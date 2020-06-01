@@ -51,7 +51,7 @@ jr_005_7BF6:
     call func_005_7A3A                            ; $7C19: $CD $3A $7A
 
 jr_005_7C1C:
-    call label_3EE8                               ; $7C1C: $CD $E8 $3E
+    call BossIntro                                ; $7C1C: $CD $E8 $3E
     call label_3B39                               ; $7C1F: $CD $39 $3B
     call func_005_7AB1                            ; $7C22: $CD $B1 $7A
     call label_3B23                               ; $7C25: $CD $23 $3B
@@ -484,7 +484,7 @@ label_005_7E9D:
     ld   a, $1A                                   ; $7E9D: $3E $1A
     ldh  [hNoiseSfx], a                           ; $7E9F: $E0 $F4
     ldh  a, [hActiveEntityType]                   ; $7EA1: $F0 $EB
-    cp   $63                                      ; $7EA3: $FE $63
+    cp   ENTITY_EVIL_EAGLE                        ; $7EA3: $FE $63
     jp   z, label_005_758C                        ; $7EA5: $CA $8C $75
 
     call DidKillEnemy                             ; $7EA8: $CD $50 $3F

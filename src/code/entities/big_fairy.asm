@@ -164,14 +164,14 @@ BigFairyHealingHandler::
     call GetEntityTransitionCountdown             ; $718A: $CD $05 $0C
     ld   [hl], $48                                ; $718D: $36 $48
     call IncrementEntityState                     ; $718F: $CD $12 $3B
-    ld   a, $26                                   ; $7192: $3E $26
+    ld   a, JINGLE_DISAPPEAR                      ; $7192: $3E $26
     ldh  [hJingle], a                             ; $7194: $E0 $F2
     ret                                           ; $7196: $C9
 
 jr_006_7197:
     ld   a, $02                                   ; $7197: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7199: $E0 $A1
-    ld   a, $1A                                   ; $719B: $3E $1A
+    ld   a, JINGLE_FAIRY_HEALING                  ; $719B: $3E $1A
     ldh  [hJingle], a                             ; $719D: $E0 $F2
     call func_006_64C6                            ; $719F: $CD $C6 $64
     ld   hl, wEntitiesPrivateCountdown2Table      ; $71A2: $21 $00 $C3

@@ -10,7 +10,7 @@ RollingBonesEntityHandler::
 
 jr_006_6C7B:
     call func_006_6E7E                            ; $6C7B: $CD $7E $6E
-    call label_3EE8                               ; $6C7E: $CD $E8 $3E
+    call BossIntro                                ; $6C7E: $CD $E8 $3E
     call label_394D                               ; $6C81: $CD $4D $39
     ldh  a, [hActiveEntityStatus]                 ; $6C84: $F0 $EA
     cp   $05                                      ; $6C86: $FE $05
@@ -133,7 +133,7 @@ jr_006_6D0D:
     cp   $F2                                      ; $6D2A: $FE $F2
     jr   nc, jr_006_6D32                          ; $6D2C: $30 $04
 
-    ld   a, $20                                   ; $6D2E: $3E $20
+    ld   a, JINGLE_BIG_BUMP                       ; $6D2E: $3E $20
     ldh  [hJingle], a                             ; $6D30: $E0 $F2
 
 jr_006_6D32:

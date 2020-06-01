@@ -1204,7 +1204,7 @@ func_036_471E::
 
 func_036_4730::
     call func_036_4365                            ; $4730: $CD $65 $43
-    ld   a, $01                                   ; $4733: $3E $01
+    ld   a, JINGLE_TREASURE_FOUND                 ; $4733: $3E $01
     ldh  [hJingle], a                             ; $4735: $E0 $F2
     call func_036_471E                            ; $4737: $CD $1E $47
     call GetEntityTransitionCountdown             ; $473A: $CD $05 $0C
@@ -2133,7 +2133,7 @@ HardhitBeetleEntityHandler::
     ld   [hl], a                                  ; $4CD4: $77
 
 jr_036_4CD5:
-    call label_3EE8                               ; $4CD5: $CD $E8 $3E
+    call BossIntro                                ; $4CD5: $CD $E8 $3E
     call func_036_6A40                            ; $4CD8: $CD $40 $6A
     call func_036_6A62                            ; $4CDB: $CD $62 $6A
     ld   de, Data_036_4CB4                        ; $4CDE: $11 $B4 $4C
@@ -2525,11 +2525,11 @@ func_036_4F68::
     ld   hl, wEntitiesPrivateState2Table          ; $4F71: $21 $C0 $C2
     add  hl, bc                                   ; $4F74: $09
     ld   a, [hl]                                  ; $4F75: $7E
-    ld   hl, Data_036_6A20                        ; $4F76: $21 $20 $6A
+    ld   hl, Data_020_6A20                        ; $4F76: $21 $20 $6A
     and  a                                        ; $4F79: $A7
     jr   nz, jr_036_4F7F                          ; $4F7A: $20 $03
 
-    ld   hl, Data_036_6A28                        ; $4F7C: $21 $28 $6A
+    ld   hl, Data_020_6A28                        ; $4F7C: $21 $28 $6A
 
 jr_036_4F7F:
     ld   c, $02                                   ; $4F7F: $0E $02
@@ -2569,7 +2569,7 @@ jr_036_4FB1:
     push af                                       ; $4FB4: $F5
     ld   a, $36                                   ; $4FB5: $3E $36
     ld   [wCurrentBank], a                        ; $4FB7: $EA $AF $DB
-    ld   hl, Data_036_6A0F + 1                    ; $4FBA: $21 $10 $6A
+    ld   hl, Data_020_6A10                        ; $4FBA: $21 $10 $6A
     ld   c, $02                                   ; $4FBD: $0E $02
     ld   a, $36                                   ; $4FBF: $3E $36
     call func_A5F                                 ; $4FC1: $CD $5F $0A
@@ -2673,12 +2673,12 @@ jr_036_505E:
     ret                                           ; $505E: $C9
 
 func_036_505F::
-    ld   hl, Data_036_69DF + 1                    ; $505F: $21 $E0 $69
+    ld   hl, Data_020_69E0                        ; $505F: $21 $E0 $69
     ldh  a, [hFrameCounter]                       ; $5062: $F0 $E7
     and  $08                                      ; $5064: $E6 $08
     jr   z, jr_036_506B                           ; $5066: $28 $03
 
-    ld   hl, Data_036_69F7 + 1                    ; $5068: $21 $F8 $69
+    ld   hl, Data_020_69F8                        ; $5068: $21 $F8 $69
 
 jr_036_506B:
     ld   c, $06                                   ; $506B: $0E $06
@@ -2832,7 +2832,7 @@ func_036_5159::
     and  a                                        ; $5160: $A7
     ret  nz                                       ; $5161: $C0
 
-    ld   a, $01                                   ; $5162: $3E $01
+    ld   a, JINGLE_TREASURE_FOUND                 ; $5162: $3E $01
     ldh  [hJingle], a                             ; $5164: $E0 $F2
     ldh  a, [hLinkPositionX]                      ; $5166: $F0 $98
     ld   a, $B9                                   ; $5168: $3E $B9
@@ -3362,7 +3362,7 @@ GiantBuzzBlobEntityHandler::
     pop  bc                                       ; $54FD: $C1
 
 jr_036_54FE:
-    call label_3EE8                               ; $54FE: $CD $E8 $3E
+    call BossIntro                                ; $54FE: $CD $E8 $3E
     call DecrementEntityIgnoreHitsCountdown       ; $5501: $CD $56 $0C
     call func_036_6A40                            ; $5504: $CD $40 $6A
     ldh  a, [hActiveEntityState]                  ; $5507: $F0 $F0
@@ -3842,77 +3842,64 @@ jr_036_57E6:
     call func_036_5756                            ; $57E6: $CD $56 $57
     ret                                           ; $57E9: $C9
 
-    jr   c, jr_036_5855                           ; $57EA: $38 $69
+Data_036_57EA:
+    dw   Data_020_6938
+    dw   Data_020_6950
+    dw   Data_020_6968
+    dw   Data_020_6950
 
-    ld   d, b                                     ; $57EC: $50
-    ld   l, c                                     ; $57ED: $69
-    ld   l, b                                     ; $57EE: $68
-    ld   l, c                                     ; $57EF: $69
-    ld   d, b                                     ; $57F0: $50
-    ld   l, c                                     ; $57F1: $69
-    jr   c, @+$6B                                 ; $57F2: $38 $69
+Data_036_57F2:
+    dw   Data_020_6938
+    dw   Data_020_6950
+    dw   Data_020_6968
+    dw   Data_020_6950
+    dw   Data_020_6938
+    dw   Data_020_6950
+    dw   Data_020_6968
+    dw   Data_020_6950
+    dw   Data_020_6938
+    dw   Data_020_6950
+    dw   Data_020_6980
 
-    ld   d, b                                     ; $57F4: $50
-    ld   l, c                                     ; $57F5: $69
-    ld   l, b                                     ; $57F6: $68
-    ld   l, c                                     ; $57F7: $69
-    ld   d, b                                     ; $57F8: $50
-    ld   l, c                                     ; $57F9: $69
-    jr   c, jr_036_5865                           ; $57FA: $38 $69
+Data_036_5808:
+    dw   Data_020_6980
+    dw   Data_020_6998
+    dw   Data_020_6980
+    dw   Data_020_69B0
 
-    ld   d, b                                     ; $57FC: $50
-    ld   l, c                                     ; $57FD: $69
-    ld   l, b                                     ; $57FE: $68
-    ld   l, c                                     ; $57FF: $69
-    ld   d, b                                     ; $5800: $50
-    ld   l, c                                     ; $5801: $69
-    jr   c, jr_036_586D                           ; $5802: $38 $69
+Data_036_5810:
+    dw   Data_020_6980
+    dw   Data_020_69C8
+    dw   Data_020_6980
 
-    ld   d, b                                     ; $5804: $50
-    ld   l, c                                     ; $5805: $69
-    add  b                                        ; $5806: $80
-    ld   l, c                                     ; $5807: $69
-    add  b                                        ; $5808: $80
-    ld   l, c                                     ; $5809: $69
-    sbc  b                                        ; $580A: $98
-    ld   l, c                                     ; $580B: $69
-    add  b                                        ; $580C: $80
-    ld   l, c                                     ; $580D: $69
-    or   b                                        ; $580E: $B0
-    ld   l, c                                     ; $580F: $69
-    add  b                                        ; $5810: $80
-    ld   l, c                                     ; $5811: $69
-    ret  z                                        ; $5812: $C8
+Data_036_5816:
+    dw   Data_020_6980
+    dw   Data_020_6950
+    dw   Data_020_6938
+    dw   Data_020_6950
+    dw   Data_020_6968
+    dw   Data_020_6950
+    dw   Data_020_6938
 
-    ld   l, c                                     ; $5813: $69
-    add  b                                        ; $5814: $80
-    ld   l, c                                     ; $5815: $69
-    add  b                                        ; $5816: $80
-    ld   l, c                                     ; $5817: $69
-    ld   d, b                                     ; $5818: $50
-    ld   l, c                                     ; $5819: $69
-    jr   c, @+$6B                                 ; $581A: $38 $69
-
-    ld   d, b                                     ; $581C: $50
-    ld   l, c                                     ; $581D: $69
-    ld   l, b                                     ; $581E: $68
-    ld   l, c                                     ; $581F: $69
-    ld   d, b                                     ; $5820: $50
-    ld   l, c                                     ; $5821: $69
-    jr   c, @+$6B                                 ; $5822: $38 $69
-
-    jr   c, jr_036_588F                           ; $5824: $38 $69
-
-    ld   d, b                                     ; $5826: $50
-    ld   l, c                                     ; $5827: $69
-    ld   l, b                                     ; $5828: $68
-    ld   l, c                                     ; $5829: $69
-    ld   d, b                                     ; $582A: $50
-    ld   l, c                                     ; $582B: $69
+Data_036_5824:
+    dw   Data_020_6938
+    dw   Data_020_6950
+    dw   Data_020_6968
+    dw   Data_020_6950
 
 Data_036_582C::
-    db   $EA, $57, $EA, $57, $EA, $57, $EA, $57, $F2, $57, $08, $58, $10, $58, $10, $58
-    db   $16, $58, $24, $58, $24, $58, $24, $58
+    dw   Data_036_57EA
+    dw   Data_036_57EA
+    dw   Data_036_57EA
+    dw   Data_036_57EA
+    dw   Data_036_57F2
+    dw   Data_036_5808
+    dw   Data_036_5810
+    dw   Data_036_5810
+    dw   Data_036_5816
+    dw   Data_036_5824
+    dw   Data_036_5824
+    dw   Data_036_5824
 
 func_036_5844::
     ld   d, $00                                   ; $5844: $16 $00
@@ -4229,7 +4216,7 @@ jr_036_5A00:
 
 func_036_5A0A::
     ldh  a, [hActiveEntityType]                   ; $5A0A: $F0 $EB
-    sub  $F6                                      ; $5A0C: $D6 $F6
+    sub  ENTITY_COLOR_GUARDIAN_BLUE               ; $5A0C: $D6 $F6
     ld   e, a                                     ; $5A0E: $5F
     ld   a, [wC177]                               ; $5A0F: $FA $77 $C1
     cp   e                                        ; $5A12: $BB
@@ -4319,62 +4306,42 @@ func_036_5A87::
     call func_036_6C07                            ; $5A90: $CD $07 $6C
     ret                                           ; $5A93: $C9
 
-    ld   b, b                                     ; $5A94: $40
-    inc  bc                                       ; $5A95: $03
-    ld   b, d                                     ; $5A96: $42
-    inc  bc                                       ; $5A97: $03
-    ld   b, d                                     ; $5A98: $42
-    inc  hl                                       ; $5A99: $23
-    ld   b, b                                     ; $5A9A: $40
-    inc  hl                                       ; $5A9B: $23
-    ld   c, b                                     ; $5A9C: $48
-    inc  bc                                       ; $5A9D: $03
-    ld   c, d                                     ; $5A9E: $4A
-    inc  bc                                       ; $5A9F: $03
-    ld   c, h                                     ; $5AA0: $4C
-    inc  bc                                       ; $5AA1: $03
-    ld   c, [hl]                                  ; $5AA2: $4E
-    inc  bc                                       ; $5AA3: $03
-    ld   c, d                                     ; $5AA4: $4A
-    inc  hl                                       ; $5AA5: $23
-    ld   c, b                                     ; $5AA6: $48
-    inc  hl                                       ; $5AA7: $23
-    ld   c, [hl]                                  ; $5AA8: $4E
-    inc  hl                                       ; $5AA9: $23
-    ld   c, h                                     ; $5AAA: $4C
-    inc  hl                                       ; $5AAB: $23
-    ld   b, b                                     ; $5AAC: $40
-    ld   [bc], a                                  ; $5AAD: $02
-    ld   b, d                                     ; $5AAE: $42
-    ld   [bc], a                                  ; $5AAF: $02
-    ld   b, d                                     ; $5AB0: $42
-    ld   [hl+], a                                 ; $5AB1: $22
-    ld   b, b                                     ; $5AB2: $40
-    ld   [hl+], a                                 ; $5AB3: $22
-    ld   c, d                                     ; $5AB4: $4A
-    ld   [hl+], a                                 ; $5AB5: $22
-    ld   c, b                                     ; $5AB6: $48
-    ld   [hl+], a                                 ; $5AB7: $22
-    ld   c, [hl]                                  ; $5AB8: $4E
-    ld   [hl+], a                                 ; $5AB9: $22
-    ld   c, h                                     ; $5ABA: $4C
-    ld   [hl+], a                                 ; $5ABB: $22
-    ld   c, b                                     ; $5ABC: $48
-    ld   [bc], a                                  ; $5ABD: $02
-    ld   c, d                                     ; $5ABE: $4A
-    ld   [bc], a                                  ; $5ABF: $02
-    ld   c, h                                     ; $5AC0: $4C
-    ld   [bc], a                                  ; $5AC1: $02
-    ld   c, [hl]                                  ; $5AC2: $4E
-    ld   [bc], a                                  ; $5AC3: $02
+Data_036_5A94:
+    db   $40, $03
+    db   $42, $03
+    db   $42, $23
+    db   $40, $23
+    db   $48, $03
+    db   $4A, $03
+    db   $4C, $03
+    db   $4E, $03
+    db   $4A, $23
+    db   $48, $23
+    db   $4E, $23
+    db   $4C, $23
+
+Data_036_5AAC:
+    db   $40, $02
+    db   $42, $02
+    db   $42, $22
+    db   $40, $22
+    db   $4A, $22
+    db   $48, $22
+    db   $4E, $22
+    db   $4C, $22
+    db   $48, $02
+    db   $4A, $02
+    db   $4C, $02
+    db   $4E, $02
 
 Data_036_5AC4::
-    db   $94, $5A, $AC, $5A
+    dw   Data_036_5A94
+    dw   Data_036_5AAC
 
 func_036_5AC8::
     ld   d, $00                                   ; $5AC8: $16 $00
     ldh  a, [hActiveEntityType]                   ; $5ACA: $F0 $EB
-    sub  $F6                                      ; $5ACC: $D6 $F6
+    sub  ENTITY_COLOR_GUARDIAN_BLUE               ; $5ACC: $D6 $F6
     sla  a                                        ; $5ACE: $CB $27
     ld   e, a                                     ; $5AD0: $5F
     ld   hl, Data_036_5AC4                        ; $5AD1: $21 $C4 $5A
@@ -4386,7 +4353,10 @@ func_036_5AC8::
     ret                                           ; $5ADB: $C9
 
 Data_036_5ADC::
-    db   $40, $01, $40, $21, $42, $01, $42, $21
+    db   $40, $01
+    db   $40, $21
+    db   $42, $01
+    db   $42, $21
 
 label_036_5AE4:
     ld   de, Data_036_5ADC                        ; $5AE4: $11 $DC $5A
@@ -4508,7 +4478,7 @@ jr_036_5B73:
     ld   a, [hl]                                  ; $5BDF: $7E
     call func_036_6BF8                            ; $5BE0: $CD $F8 $6B
     ld   [hl], a                                  ; $5BE3: $77
-    ld   a, $20                                   ; $5BE4: $3E $20
+    ld   a, JINGLE_BIG_BUMP                       ; $5BE4: $3E $20
     ldh  [hJingle], a                             ; $5BE6: $E0 $F2
 
 label_036_5BE8:
@@ -4532,7 +4502,7 @@ AvalaunchEntityHandler::
     cp   $05                                      ; $5C06: $FE $05
     jr   nz, label_036_5C3C                       ; $5C08: $20 $32
 
-    call label_3EE8                               ; $5C0A: $CD $E8 $3E
+    call BossIntro                                ; $5C0A: $CD $E8 $3E
     call func_036_6A40                            ; $5C0D: $CD $40 $6A
     ld   a, [$C190]                               ; $5C10: $FA $90 $C1
     and  a                                        ; $5C13: $A7
@@ -5088,13 +5058,24 @@ jr_036_5F58:
     ret                                           ; $5F58: $C9
 
 Data_036_5F59::
-    db   $B8, $68, $D8, $68
+    dw   Data_020_68B8
+    dw   Data_020_68D8
 
 Data_036_5F5D::
-    db   $18, $69, $B8, $68, $D8, $68, $F8, $68, $D8, $68, $B8, $68
+    dw   Data_020_6918
+    dw   Data_020_68B8
+    dw   Data_020_68D8
+    dw   Data_020_68F8
+    dw   Data_020_68D8
+    dw   Data_020_68B8
 
 Data_036_5F69::
-    db   $F8, $68, $D8, $68, $B8, $68, $18, $69, $B8, $68, $D8, $68
+    dw   Data_020_68F8
+    dw   Data_020_68D8
+    dw   Data_020_68B8
+    dw   Data_020_6918
+    dw   Data_020_68B8
+    dw   Data_020_68D8
 
 func_036_5F75::
     ld   d, $00                                   ; $5F75: $16 $00
@@ -5206,7 +5187,7 @@ jr_036_6014:
     ld   [hl], e                                  ; $6017: $73
     call func_036_6BF8                            ; $6018: $CD $F8 $6B
     ld   [hl], $14                                ; $601B: $36 $14
-    ld   a, $0D                                   ; $601D: $3E $0D
+    ld   a, JINGLE_FEATHER_JUMP                   ; $601D: $3E $0D
     ldh  [hJingle], a                             ; $601F: $E0 $F2
 
 func_036_6021::
@@ -5559,7 +5540,14 @@ jr_036_6205:
     ret                                           ; $6208: $C9
 
 Data_036_6209::
-    db   $38, $68, $48, $68, $58, $68, $68, $68, $78, $68, $88, $68, $98, $68, $A8, $68
+    dw   Data_020_6838
+    dw   Data_020_6848
+    dw   Data_020_6858
+    dw   Data_020_6868
+    dw   Data_020_6878
+    dw   Data_020_6888
+    dw   Data_020_6898
+    dw   Data_020_68A8
 
 func_036_6219::
     ld   d, $00                                   ; $6219: $16 $00
@@ -5920,7 +5908,7 @@ Data_036_6424::
 ColorGhoulState2Handler::
     ld   hl, Data_036_6424
     ldh  a, [hActiveEntityType]                   ; $642A: $F0 $EB
-    sub  $EC                                      ; $642C: $D6 $EC
+    sub  ENTITY_COLOR_GHOUL_RED                   ; $642C: $D6 $EC
     ld   e, a                                     ; $642E: $5F
     ld   d, $00                                   ; $642F: $16 $00
     add  hl, de                                   ; $6431: $19
@@ -6039,7 +6027,7 @@ ColorGhoulState3Handler::
     call func_036_6C83                            ; $64D2: $CD $83 $6C
     ld   hl, Data_036_64BA                        ; $64D5: $21 $BA $64
     ldh  a, [hActiveEntityType]                   ; $64D8: $F0 $EB
-    sub  $EC                                      ; $64DA: $D6 $EC
+    sub  ENTITY_COLOR_GHOUL_RED                   ; $64DA: $D6 $EC
     ld   e, a                                     ; $64DC: $5F
     ld   d, $00                                   ; $64DD: $16 $00
     add  hl, de                                   ; $64DF: $19
@@ -6219,7 +6207,7 @@ func_036_6629::
     ld   hl, Data_036_6625                        ; $6633: $21 $25 $66
     call func_036_6C7E                            ; $6636: $CD $7E $6C
     ldh  a, [hActiveEntityType]                   ; $6639: $F0 $EB
-    sub  $EC                                      ; $663B: $D6 $EC
+    sub  ENTITY_COLOR_GHOUL_RED                   ; $663B: $D6 $EC
     sla  a                                        ; $663D: $CB $27
     ld   e, a                                     ; $663F: $5F
     call func_036_6C7E                            ; $6640: $CD $7E $6C
@@ -6647,7 +6635,7 @@ Data_036_688E::
 
 ColorShellState8Handler::
     ldh  a, [hActiveEntityType]                   ; $6891: $F0 $EB
-    sub  $E9                                      ; $6893: $D6 $E9
+    sub  ENTITY_COLOR_SHELL_RED                   ; $6893: $D6 $E9
     ld   e, a                                     ; $6895: $5F
     ld   d, $00                                   ; $6896: $16 $00
     ld   hl, Data_036_688E                        ; $6898: $21 $8E $68
@@ -6669,7 +6657,7 @@ ColorShellState8Handler::
     ld   [hl], a                                  ; $68B2: $77
     call func_036_6BCF                            ; $68B3: $CD $CF $6B
     ldh  a, [hActiveEntityType]                   ; $68B6: $F0 $EB
-    sub  $E9                                      ; $68B8: $D6 $E9
+    sub  ENTITY_COLOR_SHELL_RED                   ; $68B8: $D6 $E9
     add  $67                                      ; $68BA: $C6 $67
     ld   [hl], a                                  ; $68BC: $77
     ld   a, $04                                   ; $68BD: $3E $04
@@ -6677,7 +6665,7 @@ ColorShellState8Handler::
     jr   jr_036_68EB                              ; $68C1: $18 $28
 
 jr_036_68C3:
-    ld   a, $1D                                   ; $68C3: $3E $1D
+    ld   a, JINGLE_WRONG_ANSWER                   ; $68C3: $3E $1D
     ldh  [hJingle], a                             ; $68C5: $E0 $F2
     ld   e, $10                                   ; $68C7: $1E $10
     call func_036_6C23                            ; $68C9: $CD $23 $6C
@@ -6818,7 +6806,7 @@ jr_036_6981:
     call IncrementEntityState                     ; $698C: $CD $12 $3B
     call func_036_6BCF                            ; $698F: $CD $CF $6B
     ldh  a, [hActiveEntityType]                   ; $6992: $F0 $EB
-    sub  $E9                                      ; $6994: $D6 $E9
+    sub  ENTITY_COLOR_SHELL_RED                   ; $6994: $D6 $E9
     add  $67                                      ; $6996: $C6 $67
     ld   [hl], a                                  ; $6998: $77
 
@@ -6833,7 +6821,7 @@ ColorShellStateDHandler::
     jr   nz, jr_036_69CC                          ; $69A0: $20 $2A
 
     ldh  a, [hActiveEntityType]                   ; $69A2: $F0 $EB
-    sub  $E9                                      ; $69A4: $D6 $E9
+    sub  ENTITY_COLOR_SHELL_RED                   ; $69A4: $D6 $E9
     ld   e, a                                     ; $69A6: $5F
     ld   d, $00                                   ; $69A7: $16 $00
     ld   hl, Data_036_699A                        ; $69A9: $21 $9A $69
@@ -6859,16 +6847,19 @@ jr_036_69CC:
     ret                                           ; $69CC: $C9
 
 Data_036_69CD::
-    db   $88, $66, $E8, $66, $48, $67
+    dw   Data_020_6688
+    dw   Data_020_66E8
+    dw   Data_020_6748
 
 Data_036_69D3::
-    db   $A8, $67, $D8, $67, $08, $68
+    dw   Data_020_67A8
+    dw   Data_020_67D8
+    dw   Data_020_6808
 
 func_036_69D9::
     ldh  a, [hActiveEntityType]                   ; $69D9: $F0 $EB
-    sub  $E9                                      ; $69DB: $D6 $E9
+    sub  ENTITY_COLOR_SHELL_RED                   ; $69DB: $D6 $E9
     sla  a                                        ; $69DD: $CB $27
-Data_036_69DF::
     ldh  [hScratch0], a                           ; $69DF: $E0 $D7
     ld   d, $00                                   ; $69E1: $16 $00
     call func_036_6C02                            ; $69E3: $CD $02 $6C
@@ -6885,7 +6876,6 @@ jr_036_69F2:
     ld   l, a                                     ; $69F3: $6F
     sla  a                                        ; $69F4: $CB $27
     add  l                                        ; $69F6: $85
-Data_036_69F7::
     sla  a                                        ; $69F7: $CB $27
     sla  a                                        ; $69F9: $CB $27
     ld   e, a                                     ; $69FB: $5F
@@ -6905,7 +6895,6 @@ jr_036_6A0A:
     ld   l, a                                     ; $6A0B: $6F
     sla  a                                        ; $6A0C: $CB $27
     add  l                                        ; $6A0E: $85
-Data_036_6A0F::
     sla  a                                        ; $6A0F: $CB $27
     sla  a                                        ; $6A11: $CB $27
     ld   e, a                                     ; $6A13: $5F
@@ -7029,7 +7018,7 @@ func_036_6A98::
 
     inc  e                                        ; $6AB2: $1C
     ldh  a, [hActiveEntityType]                   ; $6AB3: $F0 $EB
-    cp   $B5                                      ; $6AB5: $FE $B5
+    cp   ENTITY_BEAR                              ; $6AB5: $FE $B5
     jr   z, jr_036_6AC5                           ; $6AB7: $28 $0C
 
     push de                                       ; $6AB9: $D5
@@ -7608,8 +7597,8 @@ jr_036_6E3B:
 jr_036_6E3F:
     call func_036_6A40                            ; $6E3F: $CD $40 $6A
     ldh  a, [hActiveEntityType]                   ; $6E42: $F0 $EB
-    cp   $8A                                      ; $6E44: $FE $8A
-    jr   nz, jr_036_6E57                          ; $6E46: $20 $0F
+    cp   ENTITY_TILE_GLINT_SHOWN                  ; $6E44: $FE $8A
+    jr   nz, .tileGlintShownEnd                   ; $6E46: $20 $0F
 
     ldh  a, [hFrameCounter]                       ; $6E48: $F0 $E7
     rra                                           ; $6E4A: $1F
@@ -7618,8 +7607,8 @@ jr_036_6E3F:
     call SetEntitySpriteVariant                   ; $6E4E: $CD $0C $3B
     ld   de, Data_036_6DA7                        ; $6E51: $11 $A7 $6D
     call RenderActiveEntitySpritesPair            ; $6E54: $CD $C0 $3B
+.tileGlintShownEnd
 
-jr_036_6E57:
     ld   hl, wEntitiesUnknowTableY                ; $6E57: $21 $D0 $C3
     add  hl, bc                                   ; $6E5A: $09
     ldh  a, [$FFB9]                               ; $6E5B: $F0 $B9
@@ -7667,7 +7656,7 @@ jr_036_6E57:
 
 jr_036_6EA0:
     inc  [hl]                                     ; $6EA0: $34
-    ld   a, $13                                   ; $6EA1: $3E $13
+    ld   a, JINGLE_VALIDATE                       ; $6EA1: $3E $13
     ldh  [hJingle], a                             ; $6EA3: $E0 $F2
     ld   a, $8A                                   ; $6EA5: $3E $8A
     call SpawnNewEntity_trampoline                ; $6EA7: $CD $86 $3B
@@ -8148,7 +8137,7 @@ jr_036_71C7:
     jp   label_036_728B                           ; $71F7: $C3 $8B $72
 
 label_036_71FA:
-    ld   a, [$D879]                               ; $71FA: $FA $79 $D8
+    ld   a, [wOverworldRoomStatus + $79]                               ; $71FA: $FA $79 $D8
     and  $10                                      ; $71FD: $E6 $10
     jp   nz, label_036_7288                       ; $71FF: $C2 $88 $72
 

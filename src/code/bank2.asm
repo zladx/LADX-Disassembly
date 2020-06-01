@@ -479,8 +479,8 @@ label_002_4464:
     and  a                                        ; $4471: $A7
     jr   z, jr_002_4481                           ; $4472: $28 $0D
 
-    ld   a, [$C5A8]                               ; $4474: $FA $A8 $C5
-    cp   $D5                                      ; $4477: $FE $D5
+    ld   a, [wLiftedEntityType]                   ; $4474: $FA $A8 $C5
+    cp   ENTITY_ROOSTER                           ; $4477: $FE $D5
     jr   nz, jr_002_4481                          ; $4479: $20 $06
 
     ld   a, [$C146]                               ; $447B: $FA $46 $C1
@@ -1097,11 +1097,11 @@ LinkAnimationsList_PushingObject::
 LinkAnimationsList_LiftingObject::
     db   $3E, $3F, $40, $41, $42, $43, $44, $45
 
-; Falling up 1
+; Swimming 1
 Data_002_4948::
     db   $46, $47, $48, $49, $4A, $4B, $4C, $4D
 
-; Falling up 2
+; Swimming 2
 Data_002_4950::
     db   $4E, $4F, $4E, $4F, $4E, $4F, $4E, $4F
 
@@ -2031,7 +2031,7 @@ Data_002_4F10::
 Data_002_4F20::
     db   $00, $00, $00, $00, $F0, $F4, $F4, $00, $10, $0C, $0C, $00, $00, $00, $00, $00
 
-LinkMotionFallingUpHandler::
+LinkMotionSwimmingHandler::
     ld   a, [wFreeMovementMode]                   ; $4F30: $FA $7B $C1
     and  a                                        ; $4F33: $A7
     jr   z, jr_002_4F3C                           ; $4F34: $28 $06
@@ -2068,7 +2068,7 @@ jr_002_4F6A:
 
 label_002_4F6D:
     ldh  a, [hJoypadState]                        ; $4F6D: $F0 $CC
-    and  $20                                      ; $4F6F: $E6 $20
+    and  J_B                                      ; $4F6F: $E6 $20
     jr   z, jr_002_4F86                           ; $4F71: $28 $13
 
     ldh  a, [hFF9C]                               ; $4F73: $F0 $9C
@@ -2093,10 +2093,10 @@ jr_002_4F86:
 
 jr_002_4F92:
     ldh  a, [hJoypadState]                        ; $4F92: $F0 $CC
-    and  $10                                      ; $4F94: $E6 $10
+    and  J_A                                      ; $4F94: $E6 $10
     jr   z, jr_002_4FA1                           ; $4F96: $28 $09
 
-    ld   a, $0F                                   ; $4F98: $3E $0F
+    ld   a, JINGLE_WATER_SWIM                     ; $4F98: $3E $0F
     ldh  [hJingle], a                             ; $4F9A: $E0 $F2
     ld   a, $20                                   ; $4F9C: $3E $20
     ld   [$C183], a                               ; $4F9E: $EA $83 $C1
@@ -2640,7 +2640,7 @@ jr_002_52B5:
 
 label_002_52B9:
     ld   a, $40                                   ; $52B9: $3E $40
-    ld   [$DBC7], a                               ; $52BB: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $52BB: $EA $C7 $DB
     ld   a, [wLinkMapEntryPositionX]              ; $52BE: $FA $B1 $DB
     ldh  [hLinkPositionX], a                      ; $52C1: $E0 $98
     ldh  [hLinkFinalPositionX], a                 ; $52C3: $E0 $9F
@@ -3209,11 +3209,10 @@ jr_002_55EF:
     ld   hl, Data_002_55BC                        ; $55FA: $21 $BC $55
 
 jr_002_55FD:
-    db   $C3                                      ; $55FD: $C3
-    ld   a, [hl-]                                 ; $55FE: $3A
+    jp   label_002_583A                           ; $55FD: $C3 $3A $58
 
-Data_002_55FF::
-    db   $58, $F8, $00, $08
+Data_002_5600::
+    db   $F8, $00, $08
 
 Data_002_5603::
     db   $10, $6C, $6E, $6E
@@ -3238,7 +3237,7 @@ jr_002_561E:
     ld   [de], a                                  ; $5620: $12
     inc  de                                       ; $5621: $13
     ldh  a, [hScratch2]                           ; $5622: $F0 $D9
-    ld   hl, Data_002_55FF                        ; $5624: $21 $FF $55
+    ld   hl, Data_002_5600 - 1                    ; $5624: $21 $FF $55
     add  hl, bc                                   ; $5627: $09
     add  [hl]                                     ; $5628: $86
     ld   [de], a                                  ; $5629: $12
@@ -4317,7 +4316,7 @@ jr_002_5D21:
     and  a                                        ; $5D27: $A7
     jr   z, jr_002_5D36                           ; $5D28: $28 $0C
 
-    ld   hl, $D900                                ; $5D2A: $21 $00 $D9
+    ld   hl, wIndoorARoomStatus                                ; $5D2A: $21 $00 $D9
     ldh  a, [hMapId]                         ; $5D2D: $F0 $F7
     cp   MAP_COLOR_DUNGEON                                      ; $5D2F: $FE $FF
     jr   nz, jr_002_5D36                          ; $5D31: $20 $03
@@ -4625,8 +4624,8 @@ UpdateRupeesCount::
     or   [hl]                                     ; $627A: $B6
     ret  z                                        ; $627B: $C8
 
-    ld   a, NOISE_SFX_RUPEE                             ; $627C: $3E $05
-    ldh  [hWaveSfx], a                                ; $627E: $E0 $F3
+    ld   a, NOISE_SFX_CUT_GRASS                   ; $627C: $3E $05
+    ldh  [hWaveSfx], a                            ; $627E: $E0 $F3
     ld   a, [wSubstractRupeeBufferLow]            ; $6280: $FA $92 $DB
     ld   e, a                                     ; $6283: $5F
     ld   a, [wSubstractRupeeBufferHigh]           ; $6284: $FA $91 $DB
@@ -4824,7 +4823,7 @@ jr_002_63A3:
     add  $80                                      ; $63B5: $C6 $80
     ld   [wAddHealthBuffer], a                    ; $63B7: $EA $93 $DB
     ld   a, $A0                                   ; $63BA: $3E $A0
-    ld   [$DBC7], a                               ; $63BC: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $63BC: $EA $C7 $DB
     ld   a, [wRequests]                           ; $63BF: $FA $00 $D6
     ld   e, a                                     ; $63C2: $5F
     ld   d, $00                                   ; $63C3: $16 $00
@@ -5036,7 +5035,7 @@ func_002_6910::
     ld   a, WAVE_SFX_LINK_HURT                    ; $6921: $3E $03
     ldh  [hWaveSfx], a                            ; $6923: $E0 $F3
     ld   a, $80                                   ; $6925: $3E $80
-    ld   [$DBC7], a                               ; $6927: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $6927: $EA $C7 $DB
     ret                                           ; $692A: $C9
 
 jr_002_692B:
@@ -5380,7 +5379,7 @@ jr_002_6AFC:
     and  a                                        ; $6B11: $A7
     jr   nz, jr_002_6B26                          ; $6B12: $20 $12
 
-    ld   a, [$DBC7]                               ; $6B14: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $6B14: $FA $C7 $DB
     and  a                                        ; $6B17: $A7
     jr   nz, jr_002_6B1F                          ; $6B18: $20 $05
 
@@ -6057,8 +6056,8 @@ jr_002_6E72:
     and  a                                        ; $6E92: $A7
     jr   z, jr_002_6EC6                           ; $6E93: $28 $31
 
-    ld   a, [$C5A8]                               ; $6E95: $FA $A8 $C5
-    cp   $D5                                      ; $6E98: $FE $D5
+    ld   a, [wLiftedEntityType]                   ; $6E95: $FA $A8 $C5
+    cp   ENTITY_ROOSTER                           ; $6E98: $FE $D5
     jr   z, jr_002_6EC6                           ; $6E9A: $28 $2A
 
     ld   a, [wLinkMotionState]                    ; $6E9C: $FA $1C $C1
@@ -6577,8 +6576,8 @@ label_002_719C:
     cp   $02                                      ; $719F: $FE $02
     jp   z, collisionEnd                          ; $71A1: $CA $54 $74
 
-    ld   a, [$C5A8]                               ; $71A4: $FA $A8 $C5
-    cp   $D5                                      ; $71A7: $FE $D5
+    ld   a, [wLiftedEntityType]                   ; $71A4: $FA $A8 $C5
+    cp   ENTITY_ROOSTER                           ; $71A7: $FE $D5
     jp   z, collisionEnd                          ; $71A9: $CA $54 $74
 
     ldh  a, [hScratch5]                           ; $71AC: $F0 $DC
@@ -7064,7 +7063,7 @@ jr_002_7472:
     ld   a, $05                                   ; $747E: $3E $05
     ld   [wLinkMotionState], a                    ; $7480: $EA $1C $C1
     call ClearLinkPositionIncrement               ; $7483: $CD $8E $17
-    ld   [$DBC7], a                               ; $7486: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $7486: $EA $C7 $DB
     ld   [$C198], a                               ; $7489: $EA $98 $C1
     ldh  [hLinkPositionZ], a                      ; $748C: $E0 $A2
     ldh  [$FFA3], a                               ; $748E: $E0 $A3
@@ -7312,7 +7311,7 @@ jr_002_75E7:
     jr   nz, jr_002_7635                          ; $75F3: $20 $40
 
 func_002_75F5::
-    ld   a, [$DBC7]                               ; $75F5: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $75F5: $FA $C7 $DB
     and  a                                        ; $75F8: $A7
     jr   nz, jr_002_7634                          ; $75F9: $20 $39
 
@@ -7341,7 +7340,7 @@ jr_002_761E:
     ld   a, $10                                   ; $761E: $3E $10
     ld   [$C13E], a                               ; $7620: $EA $3E $C1
     ld   a, $30                                   ; $7623: $3E $30
-    ld   [$DBC7], a                               ; $7625: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $7625: $EA $C7 $DB
     ld   a, [wSubtractHealthBuffer]               ; $7628: $FA $94 $DB
     add  $04                                      ; $762B: $C6 $04
     ld   [wSubtractHealthBuffer], a               ; $762D: $EA $94 $DB
@@ -7671,7 +7670,7 @@ jr_002_77F7:
     cp   $C3                                      ; $782A: $FE $C3
     jr   nz, jr_002_7833                          ; $782C: $20 $05
 
-    ld   hl, $D879                                ; $782E: $21 $79 $D8
+    ld   hl, wOverworldRoomStatus + $79                                ; $782E: $21 $79 $D8
     set  4, [hl]                                  ; $7831: $CB $E6
 
 jr_002_7833:

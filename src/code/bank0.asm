@@ -836,12 +836,13 @@ MarkTriggerAsResolved::
 
 ApplyMapFadeOutTransition::
     ld   a, $30
-    ldh  [$FFA8], a
+    ; Timer that counts down and ends when the track has completely faded out. *Might* be used for the visual effect when entering a house as well.
+    ldh  [hMusicFadeOutTimer], a
     jr   label_C9A
 
 label_C83::
     ld   a, $30
-    ldh  [$FFA8], a
+    ldh  [hMusicFadeOutTimer], a
     jr   label_C9E
 
 label_C89::
@@ -1129,7 +1130,7 @@ LoadRoomTiles::
     ld   a, e
     cp   $23
     jr   nz, .label_DCE
-    ld   a, [$D8C9]
+    ld   a, [wOverworldRoomStatus + $C9]
     and  $20
     jr   z, .label_DCE
     inc  e
@@ -1138,7 +1139,7 @@ LoadRoomTiles::
     ld   a, e
     cp   $21
     jr   nz, .label_DDB
-    ld   a, [$D8FD]
+    ld   a, [wOverworldRoomStatus + $FD]
     and  $20
     jr   z, .label_DDB
     inc  e
@@ -1207,7 +1208,7 @@ LoadRoomTiles::
 
 ExecuteGameplayHandler::
     ld   a, [wGameplayType]
-    cp   GAMEPLAY_MINI_MAP ; If GameplayType < MINI_MAP
+    cp   GAMEPLAY_WORLD_MAP; If GameplayType < MINI_MAP
     jr   c, jumpToGameplayHandler
     cp   GAMEPLAY_WORLD ; If GameplayType != World
     jr   nz, presentSaveScreenIfNeeded
@@ -1269,7 +1270,7 @@ jumpToGameplayHandler::
 ._04 dw FileDeletionHandler
 ._05 dw FileCopyHandler
 ._06 dw FileSaveHandler
-._07 dw MinimapHandler
+._07 dw WorldMapHandler
 ._08 dw PeachPictureHandler
 ._09 dw MarinBeachHandler
 ._0A dw FaceShrineMuralHandler
@@ -1302,8 +1303,8 @@ MarinBeachHandler::
     call MarineBeachEntryPoint
     jp   returnFromGameplayHandler
 
-MinimapHandler::
-    call MinimapEntryPoint
+WorldMapHandler::
+    call WorldMapEntryPoint
     jp   returnFromGameplayHandler
 
 FileSaveHandler::
@@ -1418,13 +1419,13 @@ WorldDefaultHandler::
 
 .normalFlow
 
-    ; If $DBC7 > 0, decrement it
-    ld   hl, $DBC7
+    ; If wInvincibilityCounter > 0, decrement it
+    ld   hl, wInvincibilityCounter
     ld   a, [hl]
     and  a
-    jr   z, .DBC7End
+    jr   z, .wInvincibilityAtZero
     dec  [hl]
-.DBC7End
+.wInvincibilityAtZero
 
     ; Copy Link's position into Link's final position
     ldh  a, [hLinkPositionX]
@@ -1599,7 +1600,7 @@ InitGotItemSequence::
     ld   [wTransitionSequenceCounter], a
     ld   [$C16C], a
     ld   [wGameplaySubtype], a
-    ld   a, GAMEPLAY_MINI_MAP
+    ld   a, GAMEPLAY_WORLD_MAP
     ld   [wGameplayType], a
     callsb func_002_755B
     call DrawLinkSprite
@@ -1648,7 +1649,7 @@ InitGotItemSequence::
     ld   a, $10
     ld   [$C3CC], a
     xor  a
-    ld   [$DBC7], a
+    ld   [wInvincibilityCounter], a
     ldh  [$FF9C], a
     ld   [$DDD6], a
     ld   [$DDD7], a
@@ -1662,7 +1663,7 @@ InitGotItemSequence::
 .linkMotionJumpTable
     JP_TABLE
 ._00 dw LinkMotionInteractiveHandler
-._01 dw LinkMotionFallingUpHandler
+._01 dw LinkMotionSwimmingHandler
 ._02 dw LinkMotionJumpingHandler
 ._03 dw LinkMotionMapFadeOutHandler
 ._04 dw LinkMotionMapFadeInHandler
@@ -2783,7 +2784,7 @@ LinkMotionMapFadeOutHandler::
     call label_004_7A5F
     ld   hl, wIsThief
     inc  [hl]
-    ld   hl, $DB46
+    ld   hl, wHasStolenFromShop
     inc  [hl]
     ld   a, [$DC0C]
     or   $40
@@ -3091,16 +3092,16 @@ UpdateLinkWalkingAnimation::
 
     ld   hl, Data_002_4948
     ld   a, [wLinkMotionState]
-    cp   LINK_MOTION_FALLING_UP
-    jr   nz, .notFallingUp
+    cp   LINK_MOTION_SWIMMING
+    jr   nz, .notSwimming
     ldh  a, [$FF9C]
     and  a
-    jr   z, .fallingUpEnd
+    jr   z, .swimmingEnd
     ld   hl, Data_002_4950
-.fallingUpEnd
+.swimmingEnd
     jr   .done
 
-.notFallingUp
+.notSwimming
     ldh  a, [hIsSideScrolling]
     and  a
     jr   z, .notSideScrolling
@@ -4062,14 +4063,14 @@ include "code/home/dialog.asm"
 ; Input:
 ;   a:   soundtrack id to load
 SetWorldMusicTrack::
-    ld   [wActiveMusicTrack], a
-    ldh  [hNextWorldMusicTrack], a
-    ; $FFAB = a
+    ld   [wMusicTrackToPlay], a
+    ldh  [hNextDefaultMusicTrack], a
+    ; Sets the music fade in timer to $38
     ld   a, $38
-    ldh  [$FFAB], a
-    ; $FFA8 = 0
+    ldh  [hMusicFadeInTimer], a
+    ; Prematurely sets the timer to zero, to skip a tiny part of the fade at the end and skip straight to playing the new area's music track.
     xor  a
-    ldh  [$FFA8], a
+    ldh  [hMusicFadeOutTimer], a
     ret
 
 EnableExternalRAMWriting::
@@ -4092,9 +4093,9 @@ label_27DD::
 
 label_27EA::
     ld   a, $38
-    ldh  [$FFA8], a
+    ldh  [hMusicFadeOutTimer], a
     xor  a
-    ldh  [$FFAB], a
+    ldh  [hMusicFadeInTimer], a
     ret
 
 label_27F2::
@@ -4882,10 +4883,10 @@ LoadTitleScreenTiles::
     jp   CopyData
 
 LoadTileset0B::
-    ; Load minimap tiles
-    ld   a, BANK(MinimapTiles)
+    ; Load world map tiles
+    ld   a, BANK(WorldMapTiles)
     call SwitchAdjustedBank
-    ld   hl, MinimapTiles
+    ld   hl, WorldMapTiles
     ld   de, vTiles1 + $700
     ld   bc, TILE_SIZE * $80
     call CopyData
@@ -5655,7 +5656,7 @@ LoadRoom::
     ldh  a, [hMapRoom]
     cp   $0E
     jr   nz, .endEaglesTowerAlt
-    ld   a, [$D80E]
+    ld   a, [wOverworldRoomStatus + $0E]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, Overworld0EAlt ; Eagle's Tower open
@@ -5664,7 +5665,7 @@ LoadRoom::
 
     cp   $8C
     jr   nz, .endSouthFaceShrineAlt
-    ld   a, [$D88C]
+    ld   a, [wOverworldRoomStatus + $8C]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, Overworld8CAlt ; South Face Shrine open
@@ -5673,7 +5674,7 @@ LoadRoom::
 
     cp   $79
     jr   nz, .endUpperTalTalHeightsAlt
-    ld   a, [$D879]
+    ld   a, [wOverworldRoomStatus + $79]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, Overworld79Alt ; Kanalet Castle open
@@ -5682,7 +5683,7 @@ LoadRoom::
 
     cp   $06
     jr   nz, .endWindfishsEggAlt
-    ld   a, [$D806]
+    ld   a, [wOverworldRoomStatus + $06]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, Overworld06Alt ; Windfish's Egg open
@@ -5691,7 +5692,7 @@ LoadRoom::
 
     cp   $1B
     jr   nz, .endTalTalHeightsAlt
-    ld   a, [$D82B]
+    ld   a, [wOverworldRoomStatus + $2B]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, Overworld1BAlt ; Angler's Tunnel upper water dry
@@ -5700,7 +5701,7 @@ LoadRoom::
 
     cp   $2B
     jr   nz, .altRoomsEnd
-    ld   a, [$D82B]
+    ld   a, [wOverworldRoomStatus + $2B]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, Overworld2BAlt ; Angler's Tunnel open
@@ -6759,7 +6760,7 @@ LoadObject_OpenDoorTop::
 ; Set hRoomStatus depending on the map and room
 label_36C4::
     push af
-    ld   hl, $D900
+    ld   hl, wIndoorARoomStatus
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
@@ -6919,8 +6920,8 @@ LoadObject_IndoorEntrance::
     cp   $D3
     jr   nz, .end
 
-    ; … and $DB46 != 0…
-    ld   a, [$DB46]
+    ; … and HasStolenFromShop != 0…
+    ld   a, [wHasStolenFromShop]
     and  a
     jr   z, .end
 
@@ -7005,19 +7006,19 @@ LoadRoomEntities::
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
     jr   nz, .eaglesTowerEnd
-    ; … and [hMapRoom] == [$DB6F]…
-    ld   a, [$DB6F]
+    ; … and [hMapRoom] == [wWreckingBallRoom]…
+    ld   a, [wWreckingBallRoom]
     ld   hl, hMapRoom
     cp   [hl]
     jr   nz, .eaglesTowerEnd
-    ; do some special casing for this room entities
-    ld   a, ENTITY_A8
+    ; place the wrecking ball
+    ld   a, ENTITY_WRECKING_BALL
     call SpawnNewEntity_trampoline
-    ld   a, [$DB70]
+    ld   a, [wWreckingBallPosX]
     ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
-    ld   a, [$DB71]
+    ld   a, [wWreckingBallPosY]
     ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a

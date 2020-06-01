@@ -602,6 +602,7 @@ POPC
     adc  a, $00
     ld   [wDialogCharacterIndexHi], a
     xor  a
+    ; $C1CC = 01 when an unfinished textbox is waiting for a button press to continue.
     ld   [$C1CC], a
     ld   a, [wDialogNextCharPosition]
     cp   $1F
@@ -634,10 +635,12 @@ DialogBreakHandler::
     jp   z, DialogDrawNextCharacterHandler.label_25AD
     cp   $FE
     jp   z, DialogDrawNextCharacterHandler.choice
+    ; $C1CC = 01 when an unfinished textbox is waiting for a button press to continue.
     ld   a, [$C1CC]
     and  a
     jr   nz, .jp_26B6
     inc  a
+    ; $C1CC = 01 when an unfinished textbox is waiting for a button press to continue.
     ld   [$C1CC], a
     call DialogDrawNextCharacterHandler.endDialog
 
@@ -652,7 +655,7 @@ DialogBreakHandler::
     ld   a, BANK(DialogBankTable)
     ld   [MBC3SelectBank], a
     ld   a, [wGameplayType]
-    cp   GAMEPLAY_MINI_MAP
+    cp   GAMEPLAY_WORLD_MAP
     jp   z, label_278B
     ld   a, [wDialogIndex]
     ld   e, a

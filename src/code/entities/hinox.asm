@@ -13,7 +13,7 @@ HinoxEntityHandler::
     jp   nz, label_006_5308                       ; $4FC3: $C2 $08 $53
 
     call func_006_64C6                            ; $4FC6: $CD $C6 $64
-    call label_3EE8                               ; $4FC9: $CD $E8 $3E
+    call BossIntro                                ; $4FC9: $CD $E8 $3E
     call func_006_64F7                            ; $4FCC: $CD $F7 $64
     call GetEntityPrivateCountdown1               ; $4FCF: $CD $00 $0C
     jr   z, jr_006_4FD7                           ; $4FD2: $28 $03
@@ -177,7 +177,7 @@ jr_006_50BA:
     and  $0F                                      ; $50C2: $E6 $0F
     jr   nz, jr_006_50CA                          ; $50C4: $20 $04
 
-    ld   a, $20                                   ; $50C6: $3E $20
+    ld   a, JINGLE_BIG_BUMP                       ; $50C6: $3E $20
     ldh  [hJingle], a                             ; $50C8: $E0 $F2
 
 jr_006_50CA:
@@ -266,7 +266,7 @@ jr_006_5157:
     ldh  [$FFA3], a                               ; $515B: $E0 $A3
     ld   a, $02                                   ; $515D: $3E $02
     ld   [$C146], a                               ; $515F: $EA $46 $C1
-    ld   a, $08                                   ; $5162: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $5162: $3E $08
     ldh  [hJingle], a                             ; $5164: $E0 $F2
     ld   a, $08                                   ; $5166: $3E $08
     ld   [wSubtractHealthBuffer], a               ; $5168: $EA $94 $DB

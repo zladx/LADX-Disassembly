@@ -29,7 +29,7 @@ jr_003_66AD:
 
 jr_003_66BF:
     call func_003_6711                            ; $66BF: $CD $11 $67
-    call func_003_5CEA                            ; $66C2: $CD $EA $5C
+    call CheckForEntityFallingDownQuicksandHole   ; $66C2: $CD $EA $5C
     call func_003_7F78                            ; $66C5: $CD $78 $7F
     call func_003_60B3                            ; $66C8: $CD $B3 $60
     ld   hl, $C300                                ; $66CB: $21 $00 $C3
@@ -42,22 +42,22 @@ jr_003_66BF:
     jr   nz, jr_003_66FA                          ; $66D9: $20 $1F
 
     ld   a, [wBButtonSlot]                        ; $66DB: $FA $00 $DB
-    cp   $02                                      ; $66DE: $FE $02
+    cp   INVENTORY_BOMBS                          ; $66DE: $FE $02
     jr   nz, jr_003_66EA                          ; $66E0: $20 $08
 
     ldh  a, [hJoypadState]                        ; $66E2: $F0 $CC
-    and  $20                                      ; $66E4: $E6 $20
+    and  J_B                                      ; $66E4: $E6 $20
     jr   nz, jr_003_66F7                          ; $66E6: $20 $0F
 
     jr   jr_003_66FA                              ; $66E8: $18 $10
 
 jr_003_66EA:
     ld   a, [wAButtonSlot]                        ; $66EA: $FA $01 $DB
-    cp   $02                                      ; $66ED: $FE $02
+    cp   INVENTORY_BOMBS                          ; $66ED: $FE $02
     jr   nz, jr_003_66FA                          ; $66EF: $20 $09
 
     ldh  a, [hJoypadState]                        ; $66F1: $F0 $CC
-    and  $10                                      ; $66F3: $E6 $10
+    and  J_A                                      ; $66F3: $E6 $10
     jr   z, jr_003_66FA                           ; $66F5: $28 $03
 
 jr_003_66F7:

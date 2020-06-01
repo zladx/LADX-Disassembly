@@ -26,10 +26,10 @@ jr_01E_400C:
     ret                                           ; $401D: $C9
 
 PlayMusicTrack_1E_EntryPoint::
-    ld   hl, wActiveMusicTrack                                ; $401E: $21 $68 $D3
+    ld   hl, wMusicTrackToPlay                    ; $401E: $21 $68 $D3
     ld   a, [hl+]                                 ; $4021: $2A
     and  a                                        ; $4022: $A7
-    jr   nz, BeginMusicTrack_1E                          ; $4023: $20 $14
+    jr   nz, BeginMusicTrack_1E                   ; $4023: $20 $14
 
     call func_01E_403F                            ; $4025: $CD $3F $40
 
@@ -39,20 +39,20 @@ jr_01E_4028:
 DontPlayAudio_1E::
     xor  a                                        ; $402B: $AF
     ld   [wActiveJingle], a                       ; $402C: $EA $60 $D3
-    ld   [wActiveMusicTrack], a                   ; $402F: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $402F: $EA $68 $D3
     ld   [wActiveWaveSfx], a                      ; $4032: $EA $70 $D3
     ld   [wActiveNoiseSfx], a                     ; $4035: $EA $78 $D3
     ret                                           ; $4038: $C9
 
 BeginMusicTrack_1E::
-    ; [$D369] = [wActiveMusicTrack]
+    ; [wActiveMusicIndex] = [wMusicTrackToPlay]
     ld   [hl], a                                  ; $4039: $77
-    call BeginMusicTrack_Dispatch_1E                            ; $403A: $CD $63 $41
+    call BeginMusicTrack_Dispatch_1E              ; $403A: $CD $63 $41
     jr   jr_01E_4028                              ; $403D: $18 $E9
 
 func_01E_403F::
     ld   de, $D393                                ; $403F: $11 $93 $D3
-    ld   hl, wActiveNoiseSfx                                ; $4042: $21 $78 $D3
+    ld   hl, wActiveNoiseSfx                      ; $4042: $21 $78 $D3
     ld   a, [hl+]                                 ; $4045: $2A
     cp   $01                                      ; $4046: $FE $01
     jr   z, jr_01E_4050                           ; $4048: $28 $06
@@ -111,8 +111,9 @@ jr_01E_4076:
     ret                                           ; $407E: $C9
 
 
-; Music ID numbers are based on values written to wActiveMusicTrack. They don't
+; Music ID numbers are based on values written to wMusicTrackToPlay. They don't
 ; match up with "constants/sfx.asm" for some reason.
+; Is this still the case? The constants are now correctly named.
 MusicDataPointerTable_1E::
     dw   Music11
     dw   Music12
@@ -230,64 +231,64 @@ func_01E_4137::
 jr_01E_4137:
     ld   a, [$D379]                               ; $4137: $FA $79 $D3
     cp   $05                                      ; $413A: $FE $05
-    jp   z, label_01E_4D1D                                 ; $413C: $CA $1D $4D
+    jp   z, label_01E_4D1D                        ; $413C: $CA $1D $4D
 
     cp   $0C                                      ; $413F: $FE $0C
-    jp   z, label_01E_4D1D                                 ; $4141: $CA $1D $4D
+    jp   z, label_01E_4D1D                        ; $4141: $CA $1D $4D
 
     cp   $1A                                      ; $4144: $FE $1A
-    jp   z, label_01E_4D1D                                 ; $4146: $CA $1D $4D
+    jp   z, label_01E_4D1D                        ; $4146: $CA $1D $4D
 
     cp   $24                                      ; $4149: $FE $24
-    jp   z, label_01E_4D1D                                 ; $414B: $CA $1D $4D
+    jp   z, label_01E_4D1D                        ; $414B: $CA $1D $4D
 
     cp   $2A                                      ; $414E: $FE $2A
-    jp   z, label_01E_4D1D                                 ; $4150: $CA $1D $4D
+    jp   z, label_01E_4D1D                        ; $4150: $CA $1D $4D
 
     cp   $2E                                      ; $4153: $FE $2E
-    jp   z, label_01E_4D1D                                 ; $4155: $CA $1D $4D
+    jp   z, label_01E_4D1D                        ; $4155: $CA $1D $4D
 
     cp   $3F                                      ; $4158: $FE $3F
-    jp   z, label_01E_4D1D                                 ; $415A: $CA $1D $4D
+    jp   z, label_01E_4D1D                        ; $415A: $CA $1D $4D
 
     call func_01E_411B                            ; $415D: $CD $1B $41
-    jp   label_01E_4D1D                                    ; $4160: $C3 $1D $4D
+    jp   label_01E_4D1D                           ; $4160: $C3 $1D $4D
 
 BeginMusicTrack_Dispatch_1E::
     ld   b, a                                     ; $4163: $47
-    ld   a, [wMusicMode]                               ; $4164: $FA $CE $D3
+    ld   a, [wActiveMusicTable]                   ; $4164: $FA $CE $D3
     and  a                                        ; $4167: $A7
-    jp   nz, DontPlayAudio_1E          ; $4168: $C2 $2B $40
+    jp   nz, DontPlayAudio_1E                     ; $4168: $C2 $2B $40
 
     ld   a, b                                     ; $416B: $78
     cp   $FF                                      ; $416C: $FE $FF
     jr   z, jr_01E_4137                           ; $416E: $28 $C7
 
     cp   $11                                      ; $4170: $FE $11
-    jr   nc, .above10                          ; $4172: $30 $03
+    jr   nc, .above10                             ; $4172: $30 $03
 
-    jp   DontPlayAudio_1E              ; $4174: $C3 $2B $40
+    jp   DontPlayAudio_1E                         ; $4174: $C3 $2B $40
 
 .above10
     cp   $21                                      ; $4177: $FE $21
-    jr   nc, .above20                          ; $4179: $30 $04
+    jr   nc, .above20                             ; $4179: $30 $04
 
     add  $F0                                      ; $417B: $C6 $F0
-    jr   .playAudio                              ; $417D: $18 $14
+    jr   .playAudio                               ; $417D: $18 $14
 
 .above20
     cp   $31                                      ; $417F: $FE $31
-    jr   nc, .above30                          ; $4181: $30 $04
+    jr   nc, .above30                             ; $4181: $30 $04
 
     add  $F0                                      ; $4183: $C6 $F0
-    jr   .playAudio                              ; $4185: $18 $0C
+    jr   .playAudio                               ; $4185: $18 $0C
 
 .above30
     cp   $41                                      ; $4187: $FE $41
-    jp   c, DontPlayAudio_1E                        ; $4189: $DA $2B $40
+    jp   c, DontPlayAudio_1E                      ; $4189: $DA $2B $40
 
     cp   $61                                      ; $418C: $FE $61
-    jp   nc, DontPlayAudio_1E                       ; $418E: $D2 $2B $40
+    jp   nc, DontPlayAudio_1E                     ; $418E: $D2 $2B $40
 
     add  $E0                                      ; $4191: $C6 $E0
 
@@ -297,41 +298,82 @@ BeginMusicTrack_Dispatch_1E::
 
     ld   [hl-], a                                 ; $4195: $32
     ld   a, [$D3CA]                               ; $4196: $FA $CA $D3
-    ld   [$D3CB], a                               ; $4199: $EA $CB $D3
+    ld   [wPreviousMusicTrack], a                 ; $4199: $EA $CB $D3
     ld   a, [hl+]                                 ; $419C: $2A
     ld   [$D3CA], a                               ; $419D: $EA $CA $D3
     ld   b, a                                     ; $41A0: $47
-    ld   hl, MusicDataPointerTable_1E                        ; $41A1: $21 $7F $40
+    ld   hl, MusicDataPointerTable_1E             ; $41A1: $21 $7F $40
     and  $7F                                      ; $41A4: $E6 $7F
     call func_01E_40FF                            ; $41A6: $CD $FF $40
     call func_01E_43C0                            ; $41A9: $CD $C0 $43
     jp   label_01E_4359                           ; $41AC: $C3 $59 $43
 
+; Pattern, repeats after 6 entries.
 Data_01E_41AF::
-    db   $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF
-    db   $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00
-    db   $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF
-    db   $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00
-    db   $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF
-    db   $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00
-    db   $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF
-    db   $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00
-    db   $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF
-    db   $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00
-    db   $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF
-    db   $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00
-    db   $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF
-    db   $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00
-    db   $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF
-    db   $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00
-    db   $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
 
 label_01E_432F:
     ld   a, [$D3E7]                               ; $432F: $FA $E7 $D3
@@ -364,7 +406,7 @@ jr_01E_4348:
     jp   label_01E_473F                           ; $4356: $C3 $3F $47
 
 label_01E_4359:
-    ld   a, [$D369]                               ; $4359: $FA $69 $D3
+    ld   a, [wActiveMusicIndex]                   ; $4359: $FA $69 $D3
     ld   hl, Data_01E_41AF                        ; $435C: $21 $AF $41
 
 jr_01E_435F:
@@ -707,9 +749,9 @@ jr_01E_44F7:
 jr_01E_450E:
     ld   a, [$D3CA]                               ; $450E: $FA $CA $D3
     cp   $15                                      ; $4511: $FE $15
-    jp   z, label_01E_4854                        ; $4513: $CA $54 $48
+    jp   z, ContinueCurrentScreenMusic_1E         ; $4513: $CA $54 $48
 
-    ld   hl, $D369                                ; $4516: $21 $69 $D3
+    ld   hl, wActiveMusicIndex                    ; $4516: $21 $69 $D3
     ld   [hl], $00                                ; $4519: $36 $00
     call func_01E_4137                            ; $451B: $CD $37 $41
     ret                                           ; $451E: $C9
@@ -793,14 +835,14 @@ jr_01E_457E:
     jr   jr_01E_453C                              ; $457F: $18 $BB
 
 func_01E_4581::
-    ld   hl, $D369                                ; $4581: $21 $69 $D3
+    ld   hl, wActiveMusicIndex                    ; $4581: $21 $69 $D3
     ld   a, [hl]                                  ; $4584: $7E
     and  a                                        ; $4585: $A7
     ret  z                                        ; $4586: $C8
 
-    ld   a, [wMusicMode]                               ; $4587: $FA $CE $D3
+    ld   a, [wActiveMusicTable]                   ; $4587: $FA $CE $D3
     and  a                                        ; $458A: $A7
-    jp   nz, DontPlayAudio_1E                       ; $458B: $C2 $2B $40
+    jp   nz, DontPlayAudio_1E                     ; $458B: $C2 $2B $40
 
     call func_01E_4387                            ; $458E: $CD $87 $43
     ld   a, $01                                   ; $4591: $3E $01
@@ -964,7 +1006,7 @@ jr_01E_463C:
     ld   [$D39F], a                               ; $4669: $EA $9F $D3
 
 jr_01E_466C:
-    ld   de, $D3D9                                ; $466C: $11 $D9 $D3
+    ld   de, wActiveMusicTableIndex               ; $466C: $11 $D9 $D3
     ld   a, [de]                                  ; $466F: $1A
     and  a                                        ; $4670: $A7
     jr   z, jr_01E_467A                           ; $4671: $28 $07
@@ -1241,7 +1283,7 @@ label_01E_47BD:
     and  a                                        ; $47C8: $A7
     jp   nz, label_01E_4882                       ; $47C9: $C2 $82 $48
 
-    ld   a, [$D3D9]                               ; $47CC: $FA $D9 $D3
+    ld   a, [wActiveMusicTableIndex]              ; $47CC: $FA $D9 $D3
     and  a                                        ; $47CF: $A7
     jp   nz, label_01E_48C3                       ; $47D0: $C2 $C3 $48
 
@@ -1335,11 +1377,11 @@ func_01E_4841::
     ld   [c], a                                   ; $4852: $E2
     ret                                           ; $4853: $C9
 
-label_01E_4854:
+ContinueCurrentScreenMusic_1E:
     xor  a                                        ; $4854: $AF
-    ld   [wMusicMode], a                               ; $4855: $EA $CE $D3
+    ld   [wActiveMusicTable], a                   ; $4855: $EA $CE $D3
     ldh  a, [$FFBF]                               ; $4858: $F0 $BF
-    ld   [wActiveMusicTrack], a                               ; $485A: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $485A: $EA $68 $D3
     jp   PlayMusicTrack_1E_EntryPoint             ; $485D: $C3 $1E $40
 
 label_01E_4860:
@@ -1364,7 +1406,7 @@ jr_01E_4870:
 
 label_01E_4879:
     xor  a                                        ; $4879: $AF
-    ld   [$D3D9], a                               ; $487A: $EA $D9 $D3
+    ld   [wActiveMusicTableIndex], a              ; $487A: $EA $D9 $D3
     ld   [$D3DA], a                               ; $487D: $EA $DA $D3
     jr   jr_01E_4870                              ; $4880: $18 $EE
 
@@ -1410,7 +1452,7 @@ func_01E_48B4::
 
 label_01E_48B8:
     ld   a, $01                                   ; $48B8: $3E $01
-    ld   [$D3D9], a                               ; $48BA: $EA $D9 $D3
+    ld   [wActiveMusicTableIndex], a              ; $48BA: $EA $D9 $D3
     call func_01E_4487                            ; $48BD: $CD $87 $44
     jp   label_01E_45A5                           ; $48C0: $C3 $A5 $45
 
@@ -1434,7 +1476,7 @@ label_01E_48C3:
     jp   nz, label_01E_4770                       ; $48E2: $C2 $70 $47
 
     ld   a, $02                                   ; $48E5: $3E $02
-    ld   [$D3D9], a                               ; $48E7: $EA $D9 $D3
+    ld   [wActiveMusicTableIndex], a              ; $48E7: $EA $D9 $D3
     jp   label_01E_48AF                           ; $48EA: $C3 $AF $48
 
 label_01E_48ED:
@@ -1641,7 +1683,7 @@ label_01E_4D1D:
     ld   a, $03                                   ; $4D21: $3E $03
     ld   [$D355], a                               ; $4D23: $EA $55 $D3
     xor  a                                        ; $4D26: $AF
-    ld   [$D369], a                               ; $4D27: $EA $69 $D3
+    ld   [wActiveMusicIndex], a                   ; $4D27: $EA $69 $D3
 
 func_01E_4D2A::
     xor  a                                        ; $4D2A: $AF
@@ -1652,7 +1694,7 @@ func_01E_4D2A::
     ld   [$D33F], a                               ; $4D37: $EA $3F $D3
     ld   [$D39E], a                               ; $4D3A: $EA $9E $D3
     ld   [$D39F], a                               ; $4D3D: $EA $9F $D3
-    ld   [$D3D9], a                               ; $4D40: $EA $D9 $D3
+    ld   [wActiveMusicTableIndex], a              ; $4D40: $EA $D9 $D3
     ld   [$D3DA], a                               ; $4D43: $EA $DA $D3
     ld   [$D3B6], a                               ; $4D46: $EA $B6 $D3
     ld   [$D3B7], a                               ; $4D49: $EA $B7 $D3

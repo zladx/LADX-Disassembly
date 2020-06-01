@@ -553,12 +553,35 @@ jr_001_65D6::
     ret
 
 func_001_65DD::
-    db $3D, $C7, $73, $66, $FD, $66
+    dec a
+    JP_TABLE
+._00 dw func_001_6673
+._01 dw func_001_66FD
 
-; TODO: fix pointers table
 Data_001_65E3::
-    db $EF, $65, $F3, $65, $F7, $65, $FB, $65, $FF, $65, 3, $66, $50, 0, $50, $20
-    db $52, 0, $52, $20, $54, 0, $54, $20, $56, 0, $56, $20, $58, 0, $58, $20
+    dw Data_001_65EF
+    dw Data_001_65F3
+    dw Data_001_65F7
+    dw Data_001_65FB
+    dw Data_001_65FF
+    dw Data_001_6603
+
+Data_001_65EF:
+    db $50, 0, $50, $20
+
+Data_001_65F3:
+    db $52, 0, $52, $20
+
+Data_001_65F7:
+    db $54, 0, $54, $20
+
+Data_001_65FB:
+    db $56, 0, $56, $20
+
+Data_001_65FF:
+    db $58, 0, $58, $20
+
+Data_001_6603:
     db $5A, 0, $5A, $20
 
 Data_001_6607::
@@ -575,7 +598,7 @@ jr_001_6646::
     db 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4
     db 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5
 
-label_6673::
+func_001_6673::
     ld   hl, wTranscientVfxCountdownTable
     add  hl, bc
     ld   a, [hl]
@@ -648,8 +671,22 @@ jr_001_66D7::
     ret
 
 Data_001_66D8::
-    db $E0, $66, $E4, $66, $E8, $66, $EC, $66, $4C, 0, $4C, $20, $4E, 0, $4E, $20
-    db $5C, 0, $5C, $20, $5E, 0, $5E, $20
+    dw Data_001_66E0
+    dw Data_001_66E4
+    dw Data_001_66E8
+    dw Data_001_66EC
+
+Data_001_66E0:
+    db $4C, 0, $4C, $20
+
+Data_001_66E4:
+    db $4E, 0, $4E, $20
+
+Data_001_66E8:
+    db $5C, 0, $5C, $20
+
+Data_001_66EC:
+    db $5E, 0, $5E, $20
 
 Data_001_66F0::
     db 1, $FF
@@ -660,7 +697,7 @@ jr_001_66F2::
 Data_001_66F6::
     db 1, $FF, $4C, $52, $58, $5C, $60
 
-label_66FD::
+func_001_66FD::
     ld   hl, $C560
     add  hl, bc
     ld   a, [hl]

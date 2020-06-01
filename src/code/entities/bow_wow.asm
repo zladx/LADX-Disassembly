@@ -157,8 +157,8 @@ jr_005_40FA:
     jr   z, jr_005_4127                           ; $4112: $28 $13
 
     ; Bow-Wow retrieved from King Moblin
-    ld   a, $10                                   ; $4114: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $4116: $EA $68 $D3
+    ld   a, MUSIC_TOOL_ACQUIRED                   ; $4114: $3E $10
+    ld   [wMusicTrackToPlay], a                   ; $4116: $EA $68 $D3
     call_open_dialog $16C                         ; $4119
     ld   a, WAVE_SFX_CHAIN_CHOMP                  ; $411E: $3E $18
     ldh  [hWaveSfx], a                            ; $4120: $E0 $F3
@@ -590,7 +590,7 @@ jr_005_4380:
     and  a                                        ; $4385: $A7
     ret  nz                                       ; $4386: $C0
 
-    ld   a, $03                                   ; $4387: $3E $03
+    ld   a, JINGLE_BOW_WOW_CHOMP                  ; $4387: $3E $03
     ldh  [hJingle], a                             ; $4389: $E0 $F2
     ld   hl, wEntitiesTypeTable                   ; $438B: $21 $A0 $C3
     add  hl, de                                   ; $438E: $19

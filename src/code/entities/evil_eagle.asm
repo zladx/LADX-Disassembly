@@ -66,8 +66,8 @@ jr_005_5A5D:
 
     ld   a, $02                                   ; $5A73: $3E $02
     ld   [$D205], a                               ; $5A75: $EA $05 $D2
-    ld   a, $5C                                   ; $5A78: $3E $5C
-    ld   [wActiveMusicTrack], a                   ; $5A7A: $EA $68 $D3
+    ld   a, MUSIC_GRIM_CREEPER_DIALOG             ; $5A78: $3E $5C
+    ld   [wMusicTrackToPlay], a                   ; $5A7A: $EA $68 $D3
 
 Data_005_5A7D::
     db   $C9, $10, $F0
@@ -155,8 +155,8 @@ func_005_5ADB::
     ret                                           ; $5AFD: $C9
 
 jr_005_5AFE:
-    ld   a, $54                                   ; $5AFE: $3E $54
-    ld   [wActiveMusicTrack], a                   ; $5B00: $EA $68 $D3
+    ld   a, MUSIC_EAGLES_TOWER_BOSS_CUTSCENE      ; $5AFE: $3E $54
+    ld   [wMusicTrackToPlay], a                   ; $5B00: $EA $68 $D3
 
 func_005_5B03::
     ld   a, ENTITY_EVIL_EAGLE                     ; $5B03: $3E $63
@@ -349,7 +349,7 @@ jr_005_5C38:
     jr   nz, jr_005_5C41                          ; $5C3A: $20 $05
 
     ld   hl, hJingle                              ; $5C3C: $21 $F2 $FF
-    ld   [hl], $30                                ; $5C3F: $36 $30
+    ld   [hl], JINGLE_EVIL_EAGLE                  ; $5C3F: $36 $30
 
 jr_005_5C41:
     and  a                                        ; $5C41: $A7
@@ -380,7 +380,7 @@ func_005_5C5B::
     ld   [hl], $28                                ; $5C64: $36 $28
     ld   a, $D0                                   ; $5C66: $3E $D0
     ld   [wEntitiesSpeedYTable], a                ; $5C68: $EA $50 $C2
-    ld   a, $24                                   ; $5C6B: $3E $24
+    ld   a, JINGLE_JUMP                           ; $5C6B: $3E $24
     ldh  [hJingle], a                             ; $5C6D: $E0 $F2
     ld   a, $12                                   ; $5C6F: $3E $12
     ld   [wEntitiesSpeedXTable], a                ; $5C71: $EA $40 $C2

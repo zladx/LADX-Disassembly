@@ -18,6 +18,9 @@ section "Main", rom0[$0150]
 include "code/bank0.asm"
 
 section "bank1",romx[$4000],bank[$01]
+include "code/file_save_screen.asm"
+include "code/game_over.asm"
+include "code/world_handler.asm"
 include "code/bank1.asm"
 
 section "bank2",romx[$4000],bank[$02]
@@ -63,7 +66,7 @@ include "data/objects_tilemaps/indoor.cgb.asm"
 ColorDungeonObjectsTilemap::
 include "data/objects_tilemaps/color_dungeon.asm"
 include "data/objects/physics.asm"
-include "data/bg_copy_requests.asm"
+include "data/backgrounds/background_tile_commands.asm"
 
 ; Maps and dialogs
 section "bank9",romx[$4000],bank[$09]
@@ -114,7 +117,7 @@ OcarinaSymbolsTiles::
 incbin "gfx/items/ocarina_symbols.dmg.2bpp"
 AnimatedTiles::
 incbin "gfx/world/animated_tiles.w32.dmg.2bpp"
-MinimapTiles::
+WorldMapTiles::
 incbin "gfx/world/minimap.dmg.2bpp"
 
 section "bankOD",romx[$4000],bank[$0D]
@@ -352,21 +355,33 @@ include "src/code/photo_album.asm"
 include "data/photo_album/background.asm"
 
 section "bank29",romx[$4000],bank[$29]
+PhotoNiceLinkTiles:
 incbin "gfx/photos/photo_nice_link.2bpp"
+PhotoMarinCliffTiles:
 incbin "gfx/photos/photo_marin_cliff.2bpp"
+PhotoMarinWellTiles:
 incbin "gfx/photos/photo_marin_well.2bpp"
+PhotoMabeTiles:
 incbin "gfx/photos/photo_mabe.2bpp"
 
 section "bank2A",romx[$4000],bank[$2A]
+PhotoUlriraTiles:
 incbin "gfx/photos/photo_ulrira.2bpp"
+PhotoBowWowTiles:
 incbin "gfx/photos/photo_bow_wow.2bpp"
+PhotoShopTiles:
 incbin "gfx/photos/photo_shop.2bpp"
+PhotoFishermanTiles:
 incbin "gfx/photos/photo_fisherman.2bpp"
 
 section "bank2B",romx[$4000],bank[$2B]
+PhotoZoraTiles:
 incbin "gfx/photos/photo_zora.2bpp"
+PhotoKanaletTiles:
 incbin "gfx/photos/photo_kanalet.2bpp"
+PhotoGhostTiles:
 incbin "gfx/photos/photo_ghost.2bpp"
+PhotoBridgeTiles:
 incbin "gfx/photos/photo_bridge.2bpp"
 
 section "bank2C",romx[$4000],bank[$2C]
@@ -475,6 +490,7 @@ incbin "gfx/photos/photo_elements_2.2bpp"
 
 section "bank3B",romx[$4000],bank[$3B]
 incbin "gfx/photos/photo_elements_3.2bpp"
+PhotoDizzyLinkTiles:
 incbin "gfx/photos/photo_dizzy_link.2bpp"
 
 section "bank3C",romx[$4000],bank[$3C]

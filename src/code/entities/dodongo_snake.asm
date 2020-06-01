@@ -72,7 +72,7 @@ DodongoSnakeEntityHandler::
 jr_005_6879:
     call func_005_6A38                            ; $6879: $CD $38 $6A
     call func_005_7A3A                            ; $687C: $CD $3A $7A
-    call label_3EE8                               ; $687F: $CD $E8 $3E
+    call BossIntro                                ; $687F: $CD $E8 $3E
     call DecrementEntityIgnoreHitsCountdown       ; $6882: $CD $56 $0C
     call label_3B39                               ; $6885: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $6888: $F0 $F0
@@ -200,7 +200,7 @@ jr_005_68F6:
     ld   hl, wEntitiesUnknowTableP                ; $6949: $21 $40 $C4
     add  hl, bc                                   ; $694C: $09
     inc  [hl]                                     ; $694D: $34
-    ld   a, $2A                                   ; $694E: $3E $2A
+    ld   a, JINGLE_DODONGO_EAT_BOMB               ; $694E: $3E $2A
     ldh  [hJingle], a                             ; $6950: $E0 $F2
     ret                                           ; $6952: $C9
 

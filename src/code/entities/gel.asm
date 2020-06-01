@@ -51,7 +51,7 @@ jr_006_7C2E:
 
 jr_006_7C50:
     ldh  a, [hActiveEntityType]                   ; $7C50: $F0 $EB
-    cp   $1B                                      ; $7C52: $FE $1B
+    cp   ENTITY_GEL                               ; $7C52: $FE $1B
     jr   nz, jr_006_7CB7                          ; $7C54: $20 $61
 
     ld   hl, wEntitiesFlashCountdownTable         ; $7C56: $21 $20 $C4

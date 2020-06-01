@@ -1073,59 +1073,69 @@ label_3EAF::
 .jr_3EDE
     ret
 
-data_3EDF::
+BossIntroDialogTable::
+    ; Indexed by hMapId. Last entry might be unused?
     db $B0, $B4, $B1, $B2, $B3, $B6, $BA, $BC, $B8
 
-label_3EE8::
+; Start the boss music and show the boss's intro dialog
+BossIntro::
     ld   hl, wInventoryAppearing
     ld   a, [wRoomTransitionState]
     or   [hl]
     ret  nz
-    ld   a, [$C165]
-    and  a
-    jr   z, jp_3EFB
-    dec  a
-    ld   [$C165], a
-    ret
 
-jp_3EFB::
-    ld   a, [$C1BD]
+    ld   a, [wBossIntroDelay]
+    and  a
+    jr   z, .endOfDelay
+    dec  a
+    ld   [wBossIntroDelay], a
+    ret
+.endOfDelay:
+
+    ; don't do this twice
+    ld   a, [wDidBossIntro]
     and  a
     ret  nz
     inc  a
-    ld   [$C1BD], a
+    ld   [wDidBossIntro], a
+
+    ; boss music
     ld   hl, wEntitiesUnknowTableH
     add  hl, bc
     ld   a, [hl]
     and  $04
-    ld   a, $19
-    jr   z, jp_3F11
-    ld   a, $50
+    ld   a, MUSIC_BOSS_BATTLE
 
-jp_3F11::
-    ld   [wActiveMusicTrack], a
-    ldh  [$FFBD], a
+    jr   z, .endIf
+    ld   a, MUSIC_MINIBOSS
+
+.endIf:
+    ld   [wMusicTrackToPlay], a
+
+ldh  [$FFBD], a
     ld   a, [wTransitionSequenceCounter]
     cp   $04
     ret  nz
+
+    ; opening monologue
     ldh  a, [hActiveEntityType]
-    cp   $87
-    jr   nz, jp_3F26
+    cp   ENTITY_DESERT_LANMOLA
+    jr   nz, .endDesertLanmola
     ld   a, $DA
-    jr   jp_3F45
+    jr   .openDialog
+.endDesertLanmola:
 
-jp_3F26::
-    cp   $BC
-    jr   nz, jp_3F2E
+    cp   ENTITY_GRIM_CREEPER
+    jr   nz, .endGrimCreeper
     ld   a, $26
-    jr   jp_3F45
+    jr   .openDialog
+.endGrimCreeper:
 
-jp_3F2E::
     ld   hl, wEntitiesUnknowTableH
     add  hl, bc
     ld   a, [hl]
     and  $04
-    ret  nz
+    ret  nz                     ; other minibosses are silent
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     ret  z
@@ -1133,11 +1143,10 @@ jp_3F2E::
     ret  z
     ld   e, a
     ld   d, b
-    ld   hl, data_3EDF
+    ld   hl, BossIntroDialogTable
     add  hl, de
     ld   a, [hl]
-
-jp_3F45::
+.openDialog:
     jp   OpenDialog
 
 data_3F48::
@@ -1145,7 +1154,7 @@ data_3F48::
 
 DidKillEnemy::
     ld   a, BANK(SpawnEnemyDrop)
-    ld   [$C113], a
+    ld   [wC113], a
     ld   [MBC3SelectBank], a
     call SpawnEnemyDrop
     call ReloadSavedBank

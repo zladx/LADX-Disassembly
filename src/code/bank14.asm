@@ -181,8 +181,8 @@ PerformOverworldAudioTasks::
     ; If the countdown reached 0…
     jr   nz, .compassSfxEnd                       ; $4AC6: $20 $04
     ; play the compass sfx.
-    ld   a, WAVE_SFX_COMPASS                           ; $4AC8: $3E $1B
-    ldh  [hWaveSfx], a                                ; $4ACA: $E0 $F3
+    ld   a, WAVE_SFX_COMPASS                      ; $4AC8: $3E $1B
+    ldh  [hWaveSfx], a                            ; $4ACA: $E0 $F3
 .compassSfxEnd
 
     ;
@@ -204,10 +204,10 @@ PerformOverworldAudioTasks::
     ld   [wNextWorldMusicTrackCountdown], a       ; $4ADD: $EA $AF $C5
     jr   nz, jr_014_4AE7                          ; $4AE0: $20 $05
 
-    ldh  a, [hNextWorldMusicTrack]                ; $4AE2: $F0 $BF
+    ldh  a, [hNextDefaultMusicTrack]              ; $4AE2: $F0 $BF
 
 jr_014_4AE4:
-    ld   [wActiveMusicTrack], a                   ; $4AE4: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $4AE4: $EA $68 $D3
 
 jr_014_4AE7:
 
@@ -442,7 +442,7 @@ Data_014_4C20::
 ; objects are disabled, depending on Link's motion state.
 PaletteEffectDisabledTable::
 .LINK_MOTION_INTERACTIVE    db 0
-.LINK_MOTION_FALLING_UP     db 0
+.LINK_MOTION_SWIMMING       db 0
 .LINK_MOTION_JUMPING        db 0
 .LINK_MOTION_MAP_FADE_OUT   db 1
 .LINK_MOTION_MAP_FADE_IN    db 1
@@ -680,7 +680,7 @@ UpdateEntityTimers::
     ldh  [hActiveEntityTilesOffset], a            ; $4D76: $E0 $F5
 
     ld   a, [wGameplayType]                       ; $4D78: $FA $95 $DB
-    cp   GAMEPLAY_MINI_MAP                        ; $4D7B: $FE $07
+    cp   GAMEPLAY_WORLD_MAP                       ; $4D7B: $FE $07
     jr   z, .done                                 ; $4D7D: $28 $6E
 
     cp   GAMEPLAY_CREDITS                         ; $4D7F: $FE $01
@@ -1152,7 +1152,7 @@ func_014_5347::
 
 jr_014_5354:
     ldh  a, [hActiveEntityType]                   ; $5354: $F0 $EB
-    cp   $A8                                      ; $5356: $FE $A8
+    cp   ENTITY_WRECKING_BALL                     ; $5356: $FE $A8
     jr   z, jr_014_5360                           ; $5358: $28 $06
 
     call func_014_53A3                            ; $535A: $CD $A3 $53
@@ -1174,7 +1174,7 @@ jr_014_536B:
 
     ld   d, $03                                   ; $5373: $16 $03
     ldh  a, [hActiveEntityType]                   ; $5375: $F0 $EB
-    cp   $02                                      ; $5377: $FE $02
+    cp   ENTITY_BOMB                              ; $5377: $FE $02
     jr   nz, jr_014_537D                          ; $5379: $20 $02
 
     ld   d, $02                                   ; $537B: $16 $02
@@ -1205,14 +1205,14 @@ jr_014_5391:
     add  hl, bc                                   ; $539C: $09
     ld   [hl], a                                  ; $539D: $77
     ld   hl, hJingle                              ; $539E: $21 $F2 $FF
-    ld   [hl], $08                                ; $53A1: $36 $08
+    ld   [hl], JINGLE_JUMP_DOWN                   ; $53A1: $36 $08
 
 func_014_53A3::
     ld   hl, wEntitiesStatusTable                 ; $53A3: $21 $80 $C2
     add  hl, bc                                   ; $53A6: $09
     ld   [hl], $05                                ; $53A7: $36 $05
     ldh  a, [hActiveEntityType]                   ; $53A9: $F0 $EB
-    cp   $02                                      ; $53AB: $FE $02
+    cp   ENTITY_BOMB                              ; $53AB: $FE $02
     jr   nz, jr_014_53B6                          ; $53AD: $20 $07
 
     call GetEntityTransitionCountdown             ; $53AF: $CD $05 $0C
@@ -1288,7 +1288,7 @@ jr_014_5409:
 
 jr_014_5411:
     ldh  a, [hActiveEntityType]                   ; $5411: $F0 $EB
-    cp   $02                                      ; $5413: $FE $02
+    cp   ENTITY_BOMB                              ; $5413: $FE $02
     jr   nz, jr_014_541B                          ; $5415: $20 $04
 
     ld   a, e                                     ; $5417: $7B
@@ -1946,7 +1946,7 @@ jr_014_5789:
     and  $F0                                      ; $57D6: $E6 $F0
     or   e                                        ; $57D8: $B3
     ld   [wWarp0PositionTileIndex], a             ; $57D9: $EA $16 $D4
-    ld   a, $02                                   ; $57DC: $3E $02
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $57DC: $3E $02
     ldh  [hJingle], a                             ; $57DE: $E0 $F2
     ret                                           ; $57E0: $C9
 

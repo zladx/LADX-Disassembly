@@ -4,45 +4,7 @@
 
 ; Contains pointers to wRequests data.
 ; (The requests themselves load data in bank 8.)
-BGMapToLoadAdjustementTable::
-    dw   $0000  ; disabled
-    dw   BGCopyRequest01
-    dw   BGCopyRequest02
-    dw   BGCopyRequest03
-    dw   BGCopyRequest04
-    dw   BGCopyRequest05
-    dw   BGCopyRequest06
-    dw   $D651
-    dw   BGCopyRequest08
-    dw   BGCopyRequest09
-    dw   BGCopyRequest0A
-    dw   BGCopyRequest0B
-    dw   BGCopyRequest0C
-    dw   BGCopyRequest0D
-    dw   BGCopyRequest0E
-    dw   BGCopyRequest0F
-    dw   BGCopyRequest10
-    dw   BGCopyRequest11
-    dw   BGCopyRequest12
-    dw   BGCopyRequest13
-    dw   BGCopyRequest14
-    dw   BGCopyRequest15
-    dw   BGCopyRequest16
-    dw   BGCopyRequest17
-    dw   BGCopyRequest18
-    dw   BGCopyRequest19
-    dw   BGCopyRequest1A
-    dw   BGCopyRequest1B
-    dw   BGCopyRequest1C
-    dw   BGCopyRequest1D
-    dw   BGCopyRequest1E
-    dw   BGCopyRequest1F
-    dw   BGCopyRequest20
-    dw   BGCopyRequest21
-    dw   BGCopyRequest22
-    dw   BGCopyRequest23
-    dw   BGCopyRequest24
-    dw   BGCopyRequest25
+include "data/backgrounds/background_tile_commands_pointers.asm"
 
 ; Retrieve the address of a wRequest for loading a given background.
 ; Input:
@@ -50,7 +12,7 @@ BGMapToLoadAdjustementTable::
 ; Returns:
 ;   de   an address to a wRequest for loading BG data
 GetBGCopyRequest::
-    ld   hl, BGMapToLoadAdjustementTable          ; $4577: $21 $2B $45
+    ld   hl, BackgroundTileCommandsPointersTable  ; $4577: $21 $2B $45
     ld   b, $00                                   ; $457A: $06 $00
     ld   a, [wBGMapToLoad]                        ; $457C: $FA $FF $D6
     sla  a                                        ; $457F: $CB $27
@@ -1141,7 +1103,7 @@ label_020_4B9E:
     and  a                                        ; $4BBF: $A7
     jr   nz, jr_020_4BC8                          ; $4BC0: $20 $06
 
-    ld   a, $09                                   ; $4BC2: $3E $09
+    ld   a, JINGLE_BUMP                           ; $4BC2: $3E $09
     ldh  [hJingle], a                             ; $4BC4: $E0 $F2
     jr   jr_020_4BCD                              ; $4BC6: $18 $05
 
@@ -1242,7 +1204,7 @@ Data_020_4C43::
     db   $00, $00, $F4, $0C
 
 func_020_4C47::
-    ld   a, $05                                   ; $4C47: $3E $05
+    ld   a, JINGLE_POWDER                         ; $4C47: $3E $05
     ldh  [hJingle], a                             ; $4C49: $E0 $F2
     ld   a, $0E                                   ; $4C4B: $3E $0E
     ld   [$C19B], a                               ; $4C4D: $EA $9B $C1
@@ -1320,7 +1282,7 @@ ResetRoomVariables::
     ldh  [$FFAC], a                               ; $4CBE: $E0 $AC
     ld   [wC113], a                               ; $4CC0: $EA $13 $C1
     ld   [$D460], a                               ; $4CC3: $EA $60 $D4
-    ld   [$C1BE], a                               ; $4CC6: $EA $BE $C1
+    ld   [wInBossBattle], a                       ; $4CC6: $EA $BE $C1
     ld   [$C50E], a                               ; $4CC9: $EA $0E $C5
     ld   [$C3C8], a                               ; $4CCC: $EA $C8 $C3
     ld   [$C5A6], a                               ; $4CCF: $EA $A6 $C5
@@ -1463,8 +1425,6 @@ Data_020_4FE4::
     db   $F0, $F1, $F2, $F2, $F3, $F4, $F4, $F5   ; $502C
     db   $F6, $F6, $F7, $F8, $F8, $F9, $FA, $FA   ; $5034
     db   $FB, $FC, $FC, $FD                       ; $503C
-
-Data_020_5040::
     db   $FE, $FE, $FF, $00, $00, $01, $02, $02, $03, $04, $04, $05, $06, $06, $07, $08
     db   $08, $09, $0A, $0A, $0B, $0C, $0C, $0D, $0E, $0E, $0F, $10, $10, $11, $12, $12
     db   $13, $14, $14, $15
@@ -1473,8 +1433,6 @@ Data_020_5064::
     db   $ED, $EE, $EE, $EF, $F0, $F0, $F1, $F1, $F2, $F2, $F3, $F3
     db   $F3, $F4, $F5, $F5, $F6, $F6, $F7, $F8, $F8, $F9, $F9, $FA, $FB, $FB, $FC, $FC
     db   $FE, $FF, $FF, $00, $00, $01, $01, $02, $03, $03, $04, $04, $05, $06, $06, $07
-
-Data_020_5090::
     db   $07, $08, $09, $09, $0A, $0A, $0B, $0C, $0C, $0D, $0D, $0E, $0F, $0F, $10, $10
     db   $11, $12, $12, $13
 
@@ -1483,8 +1441,6 @@ Data_020_50A4::
     db   $F6, $F7, $F7, $F8, $F8, $F9, $F9, $FA, $FA, $FB, $FB, $FC, $FC, $FD, $FD, $FE
     db   $FE, $FF, $FF, $00, $00, $01, $01, $02, $02, $03, $03, $04, $04, $05, $05, $06
     db   $06, $07, $07, $08, $08, $09, $09, $0A, $0A, $0B, $0B, $0C, $0C, $0D, $0D, $0E
-
-Data_020_50E0::
     db   $0E, $0F, $0F, $10
 
 Data_020_50E4::
@@ -1496,8 +1452,6 @@ Data_020_50E4::
 
 Data_020_5124::
     db   $F5, $F6, $F6, $F6, $F7, $F7, $F7, $F8, $F8, $F8, $F9, $F9
-
-Data_020_5130::
     db   $F9, $FA, $FA, $FA, $FB, $FB, $FB, $FC, $FC, $FC, $FD, $FD, $FD, $FE, $FE, $FE
     db   $FF, $FF, $FF, $00, $00, $01, $01, $01, $02, $02, $02, $03, $03, $03, $04, $04
     db   $04, $05, $05, $05, $06, $06, $06, $07, $07, $07, $08, $08, $08, $09, $09, $09
@@ -1506,8 +1460,6 @@ Data_020_5130::
 Data_020_5164::
     db   $FC, $FC, $FB, $FB, $FB, $FB, $FA, $FA, $FA, $FA, $FB, $FB
     db   $FB, $FB, $FC, $FC, $FC, $FC, $FD, $FD, $FD, $FD, $FE, $FE, $FE, $FE, $FF, $FF
-
-Data_020_5180::
     db   $FF, $FF, $00, $00, $00, $00, $01, $01, $01, $01, $02, $02, $02, $02, $03, $03
     db   $03, $03, $04, $04, $04, $04, $05, $05, $05, $05, $06, $06, $06, $06, $07, $07
     db   $07, $07, $08, $08
@@ -1516,8 +1468,6 @@ Data_020_51A4::
     db   $FB, $FB, $FB, $FB, $FB, $FC, $FC, $FC, $FC, $FC, $FC, $FD
     db   $FD, $FD, $FD, $FD, $FE, $FE, $FE, $FE, $FE, $FE, $FF, $FF, $FF, $FF, $FF, $FF
     db   $00, $00, $00, $00, $00, $00, $01, $01, $01, $01, $01, $01, $02, $02, $02, $02
-
-Data_020_51D0::
     db   $02, $02, $03, $03, $03, $03, $03, $03, $04, $04, $04, $04, $04, $04, $05, $05
     db   $05, $05, $05, $05
 
@@ -1965,7 +1915,7 @@ label_020_55C2:
     ret                                           ; $55C9: $C9
 
 func_020_55CA::
-    ldh  a, [hFFA8]                               ; $55CA: $F0 $A8
+    ldh  a, [hMusicFadeOutTimer]                  ; $55CA: $F0 $A8
     and  a                                        ; $55CC: $A7
     jr   z, jr_020_55F0                           ; $55CD: $28 $21
 
@@ -1984,10 +1934,10 @@ func_020_55CA::
     or   [hl]                                     ; $55E4: $B6
     jr   z, jr_020_55F0                           ; $55E5: $28 $09
 
-    ldh  a, [hFFA8]                               ; $55E7: $F0 $A8
+    ldh  a, [hMusicFadeOutTimer]                  ; $55E7: $F0 $A8
     and  $FC                                      ; $55E9: $E6 $FC
     or   $01                                      ; $55EB: $F6 $01
-    ldh  [hFFA8], a                               ; $55ED: $E0 $A8
+    ldh  [hMusicFadeOutTimer], a                  ; $55ED: $E0 $A8
     ret                                           ; $55EF: $C9
 
 jr_020_55F0:
@@ -2361,10 +2311,16 @@ Data_020_5989::
 
 data_020_5994::
 ; Location for overwriting each inventory sprite
-    db   $9C, $6A, $83, $94, $95, $C0, $C1, $9C, $6C, $83, $A0, $A1, $C2, $C3, $9C, $6E
-    db   $83, $9A, $9B, $C4, $C5, $9C, $6F, $81, $9C, $9D, $9C, $B0, $81, $C6, $C7, $9C
-    db   $71, $81, $9E, $9F, $9C, $B2, $81, $CA, $CB, $9C, $92, $01, $7F, $7F, $9C, $D3
-    db   $00, $7F, $00
+    db   $9C, $6A, $83, $94, $95, $C0, $C1
+    db   $9C, $6C, $83, $A0, $A1, $C2, $C3
+    db   $9C, $6E, $83, $9A, $9B, $C4, $C5
+    db   $9C, $6F, $81, $9C, $9D
+    db   $9C, $B0, $81, $C6, $C7
+    db   $9C, $71, $81, $9E, $9F
+    db   $9C, $B2, $81, $CA, $CB
+    db   $9C, $92, $01, $7F, $7F
+    db   $9C, $D3, $00, $7F
+    db   $00
 
 data_020_59C7::
     db   $03, $0A, $11, $22, $05, $0C, $13, $1D, $27
@@ -2589,7 +2545,7 @@ jr_020_5AAE:
     ld   [hl], $01                                ; $5ACB: $36 $01
     pop  hl                                       ; $5ACD: $E1
     pop  af                                       ; $5ACE: $F1
-    jr   jr_020_5ADB                              ; $5ACF: $18 $0A
+    jr   DrawKeyCounter                              ; $5ACF: $18 $0A
 
 jr_020_5AD1:
     ld   a, [wGoldenLeavesCount]                  ; $5AD1: $FA $15 $DB
@@ -2599,7 +2555,7 @@ jr_020_5AD1:
     cp   $06                                      ; $5AD7: $FE $06
     jr   nc, jr_020_5ADE                          ; $5AD9: $30 $03
 
-jr_020_5ADB:
+DrawKeyCounter:
     add  $B0                                      ; $5ADB: $C6 $B0
     ld   [hl], a                                  ; $5ADD: $77
 
@@ -3356,7 +3312,7 @@ jr_020_5F85:
     jr   z, jr_020_5FC1                           ; $5F8C: $28 $33
 
     ld   hl, hJingle                              ; $5F8E: $21 $F2 $FF
-    ld   [hl], $0A                                ; $5F91: $36 $0A
+    ld   [hl], JINGLE_MOVE_SELECTION              ; $5F91: $36 $0A
     ld   e, a                                     ; $5F93: $5F
     ld   d, $00                                   ; $5F94: $16 $00
     ld   hl, wInventoryItem1                      ; $5F96: $21 $02 $DB
@@ -3466,7 +3422,7 @@ jr_020_6036:
     call func_020_5C9C                            ; $6036: $CD $9C $5C
 
 func_020_6039:
-    ld   a, $13                                   ; $6039: $3E $13
+    ld   a, JINGLE_VALIDATE                       ; $6039: $3E $13
     ldh  [hJingle], a                             ; $603B: $E0 $F2
     ld   a, [$DBA3]                               ; $603D: $FA $A3 $DB
     add  $02                                      ; $6040: $C6 $02
@@ -4058,7 +4014,7 @@ jr_020_6436:
     ld   [wC16C], a                               ; $643A: $EA $6C $C1
     inc  a                                        ; $643D: $3C
     ld   [wPaletteUnknownE], a                    ; $643E: $EA $D5 $DD
-    ld   a, $12                                   ; $6441: $3E $12
+    ld   a, JINGLE_CLOSE_INVENTORY                ; $6441: $3E $12
     ldh  [hJingle], a                             ; $6443: $E0 $F2
 
 jr_020_6445:
@@ -4398,7 +4354,6 @@ IncrementGameplaySubtype_20::
     inc  [hl]                                     ; $6686: $34
     ret                                           ; $6687: $C9
 
-; Unused data?
 Data_020_6688::
     db   $00, $08, $48, $02, $00, $00, $40, $02   ; $6688
     db   $00, $00, $FF, $FF, $00, $08, $4A, $02   ; $6690
@@ -4412,6 +4367,7 @@ Data_020_6688::
     db   $00, $FC, $44, $22, $00, $04, $42, $22   ; $66D0
     db   $00, $0C, $40, $22, $00, $0C, $44, $02   ; $66D8
     db   $00, $04, $42, $02, $00, $FC, $40, $02   ; $66E0
+Data_020_66E8::
     db   $00, $08, $48, $00, $00, $00, $40, $00   ; $66E8
     db   $00, $00, $FF, $FF, $00, $08, $4A, $00   ; $66F0
     db   $00, $00, $4C, $00, $00, $00, $FF, $FF   ; $66F8
@@ -4424,6 +4380,7 @@ Data_020_6688::
     db   $00, $FC, $44, $20, $00, $04, $42, $20   ; $6730
     db   $00, $0C, $40, $20, $00, $0C, $44, $00   ; $6738
     db   $00, $04, $42, $00, $00, $FC, $40, $00   ; $6740
+Data_020_6748::
     db   $00, $08, $48, $03, $00, $00, $40, $03   ; $6748
     db   $00, $00, $FF, $FF, $00, $08, $4A, $03   ; $6750
     db   $00, $00, $4C, $03, $00, $00, $FF, $FF   ; $6758
@@ -4436,86 +4393,114 @@ Data_020_6688::
     db   $00, $FC, $44, $23, $00, $04, $42, $23   ; $6790
     db   $00, $0C, $40, $23, $00, $0C, $44, $03   ; $6798
     db   $00, $04, $42, $03, $00, $FC, $40, $03   ; $67A0
+Data_020_67A8::
     db   $00, $00, $4C, $02, $00, $08, $4E, $02   ; $67A8
     db   $00, $00, $FF, $02, $00, $00, $4E, $22   ; $67B0
     db   $00, $08, $4C, $22, $00, $00, $FF, $02   ; $67B8
     db   $00, $00, $50, $02, $00, $08, $5A, $02   ; $67C0
     db   $00, $00, $FF, $02, $00, $00, $5A, $22   ; $67C8
     db   $00, $08, $50, $22, $00, $00, $FF, $02   ; $67D0
+Data_020_67D8::
     db   $00, $00, $4C, $00, $00, $08, $4E, $00   ; $67D8
     db   $00, $00, $FF, $00, $00, $00, $4E, $20   ; $67E0
     db   $00, $08, $4C, $20, $00, $00, $FF, $00   ; $67E8
     db   $00, $00, $50, $00, $00, $08, $5A, $00   ; $67F0
     db   $00, $00, $FF, $00, $00, $00, $5A, $20   ; $67F8
     db   $00, $08, $50, $20, $00, $00, $FF, $00   ; $6800
+Data_020_6808::
     db   $00, $00, $4C, $03, $00, $08, $4E, $03   ; $6808
     db   $00, $00, $FF, $03, $00, $00, $4E, $23   ; $6810
     db   $00, $08, $4C, $23, $00, $00, $FF, $03   ; $6818
     db   $00, $00, $50, $03, $00, $08, $5A, $03   ; $6820
     db   $00, $00, $FF, $03, $00, $00, $5A, $23   ; $6828
     db   $00, $08, $50, $23, $00, $00, $FF, $03   ; $6830
+Data_020_6838::
     db   $00, $00, $78, $03, $00, $08, $7A, $03   ; $6838
     db   $00, $00, $FF, $03, $00, $00, $FF, $03   ; $6840
+Data_020_6848::
     db   $00, $00, $7C, $03, $00, $08, $7E, $03   ; $6848
     db   $00, $00, $FF, $03, $00, $00, $FF, $03   ; $6850
+Data_020_6858::
     db   $00, $00, $7A, $23, $00, $08, $78, $23   ; $6858
     db   $00, $00, $FF, $03, $00, $00, $FF, $03   ; $6860
+Data_020_6868::
     db   $00, $00, $7E, $23, $00, $08, $7C, $23   ; $6868
     db   $00, $00, $FF, $03, $00, $00, $FF, $03   ; $6870
+Data_020_6878::
     db   $FD, $10, $22, $23, $FD, $FD, $22, $03   ; $6878
     db   $00, $00, $78, $03, $00, $08, $7A, $03   ; $6880
+Data_020_6888::
     db   $07, $10, $22, $03, $07, $FD, $22, $23   ; $6888
     db   $FF, $00, $78, $03, $FF, $08, $7A, $03   ; $6890
+Data_020_6898::
     db   $FD, $0B, $22, $23, $FD, $F8, $22, $03   ; $6898
     db   $00, $00, $7A, $23, $00, $08, $78, $23   ; $68A0
+Data_020_68A8::
     db   $07, $0B, $22, $03, $07, $F8, $22, $23   ; $68A8
     db   $FF, $00, $7A, $23, $FF, $08, $78, $23   ; $68B0
+Data_020_68B8::
     db   $F4, $F8, $40, $07, $F4, $00, $42, $07   ; $68B8
     db   $F4, $08, $44, $07, $F4, $10, $46, $07   ; $68C0
     db   $04, $F8, $48, $07, $04, $00, $4A, $07   ; $68C8
     db   $04, $08, $4C, $07, $04, $10, $4E, $07   ; $68D0
+Data_020_68D8::
     db   $F4, $10, $40, $27, $F4, $08, $42, $27   ; $68D8
     db   $F4, $00, $44, $27, $F4, $F8, $46, $27   ; $68E0
     db   $04, $10, $48, $27, $04, $08, $4A, $27   ; $68E8
     db   $04, $00, $4C, $27, $04, $F8, $4E, $27   ; $68F0
+Data_020_68F8::
     db   $F4, $10, $50, $27, $F4, $08, $52, $27   ; $68F8
     db   $F4, $00, $54, $27, $F4, $F8, $56, $27   ; $6900
     db   $04, $10, $58, $27, $04, $08, $5A, $27   ; $6908
     db   $04, $00, $5C, $27, $04, $F8, $5E, $27   ; $6910
+Data_020_6918::
     db   $F4, $F8, $50, $07, $F4, $00, $52, $07   ; $6918
     db   $F4, $08, $54, $07, $F4, $10, $56, $07   ; $6920
     db   $04, $F8, $58, $07, $04, $00, $5A, $07   ; $6928
     db   $04, $08, $5C, $07, $04, $10, $5E, $07   ; $6930
+Data_020_6938::
     db   $02, $FC, $40, $07, $02, $04, $42, $07   ; $6938
     db   $02, $0C, $40, $27, $00, $00, $FF, $00   ; $6940
     db   $00, $00, $FF, $00, $00, $00, $FF, $00   ; $6948
+Data_020_6950::
     db   $F2, $00, $44, $07, $F2, $08, $44, $27   ; $6950
     db   $02, $00, $46, $07, $02, $08, $46, $27   ; $6958
     db   $00, $00, $FF, $00, $00, $00, $FF, $00   ; $6960
+Data_020_6968::
     db   $F2, $00, $48, $07, $F2, $08, $48, $27   ; $6968
     db   $02, $00, $4A, $07, $02, $08, $4A, $27   ; $6970
     db   $00, $00, $FF, $00, $00, $00, $FF, $00   ; $6978
+Data_020_6980::
     db   $F2, $00, $4C, $07, $F2, $08, $4C, $27   ; $6980
     db   $02, $F8, $4E, $07, $02, $00, $50, $07   ; $6988
     db   $02, $08, $50, $27, $02, $10, $4E, $27   ; $6990
+Data_020_6998::
     db   $F2, $FC, $52, $07, $F2, $04, $56, $07   ; $6998
     db   $F2, $0C, $5A, $07, $02, $FC, $54, $07   ; $69A0
     db   $02, $04, $58, $07, $02, $0C, $5C, $07   ; $69A8
+Data_020_69B0::
     db   $F2, $FC, $5A, $27, $F2, $04, $56, $27   ; $69B0
     db   $F2, $0C, $52, $27, $02, $FC, $5C, $27   ; $69B8
     db   $02, $04, $58, $27, $02, $0C, $54, $27   ; $69C0
+Data_020_69C8::
     db   $F2, $00, $4C, $04, $F2, $08, $4C, $24   ; $69C8
     db   $02, $F8, $4E, $04, $02, $00, $50, $04   ; $69D0
     db   $02, $08, $50, $24, $02, $10, $4E, $24   ; $69D8
+Data_020_69E0::
     db   $F0, $FC, $50, $01, $F0, $04, $52, $01   ; $69E0
     db   $F0, $0C, $54, $01, $00, $FC, $56, $01   ; $69E8
     db   $00, $04, $58, $01, $00, $0C, $5A, $01   ; $69F0
+Data_020_69F8::
     db   $F0, $FC, $50, $01, $F0, $04, $52, $01   ; $69F8
     db   $F0, $0C, $54, $01, $00, $FC, $5C, $01   ; $6A00
     db   $00, $04, $58, $01, $00, $0C, $5E, $01   ; $6A08
+Data_020_6A10::
     db   $F4, $04, $20, $21, $00, $04, $8E, $16   ; $6A10
     db   $F4, $04, $20, $01, $00, $04, $8E, $16   ; $6A18
+Data_020_6A20::
     db   $F4, $00, $40, $03, $F4, $08, $40, $23   ; $6A20
+
+Data_020_6A28::
     db   $F4, $00, $40, $02, $F4, $08, $40, $22   ; $6A28
 
 func_020_6A30::
@@ -5185,69 +5170,69 @@ LoadRoomObjectsAttributes::
     cp   $0E                                      ; $6DB6: $FE $0E
     jr   nz, .jr_020_6DC6                         ; $6DB8: $20 $0C
 
-    ld   a, [$D80E]                               ; $6DBA: $FA $0E $D8
+    ld   a, [wOverworldRoomStatus + $0E]                               ; $6DBA: $FA $0E $D8
     and  $10                                      ; $6DBD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DBF: $28 $59
 
-    ld   hl, Data_020_5090                        ; $6DC1: $21 $90 $50
+    ld   hl, RoomGBCOverlay0EAlt                  ; $6DC1: $21 $90 $50
     jr   .jr_020_6E14                             ; $6DC4: $18 $4E
 
 .jr_020_6DC6
     cp   $8C                                      ; $6DC6: $FE $8C
     jr   nz, .jr_020_6DD6                         ; $6DC8: $20 $0C
 
-    ld   a, [$D88C]                               ; $6DCA: $FA $8C $D8
+    ld   a, [wOverworldRoomStatus + $8C]                               ; $6DCA: $FA $8C $D8
     and  $10                                      ; $6DCD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DCF: $28 $49
 
-    ld   hl, Data_020_51D0                        ; $6DD1: $21 $D0 $51
+    ld   hl, RoomGBCOverlay8CAlt                  ; $6DD1: $21 $D0 $51
     jr   .jr_020_6E14                             ; $6DD4: $18 $3E
 
 .jr_020_6DD6
     cp   $79                                      ; $6DD6: $FE $79
     jr   nz, .jr_020_6DE6                         ; $6DD8: $20 $0C
 
-    ld   a, [$D879]                               ; $6DDA: $FA $79 $D8
+    ld   a, [wOverworldRoomStatus + $79]                               ; $6DDA: $FA $79 $D8
     and  $10                                      ; $6DDD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DDF: $28 $39
 
-    ld   hl, Data_020_5180                        ; $6DE1: $21 $80 $51
+    ld   hl, RoomGBCOverlay79Alt                  ; $6DE1: $21 $80 $51
     jr   .jr_020_6E14                             ; $6DE4: $18 $2E
 
 .jr_020_6DE6
     cp   $06                                      ; $6DE6: $FE $06
     jr   nz, .jr_020_6DF6                         ; $6DE8: $20 $0C
 
-    ld   a, [$D806]                               ; $6DEA: $FA $06 $D8
+    ld   a, [wOverworldRoomStatus + $06]                               ; $6DEA: $FA $06 $D8
     and  $10                                      ; $6DED: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DEF: $28 $29
 
-    ld   hl, Data_020_5040                        ; $6DF1: $21 $40 $50
+    ld   hl, RoomGBCOverlay06Alt                  ; $6DF1: $21 $40 $50
     jr   .jr_020_6E14                             ; $6DF4: $18 $1E
 
 .jr_020_6DF6
     cp   $1B                                      ; $6DF6: $FE $1B
     jr   nz, .jr_020_6E06                         ; $6DF8: $20 $0C
 
-    ld   a, [$D82B]                               ; $6DFA: $FA $2B $D8
+    ld   a, [wOverworldRoomStatus + $2B]                               ; $6DFA: $FA $2B $D8
     and  $10                                      ; $6DFD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DFF: $28 $19
 
-    ld   hl, Data_020_50E0                        ; $6E01: $21 $E0 $50
+    ld   hl, RoomGBCOverlay1BAlt                  ; $6E01: $21 $E0 $50
     jr   .jr_020_6E14                             ; $6E04: $18 $0E
 
 .jr_020_6E06
     cp   $2B                                      ; $6E06: $FE $2B
     jr   nz, .jr_020_6E1A                         ; $6E08: $20 $10
 
-    ld   a, [$D82B]                               ; $6E0A: $FA $2B $D8
+    ld   a, [wOverworldRoomStatus + $2B]                               ; $6E0A: $FA $2B $D8
     and  $10                                      ; $6E0D: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6E0F: $28 $09
 
-    ld   hl, Data_020_5130                        ; $6E11: $21 $30 $51
+    ld   hl, RoomGBCOverlay2BAlt                 ; $6E11: $21 $30 $51
 
 .jr_020_6E14
-    ld   a, $27                                   ; $6E14: $3E $27
+    ld   a, BANK(RoomGBCOverlay2BAlt)             ; $6E14: $3E $27
     ldh  [hScratch0], a                           ; $6E16: $E0 $D7
     jr   .copyAttributes                          ; $6E18: $18 $22
 
@@ -5629,9 +5614,11 @@ data_020_763B::
     db   $A4, $4D, $FF, $FF                       ; $783B
 
 EndingWaterGeyserPalettes::
-    db   $45, $78
-    db   $7D, $78
-    db   $B5, $78
+    dw   Data_020_7845
+    dw   Data_020_787D
+    dw   Data_020_78B5
+
+Data_020_7845:
     db   $00, $00
     db   $C5, $4C
     db   $68, $7D
@@ -5660,6 +5647,8 @@ EndingWaterGeyserPalettes::
     db   $0F, $66
     db   $D6, $6E
     db   $FF, $7F
+
+Data_020_787D:
     db   $00, $00
     db   $68, $7D
     db   $FF, $7F
@@ -5688,6 +5677,8 @@ EndingWaterGeyserPalettes::
     db   $D6, $6E
     db   $FF, $7F
     db   $0F, $66
+
+Data_020_78B5:
     db   $00, $00
     db   $FF, $7F
     db   $C5, $4C
@@ -6137,4 +6128,3 @@ LoadTileset23::
     ld   h, BANK(@)                               ; $7E02: $26 $20
     call Copy100BytesFromBankAtA                  ; $7E04: $CD $13 $0A
     ret                                           ; $7E07: $C9
-

@@ -88,8 +88,8 @@ func_006_60E5::
     ld   a, $0E                                   ; $60EE: $3E $0E
 
 jr_006_60F0:
-    ld   [wActiveMusicTrack], a                   ; $60F0: $EA $68 $D3
-    ldh  [hMusicTrack], a                         ; $60F3: $E0 $B0
+    ld   [wMusicTrackToPlay], a                   ; $60F0: $EA $68 $D3
+    ldh  [hDefaultMusicTrack], a                  ; $60F3: $E0 $B0
     ldh  [$FFBD], a                               ; $60F5: $E0 $BD
 
 label_006_60F7:
@@ -116,12 +116,12 @@ jr_006_6110:
     ret  nz                                       ; $6115: $C0
 
     ldh  a, [hActiveEntityType]                   ; $6116: $F0 $EB
-    cp   $71                                      ; $6118: $FE $71
-    jr   nz, jr_006_6121                          ; $611A: $20 $05
+    cp   ENTITY_KID_71                            ; $6118: $FE $71
+    jr   nz, .kid71End                            ; $611A: $20 $05
 
     call_open_dialog $220                         ; $611C
+.kid71End
 
-jr_006_6121:
     jp   label_006_60F7                           ; $6121: $C3 $F7 $60
 
 jr_006_6124:
@@ -234,7 +234,7 @@ func_006_61A6::
     add  hl, de                                   ; $61D3: $19
     ld   [hl], $10                                ; $61D4: $36 $10
     ldh  a, [hActiveEntityType]                   ; $61D6: $F0 $EB
-    cp   $71                                      ; $61D8: $FE $71
+    cp   ENTITY_KID_71                            ; $61D8: $FE $71
     ld   a, $14                                   ; $61DA: $3E $14
     jr   z, jr_006_61E0                           ; $61DC: $28 $02
 

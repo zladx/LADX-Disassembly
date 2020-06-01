@@ -12,7 +12,7 @@ EntityInitSlimeEel::
 
 SlimeEelEntityHandler::
     call label_394D                               ; $6CDC: $CD $4D $39
-    call label_3EE8                               ; $6CDF: $CD $E8 $3E
+    call BossIntro                                ; $6CDF: $CD $E8 $3E
     call DecrementEntityIgnoreHitsCountdown       ; $6CE2: $CD $56 $0C
     ld   hl, wEntitiesPrivateState1Table          ; $6CE5: $21 $B0 $C2
     add  hl, bc                                   ; $6CE8: $09
@@ -1015,7 +1015,7 @@ func_005_7425::
     and  a                                        ; $7437: $A7
     jr   z, jr_005_7478                           ; $7438: $28 $3E
 
-    ld   a, [$DBC7]                               ; $743A: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $743A: $FA $C7 $DB
     and  a                                        ; $743D: $A7
     jr   nz, jr_005_7478                          ; $743E: $20 $38
 
@@ -1045,7 +1045,7 @@ jr_005_745F:
     and  $07                                      ; $7461: $E6 $07
     jr   nz, jr_005_7469                          ; $7463: $20 $04
 
-    ld   a, $29                                   ; $7465: $3E $29
+    ld   a, JINGLE_SLIME_EEL_PULL                 ; $7465: $3E $29
     ldh  [hJingle], a                             ; $7467: $E0 $F2
 
 jr_005_7469:
@@ -1657,8 +1657,8 @@ jr_005_79B3:
     call label_27F2                               ; $7A08: $CD $F2 $27
     ld   a, $03                                   ; $7A0B: $3E $03
     ld   [wBossAgonySFXCountdown], a              ; $7A0D: $EA $A7 $C5
-    ld   a, $5E                                   ; $7A10: $3E $5E
-    ld   [wActiveMusicTrack], a                   ; $7A12: $EA $68 $D3
+    ld   a, MUSIC_BOSS_WARNING                    ; $7A10: $3E $5E
+    ld   [wMusicTrackToPlay], a                   ; $7A12: $EA $68 $D3
     ld   a, $B5                                   ; $7A15: $3E $B5
     call OpenDialog                               ; $7A17: $CD $85 $23
 

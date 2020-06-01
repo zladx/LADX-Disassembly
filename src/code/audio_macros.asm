@@ -6,7 +6,7 @@ rest: macro
     db $01
 endm
 
-; Sets [$D3D9] to 1.
+; Sets [wActiveMusicTableIndex] to 1.
 unknownop_94: macro
     db $94
 endm

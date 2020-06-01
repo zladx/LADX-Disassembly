@@ -256,6 +256,7 @@ wIsUsingShield:: ; C15B
 
 wIsCarryingLiftedObject: ; C15C
   ; Is Link carrying an object above his head
+  ; (not a boolean -- possible values: Data_003_56F1)
   ds 1
 
 ; Contains a DIRECTION_* value taken from Link's irection
@@ -268,7 +269,9 @@ wC161: ds 1
 wC162: ds 1
 wC163: ds 1
 wDialogCharacterIndexHi: ds 1
-wC165: ds 1
+wBossIntroDelay: ; C165
+  ; Delay boss intro until this reaches zero
+  ds 1
 wLinkPlayingOcarinaCountdown: ; C166
   ; While not zero, Link is shown playing the Ocarina
   ds 1
@@ -378,8 +381,13 @@ wLoadPreviousMapCountdown:: ; C1BC
   ; Number of frames to wait before loading the previous map and room
   ds 1
 
-; Unlabeled
-ds 2
+wDidBossIntro:: ; C1BD
+  ; Non-zero when the BossIntro routine did its thing
+  ds 1
+
+wInBossBattle:: ; C1BE
+  ; Non-zero after initializing a boss entity
+  ds 1
 
 wScrollXOffset:: ; C1BF
   ds 1
@@ -614,6 +622,7 @@ wEntitiesFlashCountdownTable:: ; C420
 
 ; Entity initialization flags?
 ; Seems to be a bitfield
+; bit 2: set for bosses, clear for minibosses
 wEntitiesUnknowTableH::  ; C430
   ds $10
 
@@ -699,8 +708,12 @@ wBossAgonySFXCountdown:: ; C5A7
   ; When reaching zero, play the WAVE_SFX_BOSS_AGONY sound effect
   ds 1
 
+wLiftedEntityType:: ; C5A8
+  ; Type of lifted entity. Used only for Rooster behavior.
+  ds 1
+
 ; Unlabeled
-ds 2
+ds 1
 
 wEggMazeProgress:: ; C5AA
   ; Number of rooms progressed correctly in the Wind Fish's Egg maze
@@ -843,12 +856,12 @@ wActiveJingle:: ; D360
 ; D361-D367: squareform jingle parameters
 ds 7
 
-wActiveMusicTrack:: ; D368
-  ; The music track currently playing
+wMusicTrackToPlay:: ; D368
+  ; The music track to be played next
   ds 1
 
-wD369:: ; D369
-  ; Copied from wActiveMusicTrack
+wActiveMusicIndex:: ; wActiveMusicIndex
+  ; Copied from wMusicTrackToPlay
   ds 1
 
 wD36A:: ; D36A
@@ -902,23 +915,23 @@ wD3C8::
 wD3C9::
   ds 1
 wD3CA::
-  ; Copied from $D369 (a music index)
+  ; Copied from wActiveMusicIndex (a music index)
   ds 1
-wD3CB:: ; D3CB
+wPreviousMusicTrack:: ; D3CB
   ; Copied from $D3CA
+  ; The music track that was playing previously.
   ds 1
 
 ; Unlabeled
 ds 2
 
-wMusicMode:: ; D3CE
-  ; Music disabled when this is 0?
+wActiveMusicTable:: ; D3CE
   ds 1
 
 ; Unlabeled
 ds $D3D9-$D3CF
 
-wD3D9:: ; D3D9
+wActiveMusicTableIndex:: ; D3D9
   ; Set to 1 by opcode 94
   ds 1
 
@@ -1017,7 +1030,11 @@ wBossDefeated:: ; D46C
   ds 1
 
 ; Unlabeled
-ds $5
+ds $4
+
+wGuardianAcornCounter:: ; D471
+  ; Increases on each kill. Reset to 0 when hit, or when it hits 12 a guardian acorn is spawned.
+  ds 1
 
 wMazeSignpostGoal:: ; D472
   ; Signpost maze: current goal
@@ -1233,9 +1250,14 @@ wShieldLevel:: ; DB44
 wArrowCount:: ; DB45
   ds 1
 
+; Set to 1 when you steal from the shop.
+; Set back to zero when the shopkeeper kills you.
+wHasStolenFromShop:: ; DB46
+  ds 1
+
 ; Unlabeled
-wDB46 equ $DB46
-  ds 3
+wDB47 equ $DB47
+  ds 2
 
 ; $0111 means that the player has every song.
 ;   bit 0: has Frog's Song of the Soul
@@ -1244,8 +1266,8 @@ wDB46 equ $DB46
 wOcarinaSongFlags:: ; DB49
   ds 1
 
-; Unlabeled
-wDB4A equ $DB4A
+; Which song is selected (zero based)
+wSelectedSongIndex:: ; DB4A
   ds 1
 
 ; 0 means that the player does not have the Toadstool
@@ -1266,8 +1288,13 @@ wSwordLevel:: ; DB4E
 wName:: ; DB4F
   ds NAME_LENGTH ; 5
 
-wDB54:: ds 1
-wDB55:: ds 1
+wDB54:: ds 1 ; Unknown, but some kind of map index entry
+
+; Indicates if we have spoken with richard.
+; 1 indicates spoken with grandpa ulrira in his own house, but does not seem to be used anywhere.
+; 2 means spoken with richard, changes the telephone message.
+wRichardSpokenFlag:: ; DB55
+  ds 1
 
 wIsBowWowFollowingLink:: ; DB56
   ; Bow-Wow status.
@@ -1354,10 +1381,17 @@ wDB6D: ds 1
 wIsThief:: ; DB6E
   ds 1
 
-wDB6F: ds 1
-wDB70: ds 1
-wDB71: ds 1
-wDB72: ds 1
+wWreckingBallRoom: ; DB6F
+  ds 1
+
+wWreckingBallPosX: ; DB70
+  ds 1
+
+wWreckingBallPosY: ; DB71
+  ds 1
+
+wNumberOfDungeon7PillarsDestroyed: ; DB72
+  ds 1
 
 wIsMarinFollowingLink:: ; DB73
   ds 1
@@ -1383,15 +1417,34 @@ wMaxArrows:: ; DB78
 wIsGhostFollowingLink:: ; DB79
   ds 1
 
-wDB7A:: ; DB7A
+wGhostSeeksGrave:: ; DB7A
+  ; Zero: The ghost wants to go to House by the Bay
+  ; Non-zero: ... to his grave in Kohilint Prairie
   ds 1
 
 wIsRoosterFollowingLink:: ; DB7B
   ds 1
 
-; Unlabeled
-wDB7C equ $DB7C
-  ds $13
+; Offset in the WindFishEggMazeSequence table, set to a random value chosen from $00 $08 $10 $18
+wWindFishEggMazeSequenceOffset:
+  ds 1
+
+wBoomerangTradedItem:: ; DB7D
+  ; Stores the inventory item that you traded for the boomerang.
+  ; Initially this value is zero, indicating no trade. But after you traded the boomerang
+  ; back it will be INVENTORY_BOOMERANG
+  ds 1
+
+wKidSaveHintIndex:: ;DB7E
+  ; Switches between 4 different hits for one of the kids throwing the ball
+  ds 1
+
+wDB7F:: ;DB7F
+  ; Unknown
+  ds 1
+  
+; Unlabeled, outside the area that is stored in the savegame.
+  ds $0F
 
 wAddRupeeBufferHigh:: ; DB8F
   ; Higher digits of the amount of rupees to be added to your wallet (high digits)
@@ -1498,7 +1551,13 @@ wKillCount2:: ; DBB5
 
 ; Unlabeled
 wDBB6 equ $DBB6
-  ds $13
+  ds $11
+
+wInvincibilityCounter:: ; DBC7
+  ds 1
+
+; Unlabeled
+  ds 1
 
 wTorchesCount:: ; DBC9
   ds 1

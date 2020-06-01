@@ -56,7 +56,7 @@ jr_006_6265:
     cp   $92                                      ; $6267: $FE $92
     jr   nz, jr_006_6277                          ; $6269: $20 $0C
 
-    ld   a, [$D8FD]                               ; $626B: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + $FD]                               ; $626B: $FA $FD $D8
     and  $30                                      ; $626E: $E6 $30
     jr   nz, jr_006_6277                          ; $6270: $20 $05
 
@@ -67,7 +67,7 @@ jr_006_6277:
     and  $02                                      ; $627A: $E6 $02
     jr   z, jr_006_6290                           ; $627C: $28 $12
 
-    ld   a, [$DABE]                               ; $627E: $FA $BE $DA
+    ld   a, [wIndoorBRoomStatus + $BE]                               ; $627E: $FA $BE $DA
     and  $10                                      ; $6281: $E6 $10
     jr   nz, jr_006_6290                          ; $6283: $20 $0B
 
@@ -100,6 +100,6 @@ jr_006_629B:
 jr_006_62A9:
     pop  af                                       ; $62A9: $F1
     ldh  a, [hActiveEntityType]                   ; $62AA: $F0 $EB
-    sub  $70                                      ; $62AC: $D6 $70
+    sub  ENTITY_KID_70                            ; $62AC: $D6 $70
     add  $1C                                      ; $62AE: $C6 $1C
     jp   OpenDialogInTable1                       ; $62B0: $C3 $73 $23

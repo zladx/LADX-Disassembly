@@ -134,7 +134,7 @@ jr_018_7CAE:
 jr_018_7CAF:
     call GetEntityTransitionCountdown             ; $7CAF: $CD $05 $0C
     ld   [hl], b                                  ; $7CB2: $70
-    ld   a, $07                                   ; $7CB3: $3E $07
+    ld   a, JINGLE_SWORD_POKING                   ; $7CB3: $3E $07
     ldh  [hJingle], a                             ; $7CB5: $E0 $F2
     ldh  a, [hActiveEntityPosX]                   ; $7CB7: $F0 $EE
     ldh  [hScratch0], a                           ; $7CB9: $E0 $D7

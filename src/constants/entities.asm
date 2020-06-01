@@ -185,7 +185,7 @@ ENTITY_SIDE_VIEW_PLATFORM_VERTICAL   equ $A4
 ENTITY_SIDE_VIEW_PLATFORM            equ $A5
 ENTITY_SIDE_VIEW_WEIGHTS             equ $A6
 ENTITY_SMASHABLE_PILLAR              equ $A7
-ENTITY_A8                            equ $A8 ; unknown
+ENTITY_WRECKING_BALL                 equ $A8
 ENTITY_BLOOPER                       equ $A9
 ENTITY_CHEEP_CHEEP_HORIZONTAL        equ $AA
 ENTITY_CHEEP_CHEEP_VERTICAL          equ $AB

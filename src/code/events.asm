@@ -202,7 +202,7 @@ jr_002_5E2E:
     ld   d, $00                                   ; $5E47: $16 $00
     ldh  a, [hMapRoom]                           ; $5E49: $F0 $F6
     ld   e, a                                     ; $5E4B: $5F
-    ld   hl, $D900                                ; $5E4C: $21 $00 $D9
+    ld   hl, wIndoorARoomStatus                                ; $5E4C: $21 $00 $D9
     ldh  a, [hMapId]                         ; $5E4F: $F0 $F7
     cp   MAP_COLOR_DUNGEON                                      ; $5E51: $FE $FF
     jr   nz, jr_002_5E5A                          ; $5E53: $20 $05
@@ -222,8 +222,8 @@ jr_002_5E5A:
 jr_002_5E63:
     add  hl, de                                   ; $5E63: $19
     set  5, [hl]                                  ; $5E64: $CB $EE
-    ld   a, $1B                                   ; $5E66: $3E $1B
-    ldh  [hJingle], a                               ; $5E68: $E0 $F2
+    ld   a, JINGLE_CLEAR_MIDBOSS                  ; $5E66: $3E $1B
+    ldh  [hJingle], a                             ; $5E68: $E0 $F2
 
 jr_002_5E6A:
     ld   a, [$C190]                               ; $5E6A: $FA $90 $C1
@@ -459,11 +459,11 @@ CheckKillSidescrollBossTrigger::
     cp   MAP_EAGLES_TOWER                         ; $5FC8: $FE $06
     jr   nz, jr_002_5FD1                          ; $5FCA: $20 $05
 
-    ld   a, [$DAE8]                               ; $5FCC: $FA $E8 $DA
+    ld   a, [wIndoorBRoomStatus + $E8]                               ; $5FCC: $FA $E8 $DA
     jr   jr_002_5FD4                              ; $5FCF: $18 $03
 
 jr_002_5FD1:
-    ld   a, [$D9FF]                               ; $5FD1: $FA $FF $D9
+    ld   a, [wIndoorARoomStatus + $FF]                               ; $5FD1: $FA $FF $D9
 
 jr_002_5FD4:
     and  $20                                      ; $5FD4: $E6 $20

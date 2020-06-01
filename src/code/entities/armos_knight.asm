@@ -64,22 +64,22 @@ ArmosKnightPrivateState2Handler::
     call label_27DD                               ; $533C: $CD $DD $27
     call DidKillEnemy                             ; $533F: $CD $50 $3F
     ldh  a, [hActiveEntityType]                   ; $5342: $F0 $EB
-    cp   $88                                      ; $5344: $FE $88
+    cp   ENTITY_ARMOS_KNIGHT                      ; $5344: $FE $88
     ret  z                                        ; $5346: $C8
 
     ldh  a, [hActiveEntityType]                   ; $5347: $F0 $EB
-    cp   $89                                      ; $5349: $FE $89
+    cp   ENTITY_HINOX                             ; $5349: $FE $89
     jr   z, jr_006_5355                           ; $534B: $28 $08
 
-    cp   $8E                                      ; $534D: $FE $8E
+    cp   ENTITY_CUE_BALL                          ; $534D: $FE $8E
     jr   z, jr_006_5355                           ; $534F: $28 $04
 
-    cp   $92                                      ; $5351: $FE $92
+    cp   ENTITY_SMASHER                           ; $5351: $FE $92
     jr   nz, jr_006_535A                          ; $5353: $20 $05
 
 jr_006_5355:
     ldh  a, [hMapId]                              ; $5355: $F0 $F7
-    cp   $06                                      ; $5357: $FE $06
+    cp   MAP_EAGLES_TOWER                         ; $5357: $FE $06
     ret  nc                                       ; $5359: $D0
 
 jr_006_535A:
@@ -93,7 +93,7 @@ ArmosKnightPrivateState3Handler::
 
 jr_006_5361:
     call func_006_64C6                            ; $5361: $CD $C6 $64
-    call label_3EE8                               ; $5364: $CD $E8 $3E
+    call BossIntro                                ; $5364: $CD $E8 $3E
     call label_3B70                               ; $5367: $CD $70 $3B
     call func_006_641A                            ; $536A: $CD $1A $64
     call func_006_657A                            ; $536D: $CD $7A $65
@@ -286,7 +286,7 @@ ArmosKnightState3Handler::
     add  hl, bc                                   ; $5491: $09
     ld   [hl], $30                                ; $5492: $36 $30
     call IncrementEntityState                     ; $5494: $CD $12 $3B
-    ld   a, $24                                   ; $5497: $3E $24
+    ld   a, JINGLE_JUMP                           ; $5497: $3E $24
     ldh  [hJingle], a                             ; $5499: $E0 $F2
     ret                                           ; $549B: $C9
 
@@ -309,7 +309,7 @@ jr_006_549C:
 
 jr_006_54B4:
     call ApplyVectorTowardsLink_trampoline        ; $54B4: $CD $AA $3B
-    ld   a, $20                                   ; $54B7: $3E $20
+    ld   a, JINGLE_BIG_BUMP                       ; $54B7: $3E $20
     ldh  [hJingle], a                             ; $54B9: $E0 $F2
 
 jr_006_54BB:
@@ -356,7 +356,7 @@ ArmosKnightState6Handler::
     ld   [$C157], a                               ; $54F6: $EA $57 $C1
     ld   a, $04                                   ; $54F9: $3E $04
     ld   [$C158], a                               ; $54FB: $EA $58 $C1
-    ld   a, $0B                                   ; $54FE: $3E $0B
+    ld   a, JINGLE_HUGE_BUMP                      ; $54FE: $3E $0B
     ldh  [hJingle], a                             ; $5500: $E0 $F2
     call GetEntityTransitionCountdown             ; $5502: $CD $05 $0C
     ld   [hl], $30                                ; $5505: $36 $30

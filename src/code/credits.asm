@@ -1004,8 +1004,8 @@ jr_017_4C2F:
     res  3, [hl]                                  ; $4C43: $CB $9E
     call ResetCreditsSceneVariables               ; $4C45: $CD $A5 $4D
     call IncrementCreditsGameplaySubtype          ; $4C48: $CD $5B $4C
-    ld   a, $59                                   ; $4C4B: $3E $59
-    ld   [wActiveMusicTrack], a                   ; $4C4D: $EA $68 $D3
+    ld   a, MUSIC_MEETING_WINDFISH                ; $4C4B: $3E $59
+    ld   [wMusicTrackToPlay], a                   ; $4C4D: $EA $68 $D3
     ld   a, $40                                   ; $4C50: $3E $40
     ld   [$D006], a                               ; $4C52: $EA $06 $D0
     ld   a, $04                                   ; $4C55: $3E $04
@@ -1030,9 +1030,9 @@ CreditsWindFishHandler::
     ld   a, $92                                   ; $4C70: $3E $92
     ldh  [hMapRoom], a                            ; $4C72: $E0 $F6
     ld   a, $FF                                   ; $4C74: $3E $FF
-    ld   [$DBC7], a                               ; $4C76: $EA $C7 $DB
-    call AnimateEntitiesAndRestoreBank17                                    ; $4C79: $CD $ED $0E
-    ld   a, [wCreditsSubscene]                               ; $4C7C: $FA $0E $D0
+    ld   [wInvincibilityCounter], a               ; $4C76: $EA $C7 $DB
+    call AnimateEntitiesAndRestoreBank17          ; $4C79: $CD $ED $0E
+    ld   a, [wCreditsSubscene]                    ; $4C7C: $FA $0E $D0
     JP_TABLE                                      ; $4C7F: $C7
 ._00 dw CreditsStairsPrepare1Handler              ; $4C80
 ._01 dw CreditsStairsPrepare2Handler              ; $4C82
@@ -1865,8 +1865,8 @@ CreditsLinkPreparesToPlayHandler::
 
     ld   a, $04                                   ; $5571: $3E $04
     ldh  [hLinkAnimationState], a                 ; $5573: $E0 $9D
-    ld   a, $3F                                   ; $5575: $3E $3F
-    ld   [wActiveMusicTrack], a                   ; $5577: $EA $68 $D3
+    ld   a, MUSIC_WIND_FISH_AWAKENS               ; $5575: $3E $3F
+    ld   [wMusicTrackToPlay], a                   ; $5577: $EA $68 $D3
 
 jr_017_557A:
     ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $557A: $3E $E8
@@ -1942,7 +1942,7 @@ CreditsLinkShowsInstrumentsHandler::
     jr   nz, jr_017_55F6                          ; $55EF: $20 $05
 
     ld   hl, hJingle                              ; $55F1: $21 $F2 $FF
-    ld   [hl], $34                                ; $55F4: $36 $34
+    ld   [hl], JINGLE_SHOW_INSTRUMENTS            ; $55F4: $36 $34
 
 jr_017_55F6:
     and  a                                        ; $55F6: $A7
@@ -2732,7 +2732,11 @@ func_017_5B00::
     ret                                           ; $5B0E: $C9
 
 Data_017_5B0F::
-    db   $40, $73, $D0, $6A, $A0, $6D, $70, $70, $00, $68
+    dw CreditsBGMaps._04
+    dw CreditsBGMaps._01
+    dw CreditsBGMaps._02
+    dw CreditsBGMaps._03
+    dw CreditsBGMaps._00
 
 CreditsLoadBGMap::
     ld   hl, Data_017_5B0F                        ; $5B19: $21 $0F $5B
@@ -2744,12 +2748,12 @@ CreditsLoadBGMap::
     ld   a, [hl+]                                 ; $5B24: $2A
     ld   b, a                                     ; $5B25: $47
     ; Return bank to restore
-    ld   a, BANK(CreditsLoadBGMap)                   ; $5B26: $3E $17
+    ld   a, BANK(@)                               ; $5B26: $3E $17
     ldh  [hScratchF], a                           ; $5B28: $E0 $E6
     ld   h, [hl]                                  ; $5B2A: $66
     ld   l, b                                     ; $5B2B: $68
     ; Source bank
-    ld   a, $23                                   ; $5B2C: $3E $23
+    ld   a, BANK(CreditsBGMaps)                ; $5B2C: $3E $23
     call CopyBGMapFromBank                        ; $5B2E: $CD $69 $0B
     ret                                           ; $5B31: $C9
 
@@ -3239,8 +3243,8 @@ CreditsSunAbove0Handler::
     ldh  [hBaseScrollY], a                        ; $6136: $E0 $97
     ld   [wScreenShakeHorizontal], a              ; $6138: $EA $55 $C1
     ld   [wScreenShakeVertical], a                ; $613B: $EA $56 $C1
-    ld   a, $3D                                   ; $613E: $3E $3D
-    ld   [wActiveMusicTrack], a                   ; $6140: $EA $68 $D3
+    ld   a, MUSIC_ENDING                          ; $613E: $3E $3D
+    ld   [wMusicTrackToPlay], a                   ; $6140: $EA $68 $D3
     call ResetCreditsSceneVariables               ; $6143: $CD $A5 $4D
     jp   IncrementCreditsSubscene                 ; $6146: $C3 $D9 $4C
 
@@ -5014,11 +5018,7 @@ Data_017_71DF::
     db   $00, $08, $00, $20, $08, $08, $01, $20, $00, $00, $02, $20, $08, $00, $03, $20
     db   $00, $FA, $10, $00, $08, $FA, $11, $00, $00, $0E, $10, $20, $08, $0E, $11, $20
     db   $00, $08, $00, $20, $08, $08, $01, $20, $00, $00, $02, $20, $08, $00, $03, $20
-    db   $08, $FA, $10, $40, $00, $FA, $11, $40, $08, $0E, $10, $60, $00
-
-func_017_725C::
-    ld   c, $11                                   ; $725C: $0E $11
-    ld   h, b                                     ; $725E: $60
+    db   $08, $FA, $10, $40, $00, $FA, $11, $40, $08, $0E, $10, $60, $00, $0E, $11, $60
 
 func_017_725F::
     ld   hl, wDeathCount                          ; $725F: $21 $57 $DB
@@ -6281,7 +6281,7 @@ jr_017_7CC8:
     cp   $DF                                      ; $7CCC: $FE $DF
     jr   nz, jr_017_7CD4                          ; $7CCE: $20 $04
 
-    ld   a, $26                                   ; $7CD0: $3E $26
+    ld   a, JINGLE_DISAPPEAR                      ; $7CD0: $3E $26
     ldh  [hJingle], a                             ; $7CD2: $E0 $F2
 
 jr_017_7CD4:

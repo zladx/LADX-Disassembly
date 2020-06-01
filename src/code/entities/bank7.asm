@@ -835,7 +835,7 @@ func_007_4537::
     call ApplyVectorTowardsLink_trampoline        ; $4572: $CD $AA $3B
     pop  bc                                       ; $4575: $C1
     call func_007_48FD                            ; $4576: $CD $FD $48
-    ld   a, $08                                   ; $4579: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $4579: $3E $08
     ldh  [hJingle], a                             ; $457B: $E0 $F2
     ld   a, $0C                                   ; $457D: $3E $0C
     ld   [wTradeSequenceItem], a                  ; $457F: $EA $0E $DB
@@ -1232,7 +1232,7 @@ jr_007_4820:
     ldh  [hScratch1], a                           ; $4828: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $482A: $F0 $98
     ldh  [hScratch0], a                           ; $482C: $E0 $D7
-    ld   a, $0E                                   ; $482E: $3E $0E
+    ld   a, JINGLE_WATER_DIVE                     ; $482E: $3E $0E
     ldh  [hJingle], a                             ; $4830: $E0 $F2
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $4832: $3E $01
     call AddTranscientVfx                         ; $4834: $CD $C7 $0C
@@ -1376,7 +1376,7 @@ func_007_48FD::
     ldh  [hScratch0], a                           ; $4903: $E0 $D7
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $4905: $3E $01
     call AddTranscientVfx                         ; $4907: $CD $C7 $0C
-    ld   a, $0E                                   ; $490A: $3E $0E
+    ld   a, JINGLE_WATER_DIVE                     ; $490A: $3E $0E
     ldh  [hJingle], a                             ; $490C: $E0 $F2
     ret                                           ; $490E: $C9
 
@@ -1773,7 +1773,7 @@ func_007_4C16::
     ret  nc                                       ; $4C19: $D0
 
     ld   e, $D3                                   ; $4C1A: $1E $D3
-    ld   a, [$D8FD]                               ; $4C1C: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + $FD]                               ; $4C1C: $FA $FD $D8
     and  $30                                      ; $4C1F: $E6 $30
     jr   nz, jr_007_4C45                          ; $4C21: $20 $22
 
@@ -2107,7 +2107,7 @@ Data_007_4E0D::
     db   $20, $28, $F0, $E8, $E8, $E0, $E0, $D8
 
 func_007_4E25::
-    ld   a, $22                                   ; $4E25: $3E $22
+    ld   a, JINGLE_HONEYCOMB                      ; $4E25: $3E $22
     ldh  [hJingle], a                             ; $4E27: $E0 $F2
     ld   a, [$D204]                               ; $4E29: $FA $04 $D2
     ld   e, a                                     ; $4E2C: $5F
@@ -2264,11 +2264,11 @@ func_007_4F1F::
 
     ld   a, $02                                   ; $4F2E: $3E $02
     ld   [$DB7F], a                               ; $4F30: $EA $7F $DB
-    ld   hl, $D887                                ; $4F33: $21 $87 $D8
+    ld   hl, wOverworldRoomStatus + $87                                ; $4F33: $21 $87 $D8
     set  6, [hl]                                  ; $4F36: $CB $F6
     call GetEntityTransitionCountdown             ; $4F38: $CD $05 $0C
     ld   [hl], $A0                                ; $4F3B: $36 $A0
-    ld   a, $01                                   ; $4F3D: $3E $01
+    ld   a, JINGLE_TREASURE_FOUND                 ; $4F3D: $3E $01
     ldh  [hJingle], a                             ; $4F3F: $E0 $F2
     jp   IncrementEntityState                     ; $4F41: $C3 $12 $3B
 
@@ -2302,6 +2302,7 @@ func_007_4F56::
     ld   a, $08                                   ; $4F76: $3E $08
     jp   SetEntitySpriteVariant                   ; $4F78: $C3 $0C $3B
 
+; Tarin beehive cutscene related
 jr_007_4F7B:
     cp   $18                                      ; $4F7B: $FE $18
     jr   nc, jr_007_4FA5                          ; $4F7D: $30 $26
@@ -2317,9 +2318,9 @@ jr_007_4F7B:
     call GetEntityTransitionCountdown             ; $4F91: $CD $05 $0C
     jr   nz, jr_007_4FA5                          ; $4F94: $20 $0F
 
-    ld   a, $34                                   ; $4F96: $3E $34
-    ld   [wActiveMusicTrack], a                   ; $4F98: $EA $68 $D3
-    ldh  [hMusicTrack], a                         ; $4F9B: $E0 $B0
+    ld   a, MUSIC_TARIN_BEEHIVE                   ; $4F96: $3E $34
+    ld   [wMusicTrackToPlay], a                   ; $4F98: $EA $68 $D3
+    ldh  [hDefaultMusicTrack], a                  ; $4F9B: $E0 $B0
     call GetEntityTransitionCountdown             ; $4F9D: $CD $05 $0C
     ld   [hl], $C0                                ; $4FA0: $36 $C0
     jp   IncrementEntityState                     ; $4FA2: $C3 $12 $3B
@@ -2636,7 +2637,7 @@ Data_007_5178::
 func_007_517C::
     ld   a, $01                                   ; $517C: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $517E: $E0 $A1
-    ld   a, $3E                                   ; $5180: $3E $3E
+    ld   a, JINGLE_URCHIN_PUSH                    ; $5180: $3E $3E
     ldh  [hJingle], a                             ; $5182: $E0 $F2
     ldh  a, [hJoypadState]                        ; $5184: $F0 $CC
     and  $0F                                      ; $5186: $E6 $0F
@@ -2788,7 +2789,7 @@ jr_007_51F2:
     ldh  [hScratch0], a                           ; $5261: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $5263: $F0 $EC
     ldh  [hScratch1], a                           ; $5265: $E0 $D8
-    ld   a, $2F                                   ; $5267: $3E $2F
+    ld   a, JINGLE_POOF                           ; $5267: $3E $2F
     ldh  [hJingle], a                             ; $5269: $E0 $F2
     ld   a, TRANSCIENT_VFX_POOF                   ; $526B: $3E $02
     call AddTranscientVfx                         ; $526D: $CD $C7 $0C
@@ -3127,11 +3128,10 @@ jr_007_549C:
     jr   nz, jr_007_548A                          ; $54BB: $20 $CD
 
     ld   a, $03                                   ; $54BD: $3E $03
-    db   $C3                                      ; $54BF: $C3
-    and  b                                        ; $54C0: $A0
+    jp   label_3DA0
 
-Data_007_54C1::
-    db   $3D, $44, $29, $82, $CB, $64, $C1, $D0, $74, $6A, $36, $5E, $EC, $F5, $9D
+Data_007_54C2::
+    db   $44, $29, $82, $CB, $64, $C1, $D0, $74, $6A, $36, $5E, $EC, $F5, $9D
 
 Data_007_54D0::
     db   $9A, $16, $9C, $16
@@ -3164,7 +3164,7 @@ TradingItemEntityHandler::
     jr   nz, jr_007_552E                          ; $5526: $20 $06
 
 jr_007_5528:
-    ld   a, [$D87B]                               ; $5528: $FA $7B $D8
+    ld   a, [wOverworldRoomStatus + $7B]                               ; $5528: $FA $7B $D8
     and  $10                                      ; $552B: $E6 $10
     ret  z                                        ; $552D: $C8
 
@@ -3225,11 +3225,11 @@ jr_007_5572:
     call CheckLinkCollisionWithEnemy_trampoline   ; $557A: $CD $5A $3B
     jr   nc, jr_007_5599                          ; $557D: $30 $1A
 
-    ld   a, MUSIC_WEAPON_ACQUIRED                 ; $557F: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $5581: $EA $68 $D3
+    ld   a, MUSIC_TOOL_ACQUIRED                   ; $557F: $3E $10
+    ld   [wMusicTrackToPlay], a                   ; $5581: $EA $68 $D3
     ld   [wC167], a                               ; $5584: $EA $67 $C1
-    ldh  a, [hNextWorldMusicTrack]                ; $5587: $F0 $BF
-    ldh  [hMusicTrack], a                         ; $5589: $E0 $B0
+    ldh  a, [hNextDefaultMusicTrack]              ; $5587: $F0 $BF
+    ldh  [hDefaultMusicTrack], a                  ; $5589: $E0 $B0
     call GetEntityTransitionCountdown             ; $558B: $CD $05 $0C
     ld   a, $68                                   ; $558E: $3E $68
     ld   [hl], a                                  ; $5590: $77
@@ -3248,7 +3248,7 @@ jr_007_559A:
     ld   a, [wTradeSequenceItem]                  ; $559F: $FA $0E $DB
     ld   e, a                                     ; $55A2: $5F
     ld   d, b                                     ; $55A3: $50
-    ld   hl, Data_007_54C1                        ; $55A4: $21 $C1 $54
+    ld   hl, Data_007_54C2 - 1                    ; $55A4: $21 $C1 $54
     add  hl, de                                   ; $55A7: $19
     ld   a, [hl]                                  ; $55A8: $7E
     cp   $9D                                      ; $55A9: $FE $9D
@@ -3815,7 +3815,7 @@ func_007_5934::
     ld   hl, wEntitiesUnknowTableV                ; $593B: $21 $80 $C4
     add  hl, bc                                   ; $593E: $09
     ld   [hl], $80                                ; $593F: $36 $80
-    ld   a, $01                                   ; $5941: $3E $01
+    ld   a, JINGLE_TREASURE_FOUND                 ; $5941: $3E $01
     ldh  [hJingle], a                             ; $5943: $E0 $F2
     call IncrementEntityState                     ; $5945: $CD $12 $3B
 
@@ -3833,9 +3833,9 @@ func_007_5951::
     call GetEntityTransitionCountdown             ; $5956: $CD $05 $0C
     jr   nz, jr_007_596A                          ; $5959: $20 $0F
 
-    ld   a, $36                                   ; $595B: $3E $36
-    ld   [wActiveMusicTrack], a                   ; $595D: $EA $68 $D3
-    ldh  [hMusicTrack], a                         ; $5960: $E0 $B0
+    ld   a, MUSIC_MONKEYS_BUILDING_BRIDGE         ; $595B: $3E $36
+    ld   [wMusicTrackToPlay], a                   ; $595D: $EA $68 $D3
+    ldh  [hDefaultMusicTrack], a                  ; $5960: $E0 $B0
     call GetEntityDropTimer                       ; $5962: $CD $FB $0B
     ld   [hl], $80                                ; $5965: $36 $80
     jp   IncrementEntityState                     ; $5967: $C3 $12 $3B
@@ -3876,11 +3876,11 @@ func_007_5997::
 jr_007_59A1:
     jr   nz, jr_007_59C8                          ; $59A1: $20 $25
 
-    ld   a, $02                                   ; $59A3: $3E $02
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $59A3: $3E $02
     ldh  [hJingle], a                             ; $59A5: $E0 $F2
-    ld   a, [$D87B]                               ; $59A7: $FA $7B $D8
+    ld   a, [wOverworldRoomStatus + $7B]                               ; $59A7: $FA $7B $D8
     or   $10                                      ; $59AA: $F6 $10
-    ld   [$D87B], a                               ; $59AC: $EA $7B $D8
+    ld   [wOverworldRoomStatus + $7B], a                               ; $59AC: $EA $7B $D8
     ld   a, $01                                   ; $59AF: $3E $01
     ld   [$DB7F], a                               ; $59B1: $EA $7F $DB
     ld   a, $63                                   ; $59B4: $3E $63
@@ -4629,9 +4629,9 @@ jr_007_5EA6:
 label_007_5EA7:
     ld   a, $00                                   ; $5EA7: $3E $00
     ld   [wScreenShakeHorizontal], a              ; $5EA9: $EA $55 $C1
-    ld   a, [wDB72]                               ; $5EAC: $FA $72 $DB
+    ld   a, [wNumberOfDungeon7PillarsDestroyed]   ; $5EAC: $FA $72 $DB
     inc  a                                        ; $5EAF: $3C
-    ld   [wDB72], a                               ; $5EB0: $EA $72 $DB
+    ld   [wNumberOfDungeon7PillarsDestroyed], a   ; $5EB0: $EA $72 $DB
     cp   $04                                      ; $5EB3: $FE $04
     jr   c, jr_007_5EBF                           ; $5EB5: $38 $08
 
@@ -4883,11 +4883,11 @@ jr_007_602A:
     ret  nz                                       ; $6034: $C0
 
     ldh  a, [hMapRoom]                            ; $6035: $F0 $F6
-    ld   [wDB6F], a                               ; $6037: $EA $6F $DB
+    ld   [wWreckingBallRoom], a                   ; $6037: $EA $6F $DB
     ldh  a, [hActiveEntityPosX]                   ; $603A: $F0 $EE
-    ld   [wDB70], a                               ; $603C: $EA $70 $DB
+    ld   [wWreckingBallPosX], a                   ; $603C: $EA $70 $DB
     ldh  a, [hActiveEntityPosY]                   ; $603F: $F0 $EF
-    ld   [wDB71], a                               ; $6041: $EA $71 $DB
+    ld   [wWreckingBallPosY], a                   ; $6041: $EA $71 $DB
     ld   a, [wDialogState]                        ; $6044: $FA $9F $C1
     and  a                                        ; $6047: $A7
     ret  nz                                       ; $6048: $C0
@@ -5066,7 +5066,7 @@ func_007_6135::
     jr   z, jr_007_6164                           ; $6140: $28 $22
 
 func_007_6142::
-    ld   a, $07                                   ; $6142: $3E $07
+    ld   a, JINGLE_SWORD_POKING                   ; $6142: $3E $07
     ldh  [hJingle], a                             ; $6144: $E0 $F2
     ld   hl, wEntitiesSpeedXTable                 ; $6146: $21 $40 $C2
     add  hl, bc                                   ; $6149: $09
@@ -5146,7 +5146,7 @@ func_007_618F::
     call func_007_6142                            ; $61AE: $CD $42 $61
     ld   a, $25                                   ; $61B1: $3E $25
     ldh  [hNoiseSfx], a                           ; $61B3: $E0 $F4
-    ld   a, $0B                                   ; $61B5: $3E $0B
+    ld   a, JINGLE_HUGE_BUMP                      ; $61B5: $3E $0B
     ldh  [hJingle], a                             ; $61B7: $E0 $F2
     call GetEntityTransitionCountdown             ; $61B9: $CD $05 $0C
     ld   [hl], $10                                ; $61BC: $36 $10
@@ -5452,7 +5452,7 @@ SideViewPlatformVerticalEntityHandler::
     jr   nz, func_007_639E                        ; $6370: $20 $2C
 
     ldh  a, [hActiveEntityType]                   ; $6372: $F0 $EB
-    cp   $A4                                      ; $6374: $FE $A4
+    cp   ENTITY_SIDE_VIEW_PLATFORM_VERTICAL       ; $6374: $FE $A4
     jp   z, label_007_63FB                        ; $6376: $CA $FB $63
 
     ld   hl, wEntitiesPrivateState1Table          ; $6379: $21 $B0 $C2
@@ -6386,8 +6386,8 @@ func_007_698A::
     ret  nz                                       ; $698D: $C0
 
 jr_007_698E:
-    ld   a, $4C                                   ; $698E: $3E $4C
-    ld   [wActiveMusicTrack], a                   ; $6990: $EA $68 $D3
+    ld   a, MUSIC_WATERFALL_DRAIN                 ; $698E: $3E $4C
+    ld   [wMusicTrackToPlay], a                   ; $6990: $EA $68 $D3
     jp   IncrementEntityState                     ; $6993: $C3 $12 $3B
 
 func_007_6996::
@@ -6535,7 +6535,7 @@ jr_007_6A52:
 
     call func_007_7D96                            ; $6A5C: $CD $96 $7D
     call label_394D                               ; $6A5F: $CD $4D $39
-    call label_3EE8                               ; $6A62: $CD $E8 $3E
+    call BossIntro                                ; $6A62: $CD $E8 $3E
     ld   hl, wEntitiesFlashCountdownTable         ; $6A65: $21 $20 $C4
     add  hl, bc                                   ; $6A68: $09
     ld   a, [hl]                                  ; $6A69: $7E
@@ -6637,7 +6637,7 @@ func_007_6AF5::
     cp   $01                                      ; $6AFA: $FE $01
     jr   nz, jr_007_6B02                          ; $6AFC: $20 $04
 
-    ld   a, $08                                   ; $6AFE: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $6AFE: $3E $08
     ldh  [hJingle], a                             ; $6B00: $E0 $F2
 
 jr_007_6B02:
@@ -7041,7 +7041,7 @@ func_007_6D7F::
     ld   hl, wEntitiesUnknowTableH                ; $6D92: $21 $30 $C4
     add  hl, bc                                   ; $6D95: $09
     set  6, [hl]                                  ; $6D96: $CB $F6
-    ld   a, $28                                   ; $6D98: $3E $28
+    ld   a, JINGLE_MASTER_STALFOS                 ; $6D98: $3E $28
     ldh  [hJingle], a                             ; $6D9A: $E0 $F2
 
 jr_007_6D9C:
@@ -7293,7 +7293,7 @@ func_007_6ED0::
     ld   [hl], $7F                                ; $6ED4: $36 $7F
     call GetEntityTransitionCountdown             ; $6ED6: $CD $05 $0C
     ld   [hl], $80                                ; $6ED9: $36 $80
-    ldh  a, [hMusicTrack]                         ; $6EDB: $F0 $B0
+    ldh  a, [hDefaultMusicTrack]                  ; $6EDB: $F0 $B0
     ld   hl, wEntitiesUnknowTableR                ; $6EDD: $21 $90 $C3
     add  hl, bc                                   ; $6EE0: $09
     ld   [hl], a                                  ; $6EE1: $77
@@ -7504,7 +7504,7 @@ func_007_7090::
 
 func_007_70B7::
     ld   hl, $C146                                ; $70B7: $21 $46 $C1
-    ld   a, [$DBC7]                               ; $70BA: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $70BA: $FA $C7 $DB
     or   [hl]                                     ; $70BD: $B6
     jr   nz, jr_007_7111                          ; $70BE: $20 $51
 
@@ -7551,7 +7551,7 @@ jr_007_70E0:
     ld   a, $08                                   ; $7103: $3E $08
     ld   [wSubtractHealthBuffer], a               ; $7105: $EA $94 $DB
     ld   a, $20                                   ; $7108: $3E $20
-    ld   [$DBC7], a                               ; $710A: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $710A: $EA $C7 $DB
     ld   a, $03                                   ; $710D: $3E $03
     ldh  [hWaveSfx], a                            ; $710F: $E0 $F3
 
@@ -7910,7 +7910,7 @@ func_007_7320::
     call IncrementEntityState                     ; $733C: $CD $12 $3B
 
 func_007_733F::
-    ld   a, $24                                   ; $733F: $3E $24
+    ld   a, JINGLE_JUMP                           ; $733F: $3E $24
     ldh  [hJingle], a                             ; $7341: $E0 $F2
     ret                                           ; $7343: $C9
 
@@ -9268,7 +9268,7 @@ jr_007_7D4E:
 
     inc  e                                        ; $7D5C: $1C
     ldh  a, [hActiveEntityType]                   ; $7D5D: $F0 $EB
-    cp   $B5                                      ; $7D5F: $FE $B5
+    cp   ENTITY_BEAR                              ; $7D5F: $FE $B5
     jr   z, jr_007_7D6F                           ; $7D61: $28 $0C
 
     push de                                       ; $7D63: $D5
@@ -9566,10 +9566,10 @@ func_007_7ED6::
     jr   nz, jr_007_7F13                          ; $7ED9: $20 $38
 
     ldh  a, [hActiveEntityType]                   ; $7EDB: $F0 $EB
-    cp   $5F                                      ; $7EDD: $FE $5F
+    cp   ENTITY_MASTER_STALFOS                    ; $7EDD: $FE $5F
     jr   nz, jr_007_7F0A                          ; $7EDF: $20 $29
 
-    ld   a, $30                                   ; $7EE1: $3E $30
+    ld   a, ENTITY_KEY_DROP_POINT                 ; $7EE1: $3E $30
     call SpawnNewEntity_trampoline                ; $7EE3: $CD $86 $3B
     ldh  a, [hScratch0]                           ; $7EE6: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $7EE8: $21 $00 $C2
@@ -9588,7 +9588,7 @@ func_007_7ED6::
     ld   hl, wEntitiesUnknowTableR                ; $7F00: $21 $90 $C3
     add  hl, bc                                   ; $7F03: $09
     ld   a, [hl]                                  ; $7F04: $7E
-    ldh  [hMusicTrack], a                         ; $7F05: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $7F05: $E0 $B0
     jp   jr_007_7F76                              ; $7F07: $C3 $76 $7F
 
 jr_007_7F0A:

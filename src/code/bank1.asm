@@ -1,200 +1,7 @@
-; Code for bank 1.
-; Contains main engine support code.
-
-include "code/file_save_screen.asm"
-
-; Unused code?
-label_40D6::
-    xor  a
-    ld   [wOBJ0Palette], a
-    ld   [wOBJ1Palette], a
-    ld   [rOBP0], a
-    ld   [rOBP1], a
-    ld   [wBGPalette], a
-    ld   [rBGP], a
-    ldh  a, [hLinkPositionX]
-    ld   [wMapEntrancePositionX], a
-    ldh  a, [hLinkPositionY]
-    ld   [wMapEntrancePositionY], a
-    call LoadSavedFile
-    ld   a, $80
-    ld   [$DBC7], a
-    ret
-
-jr_001_40F9::
-    call label_27F2
-    call func_001_5DE6
-    call ClearWRAMAndLowerHRAM
-    xor  a
-    ldh  [hActiveEntityTilesOffset], a
-    ld   a, $01
-    ld   [$DBAF], a
-    call func_001_6162
-
-; Enable LCD Screen
-LCDOn::
-    ; Configure LCD control register
-    ;   Bit 7: Enable LDC display
-    ;   Bit 6: Window tile map to $9C00-$9FFF
-    ;   Bit 5: Window display disabled
-    ;   Bit 4: Background & Window Tile Data to $8800-$97FF
-    ;   Bit 3: Background Tile Map to $9800-$9BFF
-    ;   Bit 2: Sprite size 8x16
-    ;   Bit 1: Sprite displayed enabled
-    ;   Bit 0: Background display enabled
-    ld   a, %11000111
-    ld   [rLCDC], a
-    ld   [wLCDControl], a
-
-    ; Set Window X position
-    ld   a, $07
-    ld   [rWX], a
-
-    ; Set Windows Y position
-    ld   a, $80
-    ld   [wWindowY], a
-    ld   [rWY], a
-
-    ; Configure Window
-    ld   a, $07
-    ldh  [hWindowYUnused], a
-    ld   a, $70
-    ldh  [hWindowXUnused], a
-LCDOn_return:
-    ret
-
-Data_001_4128::
-    ld   c, b
-    ld   e, b
-
-; Called by FileSaveInteractive
-func_001_412A::
-    ld   hl, $C13F
-    call func_001_6BA8
-    ldh  a, [hJoypadState]
-    and  $0C
-    jr   z, jr_001_413B
-    ld   a, [hl]
-    inc  a
-    and  $01
-    ld   [hl], a
-
-jr_001_413B::
-    ld   e, [hl]
-    ld   d, $00
-    ld   hl, Data_001_4128
-    add  hl, de
-    ld   a, [hl]
-    ld   hl, $C018
-    ldi  [hl], a
-    ld   a, $24
-    ldi  [hl], a
-    ld   a, $BE
-    ldi  [hl], a
-    ld   [hl], $00
-    ret
-    ldh  a, [$FFB7]
-    and  a
-    jp   nz, label_001_41BB
-    ld   e, $70
-
-.wait
-    xor  a
-    ld   [rBGP], a
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    dec  e
-    jr   nz, .wait
-    ld   e, $30
-
-jr_001_417E::
-    ld   a, $40
-    ld   [rBGP], a
-    dec  e
-    jr   nz, jr_001_417E
-    ld   e, $30
-
-jr_001_4187::
-    ld   a, $80
-    ld   [rBGP], a
-    dec  e
-    jr   nz, jr_001_4187
-    ld   e, $FF
-
-.wait
-    ld   a, $C0
-    ld   [rBGP], a
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    dec  e
-    jr   nz, .wait
-    ld   e, $30
-
-jr_001_41AB::
-    ld   a, $80
-    ld   [rBGP], a
-    dec  e
-    jr   nz, jr_001_41AB
-    ld   e, $30
-
-jr_001_41B4::
-    ld   a, $40
-    ld   [rBGP], a
-    dec  e
-    jr   nz, jr_001_41B4
-
-label_001_41BB::
-    xor  a
-    ld   [wBGPalette], a
-    ld   [rBGP], a
-    ret
-
-include "code/game_over.asm"
-include "code/world_handler.asm"
+;
+; TODO: move these pieces of code to named files
+; (instead of the generic "bank1.asm")
+;
 
 DebugSaveFileData::
     db INVENTORY_SHIELD          ; B button
@@ -470,7 +277,7 @@ jr_001_52C7::
     ld   c, [hl]
     inc  hl
     ld   b, [hl]
-    ld   hl, $D800
+    ld   hl, wOverworldRoomStatus
     ld   de, $0380
 
 jr_001_52D9::
@@ -532,15 +339,15 @@ jr_001_531D::
     ld   [wAddRupeeBufferHigh], a
     ld   [wSubstractRupeeBufferLow], a
     ld   [wSubstractRupeeBufferHigh], a
-    ld   a, [$DB6F]
+    ld   a, [wWreckingBallRoom]
     and  a
     jr   nz, .setStartingPoint
     ld   a, $16
-    ld   [$DB6F], a
+    ld   [wWreckingBallRoom], a
     ld   a, $50
-    ld   [$DB70], a
+    ld   [wWreckingBallPosX], a
     ld   a, $27
-    ld   [$DB71], a
+    ld   [wWreckingBallPosY], a
 
 .setStartingPoint
     ld   a, [wSpawnPositionX]
@@ -611,11 +418,11 @@ jr_001_531D::
     ld   a, $03
     ldh  [hLinkDirection], a
     ld   a, $16
-    ld   [$DB6F], a
+    ld   [wWreckingBallRoom], a
     ld   a, $50
-    ld   [$DB70], a
+    ld   [wWreckingBallPosX], a
     ld   a, $27
-    ld   [$DB71], a
+    ld   [wWreckingBallPosY], a
     jr   .finish
 
 
@@ -675,21 +482,22 @@ Data_001_54E6::
     db $A, $EA
 
 Data_001_54E8::
-    db $9C, $E9, $49, $7F, $9D, 9, $49, $7F, $9D, $29, $49, $7F, $9D, $49, $49, $7F
+    db $9C, $E9, $49, $7F, $9D, $09, $49, $7F, $9D, $29, $49, $7F, $9D, $49, $49, $7F
     db $9D, $69, $49, $7F, $9D, $89, $49, $7F, $9D, $A9, $49, $7F, $9D, $C9, $49, $7F
-    db $9D, $E9, $49, $7F, $9E, 9, $49, $7F, 0
+    db $9D, $E9, $49, $7F, $9E, $09, $49, $7F, $00
 
 func_001_5511::
+    ; Copy $29 bytes from Data_001_54E8 to $D650
     ld   hl, Data_001_54E8
     ld   de, $D650
     ld   c, $29
-
-jr_001_5519::
+.copyLoop
     ld   a, [hli]
     inc  de
     ld   [de], a
     dec  c
-    jr   nz, jr_001_5519
+    jr   nz, .copyLoop
+
     push de
     xor  a
     ldh  [hScratch0], a
@@ -707,14 +515,14 @@ jr_001_5519::
     and  a
     jr   z, jr_001_5543
 
-jr_001_5538::
+.loop
     ld   a, c
     add  a, $04
     ld   c, a
     dec  e
     ld   a, e
     and  a
-    jr   nz, jr_001_5538
+    jr   nz, .loop
     ld   b, $00
 
 jr_001_5543::
@@ -848,8 +656,6 @@ jr_001_55F5::
     ld   a, [hl]
     ldh  [hScratch0], a
     ld   hl, Data_001_54E6
-
-func_001_5600::
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratch1], a
@@ -878,303 +684,7 @@ func_001_5619::
     ld   [hl], a
     ret
 
-MinimapEntryPoint::
-    xor  a
-    ld   [wOAMNextAvailableSlot], a
-    ld   a, [wGameplaySubtype]
-    cp   $05
-    jr   z, jr_001_5639
-    xor  a
-    ldh  [hPressedButtonsMask], a
-    ldh  [hJoypadState], a
-    ld   a, [wGameplaySubtype]
-
-jr_001_5639::
-    JP_TABLE
-    ; Code below is actually data for the jump table
-    ld   c, b
-    ld   d, [hl]
-    ld   a, b
-    ld   d, [hl]
-    db   $F4 ; Undefined instruction
-    ld   d, [hl]
-    db   $FD ; Undefined instruction
-    ld   d, [hl]
-    dec  bc
-    ld   d, a
-    inc  e
-    ld   d, a
-    dec  h
-    ld   e, b
-    call IncrementGameplaySubtype
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, jr_001_5678
-    ld   hl, $DC10
-    ld   c, $80
-    di
-    ld   a, $03
-    ld   [rSVBK], a
-    ld   a, [$D000]
-    and  a
-    jr   nz, jr_001_5674
-
-jr_001_5660::
-    xor  a
-    ld   [rSVBK], a
-    ld   b, [hl]
-    ld   a, $03
-    ld   [rSVBK], a
-    ld   [hl], b
-    inc  hl
-    dec  c
-    ld   a, c
-    and  a
-    jr   nz, jr_001_5660
-    ld   a, $01
-    ld   [$D000], a
-
-jr_001_5674::
-    xor  a
-    ld   [rSVBK], a
-    ei
-
-jr_001_5678::
-    call DrawLinkSprite
-    call AnimateEntitiesAndRestoreBank01
-    call func_1A22
-    ld   a, [$C16B]
-    cp   $04
-    jr   nz, jr_001_56F3
-    ld   a, $03
-    ldh  [hWindowYUnused], a
-    ld   a, $30
-    ldh  [hWindowXUnused], a
-    call IncrementGameplaySubtype
-    xor  a
-    ld   [$C16B], a
-    ld   [$C16C], a
-    ldh  [hBaseScrollX], a
-    ld   [$C1BF], a
-    ldh  [$FF97], a
-    ld   [wInventoryAppearing], a
-    ld   [$C1B2], a
-    ld   [$C1B3], a
-    ld   a, [$DB54]
-    ld   [$DBB4], a
-    ld   e, a
-    ld   d, $00
-    ld   hl, MapSpecialLocationNamesTable
-    add  hl, de
-    ld   a, [hl]
-    and  a
-    jr   z, jr_001_56D9
-    swap a
-    and  $07
-    inc  a
-    cp   $01
-    jr   nz, jr_001_56D9
-    ld   a, [$C5A2]
-    and  a
-    ld   a, $00
-    jr   nz, jr_001_56D9
-    ld   hl, $D800
-    add  hl, de
-    ld   a, [hl]
-    and  $20
-    ld   a, $00
-    jr   z, jr_001_56D9
-    ld   a, $01
-
-jr_001_56D9::
-    ld   [$C1B1], a
-    ld   a, [$DBB4]
-    ld   [$C1B4], a
-    ld   a, [$FF40]
-    and  $DF
-    ld   [wLCDControl], a
-    ld   [rLCDC], a
-    call func_001_5888
-    ld   a, $08
-    ld   [wBGMapToLoad], a
-
-jr_001_56F3::
-    ret
-    ld   a, $0B
-    ld   [wTileMapToLoad], a
-    call IncrementGameplaySubtype
-    ret
-    ld   a, $0E
-    ld   [wTileMapToLoad], a
-    ld   a, $01
-    ld   [$DDD5], a
-    call IncrementGameplaySubtype
-    ret
-    call func_1A39
-    ld   a, [$C16B]
-    cp   $04
-    jr   nz, jr_001_571B
-    call IncrementGameplaySubtype
-    call PlayValidationJingle
-
-jr_001_571B::
-    ret
-    ld   a, [ROM_DebugTool3]
-    and  a
-    jr   z, jr_001_5731
-    ldh  a, [hJoypadState]
-    bit  7, a
-    jr   z, jr_001_5731
-    xor  a
-    ld   [wGameplaySubtype], a
-    inc  a
-    ld   [wGameplayType], a
-    ret
-
-jr_001_5731::
-    ld   a, [$C19F]
-    and  a
-    jp   nz, label_001_5818
-    ldh  a, [hJoypadState]
-    and  J_A
-    jr   z, jr_001_57B7
-    ld   a, [$DBB4]
-    ld   e, a
-    ld   d, $00
-    ld   hl, MapSpecialLocationNamesTable
-    add  hl, de
-    ld   a, [hl]
-    and  a
-    jr   z, jr_001_576F
-    ld   e, a
-    and  $F0
-    jr   nz, jr_001_5766
-    ld   a, [$C5A2]
-    and  a
-    jr   nz, jr_001_576F
-    push de
-    ld   a, [$DBB4]
-    ld   e, a
-    ld   hl, $D800
-    add  hl, de
-    pop  de
-    ld   a, [hl]
-    and  $20
-    jr   z, jr_001_576F
-
-jr_001_5766::
-    ld   d, $00
-    ld   hl, MapSpecialLocationNamesLookupTable
-    add  hl, de
-    ld   a, [hl]
-    jr   jr_001_5792
-
-jr_001_576F::
-    ld   a, [$DBB4]
-    cp   $24
-    jr   z, jr_001_577A
-    cp   $34
-    jr   nz, jr_001_577E
-
-jr_001_577A::
-    ld   a, $76
-    jr   jr_001_5792
-
-jr_001_577E::
-    rra
-    and  $07
-    ld   e, a
-    ld   a, [$DBB4]
-    rra
-    rra
-    and  $38
-    or   e
-    ld   e, a
-    ld   d, $00
-    ld   hl, MapLocationNamesTable
-    add  hl, de
-    ld   a, [hl]
-
-jr_001_5792::
-    call OpenDialog
-    ld   a, [$C173]
-    cp   $A7
-    jr   z, jr_001_57A3
-    ld   a, [$DBB4]
-    cp   $37
-    jr   nz, jr_001_57A8
-
-jr_001_57A3::
-    ld   a, $01
-    ld   [$C112], a
-
-jr_001_57A8::
-    ld   a, [$DBB4]
-    cp   $70
-    ld   a, $01
-    jr   nc, jr_001_57B3
-    ld   a, $81
-
-jr_001_57B3::
-    ld   [$C19F], a
-    ret
-
-; POI: Debug code to warp to any room on the map by pushing B + Select (on the map screen)
-jr_001_57B7::
-    ld   a, [ROM_DebugTool1]                    ; If we weren't pushing A above, then
-    and  a                                      ; Check the first debug flag
-    jr   z, jr_001_57FA                          ; If the debug flag is off, skip this
-    ldh  a, [hPressedButtonsMask]               ; Otherwise, are we holding SELECT / B?
-    cp   J_SELECT | J_B
-    jr   nz, jr_001_57FA                         ; If yes, skip this too
-    ld   a, GAMEPLAY_WORLD                      ; Otherwise, warp somewhere
-    ld   [wGameplayType], a
-    call ApplyMapFadeOutTransition
-    ld   a, $00
-    ld   [wWarp0MapCategory], a
-    ld   [wWarp0Map], a
-    ld   a, [$DBB4]
-    ld   [wWarp0Room], a
-    ld   a, $48
-    ld   [wWarp0DestinationX], a
-    ld   a, $52
-    ld   [wWarp0DestinationY], a
-    ldh  a, [hLinkPositionX]
-    swap a
-    and  $0F
-    ld   e, a
-    ldh  a, [hLinkPositionY]
-    sub  a, $08
-    and  $F0
-    or   e
-    ld   [wWarp0PositionTileIndex], a
-    ld   a, $07
-    ld   [wGameplaySubtype], a
-    ret
-
-jr_001_57FA::
-    ld   e, J_SELECT
-    ld   a, [ROM_DebugTool1]
-    and  a
-    jr   nz, jr_001_5804
-    ld   e, J_SELECT | J_B
-
-jr_001_5804::
-    ldh  a, [hJoypadState]
-    and  e
-    jr   z, label_001_5818
-    xor  a
-    ld   [$C16B], a
-    ld   [$C16C], a
-    ld   a, $01
-    ld   [$DDD5], a
-    call IncrementGameplaySubtype
-
-label_001_5818::
-    call func_001_58A8
-    call func_001_5A71
-    call func_001_5C49
-    ret
+include "code/world_map.asm"
 
 PeachPictureStateAHandler::
     call func_6A7C
@@ -1423,7 +933,7 @@ jr_001_5AA0::
     jr   z, label_001_5B3F
     ld   e, a
     ld   d, $00
-    ld   hl, $D800
+    ld   hl, wOverworldRoomStatus
     add  hl, de
     ld   a, [$C5A2]
     and  a
@@ -1456,7 +966,7 @@ jr_001_5AF5::
     ld   a, [$C5A2]
     and  a
     jr   nz, jr_001_5B30
-    ld   hl, $D800
+    ld   hl, wOverworldRoomStatus
     add  hl, de
     ld   a, [hl]
     and  $20
@@ -1876,7 +1386,7 @@ func_001_5DE6::
     ld   a, [hli]
     ld   h, [hl]
     ld   l, a
-    ld   bc, $D800
+    ld   bc, wOverworldRoomStatus
     ld   de, $0380
 
 jr_001_5E12::

@@ -110,7 +110,7 @@ SpikeTrapState2Handler::
     jr   nz, jr_006_75B5                          ; $75A7: $20 $0C
 
 jr_006_75A9:
-    ld   a, $07                                   ; $75A9: $3E $07
+    ld   a, JINGLE_SWORD_POKING                   ; $75A9: $3E $07
     ldh  [hJingle], a                             ; $75AB: $E0 $F2
     call GetEntityTransitionCountdown             ; $75AD: $CD $05 $0C
     ld   [hl], $20                                ; $75B0: $36 $20

@@ -272,7 +272,7 @@ AntiKirbyState3Handler::
     ld   hl, wEntitiesSpeedZTable                 ; $43D8: $21 $20 $C3
     add  hl, bc                                   ; $43DB: $09
     ld   [hl], $0C                                ; $43DC: $36 $0C
-    ld   a, $09                                   ; $43DE: $3E $09
+    ld   a, JINGLE_BUMP                           ; $43DE: $3E $09
     ldh  [hJingle], a                             ; $43E0: $E0 $F2
 
 jr_006_43E2:
@@ -308,12 +308,12 @@ jr_006_440C:
     ld   a, $10                                   ; $440E: $3E $10
     ldh  [$FFA3], a                               ; $4410: $E0 $A3
     ld   a, $20                                   ; $4412: $3E $20
-    ld   [$DBC7], a                               ; $4414: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $4414: $EA $C7 $DB
     ld   a, $02                                   ; $4417: $3E $02
     ld   [$C146], a                               ; $4419: $EA $46 $C1
     ld   a, $02                                   ; $441C: $3E $02
     ld   [wSubtractHealthBuffer], a               ; $441E: $EA $94 $DB
-    ld   a, $08                                   ; $4421: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $4421: $3E $08
     ldh  [hJingle], a                             ; $4423: $E0 $F2
     jp   IncrementEntityState                     ; $4425: $C3 $12 $3B
 

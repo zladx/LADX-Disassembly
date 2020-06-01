@@ -451,7 +451,7 @@ jr_004_4F49:
     cp   $F2                                      ; $4F4F: $FE $F2
     jr   nc, jr_004_4F57                          ; $4F51: $30 $04
 
-    ld   a, $20                                   ; $4F53: $3E $20
+    ld   a, JINGLE_BIG_BUMP                       ; $4F53: $3E $20
     ldh  [hJingle], a                             ; $4F55: $E0 $F2
 
 jr_004_4F57:
@@ -502,7 +502,7 @@ func_004_4F7E::
     ld   hl, wEntitiesPosYTable                   ; $4FA4: $21 $10 $C2
     add  hl, bc                                   ; $4FA7: $09
     ld   [hl], a                                  ; $4FA8: $77
-    ld   a, $08                                   ; $4FA9: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $4FA9: $3E $08
     ldh  [hJingle], a                             ; $4FAB: $E0 $F2
 
 jr_004_4FAD:
@@ -601,7 +601,7 @@ FacadeEntityHandler::
 FacadeState0Handler::
     xor  a                                        ; $507E: $AF
     ld   [wScreenShakeHorizontal], a              ; $507F: $EA $55 $C1
-    call label_3EE8                               ; $5082: $CD $E8 $3E
+    call BossIntro                                ; $5082: $CD $E8 $3E
     call label_394D                               ; $5085: $CD $4D $39
     call func_004_542F                            ; $5088: $CD $2F $54
     ldh  a, [hActiveEntityStatus]                 ; $508B: $F0 $EA
@@ -1102,7 +1102,7 @@ FacadeState1Handler:
     jr   nz, jr_004_547E                          ; $5477: $20 $05
 
     ld   hl, hJingle                              ; $5479: $21 $F2 $FF
-    ld   [hl], $40                                ; $547C: $36 $40
+    ld   [hl], JINGLE_FACADE_HOLE                 ; $547C: $36 $40
 
 jr_004_547E:
     rra                                           ; $547E: $1F
@@ -1214,7 +1214,7 @@ jr_004_551C:
     and  $07                                      ; $5539: $E6 $07
     jr   nz, jr_004_5541                          ; $553B: $20 $04
 
-    ld   a, $3F                                   ; $553D: $3E $3F
+    ld   a, JINGLE_FLYING_TILE                    ; $553D: $3E $3F
     ldh  [hJingle], a                             ; $553F: $E0 $F2
 
 jr_004_5541:
@@ -1478,7 +1478,7 @@ MoldormEntityHandler::
     and  a                                        ; $56BC: $A7
     jp   nz, EntityInitMoldorm                        ; $56BD: $C2 $90 $56
 
-    call label_3EE8                               ; $56C0: $CD $E8 $3E
+    call BossIntro                                ; $56C0: $CD $E8 $3E
     ldh  a, [hActiveEntityStatus]                 ; $56C3: $F0 $EA
     cp   ENTITY_STATUS_ACTIVE                     ; $56C5: $FE $05
     jp   z, MoldormEntityActiveHandler            ; $56C7: $CA $91 $57
@@ -2051,7 +2051,7 @@ jr_004_5B28:
 
     ld   [hl], $04                                ; $5B2D: $36 $04
     ldh  a, [hActiveEntityType]                   ; $5B2F: $F0 $EB
-    cp   $59                                      ; $5B31: $FE $59
+    cp   ENTITY_MOLDORM                           ; $5B31: $FE $59
     jr   nz, jr_004_5B37                          ; $5B33: $20 $02
 
     ld   [hl], $06                                ; $5B35: $36 $06
@@ -2517,7 +2517,7 @@ PairoddState0Handler::
     call GetEntityTransitionCountdown                 ; $5E66: $CD $05 $0C
     ld   [hl], $20                                ; $5E69: $36 $20
     call IncrementEntityState                     ; $5E6B: $CD $12 $3B
-    ld   a, JINGLE_ENNEMY_SHRIEK                  ; $5E6E: $3E $3C
+    ld   a, JINGLE_ENEMY_SHRIEK                   ; $5E6E: $3E $3C
     ldh  [hJingle], a                             ; $5E70: $E0 $F2
 
 .return
@@ -3862,7 +3862,7 @@ func_004_6689::
     ldh  a, [hMapRoom]                            ; $66AF: $F0 $F6
     ld   e, a                                     ; $66B1: $5F
     ld   d, $01                                   ; $66B2: $16 $01
-    ld   hl, $D900                                ; $66B4: $21 $00 $D9
+    ld   hl, wIndoorARoomStatus                                ; $66B4: $21 $00 $D9
     add  hl, de                                   ; $66B7: $19
     ld   a, [hl]                                  ; $66B8: $7E
     or   $10                                      ; $66B9: $F6 $10
@@ -4143,7 +4143,7 @@ jr_004_6852:
     push af                                       ; $685F: $F5
     ld   e, $00                                   ; $6860: $1E $00
     ldh  a, [hActiveEntityType]                   ; $6862: $F0 $EB
-    cp   $52                                      ; $6864: $FE $52
+    cp   ENTITY_TRACTOR_DEVICE                    ; $6864: $FE $52
     ld   a, $14                                   ; $6866: $3E $14
     jr   nz, jr_004_686D                          ; $6868: $20 $03
 
@@ -4183,7 +4183,7 @@ jr_004_6884:
     xor  a                                        ; $6894: $AF
     ld   [wIsLinkPushing], a                               ; $6895: $EA $44 $C1
     ldh  a, [hActiveEntityType]                   ; $6898: $F0 $EB
-    cp   $52                                      ; $689A: $FE $52
+    cp   ENTITY_TRACTOR_DEVICE                    ; $689A: $FE $52
     jp   nz, label_004_68E4                       ; $689C: $C2 $E4 $68
 
     ld   a, [$C146]                               ; $689F: $FA $46 $C1
@@ -4303,7 +4303,7 @@ label_004_6910:
     call GetVectorTowardsLink_trampoline          ; $6948: $CD $B5 $3B
     ld   e, $00                                   ; $694B: $1E $00
     ldh  a, [hActiveEntityType]                   ; $694D: $F0 $EB
-    cp   $52                                      ; $694F: $FE $52
+    cp   ENTITY_TRACTOR_DEVICE                    ; $694F: $FE $52
     jr   nz, jr_004_6954                          ; $6951: $20 $01
 
     inc  e                                        ; $6953: $1C
@@ -4930,7 +4930,7 @@ label_004_6D0F:
     jr   nc, jr_004_6D5C                          ; $6D31: $30 $29
 
     call func_004_6D7A                            ; $6D33: $CD $7A $6D
-    ld   a, [$DBC7]                               ; $6D36: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $6D36: $FA $C7 $DB
     and  a                                        ; $6D39: $A7
     jr   nz, jr_004_6D5C                          ; $6D3A: $20 $20
 
@@ -5406,7 +5406,7 @@ func_004_6FC6::
     cp   $6C                                      ; $6FD3: $FE $6C
     jr   c, jr_004_6FE2                           ; $6FD5: $38 $0B
 
-    ld   hl, $DAA0                                ; $6FD7: $21 $A0 $DA
+    ld   hl, wIndoorBRoomStatus + $A0                                ; $6FD7: $21 $A0 $DA
     set  4, [hl]                                  ; $6FDA: $CB $E6
     ld   a, $6B                                   ; $6FDC: $3E $6B
     ldh  [hLinkPositionX], a                      ; $6FDE: $E0 $98
@@ -6702,7 +6702,7 @@ Data_004_77EE::     ; Price (low) ?
     db   $00, $C8, $0A, $14, $0A, $D4, $0A, $00, $00, $00
 
 func_004_77F8::
-    ld   a, [$DB46]                               ; $77F8: $FA $46 $DB
+    ld   a, [wHasStolenFromShop]                  ; $77F8: $FA $46 $DB
     and  a                                        ; $77FB: $A7
 
 jr_004_77FC:
@@ -6734,8 +6734,8 @@ jr_004_77FC:
     ld   hl, wEntitiesStateTable                  ; $782D: $21 $90 $C2
     add  hl, bc                                   ; $7830: $09
     ld   [hl], $04                                ; $7831: $36 $04
-    ld   a, $19                                   ; $7833: $3E $19
-    ld   [wActiveMusicTrack], a                   ; $7835: $EA $68 $D3
+    ld   a, MUSIC_BOSS_BATTLE                     ; $7833: $3E $19
+    ld   [wMusicTrackToPlay], a                   ; $7835: $EA $68 $D3
 
 jr_004_7838:
     ret                                           ; $7838: $C9
@@ -6755,7 +6755,7 @@ jr_004_7845:
     ld   c, $0B                                   ; $7849: $0E $0B
 
 jr_004_784B:
-    ld   a, [$DB7D]                               ; $784B: $FA $7D $DB
+    ld   a, [wBoomerangTradedItem]                ; $784B: $FA $7D $DB
     cp   $0B                                      ; $784E: $FE $0B
     jr   z, jr_004_7857                           ; $7850: $28 $05
 
@@ -6776,7 +6776,7 @@ jr_004_7859:
     ld   c, $0B                                   ; $7862: $0E $0B
 
 jr_004_7864:
-    ld   a, [$DB7D]                               ; $7864: $FA $7D $DB
+    ld   a, [wBoomerangTradedItem]                ; $7864: $FA $7D $DB
     cp   $05                                      ; $7867: $FE $05
     jr   z, jr_004_7870                           ; $7869: $28 $05
 
@@ -7312,7 +7312,7 @@ func_004_7B40::
     and  a                                        ; $7B4B: $A7
     ret  nz                                       ; $7B4C: $C0
 
-    ld   [$DB46], a                               ; $7B4D: $EA $46 $DB
+    ld   [wHasStolenFromShop], a                  ; $7B4D: $EA $46 $DB
     ld   [$C50A], a                               ; $7B50: $EA $0A $C5
     db   $C3                                      ; $7B53: $C3
     ld   a, d                                     ; $7B54: $7A

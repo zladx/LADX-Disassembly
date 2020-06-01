@@ -11,7 +11,7 @@ EntityInitHotHead::
 
 HotHeadEntityHandler::
     call label_394D                               ; $6314: $CD $4D $39
-    call label_3EE8                               ; $6317: $CD $E8 $3E
+    call BossIntro                                ; $6317: $CD $E8 $3E
     ld   hl, wEntitiesPrivateState1Table          ; $631A: $21 $B0 $C2
     add  hl, bc                                   ; $631D: $09
     ld   a, [hl]                                  ; $631E: $7E
@@ -217,7 +217,7 @@ jr_005_6444:
     ld   [hl], b                                  ; $6461: $70
     call func_005_6611                            ; $6462: $CD $11 $66
     call func_005_65D9                            ; $6465: $CD $D9 $65
-    ld   a, $32                                   ; $6468: $3E $32
+    ld   a, JINGLE_HOT_HEAD_SPLASH                ; $6468: $3E $32
     ldh  [hJingle], a                             ; $646A: $E0 $F2
     ld   a, $FF                                   ; $646C: $3E $FF
     jp   SetEntitySpriteVariant                   ; $646E: $C3 $0C $3B

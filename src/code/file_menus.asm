@@ -17,7 +17,6 @@ FileSelectionEntryPoint::
     call func_5DC0
     ld   a, [wGameplaySubtype]
     JP_TABLE
-    ; Code below is actually data for the jump table
 ._00 dw FileSelectionPrepare0
 ._01 dw FileSelectionPrepare1
 ._02 dw FileSelectionPrepare2
@@ -183,8 +182,8 @@ FileSelectionPrepare6::
     xor  a
     ld   [wForceFileSelectionScreenMusic], a
     ; … and set the music to the file menu selection track
-    ld   a, $11
-    ld   [wActiveMusicTrack], a
+    ld   a, MUSIC_FILE_SELECT
+    ld   [wMusicTrackToPlay], a
 .dontForceMusicTrack
 
     ; If there are no saved files yet…
@@ -564,23 +563,24 @@ FileCreationInteractiveHandler::
     ld   d, $00
     ld   hl, $DB80
     add  hl, de
+    ; Checks if the chosen name is 'ZELDA' and plays the easter egg music if this is the case.
     ld   a, [hli]
-    cp   $5B
+    cp   "Z" + $01
     jr   nz, jr_001_4AFE
     ld   a, [hli]
-    cp   $46
+    cp   "E" + $01
     jr   nz, jr_001_4AFE
     ld   a, [hli]
-    cp   $4D
+    cp   "L" + $01
     jr   nz, jr_001_4AFE
     ld   a, [hli]
-    cp   $45
+    cp   "D" + $01
     jr   nz, jr_001_4AFE
     ld   a, [hli]
-    cp   $42
+    cp   "A" + $01
     jr   nz, jr_001_4AFE
-    ld   a, $60
-    ld   [wActiveMusicTrack], a
+    ld   a, MUSIC_ZELDA_NICKNAME_EASTER_EGG
+    ld   [wMusicTrackToPlay], a
 
 jr_001_4AFE::
     ld   hl, $DB80
@@ -599,14 +599,14 @@ jr_001_4B05::
     push hl
     ld   de, $5A
     add  hl, de
-    ld   [hl], $18
+    ld   [hl], $18  ; write new save current health
     pop  hl
     push hl
     ld   de, $5B
     add  hl, de
 
 Data_001_4B1C::
-    ld   [hl], $03
+    ld   [hl], $03  ; write new save max health
     pop  hl
     ld   de, $57
     add  hl, de
@@ -1077,7 +1077,7 @@ FileDeletionState11Handler::
     ld   a, [hl+]                                 ; $4E8B: $2A
     ld   h, [hl]                                  ; $4E8C: $66
     ld   l, a                                     ; $4E8D: $6F
-    ld   de, InterruptLCDStatus.setScrollY        ; $4E8E: $11 $A8 $03
+    ld   de, $3a8                                 ; $4E8E: $11 $A8 $03
 
 jr_001_4E91::
     call EnableExternalRAMWriting                 ; $4E91: $CD $D0 $27
@@ -1670,7 +1670,7 @@ FileCopyStateAHandler::
     inc  hl                                       ; $521E: $23
     ld   h, [hl]                                  ; $521F: $66
     ld   l, a                                     ; $5220: $6F
-    ld   de, InterruptLCDStatus.skipScrollY       ; $5221: $11 $AD $03
+    ld   de, $3ad                                 ; $5221: $11 $AD $03
 
 jr_001_5224::
     call EnableExternalRAMWriting                 ; $5224: $CD $D0 $27

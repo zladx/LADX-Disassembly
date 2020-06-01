@@ -23,9 +23,9 @@ jr_018_400F:
     JP_TABLE                                      ; $401E
 ._00 dw MamuAndFrogsState0Handler
 ._01 dw MamuAndFrogsState1Handler
-._02 dw MamuAndFrogsState2Handler
+._02 dw MamuAndFrogsSingingHandler
 ._03 dw MamuAndFrogsState3Handler
-._04 dw MamuAndFrogsState4Handler
+._04 dw MamuAndFrogsGrantSongHandler
 ._05 dw MamuAndFrogsState5Handler
 ._06 dw MamuAndFrogsState6Handler
 
@@ -137,15 +137,16 @@ jr_018_40AF:
 jr_018_40D6:
     ret                                           ; $40D6: $C9
 
-MamuAndFrogsState2Handler::
+; Frogs start singing
+MamuAndFrogsSingingHandler::
     ld   a, $02                                   ; $40D7: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $40D9: $E0 $A1
     ld   [wC167], a                               ; $40DB: $EA $67 $C1
     call GetEntityTransitionCountdown             ; $40DE: $CD $05 $0C
     jr   nz, jr_018_40F0                          ; $40E1: $20 $0D
 
-    ld   a, $35                                   ; $40E3: $3E $35
-    ld   [wActiveMusicTrack], a                   ; $40E5: $EA $68 $D3
+    ld   a, MUSIC_MAMU_SONG                       ; $40E3: $3E $35
+    ld   [wMusicTrackToPlay], a                   ; $40E5: $EA $68 $D3
     ld   a, $01                                   ; $40E8: $3E $01
     ld   [$D215], a                               ; $40EA: $EA $15 $D2
     jp   IncrementEntityState                     ; $40ED: $C3 $12 $3B
@@ -276,7 +277,8 @@ jr_018_4230:
 
     ret                                           ; $4251: $C9
 
-MamuAndFrogsState4Handler::
+; When you receive the Frog Song 'item'
+MamuAndFrogsGrantSongHandler::
     ld   a, [wDialogState]                        ; $4252: $FA $9F $C1
     and  a                                        ; $4255: $A7
     jr   nz, jr_018_4268                          ; $4256: $20 $10
@@ -284,8 +286,8 @@ MamuAndFrogsState4Handler::
     ld   [$D215], a                               ; $4258: $EA $15 $D2
     call GetEntityTransitionCountdown             ; $425B: $CD $05 $0C
     ld   [hl], $70                                ; $425E: $36 $70
-    ld   a, $10                                   ; $4260: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $4262: $EA $68 $D3
+    ld   a, MUSIC_TOOL_ACQUIRED                 ; $4260: $3E $10
+    ld   [wMusicTrackToPlay], a                   ; $4262: $EA $68 $D3
     call IncrementEntityState                     ; $4265: $CD $12 $3B
 
 jr_018_4268:
@@ -296,7 +298,7 @@ MamuAndFrogsState5Handler::
     jr   nz, jr_018_427D                          ; $426E: $20 $0D
 
     ld   a, $02                                   ; $4270: $3E $02
-    ld   [$DB4A], a                               ; $4272: $EA $4A $DB
+    ld   [wSelectedSongIndex], a                  ; $4272: $EA $4A $DB
     ld   hl, wOcarinaSongFlags                    ; $4275: $21 $49 $DB
     set  0, [hl]                                  ; $4278: $CB $C6
     jp   IncrementEntityState                     ; $427A: $C3 $12 $3B
@@ -654,9 +656,9 @@ jr_018_4521:
     JP_TABLE                                      ; $4529
 ._00 dw ManboAndFishesState0Handler
 ._01 dw ManboAndFishesState1Handler
-._02 dw ManboAndFishesState2Handler
+._02 dw ManboAndFishesSingHandler
 ._03 dw ManboAndFishesState3Handler
-._04 dw ManboAndFishesState4Handler
+._04 dw ManboAndFishesGrantSongHandler
 ._05 dw ManboAndFishesState5Handler
 
 ManboAndFishesState0Handler::
@@ -719,13 +721,14 @@ jr_018_458A:
     call IncrementEntityState                     ; $458A: $CD $12 $3B
     jp_open_dialog $187                           ; $458D
 
-ManboAndFishesState2Handler::
+; Manbo singing his song
+ManboAndFishesSingHandler::
     ld   a, [wDialogState]                        ; $4592: $FA $9F $C1
     and  a                                        ; $4595: $A7
     jr   nz, jr_018_45B6                          ; $4596: $20 $1E
 
-    ld   a, $30                                   ; $4598: $3E $30
-    ld   [wActiveMusicTrack], a                   ; $459A: $EA $68 $D3
+    ld   a, MUSIC_MANBO_MAMBO                     ; $4598: $3E $30
+    ld   [wMusicTrackToPlay], a                   ; $459A: $EA $68 $D3
     call IncrementEntityState                     ; $459D: $CD $12 $3B
 
 func_018_45A0::
@@ -850,13 +853,13 @@ jr_018_4722:
 Data_018_4728::
     db   $00, $00, $40, $00, $00, $08, $42, $00, $00, $10, $44, $00
 
-ManboAndFishesState4Handler::
+ManboAndFishesGrantSongHandler::
     call GetEntityTransitionCountdown             ; $4734: $CD $05 $0C
     jr   nz, jr_018_4746                          ; $4737: $20 $0D
 
     ld   [hl], $70                                ; $4739: $36 $70
-    ld   a, $10                                   ; $473B: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $473D: $EA $68 $D3
+    ld   a, MUSIC_TOOL_ACQUIRED                   ; $473B: $3E $10
+    ld   [wMusicTrackToPlay], a                   ; $473D: $EA $68 $D3
     ld   [wC167], a                               ; $4740: $EA $67 $C1
     call IncrementEntityState                     ; $4743: $CD $12 $3B
 
@@ -874,7 +877,7 @@ ManboAndFishesState5Handler::
     jr   nz, jr_018_476A                          ; $4755: $20 $13
 
     ld   a, $01                                   ; $4757: $3E $01
-    ld   [$DB4A], a                               ; $4759: $EA $4A $DB
+    ld   [wSelectedSongIndex], a                               ; $4759: $EA $4A $DB
     ld   hl, wOcarinaSongFlags                    ; $475C: $21 $49 $DB
     set  1, [hl]                                  ; $475F: $CB $CE
     xor  a                                        ; $4761: $AF
@@ -1117,7 +1120,7 @@ MermaidStatueState2Handler::
 
     call IncrementEntityState                     ; $499F: $CD $12 $3B
     ld   [hl], $01                                ; $49A2: $36 $01
-    ld   a, $02                                   ; $49A4: $3E $02
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $49A4: $3E $02
     ldh  [hJingle], a                             ; $49A6: $E0 $F2
     xor  a                                        ; $49A8: $AF
     ld   [wC167], a                               ; $49A9: $EA $67 $C1
@@ -1294,7 +1297,7 @@ ZoraState3Handler::
     ld   [hl], b                                  ; $4AC4: $70
     xor  a                                        ; $4AC5: $AF
     call SetEntitySpriteVariant                   ; $4AC6: $CD $0C $3B
-    ld   a, $0E                                   ; $4AC9: $3E $0E
+    ld   a, JINGLE_WATER_DIVE                     ; $4AC9: $3E $0E
     ldh  [hJingle], a                             ; $4ACB: $E0 $F2
     ldh  a, [hActiveEntityPosX]                   ; $4ACD: $F0 $EE
     ldh  [hScratch0], a                           ; $4ACF: $E0 $D7
@@ -1708,7 +1711,7 @@ GrandmaUlriraState1Handler::
     and  a                                        ; $4DBD: $A7
     jr   nz, jr_018_4DCF                          ; $4DBE: $20 $0F
 
-    ld   a, $01                                   ; $4DC0: $3E $01
+    ld   a, JINGLE_TREASURE_FOUND                 ; $4DC0: $3E $01
     ldh  [hJingle], a                             ; $4DC2: $E0 $F2
     ld   [$DB7F], a                               ; $4DC4: $EA $7F $DB
     call GetEntityTransitionCountdown             ; $4DC7: $CD $05 $0C
@@ -1884,15 +1887,15 @@ MadBatterEntityHandler::
     call DecrementEntityIgnoreHitsCountdown       ; $4EED: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $4EF0: $F0 $F0
     JP_TABLE                                      ; $4EF2
-._00 dw MadBatterState0Handler                             ; $4EF3
-._01 dw MadBatterState1Handler                             ; $4EF5
-._02 dw MadBatterState2Handler                             ; $4EF7
-._03 dw MadBatterState3Handler                             ; $4EF9
-._04 dw MadBatterState4Handler                             ; $4EFB
-._05 dw MadBatterState5Handler                             ; $4EFD
-._06 dw MadBatterState6Handler                             ; $4EFF
-._07 dw MadBatterState7Handler                             ; $4F01
-._08 dw MadBatterState8Handler                             ; $4F03
+._00 dw MadBatterState0Handler                    ; $4EF3
+._01 dw MadBatterState1Handler                    ; $4EF5
+._02 dw MadBatterState2Handler                    ; $4EF7
+._03 dw MadBatterState3Handler                    ; $4EF9
+._04 dw MadBatterState4Handler                    ; $4EFB
+._05 dw MadBatterState5Handler                    ; $4EFD
+._06 dw MadBatterState6Handler                    ; $4EFF
+._07 dw MadBatterState7Handler                    ; $4F01
+._08 dw MadBatterState8Handler                    ; $4F03
 
 MadBatterState0Handler::
     ld   a, [wMaxMagicPowder]                     ; $4F05: $FA $76 $DB
@@ -1922,7 +1925,7 @@ MadBatterState1Handler::
     ldh  [hScratch1], a                           ; $4F29: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $4F2B: $3E $02
     call AddTranscientVfx                         ; $4F2D: $CD $C7 $0C
-    ld   a, $06                                   ; $4F30: $3E $06
+    ld   a, JINGLE_ENEMY_MORPH_IN                 ; $4F30: $3E $06
     ldh  [hJingle], a                             ; $4F32: $E0 $F2
     jp   IncrementEntityState                     ; $4F34: $C3 $12 $3B
 
@@ -2122,7 +2125,7 @@ MadBatterState8Handler::
     jr   nz, jr_018_5067                          ; $5060: $20 $05
 
     inc  [hl]                                     ; $5062: $34
-    ld   a, $3B                                   ; $5063: $3E $3B
+    ld   a, JINGLE_SWORD_BEAM                     ; $5063: $3E $3B
     ldh  [hJingle], a                             ; $5065: $E0 $F2
 
 jr_018_5067:
@@ -2812,7 +2815,7 @@ WalrusEntityHandler::
     and  a                                        ; $5506: $A7
     jp   nz, label_018_54BD                       ; $5507: $C2 $BD $54
 
-    ld   a, [$D8FD]                               ; $550A: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + $FD]                               ; $550A: $FA $FD $D8
     and  $20                                      ; $550D: $E6 $20
     jp   nz, label_018_589A                       ; $550F: $C2 $9A $58
 
@@ -2837,15 +2840,15 @@ jr_018_552F:
     call func_018_7D36                            ; $552F: $CD $36 $7D
     ldh  a, [hActiveEntityState]                  ; $5532: $F0 $F0
     JP_TABLE                                      ; $5534
-._00 dw WalrusState0Handler                             ; $5535
-._01 dw WalrusState1Handler                             ; $5537
-._02 dw WalrusState2Handler                             ; $5539
-._03 dw WalrusState3Handler                             ; $553B
-._04 dw WalrusState4Handler                             ; $553D
-._05 dw WalrusState5Handler                             ; $553F
-._06 dw WalrusState6Handler                             ; $5541
-._07 dw WalrusState7Handler                             ; $5543
-._08 dw WalrusState8Handler                             ; $5545
+._00 dw WalrusState0Handler                       ; $5535
+._01 dw WalrusWakingUpHandler                     ; $5537
+._02 dw WalrusState2Handler                       ; $5539
+._03 dw WalrusState3Handler                       ; $553B
+._04 dw WalrusState4Handler                       ; $553D
+._05 dw WalrusState5Handler                       ; $553F
+._06 dw WalrusDisappearHandler                    ; $5541
+._07 dw WalrusState7Handler                       ; $5543
+._08 dw WalrusState8Handler                       ; $5545
 
 WalrusState0Handler::
     ld   hl, wEntitiesUnknowTableY                ; $5547: $21 $D0 $C3
@@ -2919,7 +2922,7 @@ jr_018_558A:
     call_open_dialog $1E1                         ; $55B4
     jp   label_018_59AC                           ; $55B9: $C3 $AC $59
 
-WalrusState1Handler::
+WalrusWakingUpHandler::
     ld   a, [wDialogState]                        ; $55BC: $FA $9F $C1
     and  a                                        ; $55BF: $A7
     ret  nz                                       ; $55C0: $C0
@@ -2929,8 +2932,8 @@ WalrusState1Handler::
     and  a                                        ; $55C7: $A7
     jr   nz, jr_018_55D8                          ; $55C8: $20 $0E
 
-    ld   a, $2F                                   ; $55CA: $3E $2F
-    ld   [wActiveMusicTrack], a                   ; $55CC: $EA $68 $D3
+    ld   a, MUSIC_MARIN_SINGING                   ; $55CA: $3E $2F
+    ld   [wMusicTrackToPlay], a                   ; $55CC: $EA $68 $D3
     ld   [$C3C8], a                               ; $55CF: $EA $C8 $C3
     call GetEntityDropTimer                       ; $55D2: $CD $FB $0B
     ld   [hl], $50                                ; $55D5: $36 $50
@@ -3025,7 +3028,7 @@ jr_018_5698:
     ld   hl, wEntitiesSpeedZTable                 ; $56AE: $21 $20 $C3
     add  hl, bc                                   ; $56B1: $09
     ld   [hl], $10                                ; $56B2: $36 $10
-    ld   a, $24                                   ; $56B4: $3E $24
+    ld   a, JINGLE_JUMP                           ; $56B4: $3E $24
     ldh  [hJingle], a                             ; $56B6: $E0 $F2
 
 jr_018_56B8:
@@ -3040,7 +3043,7 @@ jr_018_56B8:
     jr   nz, jr_018_56CC                          ; $56C5: $20 $05
 
     ld   hl, hJingle                              ; $56C7: $21 $F2 $FF
-    ld   [hl], $27                                ; $56CA: $36 $27
+    ld   [hl], JINGLE_WALRUS                      ; $56CA: $36 $27
 
 jr_018_56CC:
     ld   a, $02                                   ; $56CC: $3E $02
@@ -3095,7 +3098,7 @@ WalrusState4Handler::
     ld   a, [hl]                                  ; $5710: $7E
     add  $18                                      ; $5711: $C6 $18
     ld   [hl], a                                  ; $5713: $77
-    ld   a, $08                                   ; $5714: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $5714: $3E $08
     ldh  [hJingle], a                             ; $5716: $E0 $F2
     jp   IncrementEntityState                     ; $5718: $C3 $12 $3B
 
@@ -3112,6 +3115,7 @@ WalrusState5Handler::
     call GetEntityTransitionCountdown             ; $5729: $CD $05 $0C
     ld   [hl], $08                                ; $572C: $36 $08
 
+; Walrus splash VFX
 func_018_572E::
     ld   a, $24                                   ; $572E: $3E $24
     ldh  [hNoiseSfx], a                           ; $5730: $E0 $F4
@@ -3131,19 +3135,21 @@ func_018_572E::
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $574D: $3E $01
     jp   AddTranscientVfx                         ; $574F: $C3 $C7 $0C
 
-WalrusState6Handler::
+; When the walrus disappears and Link looks down and the normal music resumes.
+WalrusDisappearHandler::
     call GetEntityTransitionCountdown             ; $5752: $CD $05 $0C
     jr   nz, jr_018_5778                          ; $5755: $20 $21
 
     call IncrementEntityState                     ; $5757: $CD $12 $3B
-    ldh  a, [hMusicTrack]                         ; $575A: $F0 $B0
-    ld   [wActiveMusicTrack], a                   ; $575C: $EA $68 $D3
+    ; Resumes the normal music after the walrus has disappeared
+    ldh  a, [hDefaultMusicTrack]                  ; $575A: $F0 $B0
+    ld   [wMusicTrackToPlay], a                   ; $575C: $EA $68 $D3
     ld   a, $FF                                   ; $575F: $3E $FF
     call SetEntitySpriteVariant                   ; $5761: $CD $0C $3B
     call_open_dialog $1E2                         ; $5764
     ld   a, $03                                   ; $5769: $3E $03
     call func_018_59AE                            ; $576B: $CD $AE $59
-    ld   a, $03                                   ; $576E: $3E $03
+    ld   a, DIRECTION_DOWN                        ; $576E: $3E $03
     ldh  [hLinkDirection], a                      ; $5770: $E0 $9E
     push bc                                       ; $5772: $C5
     call UpdateLinkWalkingAnimation_trampoline    ; $5773: $CD $F0 $0B
@@ -3261,7 +3267,7 @@ func_018_58C1::
     call GetEntityTransitionCountdown             ; $58C1: $CD $05 $0C
     ret  nz                                       ; $58C4: $C0
 
-    ld   a, [$DB4A]                               ; $58C5: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                               ; $58C5: $FA $4A $DB
     cp   $00                                      ; $58C8: $FE $00
     ret  nz                                       ; $58CA: $C0
 
@@ -3412,10 +3418,12 @@ Data_018_59B8::
 Data_018_59E4::
     db   $06, $04, $02, $00
 
+; Marin beach cutscene related.
 label_018_59E8:
     ld   a, c                                     ; $59E8: $79
     ld   [$C50F], a                               ; $59E9: $EA $0F $C5
     call GetEntityTransitionCountdown             ; $59EC: $CD $05 $0C
+
     jr   z, jr_018_5A3F                           ; $59EF: $28 $4E
 
     cp   $10                                      ; $59F1: $FE $10
@@ -3431,16 +3439,18 @@ label_018_59E8:
     ldh  [hLinkPositionY], a                      ; $5A03: $E0 $99
     ld   a, $0F                                   ; $5A05: $3E $0F
 
+; Sword on beach music handling script
 jr_018_5A07:
     cp   $01                                      ; $5A07: $FE $01
     jr   nz, jr_018_5A18                          ; $5A09: $20 $0D
 
     xor  a                                        ; $5A0B: $AF
     ld   [wC167], a                               ; $5A0C: $EA $67 $C1
-    ld   a, MUSIC_OVERWORLD_INTRODUCTION                ; $5A0F: $3E $31
-    ld   [wActiveMusicTrack], a                   ; $5A11: $EA $68 $D3
+    ld   a, MUSIC_OVERWORLD_INTRO                 ; $5A0F: $3E $31
+    ld   [wMusicTrackToPlay], a                   ; $5A11: $EA $68 $D3
+    ; Sets the area track to overworld, so that after the introduction section fanfare, the overworld music will play rather than the Koholint Island theme
     ld   a, MUSIC_OVERWORLD                       ; $5A14: $3E $05
-    ldh  [hMusicTrack], a                         ; $5A16: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $5A16: $E0 $B0
 
 jr_018_5A18:
     xor  a                                        ; $5A18: $AF
@@ -3464,6 +3474,7 @@ jr_018_5A18:
     ld   [hl], a                                  ; $5A3D: $77
     ret                                           ; $5A3E: $C9
 
+; 'You got Marin!' joke
 jr_018_5A3F:
     ld   hl, wEntitiesUnknowTableP                ; $5A3F: $21 $40 $C4
     add  hl, bc                                   ; $5A42: $09
@@ -3478,10 +3489,13 @@ jr_018_5A3F:
     inc  [hl]                                     ; $5A4E: $34
     call GetEntityTransitionCountdown             ; $5A4F: $CD $05 $0C
     ld   [hl], $70                                ; $5A52: $36 $70
-    ld   a, MUSIC_WEAPON_ACQUIRED                  ; $5A54: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $5A56: $EA $68 $D3
-    ld   a, $FF                                   ; $5A59: $3E $FF
-    ldh  [hNextWorldMusicTrack], a                ; $5A5B: $E0 $BF
+    ld   a, MUSIC_TOOL_ACQUIRED                   ; $5A54: $3E $10
+    ld   [wMusicTrackToPlay], a                   ; $5A56: $EA $68 $D3
+    ; Makes it so that no music plays after the 'item found' fanfare
+    ld   a, MUSIC_SILENCE                         ; $5A59: $3E $FF
+    ldh  [hNextDefaultMusicTrack], a              ; $5A5B: $E0 $BF
+
+    ; Link lifting Marin animation
     ldh  a, [hLinkPositionX]                      ; $5A5D: $F0 $98
     ld   hl, $D155                                ; $5A5F: $21 $55 $D1
     call func_018_5A79                            ; $5A62: $CD $79 $5A
@@ -3634,7 +3648,7 @@ jr_018_5B33:
 
 jr_018_5B3B:
     ld   hl, hJingle                              ; $5B3B: $21 $F2 $FF
-    ld   [hl], $0B                                ; $5B3E: $36 $0B
+    ld   [hl], JINGLE_HUGE_BUMP                   ; $5B3E: $36 $0B
     ld   hl, hWaveSfx                             ; $5B40: $21 $F3 $FF
     ld   [hl], $03                                ; $5B43: $36 $03
     ld   hl, $C157                                ; $5B45: $21 $57 $C1
@@ -3991,7 +4005,7 @@ jr_018_5D5E:
     ldh  [hScratch1], a                           ; $5D60: $E0 $D8
     ldh  a, [hActiveEntityPosX]                   ; $5D62: $F0 $EE
     ldh  [hScratch0], a                           ; $5D64: $E0 $D7
-    ld   a, $0E                                   ; $5D66: $3E $0E
+    ld   a, JINGLE_WATER_DIVE                     ; $5D66: $3E $0E
     ldh  [hJingle], a                             ; $5D68: $E0 $F2
     ld   a, TRANSCIENT_VFX_PEGASUS_SPLASH         ; $5D6A: $3E $0C
     jp   AddTranscientVfx                         ; $5D6C: $C3 $C7 $0C
@@ -3999,10 +4013,10 @@ jr_018_5D5E:
 jr_018_5D6F:
     ld   a, e                                     ; $5D6F: $7B
     cp   $08                                      ; $5D70: $FE $08
-    ld   a, $08                                   ; $5D72: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $5D72: $3E $08
     jr   nc, jr_018_5D78                          ; $5D74: $30 $02
 
-    ld   a, $24                                   ; $5D76: $3E $24
+    ld   a, JINGLE_JUMP                           ; $5D76: $3E $24
 
 jr_018_5D78:
     ldh  [hJingle], a                             ; $5D78: $E0 $F2
@@ -4152,7 +4166,7 @@ func_018_5E5D::
     and  a                                        ; $5E63: $A7
     jr   nz, jr_018_5E79                          ; $5E64: $20 $13
 
-    ld   a, $0A                                   ; $5E66: $3E $0A
+    ld   a, GAMEPLAY_WF_MURAL                     ; $5E66: $3E $0A
     call func_018_4CB0                            ; $5E68: $CD $B0 $4C
     call GetEntityTransitionCountdown             ; $5E6B: $CD $05 $0C
     ld   [hl], $20                                ; $5E6E: $36 $20
@@ -4490,7 +4504,7 @@ jr_018_60A3:
 
     xor  a                                        ; $60B8: $AF
     ld   [wC167], a                               ; $60B9: $EA $67 $C1
-    ld   hl, $D808                                ; $60BC: $21 $08 $D8
+    ld   hl, wOverworldRoomStatus + $08                                ; $60BC: $21 $08 $D8
     set  4, [hl]                                  ; $60BF: $CB $E6
     ld   a, [hl]                                  ; $60C1: $7E
     ldh  [hRoomStatus], a                         ; $60C2: $E0 $F8
@@ -4604,7 +4618,7 @@ MarinAtTheShoreEntityHandler::
     and  a                                        ; $6194: $A7
     ret  nz                                       ; $6195: $C0
 
-    ld   a, [$D8FD]                               ; $6196: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + $FD]                               ; $6196: $FA $FD $D8
     and  $20                                      ; $6199: $E6 $20
     jp   nz, func_018_7F08                        ; $619B: $C2 $08 $7F
 
@@ -4629,7 +4643,7 @@ MarinAtTheShoreEntityHandler::
 
     ldh  a, [hActiveEntityState]                  ; $61C0: $F0 $F0
     JP_TABLE                                      ; $61C2
-._00 dw MarinAtTheShoreState0Handler
+._00 dw MarinAtTheShoreTransitionHandler
 ._01 dw MarinAtTheShoreState1Handler
 ._02 dw MarinAtTheShoreState2Handler
 ._03 dw MarinAtTheShoreState3Handler
@@ -4637,10 +4651,10 @@ MarinAtTheShoreEntityHandler::
 ._05 dw MarinAtTheShoreState5Handler
 ._06 dw MarinAtTheShoreState6Handler
 
-MarinAtTheShoreState0Handler::
-    ld   a, $4D                                   ; $61D1: $3E $4D
-    ld   [wActiveMusicTrack], a                   ; $61D3: $EA $68 $D3
-    ldh  [hMusicTrack], a                         ; $61D6: $E0 $B0
+MarinAtTheShoreTransitionHandler::
+    ld   a, MUSIC_MARIN_BEACH_TRANSITION          ; $61D1: $3E $4D
+    ld   [wMusicTrackToPlay], a                   ; $61D3: $EA $68 $D3
+    ldh  [hDefaultMusicTrack], a                  ; $61D6: $E0 $B0
     ldh  [$FFBD], a                               ; $61D8: $E0 $BD
     jp   IncrementEntityState                     ; $61DA: $C3 $12 $3B
 
@@ -4700,8 +4714,8 @@ MarinAtTheShoreState3Handler::
     ld   [wGameplaySubtype], a                    ; $622F: $EA $96 $DB
     ld   a, $09                                   ; $6232: $3E $09
     ld   [wGameplayType], a                       ; $6234: $EA $95 $DB
-    ld   a, $4E                                   ; $6237: $3E $4E
-    ld   [wActiveMusicTrack], a                   ; $6239: $EA $68 $D3
+    ld   a, MUSIC_MARIN_BEACH                     ; $6237: $3E $4E
+    ld   [wMusicTrackToPlay], a                   ; $6239: $EA $68 $D3
     ret                                           ; $623C: $C9
 
 jr_018_623D:
@@ -4789,7 +4803,7 @@ MazeSignpostEntityHandler::
     ; maze solved
     xor  a                                        ; $62CF: $AF
     ld   [wMazeSignpostGoal], a                   ; $62D0: $EA $72 $D4
-    ld   a, $02                                   ; $62D3: $3E $02
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $62D3: $3E $02
     ldh  [hJingle], a                             ; $62D5: $E0 $F2
     push de                                       ; $62D7: $D5
     call RevealMamuCave                           ; $62D8: $CD $F5 $62
@@ -4805,7 +4819,7 @@ MazeSignpostEntityHandler::
     xor  a                                        ; $62E4: $AF
     ld   [wMazeSignpostGoal], a                   ; $62E5: $EA $72 $D4
     ld   [wMazeSignpostPos], a                    ; $62E8: $EA $73 $D4
-    ld   a, $1D                                   ; $62EB: $3E $1D
+    ld   a, JINGLE_WRONG_ANSWER                   ; $62EB: $3E $1D
     ldh  [hJingle], a                             ; $62ED: $E0 $F2
     call_open_dialog $1AD                         ; "try again from the start"
 
@@ -5101,7 +5115,7 @@ BlainoEntityHandler::
     jp   z, func_018_7F0F                         ; $64D3: $CA $0F $7F
 
     call func_018_7DE8                            ; $64D6: $CD $E8 $7D
-    call label_3EE8                               ; $64D9: $CD $E8 $3E
+    call BossIntro                                ; $64D9: $CD $E8 $3E
     ld   hl, wEntitiesPrivateState1Table          ; $64DC: $21 $B0 $C2
     add  hl, bc                                   ; $64DF: $09
     ld   a, [hl]                                  ; $64E0: $7E
@@ -5122,7 +5136,7 @@ jr_018_64EA:
     jr   nz, jr_018_64FC                          ; $64F5: $20 $05
 
     ld   hl, hJingle                              ; $64F7: $21 $F2 $FF
-    ld   [hl], $33                                ; $64FA: $36 $33
+    ld   [hl], JINGLE_BLAINO_PUNCH                ; $64FA: $36 $33
 
 jr_018_64FC:
     and  a                                        ; $64FC: $A7
@@ -6688,7 +6702,7 @@ jr_018_6FDB:
     set  6, [hl]                                  ; $6FE3: $CB $F6
     call func_018_7181                            ; $6FE5: $CD $81 $71
     call label_394D                               ; $6FE8: $CD $4D $39
-    call label_3EE8                               ; $6FEB: $CD $E8 $3E
+    call BossIntro                                ; $6FEB: $CD $E8 $3E
     call func_018_7DE8                            ; $6FEE: $CD $E8 $7D
     ld   a, [wRoomEventEffectExecuted]            ; $6FF1: $FA $8F $C1
     and  a                                        ; $6FF4: $A7
@@ -6823,7 +6837,7 @@ jr_018_70A4:
     call SpawnNewEntity_trampoline                ; $70B3: $CD $86 $3B
     jr   c, label_018_70FD                        ; $70B6: $38 $45
 
-    ld   a, $31                                   ; $70B8: $3E $31
+    ld   a, JINGLE_GRIM_CREEPER                   ; $70B8: $3E $31
     ldh  [hJingle], a                             ; $70BA: $E0 $F2
     ld   hl, wEntitiesUnknowTableY                ; $70BC: $21 $D0 $C3
     add  hl, bc                                   ; $70BF: $09
@@ -7105,7 +7119,7 @@ func_018_72A5::
     ld   hl, wEntitiesSpeedZTable                 ; $72B8: $21 $20 $C3
     add  hl, bc                                   ; $72BB: $09
     ld   [hl], $F4                                ; $72BC: $36 $F4
-    ld   a, $31                                   ; $72BE: $3E $31
+    ld   a, JINGLE_GRIM_CREEPER                   ; $72BE: $3E $31
     ldh  [hJingle], a                             ; $72C0: $E0 $F2
     call IncrementEntityState                     ; $72C2: $CD $12 $3B
 
@@ -7192,7 +7206,7 @@ jr_018_733C:
     and  a                                        ; $7341: $A7
     jr   nz, jr_018_7363                          ; $7342: $20 $1F
 
-    ld   a, [$DB4A]                               ; $7344: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                               ; $7344: $FA $4A $DB
     cp   $02                                      ; $7347: $FE $02
     jr   nz, jr_018_7363                          ; $7349: $20 $18
 
@@ -7222,9 +7236,9 @@ jr_018_7363:
     and  a                                        ; $7371: $A7
     jr   nz, jr_018_737D                          ; $7372: $20 $09
 
-    ld   hl, $D810                                ; $7374: $21 $10 $D8
+    ld   hl, wOverworldRoomStatus + $10                                ; $7374: $21 $10 $D8
     set  5, [hl]                                  ; $7377: $CB $EE
-    ld   a, $02                                   ; $7379: $3E $02
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $7379: $3E $02
     ldh  [hJingle], a                             ; $737B: $E0 $F2
 
 jr_018_737D:
@@ -7266,11 +7280,11 @@ TurtleRockHeadState0Handler::
 TurtleRockHeadState1Handler::
     call GetEntityTransitionCountdown             ; $73B1: $CD $05 $0C
     ld   [hl], $80                                ; $73B4: $36 $80
-    ld   a, $39                                   ; $73B6: $3E $39
-    ld   [wActiveMusicTrack], a                   ; $73B8: $EA $68 $D3
-    ldh  [hMusicTrack], a                         ; $73BB: $E0 $B0
+    ld   a, MUSIC_TURTLE_ROCK_ENTRANCE_BOSS       ; $73B6: $3E $39
+    ld   [wMusicTrackToPlay], a                   ; $73B8: $EA $68 $D3
+    ldh  [hDefaultMusicTrack], a                  ; $73BB: $E0 $B0
     ldh  [$FFBD], a                               ; $73BD: $E0 $BD
-    ldh  [hNextWorldMusicTrack], a                ; $73BF: $E0 $BF
+    ldh  [hNextDefaultMusicTrack], a              ; $73BF: $E0 $BF
     jp   IncrementEntityState                     ; $73C1: $C3 $12 $3B
 
 TurtleRockHeadState2Handler::
@@ -7664,7 +7678,7 @@ jr_018_76C9:
     push hl                                       ; $76CF: $E5
     ld   de, Data_018_7666                        ; $76D0: $11 $66 $76
     call RenderActiveEntitySpritesPair            ; $76D3: $CD $C0 $3B
-    ld   a, [$DBC7]                               ; $76D6: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $76D6: $FA $C7 $DB
     and  a                                        ; $76D9: $A7
     jr   nz, jr_018_7717                          ; $76DA: $20 $3B
 
@@ -7698,7 +7712,7 @@ jr_018_76FE:
     ld   a, $18                                   ; $7704: $3E $18
     ld   [$C13E], a                               ; $7706: $EA $3E $C1
     ld   a, $10                                   ; $7709: $3E $10
-    ld   [$DBC7], a                               ; $770B: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $770B: $EA $C7 $DB
     ld   a, $08                                   ; $770E: $3E $08
     ld   [wSubtractHealthBuffer], a               ; $7710: $EA $94 $DB
     ld   a, $03                                   ; $7713: $3E $03
@@ -7969,7 +7983,7 @@ label_018_78A6:
     ld   a, $10                                   ; $78E7: $3E $10
     call ApplyVectorTowardsLink_trampoline        ; $78E9: $CD $AA $3B
     pop  bc                                       ; $78EC: $C1
-    ld   a, $08                                   ; $78ED: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $78ED: $3E $08
     ldh  [hJingle], a                             ; $78EF: $E0 $F2
 
 jr_018_78F1:
@@ -8111,7 +8125,7 @@ jr_018_79B3:
     ldh  [hScratch1], a                           ; $79C2: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $79C4: $3E $02
     call AddTranscientVfx                         ; $79C6: $CD $C7 $0C
-    ld   a, $2F                                   ; $79C9: $3E $2F
+    ld   a, JINGLE_POOF                           ; $79C9: $3E $2F
     ldh  [hJingle], a                             ; $79CB: $E0 $F2
     jr   label_018_7A48                           ; $79CD: $18 $79
 
@@ -8571,7 +8585,7 @@ func_018_7DA0::
 
     inc  e                                        ; $7DAE: $1C
     ldh  a, [hActiveEntityType]                   ; $7DAF: $F0 $EB
-    cp   $C4                                      ; $7DB1: $FE $C4
+    cp   ENTITY_WALRUS                            ; $7DB1: $FE $C4
     jr   z, jr_018_7DC1                           ; $7DB3: $28 $0C
 
     push de                                       ; $7DB5: $D5
@@ -8616,7 +8630,7 @@ func_018_7DE8::
 
 func_018_7DEE::
     ld   a, [wGameplayType]                       ; $7DEE: $FA $95 $DB
-    cp   GAMEPLAY_MINI_MAP                        ; $7DF1: $FE $07
+    cp   GAMEPLAY_WORLD_MAP                       ; $7DF1: $FE $07
     jr   z, jr_018_7E13                           ; $7DF3: $28 $1E
 
     cp   GAMEPLAY_WORLD                           ; $7DF5: $FE $0B
@@ -8797,7 +8811,7 @@ jr_018_7ED0:
 func_018_7ED2::
     ld   e, $02                                   ; $7ED2: $1E $02
     ldh  a, [hLinkPositionY]                      ; $7ED4: $F0 $99
-    ld   hl, hActiveEntityVisualPosY                                ; $7ED6: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $7ED6: $21 $EC $FF
     sub  [hl]                                     ; $7ED9: $96
     bit  7, a                                     ; $7EDA: $CB $7F
     jr   nz, jr_018_7EDF                          ; $7EDC: $20 $01

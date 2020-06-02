@@ -54,10 +54,16 @@ GetBGAttributesAddressForObject::
     and  a                                        ; $659A: $A7
     jp   z, .indoorPaletteEnd                     ; $659B: $CA $30 $66
 
+
     ld   a, BANK(IndoorsBGAttributesA)            ; $659E: $3E $23
     ldh  [hScratch8], a                           ; $65A0: $E0 $DF
+
+    ; hl += $200
+    ; Assertions were introduced in rgbds 0.4.0
+    ; ASSERT OverworldBGAttributesPointers + $200 == IndoorsBGAttributesPointers
     inc  h                                        ; $65A2: $24
     inc  h                                        ; $65A3: $24
+
     ld   b, $00                                   ; $65A4: $06 $00
 
     ; If in the Color Dungeon…
@@ -74,7 +80,9 @@ GetBGAttributesAddressForObject::
     ld   c, a                                     ; $65B2: $4F
     sla  c                                        ; $65B3: $CB $21
     rl   b                                        ; $65B5: $CB $10
-    cp   $09                                      ; $65B7: $FE $09
+
+    ; if a <= MAP_WINDFISHS_EGG goto .indoorPaletteEnd
+    cp   MAP_WINDFISHS_EGG + 1                    ; $65B7: $FE $09
     jr   c, .indoorPaletteEnd                     ; $65B9: $38 $75
 
     cp   $0A                                      ; $65BB: $FE $0A

@@ -85,7 +85,7 @@ func_006_60E5::
     ld   hl, wEntitiesPrivateState2Table          ; $60E8: $21 $C0 $C2
     add  hl, bc                                   ; $60EB: $09
     ld   [hl], $30                                ; $60EC: $36 $30
-    ld   a, $0E                                   ; $60EE: $3E $0E
+    ld   a, MUSIC_BOWWOW_KIDNAPPED                ; $60EE: $3E $0E
 
 jr_006_60F0:
     ld   [wMusicTrackToPlay], a                   ; $60F0: $EA $68 $D3

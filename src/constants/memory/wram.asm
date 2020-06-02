@@ -680,7 +680,14 @@ wAlternateBackgroundEnabled:: ; C500
   ds 1
 
 ; Unlabeled
-ds $C510 - $C501
+ds $C509 - $C501
+
+wItemPickedUpInShop:: ; C509
+  ; Index of the item we are grabbing in the shop
+  ds 1
+
+; Unlabeled
+ds $C510 - $C50A
 
 wTranscientVfxTypeTable:: ; C510
   ; Temporary visual effects displayed as non-interactive sprites.
@@ -1656,8 +1663,14 @@ wColorDungonCorrectTombStones:: ; DDD9
   ; 80      color dungon has been opened
   ds 1
 
+wColorDungeonItemFlags:: ; DDDA
+  ; Dungeon flags for the color dungeon (map/compass/stone beak/nightmare key/small keys)
+  ; See also: wDungeonItemFlags
+  ds 5
+
 ; Unlabeled
-ds $DDE0 - $DDDA
+wDDDF:: ; DDDF
+  ds 1
 
 ; Color dungeon rooms status
 ;

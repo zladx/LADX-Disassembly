@@ -43,7 +43,7 @@ SelectMusicTrackAfterTransition::
 
 .noPendingGameplayTransition
     ; If wSwordLevel == 0 (Link doesn’t have its sword yet), use adventure start music
-    ld   d, $1D                                   ; $414F: $16 $1D
+    ld   d, MUSIC_SWORD_SEARCH                    ; $414F: $16 $1D
     ld   a, [wSwordLevel]                         ; $4151: $FA $4E $DB
     and  a                                        ; $4154: $A7
     jp   z, .clearEventFlagsAndLoadSoundtrack     ; $4155: $CA $A2 $41

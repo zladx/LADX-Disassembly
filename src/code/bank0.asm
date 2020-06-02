@@ -2774,7 +2774,7 @@ LinkMotionMapFadeOutHandler::
     dec  e
     jr   nz, .clearEntitiesStatusLoop
 
-    ld   a, [$C509]
+    ld   a, [wItemPickedUpInShop]
     and  a
     jr   z, .label_1898
     push af
@@ -5497,7 +5497,7 @@ LoadTileset1::
 ; Load room objects
 LoadRoom::
     ; Disable all interrupts except VBlank
-    ld   a, $01
+    ld   a, $01 ; 30F4
     ld   [rIE], a
 
     ; Increment $D47F

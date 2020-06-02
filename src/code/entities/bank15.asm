@@ -2065,6 +2065,12 @@ func_015_50C2::
     and  a                                        ; $50C5: $A7
     ret  nz                                       ; $50C6: $C0
 
+IF __PATCH_0__
+    ld   a, [wGameplayType]
+    cp   GAMEPLAY_WORLD
+    ret  nz
+ENDC
+
     ld   a, MUSIC_FINAL_BOSS_DIALOG               ; $50C7: $3E $5D
     ld   [wMusicTrackToPlay], a                   ; $50C9: $EA $68 $D3
     ld   hl, wIndoorBRoomStatus + $74                                ; $50CC: $21 $74 $DA
@@ -4232,7 +4238,11 @@ jr_015_62AC:
     add  hl, bc                                   ; $630A: $09
     ld   a, [hl]                                  ; $630B: $7E
     and  a                                        ; $630C: $A7
+IF __PATCH_0__
+    jr   nz, jr_015_6324
+ELSE
     jr   nz, jr_015_6330                          ; $630D: $20 $21
+ENDC
 
     ld   hl, wEntitiesUnknowTableH                ; $630F: $21 $30 $C4
     add  hl, bc                                   ; $6312: $09
@@ -4241,6 +4251,8 @@ jr_015_62AC:
     ld   hl, wEntitiesUnknowTableH                ; $6318: $21 $30 $C4
     add  hl, bc                                   ; $631B: $09
     ld   [hl], $D0                                ; $631C: $36 $D0
+
+jr_015_6324:
     ld   hl, wEntitiesHealthTable                 ; $631E: $21 $60 $C3
     add  hl, bc                                   ; $6321: $09
     ld   a, [hl]                                  ; $6322: $7E
@@ -5578,12 +5590,14 @@ jr_015_6E3D:
 
 jr_015_6E4E:
     call func_015_7056                            ; $6E4E: $CD $56 $70
+IF !__PATCH_0__
     ldh  a, [hActiveEntityState]                  ; $6E51: $F0 $F0
     and  a                                        ; $6E53: $A7
     jr   z, jr_015_6E5A                           ; $6E54: $28 $04
 
     xor  a                                        ; $6E56: $AF
     ld   [wSubtractHealthBuffer], a               ; $6E57: $EA $94 $DB
+ENDC
 
 jr_015_6E5A:
     call func_015_7B0D                            ; $6E5A: $CD $0D $7B
@@ -6171,6 +6185,13 @@ func_015_72CF::
     call RenderActiveEntitySpritesPair            ; $72D4: $CD $C0 $3B
     ld   a, $02                                   ; $72D7: $3E $02
     call label_3DA0                               ; $72D9: $CD $A0 $3D
+
+IF __PATCH_0__
+    ldh  a, [hActiveEntityState]
+    and  a
+    jr   nz, jr_015_731D
+ENDC
+
     ld   hl, hLinkPositionX                       ; $72DC: $21 $98 $FF
     ldh  a, [hActiveEntityPosX]                   ; $72DF: $F0 $EE
     sub  [hl]                                     ; $72E1: $96
@@ -7289,12 +7310,20 @@ func_015_79F0::
     ld   h, $00                                   ; $79F4: $26 $00
     ld   de, wDynamicOAMBuffer                    ; $79F6: $11 $30 $C0
     add  hl, de                                   ; $79F9: $19
+IF __PATCH_0__
+    ld   e, $03
+ELSE
     ld   e, $00                                   ; $79FA: $1E $00
+ENDC
     ldh  a, [hFrameCounter]                       ; $79FC: $F0 $E7
     and  $04                                      ; $79FE: $E6 $04
     jr   z, jr_015_7A04                           ; $7A00: $28 $02
 
+IF __PATCH_0__
+    ld   e, $15
+ELSE
     ld   e, $10                                   ; $7A02: $1E $10
+ENDC
 
 jr_015_7A04:
     ldh  a, [hActiveEntityVisualPosY]             ; $7A04: $F0 $EC

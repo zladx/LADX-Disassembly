@@ -2601,13 +2601,13 @@ jr_001_6BC6::
     ldh  [hBGTilesLoadingStage], a
     ret
 
-Data_001_6BCF::
-    db $F, $51, $B1, $EF, $EC, $AA, $4A, $C
+Data_001_6BCF::  ; Instrument on inventory menu position ($9D00 is added to get to background position)
+    db $0F, $51, $B1, $EF, $EC, $AA, $4A, $0C
 
-Data_001_6BD7::
+Data_001_6BD7::  ; Instrument on inventory menu, number tile
     db $B1, $B2, $B3, $B4, $B5, $B6, $B7, $B8
 
-Data_001_6BDF::
+Data_001_6BDF::  ; Instrument on inventory menu, instrument tile (top left corner)
     db $D0, $D2, $D4, $D6, $D8, $DA, $DC, $DE
 
 Data_001_6BE7::

@@ -53,22 +53,29 @@ TRUE equ 1
 
 BANK_1C_VAR = 1
 
-__PATCH_0__ = FALSE
-__PATCH_1__ = FALSE
+__PATCH_0__ = FALSE ; Applies to JP1+, EN1+, DE, FR
+__PATCH_1__ = FALSE ; Applies to DE, FR
+__PATCH_2__ = FALSE ; Applies to DE, JP1+, EN2+, FR
 
 IF ("{LANG}" == "JP")
 BANK_1C_VAR = 0
 IF (VERSION > 0)
 __PATCH_0__ = TRUE
+__PATCH_2__ = TRUE
 ENDC
 ELIF ("{LANG}" == "EN")
 IF (VERSION > 0)
 __PATCH_0__ = TRUE
 ENDC
+IF (VERSION > 1)
+__PATCH_2__ = TRUE
+ENDC
 ELIF ("{LANG}" == "FR")
 __PATCH_0__ = TRUE
 __PATCH_1__ = TRUE
+__PATCH_2__ = TRUE
 ELIF ("{LANG}" == "DE")
 __PATCH_0__ = TRUE
 __PATCH_1__ = TRUE
+__PATCH_2__ = TRUE
 ENDC

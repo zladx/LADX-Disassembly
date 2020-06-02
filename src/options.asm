@@ -48,8 +48,24 @@ IF(!DEF(VERSION))
 VERSION equs "0"
 ENDC
 
+FALSE equ 0
+TRUE equ 1
+
 BANK_1C_VAR = 1
+
+__PATCH_0__ = FALSE
 
 IF ("{LANG}" == "JP")
 BANK_1C_VAR = 0
+IF (VERSION > 0)
+__PATCH_0__ = TRUE
+ENDC
+ELIF ("{LANG}" == "EN")
+IF (VERSION > 0)
+__PATCH_0__ = TRUE
+ENDC
+ELIF ("{LANG}" == "FR")
+__PATCH_0__ = TRUE
+ELIF ("{LANG}" == "DE")
+__PATCH_0__ = TRUE
 ENDC

@@ -7,7 +7,11 @@ PhysicsFlagsForEntity::
 ._03 db $C2
 ._04 db $C2
 ._05 db $D2
+IF __PATCH_0__
+._06 db $A2
+ELSE
 ._06 db $C2
+ENDC
 ._07 db $C2
 ._08 db $C3
 ._09 db $12
@@ -75,7 +79,11 @@ PhysicsFlagsForEntity::
 ._47 db $82
 ._48 db $82
 ._49 db $82
+IF __PATCH_0__
+._4A db $82
+ELSE
 ._4A db $F2
+ENDC
 ._4B db $82
 ._4C db $41
 ._4D db $82

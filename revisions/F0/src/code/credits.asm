@@ -6517,11 +6517,11 @@ func_017_7E80::
 
 jr_017_7E88:
     ld   hl, wFarcallParams                       ; $7FA9: $21 $01 $DE
-    ld   a, BANK(Call_020_7e0e)                   ; $7FAC: $3E $20
+    ld   a, BANK(func_020_7E0E)                   ; $7FAC: $3E $20
     ld   [hl+], a                                 ; $7FAE: $22
-    ld   a, HIGH(Call_020_7e0e)                   ; $7FAF: $3E $7D
+    ld   a, HIGH(func_020_7E0E)                   ; $7FAF: $3E $7D
     ld   [hl+], a                                 ; $7FB1: $22
-    ld   a, LOW(Call_020_7e0e)                    ; $7FB2: $3E $7C
+    ld   a, LOW(func_020_7E0E)                    ; $7FB2: $3E $7C
     ld   [hl+], a                                 ; $7FB4: $22
     ld   a, BANK(@)                               ; $7FB5: $3E $17
     ld   [hl], a                                  ; $7FB7: $77

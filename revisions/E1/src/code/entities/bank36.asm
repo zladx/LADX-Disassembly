@@ -2520,7 +2520,7 @@ func_036_4F4E::
 func_036_4F68::
     ld   a, [wCurrentBank]                        ; $4F68: $FA $AF $DB
     push af                                       ; $4F6B: $F5
-        ld a, $09
+    ld a, $09
     ld hl, wEntitiesHealthGroup
     add hl, bc
     ld [hl], a
@@ -2676,6 +2676,7 @@ jr_036_505D:
 jr_036_505E:
     ret                                           ; $505E: $C9
 
+; @TODO Big Fairy in the Color Dungeon
 func_036_505F::
     ld   hl, Data_020_69E0                        ; $505F: $21 $E0 $69
     ldh  a, [hFrameCounter]                       ; $5062: $F0 $E7
@@ -4642,7 +4643,6 @@ func_036_5CBD::
     cp d
     jr nc, jr_036_5cf4
 
-
     ld   a, $10                                   ; $5CC7: $3E $10
     ld   [$C13E], a                               ; $5CC9: $EA $3E $C1
     ld   a, $20                                   ; $5CCC: $3E $20
@@ -6076,6 +6076,7 @@ ColorGhoulCommonStateHandler::
 jr_036_6504:
     ret                                           ; $6504: $C9
 
+; @FIXME Data disassembled as code
     ld   d, c                                     ; $6505: $51
     ld   d, b                                     ; $6506: $50
     ld   d, d                                     ; $6507: $52
@@ -7975,7 +7976,6 @@ func_036_70D6::
 
     xor a
     ld [$dc52], a
-
     ldh  a, [hIsGBC]                              ; $70DF: $F0 $FE
     and  a                                        ; $70E1: $A7
     ret  z                                        ; $70E2: $C8
@@ -8331,7 +8331,6 @@ jr_036_730a:
     ld a, $04
     ld [wInvincibilityCounter], a
     ret
-
 
 ; On Overworld, copy some palette data to OAM buffer
 func_036_72BA::

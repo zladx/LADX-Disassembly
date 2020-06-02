@@ -146,7 +146,7 @@ IntroSceneStage0Handler::
     call ClearLowerAndMiddleWRAM
     ld   a, $01
     ld [$dbaf], a
-    call $27ee
+    call label_27F2
     ld   a, $01
     call ClearFileMenuBG_trampoline
     ld   a, $1A
@@ -1643,7 +1643,7 @@ func_001_7920::
     inc a                                         ; $7a71: $3c
     cp $09                                        ; $7a72: $fe $09
     jr nz, .jr_001_7a7f                            ; $7a74: $20 $09
-    call $7b14                            ; $7a76: $cd $10 $7b
+    call Call_001_7bc3                           ; $7a76: $cd $10 $7b
     xor a                                         ; $7a79: $af
     ld   [$d011], a                                 ; $7a7a: $ea $11 $d0
     jr   .jr_001_7a9f                                ; $7a7d: $18 $20
@@ -1738,6 +1738,7 @@ func_001_79C2::
     ld   [$DDD1], a
     ret
 
+Call_001_7bc3:
      call GetRandomByte                            ; $7b10: $cd $12 $28
     or $20                                        ; $7b13: $f6 $20
     ld [$d016], a                                 ; $7b15: $ea $16 $d0

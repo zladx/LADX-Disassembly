@@ -6134,10 +6134,9 @@ LoadTileset23::
     ld   a, BANK(PhotoElementsTiles)              ; $7DF5: $3E $38
     ld   h, BANK(@)                               ; $7DF7: $26 $20
     call Copy100BytesFromBankAtA                  ; $7DF9: $CD $13 $0A
-
     ret                                           ; $7E07: $C9
 
-Call_020_7e0e
+func_020_7E0E:
     ld a, $06                                     ; $7e0e: $3e $06
     ldh [hScratchD], a                            ; $7e10: $e0 $e4
     ld a, $0c                                     ; $7e12: $3e $0c
@@ -6149,7 +6148,6 @@ Call_020_7e0e
     ldh [hScratch3], a                            ; $7e1f: $e0 $da
     call Call_020_7e25                            ; $7e21: $cd $25 $7e
     ret                                           ; $7e24: $c9
-
 
 Call_020_7e25:
 Jump_020_7e25:
@@ -6271,7 +6269,7 @@ jr_020_7e8c:
     ld [wPaletteUnknownE], a                      ; $7ead: $ea $d5 $dd
     ret                                           ; $7eb0: $c9
 
-
+func_020_7EB1::
     ld a, $06                                     ; $7eb1: $3e $06
     ldh [hScratchD], a                            ; $7eb3: $e0 $e4
     ld a, $0c                                     ; $7eb5: $3e $0c

@@ -731,7 +731,7 @@ JumpTable_028_4469:
 .else_4492_28:
     ld   hl, Data_028_4439                      ; $4492: JumpTable_028_4469 $21 $39 $44
     ld   de, wOAMBuffer                         ; $4495: JumpTable_028_4469 $11 $00 $C0
-    ld   c, $0f                                 ; $4498: JumpTable_028_4469 $0E $0C
+    ld   c, $0F                                 ; $4498: JumpTable_028_4469 $0E $0C
 .loop_449A_28:
     ldi  a, [hl]                                ; $449A: JumpTable_028_4469 $2A
     ld   [de], a                                ; $449B: JumpTable_028_4469 $12
@@ -780,34 +780,34 @@ func_028_44DB::
     ret                                         ; $44DF: $C9
 
 Data_028_44E0::
-    entity_pointer PhotoNiceLinkTiles
-    entity_pointer PhotoMarinCliffTiles
-    entity_pointer PhotoMarinWellTiles
-    entity_pointer PhotoMabeTiles
-    entity_pointer PhotoUlriraTiles
-    entity_pointer PhotoBowWowTiles
-    entity_pointer PhotoShopTiles
-    entity_pointer PhotoFishermanTiles
-    entity_pointer PhotoZoraTiles
-    entity_pointer PhotoKanaletTiles
-    entity_pointer PhotoGhostTiles
-    entity_pointer PhotoBridgeTiles
-    entity_pointer PhotoDizzyLinkTiles;
+    far_pointer PhotoNiceLinkTiles
+    far_pointer PhotoMarinCliffTiles
+    far_pointer PhotoMarinWellTiles
+    far_pointer PhotoMabeTiles
+    far_pointer PhotoUlriraTiles
+    far_pointer PhotoBowWowTiles
+    far_pointer PhotoShopTiles
+    far_pointer PhotoFishermanTiles
+    far_pointer PhotoZoraTiles
+    far_pointer PhotoKanaletTiles
+    far_pointer PhotoGhostTiles
+    far_pointer PhotoBridgeTiles
+    far_pointer PhotoDizzyLinkTiles;
 
 Data_028_4507::
-    entity_pointer Data_028_5820
-    entity_pointer Data_028_5AF0
-    entity_pointer Data_028_5DC0
-    entity_pointer Data_028_6090
-    entity_pointer Data_028_6360
-    entity_pointer Data_028_6630
-    entity_pointer Data_028_6900
-    entity_pointer Data_028_6BD0
-    entity_pointer Data_028_6EA0
-    entity_pointer Data_028_7170
-    entity_pointer Data_028_7440
-    entity_pointer Data_028_7710
-    entity_pointer Data_028_5550
+    far_pointer Data_028_5820
+    far_pointer Data_028_5AF0
+    far_pointer Data_028_5DC0
+    far_pointer Data_028_6090
+    far_pointer Data_028_6360
+    far_pointer Data_028_6630
+    far_pointer Data_028_6900
+    far_pointer Data_028_6BD0
+    far_pointer Data_028_6EA0
+    far_pointer Data_028_7170
+    far_pointer Data_028_7440
+    far_pointer Data_028_7710
+    far_pointer Data_028_5550
 
 Data_028_452E::
     db   $50, $38, $00, $00
@@ -2405,7 +2405,6 @@ Data_028_4DD1::
     db   $00, $00, $00, $00, $00, $00, $00, $00 ; $5541 |........|
     db   $00, $00, $00, $00, $00, $00, $00
 
-testlabel:
     db   $00, $00, $00, $00, $00, $00, $00, $00
     db   $00, $00, $00, $00, $00, $00, $00, $00
     db   $00, $00, $00, $00, $00, $00

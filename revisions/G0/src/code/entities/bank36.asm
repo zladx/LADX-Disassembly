@@ -2676,6 +2676,7 @@ jr_036_505D:
 jr_036_505E:
     ret                                           ; $505E: $C9
 
+; @TODO Big Fairy in the Color Dungeon
 func_036_505F::
     ld   hl, Data_020_69E0                        ; $505F: $21 $E0 $69
     ldh  a, [hFrameCounter]                       ; $5062: $F0 $E7
@@ -4222,7 +4223,7 @@ jr_036_5A00:
 func_036_5A0A::
     ldh  a, [hActiveEntityType]                   ; $5A0A: $F0 $EB
     sub  ENTITY_COLOR_GUARDIAN_BLUE               ; $5A0C: $D6 $F6
-     xor $01
+    xor $01
     ld   e, a                                     ; $5A0E: $5F
     ld   a, [wC177]                               ; $5A0F: $FA $77 $C1
     cp   e                                        ; $5A12: $BB
@@ -6077,6 +6078,7 @@ ColorGhoulCommonStateHandler::
 jr_036_6504:
     ret                                           ; $6504: $C9
 
+; @FIXME Data disassembled as code
     ld   d, c                                     ; $6505: $51
     ld   d, b                                     ; $6506: $50
     ld   d, d                                     ; $6507: $52
@@ -7973,6 +7975,7 @@ func_036_70D6::
     ld   a, [wTransitionSequenceCounter]          ; $70D9: $FA $6B $C1
     cp   $04                                      ; $70DC: $FE $04
     ret  nz                                       ; $70DE: $C0
+
     xor a
     ld [$dc52], a
     ldh  a, [hIsGBC]                              ; $70DF: $F0 $FE

@@ -2722,13 +2722,12 @@ jr_018_5466:
     call func_018_7E62                            ; $5472: $CD $62 $7E
 
 jr_018_5479:
-     ldh  a, [hActiveEntityVisualPosY]
+    ldh  a, [hActiveEntityVisualPosY]
     cp   $1a
     ret  c
     xor  a
     ldh  [$ba], a
     ret
-
 
 Data_018_547A::
     db   $44, $01, $44, $21, $74, $01, $74, $21
@@ -4191,7 +4190,7 @@ OwlStatueEntityHandler::
     cp   $16                                      ; $5E7C: $FE $16
     jp   z, OwlStatueSouthFaceShrine              ; $5E7E: $CA $1B $5E
 
-     ld hl, hActiveEntityVisualPosY
+    ld hl, hActiveEntityVisualPosY
     inc [hl]
     ld   de, Data_018_5DF7                        ; $5E87: $11 $F7 $5D
     call RenderActiveEntitySpritesPair            ; $5E8A: $CD $C0 $3B

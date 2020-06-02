@@ -913,7 +913,7 @@ jr_003_4C15:
 EntityInitColorDungeonBook::
     ld   hl, wEntitiesPosYTable                   ; $4C1F: $21 $10 $C2
     add  hl, bc                                   ; $4C22: $09
-    inc [hl]                                      ; $4c21: $34
+    inc [hl]
     inc [hl]
     ld   hl, wEntitiesPosZTable                   ; $4C27: $21 $10 $C3
     add  hl, bc                                   ; $4C2A: $09
@@ -1699,7 +1699,8 @@ jr_003_50AC:
 
     cp   CHEST_SEASHELL                           ; $50B2: $FE $20
     jr   nz, jr_003_50B9                          ; $50B4: $20 $03
-    jp   label_003_636D
+
+    jp   label_003_636D                           ; $50B6: $C3 $6D $63
 
 jr_003_50B9:
     cp   CHEST_RUPEES_50                          ; $50B9: $FE $1B
@@ -2044,16 +2045,15 @@ Data_003_53A0::
     db   $F0, $16, $F2, $16, $F4, $16, $F6, $16
 
 jp_003_53A8::
-
     ld   a, [wIsIndoor]                           ; $53A8: $FA $A5 $DB
     and  a                                        ; $53AB: $A7
     jr   z, jr_003_53B3                           ; $53AC: $28 $05
 
-    ld de, Data_003_53A0
-    jr jr_003_53B6
+    ld   de, Data_003_53A0                        ; $53AE: $11 $A0 $53
+    jr   jr_003_53B6                              ; $53B1: $18 $03
 
 jr_003_53B3:
-    ld   de, Data_003_5398
+    ld   de, Data_003_5398                        ; $53B3: $11 $98 $53
 
 jr_003_53B6:
     call RenderActiveEntitySpritesPair            ; $53B6: $CD $C0 $3B
@@ -2217,7 +2217,6 @@ EntityDeathHandler::
     add  hl, bc                                   ; $551B: $09
     ld   a, [hl]                                  ; $551C: $7E
     and  $80                                      ; $551D: $E6 $80
-
     jp   nz, ExecuteActiveEntityHandler
 
 .dying
@@ -3799,7 +3798,7 @@ func_003_5ED5::
     dec  [hl]                                     ; $5EDF: $35
     call IncrementEntityState                     ; $5EE0: $CD $12 $3B
 
-  xor a
+    xor a
     ld [wActivePowerUp], a
 
     ldh  a, [hMapId]                              ; $5EE3: $F0 $F7
@@ -3944,16 +3943,17 @@ jr_003_5F5F:
 
 jr_003_5FB9:
 func_003_5FBC:
-ld a, [$dc52]
- inc a
+    ld a, [$dc52]
+    inc a
     jp nz, HoldEntityAboveLink
-    ld a, $80
-     ldh [hLinkPositionZ], a                       ; $5fb7: $e0 $a2
-    ld a, $02                                     ; $5fb9: $3e $02
-    ldh [hLinkInteractiveMotionBlocked], a        ; $5fbb: $e0 $a1
 
-func_003_5FBF:
-    ret
+    ld a, $80
+    ldh [hLinkPositionZ], a
+    ld a, $02
+    ldh [hLinkInteractiveMotionBlocked], a
+
+func_003_5FBF::
+    ret                                           ; $5FBF: $C9
 
 Data_003_5FC0::
     db   $80, $15
@@ -5696,7 +5696,7 @@ Data_003_6B48::
 
 func_003_6B48:
     cp   $01                                      ; $6B4C: $FE $01
-    jr   nz, jr_003_6B53
+    jr   nz, jr_003_6B53                          ; $6B4E: $20 $03
     jp   UnloadEntityAndReturn                    ; $6B50: $C3 $8D $3F
 
 jr_003_6B53:
@@ -6718,7 +6718,7 @@ label_003_709D:
     jp   label_003_7102                           ; $70A6: $C3 $02 $71
 
 jr_003_70A9:
-    jp   func_003_6DDF
+    jp   func_003_6DDF                            ; $70A9: $C3 $DF $6D
 
 jr_003_70AC:
     ld   a, $04                                   ; $70AC: $3E $04
@@ -9034,9 +9034,9 @@ jr_003_7DC0:
     jp   c, label_003_7DCD                        ; $7DC2: $DA $CD $7D
 
     cp   $90                                      ; $7DC5: $FE $90
-    jp   nc, label_003_7DCD
+    jp   nc, label_003_7DCD                       ; $7DC7: $D2 $CD $7D
 
-    jp jr_003_7E03                              ; $7dd4: $c3 $0d $7e
+    jp   jr_003_7E03                              ; $7DCA: $C3 $03 $7E
 
 label_003_7DCD:
     ldh  a, [hScratch3]                           ; $7DCD: $F0 $DA

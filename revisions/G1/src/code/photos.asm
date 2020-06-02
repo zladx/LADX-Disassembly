@@ -1032,8 +1032,9 @@ func_037_46AF::
     ld   a, [hl]                                  ; $46B3: $7E
     and  a                                        ; $46B4: $A7
     jr   z, .jr_037_46be                        ; $46B5: $20 $20
-    dec [hl]
-    jr .else_46D7_37
+
+    dec  [hl]                                     ; $46B2: $35
+    jr   .else_46D7_37                        ; $46B5: $20 $20
 
 .jr_037_46be
     push hl                                       ; $46B7: $E5
@@ -1053,7 +1054,7 @@ func_037_46AF::
     xor  $01                                      ; $46D2: $EE $01
     ld   [$C201], a                               ; $46D4: $EA $01 $C2
 
-.else_46D7_37
+.else_46D7_37:
     ld   a, [wDialogState]                        ; $46D7: $FA $9F $C1
     and  a                                        ; $46DA: $A7
     ret  nz                                       ; $46DB: $C0

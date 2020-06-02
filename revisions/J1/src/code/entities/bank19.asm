@@ -4496,8 +4496,8 @@ label_019_5F84:
     or   [hl]                                     ; $5FA7: $B6
     ret  nz                                       ; $5FA8: $C0
 
-   ld a, [wGameplayType]                         ; $5fa9: $fa $95 $db
-    cp $0b                                        ; $5fac: $fe $0b
+    ld a, [wGameplayType]
+    cp $0b
     ret nz
 
     ld   hl, wEntitiesUnknownTableD               ; $5FA9: $21 $D0 $C2
@@ -7461,9 +7461,7 @@ Data_019_78FE::
     db   $98, $50, $8D, $6C, $6E, $6C, $6E, $6C, $6E, $6C, $6E, $6C, $6E, $6C, $6E, $6C
     db   $6E, $98, $51, $8D, $6D, $6F, $6D, $6F, $6D, $6F, $6D, $6F, $6D, $6F, $6D, $6F
     db   $6D, $6F, $00
-
-    db   $98, $50, $cd, $00, $98, $51, $cd, $00, $00
-
+    db   $98, $50, $CD, $00, $98, $51, $CD, $00, $00
 
 func_019_7921::
     push bc                                       ; $7921: $C5
@@ -7480,19 +7478,18 @@ jr_019_792F:
     dec  c                                        ; $7932: $0D
     jr   nz, jr_019_792F                          ; $7933: $20 $FA
 
-    ld c, $09                                     ; $7944: $0e $09
-    ld a, $08                                     ; $7946: $3e $08
-    ld [$dc90], a                                 ; $7948: $ea $90 $dc
-    ld hl, $dc91                                  ; $794b: $21 $91 $dc
+    ld c, $09
+    ld a, $08
+    ld [$dc90], a
+    ld hl, $dc91
+    ld de, $7927
 
-    ld de, $7927                                  ; $794e: $11 $27 $79
-
-.loop
-    ld a, [de]                                    ; $7951: $1a
-    inc de                                        ; $7952: $13
-    ld [hl+], a                                   ; $7953: $22
-    dec c                                         ; $7954: $0d
-    jr nz, .loop                            ; $7955: $20 $fa
+jr_019_7951:
+    ld a, [de]
+    inc de
+    ld [hl+], a
+    dec c
+    jr nz, jr_019_7951
 
     pop  bc                                       ; $7935: $C1
     ld   a, $89                                   ; $7936: $3E $89

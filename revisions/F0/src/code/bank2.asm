@@ -6423,7 +6423,7 @@ jr_002_7078:
 jr_002_7085:
     ld a, [$c146]
     and a
-    jr nz, $7100
+    jr nz, label_002_70D8
 
     ld   d, $00                                   ; $7085: $16 $00
     ldh  a, [hLinkDirection]                      ; $7087: $F0 $9E

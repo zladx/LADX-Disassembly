@@ -93,17 +93,17 @@ HookshotChainSpeedY::
     db   $00, $00, $D0, $30
 
 FireHookshot::
-    ld   a, [$C144]
+    ld   a, [$c144]
     and  a
-    ret nz
+    ret  nz
 
-    ld   a, [$C146]
-    and  a
-    ret nz
+    ld   a, [$c146]                               ; $4254: $FA $46 $C1
+    and  a                                        ; $4257: $A7
+    ret  nz
 
     ld   a, ENTITY_HOOKSHOT_CHAIN                 ; $425A: $3E $03
     call SpawnPlayerProjectile                    ; $425C: $CD $2F $14
-    ret c                              ; $425F: $38 $25
+    ret c
 
     ld   hl, wEntitiesTransitionCountdownTable    ; $4261: $21 $E0 $C2
     add  hl, de                                   ; $4264: $19
@@ -130,8 +130,9 @@ FireHookshot::
     ld   hl, wEntitiesSpeedYTable                 ; $4281: $21 $50 $C2
     add  hl, de                                   ; $4284: $19
     ld   [hl], a                                  ; $4285: $77
-     ld a, [$c11c]
-    ld [$d463], a
+
+    ld   a, [wLinkMotionState]
+    ld   [$d463], a
 
 .return
     ret                                           ; $4286: $C9
@@ -1196,18 +1197,18 @@ LinkPlayingOcarinaHandler::
     and  a                                        ; $4A19: $A7
     ret  z                                        ; $4A1A: $C8
 
-    ld a, [$c11c]                                 ; $4a23: $fa $1c $c1
-    cp $01                                        ; $4a26: $fe $01
-    jr nz, .jr_002_4a31                            ; $4a28: $20 $07
+    ld a, [wLinkMotionState]
+    cp $01
+    jr nz, jr_002_4a31
 
-    xor a                                         ; $4a2a: $af
-    ld [$c166], a                                 ; $4a2b: $ea $66 $c1
-    ldh [$f3], a                                  ; $4a2e: $e0 $f3
-    ret                                           ; $4a30: $c9
+    xor a
+    ld [wLinkPlayingOcarinaCountdown], a
+    ldh [hWaveSfx], a
+    ret
 
 
-.jr_002_4a31
-    ld a, [$c166]                                 ; $4a31: $fa $66 $c1
+jr_002_4a31:
+    ld a, [wLinkPlayingOcarinaCountdown]
 
     ld   hl, hLinkInteractiveMotionBlocked        ; $4A1B: $21 $A1 $FF
     ld   [hl], $02                                ; $4A1E: $36 $02
@@ -2049,15 +2050,15 @@ Data_002_4F20::
     db   $00, $00, $00, $00, $F0, $F4, $F4, $00, $10, $0C, $0C, $00, $00, $00, $00, $00
 
 LinkMotionSwimmingHandler::
-ld a, [$c166]                                 ; $4f43: $fa $66 $c1
-    and a                                         ; $4f46: $a7
-    jr z, .jr_002_4f50                             ; $4f47: $28 $07
+    ld a, [wLinkPlayingOcarinaCountdown]
+    and a
+    jr z, jr_002_4f50
 
-    xor a                                         ; $4f49: $af
-    ld [$c166], a                                 ; $4f4a: $ea $66 $c1
-    ld [$c167], a
+    xor a
+    ld [wLinkPlayingOcarinaCountdown], a
+    ld [wC167], a
 
-.jr_002_4f50
+jr_002_4f50:
     ld   a, [wFreeMovementMode]                   ; $4F30: $FA $7B $C1
     and  a                                        ; $4F33: $A7
     jr   z, jr_002_4F3C                           ; $4F34: $28 $06
@@ -4421,7 +4422,7 @@ func_002_60E0::
     jp   z, label_002_61E7                        ; $6119: $CA $E7 $61
 
     ld   a, [wWindowY]                            ; $611C: $FA $9A $DB
-    cp $00                                          ; $611F: $A7
+    cp $00                                    ; $611F: $A7
     jr   z, jr_002_613D                           ; $6120: $28 $1B
 
     ld   a, [$D464]                               ; $6122: $FA $64 $D4
@@ -6420,7 +6421,7 @@ jr_002_7078:
     jp   nc, label_002_7461                       ; $7082: $D2 $61 $74
 
 jr_002_7085:
-ld a, [$c146]
+    ld a, [$c146]
     and a
     jr nz, label_002_70D8
 
@@ -6934,10 +6935,10 @@ jr_002_734F:
     jp   label_002_7461                           ; $73A0: $C3 $61 $74
 
 Data_002_73A3::
-    db   $24, $25, $33,$22,$23, $14, $26,$27
+    db   $24, $25, $33, $22, $23, $14, $26, $27
 
 Data_002_73A8::
-    db   $03, $03, $01, $02,$02, $00, $02,$02
+    db   $03, $03, $01, $02, $02, $00, $02, $02
 
 label_002_73AD:
     ld   e, $20                                   ; $73AD: $1E $20
@@ -6992,8 +6993,8 @@ jr_002_73EE:
     cp   $06                                      ; $73EF: $FE $04
     jr   c, jr_002_742D                           ; $73F1: $38 $3A
 
-    ld a, [$c146]                                 ; $7425: $fa $46 $c1
-    and a                                         ; $7428: $a7
+        ld a, [$c146]
+            and a
     jr nz, collisionEnd
 
     ld   hl, wBButtonSlot                         ; $73F3: $21 $00 $DB
@@ -7063,16 +7064,16 @@ interactiveBlock:
     cp   $77                                      ; $744B: $FE $77
     jr   nz, collisionEnd                         ; $744D: $20 $05
 
-    ld hl, wFarcallBank                           ; $7487: $21 $01 $de
-    ld a, $20                                     ; $748a: $3e $20
-    ld [hl+], a                                   ; $748c: $22
-    ld a, $49
-    ld [hl+], a                                   ; $748f: $22
-    ld a, $85                                     ; $7490: $3e $85
-    ld [hl+], a                                   ; $7492: $22
-    ld a, BANK(@)                                    ; $7493: $3e $02
-    ld [hl], a                                    ; $7495: $77
-    call Farcall                                  ; $7496: $cd $d3 $0b
+    ld   hl, wFarcallParams
+    ld   a, BANK(CheckPushedTombStone)
+    ld   [hl+], a
+    ld   a, HIGH(CheckPushedTombStone)
+    ld   [hl+], a
+    ld   a, LOW(CheckPushedTombStone)
+    ld   [hl+], a
+    ld   a, BANK(@)
+    ld   [hl], a
+    call Farcall
 
 collisionEnd::
     ld   hl, Data_002_6E29                        ; $7454: $21 $29 $6E
@@ -7563,7 +7564,7 @@ jr_002_7732:
     call ClearLinkPositionIncrement               ; $773A: $CD $8E $17
     ldh  a, [hLinkDirection]                      ; $773D: $F0 $9E
     ld   e, a                                     ; $773F: $5F
-    ld d, $00
+    ld   d,  $00
     ld   hl, Data_002_750A                        ; $7741: $21 $0A $75
     add  hl, de                                   ; $7744: $19
     ld   a, [hl]                                  ; $7745: $7E
@@ -7591,21 +7592,25 @@ jr_002_7750:
     ld   [hl+], a                                 ; $7762: $22
     ld   a, $1C                                   ; $7763: $3E $1C
     ld   [hl+], a                                 ; $7765: $22
-     ldh a, [hIsGBC]                               ; $77ac: $f0 $fe
-    and a                                         ; $77ae: $a7
-    jr z, jr_002_77bb                             ; $77af: $28 $0a
 
-    ldh a, [hFrameCounter]                        ; $77b1: $f0 $e7
-    and $04                                       ; $77b3: $e6 $04
-    srl a                                         ; $77b5: $cb $3f
-    add $03                                       ; $77b7: $c6 $03
-    jr jr_002_77c1                                ; $77b9: $18 $06
-jr_002_77bb:
+    ldh  a, [hIsGBC]
+    and  a
+    jr   z, .notGBC
+
+.gbc
+    ldh  a, [hFrameCounter]
+    and  $04
+    srl  a
+    add  $03
+    jr   .anyGB
+
+.notGBC
     ldh  a, [hFrameCounter]                       ; $7766: $F0 $E7
     rla                                           ; $7768: $17
     rla                                           ; $7769: $17
     and  $10                                      ; $776A: $E6 $10
-jr_002_77c1:
+
+.anyGB
     push af                                       ; $776C: $F5
     ld   [hl+], a                                 ; $776D: $22
     ldh  a, [hLinkPositionY]                      ; $776E: $F0 $99
@@ -7633,10 +7638,9 @@ jr_002_77c1:
     and  a                                        ; $7793: $A7
     jr   nz, jr_002_779A                          ; $7794: $20 $04
 
-ldh a, [hLinkAnimationState]                  ; $77eb: $f0 $9d
-    cp $6c                                        ; $77ed: $fe $6c
-    jr z, jr_002_779A                             ; $77ef: $28 $04
-
+    ldh  a, [hLinkAnimationState]
+    cp   $6c
+    jr   z, jr_002_779A
 
     ld   a, JINGLE_WATER_DIVE                     ; $7796: $3E $0E
     ldh  [hJingle], a                             ; $7798: $E0 $F2

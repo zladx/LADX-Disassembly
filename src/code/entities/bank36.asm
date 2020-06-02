@@ -6862,7 +6862,6 @@ func_036_69D9::
     ldh  a, [hActiveEntityType]                   ; $69D9: $F0 $EB
     sub  ENTITY_COLOR_SHELL_RED                   ; $69DB: $D6 $E9
     sla  a                                        ; $69DD: $CB $27
-
     ldh  [hScratch0], a                           ; $69DF: $E0 $D7
     ld   d, $00                                   ; $69E1: $16 $00
     call func_036_6C02                            ; $69E3: $CD $02 $6C

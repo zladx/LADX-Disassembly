@@ -1075,13 +1075,15 @@ func_020_4B81::
 
     xor  a                                        ; $4B8E: $AF
     ld   [wBombArrowCooldown], a                  ; $4B8F: $EA $C0 $C1
-    ld a, [wAButtonSlot]                          ; $4b92: $fa $01 $db
-    cp $05                                        ; $4b95: $fe $05
-    ret nz                                        ; $4b97: $c0
 
-    ld a, [wBButtonSlot]                          ; $4b98: $fa $00 $db
-    cp $05                                        ; $4b9b: $fe $05
-    ret nz                                        ; $4b9d: $c0
+    ld   a, [wAButtonSlot]
+    cp   INVENTORY_BOW
+    ret  nz
+
+    ld   a, [wBButtonSlot]
+    cp   INVENTORY_BOW
+    ret  nz
+
     ld   a, [$C1C2]                               ; $4B92: $FA $C2 $C1
     ld   c, a                                     ; $4B95: $4F
     ld   b, d                                     ; $4B96: $42
@@ -3864,10 +3866,12 @@ Data_020_6346::
     db   $0E, $0E, $26, $26, $3E, $3E, $56, $56, $6E, $6E, $86, $86
 
 func_020_6352::
-    ldh a, [hIsGBC]                               ; $635e: $f0 $fe
-    and a                                         ; $6360: $a7
+    ldh a, [hIsGBC]
+    and a
     jr nz, jr_020_6369
     ld   a, [wBGPalette]                          ; $6352: $FA $97 $DB
+
+jr_020_6355:
     cp   $E4                                      ; $6355: $FE $E4
     ret  c                                        ; $6357: $D8
 

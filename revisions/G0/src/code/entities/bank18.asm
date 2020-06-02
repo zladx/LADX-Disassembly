@@ -670,7 +670,7 @@ ManboAndFishesState0Handler::
     jp_open_dialog $189                           ; $4542
 
 jr_018_4547:
-    ld a, $02                                     ; $4546: $3e $02
+    ld a, $02
     ld [wC167], a
     ldh  a, [hLinkPositionX]                      ; $4547: $F0 $98
     cp   $30                                      ; $4549: $FE $30
@@ -2657,8 +2657,8 @@ jr_018_53ED:
     jr   nz, jr_018_5466                          ; $5415: $20 $4F
 
 jr_018_5417:
-    ld a, [$c3cf]                                 ; $541b: $fa $cf $c3
-    and a                                         ; $541e: $a7
+    ld a, [$c3cf]
+    and a
     jr nz, jr_018_5466
 
     ldh  a, [hPressedButtonsMask]                 ; $5417: $F0 $CB

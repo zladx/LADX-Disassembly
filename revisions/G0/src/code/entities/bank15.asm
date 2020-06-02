@@ -2069,6 +2069,7 @@ func_015_50C2::
     cp $0b
     ret nz
 
+
     ld   a, MUSIC_FINAL_BOSS_DIALOG               ; $50C7: $3E $5D
     ld   [wMusicTrackToPlay], a                   ; $50C9: $EA $68 $D3
     ld   hl, wIndoorBRoomStatus + $74                                ; $50CC: $21 $74 $DA

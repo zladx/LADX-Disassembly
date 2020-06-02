@@ -340,7 +340,7 @@ label_1CB8::
 AnimateWarpTilesGroup::
     ld   a, BANK(AnimatedTiles)
     call AdjustBankNumberForGBC
-    ld   [$2100], a
+    ld   [MBC3SelectBank], a
     ld   h, HIGH(AnimatedTiles) + $6
 
 AnimateTilesMediumSpeed::
@@ -456,7 +456,7 @@ label_1D49::
     ldh  a, [hLinkPositionX]
     add  a, c
     ldi  [hl], a
-    xor a
+    xor  a
     ldi  [hl], a
     ld   a, [$C135]
     ld   d, a

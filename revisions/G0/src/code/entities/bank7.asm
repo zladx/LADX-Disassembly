@@ -4852,9 +4852,9 @@ Data_007_6003::
     db   $4E, $00, $4E, $20
 
 EntityA8Handler::
-    ldh a, [hMapId]
-    cp $06
-    jr nz, .start
+    ldh  a, [hMapId]
+    cp   $06
+    jr nz, .default
 
     push bc
     sla c
@@ -4863,14 +4863,13 @@ EntityA8Handler::
     add hl, bc
     inc hl
     ld a, $08
-
-.label
     ld [hl+], a
     inc hl
     ld [hl], a
     pop bc
 
-.start
+
+.default
     ldh  a, [hActiveEntityStatus]                 ; $6007: $F0 $EA
     cp   $07                                      ; $6009: $FE $07
     jr   nz, jr_007_602A                          ; $600B: $20 $1D
@@ -5705,7 +5704,6 @@ Data_007_64F6:
     db   $99, $E0, $53, $00
     db   $9A, $00, $53, $00
     db   $9A, $20, $53, $00
-
 
 label_007_6523:
     xor  a                                        ; $6523: $AF

@@ -34,7 +34,7 @@ jr_005_5A29:
 
     ld   a, $05                                   ; $5A3A: $3E $05
     call SwitchBank                               ; $5A3C: $CD $0C $08
-    call jr_005_5AFE._5b09                            ; $5A3F: $CD $03 $5B
+    call Call_005_5b09                            ; $5A3F: $CD $03 $5B
     ld   hl, wEntitiesStateTable                  ; $5A42: $21 $90 $C2
     add  hl, de                                   ; $5A45: $19
     ld   [hl], $07                                ; $5A46: $36 $07
@@ -159,9 +159,9 @@ jr_005_5AFE:
     xor a
     ld [$de0b], a
     ld a, MUSIC_EAGLES_TOWER_BOSS_CUTSCENE
-    jr .play
+    jr jr_005_5B00
 
-._5b09:
+Call_005_5b09:
     ld a, [$de0b]
     and a
     jr z, func_005_5B03
@@ -170,7 +170,7 @@ jr_005_5AFE:
     ld [$de0b], a
     ld a, MUSIC_BOSS_BATTLE
 
-.play
+jr_005_5B00:
     ld   [wMusicTrackToPlay], a                   ; $5B00: $EA $68 $D3
 
 func_005_5B03::

@@ -158,20 +158,19 @@ func_005_5ADB::
 jr_005_5AFE:
     xor a
     ld [$de0b], a
-    ld   a, MUSIC_EAGLES_TOWER_BOSS_CUTSCENE      ; $5AFE: $3E $54
-     jr jr_005_5b15                                ; $5b07: $18 $0c
+    ld a, MUSIC_EAGLES_TOWER_BOSS_CUTSCENE
+    jr jr_005_5B00
 
 Call_005_5b09:
-    ld a, [$de0b]                                 ; $5b09: $fa $0b $de
-    and a                                         ; $5b0c: $a7
-    jr z, func_005_5B03                             ; $5b0d: $28 $09
+    ld a, [$de0b]
+    and a
+    jr z, func_005_5B03
 
-    xor a                                         ; $5b0f: $af
-    ld [$de0b], a                                 ; $5b10: $ea $0b $de
-    ld a, $19                                     ; $5b13: $3e $19
+    xor a
+    ld [$de0b], a
+    ld a, MUSIC_BOSS_BATTLE
 
-jr_005_5b15:
-
+jr_005_5B00:
     ld   [wMusicTrackToPlay], a                   ; $5B00: $EA $68 $D3
 
 func_005_5B03::
@@ -218,8 +217,8 @@ func_005_5B4B::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5B4B: $21 $40 $C3
     add  hl, bc                                   ; $5B4E: $09
     ld   [hl], $C2                                ; $5B4F: $36 $C2
-    xor a                                         ; $5b66: $af
-    ld [wC167], a                                 ; $5b67: $ea $67 $c1
+    xor a
+    ld [wC167], a
     ret                                           ; $5B51: $C9
 
 Data_005_5B52::

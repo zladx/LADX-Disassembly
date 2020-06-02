@@ -156,21 +156,21 @@ func_005_5ADB::
     ret                                           ; $5AFD: $C9
 
 jr_005_5AFE:
-    xor a                                         ; $5b01: $af
-    ld [$de0b], a                                 ; $5b02: $ea $0b $de
-    ld a, $54                                     ; $5b05: $3e $54
-    jr jr_005_5b15                                ; $5b07: $18 $0c
+    xor a
+    ld [$de0b], a
+    ld a, MUSIC_EAGLES_TOWER_BOSS_CUTSCENE
+    jr jr_005_5B00
 
 Call_005_5b09:
-    ld a, [$de0b]                                 ; $5b09: $fa $0b $de
-    and a                                         ; $5b0c: $a7
-    jr z, func_005_5B03                             ; $5b0d: $28 $09
+    ld a, [$de0b]
+    and a
+    jr z, func_005_5B03
 
-    xor a                                         ; $5b0f: $af
-    ld [$de0b], a                                 ; $5b10: $ea $0b $de
-    ld a, $19                                     ; $5b13: $3e $19
+    xor a
+    ld [$de0b], a
+    ld a, MUSIC_BOSS_BATTLE
 
-jr_005_5b15:
+jr_005_5B00:
     ld   [wMusicTrackToPlay], a                   ; $5B00: $EA $68 $D3
 
 func_005_5B03::

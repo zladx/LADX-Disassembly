@@ -12,8 +12,8 @@ CrowEntityHandler::
     cp   $10                                      ; $5CA4: $FE $10
     jr   c, jr_006_5CAB                           ; $5CA6: $38 $03
 
-    srl  a                                        ; $5CA8: $CB $3F
     srl  a
+    srl  a                                        ; $5CA8: $CB $3F
     ld   [hl], a                                  ; $5CAA: $77
 
 jr_006_5CAB:

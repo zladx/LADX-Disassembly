@@ -254,7 +254,7 @@ EntityInitHandler::
     ; If the room status is $30, don't load the entity.
     ldh  a, [hRoomStatus]                         ; $48BE: $F0 $F8
     and  $30                                      ; $48C0: $E6 $30
-    jp   nz, UnloadEntityAndReturn                    ; $48C4: $C3 $8D $3F
+    jp   nz, UnloadEntityAndReturn
 .roomStatusEnd
 
     ;
@@ -912,8 +912,8 @@ jr_003_4C15:
 
 EntityInitColorDungeonBook::
     ld   hl, wEntitiesPosYTable                   ; $4C1F: $21 $10 $C2
-    add hl, bc
-  inc [hl]
+    add  hl, bc                                   ; $4C22: $09
+    inc [hl]
     inc [hl]
     ld   hl, wEntitiesPosZTable                   ; $4C27: $21 $10 $C3
     add  hl, bc                                   ; $4C2A: $09
@@ -968,7 +968,7 @@ EntityDestructionHandler::
     call func_003_7F7E                            ; $4C6A: $CD $7E $7F
     call func_003_7FA9                            ; $4C6D: $CD $A9 $7F
     call func_003_60B3                            ; $4C70: $CD $B3 $60
-    jp ClearEntitySpeed                         ; $4C73: $CD $7F $3D
+    jp ClearEntitySpeed
 
 .destructionEnd
     ; If destroying a Gibdo…
@@ -1191,7 +1191,7 @@ EntityThrownHandler::
     ld   [hl], WAVE_SFX_BOSS_GRAWL                ; $4DC5: $36 $07
     ld   hl, wEntitiesUnknowTableP                ; $4DC7: $21 $40 $C4
     add  hl, bc                                   ; $4DCA: $09
-    inc [hl]                                      ; $4dc6: $34
+    inc [hl]
     ld a, [hl]
     cp   $03                                      ; $4DCE: $FE $03
     jr   z, .genie2                               ; $4DD0: $28 $1D
@@ -2043,7 +2043,7 @@ Data_003_53A0::
     db   $F0, $16, $F2, $16, $F4, $16, $F6, $16
 
 jp_003_53A8::
-    ld de,$5395
+    ld   de, Data_003_5398
     ld   a, [wIsIndoor]                           ; $53A8: $FA $A5 $DB
     and  a                                        ; $53AB: $A7
     jr   z, jr_003_53B6                           ; $53AC: $28 $05
@@ -2212,7 +2212,7 @@ EntityDeathHandler::
     add  hl, bc                                   ; $551B: $09
     ld   a, [hl]                                  ; $551C: $7E
     and  $80                                      ; $551D: $E6 $80
-    jp   nz, ExecuteActiveEntityHandler               ; $5521: $C3 $8D $3A
+    jp   nz, ExecuteActiveEntityHandler
 
 .dying
     ld   hl, wEntitiesUnknowTableV                ; $5524: $21 $80 $C4
@@ -2984,8 +2984,8 @@ SpawnOctorockRock::
     pop  bc                                       ; $59D4: $C1
     and  a                                        ; $59D5: $A7
 
-EntityInitBrokenHeartContainer::
 jr_003_59D6:
+EntityInitBrokenHeartContainer::
     ret                                           ; $59D6: $C9
 
 HeartContainerTilesTable::
@@ -3402,13 +3402,12 @@ label_003_5C49:
 
 jr_003_5C67:
     dec  a                                        ; $5C67: $3D
-    jp   nz, HoldEntityAboveLink                          ; $5C68: $20 $0B
+    jp   nz, HoldEntityAboveLink
 
     ld   d, INVENTORY_HOOKSHOT                    ; $5C6A: $16 $06
     call GiveInventoryItem                        ; $5C6C: $CD $72 $64
     call MarkRoomCompleted                        ; $5C6F: $CD $2A $51
     jp   UnloadEntityAndReturn                    ; $5C72: $C3 $8D $3F
-
 
 KeyDropSpriteTable:
     db   $CA, $17
@@ -3467,10 +3466,8 @@ jr_003_5C99:
 
 jr_003_5CCD:
     dec  a                                        ; $5CCD: $3D
-    jp   nz, HoldEntityAboveLink                          ; $5CCE: $20 $03
-
-    jp   UnloadEntityAndReturn                    ; $5CD0: $C3 $8D $3F
-
+    jp   nz, HoldEntityAboveLink
+    jp   UnloadEntityAndReturn
 
 label_003_5CD6:
     call func_003_7F78                            ; $5CD6: $CD $78 $7F
@@ -3572,7 +3569,7 @@ SleepyToadstoolEntityHandler::
 
 jr_003_5D6C:
     dec  a                                        ; $5D6C: $3D
-    jp   nz, HoldEntityAboveLink                          ; $5D6D: $20 $11
+    jp   nz, HoldEntityAboveLink
 
     ld   a, $0A                                   ; $5D6F: $3E $0A
     ldh  [hFFA5], a                               ; $5D71: $E0 $A5
@@ -3581,7 +3578,6 @@ jr_003_5D6C:
     ld   a, $01                                   ; $5D78: $3E $01
     ld   [wHasToadstool], a                       ; $5D7A: $EA $4B $DB
     jp   UnloadEntityAndReturn                    ; $5D7D: $C3 $8D $3F
-
 
 Data_003_5D83::
     db   $70, $01, $72, $01, $74, $01, $76, $01, $78, $01, $7A, $01, $7C, $01, $7E, $01
@@ -3775,8 +3771,8 @@ jr_003_5EAE:
 ._02 dw func_003_5F33                             ; $5ECF
 ._03 dw func_003_5FBC                             ; $5ED1
 ._04 dw func_003_5FBF                             ; $5ED3
-._05 dw func_003_5FBF                             ; $5ED3
-._06 dw func_003_5FBF                             ; $5ED3
+._05 dw func_003_5FBF
+._06 dw func_003_5FBF
 
 func_003_5ED5::
     call GetEntityTransitionCountdown             ; $5ED5: $CD $05 $0C
@@ -3808,9 +3804,7 @@ func_003_5ED5::
 
 jr_003_5EFE:
     dec  a                                        ; $5EFE: $3D
-
-jr_003_5F01:
-    jp   HoldEntityAboveLink                      ; $5F01: $C3 $17 $5A
+    jp  HoldEntityAboveLink
 
 InstrumentMusicTable::
     db   MUSIC_INSTRUMENT_FULL_MOON_CELLO
@@ -3941,8 +3935,8 @@ func_003_5FBC:
     ld a, $02
     ldh [hLinkInteractiveMotionBlocked], a
 
-func_003_5FBF::
-    ret                                           ; $5FBF: $C9
+func_003_5FBF:
+    ret
 
 Data_003_5FC0::
     db   $80, $15
@@ -4034,7 +4028,7 @@ jr_003_6047:
 
 jr_003_604C:
     dec  a                                        ; $604C: $3D
-    jp   nz, HoldEntityAboveLink                          ; $604D: $20 $03
+    jp   nz, HoldEntityAboveLink
 
     jp   UnloadEntityAndReturn                    ; $604F: $C3 $8D $3F
 
@@ -4964,7 +4958,7 @@ label_003_65E2:
     call func_003_7F78                            ; $65E5: $CD $78 $7F
     call GetEntityTransitionCountdown             ; $65E8: $CD $05 $0C
     and  a                                        ; $65EB: $A7
-    jp   z, UnloadEntityAndReturn                    ; $65EF: $C3 $8D $3F
+    jp   z, UnloadEntityAndReturn
 
 label_003_65F2:
     ld   e, a                                     ; $65F2: $5F
@@ -5272,7 +5266,7 @@ jr_003_6828:
     and  a                                        ; $685A: $A7
     jr   z, jr_003_6865                           ; $685B: $28 $05
 
-    ld   de, Data_003_6751                        ; $685D: $11 $51 $67
+    ld   de, Data_003_6751
 
 jr_003_6865:
     push de                                       ; $6865: $D5
@@ -8790,10 +8784,12 @@ label_003_7C7B:
     cp   $26                                      ; $7C84: $FE $26
     jr   c, .hookshotClearEnd                     ; $7C86: $38 $03
     call UnloadEntity                             ; $7C88: $CD $8D $3F
+
     xor a
     ld [$c1c6], a
     jr hookshotEnd
 .hookshotClearEnd
+
     ld   hl, wEntitiesStateTable                  ; $7C8B: $21 $90 $C2
     add  hl, bc                                   ; $7C8E: $09
     ld   [hl], $01                                ; $7C8F: $36 $01
@@ -9011,8 +9007,7 @@ jr_003_7DC0:
     jp   c, label_003_7DCD                        ; $7DC2: $DA $CD $7D
 
     cp   $90                                      ; $7DC5: $FE $90
-    jp   c, jr_003_7E03                       ; $7DC7: $D2 $CD $7D
-
+    jp   c, jr_003_7E03
 
 label_003_7DCD:
     ldh  a, [hScratch3]                           ; $7DCD: $F0 $DA

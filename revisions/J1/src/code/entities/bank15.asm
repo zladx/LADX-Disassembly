@@ -2069,6 +2069,7 @@ func_015_50C2::
     cp $0b
     ret nz
 
+
     ld   a, MUSIC_FINAL_BOSS_DIALOG               ; $50C7: $3E $5D
     ld   [wMusicTrackToPlay], a                   ; $50C9: $EA $68 $D3
     ld   hl, wIndoorBRoomStatus + $74                                ; $50CC: $21 $74 $DA
@@ -4245,6 +4246,7 @@ jr_015_62AC:
     ld   hl, wEntitiesUnknowTableH                ; $6318: $21 $30 $C4
     add  hl, bc                                   ; $631B: $09
     ld   [hl], $D0                                ; $631C: $36 $D0
+
 jr_015_6324:
     ld   hl, wEntitiesHealthTable                 ; $631E: $21 $60 $C3
     add  hl, bc                                   ; $6321: $09

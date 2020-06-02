@@ -480,6 +480,7 @@ RoomTransitionPrepareHandler::
 
     xor  a                                        ; $7ACC: $AF
     ld   [$C1CF], a                               ; $7ACD: $EA $CF $C1
+
     ld   a, [wActivePowerUp]                      ; $7AD8: $FA $7C $D4
     and  a                                        ; $7ADB: $A7
     ldh  a, [hDefaultMusicTrack]                  ; $7ADC: $F0 $B0

@@ -275,7 +275,6 @@ jr_018_4230:
     ld   [$C3B2], a                               ; $424D: $EA $B2 $C3
     ret                                           ; $4250: $C9
 
-
 ; When you receive the Frog Song 'item'
 MamuAndFrogsGrantSongHandler::
     ld   a, [wDialogState]                        ; $4252: $FA $9F $C1
@@ -2658,9 +2657,10 @@ jr_018_53ED:
     jr   nz, jr_018_5466                          ; $5415: $20 $4F
 
 jr_018_5417:
- ld a, [$c3cf]
+    ld a, [$c3cf]
     and a
     jr nz, jr_018_5466
+
     ldh  a, [hPressedButtonsMask]                 ; $5417: $F0 $CB
     and  e                                        ; $5419: $A3
     jr   z, jr_018_5466                           ; $541A: $28 $4A
@@ -2720,14 +2720,14 @@ jr_018_5466:
     add  hl, bc                                   ; $546F: $09
     ld   [hl], $FD                                ; $5470: $36 $FD
     call func_018_7E62                            ; $5472: $CD $62 $7E
-jr_018_5479:
-    ldh a, [hActiveEntityVisualPosY]
-    cp $1a
-    ret c
-    xor a
-    ldh  [$FFBA], a                               ; $5477: $E0 $BA
 
-    ret                                           ; $5479: $C9
+jr_018_5479:
+    ldh  a, [hActiveEntityVisualPosY]
+    cp   $1a
+    ret  c
+    xor  a
+    ldh  [$ba], a
+    ret
 
 Data_018_547A::
     db   $44, $01, $44, $21, $74, $01, $74, $21

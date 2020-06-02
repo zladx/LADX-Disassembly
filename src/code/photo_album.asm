@@ -66,12 +66,16 @@ func_028_4033::
     ld   hl, $D1C8                              ; $4064: $21 $C8 $D1
     inc  [hl]                                   ; $4067: $34
     ld   a, [hl]                                ; $4068: $7E
+
+    ; for every eight frame, the next block of 40 bytes is used
+    ; c = 40 * (a/8)
     and  %00011000                              ; $4069: $E6 $18
     ld   c, a                                   ; $406B: $4F
     sla  a                                      ; $406C: $CB $27
     sla  a                                      ; $406E: $CB $27
     add  c                                      ; $4070: $81
     ld   c, a                                   ; $4071: $4F
+
     ld   hl, Data_028_4DD1                      ; $4072: $21 $D1 $4D
     add  hl, bc                                 ; $4075: $09
     ld   de, wOAMBuffer                         ; $4076: $11 $00 $C0

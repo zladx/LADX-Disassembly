@@ -177,7 +177,6 @@ func_005_7CD5::
     ld hl, wEntitiesHitboxFlagsTable              ; $7cfc: $21 $50 $c3
     add hl, bc                                    ; $7cff: $09
     ld [hl], $80                                  ; $7d00: $36 $80
-
     ld   a, $01                                   ; $7CE3: $3E $01
     jp   label_005_7D5F                           ; $7CE5: $C3 $5F $7D
 

@@ -66,12 +66,16 @@ func_028_4033::
     ld   hl, $D1C8                              ; $4064: $21 $C8 $D1
     inc  [hl]                                   ; $4067: $34
     ld   a, [hl]                                ; $4068: $7E
+
+    ; for every eight frame, the next block of 40 bytes is used
+    ; c = 40 * (a/8)
     and  %00011000                              ; $4069: $E6 $18
     ld   c, a                                   ; $406B: $4F
     sla  a                                      ; $406C: $CB $27
     sla  a                                      ; $406E: $CB $27
     add  c                                      ; $4070: $81
     ld   c, a                                   ; $4071: $4F
+
     ld   hl, Data_028_4DD1                      ; $4072: $21 $D1 $4D
     add  hl, bc                                 ; $4075: $09
     ld   de, wOAMBuffer                         ; $4076: $11 $00 $C0
@@ -761,34 +765,34 @@ func_028_44DB::
     ret                                         ; $44DF: $C9
 
 Data_028_44E0::
-    entity_pointer PhotoNiceLinkTiles
-    entity_pointer PhotoMarinCliffTiles
-    entity_pointer PhotoMarinWellTiles
-    entity_pointer PhotoMabeTiles
-    entity_pointer PhotoUlriraTiles
-    entity_pointer PhotoBowWowTiles
-    entity_pointer PhotoShopTiles
-    entity_pointer PhotoFishermanTiles
-    entity_pointer PhotoZoraTiles
-    entity_pointer PhotoKanaletTiles
-    entity_pointer PhotoGhostTiles
-    entity_pointer PhotoBridgeTiles
-    entity_pointer PhotoDizzyLinkTiles;
+    far_pointer PhotoNiceLinkTiles
+    far_pointer PhotoMarinCliffTiles
+    far_pointer PhotoMarinWellTiles
+    far_pointer PhotoMabeTiles
+    far_pointer PhotoUlriraTiles
+    far_pointer PhotoBowWowTiles
+    far_pointer PhotoShopTiles
+    far_pointer PhotoFishermanTiles
+    far_pointer PhotoZoraTiles
+    far_pointer PhotoKanaletTiles
+    far_pointer PhotoGhostTiles
+    far_pointer PhotoBridgeTiles
+    far_pointer PhotoDizzyLinkTiles;
 
 Data_028_4507::
-    entity_pointer Data_028_5820
-    entity_pointer Data_028_5AF0
-    entity_pointer Data_028_5DC0
-    entity_pointer Data_028_6090
-    entity_pointer Data_028_6360
-    entity_pointer Data_028_6630
-    entity_pointer Data_028_6900
-    entity_pointer Data_028_6BD0
-    entity_pointer Data_028_6EA0
-    entity_pointer Data_028_7170
-    entity_pointer Data_028_7440
-    entity_pointer Data_028_7710
-    entity_pointer Data_028_5550
+    far_pointer Data_028_5820
+    far_pointer Data_028_5AF0
+    far_pointer Data_028_5DC0
+    far_pointer Data_028_6090
+    far_pointer Data_028_6360
+    far_pointer Data_028_6630
+    far_pointer Data_028_6900
+    far_pointer Data_028_6BD0
+    far_pointer Data_028_6EA0
+    far_pointer Data_028_7170
+    far_pointer Data_028_7440
+    far_pointer Data_028_7710
+    far_pointer Data_028_5550
 
 Data_028_452E::
     db   $50, $38, $14, $00, $50, $40, $16, $00 ; $452E

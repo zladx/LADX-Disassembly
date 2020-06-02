@@ -93,13 +93,13 @@ HookshotChainSpeedY::
     db   $00, $00, $D0, $30
 
 FireHookshot::
-    ld   a, [$C144]                               ; $4254: $FA $46 $C1
-    and  a                                        ; $4257: $A7
-    ret nz
+    ld   a, [$c144]
+    and  a
+    ret  nz
 
- ld a, [$c146]
-    and a
-    ret nz
+    ld   a, [$c146]                               ; $4254: $FA $46 $C1
+    and  a                                        ; $4257: $A7
+    ret  nz
 
     ld   a, ENTITY_HOOKSHOT_CHAIN                 ; $425A: $3E $03
     call SpawnPlayerProjectile                    ; $425C: $CD $2F $14
@@ -130,8 +130,10 @@ FireHookshot::
     ld   hl, wEntitiesSpeedYTable                 ; $4281: $21 $50 $C2
     add  hl, de                                   ; $4284: $19
     ld   [hl], a                                  ; $4285: $77
-    ld a, [wLinkMotionState]
-    ld [$d463], a
+
+    ld   a, [wLinkMotionState]
+    ld   [$d463], a
+
 .return
     ret                                           ; $4286: $C9
 
@@ -1207,6 +1209,7 @@ LinkPlayingOcarinaHandler::
 
 jr_002_4a31:
     ld a, [wLinkPlayingOcarinaCountdown]
+
     ld   hl, hLinkInteractiveMotionBlocked        ; $4A1B: $21 $A1 $FF
     ld   [hl], $02                                ; $4A1E: $36 $02
     cp   $FF                                      ; $4A20: $FE $FF
@@ -2050,6 +2053,7 @@ LinkMotionSwimmingHandler::
     ld a, [wLinkPlayingOcarinaCountdown]
     and a
     jr z, jr_002_4f50
+
     xor a
     ld [wLinkPlayingOcarinaCountdown], a
     ld [wC167], a
@@ -4418,7 +4422,7 @@ func_002_60E0::
     jp   z, label_002_61E7                        ; $6119: $CA $E7 $61
 
     ld   a, [wWindowY]                            ; $611C: $FA $9A $DB
-    cp $00
+    cp $00                                    ; $611F: $A7
     jr   z, jr_002_613D                           ; $6120: $28 $1B
 
     ld   a, [$D464]                               ; $6122: $FA $64 $D4
@@ -5969,8 +5973,9 @@ CheckPositionForMapTransition::
     ld   [wIsUsingSpinAttack], a                  ; $6DF1: $EA $21 $C1
     ld   [wIsRunningWithPegasusBoots], a                               ; $6DF4: $EA $4A $C1
     ld   [$C188], a                               ; $6DF7: $EA $88 $C1
-   ld [$ddd6], a
+     ld [$ddd6], a
     ld [$ddd7], a
+
     ; If Link's Y position >= $88…
     ldh  a, [hLinkPositionY]                      ; $6DFA: $F0 $99
     cp   $88                                      ; $6DFC: $FE $88
@@ -6419,6 +6424,7 @@ jr_002_7085:
     ld a, [$c146]
     and a
     jr nz, label_002_70D8
+
     ld   d, $00                                   ; $7085: $16 $00
     ldh  a, [hLinkDirection]                      ; $7087: $F0 $9E
     cp   e                                        ; $7089: $BB
@@ -6929,11 +6935,10 @@ jr_002_734F:
     jp   label_002_7461                           ; $73A0: $C3 $61 $74
 
 Data_002_73A3::
-    db $24 ,$25 ,$33 ,$22
-    db   $23, $14, $26, $27
+    db   $24, $25, $33, $22, $23, $14, $26, $27
 
 Data_002_73A8::
-    db   $03,$03, $01, $02, $02, $00, $02, $02
+    db   $03, $03, $01, $02, $02, $00, $02, $02
 
 label_002_73AD:
     ld   e, $20                                   ; $73AD: $1E $20
@@ -6987,10 +6992,10 @@ jr_002_73EE:
     ld   a, e                                     ; $73EE: $7B
     cp   $06                                      ; $73EF: $FE $04
     jr   c, jr_002_742D                           ; $73F1: $38 $3A
-    ld a, [$c146]
-    and a
-    jr nz, collisionEnd
 
+        ld a, [$c146]
+            and a
+    jr nz, collisionEnd
 
     ld   hl, wBButtonSlot                         ; $73F3: $21 $00 $DB
 
@@ -7058,15 +7063,16 @@ interactiveBlock:
     ldh  a, [hMapRoom]                           ; $7449: $F0 $F6
     cp   $77                                      ; $744B: $FE $77
     jr   nz, collisionEnd                         ; $744D: $20 $05
-    ld hl, wFarcallBank
-    ld a, $20
-    ld [hl+], a
-    ld a, $49
-    ld [hl+], a
-    ld a, $85
-    ld [hl+], a
-    ld a, $02
-    ld [hl], a
+
+    ld   hl, wFarcallParams
+    ld   a, BANK(CheckPushedTombStone)
+    ld   [hl+], a
+    ld   a, HIGH(CheckPushedTombStone)
+    ld   [hl+], a
+    ld   a, LOW(CheckPushedTombStone)
+    ld   [hl+], a
+    ld   a, BANK(@)
+    ld   [hl], a
     call Farcall
 
 collisionEnd::
@@ -7558,7 +7564,7 @@ jr_002_7732:
     call ClearLinkPositionIncrement               ; $773A: $CD $8E $17
     ldh  a, [hLinkDirection]                      ; $773D: $F0 $9E
     ld   e, a                                     ; $773F: $5F
-    ld   d, $00                                     ; $7740: $50
+    ld   d,  $00
     ld   hl, Data_002_750A                        ; $7741: $21 $0A $75
     add  hl, de                                   ; $7744: $19
     ld   a, [hl]                                  ; $7745: $7E
@@ -7586,21 +7592,25 @@ jr_002_7750:
     ld   [hl+], a                                 ; $7762: $22
     ld   a, $1C                                   ; $7763: $3E $1C
     ld   [hl+], a                                 ; $7765: $22
-        ldh a, [hIsGBC]
-    and a
-    jr z, jr_002_77bb
 
-    ldh a, [hFrameCounter]
-    and $04
-    srl a
-    add $03
-    jr jr_002_77c1
-jr_002_77bb:
+    ldh  a, [hIsGBC]
+    and  a
+    jr   z, .notGBC
+
+.gbc
+    ldh  a, [hFrameCounter]
+    and  $04
+    srl  a
+    add  $03
+    jr   .anyGB
+
+.notGBC
     ldh  a, [hFrameCounter]                       ; $7766: $F0 $E7
     rla                                           ; $7768: $17
     rla                                           ; $7769: $17
     and  $10                                      ; $776A: $E6 $10
-jr_002_77c1:
+
+.anyGB
     push af                                       ; $776C: $F5
     ld   [hl+], a                                 ; $776D: $22
     ldh  a, [hLinkPositionY]                      ; $776E: $F0 $99
@@ -7628,9 +7638,9 @@ jr_002_77c1:
     and  a                                        ; $7793: $A7
     jr   nz, jr_002_779A                          ; $7794: $20 $04
 
-    ldh a, [hLinkAnimationState]
-    cp $6c
-    jr z, jr_002_779A
+    ldh  a, [hLinkAnimationState]
+    cp   $6c
+    jr   z, jr_002_779A
 
     ld   a, JINGLE_WATER_DIVE                     ; $7796: $3E $0E
     ldh  [hJingle], a                             ; $7798: $E0 $F2

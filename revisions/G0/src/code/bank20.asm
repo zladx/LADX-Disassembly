@@ -1075,13 +1075,14 @@ func_020_4B81::
 
     xor  a                                        ; $4B8E: $AF
     ld   [wBombArrowCooldown], a                  ; $4B8F: $EA $C0 $C1
-    ld a, [wAButtonSlot]
-    cp $05
-    ret nz
 
-    ld a, [wBButtonSlot]
-    cp $05
-    ret nz
+    ld   a, [wAButtonSlot]
+    cp   INVENTORY_BOW
+    ret  nz
+
+    ld   a, [wBButtonSlot]
+    cp   INVENTORY_BOW
+    ret  nz
 
     ld   a, [$C1C2]                               ; $4B92: $FA $C2 $C1
     ld   c, a                                     ; $4B95: $4F
@@ -6132,8 +6133,8 @@ LoadTileset23::
     ld   b, HIGH(PhotoElementsTiles + $900)       ; $7DF3: $06 $69
     ld   a, BANK(PhotoElementsTiles)              ; $7DF5: $3E $38
     ld   h, BANK(@)                               ; $7DF7: $26 $20
-    call Copy100BytesFromBankAtA                  ; $7DF9: $CD $13 $0A00
-    ret                                           ; $7e0d: $c9
+    call Copy100BytesFromBankAtA                  ; $7DF9: $CD $13 $0A
+    ret                                           ; $7E07: $C9
 
 func_020_7E0E:
     ld a, $06                                     ; $7e0e: $3e $06

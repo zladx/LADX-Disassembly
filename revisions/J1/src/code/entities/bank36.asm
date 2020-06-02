@@ -2520,11 +2520,10 @@ func_036_4F4E::
 func_036_4F68::
     ld   a, [wCurrentBank]                        ; $4F68: $FA $AF $DB
     push af                                       ; $4F6B: $F5
-    ld a, $09                                     ; $4f6c: $3e $09
-    ld hl, wEntitiesHealthGroup                   ; $4f6e: $21 $d0 $c4
-    add hl, bc                                    ; $4f71: $09
-    ld [hl], a                                    ; $4f72: $77
-
+    ld a, $09
+    ld hl, wEntitiesHealthGroup
+    add hl, bc
+    ld [hl], a
     ld   a, $36                                   ; $4F6C: $3E $36
     ld   [wCurrentBank], a                        ; $4F6E: $EA $AF $DB
     ld   hl, wEntitiesPrivateState2Table          ; $4F71: $21 $C0 $C2
@@ -2677,6 +2676,7 @@ jr_036_505D:
 jr_036_505E:
     ret                                           ; $505E: $C9
 
+; @TODO Big Fairy in the Color Dungeon
 func_036_505F::
     ld   hl, Data_020_69E0                        ; $505F: $21 $E0 $69
     ldh  a, [hFrameCounter]                       ; $5062: $F0 $E7
@@ -4633,16 +4633,15 @@ func_036_5CBD::
     and  a                                        ; $5CC5: $A7
     ret  z                                        ; $5CC6: $C8
 
-      call func_036_6B8A
+    call func_036_6B8A
     ld d, $20
     cp d
-    jr nc, jr_036_5cf0
+    jr nc, jr_036_5cf4
 
     call func_036_6B9A
     ld d, $20
     cp d
-    jr nc, jr_036_5cf0
-
+    jr nc, jr_036_5cf4
 
     ld   a, $10                                   ; $5CC7: $3E $10
     ld   [$C13E], a                               ; $5CC9: $EA $3E $C1
@@ -4652,7 +4651,7 @@ func_036_5CBD::
     ldh  [hLinkPositionYIncrement], a             ; $5CD3: $E0 $9B
     ldh  a, [hScratch1]                           ; $5CD5: $F0 $D8
     ldh  [hLinkPositionXIncrement], a             ; $5CD7: $E0 $9A
-jr_036_5cf0:
+jr_036_5cf4:
     ld   a, $30                                   ; $5CD9: $3E $30
     call func_036_6C83                            ; $5CDB: $CD $83 $6C
     ld   hl, wEntitiesPrivateState2Table          ; $5CDE: $21 $C0 $C2
@@ -6077,6 +6076,7 @@ ColorGhoulCommonStateHandler::
 jr_036_6504:
     ret                                           ; $6504: $C9
 
+; @FIXME Data disassembled as code
     ld   d, c                                     ; $6505: $51
     ld   d, b                                     ; $6506: $50
     ld   d, d                                     ; $6507: $52
@@ -7976,7 +7976,6 @@ func_036_70D6::
 
     xor a
     ld [$dc52], a
-
     ldh  a, [hIsGBC]                              ; $70DF: $F0 $FE
     and  a                                        ; $70E1: $A7
     ret  z                                        ; $70E2: $C8
@@ -8287,51 +8286,51 @@ EntityInitGenie::
     ld   [hl], a                                  ; $72B8: $77
     ret                                           ; $72B9: $C9
 
-newfunc_036_72BA::
-    ldh a, [hActiveEntityState]                   ; $72d5: $f0 $f0
-    sub $02                                       ; $72d7: $d6 $02
-    rst $00                                       ; $72d9: $c7
-    db $e4                                        ; $72da: $e4
-    ld [hl], d                                    ; $72db: $72
-    db $e4                                        ; $72dc: $e4
-    ld [hl], d                                    ; $72dd: $72
-    db $eb                                        ; $72de: $eb
-    ld [hl], d                                    ; $72df: $72
-    di                                            ; $72e0: $f3
-    ld [hl], d                                    ; $72e1: $72
-    ld a, [bc]                                    ; $72e2: $0a
-    ld [hl], e                                    ; $72e3: $73
-    ld a, [$dc52]                                 ; $72e4: $fa $52 $dc
-    inc a                                         ; $72e7: $3c
-    ret nz                                        ; $72e8: $c0
+newfunc_036_72BA:
+    ldh a, [hActiveEntityState]
+    sub $02
+    rst $00
+    db $e4
+    ld [hl], d
+    db $e4
+    ld [hl], d
+    db $eb
+    ld [hl], d
+    di
+    ld [hl], d
+    ld a, [bc]
+    ld [hl], e
+    ld a, [$dc52]
+    inc a
+    ret nz
 
-    jr jr_036_7307                                ; $72e9: $18 $1c
+    jr jr_036_7307
 
-    ld a, [wDialogState]                          ; $72eb: $fa $9f $c1
-    and a                                         ; $72ee: $a7
-    jr z, jr_036_730a                             ; $72ef: $28 $19
+    ld a, [wDialogState]
+    and a
+    jr z, jr_036_730a
 
-    jr jr_036_7307                                ; $72f1: $18 $14
+    jr jr_036_7307
 
-    ld a, [wDialogState]                          ; $72f3: $fa $9f $c1
-    and a                                         ; $72f6: $a7
-    jr nz, jr_036_730a                            ; $72f7: $20 $11
+    ld a, [wDialogState]
+    and a
+    jr nz, jr_036_730a
 
-    ld hl, $dc64                                  ; $72f9: $21 $64 $dc
-    ld a, $ff                                     ; $72fc: $3e $ff
-    ld [hl+], a                                   ; $72fe: $22
-    ld a, $7f                                     ; $72ff: $3e $7f
-    ld [hl], a                                    ; $7301: $77
-    ld a, $02                                     ; $7302: $3e $02
-    ld [wPaletteDataFlags], a                     ; $7304: $ea $d1 $dd
+    ld hl, $dc64
+    ld a, $ff
+    ld [hl+], a
+    ld a, $7f
+    ld [hl], a
+    ld a, $02
+    ld [wPaletteDataFlags], a
 
 jr_036_7307:
-    call IncrementEntityState                     ; $7307: $cd $0e $3b
+    call IncrementEntityState
 
 jr_036_730a:
-    ld a, $04                                     ; $730a: $3e $04
-    ld [wInvincibilityCounter], a                 ; $730c: $ea $c7 $db
-    ret                                           ; $730f: $c9
+    ld a, $04
+    ld [wInvincibilityCounter], a
+    ret
 
 ; On Overworld, copy some palette data to OAM buffer
 func_036_72BA::

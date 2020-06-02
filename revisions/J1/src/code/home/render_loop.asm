@@ -25,7 +25,7 @@ RenderLoop::
     ld   a, [wGameplayType]
     cp   GAMEPLAY_WORLD
     jr   nz, .noSpecialCase
-    ld a, $00
+    ld   a, $00
     jr   .setScrollY
 .noSpecialCase
 

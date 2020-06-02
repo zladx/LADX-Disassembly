@@ -5705,7 +5705,6 @@ Data_007_64F6:
     db   $9A, $00, $53, $00
     db   $9A, $20, $53, $00
 
-
 label_007_6523:
     xor  a                                        ; $6523: $AF
     ldh  [hBaseScrollX], a                        ; $6524: $E0 $96
@@ -5788,7 +5787,7 @@ jr_007_6596:
     add  hl, bc                                   ; $659A: $09
     inc  [hl]                                     ; $659B: $34
     ld a, [hl]
-      cp $09
+    cp $09
     ret nz
 
     ldh a, [hIsGBC]
@@ -5805,9 +5804,8 @@ jr_007_6596:
     ld a, $01
     ld [wPaletteUnknownD], a
     ld a, $82
-
     ld [wPaletteDataFlags], a
-    ret
+    ret                                           ; $659C: $C9
 
 jr_007_659D:
     call GetEntityTransitionCountdown             ; $659D: $CD $05 $0C

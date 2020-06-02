@@ -2672,6 +2672,7 @@ jr_036_505D:
 jr_036_505E:
     ret                                           ; $505E: $C9
 
+; @TODO Big Fairy in the Color Dungeon
 func_036_505F::
     ld   hl, Data_020_69E0                        ; $505F: $21 $E0 $69
     ldh  a, [hFrameCounter]                       ; $5062: $F0 $E7
@@ -6060,6 +6061,7 @@ ColorGhoulCommonStateHandler::
 jr_036_6504:
     ret                                           ; $6504: $C9
 
+; @FIXME Data disassembled as code
     ld   d, c                                     ; $6505: $51
     ld   d, b                                     ; $6506: $50
     ld   d, d                                     ; $6507: $52

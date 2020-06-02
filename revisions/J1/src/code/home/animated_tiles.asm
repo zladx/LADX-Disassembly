@@ -338,7 +338,7 @@ label_1CB8::
     jp   LoadAnimatedTilesFrame.de
 
 AnimateWarpTilesGroup::
-    ld   a, $0c
+    ld   a, BANK(AnimatedTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   h, HIGH(AnimatedTiles) + $6

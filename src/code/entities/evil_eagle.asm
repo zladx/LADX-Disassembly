@@ -1,14 +1,12 @@
-Data_005_59DE::
-    db   $07, $00, $0F, $07, $1E, $0F, $3F, $18, $3F, $10, $3F, $14, $3F, $10, $27, $1B
-
-Data_005_59EE::
-    db   $E0, $00, $F0, $E0, $18, $F0, $8C, $78, $8C, $70, $3F, $C0, $FF, $3E, $EF, $F1
+Data_005_59DE:
+IF __PATCH_0__
+incbin "gfx/characters/evil_eagle/rider_v1.2bpp"
+ELSE
+incbin "gfx/characters/evil_eagle/rider_v0.2bpp"
+ENDC
 
 Data_005_59FE::
-    db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $03, $00, $07, $03
-
-Data_005_5A0E::
-    db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $3F, $00, $FF, $3E, $EF, $F1
+incbin "gfx/characters/evil_eagle/rider_hidden.2bpp"
 
 EntityInitEvilEagle::
     ld   hl, wEntitiesUnknowTableH                ; $5A1E: $21 $30 $C4
@@ -34,7 +32,11 @@ jr_005_5A29:
 
     ld   a, $05                                   ; $5A3A: $3E $05
     call SwitchBank                               ; $5A3C: $CD $0C $08
+IF __PATCH_0__
+    call func_005_5B09
+ELSE
     call func_005_5B03                            ; $5A3F: $CD $03 $5B
+ENDC
     ld   hl, wEntitiesStateTable                  ; $5A42: $21 $90 $C2
     add  hl, de                                   ; $5A45: $19
     ld   [hl], $07                                ; $5A46: $36 $07
@@ -138,6 +140,9 @@ func_005_5ADB::
     call func_005_7A3A                            ; $5ADE: $CD $3A $7A
     ld   a, $02                                   ; $5AE1: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5AE3: $E0 $A1
+IF __PATCH_0__
+    ld   [wC167], a
+ENDC
     call GetEntityTransitionCountdown             ; $5AE5: $CD $05 $0C
     and  a                                        ; $5AE8: $A7
     jr   z, jr_005_5AFE                           ; $5AE9: $28 $13
@@ -155,7 +160,26 @@ func_005_5ADB::
     ret                                           ; $5AFD: $C9
 
 jr_005_5AFE:
+IF __PATCH_0__
+    xor  a
+    ld   [$de0b], a
+ENDC
     ld   a, MUSIC_EAGLES_TOWER_BOSS_CUTSCENE      ; $5AFE: $3E $54
+IF __PATCH_0__
+    jr   jr_005_5b15
+ENDC
+
+func_005_5B09:
+IF __PATCH_0__
+    ld   a, [$de0b]
+    and  a
+    jr   z, func_005_5B03
+    xor  a
+    ld   [$de0b], a
+    ld   a, MUSIC_BOSS_BATTLE
+ENDC
+
+jr_005_5b15:
     ld   [wMusicTrackToPlay], a                   ; $5B00: $EA $68 $D3
 
 func_005_5B03::
@@ -202,6 +226,12 @@ func_005_5B4B::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5B4B: $21 $40 $C3
     add  hl, bc                                   ; $5B4E: $09
     ld   [hl], $C2                                ; $5B4F: $36 $C2
+
+IF __PATCH_0__
+    xor  a
+    ld   [wC167], a
+ENDC
+
     ret                                           ; $5B51: $C9
 
 Data_005_5B52::

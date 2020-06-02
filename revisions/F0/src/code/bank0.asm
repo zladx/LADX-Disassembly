@@ -7227,7 +7227,7 @@ label_3F93::
     ld   de, vTiles0 + $460
     ld   bc, $10
     call CopyData
-    ld   hl, Data_005_59EE
+    ld   hl, Data_005_59DE + TILE_SIZE
     jr   label_3FBD
 
 label_3FA9::
@@ -7237,7 +7237,7 @@ label_3FA9::
     ld   de, vTiles0 + $460
     ld   bc, $10
     call CopyData
-    ld   hl, Data_005_5A0E
+    ld   hl, Data_005_59FE + TILE_SIZE
 
 label_3FBD::
     ld   de, vTiles0 + $480

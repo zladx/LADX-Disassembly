@@ -201,12 +201,20 @@ jr_006_4A37:
     cp   [hl]                                     ; $4A4C: $BE
     jr   nz, jr_006_4A62                          ; $4A4D: $20 $13
 
+IF __PATCH_0__
+    ld   hl, hJingle
+    ld   [hl], JINGLE_PUZZLE_SOLVED
+ENDC
+
     ld   e, $FF                                   ; $4A4F: $1E $FF
     cp   $02                                      ; $4A51: $FE $02
     jr   nc, jr_006_4A62                          ; $4A53: $30 $0D
 
+IF !__PATCH_0__
     ld   hl, hJingle                              ; $4A55: $21 $F2 $FF
     ld   [hl], JINGLE_PUZZLE_SOLVED               ; $4A58: $36 $02
+ENDC
+
     ld   e, $2D                                   ; $4A5A: $1E $2D
     cp   $01                                      ; $4A5C: $FE $01
     jr   nz, jr_006_4A62                          ; $4A5E: $20 $02

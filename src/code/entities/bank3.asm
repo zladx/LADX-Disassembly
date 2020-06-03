@@ -3,6 +3,13 @@
 ; https://github.com/mattcurrie/mgbdis
 
 ; Array of wEntitiesUnknowTableH, indexed by entity index
+
+IF __PATCH_0__
+ENTITY_4A_VAL = $02
+ELSE
+ENTITY_4A_VAL = $42
+ENDC
+
 Data_003_42F1::
     db   $12, $12, $0A, $12, $12, $0A, $02, $02   ; $42F1
     db   $02, $08, $12, $08, $12, $08, $00, $40   ; $42F9
@@ -13,7 +20,7 @@ Data_003_42F1::
     db   $0A, $0A, $0A, $0A, $0A, $0A, $08, $0A   ; $4321
     db   $0A, $08, $0A, $0A, $1B, $1A, $02, $02   ; $4329
     db   $02, $02, $02, $02, $02, $42, $02, $02   ; $4331
-    db   $02, $02, $42, $02, $12, $00, $02, $02   ; $4339
+    db   $02, $02, ENTITY_4A_VAL, $02, $12, $00, $02, $02   ; $4339
     db   $30, $08, $02, $02, $02, $08, $08, $08   ; $4341
     db   $12, $D0, $90, $90, $D0, $90, $D4, $84   ; $4349
     db   $D4, $02, $D0, $90, $02, $80, $02, $42   ; $4351
@@ -227,8 +234,13 @@ EntityInitHandler::
     ; If the room status is $30, don't load the entity.
     ldh  a, [hRoomStatus]                         ; $48BE: $F0 $F8
     and  $30                                      ; $48C0: $E6 $30
+IF __PATCH_0__
+    jp   nz, UnloadEntityAndReturn
+ELSE
     jr   z, .roomStatusEnd                        ; $48C2: $28 $03
     jp   UnloadEntityAndReturn                    ; $48C4: $C3 $8D $3F
+ENDC
+
 .roomStatusEnd
 
     ;
@@ -887,9 +899,14 @@ jr_003_4C15:
 EntityInitColorDungeonBook::
     ld   hl, wEntitiesPosYTable                   ; $4C1F: $21 $10 $C2
     add  hl, bc                                   ; $4C22: $09
+IF __PATCH_0__
+    inc  [hl]
+    inc  [hl]
+ELSE
     ld   a, [hl]                                  ; $4C23: $7E
     add  $02                                      ; $4C24: $C6 $02
     ld   [hl], a                                  ; $4C26: $77
+ENDC
     ld   hl, wEntitiesPosZTable                   ; $4C27: $21 $10 $C3
     add  hl, bc                                   ; $4C2A: $09
     ld   [hl], $04                                ; $4C2B: $36 $04
@@ -943,8 +960,12 @@ EntityDestructionHandler::
     call func_003_7F7E                            ; $4C6A: $CD $7E $7F
     call func_003_7FA9                            ; $4C6D: $CD $A9 $7F
     call func_003_60B3                            ; $4C70: $CD $B3 $60
+IF __PATCH_0__
+    jp   ClearEntitySpeed
+ELSE
     call ClearEntitySpeed                         ; $4C73: $CD $7F $3D
     ret                                           ; $4C76: $C9
+ENDC
 
 .destructionEnd
     ; If destroying a Gibdo…
@@ -1167,9 +1188,14 @@ EntityThrownHandler::
     ld   [hl], WAVE_SFX_BOSS_GRAWL                ; $4DC5: $36 $07
     ld   hl, wEntitiesUnknowTableP                ; $4DC7: $21 $40 $C4
     add  hl, bc                                   ; $4DCA: $09
+IF __PATCH_0__
+    inc  [hl]
+    ld   a, [hl]
+ELSE
     ld   a, [hl]                                  ; $4DCB: $7E
     inc  a                                        ; $4DCC: $3C
     ld   [hl], a                                  ; $4DCD: $77
+ENDC
     cp   $03                                      ; $4DCE: $FE $03
     jr   z, .genie2                               ; $4DD0: $28 $1D
 .genieEnd
@@ -1433,6 +1459,12 @@ jr_003_4F44:
     cp   $7A                                      ; $4F44: $FE $7A
     jr   nz, jr_003_4F54                          ; $4F46: $20 $0C
 
+IF __PATCH_0__
+    ld   a, [wHasBirdKey]
+    and  a
+    jp   nz, UnloadEntityAndReturn
+ENDC
+
     ldh  a, [hRoomStatus]                         ; $4F48: $F0 $F8
     and  $10                                      ; $4F4A: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $4F4C: $C2 $8D $3F
@@ -1671,9 +1703,13 @@ jr_003_50AC:
     jp   nc, MarkRoomCompleted                   ; $50AF: $D2 $2A $51
 
     cp   CHEST_SEASHELL                           ; $50B2: $FE $20
+IF __PATCH_3__
+    jp   z, label_003_636D                          ; $50B4: $20 $03
+ELSE
     jr   nz, jr_003_50B9                          ; $50B4: $20 $03
 
     jp   label_003_636D                           ; $50B6: $C3 $6D $63
+ENDC
 
 jr_003_50B9:
     cp   CHEST_RUPEES_50                          ; $50B9: $FE $1B
@@ -1836,9 +1872,12 @@ EntityInitPushedBlock::
     add  hl, bc                                   ; $5190: $09
     ld   a, [hl]                                  ; $5191: $7E
     and  a                                        ; $5192: $A7
+IF __PATCH_0__
+    jp   nz, UnloadEntityAndReturn
+ELSE
     jr   z, jr_003_5198                           ; $5193: $28 $03
-
     jp   UnloadEntityAndReturn                    ; $5195: $C3 $8D $3F
+ENDC
 
 jr_003_5198:
     ld   a, NOISE_SFX_BLOCK_RUMBLE                ; $5198: $3E $11
@@ -2020,17 +2059,24 @@ Data_003_53A0::
     db   $F0, $16, $F2, $16, $F4, $16, $F6, $16
 
 jp_003_53A8::
+IF __PATCH_3__
+    ld   de, Data_003_5398
+    ld   a, [wIsIndoor]
+    and  a
+    jr   z, .render
+    ld   de, Data_003_53A0
+ELSE
     ld   a, [wIsIndoor]                           ; $53A8: $FA $A5 $DB
     and  a                                        ; $53AB: $A7
-    jr   z, jr_003_53B3                           ; $53AC: $28 $05
-
+    jr   z, .isNotIndoor                          ; $53AC: $28 $05
     ld   de, Data_003_53A0                        ; $53AE: $11 $A0 $53
-    jr   jr_003_53B6                              ; $53B1: $18 $03
+    jr   .render                                  ; $53B1: $18 $03
 
-jr_003_53B3:
+.isNotIndoor
     ld   de, Data_003_5398                        ; $53B3: $11 $98 $53
+ENDC
 
-jr_003_53B6:
+.render
     call RenderActiveEntitySpritesPair            ; $53B6: $CD $C0 $3B
     call func_003_7F78                            ; $53B9: $CD $78 $7F
     ld   a, $0B                                   ; $53BC: $3E $0B
@@ -2077,9 +2123,14 @@ jr_003_53F9:
     ld   [hl], e                                  ; $53FD: $73
     ld   hl, wEntitiesPhysicsFlagsTable           ; $53FE: $21 $40 $C3
     add  hl, bc                                   ; $5401: $09
+IF __PATCH_0__
+    inc  [hl]
+    inc  [hl]
+ELSE
     ld   a, [hl]                                  ; $5402: $7E
     add  $02                                      ; $5403: $C6 $02
     ld   [hl], a                                  ; $5405: $77
+ENDC
 
 jr_003_5406:
     ret                                           ; $5406: $C9
@@ -2193,9 +2244,13 @@ EntityDeathHandler::
     add  hl, bc                                   ; $551B: $09
     ld   a, [hl]                                  ; $551C: $7E
     and  $80                                      ; $551D: $E6 $80
+IF __PATCH_0__
+    jp   nz, ExecuteActiveEntityHandler
+ELSE
     jr   z, .dying                                ; $551F: $28 $03
 
     jp   ExecuteActiveEntityHandler               ; $5521: $C3 $8D $3A
+ENDC
 
 .dying
     ld   hl, wEntitiesUnknowTableV                ; $5524: $21 $80 $C4
@@ -2968,7 +3023,9 @@ SpawnOctorockRock::
     and  a                                        ; $59D5: $A7
 
 jr_003_59D6:
+IF !__PATCH_0__
     ret                                           ; $59D6: $C9
+ENDC
 
 EntityInitBrokenHeartContainer::
     ret                                           ; $59D7: $C9
@@ -3387,15 +3444,21 @@ label_003_5C49:
 
 jr_003_5C67:
     dec  a                                        ; $5C67: $3D
+IF __PATCH_3__
+    jp   nz, HoldEntityAboveLink
+ELSE
     jr   nz, jr_003_5C75                          ; $5C68: $20 $0B
+ENDC
 
     ld   d, INVENTORY_HOOKSHOT                    ; $5C6A: $16 $06
     call GiveInventoryItem                        ; $5C6C: $CD $72 $64
     call MarkRoomCompleted                        ; $5C6F: $CD $2A $51
     jp   UnloadEntityAndReturn                    ; $5C72: $C3 $8D $3F
 
+IF !__PATCH_3__
 jr_003_5C75:
     jp   HoldEntityAboveLink                      ; $5C75: $C3 $17 $5A
+ENDC
 
 KeyDropSpriteTable:
     db   $CA, $17
@@ -3454,12 +3517,17 @@ jr_003_5C99:
 
 jr_003_5CCD:
     dec  a                                        ; $5CCD: $3D
+IF __PATCH_3__
+    jp   nz, HoldEntityAboveLink
+    jp   UnloadEntityAndReturn
+ELSE
     jr   nz, jr_003_5CD3                          ; $5CCE: $20 $03
 
     jp   UnloadEntityAndReturn                    ; $5CD0: $C3 $8D $3F
 
 jr_003_5CD3:
     jp   HoldEntityAboveLink                      ; $5CD3: $C3 $17 $5A
+ENDC
 
 label_003_5CD6:
     call func_003_7F78                            ; $5CD6: $CD $78 $7F
@@ -3561,7 +3629,11 @@ SleepyToadstoolEntityHandler::
 
 jr_003_5D6C:
     dec  a                                        ; $5D6C: $3D
+IF __PATCH_3__
+    jp   nz, HoldEntityAboveLink
+ELSE
     jr   nz, jr_003_5D80                          ; $5D6D: $20 $11
+ENDC
 
     ld   a, $0A                                   ; $5D6F: $3E $0A
     ldh  [hFFA5], a                               ; $5D71: $E0 $A5
@@ -3571,8 +3643,10 @@ jr_003_5D6C:
     ld   [wHasToadstool], a                       ; $5D7A: $EA $4B $DB
     jp   UnloadEntityAndReturn                    ; $5D7D: $C3 $8D $3F
 
+IF !__PATCH_3__
 jr_003_5D80:
     jp   HoldEntityAboveLink                      ; $5D80: $C3 $17 $5A
+ENDC
 
 Data_003_5D83::
     db   $70, $01, $72, $01, $74, $01, $76, $01, $78, $01, $7A, $01, $7C, $01, $7E, $01
@@ -3633,7 +3707,9 @@ AfterSirensInstrumentD1::
 AfterSirensInstrumentD2::
     ld   a, $02                                   ; $5E12: $3E $02
     ld   [$DB48], a                               ; $5E14: $EA $48 $DB
+IF !__PATCH_0__
     ret                                           ; $5E17: $C9
+ENDC
 
 AfterSirensInstrumentD3::
     ret                                           ; $5E18: $C9
@@ -3768,6 +3844,10 @@ jr_003_5EAE:
 ._02 dw func_003_5F33                             ; $5ECF
 ._03 dw func_003_5FBC                             ; $5ED1
 ._04 dw func_003_5FBF                             ; $5ED3
+IF __PATCH_3__
+._05 dw func_003_5FBF
+._06 dw func_003_5FBF
+ENDC
 
 func_003_5ED5::
     call GetEntityTransitionCountdown             ; $5ED5: $CD $05 $0C
@@ -3778,6 +3858,12 @@ func_003_5ED5::
 
     dec  [hl]                                     ; $5EDF: $35
     call IncrementEntityState                     ; $5EE0: $CD $12 $3B
+
+IF __PATCH_0__
+    xor  a
+    ld   [wActivePowerUp], a
+ENDC
+
     ldh  a, [hMapId]                              ; $5EE3: $F0 $F7
     add  $00                                      ; $5EE5: $C6 $00 (???)
     call OpenDialogInTable1                       ; $5EE7: $CD $73 $23
@@ -3797,10 +3883,14 @@ func_003_5ED5::
 
 jr_003_5EFE:
     dec  a                                        ; $5EFE: $3D
+IF __PATCH_0__
+    jp   HoldEntityAboveLink
+ELSE
     jr   nz, jr_003_5F01                          ; $5EFF: $20 $00
 
 jr_003_5F01:
     jp   HoldEntityAboveLink                      ; $5F01: $C3 $17 $5A
+ENDC
 
 InstrumentMusicTable::
     db   MUSIC_INSTRUMENT_FULL_MOON_CELLO
@@ -3922,10 +4012,22 @@ jr_003_5F5F:
     pop  bc                                       ; $5FB8: $C1
 
 jr_003_5FB9:
+IF !__PATCH_0__
     jp   HoldEntityAboveLink                      ; $5FB9: $C3 $17 $5A
+ENDC
 
 func_003_5FBC::
+IF __PATCH_0__
+    ld   a, [$dc52]
+    inc  a
+    jp   nz, HoldEntityAboveLink
+    ld   a, $80
+    ldh  [hLinkPositionZ], a
+    ld   a, $02
+    ldh  [hLinkInteractiveMotionBlocked], a
+ELSE
     jp   HoldEntityAboveLink                      ; $5FBC: $C3 $17 $5A
+ENDC
 
 func_003_5FBF::
     ret                                           ; $5FBF: $C9
@@ -4020,12 +4122,17 @@ jr_003_6047:
 
 jr_003_604C:
     dec  a                                        ; $604C: $3D
+IF __PATCH_3__
+    jp   nz, HoldEntityAboveLink
+    jp   UnloadEntityAndReturn
+ELSE
     jr   nz, jr_003_6052                          ; $604D: $20 $03
 
     jp   UnloadEntityAndReturn                    ; $604F: $C3 $8D $3F
 
 jr_003_6052:
     jp   HoldEntityAboveLink                      ; $6052: $C3 $17 $5A
+ENDC
 
 Data_003_6055::
     db   $8E, $16
@@ -4953,9 +5060,13 @@ label_003_65E2:
     call func_003_7F78                            ; $65E5: $CD $78 $7F
     call GetEntityTransitionCountdown             ; $65E8: $CD $05 $0C
     and  a                                        ; $65EB: $A7
+IF __PATCH_0__
+    jp   z, UnloadEntityAndReturn
+ELSE
     jp   nz, label_003_65F2                       ; $65EC: $C2 $F2 $65
 
     jp   UnloadEntityAndReturn                    ; $65EF: $C3 $8D $3F
+ENDC
 
 label_003_65F2:
     ld   e, a                                     ; $65F2: $5F
@@ -5258,15 +5369,22 @@ jr_003_6828:
     ld   [$DDD8], a                               ; $6850: $EA $D8 $DD
     ld   a, $83                                   ; $6853: $3E $83
     call func_2BF                                 ; $6855: $CD $2F $0B
+IF __PATCH_3__
+    ld   de, Data_003_674D
+    ldh  a, [hIsGBC]
+    and  a
+    jr   z, jr_003_6865
+    ld   de, Data_003_6751
+ELSE
     ldh  a, [hIsGBC]                              ; $6858: $F0 $FE
     and  a                                        ; $685A: $A7
-    jr   z, jr_003_6862                           ; $685B: $28 $05
+    jr   z, .isNotGBC                             ; $685B: $28 $05
 
     ld   de, Data_003_6751                        ; $685D: $11 $51 $67
     jr   jr_003_6865                              ; $6860: $18 $03
-
-jr_003_6862:
+.isNotGBC
     ld   de, Data_003_674D                        ; $6862: $11 $4D $67
+ENDC
 
 jr_003_6865:
     push de                                       ; $6865: $D5
@@ -5673,8 +5791,12 @@ Data_003_6B48::
 
 func_003_6B48:
     cp   $01                                      ; $6B4C: $FE $01
+IF __PATCH_3__
+    jp   z, UnloadEntityAndReturn
+ELSE
     jr   nz, jr_003_6B53                          ; $6B4E: $20 $03
     jp   UnloadEntityAndReturn                    ; $6B50: $C3 $8D $3F
+ENDC
 
 jr_003_6B53:
     ldh  a, [hActiveEntityType]                   ; $6B53: $F0 $EB
@@ -6669,7 +6791,11 @@ FinalNightmareForm6Collisions::
 
     ldh  a, [hFFE8]                               ; $7081: $F0 $E8
     and  a                                        ; $7083: $A7
+IF __PATCH_3__
+    jp   nz, func_003_6DDF
+ELSE
     jr   nz, jr_003_70A9                          ; $7084: $20 $23
+ENDC
 
     ld   hl, wEntitiesPrivateState1Table          ; $7086: $21 $B0 $C2
     add  hl, bc                                   ; $7089: $09
@@ -6694,8 +6820,10 @@ label_003_709D:
     call func_003_6DDF                            ; $70A3: $CD $DF $6D
     jp   label_003_7102                           ; $70A6: $C3 $02 $71
 
+IF !__PATCH_3__
 jr_003_70A9:
     jp   func_003_6DDF                            ; $70A9: $C3 $DF $6D
+ENDC
 
 jr_003_70AC:
     ld   a, $04                                   ; $70AC: $3E $04
@@ -7132,6 +7260,10 @@ jr_003_7325:
     jr   jr_003_733E                              ; $732E: $18 $0E
 
 jr_003_7330:
+IF __PATCH_0__
+    ld   a, $01
+    ld   [$de0b], a
+ENDC
     ldh  a, [hLinkPositionY]                      ; $7330: $F0 $99
     push af                                       ; $7332: $F5
     ld   a, $10                                   ; $7333: $3E $10
@@ -7393,7 +7525,9 @@ jr_003_748B:
 
     ld   a, $20                                   ; $74A9: $3E $20
     ld   [$C13E], a                               ; $74AB: $EA $3E $C1
+IF !__PATCH_0__
     ld   a, $20                                   ; $74AE: $3E $20
+ENDC
     call func_003_7565                            ; $74B0: $CD $65 $75
     jr   jr_003_74DC                              ; $74B3: $18 $27
 
@@ -8787,6 +8921,12 @@ label_003_7C7B:
     cp   $26                                      ; $7C84: $FE $26
     jr   c, .hookshotClearEnd                     ; $7C86: $38 $03
     call UnloadEntity                             ; $7C88: $CD $8D $3F
+
+IF __PATCH_0__
+    xor  a
+    ld   [$c1c6], a
+    jr   hookshotEnd
+ENDC
 .hookshotClearEnd
 
     ld   hl, wEntitiesStateTable                  ; $7C8B: $21 $90 $C2
@@ -9006,9 +9146,13 @@ jr_003_7DC0:
     jp   c, label_003_7DCD                        ; $7DC2: $DA $CD $7D
 
     cp   $90                                      ; $7DC5: $FE $90
+IF __PATCH_3__
+    jp   c, jr_003_7E03
+ELSE
     jp   nc, label_003_7DCD                       ; $7DC7: $D2 $CD $7D
 
     jp   jr_003_7E03                              ; $7DCA: $C3 $03 $7E
+ENDC
 
 label_003_7DCD:
     ldh  a, [hScratch3]                           ; $7DCD: $F0 $DA

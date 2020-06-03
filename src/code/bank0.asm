@@ -505,7 +505,7 @@ LoadPhotoBgMap_trampoline::
 IF __PATCH_3__
 func_036_72D5_trampoline::
     push af
-    callsb newfunc_036_72BA
+    callsb func_036_72D5
     jp   RestoreStackedBankAndReturn
 ENDC
 

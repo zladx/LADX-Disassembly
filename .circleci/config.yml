@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: kemenaran/rgbds:0.3.10
+      - image: kemenaran/rgbds:0.4.0
     steps:
       - checkout
       - run:

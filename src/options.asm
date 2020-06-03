@@ -56,16 +56,19 @@ BANK_1C_VAR = 1
 __PATCH_0__ = FALSE ; Applies to JP1+, EN1+, DE, FR
 __PATCH_1__ = FALSE ; Applies to DE, FR
 __PATCH_2__ = FALSE ; Applies to DE, JP1+, EN2+, FR
+__PATCH_3__ = FALSE ; Applies to JP1+, EN1+
 
 IF ("{LANG}" == "JP")
 BANK_1C_VAR = 0
 IF (VERSION > 0)
 __PATCH_0__ = TRUE
 __PATCH_2__ = TRUE
+__PATCH_3__ = TRUE
 ENDC
 ELIF ("{LANG}" == "EN")
 IF (VERSION > 0)
 __PATCH_0__ = TRUE
+__PATCH_3__ = TRUE
 ENDC
 IF (VERSION > 1)
 __PATCH_2__ = TRUE

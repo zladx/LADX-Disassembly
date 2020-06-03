@@ -8286,7 +8286,7 @@ EntityInitGenie::
     ld   [hl], a                                  ; $72B8: $77
     ret                                           ; $72B9: $C9
 
-fn_036_72d5:
+newfunc_036_72BA:
     ldh a, [hActiveEntityState]
     sub $02
     rst $00

@@ -308,10 +308,12 @@ func_999::
     ldi  [hl], a
     jr   RestoreStackedBankAndReturn
 
+IF !__PATCH_0__
 CheckPushedTombStone_trampoline::
     push af
     callsb CheckPushedTombStone
     jr   RestoreStackedBankAndReturn
+ENDC
 
 GetEntityInitHandler_trampoline::
     push af
@@ -499,6 +501,13 @@ func_036_7161_trampoline::
 LoadPhotoBgMap_trampoline::
     callsb LoadPhotoBgMap
     ret
+
+IF __PATCH_3__
+func_036_72D5_trampoline::
+    push af
+    callsb newfunc_036_72BA
+    jp   RestoreStackedBankAndReturn
+ENDC
 
 ; Toogle an extra byte to the bank number on GBC (on DMG, does nothing)
 ; Input:  a: the bank number to adjust
@@ -762,7 +771,7 @@ ReadTileValueFromAsciiTable::
     jr   ReadValueInDialogsBank
 
 ReadDialogBankFromTable::
-    ld   hl, DialogBankTable
+    ld   hl, DakutenTable
 
 ReadValueInDialogsBank::
     ld   a, BANK(AsciiToTileMap) ; or BANK(DialogBankTable)
@@ -1938,6 +1947,10 @@ UseShovel::
     ldh  [hNoiseSfx], a
 .endIf
 
+IF __PATCH_0__
+    call ResetPegasusBoots
+ENDC
+
     ld   a, $01
     ld   [$C1C7], a
     xor  a
@@ -2989,7 +3002,11 @@ LinkMotionMapFadeOutHandler::
 ; or starting after a game over.
 SetSpawnLocation::
     ; Initialize counter
+IF __PATCH_0__
+    xor  a
+ELSE
     ld   a, $00
+ENDC
     ldh  [hScratch0], a
     ld   de, wSpawnLocationData
 
@@ -3035,7 +3052,11 @@ LinkMotionMapFadeInHandler::
     call func_1A39
     ld   a, [wTransitionSequenceCounter]
     cp   $04
+IF __PATCH_0__
+    ret  nz
+ELSE
     jr   nz, .return
+ENDC
 
 .label_1A06
     ld   a, [$D463]
@@ -3047,14 +3068,21 @@ LinkMotionMapFadeInHandler::
     ld   [wLinkMotionState], a
     ld   a, [wDidStealItem]
     and  a
+IF __PATCH_0__
+    ret  z
+ELSE
     jr   z, .return
+ENDC
     xor  a
     ld   [wDidStealItem], a
     ld   a, $36
     jp   OpenDialog
 
+IF !__PATCH_0__
 .return
     ret
+ENDC
+
 
 func_1A22::
     callsb func_020_6C4F
@@ -3394,7 +3422,11 @@ label_1F69::
     or   [hl]
     ld   hl, wLinkMotionState
     or   [hl]
+IF __PATCH_0__
+    ret  nz
+ELSE
     jp   nz, func_2165.return
+ENDC
 
     ; Update hSwordIntersectedAreaX according to Link's position and direction
     ldh  a, [hLinkDirection]
@@ -3630,10 +3662,18 @@ label_1F69::
 .jr_20DD
     ld   a, [wAButtonSlot]
     cp   INVENTORY_POWER_BRACELET
+IF __PATCH_0__
+    ret  nz
+ELSE
     jp   nz, func_2165.return
+ENDC
     ldh  a, [hPressedButtonsMask]
     and  J_A
+IF __PATCH_0__
+    ret  z
+ELSE
     jp   z, func_2165.return
+ENDC
 
 .jr_20EC
     callsb label_002_48B0
@@ -3673,7 +3713,11 @@ label_1F69::
     inc  [hl]
     ld   a, [hl]
     cp   e
+IF __PATCH_0__
+    ret  c
+ELSE
     jr   c, .return
+ENDC
     xor  a
     ldh  [$FFE5], a
     ldh  a, [hScratch0]
@@ -3683,7 +3727,11 @@ label_1F69::
     jr   z, .jr_2153
     ld   a, [wIsIndoor]
     and  a
+IF __PATCH_0__
+    ret  nz
+ELSE
     jr   nz, .return
+ENDC
     ldh  a, [hScratch0]
     cp   $5C
     jr   z, .jr_2161
@@ -3715,8 +3763,10 @@ func_2165::
     ld   [$C15D], a
     jp   label_2183
 
+IF !__PATCH_0__
 .return
     ret
+ENDC
 
 func_014_5526_trampoline::
     callsb func_014_5526
@@ -3725,7 +3775,12 @@ func_014_5526_trampoline::
 label_2183::
     ld   a, ENTITY_ENTITY_LIFTABLE_ROCK
     call SpawnPlayerProjectile
+
+IF __PATCH_0__
+    ret  c
+ELSE
     jr   c, label_21A7
+ENDC
 
     ld   a, WAVE_SFX_ZIP
     ldh  [hWaveSfx], a
@@ -3742,8 +3797,10 @@ label_2183::
     ld   e, $01
     jpsw func_003_5795
 
+IF !__PATCH_0__
 label_21A7::
     ret
+ENDC
 
 UpdateFinalLinkPosition::
     ; If inventory is appearing, return
@@ -4077,8 +4134,8 @@ EnableExternalRAMWriting::
     push hl
     ld   hl, MBC3SRamBank
     ld   [hl], $00 ; Switch to RAM bank 0
-    ld   hl, $00
-    ld   [hl], $0A ; Enable external RAM writing
+    ld   hl, MBC3SRamEnable
+    ld   [hl], SRAM_ENABLE ; Enable external RAM writing
     pop  hl
     ret
 
@@ -4482,10 +4539,42 @@ LoadTileset1B::
 
     call PlayAudioStep
 
+IF __PATCH_1__
+    ld   a, BANK(CharacterVfxTiles)
+    ld   [MBC3SelectBank], a
+    ld   hl, CharacterVfxTiles + TILE_SIZE * $2
+    ld   de, $8080
+    ld   bc, TILE_SIZE * $2
+    call CopyData
+ENDC
+
     ldh  a, [hIsGBC]
     and  a
     jr   nz, .cgbOnly
 
+IF __PATCH_1__
+.dmgOnly
+    ld   a, BANK(FontLargeTiles)
+    ld   hl, FontLargeTiles + $200
+    jr   .both
+
+.cgbOnly
+    ld   a, BANK(CgbMiscTiles)
+    ld   hl, CgbMiscTiles + $1100
+
+.both
+    ld   [MBC3SelectBank], a
+    ld   de, vTiles0 + $100
+    ld   bc, TILE_SIZE * $70
+    call CopyData
+
+    ld   a, BANK(CgbMiscTiles)
+    ld   [MBC3SelectBank], a
+    ld   hl, CgbMiscTiles + $10c0
+    ld   de, vTiles0 + $C0
+    ld   bc, TILE_SIZE * $4
+    jp   CopyData
+ELSE
 .dmgOnly
     ld   a, BANK(FontLargeTiles)
     ld   [MBC3SelectBank], a
@@ -4501,6 +4590,7 @@ LoadTileset1B::
     ld   de, vTiles0
     ld   bc, TILE_SIZE * $80
     jp   CopyData
+ENDC
 
 LoadTileset1A::
     ld   hl, EndingTiles + $3800
@@ -5497,7 +5587,7 @@ LoadTileset1::
 ; Load room objects
 LoadRoom::
     ; Disable all interrupts except VBlank
-    ld   a, $01 ; 30F4
+    ld   a, $01
     ld   [rIE], a
 
     ; Increment $D47F

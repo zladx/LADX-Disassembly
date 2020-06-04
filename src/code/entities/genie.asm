@@ -1,3 +1,11 @@
+IF __PATCH_1__
+GENIE_VAR_A = $02
+GENIE_VAR_B = $06
+ELSE
+GENIE_VAR_A = $03
+GENIE_VAR_B = $08
+ENDC
+
 GenieEntityHandler::
     call label_394D                               ; $4000: $CD $4D $39
     call BossIntro                                ; $4003: $CD $E8 $3E
@@ -15,7 +23,7 @@ GenieState0Handler::
     ld   hl, wEntitiesUnknowTableP                ; $4016: $21 $40 $C4
     add  hl, bc                                   ; $4019: $09
     ld   a, [hl]                                  ; $401A: $7E
-    cp   $03                                      ; $401B: $FE $03
+    cp   GENIE_VAR_A                              ; $401B: $FE $03
     jr   c, jr_004_404E                           ; $401D: $38 $2F
 
     ld   a, ENTITY_GENIE                          ; $401F: $3E $5C
@@ -525,7 +533,7 @@ func_004_4345::
     ld   [hl], $04                                ; $4363: $36 $04
     ld   hl, wEntitiesHealthTable                                ; $4365: $21 $60 $C3
     add  hl, bc                                   ; $4368: $09
-    ld   [hl], $08                                ; $4369: $36 $08
+    ld   [hl], GENIE_VAR_B                        ; $4369: $36 $08
     ld   a, $53                                   ; $436B: $3E $53
 
 jr_004_436D:

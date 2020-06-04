@@ -49,6 +49,16 @@ JP_TABLE: macro
     rst 0
 endm
 
+; Store an address and the associated bank.
+; First 2 bytes: memory address; third byte: bank id
+far_pointer: macro
+    db LOW(\1), HIGH(\1), BANK(\1)
+endm
+
+far_pointer_null: macro
+    db $00, $00, $00
+endm
+
 ; Define an entity in an entities list
 ; Usage:
 ;   entity <vertical-position>, <horizontal-position>, <type>

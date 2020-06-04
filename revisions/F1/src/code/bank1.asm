@@ -95,12 +95,12 @@ InitSaveFiles::
     dec  e
     jr   nz, .loop2
 
-    ld   a, $60
+    ld   a, DEBUG_SAVE_BOMB_COUNT
     ld   [$A452], a ; 60 bombs
     ld   [$A47D], a ; 60 max arrows
     ld   [$A47C], a ; 60 max bombs
     ld   [$A44A], a ; 60 arrows
-    ld   a, $40
+    ld   a, DEBUG_SAVE_MAGIC_COUNT
     ld   [$A47B], a ; 40 max magic powder
     ld   [$A451], a ; 40 magic powder
     ld   a, $89
@@ -192,8 +192,11 @@ jr_001_479C::
 
 jr_001_47AA::
     push de
+    ; hl = savefile
     ld   hl, $A105
     add  hl, de
+
+    ; de = sizeof(save)
     ld   de, $3A8
 
 jr_001_47B2::
@@ -312,8 +315,8 @@ jr_001_535b:
     jr nc, jr_001_5364
 
     ld [hl], a
-jr_001_5364:
 
+jr_001_5364:
     ld   hl, $DDDA
     ld   de, $05
 
@@ -814,8 +817,7 @@ func_001_58A8::
     inc  hl
     ldh  a, [hIsGBC]
     and  a
-    jr   z, jr_001_58d6
-
+    jr   z, .endIfGBC
     ld   a, $00
 
     ld   [hl], a
@@ -826,71 +828,15 @@ func_001_58A8::
     ld   a, $03
     ld   [hl], a
     ret
-jr_001_58d6:
+
+.endIfGBC:
     ldh  a, [hFrameCounter]
     rla
     and  $10
     ld   [hl], a
     ret
 
-
-;
-; Each 2x2 section of the overworld is assigned a dialogue index
-; that will be shown when you push A on the map screen.
-; e.g. bottom right = $68 = Dialog068 = "Yarna Desert"
-;
-MapLocationNamesTable::
-    ;   0    2    4    6    8    A    C    E
-    db $6C, $6C, $6C, $6B, $6C, $6C, $6C, $6C ; 00
-    db $76, $76, $79, $79, $79, $79, $79, $79 ; 20
-    db $6A, $6A, $72, $7A, $78, $78, $71, $71 ; 40
-    db $6A, $6A, $72, $70, $78, $78, $71, $71 ; 60
-    db $6A, $6E, $69, $69, $69, $69, $77, $71 ; 80
-    db $6E, $6E, $69, $69, $69, $69, $77, $77 ; A0
-    db $7B, $7B, $6D, $62, $74, $74, $6F, $68 ; C0
-    db $73, $73, $73, $74, $74, $74, $75, $68 ; E0
-
-;
-; Lookup table for what dialogue message to show when examining a location on the map screen
-; "Owl" icons are only visible if you've seen that particular event, though
-;
-; For (as of yet) unknown reasons, A7 actually maps to Dialog1A7 rather than 0A7
-; POI: Unused entries that don't appear in MapSpecialLocationNamesTable anywhere
-; 0F ("Enter the Egg!", maybe manually overridden?)
-; 31 (Duplicate of 3E, "Wind Fish's Egg")
-; 32 (Dialog05F and Dialog060 both point to "Mountain Bridge", hmm...!)
-;
-MapSpecialLocationNamesLookupTable::
-    ;   0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
-    db   0, $D9, $C0, $C1, $C2, $C3, $C4, $C5, $C6, $C7, $C8, $C9, $CA, $CB, $CC, $CD  ; 00 - Owl reminders
-    db   0, $56, $57, $58, $59, $5A, $5B, $5C, $5D,   0,   0,   0,   0,   0,   0,   0  ; 10 - Dungeon icons
-    db   0, $7C, $67,   0,   0, $80, $65,   0, $64, $88, $7D,   0,   0,   0,   0,   0  ; 20 - Shop icons
-    db   0, $5E, $5F, $7F, $7E, $7D, $82, $84, $85, $86, $87, $81, $66, $83, $5E, $63  ; 30 - "!?" icons
-    db   0, $61, $7C,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0  ; 40 - "!?" icons
-
-;
-; Table for map squares that have special text instead of the generic name from MapLocationNamesTable.
-; Rather than directly indexing the dialogue entry, for some reason these are instead lookup values
-; for *another* table (just above this one), MapSpecialLocationNamesLookupTable, which has the dialogue indexes...
-;
-MapSpecialLocationNamesTable::
-    ;   0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
-    db   0,   0,   0,   0,   0,   0, $3E,   0, $0E,   0, $39,   0,   0,   0, $17,   0 ; 00
-    db $18, $3D,   0,   0,   0,   0, $06, $0C,   0,   0,   0,   0,   0,   0,   0,   0 ; 10
-    db   0,   0,   0,   0, $12,   0,   0,   0, $07,   0,   0, $14,   0,   0,   0,   0 ; 20
-    db $33, $3D,   0,   0,   0,   0, $05, $2A,   0,   0,   0,   0,   0,   0,   0, $29 ; 30
-    db   0, $03,   0,   0,   0, $25,   0,   0,   0,   0,   0, $3D,   0,   0,   0,   0 ; 40
-    db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; 50
-    db   0,   0,   0,   0, $0D, $22,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; 60
-    db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; 70
-    db $02, $42, $3B, $36,   0,   0,   0,   0, $3D,   0, $37,   0, $16,   0,   0,   0 ; 80
-    db   0,   0,   0, $26,   0,   0,   0,   0,   0,   0,   0, $09, $0B, $09,   0,   0 ; 90
-    db   0, $35, $3C,   0, $3D,   0,   0,   0,   0,   0,   0,   0, $0A,   0,   0,   0 ; A0
-    db $3A, $34, $3D, $28,   0, $13, $07,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; B0
-    db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; C0
-    db   0,   0, $04, $11,   0,   0, $38,   0,   0, $15,   0, $3D,   0,   0,   0,   0 ; D0
-    db   0,   0,   0, $41,   0,   0,   0,   0, $3D,   0,   0,   0,   0,   0, $08,   0 ; E0
-    db   0,   0, $01,   0,   0,   0, $3F,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; F0
+include "data/dialogs/map.asm"
 
 func_001_5A59::
     ldh  a, [hMapRoom]
@@ -1481,65 +1427,82 @@ jr_001_5E3A::
     ret
 
 Data_001_5ea2:
-    db $06, $d9, $2b, $d9, $5a, $d9, $ff, $d9
-    db $85, $d9, $bc, $d9, $e8, $da, $34, $da
+    dw wIndoorARoomStatus + $06 ; moldorm
+    dw wIndoorARoomStatus + $2b ; genie
+    dw wIndoorARoomStatus + $5a
+    dw wIndoorARoomStatus + $ff
+    dw wIndoorARoomStatus + $85
+    dw wIndoorARoomStatus + $bc
+    dw wIndoorBRoomStatus + $e8
+    dw wIndoorBRoomStatus + $34 ; hothead
 
 Data_001_5eb2:
-    db $a4, $da, $b1, $da, $44, $d8, $ab, $da
-    db $e5, $da, $e8, $d9, $78, $d8, $f2, $d9
-    db $e6, $da, $df, $da, $ba, $da, $00, $d8
+    dw wIndoorBRoomStatus + $a4
+    dw wIndoorBRoomStatus + $b1
+    dw wOverworldRoomStatus + $44
+    dw wIndoorBRoomStatus + $ab
+    dw wIndoorBRoomStatus + $e5
+    dw wIndoorARoomStatus + $e8
+    dw wOverworldRoomStatus + $78
+    dw wIndoorARoomStatus + $f2
+    dw wIndoorBRoomStatus + $e6
+    dw wIndoorBRoomStatus + $df
+    dw wIndoorBRoomStatus + $ba
+    dw wOverworldRoomStatus + $00
 
 Call_001_5eca:
+    ; full heart containers
     ld a, $03                                     ; $5eca: $3e $03
     ldh [hScratch0], a                            ; $5ecc: $e0 $d7
     xor a                                         ; $5ece: $af
     ldh [hScratch1], a                            ; $5ecf: $e0 $d8
     ld c, $08                                     ; $5ed1: $0e $08
     ld hl, Data_001_5ea2                                   ; $5ed3: $21 $a2 $5e
-_5edb
+
+.bossLoop
     ld a, [hl+]                                   ; $5ed6: $2a
     ld e, a                                       ; $5ed7: $5f
     ld a, [hl+]                                   ; $5ed8: $2a
     ld d, a                                       ; $5ed9: $57
     ld a, [de]                                    ; $5eda: $1a
-    and $20                                       ; $5edb: $e6 $20
-    jr z, jr_001_5ee4                             ; $5edd: $28 $05
+    and $20 ; ROOM_STATUS_BOSS_DEFEATED
+    jr z, .endIfBossDefeated                             ; $5edd: $28 $05
     ldh a, [hScratch0]                            ; $5edf: $f0 $d7
     inc a                                         ; $5ee1: $3c
     ldh [hScratch0], a                            ; $5ee2: $e0 $d7
+.endIfBossDefeated:
 
-jr_001_5ee4:
     dec c                                         ; $5ee4: $0d
-    jr nz, _5edb                                   ; $5ee5: $20 $ef
+    jr nz, .bossLoop                                   ; $5ee5: $20 $ef
 
     ld c, $0c                                     ; $5ee7: $0e $0c
     ld hl, Data_001_5eb2                                  ; $5ee9: $21 $b2 $5e
 
-jr_001_5eec:
+.heartPieceLoop
     ld a, [hl+]                                   ; $5eec: $2a
     ld e, a                                       ; $5eed: $5f
     ld a, [hl+]                                   ; $5eee: $2a
     ld d, a                                       ; $5eef: $57
     ld a, [de]                                    ; $5ef0: $1a
-    and $10                                       ; $5ef1: $e6 $10
-    jr z, jr_001_5f04                             ; $5ef3: $28 $0f
+    and ROOM_STATUS_CHANGED                       ; $5ef1: $e6 $10
+    jr z, .endIfHeartPieceTaken                             ; $5ef3: $28 $0f
 
     ldh a, [hScratch1]                            ; $5ef5: $f0 $d8
     inc a                                         ; $5ef7: $3c
     cp $04                                        ; $5ef8: $fe $04
-    jr nz, jr_001_5f02                            ; $5efa: $20 $06
+    jr nz, .endIf4heartPieces                            ; $5efa: $20 $06
 
     ldh a, [hScratch0]                            ; $5efc: $f0 $d7
     inc a                                         ; $5efe: $3c
     ldh [hScratch0], a                            ; $5eff: $e0 $d7
     xor a                                         ; $5f01: $af
+.endIf4heartPieces
 
-jr_001_5f02:
     ldh [hScratch1], a                            ; $5f02: $e0 $d8
 
-jr_001_5f04:
+.endIfHeartPieceTaken
     dec c                                         ; $5f04: $0d
-    jr nz, jr_001_5eec                            ; $5f05: $20 $e5
+    jr nz, .heartPieceLoop                            ; $5f05: $20 $e5
 
     ldh a, [hScratch0]                            ; $5f07: $f0 $d7
     call Call_001_5f1c                            ; $5f09: $cd $1c $5f
@@ -1558,6 +1521,7 @@ jr_001_5f18:
     ret                                           ; $5f1b: $c9
 
 
+; clamps max health between 3 and 14
 Call_001_5f1c:
     cp $03                                        ; $5f1c: $fe $03
     jr nc, jr_001_5f23                            ; $5f1e: $30 $03
@@ -1574,7 +1538,6 @@ jr_001_5f23:
 
 jr_001_5f29:
     ret                                           ; $5f29: $c9
-
 
 
 ; Copy the current dungeon item flags to the global and persistent
@@ -1790,7 +1753,7 @@ UpdateRecentRoomsList::
 
 HideAllSprites::
     ; $0000 controls whether to enable external RAM writing
-    ld   hl, $0000
+    ld   hl, MBC3SRamEnable
 
     ; If CGB…
     ldh  a, [hIsGBC]
@@ -1798,7 +1761,7 @@ HideAllSprites::
     jr   z, .enableExternalRAMWriting
     ; disable external RAM writing
     ; (probably because an extra RAM bank available on CGB can be used)
-    ld   [hl], $00
+    ld   [hl], SRAM_DISABLE
     jr   .endIf
 
 .enableExternalRAMWriting
@@ -1932,7 +1895,7 @@ CreateFollowingNpcEntity::
     ; POI: Curiously, these should be excluded by the
     ; check against side-scrolling rooms...
     ldh  a, [hMapRoom]
-    cp   $FD ; Mambo the Sun Fish
+    cp   $FD ; Manbo the Sun Fish
     ret  z
     cp   $B1 ; Fishing minigame
     ret  z
@@ -2739,13 +2702,13 @@ jr_001_6BC6::
     ldh  [hBGTilesLoadingStage], a
     ret
 
-Data_001_6BCF::
-    db $F, $51, $B1, $EF, $EC, $AA, $4A, $C
+Data_001_6BCF::  ; Instrument on inventory menu position ($9D00 is added to get to background position)
+    db $0F, $51, $B1, $EF, $EC, $AA, $4A, $0C
 
-Data_001_6BD7::
+Data_001_6BD7::  ; Instrument on inventory menu, number tile
     db $B1, $B2, $B3, $B4, $B5, $B6, $B7, $B8
 
-Data_001_6BDF::
+Data_001_6BDF::  ; Instrument on inventory menu, instrument tile (top left corner)
     db $D0, $D2, $D4, $D6, $D8, $DA, $DC, $DE
 
 Data_001_6BE7::
@@ -3055,42 +3018,3 @@ UpdateMinimapEntranceArrowAndReturn::
     ret
 
 include "code/intro.asm"
-
-; extraneous data?
-    db   $34, $21, $01, $c1, $fa, $04, $d0, $c6
-    db   $50, $ea, $04, $d0, $30, $01, $34, $23
-    db   $fa, $05, $d0, $c6, $58, $ea, $05, $d0
-    db   $30, $01, $34, $23, $fa, $0d, $d0, $c6
-    db   $b0, $ea, $0d, $d0, $30, $01, $34, $c3
-    db   $62, $7e, $21, $00, $c1, $f0, $e7, $e6
-    db   $0f, $20, $01, $34, $21, $01, $c1, $fa
-    db   $04, $d0, $c6, $28, $ea, $04, $d0, $30
-    db   $01, $34, $23, $fa, $05, $d0, $c6, $2c
-    db   $ea, $05, $d0, $30, $01, $34, $23, $fa
-    db   $0d, $d0, $c6, $58, $ea, $0d, $d0, $30
-    db   $01, $34, $c3, $62, $7e, $5f, $16, $00
-    db   $21, $de, $7e, $19, $3e, $00, $96, $ea
-    db   $06, $c1, $f0, $e7, $e6, $0f, $fe, $04
-    db   $38, $4d, $f0, $e7, $1f, $1f, $1f, $1f
-    db   $e6, $07, $5f, $16, $00, $21, $d6, $7e
-    db   $19, $5e, $21, $c6, $7e, $fa, $0f, $d0
-    db   $a7, $28, $03, $21, $ce, $7e, $19, $2a
-    db   $66, $6f, $11, $00, $89, $fa, $0f, $d0
-    db   $a7, $28, $03, $11, $00, $93, $f0, $e7
-    db   $e6, $03, $cb, $27, $cb, $27, $cb, $27
-    db   $cb, $27, $cb, $27, $5f, $85, $6f, $7d
-    db   $ea, $06, $d0, $7c, $ea, $07, $d0, $7b
-    db   $ea, $08, $d0, $7a, $ea, $09, $d0, $c9
-    db   $21, $00, $c1, $f0, $e7, $e6, $07, $20
-    db   $01, $34, $21, $01, $c1, $fa, $04, $d0
-    db   $c6, $50, $ea, $04, $d0, $30, $01, $34
-    db   $23, $fa, $05, $d0, $c6, $58, $ea, $05
-    db   $d0, $30, $01, $34, $23, $fa, $0d, $d0
-    db   $c6, $b0, $ea, $0d, $d0, $30, $01, $34
-    db   $c3, $2b, $7f, $21, $00, $c1, $f0, $e7
-    db   $e6, $0f, $20, $01, $34, $21, $01, $c1
-    db   $fa, $04, $d0, $c6, $28, $ea, $04, $d0
-    db   $30, $01, $34, $23, $fa, $05, $d0, $c6
-    db   $2c, $ea, $05, $d0, $30, $01, $34, $23
-    db   $fa, $0d, $d0, $c6, $58, $ea, $0d, $d0
-    db   $30, $01, $34, $c3, $2b, $7f

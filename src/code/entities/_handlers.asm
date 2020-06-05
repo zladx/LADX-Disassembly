@@ -10,269 +10,260 @@
 ;
 ; -----------------------------------------------------------------
 
-; First 2 bytes: memory address; third byte: bank id
-entity_pointer: macro
-    db LOW(\1), HIGH(\1), BANK(\1)
-endm
-
-entity_disabled: macro
-    db $00, $00, $00
-endm
-
 ; Table of entities handlers
 ; See ENTITY_* constants for values
 EntityHandlersTable::
-._00 entity_pointer ArrowEntityHandler
-._01 entity_pointer BoomerangEntityHandler
-._02 entity_pointer BombEntityHandler
-._03 entity_pointer HookshotChainEntityHandler
-._04 entity_pointer HookshotHitEntityHandler
-._05 entity_pointer LiftableRockEntityHandler
-._06 entity_pointer PushedBlockEntityHandler
-._07 entity_pointer ChestWithItemEntityHandler
-._08 entity_pointer MagicPowderSprinkleEntityHandler
-._09 entity_pointer OctorockEntityHandler
-._0A entity_pointer OctorockRockEntityHandler
-._0B entity_pointer MoblinEntityHandler
-._0C entity_pointer MoblinArrowEntityHandler
-._0D entity_pointer TektiteEntityHandler
-._0E entity_pointer LeeverEntityHandler
-._0F entity_pointer ArmosStatueEntityHandler
-._10 entity_pointer HidingGhiniEntityHandler
-._11 entity_pointer GiantGhiniEntityHandler
-._12 entity_pointer GhiniEntityHandler
-._13 entity_pointer HeartContainerTilesTable
-._14 entity_pointer MoblinSwordEntityHandler ; $14
-._15 entity_pointer AntiFairyEntityHandler
-._16 entity_pointer SparkClockwiseEntityHandler
-._17 entity_pointer SparkCounterClockwiseEntityHandler
-._18 entity_pointer PolsVoiceEntityHandler ; $18
-._19 entity_pointer KeeseEntityHandler
-._1A entity_pointer StalfosAggressiveEntityHandler
-._1B entity_pointer GelEntityHandler
-._1C entity_pointer MiniGelEntityHandler ; $1C
-._1D entity_disabled
-._1E entity_pointer StalfosEvasiveEntityHandler
-._1F entity_pointer GibdoEntityHandler
-._20 entity_pointer HardHatBeetleEntityHandler ; $20
-._21 entity_pointer WizrobeEntityHandler
-._22 entity_pointer WizrobeProjectileEntityHandler
-._23 entity_pointer LikeLikeEntityHandler
-._24 entity_pointer IronMaskEntityHandler ; $24
-._25 entity_pointer EntityExplosionDisplayList ; small exploding ennemy
-._26 entity_pointer EntityExplosionDisplayList ; small exploding ennemy 2
-._27 entity_pointer SpikeTrapEntityHandler
-._28 entity_pointer MimicEntityHandler ; $28
-._29 entity_pointer MiniMoldromEntityHandler
-._2A entity_pointer LaserEntityHandler
-._2B entity_pointer LaserBeamEntityHandler
-._2C entity_pointer SpikedBeetleEntityHandler ; $2C
-._2D entity_pointer DroppableHeartEntityHandler
-._2E entity_pointer DroppableRupeeEntityHandler
-._2F entity_pointer DroppableFairyEntityHandler
-._30 entity_pointer KeyDropPointEntityHandler ; $30
-._31 entity_pointer SwordEntityHandler
-._32 entity_pointer Entity32Handler
-._33 entity_pointer PieceOfPowerEntityHandler
-._34 entity_pointer GuardianAcornEntityHandler ; $34
-._35 entity_pointer HeartPieceEntityHandler
-._36 entity_pointer HeartContainerEntityHandler
-._37 entity_pointer DroppableArrowsEntityHandler
-._38 entity_pointer DroppableBombsEntityHandler ; $38
-._39 entity_pointer SirensInstrumentEntityHandler
-._3A entity_pointer SleepyToadstoolEntityHandler
-._3B entity_pointer DroppableMagicPowderEntityHandler
-._3C entity_pointer HidingSlimeKeyEntityHandler ; $3C
-._3D entity_pointer DroppableSeashellEntityHandler
-._3E entity_pointer MarinEntityHandler
-._3F entity_pointer RacoonEntityHandler
-._40 entity_pointer WitchEntityHandler ; $40
-._41 entity_pointer OwlEventEntityHandler
-._42 entity_pointer OwlStatueEntityHandler
-._43 entity_pointer SeashellMansionTreesEntityHandler
-._44 entity_pointer YarnaTalkingBonesEntityHandler ; $44
-._45 entity_pointer BouldersEntityHandler
-._46 entity_pointer MovingBlockLeftTopEntityHandler
-._47 entity_pointer MovingBlockLeftBottomEntityHandler
-._48 entity_pointer MovingBlockBottomLeftEntityHandler ; $48
-._49 entity_pointer MovingBlockBottomRightEntityHandler
-._4A entity_pointer ColorDungeonBookEntityHandler
-._4B entity_pointer PotEntityHandler
-._4C entity_disabled
-._4D entity_pointer ShopOwnerEntityHandler
-._4E entity_pointer Disabled4EEntityHandler
-._4F entity_pointer TrendyGameOwnerEntityHandler
-._50 entity_pointer BooBuddyEntityHandler ; $50
-._51 entity_pointer KnightEntityHandler
-._52 entity_pointer TractorDeviceEntityHandler
-._53 entity_pointer ReversedTractorDeviceEntityHandler
-._54 entity_pointer FishermanFishingGameEntityHandler ; $54
-._55 entity_pointer BouncingBombiteEntityHandler
-._56 entity_pointer TimerBombiteEntityHandler
-._57 entity_pointer PairoddEntityHandler
-._58 entity_pointer PairoddProjectileEntityHandler
-._59 entity_pointer MoldormEntityHandler
-._5A entity_pointer FacadeEntityHandler
-._5B entity_pointer SlimeEyeEntityHandler
-._5C entity_pointer GenieEntityHandler ; $5C
-._5D entity_pointer SlimeEelEntityHandler
-._5E entity_pointer GhomaEntityHandler
-._5F entity_pointer MasterStalfosEntityHandler
-._60 entity_pointer DodongoSnakeEntityHandler ; $60
-._61 entity_pointer WarpEntityHandler
-._62 entity_pointer HotHeadEntityHandler
-._63 entity_pointer EvilEagleEntityHandler
-._64 entity_pointer SouthFaceShrineDoorEntityHandler ; $64
-._65 entity_pointer AnglerFishEntityHandler
-._66 entity_pointer CrystalSwitchEntityHandler
-._67 entity_pointer Entity67Handler
-._68 entity_pointer Entity68Handler ; $68
-._69 entity_pointer MovingBlockMoverEntityHandler
-._6A entity_pointer EntityRaftOwnerHandler
-._6B entity_pointer TextDebuggerEntityHandler
-._6C entity_pointer CuccoEntityHandler ; $6C
-._6D entity_pointer BowWowEntityHandler
-._6E entity_pointer ButterflyEntityHandler
-._6F entity_pointer DogEntityHandler
-._70 entity_pointer Kid70EntityHandler ; $70
-._71 entity_pointer Kid71EntityHandler
-._72 entity_pointer Kid72EntityHandler
-._73 entity_pointer Kid73EntityHandler
-._74 entity_pointer PapahlsWifeEntityHandler ; $74
-._75 entity_pointer GrandmaUlriraEntityHandler
-._76 entity_pointer MrWriteEntityHandler
-._77 entity_pointer GrandpaUlriraEntityHandler
-._78 entity_pointer YipYipEntityHandler ; $78
-._79 entity_pointer MadamMeowMeowEntityHandler
-._7A entity_pointer CrowEntityHandler
-._7B entity_pointer CrazyTracyEntityHandler
-._7C entity_pointer GiantGopongaFlowerEntityHandler ; $7C
-._7D entity_pointer GopongaProjectileEntityHandler
-._7E entity_pointer GopongaFlowerEntityHandler
-._7F entity_pointer TurtleRockHeadEntityHandler
-._80 entity_pointer TelephoneEntityHandler ; $80
-._81 entity_pointer RollingBonesEntityHandler
-._82 entity_pointer RollingBonesBarEntityHandler
-._83 entity_pointer DreamShrineBedEntityHandler
-._84 entity_pointer BigFairyEntityHandler ; $84
-._85 entity_pointer MrWriteBirdEntityHandler
-._86 entity_pointer FloatingItemEntityHandler
-._87 entity_pointer DesertLanmolaEntityHandler
-._88 entity_pointer ArmosKnightEntityHandler ; $88
-._89 entity_pointer HinoxEntityHandler
-._8A entity_pointer TileGlintShownEntityHandler
-._8B entity_pointer TileGlintHiddenEntityHandler
-._8C entity_pointer Entity8CHandler ; $8C
-._8D entity_pointer Entity8DHandler
-._8E entity_pointer CueBallEntityHandler
-._8F entity_pointer MaskedMimicGoriyaEntityHandler
-._90 entity_pointer ThreeOfAKindEntityHandler ; $90
-._91 entity_pointer AntiKirbyEntityHandler
-._92 entity_pointer SmasherEntityHandler
-._93 entity_pointer MadBomberEntityHandler
-._94 entity_pointer KanaletBombableWallEntityHandler ; $94
-._95 entity_pointer RichardEntityHandler
-._96 entity_pointer RichardFrogEntityHandler
-._97 entity_pointer Entity97Handler
-._98 entity_pointer HorsePieceEntityHandler ; $98
-._99 entity_pointer WaterTektiteEntityHandler
-._9A entity_pointer FlyingTilesEntityHandler
-._9B entity_pointer HidingGelEntityHandler
-._9C entity_pointer StarEntityHandler ; $9C
-._9D entity_pointer LiftableStatueEntityHandler
-._9E entity_pointer FireballShooterEntityHandler
-._9F entity_pointer GoombaEntityHandler
-._A0 entity_pointer PeaHatEntityHandler ; $A0
-._A1 entity_pointer SnakeEntityHandler
-._A2 entity_pointer PiranhaPlantEntityHandler
-._A3 entity_pointer SideViewPlatformHorizontalEntityHandler
-._A4 entity_pointer SideViewPlatformVerticalEntityHandler ; $A4
-._A5 entity_pointer SideViewPlatformEntityHandler
-._A6 entity_pointer SideViewWeightsEntityHandler
-._A7 entity_pointer SmashablePillarEntityHandler
-._A8 entity_pointer EntityA8Handler ; $A8
-._A9 entity_pointer BlooperEntityHandler
-._AA entity_pointer CheepCheepHorizontalEntityHandler
-._AB entity_pointer CheepCheepVerticalEntityHandler
-._AC entity_pointer CheepCheepJumpingEntityHandler ; $AC
-._AD entity_pointer KikiTheMonkeyEntityHandler
-._AE entity_pointer WingedOctorockEntityHandler
-._AF entity_pointer TradingItemEntityHandler
-._B0 entity_pointer PincerEntityHandler ; $B0
-._B1 entity_pointer HoleFillerEntityHandler
-._B2 entity_pointer BeetleSpawnerEntityHandler
-._B3 entity_pointer HoneycombEntityHandler
-._B4 entity_pointer TarinEntityHandler ; $B4
-._B5 entity_pointer BearEntityHandler
-._B6 entity_pointer PapahlEntityHandler
-._B7 entity_pointer MermaidEntityHandler
-._B8 entity_pointer FishermanUnderBridgeEntityHandler ; $B8
-._B9 entity_pointer BuzzBlobEntityHandler
-._BA entity_pointer BomberEntityHandler
-._BB entity_pointer BushCrawlerEntityHandler
-._BC entity_pointer GrimCreeperEntityHandler ; $BC
-._BD entity_pointer VireEntityHandler
-._BE entity_pointer BlainoEntityHandler
-._BF entity_pointer ZombieEntityHandler
-._C0 entity_pointer MazeSignpostEntityHandler ; $C0
-._C1 entity_pointer MarinAtTheShoreEntityHandler
-._C2 entity_pointer MarinAtTalTalHeightsEntityHandler
-._C3 entity_pointer MamuAndFrogsEntityHandler
-._C4 entity_pointer WalrusEntityHandler ; $C4
-._C5 entity_pointer UrchinEntityHandler
-._C6 entity_pointer SandCrabEntityHandler
-._C7 entity_pointer ManboAndFishesEntityHandler
-._C8 entity_pointer BunnyCallingMarinEntityHandler ; $C8
-._C9 entity_pointer MusicalNoteEntityHandler
-._CA entity_pointer MadBatterEntityHandler
-._CB entity_pointer ZoraEntityHandler
-._CC entity_pointer FishEntityHandler ; $CC
-._CD entity_pointer BananasSchuleSaleEntityHandler
-._CE entity_pointer MermaidStatueEntityHandler
-._CF entity_pointer SeashellMansionEntityHandler
-._D0 entity_pointer AnimalD0EntityHandler ; $D0
-._D1 entity_pointer AnimalD1EntityHandler
-._D2 entity_pointer AnimalD2EntityHandler
-._D3 entity_pointer BunnyD3EntityHandler
-._D4 entity_pointer GhostEntityHandler ; $D4
-._D5 entity_pointer RoosterEntityHandler
-._D6 entity_pointer SideViewPotEntityHandler
-._D7 entity_pointer ThwimpEntityHandler
-._D8 entity_pointer ThwompEntityHandler ; $D8
-._D9 entity_pointer ThwompRammableEntityHandler
-._DA entity_pointer PodobooEntityHandler
-._DB entity_pointer GiantBubbleEntityHandler
-._DC entity_pointer FlyingRoosterEventsEntityHandler ; $DC
-._DD entity_pointer BookEntityHandler
-._DE entity_pointer EggSongEventEntityHandler
-._DF entity_pointer SwordBeamEntityHandler
-._E0 entity_pointer MonkeyEntityHandler ; $E0
-._E1 entity_pointer WitchRatEntityHandler
-._E2 entity_pointer FlameShooterEntityHandler
-._E3 entity_pointer PokeyEntityHandler
-._E4 entity_pointer MoblinKingEntityHandler ; $E4
-._E5 entity_pointer FloatingItem2EntityHandler
-._E6 entity_pointer FinalNightmareEntityHandler
-._E7 entity_pointer KanaletCastleGateSwitchEntityHandler
-._E8 entity_pointer EndingOwlStairClimbingEntityHandler ; $E8
-._E9 entity_pointer ColorShellRedEntityHandler
-._EA entity_pointer ColorShellGreenEntityHandler
-._EB entity_pointer ColorShellBlueEntityHandler
-._EC entity_pointer ColorGhoulRedEntityHandler ; $EC
-._ED entity_pointer ColorGhoulGreenEntityHandler
-._EE entity_pointer ColorGhoulBlueEntityHandler
-._EF entity_pointer RotoswitchRedEntityHandler
-._F0 entity_pointer RotoswitchYellowEntityHandler ; $F0
-._F1 entity_pointer RotoswitchBlueEntityHandler
-._F2 entity_pointer FlyingHopperBombsEntityHandler
-._F3 entity_pointer HopperEntityHandler
-._F4 entity_pointer AvalaunchEntityHandler ; $F4
-._F5 entity_pointer BouncingBoulderEntityHandler
-._F6 entity_pointer ColorGuardianBlueEntityHandler
-._F7 entity_pointer ColorGuardianRedEntityHandler
-._F8 entity_pointer GiantBuzzBlobEntityHandler ; $F8
-._F9 entity_pointer HardhitBeetleEntityHandler
-._FA entity_pointer PhotographerEntityHandler
+._00 far_pointer ArrowEntityHandler
+._01 far_pointer BoomerangEntityHandler
+._02 far_pointer BombEntityHandler
+._03 far_pointer HookshotChainEntityHandler
+._04 far_pointer HookshotHitEntityHandler
+._05 far_pointer LiftableRockEntityHandler
+._06 far_pointer PushedBlockEntityHandler
+._07 far_pointer ChestWithItemEntityHandler
+._08 far_pointer MagicPowderSprinkleEntityHandler
+._09 far_pointer OctorockEntityHandler
+._0A far_pointer OctorockRockEntityHandler
+._0B far_pointer MoblinEntityHandler
+._0C far_pointer MoblinArrowEntityHandler
+._0D far_pointer TektiteEntityHandler
+._0E far_pointer LeeverEntityHandler
+._0F far_pointer ArmosStatueEntityHandler
+._10 far_pointer HidingGhiniEntityHandler
+._11 far_pointer GiantGhiniEntityHandler
+._12 far_pointer GhiniEntityHandler
+._13 far_pointer HeartContainerTilesTable
+._14 far_pointer MoblinSwordEntityHandler ; $14
+._15 far_pointer AntiFairyEntityHandler
+._16 far_pointer SparkClockwiseEntityHandler
+._17 far_pointer SparkCounterClockwiseEntityHandler
+._18 far_pointer PolsVoiceEntityHandler ; $18
+._19 far_pointer KeeseEntityHandler
+._1A far_pointer StalfosAggressiveEntityHandler
+._1B far_pointer GelEntityHandler
+._1C far_pointer MiniGelEntityHandler ; $1C
+._1D far_pointer_null
+._1E far_pointer StalfosEvasiveEntityHandler
+._1F far_pointer GibdoEntityHandler
+._20 far_pointer HardHatBeetleEntityHandler ; $20
+._21 far_pointer WizrobeEntityHandler
+._22 far_pointer WizrobeProjectileEntityHandler
+._23 far_pointer LikeLikeEntityHandler
+._24 far_pointer IronMaskEntityHandler ; $24
+._25 far_pointer EntityExplosionDisplayList ; small exploding ennemy
+._26 far_pointer EntityExplosionDisplayList ; small exploding ennemy 2
+._27 far_pointer SpikeTrapEntityHandler
+._28 far_pointer MimicEntityHandler ; $28
+._29 far_pointer MiniMoldromEntityHandler
+._2A far_pointer LaserEntityHandler
+._2B far_pointer LaserBeamEntityHandler
+._2C far_pointer SpikedBeetleEntityHandler ; $2C
+._2D far_pointer DroppableHeartEntityHandler
+._2E far_pointer DroppableRupeeEntityHandler
+._2F far_pointer DroppableFairyEntityHandler
+._30 far_pointer KeyDropPointEntityHandler ; $30
+._31 far_pointer SwordEntityHandler
+._32 far_pointer Entity32Handler
+._33 far_pointer PieceOfPowerEntityHandler
+._34 far_pointer GuardianAcornEntityHandler ; $34
+._35 far_pointer HeartPieceEntityHandler
+._36 far_pointer HeartContainerEntityHandler
+._37 far_pointer DroppableArrowsEntityHandler
+._38 far_pointer DroppableBombsEntityHandler ; $38
+._39 far_pointer SirensInstrumentEntityHandler
+._3A far_pointer SleepyToadstoolEntityHandler
+._3B far_pointer DroppableMagicPowderEntityHandler
+._3C far_pointer HidingSlimeKeyEntityHandler ; $3C
+._3D far_pointer DroppableSeashellEntityHandler
+._3E far_pointer MarinEntityHandler
+._3F far_pointer RacoonEntityHandler
+._40 far_pointer WitchEntityHandler ; $40
+._41 far_pointer OwlEventEntityHandler
+._42 far_pointer OwlStatueEntityHandler
+._43 far_pointer SeashellMansionTreesEntityHandler
+._44 far_pointer YarnaTalkingBonesEntityHandler ; $44
+._45 far_pointer BouldersEntityHandler
+._46 far_pointer MovingBlockLeftTopEntityHandler
+._47 far_pointer MovingBlockLeftBottomEntityHandler
+._48 far_pointer MovingBlockBottomLeftEntityHandler ; $48
+._49 far_pointer MovingBlockBottomRightEntityHandler
+._4A far_pointer ColorDungeonBookEntityHandler
+._4B far_pointer PotEntityHandler
+._4C far_pointer_null
+._4D far_pointer ShopOwnerEntityHandler
+._4E far_pointer Disabled4EEntityHandler
+._4F far_pointer TrendyGameOwnerEntityHandler
+._50 far_pointer BooBuddyEntityHandler ; $50
+._51 far_pointer KnightEntityHandler
+._52 far_pointer TractorDeviceEntityHandler
+._53 far_pointer ReversedTractorDeviceEntityHandler
+._54 far_pointer FishermanFishingGameEntityHandler ; $54
+._55 far_pointer BouncingBombiteEntityHandler
+._56 far_pointer TimerBombiteEntityHandler
+._57 far_pointer PairoddEntityHandler
+._58 far_pointer PairoddProjectileEntityHandler
+._59 far_pointer MoldormEntityHandler
+._5A far_pointer FacadeEntityHandler
+._5B far_pointer SlimeEyeEntityHandler
+._5C far_pointer GenieEntityHandler ; $5C
+._5D far_pointer SlimeEelEntityHandler
+._5E far_pointer GhomaEntityHandler
+._5F far_pointer MasterStalfosEntityHandler
+._60 far_pointer DodongoSnakeEntityHandler ; $60
+._61 far_pointer WarpEntityHandler
+._62 far_pointer HotHeadEntityHandler
+._63 far_pointer EvilEagleEntityHandler
+._64 far_pointer SouthFaceShrineDoorEntityHandler ; $64
+._65 far_pointer AnglerFishEntityHandler
+._66 far_pointer CrystalSwitchEntityHandler
+._67 far_pointer Entity67Handler
+._68 far_pointer Entity68Handler ; $68
+._69 far_pointer MovingBlockMoverEntityHandler
+._6A far_pointer EntityRaftOwnerHandler
+._6B far_pointer TextDebuggerEntityHandler
+._6C far_pointer CuccoEntityHandler ; $6C
+._6D far_pointer BowWowEntityHandler
+._6E far_pointer ButterflyEntityHandler
+._6F far_pointer DogEntityHandler
+._70 far_pointer Kid70EntityHandler ; $70
+._71 far_pointer Kid71EntityHandler
+._72 far_pointer Kid72EntityHandler
+._73 far_pointer Kid73EntityHandler
+._74 far_pointer PapahlsWifeEntityHandler ; $74
+._75 far_pointer GrandmaUlriraEntityHandler
+._76 far_pointer MrWriteEntityHandler
+._77 far_pointer GrandpaUlriraEntityHandler
+._78 far_pointer YipYipEntityHandler ; $78
+._79 far_pointer MadamMeowMeowEntityHandler
+._7A far_pointer CrowEntityHandler
+._7B far_pointer CrazyTracyEntityHandler
+._7C far_pointer GiantGopongaFlowerEntityHandler ; $7C
+._7D far_pointer GopongaProjectileEntityHandler
+._7E far_pointer GopongaFlowerEntityHandler
+._7F far_pointer TurtleRockHeadEntityHandler
+._80 far_pointer TelephoneEntityHandler ; $80
+._81 far_pointer RollingBonesEntityHandler
+._82 far_pointer RollingBonesBarEntityHandler
+._83 far_pointer DreamShrineBedEntityHandler
+._84 far_pointer BigFairyEntityHandler ; $84
+._85 far_pointer MrWriteBirdEntityHandler
+._86 far_pointer FloatingItemEntityHandler
+._87 far_pointer DesertLanmolaEntityHandler
+._88 far_pointer ArmosKnightEntityHandler ; $88
+._89 far_pointer HinoxEntityHandler
+._8A far_pointer TileGlintShownEntityHandler
+._8B far_pointer TileGlintHiddenEntityHandler
+._8C far_pointer Entity8CHandler ; $8C
+._8D far_pointer Entity8DHandler
+._8E far_pointer CueBallEntityHandler
+._8F far_pointer MaskedMimicGoriyaEntityHandler
+._90 far_pointer ThreeOfAKindEntityHandler ; $90
+._91 far_pointer AntiKirbyEntityHandler
+._92 far_pointer SmasherEntityHandler
+._93 far_pointer MadBomberEntityHandler
+._94 far_pointer KanaletBombableWallEntityHandler ; $94
+._95 far_pointer RichardEntityHandler
+._96 far_pointer RichardFrogEntityHandler
+._97 far_pointer Entity97Handler
+._98 far_pointer HorsePieceEntityHandler ; $98
+._99 far_pointer WaterTektiteEntityHandler
+._9A far_pointer FlyingTilesEntityHandler
+._9B far_pointer HidingGelEntityHandler
+._9C far_pointer StarEntityHandler ; $9C
+._9D far_pointer LiftableStatueEntityHandler
+._9E far_pointer FireballShooterEntityHandler
+._9F far_pointer GoombaEntityHandler
+._A0 far_pointer PeaHatEntityHandler ; $A0
+._A1 far_pointer SnakeEntityHandler
+._A2 far_pointer PiranhaPlantEntityHandler
+._A3 far_pointer SideViewPlatformHorizontalEntityHandler
+._A4 far_pointer SideViewPlatformVerticalEntityHandler ; $A4
+._A5 far_pointer SideViewPlatformEntityHandler
+._A6 far_pointer SideViewWeightsEntityHandler
+._A7 far_pointer SmashablePillarEntityHandler
+._A8 far_pointer EntityA8Handler ; $A8
+._A9 far_pointer BlooperEntityHandler
+._AA far_pointer CheepCheepHorizontalEntityHandler
+._AB far_pointer CheepCheepVerticalEntityHandler
+._AC far_pointer CheepCheepJumpingEntityHandler ; $AC
+._AD far_pointer KikiTheMonkeyEntityHandler
+._AE far_pointer WingedOctorockEntityHandler
+._AF far_pointer TradingItemEntityHandler
+._B0 far_pointer PincerEntityHandler ; $B0
+._B1 far_pointer HoleFillerEntityHandler
+._B2 far_pointer BeetleSpawnerEntityHandler
+._B3 far_pointer HoneycombEntityHandler
+._B4 far_pointer TarinEntityHandler ; $B4
+._B5 far_pointer BearEntityHandler
+._B6 far_pointer PapahlEntityHandler
+._B7 far_pointer MermaidEntityHandler
+._B8 far_pointer FishermanUnderBridgeEntityHandler ; $B8
+._B9 far_pointer BuzzBlobEntityHandler
+._BA far_pointer BomberEntityHandler
+._BB far_pointer BushCrawlerEntityHandler
+._BC far_pointer GrimCreeperEntityHandler ; $BC
+._BD far_pointer VireEntityHandler
+._BE far_pointer BlainoEntityHandler
+._BF far_pointer ZombieEntityHandler
+._C0 far_pointer MazeSignpostEntityHandler ; $C0
+._C1 far_pointer MarinAtTheShoreEntityHandler
+._C2 far_pointer MarinAtTalTalHeightsEntityHandler
+._C3 far_pointer MamuAndFrogsEntityHandler
+._C4 far_pointer WalrusEntityHandler ; $C4
+._C5 far_pointer UrchinEntityHandler
+._C6 far_pointer SandCrabEntityHandler
+._C7 far_pointer ManboAndFishesEntityHandler
+._C8 far_pointer BunnyCallingMarinEntityHandler ; $C8
+._C9 far_pointer MusicalNoteEntityHandler
+._CA far_pointer MadBatterEntityHandler
+._CB far_pointer ZoraEntityHandler
+._CC far_pointer FishEntityHandler ; $CC
+._CD far_pointer BananasSchuleSaleEntityHandler
+._CE far_pointer MermaidStatueEntityHandler
+._CF far_pointer SeashellMansionEntityHandler
+._D0 far_pointer AnimalD0EntityHandler ; $D0
+._D1 far_pointer AnimalD1EntityHandler
+._D2 far_pointer AnimalD2EntityHandler
+._D3 far_pointer BunnyD3EntityHandler
+._D4 far_pointer GhostEntityHandler ; $D4
+._D5 far_pointer RoosterEntityHandler
+._D6 far_pointer SideViewPotEntityHandler
+._D7 far_pointer ThwimpEntityHandler
+._D8 far_pointer ThwompEntityHandler ; $D8
+._D9 far_pointer ThwompRammableEntityHandler
+._DA far_pointer PodobooEntityHandler
+._DB far_pointer GiantBubbleEntityHandler
+._DC far_pointer FlyingRoosterEventsEntityHandler ; $DC
+._DD far_pointer BookEntityHandler
+._DE far_pointer EggSongEventEntityHandler
+._DF far_pointer SwordBeamEntityHandler
+._E0 far_pointer MonkeyEntityHandler ; $E0
+._E1 far_pointer WitchRatEntityHandler
+._E2 far_pointer FlameShooterEntityHandler
+._E3 far_pointer PokeyEntityHandler
+._E4 far_pointer MoblinKingEntityHandler ; $E4
+._E5 far_pointer FloatingItem2EntityHandler
+._E6 far_pointer FinalNightmareEntityHandler
+._E7 far_pointer KanaletCastleGateSwitchEntityHandler
+._E8 far_pointer EndingOwlStairClimbingEntityHandler ; $E8
+._E9 far_pointer ColorShellRedEntityHandler
+._EA far_pointer ColorShellGreenEntityHandler
+._EB far_pointer ColorShellBlueEntityHandler
+._EC far_pointer ColorGhoulRedEntityHandler ; $EC
+._ED far_pointer ColorGhoulGreenEntityHandler
+._EE far_pointer ColorGhoulBlueEntityHandler
+._EF far_pointer RotoswitchRedEntityHandler
+._F0 far_pointer RotoswitchYellowEntityHandler ; $F0
+._F1 far_pointer RotoswitchBlueEntityHandler
+._F2 far_pointer FlyingHopperBombsEntityHandler
+._F3 far_pointer HopperEntityHandler
+._F4 far_pointer AvalaunchEntityHandler ; $F4
+._F5 far_pointer BouncingBoulderEntityHandler
+._F6 far_pointer ColorGuardianBlueEntityHandler
+._F7 far_pointer ColorGuardianRedEntityHandler
+._F8 far_pointer GiantBuzzBlobEntityHandler ; $F8
+._F9 far_pointer HardhitBeetleEntityHandler
+._FA far_pointer PhotographerEntityHandler
 ._FB db $F0, $EB, $5F ; unused
 ._FC db $50, $21, $00 ; unused
 ._FD db $40, $19, $19 ; unused

@@ -1164,11 +1164,11 @@ func_001_4EBB::
 jr_001_4f2c::
     ld c, $22
 .loop
-    ld a, [de]
-    inc de
-    ld [hl+], a
-    dec c
-    jr nz, .loop
+    ld   a, [de]                                  ; $4ECF: $1A
+    inc  de                                       ; $4ED0: $13
+    ld   [hl+], a                                 ; $4ED1: $22
+    dec  c                                        ; $4ED2: $0D
+    jr   nz, .loop                                ; $4ED6: $20 $F7
     ret                                           ; $4ED8: $C9
 
 jr_001_4ED9::

@@ -430,7 +430,9 @@ Data_001_49F8::
 
 ; Part of file copy
 Data_001_49FE::
-    db 0, $A1, $AD, $A4, $5A, $A8
+    dw SaveGame1
+    dw SaveGame2
+    dw SaveGame3
 
 FileSelectionLoadSavedFile::
     jp   LoadSavedFile
@@ -1066,7 +1068,7 @@ jr_001_4E3B::
     call PlayValidationJingleAndReturn            ; $4E3B: $CD $BE $49
     call IncrementGameplaySubtype                 ; $4E3E: $CD $D6 $44
 
-label_001_4E55:
+label_001_4E55::
     ld hl, wRequestDestination
     ld a, $99
     ld [hl+], a
@@ -1705,6 +1707,8 @@ FileCopyStateAHandler::
     inc  hl                                       ; $521E: $23
     ld   h, [hl]                                  ; $521F: $66
     ld   l, a                                     ; $5220: $6F
+
+    ; sizeof save data + extra bytes?
     ld   de, $3ad                                 ; $5221: $11 $AD $03
 
 jr_001_5224::

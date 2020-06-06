@@ -425,7 +425,9 @@ Data_001_49F8::
 
 ; Part of file copy
 Data_001_49FE::
-    db 0, $A1, $AD, $A4, $5A, $A8
+    dw SaveGame1
+    dw SaveGame2
+    dw SaveGame3
 
 FileSelectionLoadSavedFile::
     jp   LoadSavedFile
@@ -1686,6 +1688,8 @@ FileCopyStateAHandler::
     inc  hl                                       ; $521E: $23
     ld   h, [hl]                                  ; $521F: $66
     ld   l, a                                     ; $5220: $6F
+
+    ; sizeof save data + extra bytes?
     ld   de, $3ad                                 ; $5221: $11 $AD $03
 
 jr_001_5224::

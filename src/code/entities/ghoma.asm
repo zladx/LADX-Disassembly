@@ -174,6 +174,13 @@ func_005_7CD5::
     ld   hl, wEntitiesPrivateCountdown2Table      ; $7CDD: $21 $00 $C3
     add  hl, bc                                   ; $7CE0: $09
     ld   [hl], $40                                ; $7CE1: $36 $40
+
+IF __PATCH_3__
+    ld   hl, wEntitiesHitboxFlagsTable
+    add  hl, bc
+    ld   [hl], $80
+ENDC
+
     ld   a, $01                                   ; $7CE3: $3E $01
     jp   label_005_7D5F                           ; $7CE5: $C3 $5F $7D
 

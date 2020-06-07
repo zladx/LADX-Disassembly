@@ -63,6 +63,7 @@ __PATCH_6__ = FALSE ; Applies to JP
 __PATCH_7__ = FALSE ; Applies to FR
 __PATCH_8__ = FALSE ; Applies to JP1+
 __PATCH_9__ = FALSE ; Applies to DE, JP
+__PATCH_A__ = 0 ; 1 in JP, 2 in DE
 
 ; Default values
 MINIMAP_VAR_0 = $EC
@@ -84,6 +85,7 @@ GAMEOVER_OPTION_SAVE_QUIT_Y equ 88
 GAMEOVER_OPTION_CONTINUE_Y equ 104
 __PATCH_6__ = TRUE
 __PATCH_9__ = TRUE
+__PATCH_A__ = 1
 IF (VERSION > 0)
 __PATCH_0__ = TRUE
 __PATCH_2__ = TRUE
@@ -131,6 +133,7 @@ __PATCH_1__ = TRUE
 __PATCH_2__ = TRUE
 __PATCH_5__ = TRUE
 __PATCH_9__ = TRUE
+__PATCH_A__ = 2
 IF (VERSION > 0)
 __PATCH_4__ = TRUE
 ENDC
@@ -153,7 +156,6 @@ IF !DEF(\1)
 \1 equ \2
 ENDC
 endm
-
 
     SET_DEFAULT GAMEOVER_OPTION_X, 28
     SET_DEFAULT GAMEOVER_OPTION_SAVE_CONTINUE_Y, 64

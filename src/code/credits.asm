@@ -130,8 +130,10 @@ jr_017_40cb:
     jp DrawLinkSpriteAndReturn
 ENDC
 
-
+PUSHC
+NEWCHARMAP default
 include "text/credits.asm"
+POPC
 
 func_017_448B::
     ld   a, [$D009]                               ; $448B: $FA $09 $D0

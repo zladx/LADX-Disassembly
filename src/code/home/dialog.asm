@@ -424,6 +424,21 @@ DialogDrawNextCharacterHandler::
     ld   a, [hli]
     ld   e, a
     ld   d, [hl]
+IF __USE_FIXED_DIALOG_BANKS__
+    ld   l, e
+    ld   h, d
+    ld   e, BANK(Dialog000)
+    ld   a, [wDialogIndexHi]
+    and  a
+    jr   z, .foundBank
+    ld   e,  BANK(Dialog100)
+    cp   $01
+    jr   z, .foundBank
+    ld   e,  BANK(Dialog200)
+.foundBank
+    ld   a, e
+    ld   [MBC3SelectBank], a
+ELSE
     push de
     ld   a, [wDialogIndex]
     ld   e, a
@@ -435,6 +450,7 @@ DialogDrawNextCharacterHandler::
     and  $3f
     ld   [MBC3SelectBank], a
     pop  hl
+ENDC
     ld   a, [wDialogCharacterIndex]
     ld   e, a
     ld   a, [wDialogCharacterIndexHi]
@@ -479,10 +495,15 @@ DialogDrawNextCharacterHandler::
     ret
 
 .ThiefString::
-PUSHC
-SETCHARMAP NameEntryCharmap
-    db "THIEF"
-POPC
+INDEX = 0
+REPT 5
+IF STRLEN("{THIEF_NAME}") < INDEX + 1
+    db 0
+ELSE
+    db  STRSUB("{THIEF_NAME}", INDEX + 1, 1) + 1
+ENDC
+INDEX = INDEX + 1
+ENDR
 
 .notEnd
     cp   " "
@@ -567,13 +588,18 @@ POPC
     ld   [hl], $00
     push hl
 
-     ; stubbed out bit of code accessing a table for (han)dakutens
-    ld   a, $1C ; BANK(DakutenTable)
+    ld   a, BANK(DakutenTable)
     ld   [MBC3SelectBank], a ; current character
     ldh  a, [hScratch1]
     ld   e, a
     ld   d, $00
+IF __DO_CHECK_DAKUTEN__
+    ld   hl, DakutenTable
+    add  hl, de
+    ld   a, [hl]
+ELSE
     xor  a
+ENDC
     pop  hl
     and  a
     jr   z, .noDakuten
@@ -663,8 +689,12 @@ DialogBreakHandler::
     ld   d, a
     ld   hl, DialogBankTable
     add  hl, de
+IF __PATCH_1__
+    bit  7, [hl]
+ELSE
     ld   a, [hl]
     and  a
+ENDC
     jp   z, label_278B
 
 .jp_26E1
@@ -695,7 +725,12 @@ DialogBreakHandler::
     ld   [wRequestLength + 1], a
     xor  a
     ld   [$D605], a
+IF __PATCH_9__
+    jp   IncrementDialogState
+ELSE
     call IncrementDialogState
+    ; fallthrough
+ENDC
 
 DialogScrollingStartHandler::
     ret
@@ -820,8 +855,12 @@ DialogChoiceHandler::
     jpsb func_017_7DCC
 
 .jp_27B7
+IF __PATCH_9__
+    jp   UpdateDialogState
+ELSE
     call UpdateDialogState
     ret
+ENDC
 
 func_27BB::
     jpsb func_017_7D7C

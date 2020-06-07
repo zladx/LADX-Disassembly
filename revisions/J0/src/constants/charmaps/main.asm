@@ -162,6 +162,7 @@ charmap "！", $a0
 charmap "？", $a1
 charmap "－", $a2
 charmap "　", $a3
+charmap " ", $a3
 charmap "．", $a4
 charmap "、", $a5
 charmap "。", $a6

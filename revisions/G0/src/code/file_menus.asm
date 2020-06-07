@@ -1211,7 +1211,7 @@ jr_001_4F1D::
 
     ld   a, [wCreditsScratch0]                    ; $4F23: $FA $00 $D0
     ld   e, a                                     ; $4F26: $5F
-    ld   a, $1e                                   ; $4F27: $3E $28
+    ld   a, $1E                                   ; $4F27: $3E $28
     dec  e                                        ; $4F29: $1D
     jr   nz, jr_001_4F2E                           ; $4F2A: $20 $02
 

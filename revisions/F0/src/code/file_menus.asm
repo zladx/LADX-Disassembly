@@ -150,8 +150,8 @@ jr_001_4894::
     ldh  [hScratch0], a
     ld   a, [de]
     and  a
-    jr   z, .jr_001_48a7
-   dec a
+    jr   z,jr_001_489D
+    dec  a
     push hl
     push bc
     ld c, a
@@ -160,11 +160,10 @@ jr_001_4894::
     pop bc
     pop hl
     cp $00
-.jr_001_48a7
-    ld a, $7e
 
 jr_001_489D::
-   jr z, jr_001_48A9                             ; $48a9: $28 $02
+    ld   a, $7E
+    jr   z, jr_001_48A9
 
     ld a, $c9
 
@@ -587,6 +586,7 @@ FileCreationInteractiveHandler::
     cp   $00
     jr   nz, jr_001_4AFE
     ld   a, MUSIC_ZELDA_NICKNAME_EASTER_EGG
+jr_001_4ae6::
     ld   [wMusicTrackToPlay], a
 
 jr_001_4AFE::
@@ -1045,6 +1045,8 @@ Data_001_4E43::
 label_001_4E55::
     ld   hl, wRequestDestinationHigh              ; $4E55: $21 $01 $D6
     ld   de, Data_001_4E43                        ; $4E58: $11 $43 $4E
+
+    ; c = sizeof(Data_001_4E43)
     ld   c, $13                                   ; $4E5B: $0E $11
 
 .loop

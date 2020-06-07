@@ -61,6 +61,7 @@ __PATCH_4__ = FALSE ; Applies to DE1+, JP2+, EN2+, FR1+
 __PATCH_5__ = FALSE ; Applies to DE
 __PATCH_6__ = FALSE ; Applies to JP
 __PATCH_7__ = FALSE ; Applies to FR
+__PATCH_8__ = FALSE ; Applies to JP1+
 
 ; Default values
 MINIMAP_VAR_0 = $EC
@@ -82,6 +83,7 @@ IF (VERSION > 0)
 __PATCH_0__ = TRUE
 __PATCH_2__ = TRUE
 __PATCH_3__ = TRUE
+__PATCH_8__ = TRUE
 ENDC
 IF (VERSION > 1)
 __PATCH_4__ = TRUE

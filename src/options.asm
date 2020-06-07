@@ -62,6 +62,7 @@ __PATCH_5__ = FALSE ; Applies to DE
 __PATCH_6__ = FALSE ; Applies to JP
 __PATCH_7__ = FALSE ; Applies to FR
 __PATCH_8__ = FALSE ; Applies to JP1+
+__PATCH_9__ = FALSE ; Applies to DE, JP
 
 ; Default values
 MINIMAP_VAR_0 = $EC
@@ -79,6 +80,7 @@ DEBUG_SAVE_BOMB_COUNT equ $59
 DEBUG_SAVE_MAGIC_COUNT equ $39
 DEBUG_SAVE_SWITCH_ARROWS = TRUE
 __PATCH_6__ = TRUE
+__PATCH_9__ = TRUE
 IF (VERSION > 0)
 __PATCH_0__ = TRUE
 __PATCH_2__ = TRUE
@@ -121,6 +123,7 @@ __PATCH_0__ = TRUE
 __PATCH_1__ = TRUE
 __PATCH_2__ = TRUE
 __PATCH_5__ = TRUE
+__PATCH_9__ = TRUE
 IF (VERSION > 0)
 __PATCH_4__ = TRUE
 ENDC

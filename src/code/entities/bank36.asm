@@ -8312,8 +8312,8 @@ EntityInitGenie::
 
 IF __PATCH_3__
 func_036_72D5:
-    ldh a, [hActiveEntityState]
-    sub $02
+    ldh  a, [hActiveEntityState]
+    sub  $02
     JP_TABLE
 ._00 dw func_036_72e4
 ._01 dw func_036_72e4

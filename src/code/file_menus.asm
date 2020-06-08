@@ -12,6 +12,7 @@
 ;
 ; -----------------------------------------------------------------------------
 
+NameEntryCharacterTableSize equs "(NameEntryCharacterTable.end - NameEntryCharacterTable)"
 
 FileSelectionEntryPoint::
     call func_5DC0
@@ -150,11 +151,41 @@ jr_001_4894::
     ldh  [hScratch0], a
     ld   a, [de]
     and  a
+
+IF __PATCH_C__
     jr   jr_001_489D
     dec  a
     and  $C0
+ELSE
+    jr   z, jr_001_489D
+    dec  a
+    push hl
+    push bc
+    ld   c, a
+    ld   b, $00
+    call ReadDialogBankFromTable
+IF __PATCH_9__
+    ldh  [hRoomBank], a
+ENDC
+    pop  bc
+    pop  hl
+    cp   $00
+ENDC
 
 jr_001_489D::
+IF __PATCH_B__ == 1
+    ld   a, $7E
+    jr   z, jr_001_48A9
+    ldh  a, [hRoomBank]
+    cp   $02
+    ld   a, $C8
+    jr   z, jr_001_48A9
+    inc  a
+ELIF __PATCH_B__ == 2
+    ld   a, $7E
+    jr   z, jr_001_48A9
+    ld   a, $c9
+ELSE
     ld   a, $7E
     jr   jr_001_48A9
     ld   a, [de]
@@ -162,6 +193,7 @@ jr_001_489D::
     ld   a, $C8
     jr   z, jr_001_48A9
     inc  a
+ENDC
 
 jr_001_48A9::
     ldi  [hl], a
@@ -188,6 +220,9 @@ FileSelectionPrepare6::
 
     ; If there are no saved files yet…
     ld   a, [wSaveFilesCount]
+IF __PATCH_5__
+    ldh [hLinkInteractiveMotionBlocked], a
+ENDC
     and  a
     ; … use background map 3,
     ld   a, $03
@@ -213,7 +248,38 @@ Data_001_48E4::
     ld   l, e
     add  a, e
 
+IF __PATCH_5__
+Data_001_48EB:
+    ; bg copy requests
+    db   $99, $C6, $00, $AA
+    db   $99, $C7, $00, $AF
+    db   $00
+.end
+ENDC
+
+
+
 FileSelectionInteractiveHandler::
+IF __PATCH_5__
+    ldh a, [hLinkInteractiveMotionBlocked]
+    and a
+    jr z, .start
+
+    xor a
+    ldh [hLinkInteractiveMotionBlocked], a
+    ld hl, wRequestDestination
+    ld de, Data_001_48EB
+    ld c, Data_001_48EB.end - Data_001_48EB
+
+.copyLoop
+    ld a, [de]
+    inc de
+    ld [hl+], a
+    dec c
+    jr nz, .copyLoop
+ENDC
+
+.start
     call func_001_6BA8
     ldh  a, [hJoypadState]
     and  $90
@@ -269,17 +335,17 @@ jr_001_4938::
     jr   nz, func_001_4954
     ld   a, [$D000]
     and  a
-    ld   a, $2C
+    ld   a, FILE_2C
     jr   z, jr_001_4948
-    ld   a, $64
+    ld   a, FILE_64
 
 jr_001_4948::
-    ld   hl, $C008
-    ld   [hl], $88
+    ld   hl, wOAMBuffer + $8
+    ld   [hl], $88 ; y
     inc  hl
-    ldi  [hl], a
+    ldi  [hl], a ; x
     ld   a, $BE
-    ldi  [hl], a
+    ldi  [hl], a ; chr
     xor  a
     ld   [hl], a
 
@@ -470,6 +536,7 @@ FileCreationInit2Handler::
     ld   [hl], a
     jp   IncrementGameplaySubtypeAndReturn
 
+IF !__PATCH_5__
 ; Write a single byte to the save file.
 ; Inputs:
 ;   hl   address of the save file start
@@ -521,9 +588,28 @@ jr_001_4A4D::
     ld   bc, $4C
     call WriteByteToExternalRAM
     ret
+ENDC
 
 Data_001_4A98::
     db   $00, $05, $0A
+
+
+CHECKNAME: macro
+    ld   hl, $DB80
+    add  hl, de
+I = 0
+REPT 5
+    ld   a, [hli]
+IF STRLEN(\1) < I + 1
+    cp   0
+ELSE
+    cp   STRSUB(\1, 1 + I, 1) + $01
+ENDC
+    jr   nz, \3
+I = I + 1
+ENDR
+    ld   a, \2
+ENDM
 
 FileCreationInteractiveHandler::
     ld   a, [wSaveSlot]
@@ -541,7 +627,11 @@ FileCreationInteractiveHandler::
 
     ldh  a, [hJoypadState]
     and  J_START
+IF __PATCH_9__
+    jp   z, jr_001_4B29
+ELSE
     jr   z, jr_001_4B29
+ENDC
     call PlayValidationJingle
     ld   a, [wSaveSlot]
     sla  a
@@ -563,25 +653,17 @@ FileCreationInteractiveHandler::
     add  a, e
     ld   e, a
     ld   d, $00
-    ld   hl, $DB80
-    add  hl, de
-    ; Checks if the chosen name is 'ZELDA' and plays the easter egg music if this is the case.
-    ld   a, [hli]
-    cp   "Z" + $01
-    jr   nz, jr_001_4AFE
-    ld   a, [hli]
-    cp   "E" + $01
-    jr   nz, jr_001_4AFE
-    ld   a, [hli]
-    cp   "L" + $01
-    jr   nz, jr_001_4AFE
-    ld   a, [hli]
-    cp   "D" + $01
-    jr   nz, jr_001_4AFE
-    ld   a, [hli]
-    cp   "A" + $01
-    jr   nz, jr_001_4AFE
-    ld   a, MUSIC_ZELDA_NICKNAME_EASTER_EGG
+
+IF (DEF(EASTER_EGG_FILENAME_2))
+    CHECKNAME "{EASTER_EGG_FILENAME_1}", EASTER_EGG_SONG_1, .checkOtherName
+    jr .foundName
+.checkOtherName
+    CHECKNAME "{EASTER_EGG_FILENAME_2}", EASTER_EGG_SONG_2, jr_001_4AFE
+ELSE
+    CHECKNAME "{EASTER_EGG_FILENAME_1}", EASTER_EGG_SONG_1, jr_001_4AFE
+ENDC
+
+.foundName
     ld   [wMusicTrackToPlay], a
 
 jr_001_4AFE::
@@ -631,6 +713,10 @@ Data_001_4B30::
     db   $58, $58, $58, $58, $58, $58, $58, $58   ; $4B58
     db   $68, $68, $68, $68, $68, $68, $68, $68   ; $4B60
     db   $68, $68, $68, $68, $68, $68, $68, $68   ; $4B68
+IF __PATCH_9__
+    db   $78, $78, $78, $78, $78, $78, $78, $78
+    db   $78, $78, $78, $78, $78, $78, $78, $78
+ENDC
 
 Data_001_4B70::
     db   $14, $1C, $24, $2C, $34, $3C, $44, $4C   ; $4B70
@@ -641,22 +727,17 @@ Data_001_4B70::
     db   $54, $5C, $64, $6C, $74, $7C, $84, $8C   ; $4B98
     db   $14, $1C, $24, $2C, $34, $3C, $44, $4C   ; $4BA0
     db   $54, $5C, $64, $6C, $74, $7C, $84, $8C   ; $4BA8
+IF __PATCH_9__
+    db   $14, $1C, $24, $2C, $34, $3C, $44, $4C
+    db   $54, $5C, $64, $6C, $74, $7C, $84, $8C
+ENDC
 
 Data_001_4BB0::
     db   $4C, $54, $5C, $64, $6C                  ; $4BB0
 
 NameEntryCharacterTable::
-    ; Used to translate cursor position -> name letter
-    ; on the name entry menu. Does not actually represent
-    ; the graphics - this is just the letter that is chosen
-    ; when you push A
-    PUSHC
-    SETCHARMAP NameEntryCharmap
-    db   "ABCDEFG",  0,0, "abcdefg"
-    db   "HIJKLMN",  0,0, "hijklmn"
-    db   "OPQRSTU",  0,0, "opqrstu"
-    db   "VWXYZ",0,0,0,0, "vwxyz",0,0
-    POPC
+include "data/name_entry_characters.asm"
+.end
 
 func_001_4BF5::
     ldh  a, [hJoypadState]
@@ -696,7 +777,7 @@ jr_001_4C21::
     jr   nz, jr_001_4C34
     ld   a, [$DBA9]
     add  a, $01
-    cp   $40
+    cp   NameEntryCharacterTableSize
     jr   c, jr_001_4C5E
     xor  a
     jr   jr_001_4C5E
@@ -706,7 +787,7 @@ jr_001_4C34::
     sub  a, $01
     cp   $FF
     jr   nz, jr_001_4C5E
-    ld   a, $3F
+    ld   a, NameEntryCharacterTableSize - 1
     jr   jr_001_4C5E
 
 jr_001_4C41::
@@ -716,15 +797,15 @@ jr_001_4C41::
     ld   a, [$DBA9]
     sub  a, $10
     jr   nc, jr_001_4C5E
-    add  a, $40
+    add  a, NameEntryCharacterTableSize
     jr   jr_001_4C5E
 
 jr_001_4C53::
     ld   a, [$DBA9]
     add  a, $10
-    cp   $40
+    cp   NameEntryCharacterTableSize
     jr   c, jr_001_4C5E
-    sub  a, $40
+    sub  a, NameEntryCharacterTableSize
 
 jr_001_4C5E::
     ld   [$DBA9], a
@@ -946,6 +1027,13 @@ func_001_4D9D::
 func_001_4DA6::
     ld   a, [wSaveFilesCount]                     ; $4DA6: $FA $A7 $DB
     and  $01                                      ; $4DA9: $E6 $01
+IF __PATCH_4__
+    ret  z
+    xor  a
+    ld   hl, $DC06
+    ld   de, $DC09
+    ; fallthrough
+ELSE
     jr   z, jr_001_4DBD                            ; $4DAB: $28 $10
 
     xor  a                                        ; $4DAD: $AF
@@ -955,13 +1043,51 @@ func_001_4DA6::
     ld   a, [$DC09]                               ; $4DB5: $FA $09 $DC
     ldh  [hScratch3], a                           ; $4DB8: $E0 $DA
     jp   label_001_5D53                               ; $4DBA: $C3 $53 $5D
+ENDC
 
+IF __PATCH_4__
+jr_001_4db6:
+    ldh [hScratch4], a
+    ld a, [hl]
+    ldh [hScratch2], a
+    ld a, [de]
+    cp $03
+    jr nc, jr_001_4dc2
+    ld a, $03
+
+jr_001_4dc2:
+    cp $0e
+    jr c, jr_001_4dc8
+
+    ld a, $0e
+
+jr_001_4dc8:
+    ld [de], a
+    ldh [hScratch3], a
+    swap a
+    srl a
+    cp [hl]
+    jp nc, label_001_5D53
+
+    ld [hl], a
+    ldh [hScratch2], a
+    jp label_001_5D53
+
+ELSE
 jr_001_4DBD::
     ret                                           ; $4DBD: $C9
+ENDC
 
 func_001_4DBE::
     ld   a, [wSaveFilesCount]                     ; $4DBE: $FA $A7 $DB
     and  $02                                      ; $4DC1: $E6 $02
+IF __PATCH_4__
+    ret  z
+    ld   a, $01
+    ld   hl, $dC07
+    ld   de, $dC0a
+    jr   jr_001_4db6
+ELSE
     jr   z, jr_001_4DBD                            ; $4DC3: $28 $F8
 
     ld   a, $01                                   ; $4DC5: $3E $01
@@ -971,10 +1097,18 @@ func_001_4DBE::
     ld   a, [$DC0A]                               ; $4DCE: $FA $0A $DC
     ldh  [hScratch3], a                           ; $4DD1: $E0 $DA
     jp   label_001_5D53                               ; $4DD3: $C3 $53 $5D
+ENDC
 
 func_001_4DD6::
     ld   a, [wSaveFilesCount]                     ; $4DD6: $FA $A7 $DB
     and  $04                                      ; $4DD9: $E6 $04
+IF __PATCH_4__
+    ret  z
+    ld   a, $02
+    ld   hl, $dC08
+    ld   de, $dC0B
+    jr   jr_001_4db6
+ELSE
     jr   z, jr_001_4DBD                            ; $4DDB: $28 $E0
 
     ld   a, $02                                   ; $4DDD: $3E $02
@@ -984,6 +1118,7 @@ func_001_4DD6::
     ld   a, [$DC0B]                               ; $4DE6: $FA $0B $DC
     ldh  [hScratch3], a                           ; $4DE9: $E0 $DA
     jp   label_001_5D53                               ; $4DEB: $C3 $53 $5D
+ENDC
 
 Data_001_4DEE::
     db   $98, $A5, $44, $7E, $98, $C5, $44, $7E   ; $4DEE
@@ -1030,28 +1165,54 @@ jr_001_4E2B::
 jr_001_4E3B::
     call PlayValidationJingleAndReturn            ; $4E3B: $CD $BE $49
     call IncrementGameplaySubtype                 ; $4E3E: $CD $D6 $44
+IF __PATCH_6__
+label_001_4E55:
+    ld hl, wRequestDestination
+    ld a, $99
+    ld [hl+], a
+    ld a, $ee
+    ld [hl+], a
+    ld a, $02
+    ld [hl+], a
+    ld a, $ba
+    ld [hl+], a
+    ld a, $bb
+    ld [hl+], a
+    ld a, $3d
+
+    ld [hl+], a                                   ; $4eb9: $22
+    xor a                                         ; $4eba: $af
+    ld [hl], a                                    ; $4ebb: $77
+    ret                                           ; $4ebc: $c9
+ELSE
     jr   label_001_4E55                               ; $4E41: $18 $12
 
 Data_001_4E43::
-    db   $99, $E4, $0D, $7E, $7E, $10, $14, $08   ; $4E43
-    db   $13, $7E, $7E, $7E, $7E, $0E, $0A, $7E   ; $4E4B
-    db   $7E, $00                                 ; $4E53
+include "data/file_menu_bg.asm"
+.end
 
 label_001_4E55::
     ld   hl, wRequestDestinationHigh              ; $4E55: $21 $01 $D6
     ld   de, Data_001_4E43                        ; $4E58: $11 $43 $4E
-    ld   c, $11                                   ; $4E5B: $0E $11
+IF __PATCH_C__
+    ld   c, Data_001_4E43.end - Data_001_4E43 - 1 ; $4E5B: $0E $11
+ELSE
+    ld   c, Data_001_4E43.end - Data_001_4E43
+ENDC
 
 .loop
     ld   a, [de]                                  ; $4E5D: $1A
     inc  de                                       ; $4E5E: $13
     ld   [hl+], a                                 ; $4E5F: $22
     dec  c                                        ; $4E60: $0D
+IF __PATCH_C__
     ld   a, c                                     ; $4E61: $79
     cp   $FF                                      ; $4E62: $FE $FF
+ENDC
     jr   nz, .loop                                ; $4E64: $20 $F7
 
     ret                                           ; $4E66: $C9
+ENDC
 
 jr_001_4E67::
     call func_001_4954                               ; $4E67: $CD $54 $49
@@ -1063,7 +1224,11 @@ FileDeletionState11Handler::
     jr   nz, jr_001_4E9E                           ; $4E6F: $20 $2D
 
     and  $90                                      ; $4E71: $E6 $90
+IF __PATCH_5__
+    jp   z, jr_001_4ED9
+ELSE
     jr   z, jr_001_4ED9                            ; $4E73: $28 $64
+ENDC
 
     ld   a, [wCreditsScratch0]                    ; $4E75: $FA $00 $D0
     and  a                                        ; $4E78: $A7
@@ -1099,32 +1264,74 @@ jr_001_4E9E::
     dec  [hl]                                     ; $4EA7: $35
     ret                                           ; $4EA8: $C9
 
+IF __PATCH_6__
+func_001_4EBB::
+    ld   a, [wRequests]                             ; $4eff: $fa $00 $d6
+    ld   e, a                                       ; $4f02: $5f
+    add  $04                                       ; $4f03: $c6 $04
+    ld   [wRequests], a                             ; $4f05: $ea $00 $d6
+    ld   d, $00                                     ; $4f08: $16 $00
+    ld   hl, wRequestDestination                    ; $4f0a: $21 $01 $d6
+    add  hl, de                                    ; $4f0d: $19
+    ld   a, $99                                     ; $4f0e: $3e $99
+    ld   [hl+], a                                   ; $4f10: $22
+    ld   a, $ee                                     ; $4f11: $3e $ee
+    ld   [hl+], a                                   ; $4f13: $22
+    ld   a, $42                                     ; $4f14: $3e $42
+    ld   [hl+], a                                   ; $4f16: $22
+    ld   a, $7e                                     ; $4f17: $3e $7e
+    ld   [hl+], a                                   ; $4f19: $22
+    xor  a                                         ; $4f1a: $af
+    ld   [hl], a                                    ; $4f1b: $77
+    ret                                           ; $4f1c: $c9
+ELSE
+
 Data_001_4EA9::
-    db   $99, $E4, $0D, $11, $04, $13, $14, $11   ; $4EA9
-    db   $0D, $7E, $13, $0E, $7E, $0C, $04, $0D   ; $4EB1
-    db   $14, $00                                 ; $4EB9
+include "data/file_menu_bg_2.asm"
+.end
+
+IF __PATCH_5__
+Data_001_4EA9_alt::
+include "data/file_menu_bg_2_alt.asm"
+.end
+ENDC
 
 func_001_4EBB::
     ld   a, [wRequests]                           ; $4EBB: $FA $00 $D6
     ld   e, a                                     ; $4EBE: $5F
-    add  $11                                      ; $4EBF: $C6 $11
+    add  Data_001_4EA9.end - Data_001_4EA9 - 1
     ld   [wRequests], a                           ; $4EC1: $EA $00 $D6
     ld   d, $00                                   ; $4EC4: $16 $00
     ld   hl, wRequestDestinationHigh              ; $4EC6: $21 $01 $D6
     add  hl, de                                   ; $4EC9: $19
     ld   de, Data_001_4EA9                        ; $4ECA: $11 $A9 $4E
-    ld   c, $11                                   ; $4ECD: $0E $11
 
+IF __PATCH_5__
+    ld   a, [wGameplayType]
+    cp   GAMEPLAY_FILE_COPY
+    jr   nz, .endIfFileCopy
+    ld   de, Data_001_4EA9_alt
+.endIfFileCopy
+ENDC
+
+IF __PATCH_C__
+    ld   c, Data_001_4EA9.end - Data_001_4EA9 - 1 ; $4ECD: $0E $11
+ELSE
+    ld   c, Data_001_4EA9.end - Data_001_4EA9
+ENDC
 .loop
     ld   a, [de]                                  ; $4ECF: $1A
     inc  de                                       ; $4ED0: $13
     ld   [hl+], a                                 ; $4ED1: $22
     dec  c                                        ; $4ED2: $0D
+IF __PATCH_C__
     ld   a, c                                     ; $4ED3: $79
     cp   $FF                                      ; $4ED4: $FE $FF
+ENDC
     jr   nz, .loop                                ; $4ED6: $20 $F7
 
     ret                                           ; $4ED8: $C9
+ENDC
 
 jr_001_4ED9::
     call func_001_4F0C                               ; $4ED9: $CD $0C $4F
@@ -1181,11 +1388,19 @@ jr_001_4F1D::
 
     ld   a, [wCreditsScratch0]                    ; $4F23: $FA $00 $D0
     ld   e, a                                     ; $4F26: $5F
-    ld   a, $28                                   ; $4F27: $3E $28
+IF __PATCH_6__
+    ld   a, [wGameplayType]
+    cp   GAMEPLAY_FILE_COPY
+    ld   a, $1c
+    jr   nz, jr_001_4f76
+ENDC
+    ld   a, FILE_28                                   ; $4F27: $3E $28
+
+jr_001_4f76:
     dec  e                                        ; $4F29: $1D
     jr   nz, jr_001_4F2E                           ; $4F2A: $20 $02
 
-    ld   a, $6C                                   ; $4F2C: $3E $6C
+    ld   a, FILE_6C                                   ; $4F2C: $3E $6C
 
 jr_001_4F2E::
     ld   hl, $C00C                                ; $4F2E: $21 $0C $C0
@@ -1366,6 +1581,17 @@ jr_001_503F::
 
 jr_001_5042::
     xor  a                                        ; $5042: $AF
+IF __PATCH_4__
+    or   [hl]
+    inc  hl
+    or   [hl]
+    inc  hl
+    or   [hl]
+    inc  hl
+    or   [hl]
+    inc  hl
+    or   [hl]
+ELSE
     add  [hl]                                     ; $5043: $86
     inc  hl                                       ; $5044: $23
     add  [hl]                                     ; $5045: $86
@@ -1375,6 +1601,7 @@ jr_001_5042::
     add  [hl]                                     ; $5049: $86
     inc  hl                                       ; $504A: $23
     add  [hl]                                     ; $504B: $86
+ENDC
     and  a                                        ; $504C: $A7
     jr   z, jr_001_5055                            ; $504D: $28 $06
 

@@ -4,7 +4,7 @@ Data_18_7BDF::
 HookshotChainEntityHandler::
     ld   a, [wLinkPlayingOcarinaCountdown]        ; $7BE3
     and  a                                        ; $7BE6: $A7
-    jp   nz, func_018_7F08                        ; $7BE7: $C2 $08 $7F
+    jp   nz, ClearEntityStatusBank18              ; $7BE7: $C2 $08 $7F
 
     ld   a, $02                                   ; $7BEA: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7BEC: $E0 $A1
@@ -66,7 +66,7 @@ jr_018_7C46:
 
     xor  a                                        ; $7C4B: $AF
     ld   [$C1C6], a                               ; $7C4C: $EA $C6 $C1
-    call func_018_7F08                            ; $7C4F: $CD $08 $7F
+    call ClearEntityStatusBank18                  ; $7C4F: $CD $08 $7F
     jr   jr_018_7CAE                              ; $7C52: $18 $5A
 
 jr_018_7C54:

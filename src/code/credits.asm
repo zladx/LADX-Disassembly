@@ -6454,7 +6454,7 @@ jr_017_7DD6:
     ld   a, [hl]                                  ; $7DE3: $7E
     ld   [$C018], a                               ; $7DE4: $EA $18 $C0
     ld   e, $00                                   ; $7DE7: $1E $00
-    ld   a, [wC177]                               ; $7DE9: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $7DE9: $FA $77 $C1
     and  $01                                      ; $7DEC: $E6 $01
     jr   z, jr_017_7DF1                           ; $7DEE: $28 $01
 
@@ -6479,7 +6479,7 @@ jr_017_7E04:
     sub  [hl]                                     ; $7E0C: $96
     ld   [wOAMBuffer], a                               ; $7E0D: $EA $00 $C0
     ld   e, $00                                   ; $7E10: $1E $00
-    ld   a, [wC177]                               ; $7E12: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $7E12: $FA $77 $C1
     and  $01                                      ; $7E15: $E6 $01
     jr   z, jr_017_7E1A                           ; $7E17: $28 $01
 

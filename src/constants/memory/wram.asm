@@ -299,7 +299,9 @@ wDialogIndex: ds 1 ; C173
 wC174: ds 1
 wC175: ds 1
 wC176: ds 1
-wC177: ds 1
+; 0 or 1 depending on the first or second option is selected in a ask dialog
+wDialogAskSelectionIndex: ; C177
+    ds 1
 wC178: ds 1
 wC179: ds 1
 wC17a: ds 1

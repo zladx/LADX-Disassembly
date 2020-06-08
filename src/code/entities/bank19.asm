@@ -869,7 +869,7 @@ jr_019_467B:
 GoriyaState1Handler::
     call func_019_7D3D                            ; $4690: $CD $3D $7D
     call IncrementEntityState                     ; $4693: $CD $12 $3B
-    ld   a, [wC177]                               ; $4696: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $4696: $FA $77 $C1
     and  a                                        ; $4699: $A7
     jr   nz, jr_019_46DB                          ; $469A: $20 $3F
 
@@ -925,7 +925,7 @@ GoriyaState3Handler::
     call func_019_7D3D                            ; $46E7: $CD $3D $7D
     call IncrementEntityState                     ; $46EA: $CD $12 $3B
     ld   [hl], $02                                ; $46ED: $36 $02
-    ld   a, [wC177]                               ; $46EF: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $46EF: $FA $77 $C1
     and  a                                        ; $46F2: $A7
     jr   nz, jr_019_4725                          ; $46F3: $20 $30
 
@@ -6117,7 +6117,7 @@ BananasSchuleState1Handler::
     ret  nz                                       ; $6D76: $C0
 
     call IncrementEntityState                     ; $6D77: $CD $12 $3B
-    ld   a, [wC177]                               ; $6D7A: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $6D7A: $FA $77 $C1
     and  a                                        ; $6D7D: $A7
     jr   z, jr_019_6D86                           ; $6D7E: $28 $06
 

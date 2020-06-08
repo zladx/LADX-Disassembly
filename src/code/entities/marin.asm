@@ -499,7 +499,7 @@ func_005_512B::
     jr   nz, jr_005_515E                          ; $512F: $20 $2D
 
     call IncrementEntityState                     ; $5131: $CD $12 $3B
-    ld   a, [wC177]                               ; $5134: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $5134: $FA $77 $C1
     and  a                                        ; $5137: $A7
     jr   nz, jr_005_514F                          ; $5138: $20 $15
 

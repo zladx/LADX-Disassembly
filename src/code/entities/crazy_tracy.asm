@@ -199,7 +199,7 @@ CrazyTracySellingHandler::
     and  a                                        ; $5F94: $A7
     jp   nz, CrazyTracySellingHandler.return                 ; $5F95: $C2 $1B $60
 
-    ld   a, [wC177]                               ; $5F98: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $5F98: $FA $77 $C1
     and  a                                        ; $5F9B: $A7
     jr   nz, .refusedMedecine
 

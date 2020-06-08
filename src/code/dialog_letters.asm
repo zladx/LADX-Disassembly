@@ -31,7 +31,7 @@ Data_01C_4A22::
     db   $98, $98, $98, $98, $98, $99, $99, $99, $99, $99
 
 DialogOpenAnimationEnd::
-    ld   a, [$C19F]                             ; $4A2C: $FA $9F $C1
+    ld   a, [wDialogState]                             ; $4A2C: $FA $9F $C1
     ld   c, a                                   ; $4A2F: $4F
     ld   a, [$C16F]                             ; $4A30: $FA $6F $C1
     cp   $05                                    ; $4A33: $FE $05
@@ -78,7 +78,7 @@ func_01C_4A6C::
     ret                                         ; $4A70: $C9
 
 func_01C_4A71::
-    ld   hl, $C19F                              ; $4A71: $21 $9F $C1
+    ld   hl, wDialogState                              ; $4A71: $21 $9F $C1
     inc  [hl]                                   ; $4A74: $34
     ret                                         ; $4A75: $C9
 
@@ -110,7 +110,7 @@ Data_01C_4A9E::
     db   $24, $48, $00, $36, $12, $24           ; $4AA2 |$H.6.$|
 
 func_01C_4AA8::
-    ld   a, [$C19F]                             ; $4AA8: $FA $9F $C1
+    ld   a, [wDialogState]                             ; $4AA8: $FA $9F $C1
     ld   c, a                                   ; $4AAB: $4F
     ld   a, [$C16F]                             ; $4AAC: $FA $6F $C1
     cp   $05                                    ; $4AAF: $FE $05

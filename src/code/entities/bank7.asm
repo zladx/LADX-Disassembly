@@ -754,7 +754,7 @@ jr_007_44E4:
 
 func_007_44E8::
     call IncrementEntityState                     ; $44E8: $CD $12 $3B
-    ld   a, [wC177]                               ; $44EB: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $44EB: $FA $77 $C1
     and  a                                        ; $44EE: $A7
     jr   nz, jr_007_4503                          ; $44EF: $20 $12
 
@@ -1195,7 +1195,7 @@ func_007_47D9::
 
 func_007_47F5::
     call IncrementEntityState                     ; $47F5: $CD $12 $3B
-    ld   a, [wC177]                               ; $47F8: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $47F8: $FA $77 $C1
     and  a                                        ; $47FB: $A7
     jr   nz, jr_007_4804                          ; $47FC: $20 $06
 
@@ -1628,7 +1628,7 @@ jr_007_4AE9:
     jp   SetEntitySpriteVariant                   ; $4AF0: $C3 $0C $3B
 
 func_007_4AF3::
-    ld   a, [wC177]                               ; $4AF3: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $4AF3: $FA $77 $C1
     and  a                                        ; $4AF6: $A7
     jr   nz, jr_007_4B0E                          ; $4AF7: $20 $15
 
@@ -1809,7 +1809,7 @@ func_007_4C49::
     jr   nz, jr_007_4C6F                          ; $4C4D: $20 $20
 
     call IncrementEntityState                     ; $4C4F: $CD $12 $3B
-    ld   a, [wC177]                               ; $4C52: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $4C52: $FA $77 $C1
     and  a                                        ; $4C55: $A7
     jr   z, jr_007_4C5E                           ; $4C56: $28 $06
 
@@ -2258,7 +2258,7 @@ func_007_4F1F::
     and  a                                        ; $4F25: $A7
     jr   nz, jr_007_4F4D                          ; $4F26: $20 $25
 
-    ld   a, [wC177]                               ; $4F28: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $4F28: $FA $77 $C1
     and  a                                        ; $4F2B: $A7
     jr   nz, jr_007_4F44                          ; $4F2C: $20 $16
 
@@ -3794,7 +3794,7 @@ func_007_591A::
     ret  nz                                       ; $591E: $C0
 
     call IncrementEntityState                     ; $591F: $CD $12 $3B
-    ld   a, [wC177]                               ; $5922: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $5922: $FA $77 $C1
     and  a                                        ; $5925: $A7
     jr   nz, jr_007_592E                          ; $5926: $20 $06
 

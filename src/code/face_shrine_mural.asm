@@ -86,7 +86,7 @@ jr_001_6B80::
     ret
 
 FaceShrineMuralStage4Handler::
-    ld   a, [$C19F]
+    ld   a, [wDialogState]
     and  a
     ret  nz
     ld   a, [$C3C4]

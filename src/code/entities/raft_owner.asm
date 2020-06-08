@@ -47,7 +47,7 @@ func_005_539C::
     ret  nz                                       ; $53A0: $C0
 
     call IncrementEntityState                     ; $53A1: $CD $12 $3B
-    ld   a, [wC177]                               ; $53A4: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $53A4: $FA $77 $C1
     and  a                                        ; $53A7: $A7
     jr   z, jr_005_53AC                           ; $53A8: $28 $02
 

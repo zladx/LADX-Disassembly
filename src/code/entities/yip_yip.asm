@@ -137,7 +137,7 @@ YipYipState2Handler::
     and  a                                        ; $5AA6: $A7
     jr   nz, jr_006_5AD0                          ; $5AA7: $20 $27
 
-    ld   a, [wC177]                               ; $5AA9: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $5AA9: $FA $77 $C1
     and  a                                        ; $5AAC: $A7
     jr   nz, jr_006_5AC3                          ; $5AAD: $20 $14
 

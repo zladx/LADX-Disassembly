@@ -3,7 +3,7 @@
 ;
 
 MarineBeachEntryPoint::
-    ld   a, [$C19F]
+    ld   a, [wDialogState]
     and  a
     jr   nz, jr_001_6213
     ld   a, [$C3C7]
@@ -272,7 +272,7 @@ jr_001_642E::
 
 MarineBeachScrollStop::
     call func_001_651E
-    ld   a, [$C19F]
+    ld   a, [wDialogState]
     and  a
     jr   nz, jr_001_644A
     ld   a, [$C3C7]
@@ -292,7 +292,7 @@ jr_001_644A::
 
 MarineBeachDialog1::
     call func_001_651E
-    ld   a, [$C19F]
+    ld   a, [wDialogState]
     and  a
     jr   nz, jr_001_6466
     ld   a, $80
@@ -318,7 +318,7 @@ jr_001_6478::
 
 MarineBeachDialog2::
     call func_001_651E
-    ld   a, [$C19F]
+    ld   a, [wDialogState]
     and  a
     jr   nz, jr_001_648F
     ld   a, $80
@@ -344,10 +344,10 @@ jr_001_64A1::
 
 MarineBeachAreYouListening::
     call func_001_651E
-    ld   a, [$C19F]
+    ld   a, [wDialogState]
     and  a
     jr   nz, jr_001_64CA
-    ld   a, [$C177]
+    ld   a, [wDialogAskSelectionIndex]
     and  a
     jr   nz, jr_001_64BA
     ld   a, $DB
@@ -371,7 +371,7 @@ jr_001_64CA::
 
 MarineBeachDialog3::
     call func_001_651E
-    ld   a, [$C19F]
+    ld   a, [wDialogState]
     and  a
     jr   nz, jr_001_64E6
     ld   a, $DC

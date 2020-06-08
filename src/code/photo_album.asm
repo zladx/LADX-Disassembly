@@ -343,12 +343,12 @@ JumpTable_028_4218:
     ld   [$C173], a                             ; $4224: JumpTable_028_4218 $EA $73 $C1
     call OpenDialogInTable2                     ; $4227: JumpTable_028_4218 $CD $7C $23
     ld   a, $01                                 ; $422A: JumpTable_028_4218 $3E $01
-    ld   [$C19F], a                             ; $422C: JumpTable_028_4218 $EA $9F $C1
+    ld   [wDialogState], a                             ; $422C: JumpTable_028_4218 $EA $9F $C1
 .else_422F_28:
     jp   func_028_44DB                          ; $422F: JumpTable_028_4218 $C3 $DB $44
 
 JumpTable_028_4232:
-    ld   a, [$C19F]                             ; $4232: JumpTable_028_4232 $FA $9F $C1
+    ld   a, [wDialogState]                             ; $4232: JumpTable_028_4232 $FA $9F $C1
     and  a                                      ; $4235: JumpTable_028_4232 $A7
     ret  nz                                     ; $4236: JumpTable_028_4232 $C0
 

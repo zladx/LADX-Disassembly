@@ -876,7 +876,7 @@ func_001_5A71::
     ld   a, [$C1B3]
     ld   hl, $C1B2
     or   [hl]
-    ld   hl, $C19F
+    ld   hl, wDialogState
     or   [hl]
     jp   nz, label_001_5B3F
     ldh  a, [hPressedButtonsMask]
@@ -1715,11 +1715,11 @@ jr_001_5F6A::
     ld   a, [wWindowY]
     and  a
     ret  z
-    ld   a, [$C19F]
+    ld   a, [wDialogState]
     and  a
     ret  z
     ld   d, $3E
-    ld   a, [$C19F]
+    ld   a, [wDialogState]
     and  $80
     jr   z, jr_001_5F7F
     ld   d, $58
@@ -1731,7 +1731,7 @@ jr_001_5F7F::
 jr_001_5F84::
     ld   a, [hl]
     cp   d
-    ld   a, [$C19F]
+    ld   a, [wDialogState]
     bit  7, a
     jr   nz, jr_001_5F8E
     ccf

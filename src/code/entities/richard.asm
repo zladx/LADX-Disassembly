@@ -107,7 +107,7 @@ label_006_40C1:
     jp   OpenDialogInTable1                       ; $40C2: $C3 $73 $23
 
 RichardState2Handler::
-    ld   a, [wC177]                               ; $40C5: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $40C5: $FA $77 $C1
     and  a                                        ; $40C8: $A7
     ld   a, $3B                                   ; $40C9: $3E $3B
     jr   z, jr_006_40CF                           ; $40CB: $28 $02

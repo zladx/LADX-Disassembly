@@ -21,7 +21,7 @@ OverworldMusicTracks::
 
 ; Music tracks for inside houses, indexed by map index
 HouseMusicTracks::
-    db   MUSIC_TAIL_CAVE, MUSIC_BOTTLE_GROTTO, MUSIC_KEY_CAVERN, MUSIC_ANGLERS_TUNNEL, MUSIC_CATFISH_MAW, MUSIC_FACE_SHRINE, MUSIC_EAGLE_TOWER, MUSIC_TURTLE_ROCK, MUSIC_EGG_MAZE, MUSIC_COLOR_DUNGEON, MUSIC_COMMON_CAVE, MUSIC_COMMON_CAVE, MUSIC_COMMON_CAVE, MUSIC_COMMON_CAVE, MUSIC_WITCH_HUT, MUSIC_MINIGAME
+    db   MUSIC_TAIL_CAVE, MUSIC_BOTTLE_GROTTO, MUSIC_KEY_CAVERN, MUSIC_ANGLERS_TUNNEL, MUSIC_CATFISH_MAW, MUSIC_FACE_SHRINE, MUSIC_EAGLE_TOWER, MUSIC_TURTLE_ROCK, MUSIC_EGG_MAZE, MUSIC_COMMON_CAVE, MUSIC_COMMON_CAVE, MUSIC_COMMON_CAVE, MUSIC_COMMON_CAVE, MUSIC_COMMON_CAVE, MUSIC_WITCH_HUT, MUSIC_MINIGAME
     db   MUSIC_HOUSE, MUSIC_COMMON_CAVE, MUSIC_HOUSE, MUSIC_DREAM_SHRINE, MUSIC_KANALET_CASTLE, MUSIC_BOWWOW_KIDNAPPED_INTRODUCTION, MUSIC_SOUTHERN_SHRINE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_HOUSE, MUSIC_GHOST_HOUSE, MUSIC_COMMON_CAVE
 
 ; Whether a music track has precedence over the Power-Up music, indexed by track id
@@ -75,25 +75,6 @@ SelectMusicTrackAfterTransition::
 
     ; Set a depending on the world map
     ldh  a, [hMapId]                              ; $4174: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                              ; $4176: $FE $FF
-    jr   nz, .mapNotFF                            ; $4178: $20 $04
-
-    ld   a, $09                                   ; $417A: $3E $09
-    jr   .mapDone                                 ; $417C: $18 $0E
-
-.mapNotFF
-    ; If on the houses map…
-    cp   MAP_HOUSE                                ; $417E: $FE $10
-    jr   nz, .mapDone                             ; $4180: $20 $0A
-    ; … and the map is $B5 (Photo Shop)…
-    ld   d, a                                     ; $4182: $57
-    ldh  a, [hMapRoom]                            ; $4183: $F0 $F6
-    cp   $B5                                      ; $4185: $FE $B5
-    ld   a, d                                     ; $4187: $7A
-    jr   nz, .mapDone                             ; $4188: $20 $02
-    ; … use same music than for map $0F (Trendy Game)
-    ld   a, $0F                                   ; $418A: $3E $0F
-.mapDone
 
     ; music id = HouseMusicTracks[a]
     ld   e, a                                     ; $418C: $5F

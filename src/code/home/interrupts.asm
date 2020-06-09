@@ -24,11 +24,6 @@ InterruptLCDStatus::
     push af
     push hl
     push de
-    push bc
-    ld   a, [rSVBK]  ; Save current WRAM Bank to c
-    ld   c, a        ;
-    xor  a           ; Load WRAM Bank 1 (as "0" fallbacks to loading bank 1)
-    ld   [rSVBK], a  ;
     ld   a, [wGameplayType]
     cp   GAMEPLAY_CREDITS ; if GameplayType != GAMEPLAY_CREDITS
     jr   nz, .skipScrollY
@@ -109,10 +104,7 @@ InterruptLCDStatus::
     ld   [rSCX], a ; scrollX
 
 .clearBGTilesFlag
-    ; Restore banks and register
-    ld   a, c
-    ld   [rSVBK], a
-    pop  bc
+
     pop  de
     pop  hl
     pop  af
@@ -124,14 +116,76 @@ InterruptLCDStatus::
 ;
 ; Dispatches to the Game Boy Printer routines.
 ;
+InterruptSerial:
+    db $00
+    db $00
+    db $a5
+    db $62
+    db $13
+    db $73
+    db $0f
+    db $6f
+    db $01, $6f, $1e
+    db $70
+    db $54
+    db $71
+    db $51
+    db $d6, $c2
+    db $6e
+    db $93
+    db $73
+    db $59
+    db $75
+    db $c0
+    db $74
+    db $2b
+    db $72
+    db $37
+    db $76
+    db $b7
+    db $76, $00
+    db $78
+    db $0b
+    db $7a
+    db $8a
+    db $7b
+    db $af
+    db $54
+    db $70
+    db $56
+    db $81
+    db $6e
+    db $10
+    db $53
+    db $65
+    db $63
 
-InterruptSerial::
-    push af
-    callsb PrinterInterruptSerial
-    ld   a, [wCurrentBank]
-    ld   [MBC3SelectBank], a
-    pop  af
-    reti
+    db $ce, $66
+    db $a1
+    db $67
+    db $e5
+
+    db $68
+    db $34
+    db $6a
+    db $20, $6b
+    db $dd
+    db $6b
+    db $dd
+    db $6b
+    db $73
+
+    db $5a
+    db $29
+    db $5c
+    db $c8
+    db $5d
+    db $67
+    db $5f
+    db $06 ,$61
+    db $0e ,$58
+    db $ad
+    db $59
 
 ; Load tileset, background, sprites while the LCD screen is off.
 ; Inputs:
@@ -141,12 +195,6 @@ LoadMapData::
     and  a
     jr   z, .LoadTileMapZero
 
-    ; Copy tile map number to the palette-loading variable
-    ld   [wPaletteToLoadForTileMap], a
-
-    ; if wTileMapToLoad != $23, turn off LCD
-    cp   $23
-    jr   z, .LCDOffEnd
     push af
     call LCDOff
     pop  af
@@ -156,24 +204,63 @@ LoadMapData::
     jr   .clearFlagsAndReturn
 
 .executeMapLoadHandler
-    ld   e, a
-    callsb GetTilemapHandlerAddress
-    ; Jump to the tilemap loading handler
-    jp   hl ; tail-call
+   dec a
+    JP_TABLE
+._01 dw LoadTileset1
+._02 dw ClearBGMap
+._03 dw LoadBaseTiles
+._04 dw LoadInventoryTiles
+._05 dw LoadTileset5
+._06 dw LoadDungeonTiles
+._07 dw LoadTileset5
+._08 dw LoadTileset8
+._09 dw LoadTileset9
+._0A dw LoadMapData.return
+._0B dw LoadTileset0B
+._0C dw LoadMapData.return
+._0D dw LoadSaveMenuTiles
+._0E dw LoadTileset0E_trampoline
+._0F dw LoadTileset0F_trampoline
+._10 dw LoadIntroSequenceTiles
+._11 dw LoadTitleScreenTiles
+._12 dw LoadChristinePortraitTiles
+._13 dw LoadTileset13
+._14 dw LoadFaceShrineReliefTiles
+._15 dw LoadTileset15
+._16 dw LoadTileset16
+._17 dw LoadTileset17
+._18 dw LoadTileset18
+._19 dw LoadTileset19
+._1A dw LoadTileset1A
+._1B dw LoadTileset1B
+._1C dw LoadTileset1A
+._1D dw LoadTileset1D
+._1E dw LoadTileset1E
+._1F dw LoadTileset1F
+._20 dw LoadSchulePaintingTiles
+._21 dw LoadEaglesTowerTopTiles
 
-    ; Special case for loading map n° 0
-.LoadTileMapZero
-    call LCDOff
-    callsb LoadBGMapAttributes
+.LoadTileMapZero:
+    call $2881                            ; $04f5: $cd $81 $28
 
-    ; Read and execute a wRequest for loading wBGMapToLoad.
-    callsb GetBGCopyRequest
+    ; GetBGCopyRequest
+    ld hl, InterruptSerial                        ; $04f8: $21 $57 $04
+    ld b, $00                                     ; $04fb: $06 $00
+    ld   a, [wBGMapToLoad]                        ; $457C: $FA $FF $D6
+    sla  a                                        ; $457F: $CB $27
+    ld   c, a                                     ; $4581: $4F
+    add  hl, bc                                   ; $4582: $09
+    ld   a, [hl]                                  ; $4583: $7E
+    ld   e, a                                     ; $4584: $5F
+    inc  hl                                       ; $4585: $23
+    ld   a, [hl]                                  ; $4586: $7E
+    ld   d, a                                     ; $4587: $57
+
     ld   a, $08
     ld   [MBC3SelectBank], a
     call ExecuteBackgroundCopyRequest.noMapTransition
 
     ld   a, $0C
-    call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
 
 .clearFlagsAndReturn
@@ -200,30 +287,8 @@ InterruptVBlank::
     push de
     push hl
 
-    ; Ensure the RAM bank is in a valid range
-    ld   a, [rSVBK]
-    and  $07
-    ld   c, a
-    xor  a
-    ld   [rSVBK], a
-    push bc
-
     di
 
-    ;
-    ; Photo Album handling
-    ;
-    ld   a, [wGameplayType]
-    cp   GAMEPLAY_PHOTO_ALBUM
-    jr   nz, .continue
-    ; GameplayType == PHOTO_ALBUM
-    ld   a, [wGameplaySubtype]
-    cp   $09
-    jr   c, .continue
-    cp   $12
-    jp  c, PhotoAlbumVBlankHandler
-
-.continue
     ldh  a, [hDidRenderFrame]
     and  a
     jp   nz, WaitForVBlankAndReturn  ; if not already waiting for next frame, do
@@ -243,14 +308,14 @@ InterruptVBlank::
     call label_23E4
     ld   hl, wDialogState
     inc  [hl]  ; Increment DialogState
-    jp   WaitForVBlankAndReturn
+    jr WaitForVBlankAndReturn
 
 .renderDialogText
     cp   DIALOG_SCROLLING_1  ; if DialogState != Scrolling
     jr   nz, .renderDialogTextContinue
     ; DialogState == Scrolling
     call DialogBeginScrolling
-    jp   WaitForVBlankAndReturn
+    jr WaitForVBlankAndReturn
 
 .renderDialogTextContinue
     cp   DIALOG_SCROLLING_2  ; if DialogState != Scrolling2
@@ -265,23 +330,12 @@ InterruptVBlank::
 
 .DialogFinishScrolling
     call DialogFinishScrolling
-    jp   WaitForVBlankAndReturn
+    jr WaitForVBlankAndReturn
 
     ;
     ; Photo Picture handling
     ;
 vBlankContinue::
-    ld   a, [wGameplayType]
-    cp   GAMEPLAY_PHOTO_DIZZY_LINK  ; If GameplayType < Photo Picture
-    jr   c, .gameplayNotAPhoto
-    ; GameplayType is one of the Pictures
-    ld   a, [wGameplaySubtype]
-    cp   $06
-    jr   c, .animateTilesEnd
-    callsb func_038_785A
-    jr   .animateTilesEnd
-.gameplayNotAPhoto
-
     ;
     ; Standard gameplay (i.e. not Photos) handling
     ;
@@ -339,51 +393,23 @@ vBlankContinue::
     call label_1ED7
     jr   .drawLinkSprite
 
+.AnimateTiles
 .animateTiles
-    ; If GameplayType != PHOTO_ALBUM, animate tiles
-    ld   a, [wGameplayType]
-    cp   GAMEPLAY_PHOTO_ALBUM
-    jr   z, .animateTilesEnd
     call AnimateTiles
-.animateTilesEnd
-
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .gbcEnd
-    ; Change BG column palette
-    callsb func_024_5C1A
-.gbcEnd
 
     ld   de, wRequest
     call ExecuteBackgroundCopyRequest ; Load BG column tiles
     xor  a
     ld   [wRequests], a
     ld   [wRequest], a
-    ld   [$DC90], a
-    ld   [$DC91], a
-
-    ; On Overworld, copy some palette data to OAM buffer
-    callsb func_036_72BA
 
     ; Copy the content of wOAMBuffer to the OAM memory
     call hDMARoutine
 
-    ; If on GBC…
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, WaitForVBlankAndReturn
-    callsb CopyPalettesToHardware
-    ; Restore the current bank
-    ld   a, [wCurrentBank]
-    ld   [MBC3SelectBank], a
 
 WaitForVBlankAndReturn::
     ei
 .interruptsEnabled
-    ; Restore the RAM bank
-    pop  bc
-    ld   a, c
-    ld   [rSVBK], a
 
     ; Restore registers
     pop  hl
@@ -395,37 +421,6 @@ WaitForVBlankAndReturn::
 
     pop  af
     reti
-
-PhotoAlbumVBlankHandler::
-    ld   a, [wCurrentBank]
-    push af
-    ldh  a, [hDidRenderFrame]
-    and  a
-    jr   nz, .clearBGTilesFlag
-
-    call hDMARoutine
-
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .gbcEnd
-    callsw CopyPalettesToHardware
-    callsw func_024_5C1A
-.gbcEnd
-
-    ld   de, wRequest
-    call ExecuteBackgroundCopyRequest
-    xor  a
-    ld   [wRequests], a
-    ld   [wRequest], a
-    ld   [$DC90], a
-    ld   [$DC91], a
-
-.clearBGTilesFlag
-    callsw PrinterInterruptVBlank
-    pop  af
-    ld   [wCurrentBank], a
-    ld   [MBC3SelectBank], a
-    jr   WaitForVBlankAndReturn.interruptsEnabled
 
 ; Execute tile-loading commands for BG tiles, enemy tiles and NPC tiles
 LoadTiles::
@@ -453,13 +448,12 @@ LoadTiles::
 
     ld   a, [wIsIndoor]
     and  a
-    jp   z, LoadOverworldBGTiles
+    jr   z, LoadOverworldBGTiles
     ldh  a, [hNeedsUpdatingBGTiles]
     cp   $02
     jp   z, LoadDungeonMinimapTiles
 
     ld   a, BANK(Dungeons2Tiles)
-    call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ldh  a, [hBGTilesLoadingStage]
     ld   c, a
@@ -478,17 +472,9 @@ LoadTiles::
     rl   b
     ld   hl, $9000
     add  hl, bc
-    ld   e, l
-    ld   d, h
+   push hl
+    pop de
     ld   hl, Dungeons2Tiles
-
-    ldh  a, [hMapId]
-    cp   MAP_COLOR_DUNGEON
-    jr   nz, .colorDungeonEnd
-    callsb GetColorDungeonTilesAddress
-    ld   [MBC3SelectBank], a
-    jr   .copyData
-.colorDungeonEnd
 
     ldh  a, [hWorldTileset]
     add  a, $50
@@ -521,9 +507,8 @@ LoadTiles::
     ret
 
 LoadOverworldBGTiles::
-    ld   a, $0F
-    call AdjustBankNumberForGBC
-    ld   [MBC3SelectBank], a
+    ld hl, $2100
+    ld [hl], $0f
     ; de = vTiles2 + [hBGTilesLoadingStage] * 6
     ldh  a, [hBGTilesLoadingStage]
     ld   c, a
@@ -567,27 +552,6 @@ LoadOverworldBGTiles::
     ret
 
 LoadOAMTiles::
-    ; If on GBC and inside the Color Dungeon…
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .colorDungeonEnd
-    ldh  a, [hMapId]
-    cp   MAP_COLOR_DUNGEON
-    jr   nz, .colorDungeonEnd
-
-    callsb func_020_475A
-    xor  a
-    ld   [wNeedsUpdatingNPCTiles], a
-    ld   [$C10F], a
-    ld   hl, vTiles2
-    ld   bc, $00
-    call GetColorDungeonTilesAddress
-    ld   c, $90
-    ld   b, h
-    ld   h, $00
-    call Copy100BytesFromBankAtA
-    jr   .clearEnemiesTilesLoadCommand
-.colorDungeonEnd
 
     ;
     ; Execute Enemies Tiles command
@@ -595,7 +559,7 @@ LoadOAMTiles::
 
     ldh  a, [hNeedsUpdatingEnnemiesTiles]
     and  a
-    jp   z, label_73E
+    jr   z, label_73E
     ld   a, [$C197]
     ld   e, a
     ld   d, $00
@@ -616,11 +580,6 @@ LoadOAMTiles::
     ld   hl, NpcTilesBankTable
     add  hl, bc
     ld   a, [hl]
-    and  a
-    jr   z, .adjustBankEnd
-    call AdjustBankNumberForGBC
-.adjustBankEnd
-
     ld   [MBC3SelectBank], a
     ldh  a, [hEnemiesTilesLoadingStage]
     ld   c, a
@@ -689,11 +648,6 @@ label_73E::
     ld   hl, NpcTilesBankTable
     add  hl, bc
     ld   a, [hl]
-    and  a
-    jr   z, .jp_0764
-    call AdjustBankNumberForGBC
-.jp_0764
-
     ld   [MBC3SelectBank], a
     ld   a, [$C10F]
     ld   c, a
@@ -784,7 +738,6 @@ LoadTilesCommands8ToD::
     ld   h, [hl]
     ld   l, a
     ld   a, $0C
-    call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ; Data length
     ld   bc, $40

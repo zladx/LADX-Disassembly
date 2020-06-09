@@ -8,7 +8,6 @@ AnimateMarinBeachTiles::
     and  a
     ret  nz
     ld   a, BANK(MarinBeachWavesTiles)
-    call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   hl, MarinBeachWavesTiles
     ld   de, vTiles2 + $500
@@ -72,7 +71,6 @@ AnimateTiles::
     jr   c, .return
     ; Switch to the bank with intro tiles
     ld   a, $10
-    call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ; Copy 32 bytes of data from address stored at $D006 to address stored at $D008
     ld   a, [$D006]
@@ -84,7 +82,7 @@ AnimateTiles::
     ld   a, [$D009]
     ld   d, a
     ld   bc, $20
-    jp   CopyData
+    call   CopyData
 .return
     ; Return early
     ret
@@ -201,7 +199,6 @@ AnimateTiles::
 ._0E dw AnimateCrystalBlockTilesGroup
 ._0F dw AnimateBubblesTilesGroup
 ._10 dw AnimateWeatherVaneTilesGroup
-._11 dw AnimatePhotoTilesGroup
 
 AnimateCounterTilesGroup::
     ldh  a, [hAnimatedTilesFrameCount]
@@ -209,7 +206,6 @@ AnimateCounterTilesGroup::
     jp   nz, SkipTilesGroupAnimation
     callsb LoadCounterAnimatedTiles
     ld   a, $0C
-    call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     jp   DrawLinkSpriteAndReturn
 
@@ -275,29 +271,6 @@ LoadAnimatedTilesFrame::
     ld   bc, $40
     call CopyData
 
-    ; Do special case for MAP_COLOR_DUNGEON
-    ldh  a, [hMapId]
-    cp   MAP_COLOR_DUNGEON
-    jr   nz, .endMapFF
-
-    ld   a, BANK(ConfigureAnimatedTilesCopy)
-    ld   [MBC3SelectBank], a
-    ld   b, $01
-    call ConfigureAnimatedTilesCopy
-    jr   z, .next
-    ld   [MBC3SelectBank], a
-    call CopyData
-.next
-    ld   a, BANK(ConfigureAnimatedTilesCopy)
-    ld   [MBC3SelectBank], a
-    ld   b, $00
-    call ConfigureAnimatedTilesCopy
-    jr   z, .endMapFF
-    ld   [MBC3SelectBank], a
-    ld   de, $96C0
-    call CopyData
-.endMapFF
-
     jp   DrawLinkSpriteAndReturn
 
 AnimateUndergroundTilesGroup::
@@ -322,18 +295,11 @@ AnimateLavaTilesGroup::
     jp   LoadAnimatedTilesFrame
 
 AnimateDungeon2TilesGroup::
-    ld   hl, $DCC0
-    ldh  a, [hMapId]
-    cp   MAP_COLOR_DUNGEON
-    jr   nz, label_1CB8
-    ld   de, $8400
-    jp   LoadAnimatedTilesFrame.de
-
-label_1CB8::
     ldh  a, [hAnimatedTilesFrameCount]
     inc  a
     and  $03
     jp   nz, AnimateDungeon1TilesGroup
+    ld hl, $dcc0
     ld   de, $90C0
     jp   LoadAnimatedTilesFrame.de
 
@@ -386,9 +352,76 @@ AnimateCrystalBlockTilesGroup::
     ld   h, HIGH(AnimatedTiles) + $C
     jr   AnimateTilesMediumSpeed
 
-AnimatePhotoTilesGroup::
-    callsb func_038_7830
-    jp   DrawLinkSpriteAndReturn
+
+SkipTilesGroupAnimation::
+    ldh  a, [hLinkAnimationState]                 ; $54F5: $F0 $9D
+    cp   $FF                                      ; $54F7: $FE $FF
+   jp z, $1ccc
+
+    ; Read the first byte in LinkAnimationStateTable
+    ld   hl, LinkAnimationStateTable              ; $54FA: $21 $19 $53
+    sla  a                                        ; $54FD: $CB $27
+    ld   c, a                                     ; $54FF: $4F
+    ld   b, $00                                   ; $5500: $06 $00
+    add  hl, bc                                   ; $5502: $09
+    ld   e, [hl]                                  ; $5503: $5E
+    push hl                                       ; $5504: $E5
+
+    ld   hl, data_020_5407                        ; $5505: $21 $07 $54
+    add  hl, bc                                   ; $5508: $09
+    ld   a, [wC11D]                               ; $5509: $FA $1D $C1
+    and  $98                                      ; $550C: $E6 $98
+    or   [hl]                                     ; $550E: $B6
+    ld   [wC11D], a                               ; $550F: $EA $1D $C1
+    inc  hl                                       ; $5512: $23
+    ld   a, [wC11E]                               ; $5513: $FA $1E $C1
+    and  $98                                      ; $5516: $E6 $98
+    or   [hl]                                     ; $5518: $B6
+    ld   [wC11E], a                               ; $5519: $EA $1E $C1
+    ld   d, $00                                   ; $551C: $16 $00
+    sla  e                                        ; $551E: $CB $23
+    rl   d                                        ; $5520: $CB $12
+    sla  e                                        ; $5522: $CB $23
+    rl   d                                        ; $5524: $CB $12
+    sla  e                                        ; $5526: $CB $23
+    rl   d                                        ; $5528: $CB $12
+    sla  e                                        ; $552A: $CB $23
+    rl   d                                        ; $552C: $CB $12
+    ld   hl, LinkCharacter2Tiles                  ; $552E: $21 $00 $58
+    add  hl, de                                   ; $5531: $19
+     push hl                                       ; $1c99: $e5
+    pop bc                                   ; $5533: $44
+    ld   hl, vTiles0                              ; $5534: $21 $00 $80
+    ld   d, $20                                   ; $5537: $16 $20
+jr_000_1ca0:
+    ld a, [bc]                                    ; $1ca0: $0a
+    inc bc                                        ; $1ca1: $03
+    ld [hl+], a                                   ; $1ca2: $22
+    dec d                                         ; $1ca3: $15
+    jr nz, jr_000_1ca0
+
+    ; hl = LinkAnimationStateTable + hLinkAnimationState
+    pop  hl                                       ; $553C: $E1
+    ; Read the 2nd byte from the table
+    inc  hl                                       ; $553D: $23
+    ld   e, [hl]                                  ; $553E: $5E
+    ld   d, $00                                   ; $553F: $16 $00
+    sla  e                                        ; $5541: $CB $23
+    rl   d                                        ; $5543: $CB $12
+    sla  e                                        ; $5545: $CB $23
+    rl   d                                        ; $5547: $CB $12
+    sla  e                                        ; $5549: $CB $23
+    rl   d                                        ; $554B: $CB $12
+    sla  e                                        ; $554D: $CB $23
+    rl   d                                        ; $554F: $CB $12
+    ld   hl, LinkCharacter2Tiles                  ; $5551: $21 $00 $58
+    add  hl, de                                   ; $5554: $19
+    push hl
+    pop bc
+    ld   hl, vTiles0 + $20                        ; $5557: $21 $20 $80
+    ld   d, $20                                   ; $555A: $16 $20
+
+
 
 ; Copy D bytes from BC to HL, then return to bank 20.
 ; Inputs:
@@ -396,9 +429,6 @@ AnimatePhotoTilesGroup::
 ;   bc   source address
 ;   hl   target address in VRAM
 CopyLinkTilesPair::
-    ld   a, BANK(LinkCharacterTiles)
-    call AdjustBankNumberForGBC
-    ld   [MBC3SelectBank], a
 
 .loop
     ld   a, [bc]
@@ -407,31 +437,11 @@ CopyLinkTilesPair::
     dec  d
     jr   nz, .loop
 
-    ld   a, BANK(func_020_54F5)
-    ld   [MBC3SelectBank], a
-    ret
-
-SkipTilesGroupAnimation::
-    callsb func_020_54F5
-    ld   a, $0C
-    call AdjustBankNumberForGBC
-    ld   [MBC3SelectBank], a
-
 DrawLinkSprite::
 DrawLinkSpriteAndReturn::
     ldh  a, [hLinkAnimationState]
     inc  a
-    ret  z
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, label_1D42
-    ld   a, [wInvincibilityCounter]
-    and  $04
-    jr   z, label_1D49
-    ld   a, $04
-    jr   label_1D49
-
-label_1D42::
+     jr z, $1d14
     ld   a, [wInvincibilityCounter]
     rla
     rla
@@ -445,7 +455,7 @@ label_1D49::
     ld   a, [$C145]
     add  a, c
     cp   $88
-    ret  nc
+    jr nc, $1d14
     push af
     ldi  [hl], a
     ld   a, [$C13C]
@@ -459,43 +469,7 @@ label_1D49::
     ld   d, a
     ld   a, [$C11D]
     or   d
-    ld   [hl], a
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, label_1DA1
-    ld   a, [wInvincibilityCounter]
-    and  $04
-    jr   nz, label_1DA1
-    ldh  a, [hLinkAnimationState]
-    cp   $50
-    jr   c, label_1D8C
-    cp   $55
-    jr   nc, label_1D8C
-    ld   a, [hl]
-    or   $07
-    ld   [hl], a
-    jr   label_1DA1
-
-label_1D8C::
-    ld   a, [wTunicType]
-    and  a
-    jr   z, label_1D95
-    inc  a
-    or   [hl]
-    ld   [hl], a
-
-label_1D95::
-    ldh  a, [hLinkAnimationState]
-    cp   $4E
-    jr   z, label_1D9F
-    cp   $4F
-    jr   nz, label_1DA1
-
-label_1D9F::
-    ld   [hl], $03
-
-label_1DA1::
-    inc  hl
+    ld   [hl+], a
     pop  af
     ldi  [hl], a
     ldh  a, [hLinkPositionX]
@@ -508,44 +482,7 @@ label_1DA1::
     ld   d, a
     ld   a, [$C11E]
     or   d
-    ld   [hl], a
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, label_1DE7
-    ld   a, [wInvincibilityCounter]
-    and  $04
-    jr   nz, label_1DE7
-    ldh  a, [hLinkAnimationState]
-    cp   $50
-    jr   c, label_1DD2
-    cp   $55
-    jr   nc, label_1DD2
-    ld   a, [hl]
-    or   $07
-    ld   [hl], a
-    jr   label_1DE7
-
-label_1DD2::
-    ld   a, [wTunicType]
-    and  a
-    jr   z, label_1DDB
-    inc  a
-    or   [hl]
-    ld   [hl], a
-
-label_1DDB::
-    ldh  a, [hLinkAnimationState]
-    cp   $4E
-    jr   z, label_1DE5
-    cp   $4F
-    jr   nz, label_1DE7
-
-label_1DE5::
-    ld   [hl], $23
-
-label_1DE7::
-    inc  hl
-
+    ld   [hl+], a
 AnimateTiles_return::
     ret
 
@@ -583,6 +520,5 @@ label_1E01::
     ld   de, vTiles1 + $1A0
     ld   bc, $40
     ld   a, BANK(Items1Tiles)
-    call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     jp   CopyDataAndDrawLinkSprite

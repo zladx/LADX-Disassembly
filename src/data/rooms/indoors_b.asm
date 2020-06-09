@@ -4419,7 +4419,7 @@ IndoorsBA3::
   db   $31, $C6                ; object
   db   $23, $C5                ; object
   db   $33, $C6                ; object
-  db   $C2, $18, $A6           ; object
+  db   $C2, $18, $A7           ; object
   db   $82, $61, $20           ; object
   db   $48, $C0                ; object
   db   $68, $C0                ; object
@@ -4914,22 +4914,6 @@ IndoorsBB4::
 IndoorsBB5::
   db   ANIMATED_TILES_DUNGEON_1 ; animation id
   db   ROOM_TEMPLATE_TOP_RIGHT_BOTTOM_LEFT | $0D ; room template | floor tile
-  db   $84, $03, $9B           ; object
-  db   $C2, $13, $B3           ; object
-  db   $82, $14, $03           ; object
-  db   $C2, $16, $B5           ; object
-  db   $82, $24, $B4           ; object
-  db   $20, $C9                ; object
-  db   $50, $C9                ; object
-  db   $29, $CA                ; object
-  db   $59, $CA                ; object
-  db   $22, $9C                ; object
-  db   $61, $9C                ; object
-  db   $47, $CE                ; object
-  db   $84, $53, $0F           ; object
-  db   $84, $63, $0F           ; object
-  db   $74, $FD                ; object
-  db   $E0, $00, $37, $48, $42 ; object
   db   ROOM_END
 
 IndoorsBB6::

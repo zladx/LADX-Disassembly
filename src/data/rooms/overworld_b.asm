@@ -13,8 +13,9 @@ Overworld80::
   db   $C2, $42, $F5           ; object
   db   $C3, $33, $F5           ; object
   db   $C2, $44, $F5           ; object
-  db   $10, $3C                ; object
-  db   $C2, $20, $37           ; object
+  db   $10, $F5                ; object
+  db   $20, $3C                ; object
+  db   $30, $37                ; object
   db   $40, $2E                ; object
   db   $41, $3C                ; object
   db   $C3, $51, $37           ; object
@@ -357,6 +358,8 @@ Overworld8B::
 Overworld8C::
   db   ANIMATED_TILES_VILLAGE ; animation id
   db   $04 ; floor tile
+  db   $33, $E3                ; object
+  db   $E1, $05, $D4, $50, $7C ; object
   db   $C8, $00, $38           ; object
   db   $89, $01, $3A           ; object
   db   $85, $11, $B9           ; object
@@ -1423,7 +1426,6 @@ OverworldB1::
   db   $13, $44                ; object
   db   $39, $44                ; object
   db   $68, $44                ; object
-  db   $34, $61                ; object
   db   ROOM_END
 
 OverworldB2::

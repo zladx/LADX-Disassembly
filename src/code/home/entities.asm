@@ -39,10 +39,6 @@ label_3965::
     callsb ConfigureNewEntity
     jp   ReloadSavedBank
 
-label_3970::
-    callsb func_003_7EFE
-    jp   ReloadSavedBank
-
 label_397B::
     callsb func_014_5347
     ld   a, $03
@@ -100,19 +96,26 @@ AnimateEntities::
     add  hl, de
     ld   a, [hl]
     ld   [wOAMNextAvailableSlot], a
-    callsb func_020_4303
-    xor  a
-    ld   [MBC3SelectBank], a
+    ld   a, [$C5A0]                               ; $4303: $FA $A0 $C5
+    ld   [$C5A1], a                               ; $4306: $EA $A1 $C5
+    xor  a                                        ; $4309: $AF
+    ld   [$C5A0], a                               ; $430A: $EA $A0 $C5
+    ld   [wC10C], a                               ; $430D: $EA $0C $C1
+    ldh  [hFFB2], a                               ; $4310: $E0 $B2
+    ld   [wC117], a                               ; $4312: $EA $17 $C1
+    ld   [$C19D], a                               ; $4315: $EA $9D $C1
+    ld   [$C147], a                               ; $4318: $EA $47 $C1
+    ld   [wLiftedEntityType], a                   ; $431B: $EA $A8 $C5
+    ld   [$D45E], a                               ; $431E: $EA $5E $D4
     ld   a, [wDialogState]
     and  a
     jr   nz, .label_39E3
     ld   [$C1AD], a
 
 .label_39E3
-    ld   a, BANK(func_020_6352)
-    ld   [wCurrentBank], a
-    ld   [MBC3SelectBank], a
-    call func_020_6352
+    ld a, $02                                     ; $38ab: $3e $02
+    call SwitchAdjustedBank                       ; $38ad: $cd $b9 $07
+    call $63e6                                    ; $38b0: $cd $e6 $63
 
     ; Initialize the entities counter
     ld   b, $00
@@ -175,8 +178,7 @@ AnimateEntity::
     ldh  [hActiveEntitySpriteVariant], a
 
     ld   a, BANK(UpdateEntityPositionForRoomTransition)
-    ld   [wCurrentBank], a
-    ld   [MBC3SelectBank], a
+    call SwitchAdjustedBank
 
     ldh  a, [hActiveEntityType]
     cp   ENTITY_RAFT_RAFT_OWNER
@@ -199,14 +201,12 @@ AnimateEntity::
 .liftedEnd
 
     ld   a, BANK(UpdateEntityTimers)
-    ld   [wCurrentBank], a
-    ld   [MBC3SelectBank], a
+    call SwitchAdjustedBank
     call UpdateEntityTimers
 
     ; Select bank 3
     ld   a, $03
-    ld   [wCurrentBank], a
-    ld   [MBC3SelectBank], a
+    call SwitchAdjustedBank
 
     ldh  a, [hActiveEntityStatus]
     cp   ENTITY_STATUS_ACTIVE
@@ -226,15 +226,11 @@ AnimateEntity::
 ExecuteActiveEntityHandler_trampoline::
     call ExecuteActiveEntityHandler
     ld   a, $03
-    ld   [wCurrentBank], a
-    ld   [MBC3SelectBank], a
-    ret
+    jp SwitchAdjustedBank
 
 ; Read the entity handler address in the handlers table,
 ; then jump to execution.
 ExecuteActiveEntityHandler::
-    ld   a, BANK(EntityHandlersTable)
-    ld   [MBC3SelectBank], a
 
     ; de = active entity id
     ldh  a, [hActiveEntityType]
@@ -242,29 +238,245 @@ ExecuteActiveEntityHandler::
     ld   d, b
 
     ; hl = de * 3
-    ld   hl, EntityHandlersTable
-    add  hl, de
-    add  hl, de
-    add  hl, de
-
-    ; Read values from the entities pointers table:
-    ; a = entity handler bank
-    ; d = entity handler address (high)
-    ; e = entity handler address (low)
-    ld   e, [hl]
-    inc  hl
-    ld   d, [hl]
-    inc  hl
-    ld   a, [hl]
-
-    ; Select entity handler bank
-    ld   l, e
-    ld   h, d
-    ld   [wCurrentBank], a
-    ld   [MBC3SelectBank], a
-
-    ; Jump to the entity handler
-    jp   hl
+    ld hl, $4000                                  ; $3949: $21 $00 $40
+    add hl, de                                    ; $394c: $19
+    ld a, [hl]                                    ; $394d: $7e
+    call SwitchAdjustedBank
+    ld a, e
+    JP_TABLE
+._00 dw ArrowEntityHandler
+._01 dw BoomerangEntityHandler
+._02 dw BombEntityHandler
+._03 dw HookshotChainEntityHandler
+._04 dw HookshotHitEntityHandler
+._05 dw LiftableRockEntityHandler
+._06 dw PushedBlockEntityHandler
+._07 dw ChestWithItemEntityHandler
+._08 dw MagicPowderSprinkleEntityHandler
+._09 dw OctorockEntityHandler
+._0A dw OctorockRockEntityHandler
+._0B dw MoblinEntityHandler
+._0C dw MoblinArrowEntityHandler
+._0D dw TektiteEntityHandler
+._0E dw LeeverEntityHandler
+._0F dw ArmosStatueEntityHandler
+._10 dw HidingGhiniEntityHandler
+._11 dw GiantGhiniEntityHandler
+._12 dw GhiniEntityHandler
+._13 dw HeartContainerTilesTable
+._14 dw MoblinSwordEntityHandler ; $14
+._15 dw AntiFairyEntityHandler
+._16 dw SparkClockwiseEntityHandler
+._17 dw SparkCounterClockwiseEntityHandler
+._18 dw PolsVoiceEntityHandler ; $18
+._19 dw KeeseEntityHandler
+._1A dw StalfosAggressiveEntityHandler
+._1B dw GelEntityHandler
+._1C dw MiniGelEntityHandler ; $1C
+._1D dw 0
+._1E dw StalfosEvasiveEntityHandler
+._1F dw GibdoEntityHandler
+._20 dw HardHatBeetleEntityHandler ; $20
+._21 dw WizrobeEntityHandler
+._22 dw WizrobeProjectileEntityHandler
+._23 dw LikeLikeEntityHandler
+._24 dw IronMaskEntityHandler ; $24
+._25 dw EntityExplosionDisplayList ; small exploding ennemy
+._26 dw EntityExplosionDisplayList ; small exploding ennemy 2
+._27 dw SpikeTrapEntityHandler
+._28 dw MimicEntityHandler ; $28
+._29 dw MiniMoldromEntityHandler
+._2A dw LaserEntityHandler
+._2B dw LaserBeamEntityHandler
+._2C dw SpikedBeetleEntityHandler ; $2C
+._2D dw DroppableHeartEntityHandler
+._2E dw DroppableRupeeEntityHandler
+._2F dw DroppableFairyEntityHandler
+._30 dw KeyDropPointEntityHandler ; $30
+._31 dw SwordEntityHandler
+._32 dw Entity32Handler
+._33 dw PieceOfPowerEntityHandler
+._34 dw GuardianAcornEntityHandler ; $34
+._35 dw HeartPieceEntityHandler
+._36 dw HeartContainerEntityHandler
+._37 dw DroppableArrowsEntityHandler
+._38 dw DroppableBombsEntityHandler ; $38
+._39 dw SirensInstrumentEntityHandler
+._3A dw SleepyToadstoolEntityHandler
+._3B dw DroppableMagicPowderEntityHandler
+._3C dw HidingSlimeKeyEntityHandler ; $3C
+._3D dw DroppableSeashellEntityHandler
+._3E dw MarinEntityHandler
+._3F dw RacoonEntityHandler
+._40 dw WitchEntityHandler ; $40
+._41 dw OwlEventEntityHandler
+._42 dw OwlStatueEntityHandler
+._43 dw SeashellMansionTreesEntityHandler
+._44 dw YarnaTalkingBonesEntityHandler ; $44
+._45 dw BouldersEntityHandler
+._46 dw MovingBlockLeftTopEntityHandler
+._47 dw MovingBlockLeftBottomEntityHandler
+._48 dw MovingBlockBottomLeftEntityHandler ; $48
+._49 dw MovingBlockBottomRightEntityHandler
+._4A dw 0
+._4B dw PotEntityHandler
+._4C dw 0
+._4D dw ShopOwnerEntityHandler
+._4E dw Disabled4EEntityHandler
+._4F dw TrendyGameOwnerEntityHandler
+._50 dw BooBuddyEntityHandler ; $50
+._51 dw KnightEntityHandler
+._52 dw TractorDeviceEntityHandler
+._53 dw ReversedTractorDeviceEntityHandler
+._54 dw FishermanFishingGameEntityHandler ; $54
+._55 dw BouncingBombiteEntityHandler
+._56 dw TimerBombiteEntityHandler
+._57 dw PairoddEntityHandler
+._58 dw PairoddProjectileEntityHandler
+._59 dw MoldormEntityHandler
+._5A dw FacadeEntityHandler
+._5B dw SlimeEyeEntityHandler
+._5C dw GenieEntityHandler ; $5C
+._5D dw SlimeEelEntityHandler
+._5E dw GhomaEntityHandler
+._5F dw MasterStalfosEntityHandler
+._60 dw DodongoSnakeEntityHandler ; $60
+._61 dw WarpEntityHandler
+._62 dw HotHeadEntityHandler
+._63 dw EvilEagleEntityHandler
+._64 dw SouthFaceShrineDoorEntityHandler ; $64
+._65 dw AnglerFishEntityHandler
+._66 dw CrystalSwitchEntityHandler
+._67 dw Entity67Handler
+._68 dw Entity68Handler ; $68
+._69 dw MovingBlockMoverEntityHandler
+._6A dw EntityRaftOwnerHandler
+._6B dw TextDebuggerEntityHandler
+._6C dw CuccoEntityHandler ; $6C
+._6D dw BowWowEntityHandler
+._6E dw ButterflyEntityHandler
+._6F dw DogEntityHandler
+._70 dw Kid70EntityHandler ; $70
+._71 dw Kid71EntityHandler
+._72 dw Kid72EntityHandler
+._73 dw Kid73EntityHandler
+._74 dw PapahlsWifeEntityHandler ; $74
+._75 dw GrandmaUlriraEntityHandler
+._76 dw MrWriteEntityHandler
+._77 dw GrandpaUlriraEntityHandler
+._78 dw YipYipEntityHandler ; $78
+._79 dw MadamMeowMeowEntityHandler
+._7A dw CrowEntityHandler
+._7B dw CrazyTracyEntityHandler
+._7C dw GiantGopongaFlowerEntityHandler ; $7C
+._7D dw GopongaProjectileEntityHandler
+._7E dw GopongaFlowerEntityHandler
+._7F dw TurtleRockHeadEntityHandler
+._80 dw TelephoneEntityHandler ; $80
+._81 dw RollingBonesEntityHandler
+._82 dw RollingBonesBarEntityHandler
+._83 dw DreamShrineBedEntityHandler
+._84 dw BigFairyEntityHandler ; $84
+._85 dw MrWriteBirdEntityHandler
+._86 dw FloatingItemEntityHandler
+._87 dw DesertLanmolaEntityHandler
+._88 dw ArmosKnightEntityHandler ; $88
+._89 dw HinoxEntityHandler
+._8A dw 0
+._8B dw 0
+._8C dw Entity8CHandler ; $8C
+._8D dw Entity8DHandler
+._8E dw CueBallEntityHandler
+._8F dw MaskedMimicGoriyaEntityHandler
+._90 dw ThreeOfAKindEntityHandler ; $90
+._91 dw AntiKirbyEntityHandler
+._92 dw SmasherEntityHandler
+._93 dw MadBomberEntityHandler
+._94 dw KanaletBombableWallEntityHandler ; $94
+._95 dw RichardEntityHandler
+._96 dw RichardFrogEntityHandler
+._97 dw Entity97Handler
+._98 dw HorsePieceEntityHandler ; $98
+._99 dw WaterTektiteEntityHandler
+._9A dw FlyingTilesEntityHandler
+._9B dw HidingGelEntityHandler
+._9C dw StarEntityHandler ; $9C
+._9D dw LiftableStatueEntityHandler
+._9E dw FireballShooterEntityHandler
+._9F dw GoombaEntityHandler
+._A0 dw PeaHatEntityHandler ; $A0
+._A1 dw SnakeEntityHandler
+._A2 dw 0
+._A3 dw SideViewPlatformHorizontalEntityHandler
+._A4 dw SideViewPlatformVerticalEntityHandler ; $A4
+._A5 dw SideViewPlatformEntityHandler
+._A6 dw SideViewWeightsEntityHandler
+._A7 dw SmashablePillarEntityHandler
+._A8 dw EntityA8Handler ; $A8
+._A9 dw BlooperEntityHandler
+._AA dw CheepCheepHorizontalEntityHandler
+._AB dw CheepCheepVerticalEntityHandler
+._AC dw CheepCheepJumpingEntityHandler ; $AC
+._AD dw KikiTheMonkeyEntityHandler
+._AE dw WingedOctorockEntityHandler
+._AF dw TradingItemEntityHandler
+._B0 dw PincerEntityHandler ; $B0
+._B1 dw HoleFillerEntityHandler
+._B2 dw BeetleSpawnerEntityHandler
+._B3 dw HoneycombEntityHandler
+._B4 dw TarinEntityHandler ; $B4
+._B5 dw BearEntityHandler
+._B6 dw PapahlEntityHandler
+._B7 dw MermaidEntityHandler
+._B8 dw FishermanUnderBridgeEntityHandler ; $B8
+._B9 dw BuzzBlobEntityHandler
+._BA dw BomberEntityHandler
+._BB dw BushCrawlerEntityHandler
+._BC dw GrimCreeperEntityHandler ; $BC
+._BD dw VireEntityHandler
+._BE dw BlainoEntityHandler
+._BF dw ZombieEntityHandler
+._C0 dw MazeSignpostEntityHandler ; $C0
+._C1 dw MarinAtTheShoreEntityHandler
+._C2 dw MarinAtTalTalHeightsEntityHandler
+._C3 dw MamuAndFrogsEntityHandler
+._C4 dw WalrusEntityHandler ; $C4
+._C5 dw UrchinEntityHandler
+._C6 dw SandCrabEntityHandler
+._C7 dw ManboAndFishesEntityHandler
+._C8 dw BunnyCallingMarinEntityHandler ; $C8
+._C9 dw MusicalNoteEntityHandler
+._CA dw MadBatterEntityHandler
+._CB dw ZoraEntityHandler
+._CC dw FishEntityHandler ; $CC
+._CD dw BananasSchuleSaleEntityHandler
+._CE dw MermaidStatueEntityHandler
+._CF dw SeashellMansionEntityHandler
+._D0 dw AnimalD0EntityHandler ; $D0
+._D1 dw AnimalD1EntityHandler
+._D2 dw AnimalD2EntityHandler
+._D3 dw BunnyD3EntityHandler
+._D4 dw GhostEntityHandler ; $D4
+._D5 dw RoosterEntityHandler
+._D6 dw SideViewPotEntityHandler
+._D7 dw ThwimpEntityHandler
+._D8 dw ThwompEntityHandler ; $D8
+._D9 dw ThwompRammableEntityHandler
+._DA dw PodobooEntityHandler
+._DB dw GiantBubbleEntityHandler
+._DC dw FlyingRoosterEventsEntityHandler ; $DC
+._DD dw BookEntityHandler
+._DE dw EggSongEventEntityHandler
+._DF dw SwordBeamEntityHandler
+._E0 dw MonkeyEntityHandler ; $E0
+._E1 dw WitchRatEntityHandler
+._E2 dw FlameShooterEntityHandler
+._E3 dw PokeyEntityHandler
+._E4 dw MoblinKingEntityHandler ; $E4
+._E5 dw FloatingItem2EntityHandler
+._E6 dw FinalNightmareEntityHandler
+._E7 dw KanaletCastleGateSwitchEntityHandler
+._E8 dw EndingOwlStairClimbingEntityHandler ; $E8
 
 ; Types of entity hitboxes
 ; Array indexed par (wEntitiesHitboxFlagsTable & $7C)
@@ -274,7 +486,7 @@ ExecuteActiveEntityHandler::
 ;  - hitbox Y
 ;  - ???
 ;  - ???
-HitboxPositions::
+HitboxPositions:: ; 3b25
 ._00 db   $08, $05, $08, $05
 ._04 db   $08, $0A, $08, $0A
 ._08 db   $08, $0A, $08, $0A
@@ -306,8 +518,8 @@ ConfigureEntityHitbox::
     ld   d, b
     ld   hl, HitboxPositions
     add  hl, de
-    ld   e, l
-    ld   d, h
+    push hl
+    pop de
     push bc
     ; c = c * 4
     sla  c
@@ -508,19 +720,6 @@ RenderActiveEntitySpritesPair::
     ld   hl, hActiveEntityFlipAttribute
     xor  [hl]
     ld   [de], a
-    ; On GBC, if the "invert palette" bit is set…
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .paletteFlip0End
-    ldh  a, [hActiveEntityFlipAttribute]
-    and  OAMF_PAL1
-    jr   z, .paletteFlip0End
-    ; …invert the color palette data.
-    ld   a, [de]
-    and  $FF ^ OAMF_PALMASK
-    or   $04
-    ld   [de], a
-.paletteFlip0End
     inc  de
 
     ; Sprite 1: set OAM byte 0 (Y position)
@@ -566,18 +765,6 @@ RenderActiveEntitySpritesPair::
     ld   a, [hl]
     ld   hl, hActiveEntityFlipAttribute
     xor  [hl]
-    ld   [de], a
-    ; On GBC, if the "invert palette" bit is set…
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .paletteFlip1End
-    ldh  a, [hActiveEntityFlipAttribute]
-    and  OAMF_PAL1
-    jr   z, .paletteFlip1End
-    ; …invert the color palette data.
-    ld   a, [de]
-    and  $FF ^ OAMF_PALMASK
-    or   $04
     ld   [de], a
 .paletteFlip1End
 
@@ -669,25 +856,6 @@ RenderActiveEntitySprite::
 
     ; If on GBC…
     inc  de
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .paletteFlipEnd
-    ; and not during credits…
-    ld   a, [wGameplayType]
-    cp   GAMEPLAY_CREDITS
-    jr   z, .paletteFlipEnd
-    ; and hActiveEntityFlipAttribute != 0…
-    ldh  a, [hActiveEntityFlipAttribute]
-    and  a
-    jr   z, .paletteFlipEnd
-    ; …invert the color palette data.
-    ld   a, [hl]
-    and  $FF ^ OAMF_PALMASK
-    or   $04
-    ld   [de], a
-    jr   .functionEnd
-.paletteFlipEnd
-
     ld   a, [hli]
     ld   hl, hActiveEntityFlipAttribute
     xor  [hl]
@@ -805,18 +973,7 @@ RenderActiveEntitySpritesRect::
     xor  [hl]
     ld   [de], a
     inc  hl
-    ; On GBC, if the "invert palette" bit is set…
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .paletteFlipEnd
-    ldh  a, [hActiveEntityFlipAttribute]
-    and  a
-    jr   z, .paletteFlipEnd
-    ; …invert the color palette data.
-    ld   a, [de]
-    and  $FF ^ OAMF_PALMASK
-    or   $04
-    ld   [de], a
+
 .paletteFlipEnd
 
     inc  de
@@ -983,12 +1140,9 @@ label_3E4D::
 
 label_3E5A::
     ld   hl, MBC3SelectBank
-    ld   [hl], BANK(func_020_5C9C)
-    ld   c, $01
-    ld   b, $00
-    ld   e, $FF
-    call func_020_5C9C
-    jp   ReloadSavedBank
+    ld [hl], $02                                  ; $3e8d: $36 $02
+    call $61e7                                    ; $3e8f: $cd $e7 $61
+    jp ReloadSavedBank
 
 GiveInventoryItem_trampoline::                ; @TODO Give player item in reg d
     callhl GiveInventoryItem
@@ -1135,19 +1289,19 @@ ldh  [$FFBD], a
     add  hl, bc
     ld   a, [hl]
     and  $04
-    ret  nz                     ; other minibosses are silent
+    jr nz, jr_000_3f71                    ; other minibosses are silent
     ldh  a, [hMapId]
-    cp   MAP_COLOR_DUNGEON
-    ret  z
     cp   MAP_FACE_SHRINE
-    ret  z
+   jr nz, jr_000_3f71
     ld   e, a
     ld   d, b
     ld   hl, BossIntroDialogTable
     add  hl, de
     ld   a, [hl]
 .openDialog:
-    jp   OpenDialog
+    call   OpenDialog
+jr_000_3f71
+    ret
 
 data_3F48::
     db 1, 2, 4, 8, $10, $20, $40, $80

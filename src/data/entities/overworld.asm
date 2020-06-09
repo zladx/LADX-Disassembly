@@ -60,7 +60,6 @@ Overworld0CEntities::
 
 Overworld0DEntities::
   entity $4, $6, ENTITY_BUSH_CRAWLER
-  entity $4, $9, ENTITY_PHOTOGRAPHER
   entities_end
 
 Overworld0EEntities::
@@ -246,6 +245,7 @@ Overworld36Entities::
   entities_end
 
 Overworld37Entities::
+  entity $2, $4, ENTITY_MOBLIN_SWORD
   entities_end
 
 Overworld38Entities::

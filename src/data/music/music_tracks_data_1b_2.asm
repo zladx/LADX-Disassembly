@@ -5113,8 +5113,6 @@ Music3dChannel1::
     dw   ChannelDefinition_1b_67f2
     dw   ChannelDefinition_1b_676a
     dw   ChannelDefinition_1b_676a
-    dw   ChannelDefinition_1b_67f2
-    dw   ChannelDefinition_1b_67d1
     dw   ChannelDefinition_1b_6832
     dw   ChannelDefinition_1b_6852
     dw   ChannelDefinition_1b_709f
@@ -5153,8 +5151,6 @@ Music3dChannel2::
     dw   ChannelDefinition_1b_69ae
     dw   ChannelDefinition_1b_693d
     dw   ChannelDefinition_1b_693d
-    dw   ChannelDefinition_1b_69ae
-    dw   ChannelDefinition_1b_698f
     dw   ChannelDefinition_1b_69ee
     dw   ChannelDefinition_1b_6a07
     dw   ChannelDefinition_1b_709f
@@ -5194,8 +5190,6 @@ Music3dChannel3::
     dw   ChannelDefinition_1b_6b30
     dw   ChannelDefinition_1b_6ab7
     dw   ChannelDefinition_1b_6ab7
-    dw   ChannelDefinition_1b_6b30
-    dw   ChannelDefinition_1b_6b15
     dw   ChannelDefinition_1b_6b7b
     dw   ChannelDefinition_1b_6b98
     dw   ChannelDefinition_1b_709f
@@ -5241,9 +5235,6 @@ Music3dChannel4::
     dw   ChannelDefinition_1b_6bd5
     dw   ChannelDefinition_1b_6bd5
     dw   ChannelDefinition_1b_6bd5
-    dw   ChannelDefinition_1b_6bf7
-    dw   ChannelDefinition_1b_6bf7
-    dw   ChannelDefinition_1b_6be6
     dw   ChannelDefinition_1b_6bd5
     dw   ChannelDefinition_1b_6c02
     dw   ChannelDefinition_1b_709f
@@ -5613,35 +5604,7 @@ ChannelDefinition_1b_676a::
     note C_4
     end_def
 
-ChannelDefinition_1b_67d1::
-    set_envelope_duty $90, $21, 1, 1
-    notelen 3
-    note B_2
-    notelen 10
-    note C_3
-    note B_2
-    note A_2
-    note B_2
-    rest
-    note B_2
-    note C_3
-    note D_3
-    note E_3
-    notelen 3
-    note F#3
-    set_envelope_duty $70, $21, 1, 1
-    notelen 10
-    note C_2
-    note D_2
-    note G_2
-    note A_2
-    note F#2
-    note A_2
-    note D_3
-    note F#3
-    note A_3
-    end_def
-
+ChannelDefinition_1b_67d1:
 ChannelDefinition_1b_67f2::
     set_envelope_duty $70, $00, 2, 1
     notelen 5
@@ -6040,31 +6003,6 @@ ChannelDefinition_1b_693d::
     end_def
 
 ChannelDefinition_1b_698f::
-    set_envelope_duty $a0, $21, 1, 1
-    notelen 3
-    note G_3
-    note D_3
-    notelen 10
-    note D_3
-    rest
-    note G_3
-    note A_3
-    note B_3
-    note C_4
-    notelen 3
-    note D_4
-    set_envelope_duty $80, $21, 1, 1
-    notelen 10
-    note G_2
-    note A_2
-    note D_3
-    note F#3
-    note D_3
-    note F#3
-    note A_3
-    note D_4
-    note F#4
-    end_def
 
 ChannelDefinition_1b_69ae::
     set_envelope_duty $a0, $26, 2, 1
@@ -6425,36 +6363,8 @@ ChannelDefinition_1b_6ab7::
     end_def
 
 ChannelDefinition_1b_6b15::
-    enable_software_envelope
-    notelen 3
-    note G_2
-    notelen 10
-    note G_2
-    note G_2
-    note F_2
-    notelen 3
-    note G_2
-    notelen 10
-    note G_2
-    note G_2
-    note G_2
-    notelen 3
-    note D_2
-    notelen 10
-    note D_2
-    note D_2
-    note D_2
-    note D_2
-    notelen 10
-    note D_3
-    note E_3
-    note F#3
-    note E_3
-    note D_3
-    end_def
 
 ChannelDefinition_1b_6b30::
-    notelen 10
     note D#3
     note G_4
     note A#4
@@ -6655,24 +6565,6 @@ ChannelDefinition_1b_6bd5::
     end_def
 
 ChannelDefinition_1b_6be6::
-    begin_loop $03
-        notelen 3
-        note NOISE_5
-        notelen 10
-        note NOISE_6
-        note NOISE_6
-        note NOISE_6
-    next_loop
-
-    notelen 10
-    note NOISE_5
-    note NOISE_5
-    note NOISE_5
-    note NOISE_6
-    note NOISE_5
-    note NOISE_5
-    end_def
-
 ChannelDefinition_1b_6bf7::
     begin_loop $08
         notelen 10

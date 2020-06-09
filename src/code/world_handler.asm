@@ -28,31 +28,15 @@ MinimapLayoutTable::
 ._0A db INVENTORY_MINIMAP_SINGLE_FLOOR
 ._0B db INVENTORY_MINIMAP_SINGLE_FLOOR
 ._0C db INVENTORY_MINIMAP_SINGLE_FLOOR
-._0D db INVENTORY_MINIMAP_SINGLE_FLOOR
-._0E db INVENTORY_MINIMAP_SINGLE_FLOOR
-._0F db MINIMAP_STYLE_COLOR_DUNGEON ; probably
 
 GameplayWorldSubtype0Handler::
     call label_27F2
     call IncrementGameplaySubtype
-    ld   a, [ROM_DebugTool2]
-    and  a
-    jr   z, jr_001_43A7
-    ld   a, $0B
-    ld   [wBGMapToLoad], a
-    ret
-
 jr_001_43A7::
     ld   a, [wIsIndoor]
     and  a
     jr   z, jr_001_4414
     ldh  a, [hMapId]
-    cp   MAP_COLOR_DUNGEON
-    jr   nz, jr_001_43B8
-    ld   hl, $DDDA
-    jr   jr_001_43C5
-
-jr_001_43B8::
     ld   e, a
     sla  a
     sla  a
@@ -68,11 +52,10 @@ jr_001_43C5::
 
 jr_001_43CA::
     ldh  a, [hMapId]
-    cp   MAP_COLOR_DUNGEON
-    jr   z, jr_001_43DB
+    cp   MAP_CAVE_B
+    ldh  a, [hMapId]
     cp   MAP_WINDFISHS_EGG
     jr   z, jr_001_43D8
-    cp   MAP_CAVE_B
     jr   c, jr_001_43DB
 
 jr_001_43D8::
@@ -91,10 +74,6 @@ jr_001_43DC::
     ; If inside the color dungeon ($FF),
     ; lookup for dungeon $0F in the table instead.
     ldh  a, [hMapId]
-    cp   MAP_COLOR_DUNGEON
-    jr   nz, .colorDungeonIndexEnd
-    ld   a, $0F
-.colorDungeonIndexEnd
 
     ; Lookup the minimap layout for the dungeon in a
     ld   e, a
@@ -104,9 +83,7 @@ jr_001_43DC::
     ld   a, [hl]
     ld   [wMinimapLayout], a
 
-    ldh  a, [hMapId]
-    cp   MAP_COLOR_DUNGEON
-    jr   z, jr_001_440B
+    ld a, e
     cp   MAP_WINDFISHS_EGG
     jr   z, jr_001_4425
     cp   MAP_CAVE_B
@@ -169,12 +146,6 @@ jr_001_4452::
     jr   z, jr_001_44A6
     ld   d, a
     ldh  a, [hMapId]
-    cp   MAP_COLOR_DUNGEON
-    jr   nz, jr_001_4475
-    ld   d, $00
-    jr   jr_001_447E
-
-jr_001_4475::
     cp   $1A
     jr   nc, jr_001_447E
     cp   $06
@@ -218,18 +189,6 @@ jr_001_44B0::
 GameplayWorldSubtype2Handler::
     ld   a, $0F
     ldh  [hWorldTileset], a
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, jr_001_44C9
-    di
-    ld   a, $03
-    ld   [rSVBK], a
-    xor  a
-    ld   [$D000], a
-    ld   [rSVBK], a
-    ei
-
-jr_001_44C9::
     call LoadRoomTiles
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
@@ -294,9 +253,6 @@ GameplayWorldSubtype6Handler::
     ld   [wOBJ0Palette], a
     ld   a, $E4
     ld   [wOBJ1Palette], a
-    ldh  a, [hIsGBC]
-    and  a
-    jr   nz, jr_001_4548
     ld   a, $04
     ld   [$C16B], a
 
@@ -402,7 +358,5 @@ label_001_4555::
     ld   [wBGPalette], a
     ld   [wOBJ0Palette], a
     ld   [wOBJ1Palette], a
-    ld   a, $01
-    call ClearFileMenuBG_trampoline
 TransitionReturn::
     ret

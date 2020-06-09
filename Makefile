@@ -3,19 +3,19 @@
 2BPP   := rgbgfx
 ASM    := rgbasm -E
 
-.SUFFIXES: .asm .o .gbc .png .2bpp
+.SUFFIXES: .asm .o .gb .png .2bpp
 
 # Default target
 all: build test
 
-build: game.gbc
+build: game.gb
 
 test: build
-	@tools/md5sum.sh -c ladx.md5
+#	@tools/md5sum.sh -c ladx.md5
 
 clean:
 	rm -f $(obj)
-	rm -f game.{gbc,sym,map}
+	rm -f game.{gb,sym,map}
 	find . -iname '*.2bpp' -exec rm {} +
 
 # Objects are assembled from source.
@@ -36,6 +36,7 @@ src/main.o: $(asm_files) $(gfx_files:.png=.2bpp) $(bin_files)
 # Then we link them to create a playable image.
 # This also spits out game.sym, which lets you use labels in bgb.
 # Generating a mapfile is required thanks to a bug in rgblink.
-game.gbc: $(obj)
-	rgblink -n $*.sym -m $*.map -o $@ $(obj)
-	rgbfix  -c -n 0 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -v $@
+game.gb: $(obj)
+	rgblink -n $*.sym -m $*.map -o $@ $(obj) -p 0xFF
+	rgbfix  -n 0 -r 0x02 -s --old-licensee 0x01 -m 0x1B -j -p 0xFF -t "ZELDA" -v $@
+	# ../mgbdis/mgbdis.py --output-dir ../mgbdis/disassembly --overwrite --print-hex game.gb

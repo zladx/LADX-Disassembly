@@ -74,6 +74,7 @@ OverworldRoomPointers::
 include "data/maps/overworld.asm"
 OverworldRoomsFirstHalf::
 include "data/rooms/overworld_a.asm"
+section "bank9 text",romx[$6700],bank[$09]
 include "text/dialog_dx.asm"
 
 section "bank0A", romx[$4000], bank[$0A]
@@ -254,7 +255,9 @@ section "bank14",romx[$4000],bank[$14]
 include "data/events/dungeons.asm"
 include "data/maps/layouts.asm"
 include "data/chests/chests.asm"
+section "bank14 chests",romx[$5000],bank[$14]
 include "code/bank14.asm"
+section "bank14 text",romx[$5C00],bank[$14]
 include "text/dialog_1.asm"
 
 section "bank15",romx[$4000],bank[$15]
@@ -266,6 +269,7 @@ include "data/entities/indoors_a.asm"
 include "data/entities/indoors_b.asm"
 include "data/entities/overworld.asm"
 include "data/entities/color_dungeon.asm"
+section "bank16 test",romx[$5700],bank[$16]
 include "text/dialog_2.asm"
 
 section "bank17",romx[$4000],bank[$17]
@@ -280,28 +284,27 @@ include "code/entities/bank19.asm"
 section "bank1A",romx[$4000],bank[$1A]
 OverworldRoomsSecondHalf::
 include "data/rooms/overworld_b.asm"
-include "data/bg_attributes/overworld_pointers.asm"
-include "data/bg_attributes/overworld_banks.asm"
-include "code/map_loading.asm"
+; include "code/map_loading.asm"
 OverworldObjectsTilemapDMG::
-include "data/objects_tilemaps/overworld.dmg.asm"
+; include "data/objects_tilemaps/overworld.dmg.asm"
 OverworldObjectsTilemapCGB::
-include "data/objects_tilemaps/overworld.cgb.asm"
-include "code/entities/anglers_tunnel_door.asm"
+; include "data/objects_tilemaps/overworld.cgb.asm"
+; include "code/entities/anglers_tunnel_door.asm"
+AnglersTunnelDoorEntityHandler:
 
 section "bank1B",romx[$4000],bank[$1B]
 include "code/audio/music_1.asm"
 section "Music tracks section 1B/2",romx[$5000],bank[$1B] ; TODO: organize these better
 include "data/music/music_tracks_data_1b_2.asm"
-section "Music tracks section 1B/3",romx[$7100],bank[$1B]
-include "data/music/music_tracks_data_1b_3.asm"
+; section "Music tracks section 1B/3",romx[$7100],bank[$1B]
+; include "data/music/music_tracks_data_1b_3.asm"
 
 section "bank1C",romx[$4000],bank[$1C]
 db $01 ; Extra byte present in the original ROM
 include "data/dialogs/dialog_pointers.asm"
 include "data/ascii_to_tile.asm"
 include "data/dialogs/dialog_banks.asm"
-include "code/dialog_letters.asm"
+section "bank1C dialog",romx[$4a00],bank[$1C]
 include "text/dialog_3.asm"
 
 section "bank1D", romx[$4000], bank[$1D]
@@ -319,197 +322,146 @@ include "code/audio/sfx_entry_point.asm"
 section "sfx pointers table", romx[$4100], bank[$1F]
 include "data/sfx/pointers_table.asm"
 include "code/audio/sfx.asm"
+OverworldBGAttributesPointers:
+OverworldBGAttributesBanks:
+func_020_7D7C:
+func_020_7BA5:
+func_027_74E3:
+func_027_73C7:
+func_027_734B:
+func_027_7306:
+func_027_72E4:
+func_027_7660:
+func_027_774C:
+func_020_7C26:
+func_020_78ED:
+func_023_7E95:
+func_027_782E:
+func_027_7854:
+CreditsBGMaps:
+._00
+._01
+._02
+._03
+._04
+._05
+func_020_7D1C:
+func_021_53F3:
+CameraShopIndoorTiles:
+func_020_4A76:
+func_020_54F5:
+func_020_49BA:
+ConfigureAnimatedTilesCopy:
+PhotoAlbumTiles:
+func_020_6C4F:
+func_020_563B:
+func_020_55CA:
+func_020_6C7A:
+func_021_53CF:
+func_038_7830:
+DungeonItemsTilesPointers:
+func_020_5570:
+func_020_49D9:
+PlayBoomerangSfx:
+EndingCGBAltTiles:
+DungeonFloorTilesPointers:
+TitleDXTilesCGB:
+DungeonWallsTilesPointers:
+CgbMiscTiles:
+ColorDungeonWallsTilesPointers:
+TitleDXTiles:
+ColorDungeonTiles:
+PhotoElementsTiles:
+TitleDXTilesDMG:
+func_020_475A:
+ResetRoomVariables:
+func_020_4303:
+LoadRoomPalettes:
+func_021_53B6:
+func_036_6D4D:
+LoadRoomObjectsAttributes:
+ApplyOverworldObjectMacro:
+EntityHandlersTable:
+LoadTileset23:
+LoadTileset22:
+func_020_6352:
+LoadTileset0E:
+func_020_5C9C:
+EntityInitGenie:
+func_021_5355:
+InventoryEntryPoint:
+ColorDungeonNpcTiles:
+func_020_4AB3:
+func_020_4C47:
+func_020_4BFF:
 
-section "bank20",romx[$4000],bank[$20]
-include "code/entities/_handlers.asm"
-include "code/bank20.asm"
+func_020_4B81:
+func_020_4B4A:
 
-section "bank21",romx[$4000],bank[$21]
-include "code/palettes.asm"
+func_020_48CA:
+func_036_725A:
+LoadBGPalettes:
+func_20_4B1F:
 
-section "bank22",romx[$4000],bank[$22]
-include "data/bg_attributes/overworld_a.asm"
+PhotosEntryPoint:
+PhotoAlbumEntryPoint:
+data_020_763B:
+data_020_73F3:
+data_020_70D3:
+OverworldTilesetsTable:
+ColorDungeonTilesetsTable:
+func_020_6AC1
+PositionTitleScreenSprites
+IndoorsTilesetsTable:
+IndoorsBGAttributesA
+IndoorsBGAttributesB
+LoadBGMapAttributes
+ColorDungeonBGAttributes
+ClearWRAMBank5
+ApplyFadeToWhite_GBC
+SuperGameBoyInit
+ClearBGMap0Attributes
+LoadPaletteForTilemap
+TilesetTables:
+PrinterInterruptSerial
+PrinterInterruptVBlank
+func_020_6E50:
+CopyPalettesToHardware
+GetTilemapHandlerAddress
+func_020_6BDC
+GetBGCopyRequest
+func_038_785A
+LoadFileMenuBG
+func_036_72BA
+ReplaceObjects56and57
+func_020_6BA4
+GetColorDungeonTilesAddress
+func_020_6A30
+LoadPhotoBgMap:
+func_036_7161:
+CheckPushedTombStone
+CopyLinkTunicPalette
+GetEntityInitHandler
+func_036_505F
+func_020_6D0E
+func_036_4F9B
+func_020_4874
+func_020_6D52
+func_036_4F68
+func_020_4954
+func_036_705A
+func_036_70D6:
+func_036_703E
+func_036_4BE8
+func_024_5C1A
+func_036_4A4C:
 
-section "bank23",romx[$4000],bank[$23]
-include "data/bg_attributes/indoors_a.asm"
-include "code/bank23.asm"
+func_036_4A77:
 
-section "bank24",romx[$4000],bank[$24]
-include "data/bg_attributes/indoors_b.asm"
-include "code/background_colors.asm"
-include "code/overworld_macros.asm"
+func_014_50C3
+label_014_5067
+jr_014_50B2
+func_002_4E48
+func_002_4E2C
 
-section "bank25",romx[$4000],bank[$25]
-include "data/bg_attributes/overworld_b.asm"
-
-section "bank26",romx[$4000],bank[$26]
-include "data/rooms_gbc_overlays/overworld_a.asm"
-
-section "bank27",romx[$4000],bank[$27]
-include "data/rooms_gbc_overlays/overworld_b.asm"
-include "data/bg_attributes/overworld_c.asm"
-include "code/bank27.asm"
-
-section "bank28",romx[$4000],bank[$28]
-include "src/code/photo_album.asm"
-include "data/photo_album/background.asm"
-
-section "bank29",romx[$4000],bank[$29]
-PhotoNiceLinkTiles:
-incbin "gfx/photos/photo_nice_link.2bpp"
-PhotoMarinCliffTiles:
-incbin "gfx/photos/photo_marin_cliff.2bpp"
-PhotoMarinWellTiles:
-incbin "gfx/photos/photo_marin_well.2bpp"
-PhotoMabeTiles:
-incbin "gfx/photos/photo_mabe.2bpp"
-
-section "bank2A",romx[$4000],bank[$2A]
-PhotoUlriraTiles:
-incbin "gfx/photos/photo_ulrira.2bpp"
-PhotoBowWowTiles:
-incbin "gfx/photos/photo_bow_wow.2bpp"
-PhotoShopTiles:
-incbin "gfx/photos/photo_shop.2bpp"
-PhotoFishermanTiles:
-incbin "gfx/photos/photo_fisherman.2bpp"
-
-section "bank2B",romx[$4000],bank[$2B]
-PhotoZoraTiles:
-incbin "gfx/photos/photo_zora.2bpp"
-PhotoKanaletTiles:
-incbin "gfx/photos/photo_kanalet.2bpp"
-PhotoGhostTiles:
-incbin "gfx/photos/photo_ghost.2bpp"
-PhotoBridgeTiles:
-incbin "gfx/photos/photo_bridge.2bpp"
-
-section "bank2C",romx[$4000],bank[$2C]
-incbin "gfx/characters/link_1.cgb.2bpp"
-incbin "gfx/characters/vfx.cgb.2bpp"
-incbin "gfx/items/items_1.cgb.2bpp"
-incbin "gfx/items/items_2.cgb.2bpp"
-incbin "gfx/items/dungeon_keys.cgb.2bpp"
-incbin "gfx/items/instruments.cgb.2bpp"
-incbin "gfx/world/overworld_1.cgb.2bpp"
-incbin "gfx/characters/link_2.cgb.2bpp"
-incbin "gfx/items/piece_of_heart_meter.cgb.2bpp"
-incbin "gfx/items/ocarina_symbols.cgb.2bpp"
-incbin "gfx/world/animated_tiles.w32.cgb.2bpp"
-incbin "gfx/world/minimap.cgb.2bpp"
-
-section "bank2D",romx[$4000],bank[$2D]
-DungeonsTilesCGB::
-incbin "gfx/dungeons/dungeons.cgb.2bpp"
-
-section "bank2E",romx[$4000],bank[$2E]
-incbin "gfx/characters/npc_1.cgb.2bpp"
-
-section "bank2F",romx[$4000],bank[$2F]
-incbin "gfx/menus/menu.cgb.2bpp"
-incbin "gfx/menus/save_menu.cgb.2bpp"
-incbin "gfx/intro/title.cgb.2bpp"
-incbin "gfx/fonts/font.cgb.2bpp"
-incbin "gfx/world/overworld_2.cgb.2bpp"
-
-section "bank30",romx[$4000],bank[$30]
-incbin "gfx/intro/intro_1.cgb.2bpp"
-incbin "gfx/intro/intro_2.cgb.2bpp"
-incbin "gfx/intro/intro_3.cgb.2bpp"
-incbin "gfx/scenes/christine.cgb.2bpp"
-incbin "gfx/scenes/marin_beach.cgb.2bpp"
-incbin "gfx/scenes/marin_beach_waves.cgb.2bpp"
-incbin "gfx/fonts/font_large.cgb.2bpp"
-incbin "gfx/scenes/relief.cgb.2bpp"
-incbin "gfx/scenes/painting.cgb.2bpp"
-
-section "bank31",romx[$4000],bank[$31]
-incbin "gfx/characters/npc_2.cgb.2bpp"
-
-section "bank32",romx[$4000],bank[$32]
-incbin "gfx/characters/npc_3.cgb.2bpp"
-incbin "gfx/characters/nightmare.cgb.2bpp"
-incbin "gfx/characters/npc_4.cgb.2bpp"
-incbin "gfx/items/dungeon_a.cgb.2bpp"
-incbin "gfx/items/dungeon_b.cgb.2bpp"
-incbin "gfx/items/dungeon_c.cgb.2bpp"
-incbin "gfx/items/dungeon_d.cgb.2bpp"
-incbin "gfx/items/house_a.cgb.2bpp"
-incbin "gfx/items/house_b.cgb.2bpp"
-incbin "gfx/items/dungeon_items.cgb.2bpp"
-incbin "gfx/items/minimap_cgb.2bpp"
-
-section "bank33",romx[$4000],bank[$33]
-incbin "gfx/ending/ending_1.cgb.2bpp"
-incbin "gfx/dungeons/eagles_tower_top_1.cgb.2bpp"
-incbin "gfx/ending/ending_2.cgb.2bpp"
-incbin "gfx/dungeons/eagles_tower_top_2.cgb.2bpp"
-
-section "bank34",romx[$4000],bank[$34]
-incbin "gfx/menus/print.2bpp"
-
-section "bank35",romx[$4000],bank[$35]
-ColorDungeonNpcTiles::
-incbin "gfx/characters/color_dungeon.2bpp"
-PrintUI1Tiles::
-incbin "gfx/photos/print_ui_1.2bpp"
-PrintUI2Tiles::
-incbin "gfx/photos/print_ui_2.2bpp"
-ColorDungeonTiles::
-incbin "gfx/dungeons/color_dungeon.2bpp"
-CameraShopIndoorTiles::
-incbin "gfx/dungeons/camera_shop.2bpp"
-PhotoAlbumTiles::
-incbin "gfx/photos/photo_album.2bpp"
-EndingCGBAltTiles::
-incbin "gfx/ending/ending.cgb.alt.2bpp"
-
-section "bank36",romx[$4000],bank[$36]
-include "code/entities/bank36.asm"
-
-section "bank37",romx[$4000],bank[$37]
-include "code/photos.asm"
-
-section "bank38",romx[$4000],bank[$38]
-CgbMiscTiles::
-incbin "gfx/cgb_misc.2bpp"
-TitleDXTiles::
-TitleDXTilesDMG::
-incbin "gfx/intro/title_dx.dmg.2bpp"
-TitleDXTilesCGB::
-incbin "gfx/intro/title_dx.cgb.2bpp"
-PhotoElementsTiles::
-incbin "gfx/photos/photo_elements_4.2bpp"
-include "code/photos_animations.asm"
-
-section "bank39",romx[$4000],bank[$39]
-incbin "gfx/photos/photo_elements_1.2bpp"
-
-section "bank3A",romx[$4000],bank[$3A]
-incbin "gfx/photos/photo_elements_2.2bpp"
-
-section "bank3B",romx[$4000],bank[$3B]
-incbin "gfx/photos/photo_elements_3.2bpp"
-PhotoDizzyLinkTiles:
-incbin "gfx/photos/photo_dizzy_link.2bpp"
-
-section "bank3C",romx[$4000],bank[$3C]
-SGBFrameTilesA:
-include "data/super_gameboy/frame_tiles_a.asm"
-SGBFrameTilesB:
-include "data/super_gameboy/frame_tiles_b.asm"
-SGBFrameTilemap:
-include "data/super_gameboy/frame_tilemap.asm"
-include "data/super_gameboy/frame_palette_1.asm"
-include "data/super_gameboy/frame_palette_2.asm"
-include "data/super_gameboy/frame_palette_3.asm"
-include "data/super_gameboy/commands.asm"
-include "code/super_gameboy.asm"
-
-section "bank3D",romx[$4000],bank[$3D]
-include "code/photos_bg.asm"
-
-; Unused banks; make blank sections so they are filled with $00 instead of $ff to match
-; the rom
-section "bank3E",romx[$4000],bank[$3E]
-section "bank3F",romx[$4000],bank[$3F]
+func_002_4DFC

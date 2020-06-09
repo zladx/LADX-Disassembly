@@ -122,15 +122,6 @@ MapLayout10::
     db     0, $7C, $7D, $7E, $F6, $F7, $DE, $DF
 
 MapLayout11::
-    ; Color Dungeon
-    db     0,   0,   0,   0,   0,   0,   0,   0
-    db     0,   0,   0,   0,   0,   0,   0,   0
-    db     0,   0,   0,   0,   0,   0,   0,   0
-    db     0, $00, $01,   0,   0, $02, $03,   0   ; Not a formatting error. Room 0 is the boss room
-    db     0, $04, $05, $06, $07, $08, $09,   0   ; but is also the 'filler' room - this shows intent
-    db     0,   0, $0A, $0B, $0C, $0D,   0,   0
-    db     0,   0, $0E, $0F, $10, $11,   0,   0
-    db     0,   0, $12, $13, $14, $15,   0,   0
 
 MapLayout12::
     ; Eagle's Tower post-collapse

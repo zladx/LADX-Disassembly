@@ -4027,16 +4027,10 @@ jr_007_5A5F:
     ld   [hl], b                                  ; $5A8D: $70
     ld   hl, $D725                                ; $5A8E: $21 $25 $D7
     ld   [hl], $DB                                ; $5A91: $36 $DB
-    ld   a, $87                                   ; $5A93: $3E $87
-    call func_2BF                                ; $5A95: $CD $2F $0B
     ld   hl, $D735                                ; $5A98: $21 $35 $D7
     ld   [hl], $DB                                ; $5A9B: $36 $DB
-    ld   a, $87                                   ; $5A9D: $3E $87
-    call func_2BF                                ; $5A9F: $CD $2F $0B
     ld   hl, $D745                                ; $5AA2: $21 $45 $D7
     ld   [hl], $DB                                ; $5AA5: $36 $DB
-    ld   a, $87                                   ; $5AA7: $3E $87
-    jp   func_2BF                                ; $5AA9: $C3 $2F $0B
 
 func_007_5AAC::
     call GetEntityTransitionCountdown             ; $5AAC: $CD $05 $0C
@@ -6494,8 +6488,6 @@ jr_007_6A23:
     push hl                                       ; $6A25: $E5
     ld   h, b                                     ; $6A26: $60
     ld   l, c                                     ; $6A27: $69
-    ld   a, $87                                   ; $6A28: $3E $87
-    call func_2BF                                ; $6A2A: $CD $2F $0B
     pop  hl                                       ; $6A2D: $E1
     inc  bc                                       ; $6A2E: $03
     dec  e                                        ; $6A2F: $1D
@@ -9662,4 +9654,3 @@ jr_007_7F76:
     ld   hl, hNoiseSfx                            ; $7F79: $21 $F4 $FF
     ld   [hl], $1A                                ; $7F7C: $36 $1A
     ret                                           ; $7F7E: $C9
-

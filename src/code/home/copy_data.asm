@@ -118,10 +118,12 @@ CopyBackgroundData::
     and  $1F
     jr   nz, .noSubstraction0
     ; dest = dest - 32
-    dec  hl
-    ld   a, l
-    and  $E0
-    ld   l, a
+    ld a, l
+    sub $20
+    ld l, a
+    ld a, h
+    sbc $00
+    ld h, a
 .noSubstraction0
     ; Increment the source address
     inc  de
@@ -141,10 +143,13 @@ CopyBackgroundData::
     and  $1F
     jr   nz, .noSubstraction1
     ; dest = dest - 32
-    dec  hl
-    ld   a, l
-    and  $E0
-    ld   l, a
+ ld a, l                                       ; $2921: $7d
+    sub $20                                       ; $2922: $d6 $20
+    ld l, a                                       ; $2924: $6f
+    ld a, h                                       ; $2925: $7c
+    sbc $00                                       ; $2926: $de $00
+    ld h, a                                       ; $2928: $67
+
 .noSubstraction1
     ; Decrement the length to be copied
     dec  b
@@ -203,10 +208,13 @@ label_299B::
     ld   a, l
     and  $1F
     jr   nz, label_29AB
-    dec  hl
-    ld   a, l
-    and  $E0
-    ld   l, a
+ ld a, l
+    sub $20
+    ld l, a
+    ld a, h
+    sbc $00
+    ld h, a
+
 
 label_29AB::
     inc  de

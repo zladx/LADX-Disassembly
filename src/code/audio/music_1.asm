@@ -143,22 +143,6 @@ MusicDataPointerTable_1B::
     dw   Music3f
     dw   Music40
 
-    dw   Music61
-    dw   Music62
-    dw   Music63
-    dw   Music64
-    dw   Music65
-    dw   Music66
-    dw   Music67
-    dw   Music68
-    dw   Music69
-    dw   Music6a
-    dw   Music6b
-    dw   Music6c
-    dw   Music6d
-    dw   Music6e
-    dw   Music6f
-    dw   Music70
 
 ; Input:
 ;   a:   Table index (starting at 1, not 0)
@@ -272,19 +256,9 @@ BeginMusicTrack_Dispatch_1B::
 
 .above30
     cp   $41                                      ; $415D: $FE $41
-    jp   nc, .above40                             ; $415F: $D2 $66 $41
+    jp   nc, DontPlayAudio_1B                             ; $415F: $D2 $66 $41
 
     add  $E0                                      ; $4162: $C6 $E0
-    jr   .playAudio                               ; $4164: $18 $0C
-
-.above40
-    cp   $61                                      ; $4166: $FE $61
-    jp   c, DontPlayAudio_1B                      ; $4168: $DA $2C $40
-
-    cp   $70                                      ; $416B: $FE $70
-    jp   nc, DontPlayAudio_1B                       ; $416D: $D2 $2C $40
-
-    add  $C0                                      ; $4170: $C6 $C0
 
 .playAudio
     dec  hl                                       ; $4172: $2B
@@ -303,22 +277,6 @@ BeginMusicTrack_Dispatch_1B::
     jp   label_01B_42D5                           ; $4188: $C3 $D5 $42
 
 Data_1B_418B::
-    db   $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00
     db   $01, $00, $FF, $FF, $00, $00
     db   $01, $00, $FF, $FF, $00, $00
     db   $01, $00, $FF, $FF, $00, $00

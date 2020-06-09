@@ -1,3 +1,4 @@
+
 Data_002_66F9::
     db   $00, $02, $03, $07, $05, $0A, $0B, $0F, $04, $08, $09, $0E, $06, $0C, $0D, $01
 
@@ -10,12 +11,6 @@ LoadMinimap::
     ; Load special minimap for Color Dungeon
     ld   hl, MinimapsTable                        ; $670E: $21 $79 $64
     ldh  a, [hMapId]                              ; $6711: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                        ; $6713: $FE $FF
-    jr   nz, .computeRegularMinimapAddress        ; $6715: $20 $05
-
-    ld   hl, ColorDungeonMinimap                  ; $6717: $21 $B9 $66
-    jr   .minimapAddressEnd                       ; $671A: $18 $0E
-
 .computeRegularMinimapAddress
     ; Compute minimap address from map id
     swap a                                        ; $671C: $CB $37
@@ -142,41 +137,6 @@ LoadMinimap::
     cp   $40                                      ; $67B7: $FE $40
     jp   nz, .minimapRoomsLoop                    ; $67B9: $C2 $47 $67
 
-    ldh  a, [hIsGBC]                              ; $67BC: $F0 $FE
-    and  a                                        ; $67BE: $A7
-    jr   z, .return                               ; $67BF: $28 $23
-
-    di                                            ; $67C1: $F3
-    ld   e, $00                                   ; $67C2: $1E $00
-    ld   hl, wDungeonMinimap                      ; $67C4: $21 $80 $D4
-
-.loop
-    ld   d, $01                                   ; $67C7: $16 $01
-    xor  a                                        ; $67C9: $AF
-    ld   [rSVBK], a                               ; $67CA: $E0 $70
-    ld   a, [hl]                                  ; $67CC: $7E
-    cp   $ED                                      ; $67CD: $FE $ED
-    jr   nz, .jr_002_67D3                         ; $67CF: $20 $02
-
-    ld   d, $06                                   ; $67D1: $16 $06
-
-.jr_002_67D3
-    ld   a, $02                                   ; $67D3: $3E $02
-    ld   [rSVBK], a                               ; $67D5: $E0 $70
-    ld   a, d                                     ; $67D7: $7A
-    ld   [hl], a                                  ; $67D8: $77
-    inc  hl                                       ; $67D9: $23
-
-    ; Loop while not all $40 rooms are processed
-    inc  e                                        ; $67DA: $1C
-    ld   a, e                                     ; $67DB: $7B
-    cp   $40                                      ; $67DC: $FE $40
-    jr   nz, .loop                                ; $67DE: $20 $E7
-
-    xor  a                                        ; $67E0: $AF
-    ld   [rSVBK], a                               ; $67E1: $E0 $70
-    ei                                            ; $67E3: $FB
-
 .return
     ret                                           ; $67E4: $C9
 
@@ -217,16 +177,24 @@ label_002_680B:
     swap a                                        ; $6810: $CB $37
     JP_TABLE                                      ; $6812: $C7
 ._00 dw func_002_681B
-._01 dw func_002_6820
-._02 dw func_002_681B
+._01 dw func_002_6B81
+._02 dw func_002_6B86
 ._03 dw func_002_6820
 
 func_002_681B::
-    ld   hl, $9D8F                                ; $681B: $21 $8F $9D
-    jr   jr_002_6823                              ; $681E: $18 $03
+    ld hl, $9dae                                  ; $6b7c: $21 $ae $9d
+    jr jr_002_6823                                ; $6b7f: $18 $0d
+
+func_002_6B81:
+    ld hl, $9daf                                  ; $6b81: $21 $af $9d
+    jr jr_002_6823                                ; $6b84: $18 $08
+
+func_002_6B86:
+    ld hl, $9dae                                  ; $6b86: $21 $ae $9d
+    jr jr_002_6823                                ; $6b89: $18 $03
 
 func_002_6820::
-    ld   hl, $9D90                                ; $6820: $21 $90 $9D
+    ld   hl, $9daf                                ; $6820: $21 $90 $9D
 
 jr_002_6823:
     ld   e, $24                                   ; $6823: $1E $24
@@ -239,79 +207,33 @@ label_002_6827:
     swap a                                        ; $682C: $CB $37
     JP_TABLE                                      ; $682E: $C7
 ._00 dw func_002_6837
-._01 dw func_002_6837
-._02 dw func_002_683C
-._03 dw func_002_683C
+._01 dw func_002_683C
+._02 dw fn6bac
+._03 dw fn6bb1
 
 func_002_6837::
-    ld   hl, $9D0B                                ; $6837: $21 $0B $9D
+    ld   hl, $9d2a                                ; $6837: $21 $0B $9D
     jr   jr_002_683F                              ; $683A: $18 $03
 
 func_002_683C::
-    ld   hl, $9CEB                                ; $683C: $21 $EB $9C
+    ld   hl, $9d2a
+    jr   jr_002_683F                                 ; $683C: $21 $EB $9C
 
+fn6bac
+    ld hl, $9d0a                                  ; $6bac: $21 $0a $9d
+    jr jr_002_683F
+
+fn6bb1
+    ld hl, $9d0a
 jr_002_683F:
     ld   e, $00                                   ; $683F: $1E $00
     jr   jr_002_6848                              ; $6841: $18 $05
 
 CopyDungeonMinimapPalette::
-    ld   hl, $9D8B                                ; $6843: $21 $8B $9D
+    ld   hl, $9daa                                ; $6843: $21 $8B $9D
     ld   e, $20                                   ; $6846: $1E $20
 
 jr_002_6848:
-    ldh  a, [hIsGBC]                              ; $6848: $F0 $FE
-    and  a                                        ; $684A: $A7
-    jr   z, jr_002_6885                           ; $684B: $28 $38
-
-    push de                                       ; $684D: $D5
-    push hl                                       ; $684E: $E5
-    di                                            ; $684F: $F3
-    ld   a, $02                                   ; $6850: $3E $02
-    ld   [rSVBK], a                               ; $6852: $E0 $70
-    ld   a, $01                                   ; $6854: $3E $01
-    ld   [rVBK], a                                ; $6856: $E0 $4F
-    ld   c, $00                                   ; $6858: $0E $00
-    ld   d, c                                     ; $685A: $51
-
-jr_002_685B:
-    push hl                                       ; $685B: $E5
-    ld   hl, wDungeonMinimap                      ; $685C: $21 $80 $D4
-    add  hl, de                                   ; $685F: $19
-    ld   a, [hl]                                  ; $6860: $7E
-    pop  hl                                       ; $6861: $E1
-    ld   [hl], a                                  ; $6862: $77
-    inc  e                                        ; $6863: $1C
-    inc  c                                        ; $6864: $0C
-    ld   a, c                                     ; $6865: $79
-    cp   $10                                      ; $6866: $FE $10
-    jr   z, jr_002_687D                           ; $6868: $28 $13
-
-    inc  hl                                       ; $686A: $23
-    and  $03                                      ; $686B: $E6 $03
-    jr   nz, jr_002_685B                          ; $686D: $20 $EC
-
-    ld   a, e                                     ; $686F: $7B
-    add  $04                                      ; $6870: $C6 $04
-    ld   e, a                                     ; $6872: $5F
-    ld   a, l                                     ; $6873: $7D
-    add  $1C                                      ; $6874: $C6 $1C
-    ld   l, a                                     ; $6876: $6F
-    ld   a, $00                                   ; $6877: $3E $00
-    adc  h                                        ; $6879: $8C
-    ld   h, a                                     ; $687A: $67
-    jr   jr_002_685B                              ; $687B: $18 $DE
-
-jr_002_687D:
-    xor  a                                        ; $687D: $AF
-    ld   [rSVBK], a                               ; $687E: $E0 $70
-    ld   [rVBK], a                                ; $6880: $E0 $4F
-    ei                                            ; $6882: $FB
-
-jr_002_6883:
-    pop  hl                                       ; $6883: $E1
-    pop  de                                       ; $6884: $D1
-
-jr_002_6885:
     ld   c, $00                                   ; $6885: $0E $00
     ld   d, c                                     ; $6887: $51
 

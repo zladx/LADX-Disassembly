@@ -6,36 +6,8 @@
 ; is transfered to address $100, which immediatly jumps here.
 ; (See header.asm)
 Start::
-    ; Switch CPU to double-speed if needed
-    cp   GBC ; is running on Game Boy Color?
-    jr   nz, .notGBC
-    ld   a, [rKEY1]
-    and  $80 ; do we need to switch the CPU speed?
-    jr   nz, .speedSwitchDone
-    ld   a, $30      ; \
-    ld   [rP1], a  ; |
-    ld   a, $01      ; |
-    ld   [rKEY1], a  ; | Switch the CPU speed
-    xor  a           ; |
-    ld   [rIE], a    ; |
-    stop             ; /
-
-.speedSwitchDone
-    xor  a
-    ld   [rSVBK], a
-    ld   a, $01 ; isGBC = true
-    jr   Init
-
-.notGBC
-    xor  a ; isGBC = false
-
-Init::
-    ldh  [hIsGBC], a ; Save isGBC value
     call LCDOff      ; Turn off screen
     ld   sp, $DFFF   ; Init stack pointer
-
-    ; Super GameBoy detection and initialization
-    callsb SuperGameBoyInit
 
     ; Clear registers
     xor  a
@@ -48,8 +20,6 @@ Init::
     ld   bc, $1800
     call ClearBytes
 
-    ; Clear Background Maps
-    callsb ClearBGMap0Attributes
     call ClearBGMap
 
     call ClearHRAMAndWRAM
@@ -92,8 +62,7 @@ Init::
     ld   a, %00001
     ld   [rIE], a
 
-    ; Initialize save files
-    call InitSaveFiles
+    callsb SoundSystemInit
 
     ; Initialize sound
     callsb SoundSystemInit
@@ -104,9 +73,6 @@ Init::
 
     ; Enable interrupts
     ei
-
-    ; On GBC, reset WRAM bank 5
-    callsb ClearWRAMBank5
 
     ; Start rendering
     jp   WaitForNextFrame

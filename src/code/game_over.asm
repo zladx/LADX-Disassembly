@@ -65,7 +65,6 @@ jr_001_4240::
     ld   [wObjectAffectingBGPalette], a           ; $424D: $EA $CB $C3
     ld   [wBGPaletteEffectAddress], a             ; $4250: $EA $CC $C3
     ld   [wC3CD], a                               ; $4253: $EA $CD $C3
-    ldh  [rOBP0], a                               ; $4256: $E0 $48
     ret                                           ; $4258: $C9
 
 jr_001_4259::
@@ -95,10 +94,7 @@ jr_001_4259::
     ld   [wOBJ0Palette], a                        ; $427F: $EA $98 $DB
     ld   a, [wBGPalette]                          ; $4282: $FA $97 $DB
     ld   [wOBJ1Palette], a                        ; $4285: $EA $99 $DB
-    ld   e, $08                                   ; $4288: $1E $08
-    call func_020_6A30_trampoline                 ; $428A: $CD $D7 $08
-    call CopyLinkTunicPalette_trampoline          ; $428D: $CD $0F $09
-    ret                                           ; $4290: $C9
+    ret
 
 LinkPassOut1Handler::
     ld   a, $0D                                   ; $4291: $3E $0D
@@ -120,7 +116,6 @@ LinkPassOut2Handler::
     ld   hl, hFF9C                                ; $42AF: $21 $9C $FF
     inc  [hl]                                     ; $42B2: $34
     call LoadFileMenuBG_trampoline                ; $42B3: $CD $05 $09
-    call SynchronizeDungeonsItemFlags_trampoline  ; $42B6: $CD $02 $28
     ret                                           ; $42B9: $C9
 
 ; Unused data
@@ -183,16 +178,12 @@ jr_001_42FB::
     ldh  a, [hLinkPositionY]                      ; $4319: $F0 $99
     ld   [wMapEntrancePositionY], a               ; $431B: $EA $9E $DB
     call LoadSavedFile                            ; $431E: $CD $A4 $52
-    ld   a, $01                                   ; $4321: $3E $01
-    call ClearFileMenuBG_trampoline               ; $4323: $CD $FA $08
     ld   a, $80                                   ; $4326: $3E $80
     ld   [wInvincibilityCounter], a               ; $4328: $EA $C7 $DB
     ret                                           ; $432B: $C9
 
 jr_001_432C::
     call func_001_5DE6                            ; $432C: $CD $E6 $5D
-    xor  a                                        ; $432F: $AF
-    ldh  [hActiveEntityTilesOffset], a            ; $4330: $E0 $F5
     call func_001_6162                            ; $4332: $CD $62 $61
 
 jr_001_4335::

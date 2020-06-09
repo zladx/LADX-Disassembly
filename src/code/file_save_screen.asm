@@ -6,7 +6,6 @@
 FileSaveEntryPoint::
     ld   a, [wGameplaySubtype]
     JP_TABLE
-._00 dw FileSaveInitial
 ._01 dw FileSaveMapFadeOut
 ._02 dw FileSaveDelay1
 ._03 dw FileSaveDelay2
@@ -14,60 +13,6 @@ FileSaveEntryPoint::
 ._05 dw FileSaveInteractive
 ._06 dw FileSaveFadeOut
 
-FileSaveInitial::
-    call IncrementGameplaySubtype
-
-    ; If running on grayscale GB, jump directly to the
-    ; next state (map fade-out).
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, FileSaveMapFadeOut
-
-    ; Running on GBC: copy data from WRAM0 to WRAM3
-    ld   hl, $DC10 ; start address
-    ld   c, $80    ; bytes count
-
-    ; Disable interrupts
-    di
-
-    ; Select WRAM Bank 3
-    ld   a, $03
-    ld   [rSVBK], a
-
-    ; If $D000 == 0...
-    ld   a, [$D000]
-    and  a
-    jr   nz, .done
-
-    ; Copy $80 bytes from 00:DC10 to 03:DC10
-.loop
-    ; Switch to WRAM bank 0
-    xor  a
-    ld   [rSVBK], a
-    ; Read a byte
-    ld   b, [hl]
-    ; Switch to WRAM bank 3
-    ld   a, $03
-    ld   [rSVBK], a
-    ; Write a byte
-    ld   [hl], b
-    ; Increment the pointer, and loop until done.
-    inc  hl
-    dec  c
-    ld   a, c
-    and  a
-    jr   nz, .loop
-
-    ; Set $D000 to 1
-    ld   a, $01
-    ld   [$D000], a
-
-.done
-    ; Switch back to WRAM bank 0
-    xor  a
-    ld   [rSVBK], a
-    ; Enable interrupts
-    ei
 
 FileSaveMapFadeOut::
     call DrawLinkSprite
@@ -110,8 +55,6 @@ FileSaveDelay2::
     ldh  [$FF97], a
     ld   [$C16B], a
     ld   [$C16C], a
-    ld   a, $01
-    ld   [$DDD5], a
     jp   IncrementGameplaySubtypeAndReturn
 
 FileSaveVisible::
@@ -168,10 +111,6 @@ jr_001_40F9::
     call label_27F2
     call func_001_5DE6
     call ClearWRAMAndLowerHRAM
-    xor  a
-    ldh  [hActiveEntityTilesOffset], a
-    ld   a, $01
-    ld   [$DBAF], a
     call func_001_6162
     ; fallthrough
 
@@ -245,6 +184,7 @@ jr_001_413B::
 .wait1
     xor  a
     ld   [rBGP], a
+    nop
     nop
     nop
     nop

@@ -287,9 +287,6 @@ BeginMusicTrack_Dispatch_1E::
     cp   $41                                      ; $4187: $FE $41
     jp   c, DontPlayAudio_1E                      ; $4189: $DA $2B $40
 
-    cp   $61                                      ; $418C: $FE $61
-    jp   nc, DontPlayAudio_1E                     ; $418E: $D2 $2B $40
-
     add  $E0                                      ; $4191: $C6 $E0
 
 .playAudio
@@ -1733,6 +1730,3 @@ func_01E_4D2A::
     ldh  [rNR10], a                               ; $4DA4: $E0 $10
     ldh  [rNR30], a                               ; $4DA6: $E0 $1A
     ret                                           ; $4DA8: $C9
-
-
-

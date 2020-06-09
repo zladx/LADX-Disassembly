@@ -36,9 +36,6 @@ ClearWRAMBytes::
 
 ; Set BC bytes of memory starting from HL to zero
 ClearBytes::
-    ldh  a, [hIsGBC]
-    push af
-
 .loop
     xor  a
     ldi  [hl], a
@@ -46,6 +43,4 @@ ClearBytes::
     ld   a, b
     or   c
     jr   nz, .loop
-    pop  af
-    ldh  [hIsGBC], a
     ret

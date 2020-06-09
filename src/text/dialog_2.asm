@@ -1,3 +1,212 @@
+Dialog080::
+    db " Crazy Tracy's  "
+    db "  Health Spa@"
+
+Dialog081::
+    db "Quadruplet's    "
+    db "      House@"
+
+Dialog082::
+    db "  Dream Shrine  "
+    db "@"
+
+Dialog083::
+    db "Telephone Booth "
+    db "@"
+
+Dialog084::
+    db "Seashell Mansion"
+    db "@"
+
+Dialog085::
+    db "Richard's Villa "
+    db "@"
+
+Dialog086::
+    db "     Hen House  "
+    db "@"
+
+Dialog087::
+    db "Village Library "
+    db "@"
+
+Dialog088::
+    db "    Raft Shop   "
+    db "@"
+
+Dialog089::
+    db "    Warp Hole   "
+    db "@"
+
+Dialog08A::
+    db "This rock has   "
+    db "many cracks...  "
+    db "There must be   "
+    db "some way to     "
+    db "shatter it...@"
+
+Dialog08B::
+    db "Oh? What a weird"
+    db "object!  There  "
+    db "must be some way"
+    db "to tackle this  "
+    db "obstacle.@"
+
+Dialog08C::
+    db "Hunh?  This rock"
+    db "has a key hole! "
+    db "You should come "
+    db "back with a key!"
+    db "@"
+
+Dialog08D::
+    db "Wow!  This looks"
+    db "pretty heavy!   "
+    db "You won't be    "
+    db "able to lift it "
+    db "with just your  "
+    db "bare hands...@"
+
+Dialog08E::
+    db "Well, it's an   "
+    db "Ocarina, but you"
+    db "don't know how  "
+    db "to play it...@"
+
+Dialog08F::
+    db "No!  No!  Poor  "
+    db "hen!  Stop that!"
+    db "@"
+
+Dialog090::
+    db "You found the   "
+    db "Power Bracelet! "
+    db "At last, you can"
+    db "pick up pots and"
+    db "stones!@"
+
+Dialog091::
+    db "You got your    "
+    db "Shield back!    "
+    db "You can use it  "
+    db "to flip enemies!"
+    db "@"
+
+Dialog092::
+    db "Ahhh... Yess... "
+    db "That dust was so"
+    db "refreshing...   "
+    db "For that, I'll  "
+    db "tell you a hint!"
+    db "Use a Bomb in a "
+    db "place where the "
+    db "sand swallows   "
+    db "you... There is "
+    db "a treat on the  "
+    db "other side of   "
+    db "the wall... Bye!"
+    db "@"
+
+Dialog093::
+    db "You've got the  "
+    db "Hook Shot!  Its "
+    db "chain stretches "
+    db "long when you   "
+    db "use it!@"
+
+Dialog094::
+    db "You've got the  "
+    db "Magic Rod!  Now "
+    db "you can burn    "
+    db "things! Burn it!"
+    db "Burn, baby burn!"
+    db "@"
+
+Dialog095::
+    db "You've got the  "
+    db "Pegasus Boots!  "
+    db "If you hold down"
+    db "the Button, you "
+    db "can dash!@"
+
+Dialog096::
+    db "You've got the  "
+    db "Ocarina!  You   "
+    db "should learn to "
+    db "play many songs!"
+    db "@"
+
+Dialog097::
+    db "You've got the  "
+    db "Roc's Feather!  "
+    db "It feels like   "
+    db "your body is a  "
+    db "lot lighter!@"
+
+Dialog098::
+    db "You've got a    "
+    db "Shovel!  Now you"
+    db "can feel the joy"
+    db "of digging!@"
+
+Dialog099::
+    db "You've got some "
+    db "Magic Powder!   "
+    db "Try sprinkling  "
+    db "it on a variety "
+    db "of things!@"
+
+Dialog09A::
+Dialog09B::
+    db "You found your  "
+    db "Sword!  It must "
+    db "be yours because"
+    db "it has your name"
+    db "engraved on it!@"
+
+Dialog09C::
+    db "You've got the  "
+    db "Flippers! If you"
+    db "press the B     "
+    db "Button while you"
+    db "swim, you can   "
+    db "dive underwater!"
+    db "@"
+
+Dialog09D::
+    db "You've got the  "
+    db "Magnifying Lens!"
+    db "This will reveal"
+    db "many things you "
+    db "couldn't see    "
+    db "before!@"
+
+Dialog09E::
+Dialog09F::
+    db "You've got a    "
+    db "new Sword!  You "
+    db "should put your "
+    db "name on it right"
+    db "away!@"
+
+Dialog0A0::
+Dialog0A1::
+    db "You've got the  "
+    db "Tail Key!  Now  "
+    db "you can open the"
+    db "Tail Cave gate!@"
+
+Dialog0A2::
+    db "You've got the  "
+    db "Slime Key!  Now "
+    db "you can open the"
+    db "gate in Ukuku   "
+    db "Prairie!@"
+
+Dialog0A3::
+    db "You've got the  "
+    db "Angler Key!@"
+
 Dialog0A4::
     db "You've got the  "
     db "Face Key!@"
@@ -24,14 +233,16 @@ Dialog0A7::
     db "tone will tell  "
     db "you if a key is "
     db "hidden in a room"
-    db "when you enter! @"
+    db "when you enter! "
+    db "@"
 
 Dialog0A8::
     db "You found a     "
-    db "stone beak!     "
-    db "Let's find the  "
-    db "owl statue that "
-    db "belongs to it.@"
+    db "fragment of a   "
+    db "Stone Slab!  Now"
+    db "you can read the"
+    db "message on the  "
+    db "wall!@"
 
 Dialog0A9::
     db "You've got the  "
@@ -65,7 +276,8 @@ Dialog0AD::
 Dialog0AE::
     db "   You got 200  "
     db "     Rupees!    "
-    db "You're Ecstatic!@"
+    db "You're Ecstatic!"
+    db "@"
 
 Dialog0AF::
     db "Leave me alone! "
@@ -76,7 +288,8 @@ Dialog0AF::
 
 Dialog0B0::
     db "BUZZZZZ! BUZZZZ!"
-    db "   OUTZZZIDER!  @"
+    db "   OUTZZZIDER!  "
+    db "@"
 
 Dialog0B1::
     db "NEENER NEENER!  "
@@ -95,7 +308,8 @@ Dialog0B3::
     db "come to wake the"
     db "Wind Fisssh...  "
     db "KEEE-HEE-HEEEH! "
-    db "I shall eat you!@"
+    db "I shall eat you!"
+    db "@"
 
 Dialog0B4::
     db "HO HO HO!       "
@@ -201,7 +415,8 @@ Dialog0C0::
     db "key you find in "
     db "this forest...  "
     db "The Wind Fish is"
-    db "watching...Hoot!@"
+    db "watching...Hoot!"
+    db "@"
 
 Dialog0C1::
     db "Hoot!  Take the "
@@ -212,7 +427,8 @@ Dialog0C1::
     db "is hidden there!"
     db "Go now!  The    "
     db "Wind Fish is    "
-    db "waiting!  Hooot!@"
+    db "waiting!  Hooot!"
+    db "@"
 
 Dialog0C2::
     db "Hoooot!  That is"
@@ -260,7 +476,8 @@ Dialog0C4::
     db "This, my friend,"
     db "is the only way "
     db "for you to leave"
-    db "the island! Hoo!@"
+    db "the island! Hoo!"
+    db "@"
 
 Dialog0C5::
     db "Hoot!  How many "
@@ -294,7 +511,8 @@ Dialog0C6::
     db "waterfall!  A   "
     db "leap from the   "
     db "top and you will"
-    db "reach your goal!@"
+    db "reach your goal!"
+    db "@"
 
 Dialog0C7::
     db "Hoot!  There are"
@@ -333,7 +551,8 @@ Dialog0C8::
     db "Fish...  Trust  "
     db "your feelings..."
     db "Someday you will"
-    db "know for sure...@"
+    db "know for sure..."
+    db "@"
 
 Dialog0C9::
     db "Hoot!  The many "
@@ -354,14 +573,19 @@ Dialog0C9::
     db "Hoot! Hoot!@"
 
 Dialog0CA::
-    db "Hoot hoot!      "
-    db "Your path is    "
-    db "not easy, but   "
-    db "you are almost  "
-    db "there. Go east. "
+    db "The going is    "
+    db "much more trying"
+    db "from this point!"
+    db "You have only   "
+    db "two more tasks  "
+    db "to accomplish!  "
+    db "The first is in "
+    db "the east part of"
+    db "the mountains,  "
+    db "the second in   "
+    db "the west.  Go!  "
     db "The Wind Fish   "
-    db "is getting      "
-    db " restless.@"
+    db "grows restless!@"
 
 Dialog0CB::
     db "Hoot!  It has   "
@@ -443,7 +667,8 @@ Dialog0CF::
     db "work is done... "
     db "The Wind Fish   "
     db "will wake soon. "
-    db "Good bye...Hoot!@"
+    db "Good bye...Hoot!"
+    db "@"
 
 Dialog0D0::
     db "... ... ... ... "
@@ -492,7 +717,8 @@ Dialog0D2::
 Dialog0D3::
 Dialog0D4::
 Dialog0D5::
-    db "Mermaid Statue  @"
+    db "Mermaid Statue  "
+    db "@"
 
 Dialog0D6::
 Dialog0D7::
@@ -584,7 +810,8 @@ Dialog0DF::
     db "very moving     "
     db "tune... It can  "
     db "even liven up   "
-    db "unliving things!@"
+    db "unliving things!"
+    db "@"
 
 Dialog0E0::
     db "If you play this"
@@ -659,193 +886,5 @@ Dialog0E7::
     db "AWAY, YOU SHOULD"
     db "KNOW THE TRUTH! "
     db "... ... ... ... "
-    db "What?  Illusion?@"
-
-Dialog0E8::
-    db "You've found a  "
-    db "Gold Leaf! Press"
-    db "START to see    "
-    db "how many you've "
-    db "collected!@"
-
-Dialog0E9::
-    db "At last!  You've"
-    db "got the final   "
-    db "Golden Leaf!    "
-    db "Now go and see  "
-    db "Richard about   "
-    db "that key...@"
-
-Dialog0EA::
-Dialog0EB::
-Dialog0EC::
-    db "You've got a    "
-    db "Guardian Acorn! "
-    db "It will reduce  "
-    db "the damage you  "
-    db "take by half!@"
-
-Dialog0ED::
-    db "You've got the  "
-    db "Mirror Shield!  "
-    db "You can now turn"
-    db "back the beams  "
-    db "you couldn't    "
-    db "block before!@"
-
-Dialog0EE::
-    db "You've got a    "
-    db "more Powerful   "
-    db "Bracelet!  Now  "
-    db "you can almost  "
-    db "lift a whale!@"
-
-Dialog0EF::
-    db "You found a     "
-    db "Secret Seashell!"
-    db "If you collect a"
-    db "lot of these,   "
-    db "something good  "
-    db "is bound to     "
-    db "happen!@"
-
-Dialog0F0::
-    db "Want to go on a "
-    db "raft ride for a "
-    db "hundred Rupees? "
-    db "    Yes  No Way<ask>"
-
-Dialog0F1::
-    db "Okay, the raft  "
-    db "is ready for you"
-    db "outside!  Enjoy!@"
-
-Dialog0F2::
-    db "Waterfall at the"
-    db "    Shrine@"
-
-Dialog0F3::
-    db " South of the   "
-    db "    Shrine@"
-
-Dialog0F4::
-    db "Entrance to the "
-    db " Animal Village@"
-
-Dialog0F5::
-    db "We were born of "
-    db "nightmares... To"
-    db "take over this  "
-    db "world, we made  "
-    db "the Wind Fish   "
-    db "sleep endlessly!"
-    db "If the Wind Fish"
-    db "doesn't wake up,"
-    db "this island will"
-    db "never disappear!"
-    db "We would have   "
-    db "been the masters"
-    db "of this place..."
-    db "But you had to  "
-    db "come here and   "
-    db "disrupt our     "
-    db "plans!  Heh heh!"
-    db "You can never   "
-    db "defeat us!!!    "
-    db "Let's rumble!@"
-
-Dialog0F6::
-    db "This island is  "
-    db "going to dis-   "
-    db "appear...  Our  "
-    db "world is going  "
-    db "to disappear... "
-    db "Our world...    "
-    db "Our... world... @"
-
-Dialog0F7::
-    db "Wow!  #####, can"
-    db "I try this?!    "
-    db "What do you say?"
-    db "    Okay No Way<ask>"
-
-Dialog0F8::
-    db "C'mon!  I want  "
-    db "to do it! Can I?"
-    db "It looks so fun!"
-    db "    Yes  Okay<ask>"
-
-Dialog0F9::
-    db "You're good!    "
-    db "You're a pro,   "
-    db "aren't you?     "
-    db "... ... ... ... "
-    db "Well, beat it!  "
-    db "Pros aren't     "
-    db "allowed in here!@"
-
-Dialog0FA::
-    db "Go away!@"
-
-Dialog0FB::
-    db "Quit it!@"
-
-Dialog0FC::
-    db "This is not a   "
-    db "chest...  What? "
-    db "You knew that?  "
-    db "Okay.@"
-
-Dialog0FD::
-    db "##### checked   "
-    db "the chest.  Wow!"
-    db "This is a nice  "
-    db "chest!@"
-
-Dialog0FE::
-    db "It's all ready, "
-    db "it is!  Take    "
-    db "care, as there's"
-    db "not much there! "
-    db "Why not try a   "
-    db "bit in my hut?@"
-
-Dialog0FF::
-    db "Hey!  What are  "
-    db "ya doin' in my  "
-    db "chest?!  Where'd"
-    db "you learn ta do "
-    db "such a thing?!@"
-
-Dialog100::
-    db "You've got the  "
-    db "Full Moon Cello!@"
-
-Dialog101::
-    db "You've got the  "
-    db "Conch Horn!@"
-
-Dialog102::
-    db "You've got the  "
-    db "Sea Lily's Bell!@"
-
-Dialog103::
-    db "You've got the  "
-    db "Surf Harp!@"
-
-Dialog104::
-    db "You've got the  "
-    db "Wind Marimba!@"
-
-Dialog105::
-    db "You've got the  "
-    db "Coral Triangle!@"
-
-Dialog106::
-    db "You've got the  "
-    db "Organ of        "
-    db "  Evening Calm!@"
-
-Dialog107::
-    db "You've got the  "
-    db "Thunder Drum!@"
+    db "What?  Illusion?"
+    db "@"

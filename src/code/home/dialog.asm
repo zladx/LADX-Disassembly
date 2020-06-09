@@ -119,19 +119,7 @@ DialogClosingEndHandler::
     ld   [wDialogState], a
     ld   a, $18
     ld   [$C134], a
-    ldh  a, [hIsGBC]
-    and  a
-    ret  z
-
-    ld   a, [wGameplayType]
-    cp   a, GAMEPLAY_WORLD
-    ret  nz
-
-    ld   a, [$C3CC]
-    cp   a, $08
-    ret  c
-
-    jpsb func_021_53CF
+    ret
 
 ; This array actually begins two bytes before,
 ; in the middle of the `jp` instruction,
@@ -161,12 +149,13 @@ label_23EF::
     ld   hl, data_23D2 - $02
     add  hl, de
     ld   a, [hl]
-    add  a, $00
-    ld   c, a
-    ld   a, $D5
-    adc  a, $00
-    ld   b, a
-    ld   hl, data_23DC
+       ld c, a
+    ld b, $00
+    ld hl, $d500
+    add hl, bc
+    push hl
+    pop bc
+    ld hl, $21d7
     add  hl, de
     ld   a, [wBGOriginLow]
     add  a, [hl]
@@ -182,21 +171,22 @@ label_23EF::
     xor  a
     ld   e, a
     ld   d, a
-    ldh  a, [hIsGBC]
-    and  a
-    jr   nz, label_2444
 
 label_241E::
-    ld   a, [hli]
+    ld   a, [hl]
     ld   [bc], a
     inc  bc
     ld   a, l
+    add $01
     and  $1F
-    jr   nz, label_242B
+    jr   nz, jr_000_2225
     ld   a, l
-    dec  a
     and  $E0
     ld   l, a
+    jr label_242B
+
+jr_000_2225:
+    inc  l
 
 label_242B::
     inc  e
@@ -218,56 +208,101 @@ label_243C::
     jr   nz, label_241E
     ret
 
-label_2444::
-    ld   a, [hl]
-    ld   [bc], a
-    ld   a, $01
-    ld   [rVBK], a
+; label_2444::
+;     ld   a, [hl]
+;     ld   [bc], a
+;     ld   a, $01
+;     ld   [rVBK], a
 
-label_244A::
-    ld   a, $02
-    ld   [rSVBK], a
-    ld   a, [hl]
-    ld   [bc], a
-    xor  a
-    ld   [rVBK], a
-    ld   [rSVBK], a
-    inc  bc
-    ld   a, l
-    add  a, $01
-    and  $1F
-    jr   nz, label_2463
-    ld   a, l
-    and  $E0
-    ld   l, a
-    jr   label_2464
+; label_244A::
+;     ld   a, $02
+;     ld   [rSVBK], a
+;     ld   a, [hl]
+;     ld   [bc], a
+;     xor  a
+;     ld   [rVBK], a
+;     ld   [rSVBK], a
+;     inc  bc
+;     ld   a, l
+;     add  a, $01
+;     and  $1F
+;     jr   nz, label_2463
+;     ld   a, l
+;     and  $E0
+;     ld   l, a
+;     jr   label_2464
 
-label_2463::
-    inc  l
+; label_2463::
+;     inc  l
 
-label_2464::
-    inc  e
-    ld   a, e
-    cp   $12
-    jr   nz, label_2444
-    ld   e, $00
-    ldh  a, [hScratch0]
-    add  a, $20
-    ldh  [hScratch0], a
-    jr   nc, label_2475
-    inc  h
+; label_2464::
+;     inc  e
+;     ld   a, e
+;     cp   $12
+;     jr   nz, label_2444
+;     ld   e, $00
+;     ldh  a, [hScratch0]
+;     add  a, $20
+;     ldh  [hScratch0], a
+;     jr   nc, label_2475
+;     inc  h
 
-label_2475::
-    ld   l, a
-    inc  d
-    ld   a, d
-    cp   $02
-    jr   nz, label_2444
-    ret
+; label_2475::
+;     ld   l, a
+;     inc  d
+;     ld   a, d
+;     cp   $02
+;     jr   nz, label_2444
+;     ret
+
+Data_01C_4A18::
+    db   $61, $41, $81, $21, $A1, $81, $61, $A1, $41, $C1
+
+Data_01C_4A22::
+    db   $98, $98, $98, $98, $98, $99, $99, $99, $99, $99
 
 DialogOpenAnimationEndHandler::
-    jpsb DialogOpenAnimationEnd
+DialogOpenAnimationEnd::
+    ld   a, [$C19F]                             ; $4A2C: $FA $9F $C1
+    ld   c, a                                   ; $4A2F: $4F
+    ld   a, [$C16F]                             ; $4A30: $FA $6F $C1
+    cp   $05                                    ; $4A33: $FE $05
+    jr   z, func_01C_4A71                       ; $4A35: $28 $3A
 
+    bit  7, c                                   ; $4A37: $CB $79
+    jr   z, func_01C_4A3D                       ; $4A39: $28 $02
+
+    add  $05                                    ; $4A3B: $C6 $05
+
+func_01C_4A3D::
+    ld   c, a                                   ; $4A3D: $4F
+    ld   b, $00                                 ; $4A3E: $06 $00
+    ld   e, $01                                 ; $4A40: $1E $01
+    ld   d, $00                                 ; $4A42: $16 $00
+    ld   a, [wBGOriginHigh]                     ; $4A44: $FA $2E $C1
+    ld   hl, Data_01C_4A22                      ; $4A47: $21 $22 $4A
+    add  hl, bc                                 ; $4A4A: $09
+    add  [hl]                                   ; $4A4B: $86
+    ld   hl, $D600                              ; $4A4C: $21 $00 $D6
+    add  hl, de                                 ; $4A4F: $19
+    ldi  [hl], a                                ; $4A50: $22
+    push hl                                     ; $4A51: $E5
+    ld   a, [wBGOriginLow]                      ; $4A52: $FA $2F $C1
+    ld   hl, Data_01C_4A18                      ; $4A55: $21 $18 $4A
+    add  hl, bc                                 ; $4A58: $09
+    add  [hl]                                   ; $4A59: $86
+    pop  hl                                     ; $4A5A: $E1
+    ldi  [hl], a                                ; $4A5B: $22
+    ld   a, $51                                 ; $4A5C: $3E $51
+    ldi  [hl], a                                ; $4A5E: $22
+    ldh  a, [hFFE8]                             ; $4A5F: $F0 $E8
+    ldi  [hl], a                                ; $4A61: $22
+    ld   [hl], $00                              ; $4A62: $36 $00
+    ld   hl, $C16F                              ; $4A6C: $21 $6F $C1
+    inc  [hl]                                   ; $4A6F: $34
+    ret                                         ; $4A70: $C9
+
+func_01C_4A71::
 IncrementDialogState::
 IncrementDialogStateAndReturn::
     ld   hl, wDialogState
@@ -290,16 +325,6 @@ UpdateDialogState::
     xor  a
     ld   [$C16F], a
 
-.if
-    ; If GameplayType == PHOTO_ALBUM
-    ld   a, [wGameplayType]
-    cp   GAMEPLAY_PHOTO_ALBUM
-    jr   nz, .else
-.then
-    ; A = 0
-    xor  a
-    jr   .fi
-.else
     ; A = (wDialogState & $F0) | $E
     ld   a, [wDialogState]
     and  $F0
@@ -311,8 +336,76 @@ UpdateDialogState::
 UpdateDialogState_return:
     ret
 
+Data_01C_4A8A::
+    db   $A1, $21, $81, $41, $61, $C1, $41, $A1, $61, $81
+
+Data_01C_4A94::
+    db   $98, $98, $98, $98, $98, $99, $99, $99, $99, $99
+
+Data_01C_4A9E::
+    db   $48, $00, $36, $12 ; $4A9A |....H.6.|
+    db   $24, $48, $00, $36, $12, $24           ; $4AA2 |$H.6.$|
+
 DialogClosingBeginHandler::
-    jpsb func_01C_4AA8
+func_01C_4AA8::
+    ld   a, [$C19F]                             ; $4AA8: $FA $9F $C1
+    ld   c, a                                   ; $4AAB: $4F
+    ld   a, [$C16F]                             ; $4AAC: $FA $6F $C1
+    cp   $05                                    ; $4AAF: $FE $05
+    jr   z, func_01C_4A71                       ; $4AB1: $28 $BE
+
+    bit  7, c                                   ; $4AB3: $CB $79
+    jr   z, func_01C_4AB9                       ; $4AB5: $28 $02
+
+    add  $05                                    ; $4AB7: $C6 $05
+
+func_01C_4AB9::
+    ld   c, a                                   ; $4AB9: $4F
+    ld   b, $00                                 ; $4ABA: $06 $00
+    ld   e, $01                                 ; $4ABC: $1E $01
+    ld   d, $00                                 ; $4ABE: $16 $00
+    ld   a, [wBGOriginHigh]                     ; $4AC0: $FA $2E $C1
+    ld   hl, Data_01C_4A94                      ; $4AC3: $21 $94 $4A
+    add  hl, bc                                 ; $4AC6: $09
+    add  [hl]                                   ; $4AC7: $86
+    ld   hl, $D600                              ; $4AC8: $21 $00 $D6
+    add  hl, de                                 ; $4ACB: $19
+    ldi  [hl], a                                ; $4ACC: $22
+    push hl                                     ; $4ACD: $E5
+    ld   a, [wBGOriginLow]                      ; $4ACE: $FA $2F $C1
+    ld   hl, Data_01C_4A8A                      ; $4AD1: $21 $8A $4A
+    add  hl, bc                                 ; $4AD4: $09
+    add  [hl]                                   ; $4AD5: $86
+    pop  hl                                     ; $4AD6: $E1
+    ldi  [hl], a                                ; $4AD7: $22
+    ld   a, $11                                 ; $4AD8: $3E $11
+    ldi  [hl], a                                ; $4ADA: $22
+    push hl                                     ; $4ADB: $E5
+    ld   hl, Data_01C_4A9E                      ; $4ADC: $21 $9E $4A
+    add  hl, bc                                 ; $4ADF: $09
+    ld   a, [hl]                                ; $4AE0: $7E
+    ld   c, a                                   ; $4AE1: $4F
+    ld   b, $00                                 ; $4AE2: $06 $00
+    ld   hl, $D500                              ; $4AE4: $21 $00 $D5
+    add  hl, bc                                 ; $4AE7: $09
+    push hl                                     ; $4AE8: $E5
+    pop  bc                                     ; $4AE9: $C1
+    pop  hl                                     ; $4AEA: $E1
+    ld   e, $12                                 ; $4AEB: $1E $12
+
+func_01C_4AED::
+    ld   a, [bc]                                ; $4AED: $0A
+    inc  bc                                     ; $4AEE: $03
+    ldi  [hl], a                                ; $4AEF: $22
+    dec  e                                      ; $4AF0: $1D
+    jr   nz, func_01C_4AED                      ; $4AF1: $20 $FA
+
+    ld   [hl], $00                              ; $4AF3: $36 $00
+func_01C_4AFD::
+    ld   hl, $C16F                              ; $4AFD: $21 $6F $C1
+    inc  [hl]                                   ; $4B00: $34
+    ret                                         ; $4B01: $C9
+
 
 DialogLetterAnimationStartHandler::
     ld   a, BANK(func_01C_49F1)
@@ -325,7 +418,30 @@ DialogLetterAnimationStartHandler::
     ret
 
 .delayOver
-    call func_01C_49F1
+func_01C_49F1::
+    ld   a, [$C170]                             ; $49F1: $FA $70 $C1
+    and  %00011111                              ; $49F4: $E6 $1F
+    ld   e, a                                   ; $49F6: $5F
+    ld   d, $00                                 ; $49F7: $16 $00
+    ld   c, $01                                 ; $49F9: $0E $01
+    ld   b, $00                                 ; $49FB: $06 $00
+    ld   hl, DialogCharacterYTable              ; $49FD: $21 $81 $45
+    add  hl, de                                 ; $4A00: $19
+    ld   a, [hl]                                ; $4A01: $7E
+    ld   hl, $D600                              ; $4A02: $21 $00 $D6
+    add  hl, bc                                 ; $4A05: $09
+    ldi  [hl], a                                ; $4A06: $22
+    push hl                                     ; $4A07: $E5
+    ld   hl, DialogCharacterXTable              ; $4A08: $21 $61 $45
+    add  hl, de                                 ; $4A0B: $19
+    ld   a, [hl]                                ; $4A0C: $7E
+    pop  hl                                     ; $4A0D: $E1
+    ldi  [hl], a                                ; $4A0E: $22
+    ld   a, $4F                                 ; $4A0F: $3E $4F
+    ldi  [hl], a                                ; $4A11: $22
+    ld   a, $FF                                 ; $4A12: $3E $FF
+    ldi  [hl], a                                ; $4A14: $22
+    ld   [hl], $00                              ; $4A15: $36 $00
     jp   IncrementDialogStateAndReturn
 
 DialogLetterAnimationEndHandler::
@@ -663,8 +779,7 @@ DialogBreakHandler::
     ld   d, a
     ld   hl, DialogBankTable
     add  hl, de
-    ld   a, [hl]
-    and  a
+    bit  7, [hl]
     jp   z, label_278B
 
 .jp_26E1
@@ -801,10 +916,13 @@ label_278B::
 
 DialogChoiceHandler::
     ldh  a, [hJoypadState]
-    bit  4, a               ; Was A pushed?
+    bit  J_BIT_B, a
+    jr   nz, label_278B
+    and  J_A
     jp   nz, .jp_27B7
-    and  J_LEFT | J_RIGHT
-    jr   z, .jp_27AA
+    ldh a, [hJoypadState]
+    and J_SELECT | J_LEFT | J_RIGHT
+    jr z, .jp_27AA
     ld   hl, $C177
     ld   a, [hl]
     inc  a

@@ -1,69 +1,98 @@
+Dialog100::
+    db "You've got the  "
+    db "Full Moon Cello!"
+    db "@"
+
+Dialog101::
+    db "You've got the  "
+    db "Conch Horn!@"
+
+Dialog102::
+    db "You've got the  "
+    db "Sea Lily's Bell!"
+    db "@"
+
+Dialog103::
+    db "You've got the  "
+    db "Surf Harp!@"
+
+Dialog104::
+    db "You've got the  "
+    db "Wind Marimba!@"
+
+Dialog105::
+    db "You've got the  "
+    db "Coral Triangle!@"
+
+Dialog106::
+    db "You've got the  "
+    db "Organ of        "
+    db "  Evening Calm!@"
+
+Dialog107::
+    db "You've got the  "
+    db "Thunder Drum!@"
+
 Dialog108::
-    db "Hi! It's me, the"
-    db "photographer!   "
-    db "You seem curious"
-    db "about Grandpa   "
-    db "Ulrira.@"
+    db "Turn aside the  "
+    db "spined ones with"
+    db "a shield...@"
 
 Dialog109::
-    db "I'll call this  "
-    db "'##### Dis-     "
-    db "covers Ulrira's "
-    db "Secret!'@"
+    db "First, defeat   "
+    db "the imprisoned  "
+    db "Pols Voice,     "
+    db "Last, Stalfos..."
+    db "@"
+
+    db "@"
 
 Dialog10A::
-    db "#####, now run  "
-    db "away before he  "
-    db "finds you.@"
+    db "Far away...     "
+    db "Do not fear,    "
+    db "dash and fly!@"
 
 Dialog10B::
-    db "I'll go develop "
-    db "this. Come see  "
-    db "it later, OK?@"
+    db "The glint of the"
+    db "tile will be    "
+    db "your guide...@"
 
 Dialog10C::
-    db "I just LOVE to  "
-    db "take pictures.  "
-    db "Will you let me "
-    db "take your       "
-    db "picture?        "
-    db "    YES  NO<ask>"
+    db "Dive under where"
+    db "torchlight beams"
+    db "do cross...@"
 
 Dialog10D::
-    db "Go to the back  "
-    db "of the room and "
-    db "stand in front  "
-    db "of the screen.@"
+    db "Enter the space "
+    db "where the eyes  "
+    db "have walls...@"
 
 Dialog10E::
-    db "Hey! I haven't  "
-    db "taken your      "
-    db "picture yet! Go "
-    db "back and stand  "
-    db "in front of the "
-    db "screen!@"
+    db "The riddle is   "
+    db "solved when the "
+    db "pillars fall!@"
 
 Dialog10F::
-    db "I'll call this  "
-    db "'Here Stands A  "
-    db "Brave Man.'     "
-    db "Say cheese!@"
+    db "Fill all the    "
+    db "holes with the  "
+    db "rock that rolls,"
+    db "this (<EE>) is the "
+    db "key!@"
 
 Dialog110::
-    db "This owl statue "
-    db "is trying to say"
-    db "something, but  "
-    db "you can't       "
-    db "understand it   "
-    db "because it has  "
-    db "no beak.@"
+    db "Something is    "
+    db "inscribed on the"
+    db "stone slab, but "
+    db "you can't read  "
+    db "it because a    "
+    db "piece is gone.@"
 
 Dialog111::
     db "'I've got what  "
     db "was inside this "
     db "box.  Come and  "
     db "get it, if you  "
-    db "can!'  Master <skull>@"
+    db "can!'  Master <DC>@"
 
 Dialog112::
     db "Gulp!  You found"
@@ -85,7 +114,8 @@ Dialog114::
     db "do it!@"
 
 Dialog115::
-    db "WOOF! Dig! RUFF!@"
+    db "WOOF! Dig! RUFF!"
+    db "@"
 
 Dialog116::
     db "You put the     "
@@ -94,10 +124,6 @@ Dialog116::
     db "statue!@"
 
 Dialog117::
-    db "Hey! Be more    "
-    db "careful next    "
-    db "time!@"
-
 Dialog118::
     db "Hey, man!  When "
     db "you want to save"
@@ -158,7 +184,7 @@ Dialog11D::
 
 Dialog11E::
     db "The giant egg on"
-    db "top of Tamaranch"
+    db "top Tamaranch   "
     db "Mountain?  They "
     db "say the Wind    "
     db "Fish is sleeping"
@@ -214,30 +240,8 @@ Dialog123::
     db "her?@"
 
 Dialog124::
-    db "WHOA! That's a  "
-    db "big one! Hey,   "
-    db "photo guy! Can  "
-    db "you take a      "
-    db "picture of this?@"
-
 Dialog125::
-    db "I have a        "
-    db "feelin' that    "
-    db "I'll catch a big"
-    db "fish again.@"
-
 Dialog126::
-    db "If you keep me a"
-    db "secret, I'll    "
-    db "tell you some-  "
-    db "thing useful.   "
-    db "Go to Toronbo   "
-    db "Shores, use the "
-    db "magnifying glass"
-    db "and you will    "
-    db "find someone    "
-    db "like me.@"
-
 Dialog127::
     db "Tsk tsk...  What"
     db "a shame...@"
@@ -252,7 +256,7 @@ Dialog128::
 
 Dialog129::
     db "You traded your "
-    db "<yoshi> for <ribbon>!  Maybe "
+    db "<E0> for <E1>!  Maybe "
     db "you can trade   "
     db "the ribbon for  "
     db "something else!@"
@@ -261,14 +265,14 @@ Dialog12A::
     db "Because they all"
     db "look alike, even"
     db "I am sometimes  "
-    db "confused. . .   "
-    db "By the way, my  "
-    db "baby wants a    "
-    db "Yoshi Doll.     "
-    db "I saw one at the"
-    db "Trendy Game,    "
-    db "but I couldn't  "
-    db "get it.@"
+    db "confused...     "
+    db "By the way, do  "
+    db "you know Yoshi? "
+    db "My baby keeps on"
+    db "asking for a    "
+    db "Yoshi Doll and I"
+    db "don't know what "
+    db "to do about it!@"
 
 Dialog12B::
     db "Oh!  Will you   "
@@ -280,7 +284,8 @@ Dialog12C::
     db "Because they all"
     db "look alike, even"
     db "I am sometimes  "
-    db "confused...     @"
+    db "confused...     "
+    db "@"
 
 Dialog12D::
     db "Ahem!  Really, I"
@@ -294,14 +299,6 @@ Dialog12D::
     db "Good Bye!@"
 
 Dialog12E::
-    db "You want to know"
-    db "about that      "
-    db "ghost? I'll bet "
-    db "he's happy      "
-    db "thanks to you.  "
-    db "Are you ready   "
-    db "for a picture?@"
-
 Dialog12F::
     db "Ho ho ho!       "
     db "I really appre- "
@@ -326,7 +323,7 @@ Dialog130::
 
 Dialog131::
     db "AIEEEEEEEE!     "
-    db "It's terrrrible!"
+    db "It's terrrrbile!"
     db "My BowWow was   "
     db "dognapped by... "
     db "Mo-mo-MOBLINS!! "
@@ -390,7 +387,7 @@ Dialog136::
 Dialog137::
     db "Please! I really"
     db "must insist you "
-    db "have this <broom>!    "
+    db "have this <E8>!    "
     db "    Okay No Way<ask>"
 
 Dialog138::
@@ -430,12 +427,17 @@ Dialog13A::
     db "    Okay No Way<ask>"
 
 Dialog13B::
-    db "I am impressed. "
-    db "There are five  "
-    db "leaves in all.  "
-    db "Remember to buy "
-    db "a shovel on your"
-    db "way back.@"
+    db "Smashing!  To   "
+    db "tell you the    "
+    db "truth, there are"
+    db "five leaves, and"
+    db "I want them all!"
+    db "Oh, you'll need "
+    db "to do some dig- "
+    db "ging, so buy a  "
+    db "shovel! Are you "
+    db "off, then?  Good"
+    db "luck!@"
 
 Dialog13C::
     db "Well, I never!  "
@@ -501,7 +503,8 @@ Dialog142::
     db "Tal Heights...  "
     db "I hope that is  "
     db "what you wanted "
-    db "to know! CLICK!'@"
+    db "to know! CLICK!'"
+    db "@"
 
 Dialog143::
     db "'BRRING! BRRING!"
@@ -558,16 +561,18 @@ Dialog146::
 
 Dialog147::
     db "'BRRING! BRRING!"
-    db "Ya, it's Ulrira!"
-    db "You say you     "
-    db "haven't found   "
-    db "all five Golden "
-    db "Leaves? Go ask  "
-    db "the crow at the "
-    db "castle. I'm sure"
-    db "he can help you."
-    db "Bye!            "
-    db "CLICK!'@"
+    db "Yeah, it's me,  "
+    db "Ulrira!  Hmmm..."
+    db "You can't find  "
+    db "all the leaves  "
+    db "you say?  That's"
+    db "a stumper!  Ahh,"
+    db "check out the   "
+    db "raven by the    "
+    db "castle!  In any "
+    db "case, try many  "
+    db "things!  CLICK!'"
+    db "@"
 
 Dialog148::
     db "'BRRING! BRRING!"
@@ -656,7 +661,8 @@ Dialog14E::
     db "Weathercock...  "
     db "Is that useful  "
     db "for you?  I hope"
-    db "so! Bye! CLICK!'@"
+    db "so! Bye! CLICK!'"
+    db "@"
 
 Dialog14F::
     db "'BRRING! BRRING!"
@@ -672,7 +678,8 @@ Dialog14F::
 Dialog150::
     db "   ...SWAMP...  "
     db " A path opens..."
-    db "in the blooms...@"
+    db "in the blooms..."
+    db "@"
 
 Dialog151::
     db "  ...PRAIRIE... "
@@ -683,17 +690,20 @@ Dialog151::
 Dialog152::
     db "...WATERFALL... "
     db "It is hidden in "
-    db "the waterfall...@"
+    db "the waterfall..."
+    db "@"
 
 Dialog153::
     db "    ...BAY...   "
     db "Your road goes  "
-    db "into the bay... @"
+    db "into the bay... "
+    db "@"
 
 Dialog154::
     db "   ...SHRINE... "
     db "An island secret"
-    db "in the shrine...@"
+    db "in the shrine..."
+    db "@"
 
 Dialog155::
     db " ...MOUNTAIN... "
@@ -704,7 +714,8 @@ Dialog155::
 Dialog156::
     db "  ...OCARINA... "
     db "The music of the"
-    db "Ocarina leads...@"
+    db "Ocarina leads..."
+    db "@"
 
 Dialog157::
     db "    ...EGG....  "
@@ -742,9 +753,9 @@ Dialog15D::
     db "the river bank!@"
 
 Dialog15E::
-    db "You exchanged <broom> "
+    db "You exchanged <E8> "
     db "for the fishing "
-    db "hook <fishhook>!  What   "
+    db "hook <E9>!  What   "
     db "will the fishing"
     db "hook become?@"
 
@@ -761,13 +772,15 @@ Dialog161::
     db "Chi-kiita! Chi- "
     db "kiita!  Kiki the"
     db "monkey!  Hungry!"
-    db "Kiki the monkey!@"
+    db "Kiki the monkey!"
+    db "@"
 
 Dialog162::
-    db "    <bananas>!    <bananas>!    "
+    db "    <E3>!    <E3>!    "
     db "Oooh! Ooh! Kiki!"
-    db "Monkeys!  Come! "
-    db "Repay him! Kiki!@"
+    db "Monkees!  Come! "
+    db "Repay him! Kiki!"
+    db "@"
 
 Dialog163::
     db "Monkey business!"
@@ -781,7 +794,7 @@ Dialog164::
     db "You take it!@"
 
 Dialog165::
-    db "    <bananas>!    <bananas>!    "
+    db "    <E3>!    <E3>!    "
     db "  Oooh!  Oooh!  "
     db " Give to Kiki!? "
     db "    Yes  No!<ask>"
@@ -829,9 +842,9 @@ Dialog169::
     db "gentleman...@"
 
 Dialog16A::
-    db "You traded <flower2> for"
+    db "You traded <E7> for"
     db "a goat's letter "
-    db "<letter>!  ...Great!?@"
+    db "<ED>!  ...Great!?@"
 
 Dialog16B::
     db "You know, some- "
@@ -855,30 +868,6 @@ Dialog16D::
     db "He seems very   "
     db "friendly!@"
 
-Dialog16E::
-    db "'BRRING! BRRING!"
-    db "Ya, it's Ulrira!"
-    db "My wife went to "
-    db "the Animal      "
-    db "Village and left"
-    db "me all alone.   "
-    db "Can you tell    "
-    db "her to come home"
-    db "as soon as she  "
-    db "is done         "
-    db "cleaning?       "
-    db "Bye!            "
-    db "CLICK!'@"
-
-Dialog16F::
-    db "Grandma's not   "
-    db "here. She's in  "
-    db "the Animal      "
-    db "Village. That's "
-    db "what Grandpa    "
-    db "Ulrira said on  "
-    db "the phone!@"
-
 Dialog170::
     db "Yep, Papahl got "
     db "lost, just like "
@@ -894,22 +883,23 @@ Dialog171::
     db "hombre...@"
 
 Dialog172::
-    db "This <pineapple> is so    "
+    db "This <E6> is so    "
     db "delicious!  I'm "
     db "going to eat the"
-    db "<pineapple> right now!    "
+    db "<E6> right now!    "
     db " Bon Appetit!@"
 
 Dialog173::
     db "AH!  This isn't "
     db "meant to be a   "
     db "reward...  Here,"
-    db "take this <flower2>!    "
-    db "It's a hibiscus!@"
+    db "take this <E7>!    "
+    db "It's a hibiscus!"
+    db "@"
 
 Dialog174::
-    db "You traded the <pineapple>"
-    db "for the <flower2>!@"
+    db "You traded the <E6>"
+    db "for the <E7>!@"
 
 Dialog175::
     db "Delicious!  Yum!"
@@ -932,7 +922,7 @@ Dialog177::
 
 Dialog178::
     db "She's had an    "
-    db "awful tragedy   "
+    db "awful tradgedy  "
     db "in the house    "
     db "across the way! "
     db "It's just awful,"
@@ -940,183 +930,10 @@ Dialog178::
     db "is sweep!@"
 
 Dialog179::
-    db "I am the spirit "
-    db "of the mansion. "
-    db "I have been     "
-    db "waiting for     "
-    db "someone to      "
-    db "overcome the    "
-    db "darkness. Find  "
-    db "all the secret  "
-    db "shells and go   "
-    db "through the     "
-    db "gate to receive "
-    db "the ultimate    "
-    db "sword!@"
-
 Dialog17A::
-    db "Hmmm. No        "
-    db "response. You   "
-    db "must not have   "
-    db "enough shells.@"
-
 Dialog17B::
-    db "My job here     "
-    db "is finished.@"
-
 Dialog17C::
-    db "Hey you! Have   "
-    db "you been to the "
-    db "Camera Shop in  "
-    db "Tal Tal Heights?"
-    db "Iyoung people   "
-    db " like to go ther"
-    db "eand take       "
-    db " pictures of    "
-    db " themselves.    "
-    db " Seems kinda    "
-    db " funny to me.@"
-
 Dialog17D::
-    db "Step right up   "
-    db "and get your    "
-    db "souvenir photo!@"
-
 Dialog17E::
-    db "Good job!       "
-    db "Use it on your  "
-    db "enemies and see "
-    db "what happens.   "
-    db "If you run out, "
-    db "go to the for-  "
-    db "est, pick some  "
-    db "mushrooms, and  "
-    db "I will make you "
-    db "more.@"
-
 Dialog17F::
-    db ". . . .! I can't"
-    db "move! But I am  "
-    db "still all right."
-    db "Your little     "
-    db "sword won't     "
-    db "break this      "
-    db "bottle!@"
-
-Dialog180::
-    db "Make-up! Jewels!"
-    db "Dresses!  I want"
-    db "it all!  Sigh..."
-    db "And some new    "
-    db "accessories     "
-    db "would be nice...@"
-
-Dialog181::
-    db "Make-up! Jewels!"
-    db "Dresses!  I want"
-    db "it all!  Sigh..."
-    db "And some new    "
-    db "accessories     "
-    db "would be nice..."
-    db "Oh! That Ribbon!"
-    db "I need it!  Will"
-    db "you trade for my"
-    db "dog food?       "
-    db "    Yes  No!<ask>"
-
-Dialog182::
-    db "You exchanged <ribbon> "
-    db "for <dogfood>! It's full"
-    db "of juicy beef!@"
-
-Dialog183::
-    db "Lucky!  Thanks! "
-    db "Well, here's    "
-    db "your <dogfood>!@"
-
-Dialog184::
-    db "Eh?!  I can't   "
-    db "believe it!  You"
-    db "are the worst!!@"
-
-Dialog185::
-    db "I am Manbo,     "
-    db "child of the Sun"
-    db "Fish!  Have you "
-    db "got an Ocarina? "
-    db "    Yes  No<ask>"
-
-Dialog186::
-    db "Very well...    "
-    db "Glub Blub Bloop!@"
-
-Dialog187::
-    db "Ahaha!  Then I  "
-    db "can teach you my"
-    db "song! Bloop!@"
-
-Dialog188::
-    db "You've learned  "
-    db "Manbo's Mambo!  "
-    db "When you get out"
-    db "of the water,   "
-    db "play it!@"
-
-Dialog189::
-    db "I am Manbo,     "
-    db "child of the Sun"
-    db "Fish!  When you "
-    db "play my Mambo,  "
-    db "you can warp to "
-    db "Manbo Pond!  Try"
-    db "this tune in the"
-    db "dungeons, too!  "
-    db "Cha-cha-cha!@"
-
-Dialog18A::
-    db "Aha... You don't"
-    db "have an Ocarina,"
-    db "so...Glub glub!@"
-
-Dialog18B::
-    db "Chickens these  "
-    db "days don't have "
-    db "the fighting    "
-    db "spirit they used"
-    db "to!  In the old "
-    db "days, they could"
-    db "fly, flap flap! "
-    db "But now, see?   "
-    db "Cluck cluck!@"
-
-Dialog18C::
-    db "Wow!  Amazing!  "
-    db "That rooster is "
-    db "actually flying!"
-    db "It's just like I"
-    db "said, eh?  Have "
-    db "you tried to    "
-    db "hold him over   "
-    db "your head? Cluck"
-    db "Cluck!@"
-
-Dialog18D::
-    db "Wooo!  Finally! "
-    db "This flying     "
-    db "rooster is the  "
-    db "greatest!@"
-
-Dialog18E::
-    db " Here Sleeps The"
-    db " Flying Rooster@"
-
-Dialog18F::
-    db "Iz zat zee      "
-    db "Mermaid scale?  "
-    db "I can't use it  "
-    db "now. I have to  "
-    db "werk on zis     "
-    db "drawing. You    "
-    db "should go finish"
-    db "zee mermaid     "
-    db "statue for me.@"
+    db "@"

@@ -105,7 +105,7 @@ InitSaveFiles::
     ld   [$A451], a ; 40 magic powder
     ld   a, $89
     ld   [$A44C], a ; "time/animation?" (unknown)
-    xor  a
+    ld a, $00
     ld   [$A414], a ; 0 secret seashells
     ld   a, %00000111 ; @TODO Ocarina song constants?
     ld   [$A44E], a ; all 3 Ocarina songs
@@ -119,12 +119,8 @@ InitSaveFiles::
     ld   [$A45F], a ; 10 hearts of health
     ld   a, $0A
     ld   [$A460], a ; 10 heart containers
-
-    ld   a, [wGameplayType]
-    cp   GAMEPLAY_FILE_NEW
 PUSHC
 SETCHARMAP NameEntryCharmap
-    jr   z, .notOnNewFileScreen
     ld   a, "Z"     ; Set save file name to "ZELDA"
     ld   [$A454], a
     ld   a, "E"
@@ -137,11 +133,13 @@ SETCHARMAP NameEntryCharmap
     ld   [$A458], a
 POPC
 .notOnNewFileScreen
-    xor  a
+    ld a, $00
     ld   [$A45C], a ; death counter = 0
     ld   [$A45D], a ; death counter = 0
+    ld a, $00
     ld   [$A45B], a ; bowwow flag = off
     ld   [$A464], a ; current map = overworld
+    ld a, $00
     ld   [$A465], a ; current submap = none
     ld   a, $92
     ld   [$A466], a ; saved room = flying rooster in mabe village
@@ -158,17 +156,6 @@ POPC
     ldi  [hl], a
     dec  e
     jr   nz, .loop3
-
-    ld   a, $01
-    ld   [$DDDA], a
-    ld   [$DDDB], a
-    ld   [$DDDC], a
-    ld   [$DDDD], a
-    ld   [$DDDE], a
-    ld   a, $FF
-    ld   [wPhotos1], a
-    ld   a, $0F
-    ld   [wPhotos2], a
 
 .return
     ret
@@ -191,10 +178,17 @@ jr_001_479C::
     jr   jr_001_47CD
 
 jr_001_47AA::
-    push de
-    ld   hl, $A105
-    add  hl, de
-    ld   de, $3A8
+    ld hl, $a100                                  ; $46f3: $21 $00 $a1
+    add hl, de                                    ; $46f6: $19
+    ld a, $01                                     ; $46f7: $3e $01
+.loop
+    call EnableExternalRAMWriting
+    ldi  [hl], a
+    inc a                                         ; $46fd: $3c
+    inc a                                         ; $46fe: $3c
+    cp $0b                                        ; $46ff: $fe $0b
+    jr c, .loop                           ; $4701: $38 $f6
+    ld   de, $380
 
 jr_001_47B2::
     call EnableExternalRAMWriting
@@ -204,19 +198,6 @@ jr_001_47B2::
     ld   a, e
     or   d
     jr   nz, jr_001_47B2
-    pop  de
-    ld   hl, $A100
-    add  hl, de
-    ld   a, $01
-
-jr_001_47C3::
-    call EnableExternalRAMWriting
-    ldi  [hl], a
-    inc  a
-    inc  a
-    cp   $0B
-    jr   c, jr_001_47C3
-
 jr_001_47CD::
     ret
 

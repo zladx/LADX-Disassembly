@@ -272,17 +272,6 @@ EntityHandlersTable::
 .overflow db $6B, $62, $C9
 
 func_020_4303::
-    ld   a, [$C5A0]                               ; $4303: $FA $A0 $C5
-    ld   [$C5A1], a                               ; $4306: $EA $A1 $C5
-    xor  a                                        ; $4309: $AF
-    ld   [$C5A0], a                               ; $430A: $EA $A0 $C5
-    ld   [wC10C], a                               ; $430D: $EA $0C $C1
-    ldh  [hFFB2], a                               ; $4310: $E0 $B2
-    ld   [wC117], a                               ; $4312: $EA $17 $C1
-    ld   [$C19D], a                               ; $4315: $EA $9D $C1
-    ld   [$C147], a                               ; $4318: $EA $47 $C1
-    ld   [wLiftedEntityType], a                   ; $431B: $EA $A8 $C5
-    ld   [$D45E], a                               ; $431E: $EA $5E $D4
     ret                                           ; $4321: $C9
 
 ; -----------------------------------------------------------------

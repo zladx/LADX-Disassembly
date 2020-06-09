@@ -175,27 +175,145 @@ RenderLoop::
 
     ; If TransitionSfxFrameCount >= $60,
     ; start fading the screen to white.
-    push af
     cp   $60
     jr   c, .transitionFadeOutEnd
-    ; If GBC...
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .renderDMGFadeOut
-    ; Render fade-to-white effect for GBC
-    callsb ApplyFadeToWhite_GBC
-    jr   .transitionDone
-.renderDMGFadeOut
-    ; Render fade-to-white effect for DMG
-    call ApplyFadeToWhite_DMG
+   push af                                       ; $4FEB: $F5
+    and  $07                                      ; $4FEC: $E6 $07
+    jr   nz, .jr_014_4FFB                          ; $4FEE: $20 $0B
+
+    ld   a, [$C3CA]                               ; $4FF0: $FA $CA $C3
+    cp   $0C                                      ; $4FF3: $FE $0C
+    jr   z, .jr_014_5036                           ; $4FF5: $28 $3F
+
+    inc  a                                        ; $4FF7: $3C
+    ld   [$C3CA], a                               ; $4FF8: $EA $CA $C3
+
+.jr_014_4FFB:
+    ld   a, [$C3CA]                               ; $4FFB: $FA $CA $C3
+    ld   e, a                                     ; $4FFE: $5F
+    ldh  a, [hFrameCounter]                       ; $4FFF: $F0 $E7
+    and  $03                                      ; $5001: $E6 $03
+    add  e                                        ; $5003: $83
+    ld   e, a                                     ; $5004: $5F
+    ld   d, $00                                   ; $5005: $16 $00
+    ld   a, [wTransitionGfx]                      ; $5007: $FA $7F $C1
+    cp   $03                                      ; $500A: $FE $03
+    jr   z, .jr_014_5023                           ; $500C: $28 $15
+
+    ld   hl, Data_014_4EA8                        ; $500E: $21 $A8 $4E
+    add  hl, de                                   ; $5011: $19
+    ld   a, [hl]                                  ; $5012: $7E
+    ld   [wBGPalette], a                          ; $5013: $EA $97 $DB
+    ld   [wOBJ1Palette], a                        ; $5016: $EA $99 $DB
+    ld   hl, Data_014_4EB8                        ; $5019: $21 $B8 $4E
+    add  hl, de                                   ; $501C: $19
+    ld   a, [hl]                                  ; $501D: $7E
+    ld   [wOBJ0Palette], a                        ; $501E: $EA $98 $DB
+    jr   .jr_014_5036                              ; $5021: $18 $13
+
+.jr_014_5023:
+    ld   hl, Data_014_4EC8                        ; $5023: $21 $C8 $4E
+    add  hl, de                                   ; $5026: $19
+    ld   a, [hl]                                  ; $5027: $7E
+    ld   [wBGPalette], a                          ; $5028: $EA $97 $DB
+    ld   [wOBJ1Palette], a                        ; $502B: $EA $99 $DB
+    ld   hl, Data_014_4ED8                        ; $502E: $21 $D8 $4E
+    add  hl, de                                   ; $5031: $19
+    ld   a, [hl]                                  ; $5032: $7E
+    ld   [wOBJ0Palette], a                        ; $5033: $EA $98 $DB
+
+.jr_014_5036:
+    pop  af                                       ; $5036: $F1
+
 .transitionFadeOutEnd
 
 .transitionDone
     ; Render transition effect
-    ld   a, BANK(RenderTransitionEffect)
-    ld   [MBC3SelectBank], a
-    pop  af
-    call RenderTransitionEffect
+    srl  a                                        ; $5038: $CB $3F
+    srl  a                                        ; $503A: $CB $3F
+    ldh  [hScratch0], a                           ; $503C: $E0 $D7
+    ld   a, [wTransitionGfxFrameCount]            ; $503E: $FA $80 $C1
+    nop                                           ; $5041: $00
+    and  $E0                                      ; $5042: $E6 $E0
+    ld   e, a                                     ; $5044: $5F
+    ld   a, [wTransitionGfx]                      ; $5045: $FA $7F $C1
+    cp   $03                                      ; $5048: $FE $03
+    jr   nz, .jr_014_5050                          ; $504A: $20 $04
+
+    ld   a, e                                     ; $504C: $7B
+    xor  $E0                                      ; $504D: $EE $E0
+    ld   e, a                                     ; $504F: $5F
+
+.jr_014_5050:
+    ld   a, e                                     ; $5050: $7B
+    ldh  [hScratch1], a                           ; $5051: $E0 $D8
+    ld   hl, $C17C                                ; $5053: $21 $7C $C1
+    xor  a                                        ; $5056: $AF
+    ld   [hl+], a                                 ; $5057: $22
+    ld   [hl+], a                                 ; $5058: $22
+    ld   [hl+], a                                 ; $5059: $22
+.jr_000_02de
+    ldh  a, [rSTAT]                               ; $5067: $F0 $41
+    and  $03                                      ; $5069: $E6 $03
+    jr   nz, .jr_000_02de                       ; $506B: $20 $FA
+
+    ld   d, $00                                   ; $506D: $16 $00
+
+.jr_014_506F:
+    ld   a, [$C17E]                               ; $506F: $FA $7E $C1
+    inc  a                                        ; $5072: $3C
+    ld   [$C17E], a                               ; $5073: $EA $7E $C1
+    and  $01                                      ; $5076: $E6 $01
+    jr   nz, .jr_014_506F                          ; $5078: $20 $F5
+
+    ld   a, [$C17C]                               ; $507A: $FA $7C $C1
+    add  $01                                      ; $507D: $C6 $01
+    ld   [$C17C], a                               ; $507F: $EA $7C $C1
+    ld   a, [$C17D]                               ; $5082: $FA $7D $C1
+    adc  $00                                      ; $5085: $CE $00
+    ld   [$C17D], a                               ; $5087: $EA $7D $C1
+    ld a, [$c17c]                                 ; $0301: $fa $7c $c1
+    cp $58                                        ; $0304: $fe $58
+    jp z, $033e                           ; $0306: $ca $3e $03
+
+    ld   c, $00                                   ; $5091: $0E $00
+    ld   a, [wTransitionGfx]                      ; $5093: $FA $7F $C1
+    cp   $01                                      ; $5096: $FE $01
+    jr   z, .jr_014_509B                           ; $5098: $28 $01
+
+    inc  c                                        ; $509A: $0C
+
+.jr_014_509B:
+    ld hl, $c17c
+    ldh  a, [hScratch0]                           ; $509B: $F0 $D7
+    add  [hl]                                     ; $509D: $86
+    and  $1F                                      ; $509E: $E6 $1F
+    ld   hl, hScratch1                            ; $50A0: $21 $D8 $FF
+    or   [hl]                                     ; $50A3: $B6
+    ld   e, a                                     ; $50A4: $5F
+    ld   hl, Data_014_4EE8                        ; $50A5: $21 $E8 $4E
+    add  hl, de                                   ; $50A8: $19
+    ld   a, [wTransitionGfxFrameCount]            ; $50A9: $FA $80 $C1
+    and  c                                        ; $50AC: $A1
+    ld   a, [hl]                                  ; $50AD: $7E
+    jr   z, .jr_014_50B2                           ; $50AE: $28 $02
+
+    cpl                                           ; $50B0: $2F
+    inc  a                                        ; $50B1: $3C
+
+.jr_014_50B2:
+    push af                                       ; $50B2: $F5
+    ld   hl, hBaseScrollX                         ; $50B3: $21 $96 $FF
+    add  [hl]                                     ; $50B6: $86
+    ldh  [rSCX], a                                ; $50B7: $E0 $43
+    pop  af                                       ; $50B9: $F1
+    ld   hl, hBaseScrollY                         ; $50BA: $21 $97 $FF
+    add  [hl]                                     ; $50BD: $86
+    ldh  [rSCY], a                                ; $50BE: $E0 $42
+    jp   .jr_000_02de                           ; $50C0: $C3 $67 $50
+
+.func_014_50C3::
+
 
     ; Play some audio
     call PlayAudioStep
@@ -208,7 +326,7 @@ RenderLoop::
     ld   [rOBP1], a
     ; This is a non-interactive transition: no new gameplay frame is rendered.
     ; Wait for the next V-Blank.
-    jp   WaitForNextFrame
+    jr   $3bd
 
 RenderInteractiveFrame::
     ; Update graphics registers from game values
@@ -274,16 +392,6 @@ RenderInteractiveFrame::
     jr   nz, WaitForNextFrame
 
 ResetSprites::
-    ; If not in Inventory, initially hide all sprites
-    ld   a, [wGameplayType]
-    cp   GAMEPLAY_INVENTORY
-    jr   nz, .resetSpritesVisibility
-
-    ; If Inventory is actually visible, leave sprites visible
-    ld   a, [wGameplaySubtype]
-    cp   GAMEPLAY_INVENTORY_DELAY1
-    jr   c, RenderGameplay
-
 .resetSpritesVisibility
     callsw HideAllSprites
 
@@ -292,35 +400,24 @@ RenderGameplay::
 
 RenderPalettes::
     ; If isGBC…
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .clearPaletteToLoad
-    ; load pending tilemap palette.
-    callsw LoadPaletteForTilemap
 
-.clearPaletteToLoad
-    ; Clear the palette to be loaded anyway
-    xor  a
-    ld   [wPaletteToLoadForTileMap], a
+WaitForNextFrame:
+    ld a, $01
+    ld [$2100], a
+    call $5d03
 
-RenderWindow::
-    callsw UpdateWindowPosition
-
-WaitForNextFrame::
-    ; Animate inventory window
-    callsw func_01F_7F80
-
-    ; Switch to first graphics bank ($0C on DMG, $2C on GBC)
-    ld   a, $0C
-    call AdjustBankNumberForGBC
-    call SwitchBank
+    ld a, $1f
+    ld [$2100], a
+    call $7f80
+    ld a, $0c
+    ld [$2100], a
 
     ; Reset didRenderFrame flag
     xor  a
     ldh  [hDidRenderFrame], a
 
     ; Stop the CPU until the next interrupt
-    halt
+    db $76
 
     ; Loop until hNeedsRenderingFrame != 0
 .pollNeedsRenderingFrame

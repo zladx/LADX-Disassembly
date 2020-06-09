@@ -18,7 +18,6 @@ IndoorsA03Entities::
 
 IndoorsA04Entities::
   entity $1, $4, ENTITY_SPARK_CLOCKWISE
-  entity $0, $3, ENTITY_OWL_STATUE
   entities_end
 
 IndoorsA05Entities::
@@ -257,7 +256,6 @@ IndoorsA2FEntities::
   entity $6, $2, ENTITY_SPARK_CLOCKWISE
   entity $2, $4, ENTITY_DROPPABLE_HEART
   entity $6, $5, ENTITY_DROPPABLE_HEART
-  entity $0, $2, ENTITY_OWL_STATUE
   entities_end
 
 IndoorsA30Entities::
@@ -279,7 +277,6 @@ IndoorsA32Entities::
   entities_end
 
 IndoorsA33Entities::
-  entity $0, $4, ENTITY_OWL_STATUE
   entity $3, $5, ENTITY_CRYSTAL_SWITCH
   entity $1, $2, ENTITY_SPARK_COUNTER_CLOCKWISE
   entities_end
@@ -356,7 +353,6 @@ IndoorsA40Entities::
   entity $4, $2, ENTITY_BOUNCING_BOMBITE
   entity $3, $7, ENTITY_MOBLIN_SWORD
   entity $3, $4, ENTITY_FLOATING_ITEM
-  entity $0, $4, ENTITY_OWL_STATUE
   entities_end
 
 IndoorsA41Entities::
@@ -401,7 +397,6 @@ IndoorsA47Entities::
   entity $1, $3, ENTITY_STALFOS_AGGRESSIVE
   entity $4, $6, ENTITY_STALFOS_AGGRESSIVE
   entity $3, $2, ENTITY_HIDING_GEL
-  entity $0, $3, ENTITY_OWL_STATUE
   entities_end
 
 IndoorsA48Entities::
@@ -926,7 +921,6 @@ IndoorsA9AEntities::
   entity $1, $2, ENTITY_STALFOS_AGGRESSIVE
   entity $1, $7, ENTITY_STALFOS_AGGRESSIVE
   entity $4, $6, ENTITY_STALFOS_EVASIVE
-  entity $0, $7, ENTITY_OWL_STATUE
   entities_end
 
 IndoorsA9BEntities::
@@ -1078,7 +1072,6 @@ IndoorsAB5Entities::
 
 IndoorsAB6Entities::
   entity $2, $6, ENTITY_CRYSTAL_SWITCH
-  entity $0, $4, ENTITY_OWL_STATUE
   entities_end
 
 IndoorsAB7Entities::
@@ -1124,7 +1117,6 @@ IndoorsABCEntities::
 IndoorsABDEntities::
   entity $3, $2, ENTITY_LIFTABLE_STATUE
   entity $3, $7, ENTITY_LIFTABLE_STATUE
-  entity $3, $4, ENTITY_FLOATING_ITEM
   entities_end
 
 IndoorsABEEntities::
@@ -1289,7 +1281,6 @@ IndoorsAD7Entities::
   entity $3, $6, ENTITY_STAR
   entity $6, $8, ENTITY_SPIKE_TRAP
   entity $1, $1, ENTITY_DROPPABLE_HEART
-  entity $0, $1, ENTITY_OWL_STATUE
   entities_end
 
 IndoorsAD8Entities::
@@ -1432,7 +1423,6 @@ IndoorsAFAEntities::
   entity $5, $3, ENTITY_BOOK
   entity $5, $6, ENTITY_BOOK
   entity $5, $8, ENTITY_BOOK
-  entity $0, $4, ENTITY_COLOR_DUNGEON_BOOK
   entities_end
 
 IndoorsAFBEntities::

@@ -13,4 +13,4 @@
 include "data/chests/overworld.asm"
 include "data/chests/indoors_a.asm"
 include "data/chests/indoors_b.asm"
-include "data/chests/color_dungeon.asm"
+ColorDungeonRoomChestsTable:

@@ -54,21 +54,6 @@ map_descriptors = [
                 length = 0x3C00,
                 klass = IndoorRoom
             )]
-    ),
-    MapDescriptor(
-        name = 'color_dungeon',
-        address = BANK(0x0A) + 0x200 + 0x3977,
-        length = 0x40,
-        data_base_address = BANK(0x0A),
-        invalid_pointers = [BANK(0x0A) + 0x200],
-        rooms = [
-            RoomsDescriptor(
-                name = 'color_dungeon',
-                address = BANK(0x0A) + 0x200 + 0x3977 + 0x40,
-                length = 0x38B,
-                klass = IndoorRoom
-            )
-        ]
     )
 ]
 
@@ -113,7 +98,7 @@ if __name__ == "__main__":
     arg_parser.add_argument("target", nargs="?", metavar="target", type=str)
 
     args = arg_parser.parse_args()
-    rom_path = args.rompath or 'Zelda.gbc'
+    rom_path = args.rompath or 'game.gb'
     target_dir = args.target or os.path.join('src', 'data')
     disclaimer = "; File generated automatically by `tools/generate_map_data.py`\n\n"
 

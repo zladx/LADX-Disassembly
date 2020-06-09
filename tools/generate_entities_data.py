@@ -14,7 +14,7 @@ entities_descriptors = [
         address = BANK(0x16) + 0x000,
         length = 0x200,
         entities = EntitiesDescriptor(
-            address = BANK(0x16) + 0x1186,
+            address = BANK(0x16) + 0x1120,
             length = 0x4DE
         )
     ),
@@ -23,7 +23,7 @@ entities_descriptors = [
         address = BANK(0x16) + 0x200,
         length = 0x200,
         entities = EntitiesDescriptor(
-            address = BANK(0x16) + 0x0640,
+            address = BANK(0x16) + 0x0600,
             length = 0x664
         )
     ),
@@ -32,19 +32,10 @@ entities_descriptors = [
         address = BANK(0x16) + 0x400,
         length = 0x200,
         entities = EntitiesDescriptor(
-            address = BANK(0x16) + 0x0CA4,
+            address = BANK(0x16) + 0x0C50,
             length = 0x4E2
         )
     ),
-    EntitiesTableDescriptor(
-        name = 'color_dungeon',
-        address = BANK(0x16) + 0x600,
-        length = 0x40,
-        entities = EntitiesDescriptor(
-            address = BANK(0x16) + 0x1664,
-            length = 0x9D
-        )
-    )
 ]
 
 # See code/constants/entities.asm

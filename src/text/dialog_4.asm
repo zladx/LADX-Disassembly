@@ -1,3 +1,113 @@
+Dialog180::
+    db "Make-up! Jewels!"
+    db "Dresses!  I want"
+    db "it all!  Sigh..."
+    db "And some new    "
+    db "accessories     "
+    db "would be nice..."
+    db "@"
+
+Dialog181::
+    db "Make-up! Jewels!"
+    db "Dresses!  I want"
+    db "it all!  Sigh..."
+    db "And some new    "
+    db "accessories     "
+    db "would be nice..."
+    db "Oh! That Ribbon!"
+    db "I need it!  Will"
+    db "you trade for my"
+    db "dog food?       "
+    db "    Yes  No!<ask>"
+
+Dialog182::
+    db "You exchanged <E1> "
+    db "for <E2>! It's full"
+    db "of juicy beef!@"
+
+Dialog183::
+    db "Lucky!  Thanks! "
+    db "Well, here's    "
+    db "your <E2>!@"
+
+Dialog184::
+    db "Eh?!  I can't   "
+    db "believe it!  You"
+    db "are the worst!!@"
+
+Dialog185::
+    db "I am Manbo,     "
+    db "child of the Sun"
+    db "Fish!  Have you "
+    db "got an Ocarina? "
+    db "    Yes  No<ask>"
+
+Dialog186::
+    db "Very well...    "
+    db "Glub Blub Bloop!"
+    db "@"
+
+Dialog187::
+    db "Ahaha!  Then I  "
+    db "can teach you my"
+    db "song! Bloop!@"
+
+Dialog188::
+    db "You've learned  "
+    db "Manbo's Mambo!  "
+    db "When you get out"
+    db "of the water,   "
+    db "play it!@"
+
+Dialog189::
+    db "I am Manbo,     "
+    db "child of the Sun"
+    db "Fish!  When you "
+    db "play my Mambo,  "
+    db "you can warp to "
+    db "Manbo Pond!  Try"
+    db "this tune in the"
+    db "dungeons, too!  "
+    db "Cha-cha-cha!@"
+
+Dialog18A::
+    db "Aha... You don't"
+    db "have an Ocarina,"
+    db "so...Glub glub!@"
+
+Dialog18B::
+    db "Chickens these  "
+    db "days don't have "
+    db "the fighting    "
+    db "spirit they used"
+    db "to!  In the old "
+    db "days, they could"
+    db "fly, flap flap! "
+    db "But now, see?   "
+    db "Cluck cluck!@"
+
+Dialog18C::
+    db "Wow!  Amazing!  "
+    db "That rooster is "
+    db "actually flying!"
+    db "It's just like I"
+    db "said, eh?  Have "
+    db "you tried to    "
+    db "hold him over   "
+    db "your head? Cluck"
+    db "Cluck!@"
+
+Dialog18D::
+    db "Wooo!  Finally! "
+    db "This flying     "
+    db "rooster is the  "
+    db "greatest!@"
+
+Dialog18E::
+    db " Here Sleeps The"
+    db " Flying Rooster@"
+
+Dialog18F::
 Dialog190::
     db "Ennh?  Who's    "
     db "this suspicious-"
@@ -43,7 +153,8 @@ Dialog194::
     db "the Wind Fish..."
     db "What was the    "
     db "wish?  It was..."
-    db "No, it's secret!@"
+    db "No, it's secret!"
+    db "@"
 
 Dialog195::
     db "#####, some day "
@@ -61,7 +172,8 @@ Dialog196::
     db "... ... ... ... "
     db "It seems to be  "
     db "totally absorbed"
-    db "in Marin's song!@"
+    db "in Marin's song!"
+    db "@"
 
 Dialog197::
     db "They say the    "
@@ -80,7 +192,8 @@ Dialog198::
     db "No, I think I'll"
     db "wait out here..."
     db "Take care of    "
-    db "yourself, #####!@"
+    db "yourself, #####!"
+    db "@"
 
 Dialog199::
     db "Ahhh!  Ahhh, you"
@@ -91,7 +204,8 @@ Dialog19A::
     db "Here's some     "
     db "bonus treatment!"
     db "Behold!  Your   "
-    db "Hearts are full!@"
+    db "Hearts are full!"
+    db "@"
 
 Dialog19B::
     db "Ya, I am Schule "
@@ -115,18 +229,21 @@ Dialog19C::
     db "missing...@"
 
 Dialog19D::
-    db "Seashell Mansion@"
+    db "Seashell Mansion"
+    db "@"
 
 Dialog19E::
     db "Entrance to     "
-    db "  Yarna Desert <right>@"
+    db "  Yarna Desert <F3>"
+    db "@"
 
 Dialog19F::
 Dialog1A0::
     db "   Mysterious   "
     db "     Forest     "
     db " (It's a little "
-    db " bit mysterious)@"
+    db " bit mysterious)"
+    db "@"
 
 Dialog1A1::
     db "Do you want to  "
@@ -137,21 +254,24 @@ Dialog1A1::
     db "once, please!@"
 
 Dialog1A2::
-    db "East <right> Ukuku    "
+    db "East <F3> Ukuku    "
     db "       Prairie  "
     db "Farther East    "
-    db "  Animal Village@"
+    db "  Animal Village"
+    db "@"
 
 Dialog1A3::
-    db "Mt. Tamaranch   @"
+    db "Mt. Tamaranch   "
+    db "@"
 
 Dialog1A4::
-    db "<right> Tail Cave     "
-    db "<down> Toronbo Shores@"
+    db "<F3> Tail Cave     "
+    db "<F1> Toronbo Shores"
+    db "@"
 
 Dialog1A5::
-    db "<right> Gopongo Swamp "
-    db "<down> Mysterious    "
+    db "<F3> Gopongo Swamp "
+    db "<F1> Mysterious    "
     db "  Forest@"
 
 Dialog1A6::
@@ -162,7 +282,8 @@ Dialog1A6::
     db "on them!@"
 
 Dialog1A7::
-    db "Telephone Booth @"
+    db "Telephone Booth "
+    db "@"
 
 Dialog1A8::
     db "     DANGER!    "
@@ -170,16 +291,16 @@ Dialog1A8::
     db "(Except BowWow)@"
 
 Dialog1A9::
-    db "<down> GO THIS WAY@"
+    db "<F1> GO THIS WAY@"
 
 Dialog1AA::
-    db "<up> GO THIS WAY@"
+    db "<F0> GO THIS WAY@"
 
 Dialog1AB::
-    db "<right> GO THIS WAY@"
+    db "<F3> GO THIS WAY@"
 
 Dialog1AC::
-    db "<left> GO THIS WAY@"
+    db "<F2> GO THIS WAY@"
 
 Dialog1AD::
     db " TRY AGAIN FROM "
@@ -188,42 +309,43 @@ Dialog1AD::
 Dialog1AE::
     db "GREAT!  YOU DID "
     db "IT!  YOUR REWARD"
-    db "IS <right> THIS WAY!@"
+    db "IS <F3> THIS WAY!@"
 
 Dialog1AF::
     db "GONE ON TOUR    "
     db "         MAMU@"
 
 Dialog1B0::
-    db "<right> Crazy Tracy   "
-    db "<down> Manbo's Pond@"
+    db "<F3> Crazy Tracy   "
+    db "<F1> Manbo's Pond@"
 
 Dialog1B1::
-    db "<right> Animal Village"
-    db "<down> Martha's Bay@"
+    db "<F3> Animal Village"
+    db "<F1> Martha's Bay@"
 
 Dialog1B2::
-    db "<right> Welcome to the"
-    db " Animal Village!@"
+    db "<F3> Welcome to the"
+    db " Animal Village!"
+    db "@"
 
 Dialog1B3::
-    db "<right> Cemetery      "
-    db "<down> Ukuku Prairie @"
+    db "<F3> Cemetary      "
+    db "<F1> Ukuku Prairie "
+    db "@"
 
 Dialog1B4::
-    db "You're close to "
-    db "Tal Tal Heights."
-    db "The Camera Shop "
-    db "is nearby.@"
+    db "Tal Tal Heights@"
 
 Dialog1B5::
-    db "<right> Tamaranch Mt. "
-    db "<left> Goponga Swamp @"
+    db "<F3> Tamaranch Mt. "
+    db "<F2> Goponga Swamp "
+    db "@"
 
 Dialog1B6::
     db "MUSIC, THE FISH "
     db "STIRS IN THE EGG"
-    db "YOU ARE THERE...@"
+    db "YOU ARE THERE..."
+    db "@"
 
 Dialog1B7::
     db "THE WIND FISH IN"
@@ -242,12 +364,14 @@ Dialog1B9::
 
 Dialog1BA::
     db "AROUND HERE,    "
-    db "SECRETS ARE NIGH@"
+    db "SECRETS ARE NIGH"
+    db "@"
 
 Dialog1BB::
     db "SECRETS ARE LIKE"
     db "WATER WHEN IT   "
-    db "COMES TO BRIDGES@"
+    db "COMES TO BRIDGES"
+    db "@"
 
 Dialog1BC::
     db "NOW YOU NEED    "
@@ -277,8 +401,8 @@ Dialog1C0::
     db "    Can  Can't<ask>"
 
 Dialog1C1::
-    db "<stick> became the    "
-    db "honeycomb <honeycomb>!    "
+    db "<E4> became the    "
+    db "honeycomb <E5>!    "
     db "You're not sure "
     db "how it happened,"
     db "but take it!@"
@@ -291,7 +415,8 @@ Dialog1C3::
     db "Beware of Sea   "
     db "Urchins!  Don't "
     db "touch them with "
-    db "your bare hands!@"
+    db "your bare hands!"
+    db "@"
 
 Dialog1C4::
 Dialog1C5::
@@ -325,7 +450,7 @@ Dialog1C7::
     db "have?!  It's    "
     db "canned food! For"
     db "heaven's sake,  "
-    db "man, give that <dogfood>"
+    db "man, give that <E2>"
     db "to ME!!  PLEASE!"
     db "He's hysterical!"
     db "What do you do? "
@@ -353,9 +478,9 @@ Dialog1CA::
     db "bananas! YUM...@"
 
 Dialog1CB::
-    db "You gave him <dogfood>  "
+    db "You gave him <E2>  "
     db "and got bananas "
-    db "<bananas> in return!    "
+    db "<E3> in return!    "
     db "Good deal!@"
 
 Dialog1CC::
@@ -369,7 +494,8 @@ Dialog1CD::
     db "raft?  You can, "
     db "near Tal Tal    "
     db "Heights!  You   "
-    db "ought to try it!@"
+    db "ought to try it!"
+    db "@"
 
 Dialog1CE::
     db "Rik'm rak'm! I  "
@@ -382,17 +508,18 @@ Dialog1CE::
 Dialog1CF::
     db "Hi ho! Hey you! "
     db "Is that possibly"
-    db "a <honeycomb> you have?   "
+    db "a <E5> you have?   "
     db "I just ran out! "
     db "Will you swap it"
     db "for a pineapple?"
     db "    Yes  No<ask>"
 
 Dialog1D0::
-    db "You exchanged <honeycomb> "
-    db "for <pineapple>!  It's not"
+    db "You exchanged <E5> "
+    db "for <E6>!  It's not"
     db "as sweet, but it"
-    db "is delicious!   @"
+    db "is delicious!   "
+    db "@"
 
 Dialog1D1::
     db "That's a crying "
@@ -451,7 +578,7 @@ Dialog1D6::
 
 Dialog1D7::
     db "At the beach... "
-    db " Marin  <marin>@"
+    db " Marin  <DE>@"
 
 Dialog1D8::
     db "I wonder where  "
@@ -524,14 +651,10 @@ Dialog1DE::
     db "me next time?!@"
 
 Dialog1DF::
-    db "Ha! That's all  "
-    db "you've got?!    "
-    db "Get ready for   "
-    db "THIS!@"
-
 Dialog1E0::
     db "ZZZ ZZZ ZZZ ZZZ "
-    db " ... <marin> ... <marin> ...@"
+    db " ... <DE> ... <DE> ..."
+    db "@"
 
 Dialog1E1::
     db "Yes, it's that  "
@@ -551,14 +674,16 @@ Dialog1E3::
     db "Hunh?  Oh, he's "
     db "calling me...   "
     db "It's the same as"
-    db "always... Ha ha!@"
+    db "always... Ha ha!"
+    db "@"
 
 Dialog1E4::
     db "You're right, it"
     db "would be mean to"
     db "wake him up now!"
     db "Let's let him   "
-    db "sleep some more!@"
+    db "sleep some more!"
+    db "@"
 
 Dialog1E5::
     db "#####, I'm going"
@@ -568,8 +693,8 @@ Dialog1E5::
 
 Dialog1E6::
     db "Arfh! Arfh! Arf!"
-    db " <marin>  <marin>!  <marin>   <marin>!  "
-    db "..... <link>?? @"
+    db " <DE>  <DE>!  <DE>   <DE>!  "
+    db "..... <DD>?? @"
 
 Dialog1E7::
     db "It's no use,    "
@@ -597,9 +722,10 @@ Dialog1E8::
     db "    Okay No<ask>"
 
 Dialog1E9::
-    db "Keep your eyes  "
-    db "open and watch  "
-    db "a pro at work.@"
+    db "All right, boy, "
+    db "feast your eyes "
+    db "on a display of "
+    db "fishing skill!@"
 
 Dialog1EA::
     db "You should be   "
@@ -608,12 +734,14 @@ Dialog1EA::
     db "were buddies!@"
 
 Dialog1EB::
-    db "My, that's a    "
-    db "BIIIIG one!@"
+    db "Whoooah nellie!!"
+    db "It's a big one!!"
+    db "Big! Big! Yaaah!"
+    db "@"
 
 Dialog1EC::
-    db "The <fishhook> became a  "
-    db "necklace <bra>!     "
+    db "The <E9> became a  "
+    db "necklace <EA>!     "
     db "L-l-lucky!@"
 
 Dialog1ED::
@@ -622,21 +750,7 @@ Dialog1ED::
     db "catch next!@"
 
 Dialog1EE::
-    db "My husband is   "
-    db "lost in the     "
-    db "woods! Please   "
-    db "go find him!@"
-
 Dialog1EF::
-    db "Hey, you can see"
-    db "me?! You must   "
-    db "have a magnify- "
-    db "ing glass. I'm  "
-    db "not a trouble   "
-    db "maker. I just   "
-    db "want to live in "
-    db "peace.@"
-
 Dialog1F0::
     db "When I was swim-"
     db "ming in the bay,"
@@ -647,7 +761,8 @@ Dialog1F0::
     db "If you find it, "
     db "I will let you  "
     db "take a scale    "
-    db "from my tail!   @"
+    db "from my tail!   "
+    db "@"
 
 Dialog1F1::
     db "I have already  "
@@ -673,17 +788,13 @@ Dialog1F4::
 
 Dialog1F5::
     db "You returned the"
-    db "necklace <bra> and  "
-    db "got a scale <scale> of"
+    db "necklace <EA> and  "
+    db "got a scale <EB> of"
     db "the mermaid's   "
     db "tail.  How will "
     db "you use this?@"
 
 Dialog1F6::
-    db "I'll call this  "
-    db "'I Was Very     "
-    db "Afraid.' Smile!@"
-
 Dialog1F7::
     db "An artist once  "
     db "asked me to pose"
@@ -695,30 +806,21 @@ Dialog1F7::
     db "be true...?@"
 
 Dialog1F8::
-    db "Hi there! It's  "
-    db "me, the photo-  "
-    db "grapher! You say"
-    db "Zora is in the  "
-    db "house? I HAVE to"
-    db "take a picture  "
-    db "of that. I'll   "
-    db "call it 'I Found"
-    db "Zora.'@"
-
 Dialog1F9::
-    db "Richard's Villa @"
+    db "Richard's Villa "
+    db "@"
 
 Dialog1FA::
     db "Kanalet Castle  "
-    db "10 Min. <right> <up>@"
+    db "10 Min. <F3> <F0>@"
 
 Dialog1FB::
     db "Kanalet Castle  "
-    db "5 Min. <right>@"
+    db "5 Min. <F3>@"
 
 Dialog1FC::
     db "Kanalet Castle  "
-    db "50 Paces <up>@"
+    db "50 Paces <F0>@"
 
 Dialog1FD::
     db "'BRRING! BRRING!"
@@ -761,7 +863,7 @@ Dialog200::
     db "   Your Shield  "
     db "   Like A Pro!' "
     db "Read this book? "
-    db "    YES  NO<ask>"
+    db "    Read Don't<ask>"
 
 Dialog201::
     db "'If you hold the"
@@ -769,7 +871,7 @@ Dialog201::
     db "can defend your-"
     db "self from enemy "
     db "attacks, and you"
-    db "can flip some   "
+    db "can fillip some "
     db "enemies, too... "
     db "Besides the     "
     db "standard shield "
@@ -783,7 +885,7 @@ Dialog202::
     db "   Item That's  "
     db "  Right For You'"
     db "Read this book? "
-    db "    YES  NO<ask>"
+    db "    Read Don't<ask>"
 
 Dialog203::
     db "'You can select "
@@ -803,7 +905,7 @@ Dialog204::
     db " 'Auto Map and  "
     db "Memo Guide Book'"
     db "Read this book? "
-    db "    YES  NO<ask>"
+    db "    Read Don't<ask>"
 
 Dialog205::
     db "'You can see an "
@@ -828,7 +930,7 @@ Dialog206::
     db " 'Secrets Of The"
     db " Whirling Blade'"
     db "Read this book? "
-    db "    YES  NO<ask>"
+    db "    Read Don't<ask>"
 
 Dialog207::
     db "'The Whirling   "
@@ -852,7 +954,7 @@ Dialog208::
     db "'The Properties "
     db "  Of Warp Holes'"
     db "Read this book? "
-    db "    YES  NO<ask>"
+    db "    Read Don't<ask>"
 
 Dialog209::
     db "'There are some "
@@ -876,7 +978,7 @@ Dialog209::
 Dialog20A::
     db "'Fun With Bombs'"
     db "Read this book? "
-    db "    YES  NO<ask>"
+    db "    Read Don't<ask>"
 
 Dialog20B::
     db "'After you put a"
@@ -908,7 +1010,7 @@ Dialog20D::
     db "   Of Koholint' "
     db "Do you really   "
     db "want to read it?"
-    db "    YES  NO<ask>"
+    db "    Yes! N-No<ask>"
 
 Dialog20E::
     db "Gasp! Wha-What's"
@@ -929,7 +1031,8 @@ Dialog211::
     db "...the house... "
     db " ...take me...  "
     db "...the house... "
-    db "...at the bay...@"
+    db "...at the bay..."
+    db "@"
 
 Dialog212::
     db "...N-N-No!...   "
@@ -947,7 +1050,7 @@ Dialog214::
 
 Dialog215::
     db "  ...Enough...  "
-    db " ...cemetery... "
+    db " ...cemetary... "
     db "  ...take me... "
     db " ...my grave...@"
 
@@ -962,7 +1065,7 @@ Dialog217::
     db "Round and round,"
     db "the passageways "
     db "of the Egg...   "
-    db "<left> <left> <up> <right> <right> <up> <left> <up> "
+    db "<F2> <F2> <F0> <F3> <F3> <F0> <F2> <F0> "
     db "??  ...Hmmmmmm, "
     db "this book reeks "
     db "of secrets...@"
@@ -971,7 +1074,7 @@ Dialog218::
     db "Round and round,"
     db "the passageways "
     db "of the Egg...   "
-    db "<right> <up> <up> <right> <up> <up> <right> <up> "
+    db "<F3> <F0> <F0> <F3> <F0> <F0> <F3> <F0> "
     db "??  ...Hmmmmmm, "
     db "this book reeks "
     db "of secrets...@"
@@ -980,7 +1083,7 @@ Dialog219::
     db "Round and round,"
     db "the passageways "
     db "of the Egg...   "
-    db "<left> <up> <right> <up> <left> <up> <right> <up> "
+    db "<F2> <F0> <F3> <F0> <F2> <F0> <F3> <F0> "
     db "??  ...Hmmmmmm, "
     db "this book reeks "
     db "of secrets...@"
@@ -989,7 +1092,7 @@ Dialog21A::
     db "Round and round,"
     db "the passageways "
     db "of the Egg...   "
-    db "<right> <right> <right> <right> <up> <up> <up> <up> "
+    db "<F3> <F3> <F3> <F3> <F0> <F0> <F0> <F0> "
     db "??  ...Hmmmmmm, "
     db "this book reeks "
     db "of secrets...@"
@@ -997,7 +1100,8 @@ Dialog21A::
 Dialog21B::
     db "...You're late! "
     db "I thought you'd "
-    db "never come back!@"
+    db "never come back!"
+    db "@"
 
 Dialog21C::
     db "...EEEK!  You're"
@@ -1063,7 +1167,8 @@ Dialog222::
     db "it!  When you   "
     db "don't want the  "
     db "Boomerang any   "
-    db "more, come back!@"
+    db "more, come back!"
+    db "@"
 
 Dialog223::
     db "Oh, yeah, uh... "
@@ -1097,72 +1202,12 @@ Dialog227::
     db "thing else?@"
 
 Dialog228::
-    db "'BRRING! BRRING!"
-    db "Ya, it's Ulrira!"
-    db "You haven't     "
-    db "found the 5     "
-    db "Golden Leaves?  "
-    db "Keep an eye on  "
-    db "the ones you    "
-    db "have. Someone   "
-    db "might try and   "
-    db "take 'em! Bye!  "
-    db "CLICK!'@"
-
 Dialog229::
-    db "'BRRING! BRRING!"
-    db "Ya, it's Ulrira!"
-    db "You haven't     "
-    db "found the 5     "
-    db "Golden Leaves?  "
-    db "Try bombing sus-"
-    db "picious places. "
-    db "Hope that helps."
-    db "Bye!            "
-    db "CLICK!'@"
-
 Dialog22A::
-    db "'BRRING! BRRING!"
-    db "Ya, it's Ulrira!"
-    db "You haven't     "
-    db "found the 5     "
-    db "Golden Leaves?  "
-    db "Go scare that   "
-    db "crow by the     "
-    db "castle and see  "
-    db "if that helps!  "
-    db "Bye!            "
-    db "CLICK!'@"
-
 Dialog22B::
-    db "'The Travels of "
-    db "#####' Do you   "
-    db "want to look at "
-    db "your album?     "
-    db "    Look Don't<ask>"
-
 Dialog22C::
-    db "Which picture   "
-    db "would you like  "
-    db "to see? Use <dpad> to"
-    db "select, then    "
-    db "press the A     "
-    db "Button!@"
-
 Dialog22D::
-    db "You are near the"
-    db "Eagle's Tower.  "
-    db "Beware of the   "
-    db "bird!@"
-
 Dialog22E::
-    db "Hi, #####. You  "
-    db "know I love to  "
-    db "take pictures.  "
-    db "Wouldn't this   "
-    db "old castle make "
-    db "a great photo?@"
-
 Dialog22F::
 Dialog230::
     db "Hunh?  A keyhole"
@@ -1177,7 +1222,8 @@ Dialog231::
 Dialog232::
     db "Hunh?  A keyhole"
     db "here?  It says, "
-    db "'Angler Keyhole'@"
+    db "'Angler Keyhole'"
+    db "@"
 
 Dialog233::
     db "Hunh?  A keyhole"
@@ -1208,7 +1254,8 @@ Dialog237::
 Dialog238::
     db "... ... ... ... "
     db "... ... ... ... "
-    db "Say... #####... @"
+    db "Say... #####... "
+    db "@"
 
 Dialog239::
     db "Uhh... I don't  "
@@ -1219,43 +1266,17 @@ Dialog23A::
     db "Hunh?!  Tarin??!"
     db "... ... ... ... "
     db "Uh... Nevermind,"
-    db "I... I gotta go!@"
+    db "I... I gotta go!"
+    db "@"
 
 Dialog23B::
-    db "MAAAAAAARINNNN!!@"
+    db "MAAAAAAARINNNN!!"
+    db "@"
 
 Dialog23C::
-    db "Nothing yet?! I "
-    db "grow tired of   "
-    db "waiting. I want "
-    db "those Golden    "
-    db "Leaves delivered"
-    db "soon!           "
-    db "Courage like    "
-    db "this deserves a "
-    db "photo, don't you"
-    db "think?@"
-
 Dialog23D::
-    db "Hey, Marin and  "
-    db "#####! Are you  "
-    db "taking pictures?"
-    db "You should take "
-    db "pictures of     "
-    db "everyone,       "
-    db "including me.@"
-
 Dialog23E::
-    db "I use this to   "
-    db "take pictures.  "
-    db "Are you ready?  "
-    db "Say 'mushroom!'@"
-
 Dialog23F::
-    db "OK, I'm done.   "
-    db "I'll go home    "
-    db "now.@"
-
 Dialog240::
     db "'BRRING! BRRING!"
     db "This is Ulrira! "
@@ -1306,7 +1327,8 @@ Dialog243::
     db "stop calling me "
     db "because I didn't"
     db "know one little "
-    db "answer!  CLICK!'@"
+    db "answer!  CLICK!'"
+    db "@"
 
 Dialog244::
     db "'BRRING! BRRING!"
@@ -1316,14 +1338,15 @@ Dialog244::
     db "BowWow home now,"
     db "Madam MeowMeow  "
     db "would appreciate"
-    db "it! Bye! CLICK!'@"
+    db "it! Bye! CLICK!'"
+    db "@"
 
 Dialog245::
     db "'BRRING! BRRING!"
     db "Yeah, this is   "
     db "Ulrira!  You are"
     db "starting to like"
-    db "music, eh?      "
+    db "to music, eh?   "
     db "Well, a frog    "
     db "named Mamu, who "
     db "lives in the    "
@@ -1373,11 +1396,6 @@ Dialog248::
     db "Bye!  CLICK!'@"
 
 Dialog249::
-    db "Go ahead and    "
-    db "take a picture  "
-    db "of me. Any angle"
-    db "you like!@"
-
 Dialog24A::
     db "Yarna Desert?   "
     db "There's a way to"
@@ -1393,7 +1411,8 @@ Dialog24B::
     db "Ahhh... Sigh... "
     db "On such a nice  "
     db "day, we need a  "
-    db "song from Marin!@"
+    db "song from Marin!"
+    db "@"
 
 Dialog24C::
     db "Hey! Did ya know"
@@ -1416,9 +1435,84 @@ Dialog24C::
     db "that true?@"
 
 Dialog24D::
-    db "I can't go to   "
-    db "Mabe Village    "
-    db "because of all  "
-    db "the monsters.   "
-    db "I hope Marin    "
-    db "is all right.@"
+    db "Lately there    "
+    db "have been a lot "
+    db "of monsters in  "
+    db "the area, so we "
+    db "can't go to Mabe"
+    db "Village...  I   "
+    db "wonder how Marin"
+    db "is doing?@"
+
+Dialog24E::
+    db "Have you heard  "
+    db "of the Flying   "
+    db "Rooster?  They  "
+    db "say it lived in "
+    db "Mabe Village a  "
+    db "long time ago..."
+    db "I wonder if it's"
+    db "true...@"
+
+Dialog24F::
+    db "Aaaah, Little   "
+    db "Marin... I want "
+    db "her to come back"
+    db "again...Her song"
+    db "is the best...@"
+
+Dialog250::
+    db "I dreamed that  "
+    db "I turned into a "
+    db "carrot last     "
+    db "night...  What  "
+    db "an odd dream...@"
+
+Dialog251::
+    db "Eh?  How can an "
+    db "animal talk?    "
+    db "How?  Hey, I'm  "
+    db "just a rabbit,  "
+    db "so I don't know!"
+    db "@"
+
+Dialog252::
+    db "Ahhh!  It's her!"
+    db "Little Marin!!@"
+
+Dialog253::
+Dialog254::
+Dialog255::
+Dialog256::
+Dialog257::
+Dialog258::
+Dialog259::
+Dialog25A::
+Dialog25B::
+Dialog25C::
+Dialog25D::
+Dialog25E::
+Dialog25F::
+Dialog260::
+Dialog261::
+Dialog262::
+Dialog263::
+Dialog264::
+Dialog265::
+Dialog266::
+Dialog267::
+Dialog268::
+Dialog269::
+Dialog26A::
+Dialog26B::
+Dialog26C::
+Dialog26D::
+Dialog26E::
+Dialog26F::
+Dialog270::
+Dialog271::
+Dialog272::
+Dialog273::
+Dialog274::
+Dialog275::
+    db "@"

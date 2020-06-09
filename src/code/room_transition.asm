@@ -175,13 +175,6 @@ ApplyRoomTransition::
 
     ; If hMapId == MAP_COLOR_DUNGEON, d = 0
     ldh  a, [hMapId]                              ; $7993: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                        ; $7995: $FE $FF
-    jr   nz, .mapNotFF                            ; $7997: $20 $04
-
-    ld   d, 0                                     ; $7999: $16 $00
-    jr   .activeRoomEnd                           ; $799B: $18 $09
-
-.mapNotFF
     ; else if (hMapId >= MAP_FACE_SHRINE && hMapId < $1A), d += 1
     cp   $1A                                      ; $799D: $FE $1A
     jr   nc, .activeRoomEnd                       ; $799F: $30 $05
@@ -291,8 +284,6 @@ RoomTransitionPrepareHandler::
 
     ; If map is not color dungeon…
     ldh  a, [hMapId]                              ; $7A06: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                        ; $7A08: $FE $FF
-    jr   z, .noWindFishEggMaze                    ; $7A0A: $28 $3C
 
     ; … and hMapId < $0B…
     cp   MAP_DUNGEON_G1                           ; $7A0C: $FE $0B
@@ -448,24 +439,6 @@ RoomTransitionPrepareHandler::
 .loadRoom
     call LoadRoom                                 ; $7AA5: $CD $F4 $30
 
-    ; If in Color Dungeon…
-    ld   a, [wIsIndoor]                           ; $7AA8: $FA $A5 $DB
-    and  a                                        ; $7AAB: $A7
-    jr   z, .colorDungeonEnd                      ; $7AAC: $28 $0F
-
-    ldh  a, [hMapId]                              ; $7AAE: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                        ; $7AB0: $FE $FF
-    jr   nz, .colorDungeonEnd                     ; $7AB2: $20 $09
-
-    ; force update the background tiles
-    ld   a, $01                                   ; $7AB4: $3E $01
-    ldh  [hNeedsUpdatingBGTiles], a               ; $7AB6: $E0 $90
-
-    ; Replace objects $56 and $57 by object $0D
-    ld   a, $02                                   ; $7AB8: $3E $02
-    call ReplaceObjects56and57_trampoline         ; $7ABA: $CD $F5 $09
-.colorDungeonEnd
-
     call LoadRoomEntities                         ; $7ABD: $CD $FE $37
     call DrawLinkSprite                           ; $7AC0: $CD $2E $1D
     call ApplyLinkMotionState                     ; $7AC3: $CD $94 $17
@@ -480,10 +453,6 @@ RoomTransitionPrepareHandler::
 
     xor  a                                        ; $7ACC: $AF
     ld   [$C1CF], a                               ; $7ACD: $EA $CF $C1
-    ld   a, [wTunicType]                          ; $7AD0: $FA $0F $DC
-    and  a                                        ; $7AD3: $A7
-    ldh  a, [hDefaultMusicTrack]                  ; $7AD4: $F0 $B0
-    jr   nz, .jr_002_7AE2                         ; $7AD6: $20 $0A
 
     ld   a, [wActivePowerUp]                      ; $7AD8: $FA $7C $D4
     and  a                                        ; $7ADB: $A7
@@ -650,21 +619,9 @@ IndoorRoomIncrement::
 .bottom db $08
 
 RoomTransitionConfigureScrollTargets::
-    ; If $FFBB == 0, return
-    ldh  a, [$FFBB]                               ; $7B7F: $F0 $BB
-    and  a                                        ; $7B81: $A7
-    ret  nz                                       ; $7B82: $C0
-
-    ; a = wRoomTransitionDirection
-    ; e = (direction horizontal ? $DF : $FF)
-    ld   e, $FF                                   ; $7B83: $1E $FF
     ld   a, [wRoomTransitionDirection]            ; $7B85: $FA $25 $C1
     ld   c, a                                     ; $7B88: $4F
     ld   b, $00                                   ; $7B89: $06 $00
-    and  $02                                      ; $7B8B: $E6 $02
-    jr   nz, .directionNotHorizontal              ; $7B8D: $20 $02
-    ld   e, $DF                                   ; $7B8F: $1E $DF
-.directionNotHorizontal
 
     ; Configure the target scrollX position
     ld   hl, RoomTransitionTargetScrollX          ; $7B91: $21 $6F $7B
@@ -686,7 +643,7 @@ RoomTransitionConfigureScrollTargets::
     ld   a, [wBGOriginLow]                        ; $7BAB: $FA $2F $C1
     add  [hl]                                     ; $7BAE: $86
     rl   d                                        ; $7BAF: $CB $12
-    and  e                                        ; $7BB1: $A3
+    and $df                                        ; $7BB1: $A3
     ld   [wBGUpdateRegionOriginLow], a            ; $7BB2: $EA $27 $C1
 
     ld   hl, RoomTransitionBGInitialUpdateRegionHigh ; $7BB5: $21 $57 $7B
@@ -703,7 +660,7 @@ RoomTransitionConfigureScrollTargets::
     ld   a, [wBGOriginLow]                        ; $7BC8: $FA $2F $C1
     add  [hl]                                     ; $7BCB: $86
     rl   d                                        ; $7BCC: $CB $12
-    and  e                                        ; $7BCE: $A3
+    and $df                                      ; $7BCE: $A3
     ld   [wBGOriginLow], a                        ; $7BCF: $EA $2F $C1
 
     ld   hl, RoomTransitionBGOriginHigh           ; $7BD2: $21 $4F $7B
@@ -738,7 +695,8 @@ RoomTransitionConfigureScrollTargets::
 
 RoomTransitionFirstHalfHandler::
     ; Update BG Map
-    jp   UpdateBGRegion                           ; $7C00: $C3 $09 $22
+    call   UpdateBGRegion                           ; $7C00: $C3 $09 $22
+    ret
 
 RoomTransitionSecondHalfHandler::
     ; The scroll increment has already been done earlier:
@@ -797,7 +755,7 @@ label_002_7C50:
     or   [hl]                                     ; $7C63: $B6
     ld   hl, wInventoryAppearing                  ; $7C64: $21 $4F $C1
     or   [hl]                                     ; $7C67: $B6
-    ret  nz                                       ; $7C68: $C0
+    jr nz, jr_002_7efd                                       ; $7C68: $C0
 
     ld   e, $01                                   ; $7C69: $1E $01
     ldh  a, [hObjectUnderEntity]                               ; $7C6B: $F0 $AF
@@ -817,7 +775,7 @@ label_002_7C50:
     jr   z, jr_002_7C8B                           ; $7C7F: $28 $0A
 
     cp   $3F                                      ; $7C81: $FE $3F
-    ret  nz                                       ; $7C83: $C0
+    jr nz, jr_002_7efd                                         ; $7C83: $C0
 
     ld   e, $00                                   ; $7C84: $1E $00
     jr   jr_002_7C8B                              ; $7C86: $18 $03
@@ -837,4 +795,7 @@ jr_002_7C8B:
     ld   a, [hl]                                  ; $7C98: $7E
     ldh  [hLinkPositionYIncrement], a             ; $7C99: $E0 $9B
     call UpdateFinalLinkPosition                  ; $7C9B: $CD $A8 $21
-    jp   CheckForLedgeJump                        ; $7C9E: $C3 $45 $6E
+    call CheckForLedgeJump               ; $7efa: $cd $80 $71
+
+jr_002_7efd:
+    ret                                           ; $7efd: $c9

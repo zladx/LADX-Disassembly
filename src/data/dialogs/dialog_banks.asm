@@ -1,11 +1,4 @@
-; Some bank numbers have the high bit set for an unknown reason.
-; The routine DrawNextCharacter does `and $3f`, so the bit
-; is dropped. It is unknown if it's used anywhere else.
-
-; All textboxes with a prompt - e.g. 'yes/no', or a red 'press a button to continue' arrow - have '| $80'.
-
 DialogBankTable::
-; dialog_1.asm starts here
     db BANK(Dialog000)
     db BANK(Dialog001) | $80
     db BANK(Dialog002)
@@ -170,8 +163,6 @@ DialogBankTable::
     db BANK(Dialog0A1) | $80
     db BANK(Dialog0A2) | $80
     db BANK(Dialog0A3) | $80
-
-; dialog_2.asm starts here
     db BANK(Dialog0A4) | $80
     db BANK(Dialog0A5) | $80
     db BANK(Dialog0A6) | $80
@@ -228,7 +219,7 @@ DialogBankTable::
     db BANK(Dialog0D9) | $80
     db BANK(Dialog0DA)
     db BANK(Dialog0DB)
-    db BANK(Dialog0DC) | $80
+    db BANK(Dialog0DC)
     db BANK(Dialog0DD)
     db BANK(Dialog0DE)
     db BANK(Dialog0DF)
@@ -272,8 +263,6 @@ DialogBankTable::
     db BANK(Dialog105)
     db BANK(Dialog106)
     db BANK(Dialog107)
-
-; dialog_3.asm starts here
     db BANK(Dialog108) | $80
     db BANK(Dialog109) | $80
     db BANK(Dialog10A) | $80
@@ -376,8 +365,8 @@ DialogBankTable::
     db BANK(Dialog16B)
     db BANK(Dialog16C)
     db BANK(Dialog16D)
-    db BANK(Dialog16E)
-    db BANK(Dialog16F)
+    db $1C
+    db $1C
     db BANK(Dialog170)
     db BANK(Dialog171)
     db BANK(Dialog172)
@@ -410,8 +399,6 @@ DialogBankTable::
     db BANK(Dialog18D)
     db BANK(Dialog18E)
     db BANK(Dialog18F)
-
-; dialog_4.asm starts here
     db BANK(Dialog190)
     db BANK(Dialog191) | $80
     db BANK(Dialog192)
@@ -602,8 +589,6 @@ DialogBankTable::
     db BANK(Dialog24B)
     db BANK(Dialog24C)
     db BANK(Dialog24D)
-
-; dialog_dx.asm starts here
     db BANK(Dialog24E)
     db BANK(Dialog24F)
     db BANK(Dialog250)
@@ -616,10 +601,10 @@ DialogBankTable::
     db BANK(Dialog257)
     db BANK(Dialog258)
     db BANK(Dialog259)
-    db BANK(Dialog25A) | $80
-    db BANK(Dialog25B) | $80
-    db BANK(Dialog25C) | $80
-    db BANK(Dialog25D) | $80
+    db BANK(Dialog25A)
+    db BANK(Dialog25B)
+    db BANK(Dialog25C)
+    db BANK(Dialog25D)
     db BANK(Dialog25E)
     db BANK(Dialog25F)
     db BANK(Dialog260)
@@ -630,11 +615,11 @@ DialogBankTable::
     db BANK(Dialog265)
     db BANK(Dialog266)
     db BANK(Dialog267)
-    db BANK(Dialog268) | $80
+    db BANK(Dialog268)
     db BANK(Dialog269)
     db BANK(Dialog26A)
-    db BANK(Dialog26B) | $80
-    db BANK(Dialog26C) | $80
+    db BANK(Dialog26B)
+    db BANK(Dialog26C)
     db BANK(Dialog26D)
     db BANK(Dialog26E)
     db BANK(Dialog26F)
@@ -654,51 +639,3 @@ DialogBankTable::
     db BANK(Dialog27D)
     db BANK(Dialog27E)
     db BANK(Dialog27F)
-    db BANK(Dialog280) | $80
-    db BANK(Dialog281) | $80
-    db BANK(Dialog282) | $80
-    db BANK(Dialog283) | $80
-    db BANK(Dialog284) | $80
-    db BANK(Dialog285) | $80
-    db BANK(Dialog286) | $80
-    db BANK(Dialog287) | $80
-    db BANK(Dialog288) | $80
-    db BANK(Dialog289) | $80
-    db BANK(Dialog28A) | $80
-    db BANK(Dialog28B) | $80
-    db BANK(Dialog28C) | $80
-    db BANK(Dialog28D) | $80
-    db BANK(Dialog28E) | $80
-    db BANK(Dialog28F) | $80
-    db BANK(Dialog290) | $80
-    db BANK(Dialog291) | $80
-    db BANK(Dialog292) | $80
-    db BANK(Dialog293) | $80
-    db BANK(Dialog294) | $80
-    db BANK(Dialog295) | $80
-    db BANK(Dialog296)
-    db BANK(Dialog297)
-    db BANK(Dialog298) | $80
-    db BANK(Dialog299) | $80
-    db BANK(Dialog29A) | $80
-    db BANK(Dialog29B) | $80
-    db BANK(Dialog29C) | $80
-    db BANK(Dialog29D) | $80
-    db BANK(Dialog29E) | $80
-    db BANK(Dialog29F) | $80
-    db BANK(Dialog2A0) | $80
-    db BANK(Dialog2A1) | $80
-    db BANK(Dialog2A2) | $80
-    db BANK(Dialog2A3) | $80
-    db BANK(Dialog2A4) | $80
-    db BANK(Dialog2A5) | $80
-    db BANK(Dialog2A6)
-    db BANK(Dialog2A7)
-    db BANK(Dialog2A8)
-    db BANK(Dialog2A9)
-    db BANK(Dialog2AA)
-    db BANK(Dialog2AB)
-    db BANK(Dialog2AC)
-    db BANK(Dialog2AD)
-    db BANK(Dialog2AE)
-    db BANK(Dialog2AF) | $80

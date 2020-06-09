@@ -42,7 +42,8 @@ func_019_4499::
 
     ld   a, $08                                   ; $449E: $3E $08
     call ApplyVectorTowardsLink_trampoline        ; $44A0: $CD $AA $3B
-    jp   IncrementEntityState                     ; $44A3: $C3 $12 $3B
+    call   IncrementEntityState                     ; $44A3: $C3 $12 $3B
+    ret
 
 jr_019_44A6:
     ld   hl, wEntitiesCollisionsTable             ; $44A6: $21 $A0 $C2
@@ -70,9 +71,11 @@ func_019_44BA::
 
 jr_019_44C5:
     call label_3B44                               ; $44C5: $CD $44 $3B
-    ret  nc                                       ; $44C8: $D0
+    jr nc, .return                                      ; $44C8: $D0
 
-    jp   ClearEntityStatus_19                       ; $44C9: $C3 $61 $7E
+    call   ClearEntityStatus_19                       ; $44C9: $C3 $61 $7E
+.return
+    ret
 
 func_019_44CC::
     ld   a, [wIsIndoor]                           ; $44CC: $FA $A5 $DB

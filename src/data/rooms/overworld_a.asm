@@ -320,8 +320,10 @@ Overworld06Alt::   ; Alternate Wind Fish's Egg (with entrance open)
   db   $15, $64                ; object
   db   $16, $65                ; object
   db   $24, $71                ; object
+  db   $25, $1C                ; object
   db   $26, $7F                ; object
   db   $34, $A9                ; object
+  db   $35, $AA                ; object
   db   $36, $BF                ; object
   db   $10, $7C                ; object
   db   $11, $7D                ; object
@@ -1231,6 +1233,7 @@ Overworld1C::
   db   $00, $50                ; object
   db   $C4, $01, $3E           ; object
   db   $C5, $02, $3A           ; object
+  db   $03, $E1                ; object
   db   $C4, $04, $3F           ; object
   db   $C3, $05, $3E           ; object
   db   $C4, $06, $E9           ; object
@@ -1341,7 +1344,6 @@ Overworld1E::
   db   $37, $DE                ; object
   db   $12, $DE                ; object
   db   $14, $DD                ; object
-  db   $41, $6F                ; object
   db   ROOM_END
 
 Overworld1F::
@@ -1688,6 +1690,10 @@ Overworld2A::
 Overworld2B::
   db   ANIMATED_TILES_WATERFALL_SLOW ; animation id
   db   $0E ; floor tile
+  db   $14, $E1                ; object
+  db   $E1, $03, $7A, $50, $7C ; object
+  db   $26, $C6                ; object
+  db   $E1, $1F, $E9, $28, $20 ; object
   db   $8A, $00, $3A           ; object
   db   $8A, $10, $3A           ; object
   db   $8A, $20, $3A           ; object
@@ -2102,14 +2108,6 @@ Overworld37::
   db   $09, $37                ; object
   db   $19, $2E                ; object
   db   $29, $39                ; object
-  db   $13, $F7                ; object
-  db   $14, $61                ; object
-  db   $23, $40                ; object
-  db   $24, $60                ; object
-  db   $25, $42                ; object
-  db   $44, $0C                ; object
-  db   $C2, $22, $62           ; object
-  db   $E1, $10, $B5, $50, $7C ; object
   db   ROOM_END
 
 Overworld38::
@@ -4071,22 +4069,18 @@ Overworld77::
   db   $82, $02, $03           ; object
   db   $C4, $09, $51           ; object
   db   $12, $03                ; object
-  db   $13, $C5                ; object
+  db   $13, $C4                ; object
   db   $14, $09                ; object
-  db   $15, $C5                ; object
+  db   $15, $C4                ; object
   db   $16, $03                ; object
+  db   $17, $C4                ; object
   db   $21, $03                ; object
   db   $82, $22, $09           ; object
   db   $26, $09                ; object
   db   $27, $03                ; object
   db   $32, $03                ; object
-  db   $33, $C5                ; object
-  db   $35, $C5                ; object
-  db   $17, $C5                ; object
-  db   $E1, $FF, $12, $50, $5C ; object
-  db   $E1, $FF, $12, $50, $5C ; object
-  db   $E1, $FF, $12, $50, $5C ; object
-  db   $E1, $FF, $12, $50, $5C ; object
+  db   $33, $C4                ; object
+  db   $35, $C4                ; object
   db   $36, $03                ; object
   db   $82, $44, $03           ; object
   db   $84, $46, $51           ; object

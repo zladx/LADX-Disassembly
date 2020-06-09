@@ -161,7 +161,8 @@ DropKeyEffectHandler::
     ldh  [hRoomStatus], a           ; mark this one.
 
 jr_002_5E15:
-    jp   label_002_5425                           ; $5E15: $C3 $25 $54
+    call   label_002_5425                           ; $5E15: $C3 $25 $54
+    ret
 
 ; Open locked doors, and make the teleport point appear.
 ; @FIXME Actually checks if the miniboss has been defeated.
@@ -174,7 +175,7 @@ ClearMidbossEffectHandler::
     add  hl, de                                   ; $5E20: $19
     ld   a, [hl]                                  ; $5E21: $7E
     and  $01                                      ; $5E22: $E6 $01
-    ret  nz                                       ; $5E24: $C0
+    jr nz, jr_002_5c3c
 
 ; Open all the locked doors of the room
 OpenLockedDoorsEffectHandler::
@@ -187,7 +188,7 @@ OpenLockedDoorsEffectHandler::
 jr_002_5E2E:
     ld   a, [wRoomEventEffectExecuted]            ; $5E2E: $FA $8F $C1
     and  a                                        ; $5E31: $A7
-    ret  z                                        ; $5E32: $C8
+    jr z, jr_002_5c3c                                         ; $5E32: $C8
 
     ld   a, [wRoomEvent]                          ; $5E33: $FA $8E $C1
     cp   TRIGGER_KILL_ALL_ENEMIES | EFFECT_CLEAR_MIDBOSS ; $5E36: $FE $C1
@@ -206,13 +207,6 @@ jr_002_5E2E:
     ld   e, a                                     ; $5E4B: $5F
     ld   hl, wIndoorARoomStatus                                ; $5E4C: $21 $00 $D9
     ldh  a, [hMapId]                         ; $5E4F: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                                      ; $5E51: $FE $FF
-    jr   nz, jr_002_5E5A                          ; $5E53: $20 $05
-
-    ld   hl, $DDE0                                ; $5E55: $21 $E0 $DD
-    jr   jr_002_5E63                              ; $5E58: $18 $09
-
-jr_002_5E5A:
     cp   $1A                                      ; $5E5A: $FE $1A
     jr   nc, jr_002_5E63                          ; $5E5C: $30 $05
 
@@ -230,13 +224,16 @@ jr_002_5E63:
 jr_002_5E6A:
     ld   a, [$C190]                               ; $5E6A: $FA $90 $C1
     and  a                                        ; $5E6D: $A7
-    ret  z                                        ; $5E6E: $C8
+    jr z, jr_002_5c3c                             ; $5c2e: $28 $0c
 
     xor  a                                        ; $5E6F: $AF
     ld   [wRoomEvent], a                          ; $5E70: $EA $8E $C1
     ld   a, $01                                   ; $5E73: $3E $01
     ld   [$C18C], a                               ; $5E75: $EA $8C $C1
-    jp   EnqueueDoorUnlockedSfx                   ; $5E78: $C3 $20 $54
+    call   EnqueueDoorUnlockedSfx                   ; $5E78: $C3 $20 $54
+
+jr_002_5c3c:
+    ret                                           ; $5c3c: $c9
 
 func_002_5E7B::
     ldh  a, [hLinkPositionX]                      ; $5E7B: $F0 $98
@@ -265,10 +262,8 @@ func_002_5E7B::
     ret                                           ; $5EA2: $C9
 
 Data_002_5EA3::
-    db $60, $70, $61, $71
-
 Data_002_5EA7::
-    db $60, $70, $60, $70
+    db $60, $70, $61, $71
 
 RevealChestEffectHandler::
     call EventEffectGuard                         ; $5EAB: $CD $AF $5D
@@ -295,7 +290,8 @@ jr_002_5ECA:
 jr_002_5ECC:
     ldh  [hScratch1], a                           ; $5ECC: $E0 $D8
     ld   a, TRANSCIENT_VFX_CHEST_APPEARS          ; $5ECE: $3E $03
-    jp   AddTranscientVfx                         ; $5ED0: $C3 $C7 $0C
+    call   AddTranscientVfx                         ; $5ED0: $C3 $C7 $0C
+    ret
 
 func_002_5ED3::
     ldh  a, [hLinkPositionY]                      ; $5ED3: $F0 $99
@@ -332,7 +328,6 @@ jr_002_5EED:
     add  hl, de                                   ; $5F03: $19
     ld   a, $A0                                   ; $5F04: $3E $A0
     ld   [hl], a                                  ; $5F06: $77
-    ld   [$DDD8], a                               ; $5F07: $EA $D8 $DD
     call label_2887                               ; $5F0A: $CD $87 $28
     ld   a, [wRequests]                           ; $5F0D: $FA $00 $D6
     ld   e, a                                     ; $5F10: $5F
@@ -342,12 +337,6 @@ jr_002_5EED:
     add  $0A                                      ; $5F17: $C6 $0A
     ld   [wRequests], a                           ; $5F19: $EA $00 $D6
     ld   de, Data_002_5EA3                        ; $5F1C: $11 $A3 $5E
-    ldh  a, [hIsGBC]                              ; $5F1F: $F0 $FE
-    and  a                                        ; $5F21: $A7
-    jr   z, label_002_5F27                        ; $5F22: $28 $03
-
-    ld   de, Data_002_5EA7                        ; $5F24: $11 $A7 $5E
-
 label_002_5F27:
     ldh  a, [$FFCF]                               ; $5F27: $F0 $CF
     ld   [hl+], a                                 ; $5F29: $22
@@ -375,20 +364,11 @@ label_002_5F27:
     ld   [hl+], a                                 ; $5F44: $22
     xor  a                                        ; $5F45: $AF
     ld   [hl], a                                  ; $5F46: $77
-    ldh  a, [hIsGBC]                              ; $5F47: $F0 $FE
-    and  a                                        ; $5F49: $A7
-    jr   z, jr_002_5F53                           ; $5F4A: $28 $07
-
-    push bc                                       ; $5F4C: $C5
-    ld   a, $02                                   ; $5F4D: $3E $02
-    call func_91D                                ; $5F4F: $CD $1D $09
-    pop  bc                                       ; $5F52: $C1
-
 jr_002_5F53:
     ret                                           ; $5F53: $C9
 
 Data_002_5F54::
-    db $6A, $7A, $6B, $7B, $00, $00, $00, $00
+    db $6A, $7A, $6B, $7B
 
 func_002_5F5C::
     ld   a, $01                                   ; $5F5C: $3E $01
@@ -413,7 +393,6 @@ func_002_5F5C::
     add  hl, de                                   ; $5F80: $19
     ld   a, $BE                                   ; $5F81: $3E $BE
     ld   [hl], a                                  ; $5F83: $77
-    ld   [$DDD8], a                               ; $5F84: $EA $D8 $DD
     call label_2887                               ; $5F87: $CD $87 $28
     ld   a, [wRequests]                           ; $5F8A: $FA $00 $D6
     ld   e, a                                     ; $5F8D: $5F
@@ -423,7 +402,7 @@ func_002_5F5C::
     add  $0A                                      ; $5F94: $C6 $0A
     ld   [wRequests], a                           ; $5F96: $EA $00 $D6
     ld   de, Data_002_5F54                        ; $5F99: $11 $54 $5F
-    jp   label_002_5F27                           ; $5F9C: $C3 $27 $5F
+    jr   label_002_5F27                           ; $5F9C: $C3 $27 $5F
 
 ; Check if some triggers has been resolved.
 ;
@@ -450,7 +429,6 @@ CheckTriggersResolution::
 ._0D dw Events.return
 ._0E dw Events.return
 ._0F dw Events.return
-._10 dw CheckAnswerTunicsTrigger
 
 Events
 .return
@@ -494,14 +472,17 @@ CheckKillInOrderTrigger::
 jr_002_5FF0:
     ld   a, [hl+]                                 ; $5FF0: $2A
     cp   c                                        ; $5FF1: $B9
-    ret  nz                                       ; $5FF2: $C0
+    jr nz, jr_002_5d9b                                       ; $5FF2: $C0
 
     inc  c                                        ; $5FF3: $0C
     ld   a, c                                     ; $5FF4: $79
     cp   $03                                      ; $5FF5: $FE $03
     jr   nz, jr_002_5FF0                          ; $5FF7: $20 $F7
 
-    jp   MarkTriggerAsResolved                       ; $5FF9: $C3 $60 $0C
+    call MarkTriggerAsResolved                    ; $5d98: $cd $ec $08
+
+jr_002_5d9b:
+    ret                                           ; $5d9b: $c9
 
 ; Check for both TRIGGER_KILL_ALL_ENEMIES and TRIGGER_KILL_SPECIALS
 CheckKillEnemiesTrigger::
@@ -544,134 +525,3 @@ jr_002_6029:
 
 jr_002_602C:
     ret                                           ; $602C: $C9
-
-CheckAnswerTunicsTrigger::
-    ; If the effect has already been executed, return.
-    ld   a, [wRoomEventEffectExecuted]            ; $602D: $FA $8F $C1
-    and  a                                        ; $6030: $A7
-    ret  nz                                       ; $6031: $C0
-
-    xor  a                                        ; $6032: $AF
-    ldh  [hScratch0], a                               ; $6033: $E0 $D7
-    ld   de, $00                                  ; $6035: $11 $00 $00
-    ldh  a, [hMapRoom]                           ; $6038: $F0 $F6
-    cp   $12                                      ; $603A: $FE $12
-    jr   z, jr_002_609B                           ; $603C: $28 $5D
-
-jr_002_603E:
-    ld   hl, wEntitiesTypeTable                   ; $603E: $21 $A0 $C3
-    add  hl, de                                   ; $6041: $19
-    ld   a, [hl]                                  ; $6042: $7E
-    cp   $EF                                      ; $6043: $FE $EF
-    jr   z, jr_002_604F                           ; $6045: $28 $08
-
-    cp   $F0                                      ; $6047: $FE $F0
-    jr   z, jr_002_604F                           ; $6049: $28 $04
-
-    cp   $F1                                      ; $604B: $FE $F1
-    jr   nz, jr_002_6064                          ; $604D: $20 $15
-
-jr_002_604F:
-    ld   hl, wEntitiesStatusTable                   ; $604F: $21 $80 $C2
-    add  hl, de                                   ; $6052: $19
-    ld   a, [hl]                                  ; $6053: $7E
-    and  a                                        ; $6054: $A7
-    jr   z, jr_002_6064                           ; $6055: $28 $0D
-
-    ld   hl, $C3B0                                ; $6057: $21 $B0 $C3
-    add  hl, de                                   ; $605A: $19
-    ld   a, [hl]                                  ; $605B: $7E
-    cp   $08                                      ; $605C: $FE $08
-    jr   nz, jr_002_6064                          ; $605E: $20 $04
-
-    ld   hl, hScratch0                                ; $6060: $21 $D7 $FF
-    inc  [hl]                                     ; $6063: $34
-
-jr_002_6064:
-    inc  e                                        ; $6064: $1C
-    ld   a, e                                     ; $6065: $7B
-    and  $0F                                      ; $6066: $E6 $0F
-    jr   nz, jr_002_603E                          ; $6068: $20 $D4
-
-    ld   e, $09                                   ; $606A: $1E $09
-    ldh  a, [hMapRoom]                           ; $606C: $F0 $F6
-    cp   $0A                                      ; $606E: $FE $0A
-    jr   z, jr_002_6074                           ; $6070: $28 $02
-
-    ld   e, $04                                   ; $6072: $1E $04
-
-jr_002_6074:
-    ldh  a, [hScratch0]                               ; $6074: $F0 $D7
-    cp   e                                        ; $6076: $BB
-    ret  nz                                       ; $6077: $C0
-
-    call MarkTriggerAsResolved                    ; $6078: $CD $60 $0C
-    ldh  a, [hMapRoom]                           ; $607B: $F0 $F6
-    cp   $08                                      ; $607D: $FE $08
-    ret  z                                        ; $607F: $C8
-
-    cp   $0A                                      ; $6080: $FE $0A
-    jr   nz, jr_002_6098                          ; $6082: $20 $14
-
-    call EventEffectGuard                         ; $6084: $CD $AF $5D
-    call OpenLockedDoorsEffectHandler             ; $6087: $CD $25 $5E
-    ld   hl, $DDE0                                ; $608A: $21 $E0 $DD
-    ldh  a, [hMapRoom]                            ; $608D: $F0 $F6
-    ld   e, a                                     ; $608F: $5F
-    ld   d, $00                                   ; $6090: $16 $00
-    add  hl, de                                   ; $6092: $19
-    ld   a, [hl]                                  ; $6093: $7E
-    or   $10                                      ; $6094: $F6 $10
-    ld   [hl], a                                  ; $6096: $77
-    ret                                           ; $6097: $C9
-
-jr_002_6098:
-    jp   RevealChestEffectHandler                 ; $6098: $C3 $AB $5E
-
-jr_002_609B:
-    ld   hl, wEntitiesTypeTable                   ; $609B: $21 $A0 $C3
-    add  hl, de                                   ; $609E: $19
-    ld   a, [hl]                                  ; $609F: $7E
-    cp   $F6                                      ; $60A0: $FE $F6
-    jr   z, jr_002_60A8                           ; $60A2: $28 $04
-
-    cp   $F7                                      ; $60A4: $FE $F7
-    jr   nz, jr_002_60BD                          ; $60A6: $20 $15
-
-jr_002_60A8:
-    ld   hl, wEntitiesStatusTable                   ; $60A8: $21 $80 $C2
-    add  hl, de                                   ; $60AB: $19
-    ld   a, [hl]                                  ; $60AC: $7E
-    and  a                                        ; $60AD: $A7
-    jr   z, jr_002_60BD                           ; $60AE: $28 $0D
-
-    ld   hl, wEntitiesStateTable                  ; $60B0: $21 $90 $C2
-    add  hl, de                                   ; $60B3: $19
-    ld   a, [hl]                                  ; $60B4: $7E
-    cp   $04                                      ; $60B5: $FE $04
-    jr   nz, jr_002_60BD                          ; $60B7: $20 $04
-
-    ld   hl, hScratch0                                ; $60B9: $21 $D7 $FF
-    inc  [hl]                                     ; $60BC: $34
-
-jr_002_60BD:
-    inc  e                                        ; $60BD: $1C
-    ld   a, e                                     ; $60BE: $7B
-    and  $0F                                      ; $60BF: $E6 $0F
-    jr   nz, jr_002_609B                          ; $60C1: $20 $D8
-
-    ldh  a, [hScratch0]                           ; $60C3: $F0 $D7
-    cp   $02                                      ; $60C5: $FE $02
-    ret  nz                                       ; $60C7: $C0
-
-    call MarkTriggerAsResolved                    ; $60C8: $CD $60 $0C
-    call EventEffectGuard                         ; $60CB: $CD $AF $5D
-
-    ; Mark the room as completed
-    call GetRoomStatusAddress                     ; $60CE: $CD $9F $5B
-    ld   a, [hl]                                  ; $60D1: $7E
-    or   $10                                      ; $60D2: $F6 $10
-    ld   [hl], a                                  ; $60D4: $77
-    ldh  [hRoomStatus], a                               ; $60D5: $E0 $F8
-
-    ret                                           ; $60D7: $C9

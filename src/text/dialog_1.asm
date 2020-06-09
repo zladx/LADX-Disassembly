@@ -18,7 +18,8 @@ Dialog001::
     db "still be feeling"
     db "a little woozy. "
     db "You are on      "
-    db "Koholint Island!@"
+    db "Koholint Island!"
+    db "@"
 
 Dialog002::
     db "Follow the lane "
@@ -155,7 +156,8 @@ Dialog010::
 Dialog011::
     db "I'm tired... I'm"
     db "goin' ta sleep  "
-    db "now... Zzzzzz...@"
+    db "now... Zzzzzz..."
+    db "@"
 
 Dialog012::
     db "Well that was a "
@@ -272,7 +274,8 @@ Dialog021::
     db "Heh heh heh ho! "
     db "You're goin' ta "
     db "be lost, thanks "
-    db "to me!  Heh heh!@"
+    db "to me!  Heh heh!"
+    db "@"
 
 Dialog022::
     db "BOW WOW!        "
@@ -330,7 +333,8 @@ Dialog029::
     db "lot to learn,   "
     db "trying to buy   "
     db "something you   "
-    db "have no use for!@"
+    db "have no use for!"
+    db "@"
 
 Dialog02A::
     db "You've got a    "
@@ -458,7 +462,8 @@ Dialog042::
     db "It's 30 Rupees! "
     db "You can play the"
     db "game three more "
-    db "times with this!@"
+    db "times with this!"
+    db "@"
 
 Dialog043::
     db "Cough Cough...  "
@@ -492,7 +497,7 @@ Dialog046::
 Dialog047::
     db "Okay, here's how"
     db "you do it.  Use "
-    db "<left> and <right> on the <dpad>"
+    db "<F2> and <F3> on the <EE>"
     db "to aim a cast.  "
     db "Once you hook a "
     db "fish, press the "
@@ -532,7 +537,8 @@ Dialog04B::
 Dialog04C::
     db "Did I say that? "
     db "Forget it, okay?"
-    db "Run along now...@"
+    db "Run along now..."
+    db "@"
 
 Dialog04D::
     db "It's a runt!    "
@@ -555,16 +561,15 @@ Dialog04E::
 Dialog04F::
     db "You've got a    "
     db "Piece of Heart! "
-    db "Press SELECT on "
-    db "the Subscreen   "
-    db "to see.@"
+    db "@"
 
 Dialog050::
     db "You collected   "
     db "four Pieces of  "
     db "Heart.  Now, you"
     db "have a complete "
-    db "Heart Container!@"
+    db "Heart Container!"
+    db "@"
 
 Dialog051::
     db "Brrrr... This is"
@@ -618,38 +623,47 @@ Dialog056::
 
 Dialog057::
     db "Level 2--       "
-    db "   Bottle Grotto@"
+    db "   Bottle Grotto"
+    db "@"
 
 Dialog058::
     db "Level 3--       "
-    db "      Key Cavern@"
+    db "      Key Cavern"
+    db "@"
 
 Dialog059::
     db "Level 4--       "
-    db " Angler's Tunnel@"
+    db " Angler's Tunnel"
+    db "@"
 
 Dialog05A::
     db "Level 5--       "
-    db "   Catfish's Maw@"
+    db "   Catfish's Maw"
+    db "@"
 
 Dialog05B::
     db "Level 6--       "
-    db "     Face Shrine@"
+    db "     Face Shrine"
+    db "@"
 
 Dialog05C::
     db "Level 7--       "
-    db "   Eagle's Tower@"
+    db "   Eagle's Tower"
+    db "@"
 
 Dialog05D::
     db "Level 8--       "
-    db "     Turtle Rock@"
+    db "     Turtle Rock"
+    db "@"
 
 Dialog05E::
-    db "Wind Fish's Egg @"
+    db "Wind Fish's Egg "
+    db "@"
 
 Dialog05F::
 Dialog060::
-    db "Mountain Bridge @"
+    db "Mountain Bridge "
+    db "@"
 
 Dialog061::
     db "Sale's House O' "
@@ -666,11 +680,13 @@ Dialog064::
     db "   Trendy Game@"
 
 Dialog065::
-    db "  Town Tool Shop@"
+    db "  Town Tool Shop"
+    db "@"
 
 Dialog066::
     db "Marin and       "
-    db "   Tarin's House@"
+    db "   Tarin's House"
+    db "@"
 
 Dialog067::
     db "   Witch's Hut@"
@@ -682,32 +698,41 @@ Dialog069::
     db "  Ukuku Prairie@"
 
 Dialog06A::
-    db "Mysterious Woods@"
+    db "Mysterious Woods"
+    db "@"
 
 Dialog06B::
-    db "  Mt. Tamaranch @"
+    db "  Mt. Tamaranch "
+    db "@"
 
 Dialog06C::
     db "     Tal Tal    "
-    db " Mountain Range @"
+    db " Mountain Range "
+    db "@"
 
 Dialog06D::
-    db "  Signpost Maze @"
+    db "  Signpost Maze "
+    db "@"
 
 Dialog06E::
-    db "  Mabe Village  @"
+    db "  Mabe Village  "
+    db "@"
 
 Dialog06F::
-    db " Animal Village @"
+    db " Animal Village "
+    db "@"
 
 Dialog070::
-    db "    Cemetery    @"
+    db "    Cemetary    "
+    db "@"
 
 Dialog071::
-    db "   Rapids Ride  @"
+    db "   Rapids Ride  "
+    db "@"
 
 Dialog072::
-    db "Koholint Prairie@"
+    db "Koholint Prairie"
+    db "@"
 
 Dialog073::
     db " Toronbo Shores@"
@@ -731,14 +756,16 @@ Dialog079::
     db "Tal Tal Heights@"
 
 Dialog07A::
-    db "Tabahl Wasteland@"
+    db "Tabahl Wasteland"
+    db "@"
 
 Dialog07B::
     db "  South of the  "
     db "    Village@"
 
 Dialog07C::
-    db "  Fishing Pond  @"
+    db "  Fishing Pond  "
+    db "@"
 
 Dialog07D::
     db "Madam MeowMeow's"
@@ -747,213 +774,9 @@ Dialog07D::
 
 Dialog07E::
     db "Old Man Ulrira's"
-    db "     House      @"
+    db "     House      "
+    db "@"
 
 Dialog07F::
-    db "Weird Mr. Write @"
-
-Dialog080::
-    db " Crazy Tracy's  "
-    db "  Health Spa@"
-
-Dialog081::
-    db "Quadruplet's    "
-    db "      House@"
-
-Dialog082::
-    db "  Dream Shrine  @"
-
-Dialog083::
-    db "Telephone Booth "
-    db "<down> Signpost Maze @"
-
-Dialog084::
-    db "Seashell Mansion@"
-
-Dialog085::
-    db "Richard's Villa @"
-
-Dialog086::
-    db "     Hen House  @"
-
-Dialog087::
-    db "Village Library @"
-
-Dialog088::
-    db "    Raft Shop   @"
-
-Dialog089::
-    db "    Warp Hole   @"
-
-Dialog08A::
-    db "This rock has   "
-    db "many cracks...  "
-    db "There must be   "
-    db "some way to     "
-    db "shatter it...@"
-
-Dialog08B::
-    db "Oh? What a weird"
-    db "object!  There  "
-    db "must be some way"
-    db "to tackle this  "
-    db "obstacle.@"
-
-Dialog08C::
-    db "Hunh?  This rock"
-    db "has a key hole! "
-    db "You should come "
-    db "back with a key!@"
-
-Dialog08D::
-    db "Wow!  This looks"
-    db "pretty heavy!   "
-    db "You won't be    "
-    db "able to lift it "
-    db "with just your  "
-    db "bare hands...@"
-
-Dialog08E::
-    db "Well, it's an   "
-    db "Ocarina, but you"
-    db "don't know how  "
-    db "to play it...@"
-
-Dialog08F::
-    db "No!  No!  Poor  "
-    db "hen!  Stop that!@"
-
-Dialog090::
-    db "You found the   "
-    db "Power Bracelet! "
-    db "At last, you can"
-    db "pick up pots and"
-    db "stones!@"
-
-Dialog091::
-    db "You got your    "
-    db "shield back!    "
-    db "Press the button"
-    db "and repel       "
-    db "enemies with it!@"
-
-Dialog092::
-    db "Ahhh... Yess... "
-    db "That dust was so"
-    db "refreshing...   "
-    db "For that, I'll  "
-    db "tell you a hint!"
-    db "Use a Bomb in a "
-    db "place where the "
-    db "sand swallows   "
-    db "you... There is "
-    db "a treat on the  "
-    db "other side of   "
-    db "the wall... Bye!@"
-
-Dialog093::
-    db "You've got the  "
-    db "Hook Shot!  Its "
-    db "chain stretches "
-    db "long when you   "
-    db "use it!@"
-
-Dialog094::
-    db "You've got the  "
-    db "Magic Rod!  Now "
-    db "you can burn    "
-    db "things! Burn it!"
-    db "Burn, baby burn!@"
-
-Dialog095::
-    db "You've got the  "
-    db "Pegasus Boots!  "
-    db "If you hold down"
-    db "the Button, you "
-    db "can dash!@"
-
-Dialog096::
-    db "You've got the  "
-    db "Ocarina!  You   "
-    db "should learn to "
-    db "play many songs!@"
-
-Dialog097::
-    db "You've got the  "
-    db "Roc's Feather!  "
-    db "It feels like   "
-    db "your body is a  "
-    db "lot lighter!@"
-
-Dialog098::
-    db "You've got a    "
-    db "Shovel!  Now you"
-    db "can feel the joy"
-    db "of digging!@"
-
-Dialog099::
-    db "You've got some "
-    db "Magic Powder!   "
-    db "Try sprinkling  "
-    db "it on a variety "
-    db "of things!@"
-
-Dialog09A::
-    db "You've got a    "
-    db "bomb! Way to    "
-    db "go!@"
-
-Dialog09B::
-    db "You found your  "
-    db "Sword!  It must "
-    db "be yours because"
-    db "it has your name"
-    db "engraved on it!@"
-
-Dialog09C::
-    db "You've got the  "
-    db "Flippers! If you"
-    db "press the B     "
-    db "Button while you"
-    db "swim, you can   "
-    db "dive underwater!@"
-
-Dialog09D::
-    db "You've got the  "
-    db "Magnifying Lens!"
-    db "This will reveal"
-    db "many things you "
-    db "couldn't see    "
-    db "before!@"
-
-Dialog09E::
-Dialog09F::
-    db "You've got a    "
-    db "new Sword!  You "
-    db "should put your "
-    db "name on it right"
-    db "away!@"
-
-Dialog0A0::
-    db "You found the   "
-    db "secret medicine!"
-    db "You should apply"
-    db "this and see    "
-    db "what happens!@"
-
-Dialog0A1::
-    db "You've got the  "
-    db "Tail Key!  Now  "
-    db "you can open the"
-    db "Tail Cave gate!@"
-
-Dialog0A2::
-    db "You've got the  "
-    db "Slime Key!  Now "
-    db "you can open the"
-    db "gate in Ukuku   "
-    db "Prairie!@"
-
-Dialog0A3::
-    db "You've got the  "
-    db "Angler Key!@"
+    db "Weird Mr. Write "
+    db "@"

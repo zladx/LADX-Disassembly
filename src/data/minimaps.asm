@@ -147,18 +147,5 @@ EaglesTowerCollapsedMinimap::
 
 
 ColorDungeonMinimap::
-    db "                "
-    db "                "
-    db "                "
-    db "  Nm##    Ch##  "
-    db "  ####Ch######  "
-    db "    ########    "
-    db "    ##Ch##Ch    "
-    db "    ####Ch##    "
-    ;       02
-; MINIMAP_ARROW_COLOR_DUNGEON equ 2
-; MINIMAP_STYLE_COLOR_DUNGEON equ INVENTORY_MINIMAP_SINGLE_FLOOR
-
-
 
 POPC

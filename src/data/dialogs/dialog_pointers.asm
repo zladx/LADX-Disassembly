@@ -164,8 +164,6 @@ DialogPointerTable::
     dw Dialog0A1
     dw Dialog0A2
     dw Dialog0A3
-
-; dialog_2.asm starts here
     dw Dialog0A4
     dw Dialog0A5
     dw Dialog0A6
@@ -266,8 +264,6 @@ DialogPointerTable::
     dw Dialog105
     dw Dialog106
     dw Dialog107
-
-; dialog_3.asm starts here
     dw Dialog108
     dw Dialog109
     dw Dialog10A
@@ -370,8 +366,8 @@ DialogPointerTable::
     dw Dialog16B
     dw Dialog16C
     dw Dialog16D
-    dw Dialog16E
-    dw Dialog16F
+    dw 0
+    dw 0
     dw Dialog170
     dw Dialog171
     dw Dialog172
@@ -404,8 +400,6 @@ DialogPointerTable::
     dw Dialog18D
     dw Dialog18E
     dw Dialog18F
-
-; dialog_4.asm starts here
     dw Dialog190
     dw Dialog191
     dw Dialog192
@@ -596,8 +590,6 @@ DialogPointerTable::
     dw Dialog24B
     dw Dialog24C
     dw Dialog24D
-
-; dialog_dx.asm starts here
     dw Dialog24E
     dw Dialog24F
     dw Dialog250
@@ -648,51 +640,3 @@ DialogPointerTable::
     dw Dialog27D
     dw Dialog27E
     dw Dialog27F
-    dw Dialog280
-    dw Dialog281
-    dw Dialog282
-    dw Dialog283
-    dw Dialog284
-    dw Dialog285
-    dw Dialog286
-    dw Dialog287
-    dw Dialog288
-    dw Dialog289
-    dw Dialog28A
-    dw Dialog28B
-    dw Dialog28C
-    dw Dialog28D
-    dw Dialog28E
-    dw Dialog28F
-    dw Dialog290
-    dw Dialog291
-    dw Dialog292
-    dw Dialog293
-    dw Dialog294
-    dw Dialog295
-    dw Dialog296
-    dw Dialog297
-    dw Dialog298
-    dw Dialog299
-    dw Dialog29A
-    dw Dialog29B
-    dw Dialog29C
-    dw Dialog29D
-    dw Dialog29E
-    dw Dialog29F
-    dw Dialog2A0
-    dw Dialog2A1
-    dw Dialog2A2
-    dw Dialog2A3
-    dw Dialog2A4
-    dw Dialog2A5
-    dw Dialog2A6
-    dw Dialog2A7
-    dw Dialog2A8
-    dw Dialog2A9
-    dw Dialog2AA
-    dw Dialog2AB
-    dw Dialog2AC
-    dw Dialog2AD
-    dw Dialog2AE
-    dw Dialog2AF

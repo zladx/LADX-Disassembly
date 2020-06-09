@@ -24,7 +24,6 @@ IndoorsB04Entities::
   entity $5, $1, ENTITY_ANTI_KIRBY
   entity $4, $4, ENTITY_LASER
   entity $3, $6, ENTITY_SPARK_COUNTER_CLOCKWISE
-  entity $2, $4, ENTITY_OWL_STATUE
   entities_end
 
 IndoorsB05Entities::
@@ -153,7 +152,6 @@ IndoorsB1CEntities::
   entity $5, $2, ENTITY_THREE_OF_A_KIND
   entity $5, $6, ENTITY_THREE_OF_A_KIND
   entity $6, $4, ENTITY_THREE_OF_A_KIND
-  entity $0, $1, ENTITY_OWL_STATUE
   entities_end
 
 IndoorsB1DEntities::
@@ -338,7 +336,6 @@ IndoorsB40Entities::
 IndoorsB41Entities::
   entity $3, $3, ENTITY_SPARK_CLOCKWISE
   entity $3, $6, ENTITY_SPARK_CLOCKWISE
-  entity $0, $6, ENTITY_OWL_STATUE
   entities_end
 
 IndoorsB42Entities::
@@ -364,7 +361,6 @@ IndoorsB45Entities::
   entity $5, $3, ENTITY_HIDING_GEL
   entity $5, $6, ENTITY_HIDING_GEL
   entity $3, $8, ENTITY_FLOATING_ITEM
-  entity $0, $7, ENTITY_OWL_STATUE
   entities_end
 
 IndoorsB46Entities::
@@ -827,7 +823,6 @@ IndoorsBA3Entities::
 
 IndoorsBA4Entities::
   entity $4, $4, ENTITY_HEART_PIECE
-  entity $6, $5, ENTITY_PHOTOGRAPHER
   entities_end
 
 IndoorsBA5Entities::
@@ -905,8 +900,6 @@ IndoorsBB4Entities::
   entities_end
 
 IndoorsBB5Entities::
-  entity $5, $7, ENTITY_PHOTOGRAPHER
-  entity $6, $1, ENTITY_PHOTOGRAPHER
   entities_end
 
 IndoorsBB6Entities::
@@ -1095,7 +1088,6 @@ IndoorsBD9Entities::
   entities_end
 
 IndoorsBDAEntities::
-  entity $1, $7, ENTITY_ZORA
   entities_end
 
 IndoorsBDBEntities::
@@ -1216,7 +1208,6 @@ IndoorsBF4Entities::
 
 IndoorsBF5Entities::
   entity $2, $4, ENTITY_FISHERMAN_UNDER_BRIDGE
-  entity $5, $4, ENTITY_PHOTOGRAPHER
   entities_end
 
 IndoorsBF6Entities::

@@ -83,10 +83,10 @@ OpenDialogInTable2::
 ; Input:
 ;   a: dialog index in table 0
 OpenDialog::
-    ; Clear $C177
+    ; Clear wDialogAskSelectionIndex
     push af
     xor  a
-    ld   [$C177], a
+    ld   [wDialogAskSelectionIndex], a
     pop  af
 
     ; Save the dialog index
@@ -796,7 +796,7 @@ label_2777::
 
 label_278B::
     ld   a, $02
-    ld   [$C177], a
+    ld   [wDialogAskSelectionIndex], a
     jp   UpdateDialogState
 
 DialogChoiceHandler::
@@ -805,7 +805,7 @@ DialogChoiceHandler::
     jp   nz, .jp_27B7
     and  J_LEFT | J_RIGHT
     jr   z, .jp_27AA
-    ld   hl, $C177
+    ld   hl, wDialogAskSelectionIndex
     ld   a, [hl]
     inc  a
     and  $01

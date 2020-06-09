@@ -3579,7 +3579,7 @@ jr_020_619A:
     jr   nz, jr_020_6214                          ; $61A5: $20 $6D
 
     ldh  a, [hJoypadState]                        ; $61A7: $F0 $CC
-    and  $01                                      ; $61A9: $E6 $01
+    and  J_RIGHT                                  ; $61A9: $E6 $01
     jr   z, jr_020_61C5                           ; $61AB: $28 $18
 
 jr_020_61AD:
@@ -3603,7 +3603,7 @@ jr_020_61B7:
 
 jr_020_61C5:
     ldh  a, [hJoypadState]                        ; $61C5: $F0 $CC
-    and  $02                                      ; $61C7: $E6 $02
+    and  J_LEFT                                   ; $61C7: $E6 $02
     jr   z, jr_020_61E4                           ; $61C9: $28 $19
 
 jr_020_61CB:

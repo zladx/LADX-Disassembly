@@ -760,7 +760,7 @@ TarinShield4Handler::
     and  a                                        ; $4DA6: $A7
     jr   nz, jr_005_4DC6                          ; $4DA7: $20 $1D
 
-    ld   a, [wC177]                               ; $4DA9: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $4DA9: $FA $77 $C1
     and  a                                        ; $4DAC: $A7
     jr   nz, jr_005_4DBD                          ; $4DAD: $20 $0E
 

@@ -8231,7 +8231,7 @@ func_015_7F04::
 
     call IncrementEntityState                     ; $7F0E: $CD $12 $3B
     ld   [hl], b                                  ; $7F11: $70
-    ld   a, [wC177]                               ; $7F12: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $7F12: $FA $77 $C1
     and  a                                        ; $7F15: $A7
     jr   nz, jr_015_7F82                          ; $7F16: $20 $6A
 

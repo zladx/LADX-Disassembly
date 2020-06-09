@@ -62,7 +62,7 @@ func_038_7830::
 
 
 func_038_785A::
-    ld   a, [$C19F]                              ; $785A: $FA $9F $C1
+    ld   a, [wDialogState]                              ; $785A: $FA $9F $C1
     and  a                                       ; $785D: $A7
     ret  nz                                      ; $785E: $C0
 

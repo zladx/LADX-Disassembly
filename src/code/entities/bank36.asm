@@ -634,7 +634,7 @@ jr_036_43E6:
     jp   IncrementEntityState                     ; $43F0: $C3 $12 $3B
 
 func_036_43F3::
-    ld   a, [wC177]                               ; $43F3: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $43F3: $FA $77 $C1
     and  a                                        ; $43F6: $A7
     jr   nz, jr_036_4405                          ; $43F7: $20 $0C
 
@@ -779,7 +779,7 @@ func_036_44B3::
 
 func_036_44C2::
     call func_036_4365                            ; $44C2: $CD $65 $43
-    ld   a, [wC177]                               ; $44C5: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $44C5: $FA $77 $C1
     and  a                                        ; $44C8: $A7
     jr   nz, jr_036_44DA                          ; $44C9: $20 $0F
 
@@ -2783,7 +2783,7 @@ func_036_5117::
     and  a                                        ; $511A: $A7
     ret  nz                                       ; $511B: $C0
 
-    ld   a, [wC177]                               ; $511C: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $511C: $FA $77 $C1
     and  a                                        ; $511F: $A7
     ld   hl, wEntitiesPrivateState2Table          ; $5120: $21 $C0 $C2
     add  hl, bc                                   ; $5123: $09
@@ -2805,7 +2805,7 @@ func_036_5134::
     and  a                                        ; $5137: $A7
     ret  nz                                       ; $5138: $C0
 
-    ld   a, [wC177]                               ; $5139: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $5139: $FA $77 $C1
     and  a                                        ; $513C: $A7
     jr   nz, jr_036_5148                          ; $513D: $20 $09
 
@@ -4054,7 +4054,7 @@ func_036_5912::
     and  a                                        ; $5915: $A7
     ret  nz                                       ; $5916: $C0
 
-    ld   a, [wC177]                               ; $5917: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $5917: $FA $77 $C1
     and  a                                        ; $591A: $A7
     jr   nz, jr_036_592A                          ; $591B: $20 $0D
 
@@ -4219,7 +4219,7 @@ func_036_5A0A::
     ldh  a, [hActiveEntityType]                   ; $5A0A: $F0 $EB
     sub  ENTITY_COLOR_GUARDIAN_BLUE               ; $5A0C: $D6 $F6
     ld   e, a                                     ; $5A0E: $5F
-    ld   a, [wC177]                               ; $5A0F: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $5A0F: $FA $77 $C1
     cp   e                                        ; $5A12: $BB
     jr   nz, jr_036_5A1E                          ; $5A13: $20 $09
 

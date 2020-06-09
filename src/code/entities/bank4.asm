@@ -2749,7 +2749,7 @@ func_004_5FEF::
     ret  nz                                       ; $5FF3: $C0
 
     call IncrementEntityState                     ; $5FF4: $CD $12 $3B
-    ld   a, [wC177]                               ; $5FF7: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $5FF7: $FA $77 $C1
     and  a                                        ; $5FFA: $A7
     jr   z, jr_004_6007                           ; $5FFB: $28 $0A
 
@@ -3038,7 +3038,7 @@ func_004_61E5::
     and  a                                        ; $61E8: $A7
     ret  nz                                       ; $61E9: $C0
 
-    ld   a, [wC177]                               ; $61EA: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $61EA: $FA $77 $C1
     and  a                                        ; $61ED: $A7
     jr   nz, jr_004_6237                          ; $61EE: $20 $47
 
@@ -3114,7 +3114,7 @@ func_004_6252::
 
     call IncrementEntityState                     ; $6257: $CD $12 $3B
     ld   [hl], $04                                ; $625A: $36 $04
-    ld   a, [wC177]                               ; $625C: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $625C: $FA $77 $C1
     and  a                                        ; $625F: $A7
     jr   nz, jr_004_6267                          ; $6260: $20 $05
 
@@ -5471,7 +5471,7 @@ func_004_7020::
     cp   $F8                                      ; $702D: $FE $F8
     jr   z, jr_004_7038                           ; $702F: $28 $07
 
-    ld   a, [wC177]                               ; $7031: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $7031: $FA $77 $C1
     cp   $01                                      ; $7034: $FE $01
     jr   nc, jr_004_704B                          ; $7036: $30 $13
 
@@ -6962,7 +6962,7 @@ func_004_795D::
     and  a                                        ; $7960: $A7
     ret  nz                                       ; $7961: $C0
 
-    ld   a, [wC177]                               ; $7962: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]                               ; $7962: $FA $77 $C1
     cp   $00                                      ; $7965: $FE $00
     jr   z, jr_004_79AB                           ; $7967: $28 $42
 

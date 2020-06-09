@@ -159,7 +159,7 @@ WorldMapInteractiveHandler::
     ret
 .debugEnd
 
-    ld   a, [$C19F]
+    ld   a, [wDialogState]
     and  a
     jp   nz, label_001_5818
     ldh  a, [hJoypadState]
@@ -243,7 +243,7 @@ jr_001_57A8::
     ld   a, $81
 
 jr_001_57B3::
-    ld   [$C19F], a
+    ld   [wDialogState], a
     ret
 
 ; POI: Debug code to warp to any room on the map by pushing B + Select (on the map screen)

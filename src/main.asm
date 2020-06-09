@@ -300,6 +300,7 @@ include "data/music/music_tracks_data_1b_3.asm"
 section "bank1C",romx[$4000],bank[$1C]
 db BANK_1C_VAR ; Extra byte present in the original ROM
 include "data/dialogs/dialog_pointers.asm"
+include "data/text_box_data.asm"
 include "data/ascii_to_tile.asm"
 include "data/dialogs/dialog_banks.asm"
 include "code/dialog_letters.asm"

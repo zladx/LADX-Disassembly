@@ -4,34 +4,34 @@ Dialog180::
     db "très branché!   "
     db "J'aimerais avoir"
     db "des accessoires "
-    db "<25> la mode!@"
+    db "à la mode!@"
 
 Dialog181::
     db "Ouaf Ouaf!      "
     db "Je suis un chien"
     db "très branché!   "
-    db "Ce <E1> ,          "
+    db "Ce <ribbon> ,          "
     db "c'est d'un chic!"
     db "Il me le faut   "
     db "absolument...   "
     db "Tu l'échanges   "
     db "contre          "
-    db "ma p<24>tée?       "
+    db "ma pâtée?       "
     db "    Oui  Non<ask>"
 
 Dialog182::
     db "Tu as échangé   "
-    db "le <E1> contre     "
-    db "la p<24>tée <E2>!@"
+    db "le <ribbon> contre     "
+    db "la pâtée <dogfood>!@"
 
 Dialog183::
     db "Génial, merci!  "
     db "En échange,     "
-    db "voici ma <E2> ...@"
+    db "voici ma <dogfood> ...@"
 
 Dialog184::
     db "Je n'arrive pas "
-    db "<25> y croire...   "
+    db "à y croire...   "
     db "Tu es nul!@"
 
 Dialog185::
@@ -64,7 +64,7 @@ Dialog189::
     db "Joue mon        "
     db "Mambo pour te   "
     db "téléporter      "
-    db "<25> la mare Bobo. "
+    db "à la mare Bobo. "
     db "Joue aussi dans "
     db "les donjons!@"
 
@@ -150,7 +150,7 @@ Dialog194::
     db "Merci pour      "
     db "ton aide #####. "
     db "Tu étais génial."
-    db "Tout <25> l'heure, "
+    db "Tout à l'heure, "
     db "j'ai fait part  "
     db "d'un voeu       "
     db "au Poisson-Rêve."
@@ -189,14 +189,14 @@ Dialog197::
 
 Dialog198::
     db "Quoi? Tu veux   "
-    db "entrer l<25>?      "
+    db "entrer là?      "
     db "Heu, je préfère "
     db "attendre dehors."
     db "Sois prudent    "
     db "#####!@"
 
 Dialog199::
-    db "Oh l<25> l<25>!       "
+    db "Oh là là!       "
     db "Ce n'est pas    "
     db "bien #####!@"
 
@@ -229,7 +229,7 @@ Dialog19D::
     db "Coquillages@"
 
 Dialog19E::
-    db "<F3> Entrée des    "
+    db "<right> Entrée des    "
     db "  Dunes de Yarna"
     db "@"
 
@@ -246,11 +246,11 @@ Dialog1A1::
     db "les rapides     "
     db "en radeau?      "
     db "Renseigne-toi   "
-    db "<25> l'intérieur.@"
+    db "à l'intérieur.@"
 
 Dialog1A2::
-    db "Est <F3> Prairie   "
-    db "Plus <25> l'Est    "
+    db "Est <right> Prairie   "
+    db "Plus à l'Est    "
     db "Village         "
     db "des Animaux@"
 
@@ -258,12 +258,12 @@ Dialog1A3::
     db "Mt Tamaranch@"
 
 Dialog1A4::
-    db "<F3> Cave Flagello "
-    db "<F1> Plage Coco@"
+    db "<right> Cave Flagello "
+    db "<down> Plage Coco@"
 
 Dialog1A5::
-    db "<F3> Mrs Anémones  "
-    db "<F1> Forêt         "
+    db "<right> Mrs Anémones  "
+    db "<down> Forêt         "
     db "  Enchantée@"
 
 Dialog1A6::
@@ -282,16 +282,16 @@ Dialog1A8::
     db "(sauf Toutou)@"
 
 Dialog1A9::
-    db "<F1> Par ici !@"
+    db "<down> Par ici !@"
 
 Dialog1AA::
-    db "<F0> Par ici !@"
+    db "<up> Par ici !@"
 
 Dialog1AB::
-    db "<F3> Par ici !@"
+    db "<right> Par ici !@"
 
 Dialog1AC::
-    db "<F2> Par ici !@"
+    db "<left> Par ici !@"
 
 Dialog1AD::
     db "RETOUR A LA     "
@@ -299,7 +299,7 @@ Dialog1AD::
 
 Dialog1AE::
     db "TU AS REUSSI!   "
-    db "PAR ICI <F3>       "
+    db "PAR ICI <right>       "
     db "SURPRISE!!@"
 
 Dialog1AF::
@@ -307,22 +307,22 @@ Dialog1AF::
     db "Signé : WART@"
 
 Dialog1B0::
-    db "<F3> Chez Monique  "
-    db "<F1> Mare Bobo@"
+    db "<right> Chez Monique  "
+    db "<down> Mare Bobo@"
 
 Dialog1B1::
-    db "<F3> Village des   "
+    db "<right> Village des   "
     db "  Animaux       "
-    db "<F1> Baie          "
+    db "<down> Baie          "
     db "  de Martha@"
 
 Dialog1B2::
-    db "<F3> Enfin! Vill.  "
+    db "<right> Enfin! Vill.  "
     db "  des Animaux@"
 
 Dialog1B3::
-    db "<F3> Cimetière     "
-    db "<F1> La Prairie@"
+    db "<right> Cimetière     "
+    db "<down> La Prairie@"
 
 Dialog1B4::
     db "Tu es près du   "
@@ -331,8 +331,8 @@ Dialog1B4::
     db "n'est pas loin.@"
 
 Dialog1B5::
-    db "<F3> Mt Tamaranch  "
-    db "<F2> Mrs Anémones@"
+    db "<right> Mt Tamaranch  "
+    db "<left> Mrs Anémones@"
 
 Dialog1B6::
     db "VA VOIR         "
@@ -385,13 +385,13 @@ Dialog1C0::
     db "truc me plaît.  "
     db "J'te donne du   "
     db "Miel pour       "
-    db "c'B<24>ton. Alors? "
+    db "c'Bâton. Alors? "
     db "    Oui  Non<ask>"
 
 Dialog1C1::
     db "Tu as échangé   "
-    db "le <E4> contre     "
-    db "le Miel <E5> .     "
+    db "le <stick> contre     "
+    db "le Miel <honeycomb> .     "
     db "Pour quoi faire,"
     db "tu verras bien!@"
 
@@ -429,15 +429,15 @@ Dialog1C6::
     db "est un artiste. "
     db "Moi...          "
     db "Je suis plus    "
-    db "terre <25> terre.  "
+    db "terre à terre.  "
     db "J'adore manger!@"
 
 Dialog1C7::
     db "Mais qu'est-ce  "
-    db "que tu as l<25>?   "
+    db "que tu as là?   "
     db "Je t'en prie,   "
     db "donne-moi       "
-    db "cette <E2> ...     "
+    db "cette <dogfood> ...     "
     db "Je t'en SUPPLIE!"
     db "Alors, que      "
     db "décides-tu?     "
@@ -465,15 +465,15 @@ Dialog1CA::
 
 Dialog1CB::
     db "Tu lui as donné "
-    db "une <E2>           "
+    db "une <dogfood>           "
     db "en échange      "
-    db "de bananes <E3> .@"
+    db "de bananes <bananas> .@"
 
 Dialog1CC::
     db "Encore merci!@"
 
 Dialog1CD::
-    db "As-tu déj<25>      "
+    db "As-tu déjà      "
     db "essayé de       "
     db "descendre       "
     db "des rapides?    "
@@ -490,18 +490,18 @@ Dialog1CE::
     db "serait parfait!@"
 
 Dialog1CF::
-    db "C'est du <E5>      "
-    db "que tu as l<25>!   "
+    db "C'est du <honeycomb>      "
+    db "que tu as là!   "
     db "J'en ai besoin! "
     db "Tu ne veux pas  "
     db "d'Ananas        "
-    db "<25> la place?     "
+    db "à la place?     "
     db "    Oui  Non<ask>"
 
 Dialog1D0::
     db "Tu as échangé   "
-    db "le <E5> contre     "
-    db "l'Ananas <E6> .    "
+    db "le <honeycomb> contre     "
+    db "l'Ananas <pineapple> .    "
     db "Il est juteux!@"
 
 Dialog1D1::
@@ -509,7 +509,7 @@ Dialog1D1::
     db "Tu regretteras  "
     db "de ne pas       "
     db "avoir goûté     "
-    db "<25> ce délice!@"
+    db "à ce délice!@"
 
 Dialog1D2::
     db "Ho oui! Je      "
@@ -534,7 +534,7 @@ Dialog1D2::
 
 Dialog1D3::
     db "J'aimerais tant "
-    db "ouvrir un 4 <7C><7C><7C><7C>"
+    db "ouvrir un 4 <star><star><star><star>"
     db "au Village      "
     db "des Mouettes!@"
 
@@ -561,21 +561,21 @@ Dialog1D6::
 
 Dialog1D7::
     db "Sur la plage... "
-    db "<22>Marine<22> <DE>@"
+    db "\"Marine\" <marin>@"
 
 Dialog1D8::
     db "D'où vient cette"
     db "noix de coco?   "
     db "Tarkin me dit   "
     db "qu'il n'y a rien"
-    db "par-del<25> la mer."
+    db "par-delà la mer."
     db "Moi, je suis    "
     db "persuadée       "
     db "du contraire!   "
     db "Tu sais #####,  "
     db "quand je t'ai vu"
     db "mon coeur s'est "
-    db "mis <25> battre    "
+    db "mis à battre    "
     db "la chamade...   "
     db "Je suis sûre que"
     db "tu es le        "
@@ -636,12 +636,12 @@ Dialog1DE::
 Dialog1DF::
     db "Ha! C'est tout  "
     db "ce que tu as?!  "
-    db "Prépare-toi <25>..."
+    db "Prépare-toi à..."
     db "... ça! ...@"
 
 Dialog1E0::
     db "ZZZ ZZZ ZZZ ZZZ "
-    db " ... <DE> ... <DE> ..."
+    db " ... <marin> ... <marin> ..."
     db "@"
 
 Dialog1E1::
@@ -661,7 +661,7 @@ Dialog1E2::
 Dialog1E3::
     db "Tiens donc?     "
     db "Il m'appelle?   "
-    db "Oh l<25> l<25>, c'est "
+    db "Oh là là, c'est "
     db "toujours pareil."
     db "@"
 
@@ -679,8 +679,8 @@ Dialog1E5::
 
 Dialog1E6::
     db "Moûhhh Moûhhh!  "
-    db "<DE> <DE> ! <DE> <DE> !     "
-    db "... <DD> ??@"
+    db "<marin> <marin> ! <marin> <marin> !     "
+    db "... <link> ??@"
 
 Dialog1E7::
     db "Je suis embêté  "
@@ -721,8 +721,8 @@ Dialog1EB::
     db "Il est ENORME!@"
 
 Dialog1EC::
-    db "<E9>  devient un   "
-    db "collier <EA>!      "
+    db "<fishhook>  devient un   "
+    db "collier <bra>!      "
     db "Génial!@"
 
 Dialog1ED::
@@ -757,11 +757,11 @@ Dialog1F0::
     db "queue!@"
 
 Dialog1F1::
-    db "J'ai déj<25>       "
-    db "cherché par l<25>@"
+    db "J'ai déjà       "
+    db "cherché par là@"
 
 Dialog1F2::
-    db "Ahh!  Le voil<25>  "
+    db "Ahh!  Le voilà  "
     db "C'est mon       "
     db "collier!  Donne!"
     db "Donne-le moi!   "
@@ -788,8 +788,8 @@ Dialog1F5::
 
 Dialog1F6::
     db "Appelons-la:    "
-    db "<22>J'ai eu très   "
-    db "peur.<22> Souriez!@"
+    db "\"J'ai eu très   "
+    db "peur.\" Souriez!@"
 
 Dialog1F7::
     db "Après une séance"
@@ -804,33 +804,33 @@ Dialog1F8::
     db "Salut! C'est moi"
     db "le photographe! "
     db "Quoi? Zora est  "
-    db "l<25>? Il faut que "
+    db "là? Il faut que "
     db "je prenne une   "
     db "photo! Je vais  "
-    db "l'appeler <22>J'ai "
-    db "trouvé Zora.<22>@"
+    db "l'appeler \"J'ai "
+    db "trouvé Zora.\"@"
 
 Dialog1F9::
     db "Villa de Richard"
     db "@"
 
 Dialog1FA::
-    db "Ch<24>teau Canulet "
-    db "10 min. <F3> <F0>@"
+    db "Château Canulet "
+    db "10 min. <right> <up>@"
 
 Dialog1FB::
-    db "Ch<24>teau Canulet "
-    db "5 min. <F3>@"
+    db "Château Canulet "
+    db "5 min. <right>@"
 
 Dialog1FC::
-    db "Ch<24>teau Canulet "
-    db "50 pas <F0>@"
+    db "Château Canulet "
+    db "50 pas <up>@"
 
 Dialog1FD::
     db "DRING DRING!    "
     db "DRING! Hello!   "
     db "Madonna         "
-    db "<25> l'appaouïelle."
+    db "à l'appaouïelle."
     db "No darling...   "
     db "CLIC!           "
     db "Tu as dû faire  "
@@ -923,7 +923,7 @@ Dialog205::
     db "le message      "
     db "du hibou. Ainsi,"
     db "tu n'auras pas  "
-    db "<25> tout noter!@"
+    db "à tout noter!@"
 
 Dialog206::
     db "TOUT SUR L'EPEE "
@@ -941,11 +941,11 @@ Dialog207::
     db "enfoncé         "
     db "le bouton       "
     db "correspondant   "
-    db "<25> l'épée        "
+    db "à l'épée        "
     db "pour augmenter  "
     db "ta force. Quand "
     db "c'est suffisant,"
-    db "rel<24>che-le.     "
+    db "relâche-le.     "
     db "Crois-tu que tu "
     db "peux le faire?@"
 
@@ -971,7 +971,7 @@ Dialog209::
     db "vers un trou    "
     db "qui n'est pas   "
     db "encore apparu   "
-    db "<25> l'écran!@"
+    db "à l'écran!@"
 
 Dialog20A::
     db "   LES BOMBES   "
@@ -996,7 +996,7 @@ Dialog20C::
     db "    ATLAS DE    "
     db "    COCOLINT    "
     db "Choisis un lieu "
-    db "gr<24>ce au curseur"
+    db "grâce au curseur"
     db "et appuie sur A "
     db "pour afficher   "
     db "son nom. Veux-tu"
@@ -1021,7 +1021,7 @@ Dialog20E::
 Dialog20F::
 Dialog210::
     db "Cimetière!      "
-    db "Amène-moi <25>     "
+    db "Amène-moi à     "
     db "ma tombe...@"
 
 Dialog211::
@@ -1032,7 +1032,7 @@ Dialog211::
 
 Dialog212::
     db "Non!!           "
-    db "Pas l<25>!@"
+    db "Pas là!@"
 
 Dialog213::
     db "Oui, entre!     "
@@ -1047,7 +1047,7 @@ Dialog214::
 Dialog215::
     db "Assez...        "
     db "Je veux aller   "
-    db "<25> ma tombe!@"
+    db "à ma tombe!@"
 
 Dialog216::
     db "Merci!          "
@@ -1060,7 +1060,7 @@ Dialog217::
     db "Dans l'Oeuf,    "
     db "on tourne tourne"
     db "tourne...       "
-    db "<F2> <F2> <F0> <F3> <F3> <F0> <F2> <F0> "
+    db "<left> <left> <up> <right> <right> <up> <left> <up> "
     db "Hum! C'est très "
     db "énigmatique.@"
 
@@ -1068,7 +1068,7 @@ Dialog218::
     db "Dans l'Oeuf,    "
     db "on tourne tourne"
     db "tourne...       "
-    db "<F3> <F0> <F0> <F3> <F0> <F0> <F3> <F0> "
+    db "<right> <up> <up> <right> <up> <up> <right> <up> "
     db "Hum! C'est très "
     db "énigmatique.@"
 
@@ -1076,7 +1076,7 @@ Dialog219::
     db "Dans l'Oeuf,    "
     db "on tourne tourne"
     db "tourne...       "
-    db "<F2> <F0> <F3> <F0> <F2> <F0> <F3> <F0> "
+    db "<left> <up> <right> <up> <left> <up> <right> <up> "
     db "Hum! C'est très "
     db "énigmatique.@"
 
@@ -1084,7 +1084,7 @@ Dialog21A::
     db "Dans l'Oeuf,    "
     db "on tourne tourne"
     db "tourne...       "
-    db "<F3> <F3> <F3> <F3> <F0> <F0> <F0> <F0> "
+    db "<right> <right> <right> <right> <up> <up> <up> <up> "
     db "Hum! C'est très "
     db "énigmatique.@"
 
@@ -1096,7 +1096,7 @@ Dialog21B::
 Dialog21C::
     db "Ne crois-tu pas "
     db "que tu as subi  "
-    db "assez de dég<24>ts?"
+    db "assez de dégâts?"
     db "Fais un peu     "
     db "plus attention!@"
 
@@ -1132,7 +1132,7 @@ Dialog220::
     db "Ils sont entrés!"
     db "Oui, c'est ça!  "
     db "Il sont entrés  "
-    db "l<25> et ils ont   "
+    db "là et ils ont   "
     db "pris le Minou,  "
     db "non non...      "
     db "Ils ont pris    "
@@ -1195,7 +1195,7 @@ Dialog228::
     db "Tu n'as pas     "
     db "trouvé les cinq "
     db "feuilles d'Or?  "
-    db "Fais attention <25>"
+    db "Fais attention à"
     db "ne pas perdre   "
     db "celles en ta    "
     db "possession!     "
@@ -1220,12 +1220,12 @@ Dialog22A::
     db "feuilles d'Or?  "
     db "Va faire peur au"
     db "corbeau près du "
-    db "ch<24>teau!        "
+    db "château!        "
     db "CLIC!@"
 
 Dialog22B::
-    db "<22>Les voyages de "
-    db "#####.<22> Veux-tu "
+    db "\"Les voyages de "
+    db "#####.\" Veux-tu "
     db "regarder ton    "
     db "album?          "
     db "    Oui  Non<ask>"
@@ -1233,7 +1233,7 @@ Dialog22B::
 Dialog22C::
     db "Quelle photo    "
     db "veux-tu voir?   "
-    db "Utilise <EE>       "
+    db "Utilise <dpad>       "
     db "pour choisir et "
     db "appuie sur A!@"
 
@@ -1245,10 +1245,10 @@ Dialog22D::
 
 Dialog22E::
     db "Hé, #####. Mon  "
-    db "truc <25> moi c'est"
+    db "truc à moi c'est"
     db "de prendre des  "
     db "photos. Ce vieux"
-    db "ch<24>teau est     "
+    db "château est     "
     db "splendide, non?@"
 
 Dialog22F::
@@ -1306,7 +1306,7 @@ Dialog239::
     db "... tu sais...@"
 
 Dialog23A::
-    db "Hol<25>, Tarkin... "
+    db "Holà, Tarkin... "
     db "... ... ... ... "
     db "Non non, rien!  "
     db "Je dois partir.@"
@@ -1345,7 +1345,7 @@ Dialog23F::
 Dialog240::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "D'après Mamie   "
     db "Youpi, quelque  "
     db "chose est caché "
@@ -1359,7 +1359,7 @@ Dialog240::
 Dialog241::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "De mon temps,   "
     db "il y avait      "
     db "une Tour dans   "
@@ -1372,7 +1372,7 @@ Dialog241::
 Dialog242::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Dirige-toi vers "
     db "l'Oeuf Sacré,   "
     db "niché en haut   "
@@ -1384,14 +1384,14 @@ Dialog242::
 Dialog243::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Tu t'es perdu   "
     db "dans l'Oeuf?    "
     db "Désolé, mais    "
     db "je ne peux pas  "
     db "t'aider!        "
     db "Va donc te      "
-    db "renseigner <25>    "
+    db "renseigner à    "
     db "la Bibliothèque."
     db "Désolé hein!    "
     db "Salut! CLIC!@"
@@ -1399,9 +1399,9 @@ Dialog243::
 Dialog244::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Tu devrais      "
-    db "ramener Toutou <25>"
+    db "ramener Toutou à"
     db "Mme Miaou Miaou."
     db "Elle sera folle "
     db "de joie.        "
@@ -1410,7 +1410,7 @@ Dialog244::
 Dialog245::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Tu aimerais     "
     db "chanter?        "
     db "Va voir Wart    "
@@ -1425,7 +1425,7 @@ Dialog245::
 Dialog246::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Tu te défends   "
     db "très bien!      "
     db "As-tu visité    "
@@ -1441,7 +1441,7 @@ Dialog246::
 Dialog247::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Tes ennemis     "
     db "sont coriaces?  "
     db "Collecte        "

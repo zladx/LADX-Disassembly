@@ -20,7 +20,7 @@ Dialog104::
     db "@"
 
 Dialog105::
-    db "Tu as le <AE><AF>angle"
+    db "Tu as le <tri1><tri2>angle"
     db "de Corail!@"
 
 Dialog106::
@@ -41,9 +41,9 @@ Dialog108::
 
 Dialog109::
     db "Appelons ceci   "
-    db "<22>##### Découvre "
+    db "\"##### Découvre "
     db "le secret de    "
-    db "pépé!<22>@"
+    db "pépé!\"@"
 
 Dialog10A::
     db "#####, fuis     "
@@ -67,14 +67,14 @@ Dialog10C::
 Dialog10D::
     db "Va au fond de la"
     db "salle et fais   "
-    db "face <25> l'écran. "
+    db "face à l'écran. "
     db "@"
 
 Dialog10E::
     db "Hé! Je n'ai pas "
     db "encore pris ta  "
     db "photo! Retourne "
-    db "faire face <25>    "
+    db "faire face à    "
     db "l'écran!@"
 
 Dialog10F::
@@ -97,7 +97,7 @@ Dialog111::
     db "coffre. Viens   "
     db "le chercher     "
     db "si tu oses!     "
-    db "Signé : <DC>@"
+    db "Signé : <skull>@"
 
 Dialog112::
     db "Quoi??          "
@@ -138,7 +138,7 @@ Dialog118::
     db "sauvegarder,    "
     db "appuyez sur tous"
     db "les boutons     "
-    db "<25> la fois! Heu, "
+    db "à la fois! Heu, "
     db "je n'en sais pas"
     db "plus, je ne suis"
     db "qu'un gosse!@"
@@ -147,7 +147,7 @@ Dialog119::
     db "Ben... Après une"
     db "sauvegarde,     "
     db "vous pouvez     "
-    db "redémarrer <25> la "
+    db "redémarrer à la "
     db "dernière porte  "
     db "par laquelle    "
     db "vous êtes passé!"
@@ -244,7 +244,7 @@ Dialog122::
 
 Dialog123::
     db "Quoi? Marine    "
-    db "n'est plus l<25>?  "
+    db "n'est plus là?  "
     db "Que lui est-il  "
     db "arrivé?@"
 
@@ -283,8 +283,8 @@ Dialog128::
 
 Dialog129::
     db "Tu échanges ton "
-    db "<E0> contre ce     "
-    db "Ruban <E1> .       "
+    db "<yoshi> contre ce     "
+    db "Ruban <ribbon> .       "
     db "Peut-être le    "
     db "troqueras-tu    "
     db "par la suite...@"
@@ -305,11 +305,11 @@ Dialog12A::
 Dialog12B::
     db "Tu offres       "
     db "ce Yoshi        "
-    db "<25> mon bébé?     "
+    db "à mon bébé?     "
     db "    Oui  Non<ask>"
 
 Dialog12C::
-    db "Ces quatre l<25> se"
+    db "Ces quatre là se"
     db "ressemblent tant"
     db "que moi-même,   "
     db "je m'y perds...@"
@@ -329,7 +329,7 @@ Dialog12E::
     db "Qui est ce      "
     db "fantôme? Je suis"
     db "sûr qu'il est   "
-    db "heureux gr<24>ce <25> "
+    db "heureux grâce à "
     db "toi. Es-tu prêt "
     db "pour la photo?@"
 
@@ -406,13 +406,13 @@ Dialog135::
     db "te remercier    "
     db "mais je n'ai    "
     db "que ce balai    "
-    db "<25> t'offrir...   "
+    db "à t'offrir...   "
     db "En veux-tu?     "
     db "    Oui  Non<ask>"
 
 Dialog136::
     db "Mr Wright t'a   "
-    db "offert un <E8>.    "
+    db "offert un <broom>.    "
     db "Mais...         "
     db "cette photo...  "
     db "ce n'est pas...@"
@@ -420,7 +420,7 @@ Dialog136::
 Dialog137::
     db "Vraiment,       "
     db "j'insiste...    "
-    db "Prends ce <E8>!    "
+    db "Prends ce <broom>!    "
     db "    Oui  Non<ask>"
 
 Dialog138::
@@ -430,7 +430,7 @@ Dialog138::
 
 Dialog139::
     db "Bonjour! Je     "
-    db "réponds <25>       "
+    db "réponds à       "
     db "Christine!@"
 
 Dialog13A::
@@ -438,7 +438,7 @@ Dialog13A::
     db "incroyable,     "
     db "mais avant,     "
     db "je vivais dans  "
-    db "un ch<24>teau.     "
+    db "un château.     "
     db "Je me suis enfui"
     db "quand mes gardes"
     db "ont été         "
@@ -448,7 +448,7 @@ Dialog13A::
     db "de La Prairie?  "
     db "Ecoute, j'ai    "
     db "un marché       "
-    db "<25> te proposer : "
+    db "à te proposer : "
     db "quand je me     "
     db "suis enfui, j'ai"
     db "oublié mes      "
@@ -485,7 +485,7 @@ Dialog13D::
     db "t'attend!@"
 
 Dialog13E::
-    db "Gr<24>ce <25> toi,j'ai"
+    db "Grâce à toi,j'ai"
     db "mes Feuilles!   "
     db "Je te suis      "
     db "reconnaissant.@"
@@ -512,7 +512,7 @@ Dialog140::
 Dialog141::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Je sais tout de "
     db "cette île!      "
     db "Si tu te perds, "
@@ -523,7 +523,7 @@ Dialog141::
 Dialog142::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Habitants de la "
     db "Forêt Enchantée,"
     db "les Moblins     "
@@ -535,7 +535,7 @@ Dialog142::
 Dialog143::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Les fleurs du   "
     db "Marais des      "
     db "Anémones sont   "
@@ -549,12 +549,12 @@ Dialog143::
 Dialog144::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "As-tu rencontré "
     db "tous les gens   "
     db "de cette île?   "
     db "Au Sud-Est du   "
-    db "village, <25> côté "
+    db "village, à côté "
     db "du Champ        "
     db "aux Pièges,     "
     db "vit un homme    "
@@ -566,7 +566,7 @@ Dialog144::
 Dialog145::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Si tu veux des  "
     db "bananes, parle  "
     db "de nouveau aux  "
@@ -576,13 +576,13 @@ Dialog145::
 Dialog146::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Il y a une      "
     db "bibliothèque    "
     db "dans le village."
     db "Peut-être       "
     db "apportera-t'elle"
-    db "une réponse <25>   "
+    db "une réponse à   "
     db "tes questions?  "
     db "Salut! CLIC!@"
 
@@ -594,7 +594,7 @@ Dialog147::
     db "feuilles d'Or?  "
     db "Va parler au    "
     db "corbeau du      "
-    db "ch<24>teau. Il peut"
+    db "château. Il peut"
     db "sûrement aider  "
     db "un p'tit gars   "
     db "comme toi!      "
@@ -603,7 +603,7 @@ Dialog147::
 Dialog148::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "As-tu acheté    "
     db "une Pelle?      "
     db "Creuse le sol,  "
@@ -615,8 +615,8 @@ Dialog148::
 Dialog149::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
-    db "Va vite <25> la    "
+    db "à l'appareil... "
+    db "Va vite à la    "
     db "Cave aux Clés,  "
     db "située dans     "
     db "La Prairie.     "
@@ -625,7 +625,7 @@ Dialog149::
 Dialog14A::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Apparemment,    "
     db "dans les        "
     db "Dunes de Yarna, "
@@ -642,18 +642,18 @@ Dialog14A::
 Dialog14B::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Tu es hanté     "
     db "par un fantôme? "
     db "Je te conseille "
-    db "de l'amener l<25>  "
+    db "de l'amener là  "
     db "où il veut.     "
     db "Salut! CLIC!@"
 
 Dialog14C::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Dans la Baie,   "
     db "un Poisson-Chat "
     db "ouvre sa gueule."
@@ -663,7 +663,7 @@ Dialog14C::
 Dialog14D::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Es-tu allé au   "
     db "Temple du Masque"
     db "situé au Nord   "
@@ -674,14 +674,14 @@ Dialog14D::
 Dialog14E::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "Connais-tu      "
     db "le Coq Volant   "
     db "du Village      "
     db "des Mouettes?   "
     db "Autrefois,      "
     db "je m'agrippais  "
-    db "<25> ses pattes    "
+    db "à ses pattes    "
     db "et je volais!   "
     db "Hélas...        "
     db "Il est mort et  "
@@ -693,7 +693,7 @@ Dialog14E::
 Dialog14F::
     db "DRING DRING!!   "
     db "Pépé le Ramollo "
-    db "<25> l'appareil... "
+    db "à l'appareil... "
     db "La tête de la   "
     db "tortue te gêne? "
     db "Donne-lui       "
@@ -776,8 +776,8 @@ Dialog15D::
 
 Dialog15E::
     db "Tu as échangé   "
-    db "le <E8> contre     "
-    db "le <E9>!           "
+    db "le <broom> contre     "
+    db "le <fishhook>!           "
     db "Que feras-tu    "
     db "de celui-ci?@"
 
@@ -799,7 +799,7 @@ Dialog161::
     db "Kkkkkk!@"
 
 Dialog162::
-    db "<E3>, <E3>! Kiki!     "
+    db "<bananas>, <bananas>! Kiki!     "
     db "Les copains,    "
     db "venez! On va    "
     db "le remercier!@"
@@ -812,12 +812,12 @@ Dialog163::
 
 Dialog164::
     db "Tu prends       "
-    db "le b<24>ton        "
+    db "le bâton        "
     db "que le singe    "
     db "a laissé.@"
 
 Dialog165::
-    db "<E3>, <E3> ...        "
+    db "<bananas>, <bananas> ...        "
     db "Miam Miam!      "
     db "Pour Kiki?      "
     db "    Oui  Non<ask>"
@@ -826,7 +826,7 @@ Dialog166::
     db "Tu ne connais   "
     db "pas l'étiquette "
     db "quand tu        "
-    db "rends visite <25>  "
+    db "rends visite à  "
     db "une dame??      "
     db "Si tu m'avais   "
     db "apporté         "
@@ -839,11 +839,11 @@ Dialog166::
 
 Dialog167::
     db "Oh, tu m'as     "
-    db "apporté un <E7>!   "
+    db "apporté un <flower>!   "
     db "Comme           "
     db "c'est gentil!   "
     db "J'ai une faveur "
-    db "<25> te demander.  "
+    db "à te demander.  "
     db "Je peux?        "
     db "    Oui  Non<ask>"
 
@@ -866,9 +866,9 @@ Dialog169::
 
 Dialog16A::
     db "Tu as échangé   "
-    db "l' <E7> contre une "
+    db "l' <flower> contre une "
     db "lettre de chèvre"
-    db "<ED> ... Super! @"
+    db "<letter> ... Super! @"
 
 Dialog16B::
     db "Je ne peux pas  "
@@ -902,7 +902,7 @@ Dialog16E::
     db "m'a laissé tout "
     db "seul... Peux-tu "
     db "lui dire de     "
-    db "revenir <25> la    "
+    db "revenir à la    "
     db "maison quand    "
     db "elle aura fini  "
     db "de faire le     "
@@ -933,22 +933,22 @@ Dialog171::
     db "@"
 
 Dialog172::
-    db "Cet <E6> a l'air   "
+    db "Cet <pineapple> a l'air   "
     db "délicieux!      "
     db "En remerciement,"
-    db "je mange l'<E6> .@"
+    db "je mange l'<pineapple> .@"
 
 Dialog173::
     db "Au fait!! Voici "
     db "un petit cadeau."
     db "Je te donne     "
-    db "cet <E7> ... C'est "
+    db "cet <flower> ... C'est "
     db "un Hibiscus.@"
 
 Dialog174::
     db "Tu as échangé   "
-    db "l'<E6> contre      "
-    db "l'<E7> !!@"
+    db "l'<pineapple> contre      "
+    db "l'<flower> !!@"
 
 Dialog175::
     db "Quel délice!    "
@@ -1022,7 +1022,7 @@ Dialog17E::
     db "Essaie donc ceci"
     db "sur tes ennemis "
     db "et... Surprise! "
-    db "Si tu es <25> court"
+    db "Si tu es à court"
     db "va chercher des "
     db "champignons dans"
     db "la forêt. Je te "
@@ -1040,7 +1040,7 @@ Dialog17F::
 
 Dialog28B::
     db "Pour vaincre le "
-    db "monstre noir <25>  "
+    db "monstre noir à  "
     db "la carapace,    "
     db "fais-lui manger "
     db "un plat pimenté."
@@ -1082,7 +1082,7 @@ Dialog291::
 
 Dialog292::
     db "Détruis les     "
-    db "monstres <25> la   "
+    db "monstres à la   "
     db "clé par le haut."
     db "@"
 
@@ -1109,7 +1109,7 @@ Dialog296::
 Dialog297::
     db "Génial! Appelons"
     db "cette photo     "
-    db "<22>Game Over.<22>@"
+    db "\"Game Over.\"@"
 
 Dialog298::
     db "Quel est ton nom"
@@ -1126,61 +1126,61 @@ Dialog299::
     db "cet album!@"
 
 Dialog29A::
-    db "11 photos <25>     "
+    db "11 photos à     "
     db "prendre! Quel   "
     db "type de photo   "
     db "t'intéresse?@"
 
 Dialog29B::
-    db "10 photos <25>     "
+    db "10 photos à     "
     db "prendre! Quel   "
     db "type de photo   "
     db "t'intéresse?@"
 
 Dialog29C::
-    db "9 photos <25>      "
+    db "9 photos à      "
     db "prendre! Quel   "
     db "type de photo   "
     db "t'intéresse?@"
 
 Dialog29D::
-    db "8 photos <25>      "
+    db "8 photos à      "
     db "prendre! Quel   "
     db "type de photo   "
     db "t'intéresse?@"
 
 Dialog29E::
-    db "7 photos <25>    <09> "
+    db "7 photos à    <09> "
     db "prendre! Quel   "
     db "type de photo   "
     db "t'intéresse?@"
 
 Dialog29F::
-    db "6 photos <25>      "
+    db "6 photos à      "
     db "prendre! Quel   "
     db "type de photo   "
     db "t'intéresse?@"
 
 Dialog2A0::
-    db "5 photos <25>      "
+    db "5 photos à      "
     db "prendre! Quel   "
     db "type de photo   "
     db "t'intéresse?@"
 
 Dialog2A1::
-    db "4 photos <25>      "
+    db "4 photos à      "
     db "prendre! Quel   "
     db "type de photo   "
     db "t'intéresse?@"
 
 Dialog2A2::
-    db "3 photos <25>      "
+    db "3 photos à      "
     db "prendre! Quel   "
     db "type de photo   "
     db "t'intéresse?@"
 
 Dialog2A3::
-    db "2 photos <25>      "
+    db "2 photos à      "
     db "prendre! Quel   "
     db "type de photo   "
     db "t'intéresse?@"

@@ -2,7 +2,7 @@ Dialog000::
     db "Hé mon gars,    "
     db "attends un peu! "
     db "J'ai quêqu'     "
-    db "chose <25> te dire!"
+    db "chose à te dire!"
     db "@"
 
 Dialog001::
@@ -22,7 +22,7 @@ Dialog001::
 Dialog002::
     db "Suis la route   "
     db "du Sud, vers    "
-    db "la plage l<25> où  "
+    db "la plage là où  "
     db "je t'ai trouvé. "
     db "Depuis que tu   "
     db "as échoué ici,  "
@@ -47,7 +47,7 @@ Dialog003::
 Dialog004::
     db "Mais c'est un   "
     db "Ocarina         "
-    db "que tu as l<25>!   "
+    db "que tu as là!   "
     db "Veux-tu en      "
     db "jouer pendant   "
     db "que je chante?@"
@@ -61,7 +61,7 @@ Dialog005::
 Dialog006::
     db "#####, Tarkin   "
     db "fait la sieste  "
-    db "<25> la maison.    "
+    db "à la maison.    "
     db "Je préfère      "
     db "chanter. Oui!   "
     db "Pourquoi pas    "
@@ -102,7 +102,7 @@ Dialog00A::
     db "trop rigolo!!@"
 
 Dialog00B::
-    db "Oh l<25> l<25>!! J'me "
+    db "Oh là là!! J'me "
     db "sens tout drôle!"
     db "Faut m'reposer  "
     db "avant d'rentrer."
@@ -141,7 +141,7 @@ Dialog010::
     db "Quêqu' chose    "
     db "que t'as pas    "
     db "compris?        "
-    db "Téléphone <25>     "
+    db "Téléphone à     "
     db "Pépé le Ramollo."
     db "ZZZ...ZZZ...@"
 
@@ -175,7 +175,7 @@ Dialog013::
 Dialog014::
     db "Tu fredonneras  "
     db "cette chanson   "
-    db "de temps <25> autre"
+    db "de temps à autre"
     db "pour ne pas     "
     db "l'oublier!@"
 
@@ -216,7 +216,7 @@ Dialog019::
 
 Dialog01A::
     db "Merci bien!     "
-    db "Voil<25>, je viens "
+    db "Voilà, je viens "
     db "de l'appliquer  "
     db "sur toi!        "
     db "Ce remède agira "
@@ -252,7 +252,7 @@ Dialog01E::
 
 Dialog01F::
     db "Marine          "
-    db "se joint <25> toi! "
+    db "se joint à toi! "
     db "C'est la chance "
     db "da ta vie!?@"
 
@@ -330,7 +330,7 @@ Dialog02A::
 
 Dialog02B::
 Dialog02C::
-    db "Arc <26> Flèches : "
+    db "Arc & Flèches : "
     db "   980 rubis!   "
     db "    Oui  Non<ask>"
 
@@ -409,7 +409,7 @@ Dialog03B::
     db "    Oui  Non<ask>"
 
 Dialog03C::
-    db "A <26> B déplacent "
+    db "A & B déplacent "
     db "la grue. Après, "
     db "tu dois calculer"
     db "ton timing...   "
@@ -463,7 +463,7 @@ Dialog044::
     db "un Yoshi!       "
     db "On le voit      "
     db "dans tous les   "
-    db "jeux, celui-l<25>!@"
+    db "jeux, celui-là!@"
 
 Dialog045::
     db "Une partie de   "
@@ -478,14 +478,14 @@ Dialog046::
     db "plus motivé!@"
 
 Dialog047::
-    db "Avec <F2> et <F3>     "
-    db "de <EE>, évalue    "
+    db "Avec <left> et <right>     "
+    db "de <dpad>, évalue    "
     db "la distance     "
     db "de ton lancer.  "
     db "Dès que le      "
     db "poisson est     "
     db "ferré, presse   "
-    db "vite A<EF>B pour   "
+    db "vite A/B pour   "
     db "le remonter!@"
 
 Dialog048::
@@ -565,7 +565,7 @@ Dialog052::
 Dialog053::
     db "Quoi? Tu as osé?"
     db "Tu as cassé ma  "
-    db "jarre. Alors l<25>!"
+    db "jarre. Alors là!"
     db "Je suis furax!!@"
 
 Dialog054::
@@ -578,7 +578,7 @@ Dialog054::
     db "Ben, c'est gravé"
     db "sur le Bouclier!"
     db "Ben, d'ailleurs "
-    db "il est <25> toi!   "
+    db "il est à toi!   "
     db "J'te l'donne!@"
 
 Dialog055::
@@ -630,7 +630,7 @@ Dialog05D::
     db "@"
 
 Dialog05E::
-    db "   OEUF SACR<CE>@"
+    db "   OEUF SACRÉ@"
 
 Dialog05F::
 Dialog060::
@@ -719,7 +719,7 @@ Dialog077::
     db "@"
 
 Dialog078::
-    db "Ch<24>teau Canulet@"
+    db "Château Canulet@"
 
 Dialog079::
     db "Plateau Tartare@"

@@ -20,7 +20,7 @@ Dialog0E7::
     db "IL S'EVEILLERA  "
     db "ET ELLE         "
     db "DISPARAITRA.    "
-    db "NAUFRAG<CE>, TU    "
+    db "NAUFRAGÉ, TU    "
     db "DOIS CONNAITRE  "
     db "LA VERITE...    "
     db "... ... ... ... "
@@ -81,7 +81,7 @@ Dialog0F0::
 
 Dialog0F1::
     db "Il y en a un    "
-    db "<25> l'extérieur.  "
+    db "à l'extérieur.  "
     db "Amuse-toi bien!@"
 
 Dialog0F2::
@@ -199,7 +199,7 @@ Dialog24A::
     db "Leur entrée     "
     db "est au Sud,     "
     db "mais tu ne peux "
-    db "pas y aller <AD>   "
+    db "pas y aller ;   "
     db "une bestiole    "
     db "est affalée de  "
     db "tout son long!@"
@@ -224,7 +224,7 @@ Dialog24C::
     db "serait mieux!   "
     db "D'après une     "
     db "source sûre,    "
-    db "<25> l'intérieur du"
+    db "à l'intérieur du"
     db "Gîte des Rêves, "
     db "il y a un...    "
     db "Crois-tu que    "
@@ -277,7 +277,7 @@ Dialog252::
 
 Dialog253::
     db "Abandonne si tu "
-    db "es un l<24>che.    "
+    db "es un lâche.    "
     db "Seul le courage "
     db "peut déplacer   "
     db "les tombes.@"
@@ -310,7 +310,7 @@ Dialog259::
     db "J'adore les     "
     db "photos! Pourquoi"
     db "ne pas prendre  "
-    db "une photo <25>     "
+    db "une photo à     "
     db "l'écart de tous?"
     db "Appelons-la....."
     db "@"
@@ -394,7 +394,7 @@ Dialog264::
     db "@"
 
 Dialog265::
-    db "N'en parle <25>    "
+    db "N'en parle à    "
     db "personne.@"
 
 Dialog266::
@@ -407,8 +407,8 @@ Dialog267::
     db "couleur sous 5  "
     db "pierres tombales"
     db "                "
-    db "   3<F0>  4<F3>  5<F0>   "
-    db "   2<F2>  1<F1>       "
+    db "   3<up>  4<right>  5<up>   "
+    db "   2<left>  1<down>       "
     db "Teste ton       "
     db "courage. Ouvre  "
     db "un nouveau      "
@@ -478,8 +478,8 @@ Dialog26F::
 Dialog270::
     db "Fantastique!    "
     db "Appelons ceci:  "
-    db "<22>##### joue avec"
-    db "Toutou!<22>        "
+    db "\"##### joue avec"
+    db "Toutou!\"        "
     db "Maintenant      "
     db "approche-toi de "
     db "Toutou!@"
@@ -555,12 +555,12 @@ Dialog27E::
 Dialog27F::
     db "Gros bisous     "
     db "de Kyoto!       "
-    db "       VERO <CF>@"
+    db "       VERO <heart>@"
 
 Dialog280::
     db "Si tu vois      "
     db "les pointes,    "
-    db "pense <25> utiliser"
+    db "pense à utiliser"
     db "ton Bouclier.@"
 
 Dialog281::
@@ -579,7 +579,7 @@ Dialog283::
     db "ton guide...@"
 
 Dialog284::
-    db "Plonge l<25> où    "
+    db "Plonge là où    "
     db "se croisent     "
     db "les lumières    "
     db "des flambeaux..."
@@ -601,7 +601,7 @@ Dialog287::
     db "Comble tous     "
     db "les trous avec  "
     db "le roc qui roule"
-    db "et cette <EE> est  "
+    db "et cette <dpad> est  "
     db "la solution!@"
 
 Dialog288::

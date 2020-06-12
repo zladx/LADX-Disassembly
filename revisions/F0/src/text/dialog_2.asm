@@ -56,7 +56,7 @@ Dialog08C::
     db "une Clé!@"
 
 Dialog08D::
-    db "Oh l<25>... C'est  "
+    db "Oh là... C'est  "
     db "bien trop lourd!"
     db "Tu n'y arriveras"
     db "jamais rien que "
@@ -96,7 +96,7 @@ Dialog092::
     db "si tu es avalé  "
     db "par les sables  "
     db "mouvants, place "
-    db "une Bombe l<25>    "
+    db "une Bombe là    "
     db "où tu tombes.   "
     db "De l'autre côté,"
     db "une surprise    "
@@ -111,7 +111,7 @@ Dialog093::
     db "chaîne s'étire!@"
 
 Dialog094::
-    db "Tu as le B<24>ton  "
+    db "Tu as le Bâton  "
     db "de Feu!         "
     db "Brûle! Brûle!   "
     db "Brûle tout      "
@@ -262,7 +262,7 @@ Dialog0AA::
 Dialog0AB::
     db "Tu as trouvé    "
     db "20 rubis.       "
-    db "<7D> joie!@"
+    db "Ó joie!@"
 
 Dialog0AC::
     db "Tu as trouvé    "
@@ -389,7 +389,7 @@ Dialog0BE::
 Dialog0BF::
 Dialog0C0::
     db "Hou! Bienvenue  "
-    db "<25> la Forêt      "
+    db "à la Forêt      "
     db "Enchantée, mon  "
     db "brave garçon!   "
     db "L'île Cocolint  "
@@ -418,7 +418,7 @@ Dialog0C0::
 Dialog0C1::
     db "Hou!            "
     db "Avec cette clé, "
-    db "va <25> la Cave    "
+    db "va à la Cave    "
     db "Flagello.       "
     db "Prends          "
     db "l'Instrument qui"
@@ -464,11 +464,11 @@ Dialog0C4::
     db "Hou!            "
     db "Le Poisson-Rêve "
     db "sommeille dans  "
-    db "l'Oeuf, l<25> haut."
+    db "l'Oeuf, là haut."
     db "Il rêve, rêve!  "
     db "Il se réveillera"
     db "si tu te tiens  "
-    db "face <25> I'Oeuf et"
+    db "face à I'Oeuf et"
     db "que tu joues des"
     db "8 Instruments.  "
     db "Ainsi seulement,"
@@ -482,7 +482,7 @@ Dialog0C5::
     db "as-tu collectés?"
     db "Quand tu joueras"
     db "des Instruments "
-    db "face <25> l'Oeuf,  "
+    db "face à l'Oeuf,  "
     db "le Poisson-Rêve "
     db "se réveillera   "
     db "et tu pourras   "
@@ -502,7 +502,7 @@ Dialog0C6::
     db "un poisson      "
     db "remontant       "
     db "une cascade. Va "
-    db "<25> cette cascade,"
+    db "à cette cascade,"
     db "fais disparaître"
     db "l'eau et        "
     db "saute du sommet."
@@ -514,7 +514,7 @@ Dialog0C7::
     db "se trouvent     "
     db "deux temples.   "
     db "Va d'abord au   "
-    db "Sud, l<25> où des  "
+    db "Sud, là où des  "
     db "Ruines antiques "
     db "parlent         "
     db "du Poisson-Rêve."
@@ -561,7 +561,7 @@ Dialog0C9::
     db "conquérir l'île "
     db "et anéantir     "
     db "leurs ennemis.  "
-    db "Va <25> la tour    "
+    db "Va à la tour    "
     db "de la montagne  "
     db "en volant comme "
     db "un oiseau! Hou!@"
@@ -599,8 +599,8 @@ Dialog0CC::
     db "Hou! Cette fille"
     db "a chanté en face"
     db "de l'Oeuf sa    "
-    db "<22>Ballade du     "
-    db "Poisson-Rêve<22>.  "
+    db "\"Ballade du     "
+    db "Poisson-Rêve\".  "
     db "Mais c'est la   "
     db "Chanson d'Eveil!"
     db "Désirait-elle   "
@@ -652,7 +652,7 @@ Dialog0CF::
     db "J'ai toujours   "
     db "cru en toi!     "
     db "Merci #####.    "
-    db "Ma t<24>che est    "
+    db "Ma tâche est    "
     db "accomplie et je "
     db "dois réintégrer "
     db "le Poisson-Rêve."
@@ -727,7 +727,7 @@ Dialog0D8::
 Dialog0D9::
     db "Hou hou!        "
     db "Cette épée      "
-    db "est donc <25> toi! "
+    db "est donc à toi! "
     db "... Je comprends"
     db "pourquoi        "
     db "les monstres    "
@@ -754,17 +754,17 @@ Dialog0DA::
     db "tu me gênes!@"
 
 Dialog0DB::
-    db "Cro<24> cro<24>!      "
+    db "Croâ croâ!      "
     db "Je suis Wart,   "
     db "le chanteur.    "
     db "Tu es nul       "
     db "en musique!     "
     db "Reviens avec    "
     db "du matos, vieux!"
-    db "Cro<24> cro<24>!@"
+    db "Croâ croâ!@"
 
 Dialog0DC::
-    db "Cro<24> cro<24>!      "
+    db "Croâ croâ!      "
     db "Je suis Wart,   "
     db "le chanteur.    "
     db "Inutile de      "
@@ -782,7 +782,7 @@ Dialog0DC::
 Dialog0DD::
     db "Merci...        "
     db "Je suis ému.    "
-    db "Merci... Cro<24>!@"
+    db "Merci... Croâ!@"
 
 Dialog0DE::
     db "De toute façon, "
@@ -844,7 +844,7 @@ Dialog0E5::
     db "Allez, salut!@"
 
 Dialog2A4::
-    db "1 photos <25>      "
+    db "1 photos à      "
     db "prendre! Quel   "
     db "type de photo   "
     db "t'intéresse?@"
@@ -852,7 +852,7 @@ Dialog2A4::
 Dialog2A5::
     db "Oh non! La      "
     db "pellicule est   "
-    db "finie! Pense <25>  "
+    db "finie! Pense à  "
     db "regarder ton    "
     db "album!@"
 
@@ -863,17 +863,17 @@ Dialog2A6::
     db "occasion de     "
     db "faire une photo!"
     db "Appelons-la:    "
-    db "<22>Belle tête!<22>@"
+    db "\"Belle tête!\"@"
 
 Dialog2A7::
-    db "Voil<25> qui       "
+    db "Voilà qui       "
     db "représente ton  "
-    db "aventure <25> la   "
+    db "aventure à la   "
     db "perfection!@"
 
 Dialog2A8::
     db "Appelons ceci:  "
-    db "<22>C'était juste.<22>"
+    db "\"C'était juste.\""
     db "@"
 
 Dialog2A9::
@@ -888,7 +888,7 @@ Dialog2AB::
     db "Aaaaaah!@"
 
 Dialog2AC::
-    db "Je retourne <25> la"
+    db "Je retourne à la"
     db "boutique!@"
 
 Dialog2AD::

@@ -7214,8 +7214,10 @@ ChannelDefinition_1b_6f46::
 ChannelDefinition_1b_6f4b::
     set_waveform waveform_1b_6ed1, $21
     end_def
+
 ; UNREFERENCED DATA
-    db   $9d, $d1, $6e, $40, $00
+    set_waveform waveform_1b_6ed1, $40
+    end_def
 
 ChannelDefinition_1b_6f55::
     set_waveform waveform_1b_6ed1, $40

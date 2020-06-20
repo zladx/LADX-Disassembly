@@ -4852,6 +4852,25 @@ Data_007_6003::
     db   $4E, $00, $4E, $20
 
 EntityA8Handler::
+IF __PATCH_0__
+    ldh  a, [hMapId]
+    cp   MAP_EAGLES_TOWER
+    jr   nz, .default
+
+    push bc
+    sla  c
+    sla  c
+    ld   hl, wEntitiesHitboxPositionTable
+    add  hl, bc
+    inc  hl
+    ld   a, $08
+    ld   [hl+], a
+    inc  hl
+    ld   [hl], a
+    pop  bc
+ENDC
+
+.default
     ldh  a, [hActiveEntityStatus]                 ; $6007: $F0 $EA
     cp   $07                                      ; $6009: $FE $07
     jr   nz, jr_007_602A                          ; $600B: $20 $1D
@@ -5026,6 +5045,12 @@ jr_007_6104:
     ld   a, [$C3CF]                               ; $6104: $FA $CF $C3
     and  a                                        ; $6107: $A7
     jr   nz, jr_007_6133                          ; $6108: $20 $29
+
+IF __PATCH_0__
+    ldh  a, [$FFBA]
+    and  a
+    jr   nz, jr_007_6133
+ENDC
 
     inc  a                                        ; $610A: $3C
     ld   [$C3CF], a                               ; $610B: $EA $CF $C3
@@ -5643,15 +5668,53 @@ jr_007_6489:
     ret                                           ; $6492: $C9
 
 Data_007_6493::
-    db   $98, $00, $53, $7F, $98, $20, $53, $7F, $98, $40, $53, $7F, $98, $60, $53, $7F
-    db   $98, $80, $53, $7F, $98, $A0, $53, $7F, $98, $C0, $53, $7F, $98, $E0, $53, $7F
-    db   $99, $00, $53, $7F, $99, $20, $53, $7F, $99, $40, $53, $7F, $99, $60, $53, $7F
-    db   $99, $80, $53, $7F, $99, $A0, $53, $7F, $99, $C0, $53, $7F, $99, $E0, $53, $7F
-    db   $9A, $00, $53, $7F, $9A, $20, $53, $7F, $98, $00, $53, $01, $98, $20, $53, $01
-    db   $98, $40, $53, $01, $98, $60, $53, $01, $98, $80, $53, $01, $98, $A0, $53, $01
-    db   $98, $C0, $53, $01, $98, $E0, $53, $01, $99, $00, $53, $01, $99, $20, $53, $01
-    db   $99, $40, $53, $01, $99, $60, $53, $01, $99, $80, $53, $01, $99, $A0, $53, $01
-    db   $99, $C0, $53, $01, $99, $E0, $53, $01, $9A, $00, $53, $01, $9A, $20, $53, $01
+    ; bg fill commands
+    db   $98, $00, $53, $7F
+    db   $98, $20, $53, $7F
+    db   $98, $40, $53, $7F
+    db   $98, $60, $53, $7F
+    db   $98, $80, $53, $7F
+    db   $98, $A0, $53, $7F
+    db   $98, $C0, $53, $7F
+    db   $98, $E0, $53, $7F
+    db   $99, $00, $53, $7F
+    db   $99, $20, $53, $7F
+    db   $99, $40, $53, $7F
+    db   $99, $60, $53, $7F
+    db   $99, $80, $53, $7F
+    db   $99, $A0, $53, $7F
+    db   $99, $C0, $53, $7F
+    db   $99, $E0, $53, $7F
+    db   $9A, $00, $53, $7F
+    db   $9A, $20, $53, $7F
+
+IF __PATCH_0__
+TILE = $00
+ELSE
+TILE = $01
+ENDC
+
+Data_007_64F6:
+    ; bg fill commands
+    db   $98, $00, $53, TILE
+    db   $98, $20, $53, TILE
+    db   $98, $40, $53, TILE
+    db   $98, $60, $53, TILE
+    db   $98, $80, $53, TILE
+    db   $98, $A0, $53, TILE
+    db   $98, $C0, $53, TILE
+    db   $98, $E0, $53, TILE
+    db   $99, $00, $53, TILE
+    db   $99, $20, $53, TILE
+    db   $99, $40, $53, TILE
+    db   $99, $60, $53, TILE
+    db   $99, $80, $53, TILE
+    db   $99, $A0, $53, TILE
+    db   $99, $C0, $53, TILE
+    db   $99, $E0, $53, TILE
+    db   $9A, $00, $53, TILE
+    db   $9A, $20, $53, TILE
+
 
 label_007_6523:
     xor  a                                        ; $6523: $AF
@@ -5665,7 +5728,11 @@ label_007_6523:
     add  hl, bc                                   ; $6536: $09
     ld   a, [hl]                                  ; $6537: $7E
     cp   $09                                      ; $6538: $FE $09
+if __PATCH_0__
+    jp   z, jr_007_659D                           ; $653A: $28 $61
+ELSE
     jr   z, jr_007_659D                           ; $653A: $28 $61
+ENDC
 
     ld   a, [wRequests]                           ; $653C: $FA $00 $D6
     ld   e, a                                     ; $653F: $5F
@@ -5712,7 +5779,11 @@ jr_007_655E:
     sla  c                                        ; $657C: $CB $21
     sla  c                                        ; $657E: $CB $21
     sla  c                                        ; $6580: $CB $21
+IF __PATCH_0__
+    ld   hl, Data_007_64F6
+ELSE
     ld   hl, Data_007_6493                        ; $6582: $21 $93 $64
+ENDC
     add  hl, bc                                   ; $6585: $09
     ld   c, l                                     ; $6586: $4D
     ld   b, h                                     ; $6587: $44
@@ -5734,6 +5805,27 @@ jr_007_6596:
     ld   hl, wEntitiesUnknowTableY                ; $6597: $21 $D0 $C3
     add  hl, bc                                   ; $659A: $09
     inc  [hl]                                     ; $659B: $34
+IF __PATCH_0__
+    ld   a, [hl]
+    cp   $09
+    ret  nz
+
+    ldh  a, [hIsGBC]
+    and  a
+    ret  z
+
+    ld   hl, $dc64
+    ld   a, $3f
+    ld   [hl+], a
+    ld   a, $14
+    ld   [hl], a
+    ld   a, $0a
+    ld   [wPaletteUnknownC], a
+    ld   a, $01
+    ld   [wPaletteUnknownD], a
+    ld   a, $82
+    ld   [wPaletteDataFlags], a
+ENDC
     ret                                           ; $659C: $C9
 
 jr_007_659D:
@@ -9662,4 +9754,3 @@ jr_007_7F76:
     ld   hl, hNoiseSfx                            ; $7F79: $21 $F4 $FF
     ld   [hl], $1A                                ; $7F7C: $36 $1A
     ret                                           ; $7F7E: $C9
-

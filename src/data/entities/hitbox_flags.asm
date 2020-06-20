@@ -75,7 +75,11 @@ HitboxFlagsForEntity::
 ._47 db $84
 ._48 db $84
 ._49 db $84
+IF __PATCH_0__
+._4A db $98
+ELSE
 ._4A db $80
+ENDC
 ._4B db $98
 ._4C db $00
 ._4D db $98

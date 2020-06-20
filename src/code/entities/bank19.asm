@@ -4496,6 +4496,12 @@ label_019_5F84:
     or   [hl]                                     ; $5FA7: $B6
     ret  nz                                       ; $5FA8: $C0
 
+IF __PATCH_0__
+    ld   a, [wGameplayType]
+    cp   GAMEPLAY_WORLD
+    ret  nz
+ENDC
+
     ld   hl, wEntitiesUnknownTableD               ; $5FA9: $21 $D0 $C2
     add  hl, bc                                   ; $5FAC: $09
     inc  [hl]                                     ; $5FAD: $34
@@ -7458,6 +7464,14 @@ Data_019_78FE::
     db   $6E, $98, $51, $8D, $6D, $6F, $6D, $6F, $6D, $6F, $6D, $6F, $6D, $6F, $6D, $6F
     db   $6D, $6F, $00
 
+IF __PATCH_0__
+Data_019_78FE_B:
+    db   $98, $50, $CD, $00
+    db   $98, $51, $CD, $00
+    db   $00
+.end
+ENDC
+
 func_019_7921::
     push bc                                       ; $7921: $C5
     ld   c, $23                                   ; $7922: $0E $23
@@ -7472,6 +7486,21 @@ jr_019_792F:
     ld   [hl+], a                                 ; $7931: $22
     dec  c                                        ; $7932: $0D
     jr   nz, jr_019_792F                          ; $7933: $20 $FA
+
+IF __PATCH_0__
+    ld   c, Data_019_78FE_B.end - Data_019_78FE_B
+    ld   a, $08
+    ld   [$dc90], a
+    ld   hl, $dc91
+    ld   de, Data_019_78FE_B
+
+jr_019_7951:
+    ld   a, [de]
+    inc  de
+    ld   [hl+], a
+    dec  c
+    jr   nz, jr_019_7951
+ENDC
 
     pop  bc                                       ; $7935: $C1
     ld   a, $89                                   ; $7936: $3E $89

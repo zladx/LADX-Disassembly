@@ -252,12 +252,17 @@ IndoorsA2EEntities::
   entities_end
 
 IndoorsA2FEntities::
+IF __PATCH_0__
+  entity $0, $2, ENTITY_OWL_STATUE
+ENDC
   entity $2, $4, ENTITY_KEESE
   entity $5, $4, ENTITY_KEESE
   entity $6, $2, ENTITY_SPARK_CLOCKWISE
   entity $2, $4, ENTITY_DROPPABLE_HEART
   entity $6, $5, ENTITY_DROPPABLE_HEART
+IF !__PATCH_0__
   entity $0, $2, ENTITY_OWL_STATUE
+ENDC
   entities_end
 
 IndoorsA30Entities::
@@ -1454,4 +1459,3 @@ IndoorsAFEEntities::
 IndoorsAFFEntities::
   entity $2, $6, ENTITY_ANGLER_FISH
   entities_end
-

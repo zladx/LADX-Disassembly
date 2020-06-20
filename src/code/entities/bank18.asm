@@ -275,7 +275,9 @@ jr_018_4230:
     ld   [$C3B2], a                               ; $424D: $EA $B2 $C3
     ret                                           ; $4250: $C9
 
+IF !__PATCH_0__
     ret                                           ; $4251: $C9
+ENDC
 
 ; When you receive the Frog Song 'item'
 MamuAndFrogsGrantSongHandler::
@@ -672,6 +674,10 @@ ManboAndFishesState0Handler::
     jp_open_dialog $189                           ; $4542
 
 jr_018_4547:
+IF __PATCH_0__
+    ld   a, $02
+    ld   [wC167], a
+ENDC
     ldh  a, [hLinkPositionX]                      ; $4547: $F0 $98
     cp   $30                                      ; $4549: $FE $30
     jr   c, func_018_455C                         ; $454B: $38 $0F
@@ -2657,6 +2663,12 @@ jr_018_53ED:
     jr   nz, jr_018_5466                          ; $5415: $20 $4F
 
 jr_018_5417:
+IF __PATCH_0__
+    ld   a, [$c3cf]
+    and  a
+    jr   nz, jr_018_5466
+ENDC
+
     ldh  a, [hPressedButtonsMask]                 ; $5417: $F0 $CB
     and  e                                        ; $5419: $A3
     jr   z, jr_018_5466                           ; $541A: $28 $4A
@@ -2716,10 +2728,20 @@ jr_018_5466:
     add  hl, bc                                   ; $546F: $09
     ld   [hl], $FD                                ; $5470: $36 $FD
     call func_018_7E62                            ; $5472: $CD $62 $7E
+
+IF !__PATCH_0__
     ld   a, $00                                   ; $5475: $3E $00
     ldh  [$FFBA], a                               ; $5477: $E0 $BA
+ENDC
 
 jr_018_5479:
+IF __PATCH_0__
+    ldh  a, [hActiveEntityVisualPosY]
+    cp   $1a
+    ret  c
+    xor  a
+    ldh  [$FFBA], a
+ENDC
     ret                                           ; $5479: $C9
 
 Data_018_547A::
@@ -4183,13 +4205,25 @@ OwlStatueEntityHandler::
     cp   $16                                      ; $5E7C: $FE $16
     jp   z, OwlStatueSouthFaceShrine              ; $5E7E: $CA $1B $5E
 
+IF __PATCH_0__
+    ld   hl, hActiveEntityVisualPosY
+    inc  [hl]
+ELSE
     ldh  a, [hActiveEntityVisualPosY]             ; $5E81: $F0 $EC
     add  $01                                      ; $5E83: $C6 $01
     ldh  [hActiveEntityVisualPosY], a             ; $5E85: $E0 $EC
+ENDC
     ld   de, Data_018_5DF7                        ; $5E87: $11 $F7 $5D
     call RenderActiveEntitySpritesPair            ; $5E8A: $CD $C0 $3B
+
+IF __PATCH_0__
+    call func_018_7DE8
+    call func_018_7D36
+ELSE
     call func_018_7D36                            ; $5E8D: $CD $36 $7D
     call func_018_7DE8                            ; $5E90: $CD $E8 $7D
+ENDC
+
     call func_018_7D95                            ; $5E93: $CD $95 $7D
     ret  nc                                       ; $5E96: $D0
 
@@ -4504,6 +4538,9 @@ jr_018_60A3:
 
     xor  a                                        ; $60B8: $AF
     ld   [wC167], a                               ; $60B9: $EA $67 $C1
+IF __PATCH_0__
+    ld   [$db74], a
+ENDC
     ld   hl, wOverworldRoomStatus + $08                                ; $60BC: $21 $08 $D8
     set  4, [hl]                                  ; $60BF: $CB $E6
     ld   a, [hl]                                  ; $60C1: $7E

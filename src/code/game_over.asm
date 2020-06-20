@@ -199,9 +199,9 @@ jr_001_4335::
     ret                                           ; $4335: $C9
 
 Data_001_4336::
-    ld   d, b                                     ; $4336: $50
-    ld   h, b                                     ; $4337: $60
-    ld   [hl], b                                  ; $4338: $70
+    db GAMEOVER_OPTION_SAVE_CONTINUE_Y + $10
+    db GAMEOVER_OPTION_SAVE_QUIT_Y + $10
+    db GAMEOVER_OPTION_CONTINUE_Y + $10
 
 func_001_4339::
     ld   hl, $C13F                                ; $4339: $21 $3F $C1
@@ -243,7 +243,7 @@ jr_001_435C::
     ld   a, [hl]                                  ; $4363: $7E
     ld   hl, $C018                                ; $4364: $21 $18 $C0
     ld   [hl+], a                                 ; $4367: $22
-    ld   a, $24                                   ; $4368: $3E $24
+    ld   a, GAMEOVER_OPTION_X + $8                ; $4368: $3E $24
     ld   [hl+], a                                 ; $436A: $22
     ld   a, $BE                                   ; $436B: $3E $BE
     ld   [hl+], a                                 ; $436D: $22

@@ -481,6 +481,11 @@ JumpTable_037_42FE::
     jp   func_037_53FE                            ; $432E: $C3 $FE $53
 
 func_037_4331::
+IF __PATCH_0__
+    ld   a, $1c
+    ld   [wEntitiesPosXTable], a
+ENDC
+
     ld   a, [wGameplayType]                       ; $4331: $FA $95 $DB
     sub  $0E                                      ; $4334: $D6 $0E
     JP_TABLE                                      ; $4336: $C7
@@ -1027,11 +1032,20 @@ Data_037_46AB::
 
 func_037_46AF::
     ld   hl, $C20A                                ; $46AF: $21 $0A $C2
+IF __PATCH_0__
+    ld   a, [hl]
+    and  a
+    jr   z, .jr_037_46be
+    dec  [hl]
+    jr   .else_46D7_37
+ELSE
     dec  [hl]                                     ; $46B2: $35
     ld   a, [hl]                                  ; $46B3: $7E
     and  a                                        ; $46B4: $A7
     jr   nz, .else_46D7_37                        ; $46B5: $20 $20
+ENDC
 
+.jr_037_46be
     push hl                                       ; $46B7: $E5
     call GetRandomByte                            ; $46B8: $CD $0D $28
     and  %00000011                                ; $46BB: $E6 $03
@@ -2394,6 +2408,7 @@ func_037_4F37::
     ret                                           ; $4F5A: $C9
 
 JumpTable_037_4F5B::
+IF !__PATCH_4__
     ldh  a, [hJoypadState]                        ; $4F5B: $F0 $CC
     and  J_START                                  ; $4F5D: $E6 $80
     jr   z, .else_4F6B_37                         ; $4F5F: $28 $0A
@@ -2402,6 +2417,7 @@ JumpTable_037_4F5B::
     ld   [wC16C], a                               ; $4F62: $EA $6C $C1
     ld   [wTransitionSequenceCounter], a          ; $4F65: $EA $6B $C1
     call func_037_53FE                            ; $4F68: $CD $FE $53
+ENDC
 
 .else_4F6B_37:
     call func_037_4F70                            ; $4F6B: $CD $70 $4F

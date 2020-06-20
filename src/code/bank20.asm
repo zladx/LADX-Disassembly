@@ -1075,6 +1075,17 @@ func_020_4B81::
 
     xor  a                                        ; $4B8E: $AF
     ld   [wBombArrowCooldown], a                  ; $4B8F: $EA $C0 $C1
+
+IF __PATCH_0__
+    ld   a, [wAButtonSlot]
+    cp   INVENTORY_BOW
+    ret  nz
+
+    ld   a, [wBButtonSlot]
+    cp   INVENTORY_BOW
+    ret  nz
+ENDC
+
     ld   a, [$C1C2]                               ; $4B92: $FA $C2 $C1
     ld   c, a                                     ; $4B95: $4F
     ld   b, d                                     ; $4B96: $42
@@ -3859,12 +3870,18 @@ Data_020_6346::
     db   $0E, $0E, $26, $26, $3E, $3E, $56, $56, $6E, $6E, $86, $86
 
 func_020_6352::
+IF __PATCH_0__
+    ldh  a, [hIsGBC]
+    and  a
+    jr   nz, jr_020_6369
+ENDC
     ld   a, [wBGPalette]                          ; $6352: $FA $97 $DB
 
 jr_020_6355:
     cp   $E4                                      ; $6355: $FE $E4
     ret  c                                        ; $6357: $D8
 
+jr_020_6369:
     ld   d, $02                                   ; $6358: $16 $02
     jr   jr_020_635E                              ; $635A: $18 $02
 
@@ -3987,10 +4004,13 @@ jr_020_63F5:
     ld   a, [wFreeMovementMode]                   ; $640B: $FA $7B $C1
     xor  $01                                      ; $640E: $EE $01
     ld   [wFreeMovementMode], a                   ; $6410: $EA $7B $C1
+
+IF !__PATCH_3__
     ld   a, $01                                   ; $6413: $3E $01
     ld   [wPhotos1], a                            ; $6415: $EA $0C $DC
     xor  a                                        ; $6418: $AF
     ld   [wPhotos2], a                            ; $6419: $EA $0D $DC
+ENDC
 
 jr_020_641C:
     jr   jr_020_6445                              ; $641C: $18 $27
@@ -5068,7 +5088,11 @@ jr_020_6D1E:
     ldh  [hScratchE], a                           ; $6D2A: $E0 $E5
     ld   a, $04                                   ; $6D2C: $3E $04
     ldh  [hFreeWarpDataAddress], a                ; $6D2E: $E0 $E6
+IF __PATCH_3__
+    ld   hl, $DC50
+ELSE
     ld   hl, $DC30                                ; $6D30: $21 $30 $DC
+ENDC
     ld   d, $20                                   ; $6D33: $16 $20
     call func_020_6A68                            ; $6D35: $CD $68 $6A
 
@@ -5921,7 +5945,11 @@ jr_020_7C5B:
     ret                                           ; $7C67: $C9
 
 Data_020_7C68::
+IF __PATCH_1__
+    db   $00, $19, $4F, $06, $03, $10, $4E, $06, $05, $08, $4D, $06
+ELSE
     db   $00, $19, $5B, $06, $03, $10, $5A, $06, $05, $08, $59, $06
+ENDC
 
 Data_020_7C74::
     db   $08, $20, $EB, $05, $00, $20, $EA, $05   ; $7C74
@@ -6124,9 +6152,227 @@ LoadTileset23::
     ld   h, BANK(@)                               ; $7DF7: $26 $20
     call Copy100BytesFromBankAtA                  ; $7DF9: $CD $13 $0A
 
+IF !__PATCH_1__
     ld   c, $12                                   ; $7DFC: $0E $12
     ld   b, HIGH(PhotoElementsTiles + $A00)       ; $7DFE: $06 $6A
     ld   a, BANK(PhotoElementsTiles)              ; $7E00: $3E $38
     ld   h, BANK(@)                               ; $7E02: $26 $20
     call Copy100BytesFromBankAtA                  ; $7E04: $CD $13 $0A
+ENDC
+
     ret                                           ; $7E07: $C9
+
+IF __PATCH_1__
+func_020_7E0E:
+    ld a, $06                                     ; $7e0e: $3e $06
+    ldh [hScratchD], a                            ; $7e10: $e0 $e4
+    ld a, $0c                                     ; $7e12: $3e $0c
+    ldh [hScratchE], a                            ; $7e14: $e0 $e5
+    ld a, $18                                     ; $7e16: $3e $18
+    ldh [hScratchF], a                            ; $7e18: $e0 $e6
+    ld hl, $dc10                                  ; $7e1a: $21 $10 $dc
+    ld a, $40                                     ; $7e1d: $3e $40
+    ldh [hScratch3], a                            ; $7e1f: $e0 $da
+    call Call_020_7e25                            ; $7e21: $cd $25 $7e
+    ret                                           ; $7e24: $c9
+
+Call_020_7e25:
+Jump_020_7e25:
+    push hl                                       ; $7e25: $e5
+    ld a, $02                                     ; $7e26: $3e $02
+    ldh [rSVBK], a                                ; $7e28: $e0 $70
+    ld a, [hl+]                                   ; $7e2a: $2a
+    ld e, a                                       ; $7e2b: $5f
+    ld a, [hl]                                    ; $7e2c: $7e
+    ld d, a                                       ; $7e2d: $57
+    dec hl                                        ; $7e2e: $2b
+    xor a                                         ; $7e2f: $af
+    ldh [rSVBK], a                                ; $7e30: $e0 $70
+    ldh a, [hScratchD]                            ; $7e32: $f0 $e4
+    ld c, a                                       ; $7e34: $4f
+    ld a, e                                       ; $7e35: $7b
+    and $1f                                       ; $7e36: $e6 $1f
+    ld b, a                                       ; $7e38: $47
+    ld a, [hl]                                    ; $7e39: $7e
+    and $1f                                       ; $7e3a: $e6 $1f
+    cp b                                          ; $7e3c: $b8
+    jr c, jr_020_7e47                             ; $7e3d: $38 $08
+
+    jr z, jr_020_7e47                             ; $7e3f: $28 $06
+
+    sub c                                         ; $7e41: $91
+    jr c, jr_020_7e47                             ; $7e42: $38 $03
+
+    cp b                                          ; $7e44: $b8
+    jr nc, jr_020_7e48                            ; $7e45: $30 $01
+
+jr_020_7e47:
+    ld a, b                                       ; $7e47: $78
+
+jr_020_7e48:
+    ldh [hScratch0], a                            ; $7e48: $e0 $d7
+    ld a, e                                       ; $7e4a: $7b
+    and $e0                                       ; $7e4b: $e6 $e0
+    swap a                                        ; $7e4d: $cb $37
+    ld b, a                                       ; $7e4f: $47
+    ld a, d                                       ; $7e50: $7a
+    and $03                                       ; $7e51: $e6 $03
+    swap a                                        ; $7e53: $cb $37
+    or b                                          ; $7e55: $b0
+    ld b, a                                       ; $7e56: $47
+    ld a, [hl+]                                   ; $7e57: $2a
+    and $e0                                       ; $7e58: $e6 $e0
+    swap a                                        ; $7e5a: $cb $37
+    ld c, a                                       ; $7e5c: $4f
+    ld a, [hl]                                    ; $7e5d: $7e
+    and $03                                       ; $7e5e: $e6 $03
+    swap a                                        ; $7e60: $cb $37
+    or c                                          ; $7e62: $b1
+    push af                                       ; $7e63: $f5
+    ldh a, [hScratchE]                            ; $7e64: $f0 $e5
+    ld c, a                                       ; $7e66: $4f
+    pop af                                        ; $7e67: $f1
+    cp b                                          ; $7e68: $b8
+    jr c, jr_020_7e73                             ; $7e69: $38 $08
+
+    jr z, jr_020_7e73                             ; $7e6b: $28 $06
+
+    sub c                                         ; $7e6d: $91
+    jr c, jr_020_7e73                             ; $7e6e: $38 $03
+
+    cp b                                          ; $7e70: $b8
+    jr nc, jr_020_7e74                            ; $7e71: $30 $01
+
+jr_020_7e73:
+    ld a, b                                       ; $7e73: $78
+
+jr_020_7e74:
+    ldh [hScratch1], a                            ; $7e74: $e0 $d8
+    ldh a, [hScratchF]                            ; $7e76: $f0 $e6
+    ld c, a                                       ; $7e78: $4f
+    ld a, d                                       ; $7e79: $7a
+    and $7c                                       ; $7e7a: $e6 $7c
+    ld b, a                                       ; $7e7c: $47
+    ld a, [hl]                                    ; $7e7d: $7e
+    and $7c                                       ; $7e7e: $e6 $7c
+    cp b                                          ; $7e80: $b8
+    jr c, jr_020_7e8b                             ; $7e81: $38 $08
+
+    jr z, jr_020_7e8b                             ; $7e83: $28 $06
+
+    sub c                                         ; $7e85: $91
+    jr c, jr_020_7e8b                             ; $7e86: $38 $03
+
+    cp b                                          ; $7e88: $b8
+    jr nc, jr_020_7e8c                            ; $7e89: $30 $01
+
+jr_020_7e8b:
+    ld a, b                                       ; $7e8b: $78
+
+jr_020_7e8c:
+    ldh [hScratch2], a                            ; $7e8c: $e0 $d9
+    pop hl                                        ; $7e8e: $e1
+    ldh a, [hScratch0]                            ; $7e8f: $f0 $d7
+    ld b, a                                       ; $7e91: $47
+    ldh a, [hScratch1]                            ; $7e92: $f0 $d8
+    swap a                                        ; $7e94: $cb $37
+    ld c, a                                       ; $7e96: $4f
+    and $e0                                       ; $7e97: $e6 $e0
+    or b                                          ; $7e99: $b0
+    ld [hl+], a                                   ; $7e9a: $22
+    ldh a, [hScratch2]                            ; $7e9b: $f0 $d9
+    ld b, a                                       ; $7e9d: $47
+    ld a, c                                       ; $7e9e: $79
+    and $03                                       ; $7e9f: $e6 $03
+    or b                                          ; $7ea1: $b0
+    ld [hl+], a                                   ; $7ea2: $22
+    ldh a, [hScratch3]                            ; $7ea3: $f0 $da
+    dec a                                         ; $7ea5: $3d
+    ldh [hScratch3], a                            ; $7ea6: $e0 $da
+    and a                                         ; $7ea8: $a7
+    jp nz, Jump_020_7e25                          ; $7ea9: $c2 $25 $7e
+
+    xor a                                         ; $7eac: $af
+    ld [wPaletteUnknownE], a                      ; $7ead: $ea $d5 $dd
+    ret                                           ; $7eb0: $c9
+
+func_020_7EB1::
+    ld a, $06                                     ; $7eb1: $3e $06
+    ldh [hScratchD], a                            ; $7eb3: $e0 $e4
+    ld a, $0c                                     ; $7eb5: $3e $0c
+    ldh [hScratchE], a                            ; $7eb7: $e0 $e5
+    ld a, $18                                     ; $7eb9: $3e $18
+    ldh [hScratchF], a                            ; $7ebb: $e0 $e6
+    ld hl, $dc10                                  ; $7ebd: $21 $10 $dc
+    ld d, $40                                     ; $7ec0: $16 $40
+    ldh [hScratch3], a                            ; $7ec2: $e0 $da
+    call Call_020_7ec8                            ; $7ec4: $cd $c8 $7e
+    ret                                           ; $7ec7: $c9
+
+
+Call_020_7ec8:
+jr_020_7ec8:
+    push hl                                       ; $7ec8: $e5
+    ldh a, [hScratchD]                            ; $7ec9: $f0 $e4
+    ld c, a                                       ; $7ecb: $4f
+    ld a, [hl]                                    ; $7ecc: $7e
+    and $1f                                       ; $7ecd: $e6 $1f
+    add c                                         ; $7ecf: $81
+    cp $20                                        ; $7ed0: $fe $20
+    jr c, jr_020_7ed6                             ; $7ed2: $38 $02
+
+    ld a, $1f                                     ; $7ed4: $3e $1f
+
+jr_020_7ed6:
+    ldh [hScratch0], a                            ; $7ed6: $e0 $d7
+    ldh a, [hScratchE]                            ; $7ed8: $f0 $e5
+    ld c, a                                       ; $7eda: $4f
+    ld a, [hl+]                                   ; $7edb: $2a
+    and $e0                                       ; $7edc: $e6 $e0
+    swap a                                        ; $7ede: $cb $37
+    ld b, a                                       ; $7ee0: $47
+    ld a, [hl]                                    ; $7ee1: $7e
+    and $03                                       ; $7ee2: $e6 $03
+    swap a                                        ; $7ee4: $cb $37
+    or b                                          ; $7ee6: $b0
+    and $3e                                       ; $7ee7: $e6 $3e
+    add c                                         ; $7ee9: $81
+    cp $40                                        ; $7eea: $fe $40
+    jr c, jr_020_7ef0                             ; $7eec: $38 $02
+
+    ld a, $3e                                     ; $7eee: $3e $3e
+
+jr_020_7ef0:
+    ldh [hScratch1], a                            ; $7ef0: $e0 $d8
+    ldh a, [hScratchF]                            ; $7ef2: $f0 $e6
+    ld c, a                                       ; $7ef4: $4f
+    ld a, [hl]                                    ; $7ef5: $7e
+    and $7c                                       ; $7ef6: $e6 $7c
+    add c                                         ; $7ef8: $81
+    cp $80                                        ; $7ef9: $fe $80
+    jr c, jr_020_7eff                             ; $7efb: $38 $02
+
+    ld a, $7c                                     ; $7efd: $3e $7c
+
+jr_020_7eff:
+    ldh [hScratch2], a                            ; $7eff: $e0 $d9
+    pop hl                                        ; $7f01: $e1
+    ldh a, [hScratch0]                            ; $7f02: $f0 $d7
+    ld b, a                                       ; $7f04: $47
+    ldh a, [hScratch1]                            ; $7f05: $f0 $d8
+    swap a                                        ; $7f07: $cb $37
+    ld c, a                                       ; $7f09: $4f
+    and $e0                                       ; $7f0a: $e6 $e0
+    or b                                          ; $7f0c: $b0
+    ld [hl+], a                                   ; $7f0d: $22
+    ldh a, [hScratch2]                            ; $7f0e: $f0 $d9
+    ld b, a                                       ; $7f10: $47
+    ld a, c                                       ; $7f11: $79
+    and $03                                       ; $7f12: $e6 $03
+    or b                                          ; $7f14: $b0
+    ld [hl+], a                                   ; $7f15: $22
+    dec d                                         ; $7f16: $15
+    jr nz, jr_020_7ec8                            ; $7f17: $20 $af
+
+    ret                                           ; $7f19: $c9
+ENDC

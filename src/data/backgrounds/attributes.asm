@@ -880,4 +880,3 @@ BGMapAttributes_1F:
     db   $13, $1E, $1F, $1E, $1F, $1E, $1F, $1E  ; $73CB
     db   $1F, $1E, $1F, $1E, $1F, $1E, $1F, $1E  ; $73D3
     db   $1F, $1E, $1F, $1E, $1F, $00            ; $73DB
-

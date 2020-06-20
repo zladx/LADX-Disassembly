@@ -95,16 +95,23 @@ InitSaveFiles::
     dec  e
     jr   nz, .loop2
 
-    ld   a, $60
+    ld   a, DEBUG_SAVE_BOMB_COUNT
     ld   [$A452], a ; 60 bombs
+IF DEBUG_SAVE_SWITCH_ARROWS
+    ld   [$A47C], a ; 60 max bombs
+    ld   [$A47D], a ; 60 max arrows
+ELSE
     ld   [$A47D], a ; 60 max arrows
     ld   [$A47C], a ; 60 max bombs
+ENDC
     ld   [$A44A], a ; 60 arrows
-    ld   a, $40
+    ld   a, DEBUG_SAVE_MAGIC_COUNT
     ld   [$A47B], a ; 40 max magic powder
     ld   [$A451], a ; 40 magic powder
+IF !__PATCH_6__
     ld   a, $89
     ld   [$A44C], a ; "time/animation?" (unknown)
+ENDC
     xor  a
     ld   [$A414], a ; 0 secret seashells
     ld   a, %00000111 ; @TODO Ocarina song constants?
@@ -122,20 +129,16 @@ InitSaveFiles::
 
     ld   a, [wGameplayType]
     cp   GAMEPLAY_FILE_NEW
-PUSHC
-SETCHARMAP NameEntryCharmap
     jr   z, .notOnNewFileScreen
-    ld   a, "Z"     ; Set save file name to "ZELDA"
-    ld   [$A454], a
-    ld   a, "E"
-    ld   [$A455], a
-    ld   a, "L"
-    ld   [$A456], a
-    ld   a, "D"
-    ld   [$A457], a
-    ld   a, "A"
-    ld   [$A458], a
-POPC
+
+    ; Set save file name to "ZELDA"
+INDEX = 0
+REPT 5
+    ld   a, STRSUB("{DEBUG_SAVE_FILE_NAME}", INDEX + 1, 1) + 1
+    ld   [$A454 + INDEX], a
+INDEX = INDEX + 1
+ENDR
+
 .notOnNewFileScreen
     xor  a
     ld   [$A45C], a ; death counter = 0
@@ -192,8 +195,11 @@ jr_001_479C::
 
 jr_001_47AA::
     push de
+    ; hl = savefile
     ld   hl, $A105
     add  hl, de
+
+    ; de = sizeof(save)
     ld   de, $3A8
 
 jr_001_47B2::
@@ -289,6 +295,34 @@ jr_001_52D9::
     ld   a, e
     or   d
     jr   nz, jr_001_52D9
+
+IF __PATCH_4__
+    ld de, wMaxHealth
+    ld hl, wHealth
+    ld a, [de]
+    cp $03
+    jr nc, jr_001_5355
+
+    ld a, $03
+
+jr_001_5355:
+    cp $0e
+    jr c, jr_001_535b
+
+    ld a, $0e
+
+jr_001_535b:
+    ld [de], a
+    swap a
+    srl a
+    cp [hl]
+    jr nc, jr_001_5364
+
+    ld [hl], a
+
+jr_001_5364:
+ENDC
+
     ld   hl, $DDDA
     ld   de, $05
 
@@ -466,8 +500,8 @@ Data_001_545C::
 
 Data_001_54A0::
     db   $00, $00, $00, $FF, $00, $00, $00, $FF   ; $54A0
-    db   $E8, $E9, $FF, $00, $E8, $EC, $E8, $FF   ; $54A8
-    db   $E8, $E9, $FF, $00, $E8, $EC, $E8, $FF   ; $54B0
+    db   $E8, $E9, $FF, $00, $E8, MINIMAP_VAR_0, MINIMAP_VAR_1, $FF   ; $54A8
+    db   $E8, $E9, $FF, $00, $E8, $EC, MINIMAP_VAR_2, $FF   ; $54B0
     db   $E8, $EA, $E9, $EB, $FF, $00, $00, $00   ; $54B8
     db   $00, $00, $00, $E8, $EA, $E9, $EB, $EC   ; $54C0
     db   $E8, $FF, $00, $00, $00, $00, $E8, $EA   ; $54C8
@@ -476,10 +510,10 @@ Data_001_54A0::
     db   $EA, $EC, $E9, $FF                       ; $54E0
 
 Data_001_54E4::
-    db   $9D, $9C                                 ; $54E4
+    db   HIGH(vBGMap1 + $10A), HIGH(vBGMap1 + $EA)
 
 Data_001_54E6::
-    db $A, $EA
+    db   LOW(vBGMap1 + $10A), LOW(vBGMap1 + $EA)
 
 Data_001_54E8::
     db $9C, $E9, $49, $7F, $9D, $09, $49, $7F, $9D, $29, $49, $7F, $9D, $49, $49, $7F
@@ -586,23 +620,23 @@ jr_001_558C::
     jr   nz, jr_001_558C
     ld   a, [wMinimapLayout]
     and  $03
-    jr   z, jr_001_55C0
+    jr   z, .loop
     ld   a, [wMinimapLayout]
     and  $30
     cp   $30
-    jr   z, jr_001_55AF
+    jr   z, .jr_001_55AF
     ld   a, c
     add  a, $04
     ld   c, a
     ld   b, $00
-    jr   jr_001_55C0
+    jr   .loop
 
-jr_001_55AF::
+.jr_001_55AF
     ld   a, [wMinimapLayout]
     and  $03
     ld   e, a
 
-jr_001_55B5::
+.jr_001_55B5
     ld   b, $00
     ld   a, c
     add  a, $0B
@@ -610,9 +644,9 @@ jr_001_55B5::
     dec  e
     ld   a, e
     and  a
-    jr   nz, jr_001_55B5
+    jr   nz, .jr_001_55B5
 
-jr_001_55C0::
+.loop
     push hl
     ld   hl, Data_001_5418
     add  hl, bc
@@ -629,7 +663,7 @@ jr_001_55C0::
     ld   a, [hl]
     ldh  [hScratch3], a
     pop  hl
-    call func_001_5619
+    call func_001_5619 ; ???
     push hl
     ld   hl, Data_001_5418
     inc  bc
@@ -638,7 +672,7 @@ jr_001_55C0::
     pop  hl
     inc  hl
     cp   $FF
-    jr   nz, jr_001_55C0
+    jr   nz, .loop
 
 jr_001_55EA::
     xor  a
@@ -665,7 +699,11 @@ jr_001_55F5::
     add  a, $B1
     ldh  [hScratch3], a
     pop  hl
-    call func_001_5619
+    call func_001_5619 ;show dungeon map no
+IF __PATCH_6__
+    push hl
+    pop  hl
+ENDC
     inc  hl
     ld   a, $7F
     ldi  [hl], a
@@ -787,70 +825,30 @@ func_001_58A8::
     ldi  [hl], a
     ld   [hl], $3E
     inc  hl
+IF __PATCH_0__
+    ldh  a, [hIsGBC]
+    and  a
+    jr   z, .endIfGBC
+
+    ld   a, $00
+    ld   [hl], a
+    ldh  a, [hFrameCounter]
+    and  $08
+    ret  z
+
+    ld   a, $03
+    ld   [hl], a
+    ret
+ENDC
+
+.endIfGBC
     ldh  a, [hFrameCounter]
     rla
     and  $10
     ld   [hl], a
     ret
 
-
-;
-; Each 2x2 section of the overworld is assigned a dialogue index
-; that will be shown when you push A on the map screen.
-; e.g. bottom right = $68 = Dialog068 = "Yarna Desert"
-;
-MapLocationNamesTable::
-    ;   0    2    4    6    8    A    C    E
-    db $6C, $6C, $6C, $6B, $6C, $6C, $6C, $6C ; 00
-    db $76, $76, $79, $79, $79, $79, $79, $79 ; 20
-    db $6A, $6A, $72, $7A, $78, $78, $71, $71 ; 40
-    db $6A, $6A, $72, $70, $78, $78, $71, $71 ; 60
-    db $6A, $6E, $69, $69, $69, $69, $77, $71 ; 80
-    db $6E, $6E, $69, $69, $69, $69, $77, $77 ; A0
-    db $7B, $7B, $6D, $62, $74, $74, $6F, $68 ; C0
-    db $73, $73, $73, $74, $74, $74, $75, $68 ; E0
-
-;
-; Lookup table for what dialogue message to show when examining a location on the map screen
-; "Owl" icons are only visible if you've seen that particular event, though
-;
-; For (as of yet) unknown reasons, A7 actually maps to Dialog1A7 rather than 0A7
-; POI: Unused entries that don't appear in MapSpecialLocationNamesTable anywhere
-; 0F ("Enter the Egg!", maybe manually overridden?)
-; 31 (Duplicate of 3E, "Wind Fish's Egg")
-; 32 (Dialog05F and Dialog060 both point to "Mountain Bridge", hmm...!)
-;
-MapSpecialLocationNamesLookupTable::
-    ;   0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
-    db   0, $D9, $C0, $C1, $C2, $C3, $C4, $C5, $C6, $C7, $C8, $C9, $CA, $CB, $CC, $CD  ; 00 - Owl reminders
-    db   0, $56, $57, $58, $59, $5A, $5B, $5C, $5D,   0,   0,   0,   0,   0,   0,   0  ; 10 - Dungeon icons
-    db   0, $7C, $67,   0,   0, $80, $65,   0, $64, $88, $7D,   0,   0,   0,   0,   0  ; 20 - Shop icons
-    db   0, $5E, $5F, $7F, $7E, $7D, $82, $84, $85, $86, $87, $81, $66, $A7, $5E, $63  ; 30 - "!?" icons
-    db   0, $61,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0  ; 40 - "!?" icons
-
-;
-; Table for map squares that have special text instead of the generic name from MapLocationNamesTable.
-; Rather than directly indexing the dialogue entry, for some reason these are instead lookup values
-; for *another* table (just above this one), MapSpecialLocationNamesLookupTable, which has the dialogue indexes...
-;
-MapSpecialLocationNamesTable::
-    ;   0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
-    db   0,   0,   0,   0,   0,   0, $3E,   0, $0E,   0, $39,   0,   0,   0, $17,   0 ; 00
-    db $18, $3D,   0,   0,   0,   0, $06, $0C,   0,   0,   0,   0,   0,   0,   0,   0 ; 10
-    db   0,   0,   0,   0, $12,   0,   0,   0, $07,   0,   0, $14,   0,   0,   0,   0 ; 20
-    db $33, $3D,   0,   0,   0,   0, $05, $2A,   0,   0,   0,   0,   0,   0,   0, $29 ; 30
-    db   0, $03,   0,   0,   0, $25,   0,   0,   0,   0,   0, $3D,   0,   0,   0,   0 ; 40
-    db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; 50
-    db   0,   0,   0,   0, $0D, $22,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; 60
-    db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; 70
-    db $02, $21, $3B, $36,   0,   0,   0,   0, $3D,   0, $37,   0, $16,   0,   0,   0 ; 80
-    db   0,   0,   0, $26,   0,   0,   0,   0,   0,   0,   0, $09, $0B, $09,   0,   0 ; 90
-    db   0, $35, $3C,   0, $3D,   0,   0,   0,   0,   0,   0,   0, $0A,   0,   0,   0 ; A0
-    db $3A, $34, $3D, $28,   0, $13, $07,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; B0
-    db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; C0
-    db   0,   0, $04, $11,   0,   0, $38,   0,   0, $15,   0, $3D,   0,   0,   0,   0 ; D0
-    db   0,   0,   0, $41,   0,   0,   0,   0, $3D,   0,   0,   0,   0,   0, $08,   0 ; E0
-    db   0,   0, $01,   0,   0,   0, $3F,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; F0
+include "data/dialogs/map.asm"
 
 func_001_5A59::
     ldh  a, [hMapRoom]
@@ -1364,6 +1362,9 @@ jr_001_5DE1::
     ret
 
 func_001_5DE6::
+IF __PATCH_4__
+    call Call_001_5eca
+ENDC
     ld   a, [wHealth]                           ; Does the player have any health?
     and  a                                      ; If yes, skip this
     jr   nz, .skipHealthReset
@@ -1439,6 +1440,122 @@ jr_001_5E3A::
     ldi  [hl], a
     ret
 
+IF __PATCH_4__
+Data_001_5ea2:
+    dw wIndoorARoomStatus + $06 ; moldorm
+    dw wIndoorARoomStatus + $2b ; genie
+    dw wIndoorARoomStatus + $5a
+    dw wIndoorARoomStatus + $ff
+    dw wIndoorARoomStatus + $85
+    dw wIndoorARoomStatus + $bc
+    dw wIndoorBRoomStatus + $e8
+    dw wIndoorBRoomStatus + $34 ; hothead
+
+Data_001_5eb2:
+    dw wIndoorBRoomStatus + $a4
+    dw wIndoorBRoomStatus + $b1
+    dw wOverworldRoomStatus + $44
+    dw wIndoorBRoomStatus + $ab
+    dw wIndoorBRoomStatus + $e5
+    dw wIndoorARoomStatus + $e8
+    dw wOverworldRoomStatus + $78
+    dw wIndoorARoomStatus + $f2
+    dw wIndoorBRoomStatus + $e6
+    dw wIndoorBRoomStatus + $df
+    dw wIndoorBRoomStatus + $ba
+    dw wOverworldRoomStatus + $00
+
+Call_001_5eca:
+    ; full heart containers
+    ld a, $03                                     ; $5eca: $3e $03
+    ldh [hScratch0], a                            ; $5ecc: $e0 $d7
+    xor a                                         ; $5ece: $af
+    ldh [hScratch1], a                            ; $5ecf: $e0 $d8
+    ld c, $08                                     ; $5ed1: $0e $08
+    ld hl, Data_001_5ea2                                   ; $5ed3: $21 $a2 $5e
+
+.bossLoop
+    ld a, [hl+]                                   ; $5ed6: $2a
+    ld e, a                                       ; $5ed7: $5f
+    ld a, [hl+]                                   ; $5ed8: $2a
+    ld d, a                                       ; $5ed9: $57
+    ld a, [de]                                    ; $5eda: $1a
+    and $20 ; ROOM_STATUS_BOSS_DEFEATED
+    jr z, .endIfBossDefeated                             ; $5edd: $28 $05
+    ldh a, [hScratch0]                            ; $5edf: $f0 $d7
+    inc a                                         ; $5ee1: $3c
+    ldh [hScratch0], a                            ; $5ee2: $e0 $d7
+.endIfBossDefeated:
+
+    dec c                                         ; $5ee4: $0d
+    jr nz, .bossLoop                                   ; $5ee5: $20 $ef
+
+    ld c, $0c                                     ; $5ee7: $0e $0c
+    ld hl, Data_001_5eb2                                  ; $5ee9: $21 $b2 $5e
+
+.heartPieceLoop
+    ld a, [hl+]                                   ; $5eec: $2a
+    ld e, a                                       ; $5eed: $5f
+    ld a, [hl+]                                   ; $5eee: $2a
+    ld d, a                                       ; $5eef: $57
+    ld a, [de]                                    ; $5ef0: $1a
+    and ROOM_STATUS_CHANGED                       ; $5ef1: $e6 $10
+    jr z, .endIfHeartPieceTaken                             ; $5ef3: $28 $0f
+
+    ldh a, [hScratch1]                            ; $5ef5: $f0 $d8
+    inc a                                         ; $5ef7: $3c
+    cp $04                                        ; $5ef8: $fe $04
+    jr nz, .endIf4heartPieces                            ; $5efa: $20 $06
+
+    ldh a, [hScratch0]                            ; $5efc: $f0 $d7
+    inc a                                         ; $5efe: $3c
+    ldh [hScratch0], a                            ; $5eff: $e0 $d7
+    xor a                                         ; $5f01: $af
+.endIf4heartPieces
+
+    ldh [hScratch1], a                            ; $5f02: $e0 $d8
+
+.endIfHeartPieceTaken
+    dec c                                         ; $5f04: $0d
+    jr nz, .heartPieceLoop                            ; $5f05: $20 $e5
+
+    ldh a, [hScratch0]                            ; $5f07: $f0 $d7
+    call Call_001_5f1c                            ; $5f09: $cd $1c $5f
+    ld [wMaxHealth], a                            ; $5f0c: $ea $5b $db
+    cp $0e                                        ; $5f0f: $fe $0e
+    jr nz, jr_001_5f16                            ; $5f11: $20 $03
+
+    xor a                                         ; $5f13: $af
+    jr jr_001_5f18                                ; $5f14: $18 $02
+
+jr_001_5f16:
+    ldh a, [hScratch1]                            ; $5f16: $f0 $d8
+
+jr_001_5f18:
+    ld [wHeartPiecesCount], a                     ; $5f18: $ea $5c $db
+    ret                                           ; $5f1b: $c9
+
+
+; clamps max health between 3 and 14
+Call_001_5f1c:
+    cp $03                                        ; $5f1c: $fe $03
+    jr nc, jr_001_5f23                            ; $5f1e: $30 $03
+
+    ld a, $03                                     ; $5f20: $3e $03
+    ret                                           ; $5f22: $c9
+
+
+jr_001_5f23:
+    cp $0e                                        ; $5f23: $fe $0e
+    jr c, jr_001_5f29                             ; $5f25: $38 $02
+
+    ld a, $0e                                     ; $5f27: $3e $0e
+
+jr_001_5f29:
+    ret                                           ; $5f29: $c9
+ENDC
+
+
 ; Copy the current dungeon item flags to the global and persistent
 ; dungeons item flags table.
 SynchronizeDungeonsItemFlags::
@@ -1465,13 +1582,18 @@ SynchronizeDungeonsItemFlags::
 
     ; Select the correct item flags slot for the current dungeon
     ; hl = wDungeonItemFlags + (hMapId * 5)
+IF !__PATCH_5__
     ld   hl, wDungeonItemFlags
+ENDC
     ld   e, a
     sla  a
     sla  a
     add  a, e
     ld   e, a
     ld   d, $00
+IF __PATCH_5__
+    ld   hl, wDungeonItemFlags
+ENDC
     add  hl, de
 .endIf
 
@@ -1652,7 +1774,7 @@ UpdateRecentRoomsList::
 
 HideAllSprites::
     ; $0000 controls whether to enable external RAM writing
-    ld   hl, $0000
+    ld   hl, MBC3SRamEnable
 
     ; If CGB…
     ldh  a, [hIsGBC]
@@ -1660,7 +1782,7 @@ HideAllSprites::
     jr   z, .enableExternalRAMWriting
     ; disable external RAM writing
     ; (probably because an extra RAM bank available on CGB can be used)
-    ld   [hl], $00
+    ld   [hl], SRAM_DISABLE
     jr   .endIf
 
 .enableExternalRAMWriting
@@ -2845,7 +2967,7 @@ jr_001_6D26::
     ld   [rVBK], a
     ret
 
-include "src/code/oam_dma.asm"
+include "code/oam_dma.asm"
 
 IntroRainTiles::
 incbin "src/gfx/intro/rain.2bpp"

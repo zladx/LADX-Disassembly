@@ -146,18 +146,22 @@ WorldMapState4Handler::
     ret
 
 WorldMapInteractiveHandler::
+IF !__PATCH_8__
     ld   a, [ROM_DebugTool3]
     and  a
     jr   z, .debugEnd
     ldh  a, [hJoypadState]
-    bit  7, a
+    bit  J_BIT_START, a
     jr   z, .debugEnd
     xor  a
     ld   [wGameplaySubtype], a
+
+    ; set [wGameplayType] to GAMEPLAY_CREDITS
     inc  a
     ld   [wGameplayType], a
     ret
 .debugEnd
+ENDC
 
     ld   a, [wDialogState]
     and  a

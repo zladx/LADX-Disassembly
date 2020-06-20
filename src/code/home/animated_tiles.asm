@@ -338,6 +338,11 @@ label_1CB8::
     jp   LoadAnimatedTilesFrame.de
 
 AnimateWarpTilesGroup::
+IF __PATCH_3__
+    ld   a, BANK(AnimatedTiles)
+    call AdjustBankNumberForGBC
+    ld   [MBC3SelectBank], a
+ENDC
     ld   h, HIGH(AnimatedTiles) + $6
 
 AnimateTilesMediumSpeed::
@@ -453,7 +458,11 @@ label_1D49::
     ldh  a, [hLinkPositionX]
     add  a, c
     ldi  [hl], a
+IF __PATCH_0__
+    xor  a
+ELSE
     ld   a, $00
+ENDC
     ldi  [hl], a
     ld   a, [$C135]
     ld   d, a

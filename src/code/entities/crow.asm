@@ -13,6 +13,10 @@ CrowEntityHandler::
     jr   c, jr_006_5CAB                           ; $5CA6: $38 $03
 
     srl  a                                        ; $5CA8: $CB $3F
+IF __PATCH_0__
+    srl  a
+ENDC
+
     ld   [hl], a                                  ; $5CAA: $77
 
 jr_006_5CAB:

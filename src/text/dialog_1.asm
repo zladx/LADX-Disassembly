@@ -231,7 +231,11 @@ Dialog01A::
     db "secret medicine!"
     db "It will take    "
     db "effect when you "
+IF VERSION >= 2
+    db "lose all hearts!"
+ELSE
     db "lose all heart! "
+ENDC
     db "Drop by again,  "
     db "big guy!@"
 
@@ -596,8 +600,13 @@ Dialog054::
     db "your name?  You "
     db "think it's weird"
     db "eh?  Well, I saw"
+IF VERSION >= 2
+    db "it on the back  "
+    db "of this shield!@"
+ELSE
     db "it on back of   "
     db "this shield!@"
+ENDC
 
 Dialog055::
     db "Oh, yeah... Some"

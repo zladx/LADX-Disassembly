@@ -25,10 +25,15 @@ RenderLoop::
     ld   a, [wGameplayType]
     cp   GAMEPLAY_WORLD
     jr   nz, .noSpecialCase
+
+IF __PATCH_0__
+    ld   a, $00
+ELSE
     ; ... set scroll Y to $00 or $80 alternatively every other frame.
     ldh  a, [hFrameCounter]
     rrca
     and  $80
+ENDC
     jr   .setScrollY
 .noSpecialCase
 

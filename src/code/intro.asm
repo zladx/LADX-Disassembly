@@ -144,6 +144,10 @@ RenderIntroFrame::
 
 IntroSceneStage0Handler::
     call ClearLowerAndMiddleWRAM
+IF __PATCH_8__
+    ld   a, BANK(@)
+    ld   [wCurrentBank], a
+ENDC
     call label_27F2
     ld   a, $01
     call ClearFileMenuBG_trampoline
@@ -678,26 +682,42 @@ Data_001_72CB::
     db   $00, $00, $00, $00, $00, $00, $00, $00   ; $72D5
     db   $00
 
+IF __PATCH_6__
+TILE_A = $01
+TILE_B = $02
+ELSE
+TILE_A = $00
+TILE_B = $00
+ENDC
+
 Data_001_72DE::
-    db   $9A, $76, $0F, $00, $00, $00, $00
-    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $72E5
-    db   $00, $00, $00, $00
+    db   $9A, $76, $0F
+    db   TILE_A, TILE_A, TILE_A, TILE_A
+    db   TILE_A, TILE_A, TILE_A, TILE_A
+    db   TILE_A, TILE_A, TILE_A, TILE_A
+    db   TILE_A, TILE_A, TILE_A, TILE_A
+
 
 Data_001_72F1::
-    db   $9A, $96, $0F, $00
-    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $72F5
-    db   $00, $00, $00, $00, $00, $00, $00
+    db   $9A, $96, $0F
+    db   TILE_B, TILE_B, TILE_B, TILE_B
+    db   TILE_B, TILE_B, TILE_B, TILE_B
+    db   TILE_B, TILE_B, TILE_B, TILE_B
+    db   TILE_B, TILE_B, TILE_B, TILE_B
 
 Data_001_7304::
-    db   $9A   ; $72FD
-    db   $B6, $0F, $00, $00, $00, $00, $00, $00   ; $7305
-    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $730D
-    db   $00, $00
+    db   $9A, $B6, $0F
+    db   TILE_B, TILE_B, TILE_B, TILE_B
+    db   TILE_B, TILE_B, TILE_B, TILE_B
+    db   TILE_B, TILE_B, TILE_B, TILE_B
+    db   TILE_B, TILE_B, TILE_B, TILE_B
 
 Data_001_7317::
-    db   $9A, $D6, $0F, $00, $00, $00   ; $7315
-    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $731D
-    db   $00, $00, $00, $00, $00                  ; $7325
+    db   $9A, $D6, $0F
+    db   TILE_B, TILE_B, TILE_B, TILE_B
+    db   TILE_B, TILE_B, TILE_B, TILE_B
+    db   TILE_B, TILE_B, TILE_B, TILE_B
+    db   TILE_B, TILE_B, TILE_B, TILE_B
 
 Data_001_732A::
     dw   Data_001_72DE
@@ -1430,34 +1450,125 @@ jr_001_77ED::
     ld   [wOAMNextAvailableSlot], a
     ret
 
+IF __PATCH_6__
 Data_001_7808::
-    db   $10, $18, $2E, $05, $00, $18, $2C, $05   ; $7808
-    db   $10, $10, $2A, $05, $00, $10, $28, $05   ; $7810
-    db   $10, $08, $26, $05, $00, $08, $24, $05   ; $7818
-    db   $10, $00, $22, $05, $00, $00, $20, $05   ; $7820
+    db   $00, $10, $2C, $05
+    db   $10, $10, $2A, $05
+    db   $00, $10, $28, $05
+    db   $10, $08, $26, $05
+    db   $00, $08, $24, $05
+    db   $10, $00, $22, $05
+    db   $00, $00, $20, $05
 
 Data_001_7828::
-    db   $00, $28, $52, $16, $00, $20, $50, $16   ; $7828
-    db   $10, $18, $4E, $16, $00, $18, $4C, $16   ; $7830
-    db   $10, $10, $4A, $16, $00, $10, $48, $16   ; $7838
-    db   $10, $08, $46, $16, $00, $08, $44, $16   ; $7840
-    db   $10, $00, $42, $16, $00, $00, $40, $16   ; $7848
+    db   $10, $18, $4F, $16
+    db   $00, $18, $4D, $16
+    db   $10, $10, $4B, $16
+    db   $00, $10, $49, $16
+    db   $10, $08, $47, $16
+    db   $00, $08, $45, $16
+    db   $10, $00, $43, $16
+    db   $00, $00, $41, $16
+.end
+
+Data_001_7850:
+    db   $10, $10, $2A, $05
+    db   $00, $10, $28, $05
+    db   $10, $08, $26, $05
+    db   $00, $08, $24, $05
+    db   $10, $00, $22, $05
+    db   $00, $00, $20, $05
+
+Data_001_7870:
+    db   $10, $15, $5A, $07
+    db   $00, $15, $58, $07
+    db   $10, $0D, $56, $07
+    db   $00, $0D, $54, $07
+    db   $10, $05, $52, $07
+    db   $00, $05, $50, $07
+    db   $10, $18, $4E, $16
+    db   $00, $18, $4C, $16
+    db   $10, $10, $4A, $16
+    db   $00, $10, $48, $16
+    db   $10, $08, $46, $16
+    db   $00, $08, $44, $16
+    db   $10, $00, $42, $16
+    db   $00, $00, $40, $16
+.end
+
+Data_001_7850_alt:
+    db   $10, $00, $5E, $14
+    db   $00, $00, $5C, $14
+    db   $10, $00, $62, $14
+    db   $00, $60, $60, $14
+    db   $10, $04, $66, $14
+    db   $00, $04, $64, $14
+    db   $10, $08, $6A, $14
+    db   $00, $08, $68, $14
+    db   $10, $0C, $6E, $14
+    db   $00, $0C, $6C, $14
+    db   $10, $10, $72, $14
+    db   $00, $10, $70, $14
+    db   $10, $14, $76, $14
+    db   $00, $14, $74, $14
+    db   $10, $18, $7A, $14
+    db   $00, $18, $78, $14
+    db   $10, $18, $7E, $14
+    db   $00, $18, $7C, $14
+ELSE
+Data_001_7808::
+    db   $10, $18, $2E, $05
+    db   $00, $18, $2C, $05
+    db   $10, $10, $2A, $05
+    db   $00, $10, $28, $05
+    db   $10, $08, $26, $05
+    db   $00, $08, $24, $05
+    db   $10, $00, $22, $05
+    db   $00, $00, $20, $05
+
+Data_001_7828::
+    db   $00, $28, $52, $16
+    db   $00, $20, $50, $16
+    db   $10, $18, $4E, $16
+    db   $00, $18, $4C, $16
+    db   $10, $10, $4A, $16
+    db   $00, $10, $48, $16
+    db   $10, $08, $46, $16
+    db   $00, $08, $44, $16
+    db   $10, $00, $42, $16
+    db   $00, $00, $40, $16
+.end
 
 Data_001_7850::
-    db   $10, $18, $2E, $05, $00, $18, $2C, $05   ; $7850
-    db   $10, $10, $2A, $05, $00, $10, $28, $05   ; $7858
-    db   $10, $08, $26, $05, $00, $08, $24, $05   ; $7860
-    db   $10, $00, $22, $05, $00, $00, $20, $05   ; $7868
+    db   $10, $18, $2E, $05
+    db   $00, $18, $2C, $05
+    db   $10, $10, $2A, $05
+    db   $00, $10, $28, $05
+    db   $10, $08, $26, $05
+    db   $00, $08, $24, $05
+    db   $10, $00, $22, $05
+    db   $00, $00, $20, $05
 
 Data_001_7870::
-    db   $00, $28, $52, $16, $00, $20, $50, $16   ; $7870
-    db   $10, $18, $4E, $16, $00, $18, $4C, $16   ; $7878
-    db   $10, $10, $4A, $16, $00, $10, $48, $16   ; $7880
-    db   $10, $08, $46, $16, $00, $08, $44, $16   ; $7888
-    db   $10, $00, $42, $16, $00, $00, $40, $16   ; $7890
+    db   $00, $28, $52, $16
+    db   $00, $20, $50, $16
+    db   $10, $18, $4E, $16
+    db   $00, $18, $4C, $16
+    db   $10, $10, $4A, $16
+    db   $00, $10, $48, $16
+    db   $10, $08, $46, $16
+    db   $00, $08, $44, $16
+    db   $10, $00, $42, $16
+    db   $00, $00, $40, $16
+.end
+ENDC
 
 Data_001_7898::
+IF __PATCH_6__
+    db   $AC, $AC, $6C
+ELSE
     db   $54, $58, $68
+ENDC
 
 Data_001_789B::
     db   $1C
@@ -1466,25 +1577,72 @@ Data_001_789C::
     db   $00, $04, $18
 
 Data_001_789F::
+IF __PATCH_6__
+    db   $1C
+ELSE
     db   $6C
+ENDC
 
 Data_001_78A0::
-    db   $F5, $7A, $8D, $7D, $8D, $7D, $8D, $7D   ; $78A0
-    db   $F5, $7A, $FF, $7F, $FF, $7F, $FF, $7F   ; $78A8
-    db   $F5, $7A, $6C, $6D, $8D, $71, $CF, $75   ; $78B0
-    db   $F5, $7A, $7B, $6F, $BD, $73, $FF, $77   ; $78B8
-    db   $F5, $7A, $2A, $5D, $8E, $65, $12, $6E   ; $78C0
-    db   $F5, $7A, $F7, $5E, $5B, $67, $DF, $6F   ; $78C8
-    db   $F5, $7A, $E8, $48, $8E, $59, $54, $66   ; $78D0
-    db   $F5, $7A, $52, $4A, $19, $5B, $BF, $67   ; $78D8
-    db   $F5, $7A, $C6, $38, $8F, $49, $97, $5A   ; $78E0
-    db   $F5, $7A, $CE, $39, $B7, $4A, $BF, $5B   ; $78E8
-    db   $F5, $7A, $84, $24, $8F, $3D, $D9, $52   ; $78F0
-    db   $F5, $7A, $29, $25, $75, $3E, $9F, $53   ; $78F8
-    db   $F5, $7A, $42, $14, $90, $31, $1C, $4B   ; $7900
-    db   $F5, $7A, $A5, $14, $13, $32, $7F, $4B   ; $7908
-    db   $F5, $7A, $00, $00, $B1, $21, $5F, $3F   ; $7910
-    db   $F5, $7A, $00, $00, $B1, $21, $5F, $3F   ; $7918
+IF __PATCH_6__
+         ; Loaded in $18 byte chunks
+    db   $F5, $7A, $00, $00, $00, $00, $00, $00
+    db   $F5, $7A, $FF, $7F, $FF, $7F, $FF, $7F
+    db   $F5, $7A, $FF, $7F, $FF, $7F, $00, $00
+
+    db   $F5, $7A, $84, $04, $42, $00, $00, $00
+    db   $F5, $7A, $BE, $6F, $9C, $6B, $5A, $6B
+    db   $F5, $7A, $FF, $7F, $7B, $6B, $A5, $14
+
+    db   $F5, $7A, $E8, $08, $63, $00, $00, $00
+    db   $F5, $7A, $9E, $5F, $39, $5B, $D6, $5A
+    db   $F5, $7A, $FF, $7F, $F7, $5A, $29, $25
+
+    db   $F5, $7A, $4C, $09, $A5, $00, $00, $00
+    db   $F5, $7A, $7D, $4F, $D6, $46, $31, $46
+    db   $F5, $7A, $FF, $7F, $73, $46, $CE, $39
+
+    db   $F5, $7A, $B0, $0D, $C6, $00, $00, $00
+    db   $F5, $7A, $3D, $3F, $73, $36, $AD, $35
+    db   $F5, $7A, $FF, $7F, $10, $36, $52, $4A
+
+    db   $F5, $7A, $14, $0E, $08, $01, $00, $00
+    db   $F5, $7A, $1C, $2F, $10, $22, $08, $21
+    db   $F5, $7A, $FF, $7F, $8C, $21, $F7, $5E
+
+    db   $F5, $7A, $78, $12, $29, $01, $00, $00
+    db   $F5, $7A, $FC, $1E, $AD, $11, $84, $10
+    db   $F5, $7A, $FF, $7F, $08, $11, $7B, $6F
+
+    db   $F5, $7A, $DC, $12, $4A, $01, $00, $00
+    db   $F5, $7A, $DC, $12, $4A, $01, $00, $00
+    db   $F5, $7A, $FF, $7F, $A5, $00, $FF, $7F
+ELSE
+         ; Loaded in $10 byte chunks
+    db   $F5, $7A, $8D, $7D, $8D, $7D, $8D, $7D
+    db   $F5, $7A, $FF, $7F, $FF, $7F, $FF, $7F
+
+    db   $F5, $7A, $6C, $6D, $8D, $71, $CF, $75
+    db   $F5, $7A, $7B, $6F, $BD, $73, $FF, $77
+
+    db   $F5, $7A, $2A, $5D, $8E, $65, $12, $6E
+    db   $F5, $7A, $F7, $5E, $5B, $67, $DF, $6F
+
+    db   $F5, $7A, $E8, $48, $8E, $59, $54, $66
+    db   $F5, $7A, $52, $4A, $19, $5B, $BF, $67
+
+    db   $F5, $7A, $C6, $38, $8F, $49, $97, $5A
+    db   $F5, $7A, $CE, $39, $B7, $4A, $BF, $5B
+
+    db   $F5, $7A, $84, $24, $8F, $3D, $D9, $52
+    db   $F5, $7A, $29, $25, $75, $3E, $9F, $53
+
+    db   $F5, $7A, $42, $14, $90, $31, $1C, $4B
+    db   $F5, $7A, $A5, $14, $13, $32, $7F, $4B
+
+    db   $F5, $7A, $00, $00, $B1, $21, $5F, $3F
+    db   $F5, $7A, $00, $00, $B1, $21, $5F, $3F
+ENDC
 
 func_001_7920::
     ld   hl, $D015
@@ -1494,11 +1652,19 @@ func_001_7920::
     dec  [hl]
     ret
 
+IF __PATCH_6__
+X_POS = $79
+Y_OFFSET = $46
+ELSE
+X_POS = $78
+Y_OFFSET = $59
+ENDC
+
 .jr_001_7929
-    ld   a, $78
+    ld   a, X_POS
     ldh  [hActiveEntityPosX], a
     ld   hl, $D018
-    ld   a, $59
+    ld   a, Y_OFFSET
     add  a, [hl]
     ldh  [hActiveEntityVisualPosY], a
     ldh  a, [hIsGBC]
@@ -1506,7 +1672,7 @@ func_001_7920::
     jr   nz, .jr_001_795D
     ld   a, [$D013]
     cp   $04
-    jr   z, .jr_001_797D
+    jr   z, .jr_001_797D_a
     ld   hl, $D014
     inc  [hl]
     ld   a, [hl]
@@ -1525,7 +1691,7 @@ func_001_7920::
 .jr_001_795D
     ld   a, [$D013]
     cp   $08
-    jr   z, .jr_001_797D
+    jr   z, .jr_001_797D_a
     ld   hl, $D014
     inc  [hl]
     ld   a, [hl]
@@ -1541,6 +1707,56 @@ func_001_7920::
     call func_001_79C2
     jr   .jr_001_797D
 
+.jr_001_797D_a
+IF __PATCH_6__
+    ld   hl, $d016
+    ld   a, [hl+]
+    ld   b, [hl]
+    or   b
+    jr   z, func_001_7920.jr_001_7a63
+
+    dec  hl
+    ld   a, [hl]
+    sub  $01
+    ld   [hl+], a
+    ld   a, [hl]
+    sbc  $00
+    ld   [hl], a
+    jr   .jr_001_797D
+.jr_001_7a63
+    ld   hl, $d012
+    inc  [hl]
+    ld   a, [hl]
+    cp   $06
+    jr   nz, .jr_001_7a82
+    xor  a
+    ld   [hl], a
+    ld   a, [$d011]
+    inc  a
+    cp   $09
+    jr   nz, .jr_001_7a7f
+    call func_001_7BC3
+    xor  a
+    ld   [$d011], a
+    jr   .jr_001_797D
+.jr_001_7a7f
+    ld   [$d011], a
+.jr_001_7a82
+    ld   hl, Data_001_7850_alt
+    ld   a, [$d011]
+    sla  a
+    sla  a
+    sla  a
+    ld   b, $00
+    ld   c, a
+    add  hl, bc
+    ld   c, $02
+    call RenderActiveEntitySpritesRect
+    ld   a, [wOAMNextAvailableSlot]
+    add  $08
+    ld   [wOAMNextAvailableSlot], a
+ENDC
+
 .jr_001_797D
     ldh  a, [hIsGBC]
     and  a
@@ -1548,26 +1764,33 @@ func_001_7920::
     ld   a, [$D013]
     cp   $08
     jr   z, .jr_001_7990
+    ; Renders both Data_001_7850 and Data_001_7870
     ld   hl, Data_001_7850
-    ld   c, $12
+    ld   c, (Data_001_7870.end - Data_001_7850) / 4
     jr   .render
 
 .jr_001_7990
     ld   hl, Data_001_7870
-    ld   c, $0A
+    ld   c, (Data_001_7870.end - Data_001_7870) / 4
     jr   .render
 
 .jr_001_7997
     ld   a, [$D013]
+IF __PATCH_6__
+    cp   $04
+    jr   z, .jr_001_79A5
+ELSE
     cp   $03
     jr   nc, .jr_001_79A5
+ENDC
     ld   hl, Data_001_7808
-    ld   c, $12
+    ; renders both Data_001_7808 and Data_001_7828
+    ld   c, (Data_001_7828.end - Data_001_7808) / 4
     jr   .render
 
 .jr_001_79A5
     ld   hl, Data_001_7828
-    ld   c, $0A
+    ld   c, (Data_001_7828.end - Data_001_7828) / 4
 
 .render
     call RenderActiveEntitySpritesRect
@@ -1587,16 +1810,29 @@ func_001_79AE::
     ret
 
 func_001_79C2::
+    ; bc = a * CHUNKSIZE
+IF __PATCH_6__
+CHUNKSIZE = $18
+    ld   b, a
+    sla  a
+    add  b
+    sla  a
+    sla  a
+    sla  a
+ELSE
+CHUNKSIZE = $10
     sla  a
     sla  a
     sla  a
     sla  a
+ENDC
     ld   b, $00
     ld   c, a
+
     ld   hl, Data_001_78A0
     add  hl, bc
     ld   bc, $DC78
-    ld   e, $10
+    ld   e, CHUNKSIZE
 
 .loop
     ld   a, [hli]
@@ -1607,11 +1843,21 @@ func_001_79C2::
 
     ld   a, $14
     ld   [$DDD3], a
-    ld   a, $08
+    ld   a, CHUNKSIZE / 2
     ld   [$DDD4], a
     ld   a, $82
     ld   [$DDD1], a
     ret
+
+IF __PATCH_6__
+func_001_7BC3:
+    call GetRandomByte
+    or   $20
+    ld   [$d016], a
+    ld   a, $01
+    ld   [$d017], a
+    ret
+ENDC
 
 Data_001_79EC::
     db   $98, $00, $43, $7D, $98, $20, $43, $7D   ; $79EC

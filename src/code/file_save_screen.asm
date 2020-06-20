@@ -173,6 +173,9 @@ jr_001_40F9::
     ld   a, $01
     ld   [$DBAF], a
     call func_001_6162
+IF __PATCH_3__
+    call LCDOff
+ENDC
     ; fallthrough
 
 ; Enable LCD Screen
@@ -207,9 +210,10 @@ LCDOn::
 .return
     ret
 
+; OAM Y positions
 Data_001_4128::
-    ld   c, b
-    ld   e, b
+    db   $38 + $10
+    db   $48 + $10
 
 ; Called by FileSaveInteractive
 func_001_412A::
@@ -231,7 +235,7 @@ jr_001_413B::
     ld   a, [hl]
     ld   hl, $C018
     ldi  [hl], a
-    ld   a, $24
+    ld   a, SAVE_OPTION_X + $8
     ldi  [hl], a
     ld   a, $BE
     ldi  [hl], a

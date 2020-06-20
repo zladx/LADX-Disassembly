@@ -8,8 +8,6 @@ ASM    := rgbasm -E
 # Default target
 all: build test
 
-build: game.gbc
-
 test: build
 	@tools/md5sum.sh -c ladx.md5
 
@@ -20,22 +18,121 @@ clean:
 
 # Objects are assembled from source.
 # src/main.o is built from src/main.asm.
-obj = src/main.o
 asm_files = $(shell find src     -type f -name '*.asm')
 gfx_files = $(shell find src/gfx -type f -name '*.png')
 bin_files = $(shell find src     -type f -name '*.bin')
 
+asm_files += $(shell find revisions -type f -name '*.asm')
+gfx_files += $(shell find revisions -type f -name '*.png')
+
 %.2bpp: %.png
 	$(2BPP) -o $@ $<
 
-src/main.o: $(asm_files) $(gfx_files:.png=.2bpp) $(bin_files)
-
-.asm.o:
-	$(ASM) -i src/ -o $@ $<
+deps = $(asm_files) $(gfx_files:.png=.2bpp) $(bin_files)
 
 # Then we link them to create a playable image.
 # This also spits out game.sym, which lets you use labels in bgb.
 # Generating a mapfile is required thanks to a bug in rgblink.
-game.gbc: $(obj)
-	rgblink -n $*.sym -m $*.map -o $@ $(obj)
+
+
+
+src/main.o: $(asm_files) $(gfx_files:.png=.2bpp) $(bin_files)
+
+
+#
+# Japanese
+#
+
+games += azlj.gbc
+j0_obj = src/main.azlj.o
+src/main.azlj.o: src/main.asm $(deps)
+	$(ASM) -DLANG=JP -DVERSION=0 -i revisions/J0/src/ -i src/ -o $@ $<
+azlj.gbc: $(j0_obj)
+	rgblink -n $*.sym -m $*.map -o $@ $^
+	rgbfix  -c -n 0 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -p 0xFF -t "ZELDA" -v $@
+
+games += azlj-r1.gbc
+j1_obj = src/main.azlj-1.o
+src/main.azlj-1.o: src/main.asm $(deps)
+	$(ASM) -DLANG=JP -DVERSION=1 -i revisions/J1/src/ -i revisions/J0/src/ -i src/ -o $@ $<
+azlj-r1.gbc: $(j1_obj)
+	rgblink -n $*.sym -m $*.map -o $@ $^
+	rgbfix  -c -n 1 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -p 0xFF -t "ZELDA" -v $@
+
+games += azlj-r2.gbc
+j2_obj = src/main.azlj-2.o
+src/main.azlj-2.o: src/main.asm $(deps)
+	$(ASM) -DLANG=JP -DVERSION=2 -i revisions/J2/src/ -i revisions/J1/src/ -i revisions/J0/src/ -i src/ -o $@ $<
+azlj-r2.gbc: $(j2_obj)
+	rgblink -n $*.sym -m $*.map -o $@ $^
+	rgbfix  -c -n 2 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -p 0xFF -t "ZELDA" -i "AZLJ" -v $@
+
+#
+# German
+#
+
+games += azlg.gbc
+g0_obj = src/main.azlg.o
+src/main.azlg.o: src/main.asm $(deps)
+	$(ASM) -DLANG=DE -DVERSION=0 -i revisions/G0/src/ -i src/ -o $@ $<
+azlg.gbc: $(g0_obj)
+	rgblink -n $*.sym -m $*.map -o $@ $^
 	rgbfix  -c -n 0 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -v $@
+
+games += azlg-r1.gbc
+g1_obj = src/main.azlg-1.o
+src/main.azlg-1.o: src/main.asm $(deps)
+	$(ASM) -DLANG=DE -DVERSION=1 -i revisions/G1/src/ -i revisions/G0/src/ -i src/ -o $@ $<
+azlg-r1.gbc: $(g1_obj) azlj-r2.gbc
+	rgblink -O "azlj-r2.gbc" -n $*.sym -m $*.map -o $@ $<
+	rgbfix  -c -n 1 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -i "AZLD" -v $@
+
+#
+# French
+#
+
+games += azlf.gbc
+f0_obj = src/main.azlf.o
+src/main.azlf.o: src/main.asm $(deps)
+	$(ASM) -DLANG=FR -DVERSION=0 -i revisions/F0/src/ -i src/ -o $@ $<
+azlf.gbc: $(f0_obj)
+	rgblink -n $*.sym -m $*.map -o $@ $^
+	rgbfix  -c -n 0 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -v $@
+
+games += azlf-r1.gbc
+f1_obj = src/main.azlf-1.o
+src/main.azlf-1.o: src/main.asm $(deps)
+	$(ASM) -DLANG=FR -DVERSION=1 -i revisions/F1/src/ -i revisions/F0/src/ -i src/ -o $@ $<
+azlf-r1.gbc: $(f1_obj) azlg-r1.gbc
+	rgblink -O "azlg-r1.gbc" -n $*.sym -m $*.map -o $@ $<
+	rgbfix  -c -n 1 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -i "AZLF" -v $@
+
+#
+# English
+#
+
+games += azle.gbc
+e0_obj = src/main.azle.o
+src/main.azle.o: src/main.asm $(deps)
+	$(ASM) -DLANG=EN -DVERSION=0 -i src/ -o $@ $<
+azle.gbc: $(e0_obj)
+	rgblink -n $*.sym -m $*.map -o $@ $^
+	rgbfix  -c -n 0 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -v $@
+
+games += azle-r1.gbc
+e1_obj = src/main.azle-1.o
+src/main.azle-1.o: src/main.asm $(deps)
+	$(ASM) -DLANG=EN -DVERSION=1 -i revisions/E1/src/ -i src/ -o $@ $<
+azle-r1.gbc: $(e1_obj)
+	rgblink -n $*.sym -m $*.map -o $@ $^
+	rgbfix  -c -n 1 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -v $@
+
+games += azle-r2.gbc
+e2_obj = src/main.azle-2.o
+src/main.azle-2.o: src/main.asm $(deps)
+	$(ASM) -DLANG=EN -DVERSION=2 -i revisions/E2/src/ -i revisions/E1/src/ -i src/ -o $@ $<
+azle-r2.gbc: $(e2_obj) azlf-r1.gbc
+	rgblink -O "azlf-r1.gbc" -n $*.sym -m $*.map -o $@ $<
+	rgbfix  -c -n 2 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -i "AZLE" -v $@
+
+build: $(games)

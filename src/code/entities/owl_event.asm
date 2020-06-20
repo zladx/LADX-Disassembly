@@ -343,9 +343,11 @@ OwlState4Handler::
     and  a                                        ; $69F4: $A7
     jr   z, jr_006_6A04                           ; $69F5: $28 $0D
 
+IF !__PATCH_0__
     ld   a, [wTunicType]                          ; $69F7: $FA $0F $DC
     and  a                                        ; $69FA: $A7
     jr   nz, jr_006_6A04                          ; $69FB: $20 $07
+ENDC
 
     ld   a, MUSIC_ACTIVE_POWER_UP
     ld   [wMusicTrackToPlay], a                   ; $69FF: $EA $68 $D3

@@ -3648,7 +3648,11 @@ jr_004_6575:
     ret                                           ; $6575: $C9
 
 Data_004_6576::
+IF __PATCH_0__
+    db   $54, $02
+ELSE
     db   $54, $00
+ENDC
 
 Data_004_6578::
     db   $08, $F8
@@ -6895,6 +6899,18 @@ jr_004_78D4:
     jp   label_004_796D                           ; $7904: $C3 $6D $79
 
 jr_004_7907:
+IF __PATCH_0__
+    ld   a, [$c3cf]
+    and  a
+    jr   nz, jr_004_7940
+ENDC
+
+IF __PATCH_3__
+    ld   a, [wIsCarryingLiftedObject]
+    and  a
+    jr   nz, jr_004_7940
+ENDC
+
     ldh  a, [hLinkPositionX]                      ; $7907: $F0 $98
     add  $00                                      ; $7909: $C6 $00
     swap a                                        ; $790B: $CB $37

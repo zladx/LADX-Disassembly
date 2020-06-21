@@ -24,7 +24,8 @@ default: build test
 asm_files = $(shell find src     -type f -name '*.asm')
 gfx_files = $(shell find src/gfx -type f -name '*.png')
 bin_files = $(shell find src     -type f -name '*.bin')
-
+# Add files from the different revisions
+# FIXME: add these files only when building the relevant targets
 asm_files += $(shell find revisions -type f -name '*.asm')
 gfx_files += $(shell find revisions -type f -name '*.png')
 
@@ -36,9 +37,7 @@ deps = $(asm_files) $(gfx_files:.png=.2bpp) $(bin_files)
 # Then we link them to create a playable image.
 # This also spits out game.sym, which lets you use labels in bgb.
 
-
 src/main.o: $(asm_files) $(gfx_files:.png=.2bpp) $(bin_files)
-
 
 #
 # Japanese

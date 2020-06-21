@@ -2,6 +2,8 @@
 
 2BPP   := rgbgfx
 ASM    := rgbasm -E
+LINKER := rgblink
+FIXER  := rgbfix -c -r 0x03 -s -l 0x33 -k "01" -m 0x1B -p 0xFF
 
 .SUFFIXES: .asm .o .gbc .png .2bpp
 
@@ -41,24 +43,24 @@ j0_obj = src/main.azlj.o
 src/main.azlj.o: src/main.asm $(deps)
 	$(ASM) -DLANG=JP -DVERSION=0 -i revisions/J0/src/ -i src/ -o $@ $<
 azlj.gbc: $(j0_obj)
-	rgblink -n $*.sym -m $*.map -o $@ $^
-	rgbfix  -c -n 0 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -p 0xFF -t "ZELDA" -v $@
+	$(LINKER) -n $*.sym -m $*.map -o $@ $^
+	$(FIXER) -n 0 -t "ZELDA" -v $@
 
 games += azlj-r1.gbc
 j1_obj = src/main.azlj-1.o
 src/main.azlj-1.o: src/main.asm $(deps)
 	$(ASM) -DLANG=JP -DVERSION=1 -i revisions/J1/src/ -i revisions/J0/src/ -i src/ -o $@ $<
 azlj-r1.gbc: $(j1_obj)
-	rgblink -n $*.sym -m $*.map -o $@ $^
-	rgbfix  -c -n 1 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -p 0xFF -t "ZELDA" -v $@
+	$(LINKER) -n $*.sym -m $*.map -o $@ $^
+	$(FIXER) -n 1 -t "ZELDA" -v $@
 
 games += azlj-r2.gbc
 j2_obj = src/main.azlj-2.o
 src/main.azlj-2.o: src/main.asm $(deps)
 	$(ASM) -DLANG=JP -DVERSION=2 -i revisions/J2/src/ -i revisions/J1/src/ -i revisions/J0/src/ -i src/ -o $@ $<
 azlj-r2.gbc: $(j2_obj)
-	rgblink -n $*.sym -m $*.map -o $@ $^
-	rgbfix  -c -n 2 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -p 0xFF -t "ZELDA" -i "AZLJ" -v $@
+	$(LINKER) -n $*.sym -m $*.map -o $@ $^
+	$(FIXER) -n 2 -t "ZELDA" -i "AZLJ" -v $@
 
 #
 # German
@@ -69,16 +71,16 @@ g0_obj = src/main.azlg.o
 src/main.azlg.o: src/main.asm $(deps)
 	$(ASM) -DLANG=DE -DVERSION=0 -i revisions/G0/src/ -i src/ -o $@ $<
 azlg.gbc: $(g0_obj)
-	rgblink -n $*.sym -m $*.map -o $@ $^
-	rgbfix  -c -n 0 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -v $@
+	$(LINKER) -n $*.sym -m $*.map -o $@ $^
+	$(FIXER) -n 0 -j -t "ZELDA" -v $@
 
 games += azlg-r1.gbc
 g1_obj = src/main.azlg-1.o
 src/main.azlg-1.o: src/main.asm $(deps)
 	$(ASM) -DLANG=DE -DVERSION=1 -i revisions/G1/src/ -i revisions/G0/src/ -i src/ -o $@ $<
 azlg-r1.gbc: $(g1_obj) azlj-r2.gbc
-	rgblink -O "azlj-r2.gbc" -n $*.sym -m $*.map -o $@ $<
-	rgbfix  -c -n 1 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -i "AZLD" -v $@
+	$(LINKER) -O "azlj-r2.gbc" -n $*.sym -m $*.map -o $@ $<
+	$(FIXER) -n 1 -j -t "ZELDA" -i "AZLD" -v $@
 
 #
 # French
@@ -89,16 +91,16 @@ f0_obj = src/main.azlf.o
 src/main.azlf.o: src/main.asm $(deps)
 	$(ASM) -DLANG=FR -DVERSION=0 -i revisions/F0/src/ -i src/ -o $@ $<
 azlf.gbc: $(f0_obj)
-	rgblink -n $*.sym -m $*.map -o $@ $^
-	rgbfix  -c -n 0 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -v $@
+	$(LINKER) -n $*.sym -m $*.map -o $@ $^
+	$(FIXER) -n 0 -j -t "ZELDA" -v $@
 
 games += azlf-r1.gbc
 f1_obj = src/main.azlf-1.o
 src/main.azlf-1.o: src/main.asm $(deps)
 	$(ASM) -DLANG=FR -DVERSION=1 -i revisions/F1/src/ -i revisions/F0/src/ -i src/ -o $@ $<
 azlf-r1.gbc: $(f1_obj) azlg-r1.gbc
-	rgblink -O "azlg-r1.gbc" -n $*.sym -m $*.map -o $@ $<
-	rgbfix  -c -n 1 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -i "AZLF" -v $@
+	$(LINKER) -O "azlg-r1.gbc" -n $*.sym -m $*.map -o $@ $<
+	$(FIXER) -n 1 -j -t "ZELDA" -i "AZLF" -v $@
 
 #
 # English
@@ -109,24 +111,24 @@ e0_obj = src/main.azle.o
 src/main.azle.o: src/main.asm $(deps)
 	$(ASM) -DLANG=EN -DVERSION=0 -i src/ -o $@ $<
 azle.gbc: $(e0_obj)
-	rgblink -n $*.sym -m $*.map -o $@ $^
-	rgbfix  -c -n 0 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -v $@
+	$(LINKER) -n $*.sym -m $*.map -o $@ $^
+	$(FIXER) -n 0 -j -t "ZELDA" -v $@
 
 games += azle-r1.gbc
 e1_obj = src/main.azle-1.o
 src/main.azle-1.o: src/main.asm $(deps)
 	$(ASM) -DLANG=EN -DVERSION=1 -i revisions/E1/src/ -i src/ -o $@ $<
 azle-r1.gbc: $(e1_obj)
-	rgblink -n $*.sym -m $*.map -o $@ $^
-	rgbfix  -c -n 1 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -v $@
+	$(LINKER) -n $*.sym -m $*.map -o $@ $^
+	$(FIXER) -n 1 -j -t "ZELDA" -v $@
 
 games += azle-r2.gbc
 e2_obj = src/main.azle-2.o
 src/main.azle-2.o: src/main.asm $(deps)
 	$(ASM) -DLANG=EN -DVERSION=2 -i revisions/E2/src/ -i revisions/E1/src/ -i src/ -o $@ $<
 azle-r2.gbc: $(e2_obj) azlf-r1.gbc
-	rgblink -O "azlf-r1.gbc" -n $*.sym -m $*.map -o $@ $<
-	rgbfix  -c -n 2 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -i "AZLE" -v $@
+	$(LINKER) -O "azlf-r1.gbc" -n $*.sym -m $*.map -o $@ $<
+	$(FIXER) -n 2 -j -t "ZELDA" -i "AZLE" -v $@
 
 #
 # General rules

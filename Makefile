@@ -5,12 +5,9 @@ ASM    := rgbasm -E
 
 .SUFFIXES: .asm .o .gbc .png .2bpp
 
-# Default target
-all: build test
-
-test: build
-	@tools/md5sum.sh -c ladx.md5
-
+# Default target: build and test only the US 1.0 revision.
+# (Use `make all` to build and test all targets)
+default: build test
 
 # Objects are assembled from source.
 # src/main.o is built from src/main.asm.
@@ -131,7 +128,25 @@ azle-r2.gbc: $(e2_obj) azlf-r1.gbc
 	rgblink -O "azlf-r1.gbc" -n $*.sym -m $*.map -o $@ $<
 	rgbfix  -c -n 2 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -i "AZLE" -v $@
 
-build: $(games)
+#
+# General rules
+#
+
+# By default, build the US 1.0 revision.
+build: azle.gbc
+
+# Build all revisions.
+build-all: $(games)
+
+# Test the default revision.
+test: build
+	@tools/md5sum.sh -c ladx.md5
+
+# Test all revisions.
+test-all: build-all
+	@tools/md5sum.sh -c ladx.md5
+
+all: build-all test-all
 
 clean:
 	rm -f $(obj)

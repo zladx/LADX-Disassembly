@@ -11,10 +11,6 @@ all: build test
 test: build
 	@tools/md5sum.sh -c ladx.md5
 
-clean:
-	rm -f $(obj)
-	rm -f game.{gbc,sym,map}
-	find . -iname '*.2bpp' -exec rm {} +
 
 # Objects are assembled from source.
 # src/main.o is built from src/main.asm.
@@ -136,3 +132,11 @@ azle-r2.gbc: $(e2_obj) azlf-r1.gbc
 	rgbfix  -c -n 2 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -i "AZLE" -v $@
 
 build: $(games)
+
+clean:
+	rm -f $(obj)
+	rm -f $(games)
+	rm -f $(games:.gbc=.o)
+	rm -f $(games:.gbc=.map)
+	rm -f $(games:.gbc=.sym)
+	find . -iname '*.2bpp' -exec rm {} +

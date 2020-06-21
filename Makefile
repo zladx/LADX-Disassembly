@@ -155,3 +155,5 @@ clean:
 	rm -f $(games:.gbc=.map)
 	rm -f $(games:.gbc=.sym)
 	find . -iname '*.2bpp' -exec rm {} +
+
+.PHONY: default build build-all test test-all all clean

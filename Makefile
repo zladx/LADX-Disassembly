@@ -16,7 +16,7 @@ FIXER  := rgbfix \
 .SUFFIXES: .asm .o .gbc .png .2bpp
 
 # Default target: build and test only the US 1.0 revision.
-# (Use `make all` to build and test all targets)
+# (Use `make all` to build and test all targets.)
 default: build test
 
 # Objects are assembled from source.
@@ -35,8 +35,6 @@ deps = $(asm_files) $(gfx_files:.png=.2bpp) $(bin_files)
 
 # Then we link them to create a playable image.
 # This also spits out game.sym, which lets you use labels in bgb.
-# Generating a mapfile is required thanks to a bug in rgblink.
-
 
 
 src/main.o: $(asm_files) $(gfx_files:.png=.2bpp) $(bin_files)
@@ -51,7 +49,7 @@ j0_obj = src/main.azlj.o
 src/main.azlj.o: src/main.asm $(deps)
 	$(ASM) -DLANG=JP -DVERSION=0 -i revisions/J0/src/ -i src/ -o $@ $<
 azlj.gbc: $(j0_obj)
-	$(LINKER) -n $*.sym -m $*.map -o $@ $^
+	$(LINKER) -n $*.sym -o $@ $^
 	$(FIXER) --rom-version 0 --title "ZELDA" $@
 
 games += azlj-r1.gbc
@@ -59,7 +57,7 @@ j1_obj = src/main.azlj-1.o
 src/main.azlj-1.o: src/main.asm $(deps)
 	$(ASM) -DLANG=JP -DVERSION=1 -i revisions/J1/src/ -i revisions/J0/src/ -i src/ -o $@ $<
 azlj-r1.gbc: $(j1_obj)
-	$(LINKER) -n $*.sym -m $*.map -o $@ $^
+	$(LINKER) -n $*.sym -o $@ $^
 	$(FIXER) --rom-version 1 --title "ZELDA" $@
 
 games += azlj-r2.gbc
@@ -67,7 +65,7 @@ j2_obj = src/main.azlj-2.o
 src/main.azlj-2.o: src/main.asm $(deps)
 	$(ASM) -DLANG=JP -DVERSION=2 -i revisions/J2/src/ -i revisions/J1/src/ -i revisions/J0/src/ -i src/ -o $@ $<
 azlj-r2.gbc: $(j2_obj)
-	$(LINKER) -n $*.sym -m $*.map -o $@ $^
+	$(LINKER) -n $*.sym -o $@ $^
 	$(FIXER) --rom-version 2 --title "ZELDA" --game-id "AZLJ" $@
 
 #
@@ -79,7 +77,7 @@ g0_obj = src/main.azlg.o
 src/main.azlg.o: src/main.asm $(deps)
 	$(ASM) -DLANG=DE -DVERSION=0 -i revisions/G0/src/ -i src/ -o $@ $<
 azlg.gbc: $(g0_obj)
-	$(LINKER) -n $*.sym -m $*.map -o $@ $^
+	$(LINKER) -n $*.sym -o $@ $^
 	$(FIXER) --rom-version 0 -j --title "ZELDA" $@
 
 games += azlg-r1.gbc
@@ -87,7 +85,7 @@ g1_obj = src/main.azlg-1.o
 src/main.azlg-1.o: src/main.asm $(deps)
 	$(ASM) -DLANG=DE -DVERSION=1 -i revisions/G1/src/ -i revisions/G0/src/ -i src/ -o $@ $<
 azlg-r1.gbc: $(g1_obj) azlj-r2.gbc
-	$(LINKER) -O "azlj-r2.gbc" -n $*.sym -m $*.map -o $@ $<
+	$(LINKER) -O "azlj-r2.gbc" -n $*.sym -o $@ $<
 	$(FIXER) --rom-version 1 -j --title "ZELDA" --game-id "AZLD" $@
 
 #
@@ -99,7 +97,7 @@ f0_obj = src/main.azlf.o
 src/main.azlf.o: src/main.asm $(deps)
 	$(ASM) -DLANG=FR -DVERSION=0 -i revisions/F0/src/ -i src/ -o $@ $<
 azlf.gbc: $(f0_obj)
-	$(LINKER) -n $*.sym -m $*.map -o $@ $^
+	$(LINKER) -n $*.sym -o $@ $^
 	$(FIXER) --rom-version 0 -j --title "ZELDA" $@
 
 games += azlf-r1.gbc
@@ -107,7 +105,7 @@ f1_obj = src/main.azlf-1.o
 src/main.azlf-1.o: src/main.asm $(deps)
 	$(ASM) -DLANG=FR -DVERSION=1 -i revisions/F1/src/ -i revisions/F0/src/ -i src/ -o $@ $<
 azlf-r1.gbc: $(f1_obj) azlg-r1.gbc
-	$(LINKER) -O "azlg-r1.gbc" -n $*.sym -m $*.map -o $@ $<
+	$(LINKER) -O "azlg-r1.gbc" -n $*.sym -o $@ $<
 	$(FIXER) --rom-version 1 -j --title "ZELDA" --game-id "AZLF" $@
 
 #
@@ -119,7 +117,7 @@ e0_obj = src/main.azle.o
 src/main.azle.o: src/main.asm $(deps)
 	$(ASM) -DLANG=EN -DVERSION=0 -i src/ -o $@ $<
 azle.gbc: $(e0_obj)
-	$(LINKER) -n $*.sym -m $*.map -o $@ $^
+	$(LINKER) -n $*.sym -o $@ $^
 	$(FIXER) --rom-version 0 -j --title "ZELDA" $@
 
 games += azle-r1.gbc
@@ -127,7 +125,7 @@ e1_obj = src/main.azle-1.o
 src/main.azle-1.o: src/main.asm $(deps)
 	$(ASM) -DLANG=EN -DVERSION=1 -i revisions/E1/src/ -i src/ -o $@ $<
 azle-r1.gbc: $(e1_obj)
-	$(LINKER) -n $*.sym -m $*.map -o $@ $^
+	$(LINKER) -n $*.sym -o $@ $^
 	$(FIXER) --rom-version 1 -j --title "ZELDA" $@
 
 games += azle-r2.gbc
@@ -135,7 +133,7 @@ e2_obj = src/main.azle-2.o
 src/main.azle-2.o: src/main.asm $(deps)
 	$(ASM) -DLANG=EN -DVERSION=2 -i revisions/E2/src/ -i revisions/E1/src/ -i src/ -o $@ $<
 azle-r2.gbc: $(e2_obj) azlf-r1.gbc
-	$(LINKER) -O "azlf-r1.gbc" -n $*.sym -m $*.map -o $@ $<
+	$(LINKER) -O "azlf-r1.gbc" -n $*.sym -o $@ $<
 	$(FIXER) --rom-version 2 -j --title "ZELDA" --game-id "AZLE" $@
 
 #

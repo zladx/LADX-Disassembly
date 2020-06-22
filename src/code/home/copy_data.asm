@@ -5,11 +5,11 @@
 ;   de : destination address
 ;   hl : source address
 CopyDataFromBank::
-    ld   [MBC3SelectBank], a
-    call CopyData
-    ld   a, $01
-    ld   [MBC3SelectBank], a
-    ret
+    ld   [MBC3SelectBank], a                      ; $2908: $EA $00 $21
+    call CopyData                                 ; $290B: $CD $14 $29
+    ld   a, $01                                   ; $290E: $3E $01
+    ld   [MBC3SelectBank], a                      ; $2910: $EA $00 $21
+    ret                                           ; $2913: $C9
 
 ; Copy data
 ; Inputs:
@@ -17,14 +17,14 @@ CopyDataFromBank::
 ;   de : destination address
 ;   hl : source address
 CopyData::
-    ld   a, [hli]
-    ld   [de], a
-    inc  de
-    dec  bc
-    ld   a, b
-    or   c
-    jr   nz, CopyData
-    ret
+    ld   a, [hli]                                 ; $2914: $2A
+    ld   [de], a                                  ; $2915: $12
+    inc  de                                       ; $2916: $13
+    dec  bc                                       ; $2917: $0B
+    ld   a, b                                     ; $2918: $78
+    or   c                                        ; $2919: $B1
+    jr   nz, CopyData                             ; $291A: $20 $F8
+    ret                                           ; $291C: $C9
 
 ; Execute a data copy from a wRequest structure,
 ; with optional handling during map transitions.
@@ -33,16 +33,16 @@ CopyData::
 ;   a:  destination address high byte
 ExpandCopyRequestArgs
     ; Copy destination address to hl
-    inc  de
-    ld   h, a
-    ld   a, [de]
-    ld   l, a
+    inc  de                                       ; $291D: $13
+    ld   h, a                                     ; $291E: $67
+    ld   a, [de]                                  ; $291F: $1A
+    ld   l, a                                     ; $2920: $6F
     ; Copy data length to a
-    inc  de
-    ld   a, [de]
+    inc  de                                       ; $2921: $13
+    ld   a, [de]                                  ; $2922: $1A
     ; Move de to the data start
-    inc  de
-    call CopyBackgroundData
+    inc  de                                       ; $2923: $13
+    call CopyBackgroundData                       ; $2924: $CD $41 $29
     ; fallthrough
 
 ; Execute a data copy from a wRequest structure,
@@ -50,34 +50,34 @@ ExpandCopyRequestArgs
 ; Inputs:
 ;   de: data copy request struct (see wRequest)
 ExecuteBackgroundCopyRequest::
-    ld   a, [wRoomTransitionState]
-    and  a
-    jr   nz, .duringMapTransition
+    ld   a, [wRoomTransitionState]                ; $2927: $FA $24 $C1
+    and  a                                        ; $292A: $A7
+    jr   nz, .duringMapTransition                 ; $292B: $20 $0F
 
 .noMapTransition
     ; If the request is present, copy the data.
-    ld   a, [de]
-    and  a
-    jr   nz, ExpandCopyRequestArgs
+    ld   a, [de]                                  ; $292D: $1A
+    and  a                                        ; $292E: $A7
+    jr   nz, ExpandCopyRequestArgs                ; $292F: $20 $EC
     ; but if the request is blank or has just been executed successfully,
     ; return.
-    ret
+    ret                                           ; $2931: $C9
 
 .mapTransitionCopyLoop
-    inc  de
-    ld   h, a
-    ld   a, [de]
-    ld   l, a
-    inc  de
-    ld   a, [de]
-    inc  de
-    call label_2991
+    inc  de                                       ; $2932: $13
+    ld   h, a                                     ; $2933: $67
+    ld   a, [de]                                  ; $2934: $1A
+    ld   l, a                                     ; $2935: $6F
+    inc  de                                       ; $2936: $13
+    ld   a, [de]                                  ; $2937: $1A
+    inc  de                                       ; $2938: $13
+    call label_2991                               ; $2939: $CD $91 $29
 
 .duringMapTransition
-    ld   a, [de]
-    and  a
-    jr   nz, .mapTransitionCopyLoop
-    ret
+    ld   a, [de]                                  ; $293C: $1A
+    and  a                                        ; $293D: $A7
+    jr   nz, .mapTransitionCopyLoop               ; $293E: $20 $F2
+    ret                                           ; $2940: $C9
 
 ; Copy map data to Background data
 ; Inputs:
@@ -86,145 +86,145 @@ ExecuteBackgroundCopyRequest::
 ;   a:  data length (bits 0-6) and copy mode (bits 7-8)
 CopyBackgroundData::
     ; Save the six lowest bits (actual data length) of the data length to b
-    push af
-    and  $3F
-    ld   b, a
-    inc  b
-    pop  af
+    push af                                       ; $2941: $F5
+    and  $3F                                      ; $2942: $E6 $3F
+    ld   b, a                                     ; $2944: $47
+    inc  b                                        ; $2945: $04
+    pop  af                                       ; $2946: $F1
 
     ; Save the two highmost bits (copy flag) of the data length to a
-    rlca
-    rlca
-    and  $03
+    rlca                                          ; $2947: $07
+    rlca                                          ; $2948: $07
+    and  $03                                      ; $2949: $E6 $03
 
     ; Dispatch according to the copy mode
     ; BG_COPY_MODE_ROW
-    jr   z, .copyRow
-    dec  a
+    jr   z, .copyRow                              ; $294B: $28 $08
+    dec  a                                        ; $294D: $3D
     ; BG_COPY_MODE_ROW_SINGLE_VALUE
-    jr   z, .copyRowSingleValue
-    dec  a
+    jr   z, .copyRowSingleValue                   ; $294E: $28 $16
+    dec  a                                        ; $2950: $3D
     ; BG_COPY_MODE_COLUMN
-    jr   z, .copyColumn
+    jr   z, .copyColumn                           ; $2951: $28 $24
     ; BG_COPY_MODE_COLUMN_SINGLE_VALUE
-    jr   .copyColumnSingleValue
+    jr   .copyColumnSingleValue                   ; $2953: $18 $2F
 
 .copyRow
     ; Copy one byte from [de] to [hl]
-    ld   a, [de]
-    ldi  [hl], a
+    ld   a, [de]                                  ; $2955: $1A
+    ldi  [hl], a                                  ; $2956: $22
     ; If 'dest mod 32' is 0…
-    ld   a, l
-    and  $1F
-    jr   nz, .noSubstraction0
+    ld   a, l                                     ; $2957: $7D
+    and  $1F                                      ; $2958: $E6 $1F
+    jr   nz, .noSubstraction0                     ; $295A: $20 $05
     ; dest = dest - 32
-    dec  hl
-    ld   a, l
-    and  $E0
-    ld   l, a
+    dec  hl                                       ; $295C: $2B
+    ld   a, l                                     ; $295D: $7D
+    and  $E0                                      ; $295E: $E6 $E0
+    ld   l, a                                     ; $2960: $6F
 .noSubstraction0
     ; Increment the source address
-    inc  de
+    inc  de                                       ; $2961: $13
     ; Decrement the length to be copied
-    dec  b
+    dec  b                                        ; $2962: $05
     ; Loop
-    jr   nz, .copyRow
-    ret
+    jr   nz, .copyRow                             ; $2963: $20 $F0
+    ret                                           ; $2965: $C9
 
 ; Copy a single value in [de] from [hl] to [hl + a]
 .copyRowSingleValue
     ; Copy one byte from [de] to [hl]
-    ld   a, [de]
-    ldi  [hl], a
+    ld   a, [de]                                  ; $2966: $1A
+    ldi  [hl], a                                  ; $2967: $22
     ; If 'dest mod 32' is 0…
-    ld   a, l
-    and  $1F
-    jr   nz, .noSubstraction1
+    ld   a, l                                     ; $2968: $7D
+    and  $1F                                      ; $2969: $E6 $1F
+    jr   nz, .noSubstraction1                     ; $296B: $20 $05
     ; dest = dest - 32
-    dec  hl
-    ld   a, l
-    and  $E0
-    ld   l, a
+    dec  hl                                       ; $296D: $2B
+    ld   a, l                                     ; $296E: $7D
+    and  $E0                                      ; $296F: $E6 $E0
+    ld   l, a                                     ; $2971: $6F
 .noSubstraction1
     ; Decrement the length to be copied
-    dec  b
+    dec  b                                        ; $2972: $05
     ; Loop (without incrementing the source address)
-    jr   nz, .copyRowSingleValue
-    inc  de
-    ret
+    jr   nz, .copyRowSingleValue                  ; $2973: $20 $F1
+    inc  de                                       ; $2975: $13
+    ret                                           ; $2976: $C9
 
 .copyColumn
     ; Copy one byte from [de] to [hl]
-    ld   a, [de]
-    ld   [hl], a
+    ld   a, [de]                                  ; $2977: $1A
+    ld   [hl], a                                  ; $2978: $77
     ; Increment the source address
-    inc  de
+    inc  de                                       ; $2979: $13
     ; Move the destination to the next background column
-    ld   a, b
-    ld   bc, $20
-    add  hl, bc
+    ld   a, b                                     ; $297A: $78
+    ld   bc, $20                                  ; $297B: $01 $20 $00
+    add  hl, bc                                   ; $297E: $09
     ; Decrement the length to be copied
-    ld   b, a
-    dec  b
+    ld   b, a                                     ; $297F: $47
+    dec  b                                        ; $2980: $05
     ; Loop
-    jr   nz, .copyColumn
-    ret
+    jr   nz, .copyColumn                          ; $2981: $20 $F4
+    ret                                           ; $2983: $C9
 
 .copyColumnSingleValue
     ; Copy one byte from [de] to [hl]
-    ld   a, [de]
-    ld   [hl], a
+    ld   a, [de]                                  ; $2984: $1A
+    ld   [hl], a                                  ; $2985: $77
     ; Move the destination to the next background column
-    ld   a, b
-    ld   bc, $20
-    add  hl, bc
+    ld   a, b                                     ; $2986: $78
+    ld   bc, $20                                  ; $2987: $01 $20 $00
+    add  hl, bc                                   ; $298A: $09
     ; Decrement the length to be copied
-    ld   b, a
-    dec  b
+    ld   b, a                                     ; $298B: $47
+    dec  b                                        ; $298C: $05
     ; Loop (without incrementing the source address)
-    jr   nz, .copyColumnSingleValue
-    inc  de
-    ret
+    jr   nz, .copyColumnSingleValue               ; $298D: $20 $F5
+    inc  de                                       ; $298F: $13
+    ret                                           ; $2990: $C9
 
 label_2991::
-    push af
-    and  $3F
-    ld   b, a
-    inc  b
-    pop  af
-    and  $80
-    jr   nz, UpdateNextBGColumnWithTiles
+    push af                                       ; $2991: $F5
+    and  $3F                                      ; $2992: $E6 $3F
+    ld   b, a                                     ; $2994: $47
+    inc  b                                        ; $2995: $04
+    pop  af                                       ; $2996: $F1
+    and  $80                                      ; $2997: $E6 $80
+    jr   nz, UpdateNextBGColumnWithTiles          ; $2999: $20 $15
 
 label_299B::
-    ld   a, [de]
-    cp   $EE
-    jr   z, label_29AB
-    ldi  [hl], a
-    ld   a, l
-    and  $1F
-    jr   nz, label_29AB
-    dec  hl
-    ld   a, l
-    and  $E0
-    ld   l, a
+    ld   a, [de]                                  ; $299B: $1A
+    cp   $EE                                      ; $299C: $FE $EE
+    jr   z, label_29AB                            ; $299E: $28 $0B
+    ldi  [hl], a                                  ; $29A0: $22
+    ld   a, l                                     ; $29A1: $7D
+    and  $1F                                      ; $29A2: $E6 $1F
+    jr   nz, label_29AB                           ; $29A4: $20 $05
+    dec  hl                                       ; $29A6: $2B
+    ld   a, l                                     ; $29A7: $7D
+    and  $E0                                      ; $29A8: $E6 $E0
+    ld   l, a                                     ; $29AA: $6F
 
 label_29AB::
-    inc  de
-    dec  b
-    jr   nz, label_299B
-    ret
+    inc  de                                       ; $29AB: $13
+    dec  b                                        ; $29AC: $05
+    jr   nz, label_299B                           ; $29AD: $20 $EC
+    ret                                           ; $29AF: $C9
 
 UpdateNextBGColumnWithTiles::
-    ld   a, [de]
-    cp   $EE
-    jr   z, .continue
-    ld   [hl], a
+    ld   a, [de]                                  ; $29B0: $1A
+    cp   $EE                                      ; $29B1: $FE $EE
+    jr   z, .continue                             ; $29B3: $28 $01
+    ld   [hl], a                                  ; $29B5: $77
 .continue
-    inc  de
-    ld   a, b
-    ld   bc, $20
-    add  hl, bc
-    ld   b, a
-    dec  b
-    jr   nz, UpdateNextBGColumnWithTiles
-    ret
+    inc  de                                       ; $29B6: $13
+    ld   a, b                                     ; $29B7: $78
+    ld   bc, $20                                  ; $29B8: $01 $20 $00
+    add  hl, bc                                   ; $29BB: $09
+    ld   b, a                                     ; $29BC: $47
+    dec  b                                        ; $29BD: $05
+    jr   nz, UpdateNextBGColumnWithTiles          ; $29BE: $20 $F0
+    ret                                           ; $29C0: $C9

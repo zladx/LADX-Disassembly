@@ -7,63 +7,63 @@
 ; (See header.asm)
 Start::
     ; Switch CPU to double-speed if needed
-    cp   GBC ; is running on Game Boy Color?
-    jr   nz, .notGBC
-    ld   a, [rKEY1]
-    and  $80 ; do we need to switch the CPU speed?
-    jr   nz, .speedSwitchDone
-    ld   a, $30      ; \
-    ld   [rP1], a  ; |
-    ld   a, $01      ; |
-    ld   [rKEY1], a  ; | Switch the CPU speed
-    xor  a           ; |
-    ld   [rIE], a    ; |
-    stop             ; /
+    cp   GBC ; is running on Game Boy Color?      ; $0150: $FE $11
+    jr   nz, .notGBC                              ; $0152: $20 $1A
+    ld   a, [rKEY1]                               ; $0154: $F0 $4D
+    and  $80 ; do we need to switch the CPU speed? ; $0156: $E6 $80
+    jr   nz, .speedSwitchDone                     ; $0158: $20 $0D
+    ld   a, $30      ; \                          ; $015A: $3E $30
+    ld   [rP1], a  ; |                            ; $015C: $E0 $00
+    ld   a, $01      ; |                          ; $015E: $3E $01
+    ld   [rKEY1], a  ; | Switch the CPU speed     ; $0160: $E0 $4D
+    xor  a           ; |                          ; $0162: $AF
+    ld   [rIE], a    ; |                          ; $0163: $E0 $FF
+    stop             ; /                          ; $0165: $10 $00
 
 .speedSwitchDone
-    xor  a
-    ld   [rSVBK], a
-    ld   a, $01 ; isGBC = true
-    jr   Init
+    xor  a                                        ; $0167: $AF
+    ld   [rSVBK], a                               ; $0168: $E0 $70
+    ld   a, $01 ; isGBC = true                    ; $016A: $3E $01
+    jr   Init                                     ; $016C: $18 $01
 
 .notGBC
-    xor  a ; isGBC = false
+    xor  a ; isGBC = false                        ; $016E: $AF
 
 Init::
-    ldh  [hIsGBC], a ; Save isGBC value
-    call LCDOff      ; Turn off screen
-    ld   sp, $DFFF   ; Init stack pointer
+    ldh  [hIsGBC], a ; Save isGBC value           ; $016F: $E0 $FE
+    call LCDOff      ; Turn off screen            ; $0171: $CD $CF $28
+    ld   sp, $DFFF   ; Init stack pointer         ; $0174: $31 $FF $DF
 
     ; Super GameBoy detection and initialization
-    callsb SuperGameBoyInit
+    callsb SuperGameBoyInit                       ; $0177: $3E $3C $EA $00 $21 $CD $22 $6A
 
     ; Clear registers
-    xor  a
-    ld   [rBGP], a
-    ld   [rOBP0], a
-    ld   [rOBP1], a
+    xor  a                                        ; $017F: $AF
+    ld   [rBGP], a                                ; $0180: $E0 $47
+    ld   [rOBP0], a                               ; $0182: $E0 $48
+    ld   [rOBP1], a                               ; $0184: $E0 $49
 
     ; Clear Tiles Map 0
-    ld   hl, vTiles0
-    ld   bc, $1800
-    call ClearBytes
+    ld   hl, vTiles0                              ; $0186: $21 $00 $80
+    ld   bc, $1800                                ; $0189: $01 $00 $18
+    call ClearBytes                               ; $018C: $CD $DF $29
 
     ; Clear Background Maps
-    callsb ClearBGMap0Attributes
-    call ClearBGMap
+    callsb ClearBGMap0Attributes                  ; $018F: $3E $24 $EA $00 $21 $CD $00 $5C
+    call ClearBGMap                               ; $0197: $CD $F7 $28
 
-    call ClearHRAMAndWRAM
+    call ClearHRAMAndWRAM                         ; $019A: $CD $D0 $29
 
     ; Copy DMA routine to HRAM
-    callsb WriteDMACodeToHRAM
+    callsb WriteDMACodeToHRAM                     ; $019D: $3E $01 $EA $00 $21 $CD $32 $6D
 
     ; Initiate DMA transfer
-    call hDMARoutine
+    call hDMARoutine                              ; $01A5: $CD $C0 $FF
 
-    call LCDOn
+    call LCDOn                                    ; $01A8: $CD $0D $41
 
     ; Load default tiles
-    call LoadBaseTiles
+    call LoadBaseTiles                            ; $01AB: $CD $CF $2B
 
     ; Initialize LCD Status register
     ;   Bit 6: LYC coincidence interrupt enabled
@@ -71,17 +71,17 @@ Init::
     ;   Bit 4: Mode 1 V-Blank interrupt disabled
     ;   Bit 3: Mode 0 H-Blank interrupt disabled
     ;   Bit 2-0: read-only
-    ld   a, %01000100
-    ld   [rSTAT], a
+    ld   a, %01000100                             ; $01AE: $3E $44
+    ld   [rSTAT], a                               ; $01B0: $E0 $41
 
     ; Initialize LY Compare register
     ; Request a STAT interrupt when LY equals $4F
-    ld   a, $4F
-    ld   [rLYC], a
+    ld   a, $4F                                   ; $01B2: $3E $4F
+    ld   [rLYC], a                                ; $01B4: $E0 $45
 
     ; Initialize wCurrentBank
-    ld   a, $01
-    ld   [wCurrentBank], a
+    ld   a, $01                                   ; $01B6: $3E $01
+    ld   [wCurrentBank], a                        ; $01B8: $EA $AF $DB
 
     ; Initialize Interrupts
     ;   Bit 4: Joypad interrupt disabled
@@ -89,24 +89,24 @@ Init::
     ;   Bit 2: Timer interrupt disabled
     ;   Bit 1: LCD STAT interrupt disabled
     ;   Bit 0: V-Blank interrupt enabled
-    ld   a, %00001
-    ld   [rIE], a
+    ld   a, %00001                                ; $01BB: $3E $01
+    ld   [rIE], a                                 ; $01BD: $E0 $FF
 
     ; Initialize save files
-    call InitSaveFiles
+    call InitSaveFiles                            ; $01BF: $CD $AA $46
 
     ; Initialize sound
-    callsb SoundSystemInit
+    callsb SoundSystemInit                        ; $01C2: $3E $1F $EA $00 $21 $CD $00 $40
 
     ; Ignore joypad input during 24 frames
-    ld   a, 24
-    ldh  [hButtonsInactiveDelay], a
+    ld   a, 24                                    ; $01CA: $3E $18
+    ldh  [hButtonsInactiveDelay], a               ; $01CC: $E0 $B5
 
     ; Enable interrupts
-    ei
+    ei                                            ; $01CE: $FB
 
     ; On GBC, reset WRAM bank 5
-    callsb ClearWRAMBank5
+    callsb ClearWRAMBank5                         ; $01CF: $3E $20 $EA $00 $21 $CD $54 $48
 
     ; Start rendering
-    jp   WaitForNextFrame
+    jp   WaitForNextFrame                         ; $01D7: $C3 $5F $03

@@ -3,872 +3,872 @@
 ;
 
 MarineBeachEntryPoint::
-    ld   a, [wDialogState]
-    and  a
-    jr   nz, jr_001_6213
-    ld   a, [$C3C7]
-    and  a
-    jr   z, jr_001_6213
-    dec  a
-    ld   [$C3C7], a
+    ld   a, [wDialogState]                        ; $6203: $FA $9F $C1
+    and  a                                        ; $6206: $A7
+    jr   nz, jr_001_6213                          ; $6207: $20 $0A
+    ld   a, [$C3C7]                               ; $6209: $FA $C7 $C3
+    and  a                                        ; $620C: $A7
+    jr   z, jr_001_6213                           ; $620D: $28 $04
+    dec  a                                        ; $620F: $3D
+    ld   [$C3C7], a                               ; $6210: $EA $C7 $C3
 
 jr_001_6213::
-    ld   a, [$C3C4]
-    and  a
-    jr   z, jr_001_621D
-    dec  a
-    ld   [$C3C4], a
+    ld   a, [$C3C4]                               ; $6213: $FA $C4 $C3
+    and  a                                        ; $6216: $A7
+    jr   z, jr_001_621D                           ; $6217: $28 $04
+    dec  a                                        ; $6219: $3D
+    ld   [$C3C4], a                               ; $621A: $EA $C4 $C3
 
 jr_001_621D::
-    ld   a, [wGameplaySubtype]
-    JP_TABLE
-._00 dw MarineBeachPrepare0
-._01 dw MarineBeachPrepare1
-._02 dw MarineBeachPrepare2
-._03 dw MarineBeachPrepare3
-._04 dw MarineBeachScroll1
-._05 dw MarineBeachScroll2
-._06 dw MarineBeachScrollStop
-._07 dw MarineBeachDialog1
-._08 dw MarineBeachPause1
-._09 dw MarineBeachDialog2
-._0A dw MarineBeachPause2
-._0B dw MarineBeachAreYouListening
-._0C dw MarineBeachDialog3
-._0D dw MarineBeachDialog4
-._0E dw FileSaveFadeOut
+    ld   a, [wGameplaySubtype]                    ; $621D: $FA $96 $DB
+    JP_TABLE                                      ; $6220: $C7
+._00 dw MarineBeachPrepare0                       ; $6221
+._01 dw MarineBeachPrepare1                       ; $6223
+._02 dw MarineBeachPrepare2                       ; $6225
+._03 dw MarineBeachPrepare3                       ; $6227
+._04 dw MarineBeachScroll1                        ; $6229
+._05 dw MarineBeachScroll2                        ; $622B
+._06 dw MarineBeachScrollStop                     ; $622D
+._07 dw MarineBeachDialog1                        ; $622F
+._08 dw MarineBeachPause1                         ; $6231
+._09 dw MarineBeachDialog2                        ; $6233
+._0A dw MarineBeachPause2                         ; $6235
+._0B dw MarineBeachAreYouListening                ; $6237
+._0C dw MarineBeachDialog3                        ; $6239
+._0D dw MarineBeachDialog4                        ; $623B
+._0E dw FileSaveFadeOut                           ; $623D
 
 MarineBeachPrepare0::
-    call IncrementGameplaySubtype
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, MarineBeachPrepare1
+    call IncrementGameplaySubtype                 ; $623F: $CD $D6 $44
+    ldh  a, [hIsGBC]                              ; $6242: $F0 $FE
+    and  a                                        ; $6244: $A7
+    jr   z, MarineBeachPrepare1                   ; $6245: $28 $19
 
-    ld   hl, $DC10
-    ld   c, $80
-    di
+    ld   hl, $DC10                                ; $6247: $21 $10 $DC
+    ld   c, $80                                   ; $624A: $0E $80
+    di                                            ; $624C: $F3
 
 jr_001_624D::
-    xor  a
-    ld   [rSVBK], a
-    ld   b, [hl]
-    ld   a, $03
-    ld   [rSVBK], a
-    ld   [hl], b
-    inc  hl
-    dec  c
-    ld   a, c
-    and  a
-    jr   nz, jr_001_624D
-    xor  a
-    ld   [rSVBK], a
-    ei
+    xor  a                                        ; $624D: $AF
+    ld   [rSVBK], a                               ; $624E: $E0 $70
+    ld   b, [hl]                                  ; $6250: $46
+    ld   a, $03                                   ; $6251: $3E $03
+    ld   [rSVBK], a                               ; $6253: $E0 $70
+    ld   [hl], b                                  ; $6255: $70
+    inc  hl                                       ; $6256: $23
+    dec  c                                        ; $6257: $0D
+    ld   a, c                                     ; $6258: $79
+    and  a                                        ; $6259: $A7
+    jr   nz, jr_001_624D                          ; $625A: $20 $F1
+    xor  a                                        ; $625C: $AF
+    ld   [rSVBK], a                               ; $625D: $E0 $70
+    ei                                            ; $625F: $FB
 
 MarineBeachPrepare1::
-    ld   a, $01
-    ld   [$C167], a
-    call func_1A22
-    ld   a, [$C16B]
-    cp   $04
-    jr   nz, .return
-    call IncrementGameplaySubtype
-    xor  a
-    ld   [$C1BF], a
-    call func_001_5888
-    call func_001_64FF
-    ld   a, $0F
-    ld   [wTileMapToLoad], a
+    ld   a, $01                                   ; $6260: $3E $01
+    ld   [$C167], a                               ; $6262: $EA $67 $C1
+    call func_1A22                                ; $6265: $CD $22 $1A
+    ld   a, [$C16B]                               ; $6268: $FA $6B $C1
+    cp   $04                                      ; $626B: $FE $04
+    jr   nz, .return                              ; $626D: $20 $12
+    call IncrementGameplaySubtype                 ; $626F: $CD $D6 $44
+    xor  a                                        ; $6272: $AF
+    ld   [$C1BF], a                               ; $6273: $EA $BF $C1
+    call func_001_5888                            ; $6276: $CD $88 $58
+    call func_001_64FF                            ; $6279: $CD $FF $64
+    ld   a, $0F                                   ; $627C: $3E $0F
+    ld   [wTileMapToLoad], a                      ; $627E: $EA $FE $D6
 .return
-    ret
+    ret                                           ; $6281: $C9
 
 MarineBeachPrepare2::
-    ld   a, $13
-    ld   [wTileMapToLoad], a
-    xor  a
-    ld   [$C13F], a
-    jp   IncrementGameplaySubtypeAndReturn
+    ld   a, $13                                   ; $6282: $3E $13
+    ld   [wTileMapToLoad], a                      ; $6284: $EA $FE $D6
+    xor  a                                        ; $6287: $AF
+    ld   [$C13F], a                               ; $6288: $EA $3F $C1
+    jp   IncrementGameplaySubtypeAndReturn        ; $628B: $C3 $D6 $44
 
 MarineBeachPrepare3::
-    ld   a, $13
-    ld   [wBGMapToLoad], a
-    ld   a, $FF
-    ld   [wWindowY], a
-    xor  a
-    ldh  [hBaseScrollX], a
-    ld   [$C16B], a
-    ld   [$C16C], a
-    ld   a, $90
-    ldh  [$FF97], a
-    ld   a, $40
-    ld   [$C114], a
-    ld   a, $A0
-    ld   [$D466], a
-    ld   a, $01
-    ld   [$DDD5], a
-    ld   a, $E0
-    ld   [wTranscientVfxPosYTable], a
-    ld   a, $00
-    ld   [wTranscientVfxPosXTable], a
-    ld   a, TRANSCIENT_VFX_WATER_SPLASH
-    ld   [wTranscientVfxTypeTable], a
-    ld   a, $0C
-    ld   [$C560], a
-    ld   a, $08
-    ld   [$C550], a
-    ld   a, $00
-    ld   [wTranscientVfxCountdownTable], a
-    ld   [$D200], a
-    ld   a, $20
-    ld   [$C541], a
-    ld   a, $A0
-    ld   [$C531], a
-    ld   a, $01
-    ld   [$C511], a
-    ld   a, $08
-    ld   [$C561], a
-    ld   a, $F8
-    ld   [$C551], a
-    ld   a, $40
-    ld   [$C521], a
-    ld   a, $24
-    ld   [$D201], a
-    ld   a, $48
-    ld   [$C542], a
-    ld   a, $30
-    ld   [$C532], a
-    ld   a, $02
-    ld   [$C512], a
-    ld   a, $00
-    ld   [$C562], a
-    ld   a, $00
-    ld   [$C552], a
-    ld   a, $00
-    ld   [$C522], a
-    ld   a, $02
-    ld   [$D202], a
-    ld   a, $3C
-    ld   [$C543], a
-    ld   a, $40
-    ld   [$C533], a
-    ld   a, $02
-    ld   [$C513], a
-    ld   a, $00
-    ld   [$C563], a
-    ld   a, $00
-    ld   [$C553], a
-    ld   a, $00
-    ld   [$C523], a
-    ld   a, $00
-    ld   [$D203], a
-    ld   a, $40
-    ld   [$C544], a
-    ld   a, $50
-    ld   [$C534], a
-    ld   a, $02
-    ld   [$C514], a
-    ld   a, $00
-    ld   [$C564], a
-    ld   a, $00
-    ld   [$C554], a
-    ld   a, $00
-    ld   [$C524], a
-    ld   a, $00
-    ld   [$D204], a
-    ld   a, $3C
-    ld   [$C545], a
-    ld   a, $60
-    ld   [$C535], a
-    ld   a, $02
-    ld   [$C515], a
-    ld   a, $00
-    ld   [$C565], a
-    ld   a, $00
-    ld   [$C555], a
-    ld   a, $00
-    ld   [$C525], a
-    ld   a, $00
-    ld   [$D205], a
-    ld   a, $44
-    ld   [$C546], a
-    ld   a, $68
-    ld   [$C536], a
-    ld   a, $02
-    ld   [$C516], a
-    ld   a, $00
-    ld   [$C566], a
-    ld   a, $00
-    ld   [$C556], a
-    ld   a, $00
-    ld   [$C526], a
-    ld   a, $00
-    ld   [$D206], a
-    jp   IncrementGameplaySubtypeAndReturn
+    ld   a, $13                                   ; $628E: $3E $13
+    ld   [wBGMapToLoad], a                        ; $6290: $EA $FF $D6
+    ld   a, $FF                                   ; $6293: $3E $FF
+    ld   [wWindowY], a                            ; $6295: $EA $9A $DB
+    xor  a                                        ; $6298: $AF
+    ldh  [hBaseScrollX], a                        ; $6299: $E0 $96
+    ld   [$C16B], a                               ; $629B: $EA $6B $C1
+    ld   [$C16C], a                               ; $629E: $EA $6C $C1
+    ld   a, $90                                   ; $62A1: $3E $90
+    ldh  [$FF97], a                               ; $62A3: $E0 $97
+    ld   a, $40                                   ; $62A5: $3E $40
+    ld   [$C114], a                               ; $62A7: $EA $14 $C1
+    ld   a, $A0                                   ; $62AA: $3E $A0
+    ld   [$D466], a                               ; $62AC: $EA $66 $D4
+    ld   a, $01                                   ; $62AF: $3E $01
+    ld   [$DDD5], a                               ; $62B1: $EA $D5 $DD
+    ld   a, $E0                                   ; $62B4: $3E $E0
+    ld   [wTranscientVfxPosYTable], a             ; $62B6: $EA $40 $C5
+    ld   a, $00                                   ; $62B9: $3E $00
+    ld   [wTranscientVfxPosXTable], a             ; $62BB: $EA $30 $C5
+    ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $62BE: $3E $01
+    ld   [wTranscientVfxTypeTable], a             ; $62C0: $EA $10 $C5
+    ld   a, $0C                                   ; $62C3: $3E $0C
+    ld   [$C560], a                               ; $62C5: $EA $60 $C5
+    ld   a, $08                                   ; $62C8: $3E $08
+    ld   [$C550], a                               ; $62CA: $EA $50 $C5
+    ld   a, $00                                   ; $62CD: $3E $00
+    ld   [wTranscientVfxCountdownTable], a        ; $62CF: $EA $20 $C5
+    ld   [$D200], a                               ; $62D2: $EA $00 $D2
+    ld   a, $20                                   ; $62D5: $3E $20
+    ld   [$C541], a                               ; $62D7: $EA $41 $C5
+    ld   a, $A0                                   ; $62DA: $3E $A0
+    ld   [$C531], a                               ; $62DC: $EA $31 $C5
+    ld   a, $01                                   ; $62DF: $3E $01
+    ld   [$C511], a                               ; $62E1: $EA $11 $C5
+    ld   a, $08                                   ; $62E4: $3E $08
+    ld   [$C561], a                               ; $62E6: $EA $61 $C5
+    ld   a, $F8                                   ; $62E9: $3E $F8
+    ld   [$C551], a                               ; $62EB: $EA $51 $C5
+    ld   a, $40                                   ; $62EE: $3E $40
+    ld   [$C521], a                               ; $62F0: $EA $21 $C5
+    ld   a, $24                                   ; $62F3: $3E $24
+    ld   [$D201], a                               ; $62F5: $EA $01 $D2
+    ld   a, $48                                   ; $62F8: $3E $48
+    ld   [$C542], a                               ; $62FA: $EA $42 $C5
+    ld   a, $30                                   ; $62FD: $3E $30
+    ld   [$C532], a                               ; $62FF: $EA $32 $C5
+    ld   a, $02                                   ; $6302: $3E $02
+    ld   [$C512], a                               ; $6304: $EA $12 $C5
+    ld   a, $00                                   ; $6307: $3E $00
+    ld   [$C562], a                               ; $6309: $EA $62 $C5
+    ld   a, $00                                   ; $630C: $3E $00
+    ld   [$C552], a                               ; $630E: $EA $52 $C5
+    ld   a, $00                                   ; $6311: $3E $00
+    ld   [$C522], a                               ; $6313: $EA $22 $C5
+    ld   a, $02                                   ; $6316: $3E $02
+    ld   [$D202], a                               ; $6318: $EA $02 $D2
+    ld   a, $3C                                   ; $631B: $3E $3C
+    ld   [$C543], a                               ; $631D: $EA $43 $C5
+    ld   a, $40                                   ; $6320: $3E $40
+    ld   [$C533], a                               ; $6322: $EA $33 $C5
+    ld   a, $02                                   ; $6325: $3E $02
+    ld   [$C513], a                               ; $6327: $EA $13 $C5
+    ld   a, $00                                   ; $632A: $3E $00
+    ld   [$C563], a                               ; $632C: $EA $63 $C5
+    ld   a, $00                                   ; $632F: $3E $00
+    ld   [$C553], a                               ; $6331: $EA $53 $C5
+    ld   a, $00                                   ; $6334: $3E $00
+    ld   [$C523], a                               ; $6336: $EA $23 $C5
+    ld   a, $00                                   ; $6339: $3E $00
+    ld   [$D203], a                               ; $633B: $EA $03 $D2
+    ld   a, $40                                   ; $633E: $3E $40
+    ld   [$C544], a                               ; $6340: $EA $44 $C5
+    ld   a, $50                                   ; $6343: $3E $50
+    ld   [$C534], a                               ; $6345: $EA $34 $C5
+    ld   a, $02                                   ; $6348: $3E $02
+    ld   [$C514], a                               ; $634A: $EA $14 $C5
+    ld   a, $00                                   ; $634D: $3E $00
+    ld   [$C564], a                               ; $634F: $EA $64 $C5
+    ld   a, $00                                   ; $6352: $3E $00
+    ld   [$C554], a                               ; $6354: $EA $54 $C5
+    ld   a, $00                                   ; $6357: $3E $00
+    ld   [$C524], a                               ; $6359: $EA $24 $C5
+    ld   a, $00                                   ; $635C: $3E $00
+    ld   [$D204], a                               ; $635E: $EA $04 $D2
+    ld   a, $3C                                   ; $6361: $3E $3C
+    ld   [$C545], a                               ; $6363: $EA $45 $C5
+    ld   a, $60                                   ; $6366: $3E $60
+    ld   [$C535], a                               ; $6368: $EA $35 $C5
+    ld   a, $02                                   ; $636B: $3E $02
+    ld   [$C515], a                               ; $636D: $EA $15 $C5
+    ld   a, $00                                   ; $6370: $3E $00
+    ld   [$C565], a                               ; $6372: $EA $65 $C5
+    ld   a, $00                                   ; $6375: $3E $00
+    ld   [$C555], a                               ; $6377: $EA $55 $C5
+    ld   a, $00                                   ; $637A: $3E $00
+    ld   [$C525], a                               ; $637C: $EA $25 $C5
+    ld   a, $00                                   ; $637F: $3E $00
+    ld   [$D205], a                               ; $6381: $EA $05 $D2
+    ld   a, $44                                   ; $6384: $3E $44
+    ld   [$C546], a                               ; $6386: $EA $46 $C5
+    ld   a, $68                                   ; $6389: $3E $68
+    ld   [$C536], a                               ; $638B: $EA $36 $C5
+    ld   a, $02                                   ; $638E: $3E $02
+    ld   [$C516], a                               ; $6390: $EA $16 $C5
+    ld   a, $00                                   ; $6393: $3E $00
+    ld   [$C566], a                               ; $6395: $EA $66 $C5
+    ld   a, $00                                   ; $6398: $3E $00
+    ld   [$C556], a                               ; $639A: $EA $56 $C5
+    ld   a, $00                                   ; $639D: $3E $00
+    ld   [$C526], a                               ; $639F: $EA $26 $C5
+    ld   a, $00                                   ; $63A2: $3E $00
+    ld   [$D206], a                               ; $63A4: $EA $06 $D2
+    jp   IncrementGameplaySubtypeAndReturn        ; $63A7: $C3 $D6 $44
 
 Data_001_63AA::
-    db 0, 0, 0, 0, $40, $40, $40, $40, $94, $94, $94, $94, $E4, $E4, $E4, $E4
+    db 0, 0, 0, 0, $40, $40, $40, $40, $94, $94, $94, $94, $E4, $E4, $E4, $E4 ; $63AA
 
 Data_001_63BA::
-    db 0, 0, 0, 0, 4, 4, 4, 4, $18, $18, $18, $18, $1C, $1C, $1C, $1C
+    db 0, 0, 0, 0, 4, 4, 4, 4, $18, $18, $18, $18, $1C, $1C, $1C, $1C ; $63BA
 
 MarineBeachScroll1::
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, jr_001_63E4
-    ldh  a, [hFrameCounter]
-    and  $07
-    jr   nz, MarineBeachScroll2
-    call func_1A39
-    ld   a, [$C16B]
-    cp   $04
-    jr   nz, MarineBeachScroll2
-    call IncrementGameplaySubtype
-    jr   MarineBeachScroll2
+    ldh  a, [hIsGBC]                              ; $63CA: $F0 $FE
+    and  a                                        ; $63CC: $A7
+    jr   z, jr_001_63E4                           ; $63CD: $28 $15
+    ldh  a, [hFrameCounter]                       ; $63CF: $F0 $E7
+    and  $07                                      ; $63D1: $E6 $07
+    jr   nz, MarineBeachScroll2                   ; $63D3: $20 $42
+    call func_1A39                                ; $63D5: $CD $39 $1A
+    ld   a, [$C16B]                               ; $63D8: $FA $6B $C1
+    cp   $04                                      ; $63DB: $FE $04
+    jr   nz, MarineBeachScroll2                   ; $63DD: $20 $38
+    call IncrementGameplaySubtype                 ; $63DF: $CD $D6 $44
+    jr   MarineBeachScroll2                       ; $63E2: $18 $33
 
 jr_001_63E4::
-    ldh  a, [hFrameCounter]
-    and  $07
-    jr   nz, jr_001_63F8
-    ld   a, [$C3C5]
-    inc  a
-    ld   [$C3C5], a
-    cp   $0C
-    jr   nz, jr_001_63F8
-    call IncrementGameplaySubtype
+    ldh  a, [hFrameCounter]                       ; $63E4: $F0 $E7
+    and  $07                                      ; $63E6: $E6 $07
+    jr   nz, jr_001_63F8                          ; $63E8: $20 $0E
+    ld   a, [$C3C5]                               ; $63EA: $FA $C5 $C3
+    inc  a                                        ; $63ED: $3C
+    ld   [$C3C5], a                               ; $63EE: $EA $C5 $C3
+    cp   $0C                                      ; $63F1: $FE $0C
+    jr   nz, jr_001_63F8                          ; $63F3: $20 $03
+    call IncrementGameplaySubtype                 ; $63F5: $CD $D6 $44
 
 jr_001_63F8::
-    ldh  a, [hFrameCounter]
-    and  $03
-    ld   e, a
-    ld   a, [$C3C5]
-    add  a, e
-    ld   e, a
-    ld   d, $00
-    ld   hl, Data_001_63AA
-    add  hl, de
-    ld   a, [hl]
-    ld   [wBGPalette], a
-    ld   [wOBJ1Palette], a
-    ld   hl, Data_001_63BA
-    add  hl, de
-    ld   a, [hl]
-    ld   [wOBJ0Palette], a
+    ldh  a, [hFrameCounter]                       ; $63F8: $F0 $E7
+    and  $03                                      ; $63FA: $E6 $03
+    ld   e, a                                     ; $63FC: $5F
+    ld   a, [$C3C5]                               ; $63FD: $FA $C5 $C3
+    add  a, e                                     ; $6400: $83
+    ld   e, a                                     ; $6401: $5F
+    ld   d, $00                                   ; $6402: $16 $00
+    ld   hl, Data_001_63AA                        ; $6404: $21 $AA $63
+    add  hl, de                                   ; $6407: $19
+    ld   a, [hl]                                  ; $6408: $7E
+    ld   [wBGPalette], a                          ; $6409: $EA $97 $DB
+    ld   [wOBJ1Palette], a                        ; $640C: $EA $99 $DB
+    ld   hl, Data_001_63BA                        ; $640F: $21 $BA $63
+    add  hl, de                                   ; $6412: $19
+    ld   a, [hl]                                  ; $6413: $7E
+    ld   [wOBJ0Palette], a                        ; $6414: $EA $98 $DB
 
 MarineBeachScroll2::
-    ldh  a, [hFrameCounter]
-    and  $03
-    jr   nz, jr_001_642E
-    ldh  a, [$FF97]
-    inc  a
-    ldh  [$FF97], a
-    cp   $00
-    jr   nz, jr_001_642E
-    ld   a, $80
-    ld   [$C3C7], a
-    call IncrementGameplaySubtype
+    ldh  a, [hFrameCounter]                       ; $6417: $F0 $E7
+    and  $03                                      ; $6419: $E6 $03
+    jr   nz, jr_001_642E                          ; $641B: $20 $11
+    ldh  a, [$FF97]                               ; $641D: $F0 $97
+    inc  a                                        ; $641F: $3C
+    ldh  [$FF97], a                               ; $6420: $E0 $97
+    cp   $00                                      ; $6422: $FE $00
+    jr   nz, jr_001_642E                          ; $6424: $20 $08
+    ld   a, $80                                   ; $6426: $3E $80
+    ld   [$C3C7], a                               ; $6428: $EA $C7 $C3
+    call IncrementGameplaySubtype                 ; $642B: $CD $D6 $44
 
 jr_001_642E::
-    call func_001_651E
-    ret
+    call func_001_651E                            ; $642E: $CD $1E $65
+    ret                                           ; $6431: $C9
 
 MarineBeachScrollStop::
-    call func_001_651E
-    ld   a, [wDialogState]
-    and  a
-    jr   nz, jr_001_644A
-    ld   a, [$C3C7]
-    and  a
-    jr   nz, jr_001_6449
-    ld   a, $D8
-    call OpenMarinBeachDialog
-    call IncrementGameplaySubtype
+    call func_001_651E                            ; $6432: $CD $1E $65
+    ld   a, [wDialogState]                        ; $6435: $FA $9F $C1
+    and  a                                        ; $6438: $A7
+    jr   nz, jr_001_644A                          ; $6439: $20 $0F
+    ld   a, [$C3C7]                               ; $643B: $FA $C7 $C3
+    and  a                                        ; $643E: $A7
+    jr   nz, jr_001_6449                          ; $643F: $20 $08
+    ld   a, $D8                                   ; $6441: $3E $D8
+    call OpenMarinBeachDialog                     ; $6443: $CD $DE $67
+    call IncrementGameplaySubtype                 ; $6446: $CD $D6 $44
 
 jr_001_6449::
-    ret
+    ret                                           ; $6449: $C9
 
 jr_001_644A::
-    ld   a, $02
-    ld   [$C3C4], a
-    ret
+    ld   a, $02                                   ; $644A: $3E $02
+    ld   [$C3C4], a                               ; $644C: $EA $C4 $C3
+    ret                                           ; $644F: $C9
 
 MarineBeachDialog1::
-    call func_001_651E
-    ld   a, [wDialogState]
-    and  a
-    jr   nz, jr_001_6466
-    ld   a, $80
-    ld   [$C3C4], a
-    ld   a, $C0
-    ld   [$C3C7], a
-    call IncrementGameplaySubtype
+    call func_001_651E                            ; $6450: $CD $1E $65
+    ld   a, [wDialogState]                        ; $6453: $FA $9F $C1
+    and  a                                        ; $6456: $A7
+    jr   nz, jr_001_6466                          ; $6457: $20 $0D
+    ld   a, $80                                   ; $6459: $3E $80
+    ld   [$C3C4], a                               ; $645B: $EA $C4 $C3
+    ld   a, $C0                                   ; $645E: $3E $C0
+    ld   [$C3C7], a                               ; $6460: $EA $C7 $C3
+    call IncrementGameplaySubtype                 ; $6463: $CD $D6 $44
 
 jr_001_6466::
-    ret
+    ret                                           ; $6466: $C9
 
 MarineBeachPause1::
-    call func_001_651E
-    ld   a, [$C3C7]
-    and  a
-    jr   nz, jr_001_6478
-    ld   a, $D9
-    call OpenMarinBeachDialog
-    jp   IncrementGameplaySubtypeAndReturn
+    call func_001_651E                            ; $6467: $CD $1E $65
+    ld   a, [$C3C7]                               ; $646A: $FA $C7 $C3
+    and  a                                        ; $646D: $A7
+    jr   nz, jr_001_6478                          ; $646E: $20 $08
+    ld   a, $D9                                   ; $6470: $3E $D9
+    call OpenMarinBeachDialog                     ; $6472: $CD $DE $67
+    jp   IncrementGameplaySubtypeAndReturn        ; $6475: $C3 $D6 $44
 
 jr_001_6478::
-    ret
+    ret                                           ; $6478: $C9
 
 MarineBeachDialog2::
-    call func_001_651E
-    ld   a, [wDialogState]
-    and  a
-    jr   nz, jr_001_648F
-    ld   a, $80
-    ld   [$C3C4], a
-    ld   a, $C0
-    ld   [$C3C7], a
-    call IncrementGameplaySubtype
+    call func_001_651E                            ; $6479: $CD $1E $65
+    ld   a, [wDialogState]                        ; $647C: $FA $9F $C1
+    and  a                                        ; $647F: $A7
+    jr   nz, jr_001_648F                          ; $6480: $20 $0D
+    ld   a, $80                                   ; $6482: $3E $80
+    ld   [$C3C4], a                               ; $6484: $EA $C4 $C3
+    ld   a, $C0                                   ; $6487: $3E $C0
+    ld   [$C3C7], a                               ; $6489: $EA $C7 $C3
+    call IncrementGameplaySubtype                 ; $648C: $CD $D6 $44
 
 jr_001_648F::
-    ret
+    ret                                           ; $648F: $C9
 
 MarineBeachPause2::
-    call func_001_651E
-    ld   a, [$C3C7]
-    and  a
-    jr   nz, jr_001_64A1
-    ld   a, $DA
-    call OpenMarinBeachDialog
-    jp   IncrementGameplaySubtypeAndReturn
+    call func_001_651E                            ; $6490: $CD $1E $65
+    ld   a, [$C3C7]                               ; $6493: $FA $C7 $C3
+    and  a                                        ; $6496: $A7
+    jr   nz, jr_001_64A1                          ; $6497: $20 $08
+    ld   a, $DA                                   ; $6499: $3E $DA
+    call OpenMarinBeachDialog                     ; $649B: $CD $DE $67
+    jp   IncrementGameplaySubtypeAndReturn        ; $649E: $C3 $D6 $44
 
 jr_001_64A1::
-    ret
+    ret                                           ; $64A1: $C9
 
 MarineBeachAreYouListening::
-    call func_001_651E
-    ld   a, [wDialogState]
-    and  a
-    jr   nz, jr_001_64CA
-    ld   a, [wDialogAskSelectionIndex]
-    and  a
-    jr   nz, jr_001_64BA
-    ld   a, $DB
-    call OpenMarinBeachDialog
-    call IncrementGameplaySubtype
-    ret
+    call func_001_651E                            ; $64A2: $CD $1E $65
+    ld   a, [wDialogState]                        ; $64A5: $FA $9F $C1
+    and  a                                        ; $64A8: $A7
+    jr   nz, jr_001_64CA                          ; $64A9: $20 $1F
+    ld   a, [wDialogAskSelectionIndex]            ; $64AB: $FA $77 $C1
+    and  a                                        ; $64AE: $A7
+    jr   nz, jr_001_64BA                          ; $64AF: $20 $09
+    ld   a, $DB                                   ; $64B1: $3E $DB
+    call OpenMarinBeachDialog                     ; $64B3: $CD $DE $67
+    call IncrementGameplaySubtype                 ; $64B6: $CD $D6 $44
+    ret                                           ; $64B9: $C9
 
 jr_001_64BA::
-    ld   a, $DE
-    call OpenMarinBeachDialog
-    ld   a, $06
-    ld   [wGameplaySubtype], a
-    ld   a, $05
-    ld   [$C3C7], a
-    ret
+    ld   a, $DE                                   ; $64BA: $3E $DE
+    call OpenMarinBeachDialog                     ; $64BC: $CD $DE $67
+    ld   a, $06                                   ; $64BF: $3E $06
+    ld   [wGameplaySubtype], a                    ; $64C1: $EA $96 $DB
+    ld   a, $05                                   ; $64C4: $3E $05
+    ld   [$C3C7], a                               ; $64C6: $EA $C7 $C3
+    ret                                           ; $64C9: $C9
 
 jr_001_64CA::
-    ld   a, $02
-    ld   [$C3C4], a
-    ret
+    ld   a, $02                                   ; $64CA: $3E $02
+    ld   [$C3C4], a                               ; $64CC: $EA $C4 $C3
+    ret                                           ; $64CF: $C9
 
 MarineBeachDialog3::
-    call func_001_651E
-    ld   a, [wDialogState]
-    and  a
-    jr   nz, jr_001_64E6
-    ld   a, $DC
-    call OpenMarinBeachDialog
-    ld   a, $30
-    ld   [$C3C7], a
-    call IncrementGameplaySubtype
+    call func_001_651E                            ; $64D0: $CD $1E $65
+    ld   a, [wDialogState]                        ; $64D3: $FA $9F $C1
+    and  a                                        ; $64D6: $A7
+    jr   nz, jr_001_64E6                          ; $64D7: $20 $0D
+    ld   a, $DC                                   ; $64D9: $3E $DC
+    call OpenMarinBeachDialog                     ; $64DB: $CD $DE $67
+    ld   a, $30                                   ; $64DE: $3E $30
+    ld   [$C3C7], a                               ; $64E0: $EA $C7 $C3
+    call IncrementGameplaySubtype                 ; $64E3: $CD $D6 $44
 
 jr_001_64E6::
-    ret
+    ret                                           ; $64E6: $C9
 
 MarineBeachDialog4::
-    call func_001_651E
-    ld   a, $02
-    ld   [$C3C4], a
-    ld   a, [$C3C7]
-    and  a
-    ret  nz
-    call label_27F2
-    call func_001_68D9
-    ld   a, $01
-    ld   [wIsMarinFollowingLink], a
+    call func_001_651E                            ; $64E7: $CD $1E $65
+    ld   a, $02                                   ; $64EA: $3E $02
+    ld   [$C3C4], a                               ; $64EC: $EA $C4 $C3
+    ld   a, [$C3C7]                               ; $64EF: $FA $C7 $C3
+    and  a                                        ; $64F2: $A7
+    ret  nz                                       ; $64F3: $C0
+    call label_27F2                               ; $64F4: $CD $F2 $27
+    call func_001_68D9                            ; $64F7: $CD $D9 $68
+    ld   a, $01                                   ; $64FA: $3E $01
+    ld   [wIsMarinFollowingLink], a               ; $64FC: $EA $73 $DB
 
 func_001_64FF::
-    ld   e, $10
-    ld   hl, wTranscientVfxTypeTable
-    xor  a
+    ld   e, $10                                   ; $64FF: $1E $10
+    ld   hl, wTranscientVfxTypeTable              ; $6501: $21 $10 $C5
+    xor  a                                        ; $6504: $AF
 
 jr_001_6505::
-    ldi  [hl], a
-    dec  e
-    jr   nz, jr_001_6505
-    ret
+    ldi  [hl], a                                  ; $6505: $22
+    dec  e                                        ; $6506: $1D
+    jr   nz, jr_001_6505                          ; $6507: $20 $FC
+    ret                                           ; $6509: $C9
 
 ;
 ; Seagull animations and sounds
 ;
 
 Data_001_650A::
-    db $40, 1, $40, $21
+    db $40, 1, $40, $21                           ; $650A
 
 Data_001_650E::
-    db $46, 1, $48, 1
+    db $46, 1, $48, 1                             ; $650E
 
 Data_001_6512::
-    db $42, 0, $44, 0
+    db $42, 0, $44, 0                             ; $6512
 
 Data_001_6516::
-    db $42, 2, $44, 2
+    db $42, 2, $44, 2                             ; $6516
 
 Data_001_651A::
-    db $42, 3, $44, 3
+    db $42, 3, $44, 3                             ; $651A
 
 func_001_651E::
-    call func_001_65AE
-    ld   a, [$C114]
-    inc  a
-    cp   $A0
-    jr   nz, jr_001_652E
-    ld   a, NOISE_SFX_SEA_WAVES
-    ldh  [hNoiseSfx], a
-    xor  a
+    call func_001_65AE                            ; $651E: $CD $AE $65
+    ld   a, [$C114]                               ; $6521: $FA $14 $C1
+    inc  a                                        ; $6524: $3C
+    cp   $A0                                      ; $6525: $FE $A0
+    jr   nz, jr_001_652E                          ; $6527: $20 $05
+    ld   a, NOISE_SFX_SEA_WAVES                   ; $6529: $3E $0F
+    ldh  [hNoiseSfx], a                           ; $652B: $E0 $F4
+    xor  a                                        ; $652D: $AF
 
 jr_001_652E::
-    ld   [$C114], a
-    ld   a, [$D466]
-    and  a
-    jr   nz, jr_001_6545
-    ld   a, JINGLE_SEAGULL
-    ldh  [hJingle], a
-    call GetRandomByte
-    and  $7F
-    add  a, $60
-    ld   [$D466], a
+    ld   [$C114], a                               ; $652E: $EA $14 $C1
+    ld   a, [$D466]                               ; $6531: $FA $66 $D4
+    and  a                                        ; $6534: $A7
+    jr   nz, jr_001_6545                          ; $6535: $20 $0E
+    ld   a, JINGLE_SEAGULL                        ; $6537: $3E $21
+    ldh  [hJingle], a                             ; $6539: $E0 $F2
+    call GetRandomByte                            ; $653B: $CD $0D $28
+    and  $7F                                      ; $653E: $E6 $7F
+    add  a, $60                                   ; $6540: $C6 $60
+    ld   [$D466], a                               ; $6542: $EA $66 $D4
 
 jr_001_6545::
-    dec  a
-    ld   [$D466], a
-    ldh  a, [$FF97]
-    dec  a
-    cp   $C0
-    ret  c
-    ld   de, Data_001_650A
-    ld   a, [$C3C4]
-    and  a
-    jr   z, jr_001_655F
-    cp   $60
-    jr   nc, jr_001_655F
-    ld   de, Data_001_650E
+    dec  a                                        ; $6545: $3D
+    ld   [$D466], a                               ; $6546: $EA $66 $D4
+    ldh  a, [$FF97]                               ; $6549: $F0 $97
+    dec  a                                        ; $654B: $3D
+    cp   $C0                                      ; $654C: $FE $C0
+    ret  c                                        ; $654E: $D8
+    ld   de, Data_001_650A                        ; $654F: $11 $0A $65
+    ld   a, [$C3C4]                               ; $6552: $FA $C4 $C3
+    and  a                                        ; $6555: $A7
+    jr   z, jr_001_655F                           ; $6556: $28 $07
+    cp   $60                                      ; $6558: $FE $60
+    jr   nc, jr_001_655F                          ; $655A: $30 $03
+    ld   de, Data_001_650E                        ; $655C: $11 $0E $65
 
 jr_001_655F::
-    ld   a, $7C
-    ldh  [hActiveEntityVisualPosY], a
-    ld   a, $58
-    ldh  [hActiveEntityPosX], a
-    ld   hl, wDynamicOAMBuffer
-    call func_001_658B
-    ld   a, $48
-    ldh  [hActiveEntityPosX], a
-    ld   de, Data_001_6512
-    ld   a, [$DC0F]
-    and  a
-    jr   z, jr_001_6584
-    ld   de, Data_001_6516
-    cp   $01
-    jr   z, jr_001_6584
-    ld   de, Data_001_651A
+    ld   a, $7C                                   ; $655F: $3E $7C
+    ldh  [hActiveEntityVisualPosY], a             ; $6561: $E0 $EC
+    ld   a, $58                                   ; $6563: $3E $58
+    ldh  [hActiveEntityPosX], a                   ; $6565: $E0 $EE
+    ld   hl, wDynamicOAMBuffer                    ; $6567: $21 $30 $C0
+    call func_001_658B                            ; $656A: $CD $8B $65
+    ld   a, $48                                   ; $656D: $3E $48
+    ldh  [hActiveEntityPosX], a                   ; $656F: $E0 $EE
+    ld   de, Data_001_6512                        ; $6571: $11 $12 $65
+    ld   a, [$DC0F]                               ; $6574: $FA $0F $DC
+    and  a                                        ; $6577: $A7
+    jr   z, jr_001_6584                           ; $6578: $28 $0A
+    ld   de, Data_001_6516                        ; $657A: $11 $16 $65
+    cp   $01                                      ; $657D: $FE $01
+    jr   z, jr_001_6584                           ; $657F: $28 $03
+    ld   de, Data_001_651A                        ; $6581: $11 $1A $65
 
 jr_001_6584::
-    ld   hl, $C038
-    call func_001_658B
-    ret
+    ld   hl, $C038                                ; $6584: $21 $38 $C0
+    call func_001_658B                            ; $6587: $CD $8B $65
+    ret                                           ; $658A: $C9
 
 func_001_658B::
-    push bc
-    ldh  a, [$FF97]
-    ld   c, a
-    ldh  a, [hActiveEntityVisualPosY]
-    sub  a, c
-    ldh  [$FFE8], a
-    ldi  [hl], a
-    ldh  a, [hActiveEntityPosX]
-    ldi  [hl], a
-    ld   a, [de]
-    inc  de
-    ldi  [hl], a
-    ld   a, [de]
-    inc  de
-    ldi  [hl], a
-    ldh  a, [hActiveEntityVisualPosY]
-    sub  a, c
-    ldi  [hl], a
-    ldh  a, [hActiveEntityPosX]
-    add  a, $08
-    ldi  [hl], a
-    ld   a, [de]
-    inc  de
-    ldi  [hl], a
-    ld   a, [de]
-    ld   [hl], a
-    pop  bc
-    ret
+    push bc                                       ; $658B: $C5
+    ldh  a, [$FF97]                               ; $658C: $F0 $97
+    ld   c, a                                     ; $658E: $4F
+    ldh  a, [hActiveEntityVisualPosY]             ; $658F: $F0 $EC
+    sub  a, c                                     ; $6591: $91
+    ldh  [$FFE8], a                               ; $6592: $E0 $E8
+    ldi  [hl], a                                  ; $6594: $22
+    ldh  a, [hActiveEntityPosX]                   ; $6595: $F0 $EE
+    ldi  [hl], a                                  ; $6597: $22
+    ld   a, [de]                                  ; $6598: $1A
+    inc  de                                       ; $6599: $13
+    ldi  [hl], a                                  ; $659A: $22
+    ld   a, [de]                                  ; $659B: $1A
+    inc  de                                       ; $659C: $13
+    ldi  [hl], a                                  ; $659D: $22
+    ldh  a, [hActiveEntityVisualPosY]             ; $659E: $F0 $EC
+    sub  a, c                                     ; $65A0: $91
+    ldi  [hl], a                                  ; $65A1: $22
+    ldh  a, [hActiveEntityPosX]                   ; $65A2: $F0 $EE
+    add  a, $08                                   ; $65A4: $C6 $08
+    ldi  [hl], a                                  ; $65A6: $22
+    ld   a, [de]                                  ; $65A7: $1A
+    inc  de                                       ; $65A8: $13
+    ldi  [hl], a                                  ; $65A9: $22
+    ld   a, [de]                                  ; $65AA: $1A
+    ld   [hl], a                                  ; $65AB: $77
+    pop  bc                                       ; $65AC: $C1
+    ret                                           ; $65AD: $C9
 
 func_001_65AE::
-    ld   c, $08
-    ld   b, $00
+    ld   c, $08                                   ; $65AE: $0E $08
+    ld   b, $00                                   ; $65B0: $06 $00
 
 jr_001_65B2::
-    ld   hl, wTranscientVfxTypeTable
-    add  hl, bc
-    ld   a, [hl]
-    and  a
-    jr   z, jr_001_65D6
-    push af
-    ld   hl, wTranscientVfxPosXTable
-    add  hl, bc
-    ld   a, [hl]
-    ldh  [hActiveEntityPosX], a
-    ld   hl, wTranscientVfxPosYTable
-    add  hl, bc
-    ld   a, [hl]
-    ldh  [hActiveEntityVisualPosY], a
-    ld   hl, wTranscientVfxCountdownTable
-    add  hl, bc
-    ld   a, [hl]
-    and  a
-    jr   z, jr_001_65D2
-    dec  [hl]
+    ld   hl, wTranscientVfxTypeTable              ; $65B2: $21 $10 $C5
+    add  hl, bc                                   ; $65B5: $09
+    ld   a, [hl]                                  ; $65B6: $7E
+    and  a                                        ; $65B7: $A7
+    jr   z, jr_001_65D6                           ; $65B8: $28 $1C
+    push af                                       ; $65BA: $F5
+    ld   hl, wTranscientVfxPosXTable              ; $65BB: $21 $30 $C5
+    add  hl, bc                                   ; $65BE: $09
+    ld   a, [hl]                                  ; $65BF: $7E
+    ldh  [hActiveEntityPosX], a                   ; $65C0: $E0 $EE
+    ld   hl, wTranscientVfxPosYTable              ; $65C2: $21 $40 $C5
+    add  hl, bc                                   ; $65C5: $09
+    ld   a, [hl]                                  ; $65C6: $7E
+    ldh  [hActiveEntityVisualPosY], a             ; $65C7: $E0 $EC
+    ld   hl, wTranscientVfxCountdownTable         ; $65C9: $21 $20 $C5
+    add  hl, bc                                   ; $65CC: $09
+    ld   a, [hl]                                  ; $65CD: $7E
+    and  a                                        ; $65CE: $A7
+    jr   z, jr_001_65D2                           ; $65CF: $28 $01
+    dec  [hl]                                     ; $65D1: $35
 
 jr_001_65D2::
-    pop  af
-    call func_001_65DD
+    pop  af                                       ; $65D2: $F1
+    call func_001_65DD                            ; $65D3: $CD $DD $65
 
 jr_001_65D6::
-    dec  c
-    ld   a, c
-    cp   $FF
-    jr   nz, jr_001_65B2
-    ret
+    dec  c                                        ; $65D6: $0D
+    ld   a, c                                     ; $65D7: $79
+    cp   $FF                                      ; $65D8: $FE $FF
+    jr   nz, jr_001_65B2                          ; $65DA: $20 $D6
+    ret                                           ; $65DC: $C9
 
 func_001_65DD::
-    dec a
-    JP_TABLE
-._00 dw func_001_6673
-._01 dw func_001_66FD
+    dec a                                         ; $65DD: $3D
+    JP_TABLE                                      ; $65DE: $C7
+._00 dw func_001_6673                             ; $65DF
+._01 dw func_001_66FD                             ; $65E1
 
 Data_001_65E3::
-    dw Data_001_65EF
-    dw Data_001_65F3
-    dw Data_001_65F7
-    dw Data_001_65FB
-    dw Data_001_65FF
-    dw Data_001_6603
+    dw Data_001_65EF                              ; $65E3
+    dw Data_001_65F3                              ; $65E5
+    dw Data_001_65F7                              ; $65E7
+    dw Data_001_65FB                              ; $65E9
+    dw Data_001_65FF                              ; $65EB
+    dw Data_001_6603                              ; $65ED
 
 Data_001_65EF:
-    db $50, 0, $50, $20
+    db $50, 0, $50, $20                           ; $65EF
 
 Data_001_65F3:
-    db $52, 0, $52, $20
+    db $52, 0, $52, $20                           ; $65F3
 
 Data_001_65F7:
-    db $54, 0, $54, $20
+    db $54, 0, $54, $20                           ; $65F7
 
 Data_001_65FB:
-    db $56, 0, $56, $20
+    db $56, 0, $56, $20                           ; $65FB
 
 Data_001_65FF:
-    db $58, 0, $58, $20
+    db $58, 0, $58, $20                           ; $65FF
 
 Data_001_6603:
-    db $5A, 0, $5A, $20
+    db $5A, 0, $5A, $20                           ; $6603
 
 Data_001_6607::
-    db 3, 3, 3, 3
+    db 3, 3, 3, 3                                 ; $6607
 
 jr_001_660B::
-    db 3, 3, 3, 3, 3, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1
-    db 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5
-    db 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 3, 3, 3, 3, 3, 3
-    db 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3
+    db 3, 3, 3, 3, 3, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1 ; $660B
+    db 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5 ; $661B
+    db 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 3, 3, 3, 3, 3, 3 ; $662B
+    db 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3            ; $663B
 
 jr_001_6646::
-    db 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0
-    db 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4
-    db 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5
+    db 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0 ; $6646
+    db 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4 ; $6656
+    db 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5      ; $6666
 
 func_001_6673::
-    ld   hl, wTranscientVfxCountdownTable
-    add  hl, bc
-    ld   a, [hl]
-    and  a
-    ret  nz
-    ld   hl, $D210
-    add  hl, bc
-    ld   a, [hl]
-    inc  a
-    ld   [hl], a
-    cp   $06
-    jr   c, jr_001_668B
-    ld   [hl], b
-    ld   hl, $D200
-    add  hl, bc
-    inc  [hl]
+    ld   hl, wTranscientVfxCountdownTable         ; $6673: $21 $20 $C5
+    add  hl, bc                                   ; $6676: $09
+    ld   a, [hl]                                  ; $6677: $7E
+    and  a                                        ; $6678: $A7
+    ret  nz                                       ; $6679: $C0
+    ld   hl, $D210                                ; $667A: $21 $10 $D2
+    add  hl, bc                                   ; $667D: $09
+    ld   a, [hl]                                  ; $667E: $7E
+    inc  a                                        ; $667F: $3C
+    ld   [hl], a                                  ; $6680: $77
+    cp   $06                                      ; $6681: $FE $06
+    jr   c, jr_001_668B                           ; $6683: $38 $06
+    ld   [hl], b                                  ; $6685: $70
+    ld   hl, $D200                                ; $6686: $21 $00 $D2
+    add  hl, bc                                   ; $6689: $09
+    inc  [hl]                                     ; $668A: $34
 
 jr_001_668B::
-    ld   hl, $D200
-    add  hl, bc
-    ld   e, [hl]
-    ld   d, b
-    ld   hl, Data_001_6607
-    add  hl, de
-    ld   e, [hl]
-    sla  e
-    ld   d, b
-    ld   hl, Data_001_65E3
-    add  hl, de
-    ld   a, [hli]
-    ld   d, [hl]
-    ld   e, a
-    push de
-    ld   hl, $C040
-    ld   a, c
-    rla
-    rla
-    rla
-    and  $78
-    ld   e, a
-    ld   d, b
-    add  hl, de
-    pop  de
-    call func_001_658B
-    call func_001_67A8
-    ldh  a, [hFrameCounter]
-    and  $07
-    jr   nz, jr_001_66C4
-    ld   hl, $C560
-    add  hl, bc
-    ld   a, [hl]
-    cp   $FB
-    jr   z, jr_001_66C4
-    dec  [hl]
+    ld   hl, $D200                                ; $668B: $21 $00 $D2
+    add  hl, bc                                   ; $668E: $09
+    ld   e, [hl]                                  ; $668F: $5E
+    ld   d, b                                     ; $6690: $50
+    ld   hl, Data_001_6607                        ; $6691: $21 $07 $66
+    add  hl, de                                   ; $6694: $19
+    ld   e, [hl]                                  ; $6695: $5E
+    sla  e                                        ; $6696: $CB $23
+    ld   d, b                                     ; $6698: $50
+    ld   hl, Data_001_65E3                        ; $6699: $21 $E3 $65
+    add  hl, de                                   ; $669C: $19
+    ld   a, [hli]                                 ; $669D: $2A
+    ld   d, [hl]                                  ; $669E: $56
+    ld   e, a                                     ; $669F: $5F
+    push de                                       ; $66A0: $D5
+    ld   hl, $C040                                ; $66A1: $21 $40 $C0
+    ld   a, c                                     ; $66A4: $79
+    rla                                           ; $66A5: $17
+    rla                                           ; $66A6: $17
+    rla                                           ; $66A7: $17
+    and  $78                                      ; $66A8: $E6 $78
+    ld   e, a                                     ; $66AA: $5F
+    ld   d, b                                     ; $66AB: $50
+    add  hl, de                                   ; $66AC: $19
+    pop  de                                       ; $66AD: $D1
+    call func_001_658B                            ; $66AE: $CD $8B $65
+    call func_001_67A8                            ; $66B1: $CD $A8 $67
+    ldh  a, [hFrameCounter]                       ; $66B4: $F0 $E7
+    and  $07                                      ; $66B6: $E6 $07
+    jr   nz, jr_001_66C4                          ; $66B8: $20 $0A
+    ld   hl, $C560                                ; $66BA: $21 $60 $C5
+    add  hl, bc                                   ; $66BD: $09
+    ld   a, [hl]                                  ; $66BE: $7E
+    cp   $FB                                      ; $66BF: $FE $FB
+    jr   z, jr_001_66C4                           ; $66C1: $28 $01
+    dec  [hl]                                     ; $66C3: $35
 
 jr_001_66C4::
-    ldh  a, [$FFE8]
-    cp   $F0
-    jr   c, jr_001_66D7
-    ld   hl, $C560
-    add  hl, bc
-    ld   a, [hl]
-    and  $80
-    ret  z
-    ld   hl, wTranscientVfxTypeTable
-    add  hl, bc
-    ld   [hl], b
+    ldh  a, [$FFE8]                               ; $66C4: $F0 $E8
+    cp   $F0                                      ; $66C6: $FE $F0
+    jr   c, jr_001_66D7                           ; $66C8: $38 $0D
+    ld   hl, $C560                                ; $66CA: $21 $60 $C5
+    add  hl, bc                                   ; $66CD: $09
+    ld   a, [hl]                                  ; $66CE: $7E
+    and  $80                                      ; $66CF: $E6 $80
+    ret  z                                        ; $66D1: $C8
+    ld   hl, wTranscientVfxTypeTable              ; $66D2: $21 $10 $C5
+    add  hl, bc                                   ; $66D5: $09
+    ld   [hl], b                                  ; $66D6: $70
 
 jr_001_66D7::
-    ret
+    ret                                           ; $66D7: $C9
 
 Data_001_66D8::
-    dw Data_001_66E0
-    dw Data_001_66E4
-    dw Data_001_66E8
-    dw Data_001_66EC
+    dw Data_001_66E0                              ; $66D8
+    dw Data_001_66E4                              ; $66DA
+    dw Data_001_66E8                              ; $66DC
+    dw Data_001_66EC                              ; $66DE
 
 Data_001_66E0:
-    db $4C, 0, $4C, $20
+    db $4C, 0, $4C, $20                           ; $66E0
 
 Data_001_66E4:
-    db $4E, 0, $4E, $20
+    db $4E, 0, $4E, $20                           ; $66E4
 
 Data_001_66E8:
-    db $5C, 0, $5C, $20
+    db $5C, 0, $5C, $20                           ; $66E8
 
 Data_001_66EC:
-    db $5E, 0, $5E, $20
+    db $5E, 0, $5E, $20                           ; $66EC
 
 Data_001_66F0::
-    db 1, $FF
+    db 1, $FF                                     ; $66F0
 
 jr_001_66F2::
-    db 1, $FF, $FE, 2
+    db 1, $FF, $FE, 2                             ; $66F2
 
 Data_001_66F6::
-    db 1, $FF, $4C, $52, $58, $5C, $60
+    db 1, $FF, $4C, $52, $58, $5C, $60            ; $66F6
 
 func_001_66FD::
-    ld   hl, $C560
-    add  hl, bc
-    ld   a, [hl]
-    ld   e, $03
-    and  $80
-    jr   z, jr_001_6718
-    ld   hl, $D200
-    add  hl, bc
-    ldh  a, [hFrameCounter]
-    and  $07
-    jr   nz, jr_001_6717
-    ld   a, [hl]
-    inc  a
-    and  $03
-    ld   [hl], a
+    ld   hl, $C560                                ; $66FD: $21 $60 $C5
+    add  hl, bc                                   ; $6700: $09
+    ld   a, [hl]                                  ; $6701: $7E
+    ld   e, $03                                   ; $6702: $1E $03
+    and  $80                                      ; $6704: $E6 $80
+    jr   z, jr_001_6718                           ; $6706: $28 $10
+    ld   hl, $D200                                ; $6708: $21 $00 $D2
+    add  hl, bc                                   ; $670B: $09
+    ldh  a, [hFrameCounter]                       ; $670C: $F0 $E7
+    and  $07                                      ; $670E: $E6 $07
+    jr   nz, jr_001_6717                          ; $6710: $20 $05
+    ld   a, [hl]                                  ; $6712: $7E
+    inc  a                                        ; $6713: $3C
+    and  $03                                      ; $6714: $E6 $03
+    ld   [hl], a                                  ; $6716: $77
 
 jr_001_6717::
-    ld   e, [hl]
+    ld   e, [hl]                                  ; $6717: $5E
 
 jr_001_6718::
-    sla  e
-    ld   d, b
-    ld   hl, Data_001_66D8
-    add  hl, de
-    ld   a, [hli]
-    ld   d, [hl]
-    ld   e, a
-    push de
-    ld   hl, $C040
-    ld   a, c
-    rla
-    rla
-    rla
-    and  $78
-    ld   e, a
-    ld   d, b
-    add  hl, de
-    pop  de
-    call func_001_658B
+    sla  e                                        ; $6718: $CB $23
+    ld   d, b                                     ; $671A: $50
+    ld   hl, Data_001_66D8                        ; $671B: $21 $D8 $66
+    add  hl, de                                   ; $671E: $19
+    ld   a, [hli]                                 ; $671F: $2A
+    ld   d, [hl]                                  ; $6720: $56
+    ld   e, a                                     ; $6721: $5F
+    push de                                       ; $6722: $D5
+    ld   hl, $C040                                ; $6723: $21 $40 $C0
+    ld   a, c                                     ; $6726: $79
+    rla                                           ; $6727: $17
+    rla                                           ; $6728: $17
+    rla                                           ; $6729: $17
+    and  $78                                      ; $672A: $E6 $78
+    ld   e, a                                     ; $672C: $5F
+    ld   d, b                                     ; $672D: $50
+    add  hl, de                                   ; $672E: $19
+    pop  de                                       ; $672F: $D1
+    call func_001_658B                            ; $6730: $CD $8B $65
 
 jr_001_6733::
-    call func_001_67A8
-    ld   a, c
-    sla  a
-    sla  a
-    sla  a
-    sla  a
-    ld   e, a
-    ldh  a, [hFrameCounter]
-    add  a, e
-    ldh  [$FFE9], a
+    call func_001_67A8                            ; $6733: $CD $A8 $67
+    ld   a, c                                     ; $6736: $79
+    sla  a                                        ; $6737: $CB $27
+    sla  a                                        ; $6739: $CB $27
+    sla  a                                        ; $673B: $CB $27
+    sla  a                                        ; $673D: $CB $27
+    ld   e, a                                     ; $673F: $5F
+    ldh  a, [hFrameCounter]                       ; $6740: $F0 $E7
+    add  a, e                                     ; $6742: $83
+    ldh  [$FFE9], a                               ; $6743: $E0 $E9
 
 jr_001_6745::
-    and  $3F
-    jr   nz, jr_001_675A
-    call GetRandomByte
-    and  $07
-    ld   e, a
-    ld   d, b
-    ld   hl, Data_001_66F0
-    add  hl, de
-    ld   a, [hl]
-    ld   hl, $C550
-    add  hl, bc
-    ld   [hl], a
+    and  $3F                                      ; $6745: $E6 $3F
+    jr   nz, jr_001_675A                          ; $6747: $20 $11
+    call GetRandomByte                            ; $6749: $CD $0D $28
+    and  $07                                      ; $674C: $E6 $07
+    ld   e, a                                     ; $674E: $5F
+    ld   d, b                                     ; $674F: $50
+    ld   hl, Data_001_66F0                        ; $6750: $21 $F0 $66
+    add  hl, de                                   ; $6753: $19
+    ld   a, [hl]                                  ; $6754: $7E
+    ld   hl, $C550                                ; $6755: $21 $50 $C5
+    add  hl, bc                                   ; $6758: $09
+    ld   [hl], a                                  ; $6759: $77
 
 jr_001_675A::
-    ldh  a, [$FFE9]
-    add  a, $40
-    and  $3F
-    jr   nz, jr_001_6773
-    call GetRandomByte
-    and  $07
-    ld   e, a
-    ld   d, b
-    ld   hl, Data_001_66F0
-    add  hl, de
-    ld   a, [hl]
-    ld   hl, $C560
-    add  hl, bc
-    ld   [hl], a
+    ldh  a, [$FFE9]                               ; $675A: $F0 $E9
+    add  a, $40                                   ; $675C: $C6 $40
+    and  $3F                                      ; $675E: $E6 $3F
+    jr   nz, jr_001_6773                          ; $6760: $20 $11
+    call GetRandomByte                            ; $6762: $CD $0D $28
+    and  $07                                      ; $6765: $E6 $07
+    ld   e, a                                     ; $6767: $5F
+    ld   d, b                                     ; $6768: $50
+    ld   hl, Data_001_66F0                        ; $6769: $21 $F0 $66
+    add  hl, de                                   ; $676C: $19
+    ld   a, [hl]                                  ; $676D: $7E
+    ld   hl, $C560                                ; $676E: $21 $60 $C5
+    add  hl, bc                                   ; $6771: $09
+    ld   [hl], a                                  ; $6772: $77
 
 jr_001_6773::
-    ld   hl, $C590
-    add  hl, bc
-    ld   a, [hl]
-    inc  a
-    ld   [hl], a
-    cp   $13
-    jr   c, jr_001_67A7
-    ld   [hl], b
-    ld   hl, Data_001_66F6
-    add  hl, bc
-    ld   d, [hl]
-    ld   hl, wTranscientVfxPosXTable
-    add  hl, bc
-    ld   a, [hl]
-    sub  a, d
-    ld   e, $01
-    and  $80
-    jr   nz, jr_001_6792
-    ld   e, $FF
+    ld   hl, $C590                                ; $6773: $21 $90 $C5
+    add  hl, bc                                   ; $6776: $09
+    ld   a, [hl]                                  ; $6777: $7E
+    inc  a                                        ; $6778: $3C
+    ld   [hl], a                                  ; $6779: $77
+    cp   $13                                      ; $677A: $FE $13
+    jr   c, jr_001_67A7                           ; $677C: $38 $29
+    ld   [hl], b                                  ; $677E: $70
+    ld   hl, Data_001_66F6                        ; $677F: $21 $F6 $66
+    add  hl, bc                                   ; $6782: $09
+    ld   d, [hl]                                  ; $6783: $56
+    ld   hl, wTranscientVfxPosXTable              ; $6784: $21 $30 $C5
+    add  hl, bc                                   ; $6787: $09
+    ld   a, [hl]                                  ; $6788: $7E
+    sub  a, d                                     ; $6789: $92
+    ld   e, $01                                   ; $678A: $1E $01
+    and  $80                                      ; $678C: $E6 $80
+    jr   nz, jr_001_6792                          ; $678E: $20 $02
+    ld   e, $FF                                   ; $6790: $1E $FF
 
 jr_001_6792::
-    ld   a, [hl]
-    add  a, e
-    ld   [hl], a
-    ld   hl, wTranscientVfxPosYTable
-    add  hl, bc
-    ld   a, [hl]
-    sub  a, $48
-    ld   e, $01
-    and  $80
-    jr   nz, jr_001_67A4
-    ld   e, $FF
+    ld   a, [hl]                                  ; $6792: $7E
+    add  a, e                                     ; $6793: $83
+    ld   [hl], a                                  ; $6794: $77
+    ld   hl, wTranscientVfxPosYTable              ; $6795: $21 $40 $C5
+    add  hl, bc                                   ; $6798: $09
+    ld   a, [hl]                                  ; $6799: $7E
+    sub  a, $48                                   ; $679A: $D6 $48
+    ld   e, $01                                   ; $679C: $1E $01
+    and  $80                                      ; $679E: $E6 $80
+    jr   nz, jr_001_67A4                          ; $67A0: $20 $02
+    ld   e, $FF                                   ; $67A2: $1E $FF
 
 jr_001_67A4::
-    ld   a, [hl]
-    add  a, e
-    ld   [hl], a
+    ld   a, [hl]                                  ; $67A4: $7E
+    add  a, e                                     ; $67A5: $83
+    ld   [hl], a                                  ; $67A6: $77
 
 jr_001_67A7::
-    ret
+    ret                                           ; $67A7: $C9
 
 func_001_67A8::
-    call func_001_67B5
-    push bc
-    ld   a, c
-    add  a, $10
-    ld   c, a
-    call func_001_67B5
-    pop  bc
-    ret
+    call func_001_67B5                            ; $67A8: $CD $B5 $67
+    push bc                                       ; $67AB: $C5
+    ld   a, c                                     ; $67AC: $79
+    add  a, $10                                   ; $67AD: $C6 $10
+    ld   c, a                                     ; $67AF: $4F
+    call func_001_67B5                            ; $67B0: $CD $B5 $67
+    pop  bc                                       ; $67B3: $C1
+    ret                                           ; $67B4: $C9
 
 func_001_67B5::
-    ld   hl, $C550
-    add  hl, bc
-    ld   a, [hl]
-    push af
-    swap a
-    and  $F0
-    ld   hl, $C570
-    add  hl, bc
-    add  a, [hl]
-    ld   [hl], a
-    rl   d
-    ld   hl, wTranscientVfxPosXTable
-    add  hl, bc
-    pop  af
-    ld   e, $00
-    bit  7, a
-    jr   z, jr_001_67D4
-    ld   e, $F0
+    ld   hl, $C550                                ; $67B5: $21 $50 $C5
+    add  hl, bc                                   ; $67B8: $09
+    ld   a, [hl]                                  ; $67B9: $7E
+    push af                                       ; $67BA: $F5
+    swap a                                        ; $67BB: $CB $37
+    and  $F0                                      ; $67BD: $E6 $F0
+    ld   hl, $C570                                ; $67BF: $21 $70 $C5
+    add  hl, bc                                   ; $67C2: $09
+    add  a, [hl]                                  ; $67C3: $86
+    ld   [hl], a                                  ; $67C4: $77
+    rl   d                                        ; $67C5: $CB $12
+    ld   hl, wTranscientVfxPosXTable              ; $67C7: $21 $30 $C5
+    add  hl, bc                                   ; $67CA: $09
+    pop  af                                       ; $67CB: $F1
+    ld   e, $00                                   ; $67CC: $1E $00
+    bit  7, a                                     ; $67CE: $CB $7F
+    jr   z, jr_001_67D4                           ; $67D0: $28 $02
+    ld   e, $F0                                   ; $67D2: $1E $F0
 
 jr_001_67D4::
-    swap a
-    and  $0F
-    or   e
-    rr   d
-    adc  a, [hl]
-    ld   [hl], a
-    ret
+    swap a                                        ; $67D4: $CB $37
+    and  $0F                                      ; $67D6: $E6 $0F
+    or   e                                        ; $67D8: $B3
+    rr   d                                        ; $67D9: $CB $1A
+    adc  a, [hl]                                  ; $67DB: $8E
+    ld   [hl], a                                  ; $67DC: $77
+    ret                                           ; $67DD: $C9
 
 OpenMarinBeachDialog::
-    ld   e, a
-    ldh  a, [hLinkPositionY]
-    push af
-    ld   a, $60
-    ldh  [hLinkPositionY], a
-    ld   a, e
-    call OpenDialogInTable1
-    pop  af
-    ldh  [hLinkPositionY], a
-    ret
+    ld   e, a                                     ; $67DE: $5F
+    ldh  a, [hLinkPositionY]                      ; $67DF: $F0 $99
+    push af                                       ; $67E1: $F5
+    ld   a, $60                                   ; $67E2: $3E $60
+    ldh  [hLinkPositionY], a                      ; $67E4: $E0 $99
+    ld   a, e                                     ; $67E6: $7B
+    call OpenDialogInTable1                       ; $67E7: $CD $73 $23
+    pop  af                                       ; $67EA: $F1
+    ldh  [hLinkPositionY], a                      ; $67EB: $E0 $99
+    ret                                           ; $67ED: $C9

@@ -42,11 +42,6 @@ gfx_files += $(shell find revisions -type f -name '*.png')
 
 deps = $(asm_files) $(gfx_files:.png=.2bpp)
 
-# Then we link them to create a playable image.
-# This also spits out game.sym, which lets you use labels in bgb.
-
-src/main.o: $(asm_files) $(gfx_files:.png=.2bpp)
-
 #
 # Japanese
 #

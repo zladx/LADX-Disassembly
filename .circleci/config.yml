@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Building
-          command: make build
+          command: make build-all
       - run:
           name: Testing checksum
-          command: make test
+          command: make test-all

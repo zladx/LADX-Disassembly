@@ -106,7 +106,7 @@ endm
 ; Play a note. Can pass multiple notes to this.
 note: macro
     REPT _NARG
-        if \1 < $2 || \1 > $90 || (\1 % 2) != 0
+        if \1 < $2 || \1 > $90
             fail "note: Invalid note value \1"
         endc
         db \1

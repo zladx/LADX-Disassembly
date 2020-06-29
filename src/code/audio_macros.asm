@@ -100,7 +100,7 @@ endm
 ; Play a note. Can pass multiple notes to this.
 note: macro
     REPT _NARG
-        ASSERT \1 >= $1 && \1 <= $90 || \1 == $ff, "note: Invalid note value \1"
+        ASSERT (\1 >= $1 && \1 <= $90) || \1 == $ff, "note: Invalid note value \1"
         db \1
         SHIFT
     ENDR

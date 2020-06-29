@@ -76,7 +76,7 @@ endm
 ; The opcode's 3 bytes are written to D3x6, D3x7, D3x8 (x = channel number).
 set_envelope_duty: macro
     ASSERT \3 < 4, "set_envelope_duty: Invalid duty cycle value \3"
-    ASSERT \4 < $40, fail "set_envelope_duty: Note length must be less than 0x40, got \4"
+    ASSERT \4 < $40, "set_envelope_duty: Note length must be less than 0x40, got \4"
     db $9d, \1, \2, ((\3<<6) | \4)
 endm
 

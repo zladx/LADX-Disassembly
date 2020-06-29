@@ -1,4 +1,5 @@
 .POSIX:
+.PHONY: default build build-all test test-all all clean
 
 #
 # Dev tools binaries and options
@@ -148,9 +149,10 @@ all: build-all test-all
 
 clean:
 	rm -f $(games)
-	rm -f $(games:.gbc=.o)
+	rm -f $(games:%.gbc=src/main.%.o)
 	rm -f $(games:.gbc=.map)
 	rm -f $(games:.gbc=.sym)
-	find . -iname '*.2bpp' -exec rm {} +
-
-.PHONY: default build build-all test test-all all clean
+	rm -f $(gfx_files:.png=.2bpp)
+	rm -f $(azlj_gfx:.png=.2bpp)
+	rm -f $(azlg_gfx:.png=.2bpp)
+	rm -f $(azlf_gfx:.png=.2bpp)

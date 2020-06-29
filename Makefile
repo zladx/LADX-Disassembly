@@ -150,11 +150,11 @@ build-all: $(games)
 
 # Test the default revision.
 test: build
-	@tools/md5sum.sh --check --ignore-missing ladx.md5
+	@tools/compare.sh ladx.md5 azle.gbc
 
 # Test all revisions.
 test-all: build-all
-	@tools/md5sum.sh --check ladx.md5
+	@tools/compare.sh ladx.md5 $(games)
 
 all: build-all test-all
 

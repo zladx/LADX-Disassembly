@@ -49,6 +49,9 @@ deps = $(asm_files) $(gfx_files:.png=.2bpp)
 	$(LD) $(LDFLAGS) $($*_ld_opt) -n $*.sym -o $@ $^
 	$(FX) $(FXFLAGS) $($*_fx_opt) $@
 
+# Make may attempt to re-generate the Makefile; prevent this.
+Makefile: ;
+
 #
 # Japanese
 #

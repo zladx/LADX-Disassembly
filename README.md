@@ -7,8 +7,8 @@ MD5 - 07C211479386825042EFB4AD31BB525F
 
 ## Usage
 
-1. Install [rgbds](https://github.com/rednex/rgbds#1-installing-rgbds) (version >= 0.4.0 required).
-2. `make all`
+1. Install Python 3 and [rgbds](https://github.com/rednex/rgbds#1-installing-rgbds) (version >= 0.4.0 required);
+2. `make all`.
 
 ## How to contribute
 

@@ -1,6 +1,6 @@
 .POSIX:
 .SUFFIXES:
-.PRECIOUS: %.2bpp
+.PRECIOUS: %.2bpp oam_%.2bpp
 .PHONY: default build build-all test test-all all clean
 
 #
@@ -36,6 +36,11 @@ default: build test
 # Dependencies for the base version (English 1.0)
 asm_files = $(shell find src     -type f -name '*.asm')
 gfx_files = $(shell find src/gfx -type f -name '*.png')
+
+# Compile an PNG file for OAM memory to a 2BPP file
+# (invert the palette and de-interleave the tiles.)
+oam_%.2bpp: oam_%.png
+	tools/gfx/gfx.py --invert --interleave --out $@ 2bpp $<
 
 # Compile a PNG file to a 2BPP file
 %.2bpp: %.png

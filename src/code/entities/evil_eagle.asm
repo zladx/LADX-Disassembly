@@ -1,12 +1,12 @@
 Data_005_59DE:
 IF __PATCH_0__
-incbin "gfx/characters/evil_eagle/rider_v1.2bpp"
+incbin "gfx/characters/evil_eagle/oam_rider_v1.2bpp"
 ELSE
-incbin "gfx/characters/evil_eagle/rider_v0.2bpp"
+incbin "gfx/characters/evil_eagle/oam_rider_v0.2bpp"
 ENDC
 
 Data_005_59FE::
-incbin "gfx/characters/evil_eagle/rider_hidden.2bpp"
+incbin "gfx/characters/evil_eagle/oam_rider_hidden.2bpp"
 
 EntityInitEvilEagle::
     ld   hl, wEntitiesUnknowTableH                ; $5A1E: $21 $30 $C4

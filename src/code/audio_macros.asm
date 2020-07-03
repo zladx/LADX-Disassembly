@@ -75,9 +75,8 @@ endm
 ;
 ; The opcode's 3 bytes are written to D3x6, D3x7, D3x8 (x = channel number).
 set_envelope_duty: macro
-    ; Assertions:
-    ;   - \3 < 4
-    ;   - \4 < 0x40
+    ASSERT \3 < 4, "set_envelope_duty: Invalid duty cycle value \3"
+    ASSERT \4 < $40, "set_envelope_duty: Note length must be less than 0x40, got \4"
     db $9d, \1, \2, ((\3<<6) | \4)
 endm
 
@@ -94,14 +93,14 @@ endm
 
 ; Sets the length of subsequent notes.
 notelen: macro
-    ; If someone figures out how to "assert \1 <= $f" please add it here!
+    ASSERT \1 <= $f, "notelen: Length must be less than or equal to $f, got \1"
     db $a0 + \1
 endm
 
 ; Play a note. Can pass multiple notes to this.
 note: macro
     REPT _NARG
-        ; Desired assertion: \1 >= $02 && \1 <= $90 && (\1 % 2) == 0
+        ASSERT (\1 >= $1 && \1 <= $90) || \1 == $ff, "note: Invalid note value \1"
         db \1
         SHIFT
     ENDR

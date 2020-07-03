@@ -1,4 +1,7 @@
 .POSIX:
+.SUFFIXES:
+.PRECIOUS: %.2bpp
+.PHONY: default build build-all test test-all all clean
 
 #
 # Dev tools binaries and options
@@ -22,124 +25,115 @@ FXFLAGS := \
   --pad-value 0xFF \
   --validate
 
-.SUFFIXES: .asm .o .gbc .png .2bpp
-
 # Default target: build and test only the US 1.0 revision.
 # (Use `make all` to build and test all targets.)
 default: build test
 
-# Objects are assembled from source.
-# src/main.o is built from src/main.asm.
+#
+# Generic rules
+#
+
+# Dependencies for the base version (English 1.0)
 asm_files = $(shell find src     -type f -name '*.asm')
 gfx_files = $(shell find src/gfx -type f -name '*.png')
-# Add files from the different revisions
-# FIXME: add these files only when building the relevant targets
-asm_files += $(shell find revisions -type f -name '*.asm')
-gfx_files += $(shell find revisions -type f -name '*.png')
 
+# Compile a PNG file to a 2BPP file
 %.2bpp: %.png
 	$(2BPP) -o $@ $<
 
-deps = $(asm_files) $(gfx_files:.png=.2bpp)
+# Compile all dependencies (ASM, 2BPP) into an object file
+# (More specific rules may add more pre-requisites.)
+src/main.%.o: src/main.asm $(asm_files) $(gfx_files:.png=.2bpp)
+	$(ASM) $(ASFLAGS) $($*_ASFLAGS) -i src/ -o $@ $<
+
+# Link an object file to a GBC file
+%.gbc: src/main.%.o
+	$(LD) $(LDFLAGS) $($*_LDFLAGS) -n $*.sym -o $@ $^
+	$(FX) $(FXFLAGS) $($*_FXFLAGS) $@
+
+# Make may attempt to re-generate the Makefile; prevent this.
+Makefile: ;
 
 #
 # Japanese
 #
 
+azlj_asm = $(shell find revisions/J0 -type f -name '*.asm')
+azlj_gfx = $(shell find revisions/J0 -type f -name '*.png')
+
 games += azlj.gbc
-j0_obj = src/main.azlj.o
-src/main.azlj.o: src/main.asm $(deps)
-	$(ASM) $(ASFLAGS) -DLANG=JP -DVERSION=0 -i revisions/J0/src/ -i src/ -o $@ $<
-azlj.gbc: $(j0_obj)
-	$(LD) $(LDFLAGS) -n $*.sym -o $@ $^
-	$(FX) $(FXFLAGS) --rom-version 0 --title "ZELDA" $@
+src/main.azlj.o: $(azlj_asm) $(azlj_gfx:.png=.2bpp)
+azlj_ASFLAGS = -DLANG=JP -DVERSION=0 -i revisions/J0/src/
+azlj_FXFLAGS = --rom-version 0 --title "ZELDA"
 
 games += azlj-r1.gbc
-j1_obj = src/main.azlj-1.o
-src/main.azlj-1.o: src/main.asm $(deps)
-	$(ASM) $(ASFLAGS) -DLANG=JP -DVERSION=1 -i revisions/J1/src/ -i revisions/J0/src/ -i src/ -o $@ $<
-azlj-r1.gbc: $(j1_obj)
-	$(LD) $(LDFLAGS) -n $*.sym -o $@ $^
-	$(FX) $(FXFLAGS) --rom-version 1 --title "ZELDA" $@
+src/main.azlj-r1.o: $(azlj_asm) $(azlj_gfx:.png=.2bpp)
+azlj-r1_ASFLAGS = -DLANG=JP -DVERSION=1 -i revisions/J0/src/
+azlj-r1_FXFLAGS = --rom-version 1 --title "ZELDA"
 
 games += azlj-r2.gbc
-j2_obj = src/main.azlj-2.o
-src/main.azlj-2.o: src/main.asm $(deps)
-	$(ASM) $(ASFLAGS) -DLANG=JP -DVERSION=2 -i revisions/J2/src/ -i revisions/J1/src/ -i revisions/J0/src/ -i src/ -o $@ $<
-azlj-r2.gbc: $(j2_obj)
-	$(LD) $(LDFLAGS) -n $*.sym -o $@ $^
-	$(FX) $(FXFLAGS) --rom-version 2 --title "ZELDA" --game-id "AZLJ" $@
+src/main.azlj-r2.o: $(azlj_asm) $(azlj_gfx:.png=.2bpp)
+azlj-r2_ASFLAGS = -DLANG=JP -DVERSION=2 -i revisions/J0/src/
+azlj-r2_FXFLAGS = --rom-version 2 --title "ZELDA" --game-id "AZLJ"
 
 #
 # German
 #
 
+azlg_asm = $(shell find revisions/G0 -type f -name '*.asm')
+azlg_gfx = $(shell find revisions/G0 -type f -name '*.png')
+
 games += azlg.gbc
-g0_obj = src/main.azlg.o
-src/main.azlg.o: src/main.asm $(deps)
-	$(ASM) $(ASFLAGS) -DLANG=DE -DVERSION=0 -i revisions/G0/src/ -i src/ -o $@ $<
-azlg.gbc: $(g0_obj)
-	$(LD) $(LDFLAGS) -n $*.sym -o $@ $^
-	$(FX) $(FXFLAGS) --rom-version 0 --non-japanese --title "ZELDA" $@
+src/main.azlg.o: $(azlg_asm) $(azlg_gfx:.png=.2bpp)
+azlg_ASFLAGS = -DLANG=DE -DVERSION=0 -i revisions/G0/src/
+azlg_FXFLAGS = --rom-version 0 --non-japanese --title "ZELDA"
 
 games += azlg-r1.gbc
-g1_obj = src/main.azlg-1.o
-src/main.azlg-1.o: src/main.asm $(deps)
-	$(ASM) $(ASFLAGS) -DLANG=DE -DVERSION=1 -i revisions/G1/src/ -i revisions/G0/src/ -i src/ -o $@ $<
-azlg-r1.gbc: $(g1_obj) azlj-r2.gbc
-	$(LD) $(LDFLAGS) -O "azlj-r2.gbc" -n $*.sym -o $@ $<
-	$(FX) $(FXFLAGS) --rom-version 1 --non-japanese --title "ZELDA" --game-id "AZLD" $@
+src/main.azlg-r1.o: $(azlg_asm) $(azlg_gfx:.png=.2bpp) azlj-r2.gbc
+azlg-r1_ASFLAGS = -DLANG=DE -DVERSION=1 -i revisions/G0/src/
+azlg-r1_LDFLAGS = -O azlj-r2.gbc
+azlg-r1_FXFLAGS = --rom-version 1 --non-japanese --title "ZELDA" --game-id "AZLD"
 
 #
 # French
 #
 
+azlf_asm = $(shell find revisions/F0 -type f -name '*.asm')
+azlf_gfx = $(shell find revisions/F0 -type f -name '*.png')
+
 games += azlf.gbc
-f0_obj = src/main.azlf.o
-src/main.azlf.o: src/main.asm $(deps)
-	$(ASM) $(ASFLAGS) -DLANG=FR -DVERSION=0 -i revisions/F0/src/ -i src/ -o $@ $<
-azlf.gbc: $(f0_obj)
-	$(LD) $(LDFLAGS) -n $*.sym -o $@ $^
-	$(FX) $(FXFLAGS) --rom-version 0 --non-japanese --title "ZELDA" $@
+src/main.azlf.o: $(azlf_asm) $(azlf_gfx:.png=.2bpp)
+azlf_ASFLAGS = -DLANG=FR -DVERSION=0 -i revisions/F0/src/
+azlf_FXFLAGS = --rom-version 0 --non-japanese --title "ZELDA"
 
 games += azlf-r1.gbc
-f1_obj = src/main.azlf-1.o
-src/main.azlf-1.o: src/main.asm $(deps)
-	$(ASM) $(ASFLAGS) -DLANG=FR -DVERSION=1 -i revisions/F1/src/ -i revisions/F0/src/ -i src/ -o $@ $<
-azlf-r1.gbc: $(f1_obj) azlg-r1.gbc
-	$(LD) $(LDFLAGS) -O "azlg-r1.gbc" -n $*.sym -o $@ $<
-	$(FX) $(FXFLAGS) --rom-version 1 --non-japanese --title "ZELDA" --game-id "AZLF" $@
+src/main.azlf-r1.o: $(azlf_asm) $(azlf_gfx:.png=.2bpp) azlg-r1.gbc
+azlf-r1_ASFLAGS = -DLANG=FR -DVERSION=1 -i revisions/F0/src/
+azlf-r1_LDFLAGS = -O azlg-r1.gbc
+azlf-r1_FXFLAGS = --rom-version 1 --non-japanese --title "ZELDA" --game-id "AZLF"
 
 #
 # English
 #
 
 games += azle.gbc
-e0_obj = src/main.azle.o
-src/main.azle.o: src/main.asm $(deps)
-	$(ASM) $(ASFLAGS) -DLANG=EN -DVERSION=0 -i src/ -o $@ $<
-azle.gbc: $(e0_obj)
-	$(LD) $(LDFLAGS) -n $*.sym -o $@ $^
-	$(FX) $(FXFLAGS) --rom-version 0 --non-japanese --title "ZELDA" $@
+src/main.azle.o:
+azle_ASFLAGS = -DLANG=EN -DVERSION=0
+azle_FXFLAGS = --rom-version 0 --non-japanese --title "ZELDA"
 
 games += azle-r1.gbc
-e1_obj = src/main.azle-1.o
-src/main.azle-1.o: src/main.asm $(deps)
-	$(ASM) $(ASFLAGS) -DLANG=EN -DVERSION=1 -i revisions/E1/src/ -i src/ -o $@ $<
-azle-r1.gbc: $(e1_obj)
-	$(LD) $(LDFLAGS) -n $*.sym -o $@ $^
-	$(FX) $(FXFLAGS) --rom-version 1 --non-japanese --title "ZELDA" $@
+src/main.azle-r1.o:
+azle-r1_ASFLAGS = -DLANG=EN -DVERSION=1
+azle-r1_FXFLAGS = --rom-version 1 --non-japanese --title "ZELDA"
 
 games += azle-r2.gbc
-e2_obj = src/main.azle-2.o
-src/main.azle-2.o: src/main.asm $(deps)
-	$(ASM) $(ASFLAGS) -DLANG=EN -DVERSION=2 -i revisions/E2/src/ -i revisions/E1/src/ -i src/ -o $@ $<
-azle-r2.gbc: $(e2_obj) azlf-r1.gbc
-	$(LD) $(LDFLAGS) -O "azlf-r1.gbc" -n $*.sym -o $@ $<
-	$(FX) $(FXFLAGS) --rom-version 2 --non-japanese --title "ZELDA" --game-id "AZLE" $@
+src/main.azle-r2.o: azlf-r1.gbc
+azle-r2_ASFLAGS = -DLANG=EN -DVERSION=2
+azle-r2_LDFLAGS = -O azlf-r1.gbc
+azle-r2_FXFLAGS = --rom-version 2 --non-japanese --title "ZELDA" --game-id "AZLE"
 
 #
-# General rules
+# Main targets
 #
 
 # By default, build the US 1.0 revision.
@@ -150,20 +144,20 @@ build-all: $(games)
 
 # Test the default revision.
 test: build
-	@tools/md5sum.sh -c ladx.md5
+	@tools/compare.sh ladx.md5 azle.gbc
 
 # Test all revisions.
 test-all: build-all
-	@tools/md5sum.sh -c ladx.md5
+	@tools/compare.sh ladx.md5 $(games)
 
 all: build-all test-all
 
 clean:
-	rm -f $(obj)
 	rm -f $(games)
-	rm -f $(games:.gbc=.o)
+	rm -f $(games:%.gbc=src/main.%.o)
 	rm -f $(games:.gbc=.map)
 	rm -f $(games:.gbc=.sym)
-	find . -iname '*.2bpp' -exec rm {} +
-
-.PHONY: default build build-all test test-all all clean
+	rm -f $(gfx_files:.png=.2bpp)
+	rm -f $(azlj_gfx:.png=.2bpp)
+	rm -f $(azlg_gfx:.png=.2bpp)
+	rm -f $(azlf_gfx:.png=.2bpp)

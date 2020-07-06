@@ -509,6 +509,10 @@ Data_001_54A0::
     db   $00, $E8, $EA, $E9, $EB, $EC, $E8, $EC   ; $54D8 ; $54D8
     db   $EA, $EC, $E9, $FF                       ; $54E0 ; $54E0
 
+; Addresses of where to write the dungeon numeral on the subscreen
+; (that is, the number part of "L-?", next to the dungeon map)
+; First address: used for most maps
+; Second address: used when the minimap is split (e.g. Eagle's Tower)
 Data_001_54E4::
     db   HIGH(vBGMap1 + $10A), HIGH(vBGMap1 + $EA) ; $54E4
 

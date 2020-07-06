@@ -68,16 +68,42 @@ __PATCH_B__ = 0 ; 1 in JP/DE, 2 in FR
 __PATCH_C__ = FALSE ; Applies to EN
 __DO_CHECK_DAKUTEN__ = FALSE ; TRUE in JP, DE
 __USE_FIXED_DIALOG_BANKS__ = FALSE ; TRUE in JP
+
+; If the Key Cavern map is split into 1F and B1F on the subscreen.
+; See also: https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening/Version_Differences#Key_Cavern
 __SPLIT_KEY_CAVERN_MAP__ = TRUE ; FALSE in EN
 
+
+; -------------------------------------------------------------------
 ; Default values
+
+; Configures if the debug save file writer writes to max bombs or arrows first.
+; FALSE: Arrows, then bombs
+; TRUE: Bombs, then arrows
+; This has no impact on gameplay - it just reorders the assignments.
+DEBUG_SAVE_SWITCH_ARROWS = FALSE
+
+; Tiles used for the "floor numbers" in split-floor dungeon maps.
+; These are functionally unused in the DX version due to the map being moved
+; to make space for the "PUSH SELECT" notice.
+; Table of versions and replaced values:
+;    *   FR  DE
+; 0  EC  --  7F
+; 1  E8  B1  EC
+; 2  E8  B1  --
+; FR changes "[B-][1F]" into "[SS][1]", DE changes it into just "[ ][KI]". 
+; See also: https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening/Version_Differences#Key_Cavern
+; (examples of different languages)
 MINIMAP_VAR_0 = $EC
 MINIMAP_VAR_1 = $E8
 MINIMAP_VAR_2 = $E8
-DEBUG_SAVE_SWITCH_ARROWS = FALSE
+
+
 CREDITS_VAR_0 = $1A
 CREDITS_VAR_1 = $1B
 CREDITS_VAR_2 = $0F
+
+
 
 IF ("{LANG}" == "JP")
 FILE_28 = $14
@@ -89,7 +115,7 @@ EASTER_EGG_SONG_1 equ $60 ; MUSIC_ZELDA_NICKNAME_EASTER_EGG
 EASTER_EGG_FILENAME_2 equs "とたけけ" ; Totakeke
 EASTER_EGG_SONG_2 equ $3C ; MUSIC_TOTAKEKE_NICKNAME_EASTER_EGG
 THIEF_NAME equs "どろぼ－"
-DEBUG_SAVE_FILE_NAME equs "えすばはら"
+DEBUG_SAVE_FILE_NAME equs "えすばはら" ; Esubahara
 BANK_1C_VAR = 0
 DEBUG_SAVE_BOMB_COUNT equ $59
 DEBUG_SAVE_MAGIC_COUNT equ $39

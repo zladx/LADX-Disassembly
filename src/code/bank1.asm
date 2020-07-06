@@ -131,7 +131,9 @@ ENDC
     cp   GAMEPLAY_FILE_NEW                        ; $4731: $FE $03
     jr   z, .notOnNewFileScreen                   ; $4733: $28 $19
 
-    ; Set save file name to "ZELDA"
+    ; Set save file name; "ZELDA" in NA, "えすばはら" in JP
+    ; POI: "えすばはら" = "Esubahara" - possibly Takamitsu Kuzuhara?
+    ; (credited as "Programmer")
 INDEX = 0
 REPT 5
     ld   a, STRSUB("{DEBUG_SAVE_FILE_NAME}", INDEX + 1, 1) + 1
@@ -459,7 +461,6 @@ jr_001_531D::
     ld   [wWreckingBallPosY], a                   ; $53D3: $EA $71 $DB
     jr   .finish                                  ; $53D6: $18 $B6
 
-
 Data_001_53D8::
     db   $9D, $9D, $9D, $FF, $9D, $9D, $9D, $FF   ; $53D8 ; $53D8
     db   $9D, $9D, $9C, $FF, $9D, $9D, $9C, $FF   ; $53E0 ; $53E0
@@ -476,6 +477,14 @@ Data_001_5408::
     db   $7F, $7F, $BA, $FF, $7F, $7F, $BA, $FF   ; $5408 ; $5408
     db   $7F, $7F, $BA, $FF, $7F, $7F, $BA, $FF   ; $5410 ; $5410
 
+;
+; Series of three tables:
+; HIGH
+; LOW
+; TILE
+; Unsure of exact method this is read by, but used by subscreen dungeon map layouts.
+; Contains some changes based on language for the (unused) floor markers
+;
 Data_001_5418::
     db   $00, $00, $00, $FF, $00, $00, $00, $FF   ; $5418 ; $5418
     db   $9D, $9D, $FF, $00, $9D, $9D, $9D, $FF   ; $5420 ; $5420

@@ -53,6 +53,24 @@ TRUE equ 1
 
 BANK_1C_VAR = 1
 
+
+; @TODO Patch effects and changes:
+;
+; __PATCH_4__
+;   Recalculates player's max HP (on save/load?), based on
+;   map room flags for defeated bosses and collected heart containers.
+;
+; __PATCH_8__
+;   1: Removes the debug feature that allows you to jump to the ending
+;      by pushing START on the map screen if debug flag 3 is enabled
+;      (This feature was not part of DX JP 1.0)
+;
+; __PATCH_A__
+;   1: Skips updating the status bar's hearts, rupees,
+;      and subscreen inventory if debug flag 2 is set.
+;   2: Swaps the order of the subscreen and heart/rupee updates.
+;      Purpose unknown.
+
 __PATCH_0__ = FALSE ; Applies to JP1+, EN1+, DE, FR
 __PATCH_1__ = FALSE ; Applies to DE, FR
 __PATCH_2__ = FALSE ; Applies to DE, JP1+, EN2+, FR

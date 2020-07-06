@@ -33,5 +33,5 @@ DumpBanks
 *~
 
 # save files
-game.sav
-game.ss*
+*.sav
+*.ss*

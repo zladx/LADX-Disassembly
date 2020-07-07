@@ -1454,6 +1454,12 @@ jr_001_5E3A::
     ret                                           ; $5E66: $C9
 
 IF __PATCH_4__
+;
+; Recalculates player's Max HP based on two tables; one for boss rooms,
+; one for piece of heart rooms. Checks the save data's room flags to check
+; if the boss has been defeated or the heart piece was collected,
+; then resets max HP to 3 + (bosses) + (PoH / 4).
+;
 Data_001_5ea2:
     dw wIndoorARoomStatus + $06 ; moldorm
     dw wIndoorARoomStatus + $2b ; genie

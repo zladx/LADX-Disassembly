@@ -63,7 +63,6 @@ BANK_1C_VAR = 1
 ; __PATCH_8__
 ;   1: Removes the debug feature that allows you to jump to the ending
 ;      by pushing START on the map screen if debug flag 3 is enabled
-;      (This feature was not part of DX JP 1.0)
 ;
 ; __PATCH_A__
 ;   1: Skips updating the status bar's hearts, rupees,

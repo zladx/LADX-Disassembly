@@ -1939,7 +1939,7 @@ func_020_55CA::
     cp   $03                                      ; $55DB: $FE $03
     jr   nz, jr_020_55F0                          ; $55DD: $20 $11
 
-    ld   hl, hWindowYUnused                       ; $55DF: $21 $A9 $FF
+    ld   hl, hVolumeRight                       ; $55DF: $21 $A9 $FF
     ld   a, [hl]                                  ; $55E2: $7E
     inc  hl                                       ; $55E3: $23
     or   [hl]                                     ; $55E4: $B6
@@ -2296,9 +2296,9 @@ InventoryMapFadeOutHandler::
     xor  a                                        ; $594D: $AF
     ld   [wInventoryAppearing], a                 ; $594E: $EA $4F $C1
     ld   a, $03                                   ; $5951: $3E $03
-    ldh  [hWindowYUnused], a                      ; $5953: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $5953: $E0 $A9
     ld   a, $30                                   ; $5955: $3E $30
-    ldh  [hWindowXUnused], a                      ; $5957: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $5957: $E0 $AA
     xor  a                                        ; $5959: $AF
     ld   [$DE06], a                               ; $595A: $EA $06 $DE
     ld   [$DE07], a                               ; $595D: $EA $07 $DE
@@ -2576,9 +2576,9 @@ jr_020_5ADE:
     ld   a, $32                                   ; $5ADE: $3E $32
     ld   [wRequests], a                           ; $5AE0: $EA $00 $D6
     ld   a, $03                                   ; $5AE3: $3E $03
-    ldh  [hWindowYUnused], a                      ; $5AE5: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $5AE5: $E0 $A9
     ld   a, $30                                   ; $5AE7: $3E $30
-    ldh  [hWindowXUnused], a                      ; $5AE9: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $5AE9: $E0 $AA
     jp   label_020_5D34                           ; $5AEB: $C3 $34 $5D
 
 tradingItemPaletteIndexes:
@@ -2631,9 +2631,9 @@ InventoryLoad2Handler::
 
 jr_020_5B3D:
     ld   a, $03                                   ; $5B3D: $3E $03
-    ldh  [hWindowYUnused], a                      ; $5B3F: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $5B3F: $E0 $A9
     ld   a, $30                                   ; $5B41: $3E $30
-    ldh  [hWindowXUnused], a                      ; $5B43: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $5B43: $E0 $AA
     call IncrementGameplaySubtype_20                            ; $5B45: $CD $83 $66
     ret                                           ; $5B48: $C9
 
@@ -4277,9 +4277,9 @@ InventoryFadeOutHandler::
     ld   [wC167], a                               ; $65F0: $EA $67 $C1
     ld   [wInventoryAppearing], a                 ; $65F3: $EA $4F $C1
     ld   a, $07                                   ; $65F6: $3E $07
-    ldh  [hWindowYUnused], a                      ; $65F8: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $65F8: $E0 $A9
     ld   a, $70                                   ; $65FA: $3E $70
-    ldh  [hWindowXUnused], a                      ; $65FC: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $65FC: $E0 $AA
     ld   a, $0B                                   ; $65FE: $3E $0B
     ld   [wGameplayType], a                       ; $6600: $EA $95 $DB
     ldh  [hFFBC], a                               ; $6603: $E0 $BC
@@ -4326,9 +4326,9 @@ jr_020_6630:
     ld   a, $08                                   ; $6641: $3E $08
     ld   [$C150], a                               ; $6643: $EA $50 $C1
     ld   a, $07                                   ; $6646: $3E $07
-    ldh  [hWindowYUnused], a                      ; $6648: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $6648: $E0 $A9
     ld   a, $70                                   ; $664A: $3E $70
-    ldh  [hWindowXUnused], a                      ; $664C: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $664C: $E0 $AA
     ldh  a, [hIsGBC]                              ; $664E: $F0 $FE
     and  a                                        ; $6650: $A7
     jr   z, jr_020_6682                           ; $6651: $28 $2F

@@ -4518,7 +4518,7 @@ jr_002_613D:
     jr   nc, jr_002_619C                          ; $6195: $30 $05
 
 jr_002_6197:
-    call IsMapRoomE8                              ; $6197: $CD $09 $67
+    call LoadMinimap                              ; $6197: $CD $09 $67
     ld   a, $02                                   ; $619A: $3E $02
 
 jr_002_619C:
@@ -4527,9 +4527,9 @@ jr_002_619C:
 
 jr_002_619F:
     ld   a, $07                                   ; $619F: $3E $07
-    ldh  [hWindowYUnused], a                      ; $61A1: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $61A1: $E0 $A9
     ld   a, $70                                   ; $61A3: $3E $70
-    ldh  [hWindowXUnused], a                      ; $61A5: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $61A5: $E0 $AA
     pop  af                                       ; $61A7: $F1
     ret                                           ; $61A8: $C9
 
@@ -4566,9 +4566,9 @@ jr_002_61C6:
     jr   nz, jr_002_61E4                          ; $61D4: $20 $0E
 
     ld   a, $03                                   ; $61D6: $3E $03
-    ldh  [hWindowYUnused], a                      ; $61D8: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $61D8: $E0 $A9
     ld   a, $30                                   ; $61DA: $3E $30
-    ldh  [hWindowXUnused], a                      ; $61DC: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $61DC: $E0 $AA
 
 jr_002_61DE:
     xor  a                                        ; $61DE: $AF

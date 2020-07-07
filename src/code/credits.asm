@@ -4919,9 +4919,9 @@ CreditsTheEnd1Handler::
     ret  nz                                       ; $7007: $C0
 
     ld   a, $07                                   ; $7008: $3E $07
-    ldh  [hWindowYUnused], a                      ; $700A: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $700A: $E0 $A9
     swap a                                        ; $700C: $CB $37
-    ldh  [hWindowXUnused], a                      ; $700E: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $700E: $E0 $AA
     ld   a, $B4                                   ; $7010: $3E $B4
     ld   [$D006], a                               ; $7012: $EA $06 $D0
     jp   IncrementCreditsSubscene                 ; $7015: $C3 $D9 $4C

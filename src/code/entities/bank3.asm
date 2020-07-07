@@ -1637,6 +1637,7 @@ OpenChestTilesGBC::
 OpenChestTiles::
     db   $62, $70, $62, $70
 
+; POI: The bow, shovel, and sword are not placed in chests
 ChestToInventoryMappingTable::
     db   INVENTORY_POWER_BRACELET                 ; CHEST_POWER_BRACELET
     db   INVENTORY_SHIELD                         ; CHEST_SHIELD
@@ -1651,11 +1652,12 @@ ChestToInventoryMappingTable::
     db   INVENTORY_BOMBS                          ; CHEST_BOMB
     db   INVENTORY_SWORD                          ; CHEST_SWORD
 
-    ; High and low bytes for the CHEST_RUPEE_xxx amounts of rupees
+; High and low bytes for the CHEST_RUPEE_xxx amounts of rupees
+; POI: A chest with 500 rupees???
 ChestRupeeCountHigh::
-    db   $00, $00, $00, $00, $01
+    db   HIGH( 50), HIGH( 20), HIGH(100), HIGH(200), HIGH(500)
 ChestRupeeCountLow::
-    db   $32, $14, $64, $C8, $F4
+    db   LOW(  50), LOW(  20), LOW( 100), LOW( 200), LOW( 500)
 
 EntityInitChestWithItem::
     ld   a, $2A                                   ; $506D: $3E $2A
@@ -1776,7 +1778,7 @@ jr_003_50EF:
     ldh  a, [hFFE8]                               ; $510C: $F0 $E8
     cp   CHEST_BOMB                               ; $510E: $FE $0A
     jr   nz, .bombsEnd                            ; $5110: $20 $08
-    ; increment the bomb's count by 10
+    ; increment the bomb's count by 1
     ld   hl, wBombCount                           ; $5112: $21 $4D $DB
     ld   a, [hl]                                  ; $5115: $7E
     add  $01                                      ; $5116: $C6 $01
@@ -1885,7 +1887,7 @@ jr_003_5198:
     ld   de, Data_003_5166                        ; $519C: $11 $66 $51
     ld   b, $C6                                   ; $519F: $06 $C6
     ldh  a, [hMapRoom]                            ; $51A1: $F0 $F6
-    cp   $77                                      ; $51A3: $FE $77
+    cp   $77                                      ; Color Dungeon entrance in the graveyard  ; $51A3: $FE $77
     jr   nz, jr_003_51B3                          ; $51A5: $20 $0C
 
     ; If the color dungeon is open…

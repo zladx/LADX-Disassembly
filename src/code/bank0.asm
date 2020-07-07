@@ -2932,7 +2932,7 @@ LinkMotionMapFadeOutHandler::
     ldh  a, [hMapId]                              ; $1955: $F0 $F7
     cp   MAP_CAVE_B                               ; $1957: $FE $0A
     jr   nc, .label_196E                          ; $1959: $30 $13
-    callsw IsMapRoomE8              ; @TODO Either Eagle's Tower boss room bottom half or Yarna Desert quicksand pit ; $195B: $3E $02 $CD $0C $08 $CD $09 $67
+    callsw LoadMinimap                            ; $195B: $3E $02 $CD $0C $08 $CD $09 $67
     ld   a, $30                                   ; $1963: $3E $30
     ldh  [$FFB4], a                               ; $1965: $E0 $B4
     xor  a                                        ; $1967: $AF

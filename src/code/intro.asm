@@ -1984,9 +1984,9 @@ InertLinkState2Handler::
     call GetEntityTransitionCountdown             ; $7AB6: $CD $05 $0C
     ld   [hl], $17                                ; $7AB9: $36 $17
     ld   a, $07                                   ; $7ABB: $3E $07
-    ldh  [hWindowYUnused], a                      ; $7ABD: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $7ABD: $E0 $A9
     ld   a, $70                                   ; $7ABF: $3E $70
-    ldh  [hWindowXUnused], a                      ; $7AC1: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $7AC1: $E0 $AA
     ret                                           ; $7AC3: $C9
 
 InertLinkState3Handler::

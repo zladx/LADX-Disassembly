@@ -148,7 +148,7 @@ JumpTable_037_40EC::
     and  %00000001                                ; $40EE: $E6 $01
     jr   nz, .else_4108_37                        ; $40F0: $20 $16
 
-    ld   hl, hWindowYUnused                       ; $40F2: $21 $A9 $FF
+    ld   hl, hVolumeRight                       ; $40F2: $21 $A9 $FF
     dec  [hl]                                     ; $40F5: $35
     ld   a, [hl]                                  ; $40F6: $7E
     bit  7, a                                     ; $40F7: $CB $7F
@@ -157,14 +157,14 @@ JumpTable_037_40EC::
     xor  a                                        ; $40FB: $AF
 .else_40FC_37:
     ld   [hl], a                                  ; $40FC: $77
-    ldh  a, [hWindowXUnused]                      ; $40FD: $F0 $AA
+    ldh  a, [hVolumeLeft]                      ; $40FD: $F0 $AA
     sub  $10                                      ; $40FF: $D6 $10
     bit  7, a                                     ; $4101: $CB $7F
     jr   z, .else_4106_37                         ; $4103: $28 $01
 
     xor  a                                        ; $4105: $AF
 .else_4106_37:
-    ldh  [hWindowXUnused], a                      ; $4106: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $4106: $E0 $AA
 .else_4108_37:
     call func_1A22                               ; $4108: $CD $22 $1A
     ld   a, [wTransitionSequenceCounter]          ; $410B: $FA $6B $C1
@@ -449,7 +449,7 @@ JumpTable_037_42FE::
     and  $01                                      ; $4300: $E6 $01
     jr   nz, .else_431B_37                        ; $4302: $20 $17
 
-    ldh  a, [hWindowYUnused]                      ; $4304: $F0 $A9
+    ldh  a, [hVolumeRight]                      ; $4304: $F0 $A9
     inc  a                                        ; $4306: $3C
     cp   $07                                      ; $4307: $FE $07
     jr   c, .else_430D_37                         ; $4309: $38 $02
@@ -457,8 +457,8 @@ JumpTable_037_42FE::
     ld   a, $07                                   ; $430B: $3E $07
 
 .else_430D_37:
-    ldh  [hWindowYUnused], a                      ; $430D: $E0 $A9
-    ldh  a, [hWindowXUnused]                      ; $430F: $F0 $AA
+    ldh  [hVolumeRight], a                      ; $430D: $E0 $A9
+    ldh  a, [hVolumeLeft]                      ; $430F: $F0 $AA
     add  $10                                      ; $4311: $C6 $10
     cp   $70                                      ; $4313: $FE $70
     jr   c, .else_4319_37                         ; $4315: $38 $02
@@ -466,7 +466,7 @@ JumpTable_037_42FE::
     ld   a, $70                                   ; $4317: $3E $70
 
 .else_4319_37:
-    ldh  [hWindowXUnused], a                      ; $4319: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $4319: $E0 $AA
 
 .else_431B_37:
     xor  a                                        ; $431B: $AF

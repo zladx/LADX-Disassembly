@@ -77,9 +77,9 @@ FileSaveMapFadeOut::
     cp   $04                                      ; $404E: $FE $04
     jr   nz, jr_001_4072                          ; $4050: $20 $20
     ld   a, $03                                   ; $4052: $3E $03
-    ldh  [hWindowYUnused], a                      ; $4054: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $4054: $E0 $A9
     ld   a, $30                                   ; $4056: $3E $30
-    ldh  [hWindowXUnused], a                      ; $4058: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $4058: $E0 $AA
     call IncrementGameplaySubtype                 ; $405A: $CD $D6 $44
     xor  a                                        ; $405D: $AF
     ld   [$C1BF], a                               ; $405E: $EA $BF $C1
@@ -204,9 +204,9 @@ LCDOn::
 
     ; Configure Window
     ld   a, $07                                   ; $411F: $3E $07
-    ldh  [hWindowYUnused], a                      ; $4121: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $4121: $E0 $A9
     ld   a, $70                                   ; $4123: $3E $70
-    ldh  [hWindowXUnused], a                      ; $4125: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $4125: $E0 $AA
 .return
     ret                                           ; $4127: $C9
 

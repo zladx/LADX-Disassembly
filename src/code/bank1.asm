@@ -781,9 +781,9 @@ jr_001_5854::
     ldh  [$FF97], a                               ; $5862: $E0 $97
     ld   [$C167], a                               ; $5864: $EA $67 $C1
     ld   a, $07                                   ; $5867: $3E $07
-    ldh  [hWindowYUnused], a                      ; $5869: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $5869: $E0 $A9
     ld   a, $70                                   ; $586B: $3E $70
-    ldh  [hWindowXUnused], a                      ; $586D: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $586D: $E0 $AA
     ld   a, GAMEPLAY_WORLD                        ; $586F: $3E $0B
     ld   [wGameplayType], a                       ; $5871: $EA $95 $DB
     ldh  [hFFBC], a                               ; $5874: $E0 $BC
@@ -1454,6 +1454,12 @@ jr_001_5E3A::
     ret                                           ; $5E66: $C9
 
 IF __PATCH_4__
+;
+; Recalculates player's Max HP based on two tables; one for boss rooms,
+; one for piece of heart rooms. Checks the save data's room flags to check
+; if the boss has been defeated or the heart piece was collected,
+; then resets max HP to 3 + (bosses) + (PoH / 4).
+;
 Data_001_5ea2:
     dw wIndoorARoomStatus + $06 ; moldorm
     dw wIndoorARoomStatus + $2b ; genie
@@ -2361,9 +2367,9 @@ PeachPictureState1Handler::
     cp   MAP_EAGLES_TOWER                         ; $683D: $FE $06
     jr   z, jr_001_6849                           ; $683F: $28 $08
     ld   a, $03                                   ; $6841: $3E $03
-    ldh  [hWindowYUnused], a                      ; $6843: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $6843: $E0 $A9
     ld   a, $30                                   ; $6845: $3E $30
-    ldh  [hWindowXUnused], a                      ; $6847: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $6847: $E0 $AA
 
 jr_001_6849::
     call IncrementGameplaySubtype                 ; $6849: $CD $D6 $44

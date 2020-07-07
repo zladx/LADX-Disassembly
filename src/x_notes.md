@@ -32,6 +32,8 @@ This is not an exhaustive list. Many patches have effects that are not well-docu
 *  If **Yes**, will **not** check for Evil Eagle's room when loading a minimap
   * `src/code/minimap.asm -> LoadMinimap`
   * Effects of this are unknown
+* [Color Dungeon book shadow is removed](https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening/Version_Differences#Book.27s_Shadow_in_the_Library)
+  * `src/code/bank3.asm -> Data_003_42F1`
 * Many, many other changes everywhere
   * A handful of checks against your current tunic type when changing music tracks
   * `src/code/entities/bank7.asm -> EntityA8Handler` Code possibly relating to (unused?) entity `A8`?

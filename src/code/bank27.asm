@@ -559,9 +559,9 @@ jr_027_790C:
 
 jr_027_7910:
     ld   a, $07                                   ; $7910: $3E $07
-    ldh  [hWindowYUnused], a                      ; $7912: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $7912: $E0 $A9
     swap a                                        ; $7914: $CB $37
-    ldh  [hWindowXUnused], a                      ; $7916: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $7916: $E0 $AA
     ld   a, $32                                   ; $7918: $3E $32
     ld   [$D466], a                               ; $791A: $EA $66 $D4
     ld   a, $90                                   ; $791D: $3E $90
@@ -577,12 +577,12 @@ func_027_7925::
     dec  [hl]                                     ; $792B: $35
     ret  nz                                       ; $792C: $C0
 
-    ldh  a, [hWindowYUnused]                      ; $792D: $F0 $A9
+    ldh  a, [hVolumeRight]                      ; $792D: $F0 $A9
     dec  a                                        ; $792F: $3D
-    ldh  [hWindowYUnused], a                      ; $7930: $E0 $A9
-    ldh  a, [hWindowXUnused]                      ; $7932: $F0 $AA
+    ldh  [hVolumeRight], a                      ; $7930: $E0 $A9
+    ldh  a, [hVolumeLeft]                      ; $7932: $F0 $AA
     sub  $10                                      ; $7934: $D6 $10
-    ldh  [hWindowXUnused], a                      ; $7936: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $7936: $E0 $AA
     jr   nz, jr_027_7940                          ; $7938: $20 $06
 
     ld   a, MUSIC_SILENCE                         ; $793A: $3E $FF

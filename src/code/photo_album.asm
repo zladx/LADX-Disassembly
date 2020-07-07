@@ -138,9 +138,9 @@ JumpTable_028_40A7:
     ld   a, $01                                 ; $40C2: JumpTable_028_40A7 $3E $01
     ld   [$D1D1], a                             ; $40C4: JumpTable_028_40A7 $EA $D1 $D1
     ld   a, $03                                 ; $40C7: JumpTable_028_40A7 $3E $03
-    ldh  [hWindowYUnused], a                    ; $40C9: JumpTable_028_40A7 $E0 $A9
+    ldh  [hVolumeRight], a                    ; $40C9: JumpTable_028_40A7 $E0 $A9
     ld   a, $30                                 ; $40CB: JumpTable_028_40A7 $3E $30
-    ldh  [hWindowXUnused], a                    ; $40CD: JumpTable_028_40A7 $E0 $AA
+    ldh  [hVolumeLeft], a                    ; $40CD: JumpTable_028_40A7 $E0 $AA
     call func_028_47CB                          ; $40CF: JumpTable_028_40A7 $CD $CB $47
     ld   a, $09                                 ; $40D2: JumpTable_028_40A7 $3E $09
     ld   [rIE], a                               ; $40D4: JumpTable_028_40A7 $E0 $FF
@@ -784,9 +784,9 @@ JumpTable_028_44AA:
     ld   a, $18                                 ; $44C5: JumpTable_028_44AA $3E $18
     ld   [$DE05], a                             ; $44C7: JumpTable_028_44AA $EA $05 $DE
     ld   a, $07                                 ; $44CA: JumpTable_028_44AA $3E $07
-    ldh  [hWindowYUnused], a                    ; $44CC: JumpTable_028_44AA $E0 $A9
+    ldh  [hVolumeRight], a                    ; $44CC: JumpTable_028_44AA $E0 $A9
     ld   a, $70                                 ; $44CE: JumpTable_028_44AA $3E $70
-    ldh  [hWindowXUnused], a                    ; $44D0: JumpTable_028_44AA $E0 $AA
+    ldh  [hVolumeLeft], a                    ; $44D0: JumpTable_028_44AA $E0 $AA
     ld   a, [wLCDControl]                       ; $44D2: JumpTable_028_44AA $FA $FD $D6
     ld   [wLCDControl], a                       ; $44D5: JumpTable_028_44AA $EA $FD $D6
     ld   [rLCDC], a                             ; $44D8: JumpTable_028_44AA $E0 $40

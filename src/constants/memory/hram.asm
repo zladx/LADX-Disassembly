@@ -158,12 +158,12 @@ hMusicFadeOutTimer:: ; FFA8
   ; Music fade out timer
   ds 1
 
-; Unused (?) Window Y value
-hWindowYUnused:: ; FFA9
+; Right channel volume -- low nybble only, 00-07
+hVolumeRight:: ; FFA9
   ds 1
 
-; Unused (?) Window X value
-hWindowXUnused:: ; FFAA
+; Left channel volume -- high nybble only, 00-70
+hVolumeLeft:: ; FFAA
   ds 1
 
 hMusicFadeInTimer:: ; hFFAB

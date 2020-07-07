@@ -67,9 +67,9 @@ WorldMapState1Handler::
     cp   $04                                      ; $5684: $FE $04
     jr   nz, jr_001_56F3                          ; $5686: $20 $6B
     ld   a, $03                                   ; $5688: $3E $03
-    ldh  [hWindowYUnused], a                      ; $568A: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $568A: $E0 $A9
     ld   a, $30                                   ; $568C: $3E $30
-    ldh  [hWindowXUnused], a                      ; $568E: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $568E: $E0 $AA
     call IncrementGameplaySubtype                 ; $5690: $CD $D6 $44
     xor  a                                        ; $5693: $AF
     ld   [$C16B], a                               ; $5694: $EA $6B $C1

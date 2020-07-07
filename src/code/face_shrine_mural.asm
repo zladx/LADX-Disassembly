@@ -47,9 +47,9 @@ FaceShrineMuralStage1Handler::
     jr   nz, jr_001_6B51                          ; $6B38: $20 $17
     call func_001_5888                            ; $6B3A: $CD $88 $58
     ld   a, $03                                   ; $6B3D: $3E $03
-    ldh  [hWindowYUnused], a                      ; $6B3F: $E0 $A9
+    ldh  [hVolumeRight], a                      ; $6B3F: $E0 $A9
     ld   a, $30                                   ; $6B41: $3E $30
-    ldh  [hWindowXUnused], a                      ; $6B43: $E0 $AA
+    ldh  [hVolumeLeft], a                      ; $6B43: $E0 $AA
     call IncrementGameplaySubtype                 ; $6B45: $CD $D6 $44
     xor  a                                        ; $6B48: $AF
     ld   [$C1BF], a                               ; $6B49: $EA $BF $C1

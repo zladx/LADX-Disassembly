@@ -1,14 +1,15 @@
 Data_002_66F9::
     db   $00, $02, $03, $07, $05, $0A, $0B, $0F, $04, $08, $09, $0E, $06, $0C, $0D, $01
 
-IsMapRoomE8::
+LoadMinimap::
 IF !__PATCH_0__
+    ; Check if this is room E8, which is Evil Eagle's boss room
+    ; If so, don't actually load the map
     ldh  a, [hMapRoom]                            ; $6709: $F0 $F6
     cp   $E8                                      ; $670B: $FE $E8
     ret  z                                        ; $670D: $C8
 ENDC
 
-LoadMinimap::
     ; Load special minimap for Color Dungeon
     ld   hl, MinimapsTable                        ; $670E: $21 $79 $64
     ldh  a, [hMapId]                              ; $6711: $F0 $F7

@@ -4518,7 +4518,7 @@ jr_002_613D:
     jr   nc, jr_002_619C                          ; $6195: $30 $05
 
 jr_002_6197:
-    call IsMapRoomE8                              ; $6197: $CD $09 $67
+    call LoadMinimap                              ; $6197: $CD $09 $67
     ld   a, $02                                   ; $619A: $3E $02
 
 jr_002_619C:

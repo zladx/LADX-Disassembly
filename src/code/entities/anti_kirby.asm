@@ -310,7 +310,7 @@ jr_006_440C:
     ld   a, $20                                   ; $4412: $3E $20
     ld   [wInvincibilityCounter], a               ; $4414: $EA $C7 $DB
     ld   a, $02                                   ; $4417: $3E $02
-    ld   [$C146], a                               ; $4419: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $4419: $EA $46 $C1
     ld   a, $02                                   ; $441C: $3E $02
     ld   [wSubtractHealthBuffer], a               ; $441E: $EA $94 $DB
     ld   a, JINGLE_JUMP_DOWN                      ; $4421: $3E $08

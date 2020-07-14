@@ -1931,7 +1931,7 @@ UseShield::
 
 UseShovel::
     ld   a, [$C1C7]                               ; $12F8: $FA $C7 $C1
-    ld   hl, $C146                                ; $12FB: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $12FB: $21 $46 $C1
     or   [hl]                                     ; $12FE: $B6
     ret  nz                                       ; $12FF: $C0
 
@@ -2229,11 +2229,11 @@ UseRocsFeather::
     ld   a, [$C130]                               ; $14CB: $FA $30 $C1
     cp   $07                                      ; $14CE: $FE $07
     ret  z                                        ; $14D0: $C8
-    ld   a, [$C146]                               ; $14D1: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $14D1: $FA $46 $C1
     and  a                                        ; $14D4: $A7
     ret  nz                                       ; $14D5: $C0
     ld   a, $01                                   ; $14D6: $3E $01
-    ld   [$C146], a                               ; $14D8: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $14D8: $EA $46 $C1
     xor  a                                        ; $14DB: $AF
     ld   [$C152], a                               ; $14DC: $EA $52 $C1
     ld   [$C153], a                               ; $14DF: $EA $53 $C1
@@ -2307,7 +2307,7 @@ label_1535::
     ldh  [hNoiseSfx], a                           ; $1551: $E0 $F4
 
     call func_157C                                ; $1553: $CD $7C $15
-    ld   a, [$C146]                               ; $1556: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $1556: $FA $46 $C1
     and  a                                        ; $1559: $A7
     jr   nz, label_1562                           ; $155A: $20 $06
     call ResetSpinAttack                          ; $155C: $CD $AF $0C
@@ -2605,7 +2605,7 @@ UsePegasusBoots::
     and  a                                        ; $1716: $A7
     ret  nz                                       ; $1717: $C0
     ldh  a, [hLinkPositionZ]                      ; $1718: $F0 $A2
-    ld   hl, $C146                                ; $171A: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $171A: $21 $46 $C1
     or   [hl]                                     ; $171D: $B6
     ret  nz                                       ; $171E: $C0
     ld   a, [wConsecutiveStepsCount]              ; $171F: $FA $20 $C1
@@ -2643,7 +2643,7 @@ func_1756::
     or   [hl]                                     ; $175D: $B6
     ld   hl, hLinkInteractiveMotionBlocked        ; $175E: $21 $A1 $FF
     or   [hl]                                     ; $1761: $B6
-    ld   hl, $C146                                ; $1762: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $1762: $21 $46 $C1
     or   [hl]                                     ; $1765: $B6
     ret  nz                                       ; $1766: $C0
 

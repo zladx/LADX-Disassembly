@@ -46,3 +46,4 @@ Thanks to these people for contributing:
 * Xkeeper - https://github.com/Xkeeper0
 * Vextrove - https://github.com/Vextrove
 * daid - https://github.com/daid
+* stephaneseng - https://github.com/stephaneseng

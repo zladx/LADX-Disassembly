@@ -324,7 +324,7 @@ WarpEntityHandler::
 
 jr_019_4226:
     call func_019_7D3D                            ; $4226: $CD $3D $7D
-    ld   a, [$C146]                               ; $4229: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $4229: $FA $46 $C1
     and  a                                        ; $422C: $A7
     ret  nz                                       ; $422D: $C0
 
@@ -3650,7 +3650,7 @@ jr_019_598B:
 
 func_019_599B::
     call ResetPegasusBoots                        ; $599B: $CD $B6 $0C
-    ld   a, [$C146]                               ; $599E: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $599E: $FA $46 $C1
     and  a                                        ; $59A1: $A7
     jr   nz, jr_019_59B7                          ; $59A2: $20 $13
 
@@ -3720,7 +3720,7 @@ jr_019_5A0D:
     ld   hl, wEntitiesSpeedZTable                 ; $5A1F: $21 $20 $C3
     add  hl, bc                                   ; $5A22: $09
     ld   [hl], $10                                ; $5A23: $36 $10
-    ld   a, [$C146]                               ; $5A25: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $5A25: $FA $46 $C1
     ld   e, a                                     ; $5A28: $5F
     ld   a, [wIsRunningWithPegasusBoots]          ; $5A29: $FA $4A $C1
     or   e                                        ; $5A2C: $B3
@@ -3866,7 +3866,7 @@ jr_019_5AC4:
     ld   [hl], $01                                ; $5AEE: $36 $01
     ld   a, $02                                   ; $5AF0: $3E $02
     ldh  [hLinkPositionZ], a                      ; $5AF2: $E0 $A2
-    ld   [$C146], a                               ; $5AF4: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $5AF4: $EA $46 $C1
     ret                                           ; $5AF7: $C9
 
 Data_019_5AF8::
@@ -3926,7 +3926,7 @@ label_019_5B3C:
     add  e                                        ; $5B48: $83
     call SetEntitySpriteVariant                   ; $5B49: $CD $0C $3B
     ld   a, $02                                   ; $5B4C: $3E $02
-    ld   [$C146], a                               ; $5B4E: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $5B4E: $EA $46 $C1
     xor  a                                        ; $5B51: $AF
     ldh  [$FFA3], a                               ; $5B52: $E0 $A3
     ldh  a, [hFrameCounter]                       ; $5B54: $F0 $E7
@@ -6706,7 +6706,7 @@ jr_019_7255:
 SeashellMansionState1Handler::
     ld   a, $01                                   ; $7256: $3E $01
     ld   [wC167], a                               ; $7258: $EA $67 $C1
-    ld   a, [$C146]                               ; $725B: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $725B: $FA $46 $C1
     and  a                                        ; $725E: $A7
     jp   z, IncrementEntityState                  ; $725F: $CA $12 $3B
 
@@ -8044,7 +8044,7 @@ func_019_7D16::
     ld   a, [wDialogState]                        ; $7D1B: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $7D1E: $21 $4F $C1
     or   [hl]                                     ; $7D21: $B6
-    ld   hl, $C146                                ; $7D22: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $7D22: $21 $46 $C1
     or   [hl]                                     ; $7D25: $B6
     ld   hl, $C134                                ; $7D26: $21 $34 $C1
     or   [hl]                                     ; $7D29: $B6

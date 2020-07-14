@@ -591,7 +591,7 @@ func_015_463D::
     cp   $10                                      ; $464D: $FE $10
     jr   nc, jr_015_465F                          ; $464F: $30 $0E
 
-    ld   a, [$C146]                               ; $4651: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $4651: $FA $46 $C1
     and  a                                        ; $4654: $A7
     ret  nz                                       ; $4655: $C0
 
@@ -2061,7 +2061,7 @@ FinalNightmareForm1Handler::
 
 ; Final boss dialog related
 func_015_50C2::
-    ld   a, [$C146]                               ; $50C2: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $50C2: $FA $46 $C1
     and  a                                        ; $50C5: $A7
     ret  nz                                       ; $50C6: $C0
 
@@ -6206,7 +6206,7 @@ ENDC
     cp   $10                                      ; $72F0: $FE $10
     jr   nc, jr_015_731D                          ; $72F2: $30 $29
 
-    ld   hl, $C146                                ; $72F4: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $72F4: $21 $46 $C1
     ld   a, [wInvincibilityCounter]               ; $72F7: $FA $C7 $DB
     or   [hl]                                     ; $72FA: $B6
     jr   nz, jr_015_731D                          ; $72FB: $20 $20
@@ -7499,7 +7499,7 @@ ShouldLinkTalkToEntity::
     ld   a, [wDialogState]                        ; $7AE7: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $7AEA: $21 $4F $C1
     or   [hl]                                     ; $7AED: $B6
-    ld   hl, $C146                                ; $7AEE: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $7AEE: $21 $46 $C1
     or   [hl]                                     ; $7AF1: $B6
     ld   hl, $C134                                ; $7AF2: $21 $34 $C1
     or   [hl]                                     ; $7AF5: $B6
@@ -7930,7 +7930,7 @@ func_015_7D01::
     ld   a, $01                                   ; $7D26: $3E $01
     ldh  [hLinkPositionZ], a                      ; $7D28: $E0 $A2
     ld   a, $02                                   ; $7D2A: $3E $02
-    ld   [$C146], a                               ; $7D2C: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $7D2C: $EA $46 $C1
     ld   a, $12                                   ; $7D2F: $3E $12
     ldh  [$FFA3], a                               ; $7D31: $E0 $A3
     ld   a, $0C                                   ; $7D33: $3E $0C
@@ -7966,7 +7966,7 @@ Data_015_7D70::
     db   $98, $42, $98, $50, $99, $90, $99, $82
 
 func_015_7D78::
-    ld   a, [$C146]                               ; $7D78: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $7D78: $FA $46 $C1
     and  a                                        ; $7D7B: $A7
     ret  nz                                       ; $7D7C: $C0
 

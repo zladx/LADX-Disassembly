@@ -432,7 +432,7 @@ jr_004_4F14:
     ld   [$C157], a                               ; $4F30: $EA $57 $C1
     ld   a, JINGLE_HUGE_BUMP                      ; $4F33: $3E $0B
     ldh  [hJingle], a                             ; $4F35: $E0 $F2
-    ld   a, [$C146]                               ; $4F37: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $4F37: $FA $46 $C1
     and  a                                        ; $4F3A: $A7
     jr   nz, jr_004_4F49                          ; $4F3B: $20 $0C
 
@@ -4190,7 +4190,7 @@ jr_004_6884:
     cp   ENTITY_TRACTOR_DEVICE                    ; $689A: $FE $52
     jp   nz, label_004_68E4                       ; $689C: $C2 $E4 $68
 
-    ld   a, [$C146]                               ; $689F: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $689F: $FA $46 $C1
     and  a                                        ; $68A2: $A7
     jr   nz, jr_004_68D4                          ; $68A3: $20 $2F
 
@@ -7497,7 +7497,7 @@ func_004_7C4B::
     ld   a, [wDialogState]                        ; $7C4B: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $7C4E: $21 $4F $C1
     or   [hl]                                     ; $7C51: $B6
-    ld   hl, $C146                                ; $7C52: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $7C52: $21 $46 $C1
     or   [hl]                                     ; $7C55: $B6
     ld   hl, $C134                                ; $7C56: $21 $34 $C1
     or   [hl]                                     ; $7C59: $B6

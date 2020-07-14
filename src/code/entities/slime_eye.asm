@@ -149,7 +149,7 @@ jr_004_4A41:
     call GetEntityTransitionCountdown                 ; $4A54: $CD $05 $0C
     ld   [hl], $40                                ; $4A57: $36 $40
     call PlayBombExplosionSfx                                ; $4A59: $CD $4B $0C
-    ld   a, [$C146]                               ; $4A5C: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $4A5C: $FA $46 $C1
     and  a                                        ; $4A5F: $A7
     jr   nz, jr_004_4A67                          ; $4A60: $20 $05
 

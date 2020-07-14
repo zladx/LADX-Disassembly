@@ -265,7 +265,7 @@ jr_006_5157:
     ld   a, $10                                   ; $5159: $3E $10
     ldh  [$FFA3], a                               ; $515B: $E0 $A3
     ld   a, $02                                   ; $515D: $3E $02
-    ld   [$C146], a                               ; $515F: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $515F: $EA $46 $C1
     ld   a, JINGLE_JUMP_DOWN                      ; $5162: $3E $08
     ldh  [hJingle], a                             ; $5164: $E0 $F2
     ld   a, $08                                   ; $5166: $3E $08
@@ -309,7 +309,7 @@ jr_006_5179:
     ld   a, [hl]                                  ; $51A4: $7E
     ldh  [hLinkPositionZ], a                      ; $51A5: $E0 $A2
     ld   a, $02                                   ; $51A7: $3E $02
-    ld   [$C146], a                               ; $51A9: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $51A9: $EA $46 $C1
     ldh  a, [hActiveEntityPosY]                   ; $51AC: $F0 $EF
     ldh  [hLinkPositionY], a                      ; $51AE: $E0 $99
 

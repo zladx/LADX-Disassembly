@@ -360,7 +360,7 @@ ArmosKnightState6Handler::
     ldh  [hJingle], a                             ; $5500: $E0 $F2
     call GetEntityTransitionCountdown             ; $5502: $CD $05 $0C
     ld   [hl], $30                                ; $5505: $36 $30
-    ld   a, [$C146]                               ; $5507: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $5507: $FA $46 $C1
     and  a                                        ; $550A: $A7
     jr   nz, jr_006_5512                          ; $550B: $20 $05
 

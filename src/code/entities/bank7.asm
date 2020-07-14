@@ -7595,7 +7595,7 @@ func_007_7090::
     jp   label_007_7034                           ; $70B4: $C3 $34 $70
 
 func_007_70B7::
-    ld   hl, $C146                                ; $70B7: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $70B7: $21 $46 $C1
     ld   a, [wInvincibilityCounter]               ; $70BA: $FA $C7 $DB
     or   [hl]                                     ; $70BD: $B6
     jr   nz, jr_007_7111                          ; $70BE: $20 $51
@@ -7637,7 +7637,7 @@ jr_007_70E0:
     ldh  a, [hScratch1]                           ; $70F6: $F0 $D8
     ldh  [hLinkPositionXIncrement], a             ; $70F8: $E0 $9A
     ld   a, $02                                   ; $70FA: $3E $02
-    ld   [$C146], a                               ; $70FC: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $70FC: $EA $46 $C1
     ld   a, $13                                   ; $70FF: $3E $13
     ldh  [$FFA3], a                               ; $7101: $E0 $A3
     ld   a, $08                                   ; $7103: $3E $08
@@ -9377,7 +9377,7 @@ jr_007_7D6F:
     ld   a, [wDialogState]                        ; $7D74: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $7D77: $21 $4F $C1
     or   [hl]                                     ; $7D7A: $B6
-    ld   hl, $C146                                ; $7D7B: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $7D7B: $21 $46 $C1
     or   [hl]                                     ; $7D7E: $B6
     ld   hl, $C134                                ; $7D7F: $21 $34 $C1
     or   [hl]                                     ; $7D82: $B6

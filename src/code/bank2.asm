@@ -36,7 +36,7 @@ SpawnChestWithItem::
     ret                                           ; $41FB: $C9
 
 UseOcarina::
-    ld   hl, $C146                                ; $41FC: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $41FC: $21 $46 $C1
     ld   a, [wLinkPlayingOcarinaCountdown]        ; $41FF: $FA $66 $C1
     or   [hl]                                     ; $4202: $B6
     ld   hl, $C1A4                                ; $4203: $21 $A4 $C1
@@ -99,7 +99,7 @@ IF __PATCH_0__
     ret  nz
 ENDC
 
-    ld   a, [$C146]                               ; $4254: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $4254: $FA $46 $C1
     and  a                                        ; $4257: $A7
 IF __PATCH_0__
     ret  nz
@@ -414,7 +414,7 @@ jr_002_43F4:
     call ResetSpinAttack                          ; $43FF: $CD $AF $0C
 
 jr_002_4402:
-    ld   a, [$C146]                               ; $4402: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $4402: $FA $46 $C1
     and  a                                        ; $4405: $A7
 IF __PATCH_0__
     jr   nz, label_002_4464
@@ -506,7 +506,7 @@ label_002_4464:
     cp   ENTITY_ROOSTER                           ; $4477: $FE $D5
     jr   nz, jr_002_4481                          ; $4479: $20 $06
 
-    ld   a, [$C146]                               ; $447B: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $447B: $FA $46 $C1
     and  a                                        ; $447E: $A7
     jr   nz, jr_002_44A2                          ; $447F: $20 $21
 
@@ -592,7 +592,7 @@ Data_002_44E7::
     db   $00, $F0, $10, $00, $FF, $01
 
 func_002_44ED::
-    ld   a, [$C146]                               ; $44ED: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $44ED: $FA $46 $C1
     and  a                                        ; $44F0: $A7
     jp   z, groundVfxEnd                        ; $44F1: $CA $AC $45
 
@@ -687,7 +687,7 @@ jr_002_456C:
     ldh  [hLinkPositionZ], a                      ; $456F: $E0 $A2
     ld   [$C149], a                               ; $4571: $EA $49 $C1
     ldh  [$FFA3], a                               ; $4574: $E0 $A3
-    ld   [$C146], a                               ; $4576: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $4576: $EA $46 $C1
     ld   [$C152], a                               ; $4579: $EA $52 $C1
     ld   [$C153], a                               ; $457C: $EA $53 $C1
     ld   [wC10A], a                               ; $457F: $EA $0A $C1
@@ -837,7 +837,7 @@ jr_002_4745:
     ld   [$C140], a                               ; $4754: $EA $40 $C1
     ld   a, $18                                   ; $4757: $3E $18
     ld   [$C141], a                               ; $4759: $EA $41 $C1
-    ld   [wIsLinkInTheAir], a                     ; $475C: $EA $43 $C1
+    ld   [$C143], a                               ; $475C: $EA $43 $C1
     ld   a, [$C145]                               ; $475F: $FA $45 $C1
     add  $08                                      ; $4762: $C6 $08
     ld   [$C142], a                               ; $4764: $EA $42 $C1
@@ -884,7 +884,7 @@ func_002_478C::
     ret                                           ; $47A2: $C9
 
 jr_002_47A3:
-    ld   a, [$C146]                               ; $47A3: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $47A3: $FA $46 $C1
     cp   $01                                      ; $47A6: $FE $01
     jr   nz, jr_002_47E0                          ; $47A8: $20 $36
 
@@ -1041,7 +1041,7 @@ jr_002_487E:
     ld   hl, Data_002_4606                        ; $48A0: $21 $06 $46
     add  hl, bc                                   ; $48A3: $09
     ld   a, [hl]                                  ; $48A4: $7E
-    ld   [wIsLinkInTheAir], a                     ; $48A5: $EA $43 $C1
+    ld   [$C143], a                               ; $48A5: $EA $43 $C1
     ld   a, $01                                   ; $48A8: $3E $01
     ld   [$C5B0], a                               ; $48AA: $EA $B0 $C5
 
@@ -1188,7 +1188,7 @@ jr_002_49AA:
 
 jr_002_49B6:
     ld   a, $01                                   ; $49B6: $3E $01
-    ld   [$C146], a                               ; $49B8: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $49B8: $EA $46 $C1
     call CheckItemsToUse                          ; $49BB: $CD $77 $11
     call func_002_478C                            ; $49BE: $CD $8C $47
     ld   a, [wSwordAnimationState]                ; $49C1: $FA $37 $C1
@@ -2095,7 +2095,7 @@ ENDC
 jr_002_4F3C:
     call ResetSpinAttack                          ; $4F3C: $CD $AF $0C
     ldh  [hLinkPositionZ], a                      ; $4F3F: $E0 $A2
-    ld   [$C146], a                               ; $4F41: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $4F41: $EA $46 $C1
     ld   [$C19B], a                               ; $4F44: $EA $9B $C1
     ld   [wSwordAnimationState], a                ; $4F47: $EA $37 $C1
     ld   [wC16A], a                               ; $4F4A: $EA $6A $C1
@@ -2457,7 +2457,7 @@ jr_002_515C:
     ld   [$DBC8], a                               ; $515C: $EA $C8 $DB
     call ClearLinkPositionIncrement               ; $515F: $CD $8E $17
     ldh  [$FFA3], a                               ; $5162: $E0 $A3
-    ld   [$C146], a                               ; $5164: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $5164: $EA $46 $C1
     jp   label_C83                                ; $5167: $C3 $83 $0C
 
 jr_002_516A:
@@ -5032,7 +5032,7 @@ Data_002_68B4::
     db   $FF, $00, $01
 
 jp_002_68B7::
-    ld   a, [$C146]                               ; $68B7: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $68B7: $FA $46 $C1
     and  a                                        ; $68BA: $A7
     jr   nz, jr_002_68C7                          ; $68BB: $20 $0A
 
@@ -5102,7 +5102,7 @@ jr_002_692B:
     ld   hl, hLinkDirection                       ; $6932: $21 $9E $FF
     res  1, [hl]                                  ; $6935: $CB $8E
     call ResetPegasusBoots                        ; $6937: $CD $B6 $0C
-    ld   [$C146], a                               ; $693A: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $693A: $EA $46 $C1
     ldh  a, [hFrameCounter]                       ; $693D: $F0 $E7
     and  $01                                      ; $693F: $E6 $01
     jr   nz, jr_002_696E                          ; $6941: $20 $2B
@@ -5182,7 +5182,7 @@ jr_002_699E:
 
 func_002_69A1::
     call ResetPegasusBoots                        ; $69A1: $CD $B6 $0C
-    ld   [$C146], a                               ; $69A4: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $69A4: $EA $46 $C1
     ld   [$C153], a                               ; $69A7: $EA $53 $C1
     ld   [$C152], a                               ; $69AA: $EA $52 $C1
     ldh  a, [hPressedButtonsMask]                 ; $69AD: $F0 $CB
@@ -5255,7 +5255,7 @@ func_002_6A01::
     cp   $F8                                      ; $6A09: $FE $F8
     jr   nz, jr_002_6A24                          ; $6A0B: $20 $17
 
-    ld   a, [$C146]                               ; $6A0D: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $6A0D: $FA $46 $C1
     and  a                                        ; $6A10: $A7
     jr   nz, jr_002_6A24                          ; $6A11: $20 $11
 
@@ -5300,12 +5300,12 @@ jr_002_6A4C:
     and  $08                                      ; $6A55: $E6 $08
     jr   nz, jr_002_6A94                          ; $6A57: $20 $3B
 
-    ld   a, [$C146]                               ; $6A59: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $6A59: $FA $46 $C1
     and  a                                        ; $6A5C: $A7
     jr   nz, jr_002_6A64                          ; $6A5D: $20 $05
 
     ld   a, $01                                   ; $6A5F: $3E $01
-    ld   [$C146], a                               ; $6A61: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $6A61: $EA $46 $C1
 
 jr_002_6A64:
     ld   a, $0A                                   ; $6A64: $3E $0A
@@ -5346,14 +5346,14 @@ jr_002_6A92:
     jr   label_002_6ADB                           ; $6A92: $18 $47
 
 jr_002_6A94:
-    ld   a, [$C146]                               ; $6A94: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $6A94: $FA $46 $C1
     and  a                                        ; $6A97: $A7
     jr   z, jr_002_6AAA                           ; $6A98: $28 $10
 
     ld   a, NOISE_SFX_FOOTSTEP                          ; $6A9A: $3E $07
     ldh  [hNoiseSfx], a                            ; $6A9C: $E0 $F4
     call ResetPegasusBoots                        ; $6A9E: $CD $B6 $0C
-    ld   [$C146], a                               ; $6AA1: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $6AA1: $EA $46 $C1
     ld   [$C152], a                               ; $6AA4: $EA $52 $C1
     ld   [$C153], a                               ; $6AA7: $EA $53 $C1
 
@@ -5905,7 +5905,7 @@ CheckPositionForMapTransition::
     and  a                                        ; $6D7E: $A7
     jr   nz, .jr_002_6D88                         ; $6D7F: $20 $07
 
-    ld   a, [$C146]                               ; $6D81: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $6D81: $FA $46 $C1
     and  a                                        ; $6D84: $A7
     jp   nz, clearIncrementAndReturn              ; $6D85: $C2 $0C $6E
 
@@ -6014,7 +6014,7 @@ ENDC
 
     ; … reset some more position variables.
     ld   a, $02                                   ; $6E00: $3E $02
-    ld   [$C146], a                               ; $6E02: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $6E02: $EA $46 $C1
     ld   a, $08                                   ; $6E05: $3E $08
     ldh  [hLinkPositionZ], a                      ; $6E07: $E0 $A2
 
@@ -6453,7 +6453,7 @@ jr_002_7078:
 
 jr_002_7085:
 IF __PATCH_0__
-    ld   a, [$c146]
+    ld   a, [wIsLinkInTheAir]
     and  a
     jr   nz, label_002_70D8
 ENDC
@@ -6499,7 +6499,7 @@ jr_002_70B5:
     ld   a, $1C                                   ; $70C6: $3E $1C
     ldh  [$FFA3], a                               ; $70C8: $E0 $A3
     ld   a, $01                                   ; $70CA: $3E $01
-    ld   [$C146], a                               ; $70CC: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $70CC: $EA $46 $C1
     ld   a, $01                                   ; $70CF: $3E $01
     ld   [wC10A], a                               ; $70D1: $EA $0A $C1
     ld   a, JINGLE_JUMP_DOWN                      ; $70D4: $3E $08
@@ -6799,7 +6799,7 @@ jr_002_728E:
     jr   nz, jr_002_72FA                          ; $7294: $20 $64
 
     ld   a, [$C13E]                               ; $7296: $FA $3E $C1
-    ld   hl, $C146                                ; $7299: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $7299: $21 $46 $C1
     or   [hl]                                     ; $729C: $B6
     jr   nz, jr_002_72FA                          ; $729D: $20 $5B
 
@@ -7044,7 +7044,7 @@ ENDC
     jr   c, jr_002_742D                           ; $73F1: $38 $3A
 
 IF __PATCH_0__
-    ld   a, [$c146]
+    ld   a, [wIsLinkInTheAir]
     and  a
     jr   nz, collisionEnd
 ENDC
@@ -7231,7 +7231,7 @@ jr_002_74C9:
     ld   a, $18                                   ; $74E0: $3E $18
     ldh  [$FFA3], a                               ; $74E2: $E0 $A3
     ld   a, $02                                   ; $74E4: $3E $02
-    ld   [$C146], a                               ; $74E6: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $74E6: $EA $46 $C1
     ld   a, $20                                   ; $74E9: $3E $20
     ld   [$C157], a                               ; $74EB: $EA $57 $C1
     ldh  a, [hLinkDirection]                      ; $74EE: $F0 $9E
@@ -7297,7 +7297,7 @@ jr_002_7549:
     jr   z, jr_002_7587                           ; $754D: $28 $38
 
 func_002_754F::
-    ld   hl, $C146                                ; $754F: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $754F: $21 $46 $C1
     ld   a, [wIsRunningWithPegasusBoots]          ; $7552: $FA $4A $C1
     or   [hl]                                     ; $7555: $B6
     jr   nz, func_002_755B                        ; $7556: $20 $03
@@ -7429,7 +7429,7 @@ func_002_75F5::
     inc  a                                        ; $7607: $3C
     ldh  [hLinkPositionYIncrement], a             ; $7608: $E0 $9B
     ld   a, $02                                   ; $760A: $3E $02
-    ld   [$C146], a                               ; $760C: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $760C: $EA $46 $C1
     ldh  a, [hIsSideScrolling]                    ; $760F: $F0 $F9
     and  a                                        ; $7611: $A7
     jr   nz, jr_002_761E                          ; $7612: $20 $0A

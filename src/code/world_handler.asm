@@ -156,7 +156,7 @@ GameplayWorldSubtype1Handler::
     and  a                                        ; $444A: $A7
     jr   z, jr_001_4452                           ; $444B: $28 $05
     ld   a, $02                                   ; $444D: $3E $02
-    ld   [$C146], a                               ; $444F: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $444F: $EA $46 $C1
 
 jr_001_4452::
     ld   a, $04                                   ; $4452: $3E $04

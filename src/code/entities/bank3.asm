@@ -6140,7 +6140,7 @@ ApplyLinkCollisionWithEnemy::
     call IncrementEntityState                     ; $6CE3: $CD $12 $3B
     ld   [hl], ENTITY_STATUS_ACTIVE               ; $6CE6: $36 $05
     ld   a, $02                                   ; $6CE8: $3E $02
-    ld   [$C146], a                               ; $6CEA: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $6CEA: $EA $46 $C1
     ld   a, $F0                                   ; $6CED: $3E $F0
     ldh  [hLinkPositionYIncrement], a             ; $6CEF: $E0 $9B
     call ClearEntitySpeed                         ; $6CF1: $CD $7F $3D
@@ -6157,7 +6157,7 @@ ApplyLinkCollisionWithEnemy::
     cp   ENTITY_GOOMBA                            ; $6CFB: $FE $9F
     jr   nz, .goombaEnd                           ; $6CFD: $20 $3E
 
-    ld   a, [$C146]                               ; $6CFF: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $6CFF: $FA $46 $C1
     and  a                                        ; $6D02: $A7
     jr   z, .goombaEnd                            ; $6D03: $28 $38
 
@@ -6453,7 +6453,7 @@ jr_003_6E8E:
     pop  hl                                       ; $6E8E: $E1
     push af                                       ; $6E8F: $F5
     inc  hl                                       ; $6E90: $23
-    ld   a, [wIsLinkInTheAir]                     ; $6E91: $FA $43 $C1
+    ld   a, [$C143]                               ; $6E91: $FA $43 $C1
     add  [hl]                                     ; $6E94: $86
     ld   e, a                                     ; $6E95: $5F
     pop  af                                       ; $6E96: $F1
@@ -7466,7 +7466,7 @@ jr_003_7440:
     pop  hl                                       ; $7440: $E1
     push af                                       ; $7441: $F5
     inc  hl                                       ; $7442: $23
-    ld   a, [wIsLinkInTheAir]                     ; $7443: $FA $43 $C1
+    ld   a, [$C143]                               ; $7443: $FA $43 $C1
     add  [hl]                                     ; $7446: $86
     ld   e, a                                     ; $7447: $5F
     pop  af                                       ; $7448: $F1

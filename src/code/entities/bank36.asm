@@ -329,7 +329,7 @@ func_036_41DF::
     ld   a, $70                                   ; $41DF: $3E $70
     ldh  [hLinkPositionZ], a                      ; $41E1: $E0 $A2
     ld   a, $02                                   ; $41E3: $3E $02
-    ld   [$C146], a                               ; $41E5: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $41E5: $EA $46 $C1
     ld   a, $E0                                   ; $41E8: $3E $E0
     ldh  [$FFB3], a                               ; $41EA: $E0 $B3
     ld   [$C145], a                               ; $41EC: $EA $45 $C1
@@ -673,7 +673,7 @@ jr_036_4429:
     ld   a, $77                                   ; $4432: $3E $77
     ldh  [hLinkPositionY], a                      ; $4434: $E0 $99
     ld   [wMapEntrancePositionY], a               ; $4436: $EA $9E $DB
-    ld   a, [$C146]                               ; $4439: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $4439: $FA $46 $C1
     and  a                                        ; $443C: $A7
     ret  nz                                       ; $443D: $C0
 
@@ -2603,7 +2603,7 @@ jr_036_4FB1:
     call SetEntitySpriteVariant                   ; $4FE4: $CD $0C $3B
     call func_036_6A62                            ; $4FE7: $CD $62 $6A
     call func_036_5000                            ; $4FEA: $CD $00 $50
-    ld   a, [$C146]                               ; $4FED: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $4FED: $FA $46 $C1
     and  a                                        ; $4FF0: $A7
     jr   z, jr_036_4FFB                           ; $4FF1: $28 $08
 
@@ -5048,7 +5048,7 @@ jr_036_5EDC:
     ret                                           ; $5F14: $C9
 
 AvalaunchStateAHandler::
-    ld   a, [$C146]                               ; $5F15: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $5F15: $FA $46 $C1
     and  a                                        ; $5F18: $A7
     jr   nz, jr_036_5F26                          ; $5F19: $20 $0B
 
@@ -7073,7 +7073,7 @@ jr_036_6AC5:
     ld   a, [wDialogState]                        ; $6ACA: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $6ACD: $21 $4F $C1
     or   [hl]                                     ; $6AD0: $B6
-    ld   hl, $C146                                ; $6AD1: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $6AD1: $21 $46 $C1
     or   [hl]                                     ; $6AD4: $B6
     ld   hl, $C134                                ; $6AD5: $21 $34 $C1
     or   [hl]                                     ; $6AD8: $B6

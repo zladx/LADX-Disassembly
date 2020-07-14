@@ -338,7 +338,7 @@ jr_005_5544:
     ld   a, [wDialogState]                        ; $5549: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $554C: $21 $4F $C1
     or   [hl]                                     ; $554F: $B6
-    ld   hl, $C146                                ; $5550: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $5550: $21 $46 $C1
     or   [hl]                                     ; $5553: $B6
     ld   hl, $C134                                ; $5554: $21 $34 $C1
     or   [hl]                                     ; $5557: $B6

@@ -2927,7 +2927,7 @@ jr_018_558A:
 
     call ResetSpinAttack                          ; $559A: $CD $AF $0C
     call ClearLinkPositionIncrement               ; $559D: $CD $8E $17
-    ld   a, [$C146]                               ; $55A0: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $55A0: $FA $46 $C1
     and  a                                        ; $55A3: $A7
     ret  nz                                       ; $55A4: $C0
 
@@ -8639,7 +8639,7 @@ jr_018_7DC1:
     ld   a, [wDialogState]                        ; $7DC6: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $7DC9: $21 $4F $C1
     or   [hl]                                     ; $7DCC: $B6
-    ld   hl, $C146                                ; $7DCD: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $7DCD: $21 $46 $C1
     or   [hl]                                     ; $7DD0: $B6
     ld   hl, $C134                                ; $7DD1: $21 $34 $C1
     or   [hl]                                     ; $7DD4: $B6

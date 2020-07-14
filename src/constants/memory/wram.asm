@@ -199,7 +199,14 @@ wIsLinkPushing:: ; C144
   ds 1
 
 ; Unlabeled
-ds $5
+ds $1
+
+wIsLinkInTheAir:: ; C146
+  ; Is Link in the air (jumping with the feather, flying with roaster, etc)?
+  ds 1
+
+; Unlabeled
+ds $3
 
 wIsRunningWithPegasusBoots:: ; C14A
   ds 1

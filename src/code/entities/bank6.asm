@@ -138,7 +138,7 @@ func_006_645D::
     ld   a, [wDialogState]                        ; $64A4: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $64A7: $21 $4F $C1
     or   [hl]                                     ; $64AA: $B6
-    ld   hl, $C146                                ; $64AB: $21 $46 $C1
+    ld   hl, wIsLinkInTheAir                      ; $64AB: $21 $46 $C1
     or   [hl]                                     ; $64AE: $B6
     ld   hl, $C134                                ; $64AF: $21 $34 $C1
     or   [hl]                                     ; $64B2: $B6

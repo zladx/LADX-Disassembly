@@ -755,7 +755,7 @@ func_005_52DB::
     ld   a, $01                                   ; $52F2: $3E $01
     ldh  [hLinkPositionZ], a                      ; $52F4: $E0 $A2
     ld   a, $02                                   ; $52F6: $3E $02
-    ld   [$C146], a                               ; $52F8: $EA $46 $C1
+    ld   [wIsLinkInTheAir], a                     ; $52F8: $EA $46 $C1
     ld   a, $12                                   ; $52FB: $3E $12
     ldh  [$FFA3], a                               ; $52FD: $E0 $A3
     ld   a, $0C                                   ; $52FF: $3E $0C

@@ -645,7 +645,7 @@ func_020_48CA::
     jr   nz, jr_020_490A                          ; $48FA: $20 $0E
 
 jr_020_48FC:
-    ld   a, [$C146]                               ; $48FC: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $48FC: $FA $46 $C1
     and  a                                        ; $48FF: $A7
     jr   nz, jr_020_4917                          ; $4900: $20 $15
 

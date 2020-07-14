@@ -34,7 +34,7 @@ jr_006_4B98:
     call DecrementEntityIgnoreHitsCountdown       ; $4BAB: $CD $56 $0C
     call label_3B44                               ; $4BAE: $CD $44 $3B
     call func_006_6541                            ; $4BB1: $CD $41 $65
-    ld   a, [$C146]                               ; $4BB4: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $4BB4: $FA $46 $C1
     and  a                                        ; $4BB7: $A7
     jr   nz, jr_006_4BE1                          ; $4BB8: $20 $27
 

@@ -760,7 +760,7 @@ jr_005_5E59:
     jr   nz, jr_005_5E8A                          ; $5E5F: $20 $29
 
 jr_005_5E61:
-    ld   a, [$C146]                               ; $5E61: $FA $46 $C1
+    ld   a, [wIsLinkInTheAir]                     ; $5E61: $FA $46 $C1
     and  a                                        ; $5E64: $A7
 
 jr_005_5E65:

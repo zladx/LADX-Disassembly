@@ -2,15 +2,15 @@ version: 2
 jobs:
   build:
     docker:
-      - image: kemenaran/rgbds:0.4.0
+    - image: kemenaran/rgbds:0.4.0
     steps:
-      - checkout
-      - run:
-          name: Installing build dependencies
-          command: apt-get update && apt-get --yes install python3-minimal
-      - run:
-          name: Building
-          command: make build-all
-      - run:
-          name: Testing checksum
-          command: make test-all
+    - checkout
+    - run:
+        name: Installing build dependencies
+        command: apt-get update && apt-get --yes install python3-minimal
+    - run:
+        name: Building
+        command: make build-all
+    - run:
+        name: Testing checksum
+        command: make test-all

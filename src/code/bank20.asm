@@ -1054,7 +1054,7 @@ func_020_4B4A::
     ld   hl, data_020_4B46                        ; $4B6C: $21 $46 $4B
     add  hl, de                                   ; $4B6F: $19
     ld   a, [hl]                                  ; $4B70: $7E
-    ld   [wIsLinkInTheAir], a                     ; $4B71: $EA $43 $C1
+    ld   [$C143], a                               ; $4B71: $EA $43 $C1
     xor  a                                        ; $4B74: $AF
     ld   [$C5B0], a                               ; $4B75: $EA $B0 $C5
     ret                                           ; $4B78: $C9

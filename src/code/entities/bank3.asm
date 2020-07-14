@@ -6453,7 +6453,7 @@ jr_003_6E8E:
     pop  hl                                       ; $6E8E: $E1
     push af                                       ; $6E8F: $F5
     inc  hl                                       ; $6E90: $23
-    ld   a, [wIsLinkInTheAir]                     ; $6E91: $FA $43 $C1
+    ld   a, [$C143]                               ; $6E91: $FA $43 $C1
     add  [hl]                                     ; $6E94: $86
     ld   e, a                                     ; $6E95: $5F
     pop  af                                       ; $6E96: $F1
@@ -7466,7 +7466,7 @@ jr_003_7440:
     pop  hl                                       ; $7440: $E1
     push af                                       ; $7441: $F5
     inc  hl                                       ; $7442: $23
-    ld   a, [wIsLinkInTheAir]                     ; $7443: $FA $43 $C1
+    ld   a, [$C143]                               ; $7443: $FA $43 $C1
     add  [hl]                                     ; $7446: $86
     ld   e, a                                     ; $7447: $5F
     pop  af                                       ; $7448: $F1

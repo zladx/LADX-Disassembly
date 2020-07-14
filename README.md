@@ -30,6 +30,8 @@ md5: 68242187b65166b5f8225b20e2021659`
 1. Install Python 3 and [rgbds](https://github.com/rednex/rgbds#1-installing-rgbds) (version >= 0.4.0 required);
 2. `make all`.
 
+This will build both the games and their debug symbols. Use [BGB](https://github.com/zladx/LADX-Disassembly/wiki/Tooling-for-reverse-engineering#bgb) to load the debug symbols into the debugger.
+
 ## How to contribute
 
 1. Fork this repository;

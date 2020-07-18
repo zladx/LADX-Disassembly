@@ -8770,7 +8770,7 @@ func_018_7E6C::
     push af                                       ; $7E74: $F5
     swap a                                        ; $7E75: $CB $37
     and  $F0                                      ; $7E77: $E6 $F0
-    ld   hl, wEntitiesUnknowTableN                ; $7E79: $21 $60 $C2
+    ld   hl, wEntitiesSpeedXCountTable            ; $7E79: $21 $60 $C2
     add  hl, bc                                   ; $7E7C: $09
     add  [hl]                                     ; $7E7D: $86
     ld   [hl], a                                  ; $7E7E: $77
@@ -8807,7 +8807,7 @@ func_018_7E98::
     push af                                       ; $7EA0: $F5
     swap a                                        ; $7EA1: $CB $37
     and  $F0                                      ; $7EA3: $E6 $F0
-    ld   hl, wEntitiesUnknowTableK                ; $7EA5: $21 $30 $C3
+    ld   hl, wEntitiesSpeedZCountTable            ; $7EA5: $21 $30 $C3
     add  hl, bc                                   ; $7EA8: $09
     add  [hl]                                     ; $7EA9: $86
     ld   [hl], a                                  ; $7EAA: $77

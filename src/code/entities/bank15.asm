@@ -7,13 +7,13 @@
 ;   bc   entity slot index
 ResetEntity::
     call ClearEntitySpeed                         ; $4000: $CD $7F $3D
-    ld   hl, wEntitiesUnknowTableK                ; $4003: $21 $30 $C3
+    ld   hl, wEntitiesSpeedZCountTable            ; $4003: $21 $30 $C3
     add  hl, bc                                   ; $4006: $09
     ld   [hl], b                                  ; $4007: $70
-    ld   hl, wEntitiesUnknowTableN                ; $4008: $21 $60 $C2
+    ld   hl, wEntitiesSpeedXCountTable            ; $4008: $21 $60 $C2
     add  hl, bc                                   ; $400B: $09
     ld   [hl], b                                  ; $400C: $70
-    ld   hl, wEntitiesUnknowTableO                ; $400D: $21 $70 $C2
+    ld   hl, wEntitiesSpeedYCountTable            ; $400D: $21 $70 $C2
     add  hl, bc                                   ; $4010: $09
     ld   [hl], b                                  ; $4011: $70
     ld   hl, wEntitiesSpeedZTable                 ; $4012: $21 $20 $C3
@@ -7635,7 +7635,7 @@ func_015_7B95::
     push af                                       ; $7B9D: $F5
     swap a                                        ; $7B9E: $CB $37
     and  $F0                                      ; $7BA0: $E6 $F0
-    ld   hl, wEntitiesUnknowTableN                ; $7BA2: $21 $60 $C2
+    ld   hl, wEntitiesSpeedXCountTable            ; $7BA2: $21 $60 $C2
     add  hl, bc                                   ; $7BA5: $09
     add  [hl]                                     ; $7BA6: $86
     ld   [hl], a                                  ; $7BA7: $77
@@ -7672,7 +7672,7 @@ func_015_7BC1::
     push af                                       ; $7BC9: $F5
     swap a                                        ; $7BCA: $CB $37
     and  $F0                                      ; $7BCC: $E6 $F0
-    ld   hl, wEntitiesUnknowTableK                ; $7BCE: $21 $30 $C3
+    ld   hl, wEntitiesSpeedZCountTable            ; $7BCE: $21 $30 $C3
     add  hl, bc                                   ; $7BD1: $09
     add  [hl]                                     ; $7BD2: $86
     ld   [hl], a                                  ; $7BD3: $77

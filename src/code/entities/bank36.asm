@@ -1588,7 +1588,7 @@ jr_036_49AD:
     push af                                       ; $49AD: $F5
     swap a                                        ; $49AE: $CB $37
     and  $F0                                      ; $49B0: $E6 $F0
-    ld   hl, wEntitiesUnknowTableN                ; $49B2: $21 $60 $C2
+    ld   hl, wEntitiesSpeedXCountTable            ; $49B2: $21 $60 $C2
     add  [hl]                                     ; $49B5: $86
     ld   [hl], a                                  ; $49B6: $77
     rl   d                                        ; $49B7: $CB $12
@@ -7016,7 +7016,7 @@ func_036_6A6F::
     push af                                       ; $6A75: $F5
     swap a                                        ; $6A76: $CB $37
     and  $F0                                      ; $6A78: $E6 $F0
-    ld   hl, wEntitiesUnknowTableN                ; $6A7A: $21 $60 $C2
+    ld   hl, wEntitiesSpeedXCountTable            ; $6A7A: $21 $60 $C2
     add  hl, bc                                   ; $6A7D: $09
     add  [hl]                                     ; $6A7E: $86
     ld   [hl], a                                  ; $6A7F: $77
@@ -7103,7 +7103,7 @@ func_036_6AEC::
     push af                                       ; $6AF2: $F5
     swap a                                        ; $6AF3: $CB $37
     and  $F0                                      ; $6AF5: $E6 $F0
-    ld   hl, wEntitiesUnknowTableK                ; $6AF7: $21 $30 $C3
+    ld   hl, wEntitiesSpeedZCountTable            ; $6AF7: $21 $30 $C3
     add  hl, bc                                   ; $6AFA: $09
     add  [hl]                                     ; $6AFB: $86
     ld   [hl], a                                  ; $6AFC: $77

@@ -6629,7 +6629,7 @@ jr_017_7E42:
     push af                                       ; $7E42: $F5
     swap a                                        ; $7E43: $CB $37
     and  $F0                                      ; $7E45: $E6 $F0
-    ld   hl, wEntitiesUnknowTableN                ; $7E47: $21 $60 $C2
+    ld   hl, wEntitiesSpeedXCountTable            ; $7E47: $21 $60 $C2
     add  hl, bc                                   ; $7E4A: $09
     add  [hl]                                     ; $7E4B: $86
     ld   [hl], a                                  ; $7E4C: $77
@@ -6665,7 +6665,7 @@ jr_017_7E65:
     push af                                       ; $7E6E: $F5
     swap a                                        ; $7E6F: $CB $37
     and  $F0                                      ; $7E71: $E6 $F0
-    ld   hl, wEntitiesUnknowTableK                ; $7E73: $21 $30 $C3
+    ld   hl, wEntitiesSpeedZCountTable            ; $7E73: $21 $30 $C3
     add  hl, bc                                   ; $7E76: $09
     add  [hl]                                     ; $7E77: $86
     ld   [hl], a                                  ; $7E78: $77

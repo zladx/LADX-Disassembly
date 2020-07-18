@@ -432,23 +432,25 @@ wEntitiesPosYSignTable:: ; C230
   ds $10
 
 wEntitiesSpeedXTable:: ; C240
-  ; X Velocity of visible entities
+  ; X Velocity / 16 of visible entities. Value is the number of pixels to move
+  ; within 16 frames. For example, if it's 8, the entity will move 1 pixel every
+  ; other frame (8/16).
   ds $10
 
 wEntitiesSpeedYTable:: ; C250
-  ; X Velocity of visible entities
+  ; Y Velocity / 16 of visible entities. Value is the number of pixels to move
+  ; within 16 frames. For example, if it's 8, the entity will move 1 pixel every
+  ; other frame (8/16).
   ds $10
 
-wEntitiesUnknowTableN:: ; C260
-  ; Unlabeled entity attributes table
-  ; Related to speed X: many code occurence do somethinkg like:
-  ;   [wEntitiesUnknowTableN + entity index] = [wEntitiesUnknowTableN + entity index] + (EntitySpeedX * 16)
+wEntitiesSpeedXCountTable:: ; C260
+  ; Used as a way to give entities speeds divided by 16. (EntitySpeedX * 16) is
+  ; added to EntitySpeedXCount and the carry is used to move the entity.
   ds $10
 
-wEntitiesUnknowTableO:: ; C270
-  ; Unlabeled entity attributes table
-  ; Related to speed Y: many code occurence do somethinkg like:
-  ;   [wEntitiesUnknowTableN + entity index] = [wEntitiesUnknowTableN + entity index] + (EntitySpeedY * 16)
+wEntitiesSpeedYCountTable:: ; C270
+  ; Used as a way to give entities speeds divided by 16. (EntitySpeedY * 16) is
+  ; added to EntitySpeedYCount and the carry is used to move the entity.
   ds $10
 
 wEntitiesStatusTable:: ; C280
@@ -518,10 +520,13 @@ wEntitiesPosZTable:: ; C310
   ds $10
 
 wEntitiesSpeedZTable:: ; C320
+  ; Z Velocity / 16 of visible entities. Value is the number of pixels to move
+  ; within 16 frames. For example, if it's 8, the entity will move 1 pixel every
+  ; other frame (8/16).
   ; Positive numbers increase the altitude, negative numbers decrease it
   ds $10
 
-wEntitiesUnknowTableK:: ; C330
+wEntitiesSpeedZCountTable:: ; C330
   ds $10
 
 wEntitiesPhysicsFlagsTable:: ; C340

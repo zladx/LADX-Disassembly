@@ -2,13 +2,35 @@
 
 Disassembly of one of my favorite games. Taking it easy for now.
 
-Theses sources reproduce a valid build of `Legend of Zelda, The - Link's Awakening DX (U) (V1.0) [C][!].gbc`
-MD5 - 07C211479386825042EFB4AD31BB525F
+It builds the following ROMs:
+
+- azlj.gbc (Japanese, v1.0) `
+md5: f75874e3654360094fc2b09bd1fed7e8`
+- azlj-r1.gbc (Japanese, v1.1) `
+md5: 6d8f9cd72201caabdfd0455a819af9ce`
+- azlj-r2.gbc (Japanese, v1.2) `
+md5: 2e2596c008d47df901394d28f5bd66ec`
+- azle.gbc (English, v1.0) `
+md5: 07c211479386825042efb4ad31bb525f`
+- azle-r1.gbc (English, v1.1) `
+md5: ccbb56212e3dbaa9007d389a17e9d075`
+- azle-r2.gbc (English, v1.2) `
+md5: 7351daa3c0a91d8f6fe2fbcca6182478`
+- azlg.gbc (German, v1.0) `
+md5: e91fd46e7092d32ca264f21853f09539`
+- azlg-r1.gbc (German, v1.1) `
+md5: b0080c2f1919a4bb0ea73b788f4a6786`
+- azlf.gbc (French, v1.0) `
+md5: 1043fd167d0ed9c4094e3c9d8e757f1e`
+- azlf-r1.gbc (French, v1.1) `
+md5: 68242187b65166b5f8225b20e2021659`
 
 ## Usage
 
 1. Install Python 3 and [rgbds](https://github.com/rednex/rgbds#1-installing-rgbds) (version >= 0.4.0 required);
 2. `make all`.
+
+This will build both the games and their debug symbols. Use [BGB](https://github.com/zladx/LADX-Disassembly/wiki/Tooling-for-reverse-engineering#bgb) to load the debug symbols into the debugger.
 
 ## How to contribute
 

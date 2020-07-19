@@ -432,15 +432,17 @@ wEntitiesPosYSignTable:: ; C230
   ds $10
 
 wEntitiesSpeedXTable:: ; C240
-  ; X Velocity / 16 of visible entities. Value is the number of pixels to move
-  ; within 16 frames. For example, if it's 8, the entity will move 1 pixel every
-  ; other frame (8/16).
+  ; X Velocity of visible entities
+  ;
+  ; bits 0-3: Number of pixels to move every 16 frames
+  ; bits 4-7: Number of pixels to move every frame, plus value calculated from low nibble
   ds $10
 
 wEntitiesSpeedYTable:: ; C250
-  ; Y Velocity / 16 of visible entities. Value is the number of pixels to move
-  ; within 16 frames. For example, if it's 8, the entity will move 1 pixel every
-  ; other frame (8/16).
+  ; Y Velocity of visible entities
+  ;
+  ; bits 0-3: Number of pixels to move every 16 frames
+  ; bits 4-7: Number of pixels to move every frame, plus value calculated from low nibble
   ds $10
 
 wEntitiesSpeedXCountTable:: ; C260
@@ -520,10 +522,10 @@ wEntitiesPosZTable:: ; C310
   ds $10
 
 wEntitiesSpeedZTable:: ; C320
-  ; Z Velocity / 16 of visible entities. Value is the number of pixels to move
-  ; within 16 frames. For example, if it's 8, the entity will move 1 pixel every
-  ; other frame (8/16).
-  ; Positive numbers increase the altitude, negative numbers decrease it
+  ; Z Velocity of visible entities
+  ;
+  ; bits 0-3: Number of pixels to move every 16 frames
+  ; bits 4-7: Number of pixels to move every frame, plus value calculated from low nibble
   ds $10
 
 wEntitiesSpeedZCountTable:: ; C330

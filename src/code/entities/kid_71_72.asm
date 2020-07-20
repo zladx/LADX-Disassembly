@@ -21,8 +21,8 @@ Kid72EntityHandler::
     ld   de, Data_006_607D                        ; $6087: $11 $7D $60
     call RenderActiveEntitySprite                 ; $608A: $CD $77 $3C
     call func_006_64C6                            ; $608D: $CD $C6 $64
-    call func_006_6541                            ; $6090: $CD $41 $65
-    call func_006_657A                            ; $6093: $CD $7A $65
+    call UpdateEntityPosWithSpeed_06              ; $6090: $CD $41 $65
+    call AddEntityZSpeedToPos_06                  ; $6093: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $6096: $21 $20 $C3
     add  hl, bc                                   ; $6099: $09
     dec  [hl]                                     ; $609A: $35
@@ -127,7 +127,7 @@ jr_006_6110:
 jr_006_6124:
     ld   a, $08                                   ; $6124: $3E $08
     call ApplyVectorTowardsLink_trampoline        ; $6126: $CD $AA $3B
-    call func_006_6541                            ; $6129: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $6129: $CD $41 $65
     ld   a, $02                                   ; $612C: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $612E: $E0 $A1
     ld   [wC167], a                               ; $6130: $EA $67 $C1
@@ -146,7 +146,7 @@ func_006_6134::
     call_open_dialog $220                         ; $6147
 
 jr_006_614C:
-    call func_006_657A                            ; $614C: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $614C: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $614F: $21 $20 $C3
     add  hl, bc                                   ; $6152: $09
     dec  [hl]                                     ; $6153: $35
@@ -184,7 +184,7 @@ label_006_6170:
     call RenderActiveEntitySpritesPair            ; $617C: $CD $C0 $3B
     call func_006_64C6                            ; $617F: $CD $C6 $64
     call func_006_6230                            ; $6182: $CD $30 $62
-    call func_006_657A                            ; $6185: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $6185: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $6188: $21 $20 $C3
     add  hl, bc                                   ; $618B: $09
     dec  [hl]                                     ; $618C: $35

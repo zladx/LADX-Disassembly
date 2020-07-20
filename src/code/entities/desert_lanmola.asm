@@ -346,8 +346,8 @@ func_006_57ED::
     call IncrementEntityState                     ; $5800: $CD $12 $3B
 
 jr_006_5803:
-    call func_006_6541                            ; $5803: $CD $41 $65
-    call func_006_657A                            ; $5806: $CD $7A $65
+    call UpdateEntityPosWithSpeed_06              ; $5803: $CD $41 $65
+    call AddEntityZSpeedToPos_06                  ; $5806: $CD $7A $65
     jp   label_3B39                               ; $5809: $C3 $39 $3B
 
 func_006_580C::
@@ -378,8 +378,8 @@ jr_006_582B:
     dec  [hl]                                     ; $582B: $35
 
 jr_006_582C:
-    call func_006_6541                            ; $582C: $CD $41 $65
-    call func_006_657A                            ; $582F: $CD $7A $65
+    call UpdateEntityPosWithSpeed_06              ; $582C: $CD $41 $65
+    call AddEntityZSpeedToPos_06                  ; $582F: $CD $7A $65
     jp   label_3B39                               ; $5832: $C3 $39 $3B
 
 func_006_5835::
@@ -451,8 +451,8 @@ jr_006_5887:
     dec  [hl]                                     ; $5887: $35
 
 jr_006_5888:
-    call func_006_6541                            ; $5888: $CD $41 $65
-    call func_006_657A                            ; $588B: $CD $7A $65
+    call UpdateEntityPosWithSpeed_06              ; $5888: $CD $41 $65
+    call AddEntityZSpeedToPos_06                  ; $588B: $CD $7A $65
     ld   hl, wEntitiesPosZTable                   ; $588E: $21 $10 $C3
     add  hl, bc                                   ; $5891: $09
     ld   a, [hl]                                  ; $5892: $7E
@@ -619,7 +619,7 @@ label_006_5988:
     ld   de, Data_006_5980                        ; $5988: $11 $80 $59
     call RenderActiveEntitySprite                 ; $598B: $CD $77 $3C
     call func_006_64C6                            ; $598E: $CD $C6 $64
-    call func_006_6541                            ; $5991: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $5991: $CD $41 $65
     ld   hl, wEntitiesSpeedYTable                 ; $5994: $21 $50 $C2
     add  hl, bc                                   ; $5997: $09
     inc  [hl]                                     ; $5998: $34

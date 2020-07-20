@@ -7,7 +7,7 @@ BooBuddyEntityHandler::
     call RenderActiveEntitySpritesPair            ; $79AC: $CD $C0 $3B
     call func_006_64C6                            ; $79AF: $CD $C6 $64
     call func_006_64F7                            ; $79B2: $CD $F7 $64
-    call func_006_6541                            ; $79B5: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $79B5: $CD $41 $65
     call func_006_5E54                            ; $79B8: $CD $54 $5E
     ldh  a, [hActiveEntityState]                  ; $79BB: $F0 $F0
     JP_TABLE                                      ; $79BD

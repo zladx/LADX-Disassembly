@@ -15,7 +15,7 @@ jr_006_78CD:
     call func_006_64C6                            ; $78CD: $CD $C6 $64
     call func_006_64F7                            ; $78D0: $CD $F7 $64
     call label_3B39                               ; $78D3: $CD $39 $3B
-    call func_006_6541                            ; $78D6: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $78D6: $CD $41 $65
     call label_3B23                               ; $78D9: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $78DC: $21 $A0 $C2
     add  hl, bc                                   ; $78DF: $09
@@ -58,7 +58,7 @@ jr_006_78F0:
     jp   SetEntitySpriteVariant                   ; $7915: $C3 $0C $3B
 
 jr_006_7918:
-    call func_006_657A                            ; $7918: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $7918: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $791B: $21 $20 $C3
     add  hl, bc                                   ; $791E: $09
     dec  [hl]                                     ; $791F: $35
@@ -87,7 +87,7 @@ jr_006_7921:
     ld   hl, wEntitiesSpeedZTable                 ; $7941: $21 $20 $C3
     add  hl, bc                                   ; $7944: $09
     ld   [hl], a                                  ; $7945: $77
-    call func_006_657A                            ; $7946: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $7946: $CD $7A $65
     call GetRandomByte                            ; $7949: $CD $0D $28
     and  $03                                      ; $794C: $E6 $03
     ld   e, a                                     ; $794E: $5F

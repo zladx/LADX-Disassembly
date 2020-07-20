@@ -73,5 +73,5 @@ jr_006_63DD:
     and  $01                                      ; $63E6: $E6 $01
     call SetEntitySpriteVariant                   ; $63E8: $CD $0C $3B
     call label_3B39                               ; $63EB: $CD $39 $3B
-    call func_006_6541                            ; $63EE: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $63EE: $CD $41 $65
     jp   func_006_5E54                            ; $63F1: $C3 $54 $5E

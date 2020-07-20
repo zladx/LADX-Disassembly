@@ -31,7 +31,7 @@ jr_006_7C2E:
     ld   hl, $C1AE                                ; $7C2E: $21 $AE $C1
     inc  [hl]                                     ; $7C31: $34
     call func_006_64C6                            ; $7C32: $CD $C6 $64
-    call func_006_657A                            ; $7C35: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $7C35: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $7C38: $21 $20 $C3
     add  hl, bc                                   ; $7C3B: $09
     dec  [hl]                                     ; $7C3C: $35
@@ -175,7 +175,7 @@ jr_006_7D0B:
     ld   [hl], b                                  ; $7D0E: $70
 
 func_006_7D0F::
-    call func_006_6541                            ; $7D0F: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $7D0F: $CD $41 $65
     call GetEntityPrivateCountdown1               ; $7D12: $CD $00 $0C
     ret  nz                                       ; $7D15: $C0
 

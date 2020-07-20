@@ -130,7 +130,7 @@ jr_006_40E0:
     ld   hl, wEntitiesSpeedXTable                 ; $40E0: $21 $40 $C2
     add  hl, bc                                   ; $40E3: $09
     ld   [hl], $F8                                ; $40E4: $36 $F8
-    jp   func_006_654E                            ; $40E6: $C3 $4E $65
+    jp   AddEntitySpeedToPos_06                   ; $40E6: $C3 $4E $65
 
 RichardState4Handler::
     call func_006_645D                            ; $40E9: $CD $5D $64

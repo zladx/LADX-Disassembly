@@ -17,7 +17,7 @@ jr_006_4F48:
     call func_006_64C6                            ; $4F4B: $CD $C6 $64
     call func_006_64F7                            ; $4F4E: $CD $F7 $64
     call label_3B39                               ; $4F51: $CD $39 $3B
-    call func_006_6541                            ; $4F54: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $4F54: $CD $41 $65
     call label_3B23                               ; $4F57: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $4F5A: $F0 $E7
     rra                                           ; $4F5C: $1F

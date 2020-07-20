@@ -711,7 +711,7 @@ jr_027_7AE8:
     inc  [hl]                                     ; $7AFC: $34
 
 jr_027_7AFD:
-    call func_027_7B18                            ; $7AFD: $CD $18 $7B
+    call UpdateEntityPosWithSpeed_27              ; $7AFD: $CD $18 $7B
     ldh  a, [hActiveEntityPosX]                   ; $7B00: $F0 $EE
     cp   $B0                                      ; $7B02: $FE $B0
     jp   nc, label_027_7B51                       ; $7B04: $D2 $51 $7B

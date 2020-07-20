@@ -67,7 +67,7 @@ jr_006_6773:
     jp   label_006_67E6                           ; $678C: $C3 $E6 $67
 
 KeeseFlyingHandler::
-    call func_006_6541                            ; $678F: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $678F: $CD $41 $65
     call label_3B23                               ; $6792: $CD $23 $3B
     call GetEntityTransitionCountdown             ; $6795: $CD $05 $0C
     jr   nz, jr_006_67A2                          ; $6798: $20 $08

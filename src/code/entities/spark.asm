@@ -23,7 +23,7 @@ SparkCounterClockwiseEntityHandler::
     call func_006_64C6                            ; $6646: $CD $C6 $64
     call func_006_64F7                            ; $6649: $CD $F7 $64
     call label_3B44                               ; $664C: $CD $44 $3B
-    call func_006_6541                            ; $664F: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $664F: $CD $41 $65
     call func_006_66CC                            ; $6652: $CD $CC $66
     ld   hl, wEntitiesPrivateState1Table          ; $6655: $21 $B0 $C2
     add  hl, bc                                   ; $6658: $09

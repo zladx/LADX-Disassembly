@@ -13,7 +13,7 @@ WizrobeProjectileEntityHandler::
     call RenderActiveEntitySpritesPair            ; $65FC: $CD $C0 $3B
     call func_006_64C6                            ; $65FF: $CD $C6 $64
     call CheckLinkCollisionWithProjectile_trampoline; $6602: $CD $4F $3B
-    call func_006_6541                            ; $6605: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $6605: $CD $41 $65
     call label_3B2E                               ; $6608: $CD $2E $3B
     ld   hl, wEntitiesCollisionsTable             ; $660B: $21 $A0 $C2
     add  hl, bc                                   ; $660E: $09

@@ -227,7 +227,7 @@ func_006_64F7::
     ld   hl, wEntitiesSpeedYTable                 ; $651F: $21 $50 $C2
     add  hl, bc                                   ; $6522: $09
     ld   [hl], a                                  ; $6523: $77
-    call func_006_6541                            ; $6524: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $6524: $CD $41 $65
     ld   hl, wEntitiesUnknowTableH                ; $6527: $21 $30 $C4
     add  hl, bc                                   ; $652A: $09
     ld   a, [hl]                                  ; $652B: $7E
@@ -250,70 +250,85 @@ jr_006_6533:
 jr_006_6540:
     ret                                           ; $6540: $C9
 
-func_006_6541::
-    call func_006_654E                            ; $6541: $CD $4E $65
+UpdateEntityPosWithSpeed_06::
+    call AddEntitySpeedToPos_06                   ; $6541: $CD $4E $65
     push bc                                       ; $6544: $C5
     ld   a, c                                     ; $6545: $79
     add  $10                                      ; $6546: $C6 $10
     ld   c, a                                     ; $6548: $4F
-    call func_006_654E                            ; $6549: $CD $4E $65
+    call AddEntitySpeedToPos_06                   ; $6549: $CD $4E $65
     pop  bc                                       ; $654C: $C1
     ret                                           ; $654D: $C9
 
-func_006_654E::
+; Update the entity's position using its speed.
+;
+; The low nibble of the value in the entity speed tables is the
+; number of pixels to move within 16 frames. For example, if it's
+; 8, the entity will move 1 pixel every other frame (8/16).
+;
+; The high nibble of the value is the number of pixels to normally
+; move, in addition to the carry from the SpeedAccTables.
+;
+; Inputs:
+;   bc  entity index
+AddEntitySpeedToPos_06::
     ld   hl, wEntitiesSpeedXTable                 ; $654E: $21 $40 $C2
     add  hl, bc                                   ; $6551: $09
     ld   a, [hl]                                  ; $6552: $7E
     and  a                                        ; $6553: $A7
-    jr   z, jr_006_6579                           ; $6554: $28 $23
+    ; No need to update the position if it's not moving
+    jr   z, .return                               ; $6554: $28 $23
 
     push af                                       ; $6556: $F5
     swap a                                        ; $6557: $CB $37
     and  $F0                                      ; $6559: $E6 $F0
-    ld   hl, wEntitiesSpeedXCountTable            ; $655B: $21 $60 $C2
+    ld   hl, wEntitiesSpeedXAccTable              ; $655B: $21 $60 $C2
     add  hl, bc                                   ; $655E: $09
     add  [hl]                                     ; $655F: $86
     ld   [hl], a                                  ; $6560: $77
+    ; Save carry in bit 0 of d
     rl   d                                        ; $6561: $CB $12
     ld   hl, wEntitiesPosXTable                   ; $6563: $21 $00 $C2
 
-jr_006_6566:
+.updatePosition
     add  hl, bc                                   ; $6566: $09
     pop  af                                       ; $6567: $F1
+    ; Sign extension for high nibble
     ld   e, $00                                   ; $6568: $1E $00
     bit  7, a                                     ; $656A: $CB $7F
-    jr   z, jr_006_6570                           ; $656C: $28 $02
+    jr   z, .positive                             ; $656C: $28 $02
 
     ld   e, $F0                                   ; $656E: $1E $F0
 
-jr_006_6570:
+.positive
     swap a                                        ; $6570: $CB $37
     and  $0F                                      ; $6572: $E6 $0F
     or   e                                        ; $6574: $B3
+    ; Get carry back from d
     rr   d                                        ; $6575: $CB $1A
     adc  [hl]                                     ; $6577: $8E
     ld   [hl], a                                  ; $6578: $77
 
-jr_006_6579:
+.return
     ret                                           ; $6579: $C9
 
-func_006_657A::
+AddEntityZSpeedToPos_06::
     ld   hl, wEntitiesSpeedZTable                 ; $657A: $21 $20 $C3
     add  hl, bc                                   ; $657D: $09
     ld   a, [hl]                                  ; $657E: $7E
     and  a                                        ; $657F: $A7
-    jr   z, jr_006_6579                           ; $6580: $28 $F7
+    jr   z, AddEntitySpeedToPos_06.return         ; $6580: $28 $F7
 
     push af                                       ; $6582: $F5
     swap a                                        ; $6583: $CB $37
     and  $F0                                      ; $6585: $E6 $F0
-    ld   hl, wEntitiesSpeedZCountTable            ; $6587: $21 $30 $C3
+    ld   hl, wEntitiesSpeedZAccTable              ; $6587: $21 $30 $C3
     add  hl, bc                                   ; $658A: $09
     add  [hl]                                     ; $658B: $86
     ld   [hl], a                                  ; $658C: $77
     rl   d                                        ; $658D: $CB $12
     ld   hl, wEntitiesPosZTable                   ; $658F: $21 $10 $C3
-    jr   jr_006_6566                              ; $6592: $18 $D2
+    jr   AddEntitySpeedToPos_06.updatePosition    ; $6592: $18 $D2
 
 func_006_6594::
     ld   e, $00                                   ; $6594: $1E $00

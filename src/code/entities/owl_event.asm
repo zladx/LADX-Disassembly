@@ -235,7 +235,7 @@ OwlState1Handler::
     ld   a, $05                                   ; $693B: $3E $05
     ld   [wC111], a                               ; $693D: $EA $11 $C1
     call func_006_69BD                            ; $6940: $CD $BD $69
-    call func_006_6541                            ; $6943: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $6943: $CD $41 $65
     ld   hl, wEntitiesPosZTable                   ; $6946: $21 $10 $C3
     add  hl, bc                                   ; $6949: $09
     ld   a, [hl]                                  ; $694A: $7E
@@ -248,7 +248,7 @@ jr_006_6951:
     ld   hl, wEntitiesSpeedZTable                 ; $6951: $21 $20 $C3
     add  hl, bc                                   ; $6954: $09
     ld   [hl], $FC                                ; $6955: $36 $FC
-    call func_006_657A                            ; $6957: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $6957: $CD $7A $65
     call PlayBoomerangSfx_trampoline              ; $695A: $CD $F8 $29
     ldh  a, [hFrameCounter]                       ; $695D: $F0 $E7
     and  $03                                      ; $695F: $E6 $03
@@ -322,12 +322,12 @@ func_006_69BD::
 OwlState4Handler::
     call func_006_64C6                            ; $69CA: $CD $C6 $64
     call func_006_69BD                            ; $69CD: $CD $BD $69
-    call func_006_6541                            ; $69D0: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $69D0: $CD $41 $65
     call func_006_5E54                            ; $69D3: $CD $54 $5E
     ld   hl, wEntitiesSpeedZTable                 ; $69D6: $21 $20 $C3
     add  hl, bc                                   ; $69D9: $09
     ld   [hl], $04                                ; $69DA: $36 $04
-    call func_006_657A                            ; $69DC: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $69DC: $CD $7A $65
     ld   hl, wEntitiesStatusTable                 ; $69DF: $21 $80 $C2
     add  hl, bc                                   ; $69E2: $09
     ld   a, [hl]                                  ; $69E3: $7E

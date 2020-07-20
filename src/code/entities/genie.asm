@@ -176,7 +176,7 @@ jr_004_410F:
     ldh  [hLinkPositionY], a                      ; $4110: $E0 $99
     pop  af                                       ; $4112: $F1
     ldh  [hLinkPositionX], a                      ; $4113: $E0 $98
-    call func_004_6DCA                            ; $4115: $CD $CA $6D
+    call UpdateEntityPosWithSpeed_04              ; $4115: $CD $CA $6D
 
 jr_004_4118:
     call GetEntityTransitionCountdown                 ; $4118: $CD $05 $0C
@@ -275,7 +275,7 @@ jr_004_41A1:
     ld   [hl], e                                  ; $41A5: $73
 
 jr_004_41A6:
-    call func_004_6DCA                            ; $41A6: $CD $CA $6D
+    call UpdateEntityPosWithSpeed_04              ; $41A6: $CD $CA $6D
 
 jr_004_41A9:
     call label_3B23                               ; $41A9: $CD $23 $3B
@@ -401,7 +401,7 @@ jr_004_4245:
     call ApplyVectorTowardsLink_trampoline        ; $4275: $CD $AA $3B
 
 jr_004_4278:
-    call func_004_6DCA                            ; $4278: $CD $CA $6D
+    call UpdateEntityPosWithSpeed_04              ; $4278: $CD $CA $6D
     call label_3B23                               ; $427B: $CD $23 $3B
     jp   label_004_4144                           ; $427E: $C3 $44 $41
 
@@ -770,7 +770,7 @@ func_004_449F::
     ldh  [hLinkPositionY], a                      ; $44B8: $E0 $99
     ld   a, $10                                   ; $44BA: $3E $10
     call ApplyVectorTowardsLink_trampoline        ; $44BC: $CD $AA $3B
-    call func_004_6DCA                            ; $44BF: $CD $CA $6D
+    call UpdateEntityPosWithSpeed_04              ; $44BF: $CD $CA $6D
     ld   hl, hLinkPositionX                       ; $44C2: $21 $98 $FF
     ldh  a, [hActiveEntityPosX]                               ; $44C5: $F0 $EE
     sub  [hl]                                     ; $44C7: $96
@@ -846,7 +846,7 @@ func_004_4517::
 jr_004_4535:
     call func_004_6D80                            ; $4535: $CD $80 $6D
     call label_3B70                               ; $4538: $CD $70 $3B
-    call func_004_6DCA                            ; $453B: $CD $CA $6D
+    call UpdateEntityPosWithSpeed_04              ; $453B: $CD $CA $6D
     call label_3B23                               ; $453E: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $4541: $F0 $E7
     and  $03                                      ; $4543: $E6 $03
@@ -1001,7 +1001,7 @@ jr_004_45F1:
     ldh  [hLinkPositionY], a                      ; $4626: $E0 $99
     pop  af                                       ; $4628: $F1
     ldh  [hLinkPositionX], a                      ; $4629: $E0 $98
-    call func_004_6DCA                            ; $462B: $CD $CA $6D
+    call UpdateEntityPosWithSpeed_04              ; $462B: $CD $CA $6D
     call func_004_4634                            ; $462E: $CD $34 $46
     jp   label_004_4568                           ; $4631: $C3 $68 $45
 
@@ -1264,7 +1264,7 @@ GenieState3Handler::
     ld   a, [wIntroTimer]                         ; $48FD: $FA $01 $D0
     add  [hl]                                     ; $4900: $86
     ld   [hl], a                                  ; $4901: $77
-    call func_004_6DCA                            ; $4902: $CD $CA $6D
+    call UpdateEntityPosWithSpeed_04              ; $4902: $CD $CA $6D
     pop  af                                       ; $4905: $F1
     ld   hl, wEntitiesSpeedYTable                                ; $4906: $21 $50 $C2
     add  hl, bc                                   ; $4909: $09
@@ -1314,7 +1314,7 @@ GenieState4Handler::
     and  $01                                      ; $494C: $E6 $01
     call SetEntitySpriteVariant                   ; $494E: $CD $0C $3B
     call label_3B44                               ; $4951: $CD $44 $3B
-    call func_004_6DCA                            ; $4954: $CD $CA $6D
+    call UpdateEntityPosWithSpeed_04              ; $4954: $CD $CA $6D
     call func_004_6E03                            ; $4957: $CD $03 $6E
     ld   hl, wEntitiesSpeedZTable                                ; $495A: $21 $20 $C3
     add  hl, bc                                   ; $495D: $09

@@ -203,8 +203,8 @@ jr_005_6443:
     ret                                           ; $6443: $C9
 
 jr_005_6444:
-    call func_005_7AB1                            ; $6444: $CD $B1 $7A
-    call func_005_7AEA                            ; $6447: $CD $EA $7A
+    call UpdateEntityPosWithSpeed_05              ; $6444: $CD $B1 $7A
+    call AddEntityZSpeedToPos_05                  ; $6447: $CD $EA $7A
     ld   hl, wEntitiesSpeedZTable                 ; $644A: $21 $20 $C3
     add  hl, bc                                   ; $644D: $09
     dec  [hl]                                     ; $644E: $35
@@ -268,7 +268,7 @@ jr_005_64A0:
     ld   a, [hl]                                  ; $64A5: $7E
     push af                                       ; $64A6: $F5
     ld   [hl], e                                  ; $64A7: $73
-    call func_005_7ABE                            ; $64A8: $CD $BE $7A
+    call AddEntitySpeedToPos_05                   ; $64A8: $CD $BE $7A
     pop  af                                       ; $64AB: $F1
     pop  hl                                       ; $64AC: $E1
     ld   [hl], a                                  ; $64AD: $77
@@ -335,7 +335,7 @@ jr_005_64F7:
     cp   $0B                                      ; $64FC: $FE $0B
     ret  nc                                       ; $64FE: $D0
 
-    call func_005_7AB1                            ; $64FF: $CD $B1 $7A
+    call UpdateEntityPosWithSpeed_05              ; $64FF: $CD $B1 $7A
     call label_3B23                               ; $6502: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $6505: $21 $A0 $C2
     add  hl, bc                                   ; $6508: $09
@@ -398,7 +398,7 @@ jr_005_654C:
     ld   a, [hl]                                  ; $6551: $7E
     push af                                       ; $6552: $F5
     ld   [hl], e                                  ; $6553: $73
-    call func_005_7ABE                            ; $6554: $CD $BE $7A
+    call AddEntitySpeedToPos_05                   ; $6554: $CD $BE $7A
     pop  af                                       ; $6557: $F1
     pop  hl                                       ; $6558: $E1
     ld   [hl], a                                  ; $6559: $77
@@ -704,8 +704,8 @@ label_005_6798:
 ._01 dw func_005_67D2                             ; $67A9
 
 func_005_67AB::
-    call func_005_7AB1
-    call func_005_7AEA                            ; $67AE: $CD $EA $7A
+    call UpdateEntityPosWithSpeed_05
+    call AddEntityZSpeedToPos_05                  ; $67AE: $CD $EA $7A
     ld   hl, wEntitiesSpeedZTable                 ; $67B1: $21 $20 $C3
     add  hl, bc                                   ; $67B4: $09
     dec  [hl]                                     ; $67B5: $35
@@ -747,8 +747,8 @@ label_005_67EA:
     ld   de, Data_005_67E2                        ; $67EA: $11 $E2 $67
     call RenderActiveEntitySpritesPair            ; $67ED: $CD $C0 $3B
     call func_005_7A3A                            ; $67F0: $CD $3A $7A
-    call func_005_7AB1                            ; $67F3: $CD $B1 $7A
-    call func_005_7AEA                            ; $67F6: $CD $EA $7A
+    call UpdateEntityPosWithSpeed_05              ; $67F3: $CD $B1 $7A
+    call AddEntityZSpeedToPos_05                  ; $67F6: $CD $EA $7A
     ld   hl, wEntitiesSpeedZTable                 ; $67F9: $21 $20 $C3
     add  hl, bc                                   ; $67FC: $09
     dec  [hl]                                     ; $67FD: $35

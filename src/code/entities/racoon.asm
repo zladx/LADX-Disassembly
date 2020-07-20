@@ -232,7 +232,7 @@ jr_005_4A9E:
     inc  [hl]                                     ; $4AAD: $34
 
 jr_005_4AAE:
-    call func_005_7AB1                            ; $4AAE: $CD $B1 $7A
+    call UpdateEntityPosWithSpeed_05              ; $4AAE: $CD $B1 $7A
     call label_3B23                               ; $4AB1: $CD $23 $3B
     call GetEntityDropTimer                       ; $4AB4: $CD $FB $0B
     cp   $06                                      ; $4AB7: $FE $06
@@ -282,7 +282,7 @@ jr_005_4AE8:
     dec  [hl]                                     ; $4AE8: $35
 
 jr_005_4AE9:
-    jp   func_005_7AEA                            ; $4AE9: $C3 $EA $7A
+    jp   AddEntityZSpeedToPos_05                  ; $4AE9: $C3 $EA $7A
 
 jr_005_4AEC:
     ld   hl, wEntitiesCollisionsTable             ; $4AEC: $21 $A0 $C2
@@ -354,7 +354,7 @@ jr_005_4B40:
 func_005_4B41::
     ld   a, $02                                   ; $4B41: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4B43: $E0 $A1
-    call func_005_7AEA                            ; $4B45: $CD $EA $7A
+    call AddEntityZSpeedToPos_05                  ; $4B45: $CD $EA $7A
     ld   hl, wEntitiesSpeedZTable                 ; $4B48: $21 $20 $C3
     add  hl, bc                                   ; $4B4B: $09
     dec  [hl]                                     ; $4B4C: $35
@@ -444,7 +444,7 @@ label_005_4BC1:
     ld   de, Data_005_4BBF                        ; $4BC9: $11 $BF $4B
     call RenderActiveEntitySprite                 ; $4BCC: $CD $77 $3C
     call func_005_7A3A                            ; $4BCF: $CD $3A $7A
-    call func_005_7AB1                            ; $4BD2: $CD $B1 $7A
+    call UpdateEntityPosWithSpeed_05              ; $4BD2: $CD $B1 $7A
     call GetEntityTransitionCountdown             ; $4BD5: $CD $05 $0C
     jp   z, func_005_7B4B                         ; $4BD8: $CA $4B $7B
 

@@ -187,7 +187,7 @@ jr_005_4137:
     add  hl, bc                                   ; $4142: $09
     ld   a, [hl]                                  ; $4143: $7E
     ld   [$D151], a                               ; $4144: $EA $51 $D1
-    call func_005_7AEA                            ; $4147: $CD $EA $7A
+    call AddEntityZSpeedToPos_05                  ; $4147: $CD $EA $7A
     ld   hl, wEntitiesSpeedZTable                 ; $414A: $21 $20 $C3
     add  hl, bc                                   ; $414D: $09
     dec  [hl]                                     ; $414E: $35
@@ -289,14 +289,14 @@ jr_005_41DA:
     ld   [hl], $10                                ; $41E3: $36 $10
 
 jr_005_41E5:
-    call func_005_7AB1                            ; $41E5: $CD $B1 $7A
+    call UpdateEntityPosWithSpeed_05              ; $41E5: $CD $B1 $7A
     jp   func_005_4228                            ; $41E8: $C3 $28 $42
 
 func_005_41EB::
     call GetEntityTransitionCountdown             ; $41EB: $CD $05 $0C
     jr   z, jr_005_41F9                           ; $41EE: $28 $09
 
-    call func_005_7AB1                            ; $41F0: $CD $B1 $7A
+    call UpdateEntityPosWithSpeed_05              ; $41F0: $CD $B1 $7A
     call func_005_4228                            ; $41F3: $CD $28 $42
     dec  e                                        ; $41F6: $1D
     jr   z, jr_005_4206                           ; $41F7: $28 $0D

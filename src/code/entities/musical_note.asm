@@ -28,4 +28,4 @@ jr_005_7F10:
     ld   [hl], a                                  ; $7F1A: $77
 
 jr_005_7F1B:
-    jp   func_005_7AB1                            ; $7F1B: $C3 $B1 $7A
+    jp   UpdateEntityPosWithSpeed_05              ; $7F1B: $C3 $B1 $7A

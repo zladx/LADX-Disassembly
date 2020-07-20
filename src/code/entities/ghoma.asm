@@ -53,7 +53,7 @@ jr_005_7BF6:
 jr_005_7C1C:
     call BossIntro                                ; $7C1C: $CD $E8 $3E
     call label_3B39                               ; $7C1F: $CD $39 $3B
-    call func_005_7AB1                            ; $7C22: $CD $B1 $7A
+    call UpdateEntityPosWithSpeed_05              ; $7C22: $CD $B1 $7A
     call label_3B23                               ; $7C25: $CD $23 $3B
     call DecrementEntityIgnoreHitsCountdown       ; $7C28: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $7C2B: $F0 $F0

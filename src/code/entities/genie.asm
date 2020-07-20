@@ -66,7 +66,7 @@ jr_004_404E:
     ld   hl, wEntitiesHitboxFlagsTable                ; $4064: $21 $50 $C3
     add  hl, bc                                   ; $4067: $09
     ld   [hl], $80                                ; $4068: $36 $80
-    call func_004_6E03                            ; $406A: $CD $03 $6E
+    call AddEntityZSpeedToPos_04                  ; $406A: $CD $03 $6E
     ld   hl, wEntitiesSpeedZTable                                ; $406D: $21 $20 $C3
     add  hl, bc                                   ; $4070: $09
     dec  [hl]                                     ; $4071: $35
@@ -1277,7 +1277,7 @@ GenieState3Handler::
     and  a                                        ; $4913: $A7
     jr   nz, jr_004_4938                          ; $4914: $20 $22
 
-    call func_004_6E03                            ; $4916: $CD $03 $6E
+    call AddEntityZSpeedToPos_04                  ; $4916: $CD $03 $6E
     ld   hl, wEntitiesSpeedZTable                                ; $4919: $21 $20 $C3
     add  hl, bc                                   ; $491C: $09
     dec  [hl]                                     ; $491D: $35
@@ -1315,7 +1315,7 @@ GenieState4Handler::
     call SetEntitySpriteVariant                   ; $494E: $CD $0C $3B
     call label_3B44                               ; $4951: $CD $44 $3B
     call UpdateEntityPosWithSpeed_04              ; $4954: $CD $CA $6D
-    call func_004_6E03                            ; $4957: $CD $03 $6E
+    call AddEntityZSpeedToPos_04                  ; $4957: $CD $03 $6E
     ld   hl, wEntitiesSpeedZTable                                ; $495A: $21 $20 $C3
     add  hl, bc                                   ; $495D: $09
     dec  [hl]                                     ; $495E: $35

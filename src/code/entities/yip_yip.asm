@@ -74,7 +74,7 @@ jr_006_5A43:
     call RenderActiveEntitySpritesPair            ; $5A43: $CD $C0 $3B
     call func_006_64C6                            ; $5A46: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $5A49: $CD $56 $0C
-    call func_006_657A                            ; $5A4C: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $5A4C: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $5A4F: $21 $20 $C3
     add  hl, bc                                   ; $5A52: $09
     dec  [hl]                                     ; $5A53: $35
@@ -217,7 +217,7 @@ jr_006_5B27:
     jp   label_006_5B4C                           ; $5B27: $C3 $4C $5B
 
 YipYipState1Handler::
-    call func_006_6541                            ; $5B2A: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $5B2A: $CD $41 $65
     call label_3B23                               ; $5B2D: $CD $23 $3B
     ldh  a, [hFFE8]                               ; $5B30: $F0 $E8
     and  a                                        ; $5B32: $A7

@@ -140,7 +140,7 @@ jr_005_689B:
     add  hl, de                                   ; $68E9: $19
     ldh  a, [hActiveEntityVisualPosY]             ; $68EA: $F0 $EC
     ld   [hl], a                                  ; $68EC: $77
-    call func_005_7AB1                            ; $68ED: $CD $B1 $7A
+    call UpdateEntityPosWithSpeed_05              ; $68ED: $CD $B1 $7A
     call label_3B23                               ; $68F0: $CD $23 $3B
     ld   e, $0F                                   ; $68F3: $1E $0F
     ld   d, b                                     ; $68F5: $50

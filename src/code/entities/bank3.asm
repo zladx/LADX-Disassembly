@@ -1156,7 +1156,7 @@ jr_003_4D66:
     ldh  [hLinkPositionY], a                      ; $4D8C: $E0 $99
     pop  af                                       ; $4D8E: $F1
     ldh  [hLinkPositionX], a                      ; $4D8F: $E0 $98
-    jp   func_003_7F25                            ; $4D91: $C3 $25 $7F
+    jp   UpdateEntityPosWithSpeed_03              ; $4D91: $C3 $25 $7F
 
 EntityThrownHandler::
     call ExecuteActiveEntityHandler_trampoline    ; $4D94: $CD $81 $3A
@@ -1326,7 +1326,7 @@ jr_003_4E85:
     ld   hl, wEntitiesSpeedXTable                 ; $4E95: $21 $40 $C2
     add  hl, bc                                   ; $4E98: $09
     ld   [hl], a                                  ; $4E99: $77
-    call func_003_7F32                            ; $4E9A: $CD $32 $7F
+    call AddEntitySpeedToPos_03                   ; $4E9A: $CD $32 $7F
     jp   ClearEntitySpeed                         ; $4E9D: $C3 $7F $3D
 
 EntityRandomSpeedX::
@@ -1592,7 +1592,7 @@ IronMaskEntityHandler::
     call func_003_7F78                            ; $5009: $CD $78 $7F
     call func_003_7FA9                            ; $500C: $CD $A9 $7F
     call func_003_6E28                            ; $500F: $CD $28 $6E
-    call func_003_7F25                            ; $5012: $CD $25 $7F
+    call UpdateEntityPosWithSpeed_03              ; $5012: $CD $25 $7F
     call func_003_7893                            ; $5015: $CD $93 $78
     call GetEntityTransitionCountdown             ; $5018: $CD $05 $0C
     jr   nz, .jp_003_503D                         ; $501B: $20 $20
@@ -2885,7 +2885,7 @@ jr_003_58E5:
     call ClearEntitySpeed                         ; $58F3: $CD $7F $3D
 
 jr_003_58F6:
-    call func_003_7F25                            ; $58F6: $CD $25 $7F
+    call UpdateEntityPosWithSpeed_03              ; $58F6: $CD $25 $7F
     call func_003_7893                            ; $58F9: $CD $93 $78
 
 func_003_58FC::
@@ -3812,7 +3812,7 @@ Data_003_5E8B::
 SirensInstrumentState1Handler::
     ld   de, Data_003_5E8B                        ; $5E93: $11 $8B $5E
     call RenderActiveEntitySpritesPair            ; $5E96: $CD $C0 $3B
-    call func_003_7F25                            ; $5E99: $CD $25 $7F
+    call UpdateEntityPosWithSpeed_03              ; $5E99: $CD $25 $7F
     call GetEntityTransitionCountdown             ; $5E9C: $CD $05 $0C
     jp   z, UnloadEntityAndReturn                 ; $5E9F: $CA $8D $3F
 
@@ -4197,7 +4197,7 @@ label_003_60AA:
     call func_003_62EB                            ; $60B0: $CD $EB $62
 
 func_003_60B3::
-    call func_003_7F25                            ; $60B3: $CD $25 $7F
+    call UpdateEntityPosWithSpeed_03              ; $60B3: $CD $25 $7F
     call func_003_6B7B                            ; $60B6: $CD $7B $6B
     call func_003_7893                            ; $60B9: $CD $93 $78
     ldh  a, [hIsSideScrolling]                    ; $60BC: $F0 $F9
@@ -5709,7 +5709,7 @@ jr_003_6ADA:
     call GetEntityTransitionCountdown             ; $6ADD: $CD $05 $0C
     jr   nz, @+$6C                                ; $6AE0: $20 $6A
 
-    call func_003_7F25                            ; $6AE2: $CD $25 $7F
+    call UpdateEntityPosWithSpeed_03              ; $6AE2: $CD $25 $7F
     call ApplySwordIntersectionWithObjects        ; $6AE5: $CD $AB $7C
     ld   hl, wEntitiesCollisionsTable             ; $6AE8: $21 $A0 $C2
     add  hl, bc                                   ; $6AEB: $09
@@ -5818,7 +5818,7 @@ jr_003_6B53:
     call SetEntitySpriteVariant                   ; $6B6B: $CD $0C $3B
 .octorockRockEnd
 
-    call func_003_7F25                            ; $6B6E: $CD $25 $7F
+    call UpdateEntityPosWithSpeed_03              ; $6B6E: $CD $25 $7F
     jr   func_003_6B7B                            ; $6B71: $18 $08
 
 Data_003_6B73::
@@ -5832,7 +5832,7 @@ func_003_6B7B::
     and  a                                        ; $6B7D: $A7
     jr   nz, jr_003_6B8C                          ; $6B7E: $20 $0C
 
-    call func_003_7F5E                            ; $6B80: $CD $5E $7F
+    call AddEntityZSpeedToPos_03                  ; $6B80: $CD $5E $7F
     ld   hl, wEntitiesSpeedZTable                 ; $6B83: $21 $20 $C3
     add  hl, bc                                   ; $6B86: $09
     ld   a, [hl]                                  ; $6B87: $7E
@@ -6132,7 +6132,7 @@ ApplyLinkCollisionWithEnemy::
     cp   ENTITY_CHEEP_CHEEP_JUMPING               ; $6CD7: $FE $AC
     jr   nz, .cheepCheepEnd                       ; $6CD9: $20 $1E
 
-    call func_003_7EE9                            ; $6CDB: $CD $E9 $7E
+    call GetEntityYDistanceAwayFromLink           ; $6CDB: $CD $E9 $7E
     ld   a, e                                     ; $6CDE: $7B
     cp   $02                                      ; $6CDF: $FE $02
     jr   nz, .goombaEnd                          ; $6CE1: $20 $5A
@@ -6359,7 +6359,7 @@ jr_003_6E0E:
     cp   $02                                      ; $6E10: $FE $02
     jr   z, setCarryAndReturn                           ; $6E12: $28 $F6
 
-    call func_003_7ED9                            ; $6E14: $CD $D9 $7E
+    call GetEntityXDistanceAwayFromLink           ; $6E14: $CD $D9 $7E
     ld   d, b                                     ; $6E17: $50
     ld   hl, Data_003_6E0C                        ; $6E18: $21 $0C $6E
     add  hl, de                                   ; $6E1B: $19
@@ -6644,7 +6644,7 @@ func_003_6F93::
 
 label_003_6FA7:
     push de                                       ; $6FA7: $D5
-    call func_003_7ED9                            ; $6FA8: $CD $D9 $7E
+    call GetEntityXDistanceAwayFromLink           ; $6FA8: $CD $D9 $7E
     ld   a, e                                     ; $6FAB: $7B
     and  a                                        ; $6FAC: $A7
     pop  de                                       ; $6FAD: $D1
@@ -9250,8 +9250,7 @@ func_003_7E0E::
 ;
 ; Inputs:
 ;   a    vector length
-;   ???  vector origin X
-;   ???  vector origin Y
+;   bc   entity index
 ;
 ; Outputs:
 ;   hScratch0   resulting vector Y
@@ -9259,40 +9258,44 @@ func_003_7E0E::
 GetVectorTowardsLink::
     ldh  [hScratch1], a                           ; $7E45: $E0 $D8
     and  a                                        ; $7E47: $A7
-    jp   z, label_003_7EC3                        ; $7E48: $CA $C3 $7E
+    jp   z, .cancelAndReturn                      ; $7E48: $CA $C3 $7E
 
-    call func_003_7EE9                            ; $7E4B: $CD $E9 $7E
+    call GetEntityYDistanceAwayFromLink           ; $7E4B: $CD $E9 $7E
     dec  e                                        ; $7E4E: $1D
     dec  e                                        ; $7E4F: $1D
     ld   a, e                                     ; $7E50: $7B
+    ; hScratch2 = dy < 0 ? 0 : 1
     ldh  [hScratch2], a                           ; $7E51: $E0 $D9
     ld   a, d                                     ; $7E53: $7A
     bit  7, a                                     ; $7E54: $CB $7F
-    jr   z, jr_003_7E5A                           ; $7E56: $28 $02
+    jr   z, .absoluteY                            ; $7E56: $28 $02
 
     cpl                                           ; $7E58: $2F
     inc  a                                        ; $7E59: $3C
 
-jr_003_7E5A:
+.absoluteY
     ldh  [hScratchC], a                           ; $7E5A: $E0 $E3
-    call func_003_7ED9                            ; $7E5C: $CD $D9 $7E
+    call GetEntityXDistanceAwayFromLink           ; $7E5C: $CD $D9 $7E
     ld   a, e                                     ; $7E5F: $7B
+    ; hScratch3 = dx < 0 ? 1 : 0
     ldh  [hScratch3], a                           ; $7E60: $E0 $DA
     ld   a, d                                     ; $7E62: $7A
     bit  7, a                                     ; $7E63: $CB $7F
-    jr   z, jr_003_7E69                           ; $7E65: $28 $02
+    jr   z, .absoluteX                            ; $7E65: $28 $02
 
     cpl                                           ; $7E67: $2F
     inc  a                                        ; $7E68: $3C
 
-jr_003_7E69:
+.absoluteX
     ldh  [hScratchD], a                           ; $7E69: $E0 $E4
     ld   e, $00                                   ; $7E6B: $1E $00
     ld   hl, hScratchC                            ; $7E6D: $21 $E3 $FF
     ldh  a, [hScratchD]                           ; $7E70: $F0 $E4
+    ; Always divide the larger distance by the smaller distance...
     cp   [hl]                                     ; $7E72: $BE
-    jr   nc, jr_003_7E7E                          ; $7E73: $30 $09
+    jr   nc, .noSwap1                             ; $7E73: $30 $09
 
+    ; ...so swap them if necessary
     inc  e                                        ; $7E75: $1C
     push af                                       ; $7E76: $F5
     ldh  a, [hScratchC]                           ; $7E77: $F0 $E3
@@ -9300,37 +9303,42 @@ jr_003_7E69:
     pop  af                                       ; $7E7B: $F1
     ldh  [hScratchC], a                           ; $7E7C: $E0 $E3
 
-jr_003_7E7E:
+.noSwap1
+    ; e = dx > dy ? 0 : 1
+    
     xor  a                                        ; $7E7E: $AF
     ldh  [hScratchB], a                           ; $7E7F: $E0 $E2
     ldh  [hScratch0], a                           ; $7E81: $E0 $D7
+    
     ldh  a, [hScratch1]                           ; $7E83: $F0 $D8
     ld   d, a                                     ; $7E85: $57
 
-jr_003_7E86:
+.divideLoop
     ldh  a, [hScratchB]                           ; $7E86: $F0 $E2
     ld   hl, hScratchC                            ; $7E88: $21 $E3 $FF
     add  [hl]                                     ; $7E8B: $86
-    jr   c, jr_003_7E94                           ; $7E8C: $38 $06
+    jr   c, .incResult                            ; $7E8C: $38 $06
 
     ld   hl, hScratchD                            ; $7E8E: $21 $E4 $FF
     cp   [hl]                                     ; $7E91: $BE
-    jr   c, jr_003_7E99                           ; $7E92: $38 $05
+    jr   c, .decCounter                           ; $7E92: $38 $05
 
-jr_003_7E94:
+.incResult
     sub  [hl]                                     ; $7E94: $96
     ld   hl, hScratch0                            ; $7E95: $21 $D7 $FF
     inc  [hl]                                     ; $7E98: $34
 
-jr_003_7E99:
+.decCounter
     ldh  [hScratchB], a                           ; $7E99: $E0 $E2
     dec  d                                        ; $7E9B: $15
-    jr   nz, jr_003_7E86                          ; $7E9C: $20 $E8
+    jr   nz, .divideLoop                          ; $7E9C: $20 $E8
 
     ld   a, e                                     ; $7E9E: $7B
+    ; If the X and Y were swapped before...
     and  a                                        ; $7E9F: $A7
-    jr   z, jr_003_7EAC                           ; $7EA0: $28 $0A
+    jr   z, .noSwap2                              ; $7EA0: $28 $0A
 
+    ; ...swap them back
     ldh  a, [hScratch0]                           ; $7EA2: $F0 $D7
     push af                                       ; $7EA4: $F5
     ldh  a, [hScratch1]                           ; $7EA5: $F0 $D8
@@ -9338,30 +9346,31 @@ jr_003_7E99:
     pop  af                                       ; $7EA9: $F1
     ldh  [hScratch1], a                           ; $7EAA: $E0 $D8
 
-jr_003_7EAC:
+.noSwap2
     ldh  a, [hScratch2]                           ; $7EAC: $F0 $D9
+    ; If the distance was negative...
     and  a                                        ; $7EAE: $A7
     ldh  a, [hScratch0]                           ; $7EAF: $F0 $D7
-    jr   nz, jr_003_7EB7                          ; $7EB1: $20 $04
+    jr   nz, .positiveResultY                     ; $7EB1: $20 $04
 
+    ; ...make the result negative
     cpl                                           ; $7EB3: $2F
     inc  a                                        ; $7EB4: $3C
     ldh  [hScratch0], a                           ; $7EB5: $E0 $D7
 
-jr_003_7EB7:
+.positiveResultY
     ldh  a, [hScratch3]                           ; $7EB7: $F0 $DA
     and  a                                        ; $7EB9: $A7
     ldh  a, [hScratch1]                           ; $7EBA: $F0 $D8
-    jr   z, jr_003_7EC2                           ; $7EBC: $28 $04
+    jr   z, .positiveResultX                      ; $7EBC: $28 $04
 
     cpl                                           ; $7EBE: $2F
     inc  a                                        ; $7EBF: $3C
     ldh  [hScratch1], a                           ; $7EC0: $E0 $D8
-
-jr_003_7EC2:
+.positiveResultX
     ret                                           ; $7EC2: $C9
 
-label_003_7EC3:
+.cancelAndReturn
     xor  a                                        ; $7EC3: $AF
     ldh  [hScratch0], a                           ; $7EC4: $E0 $D7
     ret                                           ; $7EC6: $C9
@@ -9379,22 +9388,22 @@ ApplyVectorTowardsLinkAndReturn::
     ld   [hl], a                                  ; $7ED7: $77
     ret                                           ; $7ED8: $C9
 
-func_003_7ED9::
+GetEntityXDistanceAwayFromLink::
     ld   e, $00                                   ; $7ED9: $1E $00
     ldh  a, [hLinkPositionX]                      ; $7EDB: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $7EDD: $21 $00 $C2
     add  hl, bc                                   ; $7EE0: $09
     sub  [hl]                                     ; $7EE1: $96
     bit  7, a                                     ; $7EE2: $CB $7F
-    jr   z, jr_003_7EE7                           ; $7EE4: $28 $01
+    jr   z, .positive                             ; $7EE4: $28 $01
 
     inc  e                                        ; $7EE6: $1C
 
-jr_003_7EE7:
+.positive
     ld   d, a                                     ; $7EE7: $57
     ret                                           ; $7EE8: $C9
 
-func_003_7EE9::
+GetEntityYDistanceAwayFromLink::
     ld   e, $02                                   ; $7EE9: $1E $02
     ldh  a, [hLinkPositionY]                      ; $7EEB: $F0 $99
     ld   hl, wEntitiesPosYTable                   ; $7EED: $21 $10 $C2
@@ -9404,16 +9413,16 @@ func_003_7EE9::
     add  hl, bc                                   ; $7EF5: $09
     add  [hl]                                     ; $7EF6: $86
     bit  7, a                                     ; $7EF7: $CB $7F
-    jr   nz, jr_003_7EFC                          ; $7EF9: $20 $01
+    jr   nz, .negative                            ; $7EF9: $20 $01
 
     inc  e                                        ; $7EFB: $1C
 
-jr_003_7EFC:
+.negative
     ld   d, a                                     ; $7EFC: $57
     ret                                           ; $7EFD: $C9
 
 func_003_7EFE::
-    call func_003_7ED9                            ; $7EFE: $CD $D9 $7E
+    call GetEntityXDistanceAwayFromLink           ; $7EFE: $CD $D9 $7E
     ld   a, e                                     ; $7F01: $7B
     ldh  [hScratch0], a                           ; $7F02: $E0 $D7
     ld   a, d                                     ; $7F04: $7A
@@ -9425,7 +9434,7 @@ func_003_7EFE::
 
 jr_003_7F0B:
     push af                                       ; $7F0B: $F5
-    call func_003_7EE9                            ; $7F0C: $CD $E9 $7E
+    call GetEntityYDistanceAwayFromLink           ; $7F0C: $CD $E9 $7E
     ld   a, e                                     ; $7F0F: $7B
     ldh  [hScratch1], a                           ; $7F10: $E0 $D8
     ld   a, d                                     ; $7F12: $7A
@@ -9450,70 +9459,86 @@ jr_003_7F23:
     ld   e, a                                     ; $7F23: $5F
     ret                                           ; $7F24: $C9
 
-func_003_7F25::
-    call func_003_7F32                            ; $7F25: $CD $32 $7F
+UpdateEntityPosWithSpeed_03::
+    call AddEntitySpeedToPos_03                   ; $7F25: $CD $32 $7F
     push bc                                       ; $7F28: $C5
     ld   a, c                                     ; $7F29: $79
     add  $10                                      ; $7F2A: $C6 $10
     ld   c, a                                     ; $7F2C: $4F
-    call func_003_7F32                            ; $7F2D: $CD $32 $7F
+    call AddEntitySpeedToPos_03                   ; $7F2D: $CD $32 $7F
     pop  bc                                       ; $7F30: $C1
     ret                                           ; $7F31: $C9
 
-func_003_7F32::
+; Update the entity's position using its speed.
+;
+; The low nibble of the value in the entity speed tables is the
+; number of pixels to move within 16 frames. For example, if it's
+; 8, the entity will move 1 pixel every other frame (8/16).
+;
+; The high nibble of the value is the number of pixels to normally
+; move, in addition to the carry from the SpeedAccTables.
+;
+; Inputs:
+;   bc  entity index
+AddEntitySpeedToPos_03::
     ld   hl, wEntitiesSpeedXTable                 ; $7F32: $21 $40 $C2
     add  hl, bc                                   ; $7F35: $09
     ld   a, [hl]                                  ; $7F36: $7E
     and  a                                        ; $7F37: $A7
-    jr   z, jr_003_7F5D                           ; $7F38: $28 $23
+    ; No need to update the position if it's not moving
+    jr   z, .return                               ; $7F38: $28 $23
 
     push af                                       ; $7F3A: $F5
+    ; Multiply speed by 16 so the carry is set if greater than $0F
     swap a                                        ; $7F3B: $CB $37
     and  $F0                                      ; $7F3D: $E6 $F0
-    ld   hl, wEntitiesUnknowTableN                ; $7F3F: $21 $60 $C2
+    ld   hl, wEntitiesSpeedXAccTable              ; $7F3F: $21 $60 $C2
     add  hl, bc                                   ; $7F42: $09
     add  [hl]                                     ; $7F43: $86
     ld   [hl], a                                  ; $7F44: $77
+    ; Save carry in bit 0 of d
     rl   d                                        ; $7F45: $CB $12
     ld   hl, wEntitiesPosXTable                   ; $7F47: $21 $00 $C2
 
-jr_003_7F4A:
+.updatePosition
     add  hl, bc                                   ; $7F4A: $09
     pop  af                                       ; $7F4B: $F1
+    ; Sign extension for high nibble
     ld   e, $00                                   ; $7F4C: $1E $00
     bit  7, a                                     ; $7F4E: $CB $7F
-    jr   z, jr_003_7F54                           ; $7F50: $28 $02
+    jr   z, .positive                             ; $7F50: $28 $02
 
     ld   e, $F0                                   ; $7F52: $1E $F0
 
-jr_003_7F54:
+.positive
     swap a                                        ; $7F54: $CB $37
     and  $0F                                      ; $7F56: $E6 $0F
     or   e                                        ; $7F58: $B3
+    ; Get carry back from d
     rr   d                                        ; $7F59: $CB $1A
     adc  [hl]                                     ; $7F5B: $8E
     ld   [hl], a                                  ; $7F5C: $77
 
-jr_003_7F5D:
+.return
     ret                                           ; $7F5D: $C9
 
-func_003_7F5E::
+AddEntityZSpeedToPos_03::
     ld   hl, wEntitiesSpeedZTable                 ; $7F5E: $21 $20 $C3
     add  hl, bc                                   ; $7F61: $09
     ld   a, [hl]                                  ; $7F62: $7E
     and  a                                        ; $7F63: $A7
-    jr   z, jr_003_7F5D                           ; $7F64: $28 $F7
+    jr   z, AddEntitySpeedToPos_03.return         ; $7F64: $28 $F7
 
     push af                                       ; $7F66: $F5
     swap a                                        ; $7F67: $CB $37
     and  $F0                                      ; $7F69: $E6 $F0
-    ld   hl, wEntitiesUnknowTableK                ; $7F6B: $21 $30 $C3
+    ld   hl, wEntitiesSpeedZAccTable              ; $7F6B: $21 $30 $C3
     add  hl, bc                                   ; $7F6E: $09
     add  [hl]                                     ; $7F6F: $86
     ld   [hl], a                                  ; $7F70: $77
     rl   d                                        ; $7F71: $CB $12
     ld   hl, wEntitiesPosZTable                   ; $7F73: $21 $10 $C3
-    jr   jr_003_7F4A                              ; $7F76: $18 $D2
+    jr   AddEntitySpeedToPos_03.updatePosition    ; $7F76: $18 $D2
 
 func_003_7F78::
     ldh  a, [hActiveEntityStatus]                 ; $7F78: $F0 $EA
@@ -9589,7 +9614,7 @@ func_003_7FA9::
     ld   hl, wEntitiesSpeedYTable                 ; $7FD0: $21 $50 $C2
     add  hl, bc                                   ; $7FD3: $09
     ld   [hl], a                                  ; $7FD4: $77
-    call func_003_7F25                            ; $7FD5: $CD $25 $7F
+    call UpdateEntityPosWithSpeed_03              ; $7FD5: $CD $25 $7F
     ld   hl, wEntitiesUnknowTableH                ; $7FD8: $21 $30 $C4
     add  hl, bc                                   ; $7FDB: $09
     ld   a, [hl]                                  ; $7FDC: $7E

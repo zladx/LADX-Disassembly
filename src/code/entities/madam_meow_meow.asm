@@ -29,7 +29,7 @@ jr_006_5B91:
     cp   $80                                      ; $5B9D: $FE $80
     jr   nz, jr_006_5BC4                          ; $5B9F: $20 $23
 
-    call func_006_657A                            ; $5BA1: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $5BA1: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $5BA4: $21 $20 $C3
     add  hl, bc                                   ; $5BA7: $09
     dec  [hl]                                     ; $5BA8: $35

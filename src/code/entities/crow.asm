@@ -215,7 +215,7 @@ jr_006_5DBA:
     ld   hl, wEntitiesSpeedZTable                 ; $5DBD: $21 $20 $C3
     add  hl, bc                                   ; $5DC0: $09
     ld   [hl], $08                                ; $5DC1: $36 $08
-    call func_006_657A                            ; $5DC3: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $5DC3: $CD $7A $65
     jr   jr_006_5E08                              ; $5DC6: $18 $40
 
 CrowState2Handler::
@@ -261,7 +261,7 @@ jr_006_5DF5:
     ld   [hl], a                                  ; $5E01: $77
 
 func_006_5E02::
-    call func_006_6541                            ; $5E02: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $5E02: $CD $41 $65
     call func_006_5E14                            ; $5E05: $CD $14 $5E
 
 jr_006_5E08:

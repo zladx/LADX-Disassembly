@@ -42,7 +42,7 @@ ButterflyEntityHandler::
     rra                                           ; $6BED: $1F
     and  $01                                      ; $6BEE: $E6 $01
     call SetEntitySpriteVariant                   ; $6BF0: $CD $0C $3B
-    call func_006_6541                            ; $6BF3: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $6BF3: $CD $41 $65
 
     ; If [hActiveEntityState] & $1F == 0…
     ldh  a, [hActiveEntityState]                  ; $6BF6: $F0 $F0

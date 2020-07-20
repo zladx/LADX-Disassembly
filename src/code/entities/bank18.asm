@@ -1145,7 +1145,7 @@ jr_018_49B6:
     ld   hl, wEntitiesSpeedXTable                 ; $49B7: $21 $40 $C2
     add  hl, bc                                   ; $49BA: $09
     ld   [hl], $FC                                ; $49BB: $36 $FC
-    jp   func_018_7E6C                            ; $49BD: $C3 $6C $7E
+    jp   AddEntitySpeedToPos_18                   ; $49BD: $C3 $6C $7E
 
 Data_018_49C0::
     db   $FF, $FF, $FF, $FF, $54, $02, $54, $62, $54, $42, $54, $22, $56, $02, $56, $22
@@ -1958,7 +1958,7 @@ MadBatterState2Handler::
     ld   hl, wEntitiesSpeedYTable                 ; $4F53: $21 $50 $C2
     add  hl, bc                                   ; $4F56: $09
     ld   [hl], $FC                                ; $4F57: $36 $FC
-    jp   func_018_7E5F                            ; $4F59: $C3 $5F $7E
+    jp   UpdateEntityPosWithSpeed_18              ; $4F59: $C3 $5F $7E
 
 MadBatterState3Handler::
     call MadBatterRenderSmallSprite                            ; $4F5C: $CD $C3 $50
@@ -2135,7 +2135,7 @@ MadBatterState8Handler::
     ldh  [hJingle], a                             ; $5065: $E0 $F2
 
 jr_018_5067:
-    call func_018_7E62                            ; $5067: $CD $62 $7E
+    call UpdateEntityYPosWithSpeed_18             ; $5067: $CD $62 $7E
     ld   hl, wEntitiesSpeedYTable                 ; $506A: $21 $50 $C2
     add  hl, bc                                   ; $506D: $09
     dec  [hl]                                     ; $506E: $35
@@ -2319,7 +2319,7 @@ BunnyD3EntityHandler::
 jr_018_51F3:
     call func_018_7D60                            ; $51F3: $CD $60 $7D
     call func_018_7DE8                            ; $51F6: $CD $E8 $7D
-    call func_018_7E98                            ; $51F9: $CD $98 $7E
+    call AddEntityZSpeedToPos_18                  ; $51F9: $CD $98 $7E
     ld   hl, wEntitiesSpeedZTable                 ; $51FC: $21 $20 $C3
     add  hl, bc                                   ; $51FF: $09
     dec  [hl]                                     ; $5200: $35
@@ -2435,7 +2435,7 @@ BunnyCallingMarinEntityHandler::
     ld   a, $02                                   ; $52B6: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $52B8: $E0 $A1
     ld   [wC167], a                               ; $52BA: $EA $67 $C1
-    call func_018_7E98                            ; $52BD: $CD $98 $7E
+    call AddEntityZSpeedToPos_18                  ; $52BD: $CD $98 $7E
     ld   hl, wEntitiesSpeedZTable                 ; $52C0: $21 $20 $C3
     add  hl, bc                                   ; $52C3: $09
     dec  [hl]                                     ; $52C4: $35
@@ -2467,7 +2467,7 @@ BunnyCallingMarinState0Handler::
     ld   hl, wEntitiesSpeedXTable                 ; $52E6: $21 $40 $C2
     add  hl, bc                                   ; $52E9: $09
     ld   [hl], $0C                                ; $52EA: $36 $0C
-    call func_018_7E6C                            ; $52EC: $CD $6C $7E
+    call AddEntitySpeedToPos_18                   ; $52EC: $CD $6C $7E
     ldh  a, [hActiveEntityPosX]                   ; $52EF: $F0 $EE
     cp   $20                                      ; $52F1: $FE $20
     jr   nz, jr_018_5304                          ; $52F3: $20 $0F
@@ -2579,7 +2579,7 @@ jr_018_5375:
     ld   hl, wEntitiesSpeedXTable                 ; $538E: $21 $40 $C2
     add  hl, bc                                   ; $5391: $09
     ld   [hl], $EC                                ; $5392: $36 $EC
-    call func_018_7E6C                            ; $5394: $CD $6C $7E
+    call AddEntitySpeedToPos_18                   ; $5394: $CD $6C $7E
 
 jr_018_5397:
     ld   a, [$C50F]                               ; $5397: $FA $0F $C5
@@ -2601,7 +2601,7 @@ jr_018_5397:
     push bc                                       ; $53B1: $C5
     ld   c, e                                     ; $53B2: $4B
     ld   b, d                                     ; $53B3: $42
-    call func_018_7E6C                            ; $53B4: $CD $6C $7E
+    call AddEntitySpeedToPos_18                   ; $53B4: $CD $6C $7E
     pop  bc                                       ; $53B7: $C1
     pop  de                                       ; $53B8: $D1
     ld   hl, wEntitiesPosXTable                   ; $53B9: $21 $00 $C2
@@ -2706,7 +2706,7 @@ ENDC
     ld   hl, wEntitiesSpeedYTable                 ; $5451: $21 $50 $C2
     add  hl, bc                                   ; $5454: $09
     ld   [hl], $04                                ; $5455: $36 $04
-    call func_018_7E62                            ; $5457: $CD $62 $7E
+    call UpdateEntityYPosWithSpeed_18             ; $5457: $CD $62 $7E
     ld   a, $01                                   ; $545A: $3E $01
     ldh  [$FFBA], a                               ; $545C: $E0 $BA
 
@@ -2727,7 +2727,7 @@ jr_018_5466:
     ld   hl, wEntitiesSpeedYTable                 ; $546C: $21 $50 $C2
     add  hl, bc                                   ; $546F: $09
     ld   [hl], $FD                                ; $5470: $36 $FD
-    call func_018_7E62                            ; $5472: $CD $62 $7E
+    call UpdateEntityYPosWithSpeed_18             ; $5472: $CD $62 $7E
 
 IF !__PATCH_0__
     ld   a, $00                                   ; $5475: $3E $00
@@ -2828,7 +2828,7 @@ jr_018_54EE:
     and  $03                                      ; $54FB: $E6 $03
     ret  nz                                       ; $54FD: $C0
 
-    jp   func_018_7E5F                            ; $54FE: $C3 $5F $7E
+    jp   UpdateEntityPosWithSpeed_18              ; $54FE: $C3 $5F $7E
 
 WalrusEntityHandler::
     ld   hl, wEntitiesPrivateState1Table          ; $5501: $21 $B0 $C2
@@ -2843,7 +2843,7 @@ WalrusEntityHandler::
 
     call func_018_586B                            ; $5512: $CD $6B $58
     call func_018_7DE8                            ; $5515: $CD $E8 $7D
-    call func_018_7E98                            ; $5518: $CD $98 $7E
+    call AddEntityZSpeedToPos_18                  ; $5518: $CD $98 $7E
     ld   hl, wEntitiesSpeedZTable                 ; $551B: $21 $20 $C3
     add  hl, bc                                   ; $551E: $09
     dec  [hl]                                     ; $551F: $35
@@ -3765,7 +3765,7 @@ func_018_5BD0::
     ld   hl, wEntitiesSpeedXTable                 ; $5BD5: $21 $40 $C2
     add  hl, bc                                   ; $5BD8: $09
     ld   [hl], $F4                                ; $5BD9: $36 $F4
-    call func_018_7E6C                            ; $5BDB: $CD $6C $7E
+    call AddEntitySpeedToPos_18                   ; $5BDB: $CD $6C $7E
     ldh  a, [hFrameCounter]                       ; $5BDE: $F0 $E7
     and  $08                                      ; $5BE0: $E6 $08
     ld   e, $04                                   ; $5BE2: $1E $04
@@ -4275,7 +4275,7 @@ MarinAtTalTalHeightsEntityHandler::
     ld   de, Data_018_5EB7                        ; $5EFA: $11 $B7 $5E
     call RenderActiveEntitySpritesPair            ; $5EFD: $CD $C0 $3B
     call func_018_7D60                            ; $5F00: $CD $60 $7D
-    call func_018_7E98                            ; $5F03: $CD $98 $7E
+    call AddEntityZSpeedToPos_18                  ; $5F03: $CD $98 $7E
     ld   hl, wEntitiesSpeedZTable                 ; $5F06: $21 $20 $C3
     add  hl, bc                                   ; $5F09: $09
     dec  [hl]                                     ; $5F0A: $35
@@ -4493,7 +4493,7 @@ jr_018_6064:
     ld   hl, wEntitiesDirectionTable              ; $606A: $21 $80 $C3
     add  hl, bc                                   ; $606D: $09
     ld   [hl], $03                                ; $606E: $36 $03
-    jp   func_018_7E62                            ; $6070: $C3 $62 $7E
+    jp   UpdateEntityYPosWithSpeed_18             ; $6070: $C3 $62 $7E
 
 MarinAtTalTalHeightsStateBHandler::
     ld   a, $02                                   ; $6073: $3E $02
@@ -4504,7 +4504,7 @@ MarinAtTalTalHeightsStateBHandler::
     ld   hl, wEntitiesDirectionTable              ; $607D: $21 $80 $C3
     add  hl, bc                                   ; $6080: $09
     ld   [hl], $01                                ; $6081: $36 $01
-    call func_018_7E6C                            ; $6083: $CD $6C $7E
+    call AddEntitySpeedToPos_18                   ; $6083: $CD $6C $7E
     ldh  a, [hActiveEntityPosX]                   ; $6086: $F0 $EE
     cp   $18                                      ; $6088: $FE $18
     ret  nc                                       ; $608A: $D0
@@ -4531,7 +4531,7 @@ jr_018_60A3:
     ld   hl, wEntitiesDirectionTable              ; $60A9: $21 $80 $C3
     add  hl, bc                                   ; $60AC: $09
     ld   [hl], $01                                ; $60AD: $36 $01
-    call func_018_7E6C                            ; $60AF: $CD $6C $7E
+    call AddEntitySpeedToPos_18                   ; $60AF: $CD $6C $7E
     ldh  a, [hActiveEntityPosX]                   ; $60B2: $F0 $EE
     cp   $F0                                      ; $60B4: $FE $F0
     jr   nz, jr_018_60C7                          ; $60B6: $20 $0F
@@ -4579,7 +4579,7 @@ func_018_6109::
     ld   hl, wEntitiesSpeedYTable                 ; $610F: $21 $50 $C2
     add  hl, bc                                   ; $6112: $09
     ld   [hl], $F4                                ; $6113: $36 $F4
-    call func_018_7E62                            ; $6115: $CD $62 $7E
+    call UpdateEntityYPosWithSpeed_18             ; $6115: $CD $62 $7E
     ldh  a, [hActiveEntityVisualPosY]             ; $6118: $F0 $EC
     cp   $70                                      ; $611A: $FE $70
     ret  nc                                       ; $611C: $D0
@@ -4639,7 +4639,7 @@ func_018_6173::
     ld   hl, wEntitiesSpeedXTable                 ; $6179: $21 $40 $C2
     add  hl, bc                                   ; $617C: $09
     ld   [hl], $F8                                ; $617D: $36 $F8
-    call func_018_7E6C                            ; $617F: $CD $6C $7E
+    call AddEntitySpeedToPos_18                   ; $617F: $CD $6C $7E
     ldh  a, [hActiveEntityPosX]                   ; $6182: $F0 $EE
     cp   $E0                                      ; $6184: $FE $E0
     ret  nz                                       ; $6186: $C0
@@ -5064,7 +5064,7 @@ jr_018_644C:
     jp   SetEntitySpriteVariant                   ; $644D: $C3 $0C $3B
 
 ZombieState2Handler::
-    call func_018_7E5F                            ; $6450: $CD $5F $7E
+    call UpdateEntityPosWithSpeed_18              ; $6450: $CD $5F $7E
     call label_3B23                               ; $6453: $CD $23 $3B
     call label_3B39                               ; $6456: $CD $39 $3B
     ld   hl, wEntitiesCollisionsTable             ; $6459: $21 $A0 $C2
@@ -5195,9 +5195,9 @@ jr_018_650A:
     call label_3B39                               ; $6516: $CD $39 $3B
 
 jr_018_6519:
-    call func_018_7E5F                            ; $6519: $CD $5F $7E
+    call UpdateEntityPosWithSpeed_18              ; $6519: $CD $5F $7E
     call label_3B23                               ; $651C: $CD $23 $3B
-    call func_018_7E98                            ; $651F: $CD $98 $7E
+    call AddEntityZSpeedToPos_18                  ; $651F: $CD $98 $7E
     ld   hl, wEntitiesSpeedZTable                 ; $6522: $21 $20 $C3
     add  hl, bc                                   ; $6525: $09
     dec  [hl]                                     ; $6526: $35
@@ -5839,8 +5839,8 @@ jr_018_6A71:
 jr_018_6A8B:
     call func_018_7DE8                            ; $6A8B: $CD $E8 $7D
     call func_018_7E15                            ; $6A8E: $CD $15 $7E
-    call func_018_7E5F                            ; $6A91: $CD $5F $7E
-    call func_018_7E98                            ; $6A94: $CD $98 $7E
+    call UpdateEntityPosWithSpeed_18              ; $6A91: $CD $5F $7E
+    call AddEntityZSpeedToPos_18                  ; $6A94: $CD $98 $7E
     ldh  a, [hActiveEntityState]                  ; $6A97: $F0 $F0
     JP_TABLE                                      ; $6A99
 ._00 dw VireState0Handler
@@ -6635,7 +6635,7 @@ jr_018_6F51:
     jp   ClearEntityStatusBank18                  ; $6F51: $C3 $08 $7F
 
 jr_018_6F54:
-    call func_018_7E5F                            ; $6F54: $CD $5F $7E
+    call UpdateEntityPosWithSpeed_18              ; $6F54: $CD $5F $7E
     call GetEntityTransitionCountdown             ; $6F57: $CD $05 $0C
     ret  nz                                       ; $6F5A: $C0
 
@@ -6661,7 +6661,7 @@ label_018_6F70:
     call RenderActiveEntitySpritesPair            ; $6F73: $CD $C0 $3B
     call func_018_7DE8                            ; $6F76: $CD $E8 $7D
     call func_018_7E15                            ; $6F79: $CD $15 $7E
-    call func_018_7E5F                            ; $6F7C: $CD $5F $7E
+    call UpdateEntityPosWithSpeed_18              ; $6F7C: $CD $5F $7E
     ldh  a, [hFrameCounter]                       ; $6F7F: $F0 $E7
     and  $03                                      ; $6F81: $E6 $03
     jr   nz, jr_018_6F95                          ; $6F83: $20 $10
@@ -6767,7 +6767,7 @@ jr_018_7011:
     ld   hl, wEntitiesSpeedZTable                 ; $7011: $21 $20 $C3
     add  hl, bc                                   ; $7014: $09
     ld   [hl], $20                                ; $7015: $36 $20
-    call func_018_7E98                            ; $7017: $CD $98 $7E
+    call AddEntityZSpeedToPos_18                  ; $7017: $CD $98 $7E
     ld   hl, wEntitiesPosZTable                   ; $701A: $21 $10 $C3
     add  hl, bc                                   ; $701D: $09
     ld   a, [hl]                                  ; $701E: $7E
@@ -7108,7 +7108,7 @@ jr_018_726D:
     ldh  [hLinkPositionX], a                      ; $7271: $E0 $98
 
 func_018_7273::
-    call func_018_7E5F                            ; $7273: $CD $5F $7E
+    call UpdateEntityPosWithSpeed_18              ; $7273: $CD $5F $7E
 
 label_018_7276:
     ldh  a, [hFrameCounter]                       ; $7276: $F0 $E7
@@ -7166,7 +7166,7 @@ jr_018_72C5:
 func_018_72C8::
     call label_3B39                               ; $72C8: $CD $39 $3B
     call func_018_7273                            ; $72CB: $CD $73 $72
-    call func_018_7E98                            ; $72CE: $CD $98 $7E
+    call AddEntityZSpeedToPos_18                  ; $72CE: $CD $98 $7E
     ldh  a, [hFrameCounter]                       ; $72D1: $F0 $E7
     and  $03                                      ; $72D3: $E6 $03
     jr   nz, jr_018_72E1                          ; $72D5: $20 $0A
@@ -7213,8 +7213,8 @@ TurtleRockHeadEntityHandler::
     ld   de, Data_018_72F5                        ; $7310: $11 $F5 $72
     call RenderActiveEntitySprite                 ; $7313: $CD $77 $3C
     call func_018_7DE8                            ; $7316: $CD $E8 $7D
-    call func_018_7E5F                            ; $7319: $CD $5F $7E
-    call func_018_7E98                            ; $731C: $CD $98 $7E
+    call UpdateEntityPosWithSpeed_18              ; $7319: $CD $5F $7E
+    call AddEntityZSpeedToPos_18                  ; $731C: $CD $98 $7E
     ld   hl, wEntitiesSpeedZTable                 ; $731F: $21 $20 $C3
     add  hl, bc                                   ; $7322: $09
     dec  [hl]                                     ; $7323: $35
@@ -7351,7 +7351,7 @@ jr_018_73E6:
     ld   hl, wEntitiesSpeedXTable                 ; $73E6: $21 $40 $C2
     add  hl, bc                                   ; $73E9: $09
     ld   [hl], e                                  ; $73EA: $73
-    jp   func_018_7E6C                            ; $73EB: $C3 $6C $7E
+    jp   AddEntitySpeedToPos_18                   ; $73EB: $C3 $6C $7E
 
 Data_018_73EE::
     db   $F8, $08, $10, $00, $00, $08
@@ -7493,7 +7493,7 @@ jr_018_74BC:
     ld   hl, wEntitiesSpeedYTable                 ; $74BC: $21 $50 $C2
     add  hl, bc                                   ; $74BF: $09
     ld   [hl], $04                                ; $74C0: $36 $04
-    jp   func_018_7E62                            ; $74C2: $C3 $62 $7E
+    jp   UpdateEntityYPosWithSpeed_18             ; $74C2: $C3 $62 $7E
 
 TurtleRockHeadState6Handler::
     call GetEntityTransitionCountdown             ; $74C5: $CD $05 $0C
@@ -7517,7 +7517,7 @@ TurtleRockHeadState7Handler::
     call IncrementEntityState                     ; $74E4: $CD $12 $3B
 
 jr_018_74E7:
-    jp   func_018_7E6C                            ; $74E7: $C3 $6C $7E
+    jp   AddEntitySpeedToPos_18                   ; $74E7: $C3 $6C $7E
 
 TurtleRockHeadState8Handler::
     call GetEntityTransitionCountdown             ; $74EA: $CD $05 $0C
@@ -7591,7 +7591,7 @@ jr_018_7546:
     call IncrementEntityState                     ; $7546: $CD $12 $3B
 
 jr_018_7549:
-    jp   func_018_7E5F                            ; $7549: $C3 $5F $7E
+    jp   UpdateEntityPosWithSpeed_18              ; $7549: $C3 $5F $7E
 
 TurtleRockHeadStateBHandler::
     ldh  a, [hLinkPositionX]                      ; $754C: $F0 $98
@@ -7628,7 +7628,7 @@ jr_018_7585:
     ldh  [hLinkPositionY], a                      ; $7586: $E0 $99
     pop  af                                       ; $7588: $F1
     ldh  [hLinkPositionX], a                      ; $7589: $E0 $98
-    jp   func_018_7E5F                            ; $758B: $C3 $5F $7E
+    jp   UpdateEntityPosWithSpeed_18              ; $758B: $C3 $5F $7E
 
 Data_018_758E::
     db   $F0, $F8, $7A, $16, $F0, $00, $7C, $16, $F0, $08, $7C, $36, $F0, $10, $7A, $36
@@ -7833,7 +7833,7 @@ BuzzBlobState0Handler::
     ld   [hl], a                                  ; $77A8: $77
 
 jr_018_77A9:
-    call func_018_7E5F                            ; $77A9: $CD $5F $7E
+    call UpdateEntityPosWithSpeed_18              ; $77A9: $CD $5F $7E
     call label_3B23                               ; $77AC: $CD $23 $3B
     ld   hl, wEntitiesPrivateState1Table          ; $77AF: $21 $B0 $C2
     add  hl, bc                                   ; $77B2: $09
@@ -7923,7 +7923,7 @@ BomberEntityHandler::
     add  hl, bc                                   ; $7851: $09
     ld   [hl], a                                  ; $7852: $77
     call func_018_7E15                            ; $7853: $CD $15 $7E
-    call func_018_7E5F                            ; $7856: $CD $5F $7E
+    call UpdateEntityPosWithSpeed_18              ; $7856: $CD $5F $7E
     call label_3B23                               ; $7859: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $785C: $F0 $F0
     JP_TABLE                                      ; $785E
@@ -8725,7 +8725,7 @@ func_018_7E15::
     ld   hl, wEntitiesSpeedYTable                 ; $7E3D: $21 $50 $C2
     add  hl, bc                                   ; $7E40: $09
     ld   [hl], a                                  ; $7E41: $77
-    call func_018_7E5F                            ; $7E42: $CD $5F $7E
+    call UpdateEntityPosWithSpeed_18              ; $7E42: $CD $5F $7E
     ld   hl, wEntitiesUnknowTableH                ; $7E45: $21 $30 $C4
     add  hl, bc                                   ; $7E48: $09
     ld   a, [hl]                                  ; $7E49: $7E
@@ -8748,72 +8748,88 @@ jr_018_7E51:
 jr_018_7E5E:
     ret                                           ; $7E5E: $C9
 
-func_018_7E5F::
-    call func_018_7E6C                            ; $7E5F: $CD $6C $7E
+UpdateEntityPosWithSpeed_18::
+    call AddEntitySpeedToPos_18                   ; $7E5F: $CD $6C $7E
 
-func_018_7E62::
+UpdateEntityYPosWithSpeed_18::
     push bc                                       ; $7E62: $C5
     ld   a, c                                     ; $7E63: $79
     add  $10                                      ; $7E64: $C6 $10
     ld   c, a                                     ; $7E66: $4F
-    call func_018_7E6C                            ; $7E67: $CD $6C $7E
+    call AddEntitySpeedToPos_18                   ; $7E67: $CD $6C $7E
     pop  bc                                       ; $7E6A: $C1
     ret                                           ; $7E6B: $C9
 
-func_018_7E6C::
+; Update the entity's position using its speed.
+;
+; The low nibble of the value in the entity speed tables is the
+; number of pixels to move within 16 frames. For example, if it's
+; 8, the entity will move 1 pixel every other frame (8/16).
+;
+; The high nibble of the value is the number of pixels to normally
+; move, in addition to the carry from the SpeedAccTables.
+;
+; Inputs:
+;   bc  entity index
+AddEntitySpeedToPos_18::
     ld   hl, wEntitiesSpeedXTable                 ; $7E6C: $21 $40 $C2
     add  hl, bc                                   ; $7E6F: $09
     ld   a, [hl]                                  ; $7E70: $7E
     and  a                                        ; $7E71: $A7
-    jr   z, jr_018_7E97                           ; $7E72: $28 $23
+    ; No need to update the position if it's not moving
+    jr   z, .return                               ; $7E72: $28 $23
 
     push af                                       ; $7E74: $F5
+    ; Multiply speed by 16 so the carry is set if greater than $0F
     swap a                                        ; $7E75: $CB $37
     and  $F0                                      ; $7E77: $E6 $F0
-    ld   hl, wEntitiesUnknowTableN                ; $7E79: $21 $60 $C2
+    ld   hl, wEntitiesSpeedXAccTable              ; $7E79: $21 $60 $C2
     add  hl, bc                                   ; $7E7C: $09
     add  [hl]                                     ; $7E7D: $86
     ld   [hl], a                                  ; $7E7E: $77
+    ; Save carry in bit 0 of d
     rl   d                                        ; $7E7F: $CB $12
     ld   hl, wEntitiesPosXTable                   ; $7E81: $21 $00 $C2
 
-jr_018_7E84:
+.updatePosition
     add  hl, bc                                   ; $7E84: $09
     pop  af                                       ; $7E85: $F1
+    ; Sign extension for high nibble
     ld   e, $00                                   ; $7E86: $1E $00
     bit  7, a                                     ; $7E88: $CB $7F
-    jr   z, jr_018_7E8E                           ; $7E8A: $28 $02
+    jr   z, .positive                             ; $7E8A: $28 $02
 
     ld   e, $F0                                   ; $7E8C: $1E $F0
 
-jr_018_7E8E:
+.positive
     swap a                                        ; $7E8E: $CB $37
     and  $0F                                      ; $7E90: $E6 $0F
     or   e                                        ; $7E92: $B3
+    ; Get carry back from d
     rr   d                                        ; $7E93: $CB $1A
     adc  [hl]                                     ; $7E95: $8E
     ld   [hl], a                                  ; $7E96: $77
 
-jr_018_7E97:
+.return
     ret                                           ; $7E97: $C9
 
-func_018_7E98::
+AddEntityZSpeedToPos_18::
     ld   hl, wEntitiesSpeedZTable                 ; $7E98: $21 $20 $C3
     add  hl, bc                                   ; $7E9B: $09
     ld   a, [hl]                                  ; $7E9C: $7E
     and  a                                        ; $7E9D: $A7
-    jr   z, jr_018_7E97                           ; $7E9E: $28 $F7
+    jr   z, AddEntitySpeedToPos_18.return         ; $7E9E: $28 $F7
 
     push af                                       ; $7EA0: $F5
     swap a                                        ; $7EA1: $CB $37
     and  $F0                                      ; $7EA3: $E6 $F0
-    ld   hl, wEntitiesUnknowTableK                ; $7EA5: $21 $30 $C3
+    ld   hl, wEntitiesSpeedZAccTable              ; $7EA5: $21 $30 $C3
     add  hl, bc                                   ; $7EA8: $09
     add  [hl]                                     ; $7EA9: $86
     ld   [hl], a                                  ; $7EAA: $77
     rl   d                                        ; $7EAB: $CB $12
     ld   hl, wEntitiesPosZTable                   ; $7EAD: $21 $10 $C3
-    jr   jr_018_7E84                              ; $7EB0: $18 $D2
+    jr   AddEntitySpeedToPos_18.updatePosition    ; $7EB0: $18 $D2
 
 func_018_7EB2::
     ld   e, $00                                   ; $7EB2: $1E $00

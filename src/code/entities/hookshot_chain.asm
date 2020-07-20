@@ -68,7 +68,7 @@ jr_018_7C21:
     jr   jr_018_7C46                              ; $7C37: $18 $0D
 
 jr_018_7C39:
-    call func_018_7E5F                            ; $7C39: $CD $5F $7E
+    call UpdateEntityPosWithSpeed_18              ; $7C39: $CD $5F $7E
     call GetEntityTransitionCountdown             ; $7C3C: $CD $05 $0C
     jr   nz, jr_018_7C54                          ; $7C3F: $20 $13
 

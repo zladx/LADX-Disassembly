@@ -42,7 +42,7 @@ jr_006_453F:
     call func_006_64C6                            ; $454C: $CD $C6 $64
     call func_006_64F7                            ; $454F: $CD $F7 $64
     call label_3B39                               ; $4552: $CD $39 $3B
-    call func_006_657A                            ; $4555: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $4555: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $4558: $21 $20 $C3
     add  hl, bc                                   ; $455B: $09
     dec  [hl]                                     ; $455C: $35
@@ -93,7 +93,7 @@ SmasherState0Handler::
     ldh  [hLinkPositionY], a                      ; $459D: $E0 $99
     ld   a, $10                                   ; $459F: $3E $10
     call ApplyVectorTowardsLink_trampoline        ; $45A1: $CD $AA $3B
-    call func_006_6541                            ; $45A4: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $45A4: $CD $41 $65
     call label_3B23                               ; $45A7: $CD $23 $3B
     call func_006_6594                            ; $45AA: $CD $94 $65
     ld   hl, wEntitiesDirectionTable              ; $45AD: $21 $80 $C3
@@ -194,7 +194,7 @@ jr_006_4614:
     ld   [hl], a                                  ; $463D: $77
 
 jr_006_463E:
-    call func_006_6541                            ; $463E: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $463E: $CD $41 $65
     call label_3B23                               ; $4641: $CD $23 $3B
     call func_006_45E5                            ; $4644: $CD $E5 $45
     ldh  a, [hFrameCounter]                       ; $4647: $F0 $E7
@@ -314,7 +314,7 @@ jr_006_46FB:
     add  hl, bc                                   ; $4709: $09
     ld   [hl], e                                  ; $470A: $73
     call func_006_46BD                            ; $470B: $CD $BD $46
-    call func_006_6541                            ; $470E: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $470E: $CD $41 $65
     jp   label_3B23                               ; $4711: $C3 $23 $3B
 
 SmasherState4Handler::
@@ -369,8 +369,8 @@ label_006_4781:
     call func_006_64C6                            ; $4793: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $4796: $CD $56 $0C
     call label_3B70                               ; $4799: $CD $70 $3B
-    call func_006_6541                            ; $479C: $CD $41 $65
-    call func_006_657A                            ; $479F: $CD $7A $65
+    call UpdateEntityPosWithSpeed_06              ; $479C: $CD $41 $65
+    call AddEntityZSpeedToPos_06                  ; $479F: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $47A2: $21 $20 $C3
     add  hl, bc                                   ; $47A5: $09
     dec  [hl]                                     ; $47A6: $35

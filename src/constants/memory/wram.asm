@@ -433,22 +433,26 @@ wEntitiesPosYSignTable:: ; C230
 
 wEntitiesSpeedXTable:: ; C240
   ; X Velocity of visible entities
+  ;
+  ; bits 0-3: Number of pixels to move every 16 frames
+  ; bits 4-7: Number of pixels to move every frame, plus value calculated from low nibble
   ds $10
 
 wEntitiesSpeedYTable:: ; C250
-  ; X Velocity of visible entities
+  ; Y Velocity of visible entities
+  ;
+  ; bits 0-3: Number of pixels to move every 16 frames
+  ; bits 4-7: Number of pixels to move every frame, plus value calculated from low nibble
   ds $10
 
-wEntitiesUnknowTableN:: ; C260
-  ; Unlabeled entity attributes table
-  ; Related to speed X: many code occurence do somethinkg like:
-  ;   [wEntitiesUnknowTableN + entity index] = [wEntitiesUnknowTableN + entity index] + (EntitySpeedX * 16)
+wEntitiesSpeedXAccTable:: ; C260
+  ; Used as a way to give entities speeds divided by 16. (EntitySpeedX * 16) is
+  ; added to EntitySpeedXAcc and the carry is used to move the entity.
   ds $10
 
-wEntitiesUnknowTableO:: ; C270
-  ; Unlabeled entity attributes table
-  ; Related to speed Y: many code occurence do somethinkg like:
-  ;   [wEntitiesUnknowTableN + entity index] = [wEntitiesUnknowTableN + entity index] + (EntitySpeedY * 16)
+wEntitiesSpeedYAccTable:: ; C270
+  ; Used as a way to give entities speeds divided by 16. (EntitySpeedY * 16) is
+  ; added to EntitySpeedYAcc and the carry is used to move the entity.
   ds $10
 
 wEntitiesStatusTable:: ; C280
@@ -518,10 +522,15 @@ wEntitiesPosZTable:: ; C310
   ds $10
 
 wEntitiesSpeedZTable:: ; C320
-  ; Positive numbers increase the altitude, negative numbers decrease it
+  ; Z Velocity of visible entities
+  ;
+  ; bits 0-3: Number of pixels to move every 16 frames
+  ; bits 4-7: Number of pixels to move every frame, plus value calculated from low nibble
   ds $10
 
-wEntitiesUnknowTableK:: ; C330
+wEntitiesSpeedZAccTable:: ; C330
+  ; Used as a way to give entities speeds divided by 16. (EntitySpeedZ * 16) is
+  ; added to EntitySpeedZAcc and the carry is used to move the entity.
   ds $10
 
 wEntitiesPhysicsFlagsTable:: ; C340

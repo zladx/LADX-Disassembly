@@ -145,7 +145,7 @@ jr_006_5085:
     call ClearEntitySpeed                         ; $5090: $CD $7F $3D
 
 jr_006_5093:
-    call func_006_6541                            ; $5093: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $5093: $CD $41 $65
     call label_3B23                               ; $5096: $CD $23 $3B
 
 func_006_5099::
@@ -192,7 +192,7 @@ HinoxState3Handler::
     ld   [hl], b                                  ; $50D6: $70
 
 jr_006_50D7:
-    call func_006_6541                            ; $50D7: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $50D7: $CD $41 $65
     call label_3B23                               ; $50DA: $CD $23 $3B
     call func_006_6594                            ; $50DD: $CD $94 $65
     add  $18                                      ; $50E0: $C6 $18

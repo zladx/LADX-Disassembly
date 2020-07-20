@@ -15,10 +15,10 @@ DroppableFairyEntityHandler::
     rlca                                          ; $6175: $07
     and  $01                                      ; $6176: $E6 $01
     call SetEntitySpriteVariant                   ; $6178: $CD $0C $3B
-    call func_003_7F25                            ; $617B: $CD $25 $7F
+    call UpdateEntityPosWithSpeed_03              ; $617B: $CD $25 $7F
     call func_003_61C0                            ; $617E: $CD $C0 $61
     call func_003_7893                            ; $6181: $CD $93 $78
-    call func_003_7ED9                            ; $6184: $CD $D9 $7E
+    call GetEntityXDistanceAwayFromLink           ; $6184: $CD $D9 $7E
     ld   a, d                                     ; $6187: $7A
     bit  7, a                                     ; $6188: $CB $7F
     jr   z, jr_003_618C                           ; $618A: $28 $00
@@ -27,7 +27,7 @@ jr_003_618C:
     cp   $20                                      ; $618C: $FE $20
     jr   c, jr_003_619C                           ; $618E: $38 $0C
 
-    call func_003_7EE9                            ; $6190: $CD $E9 $7E
+    call GetEntityYDistanceAwayFromLink           ; $6190: $CD $E9 $7E
     ld   a, d                                     ; $6193: $7A
     bit  7, a                                     ; $6194: $CB $7F
     jr   z, jr_003_6198                           ; $6196: $28 $00

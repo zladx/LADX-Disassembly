@@ -2,7 +2,7 @@ AntiKirbyEntityHandler::
     call func_006_44B6                            ; $423A: $CD $B6 $44
     call func_006_64C6                            ; $423D: $CD $C6 $64
     call func_006_64F7                            ; $4240: $CD $F7 $64
-    call func_006_657A                            ; $4243: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $4243: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $4246: $21 $20 $C3
     add  hl, bc                                   ; $4249: $09
     dec  [hl]                                     ; $424A: $35
@@ -71,7 +71,7 @@ label_006_42A2:
     ld   [hl], $10                                ; $42AB: $36 $10
 
 jr_006_42AD:
-    call func_006_6541                            ; $42AD: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $42AD: $CD $41 $65
     call label_3B23                               ; $42B0: $CD $23 $3B
     ld   hl, wEntitiesDirectionTable              ; $42B3: $21 $80 $C3
     add  hl, bc                                   ; $42B6: $09

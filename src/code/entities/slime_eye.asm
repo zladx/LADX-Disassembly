@@ -124,7 +124,7 @@ jr_004_4A2C:
 SlimeEyeState1Handler::
     call func_004_4DB5                            ; $4A2D: $CD $B5 $4D
     call func_004_7FA3                            ; $4A30: $CD $A3 $7F
-    call func_004_6E03                            ; $4A33: $CD $03 $6E
+    call AddEntityZSpeedToPos_04                            ; $4A33: $CD $03 $6E
     ld   hl, wEntitiesSpeedZTable                                ; $4A36: $21 $20 $C3
     add  hl, bc                                   ; $4A39: $09
     ld   a, [hl]                                  ; $4A3A: $7E

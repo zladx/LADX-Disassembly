@@ -111,7 +111,7 @@ jr_006_6D08:
     ld   [hl], e                                  ; $6D0C: $73
 
 jr_006_6D0D:
-    call func_006_657A                            ; $6D0D: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $6D0D: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $6D10: $21 $20 $C3
     add  hl, bc                                   ; $6D13: $09
     dec  [hl]                                     ; $6D14: $35
@@ -174,7 +174,7 @@ jr_006_6D55:
     jp   IncrementEntityState                     ; $6D65: $C3 $12 $3B
 
 jr_006_6D68:
-    call func_006_654E                            ; $6D68: $CD $4E $65
+    call AddEntitySpeedToPos_06                   ; $6D68: $CD $4E $65
     ldh  a, [hFFE8]                               ; $6D6B: $F0 $E8
     and  a                                        ; $6D6D: $A7
     jr   z, jr_006_6D76                           ; $6D6E: $28 $06
@@ -292,7 +292,7 @@ jr_006_6DFF:
     ld   [hl], a                                  ; $6E03: $77
 
 jr_006_6E04:
-    call func_006_6541                            ; $6E04: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $6E04: $CD $41 $65
     call label_3B23                               ; $6E07: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $6E0A: $21 $A0 $C2
     add  hl, bc                                   ; $6E0D: $09

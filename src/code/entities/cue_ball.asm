@@ -33,7 +33,7 @@ jr_006_4B98:
     call BossIntro                                ; $4BA8: $CD $E8 $3E
     call DecrementEntityIgnoreHitsCountdown       ; $4BAB: $CD $56 $0C
     call label_3B44                               ; $4BAE: $CD $44 $3B
-    call func_006_6541                            ; $4BB1: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $4BB1: $CD $41 $65
     ld   a, [wIsLinkInTheAir]                     ; $4BB4: $FA $46 $C1
     and  a                                        ; $4BB7: $A7
     jr   nz, jr_006_4BE1                          ; $4BB8: $20 $27
@@ -364,4 +364,4 @@ label_006_4E88:
     cp   $06                                      ; $4E97: $FE $06
     ret  nz                                       ; $4E99: $C0
 
-    jp   func_006_6541                            ; $4E9A: $C3 $41 $65
+    jp   UpdateEntityPosWithSpeed_06              ; $4E9A: $C3 $41 $65

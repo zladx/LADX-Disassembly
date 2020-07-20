@@ -44,7 +44,7 @@ jr_005_4557:
     cp   $03                                      ; $4562: $FE $03
     jr   z, jr_005_4580                           ; $4564: $28 $1A
 
-    call func_005_7AEA                            ; $4566: $CD $EA $7A
+    call AddEntityZSpeedToPos_05                  ; $4566: $CD $EA $7A
     ld   hl, wEntitiesSpeedZTable                 ; $4569: $21 $20 $C3
     add  hl, bc                                   ; $456C: $09
     dec  [hl]                                     ; $456D: $35
@@ -206,7 +206,7 @@ func_005_4624::
     jp   IncrementEntityState                     ; $4660: $C3 $12 $3B
 
 func_005_4663::
-    call func_005_7AB1                            ; $4663: $CD $B1 $7A
+    call UpdateEntityPosWithSpeed_05              ; $4663: $CD $B1 $7A
     call label_3B23                               ; $4666: $CD $23 $3B
     ldh  a, [hFFE8]                               ; $4669: $F0 $E8
     and  a                                        ; $466B: $A7
@@ -269,7 +269,7 @@ jr_005_46CD:
     ld   [hl], a                                  ; $46D1: $77
 
 jr_005_46D2:
-    call func_005_7AB1                            ; $46D2: $CD $B1 $7A
+    call UpdateEntityPosWithSpeed_05              ; $46D2: $CD $B1 $7A
     call label_3B23                               ; $46D5: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $46D8: $F0 $E7
     rra                                           ; $46DA: $1F
@@ -345,7 +345,7 @@ jr_005_474D:
 
 func_005_474E::
     call label_3B44                               ; $474E: $CD $44 $3B
-    call func_005_7AB1                            ; $4751: $CD $B1 $7A
+    call UpdateEntityPosWithSpeed_05              ; $4751: $CD $B1 $7A
     ldh  a, [hActiveEntityPosX]                   ; $4754: $F0 $EE
     cp   $A9                                      ; $4756: $FE $A9
     jp   nc, func_005_7B4B                        ; $4758: $D2 $4B $7B

@@ -96,7 +96,7 @@ jr_006_5361:
     call BossIntro                                ; $5364: $CD $E8 $3E
     call label_3B70                               ; $5367: $CD $70 $3B
     call func_006_641A                            ; $536A: $CD $1A $64
-    call func_006_657A                            ; $536D: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $536D: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $5370: $21 $20 $C3
     add  hl, bc                                   ; $5373: $09
     dec  [hl]                                     ; $5374: $35
@@ -275,7 +275,7 @@ jr_006_547E:
     ld   hl, wEntitiesSpeedXTable                 ; $547E: $21 $40 $C2
     add  hl, bc                                   ; $5481: $09
     ld   [hl], e                                  ; $5482: $73
-    jp   func_006_654E                            ; $5483: $C3 $4E $65
+    jp   AddEntitySpeedToPos_06                   ; $5483: $C3 $4E $65
 
 ArmosKnightState3Handler::
     call func_006_64F7                            ; $5486: $CD $F7 $64
@@ -313,7 +313,7 @@ jr_006_54B4:
     ldh  [hJingle], a                             ; $54B9: $E0 $F2
 
 jr_006_54BB:
-    jp   func_006_6541                            ; $54BB: $C3 $41 $65
+    jp   UpdateEntityPosWithSpeed_06              ; $54BB: $C3 $41 $65
 
 ArmosKnightState4Handler::
     call func_006_64F7                            ; $54BE: $CD $F7 $64
@@ -329,7 +329,7 @@ ArmosKnightState4Handler::
     call IncrementEntityState                     ; $54D2: $CD $12 $3B
 
 jr_006_54D5:
-    jp   func_006_6541                            ; $54D5: $C3 $41 $65
+    jp   UpdateEntityPosWithSpeed_06              ; $54D5: $C3 $41 $65
 
 ArmosKnightState5Handler::
     call func_006_64F7                            ; $54D8: $CD $F7 $64

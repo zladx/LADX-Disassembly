@@ -36,7 +36,7 @@ jr_006_73AD:
     call RenderActiveEntitySpritesPair            ; $73B0: $CD $C0 $3B
     call func_006_64C6                            ; $73B3: $CD $C6 $64
     call func_006_64F7                            ; $73B6: $CD $F7 $64
-    call func_006_6541                            ; $73B9: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $73B9: $CD $41 $65
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $73BC: $21 $10 $C4
     add  hl, bc                                   ; $73BF: $09
     ld   [hl], $01                                ; $73C0: $36 $01
@@ -101,7 +101,7 @@ jr_006_741F:
     jp   SetEntitySpriteVariant                   ; $7420: $C3 $0C $3B
 
 func_006_7423::
-    call func_006_657A                            ; $7423: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $7423: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $7426: $21 $20 $C3
     add  hl, bc                                   ; $7429: $09
     dec  [hl]                                     ; $742A: $35

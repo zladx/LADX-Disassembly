@@ -445,14 +445,14 @@ wEntitiesSpeedYTable:: ; C250
   ; bits 4-7: Number of pixels to move every frame, plus value calculated from low nibble
   ds $10
 
-wEntitiesSpeedXCountTable:: ; C260
+wEntitiesSpeedXAccTable:: ; C260
   ; Used as a way to give entities speeds divided by 16. (EntitySpeedX * 16) is
-  ; added to EntitySpeedXCount and the carry is used to move the entity.
+  ; added to EntitySpeedXAcc and the carry is used to move the entity.
   ds $10
 
-wEntitiesSpeedYCountTable:: ; C270
+wEntitiesSpeedYAccTable:: ; C270
   ; Used as a way to give entities speeds divided by 16. (EntitySpeedY * 16) is
-  ; added to EntitySpeedYCount and the carry is used to move the entity.
+  ; added to EntitySpeedYAcc and the carry is used to move the entity.
   ds $10
 
 wEntitiesStatusTable:: ; C280
@@ -528,7 +528,9 @@ wEntitiesSpeedZTable:: ; C320
   ; bits 4-7: Number of pixels to move every frame, plus value calculated from low nibble
   ds $10
 
-wEntitiesSpeedZCountTable:: ; C330
+wEntitiesSpeedZAccTable:: ; C330
+  ; Used as a way to give entities speeds divided by 16. (EntitySpeedZ * 16) is
+  ; added to EntitySpeedZAcc and the carry is used to move the entity.
   ds $10
 
 wEntitiesPhysicsFlagsTable:: ; C340

@@ -3146,7 +3146,7 @@ func_004_6281::
 ._01 dw func_004_6308                             ; $629D
 
 func_004_629F::
-    call func_004_6DD7
+    call AddEntitySpeedToPos_04
     call UpdateEntityYPosWithSpeed_04             ; $62A2: $CD $CD $6D
     ldh  a, [hPressedButtonsMask]                 ; $62A5: $F0 $CB
     and  $01                                      ; $62A7: $E6 $01

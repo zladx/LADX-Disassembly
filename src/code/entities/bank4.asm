@@ -5135,7 +5135,7 @@ func_004_6E1D::
     ld   [hl], a                                  ; $6E2C: $77
     rl   d                                        ; $6E2D: $CB $12
     ld   hl, wEntitiesUnknownTableD               ; $6E2F: $21 $D0 $C2
-    jp   label_004_6DEF                           ; $6E32: $C3 $EF $6D
+    jp   AddEntitySpeedToPos_04.updatePosition    ; $6E32: $C3 $EF $6D
 
 func_004_6E35::
     ld   e, $00                                   ; $6E35: $1E $00

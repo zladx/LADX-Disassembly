@@ -97,7 +97,7 @@ jr_006_7100:
     ld   [hl], a                                  ; $711F: $77
 
 jr_006_7120:
-    jp   func_006_6541                            ; $7120: $C3 $41 $65
+    jp   UpdateEntityPosWithSpeed_06              ; $7120: $C3 $41 $65
 
 label_006_7123:
     ld   hl, Data_006_7071                        ; $7123: $21 $71 $70
@@ -127,7 +127,7 @@ jr_006_714A:
     ld   hl, wEntitiesSpeedZTable                 ; $714A: $21 $20 $C3
     add  hl, bc                                   ; $714D: $09
     ld   [hl], e                                  ; $714E: $73
-    call func_006_657A                            ; $714F: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $714F: $CD $7A $65
     call func_006_64C6                            ; $7152: $CD $C6 $64
     ldh  a, [hActiveEntityState]                  ; $7155: $F0 $F0
     JP_TABLE                                      ; $7157

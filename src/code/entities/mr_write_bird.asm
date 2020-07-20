@@ -44,7 +44,7 @@ jr_006_7266:
     and  a                                        ; $726F: $A7
     jp   z, label_006_7372                        ; $7270: $CA $72 $73
 
-    call func_006_657A                            ; $7273: $CD $7A $65
+    call AddEntityZSpeedToPos_06                  ; $7273: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $7276: $21 $20 $C3
     add  hl, bc                                   ; $7279: $09
     dec  [hl]                                     ; $727A: $35
@@ -115,7 +115,7 @@ jr_006_72E0:
 
 MrWriteBirdState1Handler::
     call func_006_7335                            ; $72E3: $CD $35 $73
-    call func_006_6541                            ; $72E6: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $72E6: $CD $41 $65
     call label_3B23                               ; $72E9: $CD $23 $3B
     ldh  a, [hFFE8]                               ; $72EC: $F0 $E8
     and  a                                        ; $72EE: $A7
@@ -146,7 +146,7 @@ label_006_7308:
     jp   SetEntitySpriteVariant                   ; $730F: $C3 $0C $3B
 
 MrWriteBirdState2Handler::
-    call func_006_6541                            ; $7312: $CD $41 $65
+    call UpdateEntityPosWithSpeed_06              ; $7312: $CD $41 $65
     call label_3B23                               ; $7315: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $7318: $F0 $E7
     and  $01                                      ; $731A: $E6 $01

@@ -526,7 +526,7 @@ jr_036_4329:
 
     ld   a, $12                                   ; $4335: $3E $12
     ldh  [hActiveEntityState], a                  ; $4337: $E0 $F0
-    call func_036_6C07                            ; $4339: $CD $07 $6C
+    call SetEntityState                           ; $4339: $CD $07 $6C
 
 jr_036_433C:
     ldh  a, [hActiveEntityState]                  ; $433C: $F0 $F0
@@ -652,7 +652,7 @@ jr_036_4405:
     add  hl, bc                                   ; $4414: $09
     ld   [hl], a                                  ; $4415: $77
     ld   a, $07                                   ; $4416: $3E $07
-    call func_036_6C07                            ; $4418: $CD $07 $6C
+    call SetEntityState                           ; $4418: $CD $07 $6C
     ret                                           ; $441B: $C9
 
 func_036_441C::
@@ -770,7 +770,7 @@ func_036_44A4::
 func_036_44B3::
     call func_036_4365                            ; $44B3: $CD $65 $43
     ld   a, $0C                                   ; $44B6: $3E $0C
-    call func_036_6C07                            ; $44B8: $CD $07 $6C
+    call SetEntityState                           ; $44B8: $CD $07 $6C
     ld   hl, wEntitiesPrivateState1Table          ; $44BB: $21 $B0 $C2
     add  hl, bc                                   ; $44BE: $09
     xor  a                                        ; $44BF: $AF
@@ -870,7 +870,7 @@ jr_036_4542:
 
     call_open_dialog $294                         ; $454C
     ld   a, $07                                   ; $4551: $3E $07
-    call func_036_6C07                            ; $4553: $CD $07 $6C
+    call SetEntityState                           ; $4553: $CD $07 $6C
     ret                                           ; $4556: $C9
 
 func_036_4557::
@@ -1020,7 +1020,7 @@ jr_036_4622:
     ld   a, $07                                   ; $4625: $3E $07
 
 jr_036_4627:
-    call func_036_6C07                            ; $4627: $CD $07 $6C
+    call SetEntityState                           ; $4627: $CD $07 $6C
     ret                                           ; $462A: $C9
 
 func_036_462B::
@@ -2094,7 +2094,7 @@ func_036_4C82::
     ld   a, $20                                   ; $4C91: $3E $20
     call func_036_6C83                            ; $4C93: $CD $83 $6C
     xor  a                                        ; $4C96: $AF
-    call func_036_6C07                            ; $4C97: $CD $07 $6C
+    call SetEntityState                           ; $4C97: $CD $07 $6C
     ld   hl, wEntitiesSpeedZTable                 ; $4C9A: $21 $20 $C3
     add  hl, bc                                   ; $4C9D: $09
     ld   a, [hl]                                  ; $4C9E: $7E
@@ -2484,7 +2484,7 @@ func_036_4EA2::
 
 jr_036_4EE4:
     ld   a, $04                                   ; $4EE4: $3E $04
-    call func_036_6C07                            ; $4EE6: $CD $07 $6C
+    call SetEntityState                           ; $4EE6: $CD $07 $6C
     ret                                           ; $4EE9: $C9
 
 Data_036_4EEA::
@@ -2833,7 +2833,7 @@ func_036_5134::
 jr_036_5148:
     call_open_dialog $25C                         ; $5148
     ld   a, $01                                   ; $514D: $3E $01
-    call func_036_6C07                            ; $514F: $CD $07 $6C
+    call SetEntityState                           ; $514F: $CD $07 $6C
     ret                                           ; $5152: $C9
 
 func_036_5153::
@@ -3521,7 +3521,7 @@ func_036_55B1::
     ld   a, $20                                   ; $55D5: $3E $20
     call func_036_6C83                            ; $55D7: $CD $83 $6C
     ld   a, $07                                   ; $55DA: $3E $07
-    call func_036_6C07                            ; $55DC: $CD $07 $6C
+    call SetEntityState                           ; $55DC: $CD $07 $6C
     ret                                           ; $55DF: $C9
 
 jr_036_55E0:
@@ -3737,7 +3737,7 @@ jr_036_5736:
     xor  a                                        ; $5736: $AF
     ld   [hl], a                                  ; $5737: $77
     ld   a, $05                                   ; $5738: $3E $05
-    call func_036_6C07                            ; $573A: $CD $07 $6C
+    call SetEntityState                           ; $573A: $CD $07 $6C
     ret                                           ; $573D: $C9
 
 func_036_573E::
@@ -3795,7 +3795,7 @@ func_036_5779::
     ld   a, $20                                   ; $5784: $3E $20
     call func_036_6C83                            ; $5786: $CD $83 $6C
     ld   a, $03                                   ; $5789: $3E $03
-    call func_036_6C07                            ; $578B: $CD $07 $6C
+    call SetEntityState                           ; $578B: $CD $07 $6C
     ret                                           ; $578E: $C9
 
 func_036_578F::
@@ -3848,7 +3848,7 @@ func_036_57C8::
     xor  a                                        ; $57D7: $AF
     ld   [hl], a                                  ; $57D8: $77
     ld   a, $09                                   ; $57D9: $3E $09
-    call func_036_6C07                            ; $57DB: $CD $07 $6C
+    call SetEntityState                           ; $57DB: $CD $07 $6C
     call GetEntityTransitionCountdown             ; $57DE: $CD $05 $0C
     jr   nz, jr_036_57E6                          ; $57E1: $20 $03
 
@@ -4080,7 +4080,7 @@ func_036_5912::
 
 jr_036_592A:
     ld   a, $03                                   ; $592A: $3E $03
-    call func_036_6C07                            ; $592C: $CD $07 $6C
+    call SetEntityState                           ; $592C: $CD $07 $6C
 
 jr_036_592F:
     ret                                           ; $592F: $C9
@@ -4092,7 +4092,7 @@ func_036_5930::
 
     call func_036_6C0D                            ; $5936: $CD $0D $6C
     ld   a, $03                                   ; $5939: $3E $03
-    call func_036_6C07                            ; $593B: $CD $07 $6C
+    call SetEntityState                           ; $593B: $CD $07 $6C
 
 jr_036_593E:
     ret                                           ; $593E: $C9
@@ -4182,7 +4182,7 @@ jr_036_59B3:
     ld   a, $01                                   ; $59B8: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $59BA: $E0 $A1
     ld   a, $05                                   ; $59BC: $3E $05
-    call func_036_6C07                            ; $59BE: $CD $07 $6C
+    call SetEntityState                           ; $59BE: $CD $07 $6C
     pop  af                                       ; $59C1: $F1
     ret                                           ; $59C2: $C9
 
@@ -4266,12 +4266,12 @@ jr_036_5A2B:
     call SetEntitySpriteVariant                   ; $5A2D: $CD $0C $3B
     call_open_dialog $265                         ; $5A30
     ld   a, $03                                   ; $5A35: $3E $03
-    call func_036_6C07                            ; $5A37: $CD $07 $6C
+    call SetEntityState                           ; $5A37: $CD $07 $6C
     ret                                           ; $5A3A: $C9
 
 func_036_5A3B::
     xor  a                                        ; $5A3B: $AF
-    call func_036_6C07                            ; $5A3C: $CD $07 $6C
+    call SetEntityState                           ; $5A3C: $CD $07 $6C
     ret                                           ; $5A3F: $C9
 
 func_036_5A40::
@@ -4326,7 +4326,7 @@ func_036_5A87::
     jr   nz, jr_036_5A6A                          ; $5A8D: $20 $DB
 
     xor  a                                        ; $5A8F: $AF
-    call func_036_6C07                            ; $5A90: $CD $07 $6C
+    call SetEntityState                           ; $5A90: $CD $07 $6C
     ret                                           ; $5A93: $C9
 
 Data_036_5A94:
@@ -4679,7 +4679,7 @@ jr_036_5CD9:
     add  hl, bc                                   ; $5CE1: $09
     ld   [hl], $06                                ; $5CE2: $36 $06
     ld   a, $08                                   ; $5CE4: $3E $08
-    call func_036_6C07                            ; $5CE6: $CD $07 $6C
+    call SetEntityState                           ; $5CE6: $CD $07 $6C
     and  a                                        ; $5CE9: $A7
     ret                                           ; $5CEA: $C9
 
@@ -4729,7 +4729,7 @@ AvalaunchState3Handler::
     add  hl, bc                                   ; $5D30: $09
     ld   [hl], $00                                ; $5D31: $36 $00
     ld   a, $09                                   ; $5D33: $3E $09
-    call func_036_6C07                            ; $5D35: $CD $07 $6C
+    call SetEntityState                           ; $5D35: $CD $07 $6C
     ret                                           ; $5D38: $C9
 
 jr_036_5D39:
@@ -4812,7 +4812,7 @@ AvalaunchState5Handler::
     ld   a, $30                                   ; $5DB8: $3E $30
     call func_036_6C83                            ; $5DBA: $CD $83 $6C
     ld   a, $03                                   ; $5DBD: $3E $03
-    call func_036_6C07                            ; $5DBF: $CD $07 $6C
+    call SetEntityState                           ; $5DBF: $CD $07 $6C
 
 jr_036_5DC2:
     ret                                           ; $5DC2: $C9
@@ -4869,7 +4869,7 @@ AvalaunchState7Handler::
     ld   a, $30                                   ; $5E11: $3E $30
     call func_036_6C83                            ; $5E13: $CD $83 $6C
     ld   a, $03                                   ; $5E16: $3E $03
-    call func_036_6C07                            ; $5E18: $CD $07 $6C
+    call SetEntityState                           ; $5E18: $CD $07 $6C
     ret                                           ; $5E1B: $C9
 
 AvalaunchState8Handler::
@@ -5089,7 +5089,7 @@ jr_036_5F43:
     and  $01                                      ; $5F50: $E6 $01
     ld   [hl], a                                  ; $5F52: $77
     ld   a, $03                                   ; $5F53: $3E $03
-    call func_036_6C07                            ; $5F55: $CD $07 $6C
+    call SetEntityState                           ; $5F55: $CD $07 $6C
 
 jr_036_5F58:
     ret                                           ; $5F58: $C9
@@ -5280,7 +5280,7 @@ func_036_6065::
     jr   z, jr_036_607A                           ; $606B: $28 $0D
 
     ld   a, $03                                   ; $606D: $3E $03
-    call func_036_6C07                            ; $606F: $CD $07 $6C
+    call SetEntityState                           ; $606F: $CD $07 $6C
     ld   hl, wEntitiesHealthGroup                 ; $6072: $21 $D0 $C4
     add  hl, bc                                   ; $6075: $09
     ld   [hl], $00                                ; $6076: $36 $00
@@ -5325,7 +5325,7 @@ jr_036_60A2:
 
 jr_036_60AD:
     ld   a, $02                                   ; $60AD: $3E $02
-    call func_036_6C07                            ; $60AF: $CD $07 $6C
+    call SetEntityState                           ; $60AF: $CD $07 $6C
 
 jr_036_60B2:
     ret                                           ; $60B2: $C9
@@ -5531,7 +5531,7 @@ jr_036_61AA:
     ld   a, $10                                   ; $61B5: $3E $10
     call func_036_6C83                            ; $61B7: $CD $83 $6C
     xor  a                                        ; $61BA: $AF
-    call func_036_6C07                            ; $61BB: $CD $07 $6C
+    call SetEntityState                           ; $61BB: $CD $07 $6C
     ld   a, [wHasPlacedBomb]                      ; $61BE: $FA $4E $C1
     and  a                                        ; $61C1: $A7
     jr   nz, jr_036_6205                          ; $61C2: $20 $41
@@ -5801,7 +5801,7 @@ jr_036_6335:
     xor  a                                        ; $6342: $AF
     ld   [hl], a                                  ; $6343: $77
     ld   a, $00                                   ; $6344: $3E $00
-    call func_036_6C07                            ; $6346: $CD $07 $6C
+    call SetEntityState                           ; $6346: $CD $07 $6C
     ret                                           ; $6349: $C9
 
 jr_036_634A:
@@ -5845,7 +5845,7 @@ jr_036_636C:
     xor  a                                        ; $6375: $AF
     ld   [hl], a                                  ; $6376: $77
     ld   a, $00                                   ; $6377: $3E $00
-    call func_036_6C07                            ; $6379: $CD $07 $6C
+    call SetEntityState                           ; $6379: $CD $07 $6C
 
 jr_036_637C:
     ld   a, $04                                   ; $637C: $3E $04
@@ -6040,7 +6040,7 @@ jr_036_64A4:
     and  $DF                                      ; $64B1: $E6 $DF
     ld   [hl], a                                  ; $64B3: $77
     ld   a, $01                                   ; $64B4: $3E $01
-    call func_036_6C07                            ; $64B6: $CD $07 $6C
+    call SetEntityState                           ; $64B6: $CD $07 $6C
 
 jr_036_64B9:
     ret                                           ; $64B9: $C9
@@ -6115,7 +6115,7 @@ ColorGhoulStateBHandler::
     jr   nz, label_036_6528                       ; $6519: $20 $0D
 
     ld   a, $01                                   ; $651B: $3E $01
-    call func_036_6C07                            ; $651D: $CD $07 $6C
+    call SetEntityState                           ; $651D: $CD $07 $6C
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6520: $21 $40 $C3
     add  hl, bc                                   ; $6523: $09
     ld   a, [hl]                                  ; $6524: $7E
@@ -6316,7 +6316,7 @@ ColorShellState0Handler::
     ld   a, $40                                   ; $66A6: $3E $40
     call func_036_6C83                            ; $66A8: $CD $83 $6C
     ld   a, $01                                   ; $66AB: $3E $01
-    call func_036_6C07                            ; $66AD: $CD $07 $6C
+    call SetEntityState                           ; $66AD: $CD $07 $6C
 
 jr_036_66B0:
     call func_036_6B8A                            ; $66B0: $CD $8A $6B
@@ -6328,7 +6328,7 @@ jr_036_66B0:
     jp   nc, label_036_66C5                       ; $66BD: $D2 $C5 $66
 
     ld   a, $01                                   ; $66C0: $3E $01
-    call func_036_6C07                            ; $66C2: $CD $07 $6C
+    call SetEntityState                           ; $66C2: $CD $07 $6C
 
 label_036_66C5:
     ret                                           ; $66C5: $C9
@@ -6468,7 +6468,7 @@ ColorShellState1Handler::
     ld   a, $01                                   ; $677D: $3E $01
 
 jr_036_677F:
-    call func_036_6C07                            ; $677F: $CD $07 $6C
+    call SetEntityState                           ; $677F: $CD $07 $6C
     call func_036_6B8A                            ; $6782: $CD $8A $6B
     cp   $20                                      ; $6785: $FE $20
     jr   nc, label_036_679F                       ; $6787: $30 $16
@@ -6482,7 +6482,7 @@ jr_036_677F:
     ld   a, $20                                   ; $6795: $3E $20
     call func_036_6C83                            ; $6797: $CD $83 $6C
     ld   a, $02                                   ; $679A: $3E $02
-    call func_036_6C07                            ; $679C: $CD $07 $6C
+    call SetEntityState                           ; $679C: $CD $07 $6C
 
 label_036_679F:
     call func_036_6C15                            ; $679F: $CD $15 $6C
@@ -6494,7 +6494,7 @@ ColorShellState2Handler::
 
     ld   [hl], $18                                ; $67A8: $36 $18
     ld   a, $03                                   ; $67AA: $3E $03
-    call func_036_6C07                            ; $67AC: $CD $07 $6C
+    call SetEntityState                           ; $67AC: $CD $07 $6C
     jr   jr_036_67D1                              ; $67AF: $18 $20
 
 Data_036_67B1::
@@ -6505,7 +6505,7 @@ ColorShellState3Handler::
     jr   nz, jr_036_67C8                          ; $67B8: $20 $0E
 
     ld   a, $01                                   ; $67BA: $3E $01
-    call func_036_6C07                            ; $67BC: $CD $07 $6C
+    call SetEntityState                           ; $67BC: $CD $07 $6C
     xor  a                                        ; $67BF: $AF
     call PointHLToEntitySpeedX                    ; $67C0: $CD $EE $6B
     ld   [hl], a                                  ; $67C3: $77
@@ -6554,7 +6554,7 @@ jr_036_67F1:
     or   $80                                      ; $67FE: $F6 $80
     ld   [hl], a                                  ; $6800: $77
     ld   a, $04                                   ; $6801: $3E $04
-    call func_036_6C07                            ; $6803: $CD $07 $6C
+    call SetEntityState                           ; $6803: $CD $07 $6C
 
 jr_036_6806:
     ret                                           ; $6806: $C9
@@ -6602,7 +6602,7 @@ ColorShellState5Handler::
     or   $80                                      ; $6835: $F6 $80
     ld   [hl], a                                  ; $6837: $77
     ld   a, $04                                   ; $6838: $3E $04
-    call func_036_6C07                            ; $683A: $CD $07 $6C
+    call SetEntityState                           ; $683A: $CD $07 $6C
     jr   jr_036_6856                              ; $683D: $18 $17
 
 jr_036_683F:
@@ -6619,7 +6619,7 @@ jr_036_683F:
     and  $7F                                      ; $684E: $E6 $7F
     ld   [hl], a                                  ; $6850: $77
     ld   a, $01                                   ; $6851: $3E $01
-    call func_036_6C07                            ; $6853: $CD $07 $6C
+    call SetEntityState                           ; $6853: $CD $07 $6C
 
 jr_036_6856:
     ret                                           ; $6856: $C9
@@ -6687,7 +6687,7 @@ ColorShellState8Handler::
     jr   nz, jr_036_68C3                          ; $68A4: $20 $1D
 
     ld   a, $0C                                   ; $68A6: $3E $0C
-    call func_036_6C07                            ; $68A8: $CD $07 $6C
+    call SetEntityState                           ; $68A8: $CD $07 $6C
     ld   hl, wEntitiesPhysicsFlagsTable           ; $68AB: $21 $40 $C3
     add  hl, bc                                   ; $68AE: $09
     ld   a, [hl]                                  ; $68AF: $7E
@@ -6724,7 +6724,7 @@ jr_036_68D3:
     ld   a, $18                                   ; $68E1: $3E $18
     call func_036_6C83                            ; $68E3: $CD $83 $6C
     ld   a, $09                                   ; $68E6: $3E $09
-    call func_036_6C07                            ; $68E8: $CD $07 $6C
+    call SetEntityState                           ; $68E8: $CD $07 $6C
 
 jr_036_68EB:
     ret                                           ; $68EB: $C9
@@ -6757,7 +6757,7 @@ jr_036_68FB:
     call PointHLToEntitySpeedX                    ; $6914: $CD $EE $6B
     sra  [hl]                                     ; $6917: $CB $2E
     ld   a, $0A                                   ; $6919: $3E $0A
-    call func_036_6C07                            ; $691B: $CD $07 $6C
+    call SetEntityState                           ; $691B: $CD $07 $6C
 
 jr_036_691E:
     ret                                           ; $691E: $C9
@@ -6793,7 +6793,7 @@ ColorShellStateBHandler::
     call PointHLToEntitySpeedX                    ; $694A: $CD $EE $6B
     ld   [hl], a                                  ; $694D: $77
     ld   a, $01                                   ; $694E: $3E $01
-    call func_036_6C07                            ; $6950: $CD $07 $6C
+    call SetEntityState                           ; $6950: $CD $07 $6C
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6953: $21 $40 $C3
     add  hl, bc                                   ; $6956: $09
     ld   a, [hl]                                  ; $6957: $7E

@@ -733,49 +733,65 @@ jr_027_7B16:
     ld   [hl], a                                  ; $7B16: $77
     ret                                           ; $7B17: $C9
 
-func_027_7B18::
-    call func_027_7B25                            ; $7B18: $CD $25 $7B
+UpdateEntityPosWithSpeed_27::
+    call AddEntitySpeedToPos_27                   ; $7B18: $CD $25 $7B
     push bc                                       ; $7B1B: $C5
     ld   a, c                                     ; $7B1C: $79
     add  $10                                      ; $7B1D: $C6 $10
     ld   c, a                                     ; $7B1F: $4F
-    call func_027_7B25                            ; $7B20: $CD $25 $7B
+    call AddEntitySpeedToPos_27                   ; $7B20: $CD $25 $7B
     pop  bc                                       ; $7B23: $C1
     ret                                           ; $7B24: $C9
 
-func_027_7B25::
+; Update the entity's position using its speed.
+;
+; The low nibble of the value in the entity speed tables is the
+; number of pixels to move within 16 frames. For example, if it's
+; 8, the entity will move 1 pixel every other frame (8/16).
+;
+; The high nibble of the value is the number of pixels to normally
+; move, in addition to the carry from the SpeedAccTables.
+;
+; Inputs:
+;   bc  entity index
+AddEntitySpeedToPos_27::
     ld   hl, wEntitiesSpeedXTable                 ; $7B25: $21 $40 $C2
     add  hl, bc                                   ; $7B28: $09
     ld   a, [hl]                                  ; $7B29: $7E
     and  a                                        ; $7B2A: $A7
-    jr   z, jr_027_7B50                           ; $7B2B: $28 $23
+    ; No need to update the position if it's not moving
+    jr   z, .return                               ; $7B2B: $28 $23
 
     push af                                       ; $7B2D: $F5
+    ; Multiply speed by 16 so the carry is set if greater than $0F
     swap a                                        ; $7B2E: $CB $37
     and  $F0                                      ; $7B30: $E6 $F0
-    ld   hl, wEntitiesSpeedXCountTable            ; $7B32: $21 $60 $C2
+    ld   hl, wEntitiesSpeedXAccTable              ; $7B32: $21 $60 $C2
     add  hl, bc                                   ; $7B35: $09
     add  [hl]                                     ; $7B36: $86
     ld   [hl], a                                  ; $7B37: $77
+    ; Save carry in bit 0 of d
     rl   d                                        ; $7B38: $CB $12
     ld   hl, wEntitiesPosXTable                   ; $7B3A: $21 $00 $C2
     add  hl, bc                                   ; $7B3D: $09
     pop  af                                       ; $7B3E: $F1
+    ; Sign extension for high nibble
     ld   e, $00                                   ; $7B3F: $1E $00
     bit  7, a                                     ; $7B41: $CB $7F
-    jr   z, jr_027_7B47                           ; $7B43: $28 $02
+    jr   z, .positive                             ; $7B43: $28 $02
 
     ld   e, $F0                                   ; $7B45: $1E $F0
 
-jr_027_7B47:
+.positive
     swap a                                        ; $7B47: $CB $37
     and  $0F                                      ; $7B49: $E6 $0F
     or   e                                        ; $7B4B: $B3
+    ; Get carry back from d
     rr   d                                        ; $7B4C: $CB $1A
     adc  [hl]                                     ; $7B4E: $8E
     ld   [hl], a                                  ; $7B4F: $77
 
-jr_027_7B50:
+.return
     ret                                           ; $7B50: $C9
 
 label_027_7B51:

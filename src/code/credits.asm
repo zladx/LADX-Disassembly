@@ -6620,12 +6620,10 @@ UpdateEntityYPosWithSpeed_17::
 
 ; Update the entity's position using its speed.
 ;
-; The low nibble of the value in the entity speed tables is the
-; number of pixels to move within 16 frames. For example, if it's
-; 8, the entity will move 1 pixel every other frame (8/16).
-;
-; The high nibble of the value is the number of pixels to normally
-; move, in addition to the carry from the SpeedAccTables.
+; The values in the entity speed tables are the number of pixels to
+; move within 16 frames. For example, if it's 8, the entity will move
+; 1 pixel every other frame (8/16). If it's -16, the entity will move
+; -1 pixel every frame (-16/16).
 ;
 ; Inputs:
 ;   bc  entity index

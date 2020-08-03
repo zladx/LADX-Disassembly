@@ -489,7 +489,7 @@ jr_019_434A:
     xor  a                                        ; $434B: $AF
     ld   [wC167], a                               ; $434C: $EA $67 $C1
     call ClearEntityStatus_19                            ; $434F: $CD $61 $7E
-    jp   label_C9E                                ; $4352: $C3 $9E $0C
+    jp   disableMovementInTransition              ; $4352: $C3 $9E $0C
 
 jr_019_4355:
     ld   hl, hLinkInteractiveMotionBlocked        ; $4355: $21 $A1 $FF
@@ -1197,7 +1197,7 @@ jr_019_48AC:
     and  $F0                                      ; $48C1: $E6 $F0
     or   e                                        ; $48C3: $B3
     ld   [wWarp0PositionTileIndex], a             ; $48C4: $EA $16 $D4
-    jp   label_C83                                ; $48C7: $C3 $83 $0C
+    jp   ApplyMapFadeOutTransition                ; $48C7: $C3 $83 $0C
 
 Data_019_48CA::
     db   $58, $01, $5A, $01, $58, $01, $5C, $01, $5A, $21, $58, $21, $5C, $21, $58, $21
@@ -4210,7 +4210,7 @@ func_019_5DAC::
     ld   [$D475], a                               ; $5DE8: $EA $75 $D4
     ld   a, $66                                   ; $5DEB: $3E $66
     ld   [wWarp0PositionTileIndex], a             ; $5DED: $EA $16 $D4
-    call label_C83                                ; $5DF0: $CD $83 $0C
+    call ApplyMapFadeOutTransition                ; $5DF0: $CD $83 $0C
     xor  a                                        ; $5DF3: $AF
     ld   [wC167], a                               ; $5DF4: $EA $67 $C1
 
@@ -4670,7 +4670,7 @@ func_019_60A5::
     ld   [wGhostSeeksGrave], a                    ; $60A7: $EA $7A $DB
     call func_019_7F0E                            ; $60AA: $CD $0E $7F
     call ClearEntityStatus_19                     ; $60AD: $CD $61 $7E
-    jp   ApplyMapFadeOutTransition                ; $60B0: $C3 $7D $0C
+    jp   ApplyMapFadeOutTransitionWithNoise       ; $60B0: $C3 $7D $0C
 
     nop
 

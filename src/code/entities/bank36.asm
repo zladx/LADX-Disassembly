@@ -3256,7 +3256,7 @@ func_036_544E::
     ret  nz                                       ; $5455: $C0
 
     call UnloadEntity                             ; $5456: $CD $8D $3F
-    call label_C9E                                ; $5459: $CD $9E $0C
+    call disableMovementInTransition              ; $5459: $CD $9E $0C
     ret                                           ; $545C: $C9
 
 func_036_545D::

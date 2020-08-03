@@ -2334,7 +2334,7 @@ jr_002_507A:
     ld   [wWarp0DestinationX], a                  ; $5096: $EA $04 $D4
     ld   a, [wLinkMotionState]                    ; $5099: $FA $1C $C1
     ld   [$D463], a                               ; $509C: $EA $63 $D4
-    jp   ApplyMapFadeOutTransition                ; $509F: $C3 $7D $0C
+    jp   ApplyMapFadeOutTransitionWithNoise       ; $509F: $C3 $7D $0C
 
 jr_002_50A2:
     ret                                           ; $50A2: $C9
@@ -2354,7 +2354,7 @@ LinkMotionUnknownHandler::
     ret  c                                        ; $50B9: $D8
 
 jr_002_50BA:
-    call label_C83                                ; $50BA: $CD $83 $0C
+    call ApplyMapFadeOutTransition                ; $50BA: $CD $83 $0C
     call ClearLinkPositionIncrement               ; $50BD: $CD $8E $17
     ldh  [hLinkPositionZ], a                      ; $50C0: $E0 $A2
     ldh  [$FFA3], a                               ; $50C2: $E0 $A3
@@ -2458,7 +2458,7 @@ jr_002_515C:
     call ClearLinkPositionIncrement               ; $515F: $CD $8E $17
     ldh  [$FFA3], a                               ; $5162: $E0 $A3
     ld   [wIsLinkInTheAir], a                     ; $5164: $EA $46 $C1
-    jp   label_C83                                ; $5167: $C3 $83 $0C
+    jp   ApplyMapFadeOutTransition                ; $5167: $C3 $83 $0C
 
 jr_002_516A:
     ld   a, [wIsIndoor]                           ; $516A: $FA $A5 $DB
@@ -2503,7 +2503,7 @@ jr_002_518E:
     ld   [$DBC8], a                               ; $51A2: $EA $C8 $DB
     ld   a, $03                                   ; $51A5: $3E $03
     ldh  [hLinkDirection], a                      ; $51A7: $E0 $9E
-    jp   label_C83                                ; $51A9: $C3 $83 $0C
+    jp   ApplyMapFadeOutTransition                ; $51A9: $C3 $83 $0C
 
 jr_002_51AC:
     call label_002_52B9                           ; $51AC: $CD $B9 $52
@@ -3081,7 +3081,7 @@ jr_002_54BD:
     ld   [wWarp0DestinationY], a                  ; $54D9: $EA $05 $D4
     ld   hl, hJingle                              ; $54DC: $21 $F2 $FF
     ld   [hl], JINGLE_PUZZLE_SOLVED               ; $54DF: $36 $02
-    jp   ApplyMapFadeOutTransition                ; $54E1: $C3 $7D $0C
+    jp   ApplyMapFadeOutTransitionWithNoise       ; $54E1: $C3 $7D $0C
 
 renderTranscientVFXs:
     ld   b, $00                                   ; $54E4: $06 $00
@@ -3176,7 +3176,7 @@ jr_002_552A:
     jr   nz, jr_002_5566                          ; $555E: $20 $06
 
 jr_002_5560:
-    call label_C89                                ; $5560: $CD $89 $0C
+    call ApplyMapFadeOutTransitionWithSound       ; $5560: $CD $89 $0C
     xor  a                                        ; $5563: $AF
     ldh  [$FFAC], a                               ; $5564: $E0 $AC
 
@@ -5267,7 +5267,7 @@ func_002_6A01::
 
     ldh  a, [hJoypadState]                        ; $6A1D: $F0 $CC
     and  $04                                      ; $6A1F: $E6 $04
-    jp   nz, ApplyMapFadeOutTransition            ; $6A21: $C2 $7D $0C
+    jp   nz, ApplyMapFadeOutTransitionWithNoise   ; $6A21: $C2 $7D $0C
 
 jr_002_6A24:
     ld   a, [wIsRunningWithPegasusBoots]          ; $6A24: $FA $4A $C1
@@ -5717,7 +5717,7 @@ CheckPositionForMapTransition::
     cp   $2C                                      ; $6C94: $FE $2C
 
     ; … exit the map.
-    jp   c, ApplyMapFadeOutTransition             ; $6C96: $DA $7D $0C
+    jp   c, ApplyMapFadeOutTransitionWithNoise    ; $6C96: $DA $7D $0C
 .kanaletEnd
 
     ;
@@ -5768,14 +5768,14 @@ CheckPositionForMapTransition::
     ; … and room is $F5 (Hidden fairy grotto)…
     ldh  a, [hMapRoom]                            ; $6CC2: $F0 $F6
     cp   $F5                                      ; $6CC4: $FE $F5
-    jp   z, ApplyMapFadeOutTransition             ; $6CC6: $CA $7D $0C
+    jp   z, ApplyMapFadeOutTransitionWithNoise    ; $6CC6: $CA $7D $0C
 
     ; … or room is $F2 (Water-flooded grotto)…
     cp   $F2                                      ; $6CC9: $FE $F2
     jp   nz, .manualEntryPointsEnd                ; $6CCB: $C2 $5C $6D
 
     ; … exit the map directly.
-    jp   ApplyMapFadeOutTransition                ; $6CCE: $C3 $7D $0C
+    jp   ApplyMapFadeOutTransitionWithNoise       ; $6CCE: $C3 $7D $0C
 
 .isSideScrolling
     ;
@@ -5793,13 +5793,13 @@ CheckPositionForMapTransition::
     jr   z, .jr_002_6D00                          ; $6CDF: $28 $1F
 
     cp   $A3                                      ; $6CE1: $FE $A3
-    jp   z, ApplyMapFadeOutTransition             ; $6CE3: $CA $7D $0C
+    jp   z, ApplyMapFadeOutTransitionWithNoise    ; $6CE3: $CA $7D $0C
 
     cp   $C0                                      ; $6CE6: $FE $C0
-    jp   z, ApplyMapFadeOutTransition             ; $6CE8: $CA $7D $0C
+    jp   z, ApplyMapFadeOutTransitionWithNoise    ; $6CE8: $CA $7D $0C
 
     cp   $C1                                      ; $6CEB: $FE $C1
-    jp   z, ApplyMapFadeOutTransition             ; $6CED: $CA $7D $0C
+    jp   z, ApplyMapFadeOutTransitionWithNoise    ; $6CED: $CA $7D $0C
 
     cp   $FF                                      ; $6CF0: $FE $FF
     jr   nz, .jr_002_6D0A                         ; $6CF2: $20 $16
@@ -5824,7 +5824,7 @@ CheckPositionForMapTransition::
     cp   $02                                      ; $6D0C: $FE $02
     jr   z, .manualEntryPointsEnd                 ; $6D0E: $28 $4C
 
-    jp   ApplyMapFadeOutTransition                ; $6D10: $C3 $7D $0C
+    jp   ApplyMapFadeOutTransitionWithNoise       ; $6D10: $C3 $7D $0C
 
 .horizontalTransition
     ; hLinkPositionX = hLinkFinalPositionX
@@ -5845,13 +5845,13 @@ CheckPositionForMapTransition::
     ;
     ldh  a, [hMapRoom]                            ; $6D1F: $F0 $F6
     cp   $F5                                      ; $6D21: $FE $F5
-    jp   z, label_C83                             ; $6D23: $CA $83 $0C
+    jp   z, ApplyMapFadeOutTransition             ; $6D23: $CA $83 $0C
 
     cp   $FD                                      ; $6D26: $FE $FD
-    jp   z, label_C83                             ; $6D28: $CA $83 $0C
+    jp   z, ApplyMapFadeOutTransition             ; $6D28: $CA $83 $0C
 
     cp   $E9                                      ; $6D2B: $FE $E9
-    jp   z, ApplyMapFadeOutTransition             ; $6D2D: $CA $7D $0C
+    jp   z, ApplyMapFadeOutTransitionWithNoise    ; $6D2D: $CA $7D $0C
 
     cp   $E8                                      ; $6D30: $FE $E8
     jp   z, .return                               ; $6D32: $CA $09 $6E
@@ -6723,7 +6723,7 @@ jr_002_7213:
     ld   a, [wC163]                               ; $721F: $FA $63 $C1
     inc  a                                        ; $7222: $3C
     ld   [$DB10], a                               ; $7223: $EA $10 $DB
-    call label_C9E                                ; $7226: $CD $9E $0C
+    call disableMovementInTransition              ; $7226: $CD $9E $0C
     jp   collisionEnd                             ; $7229: $C3 $54 $74
 
 jr_002_722C:
@@ -6733,9 +6733,9 @@ jr_002_722C:
 
     ld   a, [wIsIndoor]                           ; $7233: $FA $A5 $DB
     and  a                                        ; $7236: $A7
-    jp   nz, label_C89                            ; $7237: $C2 $89 $0C
+    jp   nz, ApplyMapFadeOutTransitionWithSound   ; $7237: $C2 $89 $0C
 
-    jp   ApplyMapFadeOutTransition                ; $723A: $C3 $7D $0C
+    jp   ApplyMapFadeOutTransitionWithNoise       ; $723A: $C3 $7D $0C
 
 label_002_723D:
     ld   a, [$D6F9]                               ; $723D: $FA $F9 $D6
@@ -7190,7 +7190,7 @@ jr_002_74A3:
     ldh  a, [hScratch5]                           ; $74A3: $F0 $DC
     and  $0F                                      ; $74A5: $E6 $0F
     cp   $0C                                      ; $74A7: $FE $0C
-    jp   nc, ApplyMapFadeOutTransition            ; $74A9: $D2 $7D $0C
+    jp   nc, ApplyMapFadeOutTransitionWithNoise   ; $74A9: $D2 $7D $0C
 
 jr_002_74AC:
     ret                                           ; $74AC: $C9

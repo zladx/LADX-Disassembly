@@ -1100,41 +1100,51 @@ LoadRoomTiles::
 
     ; ------------------------------------------------------------
     ;
-    ; Load Sprites tileset
+    ; Select Sprites tileset
+    ; Main theme is data_020_70D3. Final subset is selected by the room/scene
+    ; TODO: multible iterations of commenting needed. This code is total spagetti.
     ;
     ; ------------------------------------------------------------
 
-    ; TODO: document this
-
+    ; $hScratch0 = 0
     xor  a                                        ; $0D91: $AF
     ldh  [hScratch0], a                           ; $0D92: $E0 $D7
-
+    ; e = $hMapRoom
     ldh  a, [hMapRoom]                            ; $0D94: $F0 $F6
     ld   e, a                                     ; $0D96: $5F
+    ; d = 0, but never used
     ld   d, $00                                   ; $0D97: $16 $00
+    ; hl points to tileset data_020_70D3
     ld   hl, data_020_70D3                        ; $0D99: $21 $D3 $70
-
+    ; d = $wIsIndoor
     ld   a, [wIsIndoor]                           ; $0D9C: $FA $A5 $DB
     ld   d, a                                     ; $0D9F: $57
+    ; inc d if MAP_EAGLES_TOWER <= $hMapId > $1A
     ldh  a, [hMapId]                              ; $0DA0: $F0 $F7
+    ; TODO: for which MAP does $1A stands for? Also edit 2 lines above
     cp   $1A                                      ; $0DA2: $FE $1A
-    jr   nc, .label_DAB                           ; $0DA4: $30 $05
+    jr   nc, .skipIncD                            ; $0DA4: $30 $05
     cp   MAP_EAGLES_TOWER                         ; $0DA6: $FE $06
-    jr   c, .label_DAB                            ; $0DA8: $38 $01
+    jr   c, .skipIncD                             ; $0DA8: $38 $01
     inc  d                                        ; $0DAA: $14
 
-.label_DAB
+.skipIncD 
+    ; hl = $data_020_70D3 + room-offset
     add  hl, de                                   ; $0DAB: $19
     ld   e, [hl]                                  ; $0DAC: $5E
+    ; if outside jump to .label_DC1
     ld   a, d                                     ; $0DAD: $7A
     and  a                                        ; $0DAE: $A7
     jr   z, .label_DC1                            ; $0DAF: $28 $10
+    ; if MAP_HOUSE != $hMapId jump to label_DDB
     ldh  a, [hMapId]                              ; $0DB1: $F0 $F7
     cp   MAP_HOUSE                                ; $0DB3: $FE $10
     jr   nz, .label_DDB                           ; $0DB5: $20 $24
+    ; if $B5 != $hMapRoom jump to label_DDB
     ldh  a, [hMapRoom]                            ; $0DB7: $F0 $F6
     cp   $B5                                      ; $0DB9: $FE $B5
     jr   nz, .label_DDB                           ; $0DBB: $20 $1E
+    ; e = 0x3D
     ld   e, $3D                                   ; $0DBD: $1E $3D
     jr   .label_DDB                               ; $0DBF: $18 $1A
 
@@ -1180,6 +1190,13 @@ LoadRoomTiles::
     add  hl, de                                   ; $0DFD: $19
     ld   d, $00                                   ; $0DFE: $16 $00
     ld   bc, $C193                                ; $0E00: $01 $93 $C1
+
+    ; ------------------------------------------------------------
+    ;
+    ; Load selected Sprites tileset
+    ; 
+    ;
+    ; ------------------------------------------------------------
 
 .loop
     ld   e, [hl]                                  ; $0E03: $5E

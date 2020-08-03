@@ -432,17 +432,17 @@ wEntitiesPosYSignTable:: ; C230
   ds $10
 
 wEntitiesSpeedXTable:: ; C240
-  ; X Velocity of visible entities
+  ; X Velocity of visible entities / 16.
   ;
-  ; bits 0-3: Number of pixels to move every 16 frames
-  ; bits 4-7: Number of pixels to move every frame, plus value calculated from low nibble
+  ; The entity will move this number of pixels every 16 frames. For example, if it's 8,
+  ; the entity will move 1 pixel every other frame (8/16).
   ds $10
 
 wEntitiesSpeedYTable:: ; C250
-  ; Y Velocity of visible entities
+  ; Y Velocity of visible entities / 16.
   ;
-  ; bits 0-3: Number of pixels to move every 16 frames
-  ; bits 4-7: Number of pixels to move every frame, plus value calculated from low nibble
+  ; The entity will move this number of pixels every 16 frames. For example, if it's 8,
+  ; the entity will move 1 pixel every other frame (8/16).
   ds $10
 
 wEntitiesSpeedXAccTable:: ; C260
@@ -522,10 +522,10 @@ wEntitiesPosZTable:: ; C310
   ds $10
 
 wEntitiesSpeedZTable:: ; C320
-  ; Z Velocity of visible entities
+  ; Z Velocity of visible entities / 16.
   ;
-  ; bits 0-3: Number of pixels to move every 16 frames
-  ; bits 4-7: Number of pixels to move every frame, plus value calculated from low nibble
+  ; The entity will move this number of pixels every 16 frames. For example, if it's 8,
+  ; the entity will move 1 pixel every other frame (8/16).
   ds $10
 
 wEntitiesSpeedZAccTable:: ; C330

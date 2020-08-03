@@ -8129,7 +8129,7 @@ func_015_7E31::
     ld   a, $7C                                   ; $7E4C: $3E $7C
     ld   [hl], a                                  ; $7E4E: $77
     call ClearEntityStatus_15                        ; $7E4F: $CD $31 $7C
-    jp   label_C9E                                ; $7E52: $C3 $9E $0C
+    jp   disableMovementInTransition              ; $7E52: $C3 $9E $0C
 
 Data_015_7E55:
     db   $58, $00

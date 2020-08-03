@@ -3686,7 +3686,7 @@ SirensInstrumentState2Handler::
     ld   hl, wEntitiesStateTable                  ; $5DF1: $21 $90 $C2
     add  hl, de                                   ; $5DF4: $19
     inc  [hl]                                     ; $5DF5: $34
-    call label_C9E                                ; $5DF6: $CD $9E $0C
+    call disableMovementInTransition              ; $5DF6: $CD $9E $0C
 
     ; Execute some code specific to each dungeon
     ldh  a, [hMapId]                              ; $5DF9: $F0 $F7

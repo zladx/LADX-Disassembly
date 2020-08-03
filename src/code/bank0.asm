@@ -843,32 +843,35 @@ MarkTriggerAsResolved::
     pop  af                                       ; $0C7B: $F1
     ret                                           ; $0C7C: $C9
 
-ApplyMapFadeOutTransition::
+ApplyMapFadeOutTransitionWithNoise::
     ld   a, $30                                   ; $0C7D: $3E $30
     ; Timer that counts down and ends when the track has completely faded out. *Might* be used for the visual effect when entering a house as well.
     ldh  [hMusicFadeOutTimer], a                  ; $0C7F: $E0 $A8
-    jr   label_C9A                                ; $0C81: $18 $17
+    jr   playNoiseStairs                          ; $0C81: $18 $17
 
-label_C83::
+ApplyMapFadeOutTransition::
     ld   a, $30                                   ; $0C83: $3E $30
     ldh  [hMusicFadeOutTimer], a                  ; $0C85: $E0 $A8
-    jr   label_C9E                                ; $0C87: $18 $15
+    jr   disableMovementInTransition              ; $0C87: $18 $15
 
-label_C89::
+ApplyMapFadeOutTransitionWithSound::
+    ; check if wWarp0MapCategory is 1
     ld   a, [wWarp0MapCategory]                   ; $0C89: $FA $01 $D4
     cp   $01                                      ; $0C8C: $FE $01
-    jr   nz, ApplyMapFadeOutTransition            ; $0C8E: $20 $ED
+    jr   nz, ApplyMapFadeOutTransitionWithNoise   ; $0C8E: $20 $ED
+    ; check if outdoors
     ld   a, [wIsIndoor]                           ; $0C90: $FA $A5 $DB
     and  a                                        ; $0C93: $A7
-    jr   z, ApplyMapFadeOutTransition             ; $0C94: $28 $E7
+    jr   z, ApplyMapFadeOutTransitionWithNoise    ; $0C94: $28 $E7
+    ; Link is indoors
     ld   a, $01                                   ; $0C96: $3E $01
     ldh  [hFFBC], a                               ; $0C98: $E0 $BC
 
-label_C9A::
+playNoiseStairs::
     ld   a, NOISE_SFX_STAIRS                      ; $0C9A: $3E $06
     ldh  [hNoiseSfx], a                           ; $0C9C: $E0 $F4
 
-label_C9E::
+disableMovementInTransition::
     ; Prevent Link from moving during the transition
     ld   a, LINK_MOTION_MAP_FADE_OUT              ; $0C9E: $3E $03
     ld   [wLinkMotionState], a                    ; $0CA0: $EA $1C $C1
@@ -1424,7 +1427,7 @@ WorldDefaultHandler::
 
     ; If the countdown reached zero, apply the transition
     jr   nz, .normalFlow                          ; $0F8A: $20 $03
-    jp   ApplyMapFadeOutTransition                ; $0F8C: $C3 $7D $0C
+    jp   ApplyMapFadeOutTransitionWithNoise       ; $0F8C: $C3 $7D $0C
 
 .normalFlow
 
@@ -2762,7 +2765,7 @@ LinkMotionMapFadeOutHandler::
     jr   z, .label_1847                           ; $183E: $28 $07
     xor  a                                        ; $1840: $AF
     ld   [$C3C9], a                               ; $1841: $EA $C9 $C3
-    jp   ApplyMapFadeOutTransition                ; $1844: $C3 $7D $0C
+    jp   ApplyMapFadeOutTransitionWithNoise       ; $1844: $C3 $7D $0C
 
 .label_1847
     call func_1A22                                ; $1847: $CD $22 $1A

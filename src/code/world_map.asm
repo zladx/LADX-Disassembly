@@ -260,7 +260,7 @@ jr_001_57B7::
     jr   nz, jr_001_57FA                        ; If yes, skip this too ; $57C1: $20 $37
     ld   a, GAMEPLAY_WORLD                      ; Otherwise, warp somewhere ; $57C3: $3E $0B
     ld   [wGameplayType], a                       ; $57C5: $EA $95 $DB
-    call ApplyMapFadeOutTransition                ; $57C8: $CD $7D $0C
+    call ApplyMapFadeOutTransitionWithNoise       ; $57C8: $CD $7D $0C
     ld   a, $00                                   ; $57CB: $3E $00
     ld   [wWarp0MapCategory], a                   ; $57CD: $EA $01 $D4
     ld   [wWarp0Map], a                           ; $57D0: $EA $02 $D4

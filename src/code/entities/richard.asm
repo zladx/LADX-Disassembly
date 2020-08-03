@@ -171,4 +171,4 @@ jr_006_40FC:
     ld   a, $70                                   ; $411D: $3E $70
     ld   [hl+], a                                 ; $411F: $22
     call ClearEntityStatus_06                     ; $4120: $CD $DB $65
-    jp   ApplyMapFadeOutTransition                ; $4123: $C3 $7D $0C
+    jp   ApplyMapFadeOutTransitionWithNoise       ; $4123: $C3 $7D $0C

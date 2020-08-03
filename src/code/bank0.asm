@@ -1488,8 +1488,6 @@ WorldDefaultHandler::
     jr   nc, label_1012                           ; $0FFA: $30 $16
     ld   c, $01                                   ; $0FFC: $0E $01
     ld   b, $00                                   ; $0FFE: $06 $00
-
-label_1000::
     ld   e, $00                                   ; $1000: $1E $00
     ldh  a, [hFrameCounter]                       ; $1002: $F0 $E7
     and  $04                                      ; $1004: $E6 $04

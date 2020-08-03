@@ -1777,25 +1777,32 @@ CheckItemsToUse::
     jp   nz, UseItem.return                       ; $11E5: $C2 $ED $12
 
 .pegasusBootsB
+    ; if Pegasus boots are not equiped in slot B check slot A
     ld   a, [wBButtonSlot]                        ; $11E8: $FA $00 $DB
     cp   INVENTORY_PEGASUS_BOOTS                  ; $11EB: $FE $08
     jr   nz, .pegasusBootsA                       ; $11ED: $20 $0F
+    ; reset boots if button not longer pressed down
     ldh  a, [hPressedButtonsMask]                 ; $11EF: $F0 $CB
     and  J_B                                      ; $11F1: $E6 $20
     jr   z, .resetPegasusBootsChargeMeterB        ; $11F3: $28 $05
+    ; use the boots and check for slot A
     call UsePegasusBoots                          ; $11F5: $CD $05 $17
     jr   .pegasusBootsA                           ; $11F8: $18 $04
 
 .resetPegasusBootsChargeMeterB
+    ; $wPegasusBootsChargeMeter = 0
     xor  a                                        ; $11FA: $AF
     ld   [wPegasusBootsChargeMeter], a            ; $11FB: $EA $4B $C1
 
 .pegasusBootsA
+    ; if Pegasus boots are not equiped in slot A check slot A for shield
     ld   a, [wAButtonSlot]                        ; $11FE: $FA $01 $DB
     cp   INVENTORY_PEGASUS_BOOTS                  ; $1201: $FE $08
     jr   nz, .shieldA                             ; $1203: $20 $0F
+    ; reset boots if button not longer pressed down
     ldh  a, [hPressedButtonsMask]                 ; $1205: $F0 $CB
     and  J_A                                      ; $1207: $E6 $10
+    ; use the boots and check for slot A for shield
     jr   z, .resetPegasusBootsChargeMeterA        ; $1209: $28 $05
     call UsePegasusBoots                          ; $120B: $CD $05 $17
     jr   .shieldA                                 ; $120E: $18 $04

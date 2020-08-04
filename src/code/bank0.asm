@@ -1830,33 +1830,44 @@ CheckItemsToUse::
     ld   [wPegasusBootsChargeMeter], a            ; $1211: $EA $4B $C1
 
 .shieldA
+    ; if shield is not equiped in slot A
     ld   a, [wAButtonSlot]                        ; $1214: $FA $01 $DB
     cp   INVENTORY_SHIELD                         ; $1217: $FE $04
-    jr   nz, .shieldBEnd                          ; $1219: $20 $1A
+    jr   nz, .shieldB                             ; $1219: $20 $1A
+    ; update shield status
     ld   a, [wShieldLevel]                        ; $121B: $FA $44 $DB
     ld   [wHasMirrorShield], a                    ; $121E: $EA $5A $C1
+    ; reset shield if button not longer pressed down
     ldh  a, [hPressedButtonsMask]                 ; $1221: $F0 $CB
     and  J_A                                      ; $1223: $E6 $10
-    jr   z, .shieldBEnd                           ; $1225: $28 $0E
+    jr   z, .shieldB                              ; $1225: $28 $0E
+    ; TODO: comment here
     ld   a, [$C1AD]                               ; $1227: $FA $AD $C1
     cp   $01                                      ; $122A: $FE $01
-    jr   z, .shieldBEnd                           ; $122C: $28 $07
+    jr   z, .shieldB                              ; $122C: $28 $07
+    ; TODO: comment here
     cp   $02                                      ; $122E: $FE $02
-    jr   z, .shieldBEnd                           ; $1230: $28 $03
+    jr   z, .shieldB                              ; $1230: $28 $03
+    ; use the shield
     call SetShieldVals                            ; $1232: $CD $40 $13
-.shieldBEnd
 
+.shieldB
+    ; if shield is not equiped in slot B
     ld   a, [wBButtonSlot]                        ; $1235: $FA $00 $DB
     cp   INVENTORY_SHIELD                         ; $1238: $FE $04
-    jr   nz, .shieldAEnd                          ; $123A: $20 $0F
+    jr   nz, .nextItemB                           ; $123A: $20 $0F
+    ; update shield status
     ld   a, [wShieldLevel]                        ; $123C: $FA $44 $DB
     ld   [wHasMirrorShield], a                    ; $123F: $EA $5A $C1
+    ; reset shield if button not longer pressed down
     ldh  a, [hPressedButtonsMask]                 ; $1242: $F0 $CB
     and  J_B                                      ; $1244: $E6 $20
-    jr   z, .shieldAEnd                           ; $1246: $28 $03
+    jr   z, .nextItemB                            ; $1246: $28 $03
+    ; the two checks from A does not apear here == bug?
+    ; use the shield
     call SetShieldVals                            ; $1248: $CD $40 $13
-.shieldAEnd
 
+.nextItemB
     ldh  a, [hJoypadState]                        ; $124B: $F0 $CC
     and  J_B                                      ; $124D: $E6 $20
     jr   z, .jr_125E                              ; $124F: $28 $0D

@@ -2506,6 +2506,7 @@ label_1637::
     ld   a, [$C16A]                               ; $1643: $FA $6A $C1
     cp   $05                                      ; $1646: $FE $05
     jr   nz, label_1653                           ; $1648: $20 $09
+    ; reset sword charge
     xor  a                                        ; $164A: $AF
     ld   [wSwordCharge], a                        ; $164B: $EA $22 $C1
     ld   a, $0C                                   ; $164E: $3E $0C
@@ -2657,6 +2658,7 @@ UsePegasusBoots::
     cp   $20                                      ; $1731: $FE $20
     ret  nz                                       ; $1733: $C0
     ld   [wIsRunningWithPegasusBoots], a          ; $1734: $EA $4A $C1
+    ; reset spin marker and sword charge
     xor  a                                        ; $1737: $AF
     ld   [wIsUsingSpinAttack], a                  ; $1738: $EA $21 $C1
     ld   [wSwordCharge], a                        ; $173B: $EA $22 $C1
@@ -2735,7 +2737,7 @@ ApplyLinkMotionState::
     ld   hl, hScratch3                            ; $17B3: $21 $DA $FF
     ld   [hl], $00                                ; $17B6: $36 $00
     ld   a, [wSwordCharge]                        ; $17B8: $FA $22 $C1
-    cp   $28                                      ; $17BB: $FE $28
+    cp   MAX_SWORD_CHARGE                         ; $17BB: $FE $28
     jr   c, .label_17C6                           ; $17BD: $38 $07
     ldh  a, [hFrameCounter]                       ; $17BF: $F0 $E7
     rla                                           ; $17C1: $17

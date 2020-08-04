@@ -165,6 +165,9 @@ SWORD_ANIMATION_STATE_SWING_MIDDLE equ $03
 SWORD_ANIMATION_STATE_SWING_END    equ $04
 SWORD_ANIMATION_STATE_HOLDING      equ $05
 
+; Charge amount needed for spin attack
+MAX_SWORD_CHARGE equ $28
+
 ; Values for wTransitionGfx
 TRANSITION_GFX_NONE         equ $00 ; no transition
 TRANSITION_GFX_DREAM_SHRINE equ $01 ; wavy transition when sleeping in the Dream Shrine

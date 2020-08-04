@@ -1882,18 +1882,19 @@ CheckItemsToUse::
 .jr_125E
     ldh  a, [hJoypadState]                        ; $125E: $F0 $CC
     and  J_A                                      ; $1260: $E6 $10
-    jr   z, .jr_1275                              ; $1262: $28 $11
+    jr   z, .swordB                               ; $1262: $28 $11
     ld   a, [$C1AD]                               ; $1264: $FA $AD $C1
     cp   $01                                      ; $1267: $FE $01
-    jr   z, .jr_1275                              ; $1269: $28 $0A
+    jr   z, .swordB                               ; $1269: $28 $0A
     cp   $02                                      ; $126B: $FE $02
-    jr   z, .jr_1275                              ; $126D: $28 $06
+    jr   z, .swordB                               ; $126D: $28 $06
 
     ; Use item in A slot
     ld   a, [wAButtonSlot]                        ; $126F: $FA $01 $DB
     call UseItem                                  ; $1272: $CD $9C $12
 
-.jr_1275
+.swordB
+    ; skip if button is not pressed
     ldh  a, [hPressedButtonsMask]                 ; $1275: $F0 $CB
     and  J_B                                      ; $1277: $E6 $20
     jr   z, .jr_1281                              ; $1279: $28 $06

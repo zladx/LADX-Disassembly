@@ -1825,6 +1825,7 @@ CheckItemsToUse::
     jr   .shieldA                                 ; $120E: $18 $04
 
 .resetPegasusBootsChargeMeterA
+    ; $wPegasusBootsChargeMeter = 0
     xor  a                                        ; $1210: $AF
     ld   [wPegasusBootsChargeMeter], a            ; $1211: $EA $4B $C1
 

@@ -59,8 +59,10 @@ Data_007_7BBB::
 ChestWithItemEntityHandler::
     ld   a, $02                                   ; $7BDD: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7BDF: $E0 $A1
+    ; wSwordAnimationState = SWORD_ANIMATION_STATE_NONE
     xor  a                                        ; $7BE1: $AF
     ld   [wSwordAnimationState], a                ; $7BE2: $EA $37 $C1
+    ; wC16A = 0
     ld   [wC16A], a                               ; $7BE5: $EA $6A $C1
     ldh  a, [hActiveEntitySpriteVariant]          ; $7BE8: $F0 $F1
     cp   CHEST_GEL                                ; $7BEA: $FE $22

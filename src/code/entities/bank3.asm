@@ -3109,6 +3109,7 @@ func_003_5A2E::
     ldh  [hLinkAnimationState], a                 ; $5A30: $E0 $9D
     ld   a, $03                                   ; $5A32: $3E $03
     ldh  [hLinkDirection], a                      ; $5A34: $E0 $9E
+    ; reset sword parameter
     xor  a                                        ; $5A36: $AF
     ld   [wSwordAnimationState], a                ; $5A37: $EA $37 $C1
     ld   [wC16A], a                               ; $5A3A: $EA $6A $C1
@@ -6742,6 +6743,7 @@ jr_003_7018:
     ld   [hl], $40                                ; $702A: $36 $40
     ld   a, $40                                   ; $702C: $3E $40
     ld   [$D464], a                               ; $702E: $EA $64 $D4
+    ; reset sword parameter
     xor  a                                        ; $7031: $AF
     ld   [wSwordAnimationState], a                ; $7032: $EA $37 $C1
     ld   [wC16A], a                               ; $7035: $EA $6A $C1

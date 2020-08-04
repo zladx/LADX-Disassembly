@@ -3309,6 +3309,7 @@ jr_007_55DF:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $55F9: $E0 $A1
     ld   a, $03                                   ; $55FB: $3E $03
     ldh  [hLinkDirection], a                      ; $55FD: $E0 $9E
+    ; reset sword parameter
     xor  a                                        ; $55FF: $AF
     ld   [wSwordAnimationState], a                ; $5600: $EA $37 $C1
     ld   [wC16A], a                               ; $5603: $EA $6A $C1

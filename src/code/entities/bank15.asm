@@ -653,6 +653,8 @@ jr_015_469C:
     call UpdateLinkWalkingAnimation_trampoline    ; $46A8: $CD $F0 $0B
     pop  bc                                       ; $46AB: $C1
     call ResetSpinAttack                          ; $46AC: $CD $AF $0C
+    ; a = 0
+    ; wSwordAnimationState = SWORD_ANIMATION_STATE_NONE
     ld   [wSwordAnimationState], a                ; $46AF: $EA $37 $C1
     ld   [wC16A], a                               ; $46B2: $EA $6A $C1
     ret                                           ; $46B5: $C9

@@ -437,6 +437,8 @@ Data_019_42F1::
 
 WarpState3Handler::
     call ResetSpinAttack                          ; $42F5: $CD $AF $0C
+    ; a = 0
+    ; reset parameter to 0
     ld   [wSubtractHealthBuffer], a               ; $42F8: $EA $94 $DB
     ld   [wInvincibilityCounter], a               ; $42FB: $EA $C7 $DB
     ld   [$C13E], a                               ; $42FE: $EA $3E $C1
@@ -7290,6 +7292,7 @@ jr_019_7709:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $772B: $E0 $A1
     ld   a, $03                                   ; $772D: $3E $03
     ldh  [hLinkDirection], a                      ; $772F: $E0 $9E
+    ; reset sword parameter
     xor  a                                        ; $7731: $AF
     ld   [wSwordAnimationState], a                ; $7732: $EA $37 $C1
     ld   [wC16A], a                               ; $7735: $EA $6A $C1

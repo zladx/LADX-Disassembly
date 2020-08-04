@@ -157,6 +157,14 @@ SWORD_DIRECTION_LEFT_TOP     equ $05
 SWORD_DIRECTION_TOP          equ $06
 SWORD_DIRECTION_RIGHT_TOP    equ $07
 
+; Values for wSwordAnimationState
+SWORD_ANIMATION_STATE_NONE         equ $00
+SWORD_ANIMATION_STATE_DRAW         equ $01
+SWORD_ANIMATION_STATE_SWING_START  equ $02
+SWORD_ANIMATION_STATE_SWING_MIDDLE equ $03
+SWORD_ANIMATION_STATE_SWING_END    equ $04
+SWORD_ANIMATION_STATE_HOLDING      equ $05
+
 ; Values for wTransitionGfx
 TRANSITION_GFX_NONE         equ $00 ; no transition
 TRANSITION_GFX_DREAM_SHRINE equ $01 ; wavy transition when sleeping in the Dream Shrine

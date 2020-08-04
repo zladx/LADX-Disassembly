@@ -214,13 +214,14 @@ jr_002_42C7:
 
     ld   a, [wSwordAnimationState]                ; $42EE: $FA $37 $C1
     ld   [wC16A], a                               ; $42F1: $EA $6A $C1
-    cp   $05                                      ; $42F4: $FE $05
+    cp   SWORD_ANIMATION_STATE_HOLDING            ; $42F4: $FE $05
     jr   nz, jr_002_4316                          ; $42F6: $20 $1E
 
     ld   a, [wIsRunningWithPegasusBoots]          ; $42F8: $FA $4A $C1
     and  a                                        ; $42FB: $A7
     jr   nz, jr_002_4333                          ; $42FC: $20 $35
 
+    ; sword animation state = SWORD_ANIMATION_STATE_NONE
     xor  a                                        ; $42FE: $AF
     ld   [wSwordAnimationState], a                ; $42FF: $EA $37 $C1
     ld   a, [wSwordCharge]                        ; $4302: $FA $22 $C1
@@ -859,7 +860,7 @@ label_002_476B:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $477F: $E0 $A1
 
 jr_002_4781:
-    ld   a, $03                                   ; $4781: $3E $03
+    ld   a, SWORD_ANIMATION_STATE_SWING_MIDDLE    ; $4781: $3E $03
     ld   [wSwordAnimationState], a                ; $4783: $EA $37 $C1
     jp   label_002_4827                           ; $4786: $C3 $27 $48
 
@@ -929,6 +930,7 @@ jr_002_47E0:
     and  a                                        ; $47EA: $A7
     jp   nz, label_002_476B                       ; $47EB: $C2 $6B $47
 
+    ; return if wSwordAnimationState == SWORD_ANIMATION_STATE_NONE
     ld   a, [wSwordAnimationState]                ; $47EE: $FA $37 $C1
     and  a                                        ; $47F1: $A7
     ret  z                                        ; $47F2: $C8
@@ -936,7 +938,7 @@ jr_002_47E0:
     ld   hl, wC16E                                ; $47F3: $21 $6E $C1
     ld   [hl], $04                                ; $47F6: $36 $04
     ld   a, [wSwordAnimationState]                ; $47F8: $FA $37 $C1
-    cp   $05                                      ; $47FB: $FE $05
+    cp   SWORD_ANIMATION_STATE_HOLDING            ; $47FB: $FE $05
     jr   nc, jr_002_4789                          ; $47FD: $30 $8A
 
     ld   a, [wIsRunningWithPegasusBoots]          ; $47FF: $FA $4A $C1
@@ -950,11 +952,13 @@ jr_002_4809:
     ld   a, [$C138]                               ; $4809: $FA $38 $C1
     and  a                                        ; $480C: $A7
     jr   nz, jr_002_4823                          ; $480D: $20 $14
-
+    ; go to next sword animation state
     ld   a, [wSwordAnimationState]                ; $480F: $FA $37 $C1
     inc  a                                        ; $4812: $3C
+    ; save new sword animation state
     ld   [wSwordAnimationState], a                ; $4813: $EA $37 $C1
-    cp   $04                                      ; $4816: $FE $04
+    ; if at the end of swinging jump to label_002_48B0
+    cp   SWORD_ANIMATION_STATE_SWING_END          ; $4816: $FE $04
     jp   z, label_002_48B0                        ; $4818: $CA $B0 $48
 
     ld   c, a                                     ; $481B: $4F
@@ -1055,6 +1059,7 @@ label_002_48B0:
     and  a                                        ; $48B7: $A7
     jr   nz, jr_002_48C4                          ; $48B8: $20 $0A
 
+    ; wSwordAnimationState = SWORD_ANIMATION_STATE_NONE
     xor  a                                        ; $48BA: $AF
     ld   [wSwordAnimationState], a                ; $48BB: $EA $37 $C1
     ld   [wC16A], a                               ; $48BE: $EA $6A $C1
@@ -2094,12 +2099,15 @@ ENDC
 
 jr_002_4F3C:
     call ResetSpinAttack                          ; $4F3C: $CD $AF $0C
+    ; a = 0
+    ; reset all states after spin attack
     ldh  [hLinkPositionZ], a                      ; $4F3F: $E0 $A2
     ld   [wIsLinkInTheAir], a                     ; $4F41: $EA $46 $C1
     ld   [$C19B], a                               ; $4F44: $EA $9B $C1
     ld   [wSwordAnimationState], a                ; $4F47: $EA $37 $C1
     ld   [wC16A], a                               ; $4F4A: $EA $6A $C1
     ld   [wC16D], a                               ; $4F4D: $EA $6D $C1
+
     ld   a, [wIndoorRoom]                         ; $4F50: $FA $AE $DB
     ld   [$D46B], a                               ; $4F53: $EA $6B $D4
     ld   hl, wDialogState                         ; $4F56: $21 $9F $C1
@@ -2524,6 +2532,8 @@ HandleGotItemA::
 
 HandleGotItemB::
     call ResetSpinAttack                          ; $51C7: $CD $AF $0C
+    ; a = 0
+    ; reset all states after spin attack
     ld   [wC16A], a                               ; $51CA: $EA $6A $C1
     ld   [wSwordAnimationState], a                ; $51CD: $EA $37 $C1
     ld   [$C13E], a                               ; $51D0: $EA $3E $C1
@@ -5394,10 +5404,11 @@ jr_002_6AD1:
     ld   [wConsecutiveStepsCount], a                               ; $6AD8: $EA $20 $C1
 
 label_002_6ADB:
+    ; if wSwordAnimationState != SWORD_ANIMATION_STATE_NONE jump to jr_002_6AE6
     ld   a, [wSwordAnimationState]                ; $6ADB: $FA $37 $C1
     and  a                                        ; $6ADE: $A7
     jr   nz, jr_002_6AE6                          ; $6ADF: $20 $05
-
+    
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $6AE1: $F0 $A1
     and  a                                        ; $6AE3: $A7
     jr   nz, jr_002_6AFC                          ; $6AE4: $20 $16

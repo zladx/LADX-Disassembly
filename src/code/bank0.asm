@@ -1755,9 +1755,9 @@ CheckItemsToUse::
 .swordEquiped
     ld   a, [wSwordAnimationState]                ; $11AA: $FA $37 $C1
     dec  a                                        ; $11AD: $3D
-    cp   $04                                      ; $11AE: $FE $04
+    cp   SWORD_ANIMATION_STATE_SWING_END          ; $11AE: $FE $04
     jr   c, .shieldEnd                            ; $11B0: $38 $08
-    ld   a, $05                                   ; $11B2: $3E $05
+    ld   a, SWORD_ANIMATION_STATE_HOLDING         ; $11B2: $3E $05
     ld   [wSwordAnimationState], a                ; $11B4: $EA $37 $C1
     ld   [$C16A], a                               ; $11B7: $EA $6A $C1
 
@@ -1782,7 +1782,7 @@ CheckItemsToUse::
     ld   a, [wSwordAnimationState]                ; $11D1: $FA $37 $C1
     and  a                                        ; $11D4: $A7
     jr   z, .checkMotionBlocked                   ; $11D5: $28 $0B
-    cp   $03                                      ; $11D7: $FE $03
+    cp   SWORD_ANIMATION_STATE_SWING_MIDDLE       ; $11D7: $FE $03
     jr   nz, .checkMotionBlocked                  ; $11D9: $20 $07
     ld   a, [$C138]                               ; $11DB: $FA $38 $C1
     cp   $03                                      ; $11DE: $FE $03
@@ -1992,22 +1992,23 @@ UseHookshot::
 ; Inputs:
 ;   a    inventory item
 label_1321::
+    ; if inventory item is not sword, exit
     cp   INVENTORY_SWORD                          ; $1321: $FE $01
     ret  nz                                       ; $1323: $C0
-
+    ; normal attack
     ld   hl, wSwordAnimationState                 ; $1324: $21 $37 $C1
     ld   a, [$C1AD]                               ; $1327: $FA $AD $C1
     and  $03                                      ; $132A: $E6 $03
     or   [hl]                                     ; $132C: $B6
     ret  nz                                       ; $132D: $C0
-
+    ; sword holded
     ld   a, [$C160]                               ; $132E: $FA $60 $C1
     and  a                                        ; $1331: $A7
     ret  nz                                       ; $1332: $C0
 
     xor  a                                        ; $1333: $AF
     ld   [$C1AC], a                               ; $1334: $EA $AC $C1
-    ld   a, $05                                   ; $1337: $3E $05
+    ld   a, SWORD_ANIMATION_STATE_HOLDING         ; $1337: $3E $05
     ld   [wSwordAnimationState], a                ; $1339: $EA $37 $C1
     ld   [$C5B0], a                               ; $133C: $EA $B0 $C5
     ret                                           ; $133F: $C9
@@ -2313,7 +2314,7 @@ UseSword::
     ret  nz                                       ; $152F: $C0
     ld   a, $03                                   ; $1530: $3E $03
     ld   [$C138], a                               ; $1532: $EA $38 $C1
-    ld   a, $01                                   ; $1535: $3E $01
+    ld   a, SWORD_ANIMATION_STATE_DRAW            ; $1535: $3E $01
     ld   [wSwordAnimationState], a                ; $1537: $EA $37 $C1
     ld   [$C5B0], a                               ; $153A: $EA $B0 $C5
     xor  a                                        ; $153D: $AF

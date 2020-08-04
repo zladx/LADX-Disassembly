@@ -53,6 +53,7 @@ CrazyTracyEntityHandler::
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5EC2: $E0 $A1
     ld   a, DIRECTION_DOWN                        ; $5EC4: $3E $03
     ldh  [hLinkDirection], a                      ; $5EC6: $E0 $9E
+    ; reset sword parameter
     xor  a                                        ; $5EC8: $AF
     ld   [wSwordAnimationState], a                ; $5EC9: $EA $37 $C1
     ld   [wC16A], a                               ; $5ECC: $EA $6A $C1

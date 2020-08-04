@@ -6079,7 +6079,7 @@ VireState3Handler::
     ld   a, [hl]                                  ; $6BFB: $7E
     and  a                                        ; $6BFC: $A7
     jr   nz, jr_018_6C27                          ; $6BFD: $20 $28
-
+    ; if wSwordAnimationState == SWORD_ANIMATION_STATE_NONE jump to jr_018_6C27
     ld   a, [wSwordAnimationState]                ; $6BFF: $FA $37 $C1
     and  a                                        ; $6C02: $A7
     jr   z, jr_018_6C27                           ; $6C03: $28 $22
@@ -8039,7 +8039,7 @@ jr_018_78F1:
     add  $20                                      ; $7907: $C6 $20
     cp   $40                                      ; $7909: $FE $40
     jr   nc, jr_018_7935                          ; $790B: $30 $28
-
+    ; if wSwordAnimationState == SWORD_ANIMATION_STATE_NONE jump to jr_018_7935
     ld   a, [wSwordAnimationState]                ; $790D: $FA $37 $C1
     and  a                                        ; $7910: $A7
     jr   z, jr_018_7935                           ; $7911: $28 $22

@@ -157,7 +157,7 @@ label_002_4287:
     dec  a                                        ; $428D: $3D
     ld   [wIsShootingArrow], a                    ; $428E: $EA $4C $C1
 
-.jr_002_4291:
+.jr_002_4291
     ld   a, [$C1C4]                               ; $4291: $FA $C4 $C1
     and  a                                        ; $4294: $A7
     jr   z, .jr_002_429B                           ; $4295: $28 $04
@@ -165,7 +165,7 @@ label_002_4287:
     dec  a                                        ; $4297: $3D
     ld   [$C1C4], a                               ; $4298: $EA $C4 $C1
 
-.jr_002_429B:
+.jr_002_429B
     ld   a, [wBombArrowCooldown]                  ; $429B: $FA $C0 $C1
     and  a                                        ; $429E: $A7
     jr   z, .jr_002_42A5                           ; $429F: $28 $04
@@ -173,7 +173,7 @@ label_002_4287:
     dec  a                                        ; $42A1: $3D
     ld   [wBombArrowCooldown], a                  ; $42A2: $EA $C0 $C1
 
-.jr_002_42A5:
+.jr_002_42A5
     call func_002_436C                            ; $42A5: $CD $6C $43
     ld   a, [wC16E]                               ; $42A8: $FA $6E $C1
     and  a                                        ; $42AB: $A7
@@ -182,7 +182,7 @@ label_002_4287:
     dec  a                                        ; $42AE: $3D
     ld   [wC16E], a                               ; $42AF: $EA $6E $C1
 
-.jr_002_42B2:
+.jr_002_42B2
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $42B2: $F0 $A1
     cp   $02                                      ; $42B4: $FE $02
     jr   nz, .jr_002_42C7                          ; $42B6: $20 $0F
@@ -195,7 +195,7 @@ label_002_4287:
     call LinkPlayingOcarinaHandler                ; $42C1: $CD $16 $4A
     jp   func_002_753A                            ; $42C4: $C3 $3A $75
 
-.jr_002_42C7:
+.jr_002_42C7
     call UpdateLinkWalkingAnimation               ; $42C7: $CD $50 $1A
     xor  a                                        ; $42CA: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42CB: $E0 $A1
@@ -237,10 +237,10 @@ label_002_4287:
     ld   a, JINGLE_CHARGING_SWORD                 ; $4311: $3E $04
     ldh  [hJingle], a                             ; $4313: $E0 $F2
 
-.return:
+.return
     ret                                           ; $4315: $C9
 
-.lowerSword:
+.lowerSword
     ; Guess: inside dialog = $C1AD ?
     ld   a, [$C1AD]                               ; $4316: $FA $AD $C1
     cp   $01                                      ; $4319: $FE $01
@@ -260,12 +260,12 @@ label_002_4287:
     ld   a, NOISE_SFX_SPIN_ATTACK                 ; $432F: $3E $03
     ldh  [hNoiseSfx], a                           ; $4331: $E0 $F4
 
-.resetSwordCharge:
+.resetSwordCharge
     ; set sword charge back to 0
     xor  a                                        ; $4333: $AF
     ld   [wSwordCharge], a                        ; $4334: $EA $22 $C1
 
-.return2:
+.return2
     ret                                           ; $4337: $C9
 
 func_002_4338::

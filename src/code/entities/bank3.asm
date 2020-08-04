@@ -6465,8 +6465,8 @@ jr_003_6E8E:
     ld   a, [hl]                                  ; $6E9F: $7E
     and  %00100000                                ; $6EA0: $E6 $20
     jp   nz, collectPickableItem                  ; $6EA2: $C2 $11 $63
-
-    ld   a, [$C5B0]                               ; $6EA5: $FA $B0 $C5
+    ; if sword collision is enabled jump to label_003_6FE8
+    ld   a, [wSwordCollisionEnabled]              ; $6EA5: $FA $B0 $C5
     and  a                                        ; $6EA8: $A7
     jp   nz, label_003_6FE8                       ; $6EA9: $C2 $E8 $6F
 

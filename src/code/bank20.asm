@@ -1055,8 +1055,9 @@ func_020_4B4A::
     add  hl, de                                   ; $4B6F: $19
     ld   a, [hl]                                  ; $4B70: $7E
     ld   [$C143], a                               ; $4B71: $EA $43 $C1
+    ; disable sword collision and return
     xor  a                                        ; $4B74: $AF
-    ld   [$C5B0], a                               ; $4B75: $EA $B0 $C5
+    ld   [wSwordCollisionEnabled], a              ; $4B75: $EA $B0 $C5
     ret                                           ; $4B78: $C9
 
 Data_020_4B79::

@@ -750,8 +750,14 @@ wNextWorldMusicTrackCountdown:: ; C5AF
   ; When reaching zero, play wNextWorldMusicTrack
   ds 1
 
+wSwordCollisionEnabled:: ; $C5B0
+  ; zero if sword collision is disabled
+  ; any other value enables sword collision
+  ; this is used to check if a object can be hit by sword
+  ds 1
+
 ; Unlabeled
-ds $CE80 - $C5B0
+ds $CE80 - $C5B1
 
 wRecentRoomsIndex:: ; CE80
   ; Index of the next slot to use in wRecentRooms

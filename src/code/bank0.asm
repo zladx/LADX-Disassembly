@@ -1855,65 +1855,57 @@ CheckItemsToUse::
     ; if shield is not equiped in slot B
     ld   a, [wBButtonSlot]                        ; $1235: $FA $00 $DB
     cp   INVENTORY_SHIELD                         ; $1238: $FE $04
-    jr   nz, .otherItemB                           ; $123A: $20 $0F
+    jr   nz, .nextItemB                           ; $123A: $20 $0F
     ; update shield status
     ld   a, [wShieldLevel]                        ; $123C: $FA $44 $DB
     ld   [wHasMirrorShield], a                    ; $123F: $EA $5A $C1
     ; reset shield if button not longer pressed down
     ldh  a, [hPressedButtonsMask]                 ; $1242: $F0 $CB
     and  J_B                                      ; $1244: $E6 $20
-    jr   z, .otherItemB                            ; $1246: $28 $03
+    jr   z, .nextItemB                            ; $1246: $28 $03
     ; the two checks from A does not apear here == bug?
     ; use the shield
     call SetShieldVals                            ; $1248: $CD $40 $13
 
-.otherItemB
-    ; skip if button is not pressed
+.nextItemB
     ldh  a, [hJoypadState]                        ; $124B: $F0 $CC
     and  J_B                                      ; $124D: $E6 $20
-    jr   z, .otherItemA                              ; $124F: $28 $0D
+    jr   z, .jr_125E                              ; $124F: $28 $0D
     ld   a, [$C1AD]                               ; $1251: $FA $AD $C1
     cp   $02                                      ; $1254: $FE $02
-    jr   z, .otherItemA                              ; $1256: $28 $06
+    jr   z, .jr_125E                              ; $1256: $28 $06
 
     ; Use item in B slot
     ld   a, [wBButtonSlot]                        ; $1258: $FA $00 $DB
     call UseItem                                  ; $125B: $CD $9C $12
 
-.otherItemA
-    ; skip if button is not pressed
+.jr_125E
     ldh  a, [hJoypadState]                        ; $125E: $F0 $CC
     and  J_A                                      ; $1260: $E6 $10
-    jr   z, .SwordB                               ; $1262: $28 $11
+    jr   z, .jr_1275                              ; $1262: $28 $11
     ld   a, [$C1AD]                               ; $1264: $FA $AD $C1
     cp   $01                                      ; $1267: $FE $01
-    jr   z, .SwordB                               ; $1269: $28 $0A
+    jr   z, .jr_1275                              ; $1269: $28 $0A
     cp   $02                                      ; $126B: $FE $02
-    jr   z, .SwordB                               ; $126D: $28 $06
+    jr   z, .jr_1275                              ; $126D: $28 $06
 
     ; Use item in A slot
     ld   a, [wAButtonSlot]                        ; $126F: $FA $01 $DB
     call UseItem                                  ; $1272: $CD $9C $12
 
-.SwordB
-    ; skip if button is not pressed
+.jr_1275
     ldh  a, [hPressedButtonsMask]                 ; $1275: $F0 $CB
     and  J_B                                      ; $1277: $E6 $20
-    jr   z, .SwordA                               ; $1279: $28 $06
-    ; sword attack is called also if no sword selected
+    jr   z, .jr_1281                              ; $1279: $28 $06
     ld   a, [wBButtonSlot]                        ; $127B: $FA $00 $DB
-    call SwordAttack                              ; $127E: $CD $21 $13
-    ; sword attack returns this functioon
+    call label_1321                               ; $127E: $CD $21 $13
 
-.SwordA
-    ; skip if button is not pressed
+.jr_1281
     ldh  a, [hPressedButtonsMask]                 ; $1281: $F0 $CB
     and  J_A                                      ; $1283: $E6 $10
     jr   z, .jr_128D                              ; $1285: $28 $06
-    ; sword attack is called also if no sword selected
     ld   a, [wAButtonSlot]                        ; $1287: $FA $01 $DB
-    call SwordAttack                              ; $128A: $CD $21 $13
-    ; sword attack returns this functioon
+    call label_1321                               ; $128A: $CD $21 $13
 
 .jr_128D
     ; Special code for the Color Dungeon
@@ -2011,7 +2003,7 @@ UseHookshot::
 
 ; Inputs:
 ;   a    inventory item
-SwordAttack::
+label_1321::
     ; if inventory item is not sword, exit
     cp   INVENTORY_SWORD                          ; $1321: $FE $01
     ret  nz                                       ; $1323: $C0

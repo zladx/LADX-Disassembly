@@ -2009,7 +2009,8 @@ label_1321::
     ld   [$C1AC], a                               ; $1334: $EA $AC $C1
     ld   a, $05                                   ; $1337: $3E $05
     ld   [wSwordAnimationState], a                ; $1339: $EA $37 $C1
-    ld   [$C5B0], a                               ; $133C: $EA $B0 $C5
+    ; enable sword collision
+    ld   [wSwordCollisionEnabled], a              ; $133C: $EA $B0 $C5
     ret                                           ; $133F: $C9
 
 SetShieldVals::
@@ -2317,7 +2318,8 @@ UseSword::
 label_1535::
     ld   a, $01                                   ; $1535: $3E $01
     ld   [wSwordAnimationState], a                ; $1537: $EA $37 $C1
-    ld   [$C5B0], a                               ; $153A: $EA $B0 $C5
+    ; enable sword collision
+    ld   [wSwordCollisionEnabled], a              ; $153A: $EA $B0 $C5
     xor  a                                        ; $153D: $AF
     ld   [$C160], a                               ; $153E: $EA $60 $C1
     ld   [$C1AC], a                               ; $1541: $EA $AC $C1

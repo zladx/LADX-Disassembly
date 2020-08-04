@@ -841,7 +841,8 @@ jr_002_4745:
     ld   a, [$C145]                               ; $475F: $FA $45 $C1
     add  $08                                      ; $4762: $C6 $08
     ld   [$C142], a                               ; $4764: $EA $42 $C1
-    ld   [$C5B0], a                               ; $4767: $EA $B0 $C5
+    ; enable sword collision for next 1/8 of spin as well
+    ld   [wSwordCollisionEnabled], a              ; $4767: $EA $B0 $C5
     ret                                           ; $476A: $C9
 
 label_002_476B:
@@ -1042,8 +1043,9 @@ jr_002_487E:
     add  hl, bc                                   ; $48A3: $09
     ld   a, [hl]                                  ; $48A4: $7E
     ld   [$C143], a                               ; $48A5: $EA $43 $C1
+    ; enable sword collision
     ld   a, $01                                   ; $48A8: $3E $01
-    ld   [$C5B0], a                               ; $48AA: $EA $B0 $C5
+    ld   [wSwordCollisionEnabled], a              ; $48AA: $EA $B0 $C5
 
 jr_002_48AD:
     jp   CheckStaticSwordCollision_trampoline     ; $48AD: $C3 $A7 $15
@@ -1421,8 +1423,9 @@ func_002_4B49::
     jr   nz, jr_002_4B64                          ; $4B5A: $20 $08
 
     call func_020_4B4A_trampoline                 ; $4B5C: $CD $4B $13
+    ; enable sword collision
     ld   a, $01                                   ; $4B5F: $3E $01
-    ld   [$C5B0], a                               ; $4B61: $EA $B0 $C5
+    ld   [wSwordCollisionEnabled], a              ; $4B61: $EA $B0 $C5
 
 jr_002_4B64:
     ld   hl, hLinkInteractiveMotionBlocked        ; $4B64: $21 $A1 $FF

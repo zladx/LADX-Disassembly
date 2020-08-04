@@ -2313,8 +2313,6 @@ UseSword::
     ret  nz                                       ; $152F: $C0
     ld   a, $03                                   ; $1530: $3E $03
     ld   [$C138], a                               ; $1532: $EA $38 $C1
-
-label_1535::
     ld   a, $01                                   ; $1535: $3E $01
     ld   [wSwordAnimationState], a                ; $1537: $EA $37 $C1
     ld   [$C5B0], a                               ; $153A: $EA $B0 $C5

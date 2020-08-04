@@ -6540,6 +6540,7 @@ label_003_6F04:
     ld   [hl], $0C                                ; $6F12: $36 $0C
     ld   a, $01                                   ; $6F14: $3E $01
     ld   [wC160], a                               ; $6F16: $EA $60 $C1
+    ; reset sword charge
     xor  a                                        ; $6F19: $AF
     ld   [wSwordCharge], a                        ; $6F1A: $EA $22 $C1
     jp   label_003_713B                           ; $6F1D: $C3 $3B $71
@@ -6944,6 +6945,7 @@ jr_003_714D:
     ld   [wC16D], a                               ; $715B: $EA $6D $C1
 
 jr_003_715E:
+    ; reset sword charge
     xor  a                                        ; $715E: $AF
     ld   [wSwordCharge], a                        ; $715F: $EA $22 $C1
     ld   a, $30                                   ; $7162: $3E $30
@@ -7496,6 +7498,7 @@ jr_003_7440:
     ld   [hl], a                                  ; $7470: $77
     call func_003_73DB                            ; $7471: $CD $DB $73
     ld   [hl], $08                                ; $7474: $36 $08
+    ; reset sword charge
     xor  a                                        ; $7476: $AF
     ld   [wSwordCharge], a                        ; $7477: $EA $22 $C1
     call func_C50                                 ; $747A: $CD $50 $0C

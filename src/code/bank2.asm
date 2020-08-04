@@ -152,40 +152,40 @@ ENDC
 label_002_4287:
     ld   a, [wIsShootingArrow]                    ; $4287: $FA $4C $C1
     and  a                                        ; $428A: $A7
-    jr   z, jr_002_4291                           ; $428B: $28 $04
+    jr   z, .jr_002_4291                           ; $428B: $28 $04
 
     dec  a                                        ; $428D: $3D
     ld   [wIsShootingArrow], a                    ; $428E: $EA $4C $C1
 
-jr_002_4291:
+.jr_002_4291:
     ld   a, [$C1C4]                               ; $4291: $FA $C4 $C1
     and  a                                        ; $4294: $A7
-    jr   z, jr_002_429B                           ; $4295: $28 $04
+    jr   z, .jr_002_429B                           ; $4295: $28 $04
 
     dec  a                                        ; $4297: $3D
     ld   [$C1C4], a                               ; $4298: $EA $C4 $C1
 
-jr_002_429B:
+.jr_002_429B:
     ld   a, [wBombArrowCooldown]                  ; $429B: $FA $C0 $C1
     and  a                                        ; $429E: $A7
-    jr   z, jr_002_42A5                           ; $429F: $28 $04
+    jr   z, .jr_002_42A5                           ; $429F: $28 $04
 
     dec  a                                        ; $42A1: $3D
     ld   [wBombArrowCooldown], a                  ; $42A2: $EA $C0 $C1
 
-jr_002_42A5:
+.jr_002_42A5:
     call func_002_436C                            ; $42A5: $CD $6C $43
     ld   a, [wC16E]                               ; $42A8: $FA $6E $C1
     and  a                                        ; $42AB: $A7
-    jr   z, jr_002_42B2                           ; $42AC: $28 $04
+    jr   z, .jr_002_42B2                           ; $42AC: $28 $04
 
     dec  a                                        ; $42AE: $3D
     ld   [wC16E], a                               ; $42AF: $EA $6E $C1
 
-jr_002_42B2:
+.jr_002_42B2:
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $42B2: $F0 $A1
     cp   $02                                      ; $42B4: $FE $02
-    jr   nz, jr_002_42C7                          ; $42B6: $20 $0F
+    jr   nz, .jr_002_42C7                          ; $42B6: $20 $0F
 
     xor  a                                        ; $42B8: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42B9: $E0 $A1
@@ -195,8 +195,8 @@ jr_002_42B2:
     call LinkPlayingOcarinaHandler                ; $42C1: $CD $16 $4A
     jp   func_002_753A                            ; $42C4: $C3 $3A $75
 
-jr_002_42C7:
-    call UpdateLinkWalkingAnimation                                ; $42C7: $CD $50 $1A
+.jr_002_42C7:
+    call UpdateLinkWalkingAnimation               ; $42C7: $CD $50 $1A
     xor  a                                        ; $42CA: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42CB: $E0 $A1
     call label_1F69_trampoline                    ; $42CD: $CD $61 $1F
@@ -210,58 +210,62 @@ jr_002_42C7:
     call LinkPlayingOcarinaHandler                ; $42E5: $CD $16 $4A
     ld   a, [wRoomTransitionState]                ; $42E8: $FA $24 $C1
     and  a                                        ; $42EB: $A7
-    jr   nz, jr_002_4315                          ; $42EC: $20 $27
+    jr   nz, .return                              ; $42EC: $20 $27
 
     ld   a, [wSwordAnimationState]                ; $42EE: $FA $37 $C1
     ld   [wC16A], a                               ; $42F1: $EA $6A $C1
     cp   SWORD_ANIMATION_STATE_HOLDING            ; $42F4: $FE $05
-    jr   nz, jr_002_4316                          ; $42F6: $20 $1E
+    jr   nz, .lowerSword                         ; $42F6: $20 $1E
 
     ld   a, [wIsRunningWithPegasusBoots]          ; $42F8: $FA $4A $C1
     and  a                                        ; $42FB: $A7
-    jr   nz, jr_002_4333                          ; $42FC: $20 $35
+    jr   nz, .resetSwordCharge                    ; $42FC: $20 $35
 
     ; sword animation state = SWORD_ANIMATION_STATE_NONE
     xor  a                                        ; $42FE: $AF
     ld   [wSwordAnimationState], a                ; $42FF: $EA $37 $C1
     ld   a, [wSwordCharge]                        ; $4302: $FA $22 $C1
-    cp   $28                                      ; $4305: $FE $28
-    jr   z, jr_002_4315                           ; $4307: $28 $0C
-
+    cp   MAX_SWORD_CHARGE                         ; $4305: $FE $28
+    jr   z, .return                               ; $4307: $28 $0C
+    ; increment sword charge
     inc  a                                        ; $4309: $3C
     ld   [wSwordCharge], a                        ; $430A: $EA $22 $C1
-    cp   $28                                      ; $430D: $FE $28
-    jr   nz, jr_002_4315                          ; $430F: $20 $04
-
+    ; if not fully loaded return
+    cp   MAX_SWORD_CHARGE                         ; $430D: $FE $28
+    jr   nz, .return                              ; $430F: $20 $04
+    ; play fully charged jingle
     ld   a, JINGLE_CHARGING_SWORD                 ; $4311: $3E $04
     ldh  [hJingle], a                             ; $4313: $E0 $F2
 
-jr_002_4315:
+.return:
     ret                                           ; $4315: $C9
 
-jr_002_4316:
+.lowerSword:
+    ; Guess: inside dialog = $C1AD ?
     ld   a, [$C1AD]                               ; $4316: $FA $AD $C1
     cp   $01                                      ; $4319: $FE $01
-    jr   z, jr_002_4333                           ; $431B: $28 $16
-
+    jr   z, .resetSwordCharge                     ; $431B: $28 $16
+    ; if sword not fully charged reset it
     ld   a, [wSwordCharge]                        ; $431D: $FA $22 $C1
-    cp   $28                                      ; $4320: $FE $28
-    jr   nz, jr_002_4333                          ; $4322: $20 $0F
-
+    cp   MAX_SWORD_CHARGE                         ; $4320: $FE $28
+    jr   nz, .resetSwordCharge                    ; $4322: $20 $0F
+    ; TODO: comment
     ld   a, [wC16E]                               ; $4324: $FA $6E $C1
     and  a                                        ; $4327: $A7
-    jr   nz, jr_002_4337                          ; $4328: $20 $0D
-
+    jr   nz, .return2                             ; $4328: $20 $0D
+    ; TODO: comment
     ld   a, $20                                   ; $432A: $3E $20
     ld   [wIsUsingSpinAttack], a                  ; $432C: $EA $21 $C1
-    ld   a, NOISE_SFX_SPIN_ATTACK                       ; $432F: $3E $03
-    ldh  [hNoiseSfx], a                            ; $4331: $E0 $F4
+    ; play spin attack sound
+    ld   a, NOISE_SFX_SPIN_ATTACK                 ; $432F: $3E $03
+    ldh  [hNoiseSfx], a                           ; $4331: $E0 $F4
 
-jr_002_4333:
+.resetSwordCharge:
+    ; set sword charge back to 0
     xor  a                                        ; $4333: $AF
     ld   [wSwordCharge], a                        ; $4334: $EA $22 $C1
 
-jr_002_4337:
+.return2:
     ret                                           ; $4337: $C9
 
 func_002_4338::
@@ -1436,6 +1440,8 @@ jr_002_4B64:
     ld   hl, hLinkInteractiveMotionBlocked        ; $4B64: $21 $A1 $FF
     ld   [hl], $01                                ; $4B67: $36 $01
     call ClearLinkPositionIncrement               ; $4B69: $CD $8E $17
+    ; a = 0
+    ; reset sword parameter
     ld   [wSwordAnimationState], a                ; $4B6C: $EA $37 $C1
     ld   [wIsUsingSpinAttack], a                  ; $4B6F: $EA $21 $C1
     ld   [wSwordCharge], a                        ; $4B72: $EA $22 $C1
@@ -2400,6 +2406,7 @@ LinkMotionFallingDownHandler::
     ret                                           ; $50F5: $C9
 
 jr_002_50F6:
+    ; reset sword parameter
     xor  a                                        ; $50F6: $AF
     ld   [$C13E], a                               ; $50F7: $EA $3E $C1
     ld   [wIsUsingSpinAttack], a                  ; $50FA: $EA $21 $C1
@@ -6905,6 +6912,7 @@ jr_002_72FA:
 
     xor  a                                        ; $731D: $AF
     ld   [$C1C3], a                               ; $731E: $EA $C3 $C1
+    ; reset spin marker and sword charge
     xor  a                                        ; $7321: $AF
     ld   [wIsUsingSpinAttack], a                  ; $7322: $EA $21 $C1
     ld   [wSwordCharge], a                        ; $7325: $EA $22 $C1

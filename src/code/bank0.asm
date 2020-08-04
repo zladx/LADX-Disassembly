@@ -1488,8 +1488,6 @@ WorldDefaultHandler::
     jr   nc, label_1012                           ; $0FFA: $30 $16
     ld   c, $01                                   ; $0FFC: $0E $01
     ld   b, $00                                   ; $0FFE: $06 $00
-
-label_1000::
     ld   e, $00                                   ; $1000: $1E $00
     ldh  a, [hFrameCounter]                       ; $1002: $F0 $E7
     and  $04                                      ; $1004: $E6 $04
@@ -1759,53 +1757,61 @@ CheckItemsToUse::
     ld   a, [$C117]                               ; $11C3: $FA $17 $C1
     and  a                                        ; $11C6: $A7
     jp   nz, UseItem.return                       ; $11C7: $C2 $ED $12
+    ; if Link does carry something, exit
     ld   a, [wIsCarryingLiftedObject]             ; $11CA: $FA $5C $C1
     and  a                                        ; $11CD: $A7
     jp   nz, UseItem.return                       ; $11CE: $C2 $ED $12
+    ; if in sword animation check if motion is possible
     ld   a, [wSwordAnimationState]                ; $11D1: $FA $37 $C1
     and  a                                        ; $11D4: $A7
-    jr   z, .jr_11E2                              ; $11D5: $28 $0B
+    jr   z, .checkMotionBlocked                   ; $11D5: $28 $0B
     cp   $03                                      ; $11D7: $FE $03
-    jr   nz, .jr_11E2                             ; $11D9: $20 $07
+    jr   nz, .checkMotionBlocked                  ; $11D9: $20 $07
     ld   a, [$C138]                               ; $11DB: $FA $38 $C1
     cp   $03                                      ; $11DE: $FE $03
-    jr   nc, .jr_11E8                             ; $11E0: $30 $06
+    jr   nc, .pegasusBootsB                       ; $11E0: $30 $06
 
-.jr_11E2
+.checkMotionBlocked
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $11E2: $F0 $A1
     and  a                                        ; $11E4: $A7
     jp   nz, UseItem.return                       ; $11E5: $C2 $ED $12
 
-.jr_11E8
+.pegasusBootsB
+    ; if Pegasus boots are not equiped in slot B check slot A
     ld   a, [wBButtonSlot]                        ; $11E8: $FA $00 $DB
     cp   INVENTORY_PEGASUS_BOOTS                  ; $11EB: $FE $08
-    jr   nz, .jr_11FE                             ; $11ED: $20 $0F
+    jr   nz, .pegasusBootsA                       ; $11ED: $20 $0F
+    ; reset boots if button not longer pressed down
     ldh  a, [hPressedButtonsMask]                 ; $11EF: $F0 $CB
     and  J_B                                      ; $11F1: $E6 $20
-    jr   z, .jr_11FA                              ; $11F3: $28 $05
+    jr   z, .resetPegasusBootsChargeMeterB        ; $11F3: $28 $05
+    ; use the boots and check for slot A
     call UsePegasusBoots                          ; $11F5: $CD $05 $17
-    jr   .jr_11FE                                 ; $11F8: $18 $04
+    jr   .pegasusBootsA                           ; $11F8: $18 $04
 
-.jr_11FA
+.resetPegasusBootsChargeMeterB
+    ; $wPegasusBootsChargeMeter = 0
     xor  a                                        ; $11FA: $AF
     ld   [wPegasusBootsChargeMeter], a            ; $11FB: $EA $4B $C1
 
-.jr_11FE
+.pegasusBootsA
+    ; if Pegasus boots are not equiped in slot A check slot A for shield
     ld   a, [wAButtonSlot]                        ; $11FE: $FA $01 $DB
     cp   INVENTORY_PEGASUS_BOOTS                  ; $1201: $FE $08
-    jr   nz, .jr_1214                             ; $1203: $20 $0F
+    jr   nz, .shieldA                             ; $1203: $20 $0F
+    ; reset boots if button not longer pressed down
     ldh  a, [hPressedButtonsMask]                 ; $1205: $F0 $CB
     and  J_A                                      ; $1207: $E6 $10
-    jr   z, .jr_1210                              ; $1209: $28 $05
+    ; use the boots and check for slot A for shield
+    jr   z, .resetPegasusBootsChargeMeterA        ; $1209: $28 $05
     call UsePegasusBoots                          ; $120B: $CD $05 $17
-    jr   .jr_1214                                 ; $120E: $18 $04
+    jr   .shieldA                                 ; $120E: $18 $04
 
-.jr_1210
+.resetPegasusBootsChargeMeterA
     xor  a                                        ; $1210: $AF
     ld   [wPegasusBootsChargeMeter], a            ; $1211: $EA $4B $C1
 
-.jr_1214
-
+.shieldA
     ld   a, [wAButtonSlot]                        ; $1214: $FA $01 $DB
     cp   INVENTORY_SHIELD                         ; $1217: $FE $04
     jr   nz, .shieldBEnd                          ; $1219: $20 $1A

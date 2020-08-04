@@ -173,7 +173,7 @@ jr_006_732C:
 
 func_006_7335::
     ld   a, [wSwordAnimationState]                ; $7335: $FA $37 $C1
-    cp   $02                                      ; $7338: $FE $02
+    cp   SWORD_ANIMATION_STATE_SWING_START        ; $7338: $FE $02
     jr   nz, jr_006_7371                          ; $733A: $20 $35
 
     call func_006_6594                            ; $733C: $CD $94 $65

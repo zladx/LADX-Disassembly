@@ -24,9 +24,9 @@ BooBuddyState0Handler::
 
     call GetEntityPrivateCountdown1               ; $79CE: $CD $00 $0C
     jr   nz, jr_006_7A21                          ; $79D1: $20 $4E
-
+    ; if in swing middle animation state jump to jr_006_79FA
     ld   a, [wSwordAnimationState]                ; $79D3: $FA $37 $C1
-    cp   $03                                      ; $79D6: $FE $03
+    cp   SWORD_ANIMATION_STATE_SWING_MIDDLE       ; $79D6: $FE $03
     jr   z, jr_006_79FA                           ; $79D8: $28 $20
 
     call GetRandomByte                            ; $79DA: $CD $0D $28

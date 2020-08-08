@@ -4931,7 +4931,7 @@ UpdateHealth:
     add  ONE_HEART*16                                      ; $63B5: $C6 $80
     ld   [wAddHealthBuffer], a                    ; $63B7: $EA $93 $DB
     ; make player invincible so no damage can be taken some time
-    ld   a, DEMAGE_COOLDOWN_TIME                                   ; $63BA: $3E $A0
+    ld   a, DAMAGE_COOLDOWN_TIME                                   ; $63BA: $3E $A0
     ld   [wInvincibilityCounter], a               ; $63BC: $EA $C7 $DB
     ; TODO: comment what is going one here
     ld   a, [wRequests]                           ; $63BF: $FA $00 $D6

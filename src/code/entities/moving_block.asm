@@ -324,7 +324,7 @@ jr_015_42A7:
 jr_015_42AB:
     jp   label_015_416F                           ; $42AB: $C3 $6F $41
 
-MovingBlockBottomRightEntityHandler
+MovingBlockBottomRightEntityHandler:
     ld   de, Data_015_40FC                        ; $42AE: $11 $FC $40
     call RenderActiveEntitySpritesPair            ; $42B1: $CD $C0 $3B
     call func_015_7B0D                            ; $42B4: $CD $0D $7B

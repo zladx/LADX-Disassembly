@@ -2406,7 +2406,7 @@ func_017_583C::
 jr_017_5849:
     ret                                           ; $5849: $C9
 
-MarinSingingSceneHandler
+MarinSingingSceneHandler:
     ld   a, [$D006]                               ; $584A: $FA $06 $D0
     and  a                                        ; $584D: $A7
     jr   nz, jr_017_58C2                          ; $584E: $20 $72

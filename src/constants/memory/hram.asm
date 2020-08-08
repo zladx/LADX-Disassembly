@@ -269,12 +269,12 @@ hScratch6:: ; FFDD
   ds 1
 hScratch7:: ; FFDE
   ds 1
-hScratch8 ; FFDF
+hScratch8:: ; FFDF
   ds 1
-hScratch9          ; FFE0
+hScratch9::          ; FFE0
 hBGMapOffsetHigh:: ; FFE0
   ds 1
-hScratchA          ; FFE1
+hScratchA::          ; FFE1
 hBGMapOffsetLow::  ; FFE1
   ds 1
 hScratchB:: ; FFE2
@@ -286,7 +286,7 @@ hScratchD:: ; FFE4
 hScratchE:: ; FFE5
   ds 1
 hScratchF:: ; FFE6
-hFreeWarpDataAddress ; FFE6
+hFreeWarpDataAddress:: ; FFE6
   ; Address of the first free warp data slot
   ds 1
 
@@ -295,7 +295,7 @@ hFrameCounter:: ; FFE7
   ds 1
 
 ; This location has different uses
-hFFE8                   ; FFE8
+hFFE8::                   ; FFE8
 hRoomBank::             ; FFE8
 hDialogBackgroundTile:: ; FFE8
   ds 1

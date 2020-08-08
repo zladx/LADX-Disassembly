@@ -452,7 +452,7 @@ CheckTriggersResolution::
 ._0F dw Events.return
 ._10 dw CheckAnswerTunicsTrigger
 
-Events
+Events::
 .return
     ret                                           ; $5FC5: $C9
 

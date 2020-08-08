@@ -23,7 +23,7 @@ ClearHRAMAndWRAM::
     ; Set all bytes of HRAM (from $FF90 to $FFFD) to zero
     ld   bc, $6D                                  ; $29D0: $01 $6D $00
 
-ClearHRAMBytesAndWRAM
+ClearHRAMBytesAndWRAM::
     ; Set BC bytes of HRAM (starting from $FF90) to zero
     ld   hl, hGameValuesSection                   ; $29D3: $21 $90 $FF
     call ClearBytes                               ; $29D6: $CD $DF $29

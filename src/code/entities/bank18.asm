@@ -3799,7 +3799,7 @@ func_018_5C07::
     ld   a, [$DB10]                               ; $5C0C: $FA $10 $DB
     dec  a                                        ; $5C0F: $3D
     ld   e, a                                     ; $5C10: $5F
-    ld   a, [wC163]                               ; $5C11: $FA $63 $C1
+    ld   a, [wIsOnLowHeath]                               ; $5C11: $FA $63 $C1
     cp   e                                        ; $5C14: $BB
     jr   z, jr_018_5C27                           ; $5C15: $28 $10
 

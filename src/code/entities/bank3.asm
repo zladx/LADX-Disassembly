@@ -2449,7 +2449,7 @@ SpawnEnemyDrop::
 .jr_003_5648
     ld   d, b                                     ; $5648: $50
     ld   hl, Data_003_55AA                        ; $5649: $21 $AA $55
-    ld   a, [wC163]                               ; $564C: $FA $63 $C1
+    ld   a, [wIsOnLowHeath]                               ; $564C: $FA $63 $C1
     and  a                                        ; $564F: $A7
     jr   z, .jr_003_5655                          ; $5650: $28 $03
 

@@ -31,7 +31,7 @@ CopyData::
 ; Inputs:
 ;   de: data copy request struct (see wRequest)
 ;   a:  destination address high byte
-ExpandCopyRequestArgs
+ExpandCopyRequestArgs::
     ; Copy destination address to hl
     inc  de                                       ; $291D: $13
     ld   h, a                                     ; $291E: $67

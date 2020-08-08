@@ -130,7 +130,7 @@ wBGUpdateRegionOriginLow:: ; C127
   ; to update during a room transition (high byte)
   ds 1
 
-wBGUpdateRegionTilesCount ; C128
+wBGUpdateRegionTilesCount:: ; C128
   ; Number of tiles of a background piece (row or column) to be updated in a single batch
   ds 1
 
@@ -292,7 +292,7 @@ wC16E: ds 1
 ; State of the dialog open or close animation.
 ; Values goes from 0 to 5.
 wDialogOpenCloseAnimationFrame: ds 1 ; C16F
-wDialogCharacterIndex ds 1 ; C170
+wDialogCharacterIndex: ds 1 ; C170
 wDialogNextCharPosition: ds 1 ; C171
 
 wDialogScrollDelay:: ; C172
@@ -1559,7 +1559,7 @@ wIndoorRoom:: ; DBAE
 wCurrentBank:: ; DBAF
   ds 1
 
-wMinimapLayout ; DBB0
+wMinimapLayout:: ; DBB0
   ; Layout of the dungeon map in the inventory
   ; See INVENTORY_MINIMAP_* constants for values
   ds 1

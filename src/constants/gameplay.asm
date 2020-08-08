@@ -244,4 +244,4 @@ FISHING_GAME_LARGE_REWARD equ 20
 ONE_HEART equ $08
 
 ; how much time has to pass until the player can receive damage again
-DEMAGE_COOLDOWN_TIME equ $A0
+DAMAGE_COOLDOWN_TIME equ $A0

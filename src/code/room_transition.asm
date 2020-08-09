@@ -474,12 +474,12 @@ RoomTransitionPrepareHandler::
     ; Get the music track to apply later
     ;
 
-    ld   a, [$C1CF]                               ; $7AC6: $FA $CF $C1
+    ld   a, [wC1CF]                               ; $7AC6: $FA $CF $C1
     and  a                                        ; $7AC9: $A7
     jr   z, .C1CFIsZero                           ; $7ACA: $28 $1D
 
     xor  a                                        ; $7ACC: $AF
-    ld   [$C1CF], a                               ; $7ACD: $EA $CF $C1
+    ld   [wC1CF], a                               ; $7ACD: $EA $CF $C1
 
 IF !__PATCH_0__
     ld   a, [wTunicType]                          ; $7AD0: $FA $0F $DC

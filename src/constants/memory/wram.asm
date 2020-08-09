@@ -568,28 +568,101 @@ wDialogGotItemCountdown::
 ; Unlabeled
 ds $11
 
-wLoadPreviousMapCountdown:: ; C1BC
-  ; Number of frames to wait before loading the previous map and room
-  ds 1
+; Number of frames to wait before loading the previous map and room
+wLoadPreviousMapCountdown::
+  ds 1 ; C1BC
 
-wDidBossIntro:: ; C1BD
-  ; Non-zero when the BossIntro routine did its thing
-  ds 1
+; Non-zero when the BossIntro routine did its thing
+wDidBossIntro::
+  ds 1 ; C1BD
 
-wInBossBattle:: ; C1BE
-  ; Non-zero after initializing a boss entity
-  ds 1
+; Non-zero after initializing a boss entity
+wInBossBattle::
+  ds 1 ; C1BE
 
-wScrollXOffset:: ; C1BF
-  ds 1
+; TODO comment
+wScrollXOffset::
+  ds 1 ; C1BF
 
-wBombArrowCooldown:: ; C1C0
-  ; Gets set to 6 whenever Link uses the bow or drops a bomb,
-  ; and then decrements by 1 each frame.
-  ds 1
+; Gets set to 6 whenever Link uses the bow or drops a bomb,
+; and then decrements by 1 each frame.
+wBombArrowCooldown::
+  ds 1 ; C1C0
 
 ; Unlabeled
-  ds $3F
+wC1C1::
+  ds 1 ; C1C1
+
+; Unlabeled
+wC1C2::
+  ds 1 ; C1C2
+
+; Unlabeled
+wC1C3::
+  ds 1 ; C1C3
+
+; Unlabeled
+wC1C4::
+  ds 1 ; C1C4
+
+; not used
+ds 1 ; C1C5
+
+; Unlabeled
+wC1C6::
+  ds 1 ; C1C6
+
+; Unlabeled
+wC1C7::
+  ds 1 ; C1C7
+
+; Unlabeled
+wC1C8::
+  ds 1 ; C1C8
+
+; Unlabeled
+wC1C9::
+  ds 1 ; C1C9
+
+; Unlabeled
+wC1CA::
+  ds 1 ; C1CA
+
+; Unlabeled
+wC1CB::
+  ds 1 ; C1CB
+
+; Unlabeled
+wC1CC::
+  ds 1 ; C1CC
+
+; Unlabeled
+wC1CD::
+  ds 1 ; C1CD
+
+; Unlabeled
+wC1CE::
+  ds 1 ; C1CE
+
+; Unlabeled
+wC1CF::
+  ds 1 ; C1CF
+
+; Unlabeled
+wC1D0::
+  ds 16 ; C1D0 -C1DF
+
+; Unlabeled
+wC1E0::
+  ds 16 ; C1E0 - C1EF
+
+; Unlabeled
+wC1F0::
+  ds 4 ; C1F0 - C1F3
+
+; Unlabeled
+wC1F4::
+  ds 12 ; C1F4 - C1FF
 
 ; ---------------------------------------------------------
 ;

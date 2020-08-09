@@ -1087,7 +1087,7 @@ IF __PATCH_0__
     ret  nz
 ENDC
 
-    ld   a, [$C1C2]                               ; $4B92: $FA $C2 $C1
+    ld   a, [wC1C2]                               ; $4B92: $FA $C2 $C1
     ld   c, a                                     ; $4B95: $4F
     ld   b, d                                     ; $4B96: $42
     ld   hl, wEntitiesStateTable                  ; $4B97: $21 $90 $C2
@@ -1099,7 +1099,7 @@ label_020_4B9E:
     ld   a, $06                                   ; $4B9E: $3E $06
     ld   [wBombArrowCooldown], a                  ; $4BA0: $EA $C0 $C1
     ld   a, e                                     ; $4BA3: $7B
-    ld   [$C1C1], a                               ; $4BA4: $EA $C1 $C1
+    ld   [wC1C1], a                               ; $4BA4: $EA $C1 $C1
     ld   a, $0C                                   ; $4BA7: $3E $0C
     ld   [$C19B], a                               ; $4BA9: $EA $9B $C1
     ld   hl, wEntitiesTransitionCountdownTable    ; $4BAC: $21 $E0 $C2
@@ -1288,7 +1288,7 @@ ResetRoomVariables::
     ld   [$DBC8], a                               ; $4CAC: $EA $C8 $DB
     ld   [wTorchesCount], a                       ; $4CAF: $EA $C9 $DB
     ld   [wC1A2], a                               ; $4CB2: $EA $A2 $C1
-    ld   [$C1C6], a                               ; $4CB5: $EA $C6 $C1
+    ld   [wC1C6], a                               ; $4CB5: $EA $C6 $C1
     ld   [wRoomSwitchableObject], a               ; $4CB8: $EA $FA $D6
     ld   [$C50A], a                               ; $4CBB: $EA $0A $C5
     ldh  [$FFAC], a                               ; $4CBE: $E0 $AC

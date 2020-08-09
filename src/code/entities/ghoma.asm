@@ -518,7 +518,7 @@ jr_005_7EBF:
     jr   nz, jr_005_7EAE                          ; $7EC3: $20 $E9
 
     xor  a                                        ; $7EC5: $AF
-    ld   [$C1CF], a                               ; $7EC6: $EA $CF $C1
+    ld   [wC1CF], a                               ; $7EC6: $EA $CF $C1
     jp   label_27DD                               ; $7EC9: $C3 $DD $27
 
 jr_005_7ECC:

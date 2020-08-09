@@ -825,8 +825,8 @@ MarkTriggerAsResolved::
     and  a                                        ; $0C64: $A7
     jr   nz, .return                              ; $0C65: $20 $14
 
-    ; $C1CF = 0
-    ld   [$C1CF], a                               ; $0C67: $EA $CF $C1
+    ; wC1CF = 0
+    ld   [wC1CF], a                               ; $0C67: $EA $CF $C1
     ; wRoomEventEffectExecuted = $C5A6 = 1
     inc  a                                        ; $0C6A: $3C
     ld   [wRoomEventEffectExecuted], a            ; $0C6B: $EA $8F $C1
@@ -1969,7 +1969,7 @@ UseShield::
     ret                                           ; $12F7: $C9
 
 UseShovel::
-    ld   a, [$C1C7]                               ; $12F8: $FA $C7 $C1
+    ld   a, [wC1C7]                               ; $12F8: $FA $C7 $C1
     ld   hl, wIsLinkInTheAir                      ; $12FB: $21 $46 $C1
     or   [hl]                                     ; $12FE: $B6
     ret  nz                                       ; $12FF: $C0
@@ -1991,9 +1991,9 @@ IF __PATCH_0__
 ENDC
 
     ld   a, $01                                   ; $130F: $3E $01
-    ld   [$C1C7], a                               ; $1311: $EA $C7 $C1
+    ld   [wC1C7], a                               ; $1311: $EA $C7 $C1
     xor  a                                        ; $1314: $AF
-    ld   [$C1C8], a                               ; $1315: $EA $C8 $C1
+    ld   [wC1C8], a                               ; $1315: $EA $C8 $C1
     ret                                           ; $1318: $C9
 
 UseHookshot::
@@ -2118,11 +2118,11 @@ ShootArrow::
     call SpawnPlayerProjectile                    ; $13E0: $CD $2F $14
     ret  c                                        ; $13E3: $D8
     ld   a, e                                     ; $13E4: $7B
-    ld   [$C1C2], a                               ; $13E5: $EA $C2 $C1
+    ld   [wC1C2], a                               ; $13E5: $EA $C2 $C1
     ld   a, [wBombArrowCooldown]                  ; $13E8: $FA $C0 $C1
     and  a                                        ; $13EB: $A7
     jr   z, label_1401                            ; $13EC: $28 $13
-    ld   a, [$C1C1]                               ; $13EE: $FA $C1 $C1
+    ld   a, [wC1C1]                               ; $13EE: $FA $C1 $C1
     ld   c, a                                     ; $13F1: $4F
     ld   b, d                                     ; $13F2: $42
     ld   hl, wEntitiesStatusTable                 ; $13F3: $21 $80 $C2
@@ -2404,7 +2404,7 @@ CheckStaticSwordCollision_trampoline::
 ; Check sword collision with static elements (bushes, grasses)
 ; and items lying on the floor.
 CheckStaticSwordCollision::
-    ld   a, [$C1C4]                               ; $15AF: $FA $C4 $C1
+    ld   a, [wC1C4]                               ; $15AF: $FA $C4 $C1
     and  a                                        ; $15B2: $A7
     ret  nz                                       ; $15B3: $C0
     ld   a, [wIsRunningWithPegasusBoots]          ; $15B4: $FA $4A $C1
@@ -2610,7 +2610,7 @@ CheckItemsSwordCollision::
     ld   [$C502], a                               ; $16E1: $EA $02 $C5
     call label_D15                                ; $16E4: $CD $15 $0D
     ld   a, $10                                   ; $16E7: $3E $10
-    ld   [$C1C4], a                               ; $16E9: $EA $C4 $C1
+    ld   [wC1C4], a                               ; $16E9: $EA $C4 $C1
     ld   a, c                                     ; $16EC: $79
     and  $F0                                      ; $16ED: $E6 $F0
     cp   $90                                      ; $16EF: $FE $90
@@ -6970,20 +6970,20 @@ LoadObject_BossDoor::
 
 func_373F::
     ld   d, $00                                   ; $373F: $16 $00
-    ld   hl, $C1F0                                ; $3741: $21 $F0 $C1
+    ld   hl, wC1F0                                ; $3741: $21 $F0 $C1
     add  hl, de                                   ; $3744: $19
     dec  bc                                       ; $3745: $0B
     ld   a, [bc]                                  ; $3746: $0A
     ld   [hl], a                                  ; $3747: $77
     push af                                       ; $3748: $F5
     and  $F0                                      ; $3749: $E6 $F0
-    ld   hl, $C1E0                                ; $374B: $21 $E0 $C1
+    ld   hl, wC1E0                                ; $374B: $21 $E0 $C1
     add  hl, de                                   ; $374E: $19
     ld   [hl], a                                  ; $374F: $77
     pop  af                                       ; $3750: $F1
     swap a                                        ; $3751: $CB $37
     and  $F0                                      ; $3753: $E6 $F0
-    ld   hl, $C1D0                                ; $3755: $21 $D0 $C1
+    ld   hl, wC1D0                                ; $3755: $21 $D0 $C1
     add  hl, de                                   ; $3758: $19
     ld   [hl], a                                  ; $3759: $77
     inc  bc                                       ; $375A: $03

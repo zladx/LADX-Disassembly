@@ -178,7 +178,7 @@ jr_006_56D9:
     add  hl, de                                   ; $56E9: $19
     and  $02                                      ; $56EA: $E6 $02
     ld   [hl], a                                  ; $56EC: $77
-    ld   a, [$C1CD]                               ; $56ED: $FA $CD $C1
+    ld   a, [wC1CD]                               ; $56ED: $FA $CD $C1
     ld   hl, Data_006_55E3                        ; $56F0: $21 $E3 $55
     add  hl, bc                                   ; $56F3: $09
     add  [hl]                                     ; $56F4: $86
@@ -191,7 +191,7 @@ jr_006_56D9:
     ld   hl, wEntitiesSpeedXTable                 ; $56FF: $21 $40 $C2
     add  hl, de                                   ; $5702: $19
     ld   [hl], a                                  ; $5703: $77
-    ld   a, [$C1CE]                               ; $5704: $FA $CE $C1
+    ld   a, [wC1CE]                               ; $5704: $FA $CE $C1
     add  $00                                      ; $5707: $C6 $00
     ld   hl, wEntitiesPosYTable                   ; $5709: $21 $10 $C2
     add  hl, de                                   ; $570C: $19
@@ -315,9 +315,9 @@ jr_006_57B2:
     add  hl, bc                                   ; $57CB: $09
     ld   [hl], $08                                ; $57CC: $36 $08
     ldh  a, [hActiveEntityPosX]                   ; $57CE: $F0 $EE
-    ld   [$C1CD], a                               ; $57D0: $EA $CD $C1
+    ld   [wC1CD], a                               ; $57D0: $EA $CD $C1
     ldh  a, [hActiveEntityPosY]                   ; $57D3: $F0 $EF
-    ld   [$C1CE], a                               ; $57D5: $EA $CE $C1
+    ld   [wC1CE], a                               ; $57D5: $EA $CE $C1
     call GetEntityPrivateCountdown1               ; $57D8: $CD $00 $0C
     ld   [hl], $61                                ; $57DB: $36 $61
     call IncrementEntityState                     ; $57DD: $CD $12 $3B
@@ -396,9 +396,9 @@ jr_006_5841:
     jr   nz, jr_006_5858                          ; $5843: $20 $13
 
     ldh  a, [hActiveEntityPosX]                   ; $5845: $F0 $EE
-    ld   [$C1CD], a                               ; $5847: $EA $CD $C1
+    ld   [wC1CD], a                               ; $5847: $EA $CD $C1
     ldh  a, [hActiveEntityPosY]                   ; $584A: $F0 $EF
-    ld   [$C1CE], a                               ; $584C: $EA $CE $C1
+    ld   [wC1CE], a                               ; $584C: $EA $CE $C1
     call GetEntityPrivateCountdown1               ; $584F: $CD $00 $0C
     ld   [hl], $60                                ; $5852: $36 $60
     ld   a, $23                                   ; $5854: $3E $23

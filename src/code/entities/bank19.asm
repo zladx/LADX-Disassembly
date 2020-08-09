@@ -420,7 +420,7 @@ WarpState2Handler::
 
     call IncrementEntityState                     ; $42CF: $CD $12 $3B
     ld   a, $20                                   ; $42D2: $3E $20
-    ld   [$C1C6], a                               ; $42D4: $EA $C6 $C1
+    ld   [wC1C6], a                               ; $42D4: $EA $C6 $C1
     call GetEntityTransitionCountdown             ; $42D7: $CD $05 $0C
     ld   [hl], $50                                ; $42DA: $36 $50
     ld   a, JINGLE_MIDBOSS_WARP                   ; $42DC: $3E $1C

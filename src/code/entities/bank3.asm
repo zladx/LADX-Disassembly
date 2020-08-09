@@ -289,7 +289,7 @@ ENDC
     and  $04                                      ; $4901: $E6 $04
     jr   z, .indoorEnd                            ; $4903: $28 $03
 
-    ld   [$C1CF], a                               ; $4905: $EA $CF $C1
+    ld   [wC1CF], a                               ; $4905: $EA $CF $C1
 .indoorEnd
 
     call label_27F2                               ; $4908: $CD $F2 $27
@@ -6246,7 +6246,7 @@ jr_003_6D5D:
 
 jr_003_6D73:
     ld   a, [wInvincibilityCounter]               ; $6D73: $FA $C7 $DB
-    ld   hl, $C1C6                                ; $6D76: $21 $C6 $C1
+    ld   hl, wC1C6                                ; $6D76: $21 $C6 $C1
     or   [hl]                                     ; $6D79: $B6
     ld   hl, wLinkPlayingOcarinaCountdown         ; $6D7A: $21 $66 $C1
     or   [hl]                                     ; $6D7D: $B6
@@ -8931,7 +8931,7 @@ label_003_7C7B:
 
 IF __PATCH_0__
     xor  a
-    ld   [$c1c6], a
+    ld   [wC1C6], a
     jr   hookshotEnd
 ENDC
 .hookshotClearEnd

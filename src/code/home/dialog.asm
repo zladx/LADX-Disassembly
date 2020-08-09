@@ -628,8 +628,8 @@ ENDC
     adc  a, $00                                   ; $266E: $CE $00
     ld   [wDialogCharacterIndexHi], a             ; $2670: $EA $64 $C1
     xor  a                                        ; $2673: $AF
-    ; $C1CC = 01 when an unfinished textbox is waiting for a button press to continue.
-    ld   [$C1CC], a                               ; $2674: $EA $CC $C1
+    ; wC1CC = 01 when an unfinished textbox is waiting for a button press to continue.
+    ld   [wC1CC], a                               ; $2674: $EA $CC $C1
     ld   a, [wDialogNextCharPosition]             ; $2677: $FA $71 $C1
     cp   $1F                                      ; $267A: $FE $1F
     jr   z, label_268E                            ; $267C: $28 $10
@@ -661,13 +661,13 @@ DialogBreakHandler::
     jp   z, DialogDrawNextCharacterHandler.label_25AD ; $26A1: $CA $AD $25
     cp   $FE                                      ; $26A4: $FE $FE
     jp   z, DialogDrawNextCharacterHandler.choice ; $26A6: $CA $95 $25
-    ; $C1CC = 01 when an unfinished textbox is waiting for a button press to continue.
-    ld   a, [$C1CC]                               ; $26A9: $FA $CC $C1
+    ; wC1CC = 01 when an unfinished textbox is waiting for a button press to continue.
+    ld   a, [wC1CC]                               ; $26A9: $FA $CC $C1
     and  a                                        ; $26AC: $A7
     jr   nz, .jp_26B6                             ; $26AD: $20 $07
     inc  a                                        ; $26AF: $3C
-    ; $C1CC = 01 when an unfinished textbox is waiting for a button press to continue.
-    ld   [$C1CC], a                               ; $26B0: $EA $CC $C1
+    ; wC1CC = 01 when an unfinished textbox is waiting for a button press to continue.
+    ld   [wC1CC], a                               ; $26B0: $EA $CC $C1
     call DialogDrawNextCharacterHandler.endDialog ; $26B3: $CD $9F $25
 
 .jp_26B6

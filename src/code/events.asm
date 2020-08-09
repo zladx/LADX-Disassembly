@@ -481,7 +481,7 @@ CheckLightTorchesTrigger::
     ret                                           ; $5FE2: $C9
 
 CheckStepOnButtonTrigger::
-    ld   a, [$C1CB]                               ; $5FE3: $FA $CB $C1
+    ld   a, [wC1CB]                               ; $5FE3: $FA $CB $C1
     and  a                                        ; $5FE6: $A7
     jp   nz, MarkTriggerAsResolved               ; $5FE7: $C2 $60 $0C
 

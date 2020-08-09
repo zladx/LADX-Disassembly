@@ -69,3 +69,4 @@ Thanks to these people for contributing:
 * Vextrove - https://github.com/Vextrove
 * daid - https://github.com/daid
 * stephaneseng - https://github.com/stephaneseng
+* zelosos - https://gitlab.com/zelosos

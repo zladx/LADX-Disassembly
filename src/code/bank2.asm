@@ -152,7 +152,7 @@ ENDC
 label_002_4287:
     ld   a, [wIsShootingArrow]                    ; $4287: $FA $4C $C1
     and  a                                        ; $428A: $A7
-    jr   z, .jr_002_4291                           ; $428B: $28 $04
+    jr   z, .jr_002_4291                          ; $428B: $28 $04
 
     dec  a                                        ; $428D: $3D
     ld   [wIsShootingArrow], a                    ; $428E: $EA $4C $C1
@@ -160,7 +160,7 @@ label_002_4287:
 .jr_002_4291
     ld   a, [$C1C4]                               ; $4291: $FA $C4 $C1
     and  a                                        ; $4294: $A7
-    jr   z, .jr_002_429B                           ; $4295: $28 $04
+    jr   z, .jr_002_429B                          ; $4295: $28 $04
 
     dec  a                                        ; $4297: $3D
     ld   [$C1C4], a                               ; $4298: $EA $C4 $C1
@@ -168,7 +168,7 @@ label_002_4287:
 .jr_002_429B
     ld   a, [wBombArrowCooldown]                  ; $429B: $FA $C0 $C1
     and  a                                        ; $429E: $A7
-    jr   z, .jr_002_42A5                           ; $429F: $28 $04
+    jr   z, .jr_002_42A5                          ; $429F: $28 $04
 
     dec  a                                        ; $42A1: $3D
     ld   [wBombArrowCooldown], a                  ; $42A2: $EA $C0 $C1
@@ -177,7 +177,7 @@ label_002_4287:
     call func_002_436C                            ; $42A5: $CD $6C $43
     ld   a, [wC16E]                               ; $42A8: $FA $6E $C1
     and  a                                        ; $42AB: $A7
-    jr   z, .jr_002_42B2                           ; $42AC: $28 $04
+    jr   z, .jr_002_42B2                          ; $42AC: $28 $04
 
     dec  a                                        ; $42AE: $3D
     ld   [wC16E], a                               ; $42AF: $EA $6E $C1
@@ -185,7 +185,7 @@ label_002_4287:
 .jr_002_42B2
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $42B2: $F0 $A1
     cp   $02                                      ; $42B4: $FE $02
-    jr   nz, .jr_002_42C7                          ; $42B6: $20 $0F
+    jr   nz, .jr_002_42C7                         ; $42B6: $20 $0F
 
     xor  a                                        ; $42B8: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42B9: $E0 $A1
@@ -269,7 +269,7 @@ label_002_4287:
     ret                                           ; $4337: $C9
 
 func_002_4338::
-    ld   a, [wIsCarryingLiftedObject]                               ; $4338: $FA $5C $C1
+    ld   a, [wIsCarryingLiftedObject]             ; $4338: $FA $5C $C1
     cp   $02                                      ; $433B: $FE $02
     jr   c, jr_002_4345                           ; $433D: $38 $06
 
@@ -327,7 +327,7 @@ MoveLinkToPressedButtonDirection::
     or   e                                        ; $437E: $B3
     ld   e, a                                     ; $437F: $5F
     ; hLinkPositionXIncrement = [HorizontalIncrementForLinkPosition + de]
-    ld   hl, HorizontalIncrementForLinkPosition                        ; $4380: $21 $C5 $48
+    ld   hl, HorizontalIncrementForLinkPosition   ; $4380: $21 $C5 $48
     add  hl, de                                   ; $4383: $19
     ld   a, [hl]                                  ; $4384: $7E
     ldh  [hLinkPositionXIncrement], a             ; $4385: $E0 $9A
@@ -599,11 +599,11 @@ Data_002_44E7::
 func_002_44ED::
     ld   a, [wIsLinkInTheAir]                     ; $44ED: $FA $46 $C1
     and  a                                        ; $44F0: $A7
-    jp   z, groundVfxEnd                        ; $44F1: $CA $AC $45
+    jp   z, groundVfxEnd                          ; $44F1: $CA $AC $45
 
     ldh  a, [hIsSideScrolling]                    ; $44F4: $F0 $F9
     and  a                                        ; $44F6: $A7
-    jp   nz, groundVfxEnd                       ; $44F7: $C2 $AC $45
+    jp   nz, groundVfxEnd                         ; $44F7: $C2 $AC $45
 
 func_002_44FA::
     call func_21E1                                ; $44FA: $CD $E1 $21
@@ -685,7 +685,7 @@ jr_002_4563:
     jr   z, jr_002_456C                           ; $4566: $28 $04
 
     and  $80                                      ; $4568: $E6 $80
-    jr   z, groundVfxEnd                        ; $456A: $28 $40
+    jr   z, groundVfxEnd                          ; $456A: $28 $40
 
 jr_002_456C:
     call ResetPegasusBoots                        ; $456C: $CD $B6 $0C
@@ -721,8 +721,8 @@ jr_002_456C:
     cp   $51                                      ; $45A4: $FE $51
     jr   z, groundVfxEnd                          ; $45A6: $28 $04
 
-    ld   a, NOISE_SFX_FOOTSTEP                     ; $45A8: $3E $07
-    ldh  [hNoiseSfx], a                            ; $45AA: $E0 $F4
+    ld   a, NOISE_SFX_FOOTSTEP                    ; $45A8: $3E $07
+    ldh  [hNoiseSfx], a                           ; $45AA: $E0 $F4
 
 groundVfxEnd:
     ret                                           ; $45AC: $C9
@@ -1427,7 +1427,7 @@ func_002_4B49::
     cp   MAP_WINDFISHS_EGG                        ; $4B51: $FE $08
     jr   nz, jr_002_4B64                          ; $4B53: $20 $0F
 
-    ld   a, [wFinalNightmareForm]                               ; $4B55: $FA $19 $D2
+    ld   a, [wFinalNightmareForm]                 ; $4B55: $FA $19 $D2
     cp   $02                                      ; $4B58: $FE $02
     jr   nz, jr_002_4B64                          ; $4B5A: $20 $08
 
@@ -1753,7 +1753,7 @@ jr_002_4D1F:
     ret                                           ; $4D1F: $C9
 
 func_002_4D20::
-    ld   a, [wIsCarryingLiftedObject]                               ; $4D20: $FA $5C $C1
+    ld   a, [wIsCarryingLiftedObject]             ; $4D20: $FA $5C $C1
     ld   hl, hLinkPositionZ                       ; $4D23: $21 $A2 $FF
     or   [hl]                                     ; $4D26: $B6
     ld   hl, wLinkMotionState                     ; $4D27: $21 $1C $C1
@@ -2133,7 +2133,7 @@ jr_002_4F3C:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4F68: $E0 $A1
 
 jr_002_4F6A:
-    jp   UpdateLinkWalkingAnimation                                ; $4F6A: $C3 $50 $1A
+    jp   UpdateLinkWalkingAnimation               ; $4F6A: $C3 $50 $1A
 
 label_002_4F6D:
     ldh  a, [hJoypadState]                        ; $4F6D: $F0 $CC
@@ -2229,13 +2229,13 @@ jr_002_4FE6:
     or   [hl]                                     ; $4FEC: $B6
     jr   z, jr_002_4FF5                           ; $4FED: $28 $06
 
-    ld   hl, wConsecutiveStepsCount                                ; $4FEF: $21 $20 $C1
+    ld   hl, wConsecutiveStepsCount               ; $4FEF: $21 $20 $C1
     inc  [hl]                                     ; $4FF2: $34
     jr   jr_002_4FFA                              ; $4FF3: $18 $05
 
 jr_002_4FF5:
     ld   a, $03                                   ; $4FF5: $3E $03
-    ld   [wConsecutiveStepsCount], a                               ; $4FF7: $EA $20 $C1
+    ld   [wConsecutiveStepsCount], a              ; $4FF7: $EA $20 $C1
 
 jr_002_4FFA:
     ld   hl, Data_002_4905                        ; $4FFA: $21 $05 $49
@@ -2247,7 +2247,7 @@ jr_002_4FFA:
     ldh  [hLinkDirection], a                      ; $5003: $E0 $9E
 
 jr_002_5005:
-    call UpdateLinkWalkingAnimation                                ; $5005: $CD $50 $1A
+    call UpdateLinkWalkingAnimation               ; $5005: $CD $50 $1A
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $5008: $F0 $A1
     and  a                                        ; $500A: $A7
     jr   z, jr_002_5012                           ; $500B: $28 $05
@@ -2488,8 +2488,8 @@ jr_002_516A:
     jr   z, jr_002_5155                           ; $5174: $28 $DF
 
 jr_002_5176:
-    ldh  a, [hMapId]                         ; $5176: $F0 $F7
-    cp   MAP_CAVE_B                                      ; $5178: $FE $0A
+    ldh  a, [hMapId]                              ; $5176: $F0 $F7
+    cp   MAP_CAVE_B                               ; $5178: $FE $0A
     jr   nz, jr_002_51AC                          ; $517A: $20 $30
 
     ldh  a, [hMapRoom]                          ; Underworld 2:
@@ -2507,7 +2507,7 @@ jr_002_5176:
 
 jr_002_518E:
     ld   a, $00                                   ; $518E: $3E $00
-    ld   hl, wWarp0MapCategory                                ; $5190: $21 $01 $D4
+    ld   hl, wWarp0MapCategory                    ; $5190: $21 $01 $D4
     ld   [hl+], a                                 ; $5193: $22
     ld   a, $00                                   ; $5194: $3E $00
     ld   [hl+], a                                 ; $5196: $22
@@ -2699,7 +2699,7 @@ jr_002_529F:
 
     jr   nz, jr_002_52B3                          ; $52AD: $20 $04
 
-    ld   a, NOISE_SFX_SPIN_ATTACK                       ; $52AF: $3E $03
+    ld   a, NOISE_SFX_SPIN_ATTACK                 ; $52AF: $3E $03
     ldh  [hWaveSfx], a                            ; $52B1: $E0 $F3
 
 jr_002_52B3:
@@ -2876,7 +2876,7 @@ TryOpenLockedDoor::
     ; Decrease the player small key count
     dec  a                                        ; $53BE: $3D
     ld   [wSmallKeysCount], a                     ; $53BF: $EA $D0 $DB
-    call SynchronizeDungeonsItemFlags_trampoline                               ; $53C2: $CD $02 $28
+    call SynchronizeDungeonsItemFlags_trampoline  ; $53C2: $CD $02 $28
     call EnqueueDoorUnlockedSfx                   ; $53C5: $CD $20 $54
 
     ; Mark the room as opened
@@ -2935,7 +2935,7 @@ TryOpenLockedDoor::
     ret                                           ; $541F: $C9
 
 EnqueueDoorUnlockedSfx::
-    ld   a, NOISE_SFX_DOOR_UNLOCKED                     ; $5420: $3E $04
+    ld   a, NOISE_SFX_DOOR_UNLOCKED               ; $5420: $3E $04
     ldh  [hNoiseSfx], a                           ; $5422: $E0 $F4
     ret                                           ; $5424: $C9
 
@@ -2959,8 +2959,8 @@ label_002_5425:
     ld   hl, wEntitiesPosXTable                   ; $543D: $21 $00 $C2
     add  hl, de                                   ; $5440: $19
     ld   [hl], $28                                ; $5441: $36 $28
-    ldh  a, [hMapId]                         ; $5443: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                                      ; $5445: $FE $FF
+    ldh  a, [hMapId]                              ; $5443: $F0 $F7
+    cp   MAP_COLOR_DUNGEON                        ; $5445: $FE $FF
     jr   nz, jr_002_5453                          ; $5447: $20 $0A
 
     ld   [hl], $48                                ; $5449: $36 $48
@@ -2974,8 +2974,8 @@ jr_002_5453:
     ld   hl, wEntitiesPosYTable                   ; $5453: $21 $10 $C2
     add  hl, de                                   ; $5456: $19
     ld   [hl], $3C                                ; $5457: $36 $3C
-    ldh  a, [hMapId]                         ; $5459: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                                      ; $545B: $FE $FF
+    ldh  a, [hMapId]                              ; $5459: $F0 $F7
+    cp   MAP_COLOR_DUNGEON                        ; $545B: $FE $FF
     jr   nz, jr_002_5469                          ; $545D: $20 $0A
 
     ld   [hl], $3C                                ; $545F: $36 $3C
@@ -3178,7 +3178,7 @@ jr_002_552A:
     cp   $0A                                      ; $5543: $FE $0A
     jr   nc, jr_002_5566                          ; $5545: $30 $1F
 
-    ld   a, [wIsCarryingLiftedObject]                               ; $5547: $FA $5C $C1
+    ld   a, [wIsCarryingLiftedObject]             ; $5547: $FA $5C $C1
     and  a                                        ; $554A: $A7
     jr   nz, jr_002_5566                          ; $554B: $20 $19
 
@@ -3226,7 +3226,7 @@ RenderTranscientVfx::
     jr   nz, .render                              ; $557A: $20 $03
 
 .removeVfx
-    call ClearTranscientVfx                            ; $557C: $CD $E6 $58
+    call ClearTranscientVfx                       ; $557C: $CD $E6 $58
 
 .render
     pop  af                                       ; $557F: $F1
@@ -3358,8 +3358,8 @@ jr_002_5664:
     cp   $A0                                      ; $5664: $FE $A0
     jr   nz, jr_002_566D                          ; $5666: $20 $05
 
-    ld   hl, hNoiseSfx                             ; $5668: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_DOOR_RUMBLE                    ; $566B: $36 $2A
+    ld   hl, hNoiseSfx                            ; $5668: $21 $F4 $FF
+    ld   [hl], NOISE_SFX_DOOR_RUMBLE              ; $566B: $36 $2A
 
 jr_002_566D:
     cp   $0A                                      ; $566D: $FE $0A
@@ -3461,7 +3461,7 @@ jr_002_56B8:
 jr_002_56FC:
     ld   [hl], $E3                                ; $56FC: $36 $E3
     ld   a, $82                                   ; $56FE: $3E $82
-    call func_2BF                                ; $5700: $CD $2F $0B
+    call func_2BF                                 ; $5700: $CD $2F $0B
     ld   a, JINGLE_DUNGEON_OPENED                 ; $5703: $3E $23
     ldh  [hJingle], a                             ; $5705: $E0 $F2
 
@@ -3803,7 +3803,7 @@ label_002_593B:
     and  a                                        ; $594B: $A7
     jr   z, .return                               ; $594C: $28 $19
 
-    call ExecuteRoomTriggersAndEffects                            ; $594E: $CD $4F $5D
+    call ExecuteRoomTriggersAndEffects            ; $594E: $CD $4F $5D
     ld   a, [$C188]                               ; $5951: $FA $88 $C1
     and  a                                        ; $5954: $A7
     jr   z, .jr_002_5968                          ; $5955: $28 $11
@@ -4162,7 +4162,7 @@ GetRoomStatusAddress::
     cp   MAP_UNKNOWN_1A                           ; $5BB9: $FE $1A
     jr   nc, .computeAddress                      ; $5BBB: $30 $05
     cp   $06                                      ; $5BBD: $FE $06
-    jr   c, .computeAddress                           ; $5BBF: $38 $01
+    jr   c, .computeAddress                       ; $5BBF: $38 $01
     ; d += 1
     inc  d                                        ; $5BC1: $14
 
@@ -4388,9 +4388,9 @@ jr_002_5D21:
     and  a                                        ; $5D27: $A7
     jr   z, jr_002_5D36                           ; $5D28: $28 $0C
 
-    ld   hl, wIndoorARoomStatus                                ; $5D2A: $21 $00 $D9
-    ldh  a, [hMapId]                         ; $5D2D: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                                      ; $5D2F: $FE $FF
+    ld   hl, wIndoorARoomStatus                   ; $5D2A: $21 $00 $D9
+    ldh  a, [hMapId]                              ; $5D2D: $F0 $F7
+    cp   MAP_COLOR_DUNGEON                        ; $5D2F: $FE $FF
     jr   nz, jr_002_5D36                          ; $5D31: $20 $03
 
     ld   hl, wColorDungeonRoomStatus              ; $5D33: $21 $E0 $DD
@@ -4530,7 +4530,7 @@ jr_002_613D:
     jr   z, jr_002_619C                           ; Partially determines if subscreen dungeon map should be drawn
 
     ldh  a, [hMapId]                              ; $618B: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                                      ; $618D: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $618D: $FE $FF
     jr   z, jr_002_6197                           ; $618F: $28 $06
 
     cp   MAP_WINDFISHS_EGG                        ; $6191: $FE $08
@@ -4547,9 +4547,9 @@ jr_002_619C:
 
 jr_002_619F:
     ld   a, $07                                   ; $619F: $3E $07
-    ldh  [hVolumeRight], a                      ; $61A1: $E0 $A9
+    ldh  [hVolumeRight], a                        ; $61A1: $E0 $A9
     ld   a, $70                                   ; $61A3: $3E $70
-    ldh  [hVolumeLeft], a                      ; $61A5: $E0 $AA
+    ldh  [hVolumeLeft], a                         ; $61A5: $E0 $AA
     pop  af                                       ; $61A7: $F1
     ret                                           ; $61A8: $C9
 
@@ -4586,9 +4586,9 @@ jr_002_61C6:
     jr   nz, jr_002_61E4                          ; $61D4: $20 $0E
 
     ld   a, $03                                   ; $61D6: $3E $03
-    ldh  [hVolumeRight], a                      ; $61D8: $E0 $A9
+    ldh  [hVolumeRight], a                        ; $61D8: $E0 $A9
     ld   a, $30                                   ; $61DA: $3E $30
-    ldh  [hVolumeLeft], a                      ; $61DC: $E0 $AA
+    ldh  [hVolumeLeft], a                         ; $61DC: $E0 $AA
 
 jr_002_61DE:
     xor  a                                        ; $61DE: $AF
@@ -4613,17 +4613,17 @@ jr_002_61F4:
 label_002_61F5:
     ld   a, [wDialogState]                        ; $61F5: $FA $9F $C1
     and  $7F                                      ; $61F8: $E6 $7F
-    jr   z, .jr_002_6203                           ; $61FA: $28 $07
+    jr   z, .jr_002_6203                          ; $61FA: $28 $07
 
     cp   $0C                                      ; $61FC: $FE $0C
-    jr   z, .jr_002_6203                           ; $61FE: $28 $03
+    jr   z, .jr_002_6203                          ; $61FE: $28 $03
 
     cp   $0D                                      ; $6200: $FE $0D
     ret  nz                                       ; $6202: $C0
 
 .jr_002_6203:
     call UpdateRupeesCount                        ; $6203: $CD $09 $62
-    jp   UpdateHealth                           ; $6206: $C3 $17 $63
+    jp   UpdateHealth                             ; $6206: $C3 $17 $63
 
 ; Decrement the rupees count and play the associated sound effect
 UpdateRupeesCount::
@@ -4692,7 +4692,7 @@ UpdateRupeesCount::
     ld   [wAddRupeeBufferLow], a                  ; $626E: $EA $90 $DB
 .rupeesLessThan16
 
-    call LoadRupeesDigits                           ; $6271: $CD $CE $62
+    call LoadRupeesDigits                         ; $6271: $CD $CE $62
 
 .jr_002_6274
     ld   hl, wSubstractRupeeBufferHigh            ; $6274: $21 $91 $DB
@@ -4808,7 +4808,7 @@ ThresholdLowHealthTable::
 UpdateHealth:
     ; $wIsOnLowHeath = False
     xor  a                                        ; $6317: $AF
-    ld   [wIsOnLowHeath], a                               ; $6318: $EA $63 $C1
+    ld   [wIsOnLowHeath], a                       ; $6318: $EA $63 $C1
     ; de = 0x00 | $wMaxHealth
     ld   a, [wMaxHealth]                          ; $631B: $FA $5B $DB
     ld   e, a                                     ; $631E: $5F
@@ -4818,16 +4818,16 @@ UpdateHealth:
     add  hl, de                                   ; $6324: $19
     ld   a, [wHealth]                             ; $6325: $FA $5A $DB
     cp   [hl]                                     ; $6328: $BE
-    jr   nc, .increaseHealth                  ; $6329: $30 $17
+    jr   nc, .increaseHealth                      ; $6329: $30 $17
 
     ; $wIsOnLowHealth = True
     ld   a, TRUE                                   ; $632B: $3E $01
-    ld   [wIsOnLowHeath], a                               ; $632D: $EA $63 $C1
+    ld   [wIsOnLowHeath], a                        ; $632D: $EA $63 $C1
     ; if $wTimeToNextLowHealthSFX == 0 play low hearts sound
     ld   a, [wTimeToNextLowHealthSFX]              ; $6330: $FA $10 $C1
-    dec  a                                        ; $6333: $3D
+    dec  a                                         ; $6333: $3D
     ; could be easier done with jr c, .savewTimeToNextLowHealthSFX
-    cp   $FF                                      ; $6334: $FE $FF
+    cp   $FF                                       ; $6334: $FE $FF
     jr   nz, .savewTimeToNextLowHealthSFX          ; $6336: $20 $07
     ; play low hearts sound
     ld   a, LOW_HEALTH_SFX_PAUSE                  ; $6338: $3E $30
@@ -4837,28 +4837,28 @@ UpdateHealth:
 .savewTimeToNextLowHealthSFX:
     ; if $wTimeToNextLowHealthSFX > 0: $wTimeToNextLowHealthSFX -= 1 
     ; else:                           $wTimeToNextLowHealthSFX  = LOW_HEALTH_PEEP_PAUSE
-    ld   [wTimeToNextLowHealthSFX], a              ; $633F: $EA $10 $C1
+    ld   [wTimeToNextLowHealthSFX], a             ; $633F: $EA $10 $C1
 
 .increaseHealth:
     ; return if even frame
     ldh  a, [hFrameCounter]                       ; $6342: $F0 $E7
     and  $01                                      ; $6344: $E6 $01
-    jr   z, .return2                           ; $6346: $28 $5A
+    jr   z, .return2                              ; $6346: $28 $5A
     ; return if background copy was not executed yet
     ld   a, [wRequests]                           ; $6348: $FA $00 $D6
     and  a                                        ; $634B: $A7
-    jr   nz, .return2                          ; $634C: $20 $54
+    jr   nz, .return2                             ; $634C: $20 $54
     ; if no health has to be added go to health reduce section
     ld   a, [wAddHealthBuffer]                    ; $634E: $FA $93 $DB
     and  a                                        ; $6351: $A7
-    jr   z, .reduceHealth                           ; $6352: $28 $31
+    jr   z, .reduceHealth                         ; $6352: $28 $31
     ; decrease $wAddHealthBuffer
     dec  a                                        ; $6354: $3D
     ld   [wAddHealthBuffer], a                    ; $6355: $EA $93 $DB
     ; cap $wMaxHealth at $0E
     ld   a, [wMaxHealth]                          ; $6358: $FA $5B $DB
     cp   $0F                                      ; $635B: $FE $0F
-    jr   c, .skipSetMaxHealthCap                           ; $635D: $38 $02
+    jr   c, .skipSetMaxHealthCap                  ; $635D: $38 $02
     ld   a, $0E                                   ; $635F: $3E $0E
 
 .skipSetMaxHealthCap:
@@ -4870,20 +4870,20 @@ UpdateHealth:
     ; if not all full health => increase health
     ld   a, [wHealth]                             ; $6368: $FA $5A $DB
     cp   e                                        ; $636B: $BB
-    jr   nz, .incrementHealth                          ; $636C: $20 $06
+    jr   nz, .incrementHealth                     ; $636C: $20 $06
     ; reset $wAddHealthBuffer to 0
     xor  a                                        ; $636E: $AF
     ld   [wAddHealthBuffer], a                    ; $636F: $EA $93 $DB
-    jr   .reduceHealth                              ; $6372: $18 $11
+    jr   .reduceHealth                            ; $6372: $18 $11
 
 .incrementHealth:
     ; increment $wHealth by 1
     inc  a                                        ; $6374: $3C
     ld   [wHealth], a                             ; $6375: $EA $5A $DB
     ; if one heart is filled up play picked up sound
-    and  ONE_HEART-1                                      ; $6378: $E6 $07
-    cp   ONE_HEART-2                                      ; $637A: $FE $06
-    jr   nz, .skipPickupSound                          ; $637C: $20 $04
+    and  ONE_HEART-1                              ; $6378: $E6 $07
+    cp   ONE_HEART-2                              ; $637A: $FE $06
+    jr   nz, .skipPickupSound                     ; $637C: $20 $04
     ld   a, WAVE_SFX_HEART_PICKED_UP              ; $637E: $3E $06
     ldh  [hWaveSfx], a                            ; $6380: $E0 $F3
 
@@ -4894,14 +4894,14 @@ UpdateHealth:
     ; return if health will not be reudced
     ld   a, [wSubtractHealthBuffer]               ; $6385: $FA $94 $DB
     and  a                                        ; $6388: $A7
-    jr   z, .return2                           ; $6389: $28 $17
+    jr   z, .return2                              ; $6389: $28 $17
     ; decrement the buffer
     dec  a                                        ; $638B: $3D
     ld   [wSubtractHealthBuffer], a               ; $638C: $EA $94 $DB
     ; if $wHealth != 0 decrement it
     ld   a, [wHealth]                             ; $638F: $FA $5A $DB
     and  a                                        ; $6392: $A7
-    jr   z, .skipDecrementHealth                           ; $6393: $28 $04
+    jr   z, .skipDecrementHealth                  ; $6393: $28 $04
     dec  a                                        ; $6395: $3D
     ld   [wHealth], a                             ; $6396: $EA $5A $DB
 
@@ -4910,7 +4910,7 @@ UpdateHealth:
     ; return if player has health
     ld   a, [wHealth]                             ; $639C: $FA $5A $DB
     and  a                                        ; $639F: $A7
-    jr   z, .noHealth                           ; $63A0: $28 $01
+    jr   z, .noHealth                             ; $63A0: $28 $01
 
 .return2:
     ret                                           ; $63A2: $C9
@@ -4919,19 +4919,19 @@ UpdateHealth:
     ; return if player has no medicine
     ld   a, [wHasMedicine]                        ; $63A3: $FA $0D $DB
     and  a                                        ; $63A6: $A7
-    jr   z, .return                           ; $63A7: $28 $55
+    jr   z, .return                               ; $63A7: $28 $55
     ; consume one medicine
     dec  a                                        ; $63A9: $3D
     ld   [wHasMedicine], a                        ; $63AA: $EA $0D $DB
     ; add one heart to the $wHealth
-    ld   a, ONE_HEART                                   ; $63AD: $3E $08
+    ld   a, ONE_HEART                             ; $63AD: $3E $08
     ld   [wHealth], a                             ; $63AF: $EA $5A $DB
     ; add 16 hearts to the wAddHealthBuffer
     ld   a, [wAddHealthBuffer]                    ; $63B2: $FA $93 $DB
-    add  ONE_HEART*16                                      ; $63B5: $C6 $80
+    add  ONE_HEART*16                             ; $63B5: $C6 $80
     ld   [wAddHealthBuffer], a                    ; $63B7: $EA $93 $DB
     ; make player invincible so no damage can be taken some time
-    ld   a, DAMAGE_COOLDOWN_TIME                                   ; $63BA: $3E $A0
+    ld   a, DAMAGE_COOLDOWN_TIME                  ; $63BA: $3E $A0
     ld   [wInvincibilityCounter], a               ; $63BC: $EA $C7 $DB
     ; TODO: comment what is going one here
     ld   a, [wRequests]                           ; $63BF: $FA $00 $D6
@@ -4950,7 +4950,7 @@ UpdateHealth:
     ld   a, [wHasMedicine]                        ; $63D7: $FA $0D $DB
     add  $B0                                      ; $63DA: $C6 $B0
     cp   $B0                                      ; $63DC: $FE $B0
-    jr   z, .jr_002_63E4                           ; $63DE: $28 $04
+    jr   z, .jr_002_63E4                          ; $63DE: $28 $04
 
     ld   [hl+], a                                 ; $63E0: $22
     xor  a                                        ; $63E1: $AF
@@ -5195,7 +5195,7 @@ jr_002_695C:
     dec  [hl]                                     ; $696D: $35
 
 jr_002_696E:
-    ld   hl, wConsecutiveStepsCount                                ; $696E: $21 $20 $C1
+    ld   hl, wConsecutiveStepsCount               ; $696E: $21 $20 $C1
     inc  [hl]                                     ; $6971: $34
     ldh  a, [hPressedButtonsMask]                 ; $6972: $F0 $CB
     and  $03                                      ; $6974: $E6 $03
@@ -5262,7 +5262,7 @@ func_002_69A1::
     and  $0F                                      ; $69CF: $E6 $0F
     jr   z, jr_002_69D7                           ; $69D1: $28 $04
 
-    ld   hl, wConsecutiveStepsCount                                ; $69D3: $21 $20 $C1
+    ld   hl, wConsecutiveStepsCount               ; $69D3: $21 $20 $C1
     inc  [hl]                                     ; $69D6: $34
 
 jr_002_69D7:
@@ -5332,9 +5332,9 @@ jr_002_6A24:
     and  $0F                                      ; $6A2C: $E6 $0F
     jr   nz, jr_002_6A3E                          ; $6A2E: $20 $0E
 
-    ld   a, [wConsecutiveStepsCount]                               ; $6A30: $FA $20 $C1
+    ld   a, [wConsecutiveStepsCount]              ; $6A30: $FA $20 $C1
     add  $02                                      ; $6A33: $C6 $02
-    ld   [wConsecutiveStepsCount], a                               ; $6A35: $EA $20 $C1
+    ld   [wConsecutiveStepsCount], a              ; $6A35: $EA $20 $C1
     call func_1756                                ; $6A38: $CD $56 $17
     jp   label_002_6ADB                           ; $6A3B: $C3 $DB $6A
 
@@ -5363,7 +5363,7 @@ jr_002_6A4C:
 
 jr_002_6A64:
     ld   a, $0A                                   ; $6A64: $3E $0A
-    ld   [wConsecutiveStepsCount], a                               ; $6A66: $EA $20 $C1
+    ld   [wConsecutiveStepsCount], a              ; $6A66: $EA $20 $C1
     ldh  a, [hLinkPositionXIncrement]             ; $6A69: $F0 $9A
     and  a                                        ; $6A6B: $A7
     jr   z, jr_002_6A73                           ; $6A6C: $28 $05
@@ -5404,8 +5404,8 @@ jr_002_6A94:
     and  a                                        ; $6A97: $A7
     jr   z, jr_002_6AAA                           ; $6A98: $28 $10
 
-    ld   a, NOISE_SFX_FOOTSTEP                          ; $6A9A: $3E $07
-    ldh  [hNoiseSfx], a                            ; $6A9C: $E0 $F4
+    ld   a, NOISE_SFX_FOOTSTEP                    ; $6A9A: $3E $07
+    ldh  [hNoiseSfx], a                           ; $6A9C: $E0 $F4
     call ResetPegasusBoots                        ; $6A9E: $CD $B6 $0C
     ld   [wIsLinkInTheAir], a                     ; $6AA1: $EA $46 $C1
     ld   [$C152], a                               ; $6AA4: $EA $52 $C1
@@ -5435,7 +5435,7 @@ jr_002_6AAA:
     ldh  [hLinkDirection], a                      ; $6AC9: $E0 $9E
 
 jr_002_6ACB:
-    ld   hl, wConsecutiveStepsCount                                ; $6ACB: $21 $20 $C1
+    ld   hl, wConsecutiveStepsCount               ; $6ACB: $21 $20 $C1
     inc  [hl]                                     ; $6ACE: $34
     jr   label_002_6ADB                           ; $6ACF: $18 $0A
 
@@ -5445,7 +5445,7 @@ jr_002_6AD1:
     jr   nz, label_002_6ADB                       ; $6AD5: $20 $04
 
     xor  a                                        ; $6AD7: $AF
-    ld   [wConsecutiveStepsCount], a                               ; $6AD8: $EA $20 $C1
+    ld   [wConsecutiveStepsCount], a              ; $6AD8: $EA $20 $C1
 
 label_002_6ADB:
     ; if wSwordAnimationState != SWORD_ANIMATION_STATE_NONE jump to jr_002_6AE6
@@ -5681,7 +5681,7 @@ jr_002_6BF6:
     and  $02                                      ; $6C23: $E6 $02
     sla  a                                        ; $6C25: $CB $27
     ld   [$C158], a                               ; $6C27: $EA $58 $C1
-    ld   a, JINGLE_HUGE_BUMP                   ; $6C2A: $3E $0B
+    ld   a, JINGLE_HUGE_BUMP                      ; $6C2A: $3E $0B
     ldh  [hJingle], a                             ; $6C2C: $E0 $F2
     ret                                           ; $6C2E: $C9
 
@@ -5746,7 +5746,7 @@ CheckPositionForMapTransition::
 
     ; If on MAP_CAVE_E…
     ldh  a, [hMapId]                              ; $6C7D: $F0 $F7
-    cp   MAP_CAVE_E                         ; $6C7F: $FE $1F
+    cp   MAP_CAVE_E                               ; $6C7F: $FE $1F
     jr   nz, .kanaletEnd                          ; $6C81: $20 $16
 
     ; … and not side-scrolling…
@@ -5939,7 +5939,7 @@ CheckPositionForMapTransition::
 
 .manualEntryPointsEnd
 
-    call CopyLinkFinalPositionToPosition                                ; $6D5C: $CD $BE $0C
+    call CopyLinkFinalPositionToPosition          ; $6D5C: $CD $BE $0C
 
     ld   a, [wLinkGroundVfx]                      ; $6D5F: $FA $81 $C1
     cp   $50                                      ; $6D62: $FE $50
@@ -5965,7 +5965,7 @@ CheckPositionForMapTransition::
     jp   nz, clearIncrementAndReturn              ; $6D85: $C2 $0C $6E
 
 .jr_002_6D88
-    ld   a, [wIsRunningWithPegasusBoots]                               ; $6D88: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]          ; $6D88: $FA $4A $C1
     and  a                                        ; $6D8B: $A7
     jr   nz, .jr_002_6D94                         ; $6D8C: $20 $06
 
@@ -6434,9 +6434,9 @@ jr_002_700D:
 jr_002_7015:
     ; Schedule deep rumble animation
     ldh  a, [hLinkPositionY]                      ; $7015: $F0 $99
-    ldh  [hScratch1], a                               ; $7017: $E0 $D8
+    ldh  [hScratch1], a                           ; $7017: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $7019: $F0 $98
-    ldh  [hScratch0], a                               ; $701B: $E0 $D7
+    ldh  [hScratch0], a                           ; $701B: $E0 $D7
     ld   a, TRANSCIENT_VFX_RUMBLE                 ; $701D: $3E $09
     call AddTranscientVfx                         ; $701F: $CD $C7 $0C
     ld   [hl], $DF                                ; $7022: $36 $DF
@@ -6710,7 +6710,7 @@ label_002_719C:
     jp   collisionEnd                             ; $71B8: $C3 $54 $74
 
 label_002_71BB:
-    ld   a, [wIsCarryingLiftedObject]                               ; $71BB: $FA $5C $C1
+    ld   a, [wIsCarryingLiftedObject]             ; $71BB: $FA $5C $C1
     and  a                                        ; $71BE: $A7
     jp   nz, collisionEnd                         ; $71BF: $C2 $54 $74
 
@@ -6960,7 +6960,7 @@ jr_002_7330:
     jr   nz, jr_002_733B                          ; $7334: $20 $05
 
     ld   a, $03                                   ; $7336: $3E $03
-    ld   [wIsLinkPushing], a                               ; $7338: $EA $44 $C1
+    ld   [wIsLinkPushing], a                      ; $7338: $EA $44 $C1
 
 jr_002_733B:
     ldh  a, [hMapId]                              ; $733B: $F0 $F7
@@ -7013,8 +7013,8 @@ jr_002_734F:
     ld   hl, wEntitiesSpriteVariantTable          ; $738A: $21 $B0 $C3
     add  hl, de                                   ; $738D: $19
     ld   [hl], d                                  ; $738E: $72
-    ld   hl, hNoiseSfx                             ; $738F: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_POT_SMASHED                ; $7392: $36 $09
+    ld   hl, hNoiseSfx                            ; $738F: $21 $F4 $FF
+    ld   [hl], NOISE_SFX_POT_SMASHED              ; $7392: $36 $09
     ld   hl, wEntitiesPrivateCountdown1Table      ; $7394: $21 $F0 $C2
     add  hl, de                                   ; $7397: $19
     ld   [hl], $0F                                ; $7398: $36 $0F
@@ -7130,7 +7130,7 @@ jr_002_7402:
     jr   z, jr_002_742D                           ; $7413: $28 $18
 
 jr_002_7415:
-    call_open_dialog $253            ; $7415
+    call_open_dialog $253                         ; $7415
     jp   collisionEnd                             ; $741A: $C3 $54 $74
 
 jr_002_741D:
@@ -7160,15 +7160,15 @@ interactiveBlock:
     ldh  [hFFE8], a                               ; $743A: $E0 $E8
     xor  a                                        ; $743C: $AF
     ld   [$C191], a                               ; $743D: $EA $91 $C1
-    call TryOpenLockedDoor                            ; $7440: $CD $B0 $53
+    call TryOpenLockedDoor                        ; $7440: $CD $B0 $53
 
     ; If on overworld…
-    ld   a, [wIsIndoor]                         ; $7443: $FA $A5 $DB
+    ld   a, [wIsIndoor]                           ; $7443: $FA $A5 $DB
     and  a                                        ; $7446: $A7
     jr   nz, collisionEnd                         ; $7447: $20 $0B
 
     ; … and on room 77 (graveyard with entry to color dungeon)…
-    ldh  a, [hMapRoom]                           ; $7449: $F0 $F6
+    ldh  a, [hMapRoom]                            ; $7449: $F0 $F6
     cp   $77                                      ; $744B: $FE $77
     jr   nz, collisionEnd                         ; $744D: $20 $05
 
@@ -7294,7 +7294,7 @@ jr_002_74C9:
     and  $02                                      ; $74F0: $E6 $02
     sla  a                                        ; $74F2: $CB $27
     ld   [$C158], a                               ; $74F4: $EA $58 $C1
-    ld   a, JINGLE_HUGE_BUMP                   ; $74F7: $3E $0B
+    ld   a, JINGLE_HUGE_BUMP                      ; $74F7: $3E $0B
     ldh  [hJingle], a                             ; $74F9: $E0 $F2
     jp   func_1828                                ; $74FB: $C3 $28 $18
 
@@ -7819,8 +7819,8 @@ jr_002_77B2:
     and  a                                        ; $77EC: $A7
     jr   z, jr_002_77F7                           ; $77ED: $28 $08
 
-    ld   a, NOISE_SFX_FOOTSTEP                          ; $77EF: $3E $07
-    ldh  [hNoiseSfx], a                            ; $77F1: $E0 $F4
+    ld   a, NOISE_SFX_FOOTSTEP                    ; $77EF: $3E $07
+    ldh  [hNoiseSfx], a                           ; $77F1: $E0 $F4
     xor  a                                        ; $77F3: $AF
     ld   [$D6F9], a                               ; $77F4: $EA $F9 $D6
 
@@ -7857,7 +7857,7 @@ jr_002_77F7:
     cp   $C3                                      ; $782A: $FE $C3
     jr   nz, jr_002_7833                          ; $782C: $20 $05
 
-    ld   hl, wOverworldRoomStatus + $79                                ; $782E: $21 $79 $D8
+    ld   hl, wOverworldRoomStatus + $79           ; $782E: $21 $79 $D8
     set  4, [hl]                                  ; $7831: $CB $E6
 
 jr_002_7833:
@@ -7921,7 +7921,7 @@ label_002_787D:
     ld   a, $1A                                   ; $7887: $3E $1A
     ld   [hl+], a                                 ; $7889: $22
 
-    ld   a, [wConsecutiveStepsCount]                               ; $788A: $FA $20 $C1
+    ld   a, [wConsecutiveStepsCount]              ; $788A: $FA $20 $C1
     rla                                           ; $788D: $17
     rla                                           ; $788E: $17
     and  $20                                      ; $788F: $E6 $20

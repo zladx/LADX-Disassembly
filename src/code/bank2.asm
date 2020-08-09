@@ -4613,17 +4613,17 @@ jr_002_61F4:
 label_002_61F5:
     ld   a, [wDialogState]                        ; $61F5: $FA $9F $C1
     and  $7F                                      ; $61F8: $E6 $7F
-    jr   z, jr_002_6203                           ; $61FA: $28 $07
+    jr   z, .jr_002_6203                           ; $61FA: $28 $07
 
     cp   $0C                                      ; $61FC: $FE $0C
-    jr   z, jr_002_6203                           ; $61FE: $28 $03
+    jr   z, .jr_002_6203                           ; $61FE: $28 $03
 
     cp   $0D                                      ; $6200: $FE $0D
     ret  nz                                       ; $6202: $C0
 
-jr_002_6203:
+.jr_002_6203:
     call UpdateRupeesCount                        ; $6203: $CD $09 $62
-    jp   label_002_6317                           ; $6206: $C3 $17 $63
+    jp   UpdateHealth                           ; $6206: $C3 $17 $63
 
 ; Decrement the rupees count and play the associated sound effect
 UpdateRupeesCount::
@@ -4787,119 +4787,153 @@ LoadRupeesDigits::
     ld   [hl+], a                                 ; $6306: $22
     db   $3E                                      ; $6307: $3E
 
-Data_002_6308::
-    db   $00, $22, $C9, $05, $05, $05, $09, $09, $09, $11, $11, $11, $19, $19, $19
+; Table that defines what counts as low health when having XX max hearts.
+ThresholdLowHealthTable::
+    db   $00 ;  0 max hearts
+    db   $22 ;  1 max hearts
+    db   $C9 ;  2 max hearts
+    db   $05 ;  3 max hearts
+    db   $05 ;  4 max hearts
+    db   $05 ;  5 max hearts
+    db   $09 ;  6 max hearts
+    db   $09 ;  7 max hearts
+    db   $09 ;  8 max hearts
+    db   $11 ;  9 max hearts
+    db   $11 ; 10 max hearts
+    db   $11 ; 11 max hearts
+    db   $19 ; 12 max hearts
+    db   $19 ; 13 max hearts
+    db   $19 ; 14 max hearts
 
-label_002_6317:
+UpdateHealth:
+    ; $wIsOnLowHeath = False
     xor  a                                        ; $6317: $AF
-    ld   [wC163], a                               ; $6318: $EA $63 $C1
+    ld   [wIsOnLowHeath], a                               ; $6318: $EA $63 $C1
+    ; de = 0x00 | $wMaxHealth
     ld   a, [wMaxHealth]                          ; $631B: $FA $5B $DB
     ld   e, a                                     ; $631E: $5F
     ld   d, $00                                   ; $631F: $16 $00
-    ld   hl, Data_002_6308                        ; $6321: $21 $08 $63
+    ; if wHealth is above threshold skip low health section
+    ld   hl, ThresholdLowHealthTable              ; $6321: $21 $08 $63
     add  hl, de                                   ; $6324: $19
     ld   a, [wHealth]                             ; $6325: $FA $5A $DB
     cp   [hl]                                     ; $6328: $BE
-    jr   nc, jr_002_6342                          ; $6329: $30 $17
+    jr   nc, .increaseHealth                  ; $6329: $30 $17
 
-    ld   a, $01                                   ; $632B: $3E $01
-    ld   [wC163], a                               ; $632D: $EA $63 $C1
-    ld   a, [wC110]                               ; $6330: $FA $10 $C1
+    ; $wIsOnLowHealth = True
+    ld   a, TRUE                                   ; $632B: $3E $01
+    ld   [wIsOnLowHeath], a                               ; $632D: $EA $63 $C1
+    ; if $wTimeToNextLowHealthSFX == 0 play low hearts sound
+    ld   a, [wTimeToNextLowHealthSFX]              ; $6330: $FA $10 $C1
     dec  a                                        ; $6333: $3D
+    ; could be easier done with jr c, .savewTimeToNextLowHealthSFX
     cp   $FF                                      ; $6334: $FE $FF
-    jr   nz, jr_002_633F                          ; $6336: $20 $07
-
-    ld   a, $30                                   ; $6338: $3E $30
+    jr   nz, .savewTimeToNextLowHealthSFX          ; $6336: $20 $07
+    ; play low hearts sound
+    ld   a, LOW_HEALTH_SFX_PAUSE                  ; $6338: $3E $30
     ld   hl, hWaveSfx                             ; $633A: $21 $F3 $FF
     ld   [hl], WAVE_SFX_LOW_HEARTS                ; $633D: $36 $04
 
-jr_002_633F:
-    ld   [wC110], a                               ; $633F: $EA $10 $C1
+.savewTimeToNextLowHealthSFX:
+    ; if $wTimeToNextLowHealthSFX > 0: $wTimeToNextLowHealthSFX -= 1 
+    ; else:                           $wTimeToNextLowHealthSFX  = LOW_HEALTH_PEEP_PAUSE
+    ld   [wTimeToNextLowHealthSFX], a              ; $633F: $EA $10 $C1
 
-jr_002_6342:
+.increaseHealth:
+    ; return if even frame
     ldh  a, [hFrameCounter]                       ; $6342: $F0 $E7
     and  $01                                      ; $6344: $E6 $01
-    jr   z, jr_002_63A2                           ; $6346: $28 $5A
-
+    jr   z, .return2                           ; $6346: $28 $5A
+    ; return if background copy was not executed yet
     ld   a, [wRequests]                           ; $6348: $FA $00 $D6
     and  a                                        ; $634B: $A7
-    jr   nz, jr_002_63A2                          ; $634C: $20 $54
-
+    jr   nz, .return2                          ; $634C: $20 $54
+    ; if no health has to be added go to health reduce section
     ld   a, [wAddHealthBuffer]                    ; $634E: $FA $93 $DB
     and  a                                        ; $6351: $A7
-    jr   z, jr_002_6385                           ; $6352: $28 $31
-
+    jr   z, .reduceHealth                           ; $6352: $28 $31
+    ; decrease $wAddHealthBuffer
     dec  a                                        ; $6354: $3D
     ld   [wAddHealthBuffer], a                    ; $6355: $EA $93 $DB
+    ; cap $wMaxHealth at $0E
     ld   a, [wMaxHealth]                          ; $6358: $FA $5B $DB
     cp   $0F                                      ; $635B: $FE $0F
-    jr   c, jr_002_6361                           ; $635D: $38 $02
-
+    jr   c, .skipSetMaxHealthCap                           ; $635D: $38 $02
     ld   a, $0E                                   ; $635F: $3E $0E
 
-jr_002_6361:
+.skipSetMaxHealthCap:
+    ; e = $wMaxHealth * 8
     sla  a                                        ; $6361: $CB $27
     sla  a                                        ; $6363: $CB $27
     sla  a                                        ; $6365: $CB $27
     ld   e, a                                     ; $6367: $5F
+    ; if not all full health => increase health
     ld   a, [wHealth]                             ; $6368: $FA $5A $DB
     cp   e                                        ; $636B: $BB
-    jr   nz, jr_002_6374                          ; $636C: $20 $06
-
+    jr   nz, .incrementHealth                          ; $636C: $20 $06
+    ; reset $wAddHealthBuffer to 0
     xor  a                                        ; $636E: $AF
     ld   [wAddHealthBuffer], a                    ; $636F: $EA $93 $DB
-    jr   jr_002_6385                              ; $6372: $18 $11
+    jr   .reduceHealth                              ; $6372: $18 $11
 
-jr_002_6374:
+.incrementHealth:
+    ; increment $wHealth by 1
     inc  a                                        ; $6374: $3C
     ld   [wHealth], a                             ; $6375: $EA $5A $DB
-    and  $07                                      ; $6378: $E6 $07
-    cp   $06                                      ; $637A: $FE $06
-    jr   nz, jr_002_6382                          ; $637C: $20 $04
-
+    ; if one heart is filled up play picked up sound
+    and  ONE_HEART-1                                      ; $6378: $E6 $07
+    cp   ONE_HEART-2                                      ; $637A: $FE $06
+    jr   nz, .skipPickupSound                          ; $637C: $20 $04
     ld   a, WAVE_SFX_HEART_PICKED_UP              ; $637E: $3E $06
     ldh  [hWaveSfx], a                            ; $6380: $E0 $F3
 
-jr_002_6382:
+.skipPickupSound:
     jp   LoadHeartsCount                          ; $6382: $C3 $14 $64
 
-jr_002_6385:
+.reduceHealth:
+    ; return if health will not be reudced
     ld   a, [wSubtractHealthBuffer]               ; $6385: $FA $94 $DB
     and  a                                        ; $6388: $A7
-    jr   z, jr_002_63A2                           ; $6389: $28 $17
-
+    jr   z, .return2                           ; $6389: $28 $17
+    ; decrement the buffer
     dec  a                                        ; $638B: $3D
     ld   [wSubtractHealthBuffer], a               ; $638C: $EA $94 $DB
+    ; if $wHealth != 0 decrement it
     ld   a, [wHealth]                             ; $638F: $FA $5A $DB
     and  a                                        ; $6392: $A7
-    jr   z, jr_002_6399                           ; $6393: $28 $04
-
+    jr   z, .skipDecrementHealth                           ; $6393: $28 $04
     dec  a                                        ; $6395: $3D
     ld   [wHealth], a                             ; $6396: $EA $5A $DB
 
-jr_002_6399:
+.skipDecrementHealth:
     call LoadHeartsCount                          ; $6399: $CD $14 $64
+    ; return if player has health
     ld   a, [wHealth]                             ; $639C: $FA $5A $DB
     and  a                                        ; $639F: $A7
-    jr   z, jr_002_63A3                           ; $63A0: $28 $01
+    jr   z, .noHealth                           ; $63A0: $28 $01
 
-jr_002_63A2:
+.return2:
     ret                                           ; $63A2: $C9
 
-jr_002_63A3:
+.noHealth:
+    ; return if player has no medicine
     ld   a, [wHasMedicine]                        ; $63A3: $FA $0D $DB
     and  a                                        ; $63A6: $A7
-    jr   z, jr_002_63FE                           ; $63A7: $28 $55
-
+    jr   z, .return                           ; $63A7: $28 $55
+    ; consume one medicine
     dec  a                                        ; $63A9: $3D
     ld   [wHasMedicine], a                        ; $63AA: $EA $0D $DB
-    ld   a, $08                                   ; $63AD: $3E $08
+    ; add one heart to the $wHealth
+    ld   a, ONE_HEART                                   ; $63AD: $3E $08
     ld   [wHealth], a                             ; $63AF: $EA $5A $DB
+    ; add 16 hearts to the wAddHealthBuffer
     ld   a, [wAddHealthBuffer]                    ; $63B2: $FA $93 $DB
-    add  $80                                      ; $63B5: $C6 $80
+    add  ONE_HEART*16                                      ; $63B5: $C6 $80
     ld   [wAddHealthBuffer], a                    ; $63B7: $EA $93 $DB
-    ld   a, $A0                                   ; $63BA: $3E $A0
+    ; make player invincible so no damage can be taken some time
+    ld   a, DAMAGE_COOLDOWN_TIME                                   ; $63BA: $3E $A0
     ld   [wInvincibilityCounter], a               ; $63BC: $EA $C7 $DB
+    ; TODO: comment what is going one here
     ld   a, [wRequests]                           ; $63BF: $FA $00 $D6
     ld   e, a                                     ; $63C2: $5F
     ld   d, $00                                   ; $63C3: $16 $00
@@ -4916,14 +4950,14 @@ jr_002_63A3:
     ld   a, [wHasMedicine]                        ; $63D7: $FA $0D $DB
     add  $B0                                      ; $63DA: $C6 $B0
     cp   $B0                                      ; $63DC: $FE $B0
-    jr   z, jr_002_63E4                           ; $63DE: $28 $04
+    jr   z, .jr_002_63E4                           ; $63DE: $28 $04
 
     ld   [hl+], a                                 ; $63E0: $22
     xor  a                                        ; $63E1: $AF
     ld   [hl], a                                  ; $63E2: $77
     ret                                           ; $63E3: $C9
 
-jr_002_63E4:
+.jr_002_63E4:
     ld   a, $7F                                   ; $63E4: $3E $7F
     ld   [hl+], a                                 ; $63E6: $22
     ld   a, $9C                                   ; $63E7: $3E $9C
@@ -4941,7 +4975,7 @@ jr_002_63E4:
     ld   [wRequests], a                           ; $63FA: $EA $00 $D6
     ret                                           ; $63FD: $C9
 
-jr_002_63FE:
+.return:
     ret                                           ; $63FE: $C9
 
 Data_002_63FF::
@@ -6741,7 +6775,7 @@ jr_002_7213:
     ld   a, $98                                   ; $7217: $3E $98
     ld   [$C3C9], a                               ; $7219: $EA $C9 $C3
     call OpenDialogInTable1                       ; $721C: $CD $73 $23
-    ld   a, [wC163]                               ; $721F: $FA $63 $C1
+    ld   a, [wIsOnLowHeath]                               ; $721F: $FA $63 $C1
     inc  a                                        ; $7222: $3C
     ld   [$DB10], a                               ; $7223: $EA $10 $DB
     call disableMovementInTransition              ; $7226: $CD $9E $0C

@@ -239,3 +239,9 @@ FISHING_GAME_PRICE        equ 10
 ; Fishing game rewards
 FISHING_GAME_SMALL_REWARD equ 05
 FISHING_GAME_LARGE_REWARD equ 20
+
+; one heart equals XX health
+ONE_HEART equ $08
+
+; how much time has to pass until the player can receive damage again
+DAMAGE_COOLDOWN_TIME equ $A0

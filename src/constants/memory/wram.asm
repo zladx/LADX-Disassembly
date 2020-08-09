@@ -54,7 +54,12 @@ wNeedsUpdatingNPCTiles:: ; C10E
   ds 1
 
 wC10F: ds 1
-wC110: ds 1
+
+; Time until the next low health SFX sound will be played.
+wTimeToNextLowHealthSFX:
+  ; C110
+  ds 1
+  
 wC111: ds 1
 wDialogIndexHi: ds 1
 wC113: ds 1
@@ -270,7 +275,13 @@ wC15F: ds 1
 wC160: ds 1
 wC161: ds 1
 wC162: ds 1
-wC163: ds 1
+
+; 1 if on low health by measure of ThresholdLowHealthTable
+; 0 if health is higher
+wIsOnLowHeath::
+  ; C163
+  ds 1
+
 wDialogCharacterIndexHi: ds 1
 wBossIntroDelay: ; C165
   ; Delay boss intro until this reaches zero
@@ -1118,6 +1129,7 @@ ds $D600 - $D5C0
 
 ; Data structures for copying data to vram during blanking times
 wRequests::               ; D600
+  ; is 0 if background copy was executed
   ds 1
 
 ; Request destination address (big endian)
@@ -1335,12 +1347,14 @@ wIsBowWowFollowingLink:: ; DB56
 wDeathCount:: ; DB57
   ds $3
 
-wHealth:: ; DB5A
-  ; Number of hearts ($08 = 1 heart)
+; Number of hearts ($08 = 1 heart)
+wHealth::
+; DB5A
   ds 1
 
-wMaxHealth:: ; DB5B
-  ; Maximum number of hearts
+; Maximum number of hearts
+wMaxHealth::
+; DB5B
   ds 1
 
 wHeartPiecesCount:: ; DB5C

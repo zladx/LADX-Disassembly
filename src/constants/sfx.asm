@@ -253,3 +253,5 @@ NOISE_SFX_BOOMERANG               equ $2D;probably boomerang
 NOISE_SFX_EAGLE_TOUCHDOWN         equ $30;probably eagle wings
 NOISE_SFX_EAGLE_LIFT_UP           equ $31;also eagle probably
 ; entries to be added to at least $AA
+
+LOW_HEALTH_SFX_PAUSE              equ $30 ; pause beetween low health SFX beeps

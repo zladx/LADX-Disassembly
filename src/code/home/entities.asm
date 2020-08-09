@@ -72,7 +72,7 @@ AnimateEntities::
     jr   nz, .C111End                             ; $399F: $20 $0D
     ; … decrement $C111
     ld   a, [$C111]                               ; $39A1: $FA $11 $C1
-    ld   [$C1A8], a                               ; $39A4: $EA $A8 $C1
+    ld   [wC1A8], a                               ; $39A4: $EA $A8 $C1
     and  a                                        ; $39A7: $A7
     jr   z, .C111End                              ; $39A8: $28 $04
     dec  a                                        ; $39AA: $3D
@@ -713,7 +713,7 @@ label_3CD9::
 ; See RenderActiveEntitySpritesRect for details.
 RenderActiveEntitySpritesRectUsingAllOAM::
     push hl                                       ; $3CE0: $E5
-    ld   hl, wOAMBuffer                           ; $3CE1: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $3CE1: $21 $00 $C0
     jr   RenderActiveEntitySpritesRect.withDestination ; $3CE4: $18 $10
 
 ; Render a large rectangle of sprites for the active entity to the OAM buffer.

@@ -12,7 +12,7 @@ HookshotChainEntityHandler::
     ld   [$C1C6], a                               ; $7BF1: $EA $C6 $C1
     ld   a, c                                     ; $7BF4: $79
     inc  a                                        ; $7BF5: $3C
-    ld   [$C1A6], a                               ; $7BF6: $EA $A6 $C1
+    ld   [wC1A6], a                               ; $7BF6: $EA $A6 $C1
     xor  a                                        ; $7BF9: $AF
     call ResetSpinAttack                                ; $7BFA: $CD $AF $0C
     ld   [$C13E], a                               ; $7BFD: $EA $3E $C1

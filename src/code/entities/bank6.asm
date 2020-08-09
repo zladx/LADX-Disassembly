@@ -36,7 +36,7 @@ func_006_641A::
 label_006_641F:
     call CopyLinkFinalPositionToPosition          ; $641F: $CD $BE $0C
     call ResetPegasusBoots                        ; $6422: $CD $B6 $0C
-    ld   a, [$C1A6]                               ; $6425: $FA $A6 $C1
+    ld   a, [wC1A6]                               ; $6425: $FA $A6 $C1
     and  a                                        ; $6428: $A7
     jr   z, jr_006_643C                           ; $6429: $28 $11
 
@@ -180,7 +180,7 @@ func_006_64CC::
     jr   nz, jr_006_64F5                          ; $64E0: $20 $13
 
 jr_006_64E2:
-    ld   hl, $C1A8                                ; $64E2: $21 $A8 $C1
+    ld   hl, wC1A8                                ; $64E2: $21 $A8 $C1
     ld   a, [wDialogState]                        ; $64E5: $FA $9F $C1
     or   [hl]                                     ; $64E8: $B6
     ld   hl, wInventoryAppearing                  ; $64E9: $21 $4F $C1

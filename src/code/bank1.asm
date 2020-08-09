@@ -1814,7 +1814,7 @@ HideAllSprites::
     ; value to write
     ld   a, $F4                                   ; $5F3E: $3E $F4
     ; address
-    ld   hl, wOAMBuffer                           ; $5F40: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $5F40: $21 $00 $C0
 
     ; Write $F4 to every first byte (Y position) of the OAM buffer
     ; This ensures the sprite is hidden.
@@ -1831,7 +1831,7 @@ UpdateWindowPosition::
     ld   a, [wInventoryAppearing]                 ; $5F4B: $FA $4F $C1
     and  a                                        ; $5F4E: $A7
     jr   z, jr_001_5F6A                           ; $5F4F: $28 $19
-    ld   hl, wOAMBuffer                           ; $5F51: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $5F51: $21 $00 $C0
     ld   a, [wWindowY]                            ; $5F54: $FA $9A $DB
     add  a, $08                                   ; $5F57: $C6 $08
     ld   d, a                                     ; $5F59: $57

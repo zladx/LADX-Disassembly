@@ -340,7 +340,7 @@ jr_001_4938::
     ld   a, FILE_64                               ; $4946: $3E $64
 
 jr_001_4948::
-    ld   hl, wOAMBuffer + $8                      ; $4948: $21 $08 $C0
+    ld   hl, wLinkOAMBuffer + $8                      ; $4948: $21 $08 $C0
     ld   [hl], $88 ; y                            ; $494B: $36 $88
     inc  hl                                       ; $494D: $23
     ldi  [hl], a ; x                              ; $494E: $22
@@ -359,7 +359,7 @@ func_001_4954::
     and  $08                                      ; $4960: $E6 $08
     jr   z, jr_001_497B                           ; $4962: $28 $17
     ld   a, [hl]                                  ; $4964: $7E
-    ld   hl, wOAMBuffer                           ; $4965: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $4965: $21 $00 $C0
     push af                                       ; $4968: $F5
     ldi  [hl], a                                  ; $4969: $22
     ld   a, $18                                   ; $496A: $3E $18
@@ -379,7 +379,7 @@ func_001_4954::
 
 jr_001_497B::
     ld   a, [hl]                                  ; $497B: $7E
-    ld   hl, wOAMBuffer                           ; $497C: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $497C: $21 $00 $C0
     push af                                       ; $497F: $F5
     ldi  [hl], a                                  ; $4980: $22
     ld   a, $18                                   ; $4981: $3E $18
@@ -824,7 +824,7 @@ jr_001_4C63::
     ld   b, $00                                   ; $4C75: $06 $00
     add  hl, bc                                   ; $4C77: $09
     ld   d, [hl]                                  ; $4C78: $56
-    ld   hl, wOAMBuffer                           ; $4C79: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $4C79: $21 $00 $C0
     ld   a, d                                     ; $4C7C: $7A
     add  a, $0B                                   ; $4C7D: $C6 $0B
     ldi  [hl], a                                  ; $4C7F: $22

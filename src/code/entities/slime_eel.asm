@@ -915,7 +915,7 @@ jr_005_7395:
     and  $02                                      ; $7397: $E6 $02
     jp   z, jr_005_7424                           ; $7399: $CA $24 $74
 
-    ld   a, [$C1A6]                               ; $739C: $FA $A6 $C1
+    ld   a, [wC1A6]                               ; $739C: $FA $A6 $C1
     and  a                                        ; $739F: $A7
     jp   z, jr_005_7424                           ; $73A0: $CA $24 $74
 
@@ -1704,7 +1704,7 @@ func_005_7A40::
     cp   $04                                      ; $7A4E: $FE $04
     jr   nz, jr_005_7A65                          ; $7A50: $20 $13
 
-    ld   hl, $C1A8                                ; $7A52: $21 $A8 $C1
+    ld   hl, wC1A8                                ; $7A52: $21 $A8 $C1
     ld   a, [wDialogState]                        ; $7A55: $FA $9F $C1
     or   [hl]                                     ; $7A58: $B6
     ld   hl, wInventoryAppearing                  ; $7A59: $21 $4F $C1

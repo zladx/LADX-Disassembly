@@ -6981,7 +6981,7 @@ func_036_6A46::
     jr   z, jr_036_6A60                           ; $6A4B: $28 $13
 
     ld   a, [wDialogState]                        ; $6A4D: $FA $9F $C1
-    ld   hl, $C1A8                                ; $6A50: $21 $A8 $C1
+    ld   hl, wC1A8                                ; $6A50: $21 $A8 $C1
     or   [hl]                                     ; $6A53: $B6
     ld   hl, wInventoryAppearing                  ; $6A54: $21 $4F $C1
     or   [hl]                                     ; $6A57: $B6
@@ -7192,7 +7192,7 @@ func_036_6B5C::
     jr   nc, jr_036_6B88                          ; $6B5F: $30 $27
 
     call CopyLinkFinalPositionToPosition          ; $6B61: $CD $BE $0C
-    ld   a, [$C1A6]                               ; $6B64: $FA $A6 $C1
+    ld   a, [wC1A6]                               ; $6B64: $FA $A6 $C1
     and  a                                        ; $6B67: $A7
     jr   z, jr_036_6B7B                           ; $6B68: $28 $11
 
@@ -8396,7 +8396,7 @@ func_036_72BA::
     xor  a                                        ; $72D4: $AF
     ld   [$DE00], a                               ; $72D5: $EA $00 $DE
 
-    ld   hl, wOAMBuffer                           ; $72D8: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $72D8: $21 $00 $C0
     ld   de, $C09C                                ; $72DB: $11 $9C $C0
     ld   b, $14                                   ; $72DE: $06 $14
 

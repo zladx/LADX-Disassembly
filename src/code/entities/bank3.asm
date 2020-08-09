@@ -4451,7 +4451,7 @@ jr_003_6243:
 
     ldh  a, [hActiveEntityPosY]                   ; $625D: $F0 $EF
     add  $08                                      ; $625F: $C6 $08
-    ld   hl, wC17a                                ; $6261: $21 $7A $C1
+    ld   hl, wC17A                                ; $6261: $21 $7A $C1
     sub  [hl]                                     ; $6264: $96
     add  $10                                      ; $6265: $C6 $10
     cp   $20                                      ; $6267: $FE $20
@@ -9063,7 +9063,7 @@ jr_003_7CFD:
     call GetEntityDropTimer                       ; $7D3F: $CD $FB $0B
     ld   [hl], $80                                ; $7D42: $36 $80
     pop  bc                                       ; $7D44: $C1
-    ld   hl, $C1A2                                ; $7D45: $21 $A2 $C1
+    ld   hl, wC1A2                                ; $7D45: $21 $A2 $C1
     inc  [hl]                                     ; $7D48: $34
     ld   a, [wC3CD]                               ; $7D49: $FA $CD $C3
     and  a                                        ; $7D4C: $A7
@@ -9565,7 +9565,7 @@ func_003_7F7E::
 
 jr_003_7F94:
     ld   a, [wDialogState]                        ; $7F94: $FA $9F $C1
-    ld   hl, $C1A8                                ; $7F97: $21 $A8 $C1
+    ld   hl, wC1A8                                ; $7F97: $21 $A8 $C1
     or   [hl]                                     ; $7F9A: $B6
     ld   hl, wInventoryAppearing                  ; $7F9B: $21 $4F $C1
     or   [hl]                                     ; $7F9E: $B6

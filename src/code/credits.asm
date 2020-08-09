@@ -5978,7 +5978,7 @@ func_017_7A29::
     ldh  a, [hScratch0]                           ; $7A2B: $F0 $D7
     ld   e, a                                     ; $7A2D: $5F
     ld   d, b                                     ; $7A2E: $50
-    ld   hl, wOAMBuffer                                ; $7A2F: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                                ; $7A2F: $21 $00 $C0
     add  hl, de                                   ; $7A32: $19
     push hl                                       ; $7A33: $E5
     pop  de                                       ; $7A34: $D1
@@ -6585,7 +6585,7 @@ jr_017_7E04:
     ld   a, [hl]                                  ; $7E08: $7E
     ld   hl, hBaseScrollY                         ; $7E09: $21 $97 $FF
     sub  [hl]                                     ; $7E0C: $96
-    ld   [wOAMBuffer], a                               ; $7E0D: $EA $00 $C0
+    ld   [wLinkOAMBuffer], a                               ; $7E0D: $EA $00 $C0
     ld   e, $00                                   ; $7E10: $1E $00
     ld   a, [wDialogAskSelectionIndex]            ; $7E12: $FA $77 $C1
     and  $01                                      ; $7E15: $E6 $01

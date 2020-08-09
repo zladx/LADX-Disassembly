@@ -100,7 +100,7 @@ func_005_4815::
 
     xor  a                                        ; $4833: $AF
     ld   [wDialogGotItem], a                      ; $4834: $EA $A9 $C1
-    ld   [$C1A8], a                               ; $4837: $EA $A8 $C1
+    ld   [wC1A8], a                               ; $4837: $EA $A8 $C1
     jr   jr_005_4847                              ; $483A: $18 $0B
 
 jr_005_483C:
@@ -218,7 +218,7 @@ func_005_48CF::
     call IncrementEntityState                     ; $48F4: $CD $12 $3B
 
 func_005_48F7::
-    ld   a, [$C1A2]                               ; $48F7: $FA $A2 $C1
+    ld   a, [wC1A2]                               ; $48F7: $FA $A2 $C1
     and  a                                        ; $48FA: $A7
     ret  z                                        ; $48FB: $C8
 

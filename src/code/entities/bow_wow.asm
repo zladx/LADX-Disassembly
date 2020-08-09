@@ -51,7 +51,7 @@ jr_005_4060:
     jp   label_005_40A2                           ; $4079: $C3 $A2 $40
 
 jr_005_407C:
-    ld   a, [$C1A8]                               ; $407C: $FA $A8 $C1
+    ld   a, [wC1A8]                               ; $407C: $FA $A8 $C1
     ld   hl, wDialogState                         ; $407F: $21 $9F $C1
     or   [hl]                                     ; $4082: $B6
     ld   hl, wInventoryAppearing                  ; $4083: $21 $4F $C1

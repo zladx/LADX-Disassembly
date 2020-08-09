@@ -3483,7 +3483,7 @@ RenderTranscientPegasusDust::
     jp   nz, label_002_583A                       ; $5729: $C2 $3A $58
 
     add  hl, de                                   ; $572C: $19
-    ld   de, wOAMBuffer                           ; $572D: $11 $00 $C0
+    ld   de, wLinkOAMBuffer                           ; $572D: $11 $00 $C0
     call label_002_5854                           ; $5730: $CD $54 $58
     jp   label_002_5854                           ; $5733: $C3 $54 $58
 
@@ -3616,7 +3616,7 @@ RenderTranscientPegasusSplash::
 
 RenderTranscientWaterSplash::
     call func_002_58D0                            ; $5825: $CD $D0 $58
-    ld   a, [$C1A7]                               ; $5828: $FA $A7 $C1
+    ld   a, [wC1A7]                               ; $5828: $FA $A7 $C1
     cp   $02                                      ; $582B: $FE $02
 
 jr_002_582D:
@@ -4066,7 +4066,7 @@ jr_002_5B1C:
 jr_002_5B31:
     xor  a                                        ; $5B31: $AF
     ld   [$C188], a                               ; $5B32: $EA $88 $C1
-    ld   [$C1A8], a                               ; $5B35: $EA $A8 $C1
+    ld   [wC1A8], a                               ; $5B35: $EA $A8 $C1
     xor  a                                        ; $5B38: $AF
     ldh  [hScratchE], a                           ; $5B39: $E0 $E5
     ld   a, [$C189]                               ; $5B3B: $FA $89 $C1
@@ -4346,7 +4346,7 @@ jr_002_5CD0:
 jr_002_5CE5:
     xor  a                                        ; $5CE5: $AF
     ld   [$C188], a                               ; $5CE6: $EA $88 $C1
-    ld   [$C1A8], a                               ; $5CE9: $EA $A8 $C1
+    ld   [wC1A8], a                               ; $5CE9: $EA $A8 $C1
     xor  a                                        ; $5CEC: $AF
     ldh  [hScratchE], a                           ; $5CED: $E0 $E5
     ld   a, [$C189]                               ; $5CEF: $FA $89 $C1
@@ -7408,7 +7408,7 @@ jr_002_7587:
     and  $01                                      ; $7597: $E6 $01
     jr   nz, jr_002_75B1                          ; $7599: $20 $16
 
-    ld   hl, wOAMBuffer                           ; $759B: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $759B: $21 $00 $C0
     ldh  a, [hLinkPositionY]                      ; $759E: $F0 $99
     add  $0B                                      ; $75A0: $C6 $0B
     cp   $88                                      ; $75A2: $FE $88
@@ -7599,7 +7599,7 @@ jr_002_76BF:
     ret                                           ; $76BF: $C9
 
 label_002_76C0:
-    ld   hl, wOAMBuffer                           ; $76C0: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $76C0: $21 $00 $C0
     ld   a, [wLinkGroundVfx]                      ; $76C3: $FA $81 $C1
     cp   $08                                      ; $76C6: $FE $08
     jr   nz, jr_002_76D5                          ; $76C8: $20 $0B

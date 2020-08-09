@@ -7961,7 +7961,7 @@ func_019_7CA2::
     jr   nc, jr_019_7CCE                          ; $7CA5: $30 $27
 
     call CopyLinkFinalPositionToPosition          ; $7CA7: $CD $BE $0C
-    ld   a, [$C1A6]                               ; $7CAA: $FA $A6 $C1
+    ld   a, [wC1A6]                               ; $7CAA: $FA $A6 $C1
     and  a                                        ; $7CAD: $A7
     jr   z, jr_019_7CC1                           ; $7CAE: $28 $11
 
@@ -8089,7 +8089,7 @@ func_019_7D43::
     jr   nz, jr_019_7D6C                          ; $7D57: $20 $13
 
 jr_019_7D59:
-    ld   hl, $C1A8                                ; $7D59: $21 $A8 $C1
+    ld   hl, wC1A8                                ; $7D59: $21 $A8 $C1
     ld   a, [wDialogState]                        ; $7D5C: $FA $9F $C1
     or   [hl]                                     ; $7D5F: $B6
     ld   hl, wInventoryAppearing                  ; $7D60: $21 $4F $C1

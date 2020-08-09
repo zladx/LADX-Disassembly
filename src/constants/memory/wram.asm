@@ -1,394 +1,569 @@
 section "WRAM Bank0", wram0[$c000]
 
+; *******************************************************************
+; *                                                                 *
+; *             >> LABEL GUIDELINE <<                               *
+; *                                                                 *
+; *         ; Discripe the function of this memory address.         *
+; *         ; Possible values:                                      *
+; *         ; 0 = meaning 0,                                        *
+; *         ; 1 = meaning 1,                                        *
+; *         ; 2 = meaning 2                                         *
+; *         label::                                                 *
+; *           ds 1 ; address as 4 hex value                         *
+; *                                                                 *
+; *******************************************************************
+
+
 wram0Section EQU $C000
 
-; Buffer for OAM data. Copied to OAM by DMA.
+; Buffer Area for 12 Link OAM tiles. Copied to OAM by DMA.
 ; Structure:
-;  byte 0: Y position
-;  byte 1: X position
-;  byte 2: tile n°
-;  byte 3: attribute
-wOAMBuffer:: ; C000
-wLinkOAMBuffer:: ; C000
-  ; Area for Link OAM data
-  ds 4 * 12
-wDynamicOAMBuffer:: ; C030
-  ; Area for dynamically allocated OAM elements
-  ds 4 * 28
+;  byte 0 = Y position,
+;  byte 1 = X position,
+;  byte 2 = tile n°,
+;  byte 3 = attribute
+wLinkOAMBuffer::
+  ds 4 * 12 ; C000
+
+; Buffer Area for 28 dynamically allocated OAM elements
+; Structure:
+;  byte 0 = Y position,
+;  byte 1 = X position,
+;  byte 2 = tile n°,
+;  byte 3 = attribute
+wDynamicOAMBuffer::
+  ds 4 * 28 ; C030
 
 ; Unlabeled
-wC0A0:: ; C0A0
-  ds $60
+wC0A0::
+  ds $60 ; C0A0
 
-wScrollXOffsetForSection:: ; C100
-  ; Table of the scrollX offset to add for each screen section being drawn
-  ds $5
+; Table of the scrollX offset to add for each screen section being drawn
+wScrollXOffsetForSection::
+  ds $5 ; C100
 
-wLCDSectionIndex:: ; C105
-  ; Portion of the screen being drawn (0 -> 4)
-  ds 1
+; Portion of the screen being drawn (0 -> 4)
+wLCDSectionIndex::
+  ds 1 ; C105
 
-wIntroBGYOffset:: ; C106
-  ; Offset for compensating the sea movement when drawing bottom screen section on intro sea
-  ds 1
+; Offset for compensating the sea movement when drawing bottom screen section on intro sea
+wIntroBGYOffset:: 
+  ds 1 ; C106
 
+; Unlabeled
+wC107:
+  ds 1 ; C107
 
-wC107: ds 1
+; TODO comment
+wNameIndex::
+  ds 1 ; C108
 
-wNameIndex:: ds 1
+; Unlabeled
+wC109:
+  ds 1 ; C109
 
-wC109: ds 1
-wC10A: ds 1
+; Unlabeled
+wC10A:
+  ds 1 ; C10A
 
-wMusicTrackTiming: ; C10B
-  ; Music timing
-  ; 0: normal
-  ; 1: double-speed
-  ; 2: half-speed
-  ds 1
+; Music timing:
+; 0 = normal,
+; 1 = double-speed,
+; 2 = half-speed
+wMusicTrackTiming:
+  ds 1 ; C10B
 
-wC10C: ds 1
-wC10D: ds 1
+; Unlabeled
+wC10C:
+  ds 1 ; C10C
 
-wNeedsUpdatingNPCTiles:: ; C10E
-  ds 1
+; Unlabeled
+wC10D:
+  ds 1 ; wC10D
 
-wC10F: ds 1
+; TODO comment
+wNeedsUpdatingNPCTiles::
+  ds 1 ; C10E
+
+; Unlabeled
+wC10F:
+  ds 1 ; C10F
 
 ; Time until the next low health SFX sound will be played.
 wTimeToNextLowHealthSFX:
-  ; C110
-  ds 1
+  ds 1 ; C110
   
-wC111: ds 1
-wDialogIndexHi: ds 1
-wC113: ds 1
+; Unlabeled
+wC111:
+  ds 1 ; C111
 
+; TODO comment
+wDialogIndexHi:
+  ds 1 ; C112
+
+; Unlabeled
+wC113:
+  ds 1 ; C113
+
+; Delay for repeatin the NOISE_SFX_SEA_WAVES sound effect
+; Plays when reaching $A0
 wNoiseSfxSeaWavesCounter::
-  ; Delay for repeatin the NOISE_SFX_SEA_WAVES sound effect
-  ; Plays when reaching $A0
-  ds 1
+  ds 1 ; C114
 
-wC115: ds 1
-wC116: ds 1
-wC117: ds 1
-wC118: ds 1
-wC119: ds 1
-wC11A: ds 1
-wC11B: ds 1
+; Unlabeled
+wC115:
+  ds 1 ; C115
+
+; Unlabeled
+wC116:
+  ds 1 ; C116
+
+; Unlabeled
+wC117:
+  ds 1 ; C117
+
+; Unlabeled
+wC118:
+  ds 1 ; C118
+
+; Unlabeled
+wC119:
+  ds 1 ; C119
+
+; Unlabeled
+wC11A:
+  ds 1 ; C11A
+
+; Unlabeled
+wC11B:
+  ds 1 ; C11B
 
 ; See LINK_MOTION_* constants for possible values.
-wLinkMotionState: ; C11C
-  ds 1
+wLinkMotionState:
+  ds 1 ; C11C
 
-wC11D: ds 1
-wC11E: ds 1
+; Unlabeled
+wC11D:
+  ds 1 ; C11D
 
+; Unlabeled
+wC11E:
+  ds 1 ; C11E
 
-wLinkGroundStatus:: ; C11F
-  ; The condition of the ground Link is standing on
-  ; 0:  dry ground
-  ; 1:  steps (only when moving)
-  ; 3:  wet or grassy
-  ; 7:  pit
-  ;
-  ; Also see: wLinkGroundVfx
-  ds 1
+; The condition of the ground Link is standing on:
+; 0 = dry ground,
+; 1 = steps (only when moving),
+; 3 = wet or grassy,
+; 7 = pit,
+; Also see: wLinkGroundVfx
+wLinkGroundStatus:: 
+  ds 1 ; C11F
 
-wConsecutiveStepsCount: ; C120
-  ; Number of consecutive steps taken by Link.
-  ; Doubled when running with pegasus boots.
-  ; Special values:
-  ;  -1   bumping using Pegasus Boots
-  ;   7   initial value at rest
-  ds 1
+; Number of consecutive steps taken by Link.
+; Doubled when running with pegasus boots.
+; Special values:
+;  -1 = bumping using Pegasus Boots,
+;   7 = initial value at rest
+wConsecutiveStepsCount:
+  ds 1 ; C120
 
-wIsUsingSpinAttack:: ; C121
-  ds 1
+; TODO comment
+wIsUsingSpinAttack::
+  ds 1 ; C121
 
-wSwordCharge:: ; C122
-  ; Link's spin attack charging meter
-  ; 0:     not charged
-  ; 0x28:  fully charged
-  ds 1
+; Link's spin attack charging meter:
+; 0x00 = not charged,
+; 0x28 = fully charged
+wSwordCharge::
+  ds 1 ; C122
 
-wActiveEntityIndex:: ; C123
-  ; Index of the entity being currently animated.
-  ; (Also used for the current transcient VFX being drawn.)
-  ds 1
+; Index of the entity being currently animated.
+; (Also used for the current transcient VFX being drawn.)
+wActiveEntityIndex::
+  ds 1 ; C123
 
 ; See ROOM_TRANSITION_* constants for possible values.
-wRoomTransitionState:: ; C124
-  ds 1
+wRoomTransitionState:: 
+  ds 1 ; C124
 
-wRoomTransitionDirection:: ; C125
-  ; See DIRECTION_* constants for possible values
-  ds 1
+; See DIRECTION_* constants for possible values
+wRoomTransitionDirection::
+  ds 1 ; C125
 
-wBGUpdateRegionOriginHigh:: ; C126
-  ; Position of the first tile of a background region
-  ; to be updated during a room transition (low byte)
-  ds 1
+; Position of the first tile of a background region
+; to be updated during a room transition (low byte)
+wBGUpdateRegionOriginHigh::
+  ds 1 ; C126
 
-wBGUpdateRegionOriginLow:: ; C127
-  ; Position of the first tile of a background piece (row or colum)
-  ; to update during a room transition (high byte)
-  ds 1
+; Position of the first tile of a background piece (row or colum)
+; to update during a room transition (high byte)
+wBGUpdateRegionOriginLow::
+  ds 1 ; C127
 
-wBGUpdateRegionTilesCount:: ; C128
-  ; Number of tiles of a background piece (row or column) to be updated in a single batch
-  ds 1
+; Number of tiles of a background piece (row or column) to be updated in a single batch
+wBGUpdateRegionTilesCount::
+  ds 1 ; C128
 
-wRoomTransitionFramesBeforeMidScreen:: ; C129
-  ; Number of frames remaining before reaching the mid-screen transition point
-  ds 1
-
-; Unlabeled
-ds 2
-
-wRoomTransitionTargetScrollX:: ; C12C
-  ; Stop the room transition when reaching this value
-  ds 1
-
-wRoomTransitionTargetScrollY:: ; C12D
-  ; Stop the room transition when reaching this value
-  ds 1
-
-wBGOriginHigh:: ; C12E
-  ; Position of the first visible background tile (high byte)
-  ds 1
-
-wBGOriginLow:: ; C12F
-  ; Position of the first visible background tile (low byte)
-  ds 1
+; Number of frames remaining before reaching the mid-screen transition point
+wRoomTransitionFramesBeforeMidScreen::
+  ds 1 ; C129
 
 ; Unlabeled
-ds 3
-
-wCollisionType:: ; C133
-  ; 00  no collision
-  ; 03  obstacle on top/bottom
-  ; 04  unknown
-  ; 08  unknown
-  ; 0C  obstacle on left/right
-  ds 1
+wC12A:
+  ds 1 ; C12A
 
 ; Unlabeled
-ds $2
+wC12B:
+  ds 1 ; C12B
 
-wSwordDirection:: ; C136
-  ; Position of the sword during a sping attack
-  ; See SWORD_DIRECTION_* constants for possible values
-  ds 1
+; Stop the room transition when reaching this value
+wRoomTransitionTargetScrollX::
+  ds 1 ; C12C
 
-wSwordAnimationState:: ; C137
-  ; State of the sword during a normal swing or a swing attack
-  ; 00  none
-  ; 01  swing start
-  ; 02  swing middle
-  ; 03  swing front
-  ; 04  swing end
-  ds 1
+; Stop the room transition when reaching this value
+wRoomTransitionTargetScrollY::
+  ds 1 ; C12D
 
-; Unlabeled
-ds $5
+; Position of the first visible background tile (high byte)
+wBGOriginHigh:: 
+  ds 1 ; C12E
 
-wRandomSeed:: ; C13D
-  ; Seed for the Random Number Generator
-  ds 1
+; Position of the first visible background tile (low byte)
+wBGOriginLow::
+  ds 1 ; C12F
 
 ; Unlabeled
-ds $6
+wC130::
+  ds 3 ; C130
 
+; 0x00 = no collision,
+; 0x03 = obstacle on top/bottom,
+; 0x04 = unknown,
+; 0x08 = unknown,
+; 0x0C = obstacle on left/right
+wCollisionType::
+  ds 1 ; C133
+
+; Unlabeled
+wC134:
+  ds $2 ; C134
+
+; Position of the sword during a sping attack
+; See SWORD_DIRECTION_* constants for possible values
+wSwordDirection::
+  ds 1 ; C136
+
+; State of the sword during a normal swing or a swing attack:
+; 0x00 = none,
+; 0x01 = swing start,
+; 0x02 = swing middle,
+; 0x03 = swing front,
+; 0x04 = swing end
+wSwordAnimationState:: 
+  ds 1 ; C137
+
+; Unlabeled
+wC138::
+  ds $5 ; C138 - C13E
+
+; Seed for the Random Number Generator
+wRandomSeed::
+  ds 1 ; C13D
+
+; Unlabeled
+wC13E::
+  ds $6 ; C13E - C143
+
+; TODO comment
 wIsLinkPushing:: ; C144
   ds 1
 
 ; Unlabeled
-ds $1
+wC145::
+  ds $1 ; C145
 
-wIsLinkInTheAir:: ; C146
-  ; Is Link in the air (jumping with the feather, flying with roaster, etc)?
-  ds 1
-
-; Unlabeled
-ds $3
-
-wIsRunningWithPegasusBoots:: ; C14A
-  ds 1
-
-wPegasusBootsChargeMeter:: ; C14B
-  ; Pegasus Boots charge meter
-  ; 0:  not charged
-  ; 1F: fully charged
-  ds 1
-
-wIsShootingArrow:: ; C14C
-  ds 1
-
-wActiveProjectileCount:: ; C14D
-  ; Link's active projectiles.
-  ; If ≥0x02, Link cannot shoot any more projectiles.
-  ; Re-initialized to 0 at the end of each frame.
-  ds 1
-
-wHasPlacedBomb:: ; C14E
-  ds 1
-
-wInventoryAppearing:: ; C14F
-  ds 1
+; Is Link in the air (jumping with the feather, flying with roaster, etc)?
+wIsLinkInTheAir::
+  ds 1 ; C146
 
 ; Unlabeled
-wC150 equ $C150
-  ds 5
+wC147::
+  ds $3 ; C147 - C149
 
-wScreenShakeHorizontal:: ; C155
-  ; background offset for shaking the screen vertically
-  ds 1
+; TODO comment
+wIsRunningWithPegasusBoots::
+  ds 1 ; C14A
 
-wScreenShakeVertical:: ; C156
-  ; background offset for shaking the screen vertically
-  ds 1
+; Pegasus Boots charge meter:
+; 0x00 = not charged,
+; 0x1F = fully charged
+wPegasusBootsChargeMeter::
+  ds 1 ; C14B
+
+; TODO comment
+wIsShootingArrow::
+  ds 1 ; C14C
+
+; Link's active projectiles.
+; If ≥0x02, Link cannot shoot any more projectiles.
+; Re-initialized to 0 at the end of each frame.
+wActiveProjectileCount::
+  ds 1 ; C14D
+
+; TODO comment
+wHasPlacedBomb::
+  ds 1 ; C14E
+
+; TODO comment
+wInventoryAppearing::
+  ds 1 ; C14F
 
 ; Unlabeled
-wC157 equ $C157
-  ds $2
+wC150::
+  ds 5 ; C150 - C154
 
-wInventoryCursorFrameCounter:: ; C159
-  ds 1
+; background offset for shaking the screen vertically
+wScreenShakeHorizontal::
+  ds 1 ; C155
 
-wHasMirrorShield:: ; C15A
-  ds 1
+; background offset for shaking the screen vertically
+wScreenShakeVertical::
+  ds 1 ; C156
 
-wIsUsingShield:: ; C15B
-  ds 1
+; Unlabeled
+wC157::
+  ds $2 ; C157 - C158
 
-wIsCarryingLiftedObject: ; C15C
-  ; Is Link carrying an object above his head
-  ; (not a boolean -- possible values: Data_003_56F1)
-  ds 1
+; TODO comment
+wInventoryCursorFrameCounter::
+  ds 1 ; C159
+
+; TODO comment
+wHasMirrorShield::
+  ds 1 ; C15A
+
+; TODO comment
+wIsUsingShield::
+  ds 1 ; C15B
+
+; Is Link carrying an object above his head
+; (not a boolean -- possible values: Data_003_56F1)
+wIsCarryingLiftedObject:
+  ds 1 ; C15C
 
 ; Contains a DIRECTION_* value taken from Link's irection
-wC15D: ds 1
+; TODO rename
+wC15D:
+  ds 1 ; C15D
 
-wC15E: ds 1
-wC15F: ds 1
-wC160: ds 1
-wC161: ds 1
-wC162: ds 1
+; Unlabeled
+wC15E:
+  ds 1 ; C15E
 
-; 1 if on low health by measure of ThresholdLowHealthTable
-; 0 if health is higher
+; Unlabeled
+wC15F:
+  ds 1 ; C15F
+
+; Unlabeled
+wC160:
+  ds 1 ; C160
+
+; Unlabeled
+wC161:
+  ds 1 ; C161
+
+; Unlabeled
+wC162:
+  ds 1 ; C162
+
+; 1 = if on low health by measure of ThresholdLowHealthTable,
+; 0 = if health is higher
 wIsOnLowHeath::
-  ; C163
-  ds 1
+  ds 1 ; C163
 
-wDialogCharacterIndexHi: ds 1
-wBossIntroDelay: ; C165
-  ; Delay boss intro until this reaches zero
-  ds 1
-wLinkPlayingOcarinaCountdown: ; C166
-  ; While not zero, Link is shown playing the Ocarina
-  ds 1
-wC167: ds 1
-wC168: ds 1
-wNextJingle: ds 1 ; C169
-wC16A: ds 1
+; TODO comment
+wDialogCharacterIndexHi:
+  ds 1 ; C164
 
-wTransitionSequenceCounter:: ; C16B
-  ds 1
+; Delay boss intro until this reaches zero
+wBossIntroDelay:
+  ds 1 ; C165
 
-wC16C: ds 1
-wC16D: ds 1
-wC16E: ds 1
+; While not zero, Link is shown playing the Ocarina
+wLinkPlayingOcarinaCountdown:
+  ds 1 ; C166
+
+; Unlabeled
+wC167:
+  ds 1 ; C167
+
+; Unlabeled
+wC168:
+  ds 1 ; C168
+
+; TODO comment
+wNextJingle:
+  ds 1 ; C169
+
+; Unlabeled
+wC16A:
+  ds 1 ; C16A
+
+; TODO comment
+wTransitionSequenceCounter::
+  ds 1 ; C16B
+
+; Unlabeled
+wC16C:
+  ds 1 ; C16C
+
+; Unlabeled
+wC16D:
+  ds 1 ; C16D
+
+; Unlabeled
+wC16E:
+  ds 1 ; C16E
+
 ; State of the dialog open or close animation.
 ; Values goes from 0 to 5.
-wDialogOpenCloseAnimationFrame: ds 1 ; C16F
-wDialogCharacterIndex: ds 1 ; C170
-wDialogNextCharPosition: ds 1 ; C171
+wDialogOpenCloseAnimationFrame:
+  ds 1 ; C16F
 
+; TODO comment
+wDialogCharacterIndex:
+  ds 1 ; C170
+
+; TODO comment
+wDialogNextCharPosition:
+  ds 1 ; C171
+
+; TODO comment
 wDialogScrollDelay:: ; C172
   ds 1
 
-wDialogIndex: ds 1 ; C173
-wC174: ds 1
-wC175: ds 1
-wC176: ds 1
+; TODO comment
+wDialogIndex:
+  ds 1 ; C173
+
+; Unlabeled
+wC174:
+  ds 1 ; C174
+
+; Unlabeled
+wC175:
+  ds 1 ; C175
+
+; Unlabeled
+wC176:
+  ds 1 ; C176
+
 ; 0 or 1 depending on the first or second option is selected in a ask dialog
-wDialogAskSelectionIndex: ; C177
-    ds 1
-wC178: ds 1
-wC179: ds 1
-wC17a: ds 1
-
-wFreeMovementMode:: ; C17B
-  ; See https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening#Mono_Pausing_the_Engine_and_Mono.2FDX_Free-Movement_Mode
-  ds 1
+wDialogAskSelectionIndex:
+  ds 1 ; C177
 
 ; Unlabeled
-wC17C equ $C17C
-  ds 3
-
-wTransitionGfx:: ; C17F
-  ; Special Background effect applied during some transitions or animations.
-  ; See TRANSITION_GFX_* constants for possible values.
-  ds 1
-
-wTransitionGfxFrameCount:: ; C180
-  ; Number of frames rendered during a warp transition.
-  ds 1
-
-wLinkGroundVfx:: ; wLinkGroundVfx
-  ; Environmental visual effect displayed depending on which ground Link is standing.
-  ; This may also affect the sound effects, or Link's position.
-  ; See GROUND_VFX_* constants for possible values.
-  ds 1
+wC178:
+  ds 1 ; C178
 
 ; Unlabeled
-ds $C18E - $C182
-
-wRoomEvent:: ; C18E
-  ; Event for the current room
-  ; A combination of trigger and effect values
-  ; See TRIGGER_* and EFFECT_* constants for possible values
-  ds 1
-
-wRoomEventEffectExecuted:: ; C18F
-  ; Has the event effect for the current room been executed already?
-  ds 1
+wC179:
+  ds 1 ; C179
 
 ; Unlabeled
-ds $C19F - $C190
+wC17A:
+  ds 1 ; C17A
 
-wDialogState:: ; C19F
-  ; Upper bit:    set if the dialog is displayed on bottom (instead of top)
-  ; Lowest bits:  the dialog state (see DIALOG_* constants for possible values)
-  ds 1
-
-; Unlabeled
-ds $5
-
-wConveyorBeltsCount:: ; C1A5
-  ; Number of conveyor belts on the current screen
-  ds 1
+; See https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening#Mono_Pausing_the_Engine_and_Mono.2FDX_Free-Movement_Mode
+wFreeMovementMode::
+  ds 1 ; C17B
 
 ; Unlabeled
-ds 3
+wC17C::
+  ds 3 ; C17C - C17E
 
-wDialogGotItem:: ; C1A9
-  ; The "Got item" dialog to display
-  ; Values:
-  ;  0  no item
-  ;  1  Piece of Power
-  ;  2  Toadstool
-  ;  3  Magic powder
-  ;  4  Break pots (?)
-  ;  5  Guardian Acorn
-  ds 1
+; Special Background effect applied during some transitions or animations.
+; See TRANSITION_GFX_* constants for possible values.
+wTransitionGfx::
+  ds 1 ; C17F
 
-wDialogGotItemCountdown:: ; C1AA
-  ; Number of frames to wait (while playing the "got item" sound effect)
-  ; before displaying the dialog
-  ds 1
+; Number of frames rendered during a warp transition.
+wTransitionGfxFrameCount::
+  ds 1 ; C180
+
+; Environmental visual effect displayed depending on which ground Link is standing.
+; This may also affect the sound effects, or Link's position.
+; See GROUND_VFX_* constants for possible values.
+wLinkGroundVfx::
+  ds 1 ; C181
+
+; Unlabeled
+wC18E::
+  ds 12 ; C182 - C18D
+
+; Event for the current room.
+; A combination of trigger and effect values.
+; See TRIGGER_* and EFFECT_* constants for possible values.
+wRoomEvent::
+  ds 1 ; C18E
+
+; Has the event effect for the current room been executed already?
+wRoomEventEffectExecuted::
+  ds 1 ; C18F
+
+; Unlabeled
+wC190::
+  ds 15 ; C190 - C19E
+
+; Upper bit   = set if the dialog is displayed on bottom (instead of top)
+; Lowest bits = the dialog state (see DIALOG_* constants for possible values)
+wDialogState::
+  ds 1 ; C19F
+
+; Unlabeled
+wC1A0::
+  ds 2 ; C1A0 - C1A1
+
+; Unlabeled
+wC1A2::
+  ds 1 ; C1A2
+
+; Unlabeled
+wC1A3::
+  ds 2 ; C1A3 - C1A4
+
+; Number of conveyor belts on the current screen
+wConveyorBeltsCount::
+  ds 1 ; C1A5
+
+; Unlabeled
+wC1A6::
+  ds 1 ; C1A6
+
+; Unlabeled
+wC1A7::
+  ds 1 ; C1A7
+
+; Unlabeled
+wC1A8::
+  ds 1 ; C1A8
+
+; The "Got item" dialog to display
+; Values:
+;  0 = no item,
+;  1 = Piece of Power,
+;  2 = Toadstool,
+;  3 = Magic powder,
+;  4 = Break pots (?),
+;  5 = Guardian Acorn
+wDialogGotItem::
+  ds 1 ; C1A9
+
+; Number of frames to wait (while playing the "got item" sound effect)
+; before displaying the dialog
+wDialogGotItemCountdown::
+  ds 1 ; C1AA
 
 ; Unlabeled
 ds $11

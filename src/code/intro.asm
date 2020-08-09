@@ -1095,7 +1095,7 @@ RenderIntroShip::
     add  a, [hl]                                  ; $7585: $86
     ld   [hl], a                                  ; $7586: $77
     ld   hl, Data_001_7538                        ; $7587: $21 $38 $75
-    ld   de, wOAMBuffer                           ; $758A: $11 $00 $C0
+    ld   de, wLinkOAMBuffer                           ; $758A: $11 $00 $C0
     push bc                                       ; $758D: $C5
     ld   c, $06                                   ; $758E: $0E $06
 

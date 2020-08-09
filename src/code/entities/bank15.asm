@@ -6788,7 +6788,7 @@ MonkeyEntityHandler::
 
     ldh  a, [hActiveEntityPosY]                   ; $76BB: $F0 $EF
     add  $08                                      ; $76BD: $C6 $08
-    ld   hl, wC17a                                ; $76BF: $21 $7A $C1
+    ld   hl, wC17A                                ; $76BF: $21 $7A $C1
     sub  [hl]                                     ; $76C2: $96
     add  $10                                      ; $76C3: $C6 $10
     cp   $20                                      ; $76C5: $FE $20
@@ -7408,7 +7408,7 @@ func_015_7A6E::
     jr   nc, jr_015_7A9A                          ; $7A71: $30 $27
 
     call CopyLinkFinalPositionToPosition          ; $7A73: $CD $BE $0C
-    ld   a, [$C1A6]                               ; $7A76: $FA $A6 $C1
+    ld   a, [wC1A6]                               ; $7A76: $FA $A6 $C1
     and  a                                        ; $7A79: $A7
     jr   z, jr_015_7A8D                           ; $7A7A: $28 $11
 
@@ -7545,7 +7545,7 @@ func_015_7B13::
     jr   nz, jr_015_7B3C                          ; $7B27: $20 $13
 
 jr_015_7B29:
-    ld   hl, $C1A8                                ; $7B29: $21 $A8 $C1
+    ld   hl, wC1A8                                ; $7B29: $21 $A8 $C1
     ld   a, [wDialogState]                        ; $7B2C: $FA $9F $C1
     or   [hl]                                     ; $7B2F: $B6
     ld   hl, wInventoryAppearing                  ; $7B30: $21 $4F $C1

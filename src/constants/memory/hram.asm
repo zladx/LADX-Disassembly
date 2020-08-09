@@ -209,7 +209,7 @@ hNextDefaultMusicTrack:: ; FFBF
   ds 1
 
 ; DMA routine copied from ROM during initialization
-; Copy the content of wOAMBuffer to the OAM memory
+; Copy the content of wLinkOAMBuffer to the OAM memory
 hDMARoutine:: ; FFC0
   ds $A
 

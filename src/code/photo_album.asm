@@ -78,7 +78,7 @@ func_028_4033::
 
     ld   hl, Data_028_4DD1                      ; $4072: $21 $D1 $4D
     add  hl, bc                                 ; $4075: $09
-    ld   de, wOAMBuffer                         ; $4076: $11 $00 $C0
+    ld   de, wLinkOAMBuffer                         ; $4076: $11 $00 $C0
     ld   c, $0A                                 ; $4079: $0E $0A
 .loop_407B_28:
     ldi  a, [hl]                                ; $407B: $2A
@@ -581,7 +581,7 @@ func_028_4385::
     ld   d, $00                                 ; $438F: $16 $00
     ld   hl, Data_028_436D                      ; $4391: $21 $6D $43
     add  hl, de                                 ; $4394: $19
-    ld   de, wOAMBuffer                         ; $4395: $11 $00 $C0
+    ld   de, wLinkOAMBuffer                         ; $4395: $11 $00 $C0
     ld   c, $02                                 ; $4398: $0E $02
 .loop_439A_28:
     ld   a, [$D1CE]                             ; $439A: $FA $CE $D1
@@ -748,7 +748,7 @@ JumpTable_028_4469:
     call func_028_44DB                          ; $448F: JumpTable_028_4469 $CD $DB $44
 .else_4492_28:
     ld   hl, Data_028_4439                      ; $4492: JumpTable_028_4469 $21 $39 $44
-    ld   de, wOAMBuffer                         ; $4495: JumpTable_028_4469 $11 $00 $C0
+    ld   de, wLinkOAMBuffer                         ; $4495: JumpTable_028_4469 $11 $00 $C0
     ld   c, (Data_028_4439.end - Data_028_4439) / 4 ; $4498: JumpTable_028_4469 $0E $0C
 .loop_449A_28:
     ldi  a, [hl]                                ; $449A: JumpTable_028_4469 $2A
@@ -905,7 +905,7 @@ JumpTable_028_457E:
     ld   a, JINGLE_VALIDATE                     ; $45A3: JumpTable_028_457E $3E $13
     ldh  [hJingle], a                           ; $45A5: JumpTable_028_457E $E0 $F2
 .else_45A7_28:
-    ld   de, wOAMBuffer                         ; $45A7: JumpTable_028_457E $11 $00 $C0
+    ld   de, wLinkOAMBuffer                         ; $45A7: JumpTable_028_457E $11 $00 $C0
     ld   hl, Data_028_452E                      ; $45AA: JumpTable_028_457E $21 $2E $45
     ; Render both Data_028_454E and Data_028_452E
     ld   c, (Data_028_454E.end - Data_028_452E) / 4

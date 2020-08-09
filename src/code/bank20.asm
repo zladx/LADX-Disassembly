@@ -798,7 +798,7 @@ func_020_49BA::
     add  hl, de                                   ; $49CC: $19
     ldh  a, [hLinkPositionY]                      ; $49CD: $F0 $99
     add  [hl]                                     ; $49CF: $86
-    ld   [wC17a], a                               ; $49D0: $EA $7A $C1
+    ld   [wC17A], a                               ; $49D0: $EA $7A $C1
     ld   a, $02                                   ; $49D3: $3E $02
     ld   [wC178], a                               ; $49D5: $EA $78 $C1
     ret                                           ; $49D8: $C9
@@ -1287,7 +1287,7 @@ ResetRoomVariables::
     ld   [$C504], a                               ; $4CA9: $EA $04 $C5
     ld   [$DBC8], a                               ; $4CAC: $EA $C8 $DB
     ld   [wTorchesCount], a                       ; $4CAF: $EA $C9 $DB
-    ld   [$C1A2], a                               ; $4CB2: $EA $A2 $C1
+    ld   [wC1A2], a                               ; $4CB2: $EA $A2 $C1
     ld   [$C1C6], a                               ; $4CB5: $EA $C6 $C1
     ld   [wRoomSwitchableObject], a               ; $4CB8: $EA $FA $D6
     ld   [$C50A], a                               ; $4CBB: $EA $0A $C5
@@ -3727,7 +3727,7 @@ jr_020_624D:
 
 jr_020_6261:
     ld   a, h                                     ; $6261: $7C
-    ld   [wOAMBuffer], a                          ; $6262: $EA $00 $C0
+    ld   [wLinkOAMBuffer], a                          ; $6262: $EA $00 $C0
     ld   a, l                                     ; $6265: $7D
     ld   [$C001], a                               ; $6266: $EA $01 $C0
     ld   a, $3F                                   ; $6269: $3E $3F
@@ -6013,7 +6013,7 @@ func_020_7D40::
     ld   a, [wOAMNextAvailableSlot]               ; $7D42: $FA $C0 $C3
     ld   e, a                                     ; $7D45: $5F
     ld   d, $00                                   ; $7D46: $16 $00
-    ld   hl, wOAMBuffer                           ; $7D48: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $7D48: $21 $00 $C0
     add  hl, de                                   ; $7D4B: $19
     ld   d, h                                     ; $7D4C: $54
     ld   e, l                                     ; $7D4D: $5D

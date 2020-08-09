@@ -8216,7 +8216,7 @@ jr_018_79F0:
     add  hl, bc                                   ; $7A17: $09
     ldh  a, [hSwordIntersectedAreaY]              ; $7A18: $F0 $CD
     ld   [hl], a                                  ; $7A1A: $77
-    ld   hl, $C1A2                                ; $7A1B: $21 $A2 $C1
+    ld   hl, wC1A2                                ; $7A1B: $21 $A2 $C1
     inc  [hl]                                     ; $7A1E: $34
     ld   a, [wC3CD]                               ; $7A1F: $FA $CD $C3
     and  a                                        ; $7A22: $A7
@@ -8285,7 +8285,7 @@ label_018_7A5D:
     cp   $74                                      ; $7A85: $FE $74
     ret  z                                        ; $7A87: $C8
 
-    ld   hl, $C1A2                                ; $7A88: $21 $A2 $C1
+    ld   hl, wC1A2                                ; $7A88: $21 $A2 $C1
     dec  [hl]                                     ; $7A8B: $35
     ld   a, [wC3CD]                               ; $7A8C: $FA $CD $C3
     cp   $0C                                      ; $7A8F: $FE $0C
@@ -8536,7 +8536,7 @@ func_018_7D36::
 func_018_7D3B::
     call CopyLinkFinalPositionToPosition          ; $7D3B: $CD $BE $0C
     call ResetPegasusBoots                        ; $7D3E: $CD $B6 $0C
-    ld   a, [$C1A6]                               ; $7D41: $FA $A6 $C1
+    ld   a, [wC1A6]                               ; $7D41: $FA $A6 $C1
     and  a                                        ; $7D44: $A7
     jr   z, jr_018_7D58                           ; $7D45: $28 $11
 
@@ -8677,7 +8677,7 @@ func_018_7DEE::
     cp   $04                                      ; $7DFC: $FE $04
     jr   nz, jr_018_7E13                          ; $7DFE: $20 $13
 
-    ld   hl, $C1A8                                ; $7E00: $21 $A8 $C1
+    ld   hl, wC1A8                                ; $7E00: $21 $A8 $C1
     ld   a, [wDialogState]                        ; $7E03: $FA $9F $C1
     or   [hl]                                     ; $7E06: $B6
     ld   hl, wInventoryAppearing                  ; $7E07: $21 $4F $C1

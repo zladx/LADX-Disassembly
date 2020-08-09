@@ -474,7 +474,7 @@ jr_002_5FD4:
     ret                                           ; $5FD9: $C9
 
 CheckLightTorchesTrigger::
-    ld   a, [$C1A2]                               ; $5FDA: $FA $A2 $C1
+    ld   a, [wC1A2]                               ; $5FDA: $FA $A2 $C1
     cp   $02                                      ; $5FDD: $FE $02
     jp   z, MarkTriggerAsResolved                 ; $5FDF: $CA $60 $0C
 

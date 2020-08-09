@@ -15,7 +15,7 @@ BooBuddyEntityHandler::
 ._01 dw BooBuddyState1Handler
 
 BooBuddyState0Handler::
-    ld   a, [$C1A2]                               ; $79C2: $FA $A2 $C1
+    ld   a, [wC1A2]                               ; $79C2: $FA $A2 $C1
     and  a                                        ; $79C5: $A7
     jp   nz, label_006_7A38                       ; $79C6: $C2 $38 $7A
 
@@ -94,7 +94,7 @@ label_006_7A38:
     ret                                           ; $7A3D: $C9
 
 BooBuddyState1Handler::
-    ld   a, [$C1A2]                               ; $7A3E: $FA $A2 $C1
+    ld   a, [wC1A2]                               ; $7A3E: $FA $A2 $C1
     and  a                                        ; $7A41: $A7
     jr   z, jr_006_7A74                           ; $7A42: $28 $30
 

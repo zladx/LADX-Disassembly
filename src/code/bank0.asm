@@ -1577,12 +1577,12 @@ ApplyGotItem::
     jr   nz, .dispatchItemType                    ; $1062: $20 $09
     xor  a                                        ; $1064: $AF
     ld   [wDialogGotItem], a                      ; $1065: $EA $A9 $C1
-    ld   [$C1A8], a                               ; $1068: $EA $A8 $C1
+    ld   [wC1A8], a                               ; $1068: $EA $A8 $C1
     jr   InitGotItemSequence                      ; $106B: $18 $12
 
 .dispatchItemType
     ld   a, [wDialogGotItem]                      ; $106D: $FA $A9 $C1
-    ld   [$C1A8], a                               ; $1070: $EA $A8 $C1
+    ld   [wC1A8], a                               ; $1070: $EA $A8 $C1
     dec  a                                        ; $1073: $3D
     JP_TABLE                                      ; $1074: $C7
 ._00 dw HandleGotItemA                            ; $1075
@@ -2811,7 +2811,7 @@ LinkMotionMapFadeOutHandler::
     xor  a                                        ; $184A: $AF
     ld   [$C157], a                               ; $184B: $EA $57 $C1
     inc  a                                        ; $184E: $3C
-    ld   [$C1A8], a                               ; $184F: $EA $A8 $C1
+    ld   [wC1A8], a                               ; $184F: $EA $A8 $C1
     ld   a, [wTransitionSequenceCounter]          ; $1852: $FA $6B $C1
     cp   $04                                      ; $1855: $FE $04
     jp   nz, SetSpawnLocation.return              ; $1857: $C2 $D9 $19

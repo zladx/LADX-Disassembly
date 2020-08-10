@@ -53,7 +53,7 @@ BeginMusicTrack_1B::
     jr   jr_01B_4028                              ; $4035: $18 $F1
 
 func_01B_4037::
-    ld   de, $D393                                ; $4037: $11 $93 $D3
+    ld   de, wD393                                ; $4037: $11 $93 $D3
     ld   hl, wActiveNoiseSfx                      ; $403A: $21 $78 $D3
     ld   a, [hl+]                                 ; $403D: $2A
     cp   $01                                      ; $403E: $FE $01
@@ -203,11 +203,11 @@ SetWaveform_1B::
 StopNoiseChannel_1B::
     xor  a                                        ; $40F3: $AF
     ld   [$D379], a                               ; $40F4: $EA $79 $D3
-    ld   [$D34F], a                               ; $40F7: $EA $4F $D3
-    ld   [$D398], a                               ; $40FA: $EA $98 $D3
-    ld   [$D393], a                               ; $40FD: $EA $93 $D3
+    ld   [wD34F], a                               ; $40F7: $EA $4F $D3
+    ld   [wD398], a                               ; $40FA: $EA $98 $D3
+    ld   [wD393], a                               ; $40FD: $EA $93 $D3
     ld   [$D3C9], a                               ; $4100: $EA $C9 $D3
-    ld   [$D3A3], a                               ; $4103: $EA $A3 $D3
+    ld   [wD3A3], a                               ; $4103: $EA $A3 $D3
     ld   a, $08                                   ; $4106: $3E $08
     ldh  [rNR42], a                               ; $4108: $E0 $21
     ld   a, $80                                   ; $410A: $3E $80
@@ -399,7 +399,7 @@ jr_01B_42DB:
     jr   jr_01B_42DB                              ; $42E4: $18 $F5
 
 jr_01B_42E6:
-    ld   bc, $D355                                ; $42E6: $01 $55 $D3
+    ld   bc, wD355                                ; $42E6: $01 $55 $D3
     ld   a, [hl+]                                 ; $42E9: $2A
     ld   [bc], a                                  ; $42EA: $02
     inc  c                                        ; $42EB: $0C
@@ -427,7 +427,7 @@ jr_01B_42E6:
     ret                                           ; $4302: $C9
 
 func_01B_4303::
-    ld   hl, $D355                                ; $4303: $21 $55 $D3
+    ld   hl, wD355                                ; $4303: $21 $55 $D3
     ld   a, [hl+]                                 ; $4306: $2A
     cp   $01                                      ; $4307: $FE $01
     ret  z                                        ; $4309: $C8
@@ -534,7 +534,7 @@ jr_01B_435E:
     call Copy2Bytes_1B                            ; $4375: $CD $36 $43
     ld   de, $D330                                ; $4378: $11 $30 $D3
     call Copy2Bytes_1B                            ; $437B: $CD $36 $43
-    ld   de, $D340                                ; $437E: $11 $40 $D3
+    ld   de, wD340                                ; $437E: $11 $40 $D3
     call Copy2Bytes_1B                            ; $4381: $CD $36 $43
     ld   hl, wD310                                ; $4384: $21 $10 $D3
     ld   de, wD314                                ; $4387: $11 $14 $D3
@@ -545,8 +545,8 @@ jr_01B_435E:
     ld   hl, $D330                                ; $4396: $21 $30 $D3
     ld   de, $D334                                ; $4399: $11 $34 $D3
     call LoadSoundDefinitionData                  ; $439C: $CD $2B $43
-    ld   hl, $D340                                ; $439F: $21 $40 $D3
-    ld   de, $D344                                ; $43A2: $11 $44 $D3
+    ld   hl, wD340                                ; $439F: $21 $40 $D3
+    ld   de, wD344                                ; $43A2: $11 $44 $D3
     call LoadSoundDefinitionData                  ; $43A5: $CD $2B $43
 
     ; [D3x2] = 1 for all channels
@@ -1000,13 +1000,13 @@ HandleNote::
     jr   z, .skippedForChannel4                   ; $45CD: $28 $38
 
     push de                                       ; $45CF: $D5
-    ld   de, $D3B0                                ; $45D0: $11 $B0 $D3
+    ld   de, wD3B0                                ; $45D0: $11 $B0 $D3
     call IndexChannelArray                        ; $45D3: $CD $95 $48
     xor  a                                        ; $45D6: $AF
     ld   [de], a                                  ; $45D7: $12
     inc  e                                        ; $45D8: $1C
     ld   [de], a                                  ; $45D9: $12
-    ld   de, $D3B6                                ; $45DA: $11 $B6 $D3
+    ld   de, wD3B6                                ; $45DA: $11 $B6 $D3
     call IndexChannelArray                        ; $45DD: $CD $95 $48
     inc  e                                        ; $45E0: $1C
     xor  a                                        ; $45E1: $AF
@@ -1016,7 +1016,7 @@ HandleNote::
     jr   nz, .doneChannel3Handler                 ; $45E8: $20 $1C
 
     ; Channel 3
-    ld   de, $D39E                                ; $45EA: $11 $9E $D3
+    ld   de, wD39E                                ; $45EA: $11 $9E $D3
     ld   a, [de]                                  ; $45ED: $1A
     and  a                                        ; $45EE: $A7
     jr   z, .jr_01B_45F8                          ; $45EF: $28 $07
@@ -1024,7 +1024,7 @@ HandleNote::
     ld   a, $01                                   ; $45F1: $3E $01
     ld   [de], a                                  ; $45F3: $12
     xor  a                                        ; $45F4: $AF
-    ld   [$D39F], a                               ; $45F5: $EA $9F $D3
+    ld   [wD39F], a                               ; $45F5: $EA $9F $D3
 
 .jr_01B_45F8:
     ld   de, wActiveMusicTableIndex               ; $45F8: $11 $D9 $D3
@@ -1103,7 +1103,7 @@ HandleNote::
     cp   $FF                                      ; $464B: $FE $FF
     jr   z, .noiseNoteFF                          ; $464D: $28 $18
 
-    ld   de, $D346                                ; $464F: $11 $46 $D3
+    ld   de, wD346                                ; $464F: $11 $46 $D3
     ld   hl, NoiseFrequencyTable                  ; $4652: $21 $54 $4A
     add  hl, bc                                   ; $4655: $09
 
@@ -1116,12 +1116,12 @@ HandleNote::
     jr   nz, .jr_01B_4656                         ; $465C: $20 $F8
 
     ld   c, rNR41 & $ff                           ; $465E: $0E $20
-    ld   hl, $D344                                ; $4660: $21 $44 $D3
+    ld   hl, wD344                                ; $4660: $21 $44 $D3
     ld   b, $00                                   ; $4663: $06 $00
     jr   .jr_01B_46A8                             ; $4665: $18 $41
 
 .noiseNoteFF
-    ld   a, [$D34F]                               ; $4667: $FA $4F $D3
+    ld   a, [wD34F]                               ; $4667: $FA $4F $D3
     bit  7, a                                     ; $466A: $CB $7F
     jp   nz, label_01B_46D9                       ; $466C: $C2 $D9 $46
 
@@ -1269,7 +1269,7 @@ func_01B_46FE::
     and  $0F                                      ; $4704: $E6 $0F
     jr   z, jr_01B_4720                           ; $4706: $28 $18
 
-    ld   [$D351], a                               ; $4708: $EA $51 $D3
+    ld   [wD351], a                               ; $4708: $EA $51 $D3
     ld   a, [wActiveChannelIndex]                               ; $470B: $FA $50 $D3
     ld   c, $13                                   ; $470E: $0E $13
     cp   $01                                      ; $4710: $FE $01
@@ -1289,7 +1289,7 @@ jr_01B_4720:
     cp   $04                                      ; $4723: $FE $04
     jp   z, label_01B_46FC                        ; $4725: $CA $FC $46
 
-    ld   de, $D3B6                                ; $4728: $11 $B6 $D3
+    ld   de, wD3B6                                ; $4728: $11 $B6 $D3
     call IndexChannelArray                            ; $472B: $CD $95 $48
     ld   a, [de]                                  ; $472E: $1A
     and  a                                        ; $472F: $A7
@@ -1312,7 +1312,7 @@ label_01B_4749:
     cp   $03                                      ; $474C: $FE $03
     jp   nz, label_01B_46FC                       ; $474E: $C2 $FC $46
 
-    ld   a, [$D39E]                               ; $4751: $FA $9E $D3
+    ld   a, [wD39E]                               ; $4751: $FA $9E $D3
     and  a                                        ; $4754: $A7
     jp   nz, label_01B_4810                       ; $4755: $C2 $10 $48
 
@@ -1334,7 +1334,7 @@ jr_01B_4762:
     add  $04                                      ; $476B: $C6 $04
     ld   l, a                                     ; $476D: $6F
     ld   b, [hl]                                  ; $476E: $46
-    ld   a, [$D351]                               ; $476F: $FA $51 $D3
+    ld   a, [wD351]                               ; $476F: $FA $51 $D3
     cp   $01                                      ; $4772: $FE $01
     jp   z, label_01B_48AB                        ; $4774: $CA $AB $48
 
@@ -1426,7 +1426,7 @@ soundOpcode96:
     ld   a, $01                                   ; $47F1: $3E $01
 
 .setD3CDAndParseNext:
-    ld   [$D3CD], a                               ; $47F3: $EA $CD $D3
+    ld   [wD3CD], a                               ; $47F3: $EA $CD $D3
     call IncChannelDefinitionPointer                            ; $47F6: $CD $0B $44
     jp   ParseSoundOpcode                           ; $47F9: $C3 $31 $45
 
@@ -1438,20 +1438,20 @@ soundOpcode99:
     ld   a, $01                                   ; $47FF: $3E $01
 
 .setD39EAndParseNext
-    ld   [$D39E], a                               ; $4801: $EA $9E $D3
+    ld   [wD39E], a                               ; $4801: $EA $9E $D3
     call IncChannelDefinitionPointer                            ; $4804: $CD $0B $44
     jp   ParseSoundOpcode                           ; $4807: $C3 $31 $45
 
 soundOpcode9A:
     xor  a                                        ; $480A: $AF
-    ld   [$D39E], a                               ; $480B: $EA $9E $D3
+    ld   [wD39E], a                               ; $480B: $EA $9E $D3
     jr   soundOpcode99.setD39EAndParseNext        ; $480E: $18 $F1
 
 label_01B_4810:
     cp   $02                                      ; $4810: $FE $02
     jp   z, label_01B_46FC                        ; $4812: $CA $FC $46
 
-    ld   bc, $D39F                                ; $4815: $01 $9F $D3
+    ld   bc, wD39F                                ; $4815: $01 $9F $D3
     call func_01B_4842                            ; $4818: $CD $42 $48
     ld   c, $1C                                   ; $481B: $0E $1C
     ld   b, $40                                   ; $481D: $06 $40
@@ -1473,7 +1473,7 @@ label_01B_4810:
     jp   nz, label_01B_46FC                       ; $4835: $C2 $FC $46
 
     ld   a, $02                                   ; $4838: $3E $02
-    ld   [$D39E], a                               ; $483A: $EA $9E $D3
+    ld   [wD39E], a                               ; $483A: $EA $9E $D3
 
 label_01B_483D:
 jr_01B_483D:
@@ -1488,7 +1488,7 @@ func_01B_4842::
     ret                                           ; $4845: $C9
 
 soundOpcode97:
-    ld   de, $D3B6                                ; $4846: $11 $B6 $D3
+    ld   de, wD3B6                                ; $4846: $11 $B6 $D3
     call IndexChannelArray                            ; $4849: $CD $95 $48
     ld   a, $01                                   ; $484C: $3E $01
 
@@ -1498,7 +1498,7 @@ soundOpcode97:
     jp   ParseSoundOpcode                           ; $4852: $C3 $31 $45
 
 soundOpcode98:
-    ld   de, $D3B6                                ; $4855: $11 $B6 $D3
+    ld   de, wD3B6                                ; $4855: $11 $B6 $D3
     call IndexChannelArray                            ; $4858: $CD $95 $48
     xor  a                                        ; $485B: $AF
     jr   soundOpcode97.setDeAndParseNext          ; $485C: $18 $F0
@@ -1537,7 +1537,7 @@ func_01B_4879::
     ret                                           ; $4883: $C9
 
 func_01B_4884::
-    ld   de, $D3A4                                ; $4884: $11 $A4 $D3
+    ld   de, wD3A4                                ; $4884: $11 $A4 $D3
     call IndexChannelArray                            ; $4887: $CD $95 $48
     ld   a, l                                     ; $488A: $7D
     ld   [c], a                                   ; $488B: $E2
@@ -1563,7 +1563,7 @@ IndexChannelArray::
     ret                                           ; $489D: $C9
 
 func_01B_489E::
-    ld   de, $D3A4                                ; $489E: $11 $A4 $D3
+    ld   de, wD3A4                                ; $489E: $11 $A4 $D3
     call IndexChannelArray                            ; $48A1: $CD $95 $48
     ld   a, [de]                                  ; $48A4: $1A
     ld   l, a                                     ; $48A5: $6F
@@ -1575,7 +1575,7 @@ func_01B_489E::
 
 label_01B_48AB:
     pop  de                                       ; $48AB: $D1
-    ld   de, $D3B0                                ; $48AC: $11 $B0 $D3
+    ld   de, wD3B0                                ; $48AC: $11 $B0 $D3
     call IndexChannelArray                            ; $48AF: $CD $95 $48
     ld   a, [de]                                  ; $48B2: $1A
     inc  a                                        ; $48B3: $3C
@@ -1763,11 +1763,11 @@ include "data/music/music_tracks_data_1b_1.asm"
 label_01B_4E2C:
     xor  a                                        ; $4E2C: $AF
     ld   [$D379], a                               ; $4E2D: $EA $79 $D3
-    ld   [$D34F], a                               ; $4E30: $EA $4F $D3
-    ld   [$D398], a                               ; $4E33: $EA $98 $D3
-    ld   [$D393], a                               ; $4E36: $EA $93 $D3
+    ld   [wD34F], a                               ; $4E30: $EA $4F $D3
+    ld   [wD398], a                               ; $4E33: $EA $98 $D3
+    ld   [wD393], a                               ; $4E36: $EA $93 $D3
     ld   [$D3C9], a                               ; $4E39: $EA $C9 $D3
-    ld   [$D3A3], a                               ; $4E3C: $EA $A3 $D3
+    ld   [wD3A3], a                               ; $4E3C: $EA $A3 $D3
     ld   [$D3E5], a                               ; $4E3F: $EA $E5 $D3
     ld   a, $08                                   ; $4E42: $3E $08
     ldh  [rNR42], a                               ; $4E44: $E0 $21
@@ -1778,7 +1778,7 @@ label_01B_4E4A:
     ld   a, $FF                                   ; $4E4A: $3E $FF
     ldh  [rNR51], a                               ; $4E4C: $E0 $25
     ld   a, $03                                   ; $4E4E: $3E $03
-    ld   [$D355], a                               ; $4E50: $EA $55 $D3
+    ld   [wD355], a                               ; $4E50: $EA $55 $D3
     xor  a                                        ; $4E53: $AF
     ld   [wActiveMusicIndex], a                   ; $4E54: $EA $69 $D3
 
@@ -1789,29 +1789,29 @@ StopSquareAndWaveChannels_1B::
     ld   [$D31F], a                               ; $4E5E: $EA $1F $D3
     ld   [$D32F], a                               ; $4E61: $EA $2F $D3
     ld   [$D33F], a                               ; $4E64: $EA $3F $D3
-    ld   [$D39E], a                               ; $4E67: $EA $9E $D3
-    ld   [$D39F], a                               ; $4E6A: $EA $9F $D3
+    ld   [wD39E], a                               ; $4E67: $EA $9E $D3
+    ld   [wD39F], a                               ; $4E6A: $EA $9F $D3
     ld   [wActiveMusicTableIndex], a              ; $4E6D: $EA $D9 $D3
     ld   [$D3DA], a                               ; $4E70: $EA $DA $D3
-    ld   [$D3B6], a                               ; $4E73: $EA $B6 $D3
-    ld   [$D3B7], a                               ; $4E76: $EA $B7 $D3
-    ld   [$D3B8], a                               ; $4E79: $EA $B8 $D3
-    ld   [$D3B9], a                               ; $4E7C: $EA $B9 $D3
-    ld   [$D3BA], a                               ; $4E7F: $EA $BA $D3
-    ld   [$D3BB], a                               ; $4E82: $EA $BB $D3
-    ld   [$D394], a                               ; $4E85: $EA $94 $D3
-    ld   [$D395], a                               ; $4E88: $EA $95 $D3
-    ld   [$D396], a                               ; $4E8B: $EA $96 $D3
-    ld   [$D390], a                               ; $4E8E: $EA $90 $D3
-    ld   [$D391], a                               ; $4E91: $EA $91 $D3
-    ld   [$D392], a                               ; $4E94: $EA $92 $D3
-    ld   [$D3C6], a                               ; $4E97: $EA $C6 $D3
-    ld   [$D3C7], a                               ; $4E9A: $EA $C7 $D3
+    ld   [wD3B6], a                               ; $4E73: $EA $B6 $D3
+    ld   [wD3B6+1], a                               ; $4E76: $EA $B7 $D3
+    ld   [wD3B6+2], a                               ; $4E79: $EA $B8 $D3
+    ld   [wD3B6+3], a                               ; $4E7C: $EA $B9 $D3
+    ld   [wD3B6+4], a                               ; $4E7F: $EA $BA $D3
+    ld   [wD3B6+5], a                               ; $4E82: $EA $BB $D3
+    ld   [wD394], a                               ; $4E85: $EA $94 $D3
+    ld   [wD394+1], a                               ; $4E88: $EA $95 $D3
+    ld   [wD396], a                               ; $4E8B: $EA $96 $D3
+    ld   [wD390], a                               ; $4E8E: $EA $90 $D3
+    ld   [wD390+1], a                               ; $4E91: $EA $91 $D3
+    ld   [wD392], a                               ; $4E94: $EA $92 $D3
+    ld   [wD3C6], a                               ; $4E97: $EA $C6 $D3
+    ld   [wD3C7], a                               ; $4E9A: $EA $C7 $D3
     ld   [$D3C8], a                               ; $4E9D: $EA $C8 $D3
-    ld   [$D3A0], a                               ; $4EA0: $EA $A0 $D3
-    ld   [$D3A1], a                               ; $4EA3: $EA $A1 $D3
-    ld   [$D3A2], a                               ; $4EA6: $EA $A2 $D3
-    ld   [$D3CD], a                               ; $4EA9: $EA $CD $D3
+    ld   [wD3A0], a                               ; $4EA0: $EA $A0 $D3
+    ld   [wD3A1], a                               ; $4EA3: $EA $A1 $D3
+    ld   [wD3A2], a                               ; $4EA6: $EA $A2 $D3
+    ld   [wD3CD], a                               ; $4EA9: $EA $CD $D3
     ld   [$D3D6], a                               ; $4EAC: $EA $D6 $D3
     ld   [$D3D7], a                               ; $4EAF: $EA $D7 $D3
     ld   [$D3D8], a                               ; $4EB2: $EA $D8 $D3

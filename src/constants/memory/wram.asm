@@ -1543,11 +1543,35 @@ wD330::
 ; Unlabeled
 ; Channel 4 data (similar to D310)
 wD340::
-  ds $10 ; D340 - D34F
+  ds 4 ; D340 - D343
+
+; Unlabeled
+wD344::
+  ds 1 ; D344
+
+; Unlabeled
+wD345::
+  ds 1 ; D345
+
+; Unlabeled
+wD346::
+  ds 9 ; D346 - D34E
+
+; Unlabeled
+wD34F::
+  ds 1 ; D34F
 
 ; Current sound channel being processed. Number from 1-4.
 wActiveChannelIndex::
-  ds $10 ; D350 - D35F
+  ds 1 ; D350
+
+; Unlabeled
+wD351::
+  ds 4 ; D351 -D354
+
+; Unlabeled
+wD355::
+  ds 11 ; D355 -D35F
 
 ; The squareform jingle currently playing
 wActiveJingle::
@@ -1605,35 +1629,156 @@ wActiveNoiseSfx::
 ; Unlabeled
 ; noise sound effect parameters?
 wD379::
-  ds 1 ; D379
+  ds 23 ; D379 - D38F
 
 ; Unlabeled
-ds $D39E-$D37A
+wD390::
+  ds 1 ; D390
 
+; Unlabeled
+wD391::
+  ds 1 ; D391
+
+; Unlabeled
+wD392::
+  ds 1 ; D392
+
+; Unlabeled
+wD393::
+  ds 1 ; D393
+
+; Unlabeled
+wD394::
+  ds 2 ; D394
+
+; Unlabeled
+wD396::
+  ds 2 ; D396 - D397
+
+; Unlabeled
+wD398::
+  ds 6 ; D398 - D39D
+
+; Unlabeled
+; Set to 1 by opcode 99, 0 by opcode 9A.
+; Enabled "envelope" behaviour of channel 3?
 wD39E::
-  ; Set to 1 by opcode 99, 0 by opcode 9A.
-  ; Enabled "envelope" behaviour of channel 3?
-  ds 1
+  ds 1 ; D39E
 
 ; Unlabeled
-ds $D3C8-$D39F
+wD39F::
+  ds 1 ; D39F
 
-; D3B6: ds 8 (channel-specific data)
+; Unlabeled
+wD3A0::
+  ds 1 ; D3A0
 
+; Unlabeled
+wD3A1::
+  ds 1 ; D3A1
+
+; Unlabeled
+wD3A2::
+  ds 1 ; D3A2
+
+; Unlabeled
+wD3A3::
+  ds 1 ; D3A3
+
+; Unlabeled
+wD3A4::
+  ds 2 ; D3A4 - D3A5
+
+; Unlabeled
+wD3A6::
+  ds 9 ; D3A6 - D3AE
+
+; Unlabeled
+wD3AF::
+  ds 1 ; D3AF
+
+; Unlabeled
+wD3B0::
+  ds 6 ; D3B0 - D3B5
+
+; Unlabeled
+; music channel-specific data
+wD3B6::
+  ds 6 ; D3A6 - D3BB
+
+; Unlabeled
+wD3BC::
+  ds 1 ; D3BC
+
+; Unlabeled
+wD3BD::
+  ds 1 ; D3BD
+
+; Unlabeled
+wD3BE::
+  ds 1 ; D3BE
+
+; Unlabeled
+wD3BF::
+  ds 1 ; D3BF
+
+; Unlabeled
+wD3C0::
+  ds 1 ; D3C0
+
+; Unlabeled
+wD3C1::
+  ds 1 ; D3C1
+
+; Unlabeled
+wD3C2::
+  ds 1 ; D3C2
+
+; Unlabeled
+wD3C3::
+  ds 1 ; D3C3
+
+; Unlabeled
+wD3C4::
+  ds 1 ; D3C4
+
+; Unlabeled
+wD3C5::
+  ds 1 ; D3C5
+
+; Unlabeled
+wD3C6::
+  ds 1 ; D3C6
+
+; Unlabeled
+wD3C7::
+  ds 1 ; D3C7
+
+; Unlabeled
 wD3C8::
-  ds 1
-wD3C9::
-  ds 1
-wD3CA::
-  ; Copied from wActiveMusicIndex (a music index)
-  ds 1
-wPreviousMusicTrack:: ; D3CB
-  ; Copied from $D3CA
-  ; The music track that was playing previously.
-  ds 1
+  ds 1 ; D3C8
 
 ; Unlabeled
-ds 2
+wD3C9::
+  ds 1 ; D3C9
+
+; Unlabeled
+; Copied from wActiveMusicIndex (a music index)
+wD3CA::
+  ds 1 ; D3CA
+
+; Copied from $D3CA
+; The music track that was playing previously.
+wPreviousMusicTrack::
+  ds 1 ; D3CB
+
+; not used
+wD3CC::
+  ds 1 ; D3CC
+
+; Unlabeled
+wD3CD::
+  ds 1 ; D3CD
 
 wActiveMusicTable:: ; D3CE
   ds 1

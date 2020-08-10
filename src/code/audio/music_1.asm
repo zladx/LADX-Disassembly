@@ -353,13 +353,13 @@ Data_1B_418B::
     db   $01, $00, $FF, $FF, $00, $00
 
 label_01B_42AB:
-    ld   a, [$D3E7]                               ; $42AB: $FA $E7 $D3
+    ld   a, [wD3E7]                               ; $42AB: $FA $E7 $D3
     and  a                                        ; $42AE: $A7
     jp   z, WriteChannelRegisters                 ; $42AF: $CA $CB $46
 
     xor  a                                        ; $42B2: $AF
     ldh  [rNR30], a                               ; $42B3: $E0 $1A
-    ld   [$D3E7], a                               ; $42B5: $EA $E7 $D3
+    ld   [wD3E7], a                               ; $42B5: $EA $E7 $D3
     push hl                                       ; $42B8: $E5
     ld   a, [$D336]                               ; $42B9: $FA $36 $D3
     ld   l, a                                     ; $42BC: $6F
@@ -1035,7 +1035,7 @@ HandleNote::
     ld   a, $01                                   ; $45FF: $3E $01
     ld   [de], a                                  ; $4601: $12
     xor  a                                        ; $4602: $AF
-    ld   [$D3DA], a                               ; $4603: $EA $DA $D3
+    ld   [wD3DA], a                               ; $4603: $EA $DA $D3
 
 .doneChannel3Handler
     pop  de                                       ; $4606: $D1
@@ -1636,7 +1636,7 @@ Data_01B_48F0::
 
 label_01B_4918:
     pop  de                                       ; $4918: $D1
-    ld   de, $D3D0                                ; $4919: $11 $D0 $D3
+    ld   de, wD3D0                                ; $4919: $11 $D0 $D3
     call IndexChannelArray                            ; $491C: $CD $95 $48
     ld   a, [de]                                  ; $491F: $1A
     inc  a                                        ; $4920: $3C
@@ -1695,7 +1695,7 @@ label_01B_4998:
     cp   $02                                      ; $4998: $FE $02
     jp   z, label_01B_46FC                        ; $499A: $CA $FC $46
 
-    ld   bc, $D3DA                                ; $499D: $01 $DA $D3
+    ld   bc, wD3DA                                ; $499D: $01 $DA $D3
     call func_01B_4842                            ; $49A0: $CD $42 $48
     ld   c, $1C                                   ; $49A3: $0E $1C
     ld   b, $60                                   ; $49A5: $06 $60
@@ -1768,7 +1768,7 @@ label_01B_4E2C:
     ld   [wD393], a                               ; $4E36: $EA $93 $D3
     ld   [$D3C9], a                               ; $4E39: $EA $C9 $D3
     ld   [wD3A3], a                               ; $4E3C: $EA $A3 $D3
-    ld   [$D3E5], a                               ; $4E3F: $EA $E5 $D3
+    ld   [wD3E2+3], a                               ; $4E3F: $EA $E5 $D3
     ld   a, $08                                   ; $4E42: $3E $08
     ldh  [rNR42], a                               ; $4E44: $E0 $21
     ld   a, $80                                   ; $4E46: $3E $80
@@ -1792,7 +1792,7 @@ StopSquareAndWaveChannels_1B::
     ld   [wD39E], a                               ; $4E67: $EA $9E $D3
     ld   [wD39F], a                               ; $4E6A: $EA $9F $D3
     ld   [wActiveMusicTableIndex], a              ; $4E6D: $EA $D9 $D3
-    ld   [$D3DA], a                               ; $4E70: $EA $DA $D3
+    ld   [wD3DA], a                               ; $4E70: $EA $DA $D3
     ld   [wD3B6], a                               ; $4E73: $EA $B6 $D3
     ld   [wD3B6+1], a                               ; $4E76: $EA $B7 $D3
     ld   [wD3B6+2], a                               ; $4E79: $EA $B8 $D3
@@ -1812,14 +1812,14 @@ StopSquareAndWaveChannels_1B::
     ld   [wD3A1], a                               ; $4EA3: $EA $A1 $D3
     ld   [wD3A2], a                               ; $4EA6: $EA $A2 $D3
     ld   [wD3CD], a                               ; $4EA9: $EA $CD $D3
-    ld   [$D3D6], a                               ; $4EAC: $EA $D6 $D3
-    ld   [$D3D7], a                               ; $4EAF: $EA $D7 $D3
-    ld   [$D3D8], a                               ; $4EB2: $EA $D8 $D3
-    ld   [$D3DC], a                               ; $4EB5: $EA $DC $D3
-    ld   [$D3E7], a                               ; $4EB8: $EA $E7 $D3
-    ld   [$D3E2], a                               ; $4EBB: $EA $E2 $D3
-    ld   [$D3E3], a                               ; $4EBE: $EA $E3 $D3
-    ld   [$D3E4], a                               ; $4EC1: $EA $E4 $D3
+    ld   [wD3D6], a                               ; $4EAC: $EA $D6 $D3
+    ld   [wD3D7], a                               ; $4EAF: $EA $D7 $D3
+    ld   [wD3D7+1], a                               ; $4EB2: $EA $D8 $D3
+    ld   [wD3DC], a                               ; $4EB5: $EA $DC $D3
+    ld   [wD3E7], a                               ; $4EB8: $EA $E7 $D3
+    ld   [wD3E2], a                               ; $4EBB: $EA $E2 $D3
+    ld   [wD3E2+1], a                               ; $4EBE: $EA $E3 $D3
+    ld   [wD3E2+2], a                               ; $4EC1: $EA $E4 $D3
     ld   a, $08                                   ; $4EC4: $3E $08
     ldh  [rNR12], a                               ; $4EC6: $E0 $12
     ldh  [rNR22], a                               ; $4EC8: $E0 $17

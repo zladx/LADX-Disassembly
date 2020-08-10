@@ -1624,7 +1624,7 @@ MoldormEntityActiveHandler::
     call CopyEntityPositionToActivePosition       ; $5791: $CD $8A $3D
     call func_004_7FA3                            ; $5794: $CD $A3 $7F
     xor  a                                        ; $5797: $AF
-    ld   [$D3D6], a                               ; $5798: $EA $D6 $D3
+    ld   [wD3D6], a                               ; $5798: $EA $D6 $D3
     ld   e, $10                                   ; $579B: $1E $10
     ld   hl, wEntitiesHealthTable                 ; $579D: $21 $60 $C3
     add  hl, bc                                   ; $57A0: $09
@@ -1641,7 +1641,7 @@ MoldormEntityActiveHandler::
 jr_004_57AE:
     call jr_004_57C6                              ; $57AE: $CD $C6 $57
     ld   a, $01                                   ; $57B1: $3E $01
-    ld   [$D3D6], a                               ; $57B3: $EA $D6 $D3
+    ld   [wD3D6], a                               ; $57B3: $EA $D6 $D3
     ld   e, $0B                                   ; $57B6: $1E $0B
 
 jr_004_57B8:

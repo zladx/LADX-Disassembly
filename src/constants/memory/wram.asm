@@ -1780,77 +1780,130 @@ wD3CC::
 wD3CD::
   ds 1 ; D3CD
 
-wActiveMusicTable:: ; D3CE
-  ds 1
+; TODO comment
+wActiveMusicTable::
+  ds 2 ; D3CE - D3CF
 
 ; Unlabeled
-ds $D3D9-$D3CF
+wD3D0::
+  ds 6 ; D3D0 - D3D5
+
+; Unlabeled
+wD3D6::
+  ds 1 ; D3D6
+
+; Unlabeled
+wD3D7::
+  ds 2 ; D3D7
 
 wActiveMusicTableIndex:: ; D3D9
   ; Set to 1 by opcode 94
   ds 1
 
 ; Unlabeled
-ds $D401-$D3DA
+wD3DA::
+  ds 2 ; D3DA - D3DB
+
+; Unlabeled
+wD3DC::
+  ds 1 ; D3DC
+
+; Unlabeled
+wD3DD::
+  ds 1 ; D3DD
+
+; Unlabeled
+wD3DE::
+  ds 1 ; D3DE
+
+; Unlabeled
+wD3DF::
+  ds 1 ; D3DF
+
+; Unlabeled
+wD3E0::
+  ds 1 ; D3E0
+
+; Unlabeled
+wD3E1::
+  ds 1 ; D3E1
+
+; Unlabeled
+wD3E2::
+  ds 4 ; D3E2 - D3E5
+
+; Unlabeled
+wD3E6::
+  ds 1 ; D3E6
+
+; Unlabeled
+wD3E7::
+  ds 1 ; D3E7
+
+; Unlabeled
+wD3E8::
+  ds 1 ; D3E8
+
+; Unlabeled
+wD3E9::
+  ds 24 ; D3E9 - D400
 
 ; Room warps
-;
 ; Each room can have 4 warp points. The room warps destination are defined below,
 ; and the warp positions is defined at D416-D419.
-
 wWarpStructs::
 
 ; Warp 0
-wWarp0MapCategory:: ; D401
-  ds 1
-wWarp0Map:: ; D402
-  ds 1
-wWarp0Room:: ; D403
-  ds 1
-wWarp0DestinationX:: ; D404
-  ds 1
-wWarp0DestinationY:: ; D405
-  ds 1
+wWarp0MapCategory::
+  ds 1 ; D401
+wWarp0Map::
+  ds 1 ; D402
+wWarp0Room::
+  ds 1 ; D403
+wWarp0DestinationX::
+  ds 1 ; D404
+wWarp0DestinationY::
+  ds 1 ; D405
 
 ; Warp 1
-wWarp1MapCategory:: ; D406
-  ds 1
-wWarp1Map:: ; D407
-  ds 1
-wWarp1Room:: ; D408
-  ds 1
-wWarp1DestinationX:: ; D409
-  ds 1
-wWarp1DestinationY:: ; D40A
-  ds 1
+wWarp1MapCategory::
+  ds 1 ; D406
+wWarp1Map::
+  ds 1 ; D407
+wWarp1Room::
+  ds 1 ; D408
+wWarp1DestinationX::
+  ds 1 ; D409
+wWarp1DestinationY::
+  ds 1 ; D40A
 
 ; Warp 2
-wWarp2MapCategory:: ; D40B
-  ds 1
-wWarp2Map:: ; D40C
-  ds 1
-wWarp2Room:: ; D40D
-  ds 1
-wWarp2DestinationX:: ; D40E
-  ds 1
-wWarp2DestinationY:: ; D40F
-  ds 1
+wWarp2MapCategory::
+  ds 1 ; D40B
+wWarp2Map::
+  ds 1 ; D40C
+wWarp2Room::
+  ds 1 ; D40D
+wWarp2DestinationX::
+  ds 1 ; D40E
+wWarp2DestinationY::
+  ds 1 ; D40F
 
 ; Warp 3
-wWarp3MapCategory:: ; D410
-  ds 1
-wWarp3Map:: ; D411
-  ds 1
-wWarp3Room:: ; D412
-  ds 1
-wWarp3DestinationX:: ; D413
-  ds 1
-wWarp3DestinationY:: ; D414
-  ds 1
+wWarp3MapCategory::
+  ds 1 ; D410
+wWarp3Map::
+  ds 1 ; D411
+wWarp3Room::
+  ds 1 ; D412
+wWarp3DestinationX::
+  ds 1 ; D413
+wWarp3DestinationY::
+  ds 1 ; D414
 
-wPieceOfPowerKillCount:: ; D415
-  ; Kill count, to tell if a Piece of Power should be dropped
-  ds 1
+; Kill count, to tell if a Piece of Power should be dropped
+wPieceOfPowerKillCount::
+  ds 1 ; D415
 
 wWarpPositions::
 wWarp0PositionTileIndex:: ; D416

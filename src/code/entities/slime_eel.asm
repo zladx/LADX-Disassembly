@@ -41,7 +41,7 @@ func_005_6D00::
     ld   [$C157], a                               ; $6D08: $EA $57 $C1
     ld   a, $3E                                   ; $6D0B: $3E $3E
     ldh  [hNoiseSfx], a                           ; $6D0D: $E0 $F4
-    ld   [$D3E8], a                               ; $6D0F: $EA $E8 $D3
+    ld   [wD3E8], a                               ; $6D0F: $EA $E8 $D3
     ld   a, $04                                   ; $6D12: $3E $04
     ld   [$C158], a                               ; $6D14: $EA $58 $C1
     jp   IncrementEntityState                     ; $6D17: $C3 $12 $3B
@@ -74,7 +74,7 @@ func_005_6D42::
 
     ld   [hl], $FF                                ; $6D5E: $36 $FF
     xor  a                                        ; $6D60: $AF
-    ld   [$D3E8], a                               ; $6D61: $EA $E8 $D3
+    ld   [wD3E8], a                               ; $6D61: $EA $E8 $D3
     call IncrementEntityState                     ; $6D64: $CD $12 $3B
     ld   a, $AF                                   ; $6D67: $3E $AF
     ld   [$D745], a                               ; $6D69: $EA $45 $D7

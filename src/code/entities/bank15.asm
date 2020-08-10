@@ -4050,7 +4050,7 @@ func_015_60D4::
     call CopyEntityPositionToActivePosition       ; $60DD: $CD $8A $3D
     call func_015_7B0D                            ; $60E0: $CD $0D $7B
     xor  a                                        ; $60E3: $AF
-    ld   [$D3D6], a                               ; $60E4: $EA $D6 $D3
+    ld   [wD3D6], a                               ; $60E4: $EA $D6 $D3
     ld   e, $0C                                   ; $60E7: $1E $0C
     ld   hl, wEntitiesPrivateCountdown2Table      ; $60E9: $21 $00 $C3
     add  hl, bc                                   ; $60EC: $09
@@ -4060,7 +4060,7 @@ func_015_60D4::
 
     call jr_015_6109                              ; $60F1: $CD $09 $61
     ld   a, $01                                   ; $60F4: $3E $01
-    ld   [$D3D6], a                               ; $60F6: $EA $D6 $D3
+    ld   [wD3D6], a                               ; $60F6: $EA $D6 $D3
     ld   e, $0C                                   ; $60F9: $1E $0C
 
 jr_015_60FB:

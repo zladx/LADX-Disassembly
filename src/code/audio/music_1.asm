@@ -528,7 +528,7 @@ jr_01B_435E:
     ld   [de], a                                  ; $4367: $12
     inc  e                                        ; $4368: $1C
     call Copy2Bytes_1B                            ; $4369: $CD $36 $43
-    ld   de, $D310                                ; $436C: $11 $10 $D3
+    ld   de, wD310                                ; $436C: $11 $10 $D3
     call Copy2Bytes_1B                            ; $436F: $CD $36 $43
     ld   de, $D320                                ; $4372: $11 $20 $D3
     call Copy2Bytes_1B                            ; $4375: $CD $36 $43
@@ -536,8 +536,8 @@ jr_01B_435E:
     call Copy2Bytes_1B                            ; $437B: $CD $36 $43
     ld   de, $D340                                ; $437E: $11 $40 $D3
     call Copy2Bytes_1B                            ; $4381: $CD $36 $43
-    ld   hl, $D310                                ; $4384: $21 $10 $D3
-    ld   de, $D314                                ; $4387: $11 $14 $D3
+    ld   hl, wD310                                ; $4384: $21 $10 $D3
+    ld   de, wD314                                ; $4387: $11 $14 $D3
     call LoadSoundDefinitionData                  ; $438A: $CD $2B $43
     ld   hl, $D320                                ; $438D: $21 $20 $D3
     ld   de, $D324                                ; $4390: $11 $24 $D3
@@ -551,7 +551,7 @@ jr_01B_435E:
 
     ; [D3x2] = 1 for all channels
     ld   bc, $0410                                ; $43A8: $01 $10 $04
-    ld   hl, $D312                                ; $43AB: $21 $12 $D3
+    ld   hl, wD312                                ; $43AB: $21 $12 $D3
 .loop
     ld   [hl], $01                                ; $43AE: $36 $01
     ld   a, c                                     ; $43B0: $79
@@ -574,7 +574,7 @@ soundOpcode9DChannel3Handler_1B::
     ld   [$D336], a                               ; $43C3: $EA $36 $D3
     ld   a, d                                     ; $43C6: $7A
     ld   [$D337], a                               ; $43C7: $EA $37 $D3
-    ld   a, [$D371]                               ; $43CA: $FA $71 $D3
+    ld   a, [wD371]                               ; $43CA: $FA $71 $D3
     and  a                                        ; $43CD: $A7
     jr   nz, .nextOpcode                          ; $43CE: $20 $08
 
@@ -770,7 +770,7 @@ soundOpcode9E:
     ld   [wMusicSpeedPointer], a                  ; $44B3: $EA $01 $D3
     call IncChannelDefinitionPointer              ; $44B6: $CD $0B $44
     call ReadSoundPointerByte                     ; $44B9: $CD $20 $44
-    ld   [$D302], a                               ; $44BC: $EA $02 $D3
+    ld   [wMusicSpeedPointer+1], a                               ; $44BC: $EA $02 $D3
     jr   IncChannelDefinitonPointerAndParseNext   ; $44BF: $18 $09
 
 soundOpcode9F:
@@ -857,7 +857,7 @@ UpdateAllMusicChannels_1B::
     call func_01B_4303                            ; $451A: $CD $03 $43
     ld   a, $01                                   ; $451D: $3E $01
     ld   [wActiveChannelIndex], a                               ; $451F: $EA $50 $D3
-    ld   hl, $D310                                ; $4522: $21 $10 $D3
+    ld   hl, wD310                                ; $4522: $21 $10 $D3
 
 ; This will loop through all music channels and update them.
 ; Input:
@@ -978,7 +978,7 @@ ParseSoundOpcode:
     dec  a                                        ; $45B5: $3D
     ld   e, a                                     ; $45B6: $5F
     ld   d, $00                                   ; $45B7: $16 $00
-    ld   hl, $D307                                ; $45B9: $21 $07 $D3
+    ld   hl, wD307                                ; $45B9: $21 $07 $D3
     add  hl, de                                   ; $45BC: $19
     ld   [hl], c                                  ; $45BD: $71
     pop  af                                       ; $45BE: $F1
@@ -1352,19 +1352,19 @@ func_01B_4787::
     and  a                                        ; $478A: $A7
     jr   nz, jr_01B_47AE                          ; $478B: $20 $21
 
-    ld   a, [$D317]                               ; $478D: $FA $17 $D3
+    ld   a, [wD317]                               ; $478D: $FA $17 $D3
     and  a                                        ; $4790: $A7
     jr   z, jr_01B_47AE                           ; $4791: $28 $1B
 
     and  $0F                                      ; $4793: $E6 $0F
     ld   b, a                                     ; $4795: $47
-    ld   hl, $D307                                ; $4796: $21 $07 $D3
+    ld   hl, wD307                                ; $4796: $21 $07 $D3
     ld   a, [$D31E]                               ; $4799: $FA $1E $D3
     cp   [hl]                                     ; $479C: $BE
     jr   nz, jr_01B_47AE                          ; $479D: $20 $0F
 
     ld   c, $12                                   ; $479F: $0E $12
-    ld   de, $D31A                                ; $47A1: $11 $1A $D3
+    ld   de, wD31A                                ; $47A1: $11 $1A $D3
     ld   a, [$D31F]                               ; $47A4: $FA $1F $D3
     bit  7, a                                     ; $47A7: $CB $7F
     jr   nz, jr_01B_47AE                          ; $47A9: $20 $03
@@ -1382,7 +1382,7 @@ jr_01B_47AE:
 
     and  $0F                                      ; $47B8: $E6 $0F
     ld   b, a                                     ; $47BA: $47
-    ld   hl, $D308                                ; $47BB: $21 $08 $D3
+    ld   hl, wD308                                ; $47BB: $21 $08 $D3
     ld   a, [$D32E]                               ; $47BE: $FA $2E $D3
     cp   [hl]                                     ; $47C1: $BE
     ret  nz                                       ; $47C2: $C0
@@ -1784,8 +1784,8 @@ label_01B_4E4A:
 
 StopSquareAndWaveChannels_1B::
     xor  a                                        ; $4E57: $AF
-    ld   [$D361], a                               ; $4E58: $EA $61 $D3
-    ld   [$D371], a                               ; $4E5B: $EA $71 $D3
+    ld   [wD361], a                               ; $4E58: $EA $61 $D3
+    ld   [wD371], a                               ; $4E5B: $EA $71 $D3
     ld   [$D31F], a                               ; $4E5E: $EA $1F $D3
     ld   [$D32F], a                               ; $4E61: $EA $2F $D3
     ld   [$D33F], a                               ; $4E64: $EA $3F $D3

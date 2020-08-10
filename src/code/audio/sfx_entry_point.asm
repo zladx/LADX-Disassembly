@@ -9,7 +9,7 @@ PlaySfx::
     jp   label_01F_401E                           ; $4006: $C3 $1E $40
 
 label_01F_4009:
-    ld   hl, $D300                                ; $4009: $21 $00 $D3
+    ld   hl, wMusicTranspose                                ; $4009: $21 $00 $D3
 
 jr_01F_400C:
     ld   [hl], $00                                ; $400C: $36 $00

@@ -37,7 +37,7 @@ PlayActiveJingle::
 BeginJingleTreasureFound::
     xor  a                                        ; $422D: $AF
     ld   [wActiveWaveSfx], a                      ; $422E: $EA $70 $D3
-    ld   [$D371], a                               ; $4231: $EA $71 $D3
+    ld   [wD371], a                               ; $4231: $EA $71 $D3
     ldh  [rNR30], a                               ; $4234: $E0 $1A
     ld   a, $01                                   ; $4236: $3E $01
     ld   [$D3C8], a                               ; $4238: $EA $C8 $D3
@@ -397,7 +397,7 @@ Data_01F_44C8::
     db   $00, $9F, $A0, $00, $C2, $01
 
 BeginJingleMoveSelection::
-    ld   a, [$D361]                               ; $44CE: $FA $61 $D3
+    ld   a, [wD361]                               ; $44CE: $FA $61 $D3
     cp   $13                                      ; $44D1: $FE $13
     jp   z, label_01F_53E6                        ; $44D3: $CA $E6 $53
 
@@ -538,7 +538,7 @@ Data_01F_45A8::
     db   $27, $80, $C2, $48, $86, $18
 
 BeginJingleWaterDive::
-    ld   a, [$D361]                               ; $45AE: $FA $61 $D3
+    ld   a, [wD361]                               ; $45AE: $FA $61 $D3
     cp   $08                                      ; $45B1: $FE $08
     jr   z, .jr_01F_45B9                          ; $45B3: $28 $04
 
@@ -631,7 +631,7 @@ label_01F_463D:
     jp   label_01F_53B5                           ; $4648: $C3 $B5 $53
 
 BeginJingleCloseInventory::
-    ld   a, [$D361]                               ; $464B: $FA $61 $D3
+    ld   a, [wD361]                               ; $464B: $FA $61 $D3
     cp   $13                                      ; $464E: $FE $13
     jp   z, label_01F_53E6                        ; $4650: $CA $E6 $53
 
@@ -724,7 +724,7 @@ Data_01F_46E1::
     db   $00, $80, $F3, $7B, $87, $03
 
 BeginJingleGotHeart::
-    ld   a, [$D361]                               ; $46E7: $FA $61 $D3
+    ld   a, [wD361]                               ; $46E7: $FA $61 $D3
     and  a                                        ; $46EA: $A7
     jp   nz, label_01F_53E6                       ; $46EB: $C2 $E6 $53
 
@@ -884,7 +884,7 @@ Data_01F_47E9::
     db   $00, $80, $A3, $C5, $87, $20
 
 BeginJingleFairyHealing::
-    ld   a, [$D361]                               ; $47EF: $FA $61 $D3
+    ld   a, [wD361]                               ; $47EF: $FA $61 $D3
     cp   $1A                                      ; $47F2: $FE $1A
     jp   z, label_01F_53E6                        ; $47F4: $CA $E6 $53
 
@@ -1123,7 +1123,7 @@ Data_01F_496F::
     db   $00, $80, $0B, $20, $86, $01
 
 BeginJingleBigBump::
-    ld   a, [$D361]                               ; $4975: $FA $61 $D3
+    ld   a, [wD361]                               ; $4975: $FA $61 $D3
     cp   $20                                      ; $4978: $FE $20
     jr   z, .jr_01F_4980                          ; $497A: $28 $04
 
@@ -1217,7 +1217,7 @@ Data_01F_4A02::
     db   $00, $00, $10, $A7, $87, $01
 
 BeginJingleHoneycomb::
-    ld   a, [$D361]                               ; $4A08: $FA $61 $D3
+    ld   a, [wD361]                               ; $4A08: $FA $61 $D3
     cp   $22                                      ; $4A0B: $FE $22
     jp   z, label_01F_53E6                        ; $4A0D: $CA $E6 $53
 
@@ -2163,7 +2163,7 @@ Data_01F_5036::
     db   $00, $80, $80, $00, $86, $01
 
 BeginJingleShadow3BG::
-    ld   a, [$D361]                               ; $503C: $FA $61 $D3
+    ld   a, [wD361]                               ; $503C: $FA $61 $D3
     and  a                                        ; $503F: $A7
     jp   nz, label_01F_53E6                       ; $5040: $C2 $E6 $53
 
@@ -2385,7 +2385,7 @@ Data_01F_51F6::
     db   $00, $40, $10, $D0, $87, $01
 
 BeginJingleShadow6BG::
-    ld   a, [$D361]                               ; $51FC: $FA $61 $D3
+    ld   a, [wD361]                               ; $51FC: $FA $61 $D3
     cp   $04                                      ; $51FF: $FE $04
     jp   z, label_01F_53E6                        ; $5201: $CA $E6 $53
 
@@ -2455,7 +2455,7 @@ Data_01F_5268::
     db   $00, $40, $86, $80, $83, $01
 
 BeginJingleUrchinPush::
-    ld   a, [$D361]                               ; $526E: $FA $61 $D3
+    ld   a, [wD361]                               ; $526E: $FA $61 $D3
     cp   $3E                                      ; $5271: $FE $3E
     jp   z, label_01F_53E6                        ; $5273: $CA $E6 $53
 
@@ -2635,7 +2635,7 @@ label_01F_5395:
 
 label_01F_539A:
     ld   a, [wActiveJingle]                       ; $539A: $FA $60 $D3
-    ld   [$D361], a                               ; $539D: $EA $61 $D3
+    ld   [wD361], a                               ; $539D: $EA $61 $D3
     xor  a                                        ; $53A0: $AF
     ld   [$D390], a                               ; $53A1: $EA $90 $D3
     ld   [$D394], a                               ; $53A4: $EA $94 $D3
@@ -2651,7 +2651,7 @@ label_01F_53B5:
 
 func_01F_53BB::
     xor  a                                        ; $53BB: $AF
-    ld   [$D361], a                               ; $53BC: $EA $61 $D3
+    ld   [wD361], a                               ; $53BC: $EA $61 $D3
     ld   [$D390], a                               ; $53BF: $EA $90 $D3
     ldh  [rNR10], a                               ; $53C2: $E0 $10
     ld   [$D394], a                               ; $53C4: $EA $94 $D3
@@ -2887,15 +2887,15 @@ Data_01F_555E::
     db   $80, $EF, $20, $00, $C6, $01
 
 func_01F_5564::
-    ld   a, [$D371]                               ; $5564: $FA $71 $D3
+    ld   a, [wD371]                               ; $5564: $FA $71 $D3
     and  a                                        ; $5567: $A7
     jp   nz, label_01F_6385                       ; $5568: $C2 $85 $63
 
-    ld   a, [$D361]                               ; $556B: $FA $61 $D3
+    ld   a, [wD361]                               ; $556B: $FA $61 $D3
     cp   $01                                      ; $556E: $FE $01
     ret  z                                        ; $5570: $C8
 
-    ld   a, [$D361]                               ; $5571: $FA $61 $D3
+    ld   a, [wD361]                               ; $5571: $FA $61 $D3
     cp   $01                                      ; $5574: $FE $01
     ret  z                                        ; $5576: $C8
 
@@ -2987,7 +2987,7 @@ Data_01F_55F6::
     db   $EA, $C7, $02
 
 func_01F_55F9::
-    ld   a, [$D361]                               ; $55F9: $FA $61 $D3
+    ld   a, [wD361]                               ; $55F9: $FA $61 $D3
     cp   $01                                      ; $55FC: $FE $01
     ret  z                                        ; $55FE: $C8
 
@@ -3035,7 +3035,7 @@ Data_01F_563F::
     db   $80, $D2, $60, $E0, $87, $01
 
 func_01F_5645::
-    ld   a, [$D371]                               ; $5645: $FA $71 $D3
+    ld   a, [wD371]                               ; $5645: $FA $71 $D3
     cp   $03                                      ; $5648: $FE $03
     jp   z, label_01F_6385                        ; $564A: $CA $85 $63
 
@@ -3546,7 +3546,7 @@ Data_01F_5A13::
     db   $80, $FD, $60, $00, $C4, $05
 
 func_01F_5A19::
-    ld   a, [$D371]                               ; $5A19: $FA $71 $D3
+    ld   a, [wD371]                               ; $5A19: $FA $71 $D3
     cp   $0F                                      ; $5A1C: $FE $0F
     jp   z, label_01F_6385                        ; $5A1E: $CA $85 $63
 
@@ -3796,7 +3796,7 @@ Data_01F_5C7A::
     db   $80, $00, $20, $08, $84, $01
 
 func_01F_5C80::
-    ld   a, [$D371]                               ; $5C80: $FA $71 $D3
+    ld   a, [wD371]                               ; $5C80: $FA $71 $D3
     cp   $14                                      ; $5C83: $FE $14
     jp   z, label_01F_6385                        ; $5C85: $CA $85 $63
 
@@ -3866,7 +3866,7 @@ Data_01F_5CF6::
     db   $80, $A0, $20, $5E, $C7, $20
 
 func_01F_5CFC::
-    ld   a, [$D371]                               ; $5CFC: $FA $71 $D3
+    ld   a, [wD371]                               ; $5CFC: $FA $71 $D3
     cp   $03                                      ; $5CFF: $FE $03
     jp   z, label_01F_6385                        ; $5D01: $CA $85 $63
 
@@ -4126,7 +4126,7 @@ Data_01F_5F72::
     db   $80, $00, $40, $30, $87, $01
 
 func_01F_5F78::
-    ld   a, [$D371]                               ; $5F78: $FA $71 $D3
+    ld   a, [wD371]                               ; $5F78: $FA $71 $D3
     cp   $03                                      ; $5F7B: $FE $03
     jp   z, label_01F_6385                        ; $5F7D: $CA $85 $63
 
@@ -4455,7 +4455,7 @@ func_01F_61A2::
     ld   a, $07                                   ; $61A2: $3E $07
     ld   [$D3BE], a                               ; $61A4: $EA $BE $D3
     ld   a, [wActiveWaveSfx]                      ; $61A7: $FA $70 $D3
-    ld   [$D371], a                               ; $61AA: $EA $71 $D3
+    ld   [wD371], a                               ; $61AA: $EA $71 $D3
     ld   a, $01                                   ; $61AD: $3E $01
     ld   [$D3C8], a                               ; $61AF: $EA $C8 $D3
     ld   hl, $D32F                                ; $61B2: $21 $2F $D3
@@ -4498,7 +4498,7 @@ jr_01F_61ED:
     xor  a                                        ; $61ED: $AF
     ld   [$D392], a                               ; $61EE: $EA $92 $D3
     ld   [$D396], a                               ; $61F1: $EA $96 $D3
-    ld   [$D371], a                               ; $61F4: $EA $71 $D3
+    ld   [wD371], a                               ; $61F4: $EA $71 $D3
     ld   [$D3C8], a                               ; $61F7: $EA $C8 $D3
     ld   hl, $D32F                                ; $61FA: $21 $2F $D3
     res  7, [hl]                                  ; $61FD: $CB $BE
@@ -4652,7 +4652,7 @@ label_01F_62F3:
 
 label_01F_62F8:
     ld   a, [wActiveWaveSfx]                      ; $62F8: $FA $70 $D3
-    ld   [$D371], a                               ; $62FB: $EA $71 $D3
+    ld   [wD371], a                               ; $62FB: $EA $71 $D3
     push hl                                       ; $62FE: $E5
     ld   hl, $D33F                                ; $62FF: $21 $3F $D3
     set  7, [hl]                                  ; $6302: $CB $FE
@@ -4677,7 +4677,7 @@ label_01F_632D:
     xor  a                                        ; $632D: $AF
     ld   [$D392], a                               ; $632E: $EA $92 $D3
     ld   [$D396], a                               ; $6331: $EA $96 $D3
-    ld   [$D371], a                               ; $6334: $EA $71 $D3
+    ld   [wD371], a                               ; $6334: $EA $71 $D3
     ldh  [rNR30], a                               ; $6337: $E0 $1A
     ld   [$D3C8], a                               ; $6339: $EA $C8 $D3
     ld   hl, $D33F                                ; $633C: $21 $3F $D3
@@ -7906,7 +7906,7 @@ Data_01F_7717::
 
 func_01F_771C::
     xor  a                                        ; $771C: $AF
-    ld   [$D361], a                               ; $771D: $EA $61 $D3
+    ld   [wD361], a                               ; $771D: $EA $61 $D3
     ld   hl, $D31F                                ; $7720: $21 $1F $D3
     set  7, [hl]                                  ; $7723: $CB $FE
     ld   a, $01                                   ; $7725: $3E $01
@@ -7957,7 +7957,7 @@ Data_01F_7769::
 
 func_01F_776E::
     xor  a                                        ; $776E: $AF
-    ld   [$D361], a                               ; $776F: $EA $61 $D3
+    ld   [wD361], a                               ; $776F: $EA $61 $D3
     ld   hl, $D31F                                ; $7772: $21 $1F $D3
     set  7, [hl]                                  ; $7775: $CB $FE
     ld   a, $01                                   ; $7777: $3E $01
@@ -8642,8 +8642,8 @@ func_01F_7B5C::
     xor  a                                        ; $7B65: $AF
     ld   [wActiveMusicIndex], a                   ; $7B66: $EA $69 $D3
     xor  a                                        ; $7B69: $AF
-    ld   [$D361], a                               ; $7B6A: $EA $61 $D3
-    ld   [$D371], a                               ; $7B6D: $EA $71 $D3
+    ld   [wD361], a                               ; $7B6A: $EA $61 $D3
+    ld   [wD371], a                               ; $7B6D: $EA $71 $D3
     ld   [$D379], a                               ; $7B70: $EA $79 $D3
     ld   [$D31F], a                               ; $7B73: $EA $1F $D3
     ld   [$D32F], a                               ; $7B76: $EA $2F $D3

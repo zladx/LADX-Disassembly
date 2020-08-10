@@ -1394,123 +1394,218 @@ wFinalNightmareForm::
   ds 1 ; D219
 
 ; Unlabeled
-ds $D300 - $D21A
-
-wMusicTranspose:: ; D300
-  ; Note transpose value applied to all channels. Should be multiple of 2.
-  ds 1
-
-wMusicSpeedPointer:: ; D301
-  ; Points to some data which somehow sets the music's speed
-  ds 2
+wD21A::
+  ds 1 ; D21A
 
 ; Unlabeled
-ds $D310 - $D303
+wD21B::
+  ds 1 ; D21B
 
-; D307: ds 4 (channel-specific, used by opcode A0-AF)
+; Unlabeled
+wD21C::
+  ds 1 ; D21C
 
-wD310:: ; D310
-  ; Channel 1 data pointer
-  ds 2
+; Unlabeled
+wD21D::
+  ds 1 ; D21D
 
-wD312:: ; D312
-  ; Copied from D313. A counter?
-  ds 1
+; Unlabeled
+wD21E::
+  ds 1 ; D21E
 
-wD313:: ; D313
-  ds 1
+; Unlabeled
+wD21F::
+  ds 1 ; D21F
 
-wD314:: ; D314
-  ; Channel 1 definition data pointer
-  ds 2
+; Unlabeled
+wD220::
+  ds 1 ; D220
 
-wD316:: ; D316
-  ; Opcode 9D stores data here.
-  ; For channel 3, D336-D337 are a pointer to waveform data.
-  ds 3
+; Unlabeled
+wD221::
+  ds 1 ; D221
 
-wD319:: ; D319
-  ; Points to frequency data for NRx3 and NRx4
-  ds 2
+; Unlabeled
+wD222::
+  ds 1 ; D222
 
-wD31B:: ; D31B
-  ds 1
+; Unlabeled
+wD223::
+  ds 1 ; D223
 
-wD31C:: ; D31C
-  ; Loop pointer for sound definition data?
-  ds 2
+; Unlabeled
+wD224::
+  ds 1 ; D224
 
-wD31E:: ; D31E
-  ; Incremented each frame?
-  ds 1
+; Unlabeled
+wD225::
+  ds 1 ; D225
 
-wD31F:: ; D31F
-  ; Audio loop counter; a segment loops [wD31F] times, then continues on.
-  ds 1
+; Unlabeled
+wD226::
+  ds 1 ; D226
 
-wD320:: ; D320
-  ; Channel 2 data (similar to D310)
-  ds $10
+; Unlabeled
+wD227::
+  ds 1 ; D227
 
-wD330:: ; D330
-  ; Channel 3 data (similar to D310)
-  ds $10
+; Unlabeled
+wD228::
+  ds 1 ; D228
 
-wD340:: ; D340
-  ; Channel 4 data (similar to D310)
-  ds $10
+; not used
+wD229::
+  ds 215 ; D220 - D2FF
 
-wActiveChannelIndex:: ; D350
-  ; Current sound channel being processed. Number from 1-4.
-  ds $10
+; Note transpose value applied to all channels. Should be multiple of 2.
+wMusicTranspose::
+  ds 1 ; D300
 
-wActiveJingle:: ; D360
-  ; The squareform jingle currently playing
-  ds 1
+; Points to some data which somehow sets the music's speed
+wMusicSpeedPointer::
+  ds 2 ; D301 - D302
 
-; D361-D367: squareform jingle parameters
-ds 7
+; not used
+wD303::
+  ds 4 ; D303 - D306
 
-wMusicTrackToPlay:: ; D368
-  ; The music track to be played next
-  ds 1
+; Unlabeled
+; ds 4 (channel-specific, used by opcode A0-AF)
+wD307::
+  ds 1 ; D307
 
-wActiveMusicIndex:: ; wActiveMusicIndex
-  ; Copied from wMusicTrackToPlay
-  ds 1
+; Unlabeled
+wD308::
+  ds 8 ; D308 - D30F
 
-wD36A:: ; D36A
-  ds 1
+; Channel 1 data pointer
+wD310::
+  ds 2 ; D310 - D311
 
-wD36B:: ; D36B
-  ds 1
+; Unlabeled
+; Copied from D313. A counter?
+wD312::
+  ds 1 ; D312
 
-wD36C:: ; D36C
-  ds 1
+; Unlabeled
+wD313::
+  ds 1 ; D313
+  
+; Unlabeled
+; Channel 1 definition data pointer
+wD314::
+  ds 2 ; D314 - D315
 
-wD36D:: ; D36D
-  ds 1
+; Unlabeled
+; Opcode 9D stores data here.
+; For channel 3, D336-D337 are a pointer to waveform data.
+wD316::
+  ds 1 ; D316
 
-wD36E:: ; D36E
-  ds 1
+; Unlabeled
+; Points to frequency data for NRx3 and NRx4  
+wD317::
+  ds 3 ; D317 - D319
 
-wD36F:: ; D36F
-  ds 1
+; Unlabeled
+wD31A::
+  ds 1 ; D31A
 
-wActiveWaveSfx:: ; D370
-  ; The waveform sound effect currently playing
-  ds 1
+; Unlabeled
+wD31B::
+  ds 1 ; D31B
 
-; D371-D377: wave sound effect parameters
-ds 7
+; Unlabeled
+; Loop pointer for sound definition data?
+wD31C::
+  ds 2 ; D31C - D31D
 
-wActiveNoiseSfx:: ; D378
-  ; The noise generator sound effect currently playing
-  ds 1
+; Unlabeled
+; Incremented each frame?
+wD31E::
+  ds 1 ; D31E
 
-wD379:: ; D379
-  ds 1
-; D379-D???: noise sound effect parameters
+; Unlabeled
+; Audio loop counter; a segment loops [wD31F] times, then continues on.
+wD31F::
+  ds 1 ; D31F
+
+; Unlabeled
+; Channel 2 data (similar to D310)
+wD320::
+  ds $10 ; D320 - D32F
+
+; Unlabeled
+; Channel 3 data (similar to D310)
+wD330::
+  ds $10 ; D330 - D33F
+
+; Unlabeled
+; Channel 4 data (similar to D310)
+wD340::
+  ds $10 ; D340 - D34F
+
+; Current sound channel being processed. Number from 1-4.
+wActiveChannelIndex::
+  ds $10 ; D350 - D35F
+
+; The squareform jingle currently playing
+wActiveJingle::
+  ds 1 ; D360
+
+; Unlabeled
+; squareform jingle parameters
+wD361::
+  ds 7 ; D361 - D367
+
+; The music track to be played next
+wMusicTrackToPlay::
+  ds 1 ; D368
+
+; Copied from wMusicTrackToPlay
+wActiveMusicIndex::
+  ds 1 ; D369
+
+; Unlabeled
+wD36A::
+  ds 1 ; D36A
+
+; Unlabeled
+wD36B::
+  ds 1 ; D36B
+
+; Unlabeled
+wD36C::
+  ds 1 ; D36C
+
+; Unlabeled
+wD36D::
+  ds 1 ; D36D
+
+; Unlabeled
+wD36E::
+  ds 1 ; D36E
+
+; Unlabeled
+wD36F::
+  ds 1 ; D36F
+
+; The waveform sound effect currently playing
+wActiveWaveSfx::
+  ds 1 ; D370
+
+; wave sound effect parameters
+wD371::
+  ds 7 ; D371 - D377
+
+; The noise generator sound effect currently playing
+wActiveNoiseSfx::
+  ds 1 ; D378
+
+; Unlabeled
+; noise sound effect parameters?
+wD379::
+  ds 1 ; D379
 
 ; Unlabeled
 ds $D39E-$D37A

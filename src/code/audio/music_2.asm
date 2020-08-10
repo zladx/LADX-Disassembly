@@ -10,7 +10,7 @@ PlayMusicTrack_1E::
     jp   PlayMusicTrack_1E_EntryPoint             ; $4006: $C3 $1E $40
 
 label_01E_4009:
-    ld   hl, $D300                                ; $4009: $21 $00 $D3
+    ld   hl, wMusicTranspose                                ; $4009: $21 $00 $D3
 
 jr_01E_400C:
     ld   [hl], $00                                ; $400C: $36 $00
@@ -535,13 +535,13 @@ func_01E_43C0::
 
 jr_01E_43E2:
     call func_01E_4D2A                            ; $43E2: $CD $2A $4D
-    ld   de, $D300                                ; $43E5: $11 $00 $D3
+    ld   de, wMusicTranspose                                ; $43E5: $11 $00 $D3
     ld   b, $00                                   ; $43E8: $06 $00
     ld   a, [hl+]                                 ; $43EA: $2A
     ld   [de], a                                  ; $43EB: $12
     inc  e                                        ; $43EC: $1C
     call func_01E_43BA                            ; $43ED: $CD $BA $43
-    ld   de, $D310                                ; $43F0: $11 $10 $D3
+    ld   de, wD310                                ; $43F0: $11 $10 $D3
     call func_01E_43BA                            ; $43F3: $CD $BA $43
     ld   de, $D320                                ; $43F6: $11 $20 $D3
     call func_01E_43BA                            ; $43F9: $CD $BA $43
@@ -549,8 +549,8 @@ jr_01E_43E2:
     call func_01E_43BA                            ; $43FF: $CD $BA $43
     ld   de, $D340                                ; $4402: $11 $40 $D3
     call func_01E_43BA                            ; $4405: $CD $BA $43
-    ld   hl, $D310                                ; $4408: $21 $10 $D3
-    ld   de, $D314                                ; $440B: $11 $14 $D3
+    ld   hl, wD310                                ; $4408: $21 $10 $D3
+    ld   de, wD314                                ; $440B: $11 $14 $D3
     call func_01E_43AF                            ; $440E: $CD $AF $43
     ld   hl, $D320                                ; $4411: $21 $20 $D3
     ld   de, $D324                                ; $4414: $11 $24 $D3
@@ -562,7 +562,7 @@ jr_01E_43E2:
     ld   de, $D344                                ; $4426: $11 $44 $D3
     call func_01E_43AF                            ; $4429: $CD $AF $43
     ld   bc, $410                                 ; $442C: $01 $10 $04
-    ld   hl, $D312                                ; $442F: $21 $12 $D3
+    ld   hl, wD312                                ; $442F: $21 $12 $D3
 
 jr_01E_4432:
     ld   [hl], $01                                ; $4432: $36 $01
@@ -580,7 +580,7 @@ jr_01E_4432:
 
 jr_01E_4445:
     push hl                                       ; $4445: $E5
-    ld   a, [$D371]                               ; $4446: $FA $71 $D3
+    ld   a, [wD371]                               ; $4446: $FA $71 $D3
     and  a                                        ; $4449: $A7
     jr   nz, jr_01E_4454                          ; $444A: $20 $08
 
@@ -759,16 +759,16 @@ jr_01E_450E:
 label_01E_451F:
     call func_01E_4487                            ; $451F: $CD $87 $44
     call func_01E_449C                            ; $4522: $CD $9C $44
-    ld   [$D301], a                               ; $4525: $EA $01 $D3
+    ld   [wMusicSpeedPointer], a                               ; $4525: $EA $01 $D3
     call func_01E_4487                            ; $4528: $CD $87 $44
     call func_01E_449C                            ; $452B: $CD $9C $44
-    ld   [$D302], a                               ; $452E: $EA $02 $D3
+    ld   [wMusicSpeedPointer+1], a                               ; $452E: $EA $02 $D3
     jr   jr_01E_453C                              ; $4531: $18 $09
 
 label_01E_4533:
     call func_01E_4487                            ; $4533: $CD $87 $44
     call func_01E_449C                            ; $4536: $CD $9C $44
-    ld   [$D300], a                               ; $4539: $EA $00 $D3
+    ld   [wMusicTranspose], a                               ; $4539: $EA $00 $D3
 
 jr_01E_453C:
     call func_01E_4487                            ; $453C: $CD $87 $44
@@ -847,7 +847,7 @@ func_01E_4581::
     call func_01E_4387                            ; $458E: $CD $87 $43
     ld   a, $01                                   ; $4591: $3E $01
     ld   [$D350], a                               ; $4593: $EA $50 $D3
-    ld   hl, $D310                                ; $4596: $21 $10 $D3
+    ld   hl, wD310                                ; $4596: $21 $10 $D3
 
 label_01E_4599:
     inc  l                                        ; $4599: $2C
@@ -913,7 +913,7 @@ jr_01E_45A5:
     ld   c, a                                     ; $45F2: $4F
     ld   b, $00                                   ; $45F3: $06 $00
     push hl                                       ; $45F5: $E5
-    ld   de, $D301                                ; $45F6: $11 $01 $D3
+    ld   de, wMusicSpeedPointer                                ; $45F6: $11 $01 $D3
     ld   a, [de]                                  ; $45F9: $1A
     ld   l, a                                     ; $45FA: $6F
     inc  e                                        ; $45FB: $1C
@@ -962,7 +962,7 @@ jr_01E_4625:
     dec  a                                        ; $4629: $3D
     ld   e, a                                     ; $462A: $5F
     ld   d, $00                                   ; $462B: $16 $00
-    ld   hl, $D307                                ; $462D: $21 $07 $D3
+    ld   hl, wD307                                ; $462D: $21 $07 $D3
     add  hl, de                                   ; $4630: $19
     ld   [hl], c                                  ; $4631: $71
     pop  af                                       ; $4632: $F1
@@ -1040,7 +1040,7 @@ jr_01E_467B:
     jr   z, jr_01E_46B8                           ; $4695: $28 $21
 
     ld   [hl], $00                                ; $4697: $36 $00
-    ld   a, [$D300]                               ; $4699: $FA $00 $D3
+    ld   a, [wMusicTranspose]                               ; $4699: $FA $00 $D3
     and  a                                        ; $469C: $A7
     jr   z, jr_01E_46AB                           ; $469D: $28 $0C
 
@@ -1316,19 +1316,19 @@ func_01E_47F6::
     and  a                                        ; $47F9: $A7
     jr   nz, jr_01E_481D                          ; $47FA: $20 $21
 
-    ld   a, [$D317]                               ; $47FC: $FA $17 $D3
+    ld   a, [wD317]                               ; $47FC: $FA $17 $D3
     and  a                                        ; $47FF: $A7
     jr   z, jr_01E_481D                           ; $4800: $28 $1B
 
     and  $0F                                      ; $4802: $E6 $0F
     ld   b, a                                     ; $4804: $47
-    ld   hl, $D307                                ; $4805: $21 $07 $D3
+    ld   hl, wD307                                ; $4805: $21 $07 $D3
     ld   a, [$D31E]                               ; $4808: $FA $1E $D3
     cp   [hl]                                     ; $480B: $BE
     jr   nz, jr_01E_481D                          ; $480C: $20 $0F
 
     ld   c, $12                                   ; $480E: $0E $12
-    ld   de, $D31A                                ; $4810: $11 $1A $D3
+    ld   de, wD31A                                ; $4810: $11 $1A $D3
     ld   a, [$D31F]                               ; $4813: $FA $1F $D3
     bit  7, a                                     ; $4816: $CB $7F
     jr   nz, jr_01E_481D                          ; $4818: $20 $03
@@ -1346,7 +1346,7 @@ jr_01E_481D:
 
     and  $0F                                      ; $4827: $E6 $0F
     ld   b, a                                     ; $4829: $47
-    ld   hl, $D308                                ; $482A: $21 $08 $D3
+    ld   hl, wD308                                ; $482A: $21 $08 $D3
     ld   a, [$D32E]                               ; $482D: $FA $2E $D3
     cp   [hl]                                     ; $4830: $BE
     ret  nz                                       ; $4831: $C0
@@ -1687,8 +1687,8 @@ label_01E_4D1D:
 
 func_01E_4D2A::
     xor  a                                        ; $4D2A: $AF
-    ld   [$D361], a                               ; $4D2B: $EA $61 $D3
-    ld   [$D371], a                               ; $4D2E: $EA $71 $D3
+    ld   [wD361], a                               ; $4D2B: $EA $61 $D3
+    ld   [wD371], a                               ; $4D2E: $EA $71 $D3
     ld   [$D31F], a                               ; $4D31: $EA $1F $D3
     ld   [$D32F], a                               ; $4D34: $EA $2F $D3
     ld   [$D33F], a                               ; $4D37: $EA $3F $D3

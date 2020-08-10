@@ -670,75 +670,73 @@ wC1F4::
 ;
 ;----------------------------------------------------------
 
-wEntitiesPosXTable:: ; C200
-  ; X position of visible entities
-  ds $10
+; X position of visible entities
+wEntitiesPosXTable::
+  ds $10 ; C200 - C20F
 
-wEntitiesPosYTable:: ; C210
-  ; Y position of visible entities
-  ds $10
+; Y position of visible entities
+wEntitiesPosYTable::
+  ds $10 ; C210 - C21F
 
-wEntitiesPosXSignTable:: ; C220
-  ; Controls the sign of the X position
-  ; 00:  position is positive
-  ; FF:  position is negative
-  ds $10
+; Controls the sign of the X position:
+; 0x00 = position is positive,
+; 0xFF = position is negative
+wEntitiesPosXSignTable::
+  ds $10 ; C220 - C22F
 
-wEntitiesPosYSignTable:: ; C230
-  ; Controls the sign of the Y position
-  ; 00:  position is positive
-  ; FF:  position is negative
-  ds $10
+; Controls the sign of the Y position:
+; 0x00 = position is positive,
+; 0xFF = position is negative
+wEntitiesPosYSignTable::
+  ds $10 ; C230 - C23F
 
-wEntitiesSpeedXTable:: ; C240
-  ; X Velocity of visible entities / 16.
-  ;
-  ; The entity will move this number of pixels every 16 frames. For example, if it's 8,
-  ; the entity will move 1 pixel every other frame (8/16).
-  ds $10
+; X Velocity of visible entities / 16.
+; The entity will move this number of pixels every 16 frames. For example, if it's 8,
+; the entity will move 1 pixel every other frame (8/16).
+wEntitiesSpeedXTable::
+  ds $10 ; C240 - C24F
 
-wEntitiesSpeedYTable:: ; C250
-  ; Y Velocity of visible entities / 16.
-  ;
-  ; The entity will move this number of pixels every 16 frames. For example, if it's 8,
-  ; the entity will move 1 pixel every other frame (8/16).
-  ds $10
+; Y Velocity of visible entities / 16.
+; The entity will move this number of pixels every 16 frames. For example, if it's 8,
+; the entity will move 1 pixel every other frame (8/16).
+wEntitiesSpeedYTable::
+  ds $10 ; C250 - C25F
 
-wEntitiesSpeedXAccTable:: ; C260
-  ; Used as a way to give entities speeds divided by 16. (EntitySpeedX * 16) is
-  ; added to EntitySpeedXAcc and the carry is used to move the entity.
-  ds $10
+; Used as a way to give entities speeds divided by 16. (EntitySpeedX * 16) is
+; added to EntitySpeedXAcc and the carry is used to move the entity.
+wEntitiesSpeedXAccTable::
+  ds $10 ; C260 - C26F
 
-wEntitiesSpeedYAccTable:: ; C270
-  ; Used as a way to give entities speeds divided by 16. (EntitySpeedY * 16) is
-  ; added to EntitySpeedYAcc and the carry is used to move the entity.
-  ds $10
+; Used as a way to give entities speeds divided by 16. (EntitySpeedY * 16) is
+; added to EntitySpeedYAcc and the carry is used to move the entity.
+wEntitiesSpeedYAccTable::
+  ds $10 ; C270 - C27F
 
-wEntitiesStatusTable:: ; C280
-  ; State of visible entities
-  ; See ENTITY_STATUS_* constants
-  ds $10
+; State of visible entities
+; See ENTITY_STATUS_* constants
+wEntitiesStatusTable::
+  ds $10 ; C280 - C28F
 
-wEntitiesStateTable:: ; C290
-  ; Store the main state of an entity. Meaning of values is entity-specific.
-  ;
-  ; For instance:
-  ; Mabe fox:  1 when jumping around, and 0 when standing in place moving the tail.
-  ; Cucco: 1 when jumping around, and 0 when standing in place
-  ; BowWow: 0 when standing still, 1 when bouncing lightly, 2 when making a big jump, 3 after a jump
-  ; Village kids: 0 when standing still, 1 when bouncing
-  ; Moblin: 0 when walking, 1 when standing still
-  ; etc.
-  ds $10
+; Store the main state of an entity. Meaning of values is entity-specific.
+;
+; For instance:
+; Mabe fox:  1 when jumping around, and 0 when standing in place moving the tail.
+; Cucco: 1 when jumping around, and 0 when standing in place
+; BowWow: 0 when standing still, 1 when bouncing lightly, 2 when making a big jump, 3 after a jump
+; Village kids: 0 when standing still, 1 when bouncing
+; Moblin: 0 when walking, 1 when standing still
+; etc.
+wEntitiesStateTable::
+  ds $10 ; C290 - C29F
 
-wEntitiesCollisionsTable:: ; C2A0
-  ; Indicates if the entity is collisioning
-  ; 0: no collisions
-  ; 1: collision on the right
-  ; 2: collision on the left
-  ; 3: collision on the bottom
-  ; 4: collision on the top
-  ds $10
+; Indicates if the entity is collisioning:
+; 0 = no collisions,
+; 1 = collision on the right,
+; 2 = collision on the left,
+; 3 = collision on the bottom,
+; 4 = collision on the top
+wEntitiesCollisionsTable::
+  ds $10 ; C2A0 - C2AF
 
 ; Entity-specific state.
 ;
@@ -749,320 +747,651 @@ wEntitiesCollisionsTable:: ; C2A0
 ;  - Butterfly: stores a delta X to move closer to Link
 ;  - Genie: store the substate
 ;  - LikeLike: swallowed item
-wEntitiesPrivateState1Table:: ; C2B0
-  ds $10
+wEntitiesPrivateState1Table::
+  ds $10 ; C2B0 - C2BF
 
 ; Entity-specific state.
 ;
 ; Examples:
 ;  - Butterfly: stores a delta Y to move closer to Link
-wEntitiesPrivateState2Table:: ; C2C0
-  ds $10
+wEntitiesPrivateState2Table::
+  ds $10 ; C2C0 - C2CF
 
 ; Is the item a droppable? Or pickable?
-wEntitiesUnknownTableD:: ; C2D0
-  ds $10
+wEntitiesUnknownTableD::
+  ds $10 ; C2D0 - C2DF
 
-wEntitiesTransitionCountdownTable:: ; C2E0
-  ; Frames before the next state transition of the entity
-  ds $10
+; Frames before the next state transition of the entity
+wEntitiesTransitionCountdownTable::
+  ds $10 ; C2E0 - C2EF
 
 ; Entity-specific countdown 1
-wEntitiesPrivateCountdown1Table:: ; C2F0
-  ds $10
+wEntitiesPrivateCountdown1Table::
+  ds $10 ; C2F0 - C2FF
 
 ; Entity-specific countdown 2
-wEntitiesPrivateCountdown2Table:: ; C300
-  ds $10
+wEntitiesPrivateCountdown2Table::
+  ds $10 ; C300 - C30F
 
-wEntitiesPosZTable:: ; C310
-  ; When the altitude is higher than 0, the entity position is shifted vertically,
-  ; and a shadow is displayed underneath.
-  ds $10
+; When the altitude is higher than 0, the entity position is shifted vertically,
+; and a shadow is displayed underneath.
+wEntitiesPosZTable::
+  ds $10 ; C310 - C31F
 
-wEntitiesSpeedZTable:: ; C320
-  ; Z Velocity of visible entities / 16.
-  ;
-  ; The entity will move this number of pixels every 16 frames. For example, if it's 8,
-  ; the entity will move 1 pixel every other frame (8/16).
-  ds $10
+; Z Velocity of visible entities / 16.
+; The entity will move this number of pixels every 16 frames. For example, if it's 8,
+; the entity will move 1 pixel every other frame (8/16).
+wEntitiesSpeedZTable::
+  ds $10 ; C320 - C32F
 
-wEntitiesSpeedZAccTable:: ; C330
-  ; Used as a way to give entities speeds divided by 16. (EntitySpeedZ * 16) is
-  ; added to EntitySpeedZAcc and the carry is used to move the entity.
-  ds $10
+; Used as a way to give entities speeds divided by 16. (EntitySpeedZ * 16) is
+; added to EntitySpeedZAcc and the carry is used to move the entity.
+wEntitiesSpeedZAccTable::
+  ds $10 ; C330 - C33F
 
-wEntitiesPhysicsFlagsTable:: ; C340
-  ; Physics attribute flags?
-  ;
-  ; bits 0-3: of number allocated sprites in OAM memory
-  ; bit 4: display shadow on posZ > 0 if set
-  ; bit 5: item is pickable
-  ; bit 6: doesn't react to projectiles if set (arrow, hookshot, etc.)
-  ; bit 7: doesn't hurt Link if set (Link's go through)
-  ds $10
+; Physics attribute flags:
+; bits 0-3: of number allocated sprites in OAM memory,
+; bit 4: display shadow on posZ > 0 if set,
+; bit 5: item is pickable,
+; bit 6: doesn't react to projectiles if set (arrow, hookshot, etc.),
+; bit 7: doesn't hurt Link if set (Link's go through)
+wEntitiesPhysicsFlagsTable::
+  ds $10 ; C340 - C34F
 
-wEntitiesHitboxFlagsTable:: ; C350
-  ; Type of hitbox (plus maybe other flags)
-  ; - bit 0-4: hitbox type (see HitboxPositions)
-  ; - bit 5:
-  ; - bit 6:
-  ; - bit 7: force collision (for some entities only)
-  ds $10
+; Type of hitbox (plus maybe other flags):
+; bit 0-4: hitbox type (see HitboxPositions),
+; bit 5: TODO ???,
+; bit 6: TODO ???,
+; bit 7: force collision (for some entities only)
+wEntitiesHitboxFlagsTable::
+  ds $10 ; C350 - C35F
 
-wEntitiesHealthTable:: ; C360
-  ds $10
+; TODO comment
+wEntitiesHealthTable::
+  ds $10 ; C360 - C36F
 
-wEntitiesUnusedTableA:: ; C370
-  ; Unused value
-  ds $10
+; Unused value
+; TODO discripe more specific
+wEntitiesUnusedTableA::
+  ds $10 ; C370 - C37F
 
-wEntitiesDirectionTable:: ; C380
-  ; Direction of the entity.
-  ; See DIRECTION_* constants for possible values.
-  ;
-  ; This direction is always relevant for projectile-throwing entities
-  ; (like Moblins or Octorocks). Other entities may not be as strict to
-  ; update their direction.
-  ds $10
+; Direction of the entity.
+; See DIRECTION_* constants for possible values.
+; This direction is always relevant for projectile-throwing entities
+; (like Moblins or Octorocks). Other entities may not be as strict to
+; update their direction.
+wEntitiesDirectionTable::
+  ds $10 ; C380 - C38F
 
-wEntitiesUnknowTableR:: ; C390
-  ds $10
+; TODO comment
+wEntitiesUnknowTableR::
+  ds $10 ; C390 - C39F
 
-wEntitiesTypeTable:: ; C3A0
-  ; Type of the entity
-  ds $10
+; Type of the entity
+wEntitiesTypeTable::
+  ds $10 ; C3A0 - C3AF
 
-wEntitiesSpriteVariantTable:: ; C3B0
-  ; Index of an entity sprite variant, depending for instance on the direction,
-  ; the tail waving, etc.
-  ; A sprite variant may use entirerly different tiles, or change only some of them.
-  ds $10
+; Index of an entity sprite variant, depending for instance on the direction,
+; the tail waving, etc.
+; A sprite variant may use entirerly different tiles, or change only some of them.
+wEntitiesSpriteVariantTable::
+  ds $10 ; C3B0 - C3BF
 
+; Index of the next available OAM slot
 wOAMNextAvailableSlot::
-  ; Index of the next available OAM slot
   ds 1 ; C3C0
 
 ; OAM-related
-ds 1 ; C3C1
+wC3C1::
+  ds 2 ; C3C1 - C3C2
 
 ; Unlabeled
-ds $C3CB - $C3C2
-
-wObjectAffectingBGPalette:: ; C3CB
-  ; Type of the object affecting the background palette
-  ; (for instance a dark palette when torches are not lit)
-  ds 1
-
-wBGPaletteEffectAddress:: ; $C3CC
-  ; Adress of a palette[frameCount] array
-  ds 1
-
-wC3CD:: ; C3CD
-  ds 1
+wC3C3::
+  ds 1 ; C3C3
 
 ; Unlabeled
-ds $C3D0 - $C3CE
-
-wEntitiesUnknowTableY:: ; C3D0
-  ds $10
-
-wEntitiesRoomTable:: ; C3E0
-  ; Room id of the entity
-  ds $10
+wC3C4::
+  ds 1 ; C3C4
 
 ; Unlabeled
-ds $10
+wC3C5::
+  ds 2 ; C3C5 - C3C6
 
-wEntitiesUnknowTableS:: ; C400
-  ds $10
+; Unlabeled
+wC3C7::
+  ds 1 ; C3C7
+
+; Unlabeled
+wC3C8::
+  ds 1 ; C3C8
+
+; Unlabeled
+wC3C9::
+  ds 1 ; C3C9
+
+; Unlabeled
+wC3CA::
+  ds 1 ; C3CA
+
+; Type of the object affecting the background palette
+; (for instance a dark palette when torches are not lit)
+wObjectAffectingBGPalette::
+  ds 1 ; C3CB
+
+; Adress of a palette[frameCount] array
+wBGPaletteEffectAddress:: 
+  ds 1 ; C3CC
+
+; Unlabeled
+wC3CD::
+  ds 1 ; C3CD
+
+; Unlabeled
+wC3CE::
+  ds 1 ; C3CE
+
+; Unlabeled
+wC3CF::
+  ds 1 ; C3CF
+
+; TODO comment
+wEntitiesUnknowTableY::
+  ds $10 ; C3D0 - C3DF
+
+; Room id of the entity
+wEntitiesRoomTable::
+  ds $10 ; C3E0 - C3EF
+
+; Unlabeled
+wC3F0::
+  ds $10 ; C3F0 - C3FF
+
+; TODO comment
+wEntitiesUnknowTableS::
+  ds $10 ; C400 - C40F
 
 ; Invulnerability countdown?
 ; While this countdown is active, the entity does not
 ; participate to collision
-wEntitiesIgnoreHitsCountdownTable  :: ; C410
-  ds $10
+wEntitiesIgnoreHitsCountdownTable::
+  ds $10 ; C410 - C41F
 
-wEntitiesFlashCountdownTable:: ; C420
-  ; Countdown during which an entity flashes when taking a hit.
-  ; (or when a bomb is nearing to explode.)
-  ;
-  ; A flashing entity (countdown > 0) doesn't take any damages from
-  ; sword or projectiles.
-  ;
-  ; When the countdown reaches 0, the flashing stops.
-  ds $10
+; Countdown during which an entity flashes when taking a hit.
+; (or when a bomb is nearing to explode.)
+; A flashing entity (countdown > 0) doesn't take any damages from
+; sword or projectiles.
+; When the countdown reaches 0, the flashing stops.
+wEntitiesFlashCountdownTable::
+  ds $10 ; C420 - C42F
 
 ; Entity initialization flags?
 ; Seems to be a bitfield
 ; bit 2: set for bosses, clear for minibosses
-wEntitiesUnknowTableH::  ; C430
-  ds $10
+wEntitiesUnknowTableH::
+  ds $10 ; C430 - C43F
 
 ; Entities-specific private state?
-wEntitiesUnknowTableP:: ; C440
-  ds $10
+wEntitiesUnknowTableP::
+  ds $10 ; C440 - C440
 
-wEntitiesDropTimerTable:: ; C450
-  ; Number of frame before a dropped item disappears
-  ds $10
+; Number of frame before a dropped item disappears
+wEntitiesDropTimerTable::
+  ds $10 ; C450 - C45F
 
-wEntitiesLoadOrderTable:: ; C460
-  ds $10
+; TODO comment
+wEntitiesLoadOrderTable::
+  ds $10 ; C460 - C46F
 
-wEntitiesUnknowTableI:: ; C470
-  ; Some physics flags?
-  ; Used by func_015_7995
-  ;
-  ; Possible values: 02, 03
-  ds $10
+; TODO find better name
+; Some physics flags?
+; Used by func_015_7995
+; Possible values: 02, 03
+wEntitiesUnknowTableI::
+  ds $10 ; C470 - C47F
 
+; TODO find better name
 ; Some kind of countdown
-wEntitiesUnknowTableV:: ; C480
-  ds $10
+wEntitiesUnknowTableV::
+  ds $10 ; C480 - C48F
 
-wEntitiesUnknowTableW:: ; C490
-  ds $10
+; TODO comment
+wEntitiesUnknowTableW::
+  ds $10 ; C490 - C49F
 
 ; See label_3E8E
 ; (whether smoke vfx should spawn?)
-wEntitiesUnknowTableZ:: ; C4A0
-  ds $10
+wEntitiesUnknowTableZ::
+  ds $10 ; C4A0 - C4AF
 
 ; Unlabeled
-ds $20
+wC4B0::
+  ds $10 ; C4B0 - C4BF
 
-; Maybe the entities health group?
+wC4C0::
+  ds $10 ; C4C0 - C4CF
+
+; Entities health group
 ; See ConfigureNewEntity
-wEntitiesHealthGroup:: ; C4D0
-  ds $10
+; TODO check name, labeler is unsure
+wEntitiesHealthGroup::
+  ds $10 ; C4D0
 
-wEntitiesDroppedItemTable:: ; C4E0
-  ; Item to drop when this entity is destroyed.
-  ; Possible values:
-  ;  0:     drop a random item or power-up
-  ;  01-FE: dropped entity type
-  ;  FF:    don't drop anything at all
-  ds $10
+; Item to drop when this entity is destroyed.
+; Possible values:
+;  00 = drop a random item or power-up,
+;  01-FE = dropped entity type,
+;  FF = don't drop anything at all
+wEntitiesDroppedItemTable::
+  ds $10 ; C4E0 - C4EF
 
-wEntitiesUnknowTableJ:: ; C4F0
-  ds $10
+; TODO rename and comment
+wEntitiesUnknowTableJ::
+  ds $10 ; C4F0
 
-wAlternateBackgroundEnabled:: ; C500
-  ; If enabled, alternate between two Background position every frame.
-  ds 1
-
-; Unlabeled
-ds $C509 - $C501
-
-wItemPickedUpInShop:: ; C509
-  ; Index of the item we are grabbing in the shop
-  ds 1
+; If enabled, alternate between two Background position every frame.
+wAlternateBackgroundEnabled::
+  ds 1 ; C500
 
 ; Unlabeled
-ds $C510 - $C50A
-
-wTranscientVfxTypeTable:: ; C510
-  ; Temporary visual effects displayed as non-interactive sprites.
-  ; Values are filled starting from the end of the array.
-  ; See TRANSCIENT_VFX_* constants for possible values.
-  ds $10
-
-wTranscientVfxCountdownTable:: ; C520
-  ; Countdown for the transcient visual effects.
-  ; When reaching 0, the visual effect gets removed.
-  ds $10
-
-wTranscientVfxPosXTable:: ; C530
-  ; Transcient visual effects X position
-  ds $10
-
-wTranscientVfxPosYTable:: ; C540
-  ; Transcient visual effects Y position
-  ds $10
+wC501::
+  ds 1 ; C501
 
 ; Unlabeled
-ds $C5A7 - $C550
-
-wBossAgonySFXCountdown:: ; C5A7
-  ; When reaching zero, play the WAVE_SFX_BOSS_AGONY sound effect
-  ds 1
-
-wLiftedEntityType:: ; C5A8
-  ; Type of lifted entity. Used only for Rooster behavior.
-  ds 1
+wC502::
+  ds 1 ; C502
 
 ; Unlabeled
-ds 1
-
-wEggMazeProgress:: ; C5AA
-  ; Number of rooms progressed correctly in the Wind Fish's Egg maze
-  ds 1
-
-wDialogSFX:: ; C5AB
-    ds 1
+wC503::
+  ds 1 ; C503
 
 ; Unlabeled
-ds 3
-
-wNextWorldMusicTrackCountdown:: ; C5AF
-  ; When reaching zero, play wNextWorldMusicTrack
-  ds 1
-
-wSwordCollisionEnabled:: ; $C5B0
-  ; zero if sword collision is disabled
-  ; any other value enables sword collision
-  ; this is used to check if a object can be hit by sword
-  ds 1
+wC504::
+  ds 1 ; C504
 
 ; Unlabeled
-ds $CE80 - $C5B1
+wC505::
+  ds 4 ; C505 - C508
 
-wRecentRoomsIndex:: ; CE80
-  ; Index of the next slot to use in wRecentRooms
-  ds 1
-
-wRecentRooms:: ; CE81
-  ; List of the 6 most recently loaded rooms.
-  ds $6
+; Index of the item we are grabbing in the shop
+wItemPickedUpInShop::
+  ds 1 ; C509
 
 ; Unlabeled
-ds $CF00 - $CE87
+wC50A::
+  ds 1 ; C50A
 
-wEntitiesClearedRooms:: ; CF00
-  ; For each room, store the number of entities not to load
-  ; when entering the room next time.
-  ; Used to avoid respawning enemies as soon as the player moves to
-  ; the next room.
-  ds $FF
+; Unlabeled
+wC50B::
+  ds 1 ; C50B
+
+; Unlabeled
+wC50C::
+  ds 1 ; C50C
+
+; Unlabeled
+wC50D::
+  ds 1 ; C50D
+
+; Unlabeled
+wC50E::
+  ds 1 ; C50E
+
+; Unlabeled
+wC50F::
+  ds 1 ; C50F
+
+; Temporary visual effects displayed as non-interactive sprites.
+; Values are filled starting from the end of the array.
+; See TRANSCIENT_VFX_* constants for possible values.
+wTranscientVfxTypeTable::
+  ds $10 ; C510 - C51F
+
+; Countdown for the transcient visual effects.
+; When reaching 0, the visual effect gets removed.
+wTranscientVfxCountdownTable::
+  ds $10 ; C520 - C52F
+
+; Transcient visual effects X position
+wTranscientVfxPosXTable::
+  ds $10 ; C530 - C53F
+
+; Transcient visual effects Y position
+wTranscientVfxPosYTable::
+  ds $10 ; C540 - C54F
+
+; Unlabeled
+wC550::
+  ds $10 ; C550-C55F
+
+; Unlabeled
+wC560::
+  ds $10 ; C560 - C56F
+
+; Unlabeled
+wC570::
+  ds $20 ; C570 - C58F
+
+; Unlabeled
+wC590::
+  ds $10 ; C590 - C59F
+
+; Unlabeled
+wC5A0::
+  ds 1 ; C5A0
+
+; Unlabeled
+wC5A1::
+  ds 1 ; C5A1
+
+; Unlabeled
+wC5A2::
+  ds 1 ; C5A2
+
+; Unlabeled
+wC5A3::
+  ds 1 ; C5A3
+
+; Unlabeled
+wC5A4::
+  ds 1 ; C5A4
+
+; Unlabeled
+wC5A5::
+  ds 1 ; C5A5
+
+; Unlabeled
+wC5A6::
+  ds 1 ; C5A6
+
+; When reaching zero, play the WAVE_SFX_BOSS_AGONY sound effect
+wBossAgonySFXCountdown::
+  ds 1 ; C5A7
+
+; Type of lifted entity. Used only for Rooster behavior.
+wLiftedEntityType::
+  ds 1 ; C5A8
+
+; Unlabeled
+wC5A9::
+  ds 1 ; C5A9
+
+; Number of rooms progressed correctly in the Wind Fish's Egg maze
+wEggMazeProgress::
+  ds 1 ; C5AA
+
+; TODO comment
+wDialogSFX::
+    ds 1 ; C5AB
+
+; Unlabeled
+wC5AC::
+  ds 1 ; C5AC
+
+; Unlabeled
+wC5AD::
+  ds 1 ; C5AD
+
+; Unlabeled
+wC5AE::
+  ds 1 ; C5AE
+
+; When reaching zero, play wNextWorldMusicTrack
+wNextWorldMusicTrackCountdown::
+  ds 1 ; C5AF
+
+; zero if sword collision is disabled
+; any other value enables sword collision
+; this is used to check if a object can be hit by sword
+wSwordCollisionEnabled::
+  ds 1 ; C5B0
+
+; not used
+wC5B1::
+  ds 15 ; C5B1- C5BF
+
+; Unlabeled
+wC5C0::
+  ds $10 ; C5C0 - C5CF
+
+; Unlabeled
+; check for not used addresses
+wC5D0::
+  ds $8B0 ; C5D0 - CE7F
+
+; Index of the next slot to use in wRecentRooms
+wRecentRoomsIndex::
+  ds 1 ; CE80
+
+; List of the 6 most recently loaded rooms.
+wRecentRooms::
+  ds 6 ; CE81
+
+; not used
+wCE87::
+  ds $79
+
+; For each room, store the number of entities not to load
+; when entering the room next time.
+; Used to avoid respawning enemies as soon as the player moves to
+; the next room.
+wEntitiesClearedRooms::
+  ds $FF ; CF00 - CFFF
 
 section "WRAM Bank1", wramx[$d000], bank[1]
 
-; This location has multiple uses
-wIsFileSelectionArrowShifted:: ; D000
-  ; Is the arrow on the File Selection screen on the COPY item
+; This location has multiple uses.
+; Is the arrow on the File Selection screen on the COPY item
+wIsFileSelectionArrowShifted::
+; This location has multiple uses.
+; Scratch variable using during the Credits sequence
 wCreditsScratch0::
-  ; Scratch variable using during the Credits sequence
-  ds 1
+  ds 1 ; D000
 
-wIntroTimer:: ; D001
-  ds 1
+; TODO comment
+wIntroTimer::
+  ds 1 ; D001
 
-wIntroSubTimer:: ; D002
-  ds 1
-
-; Unlabeled
-ds $D00E - $D003
-
-wCreditsSubscene:: ; D00E
-  ds 1
+; TODO comment
+wIntroSubTimer::
+  ds 1 ; D002
 
 ; Unlabeled
-ds $D219 - $D00F
+wD003::
+  ds 1 ; D003
 
-wFinalNightmareForm:: ; D219
-  ; Current form of the Final Nightmare (0-5)
-  ds 1
+; Unlabeled
+wD004::
+  ds 1 ; D004
+
+; Unlabeled
+wD005::
+  ds 1 ; D005
+
+; Unlabeled
+wD006::
+  ds 1 ; D006
+
+; Unlabeled
+wD007::
+  ds 1 ; D007
+
+; Unlabeled
+wD008::
+  ds 1 ; D008
+
+; Unlabeled
+wD009::
+  ds 1 ; D009
+
+; Unlabeled
+wD00A::
+  ds 1 ; D00A
+
+; Unlabeled
+wD00B::
+  ds 1 ; D00B
+
+; Unlabeled
+wD00C::
+  ds 1 ; D00C
+
+; Unlabeled
+wD00D::
+  ds 1 ; D00D
+
+; TODO comment
+wCreditsSubscene::
+  ds 1 ; D00E
+
+; Unlabeled
+wD00F::
+  ds 1 ; D00F
+
+; Unlabeled
+wD010::
+  ds 1 ; D010
+
+; Unlabeled
+wD011::
+  ds 1 ; D011
+
+; Unlabeled
+wD012::
+  ds 1 ; D012
+
+; Unlabeled
+wD013::
+  ds 1 ; D013
+
+; Unlabeled
+wD014::
+  ds 1 ; D014
+
+; Unlabeled
+wD015::
+  ds 1 ; D015
+
+; Unlabeled
+wD016::
+  ds 1 ; D016
+
+; Unlabeled
+wD017::
+  ds 1 ; D017
+
+; Unlabeled
+wD018::
+  ds 1 ; D018
+
+; Unlabeled
+wD019::
+  ds 1 ; D019
+
+; Unlabeled
+wD01A::
+  ds 1 ; D01A
+
+; Unlabeled
+wD01B::
+  ds 1 ; D01B
+
+; Unlabeled
+wD01C::
+  ds 1 ; D01C
+
+; Unlabeled
+wD01D::
+  ds 1 ; D01D
+
+; Unlabeled
+wD01E::
+  ds 1 ; D01E
+
+; Unlabeled
+wD01F::
+  ds 1 ; D01F
+
+; Unlabeled
+wD020::
+  ds 1 ; D020
+
+; Unlabeled
+wD021::
+  ds 1 ; D021
+
+; Unlabeled
+wD022::
+  ds 1 ; D022
+
+; not used
+; TODO check if never used
+wD023::
+  ds 13 ; D023 - D02F
+
+; Unlabeled
+wD030::
+  ds $10 ; D030 - D03F
+
+; Unlabeled
+wD040::
+  ds $10 ; D040 - D04F
+
+; Unlabeled
+wD050::
+  ds $10 ; D050 - D05F
+
+; Unlabeled
+wD060::
+  ds $10 ; D060 - D06F
+
+; not used
+; TODO check if never used
+wD070::
+  ds $90 ; D070 - D0FF
+
+; Unlabeled
+wD100::
+  ds 1 ; D100
+
+; Unlabeled
+wD101::
+  ds 4 ; D101 - D104
+
+; Unlabeled
+wD105::
+  ds 1 ; D105
+
+; Unlabeled
+wD106::
+  ds 2 ; D106 - D107
+
+; Unlabeled
+wD108::
+  ds 8 ; D108 - D10F
+
+; Unlabeled
+wD110::
+  ds 1 ; D110
+
+; Unlabeled
+wD111::
+  ds 4 ; D111 - D114
+
+; Unlabeled
+wD115::
+  ds 1 ; D115
+
+; Unlabeled
+wD116::
+  ds 1 ; D116
+
+; not used
+wD117::
+  ds $102 ; D117 - D218
+
+; Current form of the Final Nightmare (0-5)
+wFinalNightmareForm::
+  ds 1 ; D219
 
 ; Unlabeled
 ds $D300 - $D21A

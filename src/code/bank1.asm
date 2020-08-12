@@ -2248,7 +2248,7 @@ func_001_6162::
     ld   [rOBP1], a                               ; $6179: $E0 $49
     ldh  [$FF97], a                               ; $617B: $E0 $97
     ldh  [hBaseScrollX], a                        ; $617D: $E0 $96
-    ld   [$D6FB], a                               ; $617F: $EA $FB $D6
+    ld   [wD6FB], a                               ; $617F: $EA $FB $D6
     ld   [$D6F8], a                               ; $6182: $EA $F8 $D6
     ld   a, $18                                   ; $6185: $3E $18
     ldh  [$FFB5], a                               ; $6187: $E0 $B5

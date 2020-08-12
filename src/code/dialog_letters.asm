@@ -148,7 +148,7 @@ func_01C_4AB9::
     ld   a, [hl]                                ; $4AE0: $7E
     ld   c, a                                   ; $4AE1: $4F
     ld   b, $00                                 ; $4AE2: $06 $00
-    ld   hl, $D500                              ; $4AE4: $21 $00 $D5
+    ld   hl, wD500                              ; $4AE4: $21 $00 $D5
     add  hl, bc                                 ; $4AE7: $09
 IF __PATCH_9__
     ld   c, l

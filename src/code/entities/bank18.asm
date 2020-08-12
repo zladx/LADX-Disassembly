@@ -5559,8 +5559,8 @@ Data_018_673A::
 
 func_018_68EA::
     ld   a, $80                                   ; $68EA: $3E $80
-    ld   [$D5C0], a                               ; $68EC: $EA $C0 $D5
-    ld   [$D5C2], a                               ; $68EF: $EA $C2 $D5
+    ld   [wD5C0], a                               ; $68EC: $EA $C0 $D5
+    ld   [wD5C2], a                               ; $68EF: $EA $C2 $D5
     ldh  a, [hActiveEntitySpriteVariant]          ; $68F2: $F0 $F1
     sla  a                                        ; $68F4: $CB $27
     sla  a                                        ; $68F6: $CB $27
@@ -5610,13 +5610,13 @@ jr_018_691B:
     ld   c, a                                     ; $693B: $4F
 
 jr_018_693C:
-    ld   a, [$D5C2]                               ; $693C: $FA $C2 $D5
+    ld   a, [wD5C2]                               ; $693C: $FA $C2 $D5
     cp   $80                                      ; $693F: $FE $80
     jr   nz, jr_018_6949                          ; $6941: $20 $06
 
     ld   a, [hl]                                  ; $6943: $7E
     add  $08                                      ; $6944: $C6 $08
-    ld   [$D5C2], a                               ; $6946: $EA $C2 $D5
+    ld   [wD5C2], a                               ; $6946: $EA $C2 $D5
 
 jr_018_6949:
     ldh  a, [hActiveEntityVisualPosY]             ; $6949: $F0 $EC
@@ -5639,7 +5639,7 @@ jr_018_6949:
     ld   b, a                                     ; $695F: $47
 
 jr_018_6960:
-    ld   a, [$D5C0]                               ; $6960: $FA $C0 $D5
+    ld   a, [wD5C0]                               ; $6960: $FA $C0 $D5
     cp   $80                                      ; $6963: $FE $80
     jr   nz, jr_018_6972                          ; $6965: $20 $0B
 
@@ -5651,7 +5651,7 @@ jr_018_6960:
     add  $08                                      ; $696D: $C6 $08
 
 jr_018_696F:
-    ld   [$D5C0], a                               ; $696F: $EA $C0 $D5
+    ld   [wD5C0], a                               ; $696F: $EA $C0 $D5
 
 jr_018_6972:
     ldh  a, [hActiveEntityPosX]                   ; $6972: $F0 $EE
@@ -5696,9 +5696,9 @@ jr_018_699A:
     jr   nz, jr_018_693C                          ; $699D: $20 $9D
 
     ld   a, $08                                   ; $699F: $3E $08
-    ld   [$D5C1], a                               ; $69A1: $EA $C1 $D5
+    ld   [wD5C0+1], a                               ; $69A1: $EA $C1 $D5
     ld   a, $04                                   ; $69A4: $3E $04
-    ld   [$D5C3], a                               ; $69A6: $EA $C3 $D5
+    ld   [wD5C2+1], a                               ; $69A6: $EA $C3 $D5
     ld   a, [wActiveEntityIndex]                  ; $69A9: $FA $23 $C1
     ld   c, a                                     ; $69AC: $4F
     ld   a, $06                                   ; $69AD: $3E $06

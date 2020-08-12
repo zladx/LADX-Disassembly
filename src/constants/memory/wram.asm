@@ -1984,108 +1984,152 @@ wD46B::
 wBossDefeated::
   ds 1 ; D46C
 
+; not used
+wD45D::
+  ds 4 ; D45D - D470
+
+; Increases on each kill. Reset to 0 when hit, or when it hits 12 a guardian acorn is spawned.
+wGuardianAcornCounter::
+  ds 1 ; D471
+
+; Signpost maze: current goal
+wMazeSignpostGoal::
+  ds 1 ; D472
+
+; Signpost maze: sign activated by Link
+wMazeSignpostPos::
+  ds 1 ; D473
+
 ; Unlabeled
-ds $4
-
-wGuardianAcornCounter:: ; D471
-  ; Increases on each kill. Reset to 0 when hit, or when it hits 12 a guardian acorn is spawned.
-  ds 1
-
-wMazeSignpostGoal:: ; D472
-  ; Signpost maze: current goal
-  ds 1
-
-wMazeSignpostPos:: ; D473
-  ; Signpost maze: sign activated by Link
-  ds 1
+wD474::
+  ds 1 ; D474
 
 ; Unlabeled
-ds $5
+wD475::
+  ds 1 ; D475
 
-wDebugWarpIndex:: ; D479
-  ; What index the B + SELECT warp tool is at (00~0B)
-  ds 1
+; not used
+wD476::
+  ds 1 ; D476
 
-wPowerUpHits:: ; D47A
-  ; Power-ups are disabled after 3 hits are taken from ennemies
-  ds 1
+; Unlabeled
+wD477::
+  ds 1 ; D477
 
-wForceFileSelectionScreenMusic:: ; D47B
-  ; If not zero, force the music track to change when displaying the file selections screen
-  ds 1
+; Unlabeled
+wD478::
+  ds 1 ; D478
 
-wActivePowerUp:: ; D47C
-  ; 0:  No power-up
-  ; 1:  Piece of Power
-  ; 2:  Guardian Accorn
-  ds 1
+; What index the B + SELECT warp tool is at (00~0B)
+wDebugWarpIndex::
+  ds 1 ; D479
+
+; Power-ups are disabled after 3 hits are taken from ennemies
+wPowerUpHits::
+  ds 1 ; D47A
+
+; If not zero, force the music track to change when displaying the file selections screen
+wForceFileSelectionScreenMusic::
+  ds 1 ; D47B
+
+; 0 = No power-up
+; 1 = Piece of Power
+; 2 = Guardian Accorn
+wActivePowerUp::
+  ds 1 ; D47C
 
 ; Unlabeled
 wD47D::
-  ds 1
+  ds 1 ; D47D
 
-wDidStealItem:: ; D47E
-  ds 1
-
-; Unlabeled
-ds 1 ; D47F
-
-wDungeonMinimap:: ; D480
-  ds $40
+; TODO comment
+wDidStealItem::
+  ds 1 ; D47E
 
 ; Unlabeled
-ds $D580 - $D4C0
+wD47F::
+  ds 1 ; D47F
 
-wEntitiesHitboxPositionTable:: ; D580
-  ; Entities hitboxes.
-  ; Each hitbox is a tuple of 4 bytes: x, y, width and height.
-  ds MAX_ENTITIES * 4
+; TODO comment
+wDungeonMinimap::
+  ds $40 ; D480 - D4DF
+
+; not used
+wD4C0::
+  ds $40 ; D4C0 - D4FF
 
 ; Unlabeled
-ds $D600 - $D5C0
+wD500::
+  ds $80 ; D500 - D57F
 
-; Data structures for copying data to vram during blanking times
+; Entities hitboxes.
+; Each hitbox is a tuple of 4 bytes: x, y, width and height.
+wEntitiesHitboxPositionTable::
+  ds MAX_ENTITIES * 4 ; D580 - D5DF
+
+; Unlabeled
+wD5C0:
+  ds 2 ; D5C0 - D5C1
+
+; Unlabeled
+wD5C2::
+  ds 2 ; D5C2
+
+; not used
+wD5C4::
+  ds 60 ; D5C4 - D600
+
+; Data structures for copying data to vram during blanking times.
+; 0 if background copy was executed
 wRequests::               ; D600
-  ; is 0 if background copy was executed
   ds 1
 
 ; Request destination address (big endian)
-wRequest:                 ; D601
-wRequestDestination:      ; D601
-wRequestDestinationHigh:: ; D601
-  ds 1
-wRequestDestinationLow::  ; D602
-  ds 1
+wRequest:
+; Request destination address (big endian)
+wRequestDestination:
+; Request destination address high byte
+wRequestDestinationHigh::
+  ds 1 ; D601
 
-; Request data length and mode
-;   bits 0-6: data length
-;   bits 7-8: copy mode (see BG_COPY_MODE_* constants)
-wRequestLength:           ; D603
-  ds 1
+; Request destination address low byte
+wRequestDestinationLow::
+  ds 1 ; D602
+
+; Request data length and mode.
+; bits 0-6: data length,
+; bits 7-8: copy mode (see BG_COPY_MODE_* constants)
+wRequestLength::
+  ds 1 ; D603
 
 ; Request data (variable length)
-wRequestData:             ; D604
-  ds $D6FA - $D604
+wRequestData:
+  ds 246  ; D604 - D6F9
 
-wRoomSwitchableObject:: ; D6FA
-  ; Is there one or more switchable objects in the room
-  ; See ROOM_SWITCHABLE_OBJECT_* constants
-  ds 1
+; Is there one or more switchable objects in the room
+; See ROOM_SWITCHABLE_OBJECT_* constants
+wRoomSwitchableObject::
+  ds 1 ; D6FA
 
 ; Unlabeled
-ds 1
+wD6FB::
+  ds 1 ; D6FB
 
-wEnginePaused:: ; D6FC
-  ds 1
+; TODO comment
+wEnginePaused::
+  ds 1 ; D6FC
 
-wLCDControl:: ; D6FD
-  ds 1
+; TODO comment
+wLCDControl::
+  ds 1 ; D6FD
 
-wTileMapToLoad:: ; D6FE
-  ds 1
+; TODO comment
+wTileMapToLoad::
+  ds 1 ; D6FE
 
-wBGMapToLoad:: ; D6FF
-  ds 1
+; TODO comment
+wBGMapToLoad::
+  ds 1 ; D6FF
 
 ; Memory region reserved for map objects of the active room.
 ; Actual objects are surrounded by FF values (see wRoomObjects)
@@ -2095,125 +2139,150 @@ wBGMapToLoad:: ; D6FF
 ;
 ; NB: this area is also used in RAM bank 2, where it contains
 ; the object attributes.
-wRoomObjectsArea:: ; D700
-  ; First section is FF values padding…
-  ds $11
+;
+; First section is FF values padding…
+wRoomObjectsArea::
+  ds $11 ; D700 - D710
 
 ; Start of the actual map objects for the active room (ignoring the surrounding FF values)
-wRoomObjects:: ; D711
-  ds $EF
+wRoomObjects::
+  ds $EF ; D711 - D7FF
 
 ; World rooms status
 ; Each room is a byte combining ROOM_STATUS_* constants.
-wOverworldRoomStatus:: ; D800
-  ds $100
+wOverworldRoomStatus::
+  ds $100 ; D800 - D8FF
 
-wIndoorARoomStatus:: ; D900
-  ds $100
+; TODO comment
+wIndoorARoomStatus::
+  ds $100 ; D900
 
-wIndoorBRoomStatus:: ; DA00
-  ds $100
+; TODO comment
+wIndoorBRoomStatus::
+  ds $100 ; DA00
 
-wBButtonSlot:: ; DB00
-  ds 1
+; TODO comment
+wBButtonSlot::
+  ds 1 ; DB00
 
-wAButtonSlot:: ; DB01
-  ds 1
+; TODO comment
+wAButtonSlot::
+  ds 1 ; DB01
 
-wInventoryItem1:: ; DB02
-  ds 1
+; TODO comment
+wInventoryItem1::
+  ds 1 ; DB02
 
-wInventoryItem2:: ; DB03
-  ds 1
+; TODO comment
+wInventoryItem2::
+  ds 1 ; DB03
 
-wInventoryItem3:: ; DB04
-  ds 1
+; TODO comment
+wInventoryItem3::
+  ds 1 ; DB04
 
-wInventoryItem4:: ; DB05
-  ds 1
+; TODO comment
+wInventoryItem4::
+  ds 1 ; DB05
 
-wInventoryItem5:: ; DB06
-  ds 1
+; TODO comment
+wInventoryItem5::
+  ds 1 ; DB06
 
-wInventoryItem6:: ; DB07
-  ds 1
+; TODO comment
+wInventoryItem6::
+  ds 1 ; DB07
 
-wInventoryItem7:: ; DB08
-  ds 1
+; TODO comment
+wInventoryItem7::
+  ds 1 ; DB08
 
-wInventoryItem8:: ; DB09
-  ds 1
+; TODO comment
+wInventoryItem8::
+  ds 1 ; DB09
 
-wInventoryItem9:: ; DB0A
-  ds 1
+; TODO comment
+wInventoryItem9::
+  ds 1 ; DB0A
 
-wInventoryItem10:: ; DB0B
-  ds 1
+; TODO comment
+wInventoryItem10::
+  ds 1 ; DB0B
 
-wHasFlippers:: ; DB0C
-  ds 1
+; TODO comment
+wHasFlippers::
+  ds 1 ; DB0C
 
-wHasMedicine:: ; DB0D
-  ds 1
+; TODO comment
+wHasMedicine::
+  ds 1 ; DB0D
 
-wTradeSequenceItem:: ; DB0E
-  ; Trade Sequence items.
-  ; See TRADING_ITEM_* constants for possible values.
-  ds 1
+; Trade Sequence items.
+; See TRADING_ITEM_* constants for possible values.
+wTradeSequenceItem::
+  ds 1 ; DB0E
 
-wSeashellsCount:: ; DB0F
-  ds 1
+; TODO comment
+wSeashellsCount::
+  ds 1 ; DB0F
 
 ; Unlabeled - Spacing byte used to check for dungeon map during InventoryDisplayLoop
-wDB10 equ $DB10
+wDB10::
   ds 1
 
-wHasTailKey:: ; DB11
-  ds 1
+; TODO comment
+wHasTailKey::
+  ds 1 ; DB11
 
-wHasAnglerKey:: ; DB12
-  ds 1
+; TODO comment
+wHasAnglerKey::
+  ds 1 ; DB12
 
-wHasFaceKey:: ; DB13
-  ds 1
+; TODO comment
+wHasFaceKey::
+  ds 1 ; DB13
 
-wHasBirdKey:: ; DB14
-  ds 1
+; TODO comment
+wHasBirdKey::
+  ds 1 ; DB14
 
-; Golden Leaves count
-; 0-5: number of Golden Leaves
-; 6  : Slime Key
-wGoldenLeavesCount:: ; DB15
-  ds 1
+; Golden Leaves count:
+; 0-5 = number of Golden Leaves,
+; 6 = Slime Key
+wGoldenLeavesCount::
+  ds 1 ; DB15
 
 ; Beginning of dungeon item flags.
 ; 5 bytes fo each dungeon.
 ; For each dungeon:
-;   byte 0: has map?
-;   byte 1: has compass?
-;   byte 2: has stone slab?
-;   byte 3: has boss key?
-;   byte 4: small keys count
-wDungeonItemFlags:: ; DB16
-  ds $2D
+; byte 0 = has map?,
+; byte 1 = has compass?
+; byte 2 = has stone slab?,
+; byte 3 = has boss key?,
+; byte 4 = small keys count
+wDungeonItemFlags::
+  ds $2D ; DB16 - DB42
 
-wPowerBraceletLevel:: ; DB43
-  ds 1
+; TODO comment
+wPowerBraceletLevel::
+  ds 1 ; DB43
 
-wShieldLevel:: ; DB44
-  ds 1
+; TODO comment
+wShieldLevel::
+  ds 1 ; DB44
 
-wArrowCount:: ; DB45
-  ds 1
+; TODO comment
+wArrowCount::
+  ds 1 ; DB45
 
 ; Set to 1 when you steal from the shop.
 ; Set back to zero when the shopkeeper kills you.
-wHasStolenFromShop:: ; DB46
-  ds 1
+wHasStolenFromShop::
+  ds 1 ; DB46
 
 ; Unlabeled
-wDB47 equ $DB47
-  ds 2
+wDB47::
+  ds 2 ; DB47 - DB48
 
 ; $0111 means that the player has every song.
 ;   bit 0: has Frog's Song of the Soul

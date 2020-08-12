@@ -799,7 +799,7 @@ Data_014_4E41::
 
 TeleportToManboPond::
     ld   a, $01                                   ; $4E51: $3E $01
-    ld   [$D474], a                               ; $4E53: $EA $74 $D4
+    ld   [wD474], a                               ; $4E53: $EA $74 $D4
     ld   a, $03                                   ; $4E56: $3E $03
     ld   [wLinkMotionState], a                    ; $4E58: $EA $1C $C1
     ld   a, [wIsIndoor]                           ; $4E5B: $FA $A5 $DB

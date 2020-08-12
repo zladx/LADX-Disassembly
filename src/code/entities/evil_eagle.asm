@@ -26,7 +26,7 @@ jr_005_5A29:
     cp   $01                                      ; $5A30: $FE $01
     jr   nz, jr_005_5A29                          ; $5A32: $20 $F5
 
-    ld   a, [$D478]                               ; $5A34: $FA $78 $D4
+    ld   a, [wD478]                               ; $5A34: $FA $78 $D4
     and  a                                        ; $5A37: $A7
     jr   z, jr_005_5A5D                           ; $5A38: $28 $23
 
@@ -54,7 +54,7 @@ ENDC
 jr_005_5A5D:
     ld   a, $02                                   ; $5A5D: $3E $02
     ldh  [hFFA5], a                               ; $5A5F: $E0 $A5
-    ld   [$D478], a                               ; $5A61: $EA $78 $D4
+    ld   [wD478], a                               ; $5A61: $EA $78 $D4
     call GetEntityTransitionCountdown             ; $5A64: $CD $05 $0C
     ld   [hl], $80                                ; $5A67: $36 $80
     ld   e, $0C                                   ; $5A69: $1E $0C

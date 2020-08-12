@@ -617,7 +617,7 @@ func_002_44FA::
     or   [hl]                                     ; $450E: $B6
     jr   nz, jr_002_4563                          ; $450F: $20 $52
 
-    ld   a, [$D475]                               ; $4511: $FA $75 $D4
+    ld   a, [wD475]                               ; $4511: $FA $75 $D4
     and  a                                        ; $4514: $A7
     jr   nz, jr_002_451E                          ; $4515: $20 $07
 
@@ -873,7 +873,7 @@ jr_002_4789:
     jp   label_002_4827                           ; $4789: $C3 $27 $48
 
 func_002_478C::
-    ld   a, [$D475]                               ; $478C: $FA $75 $D4
+    ld   a, [wD475]                               ; $478C: $FA $75 $D4
     and  a                                        ; $478F: $A7
     jr   z, jr_002_47A3                           ; $4790: $28 $11
 
@@ -2468,7 +2468,7 @@ jr_002_5145:
 
 jr_002_5155:
     ld   a, $01                                   ; $5155: $3E $01
-    ld   [$D475], a                               ; $5157: $EA $75 $D4
+    ld   [wD475], a                               ; $5157: $EA $75 $D4
     ld   a, $70                                   ; $515A: $3E $70
 
 jr_002_515C:
@@ -6809,7 +6809,7 @@ label_002_723D:
     ld   d, $00                                   ; $7251: $16 $00
     ld   hl, Data_002_787B                        ; $7253: $21 $7B $78
     add  hl, de                                   ; $7256: $19
-    ld   a, [$D6FB]                               ; $7257: $FA $FB $D6
+    ld   a, [wD6FB]                               ; $7257: $FA $FB $D6
     xor  [hl]                                     ; $725A: $AE
     jr   nz, label_002_7277                       ; $725B: $20 $1A
 
@@ -7427,7 +7427,7 @@ jr_002_75B1:
 
 jr_002_75B2:
     xor  a                                        ; $75B2: $AF
-    ld   [$D475], a                               ; $75B3: $EA $75 $D4
+    ld   [wD475], a                               ; $75B3: $EA $75 $D4
     ld   a, [wLinkMotionState]                    ; $75B6: $FA $1C $C1
     cp   $02                                      ; $75B9: $FE $02
     jr   z, jr_002_75B1                           ; $75BB: $28 $F4
@@ -7798,7 +7798,7 @@ jr_002_77B2:
     ld   d, $00                                   ; $77C6: $16 $00
     ld   hl, Data_002_787B                        ; $77C8: $21 $7B $78
     add  hl, de                                   ; $77CB: $19
-    ld   a, [$D6FB]                               ; $77CC: $FA $FB $D6
+    ld   a, [wD6FB]                               ; $77CC: $FA $FB $D6
     xor  [hl]                                     ; $77CF: $AE
     jr   z, .grassVfxEnd                          ; $77D0: $28 $17
 

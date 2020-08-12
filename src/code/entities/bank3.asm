@@ -279,7 +279,7 @@ ENDC
     and  a                                        ; $48F3: $A7
     jr   z, .indoorEnd                            ; $48F4: $28 $12
 
-    ld   a, [$D478]                               ; $48F6: $FA $78 $D4
+    ld   a, [wD478]                               ; $48F6: $FA $78 $D4
     and  a                                        ; $48F9: $A7
     jr   nz, .jr_003_490B                         ; $48FA: $20 $0F
 
@@ -702,7 +702,7 @@ EntityInitRaftRaftOwner::
     and  a                                        ; $4B1E: $A7
     jr   nz, EntityInitNpcFacingDown              ; $4B1F: $20 $0E
 
-    ld   a, [$D477]                               ; $4B21: $FA $77 $D4
+    ld   a, [wD477]                               ; $4B21: $FA $77 $D4
     and  a                                        ; $4B24: $A7
     ret  nz                                       ; $4B25: $C0
 
@@ -7430,7 +7430,7 @@ func_003_73EB::
     jp   z, label_003_74E1                        ; $740C: $CA $E1 $74
 
     ld   de, hActiveEntityPosX                    ; $740F: $11 $EE $FF
-    ld   hl, $D5C0                                ; $7412: $21 $C0 $D5
+    ld   hl, wD5C0                                ; $7412: $21 $C0 $D5
     ld   a, [de]                                  ; $7415: $1A
     add  [hl]                                     ; $7416: $86
     push hl                                       ; $7417: $E5
@@ -7590,7 +7590,7 @@ label_003_74EC:
     add  $08                                      ; $74FA: $C6 $08
     ldh  [hScratch2], a                           ; $74FC: $E0 $D9
     ld   de, hActiveEntityPosX                    ; $74FE: $11 $EE $FF
-    ld   hl, $D5C0                                ; $7501: $21 $C0 $D5
+    ld   hl, wD5C0                                ; $7501: $21 $C0 $D5
     ld   a, [de]                                  ; $7504: $1A
     add  [hl]                                     ; $7505: $86
     push hl                                       ; $7506: $E5
@@ -8909,7 +8909,7 @@ jr_003_7C5A:
     ld   hl, Data_003_7CA9                        ; $7C6A: $21 $A9 $7C
     add  hl, de                                   ; $7C6D: $19
     pop  de                                       ; $7C6E: $D1
-    ld   a, [$D6FB]                               ; $7C6F: $FA $FB $D6
+    ld   a, [wD6FB]                               ; $7C6F: $FA $FB $D6
     xor  [hl]                                     ; $7C72: $AE
     jr   z, setCarryFlagAndReturn                 ; $7C73: $28 $32
 

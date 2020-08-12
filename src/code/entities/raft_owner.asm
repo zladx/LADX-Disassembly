@@ -30,7 +30,7 @@ jr_005_5372:
 ._02 dw func_005_53CB                             ; $5388
 
 func_005_538A::
-    ld   a, [$D477]                               ; $538A: $FA $77 $D4
+    ld   a, [wD477]                               ; $538A: $FA $77 $D4
     and  a                                        ; $538D: $A7
     jr   nz, func_005_53CB                        ; $538E: $20 $3B
 
@@ -68,7 +68,7 @@ jr_005_53B1:
     ld   a, $64                                   ; $53B8: $3E $64
     ld   [wSubstractRupeeBufferLow], a            ; $53BA: $EA $92 $DB
     ld   a, $F1                                   ; $53BD: $3E $F1
-    ld   [$D477], a                               ; $53BF: $EA $77 $D4
+    ld   [wD477], a                               ; $53BF: $EA $77 $D4
     jp   OpenDialog                               ; $53C2: $C3 $85 $23
 
 jr_005_53C5:
@@ -88,7 +88,7 @@ Data_005_53D4::
 raftOnOverworld:
     ld   hl, wEntitiesUnknowTableP                ; $53DC: $21 $40 $C4
     add  hl, bc                                   ; $53DF: $09
-    ld   a, [$D477]                               ; $53E0: $FA $77 $D4
+    ld   a, [wD477]                               ; $53E0: $FA $77 $D4
     or   [hl]                                     ; $53E3: $B6
     jr   nz, jr_005_5411                          ; $53E4: $20 $2B
 
@@ -195,7 +195,7 @@ func_005_546C::
     add  hl, bc                                   ; $547C: $09
     ld   [hl], $01                                ; $547D: $36 $01
     xor  a                                        ; $547F: $AF
-    ld   [$D477], a                               ; $5480: $EA $77 $D4
+    ld   [wD477], a                               ; $5480: $EA $77 $D4
 
 jr_005_5483:
     ld   a, $01                                   ; $5483: $3E $01

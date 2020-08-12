@@ -880,7 +880,7 @@ disableMovementInTransition::
     xor  a                                        ; $0CA3: $AF
     ld   [wTransitionSequenceCounter], a          ; $0CA4: $EA $6B $C1
     ld   [$C16C], a                               ; $0CA7: $EA $6C $C1
-    ld   [$D478], a                               ; $0CAA: $EA $78 $D4
+    ld   [wD478], a                               ; $0CAA: $EA $78 $D4
     and  a                                        ; $0CAD: $A7
     ret                                           ; $0CAE: $C9
 
@@ -1270,8 +1270,8 @@ presentSaveScreenIfNeeded::
     cp   J_A | J_B | J_START | J_SELECT           ; $0E63: $FE $F0
     jr   nz, jumpToGameplayHandler                ; $0E65: $20 $1E
 
-    ; If $D474 != 0
-    ld   a, [$D474]                               ; $0E67: $FA $74 $D4
+    ; If wD474 != 0
+    ld   a, [wD474]                               ; $0E67: $FA $74 $D4
     and  a                                        ; $0E6A: $A7
     jr   nz, jumpToGameplayHandler                ; $0E6B: $20 $18
 
@@ -2978,7 +2978,7 @@ LinkMotionMapFadeOutHandler::
     ld   a, $30                                   ; $1963: $3E $30
     ldh  [$FFB4], a                               ; $1965: $E0 $B4
     xor  a                                        ; $1967: $AF
-    ld   [$D6FB], a                               ; $1968: $EA $FB $D6
+    ld   [wD6FB], a                               ; $1968: $EA $FB $D6
     ld   [$D6F8], a                               ; $196B: $EA $F8 $D6
 
 .label_196E
@@ -3077,11 +3077,11 @@ label_19DA::
 
 LinkMotionMapFadeInHandler::
     call func_002_754F                            ; $19DE: $CD $4F $75
-    ld   a, [$D474]                               ; $19E1: $FA $74 $D4
+    ld   a, [wD474]                               ; $19E1: $FA $74 $D4
     and  a                                        ; $19E4: $A7
     jr   z, .label_19FC                           ; $19E5: $28 $15
     xor  a                                        ; $19E7: $AF
-    ld   [$D474], a                               ; $19E8: $EA $74 $D4
+    ld   [wD474], a                               ; $19E8: $EA $74 $D4
     ld   a, $30                                   ; $19EB: $3E $30
     ld   [$C180], a                               ; $19ED: $EA $80 $C1
     ld   a, TRANSITION_GFX_MANBO_OUT              ; $19F0: $3E $03
@@ -3348,16 +3348,16 @@ label_1ED7::
     pop  af                                       ; $1EE0: $F1
     ld   hl, hLinkInteractiveMotionBlocked        ; $1EE1: $21 $A1 $FF
     ld   [hl], $01                                ; $1EE4: $36 $01
-    ld   hl, $D6FB                                ; $1EE6: $21 $FB $D6
+    ld   hl, wD6FB                                ; $1EE6: $21 $FB $D6
     ld   e, [hl]                                  ; $1EE9: $5E
     ld   d, $00                                   ; $1EEA: $16 $00
     inc  a                                        ; $1EEC: $3C
     cp   $03                                      ; $1EED: $FE $03
     jr   nz, label_1EFB                           ; $1EEF: $20 $0A
     push af                                       ; $1EF1: $F5
-    ld   a, [$D6FB]                               ; $1EF2: $FA $FB $D6
+    ld   a, [wD6FB]                               ; $1EF2: $FA $FB $D6
     xor  $02                                      ; $1EF5: $EE $02
-    ld   [$D6FB], a                               ; $1EF7: $EA $FB $D6
+    ld   [wD6FB], a                               ; $1EF7: $EA $FB $D6
     pop  af                                       ; $1EFA: $F1
 
 label_1EFB::
@@ -5632,8 +5632,8 @@ LoadRoom::
     ld   a, $01                                   ; $30F4: $3E $01
     ld   [rIE], a                                 ; $30F6: $E0 $FF
 
-    ; Increment $D47F
-    ld   hl, $D47F                                ; $30F8: $21 $7F $D4
+    ; Increment wD47F
+    ld   hl, wD47F                                ; $30F8: $21 $7F $D4
     inc  [hl]                                     ; $30FB: $34
 
     callsb ResetRoomVariables                     ; $30FC: $3E $20 $EA $00 $21 $CD $A3 $4C

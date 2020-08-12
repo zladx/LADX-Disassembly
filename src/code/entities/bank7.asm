@@ -7534,18 +7534,18 @@ func_007_703A::
     ld   [hl], a                                  ; $7041: $77
     ld   a, [$D20A]                               ; $7042: $FA $0A $D2
     add  $0C                                      ; $7045: $C6 $0C
-    ld   [$D5C0], a                               ; $7047: $EA $C0 $D5
+    ld   [wD5C0], a                               ; $7047: $EA $C0 $D5
     ld   a, [$D20B]                               ; $704A: $FA $0B $D2
     ld   hl, hActiveEntityVisualPosY              ; $704D: $21 $EC $FF
     add  [hl]                                     ; $7050: $86
     ld   [hl], a                                  ; $7051: $77
     ld   a, [$D20B]                               ; $7052: $FA $0B $D2
     add  $08                                      ; $7055: $C6 $08
-    ld   [$D5C2], a                               ; $7057: $EA $C2 $D5
+    ld   [wD5C2], a                               ; $7057: $EA $C2 $D5
     ld   a, $08                                   ; $705A: $3E $08
-    ld   [$D5C1], a                               ; $705C: $EA $C1 $D5
+    ld   [wD5C0+1], a                               ; $705C: $EA $C1 $D5
     ld   a, $06                                   ; $705F: $3E $06
-    ld   [$D5C3], a                               ; $7061: $EA $C3 $D5
+    ld   [wD5C2+1], a                               ; $7061: $EA $C3 $D5
     ld   de, Data_007_6F15                        ; $7064: $11 $15 $6F
     call RenderActiveEntitySpritesPair            ; $7067: $CD $C0 $3B
     ld   a, $02                                   ; $706A: $3E $02
@@ -9210,14 +9210,14 @@ jr_007_7AD1:
     ld   hl, Data_007_7A85                        ; $7ADE: $21 $85 $7A
     add  hl, de                                   ; $7AE1: $19
     ld   a, [hl]                                  ; $7AE2: $7E
-    ld   [$D5C0], a                               ; $7AE3: $EA $C0 $D5
+    ld   [wD5C0], a                               ; $7AE3: $EA $C0 $D5
     ld   hl, Data_007_7A8D                        ; $7AE6: $21 $8D $7A
     add  hl, de                                   ; $7AE9: $19
     ld   a, [hl]                                  ; $7AEA: $7E
-    ld   [$D5C2], a                               ; $7AEB: $EA $C2 $D5
+    ld   [wD5C2], a                               ; $7AEB: $EA $C2 $D5
     ld   a, $02                                   ; $7AEE: $3E $02
-    ld   [$D5C1], a                               ; $7AF0: $EA $C1 $D5
-    ld   [$D5C3], a                               ; $7AF3: $EA $C3 $D5
+    ld   [wD5C0+1], a                               ; $7AF0: $EA $C1 $D5
+    ld   [wD5C2+1], a                               ; $7AF3: $EA $C3 $D5
     ld   hl, Data_007_7A7D                        ; $7AF6: $21 $7D $7A
     add  hl, de                                   ; $7AF9: $19
     ld   a, [hl]                                  ; $7AFA: $7E

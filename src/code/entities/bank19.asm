@@ -4209,7 +4209,7 @@ func_019_5DAC::
     ld   a, $68                                   ; $5DE1: $3E $68
     ld   [wWarp0DestinationX], a                  ; $5DE3: $EA $04 $D4
     ldh  [hLinkPositionX], a                      ; $5DE6: $E0 $98
-    ld   [$D475], a                               ; $5DE8: $EA $75 $D4
+    ld   [wD475], a                               ; $5DE8: $EA $75 $D4
     ld   a, $66                                   ; $5DEB: $3E $66
     ld   [wWarp0PositionTileIndex], a             ; $5DED: $EA $16 $D4
     call ApplyMapFadeOutTransition                ; $5DF0: $CD $83 $0C

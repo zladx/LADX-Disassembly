@@ -334,7 +334,7 @@ func_036_41DF::
     ldh  [$FFB3], a                               ; $41EA: $E0 $B3
     ld   [$C145], a                               ; $41EC: $EA $45 $C1
     ld   a, $01                                   ; $41EF: $3E $01
-    ld   [$D475], a                               ; $41F1: $EA $75 $D4
+    ld   [wD475], a                               ; $41F1: $EA $75 $D4
     ld   a, [wIsMarinFollowingLink]               ; $41F4: $FA $73 $DB
     and  a                                        ; $41F7: $A7
     jr   z, label_036_4217                        ; $41F8: $28 $1D

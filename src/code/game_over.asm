@@ -176,8 +176,8 @@ jr_001_42FB::
     ldh  [rOBP1], a                               ; $4307: $E0 $49 ; $4307: $E0 $49
     ld   [wBGPalette], a                          ; $4309: $EA $97 $DB ; $4309: $EA $97 $DB
     ldh  [rBGP], a                                ; $430C: $E0 $47 ; $430C: $E0 $47
-    ld   [$D6FB], a                               ; $430E: $EA $FB $D6 ; $430E: $EA $FB $D6
-    ld   [$D475], a                               ; $4311: $EA $75 $D4 ; $4311: $EA $75 $D4
+    ld   [wD6FB], a                               ; $430E: $EA $FB $D6 ; $430E: $EA $FB $D6
+    ld   [wD475], a                               ; $4311: $EA $75 $D4 ; $4311: $EA $75 $D4
     ldh  a, [hLinkPositionX]                      ; $4314: $F0 $98 ; $4314: $F0 $98
     ld   [wMapEntrancePositionX], a               ; $4316: $EA $9D $DB ; $4316: $EA $9D $DB
     ldh  a, [hLinkPositionY]                      ; $4319: $F0 $99 ; $4319: $F0 $99

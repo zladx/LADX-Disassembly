@@ -2288,253 +2288,322 @@ wDB47::
 ;   bit 0: has Frog's Song of the Soul
 ;   bit 1: has Manbo's Mambo
 ;   bit 2: has Ballad of the Wind Fish
-wOcarinaSongFlags:: ; DB49
-  ds 1
+wOcarinaSongFlags::
+  ds 1 ; DB49
 
 ; Which song is selected (zero based)
-wSelectedSongIndex:: ; DB4A
-  ds 1
+wSelectedSongIndex::
+  ds 1 ; DB4A
 
 ; 0 means that the player does not have the Toadstool
 ; 1 means that the player has the Toadstool
-wHasToadstool:: ; DB4B
-  ds 1
+wHasToadstool::
+  ds 1 ; DB4B
 
-wMagicPowderCount:: ; DB4C
-  ds 1
+; TODO comment
+wMagicPowderCount::
+  ds 1 ; DB4C
 
-wBombCount:: ; DB4D
-  ds 1
+; TODO comment
+wBombCount::
+  ds 1 ; DB4D
 
-wSwordLevel:: ; DB4E
-  ; Set to 1 when Link retrieves his sword on the beach
-  ds 1
+; Set to 1 when Link retrieves his sword on the beach
+wSwordLevel::
+  ds 1 ; DB4E
 
-wName:: ; DB4F
-  ds NAME_LENGTH ; 5
+; default value is 5
+wName::
+  ds NAME_LENGTH ; DB4F - DB53
 
-wDB54:: ds 1 ; Unknown, but some kind of map index entry
+; Unlabeled
+; some kind of map index entry
+wDB54::
+  ds 1 ; DB54
 
 ; Indicates if we have spoken with richard.
-; 1 indicates spoken with grandpa ulrira in his own house, but does not seem to be used anywhere.
-; 2 means spoken with richard, changes the telephone message.
-wRichardSpokenFlag:: ; DB55
-  ds 1
+; 1 = indicates spoken with grandpa ulrira in his own house, but does not seem to be used anywhere.
+; 2 = means spoken with richard, changes the telephone message.
+wRichardSpokenFlag::
+  ds 1 ; DB55
 
-wIsBowWowFollowingLink:: ; DB56
-  ; Bow-Wow status.
-  ; Values:
-  ;   0   not following Link
-  ;   1   Bow-Wow is following Link
-  ;   80  Bow-Wow has been kidnapped
-  ds 1
+; Bow-Wow status.
+; Values:
+;  00 = not following Link,
+;  01 = Bow-Wow is following Link,
+;  80 = Bow-Wow has been kidnapped
+wIsBowWowFollowingLink::
+  ds 1 ; DB56
 
 ; Death count (one per save slot)
-wDeathCount:: ; DB57
-  ds $3
+wDeathCount::
+  ds 3 ; DB57 DB59
 
 ; Number of hearts ($08 = 1 heart)
 wHealth::
-; DB5A
-  ds 1
+  ds 1 ; DB5A
 
 ; Maximum number of hearts
 wMaxHealth::
-; DB5B
-  ds 1
+  ds 1 ; DB5B
 
-wHeartPiecesCount:: ; DB5C
-  ds 1
+; TODO comment
+wHeartPiecesCount::
+  ds 1 ; DB5C
 
-wRupeeCountHigh:: ; DB5D
-  ; Higher digits of the player rupees count
-  ds 1
+; Higher digits of the player rupees count
+wRupeeCountHigh::
+  ds 1 ; DB5D
 
-wRupeeCountLow:: ; DB5E
-  ; Lower digits of the player rupees count
-  ds 1
+; Lower digits of the player rupees count
+wRupeeCountLow::
+  ds 1 ; DB5E
 
 ; Define Link's spawn position
 ; Used when loading a save file or after a game over
-wSpawnLocationData:: ; DB5F
-wSpawnIsIndoor:: ; DB5F
-  ds 1
-wSpawnMapId:: ; DB60
-  ds 1
-wSpawnMapRoom:: ; DB61
-  ds 1
-wSpawnPositionX:: ; DB62
-  ; If 0, will load the pre-defined save file
-  ds 1
-wSpawnPositionY:: ; DB63
-  ds 1
-wSpawnIndoorRoom:: ; DB64
-  ds 1
+wSpawnLocationData::
+; TODO comment
+wSpawnIsIndoor::
+  ds 1 ; DB5F
+
+; TODO comment
+wSpawnMapId::
+  ds 1 ; DB60
+
+; TODO comment
+wSpawnMapRoom::
+  ds 1 ; DB61
+
+; If 0, will load the pre-defined save file
+wSpawnPositionX::
+  ds 1 ; DB62
+
+; If 0, will load the pre-defined save file
+wSpawnPositionY::
+  ds 1 ; DB63
+
+; TODO comment
+wSpawnIndoorRoom::
+  ds 1 ; DB64
 
 ; @TODO Dungeon 1-9 *flags*, not instrument checks
 ; bit 0: miniboss clear
-; bit 1: (?)
+; bit 1: set if true
 ; bit 2: (?)
-wHasInstrument1:: ; DB65
-  ; 0: false, 2: true
-  ds 1
+; 0 = false
+wHasInstrument1::
+  ds 1 ; DB65
 
-wHasInstrument2:: ; DB66
-  ; 0: false, 2: true
-  ds 1
+; @TODO Dungeon 1-9 *flags*, not instrument checks
+; bit 0: miniboss clear
+; bit 1: set if true
+; bit 2: (?)
+; 0 = false
+wHasInstrument2::
+  ds 1 ; DB66
 
-wHasInstrument3:: ; DB67
-  ; 0: false, 2: true
-  ds 1
+; @TODO Dungeon 1-9 *flags*, not instrument checks
+; bit 0: miniboss clear
+; bit 1: set if true
+; bit 2: (?)
+; 0 = false
+wHasInstrument3::
+  ds 1 ; DB67
 
-wHasInstrument4:: ; DB68
-  ; 0: false, 2: true
-  ds 1
+; @TODO Dungeon 1-9 *flags*, not instrument checks
+; bit 0: miniboss clear
+; bit 1: set if true
+; bit 2: (?)
+; 0 = false
+wHasInstrument4::
+  ds 1 ; DB68
 
-wHasInstrument5:: ; DB69
-  ; 0: false, 2: true
-  ds 1
+; @TODO Dungeon 1-9 *flags*, not instrument checks
+; bit 0: miniboss clear
+; bit 1: set if true
+; bit 2: (?)
+; 0 = false
+wHasInstrument5::
+  ds 1 ; DB69
 
-wHasInstrument6:: ; DB6A
-  ; 0: false, 2: true
-  ds 1
+; @TODO Dungeon 1-9 *flags*, not instrument checks
+; bit 0: miniboss clear
+; bit 1: set if true
+; bit 2: (?)
+; 0 = false
+wHasInstrument6::
+  ds 1 ; DB6A
 
-wHasInstrument7:: ; DB6B
-  ; 0: false, 2: true
-  ds 1
+; @TODO Dungeon 1-9 *flags*, not instrument checks
+; bit 0: miniboss clear
+; bit 1: set if true
+; bit 2: (?)
+; 0 = false
+wHasInstrument7::
+  ds 1 ; DB6B
 
-wHasInstrument8:: ; DB6C
-  ; 0: false, 2: true
-  ds 1
+; @TODO Dungeon 1-9 *flags*, not instrument checks
+; bit 0: miniboss clear
+; bit 1: set if true
+; bit 2: (?)
+; 0 = false
+wHasInstrument8::
+  ds 1 ; DB6C
 
-wDB6D: ds 1
+; Unlabeled
+wDB6D:
+  ds 1 ; D86D
 
-wIsThief:: ; DB6E
-  ds 1
+; TODO comment
+wIsThief::
+  ds 1 ; DB6E
 
-wWreckingBallRoom: ; DB6F
-  ds 1
+; TODO comment
+wWreckingBallRoom:
+  ds 1 ; DB6F
 
-wWreckingBallPosX: ; DB70
-  ds 1
+; TODO comment
+wWreckingBallPosX:
+  ds 1 ; DB70
 
-wWreckingBallPosY: ; DB71
-  ds 1
+; TODO comment
+wWreckingBallPosY:
+  ds 1 ; DB71
 
-wNumberOfDungeon7PillarsDestroyed: ; DB72
-  ds 1
+; TODO comment
+wNumberOfDungeon7PillarsDestroyed:
+  ds 1 ; DB72
 
-wIsMarinFollowingLink:: ; DB73
-  ds 1
+; TODO comment
+wIsMarinFollowingLink::
+  ds 1 ; DB73
 
 ; Unlabeled, Marin-related
-wDB74 equ $DB74
+wDB74::
   ds 1
 
-wPurchasedMedecineCount:: ; DB75
-  ; Total number of medecine ever purchased from Crazy Tracy
-  ds 1
+; Total number of medecine ever purchased from Crazy Tracy
+wPurchasedMedecineCount::
+  ds 1 ; DB75
 
-wMaxMagicPowder:: ; DB76
-  ds 1
+; TODO comment
+wMaxMagicPowder::
+  ds 1 ; DB76
 
-wMaxBombs:: ; DB77
-  ; Maximum number of bombs that Link can carry
-  ds 1
+; Maximum number of bombs that Link can carry
+wMaxBombs::
+  ds 1 ; DB77
 
-wMaxArrows:: ; DB78
-  ds 1
+; TODO comment
+wMaxArrows::
+  ds 1 ; DB78
 
-wIsGhostFollowingLink:: ; DB79
-  ds 1
+; TODO comment
+wIsGhostFollowingLink::
+  ds 1 ; DB79
 
-wGhostSeeksGrave:: ; DB7A
-  ; Zero: The ghost wants to go to House by the Bay
-  ; Non-zero: ... to his grave in Kohilint Prairie
-  ds 1
+; Zero: The ghost wants to go to House by the Bay
+; Non-zero: ... to his grave in Kohilint Prairie
+wGhostSeeksGrave::
+  ds 1 ; DB7A
 
-wIsRoosterFollowingLink:: ; DB7B
-  ds 1
+; TODO comment
+wIsRoosterFollowingLink::
+  ds 1 ; DB7B
 
 ; Offset in the WindFishEggMazeSequence table, set to a random value chosen from $00 $08 $10 $18
 wWindFishEggMazeSequenceOffset:
-  ds 1
+  ds 1 ; D87C
 
-wBoomerangTradedItem:: ; DB7D
-  ; Stores the inventory item that you traded for the boomerang.
-  ; Initially this value is zero, indicating no trade. But after you traded the boomerang
-  ; back it will be INVENTORY_BOOMERANG
-  ds 1
+; Stores the inventory item that you traded for the boomerang.
+; Initially this value is zero, indicating no trade. But after you traded the boomerang
+; back it will be INVENTORY_BOOMERANG
+wBoomerangTradedItem::
+  ds 1 ; DB7D
 
-wKidSaveHintIndex:: ;DB7E
-  ; Switches between 4 different hits for one of the kids throwing the ball
-  ds 1
-
-wDB7F:: ;DB7F
-  ; Unknown
-  ds 1
-  
-; Unlabeled, outside the area that is stored in the savegame.
-  ds $0F
-
-wAddRupeeBufferHigh:: ; DB8F
-  ; Higher digits of the amount of rupees to be added to your wallet (high digits)
-  ds 1
-
-wAddRupeeBufferLow:: ; DB90
-  ; Amount of rupees to be added to your wallet (low digits)
-  ds 1
-
-wSubstractRupeeBufferHigh:: ; DB91
-  ; Amount of rupees to be removed from your wallet (high digits)
-  ds 1
-
-wSubstractRupeeBufferLow:: ; DB92
-  ; Amount of rupees to be removed from your wallet (low digits)
-  ds 1
-
-wAddHealthBuffer:: ; DB93
-  ; Amount of health to be added to your health total (wHealth)
-  ds 1
-
-wSubtractHealthBuffer:: ; DB94
-  ; Amount of health to be removed from your health total (wHealth)
-  ds 1
-
-wGameplayType:: ; DB95
-  ; See GAMEPLAY_* constants for possible values
-  ds 1
-
-wGameplaySubtype:: ; DB96
-  ; Value depens on GameplayType: this can be a sequence index, or a frame counter.
-  ds 1
-
-wBGPalette:: ; DB97
-  ds 1
-
-wOBJ0Palette:: ; DB98
-  ds 1
-
-wOBJ1Palette:: ; DB99
-  ds 1
-
-wWindowY:: ; DB9A
-  ds 1
+; Switches between 4 different hits for one of the kids throwing the ball
+wKidSaveHintIndex::
+  ds 1 ; DB7E
 
 ; Unlabeled
-ds 1
+wDB7F::
+  ds 1 ; DB7F
+  
+; Unlabeled, outside the area that is stored in the savegame.
+wDB80::
+  ds 5 ; DB80 - DB84
 
-wMapEntranceRoom:: ; DB9C
-  ; Initial room of Link when loading a new map
+; Unlabeled
+wDB85::
+  ds 5 ; DB85 - DB89
+
+; Unlabeled
+wDB8A::
+  ds 5 ; DB8A - DB8E
+
+; Higher digits of the amount of rupees to be added to your wallet (high digits)
+wAddRupeeBufferHigh::
+  ds 1 ; DB8F
+
+; Amount of rupees to be added to your wallet (low digits)
+wAddRupeeBufferLow::
+  ds 1 ; DB90
+
+; Amount of rupees to be removed from your wallet (high digits)
+wSubstractRupeeBufferHigh::
+  ds 1 ; DB91
+
+; Amount of rupees to be removed from your wallet (low digits)
+wSubstractRupeeBufferLow::
+  ds 1 ; DB92
+
+; Amount of health to be added to your health total (wHealth)
+wAddHealthBuffer::
+  ds 1 ; DB93
+
+; Amount of health to be removed from your health total (wHealth)
+wSubtractHealthBuffer::
+  ds 1 ; DB94
+
+; See GAMEPLAY_* constants for possible values
+wGameplayType::
+  ds 1 ; DB95
+
+; Value depens on GameplayType: this can be a sequence index, or a frame counter.
+wGameplaySubtype::
+  ds 1 ; DB96
+
+; TODO comment
+wBGPalette::
+  ds 1 ; DB97
+
+; TODO comment
+wOBJ0Palette::
+  ds 1 ; DB98
+
+; TODO comment
+wOBJ1Palette::
+  ds 1 ; DB99
+
+; TODO comment
+wWindowY::
+  ds 1 ; DB9A
+
+; not used
+wDB9A::
   ds 1
 
-wMapEntrancePositionX:: ; DB9D
-  ; Initial position of Link when loading a new map
-  ds 1
+; Initial room of Link when loading a new map
+wMapEntranceRoom::
+  ds 1 ; DB9C
 
-wMapEntrancePositionY:: ; DB9E
-  ; Initial position of Link when loading a new map
-  ds 1
+; Initial position of Link when loading a new map
+wMapEntrancePositionX::
+  ds 1 ; DB9D
+
+; Initial position of Link when loading a new map
+wMapEntrancePositionY::
+  ds 1 ; DB9E
 
 ; Unlabeled
 ds 6

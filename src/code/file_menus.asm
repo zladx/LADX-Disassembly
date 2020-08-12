@@ -413,7 +413,7 @@ FileSelectionExecuteChoice::
     ld   e, a                                     ; $49A5: $5F
     ld   d, $00                                   ; $49A6: $16 $00
     ld   c, $05                                   ; $49A8: $0E $05
-    ld   hl, $DB80                                ; $49AA: $21 $80 $DB
+    ld   hl, wDB80                                ; $49AA: $21 $80 $DB
     add  hl, de                                   ; $49AD: $19
 
 .loop
@@ -595,7 +595,7 @@ Data_001_4A98::
 
 
 CHECKNAME: macro
-    ld   hl, $DB80
+    ld   hl, wDB80
     add  hl, de
 I = 0
 REPT 5
@@ -618,7 +618,7 @@ FileCreationInteractiveHandler::
     ld   hl, Data_001_4A98                        ; $4AA1: $21 $98 $4A
     add  hl, de                                   ; $4AA4: $19
     ld   e, [hl]                                  ; $4AA5: $5E
-    ld   hl, $DB80                                ; $4AA6: $21 $80 $DB
+    ld   hl, wDB80                                ; $4AA6: $21 $80 $DB
     add  hl, de                                   ; $4AA9: $19
     ld   e, l                                     ; $4AAA: $5D
     ld   d, h                                     ; $4AAB: $54
@@ -667,7 +667,7 @@ ENDC
     ld   [wMusicTrackToPlay], a                   ; $4AFB: $EA $68 $D3
 
 jr_001_4AFE::
-    ld   hl, $DB80                                ; $4AFE: $21 $80 $DB
+    ld   hl, wDB80                                ; $4AFE: $21 $80 $DB
     add  hl, de                                   ; $4B01: $19
     pop  bc                                       ; $4B02: $C1
     ld   e, $05                                   ; $4B03: $1E $05
@@ -903,7 +903,7 @@ func_001_4CDA::
     sla  a                                        ; $4CEC: $CB $27
     add  a, c                                     ; $4CEE: $81
     ld   c, a                                     ; $4CEF: $4F
-    ld   hl, $DB80                                ; $4CF0: $21 $80 $DB
+    ld   hl, wDB80                                ; $4CF0: $21 $80 $DB
     add  hl, bc                                   ; $4CF3: $09
     ld   a, [$DBAA]                               ; $4CF4: $FA $AA $DB
     ld   c, a                                     ; $4CF7: $4F
@@ -1011,17 +1011,17 @@ FileDeletionState7Handler::
 
 func_001_4D8B::
     ld   bc, $98C5                                ; $4D8B: $01 $C5 $98 ; $4D8B: $01 $C5 $98
-    ld   de, $DB80                                ; $4D8E: $11 $80 $DB ; $4D8E: $11 $80 $DB
+    ld   de, wDB80                                ; $4D8E: $11 $80 $DB ; $4D8E: $11 $80 $DB
     jp   func_4852                                ; $4D91: $C3 $52 $48 ; $4D91: $C3 $52 $48
 
 func_001_4D94::
     ld   bc, $9925                                ; $4D94: $01 $25 $99 ; $4D94: $01 $25 $99
-    ld   de, $DB85                                ; $4D97: $11 $85 $DB ; $4D97: $11 $85 $DB
+    ld   de, wDB85                                ; $4D97: $11 $85 $DB ; $4D97: $11 $85 $DB
     jp   func_4852                                ; $4D9A: $C3 $52 $48 ; $4D9A: $C3 $52 $48
 
 func_001_4D9D::
     ld   bc, $9985                                ; $4D9D: $01 $85 $99 ; $4D9D: $01 $85 $99
-    ld   de, $DB8A                                ; $4DA0: $11 $8A $DB ; $4DA0: $11 $8A $DB
+    ld   de, wDB8A                                ; $4DA0: $11 $8A $DB ; $4DA0: $11 $8A $DB
     jp   func_4852                                ; $4DA3: $C3 $52 $48 ; $4DA3: $C3 $52 $48
 
 func_001_4DA6::
@@ -1511,25 +1511,25 @@ FileCopyState3Handler::
 
 FileCopyState4Handler::
     ld   bc, $98C4                                ; $4FC3: $01 $C4 $98 ; $4FC3: $01 $C4 $98
-    ld   de, $DB80                                ; $4FC6: $11 $80 $DB ; $4FC6: $11 $80 $DB
+    ld   de, wDB80                                ; $4FC6: $11 $80 $DB ; $4FC6: $11 $80 $DB
     call func_4852                                ; $4FC9: $CD $52 $48 ; $4FC9: $CD $52 $48
     ld   bc, $9924                                ; $4FCC: $01 $24 $99 ; $4FCC: $01 $24 $99
-    ld   de, $DB85                                ; $4FCF: $11 $85 $DB ; $4FCF: $11 $85 $DB
+    ld   de, wDB85                                ; $4FCF: $11 $85 $DB ; $4FCF: $11 $85 $DB
     call func_4852                                ; $4FD2: $CD $52 $48 ; $4FD2: $CD $52 $48
     ld   bc, $9984                                ; $4FD5: $01 $84 $99 ; $4FD5: $01 $84 $99
-    ld   de, $DB8A                                ; $4FD8: $11 $8A $DB ; $4FD8: $11 $8A $DB
+    ld   de, wDB8A                                ; $4FD8: $11 $8A $DB ; $4FD8: $11 $8A $DB
     call func_4852                                ; $4FDB: $CD $52 $48 ; $4FDB: $CD $52 $48
     jp   IncrementGameplaySubtypeAndReturn        ; $4FDE: $C3 $D6 $44 ; $4FDE: $C3 $D6 $44
 
 FileCopyState5Handler::
     ld   bc, $98CD                                ; $4FE1: $01 $CD $98 ; $4FE1: $01 $CD $98
-    ld   de, $DB80                                ; $4FE4: $11 $80 $DB ; $4FE4: $11 $80 $DB
+    ld   de, wDB80                                ; $4FE4: $11 $80 $DB ; $4FE4: $11 $80 $DB
     call func_4852                                ; $4FE7: $CD $52 $48 ; $4FE7: $CD $52 $48
     ld   bc, $992D                                ; $4FEA: $01 $2D $99 ; $4FEA: $01 $2D $99
-    ld   de, $DB85                                ; $4FED: $11 $85 $DB ; $4FED: $11 $85 $DB
+    ld   de, wDB85                                ; $4FED: $11 $85 $DB ; $4FED: $11 $85 $DB
     call func_4852                                ; $4FF0: $CD $52 $48 ; $4FF0: $CD $52 $48
     ld   bc, $998D                                ; $4FF3: $01 $8D $99 ; $4FF3: $01 $8D $99
-    ld   de, $DB8A                                ; $4FF6: $11 $8A $DB ; $4FF6: $11 $8A $DB
+    ld   de, wDB8A                                ; $4FF6: $11 $8A $DB ; $4FF6: $11 $8A $DB
     call func_4852                                ; $4FF9: $CD $52 $48 ; $4FF9: $CD $52 $48
     jp   IncrementGameplaySubtypeAndReturn        ; $4FFC: $C3 $D6 $44 ; $4FFC: $C3 $D6 $44
 
@@ -1564,7 +1564,7 @@ jr_001_501D::
     cp   $03                                      ; $5026: $FE $03 ; $5026: $FE $03
     jp   z, label_001_4555                            ; $5028: $CA $55 $45 ; $5028: $CA $55 $45
 
-    ld   hl, $DB80                                ; $502B: $21 $80 $DB ; $502B: $21 $80 $DB
+    ld   hl, wDB80                                ; $502B: $21 $80 $DB ; $502B: $21 $80 $DB
     ld   b, $00                                   ; $502E: $06 $00 ; $502E: $06 $00
     ld   a, [wIntroTimer]                         ; $5030: $FA $01 $D0 ; $5030: $FA $01 $D0
     and  a                                        ; $5033: $A7 ; $5033: $A7
@@ -1573,11 +1573,11 @@ jr_001_501D::
     cp   $01                                      ; $5036: $FE $01 ; $5036: $FE $01
     jr   z, jr_001_503F                            ; $5038: $28 $05 ; $5038: $28 $05
 
-    ld   hl, $DB8A                                ; $503A: $21 $8A $DB ; $503A: $21 $8A $DB
+    ld   hl, wDB8A                                ; $503A: $21 $8A $DB ; $503A: $21 $8A $DB
     jr   jr_001_5042                               ; $503D: $18 $03 ; $503D: $18 $03
 
 jr_001_503F::
-    ld   hl, $DB85                                ; $503F: $21 $85 $DB ; $503F: $21 $85 $DB
+    ld   hl, wDB85                                ; $503F: $21 $85 $DB ; $503F: $21 $85 $DB
 
 jr_001_5042::
     xor  a                                        ; $5042: $AF ; $5042: $AF
@@ -1774,17 +1774,17 @@ label_001_514F::
     jr   z, jr_001_516C                            ; $5158: $28 $12 ; $5158: $28 $12
 
     ld   bc, $98C4                                ; $515A: $01 $C4 $98 ; $515A: $01 $C4 $98
-    ld   de, $DB80                                ; $515D: $11 $80 $DB ; $515D: $11 $80 $DB
+    ld   de, wDB80                                ; $515D: $11 $80 $DB ; $515D: $11 $80 $DB
     jp   func_4852                                ; $5160: $C3 $52 $48 ; $5160: $C3 $52 $48
 
 jr_001_5163::
     ld   bc, $9924                                ; $5163: $01 $24 $99 ; $5163: $01 $24 $99
-    ld   de, $DB85                                ; $5166: $11 $85 $DB ; $5166: $11 $85 $DB
+    ld   de, wDB85                                ; $5166: $11 $85 $DB ; $5166: $11 $85 $DB
     jp   func_4852                                ; $5169: $C3 $52 $48 ; $5169: $C3 $52 $48
 
 jr_001_516C::
     ld   bc, $9984                                ; $516C: $01 $84 $99 ; $516C: $01 $84 $99
-    ld   de, $DB8A                                ; $516F: $11 $8A $DB ; $516F: $11 $8A $DB
+    ld   de, wDB8A                                ; $516F: $11 $8A $DB ; $516F: $11 $8A $DB
     jp   func_4852                                ; $5172: $C3 $52 $48 ; $5172: $C3 $52 $48
 
 func_001_5175::
@@ -1966,15 +1966,15 @@ label_001_526F::
     jr   z, jr_001_528C                            ; $5278: $28 $12 ; $5278: $28 $12
 
     ld   bc, $98CD                                ; $527A: $01 $CD $98 ; $527A: $01 $CD $98
-    ld   de, $DB80                                ; $527D: $11 $80 $DB ; $527D: $11 $80 $DB
+    ld   de, wDB80                                ; $527D: $11 $80 $DB ; $527D: $11 $80 $DB
     jp   func_4852                                ; $5280: $C3 $52 $48 ; $5280: $C3 $52 $48
 
 jr_001_5283::
     ld   bc, $992D                                ; $5283: $01 $2D $99 ; $5283: $01 $2D $99
-    ld   de, $DB85                                ; $5286: $11 $85 $DB ; $5286: $11 $85 $DB
+    ld   de, wDB85                                ; $5286: $11 $85 $DB ; $5286: $11 $85 $DB
     jp   func_4852                                ; $5289: $C3 $52 $48 ; $5289: $C3 $52 $48
 
 jr_001_528C::
     ld   bc, $998D                                ; $528C: $01 $8D $99 ; $528C: $01 $8D $99
-    ld   de, $DB8A                                ; $528F: $11 $8A $DB ; $528F: $11 $8A $DB
+    ld   de, wDB8A                                ; $528F: $11 $8A $DB ; $528F: $11 $8A $DB
     jp   func_4852                                ; $5292: $C3 $52 $48 ; $5292: $C3 $52 $48

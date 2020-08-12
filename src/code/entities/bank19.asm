@@ -1125,7 +1125,7 @@ Entity97Handler::
     jr   nz, jr_019_485C                          ; $4851: $20 $09
 
     ld   a, [wLinkMotionState]                    ; $4853: $FA $1C $C1
-    ld   [$D463], a                               ; $4856: $EA $63 $D4
+    ld   [wD463], a                               ; $4856: $EA $63 $D4
     call func_019_4891                            ; $4859: $CD $91 $48
 
 jr_019_485C:
@@ -1497,7 +1497,7 @@ EggSongEventEntityHandler::
     jp   nz, label_019_4BCC                       ; $4AD1: $C2 $CC $4B
 
     ld   a, c                                     ; $4AD4: $79
-    ld   [$D461], a                               ; $4AD5: $EA $61 $D4
+    ld   [wD461], a                               ; $4AD5: $EA $61 $D4
     ldh  a, [hRoomStatus]                         ; $4AD8: $F0 $F8
     and  $10                                      ; $4ADA: $E6 $10
     jp   nz, ClearEntityStatus_19                        ; $4ADC: $C2 $61 $7E
@@ -1588,7 +1588,7 @@ jr_019_4B4C:
 jr_019_4B57:
     ld   a, e                                     ; $4B57: $7B
     ld   [wMusicTrackToPlay], a                   ; $4B58: $EA $68 $D3
-    ld   [$D465], a                               ; $4B5B: $EA $65 $D4
+    ld   [wD465], a                               ; $4B5B: $EA $65 $D4
     ld   a, $FF                                   ; $4B5E: $3E $FF
     ld   [wLinkPlayingOcarinaCountdown], a        ; $4B60: $EA $66 $C1
     xor  a                                        ; $4B63: $AF

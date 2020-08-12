@@ -1275,8 +1275,8 @@ presentSaveScreenIfNeeded::
     and  a                                        ; $0E6A: $A7
     jr   nz, jumpToGameplayHandler                ; $0E6B: $20 $18
 
-    ; If $D464 != 0
-    ld   a, [$D464]                               ; $0E6D: $FA $64 $D4
+    ; If wD464 != 0
+    ld   a, [wD464]                               ; $0E6D: $FA $64 $D4
     and  a                                        ; $0E70: $A7
     jr   nz, jumpToGameplayHandler                ; $0E71: $20 $12
 
@@ -1598,9 +1598,9 @@ InitGotItemSequence::
     ldh  a, [hPressedButtonsMask]                 ; $1085: $F0 $CB
     and  $40                                      ; $1087: $E6 $40
     jr   z, .jp_10DB                              ; $1089: $28 $50
-    ld   a, [$D45F]                               ; $108B: $FA $5F $D4
+    ld   a, [wD45F]                               ; $108B: $FA $5F $D4
     inc  a                                        ; $108E: $3C
-    ld   [$D45F], a                               ; $108F: $EA $5F $D4
+    ld   [wD45F], a                               ; $108F: $EA $5F $D4
     cp   $04                                      ; $1092: $FE $04
     jr   c, .jp_10DF                              ; $1094: $38 $49
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $1096: $F0 $A1
@@ -1618,7 +1618,7 @@ InitGotItemSequence::
     ld   hl, wRoomTransitionState                 ; $10B0: $21 $24 $C1
     or   [hl]                                     ; $10B3: $B6
     jr   nz, .jp_10DB                             ; $10B4: $20 $25
-    ld   a, [$D464]                               ; $10B6: $FA $64 $D4
+    ld   a, [wD464]                               ; $10B6: $FA $64 $D4
     and  a                                        ; $10B9: $A7
     jr   nz, .jp_10DB                             ; $10BA: $20 $1F
 
@@ -1637,7 +1637,7 @@ InitGotItemSequence::
 
 .jp_10DB
     xor  a                                        ; $10DB: $AF
-    ld   [$D45F], a                               ; $10DC: $EA $5F $D4
+    ld   [wD45F], a                               ; $10DC: $EA $5F $D4
 
 .jp_10DF
     ldh  a, [$FFB7]                               ; $10DF: $F0 $B7
@@ -1680,7 +1680,7 @@ InitGotItemSequence::
     ldh  [$FF9C], a                               ; $1123: $E0 $9C
     ld   [$DDD6], a                               ; $1125: $EA $D6 $DD
     ld   [$DDD7], a                               ; $1128: $EA $D7 $DD
-    ld   [$D464], a                               ; $112B: $EA $64 $D4
+    ld   [wD464], a                               ; $112B: $EA $64 $D4
     call label_27F2                               ; $112E: $CD $F2 $27
     ld   a, WAVE_SFX_LINK_DIES                    ; $1131: $3E $08
     ldh  [hWaveSfx], a                            ; $1133: $E0 $F3
@@ -3101,7 +3101,7 @@ ELSE
 ENDC
 
 .label_1A06
-    ld   a, [$D463]                               ; $1A06: $FA $63 $D4
+    ld   a, [wD463]                               ; $1A06: $FA $63 $D4
     cp   $01                                      ; $1A09: $FE $01
     jr   z, .label_1A0F                           ; $1A0B: $28 $02
     ld   a, $00                                   ; $1A0D: $3E $00

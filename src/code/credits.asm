@@ -655,7 +655,7 @@ func_017_4839::
 
 jr_017_4846:
     ld   [wNoiseSfxSeaWavesCounter], a            ; $4846: $EA $14 $C1
-    ld   a, [$D466]                               ; $4849: $FA $66 $D4
+    ld   a, [wD466]                               ; $4849: $FA $66 $D4
     and  a                                        ; $484C: $A7
     jr   nz, jr_017_485D                          ; $484D: $20 $0E
 
@@ -664,11 +664,11 @@ jr_017_4846:
     call GetRandomByte                            ; $4853: $CD $0D $28
     and  $7F                                      ; $4856: $E6 $7F
     add  $50                                      ; $4858: $C6 $50
-    ld   [$D466], a                               ; $485A: $EA $66 $D4
+    ld   [wD466], a                               ; $485A: $EA $66 $D4
 
 jr_017_485D:
     dec  a                                        ; $485D: $3D
-    ld   [$D466], a                               ; $485E: $EA $66 $D4
+    ld   [wD466], a                               ; $485E: $EA $66 $D4
     ret                                           ; $4861: $C9
 
 Data_017_4862::
@@ -3189,7 +3189,7 @@ CreditsWaterNoiseFadingOutHandler::
     ld   [$C28F], a                               ; $6031: $EA $8F $C2
     ld   [wNoiseSfxSeaWavesCounter], a            ; $6034: $EA $14 $C1
     ld   a, $80                                   ; $6037: $3E $80
-    ld   [$D466], a                               ; $6039: $EA $66 $D4
+    ld   [wD466], a                               ; $6039: $EA $66 $D4
     ld   hl, wLCDControl                          ; $603C: $21 $FD $D6
     res  3, [hl]                                  ; $603F: $CB $9E
     ld   hl, wGameplaySubtype                     ; $6041: $21 $96 $DB

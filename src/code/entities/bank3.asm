@@ -1045,7 +1045,7 @@ EntityFallHandler::
     and  $02                                      ; $4CE6: $E6 $02
     jr   nz, jr_003_4CEF                          ; $4CE8: $20 $05
 
-    ld   hl, $D460                                ; $4CEA: $21 $60 $D4
+    ld   hl, wD460                                ; $4CEA: $21 $60 $D4
     ld   [hl], $01                                ; $4CED: $36 $01
 
 jr_003_4CEF:
@@ -6743,7 +6743,7 @@ jr_003_7018:
     call GetEntityTransitionCountdown             ; $7027: $CD $05 $0C
     ld   [hl], $40                                ; $702A: $36 $40
     ld   a, $40                                   ; $702C: $3E $40
-    ld   [$D464], a                               ; $702E: $EA $64 $D4
+    ld   [wD464], a                               ; $702E: $EA $64 $D4
     ; reset sword parameter
     xor  a                                        ; $7031: $AF
     ld   [wSwordAnimationState], a                ; $7032: $EA $37 $C1

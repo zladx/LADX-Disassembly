@@ -3712,12 +3712,12 @@ jr_018_5B6A:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5B7E: $E0 $A1
     ld   [wC167], a                               ; $5B80: $EA $67 $C1
     call func_018_7DE8                            ; $5B83: $CD $E8 $7D
-    ld   a, [$D468]                               ; $5B86: $FA $68 $D4
+    ld   a, [wD468]                               ; $5B86: $FA $68 $D4
     and  a                                        ; $5B89: $A7
     jr   z, jr_018_5B90                           ; $5B8A: $28 $04
 
     dec  a                                        ; $5B8C: $3D
-    ld   [$D468], a                               ; $5B8D: $EA $68 $D4
+    ld   [wD468], a                               ; $5B8D: $EA $68 $D4
 
 jr_018_5B90:
     ldh  a, [hActiveEntityState]                  ; $5B90: $F0 $F0
@@ -3734,7 +3734,7 @@ func_018_5B9D::
     ret  z                                        ; $5BA2: $C8
 
     ld   a, $40                                   ; $5BA3: $3E $40
-    ld   [$D468], a                               ; $5BA5: $EA $68 $D4
+    ld   [wD468], a                               ; $5BA5: $EA $68 $D4
     ld   a, $0F                                   ; $5BA8: $3E $0F
     ldh  [hFFA5], a                               ; $5BAA: $E0 $A5
     ld   a, $01                                   ; $5BAC: $3E $01
@@ -3742,12 +3742,12 @@ func_018_5B9D::
     jp   IncrementEntityState                     ; $5BB1: $C3 $12 $3B
 
 func_018_5BB4::
-    ld   a, [$D468]                               ; $5BB4: $FA $68 $D4
+    ld   a, [wD468]                               ; $5BB4: $FA $68 $D4
     and  a                                        ; $5BB7: $A7
     ret  nz                                       ; $5BB8: $C0
 
     ld   a, $18                                   ; $5BB9: $3E $18
-    ld   [$D468], a                               ; $5BBB: $EA $68 $D4
+    ld   [wD468], a                               ; $5BBB: $EA $68 $D4
     ld   hl, wEntitiesDirectionTable              ; $5BBE: $21 $80 $C3
     add  hl, bc                                   ; $5BC1: $09
     ld   [hl], $01                                ; $5BC2: $36 $01
@@ -3758,7 +3758,7 @@ func_018_5BB4::
     jp   IncrementEntityState                     ; $5BCD: $C3 $12 $3B
 
 func_018_5BD0::
-    ld   a, [$D468]                               ; $5BD0: $FA $68 $D4
+    ld   a, [wD468]                               ; $5BD0: $FA $68 $D4
     and  a                                        ; $5BD3: $A7
     ret  nz                                       ; $5BD4: $C0
 
@@ -3788,11 +3788,11 @@ jr_018_5BE7:
     add  hl, bc                                   ; $5BFC: $09
     ld   [hl], $02                                ; $5BFD: $36 $02
     ld   a, $10                                   ; $5BFF: $3E $10
-    ld   [$D468], a                               ; $5C01: $EA $68 $D4
+    ld   [wD468], a                               ; $5C01: $EA $68 $D4
     jp   IncrementEntityState                     ; $5C04: $C3 $12 $3B
 
 func_018_5C07::
-    ld   a, [$D468]                               ; $5C07: $FA $68 $D4
+    ld   a, [wD468]                               ; $5C07: $FA $68 $D4
     and  a                                        ; $5C0A: $A7
     ret  nz                                       ; $5C0B: $C0
 

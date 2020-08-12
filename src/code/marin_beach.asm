@@ -102,7 +102,7 @@ MarineBeachPrepare3::
     ld   a, $40                                   ; $62A5: $3E $40
     ld   [$C114], a                               ; $62A7: $EA $14 $C1
     ld   a, $A0                                   ; $62AA: $3E $A0
-    ld   [$D466], a                               ; $62AC: $EA $66 $D4
+    ld   [wD466], a                               ; $62AC: $EA $66 $D4
     ld   a, $01                                   ; $62AF: $3E $01
     ld   [$DDD5], a                               ; $62B1: $EA $D5 $DD
     ld   a, $E0                                   ; $62B4: $3E $E0
@@ -437,7 +437,7 @@ func_001_651E::
 
 jr_001_652E::
     ld   [$C114], a                               ; $652E: $EA $14 $C1
-    ld   a, [$D466]                               ; $6531: $FA $66 $D4
+    ld   a, [wD466]                               ; $6531: $FA $66 $D4
     and  a                                        ; $6534: $A7
     jr   nz, jr_001_6545                          ; $6535: $20 $0E
     ld   a, JINGLE_SEAGULL                        ; $6537: $3E $21
@@ -445,11 +445,11 @@ jr_001_652E::
     call GetRandomByte                            ; $653B: $CD $0D $28
     and  $7F                                      ; $653E: $E6 $7F
     add  a, $60                                   ; $6540: $C6 $60
-    ld   [$D466], a                               ; $6542: $EA $66 $D4
+    ld   [wD466], a                               ; $6542: $EA $66 $D4
 
 jr_001_6545::
     dec  a                                        ; $6545: $3D
-    ld   [$D466], a                               ; $6546: $EA $66 $D4
+    ld   [wD466], a                               ; $6546: $EA $66 $D4
     ldh  a, [$FF97]                               ; $6549: $F0 $97
     dec  a                                        ; $654B: $3D
     cp   $C0                                      ; $654C: $FE $C0

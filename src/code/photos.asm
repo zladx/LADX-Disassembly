@@ -1002,7 +1002,7 @@ JumpTable_037_4659::
 
 .else_467E_37:
     ld   [wNoiseSfxSeaWavesCounter], a            ; $467E: $EA $14 $C1
-    ld   a, [$D466]                               ; $4681: $FA $66 $D4
+    ld   a, [wD466]                               ; $4681: $FA $66 $D4
     and  a                                        ; $4684: $A7
     jr   nz, .else_4695_37                        ; $4685: $20 $0E
 
@@ -1011,11 +1011,11 @@ JumpTable_037_4659::
     call GetRandomByte                            ; $468B: $CD $0D $28
     and  %01111111                                ; $468E: $E6 $7F
     add  $60                                      ; $4690: $C6 $60
-    ld   [$D466], a                               ; $4692: $EA $66 $D4
+    ld   [wD466], a                               ; $4692: $EA $66 $D4
 
 .else_4695_37:
     dec  a                                        ; $4695: $3D
-    ld   [$D466], a                               ; $4696: $EA $66 $D4
+    ld   [wD466], a                               ; $4696: $EA $66 $D4
     ld   a, $37                                   ; $4699: $3E $37
     call func_A9B                                 ; $469B: $CD $9B $0A
     ld   a, $37                                   ; $469E: $3E $37

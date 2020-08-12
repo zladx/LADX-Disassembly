@@ -4108,7 +4108,7 @@ Data_004_681C::
 
 TractorDeviceEntityHandler::
 ReversedTractorDeviceEntityHandler::
-    ld   hl, $D45E                                ; $6824: $21 $5E $D4
+    ld   hl, wD45E                                ; $6824: $21 $5E $D4
     inc  [hl]                                     ; $6827: $34
     ld   de, Data_004_6814                        ; $6828: $11 $14 $68
     ldh  a, [hMapId]                              ; $682B: $F0 $F7

@@ -1905,37 +1905,84 @@ wWarp3DestinationY::
 wPieceOfPowerKillCount::
   ds 1 ; D415
 
+; TODO comment
 wWarpPositions::
-wWarp0PositionTileIndex:: ; D416
-  ; Position of warp 0, as a tile index on the map
-  ds 1
+; Position of warp 0, as a tile index on the map
+wWarp0PositionTileIndex::
+  ds 1 ; D416
 
-wWarp1PositionTileIndex:: ; D417
-  ; Position of warp 1, as a tile index on the map
-  ds 1
+; Position of warp 1, as a tile index on the map
+wWarp1PositionTileIndex::
+  ds 1 ; D417
 
-wWarp2PositionTileIndex:: ; D418
-  ; Position of warp 2, as a tile index on the map
-  ds 1
+; Position of warp 2, as a tile index on the map
+wWarp2PositionTileIndex::
+  ds 1 ; D418
 
-wWarp3PositionTileIndex:: ; D419
-  ; Position of warp 3, as a tile index on the map
-  ds 1
+; Position of warp 3, as a tile index on the map
+wWarp3PositionTileIndex::
+  ds 1 ; D419
 
-; Unlabeled
-ds $48
-
-wCompassSfxCountdown:: ; D462
-  ; Each frame decrements the value.
-  ; When reaching 0, play the compass sfx.
-  ds 1
+; not used
+wD41A::
+  ds 68 ; D41A - D45D
 
 ; Unlabeled
-ds 9
+wD45E::
+  ds 1 ; D45E
 
-wBossDefeated:: ; D46C
-  ; A boss was just defeated
-  ds 1
+; Unlabeled
+wD45F::
+  ds 1 ; D45F
+
+; Unlabeled
+wD460::
+  ds 1 ; D460
+
+; Unlabeled
+wD461::
+  ds 1 ; D461
+
+; Each frame decrements the value.
+; When reaching 0, play the compass sfx.
+wCompassSfxCountdown::
+  ds 1 ; D462
+
+; Unlabeled
+wD463::
+  ds 1 ; D463
+
+; Unlabeled
+wD464::
+  ds 1 ; D464
+
+; Unlabeled
+wD465::
+  ds 1 ; D465
+
+; Unlabeled
+wD466::
+  ds 1 ; D466
+
+; not used
+wD467::
+  ds 1 ; D467
+
+; Unlabeled
+wD468::
+  ds 1 ; D463
+
+; not used
+wD469::
+  ds 2 ; D469 - D46A
+
+; Unlabeled
+wD46B::
+  ds 1 ; D46B
+
+; A boss was just defeated
+wBossDefeated::
+  ds 1 ; D46C
 
 ; Unlabeled
 ds $4

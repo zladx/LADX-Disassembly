@@ -563,7 +563,7 @@ jr_027_7910:
     swap a                                        ; $7914: $CB $37
     ldh  [hVolumeLeft], a                      ; $7916: $E0 $AA
     ld   a, $32                                   ; $7918: $3E $32
-    ld   [$D466], a                               ; $791A: $EA $66 $D4
+    ld   [wD466], a                               ; $791A: $EA $66 $D4
     ld   a, $90                                   ; $791D: $3E $90
     ld   [$D020], a                               ; $791F: $EA $20 $D0
     jp   label_027_7BAB                           ; $7922: $C3 $AB $7B
@@ -629,7 +629,7 @@ func_027_79E6::
     jp   RenderActiveEntitySpritesRectUsingAllOAM ; $79EF: $C3 $E0 $3C
 
 func_027_79F2::
-    ld   a, [$D466]                               ; $79F2: $FA $66 $D4
+    ld   a, [wD466]                               ; $79F2: $FA $66 $D4
     and  a                                        ; $79F5: $A7
     jr   nz, jr_027_7A06                          ; $79F6: $20 $0E
 
@@ -638,11 +638,11 @@ func_027_79F2::
     call GetRandomByte                            ; $79FC: $CD $0D $28
     and  $7F                                      ; $79FF: $E6 $7F
     add  $30                                      ; $7A01: $C6 $30
-    ld   [$D466], a                               ; $7A03: $EA $66 $D4
+    ld   [wD466], a                               ; $7A03: $EA $66 $D4
 
 jr_027_7A06:
     dec  a                                        ; $7A06: $3D
-    ld   [$D466], a                               ; $7A07: $EA $66 $D4
+    ld   [wD466], a                               ; $7A07: $EA $66 $D4
     ret                                           ; $7A0A: $C9
 
 Data_027_7A0B::

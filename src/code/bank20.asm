@@ -1293,7 +1293,7 @@ ResetRoomVariables::
     ld   [$C50A], a                               ; $4CBB: $EA $0A $C5
     ldh  [$FFAC], a                               ; $4CBE: $E0 $AC
     ld   [wC113], a                               ; $4CC0: $EA $13 $C1
-    ld   [$D460], a                               ; $4CC3: $EA $60 $D4
+    ld   [wD460], a                               ; $4CC3: $EA $60 $D4
     ld   [wInBossBattle], a                       ; $4CC6: $EA $BE $C1
     ld   [$C50E], a                               ; $4CC9: $EA $0E $C5
     ld   [$C3C8], a                               ; $4CCC: $EA $C8 $C3
@@ -3687,11 +3687,11 @@ func_020_6215::
     jp   nc, label_020_628D                       ; $6223: $D2 $8D $62
 
 jr_020_6226:
-    ld   a, [$D46B]                               ; $6226: $FA $6B $D4
+    ld   a, [wD46B]                               ; $6226: $FA $6B $D4
     and  $F8                                      ; $6229: $E6 $F8
     add  $50                                      ; $622B: $C6 $50
     ld   h, a                                     ; $622D: $67
-    ld   a, [$D46B]                               ; $622E: $FA $6B $D4
+    ld   a, [wD46B]                               ; $622E: $FA $6B $D4
     rla                                           ; $6231: $17
     rla                                           ; $6232: $17
     rla                                           ; $6233: $17
@@ -3702,7 +3702,7 @@ jr_020_6226:
     and  $20                                      ; $623C: $E6 $20
     jr   z, jr_020_624D                           ; $623E: $28 $0D
 
-    ld   a, [$D46B]                               ; $6240: $FA $6B $D4
+    ld   a, [wD46B]                               ; $6240: $FA $6B $D4
     and  $38                                      ; $6243: $E6 $38
     cp   $20                                      ; $6245: $FE $20
     jr   nc, jr_020_624D                          ; $6247: $30 $04
@@ -3716,7 +3716,7 @@ jr_020_624D:
     and  $10                                      ; $6250: $E6 $10
     jr   z, jr_020_6261                           ; $6252: $28 $0D
 
-    ld   a, [$D46B]                               ; $6254: $FA $6B $D4
+    ld   a, [wD46B]                               ; $6254: $FA $6B $D4
     and  $07                                      ; $6257: $E6 $07
     cp   $04                                      ; $6259: $FE $04
     jr   c, jr_020_6261                           ; $625B: $38 $04

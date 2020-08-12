@@ -281,7 +281,7 @@ jr_014_4B2A:
     ld   [$DB47], a                               ; $4B3B: $EA $47 $DB
 
 jr_014_4B3E:
-    ld   a, [$D464]                               ; $4B3E: $FA $64 $D4
+    ld   a, [wD464]                               ; $4B3E: $FA $64 $D4
     and  a                                        ; $4B41: $A7
     ret  z                                        ; $4B42: $C8
 
@@ -300,7 +300,7 @@ jr_014_4B4D:
     ld   [wOBJ0Palette], a                        ; $4B57: $EA $98 $DB
 
 jr_014_4B5A:
-    ld   hl, $D464                                ; $4B5A: $21 $64 $D4
+    ld   hl, wD464                                ; $4B5A: $21 $64 $D4
     dec  [hl]                                     ; $4B5D: $35
     ret  z                                        ; $4B5E: $C8
 
@@ -348,7 +348,7 @@ Data_014_4B9F::
     db   $E0, $7F, $FF, $7F, $FF, $3F, $00, $00
 
 func_014_4BA7::
-    ld   a, [$D464]                               ; $4BA7: $FA $64 $D4
+    ld   a, [wD464]                               ; $4BA7: $FA $64 $D4
     cp   $3E                                      ; $4BAA: $FE $3E
     ret  c                                        ; $4BAC: $D8
 
@@ -397,7 +397,7 @@ func_014_4BDA::
     jr   func_014_4BDA                            ; $4BED: $18 $EB
 
 func_014_4BEF::
-    ld   a, [$D464]                               ; $4BEF: $FA $64 $D4
+    ld   a, [wD464]                               ; $4BEF: $FA $64 $D4
     cp   $20                                      ; $4BF2: $FE $20
     ret  nc                                       ; $4BF4: $D0
 

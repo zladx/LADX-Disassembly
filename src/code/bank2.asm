@@ -143,7 +143,7 @@ ENDC
 
 IF __PATCH_0__
     ld   a, [wLinkMotionState]
-    ld   [$d463], a
+    ld   [wD463], a
 ENDC
 
 .return
@@ -377,7 +377,7 @@ jr_002_43B9:
 
 jr_002_43BA:
     ld   a, [wIndoorRoom]                         ; $43BA: $FA $AE $DB
-    ld   [$D46B], a                               ; $43BD: $EA $6B $D4
+    ld   [wD46B], a                               ; $43BD: $EA $6B $D4
     call func_002_44C2                            ; $43C0: $CD $C2 $44
     ldh  a, [hLinkPositionZ]                      ; $43C3: $F0 $A2
     and  a                                        ; $43C5: $A7
@@ -1261,14 +1261,14 @@ ENDC
     ld   [wC167], a                               ; $4A43: $EA $67 $C1
     ld   a, $03                                   ; $4A46: $3E $03
     ld   [$C5A3], a                               ; $4A48: $EA $A3 $C5
-    ld   a, [$D465]                               ; $4A4B: $FA $65 $D4
+    ld   a, [wD465]                               ; $4A4B: $FA $65 $D4
     cp   $47                                      ; $4A4E: $FE $47
     ret  z                                        ; $4A50: $C8
 
     jr   jr_002_4A6C                              ; $4A51: $18 $19
 
 jr_002_4A53:
-    ld   a, [$D465]                               ; $4A53: $FA $65 $D4
+    ld   a, [wD465]                               ; $4A53: $FA $65 $D4
     cp   $47                                      ; $4A56: $FE $47
     jr   z, jr_002_4A7A                           ; $4A58: $28 $20
 
@@ -1283,7 +1283,7 @@ jr_002_4A53:
     ld   [$C5A3], a                               ; $4A69: $EA $A3 $C5
 
 jr_002_4A6C:
-    ld   a, [$D461]                               ; $4A6C: $FA $61 $D4
+    ld   a, [wD461]                               ; $4A6C: $FA $61 $D4
     ld   e, a                                     ; $4A6F: $5F
     ld   d, b                                     ; $4A70: $50
     ld   hl, wEntitiesStateTable                  ; $4A71: $21 $90 $C2
@@ -2118,7 +2118,7 @@ jr_002_4F3C:
     ld   [wC16D], a                               ; $4F4D: $EA $6D $C1
 
     ld   a, [wIndoorRoom]                         ; $4F50: $FA $AE $DB
-    ld   [$D46B], a                               ; $4F53: $EA $6B $D4
+    ld   [wD46B], a                               ; $4F53: $EA $6B $D4
     ld   hl, wDialogState                         ; $4F56: $21 $9F $C1
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $4F59: $F0 $A1
     or   [hl]                                     ; $4F5B: $B6
@@ -2350,7 +2350,7 @@ jr_002_507A:
     ldh  a, [hLinkPositionX]                      ; $5094: $F0 $98
     ld   [wWarp0DestinationX], a                  ; $5096: $EA $04 $D4
     ld   a, [wLinkMotionState]                    ; $5099: $FA $1C $C1
-    ld   [$D463], a                               ; $509C: $EA $63 $D4
+    ld   [wD463], a                               ; $509C: $EA $63 $D4
     jp   ApplyMapFadeOutTransitionWithNoise       ; $509F: $C3 $7D $0C
 
 jr_002_50A2:
@@ -4474,7 +4474,7 @@ ELSE
 ENDC
     jr   z, jr_002_613D                           ; $6120: $28 $1B
 
-    ld   a, [$D464]                               ; $6122: $FA $64 $D4
+    ld   a, [wD464]                               ; $6122: $FA $64 $D4
     and  a                                        ; $6125: $A7
     jp   nz, label_002_61E7                       ; $6126: $C2 $E7 $61
 
@@ -6521,7 +6521,7 @@ ENDC
     ld   a, [$C13E]                               ; $708D: $FA $3E $C1
     ld   hl, wIsUsingSpinAttack                   ; $7090: $21 $21 $C1
     or   [hl]                                     ; $7093: $B6
-    ld   hl, $D45E                                ; $7094: $21 $5E $D4
+    ld   hl, wD45E                                ; $7094: $21 $5E $D4
     or   [hl]                                     ; $7097: $B6
     jr   nz, label_002_70D8                       ; $7098: $20 $3E
 
@@ -7364,7 +7364,7 @@ func_002_754F::
 func_002_755B::
     call func_002_7512                            ; $755B: $CD $12 $75
     ld   c, $04                                   ; $755E: $0E $04
-    ld   a, [$D463]                               ; $7560: $FA $63 $D4
+    ld   a, [wD463]                               ; $7560: $FA $63 $D4
     cp   $01                                      ; $7563: $FE $01
     jr   z, jr_002_7582                           ; $7565: $28 $1B
 

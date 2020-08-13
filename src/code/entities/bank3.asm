@@ -671,7 +671,7 @@ EntityInitRacoon::
 
     ld   a, $02                                   ; $4AF7: $3E $02
     ldh  [rSVBK], a                               ; $4AF9: $E0 $70
-    ld   hl, $DC88                                ; $4AFB: $21 $88 $DC
+    ld   hl, wDC88                                ; $4AFB: $21 $88 $DC
     ld   de, Data_003_4AC6                        ; $4AFE: $11 $C6 $4A
 
 jr_003_4B01:
@@ -1935,7 +1935,7 @@ func_003_51C9::
     add  hl, de                                   ; $51EA: $19
     pop  af                                       ; $51EB: $F1
     ld   [hl], a                                  ; $51EC: $77
-    ld   [$DDD8], a                               ; $51ED: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $51ED: $EA $D8 $DD
     ld   a, $03                                   ; $51F0: $3E $03
     call func_2BF                                 ; $51F2: $CD $2F $0B
 
@@ -4021,7 +4021,7 @@ ENDC
 
 func_003_5FBC::
 IF __PATCH_0__
-    ld   a, [$dc52]
+    ld   a, [wDC52]
     inc  a
     jp   nz, HoldEntityAboveLink
     ld   a, $80
@@ -5309,7 +5309,7 @@ func_003_6771::
     ld   a, $09                                   ; $67EB: $3E $09
     ld   [hl+], a                                 ; $67ED: $22
     ld   [hl], a                                  ; $67EE: $77
-    ld   [$DDD8], a                               ; $67EF: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $67EF: $EA $D8 $DD
     ld   a, $83                                   ; $67F2: $3E $83
     call func_2BF                                 ; $67F4: $CD $2F $0B
     dec  hl                                       ; $67F7: $2B
@@ -5369,7 +5369,7 @@ jr_003_6828:
     add  hl, de                                   ; $684C: $19
     ld   a, $E1                                   ; $684D: $3E $E1
     ld   [hl], a                                  ; $684F: $77
-    ld   [$DDD8], a                               ; $6850: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $6850: $EA $D8 $DD
     ld   a, $83                                   ; $6853: $3E $83
     call func_2BF                                 ; $6855: $CD $2F $0B
 IF __PATCH_3__
@@ -5466,7 +5466,7 @@ jr_003_68BE:
     add  hl, bc                                   ; $68CF: $09
     ld   a, [hl]                                  ; $68D0: $7E
     ld   [de], a                                  ; $68D1: $12
-    ld   [$DDD8], a                               ; $68D2: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $68D2: $EA $D8 $DD
     ld   a, c                                     ; $68D5: $79
     and  $02                                      ; $68D6: $E6 $02
     rla                                           ; $68D8: $17
@@ -9009,7 +9009,7 @@ ApplySwordIntersectionWithObjects::
     cp   $05                                      ; $7CEC: $FE $05
     ret  z                                        ; $7CEE: $C8
 
-    ld   a, [$DDD6]                               ; $7CEF: $FA $D6 $DD
+    ld   a, [wDDD6]                               ; $7CEF: $FA $D6 $DD
     and  a                                        ; $7CF2: $A7
     jp   nz, jr_003_7E03                          ; $7CF3: $C2 $03 $7E
 
@@ -9037,7 +9037,7 @@ jr_003_7CFD:
     pop  hl                                       ; $7D15: $E1
     ld   a, $AC                                   ; $7D16: $3E $AC
     ld   [hl], a                                  ; $7D18: $77
-    ld   [$DDD8], a                               ; $7D19: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $7D19: $EA $D8 $DD
     push bc                                       ; $7D1C: $C5
     ld   c, e                                     ; $7D1D: $4B
     ld   b, d                                     ; $7D1E: $42
@@ -9076,9 +9076,9 @@ jr_003_7CFD:
     jr   z, jr_003_7D63                           ; $7D57: $28 $0A
 
     ld   a, $40                                   ; $7D59: $3E $40
-    ld   [$DDD6], a                               ; $7D5B: $EA $D6 $DD
+    ld   [wDDD6], a                               ; $7D5B: $EA $D6 $DD
     ld   a, $0B                                   ; $7D5E: $3E $0B
-    ld   [$DDD7], a                               ; $7D60: $EA $D7 $DD
+    ld   [wDDD7], a                               ; $7D60: $EA $D7 $DD
 
 jr_003_7D63:
     ld   de, Data_003_69A2                        ; $7D63: $11 $A2 $69

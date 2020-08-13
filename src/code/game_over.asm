@@ -154,7 +154,7 @@ LinkPassOut4Handler::
     cp   $00                                      ; $42E9: $FE $00 ; $42E9: $FE $00
     jr   z, jr_001_42F2                           ; $42EB: $28 $05 ; $42EB: $28 $05
 
-    ld   [$DBD1], a                               ; $42ED: $EA $D1 $DB ; $42ED: $EA $D1 $DB
+    ld   [wDBD1], a                               ; $42ED: $EA $D1 $DB ; $42ED: $EA $D1 $DB
     jr   jr_001_42F5                              ; $42F0: $18 $03 ; $42F0: $18 $03
 
 jr_001_42F2::

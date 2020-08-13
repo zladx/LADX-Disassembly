@@ -504,7 +504,7 @@ func_005_512B::
     jr   nz, jr_005_514F                          ; $5138: $20 $15
 
     ld   a, $01                                   ; $513A: $3E $01
-    ld   [$DE00], a                               ; $513C: $EA $00 $DE
+    ld   [wDE00], a                               ; $513C: $EA $00 $DE
     ld   a, MUSIC_TOOL_ACQUIRED                   ; $513F: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $5141: $EA $68 $D3
     ld   a, $05                                   ; $5144: $3E $05
@@ -530,7 +530,7 @@ Data_005_515F::
 
 func_005_5161::
     ld   a, $01                                   ; $5161: $3E $01
-    ld   [$DE00], a                               ; $5163: $EA $00 $DE
+    ld   [wDE00], a                               ; $5163: $EA $00 $DE
     call GetEntityTransitionCountdown             ; $5166: $CD $05 $0C
     jr   nz, jr_005_5197                          ; $5169: $20 $2C
 

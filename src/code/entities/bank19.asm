@@ -359,7 +359,7 @@ jr_019_4226:
     call ResetSpinAttack                          ; $4267: $CD $AF $0C
     ld   [$C198], a                               ; $426A: $EA $98 $C1
     ld   a, $51                                   ; $426D: $3E $51
-    ld   [$DBCB], a                               ; $426F: $EA $CB $DB
+    ld   [wDBCB], a                               ; $426F: $EA $CB $DB
     ld   a, $0C                                   ; $4272: $3E $0C
     ldh  [hWaveSfx], a                            ; $4274: $E0 $F3
     jp   ClearEntityStatus_19                            ; $4276: $C3 $61 $7E
@@ -851,7 +851,7 @@ jr_019_4663:
     add  hl, de                                   ; $4675: $19
     ld   e, l                                     ; $4676: $5D
     ld   d, h                                     ; $4677: $54
-    ld   hl, $DC8A                                ; $4678: $21 $8A $DC
+    ld   hl, wDC8A                                ; $4678: $21 $8A $DC
 
 jr_019_467B:
     ld   a, [de]                                  ; $467B: $1A
@@ -1469,7 +1469,7 @@ func_019_4A90::
     ld   d, $00                                   ; $4AA4: $16 $00
     ld   hl, Data_019_4A50                        ; $4AA6: $21 $50 $4A
     add  hl, de                                   ; $4AA9: $19
-    ld   de, $DC84                                ; $4AAA: $11 $84 $DC
+    ld   de, wDC84                                ; $4AAA: $11 $84 $DC
 
 jr_019_4AAD:
     ld   a, [hl+]                                 ; $4AAD: $2A
@@ -1736,7 +1736,7 @@ jr_019_4C21:
 
     push bc                                       ; $4C5A: $C5
     ld   a, $C1                                   ; $4C5B: $3E $C1
-    ld   [$DDD8], a                               ; $4C5D: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $4C5D: $EA $D8 $DD
     ld   a, $19                                   ; $4C60: $3E $19
     call func_91D                                ; $4C62: $CD $1D $09
     ldh  a, [$FFCF]                               ; $4C65: $F0 $CF
@@ -1751,7 +1751,7 @@ jr_019_4C21:
     ld   a, l                                     ; $4C73: $7D
     ldh  [$FFD0], a                               ; $4C74: $E0 $D0
     ld   a, $CB                                   ; $4C76: $3E $CB
-    ld   [$DDD8], a                               ; $4C78: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $4C78: $EA $D8 $DD
     ld   a, $19                                   ; $4C7B: $3E $19
     call func_91D                                ; $4C7D: $CD $1D $09
     pop  hl                                       ; $4C80: $E1
@@ -1804,7 +1804,7 @@ jr_019_4C88:
     ldh  [hJingle], a                             ; $4CC8: $E0 $F2
     call func_019_4D45                            ; $4CCA: $CD $45 $4D
     call PlayBombExplosionSfx                     ; $4CCD: $CD $4B $0C
-    ld   de, $DC5C                                ; $4CD0: $11 $5C $DC
+    ld   de, wDC5C                                ; $4CD0: $11 $5C $DC
     ld   hl, $FF70                                ; $4CD3: $21 $70 $FF
 
 jr_019_4CD6:
@@ -2572,7 +2572,7 @@ FlyingRoosterState0Handler::
 
     push bc                                       ; $5239: $C5
     ld   a, $0C                                   ; $523A: $3E $0C
-    ld   [$DDD8], a                               ; $523C: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $523C: $EA $D8 $DD
     ld   a, $19                                   ; $523F: $3E $19
     call func_91D                                 ; $5241: $CD $1D $09
     ldh  a, [$FFCF]                               ; $5244: $F0 $CF
@@ -2587,7 +2587,7 @@ FlyingRoosterState0Handler::
     ld   a, l                                     ; $5252: $7D
     ldh  [$FFD0], a                               ; $5253: $E0 $D0
     ld   a, $C6                                   ; $5255: $3E $C6
-    ld   [$DDD8], a                               ; $5257: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $5257: $EA $D8 $DD
     ld   a, $19                                   ; $525A: $3E $19
     call func_91D                                 ; $525C: $CD $1D $09
     pop  hl                                       ; $525F: $E1
@@ -2677,7 +2677,7 @@ FlyingRoosterState1Handler::
 
     push bc                                       ; $52F0: $C5
     ld   a, $91                                   ; $52F1: $3E $91
-    ld   [$DDD8], a                               ; $52F3: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $52F3: $EA $D8 $DD
     ld   a, $19                                   ; $52F6: $3E $19
     call func_91D                                 ; $52F8: $CD $1D $09
     ldh  a, [$FFCF]                               ; $52FB: $F0 $CF
@@ -2692,7 +2692,7 @@ FlyingRoosterState1Handler::
     ld   a, l                                     ; $5309: $7D
     ldh  [$FFD0], a                               ; $530A: $E0 $D0
     ld   a, $5E                                   ; $530C: $3E $5E
-    ld   [$DDD8], a                               ; $530E: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $530E: $EA $D8 $DD
     ld   a, $19                                   ; $5311: $3E $19
     call func_91D                                 ; $5313: $CD $1D $09
     pop  hl                                       ; $5316: $E1
@@ -4181,7 +4181,7 @@ func_019_5DAC::
     cp   $78                                      ; $5DB5: $FE $78
     jr   c, jr_019_5DF7                           ; $5DB7: $38 $3E
 
-    ld   [$DBC8], a                               ; $5DB9: $EA $C8 $DB
+    ld   [wDBC8], a                               ; $5DB9: $EA $C8 $DB
     ldh  a, [hMapRoom]                            ; $5DBC: $F0 $F6
     ld   e, a                                     ; $5DBE: $5F
     ld   d, $00                                   ; $5DBF: $16 $00
@@ -4979,8 +4979,8 @@ func_019_63B5::
     jr   z, jr_019_63D8                           ; $63B8: $28 $1E
 
     ld   a, $05                                   ; $63BA: $3E $05
-    ld   [$DC90], a                               ; $63BC: $EA $90 $DC
-    ld   hl, $DC91                                ; $63BF: $21 $91 $DC
+    ld   [wDC90], a                               ; $63BC: $EA $90 $DC
+    ld   hl, wDC91                                ; $63BF: $21 $91 $DC
     ld   de, Data_019_63A3                        ; $63C2: $11 $A3 $63
     ldh  a, [hBaseScrollX]                        ; $63C5: $F0 $96
     and  a                                        ; $63C7: $A7
@@ -5359,7 +5359,7 @@ jr_019_68BA:
     ld   e, a                                     ; $68CF: $5F
     push bc                                       ; $68D0: $C5
     ld   c, $10                                   ; $68D1: $0E $10
-    ld   hl, $DC91                                ; $68D3: $21 $91 $DC
+    ld   hl, wDC91                                ; $68D3: $21 $91 $DC
 
 jr_019_68D6:
     ld   a, [de]                                  ; $68D6: $1A
@@ -5442,7 +5442,7 @@ jr_019_691E:
     ld   d, [hl]                                  ; $6936: $56
     ld   e, a                                     ; $6937: $5F
     ld   c, $34                                   ; $6938: $0E $34
-    ld   hl, $DC91                                ; $693A: $21 $91 $DC
+    ld   hl, wDC91                                ; $693A: $21 $91 $DC
 
 jr_019_693D:
     ld   a, [de]                                  ; $693D: $1A
@@ -6166,7 +6166,7 @@ BananasSchuleState2Handler::
     and  a                                        ; $6DBD: $A7
     jr   z, jr_019_6DD4                           ; $6DBE: $28 $14
 
-    ld   hl, $DC7A                                ; $6DC0: $21 $7A $DC
+    ld   hl, wDC7A                                ; $6DC0: $21 $7A $DC
     ld   a, $FF                                   ; $6DC3: $3E $FF
     ld   [hl+], a                                 ; $6DC5: $22
     ld   a, $7F                                   ; $6DC6: $3E $7F
@@ -7493,8 +7493,8 @@ jr_019_792F:
 IF __PATCH_0__
     ld   c, Data_019_78FE_B.end - Data_019_78FE_B
     ld   a, $08
-    ld   [$dc90], a
-    ld   hl, $dc91
+    ld   [wDC90], a
+    ld   hl, wDC91
     ld   de, Data_019_78FE_B
 
 jr_019_7951:
@@ -7787,8 +7787,8 @@ Data_019_7AB6:
 ._03 dw func_019_7B04
 
 func_019_7ABE:
-    ld   hl, $DCCF                                ; $7ABE: $21 $CF $DC
-    ld   de, $DCCF                                ; $7AC1: $11 $CF $DC
+    ld   hl, wDCCF                                ; $7ABE: $21 $CF $DC
+    ld   de, wDCCF                                ; $7AC1: $11 $CF $DC
     ld   a, [hl-]                                 ; $7AC4: $3A
     push af                                       ; $7AC5: $F5
     ld   a, [hl-]                                 ; $7AC6: $3A
@@ -7815,8 +7815,8 @@ jr_019_7ACA:
     ret                                           ; $7ADA: $C9
 
 func_019_7ADB:
-    ld   hl, $DCD0                                ; $7ADB: $21 $D0 $DC
-    ld   de, $DCD0                                ; $7ADE: $11 $D0 $DC
+    ld   hl, wDCD0                                ; $7ADB: $21 $D0 $DC
+    ld   de, wDCD0                                ; $7ADE: $11 $D0 $DC
     ld   a, [hl+]                                 ; $7AE1: $2A
     push af                                       ; $7AE2: $F5
     ld   a, [hl+]                                 ; $7AE3: $2A
@@ -7843,7 +7843,7 @@ jr_019_7AE7:
     ret                                           ; $7AF7: $C9
 
 func_019_7AF8:
-    ld   hl, $DCE0                                ; $7AF8: $21 $E0 $DC
+    ld   hl, wDCE0                                ; $7AF8: $21 $E0 $DC
     ld   e, $10                                   ; $7AFB: $1E $10
 
 jr_019_7AFD:
@@ -7855,7 +7855,7 @@ jr_019_7AFD:
     ret                                           ; $7B03: $C9
 
 func_019_7B04:
-    ld   hl, $DCF0                                ; $7B04: $21 $F0 $DC
+    ld   hl, wDCF0                                ; $7B04: $21 $F0 $DC
     ld   e, $10                                   ; $7B07: $1E $10
 
 jr_019_7B09:

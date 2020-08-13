@@ -310,13 +310,13 @@ func_024_7815::
     ld   hl, Data_024_7711                        ; $7816: $21 $11 $77
     add  hl, bc                                   ; $7819: $09
     ld   bc, $08                                  ; $781A: $01 $08 $00
-    ld   de, $DC10                                ; $781D: $11 $10 $DC
+    ld   de, wDC10                                ; $781D: $11 $10 $DC
     call CopyData                                 ; $7820: $CD $14 $29
     pop  bc                                       ; $7823: $C1
     ld   hl, Data_024_7789                        ; $7824: $21 $89 $77
     add  hl, bc                                   ; $7827: $09
     ld   bc, $08                                  ; $7828: $01 $08 $00
-    ld   de, $DC48                                ; $782B: $11 $48 $DC
+    ld   de, wDC48                                ; $782B: $11 $48 $DC
     call CopyData                                 ; $782E: $CD $14 $29
     xor  a                                        ; $7831: $AF
     ld   [wPaletteUnknownC], a                    ; $7832: $EA $D3 $DD
@@ -415,7 +415,7 @@ func_024_7A40::
     ld   hl, Data_024_7840                        ; $7A5B: $21 $40 $78
     add  hl, bc                                   ; $7A5E: $09
     ld   bc, $40                                ; $7A5F: $01 $40 $00
-    ld   de, $DC50                                ; $7A62: $11 $50 $DC
+    ld   de, wDC50                                ; $7A62: $11 $50 $DC
     call CopyData                                 ; $7A65: $CD $14 $29
     xor  a                                        ; $7A68: $AF
     ld   [wPaletteUnknownC], a                    ; $7A69: $EA $D3 $DD
@@ -480,7 +480,7 @@ func_024_7B77::
 .jr_024_7B8E
 
     ld   bc, $40                                ; $7B8E: $01 $40 $00
-    ld   de, $DC10                                ; $7B91: $11 $10 $DC
+    ld   de, wDC10                                ; $7B91: $11 $10 $DC
     call CopyData                                 ; $7B94: $CD $14 $29
 
     xor  a                                        ; $7B97: $AF

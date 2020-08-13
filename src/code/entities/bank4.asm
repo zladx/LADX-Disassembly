@@ -1168,7 +1168,7 @@ jr_004_547E:
     call GetEntityTransitionCountdown             ; $54E6: $CD $05 $0C
     ld   [hl], $40                                ; $54E9: $36 $40
     ld   a, $50                                   ; $54EB: $3E $50
-    ld   [$DBCB], a                               ; $54ED: $EA $CB $DB
+    ld   [wDBCB], a                               ; $54ED: $EA $CB $DB
 
 jr_004_54F0:
     ret                                           ; $54F0: $C9
@@ -1406,7 +1406,7 @@ jr_004_5628:
 
     push bc                                       ; $5653: $C5
     ldh  a, [hScratch0]                           ; $5654: $F0 $D7
-    ld   [$DDD8], a                               ; $5656: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $5656: $EA $D8 $DD
     ld   a, $04                                   ; $5659: $3E $04
     call func_91D                                ; $565B: $CD $1D $09
     pop  bc                                       ; $565E: $C1
@@ -4213,7 +4213,7 @@ jr_004_6884:
     call ResetSpinAttack                                ; $68C4: $CD $AF $0C
     ld   [$C198], a                               ; $68C7: $EA $98 $C1
     ld   a, $FF                                   ; $68CA: $3E $FF
-    ld   [$DBCB], a                               ; $68CC: $EA $CB $DB
+    ld   [wDBCB], a                               ; $68CC: $EA $CB $DB
     ld   a, WAVE_SFX_LINK_FALLS                   ; $68CF: $3E $0C
     ldh  [hWaveSfx], a                            ; $68D1: $E0 $F3
     ret                                           ; $68D3: $C9
@@ -5395,7 +5395,7 @@ jr_004_6F6C:
     ld   hl, wEntitiesUnknowTableR                ; $6FAD: $21 $90 $C3
     add  hl, bc                                   ; $6FB0: $09
     ld   [hl], a                                  ; $6FB1: $77
-    ld   hl, $DC78                                ; $6FB2: $21 $78 $DC
+    ld   hl, wDC78                                ; $6FB2: $21 $78 $DC
     ld   de, Data_004_6F30                        ; $6FB5: $11 $30 $6F
 
 jr_004_6FB8:
@@ -7318,7 +7318,7 @@ func_004_7AED::
     and  a                                        ; $7B29: $A7
     jr   z, jr_004_7B3F                           ; $7B2A: $28 $13
 
-    ld   hl, $DC88                                ; $7B2C: $21 $88 $DC
+    ld   hl, wDC88                                ; $7B2C: $21 $88 $DC
     ld   de, Data_004_7AE5                        ; $7B2F: $11 $E5 $7A
 
 jr_004_7B32:

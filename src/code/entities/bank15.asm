@@ -6448,7 +6448,7 @@ jr_015_746A:
 
     push bc                                       ; $7491: $C5
     ld   a, $9D                                   ; $7492: $3E $9D
-    ld   [$DDD8], a                               ; $7494: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $7494: $EA $D8 $DD
     ld   a, $15                                   ; $7497: $3E $15
     call func_91D                                ; $7499: $CD $1D $09
     pop  bc                                       ; $749C: $C1

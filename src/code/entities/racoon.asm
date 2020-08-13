@@ -591,7 +591,7 @@ TarinShield1Handler::
     and  a                                        ; $4CAD: $A7
     jr   z, jr_005_4CC3                           ; $4CAE: $28 $13
 
-    ld   hl, $DC88                                ; $4CB0: $21 $88 $DC
+    ld   hl, wDC88                                ; $4CB0: $21 $88 $DC
     ld   de, data_005_4C94                        ; $4CB3: $11 $94 $4C
 
 jr_005_4CB6:

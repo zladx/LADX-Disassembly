@@ -4887,7 +4887,7 @@ RevealMamuCave::
 
     push bc                                       ; $6321: $C5
     ld   a, $C6                                   ; $6322: $3E $C6
-    ld   [$DDD8], a                               ; $6324: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $6324: $EA $D8 $DD
     ld   a, $18                                   ; $6327: $3E $18
     call func_91D                                 ; $6329: $CD $1D $09
     pop  bc                                       ; $632C: $C1
@@ -8183,7 +8183,7 @@ jr_018_79CF:
     cp   $05                                      ; $79E3: $FE $05
     ret  z                                        ; $79E5: $C8
 
-    ld   a, [$DDD6]                               ; $79E6: $FA $D6 $DD
+    ld   a, [wDDD6]                               ; $79E6: $FA $D6 $DD
     and  a                                        ; $79E9: $A7
     ret  nz                                       ; $79EA: $C0
 
@@ -8194,7 +8194,7 @@ jr_018_79CF:
 jr_018_79F0:
     ld   a, $AC                                   ; $79F0: $3E $AC
     ld   [hl], a                                  ; $79F2: $77
-    ld   [$DDD8], a                               ; $79F3: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $79F3: $EA $D8 $DD
     ld   d, h                                     ; $79F6: $54
     ld   e, l                                     ; $79F7: $5D
     ld   hl, wEntitiesPrivateState1Table          ; $79F8: $21 $B0 $C2
@@ -8229,9 +8229,9 @@ jr_018_79F0:
     jr   z, jr_018_7A39                           ; $7A2D: $28 $0A
 
     ld   a, $40                                   ; $7A2F: $3E $40
-    ld   [$DDD6], a                               ; $7A31: $EA $D6 $DD
+    ld   [wDDD6], a                               ; $7A31: $EA $D6 $DD
     ld   a, $0B                                   ; $7A34: $3E $0B
-    ld   [$DDD7], a                               ; $7A36: $EA $D7 $DD
+    ld   [wDDD7], a                               ; $7A36: $EA $D7 $DD
 
 jr_018_7A39:
     call GetEntityTransitionCountdown             ; $7A39: $CD $05 $0C
@@ -8279,7 +8279,7 @@ label_018_7A5D:
     ld   e, [hl]                                  ; $7A79: $5E
     ld   a, $AB                                   ; $7A7A: $3E $AB
     ld   [de], a                                  ; $7A7C: $12
-    ld   [$DDD8], a                               ; $7A7D: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $7A7D: $EA $D8 $DD
     call ClearEntityStatusBank18                  ; $7A80: $CD $08 $7F
     ldh  a, [hMapRoom]                            ; $7A83: $F0 $F6
     cp   $74                                      ; $7A85: $FE $74
@@ -8306,9 +8306,9 @@ label_018_7A5D:
     ret  nz                                       ; $7AA7: $C0
 
     ld   a, $80                                   ; $7AA8: $3E $80
-    ld   [$DDD6], a                               ; $7AAA: $EA $D6 $DD
+    ld   [wDDD6], a                               ; $7AAA: $EA $D6 $DD
     ld   a, $0B                                   ; $7AAD: $3E $0B
-    ld   [$DDD7], a                               ; $7AAF: $EA $D7 $DD
+    ld   [wDDD7], a                               ; $7AAF: $EA $D7 $DD
 
 jr_018_7AB2:
     ld   de, Data_018_7962                        ; $7AB2: $11 $62 $79

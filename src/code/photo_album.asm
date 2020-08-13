@@ -211,7 +211,7 @@ ENDC
 
     ld   bc, $80                                ; $415C: JumpTable_028_40FB $01 $80 $00
     ld   hl, PhotoAlbumPalettes                      ; $415F: JumpTable_028_40FB $21 $B0 $7C
-    ld   de, $DC10                              ; $4162: JumpTable_028_40FB $11 $10 $DC
+    ld   de, wDC10                              ; $4162: JumpTable_028_40FB $11 $10 $DC
     call func_028_4176                          ; $4165: JumpTable_028_40FB $CD $76 $41
                                                 ; $4168: JumpTable_028_40FB $3E $C7
     ld   a, $C7
@@ -683,7 +683,7 @@ Data_028_4424::
 func_028_442C::
     ld   hl, Data_028_4424                      ; $442C: $21 $24 $44
     ld   bc, $08                                ; $442F: $01 $08 $00
-    ld   de, $DC10                              ; $4432: $11 $10 $DC
+    ld   de, wDC10                              ; $4432: $11 $10 $DC
     call func_028_4176                          ; $4435: $CD $76 $41
     ret                                         ; $4438: $C9
 

@@ -984,7 +984,7 @@ func_027_7E5A::
 
 jr_027_7E7D:
     ld   bc, $38                                  ; $7E7D: $01 $38 $00
-    ld   de, $DC50                                ; $7E80: $11 $50 $DC
+    ld   de, wDC50                                ; $7E80: $11 $50 $DC
     call CopyData                                 ; $7E83: $CD $14 $29
     ret                                           ; $7E86: $C9
 
@@ -1053,7 +1053,7 @@ func_027_7F8C::
 
 jr_027_7FAF:
     ld   bc, $08                                  ; $7FAF: $01 $08 $00
-    ld   de, $DC88                                ; $7FB2: $11 $88 $DC
+    ld   de, wDC88                                ; $7FB2: $11 $88 $DC
     call CopyData                                 ; $7FB5: $CD $14 $29
     ret                                           ; $7FB8: $C9
 

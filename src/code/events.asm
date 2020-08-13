@@ -332,7 +332,7 @@ jr_002_5EED:
     add  hl, de                                   ; $5F03: $19
     ld   a, $A0                                   ; $5F04: $3E $A0
     ld   [hl], a                                  ; $5F06: $77
-    ld   [$DDD8], a                               ; $5F07: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $5F07: $EA $D8 $DD
     call label_2887                               ; $5F0A: $CD $87 $28
     ld   a, [wRequests]                           ; $5F0D: $FA $00 $D6
     ld   e, a                                     ; $5F10: $5F
@@ -413,7 +413,7 @@ func_002_5F5C::
     add  hl, de                                   ; $5F80: $19
     ld   a, $BE                                   ; $5F81: $3E $BE
     ld   [hl], a                                  ; $5F83: $77
-    ld   [$DDD8], a                               ; $5F84: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $5F84: $EA $D8 $DD
     call label_2887                               ; $5F87: $CD $87 $28
     ld   a, [wRequests]                           ; $5F8A: $FA $00 $D6
     ld   e, a                                     ; $5F8D: $5F
@@ -489,7 +489,7 @@ CheckStepOnButtonTrigger::
 
 CheckKillInOrderTrigger::
     ld   c, $00                                   ; $5FEB: $0E $00
-    ld   hl, $DBB6                                ; $5FED: $21 $B6 $DB
+    ld   hl, wDBB6                                ; $5FED: $21 $B6 $DB
 
 jr_002_5FF0:
     ld   a, [hl+]                                 ; $5FF0: $2A

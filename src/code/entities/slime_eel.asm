@@ -124,7 +124,7 @@ jr_005_6D7E:
     ldh  [$FFD0], a                               ; $6DBD: $E0 $D0
     push hl                                       ; $6DBF: $E5
     ld   a, $AF                                   ; $6DC0: $3E $AF
-    ld   [$DDD8], a                               ; $6DC2: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $6DC2: $EA $D8 $DD
     ld   a, $05                                   ; $6DC5: $3E $05
     call func_91D                                ; $6DC7: $CD $1D $09
     ldh  a, [$FFD0]                               ; $6DCA: $F0 $D0
@@ -141,7 +141,7 @@ jr_005_6D7E:
     ld   a, l                                     ; $6DDD: $7D
     ldh  [$FFD0], a                               ; $6DDE: $E0 $D0
     ld   a, $B0                                   ; $6DE0: $3E $B0
-    ld   [$DDD8], a                               ; $6DE2: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $6DE2: $EA $D8 $DD
     ld   a, $05                                   ; $6DE5: $3E $05
     call func_91D                                ; $6DE7: $CD $1D $09
     ldh  a, [$FFD0]                               ; $6DEA: $F0 $D0

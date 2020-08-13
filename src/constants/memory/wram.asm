@@ -2605,182 +2605,410 @@ wMapEntrancePositionX::
 wMapEntrancePositionY::
   ds 1 ; DB9E
 
-; Unlabeled
-ds 6
-
-wIsIndoor:: ; DBA5
-  ; 0 on the overworld
-  ; 1 on interior maps (house, dungeons, etc)
-  ds 1
-
-wSaveSlot:: ; DBA6
-  ds 1
-
-wSaveFilesCount:: ; DBA7
-  ds 1
+; not used
+wDB9F::
+  ds 4 ; DB9F - DBA2
 
 ; Unlabeled
-ds 6
+wDBA3:: 
+  ds 1 ; DBA3
 
-wIndoorRoom:: ; DBAE
-  ds 1
+; not used
+wDBA4::
+  ds 1 ; DBA4
 
-wCurrentBank:: ; DBAF
-  ds 1
+; 0 = the overworld
+; 1 = interior maps (house, dungeons, etc)
+wIsIndoor::
+  ds 1 ; DBA5
 
-wMinimapLayout:: ; DBB0
-  ; Layout of the dungeon map in the inventory
-  ; See INVENTORY_MINIMAP_* constants for values
-  ds 1
+; TODO comment
+wSaveSlot::
+  ds 1 ; DBA6
 
-wLinkMapEntryPositionX:: ; DBB1
-  ; The position at which Link entered on a map
-  ; (used for reseting Link's position after a fall)
-  ds 1
-
-wLinkMapEntryPositionY:: ; DBB2
-  ; The position at which Link entered on a map
-  ; (used for reseting Link's position after a fall)
-  ds 1
+; TODO comment
+wSaveFilesCount::
+  ds 1 ; DBA7
 
 ; Unlabeled
-ds 2
-
-wKillCount2:: ; DBB5
-  ds 1
+wDBA8::
+  ds 1 ; DBA8
 
 ; Unlabeled
-wDBB6 equ $DBB6
-  ds $11
-
-wInvincibilityCounter:: ; DBC7
-  ds 1
+wDBA9::
+  ds 1 ; DBA9
 
 ; Unlabeled
-  ds 1
-
-wTorchesCount:: ; DBC9
-  ds 1
+wDBAA::
+  ds 2 ; DBAA - DBAB
 
 ; Unlabeled
-ds 2
+wDBAC::
+  ds 2 ; DBAC - DBAD
+
+; TODO comment
+wIndoorRoom::
+  ds 1 ; DBAE
+
+; TODO comment
+wCurrentBank::
+  ds 1 ; DBAF
+
+; Layout of the dungeon map in the inventory.
+; See INVENTORY_MINIMAP_* constants for values
+wMinimapLayout::
+  ds 1 ; DBB0
+
+; The position at which Link entered on a map.
+; (used for reseting Link's position after a fall)
+wLinkMapEntryPositionX::
+  ds 1 ; DBB1
+
+; The position at which Link entered on a map.
+; (used for reseting Link's position after a fall)
+wLinkMapEntryPositionY::
+  ds 1 ; DBB2
+
+; not used
+wDBB3::
+  ds 1 ; DBB3
+
+; Unlabeled
+wDBB4::
+  ds 1 ; DBB4
+
+; TODO comment
+wKillCount2::
+  ds 1 ; DBB5
+
+; Unlabeled
+wDBB6::
+  ds $11 ; DBB6 - DBC6
+
+; TODO comment
+wInvincibilityCounter::
+  ds 1 ; DBC7
+
+; Unlabeled
+wDBC8::
+  ds 1
+
+; TODO comment
+wTorchesCount::
+  ds 1 ; DBC9
+
+; not used
+wDBCA::
+  ds 1 ; DBCA
+
+; Unlabeled
+wDBCB::
+  ds 1 ; DBCB
 
 ; A table of five items flags for the current dungeon
 ; See also: wDungeonItemFlags
-wCurrentDungeonItemFlags:: ; DBCC
-wHasDungeonMap::       ds 1 ; DBCC
-wHasDungeonCompass::   ds 1 ; DBCD
-wHasDungeonStoneSlab:: ds 1 ; DBCE
-wHasDungeonBossKey::   ds 1 ; DBCF
-wSmallKeysCount::      ds 1 ; DBD0
+wCurrentDungeonItemFlags::
+; TODO comment
+wHasDungeonMap::
+  ds 1 ; DBCC
+
+; TODO comment
+wHasDungeonCompass::
+  ds 1 ; DBCD
+
+; TODO comment
+wHasDungeonStoneSlab::
+  ds 1 ; DBCE
+
+; TODO comment
+wHasDungeonBossKey::
+  ds 1 ; DBCF
+
+; TODO comment
+wSmallKeysCount::
+  ds 1 ; DBD0
 
 ; Unlabeled
-ds $2F
+wDBD1::
+  ds $2F ; DBD1 - DBFF
 
-wFile1DeathCountHigh:: ; DC00
-  ds 1
+; TODO comment
+wFile1DeathCountHigh::
+  ds 1 ; DC00
 
-wFile1DeathCountLow:: ; DC01
-  ds 1
+; TODO comment
+wFile1DeathCountLow::
+  ds 1 ; DC01
 
-wFile2DeathCountHigh:: ; DC02
-  ds 1
+; TODO comment
+wFile2DeathCountHigh::
+  ds 1 ; DC02
 
-wFile2DeathCountLow:: ; DC03
-  ds 1
+; TODO comment
+wFile2DeathCountLow::
+  ds 1 ; DC03
 
-wFile3DeathCountHigh:: ; DC04
-  ds 1
+; TODO comment
+wFile3DeathCountHigh::
+  ds 1 ; DC04
 
-wFile3DeathCountLow:: ; DC05
-  ds 1
+; TODO comment
+wFile3DeathCountLow::
+  ds 1 ; DC05
 
 ; Unlabeled
-ds 6
+wDC06::
+  ds 1 ; DC06
+
+; Unlabeled
+wDC07::
+  ds 1 ; DC07
+
+; Unlabeled
+wDC08::
+  ds 1 ; DC08
+
+; Unlabeled
+wDC09::
+  ds 1 ; DC09
+
+; Unlabeled
+wDC0A::
+  ds 1 ; DC0A
+
+; Unlabeled
+wDC0B::
+  ds 1 ; DC0B
 
 ; Photos 1-8 (bitfield)
-wPhotos1:: ; DC0C
-  ds 1
+wPhotos1::
+  ds 1 ; DC0C
 
 ; Photos 9-12 (bitfield)
-wPhotos2:: ; DC0D
-  ds 1
+wPhotos2::
+  ds 1 ; DC0D
 
+; Unlabeled
 wDC0E::
-  ds 1
+  ds 1 ; DC0E
 
-; Tunic Type (GBC only)
-; 0: green
-; 1: red
-; 2: blue
-wTunicType:: ; DC0F
-  ds 1
-
-; Unlabeled
-ds $DDD1 - $DC10
-
-; DC10: palette data?
-; DC30: palette data?
-
-wPaletteDataFlags:: ; DDD1
-  ; Palette flags for copying palettes to hardware
-  ; byte 0:   if enabled, palette data is for BG (otherwise for objects)
-  ; byte 2:   unknown
-  ds 1
-
-wPaletteToLoadForTileMap:: ; DDD2
-  ; Indicates that the palette for the given tile map should
-  ; be loaded on the next render loop
-  ds 1
-
-wPaletteUnknownC:: ; DDD3
-  ds 1
-
-wPaletteUnknownD:: ; DDD4
-  ds 1
-
-wPaletteUnknownE:: ; DDD5
-  ds 1
+; Tunic Type (GBC only):
+; 0 = green,
+; 1 = red,
+; 2 = blue
+wTunicType::
+  ds 1 ; DC0F
 
 ; Unlabeled
-ds $DDD9 - $DDD6
+; palette data?
+wDC10::
+  ds 8 ; DC10 - DC17
 
-wColorDungonCorrectTombStones:: ; DDD9
-  ; Number of tomb stones correctly pushed so far.
-  ; Values:
-  ; 0 - 4   number of correct tomb stones
-  ; 80      color dungon has been opened
-  ds 1
+; Unlabeled
+wDC18::
+  ds 6 ; DC18 - DC1D
 
-wColorDungeonItemFlags:: ; DDDA
-  ; Dungeon flags for the color dungeon (map/compass/stone beak/nightmare key/small keys)
-  ; See also: wDungeonItemFlags
-  ds 5
+; Unlabeled
+wDC1E::
+  ds $12 ; DC1E - DC2F
+
+; Unlabeled
+; palette data?
+wDC30::
+  ds 4 ; DC30 - DC33
+
+; Unlabeled
+wDC34::
+  ds 6 ; DC34 - DC39
+
+; Unlabeled
+wDC3A::
+  ds 14 ; DC3A - DC47
+
+; Unlabeled
+wDC48::
+  ds 2 ; DC48  - DC49
+
+; Unlabeled
+wDC4A::
+  ds 6 ; DC4A - DC4F
+
+; Unlabeled
+wDC50::
+  ds 2 ; DC50 - DC51
+
+; Unlabeled
+wDC52::
+  ds 1 ; DC52
+
+; not used
+wDC53::
+  ds 1 ; DC52
+
+; Unlabeled
+wDC54::
+  ds 2 ; DC54 - DC55
+
+; Unlabeled
+wDC56::
+  ds 6 ; DC56 - DC5B
+
+; Unlabeled
+wDC5C::
+  ds 8 ; DC5C - DC63
+
+; Unlabeled
+wDC64::
+  ds 12 ; DC64 - DC6F
+
+; Unlabeled
+wDC70::
+  ds 8 ; DC70 - DC77
+
+; Unlabeled
+wDC78::
+  ds 2 ; DC78 - DC79
+
+; Unlabeled
+wDC7A::
+  ds 6 ; DC7A - DC7F
+
+; Unlabeled
+wDC80::
+  ds 4 ; DC80 - DC83
+
+; Unlabeled
+wDC84::
+  ds 4 ; DC84 - DC87
+
+; Unlabeled
+wDC88::
+  ds 2 ; DC88 - DC89
+
+; Unlabeled
+wDC8A::
+  ds 2 ; DC8A - DC8B
+
+; Unlabeled
+wDC8C::
+  ds 1 ; DC8C
+
+; Unlabeled
+wDC8D::
+  ds 3 ; DC8D
+
+; Unlabeled
+wDC90::
+  ds 1 ; DC90
+
+; Unlabeled
+wDC91::
+  ds $2F ; DC91 - DCBF
+
+; Unlabeled
+wDCC0::
+  ds 15 ; DCC0 - DCCE
+
+; Unlabeled
+wDCCF::
+  ds 1 ; DCCF
+
+; Unlabeled
+wDCD0::
+  ds $10 ; DCD0 -DCDF
+
+; Unlabeled
+wDCE0::
+  ds $10 ; DCE0 -DCEF
+
+; Unlabeled
+wDCF0::
+  ds $E1 ; DCF0 -DDD0
+
+; Palette flags for copying palettes to hardware.
+; byte 0 = if enabled, palette data is for BG (otherwise for objects),
+; byte 2 = unknown
+wPaletteDataFlags::
+  ds 1 ; DDD1
+
+; Indicates that the palette for the given tile map should
+; be loaded on the next render loop
+wPaletteToLoadForTileMap::
+  ds 1 ; DDD2
+
+; TODO comment
+wPaletteUnknownC::
+  ds 1 ; DDD3
+
+; TODO comment
+wPaletteUnknownD::
+  ds 1 ; DDD4
+
+; TODO comment
+wPaletteUnknownE::
+  ds 1 ; DDD5
+
+; Unlabeled
+wDDD6::
+  ds 1 ; DDD6
+
+; Unlabeled
+wDDD7::
+  ds 1 ; DDD7
+
+; Unlabeled
+wDDD8::
+  ds 1 ; DDD8
+
+; Number of tomb stones correctly pushed so far.
+; Values:
+; 00-04 = number of correct tomb stones.
+; 80 = color dungon has been opened
+wColorDungonCorrectTombStones::
+  ds 1 ; DDD9
+
+; Dungeon flags for the color dungeon (map/compass/stone beak/nightmare key/small keys)
+; See also: wDungeonItemFlags
+wColorDungeonItemFlags::
+  ds 5 ; DDDA
 
 ; Unlabeled
 wDDDF:: ; DDDF
   ds 1
 
 ; Color dungeon rooms status
-;
 ; See wOverworldRoomStatus
-wColorDungeonRoomStatus:: ; DDE0
-  ds $20
+wColorDungeonRoomStatus::
+  ds $20 ; DDE0
 
 ; Unlabeled
-ds 1 ; DE00
+wDE00::
+  ds 1 ; DE00
 
 ; Configuration struct for performing a farcall
 ; See the Farcall function
 wFarcallParams::
-wFarcallBank:: ; DE01
-  ds 1
+; TODO comment
+wFarcallBank::
+  ds 1 ; DE01
 
-wFarcallAdressHigh:: ; DE02
-  ds 1
+; TODO comment
+wFarcallAdressHigh::
+  ds 1 ; DE02
 
-wFarcallAdressLow:: ; DE03
-  ds 1
+; TODO comment
+wFarcallAdressLow::
+  ds 1 ; DE03
 
-wFarcallReturnBank:: ; DE04
-  ds 1
+; TODO comment
+wFarcallReturnBank::
+  ds 1 ; DE04
+
+; maximal depth the stack can grow
+wStackMax equ $DE05
+; top of WRAM is used as Stack
+wStack::
+  ds $DFFF - $DE05 +1 ; DE05 - DFFF
+
+; init puts the SP here
+wStackTop equ $DFFF

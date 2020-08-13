@@ -2711,7 +2711,7 @@ jr_007_51AA:
 
     push bc                                       ; $51E6: $C5
     ld   a, $0D                                   ; $51E7: $3E $0D
-    ld   [$DDD8], a                               ; $51E9: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $51E9: $EA $D8 $DD
     ld   a, $07                                   ; $51EC: $3E $07
     call func_91D                                ; $51EE: $CD $1D $09
     pop  bc                                       ; $51F1: $C1
@@ -3991,7 +3991,7 @@ jr_007_5A2A:
 
     push bc                                       ; $5A53: $C5
     ld   a, $DB                                   ; $5A54: $3E $DB
-    ld   [$DDD8], a                               ; $5A56: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $5A56: $EA $D8 $DD
     ld   a, $07                                   ; $5A59: $3E $07
     call func_91D                                ; $5A5B: $CD $1D $09
     pop  bc                                       ; $5A5E: $C1
@@ -4484,7 +4484,7 @@ SmashablePillarEntityHandler::
     jr   c, jr_007_5DD0                           ; $5DC9: $38 $05
 
     ld   a, $01                                   ; $5DCB: $3E $01
-    ld   [$DE00], a                               ; $5DCD: $EA $00 $DE
+    ld   [wDE00], a                               ; $5DCD: $EA $00 $DE
 
 jr_007_5DD0:
     ld   hl, wEntitiesPrivateState1Table          ; $5DD0: $21 $B0 $C2
@@ -5334,7 +5334,7 @@ jr_007_625F:
 
     push bc                                       ; $6296: $C5
     ld   a, $4D                                   ; $6297: $3E $4D
-    ld   [$DDD8], a                               ; $6299: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $6299: $EA $D8 $DD
     ld   a, $07                                   ; $629C: $3E $07
     call func_91D                                ; $629E: $CD $1D $09
     pop  bc                                       ; $62A1: $C1
@@ -5384,7 +5384,7 @@ jr_007_62D2:
 
     push bc                                       ; $62E0: $C5
     ld   a, $04                                   ; $62E1: $3E $04
-    ld   [$DDD8], a                               ; $62E3: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $62E3: $EA $D8 $DD
     ld   a, $07                                   ; $62E6: $3E $07
     call func_91D                                ; $62E8: $CD $1D $09
     pop  bc                                       ; $62EB: $C1
@@ -5768,10 +5768,10 @@ jr_007_655E:
     jr   z, jr_007_6596                           ; $6569: $28 $2B
 
     pop  bc                                       ; $656B: $C1
-    ld   a, [$DC90]                               ; $656C: $FA $90 $DC
+    ld   a, [wDC90]                               ; $656C: $FA $90 $DC
     ld   e, a                                     ; $656F: $5F
     add  $08                                      ; $6570: $C6 $08
-    ld   [$DC90], a                               ; $6572: $EA $90 $DC
+    ld   [wDC90], a                               ; $6572: $EA $90 $DC
     ld   d, b                                     ; $6575: $50
     push bc                                       ; $6576: $C5
     ld   hl, wEntitiesUnknowTableY                ; $6577: $21 $D0 $C3
@@ -5788,7 +5788,7 @@ ENDC
     add  hl, bc                                   ; $6585: $09
     ld   c, l                                     ; $6586: $4D
     ld   b, h                                     ; $6587: $44
-    ld   hl, $DC91                                ; $6588: $21 $91 $DC
+    ld   hl, wDC91                                ; $6588: $21 $91 $DC
     add  hl, de                                   ; $658B: $19
     ld   e, $08                                   ; $658C: $1E $08
 
@@ -5815,7 +5815,7 @@ IF __PATCH_0__
     and  a
     ret  z
 
-    ld   hl, $dc64
+    ld   hl, wDC64
     ld   a, $3f
     ld   [hl+], a
     ld   a, $14
@@ -5842,7 +5842,7 @@ jr_007_659D:
     and  a                                        ; $65AF: $A7
     jr   z, jr_007_65CB                           ; $65B0: $28 $19
 
-    ld   de, $DC18                                ; $65B2: $11 $18 $DC
+    ld   de, wDC18                                ; $65B2: $11 $18 $DC
     ld   hl, $FF70                                ; $65B5: $21 $70 $FF
     di                                            ; $65B8: $F3
 
@@ -7822,7 +7822,7 @@ jr_007_71B4:
 
     push bc                                       ; $7211: $C5
     ld   a, $91                                   ; $7212: $3E $91
-    ld   [$DDD8], a                               ; $7214: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $7214: $EA $D8 $DD
     ld   a, $07                                   ; $7217: $3E $07
     call func_91D                                ; $7219: $CD $1D $09
     pop  bc                                       ; $721C: $C1

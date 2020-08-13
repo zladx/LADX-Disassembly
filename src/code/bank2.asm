@@ -1565,11 +1565,11 @@ jr_002_4C0F:
 func_002_4C14::
     push de                                       ; $4C14: $D5
     push hl                                       ; $4C15: $E5
-    ld   hl, $DC91                                ; $4C16: $21 $91 $DC
-    ld   a, [$DC90]                               ; $4C19: $FA $90 $DC
+    ld   hl, wDC91                                ; $4C16: $21 $91 $DC
+    ld   a, [wDC90]                               ; $4C19: $FA $90 $DC
     ld   e, a                                     ; $4C1C: $5F
     add  $0A                                      ; $4C1D: $C6 $0A
-    ld   [$DC90], a                               ; $4C1F: $EA $90 $DC
+    ld   [wDC90], a                               ; $4C1F: $EA $90 $DC
     add  hl, de                                   ; $4C22: $19
     ld   e, l                                     ; $4C23: $5D
     ld   d, h                                     ; $4C24: $54
@@ -1897,11 +1897,11 @@ jr_002_4DCB:
     ld   [hl], $00                                ; $4DF9: $36 $00
     ret                                           ; $4DFB: $C9
 
-; Tunic-related code (see $DC50)
+; Tunic-related code (see wDC50)
 func_002_4DFC::
     push bc                                       ; $4DFC: $C5
     push de                                       ; $4DFD: $D5
-    ld   hl, $DC50                                ; $4DFE: $21 $50 $DC
+    ld   hl, wDC50                                ; $4DFE: $21 $50 $DC
     ld   c, $00                                   ; $4E01: $0E $00
     di                                            ; $4E03: $F3
 
@@ -1935,7 +1935,7 @@ func_002_4E2C::
     di                                            ; $4E2D: $F3
     ld   hl, Data_002_4E1C                        ; $4E2E: $21 $1C $4E
     add  hl, de                                   ; $4E31: $19
-    ld   de, $DC88                                ; $4E32: $11 $88 $DC
+    ld   de, wDC88                                ; $4E32: $11 $88 $DC
     ld   c, $00                                   ; $4E35: $0E $00
 
 jr_002_4E37:
@@ -1956,7 +1956,7 @@ jr_002_4E37:
 ; Copy data from RAM bank 2 to RAM bank 0
 func_002_4E48::
     di                                            ; $4E48: $F3
-    ld   hl, $DC88                                ; $4E49: $21 $88 $DC
+    ld   hl, wDC88                                ; $4E49: $21 $88 $DC
     ld   e, $00                                   ; $4E4C: $1E $00
 
 .loop
@@ -2064,8 +2064,8 @@ func_002_4EDD::
     ld   [wC167], a                               ; $4EE1: $EA $67 $C1
 
 IF !__PATCH_0__
-    ld   [$DDD6], a                               ; $4EE4: $EA $D6 $DD
-    ld   [$DDD7], a                               ; $4EE7: $EA $D7 $DD
+    ld   [wDDD6], a                               ; $4EE4: $EA $D6 $DD
+    ld   [wDDD7], a                               ; $4EE7: $EA $D7 $DD
 ENDC
 
     ld   a, $00                                   ; $4EEA: $3E $00
@@ -2376,7 +2376,7 @@ jr_002_50BA:
     ldh  [hLinkPositionZ], a                      ; $50C0: $E0 $A2
     ldh  [$FFA3], a                               ; $50C2: $E0 $A3
     ld   a, $70                                   ; $50C4: $3E $70
-    ld   [$DBC8], a                               ; $50C6: $EA $C8 $DB
+    ld   [wDBC8], a                               ; $50C6: $EA $C8 $DB
     ret                                           ; $50C9: $C9
 
 Data_002_50CA::
@@ -2441,7 +2441,7 @@ jr_002_511B:
     ret                                           ; $512A: $C9
 
 jr_002_512B:
-    ld   a, [$DBCB]                               ; $512B: $FA $CB $DB
+    ld   a, [wDBCB]                               ; $512B: $FA $CB $DB
     cp   $50                                      ; $512E: $FE $50
     jr   z, jr_002_516A                           ; $5130: $28 $38
 
@@ -2472,7 +2472,7 @@ jr_002_5155:
     ld   a, $70                                   ; $515A: $3E $70
 
 jr_002_515C:
-    ld   [$DBC8], a                               ; $515C: $EA $C8 $DB
+    ld   [wDBC8], a                               ; $515C: $EA $C8 $DB
     call ClearLinkPositionIncrement               ; $515F: $CD $8E $17
     ldh  [$FFA3], a                               ; $5162: $E0 $A3
     ld   [wIsLinkInTheAir], a                     ; $5164: $EA $46 $C1
@@ -2518,7 +2518,7 @@ jr_002_518E:
     ld   a, $56                                   ; $519D: $3E $56
     ld   [hl+], a                                 ; $519F: $22
     ld   a, $24                                   ; $51A0: $3E $24
-    ld   [$DBC8], a                               ; $51A2: $EA $C8 $DB
+    ld   [wDBC8], a                               ; $51A2: $EA $C8 $DB
     ld   a, $03                                   ; $51A5: $3E $03
     ldh  [hLinkDirection], a                      ; $51A7: $E0 $9E
     jp   ApplyMapFadeOutTransition                ; $51A9: $C3 $83 $0C
@@ -3849,7 +3849,7 @@ label_002_593B:
     ld   a, e                                     ; $598B: $7B
     ld   [$C189], a                               ; $598C: $EA $89 $C1
     xor  a                                        ; $598F: $AF
-    ld   [$DBAC], a                               ; $5990: $EA $AC $DB
+    ld   [wDBAC], a                               ; $5990: $EA $AC $DB
     inc  a                                        ; $5993: $3C
     ld   [$C188], a                               ; $5994: $EA $88 $C1
     ret                                           ; $5997: $C9
@@ -3891,7 +3891,7 @@ label_002_593B:
     ld   a, $02                                   ; $59C5: $3E $02
     ld   [$C188], a                               ; $59C7: $EA $88 $C1
     xor  a                                        ; $59CA: $AF
-    ld   [$DBAC], a                               ; $59CB: $EA $AC $DB
+    ld   [wDBAC], a                               ; $59CB: $EA $AC $DB
     ret                                           ; $59CE: $C9
 
 .jr_002_59CF
@@ -4038,10 +4038,10 @@ jr_002_5B09:
     xor  a                                        ; $5B09: $AF
     inc  hl                                       ; $5B0A: $23
     ld   [hl], a                                  ; $5B0B: $77
-    ld   a, [$DBAC]                               ; $5B0C: $FA $AC $DB
+    ld   a, [wDBAC]                               ; $5B0C: $FA $AC $DB
     add  $01                                      ; $5B0F: $C6 $01
-    ld   [$DBAC], a                               ; $5B11: $EA $AC $DB
-    ld   a, [$DBAC]                               ; $5B14: $FA $AC $DB
+    ld   [wDBAC], a                               ; $5B11: $EA $AC $DB
+    ld   a, [wDBAC]                               ; $5B14: $FA $AC $DB
     cp   $08                                      ; $5B17: $FE $08
     jr   nc, jr_002_5B1C                          ; $5B19: $30 $01
 
@@ -4318,10 +4318,10 @@ jr_002_5CBD:
     xor  a                                        ; $5CBD: $AF
     inc  hl                                       ; $5CBE: $23
     ld   [hl], a                                  ; $5CBF: $77
-    ld   a, [$DBAC]                               ; $5CC0: $FA $AC $DB
+    ld   a, [wDBAC]                               ; $5CC0: $FA $AC $DB
     add  $01                                      ; $5CC3: $C6 $01
-    ld   [$DBAC], a                               ; $5CC5: $EA $AC $DB
-    ld   a, [$DBAC]                               ; $5CC8: $FA $AC $DB
+    ld   [wDBAC], a                               ; $5CC5: $EA $AC $DB
+    ld   a, [wDBAC]                               ; $5CC8: $FA $AC $DB
     cp   $08                                      ; $5CCB: $FE $08
     jr   nc, jr_002_5CD0                          ; $5CCD: $30 $01
 
@@ -6058,8 +6058,8 @@ CheckPositionForMapTransition::
     ld   [wIsRunningWithPegasusBoots], a                               ; $6DF4: $EA $4A $C1
     ld   [$C188], a                               ; $6DF7: $EA $88 $C1
 IF __PATCH_0__
-    ld   [$ddd6], a
-    ld   [$ddd7], a
+    ld   [wDDD6], a
+    ld   [wDDD7], a
 ENDC
 
     ; If Link's Y position >= $88…
@@ -6640,7 +6640,7 @@ jr_002_7147:
     sub  $90                                      ; $7149: $D6 $90
     ld   [$C189], a                               ; $714B: $EA $89 $C1
     xor  a                                        ; $714E: $AF
-    ld   [$DBAC], a                               ; $714F: $EA $AC $DB
+    ld   [wDBAC], a                               ; $714F: $EA $AC $DB
     inc  a                                        ; $7152: $3C
     ld   [$C188], a                               ; $7153: $EA $88 $C1
     call SynchronizeDungeonsItemFlags_trampoline  ; $7156: $CD $02 $28
@@ -7591,7 +7591,7 @@ label_002_76AA:
     call ResetSpinAttack                          ; $76AF: $CD $AF $0C
     ld   [$C198], a                               ; $76B2: $EA $98 $C1
     ld   a, [wLinkGroundVfx]                      ; $76B5: $FA $81 $C1
-    ld   [$DBCB], a                               ; $76B8: $EA $CB $DB
+    ld   [wDBCB], a                               ; $76B8: $EA $CB $DB
     ld   a, WAVE_SFX_LINK_FALLS                   ; $76BB: $3E $0C
     ldh  [hWaveSfx], a                            ; $76BD: $E0 $F3
 

@@ -32,7 +32,7 @@ func_024_5C1A::
 
     ld   a, $01                                   ; $5C1E: $3E $01
     ldh  [rVBK], a                                ; $5C20: $E0 $4F
-    ld   de, $DC91                                ; $5C22: $11 $91 $DC
+    ld   de, wDC91                                ; $5C22: $11 $91 $DC
     call ExecuteBackgroundCopyRequest             ; $5C25: $CD $27 $29
     xor  a                                        ; $5C28: $AF
     ldh  [rVBK], a                                ; $5C29: $E0 $4F
@@ -82,20 +82,20 @@ LoadBGPalettes::
     and  a                                        ; $7408: $A7
     ret  nz                                       ; $7409: $C0
 
-    ld   a, [$DDD6]                               ; $740A: $FA $D6 $DD
+    ld   a, [wDDD6]                               ; $740A: $FA $D6 $DD
     and  a                                        ; $740D: $A7
     ret  z                                        ; $740E: $C8
 
-    ld   a, [$DDD7]                               ; $740F: $FA $D7 $DD
+    ld   a, [wDDD7]                               ; $740F: $FA $D7 $DD
     dec  a                                        ; $7412: $3D
-    ld   [$DDD7], a                               ; $7413: $EA $D7 $DD
+    ld   [wDDD7], a                               ; $7413: $EA $D7 $DD
     jr   z, jr_024_741B                           ; $7416: $28 $03
 
     cp   $01                                      ; $7418: $FE $01
     ret  nz                                       ; $741A: $C0
 jr_024_741B:
 
-    ld   a, [$DDD6]                               ; $741B: $FA $D6 $DD
+    ld   a, [wDDD6]                               ; $741B: $FA $D6 $DD
     bit  7, a                                     ; $741E: $CB $7F
     jr   nz, jr_024_7427                          ; $7420: $20 $05
     ld   hl, BGPalettePointersTableA              ; $7422: $21 $E1 $73
@@ -104,16 +104,16 @@ jr_024_7427:
     ld   hl, BGPalettePointersTableB              ; $7427: $21 $ED $73
 jr_024_742A:
 
-    ld   a, [$DDD7]                               ; $742A: $FA $D7 $DD
+    ld   a, [wDDD7]                               ; $742A: $FA $D7 $DD
     cp   $01                                      ; $742D: $FE $01
     jr   z, jr_024_7436                           ; $742F: $28 $05
 
     ld   a, $0B                                   ; $7431: $3E $0B
-    ld   [$DDD7], a                               ; $7433: $EA $D7 $DD
+    ld   [wDDD7], a                               ; $7433: $EA $D7 $DD
 
 jr_024_7436:
     push hl                                       ; $7436: $E5
-    ld   a, [$DDD6]                               ; $7437: $FA $D6 $DD
+    ld   a, [wDDD6]                               ; $7437: $FA $D6 $DD
     and  $3F                                      ; $743A: $E6 $3F
     sla  a                                        ; $743C: $CB $27
     ld   c, a                                     ; $743E: $4F
@@ -130,7 +130,7 @@ jr_024_7436:
     ld   l, a                                     ; $744C: $6F
     ld   bc, $20                                  ; $744D: $01 $20 $00
     call CopyData                                 ; $7450: $CD $14 $29
-    ld   a, [$DDD6]                               ; $7453: $FA $D6 $DD
+    ld   a, [wDDD6]                               ; $7453: $FA $D6 $DD
     and  $01                                      ; $7456: $E6 $01
     swap a                                        ; $7458: $CB $37
 
@@ -139,15 +139,15 @@ jr_024_7436:
     ld   [wPaletteUnknownD], a                    ; $745F: $EA $D4 $DD
     ld   a, $81                                   ; $7462: $3E $81
     ld   [wPaletteDataFlags], a                    ; $7464: $EA $D1 $DD
-    ld   a, [$DDD6]                               ; $7467: $FA $D6 $DD
+    ld   a, [wDDD6]                               ; $7467: $FA $D6 $DD
     inc  a                                        ; $746A: $3C
-    ld   [$DDD6], a                               ; $746B: $EA $D6 $DD
+    ld   [wDDD6], a                               ; $746B: $EA $D6 $DD
     and  $3F                                      ; $746E: $E6 $3F
     cp   $06                                      ; $7470: $FE $06
     ret  nz                                       ; $7472: $C0
 
     xor  a                                        ; $7473: $AF
-    ld   [$DDD6], a                               ; $7474: $EA $D6 $DD
+    ld   [wDDD6], a                               ; $7474: $EA $D6 $DD
     ret                                           ; $7477: $C9
 
 include "data/backgrounds/palettes.asm"

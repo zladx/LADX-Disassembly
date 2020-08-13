@@ -355,7 +355,7 @@ func_014_4BA7::
     jr   z, jr_014_4BBE                           ; $4BAD: $28 $0F
 
     ld   de, Data_014_4B8F                        ; $4BAF: $11 $8F $4B
-    ld   hl, $DC10                                ; $4BB2: $21 $10 $DC
+    ld   hl, wDC10                                ; $4BB2: $21 $10 $DC
     ld   b, $40                                   ; $4BB5: $06 $40
     call func_014_4BDA                            ; $4BB7: $CD $DA $4B
     ld   a, $01                                   ; $4BBA: $3E $01
@@ -363,11 +363,11 @@ func_014_4BA7::
 
 jr_014_4BBE:
     ld   de, Data_014_4B97                        ; $4BBE: $11 $97 $4B
-    ld   hl, $DC50                                ; $4BC1: $21 $50 $DC
+    ld   hl, wDC50                                ; $4BC1: $21 $50 $DC
     ld   b, $20                                   ; $4BC4: $06 $20
     call func_014_4BDA                            ; $4BC6: $CD $DA $4B
     ld   de, Data_014_4B9F                        ; $4BC9: $11 $9F $4B
-    ld   hl, $DC70                                ; $4BCC: $21 $70 $DC
+    ld   hl, wDC70                                ; $4BCC: $21 $70 $DC
     ld   b, $20                                   ; $4BCF: $06 $20
     call func_014_4BDA                            ; $4BD1: $CD $DA $4B
     ld   a, $02                                   ; $4BD4: $3E $02
@@ -406,13 +406,13 @@ func_014_4BEF::
 
     jr   z, jr_014_4C04                           ; $4BF8: $28 $0A
 
-    ld   hl, $DC10                                ; $4BFA: $21 $10 $DC
+    ld   hl, wDC10                                ; $4BFA: $21 $10 $DC
     call func_014_4C10                            ; $4BFD: $CD $10 $4C
     ld   a, $01                                   ; $4C00: $3E $01
     jr   jr_014_4BD6                              ; $4C02: $18 $D2
 
 jr_014_4C04:
-    ld   hl, $DC50                                ; $4C04: $21 $50 $DC
+    ld   hl, wDC50                                ; $4C04: $21 $50 $DC
     call func_014_4C10                            ; $4C07: $CD $10 $4C
     ld   a, $02                                   ; $4C0A: $3E $02
     ld   [wPaletteDataFlags], a                   ; $4C0C: $EA $D1 $DD
@@ -545,7 +545,7 @@ jr_014_4CB2:
     sub  [hl]                                     ; $4CBF: $96
     jr   nz, jr_014_4CC7                          ; $4CC0: $20 $05
 
-    ld   a, [$DDD6]                               ; $4CC2: $FA $D6 $DD
+    ld   a, [wDDD6]                               ; $4CC2: $FA $D6 $DD
     and  a                                        ; $4CC5: $A7
     ret  z                                        ; $4CC6: $C8
 
@@ -565,20 +565,20 @@ jr_014_4CC7:
     ret                                           ; $4CDE: $C9
 
 jr_014_4CDF:
-    ld   a, [$DDD7]                               ; $4CDF: $FA $D7 $DD
+    ld   a, [wDDD7]                               ; $4CDF: $FA $D7 $DD
     dec  a                                        ; $4CE2: $3D
-    ld   [$DDD7], a                               ; $4CE3: $EA $D7 $DD
+    ld   [wDDD7], a                               ; $4CE3: $EA $D7 $DD
     jr   z, jr_014_4CEB                           ; $4CE6: $28 $03
 
     cp   $01                                      ; $4CE8: $FE $01
     ret  nz                                       ; $4CEA: $C0
 
 jr_014_4CEB:
-    ld   a, [$DDD6]                               ; $4CEB: $FA $D6 $DD
+    ld   a, [wDDD6]                               ; $4CEB: $FA $D6 $DD
     and  $80                                      ; $4CEE: $E6 $80
     jr   nz, jr_014_4D0B                          ; $4CF0: $20 $19
 
-    ld   a, [$DDD7]                               ; $4CF2: $FA $D7 $DD
+    ld   a, [wDDD7]                               ; $4CF2: $FA $D7 $DD
     and  a                                        ; $4CF5: $A7
     jr   z, jr_014_4D22                           ; $4CF6: $28 $2A
 
@@ -597,7 +597,7 @@ jr_014_4D01:
     jr   jr_014_4D22                              ; $4D09: $18 $17
 
 jr_014_4D0B:
-    ld   a, [$DDD7]                               ; $4D0B: $FA $D7 $DD
+    ld   a, [wDDD7]                               ; $4D0B: $FA $D7 $DD
     and  a                                        ; $4D0E: $A7
     jr   z, jr_014_4D22                           ; $4D0F: $28 $11
 
@@ -619,15 +619,15 @@ jr_014_4D22:
     cp   [hl]                                     ; $4D25: $BE
     jr   nz, jr_014_4D32                          ; $4D26: $20 $0A
 
-    ld   a, [$DDD7]                               ; $4D28: $FA $D7 $DD
+    ld   a, [wDDD7]                               ; $4D28: $FA $D7 $DD
     and  a                                        ; $4D2B: $A7
     jr   nz, jr_014_4D32                          ; $4D2C: $20 $04
 
     xor  a                                        ; $4D2E: $AF
-    ld   [$DDD6], a                               ; $4D2F: $EA $D6 $DD
+    ld   [wDDD6], a                               ; $4D2F: $EA $D6 $DD
 
 jr_014_4D32:
-    ld   a, [$DDD7]                               ; $4D32: $FA $D7 $DD
+    ld   a, [wDDD7]                               ; $4D32: $FA $D7 $DD
     and  a                                        ; $4D35: $A7
     jr   z, jr_014_4D4A                           ; $4D36: $28 $12
 
@@ -643,7 +643,7 @@ jr_014_4D32:
     call Farcall                                  ; $4D47: $CD $D7 $0B
 
 jr_014_4D4A:
-    ld   a, [$DDD7]                               ; $4D4A: $FA $D7 $DD
+    ld   a, [wDDD7]                               ; $4D4A: $FA $D7 $DD
     xor  $01                                      ; $4D4D: $EE $01
     swap a                                        ; $4D4F: $CB $37
     ld   [wPaletteUnknownC], a                    ; $4D51: $EA $D3 $DD
@@ -651,7 +651,7 @@ jr_014_4D4A:
     ld   [wPaletteUnknownD], a                    ; $4D56: $EA $D4 $DD
     ld   a, $81                                   ; $4D59: $3E $81
     ld   [wPaletteDataFlags], a                   ; $4D5B: $EA $D1 $DD
-    ld   a, [$DDD7]                               ; $4D5E: $FA $D7 $DD
+    ld   a, [wDDD7]                               ; $4D5E: $FA $D7 $DD
     and  a                                        ; $4D61: $A7
     ret  nz                                       ; $4D62: $C0
 
@@ -666,7 +666,7 @@ jr_014_4D6D:
     ld   a, $0B                                   ; $4D6D: $3E $0B
 
 jr_014_4D6F:
-    ld   [$DDD7], a                               ; $4D6F: $EA $D7 $DD
+    ld   [wDDD7], a                               ; $4D6F: $EA $D7 $DD
     ret                                           ; $4D72: $C9
 
 ; Decrement various countdowns for this entity

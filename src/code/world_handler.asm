@@ -151,7 +151,7 @@ GameplayWorldSubtype1Handler::
     ld   a, [wMapEntrancePositionY]               ; $443D: $FA $9E $DB
     ldh  [hLinkPositionY], a                      ; $4440: $E0 $99
     ld   [wLinkMapEntryPositionY], a              ; $4442: $EA $B2 $DB
-    ld   a, [$DBC8]                               ; $4445: $FA $C8 $DB
+    ld   a, [wDBC8]                               ; $4445: $FA $C8 $DB
     ldh  [hLinkPositionZ], a                      ; $4448: $E0 $A2
     and  a                                        ; $444A: $A7
     jr   z, jr_001_4452                           ; $444B: $28 $05
@@ -351,10 +351,10 @@ label_001_4555::
     ld   [wDB80+4], a                               ; $457F: $EA $84 $DB
     call EnableExternalRAMWriting                 ; $4582: $CD $D0 $27
     ld   a, [$A45F]                               ; $4585: $FA $5F $A4
-    ld   [$DC06], a                               ; $4588: $EA $06 $DC
+    ld   [wDC06], a                               ; $4588: $EA $06 $DC
     call EnableExternalRAMWriting                 ; $458B: $CD $D0 $27
     ld   a, [$A460]                               ; $458E: $FA $60 $A4
-    ld   [$DC09], a                               ; $4591: $EA $09 $DC
+    ld   [wDC09], a                               ; $4591: $EA $09 $DC
     call EnableExternalRAMWriting                 ; $4594: $CD $D0 $27
     ld   a, [$A45C]                               ; $4597: $FA $5C $A4
     ld   [wFile1DeathCountHigh], a                ; $459A: $EA $00 $DC
@@ -378,10 +378,10 @@ label_001_4555::
     ld   [wDB85+4], a                               ; $45D0: $EA $89 $DB
     call EnableExternalRAMWriting                 ; $45D3: $CD $D0 $27
     ld   a, [$A80C]                               ; $45D6: $FA $0C $A8
-    ld   [$DC07], a                               ; $45D9: $EA $07 $DC
+    ld   [wDC07], a                               ; $45D9: $EA $07 $DC
     call EnableExternalRAMWriting                 ; $45DC: $CD $D0 $27
     ld   a, [$A80D]                               ; $45DF: $FA $0D $A8
-    ld   [$DC0A], a                               ; $45E2: $EA $0A $DC
+    ld   [wDC0A], a                               ; $45E2: $EA $0A $DC
     call EnableExternalRAMWriting                 ; $45E5: $CD $D0 $27
     ld   a, [$A809]                               ; $45E8: $FA $09 $A8
     ld   [wFile2DeathCountHigh], a                ; $45EB: $EA $02 $DC
@@ -405,10 +405,10 @@ label_001_4555::
     ld   [wDB8A+4], a                               ; $4621: $EA $8E $DB
     call EnableExternalRAMWriting                 ; $4624: $CD $D0 $27
     ld   a, [$ABB9]                               ; $4627: $FA $B9 $AB
-    ld   [$DC08], a                               ; $462A: $EA $08 $DC
+    ld   [wDC08], a                               ; $462A: $EA $08 $DC
     call EnableExternalRAMWriting                 ; $462D: $CD $D0 $27
     ld   a, [$ABBA]                               ; $4630: $FA $BA $AB
-    ld   [$DC0B], a                               ; $4633: $EA $0B $DC
+    ld   [wDC0B], a                               ; $4633: $EA $0B $DC
     call EnableExternalRAMWriting                 ; $4636: $CD $D0 $27
     ld   a, [$ABB6]                               ; $4639: $FA $B6 $AB
     ld   [wFile3DeathCountHigh], a                ; $463C: $EA $04 $DC

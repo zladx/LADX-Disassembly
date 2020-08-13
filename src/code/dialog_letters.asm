@@ -83,7 +83,7 @@ func_01C_4A71::
     ret                                         ; $4A75: $C9
 
 func_01C_4A76::
-    ld   hl, $DC90                              ; $4A76: $21 $90 $DC
+    ld   hl, wDC90                              ; $4A76: $21 $90 $DC
     ld   de, $D600                              ; $4A79: $11 $00 $D6
     ld   b, $04                                 ; $4A7C: $06 $04
 .loop_4A7E_1C:
@@ -181,7 +181,7 @@ func_01C_4AFD::
 
 func_01C_4B02::
     push bc                                     ; $4B02: $C5
-    ld   hl, $DC90                              ; $4B03: $21 $90 $DC
+    ld   hl, wDC90                              ; $4B03: $21 $90 $DC
     ld   de, $D600                              ; $4B06: $11 $00 $D6
     ld   b, $04                                 ; $4B09: $06 $04
 .loop_4B0B_1C:

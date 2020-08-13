@@ -184,7 +184,7 @@ LoadBank1AndReturn::
 func_91D::
     push af                                       ; $091D: $F5
     ld   b, $00                                   ; $091E: $06 $00
-    ld   a, [$DDD8]                               ; $0920: $FA $D8 $DD
+    ld   a, [wDDD8]                               ; $0920: $FA $D8 $DD
     sla  a                                        ; $0923: $CB $27
     rl   b                                        ; $0925: $CB $10
     sla  a                                        ; $0927: $CB $27
@@ -199,11 +199,11 @@ func_91D::
     callsb GetBGAttributesAddressForObject        ; $092F: $3E $1A $EA $00 $21 $CD $76 $65
     ldh  a, [hScratch8]                           ; $0937: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $0939: $EA $00 $21
-    ld   hl, $DC91                                ; $093C: $21 $91 $DC
-    ld   a, [$DC90]                               ; $093F: $FA $90 $DC
+    ld   hl, wDC91                                ; $093C: $21 $91 $DC
+    ld   a, [wDC90]                               ; $093F: $FA $90 $DC
     ld   e, a                                     ; $0942: $5F
     add  a, $0A                                   ; $0943: $C6 $0A
-    ld   [$DC90], a                               ; $0945: $EA $90 $DC
+    ld   [wDC90], a                               ; $0945: $EA $90 $DC
     ld   d, $00                                   ; $0948: $16 $00
     add  hl, de                                   ; $094A: $19
     ldh  a, [hScratch9]                           ; $094B: $F0 $E0
@@ -287,12 +287,12 @@ func_999::
     pop  bc                                       ; $09A0: $C1
     call func_983                                 ; $09A1: $CD $83 $09
     ldh  [hScratch1], a                           ; $09A4: $E0 $D8
-    ld   a, [$DC90]                               ; $09A6: $FA $90 $DC
+    ld   a, [wDC90]                               ; $09A6: $FA $90 $DC
     ld   c, a                                     ; $09A9: $4F
     ld   b, $00                                   ; $09AA: $06 $00
     add  a, $05                                   ; $09AC: $C6 $05
-    ld   [$DC90], a                               ; $09AE: $EA $90 $DC
-    ld   hl, $DC91                                ; $09B1: $21 $91 $DC
+    ld   [wDC90], a                               ; $09AE: $EA $90 $DC
+    ld   hl, wDC91                                ; $09B1: $21 $91 $DC
     add  hl, bc                                   ; $09B4: $09
     ldh  a, [$FFCF]                               ; $09B5: $F0 $CF
     ldi  [hl], a                                  ; $09B7: $22
@@ -403,7 +403,7 @@ CopyColorDungeonSymbols::
     ld   a, BANK(ColorDungeonNpcTiles)            ; $0A33: $3E $35
     ld   [MBC3SelectBank], a                      ; $0A35: $EA $00 $21
     ld   hl, ColorDungeonNpcTiles + $F00          ; $0A38: $21 $00 $4F
-    ld   de, $DCC0                                ; $0A3B: $11 $C0 $DC
+    ld   de, wDCC0                                ; $0A3B: $11 $C0 $DC
     ld   bc, $20                                  ; $0A3E: $01 $20 $00
     call CopyData                                 ; $0A41: $CD $14 $29
     jp   RestoreStackedBankAndReturn              ; $0A44: $C3 $73 $09
@@ -1678,8 +1678,8 @@ InitGotItemSequence::
     xor  a                                        ; $111F: $AF
     ld   [wInvincibilityCounter], a               ; $1120: $EA $C7 $DB
     ldh  [$FF9C], a                               ; $1123: $E0 $9C
-    ld   [$DDD6], a                               ; $1125: $EA $D6 $DD
-    ld   [$DDD7], a                               ; $1128: $EA $D7 $DD
+    ld   [wDDD6], a                               ; $1125: $EA $D6 $DD
+    ld   [wDDD7], a                               ; $1128: $EA $D7 $DD
     ld   [wD464], a                               ; $112B: $EA $64 $D4
     call label_27F2                               ; $112E: $CD $F2 $27
     ld   a, WAVE_SFX_LINK_DIES                    ; $1131: $3E $08
@@ -2819,8 +2819,8 @@ LinkMotionMapFadeOutHandler::
     ldh  [hBaseScrollX], a                        ; $185B: $E0 $96
     ldh  [hBaseScrollY], a                        ; $185D: $E0 $97
     ldh  [$FFB4], a                               ; $185F: $E0 $B4
-    ld   [$DDD6], a                               ; $1861: $EA $D6 $DD
-    ld   [$DDD7], a                               ; $1864: $EA $D7 $DD
+    ld   [wDDD6], a                               ; $1861: $EA $D6 $DD
+    ld   [wDDD7], a                               ; $1864: $EA $D7 $DD
 
     ld   e, $10                                   ; $1867: $1E $10
     ld   hl, wEntitiesStatusTable                 ; $1869: $21 $80 $C2
@@ -4816,7 +4816,7 @@ LoadDungeonTiles::
     call AdjustBankNumberForGBC                   ; $2C9C: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $2C9F: $EA $00 $21
     ld   hl, Items1Tiles + $3C0                   ; $2CA2: $21 $C0 $47
-    ld   de, $DCC0                                ; $2CA5: $11 $C0 $DC
+    ld   de, wDCC0                                ; $2CA5: $11 $C0 $DC
     ld   bc, TILE_SIZE * $4                       ; $2CA8: $01 $40 $00
     call CopyData                                 ; $2CAB: $CD $14 $29
 

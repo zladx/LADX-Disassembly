@@ -187,7 +187,7 @@ JumpTable_037_40EC::
     ld   a, [hl+]                                 ; $4129: $2A
     ld   h, [hl]                                  ; $412A: $66
     ld   l, a                                     ; $412B: $6F
-    ld   de, $DC10                                ; $412C: $11 $10 $DC
+    ld   de, wDC10                                ; $412C: $11 $10 $DC
     ld   bc, $80                                  ; $412F: $01 $80 $00
     ld   a, $02                                   ; $4132: $3E $02
     ldh  [rSVBK], a                               ; $4134: $E0 $70
@@ -202,7 +202,7 @@ JumpTable_037_40EC::
     ld   hl, Data_037_40E0                        ; $4146: $21 $E0 $40
     add  hl, de                                   ; $4149: $19
     push hl                                       ; $414A: $E5
-    ld   de, $DC54                                ; $414B: $11 $54 $DC
+    ld   de, wDC54                                ; $414B: $11 $54 $DC
     ld   a, $02                                   ; $414E: $3E $02
     ld   [rSVBK], a                               ; $4150: $E0 $70
 .loop_4152_37:
@@ -220,7 +220,7 @@ JumpTable_037_40EC::
     cp   GAMEPLAY_PHOTO_MARIN_CLIFF               ; $4161: $FE $10
     jr   nz, .else_4174_37                        ; $4163: $20 $0F
 
-    ld   de, $DC34                                ; $4165: $11 $34 $DC
+    ld   de, wDC34                                ; $4165: $11 $34 $DC
     ld   a, $02                                   ; $4168: $3E $02
     ldh  [rSVBK], a                               ; $416A: $E0 $70
     ld   a, [hl+]                                 ; $416C: $2A
@@ -815,7 +815,7 @@ func_037_4552::
 
 .else_4570_37:
     ld   hl, rSVBK                                ; $4570: $21 $70 $FF
-    ld   de, $DC10                                ; $4573: $11 $10 $DC
+    ld   de, wDC10                                ; $4573: $11 $10 $DC
 
 .loop_4576_37:
     ld   a, [de]                                  ; $4576: $1A
@@ -872,7 +872,7 @@ func_037_4552::
     jr   nz, .else_45D3_37                        ; $45B7: $20 $1A
 
     ld   hl, rSVBK                                ; $45B9: $21 $70 $FF
-    ld   de, $DC10                                ; $45BC: $11 $10 $DC
+    ld   de, wDC10                                ; $45BC: $11 $10 $DC
 
 .loop_45BF_37:
     ld   [hl], $03                                ; $45BF: $36 $03
@@ -937,7 +937,7 @@ func_037_4552::
     di                                            ; $4617: $F3
     ld   a, $03                                   ; $4618: $3E $03
     ldh  [rSVBK], a                               ; $461A: $E0 $70
-    ld   de, $DC10                                ; $461C: $11 $10 $DC
+    ld   de, wDC10                                ; $461C: $11 $10 $DC
     ld   hl, Data_037_454A                        ; $461F: $21 $4A $45
 
 .loop_4622_37:

@@ -1172,7 +1172,7 @@ DidKillEnemy::
     inc  a                                        ; $3F6D: $3C
     ld   [wKillCount2], a                         ; $3F6E: $EA $B5 $DB
     ld   a, [hl]                                  ; $3F71: $7E
-    ld   hl, $DBB6                                ; $3F72: $21 $B6 $DB
+    ld   hl, wDBB6                                ; $3F72: $21 $B6 $DB
     add  hl, de                                   ; $3F75: $19
     ld   [hl], a                                  ; $3F76: $77
     pop  af                                       ; $3F77: $F1

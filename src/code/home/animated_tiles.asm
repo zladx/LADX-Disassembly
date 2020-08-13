@@ -322,7 +322,7 @@ AnimateLavaTilesGroup::
     jp   LoadAnimatedTilesFrame                   ; $1CA6: $C3 $51 $1C
 
 AnimateDungeon2TilesGroup::
-    ld   hl, $DCC0                                ; $1CA9: $21 $C0 $DC
+    ld   hl, wDCC0                                ; $1CA9: $21 $C0 $DC
     ldh  a, [hMapId]                              ; $1CAC: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $1CAE: $FE $FF
     jr   nz, label_1CB8                           ; $1CB0: $20 $06

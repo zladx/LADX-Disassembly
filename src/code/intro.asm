@@ -738,7 +738,7 @@ func_001_7338::
     ld   a, [hli]                                 ; $7344: $2A
     ld   d, [hl]                                  ; $7345: $56
     ld   e, a                                     ; $7346: $5F
-    ld   hl, $DC91                                ; $7347: $21 $91 $DC
+    ld   hl, wDC91                                ; $7347: $21 $91 $DC
     ld   c, $13                                   ; $734A: $0E $13
 
 jr_001_734C::
@@ -809,7 +809,7 @@ Data_001_73AC::
 
 func_001_73B1::
     ld   de, Data_001_73AC                        ; $73B1: $11 $AC $73
-    ld   hl, $DC91                                ; $73B4: $21 $91 $DC
+    ld   hl, wDC91                                ; $73B4: $21 $91 $DC
     ld   c, $12                                   ; $73B7: $0E $12
 
 .loop
@@ -1831,7 +1831,7 @@ ENDC
 
     ld   hl, Data_001_78A0                        ; $79CD: $21 $A0 $78
     add  hl, bc                                   ; $79D0: $09
-    ld   bc, $DC78                                ; $79D1: $01 $78 $DC
+    ld   bc, wDC78                                ; $79D1: $01 $78 $DC
     ld   e, CHUNKSIZE                             ; $79D4: $1E $10
 
 .loop
@@ -2124,7 +2124,7 @@ func_7C60::
     ret                                           ; $7CCA: $C9
 
 func_001_7CCB::
-    ld   hl, $DC91                                ; $7CCB: $21 $91 $DC
+    ld   hl, wDC91                                ; $7CCB: $21 $91 $DC
     ld   a, [$D00C]                               ; $7CCE: $FA $0C $D0
     ldi  [hl], a                                  ; $7CD1: $22
     ld   a, [$D00B]                               ; $7CD2: $FA $0B $D0

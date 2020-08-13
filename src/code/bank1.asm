@@ -269,7 +269,7 @@ LoadSavedFile::
     ld   [wHealth], a                             ; $52B8: $EA $5A $DB
 
 .skipHealthReset:
-    ld   hl, $DBD1                                ; $52BB: $21 $D1 $DB
+    ld   hl, wDBD1                                ; $52BB: $21 $D1 $DB
     ld   a, [hl]                                  ; $52BE: $7E
     ld   [hl], $00                                ; $52BF: $36 $00
     and  a                                        ; $52C1: $A7
@@ -748,7 +748,7 @@ FileSaveFadeOut::
     ldh  a, [hIsGBC]                              ; $582F: $F0 $FE
     and  a                                        ; $5831: $A7
     jr   z, jr_001_5854                           ; $5832: $28 $20
-    ld   hl, $DC10                                ; $5834: $21 $10 $DC
+    ld   hl, wDC10                                ; $5834: $21 $10 $DC
     ld   c, $80                                   ; $5837: $0E $80
     di                                            ; $5839: $F3
 
@@ -882,7 +882,7 @@ Data_001_5A6E::
     db 0, $F0, $10                                ; $5A6E
 
 func_001_5A71::
-    ld   a, [$DBB4]                               ; $5A71: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $5A71: $FA $B4 $DB
     ldh  [hScratch0], a                           ; $5A74: $E0 $D7
     ld   a, [$C1B3]                               ; $5A76: $FA $B3 $C1
     ld   hl, $C1B2                                ; $5A79: $21 $B2 $C1
@@ -919,7 +919,7 @@ jr_001_5AA0::
     ld   d, $00                                   ; $5AA4: $16 $00
     ld   hl, Data_001_5A6B                        ; $5AA6: $21 $6B $5A
     add  hl, de                                   ; $5AA9: $19
-    ld   a, [$DBB4]                               ; $5AAA: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $5AAA: $FA $B4 $DB
     ld   d, a                                     ; $5AAD: $57
     and  $F0                                      ; $5AAE: $E6 $F0
     ld   e, a                                     ; $5AB0: $5F
@@ -927,7 +927,7 @@ jr_001_5AA0::
     add  a, [hl]                                  ; $5AB2: $86
     and  $0F                                      ; $5AB3: $E6 $0F
     or   e                                        ; $5AB5: $B3
-    ld   [$DBB4], a                               ; $5AB6: $EA $B4 $DB
+    ld   [wDBB4], a                               ; $5AB6: $EA $B4 $DB
     ld   a, c                                     ; $5AB9: $79
     rra                                           ; $5ABA: $1F
     rra                                           ; $5ABB: $1F
@@ -936,10 +936,10 @@ jr_001_5AA0::
     ld   d, $00                                   ; $5ABF: $16 $00
     ld   hl, Data_001_5A6E                        ; $5AC1: $21 $6E $5A
     add  hl, de                                   ; $5AC4: $19
-    ld   a, [$DBB4]                               ; $5AC5: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $5AC5: $FA $B4 $DB
     add  a, [hl]                                  ; $5AC8: $86
     ld   hl, hScratch0                            ; $5AC9: $21 $D7 $FF
-    ld   [$DBB4], a                               ; $5ACC: $EA $B4 $DB
+    ld   [wDBB4], a                               ; $5ACC: $EA $B4 $DB
     cp   [hl]                                     ; $5ACF: $BE
     jr   z, label_001_5B3F                        ; $5AD0: $28 $6D
     ld   e, a                                     ; $5AD2: $5F
@@ -958,7 +958,7 @@ jr_001_5AA0::
     ld   a, JINGLE_BUMP                           ; $5AEA: $3E $09
     ldh  [hJingle], a                             ; $5AEC: $E0 $F2
     ldh  a, [hScratch0]                           ; $5AEE: $F0 $D7
-    ld   [$DBB4], a                               ; $5AF0: $EA $B4 $DB
+    ld   [wDBB4], a                               ; $5AF0: $EA $B4 $DB
     jr   label_001_5B3F                           ; $5AF3: $18 $4A
 
 jr_001_5AF5::
@@ -993,7 +993,7 @@ jr_001_5B19::
 jr_001_5B24::
     ld   a, c                                     ; $5B24: $79
     ld   [$C1B1], a                               ; $5B25: $EA $B1 $C1
-    ld   a, [$DBB4]                               ; $5B28: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $5B28: $FA $B4 $DB
     ld   [$C1B4], a                               ; $5B2B: $EA $B4 $C1
     jr   label_001_5B3F                           ; $5B2E: $18 $0F
 
@@ -1008,12 +1008,12 @@ jr_001_5B30::
 
 label_001_5B3F::
     ld   hl, $C080                                ; $5B3F: $21 $80 $C0
-    ld   a, [$DBB4]                               ; $5B42: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $5B42: $FA $B4 $DB
     rra                                           ; $5B45: $1F
     and  $78                                      ; $5B46: $E6 $78
     add  a, $14                                   ; $5B48: $C6 $14
     ld   e, a                                     ; $5B4A: $5F
-    ld   a, [$DBB4]                               ; $5B4B: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $5B4B: $FA $B4 $DB
     swap a                                        ; $5B4E: $CB $37
     rra                                           ; $5B50: $1F
     and  $78                                      ; $5B51: $E6 $78
@@ -2335,7 +2335,7 @@ PeachPictureState0Handler::
     ldh  a, [hIsGBC]                              ; $680B: $F0 $FE
     and  a                                        ; $680D: $A7
     jr   z, PeachPictureState1Handler             ; $680E: $28 $19
-    ld   hl, $DC10                                ; $6810: $21 $10 $DC
+    ld   hl, wDC10                                ; $6810: $21 $10 $DC
     ld   c, $80                                   ; $6813: $0E $80
     di                                            ; $6815: $F3
 

@@ -1365,7 +1365,7 @@ CreditsStairsOwlSpeechHandler::
     ret  z                                        ; $4E4F: $C8
 
     ld   bc, wRequestDestinationHigh              ; $4E50: $01 $01 $D6
-    ld   de, $DC91                                ; $4E53: $11 $91 $DC
+    ld   de, wDC91                                ; $4E53: $11 $91 $DC
     ld   hl, $9880                                ; $4E56: $21 $80 $98
     swap a                                        ; $4E59: $CB $37
     sla  a                                        ; $4E5B: $CB $27
@@ -1418,7 +1418,7 @@ func_017_4E93::
     and  a                                        ; $4E95: $A7
     ret  z                                        ; $4E96: $C8
 
-    ld   hl, $DC10                                ; $4E97: $21 $10 $DC
+    ld   hl, wDC10                                ; $4E97: $21 $10 $DC
     ld   b, $40                                   ; $4E9A: $06 $40
     xor  a                                        ; $4E9C: $AF
 
@@ -1427,7 +1427,7 @@ func_017_4E93::
     dec  b                                        ; $4E9E: $05
     jr   nz, .loop                                ; $4E9F: $20 $FC
 
-    ld   hl, $DC1E                                ; $4EA1: $21 $1E $DC
+    ld   hl, wDC1E                                ; $4EA1: $21 $1E $DC
     dec  a                                        ; $4EA4: $3D
     ld   [hl+], a                                 ; $4EA5: $22
     ld   a, $47                                   ; $4EA6: $3E $47
@@ -1560,7 +1560,7 @@ jr_017_5115:
 
     ld   hl, Data_017_4FDF                        ; $5120: $21 $DF $4F
     add  hl, de                                   ; $5123: $19
-    ld   de, $DC91                                ; $5124: $11 $91 $DC
+    ld   de, wDC91                                ; $5124: $11 $91 $DC
     ld   c, $18                                   ; $5127: $0E $18
 
 jr_017_5129:
@@ -1702,7 +1702,7 @@ jr_017_53B8:
     ld   hl, Data_017_51A7                        ; $53C4: $21 $A7 $51
     add  hl, bc                                   ; $53C7: $09
     ld   bc, $0040                                ; $53C8: $01 $40 $00
-    ld   de, $DC10                                ; $53CB: $11 $10 $DC
+    ld   de, wDC10                                ; $53CB: $11 $10 $DC
     call CopyData                                 ; $53CE: $CD $14 $29
     xor  a                                        ; $53D1: $AF
     ld   [wPaletteUnknownC], a                    ; $53D2: $EA $D3 $DD
@@ -1880,7 +1880,7 @@ jr_017_54F6:
 
     ld   hl, Data_017_5494                        ; $54F7: $21 $94 $54
     add  hl, de                                   ; $54FA: $19
-    ld   de, $DC91                                ; $54FB: $11 $91 $DC
+    ld   de, wDC91                                ; $54FB: $11 $91 $DC
     ld   c, $03                                   ; $54FE: $0E $03
 
 jr_017_5500:
@@ -3092,7 +3092,7 @@ jr_017_5F75:
     and  a                                        ; $5F7E: $A7
     ret  z                                        ; $5F7F: $C8
 
-    ld   de, $DC91                                ; $5F80: $11 $91 $DC
+    ld   de, wDC91                                ; $5F80: $11 $91 $DC
     ld   a, [hl+]                                 ; $5F83: $2A
     ld   [de], a                                  ; $5F84: $12
     inc  de                                       ; $5F85: $13
@@ -4012,7 +4012,7 @@ jr_017_67E7:
     ld   a, [hl+]                                 ; $67F8: $2A
     ld   h, [hl]                                  ; $67F9: $66
     ld   l, a                                     ; $67FA: $6F
-    ld   de, $DC91                                ; $67FB: $11 $91 $DC
+    ld   de, wDC91                                ; $67FB: $11 $91 $DC
     ld   c, $36                                   ; $67FE: $0E $36
 
 jr_017_6800:
@@ -4211,7 +4211,7 @@ label_017_6A80:
     ld   hl, Data_017_6900                        ; $6A90: $21 $00 $69
     add  hl, bc                                   ; $6A93: $09
     ld   bc, $30                                  ; $6A94: $01 $30 $00
-    ld   de, $DC50                                ; $6A97: $11 $50 $DC
+    ld   de, wDC50                                ; $6A97: $11 $50 $DC
     call CopyData                                 ; $6A9A: $CD $14 $29
     xor  a                                        ; $6A9D: $AF
     ld   [wPaletteUnknownC], a                    ; $6A9E: $EA $D3 $DD
@@ -4863,7 +4863,7 @@ jr_017_6FA7:
     ret  z                                        ; $6FB0: $C8
 
     ld   hl, Data_017_6F8E                        ; $6FB1: $21 $8E $6F
-    ld   de, $DC91                                ; $6FB4: $11 $91 $DC
+    ld   de, wDC91                                ; $6FB4: $11 $91 $DC
     ld   c, $11                                   ; $6FB7: $0E $11
 
 jr_017_6FB9:
@@ -4891,7 +4891,7 @@ CreditsTheEnd0Handler::
     and  a                                        ; $6FD5: $A7
     ret  nz                                       ; $6FD6: $C0
 
-    ld   hl, $DC56                                ; $6FD7: $21 $56 $DC
+    ld   hl, wDC56                                ; $6FD7: $21 $56 $DC
     ld   a, $FF                                   ; $6FDA: $3E $FF
     ld   [hl+], a                                 ; $6FDC: $22
     ld   a, $7F                                   ; $6FDD: $3E $7F
@@ -4951,7 +4951,7 @@ CreditsTheEnd3Handler::
 CreditsTheEnd4Handler::
     ld   a, $23                                   ; $7036: $3E $23
     ld   [wTileMapToLoad], a                      ; $7038: $EA $FE $D6
-    ld   hl, $DC18                                ; $703B: $21 $18 $DC
+    ld   hl, wDC18                                ; $703B: $21 $18 $DC
     ld   a, $FF                                   ; $703E: $3E $FF
     ld   [hl+], a                                 ; $7040: $22
     ld   a, $47                                   ; $7041: $3E $47
@@ -4989,7 +4989,7 @@ CreditsTheEnd5Handler::
     jr   nz, .loop_017_70B9                       ; $70BD: $20 $FA
 
     ld   hl, Data_017_70A0                        ; $70BF: $21 $A0 $70
-    ld   de, $DC91                                ; $70C2: $11 $91 $DC
+    ld   de, wDC91                                ; $70C2: $11 $91 $DC
     ld   c, Data_017_70A0.end - Data_017_70A0                                   ; $70C5: $0E $11
 
 .loop_017_70C7
@@ -5958,7 +5958,7 @@ func_017_7A01::
     ld   d, $00                                   ; $7A12: $16 $00
     ld   hl, Data_017_79C1                        ; $7A14: $21 $C1 $79
     add  hl, de                                   ; $7A17: $19
-    ld   de, $DC5C                                ; $7A18: $11 $5C $DC
+    ld   de, wDC5C                                ; $7A18: $11 $5C $DC
 
 jr_017_7A1B:
     ld   a, [hl+]                                 ; $7A1B: $2A
@@ -6713,7 +6713,7 @@ ELSE
     ldh  [hScratchE], a                           ; $7E8E: $E0 $E5
     ld   a, $18                                   ; $7E90: $3E $18
     ldh  [hFreeWarpDataAddress], a                ; $7E92: $E0 $E6
-    ld   hl, $DC10                                ; $7E94: $21 $10 $DC
+    ld   hl, wDC10                                ; $7E94: $21 $10 $DC
     ld   a, $40                                   ; $7E97: $3E $40
     ldh  [hScratch3], a                           ; $7E99: $E0 $DA
     call func_017_7EA4                            ; $7E9B: $CD $A4 $7E
@@ -6873,7 +6873,7 @@ ELSE
     ldh  [hScratchE], a                           ; $7F42: $E0 $E5
     ld   a, $18                                   ; $7F44: $3E $18
     ldh  [hFreeWarpDataAddress], a                ; $7F46: $E0 $E6
-    ld   hl, $DC10                                ; $7F48: $21 $10 $DC
+    ld   hl, wDC10                                ; $7F48: $21 $10 $DC
     ld   d, $40                                   ; $7F4B: $16 $40
     call func_017_7F57                            ; $7F4D: $CD $57 $7F
 ENDC

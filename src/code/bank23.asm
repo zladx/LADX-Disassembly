@@ -313,7 +313,7 @@ jr_023_7EBE:
     and  a                                        ; $7EC7: $A7
     ret  z                                        ; $7EC8: $C8
 
-    ld   de, $DC91                                ; $7EC9: $11 $91 $DC
+    ld   de, wDC91                                ; $7EC9: $11 $91 $DC
     ld   a, [$D00D]                               ; $7ECC: $FA $0D $D0
     cp   $50                                      ; $7ECF: $FE $50
     jr   z, jr_023_7EEE                           ; $7ED1: $28 $1B

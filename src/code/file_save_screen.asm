@@ -24,7 +24,7 @@ FileSaveInitial::
     jr   z, FileSaveMapFadeOut                    ; $4018: $28 $28
 
     ; Running on GBC: copy data from WRAM0 to WRAM3
-    ld   hl, $DC10 ; start address                ; $401A: $21 $10 $DC
+    ld   hl, wDC10 ; start address                ; $401A: $21 $10 $DC
     ld   c, $80    ; bytes count                  ; $401D: $0E $80
 
     ; Disable interrupts

@@ -514,9 +514,9 @@ FileCreationInit1Handler::
     ld   a, $08                                   ; $4A14: $3E $08
     ld   [wTileMapToLoad], a                      ; $4A16: $EA $FE $D6
     xor  a                                        ; $4A19: $AF
-    ld   [$DBA8], a                               ; $4A1A: $EA $A8 $DB
-    ld   [$DBA9], a                               ; $4A1D: $EA $A9 $DB
-    ld   [$DBAA], a                               ; $4A20: $EA $AA $DB
+    ld   [wDBA8], a                               ; $4A1A: $EA $A8 $DB
+    ld   [wDBA9], a                               ; $4A1D: $EA $A9 $DB
+    ld   [wDBAA], a                               ; $4A20: $EA $AA $DB
     ret                                           ; $4A23: $C9
 
 FileCreationInit2Handler::
@@ -775,7 +775,7 @@ jr_001_4C21::
     call func_001_6BAE                            ; $4C21: $CD $AE $6B
     bit  1, a                                     ; $4C24: $CB $4F
     jr   nz, jr_001_4C34                          ; $4C26: $20 $0C
-    ld   a, [$DBA9]                               ; $4C28: $FA $A9 $DB
+    ld   a, [wDBA9]                               ; $4C28: $FA $A9 $DB
     add  a, $01                                   ; $4C2B: $C6 $01
     cp   NameEntryCharacterTableSize              ; $4C2D: $FE $40
     jr   c, jr_001_4C5E                           ; $4C2F: $38 $2D
@@ -783,7 +783,7 @@ jr_001_4C21::
     jr   jr_001_4C5E                              ; $4C32: $18 $2A
 
 jr_001_4C34::
-    ld   a, [$DBA9]                               ; $4C34: $FA $A9 $DB
+    ld   a, [wDBA9]                               ; $4C34: $FA $A9 $DB
     sub  a, $01                                   ; $4C37: $D6 $01
     cp   $FF                                      ; $4C39: $FE $FF
     jr   nz, jr_001_4C5E                          ; $4C3B: $20 $21
@@ -794,31 +794,31 @@ jr_001_4C41::
     call func_001_6BAE                            ; $4C41: $CD $AE $6B
     bit  2, a                                     ; $4C44: $CB $57
     jr   z, jr_001_4C53                           ; $4C46: $28 $0B
-    ld   a, [$DBA9]                               ; $4C48: $FA $A9 $DB
+    ld   a, [wDBA9]                               ; $4C48: $FA $A9 $DB
     sub  a, $10                                   ; $4C4B: $D6 $10
     jr   nc, jr_001_4C5E                          ; $4C4D: $30 $0F
     add  a, NameEntryCharacterTableSize           ; $4C4F: $C6 $40
     jr   jr_001_4C5E                              ; $4C51: $18 $0B
 
 jr_001_4C53::
-    ld   a, [$DBA9]                               ; $4C53: $FA $A9 $DB
+    ld   a, [wDBA9]                               ; $4C53: $FA $A9 $DB
     add  a, $10                                   ; $4C56: $C6 $10
     cp   NameEntryCharacterTableSize              ; $4C58: $FE $40
     jr   c, jr_001_4C5E                           ; $4C5A: $38 $02
     sub  a, NameEntryCharacterTableSize           ; $4C5C: $D6 $40
 
 jr_001_4C5E::
-    ld   [$DBA9], a                               ; $4C5E: $EA $A9 $DB
+    ld   [wDBA9], a                               ; $4C5E: $EA $A9 $DB
     jr   jr_001_4C63                              ; $4C61: $18 $00
 
 jr_001_4C63::
-    ld   a, [$DBA9]                               ; $4C63: $FA $A9 $DB
+    ld   a, [wDBA9]                               ; $4C63: $FA $A9 $DB
     ld   hl, Data_001_4B70                        ; $4C66: $21 $70 $4B
     ld   c, a                                     ; $4C69: $4F
     ld   b, $00                                   ; $4C6A: $06 $00
     add  hl, bc                                   ; $4C6C: $09
     ld   e, [hl]                                  ; $4C6D: $5E
-    ld   a, [$DBA9]                               ; $4C6E: $FA $A9 $DB
+    ld   a, [wDBA9]                               ; $4C6E: $FA $A9 $DB
     ld   hl, Data_001_4B30                        ; $4C71: $21 $30 $4B
     ld   c, a                                     ; $4C74: $4F
     ld   b, $00                                   ; $4C75: $06 $00
@@ -845,7 +845,7 @@ func_001_4C8A::                            ; "Enter Name" screen
     jr   nz, jr_001_4CA7                 ; If yes, backspace ; $4C92: $20 $13
     call PlayValidationJingle           ; Otherwise, A was pushed ; $4C94: $CD $BE $49
     call func_001_4CDA                     ; so add the current letter ; $4C97: $CD $DA $4C
-    ld   a, [$DBAA]                               ; $4C9A: $FA $AA $DB
+    ld   a, [wDBAA]                               ; $4C9A: $FA $AA $DB
     add  a, $01                                   ; $4C9D: $C6 $01
     cp   $05                            ; Prevent cursor from going > 5th place ; $4C9F: $FE $05
     jr   c, jr_001_4CB4                           ; $4CA1: $38 $11
@@ -855,17 +855,17 @@ func_001_4C8A::                            ; "Enter Name" screen
 jr_001_4CA7::
     ; B button when inputting filename
     call PlayValidationJingle                     ; $4CA7: $CD $BE $49
-    ld   a, [$DBAA]                               ; $4CAA: $FA $AA $DB
+    ld   a, [wDBAA]                               ; $4CAA: $FA $AA $DB
     sub  a, $01                                   ; $4CAD: $D6 $01
     cp   $FF                                      ; $4CAF: $FE $FF
     jr   nz, jr_001_4CB4                          ; $4CB1: $20 $01
     xor  a                              ; Prevent cursor from going < 1st place ; $4CB3: $AF
 
 jr_001_4CB4::
-    ld   [$DBAA], a                               ; $4CB4: $EA $AA $DB
+    ld   [wDBAA], a                               ; $4CB4: $EA $AA $DB
 
 jr_001_4CB7::
-    ld   a, [$DBAA]                               ; $4CB7: $FA $AA $DB
+    ld   a, [wDBAA]                               ; $4CB7: $FA $AA $DB
     ld   hl, Data_001_4BB0                        ; $4CBA: $21 $B0 $4B
     ld   c, a                                     ; $4CBD: $4F
     ld   b, $00                                   ; $4CBE: $06 $00
@@ -890,7 +890,7 @@ jr_001_4CB7::
     ret                                           ; $4CD9: $C9
 
 func_001_4CDA::
-    ld   a, [$DBA9]                               ; $4CDA: $FA $A9 $DB
+    ld   a, [wDBA9]                               ; $4CDA: $FA $A9 $DB
     ld   c, a                                     ; $4CDD: $4F
     ld   b, $00                                   ; $4CDE: $06 $00
     ld   hl, NameEntryCharacterTable              ; $4CE0: $21 $B5 $4B
@@ -905,7 +905,7 @@ func_001_4CDA::
     ld   c, a                                     ; $4CEF: $4F
     ld   hl, wDB80                                ; $4CF0: $21 $80 $DB
     add  hl, bc                                   ; $4CF3: $09
-    ld   a, [$DBAA]                               ; $4CF4: $FA $AA $DB
+    ld   a, [wDBAA]                               ; $4CF4: $FA $AA $DB
     ld   c, a                                     ; $4CF7: $4F
     add  hl, bc                                   ; $4CF8: $09
     ld   [hl], e                                  ; $4CF9: $73
@@ -1030,17 +1030,17 @@ func_001_4DA6::
 IF __PATCH_4__
     ret  z
     xor  a
-    ld   hl, $DC06
-    ld   de, $DC09
+    ld   hl, wDC06
+    ld   de, wDC09
     ; fallthrough
 ELSE
     jr   z, jr_001_4DBD                            ; $4DAB: $28 $10 ; $4DAB: $28 $10
 
     xor  a                                        ; $4DAD: $AF ; $4DAD: $AF
     ldh  [hScratch4], a                           ; $4DAE: $E0 $DB ; $4DAE: $E0 $DB
-    ld   a, [$DC06]                               ; $4DB0: $FA $06 $DC ; $4DB0: $FA $06 $DC
+    ld   a, [wDC06]                               ; $4DB0: $FA $06 $DC ; $4DB0: $FA $06 $DC
     ldh  [hScratch2], a                           ; $4DB3: $E0 $D9 ; $4DB3: $E0 $D9
-    ld   a, [$DC09]                               ; $4DB5: $FA $09 $DC ; $4DB5: $FA $09 $DC
+    ld   a, [wDC09]                               ; $4DB5: $FA $09 $DC ; $4DB5: $FA $09 $DC
     ldh  [hScratch3], a                           ; $4DB8: $E0 $DA ; $4DB8: $E0 $DA
     jp   label_001_5D53                               ; $4DBA: $C3 $53 $5D ; $4DBA: $C3 $53 $5D
 ENDC
@@ -1084,17 +1084,17 @@ func_001_4DBE::
 IF __PATCH_4__
     ret  z
     ld   a, $01
-    ld   hl, $dC07
-    ld   de, $dC0a
+    ld   hl, wDC07
+    ld   de, wDC0A
     jr   jr_001_4db6
 ELSE
     jr   z, jr_001_4DBD                            ; $4DC3: $28 $F8 ; $4DC3: $28 $F8
 
     ld   a, $01                                   ; $4DC5: $3E $01 ; $4DC5: $3E $01
     ldh  [hScratch4], a                           ; $4DC7: $E0 $DB ; $4DC7: $E0 $DB
-    ld   a, [$DC07]                               ; $4DC9: $FA $07 $DC ; $4DC9: $FA $07 $DC
+    ld   a, [wDC07]                               ; $4DC9: $FA $07 $DC ; $4DC9: $FA $07 $DC
     ldh  [hScratch2], a                           ; $4DCC: $E0 $D9 ; $4DCC: $E0 $D9
-    ld   a, [$DC0A]                               ; $4DCE: $FA $0A $DC ; $4DCE: $FA $0A $DC
+    ld   a, [wDC0A]                               ; $4DCE: $FA $0A $DC ; $4DCE: $FA $0A $DC
     ldh  [hScratch3], a                           ; $4DD1: $E0 $DA ; $4DD1: $E0 $DA
     jp   label_001_5D53                               ; $4DD3: $C3 $53 $5D ; $4DD3: $C3 $53 $5D
 ENDC
@@ -1105,17 +1105,17 @@ func_001_4DD6::
 IF __PATCH_4__
     ret  z
     ld   a, $02
-    ld   hl, $dC08
-    ld   de, $dC0B
+    ld   hl, wDC08
+    ld   de, wDC0B
     jr   jr_001_4db6
 ELSE
     jr   z, jr_001_4DBD                            ; $4DDB: $28 $E0 ; $4DDB: $28 $E0
 
     ld   a, $02                                   ; $4DDD: $3E $02 ; $4DDD: $3E $02
     ldh  [hScratch4], a                           ; $4DDF: $E0 $DB ; $4DDF: $E0 $DB
-    ld   a, [$DC08]                               ; $4DE1: $FA $08 $DC ; $4DE1: $FA $08 $DC
+    ld   a, [wDC08]                               ; $4DE1: $FA $08 $DC ; $4DE1: $FA $08 $DC
     ldh  [hScratch2], a                           ; $4DE4: $E0 $D9 ; $4DE4: $E0 $D9
-    ld   a, [$DC0B]                               ; $4DE6: $FA $0B $DC ; $4DE6: $FA $0B $DC
+    ld   a, [wDC0B]                               ; $4DE6: $FA $0B $DC ; $4DE6: $FA $0B $DC
     ldh  [hScratch3], a                           ; $4DE9: $E0 $DA ; $4DE9: $E0 $DA
     jp   label_001_5D53                               ; $4DEB: $C3 $53 $5D ; $4DEB: $C3 $53 $5D
 ENDC

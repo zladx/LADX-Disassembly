@@ -275,8 +275,8 @@ IncrementDialogStateAndReturn::
     ret                                           ; $2489: $C9
 
 DialogFinishedHandler::
-    ; If $C1AB == 0...
-    ld   a, [$C1AB]                               ; $248A: $FA $AB $C1
+    ; If wC1AB == 0...
+    ld   a, [wC1AB]                               ; $248A: $FA $AB $C1
     and  a                                        ; $248D: $A7
     jr   nz, UpdateDialogState_return             ; $248E: $20 $1E
     ; ... and A or B is pressed...

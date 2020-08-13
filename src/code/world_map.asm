@@ -75,11 +75,11 @@ WorldMapState1Handler::
     ld   [wTransitionSequenceCounter], a                               ; $5694: $EA $6B $C1
     ld   [wC16C], a                               ; $5697: $EA $6C $C1
     ldh  [hBaseScrollX], a                        ; $569A: $E0 $96
-    ld   [$C1BF], a                               ; $569C: $EA $BF $C1
+    ld   [wScrollXOffset], a                               ; $569C: $EA $BF $C1
     ldh  [$FF97], a                               ; $569F: $E0 $97
     ld   [wInventoryAppearing], a                 ; $56A1: $EA $4F $C1
-    ld   [$C1B2], a                               ; $56A4: $EA $B2 $C1
-    ld   [$C1B3], a                               ; $56A7: $EA $B3 $C1
+    ld   [wC1B2], a                               ; $56A4: $EA $B2 $C1
+    ld   [wC1B3], a                               ; $56A7: $EA $B3 $C1
     ld   a, [$DB54]                               ; $56AA: $FA $54 $DB
     ld   [wDBB4], a                               ; $56AD: $EA $B4 $DB
     ld   e, a                                     ; $56B0: $5F
@@ -107,9 +107,9 @@ WorldMapState1Handler::
     ld   a, $01                                   ; $56D7: $3E $01
 
 jr_001_56D9::
-    ld   [$C1B1], a                               ; $56D9: $EA $B1 $C1
+    ld   [wC1B1], a                               ; $56D9: $EA $B1 $C1
     ld   a, [wDBB4]                               ; $56DC: $FA $B4 $DB
-    ld   [$C1B4], a                               ; $56DF: $EA $B4 $C1
+    ld   [wC1B4], a                               ; $56DF: $EA $B4 $C1
     ld   a, [$FF40]                               ; $56E2: $F0 $40
     and  $DF                                      ; $56E4: $E6 $DF
     ld   [wLCDControl], a                         ; $56E6: $EA $FD $D6

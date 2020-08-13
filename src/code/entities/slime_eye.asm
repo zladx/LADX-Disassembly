@@ -96,7 +96,7 @@ jr_004_49FB:
     jr   nz, jr_004_4A2C                          ; $49FE: $20 $2C
 
     ld   [hl], $50                                ; $4A00: $36 $50
-    ld   a, [$C1AE]                               ; $4A02: $FA $AE $C1
+    ld   a, [wC1AE]                               ; $4A02: $FA $AE $C1
     cp   $02                                      ; $4A05: $FE $02
     jr   nc, jr_004_4A2C                          ; $4A07: $30 $23
 

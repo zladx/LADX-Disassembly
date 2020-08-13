@@ -1278,7 +1278,7 @@ CreditsStairsClimbingHandler::
     ld   [$D003], a                               ; $4D86: $EA $03 $D0
     jr   nc, jr_017_4D8F                          ; $4D89: $30 $04
 
-    ld   hl, $C21E                                ; $4D8B: $21 $1E $C2
+    ld   hl, wEntitiesPosYTable+14                                ; $4D8B: $21 $1E $C2
     inc  [hl]                                     ; $4D8E: $34
 
 jr_017_4D8F:
@@ -2790,9 +2790,9 @@ CreditsWaterAppearingHandler::
     cp   $60                                      ; $5AE9: $FE $60
     jr   nz, jr_017_5AFC                          ; $5AEB: $20 $0F
 
-    ld   a, [$C29F]                               ; $5AED: $FA $9F $C2
+    ld   a, [wEntitiesStateTable+15]                               ; $5AED: $FA $9F $C2
     inc  a                                        ; $5AF0: $3C
-    ld   [$C29F], a                               ; $5AF1: $EA $9F $C2
+    ld   [wEntitiesStateTable+15], a                               ; $5AF1: $EA $9F $C2
     ld   a, $40                                   ; $5AF4: $3E $40
     ld   [$D009], a                               ; $5AF6: $EA $09 $D0
     call IncrementCreditsSubscene                 ; $5AF9: $CD $D9 $4C
@@ -2878,9 +2878,9 @@ CreditsWaterSplashingHandler::
     jp   IncrementCreditsSubsceneAndReturn                           ; $5B70: $C3 $D9 $4C
 
 jr_017_5B73:
-    ld   a, [$C21E]                               ; $5B73: $FA $1E $C2
+    ld   a, [wEntitiesPosYTable+14]                               ; $5B73: $FA $1E $C2
     add  $08                                      ; $5B76: $C6 $08
-    ld   [$C21E], a                               ; $5B78: $EA $1E $C2
+    ld   [wEntitiesPosYTable+14], a                               ; $5B78: $EA $1E $C2
     ld   a, [$D00A]                               ; $5B7B: $FA $0A $D0
     inc  a                                        ; $5B7E: $3C
     ld   [$D00A], a                               ; $5B7F: $EA $0A $D0
@@ -3012,9 +3012,9 @@ Data_017_5EED::
 
 CreditsWaterMovingUpHandler::
     call func_017_5B96                            ; $5F02: $CD $96 $5B
-    ld   a, [$C21E]                               ; $5F05: $FA $1E $C2
+    ld   a, [wEntitiesPosYTable+14]                               ; $5F05: $FA $1E $C2
     add  $04                                      ; $5F08: $C6 $04
-    ld   [$C21E], a                               ; $5F0A: $EA $1E $C2
+    ld   [wEntitiesPosYTable+14], a                               ; $5F0A: $EA $1E $C2
     ld   a, [$D00B]                               ; $5F0D: $FA $0B $D0
     inc  a                                        ; $5F10: $3C
     ld   [$D00B], a                               ; $5F11: $EA $0B $D0
@@ -3040,7 +3040,7 @@ jr_017_5F23:
     jr   c, jr_017_5F39                           ; $5F33: $38 $04
 
     xor  a                                        ; $5F35: $AF
-    ld   [$C28F], a                               ; $5F36: $EA $8F $C2
+    ld   [wEntitiesStatusTable+15], a                               ; $5F36: $EA $8F $C2
 
 jr_017_5F39:
     ld   a, [$D00B]                               ; $5F39: $FA $0B $D0
@@ -3128,9 +3128,9 @@ Data_017_5FB9::
     CREDITS_FADE $90, $50, $00, $00
 
 CreditsWaterFadeToWhiteHandler::
-    ld   a, [$C21E]                               ; $5FC9: $FA $1E $C2
+    ld   a, [wEntitiesPosYTable+14]                               ; $5FC9: $FA $1E $C2
     add  $02                                      ; $5FCC: $C6 $02
-    ld   [$C21E], a                               ; $5FCE: $EA $1E $C2
+    ld   [wEntitiesPosYTable+14], a                               ; $5FCE: $EA $1E $C2
     ldh  a, [hBaseScrollY]                        ; $5FD1: $F0 $97
     add  $04                                      ; $5FD3: $C6 $04
     ldh  [hBaseScrollY], a                        ; $5FD5: $E0 $97
@@ -3185,8 +3185,8 @@ CreditsWaterNoiseFadingOutHandler::
 
     xor  a                                        ; $602A: $AF
     ld   [wCreditsSubscene], a                    ; $602B: $EA $0E $D0
-    ld   [$C28E], a                               ; $602E: $EA $8E $C2
-    ld   [$C28F], a                               ; $6031: $EA $8F $C2
+    ld   [wEntitiesStatusTable+14], a                               ; $602E: $EA $8E $C2
+    ld   [wEntitiesStatusTable+15], a                               ; $6031: $EA $8F $C2
     ld   [wNoiseSfxSeaWavesCounter], a            ; $6034: $EA $14 $C1
     ld   a, $80                                   ; $6037: $3E $80
     ld   [wD466], a                               ; $6039: $EA $66 $D4
@@ -3296,10 +3296,10 @@ LinkOnSeaLarge3Handler::
 
     xor  a                                        ; $60FB: $AF
     ld   [wCreditsSubscene], a                    ; $60FC: $EA $0E $D0
-    ld   [$C28C], a                               ; $60FF: $EA $8C $C2
-    ld   [$C28D], a                               ; $6102: $EA $8D $C2
-    ld   [$C28E], a                               ; $6105: $EA $8E $C2
-    ld   [$C28F], a                               ; $6108: $EA $8F $C2
+    ld   [wEntitiesStatusTable+12], a                               ; $60FF: $EA $8C $C2
+    ld   [wEntitiesStatusTable+13], a                               ; $6102: $EA $8D $C2
+    ld   [wEntitiesStatusTable+14], a                               ; $6105: $EA $8E $C2
+    ld   [wEntitiesStatusTable+15], a                               ; $6108: $EA $8F $C2
 
     ld   a, BANK(LinkOnSeaLarge3Handler)          ; $610B: $3E $17
     call ClearFileMenuBG_trampoline               ; $610D: $CD $FA $08
@@ -3469,9 +3469,9 @@ CreditsSunAbove4Handler::
     call ResetCreditsSceneVariables               ; $6230: $CD $A5 $4D
     xor  a                                        ; $6233: $AF
     ld   [wCreditsSubscene], a                    ; $6234: $EA $0E $D0
-    ld   [$C28D], a                               ; $6237: $EA $8D $C2
-    ld   [$C28E], a                               ; $623A: $EA $8E $C2
-    ld   [$C28F], a                               ; $623D: $EA $8F $C2
+    ld   [wEntitiesStatusTable+13], a                               ; $6237: $EA $8D $C2
+    ld   [wEntitiesStatusTable+14], a                               ; $623A: $EA $8E $C2
+    ld   [wEntitiesStatusTable+15], a                               ; $623D: $EA $8F $C2
     ld   a, $17                                   ; $6240: $3E $17
     call ClearFileMenuBG_trampoline               ; $6242: $CD $FA $08
     ld   hl, wGameplaySubtype                     ; $6245: $21 $96 $DB
@@ -3812,15 +3812,15 @@ func_017_64D8::
 func_017_64DE::
     xor  a                                        ; $64DE: $AF
     ld   [wCreditsSubscene], a                    ; $64DF: $EA $0E $D0
-    ld   [$C287], a                               ; $64E2: $EA $87 $C2
-    ld   [$C288], a                               ; $64E5: $EA $88 $C2
-    ld   [$C289], a                               ; $64E8: $EA $89 $C2
-    ld   [$C28A], a                               ; $64EB: $EA $8A $C2
-    ld   [$C28B], a                               ; $64EE: $EA $8B $C2
-    ld   [$C28C], a                               ; $64F1: $EA $8C $C2
-    ld   [$C28D], a                               ; $64F4: $EA $8D $C2
-    ld   [$C28E], a                               ; $64F7: $EA $8E $C2
-    ld   [$C28F], a                               ; $64FA: $EA $8F $C2
+    ld   [wEntitiesStatusTable+7], a                               ; $64E2: $EA $87 $C2
+    ld   [wEntitiesStatusTable+8], a                               ; $64E5: $EA $88 $C2
+    ld   [wEntitiesStatusTable+9], a                               ; $64E8: $EA $89 $C2
+    ld   [wEntitiesStatusTable+10], a                               ; $64EB: $EA $8A $C2
+    ld   [wEntitiesStatusTable+11], a                               ; $64EE: $EA $8B $C2
+    ld   [wEntitiesStatusTable+12], a                               ; $64F1: $EA $8C $C2
+    ld   [wEntitiesStatusTable+13], a                               ; $64F4: $EA $8D $C2
+    ld   [wEntitiesStatusTable+14], a                               ; $64F7: $EA $8E $C2
+    ld   [wEntitiesStatusTable+15], a                               ; $64FA: $EA $8F $C2
     ldh  [hBaseScrollY], a                        ; $64FD: $E0 $97
     ld   [$D00F], a                               ; $64FF: $EA $0F $D0
     ld   [$D00F], a                               ; $6502: $EA $0F $D0
@@ -4808,7 +4808,7 @@ jr_017_6F40:
     cp   $A0                                      ; $6F40: $FE $A0
     jr   nz, jr_017_6F4C                          ; $6F42: $20 $08
 
-    ld   hl, $C28F                                ; $6F44: $21 $8F $C2
+    ld   hl, wEntitiesStatusTable+15                                ; $6F44: $21 $8F $C2
     ld   [hl], $00                                ; $6F47: $36 $00
     jp   label_017_6F9F                           ; $6F49: $C3 $9F $6F
 

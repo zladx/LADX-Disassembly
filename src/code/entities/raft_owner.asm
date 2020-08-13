@@ -146,7 +146,7 @@ jr_005_5411:
     jr   nc, jr_005_5440                          ; $5432: $30 $0C
 
     ld   a, $80                                   ; $5434: $3E $80
-    ld   [$C1AD], a                               ; $5436: $EA $AD $C1
+    ld   [wC1AD], a                               ; $5436: $EA $AD $C1
     ldh  a, [hLinkPositionX]                      ; $5439: $F0 $98
     ld   hl, wEntitiesPosXTable                         ; $543B: $21 $00 $C2
     add  hl, bc                                   ; $543E: $09
@@ -258,7 +258,7 @@ func_005_54C3::
     cp   $03                                      ; $54DB: $FE $03
     jr   nz, jr_005_54E5                          ; $54DD: $20 $06
 
-    ld   hl, $C28F                                ; $54DF: $21 $8F $C2
+    ld   hl, wEntitiesStatusTable+15                                ; $54DF: $21 $8F $C2
     add  hl, de                                   ; $54E2: $19
     ld   [hl], $00                                ; $54E3: $36 $00
 
@@ -333,7 +333,7 @@ jr_005_5523:
     jr   nz, jr_005_5569                          ; $5542: $20 $25
 
 jr_005_5544:
-    ld   hl, $C1AD                                ; $5544: $21 $AD $C1
+    ld   hl, wC1AD                                ; $5544: $21 $AD $C1
     ld   [hl], $01                                ; $5547: $36 $01
     ld   a, [wDialogState]                        ; $5549: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $554C: $21 $4F $C1

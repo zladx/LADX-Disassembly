@@ -523,24 +523,24 @@ func_037_4351::
 
 JumpTable_037_4371::
     ld   a, $68                                   ; $4371: $3E $68
-    ld   [$C202], a                               ; $4373: $EA $02 $C2
+    ld   [wEntitiesPosXTable+2], a                               ; $4373: $EA $02 $C2
     ld   a, $38                                   ; $4376: $3E $38
-    ld   [$C203], a                               ; $4378: $EA $03 $C2
+    ld   [wEntitiesPosXTable+3], a                               ; $4378: $EA $03 $C2
     ldh  [hLinkPositionY], a                      ; $437B: $E0 $99
     ld   a, $58                                   ; $437D: $3E $58
-    ld   [$C208], a                               ; $437F: $EA $08 $C2
+    ld   [wEntitiesPosXTable+8], a                               ; $437F: $EA $08 $C2
     ld   a, $40                                   ; $4382: $3E $40
 
 jr_037_4384:
-    ld   [$C209], a                               ; $4384: $EA $09 $C2
-    ld   hl, $C22D                                ; $4387: $21 $2D $C2
+    ld   [wEntitiesPosXTable+9], a                               ; $4384: $EA $09 $C2
+    ld   hl, wEntitiesPosXSignTable+13                                ; $4387: $21 $2D $C2
     ld   [hl], $10                                ; $438A: $36 $10
     ld   hl, wEntitiesSpeedXTable                 ; $438C: $21 $40 $C2
     ld   bc, $92C0                                ; $438F: $01 $C0 $92
     ld   [hl], c                                  ; $4392: $71
     inc  hl                                       ; $4393: $23
     ld   [hl], b                                  ; $4394: $70
-    ld   hl, $C238                                ; $4395: $21 $38 $C2
+    ld   hl, wEntitiesPosYSignTable+8                                ; $4395: $21 $38 $C2
     ld   [hl], $70                                ; $4398: $36 $70
     inc  hl                                       ; $439A: $23
     ldh  a, [hIsGBC]                              ; $439B: $F0 $FE
@@ -558,22 +558,22 @@ jr_037_4384:
 JumpTable_037_43A6::
     call func_037_4A8E                            ; $43A6: $CD $8E $4A
     ld   a, $E0                                   ; $43A9: $3E $E0
-    ld   [$C202], a                               ; $43AB: $EA $02 $C2
+    ld   [wEntitiesPosXTable+2], a                               ; $43AB: $EA $02 $C2
     ld   a, $68                                   ; $43AE: $3E $68
-    ld   [$C203], a                               ; $43B0: $EA $03 $C2
+    ld   [wEntitiesPosXTable+3], a                               ; $43B0: $EA $03 $C2
     ld   a, $58                                   ; $43B3: $3E $58
-    ld   [$C206], a                               ; $43B5: $EA $06 $C2
+    ld   [wEntitiesPosXTable+6], a                               ; $43B5: $EA $06 $C2
     ld   a, $C8                                   ; $43B8: $3E $C8
-    ld   [$C208], a                               ; $43BA: $EA $08 $C2
+    ld   [wEntitiesPosXTable+8], a                               ; $43BA: $EA $08 $C2
     ld   a, $B0                                   ; $43BD: $3E $B0
-    ld   [$C211], a                               ; $43BF: $EA $11 $C2
-    ld   hl, $C22A                                ; $43C2: $21 $2A $C2
+    ld   [wEntitiesPosYTable+1], a                               ; $43BF: $EA $11 $C2
+    ld   hl, wEntitiesPosXSignTable+10                                ; $43C2: $21 $2A $C2
     ld   [hl], $40                                ; $43C5: $36 $40
     inc  hl                                       ; $43C7: $23
     ld   [hl], $30                                ; $43C8: $36 $30
     inc  hl                                       ; $43CA: $23
     ld   [hl], $20                                ; $43CB: $36 $20
-    ld   hl, $C23A                                ; $43CD: $21 $3A $C2
+    ld   hl, wEntitiesPosYSignTable+10                                ; $43CD: $21 $3A $C2
     ld   bc, vTiles2                              ; $43D0: $01 $00 $90
     ld   [hl], c                                  ; $43D3: $71
     inc  hl                                       ; $43D4: $23
@@ -588,7 +588,7 @@ JumpTable_037_43A6::
     ld   [hl], c                                  ; $43E1: $71
     inc  hl                                       ; $43E2: $23
     ld   [hl], b                                  ; $43E3: $70
-    ld   hl, $C232                                ; $43E4: $21 $32 $C2
+    ld   hl, wEntitiesPosYSignTable+2                                ; $43E4: $21 $32 $C2
     ldh  a, [hIsGBC]                              ; $43E7: $F0 $FE
     and  a                                        ; $43E9: $A7
     jr   nz, .else_43FB_37                        ; $43EA: $20 $0F
@@ -620,13 +620,13 @@ JumpTable_037_43A6::
 
 JumpTable_037_440A::
     ld   a, $80                                   ; $440A: $3E $80
-    ld   [$C202], a                               ; $440C: $EA $02 $C2
+    ld   [wEntitiesPosXTable+2], a                               ; $440C: $EA $02 $C2
     ld   a, $58                                   ; $440F: $3E $58
-    ld   [$C203], a                               ; $4411: $EA $03 $C2
+    ld   [wEntitiesPosXTable+3], a                               ; $4411: $EA $03 $C2
     ld   a, $66                                   ; $4414: $3E $66
-    ld   [$C223], a                               ; $4416: $EA $23 $C2
+    ld   [wEntitiesPosXSignTable+3], a                               ; $4416: $EA $23 $C2
     ld   e, $10                                   ; $4419: $1E $10
-    ld   hl, $C251                                ; $441B: $21 $51 $C2
+    ld   hl, wEntitiesSpeedYTable+1                                ; $441B: $21 $51 $C2
 
 .loop_441E_37:
     ld   [hl+], a                                 ; $441E: $22
@@ -634,9 +634,9 @@ JumpTable_037_440A::
     jr   nz, .loop_441E_37                        ; $4420: $20 $FC
 
     ld   a, $70                                   ; $4422: $3E $70
-    ld   [$C222], a                               ; $4424: $EA $22 $C2
+    ld   [wEntitiesPosXSignTable+2], a                               ; $4424: $EA $22 $C2
     ld   e, $10                                   ; $4427: $1E $10
-    ld   hl, $C261                                ; $4429: $21 $61 $C2
+    ld   hl, wEntitiesSpeedXAccTable+1                                ; $4429: $21 $61 $C2
 
 .loop_442C_37:
     ld   [hl+], a                                 ; $442C: $22
@@ -644,9 +644,9 @@ JumpTable_037_440A::
     jr   nz, .loop_442C_37                        ; $442E: $20 $FC
 
     xor  a                                        ; $4430: $AF
-    ld   [$C221], a                               ; $4431: $EA $21 $C2
+    ld   [wEntitiesPosXSignTable+1], a                               ; $4431: $EA $21 $C2
     ld   a, $20                                   ; $4434: $3E $20
-    ld   [$C213], a                               ; $4436: $EA $13 $C2
+    ld   [wEntitiesPosYTable+3], a                               ; $4436: $EA $13 $C2
     call func_037_4B31                            ; $4439: $CD $31 $4B
     call func_037_4F37                            ; $443C: $CD $37 $4F
     ret                                           ; $443F: $C9
@@ -656,34 +656,34 @@ JumpTable_037_4440::
 
 JumpTable_037_4441::
     ld   a, $D6                                   ; $4441: $3E $D6
-    ld   [$C202], a                               ; $4443: $EA $02 $C2
+    ld   [wEntitiesPosXTable+2], a                               ; $4443: $EA $02 $C2
     ld   a, $8A                                   ; $4446: $3E $8A
-    ld   [$C203], a                               ; $4448: $EA $03 $C2
+    ld   [wEntitiesPosXTable+3], a                               ; $4448: $EA $03 $C2
     ldh  [hLinkPositionY], a                      ; $444B: $E0 $99
     ld   a, $20                                   ; $444D: $3E $20
-    ld   [$C206], a                               ; $444F: $EA $06 $C2
+    ld   [wEntitiesPosXTable+6], a                               ; $444F: $EA $06 $C2
     ld   a, $88                                   ; $4452: $3E $88
-    ld   [$C216], a                               ; $4454: $EA $16 $C2
+    ld   [wEntitiesPosYTable+6], a                               ; $4454: $EA $16 $C2
     ld   a, $B6                                   ; $4457: $3E $B6
-    ld   [$C217], a                               ; $4459: $EA $17 $C2
+    ld   [wEntitiesPosYTable+7], a                               ; $4459: $EA $17 $C2
     ld   a, $88                                   ; $445C: $3E $88
-    ld   [$C218], a                               ; $445E: $EA $18 $C2
+    ld   [wEntitiesPosYTable+8], a                               ; $445E: $EA $18 $C2
     ld   a, $5A                                   ; $4461: $3E $5A
-    ld   [$C21C], a                               ; $4463: $EA $1C $C2
+    ld   [wEntitiesPosYTable+12], a                               ; $4463: $EA $1C $C2
     ld   a, $77                                   ; $4466: $3E $77
-    ld   [$C21D], a                               ; $4468: $EA $1D $C2
+    ld   [wEntitiesPosYTable+13], a                               ; $4468: $EA $1D $C2
     ret                                           ; $446B: $C9
 
 JumpTable_037_446C::
     ld   a, $4C                                   ; $446C: $3E $4C
-    ld   [$C202], a                               ; $446E: $EA $02 $C2
+    ld   [wEntitiesPosXTable+2], a                               ; $446E: $EA $02 $C2
     ld   a, $5A                                   ; $4471: $3E $5A
-    ld   [$C203], a                               ; $4473: $EA $03 $C2
+    ld   [wEntitiesPosXTable+3], a                               ; $4473: $EA $03 $C2
     ldh  [hLinkPositionY], a                      ; $4476: $E0 $99
     ld   a, $B0                                   ; $4478: $3E $B0
     ld   [wEntitiesSpeedYTable], a                ; $447A: $EA $50 $C2
     ld   a, $66                                   ; $447D: $3E $66
-    ld   [$C24F], a                               ; $447F: $EA $4F $C2
+    ld   [wEntitiesSpeedXTable+15], a                               ; $447F: $EA $4F $C2
     ret                                           ; $4482: $C9
 
 Data_037_4483::
@@ -714,7 +714,7 @@ Data_037_44EB::
 func_037_44EF::
     ld   bc, $00                                  ; $44EF: $01 $00 $00
 .loop_44F2_37:
-    ld   hl, $C242                                ; $44F2: $21 $42 $C2
+    ld   hl, wEntitiesSpeedXTable+2                                ; $44F2: $21 $42 $C2
     add  hl, bc                                   ; $44F5: $09
     ld   e, l                                     ; $44F6: $5D
     ld   d, h                                     ; $44F7: $54
@@ -723,7 +723,7 @@ func_037_44EF::
     ld   hl, Data_037_44EB                        ; $44FA: $21 $EB $44
     add  hl, bc                                   ; $44FD: $09
     ld   a, [hl]                                  ; $44FE: $7E
-    ld   hl, $C246                                ; $44FF: $21 $46 $C2
+    ld   hl, wEntitiesSpeedXTable+6                                ; $44FF: $21 $46 $C2
     add  hl, bc                                   ; $4502: $09
     inc  [hl]                                     ; $4503: $34
     cp   [hl]                                     ; $4504: $BE
@@ -737,7 +737,7 @@ func_037_44EF::
     ld   [de], a                                  ; $450D: $12
     xor  a                                        ; $450E: $AF
     ld   [hl], a                                  ; $450F: $77
-    ld   hl, $C24A                                ; $4510: $21 $4A $C2
+    ld   hl, wEntitiesSpeedXTable+10                                ; $4510: $21 $4A $C2
     add  hl, bc                                   ; $4513: $09
     inc  [hl]                                     ; $4514: $34
     ld   a, [hl]                                  ; $4515: $7E
@@ -760,7 +760,7 @@ func_037_44EF::
     ld   l, a                                     ; $452A: $6F
     add  hl, de                                   ; $452B: $19
     push hl                                       ; $452C: $E5
-    ld   hl, $C232                                ; $452D: $21 $32 $C2
+    ld   hl, wEntitiesPosYSignTable+2                                ; $452D: $21 $32 $C2
     add  hl, bc                                   ; $4530: $09
     push hl                                       ; $4531: $E5
     pop  de                                       ; $4532: $D1
@@ -791,7 +791,7 @@ Data_037_454A::
     db   $7F, $5B, $14, $2E, $4E, $19, $A9, $08
 
 func_037_4552::
-    ld   a, [$C214]                               ; $4552: $FA $14 $C2
+    ld   a, [wEntitiesPosYTable+4]                               ; $4552: $FA $14 $C2
     and  a                                        ; $4555: $A7
     ret  z                                        ; $4556: $C8
 
@@ -799,7 +799,7 @@ func_037_4552::
     jr   nz, .else_458A_37                        ; $4559: $20 $2F
 
     inc  a                                        ; $455B: $3C
-    ld   [$C214], a                               ; $455C: $EA $14 $C2
+    ld   [wEntitiesPosYTable+4], a                               ; $455C: $EA $14 $C2
     ld   a, $40                                   ; $455F: $3E $40
     ldh  [hNoiseSfx], a                           ; $4561: $E0 $F4
     ldh  a, [hIsGBC]                              ; $4563: $F0 $FE
@@ -844,12 +844,12 @@ func_037_4552::
 .else_4592_37:
     inc  a                                        ; $4592: $3C
     and  %00001111                                ; $4593: $E6 $0F
-    ld   [$C214], a                               ; $4595: $EA $14 $C2
+    ld   [wEntitiesPosYTable+4], a                               ; $4595: $EA $14 $C2
     ldh  a, [hIsGBC]                              ; $4598: $F0 $FE
     and  a                                        ; $459A: $A7
     jr   nz, .else_45AF_37                        ; $459B: $20 $12
 
-    ld   a, [$C214]                               ; $459D: $FA $14 $C2
+    ld   a, [wEntitiesPosYTable+4]                               ; $459D: $FA $14 $C2
     and  a                                        ; $45A0: $A7
     ret  nz                                       ; $45A1: $C0
 
@@ -886,11 +886,11 @@ func_037_4552::
 
     ld   a, $01                                   ; $45CB: $3E $01
     ld   [wPaletteDataFlags], a                   ; $45CD: $EA $D1 $DD
-    ld   a, [$C214]                               ; $45D0: $FA $14 $C2
+    ld   a, [wEntitiesPosYTable+4]                               ; $45D0: $FA $14 $C2
 
 .else_45D3_37:
     inc  a                                        ; $45D3: $3C
-    ld   [$C214], a                               ; $45D4: $EA $14 $C2
+    ld   [wEntitiesPosYTable+4], a                               ; $45D4: $EA $14 $C2
     cp   $04                                      ; $45D7: $FE $04
     ret  nz                                       ; $45D9: $C0
 
@@ -954,7 +954,7 @@ func_037_4552::
     ret                                           ; $462E: $C9
 
 JumpTable_037_462F::
-    ld   hl, $C213                                ; $462F: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $462F: $21 $13 $C2
     inc  [hl]                                     ; $4632: $34
     ld   a, [hl]                                  ; $4633: $7E
     cp   $50                                      ; $4634: $FE $50
@@ -981,7 +981,7 @@ JumpTable_037_462F::
 ; Marin and Link cliffside photo animation.
 JumpTable_037_4659::
     call func_037_44EF                            ; $4659: $CD $EF $44
-    ld   hl, $C242                                ; $465C: $21 $42 $C2
+    ld   hl, wEntitiesSpeedXTable+2                                ; $465C: $21 $42 $C2
     xor  a                                        ; $465F: $AF
     ld   [hl+], a                                 ; $4660: $22
     ld   [hl+], a                                 ; $4661: $22
@@ -1031,7 +1031,7 @@ Data_037_46AB::
     db   $08, $12, $08, $12
 
 func_037_46AF::
-    ld   hl, $C20A                                ; $46AF: $21 $0A $C2
+    ld   hl, wEntitiesPosXTable+10                                ; $46AF: $21 $0A $C2
 IF __PATCH_0__
     ld   a, [hl]
     and  a
@@ -1056,19 +1056,19 @@ ENDC
     ld   a, [hl]                                  ; $46C4: $7E
     pop  hl                                       ; $46C5: $E1
     ld   [hl], a                                  ; $46C6: $77
-    ld   a, [$C207]                               ; $46C7: $FA $07 $C2
+    ld   a, [wEntitiesPosXTable+7]                               ; $46C7: $FA $07 $C2
     xor  $01                                      ; $46CA: $EE $01
-    ld   [$C207], a                               ; $46CC: $EA $07 $C2
-    ld   a, [$C201]                               ; $46CF: $FA $01 $C2
+    ld   [wEntitiesPosXTable+7], a                               ; $46CC: $EA $07 $C2
+    ld   a, [wEntitiesPosXTable+1]                               ; $46CF: $FA $01 $C2
     xor  $01                                      ; $46D2: $EE $01
-    ld   [$C201], a                               ; $46D4: $EA $01 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $46D4: $EA $01 $C2
 
 .else_46D7_37:
     ld   a, [wDialogState]                        ; $46D7: $FA $9F $C1
     and  a                                        ; $46DA: $A7
     ret  nz                                       ; $46DB: $C0
 
-    ld   a, [$C20B]                               ; $46DC: $FA $0B $C2
+    ld   a, [wEntitiesPosXTable+11]                               ; $46DC: $FA $0B $C2
     JP_TABLE                                      ; $46DF: $C7
     dw JumpTable_037_46F6
     dw JumpTable_037_470A
@@ -1083,7 +1083,7 @@ ENDC
     dw JumpTable_037_49CD
 
 JumpTable_037_46F6::
-    ld   hl, $C213                                ; $46F6: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $46F6: $21 $13 $C2
     inc  [hl]                                     ; $46F9: $34
     ld   a, [hl]                                  ; $46FA: $7E
     cp   $20                                      ; $46FB: $FE $20
@@ -1097,7 +1097,7 @@ func_037_4702::
     call OpenDialogInTable2                       ; $4702: $CD $7C $23
 
 func_037_4705::
-    ld   hl, $C20B                                ; $4705: $21 $0B $C2
+    ld   hl, wEntitiesPosXTable+11                                ; $4705: $21 $0B $C2
     inc  [hl]                                     ; $4708: $34
     ret                                           ; $4709: $C9
 
@@ -1114,7 +1114,7 @@ JumpTable_037_4712::
     jr   func_037_4702                            ; $4714: $18 $EC
 
 JumpTable_037_4716::
-    ld   hl, $C213                                ; $4716: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4716: $21 $13 $C2
     inc  [hl]                                     ; $4719: $34
     ld   a, [hl]                                  ; $471A: $7E
     cp   $50                                      ; $471B: $FE $50
@@ -1126,7 +1126,7 @@ JumpTable_037_4716::
     jr   func_037_4702                            ; $4722: $18 $DE
 
 JumpTable_037_4724::
-    ld   hl, $C213                                ; $4724: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4724: $21 $13 $C2
     inc  [hl]                                     ; $4727: $34
     ld   a, [hl]                                  ; $4728: $7E
     cp   $20                                      ; $4729: $FE $20
@@ -1134,19 +1134,19 @@ JumpTable_037_4724::
 
     xor  a                                        ; $472C: $AF
     ld   [hl], a                                  ; $472D: $77
-    ld   hl, $C214                                ; $472E: $21 $14 $C2
+    ld   hl, wEntitiesPosYTable+4                                ; $472E: $21 $14 $C2
     inc  [hl]                                     ; $4731: $34
     ld   a, $60                                   ; $4732: $3E $60
-    ld   [$C213], a                               ; $4734: $EA $13 $C2
+    ld   [wEntitiesPosYTable+3], a                               ; $4734: $EA $13 $C2
     call func_037_4705                            ; $4737: $CD $05 $47
     ret                                           ; $473A: $C9
 
 JumpTable_037_473B::
-    ld   a, [$C214]                               ; $473B: $FA $14 $C2
+    ld   a, [wEntitiesPosYTable+4]                               ; $473B: $FA $14 $C2
     and  a                                        ; $473E: $A7
     ret  nz                                       ; $473F: $C0
 
-    ld   hl, $C213                                ; $4740: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4740: $21 $13 $C2
     dec  [hl]                                     ; $4743: $35
     ld   a, [hl]                                  ; $4744: $7E
     bit  7, a                                     ; $4745: $CB $7F
@@ -1159,7 +1159,7 @@ JumpTable_037_473B::
     ret                                           ; $4752: $C9
 
 JumpTable_037_4753::
-    ld   hl, $C213                                ; $4753: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4753: $21 $13 $C2
     inc  [hl]                                     ; $4756: $34
     ld   a, [hl]                                  ; $4757: $7E
     cp   $30                                      ; $4758: $FE $30
@@ -1187,11 +1187,11 @@ func_037_4779::
 
 JumpTable_037_4781::
     call func_037_44EF                            ; $4781: $CD $EF $44
-    ld   hl, $C245                                ; $4784: $21 $45 $C2
+    ld   hl, wEntitiesSpeedXTable+5                                ; $4784: $21 $45 $C2
     ld   [hl], $00                                ; $4787: $36 $00
     ld   a, $1C                                   ; $4789: $3E $1C
     ld   [wEntitiesPosXTable], a                  ; $478B: $EA $00 $C2
-    ld   a, [$C20E]                               ; $478E: $FA $0E $C2
+    ld   a, [wEntitiesPosXTable+14]                               ; $478E: $FA $0E $C2
     cp   $04                                      ; $4791: $FE $04
     jr   nc, .else_47A3_37                        ; $4793: $30 $0E
 
@@ -1224,7 +1224,7 @@ JumpTable_037_47C3::
     ret                                           ; $47CF: $C9
 
 func_037_47D0::
-    ld   a, [$C20E]                               ; $47D0: $FA $0E $C2
+    ld   a, [wEntitiesPosXTable+14]                               ; $47D0: $FA $0E $C2
     JP_TABLE                                      ; $47D3: $C7
     dw JumpTable_037_47E9
     dw JumpTable_037_4829
@@ -1236,21 +1236,21 @@ func_037_47D0::
     dw JumpTable_037_48CB
 
 func_037_47E4::
-    ld   hl, $C20E                                ; $47E4: $21 $0E $C2
+    ld   hl, wEntitiesPosXTable+14                                ; $47E4: $21 $0E $C2
     inc  [hl]                                     ; $47E7: $34
     ret                                           ; $47E8: $C9
 
 JumpTable_037_47E9::
     ld   a, $68                                   ; $47E9: $3E $68
-    ld   [$C212], a                               ; $47EB: $EA $12 $C2
-    ld   a, [$C202]                               ; $47EE: $FA $02 $C2
+    ld   [wEntitiesPosYTable+2], a                               ; $47EB: $EA $12 $C2
+    ld   a, [wEntitiesPosXTable+2]                               ; $47EE: $FA $02 $C2
     bit  7, a                                     ; $47F1: $CB $7F
     ret  nz                                       ; $47F3: $C0
 
     cp   $58                                      ; $47F4: $FE $58
     ret  c                                        ; $47F6: $D8
 
-    ld   hl, $C20F                                ; $47F7: $21 $0F $C2
+    ld   hl, wEntitiesPosXTable+15                                ; $47F7: $21 $0F $C2
     inc  [hl]                                     ; $47FA: $34
     ld   a, [hl]                                  ; $47FB: $7E
     cp   $0A                                      ; $47FC: $FE $0A
@@ -1262,7 +1262,7 @@ JumpTable_037_47E9::
     inc  a                                        ; $4804: $3C
     and  $03                                      ; $4805: $E6 $03
     ld   [wEntitiesPosYTable], a                  ; $4807: $EA $10 $C2
-    ld   a, [$C211]                               ; $480A: $FA $11 $C2
+    ld   a, [wEntitiesPosYTable+1]                               ; $480A: $FA $11 $C2
     sub  $04                                      ; $480D: $D6 $04
     bit  7, a                                     ; $480F: $CB $7F
     jr   nz, .else_4825_37                        ; $4811: $20 $12
@@ -1278,7 +1278,7 @@ JumpTable_037_47E9::
     ld   a, $80                                   ; $4823: $3E $80
 
 .else_4825_37:
-    ld   [$C211], a                               ; $4825: $EA $11 $C2
+    ld   [wEntitiesPosYTable+1], a                               ; $4825: $EA $11 $C2
     ret                                           ; $4828: $C9
 
 JumpTable_037_4829::
@@ -1291,7 +1291,7 @@ JumpTable_037_4829::
     jr   func_037_47E4                            ; $4832: $18 $B0
 
 JumpTable_037_4834::
-    ld   hl, $C20F                                ; $4834: $21 $0F $C2
+    ld   hl, wEntitiesPosXTable+15                                ; $4834: $21 $0F $C2
     inc  [hl]                                     ; $4837: $34
     ld   a, [hl]                                  ; $4838: $7E
     cp   $05                                      ; $4839: $FE $05
@@ -1303,7 +1303,7 @@ JumpTable_037_4834::
     inc  a                                        ; $4841: $3C
     and  $03                                      ; $4842: $E6 $03
     ld   [wEntitiesPosYTable], a                  ; $4844: $EA $10 $C2
-    ld   a, [$C211]                               ; $4847: $FA $11 $C2
+    ld   a, [wEntitiesPosYTable+1]                               ; $4847: $FA $11 $C2
     sub  $04                                      ; $484A: $D6 $04
     cp   $54                                      ; $484C: $FE $54
     jr   nc, .else_485A_37                        ; $484E: $30 $0A
@@ -1314,31 +1314,31 @@ JumpTable_037_4834::
     ld   a, $51                                   ; $4858: $3E $51
 
 .else_485A_37:
-    ld   [$C211], a                               ; $485A: $EA $11 $C2
+    ld   [wEntitiesPosYTable+1], a                               ; $485A: $EA $11 $C2
     ret                                           ; $485D: $C9
 
 JumpTable_037_485E::
-    ld   a, [$C202]                               ; $485E: $FA $02 $C2
+    ld   a, [wEntitiesPosXTable+2]                               ; $485E: $FA $02 $C2
     cp   $60                                      ; $4861: $FE $60
     jr   nc, .else_486A_37                        ; $4863: $30 $05
 
     inc  a                                        ; $4865: $3C
-    ld   [$C202], a                               ; $4866: $EA $02 $C2
+    ld   [wEntitiesPosXTable+2], a                               ; $4866: $EA $02 $C2
     ret                                           ; $4869: $C9
 
 .else_486A_37:
-    ld   a, [$C208]                               ; $486A: $FA $08 $C2
+    ld   a, [wEntitiesPosXTable+8]                               ; $486A: $FA $08 $C2
     cp   $3F                                      ; $486D: $FE $3F
     jr   c, .else_4876_37                         ; $486F: $38 $05
 
     dec  a                                        ; $4871: $3D
-    ld   [$C208], a                               ; $4872: $EA $08 $C2
+    ld   [wEntitiesPosXTable+8], a                               ; $4872: $EA $08 $C2
     ret                                           ; $4875: $C9
 
 .else_4876_37:
     call_open_dialog $23E                           ; $4876
     ld   a, $10                                   ; $487B: $3E $10
-    ld   [$C213], a                               ; $487D: $EA $13 $C2
+    ld   [wEntitiesPosYTable+3], a                               ; $487D: $EA $13 $C2
     call func_037_47E4                            ; $4880: $CD $E4 $47
     ret                                           ; $4883: $C9
 
@@ -1347,7 +1347,7 @@ JumpTable_037_4884::
     and  a                                        ; $4887: $A7
     ret  nz                                       ; $4888: $C0
 
-    ld   hl, $C213                                ; $4889: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4889: $21 $13 $C2
     dec  [hl]                                     ; $488C: $35
     ld   a, [hl]                                  ; $488D: $7E
     bit  7, a                                     ; $488E: $CB $7F
@@ -1355,19 +1355,19 @@ JumpTable_037_4884::
 
     xor  a                                        ; $4891: $AF
     ld   [hl], a                                  ; $4892: $77
-    ld   hl, $C214                                ; $4893: $21 $14 $C2
+    ld   hl, wEntitiesPosYTable+4                                ; $4893: $21 $14 $C2
     inc  [hl]                                     ; $4896: $34
     ld   a, $20                                   ; $4897: $3E $20
-    ld   [$C213], a                               ; $4899: $EA $13 $C2
+    ld   [wEntitiesPosYTable+3], a                               ; $4899: $EA $13 $C2
     call func_037_47E4                            ; $489C: $CD $E4 $47
     ret                                           ; $489F: $C9
 
 JumpTable_037_48A0::
-    ld   a, [$C214]                               ; $48A0: $FA $14 $C2
+    ld   a, [wEntitiesPosYTable+4]                               ; $48A0: $FA $14 $C2
     and  a                                        ; $48A3: $A7
     ret  nz                                       ; $48A4: $C0
 
-    ld   hl, $C213                                ; $48A5: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $48A5: $21 $13 $C2
     dec  [hl]                                     ; $48A8: $35
     ld   a, [hl]                                  ; $48A9: $7E
     bit  7, a                                     ; $48AA: $CB $7F
@@ -1392,7 +1392,7 @@ JumpTable_037_48B8::
     ret                                           ; $48CA: $C9
 
 JumpTable_037_48CB::
-    ld   a, [$C211]                               ; $48CB: $FA $11 $C2
+    ld   a, [wEntitiesPosYTable+1]                               ; $48CB: $FA $11 $C2
     cp   $28                                      ; $48CE: $FE $28
     jr   nc, .else_48E7_37                        ; $48D0: $30 $15
 
@@ -1407,7 +1407,7 @@ JumpTable_037_48CB::
     ld   [wPhotos1], a                            ; $48E4: $EA $0C $DC
 
 .else_48E7_37:
-    ld   hl, $C20F                                ; $48E7: $21 $0F $C2
+    ld   hl, wEntitiesPosXTable+15                                ; $48E7: $21 $0F $C2
     inc  [hl]                                     ; $48EA: $34
     ld   a, [hl]                                  ; $48EB: $7E
     cp   $0A                                      ; $48EC: $FE $0A
@@ -1419,9 +1419,9 @@ JumpTable_037_48CB::
     inc  a                                        ; $48F4: $3C
     and  $03                                      ; $48F5: $E6 $03
     ld   [wEntitiesPosYTable], a                  ; $48F7: $EA $10 $C2
-    ld   a, [$C211]                               ; $48FA: $FA $11 $C2
+    ld   a, [wEntitiesPosYTable+1]                               ; $48FA: $FA $11 $C2
     sub  $04                                      ; $48FD: $D6 $04
-    ld   [$C211], a                               ; $48FF: $EA $11 $C2
+    ld   [wEntitiesPosYTable+1], a                               ; $48FF: $EA $11 $C2
     ret                                           ; $4902: $C9
 
 Data_037_4903::
@@ -1463,21 +1463,21 @@ func_037_4972::
     ld   a, [hl+]                                 ; $4983: $2A
     ld   h, [hl]                                  ; $4984: $66
     ld   l, a                                     ; $4985: $6F
-    ld   a, [$C212]                               ; $4986: $FA $12 $C2
+    ld   a, [wEntitiesPosYTable+2]                               ; $4986: $FA $12 $C2
     ldh  [hScratch0], a                           ; $4989: $E0 $D7
-    ld   a, [$C211]                               ; $498B: $FA $11 $C2
+    ld   a, [wEntitiesPosYTable+1]                               ; $498B: $FA $11 $C2
     ldh  [hScratch1], a                           ; $498E: $E0 $D8
     call func_037_4AB8                            ; $4990: $CD $B8 $4A
     ret                                           ; $4993: $C9
 
 func_037_4994::
-    ld   a, [$C205]                               ; $4994: $FA $05 $C2
+    ld   a, [wEntitiesPosXTable+5]                               ; $4994: $FA $05 $C2
     JP_TABLE                                      ; $4997: $C7
     dw JumpTable_037_499C
     dw JumpTable_037_49CD
 
 JumpTable_037_499C::
-    ld   hl, $C204                                ; $499C: $21 $04 $C2
+    ld   hl, wEntitiesPosXTable+4                                ; $499C: $21 $04 $C2
     inc  [hl]                                     ; $499F: $34
     ld   a, [hl]                                  ; $49A0: $7E
     cp   $0A                                      ; $49A1: $FE $0A
@@ -1485,12 +1485,12 @@ JumpTable_037_499C::
 
     xor  a                                        ; $49A4: $AF
     ld   [hl], a                                  ; $49A5: $77
-    ld   a, [$C201]                               ; $49A6: $FA $01 $C2
+    ld   a, [wEntitiesPosXTable+1]                               ; $49A6: $FA $01 $C2
     inc  a                                        ; $49A9: $3C
     and  %00000011                                ; $49AA: $E6 $03
-    ld   [$C201], a                               ; $49AC: $EA $01 $C2
-    ld   hl, $C206                                ; $49AF: $21 $06 $C2
-    ld   a, [$C202]                               ; $49B2: $FA $02 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $49AC: $EA $01 $C2
+    ld   hl, wEntitiesPosXTable+6                                ; $49AF: $21 $06 $C2
+    ld   a, [wEntitiesPosXTable+2]                               ; $49B2: $FA $02 $C2
     add  $04                                      ; $49B5: $C6 $04
     bit  7, a                                     ; $49B7: $CB $7F
     jr   nz, .else_49C9_37                        ; $49B9: $20 $0E
@@ -1500,24 +1500,24 @@ JumpTable_037_499C::
 
     call func_037_49CE                            ; $49BE: $CD $CE $49
     ld   a, $04                                   ; $49C1: $3E $04
-    ld   [$C201], a                               ; $49C3: $EA $01 $C2
-    ld   a, [$C206]                               ; $49C6: $FA $06 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $49C3: $EA $01 $C2
+    ld   a, [wEntitiesPosXTable+6]                               ; $49C6: $FA $06 $C2
 
 .else_49C9_37
-    ld   [$C202], a                               ; $49C9: $EA $02 $C2
+    ld   [wEntitiesPosXTable+2], a                               ; $49C9: $EA $02 $C2
     ret                                           ; $49CC: $C9
 
 JumpTable_037_49CD::
     ret                                           ; $49CD: $C9
 
 func_037_49CE::
-    ld   hl, $C205                                ; $49CE: $21 $05 $C2
+    ld   hl, wEntitiesPosXTable+5                                ; $49CE: $21 $05 $C2
     inc  [hl]                                     ; $49D1: $34
     ret                                           ; $49D2: $C9
 
 func_037_49D3::
     ld   hl, Data_037_57BD                        ; $49D3: $21 $BD $57
-    ld   a, [$C201]                               ; $49D6: $FA $01 $C2
+    ld   a, [wEntitiesPosXTable+1]                               ; $49D6: $FA $01 $C2
     ld   e, a                                     ; $49D9: $5F
     ld   d, $00                                   ; $49DA: $16 $00
     add  hl, de                                   ; $49DC: $19
@@ -1525,7 +1525,7 @@ func_037_49D3::
     ld   hl, Data_037_57B3                        ; $49DE: $21 $B3 $57
 
 func_037_49E1::
-    ld   a, [$C201]                               ; $49E1: $FA $01 $C2
+    ld   a, [wEntitiesPosXTable+1]                               ; $49E1: $FA $01 $C2
     sla  a                                        ; $49E4: $CB $27
     ld   e, a                                     ; $49E6: $5F
     ld   d, $00                                   ; $49E7: $16 $00
@@ -1533,23 +1533,23 @@ func_037_49E1::
     ld   a, [hl+]                                 ; $49EA: $2A
     ld   h, [hl]                                  ; $49EB: $66
     ld   l, a                                     ; $49EC: $6F
-    ld   a, [$C203]                               ; $49ED: $FA $03 $C2
+    ld   a, [wEntitiesPosXTable+3]                               ; $49ED: $FA $03 $C2
     ldh  [hScratch0], a                           ; $49F0: $E0 $D7
-    ld   a, [$C202]                               ; $49F2: $FA $02 $C2
+    ld   a, [wEntitiesPosXTable+2]                               ; $49F2: $FA $02 $C2
     ldh  [hScratch1], a                           ; $49F5: $E0 $D8
     call func_037_4AB8                            ; $49F7: $CD $B8 $4A
     ret                                           ; $49FA: $C9
 
 func_037_49FB::
-    ld   a, [$C20B]                               ; $49FB: $FA $0B $C2
+    ld   a, [wEntitiesPosXTable+11]                               ; $49FB: $FA $0B $C2
     JP_TABLE                                      ; $49FE: $C7
     dw JumpTable_037_4A03
     dw JumpTable_037_49CD
 
 JumpTable_037_4A03::
     ld   a, $68                                   ; $4A03: $3E $68
-    ld   [$C209], a                               ; $4A05: $EA $09 $C2
-    ld   hl, $C20A                                ; $4A08: $21 $0A $C2
+    ld   [wEntitiesPosXTable+9], a                               ; $4A05: $EA $09 $C2
+    ld   hl, wEntitiesPosXTable+10                                ; $4A08: $21 $0A $C2
     inc  [hl]                                     ; $4A0B: $34
     ld   a, [hl]                                  ; $4A0C: $7E
     cp   $0A                                      ; $4A0D: $FE $0A
@@ -1557,11 +1557,11 @@ JumpTable_037_4A03::
 
     xor  a                                        ; $4A10: $AF
     ld   [hl], a                                  ; $4A11: $77
-    ld   a, [$C207]                               ; $4A12: $FA $07 $C2
+    ld   a, [wEntitiesPosXTable+7]                               ; $4A12: $FA $07 $C2
     inc  a                                        ; $4A15: $3C
     and  $03                                      ; $4A16: $E6 $03
-    ld   [$C207], a                               ; $4A18: $EA $07 $C2
-    ld   a, [$C208]                               ; $4A1B: $FA $08 $C2
+    ld   [wEntitiesPosXTable+7], a                               ; $4A18: $EA $07 $C2
+    ld   a, [wEntitiesPosXTable+8]                               ; $4A1B: $FA $08 $C2
     add  $04                                      ; $4A1E: $C6 $04
     bit  7, a                                     ; $4A20: $CB $7F
     jr   nz, .else_4A33_37                        ; $4A22: $20 $0F
@@ -1569,19 +1569,19 @@ JumpTable_037_4A03::
     cp   $40                                      ; $4A24: $FE $40
     jr   c, .else_4A33_37                         ; $4A26: $38 $0B
 
-    ld   hl, $C20B                                ; $4A28: $21 $0B $C2
+    ld   hl, wEntitiesPosXTable+11                                ; $4A28: $21 $0B $C2
     inc  [hl]                                     ; $4A2B: $34
     ld   a, $04                                   ; $4A2C: $3E $04
-    ld   [$C207], a                               ; $4A2E: $EA $07 $C2
+    ld   [wEntitiesPosXTable+7], a                               ; $4A2E: $EA $07 $C2
     ld   a, $40                                   ; $4A31: $3E $40
 
 .else_4A33_37
-    ld   [$C208], a                               ; $4A33: $EA $08 $C2
+    ld   [wEntitiesPosXTable+8], a                               ; $4A33: $EA $08 $C2
     ret                                           ; $4A36: $C9
 
 func_037_4A37::
     ld   hl, Data_037_5A56                        ; $4A37: $21 $56 $5A
-    ld   a, [$C207]                               ; $4A3A: $FA $07 $C2
+    ld   a, [wEntitiesPosXTable+7]                               ; $4A3A: $FA $07 $C2
     ld   e, a                                     ; $4A3D: $5F
     ld   d, $00                                   ; $4A3E: $16 $00
     add  hl, de                                   ; $4A40: $19
@@ -1589,7 +1589,7 @@ func_037_4A37::
     ld   hl, Data_037_5A4C                        ; $4A42: $21 $4C $5A
 
 func_037_4A45::
-    ld   a, [$C207]                               ; $4A45: $FA $07 $C2
+    ld   a, [wEntitiesPosXTable+7]                               ; $4A45: $FA $07 $C2
     sla  a                                        ; $4A48: $CB $27
     ld   e, a                                     ; $4A4A: $5F
     ld   d, $00                                   ; $4A4B: $16 $00
@@ -1597,9 +1597,9 @@ func_037_4A45::
     ld   a, [hl+]                                 ; $4A4E: $2A
     ld   h, [hl]                                  ; $4A4F: $66
     ld   l, a                                     ; $4A50: $6F
-    ld   a, [$C209]                               ; $4A51: $FA $09 $C2
+    ld   a, [wEntitiesPosXTable+9]                               ; $4A51: $FA $09 $C2
     ldh  [hScratch0], a                           ; $4A54: $E0 $D7
-    ld   a, [$C208]                               ; $4A56: $FA $08 $C2
+    ld   a, [wEntitiesPosXTable+8]                               ; $4A56: $FA $08 $C2
     ldh  [hScratch1], a                           ; $4A59: $E0 $D8
     call func_037_4AB8                            ; $4A5B: $CD $B8 $4A
     ret                                           ; $4A5E: $C9
@@ -1608,7 +1608,7 @@ func_037_4A45::
     ld   hl, Data_037_5AA7                        ; $4A61: $21 $A7 $5A
 
 func_037_4A64::
-    ld   a, [$C21B]                               ; $4A64: $FA $1B $C2
+    ld   a, [wEntitiesPosYTable+11]                               ; $4A64: $FA $1B $C2
     sla  a                                        ; $4A67: $CB $27
     ld   e, a                                     ; $4A69: $5F
     ld   d, $00                                   ; $4A6A: $16 $00
@@ -1616,9 +1616,9 @@ func_037_4A64::
     ld   a, [hl+]                                 ; $4A6D: $2A
     ld   h, [hl]                                  ; $4A6E: $66
     ld   l, a                                     ; $4A6F: $6F
-    ld   a, [$C21D]                               ; $4A70: $FA $1D $C2
+    ld   a, [wEntitiesPosYTable+13]                               ; $4A70: $FA $1D $C2
     ldh  [hScratch0], a                           ; $4A73: $E0 $D7
-    ld   a, [$C21C]                               ; $4A75: $FA $1C $C2
+    ld   a, [wEntitiesPosYTable+12]                               ; $4A75: $FA $1C $C2
     ldh  [hScratch1], a                           ; $4A78: $E0 $D8
     call func_037_4AB8                            ; $4A7A: $CD $B8 $4A
     ret                                           ; $4A7D: $C9
@@ -1630,7 +1630,7 @@ Data_037_4A86::
     db   $48, $68, $60, $03, $58, $68, $62, $03
 
 func_037_4A8E::
-    ld   hl, $C20C                                ; $4A8E: $21 $0C $C2
+    ld   hl, wEntitiesPosXTable+12                                ; $4A8E: $21 $0C $C2
     inc  [hl]                                     ; $4A91: $34
     ld   a, [hl]                                  ; $4A92: $7E
     cp   $0A                                      ; $4A93: $FE $0A
@@ -1638,13 +1638,13 @@ func_037_4A8E::
 
     xor  a                                        ; $4A97: $AF
     ld   [hl], a                                  ; $4A98: $77
-    ld   a, [$C20D]                               ; $4A99: $FA $0D $C2
+    ld   a, [wEntitiesPosXTable+13]                               ; $4A99: $FA $0D $C2
     xor  $01                                      ; $4A9C: $EE $01
-    ld   [$C20D], a                               ; $4A9E: $EA $0D $C2
+    ld   [wEntitiesPosXTable+13], a                               ; $4A9E: $EA $0D $C2
 
 .else_4AA1_37:
     ld   hl, Data_037_4A7E                        ; $4AA1: $21 $7E $4A
-    ld   a, [$C20D]                               ; $4AA4: $FA $0D $C2
+    ld   a, [wEntitiesPosXTable+13]                               ; $4AA4: $FA $0D $C2
     and  a                                        ; $4AA7: $A7
     jr   z, .else_4AAD_37                         ; $4AA8: $28 $03
 
@@ -1700,7 +1700,7 @@ func_037_4AB8::
     ret                                           ; $4AE7: $C9
 
 JumpTable_037_4AE8::
-    ld   hl, $C213                                ; $4AE8: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4AE8: $21 $13 $C2
     inc  [hl]                                     ; $4AEB: $34
     ld   a, [hl]                                  ; $4AEC: $7E
     cp   $50                                      ; $4AED: $FE $50
@@ -1733,7 +1733,7 @@ JumpTable_037_4B1E::
     call func_037_4F1B                            ; $4B1E: $CD $1B $4F
     call func_037_4B31                            ; $4B21: $CD $31 $4B
     call func_037_4F37                            ; $4B24: $CD $37 $4F
-    ld   a, [$C275]                               ; $4B27: $FA $75 $C2
+    ld   a, [wEntitiesSpeedYAccTable+5]                               ; $4B27: $FA $75 $C2
     and  %00000010                                ; $4B2A: $E6 $02
     ret  nz                                       ; $4B2C: $C0
 
@@ -1744,7 +1744,7 @@ JumpTable_037_4B1E::
 
 func_037_4B31::
     ld   hl, Data_037_5870                        ; $4B31: $21 $70 $58
-    ld   a, [$C201]                               ; $4B34: $FA $01 $C2
+    ld   a, [wEntitiesPosXTable+1]                               ; $4B34: $FA $01 $C2
     ld   e, a                                     ; $4B37: $5F
     ld   d, $00                                   ; $4B38: $16 $00
     add  hl, de                                   ; $4B3A: $19
@@ -1756,9 +1756,9 @@ func_037_4B31::
     ld   a, [hl+]                                 ; $4B44: $2A
     ld   h, [hl]                                  ; $4B45: $66
     ld   l, a                                     ; $4B46: $6F
-    ld   a, [$C203]                               ; $4B47: $FA $03 $C2
+    ld   a, [wEntitiesPosXTable+3]                               ; $4B47: $FA $03 $C2
     ldh  [hScratch0], a                           ; $4B4A: $E0 $D7
-    ld   a, [$C202]                               ; $4B4C: $FA $02 $C2
+    ld   a, [wEntitiesPosXTable+2]                               ; $4B4C: $FA $02 $C2
     ldh  [hScratch1], a                           ; $4B4F: $E0 $D8
     call func_037_4AB8                            ; $4B51: $CD $B8 $4A
     ret                                           ; $4B54: $C9
@@ -1768,14 +1768,14 @@ func_037_4B55::
     and  a                                        ; $4B58: $A7
     ret  nz                                       ; $4B59: $C0
 
-    ld   a, [$C214]                               ; $4B5A: $FA $14 $C2
+    ld   a, [wEntitiesPosYTable+4]                               ; $4B5A: $FA $14 $C2
     and  a                                        ; $4B5D: $A7
     ret  nz                                       ; $4B5E: $C0
 
-    ld   a, [$C275]                               ; $4B5F: $FA $75 $C2
+    ld   a, [wEntitiesSpeedYAccTable+5]                               ; $4B5F: $FA $75 $C2
     and  %00000010                                ; $4B62: $E6 $02
     call z, func_037_4BAC                         ; $4B64: $CC $AC $4B
-    ld   a, [$C224]                               ; $4B67: $FA $24 $C2
+    ld   a, [wEntitiesPosXSignTable+4]                               ; $4B67: $FA $24 $C2
     JP_TABLE                                      ; $4B6A: $C7
     dw JumpTable_037_4C36
     dw JumpTable_037_4C75
@@ -1793,15 +1793,15 @@ func_037_4B55::
     dw JumpTable_037_4E5F
 
 func_037_4B87::
-    ld   a, [$C276]                               ; $4B87: $FA $76 $C2
+    ld   a, [wEntitiesSpeedYAccTable+6]                               ; $4B87: $FA $76 $C2
     push af                                       ; $4B8A: $F5
     swap a                                        ; $4B8B: $CB $37
     and  %11110000                                ; $4B8D: $E6 $F0
-    ld   hl, $C277                                ; $4B8F: $21 $77 $C2
+    ld   hl, wEntitiesSpeedYAccTable+7                                ; $4B8F: $21 $77 $C2
     add  [hl]                                     ; $4B92: $86
     ld   [hl], a                                  ; $4B93: $77
     rl   d                                        ; $4B94: $CB $12
-    ld   hl, $C202                                ; $4B96: $21 $02 $C2
+    ld   hl, wEntitiesPosXTable+2                                ; $4B96: $21 $02 $C2
     pop  af                                       ; $4B99: $F1
     ld   e, $00                                   ; $4B9A: $1E $00
     bit  7, a                                     ; $4B9C: $CB $7F
@@ -1819,15 +1819,15 @@ func_037_4B87::
     ret                                           ; $4BAB: $C9
 
 func_037_4BAC::
-    ld   a, [$C271]                               ; $4BAC: $FA $71 $C2
+    ld   a, [wEntitiesSpeedYAccTable+1]                               ; $4BAC: $FA $71 $C2
     push af                                       ; $4BAF: $F5
     swap a                                        ; $4BB0: $CB $37
     and  %11110000                                ; $4BB2: $E6 $F0
-    ld   hl, $C272                                ; $4BB4: $21 $72 $C2
+    ld   hl, wEntitiesSpeedYAccTable+2                                ; $4BB4: $21 $72 $C2
     add  [hl]                                     ; $4BB7: $86
     ld   [hl], a                                  ; $4BB8: $77
     rl   d                                        ; $4BB9: $CB $12
-    ld   hl, $C222                                ; $4BBB: $21 $22 $C2
+    ld   hl, wEntitiesPosXSignTable+2                                ; $4BBB: $21 $22 $C2
     pop  af                                       ; $4BBE: $F1
     ld   e, $00                                   ; $4BBF: $1E $00
     bit  7, a                                     ; $4BC1: $CB $7F
@@ -1848,24 +1848,24 @@ func_037_4BAC::
 
 .else_4BD5_37:
     ld   [hl], a                                  ; $4BD5: $77
-    ld   hl, $C271                                ; $4BD6: $21 $71 $C2
+    ld   hl, wEntitiesSpeedYAccTable+1                                ; $4BD6: $21 $71 $C2
     ld   a, [hl]                                  ; $4BD9: $7E
     add  $04                                      ; $4BDA: $C6 $04
     ld   [hl], a                                  ; $4BDC: $77
-    ld   a, [$C275]                               ; $4BDD: $FA $75 $C2
+    ld   a, [wEntitiesSpeedYAccTable+5]                               ; $4BDD: $FA $75 $C2
     and  a                                        ; $4BE0: $A7
     jr   z, .else_4BF0_37                         ; $4BE1: $28 $0D
 
-    ld   a, [$C222]                               ; $4BE3: $FA $22 $C2
+    ld   a, [wEntitiesPosXSignTable+2]                               ; $4BE3: $FA $22 $C2
     cp   $70                                      ; $4BE6: $FE $70
     jr   c, .else_4C05_37                         ; $4BE8: $38 $1B
 
     xor  a                                        ; $4BEA: $AF
-    ld   [$C271], a                               ; $4BEB: $EA $71 $C2
+    ld   [wEntitiesSpeedYAccTable+1], a                               ; $4BEB: $EA $71 $C2
     jr   .else_4C31_37                            ; $4BEE: $18 $41
 
 .else_4BF0_37:
-    ld   a, [$C222]                               ; $4BF0: $FA $22 $C2
+    ld   a, [wEntitiesPosXSignTable+2]                               ; $4BF0: $FA $22 $C2
     cp   $70                                      ; $4BF3: $FE $70
     jr   c, .else_4C05_37                         ; $4BF5: $38 $0E
 
@@ -1875,11 +1875,11 @@ func_037_4BAC::
     sla  a                                        ; $4BFE: $CB $27
     cpl                                           ; $4C00: $2F
     inc  a                                        ; $4C01: $3C
-    ld   [$C271], a                               ; $4C02: $EA $71 $C2
+    ld   [wEntitiesSpeedYAccTable+1], a                               ; $4C02: $EA $71 $C2
 
 .else_4C05_37:
-    ld   hl, $C223                                ; $4C05: $21 $23 $C2
-    ld   a, [$C273]                               ; $4C08: $FA $73 $C2
+    ld   hl, wEntitiesPosXSignTable+3                                ; $4C05: $21 $23 $C2
+    ld   a, [wEntitiesSpeedYAccTable+3]                               ; $4C08: $FA $73 $C2
     and  a                                        ; $4C0B: $A7
     jr   nz, .else_4C18_37                        ; $4C0C: $20 $0A
 
@@ -1900,20 +1900,20 @@ func_037_4BAC::
     ld   a, $70                                   ; $4C1E: $3E $70
 .func_037_4C20::
     ld   [hl], a                                  ; $4C20: $77
-    ld   a, [$C273]                               ; $4C21: $FA $73 $C2
+    ld   a, [wEntitiesSpeedYAccTable+3]                               ; $4C21: $FA $73 $C2
     xor  $01                                      ; $4C24: $EE $01
-    ld   [$C273], a                               ; $4C26: $EA $73 $C2
-    ld   a, [$C221]                               ; $4C29: $FA $21 $C2
+    ld   [wEntitiesSpeedYAccTable+3], a                               ; $4C26: $EA $73 $C2
+    ld   a, [wEntitiesPosXSignTable+1]                               ; $4C29: $FA $21 $C2
     xor  $02                                      ; $4C2C: $EE $02
-    ld   [$C221], a                               ; $4C2E: $EA $21 $C2
+    ld   [wEntitiesPosXSignTable+1], a                               ; $4C2E: $EA $21 $C2
 
 .else_4C31_37:
     xor  a                                        ; $4C31: $AF
-    ld   [$C275], a                               ; $4C32: $EA $75 $C2
+    ld   [wEntitiesSpeedYAccTable+5], a                               ; $4C32: $EA $75 $C2
     ret                                           ; $4C35: $C9
 
 JumpTable_037_4C36::
-    ld   hl, $C213                                ; $4C36: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4C36: $21 $13 $C2
     inc  [hl]                                     ; $4C39: $34
     ld   a, [hl]                                  ; $4C3A: $7E
     cp   $50                                      ; $4C3B: $FE $50
@@ -1921,10 +1921,10 @@ JumpTable_037_4C36::
 
     xor  a                                        ; $4C3E: $AF
     ld   [hl], a                                  ; $4C3F: $77
-    ld   [$C204], a                               ; $4C40: $EA $04 $C2
+    ld   [wEntitiesPosXTable+4], a                               ; $4C40: $EA $04 $C2
     call_open_dialog $270                           ; $4C43
 .func_037_4C48::
-    ld   hl, $C224                                ; $4C48: $21 $24 $C2
+    ld   hl, wEntitiesPosXSignTable+4                                ; $4C48: $21 $24 $C2
     inc  [hl]                                     ; $4C4B: $34
     ret                                           ; $4C4C: $C9
 
@@ -1934,7 +1934,7 @@ Data_037_4C4D::
     db   $01, $02, $01, $03, $01, $02, $01, $03
 
 JumpTable_037_4C75::
-    ld   hl, $C213                                ; $4C75: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4C75: $21 $13 $C2
     inc  [hl]                                     ; $4C78: $34
     ld   a, [hl]                                  ; $4C79: $7E
     cp   $08                                      ; $4C7A: $FE $08
@@ -1942,19 +1942,19 @@ JumpTable_037_4C75::
 
     xor  a                                        ; $4C7D: $AF
     ld   [hl], a                                  ; $4C7E: $77
-    ld   hl, $C204                                ; $4C7F: $21 $04 $C2
+    ld   hl, wEntitiesPosXTable+4                                ; $4C7F: $21 $04 $C2
     inc  [hl]                                     ; $4C82: $34
     ld   e, [hl]                                  ; $4C83: $5E
     ld   d, $00                                   ; $4C84: $16 $00
     ld   hl, Data_037_4C4D                        ; $4C86: $21 $4D $4C
     add  hl, de                                   ; $4C89: $19
     ld   a, [hl]                                  ; $4C8A: $7E
-    ld   [$C201], a                               ; $4C8B: $EA $01 $C2
-    ld   a, [$C202]                               ; $4C8E: $FA $02 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $4C8B: $EA $01 $C2
+    ld   a, [wEntitiesPosXTable+2]                               ; $4C8E: $FA $02 $C2
     sub  $03                                      ; $4C91: $D6 $03
-    ld   [$C202], a                               ; $4C93: $EA $02 $C2
-    ld   a, [$C202]                               ; $4C96: $FA $02 $C2
-    ld   hl, $C223                                ; $4C99: $21 $23 $C2
+    ld   [wEntitiesPosXTable+2], a                               ; $4C93: $EA $02 $C2
+    ld   a, [wEntitiesPosXTable+2]                               ; $4C96: $FA $02 $C2
+    ld   hl, wEntitiesPosXSignTable+3                                ; $4C99: $21 $23 $C2
     sub  [hl]                                     ; $4C9C: $96
     bit  7, a                                     ; $4C9D: $CB $7F
     jr   nz, .else_4CA4_37                        ; $4C9F: $20 $03
@@ -1964,29 +1964,29 @@ JumpTable_037_4C75::
 
 .else_4CA4_37:
     xor  a                                        ; $4CA4: $AF
-    ld   [$C213], a                               ; $4CA5: $EA $13 $C2
+    ld   [wEntitiesPosYTable+3], a                               ; $4CA5: $EA $13 $C2
     ld   a, $02                                   ; $4CA8: $3E $02
-    ld   [$C201], a                               ; $4CAA: $EA $01 $C2
-    ld   a, [$C202]                               ; $4CAD: $FA $02 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $4CAA: $EA $01 $C2
+    ld   a, [wEntitiesPosXTable+2]                               ; $4CAD: $FA $02 $C2
     sub  $04                                      ; $4CB0: $D6 $04
-    ld   [$C202], a                               ; $4CB2: $EA $02 $C2
+    ld   [wEntitiesPosXTable+2], a                               ; $4CB2: $EA $02 $C2
     ld   a, $10                                   ; $4CB5: $3E $10
-    ld   [$C225], a                               ; $4CB7: $EA $25 $C2
+    ld   [wEntitiesPosXSignTable+5], a                               ; $4CB7: $EA $25 $C2
     ld   a, JINGLE_SWORD_POKING                   ; $4CBA: $3E $07
     ldh  [hJingle], a                             ; $4CBC: $E0 $F2
     ld   a, $28                                   ; $4CBE: $3E $28
-    ld   [$C276], a                               ; $4CC0: $EA $76 $C2
-    ld   a, [$C203]                               ; $4CC3: $FA $03 $C2
+    ld   [wEntitiesSpeedYAccTable+6], a                               ; $4CC0: $EA $76 $C2
+    ld   a, [wEntitiesPosXTable+3]                               ; $4CC3: $FA $03 $C2
     add  $03                                      ; $4CC6: $C6 $03
-    ld   [$C279], a                               ; $4CC8: $EA $79 $C2
-    ld   a, [$C202]                               ; $4CCB: $FA $02 $C2
+    ld   [wEntitiesSpeedYAccTable+9], a                               ; $4CC8: $EA $79 $C2
+    ld   a, [wEntitiesPosXTable+2]                               ; $4CCB: $FA $02 $C2
     sub  $0C                                      ; $4CCE: $D6 $0C
-    ld   [$C278], a                               ; $4CD0: $EA $78 $C2
+    ld   [wEntitiesSpeedYAccTable+8], a                               ; $4CD0: $EA $78 $C2
     jp   JumpTable_037_4C36.func_037_4C48         ; $4CD3: $C3 $48 $4C
 
 func_037_4CD6::
     call func_037_4B87                            ; $4CD6: $CD $87 $4B
-    ld   a, [$C276]                               ; $4CD9: $FA $76 $C2
+    ld   a, [wEntitiesSpeedYAccTable+6]                               ; $4CD9: $FA $76 $C2
     and  a                                        ; $4CDC: $A7
     ret  z                                        ; $4CDD: $C8
 
@@ -1997,7 +1997,7 @@ func_037_4CD6::
     xor  a                                        ; $4CE4: $AF
 
 .else_4CE5_37:
-    ld   [$C276], a                               ; $4CE5: $EA $76 $C2
+    ld   [wEntitiesSpeedYAccTable+6], a                               ; $4CE5: $EA $76 $C2
     ret                                           ; $4CE8: $C9
 
 Data_037_4CE9::
@@ -2005,13 +2005,13 @@ Data_037_4CE9::
 
 JumpTable_037_4CF9::
     ld   a, $01                                   ; $4CF9: $3E $01
-    ld   [$C275], a                               ; $4CFB: $EA $75 $C2
+    ld   [wEntitiesSpeedYAccTable+5], a                               ; $4CFB: $EA $75 $C2
     call func_037_4CD6                            ; $4CFE: $CD $D6 $4C
-    ld   a, [$C225]                               ; $4D01: $FA $25 $C2
+    ld   a, [wEntitiesPosXSignTable+5]                               ; $4D01: $FA $25 $C2
     and  a                                        ; $4D04: $A7
     ret  nz                                       ; $4D05: $C0
 
-    ld   hl, $C213                                ; $4D06: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4D06: $21 $13 $C2
     inc  [hl]                                     ; $4D09: $34
     ld   a, [hl]                                  ; $4D0A: $7E
     and  %00110000                                ; $4D0B: $E6 $30
@@ -2029,14 +2029,14 @@ JumpTable_037_4CF9::
     ld   d, $00                                   ; $4D1E: $16 $00
     ld   hl, Data_037_4CE9                        ; $4D20: $21 $E9 $4C
     add  hl, de                                   ; $4D23: $19
-    ld   a, [$C221]                               ; $4D24: $FA $21 $C2
+    ld   a, [wEntitiesPosXSignTable+1]                               ; $4D24: $FA $21 $C2
     and  %11111110                                ; $4D27: $E6 $FE
     or   [hl]                                     ; $4D29: $B6
-    ld   [$C221], a                               ; $4D2A: $EA $21 $C2
+    ld   [wEntitiesPosXSignTable+1], a                               ; $4D2A: $EA $21 $C2
     ret                                           ; $4D2D: $C9
 
 JumpTable_037_4D2E::
-    ld   hl, $C213                                ; $4D2E: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4D2E: $21 $13 $C2
     inc  [hl]                                     ; $4D31: $34
     ld   a, [hl]                                  ; $4D32: $7E
     cp   $20                                      ; $4D33: $FE $20
@@ -2044,19 +2044,19 @@ JumpTable_037_4D2E::
 
     xor  a                                        ; $4D36: $AF
     ld   [hl], a                                  ; $4D37: $77
-    ld   [$C204], a                               ; $4D38: $EA $04 $C2
+    ld   [wEntitiesPosXTable+4], a                               ; $4D38: $EA $04 $C2
     call_open_dialog $272                           ; $4D3B
     jp   JumpTable_037_4C36.func_037_4C48         ; $4D40: $C3 $48 $4C
 
 JumpTable_037_4D43::
     ld   a, $01                                   ; $4D43: $3E $01
-    ld   [$C275], a                               ; $4D45: $EA $75 $C2
+    ld   [wEntitiesSpeedYAccTable+5], a                               ; $4D45: $EA $75 $C2
     call func_037_4CD6                            ; $4D48: $CD $D6 $4C
-    ld   a, [$C225]                               ; $4D4B: $FA $25 $C2
+    ld   a, [wEntitiesPosXSignTable+5]                               ; $4D4B: $FA $25 $C2
     and  a                                        ; $4D4E: $A7
     ret  nz                                       ; $4D4F: $C0
 
-    ld   hl, $C213                                ; $4D50: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4D50: $21 $13 $C2
     inc  [hl]                                     ; $4D53: $34
     ld   a, [hl]                                  ; $4D54: $7E
     cp   $4F                                      ; $4D55: $FE $4F
@@ -2064,7 +2064,7 @@ JumpTable_037_4D43::
 
     xor  a                                        ; $4D59: $AF
     ld   [hl], a                                  ; $4D5A: $77
-    ld   [$C204], a                               ; $4D5B: $EA $04 $C2
+    ld   [wEntitiesPosXTable+4], a                               ; $4D5B: $EA $04 $C2
     call_open_dialog $273                           ; $4D5E
     jp   JumpTable_037_4C36.func_037_4C48         ; $4D63: $C3 $48 $4C
 
@@ -2075,28 +2075,28 @@ JumpTable_037_4D43::
     ld   d, $00                                   ; $4D6B: $16 $00
     ld   hl, Data_037_4CE9                        ; $4D6D: $21 $E9 $4C
     add  hl, de                                   ; $4D70: $19
-    ld   a, [$C221]                               ; $4D71: $FA $21 $C2
+    ld   a, [wEntitiesPosXSignTable+1]                               ; $4D71: $FA $21 $C2
     and  %11111110                                ; $4D74: $E6 $FE
     or   [hl]                                     ; $4D76: $B6
-    ld   [$C221], a                               ; $4D77: $EA $21 $C2
+    ld   [wEntitiesPosXSignTable+1], a                               ; $4D77: $EA $21 $C2
     ret                                           ; $4D7A: $C9
 
 JumpTable_037_4D7B::
     ld   a, $01                                   ; $4D7B: $3E $01
-    ld   [$C275], a                               ; $4D7D: $EA $75 $C2
+    ld   [wEntitiesSpeedYAccTable+5], a                               ; $4D7D: $EA $75 $C2
     call func_037_4CD6                            ; $4D80: $CD $D6 $4C
-    ld   a, [$C225]                               ; $4D83: $FA $25 $C2
+    ld   a, [wEntitiesPosXSignTable+5]                               ; $4D83: $FA $25 $C2
     and  a                                        ; $4D86: $A7
     ret  nz                                       ; $4D87: $C0
 
-    ld   hl, $C213                                ; $4D88: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4D88: $21 $13 $C2
     inc  [hl]                                     ; $4D8B: $34
     ld   a, [hl]                                  ; $4D8C: $7E
     cp   $68                                      ; $4D8D: $FE $68
     jr   nz, .else_4DA0_37                        ; $4D8F: $20 $0F
 
     ld   a, $02                                   ; $4D91: $3E $02
-    ld   [$C275], a                               ; $4D93: $EA $75 $C2
+    ld   [wEntitiesSpeedYAccTable+5], a                               ; $4D93: $EA $75 $C2
     xor  a                                        ; $4D96: $AF
     ld   [hl], a                                  ; $4D97: $77
     call_open_dialog $275                           ; $4D98
@@ -2109,22 +2109,22 @@ JumpTable_037_4D7B::
     ld   d, $00                                   ; $4DA5: $16 $00
     ld   hl, Data_037_4CE9                        ; $4DA7: $21 $E9 $4C
     add  hl, de                                   ; $4DAA: $19
-    ld   a, [$C221]                               ; $4DAB: $FA $21 $C2
+    ld   a, [wEntitiesPosXSignTable+1]                               ; $4DAB: $FA $21 $C2
     and  %11111110                                ; $4DAE: $E6 $FE
     or   [hl]                                     ; $4DB0: $B6
-    ld   [$C221], a                               ; $4DB1: $EA $21 $C2
+    ld   [wEntitiesPosXSignTable+1], a                               ; $4DB1: $EA $21 $C2
     ret                                           ; $4DB4: $C9
 
 JumpTable_037_4DB5::
     ld   a, $02                                   ; $4DB5: $3E $02
-    ld   [$C275], a                               ; $4DB7: $EA $75 $C2
+    ld   [wEntitiesSpeedYAccTable+5], a                               ; $4DB7: $EA $75 $C2
     call_open_dialog $274                           ; $4DBA
     jp   JumpTable_037_4C36.func_037_4C48         ; $4DBF: $C3 $48 $4C
 
 JumpTable_037_4DC2::
     xor  a                                        ; $4DC2: $AF
-    ld   [$C201], a                               ; $4DC3: $EA $01 $C2
-    ld   hl, $C213                                ; $4DC6: $21 $13 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $4DC3: $EA $01 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4DC6: $21 $13 $C2
     inc  [hl]                                     ; $4DC9: $34
     ld   a, [hl]                                  ; $4DCA: $7E
     cp   $40                                      ; $4DCB: $FE $40
@@ -2133,11 +2133,11 @@ JumpTable_037_4DC2::
     xor  a                                        ; $4DCE: $AF
     ld   [hl], a                                  ; $4DCF: $77
     ld   a, $04                                   ; $4DD0: $3E $04
-    ld   [$C201], a                               ; $4DD2: $EA $01 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $4DD2: $EA $01 $C2
     jp   JumpTable_037_4C36.func_037_4C48         ; $4DD5: $C3 $48 $4C
 
 JumpTable_037_4DD8::
-    ld   hl, $C213                                ; $4DD8: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4DD8: $21 $13 $C2
     inc  [hl]                                     ; $4DDB: $34
     ld   a, [hl]                                  ; $4DDC: $7E
     cp   $30                                      ; $4DDD: $FE $30
@@ -2146,26 +2146,26 @@ JumpTable_037_4DD8::
     xor  a                                        ; $4DE0: $AF
     ld   [hl], a                                  ; $4DE1: $77
     ld   a, $04                                   ; $4DE2: $3E $04
-    ld   [$C221], a                               ; $4DE4: $EA $21 $C2
+    ld   [wEntitiesPosXSignTable+1], a                               ; $4DE4: $EA $21 $C2
     jp   JumpTable_037_4C36.func_037_4C48         ; $4DE7: $C3 $48 $4C
 
 Data_037_4DEA::
     db   $02, $FE
 
 JumpTable_037_4DEC::
-    ld   hl, $C213                                ; $4DEC: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4DEC: $21 $13 $C2
     inc  [hl]                                     ; $4DEF: $34
     ld   a, [hl]                                  ; $4DF0: $7E
     and  $07                                      ; $4DF1: $E6 $07
     jr   nz, .else_4DFD_37                        ; $4DF3: $20 $08
 
-    ld   a, [$C221]                               ; $4DF5: $FA $21 $C2
+    ld   a, [wEntitiesPosXSignTable+1]                               ; $4DF5: $FA $21 $C2
     xor  $01                                      ; $4DF8: $EE $01
-    ld   [$C221], a                               ; $4DFA: $EA $21 $C2
+    ld   [wEntitiesPosXSignTable+1], a                               ; $4DFA: $EA $21 $C2
 
 .else_4DFD_37:
     ld   a, $02                                   ; $4DFD: $3E $02
-    ld   [$C275], a                               ; $4DFF: $EA $75 $C2
+    ld   [wEntitiesSpeedYAccTable+5], a                               ; $4DFF: $EA $75 $C2
     ld   a, [hl]                                  ; $4E02: $7E
     and  $03                                      ; $4E03: $E6 $03
     jr   nz, .else_4E23_37                        ; $4E05: $20 $1C
@@ -2180,10 +2180,10 @@ JumpTable_037_4DEC::
     ld   hl, Data_037_4DEA                        ; $4E12: $21 $EA $4D
     add  hl, de                                   ; $4E15: $19
     ld   a, [hl]                                  ; $4E16: $7E
-    ld   hl, $C223                                ; $4E17: $21 $23 $C2
+    ld   hl, wEntitiesPosXSignTable+3                                ; $4E17: $21 $23 $C2
     add  [hl]                                     ; $4E1A: $86
-    ld   [$C223], a                               ; $4E1B: $EA $23 $C2
-    ld   hl, $C222                                ; $4E1E: $21 $22 $C2
+    ld   [wEntitiesPosXSignTable+3], a                               ; $4E1B: $EA $23 $C2
+    ld   hl, wEntitiesPosXSignTable+2                                ; $4E1E: $21 $22 $C2
     dec  [hl]                                     ; $4E21: $35
     pop  hl                                       ; $4E22: $E1
 
@@ -2195,40 +2195,40 @@ JumpTable_037_4DEC::
     xor  a                                        ; $4E27: $AF
     ld   [hl], a                                  ; $4E28: $77
     ld   a, $06                                   ; $4E29: $3E $06
-    ld   [$C221], a                               ; $4E2B: $EA $21 $C2
-    ld   a, [$C223]                               ; $4E2E: $FA $23 $C2
+    ld   [wEntitiesPosXSignTable+1], a                               ; $4E2B: $EA $21 $C2
+    ld   a, [wEntitiesPosXSignTable+3]                               ; $4E2E: $FA $23 $C2
     add  $03                                      ; $4E31: $C6 $03
-    ld   [$C223], a                               ; $4E33: $EA $23 $C2
-    ld   a, [$C222]                               ; $4E36: $FA $22 $C2
+    ld   [wEntitiesPosXSignTable+3], a                               ; $4E33: $EA $23 $C2
+    ld   a, [wEntitiesPosXSignTable+2]                               ; $4E36: $FA $22 $C2
     sub  $03                                      ; $4E39: $D6 $03
-    ld   [$C222], a                               ; $4E3B: $EA $22 $C2
+    ld   [wEntitiesPosXSignTable+2], a                               ; $4E3B: $EA $22 $C2
     jp   JumpTable_037_4C36.func_037_4C48         ; $4E3E: $C3 $48 $4C
 
 JumpTable_037_4E41::
     ld   a, $02                                   ; $4E41: $3E $02
-    ld   [$C275], a                               ; $4E43: $EA $75 $C2
-    ld   hl, $C213                                ; $4E46: $21 $13 $C2
+    ld   [wEntitiesSpeedYAccTable+5], a                               ; $4E43: $EA $75 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4E46: $21 $13 $C2
     inc  [hl]                                     ; $4E49: $34
     ld   a, [hl]                                  ; $4E4A: $7E
     cp   $10                                      ; $4E4B: $FE $10
     ret  c                                        ; $4E4D: $D8
 
     ld   a, $07                                   ; $4E4E: $3E $07
-    ld   [$C221], a                               ; $4E50: $EA $21 $C2
+    ld   [wEntitiesPosXSignTable+1], a                               ; $4E50: $EA $21 $C2
     ld   a, [hl]                                  ; $4E53: $7E
     cp   $20                                      ; $4E54: $FE $20
     ret  nz                                       ; $4E56: $C0
 
     ld   a, $01                                   ; $4E57: $3E $01
-    ld   [$C214], a                               ; $4E59: $EA $14 $C2
+    ld   [wEntitiesPosYTable+4], a                               ; $4E59: $EA $14 $C2
     jp   JumpTable_037_4C36.func_037_4C48         ; $4E5C: $C3 $48 $4C
 
 JumpTable_037_4E5F::
-    ld   a, [$C214]                               ; $4E5F: $FA $14 $C2
+    ld   a, [wEntitiesPosYTable+4]                               ; $4E5F: $FA $14 $C2
     and  a                                        ; $4E62: $A7
     ret  nz                                       ; $4E63: $C0
 
-    ld   hl, $C213                                ; $4E64: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4E64: $21 $13 $C2
     inc  [hl]                                     ; $4E67: $34
     ld   a, [hl]                                  ; $4E68: $7E
     cp   $50                                      ; $4E69: $FE $50
@@ -2244,12 +2244,12 @@ JumpTable_037_4E5F::
     ret                                           ; $4E7E: $C9
 
 func_037_4E7F::
-    ld   a, [$C223]                               ; $4E7F: $FA $23 $C2
-    ld   [$C251], a                               ; $4E82: $EA $51 $C2
-    ld   a, [$C222]                               ; $4E85: $FA $22 $C2
-    ld   [$C261], a                               ; $4E88: $EA $61 $C2
-    ld   de, $C251                                ; $4E8B: $11 $51 $C2
-    ld   hl, $C252                                ; $4E8E: $21 $52 $C2
+    ld   a, [wEntitiesPosXSignTable+3]                               ; $4E7F: $FA $23 $C2
+    ld   [wEntitiesSpeedYTable+1], a                               ; $4E82: $EA $51 $C2
+    ld   a, [wEntitiesPosXSignTable+2]                               ; $4E85: $FA $22 $C2
+    ld   [wEntitiesSpeedXAccTable+1], a                               ; $4E88: $EA $61 $C2
+    ld   de, wEntitiesSpeedYTable+1                                ; $4E8B: $11 $51 $C2
+    ld   hl, wEntitiesSpeedYTable+2                                ; $4E8E: $21 $52 $C2
     ld   c, $05                                   ; $4E91: $0E $05
 
 .loop_4E93_37:
@@ -2277,8 +2277,8 @@ func_037_4E7F::
     dec  c                                        ; $4EA7: $0D
     jr   nz, .loop_4E93_37                        ; $4EA8: $20 $E9
 
-    ld   de, $C261                                ; $4EAA: $11 $61 $C2
-    ld   hl, $C262                                ; $4EAD: $21 $62 $C2
+    ld   de, wEntitiesSpeedXAccTable+1                                ; $4EAA: $11 $61 $C2
+    ld   hl, wEntitiesSpeedXAccTable+2                                ; $4EAD: $21 $62 $C2
     ld   c, $05                                   ; $4EB0: $0E $05
 
 .loop_4EB2_37:
@@ -2310,7 +2310,7 @@ func_037_4E7F::
     and  $01                                      ; $4ECB: $E6 $01
     jr   z, .else_4EDE_37                         ; $4ECD: $28 $0F
 
-    ld   hl, $C261                                ; $4ECF: $21 $61 $C2
+    ld   hl, wEntitiesSpeedXAccTable+1                                ; $4ECF: $21 $61 $C2
 
 .loop_4ED2_37:
     ld   a, [hl]                                  ; $4ED2: $7E
@@ -2343,12 +2343,12 @@ func_037_4E7F::
     rra                                           ; $4EF4: $1F
     jr   c, .else_4F0F_37                         ; $4EF5: $38 $18
 
-    ld   hl, $C261                                ; $4EF7: $21 $61 $C2
+    ld   hl, wEntitiesSpeedXAccTable+1                                ; $4EF7: $21 $61 $C2
     add  hl, bc                                   ; $4EFA: $09
     ld   a, [hl]                                  ; $4EFB: $7E
     ld   [de], a                                  ; $4EFC: $12
     inc  de                                       ; $4EFD: $13
-    ld   hl, $C251                                ; $4EFE: $21 $51 $C2
+    ld   hl, wEntitiesSpeedYTable+1                                ; $4EFE: $21 $51 $C2
     add  hl, bc                                   ; $4F01: $09
     ld   a, [hl]                                  ; $4F02: $7E
     add  $04                                      ; $4F03: $C6 $04
@@ -2371,16 +2371,16 @@ Data_037_4F13::
     db   $00, $00, $5E, $20, $00, $08, $5E, $00
 
 func_037_4F1B::
-    ld   a, [$C225]                               ; $4F1B: $FA $25 $C2
+    ld   a, [wEntitiesPosXSignTable+5]                               ; $4F1B: $FA $25 $C2
     and  a                                        ; $4F1E: $A7
     ret  z                                        ; $4F1F: $C8
 
     dec  a                                        ; $4F20: $3D
-    ld   [$C225], a                               ; $4F21: $EA $25 $C2
+    ld   [wEntitiesPosXSignTable+5], a                               ; $4F21: $EA $25 $C2
     ld   hl, Data_037_4F13                        ; $4F24: $21 $13 $4F
-    ld   a, [$C279]                               ; $4F27: $FA $79 $C2
+    ld   a, [wEntitiesSpeedYAccTable+9]                               ; $4F27: $FA $79 $C2
     ldh  [hScratch0], a                           ; $4F2A: $E0 $D7
-    ld   a, [$C278]                               ; $4F2C: $FA $78 $C2
+    ld   a, [wEntitiesSpeedYAccTable+8]                               ; $4F2C: $FA $78 $C2
     ldh  [hScratch1], a                           ; $4F2F: $E0 $D8
     ld   c, $08                                   ; $4F31: $0E $08
     call func_037_4AB8                            ; $4F33: $CD $B8 $4A
@@ -2388,7 +2388,7 @@ func_037_4F1B::
 
 func_037_4F37::
     ld   hl, Data_037_5C7F                        ; $4F37: $21 $7F $5C
-    ld   a, [$C221]                               ; $4F3A: $FA $21 $C2
+    ld   a, [wEntitiesPosXSignTable+1]                               ; $4F3A: $FA $21 $C2
     ld   e, a                                     ; $4F3D: $5F
     ld   d, $00                                   ; $4F3E: $16 $00
     add  hl, de                                   ; $4F40: $19
@@ -2400,9 +2400,9 @@ func_037_4F37::
     ld   a, [hl+]                                 ; $4F4A: $2A
     ld   h, [hl]                                  ; $4F4B: $66
     ld   l, a                                     ; $4F4C: $6F
-    ld   a, [$C222]                               ; $4F4D: $FA $22 $C2
+    ld   a, [wEntitiesPosXSignTable+2]                               ; $4F4D: $FA $22 $C2
     ldh  [hScratch0], a                           ; $4F50: $E0 $D7
-    ld   a, [$C223]                               ; $4F52: $FA $23 $C2
+    ld   a, [wEntitiesPosXSignTable+3]                               ; $4F52: $FA $23 $C2
     ldh  [hScratch1], a                           ; $4F55: $E0 $D8
     call func_037_4AB8                            ; $4F57: $CD $B8 $4A
     ret                                           ; $4F5A: $C9
@@ -2431,13 +2431,13 @@ func_037_4F70::
     and  a                                        ; $4F73: $A7
     ret  nz                                       ; $4F74: $C0
 
-    ld   a, [$C205]                               ; $4F75: $FA $05 $C2
+    ld   a, [wEntitiesPosXTable+5]                               ; $4F75: $FA $05 $C2
     JP_TABLE                                      ; $4F78: $C7
     dw JumpTable_037_4F7D
     dw JumpTable_037_49CD
 
 JumpTable_037_4F7D::
-    ld   hl, $C213                                ; $4F7D: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4F7D: $21 $13 $C2
     inc  [hl]                                     ; $4F80: $34
     ld   a, [hl]                                  ; $4F81: $7E
     cp   $70                                      ; $4F82: $FE $70
@@ -2454,7 +2454,7 @@ JumpTable_037_4F7D::
     ret                                           ; $4F9A: $C9
 
 JumpTable_037_4F9B::
-    ld   hl, $C213                                ; $4F9B: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $4F9B: $21 $13 $C2
     inc  [hl]                                     ; $4F9E: $34
     ld   a, [hl]                                  ; $4F9F: $7E
     cp   $50                                      ; $4FA0: $FE $50
@@ -2486,7 +2486,7 @@ JumpTable_037_4FB7::
 
 JumpTable_037_4FD0::
     ld   hl, Data_037_5B69                        ; $4FD0: $21 $69 $5B
-    ld   a, [$C219]                               ; $4FD3: $FA $19 $C2
+    ld   a, [wEntitiesPosYTable+9]                               ; $4FD3: $FA $19 $C2
     ld   e, a                                     ; $4FD6: $5F
     ld   d, $00                                   ; $4FD7: $16 $00
     add  hl, de                                   ; $4FD9: $19
@@ -2497,13 +2497,13 @@ JumpTable_037_4FD0::
     ld   a, [hl+]                                 ; $4FE1: $2A
     ld   h, [hl]                                  ; $4FE2: $66
     ld   l, a                                     ; $4FE3: $6F
-    ld   a, [$C216]                               ; $4FE4: $FA $16 $C2
+    ld   a, [wEntitiesPosYTable+6]                               ; $4FE4: $FA $16 $C2
     ldh  [hScratch0], a                           ; $4FE7: $E0 $D7
-    ld   a, [$C217]                               ; $4FE9: $FA $17 $C2
+    ld   a, [wEntitiesPosYTable+7]                               ; $4FE9: $FA $17 $C2
     ldh  [hScratch1], a                           ; $4FEC: $E0 $D8
     call func_037_4AB8                            ; $4FEE: $CD $B8 $4A
     ld   hl, Data_037_5941                        ; $4FF1: $21 $41 $59
-    ld   a, [$C201]                               ; $4FF4: $FA $01 $C2
+    ld   a, [wEntitiesPosXTable+1]                               ; $4FF4: $FA $01 $C2
     ld   e, a                                     ; $4FF7: $5F
     ld   d, $00                                   ; $4FF8: $16 $00
     add  hl, de                                   ; $4FFA: $19
@@ -2520,7 +2520,7 @@ func_037_500B::
     and  a                                        ; $500E: $A7
     ret  nz                                       ; $500F: $C0
 
-    ld   a, [$C215]                               ; $5010: $FA $15 $C2
+    ld   a, [wEntitiesPosYTable+5]                               ; $5010: $FA $15 $C2
     JP_TABLE                                      ; $5013: $C7
     dw JumpTable_037_506F
     dw JumpTable_037_5081
@@ -2534,11 +2534,11 @@ func_037_500B::
     dw JumpTable_037_51AB
 
 func_037_5028::
-    ld   a, [$C202]                               ; $5028: $FA $02 $C2
+    ld   a, [wEntitiesPosXTable+2]                               ; $5028: $FA $02 $C2
     cp   $3E                                      ; $502B: $FE $3E
     jr   nz, .else_5040_37                        ; $502D: $20 $11
 
-    ld   a, [$C21C]                               ; $502F: $FA $1C $C2
+    ld   a, [wEntitiesPosYTable+12]                               ; $502F: $FA $1C $C2
     cp   $52                                      ; $5032: $FE $52
     ret  nz                                       ; $5034: $C0
 
@@ -2548,7 +2548,7 @@ func_037_5028::
     ret                                           ; $503F: $C9
 
 .else_5040_37:
-    ld   hl, $C204                                ; $5040: $21 $04 $C2
+    ld   hl, wEntitiesPosXTable+4                                ; $5040: $21 $04 $C2
     inc  [hl]                                     ; $5043: $34
     ld   a, [hl]                                  ; $5044: $7E
     cp   $0A                                      ; $5045: $FE $0A
@@ -2556,14 +2556,14 @@ func_037_5028::
 
     xor  a                                        ; $5048: $AF
     ld   [hl], a                                  ; $5049: $77
-    ld   a, [$C201]                               ; $504A: $FA $01 $C2
+    ld   a, [wEntitiesPosXTable+1]                               ; $504A: $FA $01 $C2
     xor  $01                                      ; $504D: $EE $01
-    ld   [$C201], a                               ; $504F: $EA $01 $C2
-    ld   hl, $C203                                ; $5052: $21 $03 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $504F: $EA $01 $C2
+    ld   hl, wEntitiesPosXTable+3                                ; $5052: $21 $03 $C2
     dec  [hl]                                     ; $5055: $35
-    ld   a, [$C202]                               ; $5056: $FA $02 $C2
+    ld   a, [wEntitiesPosXTable+2]                               ; $5056: $FA $02 $C2
     add  $04                                      ; $5059: $C6 $04
-    ld   [$C202], a                               ; $505B: $EA $02 $C2
+    ld   [wEntitiesPosXTable+2], a                               ; $505B: $EA $02 $C2
     bit  7, a                                     ; $505E: $CB $7F
     ret  nz                                       ; $5060: $C0
 
@@ -2571,14 +2571,14 @@ func_037_5028::
     ret  c                                        ; $5063: $D8
 
     ld   a, $02                                   ; $5064: $3E $02
-    ld   [$C201], a                               ; $5066: $EA $01 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $5066: $EA $01 $C2
     ld   a, $3E                                   ; $5069: $3E $3E
-    ld   [$C202], a                               ; $506B: $EA $02 $C2
+    ld   [wEntitiesPosXTable+2], a                               ; $506B: $EA $02 $C2
     ret                                           ; $506E: $C9
 
 JumpTable_037_506F::
     call func_037_5028                            ; $506F: $CD $28 $50
-    ld   hl, $C213                                ; $5072: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $5072: $21 $13 $C2
     inc  [hl]                                     ; $5075: $34
     ld   a, [hl]                                  ; $5076: $7E
     cp   $30                                      ; $5077: $FE $30
@@ -2587,13 +2587,13 @@ JumpTable_037_506F::
     xor  a                                        ; $507A: $AF
     ld   [hl], a                                  ; $507B: $77
 .func_037_507C::
-    ld   hl, $C215                                ; $507C: $21 $15 $C2
+    ld   hl, wEntitiesPosYTable+5                                ; $507C: $21 $15 $C2
     inc  [hl]                                     ; $507F: $34
     ret                                           ; $5080: $C9
 
 JumpTable_037_5081::
     call func_037_5028                            ; $5081: $CD $28 $50
-    ld   hl, $C21F                                ; $5084: $21 $1F $C2
+    ld   hl, wEntitiesPosYTable+15                                ; $5084: $21 $1F $C2
     inc  [hl]                                     ; $5087: $34
     ld   a, [hl]                                  ; $5088: $7E
     cp   $0A                                      ; $5089: $FE $0A
@@ -2601,11 +2601,11 @@ JumpTable_037_5081::
 
     xor  a                                        ; $508C: $AF
     ld   [hl], a                                  ; $508D: $77
-    ld   a, [$C21B]                               ; $508E: $FA $1B $C2
+    ld   a, [wEntitiesPosYTable+11]                               ; $508E: $FA $1B $C2
     and  $01                                      ; $5091: $E6 $01
     xor  $01                                      ; $5093: $EE $01
-    ld   [$C21B], a                               ; $5095: $EA $1B $C2
-    ld   a, [$C21C]                               ; $5098: $FA $1C $C2
+    ld   [wEntitiesPosYTable+11], a                               ; $5095: $EA $1B $C2
+    ld   a, [wEntitiesPosYTable+12]                               ; $5098: $FA $1C $C2
     add  $04                                      ; $509B: $C6 $04
     cp   $70                                      ; $509D: $FE $70
     jr   c, .else_50A6_37                         ; $509F: $38 $05
@@ -2614,12 +2614,12 @@ JumpTable_037_5081::
     ld   a, $70                                   ; $50A4: $3E $70
 
 .else_50A6_37:
-    ld   [$C21C], a                               ; $50A6: $EA $1C $C2
+    ld   [wEntitiesPosYTable+12], a                               ; $50A6: $EA $1C $C2
     ret                                           ; $50A9: $C9
 
 JumpTable_037_50AA::
     call func_037_5028                            ; $50AA: $CD $28 $50
-    ld   hl, $C21F                                ; $50AD: $21 $1F $C2
+    ld   hl, wEntitiesPosYTable+15                                ; $50AD: $21 $1F $C2
     inc  [hl]                                     ; $50B0: $34
     ld   a, [hl]                                  ; $50B1: $7E
     cp   $0A                                      ; $50B2: $FE $0A
@@ -2627,11 +2627,11 @@ JumpTable_037_50AA::
 
     xor  a                                        ; $50B5: $AF
     ld   [hl], a                                  ; $50B6: $77
-    ld   a, [$C21B]                               ; $50B7: $FA $1B $C2
+    ld   a, [wEntitiesPosYTable+11]                               ; $50B7: $FA $1B $C2
     or   $02                                      ; $50BA: $F6 $02
     xor  $01                                      ; $50BC: $EE $01
-    ld   [$C21B], a                               ; $50BE: $EA $1B $C2
-    ld   a, [$C21C]                               ; $50C1: $FA $1C $C2
+    ld   [wEntitiesPosYTable+11], a                               ; $50BE: $EA $1B $C2
+    ld   a, [wEntitiesPosYTable+12]                               ; $50C1: $FA $1C $C2
     sub  $04                                      ; $50C4: $D6 $04
     cp   $54                                      ; $50C6: $FE $54
     jr   nc, .else_50D1_37                        ; $50C8: $30 $07
@@ -2641,11 +2641,11 @@ JumpTable_037_50AA::
     ld   a, $52                                   ; $50CF: $3E $52
 
 .else_50D1_37:
-    ld   [$C21C], a                               ; $50D1: $EA $1C $C2
+    ld   [wEntitiesPosYTable+12], a                               ; $50D1: $EA $1C $C2
     ret                                           ; $50D4: $C9
 
 JumpTable_037_50D5::
-    ld   hl, $C21A                                ; $50D5: $21 $1A $C2
+    ld   hl, wEntitiesPosYTable+10                                ; $50D5: $21 $1A $C2
     inc  [hl]                                     ; $50D8: $34
     ld   a, [hl]                                  ; $50D9: $7E
     cp   $0A                                      ; $50DA: $FE $0A
@@ -2653,53 +2653,53 @@ JumpTable_037_50D5::
 
     xor  a                                        ; $50DD: $AF
     ld   [hl], a                                  ; $50DE: $77
-    ld   a, [$C219]                               ; $50DF: $FA $19 $C2
+    ld   a, [wEntitiesPosYTable+9]                               ; $50DF: $FA $19 $C2
     xor  $01                                      ; $50E2: $EE $01
-    ld   [$C219], a                               ; $50E4: $EA $19 $C2
-    ld   a, [$C217]                               ; $50E7: $FA $17 $C2
+    ld   [wEntitiesPosYTable+9], a                               ; $50E4: $EA $19 $C2
+    ld   a, [wEntitiesPosYTable+7]                               ; $50E7: $FA $17 $C2
     sub  $04                                      ; $50EA: $D6 $04
-    ld   [$C217], a                               ; $50EC: $EA $17 $C2
+    ld   [wEntitiesPosYTable+7], a                               ; $50EC: $EA $17 $C2
     cp   $80                                      ; $50EF: $FE $80
     jr   c, .else_50F8_37                         ; $50F1: $38 $05
 
-    ld   hl, $C216                                ; $50F3: $21 $16 $C2
+    ld   hl, wEntitiesPosYTable+6                                ; $50F3: $21 $16 $C2
     dec  [hl]                                     ; $50F6: $35
     ret                                           ; $50F7: $C9
 
 .else_50F8_37:
     ld   a, $80                                   ; $50F8: $3E $80
-    ld   [$C217], a                               ; $50FA: $EA $17 $C2
+    ld   [wEntitiesPosYTable+7], a                               ; $50FA: $EA $17 $C2
     xor  a                                        ; $50FD: $AF
-    ld   [$C219], a                               ; $50FE: $EA $19 $C2
+    ld   [wEntitiesPosYTable+9], a                               ; $50FE: $EA $19 $C2
     call_open_dialog $23C                           ; $5101
     call JumpTable_037_506F.func_037_507C         ; $5106: $CD $7C $50
     ret                                           ; $5109: $C9
 
 JumpTable_037_510A::
     ld   a, $04                                   ; $510A: $3E $04
-    ld   [$C201], a                               ; $510C: $EA $01 $C2
-    ld   a, [$C21B]                               ; $510F: $FA $1B $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $510C: $EA $01 $C2
+    ld   a, [wEntitiesPosYTable+11]                               ; $510F: $FA $1B $C2
     and  $01                                      ; $5112: $E6 $01
     or   $04                                      ; $5114: $F6 $04
-    ld   [$C21B], a                               ; $5116: $EA $1B $C2
+    ld   [wEntitiesPosYTable+11], a                               ; $5116: $EA $1B $C2
     ldh  a, [hFrameCounter]                       ; $5119: $F0 $E7
     and  %00000111                                ; $511B: $E6 $07
     jr   nz, .else_5127_37                        ; $511D: $20 $08
 
-    ld   a, [$C21B]                               ; $511F: $FA $1B $C2
+    ld   a, [wEntitiesPosYTable+11]                               ; $511F: $FA $1B $C2
     xor  $01                                      ; $5122: $EE $01
-    ld   [$C21B], a                               ; $5124: $EA $1B $C2
+    ld   [wEntitiesPosYTable+11], a                               ; $5124: $EA $1B $C2
 
 .else_5127_37:
     ldh  a, [hFrameCounter]                       ; $5127: $F0 $E7
     and  $01                                      ; $5129: $E6 $01
     jr   nz, .else_5131_37                        ; $512B: $20 $04
 
-    ld   hl, $C21D                                ; $512D: $21 $1D $C2
+    ld   hl, wEntitiesPosYTable+13                                ; $512D: $21 $1D $C2
     inc  [hl]                                     ; $5130: $34
 
 .else_5131_37:
-    ld   hl, $C21A                                ; $5131: $21 $1A $C2
+    ld   hl, wEntitiesPosYTable+10                                ; $5131: $21 $1A $C2
     inc  [hl]                                     ; $5134: $34
     ld   a, [hl]                                  ; $5135: $7E
     cp   $0A                                      ; $5136: $FE $0A
@@ -2707,29 +2707,29 @@ JumpTable_037_510A::
 
     xor  a                                        ; $5139: $AF
     ld   [hl], a                                  ; $513A: $77
-    ld   a, [$C219]                               ; $513B: $FA $19 $C2
+    ld   a, [wEntitiesPosYTable+9]                               ; $513B: $FA $19 $C2
     xor  $01                                      ; $513E: $EE $01
-    ld   [$C219], a                               ; $5140: $EA $19 $C2
-    ld   hl, $C216                                ; $5143: $21 $16 $C2
+    ld   [wEntitiesPosYTable+9], a                               ; $5140: $EA $19 $C2
+    ld   hl, wEntitiesPosYTable+6                                ; $5143: $21 $16 $C2
     dec  [hl]                                     ; $5146: $35
-    ld   a, [$C217]                               ; $5147: $FA $17 $C2
+    ld   a, [wEntitiesPosYTable+7]                               ; $5147: $FA $17 $C2
     sub  $04                                      ; $514A: $D6 $04
-    ld   [$C217], a                               ; $514C: $EA $17 $C2
+    ld   [wEntitiesPosYTable+7], a                               ; $514C: $EA $17 $C2
     cp   $58                                      ; $514F: $FE $58
     ret  nc                                       ; $5151: $D0
 
     ld   a, $56                                   ; $5152: $3E $56
-    ld   [$C217], a                               ; $5154: $EA $17 $C2
+    ld   [wEntitiesPosYTable+7], a                               ; $5154: $EA $17 $C2
     ld   a, $04                                   ; $5157: $3E $04
-    ld   [$C219], a                               ; $5159: $EA $19 $C2
+    ld   [wEntitiesPosYTable+9], a                               ; $5159: $EA $19 $C2
     call_open_dialog $249                           ; $515C
     call JumpTable_037_506F.func_037_507C         ; $5161: $CD $7C $50
     ret                                           ; $5164: $C9
 
 JumpTable_037_5165::
     ld   a, $04                                   ; $5165: $3E $04
-    ld   [$C201], a                               ; $5167: $EA $01 $C2
-    ld   hl, $C213                                ; $516A: $21 $13 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $5167: $EA $01 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $516A: $21 $13 $C2
     inc  [hl]                                     ; $516D: $34
     ld   a, [hl]                                  ; $516E: $7E
     cp   $40                                      ; $516F: $FE $40
@@ -2741,10 +2741,10 @@ JumpTable_037_5165::
 
 JumpTable_037_5177::
     ld   a, $05                                   ; $5177: $3E $05
-    ld   [$C201], a                               ; $5179: $EA $01 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $5179: $EA $01 $C2
     ld   a, $05                                   ; $517C: $3E $05
-    ld   [$C219], a                               ; $517E: $EA $19 $C2
-    ld   hl, $C213                                ; $5181: $21 $13 $C2
+    ld   [wEntitiesPosYTable+9], a                               ; $517E: $EA $19 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $5181: $21 $13 $C2
     inc  [hl]                                     ; $5184: $34
     ld   a, [hl]                                  ; $5185: $7E
     cp   $40                                      ; $5186: $FE $40
@@ -2752,30 +2752,30 @@ JumpTable_037_5177::
 
     xor  a                                        ; $5189: $AF
     ld   [hl], a                                  ; $518A: $77
-    ld   hl, $C214                                ; $518B: $21 $14 $C2
+    ld   hl, wEntitiesPosYTable+4                                ; $518B: $21 $14 $C2
     inc  [hl]                                     ; $518E: $34
     jp   JumpTable_037_506F.func_037_507C         ; $518F: $C3 $7C $50
 
 JumpTable_037_5192::
-    ld   a, [$C214]                               ; $5192: $FA $14 $C2
+    ld   a, [wEntitiesPosYTable+4]                               ; $5192: $FA $14 $C2
     and  a                                        ; $5195: $A7
     ret  nz                                       ; $5196: $C0
 
-    ld   hl, $C213                                ; $5197: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $5197: $21 $13 $C2
     inc  [hl]                                     ; $519A: $34
     ld   a, [hl]                                  ; $519B: $7E
     cp   $20                                      ; $519C: $FE $20
     ret  nz                                       ; $519E: $C0
 
     xor  a                                        ; $519F: $AF
-    ld   [$C219], a                               ; $51A0: $EA $19 $C2
+    ld   [wEntitiesPosYTable+9], a                               ; $51A0: $EA $19 $C2
     call_open_dialog $254                           ; $51A3
     jp   JumpTable_037_506F.func_037_507C         ; $51A8: $C3 $7C $50
 
 JumpTable_037_51AB::
     ld   a, $04                                   ; $51AB: $3E $04
-    ld   [$C201], a                               ; $51AD: $EA $01 $C2
-    ld   a, [$C217]                               ; $51B0: $FA $17 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $51AD: $EA $01 $C2
+    ld   a, [wEntitiesPosYTable+7]                               ; $51B0: $FA $17 $C2
     cp   $28                                      ; $51B3: $FE $28
     jr   nc, .else_51CE_37                        ; $51B5: $30 $17
 
@@ -2796,7 +2796,7 @@ JumpTable_037_51AB::
     ld   [wTransitionSequenceCounter], a          ; $51D2: $EA $6B $C1
 
 .else_51D5_37:
-    ld   hl, $C21A                                ; $51D5: $21 $1A $C2
+    ld   hl, wEntitiesPosYTable+10                                ; $51D5: $21 $1A $C2
     inc  [hl]                                     ; $51D8: $34
     ld   a, [hl]                                  ; $51D9: $7E
     cp   $06                                      ; $51DA: $FE $06
@@ -2804,13 +2804,13 @@ JumpTable_037_51AB::
 
     xor  a                                        ; $51DD: $AF
     ld   [hl], a                                  ; $51DE: $77
-    ld   a, [$C219]                               ; $51DF: $FA $19 $C2
+    ld   a, [wEntitiesPosYTable+9]                               ; $51DF: $FA $19 $C2
     xor  $01                                      ; $51E2: $EE $01
-    ld   [$C219], a                               ; $51E4: $EA $19 $C2
-    ld   a, [$C217]                               ; $51E7: $FA $17 $C2
+    ld   [wEntitiesPosYTable+9], a                               ; $51E4: $EA $19 $C2
+    ld   a, [wEntitiesPosYTable+7]                               ; $51E7: $FA $17 $C2
     sub  $04                                      ; $51EA: $D6 $04
-    ld   [$C217], a                               ; $51EC: $EA $17 $C2
-    ld   hl, $C216                                ; $51EF: $21 $16 $C2
+    ld   [wEntitiesPosYTable+7], a                               ; $51EC: $EA $17 $C2
+    ld   hl, wEntitiesPosYTable+6                                ; $51EF: $21 $16 $C2
     inc  [hl]                                     ; $51F2: $34
     ret                                           ; $51F3: $C9
 
@@ -2833,7 +2833,7 @@ JumpTable_037_51F4::
     ret                                           ; $5215: $C9
 
 func_037_5216::
-    ld   a, [$C205]                               ; $5216: $FA $05 $C2
+    ld   a, [wEntitiesPosXTable+5]                               ; $5216: $FA $05 $C2
     JP_TABLE                                      ; $5219: $C7
     dw JumpTable_037_5228
     dw JumpTable_037_5257
@@ -2844,7 +2844,7 @@ func_037_5216::
     dw JumpTable_037_530D
 
 JumpTable_037_5228::
-    ld   hl, $C213                                ; $5228: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $5228: $21 $13 $C2
     inc  [hl]                                     ; $522B: $34
     ld   a, [hl]                                  ; $522C: $7E
     cp   $08                                      ; $522D: $FE $08
@@ -2852,9 +2852,9 @@ JumpTable_037_5228::
 
     xor  a                                        ; $5230: $AF
     ld   [hl], a                                  ; $5231: $77
-    ld   a, [$C24E]                               ; $5232: $FA $4E $C2
+    ld   a, [wEntitiesSpeedXTable+14]                               ; $5232: $FA $4E $C2
     xor  $01                                      ; $5235: $EE $01
-    ld   [$C24E], a                               ; $5237: $EA $4E $C2
+    ld   [wEntitiesSpeedXTable+14], a                               ; $5237: $EA $4E $C2
     ld   a, [wEntitiesSpeedYTable]                ; $523A: $FA $50 $C2
     sub  $03                                      ; $523D: $D6 $03
     ld   [wEntitiesSpeedYTable], a                ; $523F: $EA $50 $C2
@@ -2864,7 +2864,7 @@ JumpTable_037_5228::
     ld   a, $6E                                   ; $5245: $3E $6E
     ld   [wEntitiesSpeedYTable], a                ; $5247: $EA $50 $C2
     xor  a                                        ; $524A: $AF
-    ld   [$C24E], a                               ; $524B: $EA $4E $C2
+    ld   [wEntitiesSpeedXTable+14], a                               ; $524B: $EA $4E $C2
     call func_037_49CE                            ; $524E: $CD $CE $49
     call_open_dialog $2AF                           ; $5251
     ret                                           ; $5256: $C9
@@ -2876,8 +2876,8 @@ JumpTable_037_5257::
 
     call_open_dialog $12E                           ; $525C
     ld   a, $01                                   ; $5261: $3E $01
-    ld   [$C201], a                               ; $5263: $EA $01 $C2
-    ld   hl, $C202                                ; $5266: $21 $02 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $5263: $EA $01 $C2
+    ld   hl, wEntitiesPosXTable+2                                ; $5266: $21 $02 $C2
     dec  [hl]                                     ; $5269: $35
     dec  [hl]                                     ; $526A: $35
     call func_037_49CE                            ; $526B: $CD $CE $49
@@ -2891,13 +2891,13 @@ JumpTable_037_526F::
     ret  nz                                       ; $5273: $C0
 
     ld   a, $01                                   ; $5274: $3E $01
-    ld   [$C24E], a                               ; $5276: $EA $4E $C2
+    ld   [wEntitiesSpeedXTable+14], a                               ; $5276: $EA $4E $C2
     call func_037_49CE                            ; $5279: $CD $CE $49
     ret                                           ; $527C: $C9
 
 JumpTable_037_527D::
     call func_037_52B0                            ; $527D: $CD $B0 $52
-    ld   hl, $C213                                ; $5280: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $5280: $21 $13 $C2
     inc  [hl]                                     ; $5283: $34
     ld   a, [hl]                                  ; $5284: $7E
     cp   $08                                      ; $5285: $FE $08
@@ -2905,12 +2905,12 @@ JumpTable_037_527D::
 
     xor  a                                        ; $5288: $AF
     ld   [hl], a                                  ; $5289: $77
-    ld   a, [$C24E]                               ; $528A: $FA $4E $C2
+    ld   a, [wEntitiesSpeedXTable+14]                               ; $528A: $FA $4E $C2
     xor  $01                                      ; $528D: $EE $01
-    ld   [$C24E], a                               ; $528F: $EA $4E $C2
-    ld   a, [$C24F]                               ; $5292: $FA $4F $C2
+    ld   [wEntitiesSpeedXTable+14], a                               ; $528F: $EA $4E $C2
+    ld   a, [wEntitiesSpeedXTable+15]                               ; $5292: $FA $4F $C2
     add  $02                                      ; $5295: $C6 $02
-    ld   [$C24F], a                               ; $5297: $EA $4F $C2
+    ld   [wEntitiesSpeedXTable+15], a                               ; $5297: $EA $4F $C2
     push af                                       ; $529A: $F5
     and  %00000011                                ; $529B: $E6 $03
     jr   nz, .else_52A3_37                        ; $529D: $20 $04
@@ -2928,11 +2928,11 @@ JumpTable_037_527D::
     ret                                           ; $52AF: $C9
 
 func_037_52B0::
-    ld   a, [$C201]                               ; $52B0: $FA $01 $C2
+    ld   a, [wEntitiesPosXTable+1]                               ; $52B0: $FA $01 $C2
     cp   $05                                      ; $52B3: $FE $05
     ret  z                                        ; $52B5: $C8
 
-    ld   hl, $C204                                ; $52B6: $21 $04 $C2
+    ld   hl, wEntitiesPosXTable+4                                ; $52B6: $21 $04 $C2
     inc  [hl]                                     ; $52B9: $34
     ld   a, [hl]                                  ; $52BA: $7E
     cp   $0A                                      ; $52BB: $FE $0A
@@ -2940,7 +2940,7 @@ func_037_52B0::
 
     xor  a                                        ; $52BE: $AF
     ld   [hl], a                                  ; $52BF: $77
-    ld   hl, $C201                                ; $52C0: $21 $01 $C2
+    ld   hl, wEntitiesPosXTable+1                                ; $52C0: $21 $01 $C2
     inc  [hl]                                     ; $52C3: $34
     ld   a, [hl]                                  ; $52C4: $7E
     cp   $05                                      ; $52C5: $FE $05
@@ -2950,7 +2950,7 @@ func_037_52B0::
     ld   [hl], a                                  ; $52CB: $77
 
 .else_52CC_37:
-    ld   a, [$C202]                               ; $52CC: $FA $02 $C2
+    ld   a, [wEntitiesPosXTable+2]                               ; $52CC: $FA $02 $C2
     add  $04                                      ; $52CF: $C6 $04
     cp   $61                                      ; $52D1: $FE $61
     jr   c, .else_52D7_37                         ; $52D3: $38 $02
@@ -2958,18 +2958,18 @@ func_037_52B0::
     ld   a, $61                                   ; $52D5: $3E $61
 
 .else_52D7_37:
-    ld   [$C202], a                               ; $52D7: $EA $02 $C2
-    ld   a, [$C203]                               ; $52DA: $FA $03 $C2
+    ld   [wEntitiesPosXTable+2], a                               ; $52D7: $EA $02 $C2
+    ld   a, [wEntitiesPosXTable+3]                               ; $52DA: $FA $03 $C2
     sub  $01                                      ; $52DD: $D6 $01
     cp   $55                                      ; $52DF: $FE $55
     jr   nc, .else_52EA_37                        ; $52E1: $30 $07
 
     ld   a, $05                                   ; $52E3: $3E $05
-    ld   [$C201], a                               ; $52E5: $EA $01 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $52E5: $EA $01 $C2
     ld   a, $55                                   ; $52E8: $3E $55
 
 .else_52EA_37:
-    ld   [$C203], a                               ; $52EA: $EA $03 $C2
+    ld   [wEntitiesPosXTable+3], a                               ; $52EA: $EA $03 $C2
     ret                                           ; $52ED: $C9
 
 JumpTable_037_52EE::
@@ -2978,11 +2978,11 @@ JumpTable_037_52EE::
     ret  nz                                       ; $52F2: $C0
 
     ld   a, $06                                   ; $52F3: $3E $06
-    ld   [$C201], a                               ; $52F5: $EA $01 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $52F5: $EA $01 $C2
     jp   func_037_49CE                            ; $52F8: $C3 $CE $49
 
 JumpTable_037_52FB::
-    ld   hl, $C213                                ; $52FB: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $52FB: $21 $13 $C2
     inc  [hl]                                     ; $52FE: $34
     ld   a, [hl]                                  ; $52FF: $7E
     cp   $30                                      ; $5300: $FE $30
@@ -2991,16 +2991,16 @@ JumpTable_037_52FB::
     xor  a                                        ; $5303: $AF
     ld   [hl], a                                  ; $5304: $77
     inc  a                                        ; $5305: $3C
-    ld   [$C214], a                               ; $5306: $EA $14 $C2
+    ld   [wEntitiesPosYTable+4], a                               ; $5306: $EA $14 $C2
     call func_037_49CE                            ; $5309: $CD $CE $49
     ret                                           ; $530C: $C9
 
 JumpTable_037_530D::
-    ld   a, [$C214]                               ; $530D: $FA $14 $C2
+    ld   a, [wEntitiesPosYTable+4]                               ; $530D: $FA $14 $C2
     and  a                                        ; $5310: $A7
     ret  nz                                       ; $5311: $C0
 
-    ld   hl, $C213                                ; $5312: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $5312: $21 $13 $C2
     inc  [hl]                                     ; $5315: $34
     ld   a, [hl]                                  ; $5316: $7E
     cp   $50                                      ; $5317: $FE $50
@@ -3018,7 +3018,7 @@ JumpTable_037_530D::
 
 JumpTable_037_532E::
     ld   hl, Data_037_59DD                        ; $532E: $21 $DD $59
-    ld   a, [$C201]                               ; $5331: $FA $01 $C2
+    ld   a, [wEntitiesPosXTable+1]                               ; $5331: $FA $01 $C2
     ld   e, a                                     ; $5334: $5F
     ld   d, $00                                   ; $5335: $16 $00
     add  hl, de                                   ; $5337: $19
@@ -3029,7 +3029,7 @@ JumpTable_037_532E::
 func_037_533F::
     ld   c, $08                                   ; $533F: $0E $08
     ld   hl, Data_037_5CDB                        ; $5341: $21 $DB $5C
-    ld   a, [$C24E]                               ; $5344: $FA $4E $C2
+    ld   a, [wEntitiesSpeedXTable+14]                               ; $5344: $FA $4E $C2
     sla  a                                        ; $5347: $CB $27
     ld   e, a                                     ; $5349: $5F
     ld   d, $00                                   ; $534A: $16 $00
@@ -3037,7 +3037,7 @@ func_037_533F::
     ld   a, [hl+]                                 ; $534D: $2A
     ld   h, [hl]                                  ; $534E: $66
     ld   l, a                                     ; $534F: $6F
-    ld   a, [$C24F]                               ; $5350: $FA $4F $C2
+    ld   a, [wEntitiesSpeedXTable+15]                               ; $5350: $FA $4F $C2
     ldh  [hScratch0], a                           ; $5353: $E0 $D7
     ld   a, [wEntitiesSpeedYTable]                ; $5355: $FA $50 $C2
     ldh  [hScratch1], a                           ; $5358: $E0 $D8
@@ -3045,7 +3045,7 @@ func_037_533F::
     ret                                           ; $535D: $C9
 
 JumpTable_037_535E::
-    ld   hl, $C213                                ; $535E: $21 $13 $C2
+    ld   hl, wEntitiesPosYTable+3                                ; $535E: $21 $13 $C2
     inc  [hl]                                     ; $5361: $34
     ld   a, [hl]                                  ; $5362: $7E
     cp   $40                                      ; $5363: $FE $40

@@ -73,7 +73,7 @@ MarineBeachPrepare1::
     jr   nz, .return                              ; $626D: $20 $12
     call IncrementGameplaySubtype                 ; $626F: $CD $D6 $44
     xor  a                                        ; $6272: $AF
-    ld   [$C1BF], a                               ; $6273: $EA $BF $C1
+    ld   [wScrollXOffset], a                               ; $6273: $EA $BF $C1
     call func_001_5888                            ; $6276: $CD $88 $58
     call func_001_64FF                            ; $6279: $CD $FF $64
     ld   a, $0F                                   ; $627C: $3E $0F

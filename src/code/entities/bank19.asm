@@ -8042,7 +8042,7 @@ func_019_7CFB::
     jr   nz, jr_019_7D3B                          ; $7D14: $20 $25
 
 func_019_7D16::
-    ld   hl, $C1AD                                ; $7D16: $21 $AD $C1
+    ld   hl, wC1AD                                ; $7D16: $21 $AD $C1
     ld   [hl], $01                                ; $7D19: $36 $01
     ld   a, [wDialogState]                        ; $7D1B: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $7D1E: $21 $4F $C1

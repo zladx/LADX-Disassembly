@@ -126,7 +126,7 @@ jr_005_49FD:
     jp_open_dialog $00D                           ; $4A07
 
 jr_005_4A0C:
-    ld   hl, $C1AD                                ; $4A0C: $21 $AD $C1
+    ld   hl, wC1AD                                ; $4A0C: $21 $AD $C1
     ld   [hl], b                                  ; $4A0F: $70
     ret                                           ; $4A10: $C9
 

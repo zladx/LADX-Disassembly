@@ -241,8 +241,8 @@ label_002_4287:
     ret                                           ; $4315: $C9
 
 .lowerSword
-    ; Guess: inside dialog = $C1AD ?
-    ld   a, [$C1AD]                               ; $4316: $FA $AD $C1
+    ; Guess: inside dialog = wC1AD ?
+    ld   a, [wC1AD]                               ; $4316: $FA $AD $C1
     cp   $01                                      ; $4319: $FE $01
     jr   z, .resetSwordCharge                     ; $431B: $28 $16
     ; if sword not fully charged reset it
@@ -533,7 +533,7 @@ jr_002_4481:
     jr   nz, func_002_44AD                        ; $4495: $20 $16
 
     ld   e, $01                                   ; $4497: $1E $01
-    ld   a, [$C1BB]                               ; $4499: $FA $BB $C1
+    ld   a, [wC1BB]                               ; $4499: $FA $BB $C1
     cp   $18                                      ; $449C: $FE $18
     jr   c, jr_002_44A2                           ; $449E: $38 $02
 
@@ -621,7 +621,7 @@ func_002_44FA::
     and  a                                        ; $4514: $A7
     jr   nz, jr_002_451E                          ; $4515: $20 $07
 
-    ld   a, [$C1AD]                               ; $4517: $FA $AD $C1
+    ld   a, [wC1AD]                               ; $4517: $FA $AD $C1
     cp   $80                                      ; $451A: $FE $80
     jr   nz, jr_002_4523                          ; $451C: $20 $05
 
@@ -1060,7 +1060,7 @@ jr_002_48AD:
 
 label_002_48B0:
     xor  a                                        ; $48B0: $AF
-    ld   [$C1AC], a                               ; $48B1: $EA $AC $C1
+    ld   [wC1AC], a                               ; $48B1: $EA $AC $C1
     ld   a, [wIsRunningWithPegasusBoots]          ; $48B4: $FA $4A $C1
     and  a                                        ; $48B7: $A7
     jr   nz, jr_002_48C4                          ; $48B8: $20 $0A
@@ -1476,7 +1476,7 @@ jr_002_4B85:
 jr_002_4BA1:
     xor  a                                        ; $4BA1: $AF
     ld   [wC1C7], a                               ; $4BA2: $EA $C7 $C1
-    ld   [$C1AC], a                               ; $4BA5: $EA $AC $C1
+    ld   [wC1AC], a                               ; $4BA5: $EA $AC $C1
     ret                                           ; $4BA8: $C9
 
 jr_002_4BA9:
@@ -4491,10 +4491,10 @@ ENDC
     jp   z, label_002_61E7                        ; $613A: $CA $E7 $61
 
 jr_002_613D:
-    ld   a, [$C1B5]                               ; $613D: $FA $B5 $C1
-    ld   hl, $C1B8                                ; $6140: $21 $B8 $C1
+    ld   a, [wC1B5]                               ; $613D: $FA $B5 $C1
+    ld   hl, wC1B8                                ; $6140: $21 $B8 $C1
     or   [hl]                                     ; $6143: $B6
-    ld   hl, $C1B9                                ; $6144: $21 $B9 $C1
+    ld   hl, wC1B9                                ; $6144: $21 $B9 $C1
     or   [hl]                                     ; $6147: $B6
     jp   nz, label_002_61E7                       ; $6148: $C2 $E7 $61
 
@@ -7531,7 +7531,7 @@ jr_002_764C:
     call ResetSpinAttack                          ; $764C: $CD $AF $0C
     ld   a, $07                                   ; $764F: $3E $07
     ld   [wLinkGroundStatus], a                   ; $7651: $EA $1F $C1
-    ld   hl, $C1BB                                ; $7654: $21 $BB $C1
+    ld   hl, wC1BB                                ; $7654: $21 $BB $C1
     inc  [hl]                                     ; $7657: $34
     ld   hl, wFreeMovementMode                    ; $7658: $21 $7B $C1
     ldh  a, [hFrameCounter]                       ; $765B: $F0 $E7
@@ -7633,7 +7633,7 @@ jr_002_76EC:
     jp   label_002_7C50                           ; $76F1: $C3 $50 $7C
 
 jr_002_76F4:
-    ld   a, [$C1AD]                               ; $76F4: $FA $AD $C1
+    ld   a, [wC1AD]                               ; $76F4: $FA $AD $C1
     cp   $80                                      ; $76F7: $FE $80
     jr   z, jr_002_7750                           ; $76F9: $28 $55
 
@@ -7773,7 +7773,7 @@ jr_002_779A:
 
 label_002_77A2:
     xor  a                                        ; $77A2: $AF
-    ld   [$C1BB], a                               ; $77A3: $EA $BB $C1
+    ld   [wC1BB], a                               ; $77A3: $EA $BB $C1
     ld   a, [wLinkMotionState]                    ; $77A6: $FA $1C $C1
     cp   $01                                      ; $77A9: $FE $01
     jr   nz, jr_002_77B2                          ; $77AB: $20 $05

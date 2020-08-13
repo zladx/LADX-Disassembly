@@ -106,7 +106,7 @@ AnimateEntities::
     ld   a, [wDialogState]                        ; $39DA: $FA $9F $C1
     and  a                                        ; $39DD: $A7
     jr   nz, .label_39E3                          ; $39DE: $20 $03
-    ld   [$C1AD], a                               ; $39E0: $EA $AD $C1
+    ld   [wC1AD], a                               ; $39E0: $EA $AD $C1
 
 .label_39E3
     ld   a, BANK(func_020_6352)                   ; $39E3: $3E $20

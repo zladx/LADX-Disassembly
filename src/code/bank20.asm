@@ -1008,7 +1008,7 @@ func_20_4B1F::
     ld   [wActiveProjectileCount], a              ; $4B23: $EA $4D $C1
     ld   [wC1A4], a                               ; $4B26: $EA $A4 $C1
     ld   [wIsCarryingLiftedObject], a             ; $4B29: $EA $5C $C1
-    ld   [$C1AE], a                               ; $4B2C: $EA $AE $C1
+    ld   [wC1AE], a                               ; $4B2C: $EA $AE $C1
     ld   a, [wIsLinkPushing]                      ; $4B2F: $FA $44 $C1
     and  a                                        ; $4B32: $A7
     jr   z, jr_020_4B39                           ; $4B33: $28 $04
@@ -3236,13 +3236,13 @@ Data_020_5F03::
 
 func_020_5F06::
     ld   a, [wDBA3]                               ; $5F06: $FA $A3 $DB
-    ld   [$C1B6], a                               ; $5F09: $EA $B6 $C1
-    ld   a, [$C1B8]                               ; $5F0C: $FA $B8 $C1
-    ld   hl, $C1B9                                ; $5F0F: $21 $B9 $C1
+    ld   [wC1B6], a                               ; $5F09: $EA $B6 $C1
+    ld   a, [wC1B8]                               ; $5F0C: $FA $B8 $C1
+    ld   hl, wC1B9                                ; $5F0F: $21 $B9 $C1
     or   [hl]                                     ; $5F12: $B6
     jr   nz, jr_020_5F59                          ; $5F13: $20 $44
 
-    ld   a, [$C1B5]                               ; $5F15: $FA $B5 $C1
+    ld   a, [wC1B5]                               ; $5F15: $FA $B5 $C1
     and  a                                        ; $5F18: $A7
     jr   nz, jr_020_5F38                          ; $5F19: $20 $1D
 
@@ -3294,7 +3294,7 @@ jr_020_5F59:
     and  J_UP | J_DOWN | J_LEFT | J_RIGHT         ; $5F5B: $E6 $0F
     jr   z, jr_020_5F69                           ; $5F5D: $28 $0A
 
-    ld   a, [$C1B5]                               ; $5F5F: $FA $B5 $C1
+    ld   a, [wC1B5]                               ; $5F5F: $FA $B5 $C1
     and  a                                        ; $5F62: $A7
     jr   nz, jr_020_5F69                          ; $5F63: $20 $04
 
@@ -3302,12 +3302,12 @@ jr_020_5F59:
     ld   [wInventoryCursorFrameCounter], a        ; $5F66: $EA $59 $C1
 
 jr_020_5F69:
-    ld   a, [$C1B5]                               ; $5F69: $FA $B5 $C1
+    ld   a, [wC1B5]                               ; $5F69: $FA $B5 $C1
     and  a                                        ; $5F6C: $A7
     jr   z, jr_020_5F85                           ; $5F6D: $28 $16
 
-    ld   a, [$C1B8]                               ; $5F6F: $FA $B8 $C1
-    ld   hl, $C1B9                                ; $5F72: $21 $B9 $C1
+    ld   a, [wC1B8]                               ; $5F6F: $FA $B8 $C1
+    ld   hl, wC1B9                                ; $5F72: $21 $B9 $C1
     or   [hl]                                     ; $5F75: $B6
     jr   nz, jr_020_5F85                          ; $5F76: $20 $0D
 
@@ -3316,12 +3316,12 @@ jr_020_5F69:
     jr   z, jr_020_5F85                           ; $5F7C: $28 $07
 
     ld   a, $01                                   ; $5F7E: $3E $01
-    ld   [$C1BA], a                               ; $5F80: $EA $BA $C1
+    ld   [wC1BA], a                               ; $5F80: $EA $BA $C1
     jr   jr_020_5FB2                              ; $5F83: $18 $2D
 
 jr_020_5F85:
     ld   a, [wDBA3]                               ; $5F85: $FA $A3 $DB
-    ld   hl, $C1B6                                ; $5F88: $21 $B6 $C1
+    ld   hl, wC1B6                                ; $5F88: $21 $B6 $C1
     cp   [hl]                                     ; $5F8B: $BE
     jr   z, jr_020_5FC1                           ; $5F8C: $28 $33
 
@@ -3342,25 +3342,25 @@ jr_020_5F85:
     ld   a, $08                                   ; $5FA5: $3E $08
     ldh  [hNeedsUpdatingBGTiles], a               ; $5FA7: $E0 $90
     ld   a, $10                                   ; $5FA9: $3E $10
-    ld   [$C1B8], a                               ; $5FAB: $EA $B8 $C1
+    ld   [wC1B8], a                               ; $5FAB: $EA $B8 $C1
     ld   a, $01                                   ; $5FAE: $3E $01
     jr   jr_020_5FBE                              ; $5FB0: $18 $0C
 
 jr_020_5FB2:
-    ld   a, [$C1B5]                               ; $5FB2: $FA $B5 $C1
+    ld   a, [wC1B5]                               ; $5FB2: $FA $B5 $C1
     and  a                                        ; $5FB5: $A7
     jr   z, jr_020_5FC1                           ; $5FB6: $28 $09
 
     ld   a, $10                                   ; $5FB8: $3E $10
-    ld   [$C1B9], a                               ; $5FBA: $EA $B9 $C1
+    ld   [wC1B9], a                               ; $5FBA: $EA $B9 $C1
     xor  a                                        ; $5FBD: $AF
 
 jr_020_5FBE:
-    ld   [$C1B5], a                               ; $5FBE: $EA $B5 $C1
+    ld   [wC1B5], a                               ; $5FBE: $EA $B5 $C1
 
 jr_020_5FC1:
-    ld   hl, $C1B9                                ; $5FC1: $21 $B9 $C1
-    ld   a, [$C1B8]                               ; $5FC4: $FA $B8 $C1
+    ld   hl, wC1B9                                ; $5FC1: $21 $B9 $C1
+    ld   a, [wC1B8]                               ; $5FC4: $FA $B8 $C1
     or   [hl]                                     ; $5FC7: $B6
     jp   nz, jr_020_604A                          ; $5FC8: $C2 $4A $60
 
@@ -3417,20 +3417,20 @@ jr_020_600D:
     ld   a, $08                                   ; $6017: $3E $08
     ldh  [hNeedsUpdatingBGTiles], a               ; $6019: $E0 $90
     ld   a, $10                                   ; $601B: $3E $10
-    ld   [$C1B8], a                               ; $601D: $EA $B8 $C1
+    ld   [wC1B8], a                               ; $601D: $EA $B8 $C1
     ld   a, $01                                   ; $6020: $3E $01
-    ld   [$C1B5], a                               ; $6022: $EA $B5 $C1
+    ld   [wC1B5], a                               ; $6022: $EA $B5 $C1
     jr   jr_020_6036                              ; $6025: $18 $0F
 
 jr_020_6027:
-    ld   a, [$C1B5]                               ; $6027: $FA $B5 $C1
+    ld   a, [wC1B5]                               ; $6027: $FA $B5 $C1
     and  a                                        ; $602A: $A7
     jr   z, jr_020_6036                           ; $602B: $28 $09
 
     xor  a                                        ; $602D: $AF
-    ld   [$C1B5], a                               ; $602E: $EA $B5 $C1
+    ld   [wC1B5], a                               ; $602E: $EA $B5 $C1
     ld   a, $10                                   ; $6031: $3E $10
-    ld   [$C1B9], a                               ; $6033: $EA $B9 $C1
+    ld   [wC1B9], a                               ; $6033: $EA $B9 $C1
 
 jr_020_6036:
     call func_020_5C9C                            ; $6036: $CD $9C $5C
@@ -3472,17 +3472,17 @@ Data_020_610E::
     db   $04, $02, $01
 
 func_020_6111::
-    ld   a, [$C1B9]
+    ld   a, [wC1B9]
     and  a                                        ; $6114: $A7
     jr   z, jr_020_6131                           ; $6115: $28 $1A
 
     dec  a                                        ; $6117: $3D
-    ld   [$C1B9], a                               ; $6118: $EA $B9 $C1
+    ld   [wC1B9], a                               ; $6118: $EA $B9 $C1
     jr   nz, jr_020_612E                          ; $611B: $20 $11
 
     ld   hl, hNeedsUpdatingBGTiles                ; $611D: $21 $90 $FF
     ld   [hl], $0B                                ; $6120: $36 $0B
-    ld   a, [$C1BA]                               ; $6122: $FA $BA $C1
+    ld   a, [wC1BA]                               ; $6122: $FA $BA $C1
     and  a                                        ; $6125: $A7
     jr   z, jr_020_612D                           ; $6126: $28 $05
 
@@ -3497,12 +3497,12 @@ jr_020_612E:
     jr   jr_020_613B                              ; $612F: $18 $0A
 
 jr_020_6131:
-    ld   a, [$C1B8]                               ; $6131: $FA $B8 $C1
+    ld   a, [wC1B8]                               ; $6131: $FA $B8 $C1
     and  a                                        ; $6134: $A7
     jr   z, jr_020_6141                           ; $6135: $28 $0A
 
     dec  a                                        ; $6137: $3D
-    ld   [$C1B8], a                               ; $6138: $EA $B8 $C1
+    ld   [wC1B8], a                               ; $6138: $EA $B8 $C1
 
 jr_020_613B:
     rra                                           ; $613B: $1F
@@ -3511,15 +3511,15 @@ jr_020_613B:
     jr   jr_020_614A                              ; $613F: $18 $09
 
 jr_020_6141:
-    ld   a, [$C1B5]                               ; $6141: $FA $B5 $C1
+    ld   a, [wC1B5]                               ; $6141: $FA $B5 $C1
     and  a                                        ; $6144: $A7
     jp   z, jr_020_6214                           ; $6145: $CA $14 $62
 
     ld   a, $00                                   ; $6148: $3E $00
 
 jr_020_614A:
-    ld   [$C1B7], a                               ; $614A: $EA $B7 $C1
-    ld   a, [$C1B7]                               ; $614D: $FA $B7 $C1
+    ld   [wC1B7], a                               ; $614A: $EA $B7 $C1
+    ld   a, [wC1B7]                               ; $614D: $FA $B7 $C1
     ld   d, $00                                   ; $6150: $16 $00
     sla  a                                        ; $6152: $CB $27
     sla  a                                        ; $6154: $CB $27
@@ -3586,7 +3586,7 @@ jr_020_619A:
     dec  c                                        ; $619D: $0D
     jr   nz, jr_020_616A                          ; $619E: $20 $CA
 
-    ld   a, [$C1B7]                               ; $61A0: $FA $B7 $C1
+    ld   a, [wC1B7]                               ; $61A0: $FA $B7 $C1
     cp   $00                                      ; $61A3: $FE $00
     jr   nz, jr_020_6214                          ; $61A5: $20 $6D
 
@@ -3939,7 +3939,7 @@ jr_020_63A1:
     add  hl, de                                   ; $63A1: $19
 
 jr_020_63A2:
-    ld   a, [$C1B5]                               ; $63A2: $FA $B5 $C1
+    ld   a, [wC1B5]                               ; $63A2: $FA $B5 $C1
     and  a                                        ; $63A5: $A7
     jr   z, jr_020_63AB                           ; $63A6: $28 $03
 
@@ -3972,7 +3972,7 @@ InventoryVisibleHandler::
     call func_020_62A2                            ; $63D0: $CD $A2 $62
     call func_020_635C                            ; $63D3: $CD $5C $63
     call func_020_62DE                            ; $63D6: $CD $DE $62
-    ld   a, [$C1BA]                               ; $63D9: $FA $BA $C1
+    ld   a, [wC1BA]                               ; $63D9: $FA $BA $C1
     and  a                                        ; $63DC: $A7
     jr   z, jr_020_63F5                           ; $63DD: $28 $16
 
@@ -3981,10 +3981,10 @@ InventoryVisibleHandler::
     jr   nz, jr_020_6445                          ; $63E4: $20 $5F
 
     xor  a                                        ; $63E6: $AF
-    ld   [$C1BA], a                               ; $63E7: $EA $BA $C1
-    ld   [$C1B5], a                               ; $63EA: $EA $B5 $C1
-    ld   [$C1B8], a                               ; $63ED: $EA $B8 $C1
-    ld   [$C1B9], a                               ; $63F0: $EA $B9 $C1
+    ld   [wC1BA], a                               ; $63E7: $EA $BA $C1
+    ld   [wC1B5], a                               ; $63EA: $EA $B5 $C1
+    ld   [wC1B8], a                               ; $63ED: $EA $B8 $C1
+    ld   [wC1B9], a                               ; $63F0: $EA $B9 $C1
     jr   jr_020_6436                              ; $63F3: $18 $41
 
 jr_020_63F5:
@@ -4017,10 +4017,10 @@ jr_020_641C:
     jr   jr_020_6445                              ; $641C: $18 $27
 
 jr_020_641E:
-    ld   a, [$C1B5]                               ; $641E: $FA $B5 $C1
-    ld   hl, $C1B8                                ; $6421: $21 $B8 $C1
+    ld   a, [wC1B5]                               ; $641E: $FA $B5 $C1
+    ld   hl, wC1B8                                ; $6421: $21 $B8 $C1
     or   [hl]                                     ; $6424: $B6
-    ld   hl, $C1B9                                ; $6425: $21 $B9 $C1
+    ld   hl, wC1B9                                ; $6425: $21 $B9 $C1
     or   [hl]                                     ; $6428: $B6
     jr   nz, jr_020_6445                          ; $6429: $20 $1A
 

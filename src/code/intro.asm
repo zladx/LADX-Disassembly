@@ -266,9 +266,9 @@ IntroShipOnSeaHandler::
     jp   nz, .jp_001_7013                         ; $6FD9: $C2 $13 $70
     xor  a                                        ; $6FDC: $AF
     ld   [wEntitiesStatusTable], a                ; $6FDD: $EA $80 $C2
-    ld   [$C281], a                               ; $6FE0: $EA $81 $C2
-    ld   [$C282], a                               ; $6FE3: $EA $82 $C2
-    ld   [$C290], a                               ; $6FE6: $EA $90 $C2
+    ld   [wEntitiesStatusTable+1], a                               ; $6FE0: $EA $81 $C2
+    ld   [wEntitiesStatusTable+2], a                               ; $6FE3: $EA $82 $C2
+    ld   [wEntitiesStateTable], a                               ; $6FE6: $EA $90 $C2
     ld   a, $05                                   ; $6FE9: $3E $05
     ld   [wGameplaySubtype], a                    ; $6FEB: $EA $96 $DB
     ld   [$D00F], a                               ; $6FEE: $EA $0F $D0
@@ -393,7 +393,7 @@ RenderLightning::
     add  hl, de                                   ; $70A0: $19
     ld   [hl], $30                                ; $70A1: $36 $30
 
-    ld   hl, $C2E0                                ; $70A3: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable                                ; $70A3: $21 $E0 $C2
     add  hl, de                                   ; $70A6: $19
     ld   [hl], $20                                ; $70A7: $36 $20
 
@@ -448,7 +448,7 @@ IntroLinkFaceHandler::
     ld   [rIE], a ; Enable interrupts on VBlank and LCDStat ; $70E8: $E0 $FF
     xor  a                                        ; $70EA: $AF
     ld   [wEntitiesStatusTable], a                ; $70EB: $EA $80 $C2
-    ld   [$C281], a                               ; $70EE: $EA $81 $C2
+    ld   [wEntitiesStatusTable+1], a                               ; $70EE: $EA $81 $C2
     ld   a, $01                                   ; $70F1: $3E $01
     ld   [wIntroSubTimer], a                      ; $70F3: $EA $02 $D0
     ret                                           ; $70F6: $C9
@@ -566,7 +566,7 @@ IntroBeachHandler::
     ret                                           ; $71C6: $C9
 
 func_001_71C7::
-    ld   a, [$C291]                               ; $71C7: $FA $91 $C2
+    ld   a, [wEntitiesStateTable+1]                               ; $71C7: $FA $91 $C2
     cp   $02                                      ; $71CA: $FE $02
     jr   nc, .return                              ; $71CC: $30 $10
     ld   a, [wNoiseSfxSeaWavesCounter]                               ; $71CE: $FA $14 $C1
@@ -849,7 +849,7 @@ TitleScreenHandler::
 
 .jr_001_73F0
     ld   [hl], $08                                ; $73F0: $36 $08
-    ld   hl, $C2E0                                ; $73F2: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable                                ; $73F2: $21 $E0 $C2
     add  hl, de                                   ; $73F5: $19
     ld   [hl], $3F                                ; $73F6: $36 $3F
     ld   a, [$D003]                               ; $73F8: $FA $03 $D0
@@ -1254,14 +1254,14 @@ IntroMarinState1::
     jr   nz, .jr_76D4                             ; $76B6: $20 $1C
     call IncrementEntityState                     ; $76B8: $CD $12 $3B
     ld   a, $07                                   ; $76BB: $3E $07
-    ld   [$C281], a                               ; $76BD: $EA $81 $C2
+    ld   [wEntitiesStatusTable+1], a                               ; $76BD: $EA $81 $C2
     ld   a, $FE                                   ; $76C0: $3E $FE
-    ld   [$C201], a                               ; $76C2: $EA $01 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $76C2: $EA $01 $C2
     ld   a, $6E                                   ; $76C5: $3E $6E
-    ld   [$C211], a                               ; $76C7: $EA $11 $C2
+    ld   [wEntitiesPosYTable+1], a                               ; $76C7: $EA $11 $C2
     xor  a                                        ; $76CA: $AF
-    ld   [$C291], a                               ; $76CB: $EA $91 $C2
-    ld   [$C2E1], a                               ; $76CE: $EA $E1 $C2
+    ld   [wEntitiesStateTable+1], a                               ; $76CB: $EA $91 $C2
+    ld   [wEntitiesTransitionCountdownTable+1], a                               ; $76CE: $EA $E1 $C2
     ldh  [hFrameCounter], a                       ; $76D1: $E0 $E7
     ret                                           ; $76D3: $C9
 
@@ -1271,9 +1271,9 @@ IntroMarinState1::
 
 IntroMarinState2::
     call func_001_7D9C                            ; $76D6: $CD $9C $7D
-    ld   a, [$C201]                               ; $76D9: $FA $01 $C2
+    ld   a, [wEntitiesPosXTable+1]                               ; $76D9: $FA $01 $C2
     dec  a                                        ; $76DC: $3D
-    ld   [$C201], a                               ; $76DD: $EA $01 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $76DD: $EA $01 $C2
     ldh  a, [hFrameCounter]                       ; $76E0: $F0 $E7
     and  $01                                      ; $76E2: $E6 $01
     jr   nz, .jr_7707                             ; $76E4: $20 $21
@@ -1313,9 +1313,9 @@ IntroMarinState3::
     ldh  a, [hFrameCounter]                       ; $7719: $F0 $E7
     and  $01                                      ; $771B: $E6 $01
     jr   nz, .jr_776C                             ; $771D: $20 $4D
-    ld   a, [$C201]                               ; $771F: $FA $01 $C2
+    ld   a, [wEntitiesPosXTable+1]                               ; $771F: $FA $01 $C2
     dec  a                                        ; $7722: $3D
-    ld   [$C201], a                               ; $7723: $EA $01 $C2
+    ld   [wEntitiesPosXTable+1], a                               ; $7723: $EA $01 $C2
     ldh  a, [hFrameCounter]                       ; $7726: $F0 $E7
     and  $03                                      ; $7728: $E6 $03
     jr   nz, .jr_776C                             ; $772A: $20 $40
@@ -1953,11 +1953,11 @@ InertLinkState2Handler::
     ld   [wEntitiesPosYTable], a                  ; $7A88: $EA $10 $C2
 
 .jr_7A8B
-    ld   a, [$C211]                               ; $7A8B: $FA $11 $C2
+    ld   a, [wEntitiesPosYTable+1]                               ; $7A8B: $FA $11 $C2
     cp   $A0                                      ; $7A8E: $FE $A0
     jr   nc, .jr_7A96                             ; $7A90: $30 $04
     inc  a                                        ; $7A92: $3C
-    ld   [$C211], a                               ; $7A93: $EA $11 $C2
+    ld   [wEntitiesPosYTable+1], a                               ; $7A93: $EA $11 $C2
 
 .jr_7A96
     ldh  a, [$FF97]                               ; $7A96: $F0 $97
@@ -2002,7 +2002,7 @@ InertLinkState3Handler::
     ld   [$D003], a                               ; $7AD7: $EA $03 $D0
     ld   [$D004], a                               ; $7ADA: $EA $04 $D0
     ld   [wEntitiesStatusTable], a                ; $7ADD: $EA $80 $C2
-    ld   [$C281], a                               ; $7AE0: $EA $81 $C2
+    ld   [wEntitiesStatusTable+1], a                               ; $7AE0: $EA $81 $C2
 
 .return
     ret                                           ; $7AE3: $C9

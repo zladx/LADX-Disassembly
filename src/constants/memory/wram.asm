@@ -702,7 +702,68 @@ wDialogGotItemCountdown::
   ds 1 ; C1AA
 
 ; Unlabeled
-ds $11
+wC1AB::
+  ds 1 ; C1AB
+
+; Unlabeled
+wC1AC::
+  ds 1 ; C1AC
+
+; Unlabeled
+wC1AD::
+  ds 1 ; C1AD
+
+; Unlabeled
+wC1AE::
+  ds 2 ; C1AE - C1AF
+
+; Unlabeled
+wC1B0::
+  ds 1 ; C1B0
+
+; Unlabeled
+wC1B1::
+  ds 1 ; C1B1
+
+; Unlabeled
+wC1B2::
+  ds 1 ; C1B2
+
+; Unlabeled
+wC1B3::
+  ds 1 ; C1B3
+
+; Unlabeled
+wC1B4::
+  ds 1 ; C1B4
+
+; Unlabeled
+wC1B5::
+  ds 1 ; C1B5
+
+; Unlabeled
+wC1B6::
+  ds 1 ; C1B6
+
+; Unlabeled
+wC1B7::
+  ds 1 ; C1B7
+
+; Unlabeled
+wC1B8::
+  ds 1 ; C1B8
+
+; Unlabeled
+wC1B9::
+  ds 1 ; C1B9
+
+; Unlabeled
+wC1BA::
+  ds 1 ; C1BA
+
+; Unlabeled
+wC1BB::
+  ds 1 ; C1BB
 
 ; Number of frames to wait before loading the previous map and room
 wLoadPreviousMapCountdown::

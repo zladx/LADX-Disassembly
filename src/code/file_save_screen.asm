@@ -82,11 +82,11 @@ FileSaveMapFadeOut::
     ldh  [hVolumeLeft], a                      ; $4058: $E0 $AA
     call IncrementGameplaySubtype                 ; $405A: $CD $D6 $44
     xor  a                                        ; $405D: $AF
-    ld   [$C1BF], a                               ; $405E: $EA $BF $C1
+    ld   [wScrollXOffset], a                               ; $405E: $EA $BF $C1
     ld   [wInventoryAppearing], a                 ; $4061: $EA $4F $C1
-    ld   [$C1B8], a                               ; $4064: $EA $B8 $C1
-    ld   [$C1B9], a                               ; $4067: $EA $B9 $C1
-    ld   [$C1B5], a                               ; $406A: $EA $B5 $C1
+    ld   [wC1B8], a                               ; $4064: $EA $B8 $C1
+    ld   [wC1B9], a                               ; $4067: $EA $B9 $C1
+    ld   [wC1B5], a                               ; $406A: $EA $B5 $C1
     ld   a, $0F                                   ; $406D: $3E $0F
     ld   [wTileMapToLoad], a                      ; $406F: $EA $FE $D6
 

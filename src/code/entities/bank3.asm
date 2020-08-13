@@ -3165,7 +3165,7 @@ HeartPieceState4Handler::
     call_open_dialog $04F                          ; $5A8A: $3E $4F
     call IncrementEntityState                     ; $5A8F: $CD $12 $3B
     ld   a, $01                                   ; $5A92: $3E $01
-    ld   [$C1AB], a                               ; $5A94: $EA $AB $C1
+    ld   [wC1AB], a                               ; $5A94: $EA $AB $C1
     ret                                           ; $5A97: $C9
 
 HeartPieceState5Handler::
@@ -3195,7 +3195,7 @@ HeartPieceState6Handler::
     ld   de, Data_003_5A4D                        ; $5ABE: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5AC1: $CD $C0 $3B
     xor  a                                        ; $5AC4: $AF
-    ld   [$C1AB], a                               ; $5AC5: $EA $AB $C1
+    ld   [wC1AB], a                               ; $5AC5: $EA $AB $C1
     call func_003_5B2B                            ; $5AC8: $CD $2B $5B
     ld   a, [wDialogState]                        ; $5ACB: $FA $9F $C1
     and  a                                        ; $5ACE: $A7
@@ -6391,7 +6391,7 @@ func_003_6E2B::
     jp   c, label_003_73E6                        ; $6E3D: $DA $E6 $73
 
 jr_003_6E40:
-    ld   a, [$C1AC]                               ; $6E40: $FA $AC $C1
+    ld   a, [wC1AC]                               ; $6E40: $FA $AC $C1
     and  a                                        ; $6E43: $A7
     jr   z, jr_003_6E4B                           ; $6E44: $28 $05
 
@@ -6872,7 +6872,7 @@ jr_003_70DF:
 jr_003_70E7:
     ld   a, c                                     ; $70E7: $79
     inc  a                                        ; $70E8: $3C
-    ld   [$C1AC], a                               ; $70E9: $EA $AC $C1
+    ld   [wC1AC], a                               ; $70E9: $EA $AC $C1
     call label_D07                                ; $70EC: $CD $07 $0D
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $70EF: $21 $10 $C4
     add  hl, bc                                   ; $70F2: $09
@@ -6986,7 +6986,7 @@ jr_003_719C:
 func_003_719D::
     ld   a, c                                     ; $719D: $79
     inc  a                                        ; $719E: $3C
-    ld   [$C1AC], a                               ; $719F: $EA $AC $C1
+    ld   [wC1AC], a                               ; $719F: $EA $AC $C1
     ld   a, [wTunicType]                          ; $71A2: $FA $0F $DC
     and  $01                                      ; $71A5: $E6 $01
     jr   nz, jr_003_71AE                          ; $71A7: $20 $05
@@ -7410,7 +7410,7 @@ Data_003_73E7::
     db   $2D, $2E, $38, $37
 
 func_003_73EB::
-    ld   hl, $C1AC                                ; $73EB: $21 $AC $C1
+    ld   hl, wC1AC                                ; $73EB: $21 $AC $C1
     ld   a, [wC13E]                               ; $73EE: $FA $3E $C1
     or   [hl]                                     ; $73F1: $B6
     ld   hl, hFFB6                                ; $73F2: $21 $B6 $FF

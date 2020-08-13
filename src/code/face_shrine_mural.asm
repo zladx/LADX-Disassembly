@@ -52,7 +52,7 @@ FaceShrineMuralStage1Handler::
     ldh  [hVolumeLeft], a                      ; $6B43: $E0 $AA
     call IncrementGameplaySubtype                 ; $6B45: $CD $D6 $44
     xor  a                                        ; $6B48: $AF
-    ld   [$C1BF], a                               ; $6B49: $EA $BF $C1
+    ld   [wScrollXOffset], a                               ; $6B49: $EA $BF $C1
     ld   a, $14                                   ; $6B4C: $3E $14
     ld   [wTileMapToLoad], a                      ; $6B4E: $EA $FE $D6
 

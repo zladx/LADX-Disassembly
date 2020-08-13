@@ -1842,7 +1842,7 @@ CheckItemsToUse::
     and  J_A                                      ; $1223: $E6 $10
     jr   z, .shieldB                              ; $1225: $28 $0E
     ; TODO: comment here
-    ld   a, [$C1AD]                               ; $1227: $FA $AD $C1
+    ld   a, [wC1AD]                               ; $1227: $FA $AD $C1
     cp   $01                                      ; $122A: $FE $01
     jr   z, .shieldB                              ; $122C: $28 $07
     ; TODO: comment here
@@ -1871,7 +1871,7 @@ CheckItemsToUse::
     ldh  a, [hJoypadState]                        ; $124B: $F0 $CC
     and  J_B                                      ; $124D: $E6 $20
     jr   z, .jr_125E                              ; $124F: $28 $0D
-    ld   a, [$C1AD]                               ; $1251: $FA $AD $C1
+    ld   a, [wC1AD]                               ; $1251: $FA $AD $C1
     cp   $02                                      ; $1254: $FE $02
     jr   z, .jr_125E                              ; $1256: $28 $06
 
@@ -1883,7 +1883,7 @@ CheckItemsToUse::
     ldh  a, [hJoypadState]                        ; $125E: $F0 $CC
     and  J_A                                      ; $1260: $E6 $10
     jr   z, .swordB                               ; $1262: $28 $11
-    ld   a, [$C1AD]                               ; $1264: $FA $AD $C1
+    ld   a, [wC1AD]                               ; $1264: $FA $AD $C1
     cp   $01                                      ; $1267: $FE $01
     jr   z, .swordB                               ; $1269: $28 $0A
     cp   $02                                      ; $126B: $FE $02
@@ -2010,7 +2010,7 @@ label_1321::
     ret  nz                                       ; $1323: $C0
     ; normal attack
     ld   hl, wSwordAnimationState                 ; $1324: $21 $37 $C1
-    ld   a, [$C1AD]                               ; $1327: $FA $AD $C1
+    ld   a, [wC1AD]                               ; $1327: $FA $AD $C1
     and  $03                                      ; $132A: $E6 $03
     or   [hl]                                     ; $132C: $B6
     ret  nz                                       ; $132D: $C0
@@ -2020,7 +2020,7 @@ label_1321::
     ret  nz                                       ; $1332: $C0
 
     xor  a                                        ; $1333: $AF
-    ld   [$C1AC], a                               ; $1334: $EA $AC $C1
+    ld   [wC1AC], a                               ; $1334: $EA $AC $C1
     ld   a, SWORD_ANIMATION_STATE_HOLDING         ; $1337: $3E $05
     ld   [wSwordAnimationState], a                ; $1339: $EA $37 $C1
     ; enable sword collision
@@ -2128,7 +2128,7 @@ ShootArrow::
     ld   hl, wEntitiesStatusTable                 ; $13F3: $21 $80 $C2
     add  hl, bc                                   ; $13F6: $09
     ld   [hl], b                                  ; $13F7: $70
-    ld   hl, $C290                                ; $13F8: $21 $90 $C2
+    ld   hl, wEntitiesStateTable                                ; $13F8: $21 $90 $C2
     add  hl, de                                   ; $13FB: $19
     ld   [hl], $01                                ; $13FC: $36 $01
     xor  a                                        ; $13FE: $AF
@@ -2334,7 +2334,7 @@ UseSword::
     ld   [wSwordCollisionEnabled], a              ; $153A: $EA $B0 $C5
     xor  a                                        ; $153D: $AF
     ld   [wC160], a                               ; $153E: $EA $60 $C1
-    ld   [$C1AC], a                               ; $1541: $EA $AC $C1
+    ld   [wC1AC], a                               ; $1541: $EA $AC $C1
 
     ; Play a random SFX
     call GetRandomByte                            ; $1544: $CD $0D $28
@@ -2675,7 +2675,7 @@ UsePegasusBoots::
     ld   a, [hl]                                  ; $174E: $7E
     ldh  [hLinkPositionYIncrement], a             ; $174F: $E0 $9B
     xor  a                                        ; $1751: $AF
-    ld   [$C1AC], a                               ; $1752: $EA $AC $C1
+    ld   [wC1AC], a                               ; $1752: $EA $AC $C1
     ret                                           ; $1755: $C9
 
 func_1756::
@@ -3567,9 +3567,9 @@ ENDC
     ldh  a, [hLinkDirection]                      ; $1FFF: $F0 $9E
     cp   DIRECTION_UP                             ; $2001: $FE $02
     jp   nz, .specialCasesEnd                     ; $2003: $C2 $CF $20
-    ; Set [$C1AD] = 2
+    ; Set [wC1AD] = 2
     ld   a, $02                                   ; $2006: $3E $02
-    ld   [$C1AD], a                               ; $2008: $EA $AD $C1
+    ld   [wC1AD], a                               ; $2008: $EA $AD $C1
 
     ; If A or B is pressed…
     ldh  a, [hJoypadState]                        ; $200B: $F0 $CC
@@ -3676,7 +3676,7 @@ ENDC
     ldh  a, [hLinkDirection]                      ; $20A5: $F0 $9E
     cp   $02                                      ; $20A7: $FE $02
     jr   nz, .specialCasesEnd                     ; $20A9: $20 $24
-    ld   [$C1AD], a                               ; $20AB: $EA $AD $C1
+    ld   [wC1AD], a                               ; $20AB: $EA $AD $C1
     ldh  a, [hJoypadState]                        ; $20AE: $F0 $CC
     and  J_A | J_B                                ; $20B0: $E6 $30
     jr   z, .specialCasesEnd                      ; $20B2: $28 $1B

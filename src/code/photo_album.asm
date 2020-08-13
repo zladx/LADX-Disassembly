@@ -1935,7 +1935,7 @@ func_028_4BD9::
     ld   l, a                                   ; $4BDE: $6F
     ld   a, [$D198]                             ; $4BDF: $FA $98 $D1
     ld   h, a                                   ; $4BE2: $67
-    ld   de, $C200                              ; $4BE3: $11 $00 $C2
+    ld   de, wEntitiesPosXTable                              ; $4BE3: $11 $00 $C2
     ld   c, $28                                 ; $4BE6: $0E $28
 .loop_4BE8_28:
     ldi  a, [hl]                                ; $4BE8: $2A
@@ -2014,7 +2014,7 @@ JumpTable_028_4C38:
 .else_4C54_28:
     ld   a, $01                                 ; $4C54: JumpTable_028_4C38 $3E $01
     ld   [$D1B6], a                             ; $4C56: JumpTable_028_4C38 $EA $B6 $D1
-    ld   hl, $C200                              ; $4C59: JumpTable_028_4C38 $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                              ; $4C59: JumpTable_028_4C38 $21 $00 $C2
     ld   a, $09                                 ; $4C5C: JumpTable_028_4C38 $3E $09
     call func_028_48C1                          ; $4C5E: JumpTable_028_4C38 $CD $C1 $48
     cp   $FF                                    ; $4C61: JumpTable_028_4C38 $FE $FF

@@ -28,7 +28,7 @@ jr_006_7C2B:
     call RenderActiveEntitySpritesPair            ; $7C2B: $CD $C0 $3B
 
 jr_006_7C2E:
-    ld   hl, $C1AE                                ; $7C2E: $21 $AE $C1
+    ld   hl, wC1AE                                ; $7C2E: $21 $AE $C1
     inc  [hl]                                     ; $7C31: $34
     call func_006_64C6                            ; $7C32: $CD $C6 $64
     call AddEntityZSpeedToPos_06                  ; $7C35: $CD $7A $65

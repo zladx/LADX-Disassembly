@@ -393,7 +393,7 @@ jr_005_5C41:
     call IncrementEntityState                     ; $5C4A: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $5C4D: $CD $05 $0C
     ld   [hl], $40                                ; $5C50: $36 $40
-    ld   hl, $C29E                                ; $5C52: $21 $9E $C2
+    ld   hl, wEntitiesStateTable+14                                ; $5C52: $21 $9E $C2
     inc  [hl]                                     ; $5C55: $34
     inc  hl                                       ; $5C56: $23
     inc  [hl]                                     ; $5C57: $34

@@ -2773,7 +2773,7 @@ func_036_50E4::
     cp   $02                                      ; $50F2: $FE $02
     ret  nz                                       ; $50F4: $C0
 
-    ld   hl, $C1AD                                ; $50F5: $21 $AD $C1
+    ld   hl, wC1AD                                ; $50F5: $21 $AD $C1
     ld   [hl], $01                                ; $50F8: $36 $01
     ldh  a, [hJoypadState]                        ; $50FA: $F0 $CC
     and  $10                                      ; $50FC: $E6 $10
@@ -4052,7 +4052,7 @@ jr_036_58FA:
     cp   $02                                      ; $58FA: $FE $02
     jr   nz, jr_036_5911                          ; $58FC: $20 $13
 
-    ld   hl, $C1AD                                ; $58FE: $21 $AD $C1
+    ld   hl, wC1AD                                ; $58FE: $21 $AD $C1
     ld   [hl], $01                                ; $5901: $36 $01
     ldh  a, [hJoypadState]                        ; $5903: $F0 $CC
     and  $10                                      ; $5905: $E6 $10
@@ -4200,7 +4200,7 @@ func_036_59C3::
     and  $04                                      ; $59D5: $E6 $04
     jr   z, jr_036_5A00                           ; $59D7: $28 $27
 
-    ld   hl, $C1AD                                ; $59D9: $21 $AD $C1
+    ld   hl, wC1AD                                ; $59D9: $21 $AD $C1
     ld   [hl], $01                                ; $59DC: $36 $01
     ldh  a, [hJoypadState]                        ; $59DE: $F0 $CC
     and  $10                                      ; $59E0: $E6 $10
@@ -7082,7 +7082,7 @@ func_036_6A98::
     jr   nz, jr_036_6AEA                          ; $6AC3: $20 $25
 
 jr_036_6AC5:
-    ld   hl, $C1AD                                ; $6AC5: $21 $AD $C1
+    ld   hl, wC1AD                                ; $6AC5: $21 $AD $C1
     ld   [hl], $01                                ; $6AC8: $36 $01
     ld   a, [wDialogState]                        ; $6ACA: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $6ACD: $21 $4F $C1

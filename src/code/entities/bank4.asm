@@ -5928,7 +5928,7 @@ func_004_7296::
     ld   a, [$D204]                               ; $72AE: $FA $04 $D2
     ld   [wEntitiesPosXTable + $01], a            ; $72B1: $EA $01 $C2
     ld   a, [$D205]                               ; $72B4: $FA $05 $D2
-    ld   [$C211], a                               ; $72B7: $EA $11 $C2
+    ld   [wEntitiesPosYTable+1], a                               ; $72B7: $EA $11 $C2
     push bc                                       ; $72BA: $C5
     ld   c, $01                                   ; $72BB: $0E $01
     ld   a, $04                                   ; $72BD: $3E $04
@@ -5936,7 +5936,7 @@ func_004_7296::
     call UpdateEntityPosWithSpeed_04              ; $72C2: $CD $CA $6D
     ld   a, [wEntitiesPosXTable + $01]            ; $72C5: $FA $01 $C2
     ld   [$D204], a                               ; $72C8: $EA $04 $D2
-    ld   a, [$C211]                               ; $72CB: $FA $11 $C2
+    ld   a, [wEntitiesPosYTable+1]                               ; $72CB: $FA $11 $C2
     ld   [$D205], a                               ; $72CE: $EA $05 $D2
     pop  bc                                       ; $72D1: $C1
     pop  af                                       ; $72D2: $F1
@@ -6568,7 +6568,7 @@ func_004_7681::
     ld   a, $02                                   ; $7681: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7683: $E0 $A1
     ld   [wC167], a                               ; $7685: $EA $67 $C1
-    ld   a, [$C1AD]                               ; $7688: $FA $AD $C1
+    ld   a, [wC1AD]                               ; $7688: $FA $AD $C1
     and  a                                        ; $768B: $A7
     ret  nz                                       ; $768C: $C0
 
@@ -7454,7 +7454,7 @@ func_004_7BE3::
     cp   $03                                      ; $7BFB: $FE $03
     jr   nz, jr_004_7C05                          ; $7BFD: $20 $06
 
-    ld   hl, $C28F                                ; $7BFF: $21 $8F $C2
+    ld   hl, wEntitiesStatusTable+15                                ; $7BFF: $21 $8F $C2
     add  hl, de                                   ; $7C02: $19
     ld   [hl], $00                                ; $7C03: $36 $00
 
@@ -7482,7 +7482,7 @@ func_004_7C06::
     cp   e                                        ; $7C25: $BB
     jr   nz, jr_004_7C49                          ; $7C26: $20 $21
 
-    ld   hl, $C1AD                                ; $7C28: $21 $AD $C1
+    ld   hl, wC1AD                                ; $7C28: $21 $AD $C1
     ld   [hl], $01                                ; $7C2B: $36 $01
     ld   a, [wDialogState]                        ; $7C2D: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $7C30: $21 $4F $C1
@@ -7540,7 +7540,7 @@ func_004_7C4B::
     cp   e                                        ; $7C82: $BB
     jr   nz, jr_004_7C92                          ; $7C83: $20 $0D
 
-    ld   hl, $C1AD                                ; $7C85: $21 $AD $C1
+    ld   hl, wC1AD                                ; $7C85: $21 $AD $C1
     ld   [hl], $01                                ; $7C88: $36 $01
     ldh  a, [hJoypadState]                        ; $7C8A: $F0 $CC
     and  $10                                      ; $7C8C: $E6 $10

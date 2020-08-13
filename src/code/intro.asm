@@ -69,7 +69,7 @@ IntroHandlerEntryPoint::
     ld   [wBGPalette], a                          ; $6E7C: $EA $97 $DB
 
     ld   a, $10                                   ; $6E7F: $3E $10
-    ld   [$C17E], a                               ; $6E81: $EA $7E $C1
+    ld   [wC17E], a                               ; $6E81: $EA $7E $C1
 
     call ResetIntroTimers                         ; $6E84: $CD $9D $73
     ld   a, MUSIC_TITLE_SCREEN                    ; $6E87: $3E $0D
@@ -158,7 +158,7 @@ ENDC
     xor  a                                        ; $6F0D: $AF
     ldh  [hFrameCounter], a                       ; $6F0E: $E0 $E7
     ld   a, $A2                                   ; $6F10: $3E $A2
-    ld   [$C13D], a                               ; $6F12: $EA $3D $C1
+    ld   [wRandomSeed], a                               ; $6F12: $EA $3D $C1
     ld   a, [$FF40]                               ; $6F15: $F0 $40
     and  $DF                                      ; $6F17: $E6 $DF
     ld   [wLCDControl], a                         ; $6F19: $EA $FD $D6
@@ -283,10 +283,10 @@ IntroShipOnSeaHandler::
     xor  a                                        ; $6FFE: $AF
     ldh  [hBaseScrollX], a                        ; $6FFF: $E0 $96
     ld   [wScrollXOffsetForSection], a            ; $7001: $EA $00 $C1
-    ld   [$C102], a                               ; $7004: $EA $02 $C1
-    ld   [$C103], a                               ; $7007: $EA $03 $C1
+    ld   [wScrollXOffsetForSection+2], a                               ; $7004: $EA $02 $C1
+    ld   [wScrollXOffsetForSection+3], a                               ; $7007: $EA $03 $C1
     ld   a, $92                                   ; $700A: $3E $92
-    ld   [$C101], a                               ; $700C: $EA $01 $C1
+    ld   [wScrollXOffsetForSection+1], a                               ; $700C: $EA $01 $C1
     ld   a, $03                                   ; $700F: $3E $03
     ld   [rIE], a                                 ; $7011: $E0 $FF
 
@@ -569,7 +569,7 @@ func_001_71C7::
     ld   a, [$C291]                               ; $71C7: $FA $91 $C2
     cp   $02                                      ; $71CA: $FE $02
     jr   nc, .return                              ; $71CC: $30 $10
-    ld   a, [$C114]                               ; $71CE: $FA $14 $C1
+    ld   a, [wNoiseSfxSeaWavesCounter]                               ; $71CE: $FA $14 $C1
     inc  a                                        ; $71D1: $3C
     cp   $A0                                      ; $71D2: $FE $A0
     jr   nz, .jr_001_71DB                         ; $71D4: $20 $05
@@ -578,7 +578,7 @@ func_001_71C7::
     xor  a                                        ; $71DA: $AF
 
 .jr_001_71DB
-    ld   [$C114], a                               ; $71DB: $EA $14 $C1
+    ld   [wNoiseSfxSeaWavesCounter], a                               ; $71DB: $EA $14 $C1
 
 .return
     ret                                           ; $71DE: $C9
@@ -751,8 +751,8 @@ jr_001_734C::
     ret                                           ; $7354: $C9
 
 TitleScreenSfxHandler::
-    ; If $C17E != 10…
-    ld   a, [$C17E]                               ; $7355: $FA $7E $C1
+    ; If wC17E != 10…
+    ld   a, [wC17E]                               ; $7355: $FA $7E $C1
     cp   $10                                      ; $7358: $FE $10
     jr   c, .return                               ; $735A: $38 $07
 
@@ -884,8 +884,8 @@ TitleScreenHandler::
     jr   nz, .return                              ; $742A: $20 $0D
     call IncrementGameplaySubtype                 ; $742C: $CD $D6 $44
     xor  a                                        ; $742F: $AF
-    ld   [$C16B], a                               ; $7430: $EA $6B $C1
-    ld   [$C16C], a                               ; $7433: $EA $6C $C1
+    ld   [wTransitionSequenceCounter], a                               ; $7430: $EA $6B $C1
+    ld   [wC16C], a                               ; $7433: $EA $6C $C1
     call label_27EA                               ; $7436: $CD $EA $27
 
 .return
@@ -893,7 +893,7 @@ TitleScreenHandler::
 
 IntroStageCHandler::
     call func_1A22                                ; $743A: $CD $22 $1A
-    ld   a, [$C16B]                               ; $743D: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $743D: $FA $6B $C1
     cp   $04                                      ; $7440: $FE $04
     jr   nz, .return                              ; $7442: $20 $03
     jp   func_001_6162                            ; $7444: $C3 $62 $61
@@ -926,7 +926,7 @@ RenderRain::
     and  $18                                      ; $7472: $E6 $18
     add  a, $10                                   ; $7474: $C6 $10
     ldh  [hScratch0], a                           ; $7476: $E0 $D7
-    ld   hl, $C04C                                ; $7478: $21 $4C $C0
+    ld   hl, wDynamicOAMBuffer+$1C                                ; $7478: $21 $4C $C0
     ; On the sea, limit the rain to the top section of the screen ($10)
     ld   c, $10                                   ; $747B: $0E $10
     ld   a, [wGameplaySubtype]                    ; $747D: $FA $96 $DB
@@ -1123,7 +1123,7 @@ RenderIntroShip::
     cp   $10                                      ; $75A8: $FE $10
     jr   c, .return                               ; $75AA: $38 $1D
     ld   hl, Data_001_7550                        ; $75AC: $21 $50 $75
-    ld   de, $C018                                ; $75AF: $11 $18 $C0
+    ld   de, wLinkOAMBuffer+$18                                ; $75AF: $11 $18 $C0
     ld   c, $04                                   ; $75B2: $0E $04
 .loop2
     ldh  a, [hActiveEntityVisualPosY]             ; $75B4: $F0 $EC
@@ -2273,7 +2273,7 @@ func_001_7D9C::
     inc  [hl]                                     ; $7DA5: $34
 
 .jr_001_7DA6
-    ld   hl, $C101                                ; $7DA6: $21 $01 $C1
+    ld   hl, wScrollXOffsetForSection+1                                ; $7DA6: $21 $01 $C1
     ld   a, [$D004]                               ; $7DA9: $FA $04 $D0
     add  a, $50                                   ; $7DAC: $C6 $50
     ld   [$D004], a                               ; $7DAE: $EA $04 $D0
@@ -2307,7 +2307,7 @@ func_001_7DCF::
     inc  [hl]                                     ; $7DD8: $34
 
 .jr_001_7DD9
-    ld   hl, $C101                                ; $7DD9: $21 $01 $C1
+    ld   hl, wScrollXOffsetForSection+1                                ; $7DD9: $21 $01 $C1
     ld   a, [$D004]                               ; $7DDC: $FA $04 $D0
     add  a, $28                                   ; $7DDF: $C6 $28
     ld   [$D004], a                               ; $7DE1: $EA $04 $D0

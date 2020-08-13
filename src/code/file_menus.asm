@@ -874,7 +874,7 @@ jr_001_4CB7::
     ldh  a, [hFrameCounter]                       ; $4CC2: $F0 $E7
     and  $10                                      ; $4CC4: $E6 $10
     jr   z, .return                               ; $4CC6: $28 $11
-    ld   hl, $C004                                ; $4CC8: $21 $04 $C0
+    ld   hl, wLinkOAMBuffer+4                                ; $4CC8: $21 $04 $C0
     ld   a, $18                                   ; $4CCB: $3E $18
     add  a, $0B                                   ; $4CCD: $C6 $0B
     ldi  [hl], a                                  ; $4CCF: $22
@@ -1403,7 +1403,7 @@ jr_001_4f76:
     ld   a, FILE_6C                                   ; $4F2C: $3E $6C ; $4F2C: $3E $6C
 
 jr_001_4F2E::
-    ld   hl, $C00C                                ; $4F2E: $21 $0C $C0 ; $4F2E: $21 $0C $C0
+    ld   hl, wLinkOAMBuffer+12                                ; $4F2E: $21 $0C $C0 ; $4F2E: $21 $0C $C0
     ld   [hl], $88                                ; $4F31: $36 $88 ; $4F31: $36 $88
     inc  hl                                       ; $4F33: $23 ; $4F33: $23
     ld   [hl+], a                                 ; $4F34: $22 ; $4F34: $22
@@ -1802,7 +1802,7 @@ func_001_5175::
     jr   z, jr_001_51A8                            ; $518B: $28 $1B ; $518B: $28 $1B
 
     ld   a, [hl]                                  ; $518D: $7E ; $518D: $7E
-    ld   hl, $C008                                ; $518E: $21 $08 $C0 ; $518E: $21 $08 $C0
+    ld   hl, wLinkOAMBuffer+8                                ; $518E: $21 $08 $C0 ; $518E: $21 $08 $C0
     push af                                       ; $5191: $F5 ; $5191: $F5
     ld   [hl+], a                                 ; $5192: $22 ; $5192: $22
     ld   a, $58                                   ; $5193: $3E $58 ; $5193: $3E $58
@@ -1823,7 +1823,7 @@ func_001_5175::
 
 jr_001_51A8::
     ld   a, [hl]                                  ; $51A8: $7E ; $51A8: $7E
-    ld   hl, $C008                                ; $51A9: $21 $08 $C0 ; $51A9: $21 $08 $C0
+    ld   hl, wLinkOAMBuffer+8                                ; $51A9: $21 $08 $C0 ; $51A9: $21 $08 $C0
     push af                                       ; $51AC: $F5 ; $51AC: $F5
     ld   [hl+], a                                 ; $51AD: $22 ; $51AD: $22
     ld   a, $58                                   ; $51AE: $3E $58 ; $51AE: $3E $58
@@ -1846,7 +1846,7 @@ label_001_51C3::
     ldh  a, [hFrameCounter]                       ; $51C3: $F0 $E7 ; $51C3: $F0 $E7
     and  $08                                      ; $51C5: $E6 $08 ; $51C5: $E6 $08
     ld   a, [hl]                                  ; $51C7: $7E ; $51C7: $7E
-    ld   hl, $C008                                ; $51C8: $21 $08 $C0 ; $51C8: $21 $08 $C0
+    ld   hl, wLinkOAMBuffer+8                                ; $51C8: $21 $08 $C0 ; $51C8: $21 $08 $C0
     jp   label_001_5067                               ; $51CB: $C3 $67 $50 ; $51CB: $C3 $67 $50
 
 func_001_51CE::
@@ -1856,7 +1856,7 @@ func_001_51CE::
     ld   hl, Data_001_48E4                           ; $51D4: $21 $E4 $48 ; $51D4: $21 $E4 $48
     add  hl, de                                   ; $51D7: $19 ; $51D7: $19
     ld   a, [hl]                                  ; $51D8: $7E ; $51D8: $7E
-    ld   hl, $C008                                ; $51D9: $21 $08 $C0 ; $51D9: $21 $08 $C0
+    ld   hl, wLinkOAMBuffer+8                                ; $51D9: $21 $08 $C0 ; $51D9: $21 $08 $C0
     add  $05                                      ; $51DC: $C6 $05 ; $51DC: $C6 $05
     ld   [hl+], a                                 ; $51DE: $22 ; $51DE: $22
     ld   a, $5C                                   ; $51DF: $3E $5C ; $51DF: $3E $5C

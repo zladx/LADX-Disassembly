@@ -33,7 +33,7 @@ Data_01C_4A22::
 DialogOpenAnimationEnd::
     ld   a, [wDialogState]                             ; $4A2C: $FA $9F $C1
     ld   c, a                                   ; $4A2F: $4F
-    ld   a, [$C16F]                             ; $4A30: $FA $6F $C1
+    ld   a, [wDialogOpenCloseAnimationFrame]                             ; $4A30: $FA $6F $C1
     cp   $05                                    ; $4A33: $FE $05
     jr   z, func_01C_4A71                       ; $4A35: $28 $3A
 
@@ -73,7 +73,7 @@ func_01C_4A3D::
     call func_01C_4A76                          ; $4A69: $CD $76 $4A
 
 func_01C_4A6C::
-    ld   hl, $C16F                              ; $4A6C: $21 $6F $C1
+    ld   hl, wDialogOpenCloseAnimationFrame                              ; $4A6C: $21 $6F $C1
     inc  [hl]                                   ; $4A6F: $34
     ret                                         ; $4A70: $C9
 
@@ -112,7 +112,7 @@ Data_01C_4A9E::
 func_01C_4AA8::
     ld   a, [wDialogState]                             ; $4AA8: $FA $9F $C1
     ld   c, a                                   ; $4AAB: $4F
-    ld   a, [$C16F]                             ; $4AAC: $FA $6F $C1
+    ld   a, [wDialogOpenCloseAnimationFrame]                             ; $4AAC: $FA $6F $C1
     cp   $05                                    ; $4AAF: $FE $05
     jr   z, func_01C_4A71                       ; $4AB1: $28 $BE
 
@@ -175,7 +175,7 @@ func_01C_4AED::
     call func_01C_4B02                          ; $4AFA: $CD $02 $4B
 
 func_01C_4AFD::
-    ld   hl, $C16F                              ; $4AFD: $21 $6F $C1
+    ld   hl, wDialogOpenCloseAnimationFrame                              ; $4AFD: $21 $6F $C1
     inc  [hl]                                   ; $4B00: $34
     ret                                         ; $4B01: $C9
 

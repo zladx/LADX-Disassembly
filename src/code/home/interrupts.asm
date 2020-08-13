@@ -582,7 +582,7 @@ LoadOAMTiles::
     callsb func_020_475A                          ; $06A9: $3E $20 $EA $00 $21 $CD $5A $47
     xor  a                                        ; $06B1: $AF
     ld   [wNeedsUpdatingNPCTiles], a              ; $06B2: $EA $0E $C1
-    ld   [$C10F], a                               ; $06B5: $EA $0F $C1
+    ld   [wC10F], a                               ; $06B5: $EA $0F $C1
     ld   hl, vTiles2                              ; $06B8: $21 $00 $90
     ld   bc, $00                                  ; $06BB: $01 $00 $00
     call GetColorDungeonTilesAddress              ; $06BE: $CD $16 $46
@@ -677,7 +677,7 @@ ENDC
     ret                                           ; $073D: $C9
 
 label_73E::
-    ld   a, [$C10D]                               ; $073E: $FA $0D $C1
+    ld   a, [wC10D]                               ; $073E: $FA $0D $C1
     ld   e, a                                     ; $0741: $5F
     ld   d, $00                                   ; $0742: $16 $00
     ld   hl, $C193                                ; $0744: $21 $93 $C1
@@ -703,7 +703,7 @@ label_73E::
 .jp_0764
 
     ld   [MBC3SelectBank], a                      ; $0764: $EA $00 $21
-    ld   a, [$C10F]                               ; $0767: $FA $0F $C1
+    ld   a, [wC10F]                               ; $0767: $FA $0F $C1
     ld   c, a                                     ; $076A: $4F
     ld   b, $00                                   ; $076B: $06 $00
     sla  c                                        ; $076D: $CB $21
@@ -722,7 +722,7 @@ label_73E::
     add  hl, bc                                   ; $0788: $09
     add  hl, de                                   ; $0789: $19
     push hl                                       ; $078A: $E5
-    ld   a, [$C10D]                               ; $078B: $FA $0D $C1
+    ld   a, [wC10D]                               ; $078B: $FA $0D $C1
     ld   d, a                                     ; $078E: $57
     ld   hl, $8400                                ; $078F: $21 $00 $84
     add  hl, bc                                   ; $0792: $09
@@ -732,14 +732,14 @@ label_73E::
     pop  hl                                       ; $0796: $E1
     ld   bc, $40                                  ; $0797: $01 $40 $00
     call CopyData                                 ; $079A: $CD $14 $29
-    ld   a, [$C10F]                               ; $079D: $FA $0F $C1
+    ld   a, [wC10F]                               ; $079D: $FA $0F $C1
     inc  a                                        ; $07A0: $3C
-    ld   [$C10F], a                               ; $07A1: $EA $0F $C1
+    ld   [wC10F], a                               ; $07A1: $EA $0F $C1
     cp   $04                                      ; $07A4: $FE $04
     jr   nz, .return                              ; $07A6: $20 $07
     xor  a                                        ; $07A8: $AF
     ld   [wNeedsUpdatingNPCTiles], a              ; $07A9: $EA $0E $C1
-    ld   [$C10F], a                               ; $07AC: $EA $0F $C1
+    ld   [wC10F], a                               ; $07AC: $EA $0F $C1
 .return
     ret                                           ; $07AF: $C9
 

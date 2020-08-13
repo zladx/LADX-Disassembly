@@ -303,9 +303,9 @@ jr_005_574A:
     ret  nc                                       ; $5758: $D0
 
     ld   a, $30                                   ; $5759: $3E $30
-    ld   [$C157], a                               ; $575B: $EA $57 $C1
+    ld   [wC157], a                               ; $575B: $EA $57 $C1
     xor  a                                        ; $575E: $AF
-    ld   [$C158], a                               ; $575F: $EA $58 $C1
+    ld   [wC158], a                               ; $575F: $EA $58 $C1
     call PlayBombExplosionSfx                     ; $5762: $CD $4B $0C
     ld   hl, wEntitiesPrivateCountdown2Table      ; $5765: $21 $00 $C3
     add  hl, bc                                   ; $5768: $09
@@ -317,7 +317,7 @@ func_005_576E::
     add  hl, bc                                   ; $5771: $09
     ld   a, [hl]                                  ; $5772: $7E
     inc  [hl]                                     ; $5773: $34
-    ld   a, [$C157]                               ; $5774: $FA $57 $C1
+    ld   a, [wC157]                               ; $5774: $FA $57 $C1
     and  a                                        ; $5777: $A7
     jr   nz, jr_005_579B                          ; $5778: $20 $21
 

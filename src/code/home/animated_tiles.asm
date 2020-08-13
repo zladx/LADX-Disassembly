@@ -443,17 +443,17 @@ label_1D42::
     and  $10                                      ; $1D47: $E6 $10
 
 label_1D49::
-    ld   [$C135], a                               ; $1D49: $EA $35 $C1
-    ld   hl, $C008                                ; $1D4C: $21 $08 $C0
-    ld   a, [$C13B]                               ; $1D4F: $FA $3B $C1
+    ld   [wC135], a                               ; $1D49: $EA $35 $C1
+    ld   hl, wLinkOAMBuffer+8                                ; $1D4C: $21 $08 $C0
+    ld   a, [wC13B]                               ; $1D4F: $FA $3B $C1
     ld   c, a                                     ; $1D52: $4F
-    ld   a, [$C145]                               ; $1D53: $FA $45 $C1
+    ld   a, [wC145]                               ; $1D53: $FA $45 $C1
     add  a, c                                     ; $1D56: $81
     cp   $88                                      ; $1D57: $FE $88
     ret  nc                                       ; $1D59: $D0
     push af                                       ; $1D5A: $F5
     ldi  [hl], a                                  ; $1D5B: $22
-    ld   a, [$C13C]                               ; $1D5C: $FA $3C $C1
+    ld   a, [wC13C]                               ; $1D5C: $FA $3C $C1
     ld   c, a                                     ; $1D5F: $4F
     ldh  a, [hLinkPositionX]                      ; $1D60: $F0 $98
     add  a, c                                     ; $1D62: $81
@@ -464,9 +464,9 @@ ELSE
     ld   a, $00                                   ; $1D64: $3E $00
 ENDC
     ldi  [hl], a                                  ; $1D66: $22
-    ld   a, [$C135]                               ; $1D67: $FA $35 $C1
+    ld   a, [wC135]                               ; $1D67: $FA $35 $C1
     ld   d, a                                     ; $1D6A: $57
-    ld   a, [$C11D]                               ; $1D6B: $FA $1D $C1
+    ld   a, [wC11D]                               ; $1D6B: $FA $1D $C1
     or   d                                        ; $1D6E: $B2
     ld   [hl], a                                  ; $1D6F: $77
     ldh  a, [hIsGBC]                              ; $1D70: $F0 $FE
@@ -513,9 +513,9 @@ label_1DA1::
     ldi  [hl], a                                  ; $1DA9: $22
     ld   a, $02                                   ; $1DAA: $3E $02
     ldi  [hl], a                                  ; $1DAC: $22
-    ld   a, [$C135]                               ; $1DAD: $FA $35 $C1
+    ld   a, [wC135]                               ; $1DAD: $FA $35 $C1
     ld   d, a                                     ; $1DB0: $57
-    ld   a, [$C11E]                               ; $1DB1: $FA $1E $C1
+    ld   a, [wC11E]                               ; $1DB1: $FA $1E $C1
     or   d                                        ; $1DB4: $B2
     ld   [hl], a                                  ; $1DB5: $77
     ldh  a, [hIsGBC]                              ; $1DB6: $F0 $FE

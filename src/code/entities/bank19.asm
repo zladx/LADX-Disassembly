@@ -116,11 +116,11 @@ jr_019_40AD:
     ld   hl, data_1F59                            ; $40CF: $21 $59 $1F
     add  hl, de                                   ; $40D2: $19
     ld   a, [hl]                                  ; $40D3: $7E
-    ld   [$C13C], a                               ; $40D4: $EA $3C $C1
+    ld   [wC13C], a                               ; $40D4: $EA $3C $C1
     ld   hl, data_1F5D                            ; $40D7: $21 $5D $1F
     add  hl, de                                   ; $40DA: $19
     ld   a, [hl]                                  ; $40DB: $7E
-    ld   [$C13B], a                               ; $40DC: $EA $3B $C1
+    ld   [wC13B], a                               ; $40DC: $EA $3B $C1
     ld   hl, hLinkAnimationState                  ; $40DF: $21 $9D $FF
     inc  [hl]                                     ; $40E2: $34
     ld   a, [wPowerBraceletLevel]                 ; $40E3: $FA $43 $DB
@@ -441,7 +441,7 @@ WarpState3Handler::
     ; reset parameter to 0
     ld   [wSubtractHealthBuffer], a               ; $42F8: $EA $94 $DB
     ld   [wInvincibilityCounter], a               ; $42FB: $EA $C7 $DB
-    ld   [$C13E], a                               ; $42FE: $EA $3E $C1
+    ld   [wC13E], a                               ; $42FE: $EA $3E $C1
     ld   [wSwordAnimationState], a                ; $4301: $EA $37 $C1
     ld   [wC16A], a                               ; $4304: $EA $6A $C1
     ld   [wLinkPlayingOcarinaCountdown], a        ; $4307: $EA $66 $C1
@@ -1133,7 +1133,7 @@ jr_019_485C:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $485E: $E0 $A1
     ld   [wC167], a                               ; $4860: $EA $67 $C1
     ld   a, $04                                   ; $4863: $3E $04
-    ld   [$C13B], a                               ; $4865: $EA $3B $C1
+    ld   [wC13B], a                               ; $4865: $EA $3B $C1
     ret                                           ; $4868: $C9
 
 jr_019_4869:
@@ -3154,9 +3154,9 @@ jr_019_560B:
     call GetEntityTransitionCountdown             ; $5626: $CD $05 $0C
     ld   [hl], $30                                ; $5629: $36 $30
     ld   a, $30                                   ; $562B: $3E $30
-    ld   [$C157], a                               ; $562D: $EA $57 $C1
+    ld   [wC157], a                               ; $562D: $EA $57 $C1
     ld   a, $04                                   ; $5630: $3E $04
-    ld   [$C158], a                               ; $5632: $EA $58 $C1
+    ld   [wC158], a                               ; $5632: $EA $58 $C1
     jp   IncrementEntityState                     ; $5635: $C3 $12 $3B
 
 ThwompRammableState2Handler::
@@ -3459,9 +3459,9 @@ jr_019_5846:
     call GetEntityTransitionCountdown             ; $586F: $CD $05 $0C
     ld   [hl], $30                                ; $5872: $36 $30
     ld   a, $30                                   ; $5874: $3E $30
-    ld   [$C157], a                               ; $5876: $EA $57 $C1
+    ld   [wC157], a                               ; $5876: $EA $57 $C1
     ld   a, $04                                   ; $5879: $3E $04
-    ld   [$C158], a                               ; $587B: $EA $58 $C1
+    ld   [wC158], a                               ; $587B: $EA $58 $C1
     jp   IncrementEntityState                     ; $587E: $C3 $12 $3B
 
 ThwompState3Handler::
@@ -3517,7 +3517,7 @@ jr_019_58C0:
     ld   a, $02                                   ; $58CF: $3E $02
     ldh  [hLinkPositionYIncrement], a             ; $58D1: $E0 $9B
     ld   a, $01                                   ; $58D3: $3E $01
-    ld   [$C147], a                               ; $58D5: $EA $47 $C1
+    ld   [wC147], a                               ; $58D5: $EA $47 $C1
 
 jr_019_58D8:
     ret                                           ; $58D8: $C9
@@ -3565,7 +3565,7 @@ jr_019_5901:
     ld   a, $02                                   ; $5919: $3E $02
     ldh  [hLinkPositionYIncrement], a             ; $591B: $E0 $9B
     ld   a, $01                                   ; $591D: $3E $01
-    ld   [$C147], a                               ; $591F: $EA $47 $C1
+    ld   [wC147], a                               ; $591F: $EA $47 $C1
 
 jr_019_5922:
     call func_019_7E0B                            ; $5922: $CD $0B $7E
@@ -3657,7 +3657,7 @@ func_019_599B::
     jr   nz, jr_019_59B7                          ; $59A2: $20 $13
 
     ld   a, $02                                   ; $59A4: $3E $02
-    ld   [$C13E], a                               ; $59A6: $EA $3E $C1
+    ld   [wC13E], a                               ; $59A6: $EA $3E $C1
     call func_019_7E0B                            ; $59A9: $CD $0B $7E
     ld   a, e                                     ; $59AC: $7B
     and  a                                        ; $59AD: $A7
@@ -8049,7 +8049,7 @@ func_019_7D16::
     or   [hl]                                     ; $7D21: $B6
     ld   hl, wIsLinkInTheAir                      ; $7D22: $21 $46 $C1
     or   [hl]                                     ; $7D25: $B6
-    ld   hl, $C134                                ; $7D26: $21 $34 $C1
+    ld   hl, wC134                                ; $7D26: $21 $34 $C1
     or   [hl]                                     ; $7D29: $B6
     jr   nz, jr_019_7D3B                          ; $7D2A: $20 $0F
 

@@ -66,9 +66,9 @@ jr_001_624D::
 
 MarineBeachPrepare1::
     ld   a, $01                                   ; $6260: $3E $01
-    ld   [$C167], a                               ; $6262: $EA $67 $C1
+    ld   [wC167], a                               ; $6262: $EA $67 $C1
     call func_1A22                                ; $6265: $CD $22 $1A
-    ld   a, [$C16B]                               ; $6268: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $6268: $FA $6B $C1
     cp   $04                                      ; $626B: $FE $04
     jr   nz, .return                              ; $626D: $20 $12
     call IncrementGameplaySubtype                 ; $626F: $CD $D6 $44
@@ -85,7 +85,7 @@ MarineBeachPrepare2::
     ld   a, $13                                   ; $6282: $3E $13
     ld   [wTileMapToLoad], a                      ; $6284: $EA $FE $D6
     xor  a                                        ; $6287: $AF
-    ld   [$C13F], a                               ; $6288: $EA $3F $C1
+    ld   [wC13F], a                               ; $6288: $EA $3F $C1
     jp   IncrementGameplaySubtypeAndReturn        ; $628B: $C3 $D6 $44
 
 MarineBeachPrepare3::
@@ -95,12 +95,12 @@ MarineBeachPrepare3::
     ld   [wWindowY], a                            ; $6295: $EA $9A $DB
     xor  a                                        ; $6298: $AF
     ldh  [hBaseScrollX], a                        ; $6299: $E0 $96
-    ld   [$C16B], a                               ; $629B: $EA $6B $C1
-    ld   [$C16C], a                               ; $629E: $EA $6C $C1
+    ld   [wTransitionSequenceCounter], a                               ; $629B: $EA $6B $C1
+    ld   [wC16C], a                               ; $629E: $EA $6C $C1
     ld   a, $90                                   ; $62A1: $3E $90
     ldh  [$FF97], a                               ; $62A3: $E0 $97
     ld   a, $40                                   ; $62A5: $3E $40
-    ld   [$C114], a                               ; $62A7: $EA $14 $C1
+    ld   [wNoiseSfxSeaWavesCounter], a                               ; $62A7: $EA $14 $C1
     ld   a, $A0                                   ; $62AA: $3E $A0
     ld   [wD466], a                               ; $62AC: $EA $66 $D4
     ld   a, $01                                   ; $62AF: $3E $01
@@ -218,7 +218,7 @@ MarineBeachScroll1::
     and  $07                                      ; $63D1: $E6 $07
     jr   nz, MarineBeachScroll2                   ; $63D3: $20 $42
     call func_1A39                                ; $63D5: $CD $39 $1A
-    ld   a, [$C16B]                               ; $63D8: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $63D8: $FA $6B $C1
     cp   $04                                      ; $63DB: $FE $04
     jr   nz, MarineBeachScroll2                   ; $63DD: $20 $38
     call IncrementGameplaySubtype                 ; $63DF: $CD $D6 $44
@@ -427,7 +427,7 @@ Data_001_651A::
 
 func_001_651E::
     call func_001_65AE                            ; $651E: $CD $AE $65
-    ld   a, [$C114]                               ; $6521: $FA $14 $C1
+    ld   a, [wNoiseSfxSeaWavesCounter]                               ; $6521: $FA $14 $C1
     inc  a                                        ; $6524: $3C
     cp   $A0                                      ; $6525: $FE $A0
     jr   nz, jr_001_652E                          ; $6527: $20 $05
@@ -436,7 +436,7 @@ func_001_651E::
     xor  a                                        ; $652D: $AF
 
 jr_001_652E::
-    ld   [$C114], a                               ; $652E: $EA $14 $C1
+    ld   [wNoiseSfxSeaWavesCounter], a                               ; $652E: $EA $14 $C1
     ld   a, [wD466]                               ; $6531: $FA $66 $D4
     and  a                                        ; $6534: $A7
     jr   nz, jr_001_6545                          ; $6535: $20 $0E
@@ -481,7 +481,7 @@ jr_001_655F::
     ld   de, Data_001_651A                        ; $6581: $11 $1A $65
 
 jr_001_6584::
-    ld   hl, $C038                                ; $6584: $21 $38 $C0
+    ld   hl, wDynamicOAMBuffer+8                                ; $6584: $21 $38 $C0
     call func_001_658B                            ; $6587: $CD $8B $65
     ret                                           ; $658A: $C9
 
@@ -632,7 +632,7 @@ jr_001_668B::
     ld   d, [hl]                                  ; $669E: $56
     ld   e, a                                     ; $669F: $5F
     push de                                       ; $66A0: $D5
-    ld   hl, $C040                                ; $66A1: $21 $40 $C0
+    ld   hl, wDynamicOAMBuffer+$10                                ; $66A1: $21 $40 $C0
     ld   a, c                                     ; $66A4: $79
     rla                                           ; $66A5: $17
     rla                                           ; $66A6: $17
@@ -726,7 +726,7 @@ jr_001_6718::
     ld   d, [hl]                                  ; $6720: $56
     ld   e, a                                     ; $6721: $5F
     push de                                       ; $6722: $D5
-    ld   hl, $C040                                ; $6723: $21 $40 $C0
+    ld   hl, wDynamicOAMBuffer+$10                                ; $6723: $21 $40 $C0
     ld   a, c                                     ; $6726: $79
     rla                                           ; $6727: $17
     rla                                           ; $6728: $17

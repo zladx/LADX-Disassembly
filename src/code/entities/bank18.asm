@@ -3673,9 +3673,9 @@ jr_018_5B3B:
     ld   [hl], JINGLE_HUGE_BUMP                   ; $5B3E: $36 $0B
     ld   hl, hWaveSfx                             ; $5B40: $21 $F3 $FF
     ld   [hl], $03                                ; $5B43: $36 $03
-    ld   hl, $C157                                ; $5B45: $21 $57 $C1
+    ld   hl, wC157                                ; $5B45: $21 $57 $C1
     ld   [hl], $18                                ; $5B48: $36 $18
-    ld   hl, $C158                                ; $5B4A: $21 $58 $C1
+    ld   hl, wC158                                ; $5B4A: $21 $58 $C1
     ld   [hl], $04                                ; $5B4D: $36 $04
     ld   hl, hLinkPositionX                       ; $5B4F: $21 $98 $FF
     inc  [hl]                                     ; $5B52: $34
@@ -3904,7 +3904,7 @@ label_018_5C6A:
     ldh  a, [hLinkFinalPositionX]                 ; $5CA8: $F0 $9F
     ld   [hl], a                                  ; $5CAA: $77
     ldh  a, [hLinkFinalPositionY]                 ; $5CAB: $F0 $A0
-    ld   hl, $C13B                                ; $5CAD: $21 $3B $C1
+    ld   hl, wC13B                                ; $5CAD: $21 $3B $C1
     add  [hl]                                     ; $5CB0: $86
     ld   hl, $D175                                ; $5CB1: $21 $75 $D1
     add  hl, de                                   ; $5CB4: $19
@@ -5167,7 +5167,7 @@ jr_018_64EA:
     call GetEntityPrivateCountdown1               ; $64EA: $CD $00 $0C
     jr   z, jr_018_650A                           ; $64ED: $28 $1B
 
-    ld   a, [$C13E]                               ; $64EF: $FA $3E $C1
+    ld   a, [wC13E]                               ; $64EF: $FA $3E $C1
     and  a                                        ; $64F2: $A7
     cp   $01                                      ; $64F3: $FE $01
     jr   nz, jr_018_64FC                          ; $64F5: $20 $05
@@ -5188,7 +5188,7 @@ jr_018_64FC:
 jr_018_650A:
     call func_018_7E15                            ; $650A: $CD $15 $7E
     call label_3B65                               ; $650D: $CD $65 $3B
-    ld   a, [$C13E]                               ; $6510: $FA $3E $C1
+    ld   a, [wC13E]                               ; $6510: $FA $3E $C1
     and  a                                        ; $6513: $A7
     jr   nz, jr_018_6519                          ; $6514: $20 $03
 
@@ -5712,7 +5712,7 @@ Data_018_69BD::
     db   $00, $04, $08, $0C, $10, $0C, $08, $04
 
 func_018_69C5::
-    ld   hl, $C010                                ; $69C5: $21 $10 $C0
+    ld   hl, wLinkOAMBuffer+$10                                ; $69C5: $21 $10 $C0
     ldh  a, [hFrameCounter]                       ; $69C8: $F0 $E7
     rra                                           ; $69CA: $1F
     rra                                           ; $69CB: $1F
@@ -7747,7 +7747,7 @@ jr_018_76FE:
     xor  a                                        ; $7701: $AF
     ldh  [hLinkPositionYIncrement], a             ; $7702: $E0 $9B
     ld   a, $18                                   ; $7704: $3E $18
-    ld   [$C13E], a                               ; $7706: $EA $3E $C1
+    ld   [wC13E], a                               ; $7706: $EA $3E $C1
     ld   a, $10                                   ; $7709: $3E $10
     ld   [wInvincibilityCounter], a               ; $770B: $EA $C7 $DB
     ld   a, $08                                   ; $770E: $3E $08
@@ -8641,7 +8641,7 @@ jr_018_7DC1:
     or   [hl]                                     ; $7DCC: $B6
     ld   hl, wIsLinkInTheAir                      ; $7DCD: $21 $46 $C1
     or   [hl]                                     ; $7DD0: $B6
-    ld   hl, $C134                                ; $7DD1: $21 $34 $C1
+    ld   hl, wC134                                ; $7DD1: $21 $34 $C1
     or   [hl]                                     ; $7DD4: $B6
     jr   nz, jr_018_7DE6                          ; $7DD5: $20 $0F
 

@@ -307,8 +307,8 @@ GameplayWorldSubtype6Handler::
     ld   a, $04                                   ; $451C: $3E $04
     ld   [wLinkMotionState], a                    ; $451E: $EA $1C $C1
     xor  a                                        ; $4521: $AF
-    ld   [$C16B], a                               ; $4522: $EA $6B $C1
-    ld   [$C16C], a                               ; $4525: $EA $6C $C1
+    ld   [wTransitionSequenceCounter], a                               ; $4522: $EA $6B $C1
+    ld   [wC16C], a                               ; $4525: $EA $6C $C1
     ld   a, [wObjectAffectingBGPalette]           ; $4528: $FA $CB $C3
     and  a                                        ; $452B: $A7
     jr   z, jr_001_4548                           ; $452C: $28 $1A
@@ -322,7 +322,7 @@ GameplayWorldSubtype6Handler::
     and  a                                        ; $4540: $A7
     jr   nz, jr_001_4548                          ; $4541: $20 $05
     ld   a, $04                                   ; $4543: $3E $04
-    ld   [$C16B], a                               ; $4545: $EA $6B $C1
+    ld   [wTransitionSequenceCounter], a                               ; $4545: $EA $6B $C1
 
 jr_001_4548::
     jp   label_27DD                               ; $4548: $C3 $DD $27

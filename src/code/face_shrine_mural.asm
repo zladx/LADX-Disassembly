@@ -40,9 +40,9 @@ jr_001_6B18::
 
 FaceShrineMuralStage1Handler::
     ld   a, $01                                   ; $6B2B: $3E $01
-    ld   [$C167], a                               ; $6B2D: $EA $67 $C1
+    ld   [wC167], a                               ; $6B2D: $EA $67 $C1
     call func_1A22                                ; $6B30: $CD $22 $1A
-    ld   a, [$C16B]                               ; $6B33: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $6B33: $FA $6B $C1
     cp   $04                                      ; $6B36: $FE $04
     jr   nz, jr_001_6B51                          ; $6B38: $20 $17
     call func_001_5888                            ; $6B3A: $CD $88 $58
@@ -67,15 +67,15 @@ FaceShrineMuralStage2Handler::
     xor  a                                        ; $6B5C: $AF
     ldh  [hBaseScrollX], a                        ; $6B5D: $E0 $96
     ldh  [$FF97], a                               ; $6B5F: $E0 $97
-    ld   [$C16B], a                               ; $6B61: $EA $6B $C1
-    ld   [$C16C], a                               ; $6B64: $EA $6C $C1
+    ld   [wTransitionSequenceCounter], a                               ; $6B61: $EA $6B $C1
+    ld   [wC16C], a                               ; $6B64: $EA $6C $C1
     ld   a, $01                                   ; $6B67: $3E $01
     ld   [$DDD5], a                               ; $6B69: $EA $D5 $DD
     jp   IncrementGameplaySubtypeAndReturn        ; $6B6C: $C3 $D6 $44
 
 FaceShrineMuralStage3Handler::
     call func_1A39                                ; $6B6F: $CD $39 $1A
-    ld   a, [$C16B]                               ; $6B72: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $6B72: $FA $6B $C1
     cp   $04                                      ; $6B75: $FE $04
     jr   nz, jr_001_6B80                          ; $6B77: $20 $07
     call IncrementGameplaySubtype                 ; $6B79: $CD $D6 $44

@@ -155,9 +155,9 @@ RollingBonesBarRollingHandler::
     inc  a                                        ; $6FA1: $3C
     ld   [hl], a                                  ; $6FA2: $77
     ld   a, $20                                   ; $6FA3: $3E $20
-    ld   [$C157], a                               ; $6FA5: $EA $57 $C1
+    ld   [wC157], a                               ; $6FA5: $EA $57 $C1
     xor  a                                        ; $6FA8: $AF
-    ld   [$C158], a                               ; $6FA9: $EA $58 $C1
+    ld   [wC158], a                               ; $6FA9: $EA $58 $C1
     ld   a, JINGLE_HUGE_BUMP                      ; $6FAC: $3E $0B
     ldh  [hJingle], a                             ; $6FAE: $E0 $F2
     call IncrementEntityState                     ; $6FB0: $CD $12 $3B

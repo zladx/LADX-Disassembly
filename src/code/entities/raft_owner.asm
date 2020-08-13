@@ -213,7 +213,7 @@ func_005_5490::
     rra                                           ; $5494: $1F
     rra                                           ; $5495: $1F
     and  $01                                      ; $5496: $E6 $01
-    ld   [$C13B], a                               ; $5498: $EA $3B $C1
+    ld   [wC13B], a                               ; $5498: $EA $3B $C1
     ldh  a, [hMapRoom]                            ; $549B: $F0 $F6
     ld   hl, wEntitiesRoomTable                   ; $549D: $21 $E0 $C3
     add  hl, bc                                   ; $54A0: $09
@@ -340,7 +340,7 @@ jr_005_5544:
     or   [hl]                                     ; $554F: $B6
     ld   hl, wIsLinkInTheAir                      ; $5550: $21 $46 $C1
     or   [hl]                                     ; $5553: $B6
-    ld   hl, $C134                                ; $5554: $21 $34 $C1
+    ld   hl, wC134                                ; $5554: $21 $34 $C1
     or   [hl]                                     ; $5557: $B6
     jr   nz, jr_005_5569                          ; $5558: $20 $0F
 

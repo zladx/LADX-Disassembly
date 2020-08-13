@@ -429,7 +429,7 @@ jr_004_4F14:
     jr   z, jr_004_4F49                           ; $4F2C: $28 $1B
 
     ld   a, $18                                   ; $4F2E: $3E $18
-    ld   [$C157], a                               ; $4F30: $EA $57 $C1
+    ld   [wC157], a                               ; $4F30: $EA $57 $C1
     ld   a, JINGLE_HUGE_BUMP                      ; $4F33: $3E $0B
     ldh  [hJingle], a                             ; $4F35: $E0 $F2
     ld   a, [wIsLinkInTheAir]                     ; $4F37: $FA $46 $C1
@@ -6181,7 +6181,7 @@ jr_004_744B:
     pop  af                                       ; $746A: $F1
     ld   e, a                                     ; $746B: $5F
     ld   d, b                                     ; $746C: $50
-    ld   hl, $C031                                ; $746D: $21 $31 $C0
+    ld   hl, wDynamicOAMBuffer+1                                ; $746D: $21 $31 $C0
     add  hl, de                                   ; $7470: $19
     inc  [hl]                                     ; $7471: $34
     inc  hl                                       ; $7472: $23
@@ -6191,7 +6191,7 @@ jr_004_744B:
     dec  [hl]                                     ; $7476: $35
 
 jr_004_7477:
-    ld   hl, $C020                                ; $7477: $21 $20 $C0
+    ld   hl, wLinkOAMBuffer+$20                                ; $7477: $21 $20 $C0
     ld   a, $50                                   ; $747A: $3E $50
     ld   [hl+], a                                 ; $747C: $22
     ld   a, $28                                   ; $747D: $3E $28
@@ -7487,7 +7487,7 @@ func_004_7C06::
     ld   a, [wDialogState]                        ; $7C2D: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $7C30: $21 $4F $C1
     or   [hl]                                     ; $7C33: $B6
-    ld   hl, $C134                                ; $7C34: $21 $34 $C1
+    ld   hl, wC134                                ; $7C34: $21 $34 $C1
     or   [hl]                                     ; $7C37: $B6
     jr   nz, jr_004_7C49                          ; $7C38: $20 $0F
 
@@ -7512,7 +7512,7 @@ func_004_7C4B::
     or   [hl]                                     ; $7C51: $B6
     ld   hl, wIsLinkInTheAir                      ; $7C52: $21 $46 $C1
     or   [hl]                                     ; $7C55: $B6
-    ld   hl, $C134                                ; $7C56: $21 $34 $C1
+    ld   hl, wC134                                ; $7C56: $21 $34 $C1
     or   [hl]                                     ; $7C59: $B6
     jr   nz, jr_004_7C92                          ; $7C5A: $20 $36
 

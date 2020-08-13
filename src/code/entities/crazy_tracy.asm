@@ -42,7 +42,7 @@ CrazyTracyEntityHandler::
     ; Position the medecine sprite above Link
     ldh  a, [hLinkPositionX]                      ; $5EB1: $F0 $98
     ldh  [hActiveEntityPosX], a                   ; $5EB3: $E0 $EE
-    ld   a, [$C145]                               ; $5EB5: $FA $45 $C1
+    ld   a, [wC145]                               ; $5EB5: $FA $45 $C1
     sub  $10                                      ; $5EB8: $D6 $10
     ldh  [hActiveEntityVisualPosY], a             ; $5EBA: $E0 $EC
 

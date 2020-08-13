@@ -83,7 +83,7 @@ func_004_49DC::
 ._03 dw SlimeEyeState3Handler                     ; $49EB
 
 SlimeEyeState0Handler::
-    ld   a, [$C157]                               ; $49ED: $FA $57 $C1
+    ld   a, [wC157]                               ; $49ED: $FA $57 $C1
     cp   $05                                      ; $49F0: $FE $05
     jr   nz, jr_004_49FB                          ; $49F2: $20 $07
 
@@ -143,9 +143,9 @@ jr_004_4A41:
 
     ld   [hl], b                                  ; $4A49: $70
     ld   a, $50                                   ; $4A4A: $3E $50
-    ld   [$C157], a                               ; $4A4C: $EA $57 $C1
+    ld   [wC157], a                               ; $4A4C: $EA $57 $C1
     ld   a, $04                                   ; $4A4F: $3E $04
-    ld   [$C158], a                               ; $4A51: $EA $58 $C1
+    ld   [wC158], a                               ; $4A51: $EA $58 $C1
     call GetEntityTransitionCountdown                 ; $4A54: $CD $05 $0C
     ld   [hl], $40                                ; $4A57: $36 $40
     call PlayBombExplosionSfx                                ; $4A59: $CD $4B $0C

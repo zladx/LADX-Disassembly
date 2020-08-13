@@ -70,13 +70,13 @@ AnimateEntities::
     ld   a, [wDialogState]                        ; $399B: $FA $9F $C1
     and  a                                        ; $399E: $A7
     jr   nz, .C111End                             ; $399F: $20 $0D
-    ; … decrement $C111
-    ld   a, [$C111]                               ; $39A1: $FA $11 $C1
+    ; … decrement wC111
+    ld   a, [wC111]                               ; $39A1: $FA $11 $C1
     ld   [wC1A8], a                               ; $39A4: $EA $A8 $C1
     and  a                                        ; $39A7: $A7
     jr   z, .C111End                              ; $39A8: $28 $04
     dec  a                                        ; $39AA: $3D
-    ld   [$C111], a                               ; $39AB: $EA $11 $C1
+    ld   [wC111], a                               ; $39AB: $EA $11 $C1
 .C111End
 
     ; If Link is passing out, return

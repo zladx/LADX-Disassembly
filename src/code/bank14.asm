@@ -962,7 +962,7 @@ RenderTransitionEffect::
 jr_014_5050:
     ld   a, e                                     ; $5050: $7B
     ldh  [hScratch1], a                           ; $5051: $E0 $D8
-    ld   hl, $C17C                                ; $5053: $21 $7C $C1
+    ld   hl, wC17C                                ; $5053: $21 $7C $C1
     xor  a                                        ; $5056: $AF
     ld   [hl+], a                                 ; $5057: $22
     ld   [hl+], a                                 ; $5058: $22
@@ -984,20 +984,20 @@ label_014_5067:
     ld   d, $00                                   ; $506D: $16 $00
 
 jr_014_506F:
-    ld   a, [$C17E]                               ; $506F: $FA $7E $C1
+    ld   a, [wC17E]                               ; $506F: $FA $7E $C1
     inc  a                                        ; $5072: $3C
-    ld   [$C17E], a                               ; $5073: $EA $7E $C1
+    ld   [wC17E], a                               ; $5073: $EA $7E $C1
     and  $01                                      ; $5076: $E6 $01
     jr   nz, jr_014_506F                          ; $5078: $20 $F5
 
-    ld   a, [$C17C]                               ; $507A: $FA $7C $C1
+    ld   a, [wC17C]                               ; $507A: $FA $7C $C1
     add  $01                                      ; $507D: $C6 $01
-    ld   [$C17C], a                               ; $507F: $EA $7C $C1
-    ld   a, [$C17D]                               ; $5082: $FA $7D $C1
+    ld   [wC17C], a                               ; $507F: $EA $7C $C1
+    ld   a, [wC17D]                               ; $5082: $FA $7D $C1
     adc  $00                                      ; $5085: $CE $00
-    ld   [$C17D], a                               ; $5087: $EA $7D $C1
+    ld   [wC17D], a                               ; $5087: $EA $7D $C1
     ldh  a, [hScratch2]                           ; $508A: $F0 $D9
-    ld   hl, $C17C                                ; $508C: $21 $7C $C1
+    ld   hl, wC17C                                ; $508C: $21 $7C $C1
     cp   [hl]                                     ; $508F: $BE
     ret  z                                        ; $5090: $C8
 
@@ -1452,14 +1452,14 @@ func_014_54F8::
     ld   [wC178], a                               ; $54FF: $EA $78 $C1
 
 jr_014_5502:
-    ld   a, [$C157]                               ; $5502: $FA $57 $C1
+    ld   a, [wC157]                               ; $5502: $FA $57 $C1
     and  a                                        ; $5505: $A7
     jr   z, jr_014_5525                           ; $5506: $28 $1D
 
     dec  a                                        ; $5508: $3D
-    ld   [$C157], a                               ; $5509: $EA $57 $C1
+    ld   [wC157], a                               ; $5509: $EA $57 $C1
     and  $03                                      ; $550C: $E6 $03
-    ld   hl, $C158                                ; $550E: $21 $58 $C1
+    ld   hl, wC158                                ; $550E: $21 $58 $C1
     add  [hl]                                     ; $5511: $86
     ld   e, a                                     ; $5512: $5F
     ld   d, $00                                   ; $5513: $16 $00

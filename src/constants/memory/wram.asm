@@ -24,7 +24,7 @@ wram0Section EQU $C000
 ;  byte 2 = tile n°,
 ;  byte 3 = attribute
 wLinkOAMBuffer::
-  ds 4 * 12 ; C000
+  ds 4 * 12 ; C000 - C02F
 
 ; Buffer Area for 28 dynamically allocated OAM elements
 ; Structure:
@@ -33,7 +33,7 @@ wLinkOAMBuffer::
 ;  byte 2 = tile n°,
 ;  byte 3 = attribute
 wDynamicOAMBuffer::
-  ds 4 * 28 ; C030
+  ds 4 * 28 ; C030 - C09F
 
 ; Unlabeled
 wC0A0::
@@ -235,7 +235,7 @@ wBGOriginLow::
 
 ; Unlabeled
 wC130::
-  ds 3 ; C130
+  ds 3 ; C130 - C132
 
 ; 0x00 = no collision,
 ; 0x03 = obstacle on top/bottom,
@@ -247,7 +247,11 @@ wCollisionType::
 
 ; Unlabeled
 wC134:
-  ds $2 ; C134
+  ds 1 ; C134
+
+; Unlabeled
+wC135:
+  ds 1 ; C135
 
 ; Position of the sword during a sping attack
 ; See SWORD_DIRECTION_* constants for possible values
@@ -265,7 +269,23 @@ wSwordAnimationState::
 
 ; Unlabeled
 wC138::
-  ds $5 ; C138 - C13E
+  ds 1 ; C138
+
+; Unlabeled
+wC139::
+  ds 1 ; C139
+
+; Unlabeled
+wC13A::
+  ds 1 ; C13A
+
+; Unlabeled
+wC13B::
+  ds 1 ; C13B
+
+; Unlabeled
+wC13C::
+  ds 1 ; C13C
 
 ; Seed for the Random Number Generator
 wRandomSeed::
@@ -273,7 +293,27 @@ wRandomSeed::
 
 ; Unlabeled
 wC13E::
-  ds $6 ; C13E - C143
+  ds 1 ; C13E
+
+; Unlabeled
+wC13F::
+  ds 1 ; C13F
+
+; Unlabeled
+wC140::
+  ds 1 ; C140
+
+; Unlabeled
+wC141::
+  ds 1 ; C141
+
+; Unlabeled
+wC142::
+  ds 1 ; C142
+
+; Unlabeled
+wC143::
+  ds 1 ; C143
 
 ; TODO comment
 wIsLinkPushing:: ; C144
@@ -281,7 +321,7 @@ wIsLinkPushing:: ; C144
 
 ; Unlabeled
 wC145::
-  ds $1 ; C145
+  ds 1 ; C145
 
 ; Is Link in the air (jumping with the feather, flying with roaster, etc)?
 wIsLinkInTheAir::
@@ -289,7 +329,11 @@ wIsLinkInTheAir::
 
 ; Unlabeled
 wC147::
-  ds $3 ; C147 - C149
+  ds 2 ; C147 - C148
+
+; Unlabeled
+wC149::
+  ds 1 ; C149
 
 ; TODO comment
 wIsRunningWithPegasusBoots::
@@ -321,7 +365,23 @@ wInventoryAppearing::
 
 ; Unlabeled
 wC150::
-  ds 5 ; C150 - C154
+  ds 1 ; C150
+
+; Unlabeled
+wC151::
+  ds 1 ; C151
+
+; Unlabeled
+wC152::
+  ds 1 ; C152
+
+; Unlabeled
+wC153::
+  ds 1 ; C153
+
+; Unlabeled
+wC154::
+  ds 1 ; C154
 
 ; background offset for shaking the screen vertically
 wScreenShakeHorizontal::
@@ -333,7 +393,11 @@ wScreenShakeVertical::
 
 ; Unlabeled
 wC157::
-  ds $2 ; C157 - C158
+  ds 1 ; C157
+
+; Unlabeled
+wC158::
+  ds 1 ; C158
 
 ; TODO comment
 wInventoryCursorFrameCounter::
@@ -481,7 +545,15 @@ wFreeMovementMode::
 
 ; Unlabeled
 wC17C::
-  ds 3 ; C17C - C17E
+  ds 1 ; C17C
+
+; Unlabeled
+wC17D::
+  ds 1 ; C17D
+
+; Unlabeled
+wC17E::
+  ds 1 ; C17E
 
 ; Special Background effect applied during some transitions or animations.
 ; See TRANSITION_GFX_* constants for possible values.

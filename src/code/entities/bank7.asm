@@ -606,7 +606,7 @@ jr_007_43D7:
 
 func_007_43FD::
     push bc                                       ; $43FD: $C5
-    ld   bc, $C010                                ; $43FE: $01 $10 $C0
+    ld   bc, wLinkOAMBuffer+$10                                ; $43FE: $01 $10 $C0
     ldh  a, [hLinkPositionY]                      ; $4401: $F0 $99
     ldh  [hScratch0], a                           ; $4403: $E0 $D7
     ldh  a, [hLinkPositionX]                      ; $4405: $F0 $98
@@ -926,7 +926,7 @@ jr_007_461A:
     ld   a, $02                                   ; $4637: $3E $02
     ldh  [hLinkPositionYIncrement], a             ; $4639: $E0 $9B
     ld   a, $01                                   ; $463B: $3E $01
-    ld   [$C147], a                               ; $463D: $EA $47 $C1
+    ld   [wC147], a                               ; $463D: $EA $47 $C1
 
 jr_007_4640:
     call func_007_7D96                            ; $4640: $CD $96 $7D
@@ -938,7 +938,7 @@ jr_007_4640:
     jr   nz, jr_007_4666                          ; $464B: $20 $19
 
     ld   e, $48                                   ; $464D: $1E $48
-    ld   a, [$C147]                               ; $464F: $FA $47 $C1
+    ld   a, [wC147]                               ; $464F: $FA $47 $C1
     and  a                                        ; $4652: $A7
     jr   z, jr_007_4657                           ; $4653: $28 $02
 
@@ -1254,7 +1254,7 @@ jr_007_4846:
     ld   hl, hLinkInteractiveMotionBlocked        ; $4849: $21 $A1 $FF
     ld   [hl], $02                                ; $484C: $36 $02
     ld   a, $04                                   ; $484E: $3E $04
-    ld   [$C13B], a                               ; $4850: $EA $3B $C1
+    ld   [wC13B], a                               ; $4850: $EA $3B $C1
     ret                                           ; $4853: $C9
 
 jr_007_4854:
@@ -1409,7 +1409,7 @@ func_007_492E::
     ld   hl, wEntitiesPosYTable                   ; $4937: $21 $10 $C2
     add  hl, bc                                   ; $493A: $09
     ld   [hl], $80                                ; $493B: $36 $80
-    ld   a, [$C130]                               ; $493D: $FA $30 $C1
+    ld   a, [wC130]                               ; $493D: $FA $30 $C1
     and  a                                        ; $4940: $A7
     ret  z                                        ; $4941: $C8
 
@@ -3289,10 +3289,10 @@ jr_007_55CD:
     jr   nz, jr_007_55DF                          ; $55D8: $20 $05
 
     ld   a, $04                                   ; $55DA: $3E $04
-    ld   [$C13B], a                               ; $55DC: $EA $3B $C1
+    ld   [wC13B], a                               ; $55DC: $EA $3B $C1
 
 jr_007_55DF:
-    ld   hl, $C13B                                ; $55DF: $21 $3B $C1
+    ld   hl, wC13B                                ; $55DF: $21 $3B $C1
     ldh  a, [hLinkPositionY]                      ; $55E2: $F0 $99
     add  [hl]                                     ; $55E4: $86
     ld   hl, wEntitiesPosYTable                   ; $55E5: $21 $10 $C2
@@ -5552,7 +5552,7 @@ func_007_639E::
     ld   a, $02                                   ; $63E7: $3E $02
     ldh  [hLinkPositionYIncrement], a             ; $63E9: $E0 $9B
     ld   a, $01                                   ; $63EB: $3E $01
-    ld   [$C147], a                               ; $63ED: $EA $47 $C1
+    ld   [wC147], a                               ; $63ED: $EA $47 $C1
     ld   hl, wEntitiesPrivateState2Table          ; $63F0: $21 $C0 $C2
     add  hl, bc                                   ; $63F3: $09
     ld   [hl], $10                                ; $63F4: $36 $10
@@ -6681,7 +6681,7 @@ jr_007_6AA6:
     call label_3B65                               ; $6AAC: $CD $65 $3B
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $6AAF: $21 $10 $C4
     add  hl, bc                                   ; $6AB2: $09
-    ld   a, [$C13E]                               ; $6AB3: $FA $3E $C1
+    ld   a, [wC13E]                               ; $6AB3: $FA $3E $C1
     or   [hl]                                     ; $6AB6: $B6
     and  a                                        ; $6AB7: $A7
     jr   nz, jr_007_6AC0                          ; $6AB8: $20 $06
@@ -9380,7 +9380,7 @@ jr_007_7D6F:
     or   [hl]                                     ; $7D7A: $B6
     ld   hl, wIsLinkInTheAir                      ; $7D7B: $21 $46 $C1
     or   [hl]                                     ; $7D7E: $B6
-    ld   hl, $C134                                ; $7D7F: $21 $34 $C1
+    ld   hl, wC134                                ; $7D7F: $21 $34 $C1
     or   [hl]                                     ; $7D82: $B6
     jr   nz, jr_007_7D94                          ; $7D83: $20 $0F
 

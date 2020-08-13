@@ -332,7 +332,7 @@ func_036_41DF::
     ld   [wIsLinkInTheAir], a                     ; $41E5: $EA $46 $C1
     ld   a, $E0                                   ; $41E8: $3E $E0
     ldh  [$FFB3], a                               ; $41EA: $E0 $B3
-    ld   [$C145], a                               ; $41EC: $EA $45 $C1
+    ld   [wC145], a                               ; $41EC: $EA $45 $C1
     ld   a, $01                                   ; $41EF: $3E $01
     ld   [wD475], a                               ; $41F1: $EA $75 $D4
     ld   a, [wIsMarinFollowingLink]               ; $41F4: $FA $73 $DB
@@ -385,7 +385,7 @@ func_036_4221::
 
     ld   a, $02                                   ; $423B: $3E $02
     ld   [wC167], a                               ; $423D: $EA $67 $C1
-    ld   a, [$C157]                               ; $4240: $FA $57 $C1
+    ld   a, [wC157]                               ; $4240: $FA $57 $C1
     and  a                                        ; $4243: $A7
     ret  nz                                       ; $4244: $C0
 
@@ -2222,7 +2222,7 @@ func_036_4D4B::
 
 jr_036_4D5C:
     ld   a, $10                                   ; $4D5C: $3E $10
-    ld   [$C13E], a                               ; $4D5E: $EA $3E $C1
+    ld   [wC13E], a                               ; $4D5E: $EA $3E $C1
     ld   a, $14                                   ; $4D61: $3E $14
     call GetVectorTowardsLink_trampoline          ; $4D63: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $4D66: $F0 $D7
@@ -3605,7 +3605,7 @@ jr_036_5652:
 
 jr_036_5661:
     ld   a, $10                                   ; $5661: $3E $10
-    ld   [$C13E], a                               ; $5663: $EA $3E $C1
+    ld   [wC13E], a                               ; $5663: $EA $3E $C1
     ld   a, $20                                   ; $5666: $3E $20
     call GetVectorTowardsLink_trampoline          ; $5668: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $566B: $F0 $D7
@@ -3986,7 +3986,7 @@ jr_036_5892:
 ._05 dw func_036_5930                             ; $589F
 
 func_036_58A1::
-    ld   a, [$C157]                               ; $58A1: $FA $57 $C1
+    ld   a, [wC157]                               ; $58A1: $FA $57 $C1
     and  a                                        ; $58A4: $A7
     jr   z, jr_036_58B8                           ; $58A5: $28 $11
 
@@ -4664,7 +4664,7 @@ IF __PATCH_0__
 ENDC
 
     ld   a, $10                                   ; $5CC7: $3E $10
-    ld   [$C13E], a                               ; $5CC9: $EA $3E $C1
+    ld   [wC13E], a                               ; $5CC9: $EA $3E $C1
     ld   a, $20                                   ; $5CCC: $3E $20
     call GetVectorTowardsLink_trampoline          ; $5CCE: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $5CD1: $F0 $D7
@@ -4957,9 +4957,9 @@ jr_036_5E81:
     add  hl, bc                                   ; $5E92: $09
     ld   [hl], a                                  ; $5E93: $77
     ld   a, $30                                   ; $5E94: $3E $30
-    ld   [$C157], a                               ; $5E96: $EA $57 $C1
+    ld   [wC157], a                               ; $5E96: $EA $57 $C1
     ld   a, $04                                   ; $5E99: $3E $04
-    ld   [$C158], a                               ; $5E9B: $EA $58 $C1
+    ld   [wC158], a                               ; $5E9B: $EA $58 $C1
     call func_036_5EC2                            ; $5E9E: $CD $C2 $5E
     ld   hl, wEntitiesPrivateState2Table          ; $5EA1: $21 $C0 $C2
     add  hl, bc                                   ; $5EA4: $09
@@ -7089,7 +7089,7 @@ jr_036_6AC5:
     or   [hl]                                     ; $6AD0: $B6
     ld   hl, wIsLinkInTheAir                      ; $6AD1: $21 $46 $C1
     or   [hl]                                     ; $6AD4: $B6
-    ld   hl, $C134                                ; $6AD5: $21 $34 $C1
+    ld   hl, wC134                                ; $6AD5: $21 $34 $C1
     or   [hl]                                     ; $6AD8: $B6
     jr   nz, jr_036_6AEA                          ; $6AD9: $20 $0F
 
@@ -8397,7 +8397,7 @@ func_036_72BA::
     ld   [wDE00], a                               ; $72D5: $EA $00 $DE
 
     ld   hl, wLinkOAMBuffer                           ; $72D8: $21 $00 $C0
-    ld   de, $C09C                                ; $72DB: $11 $9C $C0
+    ld   de, wDynamicOAMBuffer+$6C                                ; $72DB: $11 $9C $C0
     ld   b, $14                                   ; $72DE: $06 $14
 
 .loop

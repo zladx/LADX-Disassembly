@@ -63,7 +63,7 @@ WorldMapState1Handler::
     call DrawLinkSprite                           ; $5678: $CD $2E $1D
     call AnimateEntitiesAndRestoreBank01          ; $567B: $CD $FC $0E
     call func_1A22                                ; $567E: $CD $22 $1A
-    ld   a, [$C16B]                               ; $5681: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $5681: $FA $6B $C1
     cp   $04                                      ; $5684: $FE $04
     jr   nz, jr_001_56F3                          ; $5686: $20 $6B
     ld   a, $03                                   ; $5688: $3E $03
@@ -72,8 +72,8 @@ WorldMapState1Handler::
     ldh  [hVolumeLeft], a                      ; $568E: $E0 $AA
     call IncrementGameplaySubtype                 ; $5690: $CD $D6 $44
     xor  a                                        ; $5693: $AF
-    ld   [$C16B], a                               ; $5694: $EA $6B $C1
-    ld   [$C16C], a                               ; $5697: $EA $6C $C1
+    ld   [wTransitionSequenceCounter], a                               ; $5694: $EA $6B $C1
+    ld   [wC16C], a                               ; $5697: $EA $6C $C1
     ldh  [hBaseScrollX], a                        ; $569A: $E0 $96
     ld   [$C1BF], a                               ; $569C: $EA $BF $C1
     ldh  [$FF97], a                               ; $569F: $E0 $97
@@ -137,7 +137,7 @@ WorldMapState3Handler::
 
 WorldMapState4Handler::
     call func_1A39                                ; $570B: $CD $39 $1A
-    ld   a, [$C16B]                               ; $570E: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $570E: $FA $6B $C1
     cp   $04                                      ; $5711: $FE $04
     jr   nz, .return                              ; $5713: $20 $06
     call IncrementGameplaySubtype                 ; $5715: $CD $D6 $44
@@ -228,7 +228,7 @@ jr_001_577E::
 
 jr_001_5792::
     call OpenDialog                               ; $5792: $CD $85 $23
-    ld   a, [$C173]                               ; $5795: $FA $73 $C1
+    ld   a, [wDialogIndex]                               ; $5795: $FA $73 $C1
     cp   $A7                                      ; $5798: $FE $A7
     jr   z, jr_001_57A3                           ; $579A: $28 $07
     ld   a, [wDBB4]                               ; $579C: $FA $B4 $DB
@@ -237,7 +237,7 @@ jr_001_5792::
 
 jr_001_57A3::
     ld   a, $01                                   ; $57A3: $3E $01
-    ld   [$C112], a                               ; $57A5: $EA $12 $C1
+    ld   [wDialogIndexHi], a                               ; $57A5: $EA $12 $C1
 
 jr_001_57A8::
     ld   a, [wDBB4]                               ; $57A8: $FA $B4 $DB
@@ -295,8 +295,8 @@ jr_001_5804::
     and  e                                        ; $5806: $A3
     jr   z, label_001_5818                        ; $5807: $28 $0F
     xor  a                                        ; $5809: $AF
-    ld   [$C16B], a                               ; $580A: $EA $6B $C1
-    ld   [$C16C], a                               ; $580D: $EA $6C $C1
+    ld   [wTransitionSequenceCounter], a                               ; $580A: $EA $6B $C1
+    ld   [wC16C], a                               ; $580D: $EA $6C $C1
     ld   a, $01                                   ; $5810: $3E $01
     ld   [$DDD5], a                               ; $5812: $EA $D5 $DD
     call IncrementGameplaySubtype                 ; $5815: $CD $D6 $44

@@ -94,10 +94,10 @@ OpenDialog::
 
     ; Initialize dialog variables
     xor  a                                        ; $238E: $AF
-    ld   [$C16F], a                               ; $238F: $EA $6F $C1
+    ld   [wDialogOpenCloseAnimationFrame], a                               ; $238F: $EA $6F $C1
     ld   [wDialogCharacterIndex], a               ; $2392: $EA $70 $C1
     ld   [wDialogCharacterIndexHi], a             ; $2395: $EA $64 $C1
-    ld   [$C108], a                               ; $2398: $EA $08 $C1
+    ld   [wNameIndex], a                               ; $2398: $EA $08 $C1
     ld   [wDialogIndexHi], a                      ; $239B: $EA $12 $C1
     ld   a, $0F                                   ; $239E: $3E $0F
     ld   [$C5AB], a                               ; $23A0: $EA $AB $C5
@@ -118,7 +118,7 @@ DialogClosingEndHandler::
     xor  a                                        ; $23B1: $AF
     ld   [wDialogState], a                        ; $23B2: $EA $9F $C1
     ld   a, $18                                   ; $23B5: $3E $18
-    ld   [$C134], a                               ; $23B7: $EA $34 $C1
+    ld   [wC134], a                               ; $23B7: $EA $34 $C1
     ldh  a, [hIsGBC]                              ; $23BA: $F0 $FE
     and  a                                        ; $23BC: $A7
     ret  z                                        ; $23BD: $C8
@@ -286,9 +286,9 @@ DialogFinishedHandler::
     ; ... update dialog state
 
 UpdateDialogState::
-    ; Clear $C16F
+    ; Clear wDialogOpenCloseAnimationFrame
     xor  a                                        ; $2496: $AF
-    ld   [$C16F], a                               ; $2497: $EA $6F $C1
+    ld   [wDialogOpenCloseAnimationFrame], a                               ; $2497: $EA $6F $C1
 
 .if
     ; If GameplayType == PHOTO_ALBUM

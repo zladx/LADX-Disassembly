@@ -879,7 +879,7 @@ disableMovementInTransition::
     ; Reset the transition variables
     xor  a                                        ; $0CA3: $AF
     ld   [wTransitionSequenceCounter], a          ; $0CA4: $EA $6B $C1
-    ld   [$C16C], a                               ; $0CA7: $EA $6C $C1
+    ld   [wC16C], a                               ; $0CA7: $EA $6C $C1
     ld   [wD478], a                               ; $0CAA: $EA $78 $D4
     and  a                                        ; $0CAD: $A7
     ret                                           ; $0CAE: $C9
@@ -960,10 +960,10 @@ AddTranscientVfx::
     ret                                           ; $0D06: $C9
 
 label_D07::
-    ld   a, [$C140]                               ; $0D07: $FA $40 $C1
+    ld   a, [wC140]                               ; $0D07: $FA $40 $C1
     sub  a, $08                                   ; $0D0A: $D6 $08
     ldh  [hScratch0], a                           ; $0D0C: $E0 $D7
-    ld   a, [$C142]                               ; $0D0E: $FA $42 $C1
+    ld   a, [wC142]                               ; $0D0E: $FA $42 $C1
     sub  a, $08                                   ; $0D11: $D6 $08
     ldh  [hScratch1], a                           ; $0D13: $E0 $D8
 
@@ -1211,7 +1211,7 @@ LoadRoomTiles::
     and  a                                        ; $0E10: $A7
     jr   z, .label_E1E                            ; $0E11: $28 $0B
     ld   a, d                                     ; $0E13: $7A
-    ld   [$C10D], a                               ; $0E14: $EA $0D $C1
+    ld   [wC10D], a                               ; $0E14: $EA $0D $C1
     ld   a, $01                                   ; $0E17: $3E $01
     ld   [wNeedsUpdatingNPCTiles], a              ; $0E19: $EA $0E $C1
     jr   .label_E29                               ; $0E1C: $18 $0B
@@ -1254,7 +1254,7 @@ presentSaveScreenIfNeeded::
 
     ; If a dialog is visible, or the screen is animating from one map to another
     ld   a, [wDialogState]                        ; $0E4D: $FA $9F $C1
-    ld   hl, $C167                                ; $0E50: $21 $67 $C1
+    ld   hl, wC167                                ; $0E50: $21 $67 $C1
     or   [hl]                                     ; $0E53: $B6
     ld   hl, wRoomTransitionState                 ; $0E54: $21 $24 $C1
     or   [hl]                                     ; $0E57: $B6
@@ -1283,7 +1283,7 @@ presentSaveScreenIfNeeded::
     ; Present save screen
     xor  a ; Clear variables                      ; $0E73: $AF
     ld   [wTransitionSequenceCounter], a          ; $0E74: $EA $6B $C1
-    ld   [$C16C], a                               ; $0E77: $EA $6C $C1
+    ld   [wC16C], a                               ; $0E77: $EA $6C $C1
     ld   [wDialogState], a                        ; $0E7A: $EA $9F $C1
     ld   [wGameplaySubtype], a                    ; $0E7D: $EA $96 $DB
     ld   a, GAMEPLAY_FILE_SAVE ; Set GameplayType to FILE_SAVE ; $0E80: $3E $06
@@ -1468,14 +1468,14 @@ WorldDefaultHandler::
     call func_002_60E0                            ; $0FA5: $CD $E0 $60
 
     xor  a                                        ; $0FA8: $AF
-    ld   [$C140], a                               ; $0FA9: $EA $40 $C1
-    ld   [$C13C], a                               ; $0FAC: $EA $3C $C1
-    ld   [$C13B], a                               ; $0FAF: $EA $3B $C1
+    ld   [wC140], a                               ; $0FA9: $EA $40 $C1
+    ld   [wC13C], a                               ; $0FAC: $EA $3C $C1
+    ld   [wC13B], a                               ; $0FAF: $EA $3B $C1
 
-    ld   hl, $C11D                                ; $0FB2: $21 $1D $C1
+    ld   hl, wC11D                                ; $0FB2: $21 $1D $C1
     res  7, [hl]                                  ; $0FB5: $CB $BE
 
-    ld   hl, $C11E                                ; $0FB7: $21 $1E $C1
+    ld   hl, wC11E                                ; $0FB7: $21 $1E $C1
     res  7, [hl]                                  ; $0FBA: $CB $BE
 
     ; Execute room events
@@ -1547,7 +1547,7 @@ ApplyGotItem::
     ldh  a, [hLinkPositionY]                      ; $1033: $F0 $99
     ld   hl, hLinkPositionZ                       ; $1035: $21 $A2 $FF
     sub  a, [hl]                                  ; $1038: $96
-    ld   [$C145], a                               ; $1039: $EA $45 $C1
+    ld   [wC145], a                               ; $1039: $EA $45 $C1
     ld   a, [wDialogGotItem]                      ; $103C: $FA $A9 $C1
     and  a                                        ; $103F: $A7
     jr   z, InitGotItemSequence                   ; $1040: $28 $3D
@@ -1613,7 +1613,7 @@ InitGotItemSequence::
     cp   $02                                      ; $10A5: $FE $02
     jr   nc, .jp_10DB                             ; $10A7: $30 $32
     ld   a, [wDialogState]                        ; $10A9: $FA $9F $C1
-    ld   hl, $C167                                ; $10AC: $21 $67 $C1
+    ld   hl, wC167                                ; $10AC: $21 $67 $C1
     or   [hl]                                     ; $10AF: $B6
     ld   hl, wRoomTransitionState                 ; $10B0: $21 $24 $C1
     or   [hl]                                     ; $10B3: $B6
@@ -1625,7 +1625,7 @@ InitGotItemSequence::
     ; Show a location on the mini-map
     xor  a                                        ; $10BC: $AF
     ld   [wTransitionSequenceCounter], a          ; $10BD: $EA $6B $C1
-    ld   [$C16C], a                               ; $10C0: $EA $6C $C1
+    ld   [wC16C], a                               ; $10C0: $EA $6C $C1
     ld   [wGameplaySubtype], a                    ; $10C3: $EA $96 $DB
     ld   a, GAMEPLAY_WORLD_MAP                    ; $10C6: $3E $07
     ld   [wGameplayType], a                       ; $10C8: $EA $95 $DB
@@ -1721,7 +1721,7 @@ LinkMotionInteractiveHandler::
 ; Check if one of the inventory item should be used
 CheckItemsToUse::
     ld   a, [$C50A]                               ; $1177: $FA $0A $C5
-    ld   hl, $C167                                ; $117A: $21 $67 $C1
+    ld   hl, wC167                                ; $117A: $21 $67 $C1
     or   [hl]                                     ; $117D: $B6
     ld   hl, $C1A4                                ; $117E: $21 $A4 $C1
     or   [hl]                                     ; $1181: $B6
@@ -1759,7 +1759,7 @@ CheckItemsToUse::
     jr   c, .shieldEnd                            ; $11B0: $38 $08
     ld   a, SWORD_ANIMATION_STATE_HOLDING         ; $11B2: $3E $05
     ld   [wSwordAnimationState], a                ; $11B4: $EA $37 $C1
-    ld   [$C16A], a                               ; $11B7: $EA $6A $C1
+    ld   [wC16A], a                               ; $11B7: $EA $6A $C1
 
 .shieldEnd
     jr   .swordShieldEnd                          ; $11BA: $18 $07
@@ -1771,7 +1771,7 @@ CheckItemsToUse::
 
 .swordShieldEnd
 
-    ld   a, [$C117]                               ; $11C3: $FA $17 $C1
+    ld   a, [wC117]                               ; $11C3: $FA $17 $C1
     and  a                                        ; $11C6: $A7
     jp   nz, UseItem.return                       ; $11C7: $C2 $ED $12
     ; if Link does carry something, exit
@@ -1784,7 +1784,7 @@ CheckItemsToUse::
     jr   z, .checkMotionBlocked                   ; $11D5: $28 $0B
     cp   SWORD_ANIMATION_STATE_SWING_MIDDLE       ; $11D7: $FE $03
     jr   nz, .checkMotionBlocked                  ; $11D9: $20 $07
-    ld   a, [$C138]                               ; $11DB: $FA $38 $C1
+    ld   a, [wC138]                               ; $11DB: $FA $38 $C1
     cp   $03                                      ; $11DE: $FE $03
     jr   nc, .pegasusBootsB                       ; $11E0: $30 $06
 
@@ -2015,7 +2015,7 @@ label_1321::
     or   [hl]                                     ; $132C: $B6
     ret  nz                                       ; $132D: $C0
     ; sword holded
-    ld   a, [$C160]                               ; $132E: $FA $60 $C1
+    ld   a, [wC160]                               ; $132E: $FA $60 $C1
     and  a                                        ; $1331: $A7
     ret  nz                                       ; $1332: $C0
 
@@ -2267,7 +2267,7 @@ data_14C7::
     db 0, 0, $E4, $1C                             ; $14C7
 
 UseRocsFeather::
-    ld   a, [$C130]                               ; $14CB: $FA $30 $C1
+    ld   a, [wC130]                               ; $14CB: $FA $30 $C1
     cp   $07                                      ; $14CE: $FE $07
     ret  z                                        ; $14D0: $C8
     ld   a, [wIsLinkInTheAir]                     ; $14D1: $FA $46 $C1
@@ -2276,8 +2276,8 @@ UseRocsFeather::
     ld   a, $01                                   ; $14D6: $3E $01
     ld   [wIsLinkInTheAir], a                     ; $14D8: $EA $46 $C1
     xor  a                                        ; $14DB: $AF
-    ld   [$C152], a                               ; $14DC: $EA $52 $C1
-    ld   [$C153], a                               ; $14DF: $EA $53 $C1
+    ld   [wC152], a                               ; $14DC: $EA $52 $C1
+    ld   [wC153], a                               ; $14DF: $EA $53 $C1
     ld   a, JINGLE_FEATHER_JUMP                   ; $14E2: $3E $0D
     ldh  [hJingle], a                             ; $14E4: $E0 $F2
     ldh  a, [hIsSideScrolling]                    ; $14E6: $F0 $F9
@@ -2322,18 +2322,18 @@ SwordRandomSfxTable::
     db   NOISE_SFX_SWORD_A, NOISE_SFX_SWORD_B, NOISE_SFX_SWORD_C, NOISE_SFX_SWORD_D ; $1524
 
 UseSword::
-    ld   a, [$C16D]                               ; $1528: $FA $6D $C1
+    ld   a, [wC16D]                               ; $1528: $FA $6D $C1
     ld   hl, wIsUsingSpinAttack                   ; $152B: $21 $21 $C1
     or   [hl]                                     ; $152E: $B6
     ret  nz                                       ; $152F: $C0
     ld   a, $03                                   ; $1530: $3E $03
-    ld   [$C138], a                               ; $1532: $EA $38 $C1
+    ld   [wC138], a                               ; $1532: $EA $38 $C1
     ld   a, SWORD_ANIMATION_STATE_DRAW            ; $1535: $3E $01
     ld   [wSwordAnimationState], a                ; $1537: $EA $37 $C1
     ; enable sword collision
     ld   [wSwordCollisionEnabled], a              ; $153A: $EA $B0 $C5
     xor  a                                        ; $153D: $AF
-    ld   [$C160], a                               ; $153E: $EA $60 $C1
+    ld   [wC160], a                               ; $153E: $EA $60 $C1
     ld   [$C1AC], a                               ; $1541: $EA $AC $C1
 
     ; Play a random SFX
@@ -2410,7 +2410,7 @@ CheckStaticSwordCollision::
     ld   a, [wIsRunningWithPegasusBoots]          ; $15B4: $FA $4A $C1
     and  a                                        ; $15B7: $A7
     jr   nz, .label_15C0                          ; $15B8: $20 $06
-    ld   a, [$C16A]                               ; $15BA: $FA $6A $C1
+    ld   a, [wC16A]                               ; $15BA: $FA $6A $C1
     cp   $05                                      ; $15BD: $FE $05
     ret  z                                        ; $15BF: $C8
 .label_15C0
@@ -2504,14 +2504,14 @@ label_1637::
     ld   a, [wIsRunningWithPegasusBoots]          ; $163D: $FA $4A $C1
     and  a                                        ; $1640: $A7
     jr   nz, label_1653                           ; $1641: $20 $10
-    ld   a, [$C16A]                               ; $1643: $FA $6A $C1
+    ld   a, [wC16A]                               ; $1643: $FA $6A $C1
     cp   $05                                      ; $1646: $FE $05
     jr   nz, label_1653                           ; $1648: $20 $09
     ; reset sword charge
     xor  a                                        ; $164A: $AF
     ld   [wSwordCharge], a                        ; $164B: $EA $22 $C1
     ld   a, $0C                                   ; $164E: $3E $0C
-    ld   [$C16D], a                               ; $1650: $EA $6D $C1
+    ld   [wC16D], a                               ; $1650: $EA $6D $C1
 
 label_1653::
     ld   a, ENTITY_ENTITY_LIFTABLE_ROCK           ; $1653: $3E $05
@@ -2590,7 +2590,7 @@ data_16BE::
 ; Check sword collision with items lying on the ground
 CheckItemsSwordCollision::
     ld   c, a                                     ; $16C2: $4F
-    ld   a, [$C16D]                               ; $16C3: $FA $6D $C1
+    ld   a, [wC16D]                               ; $16C3: $FA $6D $C1
     and  a                                        ; $16C6: $A7
     ret  z                                        ; $16C7: $C8
     ldh  a, [hLinkDirection]                      ; $16C8: $F0 $9E
@@ -2725,12 +2725,12 @@ ApplyLinkMotionState::
     ld   a, [wLinkMotionState]                    ; $1797: $FA $1C $C1
     cp   $01                                      ; $179A: $FE $01
     ret  z                                        ; $179C: $C8
-    ld   a, [$C16A]                               ; $179D: $FA $6A $C1
+    ld   a, [wC16A]                               ; $179D: $FA $6A $C1
     and  a                                        ; $17A0: $A7
     jr   z, .label_17DB                           ; $17A1: $28 $38
-    ld   bc, $C010                                ; $17A3: $01 $10 $C0
-    ld   a, [$C145]                               ; $17A6: $FA $45 $C1
-    ld   hl, $C13B                                ; $17A9: $21 $3B $C1
+    ld   bc, wLinkOAMBuffer+$10                                ; $17A3: $01 $10 $C0
+    ld   a, [wC145]                               ; $17A6: $FA $45 $C1
+    ld   hl, wC13B                                ; $17A9: $21 $3B $C1
     add  a, [hl]                                  ; $17AC: $86
     ldh  [hScratch0], a                           ; $17AD: $E0 $D7
     ldh  a, [hLinkPositionX]                      ; $17AF: $F0 $98
@@ -2747,9 +2747,9 @@ ApplyLinkMotionState::
     ld   [hl], a                                  ; $17C5: $77
 
 .label_17C6
-    ld   a, [$C139]                               ; $17C6: $FA $39 $C1
+    ld   a, [wC139]                               ; $17C6: $FA $39 $C1
     ld   h, a                                     ; $17C9: $67
-    ld   a, [$C13A]                               ; $17CA: $FA $3A $C1
+    ld   a, [wC13A]                               ; $17CA: $FA $3A $C1
     ld   l, a                                     ; $17CD: $6F
     ld   a, [wSwordDirection]                     ; $17CE: $FA $36 $C1
     ldh  [hScratch2], a                           ; $17D1: $E0 $D9
@@ -2809,7 +2809,7 @@ LinkMotionMapFadeOutHandler::
 .label_1847
     call func_1A22                                ; $1847: $CD $22 $1A
     xor  a                                        ; $184A: $AF
-    ld   [$C157], a                               ; $184B: $EA $57 $C1
+    ld   [wC157], a                               ; $184B: $EA $57 $C1
     inc  a                                        ; $184E: $3C
     ld   [wC1A8], a                               ; $184F: $EA $A8 $C1
     ld   a, [wTransitionSequenceCounter]          ; $1852: $FA $6B $C1
@@ -3737,11 +3737,11 @@ ENDC
     ld   hl, data_1F59                            ; $210D: $21 $59 $1F
     add  hl, de                                   ; $2110: $19
     ld   a, [hl]                                  ; $2111: $7E
-    ld   [$C13C], a                               ; $2112: $EA $3C $C1
+    ld   [wC13C], a                               ; $2112: $EA $3C $C1
     ld   hl, data_1F5D                            ; $2115: $21 $5D $1F
     add  hl, de                                   ; $2118: $19
     ld   a, [hl]                                  ; $2119: $7E
-    ld   [$C13B], a                               ; $211A: $EA $3B $C1
+    ld   [wC13B], a                               ; $211A: $EA $3B $C1
     ld   hl, hLinkAnimationState                  ; $211D: $21 $9D $FF
     inc  [hl]                                     ; $2120: $34
     ld   e, $08                                   ; $2121: $1E $08
@@ -3751,7 +3751,7 @@ ENDC
     ld   e, $03                                   ; $212A: $1E $03
 
 .jp_212C
-    ld   hl, $C15F                                ; $212C: $21 $5F $C1
+    ld   hl, wC15F                                ; $212C: $21 $5F $C1
     inc  [hl]                                     ; $212F: $34
     ld   a, [hl]                                  ; $2130: $7E
     cp   e                                        ; $2131: $BB
@@ -3783,7 +3783,7 @@ ENDC
 
 .clearC15FAndReturn
     xor  a                                        ; $214E: $AF
-    ld   [$C15F], a                               ; $214F: $EA $5F $C1
+    ld   [wC15F], a                               ; $214F: $EA $5F $C1
     ret                                           ; $2152: $C9
 
 .jr_2153
@@ -3802,7 +3802,7 @@ func_2165::
     ldh  [hObjectUnderEntity], a                  ; $216A: $E0 $AF
     call func_014_5526_trampoline                 ; $216C: $CD $78 $21
     ldh  a, [hLinkDirection]                      ; $216F: $F0 $9E
-    ld   [$C15D], a                               ; $2171: $EA $5D $C1
+    ld   [wC15D], a                               ; $2171: $EA $5D $C1
     jp   label_2183                               ; $2174: $C3 $83 $21
 
 IF !__PATCH_0__
@@ -3872,7 +3872,7 @@ ComputeLinkPosition::
     push af                                       ; $21BD: $F5
     swap a                                        ; $21BE: $CB $37
     and  $F0                                      ; $21C0: $E6 $F0
-    ld   hl, $C11A                                ; $21C2: $21 $1A $C1
+    ld   hl, wC11A                                ; $21C2: $21 $1A $C1
     add  hl, bc                                   ; $21C5: $09
     add  a, [hl]                                  ; $21C6: $86
     ld   [hl], a                                  ; $21C7: $77
@@ -3902,7 +3902,7 @@ func_21E1::
     push af                                       ; $21E3: $F5
     swap a                                        ; $21E4: $CB $37
     and  $F0                                      ; $21E6: $E6 $F0
-    ld   hl, $C149                                ; $21E8: $21 $49 $C1
+    ld   hl, wC149                                ; $21E8: $21 $49 $C1
     add  a, [hl]                                  ; $21EB: $86
     ld   [hl], a                                  ; $21EC: $77
     rl   d                                        ; $21ED: $CB $12

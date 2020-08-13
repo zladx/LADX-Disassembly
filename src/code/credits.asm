@@ -529,12 +529,12 @@ func_017_4784::
     push hl                                       ; $47A2: $E5
     xor  a                                        ; $47A3: $AF
     ldh  [hScratch1], a                           ; $47A4: $E0 $D8
-    ld   de, $C054                                ; $47A6: $11 $54 $C0
+    ld   de, wDynamicOAMBuffer+$24                                ; $47A6: $11 $54 $C0
     ldh  a, [hIsGBC]                              ; $47A9: $F0 $FE
     and  a                                        ; $47AB: $A7
     jr   z, jr_017_47B1                           ; $47AC: $28 $03
 
-    ld   de, $C024                                ; $47AE: $11 $24 $C0
+    ld   de, wLinkOAMBuffer+$24                                ; $47AE: $11 $24 $C0
 
 jr_017_47B1:
     ld   a, $55                                   ; $47B1: $3E $55
@@ -542,12 +542,12 @@ jr_017_47B1:
     ld   hl, hScratch1                            ; $47B6: $21 $D8 $FF
     inc  [hl]                                     ; $47B9: $34
     pop  hl                                       ; $47BA: $E1
-    ld   de, $C078                                ; $47BB: $11 $78 $C0
+    ld   de, wDynamicOAMBuffer+$48                                ; $47BB: $11 $78 $C0
     ldh  a, [hIsGBC]                              ; $47BE: $F0 $FE
     and  a                                        ; $47C0: $A7
     jr   z, jr_017_47C6                           ; $47C1: $28 $03
 
-    ld   de, $C048                                ; $47C3: $11 $48 $C0
+    ld   de, wDynamicOAMBuffer+$18                                ; $47C3: $11 $48 $C0
 
 jr_017_47C6:
     ld   a, $5D                                   ; $47C6: $3E $5D
@@ -767,7 +767,7 @@ ApplyWindFishVfx::
     ld   [wTransitionGfxFrameCount], a            ; $48FD: $EA $80 $C1
     ld   a, [$D005]                               ; $4900: $FA $05 $D0
     ldh  [hScratch1], a                           ; $4903: $E0 $D8
-    ld   hl, $C17C                                ; $4905: $21 $7C $C1
+    ld   hl, wC17C                                ; $4905: $21 $7C $C1
     xor  a                                        ; $4908: $AF
     ld   [hl+], a                                 ; $4909: $22
     ld   [hl+], a                                 ; $490A: $22
@@ -784,24 +784,24 @@ jr_017_4911:
     ld   d, $00                                   ; $4917: $16 $00
 
 jr_017_4919:
-    ld   a, [$C17E]                               ; $4919: $FA $7E $C1
+    ld   a, [wC17E]                               ; $4919: $FA $7E $C1
     inc  a                                        ; $491C: $3C
-    ld   [$C17E], a                               ; $491D: $EA $7E $C1
+    ld   [wC17E], a                               ; $491D: $EA $7E $C1
     and  $01                                      ; $4920: $E6 $01
     jr   nz, jr_017_4919                          ; $4922: $20 $F5
 
-    ld   a, [$C17C]                               ; $4924: $FA $7C $C1
+    ld   a, [wC17C]                               ; $4924: $FA $7C $C1
     add  $01                                      ; $4927: $C6 $01
-    ld   [$C17C], a                               ; $4929: $EA $7C $C1
-    ld   a, [$C17D]                               ; $492C: $FA $7D $C1
+    ld   [wC17C], a                               ; $4929: $EA $7C $C1
+    ld   a, [wC17D]                               ; $492C: $FA $7D $C1
     adc  $00                                      ; $492F: $CE $00
-    ld   [$C17D], a                               ; $4931: $EA $7D $C1
-    ld   a, [$C17C]                               ; $4934: $FA $7C $C1
+    ld   [wC17D], a                               ; $4931: $EA $7D $C1
+    ld   a, [wC17C]                               ; $4934: $FA $7C $C1
     cp   $50                                      ; $4937: $FE $50
     jr   z, jr_017_4960                           ; $4939: $28 $25
 
     ld   hl, wTransitionGfxFrameCount             ; $493B: $21 $80 $C1
-    ld   a, [$C17C]                               ; $493E: $FA $7C $C1
+    ld   a, [wC17C]                               ; $493E: $FA $7C $C1
     add  [hl]                                     ; $4941: $86
     and  $1F                                      ; $4942: $E6 $1F
     ld   hl, hScratch1                            ; $4944: $21 $D8 $FF
@@ -834,24 +834,24 @@ jr_017_4964:
     ld   d, $00                                   ; $496A: $16 $00
 
 jr_017_496C:
-    ld   a, [$C17E]                               ; $496C: $FA $7E $C1
+    ld   a, [wC17E]                               ; $496C: $FA $7E $C1
     inc  a                                        ; $496F: $3C
-    ld   [$C17E], a                               ; $4970: $EA $7E $C1
+    ld   [wC17E], a                               ; $4970: $EA $7E $C1
     and  $01                                      ; $4973: $E6 $01
     jr   nz, jr_017_496C                          ; $4975: $20 $F5
 
-    ld   a, [$C17C]                               ; $4977: $FA $7C $C1
+    ld   a, [wC17C]                               ; $4977: $FA $7C $C1
     add  $01                                      ; $497A: $C6 $01
-    ld   [$C17C], a                               ; $497C: $EA $7C $C1
-    ld   a, [$C17D]                               ; $497F: $FA $7D $C1
+    ld   [wC17C], a                               ; $497C: $EA $7C $C1
+    ld   a, [wC17D]                               ; $497F: $FA $7D $C1
     adc  $00                                      ; $4982: $CE $00
-    ld   [$C17D], a                               ; $4984: $EA $7D $C1
-    ld   a, [$C17C]                               ; $4987: $FA $7C $C1
+    ld   [wC17D], a                               ; $4984: $EA $7D $C1
+    ld   a, [wC17C]                               ; $4987: $FA $7C $C1
     cp   $60                                      ; $498A: $FE $60
     jr   z, jr_017_49B3                           ; $498C: $28 $25
 
     ld   hl, wTransitionGfxFrameCount             ; $498E: $21 $80 $C1
-    ld   a, [$C17C]                               ; $4991: $FA $7C $C1
+    ld   a, [wC17C]                               ; $4991: $FA $7C $C1
     add  [hl]                                     ; $4994: $86
     and  $1F                                      ; $4995: $E6 $1F
     ld   hl, hScratch1                            ; $4997: $21 $D8 $FF
@@ -6208,7 +6208,7 @@ Data_017_7B91::
     db   $1E, $1E, $1E, $2E, $2E, $3E, $2E, $2E
 
 func_017_7B99::
-    ld   de, $C090                                ; $7B99: $11 $90 $C0
+    ld   de, wDynamicOAMBuffer+$60                                ; $7B99: $11 $90 $C0
     push bc                                       ; $7B9C: $C5
     ldh  a, [hFrameCounter]                       ; $7B9D: $F0 $E7
     and  $01                                      ; $7B9F: $E6 $01
@@ -6444,7 +6444,7 @@ func_017_7D34::
     add  hl, de                                   ; $7D40: $19
     push hl                                       ; $7D41: $E5
     pop  de                                       ; $7D42: $D1
-    ld   hl, $C004                                ; $7D43: $21 $04 $C0
+    ld   hl, wLinkOAMBuffer+4                                ; $7D43: $21 $04 $C0
     ldh  a, [hLinkPositionY]                      ; $7D46: $F0 $99
     ld   [hl+], a                                 ; $7D48: $22
     ld   a, [wScreenShakeHorizontal]              ; $7D49: $FA $55 $C1
@@ -6513,13 +6513,13 @@ jr_017_7D8B:
     ld   hl, Data_017_7D7A                        ; $7D94: $21 $7A $7D
     add  hl, de                                   ; $7D97: $19
     ld   a, [hl]                                  ; $7D98: $7E
-    ld   [$C018], a                               ; $7D99: $EA $18 $C0
+    ld   [wLinkOAMBuffer+$18], a                               ; $7D99: $EA $18 $C0
     ld   a, $97                                   ; $7D9C: $3E $97
-    ld   [$C019], a                               ; $7D9E: $EA $19 $C0
+    ld   [wLinkOAMBuffer+$19], a                               ; $7D9E: $EA $19 $C0
     ld   a, $A2                                   ; $7DA1: $3E $A2
-    ld   [$C01A], a                               ; $7DA3: $EA $1A $C0
+    ld   [wLinkOAMBuffer+$1A], a                               ; $7DA3: $EA $1A $C0
     ld   a, $42                                   ; $7DA6: $3E $42
-    ld   [$C01B], a                               ; $7DA8: $EA $1B $C0
+    ld   [wLinkOAMBuffer+$1B], a                               ; $7DA8: $EA $1B $C0
     ret                                           ; $7DAB: $C9
 
 jr_017_7DAC:
@@ -6530,11 +6530,11 @@ jr_017_7DAC:
     sub  [hl]                                     ; $7DB4: $96
     ld   [wLinkOAMBuffer], a                      ; $7DB5: $EA $00 $C0
     ld   a, $97                                   ; $7DB8: $3E $97
-    ld   [$C001], a                               ; $7DBA: $EA $01 $C0
+    ld   [wLinkOAMBuffer+1], a                               ; $7DBA: $EA $01 $C0
     ld   a, $FE                                   ; $7DBD: $3E $FE
-    ld   [$C002], a                               ; $7DBF: $EA $02 $C0
+    ld   [wLinkOAMBuffer+2], a                               ; $7DBF: $EA $02 $C0
     ld   a, $40                                   ; $7DC2: $3E $40
-    ld   [$C003], a                               ; $7DC4: $EA $03 $C0
+    ld   [wLinkOAMBuffer+3], a                               ; $7DC4: $EA $03 $C0
     ret                                           ; $7DC7: $C9
 
 Data_017_7DC8::
@@ -6560,7 +6560,7 @@ jr_017_7DD6:
     ld   hl, Data_017_7DC8                        ; $7DDF: $21 $C8 $7D
     add  hl, de                                   ; $7DE2: $19
     ld   a, [hl]                                  ; $7DE3: $7E
-    ld   [$C018], a                               ; $7DE4: $EA $18 $C0
+    ld   [wLinkOAMBuffer+$18], a                               ; $7DE4: $EA $18 $C0
     ld   e, $00                                   ; $7DE7: $1E $00
     ld   a, [wDialogAskSelectionIndex]            ; $7DE9: $FA $77 $C1
     and  $01                                      ; $7DEC: $E6 $01
@@ -6572,11 +6572,11 @@ jr_017_7DF1:
     ld   hl, Data_017_7DCA                        ; $7DF1: $21 $CA $7D
     add  hl, de                                   ; $7DF4: $19
     ld   a, [hl]                                  ; $7DF5: $7E
-    ld   [$C019], a                               ; $7DF6: $EA $19 $C0
+    ld   [wLinkOAMBuffer+$19], a                               ; $7DF6: $EA $19 $C0
     ld   a, $3E                                   ; $7DF9: $3E $3E
-    ld   [$C01A], a                               ; $7DFB: $EA $1A $C0
+    ld   [wLinkOAMBuffer+$1A], a                               ; $7DFB: $EA $1A $C0
     ld   a, $00                                   ; $7DFE: $3E $00
-    ld   [$C01B], a                               ; $7E00: $EA $1B $C0
+    ld   [wLinkOAMBuffer+$1B], a                               ; $7E00: $EA $1B $C0
     ret                                           ; $7E03: $C9
 
 jr_017_7E04:
@@ -6597,13 +6597,13 @@ jr_017_7E1A:
     ld   hl, Data_017_7DCA                        ; $7E1A: $21 $CA $7D
     add  hl, de                                   ; $7E1D: $19
     ld   a, [hl]                                  ; $7E1E: $7E
-    ld   [$C001], a                               ; $7E1F: $EA $01 $C0
+    ld   [wLinkOAMBuffer+1], a                               ; $7E1F: $EA $01 $C0
     ld   a, $9E                                   ; $7E22: $3E $9E
 
 jr_017_7E24:
-    ld   [$C002], a                               ; $7E24: $EA $02 $C0
+    ld   [wLinkOAMBuffer+2], a                               ; $7E24: $EA $02 $C0
     ld   a, $00                                   ; $7E27: $3E $00
-    ld   [$C003], a                               ; $7E29: $EA $03 $C0
+    ld   [wLinkOAMBuffer+3], a                               ; $7E29: $EA $03 $C0
     ret                                           ; $7E2C: $C9
 
 UpdateEntityPosWithSpeed_17::

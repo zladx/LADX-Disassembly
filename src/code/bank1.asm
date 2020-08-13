@@ -892,7 +892,7 @@ func_001_5A71::
     jp   nz, label_001_5B3F                       ; $5A81: $C2 $3F $5B
     ldh  a, [hPressedButtonsMask]                 ; $5A84: $F0 $CB
     ld   c, a                                     ; $5A86: $4F
-    ld   hl, $C182                                ; $5A87: $21 $82 $C1
+    ld   hl, wC182                                ; $5A87: $21 $82 $C1
     and  $0F                                      ; $5A8A: $E6 $0F
     jr   nz, jr_001_5A92                          ; $5A8C: $20 $04
     xor  a                                        ; $5A8E: $AF

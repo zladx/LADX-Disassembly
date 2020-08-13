@@ -604,10 +604,10 @@ IF __PATCH_0__
 ELSE
     jp   z, label_73E                             ; $06CE: $CA $3E $07
 ENDC
-    ld   a, [$C197]                               ; $06D1: $FA $97 $C1
+    ld   a, [wC197]                               ; $06D1: $FA $97 $C1
     ld   e, a                                     ; $06D4: $5F
     ld   d, $00                                   ; $06D5: $16 $00
-    ld   hl, $C193                                ; $06D7: $21 $93 $C1
+    ld   hl, wC193                                ; $06D7: $21 $93 $C1
     add  hl, de                                   ; $06DA: $19
     ld   a, [hl]                                  ; $06DB: $7E
     push af                                       ; $06DC: $F5
@@ -649,7 +649,7 @@ ENDC
     add  hl, bc                                   ; $071A: $09
     add  hl, de                                   ; $071B: $19
     push hl                                       ; $071C: $E5
-    ld   a, [$C197]                               ; $071D: $FA $97 $C1
+    ld   a, [wC197]                               ; $071D: $FA $97 $C1
     ld   d, a                                     ; $0720: $57
     ld   hl, vTiles0 + $400                       ; $0721: $21 $00 $84
     add  hl, bc                                   ; $0724: $09
@@ -680,7 +680,7 @@ label_73E::
     ld   a, [wC10D]                               ; $073E: $FA $0D $C1
     ld   e, a                                     ; $0741: $5F
     ld   d, $00                                   ; $0742: $16 $00
-    ld   hl, $C193                                ; $0744: $21 $93 $C1
+    ld   hl, wC193                                ; $0744: $21 $93 $C1
     add  hl, de                                   ; $0747: $19
     ld   a, [hl]                                  ; $0748: $7E
     push af                                       ; $0749: $F5

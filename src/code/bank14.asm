@@ -1319,7 +1319,7 @@ jr_014_541B:
     add  hl, bc                                   ; $543C: $09
     ld   [hl], a                                  ; $543D: $77
     ld   a, $0C                                   ; $543E: $3E $0C
-    ld   [$C19B], a                               ; $5440: $EA $9B $C1
+    ld   [wC19B], a                               ; $5440: $EA $9B $C1
 
 label_014_5443:
     ret                                           ; $5443: $C9
@@ -2150,9 +2150,9 @@ jr_014_58ED:
     ld   a, [hl]                                  ; $58EE: $7E
     ld   [wRoomEvent], a                          ; $58EF: $EA $8E $C1
     xor  a                                        ; $58F2: $AF
-    ld   [$C18A], a                               ; $58F3: $EA $8A $C1
-    ld   [$C18B], a                               ; $58F6: $EA $8B $C1
-    ld   [$C190], a                               ; $58F9: $EA $90 $C1
+    ld   [wC18A], a                               ; $58F3: $EA $8A $C1
+    ld   [wC18B], a                               ; $58F6: $EA $8B $C1
+    ld   [wC190], a                               ; $58F9: $EA $90 $C1
     ld   [wRoomEventEffectExecuted], a            ; $58FC: $EA $8F $C1
     ret                                           ; $58FF: $C9
 

@@ -5,7 +5,7 @@ HookshotHitEntityHandler::
     ld   hl, wActiveProjectileCount               ; $69B2: $21 $4D $C1
     inc  [hl]                                     ; $69B5: $34
     ld   a, $0A                                   ; $69B6: $3E $0A
-    ld   [$C19E], a                               ; $69B8: $EA $9E $C1
+    ld   [wC19E], a                               ; $69B8: $EA $9E $C1
     call func_003_75A2                            ; $69BB: $CD $A2 $75
     ldh  a, [hFrameCounter]                       ; $69BE: $F0 $E7
     rra                                           ; $69C0: $1F

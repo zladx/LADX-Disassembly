@@ -352,7 +352,7 @@ DialogLetterAnimationEndHandler::
     ld   hl, wRequests                            ; $24EE: $21 $00 $D6
     add  hl, de                                   ; $24F1: $19
     ldi  [hl], a                                  ; $24F2: $22
-    ld   [$C175], a                               ; $24F3: $EA $75 $C1
+    ld   [wC175], a                               ; $24F3: $EA $75 $C1
     push hl                                       ; $24F6: $E5
     ld   hl, Data_01C_4601                        ; $24F7: $21 $01 $46
     add  hl, bc                                   ; $24FA: $09
@@ -371,7 +371,7 @@ DialogLetterAnimationEndHandler::
 
 .jp_250D
     ld   a, d                                     ; $250D: $7A
-    ld   [$C176], a                               ; $250E: $EA $76 $C1
+    ld   [wC176], a                               ; $250E: $EA $76 $C1
     pop  hl                                       ; $2511: $E1
     ldi  [hl], a                                  ; $2512: $22
     xor  a                                        ; $2513: $AF
@@ -604,9 +604,9 @@ ENDC
     and  a                                        ; $2648: $A7
     jr   z, .noDakuten                            ; $2649: $28 $18
     ld   e, a                                     ; $264B: $5F
-    ld   a, [$C175]                               ; $264C: $FA $75 $C1
+    ld   a, [wC175]                               ; $264C: $FA $75 $C1
     ldi  [hl], a                                  ; $264F: $22
-    ld   a, [$C176]                               ; $2650: $FA $76 $C1
+    ld   a, [wC176]                               ; $2650: $FA $76 $C1
     sub  a, $20                                   ; $2653: $D6 $20
     ldi  [hl], a                                  ; $2655: $22
     ld   a, $00                                   ; $2656: $3E $00

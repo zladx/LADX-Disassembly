@@ -2201,7 +2201,7 @@ func_018_50D2::
     ld   a, $04                                   ; $50D9: $3E $04
     ldh  [hLinkAnimationState], a                 ; $50DB: $E0 $9D
     xor  a                                        ; $50DD: $AF
-    ld   [$C19B], a                               ; $50DE: $EA $9B $C1
+    ld   [wC19B], a                               ; $50DE: $EA $9B $C1
     ret                                           ; $50E1: $C9
 
 label_018_50E2:
@@ -4381,7 +4381,7 @@ MarinAtTalTalHeightsState3Handler::
     ld   hl, wEntitiesDirectionTable              ; $5FA3: $21 $80 $C3
     add  hl, bc                                   ; $5FA6: $09
     ld   [hl], e                                  ; $5FA7: $73
-    ld   a, [$C1A4]                               ; $5FA8: $FA $A4 $C1
+    ld   a, [wC1A4]                               ; $5FA8: $FA $A4 $C1
     and  a                                        ; $5FAB: $A7
     jr   z, jr_018_5FBF                           ; $5FAC: $28 $11
 
@@ -4398,7 +4398,7 @@ MarinAtTalTalHeightsState3Handler::
 
 jr_018_5FBF:
     xor  a                                        ; $5FBF: $AF
-    ld   [$C19B], a                               ; $5FC0: $EA $9B $C1
+    ld   [wC19B], a                               ; $5FC0: $EA $9B $C1
     call GetEntityTransitionCountdown             ; $5FC3: $CD $05 $0C
     ld   [hl], $10                                ; $5FC6: $36 $10
     jp   IncrementEntityState                     ; $5FC8: $C3 $12 $3B
@@ -8256,7 +8256,7 @@ label_018_7A4B:
     ret  nz                                       ; $7A54: $C0
 
     ld   a, $09                                   ; $7A55: $3E $09
-    ld   [$C19E], a                               ; $7A57: $EA $9E $C1
+    ld   [wC19E], a                               ; $7A57: $EA $9E $C1
     jp   label_3B7B                               ; $7A5A: $C3 $7B $3B
 
 label_018_7A5D:

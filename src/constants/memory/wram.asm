@@ -571,8 +571,36 @@ wLinkGroundVfx::
   ds 1 ; C181
 
 ; Unlabeled
-wC18E::
-  ds 12 ; C182 - C18D
+wC182::
+  ds 1 ; C182
+
+; Unlabeled
+wC183::
+  ds 5 ; C183 - C187
+
+; Unlabeled
+wC188::
+  ds 1 ; C188
+
+; Unlabeled
+wC189::
+  ds 1 ; C189
+
+; Unlabeled
+wC18A::
+  ds 1 ; C18A
+
+; Unlabeled
+wC18B::
+  ds 1 ; C18B
+
+; Unlabeled
+wC18C::
+  ds 1 ; C18C
+
+; Unlabeled
+wC18D::
+  ds 1 ; C18D
 
 ; Event for the current room.
 ; A combination of trigger and effect values.
@@ -586,7 +614,43 @@ wRoomEventEffectExecuted::
 
 ; Unlabeled
 wC190::
-  ds 15 ; C190 - C19E
+  ds 1 ; C190
+
+; Unlabeled
+wC191::
+  ds 2 ; C191 - C192
+
+; Unlabeled
+wC193::
+  ds 4 ; C193 - C196
+
+; Unlabeled
+wC197::
+  ds 1 ; C197
+
+; Unlabeled
+wC198::
+  ds 1 ; C198
+
+; Unlabeled
+wC199::
+  ds 2 ; C199 - C19A
+
+; Unlabeled
+wC19B::
+  ds 1 ; C19B
+
+; Unlabeled
+wC19C::
+  ds 1 ; C19C
+
+; Unlabeled
+wC19D::
+  ds 1 ; C19D
+
+; Unlabeled
+wC19E::
+  ds 1 ; C19E
 
 ; Upper bit   = set if the dialog is displayed on bottom (instead of top)
 ; Lowest bits = the dialog state (see DIALOG_* constants for possible values)
@@ -599,11 +663,11 @@ wC1A0::
 
 ; Unlabeled
 wC1A2::
-  ds 1 ; C1A2
+  ds 2 ; C1A2 - w1A3
 
 ; Unlabeled
-wC1A3::
-  ds 2 ; C1A3 - C1A4
+wC1A4::
+  ds 1 ; C1A4
 
 ; Number of conveyor belts on the current screen
 wConveyorBeltsCount::

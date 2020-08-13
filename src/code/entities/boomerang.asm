@@ -24,7 +24,7 @@ BoomerangEntityHandler::
 
 jr_019_4481:
     ld   a, $08                                   ; $4481: $3E $08
-    ld   [$C19E], a                               ; $4483: $EA $9E $C1
+    ld   [wC19E], a                               ; $4483: $EA $9E $C1
     call label_3B7B                               ; $4486: $CD $7B $3B
 
 jr_019_4489:

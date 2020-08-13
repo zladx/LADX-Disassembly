@@ -69,7 +69,7 @@ LiftableStatueState0Handler::
     cp   $30                                      ; $4085: $FE $30
     jp   nc, label_019_411C                       ; $4087: $D2 $1C $41
 
-    ld   a, [$C19B]                               ; $408A: $FA $9B $C1
+    ld   a, [wC19B]                               ; $408A: $FA $9B $C1
     and  a                                        ; $408D: $A7
     jp   nz, label_019_411C                       ; $408E: $C2 $1C $41
 
@@ -357,7 +357,7 @@ jr_019_4226:
     ld   a, $06                                   ; $4262: $3E $06
     ld   [wLinkMotionState], a                    ; $4264: $EA $1C $C1
     call ResetSpinAttack                          ; $4267: $CD $AF $0C
-    ld   [$C198], a                               ; $426A: $EA $98 $C1
+    ld   [wC198], a                               ; $426A: $EA $98 $C1
     ld   a, $51                                   ; $426D: $3E $51
     ld   [wDBCB], a                               ; $426F: $EA $CB $DB
     ld   a, $0C                                   ; $4272: $3E $0C
@@ -366,7 +366,7 @@ jr_019_4226:
 
 jr_019_4279:
     ld   a, $01                                   ; $4279: $3E $01
-    ld   [$C19D], a                               ; $427B: $EA $9D $C1
+    ld   [wC19D], a                               ; $427B: $EA $9D $C1
     ldh  a, [hMapId]                              ; $427E: $F0 $F7
     ld   e, a                                     ; $4280: $5F
     ld   d, b                                     ; $4281: $50
@@ -714,7 +714,7 @@ jr_019_4562:
     call func_019_45B2                            ; $4562: $CD $B2 $45
     call func_019_7D3D                            ; $4565: $CD $3D $7D
     ld   a, $01                                   ; $4568: $3E $01
-    ld   [$C19E], a                               ; $456A: $EA $9E $C1
+    ld   [wC19E], a                               ; $456A: $EA $9E $C1
     call label_3B7B                               ; $456D: $CD $7B $3B
     call UpdateEntityPosWithSpeed_19              ; $4570: $CD $B8 $7D
     call label_3B2E                               ; $4573: $CD $2E $3B
@@ -3578,7 +3578,7 @@ jr_019_5922:
     cp   $24                                      ; $592F: $FE $24
     ret  nc                                       ; $5931: $D0
 
-    ld   a, [$C19B]                               ; $5932: $FA $9B $C1
+    ld   a, [wC19B]                               ; $5932: $FA $9B $C1
     and  a                                        ; $5935: $A7
     ret  nz                                       ; $5936: $C0
 
@@ -3819,7 +3819,7 @@ jr_019_5A9F:
     call CheckLinkCollisionWithEnemy_trampoline   ; $5AA2: $CD $5A $3B
     ret  nc                                       ; $5AA5: $D0
 
-    ld   a, [$C19B]                               ; $5AA6: $FA $9B $C1
+    ld   a, [wC19B]                               ; $5AA6: $FA $9B $C1
     and  a                                        ; $5AA9: $A7
     ret  nz                                       ; $5AAA: $C0
 

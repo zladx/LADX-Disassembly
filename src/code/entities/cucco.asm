@@ -113,7 +113,7 @@ jr_005_45BF:
     cp   $03                                      ; $45C6: $FE $03
     jr   z, jr_005_4611                           ; $45C8: $28 $47
 
-    ld   a, [$C19B]                               ; $45CA: $FA $9B $C1
+    ld   a, [wC19B]                               ; $45CA: $FA $9B $C1
     and  a                                        ; $45CD: $A7
     jr   nz, jr_005_4611                          ; $45CE: $20 $41
 

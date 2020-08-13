@@ -1164,7 +1164,7 @@ jr_004_547E:
     ld   a, $06                                   ; $54DB: $3E $06
     ld   [wLinkMotionState], a                    ; $54DD: $EA $1C $C1
     call ResetSpinAttack                          ; $54E0: $CD $AF $0C
-    ld   [$C198], a                               ; $54E3: $EA $98 $C1
+    ld   [wC198], a                               ; $54E3: $EA $98 $C1
     call GetEntityTransitionCountdown             ; $54E6: $CD $05 $0C
     ld   [hl], $40                                ; $54E9: $36 $40
     ld   a, $50                                   ; $54EB: $3E $50
@@ -4211,7 +4211,7 @@ jr_004_6884:
     ld   a, LINK_MOTION_FALLING_DOWN              ; $68BF: $3E $06
     ld   [wLinkMotionState], a                    ; $68C1: $EA $1C $C1
     call ResetSpinAttack                                ; $68C4: $CD $AF $0C
-    ld   [$C198], a                               ; $68C7: $EA $98 $C1
+    ld   [wC198], a                               ; $68C7: $EA $98 $C1
     ld   a, $FF                                   ; $68CA: $3E $FF
     ld   [wDBCB], a                               ; $68CC: $EA $CB $DB
     ld   a, WAVE_SFX_LINK_FALLS                   ; $68CF: $3E $0C

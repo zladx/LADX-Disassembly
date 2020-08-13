@@ -178,7 +178,7 @@ ClearMidbossEffectHandler::
 
 ; Open all the locked doors of the room
 OpenLockedDoorsEffectHandler::
-    ld   a, [$C190]                               ; $5E25: $FA $90 $C1
+    ld   a, [wC190]                               ; $5E25: $FA $90 $C1
     and  a                                        ; $5E28: $A7
     jr   nz, jr_002_5E2E                          ; $5E29: $20 $03
 
@@ -228,14 +228,14 @@ jr_002_5E63:
     ldh  [hJingle], a                               ; $5E68: $E0 $F2
 
 jr_002_5E6A:
-    ld   a, [$C190]                               ; $5E6A: $FA $90 $C1
+    ld   a, [wC190]                               ; $5E6A: $FA $90 $C1
     and  a                                        ; $5E6D: $A7
     ret  z                                        ; $5E6E: $C8
 
     xor  a                                        ; $5E6F: $AF
     ld   [wRoomEvent], a                          ; $5E70: $EA $8E $C1
     ld   a, $01                                   ; $5E73: $3E $01
-    ld   [$C18C], a                               ; $5E75: $EA $8C $C1
+    ld   [wC18C], a                               ; $5E75: $EA $8C $C1
     jp   EnqueueDoorUnlockedSfx                   ; $5E78: $C3 $20 $54
 
 func_002_5E7B::
@@ -254,8 +254,8 @@ func_002_5E7B::
     jr   nz, .return                              ; $5E8F: $20 $11
 
     ld   a, $01                                   ; $5E91: $3E $01
-    ld   [$C18D], a                               ; $5E93: $EA $8D $C1
-    ld   [$C190], a                               ; $5E96: $EA $90 $C1
+    ld   [wC18D], a                               ; $5E93: $EA $8D $C1
+    ld   [wC190], a                               ; $5E96: $EA $90 $C1
     ld   a, $04                                   ; $5E99: $3E $04
     ld   [wC111], a                               ; $5E9B: $EA $11 $C1
     ld   a, WAVE_SFX_BOSS_AGONY                        ; $5E9E: $3E $10

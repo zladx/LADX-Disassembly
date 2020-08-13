@@ -8,7 +8,7 @@ HookshotChainEntityHandler::
 
     ld   a, $02                                   ; $7BEA: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7BEC: $E0 $A1
-    ld   [$C1A4], a                               ; $7BEE: $EA $A4 $C1
+    ld   [wC1A4], a                               ; $7BEE: $EA $A4 $C1
     ld   [wC1C6], a                               ; $7BF1: $EA $C6 $C1
     ld   a, c                                     ; $7BF4: $79
     inc  a                                        ; $7BF5: $3C
@@ -86,7 +86,7 @@ jr_018_7C46:
 
 jr_018_7C54:
     ld   a, $06                                   ; $7C54: $3E $06
-    ld   [$C19E], a                               ; $7C56: $EA $9E $C1
+    ld   [wC19E], a                               ; $7C56: $EA $9E $C1
     call label_3B7B                               ; $7C59: $CD $7B $3B
     ld   hl, wEntitiesCollisionsTable             ; $7C5C: $21 $A0 $C2
     add  hl, bc                                   ; $7C5F: $09

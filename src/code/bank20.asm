@@ -1006,7 +1006,7 @@ func_20_4B1F::
     xor  a                                        ; $4B1F: $AF
     ld   [wHasPlacedBomb], a                      ; $4B20: $EA $4E $C1
     ld   [wActiveProjectileCount], a              ; $4B23: $EA $4D $C1
-    ld   [$C1A4], a                               ; $4B26: $EA $A4 $C1
+    ld   [wC1A4], a                               ; $4B26: $EA $A4 $C1
     ld   [wIsCarryingLiftedObject], a             ; $4B29: $EA $5C $C1
     ld   [$C1AE], a                               ; $4B2C: $EA $AE $C1
     ld   a, [wIsLinkPushing]                      ; $4B2F: $FA $44 $C1
@@ -1101,7 +1101,7 @@ label_020_4B9E:
     ld   a, e                                     ; $4BA3: $7B
     ld   [wC1C1], a                               ; $4BA4: $EA $C1 $C1
     ld   a, $0C                                   ; $4BA7: $3E $0C
-    ld   [$C19B], a                               ; $4BA9: $EA $9B $C1
+    ld   [wC19B], a                               ; $4BA9: $EA $9B $C1
     ld   hl, wEntitiesTransitionCountdownTable    ; $4BAC: $21 $E0 $C2
     add  hl, de                                   ; $4BAF: $19
     ld   [hl], $A0                                ; $4BB0: $36 $A0
@@ -1219,7 +1219,7 @@ func_020_4C47::
     ld   a, JINGLE_POWDER                         ; $4C47: $3E $05
     ldh  [hJingle], a                             ; $4C49: $E0 $F2
     ld   a, $0E                                   ; $4C4B: $3E $0E
-    ld   [$C19B], a                               ; $4C4D: $EA $9B $C1
+    ld   [wC19B], a                               ; $4C4D: $EA $9B $C1
     ld   a, [wMagicPowderCount]                   ; $4C50: $FA $4C $DB
     sub  $01                                      ; $4C53: $D6 $01
     daa                                           ; $4C55: $27
@@ -1283,7 +1283,7 @@ PlayBoomerangSfx.return::
 ResetRoomVariables::
     xor  a                                        ; $4CA3: $AF
     ldh  [hFreeWarpDataAddress], a                ; $4CA4: $E0 $E6
-    ld   [$C19C], a                               ; $4CA6: $EA $9C $C1
+    ld   [wC19C], a                               ; $4CA6: $EA $9C $C1
     ld   [$C504], a                               ; $4CA9: $EA $04 $C5
     ld   [wDBC8], a                               ; $4CAC: $EA $C8 $DB
     ld   [wTorchesCount], a                       ; $4CAF: $EA $C9 $DB
@@ -4295,7 +4295,7 @@ InventoryFadeOutHandler::
     cp   $64                                      ; @TODO ?? Map screen where you take the ghost after the house
     jr   nz, jr_020_6626                          ; $6616: $20 $0E
 
-    ld   hl, $C193                                ; $6618: $21 $93 $C1
+    ld   hl, wC193                                ; $6618: $21 $93 $C1
     ld   [hl], $A4                                ; $661B: $36 $A4
     inc  hl                                       ; $661D: $23
     ld   [hl], $E5                                ; $661E: $36 $E5

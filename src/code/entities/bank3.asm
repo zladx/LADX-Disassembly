@@ -44,7 +44,7 @@ Data_003_42F1::
     db   $00, $00, $04, $04, $94, $42, $00, $00   ; $43E1
     db   $94, $90, $12                            ; $43E9
 
-; Indexed by wEntitiesHealthGroup, 16 bytes per entry, sub indexed by damage type ($C19E)
+; Indexed by wEntitiesHealthGroup, 16 bytes per entry, sub indexed by damage type (wC19E)
 ; $00-$03) sword, sword level add +1, spin attack adds +1, pegasus boots adds +1, piece of power OR damage tunic adds +1 (tunic makes piece of power useless)
 ; $01) See above, and sword beam has a fixed value of $01
 ; $04) ??
@@ -115,7 +115,7 @@ Data_003_43EC::
     db   $01, $01, $01, $01, $01, $00, $00, $00, $00, $06, $00, $00, $00, $00, $00, $00   ; $4734
 
 
-; Indexed by entry from above table + damage type ($C19E) * 8
+; Indexed by entry from above table + damage type (wC19E) * 8
 ; Amount of damage done, unless >= $F0, then special action, and $00 is damage is ignored
 ; $FF = stun, $FE = burn, $FD = turn into fairy ($F0-$FC seem to do nothing)
 Data_003_473C::
@@ -1201,7 +1201,7 @@ ENDC
 .genieEnd
 
     ld   a, $0B                                   ; $4DD2: $3E $0B
-    ld   [$C19E], a                               ; $4DD4: $EA $9E $C1
+    ld   [wC19E], a                               ; $4DD4: $EA $9E $C1
     call func_003_75A2                            ; $4DD7: $CD $A2 $75
     ld   hl, wEntitiesSpeedXTable                 ; $4DDA: $21 $40 $C2
     add  hl, bc                                   ; $4DDD: $09
@@ -2082,7 +2082,7 @@ ENDC
     call RenderActiveEntitySpritesPair            ; $53B6: $CD $C0 $3B
     call func_003_7F78                            ; $53B9: $CD $78 $7F
     ld   a, $0B                                   ; $53BC: $3E $0B
-    ld   [$C19E], a                               ; $53BE: $EA $9E $C1
+    ld   [wC19E], a                               ; $53BE: $EA $9E $C1
     call func_003_75A2                            ; $53C1: $CD $A2 $75
     call func_003_60B3                            ; $53C4: $CD $B3 $60
     ld   hl, wEntitiesStatusTable                 ; $53C7: $21 $80 $C2
@@ -5576,7 +5576,7 @@ func_003_68F8::
     jr   c, .return                               ; $696C: $38 $32
 
     xor  a                                        ; $696E: $AF
-    ld   [$C19B], a                               ; $696F: $EA $9B $C1
+    ld   [wC19B], a                               ; $696F: $EA $9B $C1
     ld   hl, wEntitiesPosXTable                         ; $6972: $21 $00 $C2
     add  hl, de                                   ; $6975: $19
     ldh  a, [hSwordIntersectedAreaX]              ; $6976: $F0 $CE
@@ -5689,7 +5689,7 @@ jr_003_6A96:
     ld   de, Data_003_6BC6                        ; $6ABC: $11 $C6 $6B
     call RenderActiveEntitySpritesPair            ; $6ABF: $CD $C0 $3B
     ld   a, $0C                                   ; $6AC2: $3E $0C
-    ld   [$C19E], a                               ; $6AC4: $EA $9E $C1
+    ld   [wC19E], a                               ; $6AC4: $EA $9E $C1
     call func_003_75A2                            ; $6AC7: $CD $A2 $75
     jr   jr_003_6ADA                              ; $6ACA: $18 $0E
 
@@ -7006,7 +7006,7 @@ jr_003_71AE:
 
 jr_003_71BC:
     dec  a                                        ; $71BC: $3D
-    ld   [$C19E], a                               ; $71BD: $EA $9E $C1
+    ld   [wC19E], a                               ; $71BD: $EA $9E $C1
 
 label_003_71C0:
     ld   hl, wEntitiesHealthGroup                 ; $71C0: $21 $D0 $C4
@@ -7023,13 +7023,13 @@ label_003_71C0:
     rl   d                                        ; $71D4: $CB $12
     ld   hl, Data_003_43EC                        ; $71D6: $21 $EC $43
     add  hl, de                                   ; $71D9: $19
-    ld   a, [$C19E]                               ; $71DA: $FA $9E $C1
+    ld   a, [wC19E]                               ; $71DA: $FA $9E $C1
     ld   e, a                                     ; $71DD: $5F
     ld   d, b                                     ; $71DE: $50
     add  hl, de                                   ; $71DF: $19
     ld   e, [hl]                                  ; $71E0: $5E
     push de                                       ; $71E1: $D5
-    ld   a, [$C19E]                               ; $71E2: $FA $9E $C1
+    ld   a, [wC19E]                               ; $71E2: $FA $9E $C1
     rla                                           ; $71E5: $17
     rla                                           ; $71E6: $17
     rla                                           ; $71E7: $17
@@ -8166,7 +8166,7 @@ jr_003_77DD:
     jr   nc, jr_003_7834                          ; $7817: $30 $1B
 
     ld   a, $07                                   ; $7819: $3E $07
-    ld   [$C19E], a                               ; $781B: $EA $9E $C1
+    ld   [wC19E], a                               ; $781B: $EA $9E $C1
     call func_003_77A7                            ; $781E: $CD $A7 $77
     ld   a, $30                                   ; $7821: $3E $30
     call func_003_783B                            ; $7823: $CD $3B $78

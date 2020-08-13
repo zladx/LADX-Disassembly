@@ -832,8 +832,8 @@ MarkTriggerAsResolved::
     ld   [wRoomEventEffectExecuted], a            ; $0C6B: $EA $8F $C1
     ld   [$C5A6], a                               ; $0C6E: $EA $A6 $C5
 
-    ; If $C19D == 0…
-    ld   a, [$C19D]                               ; $0C71: $FA $9D $C1
+    ; If wC19D == 0…
+    ld   a, [wC19D]                               ; $0C71: $FA $9D $C1
     and  a                                        ; $0C74: $A7
     jr   nz, .return                              ; $0C75: $20 $04
     ; play puzzle solved jingle
@@ -1189,7 +1189,7 @@ LoadRoomTiles::
 .label_DFD
     add  hl, de                                   ; $0DFD: $19
     ld   d, $00                                   ; $0DFE: $16 $00
-    ld   bc, $C193                                ; $0E00: $01 $93 $C1
+    ld   bc, wC193                                ; $0E00: $01 $93 $C1
 
     ; ------------------------------------------------------------
     ;
@@ -1220,7 +1220,7 @@ LoadRoomTiles::
     inc  a                                        ; $0E1E: $3C
     ldh  [hScratch0], a                           ; $0E1F: $E0 $D7
     ld   a, d                                     ; $0E21: $7A
-    ld   [$C197], a                               ; $0E22: $EA $97 $C1
+    ld   [wC197], a                               ; $0E22: $EA $97 $C1
     ld   a, $01                                   ; $0E25: $3E $01
     ldh  [hNeedsUpdatingEnnemiesTiles], a         ; $0E27: $E0 $91
 
@@ -1723,7 +1723,7 @@ CheckItemsToUse::
     ld   a, [$C50A]                               ; $1177: $FA $0A $C5
     ld   hl, wC167                                ; $117A: $21 $67 $C1
     or   [hl]                                     ; $117D: $B6
-    ld   hl, $C1A4                                ; $117E: $21 $A4 $C1
+    ld   hl, wC1A4                                ; $117E: $21 $A4 $C1
     or   [hl]                                     ; $1181: $B6
     ret  nz                                       ; $1182: $C0
 
@@ -1948,14 +1948,14 @@ UseItem::
 
     ; Use Magic Rod
     ld   hl, wSwordAnimationState                 ; $12D8: $21 $37 $C1
-    ld   a, [$C19B]                               ; $12DB: $FA $9B $C1
+    ld   a, [wC19B]                               ; $12DB: $FA $9B $C1
     or   [hl]                                     ; $12DE: $B6
     jr   nz, .return                              ; $12DF: $20 $0C
     ld   a, [wActiveProjectileCount]              ; $12E1: $FA $4D $C1
     cp   $02                                      ; $12E4: $FE $02
     jr   nc, .return                              ; $12E6: $30 $05
     ld   a, $8E                                   ; $12E8: $3E $8E
-    ld   [$C19B], a                               ; $12EA: $EA $9B $C1
+    ld   [wC19B], a                               ; $12EA: $EA $9B $C1
 
 .return
     ret                                           ; $12ED: $C9
@@ -1997,7 +1997,7 @@ ENDC
     ret                                           ; $1318: $C9
 
 UseHookshot::
-    ld   a, [$C1A4]                               ; $1319: $FA $A4 $C1
+    ld   a, [wC1A4]                               ; $1319: $FA $A4 $C1
     and  a                                        ; $131C: $A7
     ret  nz                                       ; $131D: $C0
     jp   FireHookshot                             ; $131E: $C3 $54 $42
@@ -2177,7 +2177,7 @@ SpawnPlayerProjectile::
     ret  c                                        ; $1432: $D8
 
     ld   a, $0C                                   ; $1433: $3E $0C
-    ld   [$C19B], a                               ; $1435: $EA $9B $C1
+    ld   [wC19B], a                               ; $1435: $EA $9B $C1
     push bc                                       ; $1438: $C5
     ldh  a, [hLinkDirection]                      ; $1439: $F0 $9E
     ld   c, a                                     ; $143B: $4F
@@ -2232,7 +2232,7 @@ SpawnPlayerProjectile::
     ret                                           ; $148C: $C9
 
 UseMagicPowder::
-    ld   a, [$C19B]                               ; $148D: $FA $9B $C1
+    ld   a, [wC19B]                               ; $148D: $FA $9B $C1
     and  a                                        ; $1490: $A7
     ret  nz                                       ; $1491: $C0
     ld   a, [wHasToadstool]                       ; $1492: $FA $4B $DB
@@ -2366,7 +2366,7 @@ label_1562::
     ld   a, ENTITY_SWORD_BEAM                     ; $1572: $3E $DF
     call SpawnPlayerProjectile                    ; $1574: $CD $2F $14
     xor  a                                        ; $1577: $AF
-    ld   [$C19B], a                               ; $1578: $EA $9B $C1
+    ld   [wC19B], a                               ; $1578: $EA $9B $C1
     ret                                           ; $157B: $C9
 
 func_157C::
@@ -2518,7 +2518,7 @@ label_1653::
     call SpawnPlayerProjectile                    ; $1655: $CD $2F $14
     jr   c, .dropRandomItem                       ; $1658: $38 $22
     xor  a                                        ; $165A: $AF
-    ld   [$C19B], a                               ; $165B: $EA $9B $C1
+    ld   [wC19B], a                               ; $165B: $EA $9B $C1
     ld   hl, wEntitiesPosXTable                   ; $165E: $21 $00 $C2
     add  hl, de                                   ; $1661: $19
     ldh  a, [hSwordIntersectedAreaX]              ; $1662: $F0 $CE
@@ -2759,12 +2759,12 @@ ApplyLinkMotionState::
     jp   func_1819                                ; $17D8: $C3 $19 $18
 
 .label_17DB
-    ld   a, [$C19B]                               ; $17DB: $FA $9B $C1
+    ld   a, [wC19B]                               ; $17DB: $FA $9B $C1
     push af                                       ; $17DE: $F5
     bit  7, a                                     ; $17DF: $CB $7F
     jp   z, .magicRodEnd                          ; $17E1: $CA $14 $18
     callsw label_002_5310                         ; $17E4: $3E $02 $CD $0C $08 $CD $10 $53
-    ld   a, [$C19B]                               ; $17EC: $FA $9B $C1
+    ld   a, [wC19B]                               ; $17EC: $FA $9B $C1
     and  $7F                                      ; $17EF: $E6 $7F
     cp   $0C                                      ; $17F1: $FE $0C
     jr   nz, .magicRodEnd                         ; $17F3: $20 $1F
@@ -2782,7 +2782,7 @@ ApplyLinkMotionState::
 .magicRodEnd
 
     pop  af                                       ; $1814: $F1
-    ld   [$C19B], a                               ; $1815: $EA $9B $C1
+    ld   [wC19B], a                               ; $1815: $EA $9B $C1
     ret                                           ; $1818: $C9
 
 func_1819::
@@ -3083,7 +3083,7 @@ LinkMotionMapFadeInHandler::
     xor  a                                        ; $19E7: $AF
     ld   [wD474], a                               ; $19E8: $EA $74 $D4
     ld   a, $30                                   ; $19EB: $3E $30
-    ld   [$C180], a                               ; $19ED: $EA $80 $C1
+    ld   [wTransitionGfxFrameCount], a                               ; $19ED: $EA $80 $C1
     ld   a, TRANSITION_GFX_MANBO_OUT              ; $19F0: $3E $03
     ld   [wTransitionGfx], a                      ; $19F2: $EA $7F $C1
     ld   a, $04                                   ; $19F5: $3E $04
@@ -5110,7 +5110,7 @@ LoadTileset9::
     ; Copy a row of 16 tiles
 .copyOAMTilesRow
     ldh  [hScratch0], a                           ; $2E85: $E0 $D7
-    ld   hl, $C193                                ; $2E87: $21 $93 $C1
+    ld   hl, wC193                                ; $2E87: $21 $93 $C1
     ld   e, a                                     ; $2E8A: $5F
     ld   d, $00                                   ; $2E8B: $16 $00
     add  hl, de                                   ; $2E8D: $19
@@ -6210,11 +6210,11 @@ LoadRoomObject::
     jr   nz, .overworldDoorEnd                    ; $33A6: $20 $14
 
 .configureDoorWarpData
-    ld   a, [$C19C]                               ; $33A8: $FA $9C $C1
+    ld   a, [wC19C]                               ; $33A8: $FA $9C $C1
     ld   e, a                                     ; $33AB: $5F
     inc  a                                        ; $33AC: $3C
     and  $03                                      ; $33AD: $E6 $03
-    ld   [$C19C], a                               ; $33AF: $EA $9C $C1
+    ld   [wC19C], a                               ; $33AF: $EA $9C $C1
     ld   d, $00                                   ; $33B2: $16 $00
     ld   hl, wWarpPositions                       ; $33B4: $21 $16 $D4
     add  hl, de                                   ; $33B7: $19
@@ -6666,11 +6666,11 @@ Func_354B::
     ld   a, l                                     ; $3563: $7D
     sub  a, $11                                   ; $3564: $D6 $11
     push af                                       ; $3566: $F5
-    ld   a, [$C19C]                               ; $3567: $FA $9C $C1
+    ld   a, [wC19C]                               ; $3567: $FA $9C $C1
     ld   e, a                                     ; $356A: $5F
     inc  a                                        ; $356B: $3C
     and  $03                                      ; $356C: $E6 $03
-    ld   [$C19C], a                               ; $356E: $EA $9C $C1
+    ld   [wC19C], a                               ; $356E: $EA $9C $C1
     ld   d, $00                                   ; $3571: $16 $00
     ld   hl, wWarpPositions                       ; $3573: $21 $16 $D4
     add  hl, de                                   ; $3576: $19
@@ -6716,11 +6716,11 @@ Func_358B::
     ld   a, l                                     ; $35A3: $7D
     sub  a, $11                                   ; $35A4: $D6 $11
     push af                                       ; $35A6: $F5
-    ld   a, [$C19C]                               ; $35A7: $FA $9C $C1
+    ld   a, [wC19C]                               ; $35A7: $FA $9C $C1
     ld   e, a                                     ; $35AA: $5F
     inc  a                                        ; $35AB: $3C
     and  $03                                      ; $35AC: $E6 $03
-    ld   [$C19C], a                               ; $35AE: $EA $9C $C1
+    ld   [wC19C], a                               ; $35AE: $EA $9C $C1
     ld   d, $00                                   ; $35B1: $16 $00
     ld   hl, wWarpPositions                       ; $35B3: $21 $16 $D4
     add  hl, de                                   ; $35B6: $19
@@ -6844,37 +6844,37 @@ LoadObject_KeyDoorRight::
 LoadObject_ClosedDoorTop::
     ld   e, $04                                   ; $3664: $1E $04
     call func_373F                                ; $3666: $CD $3F $37
-    ld   a, [$C18A]                               ; $3669: $FA $8A $C1
+    ld   a, [wC18A]                               ; $3669: $FA $8A $C1
     or   $01                                      ; $366C: $F6 $01
-    ld   [$C18A], a                               ; $366E: $EA $8A $C1
-    ld   [$C18B], a                               ; $3671: $EA $8B $C1
+    ld   [wC18A], a                               ; $366E: $EA $8A $C1
+    ld   [wC18B], a                               ; $3671: $EA $8B $C1
     jp   LoadObject_OpenDoorTop                   ; $3674: $C3 $B2 $36
 
 LoadObject_ClosedDoorBottom::
     ld   e, $05                                   ; $3677: $1E $05
     call func_373F                                ; $3679: $CD $3F $37
-    ld   a, [$C18A]                               ; $367C: $FA $8A $C1
+    ld   a, [wC18A]                               ; $367C: $FA $8A $C1
     or   $02                                      ; $367F: $F6 $02
-    ld   [$C18A], a                               ; $3681: $EA $8A $C1
-    ld   [$C18B], a                               ; $3684: $EA $8B $C1
+    ld   [wC18A], a                               ; $3681: $EA $8A $C1
+    ld   [wC18B], a                               ; $3684: $EA $8B $C1
     jp   LoadObject_OpenDoorBottom                ; $3687: $C3 $EA $36
 
 LoadObject_ClosedDoorLeft::
     ld   e, $06                                   ; $368A: $1E $06
     call func_373F                                ; $368C: $CD $3F $37
-    ld   a, [$C18A]                               ; $368F: $FA $8A $C1
+    ld   a, [wC18A]                               ; $368F: $FA $8A $C1
     or   $04                                      ; $3692: $F6 $04
-    ld   [$C18A], a                               ; $3694: $EA $8A $C1
-    ld   [$C18B], a                               ; $3697: $EA $8B $C1
+    ld   [wC18A], a                               ; $3694: $EA $8A $C1
+    ld   [wC18B], a                               ; $3697: $EA $8B $C1
     jp   LoadObject_OpenDoorLeft                  ; $369A: $C3 $FE $36
 
 LoadObject_ClosedDoorRight::
     ld   e, $07                                   ; $369D: $1E $07
     call func_373F                                ; $369F: $CD $3F $37
-    ld   a, [$C18A]                               ; $36A2: $FA $8A $C1
+    ld   a, [wC18A]                               ; $36A2: $FA $8A $C1
     or   $08                                      ; $36A5: $F6 $08
-    ld   [$C18A], a                               ; $36A7: $EA $8A $C1
-    ld   [$C18B], a                               ; $36AA: $EA $8B $C1
+    ld   [wC18A], a                               ; $36A7: $EA $8A $C1
+    ld   [wC18B], a                               ; $36AA: $EA $8B $C1
     jp   LoadObject_OpenDoorRight                 ; $36AD: $C3 $12 $37
 
 data_36B0::

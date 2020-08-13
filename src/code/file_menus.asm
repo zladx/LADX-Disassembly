@@ -751,7 +751,7 @@ jr_001_4BF7::
     and  $03                                      ; $4C01: $E6 $03
     jr   nz, jr_001_4C21                          ; $4C03: $20 $1C
     ldh  a, [hPressedButtonsMask]                 ; $4C05: $F0 $CB
-    ld   hl, $C182                                ; $4C07: $21 $82 $C1
+    ld   hl, wC182                                ; $4C07: $21 $82 $C1
     and  $0F                                      ; $4C0A: $E6 $0F
     jr   nz, jr_001_4C12                          ; $4C0C: $20 $04
     xor  a                                        ; $4C0E: $AF

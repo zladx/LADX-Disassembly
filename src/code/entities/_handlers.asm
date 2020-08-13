@@ -279,7 +279,7 @@ func_020_4303::
     ld   [wC10C], a                               ; $430D: $EA $0C $C1
     ldh  [hFFB2], a                               ; $4310: $E0 $B2
     ld   [wC117], a                               ; $4312: $EA $17 $C1
-    ld   [$C19D], a                               ; $4315: $EA $9D $C1
+    ld   [wC19D], a                               ; $4315: $EA $9D $C1
     ld   [wC147], a                               ; $4318: $EA $47 $C1
     ld   [wLiftedEntityType], a                   ; $431B: $EA $A8 $C5
     ld   [wD45E], a                               ; $431E: $EA $5E $D4

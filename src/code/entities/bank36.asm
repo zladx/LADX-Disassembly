@@ -2143,7 +2143,7 @@ jr_036_4CD5:
     ld   de, Data_036_4CB4                        ; $4CDE: $11 $B4 $4C
     call func_036_6C90                            ; $4CE1: $CD $90 $6C
     call label_3B39                               ; $4CE4: $CD $39 $3B
-    ld   a, [$C190]                               ; $4CE7: $FA $90 $C1
+    ld   a, [wC190]                               ; $4CE7: $FA $90 $C1
     and  a                                        ; $4CEA: $A7
     ret  z                                        ; $4CEB: $C8
 
@@ -3413,7 +3413,7 @@ AvalaunchState1Handler::
     ret                                           ; $5536: $C9
 
 func_036_5537::
-    ld   a, [$C190]                               ; $5537: $FA $90 $C1
+    ld   a, [wC190]                               ; $5537: $FA $90 $C1
     and  a                                        ; $553A: $A7
     ret  z                                        ; $553B: $C8
 
@@ -4527,7 +4527,7 @@ AvalaunchEntityHandler::
 
     call BossIntro                                ; $5C0A: $CD $E8 $3E
     call func_036_6A40                            ; $5C0D: $CD $40 $6A
-    ld   a, [$C190]                               ; $5C10: $FA $90 $C1
+    ld   a, [wC190]                               ; $5C10: $FA $90 $C1
     and  a                                        ; $5C13: $A7
     ret  z                                        ; $5C14: $C8
 
@@ -5896,7 +5896,7 @@ ColorGhoulBlueEntityHandler::
     call label_3B39                               ; $63DA: $CD $39 $3B
 
 jr_036_63DD:
-    ld   a, [$C190]                               ; $63DD: $FA $90 $C1
+    ld   a, [wC190]                               ; $63DD: $FA $90 $C1
     and  a                                        ; $63E0: $A7
     ret  z                                        ; $63E1: $C8
 

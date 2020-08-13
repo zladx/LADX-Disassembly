@@ -2010,9 +2010,9 @@ func_015_5064::
     ld   hl, Data_015_5058                        ; $506C: $21 $58 $50
     add  hl, de                                   ; $506F: $19
     ld   a, [hl+]                                 ; $5070: $2A
-    ld   [$C195], a                               ; $5071: $EA $95 $C1
+    ld   [wC193+2], a                               ; $5071: $EA $95 $C1
     ld   a, [hl]                                  ; $5074: $7E
-    ld   [$C196], a                               ; $5075: $EA $96 $C1
+    ld   [wC193+3], a                               ; $5075: $EA $96 $C1
     ld   a, $01                                   ; $5078: $3E $01
     ldh  [hNeedsUpdatingEnnemiesTiles], a         ; $507A: $E0 $91
     ld   [wNeedsUpdatingNPCTiles], a              ; $507C: $EA $0E $C1
@@ -2411,7 +2411,7 @@ func_015_52BB::
     add  hl, bc                                   ; $52DA: $09
     ld   [hl], $C0                                ; $52DB: $36 $C0
     ld   a, $02                                   ; $52DD: $3E $02
-    ld   [$C197], a                               ; $52DF: $EA $97 $C1
+    ld   [wC197], a                               ; $52DF: $EA $97 $C1
     inc  a                                        ; $52E2: $3C
     ld   [wC10D], a                               ; $52E3: $EA $0D $C1
     ld   a, $FF                                   ; $52E6: $3E $FF

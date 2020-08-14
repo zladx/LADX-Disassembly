@@ -1129,7 +1129,7 @@ wEntitiesUnknowTableH::
 
 ; Entities-specific private state?
 wEntitiesUnknowTableP::
-  ds $10 ; C440 - C440
+  ds $10 ; C440 - C44F
 
 ; Number of frame before a dropped item disappears
 wEntitiesDropTimerTable::

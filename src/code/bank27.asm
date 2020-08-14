@@ -150,7 +150,7 @@ Data_027_7367::
     db   $08, $00, $7D, $00, $08, $08, $7D, $20   ; $73BF
 
 func_027_73C7::
-    ld   hl, $C3B0                                ; $73C7: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable                                ; $73C7: $21 $B0 $C3
     add  hl, bc                                   ; $73CA
     ld   a, [hl]                                  ; $73CB
     sla  a                                        ; $73CC: $CB $27

@@ -4922,7 +4922,7 @@ jr_01F_650B:
     jp   hl                                       ; $6511: $E9
 
 jr_01F_6512:
-    ld   a, [$C50E]                               ; $6512: $FA $0E $C5
+    ld   a, [wC50E]                               ; $6512: $FA $0E $C5
     and  a                                        ; $6515: $A7
     ret  z                                        ; $6516: $C8
 
@@ -6174,7 +6174,7 @@ func_01F_6C97::
     jp   label_01F_79E9                           ; $6CA1: $C3 $E9 $79
 
 func_01F_6CA4::
-    ld   a, [$C50E]                               ; $6CA4: $FA $0E $C5
+    ld   a, [wC50E]                               ; $6CA4: $FA $0E $C5
     and  a                                        ; $6CA7: $A7
     jr   z, jr_01F_6CB1                           ; $6CA8: $28 $07
 

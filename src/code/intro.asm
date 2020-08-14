@@ -208,9 +208,9 @@ IntroSceneStage2Handler::
 
     ld   [wEntitiesStatusTable + $00], a          ; $6F63: $EA $80 $C2
     ld   [wEntitiesStatusTable + $01], a          ; $6F66: $EA $81 $C2
-    ld   [$C3B0], a                               ; $6F69: $EA $B0 $C3
-    ld   [$C3B1], a                               ; $6F6C: $EA $B1 $C3
-    ld   [$C3B2], a                               ; $6F6F: $EA $B2 $C3
+    ld   [wEntitiesSpriteVariantTable], a                               ; $6F69: $EA $B0 $C3
+    ld   [wEntitiesSpriteVariantTable+1], a                               ; $6F6C: $EA $B1 $C3
+    ld   [wEntitiesSpriteVariantTable+2], a                               ; $6F6F: $EA $B2 $C3
     ldh  [hActiveEntityFlipAttribute], a          ; $6F72: $E0 $ED
 
     ; Configure Link's ship entity
@@ -223,9 +223,9 @@ IntroSceneStage2Handler::
 
     xor  a                                        ; $6F83: $AF
     ld   [wEntitiesPhysicsFlagsTable], a          ; $6F84: $EA $40 $C3
-    ld   [$C341], a                               ; $6F87: $EA $41 $C3
-    ld   [$C342], a                               ; $6F8A: $EA $42 $C3
-    ld   [$C343], a                               ; $6F8D: $EA $43 $C3
+    ld   [wEntitiesPhysicsFlagsTable+1], a                               ; $6F87: $EA $41 $C3
+    ld   [wEntitiesPhysicsFlagsTable+2], a                               ; $6F8A: $EA $42 $C3
+    ld   [wEntitiesPhysicsFlagsTable+3], a                               ; $6F8D: $EA $43 $C3
     jp   IncrementGameplaySubtypeAndReturn        ; $6F90: $C3 $D6 $44
 
 Data_001_6F93::
@@ -1383,7 +1383,7 @@ IntroMarinState4::
     ld   a, $02                                   ; $778A: $3E $02
     call SetEntitySpriteVariant                   ; $778C: $CD $0C $3B
     ld   a, $00                                   ; $778F: $3E $00
-    ld   [$C3B1], a                               ; $7791: $EA $B1 $C3
+    ld   [wEntitiesSpriteVariantTable+1], a                               ; $7791: $EA $B1 $C3
     call GetEntityTransitionCountdown             ; $7794: $CD $05 $0C
     jr   z, .jr_779A                              ; $7797: $28 $01
     dec  [hl]                                     ; $7799: $35
@@ -1406,7 +1406,7 @@ IntroMarinState4::
     ld   a, $03                                   ; $77B2: $3E $03
     call SetEntitySpriteVariant                   ; $77B4: $CD $0C $3B
     ld   a, $01                                   ; $77B7: $3E $01
-    ld   [$C3B1], a                               ; $77B9: $EA $B1 $C3
+    ld   [wEntitiesSpriteVariantTable+1], a                               ; $77B9: $EA $B1 $C3
 
 .return
     ret                                           ; $77BC: $C9
@@ -1423,7 +1423,7 @@ Data_001_77BD::
 
 RenderIntroSparkle::
     xor  a                                        ; $77DD: $AF
-    ld   [$C3C1], a                               ; $77DE: $EA $C1 $C3
+    ld   [wC3C1], a                               ; $77DE: $EA $C1 $C3
 
 jr_001_77E1::
     call GetEntityTransitionCountdown             ; $77E1: $CD $05 $0C

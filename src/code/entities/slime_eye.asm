@@ -175,7 +175,7 @@ SlimeEyeState3Handler::
     call func_004_4DB5                            ; $4A7E: $CD $B5 $4D
     call func_004_7FA3                            ; $4A81: $CD $A3 $7F
     call DecrementEntityIgnoreHitsCountdown       ; $4A84: $CD $56 $0C
-    ld   hl, $C300                                ; $4A87: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table                                ; $4A87: $21 $00 $C3
     add  hl, bc                                   ; $4A8A: $09
     ld   a, [hl]                                  ; $4A8B: $7E
     and  a                                        ; $4A8C: $A7
@@ -230,7 +230,7 @@ jr_004_4ACB:
     ld   hl, wEntitiesFlashCountdownTable         ; $4AD6: $21 $20 $C4
     add  hl, bc                                   ; $4AD9: $09
     ld   a, [hl]                                  ; $4ADA: $7E
-    ld   hl, $C300                                ; $4ADB: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table                                ; $4ADB: $21 $00 $C3
     add  hl, bc                                   ; $4ADE: $09
     or   [hl]                                     ; $4ADF: $B6
     jr   nz, jr_004_4AEF                          ; $4AE0: $20 $0D

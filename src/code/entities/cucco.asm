@@ -137,12 +137,12 @@ jr_005_45DF:
     jr   z, jr_005_4611                           ; $45EA: $28 $25
 
 jr_005_45EC:
-    ld   a, [$C3CF]                               ; $45EC: $FA $CF $C3
+    ld   a, [wC3CF]                               ; $45EC: $FA $CF $C3
     and  a                                        ; $45EF: $A7
     jr   nz, jr_005_4611                          ; $45F0: $20 $1F
 
     inc  a                                        ; $45F2: $3C
-    ld   [$C3CF], a                               ; $45F3: $EA $CF $C3
+    ld   [wC3CF], a                               ; $45F3: $EA $CF $C3
     ld   hl, wEntitiesStatusTable                 ; $45F6: $21 $80 $C2
     add  hl, bc                                   ; $45F9: $09
     ld   [hl], $07                                ; $45FA: $36 $07

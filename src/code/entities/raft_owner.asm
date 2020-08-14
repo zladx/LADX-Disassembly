@@ -252,7 +252,7 @@ func_005_54C3::
 
     ld   e, a                                     ; $54D4: $5F
     ld   d, b                                     ; $54D5: $50
-    ld   hl, $C39F                                ; $54D6: $21 $9F $C3
+    ld   hl, wEntitiesUnknowTableR+15                                ; $54D6: $21 $9F $C3
     add  hl, de                                   ; $54D9: $19
     ld   a, [hl]                                  ; $54DA: $7E
     cp   $03                                      ; $54DB: $FE $03

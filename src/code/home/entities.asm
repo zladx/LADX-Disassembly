@@ -85,7 +85,7 @@ AnimateEntities::
     ret  z                                        ; $39B3: $C8
 
     xor  a                                        ; $39B4: $AF
-    ld   [$C3C1], a                               ; $39B5: $EA $C1 $C3
+    ld   [wC3C1], a                               ; $39B5: $EA $C1 $C3
     ldh  a, [hMapId]                              ; $39B8: $F0 $F7
     cp   MAP_CAVE_B                               ; $39BA: $FE $0A
     ldh  a, [hFrameCounter]                       ; $39BC: $F0 $E7
@@ -169,7 +169,7 @@ AnimateEntity::
     ld   a, [hl]                                  ; $3A23: $7E
     ldh  [hActiveEntityState], a                  ; $3A24: $E0 $F0
 
-    ld   hl, $C3B0                                ; $3A26: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable                                ; $3A26: $21 $B0 $C3
     add  hl, bc                                   ; $3A29: $09
     ld   a, [hl]                                  ; $3A2A: $7E
     ldh  [hActiveEntitySpriteVariant], a          ; $3A2B: $E0 $F1
@@ -1035,7 +1035,7 @@ label_3E8E::
     ret                                           ; $3EAE: $C9
 
 label_3EAF::
-    ld   hl, $C3F0                                ; $3EAF: $21 $F0 $C3
+    ld   hl, wC3F0                                ; $3EAF: $21 $F0 $C3
     add  hl, bc                                   ; $3EB2: $09
     ld   a, [hl]                                  ; $3EB3: $7E
     bit  7, a                                     ; $3EB4: $CB $7F

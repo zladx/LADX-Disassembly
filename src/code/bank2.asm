@@ -43,8 +43,8 @@ UseOcarina::
     or   [hl]                                     ; $4206: $B6
     ret  nz                                       ; $4207: $C0
 
-    ld   [$C5A4], a                               ; $4208: $EA $A4 $C5
-    ld   [$C5A5], a                               ; $420B: $EA $A5 $C5
+    ld   [wC5A4], a                               ; $4208: $EA $A4 $C5
+    ld   [wC5A5], a                               ; $420B: $EA $A5 $C5
     call CopyLinkFinalPositionToPosition          ; $420E: $CD $BE $0C
     ld   a, [wOcarinaSongFlags]                   ; Do we have any songs available?
     and  $07                                      ;
@@ -118,7 +118,7 @@ ENDC
     ld   hl, wEntitiesTransitionCountdownTable    ; $4261: $21 $E0 $C2
     add  hl, de                                   ; $4264: $19
     ld   [hl], $2A                                ; $4265: $36 $2A
-    ld   hl, $C3B0                                ; $4267: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable                                ; $4267: $21 $B0 $C3
     add  hl, de                                   ; $426A: $19
     xor  a                                        ; $426B: $AF
     ld   [hl], a                                  ; $426C: $77
@@ -894,7 +894,7 @@ jr_002_47A3:
     cp   $01                                      ; $47A6: $FE $01
     jr   nz, jr_002_47E0                          ; $47A8: $20 $36
 
-    ld   a, [$C3CF]                               ; $47AA: $FA $CF $C3
+    ld   a, [wC3CF]                               ; $47AA: $FA $CF $C3
     ld   hl, wSwordAnimationState                 ; $47AD: $21 $37 $C1
     or   [hl]                                     ; $47B0: $B6
     jr   nz, jr_002_47E0                          ; $47B1: $20 $2D
@@ -1260,7 +1260,7 @@ ENDC
     ld   [wLinkPlayingOcarinaCountdown], a        ; $4A40: $EA $66 $C1
     ld   [wC167], a                               ; $4A43: $EA $67 $C1
     ld   a, $03                                   ; $4A46: $3E $03
-    ld   [$C5A3], a                               ; $4A48: $EA $A3 $C5
+    ld   [wC5A3], a                               ; $4A48: $EA $A3 $C5
     ld   a, [wD465]                               ; $4A4B: $FA $65 $D4
     cp   $47                                      ; $4A4E: $FE $47
     ret  z                                        ; $4A50: $C8
@@ -1280,7 +1280,7 @@ jr_002_4A53:
     ld   [wLinkPlayingOcarinaCountdown], a        ; $4A61: $EA $66 $C1
     ld   [wC167], a                               ; $4A64: $EA $67 $C1
     ld   a, $03                                   ; $4A67: $3E $03
-    ld   [$C5A3], a                               ; $4A69: $EA $A3 $C5
+    ld   [wC5A3], a                               ; $4A69: $EA $A3 $C5
 
 jr_002_4A6C:
     ld   a, [wD461]                               ; $4A6C: $FA $61 $D4
@@ -1346,20 +1346,20 @@ jr_002_4AD0:
     ret                                           ; $4AD0: $C9
 
 jr_002_4AD1:
-    ld   a, [$C5A4]                               ; $4AD1: $FA $A4 $C5
+    ld   a, [wC5A4]                               ; $4AD1: $FA $A4 $C5
     inc  a                                        ; $4AD4: $3C
-    ld   [$C5A4], a                               ; $4AD5: $EA $A4 $C5
+    ld   [wC5A4], a                               ; $4AD5: $EA $A4 $C5
     cp   $38                                      ; $4AD8: $FE $38
     jr   c, jr_002_4AE8                           ; $4ADA: $38 $0C
 
     xor  a                                        ; $4ADC: $AF
-    ld   [$C5A4], a                               ; $4ADD: $EA $A4 $C5
-    ld   a, [$C5A5]                               ; $4AE0: $FA $A5 $C5
+    ld   [wC5A4], a                               ; $4ADD: $EA $A4 $C5
+    ld   a, [wC5A5]                               ; $4AE0: $FA $A5 $C5
     xor  $01                                      ; $4AE3: $EE $01
-    ld   [$C5A5], a                               ; $4AE5: $EA $A5 $C5
+    ld   [wC5A5], a                               ; $4AE5: $EA $A5 $C5
 
 jr_002_4AE8:
-    ld   a, [$C5A5]                               ; $4AE8: $FA $A5 $C5
+    ld   a, [wC5A5]                               ; $4AE8: $FA $A5 $C5
     ld   e, $75                                   ; $4AEB: $1E $75
     and  a                                        ; $4AED: $A7
     jr   nz, jr_002_4AF1                          ; $4AEE: $20 $01
@@ -1376,7 +1376,7 @@ jr_002_4AF1:
     cp   $10                                      ; $4AFF: $FE $10
     ret  c                                        ; $4B01: $D8
 
-    ld   a, [$C5A4]                               ; $4B02: $FA $A4 $C5
+    ld   a, [wC5A4]                               ; $4B02: $FA $A4 $C5
     cp   $14                                      ; $4B05: $FE $14
     jr   nz, jr_002_4B40                          ; $4B07: $20 $37
 
@@ -1389,7 +1389,7 @@ jr_002_4AF1:
     add  hl, de                                   ; $4B15: $19
     sub  $08                                      ; $4B16: $D6 $08
     ld   [hl], a                                  ; $4B18: $77
-    ld   a, [$C5A5]                               ; $4B19: $FA $A5 $C5
+    ld   a, [wC5A5]                               ; $4B19: $FA $A5 $C5
     ld   c, a                                     ; $4B1C: $4F
     ld   b, d                                     ; $4B1D: $42
     ld   hl, Data_002_4A12                        ; $4B1E: $21 $12 $4A
@@ -3262,7 +3262,7 @@ RenderTranscientSwordBeam::
     ret  z                                        ; $55E1: $C8
 
     call func_002_58D0                            ; $55E2: $CD $D0 $58
-    ld   hl, $C590                                ; $55E5: $21 $90 $C5
+    ld   hl, wC590                                ; $55E5: $21 $90 $C5
     add  hl, bc                                   ; $55E8: $09
     ld   a, [hl]                                  ; $55E9: $7E
     rla                                           ; $55EA: $17
@@ -3510,7 +3510,7 @@ RenderTranscientMovingSparkle::
     cp   $0A                                      ; $5760: $FE $0A
     jr   c, jr_002_5780                           ; $5762: $38 $1C
 
-    ld   hl, $C590                                ; $5764: $21 $90 $C5
+    ld   hl, wC590                                ; $5764: $21 $90 $C5
     add  hl, bc                                   ; $5767: $09
     ld   e, [hl]                                  ; $5768: $5E
     ld   d, b                                     ; $5769: $50
@@ -3751,9 +3751,9 @@ label_002_58F5:
 
 jr_002_5904:
     ld   [wOAMNextAvailableSlot], a               ; $5904: $EA $C0 $C3
-    ld   a, [$C3C1]                               ; $5907: $FA $C1 $C3
+    ld   a, [wC3C1]                               ; $5907: $FA $C1 $C3
     add  e                                        ; $590A: $83
-    ld   [$C3C1], a                               ; $590B: $EA $C1 $C3
+    ld   [wC3C1], a                               ; $590B: $EA $C1 $C3
     cp   $60                                      ; $590E: $FE $60
     jr   c, jr_002_5925                           ; $5910: $38 $13
 
@@ -4633,7 +4633,7 @@ UpdateRupeesCount::
     or   [hl]                                     ; $6210: $B6
     ret  nz                                       ; $6211: $C0
 
-    ld   hl, $C3CE                                ; $6212: $21 $CE $C3
+    ld   hl, wC3CE                                ; $6212: $21 $CE $C3
     ld   a, [hl]                                  ; $6215: $7E
     and  a                                        ; $6216: $A7
     jr   z, .C3CENotZero                          ; $6217: $28 $02
@@ -5580,12 +5580,12 @@ jr_002_6B81:
     cp   $8A                                      ; $6B86: $FE $8A
     jr   nz, jr_002_6B99                          ; $6B88: $20 $0F
 
-    ld   a, [$C5A6]                               ; $6B8A: $FA $A6 $C5
+    ld   a, [wC5A6]                               ; $6B8A: $FA $A6 $C5
     and  a                                        ; $6B8D: $A7
     jr   nz, jr_002_6B99                          ; $6B8E: $20 $09
 
     inc  a                                        ; $6B90: $3C
-    ld   [$C5A6], a                               ; $6B91: $EA $A6 $C5
+    ld   [wC5A6], a                               ; $6B91: $EA $A6 $C5
     call_open_dialog $051                         ; $6B94
 
 jr_002_6B99:
@@ -6773,7 +6773,7 @@ jr_002_7213:
     xor  a                                        ; $7213: $AF
     ld   [$DB47], a                               ; $7214: $EA $47 $DB
     ld   a, $98                                   ; $7217: $3E $98
-    ld   [$C3C9], a                               ; $7219: $EA $C9 $C3
+    ld   [wC3C9], a                               ; $7219: $EA $C9 $C3
     call OpenDialogInTable1                       ; $721C: $CD $73 $23
     ld   a, [wIsOnLowHeath]                               ; $721F: $FA $63 $C1
     inc  a                                        ; $7222: $3C
@@ -6914,12 +6914,12 @@ jr_002_72D1:
     ld   e, $8D                                   ; $72EA: $1E $8D
 
 jr_002_72EC:
-    ld   a, [$C5A6]                               ; $72EC: $FA $A6 $C5
+    ld   a, [wC5A6]                               ; $72EC: $FA $A6 $C5
     and  a                                        ; $72EF: $A7
     jr   nz, jr_002_72FA                          ; $72F0: $20 $08
 
     inc  a                                        ; $72F2: $3C
-    ld   [$C5A6], a                               ; $72F3: $EA $A6 $C5
+    ld   [wC5A6], a                               ; $72F3: $EA $A6 $C5
     ld   a, e                                     ; $72F6: $7B
     call func_002_74FE                            ; $72F7: $CD $FE $74
 

@@ -775,7 +775,7 @@ jr_001_5854::
     ld   a, $01                                   ; $5854: $3E $01
     ld   [$DDD5], a                               ; $5856: $EA $D5 $DD
     xor  a                                        ; $5859: $AF
-    ld   [$C50A], a                               ; $585A: $EA $0A $C5
+    ld   [wC50A], a                               ; $585A: $EA $0A $C5
     ld   [wC116], a                               ; $585D: $EA $16 $C1
     ldh  [hBaseScrollX], a                        ; $5860: $E0 $96
     ldh  [$FF97], a                               ; $5862: $E0 $97
@@ -946,7 +946,7 @@ jr_001_5AA0::
     ld   d, $00                                   ; $5AD3: $16 $00
     ld   hl, wOverworldRoomStatus                 ; $5AD5: $21 $00 $D8
     add  hl, de                                   ; $5AD8: $19
-    ld   a, [$C5A2]                               ; $5AD9: $FA $A2 $C5
+    ld   a, [wC5A2]                               ; $5AD9: $FA $A2 $C5
     and  a                                        ; $5ADC: $A7
     jr   nz, jr_001_5AF5                          ; $5ADD: $20 $16
     ld   a, [hl]                                  ; $5ADF: $7E
@@ -974,7 +974,7 @@ jr_001_5AF5::
     ld   c, a                                     ; $5B05: $4F
     cp   $01                                      ; $5B06: $FE $01
     jr   nz, jr_001_5B19                          ; $5B08: $20 $0F
-    ld   a, [$C5A2]                               ; $5B0A: $FA $A2 $C5
+    ld   a, [wC5A2]                               ; $5B0A: $FA $A2 $C5
     and  a                                        ; $5B0D: $A7
     jr   nz, jr_001_5B30                          ; $5B0E: $20 $20
     ld   hl, wOverworldRoomStatus                 ; $5B10: $21 $00 $D8
@@ -2129,7 +2129,7 @@ CreateFollowingNpcEntity::
     ld   hl, wEntitiesUnknowTableP                ; $60D2: $21 $40 $C4
     add  hl, de                                   ; $60D5: $19
     ld   [hl], $01                                ; $60D6: $36 $01
-    ld   hl, $C2F0                                ; $60D8: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table                                ; $60D8: $21 $F0 $C2
     add  hl, de                                   ; $60DB: $19
     ld   [hl], $0C                                ; $60DC: $36 $0C
 
@@ -2144,7 +2144,7 @@ CreateFollowingNpcEntity::
     ld   a, JINGLE_JUMP_DOWN                      ; $60EA: $3E $08
     ldh  [hJingle], a                             ; $60EC: $E0 $F2
     ld   [wC167], a                               ; $60EE: $EA $67 $C1
-    ld   hl, $C300                                ; $60F1: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table                                ; $60F1: $21 $00 $C3
     add  hl, de                                   ; $60F4: $19
     ld   [hl], $79                                ; $60F5: $36 $79
 .marinFallEnd

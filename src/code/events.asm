@@ -578,7 +578,7 @@ jr_002_604F:
     and  a                                        ; $6054: $A7
     jr   z, jr_002_6064                           ; $6055: $28 $0D
 
-    ld   hl, $C3B0                                ; $6057: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable                                ; $6057: $21 $B0 $C3
     add  hl, de                                   ; $605A: $19
     ld   a, [hl]                                  ; $605B: $7E
     cp   $08                                      ; $605C: $FE $08

@@ -473,7 +473,7 @@ jr_006_4820:
     jr   z, jr_006_4852                           ; $482B: $28 $25
 
 jr_006_482D:
-    ld   a, [$C3CF]                               ; $482D: $FA $CF $C3
+    ld   a, [wC3CF]                               ; $482D: $FA $CF $C3
     and  a                                        ; $4830: $A7
     jr   nz, jr_006_4852                          ; $4831: $20 $1F
 
@@ -531,7 +531,7 @@ func_006_4855::
     add  hl, bc                                   ; $4884: $09
     ld   a, [hl]                                  ; $4885: $7E
     push hl                                       ; $4886: $E5
-    ld   hl, $C3F0                                ; $4887: $21 $F0 $C3
+    ld   hl, wC3F0                                ; $4887: $21 $F0 $C3
     add  hl, de                                   ; $488A: $19
     ld   [hl], a                                  ; $488B: $77
     pop  hl                                       ; $488C: $E1

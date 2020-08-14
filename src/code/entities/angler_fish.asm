@@ -151,7 +151,7 @@ jr_005_5650:
     call SpawnNewEntityInRange_trampoline         ; $5666: $CD $98 $3B
     jr   c, jr_005_56B1                           ; $5669: $38 $46
 
-    ld   hl, $C4D0                                ; $566B: $21 $D0 $C4
+    ld   hl, wEntitiesHealthGroup                                ; $566B: $21 $D0 $C4
     add  hl, de                                   ; $566E: $19
     ld   [hl], d                                  ; $566F: $72
     ld   hl, wEntitiesPhysicsFlagsTable                ; $5670: $21 $40 $C3

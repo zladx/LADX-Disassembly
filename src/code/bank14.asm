@@ -186,14 +186,14 @@ PerformOverworldAudioTasks::
 .compassSfxEnd
 
     ;
-    ; Decrement $C502 counter
+    ; Decrement wC502 counter
     ;
 
-    ld   a, [$C502]                               ; $4ACC: $FA $02 $C5
+    ld   a, [wC502]                               ; $4ACC: $FA $02 $C5
     and  a                                        ; $4ACF: $A7
     jr   z, .C502End                              ; $4AD0: $28 $04
     dec  a                                        ; $4AD2: $3D
-    ld   [$C502], a                               ; $4AD3: $EA $02 $C5
+    ld   [wC502], a                               ; $4AD3: $EA $02 $C5
 .C502End
 
     ld   a, [wNextWorldMusicTrackCountdown]       ; $4AD6: $FA $AF $C5
@@ -259,8 +259,8 @@ jr_014_4AE7:
     inc  a                                        ; $4B1D: $3C
 
 jr_014_4B1E:
-    ld   [$C5A9], a                               ; $4B1E: $EA $A9 $C5
-    ld   a, [$C5AC]                               ; $4B21: $FA $AC $C5
+    ld   [wC5A9], a                               ; $4B1E: $EA $A9 $C5
+    ld   a, [wC5AC]                               ; $4B21: $FA $AC $C5
     inc  a                                        ; $4B24: $3C
     cp   $1A                                      ; $4B25: $FE $1A
     jr   nz, jr_014_4B2A                          ; $4B27: $20 $01
@@ -268,7 +268,7 @@ jr_014_4B1E:
     xor  a                                        ; $4B29: $AF
 
 jr_014_4B2A:
-    ld   [$C5AC], a                               ; $4B2A: $EA $AC $C5
+    ld   [wC5AC], a                               ; $4B2A: $EA $AC $C5
     ldh  a, [hFrameCounter]                       ; $4B2D: $F0 $E7
     and  $3F                                      ; $4B2F: $E6 $3F
     jr   nz, jr_014_4B3E                          ; $4B31: $20 $0B
@@ -507,7 +507,7 @@ UpdatePaletteEffectForInteractiveObjects::
     add  hl, de                                   ; $4C8F: $19
     ld   a, [hl]                                  ; $4C90: $7E
     ld   [wBGPalette], a                          ; $4C91: $EA $97 $DB
-    ld   [$C5AD], a                               ; $4C94: $EA $AD $C5
+    ld   [wC5AD], a                               ; $4C94: $EA $AD $C5
 
     ldh  a, [hIsGBC]                              ; $4C97: $F0 $FE
     and  a                                        ; $4C99: $A7
@@ -898,15 +898,15 @@ ApplyFadeToWhite_DMG::
     and  $07                                      ; $4FEC: $E6 $07
     jr   nz, jr_014_4FFB                          ; $4FEE: $20 $0B
 
-    ld   a, [$C3CA]                               ; $4FF0: $FA $CA $C3
+    ld   a, [wC3CA]                               ; $4FF0: $FA $CA $C3
     cp   $0C                                      ; $4FF3: $FE $0C
     jr   z, jr_014_5036                           ; $4FF5: $28 $3F
 
     inc  a                                        ; $4FF7: $3C
-    ld   [$C3CA], a                               ; $4FF8: $EA $CA $C3
+    ld   [wC3CA], a                               ; $4FF8: $EA $CA $C3
 
 jr_014_4FFB:
-    ld   a, [$C3CA]                               ; $4FFB: $FA $CA $C3
+    ld   a, [wC3CA]                               ; $4FFB: $FA $CA $C3
     ld   e, a                                     ; $4FFE: $5F
     ldh  a, [hFrameCounter]                       ; $4FFF: $F0 $E7
     and  $03                                      ; $5001: $E6 $03
@@ -1159,12 +1159,12 @@ jr_014_5354:
     jp   ClearEntitySpeed                         ; $535D: $C3 $7F $3D
 
 jr_014_5360:
-    ld   a, [$C5AE]                               ; $5360: $FA $AE $C5
+    ld   a, [wC5AE]                               ; $5360: $FA $AE $C5
     and  a                                        ; $5363: $A7
     jr   z, jr_014_536B                           ; $5364: $28 $05
 
     dec  a                                        ; $5366: $3D
-    ld   [$C5AE], a                               ; $5367: $EA $AE $C5
+    ld   [wC5AE], a                               ; $5367: $EA $AE $C5
     ret                                           ; $536A: $C9
 
 jr_014_536B:
@@ -1330,7 +1330,7 @@ jr_014_5444:
     ret                                           ; $5448: $C9
 
 DialogOpenAnimationStart::
-    ld   a, [$C3C9]                               ; $5449: $FA $C9 $C3
+    ld   a, [wC3C9]                               ; $5449: $FA $C9 $C3
     and  a                                        ; $544C: $A7
     jr   nz, jr_014_545A                          ; $544D: $20 $0B
 

@@ -94,7 +94,7 @@ WorldMapState1Handler::
     inc  a                                        ; $56BF: $3C
     cp   $01                                      ; $56C0: $FE $01
     jr   nz, jr_001_56D9                          ; $56C2: $20 $15
-    ld   a, [$C5A2]                               ; $56C4: $FA $A2 $C5
+    ld   a, [wC5A2]                               ; $56C4: $FA $A2 $C5
     and  a                                        ; $56C7: $A7
     ld   a, $00                                   ; $56C8: $3E $00
     jr   nz, jr_001_56D9                          ; $56CA: $20 $0D
@@ -180,7 +180,7 @@ ENDC
     ld   e, a                                     ; $574C: $5F
     and  $F0                                      ; $574D: $E6 $F0
     jr   nz, jr_001_5766                          ; $574F: $20 $15
-    ld   a, [$C5A2]                               ; $5751: $FA $A2 $C5
+    ld   a, [wC5A2]                               ; $5751: $FA $A2 $C5
     and  a                                        ; $5754: $A7
     jr   nz, jr_001_576F                          ; $5755: $20 $18
     push de                                       ; $5757: $D5

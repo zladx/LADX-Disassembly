@@ -80,7 +80,7 @@ FaceShrineMuralStage3Handler::
     jr   nz, jr_001_6B80                          ; $6B77: $20 $07
     call IncrementGameplaySubtype                 ; $6B79: $CD $D6 $44
     xor  a                                        ; $6B7C: $AF
-    ld   [$C3C4], a                               ; $6B7D: $EA $C4 $C3
+    ld   [wC3C4], a                               ; $6B7D: $EA $C4 $C3
 
 jr_001_6B80::
     ret                                           ; $6B80: $C9
@@ -89,9 +89,9 @@ FaceShrineMuralStage4Handler::
     ld   a, [wDialogState]                        ; $6B81: $FA $9F $C1
     and  a                                        ; $6B84: $A7
     ret  nz                                       ; $6B85: $C0
-    ld   a, [$C3C4]                               ; $6B86: $FA $C4 $C3
+    ld   a, [wC3C4]                               ; $6B86: $FA $C4 $C3
     inc  a                                        ; $6B89: $3C
-    ld   [$C3C4], a                               ; $6B8A: $EA $C4 $C3
+    ld   [wC3C4], a                               ; $6B8A: $EA $C4 $C3
     jp   z, IncrementGameplaySubtype              ; $6B8D: $CA $D6 $44
     cp   $80                                      ; $6B90: $FE $80
     jr   nz, jr_001_6B99                          ; $6B92: $20 $05

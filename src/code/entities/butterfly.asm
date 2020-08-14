@@ -98,7 +98,7 @@ ButterflyEntityHandler::
     push af                                       ; $6C38: $F5
     ldh  a, [hLinkPositionY]                      ; $6C39: $F0 $99
     push af                                       ; $6C3B: $F5
-    ld   a, [$C50F]                               ; $6C3C: $FA $0F $C5
+    ld   a, [wC50F]                               ; $6C3C: $FA $0F $C5
     cp   $FF                                      ; $6C3F: $FE $FF
     jr   z, .C50FEnd                              ; $6C41: $28 $10
 

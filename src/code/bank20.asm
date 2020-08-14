@@ -1270,7 +1270,7 @@ jr_020_4C6D:
     ret                                           ; $4C97: $C9
 
 PlayBoomerangSfx::
-    ld   a, [$C5AC]                               ; $4C98: $FA $AC $C5
+    ld   a, [wC5AC]                               ; $4C98: $FA $AC $C5
     and  a                                        ; $4C9B: $A7
     jr   nz, PlayBoomerangSfx.return              ; $4C9C: $20 $04
 
@@ -1284,26 +1284,26 @@ ResetRoomVariables::
     xor  a                                        ; $4CA3: $AF
     ldh  [hFreeWarpDataAddress], a                ; $4CA4: $E0 $E6
     ld   [wC19C], a                               ; $4CA6: $EA $9C $C1
-    ld   [$C504], a                               ; $4CA9: $EA $04 $C5
+    ld   [wC504], a                               ; $4CA9: $EA $04 $C5
     ld   [wDBC8], a                               ; $4CAC: $EA $C8 $DB
     ld   [wTorchesCount], a                       ; $4CAF: $EA $C9 $DB
     ld   [wC1A2], a                               ; $4CB2: $EA $A2 $C1
     ld   [wC1C6], a                               ; $4CB5: $EA $C6 $C1
     ld   [wRoomSwitchableObject], a               ; $4CB8: $EA $FA $D6
-    ld   [$C50A], a                               ; $4CBB: $EA $0A $C5
+    ld   [wC50A], a                               ; $4CBB: $EA $0A $C5
     ldh  [$FFAC], a                               ; $4CBE: $E0 $AC
     ld   [wC113], a                               ; $4CC0: $EA $13 $C1
     ld   [wD460], a                               ; $4CC3: $EA $60 $D4
     ld   [wInBossBattle], a                       ; $4CC6: $EA $BE $C1
-    ld   [$C50E], a                               ; $4CC9: $EA $0E $C5
-    ld   [$C3C8], a                               ; $4CCC: $EA $C8 $C3
-    ld   [$C5A6], a                               ; $4CCF: $EA $A6 $C5
+    ld   [wC50E], a                               ; $4CC9: $EA $0E $C5
+    ld   [wC3C8], a                               ; $4CCC: $EA $C8 $C3
+    ld   [wC5A6], a                               ; $4CCF: $EA $A6 $C5
     ld   [wCompassSfxCountdown], a                ; $4CD2: $EA $62 $D4
     ld   [wC3CD], a                               ; $4CD5: $EA $CD $C3
     ld   [wColorDungonCorrectTombStones], a       ; $4CD8: $EA $D9 $DD
     ld   a, $FF                                   ; $4CDB: $3E $FF
     ld   [wWarpStructs], a                        ; $4CDD: $EA $01 $D4
-    ld   [$C50F], a                               ; $4CE0: $EA $0F $C5
+    ld   [wC50F], a                               ; $4CE0: $EA $0F $C5
     ret                                           ; $4CE3: $C9
 
 ;
@@ -2170,7 +2170,7 @@ func_020_58AD::
     ld   bc, 0                                    ; $58B0: $01 $00 $00
 
 jr_020_58B3:
-    ld   a, [$C5A2]                               ; $58B3: $FA $A2 $C5
+    ld   a, [wC5A2]                               ; $58B3: $FA $A2 $C5
     and  a                                        ; $58B6: $A7
     jr   nz, jr_020_58CB                          ; $58B7: $20 $12
 
@@ -4271,7 +4271,7 @@ InventoryFadeOutHandler::
     ld   a, $01                                   ; $65E0: $3E $01
     ld   [wPaletteUnknownE], a                    ; $65E2: $EA $D5 $DD
     xor  a                                        ; $65E5: $AF
-    ld   [$C50A], a                               ; $65E6: $EA $0A $C5
+    ld   [wC50A], a                               ; $65E6: $EA $0A $C5
     ld   [wC116], a                               ; $65E9: $EA $16 $C1
     ldh  [hBaseScrollX], a                        ; $65EC: $E0 $96
     ldh  [hBaseScrollY], a                        ; $65EE: $E0 $97
@@ -5005,7 +5005,7 @@ jr_020_6CA3:
     ret                                           ; $6CA6: $C9
 
 ApplyFadeToWhite_GBC::
-    ld   a, [$C3CA]                               ; $6CA7: $FA $CA $C3
+    ld   a, [wC3CA]                               ; $6CA7: $FA $CA $C3
     cp   $20                                      ; $6CAA: $FE $20
     jr   z, jr_020_6D0D                           ; $6CAC: $28 $5F
 
@@ -5018,7 +5018,7 @@ ApplyFadeToWhite_GBC::
 jr_020_6CB5:
     or   $80                                      ; $6CB5: $F6 $80
     ld   [wPaletteDataFlags], a                   ; $6CB7: $EA $D1 $DD
-    ld   a, [$C3CA]                               ; $6CBA: $FA $CA $C3
+    ld   a, [wC3CA]                               ; $6CBA: $FA $CA $C3
     and  $01                                      ; $6CBD: $E6 $01
     swap a                                        ; $6CBF: $CB $37
     ld   [wPaletteUnknownC], a                    ; $6CC1: $EA $D3 $DD
@@ -5026,7 +5026,7 @@ jr_020_6CB5:
     ld   [wPaletteUnknownD], a                    ; $6CC6: $EA $D4 $DD
     pop  af                                       ; $6CC9: $F1
     inc  a                                        ; $6CCA: $3C
-    ld   [$C3CA], a                               ; $6CCB: $EA $CA $C3
+    ld   [wC3CA], a                               ; $6CCB: $EA $CA $C3
     ld   a, $08                                   ; $6CCE: $3E $08
     ldh  [hScratchD], a                           ; $6CD0: $E0 $E4
     ld   a, $10                                   ; $6CD2: $3E $10
@@ -5050,7 +5050,7 @@ jr_020_6CB5:
     jr   jr_020_6D0D                              ; $6CF8: $18 $13
 
 jr_020_6CFA:
-    ld   a, [$C3CA]                               ; $6CFA: $FA $CA $C3
+    ld   a, [wC3CA]                               ; $6CFA: $FA $CA $C3
     dec  a                                        ; $6CFD: $3D
     and  $03                                      ; $6CFE: $E6 $03
     jr   nz, jr_020_6D0D                          ; $6D00: $20 $0B

@@ -32,7 +32,7 @@ jr_003_66BF:
     call CheckForEntityFallingDownQuicksandHole   ; $66C2: $CD $EA $5C
     call func_003_7F78                            ; $66C5: $CD $78 $7F
     call func_003_60B3                            ; $66C8: $CD $B3 $60
-    ld   hl, $C300                                ; $66CB: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table                                ; $66CB: $21 $00 $C3
     add  hl, bc                                   ; $66CE: $09
     ld   [hl], $FF                                ; $66CF: $36 $FF
     call GetEntityPrivateCountdown1                                      ; $66D1: $CD $00 $0C

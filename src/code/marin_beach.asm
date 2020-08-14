@@ -6,18 +6,18 @@ MarineBeachEntryPoint::
     ld   a, [wDialogState]                        ; $6203: $FA $9F $C1
     and  a                                        ; $6206: $A7
     jr   nz, jr_001_6213                          ; $6207: $20 $0A
-    ld   a, [$C3C7]                               ; $6209: $FA $C7 $C3
+    ld   a, [wC3C7]                               ; $6209: $FA $C7 $C3
     and  a                                        ; $620C: $A7
     jr   z, jr_001_6213                           ; $620D: $28 $04
     dec  a                                        ; $620F: $3D
-    ld   [$C3C7], a                               ; $6210: $EA $C7 $C3
+    ld   [wC3C7], a                               ; $6210: $EA $C7 $C3
 
 jr_001_6213::
-    ld   a, [$C3C4]                               ; $6213: $FA $C4 $C3
+    ld   a, [wC3C4]                               ; $6213: $FA $C4 $C3
     and  a                                        ; $6216: $A7
     jr   z, jr_001_621D                           ; $6217: $28 $04
     dec  a                                        ; $6219: $3D
-    ld   [$C3C4], a                               ; $621A: $EA $C4 $C3
+    ld   [wC3C4], a                               ; $621A: $EA $C4 $C3
 
 jr_001_621D::
     ld   a, [wGameplaySubtype]                    ; $621D: $FA $96 $DB
@@ -112,94 +112,94 @@ MarineBeachPrepare3::
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $62BE: $3E $01
     ld   [wTranscientVfxTypeTable], a             ; $62C0: $EA $10 $C5
     ld   a, $0C                                   ; $62C3: $3E $0C
-    ld   [$C560], a                               ; $62C5: $EA $60 $C5
+    ld   [wC560], a                               ; $62C5: $EA $60 $C5
     ld   a, $08                                   ; $62C8: $3E $08
-    ld   [$C550], a                               ; $62CA: $EA $50 $C5
+    ld   [wC550], a                               ; $62CA: $EA $50 $C5
     ld   a, $00                                   ; $62CD: $3E $00
     ld   [wTranscientVfxCountdownTable], a        ; $62CF: $EA $20 $C5
     ld   [$D200], a                               ; $62D2: $EA $00 $D2
     ld   a, $20                                   ; $62D5: $3E $20
-    ld   [$C541], a                               ; $62D7: $EA $41 $C5
+    ld   [wTranscientVfxPosYTable+1], a                               ; $62D7: $EA $41 $C5
     ld   a, $A0                                   ; $62DA: $3E $A0
-    ld   [$C531], a                               ; $62DC: $EA $31 $C5
+    ld   [wTranscientVfxPosXTable+1], a                               ; $62DC: $EA $31 $C5
     ld   a, $01                                   ; $62DF: $3E $01
-    ld   [$C511], a                               ; $62E1: $EA $11 $C5
+    ld   [wTranscientVfxTypeTable+1], a                               ; $62E1: $EA $11 $C5
     ld   a, $08                                   ; $62E4: $3E $08
-    ld   [$C561], a                               ; $62E6: $EA $61 $C5
+    ld   [wC560+1], a                               ; $62E6: $EA $61 $C5
     ld   a, $F8                                   ; $62E9: $3E $F8
-    ld   [$C551], a                               ; $62EB: $EA $51 $C5
+    ld   [wC550+1], a                               ; $62EB: $EA $51 $C5
     ld   a, $40                                   ; $62EE: $3E $40
-    ld   [$C521], a                               ; $62F0: $EA $21 $C5
+    ld   [wTranscientVfxCountdownTable+1], a                               ; $62F0: $EA $21 $C5
     ld   a, $24                                   ; $62F3: $3E $24
     ld   [$D201], a                               ; $62F5: $EA $01 $D2
     ld   a, $48                                   ; $62F8: $3E $48
-    ld   [$C542], a                               ; $62FA: $EA $42 $C5
+    ld   [wTranscientVfxPosYTable+2], a                               ; $62FA: $EA $42 $C5
     ld   a, $30                                   ; $62FD: $3E $30
-    ld   [$C532], a                               ; $62FF: $EA $32 $C5
+    ld   [wTranscientVfxPosXTable+2], a                               ; $62FF: $EA $32 $C5
     ld   a, $02                                   ; $6302: $3E $02
-    ld   [$C512], a                               ; $6304: $EA $12 $C5
+    ld   [wTranscientVfxTypeTable+2], a                               ; $6304: $EA $12 $C5
     ld   a, $00                                   ; $6307: $3E $00
-    ld   [$C562], a                               ; $6309: $EA $62 $C5
+    ld   [wC560+2], a                               ; $6309: $EA $62 $C5
     ld   a, $00                                   ; $630C: $3E $00
-    ld   [$C552], a                               ; $630E: $EA $52 $C5
+    ld   [wC550+2], a                               ; $630E: $EA $52 $C5
     ld   a, $00                                   ; $6311: $3E $00
-    ld   [$C522], a                               ; $6313: $EA $22 $C5
+    ld   [wTranscientVfxCountdownTable+2], a                               ; $6313: $EA $22 $C5
     ld   a, $02                                   ; $6316: $3E $02
     ld   [$D202], a                               ; $6318: $EA $02 $D2
     ld   a, $3C                                   ; $631B: $3E $3C
-    ld   [$C543], a                               ; $631D: $EA $43 $C5
+    ld   [wTranscientVfxPosYTable+3], a                               ; $631D: $EA $43 $C5
     ld   a, $40                                   ; $6320: $3E $40
-    ld   [$C533], a                               ; $6322: $EA $33 $C5
+    ld   [wTranscientVfxPosXTable+3], a                               ; $6322: $EA $33 $C5
     ld   a, $02                                   ; $6325: $3E $02
-    ld   [$C513], a                               ; $6327: $EA $13 $C5
+    ld   [wTranscientVfxTypeTable+3], a                               ; $6327: $EA $13 $C5
     ld   a, $00                                   ; $632A: $3E $00
-    ld   [$C563], a                               ; $632C: $EA $63 $C5
+    ld   [wC560+3], a                               ; $632C: $EA $63 $C5
     ld   a, $00                                   ; $632F: $3E $00
-    ld   [$C553], a                               ; $6331: $EA $53 $C5
+    ld   [wC550+3], a                               ; $6331: $EA $53 $C5
     ld   a, $00                                   ; $6334: $3E $00
-    ld   [$C523], a                               ; $6336: $EA $23 $C5
+    ld   [wTranscientVfxCountdownTable+3], a                               ; $6336: $EA $23 $C5
     ld   a, $00                                   ; $6339: $3E $00
     ld   [$D203], a                               ; $633B: $EA $03 $D2
     ld   a, $40                                   ; $633E: $3E $40
-    ld   [$C544], a                               ; $6340: $EA $44 $C5
+    ld   [wTranscientVfxPosYTable+4], a                               ; $6340: $EA $44 $C5
     ld   a, $50                                   ; $6343: $3E $50
-    ld   [$C534], a                               ; $6345: $EA $34 $C5
+    ld   [wTranscientVfxPosXTable+4], a                               ; $6345: $EA $34 $C5
     ld   a, $02                                   ; $6348: $3E $02
-    ld   [$C514], a                               ; $634A: $EA $14 $C5
+    ld   [wTranscientVfxTypeTable+4], a                               ; $634A: $EA $14 $C5
     ld   a, $00                                   ; $634D: $3E $00
-    ld   [$C564], a                               ; $634F: $EA $64 $C5
+    ld   [wC560+4], a                               ; $634F: $EA $64 $C5
     ld   a, $00                                   ; $6352: $3E $00
-    ld   [$C554], a                               ; $6354: $EA $54 $C5
+    ld   [wC550+4], a                               ; $6354: $EA $54 $C5
     ld   a, $00                                   ; $6357: $3E $00
-    ld   [$C524], a                               ; $6359: $EA $24 $C5
+    ld   [wTranscientVfxCountdownTable+4], a                               ; $6359: $EA $24 $C5
     ld   a, $00                                   ; $635C: $3E $00
     ld   [$D204], a                               ; $635E: $EA $04 $D2
     ld   a, $3C                                   ; $6361: $3E $3C
-    ld   [$C545], a                               ; $6363: $EA $45 $C5
+    ld   [wTranscientVfxPosYTable+5], a                               ; $6363: $EA $45 $C5
     ld   a, $60                                   ; $6366: $3E $60
-    ld   [$C535], a                               ; $6368: $EA $35 $C5
+    ld   [wTranscientVfxPosXTable+5], a                               ; $6368: $EA $35 $C5
     ld   a, $02                                   ; $636B: $3E $02
-    ld   [$C515], a                               ; $636D: $EA $15 $C5
+    ld   [wTranscientVfxTypeTable+5], a                               ; $636D: $EA $15 $C5
     ld   a, $00                                   ; $6370: $3E $00
-    ld   [$C565], a                               ; $6372: $EA $65 $C5
+    ld   [wC560+5], a                               ; $6372: $EA $65 $C5
     ld   a, $00                                   ; $6375: $3E $00
-    ld   [$C555], a                               ; $6377: $EA $55 $C5
+    ld   [wC550+5], a                               ; $6377: $EA $55 $C5
     ld   a, $00                                   ; $637A: $3E $00
-    ld   [$C525], a                               ; $637C: $EA $25 $C5
+    ld   [wTranscientVfxCountdownTable+5], a                               ; $637C: $EA $25 $C5
     ld   a, $00                                   ; $637F: $3E $00
     ld   [$D205], a                               ; $6381: $EA $05 $D2
     ld   a, $44                                   ; $6384: $3E $44
-    ld   [$C546], a                               ; $6386: $EA $46 $C5
+    ld   [wTranscientVfxPosYTable+6], a                               ; $6386: $EA $46 $C5
     ld   a, $68                                   ; $6389: $3E $68
-    ld   [$C536], a                               ; $638B: $EA $36 $C5
+    ld   [wTranscientVfxPosXTable+6], a                               ; $638B: $EA $36 $C5
     ld   a, $02                                   ; $638E: $3E $02
-    ld   [$C516], a                               ; $6390: $EA $16 $C5
+    ld   [wTranscientVfxTypeTable+6], a                               ; $6390: $EA $16 $C5
     ld   a, $00                                   ; $6393: $3E $00
-    ld   [$C566], a                               ; $6395: $EA $66 $C5
+    ld   [wC560+6], a                               ; $6395: $EA $66 $C5
     ld   a, $00                                   ; $6398: $3E $00
-    ld   [$C556], a                               ; $639A: $EA $56 $C5
+    ld   [wC550+6], a                               ; $639A: $EA $56 $C5
     ld   a, $00                                   ; $639D: $3E $00
-    ld   [$C526], a                               ; $639F: $EA $26 $C5
+    ld   [wTranscientVfxCountdownTable+6], a                               ; $639F: $EA $26 $C5
     ld   a, $00                                   ; $63A2: $3E $00
     ld   [$D206], a                               ; $63A4: $EA $06 $D2
     jp   IncrementGameplaySubtypeAndReturn        ; $63A7: $C3 $D6 $44
@@ -228,9 +228,9 @@ jr_001_63E4::
     ldh  a, [hFrameCounter]                       ; $63E4: $F0 $E7
     and  $07                                      ; $63E6: $E6 $07
     jr   nz, jr_001_63F8                          ; $63E8: $20 $0E
-    ld   a, [$C3C5]                               ; $63EA: $FA $C5 $C3
+    ld   a, [wC3C5]                               ; $63EA: $FA $C5 $C3
     inc  a                                        ; $63ED: $3C
-    ld   [$C3C5], a                               ; $63EE: $EA $C5 $C3
+    ld   [wC3C5], a                               ; $63EE: $EA $C5 $C3
     cp   $0C                                      ; $63F1: $FE $0C
     jr   nz, jr_001_63F8                          ; $63F3: $20 $03
     call IncrementGameplaySubtype                 ; $63F5: $CD $D6 $44
@@ -239,7 +239,7 @@ jr_001_63F8::
     ldh  a, [hFrameCounter]                       ; $63F8: $F0 $E7
     and  $03                                      ; $63FA: $E6 $03
     ld   e, a                                     ; $63FC: $5F
-    ld   a, [$C3C5]                               ; $63FD: $FA $C5 $C3
+    ld   a, [wC3C5]                               ; $63FD: $FA $C5 $C3
     add  a, e                                     ; $6400: $83
     ld   e, a                                     ; $6401: $5F
     ld   d, $00                                   ; $6402: $16 $00
@@ -263,7 +263,7 @@ MarineBeachScroll2::
     cp   $00                                      ; $6422: $FE $00
     jr   nz, jr_001_642E                          ; $6424: $20 $08
     ld   a, $80                                   ; $6426: $3E $80
-    ld   [$C3C7], a                               ; $6428: $EA $C7 $C3
+    ld   [wC3C7], a                               ; $6428: $EA $C7 $C3
     call IncrementGameplaySubtype                 ; $642B: $CD $D6 $44
 
 jr_001_642E::
@@ -275,7 +275,7 @@ MarineBeachScrollStop::
     ld   a, [wDialogState]                        ; $6435: $FA $9F $C1
     and  a                                        ; $6438: $A7
     jr   nz, jr_001_644A                          ; $6439: $20 $0F
-    ld   a, [$C3C7]                               ; $643B: $FA $C7 $C3
+    ld   a, [wC3C7]                               ; $643B: $FA $C7 $C3
     and  a                                        ; $643E: $A7
     jr   nz, jr_001_6449                          ; $643F: $20 $08
     ld   a, $D8                                   ; $6441: $3E $D8
@@ -287,7 +287,7 @@ jr_001_6449::
 
 jr_001_644A::
     ld   a, $02                                   ; $644A: $3E $02
-    ld   [$C3C4], a                               ; $644C: $EA $C4 $C3
+    ld   [wC3C4], a                               ; $644C: $EA $C4 $C3
     ret                                           ; $644F: $C9
 
 MarineBeachDialog1::
@@ -296,9 +296,9 @@ MarineBeachDialog1::
     and  a                                        ; $6456: $A7
     jr   nz, jr_001_6466                          ; $6457: $20 $0D
     ld   a, $80                                   ; $6459: $3E $80
-    ld   [$C3C4], a                               ; $645B: $EA $C4 $C3
+    ld   [wC3C4], a                               ; $645B: $EA $C4 $C3
     ld   a, $C0                                   ; $645E: $3E $C0
-    ld   [$C3C7], a                               ; $6460: $EA $C7 $C3
+    ld   [wC3C7], a                               ; $6460: $EA $C7 $C3
     call IncrementGameplaySubtype                 ; $6463: $CD $D6 $44
 
 jr_001_6466::
@@ -306,7 +306,7 @@ jr_001_6466::
 
 MarineBeachPause1::
     call func_001_651E                            ; $6467: $CD $1E $65
-    ld   a, [$C3C7]                               ; $646A: $FA $C7 $C3
+    ld   a, [wC3C7]                               ; $646A: $FA $C7 $C3
     and  a                                        ; $646D: $A7
     jr   nz, jr_001_6478                          ; $646E: $20 $08
     ld   a, $D9                                   ; $6470: $3E $D9
@@ -322,9 +322,9 @@ MarineBeachDialog2::
     and  a                                        ; $647F: $A7
     jr   nz, jr_001_648F                          ; $6480: $20 $0D
     ld   a, $80                                   ; $6482: $3E $80
-    ld   [$C3C4], a                               ; $6484: $EA $C4 $C3
+    ld   [wC3C4], a                               ; $6484: $EA $C4 $C3
     ld   a, $C0                                   ; $6487: $3E $C0
-    ld   [$C3C7], a                               ; $6489: $EA $C7 $C3
+    ld   [wC3C7], a                               ; $6489: $EA $C7 $C3
     call IncrementGameplaySubtype                 ; $648C: $CD $D6 $44
 
 jr_001_648F::
@@ -332,7 +332,7 @@ jr_001_648F::
 
 MarineBeachPause2::
     call func_001_651E                            ; $6490: $CD $1E $65
-    ld   a, [$C3C7]                               ; $6493: $FA $C7 $C3
+    ld   a, [wC3C7]                               ; $6493: $FA $C7 $C3
     and  a                                        ; $6496: $A7
     jr   nz, jr_001_64A1                          ; $6497: $20 $08
     ld   a, $DA                                   ; $6499: $3E $DA
@@ -361,12 +361,12 @@ jr_001_64BA::
     ld   a, $06                                   ; $64BF: $3E $06
     ld   [wGameplaySubtype], a                    ; $64C1: $EA $96 $DB
     ld   a, $05                                   ; $64C4: $3E $05
-    ld   [$C3C7], a                               ; $64C6: $EA $C7 $C3
+    ld   [wC3C7], a                               ; $64C6: $EA $C7 $C3
     ret                                           ; $64C9: $C9
 
 jr_001_64CA::
     ld   a, $02                                   ; $64CA: $3E $02
-    ld   [$C3C4], a                               ; $64CC: $EA $C4 $C3
+    ld   [wC3C4], a                               ; $64CC: $EA $C4 $C3
     ret                                           ; $64CF: $C9
 
 MarineBeachDialog3::
@@ -377,7 +377,7 @@ MarineBeachDialog3::
     ld   a, $DC                                   ; $64D9: $3E $DC
     call OpenMarinBeachDialog                     ; $64DB: $CD $DE $67
     ld   a, $30                                   ; $64DE: $3E $30
-    ld   [$C3C7], a                               ; $64E0: $EA $C7 $C3
+    ld   [wC3C7], a                               ; $64E0: $EA $C7 $C3
     call IncrementGameplaySubtype                 ; $64E3: $CD $D6 $44
 
 jr_001_64E6::
@@ -386,8 +386,8 @@ jr_001_64E6::
 MarineBeachDialog4::
     call func_001_651E                            ; $64E7: $CD $1E $65
     ld   a, $02                                   ; $64EA: $3E $02
-    ld   [$C3C4], a                               ; $64EC: $EA $C4 $C3
-    ld   a, [$C3C7]                               ; $64EF: $FA $C7 $C3
+    ld   [wC3C4], a                               ; $64EC: $EA $C4 $C3
+    ld   a, [wC3C7]                               ; $64EF: $FA $C7 $C3
     and  a                                        ; $64F2: $A7
     ret  nz                                       ; $64F3: $C0
     call label_27F2                               ; $64F4: $CD $F2 $27
@@ -455,7 +455,7 @@ jr_001_6545::
     cp   $C0                                      ; $654C: $FE $C0
     ret  c                                        ; $654E: $D8
     ld   de, Data_001_650A                        ; $654F: $11 $0A $65
-    ld   a, [$C3C4]                               ; $6552: $FA $C4 $C3
+    ld   a, [wC3C4]                               ; $6552: $FA $C4 $C3
     and  a                                        ; $6555: $A7
     jr   z, jr_001_655F                           ; $6556: $28 $07
     cp   $60                                      ; $6558: $FE $60
@@ -647,7 +647,7 @@ jr_001_668B::
     ldh  a, [hFrameCounter]                       ; $66B4: $F0 $E7
     and  $07                                      ; $66B6: $E6 $07
     jr   nz, jr_001_66C4                          ; $66B8: $20 $0A
-    ld   hl, $C560                                ; $66BA: $21 $60 $C5
+    ld   hl, wC560                                ; $66BA: $21 $60 $C5
     add  hl, bc                                   ; $66BD: $09
     ld   a, [hl]                                  ; $66BE: $7E
     cp   $FB                                      ; $66BF: $FE $FB
@@ -658,7 +658,7 @@ jr_001_66C4::
     ldh  a, [$FFE8]                               ; $66C4: $F0 $E8
     cp   $F0                                      ; $66C6: $FE $F0
     jr   c, jr_001_66D7                           ; $66C8: $38 $0D
-    ld   hl, $C560                                ; $66CA: $21 $60 $C5
+    ld   hl, wC560                                ; $66CA: $21 $60 $C5
     add  hl, bc                                   ; $66CD: $09
     ld   a, [hl]                                  ; $66CE: $7E
     and  $80                                      ; $66CF: $E6 $80
@@ -698,7 +698,7 @@ Data_001_66F6::
     db 1, $FF, $4C, $52, $58, $5C, $60            ; $66F6
 
 func_001_66FD::
-    ld   hl, $C560                                ; $66FD: $21 $60 $C5
+    ld   hl, wC560                                ; $66FD: $21 $60 $C5
     add  hl, bc                                   ; $6700: $09
     ld   a, [hl]                                  ; $6701: $7E
     ld   e, $03                                   ; $6702: $1E $03
@@ -760,7 +760,7 @@ jr_001_6745::
     ld   hl, Data_001_66F0                        ; $6750: $21 $F0 $66
     add  hl, de                                   ; $6753: $19
     ld   a, [hl]                                  ; $6754: $7E
-    ld   hl, $C550                                ; $6755: $21 $50 $C5
+    ld   hl, wC550                                ; $6755: $21 $50 $C5
     add  hl, bc                                   ; $6758: $09
     ld   [hl], a                                  ; $6759: $77
 
@@ -776,12 +776,12 @@ jr_001_675A::
     ld   hl, Data_001_66F0                        ; $6769: $21 $F0 $66
     add  hl, de                                   ; $676C: $19
     ld   a, [hl]                                  ; $676D: $7E
-    ld   hl, $C560                                ; $676E: $21 $60 $C5
+    ld   hl, wC560                                ; $676E: $21 $60 $C5
     add  hl, bc                                   ; $6771: $09
     ld   [hl], a                                  ; $6772: $77
 
 jr_001_6773::
-    ld   hl, $C590                                ; $6773: $21 $90 $C5
+    ld   hl, wC590                                ; $6773: $21 $90 $C5
     add  hl, bc                                   ; $6776: $09
     ld   a, [hl]                                  ; $6777: $7E
     inc  a                                        ; $6778: $3C
@@ -833,13 +833,13 @@ func_001_67A8::
     ret                                           ; $67B4: $C9
 
 func_001_67B5::
-    ld   hl, $C550                                ; $67B5: $21 $50 $C5
+    ld   hl, wC550                                ; $67B5: $21 $50 $C5
     add  hl, bc                                   ; $67B8: $09
     ld   a, [hl]                                  ; $67B9: $7E
     push af                                       ; $67BA: $F5
     swap a                                        ; $67BB: $CB $37
     and  $F0                                      ; $67BD: $E6 $F0
-    ld   hl, $C570                                ; $67BF: $21 $70 $C5
+    ld   hl, wC570                                ; $67BF: $21 $70 $C5
     add  hl, bc                                   ; $67C2: $09
     add  a, [hl]                                  ; $67C3: $86
     ld   [hl], a                                  ; $67C4: $77

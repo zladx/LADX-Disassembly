@@ -5005,7 +5005,7 @@ func_004_6D80::
     add  hl, bc                                   ; $6D96: $09
     ld   a, [hl]                                  ; $6D97: $7E
     push af                                       ; $6D98: $F5
-    ld   hl, $C3F0                                ; $6D99: $21 $F0 $C3
+    ld   hl, wC3F0                                ; $6D99: $21 $F0 $C3
     add  hl, bc                                   ; $6D9C: $09
     ld   a, [hl]                                  ; $6D9D: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $6D9E: $21 $40 $C2
@@ -5229,7 +5229,7 @@ func_004_6E92::
     ld   a, c                                     ; $6E9B: $79
     ld   [$D210], a                               ; $6E9C: $EA $10 $D2
     ld   a, $02                                   ; $6E9F: $3E $02
-    ld   [$C50A], a                               ; $6EA1: $EA $0A $C5
+    ld   [wC50A], a                               ; $6EA1: $EA $0A $C5
     call GetEntityPrivateCountdown1               ; $6EA4: $CD $00 $0C
     dec  a                                        ; $6EA7: $3D
     jr   nz, jr_004_6EAE                          ; $6EA8: $20 $04
@@ -5586,7 +5586,7 @@ jr_004_70A6:
 jr_004_70B9:
     call func_004_7FA3                            ; $70B9: $CD $A3 $7F
     push bc                                       ; $70BC: $C5
-    ld   a, [$C50F]                               ; $70BD: $FA $0F $C5
+    ld   a, [wC50F]                               ; $70BD: $FA $0F $C5
     ld   c, a                                     ; $70C0: $4F
     ldh  a, [hFrameCounter]                       ; $70C1: $F0 $E7
     and  $10                                      ; $70C3: $E6 $10
@@ -5610,7 +5610,7 @@ jr_004_70CA:
 
     call GetEntityDropTimer                       ; $70DF: $CD $FB $0B
     ld   [hl], $18                                ; $70E2: $36 $18
-    ld   a, [$C50F]                               ; $70E4: $FA $0F $C5
+    ld   a, [wC50F]                               ; $70E4: $FA $0F $C5
     ld   e, a                                     ; $70E7: $5F
     ld   d, b                                     ; $70E8: $50
     ld   hl, wEntitiesSpriteVariantTable          ; $70E9: $21 $B0 $C3
@@ -6622,12 +6622,12 @@ Data_004_76CB::
     db   $68, $03, $6A, $03, $6C, $03, $6E, $03, $6A, $23, $68, $23, $6E, $23, $6C, $23
 
 ShopOwnerEntityHandler::
-    ld   a, [$C50A]                               ; $76EB: $FA $0A $C5
+    ld   a, [wC50A]                               ; $76EB: $FA $0A $C5
     and  a                                        ; $76EE: $A7
     jr   nz, jr_004_76F9                          ; $76EF: $20 $08
 
     ld   a, $01                                   ; $76F1: $3E $01
-    ld   [$C50A], a                               ; $76F3: $EA $0A $C5
+    ld   [wC50A], a                               ; $76F3: $EA $0A $C5
     call func_004_788E                            ; $76F6: $CD $8E $78
 
 jr_004_76F9:
@@ -6816,7 +6816,7 @@ jr_004_7872:
 
     ld   hl, Data_004_77B5                        ; $7878: $21 $B5 $77
     add  hl, de                                   ; $787B: $19
-    ld   de, $C505                                ; $787C: $11 $05 $C5
+    ld   de, wC505                                ; $787C: $11 $05 $C5
     ld   c, $04                                   ; $787F: $0E $04
 
 jr_004_7881:
@@ -6833,7 +6833,7 @@ jr_004_7881:
 func_004_788E::
     ld   de, wRequestDestinationHigh              ; $788E: $11 $01 $D6
     push bc                                       ; $7891: $C5
-    ld   hl, $C505                                ; $7892: $21 $05 $C5
+    ld   hl, wC505                                ; $7892: $21 $05 $C5
     ld   c, $04                                   ; $7895: $0E $04
 
 jr_004_7897:
@@ -6903,7 +6903,7 @@ jr_004_78D4:
     ld   d, b                                     ; $78F5: $50
     ld   hl, Data_004_78A5                        ; $78F6: $21 $A5 $78
     add  hl, de                                   ; $78F9: $19
-    ld   a, [$C50B]                               ; $78FA: $FA $0B $C5
+    ld   a, [wC50B]                               ; $78FA: $FA $0B $C5
     cp   [hl]                                     ; $78FD: $BE
     jr   nz, jr_004_7940                          ; $78FE: $20 $40
 
@@ -6913,7 +6913,7 @@ jr_004_78D4:
 
 jr_004_7907:
 IF __PATCH_0__
-    ld   a, [$c3cf]
+    ld   a, [wC3CF]
     and  a
     jr   nz, jr_004_7940
 ENDC
@@ -6933,10 +6933,10 @@ ENDC
     ld   hl, Data_004_78A5                        ; $7911: $21 $A5 $78
     add  hl, de                                   ; $7914: $19
     ld   a, [hl]                                  ; $7915: $7E
-    ld   [$C50B], a                               ; $7916: $EA $0B $C5
+    ld   [wC50B], a                               ; $7916: $EA $0B $C5
     ld   e, a                                     ; $7919: $5F
     ld   d, b                                     ; $791A: $50
-    ld   hl, $C505                                ; $791B: $21 $05 $C5
+    ld   hl, wC505                                ; $791B: $21 $05 $C5
     add  hl, de                                   ; $791E: $19
     ld   a, [hl]                                  ; $791F: $7E
     ld   [wItemPickedUpInShop], a                               ; $7920: $EA $09 $C5
@@ -6999,10 +6999,10 @@ func_004_795D::
     jr   z, jr_004_7984                           ; $796B: $28 $17
 
 label_004_796D:
-    ld   a, [$C50B]                               ; $796D: $FA $0B $C5
+    ld   a, [wC50B]                               ; $796D: $FA $0B $C5
     ld   e, a                                     ; $7970: $5F
     ld   d, b                                     ; $7971: $50
-    ld   hl, $C505                                ; $7972: $21 $05 $C5
+    ld   hl, wC505                                ; $7972: $21 $05 $C5
     add  hl, de                                   ; $7975: $19
     ld   a, [wItemPickedUpInShop]                               ; $7976: $FA $09 $C5
     ld   [hl], a                                  ; $7979: $77
@@ -7053,7 +7053,7 @@ jr_004_79AB:
     cp   $02                                      ; $79AF: $FE $02
     jr   nz, jr_004_79BB                          ; $79B1: $20 $08
 
-    ld   a, [$C5A9]                               ; $79B3: $FA $A9 $C5
+    ld   a, [wC5A9]                               ; $79B3: $FA $A9 $C5
     and  a                                        ; $79B6: $A7
     jr   nz, jr_004_7A05                          ; $79B7: $20 $4C
 
@@ -7346,7 +7346,7 @@ func_004_7B40::
     ret  nz                                       ; $7B4C: $C0
 
     ld   [wHasStolenFromShop], a                  ; $7B4D: $EA $46 $DB
-    ld   [$C50A], a                               ; $7B50: $EA $0A $C5
+    ld   [wC50A], a                               ; $7B50: $EA $0A $C5
     db   $C3                                      ; $7B53: $C3
     ld   a, d                                     ; $7B54: $7A
 
@@ -7367,7 +7367,7 @@ jr_004_7B72:
     ldh  [hFreeWarpDataAddress], a                ; $7B72: $E0 $E6
     ld   e, a                                     ; $7B74: $5F
     ld   d, b                                     ; $7B75: $50
-    ld   hl, $C504                                ; $7B76: $21 $04 $C5
+    ld   hl, wC504                                ; $7B76: $21 $04 $C5
     add  hl, de                                   ; $7B79: $19
     ld   a, [hl]                                  ; $7B7A: $7E
     and  a                                        ; $7B7B: $A7
@@ -7448,7 +7448,7 @@ func_004_7BE3::
 
     ld   e, a                                     ; $7BF4: $5F
     ld   d, b                                     ; $7BF5: $50
-    ld   hl, $C39F                                ; $7BF6: $21 $9F $C3
+    ld   hl, wEntitiesUnknowTableR+15                                ; $7BF6: $21 $9F $C3
     add  hl, de                                   ; $7BF9: $19
     ld   a, [hl]                                  ; $7BFA: $7E
     cp   $03                                      ; $7BFB: $FE $03

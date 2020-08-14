@@ -219,12 +219,12 @@ jr_007_414E:
     jr   z, jr_007_41B8                           ; $4158: $28 $5E
 
 jr_007_415A:
-    ld   a, [$C3CF]                               ; $415A: $FA $CF $C3
+    ld   a, [wC3CF]                               ; $415A: $FA $CF $C3
     and  a                                        ; $415D: $A7
     ret  nz                                       ; $415E: $C0
 
     inc  a                                        ; $415F: $3C
-    ld   [$C3CF], a                               ; $4160: $EA $CF $C3
+    ld   [wC3CF], a                               ; $4160: $EA $CF $C3
     call IncrementEntityState                     ; $4163: $CD $12 $3B
     ld   [hl], $02                                ; $4166: $36 $02
     ld   hl, wEntitiesStatusTable                 ; $4168: $21 $80 $C2
@@ -2899,7 +2899,7 @@ PincerEntityHandler::
     ld   hl, wEntitiesUnknowTableI                ; $5322: $21 $70 $C4
     add  hl, bc                                   ; $5325: $09
     ld   [hl], b                                  ; $5326: $70
-    ld   hl, $C3F0                                ; $5327: $21 $F0 $C3
+    ld   hl, wC3F0                                ; $5327: $21 $F0 $C3
     add  hl, bc                                   ; $532A: $09
     ld   [hl], b                                  ; $532B: $70
     ld   hl, wEntitiesUnknowTableS                ; $532C: $21 $00 $C4
@@ -4881,7 +4881,7 @@ ENDC
     jr   nz, jr_007_6019                          ; $6012: $20 $05
 
     ld   a, $10                                   ; $6014: $3E $10
-    ld   [$C5AE], a                               ; $6016: $EA $AE $C5
+    ld   [wC5AE], a                               ; $6016: $EA $AE $C5
 
 jr_007_6019:
     ldh  a, [hMapRoom]                            ; $6019: $F0 $F6
@@ -5043,7 +5043,7 @@ jr_007_60F7:
     jr   z, jr_007_6133                           ; $6102: $28 $2F
 
 jr_007_6104:
-    ld   a, [$C3CF]                               ; $6104: $FA $CF $C3
+    ld   a, [wC3CF]                               ; $6104: $FA $CF $C3
     and  a                                        ; $6107: $A7
     jr   nz, jr_007_6133                          ; $6108: $20 $29
 
@@ -5054,7 +5054,7 @@ IF __PATCH_0__
 ENDC
 
     inc  a                                        ; $610A: $3C
-    ld   [$C3CF], a                               ; $610B: $EA $CF $C3
+    ld   [wC3CF], a                               ; $610B: $EA $CF $C3
     ldh  a, [hActiveEntityStatus]                 ; $610E: $F0 $EA
     cp   $07                                      ; $6110: $FE $07
     jr   z, jr_007_6133                           ; $6112: $28 $1F
@@ -5622,7 +5622,7 @@ jr_007_643B:
 
     call GetEntityPrivateCountdown1               ; $6459: $CD $00 $0C
     ld   [hl], $08                                ; $645C: $36 $08
-    ld   a, [$C3CF]                               ; $645E: $FA $CF $C3
+    ld   a, [wC3CF]                               ; $645E: $FA $CF $C3
     and  a                                        ; $6461: $A7
     jr   z, jr_007_6489                           ; $6462: $28 $25
 
@@ -8626,12 +8626,12 @@ jr_007_774D:
     jr   z, jr_007_7783                           ; $7758: $28 $29
 
 jr_007_775A:
-    ld   a, [$C3CF]                               ; $775A: $FA $CF $C3
+    ld   a, [wC3CF]                               ; $775A: $FA $CF $C3
     and  a                                        ; $775D: $A7
     jr   nz, jr_007_7783                          ; $775E: $20 $23
 
     inc  a                                        ; $7760: $3C
-    ld   [$C3CF], a                               ; $7761: $EA $CF $C3
+    ld   [wC3CF], a                               ; $7761: $EA $CF $C3
     call IncrementEntityState                     ; $7764: $CD $12 $3B
     ld   [hl], $02                                ; $7767: $36 $02
     ld   hl, wEntitiesStatusTable                 ; $7769: $21 $80 $C2
@@ -9115,7 +9115,7 @@ Data_007_7A29::
     db   $01, $00, $03, $02
 
 func_007_7A2D::
-    ld   a, [$C502]                               ; $7A2D: $FA $02 $C5
+    ld   a, [wC502]                               ; $7A2D: $FA $02 $C5
     and  a                                        ; $7A30: $A7
     jr   nz, func_007_7A55                        ; $7A31: $20 $22
 
@@ -9290,7 +9290,7 @@ func_007_7CF0::
 
     ld   e, a                                     ; $7D01: $5F
     ld   d, b                                     ; $7D02: $50
-    ld   hl, $C39F                                ; $7D03: $21 $9F $C3
+    ld   hl, wEntitiesUnknowTableR+15                                ; $7D03: $21 $9F $C3
     add  hl, de                                   ; $7D06: $19
     ld   a, [hl]                                  ; $7D07: $7E
     cp   $03                                      ; $7D08: $FE $03
@@ -9450,7 +9450,7 @@ func_007_7DC3::
     call GetEntitySpeedYAddress                   ; $7DD6: $CD $05 $40
     ld   a, [hl]                                  ; $7DD9: $7E
     push af                                       ; $7DDA: $F5
-    ld   hl, $C3F0                                ; $7DDB: $21 $F0 $C3
+    ld   hl, wC3F0                                ; $7DDB: $21 $F0 $C3
     add  hl, bc                                   ; $7DDE: $09
     ld   a, [hl]                                  ; $7DDF: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $7DE0: $21 $40 $C2

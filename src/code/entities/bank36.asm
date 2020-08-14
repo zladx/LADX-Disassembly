@@ -348,7 +348,7 @@ jr_036_4201:
     dec  e                                        ; $4202: $1D
     jr   nz, jr_036_4201                          ; $4203: $20 $FC
 
-    ld   [$C31F], a                               ; $4205: $EA $1F $C3
+    ld   [wEntitiesPosZTable+15], a                               ; $4205: $EA $1F $C3
     ld   a, [wPhotos1]                            ; $4208: $FA $0C $DC
     and  $01                                      ; $420B: $E6 $01
     jp   z, label_036_4217                        ; $420D: $CA $17 $42
@@ -393,7 +393,7 @@ func_036_4221::
     jp   IncrementEntityState                     ; $424A: $C3 $12 $3B
 
 func_036_424D::
-    ld   hl, $C30F                                ; $424D: $21 $0F $C3
+    ld   hl, wEntitiesPrivateCountdown2Table+15                                ; $424D: $21 $0F $C3
     inc  [hl]                                     ; $4250: $34
     jp   func_036_467F                            ; $4251: $C3 $7F $46
 
@@ -7155,7 +7155,7 @@ func_036_6B15::
     call PointHLToEntitySpeedY                    ; $6B27: $CD $F3 $6B
     ld   a, [hl]                                  ; $6B2A: $7E
     push af                                       ; $6B2B: $F5
-    ld   hl, $C3F0                                ; $6B2C: $21 $F0 $C3
+    ld   hl, wC3F0                                ; $6B2C: $21 $F0 $C3
     add  hl, bc                                   ; $6B2F: $09
     ld   a, [hl]                                  ; $6B30: $7E
     call PointHLToEntitySpeedX                    ; $6B31: $CD $EE $6B
@@ -7198,7 +7198,7 @@ func_036_6B5C::
 
     ld   e, a                                     ; $6B6A: $5F
     ld   d, b                                     ; $6B6B: $50
-    ld   hl, $C39F                                ; $6B6C: $21 $9F $C3
+    ld   hl, wEntitiesUnknowTableR+15                                ; $6B6C: $21 $9F $C3
     add  hl, de                                   ; $6B6F: $19
     ld   a, [hl]                                  ; $6B70: $7E
     cp   $03                                      ; $6B71: $FE $03
@@ -7746,7 +7746,7 @@ jr_036_6ECD:
     ret                                           ; $6ED4: $C9
 
 PiranhaPlantEntityHandler::
-    ld   hl, $C3F0                                ; $6ED5: $21 $F0 $C3
+    ld   hl, wC3F0                                ; $6ED5: $21 $F0 $C3
     add  hl, bc                                   ; $6ED8: $09
     ld   [hl], b                                  ; $6ED9: $70
     ld   hl, wEntitiesUnknowTableS                ; $6EDA: $21 $00 $C4

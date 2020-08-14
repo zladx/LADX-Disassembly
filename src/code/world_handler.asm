@@ -312,7 +312,7 @@ GameplayWorldSubtype6Handler::
     ld   a, [wObjectAffectingBGPalette]           ; $4528: $FA $CB $C3
     and  a                                        ; $452B: $A7
     jr   z, jr_001_4548                           ; $452C: $28 $1A
-    ld   a, [$C5AD]                               ; $452E: $FA $AD $C5
+    ld   a, [wC5AD]                               ; $452E: $FA $AD $C5
     ld   [wBGPalette], a                          ; $4531: $EA $97 $DB
     ld   a, $1C                                   ; $4534: $3E $1C
     ld   [wOBJ0Palette], a                        ; $4536: $EA $98 $DB

@@ -799,7 +799,7 @@ PlayBombExplosionSfx::
     ld   [hl], NOISE_SFX_BOMB_EXPLOSION           ; $0C4E: $36 $0C
 
 func_C50::
-    ld   hl, $C502                                ; $0C50: $21 $02 $C5
+    ld   hl, wC502                                ; $0C50: $21 $02 $C5
     ld   [hl], $04                                ; $0C53: $36 $04
     ret                                           ; $0C55: $C9
 
@@ -827,10 +827,10 @@ MarkTriggerAsResolved::
 
     ; wC1CF = 0
     ld   [wC1CF], a                               ; $0C67: $EA $CF $C1
-    ; wRoomEventEffectExecuted = $C5A6 = 1
+    ; wRoomEventEffectExecuted = wC5A6 = 1
     inc  a                                        ; $0C6A: $3C
     ld   [wRoomEventEffectExecuted], a            ; $0C6B: $EA $8F $C1
-    ld   [$C5A6], a                               ; $0C6E: $EA $A6 $C5
+    ld   [wC5A6], a                               ; $0C6E: $EA $A6 $C5
 
     ; If wC19D == 0…
     ld   a, [wC19D]                               ; $0C71: $FA $9D $C1
@@ -1486,7 +1486,7 @@ WorldDefaultHandler::
     call ApplyGotItem                             ; $0FC7: $CD $33 $10
 
     ld   a, [wIsCarryingLiftedObject]             ; $0FCA: $FA $5C $C1
-    ld   [$C3CF], a                               ; $0FCD: $EA $CF $C3
+    ld   [wC3CF], a                               ; $0FCD: $EA $CF $C3
 
     callsb func_20_4B1F                           ; $0FD0: $3E $20 $EA $00 $21 $CD $1F $4B
 
@@ -1664,7 +1664,7 @@ InitGotItemSequence::
     cp   LINK_MOTION_PASS_OUT                     ; $1100: $FE $07
     jr   z, .linkMotionJumpTable                  ; $1102: $28 $34
     ld   a, [wHealth]                             ; $1104: $FA $5A $DB
-    ld   hl, $C50A                                ; $1107: $21 $0A $C5
+    ld   hl, wC50A                                ; $1107: $21 $0A $C5
     or   [hl]                                     ; $110A: $B6
     ld   hl, wInventoryAppearing                  ; $110B: $21 $4F $C1
     or   [hl]                                     ; $110E: $B6
@@ -1674,7 +1674,7 @@ InitGotItemSequence::
     ld   a, $BF                                   ; $1116: $3E $BF
     ldh  [$FFB7], a                               ; $1118: $E0 $B7
     ld   a, $10                                   ; $111A: $3E $10
-    ld   [$C3CC], a                               ; $111C: $EA $CC $C3
+    ld   [wBGPaletteEffectAddress], a                               ; $111C: $EA $CC $C3
     xor  a                                        ; $111F: $AF
     ld   [wInvincibilityCounter], a               ; $1120: $EA $C7 $DB
     ldh  [$FF9C], a                               ; $1123: $E0 $9C
@@ -1720,7 +1720,7 @@ LinkMotionInteractiveHandler::
 
 ; Check if one of the inventory item should be used
 CheckItemsToUse::
-    ld   a, [$C50A]                               ; $1177: $FA $0A $C5
+    ld   a, [wC50A]                               ; $1177: $FA $0A $C5
     ld   hl, wC167                                ; $117A: $21 $67 $C1
     or   [hl]                                     ; $117D: $B6
     ld   hl, wC1A4                                ; $117E: $21 $A4 $C1
@@ -2214,7 +2214,7 @@ SpawnPlayerProjectile::
     add  hl, de                                   ; $1470: $19
     ld   [hl], a                                  ; $1471: $77
     ldh  a, [hLinkDirection]                      ; $1472: $F0 $9E
-    ld   hl, $C3B0                                ; $1474: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable                                ; $1474: $21 $B0 $C3
     add  hl, de                                   ; $1477: $19
     ld   [hl], a                                  ; $1478: $77
     ld   hl, wEntitiesDirectionTable              ; $1479: $21 $80 $C3
@@ -2357,7 +2357,7 @@ label_1562::
     ld   a, [wActiveProjectileCount]              ; $1562: $FA $4D $C1
     and  a                                        ; $1565: $A7
     ret  nz                                       ; $1566: $C0
-    ld   a, [$C5A9]                               ; $1567: $FA $A9 $C5
+    ld   a, [wC5A9]                               ; $1567: $FA $A9 $C5
     and  a                                        ; $156A: $A7
     ret  z                                        ; $156B: $C8
     ld   a, [wSwordLevel]                         ; $156C: $FA $4E $DB
@@ -2529,7 +2529,7 @@ label_1653::
     ldh  a, [hSwordIntersectedAreaY]              ; $166B: $F0 $CD
     add  a, $10                                   ; $166D: $C6 $10
     ld   [hl], a                                  ; $166F: $77
-    ld   hl, $C3B0                                ; $1670: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable                                ; $1670: $21 $B0 $C3
     add  hl, de                                   ; $1673: $19
     ldh  a, [hActiveEntitySpriteVariant]          ; $1674: $F0 $F1
     ld   [hl], a                                  ; $1676: $77
@@ -2573,7 +2573,7 @@ label_1653::
     ld   hl, wEntitiesDropTimerTable              ; $16A7: $21 $50 $C4
     add  hl, de                                   ; $16AA: $19
     ld   [hl], $80                                ; $16AB: $36 $80
-    ld   hl, $C2F0                                ; $16AD: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table                                ; $16AD: $21 $F0 $C2
     add  hl, de                                   ; $16B0: $19
     ld   [hl], $18                                ; $16B1: $36 $18
     ld   hl, wEntitiesSpeedZTable                 ; $16B3: $21 $20 $C3
@@ -2607,7 +2607,7 @@ CheckItemsSwordCollision::
     add  a, [hl]                                  ; $16DC: $86
     ldh  [hScratch1], a                           ; $16DD: $E0 $D8
     ld   a, $04                                   ; $16DF: $3E $04
-    ld   [$C502], a                               ; $16E1: $EA $02 $C5
+    ld   [wC502], a                               ; $16E1: $EA $02 $C5
     call label_D15                                ; $16E4: $CD $15 $0D
     ld   a, $10                                   ; $16E7: $3E $10
     ld   [wC1C4], a                               ; $16E9: $EA $C4 $C1
@@ -2799,11 +2799,11 @@ func_1828::
 
 LinkMotionMapFadeOutHandler::
     call func_002_754F                            ; $1837: $CD $4F $75
-    ld   a, [$C3C9]                               ; $183A: $FA $C9 $C3
+    ld   a, [wC3C9]                               ; $183A: $FA $C9 $C3
     and  a                                        ; $183D: $A7
     jr   z, .label_1847                           ; $183E: $28 $07
     xor  a                                        ; $1840: $AF
-    ld   [$C3C9], a                               ; $1841: $EA $C9 $C3
+    ld   [wC3C9], a                               ; $1841: $EA $C9 $C3
     jp   ApplyMapFadeOutTransitionWithNoise       ; $1844: $C3 $7D $0C
 
 .label_1847
@@ -3830,7 +3830,7 @@ ENDC
     ld   hl, wEntitiesStatusTable                 ; $218E: $21 $80 $C2
     add  hl, de                                   ; $2191: $19
     ld   [hl], $07                                ; $2192: $36 $07
-    ld   hl, $C3B0                                ; $2194: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable                                ; $2194: $21 $B0 $C3
     add  hl, de                                   ; $2197: $19
     ldh  a, [$FFE5]                               ; $2198: $F0 $E5
     ld   [hl], a                                  ; $219A: $77
@@ -6081,7 +6081,7 @@ LoadRoomObject::
 
     cp   OBJECT_WATERFALL                         ; $3308: $FE $E9
     jr   nz, .waterfallEnd                        ; $330A: $20 $03
-    ld   [$C50E], a                               ; $330C: $EA $0E $C5
+    ld   [wC50E], a                               ; $330C: $EA $0E $C5
 .waterfallEnd
 
     ;
@@ -6271,11 +6271,11 @@ LoadRoomObject::
     inc  [hl]                                     ; $33EF: $34
     ; mark the torch as affecting the background palette
     ld   [wObjectAffectingBGPalette], a           ; $33F0: $EA $CB $C3
-    ; $C3CD += 4
+    ; wC3CD += 4
     push af                                       ; $33F3: $F5
-    ld   a, [$C3CD]                               ; $33F4: $FA $CD $C3
+    ld   a, [wC3CD]                               ; $33F4: $FA $CD $C3
     add  a, $04                                   ; $33F7: $C6 $04
-    ld   [$C3CD], a                               ; $33F9: $EA $CD $C3
+    ld   [wC3CD], a                               ; $33F9: $EA $CD $C3
     ; If not on GBC…
     ldh  a, [hIsGBC]                              ; $33FC: $F0 $FE
     and  a                                        ; $33FE: $A7

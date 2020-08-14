@@ -3775,7 +3775,7 @@ func_015_5EAC::
     add  hl, bc                                   ; $5ED6: $09
     ld   a, [hl]                                  ; $5ED7: $7E
     sla  a                                        ; $5ED8: $CB $27
-    ld   hl, $C3F0                                ; $5EDA: $21 $F0 $C3
+    ld   hl, wC3F0                                ; $5EDA: $21 $F0 $C3
     add  hl, de                                   ; $5EDD: $19
     ld   [hl], a                                  ; $5EDE: $77
     ld   hl, wEntitiesSpeedYTable                 ; $5EDF: $21 $50 $C2
@@ -7221,9 +7221,9 @@ func_015_7964::
 
 jr_015_7973:
     ld   [wOAMNextAvailableSlot], a               ; $7973: $EA $C0 $C3
-    ld   a, [$C3C1]                               ; $7976: $FA $C1 $C3
+    ld   a, [wC3C1]                               ; $7976: $FA $C1 $C3
     add  e                                        ; $7979: $83
-    ld   [$C3C1], a                               ; $797A: $EA $C1 $C3
+    ld   [wC3C1], a                               ; $797A: $EA $C1 $C3
     cp   $60                                      ; $797D: $FE $60
     jr   c, jr_015_7994                           ; $797F: $38 $13
 
@@ -7414,7 +7414,7 @@ func_015_7A6E::
 
     ld   e, a                                     ; $7A7C: $5F
     ld   d, b                                     ; $7A7D: $50
-    ld   hl, $C39F                                ; $7A7E: $21 $9F $C3
+    ld   hl, wEntitiesUnknowTableR+15                                ; $7A7E: $21 $9F $C3
     add  hl, de                                   ; $7A81: $19
     ld   a, [hl]                                  ; $7A82: $7E
     cp   $03                                      ; $7A83: $FE $03
@@ -7580,7 +7580,7 @@ func_015_7B3E::
     add  hl, bc                                   ; $7B54: $09
     ld   a, [hl]                                  ; $7B55: $7E
     push af                                       ; $7B56: $F5
-    ld   hl, $C3F0                                ; $7B57: $21 $F0 $C3
+    ld   hl, wC3F0                                ; $7B57: $21 $F0 $C3
     add  hl, bc                                   ; $7B5A: $09
     ld   a, [hl]                                  ; $7B5B: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $7B5C: $21 $40 $C2
@@ -7994,7 +7994,7 @@ func_015_7D78::
     xor  a                                        ; $7D87: $AF
     ld   [wTransitionGfxFrameCount], a            ; $7D88: $EA $80 $C1
     ld   a, $08                                   ; $7D8B: $3E $08
-    ld   [$C3CA], a                               ; $7D8D: $EA $CA $C3
+    ld   [wC3CA], a                               ; $7D8D: $EA $CA $C3
     call IncrementEntityState                     ; $7D90: $CD $12 $3B
     xor  a                                        ; $7D93: $AF
 
@@ -8216,7 +8216,7 @@ func_015_7EB9::
     jr   z, jr_015_7EC4                           ; $7EBE: $28 $04
 
     xor  a                                        ; $7EC0: $AF
-    ld   [$C5A2], a                               ; $7EC1: $EA $A2 $C5
+    ld   [wC5A2], a                               ; $7EC1: $EA $A2 $C5
 
 jr_015_7EC4:
     xor  a                                        ; $7EC4: $AF
@@ -8333,7 +8333,7 @@ jr_015_7F4F:
     ld   a, $07                                   ; $7F64: $3E $07
     ld   [wGameplayType], a                       ; $7F66: $EA $95 $DB
     ld   a, $01                                   ; $7F69: $3E $01
-    ld   [$C5A2], a                               ; $7F6B: $EA $A2 $C5
+    ld   [wC5A2], a                               ; $7F6B: $EA $A2 $C5
     ret                                           ; $7F6E: $C9
 
 jr_015_7F6F:
@@ -8362,7 +8362,7 @@ AnimalD1EntityHandler::
 
     ld   de, Data_015_7F86                        ; $7F9D: $11 $86 $7F
     call RenderActiveEntitySpritesPair            ; $7FA0: $CD $C0 $3B
-    ld   a, [$C50F]                               ; $7FA3: $FA $0F $C5
+    ld   a, [wC50F]                               ; $7FA3: $FA $0F $C5
     ld   e, a                                     ; $7FA6: $5F
     ld   d, b                                     ; $7FA7: $50
     ld   hl, wEntitiesPosXTable                   ; $7FA8: $21 $00 $C2

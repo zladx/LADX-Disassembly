@@ -42,7 +42,7 @@ label_006_641F:
 
     ld   e, a                                     ; $642B: $5F
     ld   d, b                                     ; $642C: $50
-    ld   hl, $C39F                                ; $642D: $21 $9F $C3
+    ld   hl, wEntitiesUnknowTableR+15                                ; $642D: $21 $9F $C3
     add  hl, de                                   ; $6430: $19
     ld   a, [hl]                                  ; $6431: $7E
     cp   $03                                      ; $6432: $FE $03
@@ -215,7 +215,7 @@ func_006_64F7::
     add  hl, bc                                   ; $650D: $09
     ld   a, [hl]                                  ; $650E: $7E
     push af                                       ; $650F: $F5
-    ld   hl, $C3F0                                ; $6510: $21 $F0 $C3
+    ld   hl, wC3F0                                ; $6510: $21 $F0 $C3
     add  hl, bc                                   ; $6513: $09
     ld   a, [hl]                                  ; $6514: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $6515: $21 $40 $C2

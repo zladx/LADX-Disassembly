@@ -305,7 +305,7 @@ CrazyTracyBonusHandler::
     and  a                                        ; $602C: $A7
     jr   nz, jr_006_6048                          ; $602D: $20 $19
 
-    ld   a, [$C5A9]                               ; $602F: $FA $A9 $C5
+    ld   a, [wC5A9]                               ; $602F: $FA $A9 $C5
     and  a                                        ; $6032: $A7
     jr   nz, .fillHeartsEnd                       ; $6033: $20 $0F
     ; Also fill hearts

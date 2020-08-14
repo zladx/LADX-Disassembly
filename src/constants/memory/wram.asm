@@ -4,7 +4,7 @@ section "WRAM Bank0", wram0[$c000]
 ; *                                                                 *
 ; *             >> LABEL GUIDELINE <<                               *
 ; *                                                                 *
-; *         ; Discripe the function of this memory address.         *
+; *         ; Description of the usage of this memory address.      *
 ; *         ; Possible values:                                      *
 ; *         ; 0 = meaning 0,                                        *
 ; *         ; 1 = meaning 1,                                        *

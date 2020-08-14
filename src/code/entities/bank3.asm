@@ -8045,7 +8045,7 @@ jr_003_775A:
     ld   a, [hl]                                  ; $7777: $7E
     cpl                                           ; $7778: $2F
     ld   [hl], a                                  ; $7779: $77
-    ld   hl, $C5D0                                ; $777A: $21 $D0 $C5
+    ld   hl, wC5D0                                ; $777A: $21 $D0 $C5
     add  hl, bc                                   ; $777D: $09
     ld   [hl], $FF                                ; $777E: $36 $FF
     jr   jr_003_779A                              ; $7780: $18 $18
@@ -8816,7 +8816,7 @@ label_003_7BE4:
     jr   nc, jr_003_7C2B                          ; $7BEC: $30 $3D
 
     sub  $D0                                      ; $7BEE: $D6 $D0
-    ld   hl, $C5D0                                ; $7BF0: $21 $D0 $C5
+    ld   hl, wC5D0                                ; $7BF0: $21 $D0 $C5
     add  hl, bc                                   ; $7BF3: $09
     cp   [hl]                                     ; $7BF4: $BE
     jr   z, jr_003_7C1A                           ; $7BF5: $28 $23
@@ -9109,7 +9109,7 @@ jr_003_7D6B:
     jr   nc, jr_003_7DC0                          ; $7D87: $30 $37
 
     sub  $D0                                      ; $7D89: $D6 $D0
-    ld   hl, $C5D0                                ; $7D8B: $21 $D0 $C5
+    ld   hl, wC5D0                                ; $7D8B: $21 $D0 $C5
     add  hl, bc                                   ; $7D8E: $09
     cp   [hl]                                     ; $7D8F: $BE
     jr   z, jr_003_7DB0                           ; $7D90: $28 $1E

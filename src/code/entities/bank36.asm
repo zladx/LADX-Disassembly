@@ -7370,20 +7370,20 @@ PointHLToEntityPosZ::
     ret                                           ; $6C31: $C9
 
 func_036_6C32::
-    ld   hl, $D030                                ; $6C32: $21 $30 $D0
+    ld   hl, wD030                                ; $6C32: $21 $30 $D0
     add  hl, bc                                   ; $6C35: $09
     ret                                           ; $6C36: $C9
 
 func_036_6C37::
-    ld   hl, $D040                                ; $6C37: $21 $40 $D0
+    ld   hl, wD040                                ; $6C37: $21 $40 $D0
     add  hl, bc                                   ; $6C3A: $09
     ret                                           ; $6C3B: $C9
 
-    ld   hl, $D050                                ; $6C3C: $21 $50 $D0
+    ld   hl, wD050                                ; $6C3C: $21 $50 $D0
     add  hl, bc                                   ; $6C3F: $09
     ret                                           ; $6C40: $C9
 
-    ld   hl, $D060                                ; $6C41: $21 $60 $D0
+    ld   hl, wD060                                ; $6C41: $21 $60 $D0
     add  hl, bc                                   ; $6C44: $09
     ret                                           ; $6C45: $C9
 

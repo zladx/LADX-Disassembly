@@ -1201,7 +1201,7 @@ jr_014_5391:
     jp   z, label_014_5443                        ; $5394: $CA $43 $54
 
     ldh  a, [hLinkDirection]                      ; $5397: $F0 $9E
-    ld   hl, $C5D0                                ; $5399: $21 $D0 $C5
+    ld   hl, wC5D0                                ; $5399: $21 $D0 $C5
     add  hl, bc                                   ; $539C: $09
     ld   [hl], a                                  ; $539D: $77
     ld   hl, hJingle                              ; $539E: $21 $F2 $FF

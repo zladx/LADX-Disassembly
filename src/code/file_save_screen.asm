@@ -34,8 +34,8 @@ FileSaveInitial::
     ld   a, $03                                   ; $4020: $3E $03
     ld   [rSVBK], a                               ; $4022: $E0 $70
 
-    ; If $D000 == 0...
-    ld   a, [$D000]                               ; $4024: $FA $00 $D0
+    ; If wIsFileSelectionArrowShifted == 0...
+    ld   a, [wIsFileSelectionArrowShifted]                               ; $4024: $FA $00 $D0
     and  a                                        ; $4027: $A7
     jr   nz, .done                                ; $4028: $20 $14
 
@@ -58,9 +58,9 @@ FileSaveInitial::
     and  a                                        ; $4036: $A7
     jr   nz, .loop                                ; $4037: $20 $F1
 
-    ; Set $D000 to 1
+    ; Set wIsFileSelectionArrowShifted to 1
     ld   a, $01                                   ; $4039: $3E $01
-    ld   [$D000], a                               ; $403B: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a                               ; $403B: $EA $00 $D0
 
 .done
     ; Switch back to WRAM bank 0

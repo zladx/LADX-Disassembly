@@ -491,7 +491,7 @@ jr_004_431A:
     ld   hl, wEntitiesSpeedXTable                                ; $431D: $21 $40 $C2
     add  hl, bc                                   ; $4320: $09
     ld   a, [hl]                                  ; $4321: $7E
-    ld   [$D000], a                               ; $4322: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a                               ; $4322: $EA $00 $D0
     ld   hl, wEntitiesSpeedYTable                                ; $4325: $21 $50 $C2
     add  hl, bc                                   ; $4328: $09
     ld   a, [hl]                                  ; $4329: $7E
@@ -1254,7 +1254,7 @@ GenieState3Handler::
     add  hl, bc                                   ; $48EF: $09
     ld   a, [hl]                                  ; $48F0: $7E
     push af                                       ; $48F1: $F5
-    ld   a, [$D000]                               ; $48F2: $FA $00 $D0
+    ld   a, [wIsFileSelectionArrowShifted]                               ; $48F2: $FA $00 $D0
     add  [hl]                                     ; $48F5: $86
     ld   [hl], a                                  ; $48F6: $77
     ld   hl, wEntitiesSpeedYTable                                ; $48F7: $21 $50 $C2

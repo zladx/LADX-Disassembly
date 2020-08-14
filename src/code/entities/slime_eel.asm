@@ -1335,7 +1335,7 @@ jr_005_7635:
     add  hl, de                                   ; $7643: $19
     ldh  a, [hActiveEntityPosX]                   ; $7644: $F0 $EE
     ld   [hl], a                                  ; $7646: $77
-    ld   hl, $D100                                ; $7647: $21 $00 $D1
+    ld   hl, wD100                                ; $7647: $21 $00 $D1
     add  hl, de                                   ; $764A: $19
     ldh  a, [hActiveEntityVisualPosY]             ; $764B: $F0 $EC
     ld   [hl], a                                  ; $764D: $77
@@ -1391,7 +1391,7 @@ func_005_766E::
     add  hl, de                                   ; $7699: $19
     ld   a, [hl]                                  ; $769A: $7E
     ldh  [hActiveEntityPosX], a                   ; $769B: $E0 $EE
-    ld   hl, $D100                                ; $769D: $21 $00 $D1
+    ld   hl, wD100                                ; $769D: $21 $00 $D1
     add  hl, de                                   ; $76A0: $19
     ld   a, [hl]                                  ; $76A1: $7E
     ldh  [hActiveEntityVisualPosY], a             ; $76A2: $E0 $EC
@@ -1408,7 +1408,7 @@ func_005_766E::
     add  hl, de                                   ; $76B9: $19
     ld   a, [hl]                                  ; $76BA: $7E
     ldh  [hActiveEntityPosX], a                   ; $76BB: $E0 $EE
-    ld   hl, $D100                                ; $76BD: $21 $00 $D1
+    ld   hl, wD100                                ; $76BD: $21 $00 $D1
     add  hl, de                                   ; $76C0: $19
     ld   a, [hl]                                  ; $76C1: $7E
     ldh  [hActiveEntityVisualPosY], a             ; $76C2: $E0 $EC
@@ -1425,7 +1425,7 @@ func_005_766E::
     add  hl, de                                   ; $76D9: $19
     ld   a, [hl]                                  ; $76DA: $7E
     ldh  [hActiveEntityPosX], a                   ; $76DB: $E0 $EE
-    ld   hl, $D100                                ; $76DD: $21 $00 $D1
+    ld   hl, wD100                                ; $76DD: $21 $00 $D1
     add  hl, de                                   ; $76E0: $19
     ld   a, [hl]                                  ; $76E1: $7E
     ldh  [hActiveEntityVisualPosY], a             ; $76E2: $E0 $EC
@@ -1521,7 +1521,7 @@ jr_005_7776:
 
 label_005_7777:
     ld   e, $80                                   ; $7777: $1E $80
-    ld   hl, $D100                                ; $7779: $21 $00 $D1
+    ld   hl, wD100                                ; $7779: $21 $00 $D1
 
 jr_005_777C:
     xor  a                                        ; $777C: $AF

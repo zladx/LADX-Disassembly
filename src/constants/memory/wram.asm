@@ -1374,7 +1374,7 @@ wCE87::
 wEntitiesClearedRooms::
   ds $FF ; CF00 - CFFF
 
-section "WRAM Bank1", wramx[$d000], bank[1]
+section "WRAM Bank1", wramx[$D000], bank[1]
 
 ; This location has multiple uses.
 ; Is the arrow on the File Selection screen on the COPY item

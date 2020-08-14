@@ -653,7 +653,7 @@ CopyToBGMap0::
 
 func_BB5::
     ld   bc, $168                                 ; $0BB5: $01 $68 $01
-    ld   de, $D000                                ; $0BB8: $11 $00 $D0
+    ld   de, wIsFileSelectionArrowShifted                                ; $0BB8: $11 $00 $D0
     jp   CopyData                                 ; $0BBB: $C3 $14 $29
 
 LoadBaseTiles_trampoline::
@@ -926,19 +926,19 @@ AddTranscientVfx::
     cp   -1                                       ; $0CD6: $FE $FF
     jr   nz, .loop                                ; $0CD8: $20 $F2
 
-    ; If a zero value is not found, decrement $C5C0
-    ld   hl, $C5C0                                ; $0CDA: $21 $C0 $C5
+    ; If a zero value is not found, decrement wC5C0
+    ld   hl, wC5C0                                ; $0CDA: $21 $C0 $C5
     dec  [hl]                                     ; $0CDD: $35
-    ; (wrap $C5C0 to $0F if it reached 0)
+    ; (wrap wC5C0 to $0F if it reached 0)
     ld   a, [hl]                                  ; $0CDE: $7E
     cp   -1                                       ; $0CDF: $FE $FF
     jr   nz, .wrapEnd                             ; $0CE1: $20 $05
     ld   a, $0F                                   ; $0CE3: $3E $0F
-    ld   [$C5C0], a                               ; $0CE5: $EA $C0 $C5
+    ld   [wC5C0], a                               ; $0CE5: $EA $C0 $C5
 .wrapEnd
 
-    ; e = $C5C0
-    ld   a, [$C5C0]                               ; $0CE8: $FA $C0 $C5
+    ; e = wC5C0
+    ld   a, [wC5C0]                               ; $0CE8: $FA $C0 $C5
     ld   e, a                                     ; $0CEB: $5F
 
 .jp_CEC
@@ -2220,7 +2220,7 @@ SpawnPlayerProjectile::
     ld   hl, wEntitiesDirectionTable              ; $1479: $21 $80 $C3
     add  hl, de                                   ; $147C: $19
     ld   [hl], a                                  ; $147D: $77
-    ld   hl, $C5D0                                ; $147E: $21 $D0 $C5
+    ld   hl, wC5D0                                ; $147E: $21 $D0 $C5
     add  hl, de                                   ; $1481: $19
     ld   [hl], a                                  ; $1482: $77
     ld   hl, wEntitiesUnknowTableJ                ; $1483: $21 $F0 $C4
@@ -3244,7 +3244,7 @@ label_1E33::
     ld   a, BANK(Npc2Tiles)                       ; $1E33: $3E $11
     call AdjustBankNumberForGBC                   ; $1E35: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $1E38: $EA $00 $21
-    ld   a, [$D000]                               ; $1E3B: $FA $00 $D0
+    ld   a, [wIsFileSelectionArrowShifted]                               ; $1E3B: $FA $00 $D0
     swap a                                        ; $1E3E: $CB $37
     and  $F0                                      ; $1E40: $E6 $F0
     ld   e, a                                     ; $1E42: $5F
@@ -3274,7 +3274,7 @@ label_1E69::
     ld   a, BANK(EndingTiles)                     ; $1E69: $3E $13
     call AdjustBankNumberForGBC                   ; $1E6B: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $1E6E: $EA $00 $21
-    ld   a, [$D000]                               ; $1E71: $FA $00 $D0
+    ld   a, [wIsFileSelectionArrowShifted]                               ; $1E71: $FA $00 $D0
     swap a                                        ; $1E74: $CB $37
     and  $F0                                      ; $1E76: $E6 $F0
     ld   e, a                                     ; $1E78: $5F

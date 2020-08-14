@@ -37,7 +37,7 @@ InterruptLCDStatus::
     cp   $05 ; if GameplaySubtype != 5            ; $039D: $FE $05
     jr   nz, .setStandardScrollY                  ; $039F: $20 $05
     ; GameplaySubtype == 5
-    ld   a, [$D000]  ; override scrollY with WRA1:$D000 value ; $03A1: $FA $00 $D0
+    ld   a, [wIsFileSelectionArrowShifted]  ; override scrollY with WRA1:wIsFileSelectionArrowShifted value ; $03A1: $FA $00 $D0
     jr   .setScrollY                              ; $03A4: $18 $02
 
 .setStandardScrollY

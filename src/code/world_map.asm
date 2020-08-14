@@ -35,7 +35,7 @@ WorldMapState0Handler::
     di                                            ; $5655: $F3
     ld   a, $03                                   ; $5656: $3E $03
     ld   [rSVBK], a                               ; $5658: $E0 $70
-    ld   a, [$D000]                               ; $565A: $FA $00 $D0
+    ld   a, [wIsFileSelectionArrowShifted]                               ; $565A: $FA $00 $D0
     and  a                                        ; $565D: $A7
     jr   nz, jr_001_5674                          ; $565E: $20 $14
 
@@ -52,7 +52,7 @@ jr_001_5660::
     and  a                                        ; $566C: $A7
     jr   nz, jr_001_5660                          ; $566D: $20 $F1
     ld   a, $01                                   ; $566F: $3E $01
-    ld   [$D000], a                               ; $5671: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a                               ; $5671: $EA $00 $D0
 
 jr_001_5674::
     xor  a                                        ; $5674: $AF

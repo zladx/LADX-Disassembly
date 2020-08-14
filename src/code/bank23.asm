@@ -276,7 +276,7 @@ Data_023_7E80::
     db   $00, $00, $00, $00, $00
 
 func_023_7E95::
-    ld   a, [$D00D]                               ; $7E95: $FA $0D $D0
+    ld   a, [wD00D]                               ; $7E95: $FA $0D $D0
     ld   e, a                                     ; $7E98: $5F
     ld   d, $00                                   ; $7E99: $16 $00
     sla  e                                        ; $7E9B: $CB $23
@@ -314,7 +314,7 @@ jr_023_7EBE:
     ret  z                                        ; $7EC8: $C8
 
     ld   de, wDC91                                ; $7EC9: $11 $91 $DC
-    ld   a, [$D00D]                               ; $7ECC: $FA $0D $D0
+    ld   a, [wD00D]                               ; $7ECC: $FA $0D $D0
     cp   $50                                      ; $7ECF: $FE $50
     jr   z, jr_023_7EEE                           ; $7ED1: $28 $1B
 

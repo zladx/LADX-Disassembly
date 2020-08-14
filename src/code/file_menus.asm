@@ -34,7 +34,7 @@ FileSelectionPrepare0::
     ld   a, $04                                   ; $47E9: $3E $04
     ld   [wTileMapToLoad], a                      ; $47EB: $EA $FE $D6
     xor  a                                        ; $47EE: $AF
-    ld   [$D000], a                               ; $47EF: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a                               ; $47EF: $EA $00 $D0
     jp   IncrementGameplaySubtypeAndReturn        ; $47F2: $C3 $D6 $44
 
 FileSelectionPrepare1::
@@ -325,15 +325,15 @@ jr_001_4920::
     and  $03                                      ; $4929: $E6 $03
     jr   z, jr_001_4938                           ; $492B: $28 $0B
     call func_001_6BAE                            ; $492D: $CD $AE $6B
-    ld   a, [$D000]                               ; $4930: $FA $00 $D0
+    ld   a, [wIsFileSelectionArrowShifted]                               ; $4930: $FA $00 $D0
     xor  $01                                      ; $4933: $EE $01
-    ld   [$D000], a                               ; $4935: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a                               ; $4935: $EA $00 $D0
 
 jr_001_4938::
     ldh  a, [hFrameCounter]                       ; $4938: $F0 $E7
     and  $10                                      ; $493A: $E6 $10
     jr   nz, func_001_4954                        ; $493C: $20 $16
-    ld   a, [$D000]                               ; $493E: $FA $00 $D0
+    ld   a, [wIsFileSelectionArrowShifted]                               ; $493E: $FA $00 $D0
     and  a                                        ; $4941: $A7
     ld   a, FILE_2C                               ; $4942: $3E $2C
     jr   z, jr_001_4948                           ; $4944: $28 $02

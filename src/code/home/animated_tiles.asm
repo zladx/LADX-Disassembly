@@ -74,14 +74,14 @@ AnimateTiles::
     ld   a, $10                                   ; $1B27: $3E $10
     call AdjustBankNumberForGBC                   ; $1B29: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $1B2C: $EA $00 $21
-    ; Copy 32 bytes of data from address stored at $D006 to address stored at $D008
-    ld   a, [$D006]                               ; $1B2F: $FA $06 $D0
+    ; Copy 32 bytes of data from address stored at wD006 to address stored at wD008
+    ld   a, [wD006]                               ; $1B2F: $FA $06 $D0
     ld   l, a                                     ; $1B32: $6F
-    ld   a, [$D007]                               ; $1B33: $FA $07 $D0
+    ld   a, [wD007]                               ; $1B33: $FA $07 $D0
     ld   h, a                                     ; $1B36: $67
-    ld   a, [$D008]                               ; $1B37: $FA $08 $D0
+    ld   a, [wD008]                               ; $1B37: $FA $08 $D0
     ld   e, a                                     ; $1B3A: $5F
-    ld   a, [$D009]                               ; $1B3B: $FA $09 $D0
+    ld   a, [wD009]                               ; $1B3B: $FA $09 $D0
     ld   d, a                                     ; $1B3E: $57
     ld   bc, $20                                  ; $1B3F: $01 $20 $00
     jp   CopyData                                 ; $1B42: $C3 $14 $29

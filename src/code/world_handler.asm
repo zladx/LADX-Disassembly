@@ -227,7 +227,7 @@ GameplayWorldSubtype2Handler::
     ld   a, $03                                   ; $44BE: $3E $03
     ld   [rSVBK], a                               ; $44C0: $E0 $70
     xor  a                                        ; $44C2: $AF
-    ld   [$D000], a                               ; $44C3: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a                               ; $44C3: $EA $00 $D0
     ld   [rSVBK], a                               ; $44C6: $E0 $70
     ei                                            ; $44C8: $FB
 

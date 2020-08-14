@@ -5109,7 +5109,7 @@ func_007_6142::
     ld   [hl], a                                  ; $6158: $77
 
 jr_007_6159:
-    ld   hl, $C5D0                                ; $6159: $21 $D0 $C5
+    ld   hl, wC5D0                                ; $6159: $21 $D0 $C5
     add  hl, bc                                   ; $615C: $09
     ld   [hl], $FF                                ; $615D: $36 $FF
     call IncrementEntityState                     ; $615F: $CD $12 $3B
@@ -8544,7 +8544,7 @@ func_007_76E0::
     ld   [hl], a                                  ; $76E6: $77
 
 func_007_76E7::
-    ld   hl, $C5D0                                ; $76E7: $21 $D0 $C5
+    ld   hl, wC5D0                                ; $76E7: $21 $D0 $C5
     add  hl, bc                                   ; $76EA: $09
     ld   [hl], $FF                                ; $76EB: $36 $FF
 

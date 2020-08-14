@@ -54,7 +54,7 @@ IntroHandlerEntryPoint::
     ld   a, $08                                   ; $6E60: $3E $08
 .paletteEnd
 
-    ld   [$D013], a                               ; $6E62: $EA $13 $D0
+    ld   [wD013], a                               ; $6E62: $EA $13 $D0
     ld   a, $0D                                   ; $6E65: $3E $0D
     ld   [wGameplaySubtype], a                    ; $6E67: $EA $96 $DB
     xor  a                                        ; $6E6A: $AF
@@ -74,7 +74,7 @@ IntroHandlerEntryPoint::
     call ResetIntroTimers                         ; $6E84: $CD $9D $73
     ld   a, MUSIC_TITLE_SCREEN                    ; $6E87: $3E $0D
     ld   [wMusicTrackToPlay], a                   ; $6E89: $EA $68 $D3
-    ld   [$D00F], a                               ; $6E8C: $EA $0F $D0
+    ld   [wD00F], a                               ; $6E8C: $EA $0F $D0
     call func_001_7D4E                            ; $6E8F: $CD $4E $7D
     jr   .enableVBlankInterruptAndReturn          ; $6E92: $18 $14
 
@@ -105,12 +105,12 @@ RenderIntroFrame::
     cp   GAMEPLAY_INTRO_LIGHTNING                 ; $6EB8: $FE $05
     jr   nc, .dispatchScene                       ; $6EBA: $30 $1C
 
-    ; Decrement $D000 if > 0
-    ld   a, [$D000]                               ; $6EBC: $FA $00 $D0
+    ; Decrement wIsFileSelectionArrowShifted if > 0
+    ld   a, [wIsFileSelectionArrowShifted]                               ; $6EBC: $FA $00 $D0
     and  a                                        ; $6EBF: $A7
     jr   z, .jp_6EC6                              ; $6EC0: $28 $04
     dec  a                                        ; $6EC2: $3D
-    ld   [$D000], a                               ; $6EC3: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a                               ; $6EC3: $EA $00 $D0
 .jp_6EC6
 
     rra                                           ; $6EC6: $1F
@@ -164,9 +164,9 @@ ENDC
     ld   [wLCDControl], a                         ; $6F19: $EA $FD $D6
     ld   [rLCDC], a                               ; $6F1C: $E0 $40
     ld   a, $B4                                   ; $6F1E: $3E $B4
-    ld   [$D016], a                               ; $6F20: $EA $16 $D0
+    ld   [wD016], a                               ; $6F20: $EA $16 $D0
     xor  a                                        ; $6F23: $AF
-    ld   [$D017], a                               ; $6F24: $EA $17 $D0
+    ld   [wD017], a                               ; $6F24: $EA $17 $D0
     jp   IncrementGameplaySubtypeAndReturn        ; $6F27: $C3 $D6 $44
 
 IntroSceneStage1Handler::
@@ -198,7 +198,7 @@ IntroSceneStage2Handler::
     ld   a, $00                                   ; $6F55: $3E $00
     ld   [rLYC], a                                ; $6F57: $E0 $45
     ld   e, $11                                   ; $6F59: $1E $11
-    ld   hl, $D000                                ; $6F5B: $21 $00 $D0
+    ld   hl, wIsFileSelectionArrowShifted                                ; $6F5B: $21 $00 $D0
     xor  a                                        ; $6F5E: $AF
 
 .loop
@@ -271,7 +271,7 @@ IntroShipOnSeaHandler::
     ld   [wEntitiesStateTable], a                               ; $6FE6: $EA $90 $C2
     ld   a, $05                                   ; $6FE9: $3E $05
     ld   [wGameplaySubtype], a                    ; $6FEB: $EA $96 $DB
-    ld   [$D00F], a                               ; $6FEE: $EA $0F $D0
+    ld   [wD00F], a                               ; $6FEE: $EA $0F $D0
     call func_001_7D4E                            ; $6FF1: $CD $4E $7D
 
     ld   a, $11                                   ; $6FF4: $3E $11
@@ -399,7 +399,7 @@ RenderLightning::
 
 .playSfx
     ld   a, $1C                                   ; $70A9: $3E $1C
-    ld   [$D000], a                               ; $70AB: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a                               ; $70AB: $EA $00 $D0
 
     call PlayBombExplosionSfx                     ; $70AE: $CD $4B $0C
 
@@ -501,7 +501,7 @@ label_7154::
 
 IntroStage6Handler::
     call func_001_71C7                            ; $7158: $CD $C7 $71
-    ld   a, [$D001]                               ; $715B: $FA $01 $D0
+    ld   a, [wIntroTimer]                               ; $715B: $FA $01 $D0
     cp   $A0                                      ; $715E: $FE $A0
     jr   nz, .jr_001_7168                         ; $7160: $20 $06
     push af                                       ; $7162: $F5
@@ -511,7 +511,7 @@ IntroStage6Handler::
 
 .jr_001_7168
     dec  a                                        ; $7168: $3D
-    ld   [$D001], a                               ; $7169: $EA $01 $D0
+    ld   [wIntroTimer], a                               ; $7169: $EA $01 $D0
     jr   nz, .jr_001_7188                         ; $716C: $20 $1A
     ld   a, $07                                   ; $716E: $3E $07
     ld   [wGameplaySubtype], a                    ; $7170: $EA $96 $DB
@@ -530,17 +530,17 @@ IntroStage6Handler::
     jr   nc, .return                              ; $718A: $30 $36
     and  $03                                      ; $718C: $E6 $03
     jr   nz, .jr_001_719B                         ; $718E: $20 $0B
-    ld   a, [$D010]                               ; $7190: $FA $10 $D0
+    ld   a, [wD010]                               ; $7190: $FA $10 $D0
     cp   $0C                                      ; $7193: $FE $0C
     jr   z, .jr_001_719B                          ; $7195: $28 $04
     inc  a                                        ; $7197: $3C
-    ld   [$D010], a                               ; $7198: $EA $10 $D0
+    ld   [wD010], a                               ; $7198: $EA $10 $D0
 
 .jr_001_719B
     ldh  a, [hFrameCounter]                       ; $719B: $F0 $E7
     and  $03                                      ; $719D: $E6 $03
     ld   e, a                                     ; $719F: $5F
-    ld   a, [$D010]                               ; $71A0: $FA $10 $D0
+    ld   a, [wD010]                               ; $71A0: $FA $10 $D0
     add  a, e                                     ; $71A3: $83
     ld   e, a                                     ; $71A4: $5F
     ld   d, $00                                   ; $71A5: $16 $00
@@ -630,7 +630,7 @@ Data_001_7264::
     dw Data_001_7251                              ; $7270
 
 IntroStage8Handler::
-    ld   a, [$D002]                               ; $7272: $FA $02 $D0
+    ld   a, [wIntroSubTimer]                               ; $7272: $FA $02 $D0
     sla  a                                        ; $7275: $CB $27
     ld   e, a                                     ; $7277: $5F
     ld   d, $00                                   ; $7278: $16 $00
@@ -656,9 +656,9 @@ IntroStage8Handler::
     call func_001_7338                            ; $7293: $CD $38 $73
 .gbc
 
-    ld   a, [$D002]                               ; $7296: $FA $02 $D0
+    ld   a, [wIntroSubTimer]                               ; $7296: $FA $02 $D0
     inc  a                                        ; $7299: $3C
-    ld   [$D002], a                               ; $729A: $EA $02 $D0
+    ld   [wIntroSubTimer], a                               ; $729A: $EA $02 $D0
     cp   $07                                      ; $729D: $FE $07
     jr   nz, .return                              ; $729F: $20 $03
     call IncrementGameplaySubtype                 ; $72A1: $CD $D6 $44
@@ -729,7 +729,7 @@ Data_001_732A::
     dw   Data_001_7317                            ; $7336
 
 func_001_7338::
-    ld   a, [$D002]                               ; $7338: $FA $02 $D0
+    ld   a, [wIntroSubTimer]                               ; $7338: $FA $02 $D0
     sla  a                                        ; $733B: $CB $27
     ld   e, a                                     ; $733D: $5F
     ld   d, $00                                   ; $733E: $16 $00
@@ -791,7 +791,7 @@ IntroStageAHandler::
 .endIf
 
     ld   a, $3C                                   ; $7395: $3E $3C
-    ld   [$D015], a                               ; $7397: $EA $15 $D0
+    ld   [wD015], a                               ; $7397: $EA $15 $D0
     call IncrementGameplaySubtype                 ; $739A: $CD $D6 $44
     ; fallthrough
 
@@ -801,7 +801,7 @@ ResetIntroTimers::
     xor  a                                        ; $73A2: $AF
     ld   [wIntroSubTimer], a                      ; $73A3: $EA $02 $D0
     ld   a, $FF                                   ; $73A6: $3E $FF
-    ld   [$D003], a                               ; $73A8: $EA $03 $D0
+    ld   [wD003], a                               ; $73A8: $EA $03 $D0
     ret                                           ; $73AB: $C9
 
 Data_001_73AC::
@@ -852,9 +852,9 @@ TitleScreenHandler::
     ld   hl, wEntitiesTransitionCountdownTable                                ; $73F2: $21 $E0 $C2
     add  hl, de                                   ; $73F5: $19
     ld   [hl], $3F                                ; $73F6: $36 $3F
-    ld   a, [$D003]                               ; $73F8: $FA $03 $D0
+    ld   a, [wD003]                               ; $73F8: $FA $03 $D0
     inc  a                                        ; $73FB: $3C
-    ld   [$D003], a                               ; $73FC: $EA $03 $D0
+    ld   [wD003], a                               ; $73FC: $EA $03 $D0
     and  $07                                      ; $73FF: $E6 $07
     ld   c, a                                     ; $7401: $4F
     ld   b, $00                                   ; $7402: $06 $00
@@ -873,14 +873,14 @@ TitleScreenHandler::
     ld   [hl], a                                  ; $7417: $77
 
 .jr_001_7418
-    ld   a, [$D002]                               ; $7418: $FA $02 $D0
+    ld   a, [wIntroSubTimer]                               ; $7418: $FA $02 $D0
     inc  a                                        ; $741B: $3C
-    ld   [$D002], a                               ; $741C: $EA $02 $D0
+    ld   [wIntroSubTimer], a                               ; $741C: $EA $02 $D0
     and  $0F                                      ; $741F: $E6 $0F
     jr   nz, .return                              ; $7421: $20 $16
-    ld   a, [$D001]                               ; $7423: $FA $01 $D0
+    ld   a, [wIntroTimer]                               ; $7423: $FA $01 $D0
     dec  a                                        ; $7426: $3D
-    ld   [$D001], a                               ; $7427: $EA $01 $D0
+    ld   [wIntroTimer], a                               ; $7427: $EA $01 $D0
     jr   nz, .return                              ; $742A: $20 $0D
     call IncrementGameplaySubtype                 ; $742C: $CD $D6 $44
     xor  a                                        ; $742F: $AF
@@ -914,7 +914,7 @@ IntroStageDHandler::
     ldh  [hBaseScrollX], a                        ; $745D: $E0 $96
     ldh  [$FF97], a                               ; $745F: $E0 $97
     dec  a                                        ; $7461: $3D
-    ld   [$D018], a                               ; $7462: $EA $18 $D0
+    ld   [wD018], a                               ; $7462: $EA $18 $D0
     ret                                           ; $7465: $C9
 
 RenderRain::
@@ -1645,7 +1645,7 @@ ELSE
 ENDC
 
 func_001_7920::
-    ld   hl, $D015                                ; $7920: $21 $15 $D0
+    ld   hl, wD015                                ; $7920: $21 $15 $D0
     ld   a, [hl]                                  ; $7923: $7E
     and  a                                        ; $7924: $A7
     jr   z, .jr_001_7929                          ; $7925: $28 $02
@@ -1663,24 +1663,24 @@ ENDC
 .jr_001_7929
     ld   a, X_POS                                 ; $7929: $3E $78
     ldh  [hActiveEntityPosX], a                   ; $792B: $E0 $EE
-    ld   hl, $D018                                ; $792D: $21 $18 $D0
+    ld   hl, wD018                                ; $792D: $21 $18 $D0
     ld   a, Y_OFFSET                              ; $7930: $3E $59
     add  a, [hl]                                  ; $7932: $86
     ldh  [hActiveEntityVisualPosY], a             ; $7933: $E0 $EC
     ldh  a, [hIsGBC]                              ; $7935: $F0 $FE
     and  a                                        ; $7937: $A7
     jr   nz, .jr_001_795D                         ; $7938: $20 $23
-    ld   a, [$D013]                               ; $793A: $FA $13 $D0
+    ld   a, [wD013]                               ; $793A: $FA $13 $D0
     cp   $04                                      ; $793D: $FE $04
     jr   z, .jr_001_797D_a                        ; $793F: $28 $3C
-    ld   hl, $D014                                ; $7941: $21 $14 $D0
+    ld   hl, wD014                                ; $7941: $21 $14 $D0
     inc  [hl]                                     ; $7944: $34
     ld   a, [hl]                                  ; $7945: $7E
     cp   $0C                                      ; $7946: $FE $0C
     jp   nz, .jr_001_7997                         ; $7948: $C2 $97 $79
     xor  a                                        ; $794B: $AF
     ld   [hl], a                                  ; $794C: $77
-    ld   hl, $D013                                ; $794D: $21 $13 $D0
+    ld   hl, wD013                                ; $794D: $21 $13 $D0
     inc  [hl]                                     ; $7950: $34
     ld   a, [hl]                                  ; $7951: $7E
     cp   $04                                      ; $7952: $FE $04
@@ -1689,17 +1689,17 @@ ENDC
     jp   .jr_001_7997                             ; $795A: $C3 $97 $79
 
 .jr_001_795D
-    ld   a, [$D013]                               ; $795D: $FA $13 $D0
+    ld   a, [wD013]                               ; $795D: $FA $13 $D0
     cp   $08                                      ; $7960: $FE $08
     jr   z, .jr_001_797D_a                        ; $7962: $28 $19
-    ld   hl, $D014                                ; $7964: $21 $14 $D0
+    ld   hl, wD014                                ; $7964: $21 $14 $D0
     inc  [hl]                                     ; $7967: $34
     ld   a, [hl]                                  ; $7968: $7E
     cp   $08                                      ; $7969: $FE $08
     jr   nz, .jr_001_797D                         ; $796B: $20 $10
     xor  a                                        ; $796D: $AF
     ld   [hl], a                                  ; $796E: $77
-    ld   hl, $D013                                ; $796F: $21 $13 $D0
+    ld   hl, wD013                                ; $796F: $21 $13 $D0
     inc  [hl]                                     ; $7972: $34
     ld   a, [hl]                                  ; $7973: $7E
     cp   $08                                      ; $7974: $FE $08
@@ -1709,7 +1709,7 @@ ENDC
 
 .jr_001_797D_a
 IF __PATCH_6__
-    ld   hl, $d016
+    ld   hl, wD016
     ld   a, [hl+]
     ld   b, [hl]
     or   b
@@ -1724,26 +1724,26 @@ IF __PATCH_6__
     ld   [hl], a
     jr   .jr_001_797D
 .jr_001_7a63
-    ld   hl, $d012
+    ld   hl, wD012
     inc  [hl]
     ld   a, [hl]
     cp   $06
     jr   nz, .jr_001_7a82
     xor  a
     ld   [hl], a
-    ld   a, [$d011]
+    ld   a, [wD011]
     inc  a
     cp   $09
     jr   nz, .jr_001_7a7f
     call func_001_7BC3
     xor  a
-    ld   [$d011], a
+    ld   [wD011], a
     jr   .jr_001_797D
 .jr_001_7a7f
-    ld   [$d011], a
+    ld   [wD011], a
 .jr_001_7a82
     ld   hl, Data_001_7850_alt
-    ld   a, [$d011]
+    ld   a, [wD011]
     sla  a
     sla  a
     sla  a
@@ -1761,7 +1761,7 @@ ENDC
     ldh  a, [hIsGBC]                              ; $797D: $F0 $FE
     and  a                                        ; $797F: $A7
     jr   z, .jr_001_7997                          ; $7980: $28 $15
-    ld   a, [$D013]                               ; $7982: $FA $13 $D0
+    ld   a, [wD013]                               ; $7982: $FA $13 $D0
     cp   $08                                      ; $7985: $FE $08
     jr   z, .jr_001_7990                          ; $7987: $28 $07
     ; Renders both Data_001_7850 and Data_001_7870
@@ -1775,7 +1775,7 @@ ENDC
     jr   .render                                  ; $7995: $18 $13
 
 .jr_001_7997
-    ld   a, [$D013]                               ; $7997: $FA $13 $D0
+    ld   a, [wD013]                               ; $7997: $FA $13 $D0
 IF __PATCH_6__
     cp   $04
     jr   z, .jr_001_79A5
@@ -1853,9 +1853,9 @@ IF __PATCH_6__
 func_001_7BC3:
     call GetRandomByte
     or   $20
-    ld   [$d016], a
+    ld   [wD016], a
     ld   a, $01
-    ld   [$d017], a
+    ld   [wD017], a
     ret
 ENDC
 
@@ -1938,12 +1938,12 @@ InertLinkState1Handler::
     jp   IncrementEntityState                     ; $7A6B: $C3 $12 $3B
 
 InertLinkState2Handler::
-    ld   a, [$D00A]                               ; $7A6E: $FA $0A $D0
+    ld   a, [wD00A]                               ; $7A6E: $FA $0A $D0
     cp   $13                                      ; $7A71: $FE $13
     jr   z, .jr_7AB3                              ; $7A73: $28 $3E
-    ld   a, [$D00E]                               ; $7A75: $FA $0E $D0
+    ld   a, [wCreditsSubscene]                               ; $7A75: $FA $0E $D0
     inc  a                                        ; $7A78: $3C
-    ld   [$D00E], a                               ; $7A79: $EA $0E $D0
+    ld   [wCreditsSubscene], a                               ; $7A79: $EA $0E $D0
     and  $03                                      ; $7A7C: $E6 $03
     jr   nz, .return                              ; $7A7E: $20 $32
     ld   a, [wEntitiesPosYTable]                  ; $7A80: $FA $10 $C2
@@ -1970,7 +1970,7 @@ InertLinkState2Handler::
     push bc                                       ; $7AA1: $C5
     call func_7C60                                ; $7AA2: $CD $60 $7C
     pop  bc                                       ; $7AA5: $C1
-    ld   a, [$D00A]                               ; $7AA6: $FA $0A $D0
+    ld   a, [wD00A]                               ; $7AA6: $FA $0A $D0
     cp   $0B                                      ; $7AA9: $FE $0B
     jr   nz, .return                              ; $7AAB: $20 $05
     ld   a, MUSIC_TITLE_SCREEN_INTRO              ; $7AAD: $3E $01
@@ -1998,9 +1998,9 @@ InertLinkState3Handler::
     jr   nz, .return                              ; $7ACE: $20 $13
     call IncrementGameplaySubtype                 ; $7AD0: $CD $D6 $44
     xor  a                                        ; $7AD3: $AF
-    ld   [$D002], a                               ; $7AD4: $EA $02 $D0
-    ld   [$D003], a                               ; $7AD7: $EA $03 $D0
-    ld   [$D004], a                               ; $7ADA: $EA $04 $D0
+    ld   [wIntroSubTimer], a                               ; $7AD4: $EA $02 $D0
+    ld   [wD003], a                               ; $7AD7: $EA $03 $D0
+    ld   [wD004], a                               ; $7ADA: $EA $04 $D0
     ld   [wEntitiesStatusTable], a                ; $7ADD: $EA $80 $C2
     ld   [wEntitiesStatusTable+1], a                               ; $7AE0: $EA $81 $C2
 
@@ -2058,16 +2058,16 @@ Data_001_7AE4::
     db   $7E, $7E, $7E, $7E                       ; $7C5C
 
 func_7C60::
-    ld   a, [$D00A]                               ; $7C60: $FA $0A $D0
+    ld   a, [wD00A]                               ; $7C60: $FA $0A $D0
     and  a                                        ; $7C63: $A7
     jr   nz, .jr_7C70                             ; $7C64: $20 $0A
     ld   a, $F4                                   ; $7C66: $3E $F4
-    ld   [$D00B], a                               ; $7C68: $EA $0B $D0
+    ld   [wD00B], a                               ; $7C68: $EA $0B $D0
     ld   a, $9B                                   ; $7C6B: $3E $9B
-    ld   [$D00C], a                               ; $7C6D: $EA $0C $D0
+    ld   [wD00C], a                               ; $7C6D: $EA $0C $D0
 
 .jr_7C70::
-    ld   a, [$D00A]                               ; $7C70: $FA $0A $D0
+    ld   a, [wD00A]                               ; $7C70: $FA $0A $D0
     ld   e, a                                     ; $7C73: $5F
     ld   d, $00                                   ; $7C74: $16 $00
     sla  e                                        ; $7C76: $CB $23
@@ -2086,9 +2086,9 @@ func_7C60::
     ld   d, a                                     ; $7C8C: $57
     ld   c, $00                                   ; $7C8D: $0E $00
     ld   hl, $D601                                ; $7C8F: $21 $01 $D6
-    ld   a, [$D00C]                               ; $7C92: $FA $0C $D0
+    ld   a, [wD00C]                               ; $7C92: $FA $0C $D0
     ldi  [hl], a                                  ; $7C95: $22
-    ld   a, [$D00B]                               ; $7C96: $FA $0B $D0
+    ld   a, [wD00B]                               ; $7C96: $FA $0B $D0
     ldi  [hl], a                                  ; $7C99: $22
     ld   a, $13                                   ; $7C9A: $3E $13
     ldi  [hl], a                                  ; $7C9C: $22
@@ -2113,21 +2113,21 @@ func_7C60::
     call func_001_7CCB                            ; $7CB3: $CD $CB $7C
 
 .jr_7CB6
-    ld   hl, $D00A                                ; $7CB6: $21 $0A $D0
+    ld   hl, wD00A                                ; $7CB6: $21 $0A $D0
     inc  [hl]                                     ; $7CB9: $34
-    ld   a, [$D00B]                               ; $7CBA: $FA $0B $D0
+    ld   a, [wD00B]                               ; $7CBA: $FA $0B $D0
     sub  a, $20                                   ; $7CBD: $D6 $20
-    ld   [$D00B], a                               ; $7CBF: $EA $0B $D0
-    ld   a, [$D00C]                               ; $7CC2: $FA $0C $D0
+    ld   [wD00B], a                               ; $7CBF: $EA $0B $D0
+    ld   a, [wD00C]                               ; $7CC2: $FA $0C $D0
     sbc  a, $00                                   ; $7CC5: $DE $00
-    ld   [$D00C], a                               ; $7CC7: $EA $0C $D0
+    ld   [wD00C], a                               ; $7CC7: $EA $0C $D0
     ret                                           ; $7CCA: $C9
 
 func_001_7CCB::
     ld   hl, wDC91                                ; $7CCB: $21 $91 $DC
-    ld   a, [$D00C]                               ; $7CCE: $FA $0C $D0
+    ld   a, [wD00C]                               ; $7CCE: $FA $0C $D0
     ldi  [hl], a                                  ; $7CD1: $22
-    ld   a, [$D00B]                               ; $7CD2: $FA $0B $D0
+    ld   a, [wD00B]                               ; $7CD2: $FA $0B $D0
     sub  a, $14                                   ; $7CD5: $D6 $14
     ldi  [hl], a                                  ; $7CD7: $22
     ld   a, $5F                                   ; $7CD8: $3E $5F
@@ -2185,9 +2185,9 @@ func_001_7D01::
 
 .jr_001_7D23
     inc  hl                                       ; $7D23: $23
-    ld   a, [$D004]                               ; $7D24: $FA $04 $D0
+    ld   a, [wD004]                               ; $7D24: $FA $04 $D0
     add  a, $28                                   ; $7D27: $C6 $28
-    ld   [$D004], a                               ; $7D29: $EA $04 $D0
+    ld   [wD004], a                               ; $7D29: $EA $04 $D0
     jr   nc, .jr_001_7D2F                         ; $7D2C: $30 $01
     inc  [hl]                                     ; $7D2E: $34
 
@@ -2226,7 +2226,7 @@ func_001_7D4E::
     add  hl, de                                   ; $7D5C: $19
     ld   e, [hl]                                  ; $7D5D: $5E
     ld   hl, Data_001_7CE1                        ; $7D5E: $21 $E1 $7C
-    ld   a, [$D00F]                               ; $7D61: $FA $0F $D0
+    ld   a, [wD00F]                               ; $7D61: $FA $0F $D0
     and  a                                        ; $7D64: $A7
     jr   z, .jr_001_7D6A                          ; $7D65: $28 $03
     ld   hl, Data_001_7CE9                        ; $7D67: $21 $E9 $7C
@@ -2237,7 +2237,7 @@ func_001_7D4E::
     ld   h, [hl]                                  ; $7D6C: $66
     ld   l, a                                     ; $7D6D: $6F
     ld   de, $8900                                ; $7D6E: $11 $00 $89
-    ld   a, [$D00F]                               ; $7D71: $FA $0F $D0
+    ld   a, [wD00F]                               ; $7D71: $FA $0F $D0
     and  a                                        ; $7D74: $A7
     jr   z, .jr_001_7D7A                          ; $7D75: $28 $03
     ld   de, $9300                                ; $7D77: $11 $00 $93
@@ -2254,13 +2254,13 @@ func_001_7D4E::
     add  a, l                                     ; $7D89: $85
     ld   l, a                                     ; $7D8A: $6F
     ld   a, l                                     ; $7D8B: $7D
-    ld   [$D006], a                               ; $7D8C: $EA $06 $D0
+    ld   [wD006], a                               ; $7D8C: $EA $06 $D0
     ld   a, h                                     ; $7D8F: $7C
-    ld   [$D007], a                               ; $7D90: $EA $07 $D0
+    ld   [wD007], a                               ; $7D90: $EA $07 $D0
     ld   a, e                                     ; $7D93: $7B
-    ld   [$D008], a                               ; $7D94: $EA $08 $D0
+    ld   [wD008], a                               ; $7D94: $EA $08 $D0
     ld   a, d                                     ; $7D97: $7A
-    ld   [$D009], a                               ; $7D98: $EA $09 $D0
+    ld   [wD009], a                               ; $7D98: $EA $09 $D0
 
 jr_001_7D9B::
     ret                                           ; $7D9B: $C9
@@ -2274,25 +2274,25 @@ func_001_7D9C::
 
 .jr_001_7DA6
     ld   hl, wScrollXOffsetForSection+1                                ; $7DA6: $21 $01 $C1
-    ld   a, [$D004]                               ; $7DA9: $FA $04 $D0
+    ld   a, [wD004]                               ; $7DA9: $FA $04 $D0
     add  a, $50                                   ; $7DAC: $C6 $50
-    ld   [$D004], a                               ; $7DAE: $EA $04 $D0
+    ld   [wD004], a                               ; $7DAE: $EA $04 $D0
     jr   nc, .jr_001_7DB4                         ; $7DB1: $30 $01
     inc  [hl]                                     ; $7DB3: $34
 
 .jr_001_7DB4
     inc  hl                                       ; $7DB4: $23
-    ld   a, [$D005]                               ; $7DB5: $FA $05 $D0
+    ld   a, [wD005]                               ; $7DB5: $FA $05 $D0
     add  a, $58                                   ; $7DB8: $C6 $58
-    ld   [$D005], a                               ; $7DBA: $EA $05 $D0
+    ld   [wD005], a                               ; $7DBA: $EA $05 $D0
     jr   nc, .jr_001_7DC0                         ; $7DBD: $30 $01
     inc  [hl]                                     ; $7DBF: $34
 
 .jr_001_7DC0
     inc  hl                                       ; $7DC0: $23
-    ld   a, [$D00D]                               ; $7DC1: $FA $0D $D0
+    ld   a, [wD00D]                               ; $7DC1: $FA $0D $D0
     add  a, $B0                                   ; $7DC4: $C6 $B0
-    ld   [$D00D], a                               ; $7DC6: $EA $0D $D0
+    ld   [wD00D], a                               ; $7DC6: $EA $0D $D0
     jr   nc, .jr_001_7DCC                         ; $7DC9: $30 $01
     inc  [hl]                                     ; $7DCB: $34
 
@@ -2308,25 +2308,25 @@ func_001_7DCF::
 
 .jr_001_7DD9
     ld   hl, wScrollXOffsetForSection+1                                ; $7DD9: $21 $01 $C1
-    ld   a, [$D004]                               ; $7DDC: $FA $04 $D0
+    ld   a, [wD004]                               ; $7DDC: $FA $04 $D0
     add  a, $28                                   ; $7DDF: $C6 $28
-    ld   [$D004], a                               ; $7DE1: $EA $04 $D0
+    ld   [wD004], a                               ; $7DE1: $EA $04 $D0
     jr   nc, .jr_001_7DE7                         ; $7DE4: $30 $01
     inc  [hl]                                     ; $7DE6: $34
 
 .jr_001_7DE7
     inc  hl                                       ; $7DE7: $23
-    ld   a, [$D005]                               ; $7DE8: $FA $05 $D0
+    ld   a, [wD005]                               ; $7DE8: $FA $05 $D0
     add  a, $2C                                   ; $7DEB: $C6 $2C
-    ld   [$D005], a                               ; $7DED: $EA $05 $D0
+    ld   [wD005], a                               ; $7DED: $EA $05 $D0
     jr   nc, .jr_001_7DF3                         ; $7DF0: $30 $01
     inc  [hl]                                     ; $7DF2: $34
 
 .jr_001_7DF3
     inc  hl                                       ; $7DF3: $23
-    ld   a, [$D00D]                               ; $7DF4: $FA $0D $D0
+    ld   a, [wD00D]                               ; $7DF4: $FA $0D $D0
     add  a, $58                                   ; $7DF7: $C6 $58
-    ld   [$D00D], a                               ; $7DF9: $EA $0D $D0
+    ld   [wD00D], a                               ; $7DF9: $EA $0D $D0
     jr   nc, .jr_001_7DFF                         ; $7DFC: $30 $01
     inc  [hl]                                     ; $7DFE: $34
 

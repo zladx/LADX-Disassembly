@@ -527,7 +527,7 @@ func_020_4856::
     di                                            ; $4858: $F3
     ld   a, $05                                   ; $4859: $3E $05
     ld   [rSVBK], a                               ; $485B: $E0 $70
-    ld   hl, $D000                                ; $485D: $21 $00 $D0
+    ld   hl, wIsFileSelectionArrowShifted                                ; $485D: $21 $00 $D0
 
 .loop
     xor  a                                        ; $4860: $AF
@@ -685,7 +685,7 @@ func_020_4923::
     di                                            ; $4931: $F3
     ld   a, $05                                   ; $4932: $3E $05
     ld   [rSVBK], a                               ; $4934: $E0 $70
-    ld   hl, $D011                                ; $4936: $21 $11 $D0
+    ld   hl, wD011                                ; $4936: $21 $11 $D0
     add  hl, de                                   ; $4939: $19
     ld   [hl], a                                  ; $493A: $77
     xor  a                                        ; $493B: $AF
@@ -5900,7 +5900,7 @@ Data_020_7BFE::
     db   $A4, $3C, $29, $31, $29, $31, $EF, $3D
 
 func_020_7C26::
-    ld   a, [$D00D]                               ; $7C26: $FA $0D $D0
+    ld   a, [wD00D]                               ; $7C26: $FA $0D $D0
     cp   $50                                      ; $7C29: $FE $50
     ret  nc                                       ; $7C2B: $D0
 

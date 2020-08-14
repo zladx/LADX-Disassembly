@@ -361,7 +361,7 @@ label_006_4781:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4781: $21 $40 $C3
     add  hl, bc                                   ; $4784: $09
     ld   [hl], $92                                ; $4785: $36 $92
-    ld   hl, $C5D0                                ; $4787: $21 $D0 $C5
+    ld   hl, wC5D0                                ; $4787: $21 $D0 $C5
     add  hl, bc                                   ; $478A: $09
     ld   [hl], $FF                                ; $478B: $36 $FF
     ld   de, Data_006_477D                        ; $478D: $11 $7D $47

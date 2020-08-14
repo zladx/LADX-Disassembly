@@ -7638,7 +7638,7 @@ jr_019_7985:
     sub  [hl]                                     ; $79FF: $96
     ld   e, a                                     ; $7A00: $5F
     ld   d, b                                     ; $7A01: $50
-    ld   hl, $D100                                ; $7A02: $21 $00 $D1
+    ld   hl, wD100                                ; $7A02: $21 $00 $D1
     add  hl, de                                   ; $7A05: $19
     ldh  a, [hScratch2]                           ; $7A06: $F0 $D9
     add  [hl]                                     ; $7A08: $86
@@ -7696,9 +7696,9 @@ jr_019_7985:
     jr   z, label_019_7A74                        ; $7A4A: $28 $28
 
 .jr_019_7A4C
-    ; increment $6 bytes at $D100 by hScratch0
+    ; increment $6 bytes at wD100 by hScratch0
     ld   e, $06                                   ; $7A4C: $1E $06
-    ld   hl, $D100                                ; $7A4E: $21 $00 $D1
+    ld   hl, wD100                                ; $7A4E: $21 $00 $D1
 .loop_019_7A51
     ldh  a, [hScratch0]                           ; $7A51: $F0 $D7
     add  [hl]                                     ; $7A53: $86
@@ -7706,9 +7706,9 @@ jr_019_7985:
     dec  e                                        ; $7A55: $1D
     jr   nz, .loop_019_7A51                       ; $7A56: $20 $F9
 
-    ; increment $6 bytes at $D110 by hScratch2
+    ; increment $6 bytes at wD110 by hScratch2
     ld   e, $06                                   ; $7A58: $1E $06
-    ld   hl, $D110                                ; $7A5A: $21 $10 $D1
+    ld   hl, wD110                                ; $7A5A: $21 $10 $D1
 .loop_019_7A5D
     ldh  a, [hScratch2]                           ; $7A5D: $F0 $D9
     add  [hl]                                     ; $7A5F: $86

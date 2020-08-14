@@ -134,7 +134,7 @@ jr_006_568A:
     jr   nz, jr_006_56C6                          ; $56AF: $20 $15
 
     push hl                                       ; $56B1: $E5
-    ld   hl, $D100                                ; $56B2: $21 $00 $D1
+    ld   hl, wD100                                ; $56B2: $21 $00 $D1
     add  hl, de                                   ; $56B5: $19
     ld   a, [hl]                                  ; $56B6: $7E
     pop  hl                                       ; $56B7: $E1
@@ -228,7 +228,7 @@ jr_006_5726:
     add  hl, de                                   ; $573F: $19
     ldh  a, [hActiveEntityPosX]                   ; $5740: $F0 $EE
     ld   [hl], a                                  ; $5742: $77
-    ld   hl, $D100                                ; $5743: $21 $00 $D1
+    ld   hl, wD100                                ; $5743: $21 $00 $D1
     add  hl, de                                   ; $5746: $19
     ldh  a, [hActiveEntityPosY]                   ; $5747: $F0 $EF
     ld   [hl], a                                  ; $5749: $77
@@ -517,7 +517,7 @@ jr_006_58F3:
     add  hl, de                                   ; $5906: $19
     ld   a, [hl]                                  ; $5907: $7E
     ldh  [hActiveEntityPosX], a                   ; $5908: $E0 $EE
-    ld   hl, $D100                                ; $590A: $21 $00 $D1
+    ld   hl, wD100                                ; $590A: $21 $00 $D1
     add  hl, de                                   ; $590D: $19
     ld   a, [hl]                                  ; $590E: $7E
     ldh  [hActiveEntityPosY], a                   ; $590F: $E0 $EF

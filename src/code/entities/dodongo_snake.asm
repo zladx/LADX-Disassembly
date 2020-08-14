@@ -23,7 +23,7 @@ jr_005_6831:
     jr   nz, jr_005_6831                          ; $6837: $20 $F8
 
     pop  de                                       ; $6839: $D1
-    ld   hl, $D100                                ; $683A: $21 $00 $D1
+    ld   hl, wD100                                ; $683A: $21 $00 $D1
     add  hl, de                                   ; $683D: $19
     ld   e, $20                                   ; $683E: $1E $20
 
@@ -133,7 +133,7 @@ jr_005_689B:
     ldh  a, [hActiveEntityPosX]                   ; $68DE: $F0 $EE
     ld   [hl], a                                  ; $68E0: $77
     pop  de                                       ; $68E1: $D1
-    ld   hl, $D100                                ; $68E2: $21 $00 $D1
+    ld   hl, wD100                                ; $68E2: $21 $00 $D1
     add  hl, de                                   ; $68E5: $19
     ldh  a, [hScratch0]                           ; $68E6: $F0 $D7
     ld   e, a                                     ; $68E8: $5F
@@ -409,7 +409,7 @@ func_005_6A5F::
     ld   a, [hl]                                  ; $6A8B: $7E
     ldh  [hActiveEntityPosX], a                   ; $6A8C: $E0 $EE
     pop  de                                       ; $6A8E: $D1
-    ld   hl, $D100                                ; $6A8F: $21 $00 $D1
+    ld   hl, wD100                                ; $6A8F: $21 $00 $D1
     add  hl, de                                   ; $6A92: $19
     ldh  a, [hScratch0]                           ; $6A93: $F0 $D7
     sub  c                                        ; $6A95: $91
@@ -454,7 +454,7 @@ func_005_6AA5::
     ld   a, [hl]                                  ; $6AD1: $7E
     ldh  [hActiveEntityPosX], a                   ; $6AD2: $E0 $EE
     pop  de                                       ; $6AD4: $D1
-    ld   hl, $D100                                ; $6AD5: $21 $00 $D1
+    ld   hl, wD100                                ; $6AD5: $21 $00 $D1
     add  hl, de                                   ; $6AD8: $19
     ldh  a, [hScratch0]                           ; $6AD9: $F0 $D7
     sub  c                                        ; $6ADB: $91

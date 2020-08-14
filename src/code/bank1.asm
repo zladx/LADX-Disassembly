@@ -767,7 +767,7 @@ jr_001_583A::
     ld   a, $03                                   ; $5849: $3E $03
     ld   [rSVBK], a                               ; $584B: $E0 $70
     xor  a                                        ; $584D: $AF
-    ld   [$D000], a                               ; $584E: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a                               ; $584E: $EA $00 $D0
     ld   [rSVBK], a                               ; $5851: $E0 $70
     ei                                            ; $5853: $FB
 

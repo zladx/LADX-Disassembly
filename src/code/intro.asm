@@ -1095,7 +1095,7 @@ RenderIntroShip::
     add  a, [hl]                                  ; $7585: $86
     ld   [hl], a                                  ; $7586: $77
     ld   hl, Data_001_7538                        ; $7587: $21 $38 $75
-    ld   de, wLinkOAMBuffer                           ; $758A: $11 $00 $C0
+    ld   de, wOAMBuffer                           ; $758A: $11 $00 $C0
     push bc                                       ; $758D: $C5
     ld   c, $06                                   ; $758E: $0E $06
 
@@ -1123,7 +1123,7 @@ RenderIntroShip::
     cp   $10                                      ; $75A8: $FE $10
     jr   c, .return                               ; $75AA: $38 $1D
     ld   hl, Data_001_7550                        ; $75AC: $21 $50 $75
-    ld   de, wLinkOAMBuffer+$18                                ; $75AF: $11 $18 $C0
+    ld   de, wOAMBuffer+$18                                ; $75AF: $11 $18 $C0
     ld   c, $04                                   ; $75B2: $0E $04
 .loop2
     ldh  a, [hActiveEntityVisualPosY]             ; $75B4: $F0 $EC

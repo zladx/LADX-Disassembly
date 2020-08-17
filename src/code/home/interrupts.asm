@@ -309,7 +309,7 @@ vBlankContinue::
     call DrawLinkSprite                           ; $0501: $CD $2E $1D
 .linkSpriteclearBGTilesFlag
 
-    ; Copy the content of wLinkOAMBuffer to the OAM memory
+    ; Copy the content of wOAMBuffer to the OAM memory
     call hDMARoutine                              ; $0504: $CD $C0 $FF
     ; And we're clearBGTilesFlag.
     jr   WaitForVBlankAndReturn                   ; $0507: $18 $60
@@ -365,7 +365,7 @@ vBlankContinue::
     ; On Overworld, copy some palette data to OAM buffer
     callsb func_036_72BA                          ; $054B: $3E $36 $EA $00 $21 $CD $BA $72
 
-    ; Copy the content of wLinkOAMBuffer to the OAM memory
+    ; Copy the content of wOAMBuffer to the OAM memory
     call hDMARoutine                              ; $0553: $CD $C0 $FF
 
     ; If on GBC…

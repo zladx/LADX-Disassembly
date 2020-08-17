@@ -8396,7 +8396,7 @@ func_036_72BA::
     xor  a                                        ; $72D4: $AF
     ld   [wDE00], a                               ; $72D5: $EA $00 $DE
 
-    ld   hl, wLinkOAMBuffer                           ; $72D8: $21 $00 $C0
+    ld   hl, wOAMBuffer                           ; $72D8: $21 $00 $C0
     ld   de, wDynamicOAMBuffer+$6C                                ; $72DB: $11 $9C $C0
     ld   b, $14                                   ; $72DE: $06 $14
 

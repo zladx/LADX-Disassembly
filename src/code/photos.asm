@@ -1665,7 +1665,7 @@ func_037_4AB8::
     add  c                                        ; $4ABD: $81
     ld   [wEntitiesPosXTable], a                  ; $4ABE: $EA $00 $C2
     ld   d, $00                                   ; $4AC1: $16 $00
-    ld   hl, wLinkOAMBuffer                       ; $4AC3: $21 $00 $C0
+    ld   hl, wOAMBuffer                           ; $4AC3: $21 $00 $C0
     add  hl, de                                   ; $4AC6: $19
     push hl                                       ; $4AC7: $E5
     pop  de                                       ; $4AC8: $D1
@@ -2331,7 +2331,7 @@ func_037_4E7F::
     add  $0C                                      ; $4EE2: $C6 $0C
     ld   [wEntitiesPosXTable], a                  ; $4EE4: $EA $00 $C2
     ld   d, $00                                   ; $4EE7: $16 $00
-    ld   hl, wLinkOAMBuffer                           ; $4EE9: $21 $00 $C0
+    ld   hl, wOAMBuffer                           ; $4EE9: $21 $00 $C0
     add  hl, de                                   ; $4EEC: $19
     push hl                                       ; $4EED: $E5
     pop  de                                       ; $4EEE: $D1

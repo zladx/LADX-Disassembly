@@ -14,7 +14,7 @@ WriteDMACodeToHRAM::
 ; Transfer $60 bytes from OAM buffer to OAM memory
 DMARoutine:
     ; Initiate DMA
-    ld   a, wLinkOAMBuffer / $100 ;                   ; $6D40: $3E $C0
+    ld   a, wOAMBuffer / $100 ;                   ; $6D40: $3E $C0
     ld   [rDMA], a                                ; $6D42: $E0 $46
 
     ; Wait for DMA to finish

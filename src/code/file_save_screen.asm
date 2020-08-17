@@ -233,7 +233,7 @@ jr_001_413B::
     ld   hl, Data_001_4128                        ; $413E: $21 $28 $41
     add  hl, de                                   ; $4141: $19
     ld   a, [hl]                                  ; $4142: $7E
-    ld   hl, wLinkOAMBuffer+$18                                ; $4143: $21 $18 $C0
+    ld   hl, wOAMBuffer+$18                                ; $4143: $21 $18 $C0
     ldi  [hl], a                                  ; $4146: $22
     ld   a, SAVE_OPTION_X + $8                    ; $4147: $3E $24
     ldi  [hl], a                                  ; $4149: $22

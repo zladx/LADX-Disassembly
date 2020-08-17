@@ -5712,7 +5712,7 @@ Data_018_69BD::
     db   $00, $04, $08, $0C, $10, $0C, $08, $04
 
 func_018_69C5::
-    ld   hl, wLinkOAMBuffer+$10                                ; $69C5: $21 $10 $C0
+    ld   hl, wOAMBuffer+$10                                ; $69C5: $21 $10 $C0
     ldh  a, [hFrameCounter]                       ; $69C8: $F0 $E7
     rra                                           ; $69CA: $1F
     rra                                           ; $69CB: $1F

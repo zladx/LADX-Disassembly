@@ -606,7 +606,7 @@ jr_007_43D7:
 
 func_007_43FD::
     push bc                                       ; $43FD: $C5
-    ld   bc, wLinkOAMBuffer+$10                                ; $43FE: $01 $10 $C0
+    ld   bc, wOAMBuffer+$10                                ; $43FE: $01 $10 $C0
     ldh  a, [hLinkPositionY]                      ; $4401: $F0 $99
     ldh  [hScratch0], a                           ; $4403: $E0 $D7
     ldh  a, [hLinkPositionX]                      ; $4405: $F0 $98

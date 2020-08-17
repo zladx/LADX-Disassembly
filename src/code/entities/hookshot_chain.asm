@@ -8,14 +8,14 @@ HookshotChainEntityHandler::
 
     ld   a, $02                                   ; $7BEA: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7BEC: $E0 $A1
-    ld   [$C1A4], a                               ; $7BEE: $EA $A4 $C1
-    ld   [$C1C6], a                               ; $7BF1: $EA $C6 $C1
+    ld   [wC1A4], a                               ; $7BEE: $EA $A4 $C1
+    ld   [wC1C6], a                               ; $7BF1: $EA $C6 $C1
     ld   a, c                                     ; $7BF4: $79
     inc  a                                        ; $7BF5: $3C
-    ld   [$C1A6], a                               ; $7BF6: $EA $A6 $C1
+    ld   [wC1A6], a                               ; $7BF6: $EA $A6 $C1
     xor  a                                        ; $7BF9: $AF
     call ResetSpinAttack                                ; $7BFA: $CD $AF $0C
-    ld   [$C13E], a                               ; $7BFD: $EA $3E $C1
+    ld   [wC13E], a                               ; $7BFD: $EA $3E $C1
     ldh  a, [hLinkDirection]                      ; $7C00: $F0 $9E
     ld   e, a                                     ; $7C02: $5F
     ld   d, $00                                   ; $7C03: $16 $00
@@ -80,13 +80,13 @@ jr_018_7C46:
     jr   nc, jr_018_7CAE                          ; $7C49: $30 $63
 
     xor  a                                        ; $7C4B: $AF
-    ld   [$C1C6], a                               ; $7C4C: $EA $C6 $C1
+    ld   [wC1C6], a                               ; $7C4C: $EA $C6 $C1
     call ClearEntityStatusBank18                  ; $7C4F: $CD $08 $7F
     jr   jr_018_7CAE                              ; $7C52: $18 $5A
 
 jr_018_7C54:
     ld   a, $06                                   ; $7C54: $3E $06
-    ld   [$C19E], a                               ; $7C56: $EA $9E $C1
+    ld   [wC19E], a                               ; $7C56: $EA $9E $C1
     call label_3B7B                               ; $7C59: $CD $7B $3B
     ld   hl, wEntitiesCollisionsTable             ; $7C5C: $21 $A0 $C2
     add  hl, bc                                   ; $7C5F: $09

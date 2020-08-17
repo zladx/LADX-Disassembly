@@ -34,7 +34,7 @@ FileSelectionPrepare0::
     ld   a, $04                                   ; $47E9: $3E $04
     ld   [wTileMapToLoad], a                      ; $47EB: $EA $FE $D6
     xor  a                                        ; $47EE: $AF
-    ld   [$D000], a                               ; $47EF: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a                               ; $47EF: $EA $00 $D0
     jp   IncrementGameplaySubtypeAndReturn        ; $47F2: $C3 $D6 $44
 
 FileSelectionPrepare1::
@@ -325,22 +325,22 @@ jr_001_4920::
     and  $03                                      ; $4929: $E6 $03
     jr   z, jr_001_4938                           ; $492B: $28 $0B
     call func_001_6BAE                            ; $492D: $CD $AE $6B
-    ld   a, [$D000]                               ; $4930: $FA $00 $D0
+    ld   a, [wIsFileSelectionArrowShifted]                               ; $4930: $FA $00 $D0
     xor  $01                                      ; $4933: $EE $01
-    ld   [$D000], a                               ; $4935: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a                               ; $4935: $EA $00 $D0
 
 jr_001_4938::
     ldh  a, [hFrameCounter]                       ; $4938: $F0 $E7
     and  $10                                      ; $493A: $E6 $10
     jr   nz, func_001_4954                        ; $493C: $20 $16
-    ld   a, [$D000]                               ; $493E: $FA $00 $D0
+    ld   a, [wIsFileSelectionArrowShifted]                               ; $493E: $FA $00 $D0
     and  a                                        ; $4941: $A7
     ld   a, FILE_2C                               ; $4942: $3E $2C
     jr   z, jr_001_4948                           ; $4944: $28 $02
     ld   a, FILE_64                               ; $4946: $3E $64
 
 jr_001_4948::
-    ld   hl, wOAMBuffer + $8                      ; $4948: $21 $08 $C0
+    ld   hl, wLinkOAMBuffer + $8                      ; $4948: $21 $08 $C0
     ld   [hl], $88 ; y                            ; $494B: $36 $88
     inc  hl                                       ; $494D: $23
     ldi  [hl], a ; x                              ; $494E: $22
@@ -359,7 +359,7 @@ func_001_4954::
     and  $08                                      ; $4960: $E6 $08
     jr   z, jr_001_497B                           ; $4962: $28 $17
     ld   a, [hl]                                  ; $4964: $7E
-    ld   hl, wOAMBuffer                           ; $4965: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $4965: $21 $00 $C0
     push af                                       ; $4968: $F5
     ldi  [hl], a                                  ; $4969: $22
     ld   a, $18                                   ; $496A: $3E $18
@@ -379,7 +379,7 @@ func_001_4954::
 
 jr_001_497B::
     ld   a, [hl]                                  ; $497B: $7E
-    ld   hl, wOAMBuffer                           ; $497C: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $497C: $21 $00 $C0
     push af                                       ; $497F: $F5
     ldi  [hl], a                                  ; $4980: $22
     ld   a, $18                                   ; $4981: $3E $18
@@ -413,7 +413,7 @@ FileSelectionExecuteChoice::
     ld   e, a                                     ; $49A5: $5F
     ld   d, $00                                   ; $49A6: $16 $00
     ld   c, $05                                   ; $49A8: $0E $05
-    ld   hl, $DB80                                ; $49AA: $21 $80 $DB
+    ld   hl, wDB80                                ; $49AA: $21 $80 $DB
     add  hl, de                                   ; $49AD: $19
 
 .loop
@@ -514,9 +514,9 @@ FileCreationInit1Handler::
     ld   a, $08                                   ; $4A14: $3E $08
     ld   [wTileMapToLoad], a                      ; $4A16: $EA $FE $D6
     xor  a                                        ; $4A19: $AF
-    ld   [$DBA8], a                               ; $4A1A: $EA $A8 $DB
-    ld   [$DBA9], a                               ; $4A1D: $EA $A9 $DB
-    ld   [$DBAA], a                               ; $4A20: $EA $AA $DB
+    ld   [wDBA8], a                               ; $4A1A: $EA $A8 $DB
+    ld   [wDBA9], a                               ; $4A1D: $EA $A9 $DB
+    ld   [wDBAA], a                               ; $4A20: $EA $AA $DB
     ret                                           ; $4A23: $C9
 
 FileCreationInit2Handler::
@@ -595,7 +595,7 @@ Data_001_4A98::
 
 
 CHECKNAME: macro
-    ld   hl, $DB80
+    ld   hl, wDB80
     add  hl, de
 I = 0
 REPT 5
@@ -618,7 +618,7 @@ FileCreationInteractiveHandler::
     ld   hl, Data_001_4A98                        ; $4AA1: $21 $98 $4A
     add  hl, de                                   ; $4AA4: $19
     ld   e, [hl]                                  ; $4AA5: $5E
-    ld   hl, $DB80                                ; $4AA6: $21 $80 $DB
+    ld   hl, wDB80                                ; $4AA6: $21 $80 $DB
     add  hl, de                                   ; $4AA9: $19
     ld   e, l                                     ; $4AAA: $5D
     ld   d, h                                     ; $4AAB: $54
@@ -667,7 +667,7 @@ ENDC
     ld   [wMusicTrackToPlay], a                   ; $4AFB: $EA $68 $D3
 
 jr_001_4AFE::
-    ld   hl, $DB80                                ; $4AFE: $21 $80 $DB
+    ld   hl, wDB80                                ; $4AFE: $21 $80 $DB
     add  hl, de                                   ; $4B01: $19
     pop  bc                                       ; $4B02: $C1
     ld   e, $05                                   ; $4B03: $1E $05
@@ -751,7 +751,7 @@ jr_001_4BF7::
     and  $03                                      ; $4C01: $E6 $03
     jr   nz, jr_001_4C21                          ; $4C03: $20 $1C
     ldh  a, [hPressedButtonsMask]                 ; $4C05: $F0 $CB
-    ld   hl, $C182                                ; $4C07: $21 $82 $C1
+    ld   hl, wC182                                ; $4C07: $21 $82 $C1
     and  $0F                                      ; $4C0A: $E6 $0F
     jr   nz, jr_001_4C12                          ; $4C0C: $20 $04
     xor  a                                        ; $4C0E: $AF
@@ -775,7 +775,7 @@ jr_001_4C21::
     call func_001_6BAE                            ; $4C21: $CD $AE $6B
     bit  1, a                                     ; $4C24: $CB $4F
     jr   nz, jr_001_4C34                          ; $4C26: $20 $0C
-    ld   a, [$DBA9]                               ; $4C28: $FA $A9 $DB
+    ld   a, [wDBA9]                               ; $4C28: $FA $A9 $DB
     add  a, $01                                   ; $4C2B: $C6 $01
     cp   NameEntryCharacterTableSize              ; $4C2D: $FE $40
     jr   c, jr_001_4C5E                           ; $4C2F: $38 $2D
@@ -783,7 +783,7 @@ jr_001_4C21::
     jr   jr_001_4C5E                              ; $4C32: $18 $2A
 
 jr_001_4C34::
-    ld   a, [$DBA9]                               ; $4C34: $FA $A9 $DB
+    ld   a, [wDBA9]                               ; $4C34: $FA $A9 $DB
     sub  a, $01                                   ; $4C37: $D6 $01
     cp   $FF                                      ; $4C39: $FE $FF
     jr   nz, jr_001_4C5E                          ; $4C3B: $20 $21
@@ -794,37 +794,37 @@ jr_001_4C41::
     call func_001_6BAE                            ; $4C41: $CD $AE $6B
     bit  2, a                                     ; $4C44: $CB $57
     jr   z, jr_001_4C53                           ; $4C46: $28 $0B
-    ld   a, [$DBA9]                               ; $4C48: $FA $A9 $DB
+    ld   a, [wDBA9]                               ; $4C48: $FA $A9 $DB
     sub  a, $10                                   ; $4C4B: $D6 $10
     jr   nc, jr_001_4C5E                          ; $4C4D: $30 $0F
     add  a, NameEntryCharacterTableSize           ; $4C4F: $C6 $40
     jr   jr_001_4C5E                              ; $4C51: $18 $0B
 
 jr_001_4C53::
-    ld   a, [$DBA9]                               ; $4C53: $FA $A9 $DB
+    ld   a, [wDBA9]                               ; $4C53: $FA $A9 $DB
     add  a, $10                                   ; $4C56: $C6 $10
     cp   NameEntryCharacterTableSize              ; $4C58: $FE $40
     jr   c, jr_001_4C5E                           ; $4C5A: $38 $02
     sub  a, NameEntryCharacterTableSize           ; $4C5C: $D6 $40
 
 jr_001_4C5E::
-    ld   [$DBA9], a                               ; $4C5E: $EA $A9 $DB
+    ld   [wDBA9], a                               ; $4C5E: $EA $A9 $DB
     jr   jr_001_4C63                              ; $4C61: $18 $00
 
 jr_001_4C63::
-    ld   a, [$DBA9]                               ; $4C63: $FA $A9 $DB
+    ld   a, [wDBA9]                               ; $4C63: $FA $A9 $DB
     ld   hl, Data_001_4B70                        ; $4C66: $21 $70 $4B
     ld   c, a                                     ; $4C69: $4F
     ld   b, $00                                   ; $4C6A: $06 $00
     add  hl, bc                                   ; $4C6C: $09
     ld   e, [hl]                                  ; $4C6D: $5E
-    ld   a, [$DBA9]                               ; $4C6E: $FA $A9 $DB
+    ld   a, [wDBA9]                               ; $4C6E: $FA $A9 $DB
     ld   hl, Data_001_4B30                        ; $4C71: $21 $30 $4B
     ld   c, a                                     ; $4C74: $4F
     ld   b, $00                                   ; $4C75: $06 $00
     add  hl, bc                                   ; $4C77: $09
     ld   d, [hl]                                  ; $4C78: $56
-    ld   hl, wOAMBuffer                           ; $4C79: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $4C79: $21 $00 $C0
     ld   a, d                                     ; $4C7C: $7A
     add  a, $0B                                   ; $4C7D: $C6 $0B
     ldi  [hl], a                                  ; $4C7F: $22
@@ -845,7 +845,7 @@ func_001_4C8A::                            ; "Enter Name" screen
     jr   nz, jr_001_4CA7                 ; If yes, backspace ; $4C92: $20 $13
     call PlayValidationJingle           ; Otherwise, A was pushed ; $4C94: $CD $BE $49
     call func_001_4CDA                     ; so add the current letter ; $4C97: $CD $DA $4C
-    ld   a, [$DBAA]                               ; $4C9A: $FA $AA $DB
+    ld   a, [wDBAA]                               ; $4C9A: $FA $AA $DB
     add  a, $01                                   ; $4C9D: $C6 $01
     cp   $05                            ; Prevent cursor from going > 5th place ; $4C9F: $FE $05
     jr   c, jr_001_4CB4                           ; $4CA1: $38 $11
@@ -855,17 +855,17 @@ func_001_4C8A::                            ; "Enter Name" screen
 jr_001_4CA7::
     ; B button when inputting filename
     call PlayValidationJingle                     ; $4CA7: $CD $BE $49
-    ld   a, [$DBAA]                               ; $4CAA: $FA $AA $DB
+    ld   a, [wDBAA]                               ; $4CAA: $FA $AA $DB
     sub  a, $01                                   ; $4CAD: $D6 $01
     cp   $FF                                      ; $4CAF: $FE $FF
     jr   nz, jr_001_4CB4                          ; $4CB1: $20 $01
     xor  a                              ; Prevent cursor from going < 1st place ; $4CB3: $AF
 
 jr_001_4CB4::
-    ld   [$DBAA], a                               ; $4CB4: $EA $AA $DB
+    ld   [wDBAA], a                               ; $4CB4: $EA $AA $DB
 
 jr_001_4CB7::
-    ld   a, [$DBAA]                               ; $4CB7: $FA $AA $DB
+    ld   a, [wDBAA]                               ; $4CB7: $FA $AA $DB
     ld   hl, Data_001_4BB0                        ; $4CBA: $21 $B0 $4B
     ld   c, a                                     ; $4CBD: $4F
     ld   b, $00                                   ; $4CBE: $06 $00
@@ -874,7 +874,7 @@ jr_001_4CB7::
     ldh  a, [hFrameCounter]                       ; $4CC2: $F0 $E7
     and  $10                                      ; $4CC4: $E6 $10
     jr   z, .return                               ; $4CC6: $28 $11
-    ld   hl, $C004                                ; $4CC8: $21 $04 $C0
+    ld   hl, wLinkOAMBuffer+4                                ; $4CC8: $21 $04 $C0
     ld   a, $18                                   ; $4CCB: $3E $18
     add  a, $0B                                   ; $4CCD: $C6 $0B
     ldi  [hl], a                                  ; $4CCF: $22
@@ -890,7 +890,7 @@ jr_001_4CB7::
     ret                                           ; $4CD9: $C9
 
 func_001_4CDA::
-    ld   a, [$DBA9]                               ; $4CDA: $FA $A9 $DB
+    ld   a, [wDBA9]                               ; $4CDA: $FA $A9 $DB
     ld   c, a                                     ; $4CDD: $4F
     ld   b, $00                                   ; $4CDE: $06 $00
     ld   hl, NameEntryCharacterTable              ; $4CE0: $21 $B5 $4B
@@ -903,9 +903,9 @@ func_001_4CDA::
     sla  a                                        ; $4CEC: $CB $27
     add  a, c                                     ; $4CEE: $81
     ld   c, a                                     ; $4CEF: $4F
-    ld   hl, $DB80                                ; $4CF0: $21 $80 $DB
+    ld   hl, wDB80                                ; $4CF0: $21 $80 $DB
     add  hl, bc                                   ; $4CF3: $09
-    ld   a, [$DBAA]                               ; $4CF4: $FA $AA $DB
+    ld   a, [wDBAA]                               ; $4CF4: $FA $AA $DB
     ld   c, a                                     ; $4CF7: $4F
     add  hl, bc                                   ; $4CF8: $09
     ld   [hl], e                                  ; $4CF9: $73
@@ -1011,17 +1011,17 @@ FileDeletionState7Handler::
 
 func_001_4D8B::
     ld   bc, $98C5                                ; $4D8B: $01 $C5 $98 ; $4D8B: $01 $C5 $98
-    ld   de, $DB80                                ; $4D8E: $11 $80 $DB ; $4D8E: $11 $80 $DB
+    ld   de, wDB80                                ; $4D8E: $11 $80 $DB ; $4D8E: $11 $80 $DB
     jp   func_4852                                ; $4D91: $C3 $52 $48 ; $4D91: $C3 $52 $48
 
 func_001_4D94::
     ld   bc, $9925                                ; $4D94: $01 $25 $99 ; $4D94: $01 $25 $99
-    ld   de, $DB85                                ; $4D97: $11 $85 $DB ; $4D97: $11 $85 $DB
+    ld   de, wDB85                                ; $4D97: $11 $85 $DB ; $4D97: $11 $85 $DB
     jp   func_4852                                ; $4D9A: $C3 $52 $48 ; $4D9A: $C3 $52 $48
 
 func_001_4D9D::
     ld   bc, $9985                                ; $4D9D: $01 $85 $99 ; $4D9D: $01 $85 $99
-    ld   de, $DB8A                                ; $4DA0: $11 $8A $DB ; $4DA0: $11 $8A $DB
+    ld   de, wDB8A                                ; $4DA0: $11 $8A $DB ; $4DA0: $11 $8A $DB
     jp   func_4852                                ; $4DA3: $C3 $52 $48 ; $4DA3: $C3 $52 $48
 
 func_001_4DA6::
@@ -1030,17 +1030,17 @@ func_001_4DA6::
 IF __PATCH_4__
     ret  z
     xor  a
-    ld   hl, $DC06
-    ld   de, $DC09
+    ld   hl, wDC06
+    ld   de, wDC09
     ; fallthrough
 ELSE
     jr   z, jr_001_4DBD                            ; $4DAB: $28 $10 ; $4DAB: $28 $10
 
     xor  a                                        ; $4DAD: $AF ; $4DAD: $AF
     ldh  [hScratch4], a                           ; $4DAE: $E0 $DB ; $4DAE: $E0 $DB
-    ld   a, [$DC06]                               ; $4DB0: $FA $06 $DC ; $4DB0: $FA $06 $DC
+    ld   a, [wDC06]                               ; $4DB0: $FA $06 $DC ; $4DB0: $FA $06 $DC
     ldh  [hScratch2], a                           ; $4DB3: $E0 $D9 ; $4DB3: $E0 $D9
-    ld   a, [$DC09]                               ; $4DB5: $FA $09 $DC ; $4DB5: $FA $09 $DC
+    ld   a, [wDC09]                               ; $4DB5: $FA $09 $DC ; $4DB5: $FA $09 $DC
     ldh  [hScratch3], a                           ; $4DB8: $E0 $DA ; $4DB8: $E0 $DA
     jp   label_001_5D53                               ; $4DBA: $C3 $53 $5D ; $4DBA: $C3 $53 $5D
 ENDC
@@ -1084,17 +1084,17 @@ func_001_4DBE::
 IF __PATCH_4__
     ret  z
     ld   a, $01
-    ld   hl, $dC07
-    ld   de, $dC0a
+    ld   hl, wDC07
+    ld   de, wDC0A
     jr   jr_001_4db6
 ELSE
     jr   z, jr_001_4DBD                            ; $4DC3: $28 $F8 ; $4DC3: $28 $F8
 
     ld   a, $01                                   ; $4DC5: $3E $01 ; $4DC5: $3E $01
     ldh  [hScratch4], a                           ; $4DC7: $E0 $DB ; $4DC7: $E0 $DB
-    ld   a, [$DC07]                               ; $4DC9: $FA $07 $DC ; $4DC9: $FA $07 $DC
+    ld   a, [wDC07]                               ; $4DC9: $FA $07 $DC ; $4DC9: $FA $07 $DC
     ldh  [hScratch2], a                           ; $4DCC: $E0 $D9 ; $4DCC: $E0 $D9
-    ld   a, [$DC0A]                               ; $4DCE: $FA $0A $DC ; $4DCE: $FA $0A $DC
+    ld   a, [wDC0A]                               ; $4DCE: $FA $0A $DC ; $4DCE: $FA $0A $DC
     ldh  [hScratch3], a                           ; $4DD1: $E0 $DA ; $4DD1: $E0 $DA
     jp   label_001_5D53                               ; $4DD3: $C3 $53 $5D ; $4DD3: $C3 $53 $5D
 ENDC
@@ -1105,17 +1105,17 @@ func_001_4DD6::
 IF __PATCH_4__
     ret  z
     ld   a, $02
-    ld   hl, $dC08
-    ld   de, $dC0B
+    ld   hl, wDC08
+    ld   de, wDC0B
     jr   jr_001_4db6
 ELSE
     jr   z, jr_001_4DBD                            ; $4DDB: $28 $E0 ; $4DDB: $28 $E0
 
     ld   a, $02                                   ; $4DDD: $3E $02 ; $4DDD: $3E $02
     ldh  [hScratch4], a                           ; $4DDF: $E0 $DB ; $4DDF: $E0 $DB
-    ld   a, [$DC08]                               ; $4DE1: $FA $08 $DC ; $4DE1: $FA $08 $DC
+    ld   a, [wDC08]                               ; $4DE1: $FA $08 $DC ; $4DE1: $FA $08 $DC
     ldh  [hScratch2], a                           ; $4DE4: $E0 $D9 ; $4DE4: $E0 $D9
-    ld   a, [$DC0B]                               ; $4DE6: $FA $0B $DC ; $4DE6: $FA $0B $DC
+    ld   a, [wDC0B]                               ; $4DE6: $FA $0B $DC ; $4DE6: $FA $0B $DC
     ldh  [hScratch3], a                           ; $4DE9: $E0 $DA ; $4DE9: $E0 $DA
     jp   label_001_5D53                               ; $4DEB: $C3 $53 $5D ; $4DEB: $C3 $53 $5D
 ENDC
@@ -1403,7 +1403,7 @@ jr_001_4f76:
     ld   a, FILE_6C                                   ; $4F2C: $3E $6C ; $4F2C: $3E $6C
 
 jr_001_4F2E::
-    ld   hl, $C00C                                ; $4F2E: $21 $0C $C0 ; $4F2E: $21 $0C $C0
+    ld   hl, wLinkOAMBuffer+12                                ; $4F2E: $21 $0C $C0 ; $4F2E: $21 $0C $C0
     ld   [hl], $88                                ; $4F31: $36 $88 ; $4F31: $36 $88
     inc  hl                                       ; $4F33: $23 ; $4F33: $23
     ld   [hl+], a                                 ; $4F34: $22 ; $4F34: $22
@@ -1511,25 +1511,25 @@ FileCopyState3Handler::
 
 FileCopyState4Handler::
     ld   bc, $98C4                                ; $4FC3: $01 $C4 $98 ; $4FC3: $01 $C4 $98
-    ld   de, $DB80                                ; $4FC6: $11 $80 $DB ; $4FC6: $11 $80 $DB
+    ld   de, wDB80                                ; $4FC6: $11 $80 $DB ; $4FC6: $11 $80 $DB
     call func_4852                                ; $4FC9: $CD $52 $48 ; $4FC9: $CD $52 $48
     ld   bc, $9924                                ; $4FCC: $01 $24 $99 ; $4FCC: $01 $24 $99
-    ld   de, $DB85                                ; $4FCF: $11 $85 $DB ; $4FCF: $11 $85 $DB
+    ld   de, wDB85                                ; $4FCF: $11 $85 $DB ; $4FCF: $11 $85 $DB
     call func_4852                                ; $4FD2: $CD $52 $48 ; $4FD2: $CD $52 $48
     ld   bc, $9984                                ; $4FD5: $01 $84 $99 ; $4FD5: $01 $84 $99
-    ld   de, $DB8A                                ; $4FD8: $11 $8A $DB ; $4FD8: $11 $8A $DB
+    ld   de, wDB8A                                ; $4FD8: $11 $8A $DB ; $4FD8: $11 $8A $DB
     call func_4852                                ; $4FDB: $CD $52 $48 ; $4FDB: $CD $52 $48
     jp   IncrementGameplaySubtypeAndReturn        ; $4FDE: $C3 $D6 $44 ; $4FDE: $C3 $D6 $44
 
 FileCopyState5Handler::
     ld   bc, $98CD                                ; $4FE1: $01 $CD $98 ; $4FE1: $01 $CD $98
-    ld   de, $DB80                                ; $4FE4: $11 $80 $DB ; $4FE4: $11 $80 $DB
+    ld   de, wDB80                                ; $4FE4: $11 $80 $DB ; $4FE4: $11 $80 $DB
     call func_4852                                ; $4FE7: $CD $52 $48 ; $4FE7: $CD $52 $48
     ld   bc, $992D                                ; $4FEA: $01 $2D $99 ; $4FEA: $01 $2D $99
-    ld   de, $DB85                                ; $4FED: $11 $85 $DB ; $4FED: $11 $85 $DB
+    ld   de, wDB85                                ; $4FED: $11 $85 $DB ; $4FED: $11 $85 $DB
     call func_4852                                ; $4FF0: $CD $52 $48 ; $4FF0: $CD $52 $48
     ld   bc, $998D                                ; $4FF3: $01 $8D $99 ; $4FF3: $01 $8D $99
-    ld   de, $DB8A                                ; $4FF6: $11 $8A $DB ; $4FF6: $11 $8A $DB
+    ld   de, wDB8A                                ; $4FF6: $11 $8A $DB ; $4FF6: $11 $8A $DB
     call func_4852                                ; $4FF9: $CD $52 $48 ; $4FF9: $CD $52 $48
     jp   IncrementGameplaySubtypeAndReturn        ; $4FFC: $C3 $D6 $44 ; $4FFC: $C3 $D6 $44
 
@@ -1564,7 +1564,7 @@ jr_001_501D::
     cp   $03                                      ; $5026: $FE $03 ; $5026: $FE $03
     jp   z, label_001_4555                            ; $5028: $CA $55 $45 ; $5028: $CA $55 $45
 
-    ld   hl, $DB80                                ; $502B: $21 $80 $DB ; $502B: $21 $80 $DB
+    ld   hl, wDB80                                ; $502B: $21 $80 $DB ; $502B: $21 $80 $DB
     ld   b, $00                                   ; $502E: $06 $00 ; $502E: $06 $00
     ld   a, [wIntroTimer]                         ; $5030: $FA $01 $D0 ; $5030: $FA $01 $D0
     and  a                                        ; $5033: $A7 ; $5033: $A7
@@ -1573,11 +1573,11 @@ jr_001_501D::
     cp   $01                                      ; $5036: $FE $01 ; $5036: $FE $01
     jr   z, jr_001_503F                            ; $5038: $28 $05 ; $5038: $28 $05
 
-    ld   hl, $DB8A                                ; $503A: $21 $8A $DB ; $503A: $21 $8A $DB
+    ld   hl, wDB8A                                ; $503A: $21 $8A $DB ; $503A: $21 $8A $DB
     jr   jr_001_5042                               ; $503D: $18 $03 ; $503D: $18 $03
 
 jr_001_503F::
-    ld   hl, $DB85                                ; $503F: $21 $85 $DB ; $503F: $21 $85 $DB
+    ld   hl, wDB85                                ; $503F: $21 $85 $DB ; $503F: $21 $85 $DB
 
 jr_001_5042::
     xor  a                                        ; $5042: $AF ; $5042: $AF
@@ -1774,17 +1774,17 @@ label_001_514F::
     jr   z, jr_001_516C                            ; $5158: $28 $12 ; $5158: $28 $12
 
     ld   bc, $98C4                                ; $515A: $01 $C4 $98 ; $515A: $01 $C4 $98
-    ld   de, $DB80                                ; $515D: $11 $80 $DB ; $515D: $11 $80 $DB
+    ld   de, wDB80                                ; $515D: $11 $80 $DB ; $515D: $11 $80 $DB
     jp   func_4852                                ; $5160: $C3 $52 $48 ; $5160: $C3 $52 $48
 
 jr_001_5163::
     ld   bc, $9924                                ; $5163: $01 $24 $99 ; $5163: $01 $24 $99
-    ld   de, $DB85                                ; $5166: $11 $85 $DB ; $5166: $11 $85 $DB
+    ld   de, wDB85                                ; $5166: $11 $85 $DB ; $5166: $11 $85 $DB
     jp   func_4852                                ; $5169: $C3 $52 $48 ; $5169: $C3 $52 $48
 
 jr_001_516C::
     ld   bc, $9984                                ; $516C: $01 $84 $99 ; $516C: $01 $84 $99
-    ld   de, $DB8A                                ; $516F: $11 $8A $DB ; $516F: $11 $8A $DB
+    ld   de, wDB8A                                ; $516F: $11 $8A $DB ; $516F: $11 $8A $DB
     jp   func_4852                                ; $5172: $C3 $52 $48 ; $5172: $C3 $52 $48
 
 func_001_5175::
@@ -1802,7 +1802,7 @@ func_001_5175::
     jr   z, jr_001_51A8                            ; $518B: $28 $1B ; $518B: $28 $1B
 
     ld   a, [hl]                                  ; $518D: $7E ; $518D: $7E
-    ld   hl, $C008                                ; $518E: $21 $08 $C0 ; $518E: $21 $08 $C0
+    ld   hl, wLinkOAMBuffer+8                                ; $518E: $21 $08 $C0 ; $518E: $21 $08 $C0
     push af                                       ; $5191: $F5 ; $5191: $F5
     ld   [hl+], a                                 ; $5192: $22 ; $5192: $22
     ld   a, $58                                   ; $5193: $3E $58 ; $5193: $3E $58
@@ -1823,7 +1823,7 @@ func_001_5175::
 
 jr_001_51A8::
     ld   a, [hl]                                  ; $51A8: $7E ; $51A8: $7E
-    ld   hl, $C008                                ; $51A9: $21 $08 $C0 ; $51A9: $21 $08 $C0
+    ld   hl, wLinkOAMBuffer+8                                ; $51A9: $21 $08 $C0 ; $51A9: $21 $08 $C0
     push af                                       ; $51AC: $F5 ; $51AC: $F5
     ld   [hl+], a                                 ; $51AD: $22 ; $51AD: $22
     ld   a, $58                                   ; $51AE: $3E $58 ; $51AE: $3E $58
@@ -1846,7 +1846,7 @@ label_001_51C3::
     ldh  a, [hFrameCounter]                       ; $51C3: $F0 $E7 ; $51C3: $F0 $E7
     and  $08                                      ; $51C5: $E6 $08 ; $51C5: $E6 $08
     ld   a, [hl]                                  ; $51C7: $7E ; $51C7: $7E
-    ld   hl, $C008                                ; $51C8: $21 $08 $C0 ; $51C8: $21 $08 $C0
+    ld   hl, wLinkOAMBuffer+8                                ; $51C8: $21 $08 $C0 ; $51C8: $21 $08 $C0
     jp   label_001_5067                               ; $51CB: $C3 $67 $50 ; $51CB: $C3 $67 $50
 
 func_001_51CE::
@@ -1856,7 +1856,7 @@ func_001_51CE::
     ld   hl, Data_001_48E4                           ; $51D4: $21 $E4 $48 ; $51D4: $21 $E4 $48
     add  hl, de                                   ; $51D7: $19 ; $51D7: $19
     ld   a, [hl]                                  ; $51D8: $7E ; $51D8: $7E
-    ld   hl, $C008                                ; $51D9: $21 $08 $C0 ; $51D9: $21 $08 $C0
+    ld   hl, wLinkOAMBuffer+8                                ; $51D9: $21 $08 $C0 ; $51D9: $21 $08 $C0
     add  $05                                      ; $51DC: $C6 $05 ; $51DC: $C6 $05
     ld   [hl+], a                                 ; $51DE: $22 ; $51DE: $22
     ld   a, $5C                                   ; $51DF: $3E $5C ; $51DF: $3E $5C
@@ -1966,15 +1966,15 @@ label_001_526F::
     jr   z, jr_001_528C                            ; $5278: $28 $12 ; $5278: $28 $12
 
     ld   bc, $98CD                                ; $527A: $01 $CD $98 ; $527A: $01 $CD $98
-    ld   de, $DB80                                ; $527D: $11 $80 $DB ; $527D: $11 $80 $DB
+    ld   de, wDB80                                ; $527D: $11 $80 $DB ; $527D: $11 $80 $DB
     jp   func_4852                                ; $5280: $C3 $52 $48 ; $5280: $C3 $52 $48
 
 jr_001_5283::
     ld   bc, $992D                                ; $5283: $01 $2D $99 ; $5283: $01 $2D $99
-    ld   de, $DB85                                ; $5286: $11 $85 $DB ; $5286: $11 $85 $DB
+    ld   de, wDB85                                ; $5286: $11 $85 $DB ; $5286: $11 $85 $DB
     jp   func_4852                                ; $5289: $C3 $52 $48 ; $5289: $C3 $52 $48
 
 jr_001_528C::
     ld   bc, $998D                                ; $528C: $01 $8D $99 ; $528C: $01 $8D $99
-    ld   de, $DB8A                                ; $528F: $11 $8A $DB ; $528F: $11 $8A $DB
+    ld   de, wDB8A                                ; $528F: $11 $8A $DB ; $528F: $11 $8A $DB
     jp   func_4852                                ; $5292: $C3 $52 $48 ; $5292: $C3 $52 $48

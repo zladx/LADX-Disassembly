@@ -119,14 +119,14 @@ jr_005_49FD:
     call func_005_5506                            ; $49FD: $CD $06 $55
     jr   nc, jr_005_4A0C                          ; $4A00: $30 $0A
 
-    ld   a, [$C19B]                               ; $4A02: $FA $9B $C1
+    ld   a, [wC19B]                               ; $4A02: $FA $9B $C1
     and  a                                        ; $4A05: $A7
     ret  nz                                       ; $4A06: $C0
 
     jp_open_dialog $00D                           ; $4A07
 
 jr_005_4A0C:
-    ld   hl, $C1AD                                ; $4A0C: $21 $AD $C1
+    ld   hl, wC1AD                                ; $4A0C: $21 $AD $C1
     ld   [hl], b                                  ; $4A0F: $70
     ret                                           ; $4A10: $C9
 
@@ -137,7 +137,7 @@ func_005_4A17::
     ld   a, $02                                   ; $4A17: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4A19: $E0 $A1
     xor  a                                        ; $4A1B: $AF
-    ld   [$C19B], a                               ; $4A1C: $EA $9B $C1
+    ld   [wC19B], a                               ; $4A1C: $EA $9B $C1
     call func_005_7B24                            ; $4A1F: $CD $24 $7B
     ld   a, e                                     ; $4A22: $7B
     xor  $01                                      ; $4A23: $EE $01
@@ -591,7 +591,7 @@ TarinShield1Handler::
     and  a                                        ; $4CAD: $A7
     jr   z, jr_005_4CC3                           ; $4CAE: $28 $13
 
-    ld   hl, $DC88                                ; $4CB0: $21 $88 $DC
+    ld   hl, wDC88                                ; $4CB0: $21 $88 $DC
     ld   de, data_005_4C94                        ; $4CB3: $11 $94 $4C
 
 jr_005_4CB6:

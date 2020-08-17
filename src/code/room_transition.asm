@@ -474,12 +474,12 @@ RoomTransitionPrepareHandler::
     ; Get the music track to apply later
     ;
 
-    ld   a, [$C1CF]                               ; $7AC6: $FA $CF $C1
+    ld   a, [wC1CF]                               ; $7AC6: $FA $CF $C1
     and  a                                        ; $7AC9: $A7
     jr   z, .C1CFIsZero                           ; $7ACA: $28 $1D
 
     xor  a                                        ; $7ACC: $AF
-    ld   [$C1CF], a                               ; $7ACD: $EA $CF $C1
+    ld   [wC1CF], a                               ; $7ACD: $EA $CF $C1
 
 IF !__PATCH_0__
     ld   a, [wTunicType]                          ; $7AD0: $FA $0F $DC
@@ -733,9 +733,9 @@ RoomTransitionConfigureScrollTargets::
     ld   hl, data_002_7B67                        ; $7BF1: $21 $67 $7B
     add  hl, bc                                   ; $7BF4: $09
     ld   a, [hl]                                  ; $7BF5: $7E
-    ld   [$C12A], a                               ; $7BF6: $EA $2A $C1
+    ld   [wC12A], a                               ; $7BF6: $EA $2A $C1
     xor  a                                        ; $7BF9: $AF
-    ld   [$C12B], a                               ; $7BFA: $EA $2B $C1
+    ld   [wC12B], a                               ; $7BFA: $EA $2B $C1
 
     jp   IncrementRoomTransitionStateAndReturn    ; $7BFD: $C3 $36 $7B
 

@@ -73,7 +73,7 @@ func_038_785A::
     ld   bc, $00                                 ; $7864: $01 $00 $00
 .loop_7867_38:
     push bc                                      ; $7867: $C5
-    ld   hl, $C242                               ; $7868: $21 $42 $C2
+    ld   hl, wEntitiesSpeedXTable+2                               ; $7868: $21 $42 $C2
     add  hl, bc                                  ; $786B: $09
     ld   a, [hl]                                 ; $786C: $7E
     and  a                                       ; $786D: $A7
@@ -81,19 +81,19 @@ func_038_785A::
 
     push bc                                      ; $7870: $C5
     sla  c                                       ; $7871: $CB $21
-    ld   hl, $C23A                               ; $7873: $21 $3A $C2
+    ld   hl, wEntitiesPosYSignTable+10                               ; $7873: $21 $3A $C2
     add  hl, bc                                  ; $7876: $09
     ld   e, [hl]                                 ; $7877: $5E
     inc  hl                                      ; $7878: $23
     ld   d, [hl]                                 ; $7879: $56
-    ld   hl, $C232                               ; $787A: $21 $32 $C2
+    ld   hl, wEntitiesPosYSignTable+2                               ; $787A: $21 $32 $C2
     add  hl, bc                                  ; $787D: $09
     ldi  a, [hl]                                 ; $787E: $2A
     ld   h, [hl]                                 ; $787F: $66
     ld   l, a                                    ; $7880: $6F
     pop  bc                                      ; $7881: $C1
     push hl                                      ; $7882: $E5
-    ld   hl, $C22A                               ; $7883: $21 $2A $C2
+    ld   hl, wEntitiesPosXSignTable+10                               ; $7883: $21 $2A $C2
     add  hl, bc                                  ; $7886: $09
     ld   c, [hl]                                 ; $7887: $4E
     ld   b, $00                                  ; $7888: $06 $00

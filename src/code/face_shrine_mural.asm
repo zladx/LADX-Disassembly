@@ -18,7 +18,7 @@ FaceShrineMuralStage0Handler::
     ldh  a, [hIsGBC]                              ; $6B0D: $F0 $FE
     and  a                                        ; $6B0F: $A7
     jr   z, FaceShrineMuralStage1Handler          ; $6B10: $28 $19
-    ld   hl, $DC10                                ; $6B12: $21 $10 $DC
+    ld   hl, wDC10                                ; $6B12: $21 $10 $DC
     ld   c, $80                                   ; $6B15: $0E $80
     di                                            ; $6B17: $F3
 
@@ -40,9 +40,9 @@ jr_001_6B18::
 
 FaceShrineMuralStage1Handler::
     ld   a, $01                                   ; $6B2B: $3E $01
-    ld   [$C167], a                               ; $6B2D: $EA $67 $C1
+    ld   [wC167], a                               ; $6B2D: $EA $67 $C1
     call func_1A22                                ; $6B30: $CD $22 $1A
-    ld   a, [$C16B]                               ; $6B33: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $6B33: $FA $6B $C1
     cp   $04                                      ; $6B36: $FE $04
     jr   nz, jr_001_6B51                          ; $6B38: $20 $17
     call func_001_5888                            ; $6B3A: $CD $88 $58
@@ -52,7 +52,7 @@ FaceShrineMuralStage1Handler::
     ldh  [hVolumeLeft], a                      ; $6B43: $E0 $AA
     call IncrementGameplaySubtype                 ; $6B45: $CD $D6 $44
     xor  a                                        ; $6B48: $AF
-    ld   [$C1BF], a                               ; $6B49: $EA $BF $C1
+    ld   [wScrollXOffset], a                               ; $6B49: $EA $BF $C1
     ld   a, $14                                   ; $6B4C: $3E $14
     ld   [wTileMapToLoad], a                      ; $6B4E: $EA $FE $D6
 
@@ -67,20 +67,20 @@ FaceShrineMuralStage2Handler::
     xor  a                                        ; $6B5C: $AF
     ldh  [hBaseScrollX], a                        ; $6B5D: $E0 $96
     ldh  [$FF97], a                               ; $6B5F: $E0 $97
-    ld   [$C16B], a                               ; $6B61: $EA $6B $C1
-    ld   [$C16C], a                               ; $6B64: $EA $6C $C1
+    ld   [wTransitionSequenceCounter], a                               ; $6B61: $EA $6B $C1
+    ld   [wC16C], a                               ; $6B64: $EA $6C $C1
     ld   a, $01                                   ; $6B67: $3E $01
     ld   [$DDD5], a                               ; $6B69: $EA $D5 $DD
     jp   IncrementGameplaySubtypeAndReturn        ; $6B6C: $C3 $D6 $44
 
 FaceShrineMuralStage3Handler::
     call func_1A39                                ; $6B6F: $CD $39 $1A
-    ld   a, [$C16B]                               ; $6B72: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $6B72: $FA $6B $C1
     cp   $04                                      ; $6B75: $FE $04
     jr   nz, jr_001_6B80                          ; $6B77: $20 $07
     call IncrementGameplaySubtype                 ; $6B79: $CD $D6 $44
     xor  a                                        ; $6B7C: $AF
-    ld   [$C3C4], a                               ; $6B7D: $EA $C4 $C3
+    ld   [wC3C4], a                               ; $6B7D: $EA $C4 $C3
 
 jr_001_6B80::
     ret                                           ; $6B80: $C9
@@ -89,9 +89,9 @@ FaceShrineMuralStage4Handler::
     ld   a, [wDialogState]                        ; $6B81: $FA $9F $C1
     and  a                                        ; $6B84: $A7
     ret  nz                                       ; $6B85: $C0
-    ld   a, [$C3C4]                               ; $6B86: $FA $C4 $C3
+    ld   a, [wC3C4]                               ; $6B86: $FA $C4 $C3
     inc  a                                        ; $6B89: $3C
-    ld   [$C3C4], a                               ; $6B8A: $EA $C4 $C3
+    ld   [wC3C4], a                               ; $6B8A: $EA $C4 $C3
     jp   z, IncrementGameplaySubtype              ; $6B8D: $CA $D6 $44
     cp   $80                                      ; $6B90: $FE $80
     jr   nz, jr_001_6B99                          ; $6B92: $20 $05

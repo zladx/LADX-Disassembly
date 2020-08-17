@@ -36,13 +36,13 @@ func_006_641A::
 label_006_641F:
     call CopyLinkFinalPositionToPosition          ; $641F: $CD $BE $0C
     call ResetPegasusBoots                        ; $6422: $CD $B6 $0C
-    ld   a, [$C1A6]                               ; $6425: $FA $A6 $C1
+    ld   a, [wC1A6]                               ; $6425: $FA $A6 $C1
     and  a                                        ; $6428: $A7
     jr   z, jr_006_643C                           ; $6429: $28 $11
 
     ld   e, a                                     ; $642B: $5F
     ld   d, b                                     ; $642C: $50
-    ld   hl, $C39F                                ; $642D: $21 $9F $C3
+    ld   hl, wEntitiesUnknowTableR+15                                ; $642D: $21 $9F $C3
     add  hl, de                                   ; $6430: $19
     ld   a, [hl]                                  ; $6431: $7E
     cp   $03                                      ; $6432: $FE $03
@@ -133,14 +133,14 @@ func_006_645D::
     jr   nz, .return                              ; $649D: $20 $25
 
 .jr_006_649F
-    ld   hl, $C1AD                                ; $649F: $21 $AD $C1
+    ld   hl, wC1AD                                ; $649F: $21 $AD $C1
     ld   [hl], $01                                ; $64A2: $36 $01
     ld   a, [wDialogState]                        ; $64A4: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $64A7: $21 $4F $C1
     or   [hl]                                     ; $64AA: $B6
     ld   hl, wIsLinkInTheAir                      ; $64AB: $21 $46 $C1
     or   [hl]                                     ; $64AE: $B6
-    ld   hl, $C134                                ; $64AF: $21 $34 $C1
+    ld   hl, wC134                                ; $64AF: $21 $34 $C1
     or   [hl]                                     ; $64B2: $B6
     jr   nz, .return                              ; $64B3: $20 $0F
 
@@ -180,7 +180,7 @@ func_006_64CC::
     jr   nz, jr_006_64F5                          ; $64E0: $20 $13
 
 jr_006_64E2:
-    ld   hl, $C1A8                                ; $64E2: $21 $A8 $C1
+    ld   hl, wC1A8                                ; $64E2: $21 $A8 $C1
     ld   a, [wDialogState]                        ; $64E5: $FA $9F $C1
     or   [hl]                                     ; $64E8: $B6
     ld   hl, wInventoryAppearing                  ; $64E9: $21 $4F $C1
@@ -215,7 +215,7 @@ func_006_64F7::
     add  hl, bc                                   ; $650D: $09
     ld   a, [hl]                                  ; $650E: $7E
     push af                                       ; $650F: $F5
-    ld   hl, $C3F0                                ; $6510: $21 $F0 $C3
+    ld   hl, wC3F0                                ; $6510: $21 $F0 $C3
     add  hl, bc                                   ; $6513: $09
     ld   a, [hl]                                  ; $6514: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $6515: $21 $40 $C2

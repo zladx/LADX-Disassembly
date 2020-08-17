@@ -19,7 +19,7 @@ ArrowEntityHandler::
     ;
 
     ld   a, $05                                   ; $6A43: $3E $05
-    ld   [$C19E], a                               ; $6A45: $EA $9E $C1
+    ld   [wC19E], a                               ; $6A45: $EA $9E $C1
     call func_003_75A2                            ; $6A48: $CD $A2 $75
     call func_003_6AD4                            ; $6A4B: $CD $D4 $6A
 

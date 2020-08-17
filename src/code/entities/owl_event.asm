@@ -1,6 +1,6 @@
 OwlEventEntityHandler::
     ld   a, c                                     ; $67F5: $79
-    ld   [$C501], a                               ; $67F6: $EA $01 $C5
+    ld   [wC501], a                               ; $67F6: $EA $01 $C5
     ldh  a, [hMapRoom]                            ; $67F9: $F0 $F6
     cp   $64                        ; Ghost's gravestone
     jr   nz, jr_006_680D                          ; $67FD: $20 $0E

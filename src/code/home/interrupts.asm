@@ -37,7 +37,7 @@ InterruptLCDStatus::
     cp   $05 ; if GameplaySubtype != 5            ; $039D: $FE $05
     jr   nz, .setStandardScrollY                  ; $039F: $20 $05
     ; GameplaySubtype == 5
-    ld   a, [$D000]  ; override scrollY with WRA1:$D000 value ; $03A1: $FA $00 $D0
+    ld   a, [wIsFileSelectionArrowShifted]  ; override scrollY with WRA1:wIsFileSelectionArrowShifted value ; $03A1: $FA $00 $D0
     jr   .setScrollY                              ; $03A4: $18 $02
 
 .setStandardScrollY
@@ -309,7 +309,7 @@ vBlankContinue::
     call DrawLinkSprite                           ; $0501: $CD $2E $1D
 .linkSpriteclearBGTilesFlag
 
-    ; Copy the content of wOAMBuffer to the OAM memory
+    ; Copy the content of wLinkOAMBuffer to the OAM memory
     call hDMARoutine                              ; $0504: $CD $C0 $FF
     ; And we're clearBGTilesFlag.
     jr   WaitForVBlankAndReturn                   ; $0507: $18 $60
@@ -359,13 +359,13 @@ vBlankContinue::
     xor  a                                        ; $053E: $AF
     ld   [wRequests], a                           ; $053F: $EA $00 $D6
     ld   [wRequest], a                            ; $0542: $EA $01 $D6
-    ld   [$DC90], a                               ; $0545: $EA $90 $DC
-    ld   [$DC91], a                               ; $0548: $EA $91 $DC
+    ld   [wDC90], a                               ; $0545: $EA $90 $DC
+    ld   [wDC91], a                               ; $0548: $EA $91 $DC
 
     ; On Overworld, copy some palette data to OAM buffer
     callsb func_036_72BA                          ; $054B: $3E $36 $EA $00 $21 $CD $BA $72
 
-    ; Copy the content of wOAMBuffer to the OAM memory
+    ; Copy the content of wLinkOAMBuffer to the OAM memory
     call hDMARoutine                              ; $0553: $CD $C0 $FF
 
     ; If on GBC…
@@ -417,8 +417,8 @@ PhotoAlbumVBlankHandler::
     xor  a                                        ; $059E: $AF
     ld   [wRequests], a                           ; $059F: $EA $00 $D6
     ld   [wRequest], a                            ; $05A2: $EA $01 $D6
-    ld   [$DC90], a                               ; $05A5: $EA $90 $DC
-    ld   [$DC91], a                               ; $05A8: $EA $91 $DC
+    ld   [wDC90], a                               ; $05A5: $EA $90 $DC
+    ld   [wDC91], a                               ; $05A8: $EA $91 $DC
 
 .clearBGTilesFlag
     callsw PrinterInterruptVBlank                 ; $05AB: $3E $28 $CD $0C $08 $CD $16 $46
@@ -582,7 +582,7 @@ LoadOAMTiles::
     callsb func_020_475A                          ; $06A9: $3E $20 $EA $00 $21 $CD $5A $47
     xor  a                                        ; $06B1: $AF
     ld   [wNeedsUpdatingNPCTiles], a              ; $06B2: $EA $0E $C1
-    ld   [$C10F], a                               ; $06B5: $EA $0F $C1
+    ld   [wC10F], a                               ; $06B5: $EA $0F $C1
     ld   hl, vTiles2                              ; $06B8: $21 $00 $90
     ld   bc, $00                                  ; $06BB: $01 $00 $00
     call GetColorDungeonTilesAddress              ; $06BE: $CD $16 $46
@@ -604,10 +604,10 @@ IF __PATCH_0__
 ELSE
     jp   z, label_73E                             ; $06CE: $CA $3E $07
 ENDC
-    ld   a, [$C197]                               ; $06D1: $FA $97 $C1
+    ld   a, [wC197]                               ; $06D1: $FA $97 $C1
     ld   e, a                                     ; $06D4: $5F
     ld   d, $00                                   ; $06D5: $16 $00
-    ld   hl, $C193                                ; $06D7: $21 $93 $C1
+    ld   hl, wC193                                ; $06D7: $21 $93 $C1
     add  hl, de                                   ; $06DA: $19
     ld   a, [hl]                                  ; $06DB: $7E
     push af                                       ; $06DC: $F5
@@ -649,7 +649,7 @@ ENDC
     add  hl, bc                                   ; $071A: $09
     add  hl, de                                   ; $071B: $19
     push hl                                       ; $071C: $E5
-    ld   a, [$C197]                               ; $071D: $FA $97 $C1
+    ld   a, [wC197]                               ; $071D: $FA $97 $C1
     ld   d, a                                     ; $0720: $57
     ld   hl, vTiles0 + $400                       ; $0721: $21 $00 $84
     add  hl, bc                                   ; $0724: $09
@@ -677,10 +677,10 @@ ENDC
     ret                                           ; $073D: $C9
 
 label_73E::
-    ld   a, [$C10D]                               ; $073E: $FA $0D $C1
+    ld   a, [wC10D]                               ; $073E: $FA $0D $C1
     ld   e, a                                     ; $0741: $5F
     ld   d, $00                                   ; $0742: $16 $00
-    ld   hl, $C193                                ; $0744: $21 $93 $C1
+    ld   hl, wC193                                ; $0744: $21 $93 $C1
     add  hl, de                                   ; $0747: $19
     ld   a, [hl]                                  ; $0748: $7E
     push af                                       ; $0749: $F5
@@ -703,7 +703,7 @@ label_73E::
 .jp_0764
 
     ld   [MBC3SelectBank], a                      ; $0764: $EA $00 $21
-    ld   a, [$C10F]                               ; $0767: $FA $0F $C1
+    ld   a, [wC10F]                               ; $0767: $FA $0F $C1
     ld   c, a                                     ; $076A: $4F
     ld   b, $00                                   ; $076B: $06 $00
     sla  c                                        ; $076D: $CB $21
@@ -722,7 +722,7 @@ label_73E::
     add  hl, bc                                   ; $0788: $09
     add  hl, de                                   ; $0789: $19
     push hl                                       ; $078A: $E5
-    ld   a, [$C10D]                               ; $078B: $FA $0D $C1
+    ld   a, [wC10D]                               ; $078B: $FA $0D $C1
     ld   d, a                                     ; $078E: $57
     ld   hl, $8400                                ; $078F: $21 $00 $84
     add  hl, bc                                   ; $0792: $09
@@ -732,14 +732,14 @@ label_73E::
     pop  hl                                       ; $0796: $E1
     ld   bc, $40                                  ; $0797: $01 $40 $00
     call CopyData                                 ; $079A: $CD $14 $29
-    ld   a, [$C10F]                               ; $079D: $FA $0F $C1
+    ld   a, [wC10F]                               ; $079D: $FA $0F $C1
     inc  a                                        ; $07A0: $3C
-    ld   [$C10F], a                               ; $07A1: $EA $0F $C1
+    ld   [wC10F], a                               ; $07A1: $EA $0F $C1
     cp   $04                                      ; $07A4: $FE $04
     jr   nz, .return                              ; $07A6: $20 $07
     xor  a                                        ; $07A8: $AF
     ld   [wNeedsUpdatingNPCTiles], a              ; $07A9: $EA $0E $C1
-    ld   [$C10F], a                               ; $07AC: $EA $0F $C1
+    ld   [wC10F], a                               ; $07AC: $EA $0F $C1
 .return
     ret                                           ; $07AF: $C9
 

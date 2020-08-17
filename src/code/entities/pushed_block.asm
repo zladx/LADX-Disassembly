@@ -91,7 +91,7 @@ jr_003_52B5:
     ret  nz                                       ; $52C3: $C0
 
     call func_003_7893                            ; $52C4: $CD $93 $78
-    ld   a, [$C503]                               ; $52C7: $FA $03 $C5
+    ld   a, [wC503]                               ; $52C7: $FA $03 $C5
     cp   $A7                                      ; $52CA: $FE $A7
     jr   z, jr_003_52D1                           ; $52CC: $28 $03
 

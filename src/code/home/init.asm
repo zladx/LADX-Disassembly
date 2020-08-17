@@ -32,7 +32,7 @@ Start::
 Init::
     ldh  [hIsGBC], a ; Save isGBC value           ; $016F: $E0 $FE
     call LCDOff      ; Turn off screen            ; $0171: $CD $CF $28
-    ld   sp, $DFFF   ; Init stack pointer         ; $0174: $31 $FF $DF
+    ld   sp, wStackTop   ; Init stack pointer         ; $0174: $31 $FF $DF
 
     ; Super GameBoy detection and initialization
     callsb SuperGameBoyInit                       ; $0177: $3E $3C $EA $00 $21 $CD $22 $6A

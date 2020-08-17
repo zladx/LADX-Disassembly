@@ -30,12 +30,12 @@ WorldMapState0Handler::
     ldh  a, [hIsGBC]                              ; $564B: $F0 $FE
     and  a                                        ; $564D: $A7
     jr   z, WorldMapState1Handler                 ; $564E: $28 $28
-    ld   hl, $DC10                                ; $5650: $21 $10 $DC
+    ld   hl, wDC10                                ; $5650: $21 $10 $DC
     ld   c, $80                                   ; $5653: $0E $80
     di                                            ; $5655: $F3
     ld   a, $03                                   ; $5656: $3E $03
     ld   [rSVBK], a                               ; $5658: $E0 $70
-    ld   a, [$D000]                               ; $565A: $FA $00 $D0
+    ld   a, [wIsFileSelectionArrowShifted]                               ; $565A: $FA $00 $D0
     and  a                                        ; $565D: $A7
     jr   nz, jr_001_5674                          ; $565E: $20 $14
 
@@ -52,7 +52,7 @@ jr_001_5660::
     and  a                                        ; $566C: $A7
     jr   nz, jr_001_5660                          ; $566D: $20 $F1
     ld   a, $01                                   ; $566F: $3E $01
-    ld   [$D000], a                               ; $5671: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a                               ; $5671: $EA $00 $D0
 
 jr_001_5674::
     xor  a                                        ; $5674: $AF
@@ -63,7 +63,7 @@ WorldMapState1Handler::
     call DrawLinkSprite                           ; $5678: $CD $2E $1D
     call AnimateEntitiesAndRestoreBank01          ; $567B: $CD $FC $0E
     call func_1A22                                ; $567E: $CD $22 $1A
-    ld   a, [$C16B]                               ; $5681: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $5681: $FA $6B $C1
     cp   $04                                      ; $5684: $FE $04
     jr   nz, jr_001_56F3                          ; $5686: $20 $6B
     ld   a, $03                                   ; $5688: $3E $03
@@ -72,16 +72,16 @@ WorldMapState1Handler::
     ldh  [hVolumeLeft], a                      ; $568E: $E0 $AA
     call IncrementGameplaySubtype                 ; $5690: $CD $D6 $44
     xor  a                                        ; $5693: $AF
-    ld   [$C16B], a                               ; $5694: $EA $6B $C1
-    ld   [$C16C], a                               ; $5697: $EA $6C $C1
+    ld   [wTransitionSequenceCounter], a                               ; $5694: $EA $6B $C1
+    ld   [wC16C], a                               ; $5697: $EA $6C $C1
     ldh  [hBaseScrollX], a                        ; $569A: $E0 $96
-    ld   [$C1BF], a                               ; $569C: $EA $BF $C1
+    ld   [wScrollXOffset], a                               ; $569C: $EA $BF $C1
     ldh  [$FF97], a                               ; $569F: $E0 $97
     ld   [wInventoryAppearing], a                 ; $56A1: $EA $4F $C1
-    ld   [$C1B2], a                               ; $56A4: $EA $B2 $C1
-    ld   [$C1B3], a                               ; $56A7: $EA $B3 $C1
+    ld   [wC1B2], a                               ; $56A4: $EA $B2 $C1
+    ld   [wC1B3], a                               ; $56A7: $EA $B3 $C1
     ld   a, [$DB54]                               ; $56AA: $FA $54 $DB
-    ld   [$DBB4], a                               ; $56AD: $EA $B4 $DB
+    ld   [wDBB4], a                               ; $56AD: $EA $B4 $DB
     ld   e, a                                     ; $56B0: $5F
     ld   d, $00                                   ; $56B1: $16 $00
     ld   hl, MapSpecialLocationNamesTable         ; $56B3: $21 $59 $59
@@ -94,7 +94,7 @@ WorldMapState1Handler::
     inc  a                                        ; $56BF: $3C
     cp   $01                                      ; $56C0: $FE $01
     jr   nz, jr_001_56D9                          ; $56C2: $20 $15
-    ld   a, [$C5A2]                               ; $56C4: $FA $A2 $C5
+    ld   a, [wC5A2]                               ; $56C4: $FA $A2 $C5
     and  a                                        ; $56C7: $A7
     ld   a, $00                                   ; $56C8: $3E $00
     jr   nz, jr_001_56D9                          ; $56CA: $20 $0D
@@ -107,9 +107,9 @@ WorldMapState1Handler::
     ld   a, $01                                   ; $56D7: $3E $01
 
 jr_001_56D9::
-    ld   [$C1B1], a                               ; $56D9: $EA $B1 $C1
-    ld   a, [$DBB4]                               ; $56DC: $FA $B4 $DB
-    ld   [$C1B4], a                               ; $56DF: $EA $B4 $C1
+    ld   [wC1B1], a                               ; $56D9: $EA $B1 $C1
+    ld   a, [wDBB4]                               ; $56DC: $FA $B4 $DB
+    ld   [wC1B4], a                               ; $56DF: $EA $B4 $C1
     ld   a, [$FF40]                               ; $56E2: $F0 $40
     and  $DF                                      ; $56E4: $E6 $DF
     ld   [wLCDControl], a                         ; $56E6: $EA $FD $D6
@@ -137,7 +137,7 @@ WorldMapState3Handler::
 
 WorldMapState4Handler::
     call func_1A39                                ; $570B: $CD $39 $1A
-    ld   a, [$C16B]                               ; $570E: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $570E: $FA $6B $C1
     cp   $04                                      ; $5711: $FE $04
     jr   nz, .return                              ; $5713: $20 $06
     call IncrementGameplaySubtype                 ; $5715: $CD $D6 $44
@@ -169,7 +169,7 @@ ENDC
     ldh  a, [hJoypadState]                        ; $5738: $F0 $CC
     and  J_A                                      ; $573A: $E6 $10
     jr   z, jr_001_57B7                           ; $573C: $28 $79
-    ld   a, [$DBB4]                               ; $573E: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $573E: $FA $B4 $DB
     ld   e, a                                     ; $5741: $5F
     ld   d, $00                                   ; $5742: $16 $00
     ld   hl, MapSpecialLocationNamesTable         ; $5744: $21 $59 $59
@@ -180,11 +180,11 @@ ENDC
     ld   e, a                                     ; $574C: $5F
     and  $F0                                      ; $574D: $E6 $F0
     jr   nz, jr_001_5766                          ; $574F: $20 $15
-    ld   a, [$C5A2]                               ; $5751: $FA $A2 $C5
+    ld   a, [wC5A2]                               ; $5751: $FA $A2 $C5
     and  a                                        ; $5754: $A7
     jr   nz, jr_001_576F                          ; $5755: $20 $18
     push de                                       ; $5757: $D5
-    ld   a, [$DBB4]                               ; $5758: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $5758: $FA $B4 $DB
     ld   e, a                                     ; $575B: $5F
     ld   hl, wOverworldRoomStatus                 ; $575C: $21 $00 $D8
     add  hl, de                                   ; $575F: $19
@@ -201,7 +201,7 @@ jr_001_5766::
     jr   jr_001_5792                              ; $576D: $18 $23
 
 jr_001_576F::
-    ld   a, [$DBB4]                               ; $576F: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $576F: $FA $B4 $DB
     cp   $24                                      ; $5772: $FE $24
     jr   z, jr_001_577A                           ; $5774: $28 $04
     cp   $34                                      ; $5776: $FE $34
@@ -215,7 +215,7 @@ jr_001_577E::
     rra                                           ; $577E: $1F
     and  $07                                      ; $577F: $E6 $07
     ld   e, a                                     ; $5781: $5F
-    ld   a, [$DBB4]                               ; $5782: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $5782: $FA $B4 $DB
     rra                                           ; $5785: $1F
     rra                                           ; $5786: $1F
     and  $38                                      ; $5787: $E6 $38
@@ -228,19 +228,19 @@ jr_001_577E::
 
 jr_001_5792::
     call OpenDialog                               ; $5792: $CD $85 $23
-    ld   a, [$C173]                               ; $5795: $FA $73 $C1
+    ld   a, [wDialogIndex]                               ; $5795: $FA $73 $C1
     cp   $A7                                      ; $5798: $FE $A7
     jr   z, jr_001_57A3                           ; $579A: $28 $07
-    ld   a, [$DBB4]                               ; $579C: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $579C: $FA $B4 $DB
     cp   $37                                      ; $579F: $FE $37
     jr   nz, jr_001_57A8                          ; $57A1: $20 $05
 
 jr_001_57A3::
     ld   a, $01                                   ; $57A3: $3E $01
-    ld   [$C112], a                               ; $57A5: $EA $12 $C1
+    ld   [wDialogIndexHi], a                               ; $57A5: $EA $12 $C1
 
 jr_001_57A8::
-    ld   a, [$DBB4]                               ; $57A8: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $57A8: $FA $B4 $DB
     cp   $70                                      ; $57AB: $FE $70
     ld   a, $01                                   ; $57AD: $3E $01
     jr   nc, jr_001_57B3                          ; $57AF: $30 $02
@@ -264,7 +264,7 @@ jr_001_57B7::
     ld   a, $00                                   ; $57CB: $3E $00
     ld   [wWarp0MapCategory], a                   ; $57CD: $EA $01 $D4
     ld   [wWarp0Map], a                           ; $57D0: $EA $02 $D4
-    ld   a, [$DBB4]                               ; $57D3: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $57D3: $FA $B4 $DB
     ld   [wWarp0Room], a                          ; $57D6: $EA $03 $D4
     ld   a, $48                                   ; $57D9: $3E $48
     ld   [wWarp0DestinationX], a                  ; $57DB: $EA $04 $D4
@@ -295,8 +295,8 @@ jr_001_5804::
     and  e                                        ; $5806: $A3
     jr   z, label_001_5818                        ; $5807: $28 $0F
     xor  a                                        ; $5809: $AF
-    ld   [$C16B], a                               ; $580A: $EA $6B $C1
-    ld   [$C16C], a                               ; $580D: $EA $6C $C1
+    ld   [wTransitionSequenceCounter], a                               ; $580A: $EA $6B $C1
+    ld   [wC16C], a                               ; $580D: $EA $6C $C1
     ld   a, $01                                   ; $5810: $3E $01
     ld   [$DDD5], a                               ; $5812: $EA $D5 $DD
     call IncrementGameplaySubtype                 ; $5815: $CD $D6 $44

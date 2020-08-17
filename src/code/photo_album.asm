@@ -78,7 +78,7 @@ func_028_4033::
 
     ld   hl, Data_028_4DD1                      ; $4072: $21 $D1 $4D
     add  hl, bc                                 ; $4075: $09
-    ld   de, wOAMBuffer                         ; $4076: $11 $00 $C0
+    ld   de, wLinkOAMBuffer                         ; $4076: $11 $00 $C0
     ld   c, $0A                                 ; $4079: $0E $0A
 .loop_407B_28:
     ldi  a, [hl]                                ; $407B: $2A
@@ -104,7 +104,7 @@ func_028_4033::
 
 JumpTable_028_408F:
     call func_1A22                             ; $408F: JumpTable_028_408F $CD $22 $1A
-    ld   a, [$C16B]                             ; $4092: JumpTable_028_408F $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                             ; $4092: JumpTable_028_408F $FA $6B $C1
     cp   $04                                    ; $4095: JumpTable_028_408F $FE $04
     ret  nz                                     ; $4097: JumpTable_028_408F $C0
 
@@ -112,7 +112,7 @@ JumpTable_028_408F:
 
 JumpTable_028_409B:
     call func_1A39                             ; $409B: JumpTable_028_409B $CD $39 $1A
-    ld   a, [$C16B]                             ; $409E: JumpTable_028_409B $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                             ; $409E: JumpTable_028_409B $FA $6B $C1
     cp   $04                                    ; $40A1: JumpTable_028_409B $FE $04
     ret  nz                                     ; $40A3: JumpTable_028_409B $C0
 
@@ -148,7 +148,7 @@ JumpTable_028_40A7:
 
 JumpTable_028_40D9:
     xor  a                                      ; $40D9: JumpTable_028_40D9 $AF
-    ld   [$C16B], a                             ; $40DA: JumpTable_028_40D9 $EA $6B $C1
+    ld   [wTransitionSequenceCounter], a                             ; $40DA: JumpTable_028_40D9 $EA $6B $C1
     call func_028_45CD                          ; $40DD: JumpTable_028_40D9 $CD $CD $45
     jp   func_028_44DB                          ; $40E0: JumpTable_028_40D9 $C3 $DB $44
 
@@ -211,14 +211,14 @@ ENDC
 
     ld   bc, $80                                ; $415C: JumpTable_028_40FB $01 $80 $00
     ld   hl, PhotoAlbumPalettes                      ; $415F: JumpTable_028_40FB $21 $B0 $7C
-    ld   de, $DC10                              ; $4162: JumpTable_028_40FB $11 $10 $DC
+    ld   de, wDC10                              ; $4162: JumpTable_028_40FB $11 $10 $DC
     call func_028_4176                          ; $4165: JumpTable_028_40FB $CD $76 $41
                                                 ; $4168: JumpTable_028_40FB $3E $C7
     ld   a, $C7
     ld   [wLCDControl], a                       ; $416A: JumpTable_028_40FB $EA $FD $D6
     ld   [rLCDC], a                             ; $416D: JumpTable_028_40FB $E0 $40
     xor  a                                      ; $416F: JumpTable_028_40FB $AF
-    ld   [$C16B], a                             ; $4170: JumpTable_028_40FB $EA $6B $C1
+    ld   [wTransitionSequenceCounter], a                             ; $4170: JumpTable_028_40FB $EA $6B $C1
     jp   func_028_44DB                          ; $4173: JumpTable_028_40FB $C3 $DB $44
 
 func_028_4176::
@@ -352,7 +352,7 @@ JumpTable_028_4218:
     xor  a                                      ; $421E: JumpTable_028_4218 $AF
     ld   [$D1D1], a                             ; $421F: JumpTable_028_4218 $EA $D1 $D1
     ld   a, $2C                                 ; $4222: JumpTable_028_4218 $3E $2C
-    ld   [$C173], a                             ; $4224: JumpTable_028_4218 $EA $73 $C1
+    ld   [wDialogIndex], a                             ; $4224: JumpTable_028_4218 $EA $73 $C1
     call OpenDialogInTable2                     ; $4227: JumpTable_028_4218 $CD $7C $23
     ld   a, $01                                 ; $422A: JumpTable_028_4218 $3E $01
     ld   [wDialogState], a                             ; $422C: JumpTable_028_4218 $EA $9F $C1
@@ -406,7 +406,7 @@ func_028_427D::
     ld   a, $12                                 ; $428E: $3E $12
     ld   [wGameplaySubtype], a                  ; $4290: $EA $96 $DB
     xor  a                                      ; $4293: $AF
-    ld   [$C16B], a                             ; $4294: $EA $6B $C1
+    ld   [wTransitionSequenceCounter], a                             ; $4294: $EA $6B $C1
     ret                                         ; $4297: $C9
 
 
@@ -560,7 +560,7 @@ func_028_433A::
 
     xor  a                                      ; $435D: $AF
     ld   [$D1CF], a                             ; $435E: $EA $CF $D1
-    ld   [$C16B], a                             ; $4361: $EA $6B $C1
+    ld   [wTransitionSequenceCounter], a                             ; $4361: $EA $6B $C1
     ld   a, [$D1CB]                             ; $4364: $FA $CB $D1
     cp   $FF                                    ; $4367: $FE $FF
     ret  z                                      ; $4369: $C8
@@ -581,7 +581,7 @@ func_028_4385::
     ld   d, $00                                 ; $438F: $16 $00
     ld   hl, Data_028_436D                      ; $4391: $21 $6D $43
     add  hl, de                                 ; $4394: $19
-    ld   de, wOAMBuffer                         ; $4395: $11 $00 $C0
+    ld   de, wLinkOAMBuffer                         ; $4395: $11 $00 $C0
     ld   c, $02                                 ; $4398: $0E $02
 .loop_439A_28:
     ld   a, [$D1CE]                             ; $439A: $FA $CE $D1
@@ -616,7 +616,7 @@ JumpTable_028_43B2:
     ld   [wLCDControl], a                       ; $43C0: JumpTable_028_43B2 $EA $FD $D6
     ld   [rLCDC], a                             ; $43C3: JumpTable_028_43B2 $E0 $40
     xor  a                                      ; $43C5: JumpTable_028_43B2 $AF
-    ld   [$C16B], a                             ; $43C6: JumpTable_028_43B2 $EA $6B $C1
+    ld   [wTransitionSequenceCounter], a                             ; $43C6: JumpTable_028_43B2 $EA $6B $C1
     jp   func_028_44DB                          ; $43C9: JumpTable_028_43B2 $C3 $DB $44
 
 func_028_43CC::
@@ -683,7 +683,7 @@ Data_028_4424::
 func_028_442C::
     ld   hl, Data_028_4424                      ; $442C: $21 $24 $44
     ld   bc, $08                                ; $442F: $01 $08 $00
-    ld   de, $DC10                              ; $4432: $11 $10 $DC
+    ld   de, wDC10                              ; $4432: $11 $10 $DC
     call func_028_4176                          ; $4435: $CD $76 $41
     ret                                         ; $4438: $C9
 
@@ -730,7 +730,7 @@ JumpTable_028_4469:
     ld   a, $01                                 ; $4473: JumpTable_028_4469 $3E $01
     ld   [wGameplaySubtype], a                  ; $4475: JumpTable_028_4469 $EA $96 $DB
     xor  a                                      ; $4478: JumpTable_028_4469 $AF
-    ld   [$C16B], a                             ; $4479: JumpTable_028_4469 $EA $6B $C1
+    ld   [wTransitionSequenceCounter], a                             ; $4479: JumpTable_028_4469 $EA $6B $C1
     ret                                         ; $447C: JumpTable_028_4469 $C9
 
 
@@ -748,7 +748,7 @@ JumpTable_028_4469:
     call func_028_44DB                          ; $448F: JumpTable_028_4469 $CD $DB $44
 .else_4492_28:
     ld   hl, Data_028_4439                      ; $4492: JumpTable_028_4469 $21 $39 $44
-    ld   de, wOAMBuffer                         ; $4495: JumpTable_028_4469 $11 $00 $C0
+    ld   de, wLinkOAMBuffer                         ; $4495: JumpTable_028_4469 $11 $00 $C0
     ld   c, (Data_028_4439.end - Data_028_4439) / 4 ; $4498: JumpTable_028_4469 $0E $0C
 .loop_449A_28:
     ldi  a, [hl]                                ; $449A: JumpTable_028_4469 $2A
@@ -905,7 +905,7 @@ JumpTable_028_457E:
     ld   a, JINGLE_VALIDATE                     ; $45A3: JumpTable_028_457E $3E $13
     ldh  [hJingle], a                           ; $45A5: JumpTable_028_457E $E0 $F2
 .else_45A7_28:
-    ld   de, wOAMBuffer                         ; $45A7: JumpTable_028_457E $11 $00 $C0
+    ld   de, wLinkOAMBuffer                         ; $45A7: JumpTable_028_457E $11 $00 $C0
     ld   hl, Data_028_452E                      ; $45AA: JumpTable_028_457E $21 $2E $45
     ; Render both Data_028_454E and Data_028_452E
     ld   c, (Data_028_454E.end - Data_028_452E) / 4
@@ -1935,7 +1935,7 @@ func_028_4BD9::
     ld   l, a                                   ; $4BDE: $6F
     ld   a, [$D198]                             ; $4BDF: $FA $98 $D1
     ld   h, a                                   ; $4BE2: $67
-    ld   de, $C200                              ; $4BE3: $11 $00 $C2
+    ld   de, wEntitiesPosXTable                              ; $4BE3: $11 $00 $C2
     ld   c, $28                                 ; $4BE6: $0E $28
 .loop_4BE8_28:
     ldi  a, [hl]                                ; $4BE8: $2A
@@ -2014,7 +2014,7 @@ JumpTable_028_4C38:
 .else_4C54_28:
     ld   a, $01                                 ; $4C54: JumpTable_028_4C38 $3E $01
     ld   [$D1B6], a                             ; $4C56: JumpTable_028_4C38 $EA $B6 $D1
-    ld   hl, $C200                              ; $4C59: JumpTable_028_4C38 $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                              ; $4C59: JumpTable_028_4C38 $21 $00 $C2
     ld   a, $09                                 ; $4C5C: JumpTable_028_4C38 $3E $09
     call func_028_48C1                          ; $4C5E: JumpTable_028_4C38 $CD $C1 $48
     cp   $FF                                    ; $4C61: JumpTable_028_4C38 $FE $FF
@@ -2156,7 +2156,7 @@ JumpTable_028_4D8C:
     ld   a, MUSIC_MINIGAME                      ; $4D96: JumpTable_028_4D8C $3E $02
     ld   [wMusicTrackToPlay], a                 ; $4D98: JumpTable_028_4D8C $EA $68 $D3
     xor  a                                      ; $4D9B: JumpTable_028_4D8C $AF
-    ld   [$C16B], a                             ; $4D9C: JumpTable_028_4D8C $EA $6B $C1
+    ld   [wTransitionSequenceCounter], a                             ; $4D9C: JumpTable_028_4D8C $EA $6B $C1
 .else_4D9F_28:
     ldh  a, [hFrameCounter]                     ; $4D9F: JumpTable_028_4D8C $F0 $E7
     inc  a                                      ; $4DA1: JumpTable_028_4D8C $3C

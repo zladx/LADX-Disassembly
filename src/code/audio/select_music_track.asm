@@ -153,7 +153,7 @@ SelectMusicTrackAfterTransition::
     ldh  [$FFBD], a                               ; $41C7: $E0 $BD
     ldh  [hNextDefaultMusicTrack], a              ; $41C9: $E0 $BF
     xor  a                                        ; $41CB: $AF
-    ld   [$C1CF], a                               ; $41CC: $EA $CF $C1
+    ld   [wC1CF], a                               ; $41CC: $EA $CF $C1
 
 .return
     ret                                           ; $41CF: $C9

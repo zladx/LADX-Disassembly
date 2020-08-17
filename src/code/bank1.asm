@@ -269,7 +269,7 @@ LoadSavedFile::
     ld   [wHealth], a                             ; $52B8: $EA $5A $DB
 
 .skipHealthReset:
-    ld   hl, $DBD1                                ; $52BB: $21 $D1 $DB
+    ld   hl, wDBD1                                ; $52BB: $21 $D1 $DB
     ld   a, [hl]                                  ; $52BE: $7E
     ld   [hl], $00                                ; $52BF: $36 $00
     and  a                                        ; $52C1: $A7
@@ -742,13 +742,13 @@ PeachPictureStateAHandler::
 
 FileSaveFadeOut::
     call func_1A22                                ; $5825: $CD $22 $1A
-    ld   a, [$C16B]                               ; $5828: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $5828: $FA $6B $C1
     cp   $04                                      ; $582B: $FE $04
     jr   nz, jr_001_58A7                          ; $582D: $20 $78
     ldh  a, [hIsGBC]                              ; $582F: $F0 $FE
     and  a                                        ; $5831: $A7
     jr   z, jr_001_5854                           ; $5832: $28 $20
-    ld   hl, $DC10                                ; $5834: $21 $10 $DC
+    ld   hl, wDC10                                ; $5834: $21 $10 $DC
     ld   c, $80                                   ; $5837: $0E $80
     di                                            ; $5839: $F3
 
@@ -767,7 +767,7 @@ jr_001_583A::
     ld   a, $03                                   ; $5849: $3E $03
     ld   [rSVBK], a                               ; $584B: $E0 $70
     xor  a                                        ; $584D: $AF
-    ld   [$D000], a                               ; $584E: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a                               ; $584E: $EA $00 $D0
     ld   [rSVBK], a                               ; $5851: $E0 $70
     ei                                            ; $5853: $FB
 
@@ -775,11 +775,11 @@ jr_001_5854::
     ld   a, $01                                   ; $5854: $3E $01
     ld   [$DDD5], a                               ; $5856: $EA $D5 $DD
     xor  a                                        ; $5859: $AF
-    ld   [$C50A], a                               ; $585A: $EA $0A $C5
-    ld   [$C116], a                               ; $585D: $EA $16 $C1
+    ld   [wC50A], a                               ; $585A: $EA $0A $C5
+    ld   [wC116], a                               ; $585D: $EA $16 $C1
     ldh  [hBaseScrollX], a                        ; $5860: $E0 $96
     ldh  [$FF97], a                               ; $5862: $E0 $97
-    ld   [$C167], a                               ; $5864: $EA $67 $C1
+    ld   [wC167], a                               ; $5864: $EA $67 $C1
     ld   a, $07                                   ; $5867: $3E $07
     ldh  [hVolumeRight], a                      ; $5869: $E0 $A9
     ld   a, $70                                   ; $586B: $3E $70
@@ -816,7 +816,7 @@ func_001_5895::
     ld   a, $07                                   ; $589A: $3E $07
     ld   [rWX], a                                 ; $589C: $E0 $4B
     ld   a, $08                                   ; $589E: $3E $08
-    ld   [$C150], a                               ; $58A0: $EA $50 $C1
+    ld   [wC150], a                               ; $58A0: $EA $50 $C1
     xor  a                                        ; $58A3: $AF
     ld   [wInventoryAppearing], a                 ; $58A4: $EA $4F $C1
 
@@ -824,7 +824,7 @@ jr_001_58A7::
     ret                                           ; $58A7: $C9
 
 func_001_58A8::
-    ld   hl, $C09C                                ; $58A8: $21 $9C $C0
+    ld   hl, wDynamicOAMBuffer+$6C                                ; $58A8: $21 $9C $C0
     ld   a, [$DB54]                               ; $58AB: $FA $54 $DB
     rra                                           ; $58AE: $1F
     and  $78                                      ; $58AF: $E6 $78
@@ -882,17 +882,17 @@ Data_001_5A6E::
     db 0, $F0, $10                                ; $5A6E
 
 func_001_5A71::
-    ld   a, [$DBB4]                               ; $5A71: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $5A71: $FA $B4 $DB
     ldh  [hScratch0], a                           ; $5A74: $E0 $D7
-    ld   a, [$C1B3]                               ; $5A76: $FA $B3 $C1
-    ld   hl, $C1B2                                ; $5A79: $21 $B2 $C1
+    ld   a, [wC1B3]                               ; $5A76: $FA $B3 $C1
+    ld   hl, wC1B2                                ; $5A79: $21 $B2 $C1
     or   [hl]                                     ; $5A7C: $B6
     ld   hl, wDialogState                         ; $5A7D: $21 $9F $C1
     or   [hl]                                     ; $5A80: $B6
     jp   nz, label_001_5B3F                       ; $5A81: $C2 $3F $5B
     ldh  a, [hPressedButtonsMask]                 ; $5A84: $F0 $CB
     ld   c, a                                     ; $5A86: $4F
-    ld   hl, $C182                                ; $5A87: $21 $82 $C1
+    ld   hl, wC182                                ; $5A87: $21 $82 $C1
     and  $0F                                      ; $5A8A: $E6 $0F
     jr   nz, jr_001_5A92                          ; $5A8C: $20 $04
     xor  a                                        ; $5A8E: $AF
@@ -919,7 +919,7 @@ jr_001_5AA0::
     ld   d, $00                                   ; $5AA4: $16 $00
     ld   hl, Data_001_5A6B                        ; $5AA6: $21 $6B $5A
     add  hl, de                                   ; $5AA9: $19
-    ld   a, [$DBB4]                               ; $5AAA: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $5AAA: $FA $B4 $DB
     ld   d, a                                     ; $5AAD: $57
     and  $F0                                      ; $5AAE: $E6 $F0
     ld   e, a                                     ; $5AB0: $5F
@@ -927,7 +927,7 @@ jr_001_5AA0::
     add  a, [hl]                                  ; $5AB2: $86
     and  $0F                                      ; $5AB3: $E6 $0F
     or   e                                        ; $5AB5: $B3
-    ld   [$DBB4], a                               ; $5AB6: $EA $B4 $DB
+    ld   [wDBB4], a                               ; $5AB6: $EA $B4 $DB
     ld   a, c                                     ; $5AB9: $79
     rra                                           ; $5ABA: $1F
     rra                                           ; $5ABB: $1F
@@ -936,17 +936,17 @@ jr_001_5AA0::
     ld   d, $00                                   ; $5ABF: $16 $00
     ld   hl, Data_001_5A6E                        ; $5AC1: $21 $6E $5A
     add  hl, de                                   ; $5AC4: $19
-    ld   a, [$DBB4]                               ; $5AC5: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $5AC5: $FA $B4 $DB
     add  a, [hl]                                  ; $5AC8: $86
     ld   hl, hScratch0                            ; $5AC9: $21 $D7 $FF
-    ld   [$DBB4], a                               ; $5ACC: $EA $B4 $DB
+    ld   [wDBB4], a                               ; $5ACC: $EA $B4 $DB
     cp   [hl]                                     ; $5ACF: $BE
     jr   z, label_001_5B3F                        ; $5AD0: $28 $6D
     ld   e, a                                     ; $5AD2: $5F
     ld   d, $00                                   ; $5AD3: $16 $00
     ld   hl, wOverworldRoomStatus                 ; $5AD5: $21 $00 $D8
     add  hl, de                                   ; $5AD8: $19
-    ld   a, [$C5A2]                               ; $5AD9: $FA $A2 $C5
+    ld   a, [wC5A2]                               ; $5AD9: $FA $A2 $C5
     and  a                                        ; $5ADC: $A7
     jr   nz, jr_001_5AF5                          ; $5ADD: $20 $16
     ld   a, [hl]                                  ; $5ADF: $7E
@@ -958,7 +958,7 @@ jr_001_5AA0::
     ld   a, JINGLE_BUMP                           ; $5AEA: $3E $09
     ldh  [hJingle], a                             ; $5AEC: $E0 $F2
     ldh  a, [hScratch0]                           ; $5AEE: $F0 $D7
-    ld   [$DBB4], a                               ; $5AF0: $EA $B4 $DB
+    ld   [wDBB4], a                               ; $5AF0: $EA $B4 $DB
     jr   label_001_5B3F                           ; $5AF3: $18 $4A
 
 jr_001_5AF5::
@@ -974,7 +974,7 @@ jr_001_5AF5::
     ld   c, a                                     ; $5B05: $4F
     cp   $01                                      ; $5B06: $FE $01
     jr   nz, jr_001_5B19                          ; $5B08: $20 $0F
-    ld   a, [$C5A2]                               ; $5B0A: $FA $A2 $C5
+    ld   a, [wC5A2]                               ; $5B0A: $FA $A2 $C5
     and  a                                        ; $5B0D: $A7
     jr   nz, jr_001_5B30                          ; $5B0E: $20 $20
     ld   hl, wOverworldRoomStatus                 ; $5B10: $21 $00 $D8
@@ -984,36 +984,36 @@ jr_001_5AF5::
     jr   z, jr_001_5B30                           ; $5B17: $28 $17
 
 jr_001_5B19::
-    ld   a, [$C1B1]                               ; $5B19: $FA $B1 $C1
+    ld   a, [wC1B1]                               ; $5B19: $FA $B1 $C1
     and  a                                        ; $5B1C: $A7
     jr   nz, jr_001_5B24                          ; $5B1D: $20 $05
     ld   a, $10                                   ; $5B1F: $3E $10
-    ld   [$C1B2], a                               ; $5B21: $EA $B2 $C1
+    ld   [wC1B2], a                               ; $5B21: $EA $B2 $C1
 
 jr_001_5B24::
     ld   a, c                                     ; $5B24: $79
-    ld   [$C1B1], a                               ; $5B25: $EA $B1 $C1
-    ld   a, [$DBB4]                               ; $5B28: $FA $B4 $DB
-    ld   [$C1B4], a                               ; $5B2B: $EA $B4 $C1
+    ld   [wC1B1], a                               ; $5B25: $EA $B1 $C1
+    ld   a, [wDBB4]                               ; $5B28: $FA $B4 $DB
+    ld   [wC1B4], a                               ; $5B2B: $EA $B4 $C1
     jr   label_001_5B3F                           ; $5B2E: $18 $0F
 
 jr_001_5B30::
-    ld   a, [$C1B1]                               ; $5B30: $FA $B1 $C1
+    ld   a, [wC1B1]                               ; $5B30: $FA $B1 $C1
     and  a                                        ; $5B33: $A7
     jr   z, label_001_5B3F                        ; $5B34: $28 $09
     xor  a                                        ; $5B36: $AF
-    ld   [$C1B1], a                               ; $5B37: $EA $B1 $C1
+    ld   [wC1B1], a                               ; $5B37: $EA $B1 $C1
     ld   a, $10                                   ; $5B3A: $3E $10
-    ld   [$C1B3], a                               ; $5B3C: $EA $B3 $C1
+    ld   [wC1B3], a                               ; $5B3C: $EA $B3 $C1
 
 label_001_5B3F::
-    ld   hl, $C080                                ; $5B3F: $21 $80 $C0
-    ld   a, [$DBB4]                               ; $5B42: $FA $B4 $DB
+    ld   hl, wDynamicOAMBuffer+$50                                ; $5B3F: $21 $80 $C0
+    ld   a, [wDBB4]                               ; $5B42: $FA $B4 $DB
     rra                                           ; $5B45: $1F
     and  $78                                      ; $5B46: $E6 $78
     add  a, $14                                   ; $5B48: $C6 $14
     ld   e, a                                     ; $5B4A: $5F
-    ld   a, [$DBB4]                               ; $5B4B: $FA $B4 $DB
+    ld   a, [wDBB4]                               ; $5B4B: $FA $B4 $DB
     swap a                                        ; $5B4E: $CB $37
     rra                                           ; $5B50: $1F
     and  $78                                      ; $5B51: $E6 $78
@@ -1038,7 +1038,7 @@ label_001_5B3F::
     ldh  a, [hFrameCounter]                       ; $5B6B: $F0 $E7
     and  $10                                      ; $5B6D: $E6 $10
     jr   nz, jr_001_5BAC                          ; $5B6F: $20 $3B
-    ld   hl, $C088                                ; $5B71: $21 $88 $C0
+    ld   hl, wDynamicOAMBuffer+$58                                ; $5B71: $21 $88 $C0
     ld   a, e                                     ; $5B74: $7B
     add  a, $04                                   ; $5B75: $C6 $04
     ldi  [hl], a                                  ; $5B77: $22
@@ -1117,20 +1117,20 @@ func_001_5C49::
     ret                                           ; $5C54: $C9
 
 func_001_5C55::
-    ld   a, [$C1B3]                               ; $5C55: $FA $B3 $C1
+    ld   a, [wC1B3]                               ; $5C55: $FA $B3 $C1
     and  a                                        ; $5C58: $A7
     jr   z, jr_001_5C62                           ; $5C59: $28 $07
     dec  a                                        ; $5C5B: $3D
-    ld   [$C1B3], a                               ; $5C5C: $EA $B3 $C1
+    ld   [wC1B3], a                               ; $5C5C: $EA $B3 $C1
     cpl                                           ; $5C5F: $2F
     jr   jr_001_5C6C                              ; $5C60: $18 $0A
 
 jr_001_5C62::
-    ld   a, [$C1B2]                               ; $5C62: $FA $B2 $C1
+    ld   a, [wC1B2]                               ; $5C62: $FA $B2 $C1
     and  a                                        ; $5C65: $A7
     jr   z, jr_001_5C72                           ; $5C66: $28 $0A
     dec  a                                        ; $5C68: $3D
-    ld   [$C1B2], a                               ; $5C69: $EA $B2 $C1
+    ld   [wC1B2], a                               ; $5C69: $EA $B2 $C1
 
 jr_001_5C6C::
     rra                                           ; $5C6C: $1F
@@ -1139,13 +1139,13 @@ jr_001_5C6C::
     jr   jr_001_5C7B                              ; $5C70: $18 $09
 
 jr_001_5C72::
-    ld   a, [$C1B1]                               ; $5C72: $FA $B1 $C1
+    ld   a, [wC1B1]                               ; $5C72: $FA $B1 $C1
     and  a                                        ; $5C75: $A7
     jp   z, label_001_5D13                        ; $5C76: $CA $13 $5D
     ld   a, $00                                   ; $5C79: $3E $00
 
 jr_001_5C7B::
-    ld   [$C1B0], a                               ; $5C7B: $EA $B0 $C1
+    ld   [wC1B0], a                               ; $5C7B: $EA $B0 $C1
     ldh  [hActiveEntitySpriteVariant], a          ; $5C7E: $E0 $F1
     ld   a, $00                                   ; $5C80: $3E $00
     ld   [wOAMNextAvailableSlot], a               ; $5C82: $EA $C0 $C3
@@ -1155,7 +1155,7 @@ jr_001_5C7B::
     ld   [wActiveEntityIndex], a                  ; $5C8C: $EA $23 $C1
     ldh  [hActiveEntityFlipAttribute], a          ; $5C8F: $E0 $ED
     ld   e, $00                                   ; $5C91: $1E $00
-    ld   a, [$C1B4]                               ; $5C93: $FA $B4 $C1
+    ld   a, [wC1B4]                               ; $5C93: $FA $B4 $C1
     cp   $70                                      ; $5C96: $FE $70
     jr   c, jr_001_5C9C                           ; $5C98: $38 $02
     ld   e, $02                                   ; $5C9A: $1E $02
@@ -1176,7 +1176,7 @@ jr_001_5CA3::
     add  hl, de                                   ; $5CAF: $19
     ld   a, [hl]                                  ; $5CB0: $7E
     ldh  [hActiveEntityVisualPosY], a             ; $5CB1: $E0 $EC
-    ld   a, [$C1B0]                               ; $5CB3: $FA $B0 $C1
+    ld   a, [wC1B0]                               ; $5CB3: $FA $B0 $C1
     rla                                           ; $5CB6: $17
     rla                                           ; $5CB7: $17
     rla                                           ; $5CB8: $17
@@ -1197,10 +1197,10 @@ jr_001_5CBD::
     ldh  [hActiveEntityTilesOffset], a            ; $5CCA: $E0 $F5
     ld   c, $08                                   ; $5CCC: $0E $08
     call RenderActiveEntitySpritesRect            ; $5CCE: $CD $E6 $3C
-    ld   a, [$C1B0]                               ; $5CD1: $FA $B0 $C1
+    ld   a, [wC1B0]                               ; $5CD1: $FA $B0 $C1
     cp   $00                                      ; $5CD4: $FE $00
     jr   nz, label_001_5D13                       ; $5CD6: $20 $3B
-    ld   a, [$C1B1]                               ; $5CD8: $FA $B1 $C1
+    ld   a, [wC1B1]                               ; $5CD8: $FA $B1 $C1
     dec  a                                        ; $5CDB: $3D
     cp   $80                                      ; $5CDC: $FE $80
     jr   nc, label_001_5D13                       ; $5CDE: $30 $33
@@ -1347,7 +1347,7 @@ func_5DC0::
     ld   [de], a                                  ; $5DC4: $12
     ld   b, $01                                   ; $5DC5: $06 $01
     ld   c, $00                                   ; $5DC7: $0E $00
-    ld   hl, $DB80                                ; $5DC9: $21 $80 $DB
+    ld   hl, wDB80                                ; $5DC9: $21 $80 $DB
 
 jr_001_5DCC::
     ld   a, [hli]                                 ; $5DCC: $2A
@@ -1814,7 +1814,7 @@ HideAllSprites::
     ; value to write
     ld   a, $F4                                   ; $5F3E: $3E $F4
     ; address
-    ld   hl, wOAMBuffer                           ; $5F40: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $5F40: $21 $00 $C0
 
     ; Write $F4 to every first byte (Y position) of the OAM buffer
     ; This ensures the sprite is hidden.
@@ -1831,7 +1831,7 @@ UpdateWindowPosition::
     ld   a, [wInventoryAppearing]                 ; $5F4B: $FA $4F $C1
     and  a                                        ; $5F4E: $A7
     jr   z, jr_001_5F6A                           ; $5F4F: $28 $19
-    ld   hl, wOAMBuffer                           ; $5F51: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $5F51: $21 $00 $C0
     ld   a, [wWindowY]                            ; $5F54: $FA $9A $DB
     add  a, $08                                   ; $5F57: $C6 $08
     ld   d, a                                     ; $5F59: $57
@@ -1867,7 +1867,7 @@ jr_001_5F6A::
 
 jr_001_5F7F::
     ld   e, $1F                                   ; $5F7F: $1E $1F
-    ld   hl, $C024                                ; $5F81: $21 $24 $C0
+    ld   hl, wLinkOAMBuffer+$24                                ; $5F81: $21 $24 $C0
 
 jr_001_5F84::
     ld   a, [hl]                                  ; $5F84: $7E
@@ -1879,10 +1879,10 @@ jr_001_5F84::
 
 jr_001_5F8E::
     jr   c, jr_001_5FAB                           ; $5F8E: $38 $1B
-    ld   a, [$C173]                               ; $5F90: $FA $73 $C1
+    ld   a, [wDialogIndex]                               ; $5F90: $FA $73 $C1
     cp   $4F                                      ; $5F93: $FE $4F
     jr   nz, jr_001_5FA9                          ; $5F95: $20 $12
-    ld   a, [$C112]                               ; $5F97: $FA $12 $C1
+    ld   a, [wDialogIndexHi]                               ; $5F97: $FA $12 $C1
     and  a                                        ; $5F9A: $A7
     jr   nz, jr_001_5FA9                          ; $5F9B: $20 $0C
     inc  hl                                       ; $5F9D: $23
@@ -1985,7 +1985,7 @@ CreateFollowingNpcEntity::
     add  hl, de                                   ; $6007: $19
     ld   [hl], a                                  ; $6008: $77
     ldh  a, [hLinkPositionY]                      ; $6009: $F0 $99
-    ld   hl, $C13B                                ; $600B: $21 $3B $C1
+    ld   hl, wC13B                                ; $600B: $21 $3B $C1
     add  a, [hl]                                  ; $600E: $86
     ld   hl, wEntitiesPosYTable                   ; $600F: $21 $10 $C2
     add  hl, de                                   ; $6012: $19
@@ -2057,12 +2057,12 @@ CreateFollowingNpcEntity::
     add  hl, de                                   ; $6069: $19
     ld   [hl], a                                  ; $606A: $77
     ldh  a, [hLinkPositionY]                      ; $606B: $F0 $99
-    ld   hl, $C13B                                ; $606D: $21 $3B $C1
+    ld   hl, wC13B                                ; $606D: $21 $3B $C1
     add  a, [hl]                                  ; $6070: $86
     ld   hl, wEntitiesPosYTable                   ; $6071: $21 $10 $C2
     add  hl, de                                   ; $6074: $19
     ld   [hl], a                                  ; $6075: $77
-    ld   hl, $C2B0                                ; $6076: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table                                ; $6076: $21 $B0 $C2
     add  hl, de                                   ; $6079: $19
     inc  [hl]                                     ; $607A: $34
 
@@ -2113,7 +2113,7 @@ CreateFollowingNpcEntity::
     ld   hl, $D155                                ; $60AE: $21 $55 $D1
     call .decrementConsecutiveBytes               ; $60B1: $CD $18 $61
     ldh  a, [hLinkPositionY]                      ; $60B4: $F0 $99
-    ld   hl, $C13B                                ; $60B6: $21 $3B $C1
+    ld   hl, wC13B                                ; $60B6: $21 $3B $C1
     add  a, [hl]                                  ; $60B9: $86
     ld   hl, wEntitiesPosYTable                   ; $60BA: $21 $10 $C2
     add  hl, de                                   ; $60BD: $19
@@ -2129,7 +2129,7 @@ CreateFollowingNpcEntity::
     ld   hl, wEntitiesUnknowTableP                ; $60D2: $21 $40 $C4
     add  hl, de                                   ; $60D5: $19
     ld   [hl], $01                                ; $60D6: $36 $01
-    ld   hl, $C2F0                                ; $60D8: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table                                ; $60D8: $21 $F0 $C2
     add  hl, de                                   ; $60DB: $19
     ld   [hl], $0C                                ; $60DC: $36 $0C
 
@@ -2143,8 +2143,8 @@ CreateFollowingNpcEntity::
     jr   nz, .marinFallEnd                        ; $60E8: $20 $0D
     ld   a, JINGLE_JUMP_DOWN                      ; $60EA: $3E $08
     ldh  [hJingle], a                             ; $60EC: $E0 $F2
-    ld   [$C167], a                               ; $60EE: $EA $67 $C1
-    ld   hl, $C300                                ; $60F1: $21 $00 $C3
+    ld   [wC167], a                               ; $60EE: $EA $67 $C1
+    ld   hl, wEntitiesPrivateCountdown2Table                                ; $60F1: $21 $00 $C3
     add  hl, de                                   ; $60F4: $19
     ld   [hl], $79                                ; $60F5: $36 $79
 .marinFallEnd
@@ -2248,7 +2248,7 @@ func_001_6162::
     ld   [rOBP1], a                               ; $6179: $E0 $49
     ldh  [$FF97], a                               ; $617B: $E0 $97
     ldh  [hBaseScrollX], a                        ; $617D: $E0 $96
-    ld   [$D6FB], a                               ; $617F: $EA $FB $D6
+    ld   [wD6FB], a                               ; $617F: $EA $FB $D6
     ld   [$D6F8], a                               ; $6182: $EA $F8 $D6
     ld   a, $18                                   ; $6185: $3E $18
     ldh  [$FFB5], a                               ; $6187: $E0 $B5
@@ -2259,7 +2259,7 @@ Data_001_618A::
     db $80, $57, $90, $57, 0, $58, $10, $58, $20, $58, $30, $58, $40, $58, $50, $58 ; $619A
 
 LoadCounterAnimatedTiles::
-    ld   a, [$C109]                               ; $61AA: $FA $09 $C1
+    ld   a, [wC109]                               ; $61AA: $FA $09 $C1
     and  $0F                                      ; $61AD: $E6 $0F
     sla  a                                        ; $61AF: $CB $27
     ld   e, a                                     ; $61B1: $5F
@@ -2273,7 +2273,7 @@ LoadCounterAnimatedTiles::
     ld   bc, $10    ; count                       ; $61BE: $01 $10 $00
     ld   a, $0F     ; bank                        ; $61C1: $3E $0F
     call CopyDataFromBank                         ; $61C3: $CD $08 $29
-    ld   a, [$C109]                               ; $61C6: $FA $09 $C1
+    ld   a, [wC109]                               ; $61C6: $FA $09 $C1
     swap a                                        ; $61C9: $CB $37
     and  $0F                                      ; $61CB: $E6 $0F
     sla  a                                        ; $61CD: $CB $27
@@ -2335,7 +2335,7 @@ PeachPictureState0Handler::
     ldh  a, [hIsGBC]                              ; $680B: $F0 $FE
     and  a                                        ; $680D: $A7
     jr   z, PeachPictureState1Handler             ; $680E: $28 $19
-    ld   hl, $DC10                                ; $6810: $21 $10 $DC
+    ld   hl, wDC10                                ; $6810: $21 $10 $DC
     ld   c, $80                                   ; $6813: $0E $80
     di                                            ; $6815: $F3
 
@@ -2357,9 +2357,9 @@ jr_001_6816::
 
 PeachPictureState1Handler::
     ld   a, $01                                   ; $6829: $3E $01
-    ld   [$C167], a                               ; $682B: $EA $67 $C1
+    ld   [wC167], a                               ; $682B: $EA $67 $C1
     call func_1A22                                ; $682E: $CD $22 $1A
-    ld   a, [$C16B]                               ; $6831: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $6831: $FA $6B $C1
     cp   $04                                      ; $6834: $FE $04
     jr   nz, jr_001_6855                          ; $6836: $20 $1D
     call func_001_5888                            ; $6838: $CD $88 $58
@@ -2374,7 +2374,7 @@ PeachPictureState1Handler::
 jr_001_6849::
     call IncrementGameplaySubtype                 ; $6849: $CD $D6 $44
     xor  a                                        ; $684C: $AF
-    ld   [$C1BF], a                               ; $684D: $EA $BF $C1
+    ld   [wScrollXOffset], a                               ; $684D: $EA $BF $C1
     ld   a, $0F                                   ; $6850: $3E $0F
     ld   [wTileMapToLoad], a                      ; $6852: $EA $FE $D6
 
@@ -2395,7 +2395,7 @@ jr_001_6868::
     ld   a, e                                     ; $6868: $7B
     ld   [wTileMapToLoad], a                      ; $6869: $EA $FE $D6
     xor  a                                        ; $686C: $AF
-    ld   [$C13F], a                               ; $686D: $EA $3F $C1
+    ld   [wC13F], a                               ; $686D: $EA $3F $C1
     jp   IncrementGameplaySubtypeAndReturn        ; $6870: $C3 $D6 $44
 PeachPictureState3Handler::     ; Determines the tilemap to load (?)
     ld   e, $24                                   ; $6873: $1E $24
@@ -2416,8 +2416,8 @@ jr_001_6885::
     xor  a                                        ; $688E: $AF
     ldh  [hBaseScrollX], a                        ; $688F: $E0 $96
     ldh  [$FF97], a                               ; $6891: $E0 $97
-    ld   [$C16B], a                               ; $6893: $EA $6B $C1
-    ld   [$C16C], a                               ; $6896: $EA $6C $C1
+    ld   [wTransitionSequenceCounter], a                               ; $6893: $EA $6B $C1
+    ld   [wC16C], a                               ; $6896: $EA $6C $C1
     ld   e, $08                                   ; $6899: $1E $08
     ld   hl, $D210                                ; $689B: $21 $10 $D2
 
@@ -2432,7 +2432,7 @@ jr_001_689E::
 PeachPictureState4Handler::
     call func_6A7C                                ; $68AA: $CD $7C $6A
     call func_1A39                                ; $68AD: $CD $39 $1A
-    ld   a, [$C16B]                               ; $68B0: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $68B0: $FA $6B $C1
     cp   $04                                      ; $68B3: $FE $04
     jr   nz, jr_001_68BF                          ; $68B5: $20 $08
     call IncrementGameplaySubtype                 ; $68B7: $CD $D6 $44
@@ -2462,8 +2462,8 @@ jr_001_68CF::
 func_001_68D9::
     call IncrementGameplaySubtype                 ; $68D9: $CD $D6 $44
     xor  a                                        ; $68DC: $AF
-    ld   [$C16B], a                               ; $68DD: $EA $6B $C1
-    ld   [$C16C], a                               ; $68E0: $EA $6C $C1
+    ld   [wTransitionSequenceCounter], a                               ; $68DD: $EA $6B $C1
+    ld   [wC16C], a                               ; $68E0: $EA $6C $C1
 
 jr_001_68E3::
     ret                                           ; $68E3: $C9
@@ -2524,8 +2524,8 @@ PeachPictureState9Handler::
     ret  nz                                       ; $694F: $C0
     call IncrementGameplaySubtype                 ; $6950: $CD $D6 $44
     xor  a                                        ; $6953: $AF
-    ld   [$C16B], a                               ; $6954: $EA $6B $C1
-    ld   [$C16C], a                               ; $6957: $EA $6C $C1
+    ld   [wTransitionSequenceCounter], a                               ; $6954: $EA $6B $C1
+    ld   [wC16C], a                               ; $6957: $EA $6C $C1
     ret                                           ; $695A: $C9
 
 func_001_695B::

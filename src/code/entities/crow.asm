@@ -141,7 +141,7 @@ jr_006_5D4F:
     and  $0F                                      ; $5D51: $E6 $0F
     jr   nz, jr_006_5D0F                          ; $5D53: $20 $BA
 
-    ld   a, [$C50C]                               ; $5D55: $FA $0C $C5
+    ld   a, [wC50C]                               ; $5D55: $FA $0C $C5
     ld   e, a                                     ; $5D58: $5F
     ld   d, b                                     ; $5D59: $50
     ld   hl, wEntitiesStatusTable                 ; $5D5A: $21 $80 $C2

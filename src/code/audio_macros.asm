@@ -11,34 +11,34 @@ unknownop_94: macro
     db $94
 endm
 
-; Sets [$D3CD] to 0.
+; Sets [wD3CD] to 0.
 disable_unknown1: macro
     db $95
 endm
 
-; Sets [$D3CD] to 1.
+; Sets [wD3CD] to 1.
 enable_unknown1: macro
     db $96
 endm
 
-; Sets [$D3B6 + channelIndex] to 1.
+; Sets [wD3B6 + channelIndex] to 1.
 enable_unknown2: macro
     db $97
 endm
 
-; Sets [$D3B6 + channelIndex] to 0.
+; Sets [wD3B6 + channelIndex] to 0.
 disable_unknown2: macro
     db $98
 endm
 
 ; This seems to enable some kind of mode that controls the volume, similar to
 ; the hardware envelope? (This name is just a guess and may need to be changed.)
-; Sets [$D39E] to 1.
+; Sets [wD39E] to 1.
 enable_software_envelope: macro
     db $99
 endm
 
-; Ses [$D39E] to 0.
+; Ses [wD39E] to 0.
 disable_software_envelope: macro
     db $9a
 endm

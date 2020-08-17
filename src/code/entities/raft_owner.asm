@@ -30,7 +30,7 @@ jr_005_5372:
 ._02 dw func_005_53CB                             ; $5388
 
 func_005_538A::
-    ld   a, [$D477]                               ; $538A: $FA $77 $D4
+    ld   a, [wD477]                               ; $538A: $FA $77 $D4
     and  a                                        ; $538D: $A7
     jr   nz, func_005_53CB                        ; $538E: $20 $3B
 
@@ -68,7 +68,7 @@ jr_005_53B1:
     ld   a, $64                                   ; $53B8: $3E $64
     ld   [wSubstractRupeeBufferLow], a            ; $53BA: $EA $92 $DB
     ld   a, $F1                                   ; $53BD: $3E $F1
-    ld   [$D477], a                               ; $53BF: $EA $77 $D4
+    ld   [wD477], a                               ; $53BF: $EA $77 $D4
     jp   OpenDialog                               ; $53C2: $C3 $85 $23
 
 jr_005_53C5:
@@ -88,7 +88,7 @@ Data_005_53D4::
 raftOnOverworld:
     ld   hl, wEntitiesUnknowTableP                ; $53DC: $21 $40 $C4
     add  hl, bc                                   ; $53DF: $09
-    ld   a, [$D477]                               ; $53E0: $FA $77 $D4
+    ld   a, [wD477]                               ; $53E0: $FA $77 $D4
     or   [hl]                                     ; $53E3: $B6
     jr   nz, jr_005_5411                          ; $53E4: $20 $2B
 
@@ -146,7 +146,7 @@ jr_005_5411:
     jr   nc, jr_005_5440                          ; $5432: $30 $0C
 
     ld   a, $80                                   ; $5434: $3E $80
-    ld   [$C1AD], a                               ; $5436: $EA $AD $C1
+    ld   [wC1AD], a                               ; $5436: $EA $AD $C1
     ldh  a, [hLinkPositionX]                      ; $5439: $F0 $98
     ld   hl, wEntitiesPosXTable                         ; $543B: $21 $00 $C2
     add  hl, bc                                   ; $543E: $09
@@ -195,7 +195,7 @@ func_005_546C::
     add  hl, bc                                   ; $547C: $09
     ld   [hl], $01                                ; $547D: $36 $01
     xor  a                                        ; $547F: $AF
-    ld   [$D477], a                               ; $5480: $EA $77 $D4
+    ld   [wD477], a                               ; $5480: $EA $77 $D4
 
 jr_005_5483:
     ld   a, $01                                   ; $5483: $3E $01
@@ -213,7 +213,7 @@ func_005_5490::
     rra                                           ; $5494: $1F
     rra                                           ; $5495: $1F
     and  $01                                      ; $5496: $E6 $01
-    ld   [$C13B], a                               ; $5498: $EA $3B $C1
+    ld   [wC13B], a                               ; $5498: $EA $3B $C1
     ldh  a, [hMapRoom]                            ; $549B: $F0 $F6
     ld   hl, wEntitiesRoomTable                   ; $549D: $21 $E0 $C3
     add  hl, bc                                   ; $54A0: $09
@@ -246,19 +246,19 @@ func_005_54C3::
 
     call CopyLinkFinalPositionToPosition          ; $54C8: $CD $BE $0C
     call ResetPegasusBoots                        ; $54CB: $CD $B6 $0C
-    ld   a, [$C1A6]                               ; $54CE: $FA $A6 $C1
+    ld   a, [wC1A6]                               ; $54CE: $FA $A6 $C1
     and  a                                        ; $54D1: $A7
     jr   z, jr_005_54E5                           ; $54D2: $28 $11
 
     ld   e, a                                     ; $54D4: $5F
     ld   d, b                                     ; $54D5: $50
-    ld   hl, $C39F                                ; $54D6: $21 $9F $C3
+    ld   hl, wEntitiesUnknowTableR+15                                ; $54D6: $21 $9F $C3
     add  hl, de                                   ; $54D9: $19
     ld   a, [hl]                                  ; $54DA: $7E
     cp   $03                                      ; $54DB: $FE $03
     jr   nz, jr_005_54E5                          ; $54DD: $20 $06
 
-    ld   hl, $C28F                                ; $54DF: $21 $8F $C2
+    ld   hl, wEntitiesStatusTable+15                                ; $54DF: $21 $8F $C2
     add  hl, de                                   ; $54E2: $19
     ld   [hl], $00                                ; $54E3: $36 $00
 
@@ -333,14 +333,14 @@ jr_005_5523:
     jr   nz, jr_005_5569                          ; $5542: $20 $25
 
 jr_005_5544:
-    ld   hl, $C1AD                                ; $5544: $21 $AD $C1
+    ld   hl, wC1AD                                ; $5544: $21 $AD $C1
     ld   [hl], $01                                ; $5547: $36 $01
     ld   a, [wDialogState]                        ; $5549: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $554C: $21 $4F $C1
     or   [hl]                                     ; $554F: $B6
     ld   hl, wIsLinkInTheAir                      ; $5550: $21 $46 $C1
     or   [hl]                                     ; $5553: $B6
-    ld   hl, $C134                                ; $5554: $21 $34 $C1
+    ld   hl, wC134                                ; $5554: $21 $34 $C1
     or   [hl]                                     ; $5557: $B6
     jr   nz, jr_005_5569                          ; $5558: $20 $0F
 

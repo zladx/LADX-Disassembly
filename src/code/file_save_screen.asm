@@ -24,7 +24,7 @@ FileSaveInitial::
     jr   z, FileSaveMapFadeOut                    ; $4018: $28 $28
 
     ; Running on GBC: copy data from WRAM0 to WRAM3
-    ld   hl, $DC10 ; start address                ; $401A: $21 $10 $DC
+    ld   hl, wDC10 ; start address                ; $401A: $21 $10 $DC
     ld   c, $80    ; bytes count                  ; $401D: $0E $80
 
     ; Disable interrupts
@@ -34,8 +34,8 @@ FileSaveInitial::
     ld   a, $03                                   ; $4020: $3E $03
     ld   [rSVBK], a                               ; $4022: $E0 $70
 
-    ; If $D000 == 0...
-    ld   a, [$D000]                               ; $4024: $FA $00 $D0
+    ; If wIsFileSelectionArrowShifted == 0...
+    ld   a, [wIsFileSelectionArrowShifted]                               ; $4024: $FA $00 $D0
     and  a                                        ; $4027: $A7
     jr   nz, .done                                ; $4028: $20 $14
 
@@ -58,9 +58,9 @@ FileSaveInitial::
     and  a                                        ; $4036: $A7
     jr   nz, .loop                                ; $4037: $20 $F1
 
-    ; Set $D000 to 1
+    ; Set wIsFileSelectionArrowShifted to 1
     ld   a, $01                                   ; $4039: $3E $01
-    ld   [$D000], a                               ; $403B: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a                               ; $403B: $EA $00 $D0
 
 .done
     ; Switch back to WRAM bank 0
@@ -73,7 +73,7 @@ FileSaveMapFadeOut::
     call DrawLinkSprite                           ; $4042: $CD $2E $1D
     call AnimateEntitiesAndRestoreBank01          ; $4045: $CD $FC $0E
     call func_1A22                                ; $4048: $CD $22 $1A
-    ld   a, [$C16B]                               ; $404B: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $404B: $FA $6B $C1
     cp   $04                                      ; $404E: $FE $04
     jr   nz, jr_001_4072                          ; $4050: $20 $20
     ld   a, $03                                   ; $4052: $3E $03
@@ -82,11 +82,11 @@ FileSaveMapFadeOut::
     ldh  [hVolumeLeft], a                      ; $4058: $E0 $AA
     call IncrementGameplaySubtype                 ; $405A: $CD $D6 $44
     xor  a                                        ; $405D: $AF
-    ld   [$C1BF], a                               ; $405E: $EA $BF $C1
+    ld   [wScrollXOffset], a                               ; $405E: $EA $BF $C1
     ld   [wInventoryAppearing], a                 ; $4061: $EA $4F $C1
-    ld   [$C1B8], a                               ; $4064: $EA $B8 $C1
-    ld   [$C1B9], a                               ; $4067: $EA $B9 $C1
-    ld   [$C1B5], a                               ; $406A: $EA $B5 $C1
+    ld   [wC1B8], a                               ; $4064: $EA $B8 $C1
+    ld   [wC1B9], a                               ; $4067: $EA $B9 $C1
+    ld   [wC1B5], a                               ; $406A: $EA $B5 $C1
     ld   a, $0F                                   ; $406D: $3E $0F
     ld   [wTileMapToLoad], a                      ; $406F: $EA $FE $D6
 
@@ -97,7 +97,7 @@ FileSaveDelay1::
     ld   a, $0D                                   ; $4073: $3E $0D
     ld   [wTileMapToLoad], a                      ; $4075: $EA $FE $D6
     xor  a                                        ; $4078: $AF
-    ld   [$C13F], a                               ; $4079: $EA $3F $C1
+    ld   [wC13F], a                               ; $4079: $EA $3F $C1
     jp   IncrementGameplaySubtypeAndReturn        ; $407C: $C3 $D6 $44
 
 FileSaveDelay2::
@@ -108,15 +108,15 @@ FileSaveDelay2::
     xor  a                                        ; $4089: $AF
     ldh  [hBaseScrollX], a                        ; $408A: $E0 $96
     ldh  [$FF97], a                               ; $408C: $E0 $97
-    ld   [$C16B], a                               ; $408E: $EA $6B $C1
-    ld   [$C16C], a                               ; $4091: $EA $6C $C1
+    ld   [wTransitionSequenceCounter], a                               ; $408E: $EA $6B $C1
+    ld   [wC16C], a                               ; $4091: $EA $6C $C1
     ld   a, $01                                   ; $4094: $3E $01
     ld   [$DDD5], a                               ; $4096: $EA $D5 $DD
     jp   IncrementGameplaySubtypeAndReturn        ; $4099: $C3 $D6 $44
 
 FileSaveVisible::
     call func_1A39                                ; $409C: $CD $39 $1A
-    ld   a, [$C16B]                               ; $409F: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]                               ; $409F: $FA $6B $C1
     cp   $04                                      ; $40A2: $FE $04
     jr   nz, .return                              ; $40A4: $20 $03
     call IncrementGameplaySubtype                 ; $40A6: $CD $D6 $44
@@ -130,19 +130,19 @@ FileSaveInteractive::
     jr   z, LCDOn.return                          ; $40B1: $28 $74
     ld   a, JINGLE_VALIDATE                       ; $40B3: $3E $13
     ldh  [hJingle], a                             ; $40B5: $E0 $F2
-    ld   a, [$C13F]                               ; $40B7: $FA $3F $C1
+    ld   a, [wC13F]                               ; $40B7: $FA $3F $C1
     cp   $01                                      ; $40BA: $FE $01
     jr   z, jr_001_40F9                           ; $40BC: $28 $3B
     call IncrementGameplaySubtype                 ; $40BE: $CD $D6 $44
     xor  a                                        ; $40C1: $AF
-    ld   [$C16B], a                               ; $40C2: $EA $6B $C1
-    ld   [$C16C], a                               ; $40C5: $EA $6C $C1
+    ld   [wTransitionSequenceCounter], a                               ; $40C2: $EA $6B $C1
+    ld   [wC16C], a                               ; $40C5: $EA $6C $C1
     ld   a, [wIsIndoor]                           ; $40C8: $FA $A5 $DB
     and  a                                        ; $40CB: $A7
     jr   z, .done                                 ; $40CC: $28 $07
     xor  a                                        ; $40CE: $AF
-    ld   [$C50A], a                               ; $40CF: $EA $0A $C5
-    ld   [$C116], a                               ; $40D2: $EA $16 $C1
+    ld   [wC50A], a                               ; $40CF: $EA $0A $C5
+    ld   [wC116], a                               ; $40D2: $EA $16 $C1
 .done
     ret                                           ; $40D5: $C9
 
@@ -217,7 +217,7 @@ Data_001_4128::
 
 ; Called by FileSaveInteractive
 func_001_412A::
-    ld   hl, $C13F                                ; $412A: $21 $3F $C1
+    ld   hl, wC13F                                ; $412A: $21 $3F $C1
     call func_001_6BA8                            ; $412D: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $4130: $F0 $CC
     and  $0C                                      ; $4132: $E6 $0C
@@ -233,7 +233,7 @@ jr_001_413B::
     ld   hl, Data_001_4128                        ; $413E: $21 $28 $41
     add  hl, de                                   ; $4141: $19
     ld   a, [hl]                                  ; $4142: $7E
-    ld   hl, $C018                                ; $4143: $21 $18 $C0
+    ld   hl, wLinkOAMBuffer+$18                                ; $4143: $21 $18 $C0
     ldi  [hl], a                                  ; $4146: $22
     ld   a, SAVE_OPTION_X + $8                    ; $4147: $3E $24
     ldi  [hl], a                                  ; $4149: $22

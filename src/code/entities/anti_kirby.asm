@@ -155,7 +155,7 @@ label_006_431B:
 
 jr_006_432B:
     ld   a, $01                                   ; $432B: $3E $01
-    ld   [$D3E6], a                               ; $432D: $EA $E6 $D3
+    ld   [wD3E6], a                               ; $432D: $EA $E6 $D3
     ld   hl, wEntitiesSpeedZTable                 ; $4330: $21 $20 $C3
     add  hl, bc                                   ; $4333: $09
     ld   [hl], b                                  ; $4334: $70

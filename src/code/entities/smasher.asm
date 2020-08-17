@@ -361,7 +361,7 @@ label_006_4781:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4781: $21 $40 $C3
     add  hl, bc                                   ; $4784: $09
     ld   [hl], $92                                ; $4785: $36 $92
-    ld   hl, $C5D0                                ; $4787: $21 $D0 $C5
+    ld   hl, wC5D0                                ; $4787: $21 $D0 $C5
     add  hl, bc                                   ; $478A: $09
     ld   [hl], $FF                                ; $478B: $36 $FF
     ld   de, Data_006_477D                        ; $478D: $11 $7D $47
@@ -449,7 +449,7 @@ jr_006_4806:
     call CheckLinkCollisionWithEnemy_trampoline   ; $4806: $CD $5A $3B
     jr   nc, jr_006_4852                          ; $4809: $30 $47
 
-    ld   a, [$C19B]                               ; $480B: $FA $9B $C1
+    ld   a, [wC19B]                               ; $480B: $FA $9B $C1
     and  a                                        ; $480E: $A7
     jr   nz, jr_006_4852                          ; $480F: $20 $41
 
@@ -473,7 +473,7 @@ jr_006_4820:
     jr   z, jr_006_4852                           ; $482B: $28 $25
 
 jr_006_482D:
-    ld   a, [$C3CF]                               ; $482D: $FA $CF $C3
+    ld   a, [wC3CF]                               ; $482D: $FA $CF $C3
     and  a                                        ; $4830: $A7
     jr   nz, jr_006_4852                          ; $4831: $20 $1F
 
@@ -531,7 +531,7 @@ func_006_4855::
     add  hl, bc                                   ; $4884: $09
     ld   a, [hl]                                  ; $4885: $7E
     push hl                                       ; $4886: $E5
-    ld   hl, $C3F0                                ; $4887: $21 $F0 $C3
+    ld   hl, wC3F0                                ; $4887: $21 $F0 $C3
     add  hl, de                                   ; $488A: $19
     ld   [hl], a                                  ; $488B: $77
     pop  hl                                       ; $488C: $E1

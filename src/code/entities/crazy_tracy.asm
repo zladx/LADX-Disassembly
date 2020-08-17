@@ -42,7 +42,7 @@ CrazyTracyEntityHandler::
     ; Position the medecine sprite above Link
     ldh  a, [hLinkPositionX]                      ; $5EB1: $F0 $98
     ldh  [hActiveEntityPosX], a                   ; $5EB3: $E0 $EE
-    ld   a, [$C145]                               ; $5EB5: $FA $45 $C1
+    ld   a, [wC145]                               ; $5EB5: $FA $45 $C1
     sub  $10                                      ; $5EB8: $D6 $10
     ldh  [hActiveEntityVisualPosY], a             ; $5EBA: $E0 $EC
 
@@ -305,7 +305,7 @@ CrazyTracyBonusHandler::
     and  a                                        ; $602C: $A7
     jr   nz, jr_006_6048                          ; $602D: $20 $19
 
-    ld   a, [$C5A9]                               ; $602F: $FA $A9 $C5
+    ld   a, [wC5A9]                               ; $602F: $FA $A9 $C5
     and  a                                        ; $6032: $A7
     jr   nz, .fillHeartsEnd                       ; $6033: $20 $0F
     ; Also fill hearts

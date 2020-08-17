@@ -86,7 +86,7 @@ jr_005_4E96:
 
 jr_005_4ED1:
     call func_005_54EA                            ; $4ED1: $CD $EA $54
-    ld   a, [$C3C8]                               ; $4ED4: $FA $C8 $C3
+    ld   a, [wC3C8]                               ; $4ED4: $FA $C8 $C3
     cp   $01                                      ; $4ED7: $FE $01
     jr   nz, jr_005_4F39                          ; $4ED9: $20 $5E
 
@@ -153,7 +153,7 @@ MarinCreditsHandler:
 
 jr_005_4F39:
     ld   a, c                                     ; $4F39: $79
-    ld   [$C50F], a                               ; $4F3A: $EA $0F $C5
+    ld   [wC50F], a                               ; $4F3A: $EA $0F $C5
     ld   de, Data_005_4E2A                        ; $4F3D: $11 $2A $4E
     call RenderActiveEntitySpritesPair            ; $4F40: $CD $C0 $3B
     call func_005_54C3                            ; $4F43: $CD $C3 $54
@@ -182,7 +182,7 @@ func_005_4F64::
     cp   $C0                                      ; $4F66: $FE $C0
     jr   nc, jr_005_4F6F                          ; $4F68: $30 $05
 
-    ld   a, [$C3C8]                               ; $4F6A: $FA $C8 $C3
+    ld   a, [wC3C8]                               ; $4F6A: $FA $C8 $C3
     and  a                                        ; $4F6D: $A7
     ret  nz                                       ; $4F6E: $C0
 
@@ -335,7 +335,7 @@ func_005_5020::
     ld   [wMusicTrackToPlay], a                   ; $5032: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $5035: $E0 $B0
     ldh  [$FFBD], a                               ; $5037: $E0 $BD
-    ld   hl, $C3C8                                ; $5039: $21 $C8 $C3
+    ld   hl, wC3C8                                ; $5039: $21 $C8 $C3
     ld   [hl], $01                                ; $503C: $36 $01
 
 jr_005_503E:
@@ -407,11 +407,11 @@ jr_005_508A:
     jr   c, jr_005_50B7                           ; $50B0: $38 $05
 
     xor  a                                        ; $50B2: $AF
-    ld   [$C3C8], a                               ; $50B3: $EA $C8 $C3
+    ld   [wC3C8], a                               ; $50B3: $EA $C8 $C3
     ret                                           ; $50B6: $C9
 
 jr_005_50B7:
-    ld   hl, $C3C8                                ; $50B7: $21 $C8 $C3
+    ld   hl, wC3C8                                ; $50B7: $21 $C8 $C3
     ld   [hl], $01                                ; $50BA: $36 $01
     ld   a, e                                     ; $50BC: $7B
     srl  d                                        ; $50BD: $CB $3A
@@ -504,7 +504,7 @@ func_005_512B::
     jr   nz, jr_005_514F                          ; $5138: $20 $15
 
     ld   a, $01                                   ; $513A: $3E $01
-    ld   [$DE00], a                               ; $513C: $EA $00 $DE
+    ld   [wDE00], a                               ; $513C: $EA $00 $DE
     ld   a, MUSIC_TOOL_ACQUIRED                   ; $513F: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $5141: $EA $68 $D3
     ld   a, $05                                   ; $5144: $3E $05
@@ -530,7 +530,7 @@ Data_005_515F::
 
 func_005_5161::
     ld   a, $01                                   ; $5161: $3E $01
-    ld   [$DE00], a                               ; $5163: $EA $00 $DE
+    ld   [wDE00], a                               ; $5163: $EA $00 $DE
     call GetEntityTransitionCountdown             ; $5166: $CD $05 $0C
     jr   nz, jr_005_5197                          ; $5169: $20 $2C
 

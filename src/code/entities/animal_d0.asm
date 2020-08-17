@@ -8,7 +8,7 @@ AnimalD0EntityHandler::
 
     ld   de, Data_005_7F1E                        ; $7F35: $11 $1E $7F
     call RenderActiveEntitySpritesPair            ; $7F38: $CD $C0 $3B
-    ld   a, [$C50F]                               ; $7F3B: $FA $0F $C5
+    ld   a, [wC50F]                               ; $7F3B: $FA $0F $C5
     ld   e, a                                     ; $7F3E: $5F
     ld   d, b                                     ; $7F3F: $50
     ld   hl, wEntitiesPosYTable                   ; $7F40: $21 $10 $C2

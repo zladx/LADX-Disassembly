@@ -83,7 +83,7 @@ func_004_49DC::
 ._03 dw SlimeEyeState3Handler                     ; $49EB
 
 SlimeEyeState0Handler::
-    ld   a, [$C157]                               ; $49ED: $FA $57 $C1
+    ld   a, [wC157]                               ; $49ED: $FA $57 $C1
     cp   $05                                      ; $49F0: $FE $05
     jr   nz, jr_004_49FB                          ; $49F2: $20 $07
 
@@ -96,7 +96,7 @@ jr_004_49FB:
     jr   nz, jr_004_4A2C                          ; $49FE: $20 $2C
 
     ld   [hl], $50                                ; $4A00: $36 $50
-    ld   a, [$C1AE]                               ; $4A02: $FA $AE $C1
+    ld   a, [wC1AE]                               ; $4A02: $FA $AE $C1
     cp   $02                                      ; $4A05: $FE $02
     jr   nc, jr_004_4A2C                          ; $4A07: $30 $23
 
@@ -143,9 +143,9 @@ jr_004_4A41:
 
     ld   [hl], b                                  ; $4A49: $70
     ld   a, $50                                   ; $4A4A: $3E $50
-    ld   [$C157], a                               ; $4A4C: $EA $57 $C1
+    ld   [wC157], a                               ; $4A4C: $EA $57 $C1
     ld   a, $04                                   ; $4A4F: $3E $04
-    ld   [$C158], a                               ; $4A51: $EA $58 $C1
+    ld   [wC158], a                               ; $4A51: $EA $58 $C1
     call GetEntityTransitionCountdown                 ; $4A54: $CD $05 $0C
     ld   [hl], $40                                ; $4A57: $36 $40
     call PlayBombExplosionSfx                                ; $4A59: $CD $4B $0C
@@ -175,7 +175,7 @@ SlimeEyeState3Handler::
     call func_004_4DB5                            ; $4A7E: $CD $B5 $4D
     call func_004_7FA3                            ; $4A81: $CD $A3 $7F
     call DecrementEntityIgnoreHitsCountdown       ; $4A84: $CD $56 $0C
-    ld   hl, $C300                                ; $4A87: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table                                ; $4A87: $21 $00 $C3
     add  hl, bc                                   ; $4A8A: $09
     ld   a, [hl]                                  ; $4A8B: $7E
     and  a                                        ; $4A8C: $A7
@@ -230,7 +230,7 @@ jr_004_4ACB:
     ld   hl, wEntitiesFlashCountdownTable         ; $4AD6: $21 $20 $C4
     add  hl, bc                                   ; $4AD9: $09
     ld   a, [hl]                                  ; $4ADA: $7E
-    ld   hl, $C300                                ; $4ADB: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table                                ; $4ADB: $21 $00 $C3
     add  hl, bc                                   ; $4ADE: $09
     or   [hl]                                     ; $4ADF: $B6
     jr   nz, jr_004_4AEF                          ; $4AE0: $20 $0D

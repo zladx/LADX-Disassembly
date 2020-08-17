@@ -178,7 +178,7 @@ ClearMidbossEffectHandler::
 
 ; Open all the locked doors of the room
 OpenLockedDoorsEffectHandler::
-    ld   a, [$C190]                               ; $5E25: $FA $90 $C1
+    ld   a, [wC190]                               ; $5E25: $FA $90 $C1
     and  a                                        ; $5E28: $A7
     jr   nz, jr_002_5E2E                          ; $5E29: $20 $03
 
@@ -228,14 +228,14 @@ jr_002_5E63:
     ldh  [hJingle], a                               ; $5E68: $E0 $F2
 
 jr_002_5E6A:
-    ld   a, [$C190]                               ; $5E6A: $FA $90 $C1
+    ld   a, [wC190]                               ; $5E6A: $FA $90 $C1
     and  a                                        ; $5E6D: $A7
     ret  z                                        ; $5E6E: $C8
 
     xor  a                                        ; $5E6F: $AF
     ld   [wRoomEvent], a                          ; $5E70: $EA $8E $C1
     ld   a, $01                                   ; $5E73: $3E $01
-    ld   [$C18C], a                               ; $5E75: $EA $8C $C1
+    ld   [wC18C], a                               ; $5E75: $EA $8C $C1
     jp   EnqueueDoorUnlockedSfx                   ; $5E78: $C3 $20 $54
 
 func_002_5E7B::
@@ -254,8 +254,8 @@ func_002_5E7B::
     jr   nz, .return                              ; $5E8F: $20 $11
 
     ld   a, $01                                   ; $5E91: $3E $01
-    ld   [$C18D], a                               ; $5E93: $EA $8D $C1
-    ld   [$C190], a                               ; $5E96: $EA $90 $C1
+    ld   [wC18D], a                               ; $5E93: $EA $8D $C1
+    ld   [wC190], a                               ; $5E96: $EA $90 $C1
     ld   a, $04                                   ; $5E99: $3E $04
     ld   [wC111], a                               ; $5E9B: $EA $11 $C1
     ld   a, WAVE_SFX_BOSS_AGONY                        ; $5E9E: $3E $10
@@ -332,7 +332,7 @@ jr_002_5EED:
     add  hl, de                                   ; $5F03: $19
     ld   a, $A0                                   ; $5F04: $3E $A0
     ld   [hl], a                                  ; $5F06: $77
-    ld   [$DDD8], a                               ; $5F07: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $5F07: $EA $D8 $DD
     call label_2887                               ; $5F0A: $CD $87 $28
     ld   a, [wRequests]                           ; $5F0D: $FA $00 $D6
     ld   e, a                                     ; $5F10: $5F
@@ -413,7 +413,7 @@ func_002_5F5C::
     add  hl, de                                   ; $5F80: $19
     ld   a, $BE                                   ; $5F81: $3E $BE
     ld   [hl], a                                  ; $5F83: $77
-    ld   [$DDD8], a                               ; $5F84: $EA $D8 $DD
+    ld   [wDDD8], a                               ; $5F84: $EA $D8 $DD
     call label_2887                               ; $5F87: $CD $87 $28
     ld   a, [wRequests]                           ; $5F8A: $FA $00 $D6
     ld   e, a                                     ; $5F8D: $5F
@@ -474,14 +474,14 @@ jr_002_5FD4:
     ret                                           ; $5FD9: $C9
 
 CheckLightTorchesTrigger::
-    ld   a, [$C1A2]                               ; $5FDA: $FA $A2 $C1
+    ld   a, [wC1A2]                               ; $5FDA: $FA $A2 $C1
     cp   $02                                      ; $5FDD: $FE $02
     jp   z, MarkTriggerAsResolved                 ; $5FDF: $CA $60 $0C
 
     ret                                           ; $5FE2: $C9
 
 CheckStepOnButtonTrigger::
-    ld   a, [$C1CB]                               ; $5FE3: $FA $CB $C1
+    ld   a, [wC1CB]                               ; $5FE3: $FA $CB $C1
     and  a                                        ; $5FE6: $A7
     jp   nz, MarkTriggerAsResolved               ; $5FE7: $C2 $60 $0C
 
@@ -489,7 +489,7 @@ CheckStepOnButtonTrigger::
 
 CheckKillInOrderTrigger::
     ld   c, $00                                   ; $5FEB: $0E $00
-    ld   hl, $DBB6                                ; $5FED: $21 $B6 $DB
+    ld   hl, wDBB6                                ; $5FED: $21 $B6 $DB
 
 jr_002_5FF0:
     ld   a, [hl+]                                 ; $5FF0: $2A
@@ -531,7 +531,7 @@ jr_002_6011:
     cp   $08                                      ; $6019: $FE $08
     jr   nz, jr_002_6029                          ; $601B: $20 $0C
 
-    ld   a, [$D460]                               ; $601D: $FA $60 $D4
+    ld   a, [wD460]                               ; $601D: $FA $60 $D4
     and  a                                        ; $6020: $A7
     jr   z, jr_002_602C                           ; $6021: $28 $09
 
@@ -578,7 +578,7 @@ jr_002_604F:
     and  a                                        ; $6054: $A7
     jr   z, jr_002_6064                           ; $6055: $28 $0D
 
-    ld   hl, $C3B0                                ; $6057: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable                                ; $6057: $21 $B0 $C3
     add  hl, de                                   ; $605A: $19
     ld   a, [hl]                                  ; $605B: $7E
     cp   $08                                      ; $605C: $FE $08

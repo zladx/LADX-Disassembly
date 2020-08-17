@@ -108,8 +108,8 @@ LoadPhotoBgMap::
     ld   a, [hl]                                ; $4094: $7E
     ld   [wMusicTrackToPlay], a                             ; $4095: $EA $68 $D3
     xor  a                                      ; $4098: $AF
-    ld   [$C16C], a                             ; $4099: $EA $6C $C1
-    ld   [$C16B], a                             ; $409C: $EA $6B $C1
+    ld   [wC16C], a                             ; $4099: $EA $6C $C1
+    ld   [wTransitionSequenceCounter], a                             ; $409C: $EA $6B $C1
 
     ; Increment photo sequence step
     ld   hl, wGameplaySubtype                   ; $409F: $21 $96 $DB

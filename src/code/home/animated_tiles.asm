@@ -74,14 +74,14 @@ AnimateTiles::
     ld   a, $10                                   ; $1B27: $3E $10
     call AdjustBankNumberForGBC                   ; $1B29: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $1B2C: $EA $00 $21
-    ; Copy 32 bytes of data from address stored at $D006 to address stored at $D008
-    ld   a, [$D006]                               ; $1B2F: $FA $06 $D0
+    ; Copy 32 bytes of data from address stored at wD006 to address stored at wD008
+    ld   a, [wD006]                               ; $1B2F: $FA $06 $D0
     ld   l, a                                     ; $1B32: $6F
-    ld   a, [$D007]                               ; $1B33: $FA $07 $D0
+    ld   a, [wD007]                               ; $1B33: $FA $07 $D0
     ld   h, a                                     ; $1B36: $67
-    ld   a, [$D008]                               ; $1B37: $FA $08 $D0
+    ld   a, [wD008]                               ; $1B37: $FA $08 $D0
     ld   e, a                                     ; $1B3A: $5F
-    ld   a, [$D009]                               ; $1B3B: $FA $09 $D0
+    ld   a, [wD009]                               ; $1B3B: $FA $09 $D0
     ld   d, a                                     ; $1B3E: $57
     ld   bc, $20                                  ; $1B3F: $01 $20 $00
     jp   CopyData                                 ; $1B42: $C3 $14 $29
@@ -322,7 +322,7 @@ AnimateLavaTilesGroup::
     jp   LoadAnimatedTilesFrame                   ; $1CA6: $C3 $51 $1C
 
 AnimateDungeon2TilesGroup::
-    ld   hl, $DCC0                                ; $1CA9: $21 $C0 $DC
+    ld   hl, wDCC0                                ; $1CA9: $21 $C0 $DC
     ldh  a, [hMapId]                              ; $1CAC: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $1CAE: $FE $FF
     jr   nz, label_1CB8                           ; $1CB0: $20 $06
@@ -443,17 +443,17 @@ label_1D42::
     and  $10                                      ; $1D47: $E6 $10
 
 label_1D49::
-    ld   [$C135], a                               ; $1D49: $EA $35 $C1
-    ld   hl, $C008                                ; $1D4C: $21 $08 $C0
-    ld   a, [$C13B]                               ; $1D4F: $FA $3B $C1
+    ld   [wC135], a                               ; $1D49: $EA $35 $C1
+    ld   hl, wLinkOAMBuffer+8                                ; $1D4C: $21 $08 $C0
+    ld   a, [wC13B]                               ; $1D4F: $FA $3B $C1
     ld   c, a                                     ; $1D52: $4F
-    ld   a, [$C145]                               ; $1D53: $FA $45 $C1
+    ld   a, [wC145]                               ; $1D53: $FA $45 $C1
     add  a, c                                     ; $1D56: $81
     cp   $88                                      ; $1D57: $FE $88
     ret  nc                                       ; $1D59: $D0
     push af                                       ; $1D5A: $F5
     ldi  [hl], a                                  ; $1D5B: $22
-    ld   a, [$C13C]                               ; $1D5C: $FA $3C $C1
+    ld   a, [wC13C]                               ; $1D5C: $FA $3C $C1
     ld   c, a                                     ; $1D5F: $4F
     ldh  a, [hLinkPositionX]                      ; $1D60: $F0 $98
     add  a, c                                     ; $1D62: $81
@@ -464,9 +464,9 @@ ELSE
     ld   a, $00                                   ; $1D64: $3E $00
 ENDC
     ldi  [hl], a                                  ; $1D66: $22
-    ld   a, [$C135]                               ; $1D67: $FA $35 $C1
+    ld   a, [wC135]                               ; $1D67: $FA $35 $C1
     ld   d, a                                     ; $1D6A: $57
-    ld   a, [$C11D]                               ; $1D6B: $FA $1D $C1
+    ld   a, [wC11D]                               ; $1D6B: $FA $1D $C1
     or   d                                        ; $1D6E: $B2
     ld   [hl], a                                  ; $1D6F: $77
     ldh  a, [hIsGBC]                              ; $1D70: $F0 $FE
@@ -513,9 +513,9 @@ label_1DA1::
     ldi  [hl], a                                  ; $1DA9: $22
     ld   a, $02                                   ; $1DAA: $3E $02
     ldi  [hl], a                                  ; $1DAC: $22
-    ld   a, [$C135]                               ; $1DAD: $FA $35 $C1
+    ld   a, [wC135]                               ; $1DAD: $FA $35 $C1
     ld   d, a                                     ; $1DB0: $57
-    ld   a, [$C11E]                               ; $1DB1: $FA $1E $C1
+    ld   a, [wC11E]                               ; $1DB1: $FA $1E $C1
     or   d                                        ; $1DB4: $B2
     ld   [hl], a                                  ; $1DB5: $77
     ldh  a, [hIsGBC]                              ; $1DB6: $F0 $FE

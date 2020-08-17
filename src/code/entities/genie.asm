@@ -117,7 +117,7 @@ func_004_40A3::
     ld   a, JINGLE_BUMP                           ; $40B1: $3E $09
     ldh  [hJingle], a                             ; $40B3: $E0 $F2
     ld   a, $10                                   ; $40B5: $3E $10
-    ld   [$C13E], a                               ; $40B7: $EA $3E $C1
+    ld   [wC13E], a                               ; $40B7: $EA $3E $C1
     ld   a, $14                                   ; $40BA: $3E $14
     call GetVectorTowardsLink_trampoline          ; $40BC: $CD $B5 $3B
     ldh  a, [hScratch0]                               ; $40BF: $F0 $D7
@@ -319,12 +319,12 @@ jr_004_41DF:
     jr   z, jr_004_4210                           ; $41EA: $28 $24
 
 jr_004_41EC:
-    ld   a, [$C3CF]                               ; $41EC: $FA $CF $C3
+    ld   a, [wC3CF]                               ; $41EC: $FA $CF $C3
     and  a                                        ; $41EF: $A7
     jr   nz, jr_004_4210                          ; $41F0: $20 $1E
 
     inc  a                                        ; $41F2: $3C
-    ld   [$C3CF], a                               ; $41F3: $EA $CF $C3
+    ld   [wC3CF], a                               ; $41F3: $EA $CF $C3
     ld   hl, wEntitiesStatusTable                   ; $41F6: $21 $80 $C2
     add  hl, bc                                   ; $41F9: $09
     ld   [hl], $07                                ; $41FA: $36 $07
@@ -417,7 +417,7 @@ Data_004_42B1::
     db   $26, $00                                 ; $42B1
 
 func_004_42B3::
-    ld   hl, $C3B0                                ; $42B3: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable                                ; $42B3: $21 $B0 $C3
     add  hl, bc                                   ; $42B6: $09
     ld   a, [hl]                                  ; $42B7: $7E
     rla                                           ; $42B8: $17
@@ -491,7 +491,7 @@ jr_004_431A:
     ld   hl, wEntitiesSpeedXTable                                ; $431D: $21 $40 $C2
     add  hl, bc                                   ; $4320: $09
     ld   a, [hl]                                  ; $4321: $7E
-    ld   [$D000], a                               ; $4322: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a                               ; $4322: $EA $00 $D0
     ld   hl, wEntitiesSpeedYTable                                ; $4325: $21 $50 $C2
     add  hl, bc                                   ; $4328: $09
     ld   a, [hl]                                  ; $4329: $7E
@@ -723,14 +723,14 @@ jr_004_4438:
     ld   a, $1F                                   ; $4477: $3E $1F
     call ApplyVectorTowardsLink_trampoline        ; $4479: $CD $AA $3B
     pop  bc                                       ; $447C: $C1
-    ld   hl, $C300                                ; $447D: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table                                ; $447D: $21 $00 $C3
     add  hl, bc                                   ; $4480: $09
     ld   [hl], $10                                ; $4481: $36 $10
     ld   a, $28                                   ; $4483: $3E $28
     ldh  [hNoiseSfx], a                            ; $4485: $E0 $F4
 
 jr_004_4487:
-    ld   hl, $C300                                ; $4487: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table                                ; $4487: $21 $00 $C3
     add  hl, bc                                   ; $448A: $09
     ld   a, [hl]                                  ; $448B: $7E
     and  a                                        ; $448C: $A7
@@ -1072,7 +1072,7 @@ func_004_46F9::
     ldh  [hActiveEntityPosX], a                               ; $4711: $E0 $EE
 
 jr_004_4713:
-    ld   hl, $C3B0                                ; $4713: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable                                ; $4713: $21 $B0 $C3
     add  hl, bc                                   ; $4716: $09
     ld   a, [hl]                                  ; $4717: $7E
     ld   e, a                                     ; $4718: $5F
@@ -1254,7 +1254,7 @@ GenieState3Handler::
     add  hl, bc                                   ; $48EF: $09
     ld   a, [hl]                                  ; $48F0: $7E
     push af                                       ; $48F1: $F5
-    ld   a, [$D000]                               ; $48F2: $FA $00 $D0
+    ld   a, [wIsFileSelectionArrowShifted]                               ; $48F2: $FA $00 $D0
     add  [hl]                                     ; $48F5: $86
     ld   [hl], a                                  ; $48F6: $77
     ld   hl, wEntitiesSpeedYTable                                ; $48F7: $21 $50 $C2

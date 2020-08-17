@@ -70,13 +70,13 @@ AnimateEntities::
     ld   a, [wDialogState]                        ; $399B: $FA $9F $C1
     and  a                                        ; $399E: $A7
     jr   nz, .C111End                             ; $399F: $20 $0D
-    ; … decrement $C111
-    ld   a, [$C111]                               ; $39A1: $FA $11 $C1
-    ld   [$C1A8], a                               ; $39A4: $EA $A8 $C1
+    ; … decrement wC111
+    ld   a, [wC111]                               ; $39A1: $FA $11 $C1
+    ld   [wC1A8], a                               ; $39A4: $EA $A8 $C1
     and  a                                        ; $39A7: $A7
     jr   z, .C111End                              ; $39A8: $28 $04
     dec  a                                        ; $39AA: $3D
-    ld   [$C111], a                               ; $39AB: $EA $11 $C1
+    ld   [wC111], a                               ; $39AB: $EA $11 $C1
 .C111End
 
     ; If Link is passing out, return
@@ -85,7 +85,7 @@ AnimateEntities::
     ret  z                                        ; $39B3: $C8
 
     xor  a                                        ; $39B4: $AF
-    ld   [$C3C1], a                               ; $39B5: $EA $C1 $C3
+    ld   [wC3C1], a                               ; $39B5: $EA $C1 $C3
     ldh  a, [hMapId]                              ; $39B8: $F0 $F7
     cp   MAP_CAVE_B                               ; $39BA: $FE $0A
     ldh  a, [hFrameCounter]                       ; $39BC: $F0 $E7
@@ -106,7 +106,7 @@ AnimateEntities::
     ld   a, [wDialogState]                        ; $39DA: $FA $9F $C1
     and  a                                        ; $39DD: $A7
     jr   nz, .label_39E3                          ; $39DE: $20 $03
-    ld   [$C1AD], a                               ; $39E0: $EA $AD $C1
+    ld   [wC1AD], a                               ; $39E0: $EA $AD $C1
 
 .label_39E3
     ld   a, BANK(func_020_6352)                   ; $39E3: $3E $20
@@ -169,7 +169,7 @@ AnimateEntity::
     ld   a, [hl]                                  ; $3A23: $7E
     ldh  [hActiveEntityState], a                  ; $3A24: $E0 $F0
 
-    ld   hl, $C3B0                                ; $3A26: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable                                ; $3A26: $21 $B0 $C3
     add  hl, bc                                   ; $3A29: $09
     ld   a, [hl]                                  ; $3A2A: $7E
     ldh  [hActiveEntitySpriteVariant], a          ; $3A2B: $E0 $F1
@@ -713,7 +713,7 @@ label_3CD9::
 ; See RenderActiveEntitySpritesRect for details.
 RenderActiveEntitySpritesRectUsingAllOAM::
     push hl                                       ; $3CE0: $E5
-    ld   hl, wOAMBuffer                           ; $3CE1: $21 $00 $C0
+    ld   hl, wLinkOAMBuffer                           ; $3CE1: $21 $00 $C0
     jr   RenderActiveEntitySpritesRect.withDestination ; $3CE4: $18 $10
 
 ; Render a large rectangle of sprites for the active entity to the OAM buffer.
@@ -1035,7 +1035,7 @@ label_3E8E::
     ret                                           ; $3EAE: $C9
 
 label_3EAF::
-    ld   hl, $C3F0                                ; $3EAF: $21 $F0 $C3
+    ld   hl, wC3F0                                ; $3EAF: $21 $F0 $C3
     add  hl, bc                                   ; $3EB2: $09
     ld   a, [hl]                                  ; $3EB3: $7E
     bit  7, a                                     ; $3EB4: $CB $7F
@@ -1172,7 +1172,7 @@ DidKillEnemy::
     inc  a                                        ; $3F6D: $3C
     ld   [wKillCount2], a                         ; $3F6E: $EA $B5 $DB
     ld   a, [hl]                                  ; $3F71: $7E
-    ld   hl, $DBB6                                ; $3F72: $21 $B6 $DB
+    ld   hl, wDBB6                                ; $3F72: $21 $B6 $DB
     add  hl, de                                   ; $3F75: $19
     ld   [hl], a                                  ; $3F76: $77
     pop  af                                       ; $3F77: $F1

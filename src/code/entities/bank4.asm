@@ -6191,7 +6191,7 @@ jr_004_744B:
     dec  [hl]                                     ; $7476: $35
 
 jr_004_7477:
-    ld   hl, wLinkOAMBuffer+$20                                ; $7477: $21 $20 $C0
+    ld   hl, wOAMBuffer+$20                                ; $7477: $21 $20 $C0
     ld   a, $50                                   ; $747A: $3E $50
     ld   [hl+], a                                 ; $747C: $22
     ld   a, $28                                   ; $747D: $3E $28

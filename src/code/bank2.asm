@@ -3483,7 +3483,7 @@ RenderTranscientPegasusDust::
     jp   nz, label_002_583A                       ; $5729: $C2 $3A $58
 
     add  hl, de                                   ; $572C: $19
-    ld   de, wLinkOAMBuffer                           ; $572D: $11 $00 $C0
+    ld   de, wOAMBuffer                           ; $572D: $11 $00 $C0
     call label_002_5854                           ; $5730: $CD $54 $58
     jp   label_002_5854                           ; $5733: $C3 $54 $58
 
@@ -4835,7 +4835,7 @@ UpdateHealth:
     ld   [hl], WAVE_SFX_LOW_HEARTS                ; $633D: $36 $04
 
 .savewTimeToNextLowHealthSFX:
-    ; if $wTimeToNextLowHealthSFX > 0: $wTimeToNextLowHealthSFX -= 1 
+    ; if $wTimeToNextLowHealthSFX > 0: $wTimeToNextLowHealthSFX -= 1
     ; else:                           $wTimeToNextLowHealthSFX  = LOW_HEALTH_PEEP_PAUSE
     ld   [wTimeToNextLowHealthSFX], a             ; $633F: $EA $10 $C1
 
@@ -5452,7 +5452,7 @@ label_002_6ADB:
     ld   a, [wSwordAnimationState]                ; $6ADB: $FA $37 $C1
     and  a                                        ; $6ADE: $A7
     jr   nz, jr_002_6AE6                          ; $6ADF: $20 $05
-    
+
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $6AE1: $F0 $A1
     and  a                                        ; $6AE3: $A7
     jr   nz, jr_002_6AFC                          ; $6AE4: $20 $16

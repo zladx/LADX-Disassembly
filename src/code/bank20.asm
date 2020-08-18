@@ -3531,7 +3531,7 @@ jr_020_614A:
     ld   e, a                                     ; $615E: $5F
     ld   hl, Data_020_604B                        ; $615F: $21 $4B $60
     add  hl, de                                   ; $6162: $19
-    ld   de, wLinkOAMBuffer+$18                                ; $6163: $11 $18 $C0
+    ld   de, wOAMBuffer+$18                                ; $6163: $11 $18 $C0
     ld   c, $0C                                   ; $6166: $0E $0C
     ld   b, $04                                   ; $6168: $06 $04
 
@@ -3645,7 +3645,7 @@ jr_020_61E4:
     call func_020_6039                            ; $61EA: $CD $39 $60
 
 jr_020_61ED:
-    ld   hl, wLinkOAMBuffer+$10                                ; $61ED: $21 $10 $C0
+    ld   hl, wOAMBuffer+$10                                ; $61ED: $21 $10 $C0
     ld   a, $38                                   ; $61F0: $3E $38
     ld   [hl+], a                                 ; $61F2: $22
     push hl                                       ; $61F3: $E5
@@ -3727,30 +3727,30 @@ jr_020_624D:
 
 jr_020_6261:
     ld   a, h                                     ; $6261: $7C
-    ld   [wLinkOAMBuffer], a                          ; $6262: $EA $00 $C0
+    ld   [wOAMBuffer], a                          ; $6262: $EA $00 $C0
     ld   a, l                                     ; $6265: $7D
-    ld   [wLinkOAMBuffer+1], a                               ; $6266: $EA $01 $C0
+    ld   [wOAMBuffer+1], a                               ; $6266: $EA $01 $C0
     ld   a, $3F                                   ; $6269: $3E $3F
-    ld   [wLinkOAMBuffer+2], a                               ; $626B: $EA $02 $C0
+    ld   [wOAMBuffer+2], a                               ; $626B: $EA $02 $C0
     ldh  a, [hIsGBC]                              ; $626E: $F0 $FE
     and  a                                        ; $6270: $A7
     jr   z, jr_020_6285                           ; $6271: $28 $12
 
     ld   a, $01                                   ; $6273: $3E $01
-    ld   [wLinkOAMBuffer+3], a                               ; $6275: $EA $03 $C0
+    ld   [wOAMBuffer+3], a                               ; $6275: $EA $03 $C0
     ldh  a, [hFrameCounter]                       ; $6278: $F0 $E7
     and  $08                                      ; $627A: $E6 $08
     jr   z, label_020_628D                        ; $627C: $28 $0F
 
     ld   a, $04                                   ; $627E: $3E $04
-    ld   [wLinkOAMBuffer+3], a                               ; $6280: $EA $03 $C0
+    ld   [wOAMBuffer+3], a                               ; $6280: $EA $03 $C0
     jr   label_020_628D                           ; $6283: $18 $08
 
 jr_020_6285:
     ldh  a, [hFrameCounter]                       ; $6285: $F0 $E7
     rla                                           ; $6287: $17
     and  $10                                      ; $6288: $E6 $10
-    ld   [wLinkOAMBuffer+3], a                               ; $628A: $EA $03 $C0
+    ld   [wOAMBuffer+3], a                               ; $628A: $EA $03 $C0
 
 label_020_628D:
     ret                                           ; $628D: $C9
@@ -3774,23 +3774,23 @@ func_020_62A2::
     ld   hl, Data_020_6298                        ; $62B3: $21 $98 $62
     add  hl, de                                   ; $62B6: $19
     ld   a, [hl]                                  ; $62B7: $7E
-    ld   [wLinkOAMBuffer+4], a                               ; $62B8: $EA $04 $C0
-    ld   [wLinkOAMBuffer+8], a                               ; $62BB: $EA $08 $C0
+    ld   [wOAMBuffer+4], a                               ; $62B8: $EA $04 $C0
+    ld   [wOAMBuffer+8], a                               ; $62BB: $EA $08 $C0
     ld   hl, Data_020_628E                        ; $62BE: $21 $8E $62
 
 jr_020_62C1:
     add  hl, de                                   ; $62C1: $19
     ld   a, [hl]                                  ; $62C2: $7E
-    ld   [wLinkOAMBuffer+5], a                               ; $62C3: $EA $05 $C0
+    ld   [wOAMBuffer+5], a                               ; $62C3: $EA $05 $C0
     add  $20                                      ; $62C6: $C6 $20
-    ld   [wLinkOAMBuffer+9], a                               ; $62C8: $EA $09 $C0
+    ld   [wOAMBuffer+9], a                               ; $62C8: $EA $09 $C0
     ld   a, $BE                                   ; $62CB: $3E $BE
-    ld   [wLinkOAMBuffer+6], a                               ; $62CD: $EA $06 $C0
-    ld   [wLinkOAMBuffer+10], a                               ; $62D0: $EA $0A $C0
+    ld   [wOAMBuffer+6], a                               ; $62CD: $EA $06 $C0
+    ld   [wOAMBuffer+10], a                               ; $62D0: $EA $0A $C0
     ld   a, $34                                   ; $62D3: $3E $34
-    ld   [wLinkOAMBuffer+7], a                               ; $62D5: $EA $07 $C0
+    ld   [wOAMBuffer+7], a                               ; $62D5: $EA $07 $C0
     ld   a, $14                                   ; $62D8: $3E $14
-    ld   [wLinkOAMBuffer+11], a                               ; $62DA: $EA $0B $C0
+    ld   [wOAMBuffer+11], a                               ; $62DA: $EA $0B $C0
 
 jr_020_62DD:
     ret                                           ; $62DD: $C9
@@ -4113,7 +4113,7 @@ Data_020_64E4::
     db   $7C, $03, $7C, $03                       ; $64EA
 
 func_020_64EE::
-    ld   hl, wLinkOAMBuffer+$10                                ; $64EE: $21 $10 $C0
+    ld   hl, wOAMBuffer+$10                                ; $64EE: $21 $10 $C0
     ld   a, $53                                   ; $64F1: $3E $53
     ldh  [hBGMapOffsetLow], a                     ; $64F3: $E0 $E1
     ld   a, [$DE0A]                               ; $64F5: $FA $0A $DE
@@ -5851,7 +5851,7 @@ jr_020_7BCE:
     ld   hl, Data_020_7B15                        ; $7BD1: $21 $15 $7B
 
 jr_020_7BD4:
-    ld   de, wLinkOAMBuffer+12                                ; $7BD4: $11 $0C $C0
+    ld   de, wOAMBuffer+12                                ; $7BD4: $11 $0C $C0
     ld   c, $00                                   ; $7BD7: $0E $00
 
 .loop
@@ -6013,7 +6013,7 @@ func_020_7D40::
     ld   a, [wOAMNextAvailableSlot]               ; $7D42: $FA $C0 $C3
     ld   e, a                                     ; $7D45: $5F
     ld   d, $00                                   ; $7D46: $16 $00
-    ld   hl, wLinkOAMBuffer                           ; $7D48: $21 $00 $C0
+    ld   hl, wOAMBuffer                           ; $7D48: $21 $00 $C0
     add  hl, de                                   ; $7D4B: $19
     ld   d, h                                     ; $7D4C: $54
     ld   e, l                                     ; $7D4D: $5D

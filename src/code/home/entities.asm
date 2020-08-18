@@ -713,7 +713,7 @@ label_3CD9::
 ; See RenderActiveEntitySpritesRect for details.
 RenderActiveEntitySpritesRectUsingAllOAM::
     push hl                                       ; $3CE0: $E5
-    ld   hl, wLinkOAMBuffer                           ; $3CE1: $21 $00 $C0
+    ld   hl, wOAMBuffer                           ; $3CE1: $21 $00 $C0
     jr   RenderActiveEntitySpritesRect.withDestination ; $3CE4: $18 $10
 
 ; Render a large rectangle of sprites for the active entity to the OAM buffer.

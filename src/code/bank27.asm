@@ -4,7 +4,7 @@ func_027_7240::
     ld   a, [wOAMNextAvailableSlot]               ; $7242: $FA $C0 $C3
     ld   e, a                                     ; $7245: $5F
     ld   d, $00                                   ; $7246: $16 $00
-    ld   hl, wLinkOAMBuffer                       ; $7248: $21 $00 $C0
+    ld   hl, wOAMBuffer                           ; $7248: $21 $00 $C0
     add  hl, de                                   ; $724B: $19
     ld   d, h                                     ; $724C: $54
     ld   e, l                                     ; $724D: $5D

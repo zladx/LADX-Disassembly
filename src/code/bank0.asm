@@ -1128,7 +1128,7 @@ LoadRoomTiles::
     jr   c, .skipIncD                             ; $0DA8: $38 $01
     inc  d                                        ; $0DAA: $14
 
-.skipIncD 
+.skipIncD
     ; hl = $data_020_70D3 + room-offset
     add  hl, de                                   ; $0DAB: $19
     ld   e, [hl]                                  ; $0DAC: $5E
@@ -1194,7 +1194,7 @@ LoadRoomTiles::
     ; ------------------------------------------------------------
     ;
     ; Load selected Sprites tileset
-    ; 
+    ;
     ;
     ; ------------------------------------------------------------
 
@@ -2728,7 +2728,7 @@ ApplyLinkMotionState::
     ld   a, [wC16A]                               ; $179D: $FA $6A $C1
     and  a                                        ; $17A0: $A7
     jr   z, .label_17DB                           ; $17A1: $28 $38
-    ld   bc, wLinkOAMBuffer+$10                                ; $17A3: $01 $10 $C0
+    ld   bc, wLinkOAMBuffer+$10                   ; $17A3: $01 $10 $C0
     ld   a, [wC145]                               ; $17A6: $FA $45 $C1
     ld   hl, wC13B                                ; $17A9: $21 $3B $C1
     add  a, [hl]                                  ; $17AC: $86

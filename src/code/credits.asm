@@ -424,7 +424,7 @@ jr_017_46BD:
     and  a                                        ; $46C3: $A7
     jr   z, jr_017_46C9                           ; $46C4: $28 $03
 
-    ld   de, wLinkOAMBuffer                       ; $46C6: $11 $00 $C0
+    ld   de, wOAMBuffer                       ; $46C6: $11 $00 $C0
 
 jr_017_46C9:
     ldh  a, [hFrameCounter]                       ; $46C9: $F0 $E7
@@ -534,7 +534,7 @@ func_017_4784::
     and  a                                        ; $47AB: $A7
     jr   z, jr_017_47B1                           ; $47AC: $28 $03
 
-    ld   de, wLinkOAMBuffer+$24                                ; $47AE: $11 $24 $C0
+    ld   de, wOAMBuffer+$24                                ; $47AE: $11 $24 $C0
 
 jr_017_47B1:
     ld   a, $55                                   ; $47B1: $3E $55
@@ -5978,7 +5978,7 @@ func_017_7A29::
     ldh  a, [hScratch0]                           ; $7A2B: $F0 $D7
     ld   e, a                                     ; $7A2D: $5F
     ld   d, b                                     ; $7A2E: $50
-    ld   hl, wLinkOAMBuffer                                ; $7A2F: $21 $00 $C0
+    ld   hl, wOAMBuffer                                ; $7A2F: $21 $00 $C0
     add  hl, de                                   ; $7A32: $19
     push hl                                       ; $7A33: $E5
     pop  de                                       ; $7A34: $D1
@@ -6444,7 +6444,7 @@ func_017_7D34::
     add  hl, de                                   ; $7D40: $19
     push hl                                       ; $7D41: $E5
     pop  de                                       ; $7D42: $D1
-    ld   hl, wLinkOAMBuffer+4                                ; $7D43: $21 $04 $C0
+    ld   hl, wOAMBuffer+4                                ; $7D43: $21 $04 $C0
     ldh  a, [hLinkPositionY]                      ; $7D46: $F0 $99
     ld   [hl+], a                                 ; $7D48: $22
     ld   a, [wScreenShakeHorizontal]              ; $7D49: $FA $55 $C1
@@ -6513,13 +6513,13 @@ jr_017_7D8B:
     ld   hl, Data_017_7D7A                        ; $7D94: $21 $7A $7D
     add  hl, de                                   ; $7D97: $19
     ld   a, [hl]                                  ; $7D98: $7E
-    ld   [wLinkOAMBuffer+$18], a                               ; $7D99: $EA $18 $C0
+    ld   [wOAMBuffer+$18], a                               ; $7D99: $EA $18 $C0
     ld   a, $97                                   ; $7D9C: $3E $97
-    ld   [wLinkOAMBuffer+$19], a                               ; $7D9E: $EA $19 $C0
+    ld   [wOAMBuffer+$19], a                               ; $7D9E: $EA $19 $C0
     ld   a, $A2                                   ; $7DA1: $3E $A2
-    ld   [wLinkOAMBuffer+$1A], a                               ; $7DA3: $EA $1A $C0
+    ld   [wOAMBuffer+$1A], a                               ; $7DA3: $EA $1A $C0
     ld   a, $42                                   ; $7DA6: $3E $42
-    ld   [wLinkOAMBuffer+$1B], a                               ; $7DA8: $EA $1B $C0
+    ld   [wOAMBuffer+$1B], a                               ; $7DA8: $EA $1B $C0
     ret                                           ; $7DAB: $C9
 
 jr_017_7DAC:
@@ -6528,13 +6528,13 @@ jr_017_7DAC:
     ld   a, [hl]                                  ; $7DB0: $7E
     ld   hl, hBaseScrollY                         ; $7DB1: $21 $97 $FF
     sub  [hl]                                     ; $7DB4: $96
-    ld   [wLinkOAMBuffer], a                      ; $7DB5: $EA $00 $C0
+    ld   [wOAMBuffer], a                      ; $7DB5: $EA $00 $C0
     ld   a, $97                                   ; $7DB8: $3E $97
-    ld   [wLinkOAMBuffer+1], a                               ; $7DBA: $EA $01 $C0
+    ld   [wOAMBuffer+1], a                               ; $7DBA: $EA $01 $C0
     ld   a, $FE                                   ; $7DBD: $3E $FE
-    ld   [wLinkOAMBuffer+2], a                               ; $7DBF: $EA $02 $C0
+    ld   [wOAMBuffer+2], a                               ; $7DBF: $EA $02 $C0
     ld   a, $40                                   ; $7DC2: $3E $40
-    ld   [wLinkOAMBuffer+3], a                               ; $7DC4: $EA $03 $C0
+    ld   [wOAMBuffer+3], a                               ; $7DC4: $EA $03 $C0
     ret                                           ; $7DC7: $C9
 
 Data_017_7DC8::
@@ -6560,7 +6560,7 @@ jr_017_7DD6:
     ld   hl, Data_017_7DC8                        ; $7DDF: $21 $C8 $7D
     add  hl, de                                   ; $7DE2: $19
     ld   a, [hl]                                  ; $7DE3: $7E
-    ld   [wLinkOAMBuffer+$18], a                               ; $7DE4: $EA $18 $C0
+    ld   [wOAMBuffer+$18], a                               ; $7DE4: $EA $18 $C0
     ld   e, $00                                   ; $7DE7: $1E $00
     ld   a, [wDialogAskSelectionIndex]            ; $7DE9: $FA $77 $C1
     and  $01                                      ; $7DEC: $E6 $01
@@ -6572,11 +6572,11 @@ jr_017_7DF1:
     ld   hl, Data_017_7DCA                        ; $7DF1: $21 $CA $7D
     add  hl, de                                   ; $7DF4: $19
     ld   a, [hl]                                  ; $7DF5: $7E
-    ld   [wLinkOAMBuffer+$19], a                               ; $7DF6: $EA $19 $C0
+    ld   [wOAMBuffer+$19], a                               ; $7DF6: $EA $19 $C0
     ld   a, $3E                                   ; $7DF9: $3E $3E
-    ld   [wLinkOAMBuffer+$1A], a                               ; $7DFB: $EA $1A $C0
+    ld   [wOAMBuffer+$1A], a                               ; $7DFB: $EA $1A $C0
     ld   a, $00                                   ; $7DFE: $3E $00
-    ld   [wLinkOAMBuffer+$1B], a                               ; $7E00: $EA $1B $C0
+    ld   [wOAMBuffer+$1B], a                               ; $7E00: $EA $1B $C0
     ret                                           ; $7E03: $C9
 
 jr_017_7E04:
@@ -6585,7 +6585,7 @@ jr_017_7E04:
     ld   a, [hl]                                  ; $7E08: $7E
     ld   hl, hBaseScrollY                         ; $7E09: $21 $97 $FF
     sub  [hl]                                     ; $7E0C: $96
-    ld   [wLinkOAMBuffer], a                               ; $7E0D: $EA $00 $C0
+    ld   [wOAMBuffer], a                               ; $7E0D: $EA $00 $C0
     ld   e, $00                                   ; $7E10: $1E $00
     ld   a, [wDialogAskSelectionIndex]            ; $7E12: $FA $77 $C1
     and  $01                                      ; $7E15: $E6 $01
@@ -6597,13 +6597,13 @@ jr_017_7E1A:
     ld   hl, Data_017_7DCA                        ; $7E1A: $21 $CA $7D
     add  hl, de                                   ; $7E1D: $19
     ld   a, [hl]                                  ; $7E1E: $7E
-    ld   [wLinkOAMBuffer+1], a                               ; $7E1F: $EA $01 $C0
+    ld   [wOAMBuffer+1], a                               ; $7E1F: $EA $01 $C0
     ld   a, $9E                                   ; $7E22: $3E $9E
 
 jr_017_7E24:
-    ld   [wLinkOAMBuffer+2], a                               ; $7E24: $EA $02 $C0
+    ld   [wOAMBuffer+2], a                               ; $7E24: $EA $02 $C0
     ld   a, $00                                   ; $7E27: $3E $00
-    ld   [wLinkOAMBuffer+3], a                               ; $7E29: $EA $03 $C0
+    ld   [wOAMBuffer+3], a                               ; $7E29: $EA $03 $C0
     ret                                           ; $7E2C: $C9
 
 UpdateEntityPosWithSpeed_17::

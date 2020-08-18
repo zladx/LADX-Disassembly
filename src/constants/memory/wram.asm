@@ -17,7 +17,17 @@ section "WRAM Bank0", wram0[$c000]
 
 wram0Section EQU $C000
 
-; Buffer Area for 12 Link OAM tiles. Copied to OAM by DMA.
+; Generic 40 tiles buffer for OAM data. Copied to OAM by DMA.
+; During World gameplay, the OAM buffer is split between 12 OAM
+; tiles for Link, and 28 OAM tiles for dynamic entities.
+; Structure:
+;  byte 0: Y position
+;  byte 1: X position
+;  byte 2: tile n°
+;  byte 3: attribute
+wOAMBuffer::
+
+; During World gameplay, buffer for 12 Link OAM tiles
 ; Structure:
 ;  byte 0 = Y position,
 ;  byte 1 = X position,
@@ -26,7 +36,7 @@ wram0Section EQU $C000
 wLinkOAMBuffer::
   ds 4 * 12 ; C000 - C02F
 
-; Buffer Area for 28 dynamically allocated OAM elements
+; During World gameplay, buffer for 28 dynamically allocated OAM elements
 ; Structure:
 ;  byte 0 = Y position,
 ;  byte 1 = X position,
@@ -48,7 +58,7 @@ wLCDSectionIndex::
   ds 1 ; C105
 
 ; Offset for compensating the sea movement when drawing bottom screen section on intro sea
-wIntroBGYOffset:: 
+wIntroBGYOffset::
   ds 1 ; C106
 
 ; Unlabeled
@@ -93,7 +103,7 @@ wC10F:
 ; Time until the next low health SFX sound will be played.
 wTimeToNextLowHealthSFX:
   ds 1 ; C110
-  
+
 ; Unlabeled
 wC111:
   ds 1 ; C111
@@ -157,7 +167,7 @@ wC11E:
 ; 3 = wet or grassy,
 ; 7 = pit,
 ; Also see: wLinkGroundVfx
-wLinkGroundStatus:: 
+wLinkGroundStatus::
   ds 1 ; C11F
 
 ; Number of consecutive steps taken by Link.
@@ -184,7 +194,7 @@ wActiveEntityIndex::
   ds 1 ; C123
 
 ; See ROOM_TRANSITION_* constants for possible values.
-wRoomTransitionState:: 
+wRoomTransitionState::
   ds 1 ; C124
 
 ; See DIRECTION_* constants for possible values
@@ -226,7 +236,7 @@ wRoomTransitionTargetScrollY::
   ds 1 ; C12D
 
 ; Position of the first visible background tile (high byte)
-wBGOriginHigh:: 
+wBGOriginHigh::
   ds 1 ; C12E
 
 ; Position of the first visible background tile (low byte)
@@ -264,7 +274,7 @@ wSwordDirection::
 ; 0x02 = swing middle,
 ; 0x03 = swing front,
 ; 0x04 = swing end
-wSwordAnimationState:: 
+wSwordAnimationState::
   ds 1 ; C137
 
 ; Unlabeled
@@ -1076,7 +1086,7 @@ wObjectAffectingBGPalette::
   ds 1 ; C3CB
 
 ; Adress of a palette[frameCount] array
-wBGPaletteEffectAddress:: 
+wBGPaletteEffectAddress::
   ds 1 ; C3CC
 
 ; Unlabeled
@@ -1687,7 +1697,7 @@ wD312::
 ; Unlabeled
 wD313::
   ds 1 ; D313
-  
+
 ; Unlabeled
 ; Channel 1 definition data pointer
 wD314::
@@ -1700,7 +1710,7 @@ wD316::
   ds 1 ; D316
 
 ; Unlabeled
-; Points to frequency data for NRx3 and NRx4  
+; Points to frequency data for NRx3 and NRx4
 wD317::
   ds 3 ; D317 - D319
 
@@ -2725,7 +2735,7 @@ wKidSaveHintIndex::
 ; Unlabeled
 wDB7F::
   ds 1 ; DB7F
-  
+
 ; Unlabeled, outside the area that is stored in the savegame.
 wDB80::
   ds 5 ; DB80 - DB84
@@ -2807,7 +2817,7 @@ wDB9F::
   ds 4 ; DB9F - DBA2
 
 ; Unlabeled
-wDBA3:: 
+wDBA3::
   ds 1 ; DBA3
 
 ; not used

@@ -444,7 +444,7 @@ label_1D42::
 
 label_1D49::
     ld   [wC135], a                               ; $1D49: $EA $35 $C1
-    ld   hl, wLinkOAMBuffer+8                                ; $1D4C: $21 $08 $C0
+    ld   hl, wOAMBuffer+8                                ; $1D4C: $21 $08 $C0
     ld   a, [wC13B]                               ; $1D4F: $FA $3B $C1
     ld   c, a                                     ; $1D52: $4F
     ld   a, [wC145]                               ; $1D53: $FA $45 $C1

@@ -391,42 +391,43 @@ hActiveEntityTilesOffset:: ; FFF5
   ; etc.
   ds 1
 
+; Room id on the active map
 hMapRoom:: ; FFF6
-  ; Room id on the active map
   ds 1
 
-hMapId:: ; FFF7
-  ; Id of the current indoor world map
+; Id of the current indoor world map
   ; See MAP_* constants for values
-  ds 1
+hMapId::
+  ds 1 ; FFF7
 
-hRoomStatus:: ; FFF8
-  ; Status of the current room
-  ; 00 : not visited
-  ; 10 : special event occured
-  ; 30 : don't load room entities
-  ; 80 : visited
-  ds 1
+; Status flags of the current room
+; 0x00 = not visited,
+; 0x04 = bos door is open,
+; 0x10 = special event occured,
+; 0x30 = don't load room entities,
+; 0x80 = visited,
+hRoomStatus::
+  ds 1 ; FFF8
 
-hIsSideScrolling:: ; FFF9
-  ; 0  top view
-  ; 1  Unknown
-  ; 2  side-scrolling view
-  ds 1
+; 0  top view
+; 1  Unknown
+; 2  side-scrolling view
+hIsSideScrolling::
+  ds 1 ; FFF9
 
-hLinkRoomPosition:: ; FFFA
-  ; Position of Link in the current world room
-  ; Value goes from 0 (top left) to $79 (bottom right)
-  ; Not updated during room transitions
-  ds 1
+; Position of Link in the current world room
+; Value goes from 0 (top left) to $79 (bottom right)
+; Not updated during room transitions
+hLinkRoomPosition::
+  ds 1 ; FFFA
 
-hLinkFinalRoomPosition:: ; FFFB
-  ; Final position of Link in the room, once modifiers applied
-  ds 1
+; Final position of Link in the room, once modifiers applied
+hLinkFinalRoomPosition::
+  ds 1 ; FFFB
 
 ; Unused?
-hFFFC:: ; FFFC
-  ds 1
+hFFFC::
+  ds 1 ; FFFC
 
 hDidRenderFrame:: ; FFFD
  ds 1

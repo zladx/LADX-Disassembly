@@ -209,7 +209,7 @@ jr_002_5E2E:
     cp   MAP_COLOR_DUNGEON                                      ; $5E51: $FE $FF
     jr   nz, jr_002_5E5A                          ; $5E53: $20 $05
 
-    ld   hl, $DDE0                                ; $5E55: $21 $E0 $DD
+    ld   hl, wColorDungeonRoomStatus                                ; $5E55: $21 $E0 $DD
     jr   jr_002_5E63                              ; $5E58: $18 $09
 
 jr_002_5E5A:
@@ -615,7 +615,7 @@ jr_002_6074:
 
     call EventEffectGuard                         ; $6084: $CD $AF $5D
     call OpenLockedDoorsEffectHandler             ; $6087: $CD $25 $5E
-    ld   hl, $DDE0                                ; $608A: $21 $E0 $DD
+    ld   hl, wColorDungeonRoomStatus                                ; $608A: $21 $E0 $DD
     ldh  a, [hMapRoom]                            ; $608D: $F0 $F6
     ld   e, a                                     ; $608F: $5F
     ld   d, $00                                   ; $6090: $16 $00

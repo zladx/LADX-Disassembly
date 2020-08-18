@@ -337,7 +337,7 @@ jr_001_52EA::
     ld   a, e                                     ; $52F1: $7B
     or   d                                        ; $52F2: $B2
     jr   nz, jr_001_52EA                          ; $52F3: $20 $F5
-    ld   hl, $DDE0                                ; $52F5: $21 $E0 $DD
+    ld   hl, wColorDungeonRoomStatus                                ; $52F5: $21 $E0 $DD
     ld   de, $20                                  ; $52F8: $11 $20 $00
 
 jr_001_52FB::
@@ -1426,7 +1426,7 @@ jr_001_5E26::
     ld   a, e                                     ; $5E30: $7B
     or   d                                        ; $5E31: $B2
     jr   nz, jr_001_5E26                          ; $5E32: $20 $F2
-    ld   bc, $DDE0                                ; $5E34: $01 $E0 $DD
+    ld   bc, wColorDungeonRoomStatus                                ; $5E34: $01 $E0 $DD
     ld   de, $20                                  ; $5E37: $11 $20 $00
 
 jr_001_5E3A::

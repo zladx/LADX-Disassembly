@@ -6881,8 +6881,8 @@ data_36B0::
     db   $43, $44                                 ; $36B0
 
 LoadObject_OpenDoorTop::
-    ld   a, $04                                   ; $36B2: $3E $04
-    call label_36C4                               ; $36B4: $CD $C4 $36
+    ld   a, ROOM_STATUS_DOOR_OPENED               ; $36B2: $3E $04
+    call addIndoorRoomStatus                               ; $36B4: $CD $C4 $36
     push bc                                       ; $36B7: $C5
     call label_35EE                               ; $36B8: $CD $EE $35
     ld   bc, data_37E1                            ; $36BB: $01 $E1 $37
@@ -6890,28 +6890,39 @@ LoadObject_OpenDoorTop::
     jp   Func_354B                                ; $36C1: $C3 $4B $35
 
 ; Set hRoomStatus depending on the map and room
-label_36C4::
+; a = new rom status
+; f = not used, but overridden
+addIndoorRoomStatus::
     push af                                       ; $36C4: $F5
     ld   hl, wIndoorARoomStatus                   ; $36C5: $21 $00 $D9
+    ; de = 00 | hMapRoom
+    ; de works as offset to wIndoorARoomStatus
     ldh  a, [hMapRoom]                            ; $36C8: $F0 $F6
     ld   e, a                                     ; $36CA: $5F
     ld   d, $00                                   ; $36CB: $16 $00
+    ; if hMapId != MAP_COLOR_DUNGEON make more checks
     ldh  a, [hMapId]                              ; $36CD: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $36CF: $FE $FF
-    jr   nz, label_36D8                           ; $36D1: $20 $05
-    ld   hl, $DDE0                                ; $36D3: $21 $E0 $DD
-    jr   label_36E1                               ; $36D6: $18 $09
+    jr   nz, .checkForOffsetIncrease              ; $36D1: $20 $05
+    ; load wColorDungeonRoomStatus memory location
+    ld   hl, wColorDungeonRoomStatus              ; $36D3: $21 $E0 $DD
+    jr   .setStatus                               ; $36D6: $18 $09
 
-label_36D8::
-    cp   $1A                                      ; $36D8: $FE $1A
-    jr   nc, label_36E1                           ; $36DA: $30 $05
-    cp   $06                                      ; $36DC: $FE $06
-    jr   c, label_36E1                            ; $36DE: $38 $01
+.checkForOffsetIncrease::
+    ; do not increase d to 1 if MAP_EAGLES_TOWER > hMapId > MAP_UNKNOWN_1A
+    cp   MAP_UNKNOWN_1A                           ; $36D8: $FE $1A
+    jr   nc, .setStatus                           ; $36DA: $30 $05
+    cp   MAP_EAGLES_TOWER                         ; $36DC: $FE $06
+    jr   c, .setStatus                            ; $36DE: $38 $01
+    ; increase offset in wIndoorARoomStatus by 0x0100
     inc  d                                        ; $36E0: $14
 
-label_36E1::
+.setStatus::
+    ; wIndoorARoomStatus += offset
     add  hl, de                                   ; $36E1: $19
     pop  af                                       ; $36E2: $F1
+    ; add new status to wIndoorARoomStatus and save it
+    ; existing status will not be overridden
     or   [hl]                                     ; $36E3: $B6
     ld   [hl], a                                  ; $36E4: $77
     ldh  [hRoomStatus], a                         ; $36E5: $E0 $F8
@@ -6922,7 +6933,7 @@ data_36E8::
 
 LoadObject_OpenDoorBottom::
     ld   a, 8                                     ; $36EA: $3E $08
-    call label_36C4                               ; $36EC: $CD $C4 $36
+    call addIndoorRoomStatus                      ; $36EC: $CD $C4 $36
     push bc                                       ; $36EF: $C5
     call label_35EE                               ; $36F0: $CD $EE $35
     ld   bc, data_37E1                            ; $36F3: $01 $E1 $37
@@ -6934,7 +6945,7 @@ data_36FC::
 
 LoadObject_OpenDoorLeft::
     ld   a, $02                                   ; $36FE: $3E $02
-    call label_36C4                               ; $3700: $CD $C4 $36
+    call addIndoorRoomStatus                               ; $3700: $CD $C4 $36
     push bc                                       ; $3703: $C5
     call label_35EE                               ; $3704: $CD $EE $35
     ld   bc, data_37E4                            ; $3707: $01 $E4 $37
@@ -6946,7 +6957,7 @@ data_3710::
 
 LoadObject_OpenDoorRight::
     ld   a, $01                                   ; $3712: $3E $01
-    call label_36C4                               ; $3714: $CD $C4 $36
+    call addIndoorRoomStatus                               ; $3714: $CD $C4 $36
     push bc                                       ; $3717: $C5
     call label_35EE                               ; $3718: $CD $EE $35
     ld   bc, data_37E4                            ; $371B: $01 $E4 $37
@@ -6959,8 +6970,9 @@ data_3724::
 LoadObject_BossDoor::
     ld   e, $08                                   ; $3726: $1E $08
     call func_373F                                ; $3728: $CD $3F $37
+    ; if boss door is not open load door object
     ldh  a, [hRoomStatus]                         ; $372B: $F0 $F8
-    and  $04                                      ; $372D: $E6 $04
+    and  ROOM_STATUS_DOOR_OPENED                  ; $372D: $E6 $04
     jp   nz, LoadObject_OpenDoorTop               ; $372F: $C2 $B2 $36
     push bc                                       ; $3732: $C5
     call label_35EE                               ; $3733: $CD $EE $35
@@ -7027,7 +7039,7 @@ data_3796::
 
 LoadObject_DungeonEntrance::
     ld   a, $08                                   ; $37A2: $3E $08 ; $37A2: $3E $08
-    call label_36C4                               ; $37A4: $CD $C4 $36 ; $37A4: $CD $C4 $36
+    call addIndoorRoomStatus                               ; $37A4: $CD $C4 $36 ; $37A4: $CD $C4 $36
     push bc                                       ; $37A7: $C5 ; $37A7: $C5
     call label_35EE                               ; $37A8: $CD $EE $35 ; $37A8: $CD $EE $35
     ld   bc, data_3789                            ; $37AB: $01 $89 $37 ; $37AB: $01 $89 $37
@@ -7063,7 +7075,7 @@ LoadObject_IndoorEntrance::
 .end
 
     ld   a, $01                                   ; $37CF: $3E $01
-    call label_36C4                               ; $37D1: $CD $C4 $36
+    call addIndoorRoomStatus                               ; $37D1: $CD $C4 $36
     push bc                                       ; $37D4: $C5
     call label_35EE                               ; $37D5: $CD $EE $35
     ld   bc, data_37E1                            ; $37D8: $01 $E1 $37

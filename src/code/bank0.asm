@@ -6882,7 +6882,7 @@ data_36B0::
 
 LoadObject_OpenDoorTop::
     ld   a, $04                                   ; $36B2: $3E $04
-    call addRoomStatus                            ; $36B4: $CD $C4 $36
+    call UpdateRoomStatus                            ; $36B4: $CD $C4 $36
     push bc                                       ; $36B7: $C5
     call label_35EE                               ; $36B8: $CD $EE $35
     ld   bc, data_37E1                            ; $36BB: $01 $E1 $37
@@ -6892,7 +6892,7 @@ LoadObject_OpenDoorTop::
 ; Set hRoomStatus depending on the map and room
 ; a = new status to add
 ; f = not used, but overridden
-addRoomStatus::
+UpdateRoomStatus::
     push af                                       ; $36C4: $F5
     ld   hl, wIndoorARoomStatus                   ; $36C5: $21 $00 $D9
     ; de = 00 | hMapRoom
@@ -6933,7 +6933,7 @@ data_36E8::
 
 LoadObject_OpenDoorBottom::
     ld   a, 8                                     ; $36EA: $3E $08
-    call addRoomStatus                            ; $36EC: $CD $C4 $36
+    call UpdateRoomStatus                            ; $36EC: $CD $C4 $36
     push bc                                       ; $36EF: $C5
     call label_35EE                               ; $36F0: $CD $EE $35
     ld   bc, data_37E1                            ; $36F3: $01 $E1 $37
@@ -6945,7 +6945,7 @@ data_36FC::
 
 LoadObject_OpenDoorLeft::
     ld   a, $02                                   ; $36FE: $3E $02
-    call addRoomStatus                            ; $3700: $CD $C4 $36
+    call UpdateRoomStatus                            ; $3700: $CD $C4 $36
     push bc                                       ; $3703: $C5
     call label_35EE                               ; $3704: $CD $EE $35
     ld   bc, data_37E4                            ; $3707: $01 $E4 $37
@@ -6957,7 +6957,7 @@ data_3710::
 
 LoadObject_OpenDoorRight::
     ld   a, $01                                   ; $3712: $3E $01
-    call addRoomStatus                            ; $3714: $CD $C4 $36
+    call UpdateRoomStatus                            ; $3714: $CD $C4 $36
     push bc                                       ; $3717: $C5
     call label_35EE                               ; $3718: $CD $EE $35
     ld   bc, data_37E4                            ; $371B: $01 $E4 $37
@@ -7038,7 +7038,7 @@ data_3796::
 
 LoadObject_DungeonEntrance::
     ld   a, $08                                   ; $37A2: $3E $08 ; $37A2: $3E $08
-    call addRoomStatus                            ; $37A4: $CD $C4 $36 ; $37A4: $CD $C4 $36
+    call UpdateRoomStatus                            ; $37A4: $CD $C4 $36 ; $37A4: $CD $C4 $36
     push bc                                       ; $37A7: $C5 ; $37A7: $C5
     call label_35EE                               ; $37A8: $CD $EE $35 ; $37A8: $CD $EE $35
     ld   bc, data_3789                            ; $37AB: $01 $89 $37 ; $37AB: $01 $89 $37
@@ -7074,7 +7074,7 @@ LoadObject_IndoorEntrance::
 .end
 
     ld   a, $01                                   ; $37CF: $3E $01
-    call addRoomStatus                            ; $37D1: $CD $C4 $36
+    call UpdateRoomStatus                            ; $37D1: $CD $C4 $36
     push bc                                       ; $37D4: $C5
     call label_35EE                               ; $37D5: $CD $EE $35
     ld   bc, data_37E1                            ; $37D8: $01 $E1 $37

@@ -1,0 +1,16 @@
+# top-most EditorConfig file
+root = true
+
+# Trim trailing whitespaces, and end with a newline ending every file
+[*]
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# 4 space indentation
+[*.{asm, py}]
+indent_style = space
+indent_size = 4
+
+# Tab indentation (no size specified)
+[Makefile]
+indent_style = tab

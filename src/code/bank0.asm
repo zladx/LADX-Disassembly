@@ -4190,9 +4190,11 @@ label_27DD::
     pop  bc                                       ; $27E6: $C1
     jp   ReloadSavedBank                          ; $27E7: $C3 $1D $08
 
-label_27EA::
-    ld   a, $38                                   ; $27EA: $3E $38
+resetMusicFadeTimer::
+    ; set fade out timer to max
+    ld   a, MUSIC_FADE_OUT_TIMER_MAX              ; $27EA: $3E $38
     ldh  [hMusicFadeOutTimer], a                  ; $27EC: $E0 $A8
+    ; set fade in timer to 0
     xor  a                                        ; $27EE: $AF
     ldh  [hMusicFadeInTimer], a                   ; $27EF: $E0 $AB
     ret                                           ; $27F1: $C9

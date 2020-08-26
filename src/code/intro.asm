@@ -886,7 +886,7 @@ TitleScreenHandler::
     xor  a                                        ; $742F: $AF
     ld   [wTransitionSequenceCounter], a                               ; $7430: $EA $6B $C1
     ld   [wC16C], a                               ; $7433: $EA $6C $C1
-    call label_27EA                               ; $7436: $CD $EA $27
+    call resetMusicFadeTimer                               ; $7436: $CD $EA $27
 
 .return
     ret                                           ; $7439: $C9

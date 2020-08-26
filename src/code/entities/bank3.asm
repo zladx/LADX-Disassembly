@@ -611,7 +611,7 @@ EntityInitMarin::
     ldh  [hNextMusicTrackToFadeInto], a           ; $4A9A: $E0 $B1
     ldh  [hDefaultMusicTrack], a                  ; $4A9C: $E0 $B0
     ldh  [$FFBD], a                               ; $4A9E: $E0 $BD
-    call label_27EA                               ; $4AA0: $CD $EA $27
+    call resetMusicFadeTimer                               ; $4AA0: $CD $EA $27
 
 .mabeWeatherVaneEnd
 

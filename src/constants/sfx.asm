@@ -255,3 +255,4 @@ NOISE_SFX_EAGLE_LIFT_UP           equ $31;also eagle probably
 ; entries to be added to at least $AA
 
 LOW_HEALTH_SFX_PAUSE              equ $30 ; pause beetween low health SFX beeps
+MUSIC_FADE_OUT_TIMER_MAX          equ $38 ; reset value for hMusicFadeOutTimer

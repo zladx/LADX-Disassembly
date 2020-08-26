@@ -887,7 +887,7 @@ func_020_4A76::
     ld   a, [wRoomTransitionDirection]            ; $4A76: $FA $25 $C1
     ld   c, a                                     ; $4A79: $4F
     ld   b, $00                                   ; $4A7A: $06 $00
-    ld   a, [wC12A]                               ; $4A7C: $FA $2A $C1
+    ld   a, [wTransitionOffset]                               ; $4A7C: $FA $2A $C1
     ldh  [hScratch2], a                           ; $4A7F: $E0 $D9
     ld   hl, Data_020_49EC                        ; $4A81: $21 $EC $49
     add  hl, bc                                   ; $4A84: $09
@@ -1857,70 +1857,95 @@ func_020_54F5::
     call CopyLinkTilesPair                        ; $555C: $CD $0A $1D
     ret                                           ; $555F: $C9
 
-Data_020_5560::
-    db   $08, $08, $0A, $0A
+; amount of BG tiles to be updated for next row / coloumn
+RegionUpdateTileAmount::
+.right:  db TILES_PER_COLOUMN - 1
+.left:   db TILES_PER_COLOUMN - 1
+.up:     db TILES_PER_ROW
+.down:   db TILES_PER_ROW
 
-Data_020_5564::
-    db   $01, $FF, $F0, $10
+; I am not absolute sure about that, but it is used as an offset
+TransitionOffsetTable::
+.right:  db $01
+.left:   db $FF
+.up:     db $F0
+.down:   db $10
 
-Data_020_5568::
-    db   $00, $00, $03, $00
+RegionOriginHighOffset::
+.right:  db $00
+.left:   db $00
+.up:     db $03
+.down:   db $00
 
-Data_020_556C::
-    db   $01, $1F, $E0, $20
+RegionOriginLowOffset::
+.right:  db $01
+.left:   db $1F
+.up:     db $E0
+.down:   db $20
 
 ; Set next BG region origin, and decrement wRoomTransitionFramesBeforeMidScreen
-func_020_5570::
+UpdateBGRegionOrigin::
+    ; a = c = wRoomTransitionDirection
+    ; b = $00
+    ; e = $FF
     ld   e, $FF                                   ; $5570: $1E $FF
     ld   a, [wRoomTransitionDirection]            ; $5572: $FA $25 $C1
     ld   c, a                                     ; $5575: $4F
     ld   b, $00                                   ; $5576: $06 $00
-    and  $02                                      ; $5578: $E6 $02
-    jr   nz, jr_020_557E                          ; $557A: $20 $02
-
+    ; if direction is up or down do not override e
+    and  DIRECTION_VERTICAL_MASK                  ; $5578: $E6 $02
+    jr   nz, .updateTileAmount                    ; $557A: $20 $02
     ld   e, $DF                                   ; $557C: $1E $DF
 
-jr_020_557E:
-    ld   hl, Data_020_5560                        ; $557E: $21 $60 $55
+.updateTileAmount:
+    ld   hl, RegionUpdateTileAmount               ; $557E: $21 $60 $55
+    ; offset by direction
     add  hl, bc                                   ; $5581: $09
     ld   a, [hl]                                  ; $5582: $7E
     ld   [wBGUpdateRegionTilesCount], a           ; $5583: $EA $28 $C1
     ld   a, [wRoomTransitionFramesBeforeMidScreen]; $5586: $FA $29 $C1
+    ; if uneven frame skip transition offset addition
     and  $01                                      ; $5589: $E6 $01
-    jr   z, jr_020_5598                           ; $558B: $28 $0B
+    jr   z, .skipOffsetAddition                   ; $558B: $28 $0B
 
-    ld   hl, Data_020_5564                        ; $558D: $21 $64 $55
+    ld   hl, TransitionOffsetTable                ; $558D: $21 $64 $55
     add  hl, bc                                   ; $5590: $09
-    ld   a, [wC12A]                               ; $5591: $FA $2A $C1
+    ld   a, [wTransitionOffset]                   ; $5591: $FA $2A $C1
     add  [hl]                                     ; $5594: $86
-    ld   [wC12A], a                               ; $5595: $EA $2A $C1
+    ld   [wTransitionOffset], a                   ; $5595: $EA $2A $C1
 
-jr_020_5598:
-    ld   hl, Data_020_556C                        ; $5598: $21 $6C $55
+.skipOffsetAddition:
+    ; add offset to wBGUpdateRegionOriginLow
+    ld   hl, RegionOriginLowOffset                ; $5598: $21 $6C $55
     add  hl, bc                                   ; $559B: $09
     ld   a, [wBGUpdateRegionOriginLow]            ; $559C: $FA $27 $C1
     add  [hl]                                     ; $559F: $86
     rr   d                                        ; $55A0: $CB $1A
     and  e                                        ; $55A2: $A3
     ld   [wBGUpdateRegionOriginLow], a            ; $55A3: $EA $27 $C1
-    ld   hl, Data_020_5568                        ; $55A6: $21 $68 $55
+    ; add offset to wBGUpdateRegionOriginHigh
+    ld   hl, RegionOriginHighOffset               ; $55A6: $21 $68 $55
     add  hl, bc                                   ; $55A9: $09
     ld   a, [wBGUpdateRegionOriginHigh]           ; $55AA: $FA $26 $C1
     rl   d                                        ; $55AD: $CB $12
     adc  [hl]                                     ; $55AF: $8E
     and  $03                                      ; $55B0: $E6 $03
     ld   [wBGUpdateRegionOriginHigh], a           ; $55B2: $EA $26 $C1
+    ; decrement wRoomTransitionFramesBeforeMidScreen
     ld   a, [wRoomTransitionFramesBeforeMidScreen]; $55B5: $FA $29 $C1
     dec  a                                        ; $55B8: $3D
     ld   [wRoomTransitionFramesBeforeMidScreen], a; $55B9: $EA $29 $C1
-    jr   nz, jr_020_55C1                          ; $55BC: $20 $03
+    ; could be improved with:
+    ;   jr z, .incrementRoomTransitionState
+    ;   ret
+    ;   .incrementRoomTransitionState
+    jr   nz, .return                              ; $55BC: $20 $03
+    jp   .incrementRoomTransitionState                ; $55BE: $C3 $C2 $55
 
-    jp   label_020_55C2                           ; $55BE: $C3 $C2 $55
-
-jr_020_55C1:
+.return:
     ret                                           ; $55C1: $C9
 
-label_020_55C2:
+.incrementRoomTransitionState:
     ld   a, [wRoomTransitionState]                ; $55C2: $FA $24 $C1
     inc  a                                        ; $55C5: $3C
     ld   [wRoomTransitionState], a                ; $55C6: $EA $24 $C1

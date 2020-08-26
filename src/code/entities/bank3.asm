@@ -611,7 +611,7 @@ EntityInitMarin::
     ldh  [hNextMusicTrackToFadeInto], a           ; $4A9A: $E0 $B1
     ldh  [hDefaultMusicTrack], a                  ; $4A9C: $E0 $B0
     ldh  [$FFBD], a                               ; $4A9E: $E0 $BD
-    call resetMusicFadeTimer                               ; $4AA0: $CD $EA $27
+    call ResetMusicFadeTimer                      ; $4AA0: $CD $EA $27
 
 .mabeWeatherVaneEnd
 
@@ -9310,11 +9310,11 @@ GetVectorTowardsLink::
 
 .noSwap1
     ; e = dx > dy ? 0 : 1
-    
+
     xor  a                                        ; $7E7E: $AF
     ldh  [hScratchB], a                           ; $7E7F: $E0 $E2
     ldh  [hScratch0], a                           ; $7E81: $E0 $D7
-    
+
     ldh  a, [hScratch1]                           ; $7E83: $F0 $D8
     ld   d, a                                     ; $7E85: $57
 

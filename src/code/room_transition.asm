@@ -497,7 +497,7 @@ ENDC
 
 .jr_002_7AE2
     ldh  [hNextMusicTrackToFadeInto], a           ; $7AE2: $E0 $B1
-    call resetMusicFadeTimer                               ; $7AE4: $CD $EA $27
+    call ResetMusicFadeTimer                      ; $7AE4: $CD $EA $27
     jr   IncrementRoomTransitionStateAndReturn    ; $7AE7: $18 $4D
 
 .C1CFIsZero
@@ -555,7 +555,7 @@ jr_002_7B2A:
 SetNextMusicTrack::
     ld   a, c                                     ; $7B2D: $79
     ldh  [hNextMusicTrackToFadeInto], a           ; $7B2E: $E0 $B1
-    call resetMusicFadeTimer                               ; $7B30: $CD $EA $27
+    call ResetMusicFadeTimer                               ; $7B30: $CD $EA $27
 
 .setMusicTrack
     ld   a, c                                     ; $7B33: $79

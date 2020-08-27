@@ -15,7 +15,7 @@ Data_006_750A::
 
 SpikeTrapEntityHandler::
     ld   a, $01                                   ; $7510: $3E $01
-    ldh  [$FFBE], a                               ; $7512: $E0 $BE
+    ldh  [hFFBE], a                               ; $7512: $E0 $BE
     ld   de, Data_006_74FA                        ; $7514: $11 $FA $74
     call RenderActiveEntitySpritesPair            ; $7517: $CD $C0 $3B
     call func_006_64C6                            ; $751A: $CD $C6 $64

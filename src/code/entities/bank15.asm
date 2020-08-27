@@ -6461,9 +6461,9 @@ jr_015_749D:
     ld   [wRequests], a                           ; $74A6: $EA $00 $D6
     ld   d, $00                                   ; $74A9: $16 $00
     add  hl, de                                   ; $74AB: $19
-    ldh  a, [$FFCF]                               ; $74AC: $F0 $CF
+    ldh  a, [hFFCF]                               ; $74AC: $F0 $CF
     ld   [hl+], a                                 ; $74AE: $22
-    ldh  a, [$FFD0]                               ; $74AF: $F0 $D0
+    ldh  a, [hFFD0]                               ; $74AF: $F0 $D0
     ld   [hl+], a                                 ; $74B1: $22
     ld   a, $81                                   ; $74B2: $3E $81
     ld   [hl+], a                                 ; $74B4: $22
@@ -6486,9 +6486,9 @@ jr_015_749D:
 
 jr_015_74CB:
     ld   [hl+], a                                 ; $74CB: $22
-    ldh  a, [$FFCF]                               ; $74CC: $F0 $CF
+    ldh  a, [hFFCF]                               ; $74CC: $F0 $CF
     ld   [hl+], a                                 ; $74CE: $22
-    ldh  a, [$FFD0]                               ; $74CF: $F0 $D0
+    ldh  a, [hFFD0]                               ; $74CF: $F0 $D0
     inc  a                                        ; $74D1: $3C
     ld   [hl+], a                                 ; $74D2: $22
     ld   a, $81                                   ; $74D3: $3E $81
@@ -6519,9 +6519,9 @@ jr_015_74EF:
     ld   [hl+], a                                 ; $74EF: $22
     ld   a, $04                                   ; $74F0: $3E $04
     ld   [hl+], a                                 ; $74F2: $22
-    ldh  a, [$FFCF]                               ; $74F3: $F0 $CF
+    ldh  a, [hFFCF]                               ; $74F3: $F0 $CF
     ld   [hl+], a                                 ; $74F5: $22
-    ldh  a, [$FFD0]                               ; $74F6: $F0 $D0
+    ldh  a, [hFFD0]                               ; $74F6: $F0 $D0
     inc  a                                        ; $74F8: $3C
     ld   [hl+], a                                 ; $74F9: $22
     ld   a, $81                                   ; $74FA: $3E $81
@@ -7948,7 +7948,7 @@ func_015_7D01::
     ld   a, $02                                   ; $7D2A: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $7D2C: $EA $46 $C1
     ld   a, $12                                   ; $7D2F: $3E $12
-    ldh  [$FFA3], a                               ; $7D31: $E0 $A3
+    ldh  [hFFA3], a                               ; $7D31: $E0 $A3
     ld   a, $0C                                   ; $7D33: $3E $0C
     ldh  [hLinkPositionXIncrement], a             ; $7D35: $E0 $9A
     xor  a                                        ; $7D37: $AF

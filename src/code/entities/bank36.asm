@@ -331,7 +331,7 @@ func_036_41DF::
     ld   a, $02                                   ; $41E3: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $41E5: $EA $46 $C1
     ld   a, $E0                                   ; $41E8: $3E $E0
-    ldh  [$FFB3], a                               ; $41EA: $E0 $B3
+    ldh  [hFFB3], a                               ; $41EA: $E0 $B3
     ld   [wC145], a                               ; $41EC: $EA $45 $C1
     ld   a, $01                                   ; $41EF: $3E $01
     ld   [wD475], a                               ; $41F1: $EA $75 $D4
@@ -7663,7 +7663,7 @@ jr_036_6E3F:
 
     ld   hl, wEntitiesUnknowTableY                ; $6E57: $21 $D0 $C3
     add  hl, bc                                   ; $6E5A: $09
-    ldh  a, [$FFB9]                               ; $6E5B: $F0 $B9
+    ldh  a, [hFFB9]                               ; $6E5B: $F0 $B9
     ld   e, a                                     ; $6E5D: $5F
     sla  a                                        ; $6E5E: $CB $27
     sla  a                                        ; $6E60: $CB $27
@@ -7686,7 +7686,7 @@ jr_036_6E3F:
     call CopyEntityPositionToActivePosition       ; $6E7A: $CD $8A $3D
     ld   hl, wEntitiesPrivateState1Table          ; $6E7D: $21 $B0 $C2
     add  hl, bc                                   ; $6E80: $09
-    ldh  a, [$FFB8]                               ; $6E81: $F0 $B8
+    ldh  a, [hFFB8]                               ; $6E81: $F0 $B8
     cp   [hl]                                     ; $6E83: $BE
     jr   z, jr_036_6ECD                           ; $6E84: $28 $47
 
@@ -7739,7 +7739,7 @@ jr_036_6EC8:
     ld   [hl], b                                  ; $6ECC: $70
 
 jr_036_6ECD:
-    ldh  a, [$FFB8]                               ; $6ECD: $F0 $B8
+    ldh  a, [hFFB8]                               ; $6ECD: $F0 $B8
     ld   hl, wEntitiesPrivateState1Table          ; $6ECF: $21 $B0 $C2
     add  hl, bc                                   ; $6ED2: $09
     ld   [hl], a                                  ; $6ED3: $77

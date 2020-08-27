@@ -349,9 +349,9 @@ jr_002_5EED:
     ld   de, Data_002_5EA7                        ; $5F24: $11 $A7 $5E
 
 label_002_5F27:
-    ldh  a, [$FFCF]                               ; $5F27: $F0 $CF
+    ldh  a, [hFFCF]                               ; $5F27: $F0 $CF
     ld   [hl+], a                                 ; $5F29: $22
-    ldh  a, [$FFD0]                               ; $5F2A: $F0 $D0
+    ldh  a, [hFFD0]                               ; $5F2A: $F0 $D0
     ld   [hl+], a                                 ; $5F2C: $22
     ld   a, $81                                   ; $5F2D: $3E $81
     ld   [hl+], a                                 ; $5F2F: $22
@@ -361,9 +361,9 @@ label_002_5F27:
     ld   a, [de]                                  ; $5F33: $1A
     inc  de                                       ; $5F34: $13
     ld   [hl+], a                                 ; $5F35: $22
-    ldh  a, [$FFCF]                               ; $5F36: $F0 $CF
+    ldh  a, [hFFCF]                               ; $5F36: $F0 $CF
     ld   [hl+], a                                 ; $5F38: $22
-    ldh  a, [$FFD0]                               ; $5F39: $F0 $D0
+    ldh  a, [hFFD0]                               ; $5F39: $F0 $D0
     inc  a                                        ; $5F3B: $3C
     ld   [hl+], a                                 ; $5F3C: $22
     ld   a, $81                                   ; $5F3D: $3E $81
@@ -392,15 +392,15 @@ Data_002_5F54::
 
 func_002_5F5C::
     ld   a, $01                                   ; $5F5C: $3E $01
-    ldh  [$FFAC], a                               ; $5F5E: $E0 $AC
+    ldh  [hFFAC], a                               ; $5F5E: $E0 $AC
     ld   a, $10                                   ; $5F60: $3E $10
     ldh  [hSwordIntersectedAreaY], a                               ; $5F62: $E0 $CD
     add  $10                                      ; $5F64: $C6 $10
-    ldh  [$FFAE], a                               ; $5F66: $E0 $AE
+    ldh  [hFFAE], a                               ; $5F66: $E0 $AE
     ld   a, $80                                   ; $5F68: $3E $80
     ldh  [hSwordIntersectedAreaX], a                               ; $5F6A: $E0 $CE
     add  $08                                      ; $5F6C: $C6 $08
-    ldh  [$FFAD], a                               ; $5F6E: $E0 $AD
+    ldh  [hFFAD], a                               ; $5F6E: $E0 $AD
     swap a                                        ; $5F70: $CB $37
     and  $0F                                      ; $5F72: $E6 $0F
     ld   e, a                                     ; $5F74: $5F

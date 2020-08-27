@@ -334,7 +334,7 @@ func_005_5020::
     inc  [hl]                                     ; $5031: $34
     ld   [wMusicTrackToPlay], a                   ; $5032: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $5035: $E0 $B0
-    ldh  [$FFBD], a                               ; $5037: $E0 $BD
+    ldh  [hFFBD], a                               ; $5037: $E0 $BD
     ld   hl, wC3C8                                ; $5039: $21 $C8 $C3
     ld   [hl], $01                                ; $503C: $36 $01
 
@@ -757,7 +757,7 @@ func_005_52DB::
     ld   a, $02                                   ; $52F6: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $52F8: $EA $46 $C1
     ld   a, $12                                   ; $52FB: $3E $12
-    ldh  [$FFA3], a                               ; $52FD: $E0 $A3
+    ldh  [hFFA3], a                               ; $52FD: $E0 $A3
     ld   a, $0C                                   ; $52FF: $3E $0C
     ldh  [hLinkPositionXIncrement], a             ; $5301: $E0 $9A
     xor  a                                        ; $5303: $AF

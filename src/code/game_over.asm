@@ -26,14 +26,14 @@ LinkPassOut0Handler::
     xor  a                                        ; $4203: $AF ; $4203: $AF
     ld   [wScreenShakeHorizontal], a              ; $4204: $EA $55 $C1 ; $4204: $EA $55 $C1
     ld   [wScreenShakeVertical], a                ; $4207: $EA $56 $C1 ; $4207: $EA $56 $C1
-    ldh  a, [$FFB7]                               ; $420A: $F0 $B7 ; $420A: $F0 $B7
+    ldh  a, [hFFB7]                               ; $420A: $F0 $B7 ; $420A: $F0 $B7
     and  a                                        ; $420C: $A7 ; $420C: $A7
 
 jr_001_420D::
     jr   nz, jr_001_4259                          ; $420D: $20 $4A ; $420D: $20 $4A
 
     ld   a, $10                                   ; $420F: $3E $10 ; $420F: $3E $10
-    ldh  [$FFB7], a                               ; $4211: $E0 $B7 ; $4211: $E0 $B7
+    ldh  [hFFB7], a                               ; $4211: $E0 $B7 ; $4211: $E0 $B7
     ld   a, $01                                   ; $4213: $3E $01 ; $4213: $3E $01
     ldh  [hFF9C], a                               ; $4215: $E0 $9C ; $4215: $E0 $9C
     ld   a, $0F                                   ; $4217: $3E $0F ; $4217: $3E $0F
@@ -79,7 +79,7 @@ jr_001_4259::
     add  hl, de                                   ; $4264: $19 ; $4264: $19
     ld   a, [hl]                                  ; $4265: $7E ; $4265: $7E
     ldh  [hLinkAnimationState], a                 ; $4266: $E0 $9D ; $4266: $E0 $9D
-    ldh  a, [$FFB7]                               ; $4268: $F0 $B7 ; $4268: $F0 $B7
+    ldh  a, [hFFB7]                               ; $4268: $F0 $B7 ; $4268: $F0 $B7
     rra                                           ; $426A: $1F ; $426A: $1F
     rra                                           ; $426B: $1F ; $426B: $1F
     rra                                           ; $426C: $1F ; $426C: $1F
@@ -129,7 +129,7 @@ Data_001_42BA::
     db   $00, $04, $08, $0C, $10, $0C, $08, $04   ; $42C2 ; $42C2
 
 LinkPassOut3Handler::
-    ldh  a, [$FFB7]                               ; $42CA: $F0 $B7
+    ldh  a, [hFFB7]                               ; $42CA: $F0 $B7
     and  a                                        ; $42CC: $A7 ; $42CC: $A7
     jr   nz, jr_001_42D8                          ; $42CD: $20 $09 ; $42CD: $20 $09
 

@@ -455,13 +455,13 @@ label_018_4402:
     ld   a, $1B                                   ; $4405: $3E $1B
     ld   [wRequests], a                           ; $4407: $EA $00 $D6
     ld   hl, wRequestDestinationHigh              ; $440A: $21 $01 $D6
-    ldh  a, [$FFCF]                               ; $440D: $F0 $CF
+    ldh  a, [hFFCF]                               ; $440D: $F0 $CF
     add  $02                                      ; $440F: $C6 $02
     ld   e, a                                     ; $4411: $5F
 
 jr_018_4412:
     ld   [hl+], a                                 ; $4412: $22
-    ldh  a, [$FFD0]                               ; $4413: $F0 $D0
+    ldh  a, [hFFD0]                               ; $4413: $F0 $D0
     ld   [hl+], a                                 ; $4415: $22
     ld   a, $85                                   ; $4416: $3E $85
 
@@ -482,7 +482,7 @@ jr_018_441E:
     ld   [hl+], a                                 ; $4427: $22
     ld   a, e                                     ; $4428: $7B
     ld   [hl+], a                                 ; $4429: $22
-    ldh  a, [$FFD0]                               ; $442A: $F0 $D0
+    ldh  a, [hFFD0]                               ; $442A: $F0 $D0
     add  $01                                      ; $442C: $C6 $01
     ld   [hl+], a                                 ; $442E: $22
     ld   a, $85                                   ; $442F: $3E $85
@@ -498,7 +498,7 @@ jr_018_441E:
     ld   [hl+], a                                 ; $443D: $22
     ld   a, e                                     ; $443E: $7B
     ld   [hl+], a                                 ; $443F: $22
-    ldh  a, [$FFD0]                               ; $4440: $F0 $D0
+    ldh  a, [hFFD0]                               ; $4440: $F0 $D0
     add  $02                                      ; $4442: $C6 $02
     ld   [hl+], a                                 ; $4444: $22
     ld   a, $C5                                   ; $4445: $3E $C5
@@ -513,11 +513,11 @@ label_018_444E:
     ld   a, $1B                                   ; $4451: $3E $1B
     ld   [wRequests], a                           ; $4453: $EA $00 $D6
     ld   hl, wRequestDestinationHigh              ; $4456: $21 $01 $D6
-    ldh  a, [$FFCF]                               ; $4459: $F0 $CF
+    ldh  a, [hFFCF]                               ; $4459: $F0 $CF
     add  $02                                      ; $445B: $C6 $02
     ld   e, a                                     ; $445D: $5F
     ld   [hl+], a                                 ; $445E: $22
-    ldh  a, [$FFD0]                               ; $445F: $F0 $D0
+    ldh  a, [hFFD0]                               ; $445F: $F0 $D0
     add  $03                                      ; $4461: $C6 $03
     ld   [hl+], a                                 ; $4463: $22
     ld   a, $C5                                   ; $4464: $3E $C5
@@ -526,7 +526,7 @@ label_018_444E:
     ld   [hl+], a                                 ; $4469: $22
     ld   a, e                                     ; $446A: $7B
     ld   [hl+], a                                 ; $446B: $22
-    ldh  a, [$FFD0]                               ; $446C: $F0 $D0
+    ldh  a, [hFFD0]                               ; $446C: $F0 $D0
     add  $04                                      ; $446E: $C6 $04
     ld   [hl+], a                                 ; $4470: $22
     ld   a, $85                                   ; $4471: $3E $85
@@ -542,7 +542,7 @@ label_018_444E:
     ld   [hl+], a                                 ; $447F: $22
     ld   a, e                                     ; $4480: $7B
     ld   [hl+], a                                 ; $4481: $22
-    ldh  a, [$FFD0]                               ; $4482: $F0 $D0
+    ldh  a, [hFFD0]                               ; $4482: $F0 $D0
     add  $05                                      ; $4484: $C6 $05
     ld   [hl+], a                                 ; $4486: $22
     ld   a, $85                                   ; $4487: $3E $85
@@ -566,11 +566,11 @@ label_018_449D:
     ld   a, $15                                   ; $44A0: $3E $15
     ld   [wRequests], a                           ; $44A2: $EA $00 $D6
     ld   hl, wRequestDestinationHigh              ; $44A5: $21 $01 $D6
-    ldh  a, [$FFCF]                               ; $44A8: $F0 $CF
+    ldh  a, [hFFCF]                               ; $44A8: $F0 $CF
     add  $02                                      ; $44AA: $C6 $02
     ld   e, a                                     ; $44AC: $5F
     ld   [hl+], a                                 ; $44AD: $22
-    ldh  a, [$FFD0]                               ; $44AE: $F0 $D0
+    ldh  a, [hFFD0]                               ; $44AE: $F0 $D0
     ld   [hl+], a                                 ; $44B0: $22
     ld   a, $83                                   ; $44B1: $3E $83
     ld   [hl+], a                                 ; $44B3: $22
@@ -584,7 +584,7 @@ label_018_449D:
     ld   [hl+], a                                 ; $44BE: $22
     ld   a, e                                     ; $44BF: $7B
     ld   [hl+], a                                 ; $44C0: $22
-    ldh  a, [$FFD0]                               ; $44C1: $F0 $D0
+    ldh  a, [hFFD0]                               ; $44C1: $F0 $D0
     add  $01                                      ; $44C3: $C6 $01
     ld   [hl+], a                                 ; $44C5: $22
     ld   a, $83                                   ; $44C6: $3E $83
@@ -598,7 +598,7 @@ label_018_449D:
     ld   [hl+], a                                 ; $44D2: $22
     ld   a, e                                     ; $44D3: $7B
     ld   [hl+], a                                 ; $44D4: $22
-    ldh  a, [$FFD0]                               ; $44D5: $F0 $D0
+    ldh  a, [hFFD0]                               ; $44D5: $F0 $D0
     add  $02                                      ; $44D7: $C6 $02
     ld   [hl+], a                                 ; $44D9: $22
     ld   a, $83                                   ; $44DA: $3E $83
@@ -612,7 +612,7 @@ label_018_449D:
     ld   [hl+], a                                 ; $44E6: $22
     ld   a, e                                     ; $44E7: $7B
     ld   [hl+], a                                 ; $44E8: $22
-    ldh  a, [$FFD0]                               ; $44E9: $F0 $D0
+    ldh  a, [hFFD0]                               ; $44E9: $F0 $D0
     add  $03                                      ; $44EB: $C6 $03
     ld   [hl+], a                                 ; $44ED: $22
     ld   a, $83                                   ; $44EE: $3E $83
@@ -2674,7 +2674,7 @@ ENDC
     jr   z, jr_018_5466                           ; $541A: $28 $4A
 
     ld   a, $02                                   ; $541C: $3E $02
-    ldh  [$FFBA], a                               ; $541E: $E0 $BA
+    ldh  [hFFBA], a                               ; $541E: $E0 $BA
     ld   a, $3A                                   ; $5420: $3E $3A
     ldh  [hLinkAnimationState], a                 ; $5422: $E0 $9D
     ld   a, $02                                   ; $5424: $3E $02
@@ -2708,7 +2708,7 @@ ENDC
     ld   [hl], $04                                ; $5455: $36 $04
     call UpdateEntityYPosWithSpeed_18             ; $5457: $CD $62 $7E
     ld   a, $01                                   ; $545A: $3E $01
-    ldh  [$FFBA], a                               ; $545C: $E0 $BA
+    ldh  [hFFBA], a                               ; $545C: $E0 $BA
 
 jr_018_545E:
     ret                                           ; $545E: $C9
@@ -2731,7 +2731,7 @@ jr_018_5466:
 
 IF !__PATCH_0__
     ld   a, $00                                   ; $5475: $3E $00
-    ldh  [$FFBA], a                               ; $5477: $E0 $BA
+    ldh  [hFFBA], a                               ; $5477: $E0 $BA
 ENDC
 
 jr_018_5479:
@@ -2740,7 +2740,7 @@ IF __PATCH_0__
     cp   $1a
     ret  c
     xor  a
-    ldh  [$FFBA], a
+    ldh  [hFFBA], a
 ENDC
     ret                                           ; $5479: $C9
 
@@ -4692,7 +4692,7 @@ MarinAtTheShoreTransitionHandler::
     ld   a, MUSIC_MARIN_BEACH_TRANSITION          ; $61D1: $3E $4D
     ld   [wMusicTrackToPlay], a                   ; $61D3: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $61D6: $E0 $B0
-    ldh  [$FFBD], a                               ; $61D8: $E0 $BD
+    ldh  [hFFBD], a                               ; $61D8: $E0 $BD
     jp   IncrementEntityState                     ; $61DA: $C3 $12 $3B
 
 MarinAtTheShoreState1Handler::
@@ -4900,9 +4900,9 @@ jr_018_632D:
     ld   [wRequests], a                           ; $6336: $EA $00 $D6
     ld   d, $00                                   ; $6339: $16 $00
     add  hl, de                                   ; $633B: $19
-    ldh  a, [$FFCF]                               ; $633C: $F0 $CF
+    ldh  a, [hFFCF]                               ; $633C: $F0 $CF
     ld   [hl+], a                                 ; $633E: $22
-    ldh  a, [$FFD0]                               ; $633F: $F0 $D0
+    ldh  a, [hFFD0]                               ; $633F: $F0 $D0
     ld   [hl+], a                                 ; $6341: $22
     ld   a, $81                                   ; $6342: $3E $81
     ld   [hl+], a                                 ; $6344: $22
@@ -4910,9 +4910,9 @@ jr_018_632D:
     ld   [hl+], a                                 ; $6347: $22
     ld   a, $77                                   ; $6348: $3E $77
     ld   [hl+], a                                 ; $634A: $22
-    ldh  a, [$FFCF]                               ; $634B: $F0 $CF
+    ldh  a, [hFFCF]                               ; $634B: $F0 $CF
     ld   [hl+], a                                 ; $634D: $22
-    ldh  a, [$FFD0]                               ; $634E: $F0 $D0
+    ldh  a, [hFFD0]                               ; $634E: $F0 $D0
     inc  a                                        ; $6350: $3C
     ld   [hl+], a                                 ; $6351: $22
     ld   a, $81                                   ; $6352: $3E $81
@@ -4923,15 +4923,15 @@ jr_018_632D:
     ld   [hl+], a                                 ; $635A: $22
     ld   [hl], $00                                ; $635B: $36 $00
     ld   a, $01                                   ; $635D: $3E $01
-    ldh  [$FFAC], a                               ; $635F: $E0 $AC
+    ldh  [hFFAC], a                               ; $635F: $E0 $AC
     ldh  a, [hSwordIntersectedAreaY]              ; $6361: $F0 $CD
     and  $F0                                      ; $6363: $E6 $F0
     add  $10                                      ; $6365: $C6 $10
-    ldh  [$FFAE], a                               ; $6367: $E0 $AE
+    ldh  [hFFAE], a                               ; $6367: $E0 $AE
     ldh  a, [hSwordIntersectedAreaX]              ; $6369: $F0 $CE
     and  $F0                                      ; $636B: $E6 $F0
     add  $08                                      ; $636D: $C6 $08
-    ldh  [$FFAD], a                               ; $636F: $E0 $AD
+    ldh  [hFFAD], a                               ; $636F: $E0 $AD
     ldh  a, [hMapRoom]                            ; $6371: $F0 $F6
     ld   e, a                                     ; $6373: $5F
     ld   d, $00                                   ; $6374: $16 $00
@@ -7320,7 +7320,7 @@ TurtleRockHeadState1Handler::
     ld   a, MUSIC_TURTLE_ROCK_ENTRANCE_BOSS       ; $73B6: $3E $39
     ld   [wMusicTrackToPlay], a                   ; $73B8: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $73BB: $E0 $B0
-    ldh  [$FFBD], a                               ; $73BD: $E0 $BD
+    ldh  [hFFBD], a                               ; $73BD: $E0 $BD
     ldh  [hNextDefaultMusicTrack], a              ; $73BF: $E0 $BF
     jp   IncrementEntityState                     ; $73C1: $C3 $12 $3B
 
@@ -8364,9 +8364,9 @@ jr_018_7B2C:
     add  $0A                                      ; $7B36: $C6 $0A
     ld   [wRequests], a                           ; $7B38: $EA $00 $D6
     pop  de                                       ; $7B3B: $D1
-    ldh  a, [$FFCF]                               ; $7B3C: $F0 $CF
+    ldh  a, [hFFCF]                               ; $7B3C: $F0 $CF
     ld   [hl+], a                                 ; $7B3E: $22
-    ldh  a, [$FFD0]                               ; $7B3F: $F0 $D0
+    ldh  a, [hFFD0]                               ; $7B3F: $F0 $D0
     ld   [hl+], a                                 ; $7B41: $22
     ld   a, $81                                   ; $7B42: $3E $81
     ld   [hl+], a                                 ; $7B44: $22
@@ -8376,9 +8376,9 @@ jr_018_7B2C:
     ld   a, [de]                                  ; $7B48: $1A
     inc  de                                       ; $7B49: $13
     ld   [hl+], a                                 ; $7B4A: $22
-    ldh  a, [$FFCF]                               ; $7B4B: $F0 $CF
+    ldh  a, [hFFCF]                               ; $7B4B: $F0 $CF
     ld   [hl+], a                                 ; $7B4D: $22
-    ldh  a, [$FFD0]                               ; $7B4E: $F0 $D0
+    ldh  a, [hFFD0]                               ; $7B4E: $F0 $D0
     inc  a                                        ; $7B50: $3C
     ld   [hl+], a                                 ; $7B51: $22
     ld   a, $81                                   ; $7B52: $3E $81

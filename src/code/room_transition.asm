@@ -102,7 +102,7 @@ ApplyRoomTransition::
 
     ; Clear variables
     call ClearLinkPositionIncrement               ; $793D: $CD $8E $17
-    ldh  [$FFA3], a                               ; $7940: $E0 $A3
+    ldh  [hFFA3], a                               ; $7940: $E0 $A3
     ld   [wRoomTransitionState], a                ; $7942: $EA $24 $C1
 
     ; Save Link's initial position on the new map
@@ -538,19 +538,19 @@ jr_002_7B14:
     and  a                                        ; $7B17: $A7
     jr   z, SetNextMusicTrack                     ; $7B18: $28 $13
 
-    ldh  a, [$FFBD]                               ; $7B1A: $F0 $BD
+    ldh  a, [hFFBD]                               ; $7B1A: $F0 $BD
     cp   MUSIC_ACTIVE_POWER_UP                    ; $7B1C: $FE $49
     jr   z, SetNextMusicTrack.setMusicTrack       ; $7B1E: $28 $13
 
     call SetNextMusicTrack                        ; $7B20: $CD $2D $7B
     ld   a, MUSIC_ACTIVE_POWER_UP                 ; $7B23: $3E $49
     ldh  [hNextMusicTrackToFadeInto], a           ; $7B25: $E0 $B1
-    ldh  [$FFBD], a                               ; $7B27: $E0 $BD
+    ldh  [hFFBD], a                               ; $7B27: $E0 $BD
     ret                                           ; $7B29: $C9
 
 jr_002_7B2A:
     ld   a, c                                     ; $7B2A: $79
-    ldh  [$FFBD], a                               ; $7B2B: $E0 $BD
+    ldh  [hFFBD], a                               ; $7B2B: $E0 $BD
 
 SetNextMusicTrack::
     ld   a, c                                     ; $7B2D: $79
@@ -574,9 +574,9 @@ RoomTransitionLoadTiles::
     ld   a, [wRoomSwitchableObject]               ; $7B41: $FA $FA $D6
     cp   ROOM_SWITCHABLE_OBJECT_MOBILE_BLOCK      ; $7B44: $FE $02
     jr   nz, .mobileBlocksEnd                     ; $7B46: $20 $04
-    ; … $FFBB == 2
+    ; … hFFBB == 2
     ld   a, $02                                   ; $7B48: $3E $02
-    ldh  [$FFBB], a                               ; $7B4A: $E0 $BB
+    ldh  [hFFBB], a                               ; $7B4A: $E0 $BB
 
 .mobileBlocksEnd
 
@@ -653,8 +653,8 @@ IndoorRoomIncrement::
 .bottom db $08
 
 RoomTransitionConfigureScrollTargets::
-    ; If $FFBB == 0, return
-    ldh  a, [$FFBB]                               ; $7B7F: $F0 $BB
+    ; If hFFBB == 0, return
+    ldh  a, [hFFBB]                               ; $7B7F: $F0 $BB
     and  a                                        ; $7B81: $A7
     ret  nz                                       ; $7B82: $C0
 

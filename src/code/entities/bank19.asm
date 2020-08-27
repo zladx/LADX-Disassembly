@@ -1739,26 +1739,26 @@ jr_019_4C21:
     ld   [wDDD8], a                               ; $4C5D: $EA $D8 $DD
     ld   a, $19                                   ; $4C60: $3E $19
     call func_91D                                ; $4C62: $CD $1D $09
-    ldh  a, [$FFCF]                               ; $4C65: $F0 $CF
+    ldh  a, [hFFCF]                               ; $4C65: $F0 $CF
     ld   h, a                                     ; $4C67: $67
-    ldh  a, [$FFD0]                               ; $4C68: $F0 $D0
+    ldh  a, [hFFD0]                               ; $4C68: $F0 $D0
     ld   l, a                                     ; $4C6A: $6F
     push hl                                       ; $4C6B: $E5
     ld   de, $40                                  ; $4C6C: $11 $40 $00
     add  hl, de                                   ; $4C6F: $19
     ld   a, h                                     ; $4C70: $7C
-    ldh  [$FFCF], a                               ; $4C71: $E0 $CF
+    ldh  [hFFCF], a                               ; $4C71: $E0 $CF
     ld   a, l                                     ; $4C73: $7D
-    ldh  [$FFD0], a                               ; $4C74: $E0 $D0
+    ldh  [hFFD0], a                               ; $4C74: $E0 $D0
     ld   a, $CB                                   ; $4C76: $3E $CB
     ld   [wDDD8], a                               ; $4C78: $EA $D8 $DD
     ld   a, $19                                   ; $4C7B: $3E $19
     call func_91D                                ; $4C7D: $CD $1D $09
     pop  hl                                       ; $4C80: $E1
     ld   a, h                                     ; $4C81: $7C
-    ldh  [$FFCF], a                               ; $4C82: $E0 $CF
+    ldh  [hFFCF], a                               ; $4C82: $E0 $CF
     ld   a, l                                     ; $4C84: $7D
-    ldh  [$FFD0], a                               ; $4C85: $E0 $D0
+    ldh  [hFFD0], a                               ; $4C85: $E0 $D0
     pop  bc                                       ; $4C87: $C1
 
 jr_019_4C88:
@@ -1769,9 +1769,9 @@ jr_019_4C88:
     ld   [wRequests], a                           ; $4C91: $EA $00 $D6
     ld   d, $00                                   ; $4C94: $16 $00
     add  hl, de                                   ; $4C96: $19
-    ldh  a, [$FFCF]                               ; $4C97: $F0 $CF
+    ldh  a, [hFFCF]                               ; $4C97: $F0 $CF
     ld   [hl+], a                                 ; $4C99: $22
-    ldh  a, [$FFD0]                               ; $4C9A: $F0 $D0
+    ldh  a, [hFFD0]                               ; $4C9A: $F0 $D0
     ld   [hl+], a                                 ; $4C9C: $22
     ld   a, $83                                   ; $4C9D: $3E $83
     ld   [hl+], a                                 ; $4C9F: $22
@@ -1783,9 +1783,9 @@ jr_019_4C88:
     ld   [hl+], a                                 ; $4CA8: $22
     ld   a, $1F                                   ; $4CA9: $3E $1F
     ld   [hl+], a                                 ; $4CAB: $22
-    ldh  a, [$FFCF]                               ; $4CAC: $F0 $CF
+    ldh  a, [hFFCF]                               ; $4CAC: $F0 $CF
     ld   [hl+], a                                 ; $4CAE: $22
-    ldh  a, [$FFD0]                               ; $4CAF: $F0 $D0
+    ldh  a, [hFFD0]                               ; $4CAF: $F0 $D0
     inc  a                                        ; $4CB1: $3C
     ld   [hl+], a                                 ; $4CB2: $22
     ld   a, $83                                   ; $4CB3: $3E $83
@@ -2575,26 +2575,26 @@ FlyingRoosterState0Handler::
     ld   [wDDD8], a                               ; $523C: $EA $D8 $DD
     ld   a, $19                                   ; $523F: $3E $19
     call func_91D                                 ; $5241: $CD $1D $09
-    ldh  a, [$FFCF]                               ; $5244: $F0 $CF
+    ldh  a, [hFFCF]                               ; $5244: $F0 $CF
     ld   h, a                                     ; $5246: $67
-    ldh  a, [$FFD0]                               ; $5247: $F0 $D0
+    ldh  a, [hFFD0]                               ; $5247: $F0 $D0
     ld   l, a                                     ; $5249: $6F
     push hl                                       ; $524A: $E5
     ld   de, $40                                  ; $524B: $11 $40 $00
     add  hl, de                                   ; $524E: $19
     ld   a, h                                     ; $524F: $7C
-    ldh  [$FFCF], a                               ; $5250: $E0 $CF
+    ldh  [hFFCF], a                               ; $5250: $E0 $CF
     ld   a, l                                     ; $5252: $7D
-    ldh  [$FFD0], a                               ; $5253: $E0 $D0
+    ldh  [hFFD0], a                               ; $5253: $E0 $D0
     ld   a, $C6                                   ; $5255: $3E $C6
     ld   [wDDD8], a                               ; $5257: $EA $D8 $DD
     ld   a, $19                                   ; $525A: $3E $19
     call func_91D                                 ; $525C: $CD $1D $09
     pop  hl                                       ; $525F: $E1
     ld   a, h                                     ; $5260: $7C
-    ldh  [$FFCF], a                               ; $5261: $E0 $CF
+    ldh  [hFFCF], a                               ; $5261: $E0 $CF
     ld   a, l                                     ; $5263: $7D
-    ldh  [$FFD0], a                               ; $5264: $E0 $D0
+    ldh  [hFFD0], a                               ; $5264: $E0 $D0
     pop  bc                                       ; $5266: $C1
 
 jr_019_5267:
@@ -2605,9 +2605,9 @@ jr_019_5267:
     ld   [wRequests], a                           ; $5270: $EA $00 $D6
     ld   d, $00                                   ; $5273: $16 $00
     add  hl, de                                   ; $5275: $19
-    ldh  a, [$FFCF]                               ; $5276: $F0 $CF
+    ldh  a, [hFFCF]                               ; $5276: $F0 $CF
     ld   [hl+], a                                 ; $5278: $22
-    ldh  a, [$FFD0]                               ; $5279: $F0 $D0
+    ldh  a, [hFFD0]                               ; $5279: $F0 $D0
     ld   [hl+], a                                 ; $527B: $22
     ld   a, $83                                   ; $527C: $3E $83
     ld   [hl+], a                                 ; $527E: $22
@@ -2619,9 +2619,9 @@ jr_019_5267:
     ld   [hl+], a                                 ; $5287: $22
     ld   a, $77                                   ; $5288: $3E $77
     ld   [hl+], a                                 ; $528A: $22
-    ldh  a, [$FFCF]                               ; $528B: $F0 $CF
+    ldh  a, [hFFCF]                               ; $528B: $F0 $CF
     ld   [hl+], a                                 ; $528D: $22
-    ldh  a, [$FFD0]                               ; $528E: $F0 $D0
+    ldh  a, [hFFD0]                               ; $528E: $F0 $D0
     inc  a                                        ; $5290: $3C
     ld   [hl+], a                                 ; $5291: $22
     ld   a, $83                                   ; $5292: $3E $83
@@ -2680,26 +2680,26 @@ FlyingRoosterState1Handler::
     ld   [wDDD8], a                               ; $52F3: $EA $D8 $DD
     ld   a, $19                                   ; $52F6: $3E $19
     call func_91D                                 ; $52F8: $CD $1D $09
-    ldh  a, [$FFCF]                               ; $52FB: $F0 $CF
+    ldh  a, [hFFCF]                               ; $52FB: $F0 $CF
     ld   h, a                                     ; $52FD: $67
-    ldh  a, [$FFD0]                               ; $52FE: $F0 $D0
+    ldh  a, [hFFD0]                               ; $52FE: $F0 $D0
     ld   l, a                                     ; $5300: $6F
     push hl                                       ; $5301: $E5
     ld   de, $40                                  ; $5302: $11 $40 $00
     add  hl, de                                   ; $5305: $19
     ld   a, h                                     ; $5306: $7C
-    ldh  [$FFCF], a                               ; $5307: $E0 $CF
+    ldh  [hFFCF], a                               ; $5307: $E0 $CF
     ld   a, l                                     ; $5309: $7D
-    ldh  [$FFD0], a                               ; $530A: $E0 $D0
+    ldh  [hFFD0], a                               ; $530A: $E0 $D0
     ld   a, $5E                                   ; $530C: $3E $5E
     ld   [wDDD8], a                               ; $530E: $EA $D8 $DD
     ld   a, $19                                   ; $5311: $3E $19
     call func_91D                                 ; $5313: $CD $1D $09
     pop  hl                                       ; $5316: $E1
     ld   a, h                                     ; $5317: $7C
-    ldh  [$FFCF], a                               ; $5318: $E0 $CF
+    ldh  [hFFCF], a                               ; $5318: $E0 $CF
     ld   a, l                                     ; $531A: $7D
-    ldh  [$FFD0], a                               ; $531B: $E0 $D0
+    ldh  [hFFD0], a                               ; $531B: $E0 $D0
     pop  bc                                       ; $531D: $C1
 
 jr_019_531E:
@@ -2710,9 +2710,9 @@ jr_019_531E:
     ld   [wRequests], a                           ; $5327: $EA $00 $D6
     ld   d, $00                                   ; $532A: $16 $00
     add  hl, de                                   ; $532C: $19
-    ldh  a, [$FFCF]                               ; $532D: $F0 $CF
+    ldh  a, [hFFCF]                               ; $532D: $F0 $CF
     ld   [hl+], a                                 ; $532F: $22
-    ldh  a, [$FFD0]                               ; $5330: $F0 $D0
+    ldh  a, [hFFD0]                               ; $5330: $F0 $D0
     ld   [hl+], a                                 ; $5332: $22
     ld   a, $83                                   ; $5333: $3E $83
     ld   [hl+], a                                 ; $5335: $22
@@ -2724,9 +2724,9 @@ jr_019_531E:
     ld   [hl+], a                                 ; $533E: $22
     ld   a, $12                                   ; $533F: $3E $12
     ld   [hl+], a                                 ; $5341: $22
-    ldh  a, [$FFCF]                               ; $5342: $F0 $CF
+    ldh  a, [hFFCF]                               ; $5342: $F0 $CF
     ld   [hl+], a                                 ; $5344: $22
-    ldh  a, [$FFD0]                               ; $5345: $F0 $D0
+    ldh  a, [hFFD0]                               ; $5345: $F0 $D0
     inc  a                                        ; $5347: $3C
     ld   [hl+], a                                 ; $5348: $22
     ld   a, $83                                   ; $5349: $3E $83
@@ -3930,7 +3930,7 @@ label_019_5B3C:
     ld   a, $02                                   ; $5B4C: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $5B4E: $EA $46 $C1
     xor  a                                        ; $5B51: $AF
-    ldh  [$FFA3], a                               ; $5B52: $E0 $A3
+    ldh  [hFFA3], a                               ; $5B52: $E0 $A3
     ldh  a, [hFrameCounter]                       ; $5B54: $F0 $E7
     and  $03                                      ; $5B56: $E6 $03
     jr   nz, jr_019_5B75                          ; $5B58: $20 $1B
@@ -4136,7 +4136,7 @@ func_019_5D6A::
 ._02 dw func_019_5DAC                             ; $5D7B
 
 func_019_5D7D::
-    ldh  a, [$FFB7]                               ; $5D7D: $F0 $B7
+    ldh  a, [hFFB7]                               ; $5D7D: $F0 $B7
     and  a                                        ; $5D7F: $A7
     jr   nz, jr_019_5D8A                          ; $5D80: $20 $08
 
@@ -4152,7 +4152,7 @@ Data_019_5D8B::
     db   $00, $03, $01, $02
 
 func_019_5D8F::
-    ldh  a, [$FFB7]                               ; $5D8F: $F0 $B7
+    ldh  a, [hFFB7]                               ; $5D8F: $F0 $B7
     and  a                                        ; $5D91: $A7
     jr   nz, func_019_5D99                        ; $5D92: $20 $05
 

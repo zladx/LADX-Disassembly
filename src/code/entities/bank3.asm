@@ -416,7 +416,7 @@ SetMusicTrackIfHasSword::
 SetMusicTrack::
     ld   [wMusicTrackToPlay], a                   ; $499C: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $499F: $E0 $B0
-    ldh  [$FFBD], a                               ; $49A1: $E0 $BD
+    ldh  [hFFBD], a                               ; $49A1: $E0 $BD
     ldh  [hNextDefaultMusicTrack], a              ; $49A3: $E0 $BF
     ret                                           ; $49A5: $C9
 
@@ -610,7 +610,7 @@ EntityInitMarin::
     ld   a, MUSIC_MARIN_SINGING                   ; $4A98: $3E $2F
     ldh  [hNextMusicTrackToFadeInto], a           ; $4A9A: $E0 $B1
     ldh  [hDefaultMusicTrack], a                  ; $4A9C: $E0 $B0
-    ldh  [$FFBD], a                               ; $4A9E: $E0 $BD
+    ldh  [hFFBD], a                               ; $4A9E: $E0 $BD
     call ResetMusicFadeTimer                      ; $4AA0: $CD $EA $27
 
 .mabeWeatherVaneEnd
@@ -1949,9 +1949,9 @@ label_003_51F5:
     add  $0A                                      ; $5202: $C6 $0A
     ld   [wRequests], a                           ; $5204: $EA $00 $D6
     pop  de                                       ; $5207: $D1
-    ldh  a, [$FFCF]                               ; $5208: $F0 $CF
+    ldh  a, [hFFCF]                               ; $5208: $F0 $CF
     ld   [hl+], a                                 ; $520A: $22
-    ldh  a, [$FFD0]                               ; $520B: $F0 $D0
+    ldh  a, [hFFD0]                               ; $520B: $F0 $D0
     ld   [hl+], a                                 ; $520D: $22
     ld   a, $81                                   ; $520E: $3E $81
     ld   [hl+], a                                 ; $5210: $22
@@ -1961,9 +1961,9 @@ label_003_51F5:
     ld   a, [de]                                  ; $5214: $1A
     inc  de                                       ; $5215: $13
     ld   [hl+], a                                 ; $5216: $22
-    ldh  a, [$FFCF]                               ; $5217: $F0 $CF
+    ldh  a, [hFFCF]                               ; $5217: $F0 $CF
     ld   [hl+], a                                 ; $5219: $22
-    ldh  a, [$FFD0]                               ; $521A: $F0 $D0
+    ldh  a, [hFFD0]                               ; $521A: $F0 $D0
     inc  a                                        ; $521C: $3C
     ld   [hl+], a                                 ; $521D: $22
     ld   a, $81                                   ; $521E: $3E $81
@@ -4765,7 +4765,7 @@ jr_003_6400:
     ld   a, MUSIC_POWERUP_ACQUIRED                ; $6413: $3E $27
     ld   [wMusicTrackToPlay], a                   ; $6415: $EA $68 $D3
     ld   a, MUSIC_ACTIVE_POWER_UP                 ; $6418: $3E $49
-    ldh  [$FFBD], a                               ; $641A: $E0 $BD
+    ldh  [hFFBD], a                               ; $641A: $E0 $BD
     ldh  [hNextDefaultMusicTrack], a              ; $641C: $E0 $BF
 
 func_003_641E::
@@ -6162,7 +6162,7 @@ ApplyLinkCollisionWithEnemy::
     and  a                                        ; $6D02: $A7
     jr   z, .goombaEnd                            ; $6D03: $28 $38
 
-    ldh  a, [$FFB7]                               ; $6D05: $F0 $B7
+    ldh  a, [hFFB7]                               ; $6D05: $F0 $B7
     and  a                                        ; $6D07: $A7
     jr   nz, .jr_003_6D1B                         ; $6D08: $20 $11
 
@@ -6170,7 +6170,7 @@ ApplyLinkCollisionWithEnemy::
     and  a                                        ; $6D0C: $A7
     jr   nz, .jr_003_6D15                         ; $6D0D: $20 $06
 
-    ldh  a, [$FFA3]                               ; $6D0F: $F0 $A3
+    ldh  a, [hFFA3]                               ; $6D0F: $F0 $A3
     xor  $80                                      ; $6D11: $EE $80
     jr   .jr_003_6D17                             ; $6D13: $18 $02
 
@@ -6183,7 +6183,7 @@ ApplyLinkCollisionWithEnemy::
 
 .jr_003_6D1B
     ld   a, $02                                   ; $6D1B: $3E $02
-    ldh  [$FFB7], a                               ; $6D1D: $E0 $B7
+    ldh  [hFFB7], a                               ; $6D1D: $E0 $B7
     ld   hl, wEntitiesStateTable                  ; $6D1F: $21 $90 $C2
     add  hl, bc                                   ; $6D22: $09
     ld   [hl], $02                                ; $6D23: $36 $02
@@ -6196,7 +6196,7 @@ ApplyLinkCollisionWithEnemy::
     jr   nz, .jr_003_6D38                         ; $6D31: $20 $05
 
     ld   a, $10                                   ; $6D33: $3E $10
-    ldh  [$FFA3], a                               ; $6D35: $E0 $A3
+    ldh  [hFFA3], a                               ; $6D35: $E0 $A3
     ret                                           ; $6D37: $C9
 
 .jr_003_6D38
@@ -7698,7 +7698,7 @@ jr_003_758B:
     xor  a                                        ; $758D: $AF
     ldh  [hLinkPositionYIncrement], a             ; $758E: $E0 $9B
     ld   a, $30                                   ; $7590: $3E $30
-    ldh  [$FFA3], a                               ; $7592: $E0 $A3
+    ldh  [hFFA3], a                               ; $7592: $E0 $A3
     ld   a, JINGLE_HUGE_BUMP                      ; $7594: $3E $0B
     ldh  [hJingle], a                             ; $7596: $E0 $F2
     ret                                           ; $7598: $C9
@@ -8540,7 +8540,7 @@ jr_003_7A47:
 
     ldh  a, [hObjectUnderEntity]                  ; $7A4C: $F0 $AF
     ld   [wC503], a                               ; $7A4E: $EA $03 $C5
-    ldh  a, [$FFBE]                               ; $7A51: $F0 $BE
+    ldh  a, [hFFBE]                               ; $7A51: $F0 $BE
     and  a                                        ; $7A53: $A7
     jr   nz, jr_003_7A5D                          ; $7A54: $20 $07
 
@@ -8568,7 +8568,7 @@ jr_003_7A6E:
 
     ldh  a, [hObjectUnderEntity]                  ; $7A73: $F0 $AF
     ld   [wC50D], a                               ; $7A75: $EA $0D $C5
-    ldh  a, [$FFBE]                               ; $7A78: $F0 $BE
+    ldh  a, [hFFBE]                               ; $7A78: $F0 $BE
     and  a                                        ; $7A7A: $A7
     jr   nz, jr_003_7A84                          ; $7A7B: $20 $07
 

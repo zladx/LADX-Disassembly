@@ -199,7 +199,7 @@ func_005_546C::
 
 jr_005_5483:
     ld   a, $01                                   ; $5483: $3E $01
-    ldh  [hFFB2], a                               ; $5485: $E0 $B2
+    ldh  [slowWalkingSpeed], a                               ; $5485: $E0 $B2
 
 jr_005_5487:
     call CopyEntityPositionToActivePosition       ; $5487: $CD $8A $3D

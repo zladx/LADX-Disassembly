@@ -76,7 +76,7 @@ WorldMapState1Handler::
     ld   [wC16C], a                               ; $5697: $EA $6C $C1
     ldh  [hBaseScrollX], a                        ; $569A: $E0 $96
     ld   [wScrollXOffset], a                               ; $569C: $EA $BF $C1
-    ldh  [$FF97], a                               ; $569F: $E0 $97
+    ldh  [hBaseScrollY], a                               ; $569F: $E0 $97
     ld   [wInventoryAppearing], a                 ; $56A1: $EA $4F $C1
     ld   [wC1B2], a                               ; $56A4: $EA $B2 $C1
     ld   [wC1B3], a                               ; $56A7: $EA $B3 $C1

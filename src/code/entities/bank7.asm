@@ -2724,9 +2724,9 @@ jr_007_51F2:
     ld   [wRequests], a                           ; $51FB: $EA $00 $D6
     ld   d, $00                                   ; $51FE: $16 $00
     add  hl, de                                   ; $5200: $19
-    ldh  a, [$FFCF]                               ; $5201: $F0 $CF
+    ldh  a, [hFFCF]                               ; $5201: $F0 $CF
     ld   [hl+], a                                 ; $5203: $22
-    ldh  a, [$FFD0]                               ; $5204: $F0 $D0
+    ldh  a, [hFFD0]                               ; $5204: $F0 $D0
     ld   [hl+], a                                 ; $5206: $22
     ld   a, $81                                   ; $5207: $3E $81
     ld   [hl+], a                                 ; $5209: $22
@@ -2734,9 +2734,9 @@ jr_007_51F2:
     ld   [hl+], a                                 ; $520C: $22
     ld   a, $12                                   ; $520D: $3E $12
     ld   [hl+], a                                 ; $520F: $22
-    ldh  a, [$FFCF]                               ; $5210: $F0 $CF
+    ldh  a, [hFFCF]                               ; $5210: $F0 $CF
     ld   [hl+], a                                 ; $5212: $22
-    ldh  a, [$FFD0]                               ; $5213: $F0 $D0
+    ldh  a, [hFFD0]                               ; $5213: $F0 $D0
     inc  a                                        ; $5215: $3C
     ld   [hl+], a                                 ; $5216: $22
     ld   a, $81                                   ; $5217: $3E $81
@@ -4004,9 +4004,9 @@ jr_007_5A5F:
     ld   [wRequests], a                           ; $5A68: $EA $00 $D6
     ld   d, $00                                   ; $5A6B: $16 $00
     add  hl, de                                   ; $5A6D: $19
-    ldh  a, [$FFCF]                               ; $5A6E: $F0 $CF
+    ldh  a, [hFFCF]                               ; $5A6E: $F0 $CF
     ld   [hl+], a                                 ; $5A70: $22
-    ldh  a, [$FFD0]                               ; $5A71: $F0 $D0
+    ldh  a, [hFFD0]                               ; $5A71: $F0 $D0
     ld   [hl+], a                                 ; $5A73: $22
     ld   a, $81                                   ; $5A74: $3E $81
     ld   [hl+], a                                 ; $5A76: $22
@@ -4014,9 +4014,9 @@ jr_007_5A5F:
     ld   [hl+], a                                 ; $5A79: $22
     ld   a, $1C                                   ; $5A7A: $3E $1C
     ld   [hl+], a                                 ; $5A7C: $22
-    ldh  a, [$FFCF]                               ; $5A7D: $F0 $CF
+    ldh  a, [hFFCF]                               ; $5A7D: $F0 $CF
     ld   [hl+], a                                 ; $5A7F: $22
-    ldh  a, [$FFD0]                               ; $5A80: $F0 $D0
+    ldh  a, [hFFD0]                               ; $5A80: $F0 $D0
     inc  a                                        ; $5A82: $3C
     ld   [hl+], a                                 ; $5A83: $22
     ld   a, $81                                   ; $5A84: $3E $81
@@ -5048,7 +5048,7 @@ jr_007_6104:
     jr   nz, jr_007_6133                          ; $6108: $20 $29
 
 IF __PATCH_0__
-    ldh  a, [$FFBA]
+    ldh  a, [hFFBA]
     and  a
     jr   nz, jr_007_6133
 ENDC
@@ -5347,9 +5347,9 @@ jr_007_62A2:
     ld   [wRequests], a                           ; $62AB: $EA $00 $D6
     ld   d, $00                                   ; $62AE: $16 $00
     add  hl, de                                   ; $62B0: $19
-    ldh  a, [$FFCF]                               ; $62B1: $F0 $CF
+    ldh  a, [hFFCF]                               ; $62B1: $F0 $CF
     ld   [hl+], a                                 ; $62B3: $22
-    ldh  a, [$FFD0]                               ; $62B4: $F0 $D0
+    ldh  a, [hFFD0]                               ; $62B4: $F0 $D0
     ld   [hl+], a                                 ; $62B6: $22
     ld   a, $81                                   ; $62B7: $3E $81
     ld   [hl+], a                                 ; $62B9: $22
@@ -5357,9 +5357,9 @@ jr_007_62A2:
     ld   [hl+], a                                 ; $62BC: $22
     ld   a, $54                                   ; $62BD: $3E $54
     ld   [hl+], a                                 ; $62BF: $22
-    ldh  a, [$FFCF]                               ; $62C0: $F0 $CF
+    ldh  a, [hFFCF]                               ; $62C0: $F0 $CF
     ld   [hl+], a                                 ; $62C2: $22
-    ldh  a, [$FFD0]                               ; $62C3: $F0 $D0
+    ldh  a, [hFFD0]                               ; $62C3: $F0 $D0
     inc  a                                        ; $62C5: $3C
     ld   [hl+], a                                 ; $62C6: $22
     ld   a, $81                                   ; $62C7: $3E $81
@@ -5397,9 +5397,9 @@ jr_007_62EC:
     ld   [wRequests], a                           ; $62F5: $EA $00 $D6
     ld   d, $00                                   ; $62F8: $16 $00
     add  hl, de                                   ; $62FA: $19
-    ldh  a, [$FFCF]                               ; $62FB: $F0 $CF
+    ldh  a, [hFFCF]                               ; $62FB: $F0 $CF
     ld   [hl+], a                                 ; $62FD: $22
-    ldh  a, [$FFD0]                               ; $62FE: $F0 $D0
+    ldh  a, [hFFD0]                               ; $62FE: $F0 $D0
     ld   [hl+], a                                 ; $6300: $22
     ld   a, $81                                   ; $6301: $3E $81
     ld   [hl+], a                                 ; $6303: $22
@@ -5407,9 +5407,9 @@ jr_007_62EC:
     ld   [hl+], a                                 ; $6306: $22
     ld   a, $7E                                   ; $6307: $3E $7E
     ld   [hl+], a                                 ; $6309: $22
-    ldh  a, [$FFCF]                               ; $630A: $F0 $CF
+    ldh  a, [hFFCF]                               ; $630A: $F0 $CF
     ld   [hl+], a                                 ; $630C: $22
-    ldh  a, [$FFD0]                               ; $630D: $F0 $D0
+    ldh  a, [hFFD0]                               ; $630D: $F0 $D0
     inc  a                                        ; $630F: $3C
     ld   [hl+], a                                 ; $6310: $22
     ld   a, $81                                   ; $6311: $3E $81
@@ -7640,7 +7640,7 @@ jr_007_70E0:
     ld   a, $02                                   ; $70FA: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $70FC: $EA $46 $C1
     ld   a, $13                                   ; $70FF: $3E $13
-    ldh  [$FFA3], a                               ; $7101: $E0 $A3
+    ldh  [hFFA3], a                               ; $7101: $E0 $A3
     ld   a, $08                                   ; $7103: $3E $08
     ld   [wSubtractHealthBuffer], a               ; $7105: $EA $94 $DB
     ld   a, $20                                   ; $7108: $3E $20
@@ -7840,12 +7840,12 @@ jr_007_721D:
     ld   e, $09                                   ; $7231: $1E $09
 
 func_007_7233::
-    ldh  a, [$FFCF]                               ; $7233: $F0 $CF
+    ldh  a, [hFFCF]                               ; $7233: $F0 $CF
     ld   [hl+], a                                 ; $7235: $22
-    ldh  a, [$FFD0]                               ; $7236: $F0 $D0
+    ldh  a, [hFFD0]                               ; $7236: $F0 $D0
     ld   [hl+], a                                 ; $7238: $22
     inc  a                                        ; $7239: $3C
-    ldh  [$FFD0], a                               ; $723A: $E0 $D0
+    ldh  [hFFD0], a                               ; $723A: $E0 $D0
     ld   a, $81                                   ; $723C: $3E $81
     ld   [hl+], a                                 ; $723E: $22
     ld   a, e                                     ; $723F: $7B

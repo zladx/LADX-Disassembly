@@ -189,7 +189,7 @@ jr_020_462F:
     ld   l, a                                     ; $4631: $6F
     ld   h, $5E                                   ; $4632: $26 $5E
     ld   a, [wD6FB]                               ; $4634: $FA $FB $D6
-    ldh  [$FFBB], a                               ; $4637: $E0 $BB
+    ldh  [hFFBB], a                               ; $4637: $E0 $BB
     ld   [wRoomSwitchableObject], a               ; $4639: $EA $FA $D6
     pop  de                                       ; $463C: $D1
     ld   a, $2D                                   ; $463D: $3E $2D
@@ -580,9 +580,9 @@ func_020_4898::
     ld   d, $00                                   ; $48A5: $16 $00
     add  hl, de                                   ; $48A7: $19
     pop  de                                       ; $48A8: $D1
-    ldh  a, [$FFCF]                               ; $48A9: $F0 $CF
+    ldh  a, [hFFCF]                               ; $48A9: $F0 $CF
     ld   [hl+], a                                 ; $48AB: $22
-    ldh  a, [$FFD0]                               ; $48AC: $F0 $D0
+    ldh  a, [hFFD0]                               ; $48AC: $F0 $D0
     ld   [hl+], a                                 ; $48AE: $22
     ld   a, $81                                   ; $48AF: $3E $81
     ld   [hl+], a                                 ; $48B1: $22
@@ -592,9 +592,9 @@ func_020_4898::
     ld   a, [de]                                  ; $48B5: $1A
     inc  de                                       ; $48B6: $13
     ld   [hl+], a                                 ; $48B7: $22
-    ldh  a, [$FFCF]                               ; $48B8: $F0 $CF
+    ldh  a, [hFFCF]                               ; $48B8: $F0 $CF
     ld   [hl+], a                                 ; $48BA: $22
-    ldh  a, [$FFD0]                               ; $48BB: $F0 $D0
+    ldh  a, [hFFD0]                               ; $48BB: $F0 $D0
     inc  a                                        ; $48BD: $3C
     ld   [hl+], a                                 ; $48BE: $22
     ld   a, $81                                   ; $48BF: $3E $81
@@ -1291,7 +1291,7 @@ ResetRoomVariables::
     ld   [wC1C6], a                               ; $4CB5: $EA $C6 $C1
     ld   [wRoomSwitchableObject], a               ; $4CB8: $EA $FA $D6
     ld   [wC50A], a                               ; $4CBB: $EA $0A $C5
-    ldh  [$FFAC], a                               ; $4CBE: $E0 $AC
+    ldh  [hFFAC], a                               ; $4CBE: $E0 $AC
     ld   [wC113], a                               ; $4CC0: $EA $13 $C1
     ld   [wD460], a                               ; $4CC3: $EA $60 $D4
     ld   [wInBossBattle], a                       ; $4CC6: $EA $BE $C1

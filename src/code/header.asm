@@ -73,7 +73,7 @@ CopyTilesToPieceOfHeartMeter::
     ld   bc, $30
     call CopyData
     xor  a
-    ldh  [$FF90], a
+    ldh  [hNeedsUpdatingBGTiles], a
     ldh  [hBGTilesLoadingStage], a
 .restoreBank0C
     ld   a, $0C

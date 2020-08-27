@@ -29,7 +29,7 @@ MovingBlockLeftTopState0Handler::
     jp   IncrementEntityState                     ; $4124: $C3 $12 $3B
 
 MovingBlockLeftTopState1Handler::
-    ldh  a, [$FFBA]                               ; $4127: $F0 $BA
+    ldh  a, [hFFBA]                               ; $4127: $F0 $BA
     cp   $02                                      ; $4129: $FE $02
     jr   z, jr_015_416F                           ; $412B: $28 $42
 
@@ -180,7 +180,7 @@ MovingBlockLeftBottomState0Handler::
     jp   IncrementEntityState                     ; $41EE: $C3 $12 $3B
 
 MovingBlockLeftBottomState1Handler::
-    ldh  a, [$FFBA]                               ; $41F1: $F0 $BA
+    ldh  a, [hFFBA]                               ; $41F1: $F0 $BA
     cp   $02                                      ; $41F3: $FE $02
     jr   z, jr_015_4239                           ; $41F5: $28 $42
 
@@ -265,7 +265,7 @@ MovingBlockBottomLeftState0Handler::
     jp   IncrementEntityState                     ; $4260: $C3 $12 $3B
 
 MovingBlockBottomLeftState1Handler::
-    ldh  a, [$FFBA]                               ; $4263: $F0 $BA
+    ldh  a, [hFFBA]                               ; $4263: $F0 $BA
     cp   $02                                      ; $4265: $FE $02
     jr   z, jr_015_42AB                           ; $4267: $28 $42
 
@@ -350,7 +350,7 @@ MovingBlockBottomRightState0Handler::
     jp   IncrementEntityState                     ; $42D2: $C3 $12 $3B
 
 MovingBlockBottomRightState1Handler::
-    ldh  a, [$FFBA]                               ; $42D5: $F0 $BA
+    ldh  a, [hFFBA]                               ; $42D5: $F0 $BA
     cp   $02                                      ; $42D7: $FE $02
     jr   z, jr_015_431D                           ; $42D9: $28 $42
 

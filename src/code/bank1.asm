@@ -368,7 +368,7 @@ jr_001_531D::
     ld   [wGameplaySubtype], a                    ; $5323: $EA $96 $DB
     xor  a                                        ; $5326: $AF
     ld   [wLinkMotionState], a                    ; $5327: $EA $1C $C1
-    ldh  [$FF9C], a                               ; $532A: $E0 $9C
+    ldh  [hFF9C], a                               ; $532A: $E0 $9C
     ld   [wAddHealthBuffer], a                    ; $532C: $EA $93 $DB
     ld   [wSubtractHealthBuffer], a               ; $532F: $EA $94 $DB
     ld   [wAddRupeeBufferLow], a                  ; $5332: $EA $90 $DB
@@ -778,7 +778,7 @@ jr_001_5854::
     ld   [wC50A], a                               ; $585A: $EA $0A $C5
     ld   [wC116], a                               ; $585D: $EA $16 $C1
     ldh  [hBaseScrollX], a                        ; $5860: $E0 $96
-    ldh  [$FF97], a                               ; $5862: $E0 $97
+    ldh  [hBaseScrollY], a                               ; $5862: $E0 $97
     ld   [wC167], a                               ; $5864: $EA $67 $C1
     ld   a, $07                                   ; $5867: $3E $07
     ldh  [hVolumeRight], a                      ; $5869: $E0 $A9
@@ -1268,7 +1268,7 @@ label_001_5D53::
     add  hl, de                                   ; $5D61: $19
     push de                                       ; $5D62: $D5
     ld   bc, Data_001_5D14                        ; $5D63: $01 $14 $5D
-    ldh  a, [$FFDB]                               ; $5D66: $F0 $DB
+    ldh  a, [hScratch4]                               ; $5D66: $F0 $DB
     and  a                                        ; $5D68: $A7
     jr   z, jr_001_5D75                           ; $5D69: $28 $0A
     ld   bc, Data_001_5D29                        ; $5D6B: $01 $29 $5D
@@ -2246,12 +2246,12 @@ func_001_6162::
     ld   [rBGP], a                                ; $6175: $E0 $47
     ld   [rOBP0], a                               ; $6177: $E0 $48
     ld   [rOBP1], a                               ; $6179: $E0 $49
-    ldh  [$FF97], a                               ; $617B: $E0 $97
+    ldh  [hBaseScrollY], a                               ; $617B: $E0 $97
     ldh  [hBaseScrollX], a                        ; $617D: $E0 $96
     ld   [wD6FB], a                               ; $617F: $EA $FB $D6
     ld   [$D6F8], a                               ; $6182: $EA $F8 $D6
     ld   a, $18                                   ; $6185: $3E $18
-    ldh  [$FFB5], a                               ; $6187: $E0 $B5
+    ldh  [hButtonsInactiveDelay], a                               ; $6187: $E0 $B5
     ret                                           ; $6189: $C9
 
 Data_001_618A::
@@ -2415,7 +2415,7 @@ jr_001_6885::
     ld   [wWindowY], a                            ; $688B: $EA $9A $DB
     xor  a                                        ; $688E: $AF
     ldh  [hBaseScrollX], a                        ; $688F: $E0 $96
-    ldh  [$FF97], a                               ; $6891: $E0 $97
+    ldh  [hBaseScrollY], a                               ; $6891: $E0 $97
     ld   [wTransitionSequenceCounter], a                               ; $6893: $EA $6B $C1
     ld   [wC16C], a                               ; $6896: $EA $6C $C1
     ld   e, $08                                   ; $6899: $1E $08

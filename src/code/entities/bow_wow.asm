@@ -135,7 +135,7 @@ func_005_40E6::
 
     ldh  a, [hLinkPositionX]                      ; $40F0: $F0 $98
     ldh  [hScratch0], a                           ; $40F2: $E0 $D7
-    ldh  a, [$FFB3]                               ; $40F4: $F0 $B3
+    ldh  a, [hFFB3]                               ; $40F4: $F0 $B3
     ldh  [hScratch1], a                           ; $40F6: $E0 $D8
     jr   jr_005_4129                              ; $40F8: $18 $2F
 
@@ -699,7 +699,7 @@ func_005_43FE::
     ldh  a, [hLinkPositionYIncrement]             ; $4406: $F0 $9B
     ld   hl, hLinkPositionXIncrement              ; $4408: $21 $9A $FF
     or   [hl]                                     ; $440B: $B6
-    ld   hl, $FFA3                                ; $440C: $21 $A3 $FF
+    ld   hl, hFFA3                                ; $440C: $21 $A3 $FF
     or   [hl]                                     ; $440F: $B6
     jp   z, jr_005_44CA                           ; $4410: $CA $CA $44
 

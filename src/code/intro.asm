@@ -85,7 +85,7 @@ IntroHandlerEntryPoint::
     xor  a                                        ; $6E97: $AF
     ld   [wGameplaySubtype], a                    ; $6E98: $EA $96 $DB
     ldh  [hBaseScrollX], a                        ; $6E9B: $E0 $96
-    ldh  [$FF97], a                               ; $6E9D: $E0 $97
+    ldh  [hBaseScrollY], a                               ; $6E9D: $E0 $97
     ld   [rBGP], a                                ; $6E9F: $E0 $47
     ld   [wBGPalette], a                          ; $6EA1: $EA $97 $DB
     ld   hl, wGameplayType                        ; $6EA4: $21 $95 $DB
@@ -912,7 +912,7 @@ IntroStageDHandler::
     ld   [wOBJ0Palette], a                        ; $7459: $EA $98 $DB
     xor  a                                        ; $745C: $AF
     ldh  [hBaseScrollX], a                        ; $745D: $E0 $96
-    ldh  [$FF97], a                               ; $745F: $E0 $97
+    ldh  [hBaseScrollY], a                               ; $745F: $E0 $97
     dec  a                                        ; $7461: $3D
     ld   [wD018], a                               ; $7462: $EA $18 $D0
     ret                                           ; $7465: $C9
@@ -1960,10 +1960,10 @@ InertLinkState2Handler::
     ld   [wEntitiesPosYTable+1], a                               ; $7A93: $EA $11 $C2
 
 .jr_7A96
-    ldh  a, [$FF97]                               ; $7A96: $F0 $97
+    ldh  a, [hBaseScrollY]                               ; $7A96: $F0 $97
     push af                                       ; $7A98: $F5
     dec  a                                        ; $7A99: $3D
-    ldh  [$FF97], a                               ; $7A9A: $E0 $97
+    ldh  [hBaseScrollY], a                               ; $7A9A: $E0 $97
     pop  af                                       ; $7A9C: $F1
     and  $07                                      ; $7A9D: $E6 $07
     jr   nz, .return                              ; $7A9F: $20 $11

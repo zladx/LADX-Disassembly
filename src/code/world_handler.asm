@@ -132,7 +132,7 @@ jr_001_4414::
     ld   hl, hFrameCounter                        ; $441C: $21 $E7 $FF
     or   [hl]                                     ; $441F: $B6
     and  $03                                      ; $4420: $E6 $03
-    ldh  [$FFB9], a                               ; $4422: $E0 $B9
+    ldh  [hFFB9], a                               ; $4422: $E0 $B9
     ret                                           ; $4424: $C9
 
 jr_001_4425::
@@ -257,7 +257,7 @@ GameplayWorldSubtype3Handler::
     and  a                                        ; $44EE: $A7
     jr   z, jr_001_44F5                           ; $44EF: $28 $04
     ld   a, $03                                   ; $44F1: $3E $03
-    ldh  [$FFA5], a                               ; $44F3: $E0 $A5
+    ldh  [hFFA5], a                               ; $44F3: $E0 $A5
 
 jr_001_44F5::
     call IncrementGameplaySubtype                 ; $44F5: $CD $D6 $44
@@ -420,7 +420,7 @@ label_001_4555::
     xor  a                                        ; $464D: $AF
     ld   [wGameplaySubtype], a                    ; $464E: $EA $96 $DB
     xor  a                                        ; $4651: $AF
-    ldh  [$FF97], a                               ; $4652: $E0 $97
+    ldh  [hBaseScrollY], a                               ; $4652: $E0 $97
     ldh  [hBaseScrollX], a                        ; $4654: $E0 $96
     ld   a, $00                                   ; $4656: $3E $00
     ld   [wBGPalette], a                          ; $4658: $EA $97 $DB

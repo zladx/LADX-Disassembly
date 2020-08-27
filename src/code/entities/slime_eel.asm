@@ -114,47 +114,47 @@ jr_005_6D7E:
     jr   z, jr_005_6DFD                           ; $6DB1: $28 $4A
 
     push bc                                       ; $6DB3: $C5
-    ldh  a, [$FFCF]                               ; $6DB4: $F0 $CF
+    ldh  a, [hFFCF]                               ; $6DB4: $F0 $CF
     ld   h, a                                     ; $6DB6: $67
-    ldh  a, [$FFD0]                               ; $6DB7: $F0 $D0
+    ldh  a, [hFFD0]                               ; $6DB7: $F0 $D0
     ld   l, a                                     ; $6DB9: $6F
     push hl                                       ; $6DBA: $E5
     inc  l                                        ; $6DBB: $2C
     ld   a, l                                     ; $6DBC: $7D
-    ldh  [$FFD0], a                               ; $6DBD: $E0 $D0
+    ldh  [hFFD0], a                               ; $6DBD: $E0 $D0
     push hl                                       ; $6DBF: $E5
     ld   a, $AF                                   ; $6DC0: $3E $AF
     ld   [wDDD8], a                               ; $6DC2: $EA $D8 $DD
     ld   a, $05                                   ; $6DC5: $3E $05
     call func_91D                                ; $6DC7: $CD $1D $09
-    ldh  a, [$FFD0]                               ; $6DCA: $F0 $D0
+    ldh  a, [hFFD0]                               ; $6DCA: $F0 $D0
     inc  a                                        ; $6DCC: $3C
     inc  a                                        ; $6DCD: $3C
-    ldh  [$FFD0], a                               ; $6DCE: $E0 $D0
+    ldh  [hFFD0], a                               ; $6DCE: $E0 $D0
     ld   a, $05                                   ; $6DD0: $3E $05
     call func_91D                                ; $6DD2: $CD $1D $09
     pop  hl                                       ; $6DD5: $E1
     ld   de, $40                                  ; $6DD6: $11 $40 $00
     add  hl, de                                   ; $6DD9: $19
     ld   a, h                                     ; $6DDA: $7C
-    ldh  [$FFCF], a                               ; $6DDB: $E0 $CF
+    ldh  [hFFCF], a                               ; $6DDB: $E0 $CF
     ld   a, l                                     ; $6DDD: $7D
-    ldh  [$FFD0], a                               ; $6DDE: $E0 $D0
+    ldh  [hFFD0], a                               ; $6DDE: $E0 $D0
     ld   a, $B0                                   ; $6DE0: $3E $B0
     ld   [wDDD8], a                               ; $6DE2: $EA $D8 $DD
     ld   a, $05                                   ; $6DE5: $3E $05
     call func_91D                                ; $6DE7: $CD $1D $09
-    ldh  a, [$FFD0]                               ; $6DEA: $F0 $D0
+    ldh  a, [hFFD0]                               ; $6DEA: $F0 $D0
     inc  a                                        ; $6DEC: $3C
     inc  a                                        ; $6DED: $3C
-    ldh  [$FFD0], a                               ; $6DEE: $E0 $D0
+    ldh  [hFFD0], a                               ; $6DEE: $E0 $D0
     ld   a, $05                                   ; $6DF0: $3E $05
     call func_91D                                ; $6DF2: $CD $1D $09
     pop  hl                                       ; $6DF5: $E1
     ld   a, h                                     ; $6DF6: $7C
-    ldh  [$FFCF], a                               ; $6DF7: $E0 $CF
+    ldh  [hFFCF], a                               ; $6DF7: $E0 $CF
     ld   a, l                                     ; $6DF9: $7D
-    ldh  [$FFD0], a                               ; $6DFA: $E0 $D0
+    ldh  [hFFD0], a                               ; $6DFA: $E0 $D0
     pop  bc                                       ; $6DFC: $C1
 
 jr_005_6DFD:
@@ -170,11 +170,11 @@ jr_005_6DFD:
     call func_005_6E15                            ; $6E12: $CD $15 $6E
 
 func_005_6E15::
-    ldh  a, [$FFCF]                               ; $6E15: $F0 $CF
+    ldh  a, [hFFCF]                               ; $6E15: $F0 $CF
     ld   [hl+], a                                 ; $6E17: $22
-    ldh  a, [$FFD0]                               ; $6E18: $F0 $D0
+    ldh  a, [hFFD0]                               ; $6E18: $F0 $D0
     inc  a                                        ; $6E1A: $3C
-    ldh  [$FFD0], a                               ; $6E1B: $E0 $D0
+    ldh  [hFFD0], a                               ; $6E1B: $E0 $D0
     ld   [hl+], a                                 ; $6E1D: $22
     ld   a, $83                                   ; $6E1E: $3E $83
     ld   [hl+], a                                 ; $6E20: $22
@@ -205,11 +205,11 @@ label_005_6E30:
     call func_005_6E4A                            ; $6E47: $CD $4A $6E
 
 func_005_6E4A::
-    ldh  a, [$FFCF]                               ; $6E4A: $F0 $CF
+    ldh  a, [hFFCF]                               ; $6E4A: $F0 $CF
     ld   [hl+], a                                 ; $6E4C: $22
-    ldh  a, [$FFD0]                               ; $6E4D: $F0 $D0
+    ldh  a, [hFFD0]                               ; $6E4D: $F0 $D0
     inc  a                                        ; $6E4F: $3C
-    ldh  [$FFD0], a                               ; $6E50: $E0 $D0
+    ldh  [hFFD0], a                               ; $6E50: $E0 $D0
     ld   [hl+], a                                 ; $6E52: $22
     ld   a, $83                                   ; $6E53: $3E $83
     ld   [hl+], a                                 ; $6E55: $22
@@ -221,11 +221,11 @@ func_005_6E4A::
     ld   [hl+], a                                 ; $6E5E: $22
     ld   a, $1E                                   ; $6E5F: $3E $1E
     ld   [hl+], a                                 ; $6E61: $22
-    ldh  a, [$FFCF]                               ; $6E62: $F0 $CF
+    ldh  a, [hFFCF]                               ; $6E62: $F0 $CF
     ld   [hl+], a                                 ; $6E64: $22
-    ldh  a, [$FFD0]                               ; $6E65: $F0 $D0
+    ldh  a, [hFFD0]                               ; $6E65: $F0 $D0
     inc  a                                        ; $6E67: $3C
-    ldh  [$FFD0], a                               ; $6E68: $E0 $D0
+    ldh  [hFFD0], a                               ; $6E68: $E0 $D0
     ld   [hl+], a                                 ; $6E6A: $22
     ld   a, $83                                   ; $6E6B: $3E $83
     ld   [hl+], a                                 ; $6E6D: $22
@@ -310,9 +310,9 @@ jr_005_6EB0:
     add  $0E                                      ; $6EE1: $C6 $0E
     ld   [wRequests], a                           ; $6EE3: $EA $00 $D6
     pop  de                                       ; $6EE6: $D1
-    ldh  a, [$FFCF]                               ; $6EE7: $F0 $CF
+    ldh  a, [hFFCF]                               ; $6EE7: $F0 $CF
     ld   [hl+], a                                 ; $6EE9: $22
-    ldh  a, [$FFD0]                               ; $6EEA: $F0 $D0
+    ldh  a, [hFFD0]                               ; $6EEA: $F0 $D0
     ld   [hl+], a                                 ; $6EEC: $22
     ld   a, $03                                   ; $6EED: $3E $03
     ld   [hl+], a                                 ; $6EEF: $22
@@ -328,9 +328,9 @@ jr_005_6EB0:
     ld   a, [de]                                  ; $6EF9: $1A
     inc  de                                       ; $6EFA: $13
     ld   [hl+], a                                 ; $6EFB: $22
-    ldh  a, [$FFCF]                               ; $6EFC: $F0 $CF
+    ldh  a, [hFFCF]                               ; $6EFC: $F0 $CF
     ld   [hl+], a                                 ; $6EFE: $22
-    ldh  a, [$FFD0]                               ; $6EFF: $F0 $D0
+    ldh  a, [hFFD0]                               ; $6EFF: $F0 $D0
     add  $20                                      ; $6F01: $C6 $20
     ld   [hl+], a                                 ; $6F03: $22
     ld   a, $03                                   ; $6F04: $3E $03

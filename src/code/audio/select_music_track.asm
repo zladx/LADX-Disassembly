@@ -150,7 +150,7 @@ SelectMusicTrackAfterTransition::
     ; Replace the current music by the power-up music
     ld   a, MUSIC_ACTIVE_POWER_UP                 ; $41C2: $3E $49
     ld   [wMusicTrackToPlay], a                   ; $41C4: $EA $68 $D3
-    ldh  [$FFBD], a                               ; $41C7: $E0 $BD
+    ldh  [hFFBD], a                               ; $41C7: $E0 $BD
     ldh  [hNextDefaultMusicTrack], a              ; $41C9: $E0 $BF
     xor  a                                        ; $41CB: $AF
     ld   [wC1CF], a                               ; $41CC: $EA $CF $C1

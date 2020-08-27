@@ -13,7 +13,7 @@ Data_006_662D::
 SparkClockwiseEntityHandler::
 SparkCounterClockwiseEntityHandler::
     ld   a, $01                                   ; $6635: $3E $01
-    ldh  [$FFBE], a                               ; $6637: $E0 $BE
+    ldh  [hFFBE], a                               ; $6637: $E0 $BE
     ldh  a, [hFrameCounter]                       ; $6639: $F0 $E7
     rra                                           ; $663B: $1F
     and  $01                                      ; $663C: $E6 $01

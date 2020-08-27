@@ -5079,7 +5079,7 @@ jr_017_71AC:
     add  hl, bc                                   ; $71BB: $09
     ld   [hl], $FF                                ; $71BC: $36 $FF
     call UpdateEntityPosWithSpeed_17              ; $71BE: $CD $2D $7E
-    ldh  a, [$FFEE]                               ; $71C1: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                               ; $71C1: $F0 $EE
     cp   $A8                                      ; $71C3: $FE $A8
     ret  c                                        ; $71C5: $D8
 
@@ -6275,7 +6275,7 @@ func_017_7C1B::
     ld   a, $50
     ld   [wOAMNextAvailableSlot], a               ; $7C1D: $EA $C0 $C3
     ld   hl, Data_017_7BDB                        ; $7C20: $21 $DB $7B
-    ldh  a, [$FFF1]                               ; $7C23: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]                               ; $7C23: $F0 $F1
     rla                                           ; $7C25: $17
     rla                                           ; $7C26: $17
     rla                                           ; $7C27: $17

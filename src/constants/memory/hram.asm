@@ -151,11 +151,11 @@ hLinkInteractiveMotionBlocked::
   ds 1 ; FFA1
 
 ; high byte of the distance from Link to the ground
-hLinkPositionZHighHigh::
+hLinkPositionZHigh::
   ds 1 ; FFA2
 
 ; low byte of the distance from Link to the ground
-hLinkPositionZHighLow::
+hLinkPositionZLow::
   ds 1 ; FFA3
 
 ; Animated tiles are grouped by groups of 4 tiles.

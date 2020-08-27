@@ -2708,7 +2708,7 @@ jr_003_57D7:
     ld   hl, Data_003_5721                        ; $57D7: $21 $21 $57
     add  hl, de                                   ; $57DA: $19
     ld   a, [hl]                                  ; $57DB: $7E
-    ld   hl, hLinkPositionZ                       ; $57DC: $21 $A2 $FF
+    ld   hl, hLinkPositionZHigh                       ; $57DC: $21 $A2 $FF
     add  [hl]                                     ; $57DF: $86
     ld   hl, wEntitiesPosZTable                   ; $57E0: $21 $10 $C3
     add  hl, bc                                   ; $57E3: $09
@@ -3099,7 +3099,7 @@ HoldEntityAboveLink::
     add  hl, bc                                   ; $5A23: $09
     sub  $0C                                      ; $5A24: $D6 $0C
     ld   [hl], a                                  ; $5A26: $77
-    ldh  a, [hLinkPositionZ]                      ; $5A27: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $5A27: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $5A29: $21 $10 $C3
     add  hl, bc                                   ; $5A2C: $09
     ld   [hl], a                                  ; $5A2D: $77
@@ -4025,7 +4025,7 @@ IF __PATCH_0__
     inc  a
     jp   nz, HoldEntityAboveLink
     ld   a, $80
-    ldh  [hLinkPositionZ], a
+    ldh  [hLinkPositionZHigh], a
     ld   a, $02
     ldh  [hLinkInteractiveMotionBlocked], a
 ELSE
@@ -5917,7 +5917,7 @@ CheckLinkCollisionWithProjectile::
     jr   nc, .return                              ; $6BE3: $30 $75
 
     ; If Link is in the air, return.
-    ldh  a, [hLinkPositionZ]                      ; $6BE5: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $6BE5: $F0 $A2
     and  a                                        ; $6BE7: $A7
     jr   nz, .return                              ; $6BE8: $20 $70
 
@@ -6035,7 +6035,7 @@ func_003_6C6B::
 ;   bc  entity index
 CheckLinkCollisionWithEnemy::
     ; If Link is in the air, skip the collision check
-    ldh  a, [hLinkPositionZ]                      ; $6C72: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $6C72: $F0 $A2
     and  a                                        ; $6C74: $A7
     jr   nz, CheckLinkCollisionWithProjectile.return; $6C75: $20 $E3
 
@@ -6170,7 +6170,7 @@ ApplyLinkCollisionWithEnemy::
     and  a                                        ; $6D0C: $A7
     jr   nz, .jr_003_6D15                         ; $6D0D: $20 $06
 
-    ldh  a, [hFFA3]                               ; $6D0F: $F0 $A3
+    ldh  a, [hLinkPositionZLow]                               ; $6D0F: $F0 $A3
     xor  $80                                      ; $6D11: $EE $80
     jr   .jr_003_6D17                             ; $6D13: $18 $02
 
@@ -6196,7 +6196,7 @@ ApplyLinkCollisionWithEnemy::
     jr   nz, .jr_003_6D38                         ; $6D31: $20 $05
 
     ld   a, $10                                   ; $6D33: $3E $10
-    ldh  [hFFA3], a                               ; $6D35: $E0 $A3
+    ldh  [hLinkPositionZLow], a                               ; $6D35: $E0 $A3
     ret                                           ; $6D37: $C9
 
 .jr_003_6D38
@@ -7698,7 +7698,7 @@ jr_003_758B:
     xor  a                                        ; $758D: $AF
     ldh  [hLinkPositionYIncrement], a             ; $758E: $E0 $9B
     ld   a, $30                                   ; $7590: $3E $30
-    ldh  [hFFA3], a                               ; $7592: $E0 $A3
+    ldh  [hLinkPositionZLow], a                               ; $7592: $E0 $A3
     ld   a, JINGLE_HUGE_BUMP                      ; $7594: $3E $0B
     ldh  [hJingle], a                             ; $7596: $E0 $F2
     ret                                           ; $7598: $C9

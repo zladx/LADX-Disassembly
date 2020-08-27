@@ -699,7 +699,7 @@ func_005_43FE::
     ldh  a, [hLinkPositionYIncrement]             ; $4406: $F0 $9B
     ld   hl, hLinkPositionXIncrement              ; $4408: $21 $9A $FF
     or   [hl]                                     ; $440B: $B6
-    ld   hl, hFFA3                                ; $440C: $21 $A3 $FF
+    ld   hl, hLinkPositionZLow                                ; $440C: $21 $A3 $FF
     or   [hl]                                     ; $440F: $B6
     jp   z, jr_005_44CA                           ; $4410: $CA $CA $44
 

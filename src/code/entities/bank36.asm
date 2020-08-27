@@ -327,7 +327,7 @@ jr_036_41D2:
 
 func_036_41DF::
     ld   a, $70                                   ; $41DF: $3E $70
-    ldh  [hLinkPositionZ], a                      ; $41E1: $E0 $A2
+    ldh  [hLinkPositionZHigh], a                      ; $41E1: $E0 $A2
     ld   a, $02                                   ; $41E3: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $41E5: $EA $46 $C1
     ld   a, $E0                                   ; $41E8: $3E $E0

@@ -88,7 +88,7 @@ jr_006_7B61:
     and  a                                        ; $7B7D: $A7
     jr   nz, jr_006_7B85                          ; $7B7E: $20 $05
 
-    ldh  a, [hLinkPositionZ]                      ; $7B80: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $7B80: $F0 $A2
     cp   $0C                                      ; $7B82: $FE $0C
     ret  c                                        ; $7B84: $D8
 

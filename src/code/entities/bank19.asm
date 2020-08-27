@@ -404,7 +404,7 @@ WarpState1Handler::
     jp   IncrementEntityState                     ; $42B5: $C3 $12 $3B
 
 WarpState2Handler::
-    ldh  a, [hLinkPositionZ]                      ; $42B8: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $42B8: $F0 $A2
     and  a                                        ; $42BA: $A7
     jr   nz, label_019_42E0                       ; $42BB: $20 $23
 
@@ -1002,7 +1002,7 @@ jr_019_476A:
     ldh  a, [hLinkPositionY]                      ; $476E: $F0 $99
     sub  $0C                                      ; $4770: $D6 $0C
     ldh  [hActiveEntityVisualPosY], a             ; $4772: $E0 $EC
-    ldh  a, [hLinkPositionZ]                      ; $4774: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $4774: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $4776: $21 $10 $C3
     add  hl, bc                                   ; $4779: $09
     ld   [hl], a                                  ; $477A: $77
@@ -3867,7 +3867,7 @@ jr_019_5AC4:
     call IncrementEntityState                     ; $5AEB: $CD $12 $3B
     ld   [hl], $01                                ; $5AEE: $36 $01
     ld   a, $02                                   ; $5AF0: $3E $02
-    ldh  [hLinkPositionZ], a                      ; $5AF2: $E0 $A2
+    ldh  [hLinkPositionZHigh], a                      ; $5AF2: $E0 $A2
     ld   [wIsLinkInTheAir], a                     ; $5AF4: $EA $46 $C1
     ret                                           ; $5AF7: $C9
 
@@ -3930,7 +3930,7 @@ label_019_5B3C:
     ld   a, $02                                   ; $5B4C: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $5B4E: $EA $46 $C1
     xor  a                                        ; $5B51: $AF
-    ldh  [hFFA3], a                               ; $5B52: $E0 $A3
+    ldh  [hLinkPositionZLow], a                               ; $5B52: $E0 $A3
     ldh  a, [hFrameCounter]                       ; $5B54: $F0 $E7
     and  $03                                      ; $5B56: $E6 $03
     jr   nz, jr_019_5B75                          ; $5B58: $20 $1B
@@ -3944,7 +3944,7 @@ label_019_5B3C:
     ld   hl, Data_019_5B34                        ; $5B62: $21 $34 $5B
     add  hl, de                                   ; $5B65: $19
     ld   e, [hl]                                  ; $5B66: $5E
-    ld   hl, hLinkPositionZ                       ; $5B67: $21 $A2 $FF
+    ld   hl, hLinkPositionZHigh                       ; $5B67: $21 $A2 $FF
     ld   a, [hl]                                  ; $5B6A: $7E
     sub  e                                        ; $5B6B: $93
     jr   z, jr_019_5B75                           ; $5B6C: $28 $07
@@ -4175,9 +4175,9 @@ func_019_5D99::
 
 func_019_5DAC::
     call func_019_5D99                            ; $5DAC: $CD $99 $5D
-    ldh  a, [hLinkPositionZ]                      ; $5DAF: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $5DAF: $F0 $A2
     add  $04                                      ; $5DB1: $C6 $04
-    ldh  [hLinkPositionZ], a                      ; $5DB3: $E0 $A2
+    ldh  [hLinkPositionZHigh], a                      ; $5DB3: $E0 $A2
     cp   $78                                      ; $5DB5: $FE $78
     jr   c, jr_019_5DF7                           ; $5DB7: $38 $3E
 
@@ -7282,7 +7282,7 @@ jr_019_7709:
     sub  $13                                      ; $7718: $D6 $13
     ld   [hl], a                                  ; $771A: $77
     call CopyEntityPositionToActivePosition       ; $771B: $CD $8A $3D
-    ldh  a, [hLinkPositionZ]                      ; $771E: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $771E: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $7720: $21 $10 $C3
     add  hl, bc                                   ; $7723: $09
     ld   [hl], a                                  ; $7724: $77

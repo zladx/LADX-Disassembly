@@ -306,7 +306,7 @@ jr_006_43F5:
 jr_006_440C:
     ldh  [hLinkPositionXIncrement], a             ; $440C: $E0 $9A
     ld   a, $10                                   ; $440E: $3E $10
-    ldh  [hFFA3], a                               ; $4410: $E0 $A3
+    ldh  [hLinkPositionZLow], a                               ; $4410: $E0 $A3
     ld   a, $20                                   ; $4412: $3E $20
     ld   [wInvincibilityCounter], a               ; $4414: $EA $C7 $DB
     ld   a, $02                                   ; $4417: $3E $02

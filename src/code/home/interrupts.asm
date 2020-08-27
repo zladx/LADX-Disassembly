@@ -390,7 +390,7 @@ WaitForVBlankAndReturn::
     pop  de                                       ; $056F: $D1
     pop  bc                                       ; $0570: $C1
 
-    ld   a, $01                                   ; $0571: $3E $01
+    ld   a, TRUE                                  ; $0571: $3E $01
     ldh  [hNeedsRenderingFrame], a                ; $0573: $E0 $D1
 
     pop  af                                       ; $0575: $F1

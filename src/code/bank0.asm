@@ -1175,7 +1175,7 @@ LoadRoomTiles::
     ldh  a, [hMapId]                              ; $0DE5: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $0DE7: $FE $FF
     jr   nz, .label_DF1                           ; $0DE9: $20 $06
-    ld   a, $01                                   ; $0DEB: $3E $01
+    ld   a, TRUE                                  ; $0DEB: $3E $01
     ldh  [hNeedsUpdatingEnnemiesTiles], a         ; $0DED: $E0 $91
     jr   .return                                  ; $0DEF: $18 $40
 
@@ -1218,10 +1218,10 @@ LoadRoomTiles::
 
 .label_E1E
     inc  a                                        ; $0E1E: $3C
-    ldh  [hMultiPurpose0], a                           ; $0E1F: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $0E1F: $E0 $D7
     ld   a, d                                     ; $0E21: $7A
     ld   [wC197], a                               ; $0E22: $EA $97 $C1
-    ld   a, $01                                   ; $0E25: $3E $01
+    ld   a, TRUE                                  ; $0E25: $3E $01
     ldh  [hNeedsUpdatingEnnemiesTiles], a         ; $0E27: $E0 $91
 
 .label_E29
@@ -1462,7 +1462,7 @@ WorldDefaultHandler::
     ldh  a, [hLinkPositionY]                      ; $0F9B: $F0 $99
     ldh  [hLinkFinalPositionY], a                 ; $0F9D: $E0 $A0
 
-    ld   hl, hLinkPositionZ                       ; $0F9F: $21 $A2 $FF
+    ld   hl, hLinkPositionZHigh                       ; $0F9F: $21 $A2 $FF
     sub  a, [hl]                                  ; $0FA2: $96
     ldh  [hFFB3], a                               ; $0FA3: $E0 $B3
     call func_002_60E0                            ; $0FA5: $CD $E0 $60
@@ -1545,7 +1545,7 @@ DialogForItem::
 
 ApplyGotItem::
     ldh  a, [hLinkPositionY]                      ; $1033: $F0 $99
-    ld   hl, hLinkPositionZ                       ; $1035: $21 $A2 $FF
+    ld   hl, hLinkPositionZHigh                       ; $1035: $21 $A2 $FF
     sub  a, [hl]                                  ; $1038: $96
     ld   [wC145], a                               ; $1039: $EA $45 $C1
     ld   a, [wDialogGotItem]                      ; $103C: $FA $A9 $C1
@@ -2196,7 +2196,7 @@ SpawnPlayerProjectile::
     ld   hl, wEntitiesPosYTable                   ; $1451: $21 $10 $C2
     add  hl, de                                   ; $1454: $19
     ld   [hl], a                                  ; $1455: $77
-    ldh  a, [hLinkPositionZ]                      ; $1456: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $1456: $F0 $A2
     inc  a                                        ; $1458: $3C
     ld   hl, wEntitiesPosZTable                   ; $1459: $21 $10 $C3
     add  hl, de                                   ; $145C: $19
@@ -2238,7 +2238,7 @@ UseMagicPowder::
     ld   a, [wHasToadstool]                       ; $1492: $FA $4B $DB
     and  a                                        ; $1495: $A7
     jr   z, .jr_14A7                              ; $1496: $28 $0F
-    ldh  a, [hLinkPositionZ]                      ; $1498: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $1498: $F0 $A2
     and  a                                        ; $149A: $A7
     ret  nz                                       ; $149B: $C0
     ld   a, $02                                   ; $149C: $3E $02
@@ -2293,13 +2293,13 @@ UseRocsFeather::
 label_14F8::
     ldh  [hLinkPositionYIncrement], a             ; $14F8: $E0 $9B
     xor  a                                        ; $14FA: $AF
-    ldh  [hFFA3], a                               ; $14FB: $E0 $A3
+    ldh  [hLinkPositionZLow], a                               ; $14FB: $E0 $A3
     call UpdateFinalLinkPosition                  ; $14FD: $CD $A8 $21
     jpsw CheckPositionForMapTransition            ; $1500: $3E $02 $CD $0C $08 $C3 $75 $6C
 
 label_1508::
     ld   a, $20                                   ; $1508: $3E $20
-    ldh  [hFFA3], a                               ; $150A: $E0 $A3
+    ldh  [hLinkPositionZLow], a                               ; $150A: $E0 $A3
     ld   a, [wIsRunningWithPegasusBoots]          ; $150C: $FA $4A $C1
     and  a                                        ; $150F: $A7
     ret  z                                        ; $1510: $C8
@@ -2645,7 +2645,7 @@ UsePegasusBoots::
     ld   a, [wIsRunningWithPegasusBoots]          ; $1713: $FA $4A $C1
     and  a                                        ; $1716: $A7
     ret  nz                                       ; $1717: $C0
-    ldh  a, [hLinkPositionZ]                      ; $1718: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $1718: $F0 $A2
     ld   hl, wIsLinkInTheAir                      ; $171A: $21 $46 $C1
     or   [hl]                                     ; $171D: $B6
     ret  nz                                       ; $171E: $C0
@@ -2681,7 +2681,7 @@ UsePegasusBoots::
 func_1756::
     ldh  a, [hFrameCounter]                       ; $1756: $F0 $E7
     and  $07                                      ; $1758: $E6 $07
-    ld   hl, hLinkPositionZ                       ; $175A: $21 $A2 $FF
+    ld   hl, hLinkPositionZHigh                       ; $175A: $21 $A2 $FF
     or   [hl]                                     ; $175D: $B6
     ld   hl, hLinkInteractiveMotionBlocked        ; $175E: $21 $A1 $FF
     or   [hl]                                     ; $1761: $B6
@@ -3456,11 +3456,11 @@ label_1F69_trampoline::
 ; Physics for Link interactive motion?
 ; (Only ever called from label_002_4287)
 label_1F69::
-    ; If running with pegagus boots, or hLinkPositionZ != 0, or Link's motion != LINK_MOTION_INTERACTIVE, return
+    ; If running with pegagus boots, or hLinkPositionZHigh != 0, or Link's motion != LINK_MOTION_INTERACTIVE, return
     ld   hl, wIsRunningWithPegasusBoots           ; $1F69: $21 $4A $C1
     ld   a, [wIsCarryingLiftedObject]             ; $1F6C: $FA $5C $C1
     or   [hl]                                     ; $1F6F: $B6
-    ld   hl, hLinkPositionZ                       ; $1F70: $21 $A2 $FF
+    ld   hl, hLinkPositionZHigh                       ; $1F70: $21 $A2 $FF
     or   [hl]                                     ; $1F73: $B6
     ld   hl, wLinkMotionState                     ; $1F74: $21 $1C $C1
     or   [hl]                                     ; $1F77: $B6
@@ -3898,7 +3898,7 @@ ComputeLinkPosition::
     ret                                           ; $21E0: $C9
 
 func_21E1::
-    ldh  a, [hFFA3]                               ; $21E1: $F0 $A3
+    ldh  a, [hLinkPositionZLow]                               ; $21E1: $F0 $A3
     push af                                       ; $21E3: $F5
     swap a                                        ; $21E4: $CB $37
     and  $F0                                      ; $21E6: $E6 $F0
@@ -3906,7 +3906,7 @@ func_21E1::
     add  a, [hl]                                  ; $21EB: $86
     ld   [hl], a                                  ; $21EC: $77
     rl   d                                        ; $21ED: $CB $12
-    ld   hl, hLinkPositionZ                       ; $21EF: $21 $A2 $FF
+    ld   hl, hLinkPositionZHigh                       ; $21EF: $21 $A2 $FF
     pop  af                                       ; $21F2: $F1
     ld   e, $00                                   ; $21F3: $1E $00
     bit  7, a                                     ; $21F5: $CB $7F

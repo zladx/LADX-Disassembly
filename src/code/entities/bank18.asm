@@ -3922,7 +3922,7 @@ label_018_5C6A:
     ld   d, b                                     ; $5CC7: $50
     ld   hl, $D195                                ; $5CC8: $21 $95 $D1
     add  hl, de                                   ; $5CCB: $19
-    ldh  a, [hLinkPositionZ]                      ; $5CCC: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $5CCC: $F0 $A2
     ld   [hl], a                                  ; $5CCE: $77
     ld   a, [wLinkMotionState]                    ; $5CCF: $FA $1C $C1
     cp   $02                                      ; $5CD2: $FE $02

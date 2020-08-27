@@ -18,11 +18,11 @@ section "HRAM", HRAM[$ff80]
 hRomBank::
  ds 1 ; FF80
 
-; TODO comment
+; used as tempory valiable
 hTemp::
  ds 1 ; FF81
 
-; TODO comment
+; used as tempory valiable
 hCodeTemp::
  ds 1 ; FF82
 
@@ -48,7 +48,9 @@ hGameValuesSection::
 hNeedsUpdatingBGTiles::
  ds 1 ; FF90
 
-; TODO comment
+; bool value for enemie tile update
+; 0 = no update of enemie tiles needed,
+; 1 = update needed
 hNeedsUpdatingEnnemiesTiles::
  ds 1 ; FF91
 
@@ -70,19 +72,19 @@ hWorldTileset::
 hFF95::
   ds 1 ; FF95
 
-; TODO comment
+; offset of the main window in X direction
 hBaseScrollX::
  ds 1 ; FF96
 
-; TODO comment
+; offset of the main window in Y direction
 hBaseScrollY::
  ds 1 ; FF97
 
-; TODO comment
+; X position of Link on the map
 hLinkPositionX::
  ds 1 ; FF98
 
-; TODO comment
+; Y position of Link on the map
 hLinkPositionY::
  ds 1 ; FF99
 
@@ -148,12 +150,12 @@ hLinkFinalPositionY::
 hLinkInteractiveMotionBlocked::
   ds 1 ; FFA1
 
-; TODO comment
-hLinkPositionZ::
+; high byte of the distance from Link to the ground
+hLinkPositionZHighHigh::
   ds 1 ; FFA2
 
-; Unlabeled
-hFFA3::
+; low byte of the distance from Link to the ground
+hLinkPositionZHighLow::
   ds 1 ; FFA3
 
 ; Animated tiles are grouped by groups of 4 tiles.
@@ -319,7 +321,9 @@ hFFCF::
 hFFD0::
   ds $1 ; FFD0
 
-; TODO comment
+; boolean value if changes needs to be rendered
+; 1 = frame rendering is needed,
+; 0 = frame rendering was done
 hNeedsRenderingFrame::
   ds 1 ; FFD1
 
@@ -365,11 +369,13 @@ hMultiPurpose8::
 
 ; used in many different cases
 hMultiPurpose9::
+; high bit of the BG map offset
 hBGMapOffsetHigh::
   ds 1 ; FFE0
 
 ; used in many different cases
 hMultiPurposeA::
+; low bit of the BG map offset
 hBGMapOffsetLow::
   ds 1 ; FFE1
 
@@ -401,13 +407,17 @@ hFrameCounter::
 
 ; used in many different cases
 hMultiPurposeG::
+; bank number for the used room
 hRoomBank::
+; tile data for the dialog background
 hDialogBackgroundTile::
   ds 1 ; FFE8
 
 ; used in many different cases
 hMultiPurposeH::
+; tile data for the dungeon floor
 hDungeonFloorTile::
+; TODO comment
 hIndexOfObjectBelowLink::
   ds 1 ; FFE9
 
@@ -485,7 +495,7 @@ hMapRoom:: ; FFF6
   ds 1
 
 ; Id of the current indoor world map
-  ; See MAP_* constants for values
+; See MAP_* constants for values
 hMapId::
   ds 1 ; FFF7
 
@@ -518,11 +528,14 @@ hLinkFinalRoomPosition::
 hFFFC::
   ds 1 ; FFFC
 
-; TODO comment
+; bool value if rendering was done
+; 0 = rendering did not happened yet,
+; 1 = rendering happened
 hDidRenderFrame::
  ds 1 ; FFFD
 
 ; Marker for the Hardware that the program is running on
-; 0 = GB, 1 = GBC
+; 0 = GB,
+; 1 = GBC
 hIsGBC::
   ds 1 ; FFFE

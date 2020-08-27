@@ -2010,10 +2010,10 @@ func_015_5064::
     ld   hl, Data_015_5058                        ; $506C: $21 $58 $50
     add  hl, de                                   ; $506F: $19
     ld   a, [hl+]                                 ; $5070: $2A
-    ld   [wC193+2], a                               ; $5071: $EA $95 $C1
+    ld   [wC193+2], a                             ; $5071: $EA $95 $C1
     ld   a, [hl]                                  ; $5074: $7E
-    ld   [wC193+3], a                               ; $5075: $EA $96 $C1
-    ld   a, $01                                   ; $5078: $3E $01
+    ld   [wC193+3], a                             ; $5075: $EA $96 $C1
+    ld   a, TRUE                                  ; $5078: $3E $01
     ldh  [hNeedsUpdatingEnnemiesTiles], a         ; $507A: $E0 $91
     ld   [wNeedsUpdatingNPCTiles], a              ; $507C: $EA $0E $C1
     ret                                           ; $507F: $C9
@@ -7944,11 +7944,11 @@ func_015_7D01::
     call GetEntityTransitionCountdown             ; $7D21: $CD $05 $0C
     ld   [hl], $A0                                ; $7D24: $36 $A0
     ld   a, $01                                   ; $7D26: $3E $01
-    ldh  [hLinkPositionZ], a                      ; $7D28: $E0 $A2
+    ldh  [hLinkPositionZHigh], a                      ; $7D28: $E0 $A2
     ld   a, $02                                   ; $7D2A: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $7D2C: $EA $46 $C1
     ld   a, $12                                   ; $7D2F: $3E $12
-    ldh  [hFFA3], a                               ; $7D31: $E0 $A3
+    ldh  [hLinkPositionZLow], a                               ; $7D31: $E0 $A3
     ld   a, $0C                                   ; $7D33: $3E $0C
     ldh  [hLinkPositionXIncrement], a             ; $7D35: $E0 $9A
     xor  a                                        ; $7D37: $AF

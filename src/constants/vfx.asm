@@ -23,5 +23,3 @@ GROUND_VFX_SHALLOW_WATER equ $05
 GROUND_VFX_GRASS         equ $06
 GROUND_VFX_PIT           equ $50
 
-; height of the window on the top of the screen
-WINDOW_HEIGHT equ 2 ; number in tiles

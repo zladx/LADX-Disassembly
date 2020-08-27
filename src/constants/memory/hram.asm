@@ -27,7 +27,7 @@ hCodeTemp::
  ds 1 ; FF82
 
 ; not used
-hFF83::
+hFF83:
  ds $D ; FF83 - FF8F
 
 ; Beginning of the game-variables section of the HRAM
@@ -69,7 +69,7 @@ hWorldTileset::
   ds 1 ; FF94
 
 ; not used
-hFF95::
+hFF95:
   ds 1 ; FF95
 
 ; offset of the main window in X direction
@@ -285,7 +285,7 @@ hDMARoutine::
   ds $A ; FFC0 - FFC9
 
 ; not used
-hFFCA::
+hFFCA:
   ds 1 ; FFCA
 
 ; The pressed buttons on the joypad.
@@ -525,7 +525,7 @@ hLinkFinalRoomPosition::
   ds 1 ; FFFB
 
 ; not used
-hFFFC::
+hFFFC:
   ds 1 ; FFFC
 
 ; bool value if rendering was done

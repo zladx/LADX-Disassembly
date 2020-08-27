@@ -57,16 +57,19 @@ You can also read [disassembling How-Tos](https://github.com/zladx/LADX-Disassem
 ## Contributors
 
 Thanks to these people for contributing:
+(ordered by commits)
 
-* mojobojo - https://github.com/mojobojo
 * kemenaran - https://github.com/kemenaran
-* Drenn1 - https://github.com/Drenn1
-* Sanqui - https://github.com/Sanqui
-* Kyle McGuffin - https://github.com/kcmcg
 * Marijn van der Werf - https://github.com/marijnvdwerf
-* samuel-flynn - https://github.com/samuel-flynn
 * Xkeeper - https://github.com/Xkeeper0
-* Vextrove - https://github.com/Vextrove
-* daid - https://github.com/daid
-* stephaneseng - https://github.com/stephaneseng
 * zelosos - https://gitlab.com/zelosos
+* Vextrove - https://github.com/Vextrove
+* mojobojo - https://github.com/mojobojo
+* Kyle McGuffin - https://github.com/kcmcg
+* daid - https://github.com/daid
+* Sanqui - https://github.com/Sanqui
+* Drenn1 - https://github.com/Drenn1
+* stephaneseng - https://github.com/stephaneseng
+* samuel-flynn - https://github.com/samuel-flynn
+
+You want to rank up? Then contribute more ;)

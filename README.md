@@ -56,7 +56,7 @@ You can also read [disassembling How-Tos](https://github.com/zladx/LADX-Disassem
 
 ## Contributors
 
-Thanks to these people for contributing:
+Thanks to these people for contributing: <br />
 (ordered by commits)
 
 * kemenaran - https://github.com/kemenaran

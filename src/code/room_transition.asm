@@ -583,74 +583,74 @@ RoomTransitionLoadTiles::
     jp   IncrementRoomTransitionStateAndReturn    ; $7B4C: $C3 $36 $7B
 
 RoomTransitionBGOriginHigh::
-.right  db $00
-.left   db $00
-.top    db $02
-.bottom db $02
+.right:  db $00
+.left:   db $00
+.top:    db $02
+.bottom: db $02
 
 RoomTransitionBGOriginLow::
-.right  db $14
-.left   db $0C
-.top    db $00
-.bottom db $00
+.right:  db $14
+.left:   db $0C
+.top:    db $00
+.bottom: db $00
 
 RoomTransitionBGInitialUpdateRegionHigh::
-.right  db $00
-.left   db $00
-.top    db $03
-.bottom db $02
+.right:  db $00
+.left:   db $00
+.top:    db $03
+.bottom: db $02
 
 RoomTransitionBGInitialUpdateRegionLow::
-.right  db $14
-.left   db $1F
-.top    db $E0
-.bottom db $00
+.right:  db $14
+.left:   db $1F
+.top:    db $E0
+.bottom: db $00
 
 RoomUpdateTileAmount::
-.right  db TILES_PER_COLOUMN - 1
-.left   db TILES_PER_COLOUMN - 1
-.up     db TILES_PER_ROW
-.down   db TILES_PER_ROW
+.right:  db TILES_PER_COLOUMN - 1
+.left:   db TILES_PER_COLOUMN - 1
+.up:     db TILES_PER_ROW
+.down:   db TILES_PER_ROW
 
 RoomTransitionFramesToMidScreen::
-.right  db $14
-.left   db $14
-.top    db $10
-.bottom db $10
+.right:  db $14
+.left:   db $14
+.top:    db $10
+.bottom: db $10
 
 RoomTransitionOffset::
-.right  db   $00                                  ; $7B67: $00
-.left   db   $09                                  ; $7B68: $09
-.top    db   $70                                  ; $7B69: $70
-.bottom db   $00                                  ; $7B6A: $00
+.right:  db   $00                                 ; $7B67: $00
+.left:   db   $09                                 ; $7B68: $09
+.top:    db   $70                                 ; $7B69: $70
+.bottom: db   $00                                 ; $7B6A: $00
     db   $40                                      ; $7B6B: $40
     db   $40                                      ; $7B6C: $40
     db   $02                                      ; $7B6D: $02
     db   $02                                      ; $7B6E: $02
 
 RoomTransitionTargetScrollX::
-.right  db $A0
-.left   db $60
-.top    db $00
-.bottom db $00
+.right:  db $A0
+.left:   db $60
+.top:    db $00
+.bottom: db $00
 
 RoomTransitionTargetScrollY::
-.right  db $00
-.left   db $00
-.top    db $80
-.bottom db $80
+.right:  db $00
+.left:   db $00
+.top:    db $80
+.bottom: db $80
 
 OverworldRoomIncrement::
-.right  db $01
-.left   db $FF
-.top    db $F0
-.bottom db $10
+.right:  db $01
+.left:   db $FF
+.top:    db $F0
+.bottom: db $10
 
 IndoorRoomIncrement::
-.right  db $01
-.left   db $FF
-.top    db $F8
-.bottom db $08
+.right:  db $01
+.left:   db $FF
+.top:    db $F8
+.bottom: db $08
 
 RoomTransitionConfigureScrollTargets::
     ; If $FFBB == 0, return

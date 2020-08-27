@@ -26,7 +26,7 @@ hTemp::
 hCodeTemp::
  ds 1 ; FF82
 
-; Unlabeled
+; not used
 hFF83::
  ds $D ; FF83
 
@@ -66,7 +66,7 @@ hEnemiesTilesLoadingStage::
 hWorldTileset::
   ds 1 ; FF94
 
-; Unlabeled
+; not used
 hFF95::
   ds 1 ; FF95
 
@@ -153,7 +153,7 @@ hLinkPositionZ::
   ds 1 ; FFA2
 
 ; Unlabeled
-hFFA2::
+hFFA3::
 ds 1 ; FFA3
 
 ; Animated tiles are grouped by groups of 4 tiles.
@@ -189,7 +189,19 @@ hVolumeLeft::
 
 ; Music fade in timer
 hMusicFadeInTimer::
-  ds 4 ; hFFAB
+  ds 1 ; FFAB
+
+; Unlabeled
+hFFAC::
+ds 1 ; FFAC
+
+; Unlabeled
+hFFAD::
+ds 1 ; FFAD
+
+; Unlabeled
+hFFAE::
+ds 1 ; FFAE
 
 ; Type of the object under the active entity
 hObjectUnderEntity::
@@ -202,12 +214,20 @@ hDefaultMusicTrack::
 
 ; Next music to be played after room transition
 hNextMusicTrackToFadeInto::
-  ds 1 ; hFFB1
+  ds 1 ; FFB1
 
 ; When 1, Link is moving much slower, like when being
 ; incapacited by a mini-gel.
-hFFB2::
-  ds 3 ; hFFB2
+slowWalkingSpeed::
+  ds 1 ; FFB1
+
+; Unlabeled
+hFFB3::
+  ds 1 ; FFB3
+
+; Unlabeled
+hFFB4::
+  ds 1 ; FFB4
 
 ; Number of frames during which joypad is ignored
 hButtonsInactiveDelay::
@@ -215,14 +235,42 @@ hButtonsInactiveDelay::
 
 ; Unlabeled
 hFFB6::
-  ds $6 ; FFB6
+  ds 1 ; FFB6
+
+; Unlabeled
+hFFB7::
+  ds 1 ; FFB7
+
+; Unlabeled
+hFFB8::
+  ds 1 ; FFB8
+
+; Unlabeled
+hFFB9::
+  ds 1 ; FFB9
+
+; Unlabeled
+hFFBA::
+  ds 1 ; FFBA
+
+; Unlabeled
+hFFBB::
+  ds 1 ; FFBB
 
 ; Unknown; stores previous gameplay type before a transition?
 ; Related to fade-out/fade-in transitions
 ; Seems to affect whether a music track is restarted afer
 ; a transition
 hFFBC::
-  ds 3 ; FFBC
+  ds 1 ; FFBC
+
+; Unlabeled
+hFFBD::
+  ds 1 ; FFBD
+
+; Unlabeled
+hFFBE::
+  ds 1 ; FFBE
 
 ; Music track to be played after countdown
 ; See hNextMusicTrackToFadeInto and
@@ -234,7 +282,7 @@ hNextDefaultMusicTrack::
 hDMARoutine::
   ds $A ; FFC0
 
-; Unlabeled
+; not used
 hFFCA::
   ds 1 ; FFCA
 
@@ -264,11 +312,11 @@ hSwordIntersectedAreaX::
   ds 1 ; FFCE
 
 ; Unlabeled
-hFFCF
+hFFCF::
 ds $1 ; FFCF
 
 ; Unlabeled
-hFFD0
+hFFD0::
 ds $1 ; FFD0
 
 ; TODO comment
@@ -466,7 +514,7 @@ hLinkRoomPosition::
 hLinkFinalRoomPosition::
   ds 1 ; FFFB
 
-; Unused?
+; not used
 hFFFC::
   ds 1 ; FFFC
 

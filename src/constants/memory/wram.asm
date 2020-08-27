@@ -219,12 +219,12 @@ wBGUpdateRegionTilesCount::
 wRoomTransitionFramesBeforeMidScreen::
   ds 1 ; C129
 
-; Unlabeled
-wC12A:
+; some kind of offset is saved here
+wTransitionOffset:
   ds 1 ; C12A
 
 ; Unlabeled
-wC12B:
+wTransitionZeroNeverUsed:
   ds 1 ; C12B
 
 ; Stop the room transition when reaching this value

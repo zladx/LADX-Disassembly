@@ -583,74 +583,74 @@ RoomTransitionLoadTiles::
     jp   IncrementRoomTransitionStateAndReturn    ; $7B4C: $C3 $36 $7B
 
 RoomTransitionBGOriginHigh::
-.right  db $00
-.left   db $00
-.top    db $02
-.bottom db $02
+.right:  db $00
+.left:   db $00
+.top:    db $02
+.bottom: db $02
 
 RoomTransitionBGOriginLow::
-.right  db $14
-.left   db $0C
-.top    db $00
-.bottom db $00
+.right:  db $14
+.left:   db $0C
+.top:    db $00
+.bottom: db $00
 
 RoomTransitionBGInitialUpdateRegionHigh::
-.right  db $00
-.left   db $00
-.top    db $03
-.bottom db $02
+.right:  db $00
+.left:   db $00
+.top:    db $03
+.bottom: db $02
 
 RoomTransitionBGInitialUpdateRegionLow::
-.right  db $14
-.left   db $1F
-.top    db $E0
-.bottom db $00
+.right:  db $14
+.left:   db $1F
+.top:    db $E0
+.bottom: db $00
 
-data_002_7B5F::
-.right  db $08
-.left   db $08
-.top    db $0A
-.bottom db $0A
+RoomUpdateTileAmount::
+.right:  db TILES_PER_COLUMN - 1
+.left:   db TILES_PER_COLUMN - 1
+.up:     db TILES_PER_ROW
+.down:   db TILES_PER_ROW
 
 RoomTransitionFramesToMidScreen::
-.right  db $14
-.left   db $14
-.top    db $10
-.bottom db $10
+.right:  db $14
+.left:   db $14
+.top:    db $10
+.bottom: db $10
 
-data_002_7B67::
-    db   $00                                      ; $7B67: $00
-    add  hl, bc                                   ; $7B68: $09
-    ld   [hl], b                                  ; $7B69: $70
-    nop                                           ; $7B6A: $00
-    ld   b, b                                     ; $7B6B: $40
-    ld   b, b                                     ; $7B6C: $40
-    ld   [bc], a                                  ; $7B6D: $02
-    ld   [bc], a                                  ; $7B6E: $02
+RoomTransitionOffset::
+.right:  db   $00                                 ; $7B67: $00
+.left:   db   $09                                 ; $7B68: $09
+.top:    db   $70                                 ; $7B69: $70
+.bottom: db   $00                                 ; $7B6A: $00
+    db   $40                                      ; $7B6B: $40
+    db   $40                                      ; $7B6C: $40
+    db   $02                                      ; $7B6D: $02
+    db   $02                                      ; $7B6E: $02
 
 RoomTransitionTargetScrollX::
-.right  db $A0
-.left   db $60
-.top    db $00
-.bottom db $00
+.right:  db $A0
+.left:   db $60
+.top:    db $00
+.bottom: db $00
 
 RoomTransitionTargetScrollY::
-.right  db $00
-.left   db $00
-.top    db $80
-.bottom db $80
+.right:  db $00
+.left:   db $00
+.top:    db $80
+.bottom: db $80
 
 OverworldRoomIncrement::
-.right  db $01
-.left   db $FF
-.top    db $F0
-.bottom db $10
+.right:  db $01
+.left:   db $FF
+.top:    db $F0
+.bottom: db $10
 
 IndoorRoomIncrement::
-.right  db $01
-.left   db $FF
-.top    db $F8
-.bottom db $08
+.right:  db $01
+.left:   db $FF
+.top:    db $F8
+.bottom: db $08
 
 RoomTransitionConfigureScrollTargets::
     ; If $FFBB == 0, return
@@ -718,7 +718,7 @@ RoomTransitionConfigureScrollTargets::
     ld   [wBGOriginHigh], a                       ; $7BDE: $EA $2E $C1
 
     ; Configure wBGUpdateRegionTilesCount
-    ld   hl, data_002_7B5F                        ; $7BE1: $21 $5F $7B
+    ld   hl, RoomUpdateTileAmount                 ; $7BE1: $21 $5F $7B
     add  hl, bc                                   ; $7BE4: $09
     ld   a, [hl]                                  ; $7BE5: $7E
     ld   [wBGUpdateRegionTilesCount], a           ; $7BE6: $EA $28 $C1
@@ -730,13 +730,13 @@ RoomTransitionConfigureScrollTargets::
     ld   a, [hl]                                  ; $7BED: $7E
     ld   [wRoomTransitionFramesBeforeMidScreen], a ; $7BEE: $EA $29 $C1
 
-    ld   hl, data_002_7B67                        ; $7BF1: $21 $67 $7B
+    ld   hl, RoomTransitionOffset                 ; $7BF1: $21 $67 $7B
     add  hl, bc                                   ; $7BF4: $09
     ld   a, [hl]                                  ; $7BF5: $7E
-    ld   [wC12A], a                               ; $7BF6: $EA $2A $C1
+    ld   [wTransitionOffset], a                   ; $7BF6: $EA $2A $C1
+    ; wTransitionZeroNeverUsed is set to zero, but value is never used elsewere
     xor  a                                        ; $7BF9: $AF
-    ld   [wC12B], a                               ; $7BFA: $EA $2B $C1
-
+    ld   [wTransitionZeroNeverUsed], a            ; $7BFA: $EA $2B $C1
     jp   IncrementRoomTransitionStateAndReturn    ; $7BFD: $C3 $36 $7B
 
 RoomTransitionFirstHalfHandler::

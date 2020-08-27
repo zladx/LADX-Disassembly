@@ -4154,7 +4154,7 @@ DoUpdateBGRegion::
     jp   nz, .loop                                ; $2316: $C2 $41 $22
 
     ; Set next BG region origin, and decrement wRoomTransitionFramesBeforeMidScreen
-    jpsb func_020_5570                            ; $2319: $3E $20 $EA $00 $21 $C3 $70 $55
+    jpsb UpdateBGRegionOrigin                            ; $2319: $3E $20 $EA $00 $21 $C3 $70 $55
 
 include "code/home/dialog.asm"
 

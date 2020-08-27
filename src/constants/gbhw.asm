@@ -140,3 +140,19 @@ rPCM12      EQU $ff76 ; (00h) - Always 00h (Read Only)
 rPCM34      EQU $ff77 ; (00h) - Always 00h (Read Only)
 rIE         EQU $ffff ; Interrupt Enable (R/W)
 
+; display widht in pixel
+DISPLAY_WIDTH       equ 160
+; display height in pixel
+DISPLAY_HEIGHT      equ 144
+; pixel widht of one tile
+TILE_WIDTH          equ 8
+; pixel height of one tile
+TILE_HEIGHT         equ 8
+; number of tiles in one row
+TILES_PER_ROW       equ DISPLAY_WIDTH/(TILE_WIDTH*2)
+; number of tiles in one column
+TILES_PER_COLUMN   equ DISPLAY_HEIGHT/(TILE_HEIGHT*2)
+; number of tiles per map
+TILES_PER_MAP       equ $80
+; Size of a single tile in bytes
+TILE_SIZE           equ $10

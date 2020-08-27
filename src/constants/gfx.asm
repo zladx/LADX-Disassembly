@@ -166,3 +166,6 @@ ROOM_STATUS_VISITED      equ $80
 ROOM_SWITCHABLE_OBJECT_NONE          equ $0
 ROOM_SWITCHABLE_OBJECT_SWITCH_BUTTON equ $1
 ROOM_SWITCHABLE_OBJECT_MOBILE_BLOCK  equ $2
+
+; height of the window on the top of the screen
+WINDOW_HEIGHT equ 2 ; number in tiles

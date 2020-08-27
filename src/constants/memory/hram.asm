@@ -28,7 +28,7 @@ hCodeTemp::
 
 ; not used
 hFF83::
- ds $D ; FF83
+ ds $D ; FF83 - FF8F
 
 ; Beginning of the game-variables section of the HRAM
 hGameValuesSection::
@@ -154,7 +154,7 @@ hLinkPositionZ::
 
 ; Unlabeled
 hFFA3::
-ds 1 ; FFA3
+  ds 1 ; FFA3
 
 ; Animated tiles are grouped by groups of 4 tiles.
 ; Each map can use one of these groups.
@@ -193,15 +193,15 @@ hMusicFadeInTimer::
 
 ; Unlabeled
 hFFAC::
-ds 1 ; FFAC
+  ds 1 ; FFAC
 
 ; Unlabeled
 hFFAD::
-ds 1 ; FFAD
+  ds 1 ; FFAD
 
 ; Unlabeled
 hFFAE::
-ds 1 ; FFAE
+  ds 1 ; FFAE
 
 ; Type of the object under the active entity
 hObjectUnderEntity::
@@ -280,7 +280,7 @@ hNextDefaultMusicTrack::
 ; DMA routine copied from ROM during initialization
 ; Copy the content of wOAMBuffer to the OAM memory
 hDMARoutine::
-  ds $A ; FFC0
+  ds $A ; FFC0 - FFC9
 
 ; not used
 hFFCA::
@@ -313,15 +313,15 @@ hSwordIntersectedAreaX::
 
 ; Unlabeled
 hFFCF::
-ds $1 ; FFCF
+  ds $1 ; FFCF
 
 ; Unlabeled
 hFFD0::
-ds $1 ; FFD0
+  ds $1 ; FFD0
 
 ; TODO comment
 hNeedsRenderingFrame::
- ds 1 ; FFD1
+  ds 1 ; FFD1
 
 ; Unlabeled
 hFFD2::

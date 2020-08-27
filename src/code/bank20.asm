@@ -1857,10 +1857,10 @@ func_020_54F5::
     call CopyLinkTilesPair                        ; $555C: $CD $0A $1D
     ret                                           ; $555F: $C9
 
-; amount of BG tiles to be updated for next row / coloumn
+; amount of BG tiles to be updated for next row / column
 RegionUpdateTileAmount::
-.right:  db TILES_PER_COLOUMN - 1
-.left:   db TILES_PER_COLOUMN - 1
+.right:  db TILES_PER_COLUMN - 1
+.left:   db TILES_PER_COLUMN - 1
 .up:     db TILES_PER_ROW
 .down:   db TILES_PER_ROW
 

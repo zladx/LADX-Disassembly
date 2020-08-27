@@ -150,8 +150,8 @@ TILE_WIDTH          equ 8
 TILE_HEIGHT         equ 8
 ; number of tiles in one row
 TILES_PER_ROW       equ DISPLAY_WIDTH/(TILE_WIDTH*2)
-; number of tiles in one coloumn
-TILES_PER_COLOUMN   equ DISPLAY_HEIGHT/(TILE_HEIGHT*2)
+; number of tiles in one column
+TILES_PER_COLUMN   equ DISPLAY_HEIGHT/(TILE_HEIGHT*2)
 ; number of tiles per map
 TILES_PER_MAP       equ $80
 ; Size of a single tile in bytes

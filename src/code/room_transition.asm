@@ -607,8 +607,8 @@ RoomTransitionBGInitialUpdateRegionLow::
 .bottom: db $00
 
 RoomUpdateTileAmount::
-.right:  db TILES_PER_COLOUMN - 1
-.left:   db TILES_PER_COLOUMN - 1
+.right:  db TILES_PER_COLUMN - 1
+.left:   db TILES_PER_COLUMN - 1
 .up:     db TILES_PER_ROW
 .down:   db TILES_PER_ROW
 

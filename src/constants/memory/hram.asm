@@ -14,24 +14,24 @@ section "HRAM", HRAM[$ff80]
 ; *                                                                 *
 ; *******************************************************************
 
+; TODO comment
+hRomBank::
+ ds 1 ; FF80
 
-hRomBank:: ; FF80
- ds 1
+; TODO comment
+hTemp::
+ ds 1 ; FF81
 
-hTemp:: ; FF81
- ds 1
-
-hCodeTemp:: ; FF82
- ds 1
+; TODO comment
+hCodeTemp::
+ ds 1 ; FF82
 
 ; Unlabeled
-hFF83:: ; FF83
- ds $D
+hFF83::
+ ds $D ; FF83
 
 ; Beginning of the game-variables section of the HRAM
-hGameValuesSection EQU $FF90
-
-hNeedsUpdatingBGTiles:: ; FF90
+hGameValuesSection::
  ; Commands for loading tiles into VRAM at the next vblank period (see LoadTiles)
  ;
  ; Commands:
@@ -45,291 +45,333 @@ hNeedsUpdatingBGTiles:: ; FF90
  ;   7:
  ;   8-A: load inventory tiles for ocarina songs
  ;   B-D: load shared gfx: shadows, explosions, etc
- ds 1
+hNeedsUpdatingBGTiles::
+ ds 1 ; FF90
 
-hNeedsUpdatingEnnemiesTiles:: ; FF91
- ds 1
+; TODO comment
+hNeedsUpdatingEnnemiesTiles::
+ ds 1 ; FF91
 
-hBGTilesLoadingStage:: ; FF92
- ; Tiles are loaded in several passes. This stores the stage where the data loading
- ; function is at.
- ;
- ; Possible values: 0 -> $0B
- ds 1
+; Tiles are loaded in several passes. Holds the state of loading function progress.
+; Possible values: 0 -> $0B
+hBGTilesLoadingStage::
+ ds 1 ; FF92
 
-hEnemiesTilesLoadingStage:: ; FF93
- ; Tiles are loaded in several passes. This stores the stage where the data loading
- ; function is at.
- ;
- ; Possible values: 0 -> $0B
- ds 1
+; Tiles are loaded in several passes. Holds the state of loading function progress.
+; Possible values: 0 -> $0B
+hEnemiesTilesLoadingStage::
+ ds 1 ; FF93
 
-hWorldTileset:: ; FF94
-  ; Sub-tileset to use for overworld or dungeon
-  ds 1
+; Sub-tileset to use for overworld or dungeon
+hWorldTileset::
+  ds 1 ; FF94
 
 ; Unlabeled
-ds 1 ; FF95
+hFF95::
+  ds 1 ; FF95
 
-hBaseScrollX:: ; FF96
- ds 1
+; TODO comment
+hBaseScrollX::
+ ds 1 ; FF96
 
-hBaseScrollY:: ; FF97
- ds 1
+; TODO comment
+hBaseScrollY::
+ ds 1 ; FF97
 
-hLinkPositionX:: ; FF98
- ds 1
+; TODO comment
+hLinkPositionX::
+ ds 1 ; FF98
 
-hLinkPositionY:: ; FF99
- ds 1
+; TODO comment
+hLinkPositionY::
+ ds 1 ; FF99
 
-hLinkPositionXIncrement:: ; FF9A
- ; Increment applied to hLinkPositionX at the end of the frame
- ds 1
+; Increment applied to hLinkPositionX at the end of the frame
+hLinkPositionXIncrement::
+ ds 1 ; FF9A
 
-hLinkPositionYIncrement:: ; FF9B
- ; Increment applied to hLinkPositionY at the end of the frame
- ds 1
 
-; Unlabeled
-hFF9C:: ; hFF9C
- ds 1
-
-hLinkAnimationState:: ; FF9D
-  ; How the Link sprite should be drawn.
-  ;
-  ; Values:
-  ; 00   Standing bottom
-  ; 01   Walking bottom
-  ; 02
-  ; 03
-  ; 04   Standing top
-  ; 05   Walking top
-  ; 06   Standing left
-  ; 07   Walking left
-  ; 08
-  ; 09
-  ; 0A   Standing right
-  ; 0B   Walking right
-  ;
-  ; 5E   jumping 1
-  ; 5F   jumping 2
-  ; 60   jumping 3
-  ;
-  ; 6C   Got item
-  ds 1
-
-hLinkDirection:: ; FF9E
-  ; Direction Link is facing
-  ; See DIRECTION_* constants for possible values
-  ds 1
-
-hLinkFinalPositionX:: ; FF9F
-  ; Final computed position of Link, once every modifiers added
-  ds 1
-
-hLinkFinalPositionY:: ; FFA0
-  ; Final computed position of Link, once every modifiers added
-  ds 1
-
-hLinkInteractiveMotionBlocked:: ; FFA1
-  ; Whether the interactive motion of Link (i.e. responding to directionnal pad presses)
-  ; is temporary blocked.
-  ; For instance when grabbing an object with the Power Bracelet, giving
-  ; a sword slash, or talking to some NPCs.
-  ;
-  ; Values:
-  ;   0: interactive motion autorized
-  ;   1: interactive motion locked (e.g. during grab or sword slash)
-  ;   2: interactive motion locked (e.g. talking to Trendy game owner)
-  ds 1
-
-hLinkPositionZ:: ; FFA2
-  ds 1
+; Increment applied to hLinkPositionY at the end of the frame
+hLinkPositionYIncrement::
+ ds 1 ; FF9B
 
 ; Unlabeled
-ds 1
+hFF9C::
+ ds 1 ; hFF9C
 
-hAnimatedTilesGroup:: ; FFA4
-  ; Animated tiles are grouped by groups of 4 tiles.
-  ; Each map can use one of these groups.
-  ; See ANIMATED_TILES_* constants for possible values
-  ds 1
+; How the Link sprite should be drawn.
+;
+; Values:
+; 00 =  Standing bottom
+; 01 =  Walking bottom
+; 02 =
+; 03 =
+; 04 =  Standing top
+; 05 =  Walking top
+; 06 =  Standing left
+; 07 =  Walking left
+; 08 =
+; 09 =
+; 0A =  Standing right
+; 0B =  Walking right
+;
+; 5E =  jumping 1
+; 5F =  jumping 2
+; 60 =  jumping 3
+;
+; 6C =  Got item
+hLinkAnimationState::
+  ds 1 ; FF9D
+
+; Direction Link is facing
+; See DIRECTION_* constants for possible values
+hLinkDirection::
+  ds 1 ; FF9E
+
+; Final computed position of Link, once every modifiers added
+hLinkFinalPositionX::
+  ds 1 ; FF9F
+
+; Final computed position of Link, once every modifiers added
+hLinkFinalPositionY::
+  ds 1 ; FFA0
+
+; Whether the interactive motion of Link (i.e. responding to directionnal pad presses)
+; is temporary blocked.
+; For instance when grabbing an object with the Power Bracelet, giving
+; a sword slash, or talking to some NPCs.
+;
+; Values:
+;   0: interactive motion autorized
+;   1: interactive motion locked (e.g. during grab or sword slash)
+;   2: interactive motion locked (e.g. talking to Trendy game owner)
+hLinkInteractiveMotionBlocked::
+  ds 1 ; FFA1
+
+; TODO comment
+hLinkPositionZ::
+  ds 1 ; FFA2
 
 ; Unlabeled
-hFFA5:: ; FFA5
-  ds 1
+hFFA2::
+ds 1 ; FFA3
 
-hAnimatedTilesFrameCount:: ;FFA6
-  ; Incremented every frame, wraps around $FF
-  ds 1
+; Animated tiles are grouped by groups of 4 tiles.
+; Each map can use one of these groups.
+; See ANIMATED_TILES_* constants for possible values
+hAnimatedTilesGroup::
+  ds 1 ; FFA4
 
-hAnimatedTilesDataOffset:: ; FFA7
-  ; Pointer to the animation data for the current
-  ; frame (either 00, 40, 80 or C0).
-  ds 1
+; Unlabeled
+hFFA5::
+  ds 1 ; FFA5
 
-hMusicFadeOutTimer:: ; FFA8
-  ; Music fade out timer
-  ds 1
+; Incremented every frame, wraps around $FF
+hAnimatedTilesFrameCount::
+  ds 1 ; FFA6
+
+; Pointer to the animation data for the current
+; frame (either 00, 40, 80 or C0).
+hAnimatedTilesDataOffset::
+  ds 1 ; FFA7
+
+; Music fade out timer
+hMusicFadeOutTimer::
+  ds 1 ; FFA8
 
 ; Right channel volume -- low nybble only, 00-07
-hVolumeRight:: ; FFA9
-  ds 1
+hVolumeRight::
+  ds 1 ; FFA9
 
 ; Left channel volume -- high nybble only, 00-70
-hVolumeLeft:: ; FFAA
-  ds 1
+hVolumeLeft::
+  ds 1 ; FFAA
 
-hMusicFadeInTimer:: ; hFFAB
-  ; Music fade in timer
-  ds 4
+; Music fade in timer
+hMusicFadeInTimer::
+  ds 4 ; hFFAB
 
-hObjectUnderEntity:: ; FFAF
-  ; Type of the object under the active entity
-  ds 1
+; Type of the object under the active entity
+hObjectUnderEntity::
+  ds 1 ; FFAF
 
-hDefaultMusicTrack:: ; FFB0
-  ; Music track to play
-  ; See MUSIC_* constants for possible values
-  ds 1
+; Music track to play
+; See MUSIC_* constants for possible values
+hDefaultMusicTrack::
+  ds 1 ; FFB0
 
 ; Next music to be played after room transition
-hNextMusicTrackToFadeInto:: ; hFFB1
-  ds 1
+hNextMusicTrackToFadeInto::
+  ds 1 ; hFFB1
 
-hFFB2:: ; hFFB2
-  ; When 1, Link is moving much slower, like when being
-  ; incapacited by a mini-gel.
-  ds 3
+; When 1, Link is moving much slower, like when being
+; incapacited by a mini-gel.
+hFFB2::
+  ds 3 ; hFFB2
 
-hButtonsInactiveDelay:: ; FFB5
-  ; Number of frames during which joypad is ignored
-  ds 1
+; Number of frames during which joypad is ignored
+hButtonsInactiveDelay::
+  ds 1 ; FFB5
 
 ; Unlabeled
-hFFB6:: ; FFB6
-  ds $6
+hFFB6::
+  ds $6 ; FFB6
 
 ; Unknown; stores previous gameplay type before a transition?
 ; Related to fade-out/fade-in transitions
 ; Seems to affect whether a music track is restarted afer
 ; a transition
-hFFBC:: ; FFBC
-  ds 3
+hFFBC::
+  ds 3 ; FFBC
 
 ; Music track to be played after countdown
 ; See hNextMusicTrackToFadeInto and
-hNextDefaultMusicTrack:: ; FFBF
-  ds 1
+hNextDefaultMusicTrack::
+  ds 1 ; FFBF
 
 ; DMA routine copied from ROM during initialization
 ; Copy the content of wOAMBuffer to the OAM memory
-hDMARoutine:: ; FFC0
-  ds $A
+hDMARoutine::
+  ds $A ; FFC0
 
 ; Unlabeled
-hFFCA:: ; FFCA
-  ds 1
+hFFCA::
+  ds 1 ; FFCA
 
-hPressedButtonsMask:: ; FFCB
-  ; The pressed buttons on the joypad.
-  ; During all the time a button is pressed, the matching bit on this variable is set.
-  ;
-  ; See J_* constants for values.
-  ds 1
+; The pressed buttons on the joypad.
+; During all the time a button is pressed, the matching bit on this variable is set.
+;
+; See J_* constants for values.
+hPressedButtonsMask::
+  ds 1 ; FFCB
 
-hJoypadState:: ; FFCC
-  ; The buttons newly pressed on the joypad.
-  ; The matching bit is set only during the first frame the button is pressed.
-  ; Afterwards, the bit is cleared.
-  ;
-  ; See J_* constants for values.
-  ds 1
+; The buttons newly pressed on the joypad.
+; The matching bit is set only during the first frame the button is pressed.
+; Afterwards, the bit is cleared.
+;
+; See J_* constants for values.
+hJoypadState::
+  ds 1 ; FFCC
 
-hSwordIntersectedAreaY:: ; FFCD
-  ; Topmost corner of the area intercepted by Link's sword
-  ; Vary from 00 to 80 by increments of 10
-  ds 1
+; Topmost corner of the area intercepted by Link's sword
+; Vary from 00 to 80 by increments of 10
+hSwordIntersectedAreaY::
+  ds 1 ; FFCD
 
-hSwordIntersectedAreaX:: ; FFCE
-  ; Leftmost corner of the area intercepted by Link's sword
-  ; Vary from 00 to A0 by increments of 10
-  ds 1
+; Leftmost corner of the area intercepted by Link's sword
+; Vary from 00 to A0 by increments of 10
+hSwordIntersectedAreaX::
+  ds 1 ; FFCE
 
 ; Unlabeled
-ds $2
+hFFCF
+ds $1 ; FFCF
 
-hNeedsRenderingFrame:: ; FFD1
- ds 1
+; Unlabeled
+hFFD0
+ds $1 ; FFD0
 
-hFFD2:: ; FFD2
-  ds 5
+; TODO comment
+hNeedsRenderingFrame::
+ ds 1 ; FFD1
+
+; Unlabeled
+hFFD2::
+  ds 5 ; FFD2
 
 ; Scratch values, used for many different uses
+hScratch0::
+  ds 1 ; FFD7
 
-hScratch0:: ; FFD7
-  ds 1
-hScratch1:: ; FFD8
-  ds 1
-hScratch2:: ; FFD9
-  ds 1
-hScratch3:: ; FFDA
-  ds 1
-hScratch4:: ; FFDB
-  ds 1
-hScratch5:: ; FFDC
-  ds 1
-hScratch6:: ; FFDD
-  ds 1
-hScratch7:: ; FFDE
-  ds 1
-hScratch8:: ; FFDF
-  ds 1
-hScratch9::          ; FFE0
-hBGMapOffsetHigh:: ; FFE0
-  ds 1
-hScratchA::          ; FFE1
-hBGMapOffsetLow::  ; FFE1
-  ds 1
-hScratchB:: ; FFE2
-  ds 1
-hScratchC:: ; FFE3
-  ds 1
-hScratchD:: ; FFE4
-  ds 1
-hScratchE:: ; FFE5
-  ds 1
-hScratchF:: ; FFE6
-hFreeWarpDataAddress:: ; FFE6
-  ; Address of the first free warp data slot
-  ds 1
+; Scratch values, used for many different uses
+hScratch1::
+  ds 1 ; FFD8
 
-hFrameCounter:: ; FFE7
-  ; wraps around 00-FF
-  ds 1
+; Scratch values, used for many different uses
+hScratch2::
+  ds 1 ; FFD9
+
+; Scratch values, used for many different uses
+hScratch3::
+  ds 1 ; FFDA
+
+; Scratch values, used for many different uses
+hScratch4::
+  ds 1 ; FFDB
+
+; Scratch values, used for many different uses
+hScratch5::
+  ds 1 ; FFDC
+
+; Scratch values, used for many different uses
+hScratch6::
+  ds 1 ; FFDD
+
+; Scratch values, used for many different uses
+hScratch7::
+  ds 1 ; FFDE
+
+; Scratch values, used for many different uses
+hScratch8::
+  ds 1 ; FFDF
+
+; Scratch values, used for many different uses
+hScratch9::
+hBGMapOffsetHigh::
+  ds 1 ; FFE0
+
+; Scratch values, used for many different uses
+hScratchA::
+hBGMapOffsetLow::
+  ds 1 ; FFE1
+
+; Scratch values, used for many different uses
+hScratchB::
+  ds 1 ; FFE2
+
+; Scratch values, used for many different uses
+hScratchC::
+  ds 1 ; FFE3
+
+; Scratch values, used for many different uses
+hScratchD::
+  ds 1 ; FFE4
+
+; Scratch values, used for many different uses
+hScratchE::
+  ds 1 ; FFE5
+
+; Scratch values, used for many different uses
+hScratchF::
+; Address of the first free warp data slot
+hFreeWarpDataAddress::
+  ds 1 ; FFE6
+
+; wraps around 00-FF
+hFrameCounter::
+  ds 1 ; FFE7
 
 ; This location has different uses
-hFFE8::                   ; FFE8
-hRoomBank::             ; FFE8
-hDialogBackgroundTile:: ; FFE8
-  ds 1
+hFFE8::
+hRoomBank::
+hDialogBackgroundTile::
+  ds 1 ; FFE8
 
 ; This location has diffent uses
-hFFE9::                   ; FFE9
-hDungeonFloorTile::       ; FFE9
-hIndexOfObjectBelowLink:: ; FFE9
-  ds 1
+hFFE9::
+hDungeonFloorTile::
+hIndexOfObjectBelowLink::
+  ds 1 ; FFE9
 
 ; Active entity status
 ; See wEntitiesStatusTable
-hActiveEntityStatus:: ; FFEA
-  ds 1
+hActiveEntityStatus::
+  ds 1 ; FFEA
 
 ; Active entity type
 ; See wEntitiesTypeTable
-hActiveEntityType:: ; FFEB
-  ds 1
+hActiveEntityType::
+  ds 1 ; FFEB
 
 ; Visual Y-position (including the Z position) of the active entity.
 ; Usually equal to posY + posZ.
@@ -339,57 +381,56 @@ hActiveEntityVisualPosY::
 ; Invert OAM attribute bits of the active entity.
 ;
 ; Each bit set inverts the OAM attributes of the active sprite pair.
-;
-; bit 0-3: GBC palette
-; bit 4: use inverted color palette
-; bit 5: x-flip the entity
-; bit 6: y-flip the entity
+; bit 0-3: GBC palette,
+; bit 4: use inverted color palette,
+; bit 5: x-flip the entity,
+; bit 6: y-flip the entity,
 ; bit 7: invert the background priority
-hActiveEntityFlipAttribute:: ; FFED
-  ds 1
+hActiveEntityFlipAttribute::
+  ds 1 ; FFED
 
 ; Logical X-position of the active entity.
-hActiveEntityPosX:: ; FFEE
-  ds 1
+hActiveEntityPosX::
+  ds 1 ; FFEE
 
 ; Logical Y-position of the active entity.
 ; (Also see hActiveEntityVisualPosY)
-hActiveEntityPosY:: ; FFEF
-  ds 1
+hActiveEntityPosY::
+  ds 1 ; FFEF
 
-hActiveEntityState:: ; FFF0
-  ; The entity-specific state of the active entity
-  ; See wEntitiesStateTable
-  ds 1
+; The entity-specific state of the active entity
+; See wEntitiesStateTable
+hActiveEntityState::
+  ds 1 ; FFF0
 
-hActiveEntitySpriteVariant:: ; FFF1
-  ; See wEntitiesSpriteVariantTable
-  ds 1
+; See wEntitiesSpriteVariantTable
+hActiveEntitySpriteVariant::
+  ds 1 ; FFF1
 
-hJingle:: ; FFF2
-  ; Start playing a jingle
-  ; See JINGLE_* constants for possible values
-  ds 1
+; Start playing a jingle
+; See JINGLE_* constants for possible values
+hJingle::
+  ds 1 ; FFF2
 
-hWaveSfx:: ; FFF3
-  ; Start playing a waveform audio effect
-  ; See WAVE_SFX_* constants for possible values
-  ds 1
+; Start playing a waveform audio effect
+; See WAVE_SFX_* constants for possible values
+hWaveSfx::
+  ds 1 ; FFF3
 
-hNoiseSfx:: ; FFF4
-  ; Play a noise-generated audio effect next
-  ; See NOISE_SFX_* constants for possible values
-  ds 1
+; Play a noise-generated audio effect next
+; See NOISE_SFX_* constants for possible values
+hNoiseSfx::
+  ds 1 ; FFF4
 
-hActiveEntityTilesOffset:: ; FFF5
-  ; hActiveEntityTilesOffset?
-  ; Control the base location of the active entity tiles
-  ; in the tilemap.
-  ;
-  ; Dodongo snake: $10 for a specific instance
-  ; Octorock: $30
-  ; etc.
-  ds 1
+; hActiveEntityTilesOffset?
+; Control the base location of the active entity tiles
+; in the tilemap.
+;
+; Dodongo snake: $10 for a specific instance
+; Octorock: $30
+; etc.
+hActiveEntityTilesOffset::
+  ds 1 ; FFF5
 
 ; Room id on the active map
 hMapRoom:: ; FFF6
@@ -429,9 +470,11 @@ hLinkFinalRoomPosition::
 hFFFC::
   ds 1 ; FFFC
 
-hDidRenderFrame:: ; FFFD
- ds 1
+; TODO comment
+hDidRenderFrame::
+ ds 1 ; FFFD
 
-hIsGBC:: ; FFFE
-  ; 0 = GB, 1 = GBC
-  ds 1
+; Marker for the Hardware that the program is running on
+; 0 = GB, 1 = GBC
+hIsGBC::
+  ds 1 ; FFFE

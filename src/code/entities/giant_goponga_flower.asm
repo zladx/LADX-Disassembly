@@ -45,11 +45,11 @@ jr_006_62EF:
     call SpawnNewEntity_trampoline                ; $62F5: $CD $86 $3B
     jr   c, jr_006_6311                           ; $62F8: $38 $17
 
-    ldh  a, [hScratch0]                           ; $62FA: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $62FA: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $62FC: $21 $00 $C2
     add  hl, de                                   ; $62FF: $19
     ld   [hl], a                                  ; $6300: $77
-    ldh  a, [hScratch1]                           ; $6301: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $6301: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $6303: $21 $10 $C2
     add  hl, de                                   ; $6306: $19
     ld   [hl], a                                  ; $6307: $77

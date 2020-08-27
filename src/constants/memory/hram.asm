@@ -327,70 +327,70 @@ hNeedsRenderingFrame::
 hFFD2::
   ds 5 ; FFD2
 
-; Scratch values, used for many different uses
-hScratch0::
+; used in many different cases
+hMultiPurpose0::
   ds 1 ; FFD7
 
-; Scratch values, used for many different uses
-hScratch1::
+; used in many different cases
+hMultiPurpose1::
   ds 1 ; FFD8
 
-; Scratch values, used for many different uses
-hScratch2::
+; used in many different cases
+hMultiPurpose2::
   ds 1 ; FFD9
 
-; Scratch values, used for many different uses
-hScratch3::
+; used in many different cases
+hMultiPurpose3::
   ds 1 ; FFDA
 
-; Scratch values, used for many different uses
-hScratch4::
+; used in many different cases
+hMultiPurpose4::
   ds 1 ; FFDB
 
-; Scratch values, used for many different uses
-hScratch5::
+; used in many different cases
+hMultiPurpose5::
   ds 1 ; FFDC
 
-; Scratch values, used for many different uses
-hScratch6::
+; used in many different cases
+hMultiPurpose6::
   ds 1 ; FFDD
 
-; Scratch values, used for many different uses
-hScratch7::
+; used in many different cases
+hMultiPurpose7::
   ds 1 ; FFDE
 
-; Scratch values, used for many different uses
-hScratch8::
+; used in many different cases
+hMultiPurpose8::
   ds 1 ; FFDF
 
-; Scratch values, used for many different uses
-hScratch9::
+; used in many different cases
+hMultiPurpose9::
 hBGMapOffsetHigh::
   ds 1 ; FFE0
 
-; Scratch values, used for many different uses
-hScratchA::
+; used in many different cases
+hMultiPurposeA::
 hBGMapOffsetLow::
   ds 1 ; FFE1
 
-; Scratch values, used for many different uses
-hScratchB::
+; used in many different cases
+hMultiPurposeB::
   ds 1 ; FFE2
 
-; Scratch values, used for many different uses
-hScratchC::
+; used in many different cases
+hMultiPurposeC::
   ds 1 ; FFE3
 
-; Scratch values, used for many different uses
-hScratchD::
+; used in many different cases
+hMultiPurposeD::
   ds 1 ; FFE4
 
-; Scratch values, used for many different uses
-hScratchE::
+; used in many different cases
+hMultiPurposeE::
   ds 1 ; FFE5
 
-; Scratch values, used for many different uses
-hScratchF::
+; used in many different cases
+hMultiPurposeF::
 ; Address of the first free warp data slot
 hFreeWarpDataAddress::
   ds 1 ; FFE6
@@ -399,14 +399,14 @@ hFreeWarpDataAddress::
 hFrameCounter::
   ds 1 ; FFE7
 
-; This location has different uses
-hFFE8::
+; used in many different cases
+hMultiPurposeG::
 hRoomBank::
 hDialogBackgroundTile::
   ds 1 ; FFE8
 
-; This location has diffent uses
-hFFE9::
+; used in many different cases
+hMultiPurposeH::
 hDungeonFloorTile::
 hIndexOfObjectBelowLink::
   ds 1 ; FFE9

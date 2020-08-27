@@ -29,11 +29,11 @@ GenieState0Handler::
     ld   a, ENTITY_GENIE                          ; $401F: $3E $5C
     call SpawnNewEntity_trampoline                ; $4021: $CD $86 $3B
 
-    ldh  a, [hScratch0]                           ; $4024: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4024: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $4026: $21 $00 $C2
     add  hl, de                                   ; $4029: $19
     ld   [hl], a                                  ; $402A: $77
-    ldh  a, [hScratch1]                           ; $402B: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $402B: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $402D: $21 $10 $C2
     add  hl, de                                   ; $4030: $19
     sub  $18                                      ; $4031: $D6 $18
@@ -74,7 +74,7 @@ jr_004_404E:
     ld   hl, wEntitiesPosZTable                                ; $4073: $21 $10 $C3
     add  hl, bc                                   ; $4076: $09
     ld   a, [hl]                                  ; $4077: $7E
-    ldh  [hFFE8], a                               ; $4078: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $4078: $E0 $E8
     and  $80                                      ; $407A: $E6 $80
     jr   z, jr_004_4085                           ; $407C: $28 $07
 
@@ -120,9 +120,9 @@ func_004_40A3::
     ld   [wC13E], a                               ; $40B7: $EA $3E $C1
     ld   a, $14                                   ; $40BA: $3E $14
     call GetVectorTowardsLink_trampoline          ; $40BC: $CD $B5 $3B
-    ldh  a, [hScratch0]                               ; $40BF: $F0 $D7
+    ldh  a, [hMultiPurpose0]                               ; $40BF: $F0 $D7
     ldh  [hLinkPositionYIncrement], a                               ; $40C1: $E0 $9B
-    ldh  a, [hScratch1]                               ; $40C3: $F0 $D8
+    ldh  a, [hMultiPurpose1]                               ; $40C3: $F0 $D8
     ldh  [hLinkPositionXIncrement], a                               ; $40C5: $E0 $9A
 
 jr_004_40C7:
@@ -132,7 +132,7 @@ jr_004_40C7:
     and  a                                        ; $40CC: $A7
     jr   nz, jr_004_4118                          ; $40CD: $20 $49
 
-    ldh  a, [hFFE8]                               ; $40CF: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $40CF: $F0 $E8
     and  $80                                      ; $40D1: $E6 $80
     jr   z, jr_004_40DF                           ; $40D3: $28 $0A
 
@@ -185,11 +185,11 @@ jr_004_4118:
 
     ld   a, ENTITY_GENIE                          ; $411F: $3E $5C
     call SpawnNewEntity_trampoline                ; $4121: $CD $86 $3B
-    ldh  a, [hScratch0]                               ; $4124: $F0 $D7
+    ldh  a, [hMultiPurpose0]                               ; $4124: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $4126: $21 $00 $C2
     add  hl, de                                   ; $4129: $19
     ld   [hl], a                                  ; $412A: $77
-    ldh  a, [hScratch1]                               ; $412B: $F0 $D8
+    ldh  a, [hMultiPurpose1]                               ; $412B: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $412D: $21 $10 $C2
     add  hl, de                                   ; $4130: $19
     sub  $26                                      ; $4131: $D6 $26
@@ -357,13 +357,13 @@ func_004_4214::
     ld   [hl], $20                                ; $4226: $36 $20
     ld   a, $08                                   ; $4228: $3E $08
     call GetVectorTowardsLink_trampoline          ; $422A: $CD $B5 $3B
-    ldh  a, [hScratch0]                               ; $422D: $F0 $D7
+    ldh  a, [hMultiPurpose0]                               ; $422D: $F0 $D7
     cpl                                           ; $422F: $2F
     inc  a                                        ; $4230: $3C
     ld   hl, wEntitiesSpeedYTable                                ; $4231: $21 $50 $C2
     add  hl, bc                                   ; $4234: $09
     ld   [hl], a                                  ; $4235: $77
-    ldh  a, [hScratch1]                               ; $4236: $F0 $D8
+    ldh  a, [hMultiPurpose1]                               ; $4236: $F0 $D8
     cpl                                           ; $4238: $2F
     inc  a                                        ; $4239: $3C
     ld   hl, wEntitiesSpeedXTable                                ; $423A: $21 $40 $C2
@@ -388,7 +388,7 @@ jr_004_4245:
     ld   hl, wEntitiesUnknowTableH                ; $425D: $21 $30 $C4
     add  hl, bc                                   ; $4260: $09
     ld   [hl], $D0                                ; $4261: $36 $D0
-    ldh  a, [hFFE8]                               ; $4263: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $4263: $F0 $E8
     and  $80                                      ; $4265: $E6 $80
     jr   z, jr_004_4278                           ; $4267: $28 $0F
 
@@ -658,12 +658,12 @@ jr_004_43FF:
     call SpawnNewEntity_trampoline                ; $4409: $CD $86 $3B
     jr   c, jr_004_4438                           ; $440C: $38 $2A
 
-    ldh  a, [hScratch0]                               ; $440E: $F0 $D7
+    ldh  a, [hMultiPurpose0]                               ; $440E: $F0 $D7
     sub  $0C                                      ; $4410: $D6 $0C
     ld   hl, wEntitiesPosXTable                         ; $4412: $21 $00 $C2
     add  hl, de                                   ; $4415: $19
     ld   [hl], a                                  ; $4416: $77
-    ldh  a, [hScratch1]                               ; $4417: $F0 $D8
+    ldh  a, [hMultiPurpose1]                               ; $4417: $F0 $D8
     sub  $14                                      ; $4419: $D6 $14
     ld   hl, wEntitiesPosYTable                   ; $441B: $21 $10 $C2
     add  hl, de                                   ; $441E: $19
@@ -700,12 +700,12 @@ jr_004_4438:
     ld   c, a                                     ; $444F: $4F
     ld   hl, Data_004_449D                        ; $4450: $21 $9D $44
     add  hl, bc                                   ; $4453: $09
-    ldh  a, [hScratch0]                               ; $4454: $F0 $D7
+    ldh  a, [hMultiPurpose0]                               ; $4454: $F0 $D7
     add  [hl]                                     ; $4456: $86
     ld   hl, wEntitiesPosXTable                         ; $4457: $21 $00 $C2
     add  hl, de                                   ; $445A: $19
     ld   [hl], a                                  ; $445B: $77
-    ldh  a, [hScratch1]                               ; $445C: $F0 $D8
+    ldh  a, [hMultiPurpose1]                               ; $445C: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $445E: $21 $10 $C2
     add  hl, de                                   ; $4461: $19
     ld   [hl], a                                  ; $4462: $77
@@ -805,11 +805,11 @@ func_004_44E9::
 
     ld   a, ENTITY_GENIE                          ; $44F3: $3E $5C
     call SpawnNewEntity_trampoline                ; $44F5: $CD $86 $3B
-    ldh  a, [hScratch0]                               ; $44F8: $F0 $D7
+    ldh  a, [hMultiPurpose0]                               ; $44F8: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $44FA: $21 $00 $C2
     add  hl, de                                   ; $44FD: $19
     ld   [hl], a                                  ; $44FE: $77
-    ldh  a, [hScratch1]                               ; $44FF: $F0 $D8
+    ldh  a, [hMultiPurpose1]                               ; $44FF: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $4501: $21 $10 $C2
     add  hl, de                                   ; $4504: $19
     ld   [hl], a                                  ; $4505: $77
@@ -856,7 +856,7 @@ jr_004_4535:
     call GetVectorTowardsLink_trampoline          ; $4549: $CD $B5 $3B
     ld   hl, wEntitiesSpeedXTable                                ; $454C: $21 $40 $C2
     add  hl, bc                                   ; $454F: $09
-    ldh  a, [hScratch1]                               ; $4550: $F0 $D8
+    ldh  a, [hMultiPurpose1]                               ; $4550: $F0 $D8
     sub  [hl]                                     ; $4552: $96
     and  $80                                      ; $4553: $E6 $80
     jr   z, jr_004_4559                           ; $4555: $28 $02
@@ -868,7 +868,7 @@ jr_004_4559:
     inc  [hl]                                     ; $4559: $34
     ld   hl, wEntitiesSpeedYTable                                ; $455A: $21 $50 $C2
     add  hl, bc                                   ; $455D: $09
-    ldh  a, [hScratch0]                               ; $455E: $F0 $D7
+    ldh  a, [hMultiPurpose0]                               ; $455E: $F0 $D7
     sub  [hl]                                     ; $4560: $96
     and  $80                                      ; $4561: $E6 $80
     jr   z, jr_004_4567                           ; $4563: $28 $02
@@ -937,12 +937,12 @@ jr_004_45A6:
     ld   c, a                                     ; $45BE: $4F
     ld   hl, Data_004_449D                        ; $45BF: $21 $9D $44
     add  hl, bc                                   ; $45C2: $09
-    ldh  a, [hScratch0]                               ; $45C3: $F0 $D7
+    ldh  a, [hMultiPurpose0]                               ; $45C3: $F0 $D7
     add  [hl]                                     ; $45C5: $86
     ld   hl, wEntitiesPosXTable                         ; $45C6: $21 $00 $C2
     add  hl, de                                   ; $45C9: $19
     ld   [hl], a                                  ; $45CA: $77
-    ldh  a, [hScratch1]                               ; $45CB: $F0 $D8
+    ldh  a, [hMultiPurpose1]                               ; $45CB: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $45CD: $21 $10 $C2
     add  hl, de                                   ; $45D0: $19
     ld   [hl], a                                  ; $45D1: $77
@@ -977,21 +977,21 @@ jr_004_45F1:
     ldh  [hLinkPositionY], a                      ; $45FD: $E0 $99
     ld   a, $20                                   ; $45FF: $3E $20
     call GetVectorTowardsLink_trampoline          ; $4601: $CD $B5 $3B
-    ldh  a, [hScratch1]                               ; $4604: $F0 $D8
+    ldh  a, [hMultiPurpose1]                               ; $4604: $F0 $D8
     cpl                                           ; $4606: $2F
     inc  a                                        ; $4607: $3C
     push af                                       ; $4608: $F5
-    ldh  a, [hScratch0]                               ; $4609: $F0 $D7
+    ldh  a, [hMultiPurpose0]                               ; $4609: $F0 $D7
     push af                                       ; $460B: $F5
     ld   a, $04                                   ; $460C: $3E $04
     call GetVectorTowardsLink_trampoline          ; $460E: $CD $B5 $3B
-    ld   hl, hScratch1                                ; $4611: $21 $D8 $FF
+    ld   hl, hMultiPurpose1                                ; $4611: $21 $D8 $FF
     pop  af                                       ; $4614: $F1
     add  [hl]                                     ; $4615: $86
     ld   hl, wEntitiesSpeedXTable                                ; $4616: $21 $40 $C2
     add  hl, bc                                   ; $4619: $09
     ld   [hl], a                                  ; $461A: $77
-    ld   hl, hScratch0                                ; $461B: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                                ; $461B: $21 $D7 $FF
     pop  af                                       ; $461E: $F1
     add  [hl]                                     ; $461F: $86
     ld   hl, wEntitiesSpeedYTable                                ; $4620: $21 $50 $C2
@@ -1181,11 +1181,11 @@ jr_004_486D:
 
     ld   a, $5C                                   ; $4875: $3E $5C
     call SpawnNewEntity_trampoline                ; $4877: $CD $86 $3B
-    ldh  a, [hScratch0]                               ; $487A: $F0 $D7
+    ldh  a, [hMultiPurpose0]                               ; $487A: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $487C: $21 $00 $C2
     add  hl, de                                   ; $487F: $19
     ld   [hl], a                                  ; $4880: $77
-    ldh  a, [hScratch1]                               ; $4881: $F0 $D8
+    ldh  a, [hMultiPurpose1]                               ; $4881: $F0 $D8
     cp   $14                                      ; $4883: $FE $14
     jr   nc, jr_004_4889                          ; $4885: $30 $02
 

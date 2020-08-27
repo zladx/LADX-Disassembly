@@ -83,7 +83,7 @@ jr_006_5A43:
     add  hl, bc                                   ; $5A58: $09
     ld   a, [hl]                                  ; $5A59: $7E
     and  $80                                      ; $5A5A: $E6 $80
-    ldh  [hFFE8], a                               ; $5A5C: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $5A5C: $E0 $E8
     jr   z, jr_006_5A67                           ; $5A5E: $28 $07
 
     xor  a                                        ; $5A60: $AF
@@ -219,7 +219,7 @@ jr_006_5B27:
 YipYipState1Handler::
     call UpdateEntityPosWithSpeed_06              ; $5B2A: $CD $41 $65
     call label_3B23                               ; $5B2D: $CD $23 $3B
-    ldh  a, [hFFE8]                               ; $5B30: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $5B30: $F0 $E8
     and  a                                        ; $5B32: $A7
     jr   z, label_006_5B4C                        ; $5B33: $28 $17
 

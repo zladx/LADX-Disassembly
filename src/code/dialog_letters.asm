@@ -63,7 +63,7 @@ func_01C_4A3D::
     ldi  [hl], a                                ; $4A5B: $22
     ld   a, $51                                 ; $4A5C: $3E $51
     ldi  [hl], a                                ; $4A5E: $22
-    ldh  a, [hFFE8]                             ; $4A5F: $F0 $E8
+    ldh  a, [hMultiPurposeG]                             ; $4A5F: $F0 $E8
     ldi  [hl], a                                ; $4A61: $22
     ld   [hl], $00                              ; $4A62: $36 $00
     ldh  a, [hIsGBC]                            ; $4A64: $F0 $FE

@@ -18,12 +18,12 @@ SmasherEntityHandler::
     call SpawnNewEntity_trampoline                ; $4521: $CD $86 $3B
     ld   a, e                                     ; $4524: $7B
     ld   [$D201], a                               ; $4525: $EA $01 $D2
-    ldh  a, [hScratch1]                           ; $4528: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $4528: $F0 $D8
     add  $10                                      ; $452A: $C6 $10
     ld   hl, wEntitiesPosYTable                   ; $452C: $21 $10 $C2
     add  hl, de                                   ; $452F: $19
     ld   [hl], a                                  ; $4530: $77
-    ldh  a, [hScratch0]                           ; $4531: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4531: $F0 $D7
     add  $30                                      ; $4533: $C6 $30
     ld   hl, wEntitiesPosXTable                   ; $4535: $21 $00 $C2
     add  hl, de                                   ; $4538: $19
@@ -52,7 +52,7 @@ jr_006_453F:
     add  hl, bc                                   ; $4562: $09
     ld   a, [hl]                                  ; $4563: $7E
     and  $80                                      ; $4564: $E6 $80
-    ldh  [hFFE8], a                               ; $4566: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $4566: $E0 $E8
     jr   z, jr_006_4570                           ; $4568: $28 $06
 
     ld   [hl], b                                  ; $456A: $70
@@ -132,7 +132,7 @@ jr_006_45E2:
     call IncrementEntityState                     ; $45E2: $CD $12 $3B
 
 func_006_45E5::
-    ldh  a, [hFFE8]                               ; $45E5: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $45E5: $F0 $E8
     and  a                                        ; $45E7: $A7
     jr   z, jr_006_45F0                           ; $45E8: $28 $06
 
@@ -380,7 +380,7 @@ label_006_4781:
     ld   a, [hl]                                  ; $47AC: $7E
     ldh  [hIndexOfObjectBelowLink], a             ; $47AD: $E0 $E9
     and  $80                                      ; $47AF: $E6 $80
-    ldh  [hFFE8], a                               ; $47B1: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $47B1: $E0 $E8
     jr   z, jr_006_47DA                           ; $47B3: $28 $25
 
     ld   [hl], b                                  ; $47B5: $70
@@ -421,7 +421,7 @@ jr_006_47DA:
 ._04 dw func_006_48DD                             ; $47E8
 
 func_006_47EA::
-    ldh  a, [hFFE9]                               ; $47EA: $F0 $E9
+    ldh  a, [hMultiPurposeH]                               ; $47EA: $F0 $E9
     dec  a                                        ; $47EC: $3D
     and  $80                                      ; $47ED: $E6 $80
     jr   z, jr_006_4806                           ; $47EF: $28 $15
@@ -598,7 +598,7 @@ func_006_48DD::
     ld   [hl], $92                                ; $48EA: $36 $92
 
 jr_006_48EC:
-    ldh  a, [hFFE8]                               ; $48EC: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $48EC: $F0 $E8
     and  a                                        ; $48EE: $A7
     jr   nz, jr_006_490C                          ; $48EF: $20 $1B
 

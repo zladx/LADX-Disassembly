@@ -550,22 +550,22 @@ Data_020_4870::
 func_020_4874::
     ld   hl, Data_020_486C                        ; $4874: $21 $6C $48
     add  hl, de                                   ; $4877: $19
-    ldh  a, [hScratch0]                           ; $4878: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4878: $F0 $D7
     add  [hl]                                     ; $487A: $86
     sub  $08                                      ; $487B: $D6 $08
     and  $F0                                      ; $487D: $E6 $F0
     ldh  [hSwordIntersectedAreaX], a              ; $487F: $E0 $CE
     swap a                                        ; $4881: $CB $37
-    ldh  [hScratch0], a                           ; $4883: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $4883: $E0 $D7
     ld   hl, Data_020_4870                        ; $4885: $21 $70 $48
     add  hl, de                                   ; $4888: $19
-    ldh  a, [hScratch1]                           ; $4889: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $4889: $F0 $D8
     add  [hl]                                     ; $488B: $86
     sub  $10                                      ; $488C: $D6 $10
     and  $F0                                      ; $488E: $E6 $F0
     ld   e, a                                     ; $4890: $5F
     ldh  [hSwordIntersectedAreaY], a              ; $4891: $E0 $CD
-    ldh  a, [hScratch0]                           ; $4893: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4893: $F0 $D7
     or   e                                        ; $4895: $B3
     ld   e, a                                     ; $4896: $5F
     ret                                           ; $4897: $C9
@@ -628,9 +628,9 @@ func_020_48CA::
     ldh  a, [hLinkDirection]                      ; $48DD: $F0 $9E
     ld   e, a                                     ; $48DF: $5F
     ldh  a, [hLinkPositionX]                      ; $48E0: $F0 $98
-    ldh  [hScratch0], a                           ; $48E2: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $48E2: $E0 $D7
     ldh  a, [hLinkPositionY]                      ; $48E4: $F0 $99
-    ldh  [hScratch1], a                           ; $48E6: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $48E6: $E0 $D8
     call func_020_4874                            ; $48E8: $CD $74 $48
     ld   hl, wRoomObjects                         ; $48EB: $21 $11 $D7
     add  hl, de                                   ; $48EE: $19
@@ -706,25 +706,25 @@ Data_020_4950::
 func_020_4954::
     ld   a, [hl]                                  ; $4954: $7E
     inc  a                                        ; $4955: $3C
-    ldh  [hScratch0], a                           ; $4956: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $4956: $E0 $D7
     dec  a                                        ; $4958: $3D
     cp   $55                                      ; $4959: $FE $55
     jr   nz, jr_020_4961                          ; $495B: $20 $04
 
     ld   a, $AE                                   ; $495D: $3E $AE
-    ldh  [hScratch0], a                           ; $495F: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $495F: $E0 $D7
 
 jr_020_4961:
-    ldh  a, [hScratch0]                           ; $4961: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4961: $F0 $D7
     ld   [hl], a                                  ; $4963: $77
     call label_2887                               ; $4964: $CD $87 $28
     push bc                                       ; $4967: $C5
-    ldh  a, [hScratch0]                           ; $4968: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4968: $F0 $D7
     ld   [wDDD8], a                               ; $496A: $EA $D8 $DD
     ld   a, $20                                   ; $496D: $3E $20
     call func_91D                                 ; $496F: $CD $1D $09
     pop  bc                                       ; $4972: $C1
-    ldh  a, [hScratch0]                           ; $4973: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4973: $F0 $D7
     cp   $AE                                      ; $4975: $FE $AE
     jr   nz, jr_020_497F                          ; $4977: $20 $06
 
@@ -751,8 +751,8 @@ CheckPushedTombStone::
     add  hl, de                                   ; $4990: $19
     ld   a, [hl]                                  ; $4991: $7E
 
-    ; If [hFFE9] != 0, return.
-    ld   hl, hFFE9                                ; $4992: $21 $E9 $FF
+    ; If [hMultiPurposeH] != 0, return.
+    ld   hl, hMultiPurposeH                                ; $4992: $21 $E9 $FF
     cp   [hl]                                     ; $4995: $BE
     jr   nz, .return                              ; $4996: $20 $17
 
@@ -809,13 +809,13 @@ func_020_49D9::
     ld   h, a                                     ; $49DB: $67
     ldh  a, [hBGMapOffsetLow]                     ; $49DC: $F0 $E1
     ld   l, a                                     ; $49DE: $6F
-    ldh  a, [hScratchB]                           ; $49DF: $F0 $E2
+    ldh  a, [hMultiPurposeB]                           ; $49DF: $F0 $E2
     ld   b, a                                     ; $49E1: $47
-    ldh  a, [hScratchC]                           ; $49E2: $F0 $E3
+    ldh  a, [hMultiPurposeC]                           ; $49E2: $F0 $E3
     ld   c, a                                     ; $49E4: $4F
-    ldh  a, [hScratchD]                           ; $49E5: $F0 $E4
+    ldh  a, [hMultiPurposeD]                           ; $49E5: $F0 $E4
     ld   d, a                                     ; $49E7: $57
-    ldh  a, [hScratchE]                           ; $49E8: $F0 $E5
+    ldh  a, [hMultiPurposeE]                           ; $49E8: $F0 $E5
     ld   e, a                                     ; $49EA: $5F
     ret                                           ; $49EB: $C9
 
@@ -874,12 +874,12 @@ func_020_4A22::
     ld   [wDC91+21], a                               ; $4A61: $EA $A6 $DC
     ld   [wDC91+22], a                               ; $4A64: $EA $A7 $DC
     ld   a, $DC                                   ; $4A67: $3E $DC
-    ldh  [hScratchB], a                           ; $4A69: $E0 $E2
-    ldh  [hScratchD], a                           ; $4A6B: $E0 $E4
+    ldh  [hMultiPurposeB], a                           ; $4A69: $E0 $E2
+    ldh  [hMultiPurposeD], a                           ; $4A6B: $E0 $E4
     ld   a, $94                                   ; $4A6D: $3E $94
-    ldh  [hScratchC], a                           ; $4A6F: $E0 $E3
+    ldh  [hMultiPurposeC], a                           ; $4A6F: $E0 $E3
     ld   a, $AB                                   ; $4A71: $3E $AB
-    ldh  [hScratchE], a                           ; $4A73: $E0 $E5
+    ldh  [hMultiPurposeE], a                           ; $4A73: $E0 $E5
     ret                                           ; $4A75: $C9
 
 ; Configures an async data request to copy background tilemap
@@ -888,7 +888,7 @@ func_020_4A76::
     ld   c, a                                     ; $4A79: $4F
     ld   b, $00                                   ; $4A7A: $06 $00
     ld   a, [wC12A]                               ; $4A7C: $FA $2A $C1
-    ldh  [hScratch2], a                           ; $4A7F: $E0 $D9
+    ldh  [hMultiPurpose2], a                           ; $4A7F: $E0 $D9
     ld   hl, Data_020_49EC                        ; $4A81: $21 $EC $49
     add  hl, bc                                   ; $4A84: $09
     ldh  a, [hIsGBC]                              ; $4A85: $F0 $FE
@@ -918,16 +918,16 @@ Data_020_4AA4::
 
 func_020_4AB3::
     push hl                                       ; $4AB3: $E5
-    ldh  a, [hScratch0]                           ; $4AB4: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4AB4: $F0 $D7
     add  h                                        ; $4AB6: $84
     ld   [bc], a                                  ; $4AB7: $02
     inc  bc                                       ; $4AB8: $03
-    ldh  a, [hScratch1]                           ; $4AB9: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $4AB9: $F0 $D8
     add  l                                        ; $4ABB: $85
     ld   [bc], a                                  ; $4ABC: $02
     inc  bc                                       ; $4ABD: $03
     ld   hl, Data_020_4A93                        ; $4ABE: $21 $93 $4A
-    ldh  a, [hScratch2]                           ; $4AC1: $F0 $D9
+    ldh  a, [hMultiPurpose2]                           ; $4AC1: $F0 $D9
     sla  a                                        ; $4AC3: $CB $27
     ld   e, a                                     ; $4AC5: $5F
     ld   d, $00                                   ; $4AC6: $16 $00
@@ -947,14 +947,14 @@ jr_020_4AD4:
     ld   hl, Data_020_4AA3                        ; $4AD5: $21 $A3 $4A
     add  hl, de                                   ; $4AD8: $19
     ld   a, [hl]                                  ; $4AD9: $7E
-    ld   hl, hScratch3                            ; $4ADA: $21 $DA $FF
+    ld   hl, hMultiPurpose3                            ; $4ADA: $21 $DA $FF
     or   [hl]                                     ; $4ADD: $B6
     ld   [bc], a                                  ; $4ADE: $02
     ldh  a, [hIsGBC]                              ; $4ADF: $F0 $FE
     and  a                                        ; $4AE1: $A7
     jr   z, jr_020_4AEF                           ; $4AE2: $28 $0B
 
-    ldh  a, [hScratch3]                           ; $4AE4: $F0 $DA
+    ldh  a, [hMultiPurpose3]                           ; $4AE4: $F0 $DA
     and  a                                        ; $4AE6: $A7
     jr   z, jr_020_4AEF                           ; $4AE7: $28 $06
 
@@ -966,11 +966,11 @@ jr_020_4AD4:
 jr_020_4AEF:
     inc  bc                                       ; $4AEF: $03
     pop  hl                                       ; $4AF0: $E1
-    ldh  a, [hScratch0]                           ; $4AF1: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4AF1: $F0 $D7
     add  h                                        ; $4AF3: $84
     ld   [bc], a                                  ; $4AF4: $02
     inc  bc                                       ; $4AF5: $03
-    ldh  a, [hScratch1]                           ; $4AF6: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $4AF6: $F0 $D8
     add  l                                        ; $4AF8: $85
     add  $08                                      ; $4AF9: $C6 $08
     ld   [bc], a                                  ; $4AFB: $02
@@ -983,14 +983,14 @@ jr_020_4AEF:
     ld   hl, Data_020_4AA4                        ; $4B04: $21 $A4 $4A
     add  hl, de                                   ; $4B07: $19
     ld   a, [hl]                                  ; $4B08: $7E
-    ld   hl, hScratch3                            ; $4B09: $21 $DA $FF
+    ld   hl, hMultiPurpose3                            ; $4B09: $21 $DA $FF
     or   [hl]                                     ; $4B0C: $B6
     ld   [bc], a                                  ; $4B0D: $02
     ldh  a, [hIsGBC]                              ; $4B0E: $F0 $FE
     and  a                                        ; $4B10: $A7
     jr   z, jr_020_4B1E                           ; $4B11: $28 $0B
 
-    ldh  a, [hScratch3]                           ; $4B13: $F0 $DA
+    ldh  a, [hMultiPurpose3]                           ; $4B13: $F0 $DA
     and  a                                        ; $4B15: $A7
     jr   z, jr_020_4B1E                           ; $4B16: $28 $06
 
@@ -1549,7 +1549,7 @@ jr_020_527C:
     ld   hl, data_020_5246                        ; $5280: $21 $46 $52
     add  hl, de                                   ; $5283: $19
     ld   a, [hl]                                  ; $5284: $7E
-    ldh  [hScratch0], a                           ; $5285: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $5285: $E0 $D7
     sla  e                                        ; $5287: $CB $23
     ld   hl, data_020_5224                        ; $5289: $21 $24 $52
     add  hl, de                                   ; $528C: $19
@@ -1567,7 +1567,7 @@ jr_020_5296:
     and  $03                                      ; $5298: $E6 $03
     jr   nz, jr_020_5296                          ; $529A: $20 $FA
 
-    ld   hl, hScratch1                            ; $529C: $21 $D8 $FF
+    ld   hl, hMultiPurpose1                            ; $529C: $21 $D8 $FF
     ld   [hl], $01                                ; $529F: $36 $01
     ldh  a, [hIsGBC]                              ; $52A1: $F0 $FE
     and  a                                        ; $52A3: $A7
@@ -1582,7 +1582,7 @@ jr_020_52A8:
     and  [hl]                                     ; $52AF: $A6
     jr   nz, jr_020_52A8                          ; $52B0: $20 $F6
 
-    ldh  a, [hScratch0]                           ; $52B2: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $52B2: $F0 $D7
     ld   l, a                                     ; $52B4: $6F
     ld   a, [wC17C]                               ; $52B5: $FA $7C $C1
     ld   e, a                                     ; $52B8: $5F
@@ -1966,10 +1966,10 @@ jr_020_55F0:
 
     inc  [hl]                                     ; $5601: $34
     xor  a                                        ; $5602: $AF
-    ldh  [hScratch0], a                           ; $5603: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $5603: $E0 $D7
 
 jr_020_5605:
-    ldh  a, [hScratch0]                           ; $5605: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $5605: $F0 $D7
     cp   $03                                      ; $5607: $FE $03
     jr   z, jr_020_562E                           ; $5609: $28 $23
 
@@ -1998,7 +1998,7 @@ jr_020_561C:
 
     ld   a, c                                     ; $5626: $79
     ld   [hl], a                                  ; $5627: $77
-    ld   hl, hScratch0                            ; $5628: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                            ; $5628: $21 $D7 $FF
     inc  [hl]                                     ; $562B: $34
     jr   jr_020_5605                              ; $562C: $18 $D7
 
@@ -2026,10 +2026,10 @@ func_020_564B::
     jr   z, jr_020_568A                           ; $564D: $28 $3B
 
     xor  a                                        ; $564F: $AF
-    ldh  [hScratch0], a                           ; $5650: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $5650: $E0 $D7
 
 jr_020_5652:
-    ldh  a, [hScratch0]                           ; $5652: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $5652: $F0 $D7
     cp   $03                                      ; $5654: $FE $03
     jr   z, jr_020_568A                           ; $5656: $28 $32
 
@@ -2043,7 +2043,7 @@ jr_020_5652:
     ld   b, $00                                   ; $5662: $06 $00
 
 jr_020_5664:
-    ldh  a, [hScratch0]                           ; $5664: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $5664: $F0 $D7
     sla  a                                        ; $5666: $CB $27
     sla  a                                        ; $5668: $CB $27
     or   b                                        ; $566A: $B0
@@ -2068,7 +2068,7 @@ jr_020_5677:
     ld   a, c                                     ; $5681: $79
     pop  hl                                       ; $5682: $E1
     ld   [hl], a                                  ; $5683: $77
-    ld   hl, hScratch0                            ; $5684: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                            ; $5684: $21 $D7 $FF
     inc  [hl]                                     ; $5687: $34
     jr   jr_020_5652                              ; $5688: $18 $C8
 
@@ -2145,22 +2145,22 @@ Data_020_578B::
 
 LoadTileset0E::
     ld   a, LOW(Data_20_568B)                     ; $588B: $3E $8B
-    ldh  [hScratchA], a                           ; $588D: $E0 $E1
+    ldh  [hMultiPurposeA], a                           ; $588D: $E0 $E1
     ld   a, HIGH(Data_20_568B)                    ; $588F: $3E $56
-    ldh  [hScratchB], a                           ; $5891: $E0 $E2
+    ldh  [hMultiPurposeB], a                           ; $5891: $E0 $E2
 
     xor  a                                        ; $5893: $AF
-    ldh  [hScratchC], a                           ; $5894: $E0 $E3
+    ldh  [hMultiPurposeC], a                           ; $5894: $E0 $E3
     call func_020_58AD                            ; $5896: $CD $AD $58
     ldh  a, [hIsGBC]                              ; $5899: $F0 $FE
     and  a                                        ; $589B: $A7
     ret  z                                        ; $589C: $C8
 
     ld   a, LOW(Data_020_578B)                    ; $589D: $3E $8B
-    ldh  [hScratchA], a                           ; $589F: $E0 $E1
+    ldh  [hMultiPurposeA], a                           ; $589F: $E0 $E1
     ld   a, HIGH(Data_020_578B)                   ; $58A1: $3E $57
-    ldh  [hScratchB], a                           ; $58A3: $E0 $E2
-    ld   hl, hScratchC                            ; $58A5: $21 $E3 $FF
+    ldh  [hMultiPurposeB], a                           ; $58A3: $E0 $E2
+    ld   hl, hMultiPurposeC                            ; $58A5: $21 $E3 $FF
     inc  [hl]                                     ; $58A8: $34
     call func_020_58AD                            ; $58A9: $CD $AD $58
     ret                                           ; $58AC: $C9
@@ -2188,14 +2188,14 @@ jr_020_58B3:
 jr_020_58CB:
     ldh  a, [hBGMapOffsetLow]                     ; $58CB: $F0 $E1
     ld   l, a                                     ; $58CD: $6F
-    ldh  a, [hScratchB]                           ; $58CE: $F0 $E2
+    ldh  a, [hMultiPurposeB]                           ; $58CE: $F0 $E2
     ld   h, a                                     ; $58D0: $67
     add  hl, bc                                   ; $58D1: $09
     ld   a, [hl]                                  ; $58D2: $7E
 
 jr_020_58D3:
     ld   h, a                                     ; $58D3: $67
-    ldh  a, [hScratchC]                           ; $58D4: $F0 $E3
+    ldh  a, [hMultiPurposeC]                           ; $58D4: $F0 $E3
     and  a                                        ; $58D6: $A7
     jr   z, jr_020_58EA                           ; $58D7: $28 $11
 
@@ -2610,7 +2610,7 @@ InventoryLoad2Handler::
     ld   hl, tradingItemPaletteIndexes           ; $5B08: $21 $EE $5A
     add  hl, bc                                   ; $5B0B: $09
     ld   a, [hl]                                  ; $5B0C: $7E
-    ldh  [hScratch0], a                           ; $5B0D: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $5B0D: $E0 $D7
     ld   a, $9C                                   ; $5B0F: $3E $9C
     ld   [wDC91], a                               ; $5B11: $EA $91 $DC
     ld   [wDC91+4], a                               ; $5B14: $EA $95 $DC
@@ -2621,7 +2621,7 @@ InventoryLoad2Handler::
     ld   a, $41                                   ; $5B21: $3E $41
     ld   [wDC91+2], a                               ; $5B23: $EA $93 $DC
     ld   [wDC91+6], a                               ; $5B26: $EA $97 $DC
-    ldh  a, [hScratch0]                           ; $5B29: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $5B29: $F0 $D7
     ld   [wDC91+3], a                               ; $5B2B: $EA $94 $DC
     ld   [wDC91+7], a                               ; $5B2E: $EA $98 $DC
     xor  a                                        ; $5B31: $AF
@@ -2639,7 +2639,7 @@ jr_020_5B3D:
     ret                                           ; $5B48: $C9
 
 AdjustInventoryTilesForLevelsAndCounts::
-    ldh  a, [hScratch1]                           ; $5B49: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $5B49: $F0 $D8
     cp   INVENTORY_OCARINA                        ; $5B4B: $FE $09
     jr   z, jr_020_5B8B                           ; $5B4D: $28 $3C
 
@@ -2760,7 +2760,7 @@ func_020_5BB9::
     ld   a, $81                                   ; $5BD8: $3E $81
     ld   [hl+], a                                 ; $5BDA: $22
     push hl                                       ; $5BDB: $E5
-    ldh  a, [hScratch1]                           ; $5BDC: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $5BDC: $F0 $D8
     sla  a                                        ; $5BDE: $CB $27
     ld   c, a                                     ; $5BE0: $4F
     ld   hl, InventoryItemPaletteIndexes          ; $5BE1: $21 $14 $5C
@@ -2875,12 +2875,12 @@ func_020_5C9C::
     ld   hl, wBButtonSlot                         ; $5C9E: $21 $00 $DB
     add  hl, bc                                   ; $5CA1: $09
     ld   a, [hl]                                  ; $5CA2: $7E
-    ldh  [hScratch1], a                           ; $5CA3: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $5CA3: $E0 $D8
     sla  a                                        ; $5CA5: $CB $27
     ld   e, a                                     ; $5CA7: $5F
     sla  a                                        ; $5CA8: $CB $27
     add  e                                        ; $5CAA: $83
-    ldh  [hScratch0], a                           ; $5CAB: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $5CAB: $E0 $D7
     ldh  a, [hIsGBC]                              ; $5CAD: $F0 $FE
     and  a                                        ; $5CAF: $A7
     jr   z, jr_020_5CB5                           ; $5CB0: $28 $03
@@ -2923,10 +2923,10 @@ jr_020_5CB5:
     ld   [hl+], a                                 ; $5CD6: $22
 
     push hl                                       ; $5CD7: $E5
-    ldh  a, [hScratch0]                           ; $5CD8: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $5CD8: $F0 $D7
     ld   c, a                                     ; $5CDA: $4F
 
-    ; de = InventoryItemTiles + [hScratch0]
+    ; de = InventoryItemTiles + [hMultiPurpose0]
     ld   hl, InventoryItemTiles                   ; $5CDB: $21 $30 $5C
     add  hl, bc                                   ; $5CDE: $09
     push hl                                       ; $5CDF: $E5
@@ -2971,7 +2971,7 @@ jr_020_5CB5:
     ld   a, $02                                   ; $5D06: $3E $02
     ld   [hl+], a                                 ; $5D08: $22
     push hl                                       ; $5D09: $E5
-    ldh  a, [hScratch0]                           ; $5D0A: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $5D0A: $F0 $D7
     ld   c, a                                     ; $5D0C: $4F
     ld   hl, InventoryItemTiles + 3               ; $5D0D: $21 $33 $5C
     add  hl, bc                                   ; $5D10: $09
@@ -3910,11 +3910,11 @@ jr_020_636E:
     ld   hl, Data_020_633A                        ; $6370: $21 $3A $63
     add  hl, de                                   ; $6373: $19
     ld   a, [hl]                                  ; $6374: $7E
-    ldh  [hScratch0], a                           ; $6375: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $6375: $E0 $D7
     ld   hl, Data_020_6346                        ; $6377: $21 $46 $63
     add  hl, de                                   ; $637A: $19
     ld   a, [hl]                                  ; $637B: $7E
-    ldh  [hScratch1], a                           ; $637C: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $637C: $E0 $D8
     ld   a, [wActivePowerUp]                      ; $637E: $FA $7C $D4
     dec  a                                        ; $6381: $3D
     jr   nz, jr_020_63BE                          ; $6382: $20 $3A
@@ -3948,11 +3948,11 @@ jr_020_63A2:
 jr_020_63AB:
     ld   a, [wWindowY]                            ; $63AB: $FA $9A $DB
     push hl                                       ; $63AE: $E5
-    ld   hl, hScratch1                            ; $63AF: $21 $D8 $FF
+    ld   hl, hMultiPurpose1                            ; $63AF: $21 $D8 $FF
     add  [hl]                                     ; $63B2: $86
     pop  hl                                       ; $63B3: $E1
     ld   [hl+], a                                 ; $63B4: $22
-    ldh  a, [hScratch0]                           ; $63B5: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $63B5: $F0 $D7
     ld   [hl+], a                                 ; $63B7: $22
     ld   a, $04                                   ; $63B8: $3E $04
     ld   [hl+], a                                 ; $63BA: $22
@@ -4044,7 +4044,7 @@ jr_020_6445:
     ret                                           ; $6445: $C9
 
 func_020_6446::
-    ldh  a, [hScratchB]                           ; $6446: $F0 $E2
+    ldh  a, [hMultiPurposeB]                           ; $6446: $F0 $E2
     ld   [hl+], a                                 ; $6448: $22
     ldh  a, [hBGMapOffsetLow]                     ; $6449: $F0 $E1
     ld   [hl+], a                                 ; $644B: $22
@@ -4117,7 +4117,7 @@ func_020_64EE::
     ld   a, $53                                   ; $64F1: $3E $53
     ldh  [hBGMapOffsetLow], a                     ; $64F3: $E0 $E1
     ld   a, [$DE0A]                               ; $64F5: $FA $0A $DE
-    ldh  [hScratchB], a                           ; $64F8: $E0 $E2
+    ldh  [hMultiPurposeB], a                           ; $64F8: $E0 $E2
     push hl                                       ; $64FA: $E5
     ld   c, $04                                   ; $64FB: $0E $04
     ld   hl, Data_020_6474                        ; $64FD: $21 $74 $64
@@ -4131,7 +4131,7 @@ func_020_64EE::
     ld   d, [hl]                                  ; $650B: $56
     pop  hl                                       ; $650C: $E1
     call func_020_6446                            ; $650D: $CD $46 $64
-    ldh  a, [hScratchB]                           ; $6510: $F0 $E2
+    ldh  a, [hMultiPurposeB]                           ; $6510: $F0 $E2
     ld   [hl+], a                                 ; $6512: $22
     ldh  a, [hBGMapOffsetLow]                     ; $6513: $F0 $E1
     ld   [hl+], a                                 ; $6515: $22
@@ -4158,7 +4158,7 @@ func_020_64EE::
     ldh  [hBGMapOffsetLow], a                     ; $6538: $E0 $E1
     ld   a, [$DE0A]                               ; $653A: $FA $0A $DE
     add  $10                                      ; $653D: $C6 $10
-    ldh  [hScratchB], a                           ; $653F: $E0 $E2
+    ldh  [hMultiPurposeB], a                           ; $653F: $E0 $E2
     ld   c, $03                                   ; $6541: $0E $03
     ld   de, Data_020_64AA                        ; $6543: $11 $AA $64
     call func_020_6446                            ; $6546: $CD $46 $64
@@ -4536,9 +4536,9 @@ func_020_6A30::
     ret  c                                        ; $6A39: $D8
 
     ld   a, $01                                   ; $6A3A: $3E $01
-    ldh  [hScratchD], a                           ; $6A3C: $E0 $E4
+    ldh  [hMultiPurposeD], a                           ; $6A3C: $E0 $E4
     ld   a, $02                                   ; $6A3E: $3E $02
-    ldh  [hScratchE], a                           ; $6A40: $E0 $E5
+    ldh  [hMultiPurposeE], a                           ; $6A40: $E0 $E5
     ld   a, $04                                   ; $6A42: $3E $04
     ldh  [hFreeWarpDataAddress], a                ; $6A44: $E0 $E6
     ld   hl, wDC10                                ; $6A46: $21 $10 $DC
@@ -4553,19 +4553,19 @@ jr_020_6A52:
     and  $10                                      ; $6A52: $E6 $10
     jr   z, func_020_6A68                         ; $6A54: $28 $12
 
-    ldh  a, [hScratchD]                           ; $6A56: $F0 $E4
+    ldh  a, [hMultiPurposeD]                           ; $6A56: $F0 $E4
     sla  a                                        ; $6A58: $CB $27
-    ldh  [hScratchD], a                           ; $6A5A: $E0 $E4
-    ldh  a, [hScratchE]                           ; $6A5C: $F0 $E5
+    ldh  [hMultiPurposeD], a                           ; $6A5A: $E0 $E4
+    ldh  a, [hMultiPurposeE]                           ; $6A5C: $F0 $E5
     sla  a                                        ; $6A5E: $CB $27
-    ldh  [hScratchE], a                           ; $6A60: $E0 $E5
+    ldh  [hMultiPurposeE], a                           ; $6A60: $E0 $E5
     ldh  a, [hFreeWarpDataAddress]                ; $6A62: $F0 $E6
     sla  a                                        ; $6A64: $CB $27
     ldh  [hFreeWarpDataAddress], a                ; $6A66: $E0 $E6
 
 func_020_6A68::
     push hl                                       ; $6A68: $E5
-    ldh  a, [hScratchD]                           ; $6A69: $F0 $E4
+    ldh  a, [hMultiPurposeD]                           ; $6A69: $F0 $E4
     ld   c, a                                     ; $6A6B: $4F
     ld   a, [hl]                                  ; $6A6C: $7E
     and  $1F                                      ; $6A6D: $E6 $1F
@@ -4576,8 +4576,8 @@ func_020_6A68::
     ld   a, $1F                                   ; $6A74: $3E $1F
 
 jr_020_6A76:
-    ldh  [hScratch0], a                           ; $6A76: $E0 $D7
-    ldh  a, [hScratchE]                           ; $6A78: $F0 $E5
+    ldh  [hMultiPurpose0], a                           ; $6A76: $E0 $D7
+    ldh  a, [hMultiPurposeE]                           ; $6A78: $F0 $E5
     ld   c, a                                     ; $6A7A: $4F
     ld   a, [hl+]                                 ; $6A7B: $2A
     and  $E0                                      ; $6A7C: $E6 $E0
@@ -4595,7 +4595,7 @@ jr_020_6A76:
     ld   a, $3E                                   ; $6A8E: $3E $3E
 
 jr_020_6A90:
-    ldh  [hScratch1], a                           ; $6A90: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $6A90: $E0 $D8
     ldh  a, [hFreeWarpDataAddress]                ; $6A92: $F0 $E6
     ld   c, a                                     ; $6A94: $4F
     ld   a, [hl]                                  ; $6A95: $7E
@@ -4607,17 +4607,17 @@ jr_020_6A90:
     ld   a, $7C                                   ; $6A9D: $3E $7C
 
 jr_020_6A9F:
-    ldh  [hScratch2], a                           ; $6A9F: $E0 $D9
+    ldh  [hMultiPurpose2], a                           ; $6A9F: $E0 $D9
     pop  hl                                       ; $6AA1: $E1
-    ldh  a, [hScratch0]                           ; $6AA2: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $6AA2: $F0 $D7
     ld   b, a                                     ; $6AA4: $47
-    ldh  a, [hScratch1]                           ; $6AA5: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $6AA5: $F0 $D8
     swap a                                        ; $6AA7: $CB $37
     ld   c, a                                     ; $6AA9: $4F
     and  $E0                                      ; $6AAA: $E6 $E0
     or   b                                        ; $6AAC: $B0
     ld   [hl+], a                                 ; $6AAD: $22
-    ldh  a, [hScratch2]                           ; $6AAE: $F0 $D9
+    ldh  a, [hMultiPurpose2]                           ; $6AAE: $F0 $D9
     ld   b, a                                     ; $6AB0: $47
     ld   a, c                                     ; $6AB1: $79
     and  $03                                      ; $6AB2: $E6 $03
@@ -4642,24 +4642,24 @@ func_020_6AC1::
     ret  c                                        ; $6ACA: $D8
 
     ld   a, $01                                   ; $6ACB: $3E $01
-    ldh  [hScratchD], a                           ; $6ACD: $E0 $E4
+    ldh  [hMultiPurposeD], a                           ; $6ACD: $E0 $E4
     ld   a, $02                                   ; $6ACF: $3E $02
-    ldh  [hScratchE], a                           ; $6AD1: $E0 $E5
+    ldh  [hMultiPurposeE], a                           ; $6AD1: $E0 $E5
     ld   a, $04                                   ; $6AD3: $3E $04
     ldh  [hFreeWarpDataAddress], a                ; $6AD5: $E0 $E6
     ld   hl, wDC10                                ; $6AD7: $21 $10 $DC
     ld   a, $40                                   ; $6ADA: $3E $40
-    ldh  [hScratch3], a                           ; $6ADC: $E0 $DA
+    ldh  [hMultiPurpose3], a                           ; $6ADC: $E0 $DA
     ld   a, e                                     ; $6ADE: $7B
     and  $10                                      ; $6ADF: $E6 $10
     jr   z, func_020_6AF5                         ; $6AE1: $28 $12
 
-    ldh  a, [hScratchD]                           ; $6AE3: $F0 $E4
+    ldh  a, [hMultiPurposeD]                           ; $6AE3: $F0 $E4
     sla  a                                        ; $6AE5: $CB $27
-    ldh  [hScratchD], a                           ; $6AE7: $E0 $E4
-    ldh  a, [hScratchE]                           ; $6AE9: $F0 $E5
+    ldh  [hMultiPurposeD], a                           ; $6AE7: $E0 $E4
+    ldh  a, [hMultiPurposeE]                           ; $6AE9: $F0 $E5
     sla  a                                        ; $6AEB: $CB $27
-    ldh  [hScratchE], a                           ; $6AED: $E0 $E5
+    ldh  [hMultiPurposeE], a                           ; $6AED: $E0 $E5
     ldh  a, [hFreeWarpDataAddress]                ; $6AEF: $F0 $E6
     sla  a                                        ; $6AF1: $CB $27
     ldh  [hFreeWarpDataAddress], a                ; $6AF3: $E0 $E6
@@ -4675,7 +4675,7 @@ func_020_6AF5::
     dec  hl                                       ; $6AFE: $2B
     xor  a                                        ; $6AFF: $AF
     ldh  [rSVBK], a                               ; $6B00: $E0 $70
-    ldh  a, [hScratchD]                           ; $6B02: $F0 $E4
+    ldh  a, [hMultiPurposeD]                           ; $6B02: $F0 $E4
     ld   c, a                                     ; $6B04: $4F
     ld   a, e                                     ; $6B05: $7B
     and  $1F                                      ; $6B06: $E6 $1F
@@ -4697,7 +4697,7 @@ jr_020_6B17:
     ld   a, b                                     ; $6B17: $78
 
 jr_020_6B18:
-    ldh  [hScratch0], a                           ; $6B18: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $6B18: $E0 $D7
     ld   a, e                                     ; $6B1A: $7B
     and  $E0                                      ; $6B1B: $E6 $E0
     swap a                                        ; $6B1D: $CB $37
@@ -4716,7 +4716,7 @@ jr_020_6B18:
     swap a                                        ; $6B30: $CB $37
     or   c                                        ; $6B32: $B1
     push af                                       ; $6B33: $F5
-    ldh  a, [hScratchE]                           ; $6B34: $F0 $E5
+    ldh  a, [hMultiPurposeE]                           ; $6B34: $F0 $E5
     ld   c, a                                     ; $6B36: $4F
     pop  af                                       ; $6B37: $F1
     cp   b                                        ; $6B38: $B8
@@ -4734,7 +4734,7 @@ jr_020_6B43:
     ld   a, b                                     ; $6B43: $78
 
 jr_020_6B44:
-    ldh  [hScratch1], a                           ; $6B44: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $6B44: $E0 $D8
     ldh  a, [hFreeWarpDataAddress]                ; $6B46: $F0 $E6
     ld   c, a                                     ; $6B48: $4F
     ld   a, d                                     ; $6B49: $7A
@@ -4757,25 +4757,25 @@ jr_020_6B5B:
     ld   a, b                                     ; $6B5B: $78
 
 jr_020_6B5C:
-    ldh  [hScratch2], a                           ; $6B5C: $E0 $D9
+    ldh  [hMultiPurpose2], a                           ; $6B5C: $E0 $D9
     pop  hl                                       ; $6B5E: $E1
-    ldh  a, [hScratch0]                           ; $6B5F: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $6B5F: $F0 $D7
     ld   b, a                                     ; $6B61: $47
-    ldh  a, [hScratch1]                           ; $6B62: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $6B62: $F0 $D8
     swap a                                        ; $6B64: $CB $37
     ld   c, a                                     ; $6B66: $4F
     and  $E0                                      ; $6B67: $E6 $E0
     or   b                                        ; $6B69: $B0
     ld   [hl+], a                                 ; $6B6A: $22
-    ldh  a, [hScratch2]                           ; $6B6B: $F0 $D9
+    ldh  a, [hMultiPurpose2]                           ; $6B6B: $F0 $D9
     ld   b, a                                     ; $6B6D: $47
     ld   a, c                                     ; $6B6E: $79
     and  $03                                      ; $6B6F: $E6 $03
     or   b                                        ; $6B71: $B0
     ld   [hl+], a                                 ; $6B72: $22
-    ldh  a, [hScratch3]                           ; $6B73: $F0 $DA
+    ldh  a, [hMultiPurpose3]                           ; $6B73: $F0 $DA
     dec  a                                        ; $6B75: $3D
-    ldh  [hScratch3], a                           ; $6B76: $E0 $DA
+    ldh  [hMultiPurpose3], a                           ; $6B76: $E0 $DA
     and  a                                        ; $6B78: $A7
     jp   nz, func_020_6AF5                        ; $6B79: $C2 $F5 $6A
 
@@ -4831,7 +4831,7 @@ jr_020_6BB4:
     pop  bc                                       ; $6BBB: $C1
     ld   hl, wDC10                                ; $6BBC: $21 $10 $DC
     ld   a, $08                                   ; $6BBF: $3E $08
-    ldh  [hScratch0], a                           ; $6BC1: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $6BC1: $E0 $D7
 
 jr_020_6BC3:
     call func_020_6B86                            ; $6BC3: $CD $86 $6B
@@ -4839,10 +4839,10 @@ jr_020_6BC3:
     call func_020_6B86                            ; $6BC9: $CD $86 $6B
     inc  hl                                       ; $6BCC: $23
     inc  hl                                       ; $6BCD: $23
-    ldh  a, [hScratch0]                           ; $6BCE: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $6BCE: $F0 $D7
     dec  a                                        ; $6BD0: $3D
     and  a                                        ; $6BD1: $A7
-    ldh  [hScratch0], a                           ; $6BD2: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $6BD2: $E0 $D7
     jr   nz, jr_020_6BC3                          ; $6BD4: $20 $ED
 
     ld   a, $01                                   ; $6BD6: $3E $01
@@ -4961,9 +4961,9 @@ func_020_6C4F::
 
 jr_020_6C60:
     ld   a, $04                                   ; $6C60: $3E $04
-    ldh  [hScratchD], a                           ; $6C62: $E0 $E4
+    ldh  [hMultiPurposeD], a                           ; $6C62: $E0 $E4
     ld   a, $08                                   ; $6C64: $3E $08
-    ldh  [hScratchE], a                           ; $6C66: $E0 $E5
+    ldh  [hMultiPurposeE], a                           ; $6C66: $E0 $E5
     ld   a, $10                                   ; $6C68: $3E $10
     ldh  [hFreeWarpDataAddress], a                ; $6C6A: $E0 $E6
     ld   hl, wDC10                                ; $6C6C: $21 $10 $DC
@@ -4989,14 +4989,14 @@ func_020_6C7A::
 
 jr_020_6C8B:
     ld   a, $04                                   ; $6C8B: $3E $04
-    ldh  [hScratchD], a                           ; $6C8D: $E0 $E4
+    ldh  [hMultiPurposeD], a                           ; $6C8D: $E0 $E4
     ld   a, $08                                   ; $6C8F: $3E $08
-    ldh  [hScratchE], a                           ; $6C91: $E0 $E5
+    ldh  [hMultiPurposeE], a                           ; $6C91: $E0 $E5
     ld   a, $10                                   ; $6C93: $3E $10
     ldh  [hFreeWarpDataAddress], a                ; $6C95: $E0 $E6
     ld   hl, wDC10                                ; $6C97: $21 $10 $DC
     ld   a, $40                                   ; $6C9A: $3E $40
-    ldh  [hScratch3], a                           ; $6C9C: $E0 $DA
+    ldh  [hMultiPurpose3], a                           ; $6C9C: $E0 $DA
     call func_020_6AF5                            ; $6C9E: $CD $F5 $6A
     ld   a, $01                                   ; $6CA1: $3E $01
 
@@ -5028,14 +5028,14 @@ jr_020_6CB5:
     inc  a                                        ; $6CCA: $3C
     ld   [wC3CA], a                               ; $6CCB: $EA $CA $C3
     ld   a, $08                                   ; $6CCE: $3E $08
-    ldh  [hScratchD], a                           ; $6CD0: $E0 $E4
+    ldh  [hMultiPurposeD], a                           ; $6CD0: $E0 $E4
     ld   a, $10                                   ; $6CD2: $3E $10
-    ldh  [hScratchE], a                           ; $6CD4: $E0 $E5
+    ldh  [hMultiPurposeE], a                           ; $6CD4: $E0 $E5
     ld   a, $20                                   ; $6CD6: $3E $20
     ldh  [hFreeWarpDataAddress], a                ; $6CD8: $E0 $E6
     ld   hl, wDC10                                ; $6CDA: $21 $10 $DC
     ld   a, $40                                   ; $6CDD: $3E $40
-    ldh  [hScratch3], a                           ; $6CDF: $E0 $DA
+    ldh  [hMultiPurpose3], a                           ; $6CDF: $E0 $DA
     ld   a, [wTransitionGfx]                      ; $6CE1: $FA $7F $C1
     cp   $03                                      ; $6CE4: $FE $03
     jr   z, jr_020_6CFA                           ; $6CE6: $28 $12
@@ -5084,9 +5084,9 @@ jr_020_6D1E:
     jr   c, jr_020_6D38                           ; $6D22: $38 $14
 
     ld   a, $01                                   ; $6D24: $3E $01
-    ldh  [hScratchD], a                           ; $6D26: $E0 $E4
+    ldh  [hMultiPurposeD], a                           ; $6D26: $E0 $E4
     ld   a, $02                                   ; $6D28: $3E $02
-    ldh  [hScratchE], a                           ; $6D2A: $E0 $E5
+    ldh  [hMultiPurposeE], a                           ; $6D2A: $E0 $E5
     ld   a, $04                                   ; $6D2C: $3E $04
     ldh  [hFreeWarpDataAddress], a                ; $6D2E: $E0 $E6
 IF __PATCH_3__
@@ -5099,9 +5099,9 @@ ENDC
 
 jr_020_6D38:
     ld   a, $01                                   ; $6D38: $3E $01
-    ldh  [hScratchD], a                           ; $6D3A: $E0 $E4
+    ldh  [hMultiPurposeD], a                           ; $6D3A: $E0 $E4
     ld   a, $02                                   ; $6D3C: $3E $02
-    ldh  [hScratchE], a                           ; $6D3E: $E0 $E5
+    ldh  [hMultiPurposeE], a                           ; $6D3E: $E0 $E5
     ld   a, $04                                   ; $6D40: $3E $04
     ldh  [hFreeWarpDataAddress], a                ; $6D42: $E0 $E6
     ld   hl, wDC10                                ; $6D44: $21 $10 $DC
@@ -5142,7 +5142,7 @@ jr_020_6D68:
     ld   a, $1F                                   ; $6D6F: $3E $1F
 
 jr_020_6D71:
-    ldh  [hScratch0], a                           ; $6D71: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $6D71: $E0 $D7
     ld   a, [hl+]                                 ; $6D73: $2A
     and  $E0                                      ; $6D74: $E6 $E0
     swap a                                        ; $6D76: $CB $37
@@ -5158,7 +5158,7 @@ jr_020_6D71:
     ld   a, $3E                                   ; $6D85: $3E $3E
 
 jr_020_6D87:
-    ldh  [hScratch1], a                           ; $6D87: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $6D87: $E0 $D8
     ld   a, [hl]                                  ; $6D89: $7E
     add  $04                                      ; $6D8A: $C6 $04
     and  $7C                                      ; $6D8C: $E6 $7C
@@ -5167,18 +5167,18 @@ jr_020_6D87:
     ld   a, $7C                                   ; $6D90: $3E $7C
 
 jr_020_6D92:
-    ldh  [hScratch2], a                           ; $6D92: $E0 $D9
+    ldh  [hMultiPurpose2], a                           ; $6D92: $E0 $D9
     pop  hl                                       ; $6D94: $E1
-    ldh  a, [hScratch0]                           ; $6D95: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $6D95: $F0 $D7
     ld   d, a                                     ; $6D97: $57
-    ldh  a, [hScratch1]                           ; $6D98: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $6D98: $F0 $D8
     swap a                                        ; $6D9A: $CB $37
     and  $E0                                      ; $6D9C: $E6 $E0
     or   d                                        ; $6D9E: $B2
     ld   [hl+], a                                 ; $6D9F: $22
-    ldh  a, [hScratch2]                           ; $6DA0: $F0 $D9
+    ldh  a, [hMultiPurpose2]                           ; $6DA0: $F0 $D9
     ld   d, a                                     ; $6DA2: $57
-    ldh  a, [hScratch1]                           ; $6DA3: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $6DA3: $F0 $D8
     swap a                                        ; $6DA5: $CB $37
     and  $03                                      ; $6DA7: $E6 $03
     or   d                                        ; $6DA9: $B2
@@ -5260,18 +5260,18 @@ LoadRoomObjectsAttributes::
 
 .jr_020_6E14
     ld   a, BANK(RoomGBCOverlay2BAlt)             ; $6E14: $3E $27
-    ldh  [hScratch0], a                           ; $6E16: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $6E16: $E0 $D7
     jr   .copyAttributes                          ; $6E18: $18 $22
 
 .jr_020_6E1A
     ; Set attributes bank for rooms < $CC
     ld   a, BANK(RoomGBCOverlaysA) ; $6E1A: $3E $26
-    ldh  [hScratch0], a                           ; $6E1C: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $6E1C: $E0 $D7
     ; If the room id >= $CC…
     ldh  a, [hMapRoom]                            ; $6E1E: $F0 $F6
     cp   $CC                                      ; $6E20: $FE $CC
     jr   c, .bankEnd                              ; $6E22: $38 $06
-    ld   hl, hScratch0                            ; $6E24: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                            ; $6E24: $21 $D7 $FF
     ; … use BANK(RoomGBCOverlaysA) + 1 for the overlay bank
     inc  [hl]                                     ; $6E27: $34
     sub  $CC                                      ; $6E28: $D6 $CC
@@ -6059,9 +6059,9 @@ jr_020_7D74:
 
 func_020_7D7C::
     ld   a, $03                                   ; $7D7C: $3E $03
-    ldh  [hScratchD], a                           ; $7D7E: $E0 $E4
+    ldh  [hMultiPurposeD], a                           ; $7D7E: $E0 $E4
     ld   a, $06                                   ; $7D80: $3E $06
-    ldh  [hScratchE], a                           ; $7D82: $E0 $E5
+    ldh  [hMultiPurposeE], a                           ; $7D82: $E0 $E5
     ld   a, $0C                                   ; $7D84: $3E $0C
     ldh  [hFreeWarpDataAddress], a                ; $7D86: $E0 $E6
     ld   hl, wDC10                                ; $7D88: $21 $10 $DC
@@ -6074,7 +6074,7 @@ func_020_7D7C::
 
 jr_020_7D97:
     push hl                                       ; $7D97: $E5
-    ldh  a, [hScratchD]                           ; $7D98: $F0 $E4
+    ldh  a, [hMultiPurposeD]                           ; $7D98: $F0 $E4
     ld   c, a                                     ; $7D9A: $4F
     ld   a, [hl]                                  ; $7D9B: $7E
     and  $1F                                      ; $7D9C: $E6 $1F
@@ -6086,8 +6086,8 @@ jr_020_7D97:
     xor  a                                        ; $7DA3: $AF
 
 jr_020_7DA4:
-    ldh  [hScratch0], a                           ; $7DA4: $E0 $D7
-    ldh  a, [hScratchE]                           ; $7DA6: $F0 $E5
+    ldh  [hMultiPurpose0], a                           ; $7DA4: $E0 $D7
+    ldh  a, [hMultiPurposeE]                           ; $7DA6: $F0 $E5
     ld   c, a                                     ; $7DA8: $4F
     ld   a, [hl+]                                 ; $7DA9: $2A
     and  $E0                                      ; $7DAA: $E6 $E0
@@ -6106,7 +6106,7 @@ jr_020_7DA4:
     xor  a                                        ; $7DBC: $AF
 
 jr_020_7DBD:
-    ldh  [hScratch1], a                           ; $7DBD: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $7DBD: $E0 $D8
     ldh  a, [hFreeWarpDataAddress]                ; $7DBF: $F0 $E6
     ld   c, a                                     ; $7DC1: $4F
     ld   a, [hl]                                  ; $7DC2: $7E
@@ -6119,17 +6119,17 @@ jr_020_7DBD:
     xor  a                                        ; $7DCA: $AF
 
 jr_020_7DCB:
-    ldh  [hScratch2], a                           ; $7DCB: $E0 $D9
+    ldh  [hMultiPurpose2], a                           ; $7DCB: $E0 $D9
     pop  hl                                       ; $7DCD: $E1
-    ldh  a, [hScratch0]                           ; $7DCE: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $7DCE: $F0 $D7
     ld   b, a                                     ; $7DD0: $47
-    ldh  a, [hScratch1]                           ; $7DD1: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $7DD1: $F0 $D8
     swap a                                        ; $7DD3: $CB $37
     ld   c, a                                     ; $7DD5: $4F
     and  $E0                                      ; $7DD6: $E6 $E0
     or   b                                        ; $7DD8: $B0
     ld   [hl+], a                                 ; $7DD9: $22
-    ldh  a, [hScratch2]                           ; $7DDA: $F0 $D9
+    ldh  a, [hMultiPurpose2]                           ; $7DDA: $F0 $D9
     ld   b, a                                     ; $7DDC: $47
     ld   a, c                                     ; $7DDD: $79
     and  $03                                      ; $7DDE: $E6 $03
@@ -6166,14 +6166,14 @@ ENDC
 IF __PATCH_1__
 func_020_7E0E:
     ld a, $06                                     ; $7e0e: $3e $06
-    ldh [hScratchD], a                            ; $7e10: $e0 $e4
+    ldh [hMultiPurposeD], a                            ; $7e10: $e0 $e4
     ld a, $0c                                     ; $7e12: $3e $0c
-    ldh [hScratchE], a                            ; $7e14: $e0 $e5
+    ldh [hMultiPurposeE], a                            ; $7e14: $e0 $e5
     ld a, $18                                     ; $7e16: $3e $18
-    ldh [hScratchF], a                            ; $7e18: $e0 $e6
+    ldh [hMultiPurposeF], a                            ; $7e18: $e0 $e6
     ld hl, wDC10                                  ; $7e1a: $21 $10 $dc
     ld a, $40                                     ; $7e1d: $3e $40
-    ldh [hScratch3], a                            ; $7e1f: $e0 $da
+    ldh [hMultiPurpose3], a                            ; $7e1f: $e0 $da
     call Call_020_7e25                            ; $7e21: $cd $25 $7e
     ret                                           ; $7e24: $c9
 
@@ -6189,7 +6189,7 @@ Jump_020_7e25:
     dec hl                                        ; $7e2e: $2b
     xor a                                         ; $7e2f: $af
     ldh [rSVBK], a                                ; $7e30: $e0 $70
-    ldh a, [hScratchD]                            ; $7e32: $f0 $e4
+    ldh a, [hMultiPurposeD]                            ; $7e32: $f0 $e4
     ld c, a                                       ; $7e34: $4f
     ld a, e                                       ; $7e35: $7b
     and $1f                                       ; $7e36: $e6 $1f
@@ -6211,7 +6211,7 @@ jr_020_7e47:
     ld a, b                                       ; $7e47: $78
 
 jr_020_7e48:
-    ldh [hScratch0], a                            ; $7e48: $e0 $d7
+    ldh [hMultiPurpose0], a                            ; $7e48: $e0 $d7
     ld a, e                                       ; $7e4a: $7b
     and $e0                                       ; $7e4b: $e6 $e0
     swap a                                        ; $7e4d: $cb $37
@@ -6230,7 +6230,7 @@ jr_020_7e48:
     swap a                                        ; $7e60: $cb $37
     or c                                          ; $7e62: $b1
     push af                                       ; $7e63: $f5
-    ldh a, [hScratchE]                            ; $7e64: $f0 $e5
+    ldh a, [hMultiPurposeE]                            ; $7e64: $f0 $e5
     ld c, a                                       ; $7e66: $4f
     pop af                                        ; $7e67: $f1
     cp b                                          ; $7e68: $b8
@@ -6248,8 +6248,8 @@ jr_020_7e73:
     ld a, b                                       ; $7e73: $78
 
 jr_020_7e74:
-    ldh [hScratch1], a                            ; $7e74: $e0 $d8
-    ldh a, [hScratchF]                            ; $7e76: $f0 $e6
+    ldh [hMultiPurpose1], a                            ; $7e74: $e0 $d8
+    ldh a, [hMultiPurposeF]                            ; $7e76: $f0 $e6
     ld c, a                                       ; $7e78: $4f
     ld a, d                                       ; $7e79: $7a
     and $7c                                       ; $7e7a: $e6 $7c
@@ -6271,25 +6271,25 @@ jr_020_7e8b:
     ld a, b                                       ; $7e8b: $78
 
 jr_020_7e8c:
-    ldh [hScratch2], a                            ; $7e8c: $e0 $d9
+    ldh [hMultiPurpose2], a                            ; $7e8c: $e0 $d9
     pop hl                                        ; $7e8e: $e1
-    ldh a, [hScratch0]                            ; $7e8f: $f0 $d7
+    ldh a, [hMultiPurpose0]                            ; $7e8f: $f0 $d7
     ld b, a                                       ; $7e91: $47
-    ldh a, [hScratch1]                            ; $7e92: $f0 $d8
+    ldh a, [hMultiPurpose1]                            ; $7e92: $f0 $d8
     swap a                                        ; $7e94: $cb $37
     ld c, a                                       ; $7e96: $4f
     and $e0                                       ; $7e97: $e6 $e0
     or b                                          ; $7e99: $b0
     ld [hl+], a                                   ; $7e9a: $22
-    ldh a, [hScratch2]                            ; $7e9b: $f0 $d9
+    ldh a, [hMultiPurpose2]                            ; $7e9b: $f0 $d9
     ld b, a                                       ; $7e9d: $47
     ld a, c                                       ; $7e9e: $79
     and $03                                       ; $7e9f: $e6 $03
     or b                                          ; $7ea1: $b0
     ld [hl+], a                                   ; $7ea2: $22
-    ldh a, [hScratch3]                            ; $7ea3: $f0 $da
+    ldh a, [hMultiPurpose3]                            ; $7ea3: $f0 $da
     dec a                                         ; $7ea5: $3d
-    ldh [hScratch3], a                            ; $7ea6: $e0 $da
+    ldh [hMultiPurpose3], a                            ; $7ea6: $e0 $da
     and a                                         ; $7ea8: $a7
     jp nz, Jump_020_7e25                          ; $7ea9: $c2 $25 $7e
 
@@ -6299,14 +6299,14 @@ jr_020_7e8c:
 
 func_020_7EB1::
     ld a, $06                                     ; $7eb1: $3e $06
-    ldh [hScratchD], a                            ; $7eb3: $e0 $e4
+    ldh [hMultiPurposeD], a                            ; $7eb3: $e0 $e4
     ld a, $0c                                     ; $7eb5: $3e $0c
-    ldh [hScratchE], a                            ; $7eb7: $e0 $e5
+    ldh [hMultiPurposeE], a                            ; $7eb7: $e0 $e5
     ld a, $18                                     ; $7eb9: $3e $18
-    ldh [hScratchF], a                            ; $7ebb: $e0 $e6
+    ldh [hMultiPurposeF], a                            ; $7ebb: $e0 $e6
     ld hl, wDC10                                  ; $7ebd: $21 $10 $dc
     ld d, $40                                     ; $7ec0: $16 $40
-    ldh [hScratch3], a                            ; $7ec2: $e0 $da
+    ldh [hMultiPurpose3], a                            ; $7ec2: $e0 $da
     call Call_020_7ec8                            ; $7ec4: $cd $c8 $7e
     ret                                           ; $7ec7: $c9
 
@@ -6314,7 +6314,7 @@ func_020_7EB1::
 Call_020_7ec8:
 jr_020_7ec8:
     push hl                                       ; $7ec8: $e5
-    ldh a, [hScratchD]                            ; $7ec9: $f0 $e4
+    ldh a, [hMultiPurposeD]                            ; $7ec9: $f0 $e4
     ld c, a                                       ; $7ecb: $4f
     ld a, [hl]                                    ; $7ecc: $7e
     and $1f                                       ; $7ecd: $e6 $1f
@@ -6325,8 +6325,8 @@ jr_020_7ec8:
     ld a, $1f                                     ; $7ed4: $3e $1f
 
 jr_020_7ed6:
-    ldh [hScratch0], a                            ; $7ed6: $e0 $d7
-    ldh a, [hScratchE]                            ; $7ed8: $f0 $e5
+    ldh [hMultiPurpose0], a                            ; $7ed6: $e0 $d7
+    ldh a, [hMultiPurposeE]                            ; $7ed8: $f0 $e5
     ld c, a                                       ; $7eda: $4f
     ld a, [hl+]                                   ; $7edb: $2a
     and $e0                                       ; $7edc: $e6 $e0
@@ -6344,8 +6344,8 @@ jr_020_7ed6:
     ld a, $3e                                     ; $7eee: $3e $3e
 
 jr_020_7ef0:
-    ldh [hScratch1], a                            ; $7ef0: $e0 $d8
-    ldh a, [hScratchF]                            ; $7ef2: $f0 $e6
+    ldh [hMultiPurpose1], a                            ; $7ef0: $e0 $d8
+    ldh a, [hMultiPurposeF]                            ; $7ef2: $f0 $e6
     ld c, a                                       ; $7ef4: $4f
     ld a, [hl]                                    ; $7ef5: $7e
     and $7c                                       ; $7ef6: $e6 $7c
@@ -6356,17 +6356,17 @@ jr_020_7ef0:
     ld a, $7c                                     ; $7efd: $3e $7c
 
 jr_020_7eff:
-    ldh [hScratch2], a                            ; $7eff: $e0 $d9
+    ldh [hMultiPurpose2], a                            ; $7eff: $e0 $d9
     pop hl                                        ; $7f01: $e1
-    ldh a, [hScratch0]                            ; $7f02: $f0 $d7
+    ldh a, [hMultiPurpose0]                            ; $7f02: $f0 $d7
     ld b, a                                       ; $7f04: $47
-    ldh a, [hScratch1]                            ; $7f05: $f0 $d8
+    ldh a, [hMultiPurpose1]                            ; $7f05: $f0 $d8
     swap a                                        ; $7f07: $cb $37
     ld c, a                                       ; $7f09: $4f
     and $e0                                       ; $7f0a: $e6 $e0
     or b                                          ; $7f0c: $b0
     ld [hl+], a                                   ; $7f0d: $22
-    ldh a, [hScratch2]                            ; $7f0e: $f0 $d9
+    ldh a, [hMultiPurpose2]                            ; $7f0e: $f0 $d9
     ld b, a                                       ; $7f10: $47
     ld a, c                                       ; $7f11: $79
     and $03                                       ; $7f12: $e6 $03

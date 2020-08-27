@@ -473,7 +473,7 @@ UpdatePaletteEffectForInteractiveObjects::
 
     ; If Link's motion state doesn't allow for palette effects, return
     xor  a                                        ; $4C5D: $AF
-    ldh  [hScratch0], a                           ; $4C5E: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $4C5E: $E0 $D7
     ld   d, a                                     ; $4C60: $57
     ld   a, [wLinkMotionState]                    ; $4C61: $FA $1C $C1
     ld   e, a                                     ; $4C64: $5F
@@ -494,7 +494,7 @@ UpdatePaletteEffectForInteractiveObjects::
     jr   nz, .jr_014_4C82                         ; $4C7B: $20 $05
 
     ld   a, [wC3CD]                               ; $4C7D: $FA $CD $C3
-    ldh  [hScratch0], a                           ; $4C80: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $4C80: $E0 $D7
 
 .jr_014_4C82
     ld   a, [wBGPaletteEffectAddress]             ; $4C82: $FA $CC $C3
@@ -517,7 +517,7 @@ UpdatePaletteEffectForInteractiveObjects::
     and  $01                                      ; $4C9E: $E6 $01
     jr   nz, .return                              ; $4CA0: $20 $0F
 
-    ldh  a, [hScratch0]                           ; $4CA2: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4CA2: $F0 $D7
     ld   hl, wBGPaletteEffectAddress              ; $4CA4: $21 $CC $C3
     sub  [hl]                                     ; $4CA7: $96
     jr   z, .return                               ; $4CA8: $28 $07
@@ -540,7 +540,7 @@ jr_014_4CB2:
     or   [hl]                                     ; $4CB8: $B6
     ret  nz                                       ; $4CB9: $C0
 
-    ldh  a, [hScratch0]                           ; $4CBA: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4CBA: $F0 $D7
     ld   hl, wBGPaletteEffectAddress              ; $4CBC: $21 $CC $C3
     sub  [hl]                                     ; $4CBF: $96
     jr   nz, jr_014_4CC7                          ; $4CC0: $20 $05
@@ -946,7 +946,7 @@ jr_014_5036:
 RenderTransitionEffect::
     srl  a                                        ; $5038: $CB $3F
     srl  a                                        ; $503A: $CB $3F
-    ldh  [hScratch0], a                           ; $503C: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $503C: $E0 $D7
     ld   a, [wTransitionGfxFrameCount]            ; $503E: $FA $80 $C1
     nop                                           ; $5041: $00
     and  $E0                                      ; $5042: $E6 $E0
@@ -961,20 +961,20 @@ RenderTransitionEffect::
 
 jr_014_5050:
     ld   a, e                                     ; $5050: $7B
-    ldh  [hScratch1], a                           ; $5051: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $5051: $E0 $D8
     ld   hl, wC17C                                ; $5053: $21 $7C $C1
     xor  a                                        ; $5056: $AF
     ld   [hl+], a                                 ; $5057: $22
     ld   [hl+], a                                 ; $5058: $22
     ld   [hl+], a                                 ; $5059: $22
     ld   a, $58                                   ; $505A: $3E $58
-    ldh  [hScratch2], a                           ; $505C: $E0 $D9
+    ldh  [hMultiPurpose2], a                           ; $505C: $E0 $D9
     ldh  a, [hIsGBC]                              ; $505E: $F0 $FE
     and  a                                        ; $5060: $A7
     jr   z, label_014_5067                        ; $5061: $28 $04
 
     ld   a, $88                                   ; $5063: $3E $88
-    ldh  [hScratch2], a                           ; $5065: $E0 $D9
+    ldh  [hMultiPurpose2], a                           ; $5065: $E0 $D9
 
 label_014_5067:
     ldh  a, [rSTAT]                               ; $5067: $F0 $41
@@ -996,7 +996,7 @@ jr_014_506F:
     ld   a, [wC17D]                               ; $5082: $FA $7D $C1
     adc  $00                                      ; $5085: $CE $00
     ld   [wC17D], a                               ; $5087: $EA $7D $C1
-    ldh  a, [hScratch2]                           ; $508A: $F0 $D9
+    ldh  a, [hMultiPurpose2]                           ; $508A: $F0 $D9
     ld   hl, wC17C                                ; $508C: $21 $7C $C1
     cp   [hl]                                     ; $508F: $BE
     ret  z                                        ; $5090: $C8
@@ -1009,10 +1009,10 @@ jr_014_506F:
     inc  c                                        ; $509A: $0C
 
 jr_014_509B:
-    ldh  a, [hScratch0]                           ; $509B: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $509B: $F0 $D7
     add  [hl]                                     ; $509D: $86
     and  $1F                                      ; $509E: $E6 $1F
-    ld   hl, hScratch1                            ; $50A0: $21 $D8 $FF
+    ld   hl, hMultiPurpose1                            ; $50A0: $21 $D8 $FF
     or   [hl]                                     ; $50A3: $B6
     ld   e, a                                     ; $50A4: $5F
     ld   hl, Data_014_4EE8                        ; $50A5: $21 $E8 $4E
@@ -2195,5 +2195,5 @@ jr_014_5920:
     ld   a, $1C                                   ; $592F: $3E $1C
 
 jr_014_5931:
-    ldh  [hScratch8], a                           ; $5931: $E0 $DF
+    ldh  [hMultiPurpose8], a                           ; $5931: $E0 $DF
     ret                                           ; $5933: $C9

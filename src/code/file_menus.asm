@@ -116,7 +116,7 @@ func_4852::
     ld   a, $05                                   ; $486B: $3E $05
 
 .loop
-    ldh  [hScratch0], a                           ; $486D: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $486D: $E0 $D7
     ld   a, [de]                                  ; $486F: $1A
     and  a                                        ; $4870: $A7
     ld   a, $7E                                   ; $4871: $3E $7E
@@ -134,7 +134,7 @@ func_4852::
 
     ldi  [hl], a                                  ; $4881: $22
     inc  de                                       ; $4882: $13
-    ldh  a, [hScratch0]                           ; $4883: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4883: $F0 $D7
     dec  a                                        ; $4885: $3D
     jr   nz, .loop                                ; $4886: $20 $E5
     ld   a, b                                     ; $4888: $78
@@ -148,7 +148,7 @@ func_4852::
     ld   a, $05                                   ; $4892: $3E $05
 
 jr_001_4894::
-    ldh  [hScratch0], a                           ; $4894: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $4894: $E0 $D7
     ld   a, [de]                                  ; $4896: $1A
     and  a                                        ; $4897: $A7
 
@@ -198,7 +198,7 @@ ENDC
 jr_001_48A9::
     ldi  [hl], a                                  ; $48A9: $22
     inc  de                                       ; $48AA: $13
-    ldh  a, [hScratch0]                           ; $48AB: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $48AB: $F0 $D7
     dec  a                                        ; $48AD: $3D
     jr   nz, jr_001_4894                          ; $48AE: $20 $E4
     xor  a                                        ; $48B0: $AF
@@ -743,11 +743,11 @@ func_001_4BF5::
     ldh  a, [hJoypadState]                        ; $4BF5: $F0 $CC
 
 jr_001_4BF7::
-    ldh  [hScratch0], a                           ; $4BF7: $E0 $D7
-    ldh  a, [hScratch0]                           ; $4BF9: $F0 $D7
+    ldh  [hMultiPurpose0], a                           ; $4BF7: $E0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4BF9: $F0 $D7
     and  $0C                                      ; $4BFB: $E6 $0C
     jr   nz, jr_001_4C41                          ; $4BFD: $20 $42
-    ldh  a, [hScratch0]                           ; $4BFF: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4BFF: $F0 $D7
     and  $03                                      ; $4C01: $E6 $03
     jr   nz, jr_001_4C21                          ; $4C03: $20 $1C
     ldh  a, [hPressedButtonsMask]                 ; $4C05: $F0 $CB
@@ -1037,19 +1037,19 @@ ELSE
     jr   z, jr_001_4DBD                            ; $4DAB: $28 $10 ; $4DAB: $28 $10
 
     xor  a                                        ; $4DAD: $AF ; $4DAD: $AF
-    ldh  [hScratch4], a                           ; $4DAE: $E0 $DB ; $4DAE: $E0 $DB
+    ldh  [hMultiPurpose4], a                           ; $4DAE: $E0 $DB ; $4DAE: $E0 $DB
     ld   a, [wDC06]                               ; $4DB0: $FA $06 $DC ; $4DB0: $FA $06 $DC
-    ldh  [hScratch2], a                           ; $4DB3: $E0 $D9 ; $4DB3: $E0 $D9
+    ldh  [hMultiPurpose2], a                           ; $4DB3: $E0 $D9 ; $4DB3: $E0 $D9
     ld   a, [wDC09]                               ; $4DB5: $FA $09 $DC ; $4DB5: $FA $09 $DC
-    ldh  [hScratch3], a                           ; $4DB8: $E0 $DA ; $4DB8: $E0 $DA
+    ldh  [hMultiPurpose3], a                           ; $4DB8: $E0 $DA ; $4DB8: $E0 $DA
     jp   label_001_5D53                               ; $4DBA: $C3 $53 $5D ; $4DBA: $C3 $53 $5D
 ENDC
 
 IF __PATCH_4__
 jr_001_4db6:
-    ldh [hScratch4], a
+    ldh [hMultiPurpose4], a
     ld a, [hl]
-    ldh [hScratch2], a
+    ldh [hMultiPurpose2], a
     ld a, [de]
     cp $03
     jr nc, jr_001_4dc2
@@ -1063,14 +1063,14 @@ jr_001_4dc2:
 
 jr_001_4dc8:
     ld [de], a
-    ldh [hScratch3], a
+    ldh [hMultiPurpose3], a
     swap a
     srl a
     cp [hl]
     jp nc, label_001_5D53
 
     ld [hl], a
-    ldh [hScratch2], a
+    ldh [hMultiPurpose2], a
     jp label_001_5D53
 
 ELSE
@@ -1091,11 +1091,11 @@ ELSE
     jr   z, jr_001_4DBD                            ; $4DC3: $28 $F8 ; $4DC3: $28 $F8
 
     ld   a, $01                                   ; $4DC5: $3E $01 ; $4DC5: $3E $01
-    ldh  [hScratch4], a                           ; $4DC7: $E0 $DB ; $4DC7: $E0 $DB
+    ldh  [hMultiPurpose4], a                           ; $4DC7: $E0 $DB ; $4DC7: $E0 $DB
     ld   a, [wDC07]                               ; $4DC9: $FA $07 $DC ; $4DC9: $FA $07 $DC
-    ldh  [hScratch2], a                           ; $4DCC: $E0 $D9 ; $4DCC: $E0 $D9
+    ldh  [hMultiPurpose2], a                           ; $4DCC: $E0 $D9 ; $4DCC: $E0 $D9
     ld   a, [wDC0A]                               ; $4DCE: $FA $0A $DC ; $4DCE: $FA $0A $DC
-    ldh  [hScratch3], a                           ; $4DD1: $E0 $DA ; $4DD1: $E0 $DA
+    ldh  [hMultiPurpose3], a                           ; $4DD1: $E0 $DA ; $4DD1: $E0 $DA
     jp   label_001_5D53                               ; $4DD3: $C3 $53 $5D ; $4DD3: $C3 $53 $5D
 ENDC
 
@@ -1112,11 +1112,11 @@ ELSE
     jr   z, jr_001_4DBD                            ; $4DDB: $28 $E0 ; $4DDB: $28 $E0
 
     ld   a, $02                                   ; $4DDD: $3E $02 ; $4DDD: $3E $02
-    ldh  [hScratch4], a                           ; $4DDF: $E0 $DB ; $4DDF: $E0 $DB
+    ldh  [hMultiPurpose4], a                           ; $4DDF: $E0 $DB ; $4DDF: $E0 $DB
     ld   a, [wDC08]                               ; $4DE1: $FA $08 $DC ; $4DE1: $FA $08 $DC
-    ldh  [hScratch2], a                           ; $4DE4: $E0 $D9 ; $4DE4: $E0 $D9
+    ldh  [hMultiPurpose2], a                           ; $4DE4: $E0 $D9 ; $4DE4: $E0 $D9
     ld   a, [wDC0B]                               ; $4DE6: $FA $0B $DC ; $4DE6: $FA $0B $DC
-    ldh  [hScratch3], a                           ; $4DE9: $E0 $DA ; $4DE9: $E0 $DA
+    ldh  [hMultiPurpose3], a                           ; $4DE9: $E0 $DA ; $4DE9: $E0 $DA
     jp   label_001_5D53                               ; $4DEB: $C3 $53 $5D ; $4DEB: $C3 $53 $5D
 ENDC
 

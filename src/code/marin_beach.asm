@@ -491,7 +491,7 @@ func_001_658B::
     ld   c, a                                     ; $658E: $4F
     ldh  a, [hActiveEntityVisualPosY]             ; $658F: $F0 $EC
     sub  a, c                                     ; $6591: $91
-    ldh  [hFFE8], a                               ; $6592: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $6592: $E0 $E8
     ldi  [hl], a                                  ; $6594: $22
     ldh  a, [hActiveEntityPosX]                   ; $6595: $F0 $EE
     ldi  [hl], a                                  ; $6597: $22
@@ -655,7 +655,7 @@ jr_001_668B::
     dec  [hl]                                     ; $66C3: $35
 
 jr_001_66C4::
-    ldh  a, [hFFE8]                               ; $66C4: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $66C4: $F0 $E8
     cp   $F0                                      ; $66C6: $FE $F0
     jr   c, jr_001_66D7                           ; $66C8: $38 $0D
     ld   hl, wC560                                ; $66CA: $21 $60 $C5
@@ -748,7 +748,7 @@ jr_001_6733::
     ld   e, a                                     ; $673F: $5F
     ldh  a, [hFrameCounter]                       ; $6740: $F0 $E7
     add  a, e                                     ; $6742: $83
-    ldh  [hFFE9], a                               ; $6743: $E0 $E9
+    ldh  [hMultiPurposeH], a                               ; $6743: $E0 $E9
 
 jr_001_6745::
     and  $3F                                      ; $6745: $E6 $3F
@@ -765,7 +765,7 @@ jr_001_6745::
     ld   [hl], a                                  ; $6759: $77
 
 jr_001_675A::
-    ldh  a, [hFFE9]                               ; $675A: $F0 $E9
+    ldh  a, [hMultiPurposeH]                               ; $675A: $F0 $E9
     add  a, $40                                   ; $675C: $C6 $40
     and  $3F                                      ; $675E: $E6 $3F
     jr   nz, jr_001_6773                          ; $6760: $20 $11

@@ -291,7 +291,7 @@ vBlankContinue::
 
     ; If NeedsUpdatingBGTiles or NeedsUpdatingEnnemiesTiles or NeedsUpdatingNPCTiles…
     ldh  a, [hNeedsUpdatingBGTiles]               ; $04EA: $F0 $90
-    ldh  [hFFE8], a                               ; $04EC: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $04EC: $E0 $E8
     ld   hl, hNeedsUpdatingEnnemiesTiles          ; $04EE: $21 $91 $FF
     or   [hl]                                     ; $04F1: $B6
     ld   hl, wNeedsUpdatingNPCTiles               ; $04F2: $21 $0E $C1
@@ -301,8 +301,8 @@ vBlankContinue::
     ; Load tiles (?)
     call LoadTiles                                ; $04F8: $CD $BC $05
 
-    ; If hFFE8 >= 8, skip drawing of Link sprite
-    ldh  a, [hFFE8]                               ; $04FB: $F0 $E8
+    ; If hMultiPurposeG >= 8, skip drawing of Link sprite
+    ldh  a, [hMultiPurposeG]                               ; $04FB: $F0 $E8
     cp   $08                                      ; $04FD: $FE $08
     jr   nc, .linkSpriteclearBGTilesFlag          ; $04FF: $30 $03
 .drawLinkSprite

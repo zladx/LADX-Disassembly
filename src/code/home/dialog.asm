@@ -171,13 +171,13 @@ label_23EF::
     ld   a, [wBGOriginLow]                        ; $2403: $FA $2F $C1
     add  a, [hl]                                  ; $2406: $86
     ld   l, a                                     ; $2407: $6F
-    ldh  [hScratch0], a                           ; $2408: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $2408: $E0 $D7
     ld   hl, data_23D6                            ; $240A: $21 $D6 $23
     add  hl, de                                   ; $240D: $19
     ld   a, [wBGOriginHigh]                       ; $240E: $FA $2E $C1
     add  a, [hl]                                  ; $2411: $86
     ld   h, a                                     ; $2412: $67
-    ldh  a, [hScratch0]                           ; $2413: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $2413: $F0 $D7
     ld   l, a                                     ; $2415: $6F
     xor  a                                        ; $2416: $AF
     ld   e, a                                     ; $2417: $5F
@@ -204,9 +204,9 @@ label_242B::
     cp   $12                                      ; $242D: $FE $12
     jr   nz, label_241E                           ; $242F: $20 $ED
     ld   e, $00                                   ; $2431: $1E $00
-    ldh  a, [hScratch0]                           ; $2433: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $2433: $F0 $D7
     add  a, $20                                   ; $2435: $C6 $20
-    ldh  [hScratch0], a                           ; $2437: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $2437: $E0 $D7
     jr   nc, label_243C                           ; $2439: $30 $01
     inc  h                                        ; $243B: $24
 
@@ -251,9 +251,9 @@ label_2464::
     cp   $12                                      ; $2466: $FE $12
     jr   nz, label_2444                           ; $2468: $20 $DA
     ld   e, $00                                   ; $246A: $1E $00
-    ldh  a, [hScratch0]                           ; $246C: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $246C: $F0 $D7
     add  a, $20                                   ; $246E: $C6 $20
-    ldh  [hScratch0], a                           ; $2470: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $2470: $E0 $D7
     jr   nc, label_2475                           ; $2472: $30 $01
     inc  h                                        ; $2474: $24
 
@@ -462,7 +462,7 @@ ENDC
     ld   [wC3C3], a ; upcoming character, used in code for the arrow ; $2583: $EA $C3 $C3
     call ReloadSavedBank                          ; $2586: $CD $1D $08
     ld   a, e                                     ; $2589: $7B
-    ldh  [hScratch0], a                           ; $258A: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $258A: $E0 $D7
     cp   "<ask>" ; $fe                            ; $258C: $FE $FE
     jr   nz, .notChoice                           ; $258E: $20 $14
     pop  hl                                       ; $2590: $E1
@@ -555,7 +555,7 @@ ENDR
 .handleNameChar
 
 .notName
-    ldh  [hScratch1], a                           ; $2608: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $2608: $E0 $D8
     ld   e, a                                     ; $260A: $5F
     ld   a, BANK(AsciiToTileMap)                  ; $260B: $3E $1C
     ld   [MBC3SelectBank], a                      ; $260D: $EA $00 $21
@@ -590,7 +590,7 @@ ENDR
 
     ld   a, BANK(DakutenTable)                    ; $263C: $3E $1C
     ld   [MBC3SelectBank], a ; current character  ; $263E: $EA $00 $21
-    ldh  a, [hScratch1]                           ; $2641: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $2641: $F0 $D8
     ld   e, a                                     ; $2643: $5F
     ld   d, $00                                   ; $2644: $16 $00
 IF __DO_CHECK_DAKUTEN__

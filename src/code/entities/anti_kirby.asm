@@ -12,7 +12,7 @@ AntiKirbyEntityHandler::
     add  hl, bc                                   ; $4250: $09
     ld   a, [hl]                                  ; $4251: $7E
     and  $80                                      ; $4252: $E6 $80
-    ldh  [hFFE8], a                               ; $4254: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $4254: $E0 $E8
     jr   z, jr_006_425E                           ; $4256: $28 $06
 
     ld   [hl], b                                  ; $4258: $70
@@ -62,7 +62,7 @@ jr_006_4294:
     call IncrementEntityState                     ; $429F: $CD $12 $3B
 
 label_006_42A2:
-    ldh  a, [hFFE8]                               ; $42A2: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $42A2: $F0 $E8
     and  a                                        ; $42A4: $A7
     jr   z, jr_006_42AD                           ; $42A5: $28 $06
 
@@ -215,11 +215,11 @@ jr_006_434B:
 
     ld   a, $08                                   ; $437F: $3E $08
     call GetVectorTowardsLink_trampoline          ; $4381: $CD $B5 $3B
-    ldh  a, [hScratch0]                           ; $4384: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4384: $F0 $D7
     cpl                                           ; $4386: $2F
     inc  a                                        ; $4387: $3C
     ldh  [hLinkPositionYIncrement], a             ; $4388: $E0 $9B
-    ldh  a, [hScratch1]                           ; $438A: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $438A: $F0 $D8
     cpl                                           ; $438C: $2F
     inc  a                                        ; $438D: $3C
     ldh  [hLinkPositionXIncrement], a             ; $438E: $E0 $9A
@@ -258,7 +258,7 @@ AntiKirbyState3Handler::
     call GetEntityTransitionCountdown             ; $43C5: $CD $05 $0C
     jr   z, jr_006_43F5                           ; $43C8: $28 $2B
 
-    ldh  a, [hFFE8]                               ; $43CA: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $43CA: $F0 $E8
     and  a                                        ; $43CC: $A7
     jr   z, jr_006_43E2                           ; $43CD: $28 $13
 

@@ -222,7 +222,7 @@ func_006_4C91::
     ld   a, $01                                   ; $4CCC: $3E $01
 
 jr_006_4CCE:
-    ldh  [hFFE8], a                               ; $4CCE: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $4CCE: $E0 $E8
     ld   a, $8E                                   ; $4CD0: $3E $8E
     call SpawnNewEntity_trampoline                ; $4CD2: $CD $86 $3B
     jr   c, jr_006_4D3A                           ; $4CD5: $38 $63
@@ -232,19 +232,19 @@ jr_006_4CCE:
     add  hl, bc                                   ; $4CDB: $09
     ld   a, [hl]                                  ; $4CDC: $7E
     sla  a                                        ; $4CDD: $CB $27
-    ld   hl, hFFE8                                ; $4CDF: $21 $E8 $FF
+    ld   hl, hMultiPurposeG                                ; $4CDF: $21 $E8 $FF
     or   [hl]                                     ; $4CE2: $B6
     ld   c, a                                     ; $4CE3: $4F
     ld   hl, Data_006_4BF8                        ; $4CE4: $21 $F8 $4B
     add  hl, bc                                   ; $4CE7: $09
-    ldh  a, [hScratch0]                           ; $4CE8: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4CE8: $F0 $D7
     add  [hl]                                     ; $4CEA: $86
     ld   hl, wEntitiesPosXTable                   ; $4CEB: $21 $00 $C2
     add  hl, de                                   ; $4CEE: $19
     ld   [hl], a                                  ; $4CEF: $77
     ld   hl, Data_006_4C00                        ; $4CF0: $21 $00 $4C
     add  hl, bc                                   ; $4CF3: $09
-    ldh  a, [hScratch1]                           ; $4CF4: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $4CF4: $F0 $D8
     add  [hl]                                     ; $4CF6: $86
     ld   hl, wEntitiesPosYTable                   ; $4CF7: $21 $10 $C2
     add  hl, de                                   ; $4CFA: $19
@@ -280,7 +280,7 @@ jr_006_4CCE:
     add  hl, de                                   ; $4D2F: $19
     ld   [hl], $0C                                ; $4D30: $36 $0C
     pop  bc                                       ; $4D32: $C1
-    ldh  a, [hFFE8]                               ; $4D33: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $4D33: $F0 $E8
     dec  a                                        ; $4D35: $3D
     cp   $FF                                      ; $4D36: $FE $FF
     jr   nz, jr_006_4CCE                          ; $4D38: $20 $94

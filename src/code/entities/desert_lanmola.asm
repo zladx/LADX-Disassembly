@@ -79,15 +79,15 @@ func_006_564B::
     call label_27DD                               ; $5650: $CD $DD $27
     ld   a, $30                                   ; $5653: $3E $30
     call SpawnNewEntity_trampoline                ; $5655: $CD $86 $3B
-    ldh  a, [hScratch0]                           ; $5658: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $5658: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $565A: $21 $00 $C2
     add  hl, de                                   ; $565D: $19
     ld   [hl], a                                  ; $565E: $77
-    ldh  a, [hScratch1]                           ; $565F: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $565F: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $5661: $21 $10 $C2
     add  hl, de                                   ; $5664: $19
     ld   [hl], a                                  ; $5665: $77
-    ldh  a, [hScratch3]                           ; $5666: $F0 $DA
+    ldh  a, [hMultiPurpose3]                           ; $5666: $F0 $DA
     ld   hl, wEntitiesPosZTable                   ; $5668: $21 $10 $C3
     add  hl, de                                   ; $566B: $19
     ld   [hl], a                                  ; $566C: $77
@@ -102,7 +102,7 @@ func_006_564B::
     ld   [hl], $10                                ; $567D: $36 $10
     call ClearEntityStatus_06                     ; $567F: $CD $DB $65
     ldh  a, [hActiveEntityPosX]                   ; $5682: $F0 $EE
-    ldh  [hScratch0], a                           ; $5684: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $5684: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $5686: $F0 $EC
     jr   jr_006_56BB                              ; $5688: $18 $31
 
@@ -126,7 +126,7 @@ jr_006_568A:
     ld   hl, wIsFileSelectionArrowShifted         ; $56A1: $21 $00 $D0
     add  hl, de                                   ; $56A4: $19
     ld   a, [hl]                                  ; $56A5: $7E
-    ldh  [hScratch0], a                           ; $56A6: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $56A6: $E0 $D7
     ld   hl, $D200                                ; $56A8: $21 $00 $D2
     add  hl, de                                   ; $56AB: $19
     ld   a, [hl]                                  ; $56AC: $7E
@@ -142,7 +142,7 @@ jr_006_568A:
     ld   [hl], $FF                                ; $56B9: $36 $FF
 
 jr_006_56BB:
-    ldh  [hScratch1], a                           ; $56BB: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $56BB: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $56BD: $3E $02
     call AddTranscientVfx                         ; $56BF: $CD $C7 $0C
     ld   a, $13                                   ; $56C2: $3E $13
@@ -166,13 +166,13 @@ label_006_56C8:
     ld   a, $02                                   ; $56D7: $3E $02
 
 jr_006_56D9:
-    ldh  [hFFE8], a                               ; $56D9: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $56D9: $E0 $E8
     ld   a, $87                                   ; $56DB: $3E $87
     call SpawnNewEntity_trampoline                ; $56DD: $CD $86 $3B
     jr   c, jr_006_5726                           ; $56E0: $38 $44
 
     push bc                                       ; $56E2: $C5
-    ldh  a, [hFFE8]                               ; $56E3: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $56E3: $F0 $E8
     ld   c, a                                     ; $56E5: $4F
     ld   hl, wEntitiesSpriteVariantTable          ; $56E6: $21 $B0 $C3
     add  hl, de                                   ; $56E9: $19
@@ -206,7 +206,7 @@ jr_006_56D9:
     add  hl, de                                   ; $571D: $19
     ld   [hl], $C1                                ; $571E: $36 $C1
     pop  bc                                       ; $5720: $C1
-    ldh  a, [hFFE8]                               ; $5721: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $5721: $F0 $E8
     dec  a                                        ; $5723: $3D
     jr   nz, jr_006_56D9                          ; $5724: $20 $B3
 
@@ -487,7 +487,7 @@ jr_006_58D8:
     ld   hl, wEntitiesUnknowTableY                ; $58D8: $21 $D0 $C3
     add  hl, bc                                   ; $58DB: $09
     ld   a, [hl]                                  ; $58DC: $7E
-    ldh  [hScratch0], a                           ; $58DD: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $58DD: $E0 $D7
     ldh  a, [hFrameCounter]                       ; $58DF: $F0 $E7
     and  $01                                      ; $58E1: $E6 $01
     jr   z, jr_006_58ED                           ; $58E3: $28 $08
@@ -503,12 +503,12 @@ jr_006_58ED:
     ld   a, $05                                   ; $58F1: $3E $05
 
 jr_006_58F3:
-    ldh  [hFFE8], a                               ; $58F3: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $58F3: $E0 $E8
     ld   e, a                                     ; $58F5: $5F
     ld   d, b                                     ; $58F6: $50
     ld   hl, Data_006_58C3                        ; $58F7: $21 $C3 $58
     add  hl, de                                   ; $58FA: $19
-    ldh  a, [hScratch0]                           ; $58FB: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $58FB: $F0 $D7
     sub  [hl]                                     ; $58FD: $96
     and  $FF                                      ; $58FE: $E6 $FF
     ld   e, a                                     ; $5900: $5F
@@ -529,7 +529,7 @@ jr_006_58F3:
     and  $80                                      ; $5919: $E6 $80
     jr   nz, jr_006_5936                          ; $591B: $20 $19
 
-    ldh  a, [hFFE8]                               ; $591D: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $591D: $F0 $E8
     cp   $05                                      ; $591F: $FE $05
     ld   a, $04                                   ; $5921: $3E $04
     jr   nz, jr_006_592E                          ; $5923: $20 $09
@@ -556,7 +556,7 @@ jr_006_5936:
 
 jr_006_5940:
     ld   hl, hIndexOfObjectBelowLink              ; $5940: $21 $E9 $FF
-    ldh  a, [hFFE8]                               ; $5943: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $5943: $F0 $E8
     add  e                                        ; $5945: $83
     cp   [hl]                                     ; $5946: $BE
     jr   nz, jr_006_58F3                          ; $5947: $20 $AA

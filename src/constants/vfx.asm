@@ -22,3 +22,4 @@ GROUND_VFX_NONE          equ $00
 GROUND_VFX_SHALLOW_WATER equ $05
 GROUND_VFX_GRASS         equ $06
 GROUND_VFX_PIT           equ $50
+

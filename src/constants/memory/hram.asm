@@ -99,7 +99,7 @@ hLinkPositionYIncrement::
 
 ; Unlabeled
 hFF9C::
- ds 1 ; hFF9C
+ ds 1 ; FF9C
 
 ; How the Link sprite should be drawn.
 ;

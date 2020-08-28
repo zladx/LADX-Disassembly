@@ -47,7 +47,7 @@ CrazyTracyEntityHandler::
     ldh  [hActiveEntityVisualPosY], a             ; $5EBA: $E0 $EC
 
     ; Configure Link appearance
-    ld   a, $6C                                   ; $5EBC: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $5EBC: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $5EBE: $E0 $9D
     ld   a, $02                                   ; $5EC0: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5EC2: $E0 $A1

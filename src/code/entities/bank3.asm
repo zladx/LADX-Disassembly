@@ -3099,13 +3099,13 @@ HoldEntityAboveLink::
     add  hl, bc                                   ; $5A23: $09
     sub  $0C                                      ; $5A24: $D6 $0C
     ld   [hl], a                                  ; $5A26: $77
-    ldh  a, [hLinkPositionZHigh]                      ; $5A27: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                  ; $5A27: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $5A29: $21 $10 $C3
     add  hl, bc                                   ; $5A2C: $09
     ld   [hl], a                                  ; $5A2D: $77
 
 func_003_5A2E::
-    ld   a, $6C                                   ; $5A2E: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $5A2E: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $5A30: $E0 $9D
     ld   a, $03                                   ; $5A32: $3E $03
     ldh  [hLinkDirection], a                      ; $5A34: $E0 $9E
@@ -3394,7 +3394,7 @@ SwordState2Handler::
 
 SwordState3Handler::
     call HoldEntityAboveLink                      ; $5C0F: $CD $17 $5A
-    ld   a, $6B                                   ; $5C12: $3E $6B
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_6B       ; $5C12: $3E $6B
     ldh  [hLinkAnimationState], a                 ; $5C14: $E0 $9D
     ld   hl, wEntitiesPosXTable                   ; $5C16: $21 $00 $C2
     add  hl, bc                                   ; $5C19: $09

@@ -1351,7 +1351,7 @@ jr_014_545A:
     jr   nz, jr_014_547F                          ; $5465: $20 $18
 
     ldh  a, [hLinkAnimationState]                 ; $5467: $F0 $9D
-    cp   $6C                                      ; $5469: $FE $6C
+    cp   LINK_ANIMATION_STATE_GOT_ITEM            ; $5469: $FE $6C
     jr   z, jr_014_547F                           ; $546B: $28 $12
 
     ld   a, $04                                   ; $546D: $3E $04

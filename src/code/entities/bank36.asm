@@ -157,7 +157,7 @@ jr_036_40DE:
     ret                                           ; $40DE: $C9
 
 jr_036_40DF:
-    ld   a, $06                                   ; $40DF: $3E $06
+    ld   a, LINK_ANIMATION_STATE_STANDING_LEFT    ; $40DF: $3E $06
     ldh  [hLinkAnimationState], a                 ; $40E1: $E0 $9D
     call_open_dialog $2A7                         ; $40E3
     jp   IncrementEntityState                     ; $40E8: $C3 $12 $3B
@@ -380,7 +380,7 @@ func_036_4221::
     ld   [hl], $0C                                ; $4233: $36 $0C
     pop  bc                                       ; $4235: $C1
     ldh  a, [hLinkAnimationState]                 ; $4236: $F0 $9D
-    cp   $6A                                      ; $4238: $FE $6A
+    cp   LINK_ANIMATION_STATE_UNKNOWN_6A          ; $4238: $FE $6A
     ret  nz                                       ; $423A: $C0
 
     ld   a, $02                                   ; $423B: $3E $02
@@ -399,7 +399,7 @@ func_036_424D::
 
 func_036_4254::
     ldh  a, [hLinkAnimationState]                 ; $4254: $F0 $9D
-    cp   $6A                                      ; $4256: $FE $6A
+    cp   LINK_ANIMATION_STATE_UNKNOWN_6A          ; $4256: $FE $6A
     ret  z                                        ; $4258: $C8
 
     ld   a, [wPhotos1]                            ; $4259: $FA $0C $DC
@@ -1000,7 +1000,7 @@ jr_036_45FB:
 
     xor  a                                        ; $460E: $AF
     ld   [hl], a                                  ; $460F: $77
-    ld   a, $6A                                   ; $4610: $3E $6A
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_6A       ; $4610: $3E $6A
     ldh  [hLinkAnimationState], a                 ; $4612: $E0 $9D
     ld   a, $0B                                   ; $4614: $3E $0B
     jr   jr_036_4627                              ; $4616: $18 $0F
@@ -1320,7 +1320,7 @@ func_036_47C2::
     cp   $02                                      ; $47D4: $FE $02
     ret  nz                                       ; $47D6: $C0
 
-    ld   a, $04                                   ; $47D7: $3E $04
+    ld   a, LINK_ANIMATION_STATE_STANDING_UP      ; $47D7: $3E $04
     ldh  [hLinkAnimationState], a                 ; $47D9: $E0 $9D
     jp   IncrementEntityState                     ; $47DB: $C3 $12 $3B
 
@@ -1373,7 +1373,7 @@ func_036_4820::
     call GetEntityTransitionCountdown             ; $4820: $CD $05 $0C
     ret  nz                                       ; $4823: $C0
 
-    ld   a, $0A                                   ; $4824: $3E $0A
+    ld   a, LINK_ANIMATION_STATE_STANDING_RIGHT       ; $4824: $3E $0A
     ldh  [hLinkAnimationState], a                 ; $4826: $E0 $9D
     call_open_dialog $108                         ; $4828
     jp   IncrementEntityState                     ; $482D: $C3 $12 $3B
@@ -1383,7 +1383,7 @@ func_036_4830::
     and  a                                        ; $4833: $A7
     ret  nz                                       ; $4834: $C0
 
-    ld   a, $04                                   ; $4835: $3E $04
+    ld   a, LINK_ANIMATION_STATE_STANDING_UP      ; $4835: $3E $04
     ldh  [hLinkAnimationState], a                 ; $4837: $E0 $9D
     ldh  a, [hLinkPositionX]                      ; $4839: $F0 $98
     cp   $51                                      ; $483B: $FE $51
@@ -1835,7 +1835,7 @@ func_036_4AF3::
 
     ld   a, $42                                   ; $4B02: $3E $42
     ld   [hl], a                                  ; $4B04: $77
-    ld   a, $0A                                   ; $4B05: $3E $0A
+    ld   a, LINK_ANIMATION_STATE_STANDING_RIGHT       ; $4B05: $3E $0A
     ldh  [hLinkAnimationState], a                 ; $4B07: $E0 $9D
     jp   IncrementEntityState                     ; $4B09: $C3 $12 $3B
 
@@ -1849,7 +1849,7 @@ func_036_4B0C::
 
     ld   a, $78                                   ; $4B17: $3E $78
     ld   [hl], a                                  ; $4B19: $77
-    ld   a, $04                                   ; $4B1A: $3E $04
+    ld   a, LINK_ANIMATION_STATE_STANDING_UP      ; $4B1A: $3E $04
     ldh  [hLinkAnimationState], a                 ; $4B1C: $E0 $9D
     call GetEntityTransitionCountdown             ; $4B1E: $CD $05 $0C
     ld   [hl], $60                                ; $4B21: $36 $60
@@ -1865,7 +1865,7 @@ func_036_4B26::
 
     ld   a, $2C                                   ; $4B31: $3E $2C
     ld   [hl], a                                  ; $4B33: $77
-    ld   a, $04                                   ; $4B34: $3E $04
+    ld   a, LINK_ANIMATION_STATE_STANDING_UP      ; $4B34: $3E $04
     ldh  [hLinkAnimationState], a                 ; $4B36: $E0 $9D
     jp   IncrementEntityState                     ; $4B38: $C3 $12 $3B
 
@@ -5054,7 +5054,7 @@ AvalaunchStateAHandler::
 
     ld   a, $01                                   ; $5F1B: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5F1D: $E0 $A1
-    ld   a, $6A                                   ; $5F1F: $3E $6A
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_6A       ; $5F1F: $3E $6A
     ldh  [hLinkAnimationState], a                 ; $5F21: $E0 $9D
     ld   [wC167], a                               ; $5F23: $EA $67 $C1
 

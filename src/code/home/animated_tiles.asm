@@ -476,9 +476,9 @@ ENDC
     and  $04                                      ; $1D78: $E6 $04
     jr   nz, label_1DA1                           ; $1D7A: $20 $25
     ldh  a, [hLinkAnimationState]                 ; $1D7C: $F0 $9D
-    cp   $50                                      ; $1D7E: $FE $50
+    cp   LINK_ANIMATION_STATE_UNKNOWN_50          ; $1D7E: $FE $50
     jr   c, label_1D8C                            ; $1D80: $38 $0A
-    cp   $55                                      ; $1D82: $FE $55
+    cp   LINK_ANIMATION_STATE_UNKNOWN_55          ; $1D82: $FE $55
     jr   nc, label_1D8C                           ; $1D84: $30 $06
     ld   a, [hl]                                  ; $1D86: $7E
     or   $07                                      ; $1D87: $F6 $07
@@ -495,9 +495,9 @@ label_1D8C::
 
 label_1D95::
     ldh  a, [hLinkAnimationState]                 ; $1D95: $F0 $9D
-    cp   $4E                                      ; $1D97: $FE $4E
+    cp   LINK_ANIMATION_STATE_UNKNOWN_4E          ; $1D97: $FE $4E
     jr   z, label_1D9F                            ; $1D99: $28 $04
-    cp   $4F                                      ; $1D9B: $FE $4F
+    cp   LINK_ANIMATION_STATE_UNKNOWN_4F          ; $1D9B: $FE $4F
     jr   nz, label_1DA1                           ; $1D9D: $20 $02
 
 label_1D9F::
@@ -544,9 +544,9 @@ label_1DD2::
 
 label_1DDB::
     ldh  a, [hLinkAnimationState]                 ; $1DDB: $F0 $9D
-    cp   $4E                                      ; $1DDD: $FE $4E
+    cp   LINK_ANIMATION_STATE_UNKNOWN_4E          ; $1DDD: $FE $4E
     jr   z, label_1DE5                            ; $1DDF: $28 $04
-    cp   $4F                                      ; $1DE1: $FE $4F
+    cp   LINK_ANIMATION_STATE_UNKNOWN_4F          ; $1DE1: $FE $4F
     jr   nz, label_1DE7                           ; $1DE3: $20 $02
 
 label_1DE5::

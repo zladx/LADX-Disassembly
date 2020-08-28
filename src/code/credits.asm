@@ -1902,7 +1902,7 @@ CreditsPlayInstrumentsDialogHandler::
     jr   nz, jr_017_551F                          ; $550F: $20 $0E
 
     call ResetCreditsSceneVariables               ; $5511: $CD $A5 $4D
-    ld   a, $03                                   ; $5514: $3E $03
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_03       ; $5514: $3E $03
     ldh  [hLinkAnimationState], a                 ; $5516: $E0 $9D
     ld   a, $0C                                   ; $5518: $3E $0C
     ldh  [hFFA5], a                               ; $551A: $E0 $A5
@@ -1951,7 +1951,7 @@ CreditsLinkPreparesToPlayHandler::
     and  a                                        ; $556E: $A7
     jr   nz, jr_017_55E9                          ; $556F: $20 $78
 
-    ld   a, $04                                   ; $5571: $3E $04
+    ld   a, LINK_ANIMATION_STATE_STANDING_UP      ; $5571: $3E $04
     ldh  [hLinkAnimationState], a                 ; $5573: $E0 $9D
     ld   a, MUSIC_WIND_FISH_AWAKENS               ; $5575: $3E $3F
     ld   [wMusicTrackToPlay], a                   ; $5577: $EA $68 $D3
@@ -2734,7 +2734,7 @@ func_017_5A66::
 
     ld   a, $00                                   ; $5A7C: $3E $00
     ld   [wScreenShakeHorizontal], a              ; $5A7E: $EA $55 $C1
-    ld   a, $00                                   ; $5A81: $3E $00
+    ld   a, LINK_ANIMATION_STATE_STANDING_DOWN    ; $5A81: $3E $00
     ldh  [hLinkAnimationState], a                 ; $5A83: $E0 $9D
     ld   a, $15                                   ; $5A85: $3E $15
     ld   [wTileMapToLoad], a                      ; $5A87: $EA $FE $D6

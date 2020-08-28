@@ -282,10 +282,10 @@ jr_002_4345:
 
 ; conversion table from view direction to animation state
 DirectionToLinkAnimationState::
-.right  db  LINK_ANIMATION_STATE_UNKNOWN_RIGHT    ; $4346 $11
-.left   db  LINK_ANIMATION_STATE_UNKNOWN_LEFT     ; $4346 $10
-.up     db  LINK_ANIMATION_STATE_UNKNOWN_UP       ; $4346 $0F
-.down   db  LINK_ANIMATION_STATE_UNKNOWN_DOWN     ; $4346 $0E
+.right  db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_RIGHT    ; $4346 $11
+.left   db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT     ; $4346 $10
+.up     db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_UP       ; $4346 $0F
+.down   db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_DOWN     ; $4346 $0E
 
 func_002_434A::
     ld   a, [wC19B]                               ; $434A: $FA $9B $C1
@@ -777,13 +777,13 @@ LinkDirectionToSwordDirection::
     db  SWORD_DIRECTION_LEFT_BOTTOM,    SWORD_DIRECTION_BOTTOM,     SWORD_DIRECTION_RIGHT_BOTTOM,    SWORD_DIRECTION_BOTTOM
 
 ; convert the sowrd direction to link animation state
-LinkDirectionToLinkAnimationState::
-    db  LINK_ANIMATION_STATE_STANDING_DOWN, LINK_ANIMATION_STATE_UNKNOWN_18,    LINK_ANIMATION_STATE_UNKNOWN_19,      LINK_ANIMATION_STATE_UNKNOWN_RIGHT
-    db  LINK_ANIMATION_STATE_UNKNOWN_RIGHT, LINK_ANIMATION_STATE_UNKNOWN_FF,    LINK_ANIMATION_STATE_STANDING_DOWN,   LINK_ANIMATION_STATE_UNKNOWN_16
-    db  LINK_ANIMATION_STATE_UNKNOWN_17,    LINK_ANIMATION_STATE_UNKNOWN_LEFT,  LINK_ANIMATION_STATE_UNKNOWN_LEFT,    LINK_ANIMATION_STATE_UNKNOWN_FF
-    db  LINK_ANIMATION_STATE_STANDING_DOWN, LINK_ANIMATION_STATE_UNKNOWN_14,    LINK_ANIMATION_STATE_UNKNOWN_15,      LINK_ANIMATION_STATE_UNKNOWN_UP
-    db  LINK_ANIMATION_STATE_UNKNOWN_UP,    LINK_ANIMATION_STATE_UNKNOWN_FF,    LINK_ANIMATION_STATE_STANDING_DOWN,   LINK_ANIMATION_STATE_UNKNOWN_12
-    db  LINK_ANIMATION_STATE_UNKNOWN_13,    LINK_ANIMATION_STATE_UNKNOWN_DOWN,  LINK_ANIMATION_STATE_UNKNOWN_DOWN,    LINK_ANIMATION_STATE_UNKNOWN_FF
+LinkDirectionToLinkAnimationState1::
+    db  LINK_ANIMATION_STATE_STANDING_DOWN, LINK_ANIMATION_STATE_UNKNOWN_18,    LINK_ANIMATION_STATE_UNKNOWN_19,      LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_RIGHT
+    db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_RIGHT, LINK_ANIMATION_STATE_UNKNOWN_FF,    LINK_ANIMATION_STATE_STANDING_DOWN,   LINK_ANIMATION_STATE_UNKNOWN_16
+    db  LINK_ANIMATION_STATE_UNKNOWN_17,    LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT,  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT,    LINK_ANIMATION_STATE_UNKNOWN_FF
+    db  LINK_ANIMATION_STATE_STANDING_DOWN, LINK_ANIMATION_STATE_UNKNOWN_14,    LINK_ANIMATION_STATE_UNKNOWN_15,      LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_UP
+    db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_UP,    LINK_ANIMATION_STATE_UNKNOWN_FF,    LINK_ANIMATION_STATE_STANDING_DOWN,   LINK_ANIMATION_STATE_UNKNOWN_12
+    db  LINK_ANIMATION_STATE_UNKNOWN_13,    LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_DOWN,  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_DOWN,    LINK_ANIMATION_STATE_UNKNOWN_FF
 
 ; convert the direction link is facing to wC13A
 LinkDirectionTo_wC13A::
@@ -1051,7 +1051,7 @@ label_002_4827:
     ld   a, [hl]                                  ; $483B: $7E
     ld   [wSwordDirection], a                     ; $483C: $EA $36 $C1
     ; if value is not LINK_ANIMATION_STATE_UNKNOWN_FF then update hLinkAnimationState
-    ld   hl, LinkDirectionToLinkAnimationState    ; $483F: $21 $36 $46
+    ld   hl, LinkDirectionToLinkAnimationState1   ; $483F: $21 $36 $46
     add  hl, bc                                   ; $4842: $09
     ld   a, [hl]                                  ; $4843: $7E
     cp   LINK_ANIMATION_STATE_UNKNOWN_FF          ; $4844: $FE $FF
@@ -1420,10 +1420,9 @@ jr_002_4AD1:
 
 jr_002_4AE8:
     ld   a, [wC5A5]                               ; $4AE8: $FA $A5 $C5
-    ld   e, $75                                   ; $4AEB: $1E $75
+    ld   e, LINK_ANIMATION_STATE_UNKNOWN_75       ; $4AEB: $1E $75
     and  a                                        ; $4AED: $A7
     jr   nz, jr_002_4AF1                          ; $4AEE: $20 $01
-
     inc  e                                        ; $4AF0: $1C
 
 jr_002_4AF1:
@@ -1475,28 +1474,28 @@ jr_002_4AF1:
 jr_002_4B40:
     ret                                           ; $4B40: $C9
 
-Data_002_4B41::
+LinkDirectionToLinkAnimationState2::
     db   $71, $72, $6F, $70, $73, $74, $6D, $6E
 
 func_002_4B49::
     ld   a, [wC1C7]                               ; $4B49: $FA $C7 $C1
     and  a                                        ; $4B4C: $A7
-    jr   z, jr_002_4BBF                           ; $4B4D: $28 $70
+    jr   z, .return                               ; $4B4D: $28 $70
 
     ldh  a, [hMapId]                              ; $4B4F: $F0 $F7
     cp   MAP_WINDFISHS_EGG                        ; $4B51: $FE $08
-    jr   nz, jr_002_4B64                          ; $4B53: $20 $0F
+    jr   nz, .jr_002_4B64                         ; $4B53: $20 $0F
 
     ld   a, [wFinalNightmareForm]                 ; $4B55: $FA $19 $D2
     cp   $02                                      ; $4B58: $FE $02
-    jr   nz, jr_002_4B64                          ; $4B5A: $20 $08
+    jr   nz, .jr_002_4B64                         ; $4B5A: $20 $08
 
     call func_020_4B4A_trampoline                 ; $4B5C: $CD $4B $13
     ; enable sword collision
     ld   a, $01                                   ; $4B5F: $3E $01
     ld   [wSwordCollisionEnabled], a              ; $4B61: $EA $B0 $C5
 
-jr_002_4B64:
+.jr_002_4B64:
     ld   hl, hLinkInteractiveMotionBlocked        ; $4B64: $21 $A1 $FF
     ld   [hl], $01                                ; $4B67: $36 $01
     call ClearLinkPositionIncrement               ; $4B69: $CD $8E $17
@@ -1509,37 +1508,37 @@ jr_002_4B64:
     inc  a                                        ; $4B78: $3C
     ld   [wC1C8], a                               ; $4B79: $EA $C8 $C1
     cp   $10                                      ; $4B7C: $FE $10
-    jr   nz, jr_002_4B85                          ; $4B7E: $20 $05
+    jr   nz, .jr_002_4B85                         ; $4B7E: $20 $05
 
     push af                                       ; $4B80: $F5
     call func_002_4BC8                            ; $4B81: $CD $C8 $4B
     pop  af                                       ; $4B84: $F1
 
-jr_002_4B85:
+.jr_002_4B85:
     cp   $18                                      ; $4B85: $FE $18
-    jr   nz, jr_002_4BA9                          ; $4B87: $20 $20
+    jr   nz, .jr_002_4BA9                         ; $4B87: $20 $20
 
     ld   a, [wC1C7]                               ; $4B89: $FA $C7 $C1
     cp   $02                                      ; $4B8C: $FE $02
-    jr   nz, jr_002_4BA1                          ; $4B8E: $20 $11
+    jr   nz, .jr_002_4BA1                         ; $4B8E: $20 $11
 
     ld   a, [wIsMarinFollowingLink]               ; $4B90: $FA $73 $DB
     and  a                                        ; $4B93: $A7
-    jr   z, jr_002_4BA1                           ; $4B94: $28 $0B
+    jr   z, .jr_002_4BA1                          ; $4B94: $28 $0B
 
     ld   a, [wDialogState]                        ; $4B96: $FA $9F $C1
     and  a                                        ; $4B99: $A7
-    jr   nz, jr_002_4BA1                          ; $4B9A: $20 $05
+    jr   nz, .jr_002_4BA1                         ; $4B9A: $20 $05
 
     call_open_dialog $279                         ; $4B9C
 
-jr_002_4BA1:
+.jr_002_4BA1:
     xor  a                                        ; $4BA1: $AF
     ld   [wC1C7], a                               ; $4BA2: $EA $C7 $C1
     ld   [wC1AC], a                               ; $4BA5: $EA $AC $C1
     ret                                           ; $4BA8: $C9
 
-jr_002_4BA9:
+.jr_002_4BA9:
     rra                                           ; $4BA9: $1F
     rra                                           ; $4BAA: $1F
     rra                                           ; $4BAB: $1F
@@ -1551,12 +1550,12 @@ jr_002_4BA9:
     add  e                                        ; $4BB4: $83
     ld   e, a                                     ; $4BB5: $5F
     ld   d, $00                                   ; $4BB6: $16 $00
-    ld   hl, Data_002_4B41                        ; $4BB8: $21 $41 $4B
+    ld   hl, LinkDirectionToLinkAnimationState2   ; $4BB8: $21 $41 $4B
     add  hl, de                                   ; $4BBB: $19
     ld   a, [hl]                                  ; $4BBC: $7E
     ldh  [hLinkAnimationState], a                 ; $4BBD: $E0 $9D
 
-jr_002_4BBF:
+.return:
     ret                                           ; $4BBF: $C9
 
 Data_002_4BC0::
@@ -2038,8 +2037,14 @@ func_002_4E48::
     ld   [wPaletteDataFlags], a                   ; $4E62: $EA $D1 $DD
     ret                                           ; $4E65: $C9
 
-Data_002_4E66::
-    db   $50, $51, $52, $53, $53, $54, $52
+UnknownToLinkAnimationState::
+    db  LINK_ANIMATION_STATE_UNKNOWN_50
+    db  LINK_ANIMATION_STATE_UNKNOWN_51
+    db  LINK_ANIMATION_STATE_UNKNOWN_52
+    db  LINK_ANIMATION_STATE_UNKNOWN_53
+    db  LINK_ANIMATION_STATE_UNKNOWN_53
+    db  LINK_ANIMATION_STATE_UNKNOWN_54
+    db  LINK_ANIMATION_STATE_UNKNOWN_52
 
 LinkMotionRevolvingDoorHandler::
     ld   a, $10                                   ; $4E6D: $3E $10
@@ -2084,7 +2089,7 @@ jr_002_4EA1:
     and  $07                                      ; $4EA1: $E6 $07
     ld   e, a                                     ; $4EA3: $5F
     ld   d, $00                                   ; $4EA4: $16 $00
-    ld   hl, Data_002_4E66                        ; $4EA6: $21 $66 $4E
+    ld   hl, UnknownToLinkAnimationState          ; $4EA6: $21 $66 $4E
     add  hl, de                                   ; $4EA9: $19
     ld   a, [hl]                                  ; $4EAA: $7E
     ldh  [hLinkAnimationState], a                 ; $4EAB: $E0 $9D
@@ -2096,9 +2101,9 @@ jr_002_4EA1:
 
     ld   a, $FB                                   ; $4EB8: $3E $FB
     ldh  [hLinkPositionY], a                      ; $4EBA: $E0 $99
-    ld   a, $02                                   ; $4EBC: $3E $02
+    ld   a, DIRECTION_UP                          ; $4EBC: $3E $02
     ldh  [hLinkDirection], a                      ; $4EBE: $E0 $9E
-    ld   a, $04                                   ; $4EC0: $3E $04
+    ld   a, LINK_ANIMATION_STATE_STANDING_UP      ; $4EC0: $3E $04
     ldh  [hLinkAnimationState], a                 ; $4EC2: $E0 $9D
 
 jr_002_4EC4:
@@ -2439,8 +2444,12 @@ jr_002_50BA:
     ld   [wDBC8], a                               ; $50C6: $EA $C8 $DB
     ret                                           ; $50C9: $C9
 
-Data_002_50CA::
-    db   $55, $56, $57, $57, $FF, $FF, $FF, $FF, $FF, $FF
+Unknown2ToLinkAnimationState::
+    db  LINK_ANIMATION_STATE_UNKNOWN_55, LINK_ANIMATION_STATE_UNKNOWN_56
+    db  LINK_ANIMATION_STATE_UNKNOWN_57, LINK_ANIMATION_STATE_UNKNOWN_57
+    db  LINK_ANIMATION_STATE_UNKNOWN_FF, LINK_ANIMATION_STATE_UNKNOWN_FF
+    db  LINK_ANIMATION_STATE_UNKNOWN_FF, LINK_ANIMATION_STATE_UNKNOWN_FF
+    db  LINK_ANIMATION_STATE_UNKNOWN_FF, LINK_ANIMATION_STATE_UNKNOWN_FF
 
 LinkMotionFallingDownHandler::
     ld   a, $01                                   ; $50D4: $3E $01
@@ -2459,7 +2468,7 @@ LinkMotionFallingDownHandler::
 
     ld   e, a                                     ; $50EB: $5F
     ld   d, $00                                   ; $50EC: $16 $00
-    ld   hl, Data_002_50CA                        ; $50EE: $21 $CA $50
+    ld   hl, Unknown2ToLinkAnimationState                        ; $50EE: $21 $CA $50
     add  hl, de                                   ; $50F1: $19
     ld   a, [hl]                                  ; $50F2: $7E
     ldh  [hLinkAnimationState], a                 ; $50F3: $E0 $9D
@@ -2609,34 +2618,34 @@ HandleGotItemB::
     ld   [wC13E], a                               ; $51D0: $EA $3E $C1
     call ApplyLinkMotionState                     ; $51D3: $CD $94 $17
     call func_21E1                                ; $51D6: $CD $E1 $21
-    ldh  a, [hLinkPositionZLow]                               ; $51D9: $F0 $A3
+    ldh  a, [hLinkPositionZLow]                   ; $51D9: $F0 $A3
     sub  $02                                      ; $51DB: $D6 $02
-    ldh  [hLinkPositionZLow], a                               ; $51DD: $E0 $A3
-    ldh  a, [hLinkPositionZHigh]                      ; $51DF: $F0 $A2
+    ldh  [hLinkPositionZLow], a                   ; $51DD: $E0 $A3
+    ldh  a, [hLinkPositionZHigh]                  ; $51DF: $F0 $A2
     and  $80                                      ; $51E1: $E6 $80
     jr   z, jr_002_51ED                           ; $51E3: $28 $08
 
     xor  a                                        ; $51E5: $AF
-    ldh  [hLinkPositionZHigh], a                      ; $51E6: $E0 $A2
+    ldh  [hLinkPositionZHigh], a                  ; $51E6: $E0 $A2
     ld   [wC149], a                               ; $51E8: $EA $49 $C1
-    ldh  [hLinkPositionZLow], a                               ; $51EB: $E0 $A3
+    ldh  [hLinkPositionZLow], a                   ; $51EB: $E0 $A3
 
 jr_002_51ED:
-    ld   a, $6B                                   ; $51ED: $3E $6B
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_6B       ; $51ED: $3E $6B
     ldh  [hLinkAnimationState], a                 ; $51EF: $E0 $9D
-    ld   bc, wLinkOAMBuffer+$10                                ; $51F1: $01 $10 $C0
+    ld   bc, wLinkOAMBuffer+$10                   ; $51F1: $01 $10 $C0
     ldh  a, [hLinkPositionY]                      ; $51F4: $F0 $99
-    ld   hl, hLinkPositionZHigh                       ; $51F6: $21 $A2 $FF
+    ld   hl, hLinkPositionZHigh                   ; $51F6: $21 $A2 $FF
     sub  [hl]                                     ; $51F9: $96
     ld   hl, wC13B                                ; $51FA: $21 $3B $C1
     add  [hl]                                     ; $51FD: $86
     sub  $10                                      ; $51FE: $D6 $10
-    ldh  [hMultiPurpose0], a                           ; $5200: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $5200: $E0 $D7
     ld   a, [wDialogGotItem]                      ; $5202: $FA $A9 $C1
     cp   $01                                      ; $5205: $FE $01
     jr   z, jr_002_524F                           ; $5207: $28 $46
 
-    ldh  a, [hMultiPurpose0]                           ; $5209: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $5209: $F0 $D7
     add  $02                                      ; $520B: $C6 $02
     ld   [bc], a                                  ; $520D: $02
     inc  bc                                       ; $520E: $03
@@ -2748,24 +2757,24 @@ jr_002_529C:
     jp   label_002_52B9                           ; $529C: $C3 $B9 $52
 
 jr_002_529F:
-    ld   e, $FF                                   ; $529F: $1E $FF
+    ld   e, LINK_ANIMATION_STATE_UNKNOWN_FF       ; $529F: $1E $FF
     ldh  a, [hFFB7]                               ; $52A1: $F0 $B7
     cp   $30                                      ; $52A3: $FE $30
-    jr   c, jr_002_52B5                           ; $52A5: $38 $0E
+    jr   c, .jr_002_52B5                          ; $52A5: $38 $0E
 
-    ld   e, $4E                                   ; $52A7: $1E $4E
+    ld   e, LINK_ANIMATION_STATE_UNKNOWN_4E       ; $52A7: $1E $4E
     cp   $40                                      ; $52A9: $FE $40
-    jr   c, jr_002_52B5                           ; $52AB: $38 $08
+    jr   c, .jr_002_52B5                          ; $52AB: $38 $08
 
-    jr   nz, jr_002_52B3                          ; $52AD: $20 $04
+    jr   nz, .jr_002_52B3                         ; $52AD: $20 $04
 
     ld   a, NOISE_SFX_SPIN_ATTACK                 ; $52AF: $3E $03
     ldh  [hWaveSfx], a                            ; $52B1: $E0 $F3
 
-jr_002_52B3:
-    ld   e, $4C                                   ; $52B3: $1E $4C
+.jr_002_52B3:
+    ld   e, LINK_ANIMATION_STATE_UNKNOWN_4C       ; $52B3: $1E $4C
 
-jr_002_52B5:
+.jr_002_52B5:
     ld   a, e                                     ; $52B5: $7B
     ldh  [hLinkAnimationState], a                 ; $52B6: $E0 $9D
     ret                                           ; $52B8: $C9
@@ -7819,7 +7828,7 @@ ENDC
 
 IF __PATCH_0__
     ldh  a, [hLinkAnimationState]
-    cp   $6c
+    cp   LINK_ANIMATION_STATE_GOT_ITEM
     jr   z, jr_002_779A
 ENDC
 

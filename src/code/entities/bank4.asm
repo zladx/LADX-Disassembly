@@ -296,7 +296,7 @@ func_004_4E52::
 
     ld   a, $02                                   ; $4E57: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4E59: $E0 $A1
-    ld   a, $6A                                   ; $4E5B: $3E $6A
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_6A       ; $4E5B: $3E $6A
     ldh  [hLinkAnimationState], a                 ; $4E5D: $E0 $9D
 
 jr_004_4E5F:

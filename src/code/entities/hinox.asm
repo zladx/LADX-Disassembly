@@ -316,7 +316,7 @@ jr_006_5179:
 func_006_51B0::
     ld   a, $01                                   ; $51B0: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $51B2: $E0 $A1
-    ld   a, $6A                                   ; $51B4: $3E $6A
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_6A       ; $51B4: $3E $6A
     ldh  [hLinkAnimationState], a                 ; $51B6: $E0 $9D
     ld   [wC167], a                               ; $51B8: $EA $67 $C1
 

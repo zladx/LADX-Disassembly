@@ -280,8 +280,12 @@ func_002_4338::
 jr_002_4345:
     ret                                           ; $4345: $C9
 
-Data_002_4346::
-    db   $11, $10, $0F, $0E
+; conversion table from view direction to animation state
+DirectionToLinkAnimationState::
+.right  db  LINK_ANIMATION_STATE_UNKNOWN_RIGHT    ; $4346 $11
+.left   db  LINK_ANIMATION_STATE_UNKNOWN_LEFT     ; $4346 $10
+.up     db  LINK_ANIMATION_STATE_UNKNOWN_UP       ; $4346 $0F
+.down   db  LINK_ANIMATION_STATE_UNKNOWN_DOWN     ; $4346 $0E
 
 func_002_434A::
     ld   a, [wC19B]                               ; $434A: $FA $9B $C1
@@ -295,7 +299,7 @@ func_002_434A::
     ldh  a, [hLinkDirection]                      ; $435A: $F0 $9E
     ld   e, a                                     ; $435C: $5F
     ld   d, $00                                   ; $435D: $16 $00
-    ld   hl, Data_002_4346                        ; $435F: $21 $46 $43
+    ld   hl, DirectionToLinkAnimationState        ; $435F: $21 $46 $43
     add  hl, de                                   ; $4362: $19
     ld   a, [hl]                                  ; $4363: $7E
     ldh  [hLinkAnimationState], a                 ; $4364: $E0 $9D
@@ -737,89 +741,141 @@ shallowWaterVfx:
     ld   a, TRANSCIENT_VFX_PEGASUS_SPLASH         ; $45B9: $3E $0C
     jp   AddTranscientVfx                         ; $45BB: $C3 $C7 $0C
 
-Data_002_45BE::
-    db   $00, $00, $08, $06, $00, $06, $00, $00, $08, $0A, $00, $0A, $00, $00, $08, $10
-    db   $00, $10, $00, $00, $08, $08, $00, $08
+; 0 = True
+; every other value = False
+; values are never used elsewhere => easter egg?
+LinkDirectionToStaticSwordCollitionCheckNeeded::
+    db   $00, $00, $08, $06
+    db   $00, $06, $00, $00
+    db   $08, $0A, $00, $0A
+    db   $00, $00, $08, $10
+    db   $00, $10, $00, $00
+    db   $08, $08, $00, $08
 
-Data_002_45D6::
+; convert the direction link is facing to wC141
+LinkDirectionTo_wC141::
     db   $00, $00, $05, $0A, $00, $0A, $00, $00, $05, $0A, $00, $0A, $00, $00, $05, $08
     db   $00, $08, $00, $00, $05, $08, $00, $08
 
-Data_002_45EE::
+; convert the direction link is facing to an offset used in calculation
+LinkDirectionToOffset::
     db   $00, $00, $08, $08, $00, $08, $00, $00, $08, $08, $00, $08, $00, $00, $08, $08
     db   $00, $08, $00, $00, $08, $08, $00, $08
 
-Data_002_4606::
+; convert the direction link is facing to wC143
+LinkDirectionTo_wC143::
     db   $00, $00, $05, $08, $00, $08, $00, $00, $05, $08, $00, $08, $00, $00, $05, $08
     db   $00, $08, $00, $00, $05, $08, $00, $08
 
-Data_002_461E::
-    db   $00, $06, $07, $00, $01, $00, $00, $06, $05, $04, $03, $04, $00, $00, $07, $06
-    db   $05, $06, $00, $04, $03, $02, $01, $02
+; convert the direction link is facing to sword direction
+LinkDirectionToSwordDirection::
+    db  SWORD_DIRECTION_RIGHT,          SWORD_DIRECTION_TOP,        SWORD_DIRECTION_RIGHT_TOP,       SWORD_DIRECTION_RIGHT
+    db  SWORD_DIRECTION_RIGHT_BOTTOM,   SWORD_DIRECTION_RIGHT,      SWORD_DIRECTION_RIGHT,           SWORD_DIRECTION_TOP
+    db  SWORD_DIRECTION_LEFT_TOP,       SWORD_DIRECTION_LEFT,       SWORD_DIRECTION_LEFT_BOTTOM,     SWORD_DIRECTION_LEFT
+    db  SWORD_DIRECTION_RIGHT,          SWORD_DIRECTION_RIGHT,      SWORD_DIRECTION_RIGHT_TOP,       SWORD_DIRECTION_TOP
+    db  SWORD_DIRECTION_LEFT_TOP,       SWORD_DIRECTION_TOP,        SWORD_DIRECTION_RIGHT,           SWORD_DIRECTION_LEFT
+    db  SWORD_DIRECTION_LEFT_BOTTOM,    SWORD_DIRECTION_BOTTOM,     SWORD_DIRECTION_RIGHT_BOTTOM,    SWORD_DIRECTION_BOTTOM
 
-Data_002_4636::
-    db   $00, $18, $19, $11, $11, $FF, $00, $16, $17, $10, $10, $FF, $00, $14, $15, $0F
-    db   $0F, $FF, $00, $12, $13, $0E, $0E, $FF
+; convert the sowrd direction to link animation state
+LinkDirectionToLinkAnimationState::
+    db  LINK_ANIMATION_STATE_STANDING_DOWN, LINK_ANIMATION_STATE_UNKNOWN_18,    LINK_ANIMATION_STATE_UNKNOWN_19,      LINK_ANIMATION_STATE_UNKNOWN_RIGHT
+    db  LINK_ANIMATION_STATE_UNKNOWN_RIGHT, LINK_ANIMATION_STATE_UNKNOWN_FF,    LINK_ANIMATION_STATE_STANDING_DOWN,   LINK_ANIMATION_STATE_UNKNOWN_16
+    db  LINK_ANIMATION_STATE_UNKNOWN_17,    LINK_ANIMATION_STATE_UNKNOWN_LEFT,  LINK_ANIMATION_STATE_UNKNOWN_LEFT,    LINK_ANIMATION_STATE_UNKNOWN_FF
+    db  LINK_ANIMATION_STATE_STANDING_DOWN, LINK_ANIMATION_STATE_UNKNOWN_14,    LINK_ANIMATION_STATE_UNKNOWN_15,      LINK_ANIMATION_STATE_UNKNOWN_UP
+    db  LINK_ANIMATION_STATE_UNKNOWN_UP,    LINK_ANIMATION_STATE_UNKNOWN_FF,    LINK_ANIMATION_STATE_STANDING_DOWN,   LINK_ANIMATION_STATE_UNKNOWN_12
+    db  LINK_ANIMATION_STATE_UNKNOWN_13,    LINK_ANIMATION_STATE_UNKNOWN_DOWN,  LINK_ANIMATION_STATE_UNKNOWN_DOWN,    LINK_ANIMATION_STATE_UNKNOWN_FF
 
-Data_002_464E::
+; convert the direction link is facing to wC13A
+LinkDirectionTo_wC13A::
     db   $00, $00, $0D, $13, $10, $0B, $00, $F8, $F3, $ED, $F0, $F5, $00, $10, $0D, $F8
     db   $F5, $F8, $00, $F0, $F3, $00, $0C, $00
 
-Data_002_4666::
+; convert the direction link is facing to wC139
+LinkDirectionTo_wC139::
     db   $00, $F0, $F3, $00, $0C, $00, $00, $F0, $F3, $00, $0C, $00, $00, $F8, $F3, $F0
     db   $F3, $F5, $00, $00, $0D, $10, $0D, $0D
 
-Data_002_467E::
+; convert the direction link is facing to wC13C
+LinkDirectionTo_wC13C::
     db   $00, $00, $00, $03, $03, $00, $00, $00, $00, $FD, $FD, $00, $00, $00, $00, $00
     db   $00, $00, $00, $00, $00, $00, $00, $00
 
-Data_002_4696::
+; convert the direction link is facing to wC13B
+LinkDirectionTo_wC13B::
     db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $FD
     db   $FD, $00, $00, $00, $00, $03, $03
 
-Data_002_46AD::
+; convert the sword animation state to an unknown variable
+SwordAnimationStateToUnknow::
     db   $00, $03, $03, $08, $01, $01, $01, $01
 
-Data_002_46B5::
-    db   $61, $62, $63, $00, $5E, $5F, $60, $00, $67, $68, $69, $00, $64, $65, $66, $00
+; convert an unknown value to links animation state
+UnkownToLinkStateTable::
+    db  LINK_ANIMATION_STATE_UNKNOWN_61,    LINK_ANIMATION_STATE_UNKNOWN_62,    LINK_ANIMATION_STATE_UNKNOWN_63,    LINK_ANIMATION_STATE_STANDING_DOWN
+    db  LINK_ANIMATION_STATE_JUMPING_1,     LINK_ANIMATION_STATE_JUMPING_2,     LINK_ANIMATION_STATE_JUMPING_3,     LINK_ANIMATION_STATE_STANDING_DOWN
+    db  LINK_ANIMATION_STATE_UNKNOWN_67,    LINK_ANIMATION_STATE_UNKNOWN_68,    LINK_ANIMATION_STATE_UNKNOWN_69,    LINK_ANIMATION_STATE_STANDING_DOWN
+    db  LINK_ANIMATION_STATE_UNKNOWN_64,    LINK_ANIMATION_STATE_UNKNOWN_65,    LINK_ANIMATION_STATE_UNKNOWN_66,    LINK_ANIMATION_STATE_STANDING_DOWN
 
-Data_002_46C5::
-    db   $00, $03, $01, $02
+; convert the frame counter to link direction
+FrameCounterToLinkDirection::
+    db   DIRECTION_RIGHT, DIRECTION_DOWN, DIRECTION_LEFT, DIRECTION_UP
 
-Data_002_46C9::
-    db   $03, $02, $03, $02, $03, $02, $03, $04, $03, $04, $03, $02, $03, $04, $03, $04
-    db   $03, $02, $03, $04, $03, $04, $03, $04, $03, $04, $03, $04, $03, $02, $03, $04
+; convert the direction link is facing to sword animation state
+LinkDirectionToSwordAnimationState::
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_START,   SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_START
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_START,   SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_END,     SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_START
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_END,     SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_START,   SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_END,     SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_END,     SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_START,   SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END
 
-Data_002_46E9::
-    db   $00, $02, $02, $01, $01, $03, $03, $00, $01, $02, $02, $00, $00, $03, $03, $01
-    db   $02, $00, $00, $03, $03, $01, $01, $02, $03, $01, $01, $02, $02, $00, $00, $03
+; convert the relative direction link is facing to absolute direction link is facing
+LinkDirectionToAbsolute::
+    db  DIRECTION_RIGHT,    DIRECTION_UP,       DIRECTION_UP,        DIRECTION_LEFT
+    db  DIRECTION_LEFT,     DIRECTION_DOWN,     DIRECTION_DOWN,      DIRECTION_RIGHT
+    db  DIRECTION_LEFT,     DIRECTION_UP,       DIRECTION_UP,        DIRECTION_RIGHT
+    db  DIRECTION_RIGHT,    DIRECTION_DOWN,     DIRECTION_DOWN,      DIRECTION_LEFT
+    db  DIRECTION_UP,       DIRECTION_RIGHT,    DIRECTION_RIGHT,     DIRECTION_DOWN
+    db  DIRECTION_DOWN,     DIRECTION_LEFT,     DIRECTION_LEFT,      DIRECTION_UP
+    db  DIRECTION_DOWN,     DIRECTION_LEFT,     DIRECTION_LEFT,      DIRECTION_UP
+    db  DIRECTION_UP,       DIRECTION_RIGHT,    DIRECTION_RIGHT,     DIRECTION_DOWN
 
 label_002_4709:
     dec  a                                        ; $4709: $3D
     ld   [wIsUsingSpinAttack], a                  ; $470A: $EA $21 $C1
+    ; motion blocked during spin attack
     ld   hl, hLinkInteractiveMotionBlocked        ; $470D: $21 $A1 $FF
-    ld   [hl], $01                                ; $4710: $36 $01
+    ld   [hl], TRUE                               ; $4710: $36 $01
     srl  a                                        ; $4712: $CB $3F
     srl  a                                        ; $4714: $CB $3F
     ld   e, a                                     ; $4716: $5F
     ld   d, $00                                   ; $4717: $16 $00
+    ; convert Links direction to sword animation state
     ldh  a, [hLinkDirection]                      ; $4719: $F0 $9E
     sla  a                                        ; $471B: $CB $27
     sla  a                                        ; $471D: $CB $27
     sla  a                                        ; $471F: $CB $27
+    ; e = hLinkDirection + wIsUsingSpinAttack
+    ; de = absolute direction in sword spin attack
     add  e                                        ; $4721: $83
     ld   e, a                                     ; $4722: $5F
-    ld   hl, Data_002_46C9                        ; $4723: $21 $C9 $46
+    ld   hl, LinkDirectionToSwordAnimationState   ; $4723: $21 $C9 $46
     add  hl, de                                   ; $4726: $19
     ld   a, [hl]                                  ; $4727: $7E
     ld   [wSwordAnimationState], a                ; $4728: $EA $37 $C1
-    ld   hl, Data_002_46E9                        ; $472B: $21 $E9 $46
+    ld   hl, LinkDirectionToAbsolute               ; $472B: $21 $E9 $46
     add  hl, de                                   ; $472E: $19
+    ; back up link direction
     ldh  a, [hLinkDirection]                      ; $472F: $F0 $9E
     push af                                       ; $4731: $F5
+    ; link direction = absolute direcetion in spin attack
     ld   a, [hl]                                  ; $4732: $7E
     ldh  [hLinkDirection], a                      ; $4733: $E0 $9E
+    ; update sword direction to be absolute
     call label_002_4827                           ; $4735: $CD $27 $48
+    ; recover link direction
     pop  af                                       ; $4738: $F1
     ldh  [hLinkDirection], a                      ; $4739: $E0 $9E
     ldh  a, [hFrameCounter]                       ; $473B: $F0 $E7
@@ -875,7 +931,7 @@ jr_002_4789:
 func_002_478C::
     ld   a, [wD475]                               ; $478C: $FA $75 $D4
     and  a                                        ; $478F: $A7
-    jr   z, jr_002_47A3                           ; $4790: $28 $11
+    jr   z, .jr_002_47A3                           ; $4790: $28 $11
 
     ldh  a, [hFrameCounter]                       ; $4792: $F0 $E7
     rra                                           ; $4794: $1F
@@ -883,18 +939,20 @@ func_002_478C::
     and  $03                                      ; $4796: $E6 $03
     ld   e, a                                     ; $4798: $5F
     ld   d, $00                                   ; $4799: $16 $00
-    ld   hl, Data_002_46C5                        ; $479B: $21 $C5 $46
+    ld   hl, FrameCounterToLinkDirection          ; $479B: $21 $C5 $46
     add  hl, de                                   ; $479E: $19
     ld   a, [hl]                                  ; $479F: $7E
     ldh  [hLinkDirection], a                      ; $47A0: $E0 $9E
     ret                                           ; $47A2: $C9
 
-jr_002_47A3:
+.jr_002_47A3:
+    ; if link is in the air jump to jr_002_47E0
     ld   a, [wIsLinkInTheAir]                     ; $47A3: $FA $46 $C1
-    cp   $01                                      ; $47A6: $FE $01
+    cp   TRUE                                     ; $47A6: $FE $01
     jr   nz, jr_002_47E0                          ; $47A8: $20 $36
 
     ld   a, [wC3CF]                               ; $47AA: $FA $CF $C3
+    ; if in sword animation jump to jr_002_47E0
     ld   hl, wSwordAnimationState                 ; $47AD: $21 $37 $C1
     or   [hl]                                     ; $47B0: $B6
     jr   nz, jr_002_47E0                          ; $47B1: $20 $2D
@@ -911,7 +969,7 @@ jr_002_47A3:
 
     ld   e, a                                     ; $47C3: $5F
     ld   d, $00                                   ; $47C4: $16 $00
-    ld   hl, Data_002_46B5                        ; $47C6: $21 $B5 $46
+    ld   hl, UnkownToLinkStateTable               ; $47C6: $21 $B5 $46
     add  hl, de                                   ; $47C9: $19
     add  hl, bc                                   ; $47CA: $09
     ld   a, [hl]                                  ; $47CB: $7E
@@ -968,7 +1026,7 @@ jr_002_4809:
 
     ld   c, a                                     ; $481B: $4F
     ld   b, $00                                   ; $481C: $06 $00
-    ld   hl, Data_002_46AD                        ; $481E: $21 $AD $46
+    ld   hl, SwordAnimationStateToUnknow                        ; $481E: $21 $AD $46
     add  hl, bc                                   ; $4821: $09
     ld   a, [hl]                                  ; $4822: $7E
 
@@ -977,6 +1035,7 @@ jr_002_4823:
     ld   [wC138], a                               ; $4824: $EA $38 $C1
 
 label_002_4827:
+    ; convert link direction to sword direction and move to next sword animation state
     ld   hl, wSwordAnimationState                 ; $4827: $21 $37 $C1
     ldh  a, [hLinkDirection]                      ; $482A: $F0 $9E
     ld   e, a                                     ; $482C: $5F
@@ -987,67 +1046,68 @@ label_002_4827:
     add  [hl]                                     ; $4833: $86
     ld   c, a                                     ; $4834: $4F
     ld   b, $00                                   ; $4835: $06 $00
-    ld   hl, Data_002_461E                        ; $4837: $21 $1E $46
+    ld   hl, LinkDirectionToSwordDirection        ; $4837: $21 $1E $46
     add  hl, bc                                   ; $483A: $09
     ld   a, [hl]                                  ; $483B: $7E
     ld   [wSwordDirection], a                     ; $483C: $EA $36 $C1
-    ld   hl, Data_002_4636                        ; $483F: $21 $36 $46
+    ; if value is not LINK_ANIMATION_STATE_UNKNOWN_FF then update hLinkAnimationState
+    ld   hl, LinkDirectionToLinkAnimationState    ; $483F: $21 $36 $46
     add  hl, bc                                   ; $4842: $09
     ld   a, [hl]                                  ; $4843: $7E
-    cp   $FF                                      ; $4844: $FE $FF
-    jr   z, jr_002_484A                           ; $4846: $28 $02
-
+    cp   LINK_ANIMATION_STATE_UNKNOWN_FF          ; $4844: $FE $FF
+    jr   z, .noUpdate                             ; $4846: $28 $02
     ldh  [hLinkAnimationState], a                 ; $4848: $E0 $9D
 
-jr_002_484A:
-    ld   hl, Data_002_464E                        ; $484A: $21 $4E $46
+.noUpdate:
+    ld   hl, LinkDirectionTo_wC13A                        ; $484A: $21 $4E $46
     add  hl, bc                                   ; $484D: $09
     ld   a, [hl]                                  ; $484E: $7E
     ld   [wC13A], a                               ; $484F: $EA $3A $C1
-    ld   hl, Data_002_4666                        ; $4852: $21 $66 $46
+    ld   hl, LinkDirectionTo_wC139                        ; $4852: $21 $66 $46
     add  hl, bc                                   ; $4855: $09
     ld   a, [hl]                                  ; $4856: $7E
     ld   [wC139], a                               ; $4857: $EA $39 $C1
-    ld   hl, Data_002_467E                        ; $485A: $21 $7E $46
+    ld   hl, LinkDirectionTo_wC13C                        ; $485A: $21 $7E $46
     add  hl, bc                                   ; $485D: $09
     ld   a, [hl]                                  ; $485E: $7E
     ld   [wC13C], a                               ; $485F: $EA $3C $C1
-    ld   hl, Data_002_4696                        ; $4862: $21 $96 $46
+    ld   hl, LinkDirectionTo_wC13B                        ; $4862: $21 $96 $46
     add  hl, bc                                   ; $4865: $09
     ld   a, [hl]                                  ; $4866: $7E
     ld   [wC13B], a                               ; $4867: $EA $3B $C1
-    ld   hl, Data_002_45BE                        ; $486A: $21 $BE $45
+    ld   hl, LinkDirectionToStaticSwordCollitionCheckNeeded                        ; $486A: $21 $BE $45
     add  hl, bc                                   ; $486D: $09
     ld   a, [hl]                                  ; $486E: $7E
     and  a                                        ; $486F: $A7
-    jr   z, jr_002_48AD                           ; $4870: $28 $3B
+    jr   z, .checkStaticSwordCollision            ; $4870: $28 $3B
 
     ld   a, [wIsUsingShield]                      ; $4872: $FA $5B $C1
     and  a                                        ; $4875: $A7
-    jr   z, jr_002_487E                           ; $4876: $28 $06
+    jr   z, .noShieldUsed                         ; $4876: $28 $06
 
     ldh  a, [hFrameCounter]                       ; $4878: $F0 $E7
     and  $01                                      ; $487A: $E6 $01
-    jr   nz, jr_002_48AD                          ; $487C: $20 $2F
+    jr   nz, .checkStaticSwordCollision           ; $487C: $20 $2F
 
-jr_002_487E:
+.noShieldUsed:
     ld   a, [wC13A]                               ; $487E: $FA $3A $C1
     add  [hl]                                     ; $4881: $86
     ld   hl, hLinkPositionX                       ; $4882: $21 $98 $FF
     add  [hl]                                     ; $4885: $86
     ld   [wC140], a                               ; $4886: $EA $40 $C1
-    ld   hl, Data_002_45D6                        ; $4889: $21 $D6 $45
+    ld   hl, LinkDirectionTo_wC141                ; $4889: $21 $D6 $45
     add  hl, bc                                   ; $488C: $09
     ld   a, [hl]                                  ; $488D: $7E
     ld   [wC141], a                               ; $488E: $EA $41 $C1
+    ; wC142 = [LinkDirectionToOffset + hLinkDirection] + wC139 + [wC145]
     ld   a, [wC139]                               ; $4891: $FA $39 $C1
-    ld   hl, Data_002_45EE                        ; $4894: $21 $EE $45
+    ld   hl, LinkDirectionToOffset                ; $4894: $21 $EE $45
     add  hl, bc                                   ; $4897: $09
     add  [hl]                                     ; $4898: $86
     ld   hl, wC145                                ; $4899: $21 $45 $C1
     add  [hl]                                     ; $489C: $86
     ld   [wC142], a                               ; $489D: $EA $42 $C1
-    ld   hl, Data_002_4606                        ; $48A0: $21 $06 $46
+    ld   hl, LinkDirectionTo_wC143                ; $48A0: $21 $06 $46
     add  hl, bc                                   ; $48A3: $09
     ld   a, [hl]                                  ; $48A4: $7E
     ld   [wC143], a                               ; $48A5: $EA $43 $C1
@@ -1055,7 +1115,7 @@ jr_002_487E:
     ld   a, $01                                   ; $48A8: $3E $01
     ld   [wSwordCollisionEnabled], a              ; $48AA: $EA $B0 $C5
 
-jr_002_48AD:
+.checkStaticSwordCollision:
     jp   CheckStaticSwordCollision_trampoline     ; $48AD: $C3 $A7 $15
 
 label_002_48B0:

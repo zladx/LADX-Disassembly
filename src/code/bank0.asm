@@ -1607,7 +1607,7 @@ InitGotItemSequence::
     cp   $02                                      ; $1098: $FE $02
     jr   z, .jp_10DB                              ; $109A: $28 $3F
     ldh  a, [hLinkAnimationState]                 ; $109C: $F0 $9D
-    cp   $FF                                      ; $109E: $FE $FF
+    cp   LINK_ANIMATION_STATE_UNKNOWN_FF          ; $109E: $FE $FF
     jr   z, .jp_10DB                              ; $10A0: $28 $39
     ld   a, [wLinkMotionState]                    ; $10A2: $FA $1C $C1
     cp   $02                                      ; $10A5: $FE $02

@@ -97,6 +97,11 @@ hLinkPositionXIncrement::
 hLinkPositionYIncrement::
  ds 1 ; FF9B
 
+; used when jumping
+; possible values:
+; 0 = reset,
+; 1 = ??? => TRUE?,
+; 2 = ??? => different use?
 ; Unlabeled
 hFF9C::
  ds 1 ; FF9C

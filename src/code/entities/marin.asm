@@ -115,7 +115,7 @@ MarinCreditsHandler:
     call SpawnNewEntity_trampoline                ; $4EFB: $CD $86 $3B
     jr   c, jr_005_4F39                           ; $4EFE: $38 $39
 
-    ldh  a, [hScratch1]                           ; $4F00: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $4F00: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $4F02: $21 $10 $C2
     add  hl, de                                   ; $4F05: $19
     sub  $08                                      ; $4F06: $D6 $08
@@ -132,7 +132,7 @@ MarinCreditsHandler:
     ld   c, a                                     ; $4F15: $4F
     ld   hl, Data_005_4E5E                        ; $4F16: $21 $5E $4E
     add  hl, bc                                   ; $4F19: $09
-    ldh  a, [hScratch0]                           ; $4F1A: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4F1A: $F0 $D7
     add  [hl]                                     ; $4F1C: $86
     ld   hl, wEntitiesPosXTable                   ; $4F1D: $21 $00 $C2
     add  hl, de                                   ; $4F20: $19
@@ -334,7 +334,7 @@ func_005_5020::
     inc  [hl]                                     ; $5031: $34
     ld   [wMusicTrackToPlay], a                   ; $5032: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $5035: $E0 $B0
-    ldh  [$FFBD], a                               ; $5037: $E0 $BD
+    ldh  [hFFBD], a                               ; $5037: $E0 $BD
     ld   hl, wC3C8                                ; $5039: $21 $C8 $C3
     ld   [hl], $01                                ; $503C: $36 $01
 
@@ -753,11 +753,11 @@ func_005_52DB::
 
     call IncrementEntityState                     ; $52EF: $CD $12 $3B
     ld   a, $01                                   ; $52F2: $3E $01
-    ldh  [hLinkPositionZ], a                      ; $52F4: $E0 $A2
+    ldh  [hLinkPositionZHigh], a                      ; $52F4: $E0 $A2
     ld   a, $02                                   ; $52F6: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $52F8: $EA $46 $C1
     ld   a, $12                                   ; $52FB: $3E $12
-    ldh  [$FFA3], a                               ; $52FD: $E0 $A3
+    ldh  [hLinkPositionZLow], a                               ; $52FD: $E0 $A3
     ld   a, $0C                                   ; $52FF: $3E $0C
     ldh  [hLinkPositionXIncrement], a             ; $5301: $E0 $9A
     xor  a                                        ; $5303: $AF

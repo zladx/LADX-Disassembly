@@ -90,7 +90,7 @@ func_006_60E5::
 jr_006_60F0:
     ld   [wMusicTrackToPlay], a                   ; $60F0: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $60F3: $E0 $B0
-    ldh  [$FFBD], a                               ; $60F5: $E0 $BD
+    ldh  [hFFBD], a                               ; $60F5: $E0 $BD
 
 label_006_60F7:
     ld   hl, wEntitiesUnknownTableD               ; $60F7: $21 $D0 $C2
@@ -192,7 +192,7 @@ label_006_6170:
     add  hl, bc                                   ; $6190: $09
     ld   a, [hl]                                  ; $6191: $7E
     and  $80                                      ; $6192: $E6 $80
-    ldh  [hFFE8], a                               ; $6194: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $6194: $E0 $E8
     jr   z, jr_006_619F                           ; $6196: $28 $07
 
     xor  a                                        ; $6198: $AF
@@ -219,11 +219,11 @@ func_006_61A6::
     call SpawnNewEntity_trampoline                ; $61B7: $CD $86 $3B
     jr   c, jr_006_61EB                           ; $61BA: $38 $2F
 
-    ldh  a, [hScratch0]                           ; $61BC: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $61BC: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $61BE: $21 $00 $C2
     add  hl, de                                   ; $61C1: $19
     ld   [hl], a                                  ; $61C2: $77
-    ldh  a, [hScratch1]                           ; $61C3: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $61C3: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $61C5: $21 $10 $C2
     add  hl, de                                   ; $61C8: $19
     ld   [hl], a                                  ; $61C9: $77
@@ -267,7 +267,7 @@ jr_006_61F8:
     cp   $40                                      ; $61FB: $FE $40
     jr   nc, jr_006_620A                          ; $61FD: $30 $0B
 
-    ldh  a, [hFFE8]                               ; $61FF: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $61FF: $F0 $E8
     and  a                                        ; $6201: $A7
     jr   z, jr_006_620A                           ; $6202: $28 $06
 

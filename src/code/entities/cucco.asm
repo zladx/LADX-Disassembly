@@ -52,7 +52,7 @@ jr_005_4557:
     add  hl, bc                                   ; $4571: $09
     ld   a, [hl]                                  ; $4572: $7E
     and  $80                                      ; $4573: $E6 $80
-    ldh  [hFFE8], a                               ; $4575: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $4575: $E0 $E8
     jr   z, jr_005_4580                           ; $4577: $28 $07
 
     xor  a                                        ; $4579: $AF
@@ -208,7 +208,7 @@ func_005_4624::
 func_005_4663::
     call UpdateEntityPosWithSpeed_05              ; $4663: $CD $B1 $7A
     call label_3B23                               ; $4666: $CD $23 $3B
-    ldh  a, [hFFE8]                               ; $4669: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $4669: $F0 $E8
     and  a                                        ; $466B: $A7
     jr   z, jr_005_4685                           ; $466C: $28 $17
 
@@ -253,13 +253,13 @@ func_005_46AF::
 
     ld   a, $0C                                   ; $46BB: $3E $0C
     call GetVectorTowardsLink_trampoline          ; $46BD: $CD $B5 $3B
-    ldh  a, [hScratch0]                           ; $46C0: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $46C0: $F0 $D7
     cpl                                           ; $46C2: $2F
     inc  a                                        ; $46C3: $3C
     ld   hl, wEntitiesSpeedYTable                 ; $46C4: $21 $50 $C2
     add  hl, bc                                   ; $46C7: $09
     ld   [hl], a                                  ; $46C8: $77
-    ldh  a, [hScratch1]                           ; $46C9: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $46C9: $F0 $D8
     cpl                                           ; $46CB: $2F
     inc  a                                        ; $46CC: $3C
 

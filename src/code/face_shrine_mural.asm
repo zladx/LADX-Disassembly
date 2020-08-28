@@ -66,7 +66,7 @@ FaceShrineMuralStage2Handler::
     ld   [wWindowY], a                            ; $6B59: $EA $9A $DB
     xor  a                                        ; $6B5C: $AF
     ldh  [hBaseScrollX], a                        ; $6B5D: $E0 $96
-    ldh  [$FF97], a                               ; $6B5F: $E0 $97
+    ldh  [hBaseScrollY], a                               ; $6B5F: $E0 $97
     ld   [wTransitionSequenceCounter], a                               ; $6B61: $EA $6B $C1
     ld   [wC16C], a                               ; $6B64: $EA $6C $C1
     ld   a, $01                                   ; $6B67: $3E $01

@@ -220,10 +220,10 @@ jr_006_5102:
     jr   nz, jr_006_5117                          ; $5106: $20 $0F
 
     ldh  a, [hActiveEntityPosX]                   ; $5108: $F0 $EE
-    ldh  [hScratch0], a                           ; $510A: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $510A: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $510C: $F0 $EC
     add  $0A                                      ; $510E: $C6 $0A
-    ldh  [hScratch1], a                           ; $5110: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $5110: $E0 $D8
     ld   a, TRANSCIENT_VFX_PEGASUS_DUST           ; $5112: $3E $0B
     call AddTranscientVfx                         ; $5114: $CD $C7 $0C
 
@@ -263,7 +263,7 @@ jr_006_5145:
 jr_006_5157:
     ldh  [hLinkPositionXIncrement], a             ; $5157: $E0 $9A
     ld   a, $10                                   ; $5159: $3E $10
-    ldh  [$FFA3], a                               ; $515B: $E0 $A3
+    ldh  [hLinkPositionZLow], a                               ; $515B: $E0 $A3
     ld   a, $02                                   ; $515D: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $515F: $EA $46 $C1
     ld   a, JINGLE_JUMP_DOWN                      ; $5162: $3E $08
@@ -307,7 +307,7 @@ jr_006_5179:
     ld   hl, Data_006_512F                        ; $51A0: $21 $2F $51
     add  hl, de                                   ; $51A3: $19
     ld   a, [hl]                                  ; $51A4: $7E
-    ldh  [hLinkPositionZ], a                      ; $51A5: $E0 $A2
+    ldh  [hLinkPositionZHigh], a                      ; $51A5: $E0 $A2
     ld   a, $02                                   ; $51A7: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $51A9: $EA $46 $C1
     ldh  a, [hActiveEntityPosY]                   ; $51AC: $F0 $EF
@@ -347,12 +347,12 @@ jr_006_51D0:
     call SpawnNewEntity_trampoline                ; $51D6: $CD $86 $3B
     jr   c, jr_006_51F6                           ; $51D9: $38 $1B
 
-    ldh  a, [hScratch0]                           ; $51DB: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $51DB: $F0 $D7
     sub  $0C                                      ; $51DD: $D6 $0C
     ld   hl, wEntitiesPosXTable                   ; $51DF: $21 $00 $C2
     add  hl, de                                   ; $51E2: $19
     ld   [hl], a                                  ; $51E3: $77
-    ldh  a, [hScratch1]                           ; $51E4: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $51E4: $F0 $D8
     sub  $00                                      ; $51E6: $D6 $00
     ld   hl, wEntitiesPosYTable                   ; $51E8: $21 $10 $C2
     add  hl, de                                   ; $51EB: $19

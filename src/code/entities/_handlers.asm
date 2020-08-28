@@ -277,7 +277,7 @@ func_020_4303::
     xor  a                                        ; $4309: $AF
     ld   [wC5A0], a                               ; $430A: $EA $A0 $C5
     ld   [wC10C], a                               ; $430D: $EA $0C $C1
-    ldh  [hFFB2], a                               ; $4310: $E0 $B2
+    ldh  [slowWalkingSpeed], a                               ; $4310: $E0 $B2
     ld   [wC117], a                               ; $4312: $EA $17 $C1
     ld   [wC19D], a                               ; $4315: $EA $9D $C1
     ld   [wC147], a                               ; $4318: $EA $47 $C1

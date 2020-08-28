@@ -121,13 +121,13 @@ ButterflyEntityHandler::
     ldh  [hLinkPositionY], a                      ; $6C59: $E0 $99
     pop  af                                       ; $6C5B: $F1
     ldh  [hLinkPositionX], a                      ; $6C5C: $E0 $98
-    ; wEntitiesPrivateState2Table[c] = [hScratch0]
-    ldh  a, [hScratch0]                           ; $6C5E: $F0 $D7
+    ; wEntitiesPrivateState2Table[c] = [hMultiPurpose0]
+    ldh  a, [hMultiPurpose0]                           ; $6C5E: $F0 $D7
     ld   hl, wEntitiesPrivateState2Table          ; $6C60: $21 $C0 $C2
     add  hl, bc                                   ; $6C63: $09
     ld   [hl], a                                  ; $6C64: $77
-    ; wEntitiesPrivateState1Table[c] = [hScratch1]
-    ldh  a, [hScratch1]                           ; $6C65: $F0 $D8
+    ; wEntitiesPrivateState1Table[c] = [hMultiPurpose1]
+    ldh  a, [hMultiPurpose1]                           ; $6C65: $F0 $D8
     ld   hl, wEntitiesPrivateState1Table          ; $6C67: $21 $B0 $C2
     add  hl, bc                                   ; $6C6A: $09
     ld   [hl], a                                  ; $6C6B: $77

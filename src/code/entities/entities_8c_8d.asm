@@ -20,7 +20,7 @@ label_006_4EB7:
     ld   de, Data_006_4E9D                        ; $4EB7: $11 $9D $4E
     call RenderActiveEntitySpritesPair            ; $4EBA: $CD $C0 $3B
     call func_006_64C6                            ; $4EBD: $CD $C6 $64
-    ldh  a, [$FFBA]                               ; $4EC0: $F0 $BA
+    ldh  a, [hFFBA]                               ; $4EC0: $F0 $BA
     cp   $02                                      ; $4EC2: $FE $02
     jr   z, jr_006_4EF2                           ; $4EC4: $28 $2C
 
@@ -76,9 +76,9 @@ jr_006_4EF2:
     ld   [wC13E], a                               ; $4EFD: $EA $3E $C1
     ld   a, $10                                   ; $4F00: $3E $10
     call GetVectorTowardsLink_trampoline          ; $4F02: $CD $B5 $3B
-    ldh  a, [hScratch0]                           ; $4F05: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4F05: $F0 $D7
     ldh  [hLinkPositionYIncrement], a             ; $4F07: $E0 $9B
-    ldh  a, [hScratch1]                           ; $4F09: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $4F09: $F0 $D8
     ldh  [hLinkPositionXIncrement], a             ; $4F0B: $E0 $9A
 
 jr_006_4F0D:

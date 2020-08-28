@@ -36,7 +36,7 @@ AnimateMarinBeachTiles::
     jp   CopyData                                 ; $1B02: $C3 $14 $29
     jr   nz, AnimateTiles.doWorldAnimations       ; $1B05: $20 $60
     and  b                                        ; $1B07: $A0
-    ldh  [hScratch9], a                           ; $1B08: $E0 $E0
+    ldh  [hMultiPurpose9], a                           ; $1B08: $E0 $E0
     ldh  [hLinkFinalPositionY], a                 ; $1B0A: $E0 $A0
     ld   h, b                                     ; $1B0C: $60
 
@@ -97,8 +97,8 @@ AnimateTiles::
     jr   nz, .notCredits                          ; $1B4B: $20 $06
 
     ; GameplayType == CREDITS
-    ldh  a, [$FFA5]                               ; $1B4D: $F0 $A5
-    and  a                          ; if $FFA5 != 0 ; $1B4F: $A7
+    ldh  a, [hFFA5]                               ; $1B4D: $F0 $A5
+    and  a                          ; if hFFA5 != 0 ; $1B4F: $A7
     jr   nz, AnimateTiles.animateEndCredits ;   handle end credits animated tiles ; $1B50: $20 $30
     ret                                           ; $1B52: $C9
 
@@ -138,12 +138,12 @@ AnimateTiles::
     jp   DrawLinkSpriteAndReturn                  ; $1B7A: $C3 $2E $1D
 
 .notD6F8
-    ldh  a, [$FFA5]                               ; $1B7D: $F0 $A5
+    ldh  a, [hFFA5]                               ; $1B7D: $F0 $A5
     and  a                                        ; $1B7F: $A7
     jr   z, .notFFA5                              ; $1B80: $28 $4B
 
 .animateEndCredits
-    ; a == $FFA5
+    ; a == hFFA5
     cp   $01                                      ; $1B82: $FE $01
     jp   z, label_3F93                            ; $1B84: $CA $93 $3F
     cp   $02                                      ; $1B87: $FE $02

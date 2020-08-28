@@ -105,20 +105,20 @@ func_005_5A9C::
     ld   a, $02                                   ; $5AA5: $3E $02
 
 jr_005_5AA7:
-    ldh  [hFFE8], a                               ; $5AA7: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $5AA7: $E0 $E8
     ld   a, ENTITY_EVIL_EAGLE                     ; $5AA9: $3E $63
     call SpawnNewEntity_trampoline                ; $5AAB: $CD $86 $3B
     push bc                                       ; $5AAE: $C5
-    ldh  a, [hFFE8]                               ; $5AAF: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $5AAF: $F0 $E8
     ld   c, a                                     ; $5AB1: $4F
     ld   hl, Data_005_5A7D                        ; $5AB2: $21 $7D $5A
     add  hl, bc                                   ; $5AB5: $09
-    ldh  a, [hScratch0]                           ; $5AB6: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $5AB6: $F0 $D7
     add  [hl]                                     ; $5AB8: $86
     ld   hl, wEntitiesPosXTable                   ; $5AB9: $21 $00 $C2
     add  hl, de                                   ; $5ABC: $19
     ld   [hl], a                                  ; $5ABD: $77
-    ldh  a, [hScratch1]                           ; $5ABE: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $5ABE: $F0 $D8
     sub  $10                                      ; $5AC0: $D6 $10
     ld   hl, wEntitiesPosYTable                   ; $5AC2: $21 $10 $C2
     add  hl, de                                   ; $5AC5: $19
@@ -127,7 +127,7 @@ jr_005_5AA7:
     ld   hl, wEntitiesPrivateState1Table          ; $5AC8: $21 $B0 $C2
     add  hl, de                                   ; $5ACB: $19
     ld   [hl], $02                                ; $5ACC: $36 $02
-    ldh  a, [hFFE8]                               ; $5ACE: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $5ACE: $F0 $E8
     dec  a                                        ; $5AD0: $3D
     jr   nz, jr_005_5AA7                          ; $5AD1: $20 $D4
 
@@ -848,12 +848,12 @@ jr_005_5EB0:
     srl  c                                        ; $5ED7: $CB $39
     ld   hl, Data_005_5E1B                        ; $5ED9: $21 $1B $5E
     add  hl, bc                                   ; $5EDC: $09
-    ldh  a, [hScratch0]                           ; $5EDD: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $5EDD: $F0 $D7
     add  [hl]                                     ; $5EDF: $86
     ld   hl, wEntitiesPosXTable                   ; $5EE0: $21 $00 $C2
     add  hl, de                                   ; $5EE3: $19
     ld   [hl], a                                  ; $5EE4: $77
-    ldh  a, [hScratch1]                           ; $5EE5: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $5EE5: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $5EE7: $21 $10 $C2
     add  hl, de                                   ; $5EEA: $19
     add  $0C                                      ; $5EEB: $C6 $0C

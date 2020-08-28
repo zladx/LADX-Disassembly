@@ -201,7 +201,7 @@ IF __PATCH_1__
 ENDC
 
     ld   a, BANK(@)                             ; $414A: JumpTable_028_40FB $3E $28
-    ldh  [hScratchF], a                         ; $414C: JumpTable_028_40FB $E0 $E6
+    ldh  [hMultiPurposeF], a                         ; $414C: JumpTable_028_40FB $E0 $E6
     ld   a, BANK(PhotoAlbumBackgroundMap)       ; $414E: JumpTable_028_40FB $3E $28
     ld   hl, PhotoAlbumBackgroundMap            ; $4150: JumpTable_028_40FB $21 $E0 $79
     call CopyBGMapFromBank                      ; $4153: JumpTable_028_40FB $CD $69 $0B
@@ -670,7 +670,7 @@ func_028_4411::
     ldi  a, [hl]                                ; $4417: $2A
     ld   b, a                                   ; $4418: $47
     ld   a, BANK(@)                             ; $4419: $3E $28
-    ldh  [hScratchF], a                         ; $441B: $E0 $E6
+    ldh  [hMultiPurposeF], a                         ; $441B: $E0 $E6
     ld   a, [hl]                                ; $441D: $7E
     ld   h, b                                   ; $441E: $60
     ld   l, c                                   ; $441F: $69

@@ -98,7 +98,7 @@ MarineBeachPrepare3::
     ld   [wTransitionSequenceCounter], a                               ; $629B: $EA $6B $C1
     ld   [wC16C], a                               ; $629E: $EA $6C $C1
     ld   a, $90                                   ; $62A1: $3E $90
-    ldh  [$FF97], a                               ; $62A3: $E0 $97
+    ldh  [hBaseScrollY], a                               ; $62A3: $E0 $97
     ld   a, $40                                   ; $62A5: $3E $40
     ld   [wNoiseSfxSeaWavesCounter], a                               ; $62A7: $EA $14 $C1
     ld   a, $A0                                   ; $62AA: $3E $A0
@@ -257,9 +257,9 @@ MarineBeachScroll2::
     ldh  a, [hFrameCounter]                       ; $6417: $F0 $E7
     and  $03                                      ; $6419: $E6 $03
     jr   nz, jr_001_642E                          ; $641B: $20 $11
-    ldh  a, [$FF97]                               ; $641D: $F0 $97
+    ldh  a, [hBaseScrollY]                               ; $641D: $F0 $97
     inc  a                                        ; $641F: $3C
-    ldh  [$FF97], a                               ; $6420: $E0 $97
+    ldh  [hBaseScrollY], a                               ; $6420: $E0 $97
     cp   $00                                      ; $6422: $FE $00
     jr   nz, jr_001_642E                          ; $6424: $20 $08
     ld   a, $80                                   ; $6426: $3E $80
@@ -450,7 +450,7 @@ jr_001_652E::
 jr_001_6545::
     dec  a                                        ; $6545: $3D
     ld   [wD466], a                               ; $6546: $EA $66 $D4
-    ldh  a, [$FF97]                               ; $6549: $F0 $97
+    ldh  a, [hBaseScrollY]                               ; $6549: $F0 $97
     dec  a                                        ; $654B: $3D
     cp   $C0                                      ; $654C: $FE $C0
     ret  c                                        ; $654E: $D8
@@ -487,11 +487,11 @@ jr_001_6584::
 
 func_001_658B::
     push bc                                       ; $658B: $C5
-    ldh  a, [$FF97]                               ; $658C: $F0 $97
+    ldh  a, [hBaseScrollY]                               ; $658C: $F0 $97
     ld   c, a                                     ; $658E: $4F
     ldh  a, [hActiveEntityVisualPosY]             ; $658F: $F0 $EC
     sub  a, c                                     ; $6591: $91
-    ldh  [$FFE8], a                               ; $6592: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $6592: $E0 $E8
     ldi  [hl], a                                  ; $6594: $22
     ldh  a, [hActiveEntityPosX]                   ; $6595: $F0 $EE
     ldi  [hl], a                                  ; $6597: $22
@@ -655,7 +655,7 @@ jr_001_668B::
     dec  [hl]                                     ; $66C3: $35
 
 jr_001_66C4::
-    ldh  a, [$FFE8]                               ; $66C4: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $66C4: $F0 $E8
     cp   $F0                                      ; $66C6: $FE $F0
     jr   c, jr_001_66D7                           ; $66C8: $38 $0D
     ld   hl, wC560                                ; $66CA: $21 $60 $C5
@@ -748,7 +748,7 @@ jr_001_6733::
     ld   e, a                                     ; $673F: $5F
     ldh  a, [hFrameCounter]                       ; $6740: $F0 $E7
     add  a, e                                     ; $6742: $83
-    ldh  [$FFE9], a                               ; $6743: $E0 $E9
+    ldh  [hMultiPurposeH], a                               ; $6743: $E0 $E9
 
 jr_001_6745::
     and  $3F                                      ; $6745: $E6 $3F
@@ -765,7 +765,7 @@ jr_001_6745::
     ld   [hl], a                                  ; $6759: $77
 
 jr_001_675A::
-    ldh  a, [$FFE9]                               ; $675A: $F0 $E9
+    ldh  a, [hMultiPurposeH]                               ; $675A: $F0 $E9
     add  a, $40                                   ; $675C: $C6 $40
     and  $3F                                      ; $675E: $E6 $3F
     jr   nz, jr_001_6773                          ; $6760: $20 $11

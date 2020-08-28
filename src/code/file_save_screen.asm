@@ -107,7 +107,7 @@ FileSaveDelay2::
     ld   [wWindowY], a                            ; $4086: $EA $9A $DB
     xor  a                                        ; $4089: $AF
     ldh  [hBaseScrollX], a                        ; $408A: $E0 $96
-    ldh  [$FF97], a                               ; $408C: $E0 $97
+    ldh  [hBaseScrollY], a                               ; $408C: $E0 $97
     ld   [wTransitionSequenceCounter], a                               ; $408E: $EA $6B $C1
     ld   [wC16C], a                               ; $4091: $EA $6C $C1
     ld   a, $01                                   ; $4094: $3E $01
@@ -241,7 +241,7 @@ jr_001_413B::
     ldi  [hl], a                                  ; $414C: $22
     ld   [hl], $00                                ; $414D: $36 $00
     ret                                           ; $414F: $C9
-    ldh  a, [$FFB7]                               ; $4150: $F0 $B7
+    ldh  a, [hFFB7]                               ; $4150: $F0 $B7
     and  a                                        ; $4152: $A7
     jp   nz, .cleanup                             ; $4153: $C2 $BB $41
     ld   e, $70                                   ; $4156: $1E $70

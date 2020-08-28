@@ -473,7 +473,7 @@ UpdatePaletteEffectForInteractiveObjects::
 
     ; If Link's motion state doesn't allow for palette effects, return
     xor  a                                        ; $4C5D: $AF
-    ldh  [hScratch0], a                           ; $4C5E: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $4C5E: $E0 $D7
     ld   d, a                                     ; $4C60: $57
     ld   a, [wLinkMotionState]                    ; $4C61: $FA $1C $C1
     ld   e, a                                     ; $4C64: $5F
@@ -494,7 +494,7 @@ UpdatePaletteEffectForInteractiveObjects::
     jr   nz, .jr_014_4C82                         ; $4C7B: $20 $05
 
     ld   a, [wC3CD]                               ; $4C7D: $FA $CD $C3
-    ldh  [hScratch0], a                           ; $4C80: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $4C80: $E0 $D7
 
 .jr_014_4C82
     ld   a, [wBGPaletteEffectAddress]             ; $4C82: $FA $CC $C3
@@ -517,7 +517,7 @@ UpdatePaletteEffectForInteractiveObjects::
     and  $01                                      ; $4C9E: $E6 $01
     jr   nz, .return                              ; $4CA0: $20 $0F
 
-    ldh  a, [hScratch0]                           ; $4CA2: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4CA2: $F0 $D7
     ld   hl, wBGPaletteEffectAddress              ; $4CA4: $21 $CC $C3
     sub  [hl]                                     ; $4CA7: $96
     jr   z, .return                               ; $4CA8: $28 $07
@@ -540,7 +540,7 @@ jr_014_4CB2:
     or   [hl]                                     ; $4CB8: $B6
     ret  nz                                       ; $4CB9: $C0
 
-    ldh  a, [hScratch0]                           ; $4CBA: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $4CBA: $F0 $D7
     ld   hl, wBGPaletteEffectAddress              ; $4CBC: $21 $CC $C3
     sub  [hl]                                     ; $4CBF: $96
     jr   nz, jr_014_4CC7                          ; $4CC0: $20 $05
@@ -676,7 +676,7 @@ jr_014_4D6F:
 ;   bc   entity index
 UpdateEntityTimers::
     xor  a                                        ; $4D73: $AF
-    ldh  [$FFBE], a                               ; $4D74: $E0 $BE
+    ldh  [hFFBE], a                               ; $4D74: $E0 $BE
     ldh  [hActiveEntityTilesOffset], a            ; $4D76: $E0 $F5
 
     ld   a, [wGameplayType]                       ; $4D78: $FA $95 $DB
@@ -946,7 +946,7 @@ jr_014_5036:
 RenderTransitionEffect::
     srl  a                                        ; $5038: $CB $3F
     srl  a                                        ; $503A: $CB $3F
-    ldh  [hScratch0], a                           ; $503C: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $503C: $E0 $D7
     ld   a, [wTransitionGfxFrameCount]            ; $503E: $FA $80 $C1
     nop                                           ; $5041: $00
     and  $E0                                      ; $5042: $E6 $E0
@@ -961,20 +961,20 @@ RenderTransitionEffect::
 
 jr_014_5050:
     ld   a, e                                     ; $5050: $7B
-    ldh  [hScratch1], a                           ; $5051: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $5051: $E0 $D8
     ld   hl, wC17C                                ; $5053: $21 $7C $C1
     xor  a                                        ; $5056: $AF
     ld   [hl+], a                                 ; $5057: $22
     ld   [hl+], a                                 ; $5058: $22
     ld   [hl+], a                                 ; $5059: $22
     ld   a, $58                                   ; $505A: $3E $58
-    ldh  [hScratch2], a                           ; $505C: $E0 $D9
+    ldh  [hMultiPurpose2], a                           ; $505C: $E0 $D9
     ldh  a, [hIsGBC]                              ; $505E: $F0 $FE
     and  a                                        ; $5060: $A7
     jr   z, label_014_5067                        ; $5061: $28 $04
 
     ld   a, $88                                   ; $5063: $3E $88
-    ldh  [hScratch2], a                           ; $5065: $E0 $D9
+    ldh  [hMultiPurpose2], a                           ; $5065: $E0 $D9
 
 label_014_5067:
     ldh  a, [rSTAT]                               ; $5067: $F0 $41
@@ -996,7 +996,7 @@ jr_014_506F:
     ld   a, [wC17D]                               ; $5082: $FA $7D $C1
     adc  $00                                      ; $5085: $CE $00
     ld   [wC17D], a                               ; $5087: $EA $7D $C1
-    ldh  a, [hScratch2]                           ; $508A: $F0 $D9
+    ldh  a, [hMultiPurpose2]                           ; $508A: $F0 $D9
     ld   hl, wC17C                                ; $508C: $21 $7C $C1
     cp   [hl]                                     ; $508F: $BE
     ret  z                                        ; $5090: $C8
@@ -1009,10 +1009,10 @@ jr_014_506F:
     inc  c                                        ; $509A: $0C
 
 jr_014_509B:
-    ldh  a, [hScratch0]                           ; $509B: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $509B: $F0 $D7
     add  [hl]                                     ; $509D: $86
     and  $1F                                      ; $509E: $E6 $1F
-    ld   hl, hScratch1                            ; $50A0: $21 $D8 $FF
+    ld   hl, hMultiPurpose1                            ; $50A0: $21 $D8 $FF
     or   [hl]                                     ; $50A3: $B6
     ld   e, a                                     ; $50A4: $5F
     ld   hl, Data_014_4EE8                        ; $50A5: $21 $E8 $4E
@@ -1507,9 +1507,9 @@ jr_014_554D:
     ld   [wRequests], a                           ; $5556: $EA $00 $D6
     ld   d, $00                                   ; $5559: $16 $00
     add  hl, de                                   ; $555B: $19
-    ldh  a, [$FFCF]                               ; $555C: $F0 $CF
+    ldh  a, [hFFCF]                               ; $555C: $F0 $CF
     ld   [hl+], a                                 ; $555E: $22
-    ldh  a, [$FFD0]                               ; $555F: $F0 $D0
+    ldh  a, [hFFD0]                               ; $555F: $F0 $D0
     ld   [hl+], a                                 ; $5561: $22
     ld   a, $81                                   ; $5562: $3E $81
     ld   [hl+], a                                 ; $5564: $22
@@ -1517,9 +1517,9 @@ jr_014_554D:
     ld   [hl+], a                                 ; $5567: $22
     ld   a, $16                                   ; $5568: $3E $16
     ld   [hl+], a                                 ; $556A: $22
-    ldh  a, [$FFCF]                               ; $556B: $F0 $CF
+    ldh  a, [hFFCF]                               ; $556B: $F0 $CF
     ld   [hl+], a                                 ; $556D: $22
-    ldh  a, [$FFD0]                               ; $556E: $F0 $D0
+    ldh  a, [hFFD0]                               ; $556E: $F0 $D0
     inc  a                                        ; $5570: $3C
     ld   [hl+], a                                 ; $5571: $22
     ld   a, $81                                   ; $5572: $3E $81
@@ -1573,9 +1573,9 @@ jr_014_55B3:
     ld   [wRequests], a                           ; $55BC: $EA $00 $D6
     ld   d, $00                                   ; $55BF: $16 $00
     add  hl, de                                   ; $55C1: $19
-    ldh  a, [$FFCF]                               ; $55C2: $F0 $CF
+    ldh  a, [hFFCF]                               ; $55C2: $F0 $CF
     ld   [hl+], a                                 ; $55C4: $22
-    ldh  a, [$FFD0]                               ; $55C5: $F0 $D0
+    ldh  a, [hFFD0]                               ; $55C5: $F0 $D0
     ld   [hl+], a                                 ; $55C7: $22
     ld   a, $81                                   ; $55C8: $3E $81
     ld   [hl+], a                                 ; $55CA: $22
@@ -1583,9 +1583,9 @@ jr_014_55B3:
     ld   [hl+], a                                 ; $55CD: $22
     ld   a, $7E                                   ; $55CE: $3E $7E
     ld   [hl+], a                                 ; $55D0: $22
-    ldh  a, [$FFCF]                               ; $55D1: $F0 $CF
+    ldh  a, [hFFCF]                               ; $55D1: $F0 $CF
     ld   [hl+], a                                 ; $55D3: $22
-    ldh  a, [$FFD0]                               ; $55D4: $F0 $D0
+    ldh  a, [hFFD0]                               ; $55D4: $F0 $D0
     inc  a                                        ; $55D6: $3C
     ld   [hl+], a                                 ; $55D7: $22
     ld   a, $81                                   ; $55D8: $3E $81
@@ -1621,9 +1621,9 @@ jr_014_5600:
     ld   [wRequests], a                           ; $5609: $EA $00 $D6
     ld   d, $00                                   ; $560C: $16 $00
     add  hl, de                                   ; $560E: $19
-    ldh  a, [$FFCF]                               ; $560F: $F0 $CF
+    ldh  a, [hFFCF]                               ; $560F: $F0 $CF
     ld   [hl+], a                                 ; $5611: $22
-    ldh  a, [$FFD0]                               ; $5612: $F0 $D0
+    ldh  a, [hFFD0]                               ; $5612: $F0 $D0
     ld   [hl+], a                                 ; $5614: $22
     ld   a, $81                                   ; $5615: $3E $81
     ld   [hl+], a                                 ; $5617: $22
@@ -1631,9 +1631,9 @@ jr_014_5600:
     ld   [hl+], a                                 ; $561A: $22
     ld   a, $12                                   ; $561B: $3E $12
     ld   [hl+], a                                 ; $561D: $22
-    ldh  a, [$FFCF]                               ; $561E: $F0 $CF
+    ldh  a, [hFFCF]                               ; $561E: $F0 $CF
     ld   [hl+], a                                 ; $5620: $22
-    ldh  a, [$FFD0]                               ; $5621: $F0 $D0
+    ldh  a, [hFFD0]                               ; $5621: $F0 $D0
     inc  a                                        ; $5623: $3C
     ld   [hl+], a                                 ; $5624: $22
     ld   a, $81                                   ; $5625: $3E $81
@@ -1770,9 +1770,9 @@ jr_014_56C9:
     ld   [wRequests], a                           ; $56D2: $EA $00 $D6
     ld   d, $00                                   ; $56D5: $16 $00
     add  hl, de                                   ; $56D7: $19
-    ldh  a, [$FFCF]                               ; $56D8: $F0 $CF
+    ldh  a, [hFFCF]                               ; $56D8: $F0 $CF
     ld   [hl+], a                                 ; $56DA: $22
-    ldh  a, [$FFD0]                               ; $56DB: $F0 $D0
+    ldh  a, [hFFD0]                               ; $56DB: $F0 $D0
     ld   [hl+], a                                 ; $56DD: $22
     ld   a, $81                                   ; $56DE: $3E $81
     ld   [hl+], a                                 ; $56E0: $22
@@ -1818,9 +1818,9 @@ jr_014_5712:
     ld   [hl+], a                                 ; $5714: $22
     ld   a, $7F                                   ; $5715: $3E $7F
     ld   [hl+], a                                 ; $5717: $22
-    ldh  a, [$FFCF]                               ; $5718: $F0 $CF
+    ldh  a, [hFFCF]                               ; $5718: $F0 $CF
     ld   [hl+], a                                 ; $571A: $22
-    ldh  a, [$FFD0]                               ; $571B: $F0 $D0
+    ldh  a, [hFFD0]                               ; $571B: $F0 $D0
     inc  a                                        ; $571D: $3C
     ld   [hl+], a                                 ; $571E: $22
     ld   a, $81                                   ; $571F: $3E $81
@@ -1835,9 +1835,9 @@ jr_014_5729:
     ld   [hl+], a                                 ; $572B: $22
     ld   a, $76                                   ; $572C: $3E $76
     ld   [hl+], a                                 ; $572E: $22
-    ldh  a, [$FFCF]                               ; $572F: $F0 $CF
+    ldh  a, [hFFCF]                               ; $572F: $F0 $CF
     ld   [hl+], a                                 ; $5731: $22
-    ldh  a, [$FFD0]                               ; $5732: $F0 $D0
+    ldh  a, [hFFD0]                               ; $5732: $F0 $D0
     inc  a                                        ; $5734: $3C
     ld   [hl+], a                                 ; $5735: $22
     ld   a, $81                                   ; $5736: $3E $81
@@ -1906,9 +1906,9 @@ jr_014_5789:
     ld   [wRequests], a                           ; $5792: $EA $00 $D6
     ld   d, $00                                   ; $5795: $16 $00
     add  hl, de                                   ; $5797: $19
-    ldh  a, [$FFCF]                               ; $5798: $F0 $CF
+    ldh  a, [hFFCF]                               ; $5798: $F0 $CF
     ld   [hl+], a                                 ; $579A: $22
-    ldh  a, [$FFD0]                               ; $579B: $F0 $D0
+    ldh  a, [hFFD0]                               ; $579B: $F0 $D0
     ld   [hl+], a                                 ; $579D: $22
     ld   a, $81                                   ; $579E: $3E $81
     ld   [hl+], a                                 ; $57A0: $22
@@ -1916,9 +1916,9 @@ jr_014_5789:
     ld   [hl+], a                                 ; $57A3: $22
     ld   a, $77                                   ; $57A4: $3E $77
     ld   [hl+], a                                 ; $57A6: $22
-    ldh  a, [$FFCF]                               ; $57A7: $F0 $CF
+    ldh  a, [hFFCF]                               ; $57A7: $F0 $CF
     ld   [hl+], a                                 ; $57A9: $22
-    ldh  a, [$FFD0]                               ; $57AA: $F0 $D0
+    ldh  a, [hFFD0]                               ; $57AA: $F0 $D0
     inc  a                                        ; $57AC: $3C
     ld   [hl+], a                                 ; $57AD: $22
     ld   a, $81                                   ; $57AE: $3E $81
@@ -1929,15 +1929,15 @@ jr_014_5789:
     ld   [hl+], a                                 ; $57B6: $22
     ld   [hl], $00                                ; $57B7: $36 $00
     ld   a, $01                                   ; $57B9: $3E $01
-    ldh  [$FFAC], a                               ; $57BB: $E0 $AC
+    ldh  [hFFAC], a                               ; $57BB: $E0 $AC
     ldh  a, [hSwordIntersectedAreaY]              ; $57BD: $F0 $CD
     and  $F0                                      ; $57BF: $E6 $F0
     add  $10                                      ; $57C1: $C6 $10
-    ldh  [$FFAE], a                               ; $57C3: $E0 $AE
+    ldh  [hFFAE], a                               ; $57C3: $E0 $AE
     ldh  a, [hSwordIntersectedAreaX]              ; $57C5: $F0 $CE
     and  $F0                                      ; $57C7: $E6 $F0
     add  $08                                      ; $57C9: $C6 $08
-    ldh  [$FFAD], a                               ; $57CB: $E0 $AD
+    ldh  [hFFAD], a                               ; $57CB: $E0 $AD
     ldh  a, [hSwordIntersectedAreaX]              ; $57CD: $F0 $CE
     swap a                                        ; $57CF: $CB $37
     and  $0F                                      ; $57D1: $E6 $0F
@@ -1980,9 +1980,9 @@ jr_014_5807:
     ld   [wRequests], a                           ; $5810: $EA $00 $D6
     ld   d, $00                                   ; $5813: $16 $00
     add  hl, de                                   ; $5815: $19
-    ldh  a, [$FFCF]                               ; $5816: $F0 $CF
+    ldh  a, [hFFCF]                               ; $5816: $F0 $CF
     ld   [hl+], a                                 ; $5818: $22
-    ldh  a, [$FFD0]                               ; $5819: $F0 $D0
+    ldh  a, [hFFD0]                               ; $5819: $F0 $D0
     ld   [hl+], a                                 ; $581B: $22
     ld   a, $81                                   ; $581C: $3E $81
     ld   [hl+], a                                 ; $581E: $22
@@ -1990,9 +1990,9 @@ jr_014_5807:
     ld   [hl+], a                                 ; $5821: $22
     ld   a, $78                                   ; $5822: $3E $78
     ld   [hl+], a                                 ; $5824: $22
-    ldh  a, [$FFCF]                               ; $5825: $F0 $CF
+    ldh  a, [hFFCF]                               ; $5825: $F0 $CF
     ld   [hl+], a                                 ; $5827: $22
-    ldh  a, [$FFD0]                               ; $5828: $F0 $D0
+    ldh  a, [hFFD0]                               ; $5828: $F0 $D0
     inc  a                                        ; $582A: $3C
     ld   [hl+], a                                 ; $582B: $22
     ld   a, $81                                   ; $582C: $3E $81
@@ -2195,5 +2195,5 @@ jr_014_5920:
     ld   a, $1C                                   ; $592F: $3E $1C
 
 jr_014_5931:
-    ldh  [hScratch8], a                           ; $5931: $E0 $DF
+    ldh  [hMultiPurpose8], a                           ; $5931: $E0 $DF
     ret                                           ; $5933: $C9

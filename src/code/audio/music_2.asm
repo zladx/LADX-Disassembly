@@ -1380,7 +1380,7 @@ func_01E_4841::
 ContinueCurrentScreenMusic_1E:
     xor  a                                        ; $4854: $AF
     ld   [wActiveMusicTable], a                   ; $4855: $EA $CE $D3
-    ldh  a, [$FFBF]                               ; $4858: $F0 $BF
+    ldh  a, [hNextDefaultMusicTrack]                               ; $4858: $F0 $BF
     ld   [wMusicTrackToPlay], a                   ; $485A: $EA $68 $D3
     jp   PlayMusicTrack_1E_EntryPoint             ; $485D: $C3 $1E $40
 
@@ -1508,7 +1508,7 @@ label_01E_4905:
     call func_01E_4920                            ; $490E: $CD $20 $49
 
 jr_01E_4911:
-    ld   hl, $FF9C                                ; $4911: $21 $9C $FF
+    ld   hl, hFF9C                                ; $4911: $21 $9C $FF
     add  hl, de                                   ; $4914: $19
     call func_01E_492B                            ; $4915: $CD $2B $49
     jp   label_01E_4770                           ; $4918: $C3 $70 $47

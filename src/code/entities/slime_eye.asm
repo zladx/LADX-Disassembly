@@ -6,7 +6,7 @@ Data_004_496D::
 
 label_004_496F:
     xor  a                                        ; $496F: $AF
-    ldh  [hFFE8], a                               ; $4970: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $4970: $E0 $E8
 
 .loop
     ld   a, $5B                                   ; $4972: $3E $5B
@@ -15,11 +15,11 @@ label_004_496F:
     add  hl, de                                   ; $497A: $19
     ld   [hl], $01                                ; $497B: $36 $01
     push bc                                       ; $497D: $C5
-    ldh  a, [hFFE8]                               ; $497E: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $497E: $F0 $E8
     ld   c, a                                     ; $4980: $4F
     ld   hl, Data_004_496B                        ; $4981: $21 $6B $49
     add  hl, bc                                   ; $4984: $09
-    ldh  a, [hScratch0]                               ; $4985: $F0 $D7
+    ldh  a, [hMultiPurpose0]                               ; $4985: $F0 $D7
     add  [hl]                                     ; $4987: $86
     ld   hl, wEntitiesPosXTable                         ; $4988: $21 $00 $C2
     add  hl, de                                   ; $498B: $19
@@ -36,7 +36,7 @@ label_004_496F:
     ld   hl, wEntitiesStateTable                  ; $499D: $21 $90 $C2
     add  hl, de                                   ; $49A0: $19
     ld   [hl], $01                                ; $49A1: $36 $01
-    ldh  a, [hScratch1]                               ; $49A3: $F0 $D8
+    ldh  a, [hMultiPurpose1]                               ; $49A3: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $49A5: $21 $10 $C2
     add  hl, de                                   ; $49A8: $19
     ld   [hl], a                                  ; $49A9: $77
@@ -44,9 +44,9 @@ label_004_496F:
     add  hl, de                                   ; $49AD: $19
     ld   [hl], $05                                ; $49AE: $36 $05
     pop  bc                                       ; $49B0: $C1
-    ldh  a, [hFFE8]                               ; $49B1: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $49B1: $F0 $E8
     inc  a                                        ; $49B3: $3C
-    ldh  [hFFE8], a                               ; $49B4: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $49B4: $E0 $E8
     cp   $02                                      ; $49B6: $FE $02
     jr   nz, .loop                                ; $49B8: $20 $B8
 
@@ -223,7 +223,7 @@ jr_004_4AA5:
 
 jr_004_4ACB:
     xor  a                                        ; $4ACB: $AF
-    ldh  [hFFE8], a                               ; $4ACC: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $4ACC: $E0 $E8
     ld   a, $14                                   ; $4ACE: $3E $14
     call func_004_4B37                            ; $4AD0: $CD $37 $4B
     call label_3B70                               ; $4AD3: $CD $70 $3B
@@ -238,7 +238,7 @@ jr_004_4ACB:
     call func_004_4B2E                            ; $4AE2: $CD $2E $4B
     call label_3B44                               ; $4AE5: $CD $44 $3B
     ld   a, $01                                   ; $4AE8: $3E $01
-    ldh  [hFFE8], a                               ; $4AEA: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $4AEA: $E0 $E8
     call label_3B70                               ; $4AEC: $CD $70 $3B
 
 jr_004_4AEF:

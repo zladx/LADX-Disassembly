@@ -197,7 +197,7 @@ func_91D::
 
 .jp_92F
     callsb GetBGAttributesAddressForObject        ; $092F: $3E $1A $EA $00 $21 $CD $76 $65
-    ldh  a, [hScratch8]                           ; $0937: $F0 $DF
+    ldh  a, [hMultiPurpose8]                           ; $0937: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $0939: $EA $00 $21
     ld   hl, wDC91                                ; $093C: $21 $91 $DC
     ld   a, [wDC90]                               ; $093F: $FA $90 $DC
@@ -206,13 +206,13 @@ func_91D::
     ld   [wDC90], a                               ; $0945: $EA $90 $DC
     ld   d, $00                                   ; $0948: $16 $00
     add  hl, de                                   ; $094A: $19
-    ldh  a, [hScratch9]                           ; $094B: $F0 $E0
+    ldh  a, [hMultiPurpose9]                           ; $094B: $F0 $E0
     ld   d, a                                     ; $094D: $57
-    ldh  a, [hScratchA]                           ; $094E: $F0 $E1
+    ldh  a, [hMultiPurposeA]                           ; $094E: $F0 $E1
     ld   e, a                                     ; $0950: $5F
-    ldh  a, [$FFCF]                               ; $0951: $F0 $CF
+    ldh  a, [hFFCF]                               ; $0951: $F0 $CF
     ldi  [hl], a                                  ; $0953: $22
-    ldh  a, [$FFD0]                               ; $0954: $F0 $D0
+    ldh  a, [hFFD0]                               ; $0954: $F0 $D0
     ldi  [hl], a                                  ; $0956: $22
     ld   a, $81                                   ; $0957: $3E $81
     ldi  [hl], a                                  ; $0959: $22
@@ -223,9 +223,9 @@ func_91D::
     ld   a, [de]                                  ; $095E: $1A
     ldi  [hl], a                                  ; $095F: $22
     dec  de                                       ; $0960: $1B
-    ldh  a, [$FFCF]                               ; $0961: $F0 $CF
+    ldh  a, [hFFCF]                               ; $0961: $F0 $CF
     ldi  [hl], a                                  ; $0963: $22
-    ldh  a, [$FFD0]                               ; $0964: $F0 $D0
+    ldh  a, [hFFD0]                               ; $0964: $F0 $D0
     inc  a                                        ; $0966: $3C
     ldi  [hl], a                                  ; $0967: $22
     ld   a, $81                                   ; $0968: $3E $81
@@ -257,17 +257,17 @@ func_020_6D0E_trampoline::
 ; Returns:
 ;   a   palette data
 func_983::
-    ; Retrieve and store palette data into hScratch9 and hScratchA
+    ; Retrieve and store palette data into hMultiPurpose9 and hMultiPurposeA
     callsb func_01A_6710                          ; $0983: $3E $1A $EA $00 $21 $CD $10 $67
 
     ; Switch to the bank containing this room's palettes
-    ldh  a, [hScratch8]                           ; $098B: $F0 $DF
+    ldh  a, [hMultiPurpose8]                           ; $098B: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $098D: $EA $00 $21
 
-    ; Read value from address [hScratchA hScratch9]
-    ldh  a, [hScratch9]                           ; $0990: $F0 $E0
+    ; Read value from address [hMultiPurposeA hMultiPurpose9]
+    ldh  a, [hMultiPurpose9]                           ; $0990: $F0 $E0
     ld   h, a                                     ; $0992: $67
-    ldh  a, [hScratchA]                           ; $0993: $F0 $E1
+    ldh  a, [hMultiPurposeA]                           ; $0993: $F0 $E1
     ld   l, a                                     ; $0995: $6F
     ld   a, [hl]                                  ; $0996: $7E
 
@@ -283,10 +283,10 @@ func_999::
     push bc                                       ; $099A: $C5
     call func_983                                 ; $099B: $CD $83 $09
 
-    ldh  [hScratch0], a                           ; $099E: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $099E: $E0 $D7
     pop  bc                                       ; $09A0: $C1
     call func_983                                 ; $09A1: $CD $83 $09
-    ldh  [hScratch1], a                           ; $09A4: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $09A4: $E0 $D8
     ld   a, [wDC90]                               ; $09A6: $FA $90 $DC
     ld   c, a                                     ; $09A9: $4F
     ld   b, $00                                   ; $09AA: $06 $00
@@ -294,15 +294,15 @@ func_999::
     ld   [wDC90], a                               ; $09AE: $EA $90 $DC
     ld   hl, wDC91                                ; $09B1: $21 $91 $DC
     add  hl, bc                                   ; $09B4: $09
-    ldh  a, [$FFCF]                               ; $09B5: $F0 $CF
+    ldh  a, [hFFCF]                               ; $09B5: $F0 $CF
     ldi  [hl], a                                  ; $09B7: $22
-    ldh  a, [$FFD0]                               ; $09B8: $F0 $D0
+    ldh  a, [hFFD0]                               ; $09B8: $F0 $D0
     ldi  [hl], a                                  ; $09BA: $22
     ld   a, $01                                   ; $09BB: $3E $01
     ldi  [hl], a                                  ; $09BD: $22
-    ldh  a, [hScratch0]                           ; $09BE: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $09BE: $F0 $D7
     ldi  [hl], a                                  ; $09C0: $22
-    ldh  a, [hScratch1]                           ; $09C1: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $09C1: $F0 $D8
     ldi  [hl], a                                  ; $09C3: $22
     xor  a                                        ; $09C4: $AF
     ldi  [hl], a                                  ; $09C5: $22
@@ -530,12 +530,12 @@ AdjustBankNumberForGBC::
 ; Copy a block of data from a given bank to a target address in WRAM2,
 ; then return to bank 20.
 ; Inputs:
-;   hScratch0 : source bank
+;   hMultiPurpose0 : source bank
 ;   bc :        number of bytes to copy
 ;   de :        destination address
 ;   hl :        source address
 CopyObjectsAttributesToWRAM2::
-    ldh  a, [hScratch0]                           ; $0B1A: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $0B1A: $F0 $D7
     ld   [MBC3SelectBank], a                      ; $0B1C: $EA $00 $21
     ld   a, $02                                   ; $0B1F: $3E $02
     ld   [rSVBK], a                               ; $0B21: $E0 $70
@@ -549,7 +549,7 @@ CopyObjectsAttributesToWRAM2::
 
 ; On GBC, copy some overworld objects to ram bank 2
 func_2BF::
-    ldh  [hScratch2], a                           ; $0B2F: $E0 $D9
+    ldh  [hMultiPurpose2], a                           ; $0B2F: $E0 $D9
     ldh  a, [hIsGBC]                              ; $0B31: $F0 $FE
     and  a                                        ; $0B33: $A7
     ret  z                                        ; $0B34: $C8
@@ -559,7 +559,7 @@ func_2BF::
     ret  nz                                       ; $0B39: $C0
 
     push bc                                       ; $0B3A: $C5
-    ldh  a, [hScratch2]                           ; $0B3B: $F0 $D9
+    ldh  a, [hMultiPurpose2]                           ; $0B3B: $F0 $D9
     and  $80                                      ; $0B3D: $E6 $80
     jr   nz, .else                                ; $0B3F: $20 $0A
     callsb func_020_6E50                          ; $0B41: $3E $20 $EA $00 $21 $CD $50 $6E
@@ -573,7 +573,7 @@ func_2BF::
     ld   [rSVBK], a                               ; $0B52: $E0 $70
 .endIf
 
-    ldh  a, [hScratch2]                           ; $0B54: $F0 $D9
+    ldh  a, [hMultiPurpose2]                           ; $0B54: $F0 $D9
     and  $7F                                      ; $0B56: $E6 $7F
     ld   [MBC3SelectBank], a                      ; $0B58: $EA $00 $21
     pop  bc                                       ; $0B5B: $C1
@@ -591,7 +591,7 @@ CopyData_trampoline::
 ; Inputs:
 ;   a           source bank
 ;   hl          source address
-;   hhScratchF  return bank to restore
+;   hhMultiPurposeF  return bank to restore
 CopyBGMapFromBank::
     push hl                                       ; $0B69: $E5
     ld   [MBC3SelectBank], a                      ; $0B6A: $EA $00 $21
@@ -623,7 +623,7 @@ CopyBGMapFromBank::
     call func_BB5                                 ; $0B8D: $CD $B5 $0B
 .photoAlbumEnd
 
-    ldh  a, [hScratchF]                           ; $0B90: $F0 $E6
+    ldh  a, [hMultiPurposeF]                           ; $0B90: $F0 $E6
     ld   [MBC3SelectBank], a                      ; $0B92: $EA $00 $21
     ret                                           ; $0B95: $C9
 
@@ -907,8 +907,8 @@ CopyLinkFinalPositionToPosition::
 ;
 ; Inputs:
 ;   a           visual effect type
-;   hScratch0   effect X position
-;   hScratch1   effect Y position
+;   hMultiPurpose0   effect X position
+;   hMultiPurpose1   effect Y position
 AddTranscientVfx::
     push af                                       ; $0CC7: $F5
     ld   e, $0F                                   ; $0CC8: $1E $0F
@@ -946,11 +946,11 @@ AddTranscientVfx::
     ld   hl, wTranscientVfxTypeTable              ; $0CED: $21 $10 $C5
     add  hl, de                                   ; $0CF0: $19
     ld   [hl], a                                  ; $0CF1: $77
-    ldh  a, [hScratch1]                           ; $0CF2: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $0CF2: $F0 $D8
     ld   hl, wTranscientVfxPosYTable              ; $0CF4: $21 $40 $C5
     add  hl, de                                   ; $0CF7: $19
     ld   [hl], a                                  ; $0CF8: $77
-    ldh  a, [hScratch0]                           ; $0CF9: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $0CF9: $F0 $D7
     ld   hl, wTranscientVfxPosXTable              ; $0CFB: $21 $30 $C5
     add  hl, de                                   ; $0CFE: $19
     ld   [hl], a                                  ; $0CFF: $77
@@ -962,10 +962,10 @@ AddTranscientVfx::
 label_D07::
     ld   a, [wC140]                               ; $0D07: $FA $40 $C1
     sub  a, $08                                   ; $0D0A: $D6 $08
-    ldh  [hScratch0], a                           ; $0D0C: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $0D0C: $E0 $D7
     ld   a, [wC142]                               ; $0D0E: $FA $42 $C1
     sub  a, $08                                   ; $0D11: $D6 $08
-    ldh  [hScratch1], a                           ; $0D13: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $0D13: $E0 $D8
 
 label_D15::
     ld   a, JINGLE_SWORD_POKING                   ; $0D15: $3E $07
@@ -1106,9 +1106,9 @@ LoadRoomTiles::
     ;
     ; ------------------------------------------------------------
 
-    ; $hScratch0 = 0
+    ; $hMultiPurpose0 = 0
     xor  a                                        ; $0D91: $AF
-    ldh  [hScratch0], a                           ; $0D92: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $0D92: $E0 $D7
     ; e = $hMapRoom
     ldh  a, [hMapRoom]                            ; $0D94: $F0 $F6
     ld   e, a                                     ; $0D96: $5F
@@ -1175,7 +1175,7 @@ LoadRoomTiles::
     ldh  a, [hMapId]                              ; $0DE5: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $0DE7: $FE $FF
     jr   nz, .label_DF1                           ; $0DE9: $20 $06
-    ld   a, $01                                   ; $0DEB: $3E $01
+    ld   a, TRUE                                  ; $0DEB: $3E $01
     ldh  [hNeedsUpdatingEnnemiesTiles], a         ; $0DED: $E0 $91
     jr   .return                                  ; $0DEF: $18 $40
 
@@ -1207,7 +1207,7 @@ LoadRoomTiles::
     cp   $FF                                      ; $0E09: $FE $FF
     jr   z, .label_E29                            ; $0E0B: $28 $1C
     ld   [bc], a                                  ; $0E0D: $02
-    ldh  a, [hScratch0]                           ; $0E0E: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $0E0E: $F0 $D7
     and  a                                        ; $0E10: $A7
     jr   z, .label_E1E                            ; $0E11: $28 $0B
     ld   a, d                                     ; $0E13: $7A
@@ -1218,10 +1218,10 @@ LoadRoomTiles::
 
 .label_E1E
     inc  a                                        ; $0E1E: $3C
-    ldh  [hScratch0], a                           ; $0E1F: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $0E1F: $E0 $D7
     ld   a, d                                     ; $0E21: $7A
     ld   [wC197], a                               ; $0E22: $EA $97 $C1
-    ld   a, $01                                   ; $0E25: $3E $01
+    ld   a, TRUE                                  ; $0E25: $3E $01
     ldh  [hNeedsUpdatingEnnemiesTiles], a         ; $0E27: $E0 $91
 
 .label_E29
@@ -1406,8 +1406,8 @@ WorldDefaultHandler::
     and  a                                        ; $0F50: $A7
     jr   nz, .normalFlow                          ; $0F51: $20 $3C
 
-    ; If [$FFB4] != 0…
-    ld   hl, $FFB4                                ; $0F53: $21 $B4 $FF
+    ; If [hFFB4] != 0…
+    ld   hl, hFFB4                                ; $0F53: $21 $B4 $FF
     ld   a, [hl]                                  ; $0F56: $7E
     and  a                                        ; $0F57: $A7
     jr   z, .noDungeonName                        ; $0F58: $28 $1B
@@ -1462,9 +1462,9 @@ WorldDefaultHandler::
     ldh  a, [hLinkPositionY]                      ; $0F9B: $F0 $99
     ldh  [hLinkFinalPositionY], a                 ; $0F9D: $E0 $A0
 
-    ld   hl, hLinkPositionZ                       ; $0F9F: $21 $A2 $FF
+    ld   hl, hLinkPositionZHigh                       ; $0F9F: $21 $A2 $FF
     sub  a, [hl]                                  ; $0FA2: $96
-    ldh  [$FFB3], a                               ; $0FA3: $E0 $B3
+    ldh  [hFFB3], a                               ; $0FA3: $E0 $B3
     call func_002_60E0                            ; $0FA5: $CD $E0 $60
 
     xor  a                                        ; $0FA8: $AF
@@ -1545,7 +1545,7 @@ DialogForItem::
 
 ApplyGotItem::
     ldh  a, [hLinkPositionY]                      ; $1033: $F0 $99
-    ld   hl, hLinkPositionZ                       ; $1035: $21 $A2 $FF
+    ld   hl, hLinkPositionZHigh                       ; $1035: $21 $A2 $FF
     sub  a, [hl]                                  ; $1038: $96
     ld   [wC145], a                               ; $1039: $EA $45 $C1
     ld   a, [wDialogGotItem]                      ; $103C: $FA $A9 $C1
@@ -1640,18 +1640,18 @@ InitGotItemSequence::
     ld   [wD45F], a                               ; $10DC: $EA $5F $D4
 
 .jp_10DF
-    ldh  a, [$FFB7]                               ; $10DF: $F0 $B7
+    ldh  a, [hFFB7]                               ; $10DF: $F0 $B7
     and  a                                        ; $10E1: $A7
     jr   z, .jp_10E7                              ; $10E2: $28 $03
     dec  a                                        ; $10E4: $3D
-    ldh  [$FFB7], a                               ; $10E5: $E0 $B7
+    ldh  [hFFB7], a                               ; $10E5: $E0 $B7
 
 .jp_10E7
-    ldh  a, [$FFB6]                               ; $10E7: $F0 $B6
+    ldh  a, [hFFB6]                               ; $10E7: $F0 $B6
     and  a                                        ; $10E9: $A7
     jr   z, .jp_10EF                              ; $10EA: $28 $03
     dec  a                                        ; $10EC: $3D
-    ldh  [$FFB6], a                               ; $10ED: $E0 $B6
+    ldh  [hFFB6], a                               ; $10ED: $E0 $B6
 
 .jp_10EF
     ld   a, [wDialogState]                        ; $10EF: $FA $9F $C1
@@ -1672,12 +1672,12 @@ InitGotItemSequence::
     ld   a, $07                                   ; $1111: $3E $07
     ld   [wLinkMotionState], a                    ; $1113: $EA $1C $C1
     ld   a, $BF                                   ; $1116: $3E $BF
-    ldh  [$FFB7], a                               ; $1118: $E0 $B7
+    ldh  [hFFB7], a                               ; $1118: $E0 $B7
     ld   a, $10                                   ; $111A: $3E $10
     ld   [wBGPaletteEffectAddress], a                               ; $111C: $EA $CC $C3
     xor  a                                        ; $111F: $AF
     ld   [wInvincibilityCounter], a               ; $1120: $EA $C7 $DB
-    ldh  [$FF9C], a                               ; $1123: $E0 $9C
+    ldh  [hFF9C], a                               ; $1123: $E0 $9C
     ld   [wDDD6], a                               ; $1125: $EA $D6 $DD
     ld   [wDDD7], a                               ; $1128: $EA $D7 $DD
     ld   [wD464], a                               ; $112B: $EA $64 $D4
@@ -2196,7 +2196,7 @@ SpawnPlayerProjectile::
     ld   hl, wEntitiesPosYTable                   ; $1451: $21 $10 $C2
     add  hl, de                                   ; $1454: $19
     ld   [hl], a                                  ; $1455: $77
-    ldh  a, [hLinkPositionZ]                      ; $1456: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $1456: $F0 $A2
     inc  a                                        ; $1458: $3C
     ld   hl, wEntitiesPosZTable                   ; $1459: $21 $10 $C3
     add  hl, de                                   ; $145C: $19
@@ -2238,7 +2238,7 @@ UseMagicPowder::
     ld   a, [wHasToadstool]                       ; $1492: $FA $4B $DB
     and  a                                        ; $1495: $A7
     jr   z, .jr_14A7                              ; $1496: $28 $0F
-    ldh  a, [hLinkPositionZ]                      ; $1498: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $1498: $F0 $A2
     and  a                                        ; $149A: $A7
     ret  nz                                       ; $149B: $C0
     ld   a, $02                                   ; $149C: $3E $02
@@ -2293,13 +2293,13 @@ UseRocsFeather::
 label_14F8::
     ldh  [hLinkPositionYIncrement], a             ; $14F8: $E0 $9B
     xor  a                                        ; $14FA: $AF
-    ldh  [$FFA3], a                               ; $14FB: $E0 $A3
+    ldh  [hLinkPositionZLow], a                               ; $14FB: $E0 $A3
     call UpdateFinalLinkPosition                  ; $14FD: $CD $A8 $21
     jpsw CheckPositionForMapTransition            ; $1500: $3E $02 $CD $0C $08 $C3 $75 $6C
 
 label_1508::
     ld   a, $20                                   ; $1508: $3E $20
-    ldh  [$FFA3], a                               ; $150A: $E0 $A3
+    ldh  [hLinkPositionZLow], a                               ; $150A: $E0 $A3
     ld   a, [wIsRunningWithPegasusBoots]          ; $150C: $FA $4A $C1
     and  a                                        ; $150F: $A7
     ret  z                                        ; $1510: $C8
@@ -2600,12 +2600,12 @@ CheckItemsSwordCollision::
     add  hl, de                                   ; $16D0: $19
     ldh  a, [hLinkPositionX]                      ; $16D1: $F0 $98
     add  a, [hl]                                  ; $16D3: $86
-    ldh  [hScratch0], a                           ; $16D4: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $16D4: $E0 $D7
     ld   hl, data_16BE                            ; $16D6: $21 $BE $16
     add  hl, de                                   ; $16D9: $19
     ldh  a, [hLinkPositionY]                      ; $16DA: $F0 $99
     add  a, [hl]                                  ; $16DC: $86
-    ldh  [hScratch1], a                           ; $16DD: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $16DD: $E0 $D8
     ld   a, $04                                   ; $16DF: $3E $04
     ld   [wC502], a                               ; $16E1: $EA $02 $C5
     call label_D15                                ; $16E4: $CD $15 $0D
@@ -2634,7 +2634,7 @@ UsePegasusBoots::
     ldh  a, [hIsSideScrolling]                    ; $1705: $F0 $F9
     and  a                                        ; $1707: $A7
     jr   z, .label_1713                           ; $1708: $28 $09
-    ldh  a, [$FF9C]                               ; $170A: $F0 $9C
+    ldh  a, [hFF9C]                               ; $170A: $F0 $9C
     and  a                                        ; $170C: $A7
     ret  nz                                       ; $170D: $C0
     ldh  a, [hLinkDirection]                      ; $170E: $F0 $9E
@@ -2645,7 +2645,7 @@ UsePegasusBoots::
     ld   a, [wIsRunningWithPegasusBoots]          ; $1713: $FA $4A $C1
     and  a                                        ; $1716: $A7
     ret  nz                                       ; $1717: $C0
-    ldh  a, [hLinkPositionZ]                      ; $1718: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $1718: $F0 $A2
     ld   hl, wIsLinkInTheAir                      ; $171A: $21 $46 $C1
     or   [hl]                                     ; $171D: $B6
     ret  nz                                       ; $171E: $C0
@@ -2681,7 +2681,7 @@ UsePegasusBoots::
 func_1756::
     ldh  a, [hFrameCounter]                       ; $1756: $F0 $E7
     and  $07                                      ; $1758: $E6 $07
-    ld   hl, hLinkPositionZ                       ; $175A: $21 $A2 $FF
+    ld   hl, hLinkPositionZHigh                       ; $175A: $21 $A2 $FF
     or   [hl]                                     ; $175D: $B6
     ld   hl, hLinkInteractiveMotionBlocked        ; $175E: $21 $A1 $FF
     or   [hl]                                     ; $1761: $B6
@@ -2690,7 +2690,7 @@ func_1756::
     ret  nz                                       ; $1766: $C0
 
     ldh  a, [hLinkPositionX]                      ; $1767: $F0 $98
-    ldh  [hScratch0], a                           ; $1769: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $1769: $E0 $D7
 
     ld   a, [wLinkGroundVfx]                      ; $176B: $FA $81 $C1
     cp   GROUND_VFX_SHALLOW_WATER                 ; $176E: $FE $05
@@ -2700,13 +2700,13 @@ func_1756::
     ldh  [hNoiseSfx], a                           ; $1774: $E0 $F4
     ldh  a, [hLinkPositionY]                      ; $1776: $F0 $99
     add  a, $06                                   ; $1778: $C6 $06
-    ldh  [hScratch1], a                           ; $177A: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $177A: $E0 $D8
     ld   a, TRANSCIENT_VFX_PEGASUS_DUST           ; $177C: $3E $0B
     jp   AddTranscientVfx                         ; $177E: $C3 $C7 $0C
 
 .shallowWater
     ldh  a, [hLinkPositionY]                      ; $1781: $F0 $99
-    ldh  [hScratch1], a                           ; $1783: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $1783: $E0 $D8
     ld   a, JINGLE_WATER_DIVE                     ; $1785: $3E $0E
     ldh  [hJingle], a                             ; $1787: $E0 $F2
     ld   a, TRANSCIENT_VFX_PEGASUS_SPLASH         ; $1789: $3E $0C
@@ -2732,10 +2732,10 @@ ApplyLinkMotionState::
     ld   a, [wC145]                               ; $17A6: $FA $45 $C1
     ld   hl, wC13B                                ; $17A9: $21 $3B $C1
     add  a, [hl]                                  ; $17AC: $86
-    ldh  [hScratch0], a                           ; $17AD: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $17AD: $E0 $D7
     ldh  a, [hLinkPositionX]                      ; $17AF: $F0 $98
-    ldh  [hScratch1], a                           ; $17B1: $E0 $D8
-    ld   hl, hScratch3                            ; $17B3: $21 $DA $FF
+    ldh  [hMultiPurpose1], a                           ; $17B1: $E0 $D8
+    ld   hl, hMultiPurpose3                            ; $17B3: $21 $DA $FF
     ld   [hl], $00                                ; $17B6: $36 $00
     ld   a, [wSwordCharge]                        ; $17B8: $FA $22 $C1
     cp   MAX_SWORD_CHARGE                         ; $17BB: $FE $28
@@ -2752,7 +2752,7 @@ ApplyLinkMotionState::
     ld   a, [wC13A]                               ; $17CA: $FA $3A $C1
     ld   l, a                                     ; $17CD: $6F
     ld   a, [wSwordDirection]                     ; $17CE: $FA $36 $C1
-    ldh  [hScratch2], a                           ; $17D1: $E0 $D9
+    ldh  [hMultiPurpose2], a                           ; $17D1: $E0 $D9
     ldh  a, [hLinkPositionY]                      ; $17D3: $F0 $99
     cp   $88                                      ; $17D5: $FE $88
     ret  nc                                       ; $17D7: $D0
@@ -2818,7 +2818,7 @@ LinkMotionMapFadeOutHandler::
     xor  a                                        ; $185A: $AF
     ldh  [hBaseScrollX], a                        ; $185B: $E0 $96
     ldh  [hBaseScrollY], a                        ; $185D: $E0 $97
-    ldh  [$FFB4], a                               ; $185F: $E0 $B4
+    ldh  [hFFB4], a                               ; $185F: $E0 $B4
     ld   [wDDD6], a                               ; $1861: $EA $D6 $DD
     ld   [wDDD7], a                               ; $1864: $EA $D7 $DD
 
@@ -2851,7 +2851,7 @@ LinkMotionMapFadeOutHandler::
 
 .label_1898
     ldh  a, [hIsSideScrolling]                    ; $1898: $F0 $F9
-    ldh  [hScratchD], a                           ; $189A: $E0 $E4
+    ldh  [hMultiPurposeD], a                           ; $189A: $E0 $E4
     ld   a, GAMEPLAY_WORLD                        ; $189C: $3E $0B
     ld   [wGameplayType], a                       ; $189E: $EA $95 $DB
     xor  a                                        ; $18A1: $AF
@@ -2903,7 +2903,7 @@ LinkMotionMapFadeOutHandler::
     dec  a                                        ; $18EA: $3D
     ld   [wIsIndoor], a                           ; $18EB: $EA $A5 $DB
     ld   a, $01                                   ; $18EE: $3E $01
-    ldh  [$FF9C], a                               ; $18F0: $E0 $9C
+    ldh  [hFF9C], a                               ; $18F0: $E0 $9C
 
 .label_18F2
     ld   a, [hli]                                 ; $18F2: $2A
@@ -2976,7 +2976,7 @@ LinkMotionMapFadeOutHandler::
     jr   nc, .label_196E                          ; $1959: $30 $13
     callsw LoadMinimap                            ; $195B: $3E $02 $CD $0C $08 $CD $09 $67
     ld   a, $30                                   ; $1963: $3E $30
-    ldh  [$FFB4], a                               ; $1965: $E0 $B4
+    ldh  [hFFB4], a                               ; $1965: $E0 $B4
     xor  a                                        ; $1967: $AF
     ld   [wD6FB], a                               ; $1968: $EA $FB $D6
     ld   [$D6F8], a                               ; $196B: $EA $F8 $D6
@@ -2993,7 +2993,7 @@ LinkMotionMapFadeOutHandler::
     ldh  a, [hIsSideScrolling]                    ; $1978: $F0 $F9
     and  a                                        ; $197A: $A7
     jr   nz, label_19DA                           ; $197B: $20 $5D
-    ldh  a, [hScratchD]                           ; $197D: $F0 $E4
+    ldh  a, [hMultiPurposeD]                           ; $197D: $F0 $E4
     and  a                                        ; $197F: $A7
     jr   nz, SetSpawnLocation.return              ; $1980: $20 $57
     ld   a, [wIsIndoor]                           ; $1982: $FA $A5 $DB
@@ -3049,7 +3049,7 @@ IF __PATCH_0__
 ELSE
     ld   a, $00                                   ; $19C2: $3E $00
 ENDC
-    ldh  [hScratch0], a                           ; $19C4: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $19C4: $E0 $D7
     ld   de, wSpawnLocationData                   ; $19C6: $11 $5F $DB
 
     ; Copy warp data (5 bytes) from wWarp1 to wSpawnLocationData
@@ -3057,9 +3057,9 @@ ENDC
     ld   a, [hli]                                 ; $19C9: $2A
     ld   [de], a                                  ; $19CA: $12
     inc  de                                       ; $19CB: $13
-    ldh  a, [hScratch0]                           ; $19CC: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $19CC: $F0 $D7
     inc  a                                        ; $19CE: $3C
-    ldh  [hScratch0], a                           ; $19CF: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $19CF: $E0 $D7
     cp   $05                                      ; $19D1: $FE $05
     jr   nz, .loop                                ; $19D3: $20 $F4
 
@@ -3164,7 +3164,7 @@ UpdateLinkWalkingAnimation::
     ld   a, [wLinkMotionState]                    ; $1A67: $FA $1C $C1
     cp   LINK_MOTION_SWIMMING                     ; $1A6A: $FE $01
     jr   nz, .notSwimming                         ; $1A6C: $20 $0A
-    ldh  a, [$FF9C]                               ; $1A6E: $F0 $9C
+    ldh  a, [hFF9C]                               ; $1A6E: $F0 $9C
     and  a                                        ; $1A70: $A7
     jr   z, .swimmingEnd                          ; $1A71: $28 $03
     ld   hl, Data_002_4950                        ; $1A73: $21 $50 $49
@@ -3175,7 +3175,7 @@ UpdateLinkWalkingAnimation::
     ldh  a, [hIsSideScrolling]                    ; $1A78: $F0 $F9
     and  a                                        ; $1A7A: $A7
     jr   z, .notSideScrolling                     ; $1A7B: $28 $0B
-    ldh  a, [$FF9C]                               ; $1A7D: $F0 $9C
+    ldh  a, [hFF9C]                               ; $1A7D: $F0 $9C
     cp   $02                                      ; $1A7F: $FE $02
     jr   nz, .notSideScrolling                    ; $1A81: $20 $05
     ld   hl, LinkAnimationsList_WalkSideScrolling ; $1A83: $21 $58 $49
@@ -3185,7 +3185,7 @@ UpdateLinkWalkingAnimation::
     ld   a, [wIsCarryingLiftedObject]             ; $1A88: $FA $5C $C1
     cp   $01                                      ; $1A8B: $FE $01
     jr   z, .liftingObject                        ; $1A8D: $28 $35
-    ldh  a, [$FFB2]                               ; $1A8F: $F0 $B2
+    ldh  a, [slowWalkingSpeed]                               ; $1A8F: $F0 $B2
     and  a                                        ; $1A91: $A7
     jr   nz, .label_1A9A                          ; $1A92: $20 $06
     ld   a, [wIsLinkPushing]                      ; $1A94: $FA $44 $C1
@@ -3264,7 +3264,7 @@ label_1E55::
     ld   bc, $40                                  ; $1E57: $01 $40 $00
     call CopyData                                 ; $1E5A: $CD $14 $29
     xor  a                                        ; $1E5D: $AF
-    ldh  [$FFA5], a                               ; $1E5E: $E0 $A5
+    ldh  [hFFA5], a                               ; $1E5E: $E0 $A5
     ld   a, $0C                                   ; $1E60: $3E $0C
     call AdjustBankNumberForGBC                   ; $1E62: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $1E65: $EA $00 $21
@@ -3414,7 +3414,7 @@ CopyDataAndDrawLinkSprite::
 
 .drawLinkSprite
     xor  a                                        ; $1F3E: $AF
-    ldh  [$FFA5], a                               ; $1F3F: $E0 $A5
+    ldh  [hFFA5], a                               ; $1F3F: $E0 $A5
     ld   a, BANK(LinkCharacterTiles)              ; $1F41: $3E $0C
     ld   [MBC3SelectBank], a                      ; $1F43: $EA $00 $21
     jp   DrawLinkSpriteAndReturn                  ; $1F46: $C3 $2E $1D
@@ -3456,11 +3456,11 @@ label_1F69_trampoline::
 ; Physics for Link interactive motion?
 ; (Only ever called from label_002_4287)
 label_1F69::
-    ; If running with pegagus boots, or hLinkPositionZ != 0, or Link's motion != LINK_MOTION_INTERACTIVE, return
+    ; If running with pegagus boots, or hLinkPositionZHigh != 0, or Link's motion != LINK_MOTION_INTERACTIVE, return
     ld   hl, wIsRunningWithPegasusBoots           ; $1F69: $21 $4A $C1
     ld   a, [wIsCarryingLiftedObject]             ; $1F6C: $FA $5C $C1
     or   [hl]                                     ; $1F6F: $B6
-    ld   hl, hLinkPositionZ                       ; $1F70: $21 $A2 $FF
+    ld   hl, hLinkPositionZHigh                       ; $1F70: $21 $A2 $FF
     or   [hl]                                     ; $1F73: $B6
     ld   hl, wLinkMotionState                     ; $1F74: $21 $1C $C1
     or   [hl]                                     ; $1F77: $B6
@@ -3497,7 +3497,7 @@ ENDC
     ; hl = address of the room object that would intersect with the sword
     or   c                                        ; $1F9D: $B1
     ld   e, a                                     ; $1F9E: $5F
-    ldh  [hScratch1], a                           ; $1F9F: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $1F9F: $E0 $D8
     ld   hl, wRoomObjects                         ; $1FA1: $21 $11 $D7
     add  hl, de                                   ; $1FA4: $19
 
@@ -3506,26 +3506,26 @@ ENDC
     cp   $D7                                      ; $1FA6: $FE $D7
     jp   nz, .clearC15FAndReturn                  ; $1FA8: $C2 $4E $21
 
-    ; hScratch0 = id of room object under the sword
+    ; hMultiPurpose0 = id of room object under the sword
     ld   a, [hl]                                  ; $1FAB: $7E
-    ldh  [hScratch0], a                           ; $1FAC: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $1FAC: $E0 $D7
 
-    ; hScratch5 = unknown value read from the objects tilesets table
+    ; hMultiPurpose5 = unknown value read from the objects tilesets table
     ; d = map group id
     ; e = room object
     ld   e, a                                     ; $1FAE: $5F
     ld   a, [wIsIndoor]                           ; $1FAF: $FA $A5 $DB
     ld   d, a                                     ; $1FB2: $57
     call GetObjectPhysicsFlags_trampoline         ; $1FB3: $CD $26 $2A
-    ldh  [hScratch5], a                           ; $1FB6: $E0 $DC
+    ldh  [hMultiPurpose5], a                           ; $1FB6: $E0 $DC
 
     ; If the object is $9A, skip this section
 
-    ldh  a, [hScratch0]                           ; $1FB8: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $1FB8: $F0 $D7
     cp   $9A                                      ; $1FBA: $FE $9A
     jr   z, .notObject9AEnd                       ; $1FBC: $28 $40
 
-    ldh  a, [hScratch5]                           ; $1FBE: $F0 $DC
+    ldh  a, [hMultiPurpose5]                           ; $1FBE: $F0 $DC
     cp   $00                                      ; $1FC0: $FE $00
     jp   z, .clearC15FAndReturn                   ; $1FC2: $CA $4E $21
     cp   $01                                      ; $1FC5: $FE $01
@@ -3544,7 +3544,7 @@ ENDC
     jp   nc, .clearC15FAndReturn                  ; $1FE3: $D2 $4E $21
 
 .jp_1FE6
-    ldh  a, [hScratch0]                           ; $1FE6: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $1FE6: $F0 $D7
     ld   e, a                                     ; $1FE8: $5F
     cp   $6F                                      ; $1FE9: $FE $6F
     jr   z, .jp_1FF6                              ; $1FEB: $28 $09
@@ -3761,8 +3761,8 @@ ELSE
     jr   c, .return                               ; $2132: $38 $19
 ENDC
     xor  a                                        ; $2134: $AF
-    ldh  [$FFE5], a                               ; $2135: $E0 $E5
-    ldh  a, [hScratch0]                           ; $2137: $F0 $D7
+    ldh  [hMultiPurposeE], a                               ; $2135: $E0 $E5
+    ldh  a, [hMultiPurpose0]                           ; $2137: $F0 $D7
     cp   $8E                                      ; $2139: $FE $8E
     jr   z, .jr_2153                              ; $213B: $28 $16
     cp   $20                                      ; $213D: $FE $20
@@ -3774,7 +3774,7 @@ IF __PATCH_0__
 ELSE
     jr   nz, .return                              ; $2145: $20 $06
 ENDC
-    ldh  a, [hScratch0]                           ; $2147: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $2147: $F0 $D7
     cp   $5C                                      ; $2149: $FE $5C
     jr   z, .jr_2161                              ; $214B: $28 $14
 
@@ -3793,12 +3793,12 @@ ENDC
 
 .jr_2161
     ld   a, $01                                   ; $2161: $3E $01
-    ldh  [$FFE5], a                               ; $2163: $E0 $E5
+    ldh  [hMultiPurposeE], a                               ; $2163: $E0 $E5
 
 func_2165::
-    ldh  a, [hScratch1]                           ; $2165: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $2165: $F0 $D8
     ld   e, a                                     ; $2167: $5F
-    ldh  a, [hScratch0]                           ; $2168: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $2168: $F0 $D7
     ldh  [hObjectUnderEntity], a                  ; $216A: $E0 $AF
     call func_014_5526_trampoline                 ; $216C: $CD $78 $21
     ldh  a, [hLinkDirection]                      ; $216F: $F0 $9E
@@ -3832,7 +3832,7 @@ ENDC
     ld   [hl], $07                                ; $2192: $36 $07
     ld   hl, wEntitiesSpriteVariantTable                                ; $2194: $21 $B0 $C3
     add  hl, de                                   ; $2197: $19
-    ldh  a, [$FFE5]                               ; $2198: $F0 $E5
+    ldh  a, [hMultiPurposeE]                               ; $2198: $F0 $E5
     ld   [hl], a                                  ; $219A: $77
     ld   c, e                                     ; $219B: $4B
     ld   b, d                                     ; $219C: $42
@@ -3857,7 +3857,7 @@ UpdateFinalLinkPosition::
 .horizontal
    ; Compute next Link horizontal position
     ld   c, $00                                   ; $21B2: $0E $00
-    ldh  [hScratch0], a                           ; $21B4: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $21B4: $E0 $D7
 
 ; Inputs:
 ;   c : direction (0: horizontal ; 1: vertical)
@@ -3898,7 +3898,7 @@ ComputeLinkPosition::
     ret                                           ; $21E0: $C9
 
 func_21E1::
-    ldh  a, [$FFA3]                               ; $21E1: $F0 $A3
+    ldh  a, [hLinkPositionZLow]                               ; $21E1: $F0 $A3
     push af                                       ; $21E3: $F5
     swap a                                        ; $21E4: $CB $37
     and  $F0                                      ; $21E6: $E6 $F0
@@ -3906,7 +3906,7 @@ func_21E1::
     add  a, [hl]                                  ; $21EB: $86
     ld   [hl], a                                  ; $21EC: $77
     rl   d                                        ; $21ED: $CB $12
-    ld   hl, hLinkPositionZ                       ; $21EF: $21 $A2 $FF
+    ld   hl, hLinkPositionZHigh                       ; $21EF: $21 $A2 $FF
     pop  af                                       ; $21F2: $F1
     ld   e, $00                                   ; $21F3: $1E $00
     bit  7, a                                     ; $21F5: $CB $7F
@@ -3983,14 +3983,14 @@ DoUpdateBGRegion::
     push bc                                       ; $2241: $C5
     push de                                       ; $2242: $D5
 
-    ; hl = wRoomObjects + hScratch2
-    ldh  a, [hScratch2]                           ; $2243: $F0 $D9
+    ; hl = wRoomObjects + hMultiPurpose2
+    ldh  a, [hMultiPurpose2]                           ; $2243: $F0 $D9
     ld   c, a                                     ; $2245: $4F
     ld   b, $00                                   ; $2246: $06 $00
     ld   hl, wRoomObjects                         ; $2248: $21 $11 $D7
     add  hl, bc                                   ; $224B: $09
 
-    ; c = wRoomObjects[hScratch2]
+    ; c = wRoomObjects[hMultiPurpose2]
     ld   b, $00                                   ; $224C: $06 $00
     ld   c, [hl]                                  ; $224E: $4E
 
@@ -4051,7 +4051,7 @@ DoUpdateBGRegion::
     ;
 
 .configurePalettes
-    ; Set the BG attributes bank in hScratch8,
+    ; Set the BG attributes bank in hMultiPurpose8,
     ; and the target BG attributes address in FFE0-FFE1
     callsb GetBGAttributesAddressForObject        ; $2291: $3E $1A $EA $00 $21 $CD $76 $65
 .palettesskipEntityLoad
@@ -4083,18 +4083,18 @@ DoUpdateBGRegion::
     callsb func_020_49D9                          ; $22B0: $3E $20 $EA $00 $21 $CD $D9 $49
 
     ; Select BG attributes bank
-    ldh  a, [hScratch8]                           ; $22B8: $F0 $DF
+    ldh  a, [hMultiPurpose8]                           ; $22B8: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $22BA: $EA $00 $21
     ; Increment again the source and target destination
     call IncrementBGMapSourceAndDestination_Vertical ; $22BD: $CD $14 $22
     ld   a, b                                     ; $22C0: $78
-    ldh  [$FFE2], a                               ; $22C1: $E0 $E2
+    ldh  [hMultiPurposeB], a                               ; $22C1: $E0 $E2
     ld   a, c                                     ; $22C3: $79
-    ldh  [$FFE3], a                               ; $22C4: $E0 $E3
+    ldh  [hMultiPurposeC], a                               ; $22C4: $E0 $E3
     ld   a, d                                     ; $22C6: $7A
-    ldh  [hScratchD], a                           ; $22C7: $E0 $E4
+    ldh  [hMultiPurposeD], a                           ; $22C7: $E0 $E4
     ld   a, e                                     ; $22C9: $7B
-    ldh  [$FFE5], a                               ; $22CA: $E0 $E5
+    ldh  [hMultiPurposeE], a                               ; $22CA: $E0 $E5
     ; Restore state
     call SwitchToMapDataBank                      ; $22CC: $CD $05 $39
     pop  de                                       ; $22CF: $D1
@@ -4114,17 +4114,17 @@ DoUpdateBGRegion::
     push de                                       ; $22DC: $D5
     callsb func_020_49D9                          ; $22DD: $3E $20 $EA $00 $21 $CD $D9 $49
     ; Select BG attributes bank
-    ldh  a, [hScratch8]                           ; $22E5: $F0 $DF
+    ldh  a, [hMultiPurpose8]                           ; $22E5: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $22E7: $EA $00 $21
     call IncrementBGMapSourceAndDestination_Horizontal ; $22EA: $CD $24 $22
     ld   a, b                                     ; $22ED: $78
-    ldh  [$FFE2], a                               ; $22EE: $E0 $E2
+    ldh  [hMultiPurposeB], a                               ; $22EE: $E0 $E2
     ld   a, c                                     ; $22F0: $79
-    ldh  [$FFE3], a                               ; $22F1: $E0 $E3
+    ldh  [hMultiPurposeC], a                               ; $22F1: $E0 $E3
     ld   a, d                                     ; $22F3: $7A
-    ldh  [hScratchD], a                           ; $22F4: $E0 $E4
+    ldh  [hMultiPurposeD], a                           ; $22F4: $E0 $E4
     ld   a, e                                     ; $22F6: $7B
-    ldh  [$FFE5], a                               ; $22F7: $E0 $E5
+    ldh  [hMultiPurposeE], a                               ; $22F7: $E0 $E5
     ; Cleanup
     call SwitchToMapDataBank                      ; $22F9: $CD $05 $39
     pop  de                                       ; $22FC: $D1
@@ -4140,9 +4140,9 @@ DoUpdateBGRegion::
     ld   b, $00                                   ; $2303: $06 $00
     ld   hl, BGRegionIncrement                    ; $2305: $21 $05 $22
     add  hl, bc                                   ; $2308: $09
-    ldh  a, [hScratch2]                           ; $2309: $F0 $D9
+    ldh  a, [hMultiPurpose2]                           ; $2309: $F0 $D9
     add  a, [hl]                                  ; $230B: $86
-    ldh  [hScratch2], a                           ; $230C: $E0 $D9
+    ldh  [hMultiPurpose2], a                           ; $230C: $E0 $D9
     pop  bc                                       ; $230E: $C1
 
     ; Decrement loop counter
@@ -4239,7 +4239,7 @@ ReadJoypadState::
     ld   a, [wLinkMotionState]                    ; $2832: $FA $1C $C1
     cp   LINK_MOTION_PASS_OUT                     ; $2835: $FE $07
     jr   nz, .linkNotPassingOut                   ; $2837: $20 $06
-    ldh  a, [$FF9C]                               ; $2839: $F0 $9C
+    ldh  a, [hFF9C]                               ; $2839: $F0 $9C
     cp   $04                                      ; $283B: $FE $04
     jr   z, .readState                            ; $283D: $28 $13
 
@@ -4324,9 +4324,9 @@ label_2887::
     ld   e, a                                     ; $28B6: $5F
     add  hl, de                                   ; $28B7: $19
     ld   a, h                                     ; $28B8: $7C
-    ldh  [$FFCF], a                               ; $28B9: $E0 $CF
+    ldh  [hFFCF], a                               ; $28B9: $E0 $CF
     ld   a, l                                     ; $28BB: $7D
-    ldh  [$FFD0], a                               ; $28BC: $E0 $D0
+    ldh  [hFFD0], a                               ; $28BC: $E0 $D0
     pop  bc                                       ; $28BE: $C1
     ret                                           ; $28BF: $C9
 
@@ -4358,7 +4358,7 @@ TableJump::
 ; Turn off LCD at next vertical blanking
 LCDOff::
     ld   a, [rIE]                                 ; $28CF: $F0 $FF
-    ldh  [$FFD2], a ; Save interrupts configuration ; $28D1: $E0 $D2
+    ldh  [hFFD2], a ; Save interrupts configuration ; $28D1: $E0 $D2
     res  0, a                                     ; $28D3: $CB $87
     ld   [rIE], a   ; Disable all interrupts      ; $28D5: $E0 $FF
 .waitForEndOfLine
@@ -4368,7 +4368,7 @@ LCDOff::
     ld   a, [rLCDC]  ; \                          ; $28DD: $F0 $40
     and  $7F         ; | Switch off LCD screen    ; $28DF: $E6 $7F
     ld   [rLCDC], a  ; /                          ; $28E1: $E0 $40
-    ldh  a, [$FFD2]                               ; $28E3: $F0 $D2
+    ldh  a, [hFFD2]                               ; $28E3: $F0 $D2
     ld   [rIE], a    ; Restore interrupts configuration ; $28E5: $E0 $FF
     ret                                           ; $28E7: $C9
 
@@ -4901,7 +4901,7 @@ LoadDungeonTiles::
     cp   TRADING_ITEM_RIBBON                      ; $2D24: $FE $02
     jr   c, .return                               ; $2D26: $38 $04
     ld   a, $0D                                   ; $2D28: $3E $0D
-    ldh  [$FFA5], a                               ; $2D2A: $E0 $A5
+    ldh  [hFFA5], a                               ; $2D2A: $E0 $A5
 
 .return
     ret                                           ; $2D2C: $C9
@@ -5111,7 +5111,7 @@ LoadTileset9::
     xor  a                                        ; $2E84: $AF
     ; Copy a row of 16 tiles
 .copyOAMTilesRow
-    ldh  [hScratch0], a                           ; $2E85: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $2E85: $E0 $D7
     ld   hl, wC193                                ; $2E87: $21 $93 $C1
     ld   e, a                                     ; $2E8A: $5F
     ld   d, $00                                   ; $2E8B: $16 $00
@@ -5183,7 +5183,7 @@ LoadTileset9::
 
     ; Do the actual copy to OAM tiles
     ld   [MBC3SelectBank], a                      ; $2EF2: $EA $00 $21
-    ldh  a, [hScratch0]                           ; $2EF5: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $2EF5: $F0 $D7
     ld   d, a                                     ; $2EF7: $57
     ld   e, $00                                   ; $2EF8: $1E $00
     ; destination = Lower-half of the OAM tiles section (NPCs tiles)
@@ -5198,8 +5198,8 @@ LoadTileset9::
     call CopyData                                 ; $2F07: $CD $14 $29
 .copyskipEntityLoad
 
-    ; while hScratch0 < 4, copy the next row
-    ldh  a, [hScratch0]                           ; $2F0A: $F0 $D7
+    ; while hMultiPurpose0 < 4, copy the next row
+    ldh  a, [hMultiPurpose0]                           ; $2F0A: $F0 $D7
     inc  a                                        ; $2F0C: $3C
     cp   $04                                      ; $2F0D: $FE $04
     jp   nz, .copyOAMTilesRow                     ; $2F0F: $C2 $85 $2E
@@ -5500,11 +5500,11 @@ doCopyObjectToBG:
 
     ; Copy tile attributes to BG map for tiles on the upper row
     push hl                                       ; $3055: $E5
-    ldh  a, [hScratch8]                           ; $3056: $F0 $DF
+    ldh  a, [hMultiPurpose8]                           ; $3056: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $3058: $EA $00 $21
-    ldh  a, [hScratch9]                           ; $305B: $F0 $E0
+    ldh  a, [hMultiPurpose9]                           ; $305B: $F0 $E0
     ld   h, a                                     ; $305D: $67
-    ldh  a, [hScratchA]                           ; $305E: $F0 $E1
+    ldh  a, [hMultiPurposeA]                           ; $305E: $F0 $E1
     ld   l, a                                     ; $3060: $6F
     ld   a, $01                                   ; $3061: $3E $01
     ld   [rVBK], a                                ; $3063: $E0 $4F
@@ -5517,9 +5517,9 @@ doCopyObjectToBG:
 
     ; Update palette offset
     ld   a, h                                     ; $306E: $7C
-    ldh  [hScratch9], a                           ; $306F: $E0 $E0
+    ldh  [hMultiPurpose9], a                           ; $306F: $E0 $E0
     ld   a, l                                     ; $3071: $7D
-    ldh  [hScratchA], a                           ; $3072: $E0 $E1
+    ldh  [hMultiPurposeA], a                           ; $3072: $E0 $E1
     pop  hl                                       ; $3074: $E1
 
     ; Move BG target down by one row
@@ -5536,11 +5536,11 @@ doCopyObjectToBG:
     pop  de                                       ; $3081: $D1
 
     ; Copy palettes from WRAM1 for tiles on the lower row
-    ldh  a, [hScratch8]                           ; $3082: $F0 $DF
+    ldh  a, [hMultiPurpose8]                           ; $3082: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $3084: $EA $00 $21
-    ldh  a, [hScratch9]                           ; $3087: $F0 $E0
+    ldh  a, [hMultiPurpose9]                           ; $3087: $F0 $E0
     ld   h, a                                     ; $3089: $67
-    ldh  a, [hScratchA]                           ; $308A: $F0 $E1
+    ldh  a, [hMultiPurposeA]                           ; $308A: $F0 $E1
     ld   l, a                                     ; $308C: $6F
     ld   a, $01                                   ; $308D: $3E $01
     ld   [rVBK], a                                ; $308F: $E0 $4F
@@ -5995,9 +5995,9 @@ LoadRoom::
 ;   ds 1 ; type
 ;
 LoadRoomObject::
-    ; Clear hScratch0
+    ; Clear hMultiPurpose0
     xor  a                                        ; $32A9: $AF
-    ldh  [hScratch0], a                           ; $32AA: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $32AA: $E0 $D7
 
     ; If object type first bit is 1…
     ld   a, [bc]                                  ; $32AC: $0A
@@ -6008,8 +6008,8 @@ LoadRoomObject::
     jr   nz, .threeBytesObjectEnd                 ; $32B3: $20 $03
     ; … this is a three-bytes object, that spans more than one block.
     ; The first byte encodes the direction and length of the block:
-    ; save it to hScratch0.
-    ldh  [hScratch0], a                           ; $32B5: $E0 $D7
+    ; save it to hMultiPurpose0.
+    ldh  [hMultiPurpose0], a                           ; $32B5: $E0 $D7
     ; Skip the parsed direction-and-length byte
     inc  bc                                       ; $32B7: $03
 .threeBytesObjectEnd
@@ -6187,9 +6187,9 @@ LoadRoomObject::
     push af                                       ; $3380: $F5
 .bushGroundStairsEnd
 
-    ; hScratch9 = object type
+    ; hMultiPurpose9 = object type
     ld   a, d                                     ; $3381: $7A
-    ldh  [hScratch9], a                           ; $3382: $E0 $E0
+    ldh  [hMultiPurpose9], a                           ; $3382: $E0 $E0
 
     ; If object is an entrance to somewhere else…
     cp   OBJECT_CLOSED_GATE                       ; $3384: $FE $C2
@@ -6227,7 +6227,7 @@ LoadRoomObject::
 .overworldDoorEnd
 
     ; a = object type
-    ldh  a, [hScratch9]                           ; $33BC: $F0 $E0
+    ldh  a, [hMultiPurpose9]                           ; $33BC: $F0 $E0
 
     cp   $C5                                      ; $33BE: $FE $C5
     jp   z, .configureStairs                      ; $33C0: $CA $7D $34
@@ -6238,7 +6238,7 @@ LoadRoomObject::
 .loadNonDoorIndoorObject
     ; Re-increment a to be the object type
     add  a, OBJECT_KEY_DOOR_TOP                   ; $33CB: $C6 $EC
-    ldh  [hScratch9], a                           ; $33CD: $E0 $E0
+    ldh  [hMultiPurpose9], a                           ; $33CD: $E0 $E0
 
     ; If object type is a conveyor belt…
     push af                                       ; $33CF: $F5
@@ -6266,7 +6266,7 @@ LoadRoomObject::
     ldh  a, [hMapRoom]                            ; $33E4: $F0 $F6
     cp   $C4                                      ; $33E6: $FE $C4
     ; … and the object type is not zero…
-    ldh  a, [hScratch9]                           ; $33E8: $F0 $E0
+    ldh  a, [hMultiPurpose9]                           ; $33E8: $F0 $E0
     jr   z, .torchEnd                             ; $33EA: $28 $1B
     ; …then increment the number of torches in the room
     ld   hl, wTorchesCount                        ; $33EC: $21 $C9 $DB
@@ -6387,9 +6387,9 @@ LoadRoomObject::
     ; … and the chest has been opened…
     bit  4, e                                     ; $345F: $CB $63
     jr   nz, .chestEnd                            ; $3461: $20 $04
-    ; a = [$FFE9]
+    ; a = [hMultiPurposeH]
     pop  af                                       ; $3463: $F1
-    ldh  a, [$FFE9]                               ; $3464: $F0 $E9
+    ldh  a, [hMultiPurposeH]                               ; $3464: $F0 $E9
     push af                                       ; $3466: $F5
 .chestEnd
 
@@ -6422,16 +6422,16 @@ LoadRoomObject::
 .configureStairs
     dec  bc                                       ; $347D: $0B
     ld   a, $01                                   ; $347E: $3E $01
-    ldh  [$FFAC], a                               ; $3480: $E0 $AC
+    ldh  [hFFAC], a                               ; $3480: $E0 $AC
     ld   a, [bc]                                  ; $3482: $0A
     and  $F0                                      ; $3483: $E6 $F0
     add  a, $10                                   ; $3485: $C6 $10
-    ldh  [$FFAE], a                               ; $3487: $E0 $AE
+    ldh  [hFFAE], a                               ; $3487: $E0 $AE
     ld   a, [bc]                                  ; $3489: $0A
     swap a                                        ; $348A: $CB $37
     and  $F0                                      ; $348C: $E6 $F0
     add  a, $08                                   ; $348E: $C6 $08
-    ldh  [$FFAD], a                               ; $3490: $E0 $AD
+    ldh  [hFFAD], a                               ; $3490: $E0 $AD
     inc  bc                                       ; $3492: $03
     jp   .breakableObjectEnd                      ; $3493: $C3 $CE $34
 .stairsEnd
@@ -6480,7 +6480,7 @@ LoadRoomObject::
 
     ldh  a, [hMapId]                              ; $34B6: $F0 $F7
     cp   MAP_CAVE_B                               ; $34B8: $FE $0A
-    ldh  a, [hScratch9]                           ; $34BA: $F0 $E0
+    ldh  a, [hMultiPurpose9]                           ; $34BA: $F0 $E0
     jr   c, .bombableBlockEnd                     ; $34BC: $38 $04
     cp   OBJECT_BOMBABLE_BLOCK                    ; $34BE: $FE $A9
     jr   z, .configureBreakableObject             ; $34C0: $28 $04
@@ -6517,7 +6517,7 @@ LoadRoomObject::
 
     ; a = multiple-blocks object direction and length
     ld   d, $00                                   ; $34DA: $16 $00
-    ldh  a, [hScratch0]                           ; $34DC: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $34DC: $F0 $D7
     ; If there are no coordinates for a multiple-blocks object…
     and  a                                        ; $34DE: $A7
     ; … this is a single-block object:
@@ -6533,7 +6533,7 @@ LoadRoomObject::
     ld   hl, wRoomObjects                         ; $34E4: $21 $11 $D7
     add  hl, de                                   ; $34E7: $19
     ; e = count
-    ldh  a, [hScratch0]                           ; $34E8: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $34E8: $F0 $D7
     and  $0F                                      ; $34EA: $E6 $0F
     ld   e, a                                     ; $34EC: $5F
     ; d = object type
@@ -6546,14 +6546,14 @@ LoadRoomObject::
 ;   d      object type
 ;   e      count
 ;   hl     destination address
-;   hScratch0  object data (including the direction)
+;   hMultiPurpose0  object data (including the direction)
 FillRoomWithConsecutiveObjects::
     ; Copy object type to the active room map
     ld   a, d                                     ; $34EF: $7A
     ldi  [hl], a                                  ; $34F0: $22
 
     ; If the object direction is vertical…
-    ldh  a, [hScratch0]                           ; $34F1: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $34F1: $F0 $D7
     and  $40                                      ; $34F3: $E6 $40
     jr   z, .verticalEnd                          ; $34F5: $28 $04
     ; … increment the target address to move to the next column
@@ -7099,7 +7099,7 @@ data_37E4::
 ; Inputs:
 ;   a   the object type to fill the map with
 FillRoomMapWithObject::
-    ldh  [$FFE9], a                               ; $37E7: $E0 $E9
+    ldh  [hMultiPurposeH], a                               ; $37E7: $E0 $E9
     ld   d, TILES_PER_MAP                         ; $37E9: $16 $80
     ld   hl, wRoomObjects                         ; $37EB: $21 $11 $D7
     ld   e, a                                     ; $37EE: $5F
@@ -7127,7 +7127,7 @@ LoadRoomEntities::
 
     ; Reset the entities load order
     xor  a                                        ; $380B: $AF
-    ldh  [hScratchD], a                           ; $380C: $E0 $E4
+    ldh  [hMultiPurposeD], a                           ; $380C: $E0 $E4
 
     ; bc = [hMapRoom] * 2
     ldh  a, [hMapRoom]                            ; $380E: $F0 $F6
@@ -7173,7 +7173,7 @@ LoadRoomEntities::
     add  hl, de                                   ; $384A: $19
     ld   [hl], $FF                                ; $384B: $36 $FF
     xor  a                                        ; $384D: $AF
-    ldh  [hScratchD], a                           ; $384E: $E0 $E4
+    ldh  [hMultiPurposeD], a                           ; $384E: $E0 $E4
 .eaglesTowerEnd
 
     ; By default, use the IndoorsA pointers table
@@ -7239,12 +7239,12 @@ EntityMask_387B::
 ;   bc   address of the entity definition
 LoadEntityFromDefinition::
     ; a = entity load order
-    ldh  a, [hScratchD]                           ; $3883: $F0 $E4
+    ldh  a, [hMultiPurposeD]                           ; $3883: $F0 $E4
 
     ; If the load order < 8…
     cp   $08                                      ; $3885: $FE $08
     jr   nc, .skipClearedEntityEnd                ; $3887: $30 $12
-    ; and EntityMask_387B[hScratchD] & wEntitiesClearedRooms[hMapRoom] != 0,
+    ; and EntityMask_387B[hMultiPurposeD] & wEntitiesClearedRooms[hMapRoom] != 0,
     ld   e, a                                     ; $3889: $5F
     ld   d, $00                                   ; $388A: $16 $00
     ld   hl, EntityMask_387B                      ; $388C: $21 $7B $38
@@ -7278,7 +7278,7 @@ LoadEntityFromDefinition::
 
 .skipEntityLoad
     ; Increment the entity load order anyway
-    ld   hl, hScratchD                            ; $38AD: $21 $E4 $FF
+    ld   hl, hMultiPurposeD                            ; $38AD: $21 $E4 $FF
     inc  [hl]                                     ; $38B0: $34
     ; Increment the address to the next definition in the list
     inc  bc                                       ; $38B1: $03
@@ -7388,7 +7388,7 @@ label_3FBD::
     ld   bc, $10                                  ; $3FC0: $01 $10 $00
     call CopyData                                 ; $3FC3: $CD $14 $29
     xor  a                                        ; $3FC6: $AF
-    ldh  [$FFA5], a                               ; $3FC7: $E0 $A5
+    ldh  [hFFA5], a                               ; $3FC7: $E0 $A5
     ld   a, BANK(LinkCharacterTiles)              ; $3FC9: $3E $0C
     ld   [MBC3SelectBank], a                      ; $3FCB: $EA $00 $21
     jp   DrawLinkSpriteAndReturn                  ; $3FCE: $C3 $2E $1D

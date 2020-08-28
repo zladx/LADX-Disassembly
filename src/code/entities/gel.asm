@@ -41,7 +41,7 @@ jr_006_7C2E:
     add  hl, bc                                   ; $7C42: $09
     ld   a, [hl]                                  ; $7C43: $7E
     and  $80                                      ; $7C44: $E6 $80
-    ldh  [hFFE8], a                               ; $7C46: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $7C46: $E0 $E8
     jr   z, jr_006_7C50                           ; $7C48: $28 $06
 
     ld   [hl], b                                  ; $7C4A: $70
@@ -97,16 +97,16 @@ jr_006_7C6A:
     ld   hl, wEntitiesLoadOrderTable              ; $7C95: $21 $60 $C4
     add  hl, de                                   ; $7C98: $19
     ld   [hl], a                                  ; $7C99: $77
-    ldh  a, [hScratch0]                           ; $7C9A: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $7C9A: $F0 $D7
     add  $08                                      ; $7C9C: $C6 $08
     ld   hl, wEntitiesPosXTable                   ; $7C9E: $21 $00 $C2
     add  hl, de                                   ; $7CA1: $19
     ld   [hl], a                                  ; $7CA2: $77
-    ldh  a, [hScratch1]                           ; $7CA3: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $7CA3: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $7CA5: $21 $10 $C2
     add  hl, de                                   ; $7CA8: $19
     ld   [hl], a                                  ; $7CA9: $77
-    ldh  a, [hScratch3]                           ; $7CAA: $F0 $DA
+    ldh  a, [hMultiPurpose3]                           ; $7CAA: $F0 $DA
     ld   hl, wEntitiesPosZTable                   ; $7CAC: $21 $10 $C3
     add  hl, de                                   ; $7CAF: $19
     ld   [hl], a                                  ; $7CB0: $77
@@ -231,7 +231,7 @@ jr_006_7D5B:
 
 GelState3Handler::
     call func_006_7D0F                            ; $7D63: $CD $0F $7D
-    ldh  a, [hFFE8]                               ; $7D66: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $7D66: $F0 $E8
     and  a                                        ; $7D68: $A7
     jr   z, jr_006_7D6F                           ; $7D69: $28 $04
 
@@ -282,7 +282,7 @@ jr_006_7D91:
     ld   hl, wEntitiesPosYTable                   ; $7DAB: $21 $10 $C2
     add  hl, bc                                   ; $7DAE: $09
     ld   [hl], a                                  ; $7DAF: $77
-    ldh  a, [hLinkPositionZ]                      ; $7DB0: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                      ; $7DB0: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $7DB2: $21 $10 $C3
     add  hl, bc                                   ; $7DB5: $09
     ld   [hl], a                                  ; $7DB6: $77

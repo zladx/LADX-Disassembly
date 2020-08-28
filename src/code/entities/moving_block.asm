@@ -8,7 +8,7 @@ MovingBlockLeftTopEntityHandler::
     call RenderActiveEntitySpritesPair            ; $4103: $CD $C0 $3B
     call func_015_7B0D                            ; $4106: $CD $0D $7B
     xor  a                                        ; $4109: $AF
-    ldh  [hFFE8], a                               ; $410A: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $410A: $E0 $E8
 
     ldh  a, [hActiveEntityState]                  ; $410C: $F0 $F0
     JP_TABLE                                      ; $410E
@@ -29,7 +29,7 @@ MovingBlockLeftTopState0Handler::
     jp   IncrementEntityState                     ; $4124: $C3 $12 $3B
 
 MovingBlockLeftTopState1Handler::
-    ldh  a, [$FFBA]                               ; $4127: $F0 $BA
+    ldh  a, [hFFBA]                               ; $4127: $F0 $BA
     cp   $02                                      ; $4129: $FE $02
     jr   z, jr_015_416F                           ; $412B: $28 $42
 
@@ -82,7 +82,7 @@ jr_015_414D:
     jr   jr_015_416F                              ; $4169: $18 $04
 
 jr_015_416B:
-    ld   hl, hFFE8                                ; $416B: $21 $E8 $FF
+    ld   hl, hMultiPurposeG                                ; $416B: $21 $E8 $FF
     inc  [hl]                                     ; $416E: $34
 
 label_015_416F:
@@ -127,7 +127,7 @@ jr_015_41A4:
     cp   ENTITY_MOVING_BLOCK_LEFT_BOTTOM          ; $41AA: $FE $47
     jr   nz, jr_015_41B2                          ; $41AC: $20 $04
 
-    ldh  a, [hFFE8]                               ; $41AE: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $41AE: $F0 $E8
     and  a                                        ; $41B0: $A7
     ret  nz                                       ; $41B1: $C0
 
@@ -142,7 +142,7 @@ jr_015_41B9:
     cp   ENTITY_MOVING_BLOCK_LEFT_TOP             ; $41BB: $FE $46
     jr   nz, jr_015_41C3                          ; $41BD: $20 $04
 
-    ldh  a, [hFFE8]                               ; $41BF: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $41BF: $F0 $E8
     and  a                                        ; $41C1: $A7
     ret  nz                                       ; $41C2: $C0
 
@@ -159,7 +159,7 @@ MovingBlockLeftBottomEntityHandler::
     call RenderActiveEntitySpritesPair            ; $41CD: $CD $C0 $3B
     call func_015_7B0D                            ; $41D0: $CD $0D $7B
     xor  a                                        ; $41D3: $AF
-    ldh  [hFFE8], a                               ; $41D4: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $41D4: $E0 $E8
 
     ldh  a, [hActiveEntityState]                  ; $41D6: $F0 $F0
     JP_TABLE                                        ; $41D8
@@ -180,7 +180,7 @@ MovingBlockLeftBottomState0Handler::
     jp   IncrementEntityState                     ; $41EE: $C3 $12 $3B
 
 MovingBlockLeftBottomState1Handler::
-    ldh  a, [$FFBA]                               ; $41F1: $F0 $BA
+    ldh  a, [hFFBA]                               ; $41F1: $F0 $BA
     cp   $02                                      ; $41F3: $FE $02
     jr   z, jr_015_4239                           ; $41F5: $28 $42
 
@@ -233,7 +233,7 @@ jr_015_4217:
     jr   jr_015_4239                              ; $4233: $18 $04
 
 jr_015_4235:
-    ld   hl, hFFE8                                ; $4235: $21 $E8 $FF
+    ld   hl, hMultiPurposeG                                ; $4235: $21 $E8 $FF
     inc  [hl]                                     ; $4238: $34
 
 jr_015_4239:
@@ -244,7 +244,7 @@ MovingBlockBottomLeftEntityHandler::
     call RenderActiveEntitySpritesPair            ; $423F: $CD $C0 $3B
     call func_015_7B0D                            ; $4242: $CD $0D $7B
     xor  a                                        ; $4245: $AF
-    ldh  [hFFE8], a                               ; $4246: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $4246: $E0 $E8
 
     ldh  a, [hActiveEntityState]                  ; $4248: $F0 $F0
     JP_TABLE                                      ; $424A
@@ -265,7 +265,7 @@ MovingBlockBottomLeftState0Handler::
     jp   IncrementEntityState                     ; $4260: $C3 $12 $3B
 
 MovingBlockBottomLeftState1Handler::
-    ldh  a, [$FFBA]                               ; $4263: $F0 $BA
+    ldh  a, [hFFBA]                               ; $4263: $F0 $BA
     cp   $02                                      ; $4265: $FE $02
     jr   z, jr_015_42AB                           ; $4267: $28 $42
 
@@ -318,7 +318,7 @@ jr_015_4289:
     jr   jr_015_42AB                              ; $42A5: $18 $04
 
 jr_015_42A7:
-    ld   hl, hFFE8                                ; $42A7: $21 $E8 $FF
+    ld   hl, hMultiPurposeG                                ; $42A7: $21 $E8 $FF
     inc  [hl]                                     ; $42AA: $34
 
 jr_015_42AB:
@@ -329,7 +329,7 @@ MovingBlockBottomRightEntityHandler:
     call RenderActiveEntitySpritesPair            ; $42B1: $CD $C0 $3B
     call func_015_7B0D                            ; $42B4: $CD $0D $7B
     xor  a                                        ; $42B7: $AF
-    ldh  [hFFE8], a                               ; $42B8: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $42B8: $E0 $E8
 
     ldh  a, [hActiveEntityState]                  ; $42BA: $F0 $F0
     JP_TABLE                                      ; $42BC
@@ -350,7 +350,7 @@ MovingBlockBottomRightState0Handler::
     jp   IncrementEntityState                     ; $42D2: $C3 $12 $3B
 
 MovingBlockBottomRightState1Handler::
-    ldh  a, [$FFBA]                               ; $42D5: $F0 $BA
+    ldh  a, [hFFBA]                               ; $42D5: $F0 $BA
     cp   $02                                      ; $42D7: $FE $02
     jr   z, jr_015_431D                           ; $42D9: $28 $42
 
@@ -403,7 +403,7 @@ jr_015_42FB:
     jr   jr_015_431D                              ; $4317: $18 $04
 
 jr_015_4319:
-    ld   hl, hFFE8                                ; $4319: $21 $E8 $FF
+    ld   hl, hMultiPurposeG                                ; $4319: $21 $E8 $FF
     inc  [hl]                                     ; $431C: $34
 
 jr_015_431D:

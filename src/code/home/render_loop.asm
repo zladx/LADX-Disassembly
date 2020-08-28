@@ -13,7 +13,7 @@
 ;  - wait for next frame.
 RenderLoop::
     ; Set DidRenderFrame
-    ld   a, 1                                     ; $01DA: $3E $01
+    ld   a, TRUE                                  ; $01DA: $3E $01
     ldh  [hDidRenderFrame], a                     ; $01DC: $E0 $FD
 
 .RenderLoop_setScrollY:

@@ -181,7 +181,7 @@ AnimateEntity::
     ldh  a, [hActiveEntityType]                   ; $3A35: $F0 $EB
     cp   ENTITY_RAFT_RAFT_OWNER                   ; $3A37: $FE $6A
     jr   nz, .raftManEnd                          ; $3A39: $20 $05
-    ldh  a, [$FFB2]                               ; $3A3B: $F0 $B2
+    ldh  a, [slowWalkingSpeed]                               ; $3A3B: $F0 $B2
     and  a                                        ; $3A3D: $A7
     jr   nz, .entityLifted                        ; $3A3E: $20 $06
 .raftManEnd
@@ -751,16 +751,16 @@ RenderActiveEntitySpritesRect::
     ld   d, h                                     ; $3CF7: $54
     pop  hl                                       ; $3CF8: $E1
 
-    ; Save counter to hScratch0
+    ; Save counter to hMultiPurpose0
     ld   a, c                                     ; $3CF9: $79
-    ldh  [hScratch0], a                           ; $3CFA: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $3CFA: $E0 $D7
 
     ld   a, [wActiveEntityIndex]                  ; $3CFC: $FA $23 $C1
     ld   c, a                                     ; $3CFF: $4F
     call SkipDisabledEntityDuringRoomTransition   ; $3D00: $CD $57 $3D
 
-    ; Restore counter from hScratch0
-    ldh  a, [hScratch0]                           ; $3D03: $F0 $D7
+    ; Restore counter from hMultiPurpose0
+    ldh  a, [hMultiPurpose0]                           ; $3D03: $F0 $D7
     ld   c, a                                     ; $3D05: $4F
 
 .loop
@@ -1024,9 +1024,9 @@ label_3E8E::
     ret  nz                                       ; $3E9A: $C0
 
     ldh  a, [hActiveEntityPosX]                   ; $3E9B: $F0 $EE
-    ldh  [hScratch0], a                           ; $3E9D: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $3E9D: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $3E9F: $F0 $EC
-    ldh  [hScratch1], a                           ; $3EA1: $E0 $D8
+    ldh  [hMultiPurpose1], a                           ; $3EA1: $E0 $D8
     ld   a, TRANSCIENT_VFX_SMOKE                  ; $3EA3: $3E $08
     call AddTranscientVfx                         ; $3EA5: $CD $C7 $0C
     ld   hl, wTranscientVfxCountdownTable         ; $3EA8: $21 $20 $C5
@@ -1044,7 +1044,7 @@ label_3EAF::
     inc  a                                        ; $3EB9: $3C
 
 .jr_3EBA
-    ldh  [hScratch0], a                           ; $3EBA: $E0 $D7
+    ldh  [hMultiPurpose0], a                           ; $3EBA: $E0 $D7
     ld   hl, wEntitiesUnknowTableS                ; $3EBC: $21 $00 $C4
     add  hl, bc                                   ; $3EBF: $09
     ld   a, [hl]                                  ; $3EC0: $7E
@@ -1055,7 +1055,7 @@ label_3EAF::
 
 .jr_3EC7
     ld   e, $03                                   ; $3EC7: $1E $03
-    ld   hl, hScratch0                            ; $3EC9: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                            ; $3EC9: $21 $D7 $FF
     cp   [hl]                                     ; $3ECC: $BE
     jr   c, .jr_3ED1                              ; $3ECD: $38 $02
     ld   e, $0C                                   ; $3ECF: $1E $0C
@@ -1112,7 +1112,7 @@ BossIntro::
 .endIf:
     ld   [wMusicTrackToPlay], a                   ; $3F11: $EA $68 $D3
 
-ldh  [$FFBD], a                                   ; $3F14: $E0 $BD
+ldh  [hFFBD], a                                   ; $3F14: $E0 $BD
     ld   a, [wTransitionSequenceCounter]          ; $3F16: $FA $6B $C1
     cp   $04                                      ; $3F19: $FE $04
     ret  nz                                       ; $3F1B: $C0

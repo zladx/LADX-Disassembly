@@ -291,7 +291,7 @@ vBlankContinue::
 
     ; If NeedsUpdatingBGTiles or NeedsUpdatingEnnemiesTiles or NeedsUpdatingNPCTiles…
     ldh  a, [hNeedsUpdatingBGTiles]               ; $04EA: $F0 $90
-    ldh  [$FFE8], a                               ; $04EC: $E0 $E8
+    ldh  [hMultiPurposeG], a                               ; $04EC: $E0 $E8
     ld   hl, hNeedsUpdatingEnnemiesTiles          ; $04EE: $21 $91 $FF
     or   [hl]                                     ; $04F1: $B6
     ld   hl, wNeedsUpdatingNPCTiles               ; $04F2: $21 $0E $C1
@@ -301,8 +301,8 @@ vBlankContinue::
     ; Load tiles (?)
     call LoadTiles                                ; $04F8: $CD $BC $05
 
-    ; If $FFE8 >= 8, skip drawing of Link sprite
-    ldh  a, [$FFE8]                               ; $04FB: $F0 $E8
+    ; If hMultiPurposeG >= 8, skip drawing of Link sprite
+    ldh  a, [hMultiPurposeG]                               ; $04FB: $F0 $E8
     cp   $08                                      ; $04FD: $FE $08
     jr   nc, .linkSpriteclearBGTilesFlag          ; $04FF: $30 $03
 .drawLinkSprite
@@ -318,14 +318,14 @@ vBlankContinue::
     ; Otherwise, when there are not tiles to update, we can perform a bit
     ; more GFX code – like animating the tiles and palettes.
 
-    ; If $FFBB == 0, move on
-    ldh  a, [$FFBB]                               ; $0509: $F0 $BB
+    ; If hFFBB == 0, move on
+    ldh  a, [hFFBB]                               ; $0509: $F0 $BB
     and  a                                        ; $050B: $A7
     jr   z, .animateTiles                         ; $050C: $28 $13
 
-    ; Decrement $FFBB
+    ; Decrement hFFBB
     dec  a                                        ; $050E: $3D
-    ldh  [$FFBB], a                               ; $050F: $E0 $BB
+    ldh  [hFFBB], a                               ; $050F: $E0 $BB
 
     ; Read [data_046A + A]
     ld   e, a                                     ; $0511: $5F
@@ -390,7 +390,7 @@ WaitForVBlankAndReturn::
     pop  de                                       ; $056F: $D1
     pop  bc                                       ; $0570: $C1
 
-    ld   a, $01                                   ; $0571: $3E $01
+    ld   a, TRUE                                  ; $0571: $3E $01
     ldh  [hNeedsRenderingFrame], a                ; $0573: $E0 $D1
 
     pop  af                                       ; $0575: $F1
@@ -499,7 +499,7 @@ ENDC
     ld   h, a                                     ; $0633: $67
     add  hl, bc                                   ; $0634: $09
 
-    ldh  a, [$FFBB]                               ; $0635: $F0 $BB
+    ldh  a, [hFFBB]                               ; $0635: $F0 $BB
     and  a                                        ; $0637: $A7
     jr   z, .copyData                             ; $0638: $28 $07
     ldh  a, [hBGTilesLoadingStage]                ; $063A: $F0 $92

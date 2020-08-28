@@ -197,7 +197,7 @@ jr_006_68F6:
     ld   a, MUSIC_OWL                             ; $68FD: $3E $22
     ld   [wMusicTrackToPlay], a                   ; $68FF: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $6902: $E0 $B0
-    ldh  [$FFBD], a                               ; $6904: $E0 $BD
+    ldh  [hFFBD], a                               ; $6904: $E0 $BD
     ldh  a, [hMapRoom]                            ; $6906: $F0 $F6
     cp   $16                                      ; $6908: $FE $16
     jr   z, jr_006_6914                           ; $690A: $28 $08
@@ -351,7 +351,7 @@ ENDC
 
     ld   a, MUSIC_ACTIVE_POWER_UP
     ld   [wMusicTrackToPlay], a                   ; $69FF: $EA $68 $D3
-    ldh  [$FFBD], a                               ; $6A02: $E0 $BD
+    ldh  [hFFBD], a                               ; $6A02: $E0 $BD
 
 jr_006_6A04:
     ret                                           ; $6A04: $C9
@@ -371,12 +371,12 @@ jr_006_6A0F:
 
     ld   a, $20                                   ; $6A15: $3E $20
     call GetVectorTowardsLink_trampoline          ; $6A17: $CD $B5 $3B
-    ldh  a, [hScratch0]                           ; $6A1A: $F0 $D7
+    ldh  a, [hMultiPurpose0]                           ; $6A1A: $F0 $D7
     cpl                                           ; $6A1C: $2F
     inc  a                                        ; $6A1D: $3C
     ld   hl, wEntitiesSpeedYTable                 ; $6A1E: $21 $50 $C2
     call func_006_6A2B                            ; $6A21: $CD $2B $6A
-    ldh  a, [hScratch1]                           ; $6A24: $F0 $D8
+    ldh  a, [hMultiPurpose1]                           ; $6A24: $F0 $D8
     cpl                                           ; $6A26: $2F
     inc  a                                        ; $6A27: $3C
     ld   hl, wEntitiesSpeedXTable                 ; $6A28: $21 $40 $C2

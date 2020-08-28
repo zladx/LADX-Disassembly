@@ -80,9 +80,9 @@ Data_01A_70AD::
 ;
 ; Inputs:
 ;   de      wEntitiesUnknowTableY + entity index
-;   hFFE8   entity substate 1
-;   $FFCF   unknown
-;   $FFD0   unknown
+;   hMultiPurposeG   entity substate 1
+;   hFFCF   unknown
+;   hFFD0   unknown
 AnglersTunnelDoorEntityHandler::
     ; hl = de
     ld   h, d                                     ; $7111: $62
@@ -106,7 +106,7 @@ AnglersTunnelDoorEntityHandler::
     ld   e, a                                     ; $7125: $5F
     ld   d, $00                                   ; $7126: $16 $00
     ld   hl, Data_01A_7049                        ; $7128: $21 $49 $70
-    ldh  a, [hFFE8]                               ; $712B: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $712B: $F0 $E8
     and  $01                                      ; $712D: $E6 $01
     jr   z, .jr_01A_7134                          ; $712F: $28 $03
 
@@ -119,9 +119,9 @@ AnglersTunnelDoorEntityHandler::
     ld   c, $0A                                   ; $7137: $0E $0A
     ld   hl, wDC91                                ; $7139: $21 $91 $DC
     ld   a, [wDC90]                               ; $713C: $FA $90 $DC
-    ldh  a, [$FFCF]                               ; $713F: $F0 $CF
+    ldh  a, [hFFCF]                               ; $713F: $F0 $CF
     ld   [hl+], a                                 ; $7141: $22
-    ldh  a, [$FFD0]                               ; $7142: $F0 $D0
+    ldh  a, [hFFD0]                               ; $7142: $F0 $D0
     ld   [hl+], a                                 ; $7144: $22
     ld   a, $09                                   ; $7145: $3E $09
     ld   [hl+], a                                 ; $7147: $22
@@ -152,7 +152,7 @@ AnglersTunnelDoorEntityHandler::
     ld   d, b                                     ; $715E: $50
 
     ld   hl, Data_01A_6FE5                        ; $715F: $21 $E5 $6F
-    ldh  a, [hFFE8]                               ; $7162: $F0 $E8
+    ldh  a, [hMultiPurposeG]                               ; $7162: $F0 $E8
     and  $01                                      ; $7164: $E6 $01
     jr   nz, .dataSourceEnd                       ; $7166: $20 $0B
 
@@ -173,9 +173,9 @@ AnglersTunnelDoorEntityHandler::
     ld   [wRequests], a                           ; $717C: $EA $00 $D6
     ld   hl, wRequestDestinationHigh              ; $717F: $21 $01 $D6
     add  hl, de                                   ; $7182: $19
-    ldh  a, [$FFCF]                               ; $7183: $F0 $CF
+    ldh  a, [hFFCF]                               ; $7183: $F0 $CF
     ld   [hl+], a                                 ; $7185: $22
-    ldh  a, [$FFD0]                               ; $7186: $F0 $D0
+    ldh  a, [hFFD0]                               ; $7186: $F0 $D0
     ld   [hl+], a                                 ; $7188: $22
     ld   a, $09                                   ; $7189: $3E $09
     ld   [hl+], a                                 ; $718B: $22

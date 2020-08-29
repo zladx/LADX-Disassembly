@@ -3423,7 +3423,7 @@ label_018_59AC:
 
 func_018_59AE::
     ld   e, $10                                   ; $59AE: $1E $10
-    ld   hl, $D1B5                                ; $59B0: $21 $B5 $D1
+    ld   hl, wD1B5                                ; $59B0: $21 $B5 $D1
 
 jr_018_59B3:
     ld   [hl+], a                                 ; $59B3: $22
@@ -3528,7 +3528,7 @@ jr_018_5A3F:
     ld   hl, $D195                                ; $5A6E: $21 $95 $D1
     call func_018_5A79                            ; $5A71: $CD $79 $5A
     ldh  a, [hLinkDirection]                      ; $5A74: $F0 $9E
-    ld   hl, $D1B5                                ; $5A76: $21 $B5 $D1
+    ld   hl, wD1B5                                ; $5A76: $21 $B5 $D1
 
 func_018_5A79::
     ld   e, $10                                   ; $5A79: $1E $10
@@ -3850,7 +3850,7 @@ jr_018_5C59:
     jr   nz, jr_018_5C59                          ; $5C5C: $20 $FB
 
     ld   a, $02                                   ; $5C5E: $3E $02
-    ld   hl, $D1B5                                ; $5C60: $21 $B5 $D1
+    ld   hl, wD1B5                                ; $5C60: $21 $B5 $D1
 
 func_018_5C63::
     ld   e, $10                                   ; $5C63: $1E $10
@@ -3909,7 +3909,7 @@ label_018_5C6A:
     ld   hl, $D175                                ; $5CB1: $21 $75 $D1
     add  hl, de                                   ; $5CB4: $19
     ld   [hl], a                                  ; $5CB5: $77
-    ld   hl, $D1B5                                ; $5CB6: $21 $B5 $D1
+    ld   hl, wD1B5                                ; $5CB6: $21 $B5 $D1
     add  hl, de                                   ; $5CB9: $19
     ldh  a, [hLinkDirection]                      ; $5CBA: $F0 $9E
     ld   [hl], a                                  ; $5CBC: $77
@@ -3967,7 +3967,7 @@ jr_018_5CEF:
     ld   hl, wEntitiesPosYTable                   ; $5D0A: $21 $10 $C2
     add  hl, bc                                   ; $5D0D: $09
     ld   [hl], a                                  ; $5D0E: $77
-    ld   hl, $D1B5                                ; $5D0F: $21 $B5 $D1
+    ld   hl, wD1B5                                ; $5D0F: $21 $B5 $D1
     add  hl, de                                   ; $5D12: $19
     ld   a, [hl]                                  ; $5D13: $7E
     ld   hl, wEntitiesDirectionTable              ; $5D14: $21 $80 $C3

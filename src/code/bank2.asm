@@ -166,14 +166,14 @@ label_002_4287:
     ld   [wC1C4], a                               ; $4298: $EA $C4 $C1
 
 .jr_002_429B
+    ; decrement wBombArrowCooldown if not allready zero
     ld   a, [wBombArrowCooldown]                  ; $429B: $FA $C0 $C1
     and  a                                        ; $429E: $A7
-    jr   z, .jr_002_42A5                          ; $429F: $28 $04
-
+    jr   z, .skipBombArrowCooldownDecrement       ; $429F: $28 $04
     dec  a                                        ; $42A1: $3D
     ld   [wBombArrowCooldown], a                  ; $42A2: $EA $C0 $C1
 
-.jr_002_42A5
+.skipBombArrowCooldownDecrement
     call func_002_436C                            ; $42A5: $CD $6C $43
     ld   a, [wC16E]                               ; $42A8: $FA $6E $C1
     and  a                                        ; $42AB: $A7
@@ -402,7 +402,7 @@ jr_002_43CE:
 
     ld   e, a                                     ; $43DA: $5F
     ld   d, $00                                   ; $43DB: $16 $00
-    ld   hl, Data_002_4905                        ; $43DD: $21 $05 $49
+    ld   hl, JoypadToLinkDirection                        ; $43DD: $21 $05 $49
     add  hl, de                                   ; $43E0: $19
     ldh  a, [hLinkDirection]                      ; $43E1: $F0 $9E
     cp   [hl]                                     ; $43E3: $BE
@@ -474,7 +474,7 @@ jr_002_443A:
     ld   hl, wConsecutiveStepsCount                                ; $4440: $21 $20 $C1
     inc  [hl]                                     ; $4443: $34
 
-    ld   hl, Data_002_4905                        ; $4444: $21 $05 $49
+    ld   hl, JoypadToLinkDirection                        ; $4444: $21 $05 $49
     add  hl, de                                   ; $4447: $19
     ld   a, [hl]                                  ; $4448: $7E
     cp   $0F                                      ; $4449: $FE $0F
@@ -778,12 +778,12 @@ LinkDirectionToSwordDirection::
 
 ; convert the sowrd direction to link animation state
 LinkDirectionToLinkAnimationState1::
-    db  LINK_ANIMATION_STATE_STANDING_DOWN, LINK_ANIMATION_STATE_UNKNOWN_18,    LINK_ANIMATION_STATE_UNKNOWN_19,      LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_RIGHT
-    db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_RIGHT, LINK_ANIMATION_STATE_UNKNOWN_FF,    LINK_ANIMATION_STATE_STANDING_DOWN,   LINK_ANIMATION_STATE_UNKNOWN_16
-    db  LINK_ANIMATION_STATE_UNKNOWN_17,    LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT,  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT,    LINK_ANIMATION_STATE_UNKNOWN_FF
-    db  LINK_ANIMATION_STATE_STANDING_DOWN, LINK_ANIMATION_STATE_UNKNOWN_14,    LINK_ANIMATION_STATE_UNKNOWN_15,      LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_UP
-    db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_UP,    LINK_ANIMATION_STATE_UNKNOWN_FF,    LINK_ANIMATION_STATE_STANDING_DOWN,   LINK_ANIMATION_STATE_UNKNOWN_12
-    db  LINK_ANIMATION_STATE_UNKNOWN_13,    LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_DOWN,  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_DOWN,    LINK_ANIMATION_STATE_UNKNOWN_FF
+    db  LINK_ANIMATION_STATE_STANDING_DOWN,         LINK_ANIMATION_STATE_UNKNOWN_18,            LINK_ANIMATION_STATE_UNKNOWN_19,            LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_RIGHT
+    db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_RIGHT,  LINK_ANIMATION_STATE_NO_UPDATE,             LINK_ANIMATION_STATE_STANDING_DOWN,         LINK_ANIMATION_STATE_UNKNOWN_16
+    db  LINK_ANIMATION_STATE_UNKNOWN_17,            LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT,   LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT,   LINK_ANIMATION_STATE_NO_UPDATE
+    db  LINK_ANIMATION_STATE_STANDING_DOWN,         LINK_ANIMATION_STATE_UNKNOWN_14,            LINK_ANIMATION_STATE_UNKNOWN_15,            LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_UP
+    db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_UP,     LINK_ANIMATION_STATE_NO_UPDATE,             LINK_ANIMATION_STATE_STANDING_DOWN,         LINK_ANIMATION_STATE_UNKNOWN_12
+    db  LINK_ANIMATION_STATE_UNKNOWN_13,            LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_DOWN,   LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_DOWN,   LINK_ANIMATION_STATE_NO_UPDATE
 
 ; convert the direction link is facing to wC13A
 LinkDirectionTo_wC13A::
@@ -1050,11 +1050,11 @@ label_002_4827:
     add  hl, bc                                   ; $483A: $09
     ld   a, [hl]                                  ; $483B: $7E
     ld   [wSwordDirection], a                     ; $483C: $EA $36 $C1
-    ; if value is not LINK_ANIMATION_STATE_UNKNOWN_FF then update hLinkAnimationState
+    ; if value is not LINK_ANIMATION_STATE_NO_UPDATE then update hLinkAnimationState
     ld   hl, LinkDirectionToLinkAnimationState1   ; $483F: $21 $36 $46
     add  hl, bc                                   ; $4842: $09
     ld   a, [hl]                                  ; $4843: $7E
-    cp   LINK_ANIMATION_STATE_UNKNOWN_FF          ; $4844: $FE $FF
+    cp   LINK_ANIMATION_STATE_NO_UPDATE          ; $4844: $FE $FF
     jr   z, .noUpdate                             ; $4846: $28 $02
     ldh  [hLinkAnimationState], a                 ; $4848: $E0 $9D
 
@@ -1156,8 +1156,20 @@ VerticalIncrementForLinkPosition::
     db   $14, $0F, $0F, $00
     db   $00, $00, $00, $00
 
-Data_002_4905::
-    db   $0F, $00, $01, $0F, $02, $0F, $0F, $0F, $03, $0F, $0F
+; convert joypad input to Link's direction of view
+; $0F = invalide input
+JoypadToLinkDirection::
+.none        db  DIRECTION_INVALIDE
+.right       db  DIRECTION_RIGHT
+.left        db  DIRECTION_LEFT
+.rightLeft   db  DIRECTION_INVALIDE
+.up          db  DIRECTION_UP
+.upRight     db  DIRECTION_INVALIDE
+.upLeft      db  DIRECTION_INVALIDE
+.upRightLeft db  DIRECTION_INVALIDE
+.down        db  DIRECTION_DOWN
+.downRight   db  DIRECTION_INVALIDE
+.downLeft    db  DIRECTION_INVALIDE
 
 ;
 ; hLinkAnimationState values for Link walking animation.
@@ -2303,7 +2315,7 @@ jr_002_4FF5:
     ld   [wConsecutiveStepsCount], a              ; $4FF7: $EA $20 $C1
 
 jr_002_4FFA:
-    ld   hl, Data_002_4905                        ; $4FFA: $21 $05 $49
+    ld   hl, JoypadToLinkDirection                        ; $4FFA: $21 $05 $49
     add  hl, de                                   ; $4FFD: $19
     ld   a, [hl]                                  ; $4FFE: $7E
     cp   $0F                                      ; $4FFF: $FE $0F
@@ -2447,9 +2459,9 @@ jr_002_50BA:
 Unknown2ToLinkAnimationState::
     db  LINK_ANIMATION_STATE_UNKNOWN_55, LINK_ANIMATION_STATE_UNKNOWN_56
     db  LINK_ANIMATION_STATE_UNKNOWN_57, LINK_ANIMATION_STATE_UNKNOWN_57
-    db  LINK_ANIMATION_STATE_UNKNOWN_FF, LINK_ANIMATION_STATE_UNKNOWN_FF
-    db  LINK_ANIMATION_STATE_UNKNOWN_FF, LINK_ANIMATION_STATE_UNKNOWN_FF
-    db  LINK_ANIMATION_STATE_UNKNOWN_FF, LINK_ANIMATION_STATE_UNKNOWN_FF
+    db  LINK_ANIMATION_STATE_NO_UPDATE, LINK_ANIMATION_STATE_NO_UPDATE
+    db  LINK_ANIMATION_STATE_NO_UPDATE, LINK_ANIMATION_STATE_NO_UPDATE
+    db  LINK_ANIMATION_STATE_NO_UPDATE, LINK_ANIMATION_STATE_NO_UPDATE
 
 LinkMotionFallingDownHandler::
     ld   a, $01                                   ; $50D4: $3E $01
@@ -2757,7 +2769,7 @@ jr_002_529C:
     jp   label_002_52B9                           ; $529C: $C3 $B9 $52
 
 jr_002_529F:
-    ld   e, LINK_ANIMATION_STATE_UNKNOWN_FF       ; $529F: $1E $FF
+    ld   e, LINK_ANIMATION_STATE_NO_UPDATE       ; $529F: $1E $FF
     ldh  a, [hFFB7]                               ; $52A1: $F0 $B7
     cp   $30                                      ; $52A3: $FE $30
     jr   c, .jr_002_52B5                          ; $52A5: $38 $0E

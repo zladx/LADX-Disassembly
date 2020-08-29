@@ -201,7 +201,7 @@ LINK_ANIMATION_STATE_UNKNOWN_6A            equ $6A
 LINK_ANIMATION_STATE_UNKNOWN_6B            equ $6B
 LINK_ANIMATION_STATE_GOT_ITEM              equ $6C
 LINK_ANIMATION_STATE_UNKNOWN_75            equ $75
-LINK_ANIMATION_STATE_UNKNOWN_FF            equ $FF
+LINK_ANIMATION_STATE_NO_UPDATE            equ $FF
 
 ; Values for wSwordDirection
 SWORD_DIRECTION_RIGHT        equ $00
@@ -222,7 +222,10 @@ SWORD_ANIMATION_STATE_SWING_END    equ $04
 SWORD_ANIMATION_STATE_HOLDING      equ $05
 
 ; Charge amount needed for spin attack
-MAX_SWORD_CHARGE equ $28
+MAX_SWORD_CHARGE          equ $28
+
+; Charge amount needed to run
+MAX_PEGASUS_BOOTS_CHARGE  equ $20
 
 ; Values for wTransitionGfx
 TRANSITION_GFX_NONE         equ $00 ; no transition
@@ -301,3 +304,12 @@ ONE_HEART equ $08
 
 ; how much time has to pass until the player can receive damage again
 DAMAGE_COOLDOWN_TIME equ $A0
+
+; power up values
+POWER_UP_NONE             equ 0
+POWER_UP_PIECE_OF_POWER   equ 1
+POWER_UP_GUARDIAN_ACCORN  equ 2
+
+; arrow values
+ARROW_MAX_ACTIVE_COUNT    equ 2 ; maximun amount of arrows in the air
+BOMB_ARROW_COOLDOWN       equ 6 ; number of frames, until bomb / arrow can be used again

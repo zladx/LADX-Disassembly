@@ -407,11 +407,11 @@ jr_001_531D::
     xor  a                                        ; $5375: $AF
     ldh  [hIsSideScrolling], a                    ; $5376: $E0 $F9
 
-    ld   a, $03                                   ; $5378: $3E $03
+    ld   a, DIRECTION_DOWN                        ; $5378: $3E $03
     ldh  [hLinkDirection], a                      ; $537A: $E0 $9E
 
     ld   a, [wSpawnIsIndoor]                      ; $537C: $FA $5F $DB
-    and  $01                                      ; $537F: $E6 $01
+    and  TRUE                                     ; $537F: $E6 $01
     ld   [wIsIndoor], a                           ; $5381: $EA $A5 $DB
 
     jr   z, .finish                               ; $5384: $28 $08
@@ -419,7 +419,7 @@ jr_001_531D::
     ld   a, LINK_ANIMATION_STATE_STANDING_UP      ; $5386: $3E $04
     ldh  [hLinkAnimationState], a                 ; $5388: $E0 $9D
 
-    ld   a, $02                                   ; $538A: $3E $02
+    ld   a, DIRECTION_UP                          ; $538A: $3E $02
     ldh  [hLinkDirection], a                      ; $538C: $E0 $9E
 
 .finish
@@ -451,7 +451,7 @@ jr_001_531D::
     ld   [wMapEntrancePositionY], a               ; $53BD: $EA $9E $DB
     xor  a                                        ; $53C0: $AF
     ldh  [hLinkAnimationState], a                 ; $53C1: $E0 $9D
-    ld   a, $03                                   ; $53C3: $3E $03
+    ld   a, DIRECTION_DOWN                        ; $53C3: $3E $03
     ldh  [hLinkDirection], a                      ; $53C5: $E0 $9E
     ld   a, $16                                   ; $53C7: $3E $16
     ld   [wWreckingBallRoom], a                   ; $53C9: $EA $6F $DB
@@ -2150,7 +2150,7 @@ CreateFollowingNpcEntity::
 .marinFallEnd
 
     ldh  a, [hLinkDirection]                      ; $60F7: $F0 $9E
-    ld   hl, $D1B5                                ; $60F9: $21 $B5 $D1
+    ld   hl, wD1B5                                ; $60F9: $21 $B5 $D1
     call .decrementConsecutiveBytes               ; $60FC: $CD $18 $61
     ld   a, [$DB10]                               ; $60FF: $FA $10 $DB
     and  a                                        ; $6102: $A7

@@ -1479,7 +1479,7 @@ func_028_48C1::
     jp   z, func_028_4BA7                       ; $48FC: $CA $A7 $4B
 
     ld   a, [$D199]                             ; $48FF: $FA $99 $D1
-    ld   [$D1B5], a                             ; $4902: $EA $B5 $D1
+    ld   [wD1B5], a                             ; $4902: $EA $B5 $D1
     and  a                                      ; $4905: $A7
     jr   z, .else_4928_28                       ; $4906: $28 $20
 
@@ -1492,7 +1492,7 @@ func_028_48C1::
     ld   hl, $D1AC                              ; $4911: $21 $AC $D1
     add  hl, bc                                 ; $4914: $09
     ld   a, [hl]                                ; $4915: $7E
-    ld   [$D1B5], a                             ; $4916: $EA $B5 $D1
+    ld   [wD1B5], a                             ; $4916: $EA $B5 $D1
     sla  c                                      ; $4919: $CB $21
     ld   b, $00                                 ; $491B: $06 $00
     ld   hl, $D19A                              ; $491D: $21 $9A $D1
@@ -1554,7 +1554,7 @@ func_028_48C1::
 
     ld   bc, $280                               ; $4978: $01 $80 $02
     ld   a, [$D199]                             ; $497B: $FA $99 $D1
-    ld   [$D1B5], a                             ; $497E: $EA $B5 $D1
+    ld   [wD1B5], a                             ; $497E: $EA $B5 $D1
     and  a                                      ; $4981: $A7
     jr   z, .else_49A1_28                       ; $4982: $28 $1D
 
@@ -1567,7 +1567,7 @@ func_028_48C1::
     ld   hl, $D1AC                              ; $498D: $21 $AC $D1
     add  hl, bc                                 ; $4990: $09
     ld   a, [hl]                                ; $4991: $7E
-    ld   [$D1B5], a                             ; $4992: $EA $B5 $D1
+    ld   [wD1B5], a                             ; $4992: $EA $B5 $D1
     sla  c                                      ; $4995: $CB $21
     ld   b, $00                                 ; $4997: $06 $00
     ld   hl, $D19A                              ; $4999: $21 $9A $D1
@@ -1814,7 +1814,7 @@ func_028_4B0F::
     call func_028_4A51                          ; $4B2A: $CD $51 $4A
     ld   a, [Data_028_4A8A]                     ; $4B2D: $FA $8A $4A
     ld   [$D1B7], a                             ; $4B30: $EA $B7 $D1
-    ld   a, [$D1B5]                             ; $4B33: $FA $B5 $D1
+    ld   a, [wD1B5]                             ; $4B33: $FA $B5 $D1
     ld   [$D1B8], a                             ; $4B36: $EA $B8 $D1
     pop  bc                                     ; $4B39: $C1
     ld   a, c                                   ; $4B3A: $79

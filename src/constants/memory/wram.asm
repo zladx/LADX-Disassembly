@@ -1594,7 +1594,11 @@ wD116::
 
 ; not used
 wD117::
-  ds $102 ; D117 - D218
+  ds $9E ; D117 - D1B4
+
+; Unlabeled
+wD1B5::
+  ds $64 ; D1B5 - D218
 
 ; Current form of the Final Nightmare (0-5)
 wFinalNightmareForm::

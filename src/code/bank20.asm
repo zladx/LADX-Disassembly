@@ -1070,10 +1070,10 @@ func_020_4B81::
     ld   hl, wEntitiesPrivateCountdown1Table      ; $4B81: $21 $F0 $C2
     add  hl, de                                   ; $4B84: $19
     ld   [hl], $10                                ; $4B85: $36 $10
+    ; reset wBombArrowCooldown if not allready zero
     ld   a, [wBombArrowCooldown]                  ; $4B87: $FA $C0 $C1
     and  a                                        ; $4B8A: $A7
     jp   z, label_020_4B9E                        ; $4B8B: $CA $9E $4B
-
     xor  a                                        ; $4B8E: $AF
     ld   [wBombArrowCooldown], a                  ; $4B8F: $EA $C0 $C1
 
@@ -1096,7 +1096,7 @@ ENDC
     ret                                           ; $4B9D: $C9
 
 label_020_4B9E:
-    ld   a, $06                                   ; $4B9E: $3E $06
+    ld   a, BOMB_ARROW_COOLDOWN                   ; $4B9E: $3E $06
     ld   [wBombArrowCooldown], a                  ; $4BA0: $EA $C0 $C1
     ld   a, e                                     ; $4BA3: $7B
     ld   [wC1C1], a                               ; $4BA4: $EA $C1 $C1
@@ -1794,7 +1794,7 @@ data_020_5407::
 
 func_020_54F5::
     ldh  a, [hLinkAnimationState]                 ; $54F5: $F0 $9D
-    cp   LINK_ANIMATION_STATE_UNKNOWN_FF          ; $54F7: $FE $FF
+    cp   LINK_ANIMATION_STATE_NO_UPDATE          ; $54F7: $FE $FF
     ret  z                                        ; $54F9: $C8
 
     ; Read the first byte in LinkAnimationStateTable

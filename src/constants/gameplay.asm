@@ -223,6 +223,8 @@ SWORD_ANIMATION_STATE_HOLDING      equ $05
 
 ; Charge amount needed for spin attack
 MAX_SWORD_CHARGE          equ $28
+; using spin attack max value
+USING_SPIN_ATTACK_MAX     equ $20
 
 ; Charge amount needed to run
 MAX_PEGASUS_BOOTS_CHARGE  equ $20
@@ -313,3 +315,6 @@ POWER_UP_GUARDIAN_ACCORN  equ 2
 ; arrow values
 ARROW_MAX_ACTIVE_COUNT    equ 2 ; maximun amount of arrows in the air
 BOMB_ARROW_COOLDOWN       equ 6 ; number of frames, until bomb / arrow can be used again
+
+; speed of the hookshot in x or y direction
+HOOKSHOT_CHAIN_SPEED      equ $30

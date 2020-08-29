@@ -1632,29 +1632,29 @@ ENDC
     ret                                           ; $5E96: $C9
 
 EntityPosXOffsetTable::
-.right   db $A0                                   ; $5E97
-.left    db $60                                   ; $5E98
+.right:  db $A0                                   ; $5E97
+.left:   db $60                                   ; $5E98
 .top     db $00                                   ; $5E99
 .bottom  db $00                                   ; $5E9A
 .default db $00                                   ; $5E9B
 
 EntityPosXSignTable::
-.right   db $00                                   ; $5E9C
-.left    db $FF                                   ; $5E9D
+.right:  db $00                                   ; $5E9C
+.left:   db $FF                                   ; $5E9D
 .top     db $00                                   ; $5E9E
 .bottom  db $00                                   ; $5E9F
 .default db $00                                   ; $5EA0
 
 EntityPosYOffsetTable::
-.right   db $00                                   ; $5EA1
-.left    db $00                                   ; $5EA2
+.right:  db $00                                   ; $5EA1
+.left:   db $00                                   ; $5EA2
 .top     db $80                                   ; $5EA3
 .bottom  db $80                                   ; $5EA4
 .default db $00                                   ; $5EA5
 
 EntityPosYSignTable::
-.right   db $00                                   ; $5EA6
-.left    db $00                                   ; $5EA7
+.right:  db $00                                   ; $5EA6
+.left:   db $00                                   ; $5EA7
 .top     db $FF                                   ; $5EA8
 .bottom  db $00                                   ; $5EA9
 .default db $00                                   ; $5EAA

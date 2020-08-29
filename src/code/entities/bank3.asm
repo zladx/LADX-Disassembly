@@ -3377,7 +3377,7 @@ SwordState1Handler::
     call SetEntitySpriteVariant                   ; $5BED: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $5BF0: $CD $05 $0C
     ld   [hl], $20                                ; $5BF3: $36 $20
-    ld   a, $20                                   ; $5BF5: $3E $20
+    ld   a, USING_SPIN_ATTACK_MAX                 ; $5BF5: $3E $20
     ld   [wIsUsingSpinAttack], a                  ; $5BF7: $EA $21 $C1
     ld   a, $03                                   ; $5BFA: $3E $03
     ldh  [hNoiseSfx], a                           ; $5BFC: $E0 $F4

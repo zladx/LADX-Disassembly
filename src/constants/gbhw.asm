@@ -32,14 +32,15 @@ SERIAL   EQU 3
 JOYPAD   EQU 4
 
 ; Joypad buttons mask
-J_RIGHT  EQU 1 << 0             ;  1
-J_LEFT   EQU 1 << 1             ;  2
-J_UP     EQU 1 << 2             ;  4
-J_DOWN   EQU 1 << 3             ;  8
-J_A      EQU 1 << 4             ; 10
-J_B      EQU 1 << 5             ; 20
-J_SELECT EQU 1 << 6             ; 40
-J_START  EQU 1 << 7             ; 80
+J_RIGHT          EQU 1 << 0     ;  1
+J_LEFT           EQU 1 << 1     ;  2
+J_UP             EQU 1 << 2     ;  4
+J_DOWN           EQU 1 << 3     ;  8
+J_A              EQU 1 << 4     ; 10
+J_B              EQU 1 << 5     ; 20
+J_SELECT         EQU 1 << 6     ; 40
+J_START          EQU 1 << 7     ; 80
+J_DIRECTION_MASK EQU $0F        ; filter A, B, Select and Start out
 
 ; Joypad button bits
 J_BIT_RIGHT  EQU 0

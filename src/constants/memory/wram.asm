@@ -178,7 +178,9 @@ wLinkGroundStatus::
 wConsecutiveStepsCount:
   ds 1 ; C120
 
-; TODO comment
+; Starts by $20 and counts down to 0.
+; 0 = False,
+; 1-20 = True
 wIsUsingSpinAttack::
   ds 1 ; C121
 
@@ -247,11 +249,12 @@ wBGOriginLow::
 wC130::
   ds 3 ; C130 - C132
 
-; 0x00 = no collision,
-; 0x03 = obstacle on top/bottom,
-; 0x04 = unknown,
-; 0x08 = unknown,
-; 0x0C = obstacle on left/right
+; type of collistion
+; Bit 0 = up,
+; Bit 1 = down,
+; Bit 2 = left,
+; Bit 3 = right,
+; Bit 4 = unknown
 wCollisionType::
   ds 1 ; C133
 

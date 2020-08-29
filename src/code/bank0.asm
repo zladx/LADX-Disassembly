@@ -2594,16 +2594,16 @@ label_1653::
     ret                                           ; $16B9: $C9
 
 LinkDirectionToSwordCollisionRangeX::
-.right db  $12                                    ; $16BA
-.left  db  $EE                                    ; $16BB
-.up    db  $FC                                    ; $16BC
-.down  db  4                                      ; $16BD
+.right: db  $12                                    ; $16BA
+.left:  db  $EE                                    ; $16BB
+.up:    db  $FC                                    ; $16BC
+.down:  db  4                                      ; $16BD
 
 LinkDirectionToSwordCollisionRangeY::
-.right db  4                                      ; $16BE
-.left  db  4                                      ; $16BF
-.up    db  $EE                                    ; $16C0
-.down  db  $12                                    ; $16C1
+.right: db  4                                      ; $16BE
+.left:  db  4                                      ; $16BF
+.up:    db  $EE                                    ; $16C0
+.down:  db  $12                                    ; $16C1
 
 ; Check sword collision with items lying on the ground
 CheckItemsSwordCollision::
@@ -2643,16 +2643,16 @@ CheckItemsSwordCollision::
     ret                                           ; $16FC: $C9
 
 XPositionIncrementPegasusRunning::
-.right db  $20                                    ; $16FD
-.left  db  $E0                                    ; $16FE
-.up    db  0                                      ; $16FF
-.down  db  0                                      ; $1700
+.right: db  $20                                    ; $16FD
+.left:  db  $E0                                    ; $16FE
+.up:    db  0                                      ; $16FF
+.down:  db  0                                      ; $1700
 
 YPositionIncrementPegasusRunning::
-.right db  0                                      ; $1701
-.left  db  0                                      ; $1702
-.up    db  $E0                                    ; $1703
-.down  db  $20                                    ; $1704
+.right: db  0                                      ; $1701
+.left:  db  0                                      ; $1702
+.up:    db  $E0                                    ; $1703
+.down:  db  $20                                    ; $1704
 
 UsePegasusBoots::
     ldh  a, [hIsSideScrolling]                    ; $1705: $F0 $F9
@@ -3445,24 +3445,24 @@ CopyDataAndDrawLinkSprite::
 
 ; Number of horizontal pixels the sword reaches in Link's direction when drawing the sword
 SwordAreaXForDirection::
-.right db $0C                                     ; $1F49
-.left  db $03                                     ; $1F4A
-.up    db $08                                     ; $1F4B
-.down  db $08                                     ; $1F4C
+.right: db $0C                                     ; $1F49
+.left:  db $03                                     ; $1F4A
+.up:    db $08                                     ; $1F4B
+.down:  db $08                                     ; $1F4C
 
 ; Number of vertical pixels the sword reaches in Link's direction when drawing the sword
 SwordAreaYForDirection::
-.right db $0A                                     ; $1F4D
-.left  db $0A                                     ; $1F4E
-.up    db $05                                     ; $1F4F
-.down  db $10                                     ; $1F50
+.right: db $0A                                     ; $1F4D
+.left:  db $0A                                     ; $1F4E
+.up:    db $05                                     ; $1F4F
+.down:  db $10                                     ; $1F50
 
 ; Array of constants for Link animation state
 LinkDirectionToLinkAnimationState_2::
-.right db  LINK_ANIMATION_STATE_UNKNOWN_36
-.left  db  LINK_ANIMATION_STATE_UNKNOWN_38
-.up    db  LINK_ANIMATION_STATE_UNKNOWN_3A
-.down  db  LINK_ANIMATION_STATE_UNKNOWN_3C                       ; $1F51
+.right: db  LINK_ANIMATION_STATE_UNKNOWN_36
+.left:  db  LINK_ANIMATION_STATE_UNKNOWN_38
+.up:    db  LINK_ANIMATION_STATE_UNKNOWN_3A
+.down:  db  LINK_ANIMATION_STATE_UNKNOWN_3C                       ; $1F51
 
 data_1F55::
     db   2, 1, 8, 4                               ; $1F55
@@ -3951,8 +3951,8 @@ func_21E1::
 ; Increment the BG map offset by this amount during room transition,
 ; depending on the transition direction.
 BGRegionIncrement::
-.right  db $10                                    ; $2205
-.left   db $10                                    ; $2206
+.right: db $10                                    ; $2205
+.left:  db $10                                    ; $2206
 .top    db $01                                    ; $2207
 .bottom db $01                                    ; $2208
 

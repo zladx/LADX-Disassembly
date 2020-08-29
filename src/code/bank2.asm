@@ -87,10 +87,16 @@ jr_002_4241:
     ret                                           ; $424B: $C9
 
 HookshotChainSpeedX::
-    db   $30, $D0, $00, $00
+.right: db   HOOKSHOT_CHAIN_SPEED
+.left:  db  -HOOKSHOT_CHAIN_SPEED
+.up:    db  0
+.down:  db  0
 
 HookshotChainSpeedY::
-    db   $00, $00, $D0, $30
+.right: db  0
+.left:  db  0
+.up:    db  -HOOKSHOT_CHAIN_SPEED
+.down:  db   HOOKSHOT_CHAIN_SPEED
 
 FireHookshot::
 IF __PATCH_0__
@@ -203,7 +209,7 @@ label_002_4287:
     call CheckItemsToUse                          ; $42D0: $CD $77 $11
     call func_002_44ED                            ; $42D3: $CD $ED $44
     call func_002_434A                            ; $42D6: $CD $4A $43
-    call func_002_478C                            ; $42D9: $CD $8C $47
+    call RotateLinkClockwise                      ; $42D9: $CD $8C $47
     call func_002_4B49                            ; $42DC: $CD $49 $4B
     call ApplyLinkMotionState                     ; $42DF: $CD $94 $17
     call func_002_4338                            ; $42E2: $CD $38 $43
@@ -253,8 +259,8 @@ label_002_4287:
     ld   a, [wC16E]                               ; $4324: $FA $6E $C1
     and  a                                        ; $4327: $A7
     jr   nz, .return2                             ; $4328: $20 $0D
-    ; TODO: comment
-    ld   a, $20                                   ; $432A: $3E $20
+    ; load wIsUsingSpinAttack with max value to track spin progress
+    ld   a, USING_SPIN_ATTACK_MAX                 ; $432A: $3E $20
     ld   [wIsUsingSpinAttack], a                  ; $432C: $EA $21 $C1
     ; play spin attack sound
     ld   a, NOISE_SFX_SPIN_ATTACK                 ; $432F: $3E $03
@@ -282,10 +288,10 @@ jr_002_4345:
 
 ; conversion table from view direction to animation state
 DirectionToLinkAnimationState::
-.right  db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_RIGHT    ; $4346 $11
-.left   db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT     ; $4346 $10
-.up     db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_UP       ; $4346 $0F
-.down   db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_DOWN     ; $4346 $0E
+.right: db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_RIGHT    ; $4346 $11
+.left:  db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT     ; $4346 $10
+.up:    db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_UP       ; $4346 $0F
+.down:  db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_DOWN     ; $4346 $0E
 
 func_002_434A::
     ld   a, [wC19B]                               ; $434A: $FA $9B $C1
@@ -769,6 +775,7 @@ LinkDirectionTo_wC143::
 
 ; convert the direction link is facing to sword direction
 LinkDirectionToSwordDirection::
+    ;   right                           left                        up                               down
     db  SWORD_DIRECTION_RIGHT,          SWORD_DIRECTION_TOP,        SWORD_DIRECTION_RIGHT_TOP,       SWORD_DIRECTION_RIGHT
     db  SWORD_DIRECTION_RIGHT_BOTTOM,   SWORD_DIRECTION_RIGHT,      SWORD_DIRECTION_RIGHT,           SWORD_DIRECTION_TOP
     db  SWORD_DIRECTION_LEFT_TOP,       SWORD_DIRECTION_LEFT,       SWORD_DIRECTION_LEFT_BOTTOM,     SWORD_DIRECTION_LEFT
@@ -778,6 +785,7 @@ LinkDirectionToSwordDirection::
 
 ; convert the sowrd direction to link animation state
 LinkDirectionToLinkAnimationState1::
+    ;   right                                       left                                        up                                          down
     db  LINK_ANIMATION_STATE_STANDING_DOWN,         LINK_ANIMATION_STATE_UNKNOWN_18,            LINK_ANIMATION_STATE_UNKNOWN_19,            LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_RIGHT
     db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_RIGHT,  LINK_ANIMATION_STATE_NO_UPDATE,             LINK_ANIMATION_STATE_STANDING_DOWN,         LINK_ANIMATION_STATE_UNKNOWN_16
     db  LINK_ANIMATION_STATE_UNKNOWN_17,            LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT,   LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT,   LINK_ANIMATION_STATE_NO_UPDATE
@@ -822,25 +830,27 @@ FrameCounterToLinkDirection::
 
 ; convert the direction link is facing to sword animation state
 LinkDirectionToSwordAnimationState::
-    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_START,   SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_START
-    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_START,   SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END
-    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_END,     SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_START
-    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_END,     SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END
-    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_START,   SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END
-    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_END,     SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END
-    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_END,     SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END
-    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_START,   SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END
+    ;   right                               left                                 up                                     down                                ; spin attack progress
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_START,   SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_START   ; 0°
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_START,   SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END     ; 45°
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_END,     SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_START   ; 90°
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_END,     SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END     ; 135°
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_START,   SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END     ; 180°
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_END,     SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END     ; 225°
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_END,     SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END     ; 270°
+    db  SWORD_ANIMATION_STATE_SWING_MIDDLE, SWORD_ANIMATION_STATE_SWING_START,   SWORD_ANIMATION_STATE_SWING_MIDDLE,    SWORD_ANIMATION_STATE_SWING_END     ; 315°
 
 ; convert the relative direction link is facing to absolute direction link is facing
 LinkDirectionToAbsolute::
-    db  DIRECTION_RIGHT,    DIRECTION_UP,       DIRECTION_UP,        DIRECTION_LEFT
-    db  DIRECTION_LEFT,     DIRECTION_DOWN,     DIRECTION_DOWN,      DIRECTION_RIGHT
-    db  DIRECTION_LEFT,     DIRECTION_UP,       DIRECTION_UP,        DIRECTION_RIGHT
-    db  DIRECTION_RIGHT,    DIRECTION_DOWN,     DIRECTION_DOWN,      DIRECTION_LEFT
-    db  DIRECTION_UP,       DIRECTION_RIGHT,    DIRECTION_RIGHT,     DIRECTION_DOWN
-    db  DIRECTION_DOWN,     DIRECTION_LEFT,     DIRECTION_LEFT,      DIRECTION_UP
-    db  DIRECTION_DOWN,     DIRECTION_LEFT,     DIRECTION_LEFT,      DIRECTION_UP
-    db  DIRECTION_UP,       DIRECTION_RIGHT,    DIRECTION_RIGHT,     DIRECTION_DOWN
+    ;   right               left                up                   down               ; spin attack progress
+    db  DIRECTION_RIGHT,    DIRECTION_UP,       DIRECTION_UP,        DIRECTION_LEFT     ;  0°
+    db  DIRECTION_LEFT,     DIRECTION_DOWN,     DIRECTION_DOWN,      DIRECTION_RIGHT    ;  45°
+    db  DIRECTION_LEFT,     DIRECTION_UP,       DIRECTION_UP,        DIRECTION_RIGHT    ;  90°
+    db  DIRECTION_RIGHT,    DIRECTION_DOWN,     DIRECTION_DOWN,      DIRECTION_LEFT     ;  135°
+    db  DIRECTION_UP,       DIRECTION_RIGHT,    DIRECTION_RIGHT,     DIRECTION_DOWN     ;  180°
+    db  DIRECTION_DOWN,     DIRECTION_LEFT,     DIRECTION_LEFT,      DIRECTION_UP       ;  225°
+    db  DIRECTION_DOWN,     DIRECTION_LEFT,     DIRECTION_LEFT,      DIRECTION_UP       ;  270°
+    db  DIRECTION_UP,       DIRECTION_RIGHT,    DIRECTION_RIGHT,     DIRECTION_DOWN     ;  315°
 
 label_002_4709:
     dec  a                                        ; $4709: $3D
@@ -857,8 +867,8 @@ label_002_4709:
     sla  a                                        ; $471B: $CB $27
     sla  a                                        ; $471D: $CB $27
     sla  a                                        ; $471F: $CB $27
-    ; e = hLinkDirection + wIsUsingSpinAttack
-    ; de = absolute direction in sword spin attack
+    ; e = (hLinkDirection<<3) + (wIsUsingSpinAttack >> 2)
+    ; de = absolute direction in sword spin attack 0° -> 315° in 45° interval
     add  e                                        ; $4721: $83
     ld   e, a                                     ; $4722: $5F
     ld   hl, LinkDirectionToSwordAnimationState   ; $4723: $21 $C9 $46
@@ -928,17 +938,20 @@ jr_002_4781:
 jr_002_4789:
     jp   label_002_4827                           ; $4789: $C3 $27 $48
 
-func_002_478C::
+RotateLinkClockwise::
     ld   a, [wD475]                               ; $478C: $FA $75 $D4
     and  a                                        ; $478F: $A7
     jr   z, .jr_002_47A3                           ; $4790: $28 $11
-
+    ; rotate Link every 4th frame clockwise
     ldh  a, [hFrameCounter]                       ; $4792: $F0 $E7
+    ; hFrameCounter/4
     rra                                           ; $4794: $1F
     rra                                           ; $4795: $1F
+    ; only 4 values needed for direction
     and  $03                                      ; $4796: $E6 $03
     ld   e, a                                     ; $4798: $5F
     ld   d, $00                                   ; $4799: $16 $00
+    ; translate to Link's view direction
     ld   hl, FrameCounterToLinkDirection          ; $479B: $21 $C5 $46
     add  hl, de                                   ; $479E: $19
     ld   a, [hl]                                  ; $479F: $7E
@@ -1159,17 +1172,17 @@ VerticalIncrementForLinkPosition::
 ; convert joypad input to Link's direction of view
 ; $0F = invalide input
 JoypadToLinkDirection::
-.none        db  DIRECTION_INVALIDE
-.right       db  DIRECTION_RIGHT
-.left        db  DIRECTION_LEFT
-.rightLeft   db  DIRECTION_INVALIDE
-.up          db  DIRECTION_UP
-.upRight     db  DIRECTION_INVALIDE
-.upLeft      db  DIRECTION_INVALIDE
-.upRightLeft db  DIRECTION_INVALIDE
-.down        db  DIRECTION_DOWN
-.downRight   db  DIRECTION_INVALIDE
-.downLeft    db  DIRECTION_INVALIDE
+.none:        db  DIRECTION_INVALIDE
+.right:       db  DIRECTION_RIGHT
+.left:        db  DIRECTION_LEFT
+.rightLeft:   db  DIRECTION_INVALIDE
+.up:          db  DIRECTION_UP
+.upRight:     db  DIRECTION_INVALIDE
+.upLeft:      db  DIRECTION_INVALIDE
+.upRightLeft: db  DIRECTION_INVALIDE
+.down:        db  DIRECTION_DOWN
+.downRight:   db  DIRECTION_INVALIDE
+.downLeft:    db  DIRECTION_INVALIDE
 
 ;
 ; hLinkAnimationState values for Link walking animation.
@@ -1273,7 +1286,7 @@ jr_002_49B6:
     ld   a, $01                                   ; $49B6: $3E $01
     ld   [wIsLinkInTheAir], a                     ; $49B8: $EA $46 $C1
     call CheckItemsToUse                          ; $49BB: $CD $77 $11
-    call func_002_478C                            ; $49BE: $CD $8C $47
+    call RotateLinkClockwise                      ; $49BE: $CD $8C $47
     ld   a, [wSwordAnimationState]                ; $49C1: $FA $37 $C1
     ld   [wC16A], a                               ; $49C4: $EA $6A $C1
     jp   ApplyLinkMotionState                     ; $49C7: $C3 $94 $17
@@ -1570,11 +1583,21 @@ func_002_4B49::
 .return:
     ret                                           ; $4BBF: $C9
 
-Data_002_4BC0::
-    db   $14, $FC, $08, $08
+; Convert the view direction of Link to an index offset in X direction.
+; used for sword collision detection
+LinkDirectionToAdjacentTileIndexX::
+.right: db  $14
+.left:  db  $FC
+.up:    db  $08
+.down:  db  $08
 
-Data_002_4BC4::
-    db   $0A, $0A, $FC, $14
+; Convert the view direction of Link to an index offset in Y direction.
+; used for sword collision detection
+LinkDirectionToAdjacentTileIndexY::
+.right: db  $0A
+.left:  db  $0A
+.up:    db  $FC
+.down:  db  $14
 
 func_002_4BC8::
     call func_002_4D20                            ; $4BC8: $CD $20 $4D
@@ -1824,6 +1847,11 @@ jr_002_4D1F:
     ret                                           ; $4D1F: $C9
 
 func_002_4D20::
+    ; jump to label_002_4D95 if one or more is true:
+    ;   - Link carry somethin
+    ;   - Link is in the air
+    ;   - Link is in motion
+    ;   - screen scrolling is happening
     ld   a, [wIsCarryingLiftedObject]             ; $4D20: $FA $5C $C1
     ld   hl, hLinkPositionZHigh                       ; $4D23: $21 $A2 $FF
     or   [hl]                                     ; $4D26: $B6
@@ -1836,7 +1864,7 @@ func_002_4D20::
     ldh  a, [hLinkDirection]                      ; $4D32: $F0 $9E
     ld   e, a                                     ; $4D34: $5F
     ld   d, $00                                   ; $4D35: $16 $00
-    ld   hl, Data_002_4BC0                        ; $4D37: $21 $C0 $4B
+    ld   hl, LinkDirectionToAdjacentTileIndexX    ; $4D37: $21 $C0 $4B
     add  hl, de                                   ; $4D3A: $19
     ldh  a, [hLinkPositionX]                      ; $4D3B: $F0 $98
     add  [hl]                                     ; $4D3D: $86
@@ -1845,7 +1873,7 @@ func_002_4D20::
     ldh  [hSwordIntersectedAreaX], a              ; $4D42: $E0 $CE
     swap a                                        ; $4D44: $CB $37
     ld   c, a                                     ; $4D46: $4F
-    ld   hl, Data_002_4BC4                        ; $4D47: $21 $C4 $4B
+    ld   hl, LinkDirectionToAdjacentTileIndexY    ; $4D47: $21 $C4 $4B
     add  hl, de                                   ; $4D4A: $19
     ldh  a, [hLinkPositionY]                      ; $4D4B: $F0 $99
     add  [hl]                                     ; $4D4D: $86
@@ -2600,7 +2628,7 @@ jr_002_518E:
     ld   [hl+], a                                 ; $519F: $22
     ld   a, $24                                   ; $51A0: $3E $24
     ld   [wDBC8], a                               ; $51A2: $EA $C8 $DB
-    ld   a, $03                                   ; $51A5: $3E $03
+    ld   a, DIRECTION_DOWN                        ; $51A5: $3E $03
     ldh  [hLinkDirection], a                      ; $51A7: $E0 $9E
     jp   ApplyMapFadeOutTransition                ; $51A9: $C3 $83 $0C
 
@@ -2816,53 +2844,66 @@ func_002_52D6::
 jr_002_52DF:
     ret                                           ; $52DF: $C9
 
-Data_002_52E0::
-    db   $0D, $F3, $00, $FF, $08, $F8, $0C, $F5
+; convert Link's view direction to ???
+LinkDirectionTohMultiPurpose1::
+    ;   right   left    up      down
+    db  $0D,    $F3,    $00,    $FF
+    db  $08,    $F8,    $0C,    $F5
 
-Data_002_52E8::
-    db   $00, $00, $F3, $0E, $F3, $F3, $FC, $00
+; convert Link's view direction to ???
+LinkDirectionTohMultiPurpose0::
+    ;   right   left    up      down
+    db  $00,    $00,    $F3,    $0E
+    db  $F3,    $F3,    $FC,    $00
 
-Data_002_52F0::
-    db   $06, $08, $08, $06, $04, $FF, $FF, $04, $04, $FF, $FF, $04, $06, $08, $08, $06
+; convert Link's view direction to ???
+LinkDirectionTohMultiPurpose2_3::
+    ;   right       left        up          down
+    db  $06, $08,   $08, $06,   $04, $FF,   $FF, $04
+    db  $04, $FF,   $FF, $04,   $06, $08,   $08, $06
 
-Data_002_5300::
-    db   $02, $02, $22, $22, $22, $02, $02, $42, $22, $02, $02, $22, $02, $02, $22, $22
+; convert Link's view direction to ???
+LinkDirectionTohMultiPurpose4_5::
+    ;   right       left        up          down
+    db  $02, $02,   $22, $22,   $22, $02,   $02, $42
+    db  $22, $02,   $02, $22,   $02, $02,   $22, $22
 
-label_002_5310:
+label_002_5310::
+    ; TODO label and also add row comment for data above
     ld   a, [wC19B]                               ; $5310: $FA $9B $C1
     and  $7F                                      ; $5313: $E6 $7F
     cp   $08                                      ; $5315: $FE $08
     ldh  a, [hLinkDirection]                      ; $5317: $F0 $9E
-    jr   c, jr_002_531D                           ; $5319: $38 $02
+    jr   c, .skipOffset                           ; $5319: $38 $02
 
     add  $04                                      ; $531B: $C6 $04
 
-jr_002_531D:
+.skipOffset::
     ld   e, a                                     ; $531D: $5F
     ld   d, $00                                   ; $531E: $16 $00
-    ld   hl, Data_002_52E8                        ; $5320: $21 $E8 $52
+    ld   hl, LinkDirectionTohMultiPurpose0        ; $5320: $21 $E8 $52
     add  hl, de                                   ; $5323: $19
     ld   a, [hl]                                  ; $5324: $7E
-    ldh  [hMultiPurpose0], a                           ; $5325: $E0 $D7
-    ld   hl, Data_002_52E0                        ; $5327: $21 $E0 $52
+    ldh  [hMultiPurpose0], a                      ; $5325: $E0 $D7
+    ld   hl, LinkDirectionTohMultiPurpose1        ; $5327: $21 $E0 $52
     add  hl, de                                   ; $532A: $19
     ld   a, [hl]                                  ; $532B: $7E
-    ldh  [hMultiPurpose1], a                           ; $532C: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $532C: $E0 $D8
     sla  e                                        ; $532E: $CB $23
-    ld   hl, Data_002_52F0                        ; $5330: $21 $F0 $52
+    ld   hl, LinkDirectionTohMultiPurpose2_3      ; $5330: $21 $F0 $52
     add  hl, de                                   ; $5333: $19
     ld   a, [hl+]                                 ; $5334: $2A
-    ldh  [hMultiPurpose2], a                           ; $5335: $E0 $D9
+    ldh  [hMultiPurpose2], a                      ; $5335: $E0 $D9
     ld   a, [hl]                                  ; $5337: $7E
-    ldh  [hMultiPurpose3], a                           ; $5338: $E0 $DA
-    ld   hl, Data_002_5300                        ; $533A: $21 $00 $53
+    ldh  [hMultiPurpose3], a                      ; $5338: $E0 $DA
+    ld   hl, LinkDirectionTohMultiPurpose4_5      ; $533A: $21 $00 $53
     add  hl, de                                   ; $533D: $19
     ld   a, [hl+]                                 ; $533E: $2A
-    ldh  [hMultiPurpose4], a                           ; $533F: $E0 $DB
+    ldh  [hMultiPurpose4], a                      ; $533F: $E0 $DB
     ld   a, [hl]                                  ; $5341: $7E
-    ldh  [hMultiPurpose5], a                           ; $5342: $E0 $DC
-    ld   de, wLinkOAMBuffer+$10                                ; $5344: $11 $10 $C0
-    ld   bc, wLinkOAMBuffer+$14                                ; $5347: $01 $14 $C0
+    ldh  [hMultiPurpose5], a                      ; $5342: $E0 $DC
+    ld   de, wLinkOAMBuffer+$10                   ; $5344: $11 $10 $C0
+    ld   bc, wLinkOAMBuffer+$14                   ; $5347: $01 $14 $C0
     ld   a, [wC145]                               ; $534A: $FA $45 $C1
     ld   hl, wC13B                                ; $534D: $21 $3B $C1
     add  [hl]                                     ; $5350: $86
@@ -2876,7 +2917,7 @@ jr_002_531D:
     ld   a, [hl]                                  ; $535C: $7E
     ld   [de], a                                  ; $535D: $12
 
-jr_002_535E:
+jr_002_535E::
     ldh  a, [hMultiPurpose3]                           ; $535E: $F0 $DA
     cp   $FF                                      ; $5360: $FE $FF
     jr   z, jr_002_5366                           ; $5362: $28 $02
@@ -2884,7 +2925,7 @@ jr_002_535E:
     ld   a, [hl]                                  ; $5364: $7E
     ld   [bc], a                                  ; $5365: $02
 
-jr_002_5366:
+jr_002_5366::
     inc  de                                       ; $5366: $13
     inc  bc                                       ; $5367: $03
     ldh  a, [hMultiPurpose1]                           ; $5368: $F0 $D8
@@ -2907,24 +2948,30 @@ jr_002_5366:
     ld   [bc], a                                  ; $5381: $02
     ret                                           ; $5382: $C9
 
-Data_002_5383::
-    db   $04, $FC, $FC, $04
+LinkDirectionToEntitiesPositionX::
+.right: db   4
+.left:  db  -4
+.up:    db  -4
+.down:  db   4
 
-Data_002_5387::
-    db   $04, $04, $FC, $04
+LinkDirectionToEntitiesPositionY::
+.right: db   4
+.left:  db   4
+.up:    db  -4
+.down:  db   4
 
 label_002_538B:
     ldh  a, [hLinkDirection]                      ; $538B: $F0 $9E
     ld   c, a                                     ; $538D: $4F
     ld   b, $00                                   ; $538E: $06 $00
-    ld   hl, Data_002_5383                        ; $5390: $21 $83 $53
+    ld   hl, LinkDirectionToEntitiesPositionX     ; $5390: $21 $83 $53
     add  hl, bc                                   ; $5393: $09
     ldh  a, [hLinkPositionX]                      ; $5394: $F0 $98
     add  [hl]                                     ; $5396: $86
     ld   hl, wEntitiesPosXTable                   ; $5397: $21 $00 $C2
     add  hl, de                                   ; $539A: $19
     ld   [hl], a                                  ; $539B: $77
-    ld   hl, Data_002_5387                        ; $539C: $21 $87 $53
+    ld   hl, LinkDirectionToEntitiesPositionY     ; $539C: $21 $87 $53
     add  hl, bc                                   ; $539F: $09
     ldh  a, [hLinkPositionY]                      ; $53A0: $F0 $99
     add  [hl]                                     ; $53A2: $86
@@ -5372,7 +5419,7 @@ jr_002_69F1:
 jr_002_69F3:
     call func_002_6B56                            ; $69F3: $CD $56 $6B
     ld   a, [wCollisionType]                      ; $69F6: $FA $33 $C1
-    and  $08                                      ; $69F9: $E6 $08
+    and  COLLISION_TYPE_RIGHT                     ; $69F9: $E6 $08
     jr   z, jr_002_6A00                           ; $69FB: $28 $03
 
     xor  a                                        ; $69FD: $AF
@@ -5432,7 +5479,7 @@ jr_002_6A4C:
     jr   nz, jr_002_6A94                          ; $6A50: $20 $42
 
     ld   a, [wCollisionType]                      ; $6A52: $FA $33 $C1
-    and  $08                                      ; $6A55: $E6 $08
+    and  COLLISION_TYPE_RIGHT                     ; $6A55: $E6 $08
     jr   nz, jr_002_6A94                          ; $6A57: $20 $3B
 
     ld   a, [wIsLinkInTheAir]                     ; $6A59: $FA $46 $C1
@@ -5542,14 +5589,14 @@ jr_002_6AE6:
     call UpdateFinalLinkPosition                  ; $6AE6: $CD $A8 $21
     ld   hl, hLinkDirection                       ; $6AE9: $21 $9E $FF
     ldh  a, [hPressedButtonsMask]                 ; $6AEC: $F0 $CB
-    and  $0F                                      ; $6AEE: $E6 $0F
-    cp   $04                                      ; $6AF0: $FE $04
+    and  J_DIRECTION_MASK                         ; $6AEE: $E6 $0F
+    cp   J_UP                                     ; $6AF0: $FE $04
     jr   nz, jr_002_6AF6                          ; $6AF2: $20 $02
 
     ld   [hl], $02                                ; $6AF4: $36 $02
 
 jr_002_6AF6:
-    cp   $08                                      ; $6AF6: $FE $08
+    cp   J_DOWN                                   ; $6AF6: $FE $08
     jr   nz, jr_002_6AFC                          ; $6AF8: $20 $02
 
     ld   [hl], $03                                ; $6AFA: $36 $03
@@ -5628,8 +5675,12 @@ jr_002_6B55:
 func_002_6B56::
     ret                                           ; $6B56: $C9
 
-Data_002_6B57::
-    db   $01, $02, $04, $08, $10
+AddedCollisionType::
+    db  COLLISION_TYPE_UP
+    db  COLLISION_TYPE_DOWN
+    db  COLLISION_TYPE_LEFT
+    db  COLLISION_TYPE_RIGHT
+    db  COLLISION_TYPE_UNKNOWN_10
 
 Data_002_6B5C::
     db   $0B, $05, $08, $08, $08
@@ -5712,12 +5763,13 @@ jr_002_6BAC:
 
 jr_002_6BD1:
     ld   a, [wCollisionType]                      ; $6BD1: $FA $33 $C1
-    and  $08                                      ; $6BD4: $E6 $08
+    and  COLLISION_TYPE_RIGHT                     ; $6BD4: $E6 $08
     jr   z, jr_002_6BEB                           ; $6BD6: $28 $13
 
 jr_002_6BD8:
+    ; add collision type COLLISION_TYPE_RIGHT
     ld   a, [wCollisionType]                      ; $6BD8: $FA $33 $C1
-    or   $08                                      ; $6BDB: $F6 $08
+    or   COLLISION_TYPE_RIGHT                     ; $6BDB: $F6 $08
     ld   [wCollisionType], a                      ; $6BDD: $EA $33 $C1
     xor  a                                        ; $6BE0: $AF
     ldh  [hLinkPositionYIncrement], a             ; $6BE1: $E0 $9B
@@ -5728,7 +5780,7 @@ jr_002_6BD8:
 
 jr_002_6BEB:
     ld   a, [wCollisionType]                      ; $6BEB: $FA $33 $C1
-    and  $04                                      ; $6BEE: $E6 $04
+    and  COLLISION_TYPE_LEFT                      ; $6BEE: $E6 $04
     jr   z, jr_002_6BF6                           ; $6BF0: $28 $04
 
     ldh  a, [hLinkFinalPositionY]                 ; $6BF2: $F0 $A0
@@ -5736,7 +5788,7 @@ jr_002_6BEB:
 
 jr_002_6BF6:
     ld   a, [wCollisionType]                      ; $6BF6: $FA $33 $C1
-    and  $03                                      ; $6BF9: $E6 $03
+    and  COLLISION_TYPE_VERTICAL                  ; $6BF9: $E6 $03
     ret  z                                        ; $6BFB: $C8
 
     ldh  a, [hLinkFinalPositionX]                 ; $6BFC: $F0 $9F
@@ -5759,7 +5811,7 @@ jr_002_6BF6:
     ld   a, $20                                   ; $6C1C: $3E $20
     ld   [wC157], a                               ; $6C1E: $EA $57 $C1
     ldh  a, [hLinkDirection]                      ; $6C21: $F0 $9E
-    and  $02                                      ; $6C23: $E6 $02
+    and  DIRECTION_VERTICAL_MASK                  ; $6C23: $E6 $02
     sla  a                                        ; $6C25: $CB $27
     ld   [wC158], a                               ; $6C27: $EA $58 $C1
     ld   a, JINGLE_HUGE_BUMP                      ; $6C2A: $3E $0B
@@ -5803,7 +5855,7 @@ func_002_6C2F::
     jr   nz, jr_002_6C74                          ; $6C67: $20 $0B
 
 func_002_6C69::
-    ld   hl, Data_002_6B57                        ; $6C69: $21 $57 $6B
+    ld   hl, AddedCollisionType                        ; $6C69: $21 $57 $6B
     add  hl, bc                                   ; $6C6C: $09
     ld   a, [wCollisionType]                      ; $6C6D: $FA $33 $C1
     or   [hl]                                     ; $6C70: $B6
@@ -6177,8 +6229,11 @@ Data_002_6E27::
 Data_002_6E29::
     db   $01, $02, $04, $08, $01, $02, $04, $08
 
-Data_002_6E31::
-    db   $02, $02, $00, $00, $03, $03, $01, $01
+LinkDirectionCompareDirection::
+    db  DIRECTION_UP,       DIRECTION_UP
+    db  DIRECTION_RIGHT,    DIRECTION_RIGHT
+    db  DIRECTION_DOWN,     DIRECTION_DOWN
+    db  DIRECTION_LEFT,     DIRECTION_LEFT
 
 Data_002_6E39::
     db   $00, $01, $FF, $00
@@ -6286,7 +6341,7 @@ jr_002_6EB5:
 
 jr_002_6EC6:
     ld   a, [wCollisionType]                      ; $6EC6: $FA $33 $C1
-    and  $03                                      ; $6EC9: $E6 $03
+    and  COLLISION_TYPE_VERTICAL                  ; $6EC9: $E6 $03
     jr   z, jr_002_6EDD                           ; $6ECB: $28 $10
 
     ld   e, a                                     ; $6ECD: $5F
@@ -6331,7 +6386,7 @@ jr_002_6EF6:
     jr   nz, jr_002_6EF6                          ; $6EFF: $20 $F5
 
     ld   a, [wCollisionType]                      ; $6F01: $FA $33 $C1
-    and  $0C                                      ; $6F04: $E6 $0C
+    and  COLLISION_TYPE_HORIZONTAL                ; $6F04: $E6 $0C
     jr   z, jr_002_6F1C                           ; $6F06: $28 $14
 
     srl  a                                        ; $6F08: $CB $3F
@@ -6431,7 +6486,7 @@ func_002_6F2C::
     jp   nz, label_002_7045                       ; $6F9F: $C2 $45 $70
 
     ldh  a, [hLinkDirection]                      ; $6FA2: $F0 $9E
-    cp   $02                                      ; $6FA4: $FE $02
+    cp   DIRECTION_UP                             ; $6FA4: $FE $02
     jp   nz, label_002_703B                       ; $6FA6: $C2 $3B $70
 
     ldh  a, [hRoomStatus]                         ; $6FA9: $F0 $F8
@@ -7013,7 +7068,7 @@ jr_002_72FA:
     cp   $05                                      ; $7303: $FE $05
     jr   nz, jr_002_7330                          ; $7305: $20 $29
 
-    ld   hl, Data_002_6E31                        ; $7307: $21 $31 $6E
+    ld   hl, LinkDirectionCompareDirection        ; $7307: $21 $31 $6E
     add  hl, bc                                   ; $730A: $09
     ldh  a, [hLinkDirection]                      ; $730B: $F0 $9E
     cp   [hl]                                     ; $730D: $BE
@@ -7342,13 +7397,13 @@ label_002_74AD:
     ret  nz                                       ; $74B7: $C0
 
     ld   a, [wCollisionType]                      ; $74B8: $FA $33 $C1
-    and  $03                                      ; $74BB: $E6 $03
-    cp   $03                                      ; $74BD: $FE $03
+    and  COLLISION_TYPE_VERTICAL                  ; $74BB: $E6 $03
+    cp   COLLISION_TYPE_VERTICAL                  ; $74BD: $FE $03
     jr   z, jr_002_74C9                           ; $74BF: $28 $08
 
     ld   a, [wCollisionType]                      ; $74C1: $FA $33 $C1
-    and  $0C                                      ; $74C4: $E6 $0C
-    cp   $0C                                      ; $74C6: $FE $0C
+    and  COLLISION_TYPE_HORIZONTAL                ; $74C4: $E6 $0C
+    cp   COLLISION_TYPE_HORIZONTAL                ; $74C6: $FE $0C
     ret  nz                                       ; $74C8: $C0
 
 jr_002_74C9:

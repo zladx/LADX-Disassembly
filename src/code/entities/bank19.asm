@@ -3974,7 +3974,7 @@ jr_019_5B75:
 
 jr_019_5B89:
     ld   a, [wCollisionType]                      ; $5B89: $FA $33 $C1
-    and  $03                                      ; $5B8C: $E6 $03
+    and  COLLISION_TYPE_VERTICAL                  ; $5B8C: $E6 $03
     jr   z, jr_019_5B93                           ; $5B8E: $28 $03
 
     xor  a                                        ; $5B90: $AF
@@ -3982,7 +3982,7 @@ jr_019_5B89:
 
 jr_019_5B93:
     ld   a, [wCollisionType]                      ; $5B93: $FA $33 $C1
-    and  $0C                                      ; $5B96: $E6 $0C
+    and  COLLISION_TYPE_HORIZONTAL                ; $5B96: $E6 $0C
     jr   z, jr_019_5B9D                           ; $5B98: $28 $03
 
     xor  a                                        ; $5B9A: $AF

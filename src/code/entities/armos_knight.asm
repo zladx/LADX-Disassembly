@@ -119,7 +119,7 @@ jr_006_5387:
 
     ld   a, $02                                   ; $538C: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $538E: $E0 $A1
-    ld   a, $6A                                   ; $5390: $3E $6A
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_6A       ; $5390: $3E $6A
     ldh  [hLinkAnimationState], a                 ; $5392: $E0 $9D
 
 jr_006_5394:

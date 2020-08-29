@@ -626,7 +626,7 @@ TarinShield2Handler::
 
     ld   a, $01                                   ; $4CD5: $3E $01
     ld   [wShieldLevel], a                        ; $4CD7: $EA $44 $DB
-    ld   a, $22                                   ; $4CDA: $3E $22
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_22       ; $4CDA: $3E $22
     ldh  [hLinkAnimationState], a                 ; $4CDC: $E0 $9D
     call_open_dialog $091                         ; $4CDE
     jp   IncrementEntityState                     ; $4CE3: $C3 $12 $3B
@@ -642,7 +642,7 @@ jr_005_4CE6:
     ld   de, data_005_4cc6                        ; $4CF3: $11 $C6 $4C
     call RenderActiveEntitySprite                 ; $4CF6: $CD $77 $3C
     call CopyEntityPositionToActivePosition       ; $4CF9: $CD $8A $3D
-    ld   a, $6C                                   ; $4CFC: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $4CFC: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $4CFE: $E0 $9D
     ld   a, $02                                   ; $4D00: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4D02: $E0 $A1

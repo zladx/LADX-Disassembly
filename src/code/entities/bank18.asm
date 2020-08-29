@@ -314,7 +314,7 @@ jr_018_427D:
     call func_018_4087                            ; $4284: $CD $87 $40
 
 jr_018_4287:
-    ld   a, $6C                                   ; $4287: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $4287: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $4289: $E0 $9D
     ld   a, $02                                   ; $428B: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $428D: $E0 $A1
@@ -900,7 +900,7 @@ jr_018_476A:
     call_open_dialog $188                         ; $476F
 
 jr_018_4774:
-    ld   a, $6C                                   ; $4774: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $4774: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $4776: $E0 $9D
     ld   a, $02                                   ; $4778: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $477A: $E0 $A1
@@ -2198,7 +2198,7 @@ func_018_50D2::
     ld   a, $02                                   ; $50D2: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $50D4: $E0 $A1
     ld   [wC167], a                               ; $50D6: $EA $67 $C1
-    ld   a, $04                                   ; $50D9: $3E $04
+    ld   a, LINK_ANIMATION_STATE_STANDING_UP      ; $50D9: $3E $04
     ldh  [hLinkAnimationState], a                 ; $50DB: $E0 $9D
     xor  a                                        ; $50DD: $AF
     ld   [wC19B], a                               ; $50DE: $EA $9B $C1
@@ -2675,7 +2675,7 @@ ENDC
 
     ld   a, $02                                   ; $541C: $3E $02
     ldh  [hFFBA], a                               ; $541E: $E0 $BA
-    ld   a, $3A                                   ; $5420: $3E $3A
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_3A       ; $5420: $3E $3A
     ldh  [hLinkAnimationState], a                 ; $5422: $E0 $9D
     ld   a, $02                                   ; $5424: $3E $02
     ldh  [hLinkDirection], a                      ; $5426: $E0 $9E
@@ -3479,7 +3479,7 @@ jr_018_5A18:
     ld   [wEntitiesSpriteVariantTable], a         ; $5A19: $EA $B0 $C3
     ld   de, Data_018_59B8                        ; $5A1C: $11 $B8 $59
     call RenderActiveEntitySpritesPair            ; $5A1F: $CD $C0 $3B
-    ld   a, $6C                                   ; $5A22: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $5A22: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $5A24: $E0 $9D
     ld   a, $02                                   ; $5A26: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5A28: $E0 $A1
@@ -3693,7 +3693,7 @@ jr_018_5B55:
 jr_018_5B61:
     ld   a, $02                                   ; $5B61: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5B63: $E0 $A1
-    ld   a, $6A                                   ; $5B65: $3E $6A
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_6A       ; $5B65: $3E $6A
     ldh  [hLinkAnimationState], a                 ; $5B67: $E0 $9D
     ret                                           ; $5B69: $C9
 
@@ -5181,7 +5181,7 @@ jr_018_64FC:
 
     ld   a, $02                                   ; $64FF: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $6501: $E0 $A1
-    ld   a, $6A                                   ; $6503: $3E $6A
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_6A       ; $6503: $3E $6A
     ldh  [hLinkAnimationState], a                 ; $6505: $E0 $9D
     call func_018_69C5                            ; $6507: $CD $C5 $69
 

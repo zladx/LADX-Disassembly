@@ -434,13 +434,12 @@ jr_005_50D2:
     cp   $1D                                      ; $50D2: $FE $1D
     ret  c                                        ; $50D4: $D8
 
-    ld   a, $00                                   ; $50D5: $3E $00
+    ld   a, LINK_ANIMATION_STATE_STANDING_DOWN    ; $50D5: $3E $00
     ldh  [hLinkAnimationState], a                 ; $50D7: $E0 $9D
     ldh  a, [hFrameCounter]                       ; $50D9: $F0 $E7
-    ld   e, $75                                   ; $50DB: $1E $75
+    ld   e, LINK_ANIMATION_STATE_UNKNOWN_75       ; $50DB: $1E $75
     and  $40                                      ; $50DD: $E6 $40
     jr   z, jr_005_50E2                           ; $50DF: $28 $01
-
     inc  e                                        ; $50E1: $1C
 
 jr_005_50E2:
@@ -572,7 +571,7 @@ jr_005_5197:
     call OpenDialog                               ; $519E: $CD $85 $23
 
 jr_005_51A1:
-    ld   a, $6C                                   ; $51A1: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $51A1: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $51A3: $E0 $9D
     ld   a, $02                                   ; $51A5: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $51A7: $E0 $A1
@@ -724,7 +723,7 @@ func_005_52AF::
     ldh  [hLinkPositionY], a                      ; $52BB: $E0 $99
     ld   a, $02                                   ; $52BD: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $52BF: $E0 $A1
-    ld   a, $FF                                   ; $52C1: $3E $FF
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_FF       ; $52C1: $3E $FF
     ldh  [hLinkAnimationState], a                 ; $52C3: $E0 $9D
     ld   de, Data_005_5258                        ; $52C5: $11 $58 $52
     call RenderActiveEntitySpritesPair            ; $52C8: $CD $C0 $3B

@@ -1,5 +1,8 @@
-Data_18_7BDF::
-    db $11, $10, $0F, $0E
+LinkDirectionToLinkAnimationState_3::
+.right db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_RIGHT
+.left  db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_LEFT
+.up    db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_UP
+.down  db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_DOWN
 
 HookshotChainEntityHandler::
     ld   a, [wLinkPlayingOcarinaCountdown]        ; $7BE3
@@ -19,7 +22,7 @@ HookshotChainEntityHandler::
     ldh  a, [hLinkDirection]                      ; $7C00: $F0 $9E
     ld   e, a                                     ; $7C02: $5F
     ld   d, $00                                   ; $7C03: $16 $00
-    ld   hl, Data_18_7BDF                         ; $7C05: $21 $DF $7B
+    ld   hl, LinkDirectionToLinkAnimationState_3  ; $7C05: $21 $DF $7B
     add  hl, de                                   ; $7C08: $19
     ld   a, [hl]                                  ; $7C09: $7E
     ldh  [hLinkAnimationState], a                 ; $7C0A: $E0 $9D

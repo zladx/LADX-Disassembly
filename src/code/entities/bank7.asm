@@ -501,7 +501,7 @@ func_007_4356::
     jp   nc, func_007_44DC                        ; $4359: $D2 $DC $44
 
     ldh  a, [hLinkAnimationState]                 ; $435C: $F0 $9D
-    cp   $06                                      ; $435E: $FE $06
+    cp   LINK_ANIMATION_STATE_STANDING_LEFT       ; $435E: $FE $06
     jp   nz, func_007_44DC                        ; $4360: $C2 $DC $44
 
     call func_007_434E                            ; $4363: $CD $4E $43
@@ -606,18 +606,18 @@ jr_007_43D7:
 
 func_007_43FD::
     push bc                                       ; $43FD: $C5
-    ld   bc, wOAMBuffer+$10                                ; $43FE: $01 $10 $C0
+    ld   bc, wOAMBuffer+$10                       ; $43FE: $01 $10 $C0
     ldh  a, [hLinkPositionY]                      ; $4401: $F0 $99
-    ldh  [hMultiPurpose0], a                           ; $4403: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $4403: $E0 $D7
     ldh  a, [hLinkPositionX]                      ; $4405: $F0 $98
-    ldh  [hMultiPurpose1], a                           ; $4407: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $4407: $E0 $D8
     ld   a, $06                                   ; $4409: $3E $06
-    ldh  [hMultiPurpose2], a                           ; $440B: $E0 $D9
+    ldh  [hMultiPurpose2], a                      ; $440B: $E0 $D9
     ld   h, $F0                                   ; $440D: $26 $F0
     ld   l, $FC                                   ; $440F: $2E $FC
-    call func_1819                               ; $4411: $CD $19 $18
+    call func_1819                                ; $4411: $CD $19 $18
     pop  bc                                       ; $4414: $C1
-    ld   a, $6C                                   ; $4415: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $4415: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $4417: $E0 $9D
     ret                                           ; $4419: $C9
 
@@ -717,7 +717,7 @@ func_007_44B0::
     jr   nc, func_007_44DC                        ; $44B3: $30 $27
 
     ldh  a, [hLinkAnimationState]                 ; $44B5: $F0 $9D
-    cp   $58                                      ; $44B7: $FE $58
+    cp   LINK_ANIMATION_STATE_UNKNOWN_58          ; $44B7: $FE $58
     jr   c, jr_007_44BF                           ; $44B9: $38 $04
 
     cp   $5E                                      ; $44BB: $FE $5E
@@ -3299,11 +3299,11 @@ jr_007_55DF:
     add  hl, bc                                   ; $55E8: $09
     sub  $10                                      ; $55E9: $D6 $10
     ld   [hl], a                                  ; $55EB: $77
-    ldh  a, [hLinkPositionZHigh]                      ; $55EC: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                  ; $55EC: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $55EE: $21 $10 $C3
     add  hl, bc                                   ; $55F1: $09
     ld   [hl], a                                  ; $55F2: $77
-    ld   a, $6C                                   ; $55F3: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $55F3: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $55F5: $E0 $9D
     ld   a, $02                                   ; $55F7: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $55F9: $E0 $A1

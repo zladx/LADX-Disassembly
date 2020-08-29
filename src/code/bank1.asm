@@ -416,7 +416,7 @@ jr_001_531D::
 
     jr   z, .finish                               ; $5384: $28 $08
 
-    ld   a, $04                                   ; $5386: $3E $04
+    ld   a, LINK_ANIMATION_STATE_STANDING_UP      ; $5386: $3E $04
     ldh  [hLinkAnimationState], a                 ; $5388: $E0 $9D
 
     ld   a, $02                                   ; $538A: $3E $02

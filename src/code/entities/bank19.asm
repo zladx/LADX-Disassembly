@@ -103,7 +103,7 @@ jr_019_40AD:
     ldh  a, [hLinkDirection]                      ; $40BA: $F0 $9E
     ld   e, a                                     ; $40BC: $5F
     ld   d, $00                                   ; $40BD: $16 $00
-    ld   hl, data_1F51                            ; $40BF: $21 $51 $1F
+    ld   hl, LinkDirectionToLinkAnimationState_2  ; $40BF: $21 $51 $1F
     add  hl, de                                   ; $40C2: $19
     ld   a, [hl]                                  ; $40C3: $7E
     ldh  [hLinkAnimationState], a                 ; $40C4: $E0 $9D
@@ -1002,11 +1002,11 @@ jr_019_476A:
     ldh  a, [hLinkPositionY]                      ; $476E: $F0 $99
     sub  $0C                                      ; $4770: $D6 $0C
     ldh  [hActiveEntityVisualPosY], a             ; $4772: $E0 $EC
-    ldh  a, [hLinkPositionZHigh]                      ; $4774: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                  ; $4774: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $4776: $21 $10 $C3
     add  hl, bc                                   ; $4779: $09
     ld   [hl], a                                  ; $477A: $77
-    ld   a, $6C                                   ; $477B: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $477B: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $477D: $E0 $9D
     ld   a, $02                                   ; $477F: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4781: $E0 $A1
@@ -7282,11 +7282,11 @@ jr_019_7709:
     sub  $13                                      ; $7718: $D6 $13
     ld   [hl], a                                  ; $771A: $77
     call CopyEntityPositionToActivePosition       ; $771B: $CD $8A $3D
-    ldh  a, [hLinkPositionZHigh]                      ; $771E: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                  ; $771E: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $7720: $21 $10 $C3
     add  hl, bc                                   ; $7723: $09
     ld   [hl], a                                  ; $7724: $77
-    ld   a, $6B                                   ; $7725: $3E $6B
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_6B       ; $7725: $3E $6B
     ldh  [hLinkAnimationState], a                 ; $7727: $E0 $9D
     ld   a, $02                                   ; $7729: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $772B: $E0 $A1

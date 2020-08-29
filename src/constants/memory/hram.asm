@@ -97,31 +97,17 @@ hLinkPositionXIncrement::
 hLinkPositionYIncrement::
  ds 1 ; FF9B
 
+; used when jumping
+; possible values:
+; 0 = reset,
+; 1 = ??? => TRUE?,
+; 2 = ??? => different use?
 ; Unlabeled
 hFF9C::
  ds 1 ; FF9C
 
 ; How the Link sprite should be drawn.
-;
-; Values:
-; 00 =  Standing bottom
-; 01 =  Walking bottom
-; 02 =
-; 03 =
-; 04 =  Standing top
-; 05 =  Walking top
-; 06 =  Standing left
-; 07 =  Walking left
-; 08 =
-; 09 =
-; 0A =  Standing right
-; 0B =  Walking right
-;
-; 5E =  jumping 1
-; 5F =  jumping 2
-; 60 =  jumping 3
-;
-; 6C =  Got item
+; for values see gameplay.asm
 hLinkAnimationState::
   ds 1 ; FF9D
 

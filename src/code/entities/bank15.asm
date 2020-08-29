@@ -8082,9 +8082,7 @@ func_015_7DF5::
     ldh  [hLinkPositionY], a                      ; $7E01: $E0 $99
     ld   a, $02                                   ; $7E03: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7E05: $E0 $A1
-    ld   a, $FF                                   ; $7E07: $3E $FF
-
-label_015_7E09:
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_FF       ; $7E07: $3E $FF
     ldh  [hLinkAnimationState], a                 ; $7E09: $E0 $9D
     ld   de, Data_015_7D50                        ; $7E0B: $11 $50 $7D
     ld   a, [wTunicType]                          ; $7E0E: $FA $0F $DC

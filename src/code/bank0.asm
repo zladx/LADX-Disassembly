@@ -1607,7 +1607,7 @@ InitGotItemSequence::
     cp   $02                                      ; $1098: $FE $02
     jr   z, .jp_10DB                              ; $109A: $28 $3F
     ldh  a, [hLinkAnimationState]                 ; $109C: $F0 $9D
-    cp   $FF                                      ; $109E: $FE $FF
+    cp   LINK_ANIMATION_STATE_UNKNOWN_FF          ; $109E: $FE $FF
     jr   z, .jp_10DB                              ; $10A0: $28 $39
     ld   a, [wLinkMotionState]                    ; $10A2: $FA $1C $C1
     cp   $02                                      ; $10A5: $FE $02
@@ -3434,8 +3434,11 @@ SwordAreaYForDirection::
 .down  db $10                                     ; $1F50
 
 ; Array of constants for Link animation state
-data_1F51::
-    db   $36, $38, $3A, $3C                       ; $1F51
+LinkDirectionToLinkAnimationState_2::
+.right db  LINK_ANIMATION_STATE_UNKNOWN_36
+.left  db  LINK_ANIMATION_STATE_UNKNOWN_38
+.up    db  LINK_ANIMATION_STATE_UNKNOWN_3A
+.down  db  LINK_ANIMATION_STATE_UNKNOWN_3C                       ; $1F51
 
 data_1F55::
     db   2, 1, 8, 4                               ; $1F55
@@ -3724,7 +3727,7 @@ ENDC
     ldh  a, [hLinkDirection]                      ; $20F8: $F0 $9E
     ld   e, a                                     ; $20FA: $5F
     ld   d, $00                                   ; $20FB: $16 $00
-    ld   hl, data_1F51                            ; $20FD: $21 $51 $1F
+    ld   hl, LinkDirectionToLinkAnimationState_2  ; $20FD: $21 $51 $1F
 
     add  hl, de                                   ; $2100: $19
     ld   a, [hl]                                  ; $2101: $7E

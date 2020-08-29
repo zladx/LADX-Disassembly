@@ -38,7 +38,7 @@ jr_001_420D::
     ldh  [hFF9C], a                               ; $4215: $E0 $9C ; $4215: $E0 $9C
     ld   a, $0F                                   ; $4217: $3E $0F ; $4217: $3E $0F
     ld   [wTileMapToLoad], a                      ; $4219: $EA $FE $D6 ; $4219: $EA $FE $D6
-    ld   a, $FF                                   ; $421C: $3E $FF ; $421C: $3E $FF
+    ld   a, LINK_ANIMATION_STATE_UNKNOWN_FF       ; $421C: $3E $FF ; $421C: $3E $FF
     ldh  [hLinkAnimationState], a                 ; $421E: $E0 $9D ; $421E: $E0 $9D
     ld   a, [wDeathCount]                         ; $4220: $FA $57 $DB ; $4220: $FA $57 $DB
     add  $01                                      ; $4223: $C6 $01 ; $4223: $C6 $01

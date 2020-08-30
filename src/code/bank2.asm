@@ -749,7 +749,7 @@ shallowWaterVfx:
 
 ; 0 = True
 ; every other value = False
-; values are never used elsewhere => easter egg?
+; values are used also in wC140
 LinkDirectionToStaticSwordCollitionCheckNeeded::
     db   $00, $00, $08, $06
     db   $00, $06, $00, $00

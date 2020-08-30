@@ -403,7 +403,7 @@ jr_002_43CE:
     jr   z, jr_002_4402                           ; $43D2: $28 $2E
 
     ldh  a, [hJoypadState]                        ; $43D4: $F0 $CC
-    and  $0F                                      ; $43D6: $E6 $0F
+    and  J_DIRECTION_MASK                         ; $43D6: $E6 $0F
     jr   z, jr_002_43E6                           ; $43D8: $28 $0C
 
     ld   e, a                                     ; $43DA: $5F
@@ -1358,7 +1358,7 @@ jr_002_4A53:
     jr   z, jr_002_4A7A                           ; $4A58: $28 $20
 
     ldh  a, [hJoypadState]                        ; $4A5A: $F0 $CC
-    and  $30                                      ; $4A5C: $E6 $30
+    and  J_AB_MASK                                ; $4A5C: $E6 $30
     jr   z, jr_002_4A7A                           ; $4A5E: $28 $1A
 
     xor  a                                        ; $4A60: $AF
@@ -5448,7 +5448,7 @@ func_002_6A01::
     jr   nc, jr_002_6A24                          ; $6A1B: $30 $07
 
     ldh  a, [hJoypadState]                        ; $6A1D: $F0 $CC
-    and  $04                                      ; $6A1F: $E6 $04
+    and  J_UP                                     ; $6A1F: $E6 $04
     jp   nz, ApplyMapFadeOutTransitionWithNoise   ; $6A21: $C2 $7D $0C
 
 jr_002_6A24:
@@ -5457,7 +5457,7 @@ jr_002_6A24:
     jr   z, jr_002_6A4C                           ; $6A28: $28 $22
 
     ldh  a, [hJoypadState]                        ; $6A2A: $F0 $CC
-    and  $0F                                      ; $6A2C: $E6 $0F
+    and  J_DIRECTION_MASK                         ; $6A2C: $E6 $0F
     jr   nz, jr_002_6A3E                          ; $6A2E: $20 $0E
 
     ld   a, [wConsecutiveStepsCount]              ; $6A30: $FA $20 $C1

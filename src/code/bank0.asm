@@ -3600,7 +3600,7 @@ ENDC
 
     ; If A or B is pressed…
     ldh  a, [hJoypadState]                        ; $200B: $F0 $CC
-    and  J_A | J_B                                ; $200D: $E6 $30
+    and  J_AB_MASK                                ; $200D: $E6 $30
     jp   z, .specialCasesEnd                      ; $200F: $CA $CF $20
     ld   a, e                                     ; $2012: $7B
     cp   OBJECT_WEATHER_VANE_BASE                 ; $2013: $FE $5E
@@ -3705,7 +3705,7 @@ ENDC
     jr   nz, .specialCasesEnd                     ; $20A9: $20 $24
     ld   [wC1AD], a                               ; $20AB: $EA $AD $C1
     ldh  a, [hJoypadState]                        ; $20AE: $F0 $CC
-    and  J_A | J_B                                ; $20B0: $E6 $30
+    and  J_AB_MASK                                ; $20B0: $E6 $30
     jr   z, .specialCasesEnd                      ; $20B2: $28 $1B
     ldh  a, [hIsSideScrolling]                    ; $20B4: $F0 $F9
     and  a                                        ; $20B6: $A7

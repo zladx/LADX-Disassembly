@@ -144,7 +144,7 @@ jr_001_42D8::
 LinkPassOut4Handler::
     call func_001_4339                            ; $42D9: $CD $39 $43 ; $42D9: $CD $39 $43
     ldh  a, [hJoypadState]                        ; $42DC: $F0 $CC ; $42DC: $F0 $CC
-    and  $B0                                      ; $42DE: $E6 $B0 ; $42DE: $E6 $B0
+    and  J_AB_MASK | J_START                      ; $42DE: $E6 $B0 ; $42DE: $E6 $B0
     jr   z, jr_001_4335                           ; $42E0: $28 $53 ; $42E0: $28 $53
 
     ld   a, [wC13F]                               ; $42E2: $FA $3F $C1 ; $42E2: $FA $3F $C1
@@ -207,7 +207,7 @@ func_001_4339::
     ld   hl, wC13F                                ; $4339: $21 $3F $C1 ; $4339: $21 $3F $C1
     call func_001_6BA8                            ; $433C: $CD $A8 $6B ; $433C: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $433F: $F0 $CC ; $433F: $F0 $CC
-    and  $08                                      ; $4341: $E6 $08 ; $4341: $E6 $08
+    and  J_DOWN                                   ; $4341: $E6 $08 ; $4341: $E6 $08
     jr   z, jr_001_434D                           ; $4343: $28 $08 ; $4343: $28 $08
 
     ld   a, [hl]                                  ; $4345: $7E ; $4345: $7E
@@ -222,7 +222,7 @@ jr_001_434C::
 
 jr_001_434D::
     ldh  a, [hJoypadState]                        ; $434D: $F0 $CC ; $434D: $F0 $CC
-    and  $04                                      ; $434F: $E6 $04 ; $434F: $E6 $04
+    and  J_UP                                     ; $434F: $E6 $04 ; $434F: $E6 $04
     jr   z, jr_001_435C                           ; $4351: $28 $09 ; $4351: $28 $09
 
     ld   a, [hl]                                  ; $4353: $7E ; $4353: $7E

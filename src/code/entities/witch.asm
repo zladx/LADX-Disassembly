@@ -95,7 +95,7 @@ func_005_4815::
     jr   nz, jr_005_483C                          ; $482C: $20 $0E
 
     ldh  a, [hJoypadState]                        ; $482E: $F0 $CC
-    and  $20                                      ; $4830: $E6 $20
+    and  J_B                                      ; $4830: $E6 $20
     ret  z                                        ; $4832: $C8
 
     xor  a                                        ; $4833: $AF
@@ -110,7 +110,7 @@ jr_005_483C:
     jr   nz, jr_005_484A                          ; $4840: $20 $08
 
     ldh  a, [hJoypadState]                        ; $4842: $F0 $CC
-    and  $10                                      ; $4844: $E6 $10
+    and  J_A                                      ; $4844: $E6 $10
     ret  z                                        ; $4846: $C8
 
 jr_005_4847:

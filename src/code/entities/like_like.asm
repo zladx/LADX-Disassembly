@@ -35,7 +35,7 @@ label_006_7E09:
 
 LikeLikeState1Handler::
     ldh  a, [hJoypadState]                        ; $7E0C: $F0 $CC
-    and  $30                                      ; $7E0E: $E6 $30
+    and  J_AB_MASK                                ; $7E0E: $E6 $30
     jr   z, jr_006_7E27                           ; $7E10: $28 $15
 
     ld   hl, wEntitiesUnknowTableY                ; $7E12: $21 $D0 $C3

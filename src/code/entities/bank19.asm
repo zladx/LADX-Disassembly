@@ -3587,7 +3587,7 @@ jr_019_5922:
     jr   nz, jr_019_5945                          ; $593C: $20 $07
 
     ldh  a, [hJoypadState]                        ; $593E: $F0 $CC
-    and  $20                                      ; $5940: $E6 $20
+    and  J_B                                      ; $5940: $E6 $20
     jr   nz, jr_019_5950                          ; $5942: $20 $0C
 
     ret                                           ; $5944: $C9
@@ -3598,7 +3598,7 @@ jr_019_5945:
     ret  nz                                       ; $594A: $C0
 
     ldh  a, [hJoypadState]                        ; $594B: $F0 $CC
-    and  $10                                      ; $594D: $E6 $10
+    and  J_A                                      ; $594D: $E6 $10
     ret  z                                        ; $594F: $C8
 
 jr_019_5950:
@@ -3828,7 +3828,7 @@ jr_019_5A9F:
     jr   nz, jr_019_5AB9                          ; $5AB0: $20 $07
 
     ldh  a, [hJoypadState]                        ; $5AB2: $F0 $CC
-    and  $20                                      ; $5AB4: $E6 $20
+    and  J_B                                      ; $5AB4: $E6 $20
     jr   nz, jr_019_5AC4                          ; $5AB6: $20 $0C
 
     ret                                           ; $5AB8: $C9
@@ -3839,7 +3839,7 @@ jr_019_5AB9:
     ret  nz                                       ; $5ABE: $C0
 
     ldh  a, [hJoypadState]                        ; $5ABF: $F0 $CC
-    and  $10                                      ; $5AC1: $E6 $10
+    and  J_A                                      ; $5AC1: $E6 $10
     ret  z                                        ; $5AC3: $C8
 
 jr_019_5AC4:
@@ -8058,7 +8058,7 @@ func_019_7D16::
     jr   nz, jr_019_7D3B                          ; $7D31: $20 $08
 
     ldh  a, [hJoypadState]                        ; $7D33: $F0 $CC
-    and  $10                                      ; $7D35: $E6 $10
+    and  J_A                                      ; $7D35: $E6 $10
     jr   z, jr_019_7D3B                           ; $7D37: $28 $02
 
     scf                                           ; $7D39: $37

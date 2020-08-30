@@ -393,7 +393,7 @@ func_028_427D::
     ld   a, [$D1CF]                             ; $427D: $FA $CF $D1
     and  a                                      ; $4280: $A7
     ret  nz                                     ; $4281: $C0
-
+    ; return if nothing is pressed
     ldh  a, [hJoypadState]                      ; $4282: $F0 $CC
     and  a                                      ; $4284: $A7
     ret  z                                      ; $4285: $C8
@@ -489,7 +489,7 @@ func_028_427D::
 
 .else_42FB_28:
     ldh  a, [hJoypadState]                      ; $42FB: $F0 $CC
-    bit  4, a                                   ; $42FD: $CB $67
+    bit  J_BIT_A, a                             ; $42FD: $CB $67
     ret  z                                      ; $42FF: $C8
 
     ld   b, $00                                 ; $4300: $06 $00
@@ -722,7 +722,7 @@ ENDC
 
 JumpTable_028_4469:
     ldh  a, [hJoypadState]                      ; $4469: JumpTable_028_4469 $F0 $CC
-    bit  J_BIT_B, a                                   ; $446B: JumpTable_028_4469 $CB $6F
+    bit  J_BIT_B, a                             ; $446B: JumpTable_028_4469 $CB $6F
     jr   z, .else_447D_28                       ; $446D: JumpTable_028_4469 $28 $0E
 
     ld   a, JINGLE_VALIDATE                     ; $446F: JumpTable_028_4469 $3E $13
@@ -730,7 +730,7 @@ JumpTable_028_4469:
     ld   a, $01                                 ; $4473: JumpTable_028_4469 $3E $01
     ld   [wGameplaySubtype], a                  ; $4475: JumpTable_028_4469 $EA $96 $DB
     xor  a                                      ; $4478: JumpTable_028_4469 $AF
-    ld   [wTransitionSequenceCounter], a                             ; $4479: JumpTable_028_4469 $EA $6B $C1
+    ld   [wTransitionSequenceCounter], a        ; $4479: JumpTable_028_4469 $EA $6B $C1
     ret                                         ; $447C: JumpTable_028_4469 $C9
 
 

@@ -281,7 +281,7 @@ DialogFinishedHandler::
     jr   nz, UpdateDialogState_return             ; $248E: $20 $1E
     ; ... and A or B is pressed...
     ldh  a, [hJoypadState]                        ; $2490: $F0 $CC
-    and  J_AB_MASK                                ; $2492: $E6 $30
+    and  J_A | J_B                                ; $2492: $E6 $30
     jr   z, UpdateDialogState_return              ; $2494: $28 $18
     ; ... update dialog state
 
@@ -839,7 +839,7 @@ DialogChoiceHandler::
     ldh  a, [hJoypadState]                        ; $2793: $F0 $CC
     bit  J_BIT_A, a                               ; $2795: $CB $67
     jp   nz, .jp_27B7                             ; $2797: $C2 $B7 $27
-    and  J_DIRECTION_HORIZONTAL_MASK                         ; $279A: $E6 $03
+    and  J_RIGHT | J_LEFT                         ; $279A: $E6 $03
     jr   z, .jp_27AA                              ; $279C: $28 $0C
     ld   hl, wDialogAskSelectionIndex             ; $279E: $21 $77 $C1
     ld   a, [hl]                                  ; $27A1: $7E

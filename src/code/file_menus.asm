@@ -288,7 +288,7 @@ ENDC
 
 jr_001_48F4::
     ldh  a, [hJoypadState]                        ; $48F4: $F0 $CC
-    and  J_DIRECTION_VERTICAL_MASK                ; $48F6: $E6 $0C
+    and  J_UP | J_DOWN                ; $48F6: $E6 $0C
     jr   z, jr_001_4920                           ; $48F8: $28 $26
     ld   c, $02                                   ; $48FA: $0E $02
     ld   a, [wSaveFilesCount]                     ; $48FC: $FA $A7 $DB
@@ -322,7 +322,7 @@ jr_001_4920::
     cp   $03                                      ; $4923: $FE $03
     jr   nz, func_001_4954                        ; $4925: $20 $2D
     ldh  a, [hJoypadState]                        ; $4927: $F0 $CC
-    and  J_DIRECTION_HORIZONTAL_MASK              ; $4929: $E6 $03
+    and  J_RIGHT | J_LEFT              ; $4929: $E6 $03
     jr   z, jr_001_4938                           ; $492B: $28 $0B
     call func_001_6BAE                            ; $492D: $CD $AE $6B
     ld   a, [wIsFileSelectionArrowShifted]                               ; $4930: $FA $00 $D0
@@ -839,7 +839,7 @@ jr_001_4C63::
 
 func_001_4C8A::                            ; "Enter Name" screen
     ldh  a, [hJoypadState]              ; Check inputs... ; $4C8A: $F0 $CC
-    and  J_AB_MASK                      ; Was A or B pushed? ; $4C8C: $E6 $30
+    and  J_A | J_B                      ; Was A or B pushed? ; $4C8C: $E6 $30
     jr   z, jr_001_4CB7                  ; If no, bail ; $4C8E: $28 $27
     bit  5, a                           ; Was B pushed? ; $4C90: $CB $6F
     jr   nz, jr_001_4CA7                 ; If yes, backspace ; $4C92: $20 $13
@@ -1373,7 +1373,7 @@ jr_001_4F03::
 
 func_001_4F0C::
     ldh  a, [hJoypadState]                        ; $4F0C: $F0 $CC ; $4F0C: $F0 $CC
-    and  J_DIRECTION_HORIZONTAL_MASK              ; $4F0E: $E6 $03 ; $4F0E: $E6 $03
+    and  J_RIGHT | J_LEFT              ; $4F0E: $E6 $03 ; $4F0E: $E6 $03
     jr   z, jr_001_4F1D                           ; $4F10: $28 $0B ; $4F10: $28 $0B
 
     call func_001_6BAE                            ; $4F12: $CD $AE $6B ; $4F12: $CD $AE $6B

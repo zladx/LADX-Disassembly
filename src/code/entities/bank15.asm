@@ -1837,7 +1837,7 @@ func_015_4F5A::
     call UpdateEntityPosWithSpeed_15              ; $4F5A: $CD $88 $7B
     call label_3B23                               ; $4F5D: $CD $23 $3B
     ldh  a, [hJoypadState]                        ; $4F60: $F0 $CC
-    and  J_AB_MASK                                ; $4F62: $E6 $30
+    and  J_A | J_B                                ; $4F62: $E6 $30
     jr   z, jr_015_4FAE                           ; $4F64: $28 $48
 
     call func_015_7BDB                            ; $4F66: $CD $DB $7B

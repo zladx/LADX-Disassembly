@@ -4064,7 +4064,7 @@ TextDebuggerEntityHandler::                       ; POI: Text debugging tool
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5D8D: $E0 $A1
     ld   [wC167], a                               ; $5D8F: $EA $67 $C1
     ldh  a, [hJoypadState]                        ; $5D92: $F0 $CC
-    and  J_DIRECTION_HORIZONTAL_MASK              ; $5D94: $E6 $03
+    and  J_RIGHT | J_LEFT                         ; $5D94: $E6 $03
     ld   e, a                                     ; $5D96: $5F
     ld   d, b                                     ; $5D97: $50
     ld   hl, Data_018_5D7F                        ; $5D98: $21 $7F $5D
@@ -4081,7 +4081,7 @@ TextDebuggerEntityHandler::                       ; POI: Text debugging tool
     ldh  a, [hJoypadState]                        ; $5DAB: $F0 $CC
     rra                                           ; $5DAD: $1F
     rra                                           ; $5DAE: $1F
-    and  J_DIRECTION_VERTICAL_MASK >> 2           ; $5DAF: $E6 $03
+    and  (J_UP | J_DOWN) >> 2                     ; $5DAF: $E6 $03
     ld   e, a                                     ; $5DB1: $5F
     ld   d, b                                     ; $5DB2: $50
     ld   hl, Data_018_5D82                        ; $5DB3: $21 $82 $5D

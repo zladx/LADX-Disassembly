@@ -2454,7 +2454,7 @@ PeachPictureState5Handler::
 
 jr_001_68CF::
     ldh  a, [hJoypadState]                        ; $68CF: $F0 $CC
-    and  J_AB_MASK | J_START                      ; $68D1: $E6 $B0
+    and  J_A | J_B | J_START                      ; $68D1: $E6 $B0
     jr   z, jr_001_68E3                           ; $68D3: $28 $0E
     ld   a, JINGLE_VALIDATE                       ; $68D5: $3E $13
     ldh  [hJingle], a                             ; $68D7: $E0 $F2
@@ -2713,7 +2713,7 @@ include "code/face_shrine_mural.asm"
 
 func_001_6BA8::
     ldh  a, [hJoypadState]                        ; $6BA8: $F0 $CC
-    and  J_DIRECTION_VERTICAL_MASK                ; $6BAA: $E6 $0C
+    and  J_UP | J_DOWN                ; $6BAA: $E6 $0C
     jr   z, jr_001_6BB4                           ; $6BAC: $28 $06
 
 func_001_6BAE::

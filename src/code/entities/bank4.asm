@@ -2953,7 +2953,7 @@ func_004_6154::
     jr   nz, jr_004_616C                          ; $6158: $20 $12
 
     ldh  a, [hJoypadState]                        ; $615A: $F0 $CC
-    and  J_AB_MASK                                ; $615C: $E6 $30
+    and  J_A | J_B                                ; $615C: $E6 $30
     jr   z, jr_004_616C                           ; $615E: $28 $0C
 
     call IncrementEntityState                     ; $6160: $CD $12 $3B
@@ -3286,7 +3286,7 @@ jr_004_6353:
 
 jr_004_6354:
     ldh  a, [hJoypadState]                        ; $6354: $F0 $CC
-    and  J_AB_MASK                                ; $6356: $E6 $30
+    and  J_A | J_B                                ; $6356: $E6 $30
     jr   z, jr_004_63B9                           ; $6358: $28 $5F
 
     call GetEntityTransitionCountdown             ; $635A: $CD $05 $0C
@@ -3723,7 +3723,7 @@ jr_004_65D5:
 
 jr_004_65DB:
     ldh  a, [hJoypadState]                        ; $65DB: $F0 $CC
-    and  J_AB_MASK                                ; $65DD: $E6 $30
+    and  J_A | J_B                                ; $65DD: $E6 $30
     jr   z, jr_004_6631                           ; $65DF: $28 $50
 
     ld   hl, wEntitiesPrivateState1Table          ; $65E1: $21 $B0 $C2
@@ -6888,7 +6888,7 @@ jr_004_78D4:
     jr   nz, jr_004_7940                          ; $78DE: $20 $60
 
     ldh  a, [hJoypadState]                        ; $78E0: $F0 $CC
-    and  J_AB_MASK                                ; $78E2: $E6 $30
+    and  J_A | J_B                                ; $78E2: $E6 $30
     jr   z, jr_004_7940                           ; $78E4: $28 $5A
 
     ld   a, [wItemPickedUpInShop]                               ; $78E6: $FA $09 $C5

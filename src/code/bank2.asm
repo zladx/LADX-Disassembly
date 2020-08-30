@@ -403,7 +403,7 @@ jr_002_43CE:
     jr   z, jr_002_4402                           ; $43D2: $28 $2E
 
     ldh  a, [hJoypadState]                        ; $43D4: $F0 $CC
-    and  J_DIRECTION_MASK                         ; $43D6: $E6 $0F
+    and  J_RIGHT | J_LEFT | J_UP | J_DOWN                         ; $43D6: $E6 $0F
     jr   z, jr_002_43E6                           ; $43D8: $28 $0C
 
     ld   e, a                                     ; $43DA: $5F
@@ -1397,7 +1397,7 @@ jr_002_4A53:
     jr   z, jr_002_4A7A                           ; $4A58: $28 $20
 
     ldh  a, [hJoypadState]                        ; $4A5A: $F0 $CC
-    and  J_AB_MASK                                ; $4A5C: $E6 $30
+    and  J_A | J_B                                ; $4A5C: $E6 $30
     jr   z, jr_002_4A7A                           ; $4A5E: $28 $1A
 
     xor  a                                        ; $4A60: $AF
@@ -5496,7 +5496,7 @@ jr_002_6A24:
     jr   z, jr_002_6A4C                           ; $6A28: $28 $22
 
     ldh  a, [hJoypadState]                        ; $6A2A: $F0 $CC
-    and  J_DIRECTION_MASK                         ; $6A2C: $E6 $0F
+    and  J_RIGHT | J_LEFT | J_UP | J_DOWN                         ; $6A2C: $E6 $0F
     jr   nz, jr_002_6A3E                          ; $6A2E: $20 $0E
 
     ld   a, [wConsecutiveStepsCount]              ; $6A30: $FA $20 $C1
@@ -5628,7 +5628,7 @@ jr_002_6AE6:
     call UpdateFinalLinkPosition                  ; $6AE6: $CD $A8 $21
     ld   hl, hLinkDirection                       ; $6AE9: $21 $9E $FF
     ldh  a, [hPressedButtonsMask]                 ; $6AEC: $F0 $CB
-    and  J_DIRECTION_MASK                         ; $6AEE: $E6 $0F
+    and  J_RIGHT | J_LEFT | J_UP | J_DOWN                         ; $6AEE: $E6 $0F
     cp   J_UP                                     ; $6AF0: $FE $04
     jr   nz, jr_002_6AF6                          ; $6AF2: $20 $02
 

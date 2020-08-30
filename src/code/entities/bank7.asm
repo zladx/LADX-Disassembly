@@ -2640,7 +2640,7 @@ func_007_517C::
     ld   a, JINGLE_URCHIN_PUSH                    ; $5180: $3E $3E
     ldh  [hJingle], a                             ; $5182: $E0 $F2
     ldh  a, [hJoypadState]                        ; $5184: $F0 $CC
-    and  J_DIRECTION_MASK                         ; $5186: $E6 $0F
+    and  J_RIGHT | J_LEFT | J_UP | J_DOWN                         ; $5186: $E6 $0F
     ld   d, a                                     ; $5188: $57
     jr   z, jr_007_51AA                           ; $5189: $28 $1F
 

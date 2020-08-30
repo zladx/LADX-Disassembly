@@ -103,7 +103,7 @@ jr_001_6B99::
 
 FaceShrineMuralStage5Handler::
     ldh  a, [hJoypadState]                        ; $6B9A: $F0 $CC
-    and  J_AB_MASK | J_START                      ; $6B9C: $E6 $B0
+    and  J_A | J_B | J_START                      ; $6B9C: $E6 $B0
     jr   z, .return                               ; $6B9E: $28 $07
     ld   a, JINGLE_VALIDATE                       ; $6BA0: $3E $13
     ldh  [hJingle], a                             ; $6BA2: $E0 $F2

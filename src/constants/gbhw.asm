@@ -40,10 +40,6 @@ J_A      EQU 1 << 4     ; 10
 J_B      EQU 1 << 5     ; 20
 J_SELECT EQU 1 << 6     ; 40
 J_START  EQU 1 << 7     ; 80
-J_DIRECTION_MASK            EQU J_RIGHT | J_LEFT | J_UP | J_DOWN ; $0F: filter A, B, Select and Start out
-J_DIRECTION_HORIZONTAL_MASK EQU J_RIGHT | J_LEFT                 ; $03: only keep right and left
-J_DIRECTION_VERTICAL_MASK   EQU J_UP | J_DOWN                    ; $0C: only keep up and down
-J_AB_MASK                   EQU J_A | J_B                        ; $30: only keep A and B
 
 ; Joypad button bits
 J_BIT_RIGHT  EQU 0

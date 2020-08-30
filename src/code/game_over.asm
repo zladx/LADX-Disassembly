@@ -144,7 +144,7 @@ jr_001_42D8::
 LinkPassOut4Handler::
     call func_001_4339                            ; $42D9: $CD $39 $43 ; $42D9: $CD $39 $43
     ldh  a, [hJoypadState]                        ; $42DC: $F0 $CC ; $42DC: $F0 $CC
-    and  J_AB_MASK | J_START                      ; $42DE: $E6 $B0 ; $42DE: $E6 $B0
+    and  J_A | J_B | J_START                      ; $42DE: $E6 $B0 ; $42DE: $E6 $B0
     jr   z, jr_001_4335                           ; $42E0: $28 $53 ; $42E0: $28 $53
 
     ld   a, [wC13F]                               ; $42E2: $FA $3F $C1 ; $42E2: $FA $3F $C1

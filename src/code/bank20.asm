@@ -3307,7 +3307,7 @@ func_020_5F06::
     jr   nz, jr_020_5F38                          ; $5F19: $20 $1D
 
     ldh  a, [hJoypadState]                        ; $5F1B: $F0 $CC
-    and  J_DIRECTION_HORIZONTAL_MASK              ; $5F1D: $E6 $03
+    and  J_RIGHT | J_LEFT              ; $5F1D: $E6 $03
     ld   e, a                                     ; $5F1F: $5F
     ld   d, $00                                   ; $5F20: $16 $00
     ld   hl, Data_020_5F00                        ; $5F22: $21 $00 $5F
@@ -3330,7 +3330,7 @@ jr_020_5F38:
     ldh  a, [hJoypadState]                        ; $5F38: $F0 $CC
     srl  a                                        ; $5F3A: $CB $3F
     srl  a                                        ; $5F3C: $CB $3F
-    and  J_DIRECTION_HORIZONTAL_MASK              ; $5F3E: $E6 $03
+    and  J_RIGHT | J_LEFT              ; $5F3E: $E6 $03
     ld   e, a                                     ; $5F40: $5F
     ld   d, $00                                   ; $5F41: $16 $00
     ld   hl, Data_020_5F03                        ; $5F43: $21 $03 $5F
@@ -3699,7 +3699,7 @@ jr_020_61D6:
 
 jr_020_61E4:
     ldh  a, [hJoypadState]                        ; $61E4: $F0 $CC
-    and  J_DIRECTION_HORIZONTAL_MASK              ; $61E6: $E6 $03
+    and  J_RIGHT | J_LEFT              ; $61E6: $E6 $03
     jr   z, jr_020_61ED                           ; $61E8: $28 $03
 
     call func_020_6039                            ; $61EA: $CD $39 $60

@@ -495,9 +495,9 @@ label_1D8C::
 
 label_1D95::
     ldh  a, [hLinkAnimationState]                 ; $1D95: $F0 $9D
-    cp   LINK_ANIMATION_STATE_UNKNOWN_4E          ; $1D97: $FE $4E
+    cp   LINK_ANIMATION_STATE_HOLD_SWIMMING_2          ; $1D97: $FE $4E
     jr   z, label_1D9F                            ; $1D99: $28 $04
-    cp   LINK_ANIMATION_STATE_UNKNOWN_4F          ; $1D9B: $FE $4F
+    cp   LINK_ANIMATION_STATE_MOVING_SWIMMING_2          ; $1D9B: $FE $4F
     jr   nz, label_1DA1                           ; $1D9D: $20 $02
 
 label_1D9F::
@@ -544,9 +544,9 @@ label_1DD2::
 
 label_1DDB::
     ldh  a, [hLinkAnimationState]                 ; $1DDB: $F0 $9D
-    cp   LINK_ANIMATION_STATE_UNKNOWN_4E          ; $1DDD: $FE $4E
+    cp   LINK_ANIMATION_STATE_HOLD_SWIMMING_2          ; $1DDD: $FE $4E
     jr   z, label_1DE5                            ; $1DDF: $28 $04
-    cp   LINK_ANIMATION_STATE_UNKNOWN_4F          ; $1DE1: $FE $4F
+    cp   LINK_ANIMATION_STATE_MOVING_SWIMMING_2          ; $1DE1: $FE $4F
     jr   nz, label_1DE7                           ; $1DE3: $20 $02
 
 label_1DE5::

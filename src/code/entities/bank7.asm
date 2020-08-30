@@ -717,7 +717,7 @@ func_007_44B0::
     jr   nc, func_007_44DC                        ; $44B3: $30 $27
 
     ldh  a, [hLinkAnimationState]                 ; $44B5: $F0 $9D
-    cp   LINK_ANIMATION_STATE_UNKNOWN_58          ; $44B7: $FE $58
+    cp   LINK_ANIMATION_STATE_STANDING_SIDE_SCROLL_LEFT_DOWN          ; $44B7: $FE $58
     jr   c, jr_007_44BF                           ; $44B9: $38 $04
 
     cp   $5E                                      ; $44BB: $FE $5E

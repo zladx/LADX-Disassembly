@@ -1136,7 +1136,7 @@ label_002_48B0:
     ld   [wC1AC], a                               ; $48B1: $EA $AC $C1
     ld   a, [wIsRunningWithPegasusBoots]          ; $48B4: $FA $4A $C1
     and  a                                        ; $48B7: $A7
-    jr   nz, jr_002_48C4                          ; $48B8: $20 $0A
+    jr   nz, .return                              ; $48B8: $20 $0A
 
     ; wSwordAnimationState = SWORD_ANIMATION_STATE_NONE
     xor  a                                        ; $48BA: $AF
@@ -1144,7 +1144,7 @@ label_002_48B0:
     ld   [wC16A], a                               ; $48BE: $EA $6A $C1
     ld   [wIsUsingSpinAttack], a                  ; $48C1: $EA $21 $C1
 
-jr_002_48C4:
+.return:
     ret                                           ; $48C4: $C9
 
 HorizontalIncrementForLinkPosition::
@@ -1195,37 +1195,76 @@ LinkAnimationsLists::
 
 ; Normal walking animation
 LinkAnimationsList_WalkingNoShield::
-    db   $0A, $0B, $06, $07, $04, $05, $00, $01
+        ;  standing                             walking
+.right: db LINK_ANIMATION_STATE_STANDING_RIGHT, LINK_ANIMATION_STATE_WALKING_RIGHT
+.left:  db LINK_ANIMATION_STATE_STANDING_LEFT,  LINK_ANIMATION_STATE_WALKING_LEFT
+.up:    db LINK_ANIMATION_STATE_STANDING_UP,    LINK_ANIMATION_STATE_WALKING_UP
+.down:  db LINK_ANIMATION_STATE_STANDING_DOWN,  LINK_ANIMATION_STATE_WALKING_DOWN
 
 ; Walking animation with shield
 LinkAnimationsList_WalkCarryingDefaultShield::
-    db   $2C, $2D, $06, $07, $34, $35, $22, $23
+        ;  standing                                    walking     
+.right: db LINK_ANIMATION_STATE_STANDING_SHIELD_RIGHT, LINK_ANIMATION_STATE_WALKING_SHIELD_RIGHT
+.left:  db LINK_ANIMATION_STATE_STANDING_LEFT,         LINK_ANIMATION_STATE_WALKING_LEFT
+.up:    db LINK_ANIMATION_STATE_STANDING_SHIELD_UP,    LINK_ANIMATION_STATE_WALKING_SHIELD_UP
+.down:  db LINK_ANIMATION_STATE_STANDING_SHIELD_DOWN,  LINK_ANIMATION_STATE_WALKING_SHIELD_DOWN
 
 LinkAnimationsList_WalkUsingDefaultShield::
-    db   $2A, $2B, $28, $29, $30, $31, $24, $25
+        ;  standing                                        walking
+.right: db LINK_ANIMATION_STATE_STANDING_SHIELD_USE_RIGHT, LINK_ANIMATION_STATE_WALKING_SHIELD_USE_RIGHT
+.left:  db LINK_ANIMATION_STATE_STANDING_SHIELD_USE_LEFT,  LINK_ANIMATION_STATE_WALKING_SHIELD_USE_LEFT
+.up:    db LINK_ANIMATION_STATE_STANDING_SHIELD_USE_UP,    LINK_ANIMATION_STATE_WALKING_SHIELD_USE_UP
+.down:  db LINK_ANIMATION_STATE_STANDING_SHIELD_USE_DOWN,  LINK_ANIMATION_STATE_WALKING_SHIELD_USE_DOWN
 
 LinkAnimationsList_WalkCarryingMirrorShield::
-    db   $2E, $2F, $06, $07, $34, $35, $22, $23
+        ;  standing                                           walking
+.right: db LINK_ANIMATION_STATE_STANDING_MIRROR_SHIELD_RIGHT, LINK_ANIMATION_STATE_WALKING_MIRROR_SHIELD_RIGHT
+.left:  db LINK_ANIMATION_STATE_STANDING_LEFT,                LINK_ANIMATION_STATE_WALKING_LEFT
+.up:    db LINK_ANIMATION_STATE_STANDING_SHIELD_UP,           LINK_ANIMATION_STATE_WALKING_SHIELD_UP
+.down:  db LINK_ANIMATION_STATE_STANDING_SHIELD_DOWN,         LINK_ANIMATION_STATE_WALKING_SHIELD_DOWN
 
 LinkAnimationsList_WalkUsingMirrorShield::
-    db   $2A, $2B, $28, $29, $32, $33, $26, $27
+        ;  standing                                              walking
+.right: db LINK_ANIMATION_STATE_STANDING_SHIELD_USE_RIGHT,       LINK_ANIMATION_STATE_WALKING_SHIELD_USE_RIGHT
+.left:  db LINK_ANIMATION_STATE_STANDING_SHIELD_USE_LEFT,        LINK_ANIMATION_STATE_WALKING_SHIELD_USE_LEFT
+.up:    db LINK_ANIMATION_STATE_STANDING_MIRROR_SHIELD_USE_UP,   LINK_ANIMATION_STATE_WALKING_MIRROR_SHIELD_USE_UP
+.down:  db LINK_ANIMATION_STATE_STANDING_MIRROR_SHIELD_USE_DOWN, LINK_ANIMATION_STATE_WALKING_MIRROR_SHIELD_USE_DOWN
 
 LinkAnimationsList_PushingObject::
-    db   $20, $21, $1E, $1F, $1C, $1D, $1A, $1B
+        ;  standing                                     walking
+.right: db LINK_ANIMATION_STATE_STANDING_PUSHING_RIGHT, LINK_ANIMATION_STATE_WALKING_PUSHING_RIGHT
+.left:  db LINK_ANIMATION_STATE_STANDING_PUSHING_LEFT,  LINK_ANIMATION_STATE_WALKING_PUSHING_LEFT
+.up:    db LINK_ANIMATION_STATE_STANDING_PUSHING_UP,    LINK_ANIMATION_STATE_WALKING_PUSHING_UP
+.down:  db LINK_ANIMATION_STATE_STANDING_PUSHING_DOWN,  LINK_ANIMATION_STATE_WALKING_PUSHING_DOWN
 
 LinkAnimationsList_LiftingObject::
-    db   $3E, $3F, $40, $41, $42, $43, $44, $45
+        ;  standing                                     walking
+.right: db LINK_ANIMATION_STATE_STANDING_LIFTING_RIGHT, LINK_ANIMATION_STATE_WALKING_LIFTING_RIGHT
+.left:  db LINK_ANIMATION_STATE_STANDING_LIFTING_LEFT,  LINK_ANIMATION_STATE_WALKING_LIFTING_LEFT
+.up:    db LINK_ANIMATION_STATE_STANDING_LIFTING_UP,    LINK_ANIMATION_STATE_WALKING_LIFTING_UP
+.down:  db LINK_ANIMATION_STATE_STANDING_LIFTING_DOWN,  LINK_ANIMATION_STATE_WALKING_LIFTING_DOWN
 
 ; Swimming 1
 Data_002_4948::
-    db   $46, $47, $48, $49, $4A, $4B, $4C, $4D
+        ;  hold position                               ; moving
+.right: db LINK_ANIMATION_STATE_HOLD_SWIMMING_1_RIGHT, LINK_ANIMATION_STATE_MOVING_SWIMMING_1_RIGHT
+.left:  db LINK_ANIMATION_STATE_HOLD_SWIMMING_1_LEFT,  LINK_ANIMATION_STATE_MOVING_SWIMMING_1_LEFT
+.up:    db LINK_ANIMATION_STATE_HOLD_SWIMMING_1_UP,    LINK_ANIMATION_STATE_MOVING_SWIMMING_1_UP
+.down:  db LINK_ANIMATION_STATE_HOLD_SWIMMING_1_DOWN,  LINK_ANIMATION_STATE_MOVING_SWIMMING_1_DOWN
 
 ; Swimming 2
 Data_002_4950::
-    db   $4E, $4F, $4E, $4F, $4E, $4F, $4E, $4F
+.right: db LINK_ANIMATION_STATE_HOLD_SWIMMING_2, LINK_ANIMATION_STATE_MOVING_SWIMMING_2
+.left:  db LINK_ANIMATION_STATE_HOLD_SWIMMING_2, LINK_ANIMATION_STATE_MOVING_SWIMMING_2
+.up:    db LINK_ANIMATION_STATE_HOLD_SWIMMING_2, LINK_ANIMATION_STATE_MOVING_SWIMMING_2
+.down:  db LINK_ANIMATION_STATE_HOLD_SWIMMING_2, LINK_ANIMATION_STATE_MOVING_SWIMMING_2
 
 LinkAnimationsList_WalkSideScrolling::
-    db   $5B, $5C, $58, $59, $5B, $5C, $58, $59
+        ;  standing ?                                           walking ?
+.right: db LINK_ANIMATION_STATE_STANDING_SIDE_SCROLL_RIGHT_UP,  LINK_ANIMATION_STATE_WALKING_SIDE_SCROLL_RIGHT_UP
+.left:  db LINK_ANIMATION_STATE_STANDING_SIDE_SCROLL_LEFT_DOWN, LINK_ANIMATION_STATE_WALKING_SIDE_SCROLL_LEFT_DOWN
+.up:    db LINK_ANIMATION_STATE_STANDING_SIDE_SCROLL_RIGHT_UP,  LINK_ANIMATION_STATE_WALKING_SIDE_SCROLL_RIGHT_UP
+.down:  db LINK_ANIMATION_STATE_STANDING_SIDE_SCROLL_LEFT_DOWN, LINK_ANIMATION_STATE_WALKING_SIDE_SCROLL_LEFT_DOWN
 
 LinkMotionJumpingHandler::
     ld   a, $02                                   ; $4960: $3E $02
@@ -2802,7 +2841,7 @@ jr_002_529F:
     cp   $30                                      ; $52A3: $FE $30
     jr   c, .jr_002_52B5                          ; $52A5: $38 $0E
 
-    ld   e, LINK_ANIMATION_STATE_UNKNOWN_4E       ; $52A7: $1E $4E
+    ld   e, LINK_ANIMATION_STATE_HOLD_SWIMMING_2       ; $52A7: $1E $4E
     cp   $40                                      ; $52A9: $FE $40
     jr   c, .jr_002_52B5                          ; $52AB: $38 $08
 
@@ -2812,7 +2851,7 @@ jr_002_529F:
     ldh  [hWaveSfx], a                            ; $52B1: $E0 $F3
 
 .jr_002_52B3:
-    ld   e, LINK_ANIMATION_STATE_UNKNOWN_4C       ; $52B3: $1E $4C
+    ld   e, LINK_ANIMATION_STATE_HOLD_SWIMMING_1_DOWN       ; $52B3: $1E $4C
 
 .jr_002_52B5:
     ld   a, e                                     ; $52B5: $7B

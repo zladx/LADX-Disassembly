@@ -38,20 +38,27 @@ asm_files = $(shell find src     -type f -name '*.asm')
 gfx_files = $(shell find src/gfx -type f -name '*.png')
 
 # Compile an PNG file for OAM memory to a 2BPP file
-# (invert the palette and de-interleave the tiles.)
+# (inverting the palette and de-interleaving the tiles).
 oam_%.2bpp: oam_%.png
 	tools/gfx/gfx.py --invert --interleave --out $@ 2bpp $<
 
-# Compile a PNG file to a 2BPP file
+# Compile a PNG file to a 2BPP file, without any special conversion.
+# (This typically uses `rgbgfx`, which is much faster than the
+# Python-based `gfx.py`.)
 %.2bpp: %.png
 	$(2BPP) -o $@ $<
 
-# Compile all dependencies (ASM, 2BPP) into an object file
-# (More specific rules may add more pre-requisites.)
+# Compile all dependencies (ASM, 2BPP) into an single object file.
+# (This means all the source code is always fully recompiled: for now,
+# we don't compile the different ASM files separately.)
+# Locale-specific rules below (e.g. `src/main.azlj.o`) will add their own
+# pre-requisites to the ones defined by this rule.
 src/main.%.o: src/main.asm $(asm_files) $(gfx_files:.png=.2bpp)
 	$(ASM) $(ASFLAGS) $($*_ASFLAGS) -i src/ -o $@ $<
 
-# Link an object file to a GBC file
+# Link object files into a GBC executable rom
+# The arguments used are both the global options (e.g. `LDFLAGS`) and the
+# locale-specific options (e.g. `azlg-r1_LDFLAGS`).
 %.gbc: src/main.%.o
 	$(LD) $(LDFLAGS) $($*_LDFLAGS) -n $*.sym -o $@ $^
 	$(FX) $(FXFLAGS) $($*_FXFLAGS) $@

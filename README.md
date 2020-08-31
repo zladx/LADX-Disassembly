@@ -70,3 +70,5 @@ Thanks to these people for contributing:
 * daid - https://github.com/daid
 * stephaneseng - https://github.com/stephaneseng
 * zelosos - https://gitlab.com/zelosos
+
+([See contribution details here](https://github.com/zladx/LADX-Disassembly/graphs/contributors))

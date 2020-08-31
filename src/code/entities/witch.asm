@@ -203,7 +203,7 @@ func_005_48CF::
 
     ld   a, $2A                                   ; $48D4: $3E $2A
     ld   [wDialogGotItemCountdown], a             ; $48D6: $EA $AA $C1
-    ld   a, $03                                   ; $48D9: $3E $03
+    ld   a, DIALOG_GOT_MAGIC_POWDER               ; $48D9: $3E $03
     ld   [wDialogGotItem], a                      ; $48DB: $EA $A9 $C1
     ld   d, $0C                                   ; $48DE: $16 $0C
     call AssignItemToSlot                         ; $48E0: $CD $21 $53

@@ -440,7 +440,7 @@ ENDC
     ld   e, $00                                   ; $4409: $1E $00
     ld   d, $00                                   ; $440B: $16 $00
     ld   a, [wActivePowerUp]                      ; $440D: $FA $7C $D4
-    cp   $01                                      ; $4410: $FE $01
+    cp   ACTIVE_POWER_UP_PIECE_OF_POWER           ; $4410: $FE $01
     jr   nz, jr_002_4416                          ; $4412: $20 $02
 
     ld   e, $10                                   ; $4414: $1E $10
@@ -2720,7 +2720,7 @@ jr_002_51ED:
     sub  $10                                      ; $51FE: $D6 $10
     ldh  [hMultiPurpose0], a                      ; $5200: $E0 $D7
     ld   a, [wDialogGotItem]                      ; $5202: $FA $A9 $C1
-    cp   $01                                      ; $5205: $FE $01
+    cp   DIALOG_GOT_PIECE_OF_POWER                ; $5205: $FE $01
     jr   z, jr_002_524F                           ; $5207: $28 $46
 
     ldh  a, [hMultiPurpose0]                      ; $5209: $F0 $D7
@@ -2733,14 +2733,14 @@ jr_002_51ED:
     inc  bc                                       ; $5214: $03
     ld   a, [wDialogGotItem]                      ; $5215: $FA $A9 $C1
     ld   e, $AE                                   ; $5218: $1E $AE
-    cp   $05                                      ; $521A: $FE $05
+    cp   DIALOG_GOT_GUARDIAN_ACORN                ; $521A: $FE $05
     jr   z, jr_002_522F                           ; $521C: $28 $11
 
     ld   e, $8E                                   ; $521E: $1E $8E
-    cp   $03                                      ; $5220: $FE $03
+    cp   DIALOG_GOT_MAGIC_POWDER                  ; $5220: $FE $03
     jr   z, jr_002_5244                           ; $5222: $28 $20
 
-    cp   $04                                      ; $5224: $FE $04
+    cp   DIALOG_GOT_ROD                           ; $5224: $FE $04
     jr   nz, jr_002_5234                          ; $5226: $20 $0C
 
     ld   e, $8C                                   ; $5228: $1E $8C

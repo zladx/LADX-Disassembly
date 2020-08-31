@@ -2250,10 +2250,10 @@ UseMagicPowder::
     ld   a, [wHasToadstool]                       ; $1492: $FA $4B $DB
     and  a                                        ; $1495: $A7
     jr   z, .jr_14A7                              ; $1496: $28 $0F
-    ldh  a, [hLinkPositionZHigh]                      ; $1498: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                  ; $1498: $F0 $A2
     and  a                                        ; $149A: $A7
     ret  nz                                       ; $149B: $C0
-    ld   a, $02                                   ; $149C: $3E $02
+    ld   a, DIALOG_GOT_TOADSTOOL                  ; $149C: $3E $02
     ld   [wDialogGotItem], a                      ; $149E: $EA $A9 $C1
     ld   a, $2A                                   ; $14A1: $3E $2A
     ld   [wDialogGotItemCountdown], a             ; $14A3: $EA $AA $C1
@@ -3773,7 +3773,7 @@ ENDC
     inc  [hl]                                     ; $2120: $34
     ld   e, $08                                   ; $2121: $1E $08
     ld   a, [wActivePowerUp]                      ; $2123: $FA $7C $D4
-    cp   $01                                      ; $2126: $FE $01
+    cp   ACTIVE_POWER_UP_PIECE_OF_POWER           ; $2126: $FE $01
     jr   nz, .jp_212C                             ; $2128: $20 $02
     ld   e, $03                                   ; $212A: $1E $03
 

@@ -253,6 +253,7 @@ hFFBC::
   ds 1 ; FFBC
 
 ; Unlabeled
+; used for music
 hFFBD::
   ds 1 ; FFBD
 

@@ -56,20 +56,19 @@ You can also read [disassembling How-Tos](https://github.com/zladx/LADX-Disassem
 
 ## Contributors
 
-Thanks to these people for contributing: <br />
-(ordered by commits)
+Thanks to these people for contributing:
 
-* kemenaran - https://github.com/kemenaran
-* Marijn van der Werf - https://github.com/marijnvdwerf
-* Xkeeper - https://github.com/Xkeeper0
-* zelosos - https://gitlab.com/zelosos
-* Vextrove - https://github.com/Vextrove
 * mojobojo - https://github.com/mojobojo
-* Kyle McGuffin - https://github.com/kcmcg
-* daid - https://github.com/daid
-* Sanqui - https://github.com/Sanqui
+* kemenaran - https://github.com/kemenaran
 * Drenn1 - https://github.com/Drenn1
-* stephaneseng - https://github.com/stephaneseng
+* Sanqui - https://github.com/Sanqui
+* Kyle McGuffin - https://github.com/kcmcg
+* Marijn van der Werf - https://github.com/marijnvdwerf
 * samuel-flynn - https://github.com/samuel-flynn
+* Xkeeper - https://github.com/Xkeeper0
+* Vextrove - https://github.com/Vextrove
+* daid - https://github.com/daid
+* stephaneseng - https://github.com/stephaneseng
+* zelosos - https://gitlab.com/zelosos
 
-You want to rank up? Then contribute more ;)
+([See contribution details here](https://github.com/zladx/LADX-Disassembly/graphs/contributors))

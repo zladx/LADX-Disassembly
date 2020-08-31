@@ -2155,7 +2155,7 @@ ShootArrow::
     ld   b, $00                                   ; $140D: $06 $00
 
 label_140F::
-    ; if piece of power is not active do not offset direction 
+    ; if piece of power is not active do not offset direction
     ld   a, [wActivePowerUp]                      ; $140F: $FA $7C $D4
     cp   POWER_UP_PIECE_OF_POWER                  ; $1412: $FE $01
     jr   nz, .label_141A                          ; $1414: $20 $04
@@ -2389,7 +2389,7 @@ func_157C::
     ld   hl, JoypadToLinkDirection                ; $1583: $21 $05 $49
     add  hl, de                                   ; $1586: $19
     ld   a, [hl]                                  ; $1587: $7E
-    cp   DIRECTION_INVALIDE                       ; $1588: $FE $0F
+    cp   DIRECTION_KEEP                           ; $1588: $FE $0F
     jr   z, .return                               ; $158A: $28 $02
     ldh  [hLinkDirection], a                      ; $158C: $E0 $9E
 .return

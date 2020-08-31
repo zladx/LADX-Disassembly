@@ -1169,20 +1169,19 @@ VerticalIncrementForLinkPosition::
     db   $14, $0F, $0F, $00
     db   $00, $00, $00, $00
 
-; convert joypad input to Link's direction of view
-; $0F = invalide input
+; Convert joypad input to Link's direction of view
 JoypadToLinkDirection::
-.none:        db  DIRECTION_INVALIDE
+.none:        db  DIRECTION_KEEP
 .right:       db  DIRECTION_RIGHT
 .left:        db  DIRECTION_LEFT
-.rightLeft:   db  DIRECTION_INVALIDE
+.rightLeft:   db  DIRECTION_KEEP
 .up:          db  DIRECTION_UP
-.upRight:     db  DIRECTION_INVALIDE
-.upLeft:      db  DIRECTION_INVALIDE
-.upRightLeft: db  DIRECTION_INVALIDE
+.upRight:     db  DIRECTION_KEEP
+.upLeft:      db  DIRECTION_KEEP
+.upRightLeft: db  DIRECTION_KEEP
 .down:        db  DIRECTION_DOWN
-.downRight:   db  DIRECTION_INVALIDE
-.downLeft:    db  DIRECTION_INVALIDE
+.downRight:   db  DIRECTION_KEEP
+.downLeft:    db  DIRECTION_KEEP
 
 ;
 ; hLinkAnimationState values for Link walking animation.
@@ -1203,7 +1202,7 @@ LinkAnimationsList_WalkingNoShield::
 
 ; Walking animation with shield
 LinkAnimationsList_WalkCarryingDefaultShield::
-        ;  standing                                    walking     
+        ;  standing                                    walking
 .right: db LINK_ANIMATION_STATE_STANDING_SHIELD_RIGHT, LINK_ANIMATION_STATE_WALKING_SHIELD_RIGHT
 .left:  db LINK_ANIMATION_STATE_STANDING_LEFT,         LINK_ANIMATION_STATE_WALKING_LEFT
 .up:    db LINK_ANIMATION_STATE_STANDING_SHIELD_UP,    LINK_ANIMATION_STATE_WALKING_SHIELD_UP

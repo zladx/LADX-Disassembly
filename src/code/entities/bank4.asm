@@ -3286,7 +3286,7 @@ jr_004_6353:
 
 jr_004_6354:
     ldh  a, [hJoypadState]                        ; $6354: $F0 $CC
-    and  $30                                      ; $6356: $E6 $30
+    and  J_A | J_B                                ; $6356: $E6 $30
     jr   z, jr_004_63B9                           ; $6358: $28 $5F
 
     call GetEntityTransitionCountdown             ; $635A: $CD $05 $0C
@@ -3353,7 +3353,7 @@ jr_004_63AD:
 
 jr_004_63B9:
     ldh  a, [hJoypadState]                        ; $63B9: $F0 $CC
-    and  $05                                      ; $63BB: $E6 $05
+    and  J_RIGHT | J_UP                           ; $63BB: $E6 $05
     jr   z, jr_004_63DE                           ; $63BD: $28 $1F
 
     ldh  a, [hActiveEntityVisualPosY]             ; $63BF: $F0 $EC
@@ -3723,7 +3723,7 @@ jr_004_65D5:
 
 jr_004_65DB:
     ldh  a, [hJoypadState]                        ; $65DB: $F0 $CC
-    and  $30                                      ; $65DD: $E6 $30
+    and  J_A | J_B                                ; $65DD: $E6 $30
     jr   z, jr_004_6631                           ; $65DF: $28 $50
 
     ld   hl, wEntitiesPrivateState1Table          ; $65E1: $21 $B0 $C2
@@ -5713,7 +5713,7 @@ func_004_7165::
     ld   [$D200], a                               ; $716D: $EA $00 $D2
     ld   a, $01                                   ; $7170: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7172: $E0 $A1
-    ld   a, $02                                   ; $7174: $3E $02
+    ld   a, DIRECTION_UP                          ; $7174: $3E $02
     ldh  [hLinkDirection], a                      ; $7176: $E0 $9E
     ret                                           ; $7178: $C9
 
@@ -6884,11 +6884,11 @@ jr_004_78D4:
     jr   nc, jr_004_7940                          ; $78D8: $30 $66
 
     ldh  a, [hLinkDirection]                      ; $78DA: $F0 $9E
-    cp   $02                                      ; $78DC: $FE $02
+    cp   DIRECTION_UP                             ; $78DC: $FE $02
     jr   nz, jr_004_7940                          ; $78DE: $20 $60
 
     ldh  a, [hJoypadState]                        ; $78E0: $F0 $CC
-    and  $30                                      ; $78E2: $E6 $30
+    and  J_A | J_B                                ; $78E2: $E6 $30
     jr   z, jr_004_7940                           ; $78E4: $28 $5A
 
     ld   a, [wItemPickedUpInShop]                               ; $78E6: $FA $09 $C5
@@ -7496,7 +7496,7 @@ func_004_7C06::
     jr   nz, jr_004_7C49                          ; $7C3F: $20 $08
 
     ldh  a, [hJoypadState]                        ; $7C41: $F0 $CC
-    and  $10                                      ; $7C43: $E6 $10
+    and  J_A                                      ; $7C43: $E6 $10
     jr   z, jr_004_7C49                           ; $7C45: $28 $02
 
     scf                                           ; $7C47: $37
@@ -7543,7 +7543,7 @@ func_004_7C4B::
     ld   hl, wC1AD                                ; $7C85: $21 $AD $C1
     ld   [hl], $01                                ; $7C88: $36 $01
     ldh  a, [hJoypadState]                        ; $7C8A: $F0 $CC
-    and  $10                                      ; $7C8C: $E6 $10
+    and  J_A                                      ; $7C8C: $E6 $10
     jr   z, jr_004_7C92                           ; $7C8E: $28 $02
 
     scf                                           ; $7C90: $37

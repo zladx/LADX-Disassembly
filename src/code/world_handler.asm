@@ -327,7 +327,7 @@ GameplayWorldSubtype6Handler::
 jr_001_4548::
     jp   label_27DD                               ; $4548: $C3 $DD $27
     ldh  a, [hJoypadState]                        ; $454B: $F0 $CC
-    and  $90                                      ; $454D: $E6 $90
+    and  J_A | J_START                                      ; $454D: $E6 $90
     jp   z, TransitionReturn                      ; $454F: $CA $66 $46
 
 TransitionToFileMenu::

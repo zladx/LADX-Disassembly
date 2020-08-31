@@ -126,7 +126,7 @@ FileSaveVisible::
 FileSaveInteractive::
     call func_001_412A                            ; $40AA: $CD $2A $41
     ldh  a, [hJoypadState]                        ; $40AD: $F0 $CC
-    and  $B0                                      ; $40AF: $E6 $B0
+    and  J_A | J_B | J_START                      ; $40AF: $E6 $B0
     jr   z, LCDOn.return                          ; $40B1: $28 $74
     ld   a, JINGLE_VALIDATE                       ; $40B3: $3E $13
     ldh  [hJingle], a                             ; $40B5: $E0 $F2
@@ -220,7 +220,7 @@ func_001_412A::
     ld   hl, wC13F                                ; $412A: $21 $3F $C1
     call func_001_6BA8                            ; $412D: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $4130: $F0 $CC
-    and  $0C                                      ; $4132: $E6 $0C
+    and  J_UP | J_DOWN                ; $4132: $E6 $0C
     jr   z, jr_001_413B                           ; $4134: $28 $05
     ld   a, [hl]                                  ; $4136: $7E
     inc  a                                        ; $4137: $3C

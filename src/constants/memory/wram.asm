@@ -178,7 +178,9 @@ wLinkGroundStatus::
 wConsecutiveStepsCount:
   ds 1 ; C120
 
-; TODO comment
+; Starts by $20 and counts down to 0.
+; 0 = False,
+; 1-20 = True
 wIsUsingSpinAttack::
   ds 1 ; C121
 
@@ -247,11 +249,13 @@ wBGOriginLow::
 wC130::
   ds 3 ; C130 - C132
 
-; 0x00 = no collision,
-; 0x03 = obstacle on top/bottom,
-; 0x04 = unknown,
-; 0x08 = unknown,
-; 0x0C = obstacle on left/right
+; Type of collistion
+; Bit 0 = up,
+; Bit 1 = down,
+; Bit 2 = left,
+; Bit 3 = right,
+; Bit 4 = unknown
+; See COLLISION_TYPE_* constants for possible values
 wCollisionType::
   ds 1 ; C133
 
@@ -1594,7 +1598,11 @@ wD116::
 
 ; not used
 wD117::
-  ds $102 ; D117 - D218
+  ds $9E ; D117 - D1B4
+
+; Unlabeled
+wD1B5::
+  ds $64 ; D1B5 - D218
 
 ; Current form of the Final Nightmare (0-5)
 wFinalNightmareForm::

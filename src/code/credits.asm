@@ -908,7 +908,7 @@ EndCreditsEntryPoint::
 
 jr_017_4AC7:
     ldh  a, [hJoypadState]                        ; $4AC7: $F0 $CC
-    and  $03                                      ; $4AC9: $E6 $03
+    and  J_RIGHT | J_LEFT              ; $4AC9: $E6 $03
     jr   z, jr_017_4AD6                           ; $4ACB: $28 $09
 
     ld   a, [ROM_DebugTool2]                      ; $4ACD: $FA $04 $00

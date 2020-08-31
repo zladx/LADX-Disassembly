@@ -2776,7 +2776,7 @@ func_036_50E4::
     ld   hl, wC1AD                                ; $50F5: $21 $AD $C1
     ld   [hl], $01                                ; $50F8: $36 $01
     ldh  a, [hJoypadState]                        ; $50FA: $F0 $CC
-    and  $10                                      ; $50FC: $E6 $10
+    and  J_A                                      ; $50FC: $E6 $10
     ret  z                                        ; $50FE: $C8
 
     call_open_dialog $268                         ; $50FF
@@ -3335,7 +3335,7 @@ func_036_54B0::
     jr   nz, jr_036_54C8                          ; $54BF: $20 $07
 
     ldh  a, [hJoypadState]                        ; $54C1: $F0 $CC
-    and  $20                                      ; $54C3: $E6 $20
+    and  J_B                                      ; $54C3: $E6 $20
     ret  z                                        ; $54C5: $C8
 
     jr   jr_036_54D3                              ; $54C6: $18 $0B
@@ -3346,7 +3346,7 @@ jr_036_54C8:
     ret  nz                                       ; $54CD: $C0
 
     ldh  a, [hJoypadState]                        ; $54CE: $F0 $CC
-    and  $10                                      ; $54D0: $E6 $10
+    and  J_A                                      ; $54D0: $E6 $10
     ret  z                                        ; $54D2: $C8
 
 jr_036_54D3:
@@ -4055,7 +4055,7 @@ jr_036_58FA:
     ld   hl, wC1AD                                ; $58FE: $21 $AD $C1
     ld   [hl], $01                                ; $5901: $36 $01
     ldh  a, [hJoypadState]                        ; $5903: $F0 $CC
-    and  $10                                      ; $5905: $E6 $10
+    and  J_A                                      ; $5905: $E6 $10
     jr   z, jr_036_5911                           ; $5907: $28 $08
 
     call_open_dialog $266                         ; $5909
@@ -4203,7 +4203,7 @@ func_036_59C3::
     ld   hl, wC1AD                                ; $59D9: $21 $AD $C1
     ld   [hl], $01                                ; $59DC: $36 $01
     ldh  a, [hJoypadState]                        ; $59DE: $F0 $CC
-    and  $10                                      ; $59E0: $E6 $10
+    and  J_A                                      ; $59E0: $E6 $10
     jr   z, jr_036_5A00                           ; $59E2: $28 $1C
 
     ld   hl, wEntitiesPrivateState1Table          ; $59E4: $21 $B0 $C2
@@ -7098,7 +7098,7 @@ jr_036_6AC5:
     jr   nz, jr_036_6AEA                          ; $6AE0: $20 $08
 
     ldh  a, [hJoypadState]                        ; $6AE2: $F0 $CC
-    and  $10                                      ; $6AE4: $E6 $10
+    and  J_A                                      ; $6AE4: $E6 $10
     jr   z, jr_036_6AEA                           ; $6AE6: $28 $02
 
     scf                                           ; $6AE8: $37

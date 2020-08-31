@@ -1607,7 +1607,7 @@ InitGotItemSequence::
     cp   $02                                      ; $1098: $FE $02
     jr   z, .jp_10DB                              ; $109A: $28 $3F
     ldh  a, [hLinkAnimationState]                 ; $109C: $F0 $9D
-    cp   LINK_ANIMATION_STATE_UNKNOWN_FF          ; $109E: $FE $FF
+    cp   LINK_ANIMATION_STATE_NO_UPDATE          ; $109E: $FE $FF
     jr   z, .jp_10DB                              ; $10A0: $28 $39
     ld   a, [wLinkMotionState]                    ; $10A2: $FA $1C $C1
     cp   $02                                      ; $10A5: $FE $02
@@ -2093,18 +2093,27 @@ data_13A9::
     db   0, 0, $E0, $20                           ; $13A9
 
 data_13AD::
-    db   $30, $D0, 0, 0, $40, $C0, 0, 0           ; $13AD
+.rightWithPieceOfPower      db  $30
+.leftWithPieceOfPower       db  $D0
+.upWithPieceOfPower         db  0
+.downWithPieceOfPower       db  0
+.rightWithoutPieceOfPower   db  $40
+.leftWithoutPieceOfPower    db  $C0
+.upWithoutPieceOfPower      db  0
+.downWithoutPieceOfPower    db  0
 
 data_13B5::
     db   0, 0, $D0, $30, 0, 0, $C0, $40           ; $13B5
 
 ShootArrow::
+    ; return if Link is not shooting an arrow
     ld   a, [wIsShootingArrow]                    ; $13BD: $FA $4C $C1
     and  a                                        ; $13C0: $A7
     ret  nz                                       ; $13C1: $C0
+    ; return if maximal amount of arrows are allready in the air
     ld   a, [wActiveProjectileCount]              ; $13C2: $FA $4D $C1
-    cp   $02                                      ; $13C5: $FE $02
-    jr   nc, label_142E                           ; $13C7: $30 $65
+    cp   ARROW_MAX_ACTIVE_COUNT                   ; $13C5: $FE $02
+    jr   nc, label_140F.return                    ; $13C7: $30 $65
     ld   a, $10                                   ; $13C9: $3E $10
     ld   [wIsShootingArrow], a                    ; $13CB: $EA $4C $C1
     ld   a, [wArrowCount]                         ; $13CE: $FA $45 $DB
@@ -2121,39 +2130,42 @@ ShootArrow::
     ld   [wC1C2], a                               ; $13E5: $EA $C2 $C1
     ld   a, [wBombArrowCooldown]                  ; $13E8: $FA $C0 $C1
     and  a                                        ; $13EB: $A7
-    jr   z, label_1401                            ; $13EC: $28 $13
+    jr   z, .label_1401                           ; $13EC: $28 $13
     ld   a, [wC1C1]                               ; $13EE: $FA $C1 $C1
     ld   c, a                                     ; $13F1: $4F
     ld   b, d                                     ; $13F2: $42
     ld   hl, wEntitiesStatusTable                 ; $13F3: $21 $80 $C2
     add  hl, bc                                   ; $13F6: $09
     ld   [hl], b                                  ; $13F7: $70
-    ld   hl, wEntitiesStateTable                                ; $13F8: $21 $90 $C2
+    ld   hl, wEntitiesStateTable                  ; $13F8: $21 $90 $C2
     add  hl, de                                   ; $13FB: $19
     ld   [hl], $01                                ; $13FC: $36 $01
     xor  a                                        ; $13FE: $AF
-    jr   label_1407                               ; $13FF: $18 $06
+    jr   .label_1407                              ; $13FF: $18 $06
 
-label_1401::
+.label_1401::
     ld   a, NOISE_SFX_SHOOT_ARROW                 ; $1401: $3E $0A
     ldh  [hNoiseSfx], a                           ; $1403: $E0 $F4
-    ld   a, $06                                   ; $1405: $3E $06
+    ld   a, BOMB_ARROW_COOLDOWN                   ; $1405: $3E $06
 
-label_1407::
+.label_1407::
     ld   [wBombArrowCooldown], a                  ; $1407: $EA $C0 $C1
     ldh  a, [hLinkDirection]                      ; $140A: $F0 $9E
     ld   c, a                                     ; $140C: $4F
     ld   b, $00                                   ; $140D: $06 $00
 
 label_140F::
+    ; if piece of power is not active do not offset direction
     ld   a, [wActivePowerUp]                      ; $140F: $FA $7C $D4
-    cp   $01                                      ; $1412: $FE $01
-    jr   nz, label_141A                           ; $1414: $20 $04
+    cp   POWER_UP_PIECE_OF_POWER                  ; $1412: $FE $01
+    jr   nz, .label_141A                          ; $1414: $20 $04
+    ; offset table by 4
     ld   a, c                                     ; $1416: $79
     add  a, $04                                   ; $1417: $C6 $04
     ld   c, a                                     ; $1419: $4F
 
-label_141A::
+.label_141A::
+    ; a = [data_13AD + hLinkDirection] + [wEntitiesSpeedXTable + hLinkDirecetion] + [wEntitiesSpeedYTable + hLinkDirection]
     ld   hl, data_13AD                            ; $141A: $21 $AD $13
     add  hl, bc                                   ; $141D: $09
     ld   a, [hl]                                  ; $141E: $7E
@@ -2167,7 +2179,7 @@ label_141A::
     add  hl, de                                   ; $142C: $19
     ld   [hl], a                                  ; $142D: $77
 
-label_142E::
+.return::
     ret                                           ; $142E: $C9
 
 ; Spawn a arrow, liftable rock, hookshot element…
@@ -2293,13 +2305,13 @@ UseRocsFeather::
 label_14F8::
     ldh  [hLinkPositionYIncrement], a             ; $14F8: $E0 $9B
     xor  a                                        ; $14FA: $AF
-    ldh  [hLinkPositionZLow], a                               ; $14FB: $E0 $A3
+    ldh  [hLinkPositionZLow], a                   ; $14FB: $E0 $A3
     call UpdateFinalLinkPosition                  ; $14FD: $CD $A8 $21
     jpsw CheckPositionForMapTransition            ; $1500: $3E $02 $CD $0C $08 $C3 $75 $6C
 
 label_1508::
     ld   a, $20                                   ; $1508: $3E $20
-    ldh  [hLinkPositionZLow], a                               ; $150A: $E0 $A3
+    ldh  [hLinkPositionZLow], a                   ; $150A: $E0 $A3
     ld   a, [wIsRunningWithPegasusBoots]          ; $150C: $FA $4A $C1
     and  a                                        ; $150F: $A7
     ret  z                                        ; $1510: $C8
@@ -2374,10 +2386,10 @@ func_157C::
     and  J_RIGHT | J_LEFT | J_UP | J_DOWN         ; $157E: $E6 $0F
     ld   e, a                                     ; $1580: $5F
     ld   d, $00                                   ; $1581: $16 $00
-    ld   hl, Data_002_4905                        ; $1583: $21 $05 $49
+    ld   hl, JoypadToLinkDirection                ; $1583: $21 $05 $49
     add  hl, de                                   ; $1586: $19
     ld   a, [hl]                                  ; $1587: $7E
-    cp   $0F                                      ; $1588: $FE $0F
+    cp   DIRECTION_KEEP                           ; $1588: $FE $0F
     jr   z, .return                               ; $158A: $28 $02
     ldh  [hLinkDirection], a                      ; $158C: $E0 $9E
 .return
@@ -2581,11 +2593,17 @@ label_1653::
     ld   [hl], $10                                ; $16B7: $36 $10
     ret                                           ; $16B9: $C9
 
-data_16BA::
-    db $12, $EE, $FC, 4                           ; $16BA
+LinkDirectionToSwordCollisionRangeX::
+.right: db  $12                                    ; $16BA
+.left:  db  $EE                                    ; $16BB
+.up:    db  $FC                                    ; $16BC
+.down:  db  4                                      ; $16BD
 
-data_16BE::
-    db 4, 4, $EE, $12                             ; $16BE
+LinkDirectionToSwordCollisionRangeY::
+.right: db  4                                      ; $16BE
+.left:  db  4                                      ; $16BF
+.up:    db  $EE                                    ; $16C0
+.down:  db  $12                                    ; $16C1
 
 ; Check sword collision with items lying on the ground
 CheckItemsSwordCollision::
@@ -2596,12 +2614,12 @@ CheckItemsSwordCollision::
     ldh  a, [hLinkDirection]                      ; $16C8: $F0 $9E
     ld   e, a                                     ; $16CA: $5F
     ld   d, $00                                   ; $16CB: $16 $00
-    ld   hl, data_16BA                            ; $16CD: $21 $BA $16
+    ld   hl, LinkDirectionToSwordCollisionRangeX  ; $16CD: $21 $BA $16
     add  hl, de                                   ; $16D0: $19
     ldh  a, [hLinkPositionX]                      ; $16D1: $F0 $98
     add  a, [hl]                                  ; $16D3: $86
-    ldh  [hMultiPurpose0], a                           ; $16D4: $E0 $D7
-    ld   hl, data_16BE                            ; $16D6: $21 $BE $16
+    ldh  [hMultiPurpose0], a                      ; $16D4: $E0 $D7
+    ld   hl, LinkDirectionToSwordCollisionRangeY  ; $16D6: $21 $BE $16
     add  hl, de                                   ; $16D9: $19
     ldh  a, [hLinkPositionY]                      ; $16DA: $F0 $99
     add  a, [hl]                                  ; $16DC: $86
@@ -2624,11 +2642,17 @@ CheckItemsSwordCollision::
     ldh  [hNoiseSfx], a                           ; $16FA: $E0 $F4
     ret                                           ; $16FC: $C9
 
-data_16FD::
-    db   $20, $E0, 0, 0                           ; $16FD
+XPositionIncrementPegasusRunning::
+.right: db  $20                                    ; $16FD
+.left:  db  $E0                                    ; $16FE
+.up:    db  0                                      ; $16FF
+.down:  db  0                                      ; $1700
 
-data_1701::
-    db   0, 0, $E0, $20                           ; $1701
+YPositionIncrementPegasusRunning::
+.right: db  0                                      ; $1701
+.left:  db  0                                      ; $1702
+.up:    db  $E0                                    ; $1703
+.down:  db  $20                                    ; $1704
 
 UsePegasusBoots::
     ldh  a, [hIsSideScrolling]                    ; $1705: $F0 $F9
@@ -2638,7 +2662,7 @@ UsePegasusBoots::
     and  a                                        ; $170C: $A7
     ret  nz                                       ; $170D: $C0
     ldh  a, [hLinkDirection]                      ; $170E: $F0 $9E
-    and  $02                                      ; $1710: $E6 $02
+    and  DIRECTION_VERTICAL_MASK                  ; $1710: $E6 $02
     ret  nz                                       ; $1712: $C0
 
 .label_1713
@@ -2656,7 +2680,7 @@ UsePegasusBoots::
     ld   a, [wPegasusBootsChargeMeter]            ; $172A: $FA $4B $C1
     inc  a                                        ; $172D: $3C
     ld   [wPegasusBootsChargeMeter], a            ; $172E: $EA $4B $C1
-    cp   $20                                      ; $1731: $FE $20
+    cp   MAX_PEGASUS_BOOTS_CHARGE                 ; $1731: $FE $20
     ret  nz                                       ; $1733: $C0
     ld   [wIsRunningWithPegasusBoots], a          ; $1734: $EA $4A $C1
     ; reset spin marker and sword charge
@@ -2666,11 +2690,11 @@ UsePegasusBoots::
     ldh  a, [hLinkDirection]                      ; $173E: $F0 $9E
     ld   e, a                                     ; $1740: $5F
     ld   d, $00                                   ; $1741: $16 $00
-    ld   hl, data_16FD                            ; $1743: $21 $FD $16
+    ld   hl, XPositionIncrementPegasusRunning     ; $1743: $21 $FD $16
     add  hl, de                                   ; $1746: $19
     ld   a, [hl]                                  ; $1747: $7E
     ldh  [hLinkPositionXIncrement], a             ; $1748: $E0 $9A
-    ld   hl, data_1701                            ; $174A: $21 $01 $17
+    ld   hl, YPositionIncrementPegasusRunning     ; $174A: $21 $01 $17
     add  hl, de                                   ; $174D: $19
     ld   a, [hl]                                  ; $174E: $7E
     ldh  [hLinkPositionYIncrement], a             ; $174F: $E0 $9B
@@ -3421,24 +3445,24 @@ CopyDataAndDrawLinkSprite::
 
 ; Number of horizontal pixels the sword reaches in Link's direction when drawing the sword
 SwordAreaXForDirection::
-.right db $0C                                     ; $1F49
-.left  db $03                                     ; $1F4A
-.up    db $08                                     ; $1F4B
-.down  db $08                                     ; $1F4C
+.right: db $0C                                     ; $1F49
+.left:  db $03                                     ; $1F4A
+.up:    db $08                                     ; $1F4B
+.down:  db $08                                     ; $1F4C
 
 ; Number of vertical pixels the sword reaches in Link's direction when drawing the sword
 SwordAreaYForDirection::
-.right db $0A                                     ; $1F4D
-.left  db $0A                                     ; $1F4E
-.up    db $05                                     ; $1F4F
-.down  db $10                                     ; $1F50
+.right: db $0A                                     ; $1F4D
+.left:  db $0A                                     ; $1F4E
+.up:    db $05                                     ; $1F4F
+.down:  db $10                                     ; $1F50
 
 ; Array of constants for Link animation state
 LinkDirectionToLinkAnimationState_2::
-.right db  LINK_ANIMATION_STATE_UNKNOWN_36
-.left  db  LINK_ANIMATION_STATE_UNKNOWN_38
-.up    db  LINK_ANIMATION_STATE_UNKNOWN_3A
-.down  db  LINK_ANIMATION_STATE_UNKNOWN_3C                       ; $1F51
+.right: db  LINK_ANIMATION_STATE_UNKNOWN_36
+.left:  db  LINK_ANIMATION_STATE_UNKNOWN_38
+.up:    db  LINK_ANIMATION_STATE_UNKNOWN_3A
+.down:  db  LINK_ANIMATION_STATE_UNKNOWN_3C                       ; $1F51
 
 data_1F55::
     db   2, 1, 8, 4                               ; $1F55
@@ -3677,7 +3701,7 @@ ENDC
     cp   TRIGGER_THROW_POT_AT_CHEST               ; $20A1: $FE $0D
     jr   z, .specialCasesEnd                      ; $20A3: $28 $2A
     ldh  a, [hLinkDirection]                      ; $20A5: $F0 $9E
-    cp   $02                                      ; $20A7: $FE $02
+    cp   DIRECTION_UP                             ; $20A7: $FE $02
     jr   nz, .specialCasesEnd                     ; $20A9: $20 $24
     ld   [wC1AD], a                               ; $20AB: $EA $AD $C1
     ldh  a, [hJoypadState]                        ; $20AE: $F0 $CC
@@ -3687,7 +3711,7 @@ ENDC
     and  a                                        ; $20B6: $A7
     jr   nz, .label_20BF                          ; $20B7: $20 $06
     ldh  a, [hLinkDirection]                      ; $20B9: $F0 $9E
-    cp   $02                                      ; $20BB: $FE $02
+    cp   DIRECTION_UP                             ; $20BB: $FE $02
     jr   nz, .specialCasesEnd                     ; $20BD: $20 $10
 
 .label_20BF
@@ -3722,7 +3746,7 @@ ENDC
 
 .jr_20EC
     callsb label_002_48B0                         ; $20EC: $3E $02 $EA $00 $21 $CD $B0 $48
-    ld   a, $01                                   ; $20F4: $3E $01
+    ld   a, TRUE                                  ; $20F4: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $20F6: $E0 $A1
     ldh  a, [hLinkDirection]                      ; $20F8: $F0 $9E
     ld   e, a                                     ; $20FA: $5F
@@ -3796,12 +3820,12 @@ ENDC
 
 .jr_2161
     ld   a, $01                                   ; $2161: $3E $01
-    ldh  [hMultiPurposeE], a                               ; $2163: $E0 $E5
+    ldh  [hMultiPurposeE], a                      ; $2163: $E0 $E5
 
 func_2165::
-    ldh  a, [hMultiPurpose1]                           ; $2165: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $2165: $F0 $D8
     ld   e, a                                     ; $2167: $5F
-    ldh  a, [hMultiPurpose0]                           ; $2168: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $2168: $F0 $D7
     ldh  [hObjectUnderEntity], a                  ; $216A: $E0 $AF
     call func_014_5526_trampoline                 ; $216C: $CD $78 $21
     ldh  a, [hLinkDirection]                      ; $216F: $F0 $9E
@@ -3927,8 +3951,8 @@ func_21E1::
 ; Increment the BG map offset by this amount during room transition,
 ; depending on the transition direction.
 BGRegionIncrement::
-.right  db $10                                    ; $2205
-.left   db $10                                    ; $2206
+.right: db $10                                    ; $2205
+.left:  db $10                                    ; $2206
 .top    db $01                                    ; $2207
 .bottom db $01                                    ; $2208
 

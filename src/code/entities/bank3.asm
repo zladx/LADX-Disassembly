@@ -2577,17 +2577,29 @@ Data_003_56EE::
     db   $01, $04, $04
 
 Data_003_56F1::
-    db   $0A, $37, $37, $37, $01, $39, $39, $39, $01, $3B, $3B, $3B, $01, $3D, $3D, $3D
+.right: db  $0A, $37, $37, $37
+.left:  db  $01, $39, $39, $39
+.up:    db  $01, $3B, $3B, $3B
+.down:  db  $01, $3D, $3D, $3D
 
 Data_003_5701::
-    db   $01, $10, $10, $08, $00, $F0, $F0, $F8, $00, $00, $00, $00, $00, $FF, $FF, $FF
+.right: db  $01, $10, $10, $08
+.left:  db  $00, $F0, $F0, $F8
+.up:    db  $00, $00, $00, $00
+.down:  db  $00, $FF, $FF, $FF
 
 Data_003_5711::
-    db   $FF, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $08
+.right: db  $FF, $00, $00, $00
+.left:  db  $00, $00, $00, $00
+.up:    db  $00, $00, $00, $00
+.down:  db  $00, $00, $00, $08
 
 Data_003_5721::
-    db   $00, $00, $00, $08, $0E, $00, $00, $08, $0E, $00, $00, $08, $0E, $00, $00, $00
-    db   $0E
+    db  $00, $00, $00, $08
+    db  $0E, $00, $00, $08
+    db  $0E, $00, $00, $08
+    db  $0E, $00, $00, $00
+    db  $0E
 
 EntityLiftedHandler::
     ldh  a, [hActiveEntityType]                   ; $5732: $F0 $EB
@@ -2661,6 +2673,7 @@ jr_003_578F:
     call func_003_5795                            ; $578F: $CD $95 $57
     jp   label_003_57E6                           ; $5792: $C3 $E6 $57
 
+; e = carried object type ?
 func_003_5795::
     ldh  a, [hLinkDirection]                      ; $5795: $F0 $9E
     sla  a                                        ; $5797: $CB $27
@@ -2708,7 +2721,7 @@ jr_003_57D7:
     ld   hl, Data_003_5721                        ; $57D7: $21 $21 $57
     add  hl, de                                   ; $57DA: $19
     ld   a, [hl]                                  ; $57DB: $7E
-    ld   hl, hLinkPositionZHigh                       ; $57DC: $21 $A2 $FF
+    ld   hl, hLinkPositionZHigh                   ; $57DC: $21 $A2 $FF
     add  [hl]                                     ; $57DF: $86
     ld   hl, wEntitiesPosZTable                   ; $57E0: $21 $10 $C3
     add  hl, bc                                   ; $57E3: $09
@@ -3105,9 +3118,9 @@ HoldEntityAboveLink::
     ld   [hl], a                                  ; $5A2D: $77
 
 func_003_5A2E::
-    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $5A2E: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $5A2E: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $5A30: $E0 $9D
-    ld   a, $03                                   ; $5A32: $3E $03
+    ld   a, DIRECTION_DOWN                        ; $5A32: $3E $03
     ldh  [hLinkDirection], a                      ; $5A34: $E0 $9E
     ; reset sword parameter
     xor  a                                        ; $5A36: $AF
@@ -3377,7 +3390,7 @@ SwordState1Handler::
     call SetEntitySpriteVariant                   ; $5BED: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $5BF0: $CD $05 $0C
     ld   [hl], $20                                ; $5BF3: $36 $20
-    ld   a, $20                                   ; $5BF5: $3E $20
+    ld   a, USING_SPIN_ATTACK_MAX                 ; $5BF5: $3E $20
     ld   [wIsUsingSpinAttack], a                  ; $5BF7: $EA $21 $C1
     ld   a, $03                                   ; $5BFA: $3E $03
     ldh  [hNoiseSfx], a                           ; $5BFC: $E0 $F4
@@ -5896,17 +5909,17 @@ Data_003_6BC6::
 
 ; For a given direction, get the opposite direction
 ReversedDirectionsTable::
-._right db DIRECTION_LEFT
-._left  db DIRECTION_RIGHT
-._up    db DIRECTION_DOWN
-._down  db DIRECTION_UP
+.right: db DIRECTION_LEFT
+.left:  db DIRECTION_RIGHT
+.up:    db DIRECTION_DOWN
+.down:  db DIRECTION_UP
 
 ; Array indexed by Link direction
 Data_003_6BDA::
-._00 db $02
-._01 db $0A
-._02 db $0E
-._03 db $06
+.right: db $02
+.left:  db $0A
+.up:    db $0E
+.down:  db $06
 
 ; Check the collision of the active entity (an enemy projectile) with Link.
 ; If the entity is collisioning, handle whether Link has its shield up or not.
@@ -6593,10 +6606,16 @@ func_003_6F5C::
     ret                                           ; $6F64: $C9
 
 Data_003_6F65::
-    db   $10, $F0, $00, $00
+.right: db  16
+.left:  db -16
+.up:    db   0
+.down:  db   0
 
 Data_003_6F69::
-    db   $00, $00, $F0, $10
+.right: db   0
+.left:  db   0
+.up:    db -16
+.down:  db  16
 
 jr_003_6F6D:
     cp   ENTITY_STAR                              ; $6F6D: $FE $9C
@@ -6607,7 +6626,7 @@ jr_003_6F6D:
 
 .starOrAntiFairy
     ldh  a, [hLinkDirection]                      ; $6F75: $F0 $9E
-    and  $02                                      ; $6F77: $E6 $02
+    and  DIRECTION_VERTICAL_MASK                  ; $6F77: $E6 $02
     jr   nz, .jr_003_6F81                         ; $6F79: $20 $06
 
     ld   hl, wEntitiesSpeedXTable                 ; $6F7B: $21 $40 $C2
@@ -6691,7 +6710,10 @@ func_003_6FCC::
     jp   func_003_73DB                            ; $6FE1: $C3 $DB $73
 
 Data_003_6FE4::
-    db   $00, $01, $02, $03
+.right: db  $00
+.left:  db  $01
+.up:    db  $02
+.down:  db  $03
 
 label_003_6FE8:
     ldh  a, [hActiveEntityType]                   ; $6FE8: $F0 $EB
@@ -7572,10 +7594,16 @@ label_003_74E1:
     jp   label_003_74EC                           ; $74E1: $C3 $EC $74
 
 Data_003_74E4::
-    db   $00, $F0, $F8, $FC
+.right: db  $00
+.left:  db  $F0
+.up:    db  $F8
+.down:  db  $FC
 
 Data_003_74E8::
-    db   $FC, $FC, $F0, $00
+.right: db  $FC
+.left:  db  $FC
+.up:    db  $F0
+.down:  db  $00
 
 label_003_74EC:
     ldh  a, [hFrameCounter]                       ; $74EC: $F0 $E7

@@ -674,9 +674,9 @@ DialogBreakHandler::
     call func_27BB                                ; $26B6: $CD $BB $27
     ; If
     ldh  a, [hJoypadState]                        ; $26B9: $F0 $CC
-    bit  4, a                                     ; $26BB: $CB $67
+    bit  J_BIT_A, a                               ; $26BB: $CB $67
     jr   nz, .jp_26E1                             ; $26BD: $20 $22
-    bit  5, a                                     ; $26BF: $CB $6F
+    bit  J_BIT_B, a                               ; $26BF: $CB $6F
     jr   z, DialogScrollingStartHandler           ; $26C1: $28 $51
     ld   a, BANK(DialogBankTable)                 ; $26C3: $3E $1C
     ld   [MBC3SelectBank], a                      ; $26C5: $EA $00 $21
@@ -835,10 +835,11 @@ label_278B::
     jp   UpdateDialogState                        ; $2790: $C3 $96 $24
 
 DialogChoiceHandler::
+    ; Was A pushed? 
     ldh  a, [hJoypadState]                        ; $2793: $F0 $CC
-    bit  4, a               ; Was A pushed?       ; $2795: $CB $67
+    bit  J_BIT_A, a                               ; $2795: $CB $67
     jp   nz, .jp_27B7                             ; $2797: $C2 $B7 $27
-    and  J_LEFT | J_RIGHT                         ; $279A: $E6 $03
+    and  J_RIGHT | J_LEFT                         ; $279A: $E6 $03
     jr   z, .jp_27AA                              ; $279C: $28 $0C
     ld   hl, wDialogAskSelectionIndex             ; $279E: $21 $77 $C1
     ld   a, [hl]                                  ; $27A1: $7E

@@ -149,7 +149,7 @@ func_006_645D::
     jr   nz, .return                              ; $64BA: $20 $08
 
     ldh  a, [hJoypadState]                        ; $64BC: $F0 $CC
-    and  $10                                      ; $64BE: $E6 $10
+    and  J_A                                      ; $64BE: $E6 $10
     jr   z, .return                               ; $64C0: $28 $02
 
     scf                                           ; $64C2: $37

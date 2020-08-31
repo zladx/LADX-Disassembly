@@ -1837,7 +1837,7 @@ func_015_4F5A::
     call UpdateEntityPosWithSpeed_15              ; $4F5A: $CD $88 $7B
     call label_3B23                               ; $4F5D: $CD $23 $3B
     ldh  a, [hJoypadState]                        ; $4F60: $F0 $CC
-    and  $30                                      ; $4F62: $E6 $30
+    and  J_A | J_B                                ; $4F62: $E6 $30
     jr   z, jr_015_4FAE                           ; $4F64: $28 $48
 
     call func_015_7BDB                            ; $4F66: $CD $DB $7B
@@ -2646,7 +2646,7 @@ func_015_5435::
     jr   nz, jr_015_5450                          ; $5440: $20 $0E
 
     ldh  a, [hJoypadState]                        ; $5442: $F0 $CC
-    and  $20                                      ; $5444: $E6 $20
+    and  J_B                                      ; $5444: $E6 $20
     jr   z, jr_015_5465                           ; $5446: $28 $1D
 
     ld   a, $03                                   ; $5448: $3E $03
@@ -2659,7 +2659,7 @@ jr_015_5450:
     jr   nz, jr_015_5465                          ; $5455: $20 $0E
 
     ldh  a, [hJoypadState]                        ; $5457: $F0 $CC
-    and  $10                                      ; $5459: $E6 $10
+    and  J_A                                      ; $5459: $E6 $10
     jr   z, jr_015_5465                           ; $545B: $28 $08
 
     ld   a, $03                                   ; $545D: $3E $03
@@ -7514,7 +7514,7 @@ ShouldLinkTalkToEntity::
     jr   nz, jr_015_7B0B                          ; $7B01: $20 $08
 
     ldh  a, [hJoypadState]                        ; $7B03: $F0 $CC
-    and  $10                                      ; $7B05: $E6 $10
+    and  J_A                                      ; $7B05: $E6 $10
     jr   z, jr_015_7B0B                           ; $7B07: $28 $02
 
     scf                                           ; $7B09: $37
@@ -8082,7 +8082,7 @@ func_015_7DF5::
     ldh  [hLinkPositionY], a                      ; $7E01: $E0 $99
     ld   a, $02                                   ; $7E03: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7E05: $E0 $A1
-    ld   a, LINK_ANIMATION_STATE_UNKNOWN_FF       ; $7E07: $3E $FF
+    ld   a, LINK_ANIMATION_STATE_NO_UPDATE       ; $7E07: $3E $FF
     ldh  [hLinkAnimationState], a                 ; $7E09: $E0 $9D
     ld   de, Data_015_7D50                        ; $7E0B: $11 $50 $7D
     ld   a, [wTunicType]                          ; $7E0E: $FA $0F $DC

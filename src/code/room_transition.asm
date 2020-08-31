@@ -3,26 +3,26 @@
 ;
 
 RoomTransitionLinkXIncrement::
-.right  db $C6
-.left   db $3A
+.right: db $C6
+.left:  db $3A
 .top    db $00
 .bottom db $00
 
 RoomTransitionLinkYIncrement::
-.right  db $00
-.left   db $00
+.right: db $00
+.left:  db $00
 .top    db $3A
 .bottom db $C6
 
 RoomTransitionXIncrement::
-.right  db $04
-.left   db $FC
+.right: db $04
+.left:  db $FC
 .top    db $00
 .bottom db $00
 
 RoomTransitionYIncrement::
-.right  db $00
-.left   db $00
+.right: db $00
+.left:  db $00
 .top    db $FC
 .bottom db $04
 

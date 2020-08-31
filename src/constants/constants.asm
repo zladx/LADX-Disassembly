@@ -20,6 +20,7 @@ include "constants/sfx.asm"
 include "constants/super_gameboy.asm"
 include "constants/tilesets.asm"
 include "constants/vfx.asm"
+include "constants/physics.asm"
 
 ;
 ; Character maps for strings

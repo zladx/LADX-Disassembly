@@ -122,7 +122,7 @@ jr_005_45BF:
     jr   nz, jr_005_45DF                          ; $45D5: $20 $08
 
     ldh  a, [hJoypadState]                        ; $45D7: $F0 $CC
-    and  $20                                      ; $45D9: $E6 $20
+    and  J_B                                      ; $45D9: $E6 $20
     jr   nz, jr_005_45EC                          ; $45DB: $20 $0F
 
     jr   jr_005_4611                              ; $45DD: $18 $32
@@ -133,7 +133,7 @@ jr_005_45DF:
     jr   nz, jr_005_4611                          ; $45E4: $20 $2B
 
     ldh  a, [hJoypadState]                        ; $45E6: $F0 $CC
-    and  $10                                      ; $45E8: $E6 $10
+    and  J_A                                      ; $45E8: $E6 $10
     jr   z, jr_005_4611                           ; $45EA: $28 $25
 
 jr_005_45EC:

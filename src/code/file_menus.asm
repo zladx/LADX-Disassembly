@@ -282,13 +282,13 @@ ENDC
 .start
     call func_001_6BA8                            ; $48E8: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $48EB: $F0 $CC
-    and  $90                                      ; $48ED: $E6 $90
+    and  J_A | J_START                            ; $48ED: $E6 $90
     jr   z, jr_001_48F4                           ; $48EF: $28 $03
     jp   IncrementGameplaySubtypeAndReturn        ; $48F1: $C3 $D6 $44
 
 jr_001_48F4::
     ldh  a, [hJoypadState]                        ; $48F4: $F0 $CC
-    and  $0C                                      ; $48F6: $E6 $0C
+    and  J_UP | J_DOWN                ; $48F6: $E6 $0C
     jr   z, jr_001_4920                           ; $48F8: $28 $26
     ld   c, $02                                   ; $48FA: $0E $02
     ld   a, [wSaveFilesCount]                     ; $48FC: $FA $A7 $DB
@@ -298,7 +298,7 @@ jr_001_48F4::
 
 jr_001_4903::
     ldh  a, [hJoypadState]                        ; $4903: $F0 $CC
-    bit  2, a                                     ; $4905: $CB $57
+    bit  J_BIT_UP, a                              ; $4905: $CB $57
     jr   nz, jr_001_4915                          ; $4907: $20 $0C
     ld   a, [wSaveSlot]                           ; $4909: $FA $A6 $DB
     add  a, $01                                   ; $490C: $C6 $01
@@ -322,7 +322,7 @@ jr_001_4920::
     cp   $03                                      ; $4923: $FE $03
     jr   nz, func_001_4954                        ; $4925: $20 $2D
     ldh  a, [hJoypadState]                        ; $4927: $F0 $CC
-    and  $03                                      ; $4929: $E6 $03
+    and  J_RIGHT | J_LEFT              ; $4929: $E6 $03
     jr   z, jr_001_4938                           ; $492B: $28 $0B
     call func_001_6BAE                            ; $492D: $CD $AE $6B
     ld   a, [wIsFileSelectionArrowShifted]                               ; $4930: $FA $00 $D0
@@ -1088,15 +1088,15 @@ IF __PATCH_4__
     ld   de, wDC0A
     jr   jr_001_4db6
 ELSE
-    jr   z, jr_001_4DBD                            ; $4DC3: $28 $F8 ; $4DC3: $28 $F8
+    jr   z, jr_001_4DBD                           ; $4DC3: $28 $F8 ; $4DC3: $28 $F8
 
     ld   a, $01                                   ; $4DC5: $3E $01 ; $4DC5: $3E $01
-    ldh  [hMultiPurpose4], a                           ; $4DC7: $E0 $DB ; $4DC7: $E0 $DB
+    ldh  [hMultiPurpose4], a                      ; $4DC7: $E0 $DB ; $4DC7: $E0 $DB
     ld   a, [wDC07]                               ; $4DC9: $FA $07 $DC ; $4DC9: $FA $07 $DC
-    ldh  [hMultiPurpose2], a                           ; $4DCC: $E0 $D9 ; $4DCC: $E0 $D9
+    ldh  [hMultiPurpose2], a                      ; $4DCC: $E0 $D9 ; $4DCC: $E0 $D9
     ld   a, [wDC0A]                               ; $4DCE: $FA $0A $DC ; $4DCE: $FA $0A $DC
-    ldh  [hMultiPurpose3], a                           ; $4DD1: $E0 $DA ; $4DD1: $E0 $DA
-    jp   label_001_5D53                               ; $4DD3: $C3 $53 $5D ; $4DD3: $C3 $53 $5D
+    ldh  [hMultiPurpose3], a                      ; $4DD1: $E0 $DA ; $4DD1: $E0 $DA
+    jp   label_001_5D53                           ; $4DD3: $C3 $53 $5D ; $4DD3: $C3 $53 $5D
 ENDC
 
 func_001_4DD6::
@@ -1109,15 +1109,15 @@ IF __PATCH_4__
     ld   de, wDC0B
     jr   jr_001_4db6
 ELSE
-    jr   z, jr_001_4DBD                            ; $4DDB: $28 $E0 ; $4DDB: $28 $E0
+    jr   z, jr_001_4DBD                           ; $4DDB: $28 $E0 ; $4DDB: $28 $E0
 
     ld   a, $02                                   ; $4DDD: $3E $02 ; $4DDD: $3E $02
-    ldh  [hMultiPurpose4], a                           ; $4DDF: $E0 $DB ; $4DDF: $E0 $DB
+    ldh  [hMultiPurpose4], a                      ; $4DDF: $E0 $DB ; $4DDF: $E0 $DB
     ld   a, [wDC08]                               ; $4DE1: $FA $08 $DC ; $4DE1: $FA $08 $DC
-    ldh  [hMultiPurpose2], a                           ; $4DE4: $E0 $D9 ; $4DE4: $E0 $D9
+    ldh  [hMultiPurpose2], a                      ; $4DE4: $E0 $D9 ; $4DE4: $E0 $D9
     ld   a, [wDC0B]                               ; $4DE6: $FA $0B $DC ; $4DE6: $FA $0B $DC
-    ldh  [hMultiPurpose3], a                           ; $4DE9: $E0 $DA ; $4DE9: $E0 $DA
-    jp   label_001_5D53                               ; $4DEB: $C3 $53 $5D ; $4DEB: $C3 $53 $5D
+    ldh  [hMultiPurpose3], a                      ; $4DE9: $E0 $DA ; $4DE9: $E0 $DA
+    jp   label_001_5D53                           ; $4DEB: $C3 $53 $5D ; $4DEB: $C3 $53 $5D
 ENDC
 
 Data_001_4DEE::
@@ -1126,10 +1126,10 @@ Data_001_4DEE::
     db   $99, $65, $44, $7E, $99, $85, $44, $7E   ; $4DFE ; $4DFE
 
 FileDeletionState10Handler::
-    call func_001_6BA8                               ; $4E06: $CD $A8 $6B ; $4E06: $CD $A8 $6B
+    call func_001_6BA8                            ; $4E06: $CD $A8 $6B ; $4E06: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $4E09: $F0 $CC ; $4E09: $F0 $CC
-    and  $08                                      ; $4E0B: $E6 $08 ; $4E0B: $E6 $08
-    jr   z, jr_001_4E18                            ; $4E0D: $28 $09 ; $4E0D: $28 $09
+    and  J_DOWN                                   ; $4E0B: $E6 $08 ; $4E0B: $E6 $08
+    jr   z, jr_001_4E18                           ; $4E0D: $28 $09 ; $4E0D: $28 $09
 
     ld   a, [wSaveSlot]                           ; $4E0F: $FA $A6 $DB ; $4E0F: $FA $A6 $DB
     inc  a                                        ; $4E12: $3C ; $4E12: $3C
@@ -1138,13 +1138,13 @@ FileDeletionState10Handler::
 
 jr_001_4E18::
     ldh  a, [hJoypadState]                        ; $4E18: $F0 $CC ; $4E18: $F0 $CC
-    and  $04                                      ; $4E1A: $E6 $04 ; $4E1A: $E6 $04
-    jr   z, jr_001_4E2B                            ; $4E1C: $28 $0D ; $4E1C: $28 $0D
+    and  J_UP                                     ; $4E1A: $E6 $04 ; $4E1A: $E6 $04
+    jr   z, jr_001_4E2B                           ; $4E1C: $28 $0D ; $4E1C: $28 $0D
 
     ld   a, [wSaveSlot]                           ; $4E1E: $FA $A6 $DB ; $4E1E: $FA $A6 $DB
     dec  a                                        ; $4E21: $3D ; $4E21: $3D
     cp   $FF                                      ; $4E22: $FE $FF ; $4E22: $FE $FF
-    jr   nz, jr_001_4E28                           ; $4E24: $20 $02 ; $4E24: $20 $02
+    jr   nz, jr_001_4E28                          ; $4E24: $20 $02 ; $4E24: $20 $02
 
     ld   a, $03                                   ; $4E26: $3E $03 ; $4E26: $3E $03
 
@@ -1153,14 +1153,14 @@ jr_001_4E28::
 
 jr_001_4E2B::
     ldh  a, [hJoypadState]                        ; $4E2B: $F0 $CC ; $4E2B: $F0 $CC
-    and  $90                                      ; $4E2D: $E6 $90 ; $4E2D: $E6 $90
-    jr   z, jr_001_4E67                            ; $4E2F: $28 $36 ; $4E2F: $28 $36
+    and  J_A | J_START                            ; $4E2D: $E6 $90 ; $4E2D: $E6 $90
+    jr   z, jr_001_4E67                           ; $4E2F: $28 $36 ; $4E2F: $28 $36
 
     ld   a, [wSaveSlot]                           ; $4E31: $FA $A6 $DB ; $4E31: $FA $A6 $DB
     cp   $03                                      ; $4E34: $FE $03 ; $4E34: $FE $03
-    jr   nz, jr_001_4E3B                           ; $4E36: $20 $03 ; $4E36: $20 $03
+    jr   nz, jr_001_4E3B                          ; $4E36: $20 $03 ; $4E36: $20 $03
 
-    jp   label_001_4555                               ; $4E38: $C3 $55 $45 ; $4E38: $C3 $55 $45
+    jp   label_001_4555                           ; $4E38: $C3 $55 $45 ; $4E38: $C3 $55 $45
 
 jr_001_4E3B::
     call PlayValidationJingleAndReturn            ; $4E3B: $CD $BE $49 ; $4E3B: $CD $BE $49
@@ -1215,31 +1215,31 @@ ENDC
 ENDC
 
 jr_001_4E67::
-    call func_001_4954                               ; $4E67: $CD $54 $49 ; $4E67: $CD $54 $49
+    call func_001_4954                            ; $4E67: $CD $54 $49 ; $4E67: $CD $54 $49
     ret                                           ; $4E6A: $C9 ; $4E6A: $C9
 
 FileDeletionState11Handler::
     ldh  a, [hJoypadState]                        ; $4E6B: $F0 $CC ; $4E6B: $F0 $CC
-    bit  5, a                                     ; $4E6D: $CB $6F ; $4E6D: $CB $6F
-    jr   nz, jr_001_4E9E                           ; $4E6F: $20 $2D ; $4E6F: $20 $2D
+    bit  J_BIT_B, a                               ; $4E6D: $CB $6F ; $4E6D: $CB $6F
+    jr   nz, jr_001_4E9E                          ; $4E6F: $20 $2D ; $4E6F: $20 $2D
 
     and  $90                                      ; $4E71: $E6 $90 ; $4E71: $E6 $90
 IF __PATCH_5__
     jp   z, jr_001_4ED9
 ELSE
-    jr   z, jr_001_4ED9                            ; $4E73: $28 $64 ; $4E73: $28 $64
+    jr   z, jr_001_4ED9                           ; $4E73: $28 $64 ; $4E73: $28 $64
 ENDC
 
     ld   a, [wCreditsScratch0]                    ; $4E75: $FA $00 $D0 ; $4E75: $FA $00 $D0
     and  a                                        ; $4E78: $A7 ; $4E78: $A7
-    jp   z, label_001_4555                            ; $4E79: $CA $55 $45 ; $4E79: $CA $55 $45
+    jp   z, label_001_4555                        ; $4E79: $CA $55 $45 ; $4E79: $CA $55 $45
 
     call PlayValidationJingleAndReturn            ; $4E7C: $CD $BE $49 ; $4E7C: $CD $BE $49
     ld   a, [wSaveSlot]                           ; $4E7F: $FA $A6 $DB ; $4E7F: $FA $A6 $DB
     sla  a                                        ; $4E82: $CB $27 ; $4E82: $CB $27
     ld   e, a                                     ; $4E84: $5F ; $4E84: $5F
     ld   d, $00                                   ; $4E85: $16 $00 ; $4E85: $16 $00
-    ld   hl, Data_001_49F8                           ; $4E87: $21 $F8 $49 ; $4E87: $21 $F8 $49
+    ld   hl, Data_001_49F8                        ; $4E87: $21 $F8 $49 ; $4E87: $21 $F8 $49
     add  hl, de                                   ; $4E8A: $19 ; $4E8A: $19
     ld   a, [hl+]                                 ; $4E8B: $2A ; $4E8B: $2A
     ld   h, [hl]                                  ; $4E8C: $66 ; $4E8C: $66
@@ -1365,7 +1365,7 @@ jr_001_4F03::
     ld   [de], a                                  ; $4F04: $12 ; $4F04: $12
     inc  de                                       ; $4F05: $13 ; $4F05: $13
     dec  c                                        ; $4F06: $0D ; $4F06: $0D
-    jr   nz, jr_001_4F03                           ; $4F07: $20 $FA ; $4F07: $20 $FA
+    jr   nz, jr_001_4F03                          ; $4F07: $20 $FA ; $4F07: $20 $FA
 
     xor  a                                        ; $4F09: $AF ; $4F09: $AF
     ld   [de], a                                  ; $4F0A: $12 ; $4F0A: $12
@@ -1373,10 +1373,10 @@ jr_001_4F03::
 
 func_001_4F0C::
     ldh  a, [hJoypadState]                        ; $4F0C: $F0 $CC ; $4F0C: $F0 $CC
-    and  $03                                      ; $4F0E: $E6 $03 ; $4F0E: $E6 $03
-    jr   z, jr_001_4F1D                            ; $4F10: $28 $0B ; $4F10: $28 $0B
+    and  J_RIGHT | J_LEFT              ; $4F0E: $E6 $03 ; $4F0E: $E6 $03
+    jr   z, jr_001_4F1D                           ; $4F10: $28 $0B ; $4F10: $28 $0B
 
-    call func_001_6BAE                               ; $4F12: $CD $AE $6B ; $4F12: $CD $AE $6B
+    call func_001_6BAE                            ; $4F12: $CD $AE $6B ; $4F12: $CD $AE $6B
     ld   a, [wCreditsScratch0]                    ; $4F15: $FA $00 $D0 ; $4F15: $FA $00 $D0
     xor  $01                                      ; $4F18: $EE $01 ; $4F18: $EE $01
     ld   [wCreditsScratch0], a                    ; $4F1A: $EA $00 $D0 ; $4F1A: $EA $00 $D0
@@ -1384,7 +1384,7 @@ func_001_4F0C::
 jr_001_4F1D::
     ldh  a, [hFrameCounter]                       ; $4F1D: $F0 $E7 ; $4F1D: $F0 $E7
     and  $10                                      ; $4F1F: $E6 $10 ; $4F1F: $E6 $10
-    jr   nz, jr_001_4F3A                           ; $4F21: $20 $17 ; $4F21: $20 $17
+    jr   nz, jr_001_4F3A                          ; $4F21: $20 $17 ; $4F21: $20 $17
 
     ld   a, [wCreditsScratch0]                    ; $4F23: $FA $00 $D0 ; $4F23: $FA $00 $D0
     ld   e, a                                     ; $4F26: $5F ; $4F26: $5F
@@ -1534,19 +1534,19 @@ FileCopyState5Handler::
     jp   IncrementGameplaySubtypeAndReturn        ; $4FFC: $C3 $D6 $44 ; $4FFC: $C3 $D6 $44
 
 FileCopyState8Handler::
-    call func_001_6BA8                               ; $4FFF: $CD $A8 $6B ; $4FFF: $CD $A8 $6B
+    call func_001_6BA8                            ; $4FFF: $CD $A8 $6B ; $4FFF: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $5002: $F0 $CC ; $5002: $F0 $CC
-    and  $08                                      ; $5004: $E6 $08 ; $5004: $E6 $08
-    jr   z, jr_001_500E                            ; $5006: $28 $06 ; $5006: $28 $06
+    and  J_DOWN                                   ; $5004: $E6 $08 ; $5004: $E6 $08
+    jr   z, jr_001_500E                           ; $5006: $28 $06 ; $5006: $28 $06
 
     ld   a, [wIntroTimer]                         ; $5008: $FA $01 $D0 ; $5008: $FA $01 $D0
     inc  a                                        ; $500B: $3C ; $500B: $3C
-    jr   jr_001_5018                               ; $500C: $18 $0A ; $500C: $18 $0A
+    jr   jr_001_5018                              ; $500C: $18 $0A ; $500C: $18 $0A
 
 jr_001_500E::
     ldh  a, [hJoypadState]                        ; $500E: $F0 $CC ; $500E: $F0 $CC
-    and  $04                                      ; $5010: $E6 $04 ; $5010: $E6 $04
-    jr   z, jr_001_501D                            ; $5012: $28 $09 ; $5012: $28 $09
+    and  J_UP                                     ; $5010: $E6 $04 ; $5010: $E6 $04
+    jr   z, jr_001_501D                           ; $5012: $28 $09 ; $5012: $28 $09
 
     ld   a, [wIntroTimer]                         ; $5014: $FA $01 $D0 ; $5014: $FA $01 $D0
     dec  a                                        ; $5017: $3D ; $5017: $3D
@@ -1557,24 +1557,24 @@ jr_001_5018::
 
 jr_001_501D::
     ldh  a, [hJoypadState]                        ; $501D: $F0 $CC ; $501D: $F0 $CC
-    and  $90                                      ; $501F: $E6 $90 ; $501F: $E6 $90
-    jr   z, jr_001_5055                            ; $5021: $28 $32 ; $5021: $28 $32
+    and  J_A | J_START                            ; $501F: $E6 $90 ; $501F: $E6 $90
+    jr   z, jr_001_5055                           ; $5021: $28 $32 ; $5021: $28 $32
 
     ld   a, [wIntroTimer]                         ; $5023: $FA $01 $D0 ; $5023: $FA $01 $D0
     cp   $03                                      ; $5026: $FE $03 ; $5026: $FE $03
-    jp   z, label_001_4555                            ; $5028: $CA $55 $45 ; $5028: $CA $55 $45
+    jp   z, label_001_4555                        ; $5028: $CA $55 $45 ; $5028: $CA $55 $45
 
     ld   hl, wDB80                                ; $502B: $21 $80 $DB ; $502B: $21 $80 $DB
     ld   b, $00                                   ; $502E: $06 $00 ; $502E: $06 $00
     ld   a, [wIntroTimer]                         ; $5030: $FA $01 $D0 ; $5030: $FA $01 $D0
     and  a                                        ; $5033: $A7 ; $5033: $A7
-    jr   z, jr_001_5042                            ; $5034: $28 $0C ; $5034: $28 $0C
+    jr   z, jr_001_5042                           ; $5034: $28 $0C ; $5034: $28 $0C
 
     cp   $01                                      ; $5036: $FE $01 ; $5036: $FE $01
-    jr   z, jr_001_503F                            ; $5038: $28 $05 ; $5038: $28 $05
+    jr   z, jr_001_503F                           ; $5038: $28 $05 ; $5038: $28 $05
 
     ld   hl, wDB8A                                ; $503A: $21 $8A $DB ; $503A: $21 $8A $DB
-    jr   jr_001_5042                               ; $503D: $18 $03 ; $503D: $18 $03
+    jr   jr_001_5042                              ; $503D: $18 $03 ; $503D: $18 $03
 
 jr_001_503F::
     ld   hl, wDB85                                ; $503F: $21 $85 $DB ; $503F: $21 $85 $DB
@@ -1687,10 +1687,10 @@ Data_001_50C7::
     db   $99, $6D, $44, $7E, $99, $8D, $44, $7E   ; $50D7 ; $50D7
 
 FileCopyState9Handler::
-    call func_001_6BA8                               ; $50DF: $CD $A8 $6B ; $50DF: $CD $A8 $6B
+    call func_001_6BA8                            ; $50DF: $CD $A8 $6B ; $50DF: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $50E2: $F0 $CC ; $50E2: $F0 $CC
-    and  $08                                      ; $50E4: $E6 $08 ; $50E4: $E6 $08
-    jr   z, jr_001_50F1                            ; $50E6: $28 $09 ; $50E6: $28 $09
+    and  J_DOWN                                   ; $50E4: $E6 $08 ; $50E4: $E6 $08
+    jr   z, jr_001_50F1                           ; $50E6: $28 $09 ; $50E6: $28 $09
 
     ld   a, [wIntroSubTimer]                      ; $50E8: $FA $02 $D0 ; $50E8: $FA $02 $D0
     inc  a                                        ; $50EB: $3C ; $50EB: $3C
@@ -1700,12 +1700,12 @@ FileCopyState9Handler::
 jr_001_50F1::
     ldh  a, [hJoypadState]                        ; $50F1: $F0 $CC ; $50F1: $F0 $CC
     and  $04                                      ; $50F3: $E6 $04 ; $50F3: $E6 $04
-    jr   z, jr_001_5104                            ; $50F5: $28 $0D ; $50F5: $28 $0D
+    jr   z, jr_001_5104                           ; $50F5: $28 $0D ; $50F5: $28 $0D
 
     ld   a, [wIntroSubTimer]                      ; $50F7: $FA $02 $D0 ; $50F7: $FA $02 $D0
     dec  a                                        ; $50FA: $3D ; $50FA: $3D
     cp   $FF                                      ; $50FB: $FE $FF ; $50FB: $FE $FF
-    jr   nz, jr_001_5101                           ; $50FD: $20 $02 ; $50FD: $20 $02
+    jr   nz, jr_001_5101                          ; $50FD: $20 $02 ; $50FD: $20 $02
 
     ld   a, $03                                   ; $50FF: $3E $03 ; $50FF: $3E $03
 
@@ -1713,14 +1713,14 @@ jr_001_5101::
     ld   [wIntroSubTimer], a                      ; $5101: $EA $02 $D0 ; $5101: $EA $02 $D0
 
 jr_001_5104::
-    call func_001_5094                               ; $5104: $CD $94 $50 ; $5104: $CD $94 $50
+    call func_001_5094                            ; $5104: $CD $94 $50 ; $5104: $CD $94 $50
     ldh  a, [hJoypadState]                        ; $5107: $F0 $CC ; $5107: $F0 $CC
-    bit  5, a                                     ; $5109: $CB $6F ; $5109: $CB $6F
-    jr   z, jr_001_5114                            ; $510B: $28 $07 ; $510B: $28 $07
+    bit  J_BIT_B, a                               ; $5109: $CB $6F ; $5109: $CB $6F
+    jr   z, jr_001_5114                           ; $510B: $28 $07 ; $510B: $28 $07
 
     ld   hl, wGameplaySubtype                     ; $510D: $21 $96 $DB ; $510D: $21 $96 $DB
     dec  [hl]                                     ; $5110: $35 ; $5110: $35
-    jp   label_001_514F                               ; $5111: $C3 $4F $51 ; $5111: $C3 $4F $51
+    jp   label_001_514F                           ; $5111: $C3 $4F $51 ; $5111: $C3 $4F $51
 
 jr_001_5114::
     and  $90                                      ; $5114: $E6 $90 ; $5114: $E6 $90
@@ -1847,16 +1847,16 @@ label_001_51C3::
     and  $08                                      ; $51C5: $E6 $08 ; $51C5: $E6 $08
     ld   a, [hl]                                  ; $51C7: $7E ; $51C7: $7E
     ld   hl, wOAMBuffer+8                                ; $51C8: $21 $08 $C0 ; $51C8: $21 $08 $C0
-    jp   label_001_5067                               ; $51CB: $C3 $67 $50 ; $51CB: $C3 $67 $50
+    jp   label_001_5067                           ; $51CB: $C3 $67 $50 ; $51CB: $C3 $67 $50
 
 func_001_51CE::
     ld   a, [wIntroSubTimer]                      ; $51CE: $FA $02 $D0 ; $51CE: $FA $02 $D0
     ld   e, a                                     ; $51D1: $5F ; $51D1: $5F
     ld   d, $00                                   ; $51D2: $16 $00 ; $51D2: $16 $00
-    ld   hl, Data_001_48E4                           ; $51D4: $21 $E4 $48 ; $51D4: $21 $E4 $48
+    ld   hl, Data_001_48E4                        ; $51D4: $21 $E4 $48 ; $51D4: $21 $E4 $48
     add  hl, de                                   ; $51D7: $19 ; $51D7: $19
     ld   a, [hl]                                  ; $51D8: $7E ; $51D8: $7E
-    ld   hl, wOAMBuffer+8                                ; $51D9: $21 $08 $C0 ; $51D9: $21 $08 $C0
+    ld   hl, wOAMBuffer+8                         ; $51D9: $21 $08 $C0 ; $51D9: $21 $08 $C0
     add  $05                                      ; $51DC: $C6 $05 ; $51DC: $C6 $05
     ld   [hl+], a                                 ; $51DE: $22 ; $51DE: $22
     ld   a, $5C                                   ; $51DF: $3E $5C ; $51DF: $3E $5C
@@ -1868,23 +1868,23 @@ func_001_51CE::
     ret                                           ; $51E8: $C9 ; $51E8: $C9
 
 FileCopyStateAHandler::
-    call func_001_5094                               ; $51E9: $CD $94 $50 ; $51E9: $CD $94 $50
-    call func_001_51CE                               ; $51EC: $CD $CE $51 ; $51EC: $CD $CE $51
-    call func_001_4F0C                               ; $51EF: $CD $0C $4F ; $51EF: $CD $0C $4F
+    call func_001_5094                            ; $51E9: $CD $94 $50 ; $51E9: $CD $94 $50
+    call func_001_51CE                            ; $51EC: $CD $CE $51 ; $51EC: $CD $CE $51
+    call func_001_4F0C                            ; $51EF: $CD $0C $4F ; $51EF: $CD $0C $4F
     ldh  a, [hJoypadState]                        ; $51F2: $F0 $CC ; $51F2: $F0 $CC
-    and  $90                                      ; $51F4: $E6 $90 ; $51F4: $E6 $90
-    jr   z, jr_001_5235                            ; $51F6: $28 $3D ; $51F6: $28 $3D
+    and  J_A | J_START                            ; $51F4: $E6 $90 ; $51F4: $E6 $90
+    jr   z, jr_001_5235                           ; $51F6: $28 $3D ; $51F6: $28 $3D
 
     ld   a, [wCreditsScratch0]                    ; $51F8: $FA $00 $D0 ; $51F8: $FA $00 $D0
     and  a                                        ; $51FB: $A7 ; $51FB: $A7
-    jp   z, label_001_4555                            ; $51FC: $CA $55 $45 ; $51FC: $CA $55 $45
+    jp   z, label_001_4555                        ; $51FC: $CA $55 $45 ; $51FC: $CA $55 $45
 
     call PlayValidationJingleAndReturn            ; $51FF: $CD $BE $49 ; $51FF: $CD $BE $49
     ld   a, [wIntroTimer]                         ; $5202: $FA $01 $D0 ; $5202: $FA $01 $D0
     sla  a                                        ; $5205: $CB $27 ; $5205: $CB $27
     ld   e, a                                     ; $5207: $5F ; $5207: $5F
     ld   d, $00                                   ; $5208: $16 $00 ; $5208: $16 $00
-    ld   hl, Data_001_49FE                           ; $520A: $21 $FE $49 ; $520A: $21 $FE $49
+    ld   hl, Data_001_49FE                        ; $520A: $21 $FE $49 ; $520A: $21 $FE $49
     add  hl, de                                   ; $520D: $19 ; $520D: $19
     ld   c, [hl]                                  ; $520E: $4E ; $520E: $4E
     inc  hl                                       ; $520F: $23 ; $520F: $23
@@ -1893,7 +1893,7 @@ FileCopyStateAHandler::
     sla  a                                        ; $5214: $CB $27 ; $5214: $CB $27
     ld   e, a                                     ; $5216: $5F ; $5216: $5F
     ld   d, $00                                   ; $5217: $16 $00 ; $5217: $16 $00
-    ld   hl, Data_001_49FE                           ; $5219: $21 $FE $49 ; $5219: $21 $FE $49
+    ld   hl, Data_001_49FE                        ; $5219: $21 $FE $49 ; $5219: $21 $FE $49
     add  hl, de                                   ; $521C: $19 ; $521C: $19
     ld   a, [hl]                                  ; $521D: $7E ; $521D: $7E
     inc  hl                                       ; $521E: $23 ; $521E: $23
@@ -1912,27 +1912,27 @@ jr_001_5224::
     dec  de                                       ; $522D: $1B ; $522D: $1B
     ld   a, e                                     ; $522E: $7B ; $522E: $7B
     or   d                                        ; $522F: $B2 ; $522F: $B2
-    jr   nz, jr_001_5224                           ; $5230: $20 $F2 ; $5230: $20 $F2
+    jr   nz, jr_001_5224                          ; $5230: $20 $F2 ; $5230: $20 $F2
 
-    jp   label_001_4555                               ; $5232: $C3 $55 $45 ; $5232: $C3 $55 $45
+    jp   label_001_4555                           ; $5232: $C3 $55 $45 ; $5232: $C3 $55 $45
 
 jr_001_5235::
     ldh  a, [hJoypadState]                        ; $5235: $F0 $CC ; $5235: $F0 $CC
-    bit  5, a                                     ; $5237: $CB $6F ; $5237: $CB $6F
-    jr   z, jr_001_5249                            ; $5239: $28 $0E ; $5239: $28 $0E
+    bit  J_BIT_B, a                               ; $5237: $CB $6F ; $5237: $CB $6F
+    jr   z, jr_001_5249                           ; $5239: $28 $0E ; $5239: $28 $0E
 
     ld   hl, wGameplaySubtype                     ; $523B: $21 $96 $DB ; $523B: $21 $96 $DB
     dec  [hl]                                     ; $523E: $35 ; $523E: $35
     xor  a                                        ; $523F: $AF ; $523F: $AF
     ld   [wCreditsScratch0], a                    ; $5240: $EA $00 $D0 ; $5240: $EA $00 $D0
-    call func_001_4EBB                               ; $5243: $CD $BB $4E ; $5243: $CD $BB $4E
-    jp   label_001_526F                               ; $5246: $C3 $6F $52 ; $5246: $C3 $6F $52
+    call func_001_4EBB                            ; $5243: $CD $BB $4E ; $5243: $CD $BB $4E
+    jp   label_001_526F                           ; $5246: $C3 $6F $52 ; $5246: $C3 $6F $52
 
 jr_001_5249::
-    call func_001_512C                               ; $5249: $CD $2C $51 ; $5249: $CD $2C $51
+    call func_001_512C                            ; $5249: $CD $2C $51 ; $5249: $CD $2C $51
     ldh  a, [hFrameCounter]                       ; $524C: $F0 $E7 ; $524C: $F0 $E7
     and  $10                                      ; $524E: $E6 $10 ; $524E: $E6 $10
-    jr   z, label_001_526F                            ; $5250: $28 $1D ; $5250: $28 $1D
+    jr   z, label_001_526F                        ; $5250: $28 $1D ; $5250: $28 $1D
 
     ld   a, [wIntroSubTimer]                      ; $5252: $FA $02 $D0 ; $5252: $FA $02 $D0
     rla                                           ; $5255: $17 ; $5255: $17

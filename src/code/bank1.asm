@@ -407,11 +407,11 @@ jr_001_531D::
     xor  a                                        ; $5375: $AF
     ldh  [hIsSideScrolling], a                    ; $5376: $E0 $F9
 
-    ld   a, $03                                   ; $5378: $3E $03
+    ld   a, DIRECTION_DOWN                        ; $5378: $3E $03
     ldh  [hLinkDirection], a                      ; $537A: $E0 $9E
 
     ld   a, [wSpawnIsIndoor]                      ; $537C: $FA $5F $DB
-    and  $01                                      ; $537F: $E6 $01
+    and  TRUE                                     ; $537F: $E6 $01
     ld   [wIsIndoor], a                           ; $5381: $EA $A5 $DB
 
     jr   z, .finish                               ; $5384: $28 $08
@@ -419,7 +419,7 @@ jr_001_531D::
     ld   a, LINK_ANIMATION_STATE_STANDING_UP      ; $5386: $3E $04
     ldh  [hLinkAnimationState], a                 ; $5388: $E0 $9D
 
-    ld   a, $02                                   ; $538A: $3E $02
+    ld   a, DIRECTION_UP                          ; $538A: $3E $02
     ldh  [hLinkDirection], a                      ; $538C: $E0 $9E
 
 .finish
@@ -451,7 +451,7 @@ jr_001_531D::
     ld   [wMapEntrancePositionY], a               ; $53BD: $EA $9E $DB
     xor  a                                        ; $53C0: $AF
     ldh  [hLinkAnimationState], a                 ; $53C1: $E0 $9D
-    ld   a, $03                                   ; $53C3: $3E $03
+    ld   a, DIRECTION_DOWN                        ; $53C3: $3E $03
     ldh  [hLinkDirection], a                      ; $53C5: $E0 $9E
     ld   a, $16                                   ; $53C7: $3E $16
     ld   [wWreckingBallRoom], a                   ; $53C9: $EA $6F $DB
@@ -1632,29 +1632,29 @@ ENDC
     ret                                           ; $5E96: $C9
 
 EntityPosXOffsetTable::
-.right   db $A0                                   ; $5E97
-.left    db $60                                   ; $5E98
+.right:  db $A0                                   ; $5E97
+.left:   db $60                                   ; $5E98
 .top     db $00                                   ; $5E99
 .bottom  db $00                                   ; $5E9A
 .default db $00                                   ; $5E9B
 
 EntityPosXSignTable::
-.right   db $00                                   ; $5E9C
-.left    db $FF                                   ; $5E9D
+.right:  db $00                                   ; $5E9C
+.left:   db $FF                                   ; $5E9D
 .top     db $00                                   ; $5E9E
 .bottom  db $00                                   ; $5E9F
 .default db $00                                   ; $5EA0
 
 EntityPosYOffsetTable::
-.right   db $00                                   ; $5EA1
-.left    db $00                                   ; $5EA2
+.right:  db $00                                   ; $5EA1
+.left:   db $00                                   ; $5EA2
 .top     db $80                                   ; $5EA3
 .bottom  db $80                                   ; $5EA4
 .default db $00                                   ; $5EA5
 
 EntityPosYSignTable::
-.right   db $00                                   ; $5EA6
-.left    db $00                                   ; $5EA7
+.right:  db $00                                   ; $5EA6
+.left:   db $00                                   ; $5EA7
 .top     db $FF                                   ; $5EA8
 .bottom  db $00                                   ; $5EA9
 .default db $00                                   ; $5EAA
@@ -2150,7 +2150,7 @@ CreateFollowingNpcEntity::
 .marinFallEnd
 
     ldh  a, [hLinkDirection]                      ; $60F7: $F0 $9E
-    ld   hl, $D1B5                                ; $60F9: $21 $B5 $D1
+    ld   hl, wD1B5                                ; $60F9: $21 $B5 $D1
     call .decrementConsecutiveBytes               ; $60FC: $CD $18 $61
     ld   a, [$DB10]                               ; $60FF: $FA $10 $DB
     and  a                                        ; $6102: $A7
@@ -2454,7 +2454,7 @@ PeachPictureState5Handler::
 
 jr_001_68CF::
     ldh  a, [hJoypadState]                        ; $68CF: $F0 $CC
-    and  $B0                                      ; $68D1: $E6 $B0
+    and  J_A | J_B | J_START                      ; $68D1: $E6 $B0
     jr   z, jr_001_68E3                           ; $68D3: $28 $0E
     ld   a, JINGLE_VALIDATE                       ; $68D5: $3E $13
     ldh  [hJingle], a                             ; $68D7: $E0 $F2
@@ -2713,7 +2713,7 @@ include "code/face_shrine_mural.asm"
 
 func_001_6BA8::
     ldh  a, [hJoypadState]                        ; $6BA8: $F0 $CC
-    and  $0C                                      ; $6BAA: $E6 $0C
+    and  J_UP | J_DOWN                ; $6BAA: $E6 $0C
     jr   z, jr_001_6BB4                           ; $6BAC: $28 $06
 
 func_001_6BAE::

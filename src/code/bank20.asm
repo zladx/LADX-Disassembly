@@ -779,26 +779,35 @@ CheckPushedTombStone::
     pop  bc                                       ; $49B0: $C1
     ret                                           ; $49B1: $C9
 
-Data_020_49B2::
-    db   $10, $F0, $08, $08
+LinkDirectionTowC179::
+.right: db  $10
+.left:  db  $F0
+.up:    db  $08
+.down:  db  $08
 
-Data_020_49B6::
-    db   $0C, $0C, $F0, $10
+LinkDirectionTowC17A::
+.right: db  $0C
+.left:  db  $0C
+.up:    db  $F0
+.down:  db  $10
 
 func_020_49BA::
+    ; wC179 = [LinkDirectionTowC179 + Linkdirection] + hLinkPositionX
     ldh  a, [hLinkDirection]                      ; $49BA: $F0 $9E
     ld   e, a                                     ; $49BC: $5F
     ld   d, $00                                   ; $49BD: $16 $00
-    ld   hl, Data_020_49B2                        ; $49BF: $21 $B2 $49
+    ld   hl, LinkDirectionTowC179                 ; $49BF: $21 $B2 $49
     add  hl, de                                   ; $49C2: $19
     ldh  a, [hLinkPositionX]                      ; $49C3: $F0 $98
     add  [hl]                                     ; $49C5: $86
     ld   [wC179], a                               ; $49C6: $EA $79 $C1
-    ld   hl, Data_020_49B6                        ; $49C9: $21 $B6 $49
+    ; wC17A = [LinkDirectionTowC17A + Linkdirection] + hLinkPositionY
+    ld   hl, LinkDirectionTowC17A                 ; $49C9: $21 $B6 $49
     add  hl, de                                   ; $49CC: $19
     ldh  a, [hLinkPositionY]                      ; $49CD: $F0 $99
     add  [hl]                                     ; $49CF: $86
     ld   [wC17A], a                               ; $49D0: $EA $7A $C1
+    ; wC178 = 2
     ld   a, $02                                   ; $49D3: $3E $02
     ld   [wC178], a                               ; $49D5: $EA $78 $C1
     ret                                           ; $49D8: $C9
@@ -1020,38 +1029,50 @@ jr_020_4B39:
     ret                                           ; $4B39: $C9
 
 ; Link's direction table
-data_020_4B3A::
-    db   $10, $00, $08, $08
+LinkDirectionTowC140::
+.right: db  $10
+.left:  db  $00
+.up:    db  $08
+.down:  db  $08
 
-data_020_4B3E::
-    db   $03, $03, $08, $08
+LinkDirectionTowC141::
+.right: db  $03
+.left:  db  $03
+.up:    db  $08
+.down:  db  $08
 
-data_020_4B42::
-    db   $08, $08, $00, $0D
+LinkDirectionTowC142::
+.right: db  $08
+.left:  db  $08
+.up:    db  $00
+.down:  db  $0D
 
-data_020_4B46::
-    db   $08, $08, $03, $04
+LinkDirectionTowC143::
+.right: db  $08
+.left:  db  $08
+.up:    db  $03
+.down:  db  $04
 
 ; Shield-related function
 func_020_4B4A::
     ldh  a, [hLinkDirection]                      ; $4B4A: $F0 $9E
     ld   e, a                                     ; $4B4C: $5F
     ld   d, $00                                   ; $4B4D: $16 $00
-    ld   hl, data_020_4B3A                        ; $4B4F: $21 $3A $4B
+    ld   hl, LinkDirectionTowC140                 ; $4B4F: $21 $3A $4B
     add  hl, de                                   ; $4B52: $19
     ldh  a, [hLinkPositionX]                      ; $4B53: $F0 $98
     add  [hl]                                     ; $4B55: $86
     ld   [wC140], a                               ; $4B56: $EA $40 $C1
-    ld   hl, data_020_4B3E                        ; $4B59: $21 $3E $4B
+    ld   hl, LinkDirectionTowC141                 ; $4B59: $21 $3E $4B
     add  hl, de                                   ; $4B5C: $19
     ld   a, [hl]                                  ; $4B5D: $7E
     ld   [wC141], a                               ; $4B5E: $EA $41 $C1
-    ld   hl, data_020_4B42                        ; $4B61: $21 $42 $4B
+    ld   hl, LinkDirectionTowC142                 ; $4B61: $21 $42 $4B
     add  hl, de                                   ; $4B64: $19
     ld   a, [wC145]                               ; $4B65: $FA $45 $C1
     add  [hl]                                     ; $4B68: $86
     ld   [wC142], a                               ; $4B69: $EA $42 $C1
-    ld   hl, data_020_4B46                        ; $4B6C: $21 $46 $4B
+    ld   hl, LinkDirectionTowC143                 ; $4B6C: $21 $46 $4B
     add  hl, de                                   ; $4B6F: $19
     ld   a, [hl]                                  ; $4B70: $7E
     ld   [wC143], a                               ; $4B71: $EA $43 $C1
@@ -1060,20 +1081,28 @@ func_020_4B4A::
     ld   [wSwordCollisionEnabled], a              ; $4B75: $EA $B0 $C5
     ret                                           ; $4B78: $C9
 
+; trwo speed in X direction ?
 Data_020_4B79::
-    db   $08, $F8, $00, $00
+.right: db   8
+.left:  db  -8
+.up:    db   0
+.down:  db   0
 
+; trwo speed in Y direction ?
 Data_020_4B7D::
-    db   $00, $00, $FD, $04
+.right: db   0
+.left:  db   0
+.up:    db  -3
+.down:  db   4
 
 func_020_4B81::
     ld   hl, wEntitiesPrivateCountdown1Table      ; $4B81: $21 $F0 $C2
     add  hl, de                                   ; $4B84: $19
     ld   [hl], $10                                ; $4B85: $36 $10
+    ; reset wBombArrowCooldown if not already zero
     ld   a, [wBombArrowCooldown]                  ; $4B87: $FA $C0 $C1
     and  a                                        ; $4B8A: $A7
     jp   z, label_020_4B9E                        ; $4B8B: $CA $9E $4B
-
     xor  a                                        ; $4B8E: $AF
     ld   [wBombArrowCooldown], a                  ; $4B8F: $EA $C0 $C1
 
@@ -1096,7 +1125,7 @@ ENDC
     ret                                           ; $4B9D: $C9
 
 label_020_4B9E:
-    ld   a, $06                                   ; $4B9E: $3E $06
+    ld   a, BOMB_ARROW_COOLDOWN                   ; $4B9E: $3E $06
     ld   [wBombArrowCooldown], a                  ; $4BA0: $EA $C0 $C1
     ld   a, e                                     ; $4BA3: $7B
     ld   [wC1C1], a                               ; $4BA4: $EA $C1 $C1
@@ -1138,8 +1167,6 @@ jr_020_4BCD:
     ld   c, a                                     ; $4BDE: $4F
     ld   b, d                                     ; $4BDF: $42
     ld   hl, Data_020_4B79                        ; $4BE0: $21 $79 $4B
-
-jr_020_4BE3:
     add  hl, bc                                   ; $4BE3: $09
     ldh  a, [hLinkPositionX]                      ; $4BE4: $F0 $98
     add  [hl]                                     ; $4BE6: $86
@@ -1209,11 +1236,19 @@ jr_020_4C10:
 jr_020_4C3E:
     ret                                           ; $4C3E: $C9
 
+; some conversion table to X direction
 Data_020_4C3F::
-    db   $0E, $F2, $00, $00
+.right: db  14
+.left:  db -14
+.up:    db   0
+.down:  db   0
 
+; some conversion table to Y direction
 Data_020_4C43::
-    db   $00, $00, $F4, $0C
+.right: db   0
+.left:  db   0
+.up:    db -12
+.down:  db  12
 
 func_020_4C47::
     ld   a, JINGLE_POWDER                         ; $4C47: $3E $05
@@ -1794,7 +1829,7 @@ data_020_5407::
 
 func_020_54F5::
     ldh  a, [hLinkAnimationState]                 ; $54F5: $F0 $9D
-    cp   LINK_ANIMATION_STATE_UNKNOWN_FF          ; $54F7: $FE $FF
+    cp   LINK_ANIMATION_STATE_NO_UPDATE          ; $54F7: $FE $FF
     ret  z                                        ; $54F9: $C8
 
     ; Read the first byte in LinkAnimationStateTable
@@ -3272,7 +3307,7 @@ func_020_5F06::
     jr   nz, jr_020_5F38                          ; $5F19: $20 $1D
 
     ldh  a, [hJoypadState]                        ; $5F1B: $F0 $CC
-    and  J_LEFT | J_RIGHT                         ; $5F1D: $E6 $03
+    and  J_RIGHT | J_LEFT              ; $5F1D: $E6 $03
     ld   e, a                                     ; $5F1F: $5F
     ld   d, $00                                   ; $5F20: $16 $00
     ld   hl, Data_020_5F00                        ; $5F22: $21 $00 $5F
@@ -3295,7 +3330,7 @@ jr_020_5F38:
     ldh  a, [hJoypadState]                        ; $5F38: $F0 $CC
     srl  a                                        ; $5F3A: $CB $3F
     srl  a                                        ; $5F3C: $CB $3F
-    and  (J_UP | J_DOWN) >> 2                     ; ...probably
+    and  J_RIGHT | J_LEFT              ; $5F3E: $E6 $03
     ld   e, a                                     ; $5F40: $5F
     ld   d, $00                                   ; $5F41: $16 $00
     ld   hl, Data_020_5F03                        ; $5F43: $21 $03 $5F
@@ -3664,7 +3699,7 @@ jr_020_61D6:
 
 jr_020_61E4:
     ldh  a, [hJoypadState]                        ; $61E4: $F0 $CC
-    and  $03                                      ; $61E6: $E6 $03
+    and  J_RIGHT | J_LEFT              ; $61E6: $E6 $03
     jr   z, jr_020_61ED                           ; $61E8: $28 $03
 
     call func_020_6039                            ; $61EA: $CD $39 $60

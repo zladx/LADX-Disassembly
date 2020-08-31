@@ -723,7 +723,7 @@ func_005_52AF::
     ldh  [hLinkPositionY], a                      ; $52BB: $E0 $99
     ld   a, $02                                   ; $52BD: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $52BF: $E0 $A1
-    ld   a, LINK_ANIMATION_STATE_UNKNOWN_FF       ; $52C1: $3E $FF
+    ld   a, LINK_ANIMATION_STATE_NO_UPDATE       ; $52C1: $3E $FF
     ldh  [hLinkAnimationState], a                 ; $52C3: $E0 $9D
     ld   de, Data_005_5258                        ; $52C5: $11 $58 $52
     call RenderActiveEntitySpritesPair            ; $52C8: $CD $C0 $3B

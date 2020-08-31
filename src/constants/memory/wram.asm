@@ -249,12 +249,13 @@ wBGOriginLow::
 wC130::
   ds 3 ; C130 - C132
 
-; type of collistion
+; Type of collistion
 ; Bit 0 = up,
 ; Bit 1 = down,
 ; Bit 2 = left,
 ; Bit 3 = right,
 ; Bit 4 = unknown
+; See COLLISION_TYPE_* constants for possible values
 wCollisionType::
   ds 1 ; C133
 

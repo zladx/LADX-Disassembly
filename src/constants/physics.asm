@@ -1,8 +1,8 @@
 ;
-; states that a varaible for internal use can get
+; Constants for the physics system
 ;
 
-; values for wCollisionType:
+; Values for wCollisionType:
 COLLISION_TYPE_NONE         equ $00
 COLLISION_TYPE_UP           equ $01
 COLLISION_TYPE_DOWN         equ $02

@@ -1,7 +1,7 @@
 ; File generated automatically by `tools/generate_background_data.py`
 
 
-BackgroundTileCommands15 ; $4DD4
+BackgroundTileCommands15:: ; $4DD4
   db    $98, $00, $13; draw row of 20 tiles
   db    $00, $01, $02, $03, $00, $01, $02, $03, $00, $01, $02, $03, $00, $01, $02, $03, $00, $01, $02, $03
   db    $98, $20, $13; draw row of 20 tiles
@@ -40,7 +40,7 @@ BackgroundTileCommands15 ; $4DD4
   db    $10, $11, $12, $13, $10, $11, $12, $13, $10, $11, $12, $13, $10, $11, $12, $13, $10, $11, $12, $13
   db    $00 ; end of draw commands
 
-BackgroundTileCommands12 ; $4F73
+BackgroundTileCommands12:: ; $4F73
   db    $98, $00, $53, $05 ; draw row of 20x the same tile
   db    $98, $20, $53, $05 ; draw row of 20x the same tile
   db    $98, $40, $53, $05 ; draw row of 20x the same tile
@@ -95,7 +95,7 @@ BackgroundTileCommands12 ; $4F73
   db    $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $59, $5A, $5B, $5C, $5D, $5E, $5F, $05, $05
   db    $00 ; end of draw commands
 
-BackgroundTileCommands13 ; $5134
+BackgroundTileCommands13:: ; $5134
   db    $98, $00, $53, $7C ; draw row of 20x the same tile
   db    $98, $20, $53, $7C ; draw row of 20x the same tile
   db    $98, $40, $53, $7C ; draw row of 20x the same tile
@@ -145,7 +145,7 @@ BackgroundTileCommands13 ; $5134
   db    $9B, $E0, $53, $7C ; draw row of 20x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands23 ; $52D2
+BackgroundTileCommands23:: ; $52D2
   db    $98, $00, $13; draw row of 20 tiles
   db    $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $04, $05, $06, $07, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
   db    $98, $20, $13; draw row of 20 tiles
@@ -184,7 +184,7 @@ BackgroundTileCommands23 ; $52D2
   db    $7F, $7F, $7F, $7F, $7F, $7F, $40, $7F, $7F, $5E, $5F, $7F, $7F, $30, $7F, $7F, $7F, $7F, $7F, $7F
   db    $00 ; end of draw commands
 
-BackgroundTileCommands24 ; $5471
+BackgroundTileCommands24:: ; $5471
   db    $9B, $E0, $53, $7C ; draw row of 20x the same tile
   db    $98, $00, $53, $7C ; draw row of 20x the same tile
   db    $98, $20, $53, $7C ; draw row of 20x the same tile
@@ -231,7 +231,7 @@ BackgroundTileCommands24 ; $5471
   db    $24, $25, $26, $26, $29, $29, $27, $28
   db    $00 ; end of draw commands
 
-BackgroundTileCommands1E ; $5537
+BackgroundTileCommands1E:: ; $5537
   db    $99, $E0, $13; draw row of 20 tiles
   db    $1B, $1B, $48, $49, $30, $31, $32, $33, $7F, $5A, $74, $74, $7F, $5A, $30, $31, $32, $33, $30, $31
   db    $98, $00, $13; draw row of 20 tiles
@@ -272,7 +272,7 @@ BackgroundTileCommands1E ; $5537
   db    $1B, $1B, $48, $49, $34, $35, $36, $37, $7F, $5A, $74, $74, $7F, $5A, $34, $35, $30, $31, $32, $33
   db    $00 ; end of draw commands
 
-BackgroundTileCommands1F ; $56ED
+BackgroundTileCommands1F:: ; $56ED
   db    $98, $00, $13; draw row of 20 tiles
   db    $26, $27, $5A, $7F, $44, $56, $55, $56, $55, $56, $55, $56, $55, $56, $55, $56, $55, $56, $55, $56
   db    $98, $20, $13; draw row of 20 tiles
@@ -311,7 +311,7 @@ BackgroundTileCommands1F ; $56ED
   db    $36, $37, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A
   db    $00 ; end of draw commands
 
-BackgroundTileCommands20 ; $588C
+BackgroundTileCommands20:: ; $588C
   db    $98, $00, $13; draw row of 20 tiles
   db    $24, $25, $26, $27, $24, $25, $26, $27, $75, $75, $75, $75, $75, $75, $24, $25, $26, $27, $24, $25
   db    $98, $20, $13; draw row of 20 tiles
@@ -350,7 +350,7 @@ BackgroundTileCommands20 ; $588C
   db    $36, $37, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A
   db    $00 ; end of draw commands
 
-BackgroundTileCommands21 ; $5A2B
+BackgroundTileCommands21:: ; $5A2B
   db    $98, $00, $13; draw row of 20 tiles
   db    $92, $7C, $92, $7C, $92, $83, $5A, $7F, $5A, $7F, $5A, $7F, $75, $75, $82, $7C, $92, $7C, $24, $25
   db    $98, $20, $13; draw row of 20 tiles
@@ -389,7 +389,7 @@ BackgroundTileCommands21 ; $5A2B
   db    $7C, $92, $7C, $92, $7C, $83, $7F, $5A, $7F, $5A, $75, $75, $75, $75, $82, $92, $7C, $92, $8E, $8F
   db    $00 ; end of draw commands
 
-BackgroundTileCommands22 ; $5BCA
+BackgroundTileCommands22:: ; $5BCA
   db    $98, $00, $13; draw row of 20 tiles
   db    $76, $76, $49, $59, $AC, $AD, $AC, $AD, $AC, $AD, $AC, $AD, $AC, $AD, $44, $56, $48, $51, $45, $45
   db    $98, $20, $13; draw row of 20 tiles
@@ -428,7 +428,7 @@ BackgroundTileCommands22 ; $5BCA
   db    $1E, $1F, $1E, $1F, $1E, $1F, $1E, $1F, $1E, $1F, $1E, $1F, $1E, $1F, $1E, $1F, $1E, $1F, $1E, $1F
   db    $00 ; end of draw commands
 
-BackgroundTileCommands01 ; $5D69
+BackgroundTileCommands01:: ; $5D69
   db    $98, $00, $53, $AC ; draw row of 20x the same tile
   db    $98, $20, $53, $AC ; draw row of 20x the same tile
   db    $98, $40, $53, $AC ; draw row of 20x the same tile
@@ -471,7 +471,7 @@ BackgroundTileCommands01 ; $5D69
   db    $92, $93
   db    $00 ; end of draw commands
 
-BackgroundTileCommands16 ; $5E29
+BackgroundTileCommands16:: ; $5E29
   db    $9C, $00, $5F, $A0 ; draw row of 32x the same tile
   db    $9C, $20, $5F, $A0 ; draw row of 32x the same tile
   db    $9C, $40, $5F, $A0 ; draw row of 32x the same tile
@@ -587,7 +587,7 @@ BackgroundTileCommands16 ; $5E29
   db    $9B, $E0, $53, $A0 ; draw row of 20x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands17 ; $6192
+BackgroundTileCommands17:: ; $6192
   db    $98, $00, $5F, $AC ; draw row of 32x the same tile
   db    $98, $20, $5F, $AC ; draw row of 32x the same tile
   db    $98, $40, $5F, $AC ; draw row of 32x the same tile
@@ -628,7 +628,7 @@ BackgroundTileCommands17 ; $6192
   db    $92, $93, $92, $93, $92, $93, $92, $93, $92, $93, $92, $93, $92, $93, $92, $93, $92, $93, $92, $93
   db    $00 ; end of draw commands
 
-BackgroundTileCommands18 ; $6265
+BackgroundTileCommands18:: ; $6265
   db    $98, $00, $5F, $AC ; draw row of 32x the same tile
   db    $98, $20, $5F, $AC ; draw row of 32x the same tile
   db    $98, $40, $5F, $AC ; draw row of 32x the same tile
@@ -717,7 +717,7 @@ BackgroundTileCommands18 ; $6265
   db    $72, $AE, $AE, $AE, $AE, $AE, $AE, $75
   db    $00 ; end of draw commands
 
-BackgroundTileCommands19 ; $63A9
+BackgroundTileCommands19:: ; $63A9
   db    $98, $00, $5F, $AC ; draw row of 32x the same tile
   db    $98, $20, $5F, $AC ; draw row of 32x the same tile
   db    $98, $40, $5F, $AC ; draw row of 32x the same tile
@@ -779,7 +779,7 @@ BackgroundTileCommands19 ; $63A9
   db    $E0, $6C, $6D, $6E, $6F, $6C, $6D, $6E, $6F, $6C, $6D, $6E, $6F, $6C, $6D, $EF
   db    $00 ; end of draw commands
 
-BackgroundTileCommands1A ; $64F8
+BackgroundTileCommands1A:: ; $64F8
   db    $98, $00, $53, $AC ; draw row of 20x the same tile
   db    $98, $20, $53, $AC ; draw row of 20x the same tile
   db    $98, $28, $03; draw row of 4 tiles
@@ -822,7 +822,7 @@ BackgroundTileCommands1A ; $64F8
   db    $9A, $20, $5F, $AC ; draw row of 32x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands1B ; $65E4
+BackgroundTileCommands1B:: ; $65E4
   db    $9B, $C0, $5F, $AC ; draw row of 32x the same tile
   db    $9B, $E0, $5F, $AC ; draw row of 32x the same tile
   db    $98, $00, $5F, $AC ; draw row of 32x the same tile
@@ -875,8 +875,8 @@ BackgroundTileCommands1B ; $65E4
   db    $64, $65
   db    $00 ; end of draw commands
 
-BackgroundTileCommands1C ; $66A1
-BackgroundTileCommands1D ; $66A1
+BackgroundTileCommands1C:: ; $66A1
+BackgroundTileCommands1D:: ; $66A1
   db    $98, $00, $5F, $AC ; draw row of 32x the same tile
   db    $98, $20, $5F, $AC ; draw row of 32x the same tile
   db    $98, $40, $5F, $AC ; draw row of 32x the same tile
@@ -1025,7 +1025,7 @@ BackgroundTileCommands1D ; $66A1
   db    $9E, $20, $5F, $AC ; draw row of 32x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands14 ; $6945
+BackgroundTileCommands14:: ; $6945
   db    $9A, $00, $53, $7E ; draw row of 20x the same tile
   db    $9A, $20, $53, $7E ; draw row of 20x the same tile
   db    $9A, $40, $53, $7E ; draw row of 20x the same tile
@@ -1044,7 +1044,7 @@ BackgroundTileCommands14 ; $6945
   db    $9B, $E0, $53, $7E ; draw row of 20x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands08 ; $6986
+BackgroundTileCommands08:: ; $6986
   db    $98, $00, $13; draw row of 20 tiles
   db    $FC, $3B, $52, $52, $52, $52, $52, $52, $52, $52, $52, $52, $52, $52, $52, $52, $52, $52, $3C, $FC
   db    $9A, $20, $13; draw row of 20 tiles
@@ -1055,11 +1055,11 @@ BackgroundTileCommands08 ; $6986
   db    $98, $32, $CF, $51 ; draw column of 16x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands04 ; $69C5
+BackgroundTileCommands04:: ; $69C5
   db    $99, $E6, $0C; draw row of 13 tiles
   db    $66, $67, $68, $69, $6A, $7E, $7E, $60, $61, $62, $63, $64, $65
 
-BackgroundTileCommands03 ; $69D5
+BackgroundTileCommands03:: ; $69D5
   db    $98, $00, $13; draw row of 20 tiles
   db    $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
   db    $98, $20, $13; draw row of 20 tiles
@@ -1145,7 +1145,7 @@ BackgroundTileCommands03 ; $69D5
   db    $AD
   db    $00 ; end of draw commands
 
-BackgroundTileCommands05 ; $6AD2
+BackgroundTileCommands05:: ; $6AD2
   db    $98, $00, $13; draw row of 20 tiles
   db    $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $7F, $7F
   db    $98, $20, $07; draw row of 8 tiles
@@ -1262,7 +1262,7 @@ BackgroundTileCommands05 ; $6AD2
   db    $32, $3E
   db    $00 ; end of draw commands
 
-BackgroundTileCommands06 ; $6C21
+BackgroundTileCommands06:: ; $6C21
   db    $98, $00, $52, $8F ; draw row of 19x the same tile
   db    $98, $01, $00; draw row of 1 tiles
   db    $9F
@@ -1358,7 +1358,7 @@ BackgroundTileCommands06 ; $6C21
   db    $19, $14, $11, $14, $02, $0A, $6B, $6C, $6D, $6E, $0C, $04, $0D, $14
   db    $00 ; end of draw commands
 
-BackgroundTileCommands0C ; $6D07
+BackgroundTileCommands0C:: ; $6D07
   db    $98, $00, $52, $8F ; draw row of 19x the same tile
   db    $98, $01, $00; draw row of 1 tiles
   db    $9F
@@ -1458,7 +1458,7 @@ BackgroundTileCommands0C ; $6D07
   db    $19, $14, $11, $14, $02, $0A, $7E, $19, $14, $0C, $7E, $0C, $04, $0D, $14
   db    $00 ; end of draw commands
 
-BackgroundTileCommands02 ; $6DFD
+BackgroundTileCommands02:: ; $6DFD
   db    $9C, $00, $53, $7F ; draw row of 20x the same tile
   db    $9C, $20, $53, $7F ; draw row of 20x the same tile
   db    $9C, $40, $53, $7F ; draw row of 20x the same tile
@@ -1487,7 +1487,7 @@ BackgroundTileCommands02 ; $6DFD
   db    $9D, $09, $49, $7F ; draw row of 10x the same tile
   db    $9D, $0A, $C8, $7F ; draw column of 9x the same tile
 
-BackgroundTileCommands09 ; $6E7D
+BackgroundTileCommands09:: ; $6E7D
   db    $9A, $14, $4B, $7C ; draw row of 12x the same tile
   db    $9A, $34, $4B, $7C ; draw row of 12x the same tile
   db    $9A, $54, $4B, $7C ; draw row of 12x the same tile
@@ -1518,7 +1518,7 @@ BackgroundTileCommands09 ; $6E7D
   db    $7F, $7F, $7F, $3D, $3E, $3F, $3E, $3F, $3A, $7F, $7F, $7F
   db    $00 ; end of draw commands
 
-BackgroundTileCommands0B ; $6F26
+BackgroundTileCommands0B:: ; $6F26
   db    $9C, $00, $5F, $7E ; draw row of 32x the same tile
   db    $9C, $20, $5F, $7E ; draw row of 32x the same tile
   db    $9C, $40, $5F, $7E ; draw row of 32x the same tile
@@ -1559,7 +1559,7 @@ BackgroundTileCommands0B ; $6F26
   db    $9D, $49, $41, $7F ; draw row of 2x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands0A ; $6FBF
+BackgroundTileCommands0A:: ; $6FBF
   db    $98, $00, $52, $AF ; draw row of 19x the same tile
   db    $98, $01, $00; draw row of 1 tiles
   db    $AE
@@ -1674,7 +1674,7 @@ BackgroundTileCommands0A ; $6FBF
   db    $AF
   db    $00 ; end of draw commands
 
-BackgroundTileCommands0D ; $71B2
+BackgroundTileCommands0D:: ; $71B2
   db    $98, $00, $52, $AF ; draw row of 19x the same tile
   db    $98, $01, $00; draw row of 1 tiles
   db    $AE
@@ -1884,7 +1884,7 @@ BackgroundTileCommands0D ; $71B2
   db    $AF
   db    $00 ; end of draw commands
 
-BackgroundTileCommands0E ; $740E
+BackgroundTileCommands0E:: ; $740E
   db    $98, $00, $5F, $7F ; draw row of 32x the same tile
   db    $98, $20, $5F, $7F ; draw row of 32x the same tile
   db    $98, $40, $5F, $7F ; draw row of 32x the same tile
@@ -1915,7 +1915,7 @@ BackgroundTileCommands0E ; $740E
   db    $9A, $60, $5F, $7F ; draw row of 32x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands25 ; $7557
+BackgroundTileCommands25:: ; $7557
   db    $98, $00, $5F, $7F ; draw row of 32x the same tile
   db    $98, $20, $5F, $7F ; draw row of 32x the same tile
   db    $98, $40, $5F, $7F ; draw row of 32x the same tile
@@ -1946,7 +1946,7 @@ BackgroundTileCommands25 ; $7557
   db    $9A, $60, $5F, $7F ; draw row of 32x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands0F ; $76A0
+BackgroundTileCommands0F:: ; $76A0
   db    $98, $00, $5F, $7F ; draw row of 32x the same tile
   db    $98, $20, $5F, $7F ; draw row of 32x the same tile
   db    $98, $40, $1F; draw row of 32 tiles
@@ -1985,7 +1985,7 @@ BackgroundTileCommands0F ; $76A0
   db    $9B, $C0, $5F, $7F ; draw row of 32x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands10 ; $78AB
+BackgroundTileCommands10:: ; $78AB
   db    $98, $00, $1F; draw row of 32 tiles
   db    $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $44, $45, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D
   db    $98, $20, $1F; draw row of 32 tiles
@@ -2016,7 +2016,7 @@ BackgroundTileCommands10 ; $78AB
   db    $9A, $20, $5F, $7C ; draw row of 32x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands11 ; $7A2A
+BackgroundTileCommands11:: ; $7A2A
   db    $98, $00, $53, $7E ; draw row of 20x the same tile
   db    $98, $20, $53, $7E ; draw row of 20x the same tile
   db    $98, $40, $13; draw row of 20 tiles

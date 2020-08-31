@@ -2326,7 +2326,7 @@ jr_003_556F:
     jr   nz, jr_003_5594                          ; $5587: $20 $0B
 
     ld   a, [wActivePowerUp]                      ; $5589: $FA $7C $D4
-    cp   $01                                      ; $558C: $FE $01
+    cp   ACTIVE_POWER_UP_PIECE_OF_POWER           ; $558C: $FE $01
     jr   nz, jr_003_5594                          ; $558E: $20 $04
 
     ld   a, $12                                   ; $5590: $3E $12
@@ -2649,7 +2649,7 @@ jr_003_5748:
     jr   nz, jr_003_577F                          ; $5776: $20 $07
 
     ld   a, [wActivePowerUp]                      ; $5778: $FA $7C $D4
-    cp   $01                                      ; $577B: $FE $01
+    cp   ACTIVE_POWER_UP_PIECE_OF_POWER           ; $577B: $FE $01
     jr   nz, jr_003_5782                          ; $577D: $20 $03
 
 jr_003_577F:
@@ -4751,22 +4751,28 @@ PickHeartPiece::
     call IncrementEntityState                     ; $63E9: $CD $12 $3B
     jr   jr_003_63DB                              ; $63EC: $18 $ED
 
+; X offset to links position
 Data_003_63EE::
-    db   $E4, $14, $E4, $14
+    ;    loop-end  loop-next2 loop-next1 loop-start
+    db   $E4,      $14,       $E4,       $14
 
+; Y offset to links position
 Data_003_63F2::
-    db   $D4, $D4, $04, $04
+    ;    loop-end  loop-next2 loop-next1 loop-start
+    db   $D4,      $D4,       $04,       $04
 
 PickGuardianAcorn::
-    ld   a, $02                                   ; $63F6: $3E $02
-    ld   e, $05                                   ; $63F8: $1E $05
-    jr   jr_003_6400                              ; $63FA: $18 $04
+    ld   a, ACTIVE_POWER_UP_GUARDIAN_ACCORN       ; $63F6: $3E $02
+    ld   e, DIALOG_GOT_GUARDIAN_ACORN             ; $63F8: $1E $05
+    jr   ProcessPowerUp                           ; $63FA: $18 $04
 
 PickPieceOfPower::
-    ld   a, $01                                   ; $63FC: $3E $01
-    ld   e, $01                                   ; $63FE: $1E $01
+    ld   a, ACTIVE_POWER_UP_PIECE_OF_POWER        ; $63FC: $3E $01
+    ld   e, DIALOG_GOT_PIECE_OF_POWER             ; $63FE: $1E $01
 
-jr_003_6400:
+; a = active power up
+; e = dialog type for power up pickup
+ProcessPowerUp:
     ld   [wActivePowerUp], a                      ; $6400: $EA $7C $D4
     ld   a, e                                     ; $6403: $7B
     ld   [wDialogGotItem], a                      ; $6404: $EA $A9 $C1
@@ -6287,12 +6293,12 @@ jr_003_6D73:
 
     ; If having an active Guardian Acorn, take no damages
     ld   a, [wActivePowerUp]                      ; $6D9B: $FA $7C $D4
-    cp   $02                                      ; $6D9E: $FE $02
+    cp   ACTIVE_POWER_UP_GUARDIAN_ACCORN          ; $6D9E: $FE $02
     jr   nz, .damageModifiersEnd                  ; $6DA0: $20 $09
 
     ld   a, e                                     ; $6DA2: $7B
     cp   $04                                      ; $6DA3: $FE $04
-    jr   nz, .takeHalfDamages                    ; $6DA5: $20 $02
+    jr   nz, .takeHalfDamages                     ; $6DA5: $20 $02
 
     ; Take no damages
     ld   e, $00                                   ; $6DA7: $1E $00
@@ -6878,7 +6884,7 @@ jr_003_70B9:
     jr   z, jr_003_70DD                           ; $70D2: $28 $09
 
     ld   a, [wActivePowerUp]                      ; $70D4: $FA $7C $D4
-    cp   $01                                      ; $70D7: $FE $01
+    cp   ACTIVE_POWER_UP_PIECE_OF_POWER           ; $70D7: $FE $01
     ld   a, $20                                   ; $70D9: $3E $20
     jr   nz, jr_003_70DF                          ; $70DB: $20 $02
 
@@ -6979,7 +6985,7 @@ jr_003_715E:
     jr   z, jr_003_717A                           ; $7171: $28 $07
 
     ld   a, [wActivePowerUp]                      ; $7173: $FA $7C $D4
-    cp   $01                                      ; $7176: $FE $01
+    cp   ACTIVE_POWER_UP_PIECE_OF_POWER           ; $7176: $FE $01
     jr   nz, func_003_719D                        ; $7178: $20 $23
 
 jr_003_717A:
@@ -7014,7 +7020,7 @@ func_003_719D::
     jr   nz, jr_003_71AE                          ; $71A7: $20 $05
 
     ld   a, [wActivePowerUp]                      ; $71A9: $FA $7C $D4
-    and  $01                                      ; $71AC: $E6 $01
+    and  ACTIVE_POWER_UP_PIECE_OF_POWER           ; $71AC: $E6 $01
 
 jr_003_71AE:
     ld   hl, wIsUsingSpinAttack                   ; $71AE: $21 $21 $C1

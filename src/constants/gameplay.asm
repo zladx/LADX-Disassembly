@@ -363,3 +363,8 @@ BOMB_ARROW_COOLDOWN       equ 6 ; number of frames, until bomb / arrow can be us
 
 ; speed of the hookshot in x or y direction
 HOOKSHOT_CHAIN_SPEED      equ $30
+
+; Values for wActivePowerUp
+ACTIVE_POWER_UP_NONE            equ 0
+ACTIVE_POWER_UP_PIECE_OF_POWER  equ 1
+ACTIVE_POWER_UP_GUARDIAN_ACCORN equ 2

@@ -1099,7 +1099,7 @@ func_020_4B81::
     ld   hl, wEntitiesPrivateCountdown1Table      ; $4B81: $21 $F0 $C2
     add  hl, de                                   ; $4B84: $19
     ld   [hl], $10                                ; $4B85: $36 $10
-    ; reset wBombArrowCooldown if not allready zero
+    ; reset wBombArrowCooldown if not already zero
     ld   a, [wBombArrowCooldown]                  ; $4B87: $FA $C0 $C1
     and  a                                        ; $4B8A: $A7
     jp   z, label_020_4B9E                        ; $4B8B: $CA $9E $4B

@@ -56,7 +56,7 @@ oam_%.2bpp: oam_%.png
 src/main.%.o: src/main.asm $(asm_files) $(gfx_files:.png=.2bpp)
 	$(ASM) $(ASFLAGS) $($*_ASFLAGS) -i src/ -o $@ $<
 
-# Link an object file to a GBC file.
+# Link object files into a GBC executable rom
 # The arguments used are both the global options (e.g. `LDFLAGS`) and the
 # locale-specific options (e.g. `azlg-r1_LDFLAGS`).
 %.gbc: src/main.%.o

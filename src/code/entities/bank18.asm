@@ -5576,7 +5576,7 @@ func_018_68EA::
     adc  $00                                      ; $6905: $CE $00
     ld   d, a                                     ; $6907: $57
     xor  a                                        ; $6908: $AF
-    ldh  [hMultiPurposeG], a                               ; $6909: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $6909: $E0 $E8
     ld   hl, wEntitiesDirectionTable              ; $690B: $21 $80 $C3
     add  hl, bc                                   ; $690E: $09
     ld   a, [hl]                                  ; $690F: $7E
@@ -5584,9 +5584,9 @@ func_018_68EA::
     jr   nz, jr_018_691B                          ; $6911: $20 $08
 
     inc  a                                        ; $6913: $3C
-    ldh  [hMultiPurposeG], a                               ; $6914: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $6914: $E0 $E8
     ld   hl, hActiveEntityFlipAttribute           ; $6916: $21 $ED $FF
-    set  5, [hl]                                  ; $6919: $CB $EE
+    set  OAM_X_FLIP, [hl]                         ; $6919: $CB $EE
 
 jr_018_691B:
     ld   hl, Data_018_673A                        ; $691B: $21 $3A $67
@@ -5602,11 +5602,11 @@ jr_018_691B:
     ld   d, h                                     ; $692D: $54
     pop  hl                                       ; $692E: $E1
     ld   a, c                                     ; $692F: $79
-    ldh  [hMultiPurpose0], a                           ; $6930: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $6930: $E0 $D7
     ld   a, [wActiveEntityIndex]                  ; $6932: $FA $23 $C1
     ld   c, a                                     ; $6935: $4F
     call SkipDisabledEntityDuringRoomTransition   ; $6936: $CD $57 $3D
-    ldh  a, [hMultiPurpose0]                           ; $6939: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $6939: $F0 $D7
     ld   c, a                                     ; $693B: $4F
 
 jr_018_693C:
@@ -5681,7 +5681,7 @@ jr_018_6984:
     jr   z, jr_018_699A                           ; $698C: $28 $0C
 
     ldh  a, [hActiveEntityFlipAttribute]          ; $698E: $F0 $ED
-    bit  4, a                                     ; $6990: $CB $67
+    bit  OAM_OBP_NUM , a                          ; $6990: $CB $67
     jr   z, jr_018_699A                           ; $6992: $28 $06
 
     ld   a, [de]                                  ; $6994: $1A

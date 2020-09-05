@@ -55,6 +55,7 @@ J_BIT_START  EQU 7
 OAMF_PRI        EQU %10000000 ; Priority
 OAMF_YFLIP      EQU %01000000 ; Y flip
 OAMF_XFLIP      EQU %00100000 ; X flip
+OAMF_NO_FLIP    EQU %00000000 ; no flip
 OAMF_PAL0       EQU %00000000 ; Palette number; 0,1 (DMG)
 OAMF_PAL1       EQU %00010000 ; Palette number; 0,1 (DMG)
 OAMF_BANK0      EQU %00000000 ; Bank number; 0,1 (GBC)

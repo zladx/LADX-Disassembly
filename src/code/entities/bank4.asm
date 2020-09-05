@@ -1856,7 +1856,7 @@ jr_004_5963:
     ldh  a, [hFrameCounter]                       ; $59DC: $F0 $E7
     rla                                           ; $59DE: $17
     rla                                           ; $59DF: $17
-    and  $10                                      ; $59E0: $E6 $10
+    and  OAMF_PAL1                                ; $59E0: $E6 $10
     ld   hl, hActiveEntityFlipAttribute           ; $59E2: $21 $ED $FF
     xor  [hl]                                     ; $59E5: $AE
     ld   [hl], a                                  ; $59E6: $77
@@ -2415,9 +2415,9 @@ func_004_5DA6::
     push af                                       ; $5DAB: $F5
     rla                                           ; $5DAC: $17
     and  $40                                      ; $5DAD: $E6 $40
-    ldh  [hMultiPurpose0], a                           ; $5DAF: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $5DAF: $E0 $D7
     pop  af                                       ; $5DB1: $F1
-    and  $0F                                      ; $5DB2: $E6 $0F
+    and  OAMF_BANK1 | OAMF_PALMASK                ; $5DB2: $E6 $0F
     ldh  [hActiveEntityFlipAttribute], a          ; $5DB4: $E0 $ED
     ld   hl, wEntitiesSpriteVariantTable          ; $5DB6: $21 $B0 $C3
     add  hl, bc                                   ; $5DB9: $09
@@ -2428,7 +2428,7 @@ func_004_5DA6::
     rla                                           ; $5DBE: $17
     rla                                           ; $5DBF: $17
     and  $E0                                      ; $5DC0: $E6 $E0
-    ld   hl, hMultiPurpose0                            ; $5DC2: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $5DC2: $21 $D7 $FF
     add  [hl]                                     ; $5DC5: $86
     ld   e, a                                     ; $5DC6: $5F
     ld   d, b                                     ; $5DC7: $50
@@ -7634,7 +7634,7 @@ jr_004_7D2B:
     rla                                           ; $7D2E: $17
     rla                                           ; $7D2F: $17
     rla                                           ; $7D30: $17
-    and  $10                                      ; $7D31: $E6 $10
+    and  OAMF_PAL1                                ; $7D31: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $7D33: $E0 $ED
     call RenderActiveEntitySpritesPair            ; $7D35: $CD $C0 $3B
     call func_004_7FA3                            ; $7D38: $CD $A3 $7F
@@ -8034,10 +8034,10 @@ func_004_7F90::
     add  hl, bc                                   ; $7F93: $09
     ld   a, [hl]                                  ; $7F94: $7E
     rl   a                                        ; $7F95: $CB $17
-    ld   a, $00                                   ; $7F97: $3E $00
+    ld   a, OAMF_NO_FLIP                          ; $7F97: $3E $00
     jr   c, jr_004_7F9D                           ; $7F99: $38 $02
 
-    ld   a, $20                                   ; $7F9B: $3E $20
+    ld   a, OAMF_XFLIP                            ; $7F9B: $3E $20
 
 jr_004_7F9D:
     ld   hl, hActiveEntityFlipAttribute           ; $7F9D: $21 $ED $FF

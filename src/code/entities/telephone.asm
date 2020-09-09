@@ -62,7 +62,7 @@ jr_006_6AA9:
     jp   c, label_006_6BAD                        ; $6AEC: $DA $AD $6B
 
     ld   a, [wGoldenLeavesCount]                  ; $6AEF: $FA $15 $DB
-    cp   $05                                      ; $6AF2: $FE $05
+    cp   GOLDEN_LEAVES_5                          ; $6AF2: $FE $05
     jr   nc, jr_006_6B09                          ; $6AF4: $30 $13
 
     ld   hl, wEntitiesPrivateState1Table          ; $6AF6: $21 $B0 $C2

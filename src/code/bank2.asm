@@ -6593,7 +6593,7 @@ jr_002_6FFE:
     jr   nz, jr_002_700D                          ; $7000: $20 $0B
 
     ld   a, [wGoldenLeavesCount]                  ; $7002: $FA $15 $DB
-    cp   $06                                      ; $7005: $FE $06
+    cp   SLIME_KEY                                ; $7005: $FE $06
     ld   e, $31                                   ; $7007: $1E $31
     jr   nz, jr_002_703E                          ; $7009: $20 $33
 

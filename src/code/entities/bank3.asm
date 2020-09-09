@@ -391,7 +391,7 @@ EntityInitTelephone::
 
 EntityInitRichard::
     ld   a, [wGoldenLeavesCount]                  ; $4980: $FA $15 $DB
-    cp   $06                                      ; $4983: $FE $06
+    cp   SLIME_KEY                                ; $4983: $FE $06
     jr   c, .jr_003_4993                          ; $4985: $38 $0C
 
     ld   hl, wEntitiesPosXTable                   ; $4987: $21 $00 $C2
@@ -4111,7 +4111,7 @@ HidingSlimeKeyEntityHandler::
     cp   $C6                                      ; Overworld Pothole Field - Slime Key
     jr   nz, jr_003_6029                          ; $6022: $20 $05
 
-    ld   a, $05                                   ; $6024: $3E $05
+    ld   a, GOLDEN_LEAVES_5                       ; $6024: $3E $05
     ld   [wGoldenLeavesCount], a                  ; $6026: $EA $15 $DB
 
 jr_003_6029:
@@ -4122,11 +4122,11 @@ jr_003_6029:
     res  4, [hl]                                  ; $6035: $CB $A6
     ld   e, $A2                                   ; $6037: $1E $A2
     ld   a, [wGoldenLeavesCount]                  ; $6039: $FA $15 $DB
-    cp   $06                                      ; $603C: $FE $06
+    cp   SLIME_KEY                                ; $603C: $FE $06
     jr   z, jr_003_6047                           ; $603E: $28 $07
 
     ld   e, $E8                                   ; $6040: $1E $E8
-    cp   $05                                      ; $6042: $FE $05
+    cp   GOLDEN_LEAVES_5                          ; $6042: $FE $05
     jr   nz, jr_003_6047                          ; $6044: $20 $01
 
     inc  e                                        ; $6046: $1C

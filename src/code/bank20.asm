@@ -2623,10 +2623,11 @@ jr_020_5AAE:
 
 jr_020_5AD1:
     ld   a, [wGoldenLeavesCount]                  ; $5AD1: $FA $15 $DB
+    ; if no golden leaves
     and  a                                        ; $5AD4: $A7
     jr   z, jr_020_5ADE                           ; $5AD5: $28 $07
-
-    cp   $06                                      ; $5AD7: $FE $06
+    ; if not slime key
+    cp   SLIME_KEY                                ; $5AD7: $FE $06
     jr   nc, jr_020_5ADE                          ; $5AD9: $30 $03
 
 DrawKeyCounter:

@@ -369,5 +369,6 @@ ACTIVE_POWER_UP_NONE            equ 0
 ACTIVE_POWER_UP_PIECE_OF_POWER  equ 1
 ACTIVE_POWER_UP_GUARDIAN_ACCORN equ 2
 
+; values for wGoldenLeavesCount
 GOLDEN_LEAVES_5 equ 5
-SLIME_KEY equ 6
+SLIME_KEY       equ 6

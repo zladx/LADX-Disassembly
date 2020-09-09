@@ -7347,11 +7347,10 @@ func_004_7B40::
 
     ld   [wHasStolenFromShop], a                  ; $7B4D: $EA $46 $DB
     ld   [wC50A], a                               ; $7B50: $EA $0A $C5
-    db   $C3                                      ; $7B53: $C3
-    ld   a, d                                     ; $7B54: $7A
+    jp   func_004_6D7A                            ; $7B53: $C3 $7A $6D ; 6D is double used also as data in Data_004_7B55
 
 Data_004_7B55::
-    db   $6D, $1D, $3D
+    db   $1D, $3D
 
 Data_004_7B58::
     db   $5D, $7D

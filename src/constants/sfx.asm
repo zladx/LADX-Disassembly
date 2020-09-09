@@ -254,5 +254,13 @@ NOISE_SFX_EAGLE_TOUCHDOWN         equ $30;probably eagle wings
 NOISE_SFX_EAGLE_LIFT_UP           equ $31;also eagle probably
 ; entries to be added to at least $AA
 
+; values for wOcarinaSongFlags
+FROGS_SONG_OF_THE_SOUL_FLAG       equ 1
+MANBO_MAMBO_FLAG                  equ 2
+BALLAD_OF_THE_WIND_FISH_FLAG      equ 4
+FROGS_SONG_OF_THE_SOUL_FLAG_BIT   equ 0
+MANBO_MAMBO_FLAG_BIT              equ 1
+BALLAD_OF_THE_WIND_FISH_FLAG_BIT  equ 2
+
 LOW_HEALTH_SFX_PAUSE              equ $30 ; pause beetween low health SFX beeps
 MUSIC_FADE_OUT_TIMER_MAX          equ $38 ; reset value for hMusicFadeOutTimer

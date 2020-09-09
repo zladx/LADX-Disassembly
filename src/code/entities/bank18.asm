@@ -33,7 +33,7 @@ MamuAndFrogsState0Handler::
     xor  a                                        ; $402D: $AF
     ld   [$D201], a                               ; $402E: $EA $01 $D2
     ld   a, [wOcarinaSongFlags]                   ; $4031: $FA $49 $DB
-    and  $01                                      ; $4034: $E6 $01
+    and  FROGS_SONG_OF_THE_SOUL_FLAG              ; $4034: $E6 $01
     jr   z, jr_018_404A                           ; $4036: $28 $12
 
     ldh  a, [hLinkPositionY]                      ; $4038: $F0 $99
@@ -302,7 +302,7 @@ MamuAndFrogsState5Handler::
     ld   a, $02                                   ; $4270: $3E $02
     ld   [wSelectedSongIndex], a                  ; $4272: $EA $4A $DB
     ld   hl, wOcarinaSongFlags                    ; $4275: $21 $49 $DB
-    set  0, [hl]                                  ; $4278: $CB $C6
+    set  FROGS_SONG_OF_THE_SOUL_FLAG_BIT, [hl]    ; $4278: $CB $C6
     jp   IncrementEntityState                     ; $427A: $C3 $12 $3B
 
 jr_018_427D:
@@ -665,7 +665,7 @@ jr_018_4521:
 
 ManboAndFishesState0Handler::
     ld   a, [wOcarinaSongFlags]                   ; $4536: $FA $49 $DB
-    and  $02                                      ; $4539: $E6 $02
+    and  MANBO_MAMBO_FLAG                         ; $4539: $E6 $02
     jr   z, jr_018_4547                           ; $453B: $28 $0A
 
     call func_018_7D7C                            ; $453D: $CD $7C $7D
@@ -882,10 +882,10 @@ ManboAndFishesState5Handler::
     call GetEntityTransitionCountdown             ; $4752: $CD $05 $0C
     jr   nz, jr_018_476A                          ; $4755: $20 $13
 
-    ld   a, $01                                   ; $4757: $3E $01
-    ld   [wSelectedSongIndex], a                               ; $4759: $EA $4A $DB
+    ld   a, FROGS_SONG_OF_THE_SOUL_FLAG           ; $4757: $3E $01
+    ld   [wSelectedSongIndex], a                  ; $4759: $EA $4A $DB
     ld   hl, wOcarinaSongFlags                    ; $475C: $21 $49 $DB
-    set  1, [hl]                                  ; $475F: $CB $CE
+    set  MANBO_MAMBO_FLAG_BIT, [hl]               ; $475F: $CB $CE
     xor  a                                        ; $4761: $AF
     ld   [wC167], a                               ; $4762: $EA $67 $C1
     call IncrementEntityState                     ; $4765: $CD $12 $3B

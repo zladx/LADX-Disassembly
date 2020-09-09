@@ -190,11 +190,11 @@ jr_005_4F6F:
     call func_005_5506                            ; $4F6F: $CD $06 $55
     ret  nc                                       ; $4F72: $D0
 
-    ld   a, [wOverworldRoomStatus + $08]                               ; $4F73: $FA $08 $D8
+    ld   a, [wOverworldRoomStatus + $08]          ; $4F73: $FA $08 $D8
     and  $10                                      ; $4F76: $E6 $10
     jr   z, jr_005_4FA7                           ; $4F78: $28 $2D
 
-    ld   hl, wOverworldRoomStatus + $92                                ; $4F7A: $21 $92 $D8
+    ld   hl, wOverworldRoomStatus + $92           ; $4F7A: $21 $92 $D8
     ld   a, [hl]                                  ; $4F7D: $7E
     and  $40                                      ; $4F7E: $E6 $40
     jr   nz, jr_005_4F89                          ; $4F80: $20 $07
@@ -205,7 +205,7 @@ jr_005_4F6F:
 
 jr_005_4F89:
     ld   a, [wOcarinaSongFlags]                   ; $4F89: $FA $49 $DB
-    and  $04                                      ; $4F8C: $E6 $04
+    and  BALLAD_OF_THE_WIND_FISH_FLAG             ; $4F8C: $E6 $04
     jr   z, jr_005_4F95                           ; $4F8E: $28 $05
 
 jr_005_4F90:
@@ -269,7 +269,7 @@ jr_005_4FD6:
     ld   e, $04                                   ; $4FDB: $1E $04
     ld   d, $4A                                   ; $4FDD: $16 $4A
     ld   a, [wOcarinaSongFlags]                   ; $4FDF: $FA $49 $DB
-    and  $04                                      ; $4FE2: $E6 $04
+    and  BALLAD_OF_THE_WIND_FISH_FLAG             ; $4FE2: $E6 $04
     jr   z, jr_005_4FFA                           ; $4FE4: $28 $14
 
     ld   e, $05                                   ; $4FE6: $1E $05
@@ -343,7 +343,7 @@ jr_005_503E:
     jr   nz, jr_005_5054                          ; $5040: $20 $12
 
     ld   a, [wOcarinaSongFlags]                   ; $5042: $FA $49 $DB
-    and  $04                                      ; $5045: $E6 $04
+    and  BALLAD_OF_THE_WIND_FISH_FLAG             ; $5045: $E6 $04
     jr   nz, jr_005_5054                          ; $5047: $20 $0B
 
     call IncrementEntityState                     ; $5049: $CD $12 $3B
@@ -538,7 +538,7 @@ func_005_5161::
     ret  nz                                       ; $516F: $C0
 
     ld   hl, wOcarinaSongFlags                    ; $5170: $21 $49 $DB
-    set  2, [hl]                                  ; $5173: $CB $D6
+    set  BALLAD_OF_THE_WIND_FISH_FLAG_BIT, [hl]   ; $5173: $CB $D6
     xor  a                                        ; $5175: $AF
     ld   [wSelectedSongIndex], a                               ; $5176: $EA $4A $DB
     call IncrementEntityState                     ; $5179: $CD $12 $3B

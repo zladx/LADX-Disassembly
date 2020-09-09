@@ -1500,7 +1500,7 @@ EggSongEventEntityHandler::
     ld   [wD461], a                               ; $4AD5: $EA $61 $D4
     ldh  a, [hRoomStatus]                         ; $4AD8: $F0 $F8
     and  $10                                      ; $4ADA: $E6 $10
-    jp   nz, ClearEntityStatus_19                        ; $4ADC: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                 ; $4ADC: $C2 $61 $7E
 
     ldh  a, [hActiveEntityState]                  ; $4ADF: $F0 $F0
     JP_TABLE
@@ -1512,10 +1512,10 @@ EggSongEventEntityHandler::
 
 EggSongEventState0Handler::
     ld   a, [wOcarinaSongFlags]                   ; $4AEC: $FA $49 $DB
-    and  $04                                      ; $4AEF: $E6 $04
+    and  BALLAD_OF_THE_WIND_FISH_FLAG             ; $4AEF: $E6 $04
     ret  z                                        ; $4AF1: $C8
 
-    ld   a, [wSelectedSongIndex]                               ; $4AF2: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                  ; $4AF2: $FA $4A $DB
     cp   $00                                      ; $4AF5: $FE $00
     ret  nz                                       ; $4AF7: $C0
 
@@ -1956,14 +1956,14 @@ func_019_4DBC::
     ld   [hl], $50                                ; $4DC4: $36 $50
     call func_019_4E00                            ; $4DC6: $CD $00 $4E
     ld   a, [wOcarinaSongFlags]                   ; $4DC9: $FA $49 $DB
-    and  $01                                      ; $4DCC: $E6 $01
+    and  FROGS_SONG_OF_THE_SOUL_FLAG              ; $4DCC: $E6 $01
     ret  z                                        ; $4DCE: $C8
 
     ld   a, [wLinkPlayingOcarinaCountdown]        ; $4DCF: $FA $66 $C1
     cp   $01                                      ; $4DD2: $FE $01
     ret  nz                                       ; $4DD4: $C0
 
-    ld   a, [wSelectedSongIndex]                               ; $4DD5: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                  ; $4DD5: $FA $4A $DB
     cp   $02                                      ; $4DD8: $FE $02
     ret  nz                                       ; $4DDA: $C0
 

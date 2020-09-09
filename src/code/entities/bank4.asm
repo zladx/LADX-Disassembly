@@ -7349,7 +7349,7 @@ func_004_7B40::
     ld   [wC50A], a                               ; $7B50: $EA $0A $C5
     jp   func_004_6D7A                            ; $7B53: $C3 $7A $6D ; 6D is double used also as data in Data_004_7B55
 
-Data_004_7B55::
+Data_004_7B56::
     db   $1D, $3D
 
 Data_004_7B58::
@@ -7374,7 +7374,7 @@ jr_004_7B72:
 
     dec  a                                        ; $7B7E: $3D
     ldh  [hActiveEntitySpriteVariant], a          ; $7B7F: $E0 $F1
-    ld   hl, Data_004_7B55                        ; $7B81: $21 $55 $7B
+    ld   hl, Data_004_7B56 -1                     ; $7B81: $21 $55 $7B
     ldh  a, [hFreeWarpDataAddress]                ; $7B84: $F0 $E6
     ld   e, a                                     ; $7B86: $5F
     add  hl, de                                   ; $7B87: $19

@@ -4919,7 +4919,7 @@ LoadDungeonTiles::
 .jr_2D17
 
     ld   a, [wGoldenLeavesCount]                  ; $2D17: $FA $15 $DB
-    cp   $06 ; slime key                          ; $2D1A: $FE $06
+    cp   SLIME_KEY                                ; $2D1A: $FE $06
     jr   c, .jr_2D21                              ; $2D1C: $38 $03
     call ReplaceSlimeKeyTilesByGoldenLeaf         ; $2D1E: $CD $A1 $1E
 

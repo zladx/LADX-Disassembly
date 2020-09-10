@@ -8203,7 +8203,7 @@ label_036_71FA:
     jr   nz, label_036_7288                       ; $7207: $20 $7F
 
     ld   a, [wGoldenLeavesCount]                  ; $7209: $FA $15 $DB
-    cp   $05                                      ; $720C: $FE $05
+    cp   GOLDEN_LEAVES_5                          ; $720C: $FE $05
     jr   nc, label_036_7288                       ; $720E: $30 $78
 
     ldh  a, [hLinkPositionX]                      ; $7210: $F0 $98
@@ -8229,7 +8229,7 @@ label_036_7228:
     jr   nz, label_036_7288                       ; $722D: $20 $59
 
     ld   a, [wGoldenLeavesCount]                  ; $722F: $FA $15 $DB
-    cp   $06                                      ; $7232: $FE $06
+    cp   SLIME_KEY                                ; $7232: $FE $06
     jr   nz, label_036_7288                       ; $7234: $20 $52
 
     ld   hl, wIndoorARoomStatus                   ; $7236: $21 $00 $D9

@@ -7,10 +7,10 @@ PolsVoiceEntityHandler::
     jr   nz, jr_006_73AD                          ; $7380: $20 $2B
 
     ld   a, [wOcarinaSongFlags]                   ; $7382: $FA $49 $DB
-    and  $04                                      ; $7385: $E6 $04
+    and  BALLAD_OF_THE_WIND_FISH_FLAG             ; $7385: $E6 $04
     jr   z, jr_006_73AD                           ; $7387: $28 $24
 
-    ld   a, [wSelectedSongIndex]                               ; $7389: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                  ; $7389: $FA $4A $DB
     and  a                                        ; $738C: $A7
     jr   nz, jr_006_73AD                          ; $738D: $20 $1E
 

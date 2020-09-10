@@ -4628,7 +4628,7 @@ collectPickableItem:
 ._2F dw PickDroppableFairy
 ._30 dw PickDroppableKey
 ._31 dw PickSword
-._32 dw PickEntity32
+._32 dw MovePickupInTheAir.return
 ._33 dw PickPieceOfPower
 ._34 dw PickGuardianAcorn
 ._35 dw PickHeartPiece
@@ -4703,12 +4703,13 @@ PickSirensInstrument::
     ld   [wC167], a                               ; $639E: $EA $67 $C1
 
 ; Link beach sword lifting in the air animation?
-func_003_63A1::
+HoldPickupInTheAir::
     ldh  a, [hLinkPositionX]                      ; $63A1: $F0 $98
     push af                                       ; $63A3: $F5
     add  $04                                      ; $63A4: $C6 $04
     ldh  [hLinkPositionX], a                      ; $63A6: $E0 $98
-    call func_003_641E                            ; $63A8: $CD $1E $64
+    call MovePickupInTheAir                       ; $63A8: $CD $1E $64
+    ; reset hLinkPositionX to previous value
     pop  af                                       ; $63AB: $F1
     ldh  [hLinkPositionX], a                      ; $63AC: $E0 $98
     jr   label_003_63D2                           ; $63AE: $18 $22
@@ -4787,11 +4788,12 @@ ProcessPowerUp:
     ldh  [hFFBD], a                               ; $641A: $E0 $BD
     ldh  [hNextDefaultMusicTrack], a              ; $641C: $E0 $BF
 
-func_003_641E::
+MovePickupInTheAir::
+    ; set loop counter
     ld   e, $03                                   ; $641E: $1E $03
     ld   d, $00                                   ; $6420: $16 $00
 
-jr_003_6422:
+.movePickupHigher::
     push de                                       ; $6422: $D5
     ld   hl, Data_003_63EE                        ; $6423: $21 $EE $63
     add  hl, de                                   ; $6426: $19
@@ -4815,9 +4817,9 @@ jr_003_6422:
     dec  e                                        ; $6446: $1D
     ld   a, e                                     ; $6447: $7B
     cp   $FF                                      ; $6448: $FE $FF
-    jr   nz, jr_003_6422                          ; $644A: $20 $D6
+    jr   nz, .movePickupHigher                    ; $644A: $20 $D6
 
-PickEntity32::
+.return::
     ret                                           ; $644C: $C9
 
 PickSword::
@@ -4828,7 +4830,7 @@ PickSword::
     ld   a, MUSIC_SWORD_ACQUIRED                  ; $6453: $3E $0F
     ld   [wMusicTrackToPlay], a                   ; $6455: $EA $68 $D3
     ld   [wC167], a                               ; $6458: $EA $67 $C1
-    call func_003_63A1                            ; $645B: $CD $A1 $63
+    call HoldPickupInTheAir                       ; $645B: $CD $A1 $63
     call GetEntityTransitionCountdown             ; $645E: $CD $05 $0C
     ld   [hl], $A0                                ; $6461: $36 $A0
     ld   a, MUSIC_SILENCE                         ; $6463: $3E $FF

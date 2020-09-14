@@ -3,6 +3,7 @@
 INVENTORY_SLOT_COUNT equ $0C
 
 ; Items
+INVENTORY_EMPTY           equ $00
 INVENTORY_SWORD           equ $01
 INVENTORY_BOMBS           equ $02
 INVENTORY_POWER_BRACELET  equ $03

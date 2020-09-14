@@ -5697,7 +5697,7 @@ jr_002_6B34:
 
     ld   e, $20                                   ; $6B45: $1E $20
     ld   a, [wBButtonSlot]                        ; $6B47: $FA $00 $DB
-    cp   $0A                                      ; $6B4A: $FE $0A
+    cp   INVENTORY_ROCS_FEATHER                   ; $6B4A: $FE $0A
     jr   z, jr_002_6B50                           ; $6B4C: $28 $02
 
     ld   e, $10                                   ; $6B4E: $1E $10
@@ -7078,7 +7078,7 @@ jr_002_72D1:
     jr   z, jr_002_72FA                           ; $72DA: $28 $1E
 
     ld   a, [wBButtonSlot]                        ; $72DC: $FA $00 $DB
-    cp   $03                                      ; $72DF: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $72DF: $FE $03
     jr   z, jr_002_72FA                           ; $72E1: $28 $17
 
     ld   a, [wHasInstrument2]                     ; $72E3: $FA $66 $DB
@@ -7283,7 +7283,7 @@ ENDC
 
 jr_002_73F6:
     ld   a, [hl+]                                 ; $73F6: $2A
-    cp   $03                                      ; $73F7: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $73F7: $FE $03
     jr   z, jr_002_7402                           ; $73F9: $28 $07
 
     ld   a, l                                     ; $73FB: $7D

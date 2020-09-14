@@ -1250,33 +1250,39 @@ Data_020_4C43::
 .up:    db -12
 .down:  db  12
 
-func_020_4C47::
+UpdateMagicPowder::
+    ; play powder jingle
     ld   a, JINGLE_POWDER                         ; $4C47: $3E $05
     ldh  [hJingle], a                             ; $4C49: $E0 $F2
     ld   a, $0E                                   ; $4C4B: $3E $0E
     ld   [wC19B], a                               ; $4C4D: $EA $9B $C1
+    ; reduce wMagicPowderCount
     ld   a, [wMagicPowderCount]                   ; $4C50: $FA $4C $DB
     sub  $01                                      ; $4C53: $D6 $01
     daa                                           ; $4C55: $27
     ld   [wMagicPowderCount], a                   ; $4C56: $EA $4C $DB
-    jr   nz, jr_020_4C6D                          ; $4C59: $20 $12
-
+    ; if powder is left update entities positions
+    jr   nz, .updateEntitiesPositions             ; $4C59: $20 $12
+    ; powder is empty, so empty button slot
     ld   hl, wBButtonSlot                         ; $4C5B: $21 $00 $DB
     ld   a, [hl]                                  ; $4C5E: $7E
-    cp   $0C                                      ; $4C5F: $FE $0C
-    jr   nz, jr_020_4C65                          ; $4C61: $20 $02
+    cp   INVENTORY_MAGIC_POWDER                   ; $4C5F: $FE $0C
+    ; powder not in B slot, so check A slot
+    jr   nz, .checkAButtonSlot                    ; $4C61: $20 $02
+    ; empty B slot
+    ld   [hl], INVENTORY_EMPTY                    ; $4C63: $36 $00
 
-    ld   [hl], $00                                ; $4C63: $36 $00
-
-jr_020_4C65:
+.checkAButtonSlot:
+    ; hl = wAButtonSlot
     inc  hl                                       ; $4C65: $23
     ld   a, [hl]                                  ; $4C66: $7E
-    cp   $0C                                      ; $4C67: $FE $0C
-    jr   nz, jr_020_4C6D                          ; $4C69: $20 $02
+    cp   INVENTORY_MAGIC_POWDER                   ; $4C67: $FE $0C
+    ; powder not in A slot, so continue
+    jr   nz, .updateEntitiesPositions             ; $4C69: $20 $02
+    ; empty A slot
+    ld   [hl], INVENTORY_EMPTY                    ; $4C6B: $36 $00
 
-    ld   [hl], $00                                ; $4C6B: $36 $00
-
-jr_020_4C6D:
+.updateEntitiesPositions:
     push bc                                       ; $4C6D: $C5
     ldh  a, [hLinkDirection]                      ; $4C6E: $F0 $9E
     ld   c, a                                     ; $4C70: $4F
@@ -1294,7 +1300,7 @@ jr_020_4C6D:
     ld   hl, wEntitiesPosYTable                   ; $4C84: $21 $10 $C2
     add  hl, de                                   ; $4C87: $19
     ld   [hl], a                                  ; $4C88: $77
-    ldh  a, [hLinkPositionZHigh]                      ; $4C89: $F0 $A2
+    ldh  a, [hLinkPositionZHigh]                  ; $4C89: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $4C8B: $21 $10 $C3
     add  hl, de                                   ; $4C8E: $19
     ld   [hl], a                                  ; $4C8F: $77
@@ -3468,10 +3474,10 @@ jr_020_5FED:
     ld   e, $FF                                   ; $600B: $1E $FF
 
 jr_020_600D:
-    cp   $09                                      ; $600D: $FE $09
+    cp   INVENTORY_OCARINA                        ; $600D: $FE $09
     jr   nz, jr_020_6027                          ; $600F: $20 $16
 
-    ld   a, [wOcarinaSongFlags]                  ; $6011: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                   ; $6011: $FA $49 $DB
     and  a                                        ; $6014: $A7
     jr   z, jr_020_6027                           ; $6015: $28 $10
 
@@ -3956,7 +3962,7 @@ jr_020_635E:
 
 jr_020_6363:
     ld   a, [hl+]                                 ; $6363: $2A
-    cp   $01                                      ; $6364: $FE $01
+    cp   INVENTORY_SWORD                          ; $6364: $FE $01
     jr   z, jr_020_636E                           ; $6366: $28 $06
 
     inc  e                                        ; $6368: $1C
@@ -3971,11 +3977,11 @@ jr_020_636E:
     ld   hl, Data_020_633A                        ; $6370: $21 $3A $63
     add  hl, de                                   ; $6373: $19
     ld   a, [hl]                                  ; $6374: $7E
-    ldh  [hMultiPurpose0], a                           ; $6375: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $6375: $E0 $D7
     ld   hl, Data_020_6346                        ; $6377: $21 $46 $63
     add  hl, de                                   ; $637A: $19
     ld   a, [hl]                                  ; $637B: $7E
-    ldh  [hMultiPurpose1], a                           ; $637C: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $637C: $E0 $D8
     ld   a, [wActivePowerUp]                      ; $637E: $FA $7C $D4
     dec  a                                        ; $6381: $3D
     jr   nz, jr_020_63BE                          ; $6382: $20 $3A

@@ -473,6 +473,7 @@ wLinkPlayingOcarinaCountdown:
   ds 1 ; C166
 
 ; Unlabeled
+; maybe it is wHasBoomerangUnlocked
 wC167:
   ds 1 ; C167
 

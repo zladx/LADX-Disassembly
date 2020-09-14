@@ -55,12 +55,12 @@ jr_018_404A:
     ldh  [hLinkPositionY], a                      ; $4052: $E0 $99
     call ClearLinkPositionIncrement               ; $4054: $CD $8E $17
     call ResetSpinAttack                          ; $4057: $CD $AF $0C
-    ld   e, $0B                                   ; $405A: $1E $0B
+    ld   e, INVENTORY_SLOT_COUNT -1               ; $405A: $1E $0B
     ld   hl, wBButtonSlot                         ; $405C: $21 $00 $DB
 
 jr_018_405F:
     ld   a, [hl+]                                 ; $405F: $2A
-    cp   $09                                      ; $4060: $FE $09
+    cp   INVENTORY_OCARINA                        ; $4060: $FE $09
     jr   z, jr_018_4074                           ; $4062: $28 $10
 
     dec  e                                        ; $4064: $1D
@@ -705,12 +705,12 @@ ManboAndFishesState1Handler::
     and  a                                        ; $456E: $A7
     jr   nz, jr_018_4581                          ; $456F: $20 $10
 
-    ld   e, $0B                                   ; $4571: $1E $0B
+    ld   e, INVENTORY_SLOT_COUNT -1               ; $4571: $1E $0B
     ld   hl, wBButtonSlot                         ; $4573: $21 $00 $DB
 
 jr_018_4576:
     ld   a, [hl+]                                 ; $4576: $2A
-    cp   $09                                      ; $4577: $FE $09
+    cp   INVENTORY_OCARINA                        ; $4577: $FE $09
     jr   z, jr_018_458A                           ; $4579: $28 $0F
 
     dec  e                                        ; $457B: $1D
@@ -2654,12 +2654,12 @@ jr_018_53ED:
 
     ld   e, $20                                   ; $5405: $1E $20
     ld   a, [wBButtonSlot]                        ; $5407: $FA $00 $DB
-    cp   $03                                      ; $540A: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $540A: $FE $03
     jr   z, jr_018_5417                           ; $540C: $28 $09
 
     ld   e, $10                                   ; $540E: $1E $10
     ld   a, [wAButtonSlot]                        ; $5410: $FA $01 $DB
-    cp   $03                                      ; $5413: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $5413: $FE $03
     jr   nz, jr_018_5466                          ; $5415: $20 $4F
 
 jr_018_5417:

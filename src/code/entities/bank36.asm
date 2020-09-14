@@ -3331,7 +3331,7 @@ func_036_54B0::
     ret  z                                        ; $54B9: $C8
 
     ld   a, [wBButtonSlot]                        ; $54BA: $FA $00 $DB
-    cp   $0C                                      ; $54BD: $FE $0C
+    cp   INVENTORY_MAGIC_POWDER                   ; $54BD: $FE $0C
     jr   nz, jr_036_54C8                          ; $54BF: $20 $07
 
     ldh  a, [hJoypadState]                        ; $54C1: $F0 $CC
@@ -3342,7 +3342,7 @@ func_036_54B0::
 
 jr_036_54C8:
     ld   a, [wAButtonSlot]                        ; $54C8: $FA $01 $DB
-    cp   $0C                                      ; $54CB: $FE $0C
+    cp   INVENTORY_MAGIC_POWDER                   ; $54CB: $FE $0C
     ret  nz                                       ; $54CD: $C0
 
     ldh  a, [hJoypadState]                        ; $54CE: $F0 $CC
@@ -8149,11 +8149,11 @@ label_036_71AD:
     jp   nz, label_036_7288                       ; $71B2: $C2 $88 $72
 
     ld   hl, wBButtonSlot                         ; $71B5: $21 $00 $DB
-    ld   e, $0C                                   ; $71B8: $1E $0C
+    ld   e, INVENTORY_SLOT_COUNT                  ; $71B8: $1E $0C
 
 jr_036_71BA:
     ld   a, [hl+]                                 ; $71BA: $2A
-    cp   $01                                      ; $71BB: $FE $01
+    cp   INVENTORY_SWORD                                      ; $71BB: $FE $01
     jr   z, jr_036_71C7                           ; $71BD: $28 $08
 
     dec  e                                        ; $71BF: $1D

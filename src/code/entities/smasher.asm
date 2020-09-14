@@ -454,7 +454,7 @@ jr_006_4806:
     jr   nz, jr_006_4852                          ; $480F: $20 $41
 
     ld   a, [wBButtonSlot]                        ; $4811: $FA $00 $DB
-    cp   $03                                      ; $4814: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $4814: $FE $03
     jr   nz, jr_006_4820                          ; $4816: $20 $08
 
     ldh  a, [hJoypadState]                        ; $4818: $F0 $CC
@@ -465,7 +465,7 @@ jr_006_4806:
 
 jr_006_4820:
     ld   a, [wAButtonSlot]                        ; $4820: $FA $01 $DB
-    cp   $03                                      ; $4823: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $4823: $FE $03
     jr   nz, jr_006_4852                          ; $4825: $20 $2B
 
     ldh  a, [hJoypadState]                        ; $4827: $F0 $CC

@@ -1169,15 +1169,15 @@ jr_014_5360:
 
 jr_014_536B:
     ld   a, [wIsCarryingLiftedObject]             ; $536B: $FA $5C $C1
-    cp   $01                                      ; $536E: $FE $01
+    cp   TRUE                                     ; $536E: $FE $01
     jp   nz, label_014_5443                       ; $5370: $C2 $43 $54
 
-    ld   d, $03                                   ; $5373: $16 $03
+    ld   d, INVENTORY_POWER_BRACELET              ; $5373: $16 $03
     ldh  a, [hActiveEntityType]                   ; $5375: $F0 $EB
     cp   ENTITY_BOMB                              ; $5377: $FE $02
     jr   nz, jr_014_537D                          ; $5379: $20 $02
 
-    ld   d, $02                                   ; $537B: $16 $02
+    ld   d, INVENTORY_BOMBS                       ; $537B: $16 $02
 
 jr_014_537D:
     ld   e, $10                                   ; $537D: $1E $10

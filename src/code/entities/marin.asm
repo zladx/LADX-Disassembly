@@ -213,12 +213,12 @@ jr_005_4F90:
     jp   OpenDialogInTable1                       ; $4F92: $C3 $73 $23
 
 jr_005_4F95:
-    ld   e, $0B                                   ; $4F95: $1E $0B
+    ld   e, INVENTORY_SLOT_COUNT -1               ; $4F95: $1E $0B
     ld   hl, wBButtonSlot                         ; $4F97: $21 $00 $DB
 
 jr_005_4F9A:
     ld   a, [hl+]                                 ; $4F9A: $2A
-    cp   $09                                      ; $4F9B: $FE $09
+    cp   INVENTORY_OCARINA                        ; $4F9B: $FE $09
     jr   z, jr_005_4FA7                           ; $4F9D: $28 $08
 
     dec  e                                        ; $4F9F: $1D
@@ -258,12 +258,12 @@ jr_005_4FAC:
 
 jr_005_4FD0:
     push bc                                       ; $4FD0: $C5
-    ld   c, $0B                                   ; $4FD1: $0E $0B
+    ld   c, INVENTORY_SLOT_COUNT -1               ; $4FD1: $0E $0B
     ld   hl, wBButtonSlot                         ; $4FD3: $21 $00 $DB
 
 jr_005_4FD6:
     ld   a, [hl+]                                 ; $4FD6: $2A
-    cp   $09                                      ; $4FD7: $FE $09
+    cp   INVENTORY_OCARINA                        ; $4FD7: $FE $09
     jr   nz, jr_005_4FF4                          ; $4FD9: $20 $19
 
     ld   e, $04                                   ; $4FDB: $1E $04
@@ -781,7 +781,7 @@ func_005_5312::
 ; Add item to inventory slot (used for assigning the shield)
 AssignItemToSlot:
     ld   hl, wBButtonSlot                         ; $5321: $21 $00 $DB
-    ld   e, $0C                                   ; $5324: $1E $0C
+    ld   e, INVENTORY_SLOT_COUNT                  ; $5324: $1E $0C
 
     ; Search if a matching item exists in inventory
 .searchLoop
@@ -807,7 +807,7 @@ AssignItemToSlot:
     inc  hl                                       ; $5336: $23
     inc  e                                        ; $5337: $1C
     ld   a, e                                     ; $5338: $7B
-    cp   $0C                                      ; $5339: $FE $0C
+    cp   INVENTORY_SLOT_COUNT                     ; $5339: $FE $0C
     jr   nz, .assignLoop                          ; $533B: $20 $F3
 
 .return

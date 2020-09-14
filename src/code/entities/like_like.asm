@@ -66,7 +66,7 @@ jr_006_7E27:
 
 jr_006_7E37:
     ld   a, [hl]                                  ; $7E37: $7E
-    cp   $04                                      ; $7E38: $FE $04
+    cp   INVENTORY_SHIELD                         ; $7E38: $FE $04
     jr   nz, jr_006_7E4E                          ; $7E3A: $20 $12
 
     ld   a, [wShieldLevel]                        ; $7E3C: $FA $44 $DB

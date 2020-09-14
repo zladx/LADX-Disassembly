@@ -74,7 +74,7 @@ LiftableStatueState0Handler::
     jp   nz, label_019_411C                       ; $408E: $C2 $1C $41
 
     ld   a, [wBButtonSlot]                        ; $4091: $FA $00 $DB
-    cp   $03                                      ; $4094: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $4094: $FE $03
     jr   nz, jr_019_40A0                          ; $4096: $20 $08
 
     ldh  a, [hPressedButtonsMask]                 ; $4098: $F0 $CB
@@ -85,7 +85,7 @@ LiftableStatueState0Handler::
 
 jr_019_40A0:
     ld   a, [wAButtonSlot]                        ; $40A0: $FA $01 $DB
-    cp   $03                                      ; $40A3: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $40A3: $FE $03
     jr   nz, label_019_411C                       ; $40A5: $20 $75
 
     ldh  a, [hPressedButtonsMask]                 ; $40A7: $F0 $CB
@@ -880,29 +880,29 @@ GoriyaState1Handler::
     jr   z, jr_019_46DB                           ; $46A0: $28 $39
 
 jr_019_46A2:
-    cp   $01                                      ; $46A2: $FE $01
+    cp   INVENTORY_SWORD                          ; $46A2: $FE $01
     jr   z, jr_019_46E1                           ; $46A4: $28 $3B
 
-    cp   $04                                      ; $46A6: $FE $04
+    cp   INVENTORY_SHIELD                         ; $46A6: $FE $04
     jr   z, jr_019_46E1                           ; $46A8: $28 $37
 
-    cp   $03                                      ; $46AA: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $46AA: $FE $03
     jr   z, jr_019_46E1                           ; $46AC: $28 $33
 
-    cp   $02                                      ; $46AE: $FE $02
+    cp   INVENTORY_BOMBS                          ; $46AE: $FE $02
     jr   z, jr_019_46E1                           ; $46B0: $28 $2F
 
-    cp   $09                                      ; $46B2: $FE $09
+    cp   INVENTORY_OCARINA                        ; $46B2: $FE $09
     jr   z, jr_019_46E1                           ; $46B4: $28 $2B
 
-    cp   $0C                                      ; $46B6: $FE $0C
+    cp   INVENTORY_MAGIC_POWDER                   ; $46B6: $FE $0C
     jr   z, jr_019_46E1                           ; $46B8: $28 $27
 
-    cp   $05                                      ; $46BA: $FE $05
+    cp   INVENTORY_BOW                            ; $46BA: $FE $05
     jr   z, jr_019_46E1                           ; $46BC: $28 $23
 
     ld   [wBoomerangTradedItem], a                ; $46BE: $EA $7D $DB
-    ld   a, $0D                                   ; $46C1: $3E $0D
+    ld   a, INVENTORY_BOOMERANG                   ; $46C1: $3E $0D
     ld   [wBButtonSlot], a                        ; $46C3: $EA $00 $DB
     ld   hl, wEntitiesPrivateState1Table          ; $46C6: $21 $B0 $C2
     add  hl, bc                                   ; $46C9: $09
@@ -932,17 +932,17 @@ GoriyaState3Handler::
     jr   nz, jr_019_4725                          ; $46F3: $20 $30
 
     ld   hl, wBButtonSlot                         ; $46F5: $21 $00 $DB
-    ld   de, $00                                  ; $46F8: $11 $00 $00
+    ld   de, $0000                                ; $46F8: $11 $00 $00
 
 jr_019_46FB:
     ld   a, [hl]                                  ; $46FB: $7E
-    cp   $0D                                      ; $46FC: $FE $0D
+    cp   INVENTORY_BOOMERANG                      ; $46FC: $FE $0D
     jr   z, jr_019_4707                           ; $46FE: $28 $07
 
     inc  hl                                       ; $4700: $23
     inc  e                                        ; $4701: $1C
     ld   a, e                                     ; $4702: $7B
-    cp   $0C                                      ; $4703: $FE $0C
+    cp   INVENTORY_SLOT_COUNT                     ; $4703: $FE $0C
     jr   nz, jr_019_46FB                          ; $4705: $20 $F4
 
 jr_019_4707:
@@ -3583,7 +3583,7 @@ jr_019_5922:
     ret  nz                                       ; $5936: $C0
 
     ld   a, [wBButtonSlot]                        ; $5937: $FA $00 $DB
-    cp   $03                                      ; $593A: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $593A: $FE $03
     jr   nz, jr_019_5945                          ; $593C: $20 $07
 
     ldh  a, [hJoypadState]                        ; $593E: $F0 $CC
@@ -3594,7 +3594,7 @@ jr_019_5922:
 
 jr_019_5945:
     ld   a, [wAButtonSlot]                        ; $5945: $FA $01 $DB
-    cp   $03                                      ; $5948: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $5948: $FE $03
     ret  nz                                       ; $594A: $C0
 
     ldh  a, [hJoypadState]                        ; $594B: $F0 $CC
@@ -3824,7 +3824,7 @@ jr_019_5A9F:
     ret  nz                                       ; $5AAA: $C0
 
     ld   a, [wBButtonSlot]                        ; $5AAB: $FA $00 $DB
-    cp   $03                                      ; $5AAE: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $5AAE: $FE $03
     jr   nz, jr_019_5AB9                          ; $5AB0: $20 $07
 
     ldh  a, [hJoypadState]                        ; $5AB2: $F0 $CC
@@ -3835,7 +3835,7 @@ jr_019_5A9F:
 
 jr_019_5AB9:
     ld   a, [wAButtonSlot]                        ; $5AB9: $FA $01 $DB
-    cp   $03                                      ; $5ABC: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $5ABC: $FE $03
     ret  nz                                       ; $5ABE: $C0
 
     ldh  a, [hJoypadState]                        ; $5ABF: $F0 $CC

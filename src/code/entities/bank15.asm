@@ -2642,7 +2642,7 @@ func_015_5435::
     jr   z, jr_015_5465                           ; $5439: $28 $2A
 
     ld   a, [wBButtonSlot]                        ; $543B: $FA $00 $DB
-    cp   $0C                                      ; $543E: $FE $0C
+    cp   INVENTORY_MAGIC_POWDER                   ; $543E: $FE $0C
     jr   nz, jr_015_5450                          ; $5440: $20 $0E
 
     ldh  a, [hJoypadState]                        ; $5442: $F0 $CC

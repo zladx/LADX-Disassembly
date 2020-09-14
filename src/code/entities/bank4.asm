@@ -6773,15 +6773,15 @@ jr_004_7839:
 jr_004_7845:
     push bc                                       ; $7845: $C5
     ld   hl, wBButtonSlot                         ; $7846: $21 $00 $DB
-    ld   c, $0B                                   ; $7849: $0E $0B
+    ld   c, INVENTORY_SLOT_COUNT -1               ; $7849: $0E $0B
 
 jr_004_784B:
     ld   a, [wBoomerangTradedItem]                ; $784B: $FA $7D $DB
-    cp   $0B                                      ; $784E: $FE $0B
+    cp   INVENTORY_SHOVEL                         ; $784E: $FE $0B
     jr   z, jr_004_7857                           ; $7850: $28 $05
 
     ld   a, [hl+]                                 ; $7852: $2A
-    cp   $0B                                      ; $7853: $FE $0B
+    cp   INVENTORY_SHOVEL                         ; $7853: $FE $0B
     jr   nz, jr_004_7859                          ; $7855: $20 $02
 
 jr_004_7857:
@@ -6794,15 +6794,15 @@ jr_004_7859:
     jr   nz, jr_004_784B                          ; $785D: $20 $EC
 
     ld   hl, wBButtonSlot                         ; $785F: $21 $00 $DB
-    ld   c, $0B                                   ; $7862: $0E $0B
+    ld   c, INVENTORY_SLOT_COUNT -1               ; $7862: $0E $0B
 
 jr_004_7864:
     ld   a, [wBoomerangTradedItem]                ; $7864: $FA $7D $DB
-    cp   $05                                      ; $7867: $FE $05
+    cp   INVENTORY_BOW                            ; $7867: $FE $05
     jr   z, jr_004_7870                           ; $7869: $28 $05
 
     ld   a, [hl+]                                 ; $786B: $2A
-    cp   $05                                      ; $786C: $FE $05
+    cp   INVENTORY_BOW                            ; $786C: $FE $05
     jr   nz, jr_004_7872                          ; $786E: $20 $02
 
 jr_004_7870:
@@ -7064,11 +7064,11 @@ jr_004_79BB:
     jr   nz, jr_004_79D9                          ; $79BD: $20 $1A
 
     ld   hl, wBButtonSlot                         ; $79BF: $21 $00 $DB
-    ld   d, $0C                                   ; $79C2: $16 $0C
+    ld   d, INVENTORY_SLOT_COUNT                  ; $79C2: $16 $0C
 
 jr_004_79C4:
     ld   a, [hl+]                                 ; $79C4: $2A
-    cp   $02                                      ; $79C5: $FE $02
+    cp   INVENTORY_BOMBS                          ; $79C5: $FE $02
     jr   z, jr_004_79CE                           ; $79C7: $28 $05
 
     dec  d                                        ; $79C9: $15
@@ -7089,11 +7089,11 @@ jr_004_79D9:
     jr   nz, jr_004_79F7                          ; $79DB: $20 $1A
 
     ld   hl, wBButtonSlot                         ; $79DD: $21 $00 $DB
-    ld   d, $0C                                   ; $79E0: $16 $0C
+    ld   d, INVENTORY_SLOT_COUNT                  ; $79E0: $16 $0C
 
 jr_004_79E2:
     ld   a, [hl+]                                 ; $79E2: $2A
-    cp   $05                                      ; $79E3: $FE $05
+    cp   INVENTORY_BOW                            ; $79E3: $FE $05
     jr   z, jr_004_79EC                           ; $79E5: $28 $05
 
     dec  d                                        ; $79E7: $15
@@ -7114,11 +7114,11 @@ jr_004_79F7:
     jr   nz, jr_004_7A0C                          ; $79F9: $20 $11
 
     ld   hl, wBButtonSlot                         ; $79FB: $21 $00 $DB
-    ld   d, $0C                                   ; $79FE: $16 $0C
+    ld   d, INVENTORY_SLOT_COUNT                  ; $79FE: $16 $0C
 
 jr_004_7A00:
     ld   a, [hl+]                                 ; $7A00: $2A
-    cp   $04                                      ; $7A01: $FE $04
+    cp   INVENTORY_SHIELD                         ; $7A01: $FE $04
     jr   nz, jr_004_7A09                          ; $7A03: $20 $04
 
 jr_004_7A05:

@@ -200,7 +200,7 @@ jr_007_4128:
     ret  nz                                       ; $413F: $C0
 
     ld   a, [wBButtonSlot]                        ; $4140: $FA $00 $DB
-    cp   $03                                      ; $4143: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $4143: $FE $03
     jr   nz, jr_007_414E                          ; $4145: $20 $07
 
     ldh  a, [hJoypadState]                        ; $4147: $F0 $CC
@@ -211,7 +211,7 @@ jr_007_4128:
 
 jr_007_414E:
     ld   a, [wAButtonSlot]                        ; $414E: $FA $01 $DB
-    cp   $03                                      ; $4151: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $4151: $FE $03
     ret  nz                                       ; $4153: $C0
 
     ldh  a, [hJoypadState]                        ; $4154: $F0 $CC
@@ -3500,7 +3500,7 @@ label_007_5721:
     jr   nc, jr_007_5777                          ; $5739: $30 $3C
 
     ld   a, [wBButtonSlot]                        ; $573B: $FA $00 $DB
-    cp   $01                                      ; $573E: $FE $01
+    cp   INVENTORY_SWORD                          ; $573E: $FE $01
     jr   nz, jr_007_574A                          ; $5740: $20 $08
 
     ldh  a, [hJoypadState]                        ; $5742: $F0 $CC
@@ -3511,7 +3511,7 @@ label_007_5721:
 
 jr_007_574A:
     ld   a, [wAButtonSlot]                        ; $574A: $FA $01 $DB
-    cp   $01                                      ; $574D: $FE $01
+    cp   INVENTORY_SWORD                          ; $574D: $FE $01
     jr   nz, jr_007_5777                          ; $574F: $20 $26
 
     ldh  a, [hJoypadState]                        ; $5751: $F0 $CC
@@ -5024,7 +5024,7 @@ jr_007_60DD:
     jr   nz, jr_007_6133                          ; $60E6: $20 $4B
 
     ld   a, [wBButtonSlot]                        ; $60E8: $FA $00 $DB
-    cp   $03                                      ; $60EB: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $60EB: $FE $03
     jr   nz, jr_007_60F7                          ; $60ED: $20 $08
 
     ldh  a, [hJoypadState]                        ; $60EF: $F0 $CC
@@ -5035,7 +5035,7 @@ jr_007_60DD:
 
 jr_007_60F7:
     ld   a, [wAButtonSlot]                        ; $60F7: $FA $01 $DB
-    cp   $03                                      ; $60FA: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $60FA: $FE $03
     jr   nz, jr_007_6133                          ; $60FC: $20 $35
 
     ldh  a, [hJoypadState]                        ; $60FE: $F0 $CC
@@ -8607,7 +8607,7 @@ label_007_7733:
     jr   nz, jr_007_7783                          ; $773C: $20 $45
 
     ld   a, [wBButtonSlot]                        ; $773E: $FA $00 $DB
-    cp   $03                                      ; $7741: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $7741: $FE $03
     jr   nz, jr_007_774D                          ; $7743: $20 $08
 
     ldh  a, [hJoypadState]                        ; $7745: $F0 $CC
@@ -8618,7 +8618,7 @@ label_007_7733:
 
 jr_007_774D:
     ld   a, [wAButtonSlot]                        ; $774D: $FA $01 $DB
-    cp   $03                                      ; $7750: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $7750: $FE $03
     jr   nz, jr_007_7783                          ; $7752: $20 $2F
 
     ldh  a, [hJoypadState]                        ; $7754: $F0 $CC

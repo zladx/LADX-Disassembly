@@ -3655,7 +3655,7 @@ ENDC
     ldh  [hFFA5], a                               ; $5D71: $E0 $A5
     ld   d, INVENTORY_MAGIC_POWDER                ; $5D73: $16 $0C
     call GiveInventoryItem                        ; $5D75: $CD $72 $64
-    ld   a, $01                                   ; $5D78: $3E $01
+    ld   a, TRUE                                  ; $5D78: $3E $01
     ld   [wHasToadstool], a                       ; $5D7A: $EA $4B $DB
     jp   UnloadEntityAndReturn                    ; $5D7D: $C3 $8D $3F
 

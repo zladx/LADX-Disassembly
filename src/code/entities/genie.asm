@@ -284,7 +284,7 @@ jr_004_41AC:
     call DecrementEntityIgnoreHitsCountdown       ; $41AC: $CD $56 $0C
     call label_3B70                               ; $41AF: $CD $70 $3B
     call func_004_7BE3                            ; $41B2: $CD $E3 $7B
-    ldh  a, [hActiveEntityPosX]                               ; $41B5: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $41B5: $F0 $EE
     ld   hl, hLinkPositionX                       ; $41B7: $21 $98 $FF
     sub  [hl]                                     ; $41BA: $96
     add  $10                                      ; $41BB: $C6 $10
@@ -298,9 +298,9 @@ jr_004_41AC:
     cp   $20                                      ; $41C9: $FE $20
     jr   nc, jr_004_4210                          ; $41CB: $30 $43
 
-    call ResetPegasusBoots                                ; $41CD: $CD $B6 $0C
+    call ResetPegasusBoots                        ; $41CD: $CD $B6 $0C
     ld   a, [wBButtonSlot]                        ; $41D0: $FA $00 $DB
-    cp   $03                                      ; $41D3: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $41D3: $FE $03
     jr   nz, jr_004_41DF                          ; $41D5: $20 $08
 
     ldh  a, [hPressedButtonsMask]                 ; $41D7: $F0 $CB
@@ -311,7 +311,7 @@ jr_004_41AC:
 
 jr_004_41DF:
     ld   a, [wAButtonSlot]                        ; $41DF: $FA $01 $DB
-    cp   $03                                      ; $41E2: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $41E2: $FE $03
     jr   nz, jr_004_4210                          ; $41E4: $20 $2A
 
     ldh  a, [hPressedButtonsMask]                 ; $41E6: $F0 $CB

@@ -1250,7 +1250,7 @@ Data_020_4C43::
 .up:    db -12
 .down:  db  12
 
-UpdateMagicPowder::
+SprinkleMagicPowder::
     ; play powder jingle
     ld   a, JINGLE_POWDER                         ; $4C47: $3E $05
     ldh  [hJingle], a                             ; $4C49: $E0 $F2

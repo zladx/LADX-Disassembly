@@ -2267,7 +2267,7 @@ UseMagicPowder::
     ld   a, ENTITY_MAGIC_POWDER_SPRINKLE          ; $14AE: $3E $08
     call SpawnNewEntity_trampoline                ; $14B0: $CD $86 $3B
     ret  c                                        ; $14B3: $D8
-    callsb UpdateMagicPowder                      ; $14B4: $3E $20 $EA $00 $21 $CD $47 $4C
+    callsb SprinkleMagicPowder                      ; $14B4: $3E $20 $EA $00 $21 $CD $47 $4C
     ld   a, [wCurrentBank]                        ; $14BC: $FA $AF $DB
     ld   [MBC3SelectBank], a                      ; $14BF: $EA $00 $21
     ret                                           ; $14C2: $C9

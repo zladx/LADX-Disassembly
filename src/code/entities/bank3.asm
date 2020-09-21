@@ -139,7 +139,9 @@ Data_003_473C::
 include "data/entities/health.asm"
 include "data/entities/damages.asm"
 
-Data_003_4826::
+DestroyedEntityHealthGroupOffsetTable::
+    ; indexed by (destroyed entity index high byte) | wEntitiesHealthGroup
+    ; TODO: comment index (52 Entries -> 4*13 is possible)
     db   $02, $06, $01, $03, $03, $03, $0D, $08, $0A, $02, $07, $0B, $00, $04, $00, $08
     db   $04, $0E, $0E, $0E, $0E, $0E, $00, $03, $03, $03, $03, $03, $03, $03, $03, $03
     db   $03, $02, $00, $00, $02, $00, $00, $00, $00, $06, $06, $0D, $0E, $00, $09, $03
@@ -2340,18 +2342,75 @@ jr_003_5599:
     call func_003_7FA9                            ; $5599: $CD $A9 $7F
     ret                                           ; $559C: $C9
 
-Data_003_559D::
-    ; db   $C9 (data actually uses the previous `ret` instruction)
-    db   $2E, $2E, $2D, $2D, $37, $2D, $FF, $FF, $2F, $37, $38, $2E, $2F
+DropTableByIndex::
+    ; minimum offset is 1, so actualy used address is label -1 -> address of ret above
+    ; indexed by a combination of destroyed entity index and a value from DestroyedEntityHealthGroupOffsetTable
+    ; TODO: comment index
+    db   ENTITY_DROPPABLE_RUPEE
+    db   ENTITY_DROPPABLE_RUPEE
+    db   ENTITY_DROPPABLE_HEART
+    db   ENTITY_DROPPABLE_HEART
+    db   ENTITY_DROPPABLE_ARROWS
+    db   ENTITY_DROPPABLE_HEART
+    db   ENTITY_EMPTY
+    db   ENTITY_EMPTY
+    db   ENTITY_DROPPABLE_FAIRY
+    db   ENTITY_DROPPABLE_ARROWS
+    db   ENTITY_DROPPABLE_BOMBS
+    db   ENTITY_DROPPABLE_RUPEE
+    db   ENTITY_DROPPABLE_FAIRY
+    db   ENTITY_DROPPABLE_FAIRY
 
-Data_003_55AA::
-    db   $2F, $03, $01, $01, $00, $03, $03, $03, $03, $01, $00, $00, $00, $03
+RandomDropChanceTable::
+    ; minimum offset is 1, so actualy used address is label -1
+    ; TODO: comment index
+    db   DROP_CHANCE_25_PERCENT
+    db   DROP_CHANCE_50_PERCENT
+    db   DROP_CHANCE_50_PERCENT
+    db   DROP_CHANCE_0_PERCENT
+    db   DROP_CHANCE_25_PERCENT
+    db   DROP_CHANCE_25_PERCENT
+    db   DROP_CHANCE_25_PERCENT
+    db   DROP_CHANCE_25_PERCENT
+    db   DROP_CHANCE_50_PERCENT
+    db   DROP_CHANCE_0_PERCENT
+    db   DROP_CHANCE_0_PERCENT
+    db   DROP_CHANCE_0_PERCENT
+    db   DROP_CHANCE_25_PERCENT
+    db   DROP_CHANCE_0_PERCENT
 
-Data_003_55B8::
-    db   $00, $01, $01, $01, $00, $01, $01, $01, $01, $01, $00, $00, $00, $01, $00
+RandomDropChanceTableLowHealth::
+    ; minimum offset is 1, so actualy used address is label -1
+    ; TODO: comment index
+    db   DROP_CHANCE_50_PERCENT
+    db   DROP_CHANCE_50_PERCENT
+    db   DROP_CHANCE_50_PERCENT
+    db   DROP_CHANCE_0_PERCENT
+    db   DROP_CHANCE_50_PERCENT
+    db   DROP_CHANCE_50_PERCENT
+    db   DROP_CHANCE_50_PERCENT
+    db   DROP_CHANCE_50_PERCENT
+    db   DROP_CHANCE_50_PERCENT
+    db   DROP_CHANCE_0_PERCENT
+    db   DROP_CHANCE_0_PERCENT
+    db   DROP_CHANCE_0_PERCENT
+    db   DROP_CHANCE_50_PERCENT
+    db   DROP_CHANCE_0_PERCENT
 
-Data_003_55C7::
-    db   $2E, $2D, $38, $2F, $2E, $2D, $38, $37
+DropTableRandom::
+    ; rupee  = 1/4
+    ; heart  = 1/4
+    ; bombs  = 1/4
+    ; fairy  = 1/8
+    ; arrows = 1/8
+    db   ENTITY_DROPPABLE_RUPEE  ; random value 0
+    db   ENTITY_DROPPABLE_HEART  ; random value 1
+    db   ENTITY_DROPPABLE_BOMBS  ; random value 2
+    db   ENTITY_DROPPABLE_FAIRY  ; random value 3
+    db   ENTITY_DROPPABLE_RUPEE  ; random value 4
+    db   ENTITY_DROPPABLE_HEART  ; random value 5
+    db   ENTITY_DROPPABLE_BOMBS  ; random value 6
+    db   ENTITY_DROPPABLE_ARROWS ; random value 7
 
 ; Entities random drop tables
 ; Spawn a dropped item when an enemy is destroyed.
@@ -2367,115 +2426,132 @@ SpawnEnemyDrop::
     ldh  a, [hActiveEntityType]                   ; $55CF: $F0 $EB
     cp   ENTITY_LIKE_LIKE                         ; $55D1: $FE $23
     jr   nz, .likeLikeEnd                         ; $55D3: $20 $0D
-
+    ; if active entity is Like-Like 
     ld   hl, wEntitiesPrivateState1Table          ; $55D5: $21 $B0 $C2
     add  hl, bc                                   ; $55D8: $09
     ld   a, [hl]                                  ; $55D9: $7E
     and  a                                        ; $55DA: $A7
     jr   z, .likeLikeEnd                          ; $55DB: $28 $05
-
-    ld   a, ENTITY_SWORD                          ; @TODO Pretty sure likelikes only eat shields and this entity is both
+    ; if Like-Like swollowed the shield
+    ld   a, ENTITY_SHIELD                         ; $55DD: $3E $31
     jp   .dropEntity                              ; $55DF: $C3 $70 $56
-.likeLikeEnd
 
+.likeLikeEnd:
+    ; look up what this entity could drop
     ld   hl, wEntitiesDroppedItemTable            ; $55E2: $21 $E0 $C4
     add  hl, bc                                   ; $55E5: $09
     ld   a, [hl]                                  ; $55E6: $7E
-    cp   $FF                                      ; $55E7: $FE $FF
+    ; if nothing to drop, then return
+    cp   ENTITY_EMPTY                             ; $55E7: $FE $FF
     ret  z                                        ; $55E9: $C8
-
+    ; if drop is not random, drop the entity
     and  a                                        ; $55EA: $A7
     jp   nz, .dropEntity                          ; $55EB: $C2 $70 $56
-
+    ; check if wGuardianAcornCounter reached limit
     ld   a, [wGuardianAcornCounter]               ; $55EE: $FA $71 $D4
     inc  a                                        ; $55F1: $3C
     ld   [wGuardianAcornCounter], a               ; $55F2: $EA $71 $D4
-    cp   $0C                                      ; $55F5: $FE $0C
-    jr   c, .jr_003_560F                          ; $55F7: $38 $16
-
+    cp   GUARDIAN_ACCORN_COUNTER_MAX              ; $55F5: $FE $0C
+    jr   c, .noGuardianAccornDrop                 ; $55F7: $38 $16
+    ; reset counter if max value reached, even if not droped
     xor  a                                        ; $55F9: $AF
     ld   [wGuardianAcornCounter], a               ; $55FA: $EA $71 $D4
+    ; do not drop after boss battle
     ld   a, [wInBossBattle]                       ; $55FD: $FA $BE $C1
+    ; do not drop if allready power up active
     ld   hl, wActivePowerUp                       ; $5600: $21 $7C $D4
     or   [hl]                                     ; $5603: $B6
+    ; do not drop during side scrolling
     ld   hl, hIsSideScrolling                     ; $5604: $21 $F9 $FF
     or   [hl]                                     ; $5607: $B6
-    jr   nz, .jr_003_560F                         ; $5608: $20 $05
-
+    jr   nz, .noGuardianAccornDrop                ; $5608: $20 $05
+    ; drop the guardian accorn
     ld   a, ENTITY_GUARDIAN_ACORN                 ; $560A: $3E $34
     jp   .dropEntity                              ; $560C: $C3 $70 $56
 
-.jr_003_560F
+.noGuardianAccornDrop:
+    ; get an offset from the DestroyedEntityHealthGroupOffsetTable
+    ; the value is used in combination with the destroyed entity type in further code as as offset by add HL, DE
     ld   hl, wEntitiesHealthGroup                 ; $560F: $21 $D0 $C4
     add  hl, bc                                   ; $5612: $09
     ld   d, b                                     ; $5613: $50
     ld   e, [hl]                                  ; $5614: $5E
-    ld   hl, Data_003_4826                        ; $5615: $21 $26 $48
+    ld   hl, DestroyedEntityHealthGroupOffsetTable ; $5615: $21 $26 $48
     add  hl, de                                   ; $5618: $19
     ld   a, [hl]                                  ; $5619: $7E
     and  a                                        ; $561A: $A7
     ret  z                                        ; $561B: $C8
-
+    ; look up the needed kill value for a piece of power
+    ; in general the needed value is lower, if the max health is lower
+    ; so you get the piece of power more often in the early game
     ld   e, a                                     ; How many enemies to kill before a Piece of Power drops?
-    ld   d, $1E                                   ; Max HP 0~6: 30
+    ; early game
+    ld   d, PIECE_OF_POWER_COUNTER_MAX_LOW_MAX_HEALTH ; Max HP 0~6: 30
     ld   a, [wMaxHealth]                          ;
-    cp   $07                                      ; If max HP <= 6, skip
-    jr   c, .jr_003_562E                          ;
+    cp   LOW_MAX_HEALTH                           ; If max HP <= 6, skip
+    jr   c, .pieceOfPowerDrop                     ;
+    ; mid game
+    ld   d, PIECE_OF_POWER_COUNTER_MAX_MEDIUM_MAX_HEALTH ; Max HP 7~10: 35
+    cp   MEDIUM_MAX_HEALTH                        ;
+    jr   c, .pieceOfPowerDrop                     ; If max HP <= 11, skip
+    ; late game
+    ld   d, PIECE_OF_POWER_COUNTER_MAX_HIGH_MAX_HEALTH ; Max HP 11~14: 40
 
-    ld   d, $23                                   ; Max HP 7~10: 35
-    cp   $0B                                      ;
-    jr   c, .jr_003_562E                          ; If max HP <= 11, skip
-
-    ld   d, $28                                   ; Max HP 11~14: 40
-
-.jr_003_562E
+.pieceOfPowerDrop:
+    ; increment kill counter
     ld   hl, wPieceOfPowerKillCount               ; $562E: $21 $15 $D4
     inc  [hl]                                     ; $5631: $34
+    ; no drop, if counter may not reached
     ld   a, [hl]                                  ; $5632: $7E
     cp   d                                        ; $5633: $BA
-    jr   c, .jr_003_5648                          ; $5634: $38 $12
-
+    jr   c, .noPieceOfPowerDrop                   ; $5634: $38 $12
+    ; no drop, if in boss battle
     ld   [hl], b                                  ; $5636: $70
     ld   a, [wInBossBattle]                       ; $5637: $FA $BE $C1
+    ; no drop, if in side scrolling
     ld   hl, hIsSideScrolling                     ; $563A: $21 $F9 $FF
     or   [hl]                                     ; $563D: $B6
+    ; no drop, if power up is active
     ld   hl, wActivePowerUp                       ; $563E: $21 $7C $D4
     or   [hl]                                     ; $5641: $B6
-    jr   nz, .jr_003_5648                         ; $5642: $20 $04
-
+    jr   nz, .noPieceOfPowerDrop                  ; $5642: $20 $04
+    ; drop piece of power
     ld   a, ENTITY_PIECE_OF_POWER                 ; $5644: $3E $33
     jr   .dropEntity                              ; $5646: $18 $28
 
-.jr_003_5648
+.noPieceOfPowerDrop:
     ld   d, b                                     ; $5648: $50
-    ld   hl, Data_003_55AA                        ; $5649: $21 $AA $55
-    ld   a, [wIsOnLowHeath]                               ; $564C: $FA $63 $C1
+    ld   hl, (RandomDropChanceTable -1)           ; $5649: $21 $AA $55
+    ld   a, [wIsOnLowHeath]                       ; $564C: $FA $63 $C1
     and  a                                        ; $564F: $A7
-    jr   z, .jr_003_5655                          ; $5650: $28 $03
+    jr   z, .dropRandomEntity                     ; $5650: $28 $03
+    ; on low health load a drop table with higher chances of dropping something
+    ld   hl, (RandomDropChanceTableLowHealth -1)  ; $5652: $21 $B8 $55
 
-    ld   hl, Data_003_55B8                        ; $5652: $21 $B8 $55
-
-.jr_003_5655
+.dropRandomEntity:
     add  hl, de                                   ; $5655: $19
+    ; randomize, if something is dropped at all
     call GetRandomByte                            ; $5656: $CD $0D $28
     and  [hl]                                     ; $5659: $A6
     ret  nz                                       ; $565A: $C0
-
-    ld   hl, (Data_003_559D - 1)                  ; $565B: $21 $9C $55
+    
+    ld   hl, (DropTableByIndex - 1)               ; $565B: $21 $9C $55
     add  hl, de                                   ; $565E: $19
     ld   a, [hl]                                  ; $565F: $7E
-    cp   $FF                                      ; $5660: $FE $FF
+    cp   ENTITY_EMPTY                             ; $5660: $FE $FF
     jr   nz, .dropEntity                          ; $5662: $20 $0C
-
+    ; de-index was 7 or 8
+    ; so lookup with other table and change the offset
     call GetRandomByte                            ; $5664: $CD $0D $28
-    and  $07                                      ; $5667: $E6 $07
+    ; only keep 3 bits, because DropTableRandom does only contain 8 values
+    and  %00000111                                ; $5667: $E6 $07
     ld   e, a                                     ; $5669: $5F
     ld   d, b                                     ; $566A: $50
-    ld   hl, Data_003_55C7                        ; $566B: $21 $C7 $55
+    ld   hl, DropTableRandom                      ; $566B: $21 $C7 $55
     add  hl, de                                   ; $566E: $19
     ld   a, [hl]                                  ; $566F: $7E
 
-.dropEntity
+.dropEntity:
     ; Spawn the entity (and return if the entity could not be created)
     call SpawnNewEntity                           ; $5670: $CD $CA $64
     ret  c                                        ; $5673: $D8
@@ -2527,7 +2603,7 @@ SpawnEnemyDrop::
     add  hl, de                                   ; $56B5: $19
     ld   [hl], $03                                ; $56B6: $36 $03
 
-.jr_003_56B8
+.jr_003_56B8:
     cp   ENTITY_HIDING_SLIME_KEY                  ; $56B8: $FE $3C
     jr   nz, .slimeKeyEnd                         ; $56BA: $20 $15
 
@@ -2538,7 +2614,7 @@ SpawnEnemyDrop::
     cp   $5A                                      ; Overwrold Kanalet Castle five-pits room
     jr   nz, .slimeKeyEnd                         ; $56C4: $20 $0B
 
-.moveKeyTowardsLink
+.moveKeyTowardsLink:
     push bc                                       ; $56C6: $C5
     push de                                       ; $56C7: $D5
     ld   c, e                                     ; $56C8: $4B
@@ -2547,19 +2623,19 @@ SpawnEnemyDrop::
     call ApplyVectorTowardsLink                   ; $56CC: $CD $C7 $7E
     pop  de                                       ; $56CF: $D1
     pop  bc                                       ; $56D0: $C1
-.slimeKeyEnd
+.slimeKeyEnd:
 
     ld   hl, wEntitiesSpeedZTable                                ; $56D1: $21 $20 $C3
     add  hl, de                                   ; $56D4: $19
     ld   [hl], $18                                ; $56D5: $36 $18
     jr   .applyDefaultPosZ                        ; $56D7: $18 $06
 
-.isSideScrolling
+.isSideScrolling:
     ld   hl, wEntitiesSpeedYTable                 ; $56D9: $21 $50 $C2
     add  hl, de                                   ; $56DC: $19
     ld   [hl], $EC                                ; $56DD: $36 $EC
 
-.applyDefaultPosZ
+.applyDefaultPosZ:
     ; Give the dropped item the same Z position than the destroyed enemy
     ld   hl, wEntitiesPosZTable                   ; $56DF: $21 $10 $C3
     add  hl, bc                                   ; $56E2: $09
@@ -4507,23 +4583,23 @@ label_003_629D:
 
 Data_003_629E::
     ; Indexed by entity type
-    db   $01                                      ; ENTITY_DROPPABLE_HEART
-    db   $01                                      ; ENTITY_DROPPABLE_RUPEE
-    db   $00                                      ; ENTITY_DROPPABLE_FAIRY
-    db   $00                                      ; ENTITY_KEY_DROP_POINT
-    db   $01                                      ; ENTITY_SWORD
-    db   $00                                      ; ENTITY_32
-    db   $01                                      ; ENTITY_PIECE_OF_POWER
-    db   $01                                      ; ENTITY_GUARDIAN_ACORN
-    db   $00                                      ; ENTITY_HEART_PIECE
-    db   $00                                      ; ENTITY_HEART_CONTAINER
-    db   $01                                      ; ENTITY_DROPPABLE_ARROWS
-    db   $01                                      ; ENTITY_DROPPABLE_BOMBS
-    db   $00                                      ; ENTITY_INSTRUMENT_OF_THE_SIRENS
-    db   $00                                      ; ENTITY_SLEEPY_TOADSTOOL
-    db   $01                                      ; ENTITY_DROPPABLE_MAGIC_POWDER
-    db   $00                                      ; ENTITY_HIDING_SLIME_KEY
-    db   $00                                      ; ENTITY_DROPPABLE_SECRET_SEASHELL
+    db   TRUE                                     ; ENTITY_DROPPABLE_HEART
+    db   TRUE                                     ; ENTITY_DROPPABLE_RUPEE
+    db   FALSE                                    ; ENTITY_DROPPABLE_FAIRY
+    db   FALSE                                    ; ENTITY_KEY_DROP_POINT
+    db   TRUE                                     ; ENTITY_SHIELD
+    db   FALSE                                    ; ENTITY_32
+    db   TRUE                                     ; ENTITY_PIECE_OF_POWER
+    db   TRUE                                     ; ENTITY_GUARDIAN_ACORN
+    db   FALSE                                    ; ENTITY_HEART_PIECE
+    db   FALSE                                    ; ENTITY_HEART_CONTAINER
+    db   TRUE                                     ; ENTITY_DROPPABLE_ARROWS
+    db   TRUE                                     ; ENTITY_DROPPABLE_BOMBS
+    db   FALSE                                    ; ENTITY_INSTRUMENT_OF_THE_SIRENS
+    db   FALSE                                    ; ENTITY_SLEEPY_TOADSTOOL
+    db   TRUE                                     ; ENTITY_DROPPABLE_MAGIC_POWDER
+    db   FALSE                                    ; ENTITY_HIDING_SLIME_KEY
+    db   FALSE                                    ; ENTITY_DROPPABLE_SECRET_SEASHELL
 
 func_003_62AF::
     ld   hl, wEntitiesUnknowTableR                ; $62AF: $21 $90 $C3

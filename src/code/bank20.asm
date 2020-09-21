@@ -1333,7 +1333,7 @@ ResetRoomVariables::
     ld   [wRoomSwitchableObject], a               ; $4CB8: $EA $FA $D6
     ld   [wC50A], a                               ; $4CBB: $EA $0A $C5
     ldh  [hFFAC], a                               ; $4CBE: $E0 $AC
-    ld   [wC113], a                               ; $4CC0: $EA $13 $C1
+    ld   [wEnemyWasKilled], a                     ; $4CC0: $EA $13 $C1
     ld   [wD460], a                               ; $4CC3: $EA $60 $D4
     ld   [wInBossBattle], a                       ; $4CC6: $EA $BE $C1
     ld   [wC50E], a                               ; $4CC9: $EA $0E $C5

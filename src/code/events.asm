@@ -527,7 +527,7 @@ jr_002_6011:
     cp   $FF                                      ; $6013: $FE $FF
     jr   nz, jr_002_6000                          ; $6015: $20 $E9
 
-    ldh  a, [hMultiPurpose0]                               ; $6017: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $6017: $F0 $D7
     cp   $08                                      ; $6019: $FE $08
     jr   nz, jr_002_6029                          ; $601B: $20 $0C
 
@@ -535,7 +535,7 @@ jr_002_6011:
     and  a                                        ; $6020: $A7
     jr   z, jr_002_602C                           ; $6021: $28 $09
 
-    ld   a, [wC113]                               ; $6023: $FA $13 $C1
+    ld   a, [wEnemyWasKilled]                     ; $6023: $FA $13 $C1
     and  a                                        ; $6026: $A7
     jr   nz, jr_002_602C                          ; $6027: $20 $03
 
@@ -552,9 +552,9 @@ CheckAnswerTunicsTrigger::
     ret  nz                                       ; $6031: $C0
 
     xor  a                                        ; $6032: $AF
-    ldh  [hMultiPurpose0], a                               ; $6033: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $6033: $E0 $D7
     ld   de, $00                                  ; $6035: $11 $00 $00
-    ldh  a, [hMapRoom]                           ; $6038: $F0 $F6
+    ldh  a, [hMapRoom]                            ; $6038: $F0 $F6
     cp   $12                                      ; $603A: $FE $12
     jr   z, jr_002_609B                           ; $603C: $28 $5D
 

@@ -112,8 +112,10 @@ wC111:
 wDialogIndexHi:
   ds 1 ; C112
 
-; Unlabeled
-wC113:
+; condition for room cleared
+; 0 = false,
+; any other value = true
+wEnemyWasKilled:
   ds 1 ; C113
 
 ; Delay for repeatin the NOISE_SFX_SEA_WAVES sound effect
@@ -1185,6 +1187,7 @@ wC4C0::
 ; Entities health group
 ; See ConfigureNewEntity
 ; TODO check name, labeler is unsure
+; possible values: $00, $02, $09, $1B
 wEntitiesHealthGroup::
   ds $10 ; C4D0
 

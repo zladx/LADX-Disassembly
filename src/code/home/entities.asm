@@ -1154,7 +1154,7 @@ data_3F48::
 
 DidKillEnemy::
     ld   a, BANK(SpawnEnemyDrop)                  ; $3F50: $3E $03
-    ld   [wC113], a                               ; $3F52: $EA $13 $C1
+    ld   [wEnemyWasKilled], a                     ; $3F52: $EA $13 $C1
     ld   [MBC3SelectBank], a                      ; $3F55: $EA $00 $21
     call SpawnEnemyDrop                           ; $3F58: $CD $CF $55
     call ReloadSavedBank                          ; $3F5B: $CD $1D $08

@@ -349,6 +349,10 @@ FISHING_GAME_LARGE_REWARD equ 20
 ; one heart equals XX health
 ONE_HEART equ $08
 
+LOW_MAX_HEALTH    equ $07
+MEDIUM_MAX_HEALTH equ $0B
+;HIGH_MAX_HEALTH   equ 
+
 ; how much time has to pass until the player can receive damage again
 DAMAGE_COOLDOWN_TIME equ $A0
 
@@ -369,6 +373,21 @@ ACTIVE_POWER_UP_NONE            equ 0
 ACTIVE_POWER_UP_PIECE_OF_POWER  equ 1
 ACTIVE_POWER_UP_GUARDIAN_ACCORN equ 2
 
+GUARDIAN_ACCORN_COUNTER_MAX                  equ $0C ; defines after how many random drops a guardian accorn is dropped
+PIECE_OF_POWER_COUNTER_MAX_LOW_MAX_HEALTH    equ $1E ; defines after how many random drops a piece of power is dropped
+PIECE_OF_POWER_COUNTER_MAX_MEDIUM_MAX_HEALTH equ $23
+PIECE_OF_POWER_COUNTER_MAX_HIGH_MAX_HEALTH   equ $28
+
+
 ; values for wGoldenLeavesCount
 GOLDEN_LEAVES_5 equ 5
 SLIME_KEY       equ 6
+
+; values for wEntitiesDroppedItemTable
+DROP_RANDOM   equ $00
+DROP_POWER_UP equ $01
+
+; drop chances
+DROP_CHANCE_0_PERCENT  equ %00000000
+DROP_CHANCE_50_PERCENT equ %00000001
+DROP_CHANCE_25_PERCENT equ %00000011

@@ -261,7 +261,7 @@ WaitForBCFrames::
     jr   nz, WaitForBCFrames                     ; $6BA0: $20 $F0
     ret                                          ; $6BA2: $C9
 
-; Copy some data to VRAM, then send an SGB command to transfert
+; Copy some data to VRAM, then send an SGB command to transfer
 ; the VRAM content to the SGB memory.
 ; Inputs:
 ;   hl   data origin address

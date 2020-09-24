@@ -397,11 +397,11 @@ wC153::
 wC154::
   ds 1 ; C154
 
-; background offset for shaking the screen vertically
+; Background offset for shaking the screen horizontally
 wScreenShakeHorizontal::
   ds 1 ; C155
 
-; background offset for shaking the screen vertically
+; Background offset for shaking the screen vertically
 wScreenShakeVertical::
   ds 1 ; C156
 

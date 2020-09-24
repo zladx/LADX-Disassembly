@@ -1,5 +1,5 @@
 ;
-; Useful defintions
+; Useful definitions
 ;
 include "constants/defines.asm"
 

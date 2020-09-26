@@ -18,11 +18,11 @@ section "HRAM", HRAM[$ff80]
 hRomBank::
  ds 1 ; FF80
 
-; used as tempory valiable
+; used as tempory variable
 hTemp::
  ds 1 ; FF81
 
-; used as tempory valiable
+; used as tempory variable
 hCodeTemp::
  ds 1 ; FF82
 

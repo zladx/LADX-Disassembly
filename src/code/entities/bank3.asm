@@ -2352,8 +2352,8 @@ DropTableByIndex::
     db   ENTITY_DROPPABLE_HEART
     db   ENTITY_DROPPABLE_ARROWS
     db   ENTITY_DROPPABLE_HEART
-    db   ENTITY_EMPTY
-    db   ENTITY_EMPTY
+    db   ENTITY_NONE
+    db   ENTITY_NONE
     db   ENTITY_DROPPABLE_FAIRY
     db   ENTITY_DROPPABLE_ARROWS
     db   ENTITY_DROPPABLE_BOMBS
@@ -2442,7 +2442,7 @@ SpawnEnemyDrop::
     add  hl, bc                                   ; $55E5: $09
     ld   a, [hl]                                  ; $55E6: $7E
     ; if nothing to drop, then return
-    cp   ENTITY_EMPTY                             ; $55E7: $FE $FF
+    cp   ENTITY_NONE                              ; $55E7: $FE $FF
     ret  z                                        ; $55E9: $C8
     ; if drop is not random, drop the entity
     and  a                                        ; $55EA: $A7
@@ -2538,7 +2538,7 @@ SpawnEnemyDrop::
     ld   hl, (DropTableByIndex - 1)               ; $565B: $21 $9C $55
     add  hl, de                                   ; $565E: $19
     ld   a, [hl]                                  ; $565F: $7E
-    cp   ENTITY_EMPTY                             ; $5660: $FE $FF
+    cp   ENTITY_NONE                              ; $5660: $FE $FF
     jr   nz, .dropEntity                          ; $5662: $20 $0C
     ; de-index was 7 or 8
     ; so lookup with other table and change the offset
@@ -2625,7 +2625,7 @@ SpawnEnemyDrop::
     pop  bc                                       ; $56D0: $C1
 .slimeKeyEnd:
 
-    ld   hl, wEntitiesSpeedZTable                                ; $56D1: $21 $20 $C3
+    ld   hl, wEntitiesSpeedZTable                 ; $56D1: $21 $20 $C3
     add  hl, de                                   ; $56D4: $19
     ld   [hl], $18                                ; $56D5: $36 $18
     jr   .applyDefaultPosZ                        ; $56D7: $18 $06
@@ -5004,7 +5004,8 @@ PickDroppableFairy::
 ; Create a new active entity in the last available slot
 ; Inputs:
 ;   a:   entity type
-;   bc:  ???
+;   b:   0
+;   c:   entity index
 ; Outputs:
 ;   c:   set the carry flag if no slots were available
 SpawnNewEntity::

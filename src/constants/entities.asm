@@ -272,4 +272,4 @@ ENTITY_PHOTOGRAPHER                  equ $FA
 ; unused                             equ $FC
 ; unused                             equ $FD
 ; unused                             equ $FE
-ENTITY_EMPTY                         equ $FF
+ENTITY_NONE                          equ $FF

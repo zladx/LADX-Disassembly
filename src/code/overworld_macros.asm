@@ -319,9 +319,9 @@ func_024_7815::
     ld   de, wBGPal8                              ; $782B: $11 $48 $DC
     call CopyData                                 ; $782E: $CD $14 $29
     xor  a                                        ; $7831: $AF
-    ld   [wPaletteParticalCopyColorIndexStart], a ; $7832: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $7832: $EA $D3 $DD
     ld   a, $20                                   ; $7835: $3E $20
-    ld   [wPaletteParticalCopyColorCount], a      ; $7837: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $7837: $EA $D4 $DD
     ld   a, $81                                   ; $783A: $3E $81
     ld   [wPaletteDataFlags], a                   ; $783C: $EA $D1 $DD
     ret                                           ; $783F: $C9
@@ -418,9 +418,9 @@ func_024_7A40::
     ld   de, wObjPal1                             ; $7A62: $11 $50 $DC
     call CopyData                                 ; $7A65: $CD $14 $29
     xor  a                                        ; $7A68: $AF
-    ld   [wPaletteParticalCopyColorIndexStart], a ; $7A69: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $7A69: $EA $D3 $DD
     ld   a, $20                                   ; $7A6C: $3E $20
-    ld   [wPaletteParticalCopyColorCount], a      ; $7A6E: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $7A6E: $EA $D4 $DD
     ld   a, $82                                   ; $7A71: $3E $82
     ld   [wPaletteDataFlags], a                   ; $7A73: $EA $D1 $DD
     ret                                           ; $7A76: $C9
@@ -484,9 +484,9 @@ func_024_7B77::
     call CopyData                                 ; $7B94: $CD $14 $29
 
     xor  a                                        ; $7B97: $AF
-    ld   [wPaletteParticalCopyColorIndexStart], a ; $7B98: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $7B98: $EA $D3 $DD
     ld   a, $20                                   ; $7B9B: $3E $20
-    ld   [wPaletteParticalCopyColorCount], a      ; $7B9D: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $7B9D: $EA $D4 $DD
     ld   a, $81                                   ; $7BA0: $3E $81
     ld   [wPaletteDataFlags], a                   ; $7BA2: $EA $D1 $DD
     pop  bc                                       ; $7BA5: $C1

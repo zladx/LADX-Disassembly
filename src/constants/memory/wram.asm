@@ -3085,7 +3085,7 @@ wDCF0::
 ; Palette flags for copying palettes to hardware.
 ; bit 0: If set, copy background palette to hardware during vblank
 ; bit 1: If set, copy object palette to hardware during vblank
-; bit 7: If set, do a partial copy specified by wPaletteParticalCopyColorIndexStart and wPaletteParticalCopyColorCount
+; bit 7: If set, do a partial copy specified by wPalettePartialCopyColorIndexStart and wPalettePartialCopyColorCount
 wPaletteDataFlags::
   ds 1 ; DDD1
 
@@ -3095,11 +3095,11 @@ wPaletteToLoadForTileMap::
   ds 1 ; DDD2
 
 ; Palete color index to start copying palette data from if bit 7 is set in wPaletteDataFlags
-wPaletteParticalCopyColorIndexStart::
+wPalettePartialCopyColorIndexStart::
   ds 1 ; DDD3
 
 ; Amount of colors to copy if bit 7 is set in wPaletteDataFlags
-wPaletteParticalCopyColorCount::
+wPalettePartialCopyColorCount::
   ds 1 ; DDD4
 
 ; TODO comment

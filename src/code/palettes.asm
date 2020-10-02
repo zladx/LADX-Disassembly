@@ -34,7 +34,7 @@ jr_021_4026:
 
 jr_021_402B:
     ld   a, $80                                   ; $402B: $3E $80
-    ld   hl, wPaletteParticalCopyColorIndexStart  ; $402D: $21 $D3 $DD
+    ld   hl, wPalettePartialCopyColorIndexStart   ; $402D: $21 $D3 $DD
     ld   e, [hl]                                  ; $4030: $5E
     sla  e                                        ; $4031: $CB $23
     or   e                                        ; $4033: $B3
@@ -59,7 +59,7 @@ jr_021_404F:
     add  hl, de                                   ; $4051: $19
     ld   e, c                                     ; $4052: $59
     ld   d, b                                     ; $4053: $50
-    ld   a, [wPaletteParticalCopyColorCount]      ; $4054: $FA $D4 $DD
+    ld   a, [wPalettePartialCopyColorCount]       ; $4054: $FA $D4 $DD
     sla  a                                        ; $4057: $CB $27
     ld   b, a                                     ; $4059: $47
     call func_021_4068                            ; $405A: $CD $68 $40
@@ -1238,9 +1238,9 @@ func_021_53B6::
 
 jr_021_53C0:
     xor  a                                        ; $53C0: $AF
-    ld   [wPaletteParticalCopyColorIndexStart], a ; $53C1: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $53C1: $EA $D3 $DD
     ld   a, $20                                   ; $53C4: $3E $20
-    ld   [wPaletteParticalCopyColorCount], a      ; $53C6: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $53C6: $EA $D4 $DD
     ld   a, $81                                   ; $53C9: $3E $81
     ld   [wPaletteDataFlags], a                    ; $53CB: $EA $D1 $DD
     ret                                           ; $53CE: $C9

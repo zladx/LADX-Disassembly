@@ -646,9 +646,9 @@ jr_014_4D4A:
     ld   a, [wDDD7]                               ; $4D4A: $FA $D7 $DD
     xor  $01                                      ; $4D4D: $EE $01
     swap a                                        ; $4D4F: $CB $37
-    ld   [wPaletteParticalCopyColorIndexStart], a ; $4D51: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $4D51: $EA $D3 $DD
     ld   a, $10                                   ; $4D54: $3E $10
-    ld   [wPaletteParticalCopyColorCount], a      ; $4D56: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $4D56: $EA $D4 $DD
     ld   a, $81                                   ; $4D59: $3E $81
     ld   [wPaletteDataFlags], a                   ; $4D5B: $EA $D1 $DD
     ld   a, [wDDD7]                               ; $4D5E: $FA $D7 $DD

@@ -5821,9 +5821,9 @@ IF __PATCH_0__
     ld   a, $14
     ld   [hl], a
     ld   a, $0a
-    ld   [wPaletteParticalCopyColorIndexStart], a
+    ld   [wPalettePartialCopyColorIndexStart], a
     ld   a, $01
-    ld   [wPaletteParticalCopyColorCount], a
+    ld   [wPalettePartialCopyColorCount], a
     ld   a, $82
     ld   [wPaletteDataFlags], a
 ENDC

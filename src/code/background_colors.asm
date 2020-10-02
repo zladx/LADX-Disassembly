@@ -134,9 +134,9 @@ jr_024_7436:
     and  $01                                      ; $7456: $E6 $01
     swap a                                        ; $7458: $CB $37
 
-    ld   [wPaletteParticalCopyColorIndexStart], a ; $745A: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a ; $745A: $EA $D3 $DD
     ld   a, $10                                   ; $745D: $3E $10
-    ld   [wPaletteParticalCopyColorCount], a      ; $745F: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a      ; $745F: $EA $D4 $DD
     ld   a, $81                                   ; $7462: $3E $81
     ld   [wPaletteDataFlags], a                    ; $7464: $EA $D1 $DD
     ld   a, [wDDD6]                               ; $7467: $FA $D6 $DD

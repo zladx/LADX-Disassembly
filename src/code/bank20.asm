@@ -5088,9 +5088,9 @@ jr_020_6CB5:
     ld   a, [wC3CA]                               ; $6CBA: $FA $CA $C3
     and  $01                                      ; $6CBD: $E6 $01
     swap a                                        ; $6CBF: $CB $37
-    ld   [wPaletteParticalCopyColorIndexStart], a ; $6CC1: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $6CC1: $EA $D3 $DD
     ld   a, $10                                   ; $6CC4: $3E $10
-    ld   [wPaletteParticalCopyColorCount], a      ; $6CC6: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $6CC6: $EA $D4 $DD
     pop  af                                       ; $6CC9: $F1
     inc  a                                        ; $6CCA: $3C
     ld   [wC3CA], a                               ; $6CCB: $EA $CA $C3
@@ -5821,9 +5821,9 @@ func_020_78ED::
     call CopyData                                 ; $7903: $CD $14 $29
 
     xor  a                                        ; $7906: $AF
-    ld   [wPaletteParticalCopyColorIndexStart], a ; $7907: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $7907: $EA $D3 $DD
     ld   a, $1C                                   ; $790A: $3E $1C
-    ld   [wPaletteParticalCopyColorCount], a      ; $790C: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $790C: $EA $D4 $DD
     ld   a, $81                                   ; $790F: $3E $81
     ld   [wPaletteDataFlags], a                   ; $7911: $EA $D1 $DD
     ret                                           ; $7914: $C9
@@ -6005,9 +6005,9 @@ jr_020_7C50:
     ld   a, $20                                   ; $7C59: $3E $20
 
 jr_020_7C5B:
-    ld   [wPaletteParticalCopyColorCount], a      ; $7C5B: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $7C5B: $EA $D4 $DD
     xor  a                                        ; $7C5E: $AF
-    ld   [wPaletteParticalCopyColorIndexStart], a ; $7C5F: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $7C5F: $EA $D3 $DD
     ld   a, $81                                   ; $7C62: $3E $81
     ld   [wPaletteDataFlags], a                   ; $7C64: $EA $D1 $DD
     ret                                           ; $7C67: $C9

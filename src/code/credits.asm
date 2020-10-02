@@ -1433,9 +1433,9 @@ func_017_4E93::
     ld   a, $47                                   ; $4EA6: $3E $47
     ld   [hl], a                                  ; $4EA8: $77
     xor  a                                        ; $4EA9: $AF
-    ld   [wPaletteParticalCopyColorIndexStart], a ; $4EAA: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $4EAA: $EA $D3 $DD
     ld   a, $20                                   ; $4EAD: $3E $20
-    ld   [wPaletteParticalCopyColorCount], a      ; $4EAF: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $4EAF: $EA $D4 $DD
     ld   a, $81                                   ; $4EB2: $3E $81
     ld   [wPaletteDataFlags], a                   ; $4EB4: $EA $D1 $DD
     ret                                           ; $4EB7: $C9
@@ -1705,9 +1705,9 @@ jr_017_53B8:
     ld   de, wBGPal1                              ; $53CB: $11 $10 $DC
     call CopyData                                 ; $53CE: $CD $14 $29
     xor  a                                        ; $53D1: $AF
-    ld   [wPaletteParticalCopyColorIndexStart], a ; $53D2: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $53D2: $EA $D3 $DD
     ld   a, $20                                   ; $53D5: $3E $20
-    ld   [wPaletteParticalCopyColorCount], a      ; $53D7: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $53D7: $EA $D4 $DD
     ld   a, $81                                   ; $53DA: $3E $81
     ld   [wPaletteDataFlags], a                   ; $53DC: $EA $D1 $DD
     ret                                           ; $53DF: $C9
@@ -4214,9 +4214,9 @@ label_017_6A80:
     ld   de, wObjPal1                             ; $6A97: $11 $50 $DC
     call CopyData                                 ; $6A9A: $CD $14 $29
     xor  a                                        ; $6A9D: $AF
-    ld   [wPaletteParticalCopyColorIndexStart], a ; $6A9E: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $6A9E: $EA $D3 $DD
     ld   a, $18                                   ; $6AA1: $3E $18
-    ld   [wPaletteParticalCopyColorCount], a      ; $6AA3: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $6AA3: $EA $D4 $DD
     ld   a, $82                                   ; $6AA6: $3E $82
     ld   [wPaletteDataFlags], a                   ; $6AA8: $EA $D1 $DD
     ret                                           ; $6AAB: $C9
@@ -4897,9 +4897,9 @@ CreditsTheEnd0Handler::
     ld   a, $7F                                   ; $6FDD: $3E $7F
     ld   [hl], a                                  ; $6FDF: $77
     ld   a, $03                                   ; $6FE0: $3E $03
-    ld   [wPaletteParticalCopyColorIndexStart], a ; $6FE2: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $6FE2: $EA $D3 $DD
     ld   a, $01                                   ; $6FE5: $3E $01
-    ld   [wPaletteParticalCopyColorCount], a      ; $6FE7: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $6FE7: $EA $D4 $DD
     ld   a, $82                                   ; $6FEA: $3E $82
     ld   [wPaletteDataFlags], a                   ; $6FEC: $EA $D1 $DD
     ld   a, $B4                                   ; $6FEF: $3E $B4
@@ -4957,9 +4957,9 @@ CreditsTheEnd4Handler::
     ld   a, $47                                   ; $7041: $3E $47
     ld   [hl], a                                  ; $7043: $77
     ld   a, $04                                   ; $7044: $3E $04
-    ld   [wPaletteParticalCopyColorIndexStart], a ; $7046: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $7046: $EA $D3 $DD
     ld   a, $01                                   ; $7049: $3E $01
-    ld   [wPaletteParticalCopyColorCount], a      ; $704B: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $704B: $EA $D4 $DD
     ld   a, $81                                   ; $704E: $3E $81
     ld   [wPaletteDataFlags], a                   ; $7050: $EA $D1 $DD
 IF __PATCH_5__

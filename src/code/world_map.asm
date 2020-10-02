@@ -30,7 +30,7 @@ WorldMapState0Handler::
     ldh  a, [hIsGBC]                              ; $564B: $F0 $FE
     and  a                                        ; $564D: $A7
     jr   z, WorldMapState1Handler                 ; $564E: $28 $28
-    ld   hl, wDC10                                ; $5650: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $5650: $21 $10 $DC
     ld   c, $80                                   ; $5653: $0E $80
     di                                            ; $5655: $F3
     ld   a, $03                                   ; $5656: $3E $03

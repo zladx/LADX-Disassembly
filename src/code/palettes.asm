@@ -14,7 +14,7 @@ CopyPalettesToHardware::
     and  $01                                      ; $4009: $E6 $01
     jr   z, jr_021_4016                           ; $400B: $28 $09
 
-    ld   hl, wDC10                                ; $400D: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $400D: $21 $10 $DC
     ld   de, $FF68                                ; $4010: $11 $68 $FF
     call func_021_4062                            ; $4013: $CD $62 $40
 
@@ -23,7 +23,7 @@ jr_021_4016:
     and  $02                                      ; $4019: $E6 $02
     jr   z, jr_021_4026                           ; $401B: $28 $09
 
-    ld   hl, wDC50                                ; $401D: $21 $50 $DC
+    ld   hl, wObjPal1                             ; $401D: $21 $50 $DC
     ld   de, $FF6A                                ; $4020: $11 $6A $FF
     call func_021_4062                            ; $4023: $CD $62 $40
 
@@ -34,7 +34,7 @@ jr_021_4026:
 
 jr_021_402B:
     ld   a, $80                                   ; $402B: $3E $80
-    ld   hl, wPaletteUnknownC                     ; $402D: $21 $D3 $DD
+    ld   hl, wPalettePartialCopyColorIndexStart   ; $402D: $21 $D3 $DD
     ld   e, [hl]                                  ; $4030: $5E
     sla  e                                        ; $4031: $CB $23
     or   e                                        ; $4033: $B3
@@ -46,20 +46,20 @@ jr_021_402B:
 
     ldh  [rBCPS], a                               ; $403D: $E0 $68
     ld   bc, rBGPD                                ; $403F: $01 $69 $FF
-    ld   hl, wDC10                                ; $4042: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $4042: $21 $10 $DC
     jr   jr_021_404F                              ; $4045: $18 $08
 
 jr_021_4047:
     ldh  [rOCPS], a                               ; $4047: $E0 $6A
     ld   bc, rOBPD                                ; $4049: $01 $6B $FF
-    ld   hl, wDC50                                ; $404C: $21 $50 $DC
+    ld   hl, wObjPal1                             ; $404C: $21 $50 $DC
 
 jr_021_404F:
     ld   d, $00                                   ; $404F: $16 $00
     add  hl, de                                   ; $4051: $19
     ld   e, c                                     ; $4052: $59
     ld   d, b                                     ; $4053: $50
-    ld   a, [wPaletteUnknownD]                    ; $4054: $FA $D4 $DD
+    ld   a, [wPalettePartialCopyColorCount]       ; $4054: $FA $D4 $DD
     sla  a                                        ; $4057: $CB $27
     ld   b, a                                     ; $4059: $47
     call func_021_4068                            ; $405A: $CD $68 $40
@@ -104,7 +104,7 @@ LoadPaletteForTilemap::
 
     ld   h, b                                     ; $4088: $60
     ld   l, c                                     ; $4089: $69
-    ld   de, wDC10                                ; $408A: $11 $10 $DC
+    ld   de, wBGPal1                              ; $408A: $11 $10 $DC
     ld   bc, $80                                  ; $408D: $01 $80 $00
     ld   a, [wPaletteUnknownE]                    ; $4090: $FA $D5 $DD
     and  a                                        ; $4093: $A7
@@ -182,7 +182,7 @@ func_021_40DB::
     cp   $92                                      ; $40FB: $FE $92
     ret  nz                                       ; $40FD: $C0
 
-    ld   hl, wDC8A                                ; $40FE: $21 $8A $DC
+    ld   hl, wObjPal8 + 1*2                       ; $40FE: $21 $8A $DC
     ld   a, [Data_021_56C8 + 6]                   ; $4101: $FA $CE $56
     ld   [hl+], a                                 ; $4104: $22
     ld   a, [Data_021_56C8 + 7]                   ; $4105: $FA $CF $56
@@ -322,7 +322,7 @@ jr_021_41B4:
 
     push hl                                       ; $41BA: $E5
     ld   bc, $40                                ; $41BB: $01 $40 $00
-    ld   de, wDC10                                ; $41BE: $11 $10 $DC
+    ld   de, wBGPal1                              ; $41BE: $11 $10 $DC
     call CopyData                                 ; $41C1: $CD $14 $29
     push hl                                       ; $41C4: $E5
     ld   hl, Data_021_5518                        ; $41C5: $21 $18 $55
@@ -335,7 +335,7 @@ jr_021_41B4:
 
 jr_021_41D6:
     ld   bc, $40                                ; $41D6: $01 $40 $00
-    ld   de, wDC10                                ; $41D9: $11 $10 $DC
+    ld   de, wBGPal1                              ; $41D9: $11 $10 $DC
     ld   a, $02                                   ; $41DC: $3E $02
     ldh  [rSVBK], a                               ; $41DE: $E0 $70
     call CopyData                                 ; $41E0: $CD $14 $29
@@ -357,7 +357,7 @@ jr_021_41D6:
     jr   nz, jr_021_4254                          ; $4201: $20 $51
 
     ld   hl, Data_021_5548                        ; $4203: $21 $48 $55
-    ld   de, wDC78                                ; $4206: $11 $78 $DC
+    ld   de, wObjPal6                             ; $4206: $11 $78 $DC
     ld   c, $08                                   ; $4209: $0E $08
 
 jr_021_420B:
@@ -398,7 +398,7 @@ jr_021_4222:
 
 jr_021_4238:
     ld   c, $02                                   ; $4238: $0E $02
-    ld   de, wDC8C                                ; $423A: $11 $8C $DC
+    ld   de, wObjPal8 + 2*2                       ; $423A: $11 $8C $DC
 
 jr_021_423D:
     ld   a, [wPaletteUnknownE]                    ; $423D: $FA $D5 $DD
@@ -406,7 +406,7 @@ jr_021_423D:
     jr   nz, jr_021_4247                          ; $4241: $20 $04
 
     ld   a, [hl]                                  ; $4243: $7E
-    ld   [wDC8C], a                               ; $4244: $EA $8C $DC
+    ld   [wObjPal8 + 2*2], a                      ; $4244: $EA $8C $DC
 
 jr_021_4247:
     ld   a, $02                                   ; $4247: $3E $02
@@ -440,7 +440,7 @@ label_021_425E:
     ld   b, [hl]                                  ; $4272: $46
     ld   h, b                                     ; $4273: $60
     ld   l, a                                     ; $4274: $6F
-    ld   de, wDC10                                ; $4275: $11 $10 $DC
+    ld   de, wBGPal1                              ; $4275: $11 $10 $DC
     ld   bc, $40                                ; $4278: $01 $40 $00
     ld   a, [wGameplayType]                       ; $427B: $FA $95 $DB
     cp   $01                                      ; $427E: $FE $01
@@ -452,7 +452,7 @@ label_021_425E:
 
     add  hl, bc                                   ; $4289: $09
     ld   bc, $10                                  ; $428A: $01 $10 $00
-    ld   de, wDC80                                ; $428D: $11 $80 $DC
+    ld   de, wObjPal7                             ; $428D: $11 $80 $DC
     ld   a, $02                                   ; $4290: $3E $02
     ld   [wPaletteDataFlags], a                    ; $4292: $EA $D1 $DD
 
@@ -975,7 +975,7 @@ func_021_5185::
     jr   z, jr_021_51D6                           ; $5189: $28 $4B
 
     ld   b, $2D                                   ; $518B: $06 $2D
-    ld   hl, Data_021_523A                        ; $518D: $21 $3A $52
+    ld   hl, IndoorSpritePaletteIndexData                        ; $518D: $21 $3A $52
 
 jr_021_5190:
     ldh  a, [hMapId]                              ; $5190: $F0 $F7
@@ -1036,7 +1036,7 @@ jr_021_51D5:
 
 jr_021_51D6:
     ld   b, $0E                                   ; $51D6: $06 $0E
-    ld   hl, Data_021_52EE                        ; $51D8: $21 $EE $52
+    ld   hl, OverworldSpritePaletteIndexData                        ; $51D8: $21 $EE $52
 
 jr_021_51DB:
     ldh  a, [hMapRoom]                            ; $51DB: $F0 $F6
@@ -1078,7 +1078,9 @@ TilemapPaletteTable::
     db   $60, $67, $70, $67, $80, $67, $A0, $55  ; $522E |`gpg.g.U|
     db   $50, $55, $90, $56                      ; $5236 |PU.V....|
 
-Data_021_523A::
+IndoorSpritePaletteIndexData::
+    ; This is a table with 4 byte records:
+    ; MapId, RoomId, Transition Direction, wPaletteToLoadForTileMap
     db   $00, $17, $04, $81
     db   $00, $13, $01, $80, $00, $13, $00, $80  ; $523E |........|
     db   $00, $13, $03, $81, $00, $10, $00, $CA  ; $5246 |........|
@@ -1103,7 +1105,9 @@ Data_021_523A::
     db   $07, $54, $02, $CF, $16, $6F, $02, $DC  ; $52DE |.T...o..|
     db   $16, $7F, $02, $DD, $16, $8F, $03, $DE  ; $52E6 |........|
 
-Data_021_52EE::
+OverworldSpritePaletteIndexData::
+    ; This is table with 3 byte records:
+    ; RoomId, Transition Direction, wPaletteToLoadForTileMap
     db   $44, $03, $94, $36, $00, $94, $16, $02  ; $52EE |D..6....|
     db   $95, $26, $03, $95, $17, $02, $95, $27  ; $52F6 |.&.....'|
     db   $03, $95, $08, $02, $9B, $17, $01, $9B  ; $52FE |........|
@@ -1210,8 +1214,8 @@ jr_021_537B:
     ld   l, a                                     ; $539B: $6F
 
 jr_021_539C:
-    ld   de, wDC10                                ; $539C: $11 $10 $DC
-    ld   bc, $40                                ; $539F: $01 $40 $00
+    ld   de, wBGPal1                              ; $539C: $11 $10 $DC
+    ld   bc, $40                                  ; $539F: $01 $40 $00
     push bc                                       ; $53A2: $C5
     push de                                       ; $53A3: $D5
     push hl                                       ; $53A4: $E5
@@ -1234,9 +1238,9 @@ func_021_53B6::
 
 jr_021_53C0:
     xor  a                                        ; $53C0: $AF
-    ld   [wPaletteUnknownC], a                    ; $53C1: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $53C1: $EA $D3 $DD
     ld   a, $20                                   ; $53C4: $3E $20
-    ld   [wPaletteUnknownD], a                    ; $53C6: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $53C6: $EA $D4 $DD
     ld   a, $81                                   ; $53C9: $3E $81
     ld   [wPaletteDataFlags], a                    ; $53CB: $EA $D1 $DD
     ret                                           ; $53CE: $C9
@@ -1355,7 +1359,7 @@ jr_021_5465:
 func_021_5466::
     push bc                                       ; $5466: $C5
     push hl                                       ; $5467: $E5
-    ld   hl, wDC10                                ; $5468: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $5468: $21 $10 $DC
     ld   a, b                                     ; $546B: $78
     sla  a                                        ; $546C: $CB $27
     sla  a                                        ; $546E: $CB $27
@@ -2488,7 +2492,7 @@ Data_021_67D0::
     db   $FF, $7F, $00, $00, $71, $44, $7F, $7D  ; $73A0 |....qD.}|
     db   $FF, $7F, $00, $00, $31, $52, $FE, $63  ; $73A8 |....1R.c|
 
-; Blocks of $40 bytes of data, copied to wDC10
+; Blocks of $40 bytes of data, copied to wBGPal1
 Data_021_73B0::
     db   $FF, $47, $FD, $2E, $B5, $15, $00, $00  ; $73B0 |.G......|
     db   $FF, $47, $31, $52, $C5, $28, $00, $00  ; $73B8 |.G1R.(..|
@@ -2521,7 +2525,7 @@ Data_021_73B0::
     db   $FF, $47, $00, $00, $31, $52, $FF, $47  ; $7490 |.G..1R.G|
     db   $FF, $47, $00, $00, $03, $7E, $FF, $47  ; $7498 |.G...~.G|
 
-; Blocks of $40 bytes of data, copied to wDC10
+; Blocks of $40 bytes of data, copied to wBGPal1
 Data_021_74A0::
     db   $FF, $47, $FD, $2E, $B5, $15, $00, $00  ; $74A0 |.G......|
     db   $FF, $47, $31, $52, $C5, $28, $00, $00  ; $74A8 |.G1R.(..|
@@ -2534,7 +2538,7 @@ Data_021_74A0::
     db   $FD, $2E, $D9, $11, $CE, $10, $00, $00  ; $74E0 |........|
     db   $FF, $47, $00, $00, $31, $52, $FF, $47  ; $74E8 |.G..1R.G|
 
-; Blocks of $80 bytes of data, copied to wDC10
+; Blocks of $80 bytes of data, copied to wBGPal1
 Data_021_74F0::
     dw 0
     dw 0

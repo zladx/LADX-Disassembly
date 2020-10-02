@@ -1418,7 +1418,7 @@ func_017_4E93::
     and  a                                        ; $4E95: $A7
     ret  z                                        ; $4E96: $C8
 
-    ld   hl, wDC10                                ; $4E97: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $4E97: $21 $10 $DC
     ld   b, $40                                   ; $4E9A: $06 $40
     xor  a                                        ; $4E9C: $AF
 
@@ -1427,15 +1427,15 @@ func_017_4E93::
     dec  b                                        ; $4E9E: $05
     jr   nz, .loop                                ; $4E9F: $20 $FC
 
-    ld   hl, wDC1E                                ; $4EA1: $21 $1E $DC
+    ld   hl, wBGPal2 + 3*2                        ; $4EA1: $21 $1E $DC
     dec  a                                        ; $4EA4: $3D
     ld   [hl+], a                                 ; $4EA5: $22
     ld   a, $47                                   ; $4EA6: $3E $47
     ld   [hl], a                                  ; $4EA8: $77
     xor  a                                        ; $4EA9: $AF
-    ld   [wPaletteUnknownC], a                    ; $4EAA: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $4EAA: $EA $D3 $DD
     ld   a, $20                                   ; $4EAD: $3E $20
-    ld   [wPaletteUnknownD], a                    ; $4EAF: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $4EAF: $EA $D4 $DD
     ld   a, $81                                   ; $4EB2: $3E $81
     ld   [wPaletteDataFlags], a                   ; $4EB4: $EA $D1 $DD
     ret                                           ; $4EB7: $C9
@@ -1702,12 +1702,12 @@ jr_017_53B8:
     ld   hl, Data_017_51A7                        ; $53C4: $21 $A7 $51
     add  hl, bc                                   ; $53C7: $09
     ld   bc, $0040                                ; $53C8: $01 $40 $00
-    ld   de, wDC10                                ; $53CB: $11 $10 $DC
+    ld   de, wBGPal1                              ; $53CB: $11 $10 $DC
     call CopyData                                 ; $53CE: $CD $14 $29
     xor  a                                        ; $53D1: $AF
-    ld   [wPaletteUnknownC], a                    ; $53D2: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $53D2: $EA $D3 $DD
     ld   a, $20                                   ; $53D5: $3E $20
-    ld   [wPaletteUnknownD], a                    ; $53D7: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $53D7: $EA $D4 $DD
     ld   a, $81                                   ; $53DA: $3E $81
     ld   [wPaletteDataFlags], a                   ; $53DC: $EA $D1 $DD
     ret                                           ; $53DF: $C9
@@ -4211,12 +4211,12 @@ label_017_6A80:
     ld   hl, Data_017_6900                        ; $6A90: $21 $00 $69
     add  hl, bc                                   ; $6A93: $09
     ld   bc, $30                                  ; $6A94: $01 $30 $00
-    ld   de, wDC50                                ; $6A97: $11 $50 $DC
+    ld   de, wObjPal1                             ; $6A97: $11 $50 $DC
     call CopyData                                 ; $6A9A: $CD $14 $29
     xor  a                                        ; $6A9D: $AF
-    ld   [wPaletteUnknownC], a                    ; $6A9E: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $6A9E: $EA $D3 $DD
     ld   a, $18                                   ; $6AA1: $3E $18
-    ld   [wPaletteUnknownD], a                    ; $6AA3: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $6AA3: $EA $D4 $DD
     ld   a, $82                                   ; $6AA6: $3E $82
     ld   [wPaletteDataFlags], a                   ; $6AA8: $EA $D1 $DD
     ret                                           ; $6AAB: $C9
@@ -4891,15 +4891,15 @@ CreditsTheEnd0Handler::
     and  a                                        ; $6FD5: $A7
     ret  nz                                       ; $6FD6: $C0
 
-    ld   hl, wDC56                                ; $6FD7: $21 $56 $DC
+    ld   hl, wObjPal1 + 3*2                       ; $6FD7: $21 $56 $DC
     ld   a, $FF                                   ; $6FDA: $3E $FF
     ld   [hl+], a                                 ; $6FDC: $22
     ld   a, $7F                                   ; $6FDD: $3E $7F
     ld   [hl], a                                  ; $6FDF: $77
     ld   a, $03                                   ; $6FE0: $3E $03
-    ld   [wPaletteUnknownC], a                    ; $6FE2: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $6FE2: $EA $D3 $DD
     ld   a, $01                                   ; $6FE5: $3E $01
-    ld   [wPaletteUnknownD], a                    ; $6FE7: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $6FE7: $EA $D4 $DD
     ld   a, $82                                   ; $6FEA: $3E $82
     ld   [wPaletteDataFlags], a                   ; $6FEC: $EA $D1 $DD
     ld   a, $B4                                   ; $6FEF: $3E $B4
@@ -4951,15 +4951,15 @@ CreditsTheEnd3Handler::
 CreditsTheEnd4Handler::
     ld   a, $23                                   ; $7036: $3E $23
     ld   [wTileMapToLoad], a                      ; $7038: $EA $FE $D6
-    ld   hl, wDC18                                ; $703B: $21 $18 $DC
+    ld   hl, wBGPal2                              ; $703B: $21 $18 $DC
     ld   a, $FF                                   ; $703E: $3E $FF
     ld   [hl+], a                                 ; $7040: $22
     ld   a, $47                                   ; $7041: $3E $47
     ld   [hl], a                                  ; $7043: $77
     ld   a, $04                                   ; $7044: $3E $04
-    ld   [wPaletteUnknownC], a                    ; $7046: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $7046: $EA $D3 $DD
     ld   a, $01                                   ; $7049: $3E $01
-    ld   [wPaletteUnknownD], a                    ; $704B: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $704B: $EA $D4 $DD
     ld   a, $81                                   ; $704E: $3E $81
     ld   [wPaletteDataFlags], a                   ; $7050: $EA $D1 $DD
 IF __PATCH_5__
@@ -5958,7 +5958,7 @@ func_017_7A01::
     ld   d, $00                                   ; $7A12: $16 $00
     ld   hl, Data_017_79C1                        ; $7A14: $21 $C1 $79
     add  hl, de                                   ; $7A17: $19
-    ld   de, wDC5C                                ; $7A18: $11 $5C $DC
+    ld   de, wObjPal2 + 2*2                       ; $7A18: $11 $5C $DC
 
 jr_017_7A1B:
     ld   a, [hl+]                                 ; $7A1B: $2A
@@ -6713,7 +6713,7 @@ ELSE
     ldh  [hMultiPurposeE], a                           ; $7E8E: $E0 $E5
     ld   a, $18                                   ; $7E90: $3E $18
     ldh  [hFreeWarpDataAddress], a                ; $7E92: $E0 $E6
-    ld   hl, wDC10                                ; $7E94: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $7E94: $21 $10 $DC
     ld   a, $40                                   ; $7E97: $3E $40
     ldh  [hMultiPurpose3], a                           ; $7E99: $E0 $DA
     call func_017_7EA4                            ; $7E9B: $CD $A4 $7E
@@ -6873,7 +6873,7 @@ ELSE
     ldh  [hMultiPurposeE], a                           ; $7F42: $E0 $E5
     ld   a, $18                                   ; $7F44: $3E $18
     ldh  [hFreeWarpDataAddress], a                ; $7F46: $E0 $E6
-    ld   hl, wDC10                                ; $7F48: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $7F48: $21 $10 $DC
     ld   d, $40                                   ; $7F4B: $16 $40
     call func_017_7F57                            ; $7F4D: $CD $57 $7F
 ENDC

@@ -1831,7 +1831,7 @@ ENDC
 
     ld   hl, Data_001_78A0                        ; $79CD: $21 $A0 $78
     add  hl, bc                                   ; $79D0: $09
-    ld   bc, wDC78                                ; $79D1: $01 $78 $DC
+    ld   bc, wObjPal6                             ; $79D1: $01 $78 $DC
     ld   e, CHUNKSIZE                             ; $79D4: $1E $10
 
 .loop

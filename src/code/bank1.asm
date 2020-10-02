@@ -748,7 +748,7 @@ FileSaveFadeOut::
     ldh  a, [hIsGBC]                              ; $582F: $F0 $FE
     and  a                                        ; $5831: $A7
     jr   z, jr_001_5854                           ; $5832: $28 $20
-    ld   hl, wDC10                                ; $5834: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $5834: $21 $10 $DC
     ld   c, $80                                   ; $5837: $0E $80
     di                                            ; $5839: $F3
 
@@ -2335,7 +2335,7 @@ PeachPictureState0Handler::
     ldh  a, [hIsGBC]                              ; $680B: $F0 $FE
     and  a                                        ; $680D: $A7
     jr   z, PeachPictureState1Handler             ; $680E: $28 $19
-    ld   hl, wDC10                                ; $6810: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $6810: $21 $10 $DC
     ld   c, $80                                   ; $6813: $0E $80
     di                                            ; $6815: $F3
 

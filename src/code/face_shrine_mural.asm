@@ -18,7 +18,7 @@ FaceShrineMuralStage0Handler::
     ldh  a, [hIsGBC]                              ; $6B0D: $F0 $FE
     and  a                                        ; $6B0F: $A7
     jr   z, FaceShrineMuralStage1Handler          ; $6B10: $28 $19
-    ld   hl, wDC10                                ; $6B12: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $6B12: $21 $10 $DC
     ld   c, $80                                   ; $6B15: $0E $80
     di                                            ; $6B17: $F3
 

@@ -673,7 +673,7 @@ EntityInitRacoon::
 
     ld   a, $02                                   ; $4AF7: $3E $02
     ldh  [rSVBK], a                               ; $4AF9: $E0 $70
-    ld   hl, wDC88                                ; $4AFB: $21 $88 $DC
+    ld   hl, wObjPal8                             ; $4AFB: $21 $88 $DC
     ld   de, Data_003_4AC6                        ; $4AFE: $11 $C6 $4A
 
 jr_003_4B01:
@@ -3914,7 +3914,7 @@ SirensInstrumentState0Handler::
     jr   nc, jr_003_5EAE                          ; $5EA7: $30 $05
 
     ld   a, $03                                   ; $5EA9: $3E $03
-    call func_036_70D6_trampoline                 ; $5EAB: $CD $D2 $0A
+    call cycleInstrumentItemColor_trampoline      ; $5EAB: $CD $D2 $0A
 
 jr_003_5EAE:
     ld   a, c                                     ; $5EAE: $79
@@ -4110,7 +4110,7 @@ ENDC
 
 func_003_5FBC::
 IF __PATCH_0__
-    ld   a, [wDC52]
+    ld   a, [wObjPal1 + 1*2]
     inc  a
     jp   nz, HoldEntityAboveLink
     ld   a, $80

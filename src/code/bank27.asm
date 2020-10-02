@@ -838,9 +838,9 @@ func_027_7BB0::
 
 func_027_7BB6::
     xor  a                                        ; $7BB6: $AF
-    ld   [wPaletteUnknownC], a                    ; $7BB7: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $7BB7: $EA $D3 $DD
     ld   a, $20                                   ; $7BBA: $3E $20
-    ld   [wPaletteUnknownD], a                    ; $7BBC: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $7BBC: $EA $D4 $DD
     ld   a, $82                                   ; $7BBF: $3E $82
     ld   [wPaletteDataFlags], a                   ; $7BC1: $EA $D1 $DD
     ret                                           ; $7BC4: $C9
@@ -984,7 +984,7 @@ func_027_7E5A::
 
 jr_027_7E7D:
     ld   bc, $38                                  ; $7E7D: $01 $38 $00
-    ld   de, wDC50                                ; $7E80: $11 $50 $DC
+    ld   de, wObjPal1                             ; $7E80: $11 $50 $DC
     call CopyData                                 ; $7E83: $CD $14 $29
     ret                                           ; $7E86: $C9
 
@@ -1053,7 +1053,7 @@ func_027_7F8C::
 
 jr_027_7FAF:
     ld   bc, $08                                  ; $7FAF: $01 $08 $00
-    ld   de, wDC88                                ; $7FB2: $11 $88 $DC
+    ld   de, wObjPal8                             ; $7FB2: $11 $88 $DC
     call CopyData                                 ; $7FB5: $CD $14 $29
     ret                                           ; $7FB8: $C9
 

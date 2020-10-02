@@ -3145,7 +3145,7 @@ wDCF0::
   ds $E1 ; DCF0 -DDD0
 
 ; Palette flags for copying palettes to hardware.
-; byte 0 = if enabled, palette data is for BG (otherwise for objects),
+; byte 0 = if enabled, load wPaletteUnknownD palettes from $DC10[wPaletteUnknownC] to palettes memory
 ; byte 2 = unknown
 wPaletteDataFlags::
   ds 1 ; DDD1
@@ -3155,11 +3155,13 @@ wPaletteDataFlags::
 wPaletteToLoadForTileMap::
   ds 1 ; DDD2
 
-; TODO comment
+; Index of palette to load from $DC10
+; See wPaletteDataFlags
 wPaletteUnknownC::
   ds 1 ; DDD3
 
-; TODO comment
+; Number of palettes to load from $DC10
+; See wPaletteDataFlags
 wPaletteUnknownD::
   ds 1 ; DDD4
 

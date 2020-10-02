@@ -119,7 +119,7 @@ func_036_409C::
     ld   [hl], a                                  ; $40A8: $77
     di                                            ; $40A9: $F3
     ld   de, Data_036_4094                        ; $40AA: $11 $94 $40
-    ld   hl, wDC80                                ; $40AD: $21 $80 $DC
+    ld   hl, wObjPal7                             ; $40AD: $21 $80 $DC
 
 jr_036_40B0:
     ld   a, [de]                                  ; $40B0: $1A
@@ -308,7 +308,7 @@ func_036_41B2::
     pop  bc                                       ; $41C6: $C1
     di                                            ; $41C7: $F3
     ld   de, Data_036_4094                        ; $41C8: $11 $94 $40
-    ld   hl, wDC80                                ; $41CB: $21 $80 $DC
+    ld   hl, wObjPal7                             ; $41CB: $21 $80 $DC
     ld   a, $02                                   ; $41CE: $3E $02
     ldh  [rSVBK], a                               ; $41D0: $E0 $70
 
@@ -1043,7 +1043,7 @@ func_036_462B::
 func_036_4649::
     di                                            ; $4649: $F3
     ld   hl, $FF70                                ; $464A: $21 $70 $FF
-    ld   de, wDC10                                ; $464D: $11 $10 $DC
+    ld   de, wBGPal1                              ; $464D: $11 $10 $DC
 
 jr_036_4650:
     ld   a, [de]                                  ; $4650: $1A
@@ -1066,7 +1066,7 @@ jr_036_4650:
 func_036_4665::
     di                                            ; $4665: $F3
     ld   hl, $FF70                                ; $4666: $21 $70 $FF
-    ld   de, wDC10                                ; $4669: $11 $10 $DC
+    ld   de, wBGPal1                              ; $4669: $11 $10 $DC
 
 jr_036_466C:
     ld   [hl], $03                                ; $466C: $36 $03
@@ -1787,7 +1787,7 @@ func_036_4A9F::
     ld   a, $02                                   ; $4ABF: $3E $02
     ldh  [rSVBK], a                               ; $4AC1: $E0 $70
     ld   de, Data_036_4A97                        ; $4AC3: $11 $97 $4A
-    ld   hl, wDC80                                ; $4AC6: $21 $80 $DC
+    ld   hl, wObjPal7                             ; $4AC6: $21 $80 $DC
 
 jr_036_4AC9:
     ld   a, [de]                                  ; $4AC9: $1A
@@ -2239,12 +2239,12 @@ jr_036_4D6E:
     ld   d, $00                                   ; $4D76: $16 $00
     ld   hl, Data_036_4D39                        ; $4D78: $21 $39 $4D
     add  hl, de                                   ; $4D7B: $19
-    ld   a, [wDC8C]                               ; $4D7C: $FA $8C $DC
+    ld   a, [wObjPal8 + 2*2]                      ; $4D7C: $FA $8C $DC
     cp   [hl]                                     ; $4D7F: $BE
     jr   nz, jr_036_4D89                          ; $4D80: $20 $07
 
     inc  hl                                       ; $4D82: $23
-    ld   a, [wDC8D]                               ; $4D83: $FA $8D $DC
+    ld   a, [wObjPal8 + 2*2+1]                    ; $4D83: $FA $8D $DC
     cp   [hl]                                     ; $4D86: $BE
     ret  z                                        ; $4D87: $C8
 
@@ -2255,15 +2255,15 @@ jr_036_4D89:
     ld   d, h                                     ; $4D8A: $54
     ld   hl, $FF70                                ; $4D8B: $21 $70 $FF
     ld   a, [de]                                  ; $4D8E: $1A
-    ld   [wDC8C], a                               ; $4D8F: $EA $8C $DC
+    ld   [wObjPal8 + 2*2], a                      ; $4D8F: $EA $8C $DC
     ld   [hl], $02                                ; $4D92: $36 $02
-    ld   [wDC8C], a                               ; $4D94: $EA $8C $DC
+    ld   [wObjPal8 + 2*2], a                      ; $4D94: $EA $8C $DC
     ld   [hl], $00                                ; $4D97: $36 $00
     inc  de                                       ; $4D99: $13
     ld   a, [de]                                  ; $4D9A: $1A
-    ld   [wDC8D], a                               ; $4D9B: $EA $8D $DC
+    ld   [wObjPal8 + 2*2+1], a                    ; $4D9B: $EA $8D $DC
     ld   [hl], $02                                ; $4D9E: $36 $02
-    ld   [wDC8D], a                               ; $4DA0: $EA $8D $DC
+    ld   [wObjPal8 + 2*2+1], a                    ; $4DA0: $EA $8D $DC
     ld   [hl], $00                                ; $4DA3: $36 $00
     ld   a, $02                                   ; $4DA5: $3E $02
     ld   [wPaletteDataFlags], a                   ; $4DA7: $EA $D1 $DD
@@ -2707,7 +2707,7 @@ jr_036_506B:
     pop  af                                       ; $5083: $F1
     ld   [wCurrentBank], a                        ; $5084: $EA $AF $DB
     ld   a, [wGameplayType]                       ; $5087: $FA $95 $DB
-    cp   $0B                                      ; $508A: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $508A: $FE $0B
     ret  nz                                       ; $508C: $C0
 
     ld   a, [wTransitionSequenceCounter]          ; $508D: $FA $6B $C1
@@ -2747,20 +2747,20 @@ jr_036_50B1:
 func_036_50C9::
     ldh  a, [hActiveEntityState]                  ; $50C9: $F0 $F0
      JP_TABLE                                      ; $50CB
-._00 dw func_036_50E4                             ; $50CC
-._01 dw func_036_5117                             ; $50CE
-._02 dw func_036_5134                             ; $50D0
-._03 dw func_036_5159                             ; $50D2
-._04 dw func_036_5196                             ; $50D4
-._05 dw func_036_51A6                             ; $50D6
-._06 dw func_036_524B                             ; $50D8
-._07 dw func_036_52D8                             ; $50DA
-._08 dw func_036_52FA                             ; $50DC
-._09 dw func_036_53C0                             ; $50DE
-._0A dw func_036_5428                             ; $50E0
-._0B dw func_036_544E                             ; $50E2
+._00 dw TunicFairyState0                             ; $50CC
+._01 dw TunicFairyState1                             ; $50CE
+._02 dw TunicFairyState2                             ; $50D0
+._03 dw TunicFairyState3                             ; $50D2
+._04 dw TunicFairyState4                             ; $50D4
+._05 dw TunicFairyState5                             ; $50D6
+._06 dw TunicFairyState6                             ; $50D8
+._07 dw TunicFairyState7                             ; $50DA
+._08 dw TunicFairyState8                             ; $50DC
+._09 dw TunicFairyState9                             ; $50DE
+._0A dw TunicFairyStateA                             ; $50E0
+._0B dw TunicFairyStateB                             ; $50E2
 
-func_036_50E4::
+TunicFairyState0::
     call func_036_6B8A                            ; $50E4: $CD $8A $6B
     cp   $10                                      ; $50E7: $FE $10
     ret  nc                                       ; $50E9: $D0
@@ -2790,7 +2790,7 @@ func_036_50E4::
     call IncrementEntityState                     ; $5113: $CD $12 $3B
     ret                                           ; $5116: $C9
 
-func_036_5117::
+TunicFairyState1::
     ld   a, [wDialogState]                        ; $5117: $FA $9F $C1
     and  a                                        ; $511A: $A7
     ret  nz                                       ; $511B: $C0
@@ -2815,7 +2815,7 @@ jr_036_512C:
     call IncrementEntityState                     ; $5130: $CD $12 $3B
     ret                                           ; $5133: $C9
 
-func_036_5134::
+TunicFairyState2::
     ld   a, [wDialogState]                        ; $5134: $FA $9F $C1
     and  a                                        ; $5137: $A7
     ret  nz                                       ; $5138: $C0
@@ -2841,7 +2841,7 @@ func_036_5153::
     call func_003_5A2E_trampoline                 ; $5155: $CD $6B $0A
     ret                                           ; $5158: $C9
 
-func_036_5159::
+TunicFairyState3::
     ld   a, $01                                   ; $5159: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $515B: $E0 $A1
     ld   a, [wDialogState]                        ; $515D: $FA $9F $C1
@@ -2876,7 +2876,7 @@ func_036_5159::
     call IncrementEntityState                     ; $5192: $CD $12 $3B
     ret                                           ; $5195: $C9
 
-func_036_5196::
+TunicFairyState4::
     call func_036_5153                            ; $5196: $CD $53 $51
     call GetEntityTransitionCountdown             ; $5199: $CD $05 $0C
     ret  nz                                       ; $519C: $C0
@@ -2885,7 +2885,7 @@ func_036_5196::
     call IncrementEntityState                     ; $51A2: $CD $12 $3B
     ret                                           ; $51A5: $C9
 
-func_036_51A6::
+TunicFairyState5::
     ld   a, $02                                   ; $51A6: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $51A8: $E0 $A1
     ld   [wC167], a                               ; $51AA: $EA $67 $C1
@@ -2990,7 +2990,7 @@ jr_036_5248:
     ldh  [hMultiPurpose2], a                           ; $5248: $E0 $D9
     ret                                           ; $524A: $C9
 
-func_036_524B::
+TunicFairyState6::
     ld   a, $02                                   ; $524B: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $524D: $E0 $A1
     ld   [wC167], a                               ; $524F: $EA $67 $C1
@@ -3001,7 +3001,7 @@ func_036_524B::
     ld   hl, wEntitiesUnknownTableD               ; $5257: $21 $D0 $C2
     add  hl, bc                                   ; $525A: $09
     inc  [hl]                                     ; $525B: $34
-    ld   hl, wDC54                                ; $525C: $21 $54 $DC
+    ld   hl, wObjPal1 + 2*2                       ; $525C: $21 $54 $DC
     ld   a, [wTunicType]                          ; $525F: $FA $0F $DC
     and  a                                        ; $5262: $A7
     jr   z, jr_036_526E                           ; $5263: $28 $09
@@ -3082,7 +3082,7 @@ jr_036_5297:
     call IncrementEntityState                     ; $52D4: $CD $12 $3B
     ret                                           ; $52D7: $C9
 
-func_036_52D8::
+TunicFairyState7::
     ld   a, $02                                   ; $52D8: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $52DA: $E0 $A1
     ld   [wC167], a                               ; $52DC: $EA $67 $C1
@@ -3105,7 +3105,7 @@ jr_036_52F2:
     call IncrementEntityState                     ; $52F6: $CD $12 $3B
     ret                                           ; $52F9: $C9
 
-func_036_52FA::
+TunicFairyState8::
     ld   a, $02                                   ; $52FA: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $52FC: $E0 $A1
     ld   [wC167], a                               ; $52FE: $EA $67 $C1
@@ -3153,7 +3153,7 @@ Data_036_5378::
     db   $99, $80, $53, $00, $99, $A0, $53, $00, $99, $C0, $53, $00, $99, $E0, $53, $00
     db   $9A, $00, $53, $00, $9A, $20, $53, $00
 
-func_036_53C0::
+TunicFairyState9::
     call func_036_5153                            ; $53C0: $CD $53 $51
     push bc                                       ; $53C3: $C5
     ld   hl, wEntitiesPrivateState1Table          ; $53C4: $21 $B0 $C2
@@ -3225,8 +3225,9 @@ jr_036_5412:
     call IncrementEntityState                     ; $5424: $CD $12 $3B
     ret                                           ; $5427: $C9
 
+TunicFairyStateA::
 func_036_5428::
-    ld   de, wDC18                                ; $5428: $11 $18 $DC
+    ld   de, wBGPal2                              ; $5428: $11 $18 $DC
     ld   hl, $FF70                                ; $542B: $21 $70 $FF
     di                                            ; $542E: $F3
 
@@ -3249,7 +3250,7 @@ jr_036_542F:
     call IncrementEntityState                     ; $544A: $CD $12 $3B
     ret                                           ; $544D: $C9
 
-func_036_544E::
+TunicFairyStateB::
     call func_036_5153                            ; $544E: $CD $53 $51
     ld   a, [wDialogState]                        ; $5451: $FA $9F $C1
     and  a                                        ; $5454: $A7
@@ -7562,7 +7563,7 @@ func_036_6D4D::
     ld   a, [hl+]                                 ; $6D66: $2A
     ld   h, [hl]                                  ; $6D67: $66
     ld   l, a                                     ; $6D68: $6F
-    ld   de, wDC48                                ; $6D69: $11 $48 $DC
+    ld   de, wBGPal8                              ; $6D69: $11 $48 $DC
     ld   bc, $08                                  ; $6D6C: $01 $08 $00
     call CopyData                                 ; $6D6F: $CD $14 $29
     ld   a, $01                                   ; $6D72: $3E $01
@@ -7580,7 +7581,7 @@ jr_036_6D78:
     jr   z, jr_036_6D8E                           ; $6D81: $28 $0B
 
     ld   hl, Data_036_6D01                        ; $6D83: $21 $01 $6D
-    ld   de, wDC80                                ; $6D86: $11 $80 $DC
+    ld   de, wObjPal7                             ; $6D86: $11 $80 $DC
     ld   bc, $10                                  ; $6D89: $01 $10 $00
     jr   jr_036_6D9E                              ; $6D8C: $18 $10
 
@@ -7592,7 +7593,7 @@ jr_036_6D8E:
     ld   a, [hl+]                                 ; $6D95: $2A
     ld   h, [hl]                                  ; $6D96: $66
     ld   l, a                                     ; $6D97: $6F
-    ld   de, wDC88                                ; $6D98: $11 $88 $DC
+    ld   de, wObjPal8                             ; $6D98: $11 $88 $DC
     ld   bc, $08                                  ; $6D9B: $01 $08 $00
 
 jr_036_6D9E:
@@ -7930,7 +7931,7 @@ Data_036_7036::
     db   $FF, $47, $19, $14, $0A, $10, $00, $00
 
 func_036_703E::
-    ld   hl, wDC88                                ; $703E: $21 $88 $DC
+    ld   hl, wObjPal8                             ; $703E: $21 $88 $DC
     ld   de, Data_036_7036                        ; $7041: $11 $36 $70
 
 jr_036_7044:
@@ -8003,7 +8004,7 @@ Data_036_7096::
     db   $17, $14, $BD, $5E, $D7, $04, $FD, $56, $37, $05, $1D, $57, $97, $09, $3D, $5B
     db   $F5, $09, $5C, $5B, $10, $0A, $5A, $5B, $4B, $06, $79, $57, $A0, $02, $95, $57
 
-func_036_70D6::
+cycleInstrumentItemColor::
     ld   a, [wPaletteUnknownE]                    ; $70D6: $FA $D5 $DD
     ld   a, [wTransitionSequenceCounter]          ; $70D9: $FA $6B $C1
     cp   $04                                      ; $70DC: $FE $04
@@ -8011,7 +8012,7 @@ func_036_70D6::
 
 IF __PATCH_0__
     xor  a
-    ld   [wDC52], a
+    ld   [wObjPal1 + 1*2], a
 ENDC
 
     ldh  a, [hIsGBC]                              ; $70DF: $F0 $FE
@@ -8025,7 +8026,7 @@ ENDC
     ld   d, $00                                   ; $70EA: $16 $00
     ld   hl, Data_036_7096                        ; $70EC: $21 $96 $70
     add  hl, de                                   ; $70EF: $19
-    ld   de, wDC5C                                ; $70F0: $11 $5C $DC
+    ld   de, wObjPal2 + 2*2                       ; $70F0: $11 $5C $DC
 
 jr_036_70F3:
     ld   a, [hl+]                                 ; $70F3: $2A
@@ -8336,7 +8337,7 @@ func_036_72D5:
 ._04 dw func_036_730a
 
 func_036_72e4:
-    ld   a, [wDC52]
+    ld   a, [wObjPal1 + 1*2]
     inc  a
     ret  nz
 
@@ -8354,7 +8355,7 @@ func_036_72f3:
     and  a
     jr   nz, func_036_730a
 
-    ld   hl, wDC64
+    ld   hl, wObjPal3 + 2*2
     ld   a, $ff
     ld   [hl+], a
     ld   a, $7f

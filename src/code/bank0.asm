@@ -477,9 +477,9 @@ func_036_703E_trampoline::
     callsb func_036_703E                          ; $0AC7: $3E $36 $EA $00 $21 $CD $3E $70
     jp   RestoreStackedBankAndReturn              ; $0ACF: $C3 $73 $09
 
-func_036_70D6_trampoline::
+cycleInstrumentItemColor_trampoline::
     push af                                       ; $0AD2: $F5
-    callsb func_036_70D6                          ; $0AD3: $3E $36 $EA $00 $21 $CD $D6 $70
+    callsb cycleInstrumentItemColor               ; $0AD3: $3E $36 $EA $00 $21 $CD $D6 $70
     jp   RestoreStackedBankAndReturn              ; $0ADB: $C3 $73 $09
 
 func_036_4A77_trampoline::

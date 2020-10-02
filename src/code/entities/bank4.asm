@@ -5395,7 +5395,7 @@ jr_004_6F6C:
     ld   hl, wEntitiesUnknowTableR                ; $6FAD: $21 $90 $C3
     add  hl, bc                                   ; $6FB0: $09
     ld   [hl], a                                  ; $6FB1: $77
-    ld   hl, wDC78                                ; $6FB2: $21 $78 $DC
+    ld   hl, wObjPal6                             ; $6FB2: $21 $78 $DC
     ld   de, Data_004_6F30                        ; $6FB5: $11 $30 $6F
 
 jr_004_6FB8:
@@ -7318,7 +7318,7 @@ func_004_7AED::
     and  a                                        ; $7B29: $A7
     jr   z, jr_004_7B3F                           ; $7B2A: $28 $13
 
-    ld   hl, wDC88                                ; $7B2C: $21 $88 $DC
+    ld   hl, wObjPal8                             ; $7B2C: $21 $88 $DC
     ld   de, Data_004_7AE5                        ; $7B2F: $11 $E5 $7A
 
 jr_004_7B32:

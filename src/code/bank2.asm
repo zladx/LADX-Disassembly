@@ -2038,7 +2038,7 @@ jr_002_4DCB:
 func_002_4DFC::
     push bc                                       ; $4DFC: $C5
     push de                                       ; $4DFD: $D5
-    ld   hl, wDC50                                ; $4DFE: $21 $50 $DC
+    ld   hl, wObjPal1                             ; $4DFE: $21 $50 $DC
     ld   c, $00                                   ; $4E01: $0E $00
     di                                            ; $4E03: $F3
 
@@ -2072,7 +2072,7 @@ func_002_4E2C::
     di                                            ; $4E2D: $F3
     ld   hl, Data_002_4E1C                        ; $4E2E: $21 $1C $4E
     add  hl, de                                   ; $4E31: $19
-    ld   de, wDC88                                ; $4E32: $11 $88 $DC
+    ld   de, wObjPal8                             ; $4E32: $11 $88 $DC
     ld   c, $00                                   ; $4E35: $0E $00
 
 jr_002_4E37:
@@ -2093,7 +2093,7 @@ jr_002_4E37:
 ; Copy data from RAM bank 2 to RAM bank 0
 func_002_4E48::
     di                                            ; $4E48: $F3
-    ld   hl, wDC88                                ; $4E49: $21 $88 $DC
+    ld   hl, wObjPal8                             ; $4E49: $21 $88 $DC
     ld   e, $00                                   ; $4E4C: $1E $00
 
 .loop

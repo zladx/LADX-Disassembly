@@ -5815,15 +5815,15 @@ IF __PATCH_0__
     and  a
     ret  z
 
-    ld   hl, wDC64
+    ld   hl, wObjPal3 + 2*2
     ld   a, $3f
     ld   [hl+], a
     ld   a, $14
     ld   [hl], a
     ld   a, $0a
-    ld   [wPaletteUnknownC], a
+    ld   [wPaletteParticalCopyColorIndexStart], a
     ld   a, $01
-    ld   [wPaletteUnknownD], a
+    ld   [wPaletteParticalCopyColorCount], a
     ld   a, $82
     ld   [wPaletteDataFlags], a
 ENDC
@@ -5842,7 +5842,7 @@ jr_007_659D:
     and  a                                        ; $65AF: $A7
     jr   z, jr_007_65CB                           ; $65B0: $28 $19
 
-    ld   de, wDC18                                ; $65B2: $11 $18 $DC
+    ld   de, wBGPal2                              ; $65B2: $11 $18 $DC
     ld   hl, $FF70                                ; $65B5: $21 $70 $FF
     di                                            ; $65B8: $F3
 

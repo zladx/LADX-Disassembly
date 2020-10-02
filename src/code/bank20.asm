@@ -2329,7 +2329,7 @@ InventoryInitialHandler::
     and  a
     jr   z, jr_020_5940                           ; $5925: $28 $19
 
-    ld   hl, wDC10                                ; $5927: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $5927: $21 $10 $DC
     ld   c, $80                                   ; $592A: $0E $80
     di                                            ; $592C: $F3
 
@@ -3164,7 +3164,7 @@ InventoryLoad5Handler::
     jr   z, jr_020_5E6D                           ; $5E26: $28 $45
 
     ld   bc, InventoryPalettes                        ; $5E28: $01 $61 $5D
-    ld   hl, wDC10                                ; $5E2B: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $5E2B: $21 $10 $DC
     di                                            ; $5E2E: $F3
     ld   a, $02                                   ; $5E2F: $3E $02
     ldh  [rSVBK], a                               ; $5E31: $E0 $70
@@ -3196,7 +3196,7 @@ InventoryLoad5Handler::
     ld   a, [hl+]                                 ; $5E54: $2A
     ld   h, [hl]                                  ; $5E55: $66
     ld   l, a                                     ; $5E56: $6F
-    ld   de, wDC3A                                ; $5E57: $11 $3A $DC
+    ld   de, wBGPal6 + 2                          ; $5E57: $11 $3A $DC
     ld   c, $04                                   ; $5E5A: $0E $04
     di                                            ; $5E5C: $F3
     ld   a, $02                                   ; $5E5D: $3E $02
@@ -3265,7 +3265,7 @@ jr_020_5ED6:
     ld   b, $00                                   ; $5ED6: $06 $00
     ld   hl, InventoryInstrumentCyclingColors                        ; $5ED8: $21 $75 $5E
     add  hl, bc                                   ; $5EDB: $09
-    ld   bc, wDC4A                                ; $5EDC: $01 $4A $DC
+    ld   bc, wBGPal8 + 1*2                        ; $5EDC: $01 $4A $DC
     ld   e, $04                                   ; $5EDF: $1E $04
 
 jr_020_5EE1:
@@ -4401,7 +4401,7 @@ jr_020_6630:
     and  a                                        ; $6650: $A7
     jr   z, jr_020_6682                           ; $6651: $28 $2F
 
-    ld   hl, wDC10                                ; $6653: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $6653: $21 $10 $DC
     ld   c, $80                                   ; $6656: $0E $80
     di                                            ; $6658: $F3
 
@@ -4608,7 +4608,7 @@ func_020_6A30::
     ldh  [hMultiPurposeE], a                           ; $6A40: $E0 $E5
     ld   a, $04                                   ; $6A42: $3E $04
     ldh  [hFreeWarpDataAddress], a                ; $6A44: $E0 $E6
-    ld   hl, wDC10                                ; $6A46: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $6A46: $21 $10 $DC
     ld   d, $40                                   ; $6A49: $16 $40
     ld   a, e                                     ; $6A4B: $7B
     cp   $06                                      ; $6A4C: $FE $06
@@ -4714,7 +4714,7 @@ func_020_6AC1::
     ldh  [hMultiPurposeE], a                           ; $6AD1: $E0 $E5
     ld   a, $04                                   ; $6AD3: $3E $04
     ldh  [hFreeWarpDataAddress], a                ; $6AD5: $E0 $E6
-    ld   hl, wDC10                                ; $6AD7: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $6AD7: $21 $10 $DC
     ld   a, $40                                   ; $6ADA: $3E $40
     ldh  [hMultiPurpose3], a                           ; $6ADC: $E0 $DA
     ld   a, e                                     ; $6ADE: $7B
@@ -4896,7 +4896,7 @@ jr_020_6BB4:
     add  hl, de                                   ; $6BB9: $19
     push hl                                       ; $6BBA: $E5
     pop  bc                                       ; $6BBB: $C1
-    ld   hl, wDC10                                ; $6BBC: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $6BBC: $21 $10 $DC
     ld   a, $08                                   ; $6BBF: $3E $08
     ldh  [hMultiPurpose0], a                           ; $6BC1: $E0 $D7
 
@@ -4923,8 +4923,8 @@ func_020_6BDC::
     and  a                                        ; $6BDE: $A7
     ret  z                                        ; $6BDF: $C8
 
-    ld   hl, wDC10                                ; $6BE0: $21 $10 $DC
-    ld   bc, wDC50                                ; $6BE3: $01 $50 $DC
+    ld   hl, wBGPal1                              ; $6BE0: $21 $10 $DC
+    ld   bc, wObjPal1                             ; $6BE3: $01 $50 $DC
     ld   d, $20                                   ; $6BE6: $16 $20
 
 jr_020_6BE8:
@@ -4952,7 +4952,7 @@ LoadFileMenuBG::
     jp   z, label_020_6B81                        ; $6C03: $CA $81 $6B
 
     ld   c, $80                                   ; $6C06: $0E $80
-    ld   hl, wDC10                                ; $6C08: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $6C08: $21 $10 $DC
 
 jr_020_6C0B:
     ld   a, $02                                   ; $6C0B: $3E $02
@@ -4980,7 +4980,7 @@ CopyLinkTunicPalette::
     and  a                                        ; $6C26: $A7
     jr   z, .return                               ; $6C27: $28 $25
 
-    ld   hl, wDC50                                ; $6C29: $21 $50 $DC
+    ld   hl, wObjPal1                             ; $6C29: $21 $50 $DC
     ld   a, [wTunicType]                          ; $6C2C: $FA $0F $DC
     and  a                                        ; $6C2F: $A7
     jr   z, .specialTunicEnd                      ; $6C30: $28 $0B
@@ -5033,7 +5033,7 @@ jr_020_6C60:
     ldh  [hMultiPurposeE], a                           ; $6C66: $E0 $E5
     ld   a, $10                                   ; $6C68: $3E $10
     ldh  [hFreeWarpDataAddress], a                ; $6C6A: $E0 $E6
-    ld   hl, wDC10                                ; $6C6C: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $6C6C: $21 $10 $DC
     ld   d, $40                                   ; $6C6F: $16 $40
     call func_020_6A68                            ; $6C71: $CD $68 $6A
     ld   a, $01                                   ; $6C74: $3E $01
@@ -5061,7 +5061,7 @@ jr_020_6C8B:
     ldh  [hMultiPurposeE], a                           ; $6C91: $E0 $E5
     ld   a, $10                                   ; $6C93: $3E $10
     ldh  [hFreeWarpDataAddress], a                ; $6C95: $E0 $E6
-    ld   hl, wDC10                                ; $6C97: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $6C97: $21 $10 $DC
     ld   a, $40                                   ; $6C9A: $3E $40
     ldh  [hMultiPurpose3], a                           ; $6C9C: $E0 $DA
     call func_020_6AF5                            ; $6C9E: $CD $F5 $6A
@@ -5088,9 +5088,9 @@ jr_020_6CB5:
     ld   a, [wC3CA]                               ; $6CBA: $FA $CA $C3
     and  $01                                      ; $6CBD: $E6 $01
     swap a                                        ; $6CBF: $CB $37
-    ld   [wPaletteUnknownC], a                    ; $6CC1: $EA $D3 $DD
+    ld   [wPaletteParticalCopyColorIndexStart], a ; $6CC1: $EA $D3 $DD
     ld   a, $10                                   ; $6CC4: $3E $10
-    ld   [wPaletteUnknownD], a                    ; $6CC6: $EA $D4 $DD
+    ld   [wPaletteParticalCopyColorCount], a      ; $6CC6: $EA $D4 $DD
     pop  af                                       ; $6CC9: $F1
     inc  a                                        ; $6CCA: $3C
     ld   [wC3CA], a                               ; $6CCB: $EA $CA $C3
@@ -5100,7 +5100,7 @@ jr_020_6CB5:
     ldh  [hMultiPurposeE], a                           ; $6CD4: $E0 $E5
     ld   a, $20                                   ; $6CD6: $3E $20
     ldh  [hFreeWarpDataAddress], a                ; $6CD8: $E0 $E6
-    ld   hl, wDC10                                ; $6CDA: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $6CDA: $21 $10 $DC
     ld   a, $40                                   ; $6CDD: $3E $40
     ldh  [hMultiPurpose3], a                           ; $6CDF: $E0 $DA
     ld   a, [wTransitionGfx]                      ; $6CE1: $FA $7F $C1
@@ -5157,9 +5157,9 @@ jr_020_6D1E:
     ld   a, $04                                   ; $6D2C: $3E $04
     ldh  [hFreeWarpDataAddress], a                ; $6D2E: $E0 $E6
 IF __PATCH_3__
-    ld   hl, wDC50
+    ld   hl, wObjPal1
 ELSE
-    ld   hl, wDC30                                ; $6D30: $21 $30 $DC
+    ld   hl, wBGPal5                              ; $6D30: $21 $30 $DC
 ENDC
     ld   d, $20                                   ; $6D33: $16 $20
     call func_020_6A68                            ; $6D35: $CD $68 $6A
@@ -5171,7 +5171,7 @@ jr_020_6D38:
     ldh  [hMultiPurposeE], a                           ; $6D3E: $E0 $E5
     ld   a, $04                                   ; $6D40: $3E $04
     ldh  [hFreeWarpDataAddress], a                ; $6D42: $E0 $E6
-    ld   hl, wDC10                                ; $6D44: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $6D44: $21 $10 $DC
     ld   d, $20                                   ; $6D47: $16 $20
     call func_020_6A68                            ; $6D49: $CD $68 $6A
     ld   a, $01                                   ; $6D4C: $3E $01
@@ -5188,12 +5188,12 @@ func_020_6D52::
     cp   $30                                      ; $6D55: $FE $30
     jr   c, jr_020_6D60                           ; $6D57: $38 $07
 
-    ld   hl, wDC50                                ; $6D59: $21 $50 $DC
+    ld   hl, wObjPal1                             ; $6D59: $21 $50 $DC
     ld   a, $02                                   ; $6D5C: $3E $02
     jr   jr_020_6D65                              ; $6D5E: $18 $05
 
 jr_020_6D60:
-    ld   hl, wDC10                                ; $6D60: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $6D60: $21 $10 $DC
     ld   a, $01                                   ; $6D63: $3E $01
 
 jr_020_6D65:
@@ -5817,13 +5817,13 @@ func_020_78ED::
     ld   l, b                                     ; $78FC: $68
 
     ld   bc, $38                                  ; $78FD: $01 $38 $00
-    ld   de, wDC10                                ; $7900: $11 $10 $DC
+    ld   de, wBGPal1                              ; $7900: $11 $10 $DC
     call CopyData                                 ; $7903: $CD $14 $29
 
     xor  a                                        ; $7906: $AF
-    ld   [wPaletteUnknownC], a                    ; $7907: $EA $D3 $DD
+    ld   [wPaletteParticalCopyColorIndexStart], a ; $7907: $EA $D3 $DD
     ld   a, $1C                                   ; $790A: $3E $1C
-    ld   [wPaletteUnknownD], a                    ; $790C: $EA $D4 $DD
+    ld   [wPaletteParticalCopyColorCount], a      ; $790C: $EA $D4 $DD
     ld   a, $81                                   ; $790F: $3E $81
     ld   [wPaletteDataFlags], a                   ; $7911: $EA $D1 $DD
     ret                                           ; $7914: $C9
@@ -5985,7 +5985,7 @@ func_020_7C26::
     ld   hl, Data_020_7BFE                        ; $7C39: $21 $FE $7B
     add  hl, bc                                   ; $7C3C: $09
     ld   bc, $08                                  ; $7C3D: $01 $08 $00
-    ld   de, wDC10                                ; $7C40: $11 $10 $DC
+    ld   de, wBGPal1                              ; $7C40: $11 $10 $DC
     call CopyData                                 ; $7C43: $CD $14 $29
 
     pop  bc                                       ; $7C46: $C1
@@ -5997,7 +5997,7 @@ func_020_7C26::
     jr   jr_020_7C5B                              ; $7C4E: $18 $0B
 
 jr_020_7C50:
-    ld   hl, wDC48                                ; $7C50: $21 $48 $DC
+    ld   hl, wBGPal8                              ; $7C50: $21 $48 $DC
     ld   a, $A4                                   ; $7C53: $3E $A4
     ld   [hl+], a                                 ; $7C55: $22
     ld   a, $3C                                   ; $7C56: $3E $3C
@@ -6005,9 +6005,9 @@ jr_020_7C50:
     ld   a, $20                                   ; $7C59: $3E $20
 
 jr_020_7C5B:
-    ld   [wPaletteUnknownD], a                    ; $7C5B: $EA $D4 $DD
+    ld   [wPaletteParticalCopyColorCount], a      ; $7C5B: $EA $D4 $DD
     xor  a                                        ; $7C5E: $AF
-    ld   [wPaletteUnknownC], a                    ; $7C5F: $EA $D3 $DD
+    ld   [wPaletteParticalCopyColorIndexStart], a ; $7C5F: $EA $D3 $DD
     ld   a, $81                                   ; $7C62: $3E $81
     ld   [wPaletteDataFlags], a                   ; $7C64: $EA $D1 $DD
     ret                                           ; $7C67: $C9
@@ -6131,7 +6131,7 @@ func_020_7D7C::
     ldh  [hMultiPurposeE], a                           ; $7D82: $E0 $E5
     ld   a, $0C                                   ; $7D84: $3E $0C
     ldh  [hFreeWarpDataAddress], a                ; $7D86: $E0 $E6
-    ld   hl, wDC10                                ; $7D88: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $7D88: $21 $10 $DC
     ld   d, $24                                   ; $7D8B: $16 $24
     call jr_020_7D97                              ; $7D8D: $CD $97 $7D
     ld   a, $01                                   ; $7D90: $3E $01
@@ -6238,7 +6238,7 @@ func_020_7E0E:
     ldh [hMultiPurposeE], a                            ; $7e14: $e0 $e5
     ld a, $18                                     ; $7e16: $3e $18
     ldh [hMultiPurposeF], a                            ; $7e18: $e0 $e6
-    ld hl, wDC10                                  ; $7e1a: $21 $10 $dc
+    ld hl, wBGPal1                                ; $7e1a: $21 $10 $dc
     ld a, $40                                     ; $7e1d: $3e $40
     ldh [hMultiPurpose3], a                            ; $7e1f: $e0 $da
     call Call_020_7e25                            ; $7e21: $cd $25 $7e
@@ -6371,7 +6371,7 @@ func_020_7EB1::
     ldh [hMultiPurposeE], a                            ; $7eb7: $e0 $e5
     ld a, $18                                     ; $7eb9: $3e $18
     ldh [hMultiPurposeF], a                            ; $7ebb: $e0 $e6
-    ld hl, wDC10                                  ; $7ebd: $21 $10 $dc
+    ld hl, wBGPal1                                ; $7ebd: $21 $10 $dc
     ld d, $40                                     ; $7ec0: $16 $40
     ldh [hMultiPurpose3], a                            ; $7ec2: $e0 $da
     call Call_020_7ec8                            ; $7ec4: $cd $c8 $7e

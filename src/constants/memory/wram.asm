@@ -3018,103 +3018,41 @@ wDC0E::
 wTunicType::
   ds 1 ; DC0F
 
-; Unlabeled
-; palette data?
-wDC10::
+; The buffer containing the 8 background palettes follow. 8 bytes per palette.
+wBGPal1::
   ds 8 ; DC10 - DC17
+wBGPal2::
+  ds 8 ; DC18 - DC1F
+wBGPal3::
+  ds 8 ; DC20 - DC27
+wBGPal4::
+  ds 8 ; DC28 - DC2F
+wBGPal5::
+  ds 8 ; DC30 - DC37
+wBGPal6::
+  ds 8 ; DC38 - DC3F
+wBGPal7::
+  ds 8 ; DC40 - DC47
+wBGPal8::
+  ds 8 ; DC48 - DC4F
 
-; Unlabeled
-wDC18::
-  ds 6 ; DC18 - DC1D
-
-; Unlabeled
-wDC1E::
-  ds $12 ; DC1E - DC2F
-
-; Unlabeled
-; palette data?
-wDC30::
-  ds 4 ; DC30 - DC33
-
-; Unlabeled
-wDC34::
-  ds 6 ; DC34 - DC39
-
-; Unlabeled
-wDC3A::
-  ds 14 ; DC3A - DC47
-
-; Unlabeled
-wDC48::
-  ds 2 ; DC48  - DC49
-
-; Unlabeled
-wDC4A::
-  ds 6 ; DC4A - DC4F
-
-; Unlabeled
-wDC50::
-  ds 2 ; DC50 - DC51
-
-; Unlabeled
-wDC52::
-  ds 1 ; DC52
-
-; not used
-wDC53::
-  ds 1 ; DC52
-
-; Unlabeled
-wDC54::
-  ds 2 ; DC54 - DC55
-
-; Unlabeled
-wDC56::
-  ds 6 ; DC56 - DC5B
-
-; Unlabeled
-wDC5C::
-  ds 8 ; DC5C - DC63
-
-; Unlabeled
-wDC64::
-  ds 12 ; DC64 - DC6F
-
-; Unlabeled
-wDC70::
+; The buffer containing the 8 object palettes follow. 8 bytes per palette.
+wObjPal1::
+  ds 8 ; DC50 - DC57
+wObjPal2::
+  ds 8 ; DC58 - DC5F
+wObjPal3::
+  ds 8 ; DC60 - DC67
+wObjPal4::
+  ds 8 ; DC68 - DC6F
+wObjPal5::
   ds 8 ; DC70 - DC77
-
-; Unlabeled
-wDC78::
-  ds 2 ; DC78 - DC79
-
-; Unlabeled
-wDC7A::
-  ds 6 ; DC7A - DC7F
-
-; Unlabeled
-wDC80::
-  ds 4 ; DC80 - DC83
-
-; Unlabeled
-wDC84::
-  ds 4 ; DC84 - DC87
-
-; Unlabeled
-wDC88::
-  ds 2 ; DC88 - DC89
-
-; Unlabeled
-wDC8A::
-  ds 2 ; DC8A - DC8B
-
-; Unlabeled
-wDC8C::
-  ds 1 ; DC8C
-
-; Unlabeled
-wDC8D::
-  ds 3 ; DC8D
+wObjPal6::
+  ds 8 ; DC78 - DC7F
+wObjPal7::
+  ds 8 ; DC80 - DC87
+wObjPal8::
+  ds 8 ; DC88 - DC8F
 
 ; Unlabeled
 wDC90::
@@ -3145,8 +3083,9 @@ wDCF0::
   ds $E1 ; DCF0 -DDD0
 
 ; Palette flags for copying palettes to hardware.
-; byte 0 = if enabled, palette data is for BG (otherwise for objects),
-; byte 2 = unknown
+; bit 0: If set, copy background palette to hardware during vblank
+; bit 1: If set, copy object palette to hardware during vblank
+; bit 7: If set, do a partial copy specified by wPaletteParticalCopyColorIndexStart and wPaletteParticalCopyColorCount
 wPaletteDataFlags::
   ds 1 ; DDD1
 
@@ -3155,12 +3094,12 @@ wPaletteDataFlags::
 wPaletteToLoadForTileMap::
   ds 1 ; DDD2
 
-; TODO comment
-wPaletteUnknownC::
+; Palete color index to start copying palette data from if bit 7 is set in wPaletteDataFlags
+wPaletteParticalCopyColorIndexStart::
   ds 1 ; DDD3
 
-; TODO comment
-wPaletteUnknownD::
+; Amount of colors to copy if bit 7 is set in wPaletteDataFlags
+wPaletteParticalCopyColorCount::
   ds 1 ; DDD4
 
 ; TODO comment

@@ -70,12 +70,12 @@ include "data/backgrounds/attributes.asm"
 include "data/backgrounds/palette_pointers.asm"
 
 BGPaletteDestinationsTable::
-    dw   $DC10                                    ; $73F9
-    dw   $DC30                                    ; $73FB
-    dw   $DC10                                    ; $73FD
-    dw   $DC30                                    ; $73FF
-    dw   $DC10                                    ; $7401
-    dw   $DC30                                    ; $7403
+    dw   wBGPal1                                  ; $73F9
+    dw   wBGPal5                                  ; $73FB
+    dw   wBGPal1                                  ; $73FD
+    dw   wBGPal5                                  ; $73FF
+    dw   wBGPal1                                  ; $7401
+    dw   wBGPal5                                  ; $7403
 
 LoadBGPalettes::
     ld   a, [wIsIndoor]                           ; $7405: $FA $A5 $DB
@@ -134,9 +134,9 @@ jr_024_7436:
     and  $01                                      ; $7456: $E6 $01
     swap a                                        ; $7458: $CB $37
 
-    ld   [wPaletteUnknownC], a                    ; $745A: $EA $D3 $DD
+    ld   [wPaletteParticalCopyColorIndexStart], a ; $745A: $EA $D3 $DD
     ld   a, $10                                   ; $745D: $3E $10
-    ld   [wPaletteUnknownD], a                    ; $745F: $EA $D4 $DD
+    ld   [wPaletteParticalCopyColorCount], a      ; $745F: $EA $D4 $DD
     ld   a, $81                                   ; $7462: $3E $81
     ld   [wPaletteDataFlags], a                    ; $7464: $EA $D1 $DD
     ld   a, [wDDD6]                               ; $7467: $FA $D6 $DD

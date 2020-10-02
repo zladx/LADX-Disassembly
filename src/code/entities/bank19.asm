@@ -851,7 +851,7 @@ jr_019_4663:
     add  hl, de                                   ; $4675: $19
     ld   e, l                                     ; $4676: $5D
     ld   d, h                                     ; $4677: $54
-    ld   hl, wDC8A                                ; $4678: $21 $8A $DC
+    ld   hl, wObjPal8 + 1*2                       ; $4678: $21 $8A $DC
 
 jr_019_467B:
     ld   a, [de]                                  ; $467B: $1A
@@ -1469,7 +1469,7 @@ func_019_4A90::
     ld   d, $00                                   ; $4AA4: $16 $00
     ld   hl, Data_019_4A50                        ; $4AA6: $21 $50 $4A
     add  hl, de                                   ; $4AA9: $19
-    ld   de, wDC84                                ; $4AAA: $11 $84 $DC
+    ld   de, wObjPal7 + 2*2                       ; $4AAA: $11 $84 $DC
 
 jr_019_4AAD:
     ld   a, [hl+]                                 ; $4AAD: $2A
@@ -1804,7 +1804,7 @@ jr_019_4C88:
     ldh  [hJingle], a                             ; $4CC8: $E0 $F2
     call func_019_4D45                            ; $4CCA: $CD $45 $4D
     call PlayBombExplosionSfx                     ; $4CCD: $CD $4B $0C
-    ld   de, wDC5C                                ; $4CD0: $11 $5C $DC
+    ld   de, wObjPal2 + 2*2                       ; $4CD0: $11 $5C $DC
     ld   hl, $FF70                                ; $4CD3: $21 $70 $FF
 
 jr_019_4CD6:
@@ -6166,7 +6166,7 @@ BananasSchuleState2Handler::
     and  a                                        ; $6DBD: $A7
     jr   z, jr_019_6DD4                           ; $6DBE: $28 $14
 
-    ld   hl, wDC7A                                ; $6DC0: $21 $7A $DC
+    ld   hl, wObjPal6 + 1*2                       ; $6DC0: $21 $7A $DC
     ld   a, $FF                                   ; $6DC3: $3E $FF
     ld   [hl+], a                                 ; $6DC5: $22
     ld   a, $7F                                   ; $6DC6: $3E $7F

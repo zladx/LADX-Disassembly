@@ -574,7 +574,7 @@ jr_005_4C88:
     call_open_dialog $054                         ; $4C8C
     jp   IncrementEntityState                     ; $4C91: $C3 $12 $3B
 
-; This data is pushed into DC88
+; This data is pushed into wObjPal8
 data_005_4C94::
     db   $FF, $47, $31, $52, $C5, $28, $00, $00
 
@@ -591,7 +591,7 @@ TarinShield1Handler::
     and  a                                        ; $4CAD: $A7
     jr   z, jr_005_4CC3                           ; $4CAE: $28 $13
 
-    ld   hl, wDC88                                ; $4CB0: $21 $88 $DC
+    ld   hl, wObjPal8                             ; $4CB0: $21 $88 $DC
     ld   de, data_005_4C94                        ; $4CB3: $11 $94 $4C
 
 jr_005_4CB6:

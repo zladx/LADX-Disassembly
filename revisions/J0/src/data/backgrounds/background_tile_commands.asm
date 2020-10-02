@@ -1,7 +1,7 @@
 ; File generated automatically by `tools/generate_background_data.py`
 
 
-BackgroundTileCommands24 ; $4DD4
+BackgroundTileCommands24:: ; $4DD4
   db    $9B, $E0, $53, $7C ; draw row of 20x the same tile
   db    $98, $00, $53, $7C ; draw row of 20x the same tile
   db    $98, $20, $53, $7C ; draw row of 20x the same tile

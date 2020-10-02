@@ -44,7 +44,7 @@ MarineBeachPrepare0::
     and  a                                        ; $6244: $A7
     jr   z, MarineBeachPrepare1                   ; $6245: $28 $19
 
-    ld   hl, wDC10                                ; $6247: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $6247: $21 $10 $DC
     ld   c, $80                                   ; $624A: $0E $80
     di                                            ; $624C: $F3
 

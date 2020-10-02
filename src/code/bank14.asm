@@ -355,7 +355,7 @@ func_014_4BA7::
     jr   z, jr_014_4BBE                           ; $4BAD: $28 $0F
 
     ld   de, Data_014_4B8F                        ; $4BAF: $11 $8F $4B
-    ld   hl, wDC10                                ; $4BB2: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $4BB2: $21 $10 $DC
     ld   b, $40                                   ; $4BB5: $06 $40
     call func_014_4BDA                            ; $4BB7: $CD $DA $4B
     ld   a, $01                                   ; $4BBA: $3E $01
@@ -363,11 +363,11 @@ func_014_4BA7::
 
 jr_014_4BBE:
     ld   de, Data_014_4B97                        ; $4BBE: $11 $97 $4B
-    ld   hl, wDC50                                ; $4BC1: $21 $50 $DC
+    ld   hl, wObjPal1                             ; $4BC1: $21 $50 $DC
     ld   b, $20                                   ; $4BC4: $06 $20
     call func_014_4BDA                            ; $4BC6: $CD $DA $4B
     ld   de, Data_014_4B9F                        ; $4BC9: $11 $9F $4B
-    ld   hl, wDC70                                ; $4BCC: $21 $70 $DC
+    ld   hl, wObjPal5                             ; $4BCC: $21 $70 $DC
     ld   b, $20                                   ; $4BCF: $06 $20
     call func_014_4BDA                            ; $4BD1: $CD $DA $4B
     ld   a, $02                                   ; $4BD4: $3E $02
@@ -406,13 +406,13 @@ func_014_4BEF::
 
     jr   z, jr_014_4C04                           ; $4BF8: $28 $0A
 
-    ld   hl, wDC10                                ; $4BFA: $21 $10 $DC
+    ld   hl, wBGPal1                              ; $4BFA: $21 $10 $DC
     call func_014_4C10                            ; $4BFD: $CD $10 $4C
     ld   a, $01                                   ; $4C00: $3E $01
     jr   jr_014_4BD6                              ; $4C02: $18 $D2
 
 jr_014_4C04:
-    ld   hl, wDC50                                ; $4C04: $21 $50 $DC
+    ld   hl, wObjPal1                             ; $4C04: $21 $50 $DC
     call func_014_4C10                            ; $4C07: $CD $10 $4C
     ld   a, $02                                   ; $4C0A: $3E $02
     ld   [wPaletteDataFlags], a                   ; $4C0C: $EA $D1 $DD
@@ -646,9 +646,9 @@ jr_014_4D4A:
     ld   a, [wDDD7]                               ; $4D4A: $FA $D7 $DD
     xor  $01                                      ; $4D4D: $EE $01
     swap a                                        ; $4D4F: $CB $37
-    ld   [wPaletteUnknownC], a                    ; $4D51: $EA $D3 $DD
+    ld   [wPaletteParticalCopyColorIndexStart], a ; $4D51: $EA $D3 $DD
     ld   a, $10                                   ; $4D54: $3E $10
-    ld   [wPaletteUnknownD], a                    ; $4D56: $EA $D4 $DD
+    ld   [wPaletteParticalCopyColorCount], a      ; $4D56: $EA $D4 $DD
     ld   a, $81                                   ; $4D59: $3E $81
     ld   [wPaletteDataFlags], a                   ; $4D5B: $EA $D1 $DD
     ld   a, [wDDD7]                               ; $4D5E: $FA $D7 $DD

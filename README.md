@@ -25,12 +25,14 @@ md5: 1043fd167d0ed9c4094e3c9d8e757f1e`
 - azlf-r1.gbc (French, v1.1) `
 md5: 68242187b65166b5f8225b20e2021659`
 
+Additionnaly, a wiki includes a [high-level overview of the game engine](https://github.com/zladx/LADX-Disassembly/wiki/Game-engine-documentation), and technical informations on the [data formats used](https://github.com/zladx/LADX-Disassembly/wiki/Maps-data-format) throughout the game.
+
 ## Usage
 
 1. Install Python 3 and [rgbds](https://github.com/rednex/rgbds#1-installing-rgbds) (version >= 0.4.0 required);
 2. `make all`.
 
-This will build both the games and their debug symbols. Use [BGB](https://github.com/zladx/LADX-Disassembly/wiki/Tooling-for-reverse-engineering#bgb) to load the debug symbols into the debugger.
+This will build both the games and their debug symbols. Once built, use [BGB](https://github.com/zladx/LADX-Disassembly/wiki/Tooling-for-reverse-engineering#bgb) to load the debug symbols into the debugger.
 
 ## How to contribute
 

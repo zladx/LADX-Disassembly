@@ -2421,7 +2421,7 @@ DropTableRandom::
 ;  - A random object set by the drop table
 ;
 ; Input:
-;   bc   destroyed entity index
+;   bc   destroyed entity index (b=0)
 SpawnEnemyDrop::
     ldh  a, [hActiveEntityType]                   ; $55CF: $F0 $EB
     cp   ENTITY_LIKE_LIKE                         ; $55D1: $FE $23
@@ -2563,23 +2563,21 @@ SpawnEnemyDrop::
     ld   hl, wEntitiesPrivateState1Table          ; $5679: $21 $B0 $C2
     add  hl, de                                   ; $567C: $19
     ld   [hl], a                                  ; $567D: $77
-
-    ldh  a, [hMultiPurpose0]                           ; $567E: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $567E: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $5680: $21 $00 $C2
     add  hl, de                                   ; $5683: $19
     ld   [hl], a                                  ; $5684: $77
-    ldh  a, [hMultiPurpose1]                           ; $5685: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $5685: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $5687: $21 $10 $C2
     add  hl, de                                   ; $568A: $19
     ld   [hl], a                                  ; $568B: $77
-
+    ; configure timers
     ld   hl, wEntitiesDropTimerTable              ; $568C: $21 $50 $C4
     add  hl, de                                   ; $568F: $19
-    ld   [hl], $80                                ; $5690: $36 $80
-
+    ld   [hl], DROP_DESPAWN_TIME                  ; $5690: $36 $80
     ld   hl, wEntitiesPrivateCountdown1Table      ; $5692: $21 $F0 $C2
     add  hl, de                                   ; $5695: $19
-    ld   [hl], $18                                ; $5696: $36 $18
+    ld   [hl], DROP_COUNTDOWN_TIME                ; $5696: $36 $18
 
     ld   hl, wEntitiesUnknowTableV                ; $5698: $21 $80 $C4
     add  hl, de                                   ; $569B: $19
@@ -2593,25 +2591,25 @@ SpawnEnemyDrop::
     add  hl, de                                   ; $56A6: $19
     ld   a, [hl]                                  ; $56A7: $7E
     cp   ENTITY_KEY_DROP_POINT                    ; $56A8: $FE $30
-    jr   nz, .jr_003_56B8                         ; $56AA: $20 $0C
+    jr   nz, .noSpriteUpdate                      ; $56AA: $20 $0C
 
     ldh  a, [hActiveEntityType]                   ; $56AC: $F0 $EB
     cp   ENTITY_ARMOS_KNIGHT                      ; $56AE: $FE $88
-    jr   nz, .jr_003_56B8                         ; $56B0: $20 $06
+    jr   nz, .noSpriteUpdate                      ; $56B0: $20 $06
 
     ld   hl, wEntitiesSpriteVariantTable          ; $56B2: $21 $B0 $C3
     add  hl, de                                   ; $56B5: $19
     ld   [hl], $03                                ; $56B6: $36 $03
 
-.jr_003_56B8:
+.noSpriteUpdate:
     cp   ENTITY_HIDING_SLIME_KEY                  ; $56B8: $FE $3C
     jr   nz, .slimeKeyEnd                         ; $56BA: $20 $15
 
     ldh  a, [hMapRoom]                            ; $56BC: $F0 $F6
-    cp   $58                                      ; Overworld Kanalet Castle crow room
+    cp   OVERWORLD_KANALET_CASTLE_CROW_ROOM       ; Overworld Kanalet Castle crow room
     jr   z, .moveKeyTowardsLink                   ; $56C0: $28 $04
 
-    cp   $5A                                      ; Overwrold Kanalet Castle five-pits room
+    cp   OVERWORLD_KANALET_CASTLE_FIVE_PITS_ROOM  ; Overwrold Kanalet Castle five-pits room
     jr   nz, .slimeKeyEnd                         ; $56C4: $20 $0B
 
 .moveKeyTowardsLink:
@@ -2623,8 +2621,8 @@ SpawnEnemyDrop::
     call ApplyVectorTowardsLink                   ; $56CC: $CD $C7 $7E
     pop  de                                       ; $56CF: $D1
     pop  bc                                       ; $56D0: $C1
-.slimeKeyEnd:
 
+.slimeKeyEnd:
     ld   hl, wEntitiesSpeedZTable                 ; $56D1: $21 $20 $C3
     add  hl, de                                   ; $56D4: $19
     ld   [hl], $18                                ; $56D5: $36 $18
@@ -2643,7 +2641,6 @@ SpawnEnemyDrop::
     ld   hl, wEntitiesPosZTable                   ; $56E4: $21 $10 $C3
     add  hl, de                                   ; $56E7: $19
     ld   [hl], a                                  ; $56E8: $77
-
     ret                                           ; $56E9: $C9
 
 Data_003_56EA::

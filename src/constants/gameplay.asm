@@ -391,3 +391,6 @@ DROP_POWER_UP equ $01
 DROP_CHANCE_0_PERCENT  equ %00000000
 DROP_CHANCE_50_PERCENT equ %00000001
 DROP_CHANCE_25_PERCENT equ %00000011
+
+DROP_DESPAWN_TIME   equ $80 ; frames until entity despawns
+DROP_COUNTDOWN_TIME equ $18 ; frames dropped entity is blinking before despawn

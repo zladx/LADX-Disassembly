@@ -200,8 +200,7 @@ jr_005_4F6F:
     jr   nz, jr_005_4F89                          ; $4F80: $20 $07
 
     set  6, [hl]                                  ; $4F82: $CB $F6
-    ld   a, $94                                   ; $4F84: $3E $94
-    jp   OpenDialogInTable1                       ; $4F86: $C3 $73 $23
+    jp_open_dialog $194                           ; $4F84
 
 jr_005_4F89:
     ld   a, [wOcarinaSongFlags]                   ; $4F89: $FA $49 $DB
@@ -209,8 +208,7 @@ jr_005_4F89:
     jr   z, jr_005_4F95                           ; $4F8E: $28 $05
 
 jr_005_4F90:
-    ld   a, $95                                   ; $4F90: $3E $95
-    jp   OpenDialogInTable1                       ; $4F92: $C3 $73 $23
+    jp_open_dialog $195                           ; $4F90
 
 jr_005_4F95:
     ld   e, INVENTORY_SLOT_COUNT -1               ; $4F95: $1E $0B
@@ -555,20 +553,17 @@ jr_005_5183:
     cp   $C0                                      ; $5189: $FE $C0
     jr   nc, jr_005_5192                          ; $518B: $30 $05
 
-    ld   a, $14                                   ; $518D: $3E $14
-    jp   OpenDialog                               ; $518F: $C3 $85 $23
+    jp_open_dialog $014
 
 jr_005_5192:
-    ld   a, $93                                   ; $5192: $3E $93
-    jp   OpenDialogInTable1                       ; $5194: $C3 $73 $23
+    jp_open_dialog $193
 
 jr_005_5197:
     cp   $08                                      ; $5197: $FE $08
     jr   nz, jr_005_51A1                          ; $5199: $20 $06
 
     dec  [hl]                                     ; $519B: $35
-    ld   a, $13                                   ; $519C: $3E $13
-    call OpenDialog                               ; $519E: $CD $85 $23
+    call_open_dialog $013
 
 jr_005_51A1:
     ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $51A1: $3E $6C
@@ -593,8 +588,8 @@ func_005_51BC::
     call func_005_5506                            ; $51C1: $CD $06 $55
     ret  nc                                       ; $51C4: $D0
 
-    ld   a, $97                                   ; $51C5: $3E $97
-    jp   OpenDialogInTable1                       ; $51C7: $C3 $73 $23
+    jp_open_dialog $197
+
 
 Data_005_51CA::
     db   $5C, $00, $5C, $20
@@ -620,8 +615,7 @@ func_005_51CE::
     call func_005_5506                            ; $51F2: $CD $06 $55
     ret  nc                                       ; $51F5: $D0
 
-    ld   a, $D7                                   ; $51F6: $3E $D7
-    jp   OpenDialogInTable1                       ; $51F8: $C3 $73 $23
+    jp_open_dialog $1D7                           ; $51F6: $3E $D7
 
 jr_005_51FB:
     ld   a, [wSwordLevel]                         ; $51FB: $FA $4E $DB
@@ -697,8 +691,7 @@ func_005_5294::
     call GetEntityDropTimer                       ; $5294: $CD $FB $0B
     jr   nz, jr_005_52A4                          ; $5297: $20 $0B
 
-    ld   a, $01                                   ; $5299: $3E $01
-    call OpenDialog                               ; $529B: $CD $85 $23
+    call_open_dialog $001                         ; $5299: $3E $01
     ld   [hl], $40                                ; $529E: $36 $40
     call IncrementEntityState                     ; $52A0: $CD $12 $3B
     xor  a                                        ; $52A3: $AF

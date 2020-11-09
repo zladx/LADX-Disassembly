@@ -4484,7 +4484,7 @@ GetObjectPhysicsFlagsAndRestoreBank3::
     pop  af                                       ; $2A35: $F1
     ret                                           ; $2A36: $C9
 
-LoadTileset1E::
+LoadCreditsKoholintDisappearingTiles::
     ld   a, BANK(EndingTiles)                     ; $2A37: $3E $13
     call AdjustBankNumberForGBC                   ; $2A39: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $2A3C: $EA $00 $21
@@ -4499,8 +4499,10 @@ LoadTileset1E::
     ld   bc, TILE_SIZE * $80                      ; $2A51: $01 $00 $08
     jp   CopyData                                 ; $2A54: $C3 $14 $29
 
-LoadTileset1F::
+; Copy tiles for the stairs sequence of credits to tiles memory
+LoadCreditsStairsTiles::
     call LoadTileset15                            ; $2A57: $CD $66 $2A
+
     ld   de, vTiles0 + $400                       ; $2A5A: $11 $00 $84
     ld   hl, EndingTiles + $3600                  ; $2A5D: $21 $00 $76
     ld   bc, TILE_SIZE * $10                      ; $2A60: $01 $00 $01
@@ -4537,7 +4539,9 @@ LoadTileset15::
     ld   bc, TILE_SIZE * $20                      ; $2AA8: $01 $00 $02
     jp   CopyData                                 ; $2AAB: $C3 $14 $29
 
-LoadTileset1D::
+; Copy tiles for the various Koholint views while the instruments are
+; playing to tiles memory
+LoadCreditsKoholintViewsTiles::
     ld   a, BANK(Overworld1Tiles)                 ; $2AAE: $3E $0C
     call AdjustBankNumberForGBC                   ; $2AB0: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $2AB3: $EA $00 $21
@@ -4550,7 +4554,7 @@ LoadTileset1D::
     call AdjustBankNumberForGBC                   ; $2AC4: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $2AC7: $EA $00 $21
     ld   hl, Npc3Tiles + $2000                    ; $2ACA: $21 $00 $60
-    ld   de, $8000                                ; $2ACD: $11 $00 $80
+    ld   de, vTiles0                              ; $2ACD: $11 $00 $80
     ld   bc, TILE_SIZE * $80                      ; $2AD0: $01 $00 $08
     call CopyData                                 ; $2AD3: $CD $14 $29
 
@@ -4558,11 +4562,11 @@ LoadTileset1D::
     call AdjustBankNumberForGBC                   ; $2AD8: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $2ADB: $EA $00 $21
     ld   hl, Overworld2Tiles + $600               ; $2ADE: $21 $00 $60
-    ld   de, $8800                                ; $2AE1: $11 $00 $88
+    ld   de, vTiles1                              ; $2AE1: $11 $00 $88
     ld   bc, TILE_SIZE * $80                      ; $2AE4: $01 $00 $08
     jp   CopyData                                 ; $2AE7: $C3 $14 $29
 
-LoadTileset18::
+LoadCreditsLinkOnSeaCloseTiles::
     ld   hl, EndingTiles                          ; $2AEA: $21 $00 $40
     ldh  a, [hIsGBC]                              ; $2AED: $F0 $FE
     and  a                                        ; $2AEF: $A7
@@ -4571,11 +4575,11 @@ LoadTileset18::
     ld   a, BANK(PhotoAlbumTiles)                 ; $2AF5: $3E $35
     jr   label_2B06                               ; $2AF7: $18 $0D
 
-LoadTileset17::
+LoadCreditsSunAboveTiles::
     ld   hl, EndingTiles + $800                   ; $2AF9: $21 $00 $48
     jr   label_2B01                               ; $2AFC: $18 $03
 
-LoadTileset16::
+LoadCreditsLinkOnSeaLargeTiles::
     ld   hl, EndingTiles + $2000                  ; $2AFE: $21 $00 $60
 
 label_2B01::
@@ -4596,7 +4600,7 @@ label_2B06::
     ld   bc, TILE_SIZE * $100                     ; $2B20: $01 $00 $10
     jp   CopyData                                 ; $2B23: $C3 $14 $29
 
-LoadTileset1B::
+LoadCreditsRollTiles::
     call PlayAudioStep                            ; $2B26: $CD $A4 $08
 
     ld   hl, FontLargeTiles + $100                ; $2B29: $21 $00 $68
@@ -4668,7 +4672,7 @@ ELSE
     jp   CopyData                                 ; $2B6F: $C3 $14 $29
 ENDC
 
-LoadTileset1A::
+LoadCreditsLinkFaceCloseUpTiles::
     ld   hl, EndingTiles + $3800                  ; $2B72: $21 $00 $78
     ldh  a, [hIsGBC]                              ; $2B75: $F0 $FE
     and  a                                        ; $2B77: $A7
@@ -4677,7 +4681,7 @@ LoadTileset1A::
     ld   a, BANK(EndingCGBAltTiles)               ; $2B7D: $3E $35
     jr   label_2B95                               ; $2B7F: $18 $14
 
-LoadTileset19::
+LoadCreditsLinkSeatedOnLogTiles::
     ld   hl, EndingTiles + $800                   ; $2B81: $21 $00 $48
     ldh  a, [hIsGBC]                              ; $2B84: $F0 $FE
     and  a                                        ; $2B86: $A7
@@ -4996,7 +5000,7 @@ func_2D50::
     call CopyData                                 ; $2D75: $CD $14 $29
     ret                                           ; $2D78: $C9
 
-; Load Map n°10 (introduction sequence)
+; Copy opening sequence tiles to tiles memory
 LoadIntroSequenceTiles::
     ; Load rain tiles
     ld   a, BANK(IntroRainTiles)                  ; $2D79: $3E $01
@@ -5020,6 +5024,7 @@ LoadIntroSequenceTiles::
     ld   bc, TILE_SIZE * $100                     ; $2DA1: $01 $00 $10
     jp   CopyData                                 ; $2DA4: $C3 $14 $29
 
+; Copy title screen tiles to tiles memory
 LoadTitleScreenTiles::
     ; Load title logo
     ld   a, BANK(TitleLogoTitles)                 ; $2DA7: $3E $0F
@@ -5061,6 +5066,7 @@ LoadTitleScreenTiles::
     ld   bc, TILE_SIZE * $10                      ; $2DE3: $01 $00 $01
     jp   CopyData                                 ; $2DE6: $C3 $14 $29
 
+; Copy tiles for the World Map to tiles memory
 LoadWorldMapTiles::
     ; Load world map tiles
     ld   a, BANK(WorldMapTiles)                   ; $2DE9: $3E $0C
@@ -5077,19 +5083,22 @@ LoadWorldMapTiles::
     ld   bc, TILE_SIZE * $10                      ; $2E00: $01 $00 $01
     jp   CopyData                                 ; $2E03: $C3 $14 $29
 
+; Copy tiles for Face Shrine mural to tiles memory
 LoadFaceShrineReliefTiles::
     ld   hl, ReliefTiles                          ; $2E06: $21 $00 $70
     jr   LoadStaticPictureTiles                   ; $2E09: $18 $08
 
+; Copy tiles for the Schule painting to tiles memory
 LoadSchulePaintingTiles::
     ld   hl, PaintingTiles                        ; $2E0B: $21 $00 $78
     jr   LoadStaticPictureTiles                   ; $2E0E: $18 $03
 
+; Copy tiles for Christine portrait to tiles memory
 LoadChristinePortraitTiles::
     ld   hl, ChristineTiles                       ; $2E10: $21 $00 $58
     ; fallthrough
 
-; Load tiles for a static full-screen picture to vTiles2
+; Copy tiles for a static full-screen picture to vTiles2
 ; Inputs:
 ;   hl   tiles source address
 LoadStaticPictureTiles::
@@ -5113,7 +5122,8 @@ LoadEaglesTowerTopTiles::
     ld   bc, TILE_SIZE * $40                      ; $2E3B: $01 $00 $04
     jp   CopyData                                 ; $2E3E: $C3 $14 $29
 
-LoadTileset13::
+; Copy tiles for Marin's beach sequence to tiles memory
+LoadMarinBeachTiles::
     ld   a, BANK(FontLargeTiles)                  ; $2E41: $3E $10
     call SwitchAdjustedBank                       ; $2E43: $CD $13 $08
 
@@ -5127,7 +5137,7 @@ LoadTileset13::
     ld   bc, TILE_SIZE * $60                      ; $2E58: $01 $00 $06
     jp   CopyData                                 ; $2E5B: $C3 $14 $29
 
-; Tiles for Saving and Game Over screens
+; Copy tiles for Saving and Game Over screens to tiles memory
 LoadSaveMenuTiles::
     ld   a, BANK(SaveMenuTiles)                   ; $2E5E: $3E $0F
     call SwitchBank                               ; $2E60: $CD $0C $08

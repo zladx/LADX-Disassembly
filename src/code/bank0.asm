@@ -5061,7 +5061,7 @@ LoadTitleScreenTiles::
     ld   bc, TILE_SIZE * $10                      ; $2DE3: $01 $00 $01
     jp   CopyData                                 ; $2DE6: $C3 $14 $29
 
-LoadWorldMinimapTiles::
+LoadWorldMapTiles::
     ; Load world map tiles
     ld   a, BANK(WorldMapTiles)                   ; $2DE9: $3E $0C
     call SwitchAdjustedBank                       ; $2DEB: $CD $13 $08
@@ -5070,7 +5070,8 @@ LoadWorldMinimapTiles::
     ld   bc, TILE_SIZE * $80                      ; $2DF4: $01 $00 $08
     call CopyData                                 ; $2DF7: $CD $14 $29
 
-    ; Load some overworld tiles
+    ; Load some overworld objects tiles (house, owl, etc),
+    ; to display them when the cursor hovers a specific room.
     ld   hl, Overworld1Tiles + $100               ; $2DFA: $21 $00 $50
     ld   de, vTiles0 + $200                       ; $2DFD: $11 $00 $82
     ld   bc, TILE_SIZE * $10                      ; $2E00: $01 $00 $01

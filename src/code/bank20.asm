@@ -252,7 +252,7 @@ TilemapLoadingHandlersTable::
 ._0B dw LoadWorldMapTiles
 ._0C dw LoadMapData.return
 ._0D dw LoadSaveMenuTiles
-._0E dw LoadTileset0E_trampoline
+._0E dw LoadWorldMapBGMap_trampoline
 ._0F dw LoadTileset0F_trampoline
 ._10 dw LoadIntroSequenceTiles
 ._11 dw LoadTitleScreenTiles
@@ -2228,7 +2228,8 @@ Data_020_578B::
     db   $04, $04, $04, $04, $04, $04, $07, $00   ; $587B
     db   $04, $04, $00, $00, $00, $00, $03, $03   ; $5883
 
-LoadTileset0E::
+; Copy the World Map tilemap to BG memory
+LoadWorldMapBGMap::
     ld   a, LOW(Data_20_568B)                     ; $588B: $3E $8B
     ldh  [hMultiPurposeA], a                           ; $588D: $E0 $E1
     ld   a, HIGH(Data_20_568B)                    ; $588F: $3E $56

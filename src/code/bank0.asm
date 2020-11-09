@@ -7388,8 +7388,8 @@ LoadRoomTemplate_trampoline::
     ld   [MBC3SelectBank], a                      ; $38F8: $EA $00 $21
     ret                                           ; $38FB: $C9
 
-LoadTileset0E_trampoline::
-    callsb LoadTileset0E                          ; $38FC: $3E $20 $EA $00 $21 $CD $8B $58
+LoadWorldMapBGMap_trampoline::
+    callsb LoadWorldMapBGMap                      ; $38FC: $3E $20 $EA $00 $21 $CD $8B $58
     ret                                           ; $3904: $C9
 
 SwitchToMapDataBank::

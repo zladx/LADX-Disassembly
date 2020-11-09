@@ -5139,9 +5139,12 @@ LoadSaveMenuTiles::
 NpcTilesBankTable::
     db   $00, BANK(Npc2Tiles), BANK(Npc1Tiles), BANK(Npc3Tiles) ; $2E6F
 
-; For overworld or indoor rooms, load lower section of OAM tiles (NPCs),
-; and upper section of BG tiles.
-LoadWorldTiles::
+; For overworld or indoor rooms, load room-specific tiles.
+;
+; That means:
+; - the lower section of OAM tiles (NPCs),
+; - the upper section of BG tiles.
+LoadRoomSpecificTiles::
     ldh  a, [hMapId]                              ; $2E73: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $2E75: $FE $FF
     jr   nz, .colorDungeonEnd                     ; $2E77: $20 $0B

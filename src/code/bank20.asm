@@ -247,7 +247,7 @@ TilemapLoadingHandlersTable::
 ._06 dw LoadIndoorTiles
 ._07 dw LoadBaseOverworldTiles ; same as command $05
 ._08 dw FillBGMapWith7E
-._09 dw LoadWorldTiles
+._09 dw LoadRoomSpecificTiles
 ._0A dw LoadMapData.return
 ._0B dw LoadWorldMinimapTiles
 ._0C dw LoadMapData.return

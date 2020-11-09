@@ -2922,44 +2922,50 @@ PadRoomObjectsArea::
 .end
     ret                                           ; $6CE2: $C9
 
+; Fade from white?
+;
+; Used when:
+; - Displaying a menu
+; - Displaying a static picture (peach, eagle's tower collapse)
 LoadTileset0F::
     ld   bc, $400                                 ; $6CE3: $01 $00 $04
-    ld   hl, $9800                                ; $6CE6: $21 $00 $98
+    ld   hl, vBGMap0                              ; $6CE6: $21 $00 $98
 
-jr_001_6CE9::
+.loop
     ld   e, $00                                   ; $6CE9: $1E $00
     ld   a, l                                     ; $6CEB: $7D
     and  $20                                      ; $6CEC: $E6 $20
-    jr   z, jr_001_6CF1                           ; $6CEE: $28 $01
+    jr   z, .jr_001_6CF1                          ; $6CEE: $28 $01
     inc  e                                        ; $6CF0: $1C
 
-jr_001_6CF1::
+.jr_001_6CF1
     ld   d, $AE                                   ; $6CF1: $16 $AE
     ld   a, l                                     ; $6CF3: $7D
     and  $01                                      ; $6CF4: $E6 $01
     xor  e                                        ; $6CF6: $AB
-    jr   z, jr_001_6CFA                           ; $6CF7: $28 $01
+    jr   z, .jr_001_6CFA                          ; $6CF7: $28 $01
     inc  d                                        ; $6CF9: $14
 
-jr_001_6CFA::
+.jr_001_6CFA
     ld   a, l                                     ; $6CFA: $7D
     and  $1F                                      ; $6CFB: $E6 $1F
     cp   $14                                      ; $6CFD: $FE $14
-    jr   nc, jr_001_6D02                          ; $6CFF: $30 $01
+    jr   nc, .jr_001_6D02                          ; $6CFF: $30 $01
     ld   [hl], d                                  ; $6D01: $72
 
-jr_001_6D02::
+.jr_001_6D02
     inc  hl                                       ; $6D02: $23
     dec  bc                                       ; $6D03: $0B
     ld   a, b                                     ; $6D04: $78
     or   c                                        ; $6D05: $B1
-    jr   nz, jr_001_6CE9                          ; $6D06: $20 $E1
+    jr   nz, .loop                                ; $6D06: $20 $E1
+
     ldh  a, [hIsGBC]                              ; $6D08: $F0 $FE
     and  a                                        ; $6D0A: $A7
-    jr   z, jr_001_6D10                           ; $6D0B: $28 $03
+    jr   z, .jr_001_6D10                          ; $6D0B: $28 $03
     call func_001_6D11                            ; $6D0D: $CD $11 $6D
 
-jr_001_6D10::
+.jr_001_6D10
     ret                                           ; $6D10: $C9
 
 func_001_6D11::
@@ -2972,7 +2978,7 @@ func_001_6D11::
 jr_001_6D1C::
     ld   a, $01                                   ; $6D1C: $3E $01
     ld   [rVBK], a                                ; $6D1E: $E0 $4F
-    ld   hl, $9800                                ; $6D20: $21 $00 $98
+    ld   hl, vBGMap0                              ; $6D20: $21 $00 $98
     ld   bc, $400                                 ; $6D23: $01 $00 $04
 
 jr_001_6D26::

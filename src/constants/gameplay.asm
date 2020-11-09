@@ -23,7 +23,7 @@ GAMEPLAY_FILE_DELETE       equ $04
 GAMEPLAY_FILE_COPY         equ $05
 GAMEPLAY_FILE_SAVE         equ $06
 GAMEPLAY_WORLD_MAP         equ $07
-GAMEPLAY_PEACH_PIC         equ $08
+GAMEPLAY_PEACH_PIC         equ $08 ; also used for the Eagle's Tower collapse cutscene
 GAMEPLAY_MARIN_BEACH       equ $09
 GAMEPLAY_WF_MURAL          equ $0A
 GAMEPLAY_WORLD             equ $0B
@@ -213,7 +213,7 @@ LINK_ANIMATION_STATE_MOVING_SWIMMING_1_RIGHT           equ $47
 LINK_ANIMATION_STATE_HOLD_SWIMMING_1_LEFT              equ $48
 LINK_ANIMATION_STATE_MOVING_SWIMMING_1_LEFT            equ $49
 LINK_ANIMATION_STATE_HOLD_SWIMMING_1_UP                equ $4A
-LINK_ANIMATION_STATE_MOVING_SWIMMING_1_UP              equ $4B 
+LINK_ANIMATION_STATE_MOVING_SWIMMING_1_UP              equ $4B
 LINK_ANIMATION_STATE_HOLD_SWIMMING_1_DOWN              equ $4C
 LINK_ANIMATION_STATE_MOVING_SWIMMING_1_DOWN            equ $4D
 LINK_ANIMATION_STATE_HOLD_SWIMMING_2                   equ $4E
@@ -351,7 +351,7 @@ ONE_HEART equ $08
 
 LOW_MAX_HEALTH    equ $07
 MEDIUM_MAX_HEALTH equ $0B
-;HIGH_MAX_HEALTH   equ 
+;HIGH_MAX_HEALTH   equ
 
 ; how much time has to pass until the player can receive damage again
 DAMAGE_COOLDOWN_TIME equ $A0

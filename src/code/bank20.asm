@@ -253,7 +253,7 @@ TilemapLoadingHandlersTable::
 ._0C dw LoadMapData.return
 ._0D dw LoadSaveMenuTiles
 ._0E dw LoadWorldMapBGMap_trampoline
-._0F dw LoadTileset0F_trampoline
+._0F dw LoadTileset0F_trampoline ; fade from white? used in menus
 ._10 dw LoadIntroSequenceTiles
 ._11 dw LoadTitleScreenTiles
 ._12 dw LoadChristinePortraitTiles

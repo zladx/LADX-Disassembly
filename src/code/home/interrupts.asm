@@ -578,8 +578,9 @@ LoadOAMTiles::
     ldh  a, [hMapId]                              ; $06A3: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $06A5: $FE $FF
     jr   nz, .colorDungeonEnd                     ; $06A7: $20 $22
-
-    callsb func_020_475A                          ; $06A9: $3E $20 $EA $00 $21 $CD $5A $47
+    ; … skip the defined commands, and load hardcoded titles
+    ; for the Color Dungeon objects and NPCs.
+    callsb LoadColorDungeonTiles                  ; $06A9: $3E $20 $EA $00 $21 $CD $5A $47
     xor  a                                        ; $06B1: $AF
     ld   [wNeedsUpdatingNPCTiles], a              ; $06B2: $EA $0E $C1
     ld   [wC10F], a                               ; $06B5: $EA $0F $C1

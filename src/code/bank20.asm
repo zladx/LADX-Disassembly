@@ -239,17 +239,17 @@ GetTilemapHandlerAddress::
 
 ; Pointers to addresses to execute for loading a specific tilemap
 TilemapLoadingHandlersTable::
-._01 dw LoadTileset1
+._01 dw LoadRoomTilemap
 ._02 dw ClearBGMap
 ._03 dw LoadBaseTiles
-._04 dw LoadInventoryTiles
-._05 dw LoadTileset5
-._06 dw LoadDungeonTiles
-._07 dw LoadTileset5
-._08 dw LoadTileset8
-._09 dw LoadTileset9
+._04 dw LoadMenuTiles
+._05 dw LoadBaseOverworldTiles
+._06 dw LoadIndoorTiles
+._07 dw LoadBaseOverworldTiles ; same as command $05
+._08 dw FillBGMapWith7E
+._09 dw LoadWorldTiles
 ._0A dw LoadMapData.return
-._0B dw LoadTileset0B
+._0B dw LoadWorldMinimapTiles
 ._0C dw LoadMapData.return
 ._0D dw LoadSaveMenuTiles
 ._0E dw LoadTileset0E_trampoline
@@ -296,7 +296,7 @@ Data_020_472E::
     db   $47, $35, $00, $00, $00, $00, $00, $00, $47, $35, $00, $00
 
 ; Color-dungeon related function
-func_020_475A::
+LoadColorDungeonTiles::
     ld   hl, data_020_46AA                        ; $475A: $21 $AA $46
     ldh  a, [hMapRoom]                            ; $475D: $F0 $F6
     rla                                           ; $475F: $17
@@ -3087,7 +3087,7 @@ label_020_5D34:
 
 InventoryLoad4Handler::
     call LCDOff                                   ; $5D52: $CD $CF $28
-    call LoadColorDungeonTiles                    ; $5D55: $CD $D1 $3F
+    call ReloadColorDungeonNpcTiles                    ; $5D55: $CD $D1 $3F
     ld   a, [wLCDControl]                         ; $5D58: $FA $FD $D6
     ldh  [rLCDC], a                               ; $5D5B: $E0 $40
     call IncrementGameplaySubtype_20                            ; $5D5D: $CD $83 $66

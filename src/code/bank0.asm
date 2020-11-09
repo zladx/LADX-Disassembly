@@ -4884,17 +4884,19 @@ LoadDungeonTiles::
 
     ld   a, [wCurrentBank]                        ; $2CDA: $FA $AF $DB
     ld   [MBC3SelectBank], a                      ; $2CDD: $EA $00 $21
-    ld   hl, InventoryDungeonItemsTiles           ; $2CE0: $21 $00 $7D
+    ld   hl, InventoryIndoorItemsTiles            ; $2CE0: $21 $00 $7D
 
+    ; If indoor, but not in a dungeon…
     ldh  a, [hMapId]                              ; $2CE3: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $2CE5: $FE $FF
-    jr   z, .caveBOrColorDungeon                  ; $2CE7: $28 $0C
+    jr   z, .inventoryItemsEnd                    ; $2CE7: $28 $0C
     cp   MAP_CAVE_B                               ; $2CE9: $FE $0A
-    jr   c, .caveBOrColorDungeon                  ; $2CEB: $38 $08
-    ld   a, BANK(DungeonKeysTiles)                ; $2CED: $3E $0C
+    jr   c, .inventoryItemsEnd                    ; $2CEB: $38 $08
+    ; …use the overworld inventory items (instead of the dungeon ones)
+    ld   a, BANK(InventoryOverworldItemsTiles)    ; $2CED: $3E $0C
     call SwitchAdjustedBank                       ; $2CEF: $CD $13 $08
-    ld   hl, DungeonKeysTiles                     ; $2CF2: $21 $00 $4C
-.caveBOrColorDungeon
+    ld   hl, InventoryOverworldItemsTiles         ; $2CF2: $21 $00 $4C
+.inventoryItemsEnd
 
     ld   de, vTiles1 + $400                       ; $2CF5: $11 $00 $8C
     ld   bc, TILE_SIZE * $30                      ; $2CF8: $01 $00 $03
@@ -4949,7 +4951,7 @@ LoadTileset5::
     ; Load dungeon keys
     ;
 
-    ld   hl, DungeonKeysTiles                     ; $2D3E: $21 $00 $4C
+    ld   hl, InventoryOverworldItemsTiles                     ; $2D3E: $21 $00 $4C
     ld   de, vTiles1 + $400                       ; $2D41: $11 $00 $8C
     ld   bc, TILE_SIZE * $40                      ; $2D44: $01 $00 $04
     call CopyData                                 ; $2D47: $CD $14 $29

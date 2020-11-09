@@ -116,7 +116,7 @@ func_4852::
     ld   a, $05                                   ; $486B: $3E $05
 
 .loop
-    ldh  [hMultiPurpose0], a                           ; $486D: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $486D: $E0 $D7
     ld   a, [de]                                  ; $486F: $1A
     and  a                                        ; $4870: $A7
     ld   a, $7E                                   ; $4871: $3E $7E
@@ -134,7 +134,7 @@ func_4852::
 
     ldi  [hl], a                                  ; $4881: $22
     inc  de                                       ; $4882: $13
-    ldh  a, [hMultiPurpose0]                           ; $4883: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4883: $F0 $D7
     dec  a                                        ; $4885: $3D
     jr   nz, .loop                                ; $4886: $20 $E5
     ld   a, b                                     ; $4888: $78
@@ -148,7 +148,7 @@ func_4852::
     ld   a, $05                                   ; $4892: $3E $05
 
 jr_001_4894::
-    ldh  [hMultiPurpose0], a                           ; $4894: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $4894: $E0 $D7
     ld   a, [de]                                  ; $4896: $1A
     and  a                                        ; $4897: $A7
 
@@ -198,7 +198,7 @@ ENDC
 jr_001_48A9::
     ldi  [hl], a                                  ; $48A9: $22
     inc  de                                       ; $48AA: $13
-    ldh  a, [hMultiPurpose0]                           ; $48AB: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $48AB: $F0 $D7
     dec  a                                        ; $48AD: $3D
     jr   nz, jr_001_4894                          ; $48AE: $20 $E4
     xor  a                                        ; $48B0: $AF
@@ -743,11 +743,11 @@ func_001_4BF5::
     ldh  a, [hJoypadState]                        ; $4BF5: $F0 $CC
 
 jr_001_4BF7::
-    ldh  [hMultiPurpose0], a                           ; $4BF7: $E0 $D7
-    ldh  a, [hMultiPurpose0]                           ; $4BF9: $F0 $D7
+    ldh  [hMultiPurpose0], a                      ; $4BF7: $E0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4BF9: $F0 $D7
     and  $0C                                      ; $4BFB: $E6 $0C
     jr   nz, jr_001_4C41                          ; $4BFD: $20 $42
-    ldh  a, [hMultiPurpose0]                           ; $4BFF: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4BFF: $F0 $D7
     and  $03                                      ; $4C01: $E6 $03
     jr   nz, jr_001_4C21                          ; $4C03: $20 $1C
     ldh  a, [hPressedButtonsMask]                 ; $4C05: $F0 $CB
@@ -1037,11 +1037,11 @@ ELSE
     jr   z, jr_001_4DBD                            ; $4DAB: $28 $10 ; $4DAB: $28 $10
 
     xor  a                                        ; $4DAD: $AF ; $4DAD: $AF
-    ldh  [hMultiPurpose4], a                           ; $4DAE: $E0 $DB ; $4DAE: $E0 $DB
+    ldh  [hMultiPurpose4], a                      ; $4DAE: $E0 $DB ; $4DAE: $E0 $DB
     ld   a, [wDC06]                               ; $4DB0: $FA $06 $DC ; $4DB0: $FA $06 $DC
-    ldh  [hMultiPurpose2], a                           ; $4DB3: $E0 $D9 ; $4DB3: $E0 $D9
+    ldh  [hMultiPurpose2], a                      ; $4DB3: $E0 $D9 ; $4DB3: $E0 $D9
     ld   a, [wDC09]                               ; $4DB5: $FA $09 $DC ; $4DB5: $FA $09 $DC
-    ldh  [hMultiPurpose3], a                           ; $4DB8: $E0 $DA ; $4DB8: $E0 $DA
+    ldh  [hMultiPurpose3], a                      ; $4DB8: $E0 $DA ; $4DB8: $E0 $DA
     jp   label_001_5D53                               ; $4DBA: $C3 $53 $5D ; $4DBA: $C3 $53 $5D
 ENDC
 

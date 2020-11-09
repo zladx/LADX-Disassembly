@@ -190,13 +190,13 @@ func_006_7335::
     ld   [hl], $02                                ; $7351: $36 $02
     ld   a, $10                                   ; $7353: $3E $10
     call GetVectorTowardsLink_trampoline          ; $7355: $CD $B5 $3B
-    ldh  a, [hMultiPurpose0]                           ; $7358: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $7358: $F0 $D7
     cpl                                           ; $735A: $2F
     inc  a                                        ; $735B: $3C
     ld   hl, wEntitiesSpeedYTable                 ; $735C: $21 $50 $C2
     add  hl, bc                                   ; $735F: $09
     ld   [hl], a                                  ; $7360: $77
-    ldh  a, [hMultiPurpose1]                           ; $7361: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $7361: $F0 $D8
     cpl                                           ; $7363: $2F
     inc  a                                        ; $7364: $3C
     ld   hl, wEntitiesSpeedXTable                 ; $7365: $21 $40 $C2

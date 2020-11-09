@@ -547,10 +547,10 @@ func_001_5511::
 
     push de                                       ; $551F: $D5
     xor  a                                        ; $5520: $AF
-    ldh  [hMultiPurpose0], a                           ; $5521: $E0 $D7
-    ldh  [hMultiPurpose1], a                           ; $5523: $E0 $D8
-    ldh  [hMultiPurpose2], a                           ; $5525: $E0 $D9
-    ldh  [hMultiPurpose3], a                           ; $5527: $E0 $DA
+    ldh  [hMultiPurpose0], a                      ; $5521: $E0 $D7
+    ldh  [hMultiPurpose1], a                      ; $5523: $E0 $D8
+    ldh  [hMultiPurpose2], a                      ; $5525: $E0 $D9
+    ldh  [hMultiPurpose3], a                      ; $5527: $E0 $DA
     ld   c, a                                     ; $5529: $4F
     ld   b, a                                     ; $552A: $47
     ld   e, a                                     ; $552B: $5F
@@ -580,19 +580,19 @@ jr_001_5544::
     ld   hl, Data_001_53D8                        ; $5545: $21 $D8 $53
     add  hl, bc                                   ; $5548: $09
     ld   a, [hl]                                  ; $5549: $7E
-    ldh  [hMultiPurpose0], a                           ; $554A: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $554A: $E0 $D7
     ld   hl, Data_001_53E8                        ; $554C: $21 $E8 $53
     add  hl, bc                                   ; $554F: $09
     ld   a, [hl]                                  ; $5550: $7E
-    ldh  [hMultiPurpose1], a                           ; $5551: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $5551: $E0 $D8
     ld   hl, Data_001_53F8                        ; $5553: $21 $F8 $53
     add  hl, bc                                   ; $5556: $09
     ld   a, [hl]                                  ; $5557: $7E
-    ldh  [hMultiPurpose2], a                           ; $5558: $E0 $D9
+    ldh  [hMultiPurpose2], a                      ; $5558: $E0 $D9
     ld   hl, Data_001_5408                        ; $555A: $21 $08 $54
     add  hl, bc                                   ; $555D: $09
     ld   a, [hl]                                  ; $555E: $7E
-    ldh  [hMultiPurpose3], a                           ; $555F: $E0 $DA
+    ldh  [hMultiPurpose3], a                      ; $555F: $E0 $DA
     pop  hl                                       ; $5561: $E1
     call func_001_5619                            ; $5562: $CD $19 $56
     push hl                                       ; $5565: $E5
@@ -607,10 +607,10 @@ jr_001_5544::
     xor  a                                        ; $5572: $AF
     ld   [hl], a                                  ; $5573: $77
     xor  a                                        ; $5574: $AF
-    ldh  [hMultiPurpose0], a                           ; $5575: $E0 $D7
-    ldh  [hMultiPurpose1], a                           ; $5577: $E0 $D8
-    ldh  [hMultiPurpose2], a                           ; $5579: $E0 $D9
-    ldh  [hMultiPurpose3], a                           ; $557B: $E0 $DA
+    ldh  [hMultiPurpose0], a                      ; $5575: $E0 $D7
+    ldh  [hMultiPurpose1], a                      ; $5577: $E0 $D8
+    ldh  [hMultiPurpose2], a                      ; $5579: $E0 $D9
+    ldh  [hMultiPurpose3], a                      ; $557B: $E0 $DA
     ld   c, a                                     ; $557D: $4F
     ld   b, a                                     ; $557E: $47
     ld   e, a                                     ; $557F: $5F
@@ -664,17 +664,17 @@ jr_001_558C::
     ld   hl, Data_001_5418                        ; $55C1: $21 $18 $54
     add  hl, bc                                   ; $55C4: $09
     ld   a, [hl]                                  ; $55C5: $7E
-    ldh  [hMultiPurpose0], a                           ; $55C6: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $55C6: $E0 $D7
     ld   hl, Data_001_545C                        ; $55C8: $21 $5C $54
     add  hl, bc                                   ; $55CB: $09
     ld   a, [hl]                                  ; $55CC: $7E
-    ldh  [hMultiPurpose1], a                           ; $55CD: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $55CD: $E0 $D8
     xor  a                                        ; $55CF: $AF
-    ldh  [hMultiPurpose2], a                           ; $55D0: $E0 $D9
+    ldh  [hMultiPurpose2], a                      ; $55D0: $E0 $D9
     ld   hl, Data_001_54A0                        ; $55D2: $21 $A0 $54
     add  hl, bc                                   ; $55D5: $09
     ld   a, [hl]                                  ; $55D6: $7E
-    ldh  [hMultiPurpose3], a                           ; $55D7: $E0 $DA
+    ldh  [hMultiPurpose3], a                      ; $55D7: $E0 $DA
     pop  hl                                       ; $55D9: $E1
     call func_001_5619 ; ???                      ; $55DA: $CD $19 $56
     push hl                                       ; $55DD: $E5
@@ -701,16 +701,16 @@ jr_001_55F5::
     ld   hl, Data_001_54E4                        ; $55F6: $21 $E4 $54
     add  hl, bc                                   ; $55F9: $09
     ld   a, [hl]                                  ; $55FA: $7E
-    ldh  [hMultiPurpose0], a                           ; $55FB: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $55FB: $E0 $D7
     ld   hl, Data_001_54E6                        ; $55FD: $21 $E6 $54
     add  hl, bc                                   ; $5600: $09
     ld   a, [hl]                                  ; $5601: $7E
-    ldh  [hMultiPurpose1], a                           ; $5602: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $5602: $E0 $D8
     ld   a, $01                                   ; $5604: $3E $01
-    ldh  [hMultiPurpose2], a                           ; $5606: $E0 $D9
+    ldh  [hMultiPurpose2], a                      ; $5606: $E0 $D9
     ldh  a, [hMapId]                              ; $5608: $F0 $F7
     add  a, $B1                                   ; $560A: $C6 $B1
-    ldh  [hMultiPurpose3], a                           ; $560C: $E0 $DA
+    ldh  [hMultiPurpose3], a                      ; $560C: $E0 $DA
     pop  hl                                       ; $560E: $E1
     call func_001_5619 ;show dungeon map no       ; $560F: $CD $19 $56
 IF __PATCH_6__
@@ -725,13 +725,13 @@ ENDC
     ret                                           ; $5618: $C9
 
 func_001_5619::
-    ldh  a, [hMultiPurpose0]                           ; $5619: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $5619: $F0 $D7
     ldi  [hl], a                                  ; $561B: $22
-    ldh  a, [hMultiPurpose1]                           ; $561C: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $561C: $F0 $D8
     ldi  [hl], a                                  ; $561E: $22
-    ldh  a, [hMultiPurpose2]                           ; $561F: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $561F: $F0 $D9
     ldi  [hl], a                                  ; $5621: $22
-    ldh  a, [hMultiPurpose3]                           ; $5622: $F0 $DA
+    ldh  a, [hMultiPurpose3]                      ; $5622: $F0 $DA
     ld   [hl], a                                  ; $5624: $77
     ret                                           ; $5625: $C9
 
@@ -883,7 +883,7 @@ Data_001_5A6E::
 
 func_001_5A71::
     ld   a, [wDBB4]                               ; $5A71: $FA $B4 $DB
-    ldh  [hMultiPurpose0], a                           ; $5A74: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $5A74: $E0 $D7
     ld   a, [wC1B3]                               ; $5A76: $FA $B3 $C1
     ld   hl, wC1B2                                ; $5A79: $21 $B2 $C1
     or   [hl]                                     ; $5A7C: $B6
@@ -957,7 +957,7 @@ jr_001_5AA0::
     jr   nz, jr_001_5AF5                          ; $5AE8: $20 $0B
     ld   a, JINGLE_BUMP                           ; $5AEA: $3E $09
     ldh  [hJingle], a                             ; $5AEC: $E0 $F2
-    ldh  a, [hMultiPurpose0]                           ; $5AEE: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $5AEE: $F0 $D7
     ld   [wDBB4], a                               ; $5AF0: $EA $B4 $DB
     jr   label_001_5B3F                           ; $5AF3: $18 $4A
 
@@ -1289,15 +1289,15 @@ jr_001_5D77::
     ld   hl, $D604                                ; $5D7E: $21 $04 $D6
     add  hl, de                                   ; $5D81: $19
     ld   c, $00                                   ; $5D82: $0E $00
-    ldh  a, [hMultiPurpose2]                           ; $5D84: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $5D84: $F0 $D9
     and  a                                        ; $5D86: $A7
     jr   z, jr_001_5DAB                           ; $5D87: $28 $22
-    ldh  [hMultiPurpose0], a                           ; $5D89: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $5D89: $E0 $D7
 
 jr_001_5D8B::
-    ldh  a, [hMultiPurpose0]                           ; $5D8B: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $5D8B: $F0 $D7
     sub  a, $08                                   ; $5D8D: $D6 $08
-    ldh  [hMultiPurpose0], a                           ; $5D8F: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $5D8F: $E0 $D7
     jr   c, jr_001_5DA2                           ; $5D91: $38 $0F
     ld   a, $AE                                   ; $5D93: $3E $AE
     ldi  [hl], a                                  ; $5D95: $22
@@ -1320,7 +1320,7 @@ jr_001_5DA2::
     jr   jr_001_5DB3                              ; $5DA9: $18 $08
 
 jr_001_5DAB::
-    ldh  a, [hMultiPurpose3]                           ; $5DAB: $F0 $DA
+    ldh  a, [hMultiPurpose3]                      ; $5DAB: $F0 $DA
     cp   c                                        ; $5DAD: $B9
     jr   z, jr_001_5DBF                           ; $5DAE: $28 $0F
     ld   a, $AE                                   ; $5DB0: $3E $AE
@@ -1684,30 +1684,30 @@ PrepareEntityPositionForRoomTransition::
     ld   hl, EntityPosXOffsetTable                ; $5EBC: $21 $97 $5E
     add  hl, bc                                   ; $5EBF: $09
     ld   a, [hl]                                  ; $5EC0: $7E
-    ldh  [hMultiPurpose0], a                           ; $5EC1: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $5EC1: $E0 $D7
 
     ; hMultiPurpose1 = EntityPosXSignTable[wRoomTransitionDirection]
     ld   hl, EntityPosXSignTable                  ; $5EC3: $21 $9C $5E
     add  hl, bc                                   ; $5EC6: $09
     ld   a, [hl]                                  ; $5EC7: $7E
-    ldh  [hMultiPurpose1], a                           ; $5EC8: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $5EC8: $E0 $D8
 
     ; hMultiPurpose2 = EntityPosYOffsetTable[wRoomTransitionDirection]
     ld   hl, EntityPosYOffsetTable                ; $5ECA: $21 $A1 $5E
     add  hl, bc                                   ; $5ECD: $09
     ld   a, [hl]                                  ; $5ECE: $7E
-    ldh  [hMultiPurpose2], a                           ; $5ECF: $E0 $D9
+    ldh  [hMultiPurpose2], a                      ; $5ECF: $E0 $D9
 
     ; hMultiPurpose3 = EntityPosYSignTable[wRoomTransitionDirection]
     ld   hl, EntityPosYSignTable                  ; $5ED1: $21 $A6 $5E
     add  hl, bc                                   ; $5ED4: $09
     ld   a, [hl]                                  ; $5ED5: $7E
-    ldh  [hMultiPurpose3], a                           ; $5ED6: $E0 $DA
+    ldh  [hMultiPurpose3], a                      ; $5ED6: $E0 $DA
 
     ; [wEntitiesPosXTable + de] += [hMultiPurpose0]
     ld   hl, wEntitiesPosXTable                   ; $5ED8: $21 $00 $C2
     add  hl, de                                   ; $5EDB: $19
-    ldh  a, [hMultiPurpose0]                           ; $5EDC: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $5EDC: $F0 $D7
     add  a, [hl]                                  ; $5EDE: $86
     ld   [hl], a                                  ; $5EDF: $77
 
@@ -1715,7 +1715,7 @@ PrepareEntityPositionForRoomTransition::
     rr   c                                        ; $5EE0: $CB $19
     ld   hl, wEntitiesPosXSignTable               ; $5EE2: $21 $20 $C2
     add  hl, de                                   ; $5EE5: $19
-    ldh  a, [hMultiPurpose1]                           ; $5EE6: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $5EE6: $F0 $D8
     rl   c                                        ; $5EE8: $CB $11
     adc  a, [hl]                                  ; $5EEA: $8E
     ld   [hl], a                                  ; $5EEB: $77
@@ -1723,7 +1723,7 @@ PrepareEntityPositionForRoomTransition::
     ; [wEntitiesPosYTable + de] += [hMultiPurpose2]
     ld   hl, wEntitiesPosYTable                   ; $5EEC: $21 $10 $C2
     add  hl, de                                   ; $5EEF: $19
-    ldh  a, [hMultiPurpose2]                           ; $5EF0: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $5EF0: $F0 $D9
     add  a, [hl]                                  ; $5EF2: $86
     ld   [hl], a                                  ; $5EF3: $77
 
@@ -1731,7 +1731,7 @@ PrepareEntityPositionForRoomTransition::
     rr   c                                        ; $5EF4: $CB $19
     ld   hl, wEntitiesPosYSignTable               ; $5EF6: $21 $30 $C2
     add  hl, de                                   ; $5EF9: $19
-    ldh  a, [hMultiPurpose3]                           ; $5EFA: $F0 $DA
+    ldh  a, [hMultiPurpose3]                      ; $5EFA: $F0 $DA
     rl   c                                        ; $5EFC: $CB $11
     adc  a, [hl]                                  ; $5EFE: $8E
     ld   [hl], a                                  ; $5EFF: $77
@@ -2762,15 +2762,15 @@ func_001_6BF0::
 
 jr_001_6BF4::
     ld   a, c                                     ; $6BF4: $79
-    ldh  [hMultiPurpose9], a                           ; $6BF5: $E0 $E0
+    ldh  [hMultiPurpose9], a                      ; $6BF5: $E0 $E0
     ld   d, $00                                   ; $6BF7: $16 $00
 
 label_001_6BF9::
     xor  a                                        ; $6BF9: $AF
-    ldh  [hMultiPurpose0], a                           ; $6BFA: $E0 $D7
-    ldh  [hMultiPurpose1], a                           ; $6BFC: $E0 $D8
-    ldh  [hMultiPurpose2], a                           ; $6BFE: $E0 $D9
-    ldh  [hMultiPurpose3], a                           ; $6C00: $E0 $DA
+    ldh  [hMultiPurpose0], a                      ; $6BFA: $E0 $D7
+    ldh  [hMultiPurpose1], a                      ; $6BFC: $E0 $D8
+    ldh  [hMultiPurpose2], a                      ; $6BFE: $E0 $D9
+    ldh  [hMultiPurpose3], a                      ; $6C00: $E0 $DA
     ld   hl, $DB65                                ; $6C02: $21 $65 $DB
     add  hl, de                                   ; $6C05: $19
     ld   a, [hl]                                  ; $6C06: $7E
@@ -2785,13 +2785,13 @@ label_001_6BF9::
     ld   h, $9D                                   ; $6C15: $26 $9D
     push hl                                       ; $6C17: $E5
     ld   a, $7C                                   ; $6C18: $3E $7C
-    ldh  [hMultiPurpose0], a                           ; $6C1A: $E0 $D7
-    ldh  [hMultiPurpose1], a                           ; $6C1C: $E0 $D8
-    ldh  [hMultiPurpose2], a                           ; $6C1E: $E0 $D9
+    ldh  [hMultiPurpose0], a                      ; $6C1A: $E0 $D7
+    ldh  [hMultiPurpose1], a                      ; $6C1C: $E0 $D8
+    ldh  [hMultiPurpose2], a                      ; $6C1E: $E0 $D9
     ld   hl, Data_001_6BD7                        ; $6C20: $21 $D7 $6B
     add  hl, de                                   ; $6C23: $19
     ld   a, [hl]                                  ; $6C24: $7E
-    ldh  [hMultiPurpose3], a                           ; $6C25: $E0 $DA
+    ldh  [hMultiPurpose3], a                      ; $6C25: $E0 $DA
     pop  hl                                       ; $6C27: $E1
     jr   jr_001_6C48                              ; $6C28: $18 $1E
 
@@ -2807,28 +2807,28 @@ label_001_6C2A::
     ld   hl, Data_001_6BDF                        ; $6C36: $21 $DF $6B
     add  hl, de                                   ; $6C39: $19
     ld   a, [hl]                                  ; $6C3A: $7E
-    ldh  [hMultiPurpose0], a                           ; $6C3B: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $6C3B: $E0 $D7
     inc  a                                        ; $6C3D: $3C
-    ldh  [hMultiPurpose1], a                           ; $6C3E: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $6C3E: $E0 $D8
     add  a, $0F                                   ; $6C40: $C6 $0F
-    ldh  [hMultiPurpose2], a                           ; $6C42: $E0 $D9
+    ldh  [hMultiPurpose2], a                      ; $6C42: $E0 $D9
     inc  a                                        ; $6C44: $3C
-    ldh  [hMultiPurpose3], a                           ; $6C45: $E0 $DA
+    ldh  [hMultiPurpose3], a                      ; $6C45: $E0 $DA
     pop  hl                                       ; $6C47: $E1
 
 jr_001_6C48::
-    ldh  a, [hMultiPurpose0]                           ; $6C48: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $6C48: $F0 $D7
     ld   [hl], a                                  ; $6C4A: $77
     call func_001_6C69                            ; $6C4B: $CD $69 $6C
-    ldh  a, [hMultiPurpose1]                           ; $6C4E: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $6C4E: $F0 $D8
     ld   [hl], a                                  ; $6C50: $77
     inc  c                                        ; $6C51: $0C
     call func_001_6C69                            ; $6C52: $CD $69 $6C
-    ldh  a, [hMultiPurpose2]                           ; $6C55: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $6C55: $F0 $D9
     ld   [hl], a                                  ; $6C57: $77
     inc  c                                        ; $6C58: $0C
     call func_001_6C69                            ; $6C59: $CD $69 $6C
-    ldh  a, [hMultiPurpose3]                           ; $6C5C: $F0 $DA
+    ldh  a, [hMultiPurpose3]                      ; $6C5C: $F0 $DA
     ld   [hl], a                                  ; $6C5E: $77
     inc  e                                        ; $6C5F: $1C
     ld   a, e                                     ; $6C60: $7B

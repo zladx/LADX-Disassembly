@@ -119,9 +119,9 @@ DropFairyEffectHandler::
     ld   [hl], $80                                ; $5DDA: $36 $80
 
     ld   a, $88                                   ; $5DDC: $3E $88
-    ldh  [hMultiPurpose0], a                           ; $5DDE: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $5DDE: $E0 $D7
     ld   a, $30                                   ; $5DE0: $3E $30
-    ldh  [hMultiPurpose1], a                           ; $5DE2: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $5DE2: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $5DE4: $3E $02
     jp   MakeEffectObjectAppear                   ; $5DE6: $C3 $F6 $5D
 
@@ -129,9 +129,9 @@ RevealStairwayEffectHandler::
     call EventEffectGuard                         ; $5DE9: $CD $AF $5D
 
     ld   a, $88                                   ; $5DEC: $3E $88
-    ldh  [hMultiPurpose0], a                           ; $5DEE: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $5DEE: $E0 $D7
     ld   a, $20                                   ; $5DF0: $3E $20
-    ldh  [hMultiPurpose1], a                           ; $5DF2: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $5DF2: $E0 $D8
     ld   a, TRANSCIENT_VFX_STAIRS_APPEARS         ; $5DF4: $3E $04
 
 MakeEffectObjectAppear::
@@ -273,7 +273,7 @@ Data_002_5EA7::
 RevealChestEffectHandler::
     call EventEffectGuard                         ; $5EAB: $CD $AF $5D
     ld   a, $88                                   ; $5EAE: $3E $88
-    ldh  [hMultiPurpose0], a                           ; $5EB0: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $5EB0: $E0 $D7
     ldh  a, [hLinkPositionY]                      ; $5EB2: $F0 $99
     sub  $30                                      ; $5EB4: $D6 $30
     add  $08                                      ; $5EB6: $C6 $08
@@ -293,7 +293,7 @@ jr_002_5ECA:
     ld   a, $30                                   ; $5ECA: $3E $30
 
 jr_002_5ECC:
-    ldh  [hMultiPurpose1], a                           ; $5ECC: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $5ECC: $E0 $D8
     ld   a, TRANSCIENT_VFX_CHEST_APPEARS          ; $5ECE: $3E $03
     jp   AddTranscientVfx                         ; $5ED0: $C3 $C7 $0C
 
@@ -432,7 +432,7 @@ func_002_5F5C::
 CheckTriggersResolution::
     ; hMultiPurpose0 = event trigger
     and  EVENT_TRIGGER_MASK                       ; $5F9F: $E6 $1F
-    ldh  [hMultiPurpose0], a                           ; $5FA1: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $5FA1: $E0 $D7
     dec  a                                        ; $5FA3: $3D
     JP_TABLE                                      ; $5FA4: $C7
 ._01 dw CheckKillEnemiesTrigger
@@ -660,7 +660,7 @@ jr_002_60BD:
     and  $0F                                      ; $60BF: $E6 $0F
     jr   nz, jr_002_609B                          ; $60C1: $20 $D8
 
-    ldh  a, [hMultiPurpose0]                           ; $60C3: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $60C3: $F0 $D7
     cp   $02                                      ; $60C5: $FE $02
     ret  nz                                       ; $60C7: $C0
 

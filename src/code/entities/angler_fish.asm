@@ -123,12 +123,12 @@ jr_005_561E:
     ld   hl, wEntitiesUnknownTableD               ; $5638: $21 $D0 $C2
     add  hl, de                                   ; $563B: $19
     ld   [hl], $02                                ; $563C: $36 $02
-    ldh  a, [hMultiPurpose0]                           ; $563E: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $563E: $F0 $D7
     sub  $14                                      ; $5640: $D6 $14
     ld   hl, wEntitiesPosXTable                         ; $5642: $21 $00 $C2
     add  hl, de                                   ; $5645: $19
     ld   [hl], a                                  ; $5646: $77
-    ldh  a, [hMultiPurpose1]                           ; $5647: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $5647: $F0 $D8
     sub  $04                                      ; $5649: $D6 $04
     ld   hl, wEntitiesPosYTable                         ; $564B: $21 $10 $C2
     add  hl, de                                   ; $564E: $19

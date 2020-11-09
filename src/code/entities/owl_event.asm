@@ -371,12 +371,12 @@ jr_006_6A0F:
 
     ld   a, $20                                   ; $6A15: $3E $20
     call GetVectorTowardsLink_trampoline          ; $6A17: $CD $B5 $3B
-    ldh  a, [hMultiPurpose0]                           ; $6A1A: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $6A1A: $F0 $D7
     cpl                                           ; $6A1C: $2F
     inc  a                                        ; $6A1D: $3C
     ld   hl, wEntitiesSpeedYTable                 ; $6A1E: $21 $50 $C2
     call func_006_6A2B                            ; $6A21: $CD $2B $6A
-    ldh  a, [hMultiPurpose1]                           ; $6A24: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $6A24: $F0 $D8
     cpl                                           ; $6A26: $2F
     inc  a                                        ; $6A27: $3C
     ld   hl, wEntitiesSpeedXTable                 ; $6A28: $21 $40 $C2

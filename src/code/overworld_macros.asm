@@ -40,7 +40,7 @@ jr_024_75A9:
     ld   d, $00                                   ; $75A9: $16 $00
     ld   hl, wRoomObjectsArea                     ; $75AB: $21 $00 $D7
     add  hl, de                                   ; $75AE: $19
-    ldh  a, [hMultiPurpose0]                           ; $75AF: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $75AF: $F0 $D7
     and  a                                        ; $75B1: $A7
     jr   z, jr_024_75CD                           ; $75B2: $28 $19
 
@@ -50,7 +50,7 @@ jr_024_75A9:
 jr_024_75B7:
     call func_024_75CD                            ; $75B7: $CD $CD $75
     dec  bc                                       ; $75BA: $0B
-    ldh  a, [hMultiPurpose0]                           ; $75BB: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $75BB: $F0 $D7
     and  $40                                      ; $75BD: $E6 $40
     ld   d, $F1                                   ; $75BF: $16 $F1
     jr   z, jr_024_75C5                           ; $75C1: $28 $02

@@ -35,7 +35,7 @@ jr_006_4F48:
     and  $07                                      ; $4F6F: $E6 $07
     add  $04                                      ; $4F71: $C6 $04
     call GetVectorTowardsLink_trampoline          ; $4F73: $CD $B5 $3B
-    ldh  a, [hMultiPurpose0]                           ; $4F76: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4F76: $F0 $D7
     ld   hl, wEntitiesSpeedYTable                 ; $4F78: $21 $50 $C2
     call func_006_4FA3                            ; $4F7B: $CD $A3 $4F
     ld   hl, wEntitiesCollisionsTable             ; $4F7E: $21 $A0 $C2
@@ -49,7 +49,7 @@ jr_006_4F48:
     ld   [hl], b                                  ; $4F8B: $70
 
 jr_006_4F8C:
-    ldh  a, [hMultiPurpose1]                           ; $4F8C: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $4F8C: $F0 $D8
     ld   hl, wEntitiesSpeedXTable                 ; $4F8E: $21 $40 $C2
     call func_006_4FA3                            ; $4F91: $CD $A3 $4F
     ld   hl, wEntitiesCollisionsTable             ; $4F94: $21 $A0 $C2

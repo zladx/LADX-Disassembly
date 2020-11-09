@@ -183,16 +183,16 @@ func_005_63EB::
     ld   [hl], $40                                ; $6421: $36 $40
     ldh  a, [hActiveEntityPosX]                   ; $6423: $F0 $EE
     add  $F8                                      ; $6425: $C6 $F8
-    ldh  [hMultiPurpose0], a                           ; $6427: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $6427: $E0 $D7
     call func_005_6432                            ; $6429: $CD $32 $64
     ldh  a, [hActiveEntityPosX]                   ; $642C: $F0 $EE
     add  $08                                      ; $642E: $C6 $08
-    ldh  [hMultiPurpose0], a                           ; $6430: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $6430: $E0 $D7
 
 func_005_6432::
     ldh  a, [hActiveEntityVisualPosY]             ; $6432: $F0 $EC
     sub  $10                                      ; $6434: $D6 $10
-    ldh  [hMultiPurpose1], a                           ; $6436: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $6436: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $6438: $3E $02
     call AddTranscientVfx                         ; $643A: $CD $C7 $0C
     ld   hl, wTranscientVfxCountdownTable                                ; $643D: $21 $20 $C5
@@ -367,9 +367,9 @@ jr_005_6522:
     ret  nz                                       ; $6526: $C0
 
     ldh  a, [hActiveEntityPosX]                   ; $6527: $F0 $EE
-    ldh  [hMultiPurpose0], a                           ; $6529: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $6529: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $652B: $F0 $EC
-    ldh  [hMultiPurpose1], a                           ; $652D: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $652D: $E0 $D8
     ld   a, TRANSCIENT_VFX_LAVA_SPLASH            ; $652F: $3E $0A
     jp   AddTranscientVfx                         ; $6531: $C3 $C7 $0C
 
@@ -451,16 +451,16 @@ jr_005_6581:
     ld   c, a                                     ; $6593: $4F
     ld   hl, Data_005_657A                        ; $6594: $21 $7A $65
     add  hl, bc                                   ; $6597: $09
-    ldh  a, [hMultiPurpose0]                           ; $6598: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $6598: $F0 $D7
     add  [hl]                                     ; $659A: $86
     ld   hl, wEntitiesPosXTable                   ; $659B: $21 $00 $C2
     add  hl, de                                   ; $659E: $19
     ld   [hl], a                                  ; $659F: $77
-    ldh  a, [hMultiPurpose1]                           ; $65A0: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $65A0: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $65A2: $21 $10 $C2
     add  hl, de                                   ; $65A5: $19
     ld   [hl], a                                  ; $65A6: $77
-    ldh  a, [hMultiPurpose3]                           ; $65A7: $F0 $DA
+    ldh  a, [hMultiPurpose3]                      ; $65A7: $F0 $DA
     ld   hl, wEntitiesPosZTable                   ; $65A9: $21 $10 $C3
     add  hl, de                                   ; $65AC: $19
     ld   [hl], a                                  ; $65AD: $77
@@ -501,11 +501,11 @@ func_005_65D9::
     ld   hl, wEntitiesPrivateState1Table          ; $65E0: $21 $B0 $C2
     add  hl, de                                   ; $65E3: $19
     ld   [hl], $01                                ; $65E4: $36 $01
-    ldh  a, [hMultiPurpose0]                           ; $65E6: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $65E6: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $65E8: $21 $00 $C2
     add  hl, de                                   ; $65EB: $19
     ld   [hl], a                                  ; $65EC: $77
-    ldh  a, [hMultiPurpose1]                           ; $65ED: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $65ED: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $65EF: $21 $10 $C2
     add  hl, de                                   ; $65F2: $19
     ld   [hl], a                                  ; $65F3: $77
@@ -545,14 +545,14 @@ jr_005_6613:
     ld   c, a                                     ; $6625: $4F
     ld   hl, Data_005_6600                        ; $6626: $21 $00 $66
     add  hl, bc                                   ; $6629: $09
-    ldh  a, [hMultiPurpose0]                           ; $662A: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $662A: $F0 $D7
     add  [hl]                                     ; $662C: $86
     ld   hl, wEntitiesPosXTable                   ; $662D: $21 $00 $C2
     add  hl, de                                   ; $6630: $19
     ld   [hl], a                                  ; $6631: $77
     ld   hl, Data_005_6604                        ; $6632: $21 $04 $66
     add  hl, bc                                   ; $6635: $09
-    ldh  a, [hMultiPurpose1]                           ; $6636: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $6636: $F0 $D8
     add  [hl]                                     ; $6638: $86
     ld   hl, wEntitiesPosYTable                   ; $6639: $21 $10 $C2
     add  hl, de                                   ; $663C: $19

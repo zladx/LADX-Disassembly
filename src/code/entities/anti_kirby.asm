@@ -215,11 +215,11 @@ jr_006_434B:
 
     ld   a, $08                                   ; $437F: $3E $08
     call GetVectorTowardsLink_trampoline          ; $4381: $CD $B5 $3B
-    ldh  a, [hMultiPurpose0]                           ; $4384: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4384: $F0 $D7
     cpl                                           ; $4386: $2F
     inc  a                                        ; $4387: $3C
     ldh  [hLinkPositionYIncrement], a             ; $4388: $E0 $9B
-    ldh  a, [hMultiPurpose1]                           ; $438A: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $438A: $F0 $D8
     cpl                                           ; $438C: $2F
     inc  a                                        ; $438D: $3C
     ldh  [hLinkPositionXIncrement], a             ; $438E: $E0 $9A

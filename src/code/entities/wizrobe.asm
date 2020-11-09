@@ -150,14 +150,14 @@ jr_006_76E9:
     jr   c, jr_006_772D                           ; $76EE: $38 $3D
 
     push bc                                       ; $76F0: $C5
-    ldh  a, [hMultiPurpose2]                           ; $76F1: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $76F1: $F0 $D9
     ld   hl, wEntitiesDirectionTable              ; $76F3: $21 $80 $C3
     add  hl, de                                   ; $76F6: $19
     ld   [hl], a                                  ; $76F7: $77
     ld   c, a                                     ; $76F8: $4F
     ld   hl, Data_006_7618                        ; $76F9: $21 $18 $76
     add  hl, bc                                   ; $76FC: $09
-    ldh  a, [hMultiPurpose0]                           ; $76FD: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $76FD: $F0 $D7
     add  [hl]                                     ; $76FF: $86
     ld   hl, wEntitiesPosXTable                   ; $7700: $21 $00 $C2
     add  hl, de                                   ; $7703: $19
@@ -166,7 +166,7 @@ jr_006_76E9:
     add  hl, bc                                   ; $7708: $09
 
 label_006_7709:
-    ldh  a, [hMultiPurpose1]                           ; $7709: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $7709: $F0 $D8
     add  [hl]                                     ; $770B: $86
     ld   hl, wEntitiesPosYTable                   ; $770C: $21 $10 $C2
     add  hl, de                                   ; $770F: $19
@@ -186,7 +186,7 @@ label_006_7709:
 
 jr_006_7725:
     pop  bc                                       ; $7725: $C1
-    ldh  a, [hMultiPurpose2]                           ; $7726: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $7726: $F0 $D9
     ld   hl, wEntitiesSpriteVariantTable          ; $7728: $21 $B0 $C3
     add  hl, de                                   ; $772B: $19
     ld   [hl], a                                  ; $772C: $77

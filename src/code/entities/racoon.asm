@@ -182,15 +182,15 @@ jr_005_4A46:
     ld   a, ENTITY_BOMB                           ; $4A59: $3E $02
     call SpawnNewEntity_trampoline                ; $4A5B: $CD $86 $3B
 
-    ldh  a, [hMultiPurpose0]                           ; $4A5E: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4A5E: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $4A60: $21 $00 $C2
     add  hl, de                                   ; $4A63: $19
     ld   [hl], a                                  ; $4A64: $77
-    ldh  a, [hMultiPurpose1]                           ; $4A65: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $4A65: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $4A67: $21 $10 $C2
     add  hl, de                                   ; $4A6A: $19
     ld   [hl], a                                  ; $4A6B: $77
-    ldh  a, [hMultiPurpose3]                           ; $4A6C: $F0 $DA
+    ldh  a, [hMultiPurpose3]                      ; $4A6C: $F0 $DA
     ld   hl, wEntitiesPosZTable                   ; $4A6E: $21 $10 $C3
     add  hl, de                                   ; $4A71: $19
     ld   [hl], a                                  ; $4A72: $77
@@ -723,12 +723,12 @@ jr_005_4D5D:
 
     ld   a, $3F                                   ; $4D67: $3E $3F
     call SpawnNewEntity_trampoline                ; $4D69: $CD $86 $3B
-    ldh  a, [hMultiPurpose0]                           ; $4D6C: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4D6C: $F0 $D7
     add  $06                                      ; $4D6E: $C6 $06
     ld   hl, wEntitiesPosXTable                   ; $4D70: $21 $00 $C2
     add  hl, de                                   ; $4D73: $19
     ld   [hl], a                                  ; $4D74: $77
-    ldh  a, [hMultiPurpose1]                           ; $4D75: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $4D75: $F0 $D8
     sub  $03                                      ; $4D77: $D6 $03
     ld   hl, wEntitiesPosYTable                   ; $4D79: $21 $10 $C2
     add  hl, de                                   ; $4D7C: $19

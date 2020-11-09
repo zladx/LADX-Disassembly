@@ -18,12 +18,12 @@ SmasherEntityHandler::
     call SpawnNewEntity_trampoline                ; $4521: $CD $86 $3B
     ld   a, e                                     ; $4524: $7B
     ld   [$D201], a                               ; $4525: $EA $01 $D2
-    ldh  a, [hMultiPurpose1]                           ; $4528: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $4528: $F0 $D8
     add  $10                                      ; $452A: $C6 $10
     ld   hl, wEntitiesPosYTable                   ; $452C: $21 $10 $C2
     add  hl, de                                   ; $452F: $19
     ld   [hl], a                                  ; $4530: $77
-    ldh  a, [hMultiPurpose0]                           ; $4531: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4531: $F0 $D7
     add  $30                                      ; $4533: $C6 $30
     ld   hl, wEntitiesPosXTable                   ; $4535: $21 $00 $C2
     add  hl, de                                   ; $4538: $19

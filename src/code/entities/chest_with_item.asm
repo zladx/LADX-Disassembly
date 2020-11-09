@@ -72,11 +72,11 @@ ChestWithItemEntityHandler::
     call SpawnNewEntity_trampoline                ; $7BF0: $CD $86 $3B
     jp   c, func_007_7EA4                         ; $7BF3: $DA $A4 $7E
 
-    ldh  a, [hMultiPurpose0]                           ; $7BF6: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $7BF6: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $7BF8: $21 $00 $C2
     add  hl, de                                   ; $7BFB: $19
     ld   [hl], a                                  ; $7BFC: $77
-    ldh  a, [hMultiPurpose1]                           ; $7BFD: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $7BFD: $F0 $D8
     ld   hl, wEntitiesPosYTable                         ; $7BFF: $21 $10 $C2
     add  hl, de                                   ; $7C02: $19
     ld   [hl], a                                  ; $7C03: $77

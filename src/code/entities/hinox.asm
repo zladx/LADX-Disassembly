@@ -220,10 +220,10 @@ jr_006_5102:
     jr   nz, jr_006_5117                          ; $5106: $20 $0F
 
     ldh  a, [hActiveEntityPosX]                   ; $5108: $F0 $EE
-    ldh  [hMultiPurpose0], a                           ; $510A: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $510A: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $510C: $F0 $EC
     add  $0A                                      ; $510E: $C6 $0A
-    ldh  [hMultiPurpose1], a                           ; $5110: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $5110: $E0 $D8
     ld   a, TRANSCIENT_VFX_PEGASUS_DUST           ; $5112: $3E $0B
     call AddTranscientVfx                         ; $5114: $CD $C7 $0C
 
@@ -347,12 +347,12 @@ jr_006_51D0:
     call SpawnNewEntity_trampoline                ; $51D6: $CD $86 $3B
     jr   c, jr_006_51F6                           ; $51D9: $38 $1B
 
-    ldh  a, [hMultiPurpose0]                           ; $51DB: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $51DB: $F0 $D7
     sub  $0C                                      ; $51DD: $D6 $0C
     ld   hl, wEntitiesPosXTable                   ; $51DF: $21 $00 $C2
     add  hl, de                                   ; $51E2: $19
     ld   [hl], a                                  ; $51E3: $77
-    ldh  a, [hMultiPurpose1]                           ; $51E4: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $51E4: $F0 $D8
     sub  $00                                      ; $51E6: $D6 $00
     ld   hl, wEntitiesPosYTable                   ; $51E8: $21 $10 $C2
     add  hl, de                                   ; $51EB: $19

@@ -496,8 +496,8 @@ Data_001_7148::
     db 0, 0, 0, 0, $40, $40, $40, $40, $90, $90, $90, $90 ; $7148
 
 label_7154::
-    ldh  [hMultiPurpose9], a                           ; $7154: $E0 $E0
-    ldh  [hMultiPurpose9], a                           ; $7156: $E0 $E0
+    ldh  [hMultiPurpose9], a                      ; $7154: $E0 $E0
+    ldh  [hMultiPurpose9], a                      ; $7156: $E0 $E0
 
 IntroStage6Handler::
     call func_001_71C7                            ; $7158: $CD $C7 $71
@@ -921,11 +921,11 @@ RenderRain::
     call GetRandomByte                            ; $7466: $CD $0D $28
     and  $18                                      ; $7469: $E6 $18
     add  a, $10                                   ; $746B: $C6 $10
-    ldh  [hMultiPurpose1], a                           ; $746D: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $746D: $E0 $D8
     call GetRandomByte                            ; $746F: $CD $0D $28
     and  $18                                      ; $7472: $E6 $18
     add  a, $10                                   ; $7474: $C6 $10
-    ldh  [hMultiPurpose0], a                           ; $7476: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $7476: $E0 $D7
     ld   hl, wDynamicOAMBuffer+$1C                                ; $7478: $21 $4C $C0
     ; On the sea, limit the rain to the top section of the screen ($10)
     ld   c, $10                                   ; $747B: $0E $10
@@ -936,9 +936,9 @@ RenderRain::
     ld   c, $15                                   ; $7484: $0E $15
 
 .loop
-    ldh  a, [hMultiPurpose1]                           ; $7486: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $7486: $F0 $D8
     ldi  [hl], a                                  ; $7488: $22
-    ldh  a, [hMultiPurpose0]                           ; $7489: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $7489: $F0 $D7
     ldi  [hl], a                                  ; $748B: $22
     call GetRandomByte                            ; $748C: $CD $0D $28
     and  $01       ; if random(0,1) == 0          ; $748F: $E6 $01
@@ -952,16 +952,16 @@ RenderRain::
     ldi  [hl], a                                  ; $749C: $22
     ld   a, $00                                   ; $749D: $3E $00
     ldi  [hl], a                                  ; $749F: $22
-    ldh  a, [hMultiPurpose0]                           ; $74A0: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $74A0: $F0 $D7
     add  a, $1C                                   ; $74A2: $C6 $1C
-    ldh  [hMultiPurpose0], a                           ; $74A4: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $74A4: $E0 $D7
     cp   $A0                                      ; $74A6: $FE $A0
     jr   c, .continue                             ; $74A8: $38 $0A
     sub  a, $98                                   ; $74AA: $D6 $98
-    ldh  [hMultiPurpose0], a                           ; $74AC: $E0 $D7
-    ldh  a, [hMultiPurpose1]                           ; $74AE: $F0 $D8
+    ldh  [hMultiPurpose0], a                      ; $74AC: $E0 $D7
+    ldh  a, [hMultiPurpose1]                      ; $74AE: $F0 $D8
     add  a, $25                                   ; $74B0: $C6 $25
-    ldh  [hMultiPurpose1], a                           ; $74B2: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $74B2: $E0 $D8
 
 .continue
     dec  c                                        ; $74B4: $0D

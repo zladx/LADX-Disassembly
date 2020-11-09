@@ -253,13 +253,13 @@ func_005_46AF::
 
     ld   a, $0C                                   ; $46BB: $3E $0C
     call GetVectorTowardsLink_trampoline          ; $46BD: $CD $B5 $3B
-    ldh  a, [hMultiPurpose0]                           ; $46C0: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $46C0: $F0 $D7
     cpl                                           ; $46C2: $2F
     inc  a                                        ; $46C3: $3C
     ld   hl, wEntitiesSpeedYTable                 ; $46C4: $21 $50 $C2
     add  hl, bc                                   ; $46C7: $09
     ld   [hl], a                                  ; $46C8: $77
-    ldh  a, [hMultiPurpose1]                           ; $46C9: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $46C9: $F0 $D8
     cpl                                           ; $46CB: $2F
     inc  a                                        ; $46CC: $3C
 

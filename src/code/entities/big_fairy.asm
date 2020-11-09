@@ -209,12 +209,12 @@ jr_006_71BA:
     ld   hl, wEntitiesUnknownTableD               ; $71D2: $21 $D0 $C2
     add  hl, de                                   ; $71D5: $19
     ld   [hl], $01                                ; $71D6: $36 $01
-    ldh  a, [hMultiPurpose0]                           ; $71D8: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $71D8: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $71DA: $21 $00 $C2
     add  hl, de                                   ; $71DD: $19
     add  $00                                      ; $71DE: $C6 $00
     ld   [hl], a                                  ; $71E0: $77
-    ldh  a, [hMultiPurpose1]                           ; $71E1: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $71E1: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $71E3: $21 $10 $C2
     add  hl, de                                   ; $71E6: $19
     sub  $0E                                      ; $71E7: $D6 $0E

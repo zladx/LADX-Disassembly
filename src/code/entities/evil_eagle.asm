@@ -113,12 +113,12 @@ jr_005_5AA7:
     ld   c, a                                     ; $5AB1: $4F
     ld   hl, Data_005_5A7D                        ; $5AB2: $21 $7D $5A
     add  hl, bc                                   ; $5AB5: $09
-    ldh  a, [hMultiPurpose0]                           ; $5AB6: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $5AB6: $F0 $D7
     add  [hl]                                     ; $5AB8: $86
     ld   hl, wEntitiesPosXTable                   ; $5AB9: $21 $00 $C2
     add  hl, de                                   ; $5ABC: $19
     ld   [hl], a                                  ; $5ABD: $77
-    ldh  a, [hMultiPurpose1]                           ; $5ABE: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $5ABE: $F0 $D8
     sub  $10                                      ; $5AC0: $D6 $10
     ld   hl, wEntitiesPosYTable                   ; $5AC2: $21 $10 $C2
     add  hl, de                                   ; $5AC5: $19
@@ -848,12 +848,12 @@ jr_005_5EB0:
     srl  c                                        ; $5ED7: $CB $39
     ld   hl, Data_005_5E1B                        ; $5ED9: $21 $1B $5E
     add  hl, bc                                   ; $5EDC: $09
-    ldh  a, [hMultiPurpose0]                           ; $5EDD: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $5EDD: $F0 $D7
     add  [hl]                                     ; $5EDF: $86
     ld   hl, wEntitiesPosXTable                   ; $5EE0: $21 $00 $C2
     add  hl, de                                   ; $5EE3: $19
     ld   [hl], a                                  ; $5EE4: $77
-    ldh  a, [hMultiPurpose1]                           ; $5EE5: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $5EE5: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $5EE7: $21 $10 $C2
     add  hl, de                                   ; $5EEA: $19
     add  $0C                                      ; $5EEB: $C6 $0C

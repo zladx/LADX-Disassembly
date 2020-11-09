@@ -97,16 +97,16 @@ jr_006_7C6A:
     ld   hl, wEntitiesLoadOrderTable              ; $7C95: $21 $60 $C4
     add  hl, de                                   ; $7C98: $19
     ld   [hl], a                                  ; $7C99: $77
-    ldh  a, [hMultiPurpose0]                           ; $7C9A: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $7C9A: $F0 $D7
     add  $08                                      ; $7C9C: $C6 $08
     ld   hl, wEntitiesPosXTable                   ; $7C9E: $21 $00 $C2
     add  hl, de                                   ; $7CA1: $19
     ld   [hl], a                                  ; $7CA2: $77
-    ldh  a, [hMultiPurpose1]                           ; $7CA3: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $7CA3: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $7CA5: $21 $10 $C2
     add  hl, de                                   ; $7CA8: $19
     ld   [hl], a                                  ; $7CA9: $77
-    ldh  a, [hMultiPurpose3]                           ; $7CAA: $F0 $DA
+    ldh  a, [hMultiPurpose3]                      ; $7CAA: $F0 $DA
     ld   hl, wEntitiesPosZTable                   ; $7CAC: $21 $10 $C3
     add  hl, de                                   ; $7CAF: $19
     ld   [hl], a                                  ; $7CB0: $77

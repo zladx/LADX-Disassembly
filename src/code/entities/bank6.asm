@@ -361,7 +361,7 @@ jr_006_65B2:
 func_006_65B4::
     call func_006_6594                            ; $65B4: $CD $94 $65
     ld   a, e                                     ; $65B7: $7B
-    ldh  [hMultiPurpose0], a                           ; $65B8: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $65B8: $E0 $D7
     ld   a, d                                     ; $65BA: $7A
     bit  7, a                                     ; $65BB: $CB $7F
     jr   z, jr_006_65C1                           ; $65BD: $28 $02
@@ -373,7 +373,7 @@ jr_006_65C1:
     push af                                       ; $65C1: $F5
     call func_006_65A4                            ; $65C2: $CD $A4 $65
     ld   a, e                                     ; $65C5: $7B
-    ldh  [hMultiPurpose1], a                           ; $65C6: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $65C6: $E0 $D8
     ld   a, d                                     ; $65C8: $7A
     bit  7, a                                     ; $65C9: $CB $7F
     jr   z, jr_006_65CF                           ; $65CB: $28 $02
@@ -386,11 +386,11 @@ jr_006_65CF:
     cp   d                                        ; $65D0: $BA
     jr   nc, jr_006_65D7                          ; $65D1: $30 $04
 
-    ldh  a, [hMultiPurpose0]                           ; $65D3: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $65D3: $F0 $D7
     jr   jr_006_65D9                              ; $65D5: $18 $02
 
 jr_006_65D7:
-    ldh  a, [hMultiPurpose1]                           ; $65D7: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $65D7: $F0 $D8
 
 jr_006_65D9:
     ld   e, a                                     ; $65D9: $5F
@@ -438,9 +438,9 @@ func_006_700A::
 label_006_702A:
     call func_006_64CC                            ; $702A: $CD $CC $64
     ldh  a, [hActiveEntityPosX]                   ; $702D: $F0 $EE
-    ldh  [hMultiPurpose0], a                           ; $702F: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $702F: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $7031: $F0 $EC
-    ldh  [hMultiPurpose1], a                           ; $7033: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $7033: $E0 $D8
 
 label_006_7035:
     ld   a, TRANSCIENT_VFX_POOF                   ; $7035: $3E $02
@@ -451,11 +451,11 @@ label_006_7035:
 
     ld   a, $36                                   ; $703F: $3E $36
     call SpawnNewEntity_trampoline                ; $7041: $CD $86 $3B
-    ldh  a, [hMultiPurpose0]                           ; $7044: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $7044: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $7046: $21 $00 $C2
     add  hl, de                                   ; $7049: $19
     ld   [hl], a                                  ; $704A: $77
-    ldh  a, [hMultiPurpose1]                           ; $704B: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $704B: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $704D: $21 $10 $C2
     add  hl, de                                   ; $7050: $19
     ld   [hl], a                                  ; $7051: $77

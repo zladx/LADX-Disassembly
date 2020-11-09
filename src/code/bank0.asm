@@ -197,7 +197,7 @@ func_91D::
 
 .jp_92F
     callsb GetBGAttributesAddressForObject        ; $092F: $3E $1A $EA $00 $21 $CD $76 $65
-    ldh  a, [hMultiPurpose8]                           ; $0937: $F0 $DF
+    ldh  a, [hMultiPurpose8]                      ; $0937: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $0939: $EA $00 $21
     ld   hl, wDC91                                ; $093C: $21 $91 $DC
     ld   a, [wDC90]                               ; $093F: $FA $90 $DC
@@ -206,7 +206,7 @@ func_91D::
     ld   [wDC90], a                               ; $0945: $EA $90 $DC
     ld   d, $00                                   ; $0948: $16 $00
     add  hl, de                                   ; $094A: $19
-    ldh  a, [hMultiPurpose9]                           ; $094B: $F0 $E0
+    ldh  a, [hMultiPurpose9]                      ; $094B: $F0 $E0
     ld   d, a                                     ; $094D: $57
     ldh  a, [hMultiPurposeA]                           ; $094E: $F0 $E1
     ld   e, a                                     ; $0950: $5F
@@ -261,11 +261,11 @@ func_983::
     callsb func_01A_6710                          ; $0983: $3E $1A $EA $00 $21 $CD $10 $67
 
     ; Switch to the bank containing this room's palettes
-    ldh  a, [hMultiPurpose8]                           ; $098B: $F0 $DF
+    ldh  a, [hMultiPurpose8]                      ; $098B: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $098D: $EA $00 $21
 
     ; Read value from address [hMultiPurposeA hMultiPurpose9]
-    ldh  a, [hMultiPurpose9]                           ; $0990: $F0 $E0
+    ldh  a, [hMultiPurpose9]                      ; $0990: $F0 $E0
     ld   h, a                                     ; $0992: $67
     ldh  a, [hMultiPurposeA]                           ; $0993: $F0 $E1
     ld   l, a                                     ; $0995: $6F
@@ -283,10 +283,10 @@ func_999::
     push bc                                       ; $099A: $C5
     call func_983                                 ; $099B: $CD $83 $09
 
-    ldh  [hMultiPurpose0], a                           ; $099E: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $099E: $E0 $D7
     pop  bc                                       ; $09A0: $C1
     call func_983                                 ; $09A1: $CD $83 $09
-    ldh  [hMultiPurpose1], a                           ; $09A4: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $09A4: $E0 $D8
     ld   a, [wDC90]                               ; $09A6: $FA $90 $DC
     ld   c, a                                     ; $09A9: $4F
     ld   b, $00                                   ; $09AA: $06 $00
@@ -300,9 +300,9 @@ func_999::
     ldi  [hl], a                                  ; $09BA: $22
     ld   a, $01                                   ; $09BB: $3E $01
     ldi  [hl], a                                  ; $09BD: $22
-    ldh  a, [hMultiPurpose0]                           ; $09BE: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $09BE: $F0 $D7
     ldi  [hl], a                                  ; $09C0: $22
-    ldh  a, [hMultiPurpose1]                           ; $09C1: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $09C1: $F0 $D8
     ldi  [hl], a                                  ; $09C3: $22
     xor  a                                        ; $09C4: $AF
     ldi  [hl], a                                  ; $09C5: $22
@@ -535,7 +535,7 @@ AdjustBankNumberForGBC::
 ;   de :        destination address
 ;   hl :        source address
 CopyObjectsAttributesToWRAM2::
-    ldh  a, [hMultiPurpose0]                           ; $0B1A: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $0B1A: $F0 $D7
     ld   [MBC3SelectBank], a                      ; $0B1C: $EA $00 $21
     ld   a, $02                                   ; $0B1F: $3E $02
     ld   [rSVBK], a                               ; $0B21: $E0 $70
@@ -549,7 +549,7 @@ CopyObjectsAttributesToWRAM2::
 
 ; On GBC, copy some overworld objects to ram bank 2
 func_2BF::
-    ldh  [hMultiPurpose2], a                           ; $0B2F: $E0 $D9
+    ldh  [hMultiPurpose2], a                      ; $0B2F: $E0 $D9
     ldh  a, [hIsGBC]                              ; $0B31: $F0 $FE
     and  a                                        ; $0B33: $A7
     ret  z                                        ; $0B34: $C8
@@ -559,7 +559,7 @@ func_2BF::
     ret  nz                                       ; $0B39: $C0
 
     push bc                                       ; $0B3A: $C5
-    ldh  a, [hMultiPurpose2]                           ; $0B3B: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $0B3B: $F0 $D9
     and  $80                                      ; $0B3D: $E6 $80
     jr   nz, .else                                ; $0B3F: $20 $0A
     callsb func_020_6E50                          ; $0B41: $3E $20 $EA $00 $21 $CD $50 $6E
@@ -573,7 +573,7 @@ func_2BF::
     ld   [rSVBK], a                               ; $0B52: $E0 $70
 .endIf
 
-    ldh  a, [hMultiPurpose2]                           ; $0B54: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $0B54: $F0 $D9
     and  $7F                                      ; $0B56: $E6 $7F
     ld   [MBC3SelectBank], a                      ; $0B58: $EA $00 $21
     pop  bc                                       ; $0B5B: $C1
@@ -946,11 +946,11 @@ AddTranscientVfx::
     ld   hl, wTranscientVfxTypeTable              ; $0CED: $21 $10 $C5
     add  hl, de                                   ; $0CF0: $19
     ld   [hl], a                                  ; $0CF1: $77
-    ldh  a, [hMultiPurpose1]                           ; $0CF2: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $0CF2: $F0 $D8
     ld   hl, wTranscientVfxPosYTable              ; $0CF4: $21 $40 $C5
     add  hl, de                                   ; $0CF7: $19
     ld   [hl], a                                  ; $0CF8: $77
-    ldh  a, [hMultiPurpose0]                           ; $0CF9: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $0CF9: $F0 $D7
     ld   hl, wTranscientVfxPosXTable              ; $0CFB: $21 $30 $C5
     add  hl, de                                   ; $0CFE: $19
     ld   [hl], a                                  ; $0CFF: $77
@@ -962,10 +962,10 @@ AddTranscientVfx::
 label_D07::
     ld   a, [wC140]                               ; $0D07: $FA $40 $C1
     sub  a, $08                                   ; $0D0A: $D6 $08
-    ldh  [hMultiPurpose0], a                           ; $0D0C: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $0D0C: $E0 $D7
     ld   a, [wC142]                               ; $0D0E: $FA $42 $C1
     sub  a, $08                                   ; $0D11: $D6 $08
-    ldh  [hMultiPurpose1], a                           ; $0D13: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $0D13: $E0 $D8
 
 label_D15::
     ld   a, JINGLE_SWORD_POKING                   ; $0D15: $3E $07
@@ -1108,7 +1108,7 @@ LoadRoomTiles::
 
     ; $hMultiPurpose0 = 0
     xor  a                                        ; $0D91: $AF
-    ldh  [hMultiPurpose0], a                           ; $0D92: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $0D92: $E0 $D7
     ; e = $hMapRoom
     ldh  a, [hMapRoom]                            ; $0D94: $F0 $F6
     ld   e, a                                     ; $0D96: $5F
@@ -1207,7 +1207,7 @@ LoadRoomTiles::
     cp   $FF                                      ; $0E09: $FE $FF
     jr   z, .label_E29                            ; $0E0B: $28 $1C
     ld   [bc], a                                  ; $0E0D: $02
-    ldh  a, [hMultiPurpose0]                           ; $0E0E: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $0E0E: $F0 $D7
     and  a                                        ; $0E10: $A7
     jr   z, .label_E1E                            ; $0E11: $28 $0B
     ld   a, d                                     ; $0E13: $7A
@@ -2623,7 +2623,7 @@ CheckItemsSwordCollision::
     add  hl, de                                   ; $16D9: $19
     ldh  a, [hLinkPositionY]                      ; $16DA: $F0 $99
     add  a, [hl]                                  ; $16DC: $86
-    ldh  [hMultiPurpose1], a                           ; $16DD: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $16DD: $E0 $D8
     ld   a, $04                                   ; $16DF: $3E $04
     ld   [wC502], a                               ; $16E1: $EA $02 $C5
     call label_D15                                ; $16E4: $CD $15 $0D
@@ -2714,7 +2714,7 @@ func_1756::
     ret  nz                                       ; $1766: $C0
 
     ldh  a, [hLinkPositionX]                      ; $1767: $F0 $98
-    ldh  [hMultiPurpose0], a                           ; $1769: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $1769: $E0 $D7
 
     ld   a, [wLinkGroundVfx]                      ; $176B: $FA $81 $C1
     cp   GROUND_VFX_SHALLOW_WATER                 ; $176E: $FE $05
@@ -2724,13 +2724,13 @@ func_1756::
     ldh  [hNoiseSfx], a                           ; $1774: $E0 $F4
     ldh  a, [hLinkPositionY]                      ; $1776: $F0 $99
     add  a, $06                                   ; $1778: $C6 $06
-    ldh  [hMultiPurpose1], a                           ; $177A: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $177A: $E0 $D8
     ld   a, TRANSCIENT_VFX_PEGASUS_DUST           ; $177C: $3E $0B
     jp   AddTranscientVfx                         ; $177E: $C3 $C7 $0C
 
 .shallowWater
     ldh  a, [hLinkPositionY]                      ; $1781: $F0 $99
-    ldh  [hMultiPurpose1], a                           ; $1783: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $1783: $E0 $D8
     ld   a, JINGLE_WATER_DIVE                     ; $1785: $3E $0E
     ldh  [hJingle], a                             ; $1787: $E0 $F2
     ld   a, TRANSCIENT_VFX_PEGASUS_SPLASH         ; $1789: $3E $0C
@@ -2756,9 +2756,9 @@ ApplyLinkMotionState::
     ld   a, [wC145]                               ; $17A6: $FA $45 $C1
     ld   hl, wC13B                                ; $17A9: $21 $3B $C1
     add  a, [hl]                                  ; $17AC: $86
-    ldh  [hMultiPurpose0], a                           ; $17AD: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $17AD: $E0 $D7
     ldh  a, [hLinkPositionX]                      ; $17AF: $F0 $98
-    ldh  [hMultiPurpose1], a                           ; $17B1: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $17B1: $E0 $D8
     ld   hl, hMultiPurpose3                            ; $17B3: $21 $DA $FF
     ld   [hl], $00                                ; $17B6: $36 $00
     ld   a, [wSwordCharge]                        ; $17B8: $FA $22 $C1
@@ -2776,7 +2776,7 @@ ApplyLinkMotionState::
     ld   a, [wC13A]                               ; $17CA: $FA $3A $C1
     ld   l, a                                     ; $17CD: $6F
     ld   a, [wSwordDirection]                     ; $17CE: $FA $36 $C1
-    ldh  [hMultiPurpose2], a                           ; $17D1: $E0 $D9
+    ldh  [hMultiPurpose2], a                      ; $17D1: $E0 $D9
     ldh  a, [hLinkPositionY]                      ; $17D3: $F0 $99
     cp   $88                                      ; $17D5: $FE $88
     ret  nc                                       ; $17D7: $D0
@@ -3073,7 +3073,7 @@ IF __PATCH_0__
 ELSE
     ld   a, $00                                   ; $19C2: $3E $00
 ENDC
-    ldh  [hMultiPurpose0], a                           ; $19C4: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $19C4: $E0 $D7
     ld   de, wSpawnLocationData                   ; $19C6: $11 $5F $DB
 
     ; Copy warp data (5 bytes) from wWarp1 to wSpawnLocationData
@@ -3081,9 +3081,9 @@ ENDC
     ld   a, [hli]                                 ; $19C9: $2A
     ld   [de], a                                  ; $19CA: $12
     inc  de                                       ; $19CB: $13
-    ldh  a, [hMultiPurpose0]                           ; $19CC: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $19CC: $F0 $D7
     inc  a                                        ; $19CE: $3C
-    ldh  [hMultiPurpose0], a                           ; $19CF: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $19CF: $E0 $D7
     cp   $05                                      ; $19D1: $FE $05
     jr   nz, .loop                                ; $19D3: $20 $F4
 
@@ -3524,7 +3524,7 @@ ENDC
     ; hl = address of the room object that would intersect with the sword
     or   c                                        ; $1F9D: $B1
     ld   e, a                                     ; $1F9E: $5F
-    ldh  [hMultiPurpose1], a                           ; $1F9F: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $1F9F: $E0 $D8
     ld   hl, wRoomObjects                         ; $1FA1: $21 $11 $D7
     add  hl, de                                   ; $1FA4: $19
 
@@ -3535,7 +3535,7 @@ ENDC
 
     ; hMultiPurpose0 = id of room object under the sword
     ld   a, [hl]                                  ; $1FAB: $7E
-    ldh  [hMultiPurpose0], a                           ; $1FAC: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $1FAC: $E0 $D7
 
     ; hMultiPurpose5 = unknown value read from the objects tilesets table
     ; d = map group id
@@ -3544,15 +3544,15 @@ ENDC
     ld   a, [wIsIndoor]                           ; $1FAF: $FA $A5 $DB
     ld   d, a                                     ; $1FB2: $57
     call GetObjectPhysicsFlags_trampoline         ; $1FB3: $CD $26 $2A
-    ldh  [hMultiPurpose5], a                           ; $1FB6: $E0 $DC
+    ldh  [hMultiPurpose5], a                      ; $1FB6: $E0 $DC
 
     ; If the object is $9A, skip this section
 
-    ldh  a, [hMultiPurpose0]                           ; $1FB8: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $1FB8: $F0 $D7
     cp   $9A                                      ; $1FBA: $FE $9A
     jr   z, .notObject9AEnd                       ; $1FBC: $28 $40
 
-    ldh  a, [hMultiPurpose5]                           ; $1FBE: $F0 $DC
+    ldh  a, [hMultiPurpose5]                      ; $1FBE: $F0 $DC
     cp   $00                                      ; $1FC0: $FE $00
     jp   z, .clearC15FAndReturn                   ; $1FC2: $CA $4E $21
     cp   $01                                      ; $1FC5: $FE $01
@@ -3571,7 +3571,7 @@ ENDC
     jp   nc, .clearC15FAndReturn                  ; $1FE3: $D2 $4E $21
 
 .jp_1FE6
-    ldh  a, [hMultiPurpose0]                           ; $1FE6: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $1FE6: $F0 $D7
     ld   e, a                                     ; $1FE8: $5F
     cp   $6F                                      ; $1FE9: $FE $6F
     jr   z, .jp_1FF6                              ; $1FEB: $28 $09
@@ -3789,7 +3789,7 @@ ELSE
 ENDC
     xor  a                                        ; $2134: $AF
     ldh  [hMultiPurposeE], a                               ; $2135: $E0 $E5
-    ldh  a, [hMultiPurpose0]                           ; $2137: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $2137: $F0 $D7
     cp   $8E                                      ; $2139: $FE $8E
     jr   z, .jr_2153                              ; $213B: $28 $16
     cp   $20                                      ; $213D: $FE $20
@@ -3801,7 +3801,7 @@ IF __PATCH_0__
 ELSE
     jr   nz, .return                              ; $2145: $20 $06
 ENDC
-    ldh  a, [hMultiPurpose0]                           ; $2147: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $2147: $F0 $D7
     cp   $5C                                      ; $2149: $FE $5C
     jr   z, .jr_2161                              ; $214B: $28 $14
 
@@ -3884,7 +3884,7 @@ UpdateFinalLinkPosition::
 .horizontal
    ; Compute next Link horizontal position
     ld   c, $00                                   ; $21B2: $0E $00
-    ldh  [hMultiPurpose0], a                           ; $21B4: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $21B4: $E0 $D7
 
 ; Inputs:
 ;   c : direction (0: horizontal ; 1: vertical)
@@ -4011,7 +4011,7 @@ DoUpdateBGRegion::
     push de                                       ; $2242: $D5
 
     ; hl = wRoomObjects + hMultiPurpose2
-    ldh  a, [hMultiPurpose2]                           ; $2243: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $2243: $F0 $D9
     ld   c, a                                     ; $2245: $4F
     ld   b, $00                                   ; $2246: $06 $00
     ld   hl, wRoomObjects                         ; $2248: $21 $11 $D7
@@ -4110,7 +4110,7 @@ DoUpdateBGRegion::
     callsb func_020_49D9                          ; $22B0: $3E $20 $EA $00 $21 $CD $D9 $49
 
     ; Select BG attributes bank
-    ldh  a, [hMultiPurpose8]                           ; $22B8: $F0 $DF
+    ldh  a, [hMultiPurpose8]                      ; $22B8: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $22BA: $EA $00 $21
     ; Increment again the source and target destination
     call IncrementBGMapSourceAndDestination_Vertical ; $22BD: $CD $14 $22
@@ -4141,7 +4141,7 @@ DoUpdateBGRegion::
     push de                                       ; $22DC: $D5
     callsb func_020_49D9                          ; $22DD: $3E $20 $EA $00 $21 $CD $D9 $49
     ; Select BG attributes bank
-    ldh  a, [hMultiPurpose8]                           ; $22E5: $F0 $DF
+    ldh  a, [hMultiPurpose8]                      ; $22E5: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $22E7: $EA $00 $21
     call IncrementBGMapSourceAndDestination_Horizontal ; $22EA: $CD $24 $22
     ld   a, b                                     ; $22ED: $78
@@ -4167,9 +4167,9 @@ DoUpdateBGRegion::
     ld   b, $00                                   ; $2303: $06 $00
     ld   hl, BGRegionIncrement                    ; $2305: $21 $05 $22
     add  hl, bc                                   ; $2308: $09
-    ldh  a, [hMultiPurpose2]                           ; $2309: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $2309: $F0 $D9
     add  a, [hl]                                  ; $230B: $86
-    ldh  [hMultiPurpose2], a                           ; $230C: $E0 $D9
+    ldh  [hMultiPurpose2], a                      ; $230C: $E0 $D9
     pop  bc                                       ; $230E: $C1
 
     ; Decrement loop counter
@@ -5138,7 +5138,7 @@ LoadTileset9::
     xor  a                                        ; $2E84: $AF
     ; Copy a row of 16 tiles
 .copyOAMTilesRow
-    ldh  [hMultiPurpose0], a                           ; $2E85: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $2E85: $E0 $D7
     ld   hl, wC193                                ; $2E87: $21 $93 $C1
     ld   e, a                                     ; $2E8A: $5F
     ld   d, $00                                   ; $2E8B: $16 $00
@@ -5210,7 +5210,7 @@ LoadTileset9::
 
     ; Do the actual copy to OAM tiles
     ld   [MBC3SelectBank], a                      ; $2EF2: $EA $00 $21
-    ldh  a, [hMultiPurpose0]                           ; $2EF5: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $2EF5: $F0 $D7
     ld   d, a                                     ; $2EF7: $57
     ld   e, $00                                   ; $2EF8: $1E $00
     ; destination = Lower-half of the OAM tiles section (NPCs tiles)
@@ -5226,7 +5226,7 @@ LoadTileset9::
 .copyskipEntityLoad
 
     ; while hMultiPurpose0 < 4, copy the next row
-    ldh  a, [hMultiPurpose0]                           ; $2F0A: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $2F0A: $F0 $D7
     inc  a                                        ; $2F0C: $3C
     cp   $04                                      ; $2F0D: $FE $04
     jp   nz, .copyOAMTilesRow                     ; $2F0F: $C2 $85 $2E
@@ -5527,9 +5527,9 @@ doCopyObjectToBG:
 
     ; Copy tile attributes to BG map for tiles on the upper row
     push hl                                       ; $3055: $E5
-    ldh  a, [hMultiPurpose8]                           ; $3056: $F0 $DF
+    ldh  a, [hMultiPurpose8]                      ; $3056: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $3058: $EA $00 $21
-    ldh  a, [hMultiPurpose9]                           ; $305B: $F0 $E0
+    ldh  a, [hMultiPurpose9]                      ; $305B: $F0 $E0
     ld   h, a                                     ; $305D: $67
     ldh  a, [hMultiPurposeA]                           ; $305E: $F0 $E1
     ld   l, a                                     ; $3060: $6F
@@ -5544,7 +5544,7 @@ doCopyObjectToBG:
 
     ; Update palette offset
     ld   a, h                                     ; $306E: $7C
-    ldh  [hMultiPurpose9], a                           ; $306F: $E0 $E0
+    ldh  [hMultiPurpose9], a                      ; $306F: $E0 $E0
     ld   a, l                                     ; $3071: $7D
     ldh  [hMultiPurposeA], a                           ; $3072: $E0 $E1
     pop  hl                                       ; $3074: $E1
@@ -5563,9 +5563,9 @@ doCopyObjectToBG:
     pop  de                                       ; $3081: $D1
 
     ; Copy palettes from WRAM1 for tiles on the lower row
-    ldh  a, [hMultiPurpose8]                           ; $3082: $F0 $DF
+    ldh  a, [hMultiPurpose8]                      ; $3082: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $3084: $EA $00 $21
-    ldh  a, [hMultiPurpose9]                           ; $3087: $F0 $E0
+    ldh  a, [hMultiPurpose9]                      ; $3087: $F0 $E0
     ld   h, a                                     ; $3089: $67
     ldh  a, [hMultiPurposeA]                           ; $308A: $F0 $E1
     ld   l, a                                     ; $308C: $6F
@@ -6024,7 +6024,7 @@ LoadRoom::
 LoadRoomObject::
     ; Clear hMultiPurpose0
     xor  a                                        ; $32A9: $AF
-    ldh  [hMultiPurpose0], a                           ; $32AA: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $32AA: $E0 $D7
 
     ; If object type first bit is 1…
     ld   a, [bc]                                  ; $32AC: $0A
@@ -6036,7 +6036,7 @@ LoadRoomObject::
     ; … this is a three-bytes object, that spans more than one block.
     ; The first byte encodes the direction and length of the block:
     ; save it to hMultiPurpose0.
-    ldh  [hMultiPurpose0], a                           ; $32B5: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $32B5: $E0 $D7
     ; Skip the parsed direction-and-length byte
     inc  bc                                       ; $32B7: $03
 .threeBytesObjectEnd
@@ -6216,7 +6216,7 @@ LoadRoomObject::
 
     ; hMultiPurpose9 = object type
     ld   a, d                                     ; $3381: $7A
-    ldh  [hMultiPurpose9], a                           ; $3382: $E0 $E0
+    ldh  [hMultiPurpose9], a                      ; $3382: $E0 $E0
 
     ; If object is an entrance to somewhere else…
     cp   OBJECT_CLOSED_GATE                       ; $3384: $FE $C2
@@ -6254,7 +6254,7 @@ LoadRoomObject::
 .overworldDoorEnd
 
     ; a = object type
-    ldh  a, [hMultiPurpose9]                           ; $33BC: $F0 $E0
+    ldh  a, [hMultiPurpose9]                      ; $33BC: $F0 $E0
 
     cp   $C5                                      ; $33BE: $FE $C5
     jp   z, .configureStairs                      ; $33C0: $CA $7D $34
@@ -6265,7 +6265,7 @@ LoadRoomObject::
 .loadNonDoorIndoorObject
     ; Re-increment a to be the object type
     add  a, OBJECT_KEY_DOOR_TOP                   ; $33CB: $C6 $EC
-    ldh  [hMultiPurpose9], a                           ; $33CD: $E0 $E0
+    ldh  [hMultiPurpose9], a                      ; $33CD: $E0 $E0
 
     ; If object type is a conveyor belt…
     push af                                       ; $33CF: $F5
@@ -6293,7 +6293,7 @@ LoadRoomObject::
     ldh  a, [hMapRoom]                            ; $33E4: $F0 $F6
     cp   $C4                                      ; $33E6: $FE $C4
     ; … and the object type is not zero…
-    ldh  a, [hMultiPurpose9]                           ; $33E8: $F0 $E0
+    ldh  a, [hMultiPurpose9]                      ; $33E8: $F0 $E0
     jr   z, .torchEnd                             ; $33EA: $28 $1B
     ; …then increment the number of torches in the room
     ld   hl, wTorchesCount                        ; $33EC: $21 $C9 $DB
@@ -6507,7 +6507,7 @@ LoadRoomObject::
 
     ldh  a, [hMapId]                              ; $34B6: $F0 $F7
     cp   MAP_CAVE_B                               ; $34B8: $FE $0A
-    ldh  a, [hMultiPurpose9]                           ; $34BA: $F0 $E0
+    ldh  a, [hMultiPurpose9]                      ; $34BA: $F0 $E0
     jr   c, .bombableBlockEnd                     ; $34BC: $38 $04
     cp   OBJECT_BOMBABLE_BLOCK                    ; $34BE: $FE $A9
     jr   z, .configureBreakableObject             ; $34C0: $28 $04
@@ -6544,7 +6544,7 @@ LoadRoomObject::
 
     ; a = multiple-blocks object direction and length
     ld   d, $00                                   ; $34DA: $16 $00
-    ldh  a, [hMultiPurpose0]                           ; $34DC: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $34DC: $F0 $D7
     ; If there are no coordinates for a multiple-blocks object…
     and  a                                        ; $34DE: $A7
     ; … this is a single-block object:
@@ -6560,7 +6560,7 @@ LoadRoomObject::
     ld   hl, wRoomObjects                         ; $34E4: $21 $11 $D7
     add  hl, de                                   ; $34E7: $19
     ; e = count
-    ldh  a, [hMultiPurpose0]                           ; $34E8: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $34E8: $F0 $D7
     and  $0F                                      ; $34EA: $E6 $0F
     ld   e, a                                     ; $34EC: $5F
     ; d = object type
@@ -6580,7 +6580,7 @@ FillRoomWithConsecutiveObjects::
     ldi  [hl], a                                  ; $34F0: $22
 
     ; If the object direction is vertical…
-    ldh  a, [hMultiPurpose0]                           ; $34F1: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $34F1: $F0 $D7
     and  $40                                      ; $34F3: $E6 $40
     jr   z, .verticalEnd                          ; $34F5: $28 $04
     ; … increment the target address to move to the next column

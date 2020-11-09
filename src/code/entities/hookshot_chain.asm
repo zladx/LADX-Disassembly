@@ -57,11 +57,11 @@ ENDC
 jr_018_7C21:
     ld   a, $30                                   ; $7C21: $3E $30
     call GetVectorTowardsLink_trampoline          ; $7C23: $CD $B5 $3B
-    ldh  a, [hMultiPurpose0]                           ; $7C26: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $7C26: $F0 $D7
     cpl                                           ; $7C28: $2F
     inc  a                                        ; $7C29: $3C
     ldh  [hLinkPositionYIncrement], a             ; $7C2A: $E0 $9B
-    ldh  a, [hMultiPurpose1]                           ; $7C2C: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $7C2C: $F0 $D8
     cpl                                           ; $7C2E: $2F
     inc  a                                        ; $7C2F: $3C
     ldh  [hLinkPositionXIncrement], a             ; $7C30: $E0 $9A
@@ -155,8 +155,8 @@ jr_018_7CAF:
     ld   a, JINGLE_SWORD_POKING                   ; $7CB3: $3E $07
     ldh  [hJingle], a                             ; $7CB5: $E0 $F2
     ldh  a, [hActiveEntityPosX]                   ; $7CB7: $F0 $EE
-    ldh  [hMultiPurpose0], a                           ; $7CB9: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $7CB9: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $7CBB: $F0 $EC
-    ldh  [hMultiPurpose1], a                           ; $7CBD: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $7CBD: $E0 $D8
     ld   a, TRANSCIENT_VFX_SWORD_POKE             ; $7CBF: $3E $05
     jp   AddTranscientVfx                         ; $7CC1: $C3 $C7 $0C

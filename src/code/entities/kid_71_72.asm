@@ -219,11 +219,11 @@ func_006_61A6::
     call SpawnNewEntity_trampoline                ; $61B7: $CD $86 $3B
     jr   c, jr_006_61EB                           ; $61BA: $38 $2F
 
-    ldh  a, [hMultiPurpose0]                           ; $61BC: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $61BC: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $61BE: $21 $00 $C2
     add  hl, de                                   ; $61C1: $19
     ld   [hl], a                                  ; $61C2: $77
-    ldh  a, [hMultiPurpose1]                           ; $61C3: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $61C3: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $61C5: $21 $10 $C2
     add  hl, de                                   ; $61C8: $19
     ld   [hl], a                                  ; $61C9: $77

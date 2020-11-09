@@ -753,14 +753,14 @@ RenderActiveEntitySpritesRect::
 
     ; Save counter to hMultiPurpose0
     ld   a, c                                     ; $3CF9: $79
-    ldh  [hMultiPurpose0], a                           ; $3CFA: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $3CFA: $E0 $D7
 
     ld   a, [wActiveEntityIndex]                  ; $3CFC: $FA $23 $C1
     ld   c, a                                     ; $3CFF: $4F
     call SkipDisabledEntityDuringRoomTransition   ; $3D00: $CD $57 $3D
 
     ; Restore counter from hMultiPurpose0
-    ldh  a, [hMultiPurpose0]                           ; $3D03: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $3D03: $F0 $D7
     ld   c, a                                     ; $3D05: $4F
 
 .loop
@@ -1024,9 +1024,9 @@ label_3E8E::
     ret  nz                                       ; $3E9A: $C0
 
     ldh  a, [hActiveEntityPosX]                   ; $3E9B: $F0 $EE
-    ldh  [hMultiPurpose0], a                           ; $3E9D: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $3E9D: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $3E9F: $F0 $EC
-    ldh  [hMultiPurpose1], a                           ; $3EA1: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $3EA1: $E0 $D8
     ld   a, TRANSCIENT_VFX_SMOKE                  ; $3EA3: $3E $08
     call AddTranscientVfx                         ; $3EA5: $CD $C7 $0C
     ld   hl, wTranscientVfxCountdownTable         ; $3EA8: $21 $20 $C5
@@ -1044,7 +1044,7 @@ label_3EAF::
     inc  a                                        ; $3EB9: $3C
 
 .jr_3EBA
-    ldh  [hMultiPurpose0], a                           ; $3EBA: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $3EBA: $E0 $D7
     ld   hl, wEntitiesUnknowTableS                ; $3EBC: $21 $00 $C4
     add  hl, bc                                   ; $3EBF: $09
     ld   a, [hl]                                  ; $3EC0: $7E

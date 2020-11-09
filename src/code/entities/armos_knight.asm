@@ -149,13 +149,13 @@ jr_006_5394:
     call SpawnNewEntity_trampoline                ; $53B6: $CD $86 $3B
     jr   c, label_006_5411                        ; $53B9: $38 $56
 
-    ldh  a, [hMultiPurpose0]                           ; $53BB: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $53BB: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $53BD: $21 $00 $C2
     add  hl, de                                   ; $53C0: $19
     dec  a                                        ; $53C1: $3D
     ld   [hl], a                                  ; $53C2: $77
-    ldh  [hMultiPurpose0], a                           ; $53C3: $E0 $D7
-    ldh  a, [hMultiPurpose1]                           ; $53C5: $F0 $D8
+    ldh  [hMultiPurpose0], a                      ; $53C3: $E0 $D7
+    ldh  a, [hMultiPurpose1]                      ; $53C5: $F0 $D8
     ld   hl, hMultiPurpose3                            ; $53C7: $21 $DA $FF
     sub  [hl]                                     ; $53CA: $96
     ld   hl, wEntitiesPosYTable                   ; $53CB: $21 $10 $C2
@@ -175,13 +175,13 @@ jr_006_53D3:
     call SpawnNewEntity_trampoline                ; $53DF: $CD $86 $3B
     jr   c, label_006_5411                        ; $53E2: $38 $2D
 
-    ldh  a, [hMultiPurpose0]                           ; $53E4: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $53E4: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $53E6: $21 $00 $C2
     add  hl, de                                   ; $53E9: $19
     add  $07                                      ; $53EA: $C6 $07
     ld   [hl], a                                  ; $53EC: $77
-    ldh  [hMultiPurpose0], a                           ; $53ED: $E0 $D7
-    ldh  a, [hMultiPurpose1]                           ; $53EF: $F0 $D8
+    ldh  [hMultiPurpose0], a                      ; $53ED: $E0 $D7
+    ldh  a, [hMultiPurpose1]                      ; $53EF: $F0 $D8
     ld   hl, hMultiPurpose3                            ; $53F1: $21 $DA $FF
     sub  [hl]                                     ; $53F4: $96
     ld   hl, wEntitiesPosYTable                   ; $53F5: $21 $10 $C2
@@ -189,7 +189,7 @@ jr_006_53D3:
 
 jr_006_53F9:
     ld   [hl], a                                  ; $53F9: $77
-    ldh  [hMultiPurpose1], a                           ; $53FA: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $53FA: $E0 $D8
     ld   hl, wEntitiesPrivateCountdown1Table      ; $53FC: $21 $F0 $C2
     add  hl, de                                   ; $53FF: $19
     ld   [hl], $0F                                ; $5400: $36 $0F

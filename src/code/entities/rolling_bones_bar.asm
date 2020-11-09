@@ -42,7 +42,7 @@ jr_006_6F03:
     ld   hl, wEntitiesPrivateState1Table          ; $6F15: $21 $B0 $C2
     add  hl, bc                                   ; $6F18: $09
     ldh  a, [hActiveEntityPosX]                   ; $6F19: $F0 $EE
-    ldh  [hMultiPurpose0], a                           ; $6F1B: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $6F1B: $E0 $D7
     ld   e, [hl]                                  ; $6F1D: $5E
     inc  [hl]                                     ; $6F1E: $34
     ld   a, [hl]                                  ; $6F1F: $7E
@@ -70,7 +70,7 @@ jr_006_6F3C:
     ld   hl, Data_006_6EDD                        ; $6F3D: $21 $DD $6E
     add  hl, de                                   ; $6F40: $19
     ld   a, [hl]                                  ; $6F41: $7E
-    ldh  [hMultiPurpose1], a                           ; $6F42: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $6F42: $E0 $D8
     jp   label_006_7035                           ; $6F44: $C3 $35 $70
 
 jr_006_6F47:

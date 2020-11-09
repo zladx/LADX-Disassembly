@@ -29,11 +29,11 @@ GenieState0Handler::
     ld   a, ENTITY_GENIE                          ; $401F: $3E $5C
     call SpawnNewEntity_trampoline                ; $4021: $CD $86 $3B
 
-    ldh  a, [hMultiPurpose0]                           ; $4024: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4024: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $4026: $21 $00 $C2
     add  hl, de                                   ; $4029: $19
     ld   [hl], a                                  ; $402A: $77
-    ldh  a, [hMultiPurpose1]                           ; $402B: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $402B: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $402D: $21 $10 $C2
     add  hl, de                                   ; $4030: $19
     sub  $18                                      ; $4031: $D6 $18

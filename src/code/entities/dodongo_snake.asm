@@ -95,7 +95,7 @@ jr_005_689B:
     inc  a                                        ; $68A0: $3C
     and  $3F                                      ; $68A1: $E6 $3F
     ld   [hl], a                                  ; $68A3: $77
-    ldh  [hMultiPurpose0], a                           ; $68A4: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $68A4: $E0 $D7
     rra                                           ; $68A6: $1F
     rra                                           ; $68A7: $1F
     nop                                           ; $68A8: $00
@@ -127,7 +127,7 @@ jr_005_689B:
     push de                                       ; $68D5: $D5
     ld   hl, wIsFileSelectionArrowShifted         ; $68D6: $21 $00 $D0
     add  hl, de                                   ; $68D9: $19
-    ldh  a, [hMultiPurpose0]                           ; $68DA: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $68DA: $F0 $D7
     ld   e, a                                     ; $68DC: $5F
     add  hl, de                                   ; $68DD: $19
     ldh  a, [hActiveEntityPosX]                   ; $68DE: $F0 $EE
@@ -135,7 +135,7 @@ jr_005_689B:
     pop  de                                       ; $68E1: $D1
     ld   hl, wD100                                ; $68E2: $21 $00 $D1
     add  hl, de                                   ; $68E5: $19
-    ldh  a, [hMultiPurpose0]                           ; $68E6: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $68E6: $F0 $D7
     ld   e, a                                     ; $68E8: $5F
     add  hl, de                                   ; $68E9: $19
     ldh  a, [hActiveEntityVisualPosY]             ; $68EA: $F0 $EC
@@ -304,12 +304,12 @@ jr_005_69CB:
     add  hl, de                                   ; $69D6: $19
     ldh  a, [hActiveEntityPosX]                   ; $69D7: $F0 $EE
     add  [hl]                                     ; $69D9: $86
-    ldh  [hMultiPurpose0], a                           ; $69DA: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $69DA: $E0 $D7
     ld   hl, Data_005_69AD                        ; $69DC: $21 $AD $69
     add  hl, de                                   ; $69DF: $19
     ldh  a, [hActiveEntityVisualPosY]             ; $69E0: $F0 $EC
     add  [hl]                                     ; $69E2: $86
-    ldh  [hMultiPurpose1], a                           ; $69E3: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $69E3: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $69E5: $3E $02
     call AddTranscientVfx                         ; $69E7: $CD $C7 $0C
     xor  a                                        ; $69EA: $AF
@@ -337,14 +337,14 @@ jr_005_69EB:
     ld   c, [hl]                                  ; $6A07: $4E
     ld   hl, Data_005_69A1                        ; $6A08: $21 $A1 $69
     add  hl, bc                                   ; $6A0B: $09
-    ldh  a, [hMultiPurpose0]                           ; $6A0C: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $6A0C: $F0 $D7
     add  [hl]                                     ; $6A0E: $86
     ld   hl, wEntitiesPosXTable                   ; $6A0F: $21 $00 $C2
     add  hl, de                                   ; $6A12: $19
     ld   [hl], a                                  ; $6A13: $77
     ld   hl, Data_005_69A5                        ; $6A14: $21 $A5 $69
     add  hl, bc                                   ; $6A17: $09
-    ldh  a, [hMultiPurpose1]                           ; $6A18: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $6A18: $F0 $D8
     add  [hl]                                     ; $6A1A: $86
     ld   hl, wEntitiesPosYTable                   ; $6A1B: $21 $10 $C2
     add  hl, de                                   ; $6A1E: $19
@@ -382,7 +382,7 @@ func_005_6A5F::
     ld   hl, wEntitiesUnknowTableY                ; $6A5F: $21 $D0 $C3
     add  hl, bc                                   ; $6A62: $09
     ld   a, [hl]                                  ; $6A63: $7E
-    ldh  [hMultiPurpose0], a                           ; $6A64: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $6A64: $E0 $D7
     push bc                                       ; $6A66: $C5
     ld   hl, wEntitiesLoadOrderTable              ; $6A67: $21 $60 $C4
     add  hl, bc                                   ; $6A6A: $09
@@ -400,7 +400,7 @@ func_005_6A5F::
     push de                                       ; $6A7E: $D5
     ld   hl, wIsFileSelectionArrowShifted         ; $6A7F: $21 $00 $D0
     add  hl, de                                   ; $6A82: $19
-    ldh  a, [hMultiPurpose0]                           ; $6A83: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $6A83: $F0 $D7
     sub  c                                        ; $6A85: $91
     and  $3F                                      ; $6A86: $E6 $3F
     ld   e, a                                     ; $6A88: $5F
@@ -411,7 +411,7 @@ func_005_6A5F::
     pop  de                                       ; $6A8E: $D1
     ld   hl, wD100                                ; $6A8F: $21 $00 $D1
     add  hl, de                                   ; $6A92: $19
-    ldh  a, [hMultiPurpose0]                           ; $6A93: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $6A93: $F0 $D7
     sub  c                                        ; $6A95: $91
     and  $3F                                      ; $6A96: $E6 $3F
     ld   e, a                                     ; $6A98: $5F
@@ -427,7 +427,7 @@ func_005_6AA5::
     ld   hl, wEntitiesUnknowTableY                ; $6AA5: $21 $D0 $C3
     add  hl, bc                                   ; $6AA8: $09
     ld   a, [hl]                                  ; $6AA9: $7E
-    ldh  [hMultiPurpose0], a                           ; $6AAA: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $6AAA: $E0 $D7
     push bc                                       ; $6AAC: $C5
     ld   hl, wEntitiesLoadOrderTable              ; $6AAD: $21 $60 $C4
     add  hl, bc                                   ; $6AB0: $09
@@ -445,7 +445,7 @@ func_005_6AA5::
     push de                                       ; $6AC4: $D5
     ld   hl, wIsFileSelectionArrowShifted         ; $6AC5: $21 $00 $D0
     add  hl, de                                   ; $6AC8: $19
-    ldh  a, [hMultiPurpose0]                           ; $6AC9: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $6AC9: $F0 $D7
     sub  c                                        ; $6ACB: $91
     and  $3F                                      ; $6ACC: $E6 $3F
     ld   e, a                                     ; $6ACE: $5F
@@ -456,7 +456,7 @@ func_005_6AA5::
     pop  de                                       ; $6AD4: $D1
     ld   hl, wD100                                ; $6AD5: $21 $00 $D1
     add  hl, de                                   ; $6AD8: $19
-    ldh  a, [hMultiPurpose0]                           ; $6AD9: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $6AD9: $F0 $D7
     sub  c                                        ; $6ADB: $91
     and  $3F                                      ; $6ADC: $E6 $3F
     ld   e, a                                     ; $6ADE: $5F

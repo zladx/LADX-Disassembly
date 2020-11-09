@@ -28,7 +28,7 @@ SpawnChestWithItem::
     ld   [hl], a                                  ; $41F2: $77
     ld   hl, wEntitiesSpriteVariantTable          ; $41F3: $21 $B0 $C3
     add  hl, de                                   ; $41F6: $19
-    ldh  a, [hMultiPurpose8]                           ; $41F7: $F0 $DF
+    ldh  a, [hMultiPurpose8]                      ; $41F7: $F0 $DF
     ld   [hl], a                                  ; $41F9: $77
 
 .return
@@ -739,9 +739,9 @@ groundVfxEnd:
 
 shallowWaterVfx:
     ldh  a, [hLinkPositionY]                      ; $45AD: $F0 $99
-    ldh  [hMultiPurpose1], a                           ; $45AF: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $45AF: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $45B1: $F0 $98
-    ldh  [hMultiPurpose0], a                           ; $45B3: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $45B3: $E0 $D7
     ld   a, JINGLE_WATER_DIVE                     ; $45B5: $3E $0E
     ldh  [hJingle], a                             ; $45B7: $E0 $F2
     ld   a, TRANSCIENT_VFX_PEGASUS_SPLASH         ; $45B9: $3E $0C
@@ -1795,7 +1795,7 @@ jr_002_4C8B:
     ret                                           ; $4C91: $C9
 
 label_002_4C92:
-    ldh  a, [hMultiPurpose1]                           ; $4C92: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $4C92: $F0 $D8
     ld   e, a                                     ; $4C94: $5F
     ld   d, $00                                   ; $4C95: $16 $00
     ld   hl, wRoomObjects                         ; $4C97: $21 $11 $D7
@@ -1868,13 +1868,13 @@ jr_002_4CD3:
     ld   b, d                                     ; $4D07: $42
     ld   a, $0C                                   ; $4D08: $3E $0C
     call ApplyVectorTowardsLink_trampoline        ; $4D0A: $CD $AA $3B
-    ldh  a, [hMultiPurpose0]                           ; $4D0D: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4D0D: $F0 $D7
     cpl                                           ; $4D0F: $2F
     inc  a                                        ; $4D10: $3C
     ld   hl, wEntitiesSpeedYTable                 ; $4D11: $21 $50 $C2
     add  hl, bc                                   ; $4D14: $09
     ld   [hl], a                                  ; $4D15: $77
-    ldh  a, [hMultiPurpose1]                           ; $4D16: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $4D16: $F0 $D8
     cpl                                           ; $4D18: $2F
     inc  a                                        ; $4D19: $3C
     ld   hl, wEntitiesSpeedXTable                 ; $4D1A: $21 $40 $C2
@@ -1920,7 +1920,7 @@ func_002_4D20::
     ldh  [hSwordIntersectedAreaY], a              ; $4D52: $E0 $CD
     or   c                                        ; $4D54: $B1
     ld   e, a                                     ; $4D55: $5F
-    ldh  [hMultiPurpose1], a                           ; $4D56: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $4D56: $E0 $D8
     ld   hl, wRoomObjects                         ; $4D58: $21 $11 $D7
     add  hl, de                                   ; $4D5B: $19
     ld   a, h                                     ; $4D5C: $7C
@@ -1928,7 +1928,7 @@ func_002_4D20::
     jp   nz, label_002_4D95                       ; $4D5F: $C2 $95 $4D
 
     ld   a, [hl]                                  ; $4D62: $7E
-    ldh  [hMultiPurpose0], a                           ; $4D63: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $4D63: $E0 $D7
     ld   e, a                                     ; $4D65: $5F
     ld   a, [wIsIndoor]                           ; $4D66: $FA $A5 $DB
     ld   d, a                                     ; $4D69: $57
@@ -1940,7 +1940,7 @@ func_002_4D20::
     and  a                                        ; $4D72: $A7
     jr   nz, jr_002_4D8D                          ; $4D73: $20 $18
 
-    ldh  a, [hMultiPurpose0]                           ; $4D75: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4D75: $F0 $D7
     cp   $0C                                      ; $4D77: $FE $0C
     jr   z, label_002_4D95                        ; $4D79: $28 $1A
 
@@ -1959,7 +1959,7 @@ func_002_4D20::
     jr   jr_002_4D93                              ; $4D8B: $18 $06
 
 jr_002_4D8D:
-    ldh  a, [hMultiPurpose0]                           ; $4D8D: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4D8D: $F0 $D7
     cp   $05                                      ; $4D8F: $FE $05
     jr   nz, label_002_4D95                       ; $4D91: $20 $02
 
@@ -1972,12 +1972,12 @@ label_002_4D95:
     ret                                           ; $4D96: $C9
 
 label_002_4D97:
-    ldh  a, [hMultiPurpose0]                           ; $4D97: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4D97: $F0 $D7
     ldh  [hSwordIntersectedAreaX], a              ; $4D99: $E0 $CE
     swap a                                        ; $4D9B: $CB $37
     and  $0F                                      ; $4D9D: $E6 $0F
     ld   e, a                                     ; $4D9F: $5F
-    ldh  a, [hMultiPurpose1]                           ; $4DA0: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $4DA0: $F0 $D8
     ldh  [hSwordIntersectedAreaY], a              ; $4DA2: $E0 $CD
     and  $F0                                      ; $4DA4: $E6 $F0
     or   e                                        ; $4DA6: $B3
@@ -2786,17 +2786,17 @@ func_002_524A::
 jr_002_524F:
     ldh  a, [hLinkPositionX]                      ; $524F: $F0 $98
     sub  $08                                      ; $5251: $D6 $08
-    ldh  [hMultiPurpose1], a                           ; $5253: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $5253: $E0 $D8
     ldh  a, [hFrameCounter]                       ; $5255: $F0 $E7
     rla                                           ; $5257: $17
     rla                                           ; $5258: $17
     and  $10                                      ; $5259: $E6 $10
-    ldh  [hMultiPurpose3], a                           ; $525B: $E0 $DA
+    ldh  [hMultiPurpose3], a                      ; $525B: $E0 $DA
     xor  a                                        ; $525D: $AF
     ld   h, a                                     ; $525E: $67
     ld   l, a                                     ; $525F: $6F
     ld   a, $06                                   ; $5260: $3E $06
-    ldh  [hMultiPurpose2], a                           ; $5262: $E0 $D9
+    ldh  [hMultiPurpose2], a                      ; $5262: $E0 $D9
     jp   func_1819                                ; $5264: $C3 $19 $18
 
 LinkMotionRecoverHandler::
@@ -2948,7 +2948,7 @@ label_002_5310::
     ld   hl, hMultiPurpose0                            ; $5351: $21 $D7 $FF
     add  [hl]                                     ; $5354: $86
     ld   [hl], a                                  ; $5355: $77
-    ldh  a, [hMultiPurpose2]                           ; $5356: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $5356: $F0 $D9
     cp   $FF                                      ; $5358: $FE $FF
     jr   z, jr_002_535E                           ; $535A: $28 $02
 
@@ -2956,7 +2956,7 @@ label_002_5310::
     ld   [de], a                                  ; $535D: $12
 
 jr_002_535E::
-    ldh  a, [hMultiPurpose3]                           ; $535E: $F0 $DA
+    ldh  a, [hMultiPurpose3]                      ; $535E: $F0 $DA
     cp   $FF                                      ; $5360: $FE $FF
     jr   z, jr_002_5366                           ; $5362: $28 $02
 
@@ -2966,7 +2966,7 @@ jr_002_535E::
 jr_002_5366::
     inc  de                                       ; $5366: $13
     inc  bc                                       ; $5367: $03
-    ldh  a, [hMultiPurpose1]                           ; $5368: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $5368: $F0 $D8
     ld   hl, hLinkPositionX                       ; $536A: $21 $98 $FF
     add  [hl]                                     ; $536D: $86
     ld   [de], a                                  ; $536E: $12
@@ -2974,15 +2974,15 @@ jr_002_5366::
     ld   [bc], a                                  ; $5371: $02
     inc  de                                       ; $5372: $13
     inc  bc                                       ; $5373: $03
-    ldh  a, [hMultiPurpose2]                           ; $5374: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $5374: $F0 $D9
     ld   [de], a                                  ; $5376: $12
-    ldh  a, [hMultiPurpose3]                           ; $5377: $F0 $DA
+    ldh  a, [hMultiPurpose3]                      ; $5377: $F0 $DA
     ld   [bc], a                                  ; $5379: $02
     inc  de                                       ; $537A: $13
     inc  bc                                       ; $537B: $03
-    ldh  a, [hMultiPurpose4]                           ; $537C: $F0 $DB
+    ldh  a, [hMultiPurpose4]                      ; $537C: $F0 $DB
     ld   [de], a                                  ; $537E: $12
-    ldh  a, [hMultiPurpose5]                           ; $537F: $F0 $DC
+    ldh  a, [hMultiPurpose5]                      ; $537F: $F0 $DC
     ld   [bc], a                                  ; $5381: $02
     ret                                           ; $5382: $C9
 
@@ -3051,12 +3051,12 @@ TryOpenLockedDoor::
     or   $40                                      ; $53CC: $F6 $40
     ld   [hl], a                                  ; $53CE: $77
     ldh  [hRoomStatus], a                         ; $53CF: $E0 $F8
-    ldh  a, [hMultiPurpose4]                           ; $53D1: $F0 $DB
+    ldh  a, [hMultiPurpose4]                      ; $53D1: $F0 $DB
     and  $F0                                      ; $53D3: $E6 $F0
     ldh  [hSwordIntersectedAreaX], a              ; $53D5: $E0 $CE
     swap a                                        ; $53D7: $CB $37
     ld   e, a                                     ; $53D9: $5F
-    ldh  a, [hMultiPurpose5]                           ; $53DA: $F0 $DC
+    ldh  a, [hMultiPurpose5]                      ; $53DA: $F0 $DC
     and  $F0                                      ; $53DC: $E6 $F0
     ldh  [hSwordIntersectedAreaY], a              ; $53DE: $E0 $CD
     or   e                                        ; $53E0: $B3
@@ -3066,10 +3066,10 @@ TryOpenLockedDoor::
     call func_014_5526_trampoline                 ; $53E4: $CD $78 $21
     ldh  a, [hSwordIntersectedAreaX]              ; $53E7: $F0 $CE
     add  $08                                      ; $53E9: $C6 $08
-    ldh  [hMultiPurpose0], a                           ; $53EB: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $53EB: $E0 $D7
     ldh  a, [hSwordIntersectedAreaY]              ; $53ED: $F0 $CD
     add  $10                                      ; $53EF: $C6 $10
-    ldh  [hMultiPurpose1], a                           ; $53F1: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $53F1: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $53F3: $3E $02
     call AddTranscientVfx                         ; $53F5: $CD $C7 $0C
     jp   .return                                  ; $53F8: $C3 $1D $54
@@ -3082,13 +3082,13 @@ TryOpenLockedDoor::
     ld   hl, wEntitiesStatusTable                 ; $5402: $21 $80 $C2
     add  hl, de                                   ; $5405: $19
     dec  [hl]                                     ; $5406: $35
-    ldh  a, [hMultiPurpose4]                           ; $5407: $F0 $DB
+    ldh  a, [hMultiPurpose4]                      ; $5407: $F0 $DB
     and  $F0                                      ; $5409: $E6 $F0
     add  $08                                      ; $540B: $C6 $08
     ld   hl, wEntitiesPosXTable                   ; $540D: $21 $00 $C2
     add  hl, de                                   ; $5410: $19
     ld   [hl], a                                  ; $5411: $77
-    ldh  a, [hMultiPurpose5]                           ; $5412: $F0 $DC
+    ldh  a, [hMultiPurpose5]                      ; $5412: $F0 $DC
     and  $F0                                      ; $5414: $E6 $F0
     add  $10                                      ; $5416: $C6 $10
     ld   hl, wEntitiesPosYTable                   ; $5418: $21 $10 $C2
@@ -3387,7 +3387,7 @@ RenderTranscientVfx::
     ; Decrement the vfx countdown
     dec  a                                        ; $5576: $3D
     ld   [hl], a                                  ; $5577: $77
-    ldh  [hMultiPurpose0], a                           ; $5578: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $5578: $E0 $D7
     ; if the VFX countdown reached zero, remove the effect
     jr   nz, .render                              ; $557A: $20 $03
 
@@ -3471,10 +3471,10 @@ RenderTranscientLavaSplash::
     ld   c, $04                                   ; $561C: $0E $04
 
 jr_002_561E:
-    ldh  a, [hMultiPurpose1]                           ; $561E: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $561E: $F0 $D8
     ld   [de], a                                  ; $5620: $12
     inc  de                                       ; $5621: $13
-    ldh  a, [hMultiPurpose2]                           ; $5622: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $5622: $F0 $D9
     ld   hl, Data_002_5600 - 1                    ; $5624: $21 $FF $55
     add  hl, bc                                   ; $5627: $09
     add  [hl]                                     ; $5628: $86
@@ -3506,7 +3506,7 @@ RenderTranscientRumble::
     ld   [wC167], a                               ; $564A: $EA $67 $C1
     xor  a                                        ; $564D: $AF
     ld   [wScreenShakeHorizontal], a              ; $564E: $EA $55 $C1
-    ldh  a, [hMultiPurpose0]                           ; $5651: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $5651: $F0 $D7
     cp   $02                                      ; $5653: $FE $02
     jr   nc, jr_002_565B                          ; $5655: $30 $04
 
@@ -3558,7 +3558,7 @@ jr_002_568C:
     cp   $08                                      ; $568E: $FE $08
     jp   nz, label_002_5707                       ; $5690: $C2 $07 $57
 
-    ldh  a, [hMultiPurpose0]                           ; $5693: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $5693: $F0 $D7
     rra                                           ; $5695: $1F
     rra                                           ; $5696: $1F
     rra                                           ; $5697: $1F
@@ -3568,9 +3568,9 @@ jr_002_568C:
     ld   hl, Data_002_5642                        ; $569C: $21 $42 $56
     add  hl, de                                   ; $569F: $19
     ld   a, [hl+]                                 ; $56A0: $2A
-    ldh  [hMultiPurpose0], a                           ; $56A1: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $56A1: $E0 $D7
     ld   a, [hl]                                  ; $56A3: $7E
-    ldh  [hMultiPurpose1], a                           ; $56A4: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $56A4: $E0 $D8
     ld   a, $60                                   ; $56A6: $3E $60
     ldh  [hSwordIntersectedAreaX], a              ; $56A8: $E0 $CE
     ldh  a, [hMapRoom]                            ; $56AA: $F0 $F6
@@ -3596,7 +3596,7 @@ jr_002_56B8:
     ld   [hl+], a                                 ; $56CB: $22
     ld   a, $41                                   ; $56CC: $3E $41
     ld   [hl+], a                                 ; $56CE: $22
-    ldh  a, [hMultiPurpose0]                           ; $56CF: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $56CF: $F0 $D7
     ld   [hl+], a                                 ; $56D1: $22
     ldh  a, [hFFCF]                               ; $56D2: $F0 $CF
     ld   [hl+], a                                 ; $56D4: $22
@@ -3605,7 +3605,7 @@ jr_002_56B8:
     ld   [hl+], a                                 ; $56D9: $22
     ld   a, $41                                   ; $56DA: $3E $41
     ld   [hl+], a                                 ; $56DC: $22
-    ldh  a, [hMultiPurpose1]                           ; $56DD: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $56DD: $F0 $D8
     ld   [hl+], a                                 ; $56DF: $22
     ld   [hl], b                                  ; $56E0: $70
     ld   a, e                                     ; $56E1: $7B
@@ -3639,7 +3639,7 @@ Data_002_5708::
 
 RenderTranscientPegasusDust::
     call func_002_58D0                            ; $5718: $CD $D0 $58
-    ldh  a, [hMultiPurpose0]                           ; $571B: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $571B: $F0 $D7
     and  $08                                      ; $571D: $E6 $08
     ld   d, $00                                   ; $571F: $16 $00
     ld   e, a                                     ; $5721: $5F
@@ -3658,7 +3658,7 @@ Data_002_5736::
 
 RenderTranscientSmoke::
     call func_002_58D0                            ; $5746: $CD $D0 $58
-    ldh  a, [hMultiPurpose0]                           ; $5749: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $5749: $F0 $D7
     and  $08                                      ; $574B: $E6 $08
     ld   d, $00                                   ; $574D: $16 $00
     ld   e, a                                     ; $574F: $5F
@@ -3672,7 +3672,7 @@ Data_002_575A::
     db   $01, $01, $FF, $FF
 
 RenderTranscientMovingSparkle::
-    ldh  a, [hMultiPurpose0]                           ; $575E: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $575E: $F0 $D7
     cp   $0A                                      ; $5760: $FE $0A
     jr   c, jr_002_5780                           ; $5762: $38 $1C
 
@@ -3699,7 +3699,7 @@ jr_002_5780:
     call func_002_58D0                            ; $5780: $CD $D0 $58
     push bc                                       ; $5783: $C5
     ld   c, $3A                                   ; $5784: $0E $3A
-    ldh  a, [hMultiPurpose0]                           ; $5786: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $5786: $F0 $D7
     cp   $07                                      ; $5788: $FE $07
     jr   nc, jr_002_578E                          ; $578A: $30 $02
 
@@ -3711,17 +3711,17 @@ jr_002_578E:
     ld   d, $00                                   ; $5792: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $5794: $21 $30 $C0
     add  hl, de                                   ; $5797: $19
-    ldh  a, [hMultiPurpose1]                           ; $5798: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $5798: $F0 $D8
     ld   [hl+], a                                 ; $579A: $22
-    ldh  a, [hMultiPurpose2]                           ; $579B: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $579B: $F0 $D9
     ld   [hl+], a                                 ; $579D: $22
     ld   a, c                                     ; $579E: $79
     ld   [hl+], a                                 ; $579F: $22
     xor  a                                        ; $57A0: $AF
     ld   [hl+], a                                 ; $57A1: $22
-    ldh  a, [hMultiPurpose1]                           ; $57A2: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $57A2: $F0 $D8
     ld   [hl+], a                                 ; $57A4: $22
-    ldh  a, [hMultiPurpose2]                           ; $57A5: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $57A5: $F0 $D9
     add  $08                                      ; $57A7: $C6 $08
     ld   [hl+], a                                 ; $57A9: $22
     ld   a, c                                     ; $57AA: $79
@@ -3740,9 +3740,9 @@ jr_002_57BB:
     ld   d, $00                                   ; $57BB: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $57BD: $21 $30 $C0
     add  hl, de                                   ; $57C0: $19
-    ldh  a, [hMultiPurpose1]                           ; $57C1: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $57C1: $F0 $D8
     ld   [hl+], a                                 ; $57C3: $22
-    ldh  a, [hMultiPurpose2]                           ; $57C4: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $57C4: $F0 $D9
     ld   [hl+], a                                 ; $57C6: $22
     ld   a, $24                                   ; $57C7: $3E $24
     ld   [hl+], a                                 ; $57C9: $22
@@ -3762,7 +3762,7 @@ Data_002_57DD::
 
 RenderTranscientSwordPoke::
     call func_002_58D0                            ; $57ED: $CD $D0 $58
-    ldh  a, [hMultiPurpose0]                           ; $57F0: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $57F0: $F0 $D7
     and  $08                                      ; $57F2: $E6 $08
     ld   d, $00                                   ; $57F4: $16 $00
     ld   e, a                                     ; $57F6: $5F
@@ -3791,7 +3791,7 @@ jr_002_582D:
     ld   hl, Data_002_57FD                        ; $5830: $21 $FD $57
 
 jr_002_5833:
-    ldh  a, [hMultiPurpose0]                           ; $5833: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $5833: $F0 $D7
     and  $08                                      ; $5835: $E6 $08
     ld   e, a                                     ; $5837: $5F
     ld   d, $00                                   ; $5838: $16 $00
@@ -3813,12 +3813,12 @@ label_002_583A:
     jp   label_002_58F5                           ; $5851: $C3 $F5 $58
 
 label_002_5854:
-    ldh  a, [hMultiPurpose1]                           ; $5854: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $5854: $F0 $D8
     add  [hl]                                     ; $5856: $86
     ld   [de], a                                  ; $5857: $12
     inc  hl                                       ; $5858: $23
     inc  de                                       ; $5859: $13
-    ldh  a, [hMultiPurpose2]                           ; $585A: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $585A: $F0 $D9
     add  [hl]                                     ; $585C: $86
     ld   [de], a                                  ; $585D: $12
     inc  hl                                       ; $585E: $23
@@ -3835,7 +3835,7 @@ Data_002_5867::
     db   $00, $00, $7A, $00, $00, $08, $7A, $20, $00, $00, $78, $00, $00, $08, $78, $20
 
 label_002_5877:
-    ldh  a, [hMultiPurpose0]                           ; $5877: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $5877: $F0 $D7
     and  $08                                      ; $5879: $E6 $08
     ld   d, $00                                   ; $587B: $16 $00
     ld   e, a                                     ; $587D: $5F
@@ -3848,7 +3848,7 @@ Data_002_5884::
 
 RenderTranscientPoof::
     call func_002_58D0                            ; $58A4: $CD $D0 $58
-    ldh  a, [hMultiPurpose0]                           ; $58A7: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $58A7: $F0 $D7
     cp   $04                                      ; $58A9: $FE $04
     jr   nz, jr_002_58BB                          ; $58AB: $20 $0E
 
@@ -3868,7 +3868,7 @@ jr_002_58BB:
     call func_002_5F5C                            ; $58BF: $CD $5C $5F
 
 jr_002_58C2:
-    ldh  a, [hMultiPurpose0]                           ; $58C2: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $58C2: $F0 $D7
     rla                                           ; $58C4: $17
     and  $18                                      ; $58C5: $E6 $18
     ld   d, $00                                   ; $58C7: $16 $00
@@ -3880,14 +3880,14 @@ func_002_58D0::
     ld   hl, wTranscientVfxPosYTable              ; $58D0: $21 $40 $C5
     add  hl, bc                                   ; $58D3: $09
     ld   a, [hl]                                  ; $58D4: $7E
-    ldh  [hMultiPurpose1], a                           ; $58D5: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $58D5: $E0 $D8
     cp   $88                                      ; $58D7: $FE $88
     jr   nc, ClearTranscientVfx                   ; $58D9: $30 $0B
 
     ld   hl, wTranscientVfxPosXTable              ; $58DB: $21 $30 $C5
     add  hl, bc                                   ; $58DE: $09
     ld   a, [hl]                                  ; $58DF: $7E
-    ldh  [hMultiPurpose2], a                           ; $58E0: $E0 $D9
+    ldh  [hMultiPurpose2], a                      ; $58E0: $E0 $D9
     cp   $A8                                      ; $58E2: $FE $A8
     jr   c, jr_002_58EC                           ; $58E4: $38 $06
 
@@ -3943,9 +3943,9 @@ func_002_5926::
     ldh  a, [hLinkPositionY]                      ; $5926: $F0 $99
 
 func_002_5928::
-    ldh  [hMultiPurpose1], a                           ; $5928: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $5928: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $592A: $F0 $98
-    ldh  [hMultiPurpose0], a                           ; $592C: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $592C: $E0 $D7
     ld   a, JINGLE_WATER_DIVE                     ; $592E: $3E $0E
     ldh  [hJingle], a                             ; $5930: $E0 $F2
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $5932: $3E $01
@@ -4241,7 +4241,7 @@ jr_002_5B31:
     ld   hl, wC1F0                                ; $5B41: $21 $F0 $C1
     add  hl, bc                                   ; $5B44: $09
     ld   a, [hl]                                  ; $5B45: $7E
-    ldh  [hMultiPurpose0], a                           ; $5B46: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $5B46: $E0 $D7
     ld   a, c                                     ; $5B48: $79
     and  $07                                      ; $5B49: $E6 $07
     ld   c, a                                     ; $5B4B: $4F
@@ -4522,7 +4522,7 @@ jr_002_5CE5:
     ld   hl, wC1F4                                ; $5CF7: $21 $F4 $C1
     add  hl, bc                                   ; $5CFA: $09
     ld   a, [hl]                                  ; $5CFB: $7E
-    ldh  [hMultiPurpose0], a                           ; $5CFC: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $5CFC: $E0 $D7
 
 jr_002_5CFE:
     ld   hl, Data_002_5BF4                        ; $5CFE: $21 $F4 $5B
@@ -5179,12 +5179,12 @@ LoadHeartsCount::
     and  a                                        ; $643D: $A7
     jr   z, jr_002_6462                           ; $643E: $28 $22
 
-    ldh  [hMultiPurpose0], a                           ; $6440: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $6440: $E0 $D7
 
 jr_002_6442:
-    ldh  a, [hMultiPurpose0]                           ; $6442: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $6442: $F0 $D7
     sub  $08                                      ; $6444: $D6 $08
-    ldh  [hMultiPurpose0], a                           ; $6446: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $6446: $E0 $D7
     jr   c, jr_002_6459                           ; $6448: $38 $0F
 
     ld   a, $A9                                   ; $644A: $3E $A9
@@ -5381,7 +5381,7 @@ jr_002_6982:
     and  a                                        ; $698B: $A7
     ret  nz                                       ; $698C: $C0
 
-    ldh  a, [hMultiPurpose0]                           ; $698D: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $698D: $F0 $D7
     cp   $B0                                      ; $698F: $FE $B0
     jr   z, jr_002_699E                           ; $6991: $28 $0B
 
@@ -5438,7 +5438,7 @@ jr_002_69D7:
     and  a                                        ; $69E0: $A7
     ret  nz                                       ; $69E1: $C0
 
-    ldh  a, [hMultiPurpose0]                           ; $69E2: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $69E2: $F0 $D7
     cp   $B1                                      ; $69E4: $FE $B1
     jr   z, jr_002_69F3                           ; $69E6: $28 $0B
 
@@ -5645,7 +5645,7 @@ jr_002_6AFC:
     and  a                                        ; $6B02: $A7
     ret  nz                                       ; $6B03: $C0
 
-    ldh  a, [hMultiPurpose0]                           ; $6B04: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $6B04: $F0 $D7
     cp   $B1                                      ; $6B06: $FE $B1
     jr   z, jr_002_6B2A                           ; $6B08: $28 $20
 
@@ -5730,8 +5730,8 @@ label_002_6B66:
     ld   c, $04                                   ; $6B66: $0E $04
     ld   b, $00                                   ; $6B68: $06 $00
     call func_002_6C2F                            ; $6B6A: $CD $2F $6C
-    ldh  a, [hMultiPurpose1]                           ; $6B6D: $F0 $D8
-    ldh  [hMultiPurpose0], a                           ; $6B6F: $E0 $D7
+    ldh  a, [hMultiPurpose1]                      ; $6B6D: $F0 $D8
+    ldh  [hMultiPurpose0], a                      ; $6B6F: $E0 $D7
     xor  a                                        ; $6B71: $AF
     ld   [wCollisionType], a                      ; $6B72: $EA $33 $C1
     ld   c, $00                                   ; $6B75: $0E $00
@@ -5885,7 +5885,7 @@ func_002_6C2F::
     ld   a, [wIsIndoor]                           ; $6C58: $FA $A5 $DB
     ld   d, a                                     ; $6C5B: $57
     call GetObjectPhysicsFlags_trampoline         ; $6C5C: $CD $26 $2A
-    ldh  [hMultiPurpose1], a                           ; $6C5F: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $6C5F: $E0 $D8
     cp   $60                                      ; $6C61: $FE $60
     jr   z, func_002_6C69                         ; $6C63: $28 $04
 
@@ -6458,7 +6458,7 @@ func_002_6F2C::
     ldh  a, [hLinkPositionX]                      ; $6F30: $F0 $98
     sub  $08                                      ; $6F32: $D6 $08
     add  [hl]                                     ; $6F34: $86
-    ldh  [hMultiPurpose4], a                           ; $6F35: $E0 $DB
+    ldh  [hMultiPurpose4], a                      ; $6F35: $E0 $DB
     swap a                                        ; $6F37: $CB $37
     and  $0F                                      ; $6F39: $E6 $0F
     ld   e, a                                     ; $6F3B: $5F
@@ -6467,7 +6467,7 @@ func_002_6F2C::
     ldh  a, [hLinkPositionY]                      ; $6F40: $F0 $99
     add  [hl]                                     ; $6F42: $86
     sub  $10                                      ; $6F43: $D6 $10
-    ldh  [hMultiPurpose5], a                           ; $6F45: $E0 $DC
+    ldh  [hMultiPurpose5], a                      ; $6F45: $E0 $DC
     and  $F0                                      ; $6F47: $E6 $F0
     or   e                                        ; $6F49: $B3
     ld   e, a                                     ; $6F4A: $5F
@@ -6608,9 +6608,9 @@ jr_002_700D:
 jr_002_7015:
     ; Schedule deep rumble animation
     ldh  a, [hLinkPositionY]                      ; $7015: $F0 $99
-    ldh  [hMultiPurpose1], a                           ; $7017: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $7017: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $7019: $F0 $98
-    ldh  [hMultiPurpose0], a                           ; $701B: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $701B: $E0 $D7
     ld   a, TRANSCIENT_VFX_RUMBLE                 ; $701D: $3E $09
     call AddTranscientVfx                         ; $701F: $CD $C7 $0C
     ld   [hl], $DF                                ; $7022: $36 $DF
@@ -6664,7 +6664,7 @@ jr_002_7053:
     cp   $00                                      ; $7069: $FE $00
     jr   nz, jr_002_7078                          ; $706B: $20 $0B
 
-    ldh  a, [hMultiPurpose4]                           ; $706D: $F0 $DB
+    ldh  a, [hMultiPurpose4]                      ; $706D: $F0 $DB
     and  $0F                                      ; $706F: $E6 $0F
     cp   $08                                      ; $7071: $FE $08
     jp   c, label_002_7461                        ; $7073: $DA $61 $74
@@ -6675,7 +6675,7 @@ jr_002_7078:
     cp   $01                                      ; $7078: $FE $01
     jr   nz, jr_002_7085                          ; $707A: $20 $09
 
-    ldh  a, [hMultiPurpose4]                           ; $707C: $F0 $DB
+    ldh  a, [hMultiPurpose4]                      ; $707C: $F0 $DB
     and  $0F                                      ; $707E: $E6 $0F
     cp   $08                                      ; $7080: $FE $08
     jp   nc, label_002_7461                       ; $7082: $D2 $61 $74
@@ -6846,13 +6846,13 @@ jr_002_716E:
     ld   d, $00                                   ; $717B: $16 $00
     ld   hl, Data_002_49CA                        ; $717D: $21 $CA $49
     add  hl, de                                   ; $7180: $19
-    ldh  a, [hMultiPurpose4]                           ; $7181: $F0 $DB
+    ldh  a, [hMultiPurpose4]                      ; $7181: $F0 $DB
     rra                                           ; $7183: $1F
     rra                                           ; $7184: $1F
     rra                                           ; $7185: $1F
     and  $01                                      ; $7186: $E6 $01
     ld   e, a                                     ; $7188: $5F
-    ldh  a, [hMultiPurpose5]                           ; $7189: $F0 $DC
+    ldh  a, [hMultiPurpose5]                      ; $7189: $F0 $DC
     rra                                           ; $718B: $1F
     rra                                           ; $718C: $1F
     and  $02                                      ; $718D: $E6 $02
@@ -6875,7 +6875,7 @@ label_002_719C:
     cp   ENTITY_ROOSTER                           ; $71A7: $FE $D5
     jp   z, collisionEnd                          ; $71A9: $CA $54 $74
 
-    ldh  a, [hMultiPurpose5]                           ; $71AC: $F0 $DC
+    ldh  a, [hMultiPurpose5]                      ; $71AC: $F0 $DC
     and  $0F                                      ; $71AE: $E6 $0F
     cp   $08                                      ; $71B0: $FE $08
     jp   c, label_002_7461                        ; $71B2: $DA $61 $74
@@ -6888,7 +6888,7 @@ label_002_71BB:
     and  a                                        ; $71BE: $A7
     jp   nz, collisionEnd                         ; $71BF: $C2 $54 $74
 
-    ldh  a, [hMultiPurpose5]                           ; $71C2: $F0 $DC
+    ldh  a, [hMultiPurpose5]                      ; $71C2: $F0 $DC
     and  $0F                                      ; $71C4: $E6 $0F
     cp   $06                                      ; $71C6: $FE $06
     jp   nc, label_002_726A                       ; $71C8: $D2 $6A $72
@@ -6996,7 +6996,7 @@ label_002_7260:
     jp   z, label_002_7461                        ; $7267: $CA $61 $74
 
 label_002_726A:
-    ldh  a, [hMultiPurpose4]                           ; $726A: $F0 $DB
+    ldh  a, [hMultiPurpose4]                      ; $726A: $F0 $DB
     and  $0F                                      ; $726C: $E6 $0F
     cp   $06                                      ; $726E: $FE $06
     jr   c, label_002_7277                        ; $7270: $38 $05
@@ -7156,10 +7156,10 @@ jr_002_734F:
     and  a                                        ; $7352: $A7
     jp   z, collisionEnd                          ; $7353: $CA $54 $74
 
-    ldh  a, [hMultiPurpose4]                           ; $7356: $F0 $DB
+    ldh  a, [hMultiPurpose4]                      ; $7356: $F0 $DB
     and  $F0                                      ; $7358: $E6 $F0
     ldh  [hSwordIntersectedAreaX], a              ; $735A: $E0 $CE
-    ldh  a, [hMultiPurpose5]                           ; $735C: $F0 $DC
+    ldh  a, [hMultiPurpose5]                      ; $735C: $F0 $DC
     and  $F0                                      ; $735E: $E6 $F0
     ldh  [hSwordIntersectedAreaY], a              ; $7360: $E0 $CD
     ldh  a, [hDungeonFloorTile]                   ; $7362: $F0 $E9
@@ -7239,14 +7239,14 @@ IF __PATCH_0__
 ENDC
     and  $F0                                      ; $73CC: $E6 $F0
     or   e                                        ; $73CE: $B3
-    ldh  [hMultiPurpose0], a                           ; $73CF: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $73CF: $E0 $D7
     ld   e, $00                                   ; $73D1: $1E $00
     ld   d, e                                     ; $73D3: $53
 
 jr_002_73D4:
     ld   hl, Data_002_73A3                        ; $73D4: $21 $A3 $73
     add  hl, de                                   ; $73D7: $19
-    ldh  a, [hMultiPurpose0]                           ; $73D8: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $73D8: $F0 $D7
     cp   [hl]                                     ; $73DA: $BE
     jr   nz, jr_002_73E6                          ; $73DB: $20 $09
 
@@ -7387,7 +7387,7 @@ func_002_7468::
     jr   nz, jr_002_7493                          ; $7470: $20 $21
 
 jr_002_7472:
-    ldh  a, [hMultiPurpose5]                           ; $7472: $F0 $DC
+    ldh  a, [hMultiPurpose5]                      ; $7472: $F0 $DC
     and  $0F                                      ; $7474: $E6 $0F
     cp   $06                                      ; $7476: $FE $06
     jr   nc, jr_002_74AC                          ; $7478: $30 $32
@@ -7417,7 +7417,7 @@ jr_002_7493:
     jr   nz, jr_002_74AC                          ; $74A1: $20 $09
 
 jr_002_74A3:
-    ldh  a, [hMultiPurpose5]                           ; $74A3: $F0 $DC
+    ldh  a, [hMultiPurpose5]                      ; $74A3: $F0 $DC
     and  $0F                                      ; $74A5: $E6 $0F
     cp   $0C                                      ; $74A7: $FE $0C
     jp   nc, ApplyMapFadeOutTransitionWithNoise   ; $74A9: $D2 $7D $0C
@@ -7489,13 +7489,13 @@ Data_002_750E::
 func_002_7512::
     ldh  a, [hLinkPositionX]                      ; $7512: $F0 $98
     and  $F0                                      ; $7514: $E6 $F0
-    ldh  [hMultiPurpose0], a                           ; $7516: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $7516: $E0 $D7
     swap a                                        ; $7518: $CB $37
     ld   e, a                                     ; $751A: $5F
     ldh  a, [hLinkPositionY]                      ; $751B: $F0 $99
     sub  $04                                      ; $751D: $D6 $04
     and  $F0                                      ; $751F: $E6 $F0
-    ldh  [hMultiPurpose1], a                           ; $7521: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $7521: $E0 $D8
     or   e                                        ; $7523: $B3
     ld   e, a                                     ; $7524: $5F
     ldh  [hLinkRoomPosition], a                   ; $7525: $E0 $FA
@@ -7727,7 +7727,7 @@ jr_002_7672:
     ld   hl, hLinkPositionX                       ; $7672: $21 $98 $FF
     add  [hl]                                     ; $7675: $86
     ld   [hl], a                                  ; $7676: $77
-    ldh  a, [hMultiPurpose1]                           ; $7677: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $7677: $F0 $D8
     add  $10                                      ; $7679: $C6 $10
     ld   hl, hLinkPositionY                       ; $767B: $21 $99 $FF
     sub  [hl]                                     ; $767E: $96

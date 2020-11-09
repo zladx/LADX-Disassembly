@@ -237,14 +237,14 @@ jr_006_4CCE:
     ld   c, a                                     ; $4CE3: $4F
     ld   hl, Data_006_4BF8                        ; $4CE4: $21 $F8 $4B
     add  hl, bc                                   ; $4CE7: $09
-    ldh  a, [hMultiPurpose0]                           ; $4CE8: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4CE8: $F0 $D7
     add  [hl]                                     ; $4CEA: $86
     ld   hl, wEntitiesPosXTable                   ; $4CEB: $21 $00 $C2
     add  hl, de                                   ; $4CEE: $19
     ld   [hl], a                                  ; $4CEF: $77
     ld   hl, Data_006_4C00                        ; $4CF0: $21 $00 $4C
     add  hl, bc                                   ; $4CF3: $09
-    ldh  a, [hMultiPurpose1]                           ; $4CF4: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $4CF4: $F0 $D8
     add  [hl]                                     ; $4CF6: $86
     ld   hl, wEntitiesPosYTable                   ; $4CF7: $21 $10 $C2
     add  hl, de                                   ; $4CFA: $19

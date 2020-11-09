@@ -134,9 +134,9 @@ func_005_40E6::
     jr   z, jr_005_40FA                           ; $40EE: $28 $0A
 
     ldh  a, [hLinkPositionX]                      ; $40F0: $F0 $98
-    ldh  [hMultiPurpose0], a                           ; $40F2: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $40F2: $E0 $D7
     ldh  a, [hFFB3]                               ; $40F4: $F0 $B3
-    ldh  [hMultiPurpose1], a                           ; $40F6: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $40F6: $E0 $D8
     jr   jr_005_4129                              ; $40F8: $18 $2F
 
 jr_005_40FA:
@@ -169,11 +169,11 @@ jr_005_4127:
     jr   jr_005_4137                              ; $4127: $18 $0E
 
 jr_005_4129:
-    ldh  a, [hMultiPurpose0]                           ; $4129: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4129: $F0 $D7
     ld   hl, wEntitiesPrivateState1Table          ; $412B: $21 $B0 $C2
     add  hl, bc                                   ; $412E: $09
     ld   [hl], a                                  ; $412F: $77
-    ldh  a, [hMultiPurpose1]                           ; $4130: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $4130: $F0 $D8
     ld   hl, wEntitiesPrivateState2Table          ; $4132: $21 $C0 $C2
     add  hl, bc                                   ; $4135: $09
     ld   [hl], a                                  ; $4136: $77
@@ -434,17 +434,17 @@ label_005_4297:
 
     ld   e, $0F                                   ; $42A7: $1E $0F
     ld   a, $FF                                   ; $42A9: $3E $FF
-    ldh  [hMultiPurpose0], a                           ; $42AB: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $42AB: $E0 $D7
     jr   jr_005_42B7                              ; $42AD: $18 $08
 
 jr_005_42AF:
     ld   e, $00                                   ; $42AF: $1E $00
     ld   a, $01                                   ; $42B1: $3E $01
-    ldh  [hMultiPurpose0], a                           ; $42B3: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $42B3: $E0 $D7
     ld   a, $10                                   ; $42B5: $3E $10
 
 jr_005_42B7:
-    ldh  [hMultiPurpose1], a                           ; $42B7: $E0 $D8
+    ldh  [hMultiPurpose1], a                      ; $42B7: $E0 $D8
 
 jr_005_42B9:
     ld   a, e                                     ; $42B9: $7B
@@ -789,7 +789,7 @@ jr_005_4473:
     jr   nz, jr_005_4455                          ; $4476: $20 $DD
 
     ld   a, b                                     ; $4478: $78
-    ldh  [hMultiPurpose0], a                           ; $4479: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $4479: $E0 $D7
     pop  bc                                       ; $447B: $C1
     and  $01                                      ; $447C: $E6 $01
     jr   z, jr_005_4499                           ; $447E: $28 $19
@@ -819,7 +819,7 @@ jr_005_4492:
     call func_005_44B5                            ; $4496: $CD $B5 $44
 
 jr_005_4499:
-    ldh  a, [hMultiPurpose0]                           ; $4499: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4499: $F0 $D7
     and  $02                                      ; $449B: $E6 $02
     jr   z, jr_005_44CA                           ; $449D: $28 $2B
 

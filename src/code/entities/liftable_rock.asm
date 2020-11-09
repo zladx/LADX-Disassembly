@@ -2,7 +2,7 @@ LiftableRockEntityHandler::
     ld   a, c                                     ; $5328: $79
     ld   [wC50C], a                               ; $5329: $EA $0C $C5
     call GetEntityPrivateCountdown1                                      ; $532C: $CD $00 $0C
-    ldh  [hMultiPurpose0], a                           ; $532F: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $532F: $E0 $D7
     jp   z, jp_003_53A8                           ; $5331: $CA $A8 $53
 
     cp   $01                                      ; $5334: $FE $01
@@ -22,15 +22,15 @@ LiftableRockEntityHandler::
     call SpawnNewEntity                           ; $5349: $CD $CA $64
     jr   c, jr_003_5369                           ; $534C: $38 $1B
 
-    ldh  a, [hMultiPurpose0]                           ; $534E: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $534E: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $5350: $21 $00 $C2
     add  hl, de                                   ; $5353: $19
     ld   [hl], a                                  ; $5354: $77
-    ldh  a, [hMultiPurpose1]                           ; $5355: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $5355: $F0 $D8
     ld   hl, wEntitiesPosYTable                         ; $5357: $21 $10 $C2
     add  hl, de                                   ; $535A: $19
     ld   [hl], a                                  ; $535B: $77
-    ldh  a, [hMultiPurpose3]                           ; $535C: $F0 $DA
+    ldh  a, [hMultiPurpose3]                      ; $535C: $F0 $DA
     ld   hl, wEntitiesPosZTable                                ; $535E: $21 $10 $C3
     add  hl, de                                   ; $5361: $19
     ld   [hl], a                                  ; $5362: $77

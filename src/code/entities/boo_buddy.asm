@@ -34,10 +34,10 @@ BooBuddyState0Handler::
     and  $07                                      ; $79DE: $E6 $07
     add  $06                                      ; $79E0: $C6 $06
     call GetVectorTowardsLink_trampoline          ; $79E2: $CD $B5 $3B
-    ldh  a, [hMultiPurpose0]                           ; $79E5: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $79E5: $F0 $D7
     ld   hl, wEntitiesSpeedYTable                 ; $79E7: $21 $50 $C2
     call func_006_7A79                            ; $79EA: $CD $79 $7A
-    ldh  a, [hMultiPurpose1]                           ; $79ED: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $79ED: $F0 $D8
     ld   hl, wEntitiesSpeedXTable                 ; $79EF: $21 $40 $C2
 
 jr_006_79F2:
@@ -104,13 +104,13 @@ BooBuddyState1Handler::
     call label_3B39                               ; $7A4A: $CD $39 $3B
     ld   a, $04                                   ; $7A4D: $3E $04
     call GetVectorTowardsLink_trampoline          ; $7A4F: $CD $B5 $3B
-    ldh  a, [hMultiPurpose0]                           ; $7A52: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $7A52: $F0 $D7
     cpl                                           ; $7A54: $2F
     inc  a                                        ; $7A55: $3C
     ld   hl, wEntitiesSpeedYTable                 ; $7A56: $21 $50 $C2
     add  hl, bc                                   ; $7A59: $09
     ld   [hl], a                                  ; $7A5A: $77
-    ldh  a, [hMultiPurpose1]                           ; $7A5B: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $7A5B: $F0 $D8
     cpl                                           ; $7A5D: $2F
     inc  a                                        ; $7A5E: $3C
     ld   hl, wEntitiesSpeedXTable                 ; $7A5F: $21 $40 $C2

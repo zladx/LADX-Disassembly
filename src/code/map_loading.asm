@@ -33,7 +33,7 @@ GetBGAttributesAddressForObject::
     ld   hl, OverworldBGAttributesBanks           ; $6584: $21 $76 $64
     add  hl, bc                                   ; $6587: $09
     ld   a, [hl]                                  ; $6588: $7E
-    ldh  [hMultiPurpose8], a                           ; $6589: $E0 $DF
+    ldh  [hMultiPurpose8], a                      ; $6589: $E0 $DF
 .overworldPaletteBankEnd
 
     ; bc = [hMapRoom] * 2
@@ -56,7 +56,7 @@ GetBGAttributesAddressForObject::
 
 
     ld   a, BANK(IndoorsBGAttributesA)            ; $659E: $3E $23
-    ldh  [hMultiPurpose8], a                           ; $65A0: $E0 $DF
+    ldh  [hMultiPurpose8], a                      ; $65A0: $E0 $DF
 
     ; hl += $200
     ; Assertions were introduced in rgbds 0.4.0
@@ -172,7 +172,7 @@ GetBGAttributesAddressForObject::
 
 .useSecondaryIndoorsPaletteBank
     ld   a, BANK(IndoorsBGAttributesB)            ; $662A: $3E $24
-    ldh  [hMultiPurpose8], a                           ; $662C: $E0 $DF
+    ldh  [hMultiPurpose8], a                      ; $662C: $E0 $DF
 
 .jr_01A_662E
     inc  h                                        ; $662E: $24
@@ -196,7 +196,7 @@ GetBGAttributesAddressForObject::
     add  hl, bc                                   ; $6637: $09
     ; hMultiPurpose9, hMultiPurposeA = PalettesTable[ObjectAttributeValue * 4]
     ld   a, h                                     ; $6638: $7C
-    ldh  [hMultiPurpose9], a                           ; $6639: $E0 $E0
+    ldh  [hMultiPurpose9], a                      ; $6639: $E0 $E0
     ld   a, l                                     ; $663B: $7D
     ldh  [hMultiPurposeA], a                           ; $663C: $E0 $E1
     pop  hl                                       ; $663E: $E1
@@ -271,13 +271,13 @@ jr_01A_6736:
     ld   b, $00                                   ; $6737: $06 $00
     ld   a, [hl]                                  ; $6739: $7E
     ld   c, a                                     ; $673A: $4F
-    ldh  a, [hMultiPurpose9]                           ; $673B: $F0 $E0
+    ldh  a, [hMultiPurpose9]                      ; $673B: $F0 $E0
     ld   h, a                                     ; $673D: $67
     ldh  a, [hMultiPurposeA]                           ; $673E: $F0 $E1
     ld   l, a                                     ; $6740: $6F
     add  hl, bc                                   ; $6741: $09
     ld   a, h                                     ; $6742: $7C
-    ldh  [hMultiPurpose9], a                           ; $6743: $E0 $E0
+    ldh  [hMultiPurpose9], a                      ; $6743: $E0 $E0
     ld   a, l                                     ; $6745: $7D
     ldh  [hMultiPurposeA], a                           ; $6746: $E0 $E1
     ret                                           ; $6748: $C9

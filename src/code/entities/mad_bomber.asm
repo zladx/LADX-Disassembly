@@ -107,11 +107,11 @@ MadBomberState3Handler::
 
     ld   a, $02                                   ; $41DF: $3E $02
     call SpawnNewEntity_trampoline                ; $41E1: $CD $86 $3B
-    ldh  a, [hMultiPurpose0]                           ; $41E4: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $41E4: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $41E6: $21 $00 $C2
     add  hl, de                                   ; $41E9: $19
     ld   [hl], a                                  ; $41EA: $77
-    ldh  a, [hMultiPurpose1]                           ; $41EB: $F0 $D8
+    ldh  a, [hMultiPurpose1]                      ; $41EB: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $41ED: $21 $10 $C2
     add  hl, de                                   ; $41F0: $19
     ld   [hl], a                                  ; $41F1: $77

@@ -114,7 +114,7 @@ ThreeOfAKindState2Handler::
     and  a                                        ; $49D9: $A7
     jp   nz, label_006_4AA7                       ; $49DA: $C2 $A7 $4A
 
-    ldh  [hMultiPurpose0], a                           ; $49DD: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $49DD: $E0 $D7
     ld   e, $0F                                   ; $49DF: $1E $0F
     ld   d, b                                     ; $49E1: $50
 
@@ -143,9 +143,9 @@ jr_006_49E2:
     and  a                                        ; $4A01: $A7
     jr   nz, jr_006_4A09                          ; $4A02: $20 $05
 
-    ldh  a, [hMultiPurpose0]                           ; $4A04: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4A04: $F0 $D7
     inc  a                                        ; $4A06: $3C
-    ldh  [hMultiPurpose0], a                           ; $4A07: $E0 $D7
+    ldh  [hMultiPurpose0], a                      ; $4A07: $E0 $D7
 
 jr_006_4A09:
     dec  e                                        ; $4A09: $1D
@@ -153,7 +153,7 @@ jr_006_4A09:
     cp   $FF                                      ; $4A0B: $FE $FF
     jr   nz, jr_006_49E2                          ; $4A0D: $20 $D3
 
-    ldh  a, [hMultiPurpose0]                           ; $4A0F: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $4A0F: $F0 $D7
     cp   $03                                      ; $4A11: $FE $03
     jp   nz, label_006_4AA7                       ; $4A13: $C2 $A7 $4A
 
@@ -192,7 +192,7 @@ jr_006_4A37:
     pop  bc                                       ; $4A3D: $C1
     call PlayWrongAnswerJingle                    ; $4A3E: $CD $20 $0C
     ld   e, $00                                   ; $4A41: $1E $00
-    ldh  a, [hMultiPurpose2]                           ; $4A43: $F0 $D9
+    ldh  a, [hMultiPurpose2]                      ; $4A43: $F0 $D9
     ld   hl, hMultiPurpose3                            ; $4A45: $21 $DA $FF
     cp   [hl]                                     ; $4A48: $BE
     jr   nz, jr_006_4A62                          ; $4A49: $20 $17

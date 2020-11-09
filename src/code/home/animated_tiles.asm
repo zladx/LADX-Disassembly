@@ -36,7 +36,7 @@ AnimateMarinBeachTiles::
     jp   CopyData                                 ; $1B02: $C3 $14 $29
     jr   nz, AnimateTiles.doWorldAnimations       ; $1B05: $20 $60
     and  b                                        ; $1B07: $A0
-    ldh  [hMultiPurpose9], a                           ; $1B08: $E0 $E0
+    ldh  [hMultiPurpose9], a                      ; $1B08: $E0 $E0
     ldh  [hLinkFinalPositionY], a                 ; $1B0A: $E0 $A0
     ld   h, b                                     ; $1B0C: $60
 

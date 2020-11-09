@@ -568,7 +568,7 @@ IncrementRoomTransitionStateAndReturn::
     ret                                           ; $7B3D: $C9
 
 RoomTransitionLoadTiles::
-    call LoadRoomTiles                            ; $7B3E: $CD $1E $0D
+    call SelectRoomTilesets                       ; $7B3E: $CD $1E $0D
 
     ; If room has mobile blocks…
     ld   a, [wRoomSwitchableObject]               ; $7B41: $FA $FA $D6

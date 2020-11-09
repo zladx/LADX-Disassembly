@@ -977,17 +977,17 @@ label_D15::
     ld   a, TRANSCIENT_VFX_SWORD_POKE             ; $0D19: $3E $05
     jp   AddTranscientVfx                         ; $0D1B: $C3 $C7 $0C
 
-; Schedule the loading of the tilesets for the next room,
+; Schedule the loading of object and OAM tilesets for the next room,
 ; (either during a map transition or a room transition).
 ;
 ; Actual loading will be done during the next vblank period.
-LoadRoomTiles::
+SelectRoomTilesets::
     ld   a, BANK(TilesetTables)                   ; $0D1E: $3E $20
     ld   [MBC3SelectBank], a                      ; $0D20: $EA $00 $21
 
     ; ------------------------------------------------------------
     ;
-    ; Load Background tileset
+    ; Select the new BG objects tileset
     ;
     ; ------------------------------------------------------------
 
@@ -1104,7 +1104,7 @@ LoadRoomTiles::
 
     ; ------------------------------------------------------------
     ;
-    ; Select Sprites tileset
+    ; Select the new OAM tileset
     ; Main theme is data_020_70D3. Final subset is selected by the room/scene
     ; TODO: multible iterations of commenting needed. This code is total spagetti.
     ;

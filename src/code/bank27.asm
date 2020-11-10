@@ -1066,11 +1066,13 @@ MarinPortraitTilesTable::
 ._02 db HIGH(MarinPortraitTiles + $200), BANK(MarinPortraitTiles)
 ._03 db HIGH(MarinPortraitOverlayTiles + $000), BANK(MarinPortraitOverlayTiles)
 ._04 db HIGH(MarinPortraitOverlayTiles + $100), BANK(MarinPortraitOverlayTiles)
-._05 db HIGH(PhotoAlbumTiles + $700),           BANK(PhotoAlbumTiles)
+._05 db HIGH(PhotoAlbumTiles    + $700), BANK(PhotoAlbumTiles)
 
-; Copy data from a source specified in the table
-; to a destination in VRAM specified by wD01A
-LoadTileset22::
+; Copy tiles of Marin's portrait to tiles memory, in several steps.
+;
+; Inputs:
+;   wD01A:  copy step (from 0 to 5)
+LoadCreditsMarinPortraitTiles::
     ; Destination address higher byte
     ld   a, [wD01A]                              ; $7FC5: $FA $1A $D0
     cp   $05                                     ; $7FC8: $FE $05

@@ -7416,8 +7416,8 @@ SwitchToMapDataBank::
     ld   [MBC3SelectBank], a                      ; $3911: $EA $00 $21
     ret                                           ; $3914: $C9
 
-LoadTileset22_trampoline::
-    jpsb LoadTileset22                            ; $3915: $3E $27 $EA $00 $21 $C3 $C5 $7F
+LoadCreditsMarinPortraitTiles_trampoline::
+    jpsb LoadCreditsMarinPortraitTiles            ; $3915: $3E $27 $EA $00 $21 $C3 $C5 $7F
 
 LoadTileset23_trampoline::
     jpsb LoadTileset23                            ; $391D: $3E $20 $EA $00 $21 $C3 $E6 $7D

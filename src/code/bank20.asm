@@ -272,7 +272,7 @@ TilemapLoadingHandlersTable::
 ._1F dw LoadCreditsStairsTiles
 ._20 dw LoadSchulePaintingTiles
 ._21 dw LoadEaglesTowerTopTiles
-._22 dw LoadTileset22_trampoline
+._22 dw LoadCreditsMarinPortraitTiles_trampoline
 ._23 dw LoadTileset23_trampoline
 
 data_020_46AA::

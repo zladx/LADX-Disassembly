@@ -302,7 +302,7 @@ func_036_41B2::
     ld   b, $41                                   ; $41B8: $06 $41
     ld   c, $07                                   ; $41BA: $0E $07
     ld   h, $36                                   ; $41BC: $26 $36
-    call Copy100BytesFromBankAtA                  ; $41BE: $CD $13 $0A
+    call CopyDataToVRAM                           ; $41BE: $CD $13 $0A
     ld   a, [wLCDControl]                         ; $41C1: $FA $FD $D6
     ldh  [rLCDC], a                               ; $41C4: $E0 $40
     pop  bc                                       ; $41C6: $C1
@@ -564,17 +564,17 @@ func_036_436D::
     ld   b, $40                                   ; $4373: $06 $40
     ld   c, $06                                   ; $4375: $0E $06
     ld   h, $36                                   ; $4377: $26 $36
-    call Copy100BytesFromBankAtA                  ; $4379: $CD $13 $0A
+    call CopyDataToVRAM                           ; $4379: $CD $13 $0A
     ld   a, $38                                   ; $437C: $3E $38
     ld   b, $41                                   ; $437E: $06 $41
     ld   c, $07                                   ; $4380: $0E $07
     ld   h, $36                                   ; $4382: $26 $36
-    call Copy100BytesFromBankAtA                  ; $4384: $CD $13 $0A
+    call CopyDataToVRAM                           ; $4384: $CD $13 $0A
     ld   a, $35                                   ; $4387: $3E $35
     ld   b, $66                                   ; $4389: $06 $66
     ld   c, $05                                   ; $438B: $0E $05
     ld   h, $36                                   ; $438D: $26 $36
-    call Copy100BytesFromBankAtA                  ; $438F: $CD $13 $0A
+    call CopyDataToVRAM                           ; $438F: $CD $13 $0A
     ld   a, [wIsMarinFollowingLink]               ; $4392: $FA $73 $DB
     ld   hl, wIsBowWowFollowingLink               ; $4395: $21 $56 $DB
     or   [hl]                                     ; $4398: $B6
@@ -589,7 +589,7 @@ func_036_436D::
     ld   b, $42                                   ; $43A7: $06 $42
     ld   c, $04                                   ; $43A9: $0E $04
     ld   h, $36                                   ; $43AB: $26 $36
-    call Copy100BytesFromBankAtA                  ; $43AD: $CD $13 $0A
+    call CopyDataToVRAM                           ; $43AD: $CD $13 $0A
 
 jr_036_43B0:
     ld   a, [wLCDControl]                         ; $43B0: $FA $FD $D6
@@ -1775,12 +1775,12 @@ func_036_4A9F::
     ld   b, $40                                   ; $4AA5: $06 $40
     ld   c, $06                                   ; $4AA7: $0E $06
     ld   h, $36                                   ; $4AA9: $26 $36
-    call Copy100BytesFromBankAtA                  ; $4AAB: $CD $13 $0A
+    call CopyDataToVRAM                           ; $4AAB: $CD $13 $0A
     ld   a, $38                                   ; $4AAE: $3E $38
     ld   b, $41                                   ; $4AB0: $06 $41
     ld   c, $07                                   ; $4AB2: $0E $07
     ld   h, $36                                   ; $4AB4: $26 $36
-    call Copy100BytesFromBankAtA                  ; $4AB6: $CD $13 $0A
+    call CopyDataToVRAM                           ; $4AB6: $CD $13 $0A
     ld   a, [wLCDControl]                         ; $4AB9: $FA $FD $D6
     ldh  [rLCDC], a                               ; $4ABC: $E0 $40
     di                                            ; $4ABE: $F3

@@ -335,7 +335,7 @@ LoadColorDungeonTiles::
     ld   c, $04                                   ; $476E: $0E $04
     ld   a, d                                     ; $4770: $7A
     ld   h, $20                                   ; $4771: $26 $20
-    call Copy100BytesFromBankAtA                  ; $4773: $CD $13 $0A
+    call CopyDataToVRAM                           ; $4773: $CD $13 $0A
 
 jr_020_4776:
     pop  de                                       ; $4776: $D1
@@ -353,7 +353,7 @@ jr_020_4776:
     ld   c, $05                                   ; $4784: $0E $05
     ld   a, d                                     ; $4786: $7A
     ld   h, $20                                   ; $4787: $26 $20
-    call Copy100BytesFromBankAtA                  ; $4789: $CD $13 $0A
+    call CopyDataToVRAM                           ; $4789: $CD $13 $0A
 
 jr_020_478C:
     pop  de                                       ; $478C: $D1
@@ -371,7 +371,7 @@ jr_020_478C:
     ld   c, $06                                   ; $479A: $0E $06
     ld   a, d                                     ; $479C: $7A
     ld   h, $20                                   ; $479D: $26 $20
-    call Copy100BytesFromBankAtA                  ; $479F: $CD $13 $0A
+    call CopyDataToVRAM                           ; $479F: $CD $13 $0A
 
 jr_020_47A2:
     pop  de                                       ; $47A2: $D1
@@ -388,7 +388,7 @@ jr_020_47A2:
     ld   c, $07                                   ; $47AF: $0E $07
     ld   a, d                                     ; $47B1: $7A
     ld   h, $20                                   ; $47B2: $26 $20
-    call Copy100BytesFromBankAtA                  ; $47B4: $CD $13 $0A
+    call CopyDataToVRAM                           ; $47B4: $CD $13 $0A
 
 jr_020_47B7:
     ldh  a, [hMapRoom]                            ; $47B7: $F0 $F6
@@ -6231,20 +6231,20 @@ LoadTileset23::
     ld   b, HIGH(ThanksForPlayingTiles) ; src     ; $7DE8: $06 $68
     ld   a, BANK(ThanksForPlayingTiles) ; src bank  ; $7DEA: $3E $38
     ld   h, BANK(@) ; return bank                 ; $7DEC: $26 $20
-    call Copy100BytesFromBankAtA                  ; $7DEE: $CD $13 $0A
+    call CopyDataToVRAM                           ; $7DEE: $CD $13 $0A
 
     ld   c, HIGH(vTiles0 + $1100 - $8000) ; dest  ; $7DF1: $0E $11
     ld   b, HIGH(ThanksForPlayingTiles + $100) ; src ; $7DF3: $06 $69
     ld   a, BANK(ThanksForPlayingTiles) ; src bank ; $7DF5: $3E $38
     ld   h, BANK(@) ; return bank                 ; $7DF7: $26 $20
-    call Copy100BytesFromBankAtA                  ; $7DF9: $CD $13 $0A
+    call CopyDataToVRAM                           ; $7DF9: $CD $13 $0A
 
 IF !__PATCH_1__
     ld   c, HIGH(vTiles0 + $1200 - $8000) ; dest  ; $7DFC: $0E $12
     ld   b, HIGH(ThanksForPlayingTiles + $200) ; src ; $7DFE: $06 $6A
     ld   a, BANK(ThanksForPlayingTiles) ; src bank ; $7E00: $3E $38
     ld   h, BANK(@) ; return bank                 ; $7E02: $26 $20
-    call Copy100BytesFromBankAtA                  ; $7E04: $CD $13 $0A
+    call CopyDataToVRAM                           ; $7E04: $CD $13 $0A
 ENDC
 
     ret                                           ; $7E07: $C9

@@ -340,16 +340,17 @@ ReplaceObjects56and57_trampoline::
 ; Specific data-copying routines
 ;
 
-; Copy $100 bytes without DMA (used on DMG), then switch back to bank at h
+; Copy $100 bytes without DMA (used on DMG), then switch back to bank at h.
+;
 ; Inputs:
 ;  b   source address high byte
-;  c   destination address high byte
+;  c   destination address high byte (starting from $8000)
 ;  h   bank to switch back after the transfert
-Copy100Bytes_noDMA::
+CopyDataToVRAM_noDMA::
     ; Save h
     push hl                                       ; $0A01: $E5
 
-    ; Copy $100 bytes from "${b}00" to "${c}80"
+    ; Copy $100 bytes from "${b}00" to "$8000 + ${c}00"
     ld   l, $00                                   ; $0A02: $2E $00
     ld   e, l                                     ; $0A04: $5D
     ld   h, b                                     ; $0A05: $60
@@ -361,25 +362,28 @@ Copy100Bytes_noDMA::
 
     ; Switch back to the bank in h
     pop  hl                                       ; $0A10: $E1
-    jr   SelectBankAtHAndReturn                   ; $0A11: $18 $1A
+    jr   CopyDataToVRAM.restoreBankAndReturn      ; $0A11: $18 $1A
 
-; Copy $100 bytes from bank at a, then switch back to bank at h
+; Copy $100 bytes to VRAM, then switch back to bank at h.
+;
+; Uses GDMA if available (and otherwise fallbacks to direct CPU copy).
+;
 ; Inputs:
-;  a   bank to copy data from
+;  a   source bank
 ;  b   source address high byte
-;  c   destination address high byte
+;  c   destination address high byte (starting from $8000)
 ;  h   bank to switch back after the transfert
-Copy100BytesFromBankAtA::
+CopyDataToVRAM::
     ; Switch to bank in a
     ld   [MBC3SelectBank], a                      ; $0A13: $EA $00 $21
 
     ; If running on DMG, use a loop to copy the data
     ldh  a, [hIsGBC]                              ; $0A16: $F0 $FE
     and  a                                        ; $0A18: $A7
-    jr   z, Copy100Bytes_noDMA                    ; $0A19: $28 $E6
+    jr   z, CopyDataToVRAM_noDMA                  ; $0A19: $28 $E6
 
-    ; On CGB, configure a DMA transfert
-    ; to copy $0F bytes from "${b}00" to "${c}00"
+    ; On CGB, configure a GDMA transfert
+    ; to copy $0F bytes from "${b}00" to "$8000 + ${c}00"
     ld   a, b                                     ; $0A1B: $78
     ld   [rHDMA1], a                              ; $0A1C: $E0 $51
     ld   a, $00                                   ; $0A1E: $3E $00
@@ -392,7 +396,7 @@ Copy100BytesFromBankAtA::
     ld   [rHDMA5], a                              ; $0A2B: $E0 $55
 
     ; Fallthrough to switch back to the bank in h
-SelectBankAtHAndReturn::
+.restoreBankAndReturn
     ld   a, h                                     ; $0A2D: $7C
     ld   [MBC3SelectBank], a                      ; $0A2E: $EA $00 $21
     ret                                           ; $0A31: $C9

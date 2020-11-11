@@ -194,7 +194,7 @@ def isarray(x):
     return isinstance(x, array)
 
 def tostring(row):
-    return row.tostring()
+    return row.tobytes()
 
 def interleave_planes(ipixels, apixels, ipsize, apsize):
     """

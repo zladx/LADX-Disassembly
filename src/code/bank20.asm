@@ -276,9 +276,28 @@ TilemapLoadingHandlersTable::
 ._23 dw LoadTileset23_trampoline
 
 data_020_46AA::
-    db   $51, $35, $4F, $35, $00, $00, $4B, $35, $00, $00, $00, $00, $00, $00, $44, $35
-    db   $00, $00, $00, $00, $00, $00, $00, $00, $48, $35, $00, $00, $00, $00, $00, $00
-    db   $00, $00, $44, $35, $4E, $35, $00, $00, $00, $00, $00, $00
+    db   HIGH(ColorDungeonNpcTiles + $1100), BANK(ColorDungeonNpcTiles)
+    db   HIGH(ColorDungeonNpcTiles + $0F00), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0B00), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0400), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0800), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0400), BANK(ColorDungeonNpcTiles)
+    db   HIGH(ColorDungeonNpcTiles + $0E00), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
 
 Data_020_46D6::
     db   $00, $00, $4D, $31, $00, $00, $4C, $35, $51, $2E, $45, $35, $45, $35, $00, $00

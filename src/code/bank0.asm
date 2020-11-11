@@ -5033,10 +5033,10 @@ LoadTitleScreenTiles::
     ldh  a, [hIsGBC]                              ; $2DD3: $F0 $FE
     and  a                                        ; $2DD5: $A7
     jr   nz, .else                                ; $2DD6: $20 $05
-    ld   hl, PhotoElementsTiles + $600            ; $2DD8: $21 $00 $66
+    ld   hl, PhotoElementsTiles + $100            ; $2DD8: $21 $00 $66
     jr   .endIf                                   ; $2DDB: $18 $03
 .else
-    ld   hl, PhotoElementsTiles + $500            ; $2DDD: $21 $00 $65
+    ld   hl, PhotoElementsTiles                   ; $2DDD: $21 $00 $65
 .endIf
 
     ld   de, vTiles0 + $200                       ; $2DE0: $11 $00 $82

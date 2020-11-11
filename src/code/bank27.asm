@@ -1060,13 +1060,13 @@ jr_027_7FAF:
 
 ; Pointers table
 ; Format: [address high-byte, bank]
-Data_027_SourceTable::
-._00 db HIGH(PhotoElementsTiles + $000), BANK(PhotoElementsTiles)
-._01 db HIGH(PhotoElementsTiles + $100), BANK(PhotoElementsTiles)
-._02 db HIGH(PhotoElementsTiles + $200), BANK(PhotoElementsTiles)
-._03 db HIGH(PhotoElementsTiles + $300), BANK(PhotoElementsTiles)
-._04 db HIGH(PhotoElementsTiles + $400), BANK(PhotoElementsTiles)
-._05 db HIGH(PhotoAlbumTiles    + $700), BANK(PhotoAlbumTiles)
+MarinPortraitTilesTable::
+._00 db HIGH(MarinPortraitTiles + $000), BANK(MarinPortraitTiles)
+._01 db HIGH(MarinPortraitTiles + $100), BANK(MarinPortraitTiles)
+._02 db HIGH(MarinPortraitTiles + $200), BANK(MarinPortraitTiles)
+._03 db HIGH(MarinPortraitOverlayTiles + $000), BANK(MarinPortraitOverlayTiles)
+._04 db HIGH(MarinPortraitOverlayTiles + $100), BANK(MarinPortraitOverlayTiles)
+._05 db HIGH(PhotoAlbumTiles + $700),           BANK(PhotoAlbumTiles)
 
 ; Copy data from a source specified in the table
 ; to a destination specified by wD01A
@@ -1085,7 +1085,7 @@ LoadTileset22::
     sla  a                                       ; $7FD1: $CB $27
     ld   e, a                                    ; $7FD3: $5F
     ld   d, $00                                  ; $7FD4: $16 $00
-    ld   hl, Data_027_SourceTable                ; $7FD6: $21 $B9 $7F
+    ld   hl, MarinPortraitTilesTable             ; $7FD6: $21 $B9 $7F
     add  hl, de                                  ; $7FD9: $19
     ; Source address higher byte
     ld   a, [hl+]                                ; $7FDA: $2A
@@ -1093,6 +1093,6 @@ LoadTileset22::
     ; Source bank
     ld   a, [hl]                                 ; $7FDC: $7E
     ; Bank to switch back after the transfert
-    ld   h, BANK(LoadTileset22)                  ; $7FDD: $26 $27
+    ld   h, BANK(@)                              ; $7FDD: $26 $27
     ; Execute the copy
     jp   Copy100BytesFromBankAtA                 ; $7FDF: $C3 $13 $0A

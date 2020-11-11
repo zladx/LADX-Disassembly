@@ -482,6 +482,10 @@ TitleDXTilesDMG::
 incbin "gfx/intro/title_dx.dmg.2bpp"
 TitleDXTilesCGB::
 incbin "gfx/intro/title_dx.cgb.2bpp"
+MarinPortraitTiles::
+incbin "gfx/ending/oam_marin_portrait.2bpp"
+MarinPortraitOverlayTiles::
+incbin "gfx/ending/oam_marin_portrait_overlay.2bpp"
 PhotoElementsTiles::
 incbin "gfx/photos/photo_elements_4.2bpp"
 include "code/photos_animations.asm"

@@ -6208,23 +6208,23 @@ jr_020_7DCB:
     ret                                           ; $7DE5: $C9
 
 LoadTileset23::
-    ld   c, $10                                   ; $7DE6: $0E $10
-    ld   b, HIGH(PhotoElementsTiles + $300)       ; $7DE8: $06 $68
-    ld   a, BANK(PhotoElementsTiles)              ; $7DEA: $3E $38
-    ld   h, BANK(@)                               ; $7DEC: $26 $20
+    ld   c, HIGH(vTiles0 + $1000 - $8000) ; dest  ; $7DE6: $0E $10
+    ld   b, HIGH(ThanksForPlayingTiles) ; src     ; $7DE8: $06 $68
+    ld   a, BANK(ThanksForPlayingTiles) ; src bank  ; $7DEA: $3E $38
+    ld   h, BANK(@) ; return bank                 ; $7DEC: $26 $20
     call Copy100BytesFromBankAtA                  ; $7DEE: $CD $13 $0A
 
-    ld   c, $11                                   ; $7DF1: $0E $11
-    ld   b, HIGH(PhotoElementsTiles + $400)       ; $7DF3: $06 $69
-    ld   a, BANK(PhotoElementsTiles)              ; $7DF5: $3E $38
-    ld   h, BANK(@)                               ; $7DF7: $26 $20
+    ld   c, HIGH(vTiles0 + $1100 - $8000) ; dest  ; $7DF1: $0E $11
+    ld   b, HIGH(ThanksForPlayingTiles + $100) ; src ; $7DF3: $06 $69
+    ld   a, BANK(ThanksForPlayingTiles) ; src bank ; $7DF5: $3E $38
+    ld   h, BANK(@) ; return bank                 ; $7DF7: $26 $20
     call Copy100BytesFromBankAtA                  ; $7DF9: $CD $13 $0A
 
 IF !__PATCH_1__
-    ld   c, $12                                   ; $7DFC: $0E $12
-    ld   b, HIGH(PhotoElementsTiles + $500)       ; $7DFE: $06 $6A
-    ld   a, BANK(PhotoElementsTiles)              ; $7E00: $3E $38
-    ld   h, BANK(@)                               ; $7E02: $26 $20
+    ld   c, HIGH(vTiles0 + $1200 - $8000) ; dest  ; $7DFC: $0E $12
+    ld   b, HIGH(ThanksForPlayingTiles + $200) ; src ; $7DFE: $06 $6A
+    ld   a, BANK(ThanksForPlayingTiles) ; src bank ; $7E00: $3E $38
+    ld   h, BANK(@) ; return bank                 ; $7E02: $26 $20
     call Copy100BytesFromBankAtA                  ; $7E04: $CD $13 $0A
 ENDC
 

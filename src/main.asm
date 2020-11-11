@@ -486,6 +486,10 @@ MarinPortraitTiles::
 incbin "gfx/ending/oam_marin_portrait.2bpp"
 MarinPortraitOverlayTiles::
 incbin "gfx/ending/oam_marin_portrait_overlay.2bpp"
+TitleDXOAMTiles::
+incbin "gfx/intro/oam_title_dx.2bpp"
+ThanksForPlayingTiles::
+incbin "gfx/ending/thanks_for_playing.2bpp"
 PhotoElementsTiles::
 incbin "gfx/photos/photo_elements_4.2bpp"
 include "code/photos_animations.asm"

@@ -34,5 +34,6 @@ include "constants/charmaps/name_entry.asm"
 ;
 include "constants/gbhw.asm"
 include "constants/memory/hram.asm"
+include "constants/memory/sram.asm"
 include "constants/memory/vram.asm"
 include "constants/memory/wram.asm"

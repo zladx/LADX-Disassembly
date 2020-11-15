@@ -7419,8 +7419,8 @@ SwitchToMapDataBank::
 LoadCreditsMarinPortraitTiles_trampoline::
     jpsb LoadCreditsMarinPortraitTiles            ; $3915: $3E $27 $EA $00 $21 $C3 $C5 $7F
 
-LoadTileset23_trampoline::
-    jpsb LoadTileset23                            ; $391D: $3E $20 $EA $00 $21 $C3 $E6 $7D
+LoadThanksForPlayingTiles_trampoline::
+    jpsb LoadThanksForPlayingTiles                            ; $391D: $3E $20 $EA $00 $21 $C3 $E6 $7D
 
 include "code/home/entities.asm"
 

@@ -273,7 +273,7 @@ TilemapLoadingHandlersTable::
 ._20 dw LoadSchulePaintingTiles
 ._21 dw LoadEaglesTowerTopTiles
 ._22 dw LoadCreditsMarinPortraitTiles_trampoline
-._23 dw LoadTileset23_trampoline
+._23 dw LoadThanksForPlayingTiles_trampoline
 
 data_020_46AA::
     db   HIGH(ColorDungeonNpcTiles + $1100), BANK(ColorDungeonNpcTiles)
@@ -6227,7 +6227,8 @@ jr_020_7DCB:
 
     ret                                           ; $7DE5: $C9
 
-LoadTileset23::
+; Copy tiles for the Credits "Thanks for playing" message to tiles memory
+LoadThanksForPlayingTiles::
     ld   c, HIGH(vTiles0 + $1000 - $8000) ; dest  ; $7DE6: $0E $10
     ld   b, HIGH(ThanksForPlayingTiles) ; src     ; $7DE8: $06 $68
     ld   a, BANK(ThanksForPlayingTiles) ; src bank  ; $7DEA: $3E $38

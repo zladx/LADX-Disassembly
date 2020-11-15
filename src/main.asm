@@ -101,8 +101,8 @@ Items1Tiles::
 incbin "gfx/items/items_1.dmg.2bpp"
 InventoryEquipmentItemsTiles::
 incbin "gfx/items/items_2.dmg.2bpp"
-DungeonKeysTiles::
-incbin "gfx/items/dungeon_keys.dmg.2bpp"
+InventoryOverworldItemsTiles::
+incbin "gfx/items/inventory_overworld_items.dmg.2bpp"
 SirenInstrumentsTiles::
 incbin "gfx/items/instruments.dmg.2bpp"
 Overworld1Tiles::
@@ -234,8 +234,8 @@ HouseAItemsTiles::
 incbin "gfx/items/house_a.dmg.2bpp"
 HouseBItemsTiles::
 incbin "gfx/items/house_b.dmg.2bpp"
-InventoryDungeonItemsTiles::
-incbin "gfx/items/dungeon_items.dmg.2bpp"
+InventoryIndoorItemsTiles::
+incbin "gfx/items/inventory_indoor_items.dmg.2bpp"
 DungeonMinimapTiles::
 incbin "gfx/items/minimap_dmg.2bpp"
 
@@ -393,7 +393,7 @@ incbin "gfx/characters/oam_link_1.cgb.2bpp"
 incbin "gfx/characters/oam_vfx.cgb.2bpp"
 incbin "gfx/items/items_1.cgb.2bpp"
 incbin "gfx/items/items_2.cgb.2bpp"
-incbin "gfx/items/dungeon_keys.cgb.2bpp"
+incbin "gfx/items/inventory_overworld_items.cgb.2bpp"
 incbin "gfx/items/instruments.cgb.2bpp"
 incbin "gfx/world/overworld_1.cgb.2bpp"
 incbin "gfx/characters/oam_link_2.cgb.2bpp"
@@ -440,7 +440,7 @@ incbin "gfx/items/dungeon_c.cgb.2bpp"
 incbin "gfx/items/dungeon_d.cgb.2bpp"
 incbin "gfx/items/house_a.cgb.2bpp"
 incbin "gfx/items/house_b.cgb.2bpp"
-incbin "gfx/items/dungeon_items.cgb.2bpp"
+incbin "gfx/items/inventory_indoor_items.cgb.2bpp"
 incbin "gfx/items/minimap_cgb.2bpp"
 
 section "bank33",romx[$4000],bank[$33]
@@ -482,6 +482,14 @@ TitleDXTilesDMG::
 incbin "gfx/intro/title_dx.dmg.2bpp"
 TitleDXTilesCGB::
 incbin "gfx/intro/title_dx.cgb.2bpp"
+MarinPortraitTiles::
+incbin "gfx/ending/oam_marin_portrait.2bpp"
+MarinPortraitOverlayTiles::
+incbin "gfx/ending/oam_marin_portrait_overlay.2bpp"
+TitleDXOAMTiles::
+incbin "gfx/intro/oam_title_dx.2bpp"
+ThanksForPlayingTiles::
+incbin "gfx/ending/thanks_for_playing.2bpp"
 PhotoElementsTiles::
 incbin "gfx/photos/photo_elements_4.2bpp"
 include "code/photos_animations.asm"

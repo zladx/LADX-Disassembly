@@ -4403,7 +4403,7 @@ LoadTileset0F_trampoline::
     jpsw LoadTileset0F                            ; $28E8: $3E $01 $CD $0C $08 $C3 $E3 $6C
 
 ; Fill the Background Map with all 7Es
-LoadTileset8::
+FillBGMapWith7E::
     ld   a, $7E    ; value                        ; $28F0: $3E $7E
     ld   bc, $400 ; count                         ; $28F2: $01 $00 $04
     jr   FillBGMap                                ; $28F5: $18 $05
@@ -4412,6 +4412,7 @@ LoadTileset8::
 ClearBGMap::
     ld   a, $7F    ; value                        ; $28F7: $3E $7F
     ld   bc, $800 ; count                         ; $28F9: $01 $00 $08
+    ; fallthrough to FillBGMap
 
 ; Fill the Background map with a value
 ; Inputs:
@@ -4733,7 +4734,7 @@ LoadBaseTiles::
     ld   bc, TILE_SIZE * $100                     ; $2BEB: $01 $00 $10
     call CopyData                                 ; $2BEE: $CD $14 $29
 
-    ; Copy two tiles from the times tile sheet to a portion of Tiles Map 1
+    ; Copy two tiles from the items tile sheet to a portion of Tiles Map 1
     ld   hl, Items1Tiles + $3A0                   ; $2BF1: $21 $A0 $47
     ld   de, vTiles1 + $600                       ; $2BF4: $11 $00 $8E
     ld   bc, TILE_SIZE * $2                       ; $2BF7: $01 $20 $00
@@ -4744,7 +4745,8 @@ LoadBaseTiles::
     call SwitchBank                               ; $2BFF: $CD $0C $08
     ret                                           ; $2C02: $C9
 
-LoadInventoryTiles::
+; Copy base tiles and tiles used for menus to tiles memory
+LoadMenuTiles::
     call LoadBaseTiles                            ; $2C03: $CD $CF $2B
 
     ; Select the tiles sheet bank ($0F on DMG, $2F on GBC)
@@ -4765,7 +4767,9 @@ LoadInventoryTiles::
     ld   bc, $800                                 ; $2C22: $01 $00 $08
     jp   CopyData ; tail-call                     ; $2C25: $C3 $14 $29
 
-LoadDungeonTiles::
+; Copy tiles for an indoor room (floor, objects, walls, items, inventory)
+; to tile memory.
+LoadIndoorTiles::
     ;
     ; Load floor tiles
     ;
@@ -4780,6 +4784,7 @@ LoadDungeonTiles::
     ld   d, $00                                   ; $2C33: $16 $00
     cp   MAP_COLOR_DUNGEON                        ; $2C35: $FE $FF
     jr   nz, .notColorDungeon                     ; $2C37: $20 $1A
+
     ld   a, BANK(ColorDungeonTiles)               ; $2C39: $3E $35
     ld   [MBC3SelectBank], a                      ; $2C3B: $EA $00 $21
     ld   hl, ColorDungeonTiles + $200             ; $2C3E: $21 $00 $62
@@ -4808,7 +4813,7 @@ LoadDungeonTiles::
     call CopyData                                 ; $2C63: $CD $14 $29
 
     ;
-    ; Load dungeon doors, stairs and torches
+    ; Load dungeon shared objects (doors, stairs, torches, etc)
     ;
 
     ld   a, BANK(DungeonsTiles)                   ; $2C66: $3E $0D
@@ -4819,7 +4824,7 @@ LoadDungeonTiles::
     call CopyData                                 ; $2C74: $CD $14 $29
 
     ;
-    ; Load dungeon walls
+    ; Load indoor walls
     ;
 
     ld   a, BANK(DungeonWallsTilesPointers)       ; $2C77: $3E $20
@@ -4852,9 +4857,10 @@ LoadDungeonTiles::
     call func_2D50                                ; $2CAE: $CD $50 $2D
 
     ;
-    ; Load dungeon items tiles
+    ; Load indoor objects
     ;
 
+    ; Read the pointer to the objects tiles for this hMapId
     ld   a, BANK(DungeonItemsTilesPointers)       ; $2CB1: $3E $20
     ld   [MBC3SelectBank], a                      ; $2CB3: $EA $00 $21
     pop  de                                       ; $2CB6: $D1
@@ -4879,22 +4885,24 @@ LoadDungeonTiles::
     call CopyData                                 ; $2CD7: $CD $14 $29
 
     ;
-    ; Load inventory items tiles for dungeon
+    ; Load indoor items (map, compass, keys, etc)
     ;
 
     ld   a, [wCurrentBank]                        ; $2CDA: $FA $AF $DB
     ld   [MBC3SelectBank], a                      ; $2CDD: $EA $00 $21
-    ld   hl, InventoryDungeonItemsTiles           ; $2CE0: $21 $00 $7D
+    ld   hl, InventoryIndoorItemsTiles            ; $2CE0: $21 $00 $7D
 
+    ; If indoor, but not in a dungeon…
     ldh  a, [hMapId]                              ; $2CE3: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $2CE5: $FE $FF
-    jr   z, .caveBOrColorDungeon                  ; $2CE7: $28 $0C
+    jr   z, .inventoryItemsEnd                    ; $2CE7: $28 $0C
     cp   MAP_CAVE_B                               ; $2CE9: $FE $0A
-    jr   c, .caveBOrColorDungeon                  ; $2CEB: $38 $08
-    ld   a, BANK(DungeonKeysTiles)                ; $2CED: $3E $0C
+    jr   c, .inventoryItemsEnd                    ; $2CEB: $38 $08
+    ; …use the overworld inventory items (instead of the dungeon ones)
+    ld   a, BANK(InventoryOverworldItemsTiles)    ; $2CED: $3E $0C
     call SwitchAdjustedBank                       ; $2CEF: $CD $13 $08
-    ld   hl, DungeonKeysTiles                     ; $2CF2: $21 $00 $4C
-.caveBOrColorDungeon
+    ld   hl, InventoryOverworldItemsTiles         ; $2CF2: $21 $00 $4C
+.inventoryItemsEnd
 
     ld   de, vTiles1 + $400                       ; $2CF5: $11 $00 $8C
     ld   bc, TILE_SIZE * $30                      ; $2CF8: $01 $00 $03
@@ -4933,7 +4941,11 @@ LoadDungeonTiles::
 .return
     ret                                           ; $2D2C: $C9
 
-LoadTileset5::
+; Copy default tiles for the Overworld rooms to tiles memory.
+; This includes tiles available to all Overworld room.
+;
+; TODO: does it also includes default tiles for the room-specific section?
+LoadBaseOverworldTiles::
     ;
     ; Load Overworld landscape
     ;
@@ -4949,15 +4961,16 @@ LoadTileset5::
     ; Load dungeon keys
     ;
 
-    ld   hl, DungeonKeysTiles                     ; $2D3E: $21 $00 $4C
+    ld   hl, InventoryOverworldItemsTiles                     ; $2D3E: $21 $00 $4C
     ld   de, vTiles1 + $400                       ; $2D41: $11 $00 $8C
     ld   bc, TILE_SIZE * $40                      ; $2D44: $01 $00 $04
     call CopyData                                 ; $2D47: $CD $14 $29
 
     call func_2D50                                ; $2D4A: $CD $50 $2D
 
-    jp   LoadDungeonTiles.patchInventoryTiles     ; $2D4D: $C3 $FE $2C
+    jp   LoadIndoorTiles.patchInventoryTiles     ; $2D4D: $C3 $FE $2C
 
+; Copy animated tiles, inventory items and character tiles to tile memory
 func_2D50::
     xor  a                                        ; $2D50: $AF
     ldh  [hAnimatedTilesFrameCount], a            ; $2D51: $E0 $A6
@@ -5029,21 +5042,22 @@ LoadTitleScreenTiles::
     ld   bc, TILE_SIZE * $40                      ; $2DCD: $01 $00 $04
     call CopyData                                 ; $2DD0: $CD $14 $29
 
-    ; Load some title sprites
+    ; Load OAM tiles for the large "DX" text
+    ; (used to fade-in the "DX" progressively, by updating the OAM palette)
     ldh  a, [hIsGBC]                              ; $2DD3: $F0 $FE
     and  a                                        ; $2DD5: $A7
     jr   nz, .else                                ; $2DD6: $20 $05
-    ld   hl, PhotoElementsTiles + $600            ; $2DD8: $21 $00 $66
+    ld   hl, TitleDXOAMTiles + $100               ; $2DD8: $21 $00 $66
     jr   .endIf                                   ; $2DDB: $18 $03
 .else
-    ld   hl, PhotoElementsTiles + $500            ; $2DDD: $21 $00 $65
+    ld   hl, TitleDXOAMTiles                      ; $2DDD: $21 $00 $65
 .endIf
 
     ld   de, vTiles0 + $200                       ; $2DE0: $11 $00 $82
     ld   bc, TILE_SIZE * $10                      ; $2DE3: $01 $00 $01
     jp   CopyData                                 ; $2DE6: $C3 $14 $29
 
-LoadTileset0B::
+LoadWorldMinimapTiles::
     ; Load world map tiles
     ld   a, BANK(WorldMapTiles)                   ; $2DE9: $3E $0C
     call SwitchAdjustedBank                       ; $2DEB: $CD $13 $08
@@ -5121,13 +5135,13 @@ LoadSaveMenuTiles::
 NpcTilesBankTable::
     db   $00, BANK(Npc2Tiles), BANK(Npc1Tiles), BANK(Npc3Tiles) ; $2E6F
 
-; Load lower section of OAM tiles (NPCs),
-; and upper section of BG tiles
-LoadTileset9::
+; For overworld or indoor rooms, load lower section of OAM tiles (NPCs),
+; and upper section of BG tiles.
+LoadWorldTiles::
     ldh  a, [hMapId]                              ; $2E73: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $2E75: $FE $FF
     jr   nz, .colorDungeonEnd                     ; $2E77: $20 $0B
-    callsb func_020_475A                          ; $2E79: $3E $20 $EA $00 $21 $CD $5A $47
+    callsb LoadColorDungeonTiles                  ; $2E79: $3E $20 $EA $00 $21 $CD $5A $47
     jp   .oamTilesEnd                             ; $2E81: $C3 $12 $2F
 .colorDungeonEnd
 
@@ -5580,12 +5594,12 @@ doCopyObjectToBG:
 
     ret                                           ; $309A: $C9
 
-; Copy the tile map of a room to BG video memory.
+; Copy the tilemap of a room to BG video memory.
 ;
 ; This is used when loading a map in one go (instead
 ; of having a sliding screen transition.)
 ; (called by LoadMapData)
-LoadTileset1::
+LoadRoomTilemap:
     call SwitchToMapDataBank                      ; $309B: $CD $05 $39
     call SwitchBank                               ; $309E: $CD $0C $08
     ld   de, vBGMap0                              ; $30A1: $11 $00 $98
@@ -5600,13 +5614,14 @@ LoadTileset1::
     ; If not running on GBC…
     ldh  a, [hIsGBC]                              ; $30AC: $F0 $FE
     and  a                                        ; $30AE: $A7
-    jr   nz, .copyObjectToBG                      ; $30AF: $20 $05
+    jr   nz, .dmgEnd                              ; $30AF: $20 $05
     ; … copy the object tiles (2x2 tiles) to the BG map
     call WriteObjectToBG_DMG                      ; $30B1: $CD $CD $2F
     jr   .objectCopyEnd                           ; $30B4: $18 $0E
+.dmgEnd
 
     ; Copy the object tiles and palettes (2x2 tiles) to the BG map
-.copyObjectToBG
+
     ; If IsIndoor…
     ld   a, [wIsIndoor]                           ; $30B6: $FA $A5 $DB
     and  a                                        ; $30B9: $A7
@@ -7421,7 +7436,7 @@ label_3FBD::
     jp   DrawLinkSpriteAndReturn                  ; $3FCE: $C3 $2E $1D
 
 ; Copy data to second half of tiles memory
-LoadColorDungeonTiles::
+ReloadColorDungeonNpcTiles::
     ; bank = hIsGBC ? $35 : $34
     ld   b, $34                                   ; $3FD1: $06 $34
     ldh  a, [hIsGBC]                              ; $3FD3: $F0 $FE
@@ -7433,6 +7448,7 @@ LoadColorDungeonTiles::
     ; Switch to bank $34 or $35
     ld   a, b                                     ; $3FD9: $78
     ld   [MBC3SelectBank], a                      ; $3FDA: $EA $00 $21
+
     ld   hl, ColorDungeonNpcTiles                 ; $3FDD: $21 $00 $40
     ld   de, vTiles0 + $400                       ; $3FE0: $11 $00 $84
     ld   bc, TILE_SIZE * $40                      ; $3FE3: $01 $00 $04

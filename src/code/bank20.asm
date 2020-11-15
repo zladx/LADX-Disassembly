@@ -239,17 +239,17 @@ GetTilemapHandlerAddress::
 
 ; Pointers to addresses to execute for loading a specific tilemap
 TilemapLoadingHandlersTable::
-._01 dw LoadTileset1
+._01 dw LoadRoomTilemap
 ._02 dw ClearBGMap
 ._03 dw LoadBaseTiles
-._04 dw LoadInventoryTiles
-._05 dw LoadTileset5
-._06 dw LoadDungeonTiles
-._07 dw LoadTileset5
-._08 dw LoadTileset8
-._09 dw LoadTileset9
+._04 dw LoadMenuTiles
+._05 dw LoadBaseOverworldTiles
+._06 dw LoadIndoorTiles
+._07 dw LoadBaseOverworldTiles ; same as command $05
+._08 dw FillBGMapWith7E
+._09 dw LoadWorldTiles
 ._0A dw LoadMapData.return
-._0B dw LoadTileset0B
+._0B dw LoadWorldMinimapTiles
 ._0C dw LoadMapData.return
 ._0D dw LoadSaveMenuTiles
 ._0E dw LoadTileset0E_trampoline
@@ -296,7 +296,7 @@ Data_020_472E::
     db   $47, $35, $00, $00, $00, $00, $00, $00, $47, $35, $00, $00
 
 ; Color-dungeon related function
-func_020_475A::
+LoadColorDungeonTiles::
     ld   hl, data_020_46AA                        ; $475A: $21 $AA $46
     ldh  a, [hMapRoom]                            ; $475D: $F0 $F6
     rla                                           ; $475F: $17
@@ -3087,7 +3087,7 @@ label_020_5D34:
 
 InventoryLoad4Handler::
     call LCDOff                                   ; $5D52: $CD $CF $28
-    call LoadColorDungeonTiles                    ; $5D55: $CD $D1 $3F
+    call ReloadColorDungeonNpcTiles                    ; $5D55: $CD $D1 $3F
     ld   a, [wLCDControl]                         ; $5D58: $FA $FD $D6
     ldh  [rLCDC], a                               ; $5D5B: $E0 $40
     call IncrementGameplaySubtype_20                            ; $5D5D: $CD $83 $66
@@ -6208,23 +6208,23 @@ jr_020_7DCB:
     ret                                           ; $7DE5: $C9
 
 LoadTileset23::
-    ld   c, $10                                   ; $7DE6: $0E $10
-    ld   b, HIGH(PhotoElementsTiles + $800)       ; $7DE8: $06 $68
-    ld   a, BANK(PhotoElementsTiles)              ; $7DEA: $3E $38
-    ld   h, BANK(@)                               ; $7DEC: $26 $20
+    ld   c, HIGH(vTiles0 + $1000 - $8000) ; dest  ; $7DE6: $0E $10
+    ld   b, HIGH(ThanksForPlayingTiles) ; src     ; $7DE8: $06 $68
+    ld   a, BANK(ThanksForPlayingTiles) ; src bank  ; $7DEA: $3E $38
+    ld   h, BANK(@) ; return bank                 ; $7DEC: $26 $20
     call Copy100BytesFromBankAtA                  ; $7DEE: $CD $13 $0A
 
-    ld   c, $11                                   ; $7DF1: $0E $11
-    ld   b, HIGH(PhotoElementsTiles + $900)       ; $7DF3: $06 $69
-    ld   a, BANK(PhotoElementsTiles)              ; $7DF5: $3E $38
-    ld   h, BANK(@)                               ; $7DF7: $26 $20
+    ld   c, HIGH(vTiles0 + $1100 - $8000) ; dest  ; $7DF1: $0E $11
+    ld   b, HIGH(ThanksForPlayingTiles + $100) ; src ; $7DF3: $06 $69
+    ld   a, BANK(ThanksForPlayingTiles) ; src bank ; $7DF5: $3E $38
+    ld   h, BANK(@) ; return bank                 ; $7DF7: $26 $20
     call Copy100BytesFromBankAtA                  ; $7DF9: $CD $13 $0A
 
 IF !__PATCH_1__
-    ld   c, $12                                   ; $7DFC: $0E $12
-    ld   b, HIGH(PhotoElementsTiles + $A00)       ; $7DFE: $06 $6A
-    ld   a, BANK(PhotoElementsTiles)              ; $7E00: $3E $38
-    ld   h, BANK(@)                               ; $7E02: $26 $20
+    ld   c, HIGH(vTiles0 + $1200 - $8000) ; dest  ; $7DFC: $0E $12
+    ld   b, HIGH(ThanksForPlayingTiles + $200) ; src ; $7DFE: $06 $6A
+    ld   a, BANK(ThanksForPlayingTiles) ; src bank ; $7E00: $3E $38
+    ld   h, BANK(@) ; return bank                 ; $7E02: $26 $20
     call Copy100BytesFromBankAtA                  ; $7E04: $CD $13 $0A
 ENDC
 

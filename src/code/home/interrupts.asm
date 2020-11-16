@@ -590,7 +590,7 @@ LoadOAMTiles::
     ld   c, $90                                   ; $06C1: $0E $90
     ld   b, h                                     ; $06C3: $44
     ld   h, $00                                   ; $06C4: $26 $00
-    call Copy100BytesFromBankAtA                  ; $06C6: $CD $13 $0A
+    call CopyDataToVRAM                           ; $06C6: $CD $13 $0A
     jr   .clearEnemiesTilesLoadCommand            ; $06C9: $18 $6D
 .colorDungeonEnd
 

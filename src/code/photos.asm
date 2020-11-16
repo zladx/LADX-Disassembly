@@ -258,7 +258,7 @@ func_037_4190::
     push bc                                       ; $4193: $C5
     push de                                       ; $4194: $D5
     push hl                                       ; $4195: $E5
-    call Copy100BytesFromBankAtA                  ; $4196: $CD $13 $0A
+    call CopyDataToVRAM                           ; $4196: $CD $13 $0A
     pop  hl                                       ; $4199: $E1
     pop  de                                       ; $419A: $D1
     pop  bc                                       ; $419B: $C1
@@ -3100,7 +3100,7 @@ JumpTable_037_5393.func_037_53C0::
     ld   b, $42                                   ; $53C0: $06 $42
     ld   c, $06                                   ; $53C2: $0E $06
     ld   h, $37                                   ; $53C4: $26 $37
-    call Copy100BytesFromBankAtA                  ; $53C6: $CD $13 $0A
+    call CopyDataToVRAM                           ; $53C6: $CD $13 $0A
 
 .else_53C9_37:
     ld   a, $C7                                   ; $53C9: $3E $C7

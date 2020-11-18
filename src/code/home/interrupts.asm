@@ -157,7 +157,7 @@ LoadMapData::
 
 .executeMapLoadHandler
     ld   e, a                                     ; $0430: $5F
-    callsb GetTilemapHandlerAddress               ; $0431: $3E $20 $EA $00 $21 $CD $57 $46
+    callsb GetTilesetHandlerAddress               ; $0431: $3E $20 $EA $00 $21 $CD $57 $46
     ; Jump to the tilemap loading handler
     jp   hl ; tail-call                           ; $0439: $E9
 

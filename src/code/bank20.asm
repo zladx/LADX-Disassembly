@@ -222,15 +222,15 @@ jr_020_4640:
     pop  de                                       ; $4655: $D1
     ret                                           ; $4656: $C9
 
-; Retrieve the address of a tilemap loading handler
+; Retrieve the address of a tileset load handler
 ;   input:  wTilesetToLoad in e
 ;   output: address to jump to in hl
-GetTilemapHandlerAddress::
+GetTilesetHandlerAddress::
     ; de = (e - 1) * 2
     dec  e                                        ; $4657: $1D
     sla  e                                        ; $4658: $CB $23
     ld   d, $00                                   ; $465A: $16 $00
-    ld   hl, TilesetLoadHandlersTable          ; $465C: $21 $64 $46
+    ld   hl, TilesetLoadHandlersTable             ; $465C: $21 $64 $46
     add  hl, de                                   ; $465F: $19
     ld   a, [hl+]                                 ; $4660: $2A
     ld   h, [hl]                                  ; $4661: $66

@@ -247,33 +247,33 @@ TilemapLoadingHandlersTable::
 ._06 dw LoadIndoorTiles
 ._07 dw LoadBaseOverworldTiles ; same as command $05
 ._08 dw FillBGMapWith7E
-._09 dw LoadWorldTiles
+._09 dw LoadRoomSpecificTiles
 ._0A dw LoadMapData.return
-._0B dw LoadWorldMinimapTiles
+._0B dw LoadWorldMapTiles
 ._0C dw LoadMapData.return
 ._0D dw LoadSaveMenuTiles
-._0E dw LoadTileset0E_trampoline
-._0F dw LoadTileset0F_trampoline
+._0E dw LoadWorldMapBGMap_trampoline
+._0F dw LoadTileset0F_trampoline ; fade from white? used in menus
 ._10 dw LoadIntroSequenceTiles
 ._11 dw LoadTitleScreenTiles
 ._12 dw LoadChristinePortraitTiles
-._13 dw LoadTileset13
+._13 dw LoadMarinBeachTiles
 ._14 dw LoadFaceShrineReliefTiles
 ._15 dw LoadTileset15
-._16 dw LoadTileset16
-._17 dw LoadTileset17
-._18 dw LoadTileset18
-._19 dw LoadTileset19
-._1A dw LoadTileset1A
-._1B dw LoadTileset1B
-._1C dw LoadTileset1A
-._1D dw LoadTileset1D
-._1E dw LoadTileset1E
-._1F dw LoadTileset1F
+._16 dw LoadCreditsLinkOnSeaLargeTiles
+._17 dw LoadCreditsSunAboveTiles
+._18 dw LoadCreditsLinkOnSeaCloseTiles
+._19 dw LoadCreditsLinkSeatedOnLogTiles
+._1A dw LoadCreditsLinkFaceCloseUpTiles
+._1B dw LoadCreditsRollTiles
+._1C dw LoadCreditsLinkFaceCloseUpTiles
+._1D dw LoadCreditsKoholintViewsTiles
+._1E dw LoadCreditsKoholintDisappearingTiles
+._1F dw LoadCreditsStairsTiles
 ._20 dw LoadSchulePaintingTiles
 ._21 dw LoadEaglesTowerTopTiles
-._22 dw LoadTileset22_trampoline
-._23 dw LoadTileset23_trampoline
+._22 dw LoadCreditsMarinPortraitTiles_trampoline
+._23 dw LoadThanksForPlayingTiles_trampoline
 
 data_020_46AA::
     db   HIGH(ColorDungeonNpcTiles + $1100), BANK(ColorDungeonNpcTiles)
@@ -2228,7 +2228,8 @@ Data_020_578B::
     db   $04, $04, $04, $04, $04, $04, $07, $00   ; $587B
     db   $04, $04, $00, $00, $00, $00, $03, $03   ; $5883
 
-LoadTileset0E::
+; Copy the World Map tilemap to BG memory
+LoadWorldMapBGMap::
     ld   a, LOW(Data_20_568B)                     ; $588B: $3E $8B
     ldh  [hMultiPurposeA], a                           ; $588D: $E0 $E1
     ld   a, HIGH(Data_20_568B)                    ; $588F: $3E $56
@@ -6226,7 +6227,8 @@ jr_020_7DCB:
 
     ret                                           ; $7DE5: $C9
 
-LoadTileset23::
+; Copy tiles for the Credits "Thanks for playing" message to tiles memory
+LoadThanksForPlayingTiles::
     ld   c, HIGH(vTiles0 + $1000 - $8000) ; dest  ; $7DE6: $0E $10
     ld   b, HIGH(ThanksForPlayingTiles) ; src     ; $7DE8: $06 $68
     ld   a, BANK(ThanksForPlayingTiles) ; src bank  ; $7DEA: $3E $38

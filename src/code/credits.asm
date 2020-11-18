@@ -2043,7 +2043,7 @@ jr_017_55FC:
 
 ; Handles:
 ; - the fade-to-white of Link on the stairs
-; - the various views ok Koholint
+; - the various views of Koholint
 ; - the island disappearing
 ; - link's platform rumbling
 CreditsInstrumentsPlayingHandler::
@@ -2106,10 +2106,13 @@ func_017_5665::
 
     ld   a, $1D                                   ; $5676: $3E $1D
     ld   [wTileMapToLoad], a                      ; $5678: $EA $FE $D6
+
     ld   a, $01                                   ; $567B: $3E $01
     ld   [wPaletteUnknownE], a                    ; $567D: $EA $D5 $DD
+
     xor  a                                        ; $5680: $AF
     ldh  [hBaseScrollY], a                        ; $5681: $E0 $97
+
     call DisableAllEntities                       ; $5683: $CD $2A $56
     jp   IncrementD000AndReturn                       ; $5686: $C3 $25 $56
 
@@ -2489,6 +2492,7 @@ func_017_58C3::
 jr_017_58D0:
     ret                                           ; $58D0: $C9
 
+; Load koholint island disapearing GFX
 func_017_58D1::
     ld   a, [wD006]                               ; $58D1: $FA $06 $D0
     and  a                                        ; $58D4: $A7
@@ -2500,8 +2504,10 @@ func_017_58D1::
 
     ld   a, $1E                                   ; $58DF: $3E $1E
     ld   [wTileMapToLoad], a                      ; $58E1: $EA $FE $D6
+
     ld   a, $01                                   ; $58E4: $3E $01
     ld   [wPaletteUnknownE], a                    ; $58E6: $EA $D5 $DD
+
     call DisableAllEntities                       ; $58E9: $CD $2A $56
     jp   IncrementD000AndReturn                                    ; $58EC: $C3 $25 $56
 
@@ -2736,8 +2742,10 @@ func_017_5A66::
     ld   [wScreenShakeHorizontal], a              ; $5A7E: $EA $55 $C1
     ld   a, LINK_ANIMATION_STATE_STANDING_DOWN    ; $5A81: $3E $00
     ldh  [hLinkAnimationState], a                 ; $5A83: $E0 $9D
+
     ld   a, $15                                   ; $5A85: $3E $15
     ld   [wTileMapToLoad], a                      ; $5A87: $EA $FE $D6
+
     xor  a                                        ; $5A8A: $AF
     ld   [wPaletteUnknownE], a                    ; $5A8B: $EA $D5 $DD
     ld   a, $E8                                   ; $5A8E: $3E $E8
@@ -3324,6 +3332,7 @@ CreditsSunAboveHandler::
 CreditsSunAbove0Handler::
     ld   a, $17                                   ; $6129: $3E $17
     ld   [wTileMapToLoad], a                      ; $612B: $EA $FE $D6
+
     ld   a, $01                                   ; $612E: $3E $01
     ld   [wPaletteUnknownE], a                    ; $6130: $EA $D5 $DD
     xor  a                                        ; $6133: $AF

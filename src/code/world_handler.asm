@@ -232,7 +232,7 @@ GameplayWorldSubtype2Handler::
     ei                                            ; $44C8: $FB
 
 jr_001_44C9::
-    call LoadRoomTiles                            ; $44C9: $CD $1E $0D
+    call SelectRoomTilesets                       ; $44C9: $CD $1E $0D
     xor  a                                        ; $44CC: $AF
     ldh  [hNeedsUpdatingBGTiles], a               ; $44CD: $E0 $90
     ldh  [hNeedsUpdatingEnnemiesTiles], a         ; $44CF: $E0 $91

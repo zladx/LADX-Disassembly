@@ -230,15 +230,18 @@ GetTilemapHandlerAddress::
     dec  e                                        ; $4657: $1D
     sla  e                                        ; $4658: $CB $23
     ld   d, $00                                   ; $465A: $16 $00
-    ld   hl, TilemapLoadingHandlersTable          ; $465C: $21 $64 $46
+    ld   hl, TilesetLoadHandlersTable          ; $465C: $21 $64 $46
     add  hl, de                                   ; $465F: $19
     ld   a, [hl+]                                 ; $4660: $2A
     ld   h, [hl]                                  ; $4661: $66
     ld   l, a                                     ; $4662: $6F
     ret                                           ; $4663: $C9
 
-; Pointers to addresses to execute for loading a specific tilemap
-TilemapLoadingHandlersTable::
+; Pointers to addresses to execute for loading a specific tileset.
+;
+; NB: curiously, some of these functions actually load a tilemap
+; into BG memory (rather than a tileset in tiles memory.)
+TilesetLoadHandlersTable::
 ._01 dw LoadRoomTilemap
 ._02 dw ClearBGMap
 ._03 dw LoadBaseTiles

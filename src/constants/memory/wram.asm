@@ -2343,7 +2343,7 @@ wLCDControl::
   ds 1 ; D6FD
 
 ; ID of a VRAM copying command that will be executed on next vblank.
-; See possible values at TilemapLoadingHandlersTable
+; See possible values at TilesetLoadHandlersTable
 wTileMapToLoad::
   ds 1 ; D6FE
 

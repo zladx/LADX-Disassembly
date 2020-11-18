@@ -479,7 +479,7 @@ func_027_7884::
 label_027_7895:
     ld   [wD01A], a                               ; $7895: $EA $1A $D0
     ld   a, $22                                   ; $7898: $3E $22
-    ld   [wTileMapToLoad], a                      ; $789A: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $789A: $EA $FE $D6
     ret                                           ; $789D: $C9
 
 func_027_789E::

@@ -796,7 +796,7 @@ jr_001_5854::
     ld   a, $07                                   ; $5883: $3E $07
 
 jr_001_5885::
-    ld   [wTileMapToLoad], a                      ; $5885: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $5885: $EA $FE $D6
 
 func_001_5888::
     ld   hl, wRoomTransitionState                 ; $5888: $21 $24 $C1
@@ -2376,7 +2376,7 @@ jr_001_6849::
     xor  a                                        ; $684C: $AF
     ld   [wScrollXOffset], a                               ; $684D: $EA $BF $C1
     ld   a, $0F                                   ; $6850: $3E $0F
-    ld   [wTileMapToLoad], a                      ; $6852: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $6852: $EA $FE $D6
 
 jr_001_6855::
     ret                                           ; $6855: $C9
@@ -2393,7 +2393,7 @@ PeachPictureState2Handler::     ; This is for full-screen images ...
 
 jr_001_6868::
     ld   a, e                                     ; $6868: $7B
-    ld   [wTileMapToLoad], a                      ; $6869: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $6869: $EA $FE $D6
     xor  a                                        ; $686C: $AF
     ld   [wC13F], a                               ; $686D: $EA $3F $C1
     jp   IncrementGameplaySubtypeAndReturn        ; $6870: $C3 $D6 $44

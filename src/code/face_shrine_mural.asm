@@ -54,7 +54,7 @@ FaceShrineMuralStage1Handler::
     xor  a                                        ; $6B48: $AF
     ld   [wScrollXOffset], a                               ; $6B49: $EA $BF $C1
     ld   a, $14                                   ; $6B4C: $3E $14
-    ld   [wTileMapToLoad], a                      ; $6B4E: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $6B4E: $EA $FE $D6
 
 jr_001_6B51::
     ret                                           ; $6B51: $C9

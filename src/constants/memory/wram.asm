@@ -2342,9 +2342,9 @@ wEnginePaused::
 wLCDControl::
   ds 1 ; D6FD
 
-; ID of a VRAM copying command that will be executed on next vblank.
+; Index of a tileset that will by copied to VRAM on next vblank.
 ; See possible values at TilesetLoadHandlersTable
-wTileMapToLoad::
+wTilesetToLoad::
   ds 1 ; D6FE
 
 ; TODO comment

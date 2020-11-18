@@ -32,7 +32,7 @@ FileSelectionEntryPoint::
 FileSelectionPrepare0::
     ; Load tilemap 4
     ld   a, $04                                   ; $47E9: $3E $04
-    ld   [wTileMapToLoad], a                      ; $47EB: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $47EB: $EA $FE $D6
     xor  a                                        ; $47EE: $AF
     ld   [wIsFileSelectionArrowShifted], a                               ; $47EF: $EA $00 $D0
     jp   IncrementGameplaySubtypeAndReturn        ; $47F2: $C3 $D6 $44
@@ -40,7 +40,7 @@ FileSelectionPrepare0::
 FileSelectionPrepare1::
     ; Load tilemap 8
     ld   a, $08                                   ; $47F5: $3E $08
-    ld   [wTileMapToLoad], a                      ; $47F7: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $47F7: $EA $FE $D6
     jp   IncrementGameplaySubtypeAndReturn        ; $47FA: $C3 $D6 $44
 
 FileSelectionPrepare2::
@@ -446,7 +446,7 @@ LoadSelectedFile::
     call ClearFileMenuBG_trampoline               ; $49D3: $CD $FA $08
 
     ld   a, $05                                   ; $49D6: $3E $05
-    ld   [wTileMapToLoad], a                      ; $49D8: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $49D8: $EA $FE $D6
     jp   IncrementGameplaySubtypeAndReturn        ; $49DB: $C3 $D6 $44
 
 HandleFileSelectionCommand::
@@ -512,7 +512,7 @@ FileCreationEntryPoint::
 FileCreationInit1Handler::
     call IncrementGameplaySubtype                 ; $4A11: $CD $D6 $44
     ld   a, $08                                   ; $4A14: $3E $08
-    ld   [wTileMapToLoad], a                      ; $4A16: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $4A16: $EA $FE $D6
     xor  a                                        ; $4A19: $AF
     ld   [wDBA8], a                               ; $4A1A: $EA $A8 $DB
     ld   [wDBA9], a                               ; $4A1D: $EA $A9 $DB
@@ -980,7 +980,7 @@ jr_001_4D53::
 
 FileDeletionState2Handler::
     ld   a, $08                                   ; $4D56: $3E $08 ; $4D56: $3E $08
-    ld   [wTileMapToLoad], a                      ; $4D58: $EA $FE $D6 ; $4D58: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $4D58: $EA $FE $D6 ; $4D58: $EA $FE $D6
     xor  a                                        ; $4D5B: $AF ; $4D5B: $AF
     ld   [wSaveSlot], a                           ; $4D5C: $EA $A6 $DB ; $4D5C: $EA $A6 $DB
     ld   [wCreditsScratch0], a                    ; $4D5F: $EA $00 $D0 ; $4D5F: $EA $00 $D0
@@ -1496,7 +1496,7 @@ FileCopyEntryPoint::
 
 FileCopyState2Handler::
     ld   a, $08                                   ; $4FA6: $3E $08 ; $4FA6: $3E $08
-    ld   [wTileMapToLoad], a                      ; $4FA8: $EA $FE $D6 ; $4FA8: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $4FA8: $EA $FE $D6 ; $4FA8: $EA $FE $D6
     xor  a                                        ; $4FAB: $AF ; $4FAB: $AF
     ld   [wSaveSlot], a                           ; $4FAC: $EA $A6 $DB ; $4FAC: $EA $A6 $DB
     ld   [wCreditsScratch0], a                    ; $4FAF: $EA $00 $D0 ; $4FAF: $EA $00 $D0

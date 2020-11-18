@@ -223,7 +223,7 @@ jr_020_4640:
     ret                                           ; $4656: $C9
 
 ; Retrieve the address of a tilemap loading handler
-;   input:  wTileMapToLoad in e
+;   input:  wTilesetToLoad in e
 ;   output: address to jump to in hl
 GetTilemapHandlerAddress::
     ; de = (e - 1) * 2
@@ -4398,7 +4398,7 @@ jr_020_6626:
     ld   a, $07                                   ; $6626: $3E $07
 
 jr_020_6628:
-    ld   [wTileMapToLoad], a                      ; $6628: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $6628: $EA $FE $D6
     ld   hl, wRoomTransitionState                 ; $662B: $21 $24 $C1
     ld   e, $00                                   ; $662E: $1E $00
 

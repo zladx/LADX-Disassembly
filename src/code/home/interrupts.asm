@@ -135,16 +135,16 @@ InterruptSerial::
 
 ; Load tileset, background, sprites while the LCD screen is off.
 ; Inputs:
-;  - wTileMapToLoad: number of the map to load
+;  - wTilesetToLoad: number of the map to load
 LoadMapData::
-    ld   a, [wTileMapToLoad]                      ; $0419: $FA $FE $D6
+    ld   a, [wTilesetToLoad]                      ; $0419: $FA $FE $D6
     and  a                                        ; $041C: $A7
     jr   z, .LoadTileMapZero                      ; $041D: $28 $1B
 
     ; Copy tile map number to the palette-loading variable
     ld   [wPaletteToLoadForTileMap], a            ; $041F: $EA $D2 $DD
 
-    ; if wTileMapToLoad != $23, turn off LCD
+    ; if wTilesetToLoad != $23, turn off LCD
     cp   $23                                      ; $0422: $FE $23
     jr   z, .LCDOffEnd                            ; $0424: $28 $05
     push af                                       ; $0426: $F5
@@ -179,7 +179,7 @@ LoadMapData::
 .clearFlagsAndReturn
     xor  a                                        ; $045D: $AF
     ld   [wBGMapToLoad], a                        ; $045E: $EA $FF $D6
-    ld   [wTileMapToLoad], a                      ; $0461: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $0461: $EA $FE $D6
     ld   a, [wLCDControl]                         ; $0464: $FA $FD $D6
     ld   [rLCDC], a                               ; $0467: $E0 $40
 .return
@@ -285,7 +285,7 @@ vBlankContinue::
     ;
     ; Standard gameplay (i.e. not Photos) handling
     ;
-    ld   a, [wTileMapToLoad]                      ; $04E4: $FA $FE $D6
+    ld   a, [wTilesetToLoad]                      ; $04E4: $FA $FE $D6
     and  a                                        ; $04E7: $A7
     jr   nz, WaitForVBlankAndReturn               ; $04E8: $20 $7F
 

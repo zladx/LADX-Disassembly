@@ -2397,6 +2397,7 @@ jr_001_6868::
     xor  a                                        ; $686C: $AF
     ld   [wC13F], a                               ; $686D: $EA $3F $C1
     jp   IncrementGameplaySubtypeAndReturn        ; $6870: $C3 $D6 $44
+
 PeachPictureState3Handler::     ; Determines the tilemap to load (?)
     ld   e, $24                                   ; $6873: $1E $24
     ldh  a, [hMapId]                              ; $6875: $F0 $F7

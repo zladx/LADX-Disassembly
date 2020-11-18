@@ -144,8 +144,8 @@ LoadMapData::
     ; Copy tile map number to the palette-loading variable
     ld   [wPaletteToLoadForTileMap], a            ; $041F: $EA $D2 $DD
 
-    ; if wTilesetToLoad != $23, turn off LCD
-    cp   $23                                      ; $0422: $FE $23
+    ; if wTilesetToLoad != TILESET_THANKS_FOR_PLAYING, turn off LCD
+    cp   TILESET_THANKS_FOR_PLAYING               ; $0422: $FE $23
     jr   z, .LCDOffEnd                            ; $0424: $28 $05
     push af                                       ; $0426: $F5
     call LCDOff                                   ; $0427: $CD $CF $28

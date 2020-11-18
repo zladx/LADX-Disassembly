@@ -233,10 +233,12 @@ GameplayWorldSubtype2Handler::
 
 jr_001_44C9::
     call SelectRoomTilesets                       ; $44C9: $CD $1E $0D
+
     xor  a                                        ; $44CC: $AF
     ldh  [hNeedsUpdatingBGTiles], a               ; $44CD: $E0 $90
     ldh  [hNeedsUpdatingEnnemiesTiles], a         ; $44CF: $E0 $91
-    ld   a, $09                                   ; $44D1: $3E $09
+
+    ld   a, TILESET_ROOM_SPECIFIC                 ; $44D1: $3E $09
     ld   [wTilesetToLoad], a                      ; $44D3: $EA $FE $D6
 
 IncrementGameplaySubtype::

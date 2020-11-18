@@ -4378,12 +4378,12 @@ InventoryFadeOutHandler::
     ld   [wGameplaySubtype], a                    ; $6607: $EA $96 $DB
     ld   a, [wIsIndoor]                           ; $660A: $FA $A5 $DB
     and  a                                        ; $660D: $A7
-    ld   a, $06                                   ; $660E: $3E $06
+    ld   a, TILESET_INDOOR                        ; $660E: $3E $06
     jr   nz, jr_020_6628                          ; $6610: $20 $16
 
     ldh  a, [hMapRoom]                            ; $6612: $F0 $F6
     cp   $64                                      ; @TODO ?? Map screen where you take the ghost after the house
-    jr   nz, jr_020_6626                          ; $6616: $20 $0E
+    jr   nz, useOverworldTileset                  ; $6616: $20 $0E
 
     ld   hl, wC193                                ; $6618: $21 $93 $C1
     ld   [hl], $A4                                ; $661B: $36 $A4
@@ -4394,8 +4394,8 @@ InventoryFadeOutHandler::
     inc  hl                                       ; $6623: $23
     ld   [hl], $A2                                ; $6624: $36 $A2
 
-jr_020_6626:
-    ld   a, $07                                   ; $6626: $3E $07
+useOverworldTileset:
+    ld   a, TILESET_BASE_OVERWORLD_DUP            ; $6626: $3E $07
 
 jr_020_6628:
     ld   [wTilesetToLoad], a                      ; $6628: $EA $FE $D6

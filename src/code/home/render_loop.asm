@@ -84,7 +84,7 @@ ENDC
     call PlayAudioStep                            ; $022C: $CD $A4 $08
 .skipAudio
 
-    ; Load new map tiles and background
+    ; Load new map tileset and BG map
     di                                            ; $022F: $F3
     call LoadMapData                              ; $0230: $CD $19 $04
     ei                                            ; $0233: $FB

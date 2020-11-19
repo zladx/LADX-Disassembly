@@ -133,13 +133,22 @@ InterruptSerial::
     pop  af                                       ; $0417: $F1
     reti                                          ; $0418: $D9
 
-; Load tileset, background, sprites while the LCD screen is off.
+; Copy either a tileset or a BG map to VRAM.
+;
+; If a tileset is requested, it is copied to VRAM.
+; Otherwise, the requested BG map is copied to VRAM.
+;
 ; Inputs:
-;  - wTilesetToLoad: number of the map to load
+;  - wTilesetToLoad: index of the tileset to load
+;  - wBGMapToLoad:   index of the BG map to load
 LoadMapData::
     ld   a, [wTilesetToLoad]                      ; $0419: $FA $FE $D6
     and  a                                        ; $041C: $A7
-    jr   z, .LoadTileMapZero                      ; $041D: $28 $1B
+    jr   z, .loadBGMap                            ; $041D: $28 $1B
+
+    ;
+    ; Copy the requested tileset to VRAM
+    ;
 
     ; Copy tile map number to the palette-loading variable
     ld   [wPaletteToLoadForTileMap], a            ; $041F: $EA $D2 $DD
@@ -152,26 +161,32 @@ LoadMapData::
     pop  af                                       ; $042A: $F1
 .LCDOffEnd
 
-    call .executeMapLoadHandler                   ; $042B: $CD $30 $04
+    call .executeTilesetLoadHandler               ; $042B: $CD $30 $04
     jr   .clearFlagsAndReturn                     ; $042E: $18 $2D
 
-.executeMapLoadHandler
+.executeTilesetLoadHandler
     ld   e, a                                     ; $0430: $5F
     callsb GetTilesetHandlerAddress               ; $0431: $3E $20 $EA $00 $21 $CD $57 $46
-    ; Jump to the tilemap loading handler
-    jp   hl ; tail-call                           ; $0439: $E9
+    ; Jump to the tilemap loading handler and return
+    jp   hl                                       ; $0439: $E9
 
-    ; Special case for loading map n° 0
-.LoadTileMapZero
+.loadBGMap
+
+    ;
+    ; No tileset to load:
+    ; copy the requested BG map and attributes to VRAM
+    ;
+
     call LCDOff                                   ; $043A: $CD $CF $28
     callsb LoadBGMapAttributes                    ; $043D: $3E $24 $EA $00 $21 $CD $2C $5C
 
     ; Read and execute a wRequest for loading wBGMapToLoad.
     callsb GetBGCopyRequest                       ; $0445: $3E $20 $EA $00 $21 $CD $77 $45
-    ld   a, $08                                   ; $044D: $3E $08
+    ld   a, BANK(BGTilemaps)                      ; $044D: $3E $08
     ld   [MBC3SelectBank], a                      ; $044F: $EA $00 $21
-    call ExecuteBackgroundCopyRequest.noMapTransition ; $0452: $CD $2D $29
+    call ExecuteBGCopyRequest.noMapTransition     ; $0452: $CD $2D $29
 
+    ; Restore tilesets bank
     ld   a, $0C                                   ; $0455: $3E $0C
     call AdjustBankNumberForGBC                   ; $0457: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $045A: $EA $00 $21
@@ -355,7 +370,7 @@ vBlankContinue::
 .gbcEnd
 
     ld   de, wRequest                             ; $0538: $11 $01 $D6
-    call ExecuteBackgroundCopyRequest ; Load BG column tiles ; $053B: $CD $27 $29
+    call ExecuteBGCopyRequest             ; Load BG column tiles ; $053B: $CD $27 $29
     xor  a                                        ; $053E: $AF
     ld   [wRequests], a                           ; $053F: $EA $00 $D6
     ld   [wRequest], a                            ; $0542: $EA $01 $D6
@@ -413,7 +428,7 @@ PhotoAlbumVBlankHandler::
 .gbcEnd
 
     ld   de, wRequest                             ; $0598: $11 $01 $D6
-    call ExecuteBackgroundCopyRequest             ; $059B: $CD $27 $29
+    call ExecuteBGCopyRequest             ; $059B: $CD $27 $29
     xor  a                                        ; $059E: $AF
     ld   [wRequests], a                           ; $059F: $EA $00 $D6
     ld   [wRequest], a                            ; $05A2: $EA $01 $D6

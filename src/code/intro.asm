@@ -471,11 +471,11 @@ IntroLinkFaceHandler::
 
 LoadTileMapZero_trampoline::
     ld   hl, wFarcallParams                       ; $7108: $21 $01 $DE
-    ld   a, BANK(LoadMapData.LoadTileMapZero)     ; $710B: $3E $00
+    ld   a, BANK(LoadMapData.loadBGMap)           ; $710B: $3E $00
     ldi  [hl], a                                  ; $710D: $22
-    ld   a, HIGH(LoadMapData.LoadTileMapZero)     ; $710E: $3E $04
+    ld   a, HIGH(LoadMapData.loadBGMap)           ; $710E: $3E $04
     ldi  [hl], a                                  ; $7110: $22
-    ld   a, LOW(LoadMapData.LoadTileMapZero)      ; $7111: $3E $3A
+    ld   a, LOW(LoadMapData.loadBGMap)            ; $7111: $3E $3A
     ldi  [hl], a                                  ; $7113: $22
     ld   a, BANK(@)                               ; $7114: $3E $01
     ld   [hl], a                                  ; $7116: $77

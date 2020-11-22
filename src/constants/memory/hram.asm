@@ -515,10 +515,10 @@ hLinkFinalRoomPosition::
 hFFFC:
   ds 1 ; FFFC
 
-; bool value if rendering was done
-; 0 = rendering did not happened yet,
-; 1 = rendering happened
-hDidRenderFrame::
+; Is the engine currently rendering a frame.
+; 0 = rendering is done, a frame is ready to be copied to VRAM,
+; 1 = the engine is rendering a new frame
+hIsRenderingFrame::
  ds 1 ; FFFD
 
 ; Marker for the Hardware that the program is running on

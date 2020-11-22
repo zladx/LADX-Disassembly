@@ -87,15 +87,16 @@ FileSaveMapFadeOut::
     ld   [wC1B8], a                               ; $4064: $EA $B8 $C1
     ld   [wC1B9], a                               ; $4067: $EA $B9 $C1
     ld   [wC1B5], a                               ; $406A: $EA $B5 $C1
-    ld   a, $0F                                   ; $406D: $3E $0F
-    ld   [wTileMapToLoad], a                      ; $406F: $EA $FE $D6
+
+    ld   a, TILESET_0F                            ; $406D: $3E $0F
+    ld   [wTilesetToLoad], a                      ; $406F: $EA $FE $D6
 
 jr_001_4072::
     ret                                           ; $4072: $C9
 
 FileSaveDelay1::
-    ld   a, $0D                                   ; $4073: $3E $0D
-    ld   [wTileMapToLoad], a                      ; $4075: $EA $FE $D6
+    ld   a, TILESET_SAVE_MENU                     ; $4073: $3E $0D
+    ld   [wTilesetToLoad], a                      ; $4075: $EA $FE $D6
     xor  a                                        ; $4078: $AF
     ld   [wC13F], a                               ; $4079: $EA $3F $C1
     jp   IncrementGameplaySubtypeAndReturn        ; $407C: $C3 $D6 $44

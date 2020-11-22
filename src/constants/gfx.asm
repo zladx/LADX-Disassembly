@@ -37,6 +37,43 @@ MAP_UNKNOWN_1E       equ $1E
 MAP_CAVE_E           equ $1F
 MAP_COLOR_DUNGEON    equ $FF
 
+; Values for wTilesetToLoad
+TILESET_ROOM_TILEMAP                  equ $01
+TILESET_CLEAR_TILEMAP                 equ $02
+TILESET_BASE                          equ $03
+TILESET_MENU                          equ $04
+TILESET_BASE_OVERWORLD                equ $05
+TILESET_INDOOR                        equ $06
+TILESET_BASE_OVERWORLD_DUP            equ $07 ; mapped to TILESET_BASE_OVERWORLD
+TILESET_FILL_TILEMAP                  equ $08
+TILESET_ROOM_SPECIFIC                 equ $09
+TILESET_0A                            equ $0A ; unused, returns from the map loading handler
+TILESET_WORLD_MAP                     equ $0B
+TILESET_0C                            equ $0C ; unused, returns from the map loading handler
+TILESET_SAVE_MENU                     equ $0D
+TILESET_WORLD_MAP_TILEMAP             equ $0E
+TILESET_0F                            equ $0F ; fade from white? used in menus
+TILESET_INTRO                         equ $10
+TILESET_TITLE                         equ $11
+TILESET_CHRISTINE                     equ $12
+TILESET_MARIN_BEACH                   equ $13
+TILESET_FACE_SHRINE_MURAL             equ $14
+TILESET_15                            equ $15 ; TODO: document
+TILESET_CREDITS_LINK_ON_SEA_LARGE     equ $16
+TILESET_CREDITS_SUN_ABOVE             equ $17
+TILESET_CREDITS_LINK_ON_SEA_CLOSE     equ $18
+TILESET_CREDITS_LINK_SEATED_ON_LOG    equ $19
+TILESET_CREDITS_LINK_FACE_CLOSEUP     equ $1A
+TILESET_CREDITS_ROLL                  equ $1B
+TILESET_1C                            equ $1C ; unused, mapped to TILESET_CREDITS_LINK_FACE_CLOSEUP
+TILESET_CREDITS_KOHOLINT_VIEWS        equ $1D
+TILESET_CREDITS_KOHOLINT_DISAPPEARING equ $1E
+TILESET_CREDITS_STAIRS                equ $1F
+TILESET_SCHULE_PAINTING               equ $20
+TILESET_EAGLES_TOWER_TOP              equ $21
+TILESET_CREDITS_MARIN_PORTRAIT        equ $22
+TILESET_THANKS_FOR_PLAYING            equ $23
+
 ; Value for overworld room objects
 OBJECT_SHORT_GRASS          equ $04
 OBJECT_ROCKY_GROUND         equ $09

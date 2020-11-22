@@ -789,14 +789,14 @@ jr_001_5854::
     ldh  [hFFBC], a                               ; $5874: $E0 $BC
     ld   a, $02                                   ; $5876: $3E $02
     ld   [wGameplaySubtype], a                    ; $5878: $EA $96 $DB
+
     ld   a, [wIsIndoor]                           ; $587B: $FA $A5 $DB
     and  a                                        ; $587E: $A7
-    ld   a, $06                                   ; $587F: $3E $06
+    ld   a, TILESET_INDOOR                        ; $587F: $3E $06
     jr   nz, jr_001_5885                          ; $5881: $20 $02
-    ld   a, $07                                   ; $5883: $3E $07
-
+    ld   a, TILESET_BASE_OVERWORLD_DUP            ; $5883: $3E $07
 jr_001_5885::
-    ld   [wTileMapToLoad], a                      ; $5885: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $5885: $EA $FE $D6
 
 func_001_5888::
     ld   hl, wRoomTransitionState                 ; $5888: $21 $24 $C1
@@ -2375,28 +2375,29 @@ jr_001_6849::
     call IncrementGameplaySubtype                 ; $6849: $CD $D6 $44
     xor  a                                        ; $684C: $AF
     ld   [wScrollXOffset], a                               ; $684D: $EA $BF $C1
-    ld   a, $0F                                   ; $6850: $3E $0F
-    ld   [wTileMapToLoad], a                      ; $6852: $EA $FE $D6
+    ld   a, TILESET_0F                            ; $6850: $3E $0F
+    ld   [wTilesetToLoad], a                      ; $6852: $EA $FE $D6
 
 jr_001_6855::
     ret                                           ; $6855: $C9
-PeachPictureState2Handler::     ; This is for full-screen images ...
-    ld   e, $21                 ; First, check if it's Eagle's Tower ; $6856: $1E $21
-    ldh  a, [hMapId]            ; If so, load the tower graphics for when the pillars are knocked out ; $6858: $F0 $F7
-    cp   MAP_EAGLES_TOWER       ; Otherwise, check if it's room $DD (Schule's house) ; $685A: $FE $06
-    jr   z, jr_001_6868         ; If it is, load the ... whatever it is painting ; $685C: $28 $0A
-    ldh  a, [hMapRoom]          ; Otherwise, load the Christine picture ; $685E: $F0 $F6
+PeachPictureState2Handler::          ; This is for full-screen images ...
+    ld   e, TILESET_EAGLES_TOWER_TOP ; First, check if it's Eagle's Tower ; $6856: $1E $21
+    ldh  a, [hMapId]                 ; If so, load the tower graphics for when the pillars are knocked out ; $6858: $F0 $F7
+    cp   MAP_EAGLES_TOWER            ; Otherwise, check if it's room $DD (Schule's house) ; $685A: $FE $06
+    jr   z, jr_001_6868              ; If it is, load the ... whatever it is painting ; $685C: $28 $0A
+    ldh  a, [hMapRoom]               ; Otherwise, load the Christine picture ; $685E: $F0 $F6
     cp   $DD                                      ; $6860: $FE $DD
-    ld   e, $12                                   ; $6862: $1E $12
+    ld   e, TILESET_CHRISTINE                     ; $6862: $1E $12
     jr   nz, jr_001_6868                          ; $6864: $20 $02
-    ld   e, $20                                   ; $6866: $1E $20
+    ld   e, TILESET_SCHULE_PAINTING               ; $6866: $1E $20
 
 jr_001_6868::
     ld   a, e                                     ; $6868: $7B
-    ld   [wTileMapToLoad], a                      ; $6869: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $6869: $EA $FE $D6
     xor  a                                        ; $686C: $AF
     ld   [wC13F], a                               ; $686D: $EA $3F $C1
     jp   IncrementGameplaySubtypeAndReturn        ; $6870: $C3 $D6 $44
+
 PeachPictureState3Handler::     ; Determines the tilemap to load (?)
     ld   e, $24                                   ; $6873: $1E $24
     ldh  a, [hMapId]                              ; $6875: $F0 $F7

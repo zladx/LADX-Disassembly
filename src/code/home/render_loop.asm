@@ -54,9 +54,9 @@ ENDC
     ld   [rSCX], a ; scrollX                      ; $0204: $E0 $43
 
 .RenderLoop_loadNewMap:
-    ; If wTileMapToLoad != 0 || wBGMapToLoad != 0,
+    ; If wTilesetToLoad != 0 || wBGMapToLoad != 0,
     ; load new map data and return.
-    ld   a, [wTileMapToLoad]                      ; $0206: $FA $FE $D6
+    ld   a, [wTilesetToLoad]                      ; $0206: $FA $FE $D6
     and  a                                        ; $0209: $A7
     jr   nz, .loadNewMap                          ; $020A: $20 $07
     ld   a, [wBGMapToLoad]                        ; $020C: $FA $FF $D6

@@ -222,23 +222,26 @@ jr_020_4640:
     pop  de                                       ; $4655: $D1
     ret                                           ; $4656: $C9
 
-; Retrieve the address of a tilemap loading handler
-;   input:  wTileMapToLoad in e
+; Retrieve the address of a tileset load handler
+;   input:  wTilesetToLoad in e
 ;   output: address to jump to in hl
-GetTilemapHandlerAddress::
+GetTilesetHandlerAddress::
     ; de = (e - 1) * 2
     dec  e                                        ; $4657: $1D
     sla  e                                        ; $4658: $CB $23
     ld   d, $00                                   ; $465A: $16 $00
-    ld   hl, TilemapLoadingHandlersTable          ; $465C: $21 $64 $46
+    ld   hl, TilesetLoadHandlersTable             ; $465C: $21 $64 $46
     add  hl, de                                   ; $465F: $19
     ld   a, [hl+]                                 ; $4660: $2A
     ld   h, [hl]                                  ; $4661: $66
     ld   l, a                                     ; $4662: $6F
     ret                                           ; $4663: $C9
 
-; Pointers to addresses to execute for loading a specific tilemap
-TilemapLoadingHandlersTable::
+; Pointers to addresses to execute for loading a specific tileset.
+;
+; NB: curiously, some of these functions actually load a tilemap
+; into BG memory (rather than a tileset in tiles memory.)
+TilesetLoadHandlersTable::
 ._01 dw LoadRoomTilemap
 ._02 dw ClearBGMap
 ._03 dw LoadBaseTiles
@@ -4375,12 +4378,12 @@ InventoryFadeOutHandler::
     ld   [wGameplaySubtype], a                    ; $6607: $EA $96 $DB
     ld   a, [wIsIndoor]                           ; $660A: $FA $A5 $DB
     and  a                                        ; $660D: $A7
-    ld   a, $06                                   ; $660E: $3E $06
+    ld   a, TILESET_INDOOR                        ; $660E: $3E $06
     jr   nz, jr_020_6628                          ; $6610: $20 $16
 
     ldh  a, [hMapRoom]                            ; $6612: $F0 $F6
     cp   $64                                      ; @TODO ?? Map screen where you take the ghost after the house
-    jr   nz, jr_020_6626                          ; $6616: $20 $0E
+    jr   nz, useOverworldTileset                  ; $6616: $20 $0E
 
     ld   hl, wC193                                ; $6618: $21 $93 $C1
     ld   [hl], $A4                                ; $661B: $36 $A4
@@ -4391,11 +4394,11 @@ InventoryFadeOutHandler::
     inc  hl                                       ; $6623: $23
     ld   [hl], $A2                                ; $6624: $36 $A2
 
-jr_020_6626:
-    ld   a, $07                                   ; $6626: $3E $07
+useOverworldTileset:
+    ld   a, TILESET_BASE_OVERWORLD_DUP            ; $6626: $3E $07
 
 jr_020_6628:
-    ld   [wTileMapToLoad], a                      ; $6628: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $6628: $EA $FE $D6
     ld   hl, wRoomTransitionState                 ; $662B: $21 $24 $C1
     ld   e, $00                                   ; $662E: $1E $00
 

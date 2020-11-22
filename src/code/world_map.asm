@@ -122,16 +122,18 @@ jr_001_56F3::
     ret                                           ; $56F3: $C9
 
 WorldMapState2Handler::
-    ld   a, $0B                                   ; $56F4: $3E $0B
-    ld   [wTileMapToLoad], a                      ; $56F6: $EA $FE $D6
+    ld   a, TILESET_WORLD_MAP                     ; $56F4: $3E $0B
+    ld   [wTilesetToLoad], a                      ; $56F6: $EA $FE $D6
     call IncrementGameplaySubtype                 ; $56F9: $CD $D6 $44
     ret                                           ; $56FC: $C9
 
 WorldMapState3Handler::
-    ld   a, $0E                                   ; $56FD: $3E $0E
-    ld   [wTileMapToLoad], a                      ; $56FF: $EA $FE $D6
+    ld   a, TILESET_WORLD_MAP_TILEMAP             ; $56FD: $3E $0E
+    ld   [wTilesetToLoad], a                      ; $56FF: $EA $FE $D6
+
     ld   a, $01                                   ; $5702: $3E $01
     ld   [$DDD5], a                               ; $5704: $EA $D5 $DD
+
     call IncrementGameplaySubtype                 ; $5707: $CD $D6 $44
     ret                                           ; $570A: $C9
 

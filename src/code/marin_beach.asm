@@ -76,14 +76,14 @@ MarineBeachPrepare1::
     ld   [wScrollXOffset], a                               ; $6273: $EA $BF $C1
     call func_001_5888                            ; $6276: $CD $88 $58
     call func_001_64FF                            ; $6279: $CD $FF $64
-    ld   a, $0F                                   ; $627C: $3E $0F
-    ld   [wTileMapToLoad], a                      ; $627E: $EA $FE $D6
+    ld   a, TILESET_0F                            ; $627C: $3E $0F
+    ld   [wTilesetToLoad], a                      ; $627E: $EA $FE $D6
 .return
     ret                                           ; $6281: $C9
 
 MarineBeachPrepare2::
-    ld   a, $13                                   ; $6282: $3E $13
-    ld   [wTileMapToLoad], a                      ; $6284: $EA $FE $D6
+    ld   a, TILESET_MARIN_BEACH                   ; $6282: $3E $13
+    ld   [wTilesetToLoad], a                      ; $6284: $EA $FE $D6
     xor  a                                        ; $6287: $AF
     ld   [wC13F], a                               ; $6288: $EA $3F $C1
     jp   IncrementGameplaySubtypeAndReturn        ; $628B: $C3 $D6 $44

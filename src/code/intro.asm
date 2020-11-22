@@ -151,10 +151,13 @@ ENDC
     call label_27F2                               ; $6EFB: $CD $F2 $27
     ld   a, $01                                   ; $6EFE: $3E $01
     call ClearFileMenuBG_trampoline               ; $6F00: $CD $FA $08
+
     ld   a, $1A                                   ; $6F03: $3E $1A
     call SetWorldMusicTrack                       ; $6F05: $CD $C3 $27
-    ld   a, $02                                   ; $6F08: $3E $02
-    ld   [wTileMapToLoad], a                      ; $6F0A: $EA $FE $D6
+
+    ld   a, TILESET_CLEAR_TILEMAP                 ; $6F08: $3E $02
+    ld   [wTilesetToLoad], a                      ; $6F0A: $EA $FE $D6
+
     xor  a                                        ; $6F0D: $AF
     ldh  [hFrameCounter], a                       ; $6F0E: $E0 $E7
     ld   a, $A2                                   ; $6F10: $3E $A2
@@ -170,8 +173,8 @@ ENDC
     jp   IncrementGameplaySubtypeAndReturn        ; $6F27: $C3 $D6 $44
 
 IntroSceneStage1Handler::
-    ld   a, $10                                   ; $6F2A: $3E $10
-    ld   [wTileMapToLoad], a                      ; $6F2C: $EA $FE $D6
+    ld   a, TILESET_INTRO                         ; $6F2A: $3E $10
+    ld   [wTilesetToLoad], a                      ; $6F2C: $EA $FE $D6
     xor  a                                        ; $6F2F: $AF
     ld   [$DDD5], a                               ; $6F30: $EA $D5 $DD
     jp   IncrementGameplaySubtypeAndReturn        ; $6F33: $C3 $D6 $44
@@ -274,8 +277,8 @@ IntroShipOnSeaHandler::
     ld   [wD00F], a                               ; $6FEE: $EA $0F $D0
     call func_001_7D4E                            ; $6FF1: $CD $4E $7D
 
-    ld   a, $11                                   ; $6FF4: $3E $11
-    ld   [wTileMapToLoad], a                      ; $6FF6: $EA $FE $D6
+    ld   a, TILESET_TITLE                         ; $6FF4: $3E $11
+    ld   [wTilesetToLoad], a                      ; $6FF6: $EA $FE $D6
 
     ld   a, $FF                                   ; $6FF9: $3E $FF
     ld   [wIntroTimer], a                         ; $6FFB: $EA $01 $D0
@@ -903,7 +906,7 @@ IntroStageCHandler::
 
 IntroStageDHandler::
     ld   a, $11                                   ; $7448: $3E $11
-    ld   [wTileMapToLoad], a                      ; $744A: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $744A: $EA $FE $D6
     ld   a, $0B                                   ; $744D: $3E $0B
     ld   [wGameplaySubtype], a                    ; $744F: $EA $96 $DB
     ld   a, $C9                                   ; $7452: $3E $C9

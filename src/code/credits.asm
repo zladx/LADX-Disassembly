@@ -1153,8 +1153,8 @@ CreditsStairsPrepare1Handler::
     ld   [wWindowY], a                            ; $4CB4: $EA $9A $DB
 
     ; Prepare the loading of tilemap and palette
-    ld   a, $1F                                   ; $4CB7: $3E $1F
-    ld   [wTileMapToLoad], a                      ; $4CB9: $EA $FE $D6
+    ld   a, TILESET_CREDITS_STAIRS                ; $4CB7: $3E $1F
+    ld   [wTilesetToLoad], a                      ; $4CB9: $EA $FE $D6
     ld   a, $01                                   ; $4CBC: $3E $01
     ld   [wPaletteUnknownE], a                    ; $4CBE: $EA $D5 $DD
 
@@ -2104,8 +2104,8 @@ func_017_5665::
     cp   $0C                                      ; $5672: $FE $0C
     jr   nz, jr_017_5689                          ; $5674: $20 $13
 
-    ld   a, $1D                                   ; $5676: $3E $1D
-    ld   [wTileMapToLoad], a                      ; $5678: $EA $FE $D6
+    ld   a, TILESET_CREDITS_KOHOLINT_VIEWS        ; $5676: $3E $1D
+    ld   [wTilesetToLoad], a                      ; $5678: $EA $FE $D6
 
     ld   a, $01                                   ; $567B: $3E $01
     ld   [wPaletteUnknownE], a                    ; $567D: $EA $D5 $DD
@@ -2502,8 +2502,8 @@ func_017_58D1::
     call func_017_59FD                            ; $58DA: $CD $FD $59
     jr   nz, jr_017_58EF                          ; $58DD: $20 $10
 
-    ld   a, $1E                                   ; $58DF: $3E $1E
-    ld   [wTileMapToLoad], a                      ; $58E1: $EA $FE $D6
+    ld   a, TILESET_CREDITS_KOHOLINT_DISAPPEARING ; $58DF: $3E $1E
+    ld   [wTilesetToLoad], a                      ; $58E1: $EA $FE $D6
 
     ld   a, $01                                   ; $58E4: $3E $01
     ld   [wPaletteUnknownE], a                    ; $58E6: $EA $D5 $DD
@@ -2743,8 +2743,8 @@ func_017_5A66::
     ld   a, LINK_ANIMATION_STATE_STANDING_DOWN    ; $5A81: $3E $00
     ldh  [hLinkAnimationState], a                 ; $5A83: $E0 $9D
 
-    ld   a, $15                                   ; $5A85: $3E $15
-    ld   [wTileMapToLoad], a                      ; $5A87: $EA $FE $D6
+    ld   a, TILESET_15                            ; $5A85: $3E $15
+    ld   [wTilesetToLoad], a                      ; $5A87: $EA $FE $D6
 
     xor  a                                        ; $5A8A: $AF
     ld   [wPaletteUnknownE], a                    ; $5A8B: $EA $D5 $DD
@@ -3219,8 +3219,8 @@ CreditsLinkOnSeaLargeHandler::
 ._03 dw LinkOnSeaLarge3Handler                    ; $605C
 
 LinkOnSeaLarge0Handler::
-    ld   a, $16                                   ; $605E: $3E $16
-    ld   [wTileMapToLoad], a                      ; $6060: $EA $FE $D6
+    ld   a, TILESET_CREDITS_LINK_ON_SEA_LARGE     ; $605E: $3E $16
+    ld   [wTilesetToLoad], a                      ; $6060: $EA $FE $D6
     xor  a                                        ; $6063: $AF
     ld   [wPaletteUnknownE], a                    ; $6064: $EA $D5 $DD
     call ResetCreditsSceneVariables               ; $6067: $CD $A5 $4D
@@ -3330,8 +3330,8 @@ CreditsSunAboveHandler::
 ._04 dw CreditsSunAbove4Handler
 
 CreditsSunAbove0Handler::
-    ld   a, $17                                   ; $6129: $3E $17
-    ld   [wTileMapToLoad], a                      ; $612B: $EA $FE $D6
+    ld   a, TILESET_CREDITS_SUN_ABOVE             ; $6129: $3E $17
+    ld   [wTilesetToLoad], a                      ; $612B: $EA $FE $D6
 
     ld   a, $01                                   ; $612E: $3E $01
     ld   [wPaletteUnknownE], a                    ; $6130: $EA $D5 $DD
@@ -3529,8 +3529,8 @@ jr_017_6271:
 ._04 dw func_017_64D8                             ; $6290
 
 func_017_6292::
-    ld   a, $18                                   ; $6292: $3E $18
-    ld   [wTileMapToLoad], a                      ; $6294: $EA $FE $D6
+    ld   a, TILESET_CREDITS_LINK_ON_SEA_CLOSE     ; $6292: $3E $18
+    ld   [wTilesetToLoad], a                      ; $6294: $EA $FE $D6
     xor  a                                        ; $6297: $AF
     ld   [wPaletteUnknownE], a                    ; $6298: $EA $D5 $DD
     jp   IncrementCreditsSubscene                 ; $629B: $C3 $D9 $4C
@@ -4052,8 +4052,8 @@ CreditsLinkSeatedOnLogHandler::
 ._08 dw LinkSeatedOnLog8Handler                   ; $6820
 
 LinkSeatedOnLog0Handler::
-    ld   a, $19                                   ; $6822: $3E $19
-    ld   [wTileMapToLoad], a                      ; $6824: $EA $FE $D6
+    ld   a, TILESET_CREDITS_LINK_SEATED_ON_LOG    ; $6822: $3E $19
+    ld   [wTilesetToLoad], a                      ; $6824: $EA $FE $D6
     ld   a, $01                                   ; $6827: $3E $01
     ld   [wPaletteUnknownE], a                    ; $6829: $EA $D5 $DD
     jp   IncrementCreditsSubscene                 ; $682C: $C3 $D9 $4C
@@ -4498,8 +4498,8 @@ CreditsLinkFaceCloseUpHandler::
 ._06 dw CreditsLinkFaceCloseUp6Handler            ; $6D30
 
 CreditsLinkFaceCloseUp0Handler::
-    ld   a, $1A                                   ; $6D32: $3E $1A
-    ld   [wTileMapToLoad], a                      ; $6D34: $EA $FE $D6
+    ld   a, TILESET_CREDITS_LINK_FACE_CLOSEUP     ; $6D32: $3E $1A
+    ld   [wTilesetToLoad], a                      ; $6D34: $EA $FE $D6
     xor  a                                        ; $6D37: $AF
     ld   [wPaletteUnknownE], a                    ; $6D38: $EA $D5 $DD
     dec  a                                        ; $6D3B: $3D
@@ -4720,8 +4720,8 @@ CreditsRollHandler::
 ._05 dw CreditsRoll5Handler                       ; $6E8F
 
 CreditsRollLoadHandler::
-    ld   a, $1B                                   ; $6E91: $3E $1B
-    ld   [wTileMapToLoad], a                      ; $6E93: $EA $FE $D6
+    ld   a, TILESET_CREDITS_ROLL                  ; $6E91: $3E $1B
+    ld   [wTilesetToLoad], a                      ; $6E93: $EA $FE $D6
     ld   a, $01                                   ; $6E96: $3E $01
     ld   [wPaletteUnknownE], a                    ; $6E98: $EA $D5 $DD
     ld   hl, wLCDControl                          ; $6E9B: $21 $FD $D6
@@ -4958,8 +4958,9 @@ CreditsTheEnd3Handler::
     ret                                           ; $7035: $C9
 
 CreditsTheEnd4Handler::
-    ld   a, $23                                   ; $7036: $3E $23
-    ld   [wTileMapToLoad], a                      ; $7038: $EA $FE $D6
+    ld   a, TILESET_THANKS_FOR_PLAYING            ; $7036: $3E $23
+    ld   [wTilesetToLoad], a                      ; $7038: $EA $FE $D6
+
     ld   hl, wBGPal2                              ; $703B: $21 $18 $DC
     ld   a, $FF                                   ; $703E: $3E $FF
     ld   [hl+], a                                 ; $7040: $22

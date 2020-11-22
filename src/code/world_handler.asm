@@ -214,7 +214,7 @@ jr_001_44A6::
     ld   a, $07                                   ; $44AE: $3E $07
 
 jr_001_44B0::
-    ld   [wTileMapToLoad], a                      ; $44B0: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $44B0: $EA $FE $D6
     ret                                           ; $44B3: $C9
 
 GameplayWorldSubtype2Handler::
@@ -233,11 +233,13 @@ GameplayWorldSubtype2Handler::
 
 jr_001_44C9::
     call SelectRoomTilesets                       ; $44C9: $CD $1E $0D
+
     xor  a                                        ; $44CC: $AF
     ldh  [hNeedsUpdatingBGTiles], a               ; $44CD: $E0 $90
     ldh  [hNeedsUpdatingEnnemiesTiles], a         ; $44CF: $E0 $91
-    ld   a, $09                                   ; $44D1: $3E $09
-    ld   [wTileMapToLoad], a                      ; $44D3: $EA $FE $D6
+
+    ld   a, TILESET_ROOM_SPECIFIC                 ; $44D1: $3E $09
+    ld   [wTilesetToLoad], a                      ; $44D3: $EA $FE $D6
 
 IncrementGameplaySubtype::
 IncrementGameplaySubtypeAndReturn::
@@ -247,7 +249,7 @@ IncrementGameplaySubtypeAndReturn::
 
 GameplayWorldSubtype3Handler::
     ld   a, $01                                   ; $44DB: $3E $01
-    ld   [wTileMapToLoad], a                      ; $44DD: $EA $FE $D6
+    ld   [wTilesetToLoad], a                      ; $44DD: $EA $FE $D6
     ld   a, [wRoomSwitchableObject]               ; $44E0: $FA $FA $D6
     and  a                                        ; $44E3: $A7
     jr   z, jr_001_44F5                           ; $44E4: $28 $0F

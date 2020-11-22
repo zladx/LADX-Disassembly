@@ -36,8 +36,10 @@ jr_001_420D::
     ldh  [hFFB7], a                               ; $4211: $E0 $B7 ; $4211: $E0 $B7
     ld   a, $01                                   ; $4213: $3E $01 ; $4213: $3E $01
     ldh  [hFF9C], a                               ; $4215: $E0 $9C ; $4215: $E0 $9C
-    ld   a, $0F                                   ; $4217: $3E $0F ; $4217: $3E $0F
-    ld   [wTileMapToLoad], a                      ; $4219: $EA $FE $D6 ; $4219: $EA $FE $D6
+
+    ld   a, TILESET_0F                            ; $4217: $3E $0F ; $4217: $3E $0F
+    ld   [wTilesetToLoad], a                      ; $4219: $EA $FE $D6 ; $4219: $EA $FE $D6
+
     ld   a, LINK_ANIMATION_STATE_NO_UPDATE       ; $421C: $3E $FF ; $421C: $3E $FF
     ldh  [hLinkAnimationState], a                 ; $421E: $E0 $9D ; $421E: $E0 $9D
     ld   a, [wDeathCount]                         ; $4220: $FA $57 $DB ; $4220: $FA $57 $DB
@@ -101,8 +103,8 @@ jr_001_4259::
     ret                                           ; $4290: $C9 ; $4290: $C9
 
 LinkPassOut1Handler::
-    ld   a, $0D                                   ; $4291: $3E $0D ; $4291: $3E $0D
-    ld   [wTileMapToLoad], a                      ; $4293: $EA $FE $D6 ; $4293: $EA $FE $D6
+    ld   a, TILESET_SAVE_MENU                     ; $4291: $3E $0D ; $4291: $3E $0D
+    ld   [wTilesetToLoad], a                      ; $4293: $EA $FE $D6 ; $4293: $EA $FE $D6
     ld   hl, hFF9C                                ; $4296: $21 $9C $FF ; $4296: $21 $9C $FF
     inc  [hl]                                     ; $4299: $34 ; $4299: $34
     ret                                           ; $429A: $C9 ; $429A: $C9

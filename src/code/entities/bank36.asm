@@ -8398,9 +8398,11 @@ func_036_72BA::
     ld   [wDE00], a                               ; $72D5: $EA $00 $DE
 
     ld   hl, wOAMBuffer                           ; $72D8: $21 $00 $C0
-    ld   de, wDynamicOAMBuffer+$6C                                ; $72DB: $11 $9C $C0
+    ld   de, wDynamicOAMBuffer+$6C                ; $72DB: $11 $9C $C0
     ld   b, $14                                   ; $72DE: $06 $14
 
+    ; Swap the content of HL and DE for $14 * 4 bytes
+    ; (the loop is partially unrolled)
 .loop
     ld   c, [hl]                                  ; $72E0: $4E
     ld   a, [de]                                  ; $72E1: $1A
@@ -8408,29 +8410,33 @@ func_036_72BA::
     ld   a, c                                     ; $72E3: $79
     ld   [de], a                                  ; $72E4: $12
     inc  de                                       ; $72E5: $13
+
     ld   c, [hl]                                  ; $72E6: $4E
     ld   a, [de]                                  ; $72E7: $1A
     ld   [hl+], a                                 ; $72E8: $22
     ld   a, c                                     ; $72E9: $79
     ld   [de], a                                  ; $72EA: $12
     inc  de                                       ; $72EB: $13
+
     ld   c, [hl]                                  ; $72EC: $4E
     ld   a, [de]                                  ; $72ED: $1A
     ld   [hl+], a                                 ; $72EE: $22
     ld   a, c                                     ; $72EF: $79
     ld   [de], a                                  ; $72F0: $12
     inc  de                                       ; $72F1: $13
+
     ld   c, [hl]                                  ; $72F2: $4E
     ld   a, [de]                                  ; $72F3: $1A
     ld   [hl+], a                                 ; $72F4: $22
     ld   a, c                                     ; $72F5: $79
     ld   [de], a                                  ; $72F6: $12
+
     ld   c, $07                                   ; $72F7: $0E $07
     ld   a, e                                     ; $72F9: $7B
     sub  c                                        ; $72FA: $91
     ld   e, a                                     ; $72FB: $5F
+
     dec  b                                        ; $72FC: $05
     jr   nz, .loop                                ; $72FD: $20 $E1
 
     ret                                           ; $72FF: $C9
-templabel:

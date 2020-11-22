@@ -230,15 +230,15 @@ InterruptVBlank::
     ;
     ld   a, [wGameplayType]                       ; $047A: $FA $95 $DB
     cp   GAMEPLAY_PHOTO_ALBUM                     ; $047D: $FE $0D
-    jr   nz, .continue                            ; $047F: $20 $0C
+    jr   nz, .photoAlbumEnd                       ; $047F: $20 $0C
     ; GameplayType == PHOTO_ALBUM
     ld   a, [wGameplaySubtype]                    ; $0481: $FA $96 $DB
     cp   $09                                      ; $0484: $FE $09
-    jr   c, .continue                             ; $0486: $38 $05
+    jr   c, .photoAlbumEnd                        ; $0486: $38 $05
     cp   $12                                      ; $0488: $FE $12
     jp  c, PhotoAlbumVBlankHandler                ; $048A: $DA $77 $05
+.photoAlbumEnd
 
-.continue
     ldh  a, [hDidRenderFrame]                     ; $048D: $F0 $FD
     and  a                                        ; $048F: $A7
     jp   nz, WaitForVBlankAndReturn  ; if not already waiting for next frame, do ; $0490: $C2 $69 $05
@@ -248,9 +248,9 @@ InterruptVBlank::
     ;
     ld   a, [wDialogState]                        ; $0493: $FA $9F $C1
     and  $7F  ; If dialog is closed               ; $0496: $E6 $7F
-    jr   z, vBlankContinue                        ; $0498: $28 $32
-    cp   DIALOG_OPENING_1  ; If DialogState == 1  ; $049A: $FE $01
-    jr   z, vBlankContinue                        ; $049C: $28 $2E
+    jr   z, .dialogEnd                            ; $0498: $28 $32
+    cp   DIALOG_OPENING_1                         ; $049A: $FE $01
+    jr   z, .dialogEnd                            ; $049C: $28 $2E
     cp   DIALOG_OPENING_5  ; If DialogState > 5   ; $049E: $FE $05
     jr   nc, .renderDialogText                    ; $04A0: $30 $0A
     ; DialogState < 5
@@ -261,31 +261,33 @@ InterruptVBlank::
     jp   WaitForVBlankAndReturn                   ; $04A9: $C3 $69 $05
 
 .renderDialogText
-    cp   DIALOG_SCROLLING_1  ; if DialogState != Scrolling ; $04AC: $FE $0A
-    jr   nz, .renderDialogTextContinue            ; $04AE: $20 $06
-    ; DialogState == Scrolling
+
+    cp   DIALOG_SCROLLING_1                       ; $04AC: $FE $0A
+    jr   nz, .dialogScrolling1End                 ; $04AE: $20 $06
+    ; DialogState == Scrolling1
     call DialogBeginScrolling                     ; $04B0: $CD $19 $27
     jp   WaitForVBlankAndReturn                   ; $04B3: $C3 $69 $05
+.dialogScrolling1End
 
-.renderDialogTextContinue
-    cp   DIALOG_SCROLLING_2  ; if DialogState != Scrolling2 ; $04B6: $FE $0B
-    jr   nz, vBlankContinue                       ; $04B8: $20 $12
+    cp   DIALOG_SCROLLING_2                       ; $04B6: $FE $0B
+    jr   nz, .dialogEnd                           ; $04B8: $20 $12
+    ; DialogState == Scrolling2
     ld   a, [wDialogScrollDelay]                  ; $04BA: $FA $72 $C1
     and  a  ; if DialogScrollDelay == 0           ; $04BD: $A7
-    jr   z, .DialogFinishScrolling                ; $04BE: $28 $06
+    jr   z, .dialogFinishScrolling                ; $04BE: $28 $06
     ; DialogScrollDelay > 0
     dec  a  ; decrement the delay                 ; $04C0: $3D
     ld   [wDialogScrollDelay], a                  ; $04C1: $EA $72 $C1
-    jr   vBlankContinue                           ; $04C4: $18 $06
+    jr   .dialogEnd                               ; $04C4: $18 $06
 
-.DialogFinishScrolling
+.dialogFinishScrolling
     call DialogFinishScrolling                    ; $04C6: $CD $6D $27
     jp   WaitForVBlankAndReturn                   ; $04C9: $C3 $69 $05
+.dialogEnd
 
     ;
     ; Photo Picture handling
     ;
-vBlankContinue::
     ld   a, [wGameplayType]                       ; $04CC: $FA $95 $DB
     cp   GAMEPLAY_PHOTO_DIZZY_LINK  ; If GameplayType < Photo Picture ; $04CF: $FE $0E
     jr   c, .gameplayNotAPhoto                    ; $04D1: $38 $11
@@ -300,6 +302,9 @@ vBlankContinue::
     ;
     ; Standard gameplay (i.e. not Photos) handling
     ;
+
+    ; If there's a tileset to load, it will be handled when returning
+    ; to the main game loop. Exit now.
     ld   a, [wTilesetToLoad]                      ; $04E4: $FA $FE $D6
     and  a                                        ; $04E7: $A7
     jr   nz, WaitForVBlankAndReturn               ; $04E8: $20 $7F

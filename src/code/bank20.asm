@@ -251,9 +251,9 @@ TilesetLoadHandlersTable::
 ._07 dw LoadBaseOverworldTiles ; same as command $05
 ._08 dw FillBGMapWith7E
 ._09 dw LoadRoomSpecificTiles
-._0A dw LoadMapData.return
+._0A dw LoadRequestedGfx.return
 ._0B dw LoadWorldMapTiles
-._0C dw LoadMapData.return
+._0C dw LoadRequestedGfx.return
 ._0D dw LoadSaveMenuTiles
 ._0E dw LoadWorldMapBGMap_trampoline
 ._0F dw LoadTileset0F_trampoline ; fade from white? used in menus

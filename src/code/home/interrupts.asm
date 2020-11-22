@@ -141,7 +141,7 @@ InterruptSerial::
 ; Inputs:
 ;  - wTilesetToLoad: index of the tileset to load
 ;  - wBGMapToLoad:   index of the BG map to load
-LoadMapData::
+LoadRequestedGfx::
     ld   a, [wTilesetToLoad]                      ; $0419: $FA $FE $D6
     and  a                                        ; $041C: $A7
     jr   z, .loadBGMap                            ; $041D: $28 $1B

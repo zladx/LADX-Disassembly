@@ -5616,7 +5616,7 @@ doCopyObjectToBG:
 ;
 ; This is used when loading a map in one go (instead
 ; of having a sliding screen transition.)
-; (called by LoadMapData)
+; (called by LoadRequestedGfx)
 LoadRoomTilemap:
     call SwitchToMapDataBank                      ; $309B: $CD $05 $39
     call SwitchBank                               ; $309E: $CD $0C $08

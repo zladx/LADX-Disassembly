@@ -86,7 +86,7 @@ ENDC
 
     ; Load new map tileset and BG map
     di                                            ; $022F: $F3
-    call LoadMapData                              ; $0230: $CD $19 $04
+    call LoadRequestedGfx                              ; $0230: $CD $19 $04
     ei                                            ; $0233: $FB
     ; Play more audio
     call PlayAudioStep                            ; $0234: $CD $A4 $08

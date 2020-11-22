@@ -2843,20 +2843,20 @@ label_004_60A4:
 ._02 dw func_004_643A                             ; $60B3
 ._03 dw func_004_6721                             ; $60B5
 
-Data_004_60B7::
-    db   $18, $58, $60, $18
+FishStartX:
+    db   $18, $58, $60, $18, $88
 
-Data_004_60BB::
-    db   $88, $40, $4C, $34, $68
+FishStartY:
+    db   $40, $4C, $34, $68, $50
 
-Data_004_60C0::
-    db   $50, $01, $00, $00, $01
+FishStartDirection:
+    db   $01, $00, $00, $01, $00
 
-Data_004_60C5::
-    db   $00, $02, $02, $02, $03
+FishType:
+    db   $02, $02, $02, $03, $03
 
-Data_004_60CA::
-    db   $03, $00, $3E, $1E, $10, $30
+FishMoveDelay:
+    db   $00, $3E, $1E, $10, $30
 
 func_004_60D0::
     ld   a, $02                                   ; $60D0: $3E $02
@@ -2876,34 +2876,33 @@ jr_004_60E0:
     call SpawnNewEntity_trampoline                ; $60E2: $CD $86 $3B
 
     ; Set entity X and Y position
-    ; (NB: the code finds it clever to re-use some values from the
-    ; entity jump table.)
-    ld   hl, (Data_004_60B7 - 1)                  ; $60E5: $21 $B6 $60
+    ; (The indexes go from 5 to 1, so index 0 is never used)
+    ld   hl, (FishStartX - 1)                     ; $60E5: $21 $B6 $60
     add  hl, bc                                   ; $60E8: $09
     ld   a, [hl]                                  ; $60E9: $7E
     ld   hl, wEntitiesPosXTable                   ; $60EA: $21 $00 $C2
     add  hl, de                                   ; $60ED: $19
     ld   [hl], a                                  ; $60EE: $77
-    ld   hl, Data_004_60BB                        ; $60EF: $21 $BB $60
+    ld   hl, (FishStartY - 1)                     ; $60EF: $21 $BB $60
     add  hl, bc                                   ; $60F2: $09
     ld   a, [hl]                                  ; $60F3: $7E
     ld   hl, wEntitiesPosYTable                   ; $60F4: $21 $10 $C2
     add  hl, de                                   ; $60F7: $19
     ld   [hl], a                                  ; $60F8: $77
 
-    ld   hl, Data_004_60C0                        ; $60F9: $21 $C0 $60
+    ld   hl, (FishStartDirection - 1)             ; $60F9: $21 $C0 $60
     add  hl, bc                                   ; $60FC: $09
     ld   a, [hl]                                  ; $60FD: $7E
     ld   hl, wEntitiesDirectionTable              ; $60FE: $21 $80 $C3
     add  hl, de                                   ; $6101: $19
     ld   [hl], a                                  ; $6102: $77
-    ld   hl, Data_004_60C5                        ; $6103: $21 $C5 $60
+    ld   hl, (FishType - 1)                       ; $6103: $21 $C5 $60
     add  hl, bc                                   ; $6106: $09
     ld   a, [hl]                                  ; $6107: $7E
     ld   hl, wEntitiesPrivateState1Table          ; $6108: $21 $B0 $C2
     add  hl, de                                   ; $610B: $19
     ld   [hl], a                                  ; $610C: $77
-    ld   hl, Data_004_60CA                        ; $610D: $21 $CA $60
+    ld   hl, (FishMoveDelay - 1)                  ; $610D: $21 $CA $60
     add  hl, bc                                   ; $6110: $09
     ld   a, [hl]                                  ; $6111: $7E
     ld   hl, wEntitiesTransitionCountdownTable    ; $6112: $21 $E0 $C2

@@ -133,13 +133,22 @@ InterruptSerial::
     pop  af                                       ; $0417: $F1
     reti                                          ; $0418: $D9
 
-; Load tileset, background, sprites while the LCD screen is off.
+; Copy either a tileset or a BG map to VRAM.
+;
+; If a tileset is requested, it is copied to VRAM.
+; Otherwise, the requested BG map is copied to VRAM.
+;
 ; Inputs:
-;  - wTilesetToLoad: number of the map to load
-LoadMapData::
+;  - wTilesetToLoad: index of the tileset to load
+;  - wBGMapToLoad:   index of the BG map to load
+LoadRequestedGfx::
     ld   a, [wTilesetToLoad]                      ; $0419: $FA $FE $D6
     and  a                                        ; $041C: $A7
-    jr   z, .LoadTileMapZero                      ; $041D: $28 $1B
+    jr   z, .loadBGMap                            ; $041D: $28 $1B
+
+    ;
+    ; Copy the requested tileset to VRAM
+    ;
 
     ; Copy tile map number to the palette-loading variable
     ld   [wPaletteToLoadForTileMap], a            ; $041F: $EA $D2 $DD
@@ -152,26 +161,32 @@ LoadMapData::
     pop  af                                       ; $042A: $F1
 .LCDOffEnd
 
-    call .executeMapLoadHandler                   ; $042B: $CD $30 $04
+    call .executeTilesetLoadHandler               ; $042B: $CD $30 $04
     jr   .clearFlagsAndReturn                     ; $042E: $18 $2D
 
-.executeMapLoadHandler
+.executeTilesetLoadHandler
     ld   e, a                                     ; $0430: $5F
     callsb GetTilesetHandlerAddress               ; $0431: $3E $20 $EA $00 $21 $CD $57 $46
-    ; Jump to the tilemap loading handler
-    jp   hl ; tail-call                           ; $0439: $E9
+    ; Jump to the tilemap loading handler and return
+    jp   hl                                       ; $0439: $E9
 
-    ; Special case for loading map n° 0
-.LoadTileMapZero
+.loadBGMap
+
+    ;
+    ; No tileset to load:
+    ; copy the requested BG map and attributes to VRAM
+    ;
+
     call LCDOff                                   ; $043A: $CD $CF $28
     callsb LoadBGMapAttributes                    ; $043D: $3E $24 $EA $00 $21 $CD $2C $5C
 
     ; Read and execute a wRequest for loading wBGMapToLoad.
     callsb GetBGCopyRequest                       ; $0445: $3E $20 $EA $00 $21 $CD $77 $45
-    ld   a, $08                                   ; $044D: $3E $08
+    ld   a, BANK(BGTilemaps)                      ; $044D: $3E $08
     ld   [MBC3SelectBank], a                      ; $044F: $EA $00 $21
-    call ExecuteBackgroundCopyRequest.noMapTransition ; $0452: $CD $2D $29
+    call ExecuteBGCopyRequest.noMapTransition     ; $0452: $CD $2D $29
 
+    ; Restore tilesets bank
     ld   a, $0C                                   ; $0455: $3E $0C
     call AdjustBankNumberForGBC                   ; $0457: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $045A: $EA $00 $21
@@ -200,7 +215,7 @@ InterruptVBlank::
     push de                                       ; $046E: $D5
     push hl                                       ; $046F: $E5
 
-    ; Ensure the RAM bank is in a valid range
+    ; Save the current RAM bank, and switch to RAM0
     ld   a, [rSVBK]                               ; $0470: $F0 $70
     and  $07                                      ; $0472: $E6 $07
     ld   c, a                                     ; $0474: $4F
@@ -215,27 +230,30 @@ InterruptVBlank::
     ;
     ld   a, [wGameplayType]                       ; $047A: $FA $95 $DB
     cp   GAMEPLAY_PHOTO_ALBUM                     ; $047D: $FE $0D
-    jr   nz, .continue                            ; $047F: $20 $0C
+    jr   nz, .photoAlbumEnd                       ; $047F: $20 $0C
     ; GameplayType == PHOTO_ALBUM
     ld   a, [wGameplaySubtype]                    ; $0481: $FA $96 $DB
     cp   $09                                      ; $0484: $FE $09
-    jr   c, .continue                             ; $0486: $38 $05
+    jr   c, .photoAlbumEnd                        ; $0486: $38 $05
     cp   $12                                      ; $0488: $FE $12
     jp  c, PhotoAlbumVBlankHandler                ; $048A: $DA $77 $05
+.photoAlbumEnd
 
-.continue
-    ldh  a, [hDidRenderFrame]                     ; $048D: $F0 $FD
+    ;
+    ; If the next frame is still being rendered, drop this frame.
+    ;
+    ldh  a, [hIsRenderingFrame]                   ; $048D: $F0 $FD
     and  a                                        ; $048F: $A7
-    jp   nz, WaitForVBlankAndReturn  ; if not already waiting for next frame, do ; $0490: $C2 $69 $05
+    jp   nz, .vblankDone                          ; $0490: $C2 $69 $05
 
     ;
     ; Dialog handling
     ;
     ld   a, [wDialogState]                        ; $0493: $FA $9F $C1
     and  $7F  ; If dialog is closed               ; $0496: $E6 $7F
-    jr   z, vBlankContinue                        ; $0498: $28 $32
-    cp   DIALOG_OPENING_1  ; If DialogState == 1  ; $049A: $FE $01
-    jr   z, vBlankContinue                        ; $049C: $28 $2E
+    jr   z, .dialogEnd                            ; $0498: $28 $32
+    cp   DIALOG_OPENING_1                         ; $049A: $FE $01
+    jr   z, .dialogEnd                            ; $049C: $28 $2E
     cp   DIALOG_OPENING_5  ; If DialogState > 5   ; $049E: $FE $05
     jr   nc, .renderDialogText                    ; $04A0: $30 $0A
     ; DialogState < 5
@@ -243,34 +261,36 @@ InterruptVBlank::
     call label_23E4                               ; $04A2: $CD $E4 $23
     ld   hl, wDialogState                         ; $04A5: $21 $9F $C1
     inc  [hl]  ; Increment DialogState            ; $04A8: $34
-    jp   WaitForVBlankAndReturn                   ; $04A9: $C3 $69 $05
+    jp   .vblankDone                              ; $04A9: $C3 $69 $05
 
 .renderDialogText
-    cp   DIALOG_SCROLLING_1  ; if DialogState != Scrolling ; $04AC: $FE $0A
-    jr   nz, .renderDialogTextContinue            ; $04AE: $20 $06
-    ; DialogState == Scrolling
-    call DialogBeginScrolling                     ; $04B0: $CD $19 $27
-    jp   WaitForVBlankAndReturn                   ; $04B3: $C3 $69 $05
 
-.renderDialogTextContinue
-    cp   DIALOG_SCROLLING_2  ; if DialogState != Scrolling2 ; $04B6: $FE $0B
-    jr   nz, vBlankContinue                       ; $04B8: $20 $12
+    cp   DIALOG_SCROLLING_1                       ; $04AC: $FE $0A
+    jr   nz, .dialogScrolling1End                 ; $04AE: $20 $06
+    ; DialogState == Scrolling1
+    call DialogBeginScrolling                     ; $04B0: $CD $19 $27
+    jp   .vblankDone                              ; $04B3: $C3 $69 $05
+.dialogScrolling1End
+
+    cp   DIALOG_SCROLLING_2                       ; $04B6: $FE $0B
+    jr   nz, .dialogEnd                           ; $04B8: $20 $12
+    ; DialogState == Scrolling2
     ld   a, [wDialogScrollDelay]                  ; $04BA: $FA $72 $C1
     and  a  ; if DialogScrollDelay == 0           ; $04BD: $A7
-    jr   z, .DialogFinishScrolling                ; $04BE: $28 $06
+    jr   z, .dialogFinishScrolling                ; $04BE: $28 $06
     ; DialogScrollDelay > 0
     dec  a  ; decrement the delay                 ; $04C0: $3D
     ld   [wDialogScrollDelay], a                  ; $04C1: $EA $72 $C1
-    jr   vBlankContinue                           ; $04C4: $18 $06
+    jr   .dialogEnd                               ; $04C4: $18 $06
 
-.DialogFinishScrolling
+.dialogFinishScrolling
     call DialogFinishScrolling                    ; $04C6: $CD $6D $27
-    jp   WaitForVBlankAndReturn                   ; $04C9: $C3 $69 $05
+    jp   .vblankDone                              ; $04C9: $C3 $69 $05
+.dialogEnd
 
     ;
     ; Photo Picture handling
     ;
-vBlankContinue::
     ld   a, [wGameplayType]                       ; $04CC: $FA $95 $DB
     cp   GAMEPLAY_PHOTO_DIZZY_LINK  ; If GameplayType < Photo Picture ; $04CF: $FE $0E
     jr   c, .gameplayNotAPhoto                    ; $04D1: $38 $11
@@ -285,13 +305,16 @@ vBlankContinue::
     ;
     ; Standard gameplay (i.e. not Photos) handling
     ;
+
+    ; If there's a tileset to load, it will be handled when returning
+    ; to the main game loop. Exit now.
     ld   a, [wTilesetToLoad]                      ; $04E4: $FA $FE $D6
     and  a                                        ; $04E7: $A7
-    jr   nz, WaitForVBlankAndReturn               ; $04E8: $20 $7F
+    jr   nz, .vblankDone                          ; $04E8: $20 $7F
 
     ; If NeedsUpdatingBGTiles or NeedsUpdatingEnnemiesTiles or NeedsUpdatingNPCTiles…
     ldh  a, [hNeedsUpdatingBGTiles]               ; $04EA: $F0 $90
-    ldh  [hMultiPurposeG], a                               ; $04EC: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $04EC: $E0 $E8
     ld   hl, hNeedsUpdatingEnnemiesTiles          ; $04EE: $21 $91 $FF
     or   [hl]                                     ; $04F1: $B6
     ld   hl, wNeedsUpdatingNPCTiles               ; $04F2: $21 $0E $C1
@@ -301,18 +324,18 @@ vBlankContinue::
     ; Load tiles (?)
     call LoadTiles                                ; $04F8: $CD $BC $05
 
-    ; If hMultiPurposeG >= 8, skip drawing of Link sprite
-    ldh  a, [hMultiPurposeG]                               ; $04FB: $F0 $E8
+    ; If hNeedsUpdatingBGTiles >= 8, skip drawing of Link sprite
+    ldh  a, [hMultiPurposeG]                      ; $04FB: $F0 $E8
     cp   $08                                      ; $04FD: $FE $08
-    jr   nc, .linkSpriteclearBGTilesFlag          ; $04FF: $30 $03
+    jr   nc, .drawLinkSpriteEnd                   ; $04FF: $30 $03
 .drawLinkSprite
     call DrawLinkSprite                           ; $0501: $CD $2E $1D
-.linkSpriteclearBGTilesFlag
+.drawLinkSpriteEnd
 
     ; Copy the content of wOAMBuffer to the OAM memory
     call hDMARoutine                              ; $0504: $CD $C0 $FF
     ; And we're clearBGTilesFlag.
-    jr   WaitForVBlankAndReturn                   ; $0507: $18 $60
+    jr   .vblankDone                              ; $0507: $18 $60
 
 .noTilesToUpdate
     ; Otherwise, when there are not tiles to update, we can perform a bit
@@ -355,7 +378,7 @@ vBlankContinue::
 .gbcEnd
 
     ld   de, wRequest                             ; $0538: $11 $01 $D6
-    call ExecuteBackgroundCopyRequest ; Load BG column tiles ; $053B: $CD $27 $29
+    call ExecuteBGCopyRequest ; Load BG column tiles ; $053B: $CD $27 $29
     xor  a                                        ; $053E: $AF
     ld   [wRequests], a                           ; $053F: $EA $00 $D6
     ld   [wRequest], a                            ; $0542: $EA $01 $D6
@@ -368,18 +391,17 @@ vBlankContinue::
     ; Copy the content of wOAMBuffer to the OAM memory
     call hDMARoutine                              ; $0553: $CD $C0 $FF
 
-    ; If on GBC…
+    ; On GBC, copy palettes to VRAM
     ldh  a, [hIsGBC]                              ; $0556: $F0 $FE
     and  a                                        ; $0558: $A7
-    jr   z, WaitForVBlankAndReturn                ; $0559: $28 $0E
-    callsb CopyPalettesToHardware                 ; $055B: $3E $21 $EA $00 $21 $CD $00 $40
-    ; Restore the current bank
+    jr   z, .vblankDone                           ; $0559: $28 $0E
+    callsb CopyPalettesToVRAM                     ; $055B: $3E $21 $EA $00 $21 $CD $00 $40
     ld   a, [wCurrentBank]                        ; $0563: $FA $AF $DB
     ld   [MBC3SelectBank], a                      ; $0566: $EA $00 $21
 
-WaitForVBlankAndReturn::
+.vblankDone
     ei                                            ; $0569: $FB
-.interruptsEnabled
+.vblankDoneInterruptsEnabled
     ; Restore the RAM bank
     pop  bc                                       ; $056A: $C1
     ld   a, c                                     ; $056B: $79
@@ -399,7 +421,7 @@ WaitForVBlankAndReturn::
 PhotoAlbumVBlankHandler::
     ld   a, [wCurrentBank]                        ; $0577: $FA $AF $DB
     push af                                       ; $057A: $F5
-    ldh  a, [hDidRenderFrame]                     ; $057B: $F0 $FD
+    ldh  a, [hIsRenderingFrame]                     ; $057B: $F0 $FD
     and  a                                        ; $057D: $A7
     jr   nz, .clearBGTilesFlag                    ; $057E: $20 $2B
 
@@ -408,12 +430,12 @@ PhotoAlbumVBlankHandler::
     ldh  a, [hIsGBC]                              ; $0583: $F0 $FE
     and  a                                        ; $0585: $A7
     jr   z, .gbcEnd                               ; $0586: $28 $10
-    callsw CopyPalettesToHardware                 ; $0588: $3E $21 $CD $0C $08 $CD $00 $40
+    callsw CopyPalettesToVRAM                 ; $0588: $3E $21 $CD $0C $08 $CD $00 $40
     callsw func_024_5C1A                          ; $0590: $3E $24 $CD $0C $08 $CD $1A $5C
 .gbcEnd
 
     ld   de, wRequest                             ; $0598: $11 $01 $D6
-    call ExecuteBackgroundCopyRequest             ; $059B: $CD $27 $29
+    call ExecuteBGCopyRequest                     ; $059B: $CD $27 $29
     xor  a                                        ; $059E: $AF
     ld   [wRequests], a                           ; $059F: $EA $00 $D6
     ld   [wRequest], a                            ; $05A2: $EA $01 $D6
@@ -425,7 +447,7 @@ PhotoAlbumVBlankHandler::
     pop  af                                       ; $05B3: $F1
     ld   [wCurrentBank], a                        ; $05B4: $EA $AF $DB
     ld   [MBC3SelectBank], a                      ; $05B7: $EA $00 $21
-    jr   WaitForVBlankAndReturn.interruptsEnabled ; $05BA: $18 $AE
+    jr   InterruptVBlank.vblankDoneInterruptsEnabled ; $05BA: $18 $AE
 
 ; Execute tile-loading commands for BG tiles, enemy tiles and NPC tiles
 LoadTiles::

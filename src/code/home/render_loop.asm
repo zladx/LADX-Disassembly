@@ -12,11 +12,14 @@
 ;  - render window,
 ;  - wait for next frame.
 RenderLoop::
-    ; Set DidRenderFrame
+    ; Mark rendering of a new frame as being started
     ld   a, TRUE                                  ; $01DA: $3E $01
-    ldh  [hDidRenderFrame], a                     ; $01DC: $E0 $FD
+    ldh  [hIsRenderingFrame], a                   ; $01DC: $E0 $FD
 
-.RenderLoop_setScrollY:
+    ;
+    ; Set scroll Y
+    ;
+
     ; If wAlternateBackgroundEnabled == 1...
     ld   a, [wAlternateBackgroundEnabled]         ; $01DE: $FA $00 $C5
     and  a                                        ; $01E1: $A7
@@ -44,7 +47,10 @@ ENDC
 .setScrollY
     ld   [rSCY], a                                ; $01F8: $E0 $42
 
-.RenderLoop_setScrollX:
+    ;
+    ; Set scroll X
+    ;
+
     ; Add the base offset, the screen shake offset and an additionnal offset
     ldh  a, [hBaseScrollX]                        ; $01FA: $F0 $96
     ld   hl, wScreenShakeHorizontal               ; $01FC: $21 $55 $C1
@@ -53,17 +59,20 @@ ENDC
     add  a, [hl]                                  ; $0203: $86
     ld   [rSCX], a ; scrollX                      ; $0204: $E0 $43
 
-.RenderLoop_loadNewMap:
+    ;
+    ; Load requested GFX (if needed)
+    ;
+
     ; If wTilesetToLoad != 0 || wBGMapToLoad != 0,
-    ; load new map data and return.
+    ; load new graphics data and return.
     ld   a, [wTilesetToLoad]                      ; $0206: $FA $FE $D6
     and  a                                        ; $0209: $A7
-    jr   nz, .loadNewMap                          ; $020A: $20 $07
+    jr   nz, .loadRequestedGfx                    ; $020A: $20 $07
     ld   a, [wBGMapToLoad]                        ; $020C: $FA $FF $D6
     cp   $00                                      ; $020F: $FE $00
-    jr   z, .noNewMap                             ; $0211: $28 $2A
+    jr   z, .noGfxToLoad                          ; $0211: $28 $2A
 
-.loadNewMap
+.loadRequestedGfx
     ; Play audio samples before loading the map when:
     ; - in a menu (GameplayType <= GAMEPLAY_FILE_SAVE)
     ; - on the World in default mode (GAMEPLAY_WORLD_DEFAULT)
@@ -84,18 +93,22 @@ ENDC
     call PlayAudioStep                            ; $022C: $CD $A4 $08
 .skipAudio
 
-    ; Load new map tiles and background
+    ; Load the requested tileset or BG map
     di                                            ; $022F: $F3
-    call LoadMapData                              ; $0230: $CD $19 $04
+    call LoadRequestedGfx                              ; $0230: $CD $19 $04
     ei                                            ; $0233: $FB
     ; Play more audio
     call PlayAudioStep                            ; $0234: $CD $A4 $08
     call PlayAudioStep                            ; $0237: $CD $A4 $08
     ; And we're done for this frame.
-    jp   WaitForNextFrame                         ; $023A: $C3 $5F $03
-.noNewMap
+    jp   .waitForNextFrame                        ; $023A: $C3 $5F $03
 
-.RenderLoop_renderFrame:
+.noGfxToLoad
+
+    ;
+    ; Start rendering the next frame
+    ;
+
     ; Apply LCD status flags
     ld   a, [wLCDControl]                         ; $023D: $FA $FD $D6
     and  $7F                                      ; $0240: $E6 $7F
@@ -121,11 +134,14 @@ ENDC
     callsb PositionTitleScreenSprites             ; $025C: $3E $20 $EA $00 $21 $CD $57 $52
 .titleScreenEnd
 
-.RenderLoop_TransitionSfx:
+    ;
+    ; Apply transition special effects
+    ;
+
     ; If no transition special effect is active, go to the next step.
     ld   a, [wTransitionGfx]                      ; $0264: $FA $7F $C1
     and  a                                        ; $0267: $A7
-    jp   z, RenderInteractiveFrame                ; $0268: $CA $D5 $02
+    jp   z, .renderInteractiveFrame               ; $0268: $CA $D5 $02
 
     ; There are two types of transition special effects:
     ;  - interactive: new gameplay frames are rendered while the effect is active ;
@@ -139,7 +155,7 @@ ENDC
     ; Apply the transition effect...
     callsb ApplyWindFishVfx                       ; $026E: $3E $17 $EA $00 $21 $CD $DD $48
     ; ... and continue rendering a new frame.
-    jp   RenderInteractiveFrame                   ; $0276: $C3 $D5 $02
+    jp   .renderInteractiveFrame                  ; $0276: $C3 $D5 $02
 .elsif
     ; If TransitionSfx == TRANSITION_GFX_FLOATING,
     ; use the interactive transition code too.
@@ -173,8 +189,8 @@ ENDC
     xor  a                                        ; $0296: $AF
     ld   [wTransitionGfx], a                      ; $0297: $EA $7F $C1
     ld   [wC3CA], a                               ; $029A: $EA $CA $C3
-    ; Resume rendering of interactive frames
-    jp   RenderInteractiveFrame                   ; $029D: $C3 $D5 $02
+    ; Resume rendering of an interactive frame
+    jp   .renderInteractiveFrame                  ; $029D: $C3 $D5 $02
 
 .renderTransitionSfx
 
@@ -213,9 +229,13 @@ ENDC
     ld   [rOBP1], a                               ; $02D0: $E0 $49
     ; This is a non-interactive transition: no new gameplay frame is rendered.
     ; Wait for the next V-Blank.
-    jp   WaitForNextFrame                         ; $02D2: $C3 $5F $03
+    jp   .waitForNextFrame                        ; $02D2: $C3 $5F $03
 
-RenderInteractiveFrame::
+    ;
+    ; Render an interactive frame
+    ;
+.renderInteractiveFrame
+
     ; Update graphics registers from game values
     ld   a, [wWindowY]                            ; $02D5: $FA $9A $DB
     ld   [rWY], a                                 ; $02D8: $E0 $4A
@@ -229,19 +249,22 @@ RenderInteractiveFrame::
     call PlayAudioStep                            ; $02E9: $CD $A4 $08
     call ReadJoypadState                          ; $02EC: $CD $1E $28
 
-    ; If NeedsUpdatingBGTiles or NeedsUpdatingEnnemiesTiles or NeedsUpdatingNPCTiles…
+    ; If NeedsUpdatingBGTiles || NeedsUpdatingEnnemiesTiles || NeedsUpdatingNPCTiles…
     ldh  a, [hNeedsUpdatingBGTiles]               ; $02EF: $F0 $90
     ld   hl, hNeedsUpdatingEnnemiesTiles          ; $02F1: $21 $91 $FF
     or   [hl]                                     ; $02F4: $B6
     ld   hl, wNeedsUpdatingNPCTiles               ; $02F5: $21 $0E $C1
     or   [hl]                                     ; $02F8: $B6
     ; skip further rendering: the vblank interrupt will load the required data
-    jr   nz, WaitForNextFrame                     ; $02F9: $20 $64
+    jr   nz, .waitForNextFrame                    ; $02F9: $20 $64
 
+    ;
     ; Debug functions
+    ;
+
     ld   a, [ROM_DebugTool1]                      ; $02FB: $FA $03 $00
     and  a  ; Is debug mode disabled?             ; $02FE: $A7
-    jr   z, ResetSprites                          ; $02FF: $28 $2C
+    jr   z, .debugEnd                             ; $02FF: $28 $2C
 
     ld   a, [wEnginePaused]                       ; $0301: $FA $FC $D6
     and  a  ; Is engine already paused?           ; $0304: $A7
@@ -263,22 +286,27 @@ RenderInteractiveFrame::
     ld   [wEnginePaused], a                       ; $0318: $EA $FC $D6
 
     ; If the engine was just paused, skip the rest of the render loop
-    jr   nz, WaitForNextFrame                     ; $031B: $20 $42
+    jr   nz, .waitForNextFrame                    ; $031B: $20 $42
 
     ; If the engine was just unpaused,
     ; toggle Free-movement mode.
     ld   a, [wFreeMovementMode]                   ; $031D: $FA $7B $C1
     xor  $10                                      ; $0320: $EE $10
     ld   [wFreeMovementMode], a                   ; $0322: $EA $7B $C1
-    jr   WaitForNextFrame                         ; $0325: $18 $38
+    jr   .waitForNextFrame                        ; $0325: $18 $38
 
 .saveEngineStatus
     ; If the engine is paused, skip the rest of the render loop
     ld   a, [wEnginePaused]                       ; $0327: $FA $FC $D6
     and  a                                        ; $032A: $A7
-    jr   nz, WaitForNextFrame                     ; $032B: $20 $32
+    jr   nz, .waitForNextFrame                    ; $032B: $20 $32
 
-ResetSprites::
+.debugEnd
+
+    ;
+    ; Reset sprites visibility
+    ;
+
     ; If not in Inventory, initially hide all sprites
     ld   a, [wGameplayType]                       ; $032D: $FA $95 $DB
     cp   GAMEPLAY_INVENTORY                       ; $0330: $FE $0C
@@ -287,15 +315,22 @@ ResetSprites::
     ; If Inventory is actually visible, leave sprites visible
     ld   a, [wGameplaySubtype]                    ; $0334: $FA $96 $DB
     cp   GAMEPLAY_INVENTORY_DELAY1                ; $0337: $FE $02
-    jr   c, RenderGameplay                        ; $0339: $38 $08
+    jr   c, .spritesEnd                           ; $0339: $38 $08
 
 .resetSpritesVisibility
     callsw HideAllSprites                         ; $033B: $3E $01 $CD $0C $08 $CD $2E $5F
+.spritesEnd
 
-RenderGameplay::
+    ;
+    ; Execute main gameplay code
+    ;
+
     call ExecuteGameplayHandler                   ; $0343: $CD $34 $0E
 
-RenderPalettes::
+    ;
+    ; Load color palettes
+    ;
+
     ; If isGBC…
     ldh  a, [hIsGBC]                              ; $0346: $F0 $FE
     and  a                                        ; $0348: $A7
@@ -308,10 +343,15 @@ RenderPalettes::
     xor  a                                        ; $0353: $AF
     ld   [wPaletteToLoadForTileMap], a            ; $0354: $EA $D2 $DD
 
-RenderWindow::
+    ;
+    ; Render Window
+    ;
     callsw UpdateWindowPosition                   ; $0357: $3E $01 $CD $0C $08 $CD $4B $5F
 
-WaitForNextFrame::
+    ;
+    ;
+    ;
+.waitForNextFrame
     ; Animate inventory window
     callsw func_01F_7F80                          ; $035F: $3E $1F $CD $0C $08 $CD $80 $7F
 
@@ -320,14 +360,15 @@ WaitForNextFrame::
     call AdjustBankNumberForGBC                   ; $0369: $CD $0B $0B
     call SwitchBank                               ; $036C: $CD $0C $08
 
-    ; Reset didRenderFrame flag
+    ; Mark the frame as being ready
     xor  a                                        ; $036F: $AF
-    ldh  [hDidRenderFrame], a                     ; $0370: $E0 $FD
+    ldh  [hIsRenderingFrame], a                   ; $0370: $E0 $FD
 
     ; Stop the CPU until the next interrupt
     halt                                          ; $0372: $76 $00
 
-    ; Loop until hNeedsRenderingFrame != 0
+    ; An interrupt occured; but maybe it wasn't the V-Blank interrupt.
+    ; Busy-loop until the V-Blank interrupt actually ran and finished.
 .pollNeedsRenderingFrame
     ldh  a, [hNeedsRenderingFrame]                ; $0374: $F0 $D1
     and  a                                        ; $0376: $A7
@@ -337,5 +378,5 @@ WaitForNextFrame::
     xor  a                                        ; $0379: $AF
     ldh  [hNeedsRenderingFrame], a                ; $037A: $E0 $D1
 
-    ; Jump to the top of the render loop
+    ; Start rendering the next frame
     jp   RenderLoop                               ; $037C: $C3 $DA $01

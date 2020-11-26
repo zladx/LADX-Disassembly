@@ -3,7 +3,7 @@
 ; https://github.com/mattcurrie/mgbdis
 
 ; Copy object or background palettes to the hardware palette data
-CopyPalettesToHardware::
+CopyPalettesToVRAM::
     ld   a, [wPaletteDataFlags]                   ; $4000: $FA $D1 $DD
     and  a                                        ; $4003: $A7
     ret  z                                        ; $4004: $C8

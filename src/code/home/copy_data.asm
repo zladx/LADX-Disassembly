@@ -42,14 +42,14 @@ ExpandCopyRequestArgs::
     ld   a, [de]                                  ; $2922: $1A
     ; Move de to the data start
     inc  de                                       ; $2923: $13
-    call CopyBackgroundData                       ; $2924: $CD $41 $29
+    call CopyDataToBGMap                       ; $2924: $CD $41 $29
     ; fallthrough
 
-; Execute a data copy from a wRequest structure,
+; Copy data from a wRequest structure to the BG map,
 ; with optional handling during map transitions.
 ; Inputs:
-;   de: data copy request struct (see wRequest)
-ExecuteBackgroundCopyRequest::
+;   de: address of the data copy request struct (see wRequest)
+ExecuteBGCopyRequest::
     ld   a, [wRoomTransitionState]                ; $2927: $FA $24 $C1
     and  a                                        ; $292A: $A7
     jr   nz, .duringMapTransition                 ; $292B: $20 $0F
@@ -79,12 +79,14 @@ ExecuteBackgroundCopyRequest::
     jr   nz, .mapTransitionCopyLoop               ; $293E: $20 $F2
     ret                                           ; $2940: $C9
 
-; Copy map data to Background data
+; Copy data to the BG map, with support for copying a full row or column.
+; See BG_COPY_MODE_* for possible options.
+;
 ; Inputs:
 ;   de: data copy source address
 ;   hl: data copy destination address
 ;   a:  data length (bits 0-6) and copy mode (bits 7-8)
-CopyBackgroundData::
+CopyDataToBGMap::
     ; Save the six lowest bits (actual data length) of the data length to b
     push af                                       ; $2941: $F5
     and  $3F                                      ; $2942: $E6 $3F

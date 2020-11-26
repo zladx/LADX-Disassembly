@@ -108,5 +108,5 @@ Init::
     ; On GBC, reset WRAM bank 5
     callsb ClearWRAMBank5                         ; $01CF: $3E $20 $EA $00 $21 $CD $54 $48
 
-    ; Start rendering
-    jp   WaitForNextFrame                         ; $01D7: $C3 $5F $03
+    ; Start the game loop
+    jp   RenderLoop.waitForNextFrame              ; $01D7: $C3 $5F $03

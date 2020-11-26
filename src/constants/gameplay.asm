@@ -4,7 +4,7 @@
 
 NAME_LENGTH                EQU 5
 
-; Copy modes for CopyBackgroundData
+; Copy modes for CopyDataToBGMap
 ; Copy the data from source to dest, progressing horizontally
 BG_COPY_MODE_ROW                 equ $00
 ; Copy a single byte from source to dest, progressing horizontally

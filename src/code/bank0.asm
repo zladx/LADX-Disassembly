@@ -473,7 +473,7 @@ func_AB5::
     push af                                       ; $0AB5: $F5
     callsb func_024_5C1A                          ; $0AB6: $3E $24 $EA $00 $21 $CD $1A $5C
     ld   de, wRequest                             ; $0ABE: $11 $01 $D6
-    call ExecuteBackgroundCopyRequest             ; $0AC1: $CD $27 $29
+    call ExecuteBGCopyRequest                     ; $0AC1: $CD $27 $29
     jr   RestoreStackedBank                       ; $0AC4: $18 $EA
 
 func_036_703E_trampoline::
@@ -5616,7 +5616,7 @@ doCopyObjectToBG:
 ;
 ; This is used when loading a map in one go (instead
 ; of having a sliding screen transition.)
-; (called by LoadMapData)
+; (called by LoadRequestedGfx)
 LoadRoomTilemap:
     call SwitchToMapDataBank                      ; $309B: $CD $05 $39
     call SwitchBank                               ; $309E: $CD $0C $08

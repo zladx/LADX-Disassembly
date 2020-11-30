@@ -1,9 +1,9 @@
 from collections import namedtuple
 
-# Describe the location of a entities pointers table
+# Describe the location of a tilemap pointers table
 BackgroundTableDescriptor = namedtuple('BackgroundTableDescriptor', ['name', 'address', 'length', 'data'])
 
-# Describe the location of a list of entities
+# Describe the location of a tilemap
 BackgroundDescriptor = namedtuple('BackgroundDescriptor', ['address', 'length'])
 
 # Represent a pointer in a pointers table
@@ -12,7 +12,7 @@ Pointer = namedtuple('Pointer', ['index', 'address'])
 
 class BackgroundTableParser:
     """
-    Parse a entities pointers table and its associated entities from a EntitiesTableDescriptor.
+    Parse a tilemap pointers table and its associated tilemaps from a BackgroundTableDescriptor.
     """
     def __init__(self, rom_path, table_descriptor):
         self.table_descriptor = table_descriptor

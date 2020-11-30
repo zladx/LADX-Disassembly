@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Parse the ROM, and output asm files with the entities pointer tables and data.
+# Parse the ROM, and output asm files with the background tilemaps tables and data.
 
 import os
 import argparse

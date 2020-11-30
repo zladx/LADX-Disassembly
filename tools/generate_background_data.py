@@ -33,6 +33,47 @@ background_descriptors = [
     #)
 ]
 
+background_names = [
+  'unused',                   #00
+  'BackgroundTileCommands01', #01
+  'BackgroundTileCommands02', #02
+  'BackgroundTileCommands03', #03
+  'BackgroundTileCommands04', #04
+  'BackgroundTileCommands05', #05
+  'BackgroundTileCommands06', #06
+  'invalid-pointer',          #07
+  'BackgroundTileCommands08', #08
+  'BackgroundTileCommands09', #09
+  'BackgroundTileCommands0A', #0A
+  'BackgroundTileCommands0B', #0B
+  'BackgroundTileCommands0C', #0C
+  'BackgroundTileCommands0D', #0D
+  'BackgroundTileCommands0E', #0E
+  'BackgroundTileCommands0F', #0F
+  'BackgroundTileCommands10', #10
+  'BackgroundTileCommands11', #11
+  'BackgroundTileCommands12', #12
+  'BackgroundTileCommands13', #13
+  'BackgroundTileCommands14', #14
+  'BackgroundTileCommands15', #15
+  'BackgroundTileCommands16', #16
+  'BackgroundTileCommands17', #17
+  'BackgroundTileCommands18', #18
+  'BackgroundTileCommands19', #19
+  'BackgroundTileCommands1A', #1A
+  'BackgroundTileCommands1B', #1B
+  'BackgroundTileCommands1C', #1C
+  'BackgroundTileCommands1D', #1D
+  'BackgroundTileCommands1E', #1E
+  'BackgroundTileCommands1F', #1F
+  'BackgroundTileCommands20', #20
+  'BackgroundTileCommands21', #21
+  'BackgroundTileCommands22', #22
+  'BackgroundTileCommands23', #23
+  'BackgroundTileCommands24', #24
+  'BackgroundTileCommands25', #25
+]
+
 def to_camel_case(snake_str):
     """Convert a string from snake_case to CamelCase"""
     return ''.join(w.title() for w in snake_str.split('_'))
@@ -45,10 +86,11 @@ class PointersTableFormatter:
 class PointerFormatter:
     @classmethod
     def to_asm(cls, table_name, pointer):
-        if pointer.index == 0 or (pointer.index == 7 and pointer.address > 0xD000):  # ignore wrong pointers
+        if pointer.index == 0 or pointer.address >= 0x8000:  # ignore invalid pointers
             return f"  dw    ${pointer.address:04X}\n"
-        label = "{}{:02X}".format(to_camel_case(table_name), pointer.index)
-        return f"  dw    {label}  ; ${pointer.address:04X}\n"
+        else:
+            label = background_names[pointer.index];
+            return f"  dw    {label}  ; ${pointer.address:04X}\n"
 
 class BackgroundCommandFormatter:
     @classmethod
@@ -56,8 +98,8 @@ class BackgroundCommandFormatter:
         asm = ""
         for pointer in pointers:
             if (pointer.address & 0x3FFF) == (command.address & 0x3FFF):
-                label = "{}{:02X}".format(to_camel_case(table_name), pointer.index)
-                asm += f"{label} ; ${pointer.address:04X}\n"
+                label = background_names[pointer.index];
+                asm += f"{label}:: ; ${pointer.address:04X}\n"
         if asm != "":
             asm = "\n" + asm
         if isinstance(command, BackgroundCommandEnd):

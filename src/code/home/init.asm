@@ -43,14 +43,14 @@ Init::
     ld   [rOBP0], a                               ; $0182: $E0 $48
     ld   [rOBP1], a                               ; $0184: $E0 $49
 
-    ; Clear Tiles Map 0
+    ; Clear Tiles
     ld   hl, vTiles0                              ; $0186: $21 $00 $80
     ld   bc, $1800                                ; $0189: $01 $00 $18
     call ClearBytes                               ; $018C: $CD $DF $29
 
-    ; Clear Background Maps
-    callsb ClearBGMap0Attributes                  ; $018F: $3E $24 $EA $00 $21 $CD $00 $5C
-    call ClearBGMap                               ; $0197: $CD $F7 $28
+    ; Clear BG Map
+    callsb FillBGMapAttributesWhite              ; $018F: $3E $24 $EA $00 $21 $CD $00 $5C
+    call FillBGMapWhite                          ; $0197: $CD $F7 $28
 
     call ClearHRAMAndWRAM                         ; $019A: $CD $D0 $29
 

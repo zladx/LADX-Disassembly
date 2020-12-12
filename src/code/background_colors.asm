@@ -2,7 +2,7 @@
 ; Background Attributes
 ; -------------------------------------------------------
 
-ClearBGMap0Attributes::
+FillBGMapAttributesWhite::
     ldh  a, [hIsGBC]                              ; $5C00: $F0 $FE
     and  a                                        ; $5C02: $A7
     ret  z                                        ; $5C03: $C8

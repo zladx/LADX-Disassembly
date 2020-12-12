@@ -243,13 +243,13 @@ GetTilesetHandlerAddress::
 ; into BG memory (rather than a tileset in tiles memory.)
 TilesetLoadHandlersTable::
 ._01 dw LoadRoomTilemap
-._02 dw ClearBGMap
+._02 dw FillBGMapWhite
 ._03 dw LoadBaseTiles
 ._04 dw LoadMenuTiles
 ._05 dw LoadBaseOverworldTiles
 ._06 dw LoadIndoorTiles
 ._07 dw LoadBaseOverworldTiles ; same as command $05
-._08 dw FillBGMapWith7E
+._08 dw FillBGMapBlack
 ._09 dw LoadRoomSpecificTiles
 ._0A dw LoadRequestedGfx.return
 ._0B dw LoadWorldMapTiles

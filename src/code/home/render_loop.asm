@@ -163,8 +163,8 @@ ENDC
     jr   z, .interactiveTransition                ; $027A: $28 $F2
 
     ; Else, render a non-interactive transition effect.
-    ; Select bank $14
-    ld   a, $14                                   ; $027C: $3E $14
+
+    ld   a, BANK(ApplyFadeToWhite_DMG)            ; $027C: $3E $14
     ld   [MBC3SelectBank], a                      ; $027E: $EA $00 $21
 
     ; Increment frame count for the transition effect

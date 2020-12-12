@@ -2047,7 +2047,7 @@ jr_017_55FC:
 ; - the island disappearing
 ; - link's platform rumbling
 CreditsInstrumentsPlayingHandler::
-    ld   a, [wIsFileSelectionArrowShifted]                              ; $55FD: $FA $00 $D0
+    ld   a, [wCreditsScratch0]                   ; $55FD: $FA $00 $D0
     JP_TABLE                                     ; $5600
 ._00 dw func_017_5665                            ; $5601
 ._01 dw MrsMeowMeowsHouseSceneHandler            ; $5603
@@ -2069,7 +2069,7 @@ CreditsInstrumentsPlayingHandler::
 ._11 dw func_017_5ACD                            ; $5623
 
 IncrementD000AndReturn::
-    ld   hl, wIsFileSelectionArrowShifted                               ; $5625 (17): $21 $00 $D0
+    ld   hl, wCreditsScratch0                    ; $5625 (17): $21 $00 $D0
     inc  [hl]                                    ; $5628 (17): $34
     ret                                          ; $5629 (17): $C9
 

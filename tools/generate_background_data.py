@@ -139,14 +139,14 @@ class BackgroundCommandFormatter:
             bytes.append(0x00)
         elif isinstance(command, BackgroundCommandSingle):
             if command.vertical:
-                bytes.append(command.target_address >> 8, command.target_address & 0xFF, (command.amount - 1) | 0xC0, command.data, command.amount)
+                bytes.extend([command.target_address >> 8, command.target_address & 0xFF, (command.amount - 1) | 0xC0, command.data])
             else:
-                bytes.append(command.target_address >> 8, command.target_address & 0xFF, (command.amount - 1) | 0x40, command.data, command.amount)
+                bytes.extend([command.target_address >> 8, command.target_address & 0xFF, (command.amount - 1) | 0x40, command.data])
         elif isinstance(command, BackgroundCommandMultiple):
             if command.vertical:
-                bytes.append(command.target_address >> 8, command.target_address & 0xFF, (len(command.data) - 1) | 0x80, len(command.data))
+                bytes.extend([command.target_address >> 8, command.target_address & 0xFF, (len(command.data) - 1) | 0x80])
             else:
-                bytes.append(command.target_address >> 8, command.target_address & 0xFF, (len(command.data) - 1), len(command.data))
+                bytes.extend([command.target_address >> 8, command.target_address & 0xFF, (len(command.data) - 1)])
             bytes.extend(command.data)
         else:
             raise RuntimeError("Unknown command: %s" % (command))
@@ -176,7 +176,7 @@ if __name__ == "__main__":
                 pointers_file.write(PointerFormatter.to_asm(background_table_parser.name, pointer))
             pointers_file.write("\n")
 
-        if args.format == "asm" or args.format is None:
+        if args.format == ["asm"] or args.format is None:
             # Remove all previous files
             for index in range(len(background_table_parser.pointers)):
                 filename = BackgroundName(index).as_filename('asm')
@@ -196,16 +196,25 @@ if __name__ == "__main__":
                     asm = BackgroundCommandFormatter.to_asm(command)
                     background_file.write(asm)
 
-        elif args.format == "bin":
+        elif args.format == ["bin"]:
+            # Remove all previous files
+            for index in range(len(background_table_parser.pointers)):
+                filename = BackgroundName(index).as_filename('bin')
+                if filename is None:
+                    continue
+                filename_abs = os.path.join(target_dir, filename)
+                if os.path.exists(filename_abs):
+                    os.remove(filename_abs)
+
             # Write background files as binary files
             for index, command in enumerate(background_table_parser.list):
+                pointer_index = background_table_parser.pointers_for_command(command)[0].index
                 filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename('bin'))
                 with open(filename, 'ab+') as background_file:
-                    background_file = open(os.path.join(target_dir, BackgroundName.for_file(index)), 'w')
                     data = BackgroundCommandFormatter.to_bytes(command)
                     background_file.write(data)
 
-        elif args.format == "decoded":
+        elif args.format == ["decoded"]:
             mem = {}
             for command in background_table_parser.list:
                 for pointer in background_table_parser.pointers:

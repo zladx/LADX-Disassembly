@@ -68,75 +68,75 @@ include "data/objects_tilemaps/color_dungeon.asm"
 include "data/objects/physics.asm"
 BGTilemaps::
 EaglesTowerCollapseTilemap::
-include "src/data/backgrounds/eagles_tower_collapse.tilemap.encoded.asm"
+incbin "src/data/backgrounds/eagles_tower_collapse.tilemap.encoded.bin"
 CreditsKidsTilemap::
-include "src/data/backgrounds/credits_kids.tilemap.encoded.asm"
+incbin "src/data/backgrounds/credits_kids.tilemap.encoded.bin"
 CreditsMarinSingingTilemap::
-include "src/data/backgrounds/credits_marin_singing.tilemap.encoded.asm"
+incbin "src/data/backgrounds/credits_marin_singing.tilemap.encoded.bin"
 CreditsMrsMeowMeowsHouseTilemap::
-include "src/data/backgrounds/credits_mrs_meow_meows_house.tilemap.encoded.asm"
+incbin "src/data/backgrounds/credits_mrs_meow_meows_house.tilemap.encoded.bin"
 CreditsTarinTilemap::
-include "src/data/backgrounds/credits_tarin.tilemap.encoded.asm"
+incbin "src/data/backgrounds/credits_tarin.tilemap.encoded.bin"
 CreditsBeachTilemap::
-include "src/data/backgrounds/credits_beach.tilemap.encoded.asm"
+incbin "src/data/backgrounds/credits_beach.tilemap.encoded.bin"
 CreditsIslandTilemap::
-include "src/data/backgrounds/credits_island.tilemap.encoded.asm"
+incbin "src/data/backgrounds/credits_island.tilemap.encoded.bin"
 CreditsStairsTilemap::
-include "src/data/backgrounds/credits_stairs.tilemap.encoded.asm"
+incbin "src/data/backgrounds/credits_stairs.tilemap.encoded.bin"
 CreditsLinkOnSeaLargeTilemap::
-include "src/data/backgrounds/credits_link_on_sea_large.tilemap.encoded.asm"
+incbin "src/data/backgrounds/credits_link_on_sea_large.tilemap.encoded.bin"
 CreditsSunAboveTilemap::
-include "src/data/backgrounds/credits_sun_above.tilemap.encoded.asm"
+incbin "src/data/backgrounds/credits_sun_above.tilemap.encoded.bin"
 CreditsLinkOnSeaCloseTilemap::
-include "src/data/backgrounds/credits_link_on_sea_close.tilemap.encoded.asm"
+incbin "src/data/backgrounds/credits_link_on_sea_close.tilemap.encoded.bin"
 CreditsLinkSeatedOnLogTilemap::
-include "src/data/backgrounds/credits_link_seated_on_log.tilemap.encoded.asm"
+incbin "src/data/backgrounds/credits_link_seated_on_log.tilemap.encoded.bin"
 CreditsLinkFaceCloseUpTilemap::
-include "src/data/backgrounds/credits_link_face_close_up.tilemap.encoded.asm"
+incbin "src/data/backgrounds/credits_link_face_close_up.tilemap.encoded.bin"
 CreditsRollTilemap::
-include "src/data/backgrounds/credits_roll.tilemap.encoded.asm"
+incbin "src/data/backgrounds/credits_roll.tilemap.encoded.bin"
 MamuTilemap::
-include "src/data/backgrounds/mamu.tilemap.encoded.asm"
+incbin "src/data/backgrounds/mamu.tilemap.encoded.bin"
 WorldMapTilemap::
-include "src/data/backgrounds/world_map.tilemap.encoded.asm"
+incbin "src/data/backgrounds/world_map.tilemap.encoded.bin"
 MenuFileSelectionTilemap::
-include "src/data/backgrounds/menu_file_selection.tilemap.encoded.asm"
+incbin "src/data/backgrounds/menu_file_selection.tilemap.encoded.bin"
 BackgroundTileCommands03::
-include "src/data/backgrounds/background_tile_commands03.tilemap.encoded.asm"
+incbin "src/data/backgrounds/background_tile_commands03.tilemap.encoded.bin"
 MenuFileCreationTilemap::
-include "src/data/backgrounds/menu_file_creation.tilemap.encoded.asm"
+incbin "src/data/backgrounds/menu_file_creation.tilemap.encoded.bin"
 BackgroundTileCommands06::
-include "src/data/backgrounds/background_tile_commands06.tilemap.encoded.asm"
+incbin "src/data/backgrounds/background_tile_commands06.tilemap.encoded.bin"
 MenuFileCopyTilemap::
-include "src/data/backgrounds/menu_file_copy.tilemap.encoded.asm"
+incbin "src/data/backgrounds/menu_file_copy.tilemap.encoded.bin"
 BackgroundTileCommands02::
-include "src/data/backgrounds/background_tile_commands02.tilemap.encoded.asm"
+incbin "src/data/backgrounds/background_tile_commands02.tilemap.encoded.bin"
 BackgroundTileCommands09::
-include "src/data/backgrounds/background_tile_commands09.tilemap.encoded.asm"
+incbin "src/data/backgrounds/background_tile_commands09.tilemap.encoded.bin"
 InventoryDebugTilemap::
-include "src/data/backgrounds/inventory_debug.tilemap.encoded.asm"
+incbin "src/data/backgrounds/inventory_debug.tilemap.encoded.bin"
 GameOverTilemap::
-include "src/data/backgrounds/game_over.tilemap.encoded.asm"
+incbin "src/data/backgrounds/game_over.tilemap.encoded.bin"
 MenuFileSaveTilemap::
-include "src/data/backgrounds/menu_file_save.tilemap.encoded.asm"
+incbin "src/data/backgrounds/menu_file_save.tilemap.encoded.bin"
 IntroSeaDMGTilemap::
-include "src/data/backgrounds/intro_sea_dmg.tilemap.encoded.asm"
+incbin "src/data/backgrounds/intro_sea_dmg.tilemap.encoded.bin"
 IntroSeaCGBTilemap::
-include "src/data/backgrounds/intro_sea_cgb.tilemap.encoded.asm"
+incbin "src/data/backgrounds/intro_sea_cgb.tilemap.encoded.bin"
 IntroLinkFaceTilemap::
-include "src/data/backgrounds/intro_link_face.tilemap.encoded.asm"
+incbin "src/data/backgrounds/intro_link_face.tilemap.encoded.bin"
 IntroBeachTilemap::
-include "src/data/backgrounds/intro_beach.tilemap.encoded.asm"
+incbin "src/data/backgrounds/intro_beach.tilemap.encoded.bin"
 TitleTilemap::
-include "src/data/backgrounds/title.tilemap.encoded.asm"
+incbin "src/data/backgrounds/title.tilemap.encoded.bin"
 FaceShrineMuralTilemap::
-include "src/data/backgrounds/face_shrine_mural.tilemap.encoded.asm"
+incbin "src/data/backgrounds/face_shrine_mural.tilemap.encoded.bin"
 PeachTilemap::
-include "src/data/backgrounds/peach.tilemap.encoded.asm"
+incbin "src/data/backgrounds/peach.tilemap.encoded.bin"
 MarinBeachTilemap::
-include "src/data/backgrounds/marin_beach.tilemap.encoded.asm"
+incbin "src/data/backgrounds/marin_beach.tilemap.encoded.bin"
 EaglesTowerFIXMETilemap::
-include "src/data/backgrounds/eagles_tower_fixme.tilemap.encoded.asm"
+incbin "src/data/backgrounds/eagles_tower_fixme.tilemap.encoded.bin"
 
 ; Maps and dialogs
 section "bank9",romx[$4000],bank[$09]

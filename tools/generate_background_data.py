@@ -107,9 +107,9 @@ class PointerFormatter:
     def to_asm(cls, table_name, pointer):
         label = BackgroundName(pointer.index).as_label()
         if label:
-          return f"  dw    {label.ljust(32, ' ')} ; ${pointer.address:04X}\n"
+          return f"._{pointer.index:02X} dw {label.ljust(32, ' ')} ; ${pointer.address:04X}\n"
         else:
-          return f"  dw    ${pointer.address:04X}\n"
+          return f"._{pointer.index:02X} dw ${pointer.address:04X}\n"
 
 class BackgroundCommandFormatter:
     @classmethod

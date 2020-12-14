@@ -70,7 +70,7 @@ background_names = [
   'CreditsMrsMeowMeowsHouseTilemap', #20
   'CreditsTarinTilemap',             #21
   'CreditsBeachTilemap',             #22
-  'EaglesTowerFIXMETilemap',         #23
+  'SchulePaintingTilemap',           #23
   'EaglesTowerCollapseTilemap',      #24
   'IntroSeaCGBTilemap',              #25
 ]

@@ -34,7 +34,7 @@ BackgroundTileCommandsPointersTable::
 ._20 dw CreditsMrsMeowMeowsHouseTilemap  ; $51EF
 ._21 dw CreditsTarinTilemap              ; $538E
 ._22 dw CreditsBeachTilemap              ; $552D
-._23 dw EaglesTowerFIXMETilemap          ; $7781
+._23 dw SchulePaintingTilemap            ; $7781
 ._24 dw EaglesTowerCollapseTilemap       ; $4DD4
 ._25 dw IntroSeaCGBTilemap               ; $6C37
 

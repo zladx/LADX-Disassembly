@@ -135,8 +135,8 @@ PeachTilemap::
 incbin "src/data/backgrounds/peach.tilemap.encoded.bin"
 MarinBeachTilemap::
 incbin "src/data/backgrounds/marin_beach.tilemap.encoded.bin"
-EaglesTowerFIXMETilemap::
-incbin "src/data/backgrounds/eagles_tower_fixme.tilemap.encoded.bin"
+SchulePaintingTilemap::
+incbin "src/data/backgrounds/schule_painting.tilemap.encoded.bin"
 
 ; Maps and dialogs
 section "bank9",romx[$4000],bank[$09]

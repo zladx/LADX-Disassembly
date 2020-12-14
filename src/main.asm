@@ -67,77 +67,76 @@ ColorDungeonObjectsTilemap::
 include "data/objects_tilemaps/color_dungeon.asm"
 include "data/objects/physics.asm"
 BGTilemaps::
-BackgroundTileCommands24::
-include "src/data/backgrounds/background_tile_commands24.tilemap.encoded.asm"
-BackgroundTileCommands1E::
-include "src/data/backgrounds/background_tile_commands1_e.tilemap.encoded.asm"
-BackgroundTileCommands1F::
-include "src/data/backgrounds/background_tile_commands1_f.tilemap.encoded.asm"
-BackgroundTileCommands20::
-include "src/data/backgrounds/background_tile_commands20.tilemap.encoded.asm"
-BackgroundTileCommands21::
-include "src/data/backgrounds/background_tile_commands21.tilemap.encoded.asm"
-BackgroundTileCommands22::
-include "src/data/backgrounds/background_tile_commands22.tilemap.encoded.asm"
-BackgroundTileCommands01::
-include "src/data/backgrounds/background_tile_commands01.tilemap.encoded.asm"
-BackgroundTileCommands16::
-include "src/data/backgrounds/background_tile_commands16.tilemap.encoded.asm"
-BackgroundTileCommands17::
-include "src/data/backgrounds/background_tile_commands17.tilemap.encoded.asm"
-BackgroundTileCommands18::
-include "src/data/backgrounds/background_tile_commands18.tilemap.encoded.asm"
-BackgroundTileCommands19::
-include "src/data/backgrounds/background_tile_commands19.tilemap.encoded.asm"
-BackgroundTileCommands1A::
-include "src/data/backgrounds/background_tile_commands1_a.tilemap.encoded.asm"
-BackgroundTileCommands1B::
-include "src/data/backgrounds/background_tile_commands1_b.tilemap.encoded.asm"
-BackgroundTileCommands1C::
-BackgroundTileCommands1D::
-include "src/data/backgrounds/background_tile_commands1_c.tilemap.encoded.asm"
-BackgroundTileCommands14::
-include "src/data/backgrounds/background_tile_commands14.tilemap.encoded.asm"
-BackgroundTileCommands08::
-include "src/data/backgrounds/background_tile_commands08.tilemap.encoded.asm"
-BackgroundTileCommands04::
-include "src/data/backgrounds/background_tile_commands04.tilemap.encoded.asm"
+EaglesTowerCollapseTilemap::
+include "src/data/backgrounds/eagles_tower_collapse.tilemap.encoded.asm"
+CreditsKidsTilemap::
+include "src/data/backgrounds/credits_kids.tilemap.encoded.asm"
+CreditsMarinSingingTilemap::
+include "src/data/backgrounds/credits_marin_singing.tilemap.encoded.asm"
+CreditsMrsMeowMeowsHouseTilemap::
+include "src/data/backgrounds/credits_mrs_meow_meows_house.tilemap.encoded.asm"
+CreditsTarinTilemap::
+include "src/data/backgrounds/credits_tarin.tilemap.encoded.asm"
+CreditsBeachTilemap::
+include "src/data/backgrounds/credits_beach.tilemap.encoded.asm"
+CreditsIslandTilemap::
+include "src/data/backgrounds/credits_island.tilemap.encoded.asm"
+CreditsStairsTilemap::
+include "src/data/backgrounds/credits_stairs.tilemap.encoded.asm"
+CreditsLinkOnSeaLargeTilemap::
+include "src/data/backgrounds/credits_link_on_sea_large.tilemap.encoded.asm"
+CreditsSunAboveTilemap::
+include "src/data/backgrounds/credits_sun_above.tilemap.encoded.asm"
+CreditsLinkOnSeaCloseTilemap::
+include "src/data/backgrounds/credits_link_on_sea_close.tilemap.encoded.asm"
+CreditsLinkSeatedOnLogTilemap::
+include "src/data/backgrounds/credits_link_seated_on_log.tilemap.encoded.asm"
+CreditsLinkFaceCloseUpTilemap::
+include "src/data/backgrounds/credits_link_face_close_up.tilemap.encoded.asm"
+CreditsRollTilemap::
+include "src/data/backgrounds/credits_roll.tilemap.encoded.asm"
+MamuTilemap::
+include "src/data/backgrounds/mamu.tilemap.encoded.asm"
+WorldMapTilemap::
+include "src/data/backgrounds/world_map.tilemap.encoded.asm"
+MenuFileSelectionTilemap::
+include "src/data/backgrounds/menu_file_selection.tilemap.encoded.asm"
 BackgroundTileCommands03::
 include "src/data/backgrounds/background_tile_commands03.tilemap.encoded.asm"
-BackgroundTileCommands05::
-include "src/data/backgrounds/background_tile_commands05.tilemap.encoded.asm"
+MenuFileCreationTilemap::
+include "src/data/backgrounds/menu_file_creation.tilemap.encoded.asm"
 BackgroundTileCommands06::
 include "src/data/backgrounds/background_tile_commands06.tilemap.encoded.asm"
-BackgroundTileCommands0C::
-include "src/data/backgrounds/background_tile_commands0_c.tilemap.encoded.asm"
+MenuFileCopyTilemap::
+include "src/data/backgrounds/menu_file_copy.tilemap.encoded.asm"
 BackgroundTileCommands02::
 include "src/data/backgrounds/background_tile_commands02.tilemap.encoded.asm"
 BackgroundTileCommands09::
 include "src/data/backgrounds/background_tile_commands09.tilemap.encoded.asm"
-BackgroundTileCommands0B::
-include "src/data/backgrounds/background_tile_commands0_b.tilemap.encoded.asm"
-BackgroundTileCommands0A::
-include "src/data/backgrounds/background_tile_commands0_a.tilemap.encoded.asm"
-BackgroundTileCommands0D::
-include "src/data/backgrounds/background_tile_commands0_d.tilemap.encoded.asm"
-BackgroundTileCommands0E::
-include "src/data/backgrounds/background_tile_commands0_e.tilemap.encoded.asm"
-BackgroundTileCommands25::
-include "src/data/backgrounds/background_tile_commands25.tilemap.encoded.asm"
-BackgroundTileCommands0F::
-include "src/data/backgrounds/background_tile_commands0_f.tilemap.encoded.asm"
-BackgroundTileCommands10::
-include "src/data/backgrounds/background_tile_commands10.tilemap.encoded.asm"
-BackgroundTileCommands11::
-include "src/data/backgrounds/background_tile_commands11.tilemap.encoded.asm"
-BackgroundTileCommands15::
-include "src/data/backgrounds/background_tile_commands15.tilemap.encoded.asm"
-BackgroundTileCommands12::
-include "src/data/backgrounds/background_tile_commands12.tilemap.encoded.asm"
-BackgroundTileCommands13::
-include "src/data/backgrounds/background_tile_commands13.tilemap.encoded.asm"
-BackgroundTileCommands23::
-include "src/data/backgrounds/background_tile_commands23.tilemap.encoded.asm"
+InventoryDebugTilemap::
+include "src/data/backgrounds/inventory_debug.tilemap.encoded.asm"
+GameOverTilemap::
+include "src/data/backgrounds/game_over.tilemap.encoded.asm"
+MenuFileSaveTilemap::
+include "src/data/backgrounds/menu_file_save.tilemap.encoded.asm"
+IntroSeaDMGTilemap::
+include "src/data/backgrounds/intro_sea_dmg.tilemap.encoded.asm"
+IntroSeaCGBTilemap::
+include "src/data/backgrounds/intro_sea_cgb.tilemap.encoded.asm"
+IntroLinkFaceTilemap::
+include "src/data/backgrounds/intro_link_face.tilemap.encoded.asm"
+IntroBeachTilemap::
+include "src/data/backgrounds/intro_beach.tilemap.encoded.asm"
+TitleTilemap::
+include "src/data/backgrounds/title.tilemap.encoded.asm"
+FaceShrineMuralTilemap::
+include "src/data/backgrounds/face_shrine_mural.tilemap.encoded.asm"
+PeachTilemap::
+include "src/data/backgrounds/peach.tilemap.encoded.asm"
+MarinBeachTilemap::
+include "src/data/backgrounds/marin_beach.tilemap.encoded.asm"
+EaglesTowerFIXMETilemap::
+include "src/data/backgrounds/eagles_tower_fixme.tilemap.encoded.asm"
 
 ; Maps and dialogs
 section "bank9",romx[$4000],bank[$09]

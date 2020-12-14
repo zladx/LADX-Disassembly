@@ -4,9 +4,10 @@
 
 import os
 import argparse
+import re
 from textwrap import dedent
 from lib.background_parser import *
-from lib.utils import BANK
+from lib.utils import BANK, global_to_local
 
 background_descriptors = [
     BackgroundTableDescriptor(
@@ -78,6 +79,24 @@ def to_camel_case(snake_str):
     """Convert a string from snake_case to CamelCase"""
     return ''.join(w.title() for w in snake_str.split('_'))
 
+def to_snake_case(camel_str):
+    """Convert a string from CamelCase to snake_case"""
+    regexp = re.compile('((?<=[a-z0-9])[A-Z]|(?!^)[A-Z](?=[a-z]))')
+    return regexp.sub(r'_\1', camel_str).lower()
+
+class BackgroundName:
+    def __init__(self, index):
+        self.index = index
+
+    def as_label(self):
+        return background_names[self.index]
+
+    def as_filename(self, extension):
+        name = background_names[self.index]
+        if name is None:
+            return None
+        return f"{to_snake_case(name).replace('_tilemap', '')}.tilemap.encoded.{extension}"
+
 class PointersTableFormatter:
     @classmethod
     def to_asm(cls, table_name):
@@ -86,22 +105,16 @@ class PointersTableFormatter:
 class PointerFormatter:
     @classmethod
     def to_asm(cls, table_name, pointer):
-        if pointer.index == 0 or pointer.address >= 0x8000:  # ignore invalid pointers
-            return f"  dw    ${pointer.address:04X}\n"
+        label = BackgroundName(pointer.index).as_label()
+        if label:
+          return f"  dw    {label.ljust(32, ' ')} ; ${pointer.address:04X}\n"
         else:
-            label = background_names[pointer.index];
-            return f"  dw    {label}  ; ${pointer.address:04X}\n"
+          return f"  dw    ${pointer.address:04X}\n"
 
 class BackgroundCommandFormatter:
     @classmethod
-    def to_asm(cls, command, table_name, pointers):
+    def to_asm(cls, command):
         asm = ""
-        for pointer in pointers:
-            if (pointer.address & 0x3FFF) == (command.address & 0x3FFF):
-                label = background_names[pointer.index];
-                asm += f"{label}:: ; ${pointer.address:04X}\n"
-        if asm != "":
-            asm = "\n" + asm
         if isinstance(command, BackgroundCommandEnd):
             asm += f"  db    $00 ; end of draw commands\n"
         elif isinstance(command, BackgroundCommandSingle):
@@ -119,39 +132,80 @@ class BackgroundCommandFormatter:
             raise RuntimeError("Unknown command: %s" % (command))
         return asm
 
+    @classmethod
+    def to_bytes(cls, command):
+        bytes = bytearray()
+        if isinstance(command, BackgroundCommandEnd):
+            bytes.append(0x00)
+        elif isinstance(command, BackgroundCommandSingle):
+            if command.vertical:
+                bytes.append(command.target_address >> 8, command.target_address & 0xFF, (command.amount - 1) | 0xC0, command.data, command.amount)
+            else:
+                bytes.append(command.target_address >> 8, command.target_address & 0xFF, (command.amount - 1) | 0x40, command.data, command.amount)
+        elif isinstance(command, BackgroundCommandMultiple):
+            if command.vertical:
+                bytes.append(command.target_address >> 8, command.target_address & 0xFF, (len(command.data) - 1) | 0x80, len(command.data))
+            else:
+                bytes.append(command.target_address >> 8, command.target_address & 0xFF, (len(command.data) - 1), len(command.data))
+            bytes.extend(command.data)
+        else:
+            raise RuntimeError("Unknown command: %s" % (command))
+        return bytes
 
 if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument("rompath", nargs="?", metavar="rompath", type=str)
     arg_parser.add_argument("target", nargs="?", metavar="target", type=str)
-    arg_parser.add_argument("--dump", metavar="dump", action="store_const", const=True)
+    arg_parser.add_argument("--format", nargs=1, metavar="format", choices=['bin', 'asm', 'decoded'], type=str)
 
     args = arg_parser.parse_args()
     rom_path = args.rompath or 'Zelda.gbc'
     target_dir = args.target or os.path.join('src', 'data', 'backgrounds')
-    dump = args.dump
     disclaimer = "; File generated automatically by `tools/generate_background_data.py`\n\n"
 
     for background_descriptor in background_descriptors:
         # Parse background table and lists
         background_table_parser = BackgroundTableParser(rom_path, background_descriptor)
 
-        pointers_file = open(os.path.join(target_dir, background_table_parser.name + '_pointers.asm'), 'w')
-        pointers_file.write(PointersTableFormatter.to_asm(background_table_parser.name))
+        # Write the pointers table
+        with open(os.path.join(target_dir, background_table_parser.name + '_pointers.asm'), 'w') as pointers_file:
+            pointers_file.write(PointersTableFormatter.to_asm(background_table_parser.name))
 
-        # Append to the pointers file
-        for index, pointer in enumerate(background_table_parser.pointers):
-            pointers_file.write(PointerFormatter.to_asm(background_table_parser.name, pointer))
-        pointers_file.write("\n")
+            # Append to the pointers file
+            for index, pointer in enumerate(background_table_parser.pointers):
+                pointers_file.write(PointerFormatter.to_asm(background_table_parser.name, pointer))
+            pointers_file.write("\n")
 
-        # Write entities
-        background_file = open(os.path.join(target_dir, background_table_parser.name + '.asm'), 'w')
-        background_file.write(disclaimer)
+        if args.format == "asm" or args.format is None:
+            # Remove all previous files
+            for index in range(len(background_table_parser.pointers)):
+                filename = BackgroundName(index).as_filename('asm')
+                if filename is None:
+                    continue
+                filename_abs = os.path.join(target_dir, filename)
+                if os.path.exists(filename_abs):
+                    os.remove(filename_abs)
 
-        for index, command in enumerate(background_table_parser.list):
-            background_file.write(BackgroundCommandFormatter.to_asm(command, background_table_parser.name, background_table_parser.pointers))
+            # Write background files as asm files
+            for index, command in enumerate(background_table_parser.list):
+                pointer_index = background_table_parser.pointers_for_command(command)[0].index
+                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename('asm'))
+                with open(filename, 'a+') as background_file:
+                    if background_file.tell() == 0:
+                        background_file.write(disclaimer)
+                    asm = BackgroundCommandFormatter.to_asm(command)
+                    background_file.write(asm)
 
-        if dump:
+        elif args.format == "bin":
+            # Write background files as binary files
+            for index, command in enumerate(background_table_parser.list):
+                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename('bin'))
+                with open(filename, 'ab+') as background_file:
+                    background_file = open(os.path.join(target_dir, BackgroundName.for_file(index)), 'w')
+                    data = BackgroundCommandFormatter.to_bytes(command)
+                    background_file.write(data)
+
+        elif args.format == "decoded":
             mem = {}
             for command in background_table_parser.list:
                 for pointer in background_table_parser.pointers:
@@ -180,6 +234,4 @@ if __name__ == "__main__":
                             address += 0x20
                         else:
                             address += 1
-        background_file.close()
-        pointers_file.close()
 

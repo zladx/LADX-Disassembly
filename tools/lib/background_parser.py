@@ -1,4 +1,5 @@
 from collections import namedtuple
+from lib.utils import global_to_local
 
 # Describe the location of a tilemap pointers table
 BackgroundTableDescriptor = namedtuple('BackgroundTableDescriptor', ['name', 'address', 'length', 'data'])
@@ -8,7 +9,6 @@ BackgroundDescriptor = namedtuple('BackgroundDescriptor', ['address', 'length'])
 
 # Represent a pointer in a pointers table
 Pointer = namedtuple('Pointer', ['index', 'address'])
-
 
 class BackgroundTableParser:
     """
@@ -23,9 +23,19 @@ class BackgroundTableParser:
             self.pointers = self._parse_pointers_table(rom, table_descriptor)
             self.list = BackgroundListsParser(rom, table_descriptor.data).list
 
-    def pointers_for_list(self, list):
-        local_list_address = list.address - (0x16 * 0x4000) + 0x4000
-        return [pointer for pointer in self.pointers if pointer.address == local_list_address]
+    def pointers_for_command(self, command):
+        nearest_previous_pointer = None
+        local_command_address = global_to_local(command.address).offset
+        sorted_pointers = sorted(self.pointers, key=lambda p: p.address)
+        #l_p = map(lambda p: f"{p.address:04X}", sorted_pointers)
+        #print(f"{local_command_address:04X}")
+        #print(list(l_p))
+        for pointer in reversed(sorted_pointers):
+            if pointer.address <= local_command_address:
+                nearest_previous_pointer = pointer
+                break
+
+        return [pointer for pointer in self.pointers if pointer.address == nearest_previous_pointer.address]
 
     def _parse_pointers_table(self, rom, table_descriptor):
         """Return an array of words in the pointers table"""

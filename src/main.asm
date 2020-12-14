@@ -67,7 +67,77 @@ ColorDungeonObjectsTilemap::
 include "data/objects_tilemaps/color_dungeon.asm"
 include "data/objects/physics.asm"
 BGTilemaps::
-include "data/backgrounds/background_tile_commands.asm"
+BackgroundTileCommands24::
+include "src/data/backgrounds/background_tile_commands24.tilemap.encoded.asm"
+BackgroundTileCommands1E::
+include "src/data/backgrounds/background_tile_commands1_e.tilemap.encoded.asm"
+BackgroundTileCommands1F::
+include "src/data/backgrounds/background_tile_commands1_f.tilemap.encoded.asm"
+BackgroundTileCommands20::
+include "src/data/backgrounds/background_tile_commands20.tilemap.encoded.asm"
+BackgroundTileCommands21::
+include "src/data/backgrounds/background_tile_commands21.tilemap.encoded.asm"
+BackgroundTileCommands22::
+include "src/data/backgrounds/background_tile_commands22.tilemap.encoded.asm"
+BackgroundTileCommands01::
+include "src/data/backgrounds/background_tile_commands01.tilemap.encoded.asm"
+BackgroundTileCommands16::
+include "src/data/backgrounds/background_tile_commands16.tilemap.encoded.asm"
+BackgroundTileCommands17::
+include "src/data/backgrounds/background_tile_commands17.tilemap.encoded.asm"
+BackgroundTileCommands18::
+include "src/data/backgrounds/background_tile_commands18.tilemap.encoded.asm"
+BackgroundTileCommands19::
+include "src/data/backgrounds/background_tile_commands19.tilemap.encoded.asm"
+BackgroundTileCommands1A::
+include "src/data/backgrounds/background_tile_commands1_a.tilemap.encoded.asm"
+BackgroundTileCommands1B::
+include "src/data/backgrounds/background_tile_commands1_b.tilemap.encoded.asm"
+BackgroundTileCommands1C::
+BackgroundTileCommands1D::
+include "src/data/backgrounds/background_tile_commands1_c.tilemap.encoded.asm"
+BackgroundTileCommands14::
+include "src/data/backgrounds/background_tile_commands14.tilemap.encoded.asm"
+BackgroundTileCommands08::
+include "src/data/backgrounds/background_tile_commands08.tilemap.encoded.asm"
+BackgroundTileCommands04::
+include "src/data/backgrounds/background_tile_commands04.tilemap.encoded.asm"
+BackgroundTileCommands03::
+include "src/data/backgrounds/background_tile_commands03.tilemap.encoded.asm"
+BackgroundTileCommands05::
+include "src/data/backgrounds/background_tile_commands05.tilemap.encoded.asm"
+BackgroundTileCommands06::
+include "src/data/backgrounds/background_tile_commands06.tilemap.encoded.asm"
+BackgroundTileCommands0C::
+include "src/data/backgrounds/background_tile_commands0_c.tilemap.encoded.asm"
+BackgroundTileCommands02::
+include "src/data/backgrounds/background_tile_commands02.tilemap.encoded.asm"
+BackgroundTileCommands09::
+include "src/data/backgrounds/background_tile_commands09.tilemap.encoded.asm"
+BackgroundTileCommands0B::
+include "src/data/backgrounds/background_tile_commands0_b.tilemap.encoded.asm"
+BackgroundTileCommands0A::
+include "src/data/backgrounds/background_tile_commands0_a.tilemap.encoded.asm"
+BackgroundTileCommands0D::
+include "src/data/backgrounds/background_tile_commands0_d.tilemap.encoded.asm"
+BackgroundTileCommands0E::
+include "src/data/backgrounds/background_tile_commands0_e.tilemap.encoded.asm"
+BackgroundTileCommands25::
+include "src/data/backgrounds/background_tile_commands25.tilemap.encoded.asm"
+BackgroundTileCommands0F::
+include "src/data/backgrounds/background_tile_commands0_f.tilemap.encoded.asm"
+BackgroundTileCommands10::
+include "src/data/backgrounds/background_tile_commands10.tilemap.encoded.asm"
+BackgroundTileCommands11::
+include "src/data/backgrounds/background_tile_commands11.tilemap.encoded.asm"
+BackgroundTileCommands15::
+include "src/data/backgrounds/background_tile_commands15.tilemap.encoded.asm"
+BackgroundTileCommands12::
+include "src/data/backgrounds/background_tile_commands12.tilemap.encoded.asm"
+BackgroundTileCommands13::
+include "src/data/backgrounds/background_tile_commands13.tilemap.encoded.asm"
+BackgroundTileCommands23::
+include "src/data/backgrounds/background_tile_commands23.tilemap.encoded.asm"
 
 ; Maps and dialogs
 section "bank9",romx[$4000],bank[$09]

@@ -1,0 +1,41 @@
+; File generated automatically by `tools/generate_background_data.py`
+
+  db    $9C, $00, $5F, $7E ; draw row of 32x the same tile
+  db    $9C, $20, $5F, $7E ; draw row of 32x the same tile
+  db    $9C, $40, $5F, $7E ; draw row of 32x the same tile
+  db    $9C, $60, $5F, $7E ; draw row of 32x the same tile
+  db    $9C, $80, $5F, $7E ; draw row of 32x the same tile
+  db    $9C, $A0, $5F, $7E ; draw row of 32x the same tile
+  db    $9C, $C0, $5F, $7E ; draw row of 32x the same tile
+  db    $9C, $E0, $5F, $7E ; draw row of 32x the same tile
+  db    $9D, $00, $5F, $7E ; draw row of 32x the same tile
+  db    $9D, $20, $5F, $7E ; draw row of 32x the same tile
+  db    $9D, $40, $5F, $7E ; draw row of 32x the same tile
+  db    $9D, $60, $5F, $7E ; draw row of 32x the same tile
+  db    $9D, $80, $5F, $7E ; draw row of 32x the same tile
+  db    $9D, $A0, $5F, $7E ; draw row of 32x the same tile
+  db    $9D, $C0, $5F, $7E ; draw row of 32x the same tile
+  db    $9D, $E0, $5F, $7E ; draw row of 32x the same tile
+  db    $9E, $00, $5F, $7E ; draw row of 32x the same tile
+  db    $9E, $20, $5F, $7E ; draw row of 32x the same tile
+  db    $9E, $40, $5F, $7E ; draw row of 32x the same tile
+  db    $9E, $60, $5F, $7E ; draw row of 32x the same tile
+  db    $9E, $80, $5F, $7E ; draw row of 32x the same tile
+  db    $9E, $A0, $5F, $7E ; draw row of 32x the same tile
+  db    $9E, $C0, $5F, $7E ; draw row of 32x the same tile
+  db    $9E, $E0, $5F, $7E ; draw row of 32x the same tile
+  db    $9F, $00, $5F, $7E ; draw row of 32x the same tile
+  db    $9F, $20, $5F, $7E ; draw row of 32x the same tile
+  db    $9F, $40, $5F, $7E ; draw row of 32x the same tile
+  db    $9F, $60, $5F, $7E ; draw row of 32x the same tile
+  db    $9F, $80, $5F, $7E ; draw row of 32x the same tile
+  db    $9F, $A0, $5F, $7E ; draw row of 32x the same tile
+  db    $9F, $C0, $5F, $7E ; draw row of 32x the same tile
+  db    $9F, $E0, $5F, $7E ; draw row of 32x the same tile
+  db    $9C, $A9, $41, $7F ; draw row of 2x the same tile
+  db    $9C, $C8, $43, $7F ; draw row of 4x the same tile
+  db    $9C, $E7, $45, $7F ; draw row of 6x the same tile
+  db    $9D, $07, $45, $7F ; draw row of 6x the same tile
+  db    $9D, $28, $43, $7F ; draw row of 4x the same tile
+  db    $9D, $49, $41, $7F ; draw row of 2x the same tile
+  db    $00 ; end of draw commands

@@ -2,7 +2,7 @@
 #
 # Convert a range of data into hexadecimal assembly code.
 # Usage:
-#   tools/data_to_asm.py 04:4000 04:4010
+#   tools/convert_data_to_asm.py 04:4000 04:4010
 
 import argparse
 from lib.utils import parse_local_address, local_to_global

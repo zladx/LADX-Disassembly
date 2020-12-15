@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+#
+# Dump the music tracks data to readable ASM files.
+
 import sys
 
 

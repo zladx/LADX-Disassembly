@@ -3,8 +3,9 @@
 # Decode or encode BG tilemap data
 #
 # Usage:
-#  background_editor.py --decode marin_beach_tilemap.compressed
-#  background_editor.py --decode marin_beach.tilemap.compressed -o marin_beach.tilemap
+#  tools/convert_background.py --decode marin_beach.tilemap.compressed
+#  tools/convert_background.py --decode marin_beach.tilemap.compressed -o marin_beach.tilemap
+#  tools/convert_background.py --encode marin_beach-modified.tilemap -o marin_beach.tilemap.compressed
 
 import sys
 import argparse

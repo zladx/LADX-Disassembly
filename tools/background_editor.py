@@ -11,13 +11,13 @@ import argparse
 from textwrap import wrap
 from lib.background_coder import BackgroundCoder
 
-def write_result(bytes, outfile, wrapped=False):
+def write_result(bytes, outfile, wrap_count=None):
     if 'b' in outfile.mode:
         outfile.write(bytes)
     else:
         text = bytes.hex()
-        if wrapped:
-            text = "\n".join(wrap(text, 40))
+        if wrap_count:
+            text = "\n".join(wrap(text, wrap_count))
         outfile.write(text + "\n")
 
 if __name__ == "__main__":
@@ -25,6 +25,7 @@ if __name__ == "__main__":
     operation_args = arg_parser.add_argument_group('Operation').add_mutually_exclusive_group()
     operation_args.add_argument('--decode', '-d', nargs=1, type=str, metavar='encoded tilemap', help='encoded binary tilemap file to decode')
     operation_args.add_argument('--encode', '-e', nargs=1, type=str, metavar='tilemap', help='raw binary tilemap file to encode')
+    arg_parser.add_argument('--wrap', '-w', nargs=1, type=int, metavar='char_count', default=40, help='wrap the stdout output to a number of characters (40 by default; 0 to disable)')
     arg_parser.add_argument('--output', '-o', nargs=1, type=str, metavar='outfile', help='file to write the output to')
 
     args = arg_parser.parse_args()
@@ -44,11 +45,11 @@ if __name__ == "__main__":
         tilemap_bytes = BackgroundCoder.decode(data)
         for address in sorted(tilemap_bytes):
             result.append(tilemap_bytes[address])
-        write_result(result, outfile, wrapped=True)
+        write_result(result, outfile, wrap_count=args.wrap[0])
 
     elif args.encode:
         result = BackgroundCoder.encode(data)
-        write_result(result, outfile, wrapped=False)
+        write_result(result, outfile, wrap_count=args.wrap[0])
 
     outfile.close()
 

@@ -95,7 +95,7 @@ class BackgroundName:
         name = background_names[self.index]
         if name is None:
             return None
-        return f"{to_snake_case(name).replace('_tilemap', '')}.tilemap.encoded.{extension}"
+        return f"{to_snake_case(name).replace('_tilemap', '')}.tilemap{extension}"
 
 class PointersTableFormatter:
     @classmethod
@@ -152,6 +152,15 @@ class BackgroundCommandFormatter:
             raise RuntimeError("Unknown command: %s" % (command))
         return bytes
 
+def remove_all_dumped_files(background_table_parser, extension):
+    for index in range(len(background_table_parser.pointers)):
+        filename = BackgroundName(index).as_filename(extension)
+        if filename is None:
+            continue
+        filename_abs = os.path.join(target_dir, filename)
+        if os.path.exists(filename_abs):
+            os.remove(filename_abs)
+
 if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument("rompath", nargs="?", metavar="rompath", type=str)
@@ -178,18 +187,12 @@ if __name__ == "__main__":
 
         if args.format == ["asm"] or args.format is None:
             # Remove all previous files
-            for index in range(len(background_table_parser.pointers)):
-                filename = BackgroundName(index).as_filename('asm')
-                if filename is None:
-                    continue
-                filename_abs = os.path.join(target_dir, filename)
-                if os.path.exists(filename_abs):
-                    os.remove(filename_abs)
+            remove_all_dumped_files(background_table_parser, '.asm')
 
             # Write background files as asm files
             for index, command in enumerate(background_table_parser.list):
                 pointer_index = background_table_parser.pointers_for_command(command)[0].index
-                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename('asm'))
+                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename('.asm'))
                 with open(filename, 'a+') as background_file:
                     if background_file.tell() == 0:
                         background_file.write(disclaimer)
@@ -198,18 +201,12 @@ if __name__ == "__main__":
 
         elif args.format == ["bin"]:
             # Remove all previous files
-            for index in range(len(background_table_parser.pointers)):
-                filename = BackgroundName(index).as_filename('bin')
-                if filename is None:
-                    continue
-                filename_abs = os.path.join(target_dir, filename)
-                if os.path.exists(filename_abs):
-                    os.remove(filename_abs)
+            remove_all_dumped_files(background_table_parser, '.encoded')
 
             # Write background files as binary files
             for index, command in enumerate(background_table_parser.list):
                 pointer_index = background_table_parser.pointers_for_command(command)[0].index
-                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename('bin'))
+                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename('.encoded'))
                 with open(filename, 'ab+') as background_file:
                     data = BackgroundCommandFormatter.to_bytes(command)
                     background_file.write(data)

@@ -109,8 +109,8 @@ BackgroundTileCommands06::
 incbin "src/data/backgrounds/background_tile_commands06.tilemap.encoded.bin"
 MenuFileCopyTilemap::
 incbin "src/data/backgrounds/menu_file_copy.tilemap.encoded.bin"
-BackgroundTileCommands02::
-incbin "src/data/backgrounds/background_tile_commands02.tilemap.encoded.bin"
+InventoryTilemap::
+incbin "src/data/backgrounds/inventory.tilemap.encoded.bin"
 BackgroundTileCommands09::
 incbin "src/data/backgrounds/background_tile_commands09.tilemap.encoded.bin"
 InventoryDebugTilemap::

@@ -37,7 +37,7 @@ background_descriptors = [
 background_names = [
   None,                              #00
   'CreditsIslandTilemap',            #01
-  'BackgroundTileCommands02',        #02
+  'InventoryTilemap',                #02
   'BackgroundTileCommands03',        #03
   'MenuFileSelectionTilemap',        #04
   'MenuFileCreationTilemap',         #05

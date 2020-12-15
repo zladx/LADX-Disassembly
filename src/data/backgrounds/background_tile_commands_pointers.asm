@@ -1,7 +1,7 @@
 BackgroundTileCommandsPointersTable::
 ._00 dw $0000
 ._01 dw CreditsIslandTilemap             ; $56CC
-._02 dw BackgroundTileCommands02         ; $6748
+._02 dw InventoryTilemap                 ; $6748
 ._03 dw BackgroundTileCommands03         ; $6336
 ._04 dw MenuFileSelectionTilemap         ; $6328
 ._05 dw MenuFileCreationTilemap          ; $644D

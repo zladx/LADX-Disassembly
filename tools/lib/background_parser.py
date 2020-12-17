@@ -5,7 +5,7 @@ from lib.utils import global_to_local
 BackgroundTableDescriptor = namedtuple('BackgroundTableDescriptor', ['name', 'address', 'length', 'data'])
 
 # Describe the location of a tilemap
-BackgroundDescriptor = namedtuple('BackgroundDescriptor', ['address', 'length'])
+BackgroundDescriptor = namedtuple('BackgroundDescriptor', ['address'])
 
 # Represent a pointer in a pointers table
 Pointer = namedtuple('Pointer', ['index', 'address'])
@@ -73,14 +73,18 @@ class BackgroundListsParser:
     def _parse(self, rom, descriptor):
         """Walk the lists, and parse data for each list"""
         address = descriptor.address
-        end_address = descriptor.address + descriptor.length
 
-        while address < end_address:
-            address_high = rom[address]
-            if address_high == END_OF_LIST:
+        while True:
+            if rom[address] == END_OF_LIST:
                 self.list.append(BackgroundCommandEnd(address))
-                address += 1
-                continue
+                if rom[address+1] == END_OF_LIST:
+                    # Consider two consecutive END commands to mark the end of the lists
+                    break
+                else:
+                    address += 1
+                    continue
+
+            address_high = rom[address]
             address_low = rom[address+1]
             draw_address = (address_high << 8) | address_low
             command = rom[address+2] & 0xC0

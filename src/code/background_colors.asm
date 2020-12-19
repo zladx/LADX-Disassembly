@@ -149,5 +149,3 @@ jr_024_7436:
     xor  a                                        ; $7473: $AF
     ld   [wDDD6], a                               ; $7474: $EA $D6 $DD
     ret                                           ; $7477: $C9
-
-include "data/backgrounds/palettes.asm"

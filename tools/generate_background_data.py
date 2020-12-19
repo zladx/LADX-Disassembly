@@ -6,6 +6,7 @@ import os
 import argparse
 import re
 from textwrap import dedent
+from itertools import groupby
 from lib.background_parser import *
 from lib.utils import BANK, global_to_local
 
@@ -172,10 +173,14 @@ if __name__ == "__main__":
     disclaimer = "; File generated automatically by `tools/generate_background_data.py`\n\n"
 
     for background_descriptor in background_descriptors:
+        #
         # Parse background table and lists
+        #
         background_table_parser = BackgroundTableParser(rom_path, background_descriptor)
 
+        #
         # Write the pointers table
+        #
         with open(os.path.join(target_dir, background_table_parser.name + '_pointers.asm'), 'w') as pointers_file:
             pointers_file.write(PointersTableFormatter.to_asm(background_table_parser.name))
 
@@ -184,14 +189,56 @@ if __name__ == "__main__":
                 pointers_file.write(PointerFormatter.to_asm(background_table_parser.name, pointer))
             pointers_file.write("\n")
 
-        if args.format == ["asm"] or args.format is None:
-            # Remove all previous files
-            remove_all_dumped_files(background_table_parser, '.asm')
+        #
+        # Write the tilemaps files list
+        #
 
+        # Make a list of all unique pointers, in the order in which they appear in the commands list
+        pointers = set()
+        for index, command in enumerate(background_table_parser.list):
+            pointers.update(background_table_parser.pointers_for_command(command))
+
+        # Group pointers by similar target address
+        sorted_pointers = sorted(list(pointers), key=lambda p: p.address)
+        pointer_groups = groupby(sorted_pointers, lambda p: p.address)
+
+        # Compute the target list filename
+        extensions_for_format = {
+            "asm": ".asm",
+            "bin": ".encoded"
+        }
+        tilemap_extension = extensions_for_format[args.format[0]]
+        list_filename = os.path.join(target_dir, 'backgrounds_list.asm')
+
+        with open(list_filename, 'w') as list_file:
+            # For each group of pointers at the same address…
+            for address, pointers in pointer_groups:
+                immutable_pointers = list(pointers)
+                # Write the labels
+                labels = map(lambda p: BackgroundName(p.index).as_label(), immutable_pointers)
+                unique_labels = set(labels)
+                list_file.write("\n".join(f"{label}::\n" for label in unique_labels))
+                # Write the target filename include
+                # (always use a path relative to 'src/')
+                tilemap_name = BackgroundName(immutable_pointers[0].index).as_filename(tilemap_extension)
+                tilemap_path = os.path.join(target_dir, tilemap_name).split("src/")[1]
+                include = "include" if args.format[0] == "asm" else "incbin"
+                list_file.write(f"{include} \"{tilemap_path}\"\n")
+                # FIXME: maybe use "include" instead of "incbin"
+
+        #
+        # Write the tilemap files
+        #
+
+        # Remove all previous files
+        if tilemap_extension:
+            remove_all_dumped_files(background_table_parser, tilemap_extension)
+
+        if args.format == ["asm"] or args.format is None:
             # Write background files as asm files
             for index, command in enumerate(background_table_parser.list):
                 pointer_index = background_table_parser.pointers_for_command(command)[0].index
-                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename('.asm'))
+                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename(tilemap_extension))
                 with open(filename, 'a+') as background_file:
                     if background_file.tell() == 0:
                         background_file.write(disclaimer)
@@ -199,13 +246,10 @@ if __name__ == "__main__":
                     background_file.write(asm)
 
         elif args.format == ["bin"]:
-            # Remove all previous files
-            remove_all_dumped_files(background_table_parser, '.encoded')
-
             # Write background files as binary files
             for index, command in enumerate(background_table_parser.list):
                 pointer_index = background_table_parser.pointers_for_command(command)[0].index
-                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename('.encoded'))
+                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename(tilemap_extension))
                 with open(filename, 'ab+') as background_file:
                     data = BackgroundCommandFormatter.to_bytes(command)
                     background_file.write(data)

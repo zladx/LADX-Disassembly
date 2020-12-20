@@ -165,7 +165,7 @@ if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument("rompath", nargs="?", metavar="rompath", type=str)
     arg_parser.add_argument("target", nargs="?", metavar="target", type=str)
-    arg_parser.add_argument("--format", nargs=1, metavar="format", choices=['bin', 'asm', 'decoded'], type=str)
+    arg_parser.add_argument("--format", nargs=1, metavar="format", choices=['bin', 'asm'], type=str)
 
     args = arg_parser.parse_args()
     rom_path = args.rompath or 'Zelda.gbc'
@@ -224,7 +224,6 @@ if __name__ == "__main__":
                 tilemap_path = os.path.join(target_dir, tilemap_name).split("src/")[1]
                 include = "include" if args.format[0] == "asm" else "incbin"
                 list_file.write(f"{include} \"{tilemap_path}\"\n")
-                # FIXME: maybe use "include" instead of "incbin"
 
         #
         # Write the tilemap files
@@ -253,34 +252,4 @@ if __name__ == "__main__":
                 with open(filename, 'ab+') as background_file:
                     data = BackgroundCommandFormatter.to_bytes(command)
                     background_file.write(data)
-
-        elif args.format == ["decoded"]:
-            mem = {}
-            for command in background_table_parser.list:
-                for pointer in background_table_parser.pointers:
-                    if (pointer.address & 0x3FFF) == (command.address & 0x3FFF):
-                        label = "{}{:02X}".format(to_camel_case(background_table_parser.name), pointer.index)
-                        print(f"{label}:")
-                if isinstance(command, BackgroundCommandEnd) and mem:
-                    start = min(mem.keys()) & 0xFFE0
-                    end = (max(mem.keys()) | 0x001F) + 1
-                    for row in range(start, end, 0x20):
-                        print(("".join(map(lambda addr: "{:02X}".format(mem[addr]) if addr in mem else "  ", range(row, row+0x20)))).rstrip())
-                    mem = {}
-                elif isinstance(command, BackgroundCommandSingle):
-                    address = command.target_address
-                    for n in range(command.amount):
-                        mem[address] = command.data
-                        if command.vertical:
-                            address += 0x20
-                        else:
-                            address += 1
-                elif isinstance(command, BackgroundCommandMultiple):
-                    address = command.target_address
-                    for n in range(len(command.data)):
-                        mem[address] = command.data[n]
-                        if command.vertical:
-                            address += 0x20
-                        else:
-                            address += 1
 

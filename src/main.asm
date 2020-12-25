@@ -67,7 +67,7 @@ ColorDungeonObjectsTilemap::
 include "data/objects_tilemaps/color_dungeon.asm"
 include "data/objects/physics.asm"
 BGTilemaps::
-include "data/backgrounds/background_tile_commands.asm"
+include "data/backgrounds/backgrounds_list.asm"
 
 ; Maps and dialogs
 section "bank9",romx[$4000],bank[$09]
@@ -342,6 +342,7 @@ include "code/bank23.asm"
 section "bank24",romx[$4000],bank[$24]
 include "data/bg_attributes/indoors_b.asm"
 include "code/background_colors.asm"
+include "data/backgrounds/palettes.asm"
 include "code/overworld_macros.asm"
 
 section "bank25",romx[$4000],bank[$25]

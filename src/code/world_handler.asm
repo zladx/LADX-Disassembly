@@ -39,11 +39,11 @@ IF !__PATCH_5__
     ; POI: This is where debug flag 2 messes up the subscreen
     ld   a, [ROM_DebugTool2]                      ; $439B: $FA $04 $00
     and  a                                        ; $439E: $A7
-    jr   z, jr_001_43A7                           ; $439F: $28 $06
+    jr   z, .debugToolDisabled                    ; $439F: $28 $06
     ld   a, $0B                                   ; $43A1: $3E $0B
     ld   [wBGMapToLoad], a                        ; $43A3: $EA $FF $D6
     ret                                           ; $43A6: $C9
-jr_001_43A7::
+.debugToolDisabled
 ENDC
     ld   a, [wIsIndoor]                           ; $43A7: $FA $A5 $DB
     and  a                                        ; $43AA: $A7

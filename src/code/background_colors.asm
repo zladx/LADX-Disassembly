@@ -2,7 +2,7 @@
 ; Background Attributes
 ; -------------------------------------------------------
 
-ClearBGMap0Attributes::
+FillBGMapAttributesWhite::
     ldh  a, [hIsGBC]                              ; $5C00: $F0 $FE
     and  a                                        ; $5C02: $A7
     ret  z                                        ; $5C03: $C8
@@ -149,5 +149,3 @@ jr_024_7436:
     xor  a                                        ; $7473: $AF
     ld   [wDDD6], a                               ; $7474: $EA $D6 $DD
     ret                                           ; $7477: $C9
-
-include "data/backgrounds/palettes.asm"

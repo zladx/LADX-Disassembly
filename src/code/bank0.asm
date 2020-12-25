@@ -4406,14 +4406,14 @@ LCDOff::
 LoadTileset0F_trampoline::
     jpsw LoadTileset0F                            ; $28E8: $3E $01 $CD $0C $08 $C3 $E3 $6C
 
-; Fill the Background Map with all 7Es
-FillBGMapWith7E::
+; Fill the Background Map with black tiles
+FillBGMapBlack::
     ld   a, $7E    ; value                        ; $28F0: $3E $7E
     ld   bc, $400 ; count                         ; $28F2: $01 $00 $04
     jr   FillBGMap                                ; $28F5: $18 $05
 
-; Fill the Background Map with all 7Fs
-ClearBGMap::
+; Fill the Background Map with white tiles
+FillBGMapWhite::
     ld   a, $7F    ; value                        ; $28F7: $3E $7F
     ld   bc, $800 ; count                         ; $28F9: $01 $00 $08
     ; fallthrough to FillBGMap

@@ -186,10 +186,10 @@ IntroSceneStage2Handler::
     and  a                                        ; $6F3B: $A7
     jr   z, .notGBC                               ; $6F3C: $28 $04
     ld   a, $25                                   ; $6F3E: $3E $25
-    jr   .gbc                                     ; $6F40: $18 $02
+    jr   .bgMapEnd                                ; $6F40: $18 $02
 .notGBC
     ld   a, $0E                                   ; $6F42: $3E $0E
-.gbc
+.bgMapEnd
 
     ld   [wBGMapToLoad], a                        ; $6F44: $EA $FF $D6
     ld   a, $1C                                   ; $6F47: $3E $1C

@@ -1,18 +1,18 @@
 from collections import namedtuple
+from lib.utils import global_to_local
 
-# Describe the location of a entities pointers table
+# Describe the location of a tilemap pointers table
 BackgroundTableDescriptor = namedtuple('BackgroundTableDescriptor', ['name', 'address', 'length', 'data'])
 
-# Describe the location of a list of entities
-BackgroundDescriptor = namedtuple('BackgroundDescriptor', ['address', 'length'])
+# Describe the location of a tilemap
+BackgroundDescriptor = namedtuple('BackgroundDescriptor', ['address'])
 
 # Represent a pointer in a pointers table
 Pointer = namedtuple('Pointer', ['index', 'address'])
 
-
 class BackgroundTableParser:
     """
-    Parse a entities pointers table and its associated entities from a EntitiesTableDescriptor.
+    Parse a tilemap pointers table and its associated tilemaps from a BackgroundTableDescriptor.
     """
     def __init__(self, rom_path, table_descriptor):
         self.table_descriptor = table_descriptor
@@ -23,9 +23,19 @@ class BackgroundTableParser:
             self.pointers = self._parse_pointers_table(rom, table_descriptor)
             self.list = BackgroundListsParser(rom, table_descriptor.data).list
 
-    def pointers_for_list(self, list):
-        local_list_address = list.address - (0x16 * 0x4000) + 0x4000
-        return [pointer for pointer in self.pointers if pointer.address == local_list_address]
+    def pointers_for_command(self, command):
+        nearest_previous_pointer = None
+        local_command_address = global_to_local(command.address).offset
+        sorted_pointers = sorted(self.pointers, key=lambda p: p.address)
+        #l_p = map(lambda p: f"{p.address:04X}", sorted_pointers)
+        #print(f"{local_command_address:04X}")
+        #print(list(l_p))
+        for pointer in reversed(sorted_pointers):
+            if pointer.address <= local_command_address:
+                nearest_previous_pointer = pointer
+                break
+
+        return [pointer for pointer in self.pointers if pointer.address == nearest_previous_pointer.address]
 
     def _parse_pointers_table(self, rom, table_descriptor):
         """Return an array of words in the pointers table"""
@@ -63,14 +73,18 @@ class BackgroundListsParser:
     def _parse(self, rom, descriptor):
         """Walk the lists, and parse data for each list"""
         address = descriptor.address
-        end_address = descriptor.address + descriptor.length
 
-        while address < end_address:
-            address_high = rom[address]
-            if address_high == END_OF_LIST:
+        while True:
+            if rom[address] == END_OF_LIST:
                 self.list.append(BackgroundCommandEnd(address))
-                address += 1
-                continue
+                if rom[address+1] == END_OF_LIST:
+                    # Consider two consecutive END commands to mark the end of the lists
+                    break
+                else:
+                    address += 1
+                    continue
+
+            address_high = rom[address]
             address_low = rom[address+1]
             draw_address = (address_high << 8) | address_low
             command = rom[address+2] & 0xC0

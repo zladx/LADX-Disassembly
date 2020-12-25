@@ -138,6 +138,10 @@ InterruptSerial::
 ; If a tileset is requested, it is copied to VRAM.
 ; Otherwise, the requested BG map is copied to VRAM.
 ;
+; NB: this function is not called from the vblank interrupt handler,
+; but by the render loop, outside of the vblank period.
+; (This is why it needs to unlock access to VRAM by disabling the LCD screen.)
+;
 ; Inputs:
 ;  - wTilesetToLoad: index of the tileset to load
 ;  - wBGMapToLoad:   index of the BG map to load

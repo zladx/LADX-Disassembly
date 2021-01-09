@@ -31,7 +31,7 @@ class BackgroundCoder:
         return tilemap_bytes
 
     @staticmethod
-    def encode(tilemap_bytes, tilemap_location=0x9800, tilemap_width=20):
+    def encode(bytes, tilemap_location=0x9800, tilemap_width=20):
         """
         Encode a raw BG tilemap to the LADX commands format.
 
@@ -47,16 +47,15 @@ class BackgroundCoder:
 
         # Split the tilemap into chunks
         chunk_size = tilemap_width
-        chunks = [tilemap_bytes[i:i + chunk_size] for i in range(0, len(tilemap_bytes), chunk_size)]
+        chunks = [bytes[i:i + chunk_size] for i in range(0, len(bytes), chunk_size)]
 
         encoded_bytes = bytearray()
         address = tilemap_location
 
-        for i, chunk in enumerate(chunks):
-            count = len(chunk)
+        for chunk in chunks:
             encoded_bytes.append(address >> 8)
             encoded_bytes.append(address & 0xFF)
-            encoded_bytes.append(count - 1)
+            encoded_bytes.append(len(chunk) - 1)
             encoded_bytes.extend(chunk)
             address += 0x20
 

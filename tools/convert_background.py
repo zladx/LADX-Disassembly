@@ -29,13 +29,16 @@ if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
     options_parser = argparse.ArgumentParser(add_help=False)
     options_parser.add_argument('--output', '-o', type=str, metavar='outfile', action='store', help='file to write the output to')
-    options_parser.add_argument('--wrap', '-w', type=int, metavar='char_count', default=40, action='store', help='wrap the stdout output to a number of characters (40 by default; 0 to disable)')
 
     operations_subparser = arg_parser.add_subparsers(title='commands', dest='command', required=True)
     decoding_parser = operations_subparser.add_parser('decode',  parents=[options_parser], help='convert a tilemap encoded with the ZLADX format to a raw tilemap')
     decoding_parser.add_argument('infile', type=str, help='encoded tilemap file to decode')
+    decoding_parser.add_argument('--wrap', '-w', type=int, metavar='char_count', default=40, action='store', help='wrap the stdout output to a number of characters (40 by default; 0 to disable)')
+
     encoding_parser = operations_subparser.add_parser('encode',  parents=[options_parser], help='convert a raw tilemap to the encoded ZLADX format')
     encoding_parser.add_argument('infile', type=str, help='raw tilemap file to encode')
+    encoding_parser.add_argument('--width', type=int, metavar="tiles_count", default=20, action='store', help='number of tiles in the tilemap width')
+    encoding_parser.add_argument('--location', type=int, metavar="VRAM_address", default=0x9800, action='store', help='start address of the tilemap in VRAM')
 
     args = arg_parser.parse_args()
 
@@ -52,11 +55,8 @@ if __name__ == "__main__":
             result.append(tilemap_bytes[address])
         write_result(result, outfile, wrap_count=args.wrap)
 
-    elif args.encode:
-        # TODO: allow to specify the tilemap location and width from command-line argument
-        # (For now defaults of location=0x9800 and width=20 are assumed.)
-        result = BackgroundCoder.encode(data)
-        write_result(result, outfile, wrap_count=args.wrap)
+    elif args.command == 'encode':
+        result = BackgroundCoder.encode(data, args.location, args.width)
+        write_result(result, outfile)
 
     outfile.close()
-

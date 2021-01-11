@@ -12,10 +12,10 @@ To make change to a tilemap:
 
 1. Decode the tilemap:
     ```
-    tools/convert_background.py --decode src/data/backgrounds/marin_beach.tilemap.encoded --output src/data/backgrounds/marin_beach.tilemap
+    tools/convert_background.py decode src/data/backgrounds/marin_beach.tilemap.encoded --output src/data/backgrounds/marin_beach.tilemap
     ```
 2. Edit the tilemap, using your favorite editor.
 3. Re-encode the modified tilemap:
     ```
-    tools/convert_background.py --encode src/data/backgrounds/marin_beach.tilemap --output src/data/backgrounds/marin_beach.tilemap.encoded
+    tools/convert_background.py encode src/data/backgrounds/marin_beach.tilemap --output src/data/backgrounds/marin_beach.tilemap.encoded
     ```

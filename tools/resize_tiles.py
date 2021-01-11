@@ -6,7 +6,7 @@ import argparse
 import os
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
-gfx_py = "python2 " + os.path.join(dir_path, 'pokemontools', 'gfx.py')
+gfx_py = "python3 " + os.path.join(dir_path, 'gfx', 'gfx.py')
 
 parser = argparse.ArgumentParser(description='Resize a PNG file containing tiles to the given width or height')
 parser.add_argument('--width', type=lambda x: int(x, 10), metavar='target_width', default=32, help='Target width of the png')

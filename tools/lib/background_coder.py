@@ -30,7 +30,8 @@ class BackgroundCoder:
 
         return tilemap_bytes
 
-    def encode(tilemap_bytes):
+    @staticmethod
+    def encode(bytes, tilemap_location=0x9800, tilemap_width=20):
         """
         Encode a raw BG tilemap to the LADX commands format.
 
@@ -43,24 +44,20 @@ class BackgroundCoder:
           compressed tilemap. Original tilemaps were probably hand-coded, and so cannot
           be reproduced byte-for-byte by this encoder.
         """
-        result = bytearray()
-        low = min(self.tiles.keys())
-        high = max(self.tiles.keys()) + 1
-        while low < high:
-            if low not in self.tiles:
-                low += 1
-                continue
-            count = 1
-            while low + count in self.tiles and count < 255:
-                count += 1
-            result.append(low >> 8)
-            result.append(low & 0xFF)
-            result.append(count - 1)
-            for n in range(count):
-                result.append(self.tiles[low + n])
-            low += count
-        result.append(0x00)
-        if self.__is_attributes:
-            rom.background_attributes[self.__index] = result
-        else:
-            rom.background_tiles[self.__index] = result
+
+        # Split the tilemap into chunks
+        chunk_size = tilemap_width
+        chunks = [bytes[i:i + chunk_size] for i in range(0, len(bytes), chunk_size)]
+
+        encoded_bytes = bytearray()
+        address = tilemap_location
+
+        for chunk in chunks:
+            encoded_bytes.append(address >> 8)
+            encoded_bytes.append(address & 0xFF)
+            encoded_bytes.append(len(chunk) - 1)
+            encoded_bytes.extend(chunk)
+            address += 0x20
+
+        encoded_bytes.append(0x00)
+        return encoded_bytes

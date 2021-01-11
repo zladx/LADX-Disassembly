@@ -42,7 +42,7 @@ background_names = [
   'MenuFileSelectionTilemap',        #04
   'MenuFileCreationTilemap',         #05
   'Tilemap06',                       #06
-  None,                              #07
+  'Tilemap07',                       #07
   'WorldMapTilemap',                 #08
   'Tilemap09',                       #09 (inventory no minimap?)
   'GameOverTilemap',                 #0A
@@ -106,7 +106,8 @@ class PointerFormatter:
     @classmethod
     def to_asm(cls, table_name, pointer):
         label = BackgroundName(pointer.index).as_label()
-        if label:
+        is_pointing_to_rom = (pointer.address < 0x8000)
+        if label and is_pointing_to_rom:
           return f"._{pointer.index:02X} dw {label.ljust(32, ' ')} ; ${pointer.address:04X}\n"
         else:
           return f"._{pointer.index:02X} dw ${pointer.address:04X}\n"

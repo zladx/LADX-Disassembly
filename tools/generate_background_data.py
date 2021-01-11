@@ -88,8 +88,11 @@ class BackgroundName:
     def __init__(self, index):
         self.index = index
 
-    def as_label(self):
-        return background_names[self.index]
+    def as_label(self, content_type):
+        name = background_names[self.index]
+        if name is None:
+            return None
+        return name.replace('Tilemap', content_type.capitalize())
 
     def as_filename(self, extension):
         name = background_names[self.index]
@@ -104,8 +107,8 @@ class PointersTableFormatter:
 
 class PointerFormatter:
     @classmethod
-    def to_asm(cls, table_name, pointer):
-        label = BackgroundName(pointer.index).as_label()
+    def to_asm(cls, table_name, content_type, pointer):
+        label = BackgroundName(pointer.index).as_label(content_type)
         is_pointing_to_rom = (pointer.address < 0x8000)
         if label and is_pointing_to_rom:
           return f"._{pointer.index:02X} dw {label.ljust(32, ' ')} ; ${pointer.address:04X}\n"
@@ -180,6 +183,16 @@ if __name__ == "__main__":
         background_table_parser = BackgroundTableParser(rom_path, background_descriptor)
 
         #
+        # Compute the files type and extension
+        #
+        content_type = re.sub('s$', '', background_table_parser.name)
+        extensions_for_format = {
+            "asm": f"{content_type}.asm",
+            "bin": f"{content_type}.encoded"
+        }
+        content_file_extension = extensions_for_format[args.format[0]]
+
+        #
         # Write the pointers table
         #
         with open(os.path.join(target_dir, background_table_parser.name + '_pointers.asm'), 'w') as pointers_file:
@@ -187,7 +200,7 @@ if __name__ == "__main__":
 
             # Append to the pointers file
             for index, pointer in enumerate(background_table_parser.pointers):
-                pointers_file.write(PointerFormatter.to_asm(background_table_parser.name, pointer))
+                pointers_file.write(PointerFormatter.to_asm(background_table_parser.name, content_type, pointer))
             pointers_file.write("\n")
 
         #
@@ -204,12 +217,6 @@ if __name__ == "__main__":
         pointer_groups = groupby(sorted_pointers, lambda p: p.address)
 
         # Compute the target list filename
-        singular_file_type = re.sub('s$', '', background_table_parser.name)
-        extensions_for_format = {
-            "asm": f"{singular_file_type}.asm",
-            "bin": f"{singular_file_type}.encoded"
-        }
-        content_file_extension = extensions_for_format[args.format[0]]
         list_filename = os.path.join(target_dir, f"{background_table_parser.name}_list.asm")
 
         with open(list_filename, 'w') as list_file:
@@ -217,7 +224,7 @@ if __name__ == "__main__":
             for address, pointers in pointer_groups:
                 immutable_pointers = list(pointers)
                 # Write the labels
-                labels = map(lambda p: BackgroundName(p.index).as_label(), immutable_pointers)
+                labels = map(lambda p: BackgroundName(p.index).as_label(content_type), immutable_pointers)
                 unique_labels = set(labels)
                 list_file.write("\n".join(f"{label}::\n" for label in unique_labels))
                 # Write the target filename include

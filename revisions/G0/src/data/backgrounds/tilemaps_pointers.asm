@@ -1,14 +1,14 @@
-BackgroundTileCommandsPointersTable::
+TilemapsPointersTable::
 ._00 dw $0000
 ._01 dw CreditsIslandTilemap             ; $5D69
 ._02 dw InventoryTilemap                 ; $6DFD
-._03 dw BackgroundTileCommands03         ; $69D5
+._03 dw Tilemap03                        ; $69D5
 ._04 dw MenuFileSelectionTilemap         ; $69C5
 ._05 dw MenuFileCreationTilemap          ; $6AD2
-._06 dw BackgroundTileCommands06         ; $6C21
+._06 dw Tilemap06                        ; $6C21
 ._07 dw $D651
 ._08 dw WorldMapTilemap                  ; $6986
-._09 dw BackgroundTileCommands09         ; $6E7D
+._09 dw Tilemap09                        ; $6E7D
 ._0A dw GameOverTilemap                  ; $6FBF
 ._0B dw InventoryDebugTilemap            ; $6F26
 ._0C dw MenuFileCopyTilemap              ; $6D07

@@ -4,7 +4,7 @@
 
 ; Contains pointers to wRequests data.
 ; (The requests themselves load data in bank 8.)
-include "data/backgrounds/background_tile_commands_pointers.asm"
+include "data/backgrounds/tilemaps_pointers.asm"
 
 ; Retrieve the address of a wRequest for loading a given background.
 ; Input:
@@ -12,7 +12,7 @@ include "data/backgrounds/background_tile_commands_pointers.asm"
 ; Returns:
 ;   de   an address to a wRequest for loading BG data
 GetBGCopyRequest::
-    ld   hl, BackgroundTileCommandsPointersTable  ; $4577: $21 $2B $45
+    ld   hl, TilemapsPointersTable                ; $4577: $21 $2B $45
     ld   b, $00                                   ; $457A: $06 $00
     ld   a, [wBGMapToLoad]                        ; $457C: $FA $FF $D6
     sla  a                                        ; $457F: $CB $27

@@ -12,7 +12,7 @@ from lib.utils import BANK, global_to_local
 
 background_descriptors = [
     BackgroundTableDescriptor(
-        name = 'background_tile_commands',
+        name = 'tilemaps',
         address = BANK(0x20) + 0x052B,
         length = 0x4C,
         data = BackgroundDescriptor(
@@ -24,7 +24,7 @@ background_descriptors = [
     #  so we need to split the output into multiple files and make sure not to decode any code.
     #  But we only need a single pointer list.
     #BackgroundTableDescriptor(
-    #    name = 'background_attributes',
+    #    name = 'attrmaps',
     #    address = BANK(0x24) + 0x1C4B,
     #    length = 0x4C,
     #    data = BackgroundDescriptor(
@@ -38,13 +38,13 @@ background_names = [
   None,                              #00
   'CreditsIslandTilemap',            #01
   'InventoryTilemap',                #02
-  'BackgroundTileCommands03',        #03
+  'Tilemap03',                       #03
   'MenuFileSelectionTilemap',        #04
   'MenuFileCreationTilemap',         #05
-  'BackgroundTileCommands06',        #06
+  'Tilemap06',                       #06
   None,                              #07
   'WorldMapTilemap',                 #08
-  'BackgroundTileCommands09',        #09 (inventory no minimap?)
+  'Tilemap09',                       #09 (inventory no minimap?)
   'GameOverTilemap',                 #0A
   'InventoryDebugTilemap',           #0B
   'MenuFileCopyTilemap',             #0C
@@ -208,7 +208,7 @@ if __name__ == "__main__":
             "bin": ".encoded"
         }
         tilemap_extension = extensions_for_format[args.format[0]]
-        list_filename = os.path.join(target_dir, 'backgrounds_list.asm')
+        list_filename = os.path.join(target_dir, f"{background_table_parser.name}_list.asm")
 
         with open(list_filename, 'w') as list_file:
             # For each group of pointers at the same address…

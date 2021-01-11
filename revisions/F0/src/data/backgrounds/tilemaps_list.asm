@@ -1,3 +1,11 @@
+FaceShrineMuralTilemap::
+incbin "data/backgrounds/face_shrine_mural.tilemap.encoded"
+PeachTilemap::
+incbin "data/backgrounds/peach.tilemap.encoded"
+MarinBeachTilemap::
+incbin "data/backgrounds/marin_beach.tilemap.encoded"
+SchulePaintingTilemap::
+incbin "data/backgrounds/schule_painting.tilemap.encoded"
 EaglesTowerCollapseTilemap::
 incbin "data/backgrounds/eagles_tower_collapse.tilemap.encoded"
 CreditsKidsTilemap::
@@ -32,18 +40,18 @@ WorldMapTilemap::
 incbin "data/backgrounds/world_map.tilemap.encoded"
 MenuFileSelectionTilemap::
 incbin "data/backgrounds/menu_file_selection.tilemap.encoded"
-BackgroundTileCommands03::
-incbin "data/backgrounds/background_tile_commands03.tilemap.encoded"
+Tilemap03::
+incbin "data/backgrounds/tilemap03.tilemap.encoded"
 MenuFileCreationTilemap::
 incbin "data/backgrounds/menu_file_creation.tilemap.encoded"
-BackgroundTileCommands06::
-incbin "data/backgrounds/background_tile_commands06.tilemap.encoded"
+Tilemap06::
+incbin "data/backgrounds/tilemap06.tilemap.encoded"
 MenuFileCopyTilemap::
 incbin "data/backgrounds/menu_file_copy.tilemap.encoded"
 InventoryTilemap::
 incbin "data/backgrounds/inventory.tilemap.encoded"
-BackgroundTileCommands09::
-incbin "data/backgrounds/background_tile_commands09.tilemap.encoded"
+Tilemap09::
+incbin "data/backgrounds/tilemap09.tilemap.encoded"
 InventoryDebugTilemap::
 incbin "data/backgrounds/inventory_debug.tilemap.encoded"
 GameOverTilemap::
@@ -60,11 +68,3 @@ IntroBeachTilemap::
 incbin "data/backgrounds/intro_beach.tilemap.encoded"
 TitleTilemap::
 incbin "data/backgrounds/title.tilemap.encoded"
-FaceShrineMuralTilemap::
-incbin "data/backgrounds/face_shrine_mural.tilemap.encoded"
-PeachTilemap::
-incbin "data/backgrounds/peach.tilemap.encoded"
-MarinBeachTilemap::
-incbin "data/backgrounds/marin_beach.tilemap.encoded"
-SchulePaintingTilemap::
-incbin "data/backgrounds/schule_painting.tilemap.encoded"

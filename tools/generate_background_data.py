@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Parse the ROM, and output asm files with the background tilemaps tables and data.
+# Parse the US v1.0 ROM, and output asm files with the background tilemaps tables and data.
 
 import os
 import argparse
@@ -95,7 +95,7 @@ class BackgroundName:
         name = background_names[self.index]
         if name is None:
             return None
-        return f"{to_snake_case(name).replace('_tilemap', '')}.tilemap{extension}"
+        return f"{to_snake_case(name).replace('_tilemap', '')}.{extension}"
 
 class PointersTableFormatter:
     @classmethod
@@ -190,7 +190,7 @@ if __name__ == "__main__":
             pointers_file.write("\n")
 
         #
-        # Write the tilemaps files list
+        # Write the files include list
         #
 
         # Make a list of all unique pointers, in the order in which they appear in the commands list
@@ -203,11 +203,12 @@ if __name__ == "__main__":
         pointer_groups = groupby(sorted_pointers, lambda p: p.address)
 
         # Compute the target list filename
+        singular_file_type = re.sub('s$', '', background_table_parser.name)
         extensions_for_format = {
-            "asm": ".asm",
-            "bin": ".encoded"
+            "asm": f"{singular_file_type}.asm",
+            "bin": f"{singular_file_type}.encoded"
         }
-        tilemap_extension = extensions_for_format[args.format[0]]
+        content_file_extension = extensions_for_format[args.format[0]]
         list_filename = os.path.join(target_dir, f"{background_table_parser.name}_list.asm")
 
         with open(list_filename, 'w') as list_file:
@@ -220,24 +221,23 @@ if __name__ == "__main__":
                 list_file.write("\n".join(f"{label}::\n" for label in unique_labels))
                 # Write the target filename include
                 # (always use a path relative to 'src/')
-                tilemap_name = BackgroundName(immutable_pointers[0].index).as_filename(tilemap_extension)
-                tilemap_path = os.path.join(target_dir, tilemap_name).split("src/")[1]
+                content_file_name = BackgroundName(immutable_pointers[0].index).as_filename(content_file_extension)
+                content_file_path = os.path.join(target_dir, content_file_name).split("src/")[1]
                 include = "include" if args.format[0] == "asm" else "incbin"
-                list_file.write(f"{include} \"{tilemap_path}\"\n")
+                list_file.write(f"{include} \"{content_file_path}\"\n")
 
         #
-        # Write the tilemap files
+        # Write the content files
         #
 
         # Remove all previous files
-        if tilemap_extension:
-            remove_all_dumped_files(background_table_parser, tilemap_extension)
+        remove_all_dumped_files(background_table_parser, content_file_extension)
 
         if args.format == ["asm"] or args.format is None:
             # Write background files as asm files
             for index, command in enumerate(background_table_parser.list):
                 pointer_index = background_table_parser.pointers_for_command(command)[0].index
-                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename(tilemap_extension))
+                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename(content_file_extension))
                 with open(filename, 'a+') as background_file:
                     if background_file.tell() == 0:
                         background_file.write(disclaimer)
@@ -248,7 +248,7 @@ if __name__ == "__main__":
             # Write background files as binary files
             for index, command in enumerate(background_table_parser.list):
                 pointer_index = background_table_parser.pointers_for_command(command)[0].index
-                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename(tilemap_extension))
+                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename(content_file_extension))
                 with open(filename, 'ab+') as background_file:
                     data = BackgroundCommandFormatter.to_bytes(command)
                     background_file.write(data)

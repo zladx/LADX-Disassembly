@@ -22,19 +22,21 @@ background_descriptors = [
             )
         ]
     ),
-
-    # TODO: The attributes are split into multiple areas where they are stored.
-    #  so we need to split the output into multiple files and make sure not to decode any code.
-    #  But we only need a single pointer list.
-    #BackgroundTableDescriptor(
-    #    name = 'attrmaps',
-    #    address = BANK(0x24) + 0x1C4B,
-    #    length = 0x4C,
-    #    data = BackgroundDescriptor(
-    #        address = BANK(0x24) + 0x1C97,
-    #        length = 0x203A
-    #    )
-    #)
+    BackgroundTableDescriptor(
+        name = 'attrmaps',
+        address = BANK(0x24) + 0x1C4B,
+        length = 0x4C,
+        data = [
+            BackgroundDescriptor(
+                address = BANK(0x24) + 0x1C97,
+                length = 0x174A
+            ),
+            BackgroundDescriptor(
+                address = BANK(0x24) + 0x3BA7,
+                length = 0x12A
+            )
+        ]
+    )
 ]
 
 background_names = [
@@ -228,14 +230,14 @@ if __name__ == "__main__":
                 immutable_pointers = list(pointers)
                 # Write the labels
                 labels = map(lambda p: BackgroundName(p.index).as_label(content_type), immutable_pointers)
-                unique_labels = set(labels)
-                list_file.write("\n".join(f"{label}::\n" for label in unique_labels))
+                unique_labels = sorted(set(labels))
+                list_file.write("\n".join(f"{label}::" for label in unique_labels))
                 # Write the target filename include
                 # (always use a path relative to 'src/')
                 content_file_name = BackgroundName(immutable_pointers[0].index).as_filename(content_file_extension)
                 content_file_path = os.path.join(target_dir, content_file_name).split("src/")[1]
                 include = "include" if args.format[0] == "asm" else "incbin"
-                list_file.write(f"{include} \"{content_file_path}\"\n")
+                list_file.write(f"\n{include} \"{content_file_path}\"\n")
 
         #
         # Write the content files

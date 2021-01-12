@@ -1,0 +1,40 @@
+AttrmapsPointersTable::
+._00 dw $0000
+._01 dw CreditsIslandAttrmap             ; $66FA
+._02 dw InventoryAttrmap                 ; $6354
+._03 dw Attrmap03                        ; $5F80
+._04 dw MenuFileSelectionAttrmap         ; $5F74
+._05 dw MenuFileCreationAttrmap          ; $6045
+._06 dw Attrmap06                        ; $6115
+._07 dw Attrmap07                        ; $642F
+._08 dw WorldMapAttrmap                  ; $66E1
+._09 dw Attrmap09                        ; $5C97
+._0A dw GameOverAttrmap                  ; $61E5
+._0B dw InventoryDebugAttrmap            ; $5C97
+._0C dw MenuFileCopyAttrmap              ; $617D
+._0D dw MenuFileSaveAttrmap              ; $6262
+._0E dw IntroSeaDMGAttrmap               ; $5D18
+._0F dw IntroLinkFaceAttrmap             ; $5D69
+._10 dw IntroBeachAttrmap                ; $7BA7
+._11 dw TitleAttrmap                     ; $7BF0
+._12 dw PeachAttrmap                     ; $6459
+._13 dw MarinBeachAttrmap                ; $62A3
+._14 dw MamuAttrmap                      ; $6458
+._15 dw FaceShrineMuralAttrmap           ; $6547
+._16 dw CreditsStairsAttrmap             ; $6743
+._17 dw CreditsLinkOnSeaLargeAttrmap     ; $6905
+._18 dw CreditsSunAboveAttrmap           ; $694E
+._19 dw CreditsLinkOnSeaCloseAttrmap     ; $69A7
+._1A dw CreditsLinkSeatedOnLogAttrmap    ; $6A48
+._1B dw CreditsLinkFaceCloseUpAttrmap    ; $6A95
+._1C dw CreditsRollAttrmap               ; $6AE6
+._1D dw CreditsRollAttrmap               ; $6AE6
+._1E dw CreditsKidsAttrmap               ; $6BAF
+._1F dw CreditsMarinSingingAttrmap       ; $6D65
+._20 dw CreditsMrsMeowMeowsHouseAttrmap  ; $6F04
+._21 dw CreditsTarinAttrmap              ; $70A3
+._22 dw CreditsBeachAttrmap              ; $7242
+._23 dw SchulePaintingAttrmap            ; $65B0
+._24 dw EaglesTowerCollapseAttrmap       ; $667C
+._25 dw IntroSeaCGBAttrmap               ; $5D18
+

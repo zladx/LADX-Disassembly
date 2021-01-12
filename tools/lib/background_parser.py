@@ -69,9 +69,9 @@ class BackgroundListsParser:
     """
     Parse an area containing lists of background draw commands (one list per background entry).
     """
-    def __init__(self, rom, entities_descriptor):
+    def __init__(self, rom, lists_descriptor):
         self.list = []
-        self._parse(rom, entities_descriptor)
+        self._parse(rom, lists_descriptor)
 
     def _parse(self, rom, descriptor):
         """Walk the lists, and parse data for each list"""

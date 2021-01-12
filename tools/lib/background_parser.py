@@ -21,7 +21,10 @@ class BackgroundTableParser:
         with open(rom_path, 'rb') as rom_file:
             rom = rom_file.read()
             self.pointers = self._parse_pointers_table(rom, table_descriptor)
-            self.list = BackgroundListsParser(rom, table_descriptor.data).list
+
+            self.list = []
+            for list_descriptor in table_descriptor.data:
+                self.list += BackgroundListsParser(rom, list_descriptor).list
 
     def pointers_for_command(self, command):
         nearest_previous_pointer = None

@@ -15,10 +15,12 @@ background_descriptors = [
         name = 'tilemaps',
         address = BANK(0x20) + 0x052B,
         length = 0x4C,
-        data = BackgroundDescriptor(
-            address = BANK(0x08) + 0x0DD4,
-            length = 0x2B4C
-        )
+        data = [
+            BackgroundDescriptor(
+                address = BANK(0x08) + 0x0DD4,
+                length = 0x2B4C
+            )
+        ]
     ),
 
     # TODO: The attributes are split into multiple areas where they are stored.

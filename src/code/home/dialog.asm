@@ -698,7 +698,7 @@ ENDC
     jp   z, label_278B                            ; $26DE: $CA $8B $27
 
 .jp_26E1
-    ; Build a BG Data transfert request for the dialog background
+    ; Build a BG Data transfer request for the dialog background
 
     ; e = (wDialogState == DIALOG_CLOSED ? 0 : 1)
     ld   e, $00                                   ; $26E1: $1E $00

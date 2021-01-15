@@ -1095,7 +1095,7 @@ LoadCreditsMarinPortraitTiles::
     ld   b, a                                    ; $7FDB: $47
     ; Source bank
     ld   a, [hl]                                 ; $7FDC: $7E
-    ; Bank to switch back after the transfert
+    ; Bank to switch back after the transfer
     ld   h, BANK(@)                              ; $7FDD: $26 $27
     ; Execute the copy
     jp   CopyDataToVRAM                          ; $7FDF: $C3 $13 $0A

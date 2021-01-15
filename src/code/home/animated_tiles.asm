@@ -61,7 +61,7 @@ AnimateTiles::
     ; and don't perform any further animation.
     cp   GAMEPLAY_INTRO                           ; $1B14: $FE $00
     jr   nz, .notIntro                            ; $1B16: $20 $2E
-    ; If there is no transfert request pending…
+    ; If there is no transfer request pending…
     ld   a, [wRequest]                            ; $1B18: $FA $01 $D6
     and  a                                        ; $1B1B: $A7
     jp   nz, .return                              ; $1B1C: $C2 $45 $1B

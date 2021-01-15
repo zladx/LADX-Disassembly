@@ -5588,6 +5588,11 @@ data_020_70D3::
     db   $04, $04, $04, $04, $04, $04, $04, $04   ; $73E3
     db   $04, $04, $04, $04, $04, $04, $04, $04   ; $73EB
 
+; Which sprites graphics to load for room (overworld)
+; Contains 4 bytes per room (one for each spriteslot)
+; Indexed by room id
+;
+; $FF = keep current
 data_020_73F3::
     db   $A4, $FF, $FF, $FF, $A4, $8E, $7C, $C8   ; $73F3
     db   $A4, $4A, $7C, $93, $A4, $E5, $FF, $4E   ; $73FB
@@ -5663,6 +5668,11 @@ data_020_73F3::
     db   $A4, $FF, $FF, $FF, $A4, $FF, $FF, $FF   ; $762B
     db   $A4, $81, $8F, $D4, $A4, $81, $79, $FF   ; $7633
 
+; Which sprites graphics to load for room (indoors)
+; Contains 4 bytes per room (one for each spriteslot)
+; Indexed by room id
+;
+; $FF = keep current
 data_020_763B::
     db   $FF, $FF, $FF, $FF, $90, $91, $92, $98   ; $763B
     db   $90, $91, $AB, $FF, $90, $91, $92, $93   ; $7643

@@ -88,15 +88,20 @@ wMusicTrackTiming:
 wC10C:
   ds 1 ; C10C
 
-; Unlabeled
+; Higher sprite slot that needs changing during a room transition
+; (If more then 2 slots are required to change, then only the first
+; and last are changed. Normally this never happens, unless you
+; bypass collision or change the sprite mapping per room.)
 wC10D:
   ds 1 ; wC10D
 
-; TODO comment
+; Same purpose than hNeedsUpdatingEnnemiesTiles, but used by another function.
+; Uses wC10D to keep track.
 wNeedsUpdatingNPCTiles::
   ds 1 ; C10E
 
-; Unlabeled
+; NPC tiles are loaded in several passes. Holds the state of loading function progress.
+; (It takes 4 v-blank interrupts to transfer 1 slot ($40 bytes per vblank))
 wC10F:
   ds 1 ; C10F
 
@@ -637,11 +642,11 @@ wC190::
 wC191::
   ds 2 ; C191 - C192
 
-; Unlabeled
+; Currently loaded NPC sprites
 wC193::
   ds 4 ; C193 - C196
 
-; Unlabeled
+; Lowest sprite slot that needs updating during a room transition
 wC197::
   ds 1 ; C197
 

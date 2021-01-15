@@ -1,3 +1,7 @@
+; Note: this entity, unlike most others, use 3 spriteslots (out of 4 available).
+;
+; In usual gameplay, only 2 spriteslots are updated during a room transition.
+; The map transition code is special-cased for the color-dungeon to handle this.
 Data_006_4F2C::
     db   $44, $01, $44, $21, $46, $01, $46, $21
 

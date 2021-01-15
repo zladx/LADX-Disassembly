@@ -51,6 +51,10 @@ hNeedsUpdatingBGTiles::
 ; bool value for enemie tile update
 ; 0 = no update of enemie tiles needed,
 ; 1 = update needed
+;
+; Uses wC197 to keep track.
+;
+; (Has the same purpose than wNeedsUpdatingNPCTiles)
 hNeedsUpdatingEnnemiesTiles::
  ds 1 ; FF91
 
@@ -61,6 +65,7 @@ hBGTilesLoadingStage::
 
 ; Tiles are loaded in several passes. Holds the state of loading function progress.
 ; Possible values: 0 -> $0B
+; See also: wC10F (which does mostly the same thing)
 hEnemiesTilesLoadingStage::
  ds 1 ; FF93
 

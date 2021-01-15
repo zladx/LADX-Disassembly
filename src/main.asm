@@ -6,7 +6,7 @@ include "options.asm"
 ; Definitions
 include "constants/constants.asm"
 
-; Utilities fonctions and ROM header
+; Utilities functions and ROM header
 include "code/macros.asm"
 include "code/header.asm"
 

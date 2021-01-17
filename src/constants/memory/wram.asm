@@ -88,21 +88,32 @@ wMusicTrackTiming:
 wC10C:
   ds 1 ; C10C
 
-; Higher sprite slot that needs changing during a room transition
+; Index of the higher sprite slot that needs changing during a room transition.
+; Values go from 0 to 3.
+;
 ; (If more then 2 slots are required to change, then only the first
 ; and last are changed. Normally this never happens, unless you
 ; bypass collision or change the sprite mapping per room.)
-wC10D:
-  ds 1 ; wC10D
+;
+; See also: wEntityTilesSpriteslotIndexA
+wEntityTilesSpriteslotIndexB:
+  ds 1 ; C10D
 
-; Same purpose than hNeedsUpdatingEnnemiesTiles, but used by another function.
-; Uses wC10D to keep track.
-wNeedsUpdatingNPCTiles::
+; Request the spriteslot at wEntityTilesSpriteslotIndexB to be updated
+; with the spritesheet specified at wLoadedEntitySpritesheets.
+wNeedsUpdatingEntityTilesB::
   ds 1 ; C10E
 
-; NPC tiles are loaded in several passes. Holds the state of loading function progress.
-; (It takes 4 v-blank interrupts to transfer 1 slot ($40 bytes per vblank))
-wC10F:
+; Holds the progression of a loading progress started by wNeedsUpdatingEntityTilesB.
+;
+; Entity tiles are loaded in several passes (at $40 bytes per v-blank,
+; it takes 4 v-blank interrupts to transfer 1 full spriteslot). So the work
+; is divided into several slides. This variable holds whch slice is the current one.
+;
+; Possible values: 0 -> $0B
+;
+; See also: hEntityTilesLoadingStageA
+wEntityTilesLoadingStageB:
   ds 1 ; C10F
 
 ; Time until the next low health SFX sound will be played.
@@ -642,12 +653,25 @@ wC190::
 wC191::
   ds 2 ; C191 - C192
 
-; Currently loaded NPC sprites
-wC193::
+; The 4 bytes indicating which entity spritesheets are loaded in each of the 4 spriteslots.
+; Values are taken from OverworldEntitySpritesheetsTable and IndoorEntitySpritesheetsTable.
+;
+; Each byte is bbbttttt, where:
+;  - bbb indicates the bank to use (as an index to NpcTilesBankTable);
+;  - ttttt indicate which 16 tile row to take from that bank.
+; $FF means "keep current".
+wLoadedEntitySpritesheets::
   ds 4 ; C193 - C196
 
-; Lowest sprite slot that needs updating during a room transition
-wC197::
+; Index of the lowest sprite slot that needs changing during a room transition.
+; Values go from 0 to 3.
+;
+; (If more then 2 slots are required to change, then only the first
+; and last are changed. Normally this never happens, unless you
+; bypass collision or change the sprite mapping per room.)
+;
+; See also: wEntityTilesSpriteslotIndexB
+wEntityTilesSpriteslotIndexA::
   ds 1 ; C197
 
 ; Unlabeled

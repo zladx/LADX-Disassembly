@@ -4516,6 +4516,10 @@ label_036_5BE8:
 
     ret                                           ; $5BF6: $C9
 
+; Note: this entity, unlike most others, use 3 spriteslots (out of 4 available).
+;
+; In usual gameplay, only 2 spriteslots are updated during a room transition.
+; The map transition code is special-cased for the color-dungeon to handle this.
 AvalaunchEntityHandler::
     call label_394D                               ; $5BF7: $CD $4D $39
     ld   a, c                                     ; $5BFA: $79

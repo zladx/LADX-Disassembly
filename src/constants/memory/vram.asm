@@ -1,10 +1,10 @@
 section "Tiles 0", vram[$8000], BANK[0]
 vTiles0::
-; TODO: 8400: vTilesTagalong (in overworld)
-; TODO: 8400: 1st spriteslot (in dungeons)
-; TODO: 8500: 2nd spriteslot
-; TODO: 8600: 3rd spriteslot
-; TODO: 8700: 4th spriteslot
+vTilesSpriteslots equ $8400
+vTilesSpriteslot1 equ $8400
+vTilesSpriteslot2 equ $8500
+vTilesSpriteslot3 equ $8600
+vTilesSpriteslot4 equ $8700
 
 section "Tiles 1", vram[$8800], BANK[0]
 vTiles1::

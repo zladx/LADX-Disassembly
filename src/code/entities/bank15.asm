@@ -2010,14 +2010,20 @@ func_015_5064::
     ld   hl, Data_015_5058                        ; $506C: $21 $58 $50
     add  hl, de                                   ; $506F: $19
     ld   a, [hl+]                                 ; $5070: $2A
-    ld   [wC193+2], a                             ; $5071: $EA $95 $C1
+    ld   [wLoadedEntitySpritesheets+2], a                             ; $5071: $EA $95 $C1
     ld   a, [hl]                                  ; $5074: $7E
-    ld   [wC193+3], a                             ; $5075: $EA $96 $C1
+    ld   [wLoadedEntitySpritesheets+3], a                             ; $5075: $EA $96 $C1
     ld   a, TRUE                                  ; $5078: $3E $01
-    ldh  [hNeedsUpdatingEnnemiesTiles], a         ; $507A: $E0 $91
-    ld   [wNeedsUpdatingNPCTiles], a              ; $507C: $EA $0E $C1
+    ldh  [hNeedsUpdatingEntityTilesA], a         ; $507A: $E0 $91
+    ld   [wNeedsUpdatingEntityTilesB], a              ; $507C: $EA $0E $C1
     ret                                           ; $507F: $C9
 
+; Note: this entity, unlike most others, use all 4 spriteslots available.
+;
+; Normally only 2 spriteslots can be loaded on a map transition, but this
+; boss is behind a warp. And warps will load all 4 tileslots at once.
+;
+; It also switches out sprites even during the battle.
 FinalNightmareEntityHandler::
     ld   a, [wRoomTransitionState]                ; $5080: $FA $24 $C1
     and  a                                        ; $5083: $A7
@@ -2411,9 +2417,9 @@ func_015_52BB::
     add  hl, bc                                   ; $52DA: $09
     ld   [hl], $C0                                ; $52DB: $36 $C0
     ld   a, $02                                   ; $52DD: $3E $02
-    ld   [wC197], a                               ; $52DF: $EA $97 $C1
+    ld   [wEntityTilesSpriteslotIndexA], a        ; $52DF: $EA $97 $C1
     inc  a                                        ; $52E2: $3C
-    ld   [wC10D], a                               ; $52E3: $EA $0D $C1
+    ld   [wEntityTilesSpriteslotIndexB], a        ; $52E3: $EA $0D $C1
     ld   a, $FF                                   ; $52E6: $3E $FF
     call SetEntitySpriteVariant                   ; $52E8: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $52EB: $CD $05 $0C

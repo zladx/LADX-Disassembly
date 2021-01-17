@@ -251,9 +251,9 @@ ENDC
 
     ; If NeedsUpdatingBGTiles || NeedsUpdatingEnnemiesTiles || NeedsUpdatingNPCTiles…
     ldh  a, [hNeedsUpdatingBGTiles]               ; $02EF: $F0 $90
-    ld   hl, hNeedsUpdatingEnnemiesTiles          ; $02F1: $21 $91 $FF
+    ld   hl, hNeedsUpdatingEntityTilesA          ; $02F1: $21 $91 $FF
     or   [hl]                                     ; $02F4: $B6
-    ld   hl, wNeedsUpdatingNPCTiles               ; $02F5: $21 $0E $C1
+    ld   hl, wNeedsUpdatingEntityTilesB               ; $02F5: $21 $0E $C1
     or   [hl]                                     ; $02F8: $B6
     ; skip further rendering: the vblank interrupt will load the required data
     jr   nz, .waitForNextFrame                    ; $02F9: $20 $64

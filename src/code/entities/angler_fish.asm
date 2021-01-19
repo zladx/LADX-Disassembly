@@ -1,3 +1,7 @@
+; Note: this entity, unlike most others, use all 4 spriteslots available.
+;
+; Normally only 2 spriteslots can be loaded on a map transition, but this
+; boss is behind a warp. And warps will load all 4 tileslots at once.
 AnglerFishEntityHandler::
     ld   hl, wEntitiesUnknownTableD               ; $5576: $21 $D0 $C2
     add  hl, bc                                   ; $5579: $09

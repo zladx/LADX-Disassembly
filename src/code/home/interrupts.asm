@@ -319,9 +319,9 @@ InterruptVBlank::
     ; If NeedsUpdatingBGTiles or NeedsUpdatingEnnemiesTiles or NeedsUpdatingNPCTiles…
     ldh  a, [hNeedsUpdatingBGTiles]               ; $04EA: $F0 $90
     ldh  [hMultiPurposeG], a                      ; $04EC: $E0 $E8
-    ld   hl, hNeedsUpdatingEnnemiesTiles          ; $04EE: $21 $91 $FF
+    ld   hl, hNeedsUpdatingEntityTilesA           ; $04EE: $21 $91 $FF
     or   [hl]                                     ; $04F1: $B6
-    ld   hl, wNeedsUpdatingNPCTiles               ; $04F2: $21 $0E $C1
+    ld   hl, wNeedsUpdatingEntityTilesB           ; $04F2: $21 $0E $C1
     or   [hl]                                     ; $04F5: $B6
     jr   z, .noTilesToUpdate                      ; $04F6: $28 $11
 
@@ -434,7 +434,7 @@ PhotoAlbumVBlankHandler::
     ldh  a, [hIsGBC]                              ; $0583: $F0 $FE
     and  a                                        ; $0585: $A7
     jr   z, .gbcEnd                               ; $0586: $28 $10
-    callsw CopyPalettesToVRAM                 ; $0588: $3E $21 $CD $0C $08 $CD $00 $40
+    callsw CopyPalettesToVRAM                     ; $0588: $3E $21 $CD $0C $08 $CD $00 $40
     callsw func_024_5C1A                          ; $0590: $3E $24 $CD $0C $08 $CD $1A $5C
 .gbcEnd
 
@@ -453,16 +453,27 @@ PhotoAlbumVBlankHandler::
     ld   [MBC3SelectBank], a                      ; $05B7: $EA $00 $21
     jr   InterruptVBlank.vblankDoneInterruptsEnabled ; $05BA: $18 $AE
 
-; Execute tile-loading commands for BG tiles, enemy tiles and NPC tiles
+; Copy requested BG tiles or entity tiles to VRAM during V-Blank.
+;
+; Only a single copy operation is executed on each call.
+; By priority order, the function looks for:
+;  - hNeedsUpdatingBGTiles
+;  - hNeedsUpdatingEntityTilesA
+;  - wNeedsUpdatingEntityTilesB
+; It then copies $40 bytes from the higher priority request to VRAM.
+;
+; The V-Blank interval is quite short, so this function splits the
+; copies into several stages. Calling this function several times
+; will execute the stages successively.
 LoadTiles::
     ;
     ; Execute BG Tiles command
     ;
 
-    ; If there are no BG tiles to load, move to the OAM tiles.
+    ; If there are no BG tiles to load, move to the entity tiles.
     ldh  a, [hNeedsUpdatingBGTiles]               ; $05BC: $F0 $90
     and  a                                        ; $05BE: $A7
-    jp   z, LoadOAMTiles                          ; $05BF: $CA $9E $06
+    jp   z, LoadEntityTiles                       ; $05BF: $CA $9E $06
 
     cp   $07                                      ; $05C2: $FE $07
     jp   z, label_7B0                             ; $05C4: $CA $B0 $07
@@ -475,7 +486,7 @@ LoadTiles::
     cp   $06                                      ; $05D6: $FE $06
     jp   z, ClearPieceOfHeartMeterTiles2          ; $05D8: $CA $7A $00
     cp   $08                                      ; $05DB: $FE $08
-    jp   nc, LoadTilesCommands8ToD                ; $05DD: $D2 $D3 $07
+    jp   nc, LoadBGTilesCommands8ToD              ; $05DD: $D2 $D3 $07
 
     ld   a, [wIsIndoor]                           ; $05E0: $FA $A5 $DB
     and  a                                        ; $05E3: $A7
@@ -596,7 +607,7 @@ LoadOverworldBGTiles::
 .return
     ret                                           ; $069D: $C9
 
-LoadOAMTiles::
+LoadEntityTiles::
     ; If on GBC and inside the Color Dungeon…
     ldh  a, [hIsGBC]                              ; $069E: $F0 $FE
     and  a                                        ; $06A0: $A7
@@ -605,11 +616,11 @@ LoadOAMTiles::
     cp   MAP_COLOR_DUNGEON                        ; $06A5: $FE $FF
     jr   nz, .colorDungeonEnd                     ; $06A7: $20 $22
     ; … skip the defined commands, and load hardcoded titles
-    ; for the Color Dungeon objects and NPCs.
+    ; for the Color Dungeon objects and entities.
     callsb LoadColorDungeonTiles                  ; $06A9: $3E $20 $EA $00 $21 $CD $5A $47
     xor  a                                        ; $06B1: $AF
-    ld   [wNeedsUpdatingNPCTiles], a              ; $06B2: $EA $0E $C1
-    ld   [wC10F], a                               ; $06B5: $EA $0F $C1
+    ld   [wNeedsUpdatingEntityTilesB], a          ; $06B2: $EA $0E $C1
+    ld   [wEntityTilesLoadingStageB], a           ; $06B5: $EA $0F $C1
     ld   hl, vTiles2                              ; $06B8: $21 $00 $90
     ld   bc, $00                                  ; $06BB: $01 $00 $00
     call GetColorDungeonTilesAddress              ; $06BE: $CD $16 $46
@@ -621,20 +632,24 @@ LoadOAMTiles::
 .colorDungeonEnd
 
     ;
-    ; Execute Enemies Tiles command
+    ; Copy requested entity tiles to VRAM
+    ; (Variant for hNeedsUpdatingEntityTilesA)
     ;
 
-    ldh  a, [hNeedsUpdatingEnnemiesTiles]         ; $06CB: $F0 $91
+    ; If hNeedsUpdatingEntityTilesA is empty,
+    ; use wNeedsUpdatingEntityTilesB.
+    ldh  a, [hNeedsUpdatingEntityTilesA]          ; $06CB: $F0 $91
     and  a                                        ; $06CD: $A7
 IF __PATCH_0__
-    jr   z, label_73E
+    jr   z, UpdateEntityTilesB
 ELSE
-    jp   z, label_73E                             ; $06CE: $CA $3E $07
+    jp   z, UpdateEntityTilesB                    ; $06CE: $CA $3E $07
 ENDC
-    ld   a, [wC197]                               ; $06D1: $FA $97 $C1
+    ld   a, [wEntityTilesSpriteslotIndexA]        ; $06D1: $FA $97 $C1
     ld   e, a                                     ; $06D4: $5F
     ld   d, $00                                   ; $06D5: $16 $00
-    ld   hl, wC193                                ; $06D7: $21 $93 $C1
+
+    ld   hl, wLoadedEntitySpritesheets            ; $06D7: $21 $93 $C1
     add  hl, de                                   ; $06DA: $19
     ld   a, [hl]                                  ; $06DB: $7E
     push af                                       ; $06DC: $F5
@@ -657,7 +672,7 @@ ENDC
 .adjustBankEnd
 
     ld   [MBC3SelectBank], a                      ; $06F7: $EA $00 $21
-    ldh  a, [hEnemiesTilesLoadingStage]           ; $06FA: $F0 $93
+    ldh  a, [hEntityTilesLoadingStageA]           ; $06FA: $F0 $93
     ld   c, a                                     ; $06FC: $4F
     ld   b, $00                                   ; $06FD: $06 $00
     sla  c                                        ; $06FF: $CB $21
@@ -676,9 +691,9 @@ ENDC
     add  hl, bc                                   ; $071A: $09
     add  hl, de                                   ; $071B: $19
     push hl                                       ; $071C: $E5
-    ld   a, [wC197]                               ; $071D: $FA $97 $C1
+    ld   a, [wEntityTilesSpriteslotIndexA]        ; $071D: $FA $97 $C1
     ld   d, a                                     ; $0720: $57
-    ld   hl, vTiles0 + $400                       ; $0721: $21 $00 $84
+    ld   hl, vTilesSpriteslots                    ; $0721: $21 $00 $84
     add  hl, bc                                   ; $0724: $09
     add  hl, de                                   ; $0725: $19
     ld   e, l                                     ; $0726: $5D
@@ -687,27 +702,32 @@ ENDC
     ld   bc, $40                                  ; $0729: $01 $40 $00
     call CopyData                                 ; $072C: $CD $14 $29
 
-    ; Increment the enemies tiles loading stage
-    ldh  a, [hEnemiesTilesLoadingStage]           ; $072F: $F0 $93
+    ; Increment the loading stage
+    ldh  a, [hEntityTilesLoadingStageA]           ; $072F: $F0 $93
     inc  a                                        ; $0731: $3C
-    ldh  [hEnemiesTilesLoadingStage], a           ; $0732: $E0 $93
-    ; If the loading stage is >= $04, we're clearBGTilesFlag
+    ldh  [hEntityTilesLoadingStageA], a           ; $0732: $E0 $93
+    ; If the loading stage is >= $04, we're done
     cp   $04                                      ; $0734: $FE $04
     jr   nz, .return                              ; $0736: $20 $05
 
 .clearEnemiesTilesLoadCommand
     xor  a                                        ; $0738: $AF
-    ldh  [hNeedsUpdatingEnnemiesTiles], a         ; $0739: $E0 $91
-    ldh  [hEnemiesTilesLoadingStage], a           ; $073B: $E0 $93
+    ldh  [hNeedsUpdatingEntityTilesA], a          ; $0739: $E0 $91
+    ldh  [hEntityTilesLoadingStageA], a           ; $073B: $E0 $93
 
 .return
     ret                                           ; $073D: $C9
 
-label_73E::
-    ld   a, [wC10D]                               ; $073E: $FA $0D $C1
+    ;
+    ; Copy requested entity tiles to VRAM
+    ; (Variant for wNeedsUpdatingEntityTilesB)
+    ;
+
+UpdateEntityTilesB::
+    ld   a, [wEntityTilesSpriteslotIndexB]        ; $073E: $FA $0D $C1
     ld   e, a                                     ; $0741: $5F
     ld   d, $00                                   ; $0742: $16 $00
-    ld   hl, wC193                                ; $0744: $21 $93 $C1
+    ld   hl, wLoadedEntitySpritesheets            ; $0744: $21 $93 $C1
     add  hl, de                                   ; $0747: $19
     ld   a, [hl]                                  ; $0748: $7E
     push af                                       ; $0749: $F5
@@ -730,7 +750,7 @@ label_73E::
 .jp_0764
 
     ld   [MBC3SelectBank], a                      ; $0764: $EA $00 $21
-    ld   a, [wC10F]                               ; $0767: $FA $0F $C1
+    ld   a, [wEntityTilesLoadingStageB]           ; $0767: $FA $0F $C1
     ld   c, a                                     ; $076A: $4F
     ld   b, $00                                   ; $076B: $06 $00
     sla  c                                        ; $076D: $CB $21
@@ -749,9 +769,9 @@ label_73E::
     add  hl, bc                                   ; $0788: $09
     add  hl, de                                   ; $0789: $19
     push hl                                       ; $078A: $E5
-    ld   a, [wC10D]                               ; $078B: $FA $0D $C1
+    ld   a, [wEntityTilesSpriteslotIndexB]        ; $078B: $FA $0D $C1
     ld   d, a                                     ; $078E: $57
-    ld   hl, $8400                                ; $078F: $21 $00 $84
+    ld   hl, vTilesSpriteslots                    ; $078F: $21 $00 $84
     add  hl, bc                                   ; $0792: $09
     add  hl, de                                   ; $0793: $19
     ld   e, l                                     ; $0794: $5D
@@ -759,14 +779,17 @@ label_73E::
     pop  hl                                       ; $0796: $E1
     ld   bc, $40                                  ; $0797: $01 $40 $00
     call CopyData                                 ; $079A: $CD $14 $29
-    ld   a, [wC10F]                               ; $079D: $FA $0F $C1
+
+    ; Increment the loading stage
+    ld   a, [wEntityTilesLoadingStageB]           ; $079D: $FA $0F $C1
     inc  a                                        ; $07A0: $3C
-    ld   [wC10F], a                               ; $07A1: $EA $0F $C1
+    ; If the loading stage is >= $04, we're done
+    ld   [wEntityTilesLoadingStageB], a           ; $07A1: $EA $0F $C1
     cp   $04                                      ; $07A4: $FE $04
     jr   nz, .return                              ; $07A6: $20 $07
     xor  a                                        ; $07A8: $AF
-    ld   [wNeedsUpdatingNPCTiles], a              ; $07A9: $EA $0E $C1
-    ld   [wC10F], a                               ; $07AC: $EA $0F $C1
+    ld   [wNeedsUpdatingEntityTilesB], a          ; $07A9: $EA $0E $C1
+    ld   [wEntityTilesLoadingStageB], a           ; $07AC: $EA $0F $C1
 .return
     ret                                           ; $07AF: $C9
 
@@ -798,7 +821,7 @@ TilesDestination::
 ;   08-0A: copy part of the ocarina inventory icon
 ;   0B-0D: copy part of the shared gfx
 ; The command is incremented at the end.
-LoadTilesCommands8ToD::
+LoadBGTilesCommands8ToD::
     ; de = (a - 8) * 2
     sub  a, $08                                   ; $07D3: $D6 $08
     sla  a                                        ; $07D5: $CB $27

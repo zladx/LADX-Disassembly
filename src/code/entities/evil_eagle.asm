@@ -8,6 +8,10 @@ ENDC
 Data_005_59FE::
 incbin "gfx/characters/evil_eagle/oam_rider_hidden.2bpp"
 
+; Note: this entity, unlike most others, use all 4 spriteslots available.
+;
+; Normally only 2 spriteslots can be loaded on a map transition, but this
+; boss is behind a warp. And warps will load all 4 tileslots at once.
 EntityInitEvilEagle::
     ld   hl, wEntitiesUnknowTableH                ; $5A1E: $21 $30 $C4
     add  hl, bc                                   ; $5A21: $09

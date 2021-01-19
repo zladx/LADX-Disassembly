@@ -1180,20 +1180,20 @@ SelectRoomTilesets::
     cp   MAP_COLOR_DUNGEON                        ; $0DE7: $FE $FF
     jr   nz, .label_DF1                           ; $0DE9: $20 $06
     ld   a, TRUE                                  ; $0DEB: $3E $01
-    ldh  [hNeedsUpdatingEnnemiesTiles], a         ; $0DED: $E0 $91
+    ldh  [hNeedsUpdatingEntityTilesA], a         ; $0DED: $E0 $91
     jr   .return                                  ; $0DEF: $18 $40
 
 .label_DF1
-    ld   hl, data_020_73F3                        ; $0DF1: $21 $F3 $73
+    ld   hl, OverworldEntitySpritesheetsTable                        ; $0DF1: $21 $F3 $73
     ld   a, [wIsIndoor]                           ; $0DF4: $FA $A5 $DB
     and  a                                        ; $0DF7: $A7
     jr   z, .label_DFD                            ; $0DF8: $28 $03
-    ld   hl, data_020_763B                        ; $0DFA: $21 $3B $76
+    ld   hl, IndoorEntitySpritesheetsTable                        ; $0DFA: $21 $3B $76
 
 .label_DFD
     add  hl, de                                   ; $0DFD: $19
     ld   d, $00                                   ; $0DFE: $16 $00
-    ld   bc, wC193                                ; $0E00: $01 $93 $C1
+    ld   bc, wLoadedEntitySpritesheets                                ; $0E00: $01 $93 $C1
 
     ; ------------------------------------------------------------
     ;
@@ -1215,18 +1215,18 @@ SelectRoomTilesets::
     and  a                                        ; $0E10: $A7
     jr   z, .label_E1E                            ; $0E11: $28 $0B
     ld   a, d                                     ; $0E13: $7A
-    ld   [wC10D], a                               ; $0E14: $EA $0D $C1
+    ld   [wEntityTilesSpriteslotIndexB], a        ; $0E14: $EA $0D $C1
     ld   a, $01                                   ; $0E17: $3E $01
-    ld   [wNeedsUpdatingNPCTiles], a              ; $0E19: $EA $0E $C1
+    ld   [wNeedsUpdatingEntityTilesB], a          ; $0E19: $EA $0E $C1
     jr   .label_E29                               ; $0E1C: $18 $0B
 
 .label_E1E
     inc  a                                        ; $0E1E: $3C
     ldh  [hMultiPurpose0], a                      ; $0E1F: $E0 $D7
     ld   a, d                                     ; $0E21: $7A
-    ld   [wC197], a                               ; $0E22: $EA $97 $C1
+    ld   [wEntityTilesSpriteslotIndexA], a        ; $0E22: $EA $97 $C1
     ld   a, TRUE                                  ; $0E25: $3E $01
-    ldh  [hNeedsUpdatingEnnemiesTiles], a         ; $0E27: $E0 $91
+    ldh  [hNeedsUpdatingEntityTilesA], a          ; $0E27: $E0 $91
 
 .label_E29
     inc  hl                                       ; $0E29: $23
@@ -5171,7 +5171,7 @@ LoadRoomSpecificTiles::
     ; Copy a row of 16 tiles
 .copyOAMTilesRow
     ldh  [hMultiPurpose0], a                      ; $2E85: $E0 $D7
-    ld   hl, wC193                                ; $2E87: $21 $93 $C1
+    ld   hl, wLoadedEntitySpritesheets                                ; $2E87: $21 $93 $C1
     ld   e, a                                     ; $2E8A: $5F
     ld   d, $00                                   ; $2E8B: $16 $00
     add  hl, de                                   ; $2E8D: $19

@@ -278,7 +278,17 @@ TilesetLoadHandlersTable::
 ._22 dw LoadCreditsMarinPortraitTiles_trampoline
 ._23 dw LoadThanksForPlayingTiles_trampoline
 
-data_020_46AA::
+; Color dungeon spritesets (this table, and the other 3 below).
+; There are 4 tables there (one for each spriteslot), with 22 entries
+; (one for each color dungeon room).
+; The format is:
+; - graphics high byte address,
+; - graphics bank
+;
+; (It's a complete break from how the normal tables are done, with indexing
+; into a different table that contains 4 bytes for that whole room, and does
+; not encode bank and address into a single byte.)
+ColorDungeonEntitySpritesheetsTable_Slot1::
     db   HIGH(ColorDungeonNpcTiles + $1100), BANK(ColorDungeonNpcTiles)
     db   HIGH(ColorDungeonNpcTiles + $0F00), BANK(ColorDungeonNpcTiles)
     db   HIGH($0000), $00
@@ -302,24 +312,23 @@ data_020_46AA::
     db   HIGH($0000), $00
     db   HIGH($0000), $00
 
-Data_020_46D6::
+ColorDungeonEntitySpritesheetsTable_Slot2::
     db   $00, $00, $4D, $31, $00, $00, $4C, $35, $51, $2E, $45, $35, $45, $35, $00, $00
     db   $45, $35, $00, $00, $45, $35, $00, $00, $49, $35, $00, $00, $00, $00, $45, $35
     db   $00, $00, $45, $35, $00, $00, $00, $00, $00, $00, $00, $00
 
-Data_020_4702::
+ColorDungeonEntitySpritesheetsTable_Slot3::
     db   $50, $35, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db   $00, $00, $46, $35, $00, $00, $00, $00, $4A, $35, $00, $00, $46, $35, $00, $00
     db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $46, $35
 
-Data_020_472E::
+ColorDungeonEntitySpritesheetsTable_Slot4::
     db   $00, $00, $00, $00, $00, $00, $4D, $35, $00, $00, $00, $00, $00, $00, $00, $00
     db   $47, $35, $00, $00, $47, $35, $47, $35, $00, $00, $47, $35, $00, $00, $47, $35
     db   $47, $35, $00, $00, $00, $00, $00, $00, $47, $35, $00, $00
 
-; Color-dungeon related function
 LoadColorDungeonTiles::
-    ld   hl, data_020_46AA                        ; $475A: $21 $AA $46
+    ld   hl, ColorDungeonEntitySpritesheetsTable_Slot1 ; $475A: $21 $AA $46
     ldh  a, [hMapRoom]                            ; $475D: $F0 $F6
     rla                                           ; $475F: $17
     ld   e, a                                     ; $4760: $5F
@@ -343,7 +352,7 @@ LoadColorDungeonTiles::
 jr_020_4776:
     pop  de                                       ; $4776: $D1
     push de                                       ; $4777: $D5
-    ld   hl, Data_020_46D6                        ; $4778: $21 $D6 $46
+    ld   hl, ColorDungeonEntitySpritesheetsTable_Slot2 ; $4778: $21 $D6 $46
     add  hl, de                                   ; $477B: $19
     ld   a, [hl]                                  ; $477C: $7E
     and  a                                        ; $477D: $A7
@@ -361,7 +370,7 @@ jr_020_4776:
 jr_020_478C:
     pop  de                                       ; $478C: $D1
     push de                                       ; $478D: $D5
-    ld   hl, Data_020_4702                        ; $478E: $21 $02 $47
+    ld   hl, ColorDungeonEntitySpritesheetsTable_Slot3 ; $478E: $21 $02 $47
     add  hl, de                                   ; $4791: $19
     ld   a, [hl]                                  ; $4792: $7E
     and  a                                        ; $4793: $A7
@@ -378,7 +387,7 @@ jr_020_478C:
 
 jr_020_47A2:
     pop  de                                       ; $47A2: $D1
-    ld   hl, Data_020_472E                        ; $47A3: $21 $2E $47
+    ld   hl, ColorDungeonEntitySpritesheetsTable_Slot4 ; $47A3: $21 $2E $47
     add  hl, de                                   ; $47A6: $19
     ld   a, [hl]                                  ; $47A7: $7E
     and  a                                        ; $47A8: $A7
@@ -4385,7 +4394,7 @@ InventoryFadeOutHandler::
     cp   $64                                      ; @TODO ?? Map screen where you take the ghost after the house
     jr   nz, useOverworldTileset                  ; $6616: $20 $0E
 
-    ld   hl, wC193                                ; $6618: $21 $93 $C1
+    ld   hl, wLoadedEntitySpritesheets                                ; $6618: $21 $93 $C1
     ld   [hl], $A4                                ; $661B: $36 $A4
     inc  hl                                       ; $661D: $23
     ld   [hl], $E5                                ; $661E: $36 $E5
@@ -4451,7 +4460,7 @@ jr_020_6659:
     jr   nz, jr_020_667C                          ; $6676: $20 $04
 
     ld   a, TRUE                                   ; $6678: $3E $01
-    ldh  [hNeedsUpdatingEnnemiesTiles], a         ; $667A: $E0 $91
+    ldh  [hNeedsUpdatingEntityTilesA], a         ; $667A: $E0 $91
 
 jr_020_667C:
     ld   a, [wLCDControl]                         ; $667C: $FA $FD $D6
@@ -5588,7 +5597,11 @@ data_020_70D3::
     db   $04, $04, $04, $04, $04, $04, $04, $04   ; $73E3
     db   $04, $04, $04, $04, $04, $04, $04, $04   ; $73EB
 
-data_020_73F3::
+; Which spritesheets to load for each room (Overworld)
+; Contains 4 bytes per room (one for each spriteslot).
+
+; See wLoadedEntitySpritesheets for the byte format.
+OverworldEntitySpritesheetsTable::
     db   $A4, $FF, $FF, $FF, $A4, $8E, $7C, $C8   ; $73F3
     db   $A4, $4A, $7C, $93, $A4, $E5, $FF, $4E   ; $73FB
     db   $A4, $91, $83, $A2, $A4, $42, $8A, $FF   ; $7403
@@ -5663,7 +5676,11 @@ data_020_73F3::
     db   $A4, $FF, $FF, $FF, $A4, $FF, $FF, $FF   ; $762B
     db   $A4, $81, $8F, $D4, $A4, $81, $79, $FF   ; $7633
 
-data_020_763B::
+; Which spritesheets to load for each room (Indoors)
+; Contains 4 bytes per room (one for each spriteslot).
+;
+; See wLoadedEntitySpritesheets for the byte format.
+IndoorEntitySpritesheetsTable::
     db   $FF, $FF, $FF, $FF, $90, $91, $92, $98   ; $763B
     db   $90, $91, $AB, $FF, $90, $91, $92, $93   ; $7643
     db   $90, $91, $94, $9F, $90, $91, $B0, $B1   ; $764B

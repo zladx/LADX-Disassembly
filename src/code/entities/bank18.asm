@@ -2,6 +2,11 @@
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
+
+; Note: this entity, unlike most others, use all 4 spriteslots.
+;
+; Normally only 2 spriteslots can be loaded on a map transition, but this
+; boss is behind a warp. And warps will load all 4 tileslots at once.
 MamuAndFrogsEntityHandler::
     ld   a, [wC116]                               ; $4000: $FA $16 $C1
     and  a                                        ; $4003: $A7
@@ -628,6 +633,10 @@ label_018_449D:
     ld   [hl], $00                                ; $44FD: $36 $00
     ret                                           ; $44FF: $C9
 
+; Note: this entity, unlike most others, use all 4 spriteslots.
+;
+; Normally only 2 spriteslots can be loaded on a map transition, but this
+; boss is behind a warp. And warps will load all 4 tileslots at once.
 ManboAndFishesEntityHandler::
     ldh  a, [hActiveEntityVisualPosY]             ; $4500: $F0 $EC
     cp   $50                                      ; $4502: $FE $50
@@ -2830,6 +2839,12 @@ jr_018_54EE:
 
     jp   UpdateEntityPosWithSpeed_18              ; $54FE: $C3 $5F $7E
 
+; Note: this entity, unlike most others, use 3 spriteslots:
+; 2 spriteslots when sleeping, and then another one for Marin singing, so 3.
+;
+; It uses the same trick as the slime boss, so the walrus spriteslots are loaded
+; one room before the actual walrus. So Marin's singing sprite can be loaded when
+; entering the room with the walrus.
 WalrusEntityHandler::
     ld   hl, wEntitiesPrivateState1Table          ; $5501: $21 $B0 $C2
     add  hl, bc                                   ; $5504: $09
@@ -7769,6 +7784,10 @@ jr_018_7717:
 label_018_7726:
     jp   CopyEntityPositionToActivePosition       ; $7726: $C3 $8A $3D
 
+; Note: this entity, unlike most others, use 3 spriteslots (out of 4 available).
+;
+; In usual gameplay, only 2 spriteslots are updated during a room transition.
+; The map transition code is special-cased for the color-dungeon to handle this.
 Data_018_7729::
     db   $62, $00, $64, $00, $60, $00, $60, $20, $64, $20, $62, $20, $66, $00, $68, $00
     db   $60, $00, $60, $20, $68, $20, $66, $20, $6C, $00, $6E, $00, $6A, $00, $6A, $20

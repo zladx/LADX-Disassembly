@@ -1,3 +1,8 @@
+; Note: this entity, unlike most others, use 3 spriteslots (instead of 2).
+;
+; Normally only 2 spriteslots can be loaded on a map transition, but this one
+; has the small slimes "preloaded" so it only needs to load 2 (for the big eye)
+; when entering the boss room.
 Data_004_496B::
     db   $EE, $12
 

@@ -48,10 +48,11 @@ hGameValuesSection::
 hNeedsUpdatingBGTiles::
  ds 1 ; FF90
 
-; bool value for enemie tile update
-; 0 = no update of enemie tiles needed,
-; 1 = update needed
-hNeedsUpdatingEnnemiesTiles::
+; Request the spriteslot at wEntityTilesSpriteslotIndexA to be updated with the spritesheet
+; specified at wLoadedEntitySpritesheets.
+;
+; See also: wNeedsUpdatingEntityTilesB
+hNeedsUpdatingEntityTilesA::
  ds 1 ; FF91
 
 ; Tiles are loaded in several passes. Holds the state of loading function progress.
@@ -59,9 +60,16 @@ hNeedsUpdatingEnnemiesTiles::
 hBGTilesLoadingStage::
  ds 1 ; FF92
 
-; Tiles are loaded in several passes. Holds the state of loading function progress.
+; Holds the progression of a loading progress started by hNeedsUpdatingEntityTilesA.
+;
+; Entity tiles are loaded in several passes (at $40 bytes per v-blank,
+; it takes 4 v-blank interrupts to transfer 1 full spriteslot). So the work
+; is divided into several slides. This variable holds whch slice is the current one.
+;
 ; Possible values: 0 -> $0B
-hEnemiesTilesLoadingStage::
+;
+; See also: wEntityTilesLoadingStageB
+hEntityTilesLoadingStageA::
  ds 1 ; FF93
 
 ; Sub-tileset to use for overworld or dungeon

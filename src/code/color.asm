@@ -1,6 +1,24 @@
-; Disassembly of "game.gbc"
-; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
-; https://github.com/mattcurrie/mgbdis
+;
+; -----------------------------------------------------------------------------
+;
+; This bank is the first new one of the DX update.
+; (Banks up to 1F were already present in the original DMG version.)
+;
+; It contains:
+;
+; - Code moved from the original DMG banks.
+;
+;   When developping the DX version, programmers had to add code to the main
+;   engine banks (bank0, bank1, bank2, etc.) To free some space in those packed
+;   banks, they moved some of the largest data tables (and the associated
+;   functions) to this bank.
+;
+; - New code for handing colors.
+;
+;   That includes notably code for loading attributes and palettes for
+;   backgrounds, objects and entities.
+;
+; -----------------------------------------------------------------------------
 
 ; Contains pointers to wRequests data.
 ; (The requests themselves load data in bank 8.)

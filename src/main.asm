@@ -327,7 +327,7 @@ include "code/audio/sfx.asm"
 
 section "bank20",romx[$4000],bank[$20]
 include "code/entities/_handlers.asm"
-include "code/bank20.asm"
+include "code/color.asm"
 
 section "bank21",romx[$4000],bank[$21]
 include "code/palettes.asm"

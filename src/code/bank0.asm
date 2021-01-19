@@ -1178,49 +1178,63 @@ SelectRoomTilesets::
     rl   d                                        ; $0DE3: $CB $12
     ldh  a, [hMapId]                              ; $0DE5: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $0DE7: $FE $FF
-    jr   nz, .label_DF1                           ; $0DE9: $20 $06
+    jr   nz, .useStandardSpritesheetsTables       ; $0DE9: $20 $06
     ld   a, TRUE                                  ; $0DEB: $3E $01
-    ldh  [hNeedsUpdatingEntityTilesA], a         ; $0DED: $E0 $91
+    ldh  [hNeedsUpdatingEntityTilesA], a          ; $0DED: $E0 $91
     jr   .return                                  ; $0DEF: $18 $40
 
-.label_DF1
-    ld   hl, OverworldEntitySpritesheetsTable                        ; $0DF1: $21 $F3 $73
+.useStandardSpritesheetsTables
+    ld   hl, OverworldEntitySpritesheetsTable     ; $0DF1: $21 $F3 $73
     ld   a, [wIsIndoor]                           ; $0DF4: $FA $A5 $DB
     and  a                                        ; $0DF7: $A7
-    jr   z, .label_DFD                            ; $0DF8: $28 $03
-    ld   hl, IndoorEntitySpritesheetsTable                        ; $0DFA: $21 $3B $76
+    jr   z, .spritesheetsTableEnd                 ; $0DF8: $28 $03
+    ld   hl, IndoorEntitySpritesheetsTable        ; $0DFA: $21 $3B $76
 
-.label_DFD
+.spritesheetsTableEnd
     add  hl, de                                   ; $0DFD: $19
     ld   d, $00                                   ; $0DFE: $16 $00
-    ld   bc, wLoadedEntitySpritesheets                                ; $0E00: $01 $93 $C1
+    ld   bc, wLoadedEntitySpritesheets            ; $0E00: $01 $93 $C1
 
     ; ------------------------------------------------------------
     ;
-    ; Load selected Sprites tileset
-    ;
+    ; Schedule spritesheets copy
     ;
     ; ------------------------------------------------------------
+
+    ;
+    ; This loop iterates on the 4 spritesheet values for this room, and
+    ; schedule the loading for at most two of them.
+    ;
+    ; It looks for the currently loaded spritesheets, and request the ones
+    ; that are not loaded yet. (If more than two spritesheets are different,
+    ; only the last two ones are scheduled.)
+    ;
 
 .loop
     ld   e, [hl]                                  ; $0E03: $5E
     ld   a, [bc]                                  ; $0E04: $0A
+    ; If the spritesheet is already loaded, skip to the next
     cp   e                                        ; $0E05: $BB
-    jr   z, .label_E29                            ; $0E06: $28 $21
+    jr   z, .continue                             ; $0E06: $28 $21
+    ; If the spritesheet is "KEEP CURRENT", skip to the next
     ld   a, e                                     ; $0E08: $7B
     cp   $FF                                      ; $0E09: $FE $FF
-    jr   z, .label_E29                            ; $0E0B: $28 $1C
+    jr   z, .continue                             ; $0E0B: $28 $1C
+    ; Copy the spritesheet value to the wLoadedEntitySpritesheets slot
     ld   [bc], a                                  ; $0E0D: $02
+
+    ; Request the first spritesheet using hNeedsUpdatingEntityTilesA,
+    ; and the second using wNeedsUpdatingEntityTilesB.
     ldh  a, [hMultiPurpose0]                      ; $0E0E: $F0 $D7
     and  a                                        ; $0E10: $A7
-    jr   z, .label_E1E                            ; $0E11: $28 $0B
+    jr   z, .useVariantA                          ; $0E11: $28 $0B
     ld   a, d                                     ; $0E13: $7A
     ld   [wEntityTilesSpriteslotIndexB], a        ; $0E14: $EA $0D $C1
-    ld   a, $01                                   ; $0E17: $3E $01
+    ld   a, TRUE                                  ; $0E17: $3E $01
     ld   [wNeedsUpdatingEntityTilesB], a          ; $0E19: $EA $0E $C1
-    jr   .label_E29                               ; $0E1C: $18 $0B
+    jr   .continue                                ; $0E1C: $18 $0B
 
-.label_E1E
+.useVariantA
     inc  a                                        ; $0E1E: $3C
     ldh  [hMultiPurpose0], a                      ; $0E1F: $E0 $D7
     ld   a, d                                     ; $0E21: $7A
@@ -1228,7 +1242,8 @@ SelectRoomTilesets::
     ld   a, TRUE                                  ; $0E25: $3E $01
     ldh  [hNeedsUpdatingEntityTilesA], a          ; $0E27: $E0 $91
 
-.label_E29
+.continue
+    ; Loop until all four slots are done
     inc  hl                                       ; $0E29: $23
     inc  bc                                       ; $0E2A: $03
     inc  d                                        ; $0E2B: $14

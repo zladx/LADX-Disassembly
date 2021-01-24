@@ -48,8 +48,12 @@ hGameValuesSection::
 hNeedsUpdatingBGTiles::
  ds 1 ; FF90
 
-; Request the spriteslot at wEntityTilesSpriteslotIndexA to be updated with the spritesheet
-; specified at wLoadedEntitySpritesheets.
+; Request the spriteslot at wEntityTilesSpriteslotIndexA to be updated
+; with the spritesheet specified at wLoadedEntitySpritesheets.
+;
+; Writing to this value will block the gameplay code from being run
+; while the spriteslot is updated (i.e. during four frames, starting at
+; the next v-blank).
 ;
 ; See also: wNeedsUpdatingEntityTilesB
 hNeedsUpdatingEntityTilesA::

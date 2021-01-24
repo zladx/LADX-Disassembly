@@ -101,6 +101,12 @@ wEntityTilesSpriteslotIndexB:
 
 ; Request the spriteslot at wEntityTilesSpriteslotIndexB to be updated
 ; with the spritesheet specified at wLoadedEntitySpritesheets.
+;
+; Writing to this value will block the gameplay code from being run
+; while the spriteslot is updated (i.e. during four frames, starting at
+; the next v-blank).
+;
+; See also: wNeedsUpdatingEntityTilesB
 wNeedsUpdatingEntityTilesB::
   ds 1 ; C10E
 

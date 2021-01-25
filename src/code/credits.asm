@@ -1231,30 +1231,30 @@ CreditsStairsFadeInHandler::
     ld   a, [wD006]                               ; $4D39: $FA $06 $D0
     ld   e, a                                     ; $4D3C: $5F
 
-jr_017_4D3D:
     ldh  a, [hFrameCounter]                       ; $4D3D: $F0 $E7
     and  $07                                      ; $4D3F: $E6 $07
     or   e                                        ; $4D41: $B3
-    jr   nz, jr_017_4D5E                          ; $4D42: $20 $1A
+    jr   nz, .fadeInDMGPalettes                   ; $4D42: $20 $1A
 
     ld   a, [wIntroTimer]                         ; $4D44: $FA $01 $D0
     inc  a                                        ; $4D47: $3C
     ld   [wIntroTimer], a                         ; $4D48: $EA $01 $D0
     cp   $0C                                      ; $4D4B: $FE $0C
-    jr   nz, jr_017_4D52                          ; $4D4D: $20 $03
+    jr   nz, .jr_017_4D52                         ; $4D4D: $20 $03
 
     call IncrementCreditsSubscene                 ; $4D4F: $CD $D9 $4C
 
-jr_017_4D52:
+.jr_017_4D52
     ldh  a, [hIsGBC]                              ; $4D52: $F0 $FE
     and  a                                        ; $4D54: $A7
-    jr   z, jr_017_4D5E                           ; $4D55: $28 $07
+    jr   z, .fadeInDMGPalettes                    ; $4D55: $28 $07
 
     ld   a, [wIntroTimer]                         ; $4D57: $FA $01 $D0
     dec  a                                        ; $4D5A: $3D
-    jp   func_017_7E80                            ; $4D5B: $C3 $80 $7E
+    jp   CreditsBlendPalettes                     ; $4D5B: $C3 $80 $7E
 
-jr_017_4D5E:
+.fadeInDMGPalettes
+    ; Assign the DMG grayscale palettes
     ld   a, [wIntroTimer]                         ; $4D5E: $FA $01 $D0
     ld   e, a                                     ; $4D61: $5F
     CREDITS_MACRO
@@ -1641,36 +1641,54 @@ jr_017_5176:
 jr_017_51A6:
     ret                                           ; $51A6: $C9
 
-; Palette data
-Data_017_51A7::
+; Windfish palette data.
+; These are palettes for the whole fade from black to final colors, for all background GBC palettes.
+; Full color is first, and darkest is last.
+; The palettes gets loaded just before the Windfish is shown.
+WindfishPalettes::
+.step0
     db   $00, $00, $E0, $41, $E7, $1C, $FE, $73, $00, $00, $DF, $38, $70, $1C, $FF, $47
     db   $EF, $22, $B5, $02, $E7, $1C, $FE, $73, $00, $00, $EF, $22, $E7, $1C, $FE, $73
     db   $00, $00, $14, $2C, $E7, $1C, $FE, $73, $00, $00, $0F, $7C, $E7, $1C, $FE, $73
     db   $14, $2C, $0F, $7C, $E7, $1C, $FE, $73, $B5, $02, $DF, $38, $70, $1C, $FE, $73
+
+.step1
     db   $00, $00, $A0, $39, $C6, $18, $7A, $63, $00, $00, $DB, $30, $6E, $18, $FF, $47
     db   $8D, $1E, $52, $02, $C6, $18, $7A, $63, $00, $00, $8D, $1E, $C6, $18, $7A, $63
     db   $00, $00, $12, $28, $C6, $18, $7A, $63, $00, $00, $0D, $6C, $C6, $18, $7A, $63
     db   $12, $28, $0D, $6C, $C6, $18, $7A, $63, $52, $02, $DB, $30, $6E, $18, $7A, $63
+
+.step2
     db   $00, $00, $60, $31, $A5, $14, $F6, $52, $00, $00, $B7, $28, $6C, $14, $FF, $47
     db   $2B, $1A, $EF, $01, $A5, $14, $F6, $52, $00, $00, $2B, $1A, $A5, $14, $F6, $52
     db   $00, $00, $0F, $20, $A5, $14, $F6, $52, $00, $00, $0B, $5C, $A5, $14, $F6, $52
     db   $0F, $20, $0B, $5C, $A5, $14, $F6, $52, $EF, $01, $B7, $28, $6C, $14, $F6, $52
+
+.step3
     db   $00, $00, $20, $29, $84, $10, $52, $42, $00, $00, $92, $20, $4A, $10, $FF, $47
     db   $C9, $15, $8C, $01, $84, $10, $52, $42, $00, $00, $C9, $15, $84, $10, $52, $42
     db   $00, $00, $0C, $1C, $84, $10, $52, $42, $00, $00, $09, $48, $84, $10, $52, $42
     db   $0C, $1C, $09, $48, $84, $10, $52, $42, $8C, $01, $92, $20, $4A, $10, $52, $42
+
+.step4
     db   $00, $00, $E0, $1C, $63, $0C, $CD, $31, $00, $00, $6E, $18, $47, $0C, $FF, $47
     db   $47, $11, $29, $01, $63, $0C, $CD, $31, $00, $00, $47, $11, $63, $0C, $CD, $31
     db   $00, $00, $09, $14, $63, $0C, $CD, $31, $00, $00, $07, $38, $63, $0C, $CD, $31
     db   $09, $14, $07, $38, $63, $0C, $CD, $31, $29, $01, $6E, $18, $47, $0C, $CD, $31
+
+.step5
     db   $00, $00, $A0, $14, $42, $08, $29, $21, $00, $00, $49, $10, $25, $08, $FF, $47
     db   $E5, $0C, $C6, $00, $42, $08, $29, $21, $00, $00, $E5, $0C, $42, $08, $29, $21
     db   $00, $00, $06, $10, $42, $08, $29, $21, $00, $00, $05, $24, $42, $08, $29, $21
     db   $06, $10, $05, $24, $42, $08, $29, $21, $C6, $00, $49, $10, $25, $08, $29, $21
+
+.step6
     db   $00, $00, $60, $0C, $21, $04, $A5, $10, $00, $00, $25, $08, $23, $04, $FF, $47
     db   $83, $08, $63, $00, $21, $04, $A5, $10, $00, $00, $83, $08, $21, $04, $A5, $10
     db   $00, $00, $03, $08, $21, $04, $A5, $10, $00, $00, $03, $14, $21, $04, $A5, $10
     db   $03, $08, $03, $14, $21, $04, $A5, $10, $63, $00, $25, $08, $23, $04, $A5, $10
+
+.step7
     db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $FF, $47
     db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
@@ -1699,11 +1717,12 @@ jr_017_53B8:
     ld   a, $00                                   ; $53BF: $3E $00
     adc  $00                                      ; $53C1: $CE $00
     ld   b, a                                     ; $53C3: $47
-    ld   hl, Data_017_51A7                        ; $53C4: $21 $A7 $51
+    ld   hl, WindfishPalettes                        ; $53C4: $21 $A7 $51
     add  hl, bc                                   ; $53C7: $09
     ld   bc, $0040                                ; $53C8: $01 $40 $00
     ld   de, wBGPal1                              ; $53CB: $11 $10 $DC
     call CopyData                                 ; $53CE: $CD $14 $29
+
     xor  a                                        ; $53D1: $AF
     ld   [wPalettePartialCopyColorIndexStart], a  ; $53D2: $EA $D3 $DD
     ld   a, $20                                   ; $53D5: $3E $20
@@ -2603,7 +2622,7 @@ jr_017_5982:
     ret  c                                        ; $5987: $D8
 
     dec  a                                        ; $5988: $3D
-    call func_017_7E80                            ; $5989: $CD $80 $7E
+    call CreditsBlendPalettes                     ; $5989: $CD $80 $7E
     jp   jr_017_5A32                              ; $598C: $C3 $32 $5A
 
 jr_017_598F:
@@ -2636,7 +2655,7 @@ func_017_59A9::
     ret  c                                        ; $59C0: $D8
 
     dec  a                                        ; $59C1: $3D
-    call func_017_7E80                            ; $59C2: $CD $80 $7E
+    call CreditsBlendPalettes                     ; $59C2: $CD $80 $7E
     jr   jr_017_5A32                              ; $59C5: $18 $6B
 
 jr_017_59C7:
@@ -3441,7 +3460,7 @@ jr_017_61EE:
 
     ld   a, [wD00A]                               ; $61F7: $FA $0A $D0
     dec  a                                        ; $61FA: $3D
-    jp   func_017_7E80                            ; $61FB: $C3 $80 $7E
+    jp   CreditsBlendPalettes                     ; $61FB: $C3 $80 $7E
 
 jr_017_61FE:
     CREDITS_MACRO_LDH_AND_LD
@@ -4100,7 +4119,7 @@ jr_017_686C:
 
     ld   a, [wD00A]                               ; $6875: $FA $0A $D0
     dec  a                                        ; $6878: $3D
-    jp   func_017_7E80                            ; $6879: $C3 $80 $7E
+    jp   CreditsBlendPalettes                     ; $6879: $C3 $80 $7E
 
 jr_017_687C:
     CREDITS_MACRO_LDH_AND_LD
@@ -4781,7 +4800,7 @@ jr_017_6F04:
 
     ld   a, [wIntroSubTimer]                      ; $6F09: $FA $02 $D0
     dec  a                                        ; $6F0C: $3D
-    jp   func_017_7E80                            ; $6F0D: $C3 $80 $7E
+    jp   CreditsBlendPalettes                     ; $6F0D: $C3 $80 $7E
 
 jr_017_6F10:
     CREDITS_MACRO_LDH_AND_LD
@@ -6697,7 +6716,10 @@ AddEntityZSpeedToPos_17::
     ld   hl, wEntitiesPosZTable                   ; $7E7B: $21 $10 $C3
     jr   AddEntitySpeedToPos_17.updatePosition    ; $7E7E: $18 $D2
 
-func_017_7E80::
+; Blend palettes with varying degree of white for a fade-in effect.
+; Inputs:
+;   a: blending amount, between 0 (white) and 0B (non-blended original colors)
+CreditsBlendPalettes::
     and  $01                                      ; $7E80: $E6 $01
     jr   z, jr_017_7E88                           ; $7E82: $28 $04
 
@@ -6718,11 +6740,11 @@ IF __PATCH_1__
     call Farcall
 ELSE
     ld   a, $06                                   ; $7E88: $3E $06
-    ldh  [hMultiPurposeD], a                           ; $7E8A: $E0 $E4
+    ldh  [hMultiPurposeD], a                      ; $7E8A: $E0 $E4
     ld   a, $0C                                   ; $7E8C: $3E $0C
-    ldh  [hMultiPurposeE], a                           ; $7E8E: $E0 $E5
+    ldh  [hMultiPurposeE], a                      ; $7E8E: $E0 $E5
     ld   a, $18                                   ; $7E90: $3E $18
-    ldh  [hFreeWarpDataAddress], a                ; $7E92: $E0 $E6
+    ldh  [hMultiPurposeF], a                      ; $7E92: $E0 $E6
     ld   hl, wBGPal1                              ; $7E94: $21 $10 $DC
     ld   a, $40                                   ; $7E97: $3E $40
     ldh  [hMultiPurpose3], a                      ; $7E99: $E0 $DA
@@ -6806,7 +6828,7 @@ jr_017_7EF2:
 
 jr_017_7EF3:
     ldh  [hMultiPurpose1], a                      ; $7EF3: $E0 $D8
-    ldh  a, [hFreeWarpDataAddress]                ; $7EF5: $F0 $E6
+    ldh  a, [hMultiPurposeF]                      ; $7EF5: $F0 $E6
     ld   c, a                                     ; $7EF7: $4F
     ld   a, d                                     ; $7EF8: $7A
     and  $7C                                      ; $7EF9: $E6 $7C

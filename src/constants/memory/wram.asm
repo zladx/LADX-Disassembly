@@ -2828,15 +2828,18 @@ wGameplayType::
 wGameplaySubtype::
   ds 1 ; DB96
 
-; TODO comment
+; BG grayscale palette (DMG only)
+; Copied to rBGP on every frame.
 wBGPalette::
   ds 1 ; DB97
 
-; TODO comment
+; OBJ0 grayscale palette (DMG only)
+; Copied to rOBP0 on every frame.
 wOBJ0Palette::
   ds 1 ; DB98
 
-; TODO comment
+; OBJ1 grayscale palette (DMG only)
+; Copied to rOBP& on every frame.
 wOBJ1Palette::
   ds 1 ; DB99
 

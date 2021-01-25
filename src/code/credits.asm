@@ -1231,30 +1231,30 @@ CreditsStairsFadeInHandler::
     ld   a, [wD006]                               ; $4D39: $FA $06 $D0
     ld   e, a                                     ; $4D3C: $5F
 
-jr_017_4D3D:
     ldh  a, [hFrameCounter]                       ; $4D3D: $F0 $E7
     and  $07                                      ; $4D3F: $E6 $07
     or   e                                        ; $4D41: $B3
-    jr   nz, jr_017_4D5E                          ; $4D42: $20 $1A
+    jr   nz, .fadeInDMGPalettes                   ; $4D42: $20 $1A
 
     ld   a, [wIntroTimer]                         ; $4D44: $FA $01 $D0
     inc  a                                        ; $4D47: $3C
     ld   [wIntroTimer], a                         ; $4D48: $EA $01 $D0
     cp   $0C                                      ; $4D4B: $FE $0C
-    jr   nz, jr_017_4D52                          ; $4D4D: $20 $03
+    jr   nz, .jr_017_4D52                         ; $4D4D: $20 $03
 
     call IncrementCreditsSubscene                 ; $4D4F: $CD $D9 $4C
 
-jr_017_4D52:
+.jr_017_4D52
     ldh  a, [hIsGBC]                              ; $4D52: $F0 $FE
     and  a                                        ; $4D54: $A7
-    jr   z, jr_017_4D5E                           ; $4D55: $28 $07
+    jr   z, .fadeInDMGPalettes                    ; $4D55: $28 $07
 
     ld   a, [wIntroTimer]                         ; $4D57: $FA $01 $D0
     dec  a                                        ; $4D5A: $3D
-    jp   func_017_7E80                            ; $4D5B: $C3 $80 $7E
+    jp   CreditsBlendPalettes                     ; $4D5B: $C3 $80 $7E
 
-jr_017_4D5E:
+.fadeInDMGPalettes
+    ; Assign the DMG grayscale palettes
     ld   a, [wIntroTimer]                         ; $4D5E: $FA $01 $D0
     ld   e, a                                     ; $4D61: $5F
     CREDITS_MACRO
@@ -2622,7 +2622,7 @@ jr_017_5982:
     ret  c                                        ; $5987: $D8
 
     dec  a                                        ; $5988: $3D
-    call func_017_7E80                            ; $5989: $CD $80 $7E
+    call CreditsBlendPalettes                     ; $5989: $CD $80 $7E
     jp   jr_017_5A32                              ; $598C: $C3 $32 $5A
 
 jr_017_598F:
@@ -2655,7 +2655,7 @@ func_017_59A9::
     ret  c                                        ; $59C0: $D8
 
     dec  a                                        ; $59C1: $3D
-    call func_017_7E80                            ; $59C2: $CD $80 $7E
+    call CreditsBlendPalettes                     ; $59C2: $CD $80 $7E
     jr   jr_017_5A32                              ; $59C5: $18 $6B
 
 jr_017_59C7:
@@ -3460,7 +3460,7 @@ jr_017_61EE:
 
     ld   a, [wD00A]                               ; $61F7: $FA $0A $D0
     dec  a                                        ; $61FA: $3D
-    jp   func_017_7E80                            ; $61FB: $C3 $80 $7E
+    jp   CreditsBlendPalettes                     ; $61FB: $C3 $80 $7E
 
 jr_017_61FE:
     CREDITS_MACRO_LDH_AND_LD
@@ -4119,7 +4119,7 @@ jr_017_686C:
 
     ld   a, [wD00A]                               ; $6875: $FA $0A $D0
     dec  a                                        ; $6878: $3D
-    jp   func_017_7E80                            ; $6879: $C3 $80 $7E
+    jp   CreditsBlendPalettes                     ; $6879: $C3 $80 $7E
 
 jr_017_687C:
     CREDITS_MACRO_LDH_AND_LD
@@ -4800,7 +4800,7 @@ jr_017_6F04:
 
     ld   a, [wIntroSubTimer]                      ; $6F09: $FA $02 $D0
     dec  a                                        ; $6F0C: $3D
-    jp   func_017_7E80                            ; $6F0D: $C3 $80 $7E
+    jp   CreditsBlendPalettes                     ; $6F0D: $C3 $80 $7E
 
 jr_017_6F10:
     CREDITS_MACRO_LDH_AND_LD
@@ -6716,7 +6716,10 @@ AddEntityZSpeedToPos_17::
     ld   hl, wEntitiesPosZTable                   ; $7E7B: $21 $10 $C3
     jr   AddEntitySpeedToPos_17.updatePosition    ; $7E7E: $18 $D2
 
-func_017_7E80::
+; Blend palettes with varying degree of white for a fade-in effect.
+; Inputs:
+;   a: blending amount, between 0 (white) and 0B (non-blended original colors)
+CreditsBlendPalettes::
     and  $01                                      ; $7E80: $E6 $01
     jr   z, jr_017_7E88                           ; $7E82: $28 $04
 
@@ -6737,11 +6740,11 @@ IF __PATCH_1__
     call Farcall
 ELSE
     ld   a, $06                                   ; $7E88: $3E $06
-    ldh  [hMultiPurposeD], a                           ; $7E8A: $E0 $E4
+    ldh  [hMultiPurposeD], a                      ; $7E8A: $E0 $E4
     ld   a, $0C                                   ; $7E8C: $3E $0C
-    ldh  [hMultiPurposeE], a                           ; $7E8E: $E0 $E5
+    ldh  [hMultiPurposeE], a                      ; $7E8E: $E0 $E5
     ld   a, $18                                   ; $7E90: $3E $18
-    ldh  [hFreeWarpDataAddress], a                ; $7E92: $E0 $E6
+    ldh  [hMultiPurposeF], a                      ; $7E92: $E0 $E6
     ld   hl, wBGPal1                              ; $7E94: $21 $10 $DC
     ld   a, $40                                   ; $7E97: $3E $40
     ldh  [hMultiPurpose3], a                      ; $7E99: $E0 $DA
@@ -6825,7 +6828,7 @@ jr_017_7EF2:
 
 jr_017_7EF3:
     ldh  [hMultiPurpose1], a                      ; $7EF3: $E0 $D8
-    ldh  a, [hFreeWarpDataAddress]                ; $7EF5: $F0 $E6
+    ldh  a, [hMultiPurposeF]                      ; $7EF5: $F0 $E6
     ld   c, a                                     ; $7EF7: $4F
     ld   a, d                                     ; $7EF8: $7A
     and  $7C                                      ; $7EF9: $E6 $7C

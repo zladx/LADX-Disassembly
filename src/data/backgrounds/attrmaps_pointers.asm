@@ -37,4 +37,3 @@ AttrmapsPointersTable::
 ._23 dw SchulePaintingAttrmap            ; $65B0
 ._24 dw EaglesTowerCollapseAttrmap       ; $667C
 ._25 dw IntroSeaCGBAttrmap               ; $5D18
-

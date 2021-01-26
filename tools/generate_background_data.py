@@ -11,22 +11,23 @@ from lib.background_parser import *
 from lib.utils import BANK, global_to_local
 
 background_descriptors = [
-    BackgroundTableDescriptor(
-        name = 'tilemaps',
-        address = BANK(0x20) + 0x052B,
-        length = 0x4C,
-        data = [
-            BackgroundDescriptor(
-                address = BANK(0x08) + 0x0DD4,
-                length = 0x2B4C
-            )
-        ]
-    ),
+    # BackgroundTableDescriptor(
+    #     name = 'tilemaps',
+    #     address = BANK(0x20) + 0x052B,
+    #     length = 0x4C,
+    #     data = [
+    #         BackgroundDescriptor(
+    #             address = BANK(0x08) + 0x0DD4,
+    #             length = 0x2B4C
+    #         )
+    #     ]
+    # ),
     BackgroundTableDescriptor(
         name = 'attrmaps',
         address = BANK(0x24) + 0x1C4B,
         length = 0x4C,
         data = [
+            # US, JP
             BackgroundDescriptor(
                 address = BANK(0x24) + 0x1C97,
                 length = 0x174A
@@ -34,7 +35,16 @@ background_descriptors = [
             BackgroundDescriptor(
                 address = BANK(0x24) + 0x3BA7,
                 length = 0x12A
-            )
+            ),
+            # GE
+            # BackgroundDescriptor(
+            #     address = BANK(0x24) + 0x1C97,
+            #     length = 0x1736
+            # ),
+            # BackgroundDescriptor(
+            #     address = BANK(0x24) + 0x3B93,
+            #     length = 0x12A
+            # ),
         ]
     )
 ]

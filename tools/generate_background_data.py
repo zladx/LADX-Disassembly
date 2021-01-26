@@ -36,7 +36,7 @@ background_descriptors = [
                 address = BANK(0x24) + 0x3BA7,
                 length = 0x12A
             ),
-            # GE
+            # FR, GE
             # BackgroundDescriptor(
             #     address = BANK(0x24) + 0x1C97,
             #     length = 0x1736

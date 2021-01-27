@@ -219,7 +219,7 @@ FileSelectionPrepare6::
 
     ; If there are no saved files yet…
     ld   a, [wSaveFilesCount]                     ; $48C2: $FA $A7 $DB
-IF __PATCH_5__
+IF LANG_DE
     ldh [hLinkInteractiveMotionBlocked], a
 ENDC
     and  a                                        ; $48C5: $A7
@@ -247,7 +247,7 @@ Data_001_48E4::
     ld   l, e                                     ; $48E6: $6B
     add  a, e                                     ; $48E7: $83
 
-IF __PATCH_5__
+IF LANG_DE
 Data_001_48EB:
     ; bg copy requests
     db   $99, $C6, $00, $AA
@@ -259,7 +259,7 @@ ENDC
 
 
 FileSelectionInteractiveHandler::
-IF __PATCH_5__
+IF LANG_DE
     ldh a, [hLinkInteractiveMotionBlocked]
     and a
     jr z, .start
@@ -535,7 +535,7 @@ FileCreationInit2Handler::
     ld   [hl], a                                  ; $4A3B: $77
     jp   IncrementGameplaySubtypeAndReturn        ; $4A3C: $C3 $D6 $44
 
-IF !__PATCH_5__
+IF !LANG_DE
 ; Write a single byte to the save file.
 ; Inputs:
 ;   hl   address of the save file start
@@ -1223,7 +1223,7 @@ FileDeletionState11Handler::
     jr   nz, jr_001_4E9E                          ; $4E6F: $20 $2D ; $4E6F: $20 $2D
 
     and  $90                                      ; $4E71: $E6 $90 ; $4E71: $E6 $90
-IF __PATCH_5__
+IF LANG_DE
     jp   z, jr_001_4ED9
 ELSE
     jr   z, jr_001_4ED9                           ; $4E73: $28 $64 ; $4E73: $28 $64
@@ -1289,7 +1289,7 @@ Data_001_4EA9::
 include "data/file_menu_bg_2.asm"
 .end
 
-IF __PATCH_5__
+IF LANG_DE
 Data_001_4EA9_alt::
 include "data/file_menu_bg_2_alt.asm"
 .end
@@ -1305,7 +1305,7 @@ func_001_4EBB::
     add  hl, de                                   ; $4EC9: $19 ; $4EC9: $19
     ld   de, Data_001_4EA9                        ; $4ECA: $11 $A9 $4E ; $4ECA: $11 $A9 $4E
 
-IF __PATCH_5__
+IF LANG_DE
     ld   a, [wGameplayType]
     cp   GAMEPLAY_FILE_COPY
     jr   nz, .endIfFileCopy

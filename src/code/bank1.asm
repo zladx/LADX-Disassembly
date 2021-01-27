@@ -1601,7 +1601,7 @@ SynchronizeDungeonsItemFlags::
 
     ; Select the correct item flags slot for the current dungeon
     ; hl = wDungeonItemFlags + (hMapId * 5)
-IF !__PATCH_5__
+IF !LANG_DE
     ld   hl, wDungeonItemFlags                    ; $5E7D: $21 $16 $DB
 ENDC
     ld   e, a                                     ; $5E80: $5F
@@ -1610,7 +1610,7 @@ ENDC
     add  a, e                                     ; $5E85: $83
     ld   e, a                                     ; $5E86: $5F
     ld   d, $00                                   ; $5E87: $16 $00
-IF __PATCH_5__
+IF LANG_DE
     ld   hl, wDungeonItemFlags
 ENDC
     add  hl, de                                   ; $5E89: $19

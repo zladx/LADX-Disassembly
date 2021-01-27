@@ -7,6 +7,26 @@ Misc notes that have not been translated into disassembly comments yet
 
 ### Patch matrix
 
+PATCH_6 is just LANG_JP
+PATCH_5 is just LANG_DE
+
+Note: the graph is still wrong:
+- FR should not have PATCH_9
+
+
+                                                    -- PATCH_7 -- [FR 1.0] -- [FR 1.1]
+                                                   /                       /
+                                       -- PATCH_1 -- PATCH_5 -- [DE 1.0] -- [DE 1.1]
+                                      /                                  /
+BASE -- PATCH_9 -- PATCH_0 -- PATCH_2 - -- PATCH_4 ----------------------
+   \           \                      \                                  \
+    \           \                      \- PATCH_3 -- PATCH_8 --\          \
+     \           \                                              \          \
+      \           -- PATCH_6 -- [JP 1.0] ---------------------- [JP 1.1] --- [JP 1.2]
+       \
+        -- PATCH_C -- [US 1.0]
+
+
 |       -       | JP 1.0 | JP 1.1 | JP 1.2 | US 1.0 | US 1.1 | US 1.2 | FR 1.0 | FR 1.1 | DE 1.0 | DE 1.1 |
 |:-------------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
 | `__PATCH_0__` |        |  Yes   |  Yes   |        |  Yes   |  Yes   |  Yes   |  Yes   |  Yes   |  Yes   |
@@ -14,7 +34,6 @@ Misc notes that have not been translated into disassembly comments yet
 | `__PATCH_2__` |        |  Yes   |  Yes   |        |        |  Yes   |  Yes   |  Yes   |  Yes   |  Yes   |
 | `__PATCH_3__` |        |  Yes   |  Yes   |        |  Yes   |  Yes   |        |        |        |        |
 | `__PATCH_4__` |        |        |  Yes   |        |        |  Yes   |        |  Yes   |        |  Yes   |
-| `__PATCH_5__` |        |        |        |        |        |        |        |        |  Yes   |  Yes   |
 | `__PATCH_6__` |  Yes   |  Yes   |  Yes   |        |        |        |        |        |        |        |
 | `__PATCH_7__` |        |        |        |        |        |        |  Yes   |  Yes   |        |        |
 | `__PATCH_8__` |        |  Yes   |  Yes   |        |        |        |        |        |        |        |
@@ -65,7 +84,7 @@ _(To-do)_
   * File menu
   * Photo interface
 
-#### `__PATCH_5__`
+#### `LANG_DE`
 * Removes the bizarre feature where debug flag 2 writes a weird BG map to the subscreen
   * `src/code/world_handler.asm -> GameplayWorldLoad0Handler`
 * Various other undocumented changes

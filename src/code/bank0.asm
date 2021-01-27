@@ -5767,7 +5767,7 @@ doCopyObjectToBG:
 
     ret                                           ; $309A: $C9
 
-; Copy the tile map of a room to BG video memory.
+; Copy the tilemap of a room to BG video memory.
 ;
 ; This is used when loading a map in one go (instead
 ; of having a sliding screen transition.)

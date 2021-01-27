@@ -44,7 +44,7 @@ GameplayWorldLoad0Handler::
     ; Load the inventory tilemap
     ;
 
-IF !__PATCH_5__
+IF !LANG_DE
     ; POI: This is where debug flag 2 messes up the subscreen
     ld   a, [ROM_DebugTool2]                      ; $439B: $FA $04 $00
     and  a                                        ; $439E: $A7

@@ -151,7 +151,7 @@ jr_001_4894::
     ld   a, [de]                                  ; $4896: $1A
     and  a                                        ; $4897: $A7
 
-IF __PATCH_C__
+IF LANG_EN
     jr   jr_001_489D                              ; $4898: $18 $03
     dec  a                                        ; $489A: $3D
     and  $C0                                      ; $489B: $E6 $C0
@@ -1193,7 +1193,7 @@ include "data/file_menu_bg.asm"
 label_001_4E55::
     ld   hl, wRequestDestinationHigh              ; $4E55: $21 $01 $D6 ; $4E55: $21 $01 $D6
     ld   de, Data_001_4E43                        ; $4E58: $11 $43 $4E ; $4E58: $11 $43 $4E
-IF __PATCH_C__
+IF LANG_EN
     ld   c, Data_001_4E43.end - Data_001_4E43 - 1 ; $4E5B: $0E $11 ; $4E5B: $0E $11
 ELSE
     ld   c, Data_001_4E43.end - Data_001_4E43
@@ -1204,7 +1204,7 @@ ENDC
     inc  de                                       ; $4E5E: $13 ; $4E5E: $13
     ld   [hl+], a                                 ; $4E5F: $22 ; $4E5F: $22
     dec  c                                        ; $4E60: $0D ; $4E60: $0D
-IF __PATCH_C__
+IF LANG_EN
     ld   a, c                                     ; $4E61: $79 ; $4E61: $79
     cp   $FF                                      ; $4E62: $FE $FF ; $4E62: $FE $FF
 ENDC
@@ -1313,7 +1313,7 @@ IF LANG_DE
 .endIfFileCopy
 ENDC
 
-IF __PATCH_C__
+IF LANG_EN
     ld   c, Data_001_4EA9.end - Data_001_4EA9 - 1 ; $4ECD: $0E $11 ; $4ECD: $0E $11
 ELSE
     ld   c, Data_001_4EA9.end - Data_001_4EA9
@@ -1323,7 +1323,7 @@ ENDC
     inc  de                                       ; $4ED0: $13 ; $4ED0: $13
     ld   [hl+], a                                 ; $4ED1: $22 ; $4ED1: $22
     dec  c                                        ; $4ED2: $0D ; $4ED2: $0D
-IF __PATCH_C__
+IF LANG_EN
     ld   a, c                                     ; $4ED3: $79 ; $4ED3: $79
     cp   $FF                                      ; $4ED4: $FE $FF ; $4ED4: $FE $FF
 ENDC

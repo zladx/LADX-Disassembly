@@ -46,7 +46,7 @@ LoadBGMapAttributes::
 
     ld   a, $01                                   ; $5C30: $3E $01
     ldh  [rVBK], a                                ; $5C32: $E0 $4F
-    ld   hl, BGMapAttributesPointersTable         ; $5C34: $21 $4B $5C
+    ld   hl, AttrmapsPointersTable                ; $5C34: $21 $4B $5C
     ld   b, $00                                   ; $5C37: $06 $00
     ld   a, [wBGMapToLoad]                        ; $5C39: $FA $FF $D6
     sla  a                                        ; $5C3C: $CB $27
@@ -61,7 +61,8 @@ LoadBGMapAttributes::
     ldh  [rVBK], a                                ; $5C48: $E0 $4F
     ret                                           ; $5C4A: $C9
 
-include "data/backgrounds/attributes.asm"
+include "data/backgrounds/attrmaps_pointers.asm"
+include "data/backgrounds/attrmaps_list.asm"
 
 ; -------------------------------------------------------
 ; Background Palettes

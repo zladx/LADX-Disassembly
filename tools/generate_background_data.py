@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Parse the ROM, and output asm files with the background tilemaps tables and data.
+# Parse the US v1.0 ROM, and output asm files with the background tilemaps tables and data.
 
 import os
 import argparse
@@ -11,40 +11,55 @@ from lib.background_parser import *
 from lib.utils import BANK, global_to_local
 
 background_descriptors = [
+    # BackgroundTableDescriptor(
+    #     name = 'tilemaps',
+    #     address = BANK(0x20) + 0x052B,
+    #     length = 0x4C,
+    #     data = [
+    #         BackgroundDescriptor(
+    #             address = BANK(0x08) + 0x0DD4,
+    #             length = 0x2B4C
+    #         )
+    #     ]
+    # ),
     BackgroundTableDescriptor(
-        name = 'background_tile_commands',
-        address = BANK(0x20) + 0x052B,
+        name = 'attrmaps',
+        address = BANK(0x24) + 0x1C4B,
         length = 0x4C,
-        data = BackgroundDescriptor(
-            address = BANK(0x08) + 0x0DD4
-        )
-    ),
-
-    # TODO: The attributes are split into multiple areas where they are stored.
-    #  so we need to split the output into multiple files and make sure not to decode any code.
-    #  But we only need a single pointer list.
-    #BackgroundTableDescriptor(
-    #    name = 'background_attributes',
-    #    address = BANK(0x24) + 0x1C4B,
-    #    length = 0x4C,
-    #    data = BackgroundDescriptor(
-    #        address = BANK(0x24) + 0x1C97,
-    #        length = 0x203A
-    #    )
-    #)
+        data = [
+            # US, JP
+            BackgroundDescriptor(
+                address = BANK(0x24) + 0x1C97,
+                length = 0x174A
+            ),
+            BackgroundDescriptor(
+                address = BANK(0x24) + 0x3BA7,
+                length = 0x12A
+            ),
+            # FR, GE
+            # BackgroundDescriptor(
+            #     address = BANK(0x24) + 0x1C97,
+            #     length = 0x1736
+            # ),
+            # BackgroundDescriptor(
+            #     address = BANK(0x24) + 0x3B93,
+            #     length = 0x12A
+            # ),
+        ]
+    )
 ]
 
 background_names = [
   None,                              #00
   'CreditsIslandTilemap',            #01
   'InventoryTilemap',                #02
-  'BackgroundTileCommands03',        #03
+  'Tilemap03',                       #03
   'MenuFileSelectionTilemap',        #04
   'MenuFileCreationTilemap',         #05
-  'BackgroundTileCommands06',        #06
-  None,                              #07
+  'Tilemap06',                       #06
+  'Tilemap07',                       #07
   'WorldMapTilemap',                 #08
-  'BackgroundTileCommands09',        #09 (inventory no minimap?)
+  'Tilemap09',                       #09 (inventory no minimap?)
   'GameOverTilemap',                 #0A
   'InventoryDebugTilemap',           #0B
   'MenuFileCopyTilemap',             #0C
@@ -88,14 +103,17 @@ class BackgroundName:
     def __init__(self, index):
         self.index = index
 
-    def as_label(self):
-        return background_names[self.index]
+    def as_label(self, content_type):
+        name = background_names[self.index]
+        if name is None:
+            return None
+        return name.replace('Tilemap', content_type.capitalize())
 
     def as_filename(self, extension):
         name = background_names[self.index]
         if name is None:
             return None
-        return f"{to_snake_case(name).replace('_tilemap', '')}.tilemap{extension}"
+        return f"{to_snake_case(name).replace('_tilemap', '')}.{extension}"
 
 class PointersTableFormatter:
     @classmethod
@@ -104,9 +122,10 @@ class PointersTableFormatter:
 
 class PointerFormatter:
     @classmethod
-    def to_asm(cls, table_name, pointer):
-        label = BackgroundName(pointer.index).as_label()
-        if label:
+    def to_asm(cls, table_name, content_type, pointer):
+        label = BackgroundName(pointer.index).as_label(content_type)
+        is_pointing_to_rom = (pointer.address < 0x8000)
+        if label and is_pointing_to_rom:
           return f"._{pointer.index:02X} dw {label.ljust(32, ' ')} ; ${pointer.address:04X}\n"
         else:
           return f"._{pointer.index:02X} dw ${pointer.address:04X}\n"
@@ -179,6 +198,16 @@ if __name__ == "__main__":
         background_table_parser = BackgroundTableParser(rom_path, background_descriptor)
 
         #
+        # Compute the files type and extension
+        #
+        content_type = re.sub('s$', '', background_table_parser.name)
+        extensions_for_format = {
+            "asm": f"{content_type}.asm",
+            "bin": f"{content_type}.encoded"
+        }
+        content_file_extension = extensions_for_format[args.format[0]]
+
+        #
         # Write the pointers table
         #
         with open(os.path.join(target_dir, background_table_parser.name + '_pointers.asm'), 'w') as pointers_file:
@@ -186,11 +215,11 @@ if __name__ == "__main__":
 
             # Append to the pointers file
             for index, pointer in enumerate(background_table_parser.pointers):
-                pointers_file.write(PointerFormatter.to_asm(background_table_parser.name, pointer))
+                pointers_file.write(PointerFormatter.to_asm(background_table_parser.name, content_type, pointer))
             pointers_file.write("\n")
 
         #
-        # Write the tilemaps files list
+        # Write the files include list
         #
 
         # Make a list of all unique pointers, in the order in which they appear in the commands list
@@ -203,41 +232,35 @@ if __name__ == "__main__":
         pointer_groups = groupby(sorted_pointers, lambda p: p.address)
 
         # Compute the target list filename
-        extensions_for_format = {
-            "asm": ".asm",
-            "bin": ".encoded"
-        }
-        tilemap_extension = extensions_for_format[args.format[0]]
-        list_filename = os.path.join(target_dir, 'backgrounds_list.asm')
+        list_filename = os.path.join(target_dir, f"{background_table_parser.name}_list.asm")
 
         with open(list_filename, 'w') as list_file:
             # For each group of pointers at the same address…
             for address, pointers in pointer_groups:
                 immutable_pointers = list(pointers)
                 # Write the labels
-                labels = map(lambda p: BackgroundName(p.index).as_label(), immutable_pointers)
-                unique_labels = set(labels)
-                list_file.write("\n".join(f"{label}::\n" for label in unique_labels))
+                labels = map(lambda p: BackgroundName(p.index).as_label(content_type), immutable_pointers)
+                unique_labels = sorted(set(labels))
+                list_file.write("\n".join(f"{label}::" for label in unique_labels))
                 # Write the target filename include
                 # (always use a path relative to 'src/')
-                tilemap_name = BackgroundName(immutable_pointers[0].index).as_filename(tilemap_extension)
-                tilemap_path = os.path.join(target_dir, tilemap_name).split("src/")[1]
+                content_file_name = BackgroundName(immutable_pointers[0].index).as_filename(content_file_extension)
+                content_file_path = os.path.join(target_dir, content_file_name).split("src/")[1]
                 include = "include" if args.format[0] == "asm" else "incbin"
-                list_file.write(f"{include} \"{tilemap_path}\"\n")
+                list_file.write(f"\n{include} \"{content_file_path}\"\n")
 
         #
-        # Write the tilemap files
+        # Write the content files
         #
 
         # Remove all previous files
-        if tilemap_extension:
-            remove_all_dumped_files(background_table_parser, tilemap_extension)
+        remove_all_dumped_files(background_table_parser, content_file_extension)
 
         if args.format == ["asm"] or args.format is None:
             # Write background files as asm files
             for index, command in enumerate(background_table_parser.list):
                 pointer_index = background_table_parser.pointers_for_command(command)[0].index
-                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename(tilemap_extension))
+                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename(content_file_extension))
                 with open(filename, 'a+') as background_file:
                     if background_file.tell() == 0:
                         background_file.write(disclaimer)
@@ -248,7 +271,7 @@ if __name__ == "__main__":
             # Write background files as binary files
             for index, command in enumerate(background_table_parser.list):
                 pointer_index = background_table_parser.pointers_for_command(command)[0].index
-                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename(tilemap_extension))
+                filename = os.path.join(target_dir, BackgroundName(pointer_index).as_filename(content_file_extension))
                 with open(filename, 'ab+') as background_file:
                     data = BackgroundCommandFormatter.to_bytes(command)
                     background_file.write(data)

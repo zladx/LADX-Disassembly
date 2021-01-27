@@ -5,7 +5,7 @@ from lib.utils import global_to_local
 BackgroundTableDescriptor = namedtuple('BackgroundTableDescriptor', ['name', 'address', 'length', 'data'])
 
 # Describe the location of a tilemap
-BackgroundDescriptor = namedtuple('BackgroundDescriptor', ['address'])
+BackgroundDescriptor = namedtuple('BackgroundDescriptor', ['address', 'length'])
 
 # Represent a pointer in a pointers table
 Pointer = namedtuple('Pointer', ['index', 'address'])
@@ -21,7 +21,10 @@ class BackgroundTableParser:
         with open(rom_path, 'rb') as rom_file:
             rom = rom_file.read()
             self.pointers = self._parse_pointers_table(rom, table_descriptor)
-            self.list = BackgroundListsParser(rom, table_descriptor.data).list
+
+            self.list = []
+            for list_descriptor in table_descriptor.data:
+                self.list += BackgroundListsParser(rom, list_descriptor).list
 
     def pointers_for_command(self, command):
         nearest_previous_pointer = None
@@ -66,23 +69,20 @@ class BackgroundListsParser:
     """
     Parse an area containing lists of background draw commands (one list per background entry).
     """
-    def __init__(self, rom, entities_descriptor):
+    def __init__(self, rom, lists_descriptor):
         self.list = []
-        self._parse(rom, entities_descriptor)
+        self._parse(rom, lists_descriptor)
 
     def _parse(self, rom, descriptor):
         """Walk the lists, and parse data for each list"""
         address = descriptor.address
+        end_address = address + descriptor.length
 
-        while True:
+        while address < end_address:
             if rom[address] == END_OF_LIST:
                 self.list.append(BackgroundCommandEnd(address))
-                if rom[address+1] == END_OF_LIST:
-                    # Consider two consecutive END commands to mark the end of the lists
-                    break
-                else:
-                    address += 1
-                    continue
+                address += 1
+                continue
 
             address_high = rom[address]
             address_low = rom[address+1]

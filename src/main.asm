@@ -67,7 +67,7 @@ ColorDungeonObjectsTilemap::
 include "data/objects_tilemaps/color_dungeon.asm"
 include "data/objects/physics.asm"
 BGTilemaps::
-include "data/backgrounds/backgrounds_list.asm"
+include "data/backgrounds/tilemaps_list.asm"
 
 ; Maps and dialogs
 section "bank9",romx[$4000],bank[$09]

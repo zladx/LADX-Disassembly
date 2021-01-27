@@ -16,13 +16,13 @@ Note: the graph is still wrong:
 
                                                     -- PATCH_7 -- [FR 1.0] -- [FR 1.1]
                                                    /                       /
-                                       -- PATCH_1 -- PATCH_5 -- [DE 1.0] -- [DE 1.1]
+                                       -- PATCH_1 -- LANG_DE -- [DE 1.0] -- [DE 1.1]
                                       /                                  /
 BASE -- PATCH_9 -- PATCH_0 -- PATCH_2 - -- PATCH_4 ----------------------
    \           \                      \                                  \
     \           \                      \- PATCH_3 -- PATCH_8 --\          \
      \           \                                              \          \
-      \           -- PATCH_6 -- [JP 1.0] ---------------------- [JP 1.1] --- [JP 1.2]
+      \           -- LANG_JP -- [JP 1.0] ---------------------- [JP 1.1] --- [JP 1.2]
        \
         -- PATCH_C -- [US 1.0]
 
@@ -34,7 +34,6 @@ BASE -- PATCH_9 -- PATCH_0 -- PATCH_2 - -- PATCH_4 ----------------------
 | `__PATCH_2__` |        |  Yes   |  Yes   |        |        |  Yes   |  Yes   |  Yes   |  Yes   |  Yes   |
 | `__PATCH_3__` |        |  Yes   |  Yes   |        |  Yes   |  Yes   |        |        |        |        |
 | `__PATCH_4__` |        |        |  Yes   |        |        |  Yes   |        |  Yes   |        |  Yes   |
-| `__PATCH_6__` |  Yes   |  Yes   |  Yes   |        |        |        |        |        |        |        |
 | `__PATCH_7__` |        |        |        |        |        |        |  Yes   |  Yes   |        |        |
 | `__PATCH_8__` |        |  Yes   |  Yes   |        |        |        |        |        |        |        |
 | `__PATCH_9__` |  Yes   |  Yes   |  Yes   |        |        |        |        |        |  Yes   |  Yes   |
@@ -92,7 +91,7 @@ _(To-do)_
   * File menus
 
 
-#### `__PATCH_6__`
+#### `LANG_JP`
 * Seems to be a "reverse history patch". The disassembly is based on DX US 1.0 and this is for the JP versions only
   * That is, rather than representing a change in a future version, this change reverts to an older version of code
 * Pointless `push hl`, `pop hl` instruction

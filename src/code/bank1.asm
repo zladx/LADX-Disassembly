@@ -108,7 +108,7 @@ ENDC
     ld   a, DEBUG_SAVE_MAGIC_COUNT                ; $46FF: $3E $40
     ld   [$A47B], a ; 40 max magic powder         ; $4701: $EA $7B $A4
     ld   [$A451], a ; 40 magic powder             ; $4704: $EA $51 $A4
-IF !__PATCH_6__
+IF !LANG_JP
     ld   a, $89                                   ; $4707: $3E $89
     ld   [$A44C], a ; "time/animation?" (unknown) ; $4709: $EA $4C $A4
 ENDC
@@ -713,7 +713,7 @@ jr_001_55F5::
     ldh  [hMultiPurpose3], a                      ; $560C: $E0 $DA
     pop  hl                                       ; $560E: $E1
     call func_001_5619 ;show dungeon map no       ; $560F: $CD $19 $56
-IF __PATCH_6__
+IF LANG_JP
     push hl
     pop  hl
 ENDC

@@ -80,7 +80,6 @@ __PATCH_1__ = FALSE ; Applies to DE, FR
 __PATCH_2__ = FALSE ; Applies to DE, JP1+, EN2+, FR
 __PATCH_3__ = FALSE ; Applies to JP1+, EN1+
 __PATCH_4__ = FALSE ; Applies to DE1+, JP2+, EN2+, FR1+
-__PATCH_6__ = FALSE ; Applies to JP
 __PATCH_7__ = FALSE ; Applies to FR
 __PATCH_8__ = FALSE ; Applies to JP1+
 __PATCH_9__ = FALSE ; Applies to DE, JP
@@ -148,7 +147,6 @@ GAMEOVER_OPTION_CONTINUE_Y equ 104
 SAVE_OPTION_X equ 36
 __USE_FIXED_DIALOG_BANKS__ = TRUE
 __DO_CHECK_DAKUTEN__ = TRUE
-__PATCH_6__ = TRUE
 __PATCH_9__ = TRUE
 __PATCH_A__ = 1
 __PATCH_B__ = 1

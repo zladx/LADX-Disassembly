@@ -216,7 +216,7 @@ jr_021_412C:
     sla  a                                        ; $4130: $CB $27
     ld   e, a                                     ; $4132: $5F
     ld   d, $00                                   ; $4133: $16 $00
-    ld   hl, Data_021_43EF                        ; $4135: $21 $EF $43
+    ld   hl, Data_021_43EF                                ; $4135: $21 $EF $43
     ldh  a, [hIsSideScrolling]                    ; $4138: $F0 $F9
     and  a                                        ; $413A: $A7
     jr   z, jr_021_4165                           ; $413B: $28 $28
@@ -2435,7 +2435,7 @@ Data_021_7D6E:
 
 ; BG palettes data for the title screen.
 TitleBGPalettes::
-IF __PATCH_6__
+IF LANG_JP
     db   $FF, $7F, $DD, $14, $17, $14, $00, $00
     db   $FF, $7F, $1F, $13, $DF, $11, $00, $00
 ELSE
@@ -2453,7 +2453,7 @@ ENDC
     db   $40, $7E, $86, $49, $38, $6F, $20, $28
     db   $40, $7E, $00, $00, $39, $1A, $FF, $4E
     db   $75, $79, $7E, $4B, $B5, $42, $EF, $21
-IF __PATCH_6__
+IF LANG_JP
     db   $F5, $7A, $DC, $12, $4A, $01, $00, $00
     db   $F5, $7A, $DC, $12, $4A, $01, $00, $00
 ELSE

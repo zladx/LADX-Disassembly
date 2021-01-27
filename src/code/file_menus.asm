@@ -1164,7 +1164,7 @@ jr_001_4E2B::
 jr_001_4E3B::
     call PlayValidationJingleAndReturn            ; $4E3B: $CD $BE $49 ; $4E3B: $CD $BE $49
     call IncrementGameplaySubtype                 ; $4E3E: $CD $D6 $44 ; $4E3E: $CD $D6 $44
-IF __PATCH_6__
+IF LANG_JP
 label_001_4E55:
     ld hl, wRequestDestination
     ld a, $99
@@ -1263,7 +1263,7 @@ jr_001_4E9E::
     dec  [hl]                                     ; $4EA7: $35 ; $4EA7: $35
     ret                                           ; $4EA8: $C9 ; $4EA8: $C9
 
-IF __PATCH_6__
+IF LANG_JP
 func_001_4EBB::
     ld   a, [wRequests]                             ; $4eff: $fa $00 $d6
     ld   e, a                                       ; $4f02: $5f
@@ -1387,7 +1387,7 @@ jr_001_4F1D::
 
     ld   a, [wCreditsScratch0]                    ; $4F23: $FA $00 $D0 ; $4F23: $FA $00 $D0
     ld   e, a                                     ; $4F26: $5F ; $4F26: $5F
-IF __PATCH_6__
+IF LANG_JP
     ld   a, [wGameplayType]
     cp   GAMEPLAY_FILE_COPY
     ld   a, $1c

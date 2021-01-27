@@ -493,6 +493,6 @@ func_024_7B77::
     ret                                           ; $7BA6: $C9
 
 IntroBeachAttrmap::
-incbin "data/backgrounds/intro_beach.attrmap.encoded"
+incbin "gfx/backgrounds/intro_beach.attrmap.encoded"
 TitleAttrmap::
-incbin "data/backgrounds/title.attrmap.encoded"
+incbin "gfx/backgrounds/title.attrmap.encoded"

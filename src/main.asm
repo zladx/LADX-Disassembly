@@ -199,17 +199,17 @@ Intro3Tiles::
 incbin "gfx/intro/intro_3.dmg.2bpp"
 StaticPicturesTiles::
 ChristineTiles::
-incbin "gfx/scenes/christine.dmg.2bpp"
+incbin "gfx/backgrounds/christine.dmg.2bpp"
 MarinBeachTiles::
-incbin "gfx/scenes/marin_beach.dmg.2bpp"
+incbin "gfx/backgrounds/marin_beach.dmg.2bpp"
 MarinBeachWavesTiles::
-incbin "gfx/scenes/marin_beach_waves.dmg.2bpp"
+incbin "gfx/backgrounds/marin_beach_waves.dmg.2bpp"
 FontLargeTiles::
 incbin "gfx/fonts/font_large.dmg.2bpp"
 ReliefTiles::
-incbin "gfx/scenes/relief.dmg.2bpp"
+incbin "gfx/backgrounds/relief.dmg.2bpp"
 PaintingTiles::
-incbin "gfx/scenes/painting.dmg.2bpp"
+incbin "gfx/backgrounds/schule_painting.dmg.2bpp"
 
 section "bank11",romx[$4000],bank[$11]
 Npc2Tiles::
@@ -422,12 +422,12 @@ section "bank30",romx[$4000],bank[$30]
 incbin "gfx/intro/intro_1.cgb.2bpp"
 incbin "gfx/intro/intro_2.cgb.2bpp"
 incbin "gfx/intro/intro_3.cgb.2bpp"
-incbin "gfx/scenes/christine.cgb.2bpp"
-incbin "gfx/scenes/marin_beach.cgb.2bpp"
-incbin "gfx/scenes/marin_beach_waves.cgb.2bpp"
+incbin "gfx/backgrounds/christine.cgb.2bpp"
+incbin "gfx/backgrounds/marin_beach.cgb.2bpp"
+incbin "gfx/backgrounds/marin_beach_waves.cgb.2bpp"
 incbin "gfx/fonts/font_large.cgb.2bpp"
-incbin "gfx/scenes/relief.cgb.2bpp"
-incbin "gfx/scenes/painting.cgb.2bpp"
+incbin "gfx/backgrounds/relief.cgb.2bpp"
+incbin "gfx/backgrounds/schule_painting.cgb.2bpp"
 
 section "bank31",romx[$4000],bank[$31]
 incbin "gfx/characters/oam_npc_2.cgb.2bpp"

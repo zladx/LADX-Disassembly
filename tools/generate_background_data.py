@@ -68,7 +68,7 @@ background_names = [
   'IntroLinkFaceTilemap',            #0F
   'IntroBeachTilemap',               #10
   'TitleTilemap',                    #11
-  'PeachTilemap',                    #12
+  'ChristineTilemap',                #12
   'MarinBeachTilemap',               #13
   'MamuTilemap',                     #14
   'FaceShrineMuralTilemap',          #15

@@ -80,7 +80,6 @@ __PATCH_1__ = FALSE ; Applies to DE, FR
 __PATCH_2__ = FALSE ; Applies to DE, JP1+, EN2+, FR
 __PATCH_3__ = FALSE ; Applies to JP1+, EN1+
 __PATCH_4__ = FALSE ; Applies to DE1+, JP2+, EN2+, FR1+
-__PATCH_7__ = FALSE ; Applies to FR
 __PATCH_8__ = FALSE ; Applies to JP1+
 __PATCH_9__ = FALSE ; Applies to DE, JP
 __PATCH_A__ = 0 ; 1 in JP, 2 in DE
@@ -200,7 +199,6 @@ GAMEOVER_OPTION_CONTINUE_Y equ 104
 __PATCH_0__ = TRUE
 __PATCH_1__ = TRUE
 __PATCH_2__ = TRUE
-__PATCH_7__ = TRUE
 __PATCH_B__ = 2
 IF (VERSION > 0)
 __PATCH_4__ = TRUE

@@ -54,7 +54,7 @@ Data_017_4048::
     db   $70, $91, $80, $91, $90, $91, $A0, $91, $40, $94
 
 AnimateCreditsIslandFadeTiles::
-IF __PATCH_7__
+IF LANG_FR
     ldh a, [hFFA5]
     cp $11
     jr nc, jr_017_40c1
@@ -103,7 +103,7 @@ jr_017_407D:
     ldh  [hFFA5], a                               ; $4098: $E0 $A5
     ret                                           ; $409A: $C9
 
-IF __PATCH_7__
+IF LANG_FR
 Data_017_40A1:
     ; tile
     db   $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $F3, $F3, $ED, $ED, $FF, $FF

@@ -7,14 +7,11 @@ Misc notes that have not been translated into disassembly comments yet
 
 ### Patch matrix
 
-PATCH_6 is just LANG_JP
-PATCH_5 is just LANG_DE
-
 Note: the graph is still wrong:
 - FR should not have PATCH_9
 
 
-                                                    -- PATCH_7 -- [FR 1.0] -- [FR 1.1]
+                                                    -- LANG_FR -- [FR 1.0] -- [FR 1.1]
                                                    /                       /
                                        -- PATCH_1 -- LANG_DE -- [DE 1.0] -- [DE 1.1]
                                       /                                  /
@@ -34,7 +31,6 @@ BASE -- PATCH_9 -- PATCH_0 -- PATCH_2 - -- PATCH_4 ----------------------
 | `__PATCH_2__` |        |  Yes   |  Yes   |        |        |  Yes   |  Yes   |  Yes   |  Yes   |  Yes   |
 | `__PATCH_3__` |        |  Yes   |  Yes   |        |  Yes   |  Yes   |        |        |        |        |
 | `__PATCH_4__` |        |        |  Yes   |        |        |  Yes   |        |  Yes   |        |  Yes   |
-| `__PATCH_7__` |        |        |        |        |        |        |  Yes   |  Yes   |        |        |
 | `__PATCH_8__` |        |  Yes   |  Yes   |        |        |        |        |        |        |        |
 | `__PATCH_9__` |  Yes   |  Yes   |  Yes   |        |        |        |        |        |  Yes   |  Yes   |
 | `__PATCH_A__` |    1   |    1   |    1   |        |        |        |        |        |    2   |    2   |
@@ -103,7 +99,7 @@ _(To-do)_
 * Various other undocumented changes
 
 
-#### `__PATCH_7__`
+#### `LANG_FR`
 * Changes to credits code
   * `src/code/credits.asm -> AnimateCreditsIslandFadeTiles`
   * Some other changes throughout the credits

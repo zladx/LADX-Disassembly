@@ -67,7 +67,7 @@ _(To-do)_
 
 #### `__PATCH_5__`
 * Removes the bizarre feature where debug flag 2 writes a weird BG map to the subscreen
-  * `src/code/world_handler.asm -> GameplayWorldSubtype0Handler`
+  * `src/code/world_handler.asm -> GameplayWorldLoad0Handler`
 * Various other undocumented changes
   * Credits
   * File menus
@@ -109,11 +109,11 @@ _(To-do)_
 
 #### `__PATCH_A__`
 * Has two variants, which seem to have been used to test a change in the order of calls to update the status bar
-  * `src/code/world_handler.asm -> GameplayWorldSubtype4Handler`
+  * `src/code/world_handler.asm -> GameplayWorldLoadHeartsAndRuppeesHandler`
     * `0`: Calls `LoadHeartsAndRuppeesCount`, then `IncrementGameplaySubtype`.
     * `1`: Calls `IncrementGameplaySubtype`, then (if debug flag 2 is _not_ set) `LoadHeartsAndRuppeesCount`
     * `2`: Calls `IncrementGameplaySubtype`, then `LoadHeartsAndRuppeesCount`
-  * `src/code/world_handler.asm -> GameplayWorldSubtype5Handler`
+  * `src/code/world_handler.asm -> GameplayWorldLoadABButtonsHandler`
     * `0`: Calls `label_3E5A`, then `IncrementGameplaySubtype`.
     * `1`: Calls `IncrementGameplaySubtype`, then (if debug flag 2 is _not_ set) `label_3E5A`
     * `2`: Calls `IncrementGameplaySubtype`, then `label_3E5A`

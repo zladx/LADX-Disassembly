@@ -5,14 +5,14 @@
 WorldHandlerEntryPoint::
     ld   a, [wGameplaySubtype]                    ; $4371: $FA $96 $DB
     JP_TABLE                                      ; $4374: $C7
-._0 dw GameplayWorldSubtype0Handler               ; $4375
-._1 dw GameplayWorldSubtype1Handler               ; $4377
-._2 dw GameplayWorldSubtype2Handler               ; $4379
-._3 dw GameplayWorldSubtype3Handler               ; $437B
-._4 dw GameplayWorldSubtype4Handler               ; $437D
-._5 dw GameplayWorldSubtype5Handler               ; $437F
-._6 dw GameplayWorldSubtype6Handler               ; $4381
-._7 dw WorldDefaultHandler                        ; $4383
+._0 dw GameplayWorldLoad0Handler                  ; $4375
+._1 dw GameplayWorldLoadRoomHandler               ; $4377
+._2 dw GameplayWorldSelectTilesetHandler          ; $4379
+._3 dw GameplayWorldLoadRoomTilemapHandler        ; $437B
+._4 dw GameplayWorldLoadHeartsAndRuppeesHandler   ; $437D
+._5 dw GameplayWorldLoadABButtonsHandler          ; $437F
+._6 dw GameplayWorldLoad6Handler                  ; $4381
+._7 dw WorldInteractiveHandler                    ; $4383
 
 MinimapLayoutTable::
 ._00 db MINIMAP_STYLE_TAIL_CAVE                   ; $4385
@@ -32,9 +32,18 @@ MinimapLayoutTable::
 ._0E db INVENTORY_MINIMAP_SINGLE_FLOOR            ; $4393
 ._0F db MINIMAP_STYLE_COLOR_DUNGEON ; probably    ; $4394
 
-GameplayWorldSubtype0Handler::
+GameplayWorldLoad0Handler::
+    ;
+    ; Unload the audio track?
+    ;
+
     call label_27F2                               ; $4395: $CD $F2 $27
     call IncrementGameplaySubtype                 ; $4398: $CD $D6 $44
+
+    ;
+    ; Load the inventory tilemap
+    ;
+
 IF !__PATCH_5__
     ; POI: This is where debug flag 2 messes up the subscreen
     ld   a, [ROM_DebugTool2]                      ; $439B: $FA $04 $00
@@ -140,7 +149,7 @@ jr_001_4425::
     ld   [wBGMapToLoad], a                        ; $4427: $EA $FF $D6
     ret                                           ; $442A: $C9
 
-GameplayWorldSubtype1Handler::
+GameplayWorldLoadRoomHandler::
     call ClearLowerWRAM                           ; $442B: $CD $C6 $29
     xor  a                                        ; $442E: $AF
     ld   [wLinkMotionState], a                    ; $442F: $EA $1C $C1
@@ -217,7 +226,7 @@ jr_001_44B0::
     ld   [wTilesetToLoad], a                      ; $44B0: $EA $FE $D6
     ret                                           ; $44B3: $C9
 
-GameplayWorldSubtype2Handler::
+GameplayWorldSelectTilesetHandler::
     ld   a, $0F                                   ; $44B4: $3E $0F
     ldh  [hWorldTileset], a                       ; $44B6: $E0 $94
     ldh  a, [hIsGBC]                              ; $44B8: $F0 $FE
@@ -247,9 +256,10 @@ IncrementGameplaySubtypeAndReturn::
     inc  [hl]                                     ; $44D9: $34
     ret                                           ; $44DA: $C9
 
-GameplayWorldSubtype3Handler::
-    ld   a, $01                                   ; $44DB: $3E $01
+GameplayWorldLoadRoomTilemapHandler::
+    ld   a, TILESET_ROOM_TILEMAP                  ; $44DB: $3E $01
     ld   [wTilesetToLoad], a                      ; $44DD: $EA $FE $D6
+
     ld   a, [wRoomSwitchableObject]               ; $44E0: $FA $FA $D6
     and  a                                        ; $44E3: $A7
     jr   z, jr_001_44F5                           ; $44E4: $28 $0F
@@ -265,7 +275,7 @@ jr_001_44F5::
     call IncrementGameplaySubtype                 ; $44F5: $CD $D6 $44
     ret                                           ; $44F8: $C9
 
-GameplayWorldSubtype4Handler::
+GameplayWorldLoadHeartsAndRuppeesHandler::
 IF __PATCH_A__ == 1
     call IncrementGameplaySubtype
     ld a, [ROM_DebugTool2]
@@ -281,7 +291,7 @@ ELSE
 ENDC
     ret                                           ; $44FF: $C9
 
-GameplayWorldSubtype5Handler::
+GameplayWorldLoadABButtonsHandler::
 IF __PATCH_A__ == 1
     call IncrementGameplaySubtype
     ld a, [ROM_DebugTool2]
@@ -297,20 +307,33 @@ ELSE
 ENDC
     ret                                           ; $4506: $C9
 
-GameplayWorldSubtype6Handler::
+GameplayWorldLoad6Handler::
+    ;
+    ; Load audio track
+    ;
+
     call func_001_5895                            ; $4507: $CD $95 $58
+
+    ;
+    ; Finish preparations
+    ;
+
     ld   a, [$FF40]                               ; $450A: $F0 $40
     or   $20                                      ; $450C: $F6 $20
     ld   [wLCDControl], a                         ; $450E: $EA $FD $D6
     ld   [rLCDC], a                               ; $4511: $E0 $40
+
     call IncrementGameplaySubtype                 ; $4513: $CD $D6 $44
+
     ld   a, [wLinkMotionState]                    ; $4516: $FA $1C $C1
     ld   [wD463], a                               ; $4519: $EA $63 $D4
     ld   a, $04                                   ; $451C: $3E $04
     ld   [wLinkMotionState], a                    ; $451E: $EA $1C $C1
+
     xor  a                                        ; $4521: $AF
-    ld   [wTransitionSequenceCounter], a                               ; $4522: $EA $6B $C1
+    ld   [wTransitionSequenceCounter], a          ; $4522: $EA $6B $C1
     ld   [wC16C], a                               ; $4525: $EA $6C $C1
+
     ld   a, [wObjectAffectingBGPalette]           ; $4528: $FA $CB $C3
     and  a                                        ; $452B: $A7
     jr   z, jr_001_4548                           ; $452C: $28 $1A

@@ -456,9 +456,9 @@ PaletteEffectDisabledTable::
 ; Update the palette effects for interactive objects
 ; (for instance a dark palette when torches are not lit)
 UpdatePaletteEffectForInteractiveObjects::
-    ; If gameplay subtype != GAMEPLAY_WORLD_DEFAULT, return
+    ; If gameplay subtype != GAMEPLAY_WORLD_INTERACTIVE, return
     ld   a, [wGameplaySubtype]                    ; $4C4B: $FA $96 $DB
-    cp   GAMEPLAY_WORLD_DEFAULT                   ; $4C4E: $FE $07
+    cp   GAMEPLAY_WORLD_INTERACTIVE               ; $4C4E: $FE $07
     ret  nz                                       ; $4C50: $C0
 
     ; If Transition Sequence Counter != 4, return

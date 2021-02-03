@@ -75,7 +75,7 @@ ENDC
 .loadRequestedGfx
     ; Play audio samples before loading the map when:
     ; - in a menu (GameplayType <= GAMEPLAY_FILE_SAVE)
-    ; - on the World in default mode (GAMEPLAY_WORLD_DEFAULT)
+    ; - on the World (GAMEPLAY_WORLD_INTERACTIVE)
     ; - on the beach with Marin (GAMEPLAY_MARIN_BEACH)
     ; All other combinations skip this step.
     ld   a, [wGameplayType]                       ; $0213: $FA $95 $DB
@@ -86,7 +86,7 @@ ENDC
     cp   GAMEPLAY_WORLD                           ; $021E: $FE $0B
     jr   nz, .skipAudio                           ; $0220: $20 $0D
     ld   a, [wGameplaySubtype]                    ; $0222: $FA $96 $DB
-    cp   GAMEPLAY_WORLD_DEFAULT                   ; $0225: $FE $07
+    cp   GAMEPLAY_WORLD_INTERACTIVE               ; $0225: $FE $07
     jr   nc, .skipAudio                           ; $0227: $30 $06
 .playAudioStep
     call PlayAudioStep                            ; $0229: $CD $A4 $08

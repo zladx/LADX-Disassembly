@@ -8395,7 +8395,7 @@ func_036_72BA::
     ret  nz                                       ; $72CD: $C0
 
     ld   a, [wGameplaySubtype]                    ; $72CE: $FA $96 $DB
-    cp   GAMEPLAY_WORLD_DEFAULT                   ; $72D1: $FE $07
+    cp   GAMEPLAY_WORLD_INTERACTIVE               ; $72D1: $FE $07
     ret  nz                                       ; $72D3: $C0
 
     xor  a                                        ; $72D4: $AF

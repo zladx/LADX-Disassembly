@@ -1262,7 +1262,7 @@ ExecuteGameplayHandler::
     jr   nz, presentSaveScreenIfNeeded            ; $0E3D: $20 $07
     ; If GameplayType == WORLD
     ld   a, [wGameplaySubtype]                    ; $0E3F: $FA $96 $DB
-    cp   GAMEPLAY_WORLD_DEFAULT ; If GameplaySubtype != 7 (standard overworld gameplay) ; $0E42: $FE $07
+    cp   GAMEPLAY_WORLD_INTERACTIVE ; If GameplaySubtype != 7 (interactive overworld gameplay) ; $0E42: $FE $07
     jr   nz, jumpToGameplayHandler                ; $0E44: $20 $3F
 
 presentSaveScreenIfNeeded::
@@ -1416,8 +1416,8 @@ PhotoAlbumHandler::
 PhotoPictureHandler::
     jpsw PhotosEntryPoint                         ; $0F40: $3E $37 $CD $0C $08 $C3 $00 $40
 
-; World handler for GAMEPLAY_WORLD_DEFAULT (dispatched from WorldHandlerEntryPoint)
-WorldDefaultHandler::
+; World handler for GAMEPLAY_WORLD_INTERACTIVE (dispatched from WorldHandlerEntryPoint)
+WorldInteractiveHandler::
     ld   a, $02                                   ; $0F48: $3E $02
     call SwitchBank                               ; $0F4A: $CD $0C $08
     ; If a dialog is already open, continue to the normal flow
@@ -4280,7 +4280,7 @@ ReadJoypadState::
     cp   GAMEPLAY_WORLD                           ; $2827: $FE $0B
     jr   nz, .readState                           ; $2829: $20 $27
     ld   a, [wGameplaySubtype]                    ; $282B: $FA $96 $DB
-    cp   GAMEPLAY_WORLD_DEFAULT                   ; $282E: $FE $07
+    cp   GAMEPLAY_WORLD_INTERACTIVE               ; $282E: $FE $07
     jr   nz, .notWorld                            ; $2830: $20 $1A
     ld   a, [wLinkMotionState]                    ; $2832: $FA $1C $C1
     cp   LINK_MOTION_PASS_OUT                     ; $2835: $FE $07
@@ -5639,6 +5639,7 @@ LoadRoomTilemap:
     ld   hl, wRoomObjects                         ; $30A4: $21 $11 $D7
     ld   c, $80                                   ; $30A7: $0E $80
 
+    ; For each object in the room:
 .loop
     push de                                       ; $30A9: $D5
     push hl                                       ; $30AA: $E5

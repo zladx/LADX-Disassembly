@@ -4232,7 +4232,7 @@ DroppableMagicPowderEntityHandler::
     jr   z, jr_003_6063                           ; $605B: $28 $06
 
     ldh  a, [hMapId]                              ; $605D: $F0 $F7
-    cp   $FF                                      ; $605F: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $605F: $FE $FF
     jr   z, jr_003_606A                           ; $6061: $28 $07
 
 jr_003_6063:
@@ -5641,7 +5641,7 @@ func_003_68F8::
     ld   c, a                                     ; $6946: $4F
     ld   b, $00                                   ; $6947: $06 $00
     ldh  a, [hMapId]                              ; $6949: $F0 $F7
-    cp   $FF                                      ; $694B: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $694B: $FE $FF
     jr   nz, .jr_003_6954                         ; $694D: $20 $05
 
     ld   hl, wColorDungeonRoomStatus              ; $694F: $21 $E0 $DD

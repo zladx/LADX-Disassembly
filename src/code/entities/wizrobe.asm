@@ -145,7 +145,7 @@ jr_006_76DD:
     ret                                           ; $76E8: $C9
 
 jr_006_76E9:
-    ld   a, $22                                   ; $76E9: $3E $22
+    ld   a, ENTITY_WIZROBE_PROJECTILE             ; $76E9: $3E $22
     call SpawnNewEntity_trampoline                ; $76EB: $CD $86 $3B
     jr   c, jr_006_772D                           ; $76EE: $38 $3D
 

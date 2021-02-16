@@ -656,7 +656,7 @@ jr_014_4D4A:
     ret  nz                                       ; $4D62: $C0
 
     ldh  a, [hMapId]                              ; $4D63: $F0 $F7
-    cp   $07                                      ; $4D65: $FE $07
+    cp   MAP_TURTLE_ROCK                          ; $4D65: $FE $07
     jr   nz, jr_014_4D6D                          ; $4D67: $20 $04
 
     ld   a, $0A                                   ; $4D69: $3E $0A
@@ -807,7 +807,7 @@ TeleportToManboPond::
     jr   z, jr_014_4E88                           ; $4E5F: $28 $27
 
     ldh  a, [hMapId]                              ; $4E61: $F0 $F7
-    cp   $FF                                      ; $4E63: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $4E63: $FE $FF
     jr   nz, jr_014_4E6B                          ; $4E65: $20 $04
 
     and  $0F                                      ; $4E67: $E6 $0F
@@ -2007,7 +2007,7 @@ jr_014_5807:
 func_014_5838::
     ld   hl, MapLayout11                          ; $5838: $21 $E0 $44
     ldh  a, [hMapId]                              ; $583B: $F0 $F7
-    cp   $FF                                      ; $583D: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $583D: $FE $FF
     jr   z, jr_014_5866                           ; $583F: $28 $25
 
     cp   $0B                                      ; $5841: $FE $0B
@@ -2023,7 +2023,7 @@ func_014_5838::
     rl   b                                        ; $5853: $CB $10
     add  hl, bc                                   ; $5855: $09
     ldh  a, [hMapId]                              ; $5856: $F0 $F7
-    cp   $06                                      ; $5858: $FE $06
+    cp   MAP_EAGLES_TOWER                         ; $5858: $FE $06
     jr   nz, jr_014_5866                          ; $585A: $20 $0A
 
     ld   a, [wHasInstrument7]                     ; $585C: $FA $6B $DB
@@ -2039,7 +2039,7 @@ jr_014_5866:
     ld   d, $00                                   ; $5869: $16 $00
     ld   hl, wIndoorARoomStatus                   ; $586B: $21 $00 $D9
     ldh  a, [hMapId]                              ; $586E: $F0 $F7
-    cp   $FF                                      ; $5870: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $5870: $FE $FF
     jr   nz, jr_014_5879                          ; $5872: $20 $05
 
     ld   hl, wColorDungeonRoomStatus              ; $5874: $21 $E0 $DD
@@ -2068,7 +2068,7 @@ jr_014_5883:
 ;   a    status of chests (eg. $19, $1A, etc.)
 GetChestsStatusForRoom::
     ldh  a, [hMapId]                              ; $5884: $F0 $F7
-    cp   $FF                                      ; $5886: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $5886: $FE $FF
     jr   nz, jr_014_5891                          ; $5888: $20 $07
 
     ld   d, $00                                   ; $588A: $16 $00
@@ -2085,7 +2085,7 @@ jr_014_5894:
 
 func_014_5897::
     ldh  a, [hMapId]                              ; $5897: $F0 $F7
-    cp   $FF                                      ; $5899: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $5899: $FE $FF
     jr   nz, jr_014_58A2                          ; $589B: $20 $05
 
     ld   hl, MapLayout11                          ; $589D: $21 $E0 $44
@@ -2105,7 +2105,7 @@ jr_014_58A2:
     rl   d                                        ; $58B4: $CB $12
     add  hl, de                                   ; $58B6: $19
     ldh  a, [hMapId]                              ; $58B7: $F0 $F7
-    cp   $06                                      ; $58B9: $FE $06
+    cp   MAP_EAGLES_TOWER                         ; $58B9: $FE $06
     jr   nz, jr_014_58C7                          ; $58BB: $20 $0A
 
     ld   a, [wHasInstrument7]                     ; $58BD: $FA $6B $DB
@@ -2127,7 +2127,7 @@ jr_014_58D1:
     ld   c, a                                     ; $58D3: $4F
     ld   b, $00                                   ; $58D4: $06 $00
     ldh  a, [hMapId]                              ; $58D6: $F0 $F7
-    cp   $FF                                      ; $58D8: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $58D8: $FE $FF
     jr   nz, jr_014_58E1                          ; $58DA: $20 $05
 
     ld   hl, ColorDungeonEventsTable              ; $58DC: $21 $00 $42
@@ -2162,7 +2162,7 @@ func_014_5900::
     ld   a, [wIsIndoor]                           ; $5903: $FA $A5 $DB
     ld   d, a                                     ; $5906: $57
     ldh  a, [hMapId]                              ; $5907: $F0 $F7
-    cp   $FF                                      ; $5909: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $5909: $FE $FF
     jr   nz, jr_014_5914                          ; $590B: $20 $07
 
     ld   d, $00                                   ; $590D: $16 $00

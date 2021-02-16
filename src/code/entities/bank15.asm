@@ -1783,10 +1783,10 @@ jr_015_4F02:
     jr   nz, jr_015_4F50                          ; $4F07: $20 $47
 
     ldh  a, [hMapId]                              ; $4F09: $F0 $F7
-    cp   $03                                      ; $4F0B: $FE $03
+    cp   MAP_ANGLERS_TUNNEL                       ; $4F0B: $FE $03
     ret  c                                        ; $4F0D: $D8
 
-    ld   a, $1E                                   ; $4F0E: $3E $1E
+    ld   a, ENTITY_STALFOS_EVASIVE                ; $4F0E: $3E $1E
     call SpawnNewEntity_trampoline                ; $4F10: $CD $86 $3B
     ret  c                                        ; $4F13: $D8
 
@@ -2526,7 +2526,7 @@ func_015_5383::
 
 jr_015_5384:
     ldh  [hMultiPurposeG], a                               ; $5384: $E0 $E8
-    ld   a, $E6                                   ; $5386: $3E $E6
+    ld   a, ENTITY_FINAL_NIGHTMARE                ; $5386: $3E $E6
     call SpawnNewEntity_trampoline                ; $5388: $CD $86 $3B
     ret  c                                        ; $538B: $D8
 
@@ -3085,7 +3085,7 @@ func_015_5854::
 
     ld   [wD21D], a                               ; $5859: $EA $1D $D2
     ld   [hl], $50                                ; $585C: $36 $50
-    ld   a, $E6                                   ; $585E: $3E $E6
+    ld   a, ENTITY_FINAL_NIGHTMARE                ; $585E: $3E $E6
     call SpawnNewEntity_trampoline                ; $5860: $CD $86 $3B
     ld   hl, wEntitiesUnknowTableP                ; $5863: $21 $40 $C4
     add  hl, de                                   ; $5866: $19
@@ -3686,7 +3686,7 @@ func_015_5E38::
     and  $03                                      ; $5E3F: $E6 $03
     jr   nz, jr_015_5E79                          ; $5E41: $20 $36
 
-    ld   a, $E6                                   ; $5E43: $3E $E6
+    ld   a, ENTITY_FINAL_NIGHTMARE                ; $5E43: $3E $E6
     call SpawnNewEntity_trampoline                ; $5E45: $CD $86 $3B
     ret  c                                        ; $5E48: $D8
 
@@ -3861,7 +3861,7 @@ jr_015_5F3F:
 
 jr_015_5F4C:
     ldh  [hMultiPurposeG], a                               ; $5F4C: $E0 $E8
-    ld   a, $7D                                   ; $5F4E: $3E $7D
+    ld   a, ENTITY_GOPONGA_FLOWER_PROJECTILE      ; $5F4E: $3E $7D
     call SpawnNewEntity_trampoline                ; $5F50: $CD $86 $3B
     jr   c, jr_015_5F96                           ; $5F53: $38 $41
 
@@ -4706,7 +4706,7 @@ jr_015_6651:
     cp   $06                                      ; $666B: $FE $06
     jr   nc, jr_015_66C7                          ; $666D: $30 $58
 
-    ld   a, $E6                                   ; $666F: $3E $E6
+    ld   a, ENTITY_FINAL_NIGHTMARE                ; $666F: $3E $E6
     call SpawnNewEntity_trampoline                ; $6671: $CD $86 $3B
     ret  c                                        ; $6674: $D8
 
@@ -4798,7 +4798,7 @@ jr_015_66D6:
     xor  a                                        ; $66F9: $AF
     ld   [wD224], a                               ; $66FA: $EA $24 $D2
     call IncrementEntityState                     ; $66FD: $CD $12 $3B
-    ld   a, $E6                                   ; $6700: $3E $E6
+    ld   a, ENTITY_FINAL_NIGHTMARE                ; $6700: $3E $E6
     call SpawnNewEntity_trampoline                ; $6702: $CD $86 $3B
     jr   c, jr_015_674E                           ; $6705: $38 $47
 
@@ -5026,7 +5026,7 @@ jr_015_685F:
     and  $07                                      ; $6866: $E6 $07
     ret  nz                                       ; $6868: $C0
 
-    ld   a, $E6                                   ; $6869: $3E $E6
+    ld   a, ENTITY_FINAL_NIGHTMARE                ; $6869: $3E $E6
     call SpawnNewEntity_trampoline                ; $686B: $CD $86 $3B
     ret  c                                        ; $686E: $D8
 
@@ -5855,7 +5855,7 @@ func_015_6FBC::
     call PlayBombExplosionSfx                     ; $6FCA: $CD $4B $0C
     call func_015_5383                            ; $6FCD: $CD $83 $53
     call ClearEntityStatus_15                        ; $6FD0: $CD $31 $7C
-    ld   a, $E6                                   ; $6FD3: $3E $E6
+    ld   a, ENTITY_FINAL_NIGHTMARE                ; $6FD3: $3E $E6
     call SpawnNewEntity_trampoline                ; $6FD5: $CD $86 $3B
     ld   hl, wEntitiesUnknowTableR                ; $6FD8: $21 $90 $C3
     add  hl, de                                   ; $6FDB: $19
@@ -7863,7 +7863,7 @@ label_015_7C91:
     ldh  [hNoiseSfx], a                           ; $7CA3: $E0 $F4
     ret                                           ; $7CA5: $C9
 
-    ld   a, $36                                   ; $7CA6: $3E $36
+    ld   a, ENTITY_HEART_CONTAINER                ; $7CA6: $3E $36
     call SpawnNewEntity_trampoline                ; $7CA8: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $7CAB: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $7CAD: $21 $00 $C2
@@ -7903,7 +7903,7 @@ func_015_7CDB::
     ld   a, [wIsIndoor]                           ; $7CE1: $FA $A5 $DB
     ld   d, a                                     ; $7CE4: $57
     ldh  a, [hMapId]                              ; $7CE5: $F0 $F7
-    cp   $1A                                      ; $7CE7: $FE $1A
+    cp   MAP_UNKNOWN_1A                           ; $7CE7: $FE $1A
     jr   nc, jr_015_7CF0                          ; $7CE9: $30 $05
 
     cp   $06                                      ; $7CEB: $FE $06

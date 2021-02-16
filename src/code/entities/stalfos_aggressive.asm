@@ -9,7 +9,7 @@ StalfosAggressiveEntityHandler::
     call func_006_64F7                            ; $4ABD: $CD $F7 $64
     call label_3B39                               ; $4AC0: $CD $39 $3B
     ldh  a, [hMapId]                              ; $4AC3: $F0 $F7
-    cp   $FF                                      ; $4AC5: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $4AC5: $FE $FF
     jr   nz, jr_006_4ACE                          ; $4AC7: $20 $05
 
     ld   a, $06                                   ; $4AC9: $3E $06

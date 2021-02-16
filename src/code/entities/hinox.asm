@@ -343,7 +343,7 @@ jr_006_51D0:
     cp   $10                                      ; $51D0: $FE $10
     jr   nz, jr_006_51F6                          ; $51D2: $20 $22
 
-    ld   a, $02                                   ; $51D4: $3E $02
+    ld   a, ENTITY_BOMB                           ; $51D4: $3E $02
     call SpawnNewEntity_trampoline                ; $51D6: $CD $86 $3B
     jr   c, jr_006_51F6                           ; $51D9: $38 $1B
 
@@ -396,7 +396,7 @@ func_006_52BA::
     ld   d, b                                     ; $52C4: $50
     ld   hl, Data_006_527A                        ; $52C5: $21 $7A $52
     ldh  a, [hMapId]                              ; $52C8: $F0 $F7
-    cp   $07                                      ; $52CA: $FE $07
+    cp   MAP_TURTLE_ROCK                          ; $52CA: $FE $07
     jr   z, jr_006_52D8                           ; $52CC: $28 $0A
 
     ld   hl, Data_006_523A                        ; $52CE: $21 $3A $52

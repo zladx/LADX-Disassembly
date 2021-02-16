@@ -2628,7 +2628,7 @@ jr_020_5A97:
     jr   z, jr_020_5AD1                           ; $5AA2: $28 $2D
 
     ldh  a, [hMapId]                              ; $5AA4: $F0 $F7
-    cp   $FF                                      ; $5AA6: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $5AA6: $FE $FF
     jr   z, jr_020_5AAE                           ; $5AA8: $28 $04
 
     cp   $0A                                      ; $5AAA: $FE $0A
@@ -3779,7 +3779,7 @@ func_020_6215::
     jr   z, label_020_628D                        ; $6219: $28 $72
 
     ldh  a, [hMapId]                              ; $621B: $F0 $F7
-    cp   $FF                                      ; $621D: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $621D: $FE $FF
     jr   z, jr_020_6226                           ; $621F: $28 $05
 
     cp   $08                                      ; $6221: $FE $08

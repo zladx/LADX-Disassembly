@@ -1326,7 +1326,7 @@ jr_018_4ADC:
     cp   $30                                      ; $4ADC: $FE $30
     jr   nz, jr_018_4B03                          ; $4ADE: $20 $23
 
-    ld   a, $7D                                   ; $4AE0: $3E $7D
+    ld   a, ENTITY_GOPONGA_FLOWER_PROJECTILE      ; $4AE0: $3E $7D
     call SpawnNewEntity_trampoline                ; $4AE2: $CD $86 $3B
     jr   c, jr_018_4B03                           ; $4AE5: $38 $1C
 
@@ -1975,7 +1975,7 @@ MadBatterState3Handler::
     ret  nz                                       ; $4F62: $C0
 
     ld   [hl], $48                                ; $4F63: $36 $48
-    ld   a, $02                                   ; $4F65: $3E $02
+    ld   a, ENTITY_BOMB                           ; $4F65: $3E $02
     call SpawnNewEntity_trampoline                ; $4F67: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $4F6A: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $4F6C: $21 $00 $C2
@@ -2051,7 +2051,7 @@ MadBatterState6Handler::
     and  a                                        ; $4FD5: $A7
     jr   nz, jr_018_5001                          ; $4FD6: $20 $29
 
-    ld   a, $CA                                   ; $4FD8: $3E $CA
+    ld   a, ENTITY_MAD_BATTER                     ; $4FD8: $3E $CA
     call SpawnNewEntity_trampoline                ; $4FDA: $CD $86 $3B
     ld   a, $26                                   ; $4FDD: $3E $26
     ldh  [hNoiseSfx], a                           ; $4FDF: $E0 $F4
@@ -2761,7 +2761,7 @@ Data_018_5482::
 
 func_018_548A::
     ldh  a, [hMapId]                              ; $548A: $F0 $F7
-    cp   $01                                      ; $548C: $FE $01
+    cp   MAP_BOTTLE_GROTTO                        ; $548C: $FE $01
     jr   nz, jr_018_5492                          ; $548E: $20 $02
 
     ldh  [hActiveEntitySpriteVariant], a          ; $5490: $E0 $F1
@@ -2895,7 +2895,7 @@ WalrusState0Handler::
     and  [hl]                                     ; $554E: $A6
     jr   nz, jr_018_557B                          ; $554F: $20 $2A
 
-    ld   a, $C4                                   ; $5551: $3E $C4
+    ld   a, ENTITY_WALRUS                         ; $5551: $3E $C4
     call SpawnNewEntity_trampoline                ; $5553: $CD $86 $3B
     jr   c, jr_018_557B                           ; $5556: $38 $23
 
@@ -3198,7 +3198,7 @@ jr_018_5778:
     jp   SetEntitySpriteVariant                   ; $577A: $C3 $0C $3B
 
 WalrusState7Handler::
-    ld   a, $C8                                   ; $577D: $3E $C8
+    ld   a, ENTITY_BUNNY_CALLING_MARIN            ; $577D: $3E $C8
     call SpawnNewEntity_trampoline                ; $577F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $5782: $21 $00 $C2
     add  hl, de                                   ; $5785: $19
@@ -3583,7 +3583,7 @@ func_018_5A91::
     and  $1F                                      ; $5AA5: $E6 $1F
     jr   nz, jr_018_5AE7                          ; $5AA7: $20 $3E
 
-    ld   a, $C9                                   ; $5AA9: $3E $C9
+    ld   a, ENTITY_MUSICAL_NOTE                   ; $5AA9: $3E $C9
     call SpawnNewEntity_trampoline                ; $5AAB: $CD $86 $3B
     jr   c, jr_018_5AE7                           ; $5AAE: $38 $37
 
@@ -4217,7 +4217,7 @@ jr_018_5E79:
 
 OwlStatueEntityHandler::
     ldh  a, [hMapId]                              ; $5E7A: $F0 $F7
-    cp   $16                                      ; $5E7C: $FE $16
+    cp   MAP_S_FACE_SHRINE                        ; $5E7C: $FE $16
     jp   z, OwlStatueSouthFaceShrine              ; $5E7E: $CA $1B $5E
 
 IF __PATCH_0__
@@ -4251,7 +4251,7 @@ ENDC
 
 jr_018_5EA2:
     ldh  a, [hMapId]                              ; $5EA2: $F0 $F7
-    cp   $FF                                      ; $5EA4: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $5EA4: $FE $FF
     jr   nz, jr_018_5EAD                          ; $5EA6: $20 $05
 
     jp_open_dialog $263                           ; $5EA8
@@ -4473,7 +4473,7 @@ MarinAtTalTalHeightsState8Handler::
     ld   a, $02                                   ; $602F: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $6031: $E0 $A1
     call func_018_7DE8                            ; $6033: $CD $E8 $7D
-    ld   a, $C2                                   ; $6036: $3E $C2
+    ld   a, ENTITY_MARIN_AT_TAL_TAL_HEIGHTS       ; $6036: $3E $C2
     call SpawnNewEntity_trampoline                ; $6038: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $603B: $21 $00 $C2
     add  hl, de                                   ; $603E: $19
@@ -5796,7 +5796,7 @@ VireEntityHandler::
     jp   ClearEntityStatusBank18                  ; $6A2E: $C3 $08 $7F
 
 func_018_6A31::
-    ld   a, $BD                                   ; $6A31: $3E $BD
+    ld   a, ENTITY_VIRE                           ; $6A31: $3E $BD
     call SpawnNewEntity_trampoline                ; $6A33: $CD $86 $3B
     jr   c, jr_018_6A70                           ; $6A36: $38 $38
 
@@ -6430,7 +6430,7 @@ jr_018_6DDE:
     cp   $03                                      ; $6DE7: $FE $03
     jr   nc, jr_018_6E35                          ; $6DE9: $30 $4A
 
-    ld   a, $BD                                   ; $6DEB: $3E $BD
+    ld   a, ENTITY_VIRE                           ; $6DEB: $3E $BD
     call SpawnNewEntity_trampoline                ; $6DED: $CD $86 $3B
     jr   c, jr_018_6E35                           ; $6DF0: $38 $43
 
@@ -6885,7 +6885,7 @@ jr_018_70A4:
     cp   $06                                      ; $70AD: $FE $06
     jr   nc, label_018_70FD                       ; $70AF: $30 $4C
 
-    ld   a, $BC                                   ; $70B1: $3E $BC
+    ld   a, ENTITY_GRIM_CREEPER                   ; $70B1: $3E $BC
     call SpawnNewEntity_trampoline                ; $70B3: $CD $86 $3B
     jr   c, label_018_70FD                        ; $70B6: $38 $45
 
@@ -7400,7 +7400,7 @@ jr_018_7416:
 
     ld   a, $13                                   ; $7420: $3E $13
     ldh  [hNoiseSfx], a                           ; $7422: $E0 $F4
-    ld   a, $7F                                   ; $7424: $3E $7F
+    ld   a, ENTITY_TURTLE_ROCK_HEAD               ; $7424: $3E $7F
     call SpawnNewEntity_trampoline                ; $7426: $CD $86 $3B
     push bc                                       ; $7429: $C5
     ldh  a, [hActiveEntitySpriteVariant]          ; $742A: $F0 $F1
@@ -7804,7 +7804,7 @@ Data_018_7755::
 
 BuzzBlobEntityHandler::
     ldh  a, [hMapId]                              ; $7759: $F0 $F7
-    cp   $FF                                      ; $775B: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $775B: $FE $FF
     jr   nz, jr_018_7764                          ; $775D: $20 $05
 
     ld   a, $18                                   ; $775F: $3E $18
@@ -9012,7 +9012,7 @@ label_018_7F6F:
     ldh  [hNoiseSfx], a                           ; $7F81: $E0 $F4
     ret                                           ; $7F83: $C9
 
-    ld   a, $36                                   ; $7F84: $3E $36
+    ld   a, ENTITY_HEART_CONTAINER                ; $7F84: $3E $36
     call SpawnNewEntity_trampoline                ; $7F86: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $7F89: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $7F8B: $21 $00 $C2
@@ -9052,7 +9052,7 @@ SetRoomStatus20::
     ld   a, [wIsIndoor]                           ; $7FBF: $FA $A5 $DB
     ld   d, a                                     ; $7FC2: $57
     ldh  a, [hMapId]                              ; $7FC3: $F0 $F7
-    cp   $1A                                      ; $7FC5: $FE $1A
+    cp   MAP_UNKNOWN_1A                           ; $7FC5: $FE $1A
     jr   nc, .notIndoorB                          ; $7FC7: $30 $05
 
     cp   $06                                      ; $7FC9: $FE $06

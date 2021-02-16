@@ -105,7 +105,7 @@ MadBomberState3Handler::
     and  a                                        ; $41DC: $A7
     jr   nz, jr_006_4217                          ; $41DD: $20 $38
 
-    ld   a, $02                                   ; $41DF: $3E $02
+    ld   a, ENTITY_BOMB                           ; $41DF: $3E $02
     call SpawnNewEntity_trampoline                ; $41E1: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $41E4: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $41E6: $21 $00 $C2

@@ -6,7 +6,7 @@ Data_006_6EDD::
 
 RollingBonesBarEntityHandler::
     ldh  a, [hMapId]                              ; $6EE3: $F0 $F7
-    cp   $07                                      ; $6EE5: $FE $07
+    cp   MAP_TURTLE_ROCK                          ; $6EE5: $FE $07
     jr   nz, jr_006_6EED                          ; $6EE7: $20 $04
 
     ld   a, $10                                   ; $6EE9: $3E $10

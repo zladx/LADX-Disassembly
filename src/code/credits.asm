@@ -2767,7 +2767,7 @@ func_017_5A66::
 
     xor  a                                        ; $5A8A: $AF
     ld   [wPaletteUnknownE], a                    ; $5A8B: $EA $D5 $DD
-    ld   a, $E8                                   ; $5A8E: $3E $E8
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $5A8E: $3E $E8
     call SpawnNewEntity_trampoline                ; $5A90: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $5A93: $21 $00 $C2
     add  hl, de                                   ; $5A96: $19
@@ -2778,7 +2778,7 @@ func_017_5A66::
     ld   hl, wEntitiesStateTable                  ; $5A9F: $21 $90 $C2
     add  hl, de                                   ; $5AA2: $19
     ld   [hl], $02                                ; $5AA3: $36 $02
-    ld   a, $E8                                   ; $5AA5: $3E $E8
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $5AA5: $3E $E8
     call SpawnNewEntity_trampoline                ; $5AA7: $CD $86 $3B
     ld   hl, wEntitiesPrivateState1Table          ; $5AAA: $21 $B0 $C2
     add  hl, de                                   ; $5AAD: $19
@@ -4385,7 +4385,7 @@ jr_017_6C4A:
 
     ld   a, $E3                                   ; $6C51: $3E $E3
     ld   [wOBJ1Palette], a                        ; $6C53: $EA $99 $DB
-    ld   a, $E8                                   ; $6C56: $3E $E8
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $6C56: $3E $E8
     call SpawnNewEntity_trampoline                ; $6C58: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $6C5B: $21 $00 $C2
     add  hl, de                                   ; $6C5E: $19
@@ -4533,7 +4533,7 @@ CreditsLinkFaceCloseUp1Handler::
     ld   [wBGPalette], a                          ; $6D4C: $EA $97 $DB
     ld   a, $6E                                   ; $6D4F: $3E $6E
     ld   [wOBJ0Palette], a                        ; $6D51: $EA $98 $DB
-    ld   a, $E8                                   ; $6D54: $3E $E8
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $6D54: $3E $E8
     call SpawnNewEntity_trampoline                ; $6D56: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $6D59: $21 $00 $C2
     add  hl, de                                   ; $6D5C: $19
@@ -4751,7 +4751,7 @@ CreditsRoll1Handler::
     ld   a, $1C                                   ; $6EA3: $3E $1C
     ld   [wBGMapToLoad], a                        ; $6EA5: $EA $FF $D6
     call ResetCreditsSceneVariables               ; $6EA8: $CD $A5 $4D
-    ld   a, $E8                                   ; $6EAB: $3E $E8
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $6EAB: $3E $E8
     call SpawnNewEntity_trampoline                ; $6EAD: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $6EB0: $21 $00 $C2
     add  hl, de                                   ; $6EB3: $19
@@ -6164,7 +6164,7 @@ func_017_7B06::
     ldh  [hLinkPositionYIncrement], a             ; $7B14: $E0 $9B
     ld   a, $02                                   ; $7B16: $3E $02
     ldh  [hLinkAnimationState], a                 ; $7B18: $E0 $9D
-    ld   a, $E8                                   ; $7B1A: $3E $E8
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $7B1A: $3E $E8
     call SpawnNewEntity_trampoline                ; $7B1C: $CD $86 $3B
     ld   hl, wEntitiesPrivateState1Table          ; $7B1F: $21 $B0 $C2
     add  hl, de                                   ; $7B22: $19

@@ -203,7 +203,7 @@ jr_021_411A:
     ret  nz                                       ; $411F: $C0
 
     ldh  a, [hMapId]                              ; $4120: $F0 $F7
-    cp   $FF                                      ; $4122: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $4122: $FE $FF
     jr   nz, jr_021_412C                          ; $4124: $20 $06
 
     ld   hl, Data_021_67D0                        ; $4126: $21 $D0 $67
@@ -222,7 +222,7 @@ jr_021_412C:
     jr   z, jr_021_4165                           ; $413B: $28 $28
 
     ldh  a, [hMapId]                              ; $413D: $F0 $F7
-    cp   $07                                      ; $413F: $FE $07
+    cp   MAP_TURTLE_ROCK                          ; $413F: $FE $07
     jr   nz, jr_021_4162                          ; $4141: $20 $1F
 
     ldh  a, [hMapRoom]                            ; $4143: $F0 $F6
@@ -1174,7 +1174,7 @@ func_021_5355::
 
 func_021_5366::
     ldh  a, [hMapId]                              ; $5366: $F0 $F7
-    cp   $0A                                      ; $5368: $FE $0A
+    cp   MAP_CAVE_B                               ; $5368: $FE $0A
     jr   nc, jr_021_537B                          ; $536A: $30 $0F
 
     sla  a                                        ; $536C: $CB $27
@@ -1298,7 +1298,7 @@ jr_021_541D:
 jr_021_541F:
     ld   [wDDD6], a                               ; $541F: $EA $D6 $DD
     ldh  a, [hMapId]                              ; $5422: $F0 $F7
-    cp   $07                                      ; $5424: $FE $07
+    cp   MAP_TURTLE_ROCK                          ; $5424: $FE $07
     jr   nz, jr_021_542C                          ; $5426: $20 $04
 
     ld   a, $17                                   ; $5428: $3E $17

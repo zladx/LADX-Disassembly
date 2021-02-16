@@ -223,7 +223,7 @@ func_006_4C91::
 
 jr_006_4CCE:
     ldh  [hMultiPurposeG], a                               ; $4CCE: $E0 $E8
-    ld   a, $8E                                   ; $4CD0: $3E $8E
+    ld   a, ENTITY_CUE_BALL                       ; $4CD0: $3E $8E
     call SpawnNewEntity_trampoline                ; $4CD2: $CD $86 $3B
     jr   c, jr_006_4D3A                           ; $4CD5: $38 $63
 

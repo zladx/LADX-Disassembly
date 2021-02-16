@@ -721,7 +721,7 @@ jr_005_4D5D:
     ld   [hl], a                                  ; $4D64: $77
     jr   nc, jr_005_4DA2                          ; $4D65: $30 $3B
 
-    ld   a, $3F                                   ; $4D67: $3E $3F
+    ld   a, ENTITY_RACOON                         ; $4D67: $3E $3F
     call SpawnNewEntity_trampoline                ; $4D69: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $4D6C: $F0 $D7
     add  $06                                      ; $4D6E: $C6 $06

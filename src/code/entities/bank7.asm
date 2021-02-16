@@ -252,7 +252,7 @@ jr_007_415A:
     call SetEntitySpriteVariant                   ; $4195: $CD $0C $3B
 
 label_007_4198:
-    ld   a, $BB                                   ; $4198: $3E $BB
+    ld   a, ENTITY_BUSH_CRAWLER                   ; $4198: $3E $BB
     call SpawnNewEntity_trampoline                ; $419A: $CD $86 $3B
     ret  c                                        ; $419D: $D8
 
@@ -372,7 +372,7 @@ FishermanUnderBridgeEntityHandler::
     ld   a, [hl]                                  ; $4296: $7E
     add  $08                                      ; $4297: $C6 $08
     ld   [hl], a                                  ; $4299: $77
-    ld   a, $B8                                   ; $429A: $3E $B8
+    ld   a, ENTITY_FISHERMAN_UNDER_BRIDGE         ; $429A: $3E $B8
     call SpawnNewEntity_trampoline                ; $429C: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $429F: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $42A1: $21 $00 $C2
@@ -808,7 +808,7 @@ func_007_4537::
 
     ld   [wMusicTrackTiming], a                   ; $4540: $EA $0B $C1
     call IncrementEntityState                     ; $4543: $CD $12 $3B
-    ld   a, $54                                   ; $4546: $3E $54
+    ld   a, ENTITY_FISHERMAN_FISHING_GAME         ; $4546: $3E $54
     call SpawnNewEntity_trampoline                ; $4548: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $454B: $F0 $D7
     sub  $20                                      ; $454D: $D6 $20
@@ -1914,7 +1914,7 @@ jr_007_4CE7:
     call IncrementEntityState                     ; $4CEB: $CD $12 $3B
 
 func_007_4CEE::
-    ld   a, $B3                                   ; $4CEE: $3E $B3
+    ld   a, ENTITY_HONEYCOMB                      ; $4CEE: $3E $B3
     call SpawnNewEntity_trampoline                ; $4CF0: $CD $86 $3B
     jr   c, jr_007_4D1D                           ; $4CF3: $38 $28
 
@@ -3324,7 +3324,7 @@ func_007_560D::
     ld   a, [wIsIndoor]                           ; $5613: $FA $A5 $DB
     ld   d, a                                     ; $5616: $57
     ldh  a, [hMapId]                              ; $5617: $F0 $F7
-    cp   $1A                                      ; $5619: $FE $1A
+    cp   MAP_UNKNOWN_1A                           ; $5619: $FE $1A
     jr   nc, jr_007_5622                          ; $561B: $30 $05
 
     cp   $06                                      ; $561D: $FE $06
@@ -3577,7 +3577,7 @@ Data_007_57AC::
     db   $00, $00, $E0, $20
 
 func_007_57B0::
-    ld   a, $0A                                   ; $57B0: $3E $0A
+    ld   a, ENTITY_OCTOROCK_ROCK                  ; $57B0: $3E $0A
     call SpawnNewEntity_trampoline                ; $57B2: $CD $86 $3B
     jr   c, jr_007_57F4                           ; $57B5: $38 $3D
 
@@ -3918,7 +3918,7 @@ jr_007_59D5:
 jr_007_59E2:
     jr   z, jr_007_5A2A                           ; $59E2: $28 $46
 
-    ld   a, $AD                                   ; $59E4: $3E $AD
+    ld   a, ENTITY_KIKI_THE_MONKEY                ; $59E4: $3E $AD
     call SpawnNewEntity_trampoline                ; $59E6: $CD $86 $3B
     jr   c, jr_007_5A2A                           ; $59E9: $38 $3F
 
@@ -4594,7 +4594,7 @@ jr_007_5E67:
     and  $03                                      ; $5E69: $E6 $03
     jr   nz, jr_007_5EA6                          ; $5E6B: $20 $39
 
-    ld   a, $A7                                   ; $5E6D: $3E $A7
+    ld   a, ENTITY_SMASHABLE_PILLAR               ; $5E6D: $3E $A7
     call SpawnNewEntity_trampoline                ; $5E6F: $CD $86 $3B
     jr   c, jr_007_5EA6                           ; $5E72: $38 $32
 
@@ -4747,7 +4747,7 @@ label_007_5F4D:
     jp   SetEntitySpriteVariant                   ; $5F5E: $C3 $0C $3B
 
 func_007_5F61::
-    ld   a, $A7                                   ; $5F61: $3E $A7
+    ld   a, ENTITY_SMASHABLE_PILLAR               ; $5F61: $3E $A7
     call SpawnNewEntity_trampoline                ; $5F63: $CD $86 $3B
     jr   c, jr_007_5F9A                           ; $5F66: $38 $32
 
@@ -7333,7 +7333,7 @@ jr_007_6E8D:
     ld   e, a                                     ; $6E8D: $5F
     ld   d, b                                     ; $6E8E: $50
     ldh  a, [hMapId]                              ; $6E8F: $F0 $F7
-    cp   $1A                                      ; $6E91: $FE $1A
+    cp   MAP_UNKNOWN_1A                           ; $6E91: $FE $1A
     jr   nc, jr_007_6E9A                          ; $6E93: $30 $05
 
     cp   $06                                      ; $6E95: $FE $06
@@ -7716,7 +7716,7 @@ jr_007_7168:
     and  a                                        ; $716B: $A7
     ret  nz                                       ; $716C: $C0
 
-    ld   a, $7D                                   ; $716D: $3E $7D
+    ld   a, ENTITY_GOPONGA_FLOWER_PROJECTILE      ; $716D: $3E $7D
     call SpawnNewEntity_trampoline                ; $716F: $CD $86 $3B
     jr   c, jr_007_7197                           ; $7172: $38 $23
 
@@ -7777,7 +7777,7 @@ jr_007_71B4:
     and  a                                        ; $71C1: $A7
     jp   z, jr_007_7246                           ; $71C2: $CA $46 $72
 
-    ld   a, $14                                   ; $71C5: $3E $14
+    ld   a, ENTITY_MOBLIN_SWORD                   ; $71C5: $3E $14
     call SpawnNewEntity_trampoline                ; $71C7: $CD $86 $3B
     jr   c, jr_007_7246                           ; $71CA: $38 $7A
 
@@ -8180,7 +8180,7 @@ func_007_74A8::
     ld   a, [hl]                                  ; $74C0: $7E
     pop  hl                                       ; $74C1: $E1
     ld   [hl], a                                  ; $74C2: $77
-    ld   a, $5A                                   ; $74C3: $3E $5A
+    ld   a, ENTITY_FACADE                         ; $74C3: $3E $5A
     call SpawnNewEntity_trampoline                ; $74C5: $CD $86 $3B
     jr   c, jr_007_752C                           ; $74C8: $38 $62
 
@@ -8661,7 +8661,7 @@ Data_007_7794::
 SpikedBeetleEntityHandler::
     ld   de, Data_007_7784                        ; $77A4: $11 $84 $77
     ldh  a, [hMapId]                              ; $77A7: $F0 $F7
-    cp   $03                                      ; $77A9: $FE $03
+    cp   MAP_ANGLERS_TUNNEL                       ; $77A9: $FE $03
     jr   nz, jr_007_77B0                          ; $77AB: $20 $03
 
     ld   de, Data_007_7794                        ; $77AD: $11 $94 $77
@@ -8958,7 +8958,7 @@ Data_007_793D::
 
 MoblinSwordEntityHandler::
     ldh  a, [hMapId]                              ; $7941: $F0 $F7
-    cp   $15                                      ; $7943: $FE $15
+    cp   MAP_BOWWOW_HIDEOUT                       ; $7943: $FE $15
     jr   nz, jr_007_794F                          ; $7945: $20 $08
 
     ld   a, [wIsBowWowFollowingLink]              ; $7947: $FA $56 $DB
@@ -8969,7 +8969,7 @@ jr_007_794F:
     call func_007_7AB5                            ; $794F: $CD $B5 $7A
     call func_007_7D96                            ; $7952: $CD $96 $7D
     ldh  a, [hMapId]                              ; $7955: $F0 $F7
-    cp   $15                                      ; $7957: $FE $15
+    cp   MAP_BOWWOW_HIDEOUT                       ; $7957: $FE $15
     jr   z, jr_007_7963                           ; $7959: $28 $08
 
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $795B: $21 $10 $C4
@@ -9067,7 +9067,7 @@ func_007_79D7::
     jr   nz, jr_007_79F9                          ; $79E1: $20 $16
 
     ldh  a, [hMapId]                              ; $79E3: $F0 $F7
-    cp   $15                                      ; $79E5: $FE $15
+    cp   MAP_BOWWOW_HIDEOUT                       ; $79E5: $FE $15
     jr   nz, jr_007_79F9                          ; $79E7: $20 $10
 
     ld   hl, wEntitiesUnknownTableD               ; $79E9: $21 $D0 $C2
@@ -9737,7 +9737,7 @@ label_007_7F36:
     ldh  [hNoiseSfx], a                           ; $7F48: $E0 $F4
     ret                                           ; $7F4A: $C9
 
-    ld   a, $36                                   ; $7F4B: $3E $36
+    ld   a, ENTITY_HEART_CONTAINER                ; $7F4B: $3E $36
     call SpawnNewEntity_trampoline                ; $7F4D: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $7F50: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $7F52: $21 $00 $C2

@@ -833,7 +833,7 @@ jr_004_5202:
     cp   $04                                      ; $5226: $FE $04
     jr   c, jr_004_5273                           ; $5228: $38 $49
 
-    ld   a, $5A                                   ; $522A: $3E $5A
+    ld   a, ENTITY_FACADE                         ; $522A: $3E $5A
     call SpawnNewEntity_trampoline                ; $522C: $CD $86 $3B
     jr   c, jr_004_5273                           ; $522F: $38 $42
 
@@ -890,7 +890,7 @@ jr_004_5273:
     cp   $14                                      ; $527F: $FE $14
     jr   nc, jr_004_52C9                          ; $5281: $30 $46
 
-    ld   a, $5A                                   ; $5283: $3E $5A
+    ld   a, ENTITY_FACADE                         ; $5283: $3E $5A
     call SpawnNewEntity_trampoline                ; $5285: $CD $86 $3B
     jr   c, jr_004_52C9                           ; $5288: $38 $3F
 
@@ -951,7 +951,7 @@ jr_004_52C9:
     cp   $12                                      ; $52E1: $FE $12
     jr   c, jr_004_5340                           ; $52E3: $38 $5B
 
-    ld   a, $5A                                   ; $52E5: $3E $5A
+    ld   a, ENTITY_FACADE                         ; $52E5: $3E $5A
     call SpawnNewEntity_trampoline                ; $52E7: $CD $86 $3B
     jr   c, jr_004_5340                           ; $52EA: $38 $54
 
@@ -2975,7 +2975,7 @@ func_004_617B::
     call IncrementEntityState                     ; $6180: $CD $12 $3B
     ld   a, $02                                   ; $6183: $3E $02
     ld   [wEntitiesSpriteVariantTable], a         ; $6185: $EA $B0 $C3
-    ld   a, $54                                   ; $6188: $3E $54
+    ld   a, ENTITY_FISHERMAN_FISHING_GAME         ; $6188: $3E $54
     call SpawnNewEntity_trampoline                ; $618A: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $618D: $21 $00 $C2
     add  hl, de                                   ; $6190: $19
@@ -4111,7 +4111,7 @@ ReversedTractorDeviceEntityHandler::
     inc  [hl]                                     ; $6827: $34
     ld   de, Data_004_6814                        ; $6828: $11 $14 $68
     ldh  a, [hMapId]                              ; $682B: $F0 $F7
-    cp   $01                                      ; $682D: $FE $01
+    cp   MAP_BOTTLE_GROTTO                        ; $682D: $FE $01
     jr   nz, jr_004_6834                          ; $682F: $20 $03
 
     ld   de, Data_004_681C                        ; $6831: $11 $1C $68
@@ -4381,7 +4381,7 @@ label_004_69A5:
 
 KnightEntityHandler::
     ldh  a, [hMapId]                              ; $69AE: $F0 $F7
-    cp   $14                                      ; $69B0: $FE $14
+    cp   MAP_KANALET                              ; $69B0: $FE $14
     jr   c, jr_004_69C9                           ; $69B2: $38 $15
 
     ldh  a, [hRoomStatus]                         ; $69B4: $F0 $F8
@@ -4816,7 +4816,7 @@ LaserEntityHandler::
     cp   $10                                      ; $6C7B: $FE $10
     jr   nz, jr_004_6CB3                          ; $6C7D: $20 $34
 
-    ld   a, $2B                                   ; $6C7F: $3E $2B
+    ld   a, ENTITY_LASER_BEAM                     ; $6C7F: $3E $2B
     call SpawnNewEntity_trampoline                ; $6C81: $CD $86 $3B
     jr   c, jr_004_6CB3                           ; $6C84: $38 $2D
 
@@ -4869,7 +4869,7 @@ jr_004_6CB4:
     ld   hl, wEntitiesSpriteVariantTable          ; $6CCA: $21 $B0 $C3
     add  hl, bc                                   ; $6CCD: $09
     ld   [hl], a                                  ; $6CCE: $77
-    ld   a, $2A                                   ; $6CCF: $3E $2A
+    ld   a, ENTITY_LASER                          ; $6CCF: $3E $2A
     call SpawnNewEntity_trampoline                ; $6CD1: $CD $86 $3B
     jr   c, jr_004_6D0E                           ; $6CD4: $38 $38
 
@@ -6010,7 +6010,7 @@ label_004_7332:
 
     ld   a, $FF                                   ; $7338: $3E $FF
     call SetEntitySpriteVariant                   ; $733A: $CD $0C $3B
-    ld   a, $4F                                   ; $733D: $3E $4F
+    ld   a, ENTITY_TRENDY_GAME_OWNER              ; $733D: $3E $4F
     call SpawnNewEntity_trampoline                ; $733F: $CD $86 $3B
     ld   a, [$D204]                               ; $7342: $FA $04 $D2
     ld   hl, wEntitiesPosXTable                   ; $7345: $21 $00 $C2
@@ -7288,7 +7288,7 @@ func_004_7AED::
     and  a                                        ; $7AF0: $A7
     jr   nz, jr_004_7B3F                          ; $7AF1: $20 $4C
 
-    ld   a, $CA                                   ; $7AF3: $3E $CA
+    ld   a, ENTITY_MAD_BATTER                     ; $7AF3: $3E $CA
     call SpawnNewEntity_trampoline                ; $7AF5: $CD $86 $3B
     ld   a, $26                                   ; $7AF8: $3E $26
     ldh  [hNoiseSfx], a                           ; $7AFA: $E0 $F4
@@ -7622,7 +7622,7 @@ Data_004_7D07::
 TimerBombiteEntityHandler::
     ld   de, Data_004_7CEF                        ; $7D1F: $11 $EF $7C
     ldh  a, [hMapId]                              ; $7D22: $F0 $F7
-    cp   $07                                      ; $7D24: $FE $07
+    cp   MAP_TURTLE_ROCK                          ; $7D24: $FE $07
     jr   nz, jr_004_7D2B                          ; $7D26: $20 $03
 
     ld   de, Data_004_7D07                        ; $7D28: $11 $07 $7D
@@ -7777,7 +7777,7 @@ Data_004_7E09::
 BouncingBombiteEntityHandler::
     ld   de, Data_004_7DF5                        ; $7E0D: $11 $F5 $7D
     ldh  a, [hMapId]                              ; $7E10: $F0 $F7
-    cp   $07                                      ; $7E12: $FE $07
+    cp   MAP_TURTLE_ROCK                          ; $7E12: $FE $07
     jr   nz, jr_004_7E19                          ; $7E14: $20 $03
 
     ld   de, Data_004_7DFD                        ; $7E16: $11 $FD $7D
@@ -7901,7 +7901,7 @@ jr_004_7EBA:
     jp   func_004_6D7A                            ; $7EBD: $C3 $7A $6D
 
 func_004_7EC0::
-    ld   a, $02                                   ; $7EC0: $3E $02
+    ld   a, ENTITY_BOMB                           ; $7EC0: $3E $02
     call SpawnNewEntity_trampoline                ; $7EC2: $CD $86 $3B
     jr   c, jr_004_7EE4                           ; $7EC5: $38 $1D
 

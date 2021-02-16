@@ -449,7 +449,7 @@ label_006_7035:
     ldh  [hNoiseSfx], a                           ; $703C: $E0 $F4
     ret                                           ; $703E: $C9
 
-    ld   a, $36                                   ; $703F: $3E $36
+    ld   a, ENTITY_HEART_CONTAINER                ; $703F: $3E $36
     call SpawnNewEntity_trampoline                ; $7041: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $7044: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $7046: $21 $00 $C2

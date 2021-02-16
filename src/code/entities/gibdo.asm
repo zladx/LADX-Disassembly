@@ -10,7 +10,7 @@ Data_006_7E7F::
 GibdoEntityHandler::
     ld   de, Data_006_7E6F                        ; $7E85: $11 $6F $7E
     ldh  a, [hMapId]                              ; $7E88: $F0 $F7
-    cp   $07                                      ; $7E8A: $FE $07
+    cp   MAP_TURTLE_ROCK                          ; $7E8A: $FE $07
     jr   nz, jr_006_7E91                          ; $7E8C: $20 $03
 
     ld   de, Data_006_7E77                        ; $7E8E: $11 $77 $7E

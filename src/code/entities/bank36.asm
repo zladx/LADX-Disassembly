@@ -1893,7 +1893,7 @@ func_036_4B57::
     and  a                                        ; $4B5A: $A7
     ret  nz                                       ; $4B5B: $C0
 
-    ld   a, $FA                                   ; $4B5C: $3E $FA
+    ld   a, ENTITY_PHOTOGRAPHER                   ; $4B5C: $3E $FA
     call SpawnNewEntity_trampoline                ; $4B5E: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $4B61: $21 $00 $C2
     add  hl, de                                   ; $4B64: $19
@@ -2312,7 +2312,7 @@ func_036_4DD8::
     ret  nz                                       ; $4DE7: $C0
 
     push bc                                       ; $4DE8: $C5
-    ld   a, $F5                                   ; $4DE9: $3E $F5
+    ld   a, ENTITY_BOUNCING_BOULDER               ; $4DE9: $3E $F5
     call SpawnNewEntity_trampoline                ; $4DEB: $CD $86 $3B
     jr   c, jr_036_4E1B                           ; $4DEE: $38 $2B
 
@@ -2449,7 +2449,7 @@ func_036_4EA2::
     cp   $02                                      ; $4EA5: $FE $02
     jr   z, jr_036_4EE4                           ; $4EA7: $28 $3B
 
-    ld   a, $1A                                   ; $4EA9: $3E $1A
+    ld   a, ENTITY_STALFOS_AGGRESSIVE             ; $4EA9: $3E $1A
     call SpawnNewEntity_trampoline                ; $4EAB: $CD $86 $3B
     jr   c, jr_036_4EE4                           ; $4EAE: $38 $34
 
@@ -2851,7 +2851,7 @@ TunicFairyState3::
     ld   a, JINGLE_TREASURE_FOUND                 ; $5162: $3E $01
     ldh  [hJingle], a                             ; $5164: $E0 $F2
     ldh  a, [hLinkPositionX]                      ; $5166: $F0 $98
-    ld   a, $B9                                   ; $5168: $3E $B9
+    ld   a, ENTITY_BUZZ_BLOB                      ; $5168: $3E $B9
     call SpawnNewEntity_trampoline                ; $516A: $CD $86 $3B
     ldh  a, [hLinkPositionX]                      ; $516D: $F0 $98
     ld   hl, wEntitiesPosXTable                         ; $516F: $21 $00 $C2
@@ -3287,7 +3287,7 @@ jr_036_5475:
     and  $0F                                      ; $5477: $E6 $0F
     jr   nz, jr_036_5465                          ; $5479: $20 $EA
 
-    ld   a, $86                                   ; $547B: $3E $86
+    ld   a, ENTITY_FLOATING_ITEM                  ; $547B: $3E $86
     call SpawnNewEntity_trampoline                ; $547D: $CD $86 $3B
     ret  c                                        ; $5480: $D8
 
@@ -3660,7 +3660,7 @@ jr_036_56C4:
 
 func_036_56CD::
     push hl                                       ; $56CD: $E5
-    ld   a, $F5                                   ; $56CE: $3E $F5
+    ld   a, ENTITY_BOUNCING_BOULDER               ; $56CE: $3E $F5
     call SpawnNewEntity_trampoline                ; $56D0: $CD $86 $3B
     pop  hl                                       ; $56D3: $E1
     ret  c                                        ; $56D4: $D8
@@ -5024,7 +5024,7 @@ jr_036_5EDC:
     cp   $06                                      ; $5EE4: $FE $06
     ret  nc                                       ; $5EE6: $D0
 
-    ld   a, $F5                                   ; $5EE7: $3E $F5
+    ld   a, ENTITY_BOUNCING_BOULDER               ; $5EE7: $3E $F5
     call SpawnNewEntity_trampoline                ; $5EE9: $CD $86 $3B
     ret  c                                        ; $5EEC: $D8
 
@@ -5545,7 +5545,7 @@ jr_036_61AA:
     and  $03                                      ; $61C7: $E6 $03
     jr   nz, jr_036_6205                          ; $61C9: $20 $3A
 
-    ld   a, $02                                   ; $61CB: $3E $02
+    ld   a, ENTITY_BOMB                           ; $61CB: $3E $02
     call SpawnNewEntity_trampoline                ; $61CD: $CD $86 $3B
     jr   c, jr_036_6205                           ; $61D0: $38 $33
 
@@ -6408,7 +6408,7 @@ jr_036_670D:
     and  $0F                                      ; $670F: $E6 $0F
     jr   nz, jr_036_66F9                          ; $6711: $20 $E6
 
-    ld   a, $7D                                   ; $6713: $3E $7D
+    ld   a, ENTITY_GOPONGA_FLOWER_PROJECTILE      ; $6713: $3E $7D
     call SpawnNewEntity_trampoline                ; $6715: $CD $86 $3B
     ret  c                                        ; $6718: $D8
 
@@ -7548,7 +7548,7 @@ Data_036_6D3B::
 
 func_036_6D4D::
     ldh  a, [hMapId]                              ; $6D4D: $F0 $F7
-    cp   $FF                                      ; $6D4F: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $6D4F: $FE $FF
     ret  nz                                       ; $6D51: $C0
 
     ld   d, $00                                   ; $6D52: $16 $00
@@ -7715,7 +7715,7 @@ jr_036_6EA0:
     inc  [hl]                                     ; $6EA0: $34
     ld   a, JINGLE_VALIDATE                       ; $6EA1: $3E $13
     ldh  [hJingle], a                             ; $6EA3: $E0 $F2
-    ld   a, $8A                                   ; $6EA5: $3E $8A
+    ld   a, ENTITY_TILE_GLINT_SHOWN               ; $6EA5: $3E $8A
     call SpawnNewEntity_trampoline                ; $6EA7: $CD $86 $3B
     jr   c, jr_036_6EC6                           ; $6EAA: $38 $1A
 
@@ -7962,7 +7962,7 @@ func_036_705A::
     ld   b, $00                                   ; $705D: $06 $00
 
 jr_036_705F:
-    ld   a, $05                                   ; $705F: $3E $05
+    ld   a, ENTITY_ENTITY_LIFTABLE_ROCK           ; $705F: $3E $05
     call SpawnNewEntity_trampoline                ; $7061: $CD $86 $3B
     jr   c, jr_036_708E                           ; $7064: $38 $28
 
@@ -8128,7 +8128,7 @@ func_036_7161::
     push af                                       ; $7188: $F5
     ld   a, $36                                   ; $7189: $3E $36
     ld   [wCurrentBank], a                        ; $718B: $EA $AF $DB
-    ld   a, $FA                                   ; $718E: $3E $FA
+    ld   a, ENTITY_PHOTOGRAPHER                   ; $718E: $3E $FA
     call SpawnNewEntity_trampoline                ; $7190: $CD $86 $3B
     pop  af                                       ; $7193: $F1
     ld   [wCurrentBank], a                        ; $7194: $EA $AF $DB
@@ -8307,7 +8307,7 @@ label_036_728B:
 
 jr_036_729E:
     ldh  a, [hMapId]                              ; $729E: $F0 $F7
-    cp   $0F                                      ; $72A0: $FE $0F
+    cp   MAP_FISHING                              ; $72A0: $FE $0F
     jr   nz, jr_036_72A9                          ; $72A2: $20 $05
 
     ldh  a, [hIsSideScrolling]                    ; $72A4: $F0 $F9

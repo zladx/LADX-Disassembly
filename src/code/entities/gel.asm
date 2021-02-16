@@ -87,7 +87,7 @@ jr_006_7C6A:
     ld   hl, wEntitiesSpeedZTable                 ; $7C83: $21 $20 $C3
     add  hl, bc                                   ; $7C86: $09
     ld   [hl], $20                                ; $7C87: $36 $20
-    ld   a, $1C                                   ; $7C89: $3E $1C
+    ld   a, ENTITY_MINI_GEL                       ; $7C89: $3E $1C
     call SpawnNewEntity_trampoline                ; $7C8B: $CD $86 $3B
     jr   c, jr_006_7CB7                           ; $7C8E: $38 $27
 

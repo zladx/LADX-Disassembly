@@ -94,7 +94,7 @@ GetBGAttributesAddressForObject::
 
 .jr_01A_65C5
     ldh  a, [hMapId]                              ; $65C5: $F0 $F7
-    cp   $11                                      ; $65C7: $FE $11
+    cp   MAP_CAVE_C                               ; $65C7: $FE $11
     jr   nz, .jr_01A_65D9                         ; $65C9: $20 $0E
 
     ldh  a, [hMapRoom]                            ; $65CB: $F0 $F6
@@ -110,7 +110,7 @@ GetBGAttributesAddressForObject::
 
 .jr_01A_65D9
     ldh  a, [hMapId]                              ; $65D9: $F0 $F7
-    cp   $0F                                      ; $65DB: $FE $0F
+    cp   MAP_FISHING                              ; $65DB: $FE $0F
     jr   nz, .jr_01A_65E9                         ; $65DD: $20 $0A
 
     ldh  a, [hMapRoom]                            ; $65DF: $F0 $F6
@@ -122,7 +122,7 @@ GetBGAttributesAddressForObject::
 
 .jr_01A_65E9
     ldh  a, [hMapId]                              ; $65E9: $F0 $F7
-    cp   $1F                                      ; $65EB: $FE $1F
+    cp   MAP_CAVE_E                               ; $65EB: $FE $1F
     jr   nz, .jr_01A_65FD                         ; $65ED: $20 $0E
 
     ldh  a, [hMapRoom]                            ; $65EF: $F0 $F6
@@ -138,7 +138,7 @@ GetBGAttributesAddressForObject::
 
 .jr_01A_65FD
     ldh  a, [hMapId]                              ; $65FD: $F0 $F7
-    cp   $10                                      ; $65FF: $FE $10
+    cp   MAP_HOUSE                                ; $65FF: $FE $10
     jr   nz, .jr_01A_6616                         ; $6601: $20 $13
 
     ldh  a, [hMapRoom]                            ; $6603: $F0 $F6
@@ -157,7 +157,7 @@ GetBGAttributesAddressForObject::
 
 .jr_01A_6616
     ldh  a, [hMapId]                              ; $6616: $F0 $F7
-    cp   $16                                      ; $6618: $FE $16
+    cp   MAP_S_FACE_SHRINE                        ; $6618: $FE $16
     jr   nz, .useSecondaryIndoorsPaletteBank                         ; $661A: $20 $0E
 
     ldh  a, [hMapRoom]                            ; $661C: $F0 $F6

@@ -111,7 +111,7 @@ MarinCreditsHandler:
     and  $1F                                      ; $4EF5: $E6 $1F
     jr   nz, jr_005_4F39                          ; $4EF7: $20 $40
 
-    ld   a, $C9                                   ; $4EF9: $3E $C9
+    ld   a, ENTITY_MUSICAL_NOTE                   ; $4EF9: $3E $C9
     call SpawnNewEntity_trampoline                ; $4EFB: $CD $86 $3B
     jr   c, jr_005_4F39                           ; $4EFE: $38 $39
 
@@ -447,7 +447,7 @@ jr_005_50E2:
     and  $1F                                      ; $50E7: $E6 $1F
     jr   nz, jr_005_512A                          ; $50E9: $20 $3F
 
-    ld   a, $C9                                   ; $50EB: $3E $C9
+    ld   a, ENTITY_MUSICAL_NOTE                   ; $50EB: $3E $C9
     call SpawnNewEntity_trampoline                ; $50ED: $CD $86 $3B
     jr   c, jr_005_512A                           ; $50F0: $38 $38
 

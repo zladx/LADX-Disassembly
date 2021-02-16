@@ -5301,7 +5301,7 @@ Data_002_690D::
 
 func_002_6910::
     ldh  a, [hMapId]                              ; $6910: $F0 $F7
-    cp   $07                                      ; $6912: $FE $07
+    cp   MAP_TURTLE_ROCK                          ; $6912: $FE $07
     jr   nz, jr_002_692B                          ; $6914: $20 $15
 
     call label_002_7719                           ; $6916: $CD $19 $77

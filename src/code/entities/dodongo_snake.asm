@@ -63,7 +63,7 @@ Data_005_686B::
 
 DodongoSnakeEntityHandler::
     ldh  a, [hMapId]                              ; $686F: $F0 $F7
-    cp   $07                                      ; $6871: $FE $07
+    cp   MAP_TURTLE_ROCK                          ; $6871: $FE $07
     jr   nz, jr_005_6879                          ; $6873: $20 $04
 
     ld   a, $10                                   ; $6875: $3E $10

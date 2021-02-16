@@ -924,7 +924,7 @@ jr_004_45A6:
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $45A9: $21 $10 $C4
     add  hl, bc                                   ; $45AC: $09
     ld   [hl], b                                  ; $45AD: $70
-    ld   a, $5C                                   ; $45AE: $3E $5C
+    ld   a, ENTITY_GENIE                          ; $45AE: $3E $5C
     call SpawnNewEntity_trampoline                ; $45B0: $CD $86 $3B
     jr   c, jr_004_45F0                           ; $45B3: $38 $3B
 
@@ -1179,7 +1179,7 @@ jr_004_486D:
     cp   $06                                      ; $4871: $FE $06
     jr   nz, jr_004_48A6                          ; $4873: $20 $31
 
-    ld   a, $5C                                   ; $4875: $3E $5C
+    ld   a, ENTITY_GENIE                          ; $4875: $3E $5C
     call SpawnNewEntity_trampoline                ; $4877: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                               ; $487A: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $487C: $21 $00 $C2

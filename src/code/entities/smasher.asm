@@ -14,7 +14,7 @@ SmasherEntityHandler::
     jr   nz, jr_006_453F                          ; $451C: $20 $21
 
     inc  [hl]                                     ; $451E: $34
-    ld   a, $92                                   ; $451F: $3E $92
+    ld   a, ENTITY_SMASHER                        ; $451F: $3E $92
     call SpawnNewEntity_trampoline                ; $4521: $CD $86 $3B
     ld   a, e                                     ; $4524: $7B
     ld   [$D201], a                               ; $4525: $EA $01 $D2

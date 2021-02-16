@@ -215,7 +215,7 @@ func_006_61A6::
     call IncrementEntityState                     ; $61AD: $CD $12 $3B
     ld   a, $01                                   ; $61B0: $3E $01
     call SetEntitySpriteVariant                   ; $61B2: $CD $0C $3B
-    ld   a, $71                                   ; $61B5: $3E $71
+    ld   a, ENTITY_KID_71                         ; $61B5: $3E $71
     call SpawnNewEntity_trampoline                ; $61B7: $CD $86 $3B
     jr   c, jr_006_61EB                           ; $61BA: $38 $2F
 

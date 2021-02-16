@@ -2,7 +2,7 @@ RollingBonesEntityHandler::
     ld   a, c                                     ; $6C6D: $79
     ld   [$D202], a                               ; $6C6E: $EA $02 $D2
     ldh  a, [hMapId]                              ; $6C71: $F0 $F7
-    cp   $07                                      ; $6C73: $FE $07
+    cp   MAP_TURTLE_ROCK                          ; $6C73: $FE $07
     jr   nz, jr_006_6C7B                          ; $6C75: $20 $04
 
     ld   a, $10                                   ; $6C77: $3E $10
@@ -56,7 +56,7 @@ label_006_6CBE:
     call label_27DD                               ; $6CBE: $CD $DD $27
     call DidKillEnemy                             ; $6CC1: $CD $50 $3F
     ldh  a, [hMapId]                              ; $6CC4: $F0 $F7
-    cp   $07                                      ; $6CC6: $FE $07
+    cp   MAP_TURTLE_ROCK                          ; $6CC6: $FE $07
     ret  z                                        ; $6CC8: $C8
 
 label_006_6CC9:
@@ -65,7 +65,7 @@ label_006_6CC9:
     ld   e, a                                     ; $6CCE: $5F
     ld   d, b                                     ; $6CCF: $50
     ldh  a, [hMapId]                              ; $6CD0: $F0 $F7
-    cp   $FF                                      ; $6CD2: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $6CD2: $FE $FF
     jr   nz, jr_006_6CDB                          ; $6CD4: $20 $05
 
     ld   hl, wColorDungeonRoomStatus              ; $6CD6: $21 $E0 $DD

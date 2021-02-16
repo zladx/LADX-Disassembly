@@ -16,7 +16,7 @@ Data_006_672C::
 KeeseEntityHandler::
     ld   de, Data_006_6708                        ; $6730: $11 $08 $67
     ldh  a, [hMapId]                              ; $6733: $F0 $F7
-    cp   $0A                                      ; $6735: $FE $0A
+    cp   MAP_CAVE_B                               ; $6735: $FE $0A
     jr   nz, jr_006_673C                          ; $6737: $20 $03
 
     ld   de, Data_006_6710                        ; $6739: $11 $10 $67

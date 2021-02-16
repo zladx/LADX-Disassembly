@@ -523,7 +523,7 @@ jr_005_7EBF:
 
 jr_005_7ECC:
     ldh  a, [hMapId]                              ; $7ECC: $F0 $F7
-    cp   $05                                      ; $7ECE: $FE $05
+    cp   MAP_FACE_SHRINE                          ; $7ECE: $FE $05
     ret  nc                                       ; $7ED0: $D0
 
     jp   label_005_7ED7                           ; $7ED1: $C3 $D7 $7E
@@ -537,7 +537,7 @@ label_005_7ED7:
     ld   e, a                                     ; $7EDC: $5F
     ld   d, b                                     ; $7EDD: $50
     ldh  a, [hMapId]                              ; $7EDE: $F0 $F7
-    cp   $FF                                      ; $7EE0: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $7EE0: $FE $FF
     jr   nz, jr_005_7EE9                          ; $7EE2: $20 $05
 
     ld   hl, wColorDungeonRoomStatus              ; $7EE4: $21 $E0 $DD

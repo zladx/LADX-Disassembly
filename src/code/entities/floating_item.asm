@@ -16,7 +16,7 @@ FloatingItemEntityHandler::
     jr   z, FloatingItem2EntityHandler            ; $7B0F: $28 $0B
 
     ldh  a, [hMapId]                              ; $7B11: $F0 $F7
-    cp   $FF                                      ; $7B13: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $7B13: $FE $FF
     jr   nz, FloatingItem2EntityHandler           ; $7B15: $20 $05
 
     ld   a, $06                                   ; $7B17: $3E $06
@@ -163,7 +163,7 @@ jr_006_7BE0:
 
 func_006_7BE2::
     ldh  a, [hMapId]                              ; $7BE2: $F0 $F7
-    cp   $0A                                      ; $7BE4: $FE $0A
+    cp   MAP_CAVE_B                               ; $7BE4: $FE $0A
     ret  nz                                       ; $7BE6: $C0
 
 jr_006_7BE7:

@@ -77,7 +77,7 @@ func_006_564B::
     jr   nz, jr_006_568A                          ; $564E: $20 $3A
 
     call label_27DD                               ; $5650: $CD $DD $27
-    ld   a, $30                                   ; $5653: $3E $30
+    ld   a, ENTITY_KEY_DROP_POINT                 ; $5653: $3E $30
     call SpawnNewEntity_trampoline                ; $5655: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $5658: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $565A: $21 $00 $C2
@@ -167,7 +167,7 @@ label_006_56C8:
 
 jr_006_56D9:
     ldh  [hMultiPurposeG], a                               ; $56D9: $E0 $E8
-    ld   a, $87                                   ; $56DB: $3E $87
+    ld   a, ENTITY_DESERT_LANMOLA                 ; $56DB: $3E $87
     call SpawnNewEntity_trampoline                ; $56DD: $CD $86 $3B
     jr   c, jr_006_5726                           ; $56E0: $38 $44
 

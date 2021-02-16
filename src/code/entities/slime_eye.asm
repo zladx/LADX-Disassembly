@@ -14,7 +14,7 @@ label_004_496F:
     ldh  [hMultiPurposeG], a                               ; $4970: $E0 $E8
 
 .loop
-    ld   a, $5B                                   ; $4972: $3E $5B
+    ld   a, ENTITY_SLIME_EYE                      ; $4972: $3E $5B
     call SpawnNewEntity_trampoline                ; $4974: $CD $86 $3B
     ld   hl, wEntitiesUnknowTableR                ; $4977: $21 $90 $C3
     add  hl, de                                   ; $497A: $19
@@ -105,7 +105,7 @@ jr_004_49FB:
     cp   $02                                      ; $4A05: $FE $02
     jr   nc, jr_004_4A2C                          ; $4A07: $30 $23
 
-    ld   a, $1B                                   ; $4A09: $3E $1B
+    ld   a, ENTITY_GEL                            ; $4A09: $3E $1B
     call SpawnNewEntity_trampoline                ; $4A0B: $CD $86 $3B
     call GetRandomByte                            ; $4A0E: $CD $0D $28
     and  $3F                                      ; $4A11: $E6 $3F

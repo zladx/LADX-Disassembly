@@ -202,7 +202,7 @@ jr_006_71BA:
     jr   z, jr_006_71F0                           ; $71C8: $28 $26
 
     inc  [hl]                                     ; $71CA: $34
-    ld   a, $84                                   ; $71CB: $3E $84
+    ld   a, ENTITY_BIG_FAIRY                      ; $71CB: $3E $84
     call SpawnNewEntity_trampoline                ; $71CD: $CD $86 $3B
     jr   c, jr_006_71F0                           ; $71D0: $38 $1E
 

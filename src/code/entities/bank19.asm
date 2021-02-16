@@ -38,7 +38,7 @@ LiftableStatueEntityHandler::
 jr_019_404A:
     ld   hl, Data_019_4000                        ; $404A: $21 $00 $40
     ldh  a, [hMapId]                              ; $404D: $F0 $F7
-    cp   $01                                      ; $404F: $FE $01
+    cp   MAP_BOTTLE_GROTTO                        ; $404F: $FE $01
     jr   nz, jr_019_4056                          ; $4051: $20 $03
 
     ld   hl, Data_019_4010                        ; $4053: $21 $10 $40
@@ -231,7 +231,7 @@ func_019_4183::
 
 jr_019_4185:
     ldh  [hMultiPurposeG], a                               ; $4185: $E0 $E8
-    ld   a, $9D                                   ; $4187: $3E $9D
+    ld   a, ENTITY_LIFTABLE_STATUE                ; $4187: $3E $9D
     call SpawnNewEntity_trampoline                ; $4189: $CD $86 $3B
     jr   c, jr_019_41E2                           ; $418C: $38 $54
 
@@ -1032,7 +1032,7 @@ Data_019_47B9::
 
 MaskedMimicGoriyaEntityHandler::
     ldh  a, [hMapId]                              ; $47BC: $F0 $F7
-    cp   $1F                                      ; $47BE: $FE $1F
+    cp   MAP_CAVE_E                               ; $47BE: $FE $1F
     jp   z, GoriyaEntityHandler                   ; $47C0: $CA $E4 $45
 
     ld   de, Data_019_4796                        ; $47C3: $11 $96 $47
@@ -1609,7 +1609,7 @@ func_019_4B6E::
     and  $02                                      ; $4B77: $E6 $02
     jr   z, jr_019_4BAB                           ; $4B79: $28 $30
 
-    ld   a, $DE                                   ; $4B7B: $3E $DE
+    ld   a, ENTITY_EGG_SONG_EVENT                 ; $4B7B: $3E $DE
     call SpawnNewEntity_trampoline                ; $4B7D: $CD $86 $3B
     ret  c                                        ; $4B80: $D8
 
@@ -1875,7 +1875,7 @@ func_019_4D45::
 
 jr_019_4D46:
     ldh  [hMultiPurposeG], a                               ; $4D46: $E0 $E8
-    ld   a, $DE                                   ; $4D48: $3E $DE
+    ld   a, ENTITY_EGG_SONG_EVENT                 ; $4D48: $3E $DE
     call SpawnNewEntity_trampoline                ; $4D4A: $CD $86 $3B
     ret  c                                        ; $4D4D: $D8
 
@@ -1967,7 +1967,7 @@ func_019_4DBC::
     cp   $02                                      ; $4DD8: $FE $02
     ret  nz                                       ; $4DDA: $C0
 
-    ld   a, $DC                                   ; $4DDB: $3E $DC
+    ld   a, ENTITY_FLYING_ROOSTER_EVENTS          ; $4DDB: $3E $DC
     call SpawnNewEntity_trampoline                ; $4DDD: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $4DE0: $21 $00 $C2
     add  hl, de                                   ; $4DE3: $19
@@ -2002,7 +2002,7 @@ func_019_4E09::
 
     ld   [hl], $A0                                ; $4E18: $36 $A0
     call IncrementEntityState                     ; $4E1A: $CD $12 $3B
-    ld   a, $02                                   ; $4E1D: $3E $02
+    ld   a, ENTITY_BOMB                           ; $4E1D: $3E $02
     call SpawnNewEntity_trampoline                ; $4E1F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $4E22: $21 $00 $C2
     add  hl, de                                   ; $4E25: $19
@@ -2063,7 +2063,7 @@ func_019_4E74::
     and  a                                        ; $4E86: $A7
     ret  nz                                       ; $4E87: $C0
 
-    ld   a, $D5                                   ; $4E88: $3E $D5
+    ld   a, ENTITY_ROOSTER                        ; $4E88: $3E $D5
     call SpawnNewEntity_trampoline                ; $4E8A: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $4E8D: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $4E8F: $21 $00 $C2
@@ -2187,7 +2187,7 @@ jr_019_4F8F:
     and  $07                                      ; $4FB6: $E6 $07
     jr   nz, jr_019_4FDA                          ; $4FB8: $20 $20
 
-    ld   a, $DC                                   ; $4FBA: $3E $DC
+    ld   a, ENTITY_FLYING_ROOSTER_EVENTS          ; $4FBA: $3E $DC
     call SpawnNewEntity_trampoline                ; $4FBC: $CD $86 $3B
     ret  c                                        ; $4FBF: $D8
 
@@ -2864,7 +2864,7 @@ func_019_542A::
 
 jr_019_542C:
     ldh  [hMultiPurposeH], a                               ; $542C: $E0 $E9
-    ld   a, $DA                                   ; $542E: $3E $DA
+    ld   a, ENTITY_PODOBOO                        ; $542E: $3E $DA
     call SpawnNewEntity_trampoline                ; $5430: $CD $86 $3B
     ret  c                                        ; $5433: $D8
 
@@ -2950,7 +2950,7 @@ jr_019_54AC:
     and  $0F                                      ; $54AF: $E6 $0F
     ret  nz                                       ; $54B1: $C0
 
-    ld   a, $DA                                   ; $54B2: $3E $DA
+    ld   a, ENTITY_PODOBOO                        ; $54B2: $3E $DA
     call SpawnNewEntity_trampoline                ; $54B4: $CD $86 $3B
     ret  c                                        ; $54B7: $D8
 
@@ -4520,7 +4520,7 @@ ENDC
 GhostInHouseSequence:
     call func_019_7D3D                            ; $5FBF: $CD $3D $7D
     ldh  a, [hMapId]                              ; $5FC2: $F0 $F7
-    cp   $1E                                      ; $5FC4: $FE $1E
+    cp   MAP_UNKNOWN_1E                           ; $5FC4: $FE $1E
     ret  nz                                       ; $5FC6: $C0
 
     ldh  a, [hMapRoom]                            ; $5FC7: $F0 $F6
@@ -5603,7 +5603,7 @@ label_019_6A4F:
     and  $03                                      ; $6A51: $E6 $03
     jr   nz, jr_019_6A8C                          ; $6A53: $20 $37
 
-    ld   a, $A7                                   ; $6A55: $3E $A7
+    ld   a, ENTITY_SMASHABLE_PILLAR               ; $6A55: $3E $A7
     call SpawnNewEntity_trampoline                ; $6A57: $CD $86 $3B
     jr   c, jr_019_6A8C                           ; $6A5A: $38 $30
 
@@ -5659,7 +5659,7 @@ MimicEntityHandler::
     jp   nz, AnimateDungeonDoorOpening            ; $6AB5: $C2 $41 $68
 
     ldh  a, [hMapId]                              ; $6AB8: $F0 $F7
-    cp   $0A                                      ; $6ABA: $FE $0A
+    cp   MAP_CAVE_B                               ; $6ABA: $FE $0A
     jr   nz, jr_019_6ACE                          ; $6ABC: $20 $10
 
     ldh  a, [hMapRoom]                            ; $6ABE: $F0 $F6
@@ -6140,7 +6140,7 @@ BananasSchuleState2Handler::
     and  a                                        ; $6D8E: $A7
     ret  nz                                       ; $6D8F: $C0
 
-    ld   a, $CD                                   ; $6D90: $3E $CD
+    ld   a, ENTITY_BANANAS_SCHULE_SALE            ; $6D90: $3E $CD
     call SpawnNewEntity_trampoline                ; $6D92: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $6D95: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $6D97: $21 $00 $C2
@@ -6862,7 +6862,7 @@ SeashellMansionState6Handler::
     jr   nz, jr_019_7373                          ; $733A: $20 $37
 
     call IncrementEntityState                     ; $733C: $CD $12 $3B
-    ld   a, $CF                                   ; $733F: $3E $CF
+    ld   a, ENTITY_SEASHELL_MANSION               ; $733F: $3E $CF
     call SpawnNewEntity_trampoline                ; $7341: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $7344: $21 $00 $C2
     add  hl, de                                   ; $7347: $19
@@ -6876,7 +6876,7 @@ SeashellMansionState6Handler::
     ld   hl, wEntitiesTransitionCountdownTable    ; $7356: $21 $E0 $C2
     add  hl, de                                   ; $7359: $19
     ld   [hl], $14                                ; $735A: $36 $14
-    ld   a, $02                                   ; $735C: $3E $02
+    ld   a, ENTITY_BOMB                           ; $735C: $3E $02
     call SpawnNewEntity_trampoline                ; $735E: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $7361: $21 $00 $C2
     add  hl, de                                   ; $7364: $19
@@ -6907,7 +6907,7 @@ SeashellMansionState9Handler::
     call GetEntityPrivateCountdown1               ; $7382: $CD $00 $0C
     ret  nz                                       ; $7385: $C0
 
-    ld   a, $CF                                   ; $7386: $3E $CF
+    ld   a, ENTITY_SEASHELL_MANSION               ; $7386: $3E $CF
     call SpawnNewEntity_trampoline                ; $7388: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $738B: $21 $00 $C2
     add  hl, de                                   ; $738E: $19
@@ -8401,7 +8401,7 @@ label_019_7EC4:
     ldh  [hNoiseSfx], a                           ; $7ED6: $E0 $F4
     ret                                           ; $7ED8: $C9
 
-    ld   a, $36                                   ; $7ED9: $3E $36
+    ld   a, ENTITY_HEART_CONTAINER                ; $7ED9: $3E $36
     call SpawnNewEntity_trampoline                ; $7EDB: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $7EDE: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $7EE0: $21 $00 $C2
@@ -8441,7 +8441,7 @@ func_019_7F0E::
     ld   a, [wIsIndoor]                           ; $7F14: $FA $A5 $DB
     ld   d, a                                     ; $7F17: $57
     ldh  a, [hMapId]                              ; $7F18: $F0 $F7
-    cp   $1A                                      ; $7F1A: $FE $1A
+    cp   MAP_UNKNOWN_1A                           ; $7F1A: $FE $1A
     jr   nc, jr_019_7F23                          ; $7F1C: $30 $05
 
     cp   $06                                      ; $7F1E: $FE $06

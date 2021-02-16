@@ -7,7 +7,7 @@ Data_006_4F34::
 HardHatBeetleEntityHandler::
     ld   de, Data_006_4F2C                        ; $4F3C: $11 $2C $4F
     ldh  a, [hMapId]                              ; $4F3F: $F0 $F7
-    cp   $0A                                      ; $4F41: $FE $0A
+    cp   MAP_CAVE_B                               ; $4F41: $FE $0A
     jr   nz, jr_006_4F48                          ; $4F43: $20 $03
 
     ld   de, Data_006_4F34                        ; $4F45: $11 $34 $4F

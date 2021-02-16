@@ -38,7 +38,7 @@ jr_006_4B98:
     and  a                                        ; $4BB7: $A7
     jr   nz, jr_006_4BE1                          ; $4BB8: $20 $27
 
-    ld   hl, wEntitiesUnknowTableH                ; $4BBA: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $4BBA: $21 $30 $C4
     add  hl, bc                                   ; $4BBD: $09
     ld   [hl], $C4                                ; $4BBE: $36 $C4
     ldh  a, [hActiveEntityState]                  ; $4BC0: $F0 $F0
@@ -58,7 +58,7 @@ jr_006_4B98:
     cp   e                                        ; $4BD5: $BB
     jr   z, jr_006_4BDE                           ; $4BD6: $28 $06
 
-    ld   hl, wEntitiesUnknowTableH                ; $4BD8: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $4BD8: $21 $30 $C4
     add  hl, bc                                   ; $4BDB: $09
     ld   [hl], $84                                ; $4BDC: $36 $84
 
@@ -273,7 +273,7 @@ jr_006_4CCE:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4D20: $21 $40 $C3
     add  hl, de                                   ; $4D23: $19
     ld   [hl], $C2                                ; $4D24: $36 $C2
-    ld   hl, wEntitiesUnknowTableH                ; $4D26: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $4D26: $21 $30 $C4
     add  hl, de                                   ; $4D29: $19
     ld   [hl], $00                                ; $4D2A: $36 $00
     ld   hl, wEntitiesTransitionCountdownTable    ; $4D2C: $21 $E0 $C2

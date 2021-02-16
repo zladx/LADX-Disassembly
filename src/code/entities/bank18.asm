@@ -6825,7 +6825,7 @@ GrimCreeperState2Handler::
     jr   nz, jr_018_7088                          ; $705C: $20 $2A
 
     ld   [hl], $FF                                ; $705E: $36 $FF
-    ld   hl, wEntitiesUnknowTableH                ; $7060: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7060: $21 $30 $C4
     add  hl, bc                                   ; $7063: $09
     res  1, [hl]                                  ; $7064: $CB $8E
     ld   e, $0F                                   ; $7066: $1E $0F
@@ -6869,7 +6869,7 @@ GrimCreeperState3Handler::
     call GetEntityTransitionCountdown             ; $7095: $CD $05 $0C
     jr   nz, jr_018_70A4                          ; $7098: $20 $0A
 
-    ld   hl, wEntitiesUnknowTableH                ; $709A: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $709A: $21 $30 $C4
     add  hl, bc                                   ; $709D: $09
     set  1, [hl]                                  ; $709E: $CB $CE
     call IncrementEntityState                     ; $70A0: $CD $12 $3B
@@ -6914,7 +6914,7 @@ jr_018_70A4:
     ld   hl, wEntitiesUnknowTableY                ; $70DD: $21 $D0 $C3
     add  hl, de                                   ; $70E0: $19
     ld   [hl], c                                  ; $70E1: $71
-    ld   hl, wEntitiesUnknowTableH                ; $70E2: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $70E2: $21 $30 $C4
     add  hl, de                                   ; $70E5: $19
     ld   a, [hl]                                  ; $70E6: $7E
     and  $7B                                      ; $70E7: $E6 $7B
@@ -7267,7 +7267,7 @@ jr_018_733C:
     jr   z, jr_018_7363                           ; $734F: $28 $12
 
     call IncrementEntityState                     ; $7351: $CD $12 $3B
-    ld   hl, wEntitiesUnknowTableH                ; $7354: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7354: $21 $30 $C4
     add  hl, bc                                   ; $7357: $09
     set  7, [hl]                                  ; $7358: $CB $FE
     set  2, [hl]                                  ; $735A: $CB $D6
@@ -7494,7 +7494,7 @@ TurtleRockHeadState5Handler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $74A2: $21 $40 $C3
     add  hl, bc                                   ; $74A5: $09
     res  7, [hl]                                  ; $74A6: $CB $BE
-    ld   hl, wEntitiesUnknowTableH                ; $74A8: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $74A8: $21 $30 $C4
     add  hl, bc                                   ; $74AB: $09
     res  6, [hl]                                  ; $74AC: $CB $B6
     call IncrementEntityState                     ; $74AE: $CD $12 $3B
@@ -8009,7 +8009,7 @@ label_018_78A6:
     call SpawnNewEntity_trampoline                ; $78B2: $CD $86 $3B
     jr   c, jr_018_78F1                           ; $78B5: $38 $3A
 
-    ld   hl, wEntitiesUnknowTableH                ; $78B7: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $78B7: $21 $30 $C4
     add  hl, de                                   ; $78BA: $19
     res  0, [hl]                                  ; $78BB: $CB $86
     ldh  a, [hMultiPurpose0]                      ; $78BD: $F0 $D7
@@ -8745,7 +8745,7 @@ func_018_7E15::
     add  hl, bc                                   ; $7E40: $09
     ld   [hl], a                                  ; $7E41: $77
     call UpdateEntityPosWithSpeed_18              ; $7E42: $CD $5F $7E
-    ld   hl, wEntitiesUnknowTableH                ; $7E45: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7E45: $21 $30 $C4
     add  hl, bc                                   ; $7E48: $09
     ld   a, [hl]                                  ; $7E49: $7E
     and  $20                                      ; $7E4A: $E6 $20

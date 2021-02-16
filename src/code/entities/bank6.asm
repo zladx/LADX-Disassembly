@@ -228,7 +228,7 @@ func_006_64F7::
     add  hl, bc                                   ; $6522: $09
     ld   [hl], a                                  ; $6523: $77
     call UpdateEntityPosWithSpeed_06              ; $6524: $CD $41 $65
-    ld   hl, wEntitiesUnknowTableH                ; $6527: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $6527: $21 $30 $C4
     add  hl, bc                                   ; $652A: $09
     ld   a, [hl]                                  ; $652B: $7E
     and  $20                                      ; $652C: $E6 $20

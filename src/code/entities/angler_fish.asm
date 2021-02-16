@@ -82,7 +82,7 @@ func_005_55CA::
     ld   hl, wEntitiesHitboxFlagsTable                ; $55E8: $21 $50 $C3
     add  hl, de                                   ; $55EB: $19
     ld   [hl], $80                                ; $55EC: $36 $80
-    ld   hl, wEntitiesUnknowTableH                ; $55EE: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $55EE: $21 $30 $C4
     add  hl, de                                   ; $55F1: $19
     ld   [hl], $40                                ; $55F2: $36 $40
     ld   hl, wEntitiesUnknownTableD               ; $55F4: $21 $D0 $C2
@@ -161,7 +161,7 @@ jr_005_5650:
     ld   hl, wEntitiesPhysicsFlagsTable                ; $5670: $21 $40 $C3
     add  hl, de                                   ; $5673: $19
     ld   [hl], $02                                ; $5674: $36 $02
-    ld   hl, wEntitiesUnknowTableH                ; $5676: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $5676: $21 $30 $C4
     add  hl, de                                   ; $5679: $19
     ld   [hl], d                                  ; $567A: $72
     ld   hl, wEntitiesHealthTable                                ; $567B: $21 $60 $C3

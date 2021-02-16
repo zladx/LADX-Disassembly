@@ -55,7 +55,7 @@ ArmosStatueState1Handler::
     ld   hl, wEntitiesHitboxFlagsTable            ; $74A3: $21 $50 $C3
     add  hl, bc                                   ; $74A6: $09
     res  7, [hl]                                  ; $74A7: $CB $BE
-    ld   hl, wEntitiesUnknowTableH                ; $74A9: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $74A9: $21 $30 $C4
     add  hl, bc                                   ; $74AC: $09
     res  6, [hl]                                  ; $74AD: $CB $B6
     jp   ClearEntitySpeed                         ; $74AF: $C3 $7F $3D

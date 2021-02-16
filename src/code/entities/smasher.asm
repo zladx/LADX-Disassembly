@@ -575,7 +575,7 @@ func_006_4855::
     add  hl, bc                                   ; $48C9: $09
     ld   a, [hl]                                  ; $48CA: $7E
     ld   [hl], $04                                ; $48CB: $36 $04
-    ld   hl, wEntitiesUnknowTableH                ; $48CD: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $48CD: $21 $30 $C4
     add  hl, bc                                   ; $48D0: $09
     res  7, [hl]                                  ; $48D1: $CB $BE
     ld   a, $10                                   ; $48D3: $3E $10

@@ -499,11 +499,11 @@ hMapId::
   ds 1 ; FFF7
 
 ; Status flags of the current room
-; 0x00 = not visited,
-; 0x04 = bos door is open,
-; 0x10 = special event occured,
-; 0x30 = don't load room entities,
-; 0x80 = visited,
+; 0x00 = not visited
+; 0x04 = boss door is open
+; 0x10 = special event occured
+; 0x30 = boss defeated
+; 0x80 = visited
 hRoomStatus::
   ds 1 ; FFF8
 

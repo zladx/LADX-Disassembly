@@ -16,7 +16,7 @@ jr_006_6C7B:
     cp   $05                                      ; $6C86: $FE $05
     jr   z, jr_006_6CE8                           ; $6C88: $28 $5E
 
-    ld   hl, wEntitiesUnknowTableH                ; $6C8A: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $6C8A: $21 $30 $C4
     add  hl, bc                                   ; $6C8D: $09
     ld   [hl], $80                                ; $6C8E: $36 $80
     ld   hl, wEntitiesPrivateState1Table          ; $6C90: $21 $B0 $C2

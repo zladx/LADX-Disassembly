@@ -13,7 +13,7 @@ incbin "gfx/characters/evil_eagle/oam_rider_hidden.2bpp"
 ; Normally only 2 spriteslots can be loaded on a map transition, but this
 ; boss is behind a warp. And warps will load all 4 tileslots at once.
 EntityInitEvilEagle::
-    ld   hl, wEntitiesUnknowTableH                ; $5A1E: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $5A1E: $21 $30 $C4
     add  hl, bc                                   ; $5A21: $09
     ld   a, [hl]                                  ; $5A22: $7E
     and  $7F                                      ; $5A23: $E6 $7F
@@ -893,7 +893,7 @@ jr_005_5EB0:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5F1D: $21 $40 $C3
     add  hl, de                                   ; $5F20: $19
     ld   [hl], $02                                ; $5F21: $36 $02
-    ld   hl, wEntitiesUnknowTableH                ; $5F23: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $5F23: $21 $30 $C4
     add  hl, de                                   ; $5F26: $19
     ld   [hl], $00                                ; $5F27: $36 $00
     ld   hl, wEntitiesHealthGroup                 ; $5F29: $21 $D0 $C4

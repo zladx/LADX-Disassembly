@@ -1676,11 +1676,11 @@ jr_005_7A1F:
     and  a                                        ; $7A27: $A7
     jr   nz, jr_005_7A39                          ; $7A28: $20 $0F
 
-    ld   hl, wEntitiesUnknowTableH                ; $7A2A: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7A2A: $21 $30 $C4
     add  hl, bc                                   ; $7A2D: $09
     ld   [hl], $C0                                ; $7A2E: $36 $C0
     call label_3B70                               ; $7A30: $CD $70 $3B
-    ld   hl, wEntitiesUnknowTableH                ; $7A33: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7A33: $21 $30 $C4
     add  hl, bc                                   ; $7A36: $09
     ld   [hl], $80                                ; $7A37: $36 $80
 
@@ -1751,7 +1751,7 @@ jr_005_7A66:
     add  hl, bc                                   ; $7A92: $09
     ld   [hl], a                                  ; $7A93: $77
     call UpdateEntityPosWithSpeed_05              ; $7A94: $CD $B1 $7A
-    ld   hl, wEntitiesUnknowTableH                ; $7A97: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7A97: $21 $30 $C4
     add  hl, bc                                   ; $7A9A: $09
     ld   a, [hl]                                  ; $7A9B: $7E
     and  $20                                      ; $7A9C: $E6 $20

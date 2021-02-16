@@ -37,7 +37,7 @@ BushCrawlerEntityHandler::
     rla                                           ; $4033: $17
     and  $40                                      ; $4034: $E6 $40
     push af                                       ; $4036: $F5
-    ld   hl, wEntitiesUnknowTableH                ; $4037: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $4037: $21 $30 $C4
     add  hl, bc                                   ; $403A: $09
     or   [hl]                                     ; $403B: $B6
     ld   [hl], a                                  ; $403C: $77
@@ -6079,7 +6079,7 @@ PeaHatEntityHandler::
     ld   hl, wEntitiesHitboxFlagsTable            ; $6721: $21 $50 $C3
     add  hl, bc                                   ; $6724: $09
     set  7, [hl]                                  ; $6725: $CB $FE
-    ld   hl, wEntitiesUnknowTableH                ; $6727: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $6727: $21 $30 $C4
     add  hl, bc                                   ; $672A: $09
     set  6, [hl]                                  ; $672B: $CB $F6
     ldh  a, [hActiveEntityState]                  ; $672D: $F0 $F0
@@ -6106,7 +6106,7 @@ jr_007_6747:
     ld   hl, wEntitiesHitboxFlagsTable            ; $6747: $21 $50 $C3
     add  hl, bc                                   ; $674A: $09
     res  7, [hl]                                  ; $674B: $CB $BE
-    ld   hl, wEntitiesUnknowTableH                ; $674D: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $674D: $21 $30 $C4
     add  hl, bc                                   ; $6750: $09
     res  6, [hl]                                  ; $6751: $CB $B6
 
@@ -6943,7 +6943,7 @@ func_007_6C3E::
     ld   hl, wEntitiesHitboxFlagsTable            ; $6C48: $21 $50 $C3
     add  hl, bc                                   ; $6C4B: $09
     set  7, [hl]                                  ; $6C4C: $CB $FE
-    ld   hl, wEntitiesUnknowTableH                ; $6C4E: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $6C4E: $21 $30 $C4
     add  hl, bc                                   ; $6C51: $09
     res  6, [hl]                                  ; $6C52: $CB $B6
     ret                                           ; $6C54: $C9
@@ -7131,7 +7131,7 @@ func_007_6D7F::
     ld   hl, wEntitiesHitboxFlagsTable            ; $6D8C: $21 $50 $C3
     add  hl, bc                                   ; $6D8F: $09
     res  7, [hl]                                  ; $6D90: $CB $BE
-    ld   hl, wEntitiesUnknowTableH                ; $6D92: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $6D92: $21 $30 $C4
     add  hl, bc                                   ; $6D95: $09
     set  6, [hl]                                  ; $6D96: $CB $F6
     ld   a, JINGLE_MASTER_STALFOS                 ; $6D98: $3E $28
@@ -8241,7 +8241,7 @@ jr_007_74F8:
     ld   hl, wEntitiesHitboxFlagsTable            ; $7519: $21 $50 $C3
     add  hl, de                                   ; $751C: $19
     ld   [hl], $00                                ; $751D: $36 $00
-    ld   hl, wEntitiesUnknowTableH                ; $751F: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $751F: $21 $30 $C4
     add  hl, de                                   ; $7522: $19
     ld   [hl], $00                                ; $7523: $36 $00
     ld   hl, wEntitiesHealthGroup                 ; $7525: $21 $D0 $C4
@@ -8803,7 +8803,7 @@ jr_007_786E:
     ld   hl, wEntitiesHitboxFlagsTable            ; $786E: $21 $50 $C3
     add  hl, bc                                   ; $7871: $09
     ld   [hl], $80                                ; $7872: $36 $80
-    ld   hl, wEntitiesUnknowTableH                ; $7874: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7874: $21 $30 $C4
     add  hl, bc                                   ; $7877: $09
     ld   [hl], $48                                ; $7878: $36 $48
     call func_007_7E5D                            ; $787A: $CD $5D $7E
@@ -8897,7 +8897,7 @@ func_007_78E1::
     jp   SetEntitySpriteVariant                   ; $78E9: $C3 $0C $3B
 
 func_007_78EC::
-    ld   hl, wEntitiesUnknowTableH                ; $78EC: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $78EC: $21 $30 $C4
     add  hl, bc                                   ; $78EF: $09
     ld   [hl], $08                                ; $78F0: $36 $08
     ld   hl, wEntitiesHitboxFlagsTable            ; $78F2: $21 $50 $C3
@@ -9462,7 +9462,7 @@ func_007_7DC3::
     call GetEntitySpeedYAddress                   ; $7DEA: $CD $05 $40
     ld   [hl], a                                  ; $7DED: $77
     call UpdateEntityPosWithSpeed_07              ; $7DEE: $CD $0A $7E
-    ld   hl, wEntitiesUnknowTableH                ; $7DF1: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7DF1: $21 $30 $C4
     add  hl, bc                                   ; $7DF4: $09
     ld   a, [hl]                                  ; $7DF5: $7E
     and  $20                                      ; $7DF6: $E6 $20

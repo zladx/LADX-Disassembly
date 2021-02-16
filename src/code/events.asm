@@ -515,10 +515,10 @@ jr_002_6000:
     and  a                                        ; $6005: $A7
     jr   z, jr_002_6011                           ; $6006: $28 $09
 
-    ld   hl, wEntitiesUnknowTableH                ; $6008: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $6008: $21 $30 $C4
     add  hl, bc                                   ; $600B: $09
     ld   a, [hl]                                  ; $600C: $7E
-    and  $02                                      ; $600D: $E6 $02
+    and  ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL       ; $600D: $E6 $02
     jr   z, jr_002_602C                           ; $600F: $28 $1B
 
 jr_002_6011:

@@ -324,6 +324,8 @@ include "code/audio/sfx_entry_point.asm"
 section "sfx pointers table", romx[$4100], bank[$1F]
 include "data/sfx/pointers_table.asm"
 include "code/audio/sfx.asm"
+section "sfx fade", romx[$7F80], bank[$1F]
+include "code/audio/sfx_fade.asm"
 
 section "bank20",romx[$4000],bank[$20]
 include "code/entities/_handlers.asm"

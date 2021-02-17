@@ -1,15 +1,34 @@
+#!/usr/bin/env python3
+#
+# Replace numeric values with labeled constants, using pattern matching.
+#
+# Usage:
+#  1. add a new PeepholeRule to the array,
+#  2. run the script.
+
 import re
 import os
+from enum import IntFlag
 
 class PeepholeRule:
-    def __init__(self, input, result):
+    """
+    Defines a multi-line input with a searchable pattern, and a way to
+    retrieve a replacement value when the pattern is found.
+
+    input: an array of successive lines to match, with a searchable pattern.
+           The pattern is @ for an hex digit (optionally prefixed by '$').
+           Several numbers can be matched (e.g. $@@@@).
+    replacements: an Hash or lambda providing a replacement for the value matched.
+    """
+    def __init__(self, input, replacements):
         self.rules = []
-        self.result = result
+        self.replacements = replacements
         for line in input.split("\n"):
             line = line.strip()
             if not line:
                 continue
-            line = re.escape(line).replace(" ", " +").replace(r"\$XX", r"(\$[a-fA-F0-9][a-fA-F0-9])")
+            line = re.escape(line).replace(" ", " +")
+            line = re.sub(r"(\\\$)?@+", r"([\$]?[A-F0-9]+)\\b", line)
             self.rules.append(re.compile(line))
 
     def process(self, lines):
@@ -25,20 +44,55 @@ class PeepholeRule:
                 for rule_index, rule in enumerate(self.rules):
                     m = rule.search(lines[index+rule_index])
                     if m.groups():
-                        value = int(m.group(1)[1:], 16)
-                        if value in self.result:
+                        value = int(m.group(1).replace('$', ''), 16)
+                        replacement = self.replacements(value) if callable(self.replacements) else self.replacements.get(value)
+                        if replacement:
                             line = lines[index+rule_index]
-                            assert line[m.end(1):m.start(1) + len(self.result[value])].strip() == ""
-                            line = line[:m.start(1)] + self.result[value] + line[m.start(1) + len(self.result[value]):]
+                            line = line[:m.start(1)] + replacement + line[m.start(1) + len(m.group(1)):]
+                            # Fix spaces alignment
+                            replacement_len_delta = len(replacement) - len(m.group(1))
+                            line = re.sub(f"[ ]{{{replacement_len_delta}}}; ", "; ", line)
+                            # Print log
                             print(lines[index+rule_index])
                             print(" -> ")
                             print(line)
                             lines[index+rule_index] = line
 
+ENTITY_OPT1_BITS = {
+    7: "ENTITY_OPT1_B_IS_BOSS",
+    6: "ENTITY_OPT1_B_SWORD_CLINK_OFF",
+    5: "ENTITY_OPT1_B_ALLOW_OUT_OF_BOUNDS",
+    4: "ENTITY_OPT1_B_IMMUNE_WATER_PIT",
+    3: "ENTITY_OPT1_B_SPLASH_IN_WATER",
+    2: "ENTITY_OPT1_B_IS_MINI_BOSS",
+    1: "ENTITY_OPT1_B_EXCLUDED_FROM_KILL_ALL",
+    0: "ENTITY_OPT1_B_MOVE_PIT_WATER"
+}
+
+class EntityOpt1Flag(IntFlag):
+    ENTITY_OPT1_IS_BOSS                = 0x80
+    ENTITY_OPT1_SWORD_CLINK_OFF        = 0x40
+    ENTITY_OPT1_ALLOW_OUT_OF_BOUNDS    = 0x20
+    ENTITY_OPT1_IMMUNE_WATER_PIT       = 0x10
+    ENTITY_OPT1_SPLASH_IN_WATER        = 0x08
+    ENTITY_OPT1_IS_MINI_BOSS           = 0x04
+    ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL = 0x02
+    ENTITY_OPT1_MOVE_PIT_WATER         = 0x01
+    ENTITY_OPT1_NONE                   = 0x00
+
+def flags_from_enum(enum_value):
+    """
+    Returns the string representation of an enum value.
+    Example:
+      enum_value = EntityOpt1Flag($C0)
+      flags_from_enum(enum_value) # -> "ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF"                               ; $6902: $36 $C0
+    """
+    return str(enum_value).replace(f"{type(enum_value).__name__}.", '')
+
 rules = [
     PeepholeRule("""
         ldh a, [hMapId]
-        cp $XX
+        cp $@@
     """, {
         0x00: "MAP_TAIL_CAVE",
         0x01: "MAP_BOTTLE_GROTTO",
@@ -75,7 +129,7 @@ rules = [
         0xFF: "MAP_COLOR_DUNGEON"
     }),
     PeepholeRule("""
-        ld a, $XX
+        ld a, $@@
         call SpawnNewEntity_trampoline
     """, {
         0x00: "ENTITY_ARROW",
@@ -331,8 +385,37 @@ rules = [
         0xFA: "ENTITY_PHOTOGRAPHER",
         0xFF: "ENTITY_NONE",
     }),
+    PeepholeRule("""
+        ld   hl, wEntitiesOptions1Table
+        add  hl, de
+        set  @, [hl]
+    """, ENTITY_OPT1_BITS),
+    PeepholeRule("""
+        ld   hl, wEntitiesOptions1Table
+        add  hl, bc
+        set  @, [hl]
+    """, ENTITY_OPT1_BITS),
+    PeepholeRule("""
+        ld   hl, wEntitiesOptions1Table
+        add  hl, bc
+        res  @, [hl]
+    """, ENTITY_OPT1_BITS),
+    PeepholeRule("""
+        ld   hl, wEntitiesOptions1Table
+        add  hl, bc
+        res  @, [hl]
+    """, ENTITY_OPT1_BITS),
+    PeepholeRule("""
+        ld   hl, wEntitiesOptions1Table
+        add  hl, de
+        ld   [hl], $@@
+    """, lambda value: flags_from_enum(EntityOpt1Flag(value))),
+    PeepholeRule("""
+        ld   hl, wEntitiesOptions1Table
+        add  hl, bc
+        ld   [hl], $@@
+    """, lambda value: flags_from_enum(EntityOpt1Flag(value))),
 ]
-
 
 basepath = os.path.dirname(__file__)
 for path, paths, files in os.walk(os.path.join(basepath, "..", "src")):

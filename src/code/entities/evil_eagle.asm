@@ -895,7 +895,7 @@ jr_005_5EB0:
     ld   [hl], $02                                ; $5F21: $36 $02
     ld   hl, wEntitiesOptions1Table               ; $5F23: $21 $30 $C4
     add  hl, de                                   ; $5F26: $19
-    ld   [hl], $00                                ; $5F27: $36 $00
+    ld   [hl], ENTITY_OPT1_NONE                   ; $5F27: $36 $00
     ld   hl, wEntitiesHealthGroup                 ; $5F29: $21 $D0 $C4
     add  hl, de                                   ; $5F2C: $19
     ld   [hl], $02                                ; $5F2D: $36 $02

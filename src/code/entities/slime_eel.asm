@@ -1678,11 +1678,11 @@ jr_005_7A1F:
 
     ld   hl, wEntitiesOptions1Table               ; $7A2A: $21 $30 $C4
     add  hl, bc                                   ; $7A2D: $09
-    ld   [hl], $C0                                ; $7A2E: $36 $C0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF                                ; $7A2E: $36 $C0
     call label_3B70                               ; $7A30: $CD $70 $3B
     ld   hl, wEntitiesOptions1Table               ; $7A33: $21 $30 $C4
     add  hl, bc                                   ; $7A36: $09
-    ld   [hl], $80                                ; $7A37: $36 $80
+    ld   [hl], ENTITY_OPT1_IS_BOSS                ; $7A37: $36 $80
 
 jr_005_7A39:
     ret                                           ; $7A39: $C9

@@ -261,7 +261,7 @@ ArmosKnightState2Handler::
     res  7, [hl]                                  ; $546D: $CB $BE
     ld   hl, wEntitiesOptions1Table               ; $546F: $21 $30 $C4
     add  hl, bc                                   ; $5472: $09
-    res  6, [hl]                                  ; $5473: $CB $B6
+    res  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $5473: $CB $B6
     ret                                           ; $5475: $C9
 
 jr_006_5476:

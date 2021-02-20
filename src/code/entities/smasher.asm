@@ -577,7 +577,7 @@ func_006_4855::
     ld   [hl], $04                                ; $48CB: $36 $04
     ld   hl, wEntitiesOptions1Table               ; $48CD: $21 $30 $C4
     add  hl, bc                                   ; $48D0: $09
-    res  7, [hl]                                  ; $48D1: $CB $BE
+    res  ENTITY_OPT1_B_IS_BOSS, [hl]              ; $48D1: $CB $BE
     ld   a, $10                                   ; $48D3: $3E $10
     ldh  [hWaveSfx], a                            ; $48D5: $E0 $F3
 

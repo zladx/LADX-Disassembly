@@ -876,7 +876,7 @@ jr_004_5237:
     ld   [hl], $00                                ; $526A: $36 $00
     ld   hl, wEntitiesOptions1Table               ; $526C: $21 $30 $C4
     add  hl, de                                   ; $526F: $19
-    ld   [hl], $00                                ; $5270: $36 $00
+    ld   [hl], ENTITY_OPT1_NONE                   ; $5270: $36 $00
     pop  bc                                       ; $5272: $C1
 
 jr_004_5273:
@@ -925,7 +925,7 @@ jr_004_5273:
     ld   [hl], $00                                ; $52BA: $36 $00
     ld   hl, wEntitiesOptions1Table               ; $52BC: $21 $30 $C4
     add  hl, de                                   ; $52BF: $19
-    ld   [hl], $00                                ; $52C0: $36 $00
+    ld   [hl], ENTITY_OPT1_NONE                   ; $52C0: $36 $00
     ld   hl, wEntitiesHealthGroup                 ; $52C2: $21 $D0 $C4
     add  hl, de                                   ; $52C5: $19
     ld   [hl], $02                                ; $52C6: $36 $02
@@ -985,7 +985,7 @@ jr_004_52C9:
     ld   [hl], $00                                ; $531B: $36 $00
     ld   hl, wEntitiesOptions1Table               ; $531D: $21 $30 $C4
     add  hl, de                                   ; $5320: $19
-    ld   [hl], $00                                ; $5321: $36 $00
+    ld   [hl], ENTITY_OPT1_NONE                   ; $5321: $36 $00
     ld   hl, wEntitiesHealthGroup                 ; $5323: $21 $D0 $C4
     add  hl, de                                   ; $5326: $19
     ld   [hl], $1B                                ; $5327: $36 $1B
@@ -1870,11 +1870,11 @@ jr_004_5963:
 
     ld   hl, wEntitiesOptions1Table               ; $59F5: $21 $30 $C4
     add  hl, bc                                   ; $59F8: $09
-    ld   [hl], $90                                ; $59F9: $36 $90
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT                                ; $59F9: $36 $90
     call label_3B70                               ; $59FB: $CD $70 $3B
     ld   hl, wEntitiesOptions1Table               ; $59FE: $21 $30 $C4
     add  hl, bc                                   ; $5A01: $09
-    ld   [hl], $D0                                ; $5A02: $36 $D0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT                                ; $5A02: $36 $D0
 
 jr_004_5A04:
     ret                                           ; $5A04: $C9
@@ -4412,7 +4412,7 @@ jr_004_69D5:
     call func_004_6D80                            ; $69DE: $CD $80 $6D
     ld   hl, wEntitiesOptions1Table               ; $69E1: $21 $30 $C4
     add  hl, bc                                   ; $69E4: $09
-    ld   [hl], $00                                ; $69E5: $36 $00
+    ld   [hl], ENTITY_OPT1_NONE                   ; $69E5: $36 $00
     call label_3B39                               ; $69E7: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $69EA: $F0 $F0
     JP_TABLE                                      ; $69EC
@@ -4676,7 +4676,7 @@ jr_004_6B51:
 
     ld   hl, wEntitiesOptions1Table               ; $6B70: $21 $30 $C4
     add  hl, bc                                   ; $6B73: $09
-    ld   [hl], $40                                ; $6B74: $36 $40
+    ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF        ; $6B74: $36 $40
     call label_3B39                               ; $6B76: $CD $39 $3B
     call func_004_6BE1                            ; $6B79: $CD $E1 $6B
 

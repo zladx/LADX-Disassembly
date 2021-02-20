@@ -4513,7 +4513,7 @@ jr_003_6235:
 jr_003_623B:
     ld   hl, wEntitiesOptions1Table               ; $623B: $21 $30 $C4
     add  hl, bc                                   ; $623E: $09
-    ld   [hl], $0A                                ; $623F: $36 $0A
+    ld   [hl], ENTITY_OPT1_SPLASH_IN_WATER|ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL                                ; $623F: $36 $0A
     jr   jr_003_626B                              ; $6241: $18 $28
 
 jr_003_6243:

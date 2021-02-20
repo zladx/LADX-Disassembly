@@ -1041,7 +1041,7 @@ MaskedMimicGoriyaEntityHandler::
     call func_019_7D6E                            ; $47CC: $CD $6E $7D
     ld   hl, wEntitiesOptions1Table               ; $47CF: $21 $30 $C4
     add  hl, bc                                   ; $47D2: $09
-    ld   [hl], $48                                ; $47D3: $36 $48
+    ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_SPLASH_IN_WATER                                ; $47D3: $36 $48
     call func_019_7E3A                            ; $47D5: $CD $3A $7E
     ld   hl, wEntitiesDirectionTable              ; $47D8: $21 $80 $C3
     add  hl, bc                                   ; $47DB: $09
@@ -1052,7 +1052,7 @@ MaskedMimicGoriyaEntityHandler::
 
     ld   hl, wEntitiesOptions1Table               ; $47E2: $21 $30 $C4
     add  hl, bc                                   ; $47E5: $09
-    ld   [hl], $08                                ; $47E6: $36 $08
+    ld   [hl], ENTITY_OPT1_SPLASH_IN_WATER        ; $47E6: $36 $08
 
 jr_019_47E8:
     call label_3B39                               ; $47E8: $CD $39 $3B
@@ -5980,11 +5980,11 @@ jr_019_6C96:
 func_019_6C99::
     ld   hl, wEntitiesOptions1Table               ; $6C99: $21 $30 $C4
     add  hl, bc                                   ; $6C9C: $09
-    set  0, [hl]                                  ; $6C9D: $CB $C6
+    set  ENTITY_OPT1_B_MOVE_PIT_WATER, [hl]       ; $6C9D: $CB $C6
     call label_3B23                               ; $6C9F: $CD $23 $3B
     ld   hl, wEntitiesOptions1Table               ; $6CA2: $21 $30 $C4
     add  hl, bc                                   ; $6CA5: $09
-    res  0, [hl]                                  ; $6CA6: $CB $86
+    res  ENTITY_OPT1_B_MOVE_PIT_WATER, [hl]       ; $6CA6: $CB $86
     ret                                           ; $6CA8: $C9
 
 CheepCheepJumpingState5Handler::

@@ -84,7 +84,7 @@ func_005_55CA::
     ld   [hl], $80                                ; $55EC: $36 $80
     ld   hl, wEntitiesOptions1Table               ; $55EE: $21 $30 $C4
     add  hl, de                                   ; $55F1: $19
-    ld   [hl], $40                                ; $55F2: $36 $40
+    ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF        ; $55F2: $36 $40
     ld   hl, wEntitiesUnknownTableD               ; $55F4: $21 $D0 $C2
     add  hl, de                                   ; $55F7: $19
     ld   [hl], $01                                ; $55F8: $36 $01

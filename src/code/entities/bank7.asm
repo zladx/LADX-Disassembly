@@ -6081,7 +6081,7 @@ PeaHatEntityHandler::
     set  7, [hl]                                  ; $6725: $CB $FE
     ld   hl, wEntitiesOptions1Table               ; $6727: $21 $30 $C4
     add  hl, bc                                   ; $672A: $09
-    set  6, [hl]                                  ; $672B: $CB $F6
+    set  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $672B: $CB $F6
     ldh  a, [hActiveEntityState]                  ; $672D: $F0 $F0
     JP_TABLE                                      ; $672F
 ._00 dw func_007_6736                             ; $6730
@@ -6108,7 +6108,7 @@ jr_007_6747:
     res  7, [hl]                                  ; $674B: $CB $BE
     ld   hl, wEntitiesOptions1Table               ; $674D: $21 $30 $C4
     add  hl, bc                                   ; $6750: $09
-    res  6, [hl]                                  ; $6751: $CB $B6
+    res  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $6751: $CB $B6
 
 jr_007_6753:
     ldh  a, [hFrameCounter]                       ; $6753: $F0 $E7
@@ -6945,7 +6945,7 @@ func_007_6C3E::
     set  7, [hl]                                  ; $6C4C: $CB $FE
     ld   hl, wEntitiesOptions1Table               ; $6C4E: $21 $30 $C4
     add  hl, bc                                   ; $6C51: $09
-    res  6, [hl]                                  ; $6C52: $CB $B6
+    res  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $6C52: $CB $B6
     ret                                           ; $6C54: $C9
 
 jr_007_6C55:
@@ -7133,7 +7133,7 @@ func_007_6D7F::
     res  7, [hl]                                  ; $6D90: $CB $BE
     ld   hl, wEntitiesOptions1Table               ; $6D92: $21 $30 $C4
     add  hl, bc                                   ; $6D95: $09
-    set  6, [hl]                                  ; $6D96: $CB $F6
+    set  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $6D96: $CB $F6
     ld   a, JINGLE_MASTER_STALFOS                 ; $6D98: $3E $28
     ldh  [hJingle], a                             ; $6D9A: $E0 $F2
 
@@ -8243,7 +8243,7 @@ jr_007_74F8:
     ld   [hl], $00                                ; $751D: $36 $00
     ld   hl, wEntitiesOptions1Table               ; $751F: $21 $30 $C4
     add  hl, de                                   ; $7522: $19
-    ld   [hl], $00                                ; $7523: $36 $00
+    ld   [hl], ENTITY_OPT1_NONE                   ; $7523: $36 $00
     ld   hl, wEntitiesHealthGroup                 ; $7525: $21 $D0 $C4
     add  hl, de                                   ; $7528: $19
     ld   [hl], $00                                ; $7529: $36 $00
@@ -8805,7 +8805,7 @@ jr_007_786E:
     ld   [hl], $80                                ; $7872: $36 $80
     ld   hl, wEntitiesOptions1Table               ; $7874: $21 $30 $C4
     add  hl, bc                                   ; $7877: $09
-    ld   [hl], $48                                ; $7878: $36 $48
+    ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_SPLASH_IN_WATER                                ; $7878: $36 $48
     call func_007_7E5D                            ; $787A: $CD $5D $7E
     add  $06                                      ; $787D: $C6 $06
     cp   $0A                                      ; $787F: $FE $0A
@@ -8899,7 +8899,7 @@ func_007_78E1::
 func_007_78EC::
     ld   hl, wEntitiesOptions1Table               ; $78EC: $21 $30 $C4
     add  hl, bc                                   ; $78EF: $09
-    ld   [hl], $08                                ; $78F0: $36 $08
+    ld   [hl], ENTITY_OPT1_SPLASH_IN_WATER        ; $78F0: $36 $08
     ld   hl, wEntitiesHitboxFlagsTable            ; $78F2: $21 $50 $C3
     add  hl, bc                                   ; $78F5: $09
     ld   [hl], $00                                ; $78F6: $36 $00

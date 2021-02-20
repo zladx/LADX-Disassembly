@@ -57,7 +57,7 @@ ArmosStatueState1Handler::
     res  7, [hl]                                  ; $74A7: $CB $BE
     ld   hl, wEntitiesOptions1Table               ; $74A9: $21 $30 $C4
     add  hl, bc                                   ; $74AC: $09
-    res  6, [hl]                                  ; $74AD: $CB $B6
+    res  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $74AD: $CB $B6
     jp   ClearEntitySpeed                         ; $74AF: $C3 $7F $3D
 
 jr_006_74B2:

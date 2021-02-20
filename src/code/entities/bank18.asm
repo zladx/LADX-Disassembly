@@ -6827,7 +6827,7 @@ GrimCreeperState2Handler::
     ld   [hl], $FF                                ; $705E: $36 $FF
     ld   hl, wEntitiesOptions1Table               ; $7060: $21 $30 $C4
     add  hl, bc                                   ; $7063: $09
-    res  1, [hl]                                  ; $7064: $CB $8E
+    res  ENTITY_OPT1_B_EXCLUDED_FROM_KILL_ALL, [hl]                                  ; $7064: $CB $8E
     ld   e, $0F                                   ; $7066: $1E $0F
     ld   d, b                                     ; $7068: $50
 
@@ -6871,7 +6871,7 @@ GrimCreeperState3Handler::
 
     ld   hl, wEntitiesOptions1Table               ; $709A: $21 $30 $C4
     add  hl, bc                                   ; $709D: $09
-    set  1, [hl]                                  ; $709E: $CB $CE
+    set  ENTITY_OPT1_B_EXCLUDED_FROM_KILL_ALL, [hl]                                  ; $709E: $CB $CE
     call IncrementEntityState                     ; $70A0: $CD $12 $3B
     xor  a                                        ; $70A3: $AF
 
@@ -7269,7 +7269,7 @@ jr_018_733C:
     call IncrementEntityState                     ; $7351: $CD $12 $3B
     ld   hl, wEntitiesOptions1Table               ; $7354: $21 $30 $C4
     add  hl, bc                                   ; $7357: $09
-    set  7, [hl]                                  ; $7358: $CB $FE
+    set  ENTITY_OPT1_B_IS_BOSS, [hl]              ; $7358: $CB $FE
     set  2, [hl]                                  ; $735A: $CB $D6
     ld   hl, wEntitiesHealthTable                 ; $735C: $21 $60 $C3
     add  hl, bc                                   ; $735F: $09
@@ -7496,7 +7496,7 @@ TurtleRockHeadState5Handler::
     res  7, [hl]                                  ; $74A6: $CB $BE
     ld   hl, wEntitiesOptions1Table               ; $74A8: $21 $30 $C4
     add  hl, bc                                   ; $74AB: $09
-    res  6, [hl]                                  ; $74AC: $CB $B6
+    res  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $74AC: $CB $B6
     call IncrementEntityState                     ; $74AE: $CD $12 $3B
     ldh  a, [hActiveEntityPosX]                   ; $74B1: $F0 $EE
     ld   [$D201], a                               ; $74B3: $EA $01 $D2

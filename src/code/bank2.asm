@@ -3039,7 +3039,7 @@ TryOpenLockedDoor::
     ; Mark the room as opened
     call GetRoomStatusAddress                     ; $53C8: $CD $9F $5B
     ld   a, [hl]                                  ; $53CB: $7E
-    or   $40                                      ; $53CC: $F6 $40
+    or   ROOM_STATUS_EVENT_3                      ; $53CC: $F6 $40
     ld   [hl], a                                  ; $53CE: $77
     ldh  [hRoomStatus], a                         ; $53CF: $E0 $F8
     ldh  a, [hMultiPurpose4]                      ; $53D1: $F0 $DB
@@ -6616,7 +6616,7 @@ jr_002_702C:
     ld   d, $00                                   ; $7032: $16 $00
     add  hl, de                                   ; $7034: $19
     ld   a, [hl]                                  ; $7035: $7E
-    or   $10                                      ; $7036: $F6 $10
+    or   ROOM_STATUS_EVENT_1                      ; $7036: $F6 $10
     ld   [hl], a                                  ; $7038: $77
     ldh  [hRoomStatus], a                         ; $7039: $E0 $F8
 

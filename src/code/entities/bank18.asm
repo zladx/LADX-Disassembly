@@ -1083,7 +1083,7 @@ MermaidStatueEntityHandler::
 
 MermaidStatueState0Handler::
     ldh  a, [hRoomStatus]                         ; $4949: $F0 $F8
-    and  $20                                      ; $494B: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $494B: $E6 $20
     jr   z, jr_018_4957                           ; $494D: $28 $08
 
     ld   hl, wEntitiesPosXTable                   ; $494F: $21 $00 $C2
@@ -1896,7 +1896,7 @@ MadBatterEntityHandler::
     jp   nz, label_018_50E2                       ; $4EE3: $C2 $E2 $50
 
     ldh  a, [hRoomStatus]                         ; $4EE6: $F0 $F8
-    and  $20                                      ; $4EE8: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $4EE8: $E6 $20
     jp   nz, ClearEntityStatusBank18              ; $4EEA: $C2 $08 $7F
 
     call DecrementEntityIgnoreHitsCountdown       ; $4EED: $CD $56 $0C
@@ -4276,7 +4276,7 @@ MarinAtTalTalHeightsEntityHandler::
     jp   nz, ClearEntityStatusBank18              ; $5EE3: $C2 $08 $7F
 
     ldh  a, [hRoomStatus]                         ; $5EE6: $F0 $F8
-    and  $10                                      ; $5EE8: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5EE8: $E6 $10
     jp   nz, ClearEntityStatusBank18              ; $5EEA: $C2 $08 $7F
 
     ld   hl, wEntitiesPrivateState2Table          ; $5EED: $21 $C0 $C2
@@ -4952,7 +4952,7 @@ jr_018_632D:
     ld   d, $00                                   ; $6374: $16 $00
     ld   hl, wOverworldRoomStatus                 ; $6376: $21 $00 $D8
     add  hl, de                                   ; $6379: $19
-    set  ROOM_STATUS_DOOR_OPENED, [hl]            ; $637A: $CB $E6
+    set  ROOM_STATUS_DOOR_OPEN_UP, [hl]            ; $637A: $CB $E6
     ret                                           ; $637C: $C9
 
 Data_018_637D::
@@ -7216,7 +7216,7 @@ Data_018_72F5::
 
 TurtleRockHeadEntityHandler::
     ldh  a, [hRoomStatus]                         ; $7301: $F0 $F8
-    and  $20                                      ; $7303: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $7303: $E6 $20
     jp   nz, ClearEntityStatusBank18              ; $7305: $C2 $08 $7F
 
     ld   hl, wEntitiesPrivateState1Table          ; $7308: $21 $B0 $C2
@@ -9063,7 +9063,7 @@ SetRoomStatus20::
 .notIndoorB:
     add  hl, de                                   ; $7FCE: $19
     ld   a, [hl]                                  ; $7FCF: $7E
-    or   $20                                      ; $7FD0: $F6 $20
+    or   ROOM_STATUS_EVENT_2                      ; $7FD0: $F6 $20
     ld   [hl], a                                  ; $7FD2: $77
     ldh  [hRoomStatus], a                         ; $7FD3: $E0 $F8
     ret                                           ; $7FD5: $C9

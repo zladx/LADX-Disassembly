@@ -7914,7 +7914,7 @@ func_015_7CDB::
 jr_015_7CF0:
     add  hl, de                                   ; $7CF0: $19
     ld   a, [hl]                                  ; $7CF1: $7E
-    or   $20                                      ; $7CF2: $F6 $20
+    or   ROOM_STATUS_EVENT_2                      ; $7CF2: $F6 $20
     ld   [hl], a                                  ; $7CF4: $77
     ldh  [hRoomStatus], a                         ; $7CF5: $E0 $F8
     ret                                           ; $7CF7: $C9
@@ -8301,7 +8301,7 @@ func_015_7F04::
     jr   nz, jr_015_7F4F                          ; $7F2E: $20 $1F
 
     ldh  a, [hRoomStatus]                         ; $7F30: $F0 $F8
-    and  $20                                      ; $7F32: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $7F32: $E6 $20
     jr   nz, jr_015_7F44                          ; $7F34: $20 $0E
 
     call func_015_7CDB                            ; $7F36: $CD $DB $7C

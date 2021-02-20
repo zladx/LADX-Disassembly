@@ -1518,7 +1518,7 @@ Call_001_5eca:
     ld a, [hl+]                                   ; $5eee: $2a
     ld d, a                                       ; $5eef: $57
     ld a, [de]                                    ; $5ef0: $1a
-    and ROOM_STATUS_CHANGED                       ; $5ef1: $e6 $10
+    and OW_ROOM_STATUS_CHANGED                       ; $5ef1: $e6 $10
     jr z, .endIfHeartPieceTaken                             ; $5ef3: $28 $0f
 
     ldh a, [hMultiPurpose1]                            ; $5ef5: $f0 $d8

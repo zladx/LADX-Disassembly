@@ -997,7 +997,7 @@ MermaidEntityHandler::
     jr   nc, jr_007_46E4                          ; $46C8: $30 $1A
 
     ldh  a, [hRoomStatus]                         ; $46CA: $F0 $F8
-    and  $20                                      ; $46CC: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $46CC: $E6 $20
     jr   z, jr_007_46D2                           ; $46CE: $28 $02
 
     inc  [hl]                                     ; $46D0: $34
@@ -1544,7 +1544,7 @@ jr_007_4A64:
 
 jr_007_4A69:
     ldh  a, [hRoomStatus]                         ; $4A69: $F0 $F8
-    and  $20                                      ; $4A6B: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $4A6B: $E6 $20
     jp   nz, func_007_7EA4                        ; $4A6D: $C2 $A4 $7E
 
     ld   de, Data_007_49F7                        ; $4A70: $11 $F7 $49
@@ -1861,7 +1861,7 @@ Data_007_4C93::
 
 HoneycombEntityHandler::
     ldh  a, [hRoomStatus]                         ; $4C97: $F0 $F8
-    and  $20                                      ; $4C99: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $4C99: $E6 $20
     jp   nz, func_007_7EA4                        ; $4C9B: $C2 $A4 $7E
 
     ld   hl, wEntitiesUnknowTableP                ; $4C9E: $21 $40 $C4
@@ -2198,7 +2198,7 @@ TarinEntityHandler::
 
     inc  [hl]                                     ; $4EBD: $34
     ldh  a, [hRoomStatus]                         ; $4EBE: $F0 $F8
-    and  $40                                      ; $4EC0: $E6 $40
+    and  ROOM_STATUS_EVENT_3                      ; $4EC0: $E6 $40
     jp   nz, func_007_7EA4                        ; $4EC2: $C2 $A4 $7E
 
 jr_007_4EC5:
@@ -3170,7 +3170,7 @@ jr_007_5528:
 
 jr_007_552E:
     ldh  a, [hRoomStatus]                         ; $552E: $F0 $F8
-    and  $20                                      ; $5530: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $5530: $E6 $20
     jp   nz, func_007_7EA4                        ; $5532: $C2 $A4 $7E
 
     ldh  a, [hIsGBC]                              ; $5535: $F0 $FE
@@ -3650,7 +3650,7 @@ Data_007_582E::
 
 KikiTheMonkeyEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5842: $F0 $F8
-    and  $10                                      ; $5844: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5844: $E6 $10
     jp   nz, func_007_7EA4                        ; $5846: $C2 $A4 $7E
 
     ld   de, Data_007_581A                        ; $5849: $11 $1A $58
@@ -4497,7 +4497,7 @@ jr_007_5DD0:
     jp   nz, label_007_5F4D                       ; $5DDB: $C2 $4D $5F
 
     ldh  a, [hRoomStatus]                         ; $5DDE: $F0 $F8
-    and  $20                                      ; $5DE0: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $5DE0: $E6 $20
     jp   nz, func_007_7EA4                        ; $5DE2: $C2 $A4 $7E
 
     ld   a, [wRoomTransitionState]                ; $5DE5: $FA $24 $C1
@@ -7344,7 +7344,7 @@ jr_007_6E8D:
 jr_007_6E9A:
     add  hl, de                                   ; $6E9A: $19
     ld   a, [hl]                                  ; $6E9B: $7E
-    or   $20                                      ; $6E9C: $F6 $20
+    or   ROOM_STATUS_EVENT_2                      ; $6E9C: $F6 $20
     ld   [hl], a                                  ; $6E9E: $77
     ldh  [hRoomStatus], a                         ; $6E9F: $E0 $F8
 
@@ -7756,7 +7756,7 @@ KanaletBombableWallEntityHandler::
     jr   nz, jr_007_71B4                          ; $719F: $20 $13
 
     ldh  a, [hRoomStatus]                         ; $71A1: $F0 $F8
-    and  $10                                      ; $71A3: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $71A3: $E6 $10
     jp   nz, func_007_7EA4                        ; $71A5: $C2 $A4 $7E
 
     ld   hl, wEntitiesLoadOrderTable              ; $71A8: $21 $60 $C4

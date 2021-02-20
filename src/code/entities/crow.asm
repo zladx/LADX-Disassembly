@@ -21,7 +21,7 @@ ENDC
 
 jr_006_5CAB:
     ldh  a, [hRoomStatus]                         ; $5CAB: $F0 $F8
-    and  $10                                      ; $5CAD: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5CAD: $E6 $10
     jp   nz, ClearEntityStatus_06                 ; $5CAF: $C2 $DB $65
 
     ld   hl, wEntitiesLoadOrderTable              ; $5CB2: $21 $60 $C4

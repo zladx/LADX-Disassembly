@@ -233,7 +233,7 @@ EntityInitHandler::
     and  $80                                      ; $48BA: $E6 $80
     jr   z, .callEntityInitHandler                ; $48BC: $28 $5
     ldh  a, [hRoomStatus]                         ; $48BE: $F0 $F8
-    and  $30                                      ; $48C0: $E6 $30
+    and  ROOM_STATUS_EVENT_2|ROOM_STATUS_EVENT_1  ; $48C0: $E6 $30
 IF __PATCH_0__
     jp   nz, UnloadEntityAndReturn
 ELSE
@@ -1466,7 +1466,7 @@ IF __PATCH_0__
 ENDC
 
     ldh  a, [hRoomStatus]                         ; $4F48: $F0 $F8
-    and  $10                                      ; $4F4A: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $4F4A: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $4F4C: $C2 $8D $3F
 
     ld   a, $04                                   ; $4F4F: $3E $04
@@ -1483,7 +1483,7 @@ jr_003_4F54:
     jp   z, UnloadEntityAndReturn                 ; $4F5D: $CA $8D $3F
 
     ldh  a, [hRoomStatus]                         ; $4F60: $F0 $F8
-    and  $10                                      ; $4F62: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $4F62: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $4F64: $C2 $8D $3F
 
 jr_003_4F67:
@@ -1803,7 +1803,7 @@ ChestGiveNoneInventoryItem:
 MarkRoomCompleted::
     call GetRoomStatusAddressInHL                 ; $512A: $CD $34 $51
     ld   a, [hl]                                  ; $512D: $7E
-    or   $10                                      ; $512E: $F6 $10
+    or   ROOM_STATUS_EVENT_1                      ; $512E: $F6 $10
     ld   [hl], a                                  ; $5130: $77
     ldh  [hRoomStatus], a                         ; $5131: $E0 $F8
     ret                                           ; $5133: $C9
@@ -3140,7 +3140,7 @@ HeartContainerEntityHandler::
     ld   [hl], $FF                                ; $59F7: $36 $FF
     call GetRoomStatusAddressInHL                 ; $59F9: $CD $34 $51
     ld   a, [hl]                                  ; $59FC: $7E
-    or   $20                                      ; @TODO Set this room's status bit
+    or   ROOM_STATUS_EVENT_2                      ; @TODO Set this room's status bit
     ld   [hl], a                                  ; $59FF: $77
     ldh  [hRoomStatus], a                         ; $5A00: $E0 $F8
 
@@ -3211,7 +3211,7 @@ Data_003_5A4D::
 
 HeartPieceEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5A51: $F0 $F8
-    and  $10                                      ; $5A53: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5A53: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $5A55: $C2 $8D $3F
 
     ldh  a, [hActiveEntityState]                  ; $5A58: $F0 $F0
@@ -3410,7 +3410,7 @@ SwordEntityHandler::
     jr   nz, jr_003_5BAC                          ; $5BA0: $20 $0A
 
     ldh  a, [hRoomStatus]                         ; $5BA2: $F0 $F8
-    and  $10                                      ; $5BA4: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5BA4: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $5BA6: $C2 $8D $3F
 
     ld   de, Data_003_5B97                        ; $5BA9: $11 $97 $5B
@@ -3514,7 +3514,7 @@ HookshotSpriteData::
 
 label_003_5C49:
     ldh  a, [hRoomStatus]                         ; $5C49: $F0 $F8
-    and  $10                                      ; $5C4B: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5C4B: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $5C4D: $C2 $8D $3F
 
     ld   de, HookshotSpriteData                   ; $5C50: $11 $47 $5C
@@ -3915,7 +3915,7 @@ jr_003_5EAE:
     ld   a, c                                     ; $5EAE: $79
     ld   [$D201], a                               ; $5EAF: $EA $01 $D2
     ldh  a, [hRoomStatus]                         ; $5EB2: $F0 $F8
-    and  $10                                      ; $5EB4: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5EB4: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $5EB6: $C2 $8D $3F
 
     ldh  a, [hMapId]                              ; $5EB9: $F0 $F7
@@ -4139,7 +4139,7 @@ DroppableSeashellEntityHandler::
     jp   nc, UnloadEntityAndReturn                ; $5FD8: $D2 $8D $3F
 
     ldh  a, [hRoomStatus]                         ; $5FDB: $F0 $F8
-    and  $10                                      ; $5FDD: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5FDD: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $5FDF: $C2 $8D $3F
 
     ldh  a, [hMapRoom]                            ; $5FE2: $F0 $F6
@@ -4147,7 +4147,7 @@ DroppableSeashellEntityHandler::
     jr   nz, jr_003_5FEF                          ; $5FE6: $20 $07
 
     ldh  a, [hRoomStatus]                         ; $5FE8: $F0 $F8
-    and  $40                                      ; $5FEA: $E6 $40
+    and  ROOM_STATUS_EVENT_3                      ; $5FEA: $E6 $40
     jp   z, UnloadEntityAndReturn                 ; $5FEC: $CA $8D $3F
 
 jr_003_5FEF:
@@ -4161,7 +4161,7 @@ Data_003_5FFB::
 
 HidingSlimeKeyEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5FFD: $F0 $F8
-    and  $10                                      ; $5FFF: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5FFF: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $6001: $C2 $8D $3F
 
     call func_003_61DE                            ; $6004: $CD $DE $61
@@ -5490,7 +5490,7 @@ jr_003_6865:
     ld   d, $00                                   ; $686C: $16 $00
     add  hl, de                                   ; $686E: $19
     ld   a, [hl]                                  ; $686F: $7E
-    or   $04                                      ; $6870: $F6 $04
+    or   ROOM_STATUS_DOOR_OPEN_UP                 ; $6870: $F6 $04
     ld   [hl], a                                  ; $6872: $77
     ldh  [hRoomStatus], a                         ; $6873: $E0 $F8
     jp   label_003_51F5                           ; $6875: $C3 $F5 $51
@@ -5657,7 +5657,7 @@ func_003_68F8::
 .jr_003_695D
     add  hl, bc                                   ; $695D: $09
     ld   a, [hl]                                  ; $695E: $7E
-    or   $40                                      ; $695F: $F6 $40
+    or   ROOM_STATUS_EVENT_3                      ; $695F: $F6 $40
     ld   [hl], a                                  ; $6961: $77
     ldh  [hRoomStatus], a                         ; $6962: $E0 $F8
 

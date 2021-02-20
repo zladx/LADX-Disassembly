@@ -10,7 +10,7 @@ Data_006_4142::
 
 MadBomberEntityHandler::
     ldh  a, [hRoomStatus]                         ; $414A: $F0 $F8
-    and  $10                                      ; $414C: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $414C: $E6 $10
     jp   nz, ClearEntityStatus_06                 ; $414E: $C2 $DB $65
 
     ld   hl, wEntitiesDroppedItemTable            ; $4151: $21 $E0 $C4

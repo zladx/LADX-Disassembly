@@ -189,16 +189,6 @@ ROOM_WARP                   equ $E0
 ROOM_END                    equ $FE
 ROOM_BORDER                 equ $FF
 
-; Value for wOverworldRoomStatus (and similar constants)
-;
-; Flags can be combined. For example, visiting the first dungeon's screen (80)
-; and opening it with the key (10) would put that byte at 90.
-ROOM_STATUS_UNVISITED    equ $00
-ROOM_STATUS_DOOR_OPENED  equ $04 ; door or bombable entrance opened
-ROOM_STATUS_CHANGED      equ $10 ; e.g. sword taken on the beach
-ROOM_STATUS_OWL_TALKED   equ $20
-ROOM_STATUS_VISITED      equ $80
-
 ; Values for wRoomSwitchableObject
 ROOM_SWITCHABLE_OBJECT_NONE          equ $0
 ROOM_SWITCHABLE_OBJECT_SWITCH_BUTTON equ $1

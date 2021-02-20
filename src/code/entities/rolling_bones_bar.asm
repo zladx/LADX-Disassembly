@@ -14,7 +14,7 @@ RollingBonesBarEntityHandler::
 
 jr_006_6EED:
     ldh  a, [hRoomStatus]                         ; $6EED: $F0 $F8
-    and  $20                                      ; $6EEF: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $6EEF: $E6 $20
     jp   nz, ClearEntityStatus_06                 ; $6EF1: $C2 $DB $65
 
     ld   a, c                                     ; $6EF4: $79

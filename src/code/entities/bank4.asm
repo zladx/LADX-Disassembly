@@ -3857,7 +3857,7 @@ func_004_6689::
     jr   nz, jr_004_66E6                          ; $66A3: $20 $41
 
     ldh  a, [hRoomStatus]                         ; $66A5: $F0 $F8
-    and  $10                                      ; $66A7: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $66A7: $E6 $10
     jr   nz, jr_004_66E6                          ; $66A9: $20 $3B
 
     ld   a, JINGLE_TREASURE_FOUND                 ; $66AB: $3E $01
@@ -3868,7 +3868,7 @@ func_004_6689::
     ld   hl, wIndoorARoomStatus                                ; $66B4: $21 $00 $D9
     add  hl, de                                   ; $66B7: $19
     ld   a, [hl]                                  ; $66B8: $7E
-    or   $10                                      ; $66B9: $F6 $10
+    or   ROOM_STATUS_EVENT_1                      ; $66B9: $F6 $10
     ld   [hl], a                                  ; $66BB: $77
     ldh  [hRoomStatus], a                         ; $66BC: $E0 $F8
     ld   a, [wHeartPiecesCount]                   ; $66BE: $FA $5C $DB
@@ -4385,7 +4385,7 @@ KnightEntityHandler::
     jr   c, jr_004_69C9                           ; $69B2: $38 $15
 
     ldh  a, [hRoomStatus]                         ; $69B4: $F0 $F8
-    and  $10                                      ; $69B6: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $69B6: $E6 $10
     jp   nz, func_004_6D7A                        ; $69B8: $C2 $7A $6D
 
     ld   hl, wEntitiesLoadOrderTable              ; $69BB: $21 $60 $C4
@@ -5206,7 +5206,7 @@ TrendyGameOwnerEntityHandler::
     ld   a, [wIsMarinFollowingLink]               ; $6E7C: $FA $73 $DB
     push af                                       ; $6E7F: $F5
     ldh  a, [hRoomStatus]                         ; $6E80: $F0 $F8
-    and  $10                                      ; $6E82: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $6E82: $E6 $10
     jr   z, jr_004_6E8A                           ; $6E84: $28 $04
 
     xor  a                                        ; $6E86: $AF

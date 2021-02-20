@@ -19,7 +19,7 @@ jr_006_680D:
     jr   nz, jr_006_681A                          ; $6811: $20 $07
 
     ldh  a, [hRoomStatus]                         ; $6813: $F0 $F8
-    and  $10                                      ; $6815: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $6815: $E6 $10
     jp   z, ClearEntityStatus_06                  ; $6817: $CA $DB $65
 
 jr_006_681A:

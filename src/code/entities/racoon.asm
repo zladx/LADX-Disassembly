@@ -55,7 +55,7 @@ jr_005_4995:
     jp   nz, label_005_4BC1                       ; $4999: $C2 $C1 $4B
 
     ldh  a, [hRoomStatus]                         ; $499C: $F0 $F8
-    and  $10                                      ; $499E: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $499E: $E6 $10
     jp   nz, func_005_7B4B                        ; $49A0: $C2 $4B $7B
 
     ldh  a, [hActiveEntityState]                  ; $49A3: $F0 $F0
@@ -802,7 +802,7 @@ func_005_4DCF::
 
 jr_005_4DE3:
     ldh  a, [hRoomStatus]                         ; $4DE3: $F0 $F8
-    and  $20                                      ; $4DE5: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $4DE5: $E6 $20
     ret  z                                        ; $4DE7: $C8
 
     ld   hl, wEntitiesPosYTable                   ; $4DE8: $21 $10 $C2

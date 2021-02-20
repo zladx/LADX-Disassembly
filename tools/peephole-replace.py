@@ -80,6 +80,17 @@ class EntityOpt1Flag(IntFlag):
     ENTITY_OPT1_MOVE_PIT_WATER         = 0x01
     ENTITY_OPT1_NONE                   = 0x00
 
+class RoomStatusFlag(IntFlag):
+    ROOM_STATUS_NONE            = 0x00
+    ROOM_STATUS_DOOR_OPEN_RIGHT = 0x01
+    ROOM_STATUS_DOOR_OPEN_LEFT  = 0x02
+    ROOM_STATUS_DOOR_OPEN_UP    = 0x04
+    ROOM_STATUS_DOOR_OPEN_DOWN  = 0x08
+    ROOM_STATUS_EVENT_1         = 0x10
+    ROOM_STATUS_EVENT_2         = 0x20
+    ROOM_STATUS_EVENT_3         = 0x40
+    ROOM_STATUS_VISITED         = 0x80
+
 def flags_from_enum(enum_value):
     """
     Returns the string representation of an enum value.
@@ -415,6 +426,15 @@ rules = [
         add  hl, bc
         ld   [hl], $@@
     """, lambda value: flags_from_enum(EntityOpt1Flag(value))),
+     PeepholeRule("""
+        ldh  a, [hRoomStatus]
+        and  $@@
+    """, lambda value: flags_from_enum(RoomStatusFlag(value))),
+     PeepholeRule("""
+        or  $@@
+        ld   [hl], a
+        ldh  [hRoomStatus], a
+    """, lambda value: flags_from_enum(RoomStatusFlag(value))),
 ]
 
 basepath = os.path.dirname(__file__)

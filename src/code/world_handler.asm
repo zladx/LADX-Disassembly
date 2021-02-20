@@ -210,7 +210,7 @@ jr_001_4495::
     and  a                                        ; $4498: $A7
     jr   z, jr_001_44A6                           ; $4499: $28 $0B
     ldh  a, [hRoomStatus]                         ; $449B: $F0 $F8
-    and  $10                                      ; $449D: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $449D: $E6 $10
     jr   nz, jr_001_44A6                          ; $449F: $20 $05
     ld   a, $0C                                   ; $44A1: $3E $0C
     ld   [wCompassSfxCountdown], a                ; $44A3: $EA $62 $D4

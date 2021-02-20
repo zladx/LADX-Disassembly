@@ -61,7 +61,7 @@ RichardState1Handler::
 
 jr_006_4077:
     ldh  a, [hRoomStatus]                         ; $4077: $F0 $F8
-    and  $10                                      ; $4079: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $4079: $E6 $10
     jr   z, jr_006_4083                           ; $407B: $28 $06
 
     ld   a, [wGoldenLeavesCount]                  ; $407D: $FA $15 $DB

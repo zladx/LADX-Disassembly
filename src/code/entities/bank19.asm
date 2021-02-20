@@ -1499,7 +1499,7 @@ EggSongEventEntityHandler::
     ld   a, c                                     ; $4AD4: $79
     ld   [wD461], a                               ; $4AD5: $EA $61 $D4
     ldh  a, [hRoomStatus]                         ; $4AD8: $F0 $F8
-    and  $10                                      ; $4ADA: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $4ADA: $E6 $10
     jp   nz, ClearEntityStatus_19                 ; $4ADC: $C2 $61 $7E
 
     ldh  a, [hActiveEntityState]                  ; $4ADF: $F0 $F0
@@ -1694,7 +1694,7 @@ jr_019_4C03:
     jr   nz, jr_019_4C03                          ; $4C09: $20 $F8
 
     ldh  a, [hRoomStatus]                         ; $4C0B: $F0 $F8
-    and  $10                                      ; $4C0D: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $4C0D: $E6 $10
     jp   nz, ClearEntityStatus_19                       ; $4C0F: $C2 $61 $7E
 
     call GetEntityTransitionCountdown             ; $4C12: $CD $05 $0C
@@ -1928,7 +1928,7 @@ jr_019_4D46:
 
 label_019_4D9B:
     ldh  a, [hRoomStatus]                         ; $4D9B: $F0 $F8
-    and  $20                                      ; $4D9D: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $4D9D: $E6 $20
     jp   nz, ClearEntityStatus_19                        ; $4D9F: $C2 $61 $7E
 
     ld   hl, wEntitiesPrivateState1Table          ; $4DA2: $21 $B0 $C2
@@ -2513,7 +2513,7 @@ FlyingRoosterEventsEntityHandler::
 
 jr_019_51D2:
     ldh  a, [hRoomStatus]                         ; $51D2: $F0 $F8
-    and  $20                                      ; $51D4: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $51D4: $E6 $20
     jp   nz, ClearEntityStatus_19                        ; $51D6: $C2 $61 $7E
 
     ldh  a, [hActiveEntityState]                  ; $51D9: $F0 $F0
@@ -4528,7 +4528,7 @@ GhostInHouseSequence:
     ret  nz                                       ; $5FCB: $C0
 
     ldh  a, [hRoomStatus]                         ; $5FCC: $F0 $F8
-    and  $20                                      ; $5FCE: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $5FCE: $E6 $20
     ret  nz                                       ; $5FD0: $C0
 
     ld   a, $02                                   ; $5FD1: $3E $02
@@ -6090,7 +6090,7 @@ BananasSchuleState0Handler::
 
     ld   e, $CD                                   ; $6D41: $1E $CD
     ldh  a, [hRoomStatus]                         ; $6D43: $F0 $F8
-    and  $20                                      ; $6D45: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $6D45: $E6 $20
     jr   nz, jr_019_6D63                          ; $6D47: $20 $1A
 
     ld   e, $CC                                   ; $6D49: $1E $CC
@@ -6676,7 +6676,7 @@ jr_019_7215:
     ld   a, [hl]                                  ; $7220: $7E
     ldh  [hMultiPurposeG], a                               ; $7221: $E0 $E8
     ldh  a, [hRoomStatus]                         ; $7223: $F0 $F8
-    and  $10                                      ; $7225: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $7225: $E6 $10
     call func_019_73BD                            ; $7227: $CD $BD $73
     ldh  a, [hActiveEntityState]                  ; $722A: $F0 $F0
     JP_TABLE                                      ; $722C
@@ -8452,7 +8452,7 @@ func_019_7F0E::
 jr_019_7F23:
     add  hl, de                                   ; $7F23: $19
     ld   a, [hl]                                  ; $7F24: $7E
-    or   $20                                      ; $7F25: $F6 $20
+    or   ROOM_STATUS_EVENT_2                      ; $7F25: $F6 $20
     ld   [hl], a                                  ; $7F27: $77
     ldh  [hRoomStatus], a                         ; $7F28: $E0 $F8
     ret                                           ; $7F2A: $C9

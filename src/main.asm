@@ -481,6 +481,8 @@ include "code/photos.asm"
 section "bank38",romx[$4000],bank[$38]
 CgbMiscTiles::
 incbin "gfx/cgb_misc.2bpp"
+CgbMiscTiles2::
+incbin "gfx/cgb_misc2.2bpp"
 TitleDXTiles::
 TitleDXTilesDMG::
 incbin "gfx/intro/title_dx.dmg.2bpp"

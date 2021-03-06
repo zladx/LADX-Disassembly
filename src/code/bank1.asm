@@ -775,7 +775,7 @@ jr_001_5854::
     ld   a, $01                                   ; $5854: $3E $01
     ld   [$DDD5], a                               ; $5856: $EA $D5 $DD
     xor  a                                        ; $5859: $AF
-    ld   [wC50A], a                               ; $585A: $EA $0A $C5
+    ld   [wBlockItemUsage], a                     ; $585A: $EA $0A $C5
     ld   [wC116], a                               ; $585D: $EA $16 $C1
     ldh  [hBaseScrollX], a                        ; $5860: $E0 $96
     ldh  [hBaseScrollY], a                               ; $5862: $E0 $97

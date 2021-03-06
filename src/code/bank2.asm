@@ -1148,28 +1148,19 @@ label_002_48B0:
     ret                                           ; $48C4: $C9
 
 HorizontalIncrementForLinkPosition::
-    ;    TOP  LEFT RIGHT BOTTOM
-    db   $00, $10, $F0, $00
-    db   $00, $0C, $F4, $00
-    db   $00, $0C, $F4, $00
-    db   $00, $00, $00, $00
-    db   $00, $14, $EC, $00
-    db   $00, $0F, $F1, $00
-    db   $00, $0F, $F1, $00
-    db   $00, $00, $00, $00
+    ; First 16 entries are for normal walking, next 16 are for walking with piece of power
+    ;    Index by J_RIGHT|J_LEFT|J_UP|J_DOWN part of the hJoypadState.
+    db   $00, $10, $F0, $00, $00, $0C, $F4, $00, $00, $0C, $F4, $00, $00, $00, $00, $00
+    db   $00, $14, $EC, $00, $00, $0F, $F1, $00, $00, $0F, $F1, $00, $00, $00, $00, $00
 
 VerticalIncrementForLinkPosition::
-    ;    TOP  LEFT RIGHT BOTTOM
-    db   $00, $00, $00, $00
-    db   $F0, $F4, $F4, $00
-    db   $10, $0C, $0C, $00
-    db   $00, $00, $00, $00
-    db   $00, $00, $00, $00
-    db   $EC, $F1, $F1, $00
-    db   $14, $0F, $0F, $00
-    db   $00, $00, $00, $00
+    ; First 16 entries are for normal walking, next 16 are for walking with piece of power
+    ;    Index by J_RIGHT|J_LEFT|J_UP|J_DOWN part of the hJoypadState.
+    db   $00, $00, $00, $00, $F0, $F4, $F4, $00, $10, $0C, $0C, $00, $00, $00, $00, $00
+    db   $00, $00, $00, $00, $EC, $F1, $F1, $00, $14, $0F, $0F, $00, $00, $00, $00, $00
 
 ; Convert joypad input to Link's direction of view
+;    Index by J_RIGHT|J_LEFT|J_UP|J_DOWN part of the hJoypadState.
 JoypadToLinkDirection::
 .none:        db  DIRECTION_KEEP
 .right:       db  DIRECTION_RIGHT

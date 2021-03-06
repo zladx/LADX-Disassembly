@@ -5228,7 +5228,7 @@ func_004_6E92::
     ld   a, c                                     ; $6E9B: $79
     ld   [$D210], a                               ; $6E9C: $EA $10 $D2
     ld   a, $02                                   ; $6E9F: $3E $02
-    ld   [wC50A], a                               ; $6EA1: $EA $0A $C5
+    ld   [wBlockItemUsage], a                     ; $6EA1: $EA $0A $C5
     call GetEntityPrivateCountdown1               ; $6EA4: $CD $00 $0C
     dec  a                                        ; $6EA7: $3D
     jr   nz, jr_004_6EAE                          ; $6EA8: $20 $04
@@ -6621,12 +6621,12 @@ Data_004_76CB::
     db   $68, $03, $6A, $03, $6C, $03, $6E, $03, $6A, $23, $68, $23, $6E, $23, $6C, $23
 
 ShopOwnerEntityHandler::
-    ld   a, [wC50A]                               ; $76EB: $FA $0A $C5
+    ld   a, [wBlockItemUsage]                     ; $76EB: $FA $0A $C5
     and  a                                        ; $76EE: $A7
     jr   nz, jr_004_76F9                          ; $76EF: $20 $08
 
     ld   a, $01                                   ; $76F1: $3E $01
-    ld   [wC50A], a                               ; $76F3: $EA $0A $C5
+    ld   [wBlockItemUsage], a                     ; $76F3: $EA $0A $C5
     call func_004_788E                            ; $76F6: $CD $8E $78
 
 jr_004_76F9:
@@ -7345,7 +7345,7 @@ func_004_7B40::
     ret  nz                                       ; $7B4C: $C0
 
     ld   [wHasStolenFromShop], a                  ; $7B4D: $EA $46 $DB
-    ld   [wC50A], a                               ; $7B50: $EA $0A $C5
+    ld   [wBlockItemUsage], a                     ; $7B50: $EA $0A $C5
     jp   func_004_6D7A                            ; $7B53: $C3 $7A $6D ; 6D is double used also as data in Data_004_7B55
 
 Data_004_7B56::

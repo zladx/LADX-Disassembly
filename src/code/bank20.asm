@@ -1362,7 +1362,7 @@ ResetRoomVariables::
     ld   [wC1A2], a                               ; $4CB2: $EA $A2 $C1
     ld   [wC1C6], a                               ; $4CB5: $EA $C6 $C1
     ld   [wRoomSwitchableObject], a               ; $4CB8: $EA $FA $D6
-    ld   [wC50A], a                               ; $4CBB: $EA $0A $C5
+    ld   [wBlockItemUsage], a                     ; $4CBB: $EA $0A $C5
     ldh  [hFFAC], a                               ; $4CBE: $E0 $AC
     ld   [wEnemyWasKilled], a                     ; $4CC0: $EA $13 $C1
     ld   [wD460], a                               ; $4CC3: $EA $60 $D4
@@ -4370,7 +4370,7 @@ InventoryFadeOutHandler::
     ld   a, $01                                   ; $65E0: $3E $01
     ld   [wPaletteUnknownE], a                    ; $65E2: $EA $D5 $DD
     xor  a                                        ; $65E5: $AF
-    ld   [wC50A], a                               ; $65E6: $EA $0A $C5
+    ld   [wBlockItemUsage], a                     ; $65E6: $EA $0A $C5
     ld   [wC116], a                               ; $65E9: $EA $16 $C1
     ldh  [hBaseScrollX], a                        ; $65EC: $E0 $96
     ldh  [hBaseScrollY], a                        ; $65EE: $E0 $97

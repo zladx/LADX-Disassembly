@@ -1266,8 +1266,8 @@ wC505::
 wItemPickedUpInShop::
   ds 1 ; C509
 
-; Unlabeled
-wC50A::
+; Block link from using items (used by the shop and trendy game)
+wBlockItemUsage::
   ds 1 ; C50A
 
 ; Unlabeled

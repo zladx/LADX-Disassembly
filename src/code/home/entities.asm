@@ -1100,7 +1100,7 @@ BossIntro::
     ld   [wDidBossIntro], a                       ; $3F01: $EA $BD $C1
 
     ; boss music
-    ld   hl, wEntitiesUnknowTableH                ; $3F04: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $3F04: $21 $30 $C4
     add  hl, bc                                   ; $3F07: $09
     ld   a, [hl]                                  ; $3F08: $7E
     and  $04                                      ; $3F09: $E6 $04
@@ -1131,7 +1131,7 @@ ldh  [hFFBD], a                                   ; $3F14: $E0 $BD
     jr   .openDialog                              ; $3F2C: $18 $17
 .endGrimCreeper:
 
-    ld   hl, wEntitiesUnknowTableH                ; $3F2E: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $3F2E: $21 $30 $C4
     add  hl, bc                                   ; $3F31: $09
     ld   a, [hl]                                  ; $3F32: $7E
     and  $04                                      ; $3F33: $E6 $04

@@ -204,7 +204,7 @@ StonePigHeadMacroHandler::
     ld   bc, Data_024_7694                        ; $76A5: $01 $94 $76
     ld   de, Data_024_7699                        ; $76A8: $11 $99 $76
     ldh  a, [hRoomStatus]                         ; $76AB: $F0 $F8
-    and  $04                                      ; $76AD: $E6 $04
+    and  ROOM_STATUS_DOOR_OPEN_UP                 ; $76AD: $E6 $04
     jr   z, jr_024_76B4                           ; $76AF: $28 $03
 
     ld   de, Data_024_769D                        ; $76B1: $11 $9D $76

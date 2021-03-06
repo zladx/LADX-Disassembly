@@ -217,7 +217,7 @@ ApplyRoomTransition::
 
     ; If the chests for this room have been opened, return
     ldh  a, [hRoomStatus]                         ; $79C1: $F0 $F8
-    and  $10                                      ; $79C3: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $79C3: $E6 $10
     ret  nz                                       ; $79C5: $C0
 
     ; Request compass sound effect to be played with a 12 frames delay

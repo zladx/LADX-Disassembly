@@ -505,7 +505,7 @@ jr_005_7EAE:
     and  a                                        ; $7EB3: $A7
     jr   z, jr_005_7EBF                           ; $7EB4: $28 $09
 
-    ld   hl, wEntitiesUnknowTableH                ; $7EB6: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7EB6: $21 $30 $C4
     add  hl, de                                   ; $7EB9: $19
     ld   a, [hl]                                  ; $7EBA: $7E
     and  $80                                      ; $7EBB: $E6 $80

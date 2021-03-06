@@ -1174,9 +1174,16 @@ wEntitiesFlashCountdownTable::
   ds $10 ; C420 - C42F
 
 ; Entity initialization flags?
-; Seems to be a bitfield
-; bit 2: set for bosses, clear for minibosses
-wEntitiesUnknowTableH::
+; bit 0: move pit water
+; bit 1: excluded from "kill all enemies"
+; bit 2: is mini-boss
+; bit 3: splashes into water
+; bit 4: immune to pit water
+; bit 5: allow out-of-bounds
+; bit 6: sword doesn't clink
+; bit 7: is boss
+; See ENTITY_OPT_* for possible values
+wEntitiesOptions1Table::
   ds $10 ; C430 - C43F
 
 ; Entities-specific private state?

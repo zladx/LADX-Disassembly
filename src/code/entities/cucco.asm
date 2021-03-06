@@ -315,9 +315,9 @@ jr_005_46E9:
     ld   hl, wEntitiesHitboxFlagsTable            ; $471E: $21 $50 $C3
     add  hl, de                                   ; $4721: $19
     ld   [hl], $80                                ; $4722: $36 $80
-    ld   hl, wEntitiesUnknowTableH                ; $4724: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $4724: $21 $30 $C4
     add  hl, de                                   ; $4727: $19
-    ld   [hl], $40                                ; $4728: $36 $40
+    ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF        ; $4728: $36 $40
     push bc                                       ; $472A: $C5
     call GetRandomByte                            ; $472B: $CD $0D $28
     and  $0F                                      ; $472E: $E6 $0F

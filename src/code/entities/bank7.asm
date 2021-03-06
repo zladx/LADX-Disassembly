@@ -37,7 +37,7 @@ BushCrawlerEntityHandler::
     rla                                           ; $4033: $17
     and  $40                                      ; $4034: $E6 $40
     push af                                       ; $4036: $F5
-    ld   hl, wEntitiesUnknowTableH                ; $4037: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $4037: $21 $30 $C4
     add  hl, bc                                   ; $403A: $09
     or   [hl]                                     ; $403B: $B6
     ld   [hl], a                                  ; $403C: $77
@@ -997,7 +997,7 @@ MermaidEntityHandler::
     jr   nc, jr_007_46E4                          ; $46C8: $30 $1A
 
     ldh  a, [hRoomStatus]                         ; $46CA: $F0 $F8
-    and  $20                                      ; $46CC: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $46CC: $E6 $20
     jr   z, jr_007_46D2                           ; $46CE: $28 $02
 
     inc  [hl]                                     ; $46D0: $34
@@ -1544,7 +1544,7 @@ jr_007_4A64:
 
 jr_007_4A69:
     ldh  a, [hRoomStatus]                         ; $4A69: $F0 $F8
-    and  $20                                      ; $4A6B: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $4A6B: $E6 $20
     jp   nz, func_007_7EA4                        ; $4A6D: $C2 $A4 $7E
 
     ld   de, Data_007_49F7                        ; $4A70: $11 $F7 $49
@@ -1861,7 +1861,7 @@ Data_007_4C93::
 
 HoneycombEntityHandler::
     ldh  a, [hRoomStatus]                         ; $4C97: $F0 $F8
-    and  $20                                      ; $4C99: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $4C99: $E6 $20
     jp   nz, func_007_7EA4                        ; $4C9B: $C2 $A4 $7E
 
     ld   hl, wEntitiesUnknowTableP                ; $4C9E: $21 $40 $C4
@@ -2198,7 +2198,7 @@ TarinEntityHandler::
 
     inc  [hl]                                     ; $4EBD: $34
     ldh  a, [hRoomStatus]                         ; $4EBE: $F0 $F8
-    and  $40                                      ; $4EC0: $E6 $40
+    and  ROOM_STATUS_EVENT_3                      ; $4EC0: $E6 $40
     jp   nz, func_007_7EA4                        ; $4EC2: $C2 $A4 $7E
 
 jr_007_4EC5:
@@ -3170,7 +3170,7 @@ jr_007_5528:
 
 jr_007_552E:
     ldh  a, [hRoomStatus]                         ; $552E: $F0 $F8
-    and  $20                                      ; $5530: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $5530: $E6 $20
     jp   nz, func_007_7EA4                        ; $5532: $C2 $A4 $7E
 
     ldh  a, [hIsGBC]                              ; $5535: $F0 $FE
@@ -3650,7 +3650,7 @@ Data_007_582E::
 
 KikiTheMonkeyEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5842: $F0 $F8
-    and  $10                                      ; $5844: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5844: $E6 $10
     jp   nz, func_007_7EA4                        ; $5846: $C2 $A4 $7E
 
     ld   de, Data_007_581A                        ; $5849: $11 $1A $58
@@ -4497,7 +4497,7 @@ jr_007_5DD0:
     jp   nz, label_007_5F4D                       ; $5DDB: $C2 $4D $5F
 
     ldh  a, [hRoomStatus]                         ; $5DDE: $F0 $F8
-    and  $20                                      ; $5DE0: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $5DE0: $E6 $20
     jp   nz, func_007_7EA4                        ; $5DE2: $C2 $A4 $7E
 
     ld   a, [wRoomTransitionState]                ; $5DE5: $FA $24 $C1
@@ -6079,9 +6079,9 @@ PeaHatEntityHandler::
     ld   hl, wEntitiesHitboxFlagsTable            ; $6721: $21 $50 $C3
     add  hl, bc                                   ; $6724: $09
     set  7, [hl]                                  ; $6725: $CB $FE
-    ld   hl, wEntitiesUnknowTableH                ; $6727: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $6727: $21 $30 $C4
     add  hl, bc                                   ; $672A: $09
-    set  6, [hl]                                  ; $672B: $CB $F6
+    set  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $672B: $CB $F6
     ldh  a, [hActiveEntityState]                  ; $672D: $F0 $F0
     JP_TABLE                                      ; $672F
 ._00 dw func_007_6736                             ; $6730
@@ -6106,9 +6106,9 @@ jr_007_6747:
     ld   hl, wEntitiesHitboxFlagsTable            ; $6747: $21 $50 $C3
     add  hl, bc                                   ; $674A: $09
     res  7, [hl]                                  ; $674B: $CB $BE
-    ld   hl, wEntitiesUnknowTableH                ; $674D: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $674D: $21 $30 $C4
     add  hl, bc                                   ; $6750: $09
-    res  6, [hl]                                  ; $6751: $CB $B6
+    res  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $6751: $CB $B6
 
 jr_007_6753:
     ldh  a, [hFrameCounter]                       ; $6753: $F0 $E7
@@ -6943,9 +6943,9 @@ func_007_6C3E::
     ld   hl, wEntitiesHitboxFlagsTable            ; $6C48: $21 $50 $C3
     add  hl, bc                                   ; $6C4B: $09
     set  7, [hl]                                  ; $6C4C: $CB $FE
-    ld   hl, wEntitiesUnknowTableH                ; $6C4E: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $6C4E: $21 $30 $C4
     add  hl, bc                                   ; $6C51: $09
-    res  6, [hl]                                  ; $6C52: $CB $B6
+    res  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $6C52: $CB $B6
     ret                                           ; $6C54: $C9
 
 jr_007_6C55:
@@ -7131,9 +7131,9 @@ func_007_6D7F::
     ld   hl, wEntitiesHitboxFlagsTable            ; $6D8C: $21 $50 $C3
     add  hl, bc                                   ; $6D8F: $09
     res  7, [hl]                                  ; $6D90: $CB $BE
-    ld   hl, wEntitiesUnknowTableH                ; $6D92: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $6D92: $21 $30 $C4
     add  hl, bc                                   ; $6D95: $09
-    set  6, [hl]                                  ; $6D96: $CB $F6
+    set  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $6D96: $CB $F6
     ld   a, JINGLE_MASTER_STALFOS                 ; $6D98: $3E $28
     ldh  [hJingle], a                             ; $6D9A: $E0 $F2
 
@@ -7344,7 +7344,7 @@ jr_007_6E8D:
 jr_007_6E9A:
     add  hl, de                                   ; $6E9A: $19
     ld   a, [hl]                                  ; $6E9B: $7E
-    or   $20                                      ; $6E9C: $F6 $20
+    or   ROOM_STATUS_EVENT_2                      ; $6E9C: $F6 $20
     ld   [hl], a                                  ; $6E9E: $77
     ldh  [hRoomStatus], a                         ; $6E9F: $E0 $F8
 
@@ -7756,7 +7756,7 @@ KanaletBombableWallEntityHandler::
     jr   nz, jr_007_71B4                          ; $719F: $20 $13
 
     ldh  a, [hRoomStatus]                         ; $71A1: $F0 $F8
-    and  $10                                      ; $71A3: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $71A3: $E6 $10
     jp   nz, func_007_7EA4                        ; $71A5: $C2 $A4 $7E
 
     ld   hl, wEntitiesLoadOrderTable              ; $71A8: $21 $60 $C4
@@ -8241,9 +8241,9 @@ jr_007_74F8:
     ld   hl, wEntitiesHitboxFlagsTable            ; $7519: $21 $50 $C3
     add  hl, de                                   ; $751C: $19
     ld   [hl], $00                                ; $751D: $36 $00
-    ld   hl, wEntitiesUnknowTableH                ; $751F: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $751F: $21 $30 $C4
     add  hl, de                                   ; $7522: $19
-    ld   [hl], $00                                ; $7523: $36 $00
+    ld   [hl], ENTITY_OPT1_NONE                   ; $7523: $36 $00
     ld   hl, wEntitiesHealthGroup                 ; $7525: $21 $D0 $C4
     add  hl, de                                   ; $7528: $19
     ld   [hl], $00                                ; $7529: $36 $00
@@ -8803,9 +8803,9 @@ jr_007_786E:
     ld   hl, wEntitiesHitboxFlagsTable            ; $786E: $21 $50 $C3
     add  hl, bc                                   ; $7871: $09
     ld   [hl], $80                                ; $7872: $36 $80
-    ld   hl, wEntitiesUnknowTableH                ; $7874: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7874: $21 $30 $C4
     add  hl, bc                                   ; $7877: $09
-    ld   [hl], $48                                ; $7878: $36 $48
+    ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_SPLASH_IN_WATER                                ; $7878: $36 $48
     call func_007_7E5D                            ; $787A: $CD $5D $7E
     add  $06                                      ; $787D: $C6 $06
     cp   $0A                                      ; $787F: $FE $0A
@@ -8897,9 +8897,9 @@ func_007_78E1::
     jp   SetEntitySpriteVariant                   ; $78E9: $C3 $0C $3B
 
 func_007_78EC::
-    ld   hl, wEntitiesUnknowTableH                ; $78EC: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $78EC: $21 $30 $C4
     add  hl, bc                                   ; $78EF: $09
-    ld   [hl], $08                                ; $78F0: $36 $08
+    ld   [hl], ENTITY_OPT1_SPLASH_IN_WATER        ; $78F0: $36 $08
     ld   hl, wEntitiesHitboxFlagsTable            ; $78F2: $21 $50 $C3
     add  hl, bc                                   ; $78F5: $09
     ld   [hl], $00                                ; $78F6: $36 $00
@@ -9462,7 +9462,7 @@ func_007_7DC3::
     call GetEntitySpeedYAddress                   ; $7DEA: $CD $05 $40
     ld   [hl], a                                  ; $7DED: $77
     call UpdateEntityPosWithSpeed_07              ; $7DEE: $CD $0A $7E
-    ld   hl, wEntitiesUnknowTableH                ; $7DF1: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7DF1: $21 $30 $C4
     add  hl, bc                                   ; $7DF4: $09
     ld   a, [hl]                                  ; $7DF5: $7E
     and  $20                                      ; $7DF6: $E6 $20

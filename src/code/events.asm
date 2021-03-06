@@ -80,7 +80,7 @@ KillAllEnemiesEffectHandler::
 EventEffectGuard::
     ; If the room has not been cleared yet…
     ldh  a, [hRoomStatus]                         ; $5DAF: $F0 $F8
-    and  $10                                      ; $5DB1: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5DB1: $E6 $10
     jr   nz, .returnToParent                      ; $5DB3: $20 $0B
 
     ; … and the room event effect has not been executed yet…
@@ -140,7 +140,7 @@ MakeEffectObjectAppear::
     ; Mark the room as cleared
     call GetRoomStatusAddress                     ; $5DF9: $CD $9F $5B
     ld   a, [hl]                                  ; $5DFC: $7E
-    or   $10                                      ; $5DFD: $F6 $10
+    or   ROOM_STATUS_EVENT_1                      ; $5DFD: $F6 $10
     ld   [hl], a                                  ; $5DFF: $77
     ldh  [hRoomStatus], a                         ; $5E00: $E0 $F8
 
@@ -156,7 +156,7 @@ DropKeyEffectHandler::
     ; Mark the room as cleared
     call GetRoomStatusAddress       ; This is the room where the key falls into
     ld   a, [hl]                    ; a hole in the floor, making it fall into
-    or   $10                        ; a sidescrolling room.
+    or   ROOM_STATUS_EVENT_1        ; a sidescrolling room.
     ld   [hl], a                    ; Since that room handles the key now,
     ldh  [hRoomStatus], a           ; mark this one.
 
@@ -515,10 +515,10 @@ jr_002_6000:
     and  a                                        ; $6005: $A7
     jr   z, jr_002_6011                           ; $6006: $28 $09
 
-    ld   hl, wEntitiesUnknowTableH                ; $6008: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $6008: $21 $30 $C4
     add  hl, bc                                   ; $600B: $09
     ld   a, [hl]                                  ; $600C: $7E
-    and  $02                                      ; $600D: $E6 $02
+    and  ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL       ; $600D: $E6 $02
     jr   z, jr_002_602C                           ; $600F: $28 $1B
 
 jr_002_6011:
@@ -670,8 +670,8 @@ jr_002_60BD:
     ; Mark the room as completed
     call GetRoomStatusAddress                     ; $60CE: $CD $9F $5B
     ld   a, [hl]                                  ; $60D1: $7E
-    or   $10                                      ; $60D2: $F6 $10
+    or   ROOM_STATUS_EVENT_1                      ; $60D2: $F6 $10
     ld   [hl], a                                  ; $60D4: $77
-    ldh  [hRoomStatus], a                               ; $60D5: $E0 $F8
+    ldh  [hRoomStatus], a                         ; $60D5: $E0 $F8
 
     ret                                           ; $60D7: $C9

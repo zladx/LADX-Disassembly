@@ -15,6 +15,26 @@ ENTITY_STATUS_STUNNED    equ 6
 ENTITY_STATUS_LIFTED     equ 7
 ENTITY_STATUS_THROWN     equ 8
 
+; Values for wEntitiesOptions1Table
+ENTITY_OPT1_IS_BOSS                equ $80
+ENTITY_OPT1_SWORD_CLINK_OFF        equ $40
+ENTITY_OPT1_ALLOW_OUT_OF_BOUNDS    equ $20
+ENTITY_OPT1_IMMUNE_WATER_PIT       equ $10
+ENTITY_OPT1_SPLASH_IN_WATER        equ $08
+ENTITY_OPT1_IS_MINI_BOSS           equ $04
+ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL equ $02
+ENTITY_OPT1_MOVE_PIT_WATER         equ $01
+ENTITY_OPT1_NONE                   equ $00
+; Bit numbers for wEntitiesOptions1Table
+ENTITY_OPT1_B_IS_BOSS                equ 7
+ENTITY_OPT1_B_SWORD_CLINK_OFF        equ 6
+ENTITY_OPT1_B_ALLOW_OUT_OF_BOUNDS    equ 5
+ENTITY_OPT1_B_IMMUNE_WATER_PIT       equ 4
+ENTITY_OPT1_B_SPLASH_IN_WATER        equ 3
+ENTITY_OPT1_B_IS_MINI_BOSS           equ 2
+ENTITY_OPT1_B_EXCLUDED_FROM_KILL_ALL equ 1
+ENTITY_OPT1_B_MOVE_PIT_WATER         equ 0
+
 ; Values for wEntitiesTypeTable
 ; (See also EntityHandlersTable)
 ENTITY_ARROW                         equ $00

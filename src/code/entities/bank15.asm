@@ -692,9 +692,9 @@ jr_015_46E1:
     call func_015_7B0D                            ; $46E4: $CD $0D $7B
     call func_015_7B3E                            ; $46E7: $CD $3E $7B
     call label_3B39                               ; $46EA: $CD $39 $3B
-    ld   hl, wEntitiesUnknowTableH                ; $46ED: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $46ED: $21 $30 $C4
     add  hl, bc                                   ; $46F0: $09
-    set  6, [hl]                                  ; $46F1: $CB $F6
+    set  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $46F1: $CB $F6
     ld   hl, wEntitiesPhysicsFlagsTable           ; $46F3: $21 $40 $C3
     add  hl, bc                                   ; $46F6: $09
     res  7, [hl]                                  ; $46F7: $CB $BE
@@ -765,9 +765,9 @@ jr_015_475C:
     call IncrementEntityState                     ; $475E: $CD $12 $3B
     call GetEntityDropTimer                       ; $4761: $CD $FB $0B
     ld   [hl], $30                                ; $4764: $36 $30
-    ld   hl, wEntitiesUnknowTableH                ; $4766: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $4766: $21 $30 $C4
     add  hl, bc                                   ; $4769: $09
-    ld   [hl], $84                                ; $476A: $36 $84
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IS_MINI_BOSS                                ; $476A: $36 $84
     ld   a, $01                                   ; $476C: $3E $01
     ld   [wD228], a                               ; $476E: $EA $28 $D2
     ld   a, $01                                   ; $4771: $3E $01
@@ -1002,9 +1002,9 @@ Data_015_48C7::
     db   $00, $04, $08, $0C, $10, $0C, $08, $04
 
 func_015_48CF::
-    ld   hl, wEntitiesUnknowTableH                ; $48CF: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $48CF: $21 $30 $C4
     add  hl, bc                                   ; $48D2: $09
-    res  6, [hl]                                  ; $48D3: $CB $B6
+    res  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $48D3: $CB $B6
     ld   hl, wEntitiesPhysicsFlagsTable           ; $48D5: $21 $40 $C3
     add  hl, bc                                   ; $48D8: $09
     set  7, [hl]                                  ; $48D9: $CB $FE
@@ -1799,9 +1799,9 @@ jr_015_4F02:
     add  hl, de                                   ; $4F20: $19
     set  6, [hl]                                  ; $4F21: $CB $F6
     set  4, [hl]                                  ; $4F23: $CB $E6
-    ld   hl, wEntitiesUnknowTableH                ; $4F25: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $4F25: $21 $30 $C4
     add  hl, de                                   ; $4F28: $19
-    set  1, [hl]                                  ; $4F29: $CB $CE
+    set  ENTITY_OPT1_B_EXCLUDED_FROM_KILL_ALL, [hl]                                  ; $4F29: $CB $CE
     set  4, [hl]                                  ; $4F2B: $CB $E6
     ldh  a, [hMultiPurpose0]                      ; $4F2D: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $4F2F: $21 $00 $C2
@@ -4022,9 +4022,9 @@ func_015_608C::
     ld   hl, wEntitiesHitboxFlagsTable            ; $60A6: $21 $50 $C3
     add  hl, bc                                   ; $60A9: $09
     ld   [hl], $0A                                ; $60AA: $36 $0A
-    ld   hl, wEntitiesUnknowTableH                ; $60AC: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $60AC: $21 $30 $C4
     add  hl, bc                                   ; $60AF: $09
-    ld   [hl], $90                                ; $60B0: $36 $90
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT                                ; $60B0: $36 $90
     jp   ConfigureEntityHitbox                    ; $60B2: $C3 $EA $3A
 
 jr_015_60B5:
@@ -4252,13 +4252,13 @@ ELSE
     jr   nz, jr_015_6330                          ; $630D: $20 $21
 ENDC
 
-    ld   hl, wEntitiesUnknowTableH                ; $630F: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $630F: $21 $30 $C4
     add  hl, bc                                   ; $6312: $09
-    ld   [hl], $90                                ; $6313: $36 $90
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT                                ; $6313: $36 $90
     call label_3B70                               ; $6315: $CD $70 $3B
-    ld   hl, wEntitiesUnknowTableH                ; $6318: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $6318: $21 $30 $C4
     add  hl, bc                                   ; $631B: $09
-    ld   [hl], $D0                                ; $631C: $36 $D0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT                                ; $631C: $36 $D0
 
 jr_015_6324:
     ld   hl, wEntitiesHealthTable                 ; $631E: $21 $60 $C3
@@ -5114,9 +5114,9 @@ func_015_68E7::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $68F8: $21 $40 $C3
     add  hl, bc                                   ; $68FB: $09
     ld   [hl], $00                                ; $68FC: $36 $00
-    ld   hl, wEntitiesUnknowTableH                ; $68FE: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $68FE: $21 $30 $C4
     add  hl, bc                                   ; $6901: $09
-    ld   [hl], $C0                                ; $6902: $36 $C0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF                                ; $6902: $36 $C0
     call GetEntityDropTimer                       ; $6904: $CD $FB $0B
     ld   [hl], $90                                ; $6907: $36 $90
     xor  a                                        ; $6909: $AF
@@ -6915,9 +6915,9 @@ jr_015_776B:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $7776: $21 $40 $C3
     add  hl, de                                   ; $7779: $19
     ld   [hl], $12                                ; $777A: $36 $12
-    ld   hl, wEntitiesUnknowTableH                ; $777C: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $777C: $21 $30 $C4
     add  hl, de                                   ; $777F: $19
-    set  0, [hl]                                  ; $7780: $CB $C6
+    set  ENTITY_OPT1_B_MOVE_PIT_WATER, [hl]       ; $7780: $CB $C6
     ld   a, JINGLE_JUMP_DOWN                      ; $7782: $3E $08
     ldh  [hJingle], a                             ; $7784: $E0 $F2
     ld   hl, wEntitiesTransitionCountdownTable    ; $7786: $21 $E0 $C2
@@ -7599,7 +7599,7 @@ func_015_7B3E::
     add  hl, bc                                   ; $7B69: $09
     ld   [hl], a                                  ; $7B6A: $77
     call UpdateEntityPosWithSpeed_15              ; $7B6B: $CD $88 $7B
-    ld   hl, wEntitiesUnknowTableH                ; $7B6E: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7B6E: $21 $30 $C4
     add  hl, bc                                   ; $7B71: $09
     ld   a, [hl]                                  ; $7B72: $7E
     and  $20                                      ; $7B73: $E6 $20
@@ -7914,7 +7914,7 @@ func_015_7CDB::
 jr_015_7CF0:
     add  hl, de                                   ; $7CF0: $19
     ld   a, [hl]                                  ; $7CF1: $7E
-    or   $20                                      ; $7CF2: $F6 $20
+    or   ROOM_STATUS_EVENT_2                      ; $7CF2: $F6 $20
     ld   [hl], a                                  ; $7CF4: $77
     ldh  [hRoomStatus], a                         ; $7CF5: $E0 $F8
     ret                                           ; $7CF7: $C9
@@ -8301,7 +8301,7 @@ func_015_7F04::
     jr   nz, jr_015_7F4F                          ; $7F2E: $20 $1F
 
     ldh  a, [hRoomStatus]                         ; $7F30: $F0 $F8
-    and  $20                                      ; $7F32: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $7F32: $E6 $20
     jr   nz, jr_015_7F44                          ; $7F34: $20 $0E
 
     call func_015_7CDB                            ; $7F36: $CD $DB $7C

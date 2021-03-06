@@ -5867,7 +5867,7 @@ LoadRoom::
     cp   $0E                                      ; $31C1: $FE $0E
     jr   nz, .endEaglesTowerAlt                   ; $31C3: $20 $0C
     ld   a, [wOverworldRoomStatus + $0E]          ; $31C5: $FA $0E $D8
-    and  ROOM_STATUS_CHANGED                      ; $31C8: $E6 $10
+    and  OW_ROOM_STATUS_CHANGED                      ; $31C8: $E6 $10
     jr   z, .altRoomsEnd                          ; $31CA: $28 $55
     ld   bc, Overworld0EAlt ; Eagle's Tower open  ; $31CC: $01 $EC $47
     jr   .loadBankForOverworldRooms               ; $31CF: $18 $5E
@@ -5876,7 +5876,7 @@ LoadRoom::
     cp   $8C                                      ; $31D1: $FE $8C
     jr   nz, .endSouthFaceShrineAlt               ; $31D3: $20 $0C
     ld   a, [wOverworldRoomStatus + $8C]          ; $31D5: $FA $8C $D8
-    and  ROOM_STATUS_CHANGED                      ; $31D8: $E6 $10
+    and  OW_ROOM_STATUS_CHANGED                      ; $31D8: $E6 $10
     jr   z, .altRoomsEnd                          ; $31DA: $28 $45
     ld   bc, Overworld8CAlt ; South Face Shrine open ; $31DC: $01 $4E $43
     jr   .loadBankForOverworldRooms               ; $31DF: $18 $4E
@@ -5885,7 +5885,7 @@ LoadRoom::
     cp   $79                                      ; $31E1: $FE $79
     jr   nz, .endUpperTalTalHeightsAlt            ; $31E3: $20 $0C
     ld   a, [wOverworldRoomStatus + $79]          ; $31E5: $FA $79 $D8
-    and  ROOM_STATUS_CHANGED                      ; $31E8: $E6 $10
+    and  OW_ROOM_STATUS_CHANGED                      ; $31E8: $E6 $10
     jr   z, .altRoomsEnd                          ; $31EA: $28 $35
     ld   bc, Overworld79Alt ; Kanalet Castle open ; $31EC: $01 $13 $65
     jr   .loadBankForOverworldRooms               ; $31EF: $18 $3E
@@ -5894,7 +5894,7 @@ LoadRoom::
     cp   $06                                      ; $31F1: $FE $06
     jr   nz, .endWindfishsEggAlt                  ; $31F3: $20 $0C
     ld   a, [wOverworldRoomStatus + $06]          ; $31F5: $FA $06 $D8
-    and  ROOM_STATUS_CHANGED                      ; $31F8: $E6 $10
+    and  OW_ROOM_STATUS_CHANGED                      ; $31F8: $E6 $10
     jr   z, .altRoomsEnd                          ; $31FA: $28 $25
     ld   bc, Overworld06Alt ; Windfish's Egg open ; $31FC: $01 $96 $44
     jr   .loadBankForOverworldRooms               ; $31FF: $18 $2E
@@ -5903,7 +5903,7 @@ LoadRoom::
     cp   $1B                                      ; $3201: $FE $1B
     jr   nz, .endTalTalHeightsAlt                 ; $3203: $20 $0C
     ld   a, [wOverworldRoomStatus + $2B]          ; $3205: $FA $2B $D8
-    and  ROOM_STATUS_CHANGED                      ; $3208: $E6 $10
+    and  OW_ROOM_STATUS_CHANGED                      ; $3208: $E6 $10
     jr   z, .altRoomsEnd                          ; $320A: $28 $15
     ld   bc, Overworld1BAlt ; Angler's Tunnel upper water dry ; $320C: $01 $0F $4C
     jr   .loadBankForOverworldRooms               ; $320F: $18 $1E
@@ -5912,7 +5912,7 @@ LoadRoom::
     cp   $2B                                      ; $3211: $FE $2B
     jr   nz, .altRoomsEnd                         ; $3213: $20 $0C
     ld   a, [wOverworldRoomStatus + $2B]          ; $3215: $FA $2B $D8
-    and  ROOM_STATUS_CHANGED                      ; $3218: $E6 $10
+    and  OW_ROOM_STATUS_CHANGED                      ; $3218: $E6 $10
     jr   z, .altRoomsEnd                          ; $321A: $28 $05
     ld   bc, Overworld2BAlt ; Angler's Tunnel open ; $321C: $01 $9A $50
     jr   .loadBankForOverworldRooms               ; $321F: $18 $0E
@@ -6863,7 +6863,7 @@ LoadObject_KeyDoorTop::
     ld   e, 0                                     ; $35FA: $1E $00
     call func_373F                                ; $35FC: $CD $3F $37
     ldh  a, [hRoomStatus]                         ; $35FF: $F0 $F8
-    and  $04                                      ; $3601: $E6 $04
+    and  ROOM_STATUS_DOOR_OPEN_UP                 ; $3601: $E6 $04
     jp   nz, LoadObject_OpenDoorTop               ; $3603: $C2 $B2 $36
     push bc                                       ; $3606: $C5
     call label_35EE                               ; $3607: $CD $EE $35
@@ -6878,7 +6878,7 @@ LoadObject_KeyDoorBottom::
     ld   e, $01                                   ; $3615: $1E $01
     call func_373F                                ; $3617: $CD $3F $37
     ldh  a, [hRoomStatus]                         ; $361A: $F0 $F8
-    and  $08                                      ; $361C: $E6 $08
+    and  ROOM_STATUS_DOOR_OPEN_DOWN               ; $361C: $E6 $08
     jp   nz, LoadObject_OpenDoorBottom            ; $361E: $C2 $EA $36
 
     push bc                                       ; $3621: $C5
@@ -6894,7 +6894,7 @@ LoadObject_KeyDoorLeft::
     ld   e, $02                                   ; $3630: $1E $02
     call func_373F                                ; $3632: $CD $3F $37
     ldh  a, [hRoomStatus]                         ; $3635: $F0 $F8
-    and  $02                                      ; $3637: $E6 $02
+    and  ROOM_STATUS_DOOR_OPEN_LEFT               ; $3637: $E6 $02
     jp   nz, LoadObject_OpenDoorLeft              ; $3639: $C2 $FE $36
 
     push bc                                       ; $363C: $C5
@@ -6910,7 +6910,7 @@ LoadObject_KeyDoorRight::
     ld   e, $03                                   ; $364B: $1E $03
     call func_373F                                ; $364D: $CD $3F $37
     ldh  a, [hRoomStatus]                         ; $3650: $F0 $F8
-    and  $01                                      ; $3652: $E6 $01
+    and  ROOM_STATUS_DOOR_OPEN_RIGHT              ; $3652: $E6 $01
     jp   nz, LoadObject_OpenDoorRight             ; $3654: $C2 $12 $37
 
     push bc                                       ; $3657: $C5
@@ -6959,7 +6959,7 @@ data_36B0::
     db   $43, $44                                 ; $36B0
 
 LoadObject_OpenDoorTop::
-    ld   a, ROOM_STATUS_DOOR_OPENED               ; $36B2: $3E $04
+    ld   a, ROOM_STATUS_DOOR_OPEN_UP               ; $36B2: $3E $04
     call UpdateIndoorRoomStatus                               ; $36B4: $CD $C4 $36
     push bc                                       ; $36B7: $C5
     call label_35EE                               ; $36B8: $CD $EE $35
@@ -7050,7 +7050,7 @@ LoadObject_BossDoor::
     call func_373F                                ; $3728: $CD $3F $37
     ; if boss door is not open load door object
     ldh  a, [hRoomStatus]                         ; $372B: $F0 $F8
-    and  ROOM_STATUS_DOOR_OPENED                  ; $372D: $E6 $04
+    and  ROOM_STATUS_DOOR_OPEN_UP                  ; $372D: $E6 $04
     jp   nz, LoadObject_OpenDoorTop               ; $372F: $C2 $B2 $36
     push bc                                       ; $3732: $C5
     call label_35EE                               ; $3733: $CD $EE $35

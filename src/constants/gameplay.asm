@@ -339,6 +339,30 @@ TRADING_ITEM_NECKLACE          equ $0C
 TRADING_ITEM_SCALE             equ $0D
 TRADING_ITEM_MAGNIFIYING_GLASS equ $0E
 
+; Values for hRoomStatus and wOverworldRoomStatus
+;
+; Flags can be combined. For example, visiting the first dungeon's screen (80)
+; and opening it with the key (10) would put that byte at 90.
+ROOM_STATUS_NONE            equ $00
+ROOM_STATUS_DOOR_OPEN_RIGHT equ $01
+ROOM_STATUS_DOOR_OPEN_LEFT  equ $02
+ROOM_STATUS_DOOR_OPEN_UP    equ $04
+ROOM_STATUS_DOOR_OPEN_DOWN  equ $08
+ROOM_STATUS_EVENT_1         equ $10
+ROOM_STATUS_EVENT_2         equ $20
+ROOM_STATUS_EVENT_3         equ $40
+ROOM_STATUS_VISITED         equ $80
+
+; Value for wOverworldRoomStatus (and similar constants)
+;
+; Flags can be combined. For example, visiting the first dungeon's screen (80)
+; and opening it with the key (10) would put that byte at 90.
+OW_ROOM_STATUS_UNVISITED    equ $00
+OW_ROOM_STATUS_OPENED       equ $04 ; door or bombable entrance opened
+OW_ROOM_STATUS_CHANGED      equ $10 ; e.g. sword taken on the beach
+OW_ROOM_STATUS_OWL_TALKED   equ $20
+OW_ROOM_STATUS_VISITED      equ $80
+
 ; Price to pay to play the fishing game
 FISHING_GAME_PRICE        equ 10
 

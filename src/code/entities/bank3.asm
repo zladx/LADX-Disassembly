@@ -2,7 +2,7 @@
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-; Array of wEntitiesUnknowTableH, indexed by entity index
+; Array of wEntitiesOptions1Table, indexed by entity index
 
 IF __PATCH_0__
 ENTITY_4A_VAL = $02
@@ -193,7 +193,7 @@ ConfigureNewEntity::
     ld   hl, Data_003_42F1                        ; $4888: $21 $F1 $42
     add  hl, de                                   ; $488B: $19
     ld   a, [hl]                                  ; $488C: $7E
-    ld   hl, wEntitiesUnknowTableH                ; $488D: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $488D: $21 $30 $C4
     add  hl, bc                                   ; $4890: $09
     ld   [hl], a                                  ; $4891: $77
     jp   ConfigureEntityHitbox                    ; $4892: $C3 $EA $3A
@@ -226,16 +226,14 @@ MasterStalfosDefeated:
     jp   UnloadEntityAndReturn                    ; $48B2: $C3 $8D $3F
 
 EntityInitHandler::
-    ld   hl, wEntitiesUnknowTableH                ; $48B5: $21 $30 $C4
+    ; If the entity is a boss, and the room's boss is defeated, don't load the entity.
+    ld   hl, wEntitiesOptions1Table               ; $48B5: $21 $30 $C4
     add  hl, bc                                   ; $48B8: $09
     ld   a, [hl]                                  ; $48B9: $7E
     and  $80                                      ; $48BA: $E6 $80
-    jr   z, .callEntityInitHandler                           ; $48BC: $28 $5
-
-
-    ; If the room status is $30, don't load the entity.
+    jr   z, .callEntityInitHandler                ; $48BC: $28 $5
     ldh  a, [hRoomStatus]                         ; $48BE: $F0 $F8
-    and  $30                                      ; $48C0: $E6 $30
+    and  ROOM_STATUS_EVENT_2|ROOM_STATUS_EVENT_1  ; $48C0: $E6 $30
 IF __PATCH_0__
     jp   nz, UnloadEntityAndReturn
 ELSE
@@ -285,7 +283,7 @@ ENDC
     and  a                                        ; $48F9: $A7
     jr   nz, .jr_003_490B                         ; $48FA: $20 $0F
 
-    ld   hl, wEntitiesUnknowTableH                ; $48FC: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $48FC: $21 $30 $C4
     add  hl, bc                                   ; $48FF: $09
     ld   a, [hl]                                  ; $4900: $7E
     and  $04                                      ; $4901: $E6 $04
@@ -1041,7 +1039,7 @@ EntityFallHandler::
     call GetEntityTransitionCountdown                 ; $4CDC: $CD $05 $0C
     jr   nz, jr_003_4D07                          ; $4CDF: $20 $26
 
-    ld   hl, wEntitiesUnknowTableH                ; $4CE1: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $4CE1: $21 $30 $C4
     add  hl, bc                                   ; $4CE4: $09
     ld   a, [hl]                                  ; $4CE5: $7E
     and  $02                                      ; $4CE6: $E6 $02
@@ -1433,7 +1431,7 @@ EntityInitPermanentDroppable::
     ld   [hl], $02                                ; $4F22: $36 $02
 
 jr_003_4F24:
-    ld   hl, wEntitiesUnknowTableH                ; $4F24: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $4F24: $21 $30 $C4
     add  hl, bc                                   ; $4F27: $09
     ld   a, [hl]                                  ; $4F28: $7E
     or   %00010001                                ; $4F29: $F6 $11
@@ -1468,7 +1466,7 @@ IF __PATCH_0__
 ENDC
 
     ldh  a, [hRoomStatus]                         ; $4F48: $F0 $F8
-    and  $10                                      ; $4F4A: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $4F4A: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $4F4C: $C2 $8D $3F
 
     ld   a, $04                                   ; $4F4F: $3E $04
@@ -1485,7 +1483,7 @@ jr_003_4F54:
     jp   z, UnloadEntityAndReturn                 ; $4F5D: $CA $8D $3F
 
     ldh  a, [hRoomStatus]                         ; $4F60: $F0 $F8
-    and  $10                                      ; $4F62: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $4F62: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $4F64: $C2 $8D $3F
 
 jr_003_4F67:
@@ -1805,7 +1803,7 @@ ChestGiveNoneInventoryItem:
 MarkRoomCompleted::
     call GetRoomStatusAddressInHL                 ; $512A: $CD $34 $51
     ld   a, [hl]                                  ; $512D: $7E
-    or   $10                                      ; $512E: $F6 $10
+    or   ROOM_STATUS_EVENT_1                      ; $512E: $F6 $10
     ld   [hl], a                                  ; $5130: $77
     ldh  [hRoomStatus], a                         ; $5131: $E0 $F8
     ret                                           ; $5133: $C9
@@ -2244,7 +2242,7 @@ Data_003_54C8::
     db   $08, $F8, $10, $42, $08, $00, $12, $42, $08, $08, $12, $62, $08, $10, $10, $62
 
 EntityDeathHandler::
-    ld   hl, wEntitiesUnknowTableH                ; $5518: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $5518: $21 $30 $C4
     add  hl, bc                                   ; $551B: $09
     ld   a, [hl]                                  ; $551C: $7E
     and  $80                                      ; $551D: $E6 $80
@@ -3142,7 +3140,7 @@ HeartContainerEntityHandler::
     ld   [hl], $FF                                ; $59F7: $36 $FF
     call GetRoomStatusAddressInHL                 ; $59F9: $CD $34 $51
     ld   a, [hl]                                  ; $59FC: $7E
-    or   $20                                      ; @TODO Set this room's status bit
+    or   ROOM_STATUS_EVENT_2                      ; @TODO Set this room's status bit
     ld   [hl], a                                  ; $59FF: $77
     ldh  [hRoomStatus], a                         ; $5A00: $E0 $F8
 
@@ -3213,7 +3211,7 @@ Data_003_5A4D::
 
 HeartPieceEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5A51: $F0 $F8
-    and  $10                                      ; $5A53: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5A53: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $5A55: $C2 $8D $3F
 
     ldh  a, [hActiveEntityState]                  ; $5A58: $F0 $F0
@@ -3412,7 +3410,7 @@ SwordEntityHandler::
     jr   nz, jr_003_5BAC                          ; $5BA0: $20 $0A
 
     ldh  a, [hRoomStatus]                         ; $5BA2: $F0 $F8
-    and  $10                                      ; $5BA4: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5BA4: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $5BA6: $C2 $8D $3F
 
     ld   de, Data_003_5B97                        ; $5BA9: $11 $97 $5B
@@ -3516,7 +3514,7 @@ HookshotSpriteData::
 
 label_003_5C49:
     ldh  a, [hRoomStatus]                         ; $5C49: $F0 $F8
-    and  $10                                      ; $5C4B: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5C4B: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $5C4D: $C2 $8D $3F
 
     ld   de, HookshotSpriteData                   ; $5C50: $11 $47 $5C
@@ -3917,7 +3915,7 @@ jr_003_5EAE:
     ld   a, c                                     ; $5EAE: $79
     ld   [$D201], a                               ; $5EAF: $EA $01 $D2
     ldh  a, [hRoomStatus]                         ; $5EB2: $F0 $F8
-    and  $10                                      ; $5EB4: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5EB4: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $5EB6: $C2 $8D $3F
 
     ldh  a, [hMapId]                              ; $5EB9: $F0 $F7
@@ -4141,7 +4139,7 @@ DroppableSeashellEntityHandler::
     jp   nc, UnloadEntityAndReturn                ; $5FD8: $D2 $8D $3F
 
     ldh  a, [hRoomStatus]                         ; $5FDB: $F0 $F8
-    and  $10                                      ; $5FDD: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5FDD: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $5FDF: $C2 $8D $3F
 
     ldh  a, [hMapRoom]                            ; $5FE2: $F0 $F6
@@ -4149,7 +4147,7 @@ DroppableSeashellEntityHandler::
     jr   nz, jr_003_5FEF                          ; $5FE6: $20 $07
 
     ldh  a, [hRoomStatus]                         ; $5FE8: $F0 $F8
-    and  $40                                      ; $5FEA: $E6 $40
+    and  ROOM_STATUS_EVENT_3                      ; $5FEA: $E6 $40
     jp   z, UnloadEntityAndReturn                 ; $5FEC: $CA $8D $3F
 
 jr_003_5FEF:
@@ -4163,7 +4161,7 @@ Data_003_5FFB::
 
 HidingSlimeKeyEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5FFD: $F0 $F8
-    and  $10                                      ; $5FFF: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $5FFF: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $6001: $C2 $8D $3F
 
     call func_003_61DE                            ; $6004: $CD $DE $61
@@ -4513,9 +4511,9 @@ jr_003_6235:
     jr   nz, jr_003_629C                          ; $6239: $20 $61
 
 jr_003_623B:
-    ld   hl, wEntitiesUnknowTableH                ; $623B: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $623B: $21 $30 $C4
     add  hl, bc                                   ; $623E: $09
-    ld   [hl], $0A                                ; $623F: $36 $0A
+    ld   [hl], ENTITY_OPT1_SPLASH_IN_WATER|ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL                                ; $623F: $36 $0A
     jr   jr_003_626B                              ; $6241: $18 $28
 
 jr_003_6243:
@@ -5492,7 +5490,7 @@ jr_003_6865:
     ld   d, $00                                   ; $686C: $16 $00
     add  hl, de                                   ; $686E: $19
     ld   a, [hl]                                  ; $686F: $7E
-    or   $04                                      ; $6870: $F6 $04
+    or   ROOM_STATUS_DOOR_OPEN_UP                 ; $6870: $F6 $04
     ld   [hl], a                                  ; $6872: $77
     ldh  [hRoomStatus], a                         ; $6873: $E0 $F8
     jp   label_003_51F5                           ; $6875: $C3 $F5 $51
@@ -5659,7 +5657,7 @@ func_003_68F8::
 .jr_003_695D
     add  hl, bc                                   ; $695D: $09
     ld   a, [hl]                                  ; $695E: $7E
-    or   $40                                      ; $695F: $F6 $40
+    or   ROOM_STATUS_EVENT_3                      ; $695F: $F6 $40
     ld   [hl], a                                  ; $6961: $77
     ldh  [hRoomStatus], a                         ; $6962: $E0 $F8
 
@@ -6618,7 +6616,7 @@ jr_003_6E8E:
     cp   ENTITY_KNIGHT                            ; $6EF7: $FE $51
     jr   nz, jr_003_6F20                          ; $6EF9: $20 $25
 
-    ld   hl, wEntitiesUnknowTableH                ; $6EFB: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $6EFB: $21 $30 $C4
     add  hl, bc                                   ; $6EFE: $09
     and  $40                                      ; $6EFF: $E6 $40
     jp   z, func_003_6F93                         ; $6F01: $CA $93 $6F
@@ -6942,7 +6940,7 @@ jr_003_70AC:
     jp   label_003_7102                           ; $70B6: $C3 $02 $71
 
 jr_003_70B9:
-    ld   hl, wEntitiesUnknowTableH                ; $70B9: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $70B9: $21 $30 $C4
     add  hl, bc                                   ; $70BC: $09
     ld   a, [hl]                                  ; $70BD: $7E
     and  $40                                      ; $70BE: $E6 $40
@@ -7171,7 +7169,7 @@ label_003_71C0:
     ret                                           ; $7214: $C9
 
 jr_003_7215:
-    ld   hl, wEntitiesUnknowTableH                ; $7215: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7215: $21 $30 $C4
     add  hl, bc                                   ; $7218: $09
     ld   a, [hl]                                  ; $7219: $7E
     ld   hl, hJingle                              ; $721A: $21 $F2 $FF
@@ -7213,7 +7211,7 @@ jr_003_7235:
     add  hl, bc                                   ; $7254: $09
     inc  [hl]                                     ; $7255: $34
     inc  [hl]                                     ; $7256: $34
-    ld   hl, wEntitiesUnknowTableH                ; $7257: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7257: $21 $30 $C4
     add  hl, bc                                   ; $725A: $09
     ld   a, [hl]                                  ; $725B: $7E
     and  $C2                                      ; $725C: $E6 $C2
@@ -7297,7 +7295,7 @@ jr_003_72C2:
     ld   hl, wEntitiesStatusTable                 ; $72C2: $21 $80 $C2
     add  hl, bc                                   ; $72C5: $09
     ld   [hl], $01                                ; $72C6: $36 $01
-    ld   hl, wEntitiesUnknowTableH                ; $72C8: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $72C8: $21 $30 $C4
     add  hl, bc                                   ; $72CB: $09
     ld   a, [hl]                                  ; $72CC: $7E
     bit  7, a                                     ; $72CD: $CB $7F
@@ -7320,7 +7318,7 @@ jr_003_72D8:
     cp   $05                                      ; $72E1: $FE $05
     jr   nz, jr_003_72EE                          ; $72E3: $20 $09
 
-    ld   hl, wEntitiesUnknowTableH                ; $72E5: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $72E5: $21 $30 $C4
     add  hl, de                                   ; $72E8: $19
     ld   a, [hl]                                  ; $72E9: $7E
     and  $80                                      ; $72EA: $E6 $80
@@ -7393,7 +7391,7 @@ jr_003_733E:
     add  hl, bc                                   ; $734B: $09
     xor  a                                        ; $734C: $AF
     ld   [hl], a                                  ; $734D: $77
-    ld   hl, wEntitiesUnknowTableH                ; $734E: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $734E: $21 $30 $C4
     add  hl, bc                                   ; $7351: $09
     ld   a, [hl]                                  ; $7352: $7E
     and  $80                                      ; $7353: $E6 $80
@@ -8364,7 +8362,7 @@ jr_003_78B1:
     ld   hl, wEntitiesUnknowTableJ                ; $78B1: $21 $F0 $C4
     add  hl, bc                                   ; $78B4: $09
     ld   [hl], b                                  ; $78B5: $70
-    ld   hl, wEntitiesUnknowTableH                ; $78B6: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $78B6: $21 $30 $C4
     add  hl, bc                                   ; $78B9: $09
     ld   a, [hl]                                  ; $78BA: $7E
     bit  4, a                                     ; $78BB: $CB $67
@@ -8428,7 +8426,7 @@ jr_003_7907:
     ld   [hl], e                                  ; $790B: $73
 
 jr_003_790C:
-    ld   hl, wEntitiesUnknowTableH                ; $790C: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $790C: $21 $30 $C4
     add  hl, bc                                   ; $790F: $09
     ld   a, [hl]                                  ; $7910: $7E
     and  $08                                      ; $7911: $E6 $08
@@ -8882,7 +8880,7 @@ jr_003_7BA7:
     cp   ENTITY_SPARK_CLOCKWISE                   ; $7BAC: $FE $17
     jp   z, jr_003_7C9A                           ; $7BAE: $CA $9A $7C
 
-    ld   hl, wEntitiesUnknowTableH                ; $7BB1: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7BB1: $21 $30 $C4
     add  hl, bc                                   ; $7BB4: $09
     ld   a, [hl]                                  ; $7BB5: $7E
     and  $80                                      ; $7BB6: $E6 $80
@@ -9051,7 +9049,7 @@ ENDC
     ld   [hl], $01                                ; $7C8F: $36 $01
 hookshotEnd:
 
-    ld   hl, wEntitiesUnknowTableH                ; $7C91: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7C91: $21 $30 $C4
     add  hl, bc                                   ; $7C94: $09
     ld   a, [hl]                                  ; $7C95: $7E
     and  $01                                      ; $7C96: $E6 $01
@@ -9728,7 +9726,7 @@ func_003_7FA9::
     add  hl, bc                                   ; $7FD3: $09
     ld   [hl], a                                  ; $7FD4: $77
     call UpdateEntityPosWithSpeed_03              ; $7FD5: $CD $25 $7F
-    ld   hl, wEntitiesUnknowTableH                ; $7FD8: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $7FD8: $21 $30 $C4
     add  hl, bc                                   ; $7FDB: $09
     ld   a, [hl]                                  ; $7FDC: $7E
     and  $20                                      ; $7FDD: $E6 $20

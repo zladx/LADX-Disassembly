@@ -381,13 +381,13 @@ jr_004_4245:
     ld   hl, wEntitiesHitboxFlagsTable                ; $424E: $21 $50 $C3
     add  hl, bc                                   ; $4251: $09
     ld   [hl], $00                                ; $4252: $36 $00
-    ld   hl, wEntitiesUnknowTableH                ; $4254: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $4254: $21 $30 $C4
     add  hl, bc                                   ; $4257: $09
-    ld   [hl], $00                                ; $4258: $36 $00
+    ld   [hl], ENTITY_OPT1_NONE                   ; $4258: $36 $00
     call label_3B39                               ; $425A: $CD $39 $3B
-    ld   hl, wEntitiesUnknowTableH                ; $425D: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $425D: $21 $30 $C4
     add  hl, bc                                   ; $4260: $09
-    ld   [hl], $D0                                ; $4261: $36 $D0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT                                ; $4261: $36 $D0
     ldh  a, [hMultiPurposeG]                               ; $4263: $F0 $E8
     and  $80                                      ; $4265: $E6 $80
     jr   z, jr_004_4278                           ; $4267: $28 $0F
@@ -829,9 +829,9 @@ func_004_4517::
     ld   hl, wEntitiesHitboxFlagsTable            ; $4517: $21 $50 $C3
     add  hl, bc                                   ; $451A: $09
     ld   [hl], $0C                                ; $451B: $36 $0C
-    ld   hl, wEntitiesUnknowTableH                ; $451D: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $451D: $21 $30 $C4
     add  hl, bc                                   ; $4520: $09
-    ld   [hl], $81                                ; $4521: $36 $81
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_MOVE_PIT_WATER                                ; $4521: $36 $81
     ld   hl, wEntitiesFlashCountdownTable         ; $4523: $21 $20 $C4
     add  hl, bc                                   ; $4526: $09
     ld   a, [hl]                                  ; $4527: $7E

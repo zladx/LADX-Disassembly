@@ -1,6 +1,6 @@
 KanaletCastleGateSwitchEntityHandler::
     ldh  a, [hRoomStatus]                         ; $409F: $F0 $F8
-    and  $20                                      ; $40A1: $E6 $20
+    and  ROOM_STATUS_EVENT_2                      ; $40A1: $E6 $20
     jp   nz, ClearEntityStatus_15                 ; $40A3: $C2 $31 $7C
 
     call func_015_7B0D                            ; $40A6: $CD $0D $7B

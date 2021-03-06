@@ -874,9 +874,9 @@ jr_004_5237:
     ld   hl, wEntitiesHitboxFlagsTable            ; $5266: $21 $50 $C3
     add  hl, de                                   ; $5269: $19
     ld   [hl], $00                                ; $526A: $36 $00
-    ld   hl, wEntitiesUnknowTableH                ; $526C: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $526C: $21 $30 $C4
     add  hl, de                                   ; $526F: $19
-    ld   [hl], $00                                ; $5270: $36 $00
+    ld   [hl], ENTITY_OPT1_NONE                   ; $5270: $36 $00
     pop  bc                                       ; $5272: $C1
 
 jr_004_5273:
@@ -923,9 +923,9 @@ jr_004_5273:
     ld   hl, wEntitiesHitboxFlagsTable            ; $52B6: $21 $50 $C3
     add  hl, de                                   ; $52B9: $19
     ld   [hl], $00                                ; $52BA: $36 $00
-    ld   hl, wEntitiesUnknowTableH                ; $52BC: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $52BC: $21 $30 $C4
     add  hl, de                                   ; $52BF: $19
-    ld   [hl], $00                                ; $52C0: $36 $00
+    ld   [hl], ENTITY_OPT1_NONE                   ; $52C0: $36 $00
     ld   hl, wEntitiesHealthGroup                 ; $52C2: $21 $D0 $C4
     add  hl, de                                   ; $52C5: $19
     ld   [hl], $02                                ; $52C6: $36 $02
@@ -983,9 +983,9 @@ jr_004_52C9:
     ld   hl, wEntitiesHitboxFlagsTable            ; $5317: $21 $50 $C3
     add  hl, de                                   ; $531A: $19
     ld   [hl], $00                                ; $531B: $36 $00
-    ld   hl, wEntitiesUnknowTableH                ; $531D: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $531D: $21 $30 $C4
     add  hl, de                                   ; $5320: $19
-    ld   [hl], $00                                ; $5321: $36 $00
+    ld   [hl], ENTITY_OPT1_NONE                   ; $5321: $36 $00
     ld   hl, wEntitiesHealthGroup                 ; $5323: $21 $D0 $C4
     add  hl, de                                   ; $5326: $19
     ld   [hl], $1B                                ; $5327: $36 $1B
@@ -1868,13 +1868,13 @@ jr_004_5963:
     and  a                                        ; $59F2: $A7
     jr   nz, jr_004_5A04                          ; $59F3: $20 $0F
 
-    ld   hl, wEntitiesUnknowTableH                ; $59F5: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $59F5: $21 $30 $C4
     add  hl, bc                                   ; $59F8: $09
-    ld   [hl], $90                                ; $59F9: $36 $90
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT                                ; $59F9: $36 $90
     call label_3B70                               ; $59FB: $CD $70 $3B
-    ld   hl, wEntitiesUnknowTableH                ; $59FE: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $59FE: $21 $30 $C4
     add  hl, bc                                   ; $5A01: $09
-    ld   [hl], $D0                                ; $5A02: $36 $D0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT                                ; $5A02: $36 $D0
 
 jr_004_5A04:
     ret                                           ; $5A04: $C9
@@ -3857,7 +3857,7 @@ func_004_6689::
     jr   nz, jr_004_66E6                          ; $66A3: $20 $41
 
     ldh  a, [hRoomStatus]                         ; $66A5: $F0 $F8
-    and  $10                                      ; $66A7: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $66A7: $E6 $10
     jr   nz, jr_004_66E6                          ; $66A9: $20 $3B
 
     ld   a, JINGLE_TREASURE_FOUND                 ; $66AB: $3E $01
@@ -3868,7 +3868,7 @@ func_004_6689::
     ld   hl, wIndoorARoomStatus                                ; $66B4: $21 $00 $D9
     add  hl, de                                   ; $66B7: $19
     ld   a, [hl]                                  ; $66B8: $7E
-    or   $10                                      ; $66B9: $F6 $10
+    or   ROOM_STATUS_EVENT_1                      ; $66B9: $F6 $10
     ld   [hl], a                                  ; $66BB: $77
     ldh  [hRoomStatus], a                         ; $66BC: $E0 $F8
     ld   a, [wHeartPiecesCount]                   ; $66BE: $FA $5C $DB
@@ -4385,7 +4385,7 @@ KnightEntityHandler::
     jr   c, jr_004_69C9                           ; $69B2: $38 $15
 
     ldh  a, [hRoomStatus]                         ; $69B4: $F0 $F8
-    and  $10                                      ; $69B6: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $69B6: $E6 $10
     jp   nz, func_004_6D7A                        ; $69B8: $C2 $7A $6D
 
     ld   hl, wEntitiesLoadOrderTable              ; $69BB: $21 $60 $C4
@@ -4410,9 +4410,9 @@ jr_004_69D5:
     call CopyEntityPositionToActivePosition       ; $69D8: $CD $8A $3D
     call func_004_7FA3                            ; $69DB: $CD $A3 $7F
     call func_004_6D80                            ; $69DE: $CD $80 $6D
-    ld   hl, wEntitiesUnknowTableH                ; $69E1: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $69E1: $21 $30 $C4
     add  hl, bc                                   ; $69E4: $09
-    ld   [hl], $00                                ; $69E5: $36 $00
+    ld   [hl], ENTITY_OPT1_NONE                   ; $69E5: $36 $00
     call label_3B39                               ; $69E7: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $69EA: $F0 $F0
     JP_TABLE                                      ; $69EC
@@ -4674,9 +4674,9 @@ jr_004_6B51:
     call GetEntityPrivateCountdown1               ; $6B6B: $CD $00 $0C
     jr   nz, jr_004_6B7C                          ; $6B6E: $20 $0C
 
-    ld   hl, wEntitiesUnknowTableH                ; $6B70: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $6B70: $21 $30 $C4
     add  hl, bc                                   ; $6B73: $09
-    ld   [hl], $40                                ; $6B74: $36 $40
+    ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF        ; $6B74: $36 $40
     call label_3B39                               ; $6B76: $CD $39 $3B
     call func_004_6BE1                            ; $6B79: $CD $E1 $6B
 
@@ -5017,7 +5017,7 @@ func_004_6D80::
     add  hl, bc                                   ; $6DAB: $09
     ld   [hl], a                                  ; $6DAC: $77
     call UpdateEntityPosWithSpeed_04              ; $6DAD: $CD $CA $6D
-    ld   hl, wEntitiesUnknowTableH                ; $6DB0: $21 $30 $C4
+    ld   hl, wEntitiesOptions1Table               ; $6DB0: $21 $30 $C4
     add  hl, bc                                   ; $6DB3: $09
     ld   a, [hl]                                  ; $6DB4: $7E
     and  $20                                      ; $6DB5: $E6 $20
@@ -5206,7 +5206,7 @@ TrendyGameOwnerEntityHandler::
     ld   a, [wIsMarinFollowingLink]               ; $6E7C: $FA $73 $DB
     push af                                       ; $6E7F: $F5
     ldh  a, [hRoomStatus]                         ; $6E80: $F0 $F8
-    and  $10                                      ; $6E82: $E6 $10
+    and  ROOM_STATUS_EVENT_1                      ; $6E82: $E6 $10
     jr   z, jr_004_6E8A                           ; $6E84: $28 $04
 
     xor  a                                        ; $6E86: $AF

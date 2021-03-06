@@ -1683,7 +1683,7 @@ InitGotItemSequence::
     cp   LINK_MOTION_PASS_OUT                     ; $1100: $FE $07
     jr   z, .linkMotionJumpTable                  ; $1102: $28 $34
     ld   a, [wHealth]                             ; $1104: $FA $5A $DB
-    ld   hl, wC50A                                ; $1107: $21 $0A $C5
+    ld   hl, wBlockItemUsage                      ; $1107: $21 $0A $C5
     or   [hl]                                     ; $110A: $B6
     ld   hl, wInventoryAppearing                  ; $110B: $21 $4F $C1
     or   [hl]                                     ; $110E: $B6
@@ -1739,7 +1739,7 @@ LinkMotionInteractiveHandler::
 
 ; Check if one of the inventory item should be used
 CheckItemsToUse::
-    ld   a, [wC50A]                               ; $1177: $FA $0A $C5
+    ld   a, [wBlockItemUsage]                     ; $1177: $FA $0A $C5
     ld   hl, wC167                                ; $117A: $21 $67 $C1
     or   [hl]                                     ; $117D: $B6
     ld   hl, wC1A4                                ; $117E: $21 $A4 $C1

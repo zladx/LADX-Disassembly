@@ -142,7 +142,7 @@ FileSaveInteractive::
     and  a                                        ; $40CB: $A7
     jr   z, .done                                 ; $40CC: $28 $07
     xor  a                                        ; $40CE: $AF
-    ld   [wC50A], a                               ; $40CF: $EA $0A $C5
+    ld   [wBlockItemUsage], a                     ; $40CF: $EA $0A $C5
     ld   [wC116], a                               ; $40D2: $EA $16 $C1
 .done
     ret                                           ; $40D5: $C9

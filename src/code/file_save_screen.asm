@@ -84,9 +84,9 @@ FileSaveMapFadeOut::
     xor  a                                        ; $405D: $AF
     ld   [wScrollXOffset], a                               ; $405E: $EA $BF $C1
     ld   [wInventoryAppearing], a                 ; $4061: $EA $4F $C1
-    ld   [wC1B8], a                               ; $4064: $EA $B8 $C1
-    ld   [wC1B9], a                               ; $4067: $EA $B9 $C1
-    ld   [wC1B5], a                               ; $406A: $EA $B5 $C1
+    ld   [wOcarinaMenuOpening], a                 ; $4064: $EA $B8 $C1
+    ld   [wOcarinaMenuClosing], a                 ; $4067: $EA $B9 $C1
+    ld   [wOcarinaMenuOpen], a                    ; $406A: $EA $B5 $C1
 
     ld   a, TILESET_0F                            ; $406D: $3E $0F
     ld   [wTilesetToLoad], a                      ; $406F: $EA $FE $D6

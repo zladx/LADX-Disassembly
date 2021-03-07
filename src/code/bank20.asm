@@ -3334,14 +3334,14 @@ Data_020_5F03::
     db   $00, $FE, $02
 
 func_020_5F06::
-    ld   a, [wDBA3]                               ; $5F06: $FA $A3 $DB
+    ld   a, [wInventorySelection]                 ; $5F06: $FA $A3 $DB
     ld   [wC1B6], a                               ; $5F09: $EA $B6 $C1
-    ld   a, [wC1B8]                               ; $5F0C: $FA $B8 $C1
-    ld   hl, wC1B9                                ; $5F0F: $21 $B9 $C1
+    ld   a, [wOcarinaMenuOpening]                 ; $5F0C: $FA $B8 $C1
+    ld   hl, wOcarinaMenuClosing                  ; $5F0F: $21 $B9 $C1
     or   [hl]                                     ; $5F12: $B6
     jr   nz, jr_020_5F59                          ; $5F13: $20 $44
 
-    ld   a, [wC1B5]                               ; $5F15: $FA $B5 $C1
+    ld   a, [wOcarinaMenuOpen]                    ; $5F15: $FA $B5 $C1
     and  a                                        ; $5F18: $A7
     jr   nz, jr_020_5F38                          ; $5F19: $20 $1D
 
@@ -3351,7 +3351,7 @@ func_020_5F06::
     ld   d, $00                                   ; $5F20: $16 $00
     ld   hl, Data_020_5F00                        ; $5F22: $21 $00 $5F
     add  hl, de                                   ; $5F25: $19
-    ld   a, [wDBA3]                               ; $5F26: $FA $A3 $DB
+    ld   a, [wInventorySelection]                 ; $5F26: $FA $A3 $DB
     add  [hl]                                     ; $5F29: $86
     cp   $0A                                      ; $5F2A: $FE $0A
     jr   c, jr_020_5F35                           ; $5F2C: $38 $07
@@ -3363,7 +3363,7 @@ func_020_5F06::
     ld   a, $09                                   ; $5F33: $3E $09
 
 jr_020_5F35:
-    ld   [wDBA3], a                               ; $5F35: $EA $A3 $DB
+    ld   [wInventorySelection], a                 ; $5F35: $EA $A3 $DB
 
 jr_020_5F38:
     ldh  a, [hJoypadState]                        ; $5F38: $F0 $CC
@@ -3374,7 +3374,7 @@ jr_020_5F38:
     ld   d, $00                                   ; $5F41: $16 $00
     ld   hl, Data_020_5F03                        ; $5F43: $21 $03 $5F
     add  hl, de                                   ; $5F46: $19
-    ld   a, [wDBA3]                               ; $5F47: $FA $A3 $DB
+    ld   a, [wInventorySelection]                 ; $5F47: $FA $A3 $DB
     add  [hl]                                     ; $5F4A: $86
     cp   $0A                                      ; $5F4B: $FE $0A
     jr   c, jr_020_5F56                           ; $5F4D: $38 $07
@@ -3386,14 +3386,14 @@ jr_020_5F38:
     ld   a, $09                                   ; $5F54: $3E $09
 
 jr_020_5F56:
-    ld   [wDBA3], a                               ; $5F56: $EA $A3 $DB
+    ld   [wInventorySelection], a                 ; $5F56: $EA $A3 $DB
 
 jr_020_5F59:
     ldh  a, [hPressedButtonsMask]                 ; $5F59: $F0 $CB
     and  J_UP | J_DOWN | J_LEFT | J_RIGHT         ; $5F5B: $E6 $0F
     jr   z, jr_020_5F69                           ; $5F5D: $28 $0A
 
-    ld   a, [wC1B5]                               ; $5F5F: $FA $B5 $C1
+    ld   a, [wOcarinaMenuOpen]                    ; $5F5F: $FA $B5 $C1
     and  a                                        ; $5F62: $A7
     jr   nz, jr_020_5F69                          ; $5F63: $20 $04
 
@@ -3401,12 +3401,12 @@ jr_020_5F59:
     ld   [wInventoryCursorFrameCounter], a        ; $5F66: $EA $59 $C1
 
 jr_020_5F69:
-    ld   a, [wC1B5]                               ; $5F69: $FA $B5 $C1
+    ld   a, [wOcarinaMenuOpen]                    ; $5F69: $FA $B5 $C1
     and  a                                        ; $5F6C: $A7
     jr   z, jr_020_5F85                           ; $5F6D: $28 $16
 
-    ld   a, [wC1B8]                               ; $5F6F: $FA $B8 $C1
-    ld   hl, wC1B9                                ; $5F72: $21 $B9 $C1
+    ld   a, [wOcarinaMenuOpening]                 ; $5F6F: $FA $B8 $C1
+    ld   hl, wOcarinaMenuClosing                  ; $5F72: $21 $B9 $C1
     or   [hl]                                     ; $5F75: $B6
     jr   nz, jr_020_5F85                          ; $5F76: $20 $0D
 
@@ -3419,7 +3419,7 @@ jr_020_5F69:
     jr   jr_020_5FB2                              ; $5F83: $18 $2D
 
 jr_020_5F85:
-    ld   a, [wDBA3]                               ; $5F85: $FA $A3 $DB
+    ld   a, [wInventorySelection]                 ; $5F85: $FA $A3 $DB
     ld   hl, wC1B6                                ; $5F88: $21 $B6 $C1
     cp   [hl]                                     ; $5F8B: $BE
     jr   z, jr_020_5FC1                           ; $5F8C: $28 $33
@@ -3431,7 +3431,7 @@ jr_020_5F85:
     ld   hl, wInventoryItem1                      ; $5F96: $21 $02 $DB
     add  hl, de                                   ; $5F99: $19
     ld   a, [hl]                                  ; $5F9A: $7E
-    cp   $09                                      ; $5F9B: $FE $09
+    cp   INVENTORY_OCARINA                        ; $5F9B: $FE $09
     jr   nz, jr_020_5FB2                          ; $5F9D: $20 $13
 
     ld   a, [wOcarinaSongFlags]                   ; $5F9F: $FA $49 $DB
@@ -3441,25 +3441,25 @@ jr_020_5F85:
     ld   a, $08                                   ; $5FA5: $3E $08
     ldh  [hNeedsUpdatingBGTiles], a               ; $5FA7: $E0 $90
     ld   a, $10                                   ; $5FA9: $3E $10
-    ld   [wC1B8], a                               ; $5FAB: $EA $B8 $C1
+    ld   [wOcarinaMenuOpening], a                 ; $5FAB: $EA $B8 $C1
     ld   a, $01                                   ; $5FAE: $3E $01
     jr   jr_020_5FBE                              ; $5FB0: $18 $0C
 
 jr_020_5FB2:
-    ld   a, [wC1B5]                               ; $5FB2: $FA $B5 $C1
+    ld   a, [wOcarinaMenuOpen]                    ; $5FB2: $FA $B5 $C1
     and  a                                        ; $5FB5: $A7
     jr   z, jr_020_5FC1                           ; $5FB6: $28 $09
 
     ld   a, $10                                   ; $5FB8: $3E $10
-    ld   [wC1B9], a                               ; $5FBA: $EA $B9 $C1
+    ld   [wOcarinaMenuClosing], a                 ; $5FBA: $EA $B9 $C1
     xor  a                                        ; $5FBD: $AF
 
 jr_020_5FBE:
-    ld   [wC1B5], a                               ; $5FBE: $EA $B5 $C1
+    ld   [wOcarinaMenuOpen], a                    ; $5FBE: $EA $B5 $C1
 
 jr_020_5FC1:
-    ld   hl, wC1B9                                ; $5FC1: $21 $B9 $C1
-    ld   a, [wC1B8]                               ; $5FC4: $FA $B8 $C1
+    ld   hl, wOcarinaMenuClosing                  ; $5FC1: $21 $B9 $C1
+    ld   a, [wOcarinaMenuOpening]                 ; $5FC4: $FA $B8 $C1
     or   [hl]                                     ; $5FC7: $B6
     jp   nz, jr_020_604A                          ; $5FC8: $C2 $4A $60
 
@@ -3470,7 +3470,7 @@ jr_020_5FC1:
     ld   a, [wAButtonSlot]                        ; $5FD1: $FA $01 $DB
     push af                                       ; $5FD4: $F5
     ld   hl, wInventoryItem1                      ; $5FD5: $21 $02 $DB
-    ld   a, [wDBA3]                               ; $5FD8: $FA $A3 $DB
+    ld   a, [wInventorySelection]                 ; $5FD8: $FA $A3 $DB
 
 label_020_5FDB:
     ld   c, a                                     ; $5FDB: $4F
@@ -3483,7 +3483,7 @@ label_020_5FDB:
     ld   c, $01                                   ; $5FE5: $0E $01
     ld   b, $00                                   ; $5FE7: $06 $00
     ld   e, $00                                   ; $5FE9: $1E $00
-    jr   @+$22                                    ; $5FEB: $18 $20
+    jr   jr_020_600D                              ; $5FEB: $18 $20
 
 jr_020_5FED:
     ldh  a, [hJoypadState]                        ; $5FED: $F0 $CC
@@ -3493,7 +3493,7 @@ jr_020_5FED:
     ld   a, [wBButtonSlot]                        ; $5FF3: $FA $00 $DB
     push af                                       ; $5FF6: $F5
     ld   hl, wInventoryItem1                      ; $5FF7: $21 $02 $DB
-    ld   a, [wDBA3]                               ; $5FFA: $FA $A3 $DB
+    ld   a, [wInventorySelection]                 ; $5FFA: $FA $A3 $DB
     ld   c, a                                     ; $5FFD: $4F
     ld   b, $00                                   ; $5FFE: $06 $00
     add  hl, bc                                   ; $6000: $09
@@ -3516,20 +3516,20 @@ jr_020_600D:
     ld   a, $08                                   ; $6017: $3E $08
     ldh  [hNeedsUpdatingBGTiles], a               ; $6019: $E0 $90
     ld   a, $10                                   ; $601B: $3E $10
-    ld   [wC1B8], a                               ; $601D: $EA $B8 $C1
+    ld   [wOcarinaMenuOpening], a                 ; $601D: $EA $B8 $C1
     ld   a, $01                                   ; $6020: $3E $01
-    ld   [wC1B5], a                               ; $6022: $EA $B5 $C1
+    ld   [wOcarinaMenuOpen], a                    ; $6022: $EA $B5 $C1
     jr   jr_020_6036                              ; $6025: $18 $0F
 
 jr_020_6027:
-    ld   a, [wC1B5]                               ; $6027: $FA $B5 $C1
+    ld   a, [wOcarinaMenuOpen]                    ; $6027: $FA $B5 $C1
     and  a                                        ; $602A: $A7
     jr   z, jr_020_6036                           ; $602B: $28 $09
 
     xor  a                                        ; $602D: $AF
-    ld   [wC1B5], a                               ; $602E: $EA $B5 $C1
+    ld   [wOcarinaMenuOpen], a                    ; $602E: $EA $B5 $C1
     ld   a, $10                                   ; $6031: $3E $10
-    ld   [wC1B9], a                               ; $6033: $EA $B9 $C1
+    ld   [wOcarinaMenuClosing], a                 ; $6033: $EA $B9 $C1
 
 jr_020_6036:
     call func_020_5C9C                            ; $6036: $CD $9C $5C
@@ -3537,7 +3537,7 @@ jr_020_6036:
 func_020_6039:
     ld   a, JINGLE_VALIDATE                       ; $6039: $3E $13
     ldh  [hJingle], a                             ; $603B: $E0 $F2
-    ld   a, [wDBA3]                               ; $603D: $FA $A3 $DB
+    ld   a, [wInventorySelection]                 ; $603D: $FA $A3 $DB
     add  $02                                      ; $6040: $C6 $02
     ld   c, a                                     ; $6042: $4F
     ld   b, $00                                   ; $6043: $06 $00
@@ -3571,12 +3571,12 @@ Data_020_610E::
     db   $04, $02, $01
 
 func_020_6111::
-    ld   a, [wC1B9]
+    ld   a, [wOcarinaMenuClosing]
     and  a                                        ; $6114: $A7
     jr   z, jr_020_6131                           ; $6115: $28 $1A
 
     dec  a                                        ; $6117: $3D
-    ld   [wC1B9], a                               ; $6118: $EA $B9 $C1
+    ld   [wOcarinaMenuClosing], a                 ; $6118: $EA $B9 $C1
     jr   nz, jr_020_612E                          ; $611B: $20 $11
 
     ld   hl, hNeedsUpdatingBGTiles                ; $611D: $21 $90 $FF
@@ -3596,12 +3596,12 @@ jr_020_612E:
     jr   jr_020_613B                              ; $612F: $18 $0A
 
 jr_020_6131:
-    ld   a, [wC1B8]                               ; $6131: $FA $B8 $C1
+    ld   a, [wOcarinaMenuOpening]                 ; $6131: $FA $B8 $C1
     and  a                                        ; $6134: $A7
     jr   z, jr_020_6141                           ; $6135: $28 $0A
 
     dec  a                                        ; $6137: $3D
-    ld   [wC1B8], a                               ; $6138: $EA $B8 $C1
+    ld   [wOcarinaMenuOpening], a                 ; $6138: $EA $B8 $C1
 
 jr_020_613B:
     rra                                           ; $613B: $1F
@@ -3610,7 +3610,7 @@ jr_020_613B:
     jr   jr_020_614A                              ; $613F: $18 $09
 
 jr_020_6141:
-    ld   a, [wC1B5]                               ; $6141: $FA $B5 $C1
+    ld   a, [wOcarinaMenuOpen]                    ; $6141: $FA $B5 $C1
     and  a                                        ; $6144: $A7
     jp   z, jr_020_6214                           ; $6145: $CA $14 $62
 
@@ -3867,7 +3867,7 @@ func_020_62A2::
     and  $10                                      ; $62A9: $E6 $10
     jr   nz, jr_020_62DD                          ; $62AB: $20 $30
 
-    ld   a, [wDBA3]                               ; $62AD: $FA $A3 $DB
+    ld   a, [wInventorySelection]                 ; $62AD: $FA $A3 $DB
     ld   e, a                                     ; $62B0: $5F
     ld   d, $00                                   ; $62B1: $16 $00
     ld   hl, Data_020_6298                        ; $62B3: $21 $98 $62
@@ -4038,7 +4038,7 @@ jr_020_63A1:
     add  hl, de                                   ; $63A1: $19
 
 jr_020_63A2:
-    ld   a, [wC1B5]                               ; $63A2: $FA $B5 $C1
+    ld   a, [wOcarinaMenuOpen]                    ; $63A2: $FA $B5 $C1
     and  a                                        ; $63A5: $A7
     jr   z, jr_020_63AB                           ; $63A6: $28 $03
 
@@ -4081,9 +4081,9 @@ InventoryVisibleHandler::
 
     xor  a                                        ; $63E6: $AF
     ld   [wC1BA], a                               ; $63E7: $EA $BA $C1
-    ld   [wC1B5], a                               ; $63EA: $EA $B5 $C1
-    ld   [wC1B8], a                               ; $63ED: $EA $B8 $C1
-    ld   [wC1B9], a                               ; $63F0: $EA $B9 $C1
+    ld   [wOcarinaMenuOpen], a                    ; $63EA: $EA $B5 $C1
+    ld   [wOcarinaMenuOpening], a                 ; $63ED: $EA $B8 $C1
+    ld   [wOcarinaMenuClosing], a                 ; $63F0: $EA $B9 $C1
     jr   jr_020_6436                              ; $63F3: $18 $41
 
 jr_020_63F5:
@@ -4116,10 +4116,10 @@ jr_020_641C:
     jr   jr_020_6445                              ; $641C: $18 $27
 
 jr_020_641E:
-    ld   a, [wC1B5]                               ; $641E: $FA $B5 $C1
-    ld   hl, wC1B8                                ; $6421: $21 $B8 $C1
+    ld   a, [wOcarinaMenuOpen]                    ; $641E: $FA $B5 $C1
+    ld   hl, wOcarinaMenuOpening                  ; $6421: $21 $B8 $C1
     or   [hl]                                     ; $6424: $B6
-    ld   hl, wC1B9                                ; $6425: $21 $B9 $C1
+    ld   hl, wOcarinaMenuClosing                  ; $6425: $21 $B9 $C1
     or   [hl]                                     ; $6428: $B6
     jr   nz, jr_020_6445                          ; $6429: $20 $1A
 

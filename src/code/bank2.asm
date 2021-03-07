@@ -4648,10 +4648,10 @@ ENDC
     jp   z, label_002_61E7                        ; $613A: $CA $E7 $61
 
 jr_002_613D:
-    ld   a, [wC1B5]                               ; $613D: $FA $B5 $C1
-    ld   hl, wC1B8                                ; $6140: $21 $B8 $C1
+    ld   a, [wOcarinaMenuOpen]                    ; $613D: $FA $B5 $C1
+    ld   hl, wOcarinaMenuOpening                  ; $6140: $21 $B8 $C1
     or   [hl]                                     ; $6143: $B6
-    ld   hl, wC1B9                                ; $6144: $21 $B9 $C1
+    ld   hl, wOcarinaMenuClosing                  ; $6144: $21 $B9 $C1
     or   [hl]                                     ; $6147: $B6
     jp   nz, label_002_61E7                       ; $6148: $C2 $E7 $61
 

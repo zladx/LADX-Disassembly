@@ -789,8 +789,8 @@ wC1B3::
 wC1B4::
   ds 1 ; C1B4
 
-; Unlabeled
-wC1B5::
+; If non zero, the ocarina menu is opened inside the inventory subscreen.
+wOcarinaMenuOpen::
   ds 1 ; C1B5
 
 ; Unlabeled
@@ -801,12 +801,12 @@ wC1B6::
 wC1B7::
   ds 1 ; C1B7
 
-; Unlabeled
-wC1B8::
+; Counts down from 16 to 0 when the ocarina menu is opening
+wOcarinaMenuOpening::
   ds 1 ; C1B8
 
-; Unlabeled
-wC1B9::
+; Counts down from 16 to 0 when the ocarina menu is closing
+wOcarinaMenuClosing::
   ds 1 ; C1B9
 
 ; Unlabeled
@@ -2874,8 +2874,8 @@ wMapEntrancePositionY::
 wDB9F::
   ds 4 ; DB9F - DBA2
 
-; Unlabeled
-wDBA3::
+; Selected index in the inventory menu
+wInventorySelection::
   ds 1 ; DBA3
 
 ; not used

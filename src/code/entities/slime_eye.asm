@@ -139,7 +139,7 @@ jr_004_4A41:
     add  hl, bc                                   ; $4A44: $09
     ld   a, [hl]                                  ; $4A45: $7E
     and  $80                                      ; $4A46: $E6 $80
-    ret  z                                        ; $4A48: $C8
+     jr z, jr_004_4a63
 
     ld   [hl], b                                  ; $4A49: $70
     ld   a, $50                                   ; $4A4A: $3E $50
@@ -157,7 +157,11 @@ jr_004_4A41:
     ld   [hl], $14                                ; $4A65: $36 $14
 
 jr_004_4A67:
-    jp   IncrementEntityState                     ; $4A67: $C3 $12 $3B
+    call   IncrementEntityState                     ; $4A67: $C3 $12 $3B
+
+jr_004_4a63:
+    ret                                           ; $4a63: $c9
+
 
 SlimeEyeState2Handler::
     call func_004_4DB5                            ; $4A6A: $CD $B5 $4D

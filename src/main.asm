@@ -27,9 +27,11 @@ section "bank2",romx[$4000],bank[$02]
 include "code/bank2.asm"
 
 section "bank3",romx[$4000],bank[$03]
+REPT $e9
+    DB $FF
+ENDR
 include "data/entities/physics_flags.asm"
 include "data/entities/hitbox_flags.asm"
-include "data/entities/health_groups.asm"
 include "code/entities/bank3.asm"
 
 section "bank4",romx[$4000],bank[$04]
@@ -449,7 +451,6 @@ func_020_4874
 func_020_6D52
 func_036_4F68
 func_020_4954
-func_036_705A
 func_036_70D6:
 func_036_703E
 func_036_4BE8

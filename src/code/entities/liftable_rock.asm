@@ -74,4 +74,5 @@ jr_003_5392:
     jp   UnloadEntityAndReturn                    ; $5392: $C3 $8D $3F
 
 jr_003_5395:
-    jp   label_3935                               ; $5395: $C3 $35 $39
+    call   label_3935                               ; $5395: $C3 $35 $39
+    ret

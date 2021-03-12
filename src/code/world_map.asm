@@ -8,56 +8,14 @@ WorldMapEntryPoint::
 
     ; Ignore inputs until the minimap is displayed
     ld   a, [wGameplaySubtype]
-    cp   $05
-    jr   z, .ignoreInputsEnd
-    xor  a
-    ldh  [hPressedButtonsMask], a
-    ldh  [hJoypadState], a
-    ld   a, [wGameplaySubtype]
-.ignoreInputsEnd
 
     JP_TABLE
-._00 dw WorldMapState0Handler
 ._01 dw WorldMapState1Handler
 ._02 dw WorldMapState2Handler
 ._03 dw WorldMapState3Handler
 ._04 dw WorldMapState4Handler
 ._05 dw WorldMapInteractiveHandler
 ._06 dw FileSaveFadeOut
-
-WorldMapState0Handler::
-    call IncrementGameplaySubtype
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, WorldMapState1Handler
-    ld   hl, $DC10
-    ld   c, $80
-    di
-    ld   a, $03
-    ld   [rSVBK], a
-    ld   a, [$D000]
-    and  a
-    jr   nz, jr_001_5674
-
-jr_001_5660::
-    xor  a
-    ld   [rSVBK], a
-    ld   b, [hl]
-    ld   a, $03
-    ld   [rSVBK], a
-    ld   [hl], b
-    inc  hl
-    dec  c
-    ld   a, c
-    and  a
-    jr   nz, jr_001_5660
-    ld   a, $01
-    ld   [$D000], a
-
-jr_001_5674::
-    xor  a
-    ld   [rSVBK], a
-    ei
 
 WorldMapState1Handler::
     call DrawLinkSprite
@@ -130,8 +88,6 @@ WorldMapState2Handler::
 WorldMapState3Handler::
     ld   a, $0E
     ld   [wTileMapToLoad], a
-    ld   a, $01
-    ld   [$DDD5], a
     call IncrementGameplaySubtype
     ret
 
@@ -146,19 +102,6 @@ WorldMapState4Handler::
     ret
 
 WorldMapInteractiveHandler::
-    ld   a, [ROM_DebugTool3]
-    and  a
-    jr   z, .debugEnd
-    ldh  a, [hJoypadState]
-    bit  7, a
-    jr   z, .debugEnd
-    xor  a
-    ld   [wGameplaySubtype], a
-    inc  a
-    ld   [wGameplayType], a
-    ret
-.debugEnd
-
     ld   a, [$C19F]
     and  a
     jp   nz, label_001_5818
@@ -224,18 +167,6 @@ jr_001_577E::
 
 jr_001_5792::
     call OpenDialog
-    ld   a, [$C173]
-    cp   $A7
-    jr   z, jr_001_57A3
-    ld   a, [$DBB4]
-    cp   $37
-    jr   nz, jr_001_57A8
-
-jr_001_57A3::
-    ld   a, $01
-    ld   [$C112], a
-
-jr_001_57A8::
     ld   a, [$DBB4]
     cp   $70
     ld   a, $01
@@ -293,8 +224,6 @@ jr_001_5804::
     xor  a
     ld   [$C16B], a
     ld   [$C16C], a
-    ld   a, $01
-    ld   [$DDD5], a
     call IncrementGameplaySubtype
 
 label_001_5818::

@@ -12,13 +12,13 @@ IntroHandlerEntryPoint::
     ; ButtonsInactiveDelay != 0
     dec  a
     ldh  [hButtonsInactiveDelay], a
-    jp   RenderIntroFrame
+    jr   RenderIntroFrame
 
 .checkJoypad
     ; If not pressing Start, render the next intro frame
     ldh  a, [hJoypadState]
     and  J_START
-    jp   z, RenderIntroFrame
+    jr   z, RenderIntroFrame
 
     ;
     ; Start button pressed
@@ -36,25 +36,7 @@ IntroHandlerEntryPoint::
     ldh  [hButtonsInactiveDelay], a
     ld   a, $11
     ld   [wBGMapToLoad], a
-    ldh  a, [hIsGBC]
-    and  a
-    jr   nz, .isGBC
-    ; Not GBC
-    ld   a, [Data_001_789B]
-    ld   [wOBJ0Palette], a
-    ld   a, [Data_001_789F]
-    ld   [wOBJ1Palette], a
-    ld   a, $04
-    jr   .paletteEnd
-.isGBC
-    ld   a, $01
-    call ClearFileMenuBG_trampoline
-    xor  a
-    ld   [$DDD5], a
-    ld   a, $08
-.paletteEnd
 
-    ld   [$D013], a
     ld   a, $0D
     ld   [wGameplaySubtype], a
     xor  a
@@ -100,8 +82,6 @@ IntroHandlerEntryPoint::
 
 RenderIntroFrame::
     ld   a, [wGameplaySubtype]
-    cp   GAMEPLAY_INTRO_SEA
-    jr   c, .dispatchScene
     cp   GAMEPLAY_INTRO_LIGHTNING
     jr   nc, .dispatchScene
 
@@ -122,7 +102,6 @@ RenderIntroFrame::
     add  hl, de
     ld   a, [hl]
     ld   [wBGPalette], a
-    call func_020_6BA4_trampoline ; Load BG palette
 
 .dispatchScene
     ld   a, [wGameplaySubtype]
@@ -145,8 +124,6 @@ RenderIntroFrame::
 IntroSceneStage0Handler::
     call ClearLowerAndMiddleWRAM
     call label_27F2
-    ld   a, $01
-    call ClearFileMenuBG_trampoline
     ld   a, $1A
     call SetWorldMusicTrack
     ld   a, $02
@@ -158,33 +135,22 @@ IntroSceneStage0Handler::
     ld   a, [$FF40]
     and  $DF
     ld   [wLCDControl], a
-    ld   [rLCDC], a
-    ld   a, $B4
-    ld   [$D016], a
-    xor  a
-    ld   [$D017], a
+    ldh   [rLCDC], a
     jp   IncrementGameplaySubtypeAndReturn
 
 IntroSceneStage1Handler::
     ld   a, $10
     ld   [wTileMapToLoad], a
-    xor  a
-    ld   [$DDD5], a
     jp   IncrementGameplaySubtypeAndReturn
 
 IntroSceneStage2Handler::
     call func_001_7D01
 
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .notGBC
-    ld   a, $25
-    jr   .gbc
-.notGBC
     ld   a, $0E
-.gbc
 
-    ld   [wBGMapToLoad], a
+    ld   [wBGMapToLoad], a                          ; $6f1e: $ea $ff $d6
+    ld a, $c6                                     ; $6f21: $3e $c6
+    ld [wBGPalette], a
     ld   a, $1C
     ld   [wOBJ0Palette], a
     ld   a, $E0
@@ -256,7 +222,6 @@ IntroShipOnSeaHandler::
     add  hl, de
     ld   a, [hl]
     ld   [wOBJ0Palette], a
-    call func_020_6A30_trampoline
     ld   a, e
     cp   $08
     jp   nz, .jp_001_7013
@@ -296,8 +261,6 @@ IntroShipOnSeaHandler::
     jr   nz, .transitionEnd
 
     ; Transition to next sequence
-    ld   a, $FF
-    ld   [rBGP], a
     ld   a, GAMEPLAY_INTRO_LINK_FACE
     ld   [wGameplaySubtype], a
     ld   a, $0F
@@ -428,18 +391,9 @@ IntroLinkFaceHandler::
     ; Move back to sea sequence
     ld   a, GAMEPLAY_INTRO_SEA
     ld   [wGameplaySubtype], a
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .notGBC
-    ld   a, $25
-    jr   .continue3
 
-.notGBC
     ld   a, $0E
-
-.continue3
     ld   [wBGMapToLoad], a
-    call LoadTileMapZero_trampoline
     ld   a, $03
     ld   [rIE], a ; Enable interrupts on VBlank and LCDStat
     xor  a
@@ -462,23 +416,9 @@ IntroLinkFaceHandler::
 .return
     ret
 
-LoadTileMapZero_trampoline::
-    ld   hl, wFarcallParams
-    ld   a, BANK(LoadMapData.LoadTileMapZero)
-    ldi  [hl], a
-    ld   a, HIGH(LoadMapData.LoadTileMapZero)
-    ldi  [hl], a
-    ld   a, LOW(LoadMapData.LoadTileMapZero)
-    ldi  [hl], a
-    ld   a, BANK(@)
-    ld   [hl], a
-    jp   Farcall
-
 IntroStage5Handler::
     ld   a, $10
     ld   [wBGMapToLoad], a
-    ld   a, $01
-    ld   [$DDD5], a
     call IncrementGameplaySubtype
     ret
 
@@ -552,7 +492,6 @@ IntroStage6Handler::
     add  hl, de
     ld   a, [hl]
     ld   [wOBJ1Palette], a
-    call func_020_6AC1_trampoline
 
 .return
     ret
@@ -646,12 +585,6 @@ IntroStage8Handler::
     jr   nz, .loop
 
     ld   [hl], $00
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .gbc
-    call func_001_7338
-.gbc
-
     ld   a, [$D002]
     inc  a
     ld   [$D002], a
@@ -662,73 +595,73 @@ IntroStage8Handler::
 .return
     ret
 
-Data_001_72A5::
-    db   $9A, $16, $0F, $00, $00, $00, $00, $00   ; $72A5
-    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $72AD
-    db   $00, $00, $00
+; Data_001_72A5::
+;     db   $9A, $16, $0F, $00, $00, $00, $00, $00   ; $72A5
+;     db   $00, $00, $00, $00, $00, $00, $00, $00   ; $72AD
+;     db   $00, $00, $00
 
-Data_001_72B8::
-    db   $9A, $36, $0F, $00, $00
-    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $72BD
-    db   $00, $00, $00, $00, $00, $00
+; Data_001_72B8::
+;     db   $9A, $36, $0F, $00, $00
+;     db   $00, $00, $00, $00, $00, $00, $00, $00   ; $72BD
+;     db   $00, $00, $00, $00, $00, $00
 
-Data_001_72CB::
-    db   $9A, $56
-    db   $0F, $00, $00, $00, $00, $00, $00, $00   ; $72CD
-    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $72D5
-    db   $00
+; Data_001_72CB::
+;     db   $9A, $56
+;     db   $0F, $00, $00, $00, $00, $00, $00, $00   ; $72CD
+;     db   $00, $00, $00, $00, $00, $00, $00, $00   ; $72D5
+;     db   $00
 
-Data_001_72DE::
-    db   $9A, $76, $0F, $00, $00, $00, $00
-    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $72E5
-    db   $00, $00, $00, $00
+; Data_001_72DE::
+;     db   $9A, $76, $0F, $00, $00, $00, $00
+;     db   $00, $00, $00, $00, $00, $00, $00, $00   ; $72E5
+;     db   $00, $00, $00, $00
 
-Data_001_72F1::
-    db   $9A, $96, $0F, $00
-    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $72F5
-    db   $00, $00, $00, $00, $00, $00, $00
+; Data_001_72F1::
+;     db   $9A, $96, $0F, $00
+;     db   $00, $00, $00, $00, $00, $00, $00, $00   ; $72F5
+;     db   $00, $00, $00, $00, $00, $00, $00
 
-Data_001_7304::
-    db   $9A   ; $72FD
-    db   $B6, $0F, $00, $00, $00, $00, $00, $00   ; $7305
-    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $730D
-    db   $00, $00
+; Data_001_7304::
+;     db   $9A   ; $72FD
+;     db   $B6, $0F, $00, $00, $00, $00, $00, $00   ; $7305
+;     db   $00, $00, $00, $00, $00, $00, $00, $00   ; $730D
+;     db   $00, $00
 
-Data_001_7317::
-    db   $9A, $D6, $0F, $00, $00, $00   ; $7315
-    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $731D
-    db   $00, $00, $00, $00, $00                  ; $7325
+; Data_001_7317::
+;     db   $9A, $D6, $0F, $00, $00, $00   ; $7315
+;     db   $00, $00, $00, $00, $00, $00, $00, $00   ; $731D
+;     db   $00, $00, $00, $00, $00                  ; $7325
 
-Data_001_732A::
-    dw   Data_001_72DE
-    dw   Data_001_72CB
-    dw   Data_001_72F1
-    dw   Data_001_72B8
-    dw   Data_001_7304
-    dw   Data_001_72A5
-    dw   Data_001_7317
+; Data_001_732A::
+;     dw   Data_001_72DE
+;     dw   Data_001_72CB
+;     dw   Data_001_72F1
+;     dw   Data_001_72B8
+;     dw   Data_001_7304
+;     dw   Data_001_72A5
+;     dw   Data_001_7317
 
-func_001_7338::
-    ld   a, [$D002]
-    sla  a
-    ld   e, a
-    ld   d, $00
-    ld   hl, Data_001_732A
-    add  hl, de
-    ld   a, [hli]
-    ld   d, [hl]
-    ld   e, a
-    ld   hl, $DC91
-    ld   c, $13
+; func_001_7338::
+;     ld   a, [$D002]
+;     sla  a
+;     ld   e, a
+;     ld   d, $00
+;     ld   hl, Data_001_732A
+;     add  hl, de
+;     ld   a, [hli]
+;     ld   d, [hl]
+;     ld   e, a
+;     ld   hl, $DC91
+;     ld   c, $13
 
-jr_001_734C::
-    ld   a, [de]
-    inc  de
-    ldi  [hl], a
-    dec  c
-    jr   nz, jr_001_734C
-    ld   [hl], $00
-    ret
+; jr_001_734C::
+;     ld   a, [de]
+;     inc  de
+;     ldi  [hl], a
+;     dec  c
+;     jr   nz, jr_001_734C
+;     ld   [hl], $00
+;     ret
 
 TitleScreenSfxHandler::
     ; If $C17E != 10…
@@ -743,14 +676,13 @@ TitleScreenSfxHandler::
     ret
 
 Data_001_7364::
-    db   $9B, $B7, $0D, $65, $66, $67, $68, $69   ; $7364
-    db   $6A, $6B, $6C, $6D, $6E, $6F, $70, $71   ; $736C
-    db   $72, $00                                 ; $7374
+    db   $9B, $B9, $09, $65, $66, $67, $68, $69   ; $7364
+    db   $6A, $6B, $6C, $6D, $6E, $00
 
 IntroStageAHandler::
     ld   de, Data_001_7364
     ld   hl, $D601
-    ld   c, $12
+    ld   c, $0e
 
 .loop
     ld   a, [de]
@@ -759,19 +691,6 @@ IntroStageAHandler::
     dec  c
     jr   nz, .loop
 
-    ldh  a, [hIsGBC]
-    and  a
-    jr   nz, .gbc
-    call func_001_79AE
-    jr   .endIf
-.gbc
-    xor  a
-    call func_001_79C2
-    call func_001_73B1
-.endIf
-
-    ld   a, $3C
-    ld   [$D015], a
     call IncrementGameplaySubtype
     ; fallthrough
 
@@ -784,21 +703,21 @@ ResetIntroTimers::
     ld   [$D003], a
     ret
 
-Data_001_73AC::
-    db   $9B, $B7, $4D, $07, $00
+; Data_001_73AC::
+;     db   $9B, $B7, $4D, $07, $00
 
-func_001_73B1::
-    ld   de, Data_001_73AC
-    ld   hl, $DC91
-    ld   c, $12
+; func_001_73B1::
+;     ld   de, Data_001_73AC
+;     ld   hl, $DC91
+;     ld   c, $12
 
-.loop
-    ld   a, [de]
-    inc  de
-    ldi  [hl], a
-    dec  c
-    jr   nz, .loop
-    ret
+; .loop
+;     ld   a, [de]
+;     inc  de
+;     ldi  [hl], a
+;     dec  c
+;     jr   nz, .loop
+;     ret
 
 Data_001_73C0::
     db $18, $18, $38, $40, $58, $60, $80, $88
@@ -808,7 +727,6 @@ Data_001_73C8::
 
 TitleScreenHandler::
     call RenderIntroEntities
-    call func_001_7920
     ldh  a, [hFrameCounter]
     and  $3F
     jr   nz, .jr_001_7418
@@ -893,8 +811,6 @@ IntroStageDHandler::
     xor  a
     ldh  [hBaseScrollX], a
     ldh  [$FF97], a
-    dec  a
-    ld   [$D018], a
     ret
 
 RenderRain::
@@ -1402,9 +1318,6 @@ Data_001_77BD::
     db   $38, $00, $38, $20
 
 RenderIntroSparkle::
-    xor  a
-    ld   [$C3C1], a
-
 jr_001_77E1::
     call GetEntityTransitionCountdown
     dec  [hl]
@@ -1430,188 +1343,188 @@ jr_001_77ED::
     ld   [wOAMNextAvailableSlot], a
     ret
 
-Data_001_7808::
-    db   $10, $18, $2E, $05, $00, $18, $2C, $05   ; $7808
-    db   $10, $10, $2A, $05, $00, $10, $28, $05   ; $7810
-    db   $10, $08, $26, $05, $00, $08, $24, $05   ; $7818
-    db   $10, $00, $22, $05, $00, $00, $20, $05   ; $7820
+; Data_001_7808::
+;     db   $10, $18, $2E, $05, $00, $18, $2C, $05   ; $7808
+;     db   $10, $10, $2A, $05, $00, $10, $28, $05   ; $7810
+;     db   $10, $08, $26, $05, $00, $08, $24, $05   ; $7818
+;     db   $10, $00, $22, $05, $00, $00, $20, $05   ; $7820
 
-Data_001_7828::
-    db   $00, $28, $52, $16, $00, $20, $50, $16   ; $7828
-    db   $10, $18, $4E, $16, $00, $18, $4C, $16   ; $7830
-    db   $10, $10, $4A, $16, $00, $10, $48, $16   ; $7838
-    db   $10, $08, $46, $16, $00, $08, $44, $16   ; $7840
-    db   $10, $00, $42, $16, $00, $00, $40, $16   ; $7848
+; Data_001_7828::
+;     db   $00, $28, $52, $16, $00, $20, $50, $16   ; $7828
+;     db   $10, $18, $4E, $16, $00, $18, $4C, $16   ; $7830
+;     db   $10, $10, $4A, $16, $00, $10, $48, $16   ; $7838
+;     db   $10, $08, $46, $16, $00, $08, $44, $16   ; $7840
+;     db   $10, $00, $42, $16, $00, $00, $40, $16   ; $7848
 
-Data_001_7850::
-    db   $10, $18, $2E, $05, $00, $18, $2C, $05   ; $7850
-    db   $10, $10, $2A, $05, $00, $10, $28, $05   ; $7858
-    db   $10, $08, $26, $05, $00, $08, $24, $05   ; $7860
-    db   $10, $00, $22, $05, $00, $00, $20, $05   ; $7868
+; Data_001_7850::
+;     db   $10, $18, $2E, $05, $00, $18, $2C, $05   ; $7850
+;     db   $10, $10, $2A, $05, $00, $10, $28, $05   ; $7858
+;     db   $10, $08, $26, $05, $00, $08, $24, $05   ; $7860
+;     db   $10, $00, $22, $05, $00, $00, $20, $05   ; $7868
 
-Data_001_7870::
-    db   $00, $28, $52, $16, $00, $20, $50, $16   ; $7870
-    db   $10, $18, $4E, $16, $00, $18, $4C, $16   ; $7878
-    db   $10, $10, $4A, $16, $00, $10, $48, $16   ; $7880
-    db   $10, $08, $46, $16, $00, $08, $44, $16   ; $7888
-    db   $10, $00, $42, $16, $00, $00, $40, $16   ; $7890
+; Data_001_7870::
+;     db   $00, $28, $52, $16, $00, $20, $50, $16   ; $7870
+;     db   $10, $18, $4E, $16, $00, $18, $4C, $16   ; $7878
+;     db   $10, $10, $4A, $16, $00, $10, $48, $16   ; $7880
+;     db   $10, $08, $46, $16, $00, $08, $44, $16   ; $7888
+;     db   $10, $00, $42, $16, $00, $00, $40, $16   ; $7890
 
-Data_001_7898::
-    db   $54, $58, $68
+; Data_001_7898::
+;     db   $54, $58, $68
 
-Data_001_789B::
-    db   $1C
+; Data_001_789B::
+;     db   $1C
 
-Data_001_789C::
-    db   $00, $04, $18
+; Data_001_789C::
+;     db   $00, $04, $18
 
-Data_001_789F::
-    db   $6C
+; Data_001_789F::
+;     db   $6C
 
-Data_001_78A0::
-    db   $F5, $7A, $8D, $7D, $8D, $7D, $8D, $7D   ; $78A0
-    db   $F5, $7A, $FF, $7F, $FF, $7F, $FF, $7F   ; $78A8
-    db   $F5, $7A, $6C, $6D, $8D, $71, $CF, $75   ; $78B0
-    db   $F5, $7A, $7B, $6F, $BD, $73, $FF, $77   ; $78B8
-    db   $F5, $7A, $2A, $5D, $8E, $65, $12, $6E   ; $78C0
-    db   $F5, $7A, $F7, $5E, $5B, $67, $DF, $6F   ; $78C8
-    db   $F5, $7A, $E8, $48, $8E, $59, $54, $66   ; $78D0
-    db   $F5, $7A, $52, $4A, $19, $5B, $BF, $67   ; $78D8
-    db   $F5, $7A, $C6, $38, $8F, $49, $97, $5A   ; $78E0
-    db   $F5, $7A, $CE, $39, $B7, $4A, $BF, $5B   ; $78E8
-    db   $F5, $7A, $84, $24, $8F, $3D, $D9, $52   ; $78F0
-    db   $F5, $7A, $29, $25, $75, $3E, $9F, $53   ; $78F8
-    db   $F5, $7A, $42, $14, $90, $31, $1C, $4B   ; $7900
-    db   $F5, $7A, $A5, $14, $13, $32, $7F, $4B   ; $7908
-    db   $F5, $7A, $00, $00, $B1, $21, $5F, $3F   ; $7910
-    db   $F5, $7A, $00, $00, $B1, $21, $5F, $3F   ; $7918
+; Data_001_78A0::
+;     db   $F5, $7A, $8D, $7D, $8D, $7D, $8D, $7D   ; $78A0
+;     db   $F5, $7A, $FF, $7F, $FF, $7F, $FF, $7F   ; $78A8
+;     db   $F5, $7A, $6C, $6D, $8D, $71, $CF, $75   ; $78B0
+;     db   $F5, $7A, $7B, $6F, $BD, $73, $FF, $77   ; $78B8
+;     db   $F5, $7A, $2A, $5D, $8E, $65, $12, $6E   ; $78C0
+;     db   $F5, $7A, $F7, $5E, $5B, $67, $DF, $6F   ; $78C8
+;     db   $F5, $7A, $E8, $48, $8E, $59, $54, $66   ; $78D0
+;     db   $F5, $7A, $52, $4A, $19, $5B, $BF, $67   ; $78D8
+;     db   $F5, $7A, $C6, $38, $8F, $49, $97, $5A   ; $78E0
+;     db   $F5, $7A, $CE, $39, $B7, $4A, $BF, $5B   ; $78E8
+;     db   $F5, $7A, $84, $24, $8F, $3D, $D9, $52   ; $78F0
+;     db   $F5, $7A, $29, $25, $75, $3E, $9F, $53   ; $78F8
+;     db   $F5, $7A, $42, $14, $90, $31, $1C, $4B   ; $7900
+;     db   $F5, $7A, $A5, $14, $13, $32, $7F, $4B   ; $7908
+;     db   $F5, $7A, $00, $00, $B1, $21, $5F, $3F   ; $7910
+;     db   $F5, $7A, $00, $00, $B1, $21, $5F, $3F   ; $7918
 
-func_001_7920::
-    ld   hl, $D015
-    ld   a, [hl]
-    and  a
-    jr   z, .jr_001_7929
-    dec  [hl]
-    ret
+; func_001_7920::
+;     ld   hl, $D015
+;     ld   a, [hl]
+;     and  a
+;     jr   z, .jr_001_7929
+;     dec  [hl]
+;     ret
 
-.jr_001_7929
-    ld   a, $78
-    ldh  [hActiveEntityPosX], a
-    ld   hl, $D018
-    ld   a, $59
-    add  a, [hl]
-    ldh  [hActiveEntityVisualPosY], a
-    ldh  a, [hIsGBC]
-    and  a
-    jr   nz, .jr_001_795D
-    ld   a, [$D013]
-    cp   $04
-    jr   z, .jr_001_797D
-    ld   hl, $D014
-    inc  [hl]
-    ld   a, [hl]
-    cp   $0C
-    jp   nz, .jr_001_7997
-    xor  a
-    ld   [hl], a
-    ld   hl, $D013
-    inc  [hl]
-    ld   a, [hl]
-    cp   $04
-    jp   z, .jr_001_7997
-    call func_001_79AE
-    jp   .jr_001_7997
+; .jr_001_7929
+;     ld   a, $78
+;     ldh  [hActiveEntityPosX], a
+;     ld   hl, $D018
+;     ld   a, $59
+;     add  a, [hl]
+;     ldh  [hActiveEntityVisualPosY], a
+;     ldh  a, [hIsGBC]
+;     and  a
+;     jr   nz, .jr_001_795D
+;     ld   a, [$D013]
+;     cp   $04
+;     jr   z, .jr_001_797D
+;     ld   hl, $D014
+;     inc  [hl]
+;     ld   a, [hl]
+;     cp   $0C
+;     jp   nz, .jr_001_7997
+;     xor  a
+;     ld   [hl], a
+;     ld   hl, $D013
+;     inc  [hl]
+;     ld   a, [hl]
+;     cp   $04
+;     jp   z, .jr_001_7997
+;     call func_001_79AE
+;     jp   .jr_001_7997
 
-.jr_001_795D
-    ld   a, [$D013]
-    cp   $08
-    jr   z, .jr_001_797D
-    ld   hl, $D014
-    inc  [hl]
-    ld   a, [hl]
-    cp   $08
-    jr   nz, .jr_001_797D
-    xor  a
-    ld   [hl], a
-    ld   hl, $D013
-    inc  [hl]
-    ld   a, [hl]
-    cp   $08
-    jr   z, .jr_001_797D
-    call func_001_79C2
-    jr   .jr_001_797D
+; .jr_001_795D
+;     ld   a, [$D013]
+;     cp   $08
+;     jr   z, .jr_001_797D
+;     ld   hl, $D014
+;     inc  [hl]
+;     ld   a, [hl]
+;     cp   $08
+;     jr   nz, .jr_001_797D
+;     xor  a
+;     ld   [hl], a
+;     ld   hl, $D013
+;     inc  [hl]
+;     ld   a, [hl]
+;     cp   $08
+;     jr   z, .jr_001_797D
+;     call func_001_79C2
+;     jr   .jr_001_797D
 
-.jr_001_797D
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .jr_001_7997
-    ld   a, [$D013]
-    cp   $08
-    jr   z, .jr_001_7990
-    ld   hl, Data_001_7850
-    ld   c, $12
-    jr   .render
+; .jr_001_797D
+;     ldh  a, [hIsGBC]
+;     and  a
+;     jr   z, .jr_001_7997
+;     ld   a, [$D013]
+;     cp   $08
+;     jr   z, .jr_001_7990
+;     ld   hl, Data_001_7850
+;     ld   c, $12
+;     jr   .render
 
-.jr_001_7990
-    ld   hl, Data_001_7870
-    ld   c, $0A
-    jr   .render
+; .jr_001_7990
+;     ld   hl, Data_001_7870
+;     ld   c, $0A
+;     jr   .render
 
-.jr_001_7997
-    ld   a, [$D013]
-    cp   $03
-    jr   nc, .jr_001_79A5
-    ld   hl, Data_001_7808
-    ld   c, $12
-    jr   .render
+; .jr_001_7997
+;     ld   a, [$D013]
+;     cp   $03
+;     jr   nc, .jr_001_79A5
+;     ld   hl, Data_001_7808
+;     ld   c, $12
+;     jr   .render
 
-.jr_001_79A5
-    ld   hl, Data_001_7828
-    ld   c, $0A
+; .jr_001_79A5
+;     ld   hl, Data_001_7828
+;     ld   c, $0A
 
-.render
-    call RenderActiveEntitySpritesRect
-    ret
+; .render
+;     call RenderActiveEntitySpritesRect
+;     ret
 
-func_001_79AE::
-    ld   b, $00
-    ld   c, a
-    ld   hl, Data_001_7898
-    add  hl, bc
-    ld   a, [hl]
-    ld   [wOBJ0Palette], a
-    ld   hl, Data_001_789C
-    add  hl, bc
-    ld   a, [hl]
-    ld   [wOBJ1Palette], a
-    ret
+; func_001_79AE::
+;     ld   b, $00
+;     ld   c, a
+;     ld   hl, Data_001_7898
+;     add  hl, bc
+;     ld   a, [hl]
+;     ld   [wOBJ0Palette], a
+;     ld   hl, Data_001_789C
+;     add  hl, bc
+;     ld   a, [hl]
+;     ld   [wOBJ1Palette], a
+;     ret
 
-func_001_79C2::
-    sla  a
-    sla  a
-    sla  a
-    sla  a
-    ld   b, $00
-    ld   c, a
-    ld   hl, Data_001_78A0
-    add  hl, bc
-    ld   bc, $DC78
-    ld   e, $10
+; func_001_79C2::
+;     sla  a
+;     sla  a
+;     sla  a
+;     sla  a
+;     ld   b, $00
+;     ld   c, a
+;     ld   hl, Data_001_78A0
+;     add  hl, bc
+;     ld   bc, $DC78
+;     ld   e, $10
 
-.loop
-    ld   a, [hli]
-    ld   [bc], a
-    inc  bc
-    dec  e
-    jr   nz, .loop
+; .loop
+;     ld   a, [hli]
+;     ld   [bc], a
+;     inc  bc
+;     dec  e
+;     jr   nz, .loop
 
-    ld   a, $14
-    ld   [$DDD3], a
-    ld   a, $08
-    ld   [$DDD4], a
-    ld   a, $82
-    ld   [$DDD1], a
-    ret
+;     ld   a, $14
+;     ld   [$DDD3], a
+;     ld   a, $08
+;     ld   [$DDD4], a
+;     ld   a, $82
+;     ld   [$DDD1], a
+;     ret
 
 Data_001_79EC::
     db   $98, $00, $43, $7D, $98, $20, $43, $7D   ; $79EC
@@ -1811,6 +1724,10 @@ Data_001_7AE4::
     db   $7E, $7E, $7E, $7E, $7E, $7E, $7E, $7E
     db   $7E, $7E, $7E, $7E
 
+REPT $104
+    db $7C
+ENDR
+
 func_7C60::
     ld   a, [$D00A]
     and  a
@@ -1861,12 +1778,6 @@ func_7C60::
     jr   nz, .loop
 
     ld   [hl], $00
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .jr_7CB6
-    call func_001_7CCB
-
-.jr_7CB6
     ld   hl, $D00A
     inc  [hl]
     ld   a, [$D00B]
@@ -1875,20 +1786,6 @@ func_7C60::
     ld   a, [$D00C]
     sbc  a, $00
     ld   [$D00C], a
-    ret
-
-func_001_7CCB::
-    ld   hl, $DC91
-    ld   a, [$D00C]
-    ldi  [hl], a
-    ld   a, [$D00B]
-    sub  a, $14
-    ldi  [hl], a
-    ld   a, $5F
-    ldi  [hl], a
-    ld   a, $03
-    ldi  [hl], a
-    ld   [hl], $00
     ret
 
 Data_001_7CE1::

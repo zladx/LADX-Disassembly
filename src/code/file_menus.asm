@@ -204,7 +204,6 @@ FileSelectionPrepare6::
     ld   [wOBJ0Palette], a
     ld   a, $E4
     ld   [wOBJ1Palette], a
-    call LoadFileMenuBG_trampoline
     jp   IncrementGameplaySubtypeAndReturn
 
 Data_001_48E4::
@@ -222,7 +221,7 @@ FileSelectionInteractiveHandler::
 
 jr_001_48F4::
     ldh  a, [hJoypadState]
-    and  $0C
+    and  $4C
     jr   z, jr_001_4920
     ld   c, $02
     ld   a, [wSaveFilesCount]
@@ -232,8 +231,11 @@ jr_001_48F4::
 
 jr_001_4903::
     ldh  a, [hJoypadState]
+    bit 6, a                                      ; $4845: $cb $77
+    jr nz, jr_001_484d                            ; $4847: $20 $04
     bit  2, a
     jr   nz, jr_001_4915
+jr_001_484d:
     ld   a, [wSaveSlot]
     add  a, $01
     inc  c
@@ -298,8 +300,9 @@ func_001_4954::
     ldi  [hl], a
     ld   a, $18
     ldi  [hl], a
-    xor  a
+    ld a, $00
     ldi  [hl], a
+    ld a, $00
     ldi  [hl], a
     pop  af
     ldi  [hl], a
@@ -307,7 +310,7 @@ func_001_4954::
     ldi  [hl], a
     ld   a, $02
     ldi  [hl], a
-    xor  a
+    ld a, $00
     ld   [hl], a
     ret
 
@@ -326,7 +329,7 @@ jr_001_497B::
     ldi  [hl], a
     ld   a, $20
     ldi  [hl], a
-    xor  a
+    ld a, $00
     ldi  [hl], a
     ld   a, $20
     ld   [hl], a
@@ -376,8 +379,6 @@ LoadSelectedFile::
     ld   [wBGPalette], a
     ld   [wOBJ0Palette], a
     ld   [wOBJ1Palette], a
-    ld   a, $01
-    call ClearFileMenuBG_trampoline
 
     ld   a, $05
     ld   [wTileMapToLoad], a
@@ -405,22 +406,22 @@ HandleFileSelectionCommand::
 Data_001_49F2::
     dec  b
     and  h
-    or   d
+    db $8a
     and  a
-    ld   e, a
+   db $0f
     xor  e
 
 Data_001_49F8::
     dec  b
     and  c
-    or   d
+    db $8a
     and  h
-    ld   e, a
+   db $0f
     xor  b
 
 ; Part of file copy
 Data_001_49FE::
-    db 0, $A1, $AD, $A4, $5A, $A8
+    db 0, $A1, $85, $A4, $0A, $A8
 
 FileSelectionLoadSavedFile::
     jp   LoadSavedFile
@@ -457,7 +458,7 @@ FileCreationInit2Handler::
     ld   hl, $D601
     ld   a, $98
     ldi  [hl], a
-    ld   a, $49
+    ld   a, $48
     ldi  [hl], a
     xor  a
     ldi  [hl], a
@@ -474,51 +475,6 @@ FileCreationInit2Handler::
 ;   bc   offset
 ;   a    value to write
 WriteByteToExternalRAM::
-    push hl
-    add  hl, bc
-    call EnableExternalRAMWriting
-    ld   [hl], a
-    pop  hl
-    ret
-
-label_4A47::
-    ld   bc, DebugSaveFileData
-    ld   e, DEBUG_SAVE_FILE_SIZE
-    push hl
-
-jr_001_4A4D::
-    call EnableExternalRAMWriting
-    ld   a, [bc]
-    ldi  [hl], a
-    inc  bc
-    dec  e
-    ld   a, e
-    and  a
-    jr   nz, jr_001_4A4D
-    pop  hl
-    ld   bc, $4E
-    ld   a, $01
-    call WriteByteToExternalRAM
-    ld   bc, $44
-    call WriteByteToExternalRAM
-    ld   bc, $43
-    ld   a, $02
-    call WriteByteToExternalRAM
-    ld   bc, $4D
-    ld   a, $59
-    call WriteByteToExternalRAM
-    ld   bc, $77
-    call WriteByteToExternalRAM
-    ld   bc, $78
-    call WriteByteToExternalRAM
-    ld   bc, $45
-    call WriteByteToExternalRAM
-    ld   bc, $76
-    ld   a, $39
-    call WriteByteToExternalRAM
-    ld   bc, $4C
-    call WriteByteToExternalRAM
-    ret
 
 Data_001_4A98::
     db   $00, $05, $0A
@@ -532,9 +488,9 @@ FileCreationInteractiveHandler::
     ld   e, [hl]
     ld   hl, $DB80
     add  hl, de
-    ld   e, l
-    ld   d, h
-    ld   bc, $984A
+    push hl
+    pop de
+    ld   bc, $9849
     call func_4852
 
     ldh  a, [hJoypadState]
@@ -841,8 +797,6 @@ FileDeletionEntryPoint::
     call func_5DC0                                ; $4CFB: $CD $C0 $5D
     ld   a, [wGameplaySubtype]                    ; $4CFE: $FA $96 $DB
     JP_TABLE                                      ; $4D01
-._00 dw FileDeletionState0Handler
-._01 dw FileDeletionState1Handler
 ._02 dw FileDeletionState2Handler
 ._03 dw FileDeletionState3Handler
 ._04 dw FileDeletionState4Handler
@@ -851,49 +805,11 @@ FileDeletionEntryPoint::
 ._07 dw FileDeletionState7Handler
 ._08 dw FileDeletionState8Handler
 ._09 dw FileDeletionState9Handler
-._0A dw FileDeletionState10Handler
-._0B dw FileDeletionState11Handler
 
-FileDeletionState0Handler::
-    ldh  a, [hIsGBC]                              ; $4D1A: $F0 $FE
-    and  a                                        ; $4D1C: $A7
-    jr   z, jr_001_4D53                            ; $4D1D: $28 $34
-
-    ld   a, $01                                   ; $4D1F: $3E $01
-    call ClearFileMenuBG_trampoline               ; $4D21: $CD $FA $08
-    ld   a, $01                                   ; $4D24: $3E $01
-    ld   [wPaletteDataFlags], a                   ; $4D26: $EA $D1 $DD
-    jp   IncrementGameplaySubtypeAndReturn        ; $4D29: $C3 $D6 $44
-
-FileDeletionState1Handler::
-    ldh  a, [hIsGBC]                              ; $4D2C: $F0 $FE
-    and  a                                        ; $4D2E: $A7
-    jr   z, jr_001_4D53                            ; $4D2F: $28 $22
-
-    ld   a, $02                                   ; $4D31: $3E $02
-    ld   [wPaletteDataFlags], a                   ; $4D33: $EA $D1 $DD
-    jp   IncrementGameplaySubtypeAndReturn        ; $4D36: $C3 $D6 $44
-
-FileDeletionState8Handler::
-    ldh  a, [hIsGBC]                              ; $4D39: $F0 $FE
-    and  a                                        ; $4D3B: $A7
-    jr   z, jr_001_4D53                            ; $4D3C: $28 $15
-
-    call LoadFileMenuBG_trampoline                ; $4D3E: $CD $05 $09
-    ld   a, $01                                   ; $4D41: $3E $01
-    ld   [wPaletteDataFlags], a                   ; $4D43: $EA $D1 $DD
-    jp   IncrementGameplaySubtypeAndReturn        ; $4D46: $C3 $D6 $44
-
-FileDeletionState9Handler::
-    ldh  a, [hIsGBC]                              ; $4D49: $F0 $FE
-    and  a                                        ; $4D4B: $A7
-    jr   z, jr_001_4D53                            ; $4D4C: $28 $05
-
-    ld   a, $02                                   ; $4D4E: $3E $02
-    ld   [wPaletteDataFlags], a                   ; $4D50: $EA $D1 $DD
-
-jr_001_4D53::
-    jp   IncrementGameplaySubtypeAndReturn        ; $4D53: $C3 $D6 $44
+FileDeletionState1Handler:
+FileDeletionState9Handler:
+FileDeletionState0Handler:
+FileDeletionState8Handler:
 
 FileDeletionState2Handler::
     ld   a, $08                                   ; $4D56: $3E $08
@@ -946,7 +862,7 @@ func_001_4DA6::
     and  $01                                      ; $4DA9: $E6 $01
     jr   z, jr_001_4DBD                            ; $4DAB: $28 $10
 
-    xor  a                                        ; $4DAD: $AF
+    ld a, $00                                        ; $4DAD: $AF
     ldh  [hScratch4], a                           ; $4DAE: $E0 $DB
     ld   a, [$DC06]                               ; $4DB0: $FA $06 $DC
     ldh  [hScratch2], a                           ; $4DB3: $E0 $D9
@@ -1164,7 +1080,7 @@ jr_001_4F03::
 
 func_001_4F0C::
     ldh  a, [hJoypadState]                        ; $4F0C: $F0 $CC
-    and  $03                                      ; $4F0E: $E6 $03
+    and  $43                                      ; $4F0E: $E6 $03
     jr   z, jr_001_4F1D                            ; $4F10: $28 $0B
 
     call func_001_6BAE                               ; $4F12: $CD $AE $6B
@@ -1265,14 +1181,10 @@ CopyDigitsToFileScreenBG::
 FileCopyEntryPoint::
     ld   a, [wGameplaySubtype]                    ; $4F8C: $FA $96 $DB
     JP_TABLE
-._00 dw FileDeletionState0Handler
-._01 dw FileDeletionState1Handler
 ._02 dw FileCopyState2Handler
 ._03 dw FileCopyState3Handler
 ._04 dw FileCopyState4Handler
 ._05 dw FileCopyState5Handler
-._06 dw FileDeletionState8Handler
-._07 dw FileDeletionState9Handler
 ._08 dw FileCopyState8Handler
 ._09 dw FileCopyState9Handler
 ._0A dw FileCopyStateAHandler
@@ -1319,12 +1231,13 @@ FileCopyState5Handler::
 FileCopyState8Handler::
     call func_001_6BA8                               ; $4FFF: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $5002: $F0 $CC
-    and  $08                                      ; $5004: $E6 $08
+    and  $48                                      ; $5004: $E6 $08
     jr   z, jr_001_500E                            ; $5006: $28 $06
 
     ld   a, [wIntroTimer]                         ; $5008: $FA $01 $D0
     inc  a                                        ; $500B: $3C
-    jr   jr_001_5018                               ; $500C: $18 $0A
+    and $03
+     ld [wIntroTimer], a
 
 jr_001_500E::
     ldh  a, [hJoypadState]                        ; $500E: $F0 $CC
@@ -1333,9 +1246,11 @@ jr_001_500E::
 
     ld   a, [wIntroTimer]                         ; $5014: $FA $01 $D0
     dec  a                                        ; $5017: $3D
+    cp $ff
+    jr nz, jr_001_5018
+    ld a, $03
 
 jr_001_5018::
-    and  $03                                      ; $5018: $E6 $03
     ld   [wIntroTimer], a                         ; $501A: $EA $01 $D0
 
 jr_001_501D::
@@ -1346,35 +1261,6 @@ jr_001_501D::
     ld   a, [wIntroTimer]                         ; $5023: $FA $01 $D0
     cp   $03                                      ; $5026: $FE $03
     jp   z, label_001_4555                            ; $5028: $CA $55 $45
-
-    ld   hl, $DB80                                ; $502B: $21 $80 $DB
-    ld   b, $00                                   ; $502E: $06 $00
-    ld   a, [wIntroTimer]                         ; $5030: $FA $01 $D0
-    and  a                                        ; $5033: $A7
-    jr   z, jr_001_5042                            ; $5034: $28 $0C
-
-    cp   $01                                      ; $5036: $FE $01
-    jr   z, jr_001_503F                            ; $5038: $28 $05
-
-    ld   hl, $DB8A                                ; $503A: $21 $8A $DB
-    jr   jr_001_5042                               ; $503D: $18 $03
-
-jr_001_503F::
-    ld   hl, $DB85                                ; $503F: $21 $85 $DB
-
-jr_001_5042::
-    xor  a                                        ; $5042: $AF
-    add  [hl]                                     ; $5043: $86
-    inc  hl                                       ; $5044: $23
-    add  [hl]                                     ; $5045: $86
-    inc  hl                                       ; $5046: $23
-    add  [hl]                                     ; $5047: $86
-    inc  hl                                       ; $5048: $23
-    add  [hl]                                     ; $5049: $86
-    inc  hl                                       ; $504A: $23
-    add  [hl]                                     ; $504B: $86
-    and  a                                        ; $504C: $A7
-    jr   z, jr_001_5055                            ; $504D: $28 $06
 
     call IncrementGameplaySubtype                 ; $504F: $CD $D6 $44
     call PlayValidationJingleAndReturn            ; $5052: $CD $BE $49
@@ -1397,8 +1283,9 @@ label_001_5067::
     ld   [hl+], a                                 ; $506A: $22
     ld   a, $10                                   ; $506B: $3E $10
     ld   [hl+], a                                 ; $506D: $22
-    xor  a                                        ; $506E: $AF
+     ld a, $00                                      ; $506E: $AF
     ld   [hl+], a                                 ; $506F: $22
+     ld a, $00
     ld   [hl+], a                                 ; $5070: $22
     pop  af                                       ; $5071: $F1
     ld   [hl+], a                                 ; $5072: $22
@@ -1460,7 +1347,7 @@ Data_001_50C7::
 FileCopyState9Handler::
     call func_001_6BA8                               ; $50DF: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $50E2: $F0 $CC
-    and  $08                                      ; $50E4: $E6 $08
+    and  $48                                      ; $50E4: $E6 $08
     jr   z, jr_001_50F1                            ; $50E6: $28 $09
 
     ld   a, [wIntroSubTimer]                      ; $50E8: $FA $02 $D0
@@ -1670,7 +1557,7 @@ FileCopyStateAHandler::
     inc  hl                                       ; $521E: $23
     ld   h, [hl]                                  ; $521F: $66
     ld   l, a                                     ; $5220: $6F
-    ld   de, $3ad                                 ; $5221: $11 $AD $03
+    ld   de, $385                                 ; $5221: $11 $AD $03
 
 jr_001_5224::
     call EnableExternalRAMWriting                 ; $5224: $CD $D0 $27

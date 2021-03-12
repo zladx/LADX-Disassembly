@@ -7,23 +7,10 @@ Data_003_523D::
 Data_003_5241::
     db   $00, $00, $08, $F8
 
-data_003_5245::
-    db   $7E, $07, $7E, $27
-
 PushedBlockEntityHandler::
     ld   a, [wIsIndoor]                           ; $5249: $FA $A5 $DB
     ldh  [hActiveEntitySpriteVariant], a               ; $524C: $E0 $F1
     ld   de, data_003_5235                        ; $524E: $11 $35 $52
-    and  a                                        ; $5251: $A7
-    jr   nz, jr_003_525D                          ; $5252: $20 $09
-
-    ldh  a, [hMapRoom]                            ; $5254: $F0 $F6
-    cp   $77                                      ; $5256: $FE $77
-    jr   nz, jr_003_525D                          ; $5258: $20 $03
-
-    ld   de, data_003_5245                        ; $525A: $11 $45 $52
-
-jr_003_525D:
     call RenderActiveEntitySpritesPair            ; $525D: $CD $C0 $3B
     call func_003_7F78                            ; $5260: $CD $78 $7F
     call func_003_7F25                            ; $5263: $CD $25 $7F
@@ -55,7 +42,7 @@ jr_003_5286:
     inc  a                                        ; $528B: $3C
     ld   [hl], a                                  ; $528C: $77
     cp   $21                                      ; $528D: $FE $21
-    ret  nz                                       ; $528F: $C0
+    jr nz, jr_003_5342                                       ; $528F: $C0
 
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5290: $21 $10 $C4
     add  hl, bc                                   ; $5293: $09
@@ -65,10 +52,10 @@ jr_003_5286:
     add  hl, bc                                   ; $529B: $09
     ld   a, [hl]                                  ; $529C: $7E
     and  a                                        ; $529D: $A7
-    ret  z                                        ; $529E: $C8
+    jr z, jr_003_5342                                       ; $529E: $C8
 
     cp   $02                                      ; $529F: $FE $02
-    ret  z                                        ; $52A1: $C8
+    jr z, jr_003_5342                                       ; $52A1: $C8
 
     call UnloadEntity                             ; $52A2: $CD $8D $3F
     ld   de, Data_003_5162                        ; $52A5: $11 $62 $51
@@ -88,7 +75,7 @@ jr_003_52B5:
     jr   z, jr_003_52D1                           ; $52BF: $28 $10
 
     cp   TRIGGER_PUSH_BLOCKS                      ; $52C1: $FE $07
-    ret  nz                                       ; $52C3: $C0
+    jr nz, jr_003_5342                                    ; $52C3: $C0
 
     call func_003_7893                            ; $52C4: $CD $93 $78
     ld   a, [$C503]                               ; $52C7: $FA $03 $C5
@@ -96,7 +83,9 @@ jr_003_52B5:
     jr   z, jr_003_52D1                           ; $52CC: $28 $03
 
     cp   $A6                                      ; $52CE: $FE $A6
-    ret  nz                                       ; $52D0: $C0
+   jr nz, jr_003_5342                                      ; $52D0: $C0
 
 jr_003_52D1:
-    jp   MarkTriggerAsResolved                       ; $52D1: $C3 $60 $0C
+    call   MarkTriggerAsResolved                       ; $52D1: $C3 $60 $0C
+jr_003_5342:
+    ret

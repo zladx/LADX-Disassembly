@@ -5,7 +5,6 @@
 FaceShrineMuralEntryPoint::
     ld   a, [wGameplaySubtype]
     JP_TABLE
-._0 dw FaceShrineMuralStage0Handler
 ._1 dw FaceShrineMuralStage1Handler
 ._2 dw FaceShrineMuralStage2Handler
 ._3 dw FaceShrineMuralStage3Handler
@@ -13,30 +12,6 @@ FaceShrineMuralEntryPoint::
 ._5 dw FaceShrineMuralStage5Handler
 ._6 dw FileSaveFadeOut
 
-FaceShrineMuralStage0Handler::
-    call IncrementGameplaySubtype
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, FaceShrineMuralStage1Handler
-    ld   hl, $DC10
-    ld   c, $80
-    di
-
-jr_001_6B18::
-    xor  a
-    ld   [rSVBK], a
-    ld   b, [hl]
-    ld   a, $03
-    ld   [rSVBK], a
-    ld   [hl], b
-    inc  hl
-    dec  c
-    ld   a, c
-    and  a
-    jr   nz, jr_001_6B18
-    xor  a
-    ld   [rSVBK], a
-    ei
 
 FaceShrineMuralStage1Handler::
     ld   a, $01
@@ -69,8 +44,6 @@ FaceShrineMuralStage2Handler::
     ldh  [$FF97], a
     ld   [$C16B], a
     ld   [$C16C], a
-    ld   a, $01
-    ld   [$DDD5], a
     jp   IncrementGameplaySubtypeAndReturn
 
 FaceShrineMuralStage3Handler::

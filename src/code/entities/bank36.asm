@@ -7896,58 +7896,6 @@ jr_036_7044:
     ld   [wPaletteDataFlags], a                   ; $704E: $EA $D1 $DD
     ret                                           ; $7051: $C9
 
-Data_036_7052::
-    db   $08, $18, $08, $18
-
-Data_036_7056::
-    db   $10, $10, $20, $20
-
-func_036_705A::
-    push bc                                       ; $705A: $C5
-    ld   c, $03                                   ; $705B: $0E $03
-    ld   b, $00                                   ; $705D: $06 $00
-
-jr_036_705F:
-    ld   a, $05                                   ; $705F: $3E $05
-    call SpawnNewEntity_trampoline                ; $7061: $CD $86 $3B
-    jr   c, jr_036_708E                           ; $7064: $38 $28
-
-    ld   hl, wEntitiesPrivateCountdown1Table      ; $7066: $21 $F0 $C2
-    add  hl, de                                   ; $7069: $19
-    ld   [hl], $0F                                ; $706A: $36 $0F
-    ldh  a, [hSwordIntersectedAreaX]              ; $706C: $F0 $CE
-    ld   hl, Data_036_7052                        ; $706E: $21 $52 $70
-
-jr_036_7071:
-    add  hl, bc                                   ; $7071: $09
-    add  [hl]                                     ; $7072: $86
-    ld   hl, wEntitiesPosXTable                   ; $7073: $21 $00 $C2
-    add  hl, de                                   ; $7076: $19
-    ld   [hl], a                                  ; $7077: $77
-    ldh  a, [hSwordIntersectedAreaY]              ; $7078: $F0 $CD
-
-jr_036_707A:
-    ld   hl, Data_036_7056                        ; $707A: $21 $56 $70
-    add  hl, bc                                   ; $707D: $09
-    add  [hl]                                     ; $707E: $86
-    ld   hl, hScratch3                            ; $707F: $21 $DA $FF
-    sub  [hl]                                     ; $7082: $96
-    ld   hl, wEntitiesPosYTable                   ; $7083: $21 $10 $C2
-    add  hl, de                                   ; $7086: $19
-    ld   [hl], a                                  ; $7087: $77
-    ld   hl, wEntitiesPhysicsFlagsTable           ; $7088: $21 $40 $C3
-    add  hl, de                                   ; $708B: $19
-    ld   [hl], $C4                                ; $708C: $36 $C4
-
-jr_036_708E:
-    dec  c                                        ; $708E: $0D
-    ld   a, c                                     ; $708F: $79
-    cp   $FF                                      ; $7090: $FE $FF
-    jr   nz, jr_036_705F                          ; $7092: $20 $CB
-
-    pop  bc                                       ; $7094: $C1
-    ret                                           ; $7095: $C9
-
 Data_036_7096::
     db   $80, $26, $95, $63, $20, $3A, $75, $6B, $A0, $51, $35, $73, $08, $7D, $18, $7F
     db   $AD, $78, $F9, $7E, $50, $5C, $DA, $76, $12, $40, $BB, $6A, $15, $30, $BC, $66

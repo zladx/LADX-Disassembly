@@ -76,10 +76,13 @@ jr_003_66FA:
 jr_003_6706:
     ldh  a, [hIsSideScrolling]                    ; $6706: $F0 $F9
     and  a                                        ; $6708: $A7
-    ret  nz                                       ; $6709: $C0
+    jr nz, jr_003_673c                                     ; $6709: $C0
 
     ld   a, [hl]                                  ; $670A: $7E
     and  $0C                                      ; $670B: $E6 $0C
-    ret  z                                        ; $670D: $C8
+     jr z, jr_003_673c                                      ; $670D: $C8
 
-    jp   func_003_6B43                            ; $670E: $C3 $43 $6B
+    call   func_003_6B43                            ; $670E: $C3 $43 $6B
+
+jr_003_673c:
+    ret                                           ; $673c: $c9

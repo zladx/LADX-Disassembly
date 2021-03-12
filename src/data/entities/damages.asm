@@ -51,7 +51,3 @@ EntityDamagesForGroup::
 ._2E db $08
 ._2F db $08
 ._30 db $04
-._31 db $04
-._32 db $04
-._33 db $08
-._34 db $08

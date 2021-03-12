@@ -4,10 +4,10 @@
 ;
 
 DebugSaveFileData::
-    db INVENTORY_SHIELD          ; B button
     db INVENTORY_SWORD           ; A button
     db INVENTORY_BOMBS           ; Inventory slots
     db INVENTORY_POWER_BRACELET  ; .
+    db INVENTORY_SHIELD          ; B button
     db INVENTORY_BOW             ; .
     db INVENTORY_HOOKSHOT        ; .
     db INVENTORY_MAGIC_ROD       ; .
@@ -17,10 +17,11 @@ DebugSaveFileData::
     db INVENTORY_SHOVEL          ; .
     db INVENTORY_MAGIC_POWDER    ; .
 
+.flags:
     db 1  ; Have Flippers
     db 1  ; Have Medicine
     db 1  ; Trading item = Yoshi doll
-    db 0  ; 0 Secret Seashells
+    db 1  ; 0 Secret Seashells
     db 0  ; (@TODO "Medicine count: found?")
     db 1  ; Have Tail Key
     db 1  ; Have Angler Key
@@ -28,6 +29,7 @@ DebugSaveFileData::
     db 1  ; Have Bird Key
     db 0  ; 0 Golden Leaves / no Slime Key
 
+.dungeonFlags
     ; Dungeon flags ...
     ;  +-------------- Map
     ;  |  +----------- Compass
@@ -53,9 +55,9 @@ InitSaveFiles::
     ; Initialize the battery-backed memory used for save files
     ld   de, $00
     call func_001_4794
-    ld   de, $3AD
+    ld   de, $385
     call func_001_4794
-    ld   de, $75A
+    ld   de, $70A
     call func_001_4794
 
     ; POI: If DebugTool1 is enabled,
@@ -270,41 +272,7 @@ jr_001_52D9::
     ld   a, e
     or   d
     jr   nz, jr_001_52D9
-    ld   hl, $DDDA
-    ld   de, $05
 
-jr_001_52EA::
-    call EnableExternalRAMWriting
-    ld   a, [bc]
-    inc  bc
-    ldi  [hl], a
-    dec  de
-    ld   a, e
-    or   d
-    jr   nz, jr_001_52EA
-    ld   hl, $DDE0
-    ld   de, $20
-
-jr_001_52FB::
-    call EnableExternalRAMWriting
-    ld   a, [bc]
-    inc  bc
-    ldi  [hl], a
-    dec  de
-    ld   a, e
-    or   d
-    jr   nz, jr_001_52FB
-    call EnableExternalRAMWriting
-    ld   a, [bc]
-    ld   [$DC0F], a
-    inc  bc
-    call EnableExternalRAMWriting
-    ld   a, [bc]
-    ld   [$DC0C], a
-    inc  bc
-    call EnableExternalRAMWriting
-    ld   a, [bc]
-    ld   [$DC0D], a
 
 jr_001_531D::
     ld   a, GAMEPLAY_WORLD
@@ -352,9 +320,6 @@ jr_001_531D::
     xor  a
     ldh  [hIsSideScrolling], a
 
-    ld   a, $03
-    ldh  [hLinkDirection], a
-
     ld   a, [wSpawnIsIndoor]
     and  $01
     ld   [wIsIndoor], a
@@ -385,7 +350,6 @@ jr_001_531D::
     ld   a, $A3
     ld   [wMapEntranceRoom], a
     ldh  [hMapRoom], a
-    ld   [$DB54], a
     ld   a, $01
     ld   [wIsIndoor], a
     ld   a, MAP_HOUSE
@@ -647,6 +611,8 @@ jr_001_55F5::
     ldh  [hScratch3], a
     pop  hl
     call func_001_5619
+    push hl
+    pop hl
     inc  hl
     ld   a, $7F
     ldi  [hl], a
@@ -675,35 +641,6 @@ FileSaveFadeOut::
     ld   a, [$C16B]
     cp   $04
     jr   nz, jr_001_58A7
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, jr_001_5854
-    ld   hl, $DC10
-    ld   c, $80
-    di
-
-jr_001_583A::
-    ld   a, $03
-    ld   [rSVBK], a
-    ld   b, [hl]
-    dec  a
-    ld   [rSVBK], a
-    ld   [hl], b
-    inc  hl
-    dec  c
-    ld   a, c
-    and  a
-    jr   nz, jr_001_583A
-    ld   a, $03
-    ld   [rSVBK], a
-    xor  a
-    ld   [$D000], a
-    ld   [rSVBK], a
-    ei
-
-jr_001_5854::
-    ld   a, $01
-    ld   [$DDD5], a
     xor  a
     ld   [$C50A], a
     ld   [$C116], a
@@ -743,7 +680,7 @@ jr_001_588D::
 func_001_5895::
     ld   a, $80
     ld   [wWindowY], a
-    ld   a, $07
+    ld   a, $06
     ld   [rWX], a
     ld   a, $08
     ld   [$C150], a
@@ -1380,44 +1317,6 @@ jr_001_5E12::
     ld   a, e
     or   d
     jr   nz, jr_001_5E12
-    ld   bc, $DDDA
-    ld   de, $05
-
-jr_001_5E26::
-    call EnableExternalRAMWriting
-    ld   a, [bc]
-    inc  bc
-    call EnableExternalRAMWriting
-    ldi  [hl], a
-    dec  de
-    ld   a, e
-    or   d
-    jr   nz, jr_001_5E26
-    ld   bc, $DDE0
-    ld   de, $20
-
-jr_001_5E3A::
-    call EnableExternalRAMWriting
-    ld   a, [bc]
-    inc  bc
-    call EnableExternalRAMWriting
-    ldi  [hl], a
-    dec  de
-    ld   a, e
-    or   d
-    jr   nz, jr_001_5E3A
-    call EnableExternalRAMWriting
-    ld   a, [$DC0F]
-    call EnableExternalRAMWriting
-    ldi  [hl], a
-    call EnableExternalRAMWriting
-    ld   a, [$DC0C]
-    call EnableExternalRAMWriting
-    ldi  [hl], a
-    call EnableExternalRAMWriting
-    ld   a, [$DC0D]
-    call EnableExternalRAMWriting
-    ldi  [hl], a
     ret
 
 ; Copy the current dungeon item flags to the global and persistent
@@ -1432,14 +1331,6 @@ SynchronizeDungeonsItemFlags::
 
     ; If inside the Color dungeon…
     ldh  a, [hMapId]
-    cp   MAP_COLOR_DUNGEON
-    jr   nz, .notColorDungeon
-
-    ; hl = $DDDA
-    ld   hl, $DDDA
-    jr   .endIf
-
-.notColorDungeon
     ; If the map is not a dungeon, return.
     cp   MAP_CAVE_B
     jr   nc, .return
@@ -1631,28 +1522,17 @@ UpdateRecentRoomsList::
 .return
     ret
 
+section "bank01_5cf0", romx[$5cf0], bank[$01]
+
 HideAllSprites::
     ; $0000 controls whether to enable external RAM writing
     ld   hl, $0000
-
-    ; If CGB…
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .enableExternalRAMWriting
-    ; disable external RAM writing
-    ; (probably because an extra RAM bank available on CGB can be used)
-    ld   [hl], $00
-    jr   .endIf
-
-.enableExternalRAMWriting
-    ; else enable external RAM writing
     ld   [hl], $FF
-.endIf
 
     ; loop counter
     ld   b, $28
     ; value to write
-    ld   a, $F4
+    xor a
     ; address
     ld   hl, wOAMBuffer
 
@@ -2157,7 +2037,6 @@ include "code/marin_beach.asm"
 PeachPictureEntryPoint::
     ld a, [wGameplaySubtype]
     JP_TABLE
-._00 dw PeachPictureState0Handler
 ._01 dw PeachPictureState1Handler
 ._02 dw PeachPictureState2Handler
 ._03 dw PeachPictureState3Handler
@@ -2168,32 +2047,6 @@ PeachPictureEntryPoint::
 ._08 dw PeachPictureState8Handler
 ._09 dw PeachPictureState9Handler
 ._0A dw PeachPictureStateAHandler
-
-PeachPictureState0Handler::
-    call IncrementGameplaySubtype
-
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, PeachPictureState1Handler
-    ld   hl, $DC10
-    ld   c, $80
-    di
-
-jr_001_6816::
-    xor  a
-    ld   [rSVBK], a
-    ld   b, [hl]
-    ld   a, $03
-    ld   [rSVBK], a
-    ld   [hl], b
-    inc  hl
-    dec  c
-    ld   a, c
-    and  a
-    jr   nz, jr_001_6816
-    xor  a
-    ld   [rSVBK], a
-    ei
 
 PeachPictureState1Handler::
     ld   a, $01
@@ -2265,8 +2118,6 @@ jr_001_689E::
     ldi  [hl], a
     dec  e
     jr   nz, jr_001_689E
-    ld   a, $01
-    ld   [$DDD5], a
     jp   IncrementGameplaySubtypeAndReturn
 
 PeachPictureState4Handler::
@@ -2392,9 +2243,6 @@ Data_001_6976::
     db $14, $14, $10, $10, $0c, $0c
 
 Data_001_697C::
-    db $17, $17, $13
-    db $13, $0f, $0f
-
 Data_6982::
     db   $00, $00, $CC, $10
     db   $00, $08, $CE, $10
@@ -2418,29 +2266,6 @@ Data_6982::
     db   $40, $18, $DE, $30
 
 Data_69D2::
-    db   $00, $10, $DC, $16
-    db   $10, $10, $E2, $16
-    db   $20, $10, $E8, $16
-    db   $00, $00, $CC, $15
-    db   $00, $08, $CE, $15
-    db   $00, $10, $CE, $35
-    db   $00, $18, $CC, $35
-    db   $10, $00, $DE, $15
-    db   $10, $08, $E0, $15
-    db   $10, $10, $E0, $35
-    db   $10, $18, $DE, $35
-    db   $20, $00, $E4, $15
-    db   $20, $08, $E6, $15
-    db   $20, $10, $E6, $35
-    db   $20, $18, $E4, $35
-    db   $30, $00, $DE, $15
-    db   $30, $08, $E0, $15
-    db   $30, $10, $E0, $35
-    db   $30, $18, $DE, $35
-    db   $40, $00, $DE, $15
-    db   $40, $08, $E0, $15
-    db   $40, $10, $E0, $35
-    db   $40, $18, $DE, $35
 
 Data_6A2E::
     db   $48, $08, $F0, $07
@@ -2529,31 +2354,23 @@ func_6A7C::
     ld   e, a
     ld   d, $00
     ld   hl, Data_001_6976
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .jr_6AE3
-    ld   hl, Data_001_697C
-
-.jr_6AE3
     add  hl, de
     ld   c, [hl]
     xor  a
     ld   [wOAMNextAvailableSlot], a
     ld   hl, Data_6982
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, .jr_6AF4
-    ld   hl, Data_69D2
-
-.jr_6AF4
     call RenderActiveEntitySpritesRect
     ret
 
 include "code/face_shrine_mural.asm"
 
+REPT $5e9
+    db $0
+ENDR
+
 func_001_6BA8::
     ldh  a, [hJoypadState]
-    and  $0C
+    and  $4C
     jr   z, jr_001_6BB4
 
 func_001_6BAE::
@@ -2564,6 +2381,9 @@ func_001_6BAE::
 
 jr_001_6BB4::
     ret
+
+
+include "code/intro.asm"
 
 func_001_6BB5::
     ldh  a, [hBGTilesLoadingStage]
@@ -2712,8 +2532,8 @@ LoadSirenInstrumentTiles::
     rl   b
     ld   hl, $8D00
     add  hl, bc
-    ld   e, l
-    ld   d, h
+    push hl
+    pop de
     ld   hl, SirenInstrumentsTiles
     add  hl, bc
     call CopySirenInstrumentTiles
@@ -2794,36 +2614,6 @@ jr_001_6D02::
     ld   a, b
     or   c
     jr   nz, jr_001_6CE9
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, jr_001_6D10
-    call func_001_6D11
-
-jr_001_6D10::
-    ret
-
-func_001_6D11::
-    ld   d, $05
-    ld   a, [wGameplayType]
-    cp   GAMEPLAY_WORLD
-    jr   z, jr_001_6D1C
-    ld   d, $06
-
-jr_001_6D1C::
-    ld   a, $01
-    ld   [rVBK], a
-    ld   hl, $9800
-    ld   bc, $400
-
-jr_001_6D26::
-    ld   a, d
-    ldi  [hl], a
-    dec  bc
-    ld   a, b
-    or   c
-    jr   nz, jr_001_6D26
-    ld   a, $00
-    ld   [rVBK], a
     ret
 
 include "src/code/oam_dma.asm"
@@ -2833,22 +2623,14 @@ incbin "src/gfx/intro/rain.2bpp"
 
 ; Background tile where the Dungeon entrance arrow should be displayed
 MinimapEntrancePosition::
-    dw vBGMap1 + $20B + MINIMAP_ARROW_TAIL_CAVE
-    dw vBGMap1 + $20B + MINIMAP_ARROW_BOTTLE_GROTTO
-    dw vBGMap1 + $20B + MINIMAP_ARROW_KEY_CAVERN
-    dw vBGMap1 + $20B + MINIMAP_ARROW_ANGLERS_TUNNEL
-    dw vBGMap1 + $20B + MINIMAP_ARROW_CATFISHS_MAW
-    dw vBGMap1 + $20B + MINIMAP_ARROW_FACE_SHRINE
-    dw vBGMap1 + $20B + MINIMAP_ARROW_EAGLES_TOWER
-    dw vBGMap1 + $20B + MINIMAP_ARROW_TURTLE_ROCK
-    dw $0    ; (unused)
-    dw $0    ; (unused)
-    dw $0    ; (unused)
-    dw $0    ; (unused)
-    dw $0    ; (unused)
-    dw $0    ; (unused)
-    dw $0    ; (unused)
-    dw vBGMap1 + $20B + MINIMAP_ARROW_COLOR_DUNGEON
+    dw vBGMap1 + $20B + $20-1 + MINIMAP_ARROW_TAIL_CAVE
+    dw vBGMap1 + $20B + $20-1 + MINIMAP_ARROW_BOTTLE_GROTTO
+    dw vBGMap1 + $20B + $20-1 + MINIMAP_ARROW_KEY_CAVERN
+    dw vBGMap1 + $20B + $20-1 + MINIMAP_ARROW_ANGLERS_TUNNEL
+    dw vBGMap1 + $20B + $20-1 + MINIMAP_ARROW_CATFISHS_MAW
+    dw vBGMap1 + $20B + $20-1 + MINIMAP_ARROW_FACE_SHRINE
+    dw vBGMap1 + $20B + $20-1 + MINIMAP_ARROW_EAGLES_TOWER
+    dw vBGMap1 + $20B + $20-1 + MINIMAP_ARROW_TURTLE_ROCK
 
 ; Called after tiles are copied to the BG when loading a map all at once
 UpdateMinimapEntranceArrowAndReturn::
@@ -2863,12 +2645,6 @@ UpdateMinimapEntranceArrowAndReturn::
     jr   z, .return
     ; then a = (MapId == MAP_COLOR_DUNGEON ? $0F : MapId)
     ldh  a, [hMapId]
-    cp   MAP_COLOR_DUNGEON
-    jr   nz, .notColorDungeon
-    ld   a, $0F
-    jr   .endIf
-
-.notColorDungeon
     ; If MapId >= 8 (not a dungeon), return
     cp   $08
     jr   nc, .return
@@ -2897,4 +2673,61 @@ UpdateMinimapEntranceArrowAndReturn::
 .return
     ret
 
-include "code/intro.asm"
+REPT $100
+    DB $0
+ENDR
+
+; from bank 20
+func_020_58AD::
+    ld   de, vBGMap0 + $22                        ; $58AD: $11 $22 $98
+    ld   bc, 0                                    ; $58B0: $01 $00 $00
+
+jr_020_58B3:
+    ld   a, [$C5A2]                               ; $58B3: $FA $A2 $C5
+    and  a                                        ; $58B6: $A7
+    jr   nz, jr_020_58CB                          ; $58B7: $20 $12
+
+    ld   a, [wGameplayType]                       ; $58B9: $FA $95 $DB
+    cp   $01                                      ; $58BC: $FE $01
+    jr   z, jr_020_58CB                           ; $58BE: $28 $0B
+
+    ld   hl, wOverworldRoomStatus                 ; $58C0: $21 $00 $D8
+    add  hl, bc                                   ; $58C3: $09
+    ld   a, [hl]                                  ; $58C4: $7E
+    and  $80                                      ; $58C5: $E6 $80
+    ld   a, $2C                                   ; $58C7: $3E $2C
+    jr   z, jr_020_58D3                           ; $58C9: $28 $08
+
+jr_020_58CB:
+    ld hl, $7de8
+    add hl, bc
+    ld a, [hl]
+
+jr_020_58D3:
+    ld   [de], a                                  ; $58EB: $12
+
+jr_020_58EC:
+    inc  c                                        ; $58EC: $0C
+    jr   z, jr_020_5903                           ; $58ED: $28 $14
+
+    inc  e                                        ; $58EF: $1C
+    ld   a, e                                     ; $58F0: $7B
+    and  $1F                                      ; $58F1: $E6 $1F
+    cp   $12                                      ; $58F3: $FE $12
+    jr   nz, jr_020_5901                          ; $58F5: $20 $0A
+
+    ld   a, e                                     ; $58F7: $7B
+    and  $E0                                      ; $58F8: $E6 $E0
+    add  $22                                      ; $58FA: $C6 $22
+    ld   e, a                                     ; $58FC: $5F
+    ld   a, d                                     ; $58FD: $7A
+    adc  $00                                      ; $58FE: $CE $00
+    ld   d, a                                     ; $5900: $57
+
+jr_020_5901:
+    jr   jr_020_58B3                              ; $5901: $18 $B0
+
+jr_020_5903:
+    ret                                           ; $5903: $C9
+
+; endfrom

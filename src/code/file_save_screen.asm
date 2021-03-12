@@ -155,7 +155,7 @@ func_001_412A::
     ld   hl, $C13F
     call func_001_6BA8
     ldh  a, [hJoypadState]
-    and  $0C
+    and  $4C
     jr   z, jr_001_413B
     ld   a, [hl]
     inc  a
@@ -182,9 +182,8 @@ jr_001_413B::
     ld   e, $70
 
 .wait1
-    xor  a
+    ld a, $00
     ld   [rBGP], a
-    nop
     nop
     nop
     nop

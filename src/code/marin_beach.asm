@@ -22,7 +22,6 @@ jr_001_6213::
 jr_001_621D::
     ld   a, [wGameplaySubtype]
     JP_TABLE
-._00 dw MarineBeachPrepare0
 ._01 dw MarineBeachPrepare1
 ._02 dw MarineBeachPrepare2
 ._03 dw MarineBeachPrepare3
@@ -37,32 +36,6 @@ jr_001_621D::
 ._0C dw MarineBeachDialog3
 ._0D dw MarineBeachDialog4
 ._0E dw FileSaveFadeOut
-
-MarineBeachPrepare0::
-    call IncrementGameplaySubtype
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, MarineBeachPrepare1
-
-    ld   hl, $DC10
-    ld   c, $80
-    di
-
-jr_001_624D::
-    xor  a
-    ld   [rSVBK], a
-    ld   b, [hl]
-    ld   a, $03
-    ld   [rSVBK], a
-    ld   [hl], b
-    inc  hl
-    dec  c
-    ld   a, c
-    and  a
-    jr   nz, jr_001_624D
-    xor  a
-    ld   [rSVBK], a
-    ei
 
 MarineBeachPrepare1::
     ld   a, $01
@@ -103,8 +76,6 @@ MarineBeachPrepare3::
     ld   [$C114], a
     ld   a, $A0
     ld   [$D466], a
-    ld   a, $01
-    ld   [$DDD5], a
     ld   a, $E0
     ld   [wTranscientVfxPosYTable], a
     ld   a, $00
@@ -211,20 +182,6 @@ Data_001_63BA::
     db 0, 0, 0, 0, 4, 4, 4, 4, $18, $18, $18, $18, $1C, $1C, $1C, $1C
 
 MarineBeachScroll1::
-    ldh  a, [hIsGBC]
-    and  a
-    jr   z, jr_001_63E4
-    ldh  a, [hFrameCounter]
-    and  $07
-    jr   nz, MarineBeachScroll2
-    call func_1A39
-    ld   a, [$C16B]
-    cp   $04
-    jr   nz, MarineBeachScroll2
-    call IncrementGameplaySubtype
-    jr   MarineBeachScroll2
-
-jr_001_63E4::
     ldh  a, [hFrameCounter]
     and  $07
     jr   nz, jr_001_63F8
@@ -411,19 +368,13 @@ jr_001_6505::
 ;
 
 Data_001_650A::
-    db $40, 1, $40, $21
+    db $40, $00, $40, $20
 
 Data_001_650E::
-    db $46, 1, $48, 1
+    db $46, 0, $48, 0
 
 Data_001_6512::
     db $42, 0, $44, 0
-
-Data_001_6516::
-    db $42, 2, $44, 2
-
-Data_001_651A::
-    db $42, 3, $44, 3
 
 func_001_651E::
     call func_001_65AE
@@ -472,15 +423,7 @@ jr_001_655F::
     ld   a, $48
     ldh  [hActiveEntityPosX], a
     ld   de, Data_001_6512
-    ld   a, [$DC0F]
-    and  a
-    jr   z, jr_001_6584
-    ld   de, Data_001_6516
-    cp   $01
-    jr   z, jr_001_6584
-    ld   de, Data_001_651A
 
-jr_001_6584::
     ld   hl, $C038
     call func_001_658B
     ret

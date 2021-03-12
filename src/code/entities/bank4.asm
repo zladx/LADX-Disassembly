@@ -135,10 +135,13 @@ func_004_4BC7::
     jr   z, jr_004_4BD5                           ; $4BCA: $28 $09
 
     and  $0E                                      ; $4BCC: $E6 $0E
-    ret  nz                                       ; $4BCE: $C0
+    jr nz, jr_004_4bd0                                     ; $4BCE: $C0
 
     call func_004_6DCA                            ; $4BCF: $CD $CA $6D
-    jp   label_3B23                               ; $4BD2: $C3 $23 $3B
+    call   label_3B23                               ; $4BD2: $C3 $23 $3B
+
+jr_004_4bd0:
+    ret                                           ; $4bd0: $c9
 
 jr_004_4BD5:
     ld   [hl], $30                                ; $4BD5: $36 $30
@@ -212,7 +215,7 @@ jr_004_4DBE:
     add  hl, bc                                   ; $4DE1: $09
     ld   a, [hl]                                  ; $4DE2: $7E
     and  a                                        ; $4DE3: $A7
-    ret  z                                        ; $4DE4: $C8
+    jr z, jr_004_4df8                              ; $4DE4: $C8
 
     ldh  a, [hActiveEntityPosY]                   ; $4DE5: $F0 $EF
     sub  $08                                      ; $4DE7: $D6 $08
@@ -222,7 +225,10 @@ jr_004_4DBE:
     call RenderActiveEntitySpritesRect            ; $4DF0: $CD $E6 $3C
     ld   a, $06                                   ; $4DF3: $3E $06
     call label_3DA0                               ; $4DF5: $CD $A0 $3D
-    jp   CopyEntityPositionToActivePosition       ; $4DF8: $C3 $8A $3D
+    call CopyEntityPositionToActivePosition       ; $4df5: $cd $ba $3d
+
+jr_004_4df8:
+    ret                                           ; $4df8: $c9
 
 func_004_4DFB::
     call func_004_4FFE                            ; $4DFB: $CD $FE $4F
@@ -247,10 +253,13 @@ func_004_4E15::
 
 func_004_4E1D::
     call GetEntityTransitionCountdown             ; $4E1D: $CD $05 $0C
-    ret  nz                                       ; $4E20: $C0
+     jr nz, jr_004_4e25                                          ; $4E20: $C0
 
     ld   [hl], $A0                                ; $4E21: $36 $A0
-    jp   IncrementEntityState                     ; $4E23: $C3 $12 $3B
+    call IncrementEntityState                     ; $4e22: $cd $8d $3b
+
+jr_004_4e25:
+    ret                                           ; $4e25: $c9
 
 func_004_4E26::
     call GetEntityTransitionCountdown             ; $4E26: $CD $05 $0C
@@ -473,11 +482,14 @@ func_004_4F65::
     add  hl, bc                                   ; $4F71: $09
     ld   a, [hl]                                  ; $4F72: $7E
     cp   $70                                      ; $4F73: $FE $70
-    ret  c                                        ; $4F75: $D8
+     jr c, jr_004_4f7f                                       ; $4F75: $D8
 
     call GetEntityTransitionCountdown             ; $4F76: $CD $05 $0C
     ld   [hl], $30                                ; $4F79: $36 $30
-    jp   IncrementEntityState                     ; $4F7B: $C3 $12 $3B
+    call IncrementEntityState                     ; $4f7c: $cd $8d $3b
+
+jr_004_4f7f:
+    ret                                           ; $4f7f: $c9
 
 func_004_4F7E::
     ld   a, $FF                                   ; $4F7E: $3E $FF
@@ -668,10 +680,13 @@ jr_004_50DB:
 
 func_004_50E1::
     call GetEntityTransitionCountdown             ; $50E1: $CD $05 $0C
-    ret  nz                                       ; $50E4: $C0
+    jr nz, jr_004_50ec                                            ; $50E4: $C0
 
     ld   [hl], $FF                                ; $50E5: $36 $FF
     jr   jr_004_50DB                              ; $50E7: $18 $F2
+
+jr_004_50ec:
+    ret                                           ; $50ec: $c9
 
 func_004_50E9::
     call GetEntityTransitionCountdown             ; $50E9: $CD $05 $0C
@@ -679,7 +694,7 @@ func_004_50E9::
 
 label_004_50EF:
     and  $07                                      ; $50EF: $E6 $07
-    ret  nz                                       ; $50F1: $C0
+    jr nz, jr_004_5114                            ; $50f5: $20 $1d
 
     call GetRandomByte                            ; $50F2: $CD $0D $28
     and  $1F                                      ; $50F5: $E6 $1F
@@ -695,7 +710,10 @@ label_004_50EF:
     ld   hl, hActiveEntityVisualPosY              ; $5107: $21 $EC $FF
     add  [hl]                                     ; $510A: $86
     ld   [hl], a                                  ; $510B: $77
-    jp   func_004_5A05                            ; $510C: $C3 $05 $5A
+    call   func_004_5A05                            ; $510C: $C3 $05 $5A
+jr_004_5114:
+    ret                                           ; $5114: $c9
+
 
 label_004_510F:
     call func_004_7FA3                            ; $510F: $CD $A3 $7F
@@ -722,10 +740,13 @@ jr_004_5120:
 
 func_004_512F::
     call GetEntityTransitionCountdown             ; $512F: $CD $05 $0C
-    ret  nz                                       ; $5132: $C0
+    jr nz, jr_004_513f
 
     ld   [hl], $FF                                ; $5133: $36 $FF
-    jp   IncrementEntityState                     ; $5135: $C3 $12 $3B
+    call IncrementEntityState                     ; $513c: $cd $8d $3b
+
+jr_004_513f:
+    ret                                           ; $513f: $c9
 
 Data_004_5138::
     db   $03, $03, $03, $03, $03, $02, $01, $00, $01, $00, $01, $01, $01, $01, $01, $01
@@ -752,7 +773,8 @@ func_004_5158::
     ld   [hl], $A0                                ; $5172: $36 $A0
     call GetEntityDropTimer                       ; $5174: $CD $FB $0B
     ld   [hl], $FF                                ; $5177: $36 $FF
-    jp_open_dialog $0B6                           ; $5179
+    call_open_dialog $0B6                           ; $5179
+    ret
 
 Data_004_517E::
     db   $03, $02, $04, $02
@@ -1083,7 +1105,8 @@ func_004_542F::
     ld   hl, Data_004_538F                        ; $543D: $21 $8F $53
     add  hl, de                                   ; $5440: $19
     ld   c, $08                                   ; $5441: $0E $08
-    jp   RenderActiveEntitySpritesRect           ; $5443: $C3 $E6 $3C
+    call   RenderActiveEntitySpritesRect           ; $5443: $C3 $E6 $3C
+    ret
 
 Data_004_5446::
     db   $68, $06, $68, $26, $6A, $06, $6A, $26, $6C, $06, $6C, $26, $6E, $06, $6E, $26
@@ -1174,21 +1197,16 @@ jr_004_54F0:
     ret                                           ; $54F0: $C9
 
 Data_004_54F1::
-    db   $40, $06, $40, $26, $42, $06, $42, $26
+    db   $40, $00, $40, $20, $42, $00, $42, $20
 
 Data_004_54F9::
-    db   $70, $06, $70, $26, $72, $06, $72, $26
+    db   $70, $00, $70, $20, $72, $00, $72, $20
 
 Data_004_5501::
-    db   $40, $07, $40, $27, $42, $07, $42, $27
 
 FacadeState2Handler:
-    ld   de, Data_004_5501                        ; $5509: $11 $01 $55
+    ld   de, Data_004_54F1                        ; $5509: $11 $01 $55
     ldh  a, [hMapId]                              ; $550C: $F0 $F7
-    cp   MAP_EAGLES_TOWER                         ; @TODO ??? Is this right?
-    jr   z, jr_004_551C                           ; $5510: $28 $0A
-
-    ld   de, Data_004_54F1                        ; $5512: $11 $F1 $54
     cp   $01                                      ; $5515: $FE $01
     jr   nz, jr_004_551C                          ; $5517: $20 $03
 
@@ -1248,7 +1266,7 @@ func_004_5569::
     jr   z, jr_004_557E                           ; $556F: $28 $0D
 
     cp   $30                                      ; $5571: $FE $30
-    ret  c                                        ; $5573: $D8
+    jr c, jr_004_5582                                        ; $5573: $D8
 
     and  $03                                      ; $5574: $E6 $03
     jr   nz, jr_004_557D                          ; $5576: $20 $05
@@ -1263,7 +1281,9 @@ jr_004_557D:
 jr_004_557E:
     call IncrementEntityState                     ; $557E: $CD $12 $3B
     ld   a, $18                                   ; $5581: $3E $18
-    jp   ApplyVectorTowardsLink_trampoline        ; $5583: $C3 $AA $3B
+    call   ApplyVectorTowardsLink_trampoline        ; $5583: $C3 $AA $3B
+jr_004_5582:
+    ret
 
 func_004_5586::
     call func_004_6DCA                            ; $5586: $CD $CA $6D
@@ -1273,10 +1293,14 @@ func_004_5586::
     add  hl, bc                                   ; $5592: $09
     ld   a, [hl]                                  ; $5593: $7E
     and  a                                        ; $5594: $A7
-    ret  z                                        ; $5595: $C8
+    jr z, jr_004_5597                                        ; $5595: $C8
 
 label_004_5596:
-    jp   label_3E34                               ; $5596: $C3 $34 $3E
+    call label_3E34                               ; $5594: $cd $64 $3e
+
+jr_004_5597:
+    ret                                           ; $5597: $c9
+
 
 Data_004_559D::
     db   $F0, $16, $F0, $36
@@ -8049,4 +8073,3 @@ jr_004_7FCE:
 
 jr_004_7FCF:
     ret                                           ; $7FCF: $C9
-

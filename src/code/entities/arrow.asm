@@ -30,16 +30,19 @@ ArrowEntityHandler::
     ; If hActiveEntitySpriteVariant == 2…
     ldh  a, [hActiveEntitySpriteVariant]          ; $6A4E: $F0 $F1
     cp   $02                                      ; $6A50: $FE $02
-    ret  nz                                       ; $6A52: $C0
+    jr nz, jr_003_6a80
     ; and the event trigger is TRIGGER_SHOOT_STATUE_EYE…
     ld   a, [wRoomEvent]                          ; $6A53: $FA $8E $C1
     and  EVENT_TRIGGER_MASK                       ; $6A56: $E6 $1F
     cp   TRIGGER_SHOOT_STATUE_EYE                 ; $6A58: $FE $0F
-    ret  nz                                       ; $6A5A: $C0
+    jr nz, jr_003_6a80
     ; and hObjectUnderEntity == OBJECT_ONE_EYED_STATUE…
     ldh  a, [hObjectUnderEntity]                  ; $6A5B: $F0 $AF
     cp   OBJECT_ONE_EYED_STATUE                   ; $6A5D: $FE $C0
-    ret  nz                                       ; $6A5F: $C0
+    jr nz, jr_003_6a80
     ; call MarkTriggerAsResolved, and clear entity
     call MarkTriggerAsResolved                    ; $6A60: $CD $60 $0C
-    jp   UnloadEntityAndReturn                    ; $6A63: $C3 $8D $3F
+    call   UnloadEntityAndReturn                    ; $6A63: $C3 $8D $3F
+
+jr_003_6a80:
+    ret                                           ; $6a80: $c9

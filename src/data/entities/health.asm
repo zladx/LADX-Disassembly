@@ -50,7 +50,3 @@ InitialHealthForGroup::
 ._2E db $08
 ._2F db $06
 ._30 db $02
-._31 db $0A
-._32 db $01
-._33 db $08
-._34 db $08

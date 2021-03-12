@@ -198,7 +198,7 @@ func_001_4339::
     ld   hl, $C13F                                ; $4339: $21 $3F $C1
     call func_001_6BA8                            ; $433C: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $433F: $F0 $CC
-    and  $08                                      ; $4341: $E6 $08
+    and  $48                                      ; $4341: $E6 $08
     jr   z, jr_001_434D                           ; $4343: $28 $08
 
     ld   a, [hl]                                  ; $4345: $7E

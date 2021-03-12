@@ -1,3 +1,11 @@
+
+    ld hl, wEntitiesPosXTable                     ; $4000: $21 $00 $c2
+    add hl, bc                                    ; $4003: $09
+    ld a, [hl]                                    ; $4004: $7e
+    add $08                                       ; $4005: $c6 $08
+    ld [hl], a                                    ; $4007: $77
+    ret                                           ; $4008: $c9
+
 GenieEntityHandler::
     call label_394D                               ; $4000: $CD $4D $39
     call BossIntro                                ; $4003: $CD $E8 $3E
@@ -207,7 +215,8 @@ jr_004_4144:
     ld   hl, Data_004_409F                        ; $414D: $21 $9F $40
     add  hl, de                                   ; $4150: $19
     ld   a, [hl]                                  ; $4151: $7E
-    jp   SetEntitySpriteVariant                   ; $4152: $C3 $0C $3B
+    call   SetEntitySpriteVariant                   ; $4152: $C3 $0C $3B
+    ret
 
 func_004_4155::
     call GetEntityTransitionCountdown             ; $4155: $CD $05 $0C
@@ -227,26 +236,27 @@ jr_004_4163:
     and  a                                        ; $4168: $A7
     jr   nz, jr_004_41A6                          ; $4169: $20 $3B
 
-    call GetEntityTransitionCountdown                 ; $416B: $CD $05 $0C
-    cp   $28                                      ; $416E: $FE $28
-    jr   c, jr_004_418D                           ; $4170: $38 $1B
+;  call ClearEntitySpeed
+;     call GetEntityTransitionCountdown                 ; $416B: $CD $05 $0C
+;     cp   $28                                      ; $416E: $FE $28
+;     jr   nc, jr_004_418D                           ; $4170: $38 $1B
 
-    ld   hl, wEntitiesSpeedXTable                                ; $4172: $21 $40 $C2
-    add  hl, bc                                   ; $4175: $09
-    ld   a, [hl]                                  ; $4176: $7E
-    ld   hl, wEntitiesSpeedYTable                                ; $4177: $21 $50 $C2
-    add  hl, bc                                   ; $417A: $09
-    or   [hl]                                     ; $417B: $B6
-    jr   z, jr_004_418D                           ; $417C: $28 $0F
+;     ld   hl, wEntitiesSpeedXTable                                ; $4172: $21 $40 $C2
+;     add  hl, bc                                   ; $4175: $09
+;     ld   a, [hl]                                  ; $4176: $7E
+;     ld   hl, wEntitiesSpeedYTable                                ; $4177: $21 $50 $C2
+;     add  hl, bc                                   ; $417A: $09
+;     or   [hl]                                     ; $417B: $B6
+;     jr   z, jr_004_418D                           ; $417C: $28 $0F
 
-    ld   hl, wEntitiesUnknowTableR                ; $417E: $21 $90 $C3
-    add  hl, bc                                   ; $4181: $09
-    ld   a, [hl]                                  ; $4182: $7E
-    and  $01                                      ; $4183: $E6 $01
-    jr   nz, jr_004_418D                          ; $4185: $20 $06
+;     ld   hl, wEntitiesUnknowTableR                ; $417E: $21 $90 $C3
+;     add  hl, bc                                   ; $4181: $09
+;     ld   a, [hl]                                  ; $4182: $7E
+;     and  $01                                      ; $4183: $E6 $01
+;     jr   nz, jr_004_418D                          ; $4185: $20 $06
 
-    inc  [hl]                                     ; $4187: $34
-    call_open_dialog $17F                         ; $4188
+;     inc  [hl]                                     ; $4187: $34
+;     call_open_dialog $17F                         ; $4188
 
 jr_004_418D:
     call ClearEntitySpeed                         ; $418D: $CD $7F $3D
@@ -332,7 +342,8 @@ jr_004_41EC:
 
 jr_004_4210:
     xor  a                                        ; $4210: $AF
-    jp   SetEntitySpriteVariant                   ; $4211: $C3 $0C $3B
+    call   SetEntitySpriteVariant                   ; $4211: $C3 $0C $3B
+    ret
 
 func_004_4214::
     ld   hl, wEntitiesFlashCountdownTable         ; $4214: $21 $20 $C4
@@ -429,7 +440,7 @@ func_004_42B3::
     add  hl, bc                                   ; $42D1: $09
     ld   a, [hl]                                  ; $42D2: $7E
     and  a                                        ; $42D3: $A7
-    ret  z                                        ; $42D4: $C8
+    jr z, jr_004_42d1                                           ; $42D4: $C8
 
     ldh  a, [hActiveEntityPosY]                   ; $42D5: $F0 $EF
     add  $0A                                      ; $42D7: $C6 $0A
@@ -438,7 +449,10 @@ func_004_42B3::
     ldh  [hActiveEntitySpriteVariant], a                               ; $42DC: $E0 $F1
     ld   de, Data_004_42B1                        ; $42DE: $11 $B1 $42
     call RenderActiveEntitySprite                 ; $42E1: $CD $77 $3C
-    jp   CopyEntityPositionToActivePosition       ; $42E4: $C3 $8A $3D
+    call CopyEntityPositionToActivePosition       ; $42ce: $cd $ba $3d
+
+jr_004_42d1:
+    ret                                           ; $42d1: $c9
 
 ; Called by TableJump above for Level 2 Boss
 GenieState1Handler::
@@ -463,20 +477,24 @@ label_004_42F0:
 GenieKilledHandler0::
     call GetEntityTransitionCountdown                 ; $4300: $CD $05 $0C
     ld   [hl], $40                                ; $4303: $36 $40
-    jp   IncrementEntityState                     ; $4305: $C3 $12 $3B
+    call IncrementEntityState
+    ret
 
 GenieKilledHandler1::
     call GetEntityTransitionCountdown                 ; $4308: $CD $05 $0C
-    ret  nz                                       ; $430B: $C0
+    jr nz, jr_004_42fe                                         ; $430B: $C0
 
-    ld   [hl], $A0                                ; $430C: $36 $A0
-    jp   IncrementEntityState                     ; $430E: $C3 $12 $3B
+    ld   [hl], $A0
+     call IncrementEntityState
+jr_004_42fe:
+    ret
 
 GenieKilledHandler2::
     call GetEntityTransitionCountdown                 ; $4311: $CD $05 $0C
     jp   z, DropHeartContainer                    ; $4314: $CA $51 $57
 
-    jp   label_004_50EF                           ; $4317: $C3 $EF $50
+    call   label_004_50EF                           ; $4317: $C3 $EF $50
+    ret
 
 jr_004_431A:
     call func_004_7FA3                            ; $431A: $CD $A3 $7F
@@ -506,7 +524,7 @@ jr_004_4336:
 
 func_004_4345::
     call GetEntityTransitionCountdown                 ; $4345: $CD $05 $0C
-    ret  nz                                       ; $4348: $C0
+   jr nz, jr_004_4360                                      ; $4348: $C0
 
     call IncrementEntityState                     ; $4349: $CD $12 $3B
     call GetEntityPrivateCountdown1                                      ; $434C: $CD $00 $0C
@@ -529,7 +547,9 @@ func_004_4345::
     ld   a, $53                                   ; $436B: $3E $53
 
 jr_004_436D:
-    jp   OpenDialog                               ; $436D: $C3 $85 $23
+    call   OpenDialog                               ; $436D: $C3 $85 $23
+jr_004_4360:
+    ret
 
 Data_004_4370::
     db   $10, $14, $18, $20, $28, $30, $38, $40
@@ -726,7 +746,7 @@ jr_004_4487:
     add  hl, bc                                   ; $448A: $09
     ld   a, [hl]                                  ; $448B: $7E
     and  a                                        ; $448C: $A7
-    ret  z                                        ; $448D: $C8
+    jr z, jr_004_448f
 
     ld   hl, wEntitiesUnknowTableY                ; $448E: $21 $D0 $C3
     add  hl, bc                                   ; $4491: $09
@@ -738,7 +758,10 @@ jr_004_4487:
     inc  a                                        ; $4499: $3C
 
 jr_004_449A:
-    jp   SetEntitySpriteVariant                   ; $449A: $C3 $0C $3B
+    call   SetEntitySpriteVariant                   ; $449A: $C3 $0C $3B
+
+jr_004_448f:
+    ret
 
 Data_004_449D::
     db   $F4, $0C
@@ -1094,7 +1117,8 @@ jr_004_4713:
     ldh  [hActiveEntitySpriteVariant], a                               ; $4742: $E0 $F1
     ld   de, Data_004_46F5                        ; $4744: $11 $F5 $46
     call RenderActiveEntitySprite                 ; $4747: $CD $77 $3C
-    jp   CopyEntityPositionToActivePosition       ; $474A: $C3 $8A $3D
+    call   CopyEntityPositionToActivePosition       ; $474A: $C3 $8A $3D
+    ret
 
 Data_004_474D::
     db   $10, $00, $1E, $01, $10, $08, $1E, $61   ; $474D
@@ -1162,7 +1186,8 @@ jr_004_485E:
     ld   hl, Data_004_4836                        ; $4865: $21 $36 $48
     add  hl, de                                   ; $4868: $19
     ld   a, [hl]                                  ; $4869: $7E
-    jp   SetEntitySpriteVariant                   ; $486A: $C3 $0C $3B
+    call   SetEntitySpriteVariant                   ; $486A: $C3 $0C $3B
+    ret
 
 jr_004_486D:
     and  a                                        ; $486D: $A7
@@ -1211,7 +1236,8 @@ jr_004_48A6:
     ld   hl, Data_004_482D                        ; $48B0: $21 $2D $48
     add  hl, de                                   ; $48B3: $19
     ld   a, [hl]                                  ; $48B4: $7E
-    jp   SetEntitySpriteVariant                   ; $48B5: $C3 $0C $3B
+    call   SetEntitySpriteVariant                   ; $48B5: $C3 $0C $3B
+    ret
 
     ldh  a, [hActiveEntitySpriteVariant]                               ; $48B8: $F0 $F1
     rla                                           ; $48BA: $17
@@ -1227,7 +1253,8 @@ jr_004_48A6:
     ld   c, $08                                   ; $48C7: $0E $08
     call RenderActiveEntitySpritesRect            ; $48C9: $CD $E6 $3C
     ld   a, $08                                   ; $48CC: $3E $08
-    jp   label_3DA0                               ; $48CE: $C3 $A0 $3D
+    call   label_3DA0                               ; $48CE: $C3 $A0 $3D
+    ret
 
 Data_004_48D1::
     db   $34, $02, $34, $22, $34, $12, $34, $32   ; $48D1
@@ -1293,7 +1320,8 @@ jr_004_4937:
 
 jr_004_4938:
     call GetEntityTransitionCountdown                 ; $4938: $CD $05 $0C
-    jp   z, func_004_6D7A                         ; $493B: $CA $7A $6D
+    call z, func_004_6D7A                         ; $493B: $CA $7A $6D
+    ret
 
 GenieState4Handler::
     ld   de, Data_004_48D1                        ; $493E: $11 $D1 $48

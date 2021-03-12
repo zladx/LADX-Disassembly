@@ -38,7 +38,7 @@ jr_003_6198:
 
 jr_003_619C:
     call GetEntityTransitionCountdown                 ; $619C: $CD $05 $0C
-    ret  nz                                       ; $619F: $C0
+     jr nz, jr_003_61e4                                    ; $619F: $C0
 
     ld   [hl], $30                                ; $61A0: $36 $30
     call GetRandomByte                            ; $61A2: $CD $0D $28
@@ -53,8 +53,10 @@ jr_003_619C:
     ld   hl, wEntitiesSpeedYTable                       ; $61B5: $21 $50 $C2
     add  hl, bc                                   ; $61B8: $09
     ld   [hl], a                                  ; $61B9: $77
-    ret                                           ; $61BA: $C9
+    jr jr_003_61e4                                         ; $61BA: $C9
 
 jr_003_61BB:
     ld   a, $09                                   ; $61BB: $3E $09
-    jp   ApplyVectorTowardsLinkAndReturn          ; $61BD: $C3 $C7 $7E
+    call   ApplyVectorTowardsLinkAndReturn          ; $61BD: $C3 $C7 $7E
+jr_003_61e4:
+    ret

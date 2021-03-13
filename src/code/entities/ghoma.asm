@@ -175,7 +175,8 @@ func_005_7CD5::
     add  hl, bc                                   ; $7CE0: $09
     ld   [hl], $40                                ; $7CE1: $36 $40
     ld   a, $01                                   ; $7CE3: $3E $01
-    jp   label_005_7D5F                           ; $7CE5: $C3 $5F $7D
+    call   label_005_7D5F                           ; $7CE5: $C3 $5F $7D
+    ret
 
 label_005_7CE8:
     ld   hl, wEntitiesCollisionsTable             ; $7CE8: $21 $A0 $C2
@@ -468,13 +469,15 @@ label_005_7E83:
 
 func_005_7E89::
     call GetEntityTransitionCountdown             ; $7E89: $CD $05 $0C
-    ret  nz                                       ; $7E8C: $C0
+    jr nz, jr_005_7dba                                        ; $7E8C: $C0
 
     ld   [hl], $C0                                ; $7E8D: $36 $C0
     ld   hl, wEntitiesFlashCountdownTable         ; $7E8F: $21 $20 $C4
     add  hl, bc                                   ; $7E92: $09
     ld   [hl], $FF                                ; $7E93: $36 $FF
-    jp   label_005_7E83                           ; $7E95: $C3 $83 $7E
+    call   label_005_7E83                           ; $7E95: $C3 $83 $7E
+jr_005_7dba:
+    ret
 
 func_005_7E98::
     call GetEntityTransitionCountdown             ; $7E98: $CD $05 $0C
@@ -512,7 +515,8 @@ jr_005_7EBF:
 
     xor  a                                        ; $7EC5: $AF
     ld   [$C1CF], a                               ; $7EC6: $EA $CF $C1
-    jp   label_27DD                               ; $7EC9: $C3 $DD $27
+    call   label_27DD                               ; $7EC9: $C3 $DD $27
+    ret
 
 jr_005_7ECC:
     ldh  a, [hMapId]                              ; $7ECC: $F0 $F7
@@ -522,21 +526,14 @@ jr_005_7ECC:
     jp   label_005_7ED7                           ; $7ED1: $C3 $D7 $7E
 
 jr_005_7ED4:
-    jp   label_005_7550                           ; $7ED4: $C3 $50 $75
+    call   label_005_7550                           ; $7ED4: $C3 $50 $75
+    ret
 
 label_005_7ED7:
-    ld   hl, wIndoorARoomStatus                   ; $7ED7: $21 $00 $D9
     ldh  a, [hMapRoom]                            ; $7EDA: $F0 $F6
     ld   e, a                                     ; $7EDC: $5F
     ld   d, b                                     ; $7EDD: $50
     ldh  a, [hMapId]                              ; $7EDE: $F0 $F7
-    cp   $FF                                      ; $7EE0: $FE $FF
-    jr   nz, jr_005_7EE9                          ; $7EE2: $20 $05
-
-    ld   hl, wColorDungeonRoomStatus              ; $7EE4: $21 $E0 $DD
-    jr   jr_005_7EF2                              ; $7EE7: $18 $09
-
-jr_005_7EE9:
     cp   $1A                                      ; $7EE9: $FE $1A
     jr   nc, jr_005_7EF2                          ; $7EEB: $30 $05
 
@@ -546,6 +543,7 @@ jr_005_7EE9:
     inc  d                                        ; $7EF1: $14
 
 jr_005_7EF2:
+    ld hl, wIndoorARoomStatus                     ; $7e0b: $21 $00 $d9
     add  hl, de                                   ; $7EF2: $19
     set  5, [hl]                                  ; $7EF3: $CB $EE
     ret                                           ; $7EF5: $C9

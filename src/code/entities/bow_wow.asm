@@ -46,7 +46,7 @@ jr_005_4060:
     add  hl, bc                                   ; $4074: $09
     ldh  a, [hMapRoom]                            ; $4075: $F0 $F6
     cp   [hl]                                     ; $4077: $BE
-    ret  z                                        ; $4078: $C8
+    jp z, Jump_005_40a7
 
     jp   label_005_40A2                           ; $4079: $C3 $A2 $40
 
@@ -74,7 +74,9 @@ jr_005_409F:
     call func_005_40A5                            ; $409F: $CD $A5 $40
 
 label_005_40A2:
-    jp   label_005_4253                           ; $40A2: $C3 $53 $42
+    call label_005_4253                            ; $40a4: $cd $5b $42
+Jump_005_40a7:
+    ret
 
 func_005_40A5::
     ld   hl, wEntitiesUnknowTableP                ; $40A5: $21 $40 $C4
@@ -260,7 +262,8 @@ jr_005_41B1:
     and  a                                        ; $41B9: $A7
     jr   z, jr_005_41BF                           ; $41BA: $28 $03
 
-    jp   label_005_4297                           ; $41BC: $C3 $97 $42
+    call   label_005_4297                           ; $41BC: $C3 $97 $42
+    ret
 
 jr_005_41BF:
     ld   hl, wEntitiesSpeedZTable                 ; $41BF: $21 $20 $C3
@@ -269,7 +272,8 @@ jr_005_41BF:
     call IncrementEntityState                     ; $41C5: $CD $12 $3B
     ld   [hl], $02                                ; $41C8: $36 $02
     ld   a, $20                                   ; $41CA: $3E $20
-    jp   ApplyVectorTowardsLink_trampoline        ; $41CC: $C3 $AA $3B
+    call   ApplyVectorTowardsLink_trampoline        ; $41CC: $C3 $AA $3B
+    ret
 
 func_005_41CF::
     call GetEntityPrivateCountdown1               ; $41CF: $CD $00 $0C
@@ -290,7 +294,8 @@ jr_005_41DA:
 
 jr_005_41E5:
     call func_005_7AB1                            ; $41E5: $CD $B1 $7A
-    jp   func_005_4228                            ; $41E8: $C3 $28 $42
+    call   func_005_4228                            ; $41E8: $C3 $28 $42
+    ret
 
 func_005_41EB::
     call GetEntityTransitionCountdown             ; $41EB: $CD $05 $0C
@@ -311,9 +316,11 @@ jr_005_41F9:
 jr_005_4206:
     ld   a, [wIsBowWowFollowingLink]              ; $4206: $FA $56 $DB
     and  a                                        ; $4209: $A7
-    ret  z                                        ; $420A: $C8
+    jr z, jr_005_4215                                        ; $420A: $C8
 
-    jp   label_005_4335                           ; $420B: $C3 $35 $43
+    call   label_005_4335                           ; $420B: $C3 $35 $43
+jr_005_4215:
+    ret
 
 func_005_420E::
     call GetEntityTransitionCountdown             ; $420E: $CD $05 $0C
@@ -420,7 +427,8 @@ jr_005_428E:
 
     pop  bc                                       ; $4291: $C1
     ld   a, $03                                   ; $4292: $3E $03
-    jp   label_3DA0                               ; $4294: $C3 $A0 $3D
+    call   label_3DA0                               ; $4294: $C3 $A0 $3D
+    ret
 
 label_005_4297:
     ld   a, [wIsBowWowFollowingLink]              ; $4297: $FA $56 $DB
@@ -903,7 +911,8 @@ jr_005_44EE:
 
 jr_005_44F9:
     ld   e, $02                                   ; $44F9: $1E $02
-    jp   label_005_4509                           ; $44FB: $C3 $09 $45
+    call   label_005_4509                           ; $44FB: $C3 $09 $45
+    ret
 
 jr_005_44FE:
     bit  7, [hl]                                  ; $44FE: $CB $7E

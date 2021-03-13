@@ -9,7 +9,6 @@ Data_005_4942::
     db   $54, $02, $56, $02
 
 Data_005_4946::
-    db   $7A, $07, $7C, $07
 
 Data_005_494A::
     db   $00, $00, $20, $02, $00, $08, $22, $02, $00, $00, $20, $02, $00, $08, $22, $02
@@ -352,8 +351,6 @@ jr_005_4B40:
     ret                                           ; $4B40: $C9
 
 func_005_4B41::
-    ld   a, $02                                   ; $4B41: $3E $02
-    ldh  [hLinkInteractiveMotionBlocked], a       ; $4B43: $E0 $A1
     call func_005_7AEA                            ; $4B45: $CD $EA $7A
     ld   hl, wEntitiesSpeedZTable                 ; $4B48: $21 $20 $C3
     add  hl, bc                                   ; $4B4B: $09
@@ -362,7 +359,7 @@ func_005_4B41::
     add  hl, bc                                   ; $4B50: $09
     ld   a, [hl]                                  ; $4B51: $7E
     and  $80                                      ; $4B52: $E6 $80
-    ret  z                                        ; $4B54: $C8
+    jr z, jr_005_4b31                                       ; $4B54: $C8
 
     ld   [hl], b                                  ; $4B55: $70
     xor  a                                        ; $4B56: $AF
@@ -390,24 +387,21 @@ func_005_4B41::
     ld   [hl], $80                                ; $4B84: $36 $80
 
 jr_005_4B86:
-    jp   IncrementEntityState                     ; $4B86: $C3 $12 $3B
+    call   IncrementEntityState                     ; $4B86: $C3 $12 $3B
+jr_005_4b31:
+    ret
 
 func_005_4B89::
     call GetEntityTransitionCountdown             ; $4B89: $CD $05 $0C
     cp   $01                                      ; $4B8C: $FE $01
     jr   nz, jr_005_4B95                          ; $4B8E: $20 $05
 
-    jp_open_dialog $00A                           ; $4B90
+    call_open_dialog $00A                           ; $4B90
+    ret
 
 jr_005_4B95:
     and  a                                        ; $4B95: $A7
-    jr   z, jr_005_4B9D                           ; $4B96: $28 $05
-
-    ld   a, $02                                   ; $4B98: $3E $02
-    ldh  [hLinkInteractiveMotionBlocked], a       ; $4B9A: $E0 $A1
-    ret                                           ; $4B9C: $C9
-
-jr_005_4B9D:
+    jr nz, jr_005_4BB6b
     ldh  a, [hFrameCounter]                       ; $4B9D: $F0 $E7
     and  $1F                                      ; $4B9F: $E6 $1F
     jr   nz, jr_005_4BAB                          ; $4BA1: $20 $08
@@ -427,9 +421,11 @@ jr_005_4BAB:
 
 jr_005_4BB6:
     call func_005_5506                            ; $4BB6: $CD $06 $55
-    ret  nc                                       ; $4BB9: $D0
+    jr nc, jr_005_4BB6b
 
-    jp_open_dialog $00B                           ; $4BBA
+    call_open_dialog $00B                           ; $4BBA
+jr_005_4BB6b:
+    ret
 
 Data_005_4BBF::
     db   $78, $00
@@ -510,14 +506,6 @@ jr_005_4C24:
     add  hl, bc                                   ; $4C2D: $09
     ld   [hl], $34                                ; $4C2E: $36 $34
     call CopyEntityPositionToActivePosition       ; $4C30: $CD $8A $3D
-    ldh  a, [hIsGBC]                              ; $4C33: $F0 $FE
-    and  a                                        ; $4C35: $A7
-    jr   z, jr_005_4C3E                           ; $4C36: $28 $06
-
-    ld   de, Data_005_4946                        ; $4C38: $11 $46 $49
-    call RenderActiveEntitySpritesPair            ; $4C3B: $CD $C0 $3B
-
-jr_005_4C3E:
     ld   de, Data_005_4942                        ; $4C3E: $11 $42 $49
     jr   jr_005_4C57                              ; $4C41: $18 $14
 
@@ -569,44 +557,29 @@ jr_005_4C79:
 
 jr_005_4C88:
     call func_005_5506                            ; $4C88: $CD $06 $55
-    ret  nc                                       ; $4C8B: $D0
+    jr nc, jr_005_4c31
 
     call_open_dialog $054                         ; $4C8C
-    jp   IncrementEntityState                     ; $4C91: $C3 $12 $3B
+    call   IncrementEntityState                     ; $4C91: $C3 $12 $3B
+jr_005_4c31:
+    ret
 
 ; This data is pushed into DC88
 data_005_4C94::
-    db   $FF, $47, $31, $52, $C5, $28, $00, $00
+    ; db   $FF, $47, $31, $52, $C5, $28, $00, $00
 
 TarinShield1Handler::
     ld   a, [wDialogState]                        ; $4C9C: $FA $9F $C1
     and  a                                        ; $4C9F: $A7
-    ret  nz                                       ; $4CA0: $C0
+    jr nz, jr_005_4c45
 
     call GetEntityTransitionCountdown             ; $4CA1: $CD $05 $0C
     ld   [hl], $80                                ; $4CA4: $36 $80
     ld   a, MUSIC_TOOL_ACQUIRED                   ; $4CA6: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $4CA8: $EA $68 $D3
-    ldh  a, [hIsGBC]                              ; $4CAB: $F0 $FE
-    and  a                                        ; $4CAD: $A7
-    jr   z, jr_005_4CC3                           ; $4CAE: $28 $13
-
-    ld   hl, $DC88                                ; $4CB0: $21 $88 $DC
-    ld   de, data_005_4C94                        ; $4CB3: $11 $94 $4C
-
-jr_005_4CB6:
-    ld   a, [de]                                  ; $4CB6: $1A
-    ld   [hl+], a                                 ; $4CB7: $22
-    inc  de                                       ; $4CB8: $13
-    ld   a, l                                     ; $4CB9: $7D
-    and  $07                                      ; $4CBA: $E6 $07
-    jr   nz, jr_005_4CB6                          ; $4CBC: $20 $F8
-
-    ld   a, $02                                   ; $4CBE: $3E $02
-    ld   [wPaletteDataFlags], a                   ; $4CC0: $EA $D1 $DD
-
-jr_005_4CC3:
-    jp   IncrementEntityState                     ; $4CC3: $C3 $12 $3B
+    call   IncrementEntityState                     ; $4CC3: $C3 $12 $3B
+jr_005_4c45:
+    ret
 
 ; Shield sprite attributes when getting from Tarin
 ; Edit this to change sprite
@@ -683,7 +656,8 @@ jr_005_4D33:
     ld   a, $C5                                   ; $4D33: $3E $C5
 
 jr_005_4D35:
-    jp   OpenDialogInTable1                       ; $4D35: $C3 $73 $23
+    call   OpenDialogInTable1                       ; $4D35: $C3 $73 $23
+    ret
 
 jr_005_4D38:
     call func_005_5506                            ; $4D38: $CD $06 $55
@@ -704,9 +678,11 @@ jr_005_4D4B:
 
 jr_005_4D4D:
     call func_005_5506                            ; $4D4D: $CD $06 $55
-    ret  nc                                       ; $4D50: $D0
+    jr nc, jr_005_4cd8
 
-    jp_open_dialog $055                           ; $4D51
+    call_open_dialog $055                           ; $4D51
+jr_005_4cd8:
+    ret
 
 jr_005_4D56:
     ld   a, [$DB48]                               ; $4D56: $FA $48 $DB

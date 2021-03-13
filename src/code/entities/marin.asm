@@ -49,19 +49,6 @@ jr_005_4E87:
     jp   nc, func_005_7B4B                        ; $4E93: $D2 $4B $7B
 
 jr_005_4E96:
-    push bc                                       ; $4E96: $C5
-    sla  c                                        ; $4E97: $CB $21
-    rl   b                                        ; $4E99: $CB $10
-    sla  c                                        ; $4E9B: $CB $21
-    rl   b                                        ; $4E9D: $CB $10
-    ld   hl, wEntitiesHitboxPositionTable         ; $4E9F: $21 $80 $D5
-    add  hl, bc                                   ; $4EA2: $09
-    inc  hl                                       ; $4EA3: $23
-    inc  hl                                       ; $4EA4: $23
-    ld   [hl], $08                                ; $4EA5: $36 $08
-    inc  hl                                       ; $4EA7: $23
-    ld   [hl], $0B                                ; $4EA8: $36 $0B
-    pop  bc                                       ; $4EAA: $C1
     ldh  a, [hFrameCounter]                       ; $4EAB: $F0 $E7
     and  $1F                                      ; $4EAD: $E6 $1F
     jr   nz, jr_005_4ED1                          ; $4EAF: $20 $20
@@ -157,17 +144,6 @@ jr_005_4F39:
     ld   de, Data_005_4E2A                        ; $4F3D: $11 $2A $4E
     call RenderActiveEntitySpritesPair            ; $4F40: $CD $C0 $3B
     call func_005_54C3                            ; $4F43: $CD $C3 $54
-    ld   a, [wGameplayType]                       ; $4F46: $FA $95 $DB
-    cp   $07                                      ; $4F49: $FE $07
-    ret  z                                        ; $4F4B: $C8
-
-    cp   $0B                                      ; $4F4C: $FE $0B
-    ret  nz                                       ; $4F4E: $C0
-
-    ld   a, [wTransitionSequenceCounter]          ; $4F4F: $FA $6B $C1
-    cp   $04                                      ; $4F52: $FE $04
-    ret  nz                                       ; $4F54: $C0
-
     ldh  a, [hActiveEntityState]                  ; $4F55: $F0 $F0
     JP_TABLE                                      ; $4F57
 ._00 dw func_005_4F64                             ; $4F58
@@ -184,11 +160,11 @@ func_005_4F64::
 
     ld   a, [$C3C8]                               ; $4F6A: $FA $C8 $C3
     and  a                                        ; $4F6D: $A7
-    ret  nz                                       ; $4F6E: $C0
+    jp nz, Jump_005_4f83
 
 jr_005_4F6F:
     call func_005_5506                            ; $4F6F: $CD $06 $55
-    ret  nc                                       ; $4F72: $D0
+    jp nc, Jump_005_4f83
 
     ld   a, [wOverworldRoomStatus + $08]                               ; $4F73: $FA $08 $D8
     and  $10                                      ; $4F76: $E6 $10
@@ -317,7 +293,9 @@ jr_005_5018:
     ld   hl, wEntitiesUnknowTableP                ; $5018: $21 $40 $C4
     add  hl, bc                                   ; $501B: $09
     ld   [hl], d                                  ; $501C: $72
-    jp   IncrementEntityState                     ; $501D: $C3 $12 $3B
+    call   IncrementEntityState                     ; $501D: $C3 $12 $3B
+Jump_005_4f83:
+    ret
 
 func_005_5020::
     call func_005_7A3A                            ; $5020: $CD $3A $7A
@@ -362,7 +340,6 @@ func_005_5058::
 func_005_5059::
     ld   a, $02                                   ; $5059: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $505B: $E0 $A1
-    ld   [wC167], a                               ; $505D: $EA $67 $C1
     push bc                                       ; $5060: $C5
     call UpdateLinkWalkingAnimation_trampoline    ; $5061: $CD $F0 $0B
     pop  bc                                       ; $5064: $C1
@@ -503,12 +480,8 @@ func_005_512B::
     and  a                                        ; $5137: $A7
     jr   nz, jr_005_514F                          ; $5138: $20 $15
 
-    ld   a, $01                                   ; $513A: $3E $01
-    ld   [$DE00], a                               ; $513C: $EA $00 $DE
     ld   a, MUSIC_TOOL_ACQUIRED                   ; $513F: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $5141: $EA $68 $D3
-    ld   a, $05                                   ; $5144: $3E $05
-    call func_036_703E_trampoline                 ; $5146: $CD $C6 $0A
     call GetEntityTransitionCountdown             ; $5149: $CD $05 $0C
     ld   [hl], $80                                ; $514C: $36 $80
     ret                                           ; $514E: $C9
@@ -526,11 +499,9 @@ jr_005_515E:
     ret                                           ; $515E: $C9
 
 Data_005_515F::
-    db   $90, $17
+    db   $90, $10
 
 func_005_5161::
-    ld   a, $01                                   ; $5161: $3E $01
-    ld   [$DE00], a                               ; $5163: $EA $00 $DE
     call GetEntityTransitionCountdown             ; $5166: $CD $05 $0C
     jr   nz, jr_005_5197                          ; $5169: $20 $2C
 
@@ -550,8 +521,6 @@ func_005_5161::
     ld   [hl], b                                  ; $5182: $70
 
 jr_005_5183:
-    xor  a                                        ; $5183: $AF
-    ld   [wC167], a                               ; $5184: $EA $67 $C1
     ldh  a, [hMapRoom]                            ; $5187: $F0 $F6
     cp   $C0                                      ; $5189: $FE $C0
     jr   nc, jr_005_5192                          ; $518B: $30 $05
@@ -584,7 +553,8 @@ jr_005_51A1:
     ld   de, Data_005_515F                        ; $51B3: $11 $5F $51
     xor  a                                        ; $51B6: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $51B7: $E0 $F1
-    jp   RenderActiveEntitySprite                 ; $51B9: $C3 $77 $3C
+    call   RenderActiveEntitySprite                 ; $51B9: $C3 $77 $3C
+    ret
 
 func_005_51BC::
     ld   a, [wDialogState]                        ; $51BC: $FA $9F $C1
@@ -619,10 +589,12 @@ func_005_51CE::
     call RenderActiveEntitySpritesPair            ; $51EC: $CD $C0 $3B
     call func_005_7A3A                            ; $51EF: $CD $3A $7A
     call func_005_5506                            ; $51F2: $CD $06 $55
-    ret  nc                                       ; $51F5: $D0
+    jr nc, jr_005_514b
 
     ld   a, $D7                                   ; $51F6: $3E $D7
-    jp   OpenDialogInTable1                       ; $51F8: $C3 $73 $23
+    call   OpenDialogInTable1                       ; $51F8: $C3 $73 $23
+jr_005_514b:
+    ret
 
 jr_005_51FB:
     ld   a, [wSwordLevel]                         ; $51FB: $FA $4E $DB
@@ -660,7 +632,8 @@ jr_005_5211:
     sub  $08                                      ; $522E: $D6 $08
     ld   [hl], a                                  ; $5230: $77
     ld   [wC167], a                               ; $5231: $EA $67 $C1
-    jp   IncrementEntityState                     ; $5234: $C3 $12 $3B
+    call   IncrementEntityState                     ; $5234: $C3 $12 $3B
+    ret
 
 jr_005_5237:
     ldh  a, [hFrameCounter]                       ; $5237: $F0 $E7
@@ -688,7 +661,7 @@ Data_005_5258::
     db   $48, $00, $4C, $00
 
 Data_005_526C::
-    db   $00, $00, $4E, $06, $00, $08, $4E, $26
+    ; db   $00, $00, $4E, $06, $00, $08, $4E, $26
 
 Data_005_5274::
     db   $03, $03, $03, $03, $03, $04, $03, $04, $03, $03, $03, $02, $02, $02, $02, $02
@@ -728,16 +701,8 @@ func_005_52AF::
     ldh  [hLinkAnimationState], a                 ; $52C3: $E0 $9D
     ld   de, Data_005_5258                        ; $52C5: $11 $58 $52
     call RenderActiveEntitySpritesPair            ; $52C8: $CD $C0 $3B
-    ldh  a, [hIsGBC]                              ; $52CB: $F0 $FE
-    and  a                                        ; $52CD: $A7
-    jr   z, jr_005_52D8                           ; $52CE: $28 $08
-
-    ld   hl, Data_005_526C                        ; $52D0: $21 $6C $52
-    ld   c, $02                                   ; $52D3: $0E $02
-    call RenderActiveEntitySpritesRect            ; $52D5: $CD $E6 $3C
-
-jr_005_52D8:
-    jp   CopyEntityPositionToActivePosition       ; $52D8: $C3 $8A $3D
+    call   CopyEntityPositionToActivePosition       ; $52D8: $C3 $8A $3D
+    ret
 
 func_005_52DB::
     ld   a, $03                                   ; $52DB: $3E $03
@@ -775,9 +740,11 @@ func_005_5312::
     call func_005_7A3A                            ; $5312: $CD $3A $7A
     call func_005_54C3                            ; $5315: $CD $C3 $54
     call func_005_5506                            ; $5318: $CD $06 $55
-    ret  nc                                       ; $531B: $D0
+    jr nc, jr_005_5260
 
-    jp_open_dialog $002                           ; $531C
+    call_open_dialog $002                           ; $531C
+jr_005_5260:
+    ret
 
 ; Add item to inventory slot (used for assigning the shield)
 AssignItemToSlot:

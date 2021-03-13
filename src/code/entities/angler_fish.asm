@@ -39,9 +39,11 @@ func_005_55AB::
     add  hl, bc                                   ; $55B4: $09
     ld   [hl], a                                  ; $55B5: $77
     cp   $80                                      ; $55B6: $FE $80
-    ret  nc                                       ; $55B8: $D0
+    jr nc, jr_005_55AB
 
-    jp   label_005_7550                           ; $55B9: $C3 $50 $75
+    call   label_005_7550                           ; $55B9: $C3 $50 $75
+jr_005_55AB:
+    ret
 
 label_005_55BC:
     call func_005_7585                            ; $55BC: $CD $85 $75
@@ -276,7 +278,8 @@ jr_005_572A:
     ld   hl, wEntitiesSpeedYTable                 ; $572F: $21 $50 $C2
     add  hl, bc                                   ; $5732: $09
     ld   [hl], a                                  ; $5733: $77
-    jp   func_005_7AB4                            ; $5734: $C3 $B4 $7A
+    call   func_005_7AB4                            ; $5734: $C3 $B4 $7A
+    ret
 
 func_005_5737::
     ld   hl, wEntitiesUnknowTableY                ; $5737: $21 $D0 $C3
@@ -292,7 +295,7 @@ func_005_5737::
     ld   [hl], $0D                                ; $5748: $36 $0D
 
 jr_005_574A:
-    ret  nc                                       ; $574A: $D0
+    jr nc, jr_005_56a7
 
     ld   hl, wEntitiesSpeedXTable                 ; $574B: $21 $40 $C2
     add  hl, bc                                   ; $574E: $09
@@ -300,7 +303,7 @@ jr_005_574A:
     call func_005_7ABE                            ; $5751: $CD $BE $7A
     ldh  a, [hActiveEntityPosX]                   ; $5754: $F0 $EE
     cp   $18                                      ; $5756: $FE $18
-    ret  nc                                       ; $5758: $D0
+    jr nc, jr_005_56a7
 
     ld   a, $30                                   ; $5759: $3E $30
     ld   [$C157], a                               ; $575B: $EA $57 $C1
@@ -310,7 +313,9 @@ jr_005_574A:
     ld   hl, wEntitiesPrivateCountdown2Table      ; $5765: $21 $00 $C3
     add  hl, bc                                   ; $5768: $09
     ld   [hl], $FF                                ; $5769: $36 $FF
-    jp   IncrementEntityState                     ; $576B: $C3 $12 $3B
+    call   IncrementEntityState                     ; $576B: $C3 $12 $3B
+jr_005_56a7:
+    ret
 
 func_005_576E::
     ld   hl, wEntitiesUnknowTableY                ; $576E: $21 $D0 $C3
@@ -400,7 +405,8 @@ jr_005_58F2:
     ld   c, $13                                   ; $58F3: $0E $13
     call RenderActiveEntitySpritesRect            ; $58F5: $CD $E6 $3C
     ld   a, $13                                   ; $58F8: $3E $13
-    jp   label_3DA0                               ; $58FA: $C3 $A0 $3D
+    call   label_3DA0                               ; $58FA: $C3 $A0 $3D
+    ret
 
 Data_005_58FD::
     db   $72, $00, $72, $20

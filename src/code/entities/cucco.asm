@@ -172,7 +172,7 @@ func_005_4624::
     xor  a                                        ; $4624: $AF
     call SetEntitySpriteVariant                   ; $4625: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $4628: $CD $05 $0C
-    ret  nz                                       ; $462B: $C0
+    jr nz, jr_005_466e
 
     call GetRandomByte                            ; $462C: $CD $0D $28
     and  $07                                      ; $462F: $E6 $07
@@ -203,7 +203,9 @@ func_005_4624::
     and  $1F                                      ; $465B: $E6 $1F
     add  $30                                      ; $465D: $C6 $30
     ld   [hl], a                                  ; $465F: $77
-    jp   IncrementEntityState                     ; $4660: $C3 $12 $3B
+    call   IncrementEntityState                     ; $4660: $C3 $12 $3B
+jr_005_466e:
+    ret
 
 func_005_4663::
     call func_005_7AB1                            ; $4663: $CD $B1 $7A
@@ -234,7 +236,8 @@ jr_005_4685:
     rra                                           ; $4688: $1F
     rra                                           ; $4689: $1F
     and  $01                                      ; $468A: $E6 $01
-    jp   SetEntitySpriteVariant                   ; $468C: $C3 $0C $3B
+    call   SetEntitySpriteVariant                   ; $468C: $C3 $0C $3B
+    ret
 
 Data_005_468F::
     db   $28, $48, $68, $88, $18, $38, $58, $78, $00, $00, $00, $00, $A0, $A0, $A0, $A0

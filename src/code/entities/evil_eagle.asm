@@ -143,7 +143,7 @@ func_005_5ADB::
     jr   z, jr_005_5AFE                           ; $5AE9: $28 $13
 
     cp   $20                                      ; $5AEB: $FE $20
-    ret  nz                                       ; $5AED: $C0
+    jr nz, jr_005_5a75
 
     ldh  a, [hLinkPositionY]                      ; $5AEE: $F0 $99
     push af                                       ; $5AF0: $F5
@@ -183,10 +183,14 @@ func_005_5B03::
     add  hl, de                                   ; $5B2F: $19
     ld   [hl], $80                                ; $5B30: $36 $80
     call func_005_5C20                            ; $5B32: $CD $20 $5C
-    jp   IncrementEntityState                     ; $5B35: $C3 $12 $3B
+    call   IncrementEntityState                     ; $5B35: $C3 $12 $3B
+    ret
+jr_005_5a75:
+    ret
 
 func_005_5B38::
-    jp   func_005_5B5A                            ; $5B38: $C3 $5A $5B
+    call   func_005_5B5A                            ; $5B38: $C3 $5A $5B
+    ret
 
 func_005_5B3B::
     call func_005_5B5A                            ; $5B3B: $CD $5A $5B
@@ -209,7 +213,8 @@ Data_005_5B52::
 
 func_005_5B5A::
     ld   de, Data_005_5B52                        ; $5B5A: $11 $52 $5B
-    jp   RenderActiveEntitySpritesPair                ; $5B5D: $C3 $C0 $3B
+    call   RenderActiveEntitySpritesPair                ; $5B5D: $C3 $C0 $3B
+    ret
 
 Data_005_5B60::
     db   $02, $02, $02, $00, $01, $00, $01, $04, $04, $04, $04
@@ -283,13 +288,15 @@ jr_005_5BB7:
 func_005_5BD8::
     call func_005_7AB1                            ; $5BD8: $CD $B1 $7A
     call GetEntityTransitionCountdown             ; $5BDB: $CD $05 $0C
-    ret  nz                                       ; $5BDE: $C0
+    jr nz, jr_005_5b2d
 
     call IncrementEntityState                     ; $5BDF: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $5BE2: $CD $05 $0C
     ld   [hl], $20                                ; $5BE5: $36 $20
     ld   a, $FF                                   ; $5BE7: $3E $FF
-    jp   SetEntitySpriteVariant                   ; $5BE9: $C3 $0C $3B
+    call   SetEntitySpriteVariant                   ; $5BE9: $C3 $0C $3B
+jr_005_5b2d:
+    ret
 
 func_005_5BEC::
     call GetEntityTransitionCountdown             ; $5BEC: $CD $05 $0C
@@ -353,7 +360,7 @@ jr_005_5C38:
 
 jr_005_5C41:
     and  a                                        ; $5C41: $A7
-    ret  nz                                       ; $5C42: $C0
+    jr nz, jr_005_5b9e
 
     ld   hl, wEntitiesSpeedXTable                 ; $5C43: $21 $40 $C2
     add  hl, bc                                   ; $5C46: $09
@@ -369,7 +376,9 @@ jr_005_5C41:
     inc  [hl]                                     ; $5C57: $34
 
 jr_005_5C58:
-    jp   jr_005_5C7B                              ; $5C58: $C3 $7B $5C
+    call   jr_005_5C7B                              ; $5C58: $C3 $7B $5C
+jr_005_5b9e:
+    ret
 
 func_005_5C5B::
     ld   a, $02                                   ; $5C5B: $3E $02
@@ -400,7 +409,8 @@ jr_005_5C7B:
     inc  a                                        ; $5C87: $3C
 
 jr_005_5C88:
-    jp   SetEntitySpriteVariant                   ; $5C88: $C3 $0C $3B
+    call   SetEntitySpriteVariant                   ; $5C88: $C3 $0C $3B
+    ret
 
 func_005_5C8B::
     ld   a, $02                                   ; $5C8B: $3E $02
@@ -446,7 +456,8 @@ func_005_5CB9::
     ld   hl, Data_005_5CA9                        ; $5CC7: $21 $A9 $5C
     add  hl, de                                   ; $5CCA: $19
     ld   a, [hl]                                  ; $5CCB: $7E
-    jp   SetEntitySpriteVariant                   ; $5CCC: $C3 $0C $3B
+    call   SetEntitySpriteVariant                   ; $5CCC: $C3 $0C $3B
+    ret
 
 func_005_5CCF::
     call func_005_7AB1                            ; $5CCF: $CD $B1 $7A
@@ -478,7 +489,8 @@ jr_005_5CF2:
 
 jr_005_5CF7:
     xor  a                                        ; $5CF7: $AF
-    jp   SetEntitySpriteVariant                   ; $5CF8: $C3 $0C $3B
+    call   SetEntitySpriteVariant                   ; $5CF8: $C3 $0C $3B
+    ret
 
 jr_005_5CFB:
     dec  [hl]                                     ; $5CFB: $35
@@ -909,7 +921,8 @@ func_005_5F3B::
 jr_005_5F61:
     dec  [hl]                                     ; $5F61: $35
     call func_005_5CB9                            ; $5F62: $CD $B9 $5C
-    jp   func_005_5CB9                            ; $5F65: $C3 $B9 $5C
+    call   func_005_5CB9                            ; $5F65: $C3 $B9 $5C
+    ret
 
 jr_005_5F68:
     xor  a                                        ; $5F68: $AF
@@ -953,7 +966,8 @@ func_005_5F93::
     call ClearEntitySpeed                         ; $5FA0: $CD $7F $3D
 
 jr_005_5FA3:
-    jp   func_005_5CB9                            ; $5FA3: $C3 $B9 $5C
+    call   func_005_5CB9                            ; $5FA3: $C3 $B9 $5C
+    ret
 
 Data_005_5FA6::
     db   $E0, $20
@@ -1022,10 +1036,12 @@ jr_005_6008:
     call func_005_5CB9                            ; $6008: $CD $B9 $5C
     call GetEntityTransitionCountdown             ; $600B: $CD $05 $0C
     cp   $40                                      ; $600E: $FE $40
-    ret  nc                                       ; $6010: $D0
+    jr nc, jr_005_5f61
 
     call func_005_5CB9                            ; $6011: $CD $B9 $5C
-    jp   func_005_5CB9                            ; $6014: $C3 $B9 $5C
+    call   func_005_5CB9                            ; $6014: $C3 $B9 $5C
+jr_005_5f61:
+    ret
 
 func_005_6017::
     xor  a                                        ; $6017: $AF
@@ -1045,7 +1061,7 @@ func_005_6028::
     jr   z, jr_005_6040                           ; $602E: $28 $10
 
     cp   $30                                      ; $6030: $FE $30
-    ret  nc                                       ; $6032: $D0
+    jr nc, jr_005_5f8c
 
     dec  a                                        ; $6033: $3D
     jr   nz, jr_005_603A                          ; $6034: $20 $04
@@ -1055,7 +1071,9 @@ func_005_6028::
 
 jr_005_603A:
     call func_005_5CB9                            ; $603A: $CD $B9 $5C
-    jp   func_005_5CB9                            ; $603D: $C3 $B9 $5C
+    call   func_005_5CB9                            ; $603D: $C3 $B9 $5C
+jr_005_5f8c:
+    ret
 
 jr_005_6040:
     call func_005_5CB9                            ; $6040: $CD $B9 $5C

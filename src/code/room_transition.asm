@@ -34,7 +34,7 @@ ApplyRoomTransition::
     ; If the room transition didn't start to scroll yet,
     ; go directly to the jump table.
     push af                                       ; $78F0: $F5
-    cp   ROOM_TRANSITION_FIRST_HALF               ; $78F1: $FE $04
+    cp   ROOM_TRANSITION_CONFIGURE_SCROLL               ; $78F1: $FE $04
     jp   c, .dispatchTransition                   ; $78F3: $DA $CC $79
 
     ;
@@ -569,7 +569,7 @@ RoomTransitionBGInitialUpdateRegionHigh::
 RoomTransitionBGInitialUpdateRegionLow::
 .right  db $14
 .left   db $1F
-.top    db $E0
+.top    db $C0
 .bottom db $00
 
 data_002_7B5F::
@@ -579,10 +579,10 @@ data_002_7B5F::
 .bottom db $0A
 
 RoomTransitionFramesToMidScreen::
-.right  db $14
-.left   db $14
-.top    db $10
-.bottom db $10
+.right  db $0A
+.left   db $0A
+.top    db $08
+.bottom db $08
 
 data_002_7B67::
     db   $00                                      ; $7B67: $00

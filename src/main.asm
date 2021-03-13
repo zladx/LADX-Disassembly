@@ -51,8 +51,8 @@ include "code/entities/hot_head.asm"
 include "code/entities/dodongo_snake.asm"
 include "code/entities/slime_eel.asm"
 include "code/entities/ghoma.asm"
-include "code/entities/musical_note.asm"
-include "code/entities/animal_d0.asm"
+; include "code/entities/musical_note.asm"
+; include "code/entities/animal_d0.asm"
 
 section "bank6",romx[$4000],bank[$06]
 include "code/entities/bank6.asm"
@@ -466,3 +466,5 @@ func_002_4E48
 func_002_4E2C
 
 func_002_4DFC
+AnimalD0EntityHandler:
+MusicalNoteEntityHandler:

@@ -113,9 +113,9 @@ AnimateEntities::
     ld   [$C1AD], a
 
 .label_39E3
-    ld a, $02                                     ; $38ab: $3e $02
+    ld a, BANK(fn_02_63e6)                                     ; $38ab: $3e $02
     call SwitchAdjustedBank                       ; $38ad: $cd $b9 $07
-    call $63e6                                    ; $38b0: $cd $e6 $63
+    call fn_02_63e6                                   ; $38b0: $cd $e6 $63
 
     ; Initialize the entities counter
     ld   b, $00

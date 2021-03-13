@@ -35,16 +35,18 @@ func_005_538A::
     jr   nz, func_005_53CB                        ; $538E: $20 $3B
 
     call func_005_5506                            ; $5390: $CD $06 $55
-    ret  nc                                       ; $5393: $D0
+    jr nc, jr_005_52dd
 
     ld   a, $F0                                   ; $5394: $3E $F0
     call OpenDialog                               ; $5396: $CD $85 $23
-    jp   IncrementEntityState                     ; $5399: $C3 $12 $3B
+    call   IncrementEntityState                     ; $5399: $C3 $12 $3B
+jr_005_52dd:
+    ret
 
 func_005_539C::
     ld   a, [wDialogState]                        ; $539C: $FA $9F $C1
     and  a                                        ; $539F: $A7
-    ret  nz                                       ; $53A0: $C0
+    jr nz, jr_005_5308
 
     call IncrementEntityState                     ; $53A1: $CD $12 $3B
     ld   a, [wC177]                               ; $53A4: $FA $77 $C1
@@ -69,7 +71,9 @@ jr_005_53B1:
     ld   [wSubstractRupeeBufferLow], a            ; $53BA: $EA $92 $DB
     ld   a, $F1                                   ; $53BD: $3E $F1
     ld   [$D477], a                               ; $53BF: $EA $77 $D4
-    jp   OpenDialog                               ; $53C2: $C3 $85 $23
+    call   OpenDialog                               ; $53C2: $C3 $85 $23
+jr_005_5308:
+    ret
 
 jr_005_53C5:
     ld   [hl], b                                  ; $53C5: $70
@@ -78,9 +82,11 @@ jr_005_53C5:
 
 func_005_53CB::
     call func_005_5506                            ; $53CB: $CD $06 $55
-    ret  nc                                       ; $53CE: $D0
+    jr nc, jr_005_5319
 
-    jp_open_dialog $0F1                           ; $53CF
+    call_open_dialog $0F1                           ; $53CF
+jr_005_5319:
+    ret
 
 Data_005_53D4::
     db   $5C, $01, $5C, $21, $5E, $01, $5E, $21   ; $53D4
@@ -291,25 +297,11 @@ func_005_54EA::
 
 func_005_5506::
     ld   e, b                                     ; $5506: $58
-    ldh  a, [hActiveEntityType]                   ; $5507: $F0 $EB
-    cp   ENTITY_WITCH                             ; $5509: $FE $40
-    jr   nz, jr_005_5519                          ; $550B: $20 $0C
-
     ldh  a, [hLinkPositionY]                      ; $550D: $F0 $99
     ld   hl, hActiveEntityPosY                                ; $550F: $21 $EF $FF
     sub  [hl]                                     ; $5512: $96
     add  $14                                      ; $5513: $C6 $14
     cp   $2B                                      ; $5515: $FE $2B
-    jr   jr_005_5523                              ; $5517: $18 $0A
-
-jr_005_5519:
-    ldh  a, [hLinkPositionY]                      ; $5519: $F0 $99
-    ld   hl, hActiveEntityPosY                                ; $551B: $21 $EF $FF
-    sub  [hl]                                     ; $551E: $96
-    add  $14                                      ; $551F: $C6 $14
-    cp   $28                                      ; $5521: $FE $28
-
-jr_005_5523:
     jr   nc, jr_005_5569                          ; $5523: $30 $44
 
     ldh  a, [hLinkPositionX]                      ; $5525: $F0 $98

@@ -39,7 +39,7 @@ UseOcarina::
     ld   hl, $C146                                ; $41FC: $21 $46 $C1
     ld   a, [wLinkPlayingOcarinaCountdown]        ; $41FF: $FA $66 $C1
     or   [hl]                                     ; $4202: $B6
-    jr   nz, jr_002_4231
+    jr   nz, jr_002_4231b
 
     ld   [$C5A4], a                               ; $4208: $EA $A4 $C5
     ld   [$C5A5], a                               ; $420B: $EA $A5 $C5
@@ -80,6 +80,7 @@ jr_002_4241:
     ld   [wLinkPlayingOcarinaCountdown], a        ; $4243: $EA $66 $C1
     ld   a, WAVE_SFX_OCARINA_NOSONG               ; $4246: $3E $15
     ldh  [hWaveSfx], a                            ; $4248: $E0 $F3
+jr_002_4231b:
     ret                                           ; $424A: $C9
 
 jr_002_4231:
@@ -1581,7 +1582,7 @@ func_002_4D20::
     ld   e, a                                     ; $4D65: $5F
     ld   a, [wIsIndoor]                           ; $4D66: $FA $A5 $DB
     ld   d, a                                     ; $4D69: $57
-    call GetObjectPhysicsFlags_trampoline         ; $4D6A: $CD $26 $2A
+    call GetObjectPhysicsFlags         ; $4D6A: $CD $26 $2A
     cp   $00                                      ; $4D6D: $FE $00
     jr   nz, label_002_4D95                       ; $4D6F: $20 $24
 
@@ -2343,7 +2344,7 @@ Data_002_52F0::
     db   $06, $08, $08, $06, $04, $FF, $FF, $04, $04, $FF, $FF, $04, $06, $08, $08, $06
 
 Data_002_5300::
-    db   $02, $02, $22, $22, $22, $02, $02, $42, $22, $02, $02, $22, $02, $02, $22, $22
+    db   $00, $00, $20, $20, $20, $00, $00, $40, $20, $00, $00, $20, $00, $00, $20, $20
 
 label_002_5310:
     ld   a, [$C19B]                               ; $5310: $FA $9B $C1
@@ -2846,8 +2847,8 @@ RenderTranscientLavaSplash::
     ld   d, $00                                   ; $5613: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $5615: $21 $30 $C0
     add  hl, de                                   ; $5618: $19
-    ld   e, l                                     ; $5619: $5D
-    ld   d, h                                     ; $561A: $54
+    push hl                                       ; $540f: $e5
+    pop de                                        ; $5410: $d1
     push bc                                       ; $561B: $C5
     ld   c, $04                                   ; $561C: $0E $04
 
@@ -3015,7 +3016,7 @@ label_002_5707:
     ret                                           ; $5707: $C9
 
 Data_002_5708::
-    db   $00, $04, $24, $01, $00, $04, $24, $01, $00, $00, $1E, $01, $00, $08, $1E, $61
+    db   $00, $04, $24, $00, $00, $04, $24, $00, $00, $00, $1E, $00, $00, $08, $1E, $60
 
 RenderTranscientPegasusDust::
     call func_002_58D0                            ; $5718: $CD $D0 $58
@@ -3034,7 +3035,7 @@ RenderTranscientPegasusDust::
     jp   label_002_5854                           ; $5733: $C3 $54 $58
 
 Data_002_5736::
-    db   $00, $00, $1E, $01, $00, $08, $1E, $61, $00, $00, $30, $01, $00, $08, $30, $61
+    db   $00, $00, $1E, $00, $00, $08, $1E, $60, $00, $00, $30, $00, $00, $08, $30, $60
 
 RenderTranscientSmoke::
     call func_002_58D0                            ; $5746: $CD $D0 $58
@@ -3645,8 +3646,8 @@ jr_002_5B4C:
 
 jr_002_5B6F:
     call GetRoomStatusAddress                     ; $5B6F: $CD $9F $5B
-    ld   c, l                                     ; $5B72: $4D
-    ld   b, h                                     ; $5B73: $44
+    push hl
+    pop bc
     ld   a, [$C189]                               ; $5B74: $FA $89 $C1
     ld   e, a                                     ; $5B77: $5F
     ld   d, $00                                   ; $5B78: $16 $00
@@ -4996,6 +4997,7 @@ Data_002_63CE:
     ld l, [hl]                                    ; $63e3: $6e
     add [hl]                                      ; $63e4: $86
     add [hl]                                      ; $63e5: $86
+fn_02_63e6:
     ld a, [wBGPalette]                            ; $63e6: $fa $97 $db
     cp $e4                                        ; $63e9: $fe $e4
     ret c                                         ; $63eb: $d8
@@ -7830,7 +7832,7 @@ func_002_755B::
     and  a                                        ; $756C: $A7
     jr   nz, jr_002_7582                          ; $756D: $20 $13
 
-    call GetObjectPhysicsFlags_trampoline         ; $756F: $CD $26 $2A
+    call GetObjectPhysicsFlags         ; $756F: $CD $26 $2A
     ld   c, $02                                   ; $7572: $0E $02
     cp   $05                                      ; $7574: $FE $05
     jr   z, jr_002_7582                           ; $7576: $28 $0A
@@ -7919,7 +7921,7 @@ jr_002_75D9:
     jr   nc, func_002_75F5                        ; $75E5: $30 $0E
 
 jr_002_75E7:
-    call GetObjectPhysicsFlags_trampoline         ; $75E7: $CD $26 $2A
+    call GetObjectPhysicsFlags         ; $75E7: $CD $26 $2A
     ld   [wLinkGroundVfx], a                      ; $75EA: $EA $81 $C1
     and  a                                        ; $75ED: $A7
     jp   z, label_002_77A2                        ; $75EE: $CA $A2 $77

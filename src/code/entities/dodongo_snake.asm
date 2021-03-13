@@ -316,17 +316,17 @@ jr_005_69CB:
 
 jr_005_69EB:
     cp   $20                                      ; $69EB: $FE $20
-    ret  nz                                       ; $69ED: $C0
+    jr nz, jr_005_6985
 
     ld   hl, wEntitiesUnknowTableP                ; $69EE: $21 $40 $C4
     add  hl, bc                                   ; $69F1: $09
     ld   a, [hl]                                  ; $69F2: $7E
     cp   $03                                      ; $69F3: $FE $03
-    ret  nz                                       ; $69F5: $C0
+    jr nz, jr_005_6985
 
     ld   a, ENTITY_BOMB                           ; $69F6: $3E $02
     call SpawnNewEntity_trampoline                ; $69F8: $CD $86 $3B
-    ret  c                                        ; $69FB: $D8
+    jr c, jr_005_6985
 
     ld   hl, wEntitiesTransitionCountdownTable    ; $69FC: $21 $E0 $C2
     add  hl, de                                   ; $69FF: $19
@@ -350,7 +350,9 @@ jr_005_69EB:
     add  hl, de                                   ; $6A1E: $19
     ld   [hl], a                                  ; $6A1F: $77
     pop  bc                                       ; $6A20: $C1
-    jp   label_005_7E9D                           ; $6A21: $C3 $9D $7E
+    call   label_005_7E9D                           ; $6A21: $C3 $9D $7E
+jr_005_6985:
+    ret
 
 Data_005_6A24::
     db   $66, $23, $64, $23, $64, $03, $66, $03, $62, $03, $62, $23, $60, $03, $60, $23
@@ -421,7 +423,8 @@ func_005_6A5F::
     ldh  [hActiveEntityVisualPosY], a             ; $6A9C: $E0 $EC
     pop  bc                                       ; $6A9E: $C1
     ld   de, Data_005_6A24                        ; $6A9F: $11 $24 $6A
-    jp   RenderActiveEntitySpritesPair                ; $6AA2: $C3 $C0 $3B
+    call   RenderActiveEntitySpritesPair                ; $6AA2: $C3 $C0 $3B
+    ret
 
 func_005_6AA5::
     ld   hl, wEntitiesUnknowTableY                ; $6AA5: $21 $D0 $C3
@@ -572,7 +575,8 @@ jr_005_6C92:
     ld   c, $0A                                   ; $6CA4: $0E $0A
     call RenderActiveEntitySpritesRect            ; $6CA6: $CD $E6 $3C
     ld   a, $08                                   ; $6CA9: $3E $08
-    jp   label_3DA0                               ; $6CAB: $C3 $A0 $3D
+    call   label_3DA0                               ; $6CAB: $C3 $A0 $3D
+    ret
 
 jr_005_6CAE:
     ldh  a, [hActiveEntitySpriteVariant]          ; $6CAE: $F0 $F1
@@ -588,4 +592,5 @@ jr_005_6CAE:
     ld   c, $04                                   ; $6CBC: $0E $04
     call RenderActiveEntitySpritesRect            ; $6CBE: $CD $E6 $3C
     ld   a, $02                                   ; $6CC1: $3E $02
-    jp   label_3DA0                               ; $6CC3: $C3 $A0 $3D
+    call   label_3DA0                               ; $6CC3: $C3 $A0 $3D
+    ret

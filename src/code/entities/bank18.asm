@@ -86,7 +86,8 @@ func_018_407C::
     rra                                           ; $4080: $1F
     rra                                           ; $4081: $1F
     and  $01                                      ; $4082: $E6 $01
-    jp   SetEntitySpriteVariant                   ; $4084: $C3 $0C $3B
+    call   SetEntitySpriteVariant                   ; $4084: $C3 $0C $3B
+    ret
 
 func_018_4087::
     ld   e, a                                     ; $4087: $5F
@@ -114,7 +115,8 @@ MamuAndFrogsState1Handler::
 jr_018_40A9:
     ld   [hl], b                                  ; $40A9: $70
     ld   a, $DE                                   ; $40AA: $3E $DE
-    jp   func_018_4087                            ; $40AC: $C3 $87 $40
+    call   func_018_4087                            ; $40AC: $C3 $87 $40
+    ret
 
 jr_018_40AF:
     ld   a, [wRupeeCountHigh]                     ; $40AF: $FA $5D $DB
@@ -243,7 +245,8 @@ jr_018_41F9:
     call func_018_4087                            ; $4216: $CD $87 $40
     xor  a                                        ; $4219: $AF
     ld   [wAlternateBackgroundEnabled], a         ; $421A: $EA $00 $C5
-    jp   IncrementEntityState                     ; $421D: $C3 $12 $3B
+    call   IncrementEntityState                     ; $421D: $C3 $12 $3B
+    ret
 
 jr_018_4220:
     ld   a, [$D212]                               ; $4220: $FA $12 $D2
@@ -301,7 +304,8 @@ MamuAndFrogsState5Handler::
     ld   [wSelectedSongIndex], a                  ; $4272: $EA $4A $DB
     ld   hl, wOcarinaSongFlags                    ; $4275: $21 $49 $DB
     set  0, [hl]                                  ; $4278: $CB $C6
-    jp   IncrementEntityState                     ; $427A: $C3 $12 $3B
+    call   IncrementEntityState                     ; $427A: $C3 $12 $3B
+    ret
 
 jr_018_427D:
     cp   $08                                      ; $427D: $FE $08
@@ -372,7 +376,8 @@ jr_018_435F:
     ld   c, $08                                   ; $4369: $0E $08
     call RenderActiveEntitySpritesRect            ; $436B: $CD $E6 $3C
     ld   a, $04                                   ; $436E: $3E $04
-    jp   label_3DA0                               ; $4370: $C3 $A0 $3D
+    call   label_3DA0                               ; $4370: $C3 $A0 $3D
+    ret
 
 label_018_4373:
     ld   hl, wEntitiesPosYTable                   ; $4373: $21 $10 $C2
@@ -414,7 +419,8 @@ jr_018_43A1:
 
 jr_018_43AE:
     ld   a, e                                     ; $43AE: $7B
-    jp   SetEntitySpriteVariant                   ; $43AF: $C3 $0C $3B
+    call   SetEntitySpriteVariant                   ; $43AF: $C3 $0C $3B
+    ret
 
 label_018_43B2:
     ret                                           ; $43B2: $C9
@@ -446,7 +452,8 @@ jr_018_43EF:
     ld   hl, Data_018_43C3                        ; $43F9: $21 $C3 $43
     add  hl, de                                   ; $43FC: $19
     ld   c, $04                                   ; $43FD: $0E $04
-    jp   RenderActiveEntitySpritesRect            ; $43FF: $C3 $E6 $3C
+    call   RenderActiveEntitySpritesRect            ; $43FF: $C3 $E6 $3C
+    ret
 
 label_018_4402:
     call label_2887                               ; $4402: $CD $87 $28
@@ -464,22 +471,21 @@ jr_018_4412:
     ld   a, $85                                   ; $4416: $3E $85
 
 jr_018_4418:
-    ld   [hl+], a                                 ; $4418: $22
-    xor  a                                        ; $4419: $AF
-    ld   [hl+], a                                 ; $441A: $22
-    ld   a, $04                                   ; $441B: $3E $04
-    ld   [hl+], a                                 ; $441D: $22
-
-jr_018_441E:
-    ld   a, $7F                                   ; $441E: $3E $7F
-    ld   [hl+], a                                 ; $4420: $22
-    ld   [hl+], a                                 ; $4421: $22
-    ld   a, $06                                   ; $4422: $3E $06
-    ld   [hl+], a                                 ; $4424: $22
-    ld   a, $0C                                   ; $4425: $3E $0C
-    ld   [hl+], a                                 ; $4427: $22
-    ld   a, e                                     ; $4428: $7B
-    ld   [hl+], a                                 ; $4429: $22
+    ld [hl+], a                                   ; $441f: $22
+    ld a, $00                                     ; $4420: $3e $00
+    ld [hl+], a                                   ; $4422: $22
+    ld a, $04                                     ; $4423: $3e $04
+    ld [hl+], a                                   ; $4425: $22
+    ld a, $7f                                     ; $4426: $3e $7f
+    ld [hl+], a                                   ; $4428: $22
+    ld a, $7f                                     ; $4429: $3e $7f
+    ld [hl+], a                                   ; $442b: $22
+    ld a, $06                                     ; $442c: $3e $06
+    ld [hl+], a                                   ; $442e: $22
+    ld a, $0c                                     ; $442f: $3e $0c
+    ld [hl+], a                                   ; $4431: $22
+    ld a, e                                       ; $4432: $7b
+    ld [hl+], a                                   ; $4433: $22
     ldh  a, [$FFD0]                               ; $442A: $F0 $D0
     add  $01                                      ; $442C: $C6 $01
     ld   [hl+], a                                 ; $442E: $22
@@ -489,8 +495,11 @@ jr_018_441E:
     ld   [hl+], a                                 ; $4434: $22
     ld   a, $7F                                   ; $4435: $3E $7F
     ld   [hl+], a                                 ; $4437: $22
+    ld   a, $7F                                   ; $4435: $3E $7F
     ld   [hl+], a                                 ; $4438: $22
+    ld   a, $7F                                   ; $4435: $3E $7F
     ld   [hl+], a                                 ; $4439: $22
+    ld   a, $7F                                   ; $4435: $3E $7F
     ld   [hl+], a                                 ; $443A: $22
     ld   a, $0D                                   ; $443B: $3E $0D
     ld   [hl+], a                                 ; $443D: $22
@@ -533,8 +542,11 @@ label_018_444E:
     ld   [hl+], a                                 ; $4476: $22
     ld   a, $7F                                   ; $4477: $3E $7F
     ld   [hl+], a                                 ; $4479: $22
+    ld   a, $7F                                   ; $4477: $3E $7F
     ld   [hl+], a                                 ; $447A: $22
+    ld   a, $7F                                   ; $4477: $3E $7F
     ld   [hl+], a                                 ; $447B: $22
+    ld   a, $7F                                   ; $4477: $3E $7F
     ld   [hl+], a                                 ; $447C: $22
     ld   a, $0E                                   ; $447D: $3E $0E
     ld   [hl+], a                                 ; $447F: $22
@@ -551,6 +563,7 @@ label_018_444E:
     ld   [hl+], a                                 ; $448F: $22
     ld   a, $7F                                   ; $4490: $3E $7F
     ld   [hl+], a                                 ; $4492: $22
+    ld   a, $7F
     ld   [hl+], a                                 ; $4493: $22
     ld   a, $07                                   ; $4494: $3E $07
     ld   [hl+], a                                 ; $4496: $22
@@ -572,7 +585,7 @@ label_018_449D:
     ld   [hl+], a                                 ; $44B0: $22
     ld   a, $83                                   ; $44B1: $3E $83
     ld   [hl+], a                                 ; $44B3: $22
-    xor  a                                        ; $44B4: $AF
+    ld a, $00
     ld   [hl+], a                                 ; $44B5: $22
     ld   a, $04                                   ; $44B6: $3E $04
     ld   [hl+], a                                 ; $44B8: $22
@@ -591,6 +604,7 @@ label_018_449D:
     ld   [hl+], a                                 ; $44CB: $22
     ld   a, $7F                                   ; $44CC: $3E $7F
     ld   [hl+], a                                 ; $44CE: $22
+    ld   a, $7F
     ld   [hl+], a                                 ; $44CF: $22
     ld   a, $0D                                   ; $44D0: $3E $0D
     ld   [hl+], a                                 ; $44D2: $22
@@ -605,6 +619,7 @@ label_018_449D:
     ld   [hl+], a                                 ; $44DF: $22
     ld   a, $7F                                   ; $44E0: $3E $7F
     ld   [hl+], a                                 ; $44E2: $22
+    ld   a, $7F
     ld   [hl+], a                                 ; $44E3: $22
     ld   a, $0E                                   ; $44E4: $3E $0E
     ld   [hl+], a                                 ; $44E6: $22
@@ -669,7 +684,8 @@ ManboAndFishesState0Handler::
     call func_018_7D7C                            ; $453D: $CD $7C $7D
     jr   nc, func_018_455C                        ; $4540: $30 $1A
 
-    jp_open_dialog $189                           ; $4542
+    call_open_dialog $189                           ; $4542
+    ret
 
 jr_018_4547:
     ldh  a, [hLinkPositionX]                      ; $4547: $F0 $98
@@ -688,12 +704,13 @@ func_018_455C::
     rra                                           ; $455F: $1F
     rra                                           ; $4560: $1F
     and  $01                                      ; $4561: $E6 $01
-    jp   SetEntitySpriteVariant                   ; $4563: $C3 $0C $3B
+    call   SetEntitySpriteVariant                   ; $4563: $C3 $0C $3B
+    ret
 
 ManboAndFishesState1Handler::
     ld   a, [wDialogState]                        ; $4566: $FA $9F $C1
     and  a                                        ; $4569: $A7
-    ret  nz                                       ; $456A: $C0
+    jr nz, jr_018_45aa
 
     ld   a, [wC177]                               ; $456B: $FA $77 $C1
     and  a                                        ; $456E: $A7
@@ -715,7 +732,9 @@ jr_018_4576:
 jr_018_4581:
     call IncrementEntityState                     ; $4581: $CD $12 $3B
     ld   [hl], b                                  ; $4584: $70
-    jp_open_dialog $18A                           ; $4585
+    call_open_dialog $18A                           ; $4585
+jr_018_45aa:
+    ret
 
 jr_018_458A:
     call IncrementEntityState                     ; $458A: $CD $12 $3B
@@ -860,16 +879,16 @@ ManboAndFishesGrantSongHandler::
     ld   [hl], $70                                ; $4739: $36 $70
     ld   a, MUSIC_TOOL_ACQUIRED                   ; $473B: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $473D: $EA $68 $D3
-    ld   [wC167], a                               ; $4740: $EA $67 $C1
     call IncrementEntityState                     ; $4743: $CD $12 $3B
 
 jr_018_4746:
     ld   a, $02                                   ; $4746: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4748: $E0 $A1
-    jp   func_018_455C                            ; $474A: $C3 $5C $45
+    call   func_018_455C                            ; $474A: $C3 $5C $45
+    ret
 
 Data_018_474D::
-    db   $90, $17
+    db   $90, $10
 
 ManboAndFishesState5Handler::
     call func_018_455C                            ; $474F: $CD $5C $45
@@ -880,8 +899,6 @@ ManboAndFishesState5Handler::
     ld   [wSelectedSongIndex], a                               ; $4759: $EA $4A $DB
     ld   hl, wOcarinaSongFlags                    ; $475C: $21 $49 $DB
     set  1, [hl]                                  ; $475F: $CB $CE
-    xor  a                                        ; $4761: $AF
-    ld   [wC167], a                               ; $4762: $EA $67 $C1
     call IncrementEntityState                     ; $4765: $CD $12 $3B
     ld   [hl], b                                  ; $4768: $70
     ret                                           ; $4769: $C9
@@ -906,7 +923,8 @@ jr_018_4774:
     ld   de, Data_018_474D                        ; $4786: $11 $4D $47
     xor  a                                        ; $4789: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $478A: $E0 $F1
-    jp   RenderActiveEntitySprite                 ; $478C: $C3 $77 $3C
+    call   RenderActiveEntitySprite                 ; $478C: $C3 $77 $3C
+    ret
 
 Data_018_478F::
     db   $00, $00, $50, $00, $00, $08, $52, $00, $10, $00, $54, $00, $10, $08, $56, $00

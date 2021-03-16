@@ -998,7 +998,8 @@ jr_018_485C:
     ld   c, $03                                   ; $488A: $0E $03
     call RenderActiveEntitySpritesRect            ; $488C: $CD $E6 $3C
     ld   a, $03                                   ; $488F: $3E $03
-    jp   label_3DA0                               ; $4891: $C3 $A0 $3D
+    call   label_3DA0                               ; $4891: $C3 $A0 $3D
+    ret
 
 Data_018_4894::
     db   $00, $FC, $76, $00, $00, $04, $78, $00, $00, $0C, $7A, $00
@@ -1022,9 +1023,11 @@ label_018_48C8::
     call SetEntitySpriteVariant                   ; $48D3: $CD $0C $3B
     ld   a, [$D215]                               ; $48D6: $FA $15 $D2
     and  a                                        ; $48D9: $A7
-    ret  z                                        ; $48DA: $C8
+    jr z, jr_018_48fc
 
-    jp   SetEntitySpriteVariant                   ; $48DB: $C3 $0C $3B
+    call   SetEntitySpriteVariant                   ; $48DB: $C3 $0C $3B
+jr_018_48fc:
+    ret
 
 func_018_48DE::
     ld   a, [$D214]                               ; $48DE: $FA $14 $D2
@@ -1096,7 +1099,8 @@ MermaidStatueState0Handler::
     ld   [hl], a                                  ; $4956: $77
 
 jr_018_4957:
-    jp   IncrementEntityState                     ; $4957: $C3 $12 $3B
+    call   IncrementEntityState                     ; $4957: $C3 $12 $3B
+    ret
 
 MermaidStatueState1Handler::
     call func_018_7D36                            ; $495A: $CD $36 $7D
@@ -1105,12 +1109,9 @@ MermaidStatueState1Handler::
     ret  nz                                       ; $4961: $C0
 
     call func_018_7D95                            ; $4962: $CD $95 $7D
-    ret  nc                                       ; $4965: $D0
+    jr nc, jr_018_49b1
 
     ld   a, [wTradeSequenceItem]                  ; $4966: $FA $0E $DB
-    cp   TRADING_ITEM_MAGNIFIYING_GLASS           ; $4969: $FE $0E
-    ret  z                                        ; If you have the magnifying glass, return
-
     cp   TRADING_ITEM_SCALE                       ; $496C: $FE $0D
     jr   nz, jr_018_498E                          ; If you don't have the mermaid scale, return
 
@@ -1127,7 +1128,9 @@ MermaidStatueState1Handler::
     jp   IncrementEntityState                     ; $498B: $C3 $12 $3B
 
 jr_018_498E:
-    jp_open_dialog $19C                           ; $498E
+    call_open_dialog $19C                           ; $498E
+jr_018_49b1:
+    ret
 
 MermaidStatueState2Handler::
     ld   a, $02                                   ; $4993: $3E $02
@@ -1152,12 +1155,14 @@ jr_018_49AD:
     ld   [hl], $11                                ; $49B4: $36 $11
 
 jr_018_49B6:
-    ret  nc                                       ; $49B6: $D0
+    jr nc, jr_018_49e0
 
     ld   hl, wEntitiesSpeedXTable                 ; $49B7: $21 $40 $C2
     add  hl, bc                                   ; $49BA: $09
     ld   [hl], $FC                                ; $49BB: $36 $FC
-    jp   func_018_7E6C                            ; $49BD: $C3 $6C $7E
+    call   func_018_7E6C                            ; $49BD: $C3 $6C $7E
+jr_018_49e0:
+    ret                                           ; $49e0: $c9
 
 Data_018_49C0::
     db   $FF, $FF, $FF, $FF, $54, $02, $54, $62, $54, $42, $54, $22, $56, $02, $56, $22

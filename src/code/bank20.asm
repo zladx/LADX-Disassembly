@@ -1331,7 +1331,7 @@ SprinkleMagicPowder::
     ld   hl, wEntitiesPosYTable                   ; $4C84: $21 $10 $C2
     add  hl, de                                   ; $4C87: $19
     ld   [hl], a                                  ; $4C88: $77
-    ldh  a, [hLinkPositionZHigh]                  ; $4C89: $F0 $A2
+    ldh  a, [hLinkPositionZ]                  ; $4C89: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $4C8B: $21 $10 $C3
     add  hl, de                                   ; $4C8E: $19
     ld   [hl], a                                  ; $4C8F: $77

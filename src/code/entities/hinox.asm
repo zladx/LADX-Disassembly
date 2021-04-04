@@ -263,7 +263,7 @@ jr_006_5145:
 jr_006_5157:
     ldh  [hLinkPositionXIncrement], a             ; $5157: $E0 $9A
     ld   a, $10                                   ; $5159: $3E $10
-    ldh  [hLinkPositionZLow], a                               ; $515B: $E0 $A3
+    ldh  [hLinkVelocityZ], a                               ; $515B: $E0 $A3
     ld   a, $02                                   ; $515D: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $515F: $EA $46 $C1
     ld   a, JINGLE_JUMP_DOWN                      ; $5162: $3E $08
@@ -307,7 +307,7 @@ jr_006_5179:
     ld   hl, Data_006_512F                        ; $51A0: $21 $2F $51
     add  hl, de                                   ; $51A3: $19
     ld   a, [hl]                                  ; $51A4: $7E
-    ldh  [hLinkPositionZHigh], a                      ; $51A5: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $51A5: $E0 $A2
     ld   a, $02                                   ; $51A7: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $51A9: $EA $46 $C1
     ldh  a, [hActiveEntityPosY]                   ; $51AC: $F0 $EF

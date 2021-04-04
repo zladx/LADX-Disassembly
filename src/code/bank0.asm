@@ -1481,7 +1481,7 @@ WorldInteractiveHandler::
     ldh  a, [hLinkPositionY]                      ; $0F9B: $F0 $99
     ldh  [hLinkFinalPositionY], a                 ; $0F9D: $E0 $A0
 
-    ld   hl, hLinkPositionZHigh                       ; $0F9F: $21 $A2 $FF
+    ld   hl, hLinkPositionZ                       ; $0F9F: $21 $A2 $FF
     sub  a, [hl]                                  ; $0FA2: $96
     ldh  [hFFB3], a                               ; $0FA3: $E0 $B3
     call func_002_60E0                            ; $0FA5: $CD $E0 $60
@@ -1564,7 +1564,7 @@ DialogForItem::
 
 ApplyGotItem::
     ldh  a, [hLinkPositionY]                      ; $1033: $F0 $99
-    ld   hl, hLinkPositionZHigh                       ; $1035: $21 $A2 $FF
+    ld   hl, hLinkPositionZ                       ; $1035: $21 $A2 $FF
     sub  a, [hl]                                  ; $1038: $96
     ld   [wC145], a                               ; $1039: $EA $45 $C1
     ld   a, [wDialogGotItem]                      ; $103C: $FA $A9 $C1
@@ -2227,7 +2227,7 @@ SpawnPlayerProjectile::
     ld   hl, wEntitiesPosYTable                   ; $1451: $21 $10 $C2
     add  hl, de                                   ; $1454: $19
     ld   [hl], a                                  ; $1455: $77
-    ldh  a, [hLinkPositionZHigh]                      ; $1456: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $1456: $F0 $A2
     inc  a                                        ; $1458: $3C
     ld   hl, wEntitiesPosZTable                   ; $1459: $21 $10 $C3
     add  hl, de                                   ; $145C: $19
@@ -2269,7 +2269,7 @@ UseMagicPowder::
     ld   a, [wHasToadstool]                       ; $1492: $FA $4B $DB
     and  a                                        ; $1495: $A7
     jr   z, .jr_14A7                              ; $1496: $28 $0F
-    ldh  a, [hLinkPositionZHigh]                  ; $1498: $F0 $A2
+    ldh  a, [hLinkPositionZ]                  ; $1498: $F0 $A2
     and  a                                        ; $149A: $A7
     ret  nz                                       ; $149B: $C0
     ld   a, DIALOG_GOT_TOADSTOOL                  ; $149C: $3E $02
@@ -2324,13 +2324,13 @@ UseRocsFeather::
 label_14F8::
     ldh  [hLinkPositionYIncrement], a             ; $14F8: $E0 $9B
     xor  a                                        ; $14FA: $AF
-    ldh  [hLinkPositionZLow], a                   ; $14FB: $E0 $A3
+    ldh  [hLinkVelocityZ], a                   ; $14FB: $E0 $A3
     call UpdateFinalLinkPosition                  ; $14FD: $CD $A8 $21
     jpsw CheckPositionForMapTransition            ; $1500: $3E $02 $CD $0C $08 $C3 $75 $6C
 
 label_1508::
     ld   a, $20                                   ; $1508: $3E $20
-    ldh  [hLinkPositionZLow], a                   ; $150A: $E0 $A3
+    ldh  [hLinkVelocityZ], a                   ; $150A: $E0 $A3
     ld   a, [wIsRunningWithPegasusBoots]          ; $150C: $FA $4A $C1
     and  a                                        ; $150F: $A7
     ret  z                                        ; $1510: $C8
@@ -2688,7 +2688,7 @@ UsePegasusBoots::
     ld   a, [wIsRunningWithPegasusBoots]          ; $1713: $FA $4A $C1
     and  a                                        ; $1716: $A7
     ret  nz                                       ; $1717: $C0
-    ldh  a, [hLinkPositionZHigh]                      ; $1718: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $1718: $F0 $A2
     ld   hl, wIsLinkInTheAir                      ; $171A: $21 $46 $C1
     or   [hl]                                     ; $171D: $B6
     ret  nz                                       ; $171E: $C0
@@ -2724,7 +2724,7 @@ UsePegasusBoots::
 func_1756::
     ldh  a, [hFrameCounter]                       ; $1756: $F0 $E7
     and  $07                                      ; $1758: $E6 $07
-    ld   hl, hLinkPositionZHigh                       ; $175A: $21 $A2 $FF
+    ld   hl, hLinkPositionZ                       ; $175A: $21 $A2 $FF
     or   [hl]                                     ; $175D: $B6
     ld   hl, hLinkInteractiveMotionBlocked        ; $175E: $21 $A1 $FF
     or   [hl]                                     ; $1761: $B6
@@ -3502,11 +3502,11 @@ label_1F69_trampoline::
 ; Physics for Link interactive motion?
 ; (Only ever called from label_002_4287)
 label_1F69::
-    ; If running with pegagus boots, or hLinkPositionZHigh != 0, or Link's motion != LINK_MOTION_INTERACTIVE, return
+    ; If running with pegagus boots, or hLinkPositionZ != 0, or Link's motion != LINK_MOTION_INTERACTIVE, return
     ld   hl, wIsRunningWithPegasusBoots           ; $1F69: $21 $4A $C1
     ld   a, [wIsCarryingLiftedObject]             ; $1F6C: $FA $5C $C1
     or   [hl]                                     ; $1F6F: $B6
-    ld   hl, hLinkPositionZHigh                       ; $1F70: $21 $A2 $FF
+    ld   hl, hLinkPositionZ                       ; $1F70: $21 $A2 $FF
     or   [hl]                                     ; $1F73: $B6
     ld   hl, wLinkMotionState                     ; $1F74: $21 $1C $C1
     or   [hl]                                     ; $1F77: $B6
@@ -3550,7 +3550,7 @@ ENDC
     ; (Sanity check: if HIGH(hl) != $D7, then we're far out of bounds: return)
     ld   a, h                                     ; $1FA5: $7C
     cp   $D7                                      ; $1FA6: $FE $D7
-    jp   nz, .clearC15FAndReturn                  ; $1FA8: $C2 $4E $21
+    jp   nz, .clearPullCounterAndReturn           ; $1FA8: $C2 $4E $21
 
     ; hMultiPurpose0 = id of room object under the sword
     ld   a, [hl]                                  ; $1FAB: $7E
@@ -3573,21 +3573,21 @@ ENDC
 
     ldh  a, [hMultiPurpose5]                      ; $1FBE: $F0 $DC
     cp   $00                                      ; $1FC0: $FE $00
-    jp   z, .clearC15FAndReturn                   ; $1FC2: $CA $4E $21
+    jp   z, .clearPullCounterAndReturn            ; $1FC2: $CA $4E $21
     cp   $01                                      ; $1FC5: $FE $01
     jr   z, .jp_1FE6                              ; $1FC7: $28 $1D
     cp   $50                                      ; $1FC9: $FE $50
-    jp   z, .clearC15FAndReturn                   ; $1FCB: $CA $4E $21
+    jp   z, .clearPullCounterAndReturn            ; $1FCB: $CA $4E $21
     cp   $51                                      ; $1FCE: $FE $51
-    jp   z, .clearC15FAndReturn                   ; $1FD0: $CA $4E $21
+    jp   z, .clearPullCounterAndReturn            ; $1FD0: $CA $4E $21
     cp   $11                                      ; $1FD3: $FE $11
-    jp  c, .clearC15FAndReturn                    ; $1FD5: $DA $4E $21
+    jp  c, .clearPullCounterAndReturn             ; $1FD5: $DA $4E $21
     cp   $D4                                      ; $1FD8: $FE $D4
-    jp   nc, .clearC15FAndReturn                  ; $1FDA: $D2 $4E $21
+    jp   nc, .clearPullCounterAndReturn           ; $1FDA: $D2 $4E $21
     cp   $D0                                      ; $1FDD: $FE $D0
     jr   nc, .jp_1FE6                             ; $1FDF: $30 $05
     cp   $7C                                      ; $1FE1: $FE $7C
-    jp   nc, .clearC15FAndReturn                  ; $1FE3: $D2 $4E $21
+    jp   nc, .clearPullCounterAndReturn           ; $1FE3: $D2 $4E $21
 
 .jp_1FE6
     ldh  a, [hMultiPurpose0]                      ; $1FE6: $F0 $D7
@@ -3779,7 +3779,7 @@ ENDC
     add  hl, de                                   ; $2107: $19
     ldh  a, [hPressedButtonsMask]                 ; $2108: $F0 $CB
     and  [hl]                                     ; $210A: $A6
-    jr   z, .clearC15FAndReturn                   ; $210B: $28 $41
+    jr   z, .clearPullCounterAndReturn            ; $210B: $28 $41
     ld   hl, data_1F59                            ; $210D: $21 $59 $1F
     add  hl, de                                   ; $2110: $19
     ld   a, [hl]                                  ; $2111: $7E
@@ -3797,7 +3797,7 @@ ENDC
     ld   e, $03                                   ; $212A: $1E $03
 
 .jp_212C
-    ld   hl, wC15F                                ; $212C: $21 $5F $C1
+    ld   hl, wPullCounter                         ; $212C: $21 $5F $C1
     inc  [hl]                                     ; $212F: $34
     ld   a, [hl]                                  ; $2130: $7E
     cp   e                                        ; $2131: $BB
@@ -3827,9 +3827,9 @@ ENDC
 .return
     ret                                           ; $214D: $C9
 
-.clearC15FAndReturn
+.clearPullCounterAndReturn:
     xor  a                                        ; $214E: $AF
-    ld   [wC15F], a                               ; $214F: $EA $5F $C1
+    ld   [wPullCounter], a                        ; $214F: $EA $5F $C1
     ret                                           ; $2152: $C9
 
 .jr_2153
@@ -3944,7 +3944,7 @@ ComputeLinkPosition::
     ret                                           ; $21E0: $C9
 
 func_21E1::
-    ldh  a, [hLinkPositionZLow]                               ; $21E1: $F0 $A3
+    ldh  a, [hLinkVelocityZ]                               ; $21E1: $F0 $A3
     push af                                       ; $21E3: $F5
     swap a                                        ; $21E4: $CB $37
     and  $F0                                      ; $21E6: $E6 $F0
@@ -3952,7 +3952,7 @@ func_21E1::
     add  a, [hl]                                  ; $21EB: $86
     ld   [hl], a                                  ; $21EC: $77
     rl   d                                        ; $21ED: $CB $12
-    ld   hl, hLinkPositionZHigh                       ; $21EF: $21 $A2 $FF
+    ld   hl, hLinkPositionZ                       ; $21EF: $21 $A2 $FF
     pop  af                                       ; $21F2: $F1
     ld   e, $00                                   ; $21F3: $1E $00
     bit  7, a                                     ; $21F5: $CB $7F

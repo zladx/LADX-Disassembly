@@ -234,7 +234,7 @@ func_005_5490::
     cp   $02                                      ; $54BA: $FE $02
     jr   nz, jr_005_54C1                          ; $54BC: $20 $03
 
-    ldh  a, [hLinkPositionZHigh]                      ; $54BE: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $54BE: $F0 $A2
     ld   [hl], a                                  ; $54C0: $77
 
 jr_005_54C1:

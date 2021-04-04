@@ -102,7 +102,7 @@ ApplyRoomTransition::
 
     ; Clear variables
     call ClearLinkPositionIncrement               ; $793D: $CD $8E $17
-    ldh  [hLinkPositionZLow], a                               ; $7940: $E0 $A3
+    ldh  [hLinkVelocityZ], a                               ; $7940: $E0 $A3
     ld   [wRoomTransitionState], a                ; $7942: $EA $24 $C1
 
     ; Save Link's initial position on the new map

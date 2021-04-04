@@ -1980,7 +1980,7 @@ CreateFollowingNpcEntity::
     ld   hl, wEntitiesPosXTable                   ; $5FFD: $21 $00 $C2
     add  hl, de                                   ; $6000: $19
     ld   [hl], a                                  ; $6001: $77
-    ldh  a, [hLinkPositionZHigh]                      ; $6002: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $6002: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $6004: $21 $10 $C3
     add  hl, de                                   ; $6007: $19
     ld   [hl], a                                  ; $6008: $77
@@ -2120,7 +2120,7 @@ CreateFollowingNpcEntity::
     ld   [hl], a                                  ; $60BE: $77
     ld   hl, $D175                                ; $60BF: $21 $75 $D1
     call .decrementConsecutiveBytes               ; $60C2: $CD $18 $61
-    ldh  a, [hLinkPositionZHigh]                      ; $60C5: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $60C5: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $60C7: $21 $10 $C3
     add  hl, de                                   ; $60CA: $19
     ld   [hl], a                                  ; $60CB: $77
@@ -2226,7 +2226,7 @@ CreateFollowingNpcEntity::
     ld   hl, wEntitiesPosYTable                   ; $6155: $21 $10 $C2
     add  hl, de                                   ; $6158: $19
     ld   [hl], a                                  ; $6159: $77
-    ldh  a, [hLinkPositionZHigh]                      ; $615A: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $615A: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $615C: $21 $10 $C3
     add  hl, de                                   ; $615F: $19
     ld   [hl], a                                  ; $6160: $77

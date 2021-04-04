@@ -282,7 +282,7 @@ jr_006_7D91:
     ld   hl, wEntitiesPosYTable                   ; $7DAB: $21 $10 $C2
     add  hl, bc                                   ; $7DAE: $09
     ld   [hl], a                                  ; $7DAF: $77
-    ldh  a, [hLinkPositionZHigh]                      ; $7DB0: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $7DB0: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $7DB2: $21 $10 $C3
     add  hl, bc                                   ; $7DB5: $09
     ld   [hl], a                                  ; $7DB6: $77

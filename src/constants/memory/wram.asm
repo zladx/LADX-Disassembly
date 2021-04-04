@@ -463,8 +463,9 @@ wC15D:
 wC15E:
   ds 1 ; C15E
 
-; Unlabeled
-wC15F:
+; Counter that is increased every frame when pulling with the powerbracelet.
+; Used for a delay after starting pulling something before lifting it over your head
+wPullCounter:
   ds 1 ; C15F
 
 ; Unlabeled

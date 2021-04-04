@@ -1122,7 +1122,7 @@ jr_004_547E:
     cp   $06                                      ; $5494: $FE $06
     jr   z, jr_004_54F0                           ; $5496: $28 $58
 
-    ldh  a, [hLinkPositionZHigh]                      ; $5498: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $5498: $F0 $A2
     and  a                                        ; $549A: $A7
     jr   nz, jr_004_54F0                          ; $549B: $20 $53
 

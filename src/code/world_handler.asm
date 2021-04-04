@@ -161,7 +161,7 @@ GameplayWorldLoadRoomHandler::
     ldh  [hLinkPositionY], a                      ; $4440: $E0 $99
     ld   [wLinkMapEntryPositionY], a              ; $4442: $EA $B2 $DB
     ld   a, [wDBC8]                               ; $4445: $FA $C8 $DB
-    ldh  [hLinkPositionZHigh], a                      ; $4448: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $4448: $E0 $A2
     and  a                                        ; $444A: $A7
     jr   z, jr_001_4452                           ; $444B: $28 $05
     ld   a, $02                                   ; $444D: $3E $02

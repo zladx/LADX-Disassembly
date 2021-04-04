@@ -98,6 +98,6 @@ jr_006_7E55:
     ldh  [hLinkPositionY], a                      ; $7E61: $E0 $99
     xor  a                                        ; $7E63: $AF
     ld   [wIsLinkInTheAir], a                     ; $7E64: $EA $46 $C1
-    ldh  [hLinkPositionZHigh], a                      ; $7E67: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $7E67: $E0 $A2
     call func_006_7F05                            ; $7E69: $CD $05 $7F
     jp   func_006_7F05                            ; $7E6C: $C3 $05 $7F

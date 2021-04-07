@@ -86,7 +86,7 @@ ENTITY_DROPPABLE_HEART               equ $2D
 ENTITY_DROPPABLE_RUPEE               equ $2E
 ENTITY_DROPPABLE_FAIRY               equ $2F
 ENTITY_KEY_DROP_POINT                equ $30
-ENTITY_SHIELD                        equ $31 ; was previous called ENTITY_SWORD, but never used in that way
+ENTITY_SWORD_SHIELD_PICKUP           equ $31
 ENTITY_32                            equ $32 ; unknown
 ENTITY_PIECE_OF_POWER                equ $33
 ENTITY_GUARDIAN_ACORN                equ $34

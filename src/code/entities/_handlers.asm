@@ -62,7 +62,7 @@ EntityHandlersTable::
 ._2E far_pointer DroppableRupeeEntityHandler
 ._2F far_pointer DroppableFairyEntityHandler
 ._30 far_pointer KeyDropPointEntityHandler ; $30
-._31 far_pointer SwordEntityHandler
+._31 far_pointer SwordShieldPickableEntityHandler
 ._32 far_pointer Entity32Handler
 ._33 far_pointer PieceOfPowerEntityHandler
 ._34 far_pointer GuardianAcornEntityHandler ; $34

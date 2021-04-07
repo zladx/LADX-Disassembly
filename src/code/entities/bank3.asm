@@ -3430,16 +3430,19 @@ SwordShieldPickableState0Handler::
     jp   z, label_003_60AA                        ; $5BBD: $CA $AA $60
 
     cp   $10                                      ; $5BC0: $FE $10
-    jr   nz, jr_003_5BCB                          ; $5BC2: $20 $07
+    jr   nz, .playSwordFanfare                    ; $5BC2: $20 $07
 
+    ; decrement countdown
     dec  [hl]                                     ; $5BC4: $35
+
+    ; "You found your Sword!"
     call_open_dialog $09B                         ; $5BC5
     xor  a                                        ; $5BCA: $AF
 
-; Plays a heroic fanfare, when you first retrieve your sword from the beach
-jr_003_5BCB:
+.playSwordFanfare
+    ; Plays a heroic fanfare, when you first retrieve your sword from the beach
     dec  a                                        ; $5BCB: $3D
-    jr   nz, jr_003_5BE1                          ; $5BCC: $20 $13
+    jr   nz, .holdItemAboveLink                   ; $5BCC: $20 $13
 
     ld   a, MUSIC_OVERWORLD_INTRO                 ; $5BCE: $3E $31
     ld   [wMusicTrackToPlay], a                   ; $5BD0: $EA $68 $D3
@@ -3450,7 +3453,7 @@ jr_003_5BCB:
     ld   [hl], $52                                ; $5BDC: $36 $52
     call IncrementEntityState                     ; $5BDE: $CD $12 $3B
 
-jr_003_5BE1:
+.holdItemAboveLink
     jp   HoldEntityAboveLink                      ; $5BE1: $C3 $17 $5A
 
 SwordShieldPickableState1Handler::
@@ -3458,13 +3461,14 @@ SwordShieldPickableState1Handler::
     call GetEntityDropTimer                       ; $5BE7: $CD $FB $0B
     ret  nz                                       ; $5BEA: $C0
 
+    ; Make Link perform a spin-attack
     ld   a, $FF                                   ; $5BEB: $3E $FF
     call SetEntitySpriteVariant                   ; $5BED: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $5BF0: $CD $05 $0C
     ld   [hl], $20                                ; $5BF3: $36 $20
     ld   a, USING_SPIN_ATTACK_MAX                 ; $5BF5: $3E $20
     ld   [wIsUsingSpinAttack], a                  ; $5BF7: $EA $21 $C1
-    ld   a, $03                                   ; $5BFA: $3E $03
+    ld   a, NOISE_SFX_SPIN_ATTACK                 ; $5BFA: $3E $03
     ldh  [hNoiseSfx], a                           ; $5BFC: $E0 $F4
     jp   IncrementEntityState                     ; $5BFE: $C3 $12 $3B
 
@@ -3472,7 +3476,8 @@ SwordShieldPickableState2Handler::
     call GetEntityTransitionCountdown             ; $5C01: $CD $05 $0C
     ret  nz                                       ; $5C04: $C0
 
-    ld   [hl], $20                                ; $5C05: $36 $20
+    ; Prepare Link to raise the sword for 32 more frames
+    ld   [hl], 32                                 ; $5C05: $36 $20
     ld   a, $00                                   ; $5C07: $3E $00
     call SetEntitySpriteVariant                   ; $5C09: $CD $0C $3B
     jp   IncrementEntityState                     ; $5C0C: $C3 $12 $3B
@@ -3487,8 +3492,9 @@ SwordShieldPickableState3Handler::
     sub  $04                                      ; $5C1C: $D6 $04
     ld   [hl], a                                  ; $5C1E: $77
     call GetEntityTransitionCountdown             ; $5C1F: $CD $05 $0C
-    jr   nz, jr_003_5C37                          ; $5C22: $20 $13
+    jr   nz, .continueToRaiseSword                ; $5C22: $20 $13
 
+    ; Animation is done: add the L-1 sword to the inventory
     ld   [wC167], a                               ; $5C24: $EA $67 $C1
     ld   d, INVENTORY_SWORD                       ; $5C27: $16 $01
     call GiveInventoryItem                        ; $5C29: $CD $72 $64
@@ -3497,17 +3503,18 @@ SwordShieldPickableState3Handler::
     call MarkRoomCompleted                        ; $5C31: $CD $2A $51
     jp   UnloadEntityAndReturn                    ; $5C34: $C3 $8D $3F
 
-jr_003_5C37:
-    cp   $1A                                      ; $5C37: $FE $1A
-    jr   nz, jr_003_5C46                          ; $5C39: $20 $0B
-
+.continueToRaiseSword
+    ; When the countdown reaches 26…
+    cp   26                                       ; $5C37: $FE $1A
+    jr   nz, .return                              ; $5C39: $20 $0B
+    ; …activate the sword poke VFX and SFX
     ldh  a, [hActiveEntityPosY]                   ; $5C3B: $F0 $EF
     sub  $0C                                      ; $5C3D: $D6 $0C
-    call CheckLinkCollisionWithProjectile.func_003_6C36; $5C3F: $CD $36 $6C
+    call CheckLinkCollisionWithProjectile.showSwordPokeVfx ; $5C3F: $CD $36 $6C
     ld   a, JINGLE_SWORD_POKING                   ; $5C42: $3E $07
     ldh  [hJingle], a                             ; $5C44: $E0 $F2
 
-jr_003_5C46:
+.return
     ret                                           ; $5C46: $C9
 
 HookshotSpriteData::
@@ -6070,7 +6077,7 @@ CheckLinkCollisionWithProjectile::
     ldh  [hJingle], a                             ; $6C32: $E0 $F2
 
     ldh  a, [hActiveEntityPosY]                   ; $6C34: $F0 $EF
-.func_003_6C36
+.showSwordPokeVfx
     ldh  [hMultiPurpose1], a                      ; $6C36: $E0 $D8
     ldh  a, [hActiveEntityPosX]                   ; $6C38: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $6C3A: $E0 $D7

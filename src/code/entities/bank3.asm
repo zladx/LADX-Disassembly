@@ -2431,7 +2431,7 @@ SpawnEnemyDrop::
     and  a                                        ; $55DA: $A7
     jr   z, .likeLikeEnd                          ; $55DB: $28 $05
     ; if Like-Like swollowed the shield
-    ld   a, ENTITY_SHIELD                         ; $55DD: $3E $31
+    ld   a, ENTITY_SWORD_SHIELD_PICKUP            ; $55DD: $3E $31
     jp   .dropEntity                              ; $55DF: $C3 $70 $56
 
 .likeLikeEnd:
@@ -3403,7 +3403,8 @@ Data_003_5B95::
 Data_003_5B97::
     db   $84, $17
 
-SwordEntityHandler::
+; Sword on beach, or Shield dropped from Like-Like
+SwordShieldPickableEntityHandler::
     ld   de, Data_003_5B95                        ; $5B99: $11 $95 $5B
     ld   a, [wSwordLevel]                         ; $5B9C: $FA $4E $DB
     and  a                                        ; $5B9F: $A7
@@ -3419,12 +3420,12 @@ jr_003_5BAC:
     call RenderActiveEntitySprite                 ; $5BAC: $CD $77 $3C
     ldh  a, [hActiveEntityState]                  ; $5BAF: $F0 $F0
     JP_TABLE                                      ; $5BB1
-._00 dw SwordState0Handler                        ; $5BB2
-._01 dw SwordState1Handler                        ; $5BB4
-._02 dw SwordState2Handler                        ; $5BB6
-._03 dw SwordState3Handler                        ; $5BB8
+._00 dw SwordShieldPickableState0Handler                        ; $5BB2
+._01 dw SwordShieldPickableState1Handler                        ; $5BB4
+._02 dw SwordShieldPickableState2Handler                        ; $5BB6
+._03 dw SwordShieldPickableState3Handler                        ; $5BB8
 
-SwordState0Handler::
+SwordShieldPickableState0Handler::
     call GetEntityTransitionCountdown             ; $5BBA: $CD $05 $0C
     jp   z, label_003_60AA                        ; $5BBD: $CA $AA $60
 
@@ -3452,7 +3453,7 @@ jr_003_5BCB:
 jr_003_5BE1:
     jp   HoldEntityAboveLink                      ; $5BE1: $C3 $17 $5A
 
-SwordState1Handler::
+SwordShieldPickableState1Handler::
     call HoldEntityAboveLink                      ; $5BE4: $CD $17 $5A
     call GetEntityDropTimer                       ; $5BE7: $CD $FB $0B
     ret  nz                                       ; $5BEA: $C0
@@ -3467,7 +3468,7 @@ SwordState1Handler::
     ldh  [hNoiseSfx], a                           ; $5BFC: $E0 $F4
     jp   IncrementEntityState                     ; $5BFE: $C3 $12 $3B
 
-SwordState2Handler::
+SwordShieldPickableState2Handler::
     call GetEntityTransitionCountdown             ; $5C01: $CD $05 $0C
     ret  nz                                       ; $5C04: $C0
 
@@ -3476,7 +3477,7 @@ SwordState2Handler::
     call SetEntitySpriteVariant                   ; $5C09: $CD $0C $3B
     jp   IncrementEntityState                     ; $5C0C: $C3 $12 $3B
 
-SwordState3Handler::
+SwordShieldPickableState3Handler::
     call HoldEntityAboveLink                      ; $5C0F: $CD $17 $5A
     ld   a, LINK_ANIMATION_STATE_UNKNOWN_6B       ; $5C12: $3E $6B
     ldh  [hLinkAnimationState], a                 ; $5C14: $E0 $9D
@@ -4582,7 +4583,7 @@ Data_003_629E::
     db   TRUE                                     ; ENTITY_DROPPABLE_RUPEE
     db   FALSE                                    ; ENTITY_DROPPABLE_FAIRY
     db   FALSE                                    ; ENTITY_KEY_DROP_POINT
-    db   TRUE                                     ; ENTITY_SHIELD
+    db   TRUE                                     ; ENTITY_SWORD_SHIELD_PICKUP
     db   FALSE                                    ; ENTITY_32
     db   TRUE                                     ; ENTITY_PIECE_OF_POWER
     db   TRUE                                     ; ENTITY_GUARDIAN_ACORN

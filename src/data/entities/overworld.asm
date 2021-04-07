@@ -1204,7 +1204,7 @@ OverworldF1Entities::
 
 OverworldF2Entities::
   entity $0, $0, ENTITY_OWL_EVENT
-  entity $5, $5, ENTITY_SHIELD
+  entity $5, $5, ENTITY_SWORD_SHIELD_PICKUP
   entity $3, $2, ENTITY_URCHIN
   entities_end
 

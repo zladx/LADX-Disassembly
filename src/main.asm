@@ -479,8 +479,10 @@ section "bank37",romx[$4000],bank[$37]
 include "code/photos.asm"
 
 section "bank38",romx[$4000],bank[$38]
-CgbMiscTiles::
-incbin "gfx/cgb_misc.2bpp"
+PhotographerTiles::
+incbin "gfx/characters/oam_photographer.2bpp"
+CreditsRollTiles::
+incbin "gfx/ending/credits_roll.2bpp"
 TitleDXTiles::
 TitleDXTilesDMG::
 incbin "gfx/intro/title_dx.dmg.2bpp"

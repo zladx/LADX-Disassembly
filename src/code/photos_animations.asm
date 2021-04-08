@@ -1,13 +1,13 @@
 ; Array of origin addresses
 Data_038_7800::
-    dw   CgbMiscTiles + $000
-    dw   CgbMiscTiles + $040
-    dw   CgbMiscTiles + $080
-    dw   CgbMiscTiles + $0C0
-    dw   CgbMiscTiles + $100
-    dw   CgbMiscTiles + $140
-    dw   CgbMiscTiles + $180
-    dw   CgbMiscTiles + $1C0
+    dw   PhotographerTiles + $000
+    dw   PhotographerTiles + $040
+    dw   PhotographerTiles + $080
+    dw   PhotographerTiles + $0C0
+    dw   PhotographerTiles + $100
+    dw   PhotographerTiles + $140
+    dw   PhotographerTiles + $180
+    dw   PhotographerTiles + $1C0
 
 ; Array of destination addresses
 Data_038_7810::

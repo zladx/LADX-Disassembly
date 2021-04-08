@@ -4654,8 +4654,8 @@ IF __PATCH_1__
     jr   .both
 
 .cgbOnly
-    ld   a, BANK(CgbMiscTiles)
-    ld   hl, CgbMiscTiles + $1100
+    ld   a, BANK(CreditsRollTiles)
+    ld   hl, CreditsRollTiles + $100
 
 .both
     ld   [MBC3SelectBank], a
@@ -4663,9 +4663,9 @@ IF __PATCH_1__
     ld   bc, TILE_SIZE * $70
     call CopyData
 
-    ld   a, BANK(CgbMiscTiles)
+    ld   a, BANK(CreditsRollTiles)
     ld   [MBC3SelectBank], a
-    ld   hl, CgbMiscTiles + $10c0
+    ld   hl, CreditsRollTiles + $0c0
     ld   de, vTiles0 + $C0
     ld   bc, TILE_SIZE * $4
     jp   CopyData
@@ -4679,9 +4679,9 @@ ELSE
     jp   CopyData                                 ; $2B5E: $C3 $14 $29
 
 .cgbOnly
-    ld   a, BANK(CgbMiscTiles)                    ; $2B61: $3E $38
+    ld   a, BANK(CreditsRollTiles)                ; $2B61: $3E $38
     ld   [MBC3SelectBank], a                      ; $2B63: $EA $00 $21
-    ld   hl, CgbMiscTiles + $1000                 ; $2B66: $21 $00 $50
+    ld   hl, CreditsRollTiles                     ; $2B66: $21 $00 $50
     ld   de, vTiles0                              ; $2B69: $11 $00 $80
     ld   bc, TILE_SIZE * $80                      ; $2B6C: $01 $00 $08
     jp   CopyData                                 ; $2B6F: $C3 $14 $29

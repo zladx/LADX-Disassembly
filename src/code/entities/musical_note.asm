@@ -9,7 +9,7 @@ MusicalNoteEntityHandler::
     ld   a, [hl]                                  ; $7F02: $7E
     dec  a                                        ; $7F03: $3D
     ld   [hl], a                                  ; $7F04: $77
-    jp   z, func_005_7B4B                         ; $7F05: $CA $4B $7B
+    jp   z, ClearEntityStatus_05                  ; $7F05: $CA $4B $7B
 
     bit  4, a                                     ; $7F08: $CB $67
     ld   e, $01                                   ; $7F0A: $1E $01

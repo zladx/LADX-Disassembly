@@ -1164,7 +1164,7 @@ jr_005_7534:
 func_005_7535::
     xor  a                                        ; $7535: $AF
     ld   [$D200], a                               ; $7536: $EA $00 $D2
-    jp   func_005_7B4B                            ; $7539: $C3 $4B $7B
+    jp   ClearEntityStatus_05                     ; $7539: $C3 $4B $7B
 
 func_005_753C::
     call func_005_79A7                            ; $753C: $CD $A7 $79
@@ -1251,7 +1251,7 @@ jr_005_75B4:
     ld   [hl], $08                                ; $75BE: $36 $08
 
 jr_005_75C0:
-    call func_005_7B4B                            ; $75C0: $CD $4B $7B
+    call ClearEntityStatus_05                     ; $75C0: $CD $4B $7B
     ld   hl, hNoiseSfx                            ; $75C3: $21 $F4 $FF
     ld   [hl], $1A                                ; $75C6: $36 $1A
     ret                                           ; $75C8: $C9
@@ -1921,7 +1921,7 @@ jr_005_7B49:
     ld   e, a                                     ; $7B49: $5F
     ret                                           ; $7B4A: $C9
 
-func_005_7B4B::
+ClearEntityStatus_05::
     ld   hl, wEntitiesStatusTable                 ; $7B4B: $21 $80 $C2
     add  hl, bc                                   ; $7B4E: $09
     ld   [hl], b                                  ; $7B4F: $70

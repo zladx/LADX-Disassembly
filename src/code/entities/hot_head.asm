@@ -678,7 +678,7 @@ label_005_6754:
 
 label_005_6776:
     call GetEntityTransitionCountdown             ; $6776: $CD $05 $0C
-    jp   z, func_005_7B4B                         ; $6779: $CA $4B $7B
+    jp   z, ClearEntityStatus_05                  ; $6779: $CA $4B $7B
 
     cp   $0A                                      ; $677C: $FE $0A
     ld   a, $05                                   ; $677E: $3E $05
@@ -730,7 +730,7 @@ jr_005_67C8:
 
 func_005_67D2::
     call GetEntityTransitionCountdown             ; $67D2: $CD $05 $0C
-    jp   z, func_005_7B4B                         ; $67D5: $CA $4B $7B
+    jp   z, ClearEntityStatus_05                  ; $67D5: $CA $4B $7B
 
     rra                                           ; $67D8: $1F
     rra                                           ; $67D9: $1F

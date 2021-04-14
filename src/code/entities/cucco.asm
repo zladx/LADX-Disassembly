@@ -348,11 +348,11 @@ func_005_474E::
     call UpdateEntityPosWithSpeed_05              ; $4751: $CD $B1 $7A
     ldh  a, [hActiveEntityPosX]                   ; $4754: $F0 $EE
     cp   $A9                                      ; $4756: $FE $A9
-    jp   nc, func_005_7B4B                        ; $4758: $D2 $4B $7B
+    jp   nc, ClearEntityStatus_05                 ; $4758: $D2 $4B $7B
 
     ldh  a, [hActiveEntityVisualPosY]             ; $475B: $F0 $EC
     cp   $91                                      ; $475D: $FE $91
-    jp   nc, func_005_7B4B                        ; $475F: $D2 $4B $7B
+    jp   nc, ClearEntityStatus_05                 ; $475F: $D2 $4B $7B
 
     ldh  a, [hFrameCounter]                       ; $4762: $F0 $E7
     rra                                           ; $4764: $1F

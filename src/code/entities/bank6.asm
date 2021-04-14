@@ -396,7 +396,7 @@ jr_006_65D9:
     ld   e, a                                     ; $65D9: $5F
     ret                                           ; $65DA: $C9
 
-; Reset the entity status to 0
+; Reset the entity status to 0, thus removing the entity.
 ;
 ; Inputs:
 ;   bc   entity index

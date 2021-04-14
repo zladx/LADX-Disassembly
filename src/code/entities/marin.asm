@@ -23,7 +23,7 @@ MarinEntityHandler::
 
     ld   a, [wIsMarinFollowingLink]               ; $4E6A: $FA $73 $DB
     and  a                                        ; $4E6D: $A7
-    jp   nz, func_005_7B4B                        ; $4E6E: $C2 $4B $7B
+    jp   nz, ClearEntityStatus_05                 ; $4E6E: $C2 $4B $7B
 
     ld   a, [wIsIndoor]                           ; $4E71: $FA $A5 $DB
     and  a                                        ; $4E74: $A7
@@ -31,7 +31,7 @@ MarinEntityHandler::
 
     ld   a, [wSwordLevel]                         ; $4E78: $FA $4E $DB
     and  a                                        ; $4E7B: $A7
-    jp   z, func_005_7B4B                         ; $4E7C: $CA $4B $7B
+    jp   z, ClearEntityStatus_05                  ; $4E7C: $CA $4B $7B
 
     ldh  a, [hMapRoom]                            ; $4E7F: $F0 $F6
     cp   $C0                                      ; $4E81: $FE $C0
@@ -46,7 +46,7 @@ jr_005_4E87:
 
     ld   a, [wTradeSequenceItem]                  ; $4E8E: $FA $0E $DB
     cp   TRADING_ITEM_PINEAPPLE                   ; $4E91: $FE $07
-    jp   nc, func_005_7B4B                        ; $4E93: $D2 $4B $7B
+    jp   nc, ClearEntityStatus_05                 ; $4E93: $D2 $4B $7B
 
 jr_005_4E96:
     push bc                                       ; $4E96: $C5
@@ -601,7 +601,7 @@ func_005_51CE::
 
     ld   a, [wOverworldRoomStatus + $FD]                               ; $51D5: $FA $FD $D8
     and  $30                                      ; $51D8: $E6 $30
-    jp   nz, func_005_7B4B                        ; $51DA: $C2 $4B $7B
+    jp   nz, ClearEntityStatus_05                 ; $51DA: $C2 $4B $7B
 
     ld   hl, wEntitiesPosYTable                   ; $51DD: $21 $10 $C2
     add  hl, bc                                   ; $51E0: $09
@@ -620,7 +620,7 @@ func_005_51CE::
 jr_005_51FB:
     ld   a, [wSwordLevel]                         ; $51FB: $FA $4E $DB
     and  a                                        ; $51FE: $A7
-    jp   nz, func_005_7B4B                        ; $51FF: $C2 $4B $7B
+    jp   nz, ClearEntityStatus_05                 ; $51FF: $C2 $4B $7B
 
     ld   a, [wShieldLevel]                        ; $5202: $FA $44 $DB
     and  a                                        ; $5205: $A7

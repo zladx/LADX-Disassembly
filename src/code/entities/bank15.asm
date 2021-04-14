@@ -7783,6 +7783,10 @@ jr_015_7C2F:
     ld   e, a                                     ; $7C2F: $5F
     ret                                           ; $7C30: $C9
 
+; Reset the entity status to 0, thus removing the entity.
+;
+; Inputs:
+;   bc   entity index
 ClearEntityStatus_15::
     ld   hl, wEntitiesStatusTable                 ; $7C31: $21 $80 $C2
     add  hl, bc                                   ; $7C34: $09

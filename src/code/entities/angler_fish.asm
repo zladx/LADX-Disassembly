@@ -440,7 +440,7 @@ jr_005_5913:
 jr_005_592A:
     ldh  a, [hActiveEntityVisualPosY]             ; $592A: $F0 $EC
     cp   $10                                      ; $592C: $FE $10
-    jp   c, func_005_7B4B                         ; $592E: $DA $4B $7B
+    jp   c, ClearEntityStatus_05                  ; $592E: $DA $4B $7B
 
     ret                                           ; $5931: $C9
 
@@ -481,7 +481,7 @@ jr_005_5962:
     call UpdateEntityPosWithSpeed_05              ; $596D: $CD $B1 $7A
     ldh  a, [hActiveEntityVisualPosY]             ; $5970: $F0 $EC
     cp   $8B                                      ; $5972: $FE $8B
-    jp   nc, func_005_7B4B                        ; $5974: $D2 $4B $7B
+    jp   nc, ClearEntityStatus_05                 ; $5974: $D2 $4B $7B
 
     ret                                           ; $5977: $C9
 
@@ -546,7 +546,7 @@ jr_005_59CE:
 
     ldh  a, [hActiveEntityPosX]                   ; $59D6: $F0 $EE
     cp   $A8                                      ; $59D8: $FE $A8
-    jp   nc, func_005_7B4B                        ; $59DA: $D2 $4B $7B
+    jp   nc, ClearEntityStatus_05                 ; $59DA: $D2 $4B $7B
 
 jr_005_59DD:
     ret                                           ; $59DD: $C9

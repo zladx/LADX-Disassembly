@@ -1365,7 +1365,7 @@ jr_005_62A6:
 jr_005_62B0:
     ldh  a, [hActiveEntityPosX]                   ; $62B0: $F0 $EE
     cp   $E0                                      ; $62B2: $FE $E0
-    jp   nc, func_005_7B4B                        ; $62B4: $D2 $4B $7B
+    jp   nc, ClearEntityStatus_05                 ; $62B4: $D2 $4B $7B
 
     ret                                           ; $62B7: $C9
 
@@ -1407,7 +1407,7 @@ jr_005_62F5:
 func_005_62FA::
     ldh  a, [hActiveEntityPosX]                   ; $62FA: $F0 $EE
     cp   $A8                                      ; $62FC: $FE $A8
-    jp   nc, func_005_7B4B                        ; $62FE: $D2 $4B $7B
+    jp   nc, ClearEntityStatus_05                 ; $62FE: $D2 $4B $7B
 
     ret                                           ; $6301: $C9
                                           ; $6313: $C9

@@ -496,9 +496,9 @@ func_036_4A4C_trampoline::
     callsb func_036_4A4C                          ; $0AEB: $3E $36 $EA $00 $21 $CD $4C $4A
     jp   RestoreStackedBankAndReturn              ; $0AF3: $C3 $73 $09
 
-func_036_7161_trampoline::
+SpawnPhotographer_trampoline::
     push af                                       ; $0AF6: $F5
-    callsb func_036_7161                          ; $0AF7: $3E $36 $EA $00 $21 $CD $61 $71
+    callsb SpawnPhotographer                      ; $0AF7: $3E $36 $EA $00 $21 $CD $61 $71
     jp   RestoreStackedBankAndReturn              ; $0AFF: $C3 $73 $09
 
 ; Load Background map and attributes for photo

@@ -1626,7 +1626,7 @@ GrandmaUlriraEntityHandler::
 
     inc  [hl]                                     ; $4D1F: $34
     ld   a, $18                                   ; $4D20: $3E $18
-    call func_036_7161_trampoline                 ; $4D22: $CD $F6 $0A
+    call SpawnPhotographer_trampoline             ; $4D22: $CD $F6 $0A
     ld   a, [wHasInstrument5]                     ; $4D25: $FA $69 $DB
     ld   d, $B1                                   ; $4D28: $16 $B1
     and  $02                                      ; $4D2A: $E6 $02

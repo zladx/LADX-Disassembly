@@ -8100,7 +8100,8 @@ label_036_712D:
 Data_036_7159::
     db   $FF, $7F, $00, $00, $71, $44, $7F, $7D
 
-func_036_7161::
+; If needed, spawn a photographer entity in the current room.
+SpawnPhotographer::
     ldh  a, [hMapRoom]                            ; $7161: $F0 $F6
     cp   $B1                                      ; $7163: $FE $B1
     ret  nz                                       ; $7165: $C0

@@ -304,8 +304,23 @@ jr_019_41E2:
     call AddTranscientVfx                         ; $41FB: $CD $C7 $0C
     jp   ClearEntityStatus_19                            ; $41FE: $C3 $61 $7E
 
-Data_019_4201::
-    db   $17, $11, $36, $28, $45, $52, $7A, $64, $93, $A1, $C5, $D4, $28, $0E, $3F, $5D
+Data_019_4201:: ; Warp points ?
+    db   UNKNOWN_ROOM_17
+    db   UNKNOWN_ROOM_11
+    db   UNKNOWN_ROOM_36
+    db   UNKNOWN_ROOM_28
+    db   UNKNOWN_ROOM_45
+    db   UNKNOWN_ROOM_52
+    db   MOUNTAIN_CAVE_ROOM_1
+    db   UNKNOWN_ROOM_64
+    db   UNKNOWN_ROOM_93
+    db   UNKNOWN_ROOM_A1
+    db   UNKNOWN_ROOM_C5
+    db   UNKNOWN_ROOM_D4
+    db   UNKNOWN_ROOM_28
+    db   ROOM_OW_EAGLE_TOWER
+    db   UNKNOWN_ROOM_3F
+    db   UNKNOWN_ROOM_5D
 
 WarpEntityHandler::
     ld   a, [wIsIndoor]                           ; $4211: $FA $A5 $DB
@@ -313,13 +328,13 @@ WarpEntityHandler::
     jr   nz, jr_019_4279                          ; $4215: $20 $62
 
     ldh  a, [hMapRoom]                            ; $4217: $F0 $F6
-    cp   $CF                                      ; $4219: $FE $CF
+    cp   UNKNOWN_ROOM_CF                          ; $4219: $FE $CF
     jr   z, jr_019_4226                           ; $421B: $28 $09
 
-    cp   $DE                                      ; $421D: $FE $DE
+    cp   UNKNOWN_ROOM_DE                          ; $421D: $FE $DE
     jr   z, jr_019_4226                           ; $421F: $28 $05
 
-    cp   $CE                                      ; $4221: $FE $CE
+    cp   ROOM_OW_YARNA_LANMOLA                    ; $4221: $FE $CE
     jp   nz, label_019_4406                       ; $4223: $C2 $06 $44
 
 jr_019_4226:
@@ -1166,7 +1181,7 @@ jr_019_4890:
 func_019_4891::
     ld   de, Data_019_4842                        ; $4891: $11 $42 $48
     ldh  a, [hMapRoom]                            ; $4894: $F0 $F6
-    cp   $EA                                      ; $4896: $FE $EA
+    cp   UNKNOWN_ROOM_EA                          ; $4896: $FE $EA
     jr   z, jr_019_48A6                           ; $4898: $28 $0C
 
     ld   de, Data_019_4838                        ; $489A: $11 $38 $48
@@ -2503,10 +2518,10 @@ FlyingRoosterEventsEntityHandler::
     jr   z, jr_019_51D2                           ; $51C1: $28 $0F
 
     ldh  a, [hMapRoom]                            ; $51C3: $F0 $F6
-    cp   $E4                                      ; $51C5: $FE $E4
+    cp   UNKNOWN_ROOM_E4                          ; $51C5: $FE $E4
     jp   z, label_019_4D9B                        ; $51C7: $CA $9B $4D
 
-    cp   $F4                                      ; $51CA: $FE $F4
+    cp   UNKNOWN_ROOM_F4                          ; $51CA: $FE $F4
     jp   z, label_019_4D9B                        ; $51CC: $CA $9B $4D
 
     jp   func_019_500D                            ; $51CF: $C3 $0D $50
@@ -2514,7 +2529,7 @@ FlyingRoosterEventsEntityHandler::
 jr_019_51D2:
     ldh  a, [hRoomStatus]                         ; $51D2: $F0 $F8
     and  ROOM_STATUS_EVENT_2                      ; $51D4: $E6 $20
-    jp   nz, ClearEntityStatus_19                        ; $51D6: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                 ; $51D6: $C2 $61 $7E
 
     ldh  a, [hActiveEntityState]                  ; $51D9: $F0 $F0
     JP_TABLE                                      ; $51DB
@@ -4221,16 +4236,7 @@ jr_019_5DF7:
 
 Data_019_5DF8::
     db   $42, $23, $40, $23, $46, $23, $44, $23, $40, $03, $42, $03, $44, $03, $46, $03
-    db   $48
-
-label_019_5E09:
-    inc  bc                                       ; $5E09: $03
-    ld   c, d                                     ; $5E0A: $4A
-    inc  bc                                       ; $5E0B: $03
-    ld   c, h                                     ; $5E0C: $4C
-    inc  bc                                       ; $5E0D: $03
-    ld   c, [hl]                                  ; $5E0E: $4E
-    inc  bc                                       ; $5E0F: $03
+    db   $48, $03, $4A, $03, $4C, $03, $4E, $03
 
 Data_019_5E10::
     db   $10, $11, $12, $13, $13, $12, $11, $10
@@ -4343,14 +4349,14 @@ jr_019_5EAC:
 jr_019_5EAF:
     ld   a, [wIsIndoor]                           ; $5EAF: $FA $A5 $DB
     and  a                                        ; $5EB2: $A7
-    jp   nz, GhostInHouseSequence                       ; $5EB3: $C2 $BF $5F
+    jp   nz, GhostInHouseSequence                 ; $5EB3: $C2 $BF $5F
 
     ld   a, [wGhostSeeksGrave]                    ; $5EB6: $FA $7A $DB
     and  a                                        ; $5EB9: $A7
     jp   z, label_019_5F5F                        ; $5EBA: $CA $5F $5F
 
     ldh  a, [hMapRoom]                            ; $5EBD: $F0 $F6
-    cp   $64                                      ; $5EBF: $FE $64
+    cp   UNKNOWN_ROOM_64                          ; $5EBF: $FE $64
     jp   nz, label_019_5F84                       ; $5EC1: $C2 $84 $5F
 
     ldh  a, [hActiveEntityState]                  ; $5EC4: $F0 $F0
@@ -4455,7 +4461,7 @@ label_019_5F5F:
     ret  nz                                       ; $5F68: $C0
 
     ldh  a, [hMapRoom]                            ; $5F69: $F0 $F6
-    cp   $F6                                      ; $5F6B: $FE $F6
+    cp   UNKNOWN_ROOM_F6                          ; $5F6B: $FE $F6
     jp   nz, label_019_5F84                       ; $5F6D: $C2 $84 $5F
 
     ldh  a, [hLinkPositionY]                      ; $5F70: $F0 $99
@@ -4524,7 +4530,7 @@ GhostInHouseSequence:
     ret  nz                                       ; $5FC6: $C0
 
     ldh  a, [hMapRoom]                            ; $5FC7: $F0 $F6
-    cp   $E3                                      ; $5FC9: $FE $E3
+    cp   UNKNOWN_ROOM_E3                          ; $5FC9: $FE $E3
     ret  nz                                       ; $5FCB: $C0
 
     ldh  a, [hRoomStatus]                         ; $5FCC: $F0 $F8
@@ -5255,7 +5261,7 @@ Data_019_6839::
 
 AnimateDungeonDoorOpening:
     ldh  a, [hMapRoom]                            ; $6841: $F0 $F6
-    cp   $0E                                      ; $6843: $FE $0E
+    cp   ROOM_OW_EAGLE_TOWER                      ; $6843: $FE $0E
     jp   z, AnimateEaglesTowerOpening             ; $6845: $CA $F8 $61
 
     ld   a, $02                                   ; $6848: $3E $02
@@ -5663,14 +5669,14 @@ MimicEntityHandler::
     jr   nz, jr_019_6ACE                          ; $6ABC: $20 $10
 
     ldh  a, [hMapRoom]                            ; $6ABE: $F0 $F6
-    cp   $97                                      ; $6AC0: $FE $97
+    cp   ROOM_INDOOR_B_97                         ; $6AC0: $FE $97
     jr   z, jr_019_6AC8                           ; $6AC2: $28 $04
 
-    cp   $98                                      ; $6AC4: $FE $98
+    cp   ROOM_INDOOR_B_98                         ; $6AC4: $FE $98
     jr   nz, jr_019_6ACE                          ; $6AC6: $20 $06
 
 jr_019_6AC8:
-    ld   a, [$DB7F]                               ; $6AC8: $FA $7F $DB
+    ld   a, [wDB7F]                               ; $6AC8: $FA $7F $DB
     and  a                                        ; $6ACB: $A7
     jr   nz, jr_019_6AD4                          ; $6ACC: $20 $06
 
@@ -6300,7 +6306,7 @@ BananasSchuleSaleEntityHandler::
 
 jr_019_6F25:
     ldh  a, [hMapRoom]                            ; $6F25: $F0 $F6
-    cp   $FE                                      ; $6F27: $FE $FE
+    cp   UNKNOWN_ROOM_FE                          ; $6F27: $FE $FE
     jp   z, label_019_6D00                        ; $6F29: $CA $00 $6D
 
     ldh  a, [hActiveEntityPosX]                   ; $6F2C: $F0 $EE
@@ -7935,7 +7941,7 @@ jr_019_7C6D:
     jr   nz, jr_019_7C8D                          ; $7C80: $20 $0B
 
     ldh  a, [hMapRoom]                            ; $7C82: $F0 $F6
-    cp   $32                                      ; $7C84: $FE $32
+    cp   UNKNOWN_ROOM_32                          ; $7C84: $FE $32
     jr   nz, jr_019_7C8D                          ; $7C86: $20 $05
 
     ld   hl, Data_019_7BD0                        ; $7C88: $21 $D0 $7B

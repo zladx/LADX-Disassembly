@@ -473,13 +473,13 @@ func_024_7B77::
 .jr_024_7B85
 
     ldh  a, [hMapRoom]                            ; $7B85: $F0 $F6
-    cp   $A1                                      ; $7B87: $FE $A1
+    cp   UNKNOWN_ROOM_A1                          ; $7B87: $FE $A1
     jr   z, .jr_024_7B8E                          ; $7B89: $28 $03
     ld   c, $40                                   ; $7B8B: $0E $40
     add  hl, bc                                   ; $7B8D: $09
 .jr_024_7B8E
 
-    ld   bc, $40                                ; $7B8E: $01 $40 $00
+    ld   bc, $0040                                ; $7B8E: $01 $40 $00
     ld   de, wBGPal1                              ; $7B91: $11 $10 $DC
     call CopyData                                 ; $7B94: $CD $14 $29
 

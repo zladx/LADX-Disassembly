@@ -1486,7 +1486,7 @@ PhotographerEntityHandler::
     jr   z, .overworld                            ; $4916: $28 $17
 
     ldh  a, [hMapRoom]                            ; $4918: $F0 $F6
-    cp   $DA                                      ; $491A: $FE $DA
+    cp   UNKNOWN_ROOM_DA                          ; $491A: $FE $DA
     jr   nz, .jr_036_4925                         ; $491C: $20 $07
 
     ld   de, Data_036_48E2                        ; $491E: $11 $E2 $48
@@ -1494,18 +1494,16 @@ PhotographerEntityHandler::
     ret                                           ; $4924: $C9
 
 .jr_036_4925
-    cp   $B5                                      ; $4925: $FE $B5
+    cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $4925: $FE $B5
     jp   z, label_036_429A                        ; $4927: $CA $9A $42
-
-    cp   $A4                                      ; $492A: $FE $A4
+    cp   UNKNOWN_ROOM_A4                          ; $492A: $FE $A4
     jp   z, label_036_4178                        ; $492C: $CA $78 $41
 
 .overworld
     ldh  a, [hMapRoom]                            ; $492F: $F0 $F6
-    cp   $B1                                      ; $4931: $FE $B1
+    cp   ROOM_OW_ULRIRA_HOUSE                     ; $4931: $FE $B1
     jp   z, label_036_4791                        ; $4933: $CA $91 $47
-
-    cp   $0D                                      ; $4936: $FE $0D
+    cp   UNKNOWN_ROOM_0D                          ; $4936: $FE $0D
     jp   z, label_036_4000                        ; $4938: $CA $00 $40
 
     ld   a, [wPhotos1]                            ; $493B: $FA $0C $DC
@@ -1676,28 +1674,28 @@ Data_036_4A14::
     dw   Data_036_4A11
 
 Data_036_4A24::
-    db   $03, $0A, $04
+    db   UNKNOWN_ROOM_03, UNKNOWN_ROOM_0A, UNKNOWN_ROOM_04
 
 Data_036_4A27::
-    db   $29, $33, $2F
+    db   UNKNOWN_ROOM_29, UNKNOWN_ROOM_33, UNKNOWN_ROOM_2F
 
 Data_036_4A2A::
-    db   $54, $40, $47
+    db   UNKNOWN_ROOM_54, UNKNOWN_ROOM_40, UNKNOWN_ROOM_47
 
 Data_036_4A2D::
-    db   $6F, $00, $00
+    db   UNKNOWN_ROOM_6F, UNKNOWN_ROOM_00, UNKNOWN_ROOM_00
 
 Data_036_4A30::
-    db   $8A, $9A, $00
+    db   UNKNOWN_ROOM_8A, UNKNOWN_ROOM_9A, UNKNOWN_ROOM_00
 
 Data_036_4A33::
-    db   $BB, $B6, $D7
+    db   UNKNOWN_ROOM_BB, UNKNOWN_ROOM_B6, UNKNOWN_ROOM_D7
 
 Data_036_4A36::
-    db   $16, $1C, $04
+    db   UNKNOWN_ROOM_16, UNKNOWN_ROOM_1C, UNKNOWN_ROOM_04
 
 Data_036_4A39::
-    db   $53, $45, $41
+    db   UNKNOWN_ROOM_53, UNKNOWN_ROOM_45, UNKNOWN_ROOM_41
 
 Data_036_4A3C::
     dw   Data_036_4A24
@@ -5715,7 +5713,7 @@ jr_036_62C3:
     jr   nz, jr_036_62EA                          ; $62CF: $20 $19
 
     ldh  a, [hMapRoom]                            ; $62D1: $F0 $F6
-    cp   $0A                                      ; $62D3: $FE $0A
+    cp   UNKNOWN_ROOM_0A                          ; $62D3: $FE $0A
     jr   nz, jr_036_630A                          ; $62D5: $20 $33
 
     ld   hl, wEntitiesPosYTable                   ; $62D7: $21 $10 $C2
@@ -5742,7 +5740,7 @@ jr_036_62EA:
     jr   nz, jr_036_631A                          ; $62F1: $20 $27
 
     ldh  a, [hMapRoom]                            ; $62F3: $F0 $F6
-    cp   $0A                                      ; $62F5: $FE $0A
+    cp   UNKNOWN_ROOM_0A                          ; $62F5: $FE $0A
     jr   nz, jr_036_630A                          ; $62F7: $20 $11
 
     ld   hl, wEntitiesPosXTable                   ; $62F9: $21 $00 $C2
@@ -5823,7 +5821,7 @@ RotoswitchState2Handler::
 
     call PointHLToEntitySpriteVariant             ; $6356: $CD $02 $6C
     ldh  a, [hMapRoom]                            ; $6359: $F0 $F6
-    cp   $08                                      ; $635B: $FE $08
+    cp   ROOM_OW_MARIN_BRIDGE                     ; $635B: $FE $08
     jr   z, jr_036_6364                           ; $635D: $28 $05
 
     call func_036_6382                            ; $635F: $CD $82 $63
@@ -7527,7 +7525,7 @@ Data_036_6CF9::
 Data_036_6D01::
     db   $F3, $51, $00, $00, $B4, $01, $FF, $7F, $F3, $51, $00, $00, $A5, $7C, $FF, $7F
 
-Data_036_6D11::
+Data_036_6D11:: ; indexed by hMapRoom
     db   $00, $04, $00, $00, $00, $00, $00, $03, $00, $03, $01, $01, $00, $01, $01, $00
     db   $01, $00, $00, $02, $00, $00
 
@@ -8103,7 +8101,7 @@ Data_036_7159::
 ; If needed, spawn a photographer entity in the current room.
 SpawnPhotographer::
     ldh  a, [hMapRoom]                            ; $7161: $F0 $F6
-    cp   $B1                                      ; $7163: $FE $B1
+    cp   ROOM_OW_ULRIRA_HOUSE                     ; $7163: $FE $B1
     ret  nz                                       ; $7165: $C0
 
     ld   a, [wPhotos1]                            ; $7166: $FA $0C $DC
@@ -8276,19 +8274,15 @@ func_036_725A::
     jr   nz, jr_036_729E                          ; $726B: $20 $31
 
     ldh  a, [hMapRoom]                            ; $726D: $F0 $F6
-    cp   $F0                                      ; $726F: $FE $F0
+    cp   UNKNOWN_ROOM_F0                          ; $726F: $FE $F0
     jp   z, label_036_7101                        ; $7271: $CA $01 $71
-
-    cp   $92                                      ; $7274: $FE $92
+    cp   UNKNOWN_ROOM_92                          ; $7274: $FE $92
     jp   z, label_036_712D                        ; $7276: $CA $2D $71
-
-    cp   $A1                                      ; $7279: $FE $A1
+    cp   UNKNOWN_ROOM_A1                          ; $7279: $FE $A1
     jp   z, label_036_71AD                        ; $727B: $CA $AD $71
-
-    cp   $79                                      ; $727E: $FE $79
+    cp   UNKNOWN_ROOM_79                          ; $727E: $FE $79
     jp   z, label_036_71FA                        ; $7280: $CA $FA $71
-
-    cp   $64                                      ; $7283: $FE $64
+    cp   UNKNOWN_ROOM_64                          ; $7283: $FE $64
     jp   z, label_036_7228                        ; $7285: $CA $28 $72
 
 label_036_7288:

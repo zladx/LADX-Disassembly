@@ -39,7 +39,7 @@ jr_005_4060:
     jr   z, jr_005_407C                           ; $4067: $28 $13
 
     ld   a, [wIsBowWowFollowingLink]              ; $4069: $FA $56 $DB
-    cp   $01                                      ; $406C: $FE $01
+    cp   TRUE                                     ; $406C: $FE $01
     jp   z, label_005_40A2                        ; $406E: $CA $A2 $40
 
     ld   hl, wEntitiesRoomTable                   ; $4071: $21 $E0 $C3

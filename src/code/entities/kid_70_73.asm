@@ -1,12 +1,12 @@
 Kid70EntityHandler::
 Kid73EntityHandler::
     ldh  a, [hMapRoom]                            ; $620E: $F0 $F6
-    cp   $92                                      ; $6210: $FE $92
+    cp   UNKNOWN_ROOM_92                          ; $6210: $FE $92
     jr   nz, jr_006_621C                          ; $6212: $20 $08
 
     ld   a, [wTradeSequenceItem]                  ; $6214: $FA $0E $DB
     cp   $07                                      ; $6217: $FE $07
-    jp   c, ClearEntityStatus_06                         ; $6219: $DA $DB $65
+    jp   c, ClearEntityStatus_06                  ; $6219: $DA $DB $65
 
 jr_006_621C:
     ld   de, Data_006_604D                        ; $621C: $11 $4D $60
@@ -53,7 +53,7 @@ jr_006_625A:
 
 jr_006_6265:
     ldh  a, [hMapRoom]                            ; $6265: $F0 $F6
-    cp   $92                                      ; $6267: $FE $92
+    cp   UNKNOWN_ROOM_92                          ; $6267: $FE $92
     jr   nz, jr_006_6277                          ; $6269: $20 $0C
 
     ld   a, [wOverworldRoomStatus + $FD]                               ; $626B: $FA $FD $D8
@@ -67,12 +67,12 @@ jr_006_6277:
     and  $02                                      ; $627A: $E6 $02
     jr   z, jr_006_6290                           ; $627C: $28 $12
 
-    ld   a, [wIndoorBRoomStatus + $BE]                               ; $627E: $FA $BE $DA
+    ld   a, [wIndoorBRoomStatus + UNKNOWN_ROOM_BE] ; $627E: $FA $BE $DA
     and  $10                                      ; $6281: $E6 $10
     jr   nz, jr_006_6290                          ; $6283: $20 $0B
 
     ldh  a, [hMapRoom]                            ; $6285: $F0 $F6
-    cp   $83                                      ; $6287: $FE $83
+    cp   UNKNOWN_ROOM_83                          ; $6287: $FE $83
     jr   nz, jr_006_6290                          ; $6289: $20 $05
 
     jp_open_dialog $122                           ; $628B

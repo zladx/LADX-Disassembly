@@ -1053,7 +1053,7 @@ SelectRoomTilesets::
 
     ldh  a, [hMapRoom]                            ; $0D59: $F0 $F6
     ; hack: for overworld room $07 (right of the Egg), use tilset of the taramanch center
-    cp   $07                                      ; $0D5B: $FE $07
+    cp   ROOM_OW_RIGHT_OF_EGG                     ; $0D5B: $FE $07
     jr   nz, .eggHackEnd                          ; $0D5D: $20 $01
     inc  a                                        ; $0D5F: $3C
 .eggHackEnd
@@ -1091,7 +1091,7 @@ SelectRoomTilesets::
     cp   W_TILESET_CAMERA_SHOP                    ; $0D80: $FE $1A
     jr   nz, .cameraShopEnd                       ; $0D82: $20 $07
     ldh  a, [hMapRoom]                            ; $0D84: $F0 $F6
-    cp   $37 ; camera shop room                   ; $0D86: $FE $37
+    cp   ROOM_OW_CAMERA_SHOP                      ; $0D86: $FE $37
     jr   nz, .tilesetEnd                          ; $0D88: $20 $07
     ld   a, [hl]                                  ; $0D8A: $7E
 .cameraShopEnd
@@ -1136,27 +1136,26 @@ SelectRoomTilesets::
     ; hl = $data_020_70D3 + room-offset
     add  hl, de                                   ; $0DAB: $19
     ld   e, [hl]                                  ; $0DAC: $5E
-    ; if outside jump to .label_DC1
+    ; If on the overworld, jump to on_overworld
     ld   a, d                                     ; $0DAD: $7A
     and  a                                        ; $0DAE: $A7
-    jr   z, .label_DC1                            ; $0DAF: $28 $10
-    ; if MAP_HOUSE != $hMapId jump to label_DDB
+    jr   z, .label_DC1_on_overworld               ; $0DAF: $28 $10
+    ; If inside the camera shop…
     ldh  a, [hMapId]                              ; $0DB1: $F0 $F7
     cp   MAP_HOUSE                                ; $0DB3: $FE $10
     jr   nz, .label_DDB                           ; $0DB5: $20 $24
-    ; if $B5 != $hMapRoom jump to label_DDB
     ldh  a, [hMapRoom]                            ; $0DB7: $F0 $F6
-    cp   $B5                                      ; $0DB9: $FE $B5
+    cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $0DB9: $FE $B5
     jr   nz, .label_DDB                           ; $0DBB: $20 $1E
     ; e = 0x3D
     ld   e, $3D                                   ; $0DBD: $1E $3D
     jr   .label_DDB                               ; $0DBF: $18 $1A
 
-.label_DC1
+.label_DC1_on_overworld
     ld   a, e                                     ; $0DC1: $7B
     cp   $23                                      ; $0DC2: $FE $23
     jr   nz, .label_DCE                           ; $0DC4: $20 $08
-    ld   a, [wOverworldRoomStatus + $C9]          ; $0DC6: $FA $C9 $D8
+    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_C9] ; $0DC6: $FA $C9 $D8
     and  $20                                      ; $0DC9: $E6 $20
     jr   z, .label_DCE                            ; $0DCB: $28 $01
     inc  e                                        ; $0DCD: $1C
@@ -1165,7 +1164,7 @@ SelectRoomTilesets::
     ld   a, e                                     ; $0DCE: $7B
     cp   $21                                      ; $0DCF: $FE $21
     jr   nz, .label_DDB                           ; $0DD1: $20 $08
-    ld   a, [wOverworldRoomStatus + $FD]          ; $0DD3: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_FD] ; $0DD3: $FA $FD $D8
     and  $20                                      ; $0DD6: $E6 $20
     jr   z, .label_DDB                            ; $0DD8: $28 $01
     inc  e                                        ; $0DDA: $1C
@@ -3644,12 +3643,12 @@ ENDC
     ldh  a, [hMapRoom]                            ; $2034: $F0 $F6
     jr   nz, .noSwordEnd                          ; $2036: $20 $06
     ld   e, $FF                                   ; $2038: $1E $FF
-    cp   $A3                        ; Marin & Tarin's house ; $203A: $FE $A3
+    cp   ROOM_INDOOR_B_MARIN_HOUSE                ; $203A: $FE $A3
     jr   z, .jr_2046                              ; $203C: $28 $08
 .noSwordEnd
 
     ld   e, $FC                                   ; $203E: $1E $FC
-    cp   $FA                                      ; $2040: $FE $FA
+    cp   UNKNOWN_ROOM_FA                          ; $2040: $FE $FA
     jr   z, .jr_2046                              ; $2042: $28 $02
     ld   e, $FD                                   ; $2044: $1E $FD
 
@@ -3663,7 +3662,7 @@ ENDC
     ldh  a, [hMapRoom]                            ; $2049: $F0 $F6
     ld   e, a                                     ; $204B: $5F
     ld   d, $00                                   ; $204C: $16 $00
-    ld   a, $14                                   ; $204E: $3E $14
+    ld   a, BANK(SignpostDialogTable)             ; $204E: $3E $14
     ld   [MBC3SelectBank], a                      ; $2050: $EA $00 $21
     ld   hl, SignpostDialogTable                  ; $2053: $21 $18 $51
     add  hl, de                                   ; $2056: $19
@@ -5186,51 +5185,62 @@ LoadRoomSpecificTiles::
     ; Copy a row of 16 tiles
 .copyOAMTilesRow
     ldh  [hMultiPurpose0], a                      ; $2E85: $E0 $D7
-    ld   hl, wLoadedEntitySpritesheets                                ; $2E87: $21 $93 $C1
+
+    ; hl = wLoadedEntitySpritesheets[a]
+    ld   hl, wLoadedEntitySpritesheets            ; $2E87: $21 $93 $C1
     ld   e, a                                     ; $2E8A: $5F
     ld   d, $00                                   ; $2E8B: $16 $00
     add  hl, de                                   ; $2E8D: $19
+
+    ;
+    ; Override the first spritesheet row with the follower spritesheet (if any)
+    ;
+
     and  a                                        ; $2E8E: $A7
-    jr   nz, .label_2ED3                          ; $2E8F: $20 $42
+    jr   nz, .usePredefinedSpritesheet            ; $2E8F: $20 $42
+
     ld   a, [wIsIndoor]                           ; $2E91: $FA $A5 $DB
     and  a                                        ; $2E94: $A7
-    jr   z, .label_2EB0                           ; $2E95: $28 $19
+    jr   z, .indoorEnd                            ; $2E95: $28 $19
+
     ldh  a, [hIsSideScrolling]                    ; $2E97: $F0 $F9
     and  a                                        ; $2E99: $A7
-    jr   nz, .label_2ED3                          ; $2E9A: $20 $37
+    jr   nz, .usePredefinedSpritesheet            ; $2E9A: $20 $37
+
     ldh  a, [hMapId]                              ; $2E9C: $F0 $F7
     cp   MAP_KANALET                              ; $2E9E: $FE $14
-    jr   z, .label_2ED3                           ; $2EA0: $28 $31
-    cp   MAP_CAVE_B                               ; $2EA2: $FE $0A
-    jr   c, .label_2ED3                           ; $2EA4: $38 $2D
-    ldh  a, [hMapRoom]                            ; $2EA6: $F0 $F6
-    cp   $FD                                      ; $2EA8: $FE $FD
-    jr   z, .label_2ED3                           ; $2EAA: $28 $27
-    cp   $B1                                      ; $2EAC: $FE $B1
-    jr   z, .label_2ED3                           ; $2EAE: $28 $23
+    jr   z, .usePredefinedSpritesheet             ; $2EA0: $28 $31
 
-.label_2EB0
+    cp   MAP_CAVE_B                               ; $2EA2: $FE $0A
+    jr   c, .usePredefinedSpritesheet             ; $2EA4: $38 $2D
+    ldh  a, [hMapRoom]                            ; $2EA6: $F0 $F6
+    cp   ROOM_INDOOR_B_MANBO                      ; $2EA8: $FE $FD
+    jr   z, .usePredefinedSpritesheet             ; $2EAA: $28 $27
+    cp   ROOM_INDOOR_B_FISHING_MINIGAME           ; $2EAC: $FE $B1
+    jr   z, .usePredefinedSpritesheet             ; $2EAE: $28 $23
+.indoorEnd
+
     ld   a, [wIsBowWowFollowingLink]              ; $2EB0: $FA $56 $DB
     cp   $01                                      ; $2EB3: $FE $01
     ld   a, $A4                                   ; $2EB5: $3E $A4
-    jr   z, .label_2ED1                           ; $2EB7: $28 $18
+    jr   z, .useOverridenSpritesheet              ; $2EB7: $28 $18
     ld   a, [wIsGhostFollowingLink]               ; $2EB9: $FA $79 $DB
     and  a                                        ; $2EBC: $A7
     ld   a, $D8                                   ; $2EBD: $3E $D8
-    jr   nz, .label_2ED1                          ; $2EBF: $20 $10
+    jr   nz, .useOverridenSpritesheet             ; $2EBF: $20 $10
     ld   a, [wIsRoosterFollowingLink]             ; $2EC1: $FA $7B $DB
     and  a                                        ; $2EC4: $A7
     ld   a, $DD                                   ; $2EC5: $3E $DD
-    jr   nz, .label_2ED1                          ; $2EC7: $20 $08
+    jr   nz, .useOverridenSpritesheet             ; $2EC7: $20 $08
     ld   a, [wIsMarinFollowingLink]               ; $2EC9: $FA $73 $DB
     and  a                                        ; $2ECC: $A7
-    jr   z, .label_2ED3                           ; $2ECD: $28 $04
+    jr   z, .usePredefinedSpritesheet             ; $2ECD: $28 $04
     ld   a, $8F                                   ; $2ECF: $3E $8F
 
-.label_2ED1
+.useOverridenSpritesheet
     jr   .jr_2ED4                                 ; $2ED1: $18 $01
 
-.label_2ED3
+.usePredefinedSpritesheet
     ld   a, [hl]                                  ; $2ED3: $7E
 
 .jr_2ED4
@@ -5314,7 +5324,7 @@ LoadRoomSpecificTiles::
 
 .label_2F3B
     ldh  a, [hMapRoom]                            ; $2F3B: $F0 $F6
-    cp   $E9                                      ; $2F3D: $FE $E9
+    cp   ROOM_INDOOR_B_SEASHELL_MANSION           ; $2F3D: $FE $E9
     jr   z, .label_2F36                           ; $2F3F: $28 $F5
 .label_2F41
 
@@ -5333,7 +5343,7 @@ LoadRoomSpecificTiles::
     cp   MAP_COLOR_DUNGEON                        ; $2F4D: $FE $FF
     jr   nz, .notColorDungeon                     ; $2F4F: $20 $06
     ldh  a, [hMapRoom]                            ; $2F51: $F0 $F6
-    cp   $12                                      ; $2F53: $FE $12
+    cp   UNKNOWN_ROOM_12                          ; $2F53: $FE $12
     jr   nz, .skipBGLoading                       ; $2F55: $20 $12
 .notColorDungeon
 
@@ -5353,7 +5363,7 @@ LoadRoomSpecificTiles::
     cp   MAP_HOUSE                                ; $2F6B: $FE $10
     jr   nz, .cameraShopEnd                       ; $2F6D: $20 $18
     ldh  a, [hMapRoom]                            ; $2F6F: $F0 $F6
-    cp   $B5 ; camera shop indoor room            ; $2F71: $FE $B5
+    cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $2F71: $FE $B5
     jr   nz, .cameraShopEnd                       ; $2F73: $20 $12
     ld   a, BANK(CameraShopIndoorTiles)           ; $2F75: $3E $35
     ld   [MBC3SelectBank], a                      ; $2F77: $EA $00 $21
@@ -5452,7 +5462,7 @@ WriteObjectToBG_DMG::
     cp   MAP_HOUSE                                ; $2FE2: $FE $10
     jr   nz, .notCameraShop                       ; $2FE4: $20 $0B
     ldh  a, [hMapRoom]                            ; $2FE6: $F0 $F6
-    cp   $B5 ; camera shop indoors                ; $2FE8: $FE $B5
+    cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $2FE8: $FE $B5
     jr   nz, .notCameraShop                       ; $2FEA: $20 $05
 .ColorDungeonObjectsTilemap
     ld   hl, ColorDungeonObjectsTilemap           ; $2FEC: $21 $60 $47
@@ -5555,7 +5565,7 @@ doCopyObjectToBG:
     cp   MAP_HOUSE                                ; $303D: $FE $10
     jr   nz, .baseAddressskipEntityLoad           ; $303F: $20 $0E
     ldh  a, [hMapRoom]                            ; $3041: $F0 $F6
-    cp   $B5 ; camera shop indoor                 ; $3043: $FE $B5
+    cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $3043: $FE $B5
     jr   nz, .baseAddressskipEntityLoad           ; $3045: $20 $08
 
 .useColorDungeonTable
@@ -5627,7 +5637,7 @@ doCopyObjectToBG:
 
     ret                                           ; $309A: $C9
 
-; Copy the tilemap of a room to BG video memory.
+; Copy the tile map of a room to BG video memory.
 ;
 ; This is used when loading a map in one go (instead
 ; of having a sliding screen transition.)
@@ -5833,10 +5843,10 @@ LoadRoom::
     cp   MAP_CAVE_E                               ; $318F: $FE $1F
     jr   nz, .goriyaRoomEnd                       ; $3191: $20 $13
     ldh  a, [hMapRoom]                            ; $3193: $F0 $F6
-    cp   $F5                                      ; $3195: $FE $F5
+    cp   ROOM_INDOOR_A_GORIYA                     ; $3195: $FE $F5
     jr   nz, .goriyaRoomEnd                       ; $3197: $20 $0D
     ld   a, [wTradeSequenceItem]                  ; $3199: $FA $0E $DB
-    cp   $0E ; Magnifying Glass                   ; $319C: $FE $0E
+    cp   INVENTORY_MAGNIFYING_GLASS               ; $319C: $FE $0E
     jr   nz, .goriyaRoomEnd                       ; $319E: $20 $06
     ld   bc, IndoorsAF5Alt                        ; $31A0: $01 $55 $78
     jp   .parseRoomHeader                         ; $31A3: $C3 $3A $32
@@ -5864,10 +5874,10 @@ LoadRoom::
     ;
 
     ldh  a, [hMapRoom]                            ; $31BF: $F0 $F6
-    cp   $0E                                      ; $31C1: $FE $0E
+    cp   ROOM_OW_EAGLE_TOWER                      ; $31C1: $FE $0E
     jr   nz, .endEaglesTowerAlt                   ; $31C3: $20 $0C
-    ld   a, [wOverworldRoomStatus + $0E]          ; $31C5: $FA $0E $D8
-    and  OW_ROOM_STATUS_CHANGED                      ; $31C8: $E6 $10
+    ld   a, [wOverworldRoomStatus + ROOM_OW_EAGLE_TOWER           ] ; $31C5: $FA $0E $D8
+    and  OW_ROOM_STATUS_CHANGED                   ; $31C8: $E6 $10
     jr   z, .altRoomsEnd                          ; $31CA: $28 $55
     ld   bc, Overworld0EAlt ; Eagle's Tower open  ; $31CC: $01 $EC $47
     jr   .loadBankForOverworldRooms               ; $31CF: $18 $5E
@@ -5950,7 +5960,7 @@ LoadRoom::
 .loadBankForOverworldRooms
     ; … and the overworld room index is >= $80…
     ldh  a, [hMapRoom]                            ; $322F: $F0 $F6
-    cp   $80                                      ; $3231: $FE $80
+    cp   ROOM_SECTION_OW_SECOND_HALF              ; $3231: $FE $80
     jr   c, .parseRoomHeader                      ; $3233: $38 $05
     ; … select bank for second half of Overworld rooms
     ld   a, BANK(OverworldRoomsSecondHalf)        ; $3235: $3E $1A
@@ -6248,13 +6258,13 @@ LoadRoomObject::
     bit  4, e                                     ; $3366: $CB $63
     jr   z, .bushGroundStairsEnd                  ; $3368: $28 $17
     ldh  a, [hMapRoom]                            ; $336A: $F0 $F6
-    cp   $75                                      ; $336C: $FE $75
+    cp   UNKNOWN_ROOM_75                          ; $336C: $FE $75
     jr   z, .replaceObjectByGroundStairs          ; $336E: $28 $0C
-    cp   $07                                      ; $3370: $FE $07
+    cp   ROOM_OW_RIGHT_OF_EGG                     ; $3370: $FE $07
     jr   z, .replaceObjectByGroundStairs          ; $3372: $28 $08
-    cp   $AA                                      ; $3374: $FE $AA
+    cp   UNKNOWN_ROOM_AA                          ; $3374: $FE $AA
     jr   z, .replaceObjectByGroundStairs          ; $3376: $28 $04
-    cp   $4A                                      ; $3378: $FE $4A
+    cp   UNKNOWN_ROOM_4A                          ; $3378: $FE $4A
     jr   nz, .bushGroundStairsEnd                 ; $337A: $20 $05
 .replaceObjectByGroundStairs
     pop  af                                       ; $337C: $F1
@@ -6340,7 +6350,7 @@ LoadRoomObject::
     ; (part of an old Kanalet Castle entry before the side-scrolling stuff)
     ; If the room is $C4…
     ldh  a, [hMapRoom]                            ; $33E4: $F0 $F6
-    cp   $C4                                      ; $33E6: $FE $C4
+    cp   UNKNOWN_ROOM_C4                          ; $33E6: $FE $C4
     ; … and the object type is not zero…
     ldh  a, [hMultiPurpose9]                      ; $33E8: $F0 $E0
     jr   z, .torchEnd                             ; $33EA: $28 $1B
@@ -6653,7 +6663,7 @@ label_3500::
     cp   $09                                      ; $3503: $FE $09
     jr   nz, label_350E                           ; $3505: $20 $07
     ldh  a, [hMapRoom]                            ; $3507: $F0 $F6
-    cp   $97            ; Room with the giant bombable skull thing ; $3509: $FE $97
+    cp   ROOM_OW_GIANT_SKULL                      ; $3509: $FE $97
     ret  nz                                       ; $350B: $C0
     jr   label_3527                               ; $350C: $18 $19
 
@@ -6661,16 +6671,16 @@ label_350E::
     cp   $E1                                      ; $350E: $FE $E1
     jr   nz, label_351D                           ; $3510: $20 $0B
     ldh  a, [hMapRoom]                            ; $3512: $F0 $F6
-    cp   $0E            ; Eagle's Tower room      ; $3514: $FE $0E
+    cp   ROOM_OW_EAGLE_TOWER                      ; $3514: $FE $0E
     ret  z                                        ; $3516: $C8
-    cp   $0C            ; Tal-Tal Heights, 1N1E of the drainable water above Angler's Tunnel ; $3517: $FE $0C
+    cp   UNKNOWN_ROOM_0C                          ; $3517: $FE $0C
     ret  z                                        ; $3519: $C8
-    cp   $1B            ; The drainable water above Angler's Tunnel ; $351A: $FE $1B
+    cp   UNKNOWN_ROOM_1B                          ; $351A: $FE $1B
     ret  z                                        ; $351C: $C8
 
 label_351D::
     ldh  a, [hMapRoom]                            ; $351D: $F0 $F6
-    cp   $80            ; Mysterious Forest enterance from Mabe (?) ; $351F: $FE $80
+    cp   ROOM_SECTION_OW_SECOND_HALF              ; $351F: $FE $80
     jr   nc, label_3527                           ; $3521: $30 $04
     ld   a, $09                                   ; $3523: $3E $09
     jr   label_3529                               ; $3525: $18 $02
@@ -6706,16 +6716,15 @@ CopyObjectToActiveRoomMap::
 ; Use the current overworld room to load the adequate bank
 SetBankForRoom::
     ldh  a, [hMapRoom]                            ; $353B: $F0 $F6
-    ; If hMapRoom <= $80…
-    cp   $80                                      ; $353D: $FE $80
-    jr   nc, .moreThan80                          ; $353F: $30 $04
-    ; … a = $09
+    cp   ROOM_SECTION_OW_SECOND_HALF              ; $353D: $FE $80
+    jr   nc, .outside                             ; $353F: $30 $04
     ld   a, BANK(OverworldRoomsFirstHalf)         ; $3541: $3E $09
-    jr   .fi                                      ; $3543: $18 $02
-.moreThan80
-    ; else a = $1A
+    jr   .inside                                  ; $3543: $18 $02
+
+.outside
     ld   a, BANK(OverworldRoomsSecondHalf)        ; $3545: $3E $1A
-.fi
+
+.inside
     ; Load the bank $09 or $1A
     ld   [MBC3SelectBank], a                      ; $3547: $EA $00 $21
     ret                                           ; $354A: $C9
@@ -6827,7 +6836,7 @@ label_35CB::
     cp   $09                                      ; $35CE: $FE $09
     jr   nz, .label_35D9                          ; $35D0: $20 $07
     ldh  a, [hMapRoom]                            ; $35D2: $F0 $F6
-    cp   $97                                      ; $35D4: $FE $97
+    cp   ROOM_OW_GIANT_SKULL                      ; $35D4: $FE $97
     ret  nz                                       ; $35D6: $C0
     jr   label_35E8                               ; $35D7: $18 $0F
 
@@ -6835,11 +6844,11 @@ label_35CB::
     cp   $E1                                      ; $35D9: $FE $E1
     jr   nz, label_35E8                           ; $35DB: $20 $0B
     ldh  a, [hMapRoom]                            ; $35DD: $F0 $F6
-    cp   $0E                                      ; $35DF: $FE $0E
+    cp   ROOM_OW_EAGLE_TOWER                      ; $35DF: $FE $0E
     ret  z                                        ; $35E1: $C8
-    cp   $0C                                      ; $35E2: $FE $0C
+    cp   UNKNOWN_ROOM_0C                          ; $35E2: $FE $0C
     ret  z                                        ; $35E4: $C8
-    cp   $1B                                      ; $35E5: $FE $1B
+    cp   UNKNOWN_ROOM_1B                          ; $35E5: $FE $1B
     ret  z                                        ; $35E7: $C8
 
 label_35E8::
@@ -7139,7 +7148,7 @@ LoadObject_IndoorEntrance::
 
     ; … and MapRoom == $D3…
     ldh  a, [hMapRoom]                            ; $37C0: $F0 $F6
-    cp   $D3                                      ; $37C2: $FE $D3
+    cp   UNKNOWN_ROOM_D3                          ; $37C2: $FE $D3
     jr   nz, .end                                 ; $37C4: $20 $09
 
     ; … and HasStolenFromShop != 0…

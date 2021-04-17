@@ -319,7 +319,7 @@ jr_015_4445:
     jr   nc, jr_015_448C                          ; $4478: $30 $12
 
     ldh  a, [hMapRoom]                            ; $447A: $F0 $F6
-    cp   $DF                                      ; $447C: $FE $DF
+    cp   UNKNOWN_ROOM_DF                          ; $447C: $FE $DF
     ld   a, $92                                   ; $447E: $3E $92
     jr   z, jr_015_4489                           ; $4480: $28 $07
 
@@ -8188,7 +8188,7 @@ jr_015_7E82:
     push bc                                       ; $7E87: $C5
     ld   hl, Data_015_7E5F                        ; $7E88: $21 $5F $7E
     ldh  a, [hMapRoom]                            ; $7E8B: $F0 $F6
-    cp   $B5                                      ; $7E8D: $FE $B5
+    cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $7E8D: $FE $B5
     jr   z, jr_015_7E96                           ; $7E8F: $28 $05
 
     sla  c                                        ; $7E91: $CB $21
@@ -8233,7 +8233,7 @@ jr_015_7EC4:
     ret  nc                                       ; $7ECB: $D0
 
     ldh  a, [hMapRoom]                            ; $7ECC: $F0 $F6
-    cp   $B5                                      ; $7ECE: $FE $B5
+    cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $7ECE: $FE $B5
     jr   nz, jr_015_7ED6                          ; $7ED0: $20 $04
 
     ld   e, $08                                   ; $7ED2: $1E $08
@@ -8327,7 +8327,7 @@ jr_015_7F44:
 
 jr_015_7F4F:
     ldh  a, [hMapRoom]                            ; $7F4F: $F0 $F6
-    cp   $B5                                      ; $7F51: $FE $B5
+    cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $7F51: $FE $B5
     jr   z, jr_015_7F72                           ; $7F53: $28 $1D
 
     ld   a, e                                     ; $7F55: $7B

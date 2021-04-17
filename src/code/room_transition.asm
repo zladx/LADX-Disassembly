@@ -304,7 +304,7 @@ RoomTransitionPrepareHandler::
 
     ; … and egg room is $71…
     ldh  a, [hMapRoom]                            ; $7A14: $F0 $F6
-    cp   $71                                      ; $7A16: $FE $71
+    cp   UNKNOWN_ROOM_71                          ; $7A16: $FE $71
     jr   nz, .noWindFishEggMaze                   ; $7A18: $20 $2E
 
     ; … and is not sliding to the bottom…
@@ -404,7 +404,7 @@ RoomTransitionPrepareHandler::
 
     ; a = $63
     ; hl = hMapRoom
-    ld   a, $63                                   ; $7A7D: $3E $63
+    ld   a, UNKNOWN_ROOM_63                       ; $7A7D: $3E $63
     ld   hl, hMapRoom                             ; $7A7F: $21 $F6 $FF
     jr   .setRoom                                 ; $7A82: $18 $09
 .mysteriousWoodsEnd
@@ -425,7 +425,7 @@ RoomTransitionPrepareHandler::
     ld   [hl], a                                  ; $7A8D: $77
 
     ; If room == $41 (Tail Cave Key on Mysterious Forest)…
-    cp   $41                                      ; $7A8E: $FE $41
+    cp   UNKNOWN_ROOM_41                          ; $7A8E: $FE $41
     jr   nz, .forestRoomEnd                       ; $7A90: $20 $13
 
     ; … and direction == top…
@@ -434,7 +434,7 @@ RoomTransitionPrepareHandler::
     jr   nz, .forestRoomEnd                       ; $7A95: $20 $0E
 
     ; … and this room has not been visited yet…
-    ld   hl, wOverworldRoomStatus + $41           ; $7A97: $21 $41 $D8
+    ld   hl, wOverworldRoomStatus + UNKNOWN_ROOM_41 ; $7A97: $21 $41 $D8
     bit  6, [hl]                                  ; $7A9A: $CB $76
     jr   nz, .forestRoomEnd                       ; $7A9C: $20 $07
 
@@ -808,18 +808,15 @@ label_002_7C50:
     jr   nz, jr_002_7C88                          ; $7C6F: $20 $17
 
     ldh  a, [hMapRoom]                            ; @TODO Likely involves the river rapids area
-    cp   $3E                                      ; possibly for determining the leftward push
+    cp   UNKNOWN_ROOM_3E                          ; possibly for determining the leftward push
     jr   z, jr_002_7C8B                           ; at the top, before entering the rapids themselves
-
     inc  e                                        ; $7C77: $1C
-    cp   $3D                                      ; $7C78: $FE $3D
+    cp   UNKNOWN_ROOM_3D                          ; $7C78: $FE $3D
     jr   z, jr_002_7C8B                           ; $7C7A: $28 $0F
-
     inc  e                                        ; $7C7C: $1C
-    cp   $3C                                      ; $7C7D: $FE $3C
+    cp   UNKNOWN_ROOM_3C                          ; $7C7D: $FE $3C
     jr   z, jr_002_7C8B                           ; $7C7F: $28 $0A
-
-    cp   $3F                                      ; $7C81: $FE $3F
+    cp   UNKNOWN_ROOM_3F                          ; $7C81: $FE $3F
     ret  nz                                       ; $7C83: $C0
 
     ld   e, $00                                   ; $7C84: $1E $00

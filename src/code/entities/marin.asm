@@ -21,34 +21,35 @@ MarinEntityHandler::
     cp   GAMEPLAY_CREDITS                         ; $4E65: $FE $01
     jp   z, MarinCreditsHandler                   ; $4E67: $CA $E0 $4E
 
+    ; Marin is handled by the follower system: remove the entity
     ld   a, [wIsMarinFollowingLink]               ; $4E6A: $FA $73 $DB
     and  a                                        ; $4E6D: $A7
     jp   nz, ClearEntityStatus_05                 ; $4E6E: $C2 $4B $7B
 
+    ; Marin is indoor
     ld   a, [wIsIndoor]                           ; $4E71: $FA $A5 $DB
     and  a                                        ; $4E74: $A7
-    jp   nz, func_005_51CE                        ; $4E75: $C2 $CE $51
+    jp   nz, MarinEntityHandler_Indoor            ; $4E75: $C2 $CE $51
 
+    ; Didn't found sword yet: remove the entity
     ld   a, [wSwordLevel]                         ; $4E78: $FA $4E $DB
     and  a                                        ; $4E7B: $A7
     jp   z, ClearEntityStatus_05                  ; $4E7C: $CA $4B $7B
 
+    ; Not in a village, saved Marin and found the Pineapple: remove the entity
     ldh  a, [hMapRoom]                            ; $4E7F: $F0 $F6
-    cp   $C0                                      ; $4E81: $FE $C0
-    jr   c, jr_005_4E87                           ; $4E83: $38 $02
-
-    jr   jr_005_4E96                              ; $4E85: $18 $0F
-
-jr_005_4E87:
-    ld   a, [wOverworldRoomStatus + $08]                               ; $4E87: $FA $08 $D8
+    cp   ROOM_SECTION_OW_VILLAGES                 ; $4E81: $FE $C0
+    jr   c, .notInAnyVillage                      ; $4E83: $38 $02
+    jr   .continue                                ; $4E85: $18 $0F
+.notInAnyVillage
+    ld   a, [wOverworldRoomStatus + ROOM_OW_MARIN_BRIDGE] ; $4E87: $FA $08 $D8
     and  $10                                      ; $4E8A: $E6 $10
-    jr   nz, jr_005_4E96                          ; $4E8C: $20 $08
-
+    jr   nz, .continue                            ; $4E8C: $20 $08
     ld   a, [wTradeSequenceItem]                  ; $4E8E: $FA $0E $DB
     cp   TRADING_ITEM_PINEAPPLE                   ; $4E91: $FE $07
     jp   nc, ClearEntityStatus_05                 ; $4E93: $D2 $4B $7B
 
-jr_005_4E96:
+.continue
     push bc                                       ; $4E96: $C5
     sla  c                                        ; $4E97: $CB $21
     rl   b                                        ; $4E99: $CB $10
@@ -179,7 +180,7 @@ jr_005_4F39:
 
 func_005_4F64::
     ldh  a, [hMapRoom]                            ; $4F64: $F0 $F6
-    cp   $C0                                      ; $4F66: $FE $C0
+    cp   ROOM_SECTION_OW_VILLAGES                 ; $4F66: $FE $C0
     jr   nc, jr_005_4F6F                          ; $4F68: $30 $05
 
     ld   a, [wC3C8]                               ; $4F6A: $FA $C8 $C3
@@ -243,7 +244,7 @@ jr_005_4FAC:
 
     ld   e, $05                                   ; $4FBC: $1E $05
     ldh  a, [hMapRoom]                            ; $4FBE: $F0 $F6
-    cp   $C0                                      ; $4FC0: $FE $C0
+    cp   ROOM_SECTION_OW_VILLAGES                 ; $4FC0: $FE $C0
     jr   c, jr_005_4FD0                           ; $4FC2: $38 $0C
 
     push de                                       ; $4FC4: $D5
@@ -273,7 +274,7 @@ jr_005_4FD6:
     ld   e, $05                                   ; $4FE6: $1E $05
     ld   d, $2F                                   ; $4FE8: $16 $2F
     ldh  a, [hMapRoom]                            ; $4FEA: $F0 $F6
-    cp   $C0                                      ; $4FEC: $FE $C0
+    cp   ROOM_SECTION_OW_VILLAGES                 ; $4FEC: $FE $C0
     jr   c, jr_005_4FFA                           ; $4FEE: $38 $0A
 
     ld   e, $92                                   ; $4FF0: $1E $92
@@ -301,7 +302,7 @@ jr_005_5005:
 
 jr_005_5008:
     ldh  a, [hMapRoom]                            ; $5008: $F0 $F6
-    cp   $C0                                      ; $500A: $FE $C0
+    cp   ROOM_SECTION_OW_VILLAGES                 ; $500A: $FE $C0
     jr   c, jr_005_5018                           ; $500C: $38 $0A
 
     ld   hl, wEntitiesUnknownTableD               ; $500E: $21 $D0 $C2
@@ -538,10 +539,10 @@ func_005_5161::
     ld   hl, wOcarinaSongFlags                    ; $5170: $21 $49 $DB
     set  BALLAD_OF_THE_WIND_FISH_FLAG_BIT, [hl]   ; $5173: $CB $D6
     xor  a                                        ; $5175: $AF
-    ld   [wSelectedSongIndex], a                               ; $5176: $EA $4A $DB
+    ld   [wSelectedSongIndex], a                  ; $5176: $EA $4A $DB
     call IncrementEntityState                     ; $5179: $CD $12 $3B
     ldh  a, [hMapRoom]                            ; $517C: $F0 $F6
-    cp   $C0                                      ; $517E: $FE $C0
+    cp   ROOM_SECTION_OW_VILLAGES                 ; $517E: $FE $C0
     jr   c, jr_005_5183                           ; $5180: $38 $01
 
     ld   [hl], b                                  ; $5182: $70
@@ -550,7 +551,7 @@ jr_005_5183:
     xor  a                                        ; $5183: $AF
     ld   [wC167], a                               ; $5184: $EA $67 $C1
     ldh  a, [hMapRoom]                            ; $5187: $F0 $F6
-    cp   $C0                                      ; $5189: $FE $C0
+    cp   ROOM_SECTION_OW_VILLAGES                 ; $5189: $FE $C0
     jr   nc, jr_005_5192                          ; $518B: $30 $05
 
     jp_open_dialog $014
@@ -594,7 +595,7 @@ func_005_51BC::
 Data_005_51CA::
     db   $5C, $00, $5C, $20
 
-func_005_51CE::
+MarinEntityHandler_Indoor::
     ld   a, [wTradeSequenceItem]                  ; $51CE: $FA $0E $DB
     cp   TRADING_ITEM_PINEAPPLE                   ; $51D1: $FE $07
     jr   c, jr_005_51FB                           ; $51D3: $38 $26

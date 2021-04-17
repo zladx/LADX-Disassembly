@@ -3865,7 +3865,7 @@ func_004_6689::
     ldh  a, [hMapRoom]                            ; $66AF: $F0 $F6
     ld   e, a                                     ; $66B1: $5F
     ld   d, $01                                   ; $66B2: $16 $01
-    ld   hl, wIndoorARoomStatus                                ; $66B4: $21 $00 $D9
+    ld   hl, wIndoorARoomStatus                   ; $66B4: $21 $00 $D9
     add  hl, de                                   ; $66B7: $19
     ld   a, [hl]                                  ; $66B8: $7E
     or   ROOM_STATUS_EVENT_1                      ; $66B9: $F6 $10

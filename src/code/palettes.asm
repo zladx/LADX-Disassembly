@@ -179,7 +179,7 @@ func_021_40DB::
     ld   l, a                                     ; $40F5: $6F
     call func_021_41B4                            ; $40F6: $CD $B4 $41
     ldh  a, [hMapRoom]                            ; $40F9: $F0 $F6
-    cp   $92                                      ; $40FB: $FE $92
+    cp   UNKNOWN_ROOM_92                          ; $40FB: $FE $92
     ret  nz                                       ; $40FD: $C0
 
     ld   hl, wObjPal8 + 1*2                       ; $40FE: $21 $8A $DC
@@ -216,7 +216,7 @@ jr_021_412C:
     sla  a                                        ; $4130: $CB $27
     ld   e, a                                     ; $4132: $5F
     ld   d, $00                                   ; $4133: $16 $00
-    ld   hl, Data_021_43EF                                ; $4135: $21 $EF $43
+    ld   hl, Data_021_43EF                        ; $4135: $21 $EF $43
     ldh  a, [hIsSideScrolling]                    ; $4138: $F0 $F9
     and  a                                        ; $413A: $A7
     jr   z, jr_021_4165                           ; $413B: $28 $28
@@ -226,22 +226,17 @@ jr_021_412C:
     jr   nz, jr_021_4162                          ; $4141: $20 $1F
 
     ldh  a, [hMapRoom]                            ; $4143: $F0 $F6
-    cp   $64                                      ; $4145: $FE $64
+    cp   UNKNOWN_ROOM_64                          ; $4145: $FE $64
     jr   z, jr_021_415D                           ; $4147: $28 $14
-
-    cp   $65                                      ; $4149: $FE $65
+    cp   UNKNOWN_ROOM_65                          ; $4149: $FE $65
     jr   z, jr_021_415D                           ; $414B: $28 $10
-
-    cp   $66                                      ; $414D: $FE $66
+    cp   UNKNOWN_ROOM_66                          ; $414D: $FE $66
     jr   z, jr_021_415D                           ; $414F: $28 $0C
-
-    cp   $67                                      ; $4151: $FE $67
+    cp   UNKNOWN_ROOM_67                          ; $4151: $FE $67
     jr   z, jr_021_415D                           ; $4153: $28 $08
-
-    cp   $6A                                      ; $4155: $FE $6A
+    cp   UNKNOWN_ROOM_6A                          ; $4155: $FE $6A
     jr   z, jr_021_415D                           ; $4157: $28 $04
-
-    cp   $6B                                      ; $4159: $FE $6B
+    cp   UNKNOWN_ROOM_6B                          ; $4159: $FE $6B
     jr   nz, jr_021_4162                          ; $415B: $20 $05
 
 jr_021_415D:
@@ -266,10 +261,10 @@ jr_021_416C:
     jr   nz, jr_021_4191                          ; $416E: $20 $21
 
     ldh  a, [hMapRoom]                            ; $4170: $F0 $F6
-    cp   $A3                                      ; $4172: $FE $A3
+    cp   ROOM_INDOOR_B_MARIN_HOUSE                ; $4172: $FE $A3
     jr   nz, jr_021_4191                          ; $4174: $20 $1B
 
-    ld   a, [$DB48]                               ; $4176: $FA $48 $DB
+    ld   a, [wDB48]                               ; $4176: $FA $48 $DB
     cp   $01                                      ; $4179: $FE $01
     jr   z, jr_021_418C                           ; $417B: $28 $0F
 
@@ -353,7 +348,7 @@ jr_021_41D6:
     jr   nz, jr_021_4222                          ; $41FB: $20 $25
 
     ldh  a, [hMapRoom]                            ; $41FD: $F0 $F6
-    cp   $0E                                      ; $41FF: $FE $0E
+    cp   ROOM_OW_EAGLE_TOWER                      ; $41FF: $FE $0E
     jr   nz, jr_021_4254                          ; $4201: $20 $51
 
     ld   hl, Data_021_5548                        ; $4203: $21 $48 $55
@@ -383,7 +378,7 @@ jr_021_4213:
 
 jr_021_4222:
     ldh  a, [hMapRoom]                            ; $4222: $F0 $F6
-    cp   $AA                                      ; $4224: $FE $AA
+    cp   UNKNOWN_ROOM_AA                          ; $4224: $FE $AA
     jr   nz, jr_021_4254                          ; $4226: $20 $2C
 
     ld   a, [wTunicType]                          ; $4228: $FA $0F $DC

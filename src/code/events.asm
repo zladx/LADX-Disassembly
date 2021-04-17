@@ -150,15 +150,15 @@ MakeEffectObjectAppear::
 DropKeyEffectHandler::
     call EventEffectGuard                         ; $5E03: $CD $AF $5D
     ldh  a, [hMapRoom]                            ; $5E06: $F0 $F6
-    cp   $69                        ; Is this room 169? (Angler's Tunnel)
-    jr   nz, jr_002_5E15            ; If not, skip ahead...
+    cp   ROOM_OW_ANGLERS_TUNNEL                      ; Is this room 69? (Angler's Tunnel)
+    jr   nz, jr_002_5E15                          ; If not, skip ahead...
 
     ; Mark the room as cleared
-    call GetRoomStatusAddress       ; This is the room where the key falls into
-    ld   a, [hl]                    ; a hole in the floor, making it fall into
+    call GetRoomStatusAddress                     ; This is the room where the key falls into
+    ld   a, [hl]                                  ; a hole in the floor, making it fall into
     or   ROOM_STATUS_EVENT_1        ; a sidescrolling room.
-    ld   [hl], a                    ; Since that room handles the key now,
-    ldh  [hRoomStatus], a           ; mark this one.
+    ld   [hl], a                                  ; Since that room handles the key now,
+    ldh  [hRoomStatus], a                         ; mark this one.
 
 jr_002_5E15:
     jp   label_002_5425                           ; $5E15: $C3 $25 $54
@@ -555,7 +555,7 @@ CheckAnswerTunicsTrigger::
     ldh  [hMultiPurpose0], a                      ; $6033: $E0 $D7
     ld   de, $00                                  ; $6035: $11 $00 $00
     ldh  a, [hMapRoom]                            ; $6038: $F0 $F6
-    cp   $12                                      ; $603A: $FE $12
+    cp   UNKNOWN_ROOM_12                          ; $603A: $FE $12
     jr   z, jr_002_609B                           ; $603C: $28 $5D
 
 jr_002_603E:
@@ -572,13 +572,13 @@ jr_002_603E:
     jr   nz, jr_002_6064                          ; $604D: $20 $15
 
 jr_002_604F:
-    ld   hl, wEntitiesStatusTable                   ; $604F: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                 ; $604F: $21 $80 $C2
     add  hl, de                                   ; $6052: $19
     ld   a, [hl]                                  ; $6053: $7E
     and  a                                        ; $6054: $A7
     jr   z, jr_002_6064                           ; $6055: $28 $0D
 
-    ld   hl, wEntitiesSpriteVariantTable                                ; $6057: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable          ; $6057: $21 $B0 $C3
     add  hl, de                                   ; $605A: $19
     ld   a, [hl]                                  ; $605B: $7E
     cp   $08                                      ; $605C: $FE $08
@@ -594,8 +594,8 @@ jr_002_6064:
     jr   nz, jr_002_603E                          ; $6068: $20 $D4
 
     ld   e, $09                                   ; $606A: $1E $09
-    ldh  a, [hMapRoom]                           ; $606C: $F0 $F6
-    cp   $0A                                      ; $606E: $FE $0A
+    ldh  a, [hMapRoom]                            ; $606C: $F0 $F6
+    cp   UNKNOWN_ROOM_0A                          ; $606E: $FE $0A
     jr   z, jr_002_6074                           ; $6070: $28 $02
 
     ld   e, $04                                   ; $6072: $1E $04
@@ -606,16 +606,15 @@ jr_002_6074:
     ret  nz                                       ; $6077: $C0
 
     call MarkTriggerAsResolved                    ; $6078: $CD $60 $0C
-    ldh  a, [hMapRoom]                           ; $607B: $F0 $F6
-    cp   $08                                      ; $607D: $FE $08
+    ldh  a, [hMapRoom]                            ; $607B: $F0 $F6
+    cp   ROOM_OW_MARIN_BRIDGE                     ; $607D: $FE $08
     ret  z                                        ; $607F: $C8
-
-    cp   $0A                                      ; $6080: $FE $0A
+    cp   UNKNOWN_ROOM_0A                          ; $6080: $FE $0A
     jr   nz, jr_002_6098                          ; $6082: $20 $14
 
     call EventEffectGuard                         ; $6084: $CD $AF $5D
     call OpenLockedDoorsEffectHandler             ; $6087: $CD $25 $5E
-    ld   hl, wColorDungeonRoomStatus                                ; $608A: $21 $E0 $DD
+    ld   hl, wColorDungeonRoomStatus              ; $608A: $21 $E0 $DD
     ldh  a, [hMapRoom]                            ; $608D: $F0 $F6
     ld   e, a                                     ; $608F: $5F
     ld   d, $00                                   ; $6090: $16 $00
@@ -672,6 +671,6 @@ jr_002_60BD:
     ld   a, [hl]                                  ; $60D1: $7E
     or   ROOM_STATUS_EVENT_1                      ; $60D2: $F6 $10
     ld   [hl], a                                  ; $60D4: $77
-    ldh  [hRoomStatus], a                         ; $60D5: $E0 $F8
+    ldh  [hRoomStatus], a                               ; $60D5: $E0 $F8
 
     ret                                           ; $60D7: $C9

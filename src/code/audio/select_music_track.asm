@@ -88,7 +88,7 @@ SelectMusicTrackAfterTransition::
     ; … and the map is $B5 (Photo Shop)…
     ld   d, a                                     ; $4182: $57
     ldh  a, [hMapRoom]                            ; $4183: $F0 $F6
-    cp   $B5                                      ; $4185: $FE $B5
+    cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $4185: $FE $B5
     ld   a, d                                     ; $4187: $7A
     jr   nz, .mapDone                             ; $4188: $20 $02
     ; … use same music than for map $0F (Trendy Game)

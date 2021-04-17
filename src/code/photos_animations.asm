@@ -35,7 +35,7 @@ Data_038_7820::
 func_038_7830::
     ld   hl, Data_038_7810                       ; $7830: $21 $10 $78
     ldh  a, [hMapRoom]                           ; $7833: $F0 $F6
-    cp   $0D                                     ; $7835: $FE $0D
+    cp   UNKNOWN_ROOM_0D                         ; $7835: $FE $0D
     jr   nz, .else_783C_38                       ; $7837: $20 $03
 
     ld   hl, Data_038_7820                       ; $7839: $21 $20 $78

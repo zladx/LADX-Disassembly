@@ -2545,7 +2545,12 @@ wHasStolenFromShop::
 
 ; Unlabeled
 wDB47::
-  ds 2 ; DB47 - DB48
+  ds 1 ; DB47
+  
+; Unlabeled
+; possible values 01, 02, ..
+wDB48::
+  ds 1 ; DB48
 
 ; $0111 means that the player has every song.
 ;   bit 0: has Frog's Song of the Soul

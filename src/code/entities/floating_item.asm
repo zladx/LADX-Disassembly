@@ -32,7 +32,7 @@ FloatingItem2EntityHandler::
     jr   nz, jr_006_7B32                          ; $7B25: $20 $0B
 
     ldh  a, [hMapRoom]                            ; $7B27: $F0 $F6
-    cp   $1C                                      ; $7B29: $FE $1C
+    cp   UNKNOWN_ROOM_1C                          ; $7B29: $FE $1C
     jr   nz, jr_006_7B32                          ; $7B2B: $20 $05
 
     ld   a, $01                                   ; $7B2D: $3E $01
@@ -168,10 +168,9 @@ func_006_7BE2::
 
 jr_006_7BE7:
     ldh  a, [hMapRoom]                            ; $7BE7: $F0 $F6
-    cp   $97                                      ; $7BE9: $FE $97
+    cp   ROOM_INDOOR_B_97                         ; $7BE9: $FE $97
     jr   z, jr_006_7BF0                           ; $7BEB: $28 $03
-
-    cp   $98                                      ; $7BED: $FE $98
+    cp   ROOM_INDOOR_B_98                         ; $7BED: $FE $98
     ret  nz                                       ; $7BEF: $C0
 
 jr_006_7BF0:

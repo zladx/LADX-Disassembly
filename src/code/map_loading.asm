@@ -85,11 +85,11 @@ GetBGAttributesAddressForObject::
     cp   MAP_WINDFISHS_EGG + 1                    ; $65B7: $FE $09
     jr   c, .indoorPaletteEnd                     ; $65B9: $38 $75
 
-    cp   $0A                                      ; $65BB: $FE $0A
+    cp   MAP_CAVE_B                               ; $65BB: $FE $0A
     jr   nz, .jr_01A_65C5                         ; $65BD: $20 $06
 
     ldh  a, [hMapRoom]                            ; $65BF: $F0 $F6
-    cp   $FD                                      ; $65C1: $FE $FD
+    cp   ROOM_INDOOR_B_MANBO                      ; $65C1: $FE $FD
     jr   z, .jr_01A_65D5                          ; $65C3: $28 $10
 
 .jr_01A_65C5
@@ -98,10 +98,9 @@ GetBGAttributesAddressForObject::
     jr   nz, .jr_01A_65D9                         ; $65C9: $20 $0E
 
     ldh  a, [hMapRoom]                            ; $65CB: $F0 $F6
-    cp   $C0                                      ; $65CD: $FE $C0
+    cp   UNKNOWN_ROOM_C0                          ; $65CD: $FE $C0
     jr   z, .jr_01A_65D5                          ; $65CF: $28 $04
-
-    cp   $C1                                      ; $65D1: $FE $C1
+    cp   UNKNOWN_ROOM_C1                          ; $65D1: $FE $C1
     jr   nz, .jr_01A_65D9                         ; $65D3: $20 $04
 
 .jr_01A_65D5
@@ -114,7 +113,7 @@ GetBGAttributesAddressForObject::
     jr   nz, .jr_01A_65E9                         ; $65DD: $20 $0A
 
     ldh  a, [hMapRoom]                            ; $65DF: $F0 $F6
-    cp   $A0                                      ; $65E1: $FE $A0
+    cp   UNKNOWN_ROOM_A0                          ; $65E1: $FE $A0
     jr   nz, .jr_01A_65E9                         ; $65E3: $20 $04
 
     ld   c, $00                                   ; $65E5: $0E $00
@@ -126,10 +125,9 @@ GetBGAttributesAddressForObject::
     jr   nz, .jr_01A_65FD                         ; $65ED: $20 $0E
 
     ldh  a, [hMapRoom]                            ; $65EF: $F0 $F6
-    cp   $EB                                      ; $65F1: $FE $EB
+    cp   UNKNOWN_ROOM_EB                          ; $65F1: $FE $EB
     jr   z, .jr_01A_65F9                          ; $65F3: $28 $04
-
-    cp   $EC                                      ; $65F5: $FE $EC
+    cp   UNKNOWN_ROOM_EC                          ; $65F5: $FE $EC
     jr   nz, .jr_01A_65FD                         ; $65F7: $20 $04
 
 .jr_01A_65F9
@@ -142,14 +140,14 @@ GetBGAttributesAddressForObject::
     jr   nz, .jr_01A_6616                         ; $6601: $20 $13
 
     ldh  a, [hMapRoom]                            ; $6603: $F0 $F6
-    cp   $E9                                      ; $6605: $FE $E9
+    cp   ROOM_INDOOR_B_SEASHELL_MANSION           ; $6605: $FE $E9
     jr   nz, .jr_01A_660D                         ; $6607: $20 $04
 
     ld   c, $26                                   ; $6609: $0E $26
     jr   .useSecondaryIndoorsPaletteBank          ; $660B: $18 $1D
 
 .jr_01A_660D
-    cp   $B5                                      ; $660D: $FE $B5
+    cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $660D: $FE $B5
     jr   nz, .jr_01A_6616                         ; $660F: $20 $05
 
     ld   bc, $1FE                                 ; $6611: $01 $FE $01
@@ -158,16 +156,14 @@ GetBGAttributesAddressForObject::
 .jr_01A_6616
     ldh  a, [hMapId]                              ; $6616: $F0 $F7
     cp   MAP_S_FACE_SHRINE                        ; $6618: $FE $16
-    jr   nz, .useSecondaryIndoorsPaletteBank                         ; $661A: $20 $0E
+    jr   nz, .useSecondaryIndoorsPaletteBank      ; $661A: $20 $0E
 
     ldh  a, [hMapRoom]                            ; $661C: $F0 $F6
-    cp   $6F                                      ; $661E: $FE $6F
+    cp   UNKNOWN_ROOM_6F                          ; $661E: $FE $6F
     jr   z, .jr_01A_662E                          ; $6620: $28 $0C
-
-    cp   $7F                                      ; $6622: $FE $7F
+    cp   UNKNOWN_ROOM_7F                          ; $6622: $FE $7F
     jr   z, .jr_01A_662E                          ; $6624: $28 $08
-
-    cp   $8F                                      ; $6626: $FE $8F
+    cp   UNKNOWN_ROOM_8F                          ; $6626: $FE $8F
     jr   z, .jr_01A_662E                          ; $6628: $28 $04
 
 .useSecondaryIndoorsPaletteBank

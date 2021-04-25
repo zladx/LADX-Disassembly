@@ -4,7 +4,7 @@ Data_005_7F1E::
 AnimalD0EntityHandler::
     ld   a, [$DB74]                               ; $7F2E: $FA $74 $DB
     and  a                                        ; $7F31: $A7
-    jp   z, func_005_7B4B                         ; $7F32: $CA $4B $7B
+    jp   z, ClearEntityStatus_05                  ; $7F32: $CA $4B $7B
 
     ld   de, Data_005_7F1E                        ; $7F35: $11 $1E $7F
     call RenderActiveEntitySpritesPair            ; $7F38: $CD $C0 $3B

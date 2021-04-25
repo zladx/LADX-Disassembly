@@ -224,9 +224,9 @@ jr_014_4AE7:
     ldh  a, [hMapRoom]                            ; $4AED: $F0 $F6
     ld   [wDB54], a                               ; $4AEF: $EA $54 $DB
     ldh  a, [hMapRoom]                            ; $4AF2: $F0 $F6
-    cp   $F0                                      ; $4AF4: $FE $F0
+    cp   UNKNOWN_ROOM_F0                          ; $4AF4: $FE $F0
     jr   c, .wavesSfxEnd                          ; $4AF6: $38 $14
-    cp   $F6                                      ; $4AF8: $FE $F6
+    cp   UNKNOWN_ROOM_F6                          ; $4AF8: $FE $F6
     jr   nc, .wavesSfxEnd                         ; $4AFA: $30 $10
 
     ; increment the sea waves counter.
@@ -1649,17 +1649,16 @@ label_014_5630:
     jr   nz, jr_014_564E                          ; $5634: $20 $18
 
     ldh  a, [hMapRoom]                            ; $5636: $F0 $F6
-    cp   $52                                      ; $5638: $FE $52
+    cp   UNKNOWN_ROOM_52                          ; $5638: $FE $52
     jr   z, jr_014_5640                           ; $563A: $28 $04
-
-    cp   $04                                      ; $563C: $FE $04
+    cp   UNKNOWN_ROOM_04                          ; $563C: $FE $04
     jr   nz, jr_014_5643                          ; $563E: $20 $03
 
 jr_014_5640:
     jp   label_014_5767                           ; $5640: $C3 $67 $57
 
 jr_014_5643:
-    cp   $75                                      ; $5643: $FE $75
+    cp   UNKNOWN_ROOM_75                          ; $5643: $FE $75
     jr   nz, jr_014_564E                          ; $5645: $20 $07
 
     ldh  a, [hIsGBC]                              ; $5647: $F0 $FE
@@ -1674,22 +1673,18 @@ jr_014_564E:
     jr   z, jr_014_5677                           ; $5651: $28 $24
 
     ldh  a, [hMapRoom]                            ; $5653: $F0 $F6
-    cp   $20                                      ; $5655: $FE $20
+    cp   ROOM_SECTION_OW_SOUTH_OF_TAL_TAL_HEIGHTS ; $5655: $FE $20
     jr   c, jr_014_5673                           ; $5657: $38 $1A
 
-    cp   $E0                                      ; $5659: $FE $E0
+    cp   UNKNOWN_ROOM_E0                          ; $5659: $FE $E0
     jr   z, jr_014_5673                           ; $565B: $28 $16
-
-    cp   $E1                                      ; $565D: $FE $E1
+    cp   UNKNOWN_ROOM_E1                          ; $565D: $FE $E1
     jr   z, jr_014_5673                           ; $565F: $28 $12
-
-    cp   $E3                                      ; $5661: $FE $E3
+    cp   UNKNOWN_ROOM_E3                          ; $5661: $FE $E3
     jr   z, jr_014_5673                           ; $5663: $28 $0E
-
-    cp   $E4                                      ; $5665: $FE $E4
+    cp   UNKNOWN_ROOM_E4                          ; $5665: $FE $E4
     jr   z, jr_014_5673                           ; $5667: $28 $0A
-
-    cp   $FF                                      ; $5669: $FE $FF
+    cp   UNKNOWN_ROOM_FF                          ; $5669: $FE $FF
     jr   nz, jr_014_5677                          ; $566B: $20 $0A
 
     ldh  a, [hObjectUnderEntity]                  ; $566D: $F0 $AF
@@ -1713,22 +1708,18 @@ jr_014_5679:
 
     push bc                                       ; $5686: $C5
     ldh  a, [hMapRoom]                            ; $5687: $F0 $F6
-    cp   $20                                      ; $5689: $FE $20
+    cp   ROOM_SECTION_OW_SOUTH_OF_TAL_TAL_HEIGHTS ; $5689: $FE $20
     jr   c, jr_014_56B3                           ; $568B: $38 $26
 
-    cp   $E0                                      ; $568D: $FE $E0
+    cp   UNKNOWN_ROOM_E0                          ; $568D: $FE $E0
     jr   z, jr_014_56B3                           ; $568F: $28 $22
-
-    cp   $E1                                      ; $5691: $FE $E1
+    cp   UNKNOWN_ROOM_E1                          ; $5691: $FE $E1
     jr   z, jr_014_56B3                           ; $5693: $28 $1E
-
-    cp   $E3                                      ; $5695: $FE $E3
+    cp   UNKNOWN_ROOM_E3                          ; $5695: $FE $E3
     jr   z, jr_014_56B3                           ; $5697: $28 $1A
-
-    cp   $E4                                      ; $5699: $FE $E4
+    cp   UNKNOWN_ROOM_E4                          ; $5699: $FE $E4
     jr   z, jr_014_56B3                           ; $569B: $28 $16
-
-    cp   $FF                                      ; $569D: $FE $FF
+    cp   UNKNOWN_ROOM_FF                          ; $569D: $FE $FF
     jr   nz, jr_014_56A9                          ; $569F: $20 $08
 
     ldh  a, [hObjectUnderEntity]                  ; $56A1: $F0 $AF
@@ -1781,22 +1772,18 @@ jr_014_56C9:
     jr   z, jr_014_5712                           ; $56E4: $28 $2C
 
     ldh  a, [hMapRoom]                            ; $56E6: $F0 $F6
-    cp   $20                                      ; $56E8: $FE $20
+    cp   ROOM_SECTION_OW_SOUTH_OF_TAL_TAL_HEIGHTS ; $56E8: $FE $20
     jr   c, jr_014_5729                           ; $56EA: $38 $3D
 
-    cp   $E0                                      ; $56EC: $FE $E0
+    cp   UNKNOWN_ROOM_E0                          ; $56EC: $FE $E0
     jr   z, jr_014_5729                           ; $56EE: $28 $39
-
-    cp   $E1                                      ; $56F0: $FE $E1
+    cp   UNKNOWN_ROOM_E1                          ; $56F0: $FE $E1
     jr   z, jr_014_5729                           ; $56F2: $28 $35
-
-    cp   $E3                                      ; $56F4: $FE $E3
+    cp   UNKNOWN_ROOM_E3                          ; $56F4: $FE $E3
     jr   z, jr_014_5729                           ; $56F6: $28 $31
-
-    cp   $E4                                      ; $56F8: $FE $E4
+    cp   UNKNOWN_ROOM_E4                          ; $56F8: $FE $E4
     jr   z, jr_014_5729                           ; $56FA: $28 $2D
-
-    cp   $FF                                      ; $56FC: $FE $FF
+    cp   UNKNOWN_ROOM_FF                          ; $56FC: $FE $FF
     jr   nz, jr_014_5708                          ; $56FE: $20 $08
 
     ldh  a, [hObjectUnderEntity]                  ; $5700: $F0 $AF
@@ -1854,16 +1841,13 @@ label_014_573E:
 
 label_014_5743:
     ldh  a, [hMapRoom]                            ; $5743: $F0 $F6
-    cp   $75                                      ; $5745: $FE $75
+    cp   UNKNOWN_ROOM_75                          ; $5745: $FE $75
     jr   z, jr_014_5756                           ; $5747: $28 $0D
-
-    cp   $07                                      ; $5749: $FE $07
+    cp   ROOM_OW_RIGHT_OF_EGG                     ; $5749: $FE $07
     jr   z, jr_014_5756                           ; $574B: $28 $09
-
-    cp   $AA                                      ; $574D: $FE $AA
+    cp   UNKNOWN_ROOM_AA                          ; $574D: $FE $AA
     jr   z, jr_014_5756                           ; $574F: $28 $05
-
-    cp   $4A                                      ; $5751: $FE $4A
+    cp   UNKNOWN_ROOM_4A                          ; $5751: $FE $4A
     jp   nz, label_014_57E1                       ; $5753: $C2 $E1 $57
 
 jr_014_5756:

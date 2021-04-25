@@ -110,7 +110,7 @@ jr_005_53E9:
     add  hl, de                                   ; $53F8: $19
     ld   a, [hl]                                  ; $53F9: $7E
     cp   $6A                                      ; $53FA: $FE $6A
-    jp   z, func_005_7B4B                        ; $53FC: $CA $4B $7B
+    jp   z, ClearEntityStatus_05                 ; $53FC: $CA $4B $7B
 
 jr_005_53FF:
     dec  e                                        ; $53FF: $1D

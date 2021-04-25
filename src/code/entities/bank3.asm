@@ -252,25 +252,23 @@ ENDC
     jr   nz, .masterStalfosEnd                    ; $48CB: $20 $23
 
     ldh  a, [hMapRoom]                            ; $48CD: $F0 $F6
-    cp   $95                                      ; $48CF: $FE $95
+    cp   ROOM_INDOOR_A_MASTER_STALFOS_1           ; $48CF: $FE $95
     jr   z, .masterStalfosEnd                     ; $48D1: $28 $1D
-
-    cp   $92                                      ; $48D3: $FE $92
+    cp   ROOM_INDOOR_A_MASTER_STALFOS_2           ; $48D3: $FE $92
     jr   z, .masterStalfosEnd                     ; $48D5: $28 $19
-
-    cp   $84                                      ; $48D7: $FE $84
+    cp   ROOM_INDOOR_A_MASTER_STALFOS_3           ; $48D7: $FE $84
     jr   z, .jr_003_48E2                          ; $48D9: $28 $07
 
-    ld   a, [wIndoorARoomStatus + $84]                               ; $48DB: $FA $84 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_3] ; $48DB: $FA $84 $D9
     and  $30                                      ; $48DE: $E6 $30
     jr   z, MasterStalfosDefeated                 ; $48E0: $28 $CB
 
 .jr_003_48E2
-    ld   a, [wIndoorARoomStatus + $92]                               ; $48E2: $FA $92 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_2] ; $48E2: $FA $92 $D9
     and  $30                                      ; $48E5: $E6 $30
     jr   z, MasterStalfosDefeated                 ; $48E7: $28 $C4
 
-    ld   a, [wIndoorARoomStatus + $95]                               ; $48E9: $FA $95 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_1] ; $48E9: $FA $95 $D9
     and  $30                                      ; $48EC: $E6 $30
     jr   z, MasterStalfosDefeated                 ; $48EE: $28 $BD
 .masterStalfosEnd
@@ -342,7 +340,7 @@ EntityInitSnake::
 
 EntityInitSideViewPlatformVertical::
     ldh  a, [hMapRoom]                            ; $4943: $F0 $F6
-    cp   $65                                      ; $4945: $FE $65
+    cp   UNKNOWN_ROOM_65                          ; $4945: $FE $65
     ret  nz                                       ; $4947: $C0
 
     ldh  a, [hActiveEntityVisualPosY]             ; $4948: $F0 $EC
@@ -361,7 +359,7 @@ EntityInitGel::
     ret                                           ; $4959: $C9
 
 EntityInitMarinAtTheShore::
-    ld   hl, $DB74                                ; $495A: $21 $74 $DB
+    ld   hl, wDB74                                ; $495A: $21 $74 $DB
     ld   a, [wIsMarinFollowingLink]               ; $495D: $FA $73 $DB
     or   [hl]                                     ; $4960: $B6
     jp   nz, UnloadEntityAndReturn                ; $4961: $C2 $8D $3F
@@ -520,7 +518,7 @@ EntityInitKid72::
 
 EntityInitMrWrite::
     ldh  a, [hMapRoom]                            ; $4A28: $F0 $F6
-    cp   $D9                                      ; $4A2A: $FE $D9
+    cp   UNKNOWN_ROOM_D9                          ; $4A2A: $FE $D9
     ld   a, $32                                   ; $4A2C: $3E $32
     jr   nz, jr_003_4A32                          ; $4A2E: $20 $02
 
@@ -558,7 +556,7 @@ jr_003_4A4F:
 
 EntityInitBowWow::
     ldh  a, [hMapRoom]                            ; $4A5B: $F0 $F6
-    cp   $E2                                      ; $4A5D: $FE $E2
+    cp   UNKNOWN_ROOM_E2                          ; $4A5D: $FE $E2
     jr   nz, jr_003_4A6B                          ; $4A5F: $20 $0A
 
     ld   a, [wIsBowWowFollowingLink]              ; $4A61: $FA $56 $DB
@@ -594,10 +592,10 @@ UnloadEntityIfRoomStatusSet::
 
 EntityInitMarin::
     ldh  a, [hMapRoom]                            ; $4A80: $F0 $F6
-    cp   $C0                                      ; $4A82: $FE $C0
+    cp   UNKNOWN_ROOM_C0                          ; $4A82: $FE $C0
     jr   c, .mabeWeatherVaneEnd                   ; $4A84: $38 $1D
 
-    ld   a, [$DB74]                               ; $4A86: $FA $74 $DB
+    ld   a, [wDB74]                               ; $4A86: $FA $74 $DB
     and  a                                        ; $4A89: $A7
     jp   z, UnloadEntityAndReturn                 ; $4A8A: $CA $8D $3F
 
@@ -770,7 +768,7 @@ EntityInitZora::
     jr   z, EntityInitNoop                        ; $4B65: $28 $EF
 
     ldh  a, [hMapRoom]                            ; $4B67: $F0 $F6
-    cp   $DA                                      ; $4B69: $FE $DA
+    cp   UNKNOWN_ROOM_DA                          ; $4B69: $FE $DA
     jr   nz, EntityInitNoop                       ; $4B6B: $20 $E9
 
     ld   a, [wTradeSequenceItem]                  ; $4B6D: $FA $0E $DB
@@ -1404,10 +1402,10 @@ EntityInitSecretSeashell::
     add  hl, bc                                   ; $4EFE: $09
     ld   [hl], $02                                ; $4EFF: $36 $02
     ldh  a, [hMapRoom]                            ; $4F01: $F0 $F6
-    cp   $A4                                      ; Overworld room A4 (1 east of Mabe's big bush field)
+    cp   UNKNOWN_ROOM_A4                          ; Overworld room A4 (1 east of Mabe's big bush field)
     jr   z, jr_003_4F0B                           ; $4F05: $28 $04
 
-    cp   $D2                                      ; overworld room D2 (1 west of Tail Cave)
+    cp   UNKNOWN_ROOM_D2                          ; overworld room D2 (1 west of Tail Cave)
     jr   nz, jr_003_4F0F                          ; $4F09: $20 $04
 
 jr_003_4F0B:
@@ -1440,7 +1438,7 @@ jr_003_4F24:
 
 EntityInitKeyDropPoint::
     ldh  a, [hMapRoom]                            ; $4F2D: $F0 $F6
-    cp   $F8                                      ; In the Yarna Desert quicksand pit
+    cp   UNKNOWN_ROOM_F8                          ; In the Yarna Desert quicksand pit
     jr   nz, jr_003_4F44                          ; $4F31: $20 $11
 
     ; check if the angler key has dropped, and not dropped down the hole yet
@@ -1456,7 +1454,7 @@ EntityInitKeyDropPoint::
 
 jr_003_4F44:
     ; Handle the sprite change for the bird key
-    cp   $7A                                      ; $4F44: $FE $7A
+    cp   MOUNTAIN_CAVE_ROOM_1                     ; $4F44: $FE $7A
     jr   nz, jr_003_4F54                          ; $4F46: $20 $0C
 
 IF __PATCH_0__
@@ -1475,10 +1473,10 @@ ENDC
 jr_003_4F54:
     ; handle the key in the sidescroll room in dungeon 4 where
     ; the key drops in the hole down into the sidescrolling room with water
-    cp   $7C                                      ; $4F54: $FE $7C
+    cp   MOUNTAIN_CAVE_ROOM_3                     ; $4F54: $FE $7C
     jr   nz, jr_003_4F67                          ; $4F56: $20 $0F
 
-    ld   a, [wIndoorARoomStatus + $69]            ; $4F58: $FA $69 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_OW_ANGLERS_TUNNEL] ; $4F58: $FA $69 $D9
     and  $10                                      ; $4F5B: $E6 $10
     jp   z, UnloadEntityAndReturn                 ; $4F5D: $CA $8D $3F
 
@@ -1887,7 +1885,7 @@ jr_003_5198:
     ld   de, Data_003_5166                        ; $519C: $11 $66 $51
     ld   b, $C6                                   ; $519F: $06 $C6
     ldh  a, [hMapRoom]                            ; $51A1: $F0 $F6
-    cp   $77                                      ; Color Dungeon entrance in the graveyard  ; $51A3: $FE $77
+    cp   ROOM_OW_COLOR_DUNGEON_ENTRANCE           ; $51A3: $FE $77
     jr   nz, jr_003_51B3                          ; $51A5: $20 $0C
 
     ; If the color dungeon is open…
@@ -1906,7 +1904,7 @@ jr_003_51B3:
     ld   de, Data_003_515A                        ; $51B9: $11 $5A $51
     ld   b, $0D                                   ; $51BC: $06 $0D
     ldh  a, [hMapRoom]                            ; $51BE: $F0 $F6
-    cp   $C7                                      ; @TODO Richard's Villa?
+    cp   UNKNOWN_ROOM_C7                          ; @TODO Richard's Villa?
     jr   nz, func_003_51C9                        ; $51C2: $20 $05
 
     ld   de, Data_003_5156                        ; $51C4: $11 $56 $51
@@ -2604,10 +2602,10 @@ SpawnEnemyDrop::
     jr   nz, .slimeKeyEnd                         ; $56BA: $20 $15
 
     ldh  a, [hMapRoom]                            ; $56BC: $F0 $F6
-    cp   OVERWORLD_KANALET_CASTLE_CROW_ROOM       ; Overworld Kanalet Castle crow room
+    cp   ROOM_OW_KANALET_CASTLE_CROW              ; Overworld Kanalet Castle crow room
     jr   z, .moveKeyTowardsLink                   ; $56C0: $28 $04
 
-    cp   OVERWORLD_KANALET_CASTLE_FIVE_PITS_ROOM  ; Overwrold Kanalet Castle five-pits room
+    cp   ROOM_OW_KANALET_CASTLE_FIVE_PITS         ; $56C2
     jr   nz, .slimeKeyEnd                         ; $56C4: $20 $0B
 
 .moveKeyTowardsLink:
@@ -3572,15 +3570,15 @@ KeyDropPointEntityHandler::
 
     ; If dropped in the quicksand mark the angler key
     ; as available in the quicksand cave by setting the room flags.
-    ld   hl, wOverworldRoomStatus + $CE           ; $5C8E: $21 $CE $D8
+    ld   hl, wOverworldRoomStatus + ROOM_OW_YARNA_LANMOLA ; $5C8E: $21 $CE $D8
     set  4, [hl]                                  ; $5C91: $CB $E6
-    ld   hl, wIndoorARoomStatus + $F8             ; $5C93: $21 $F8 $D9
+    ld   hl, wIndoorARoomStatus + ROOM_INDOOR_A_QUICKSAND_CAVE ; $5C93: $21 $F8 $D9
     set  5, [hl]                                  ; $5C96: $CB $EE
     ret                                           ; $5C98: $C9
 
 jr_003_5C99:
     ldh  a, [hMapRoom]                            ; $5C99: $F0 $F6
-    cp   $80                                      ; @TODO (?) L5 Master Stalfos final room
+    cp   ROOM_INDOOR_A_MASTER_STALFOS_FINAL       ; $5C9B: $FE $80
     jp   z, label_003_5C49                        ; $5C9D: $CA $49 $5C
 
     ld   de, KeyDropSpriteTable                   ; $5CA0: $11 $78 $5C
@@ -3646,7 +3644,7 @@ CheckForEntityFallingDownQuicksandHole::
     jr   nz, jr_003_5D34                          ; $5CEE: $20 $44
 
     ldh  a, [hMapRoom]                            ; $5CF0: $F0 $F6
-    cp   $CE                                      ; Overworld Yarna Desert Lanmola fight
+    cp   ROOM_OW_YARNA_LANMOLA                    ; $5CF2: $FE $CE
     jr   nz, jr_003_5D34                          ; $5CF4: $20 $3E
 
     ldh  a, [hActiveEntityPosY]                   ; $5CF6: $F0 $EF
@@ -4151,7 +4149,7 @@ DroppableSeashellEntityHandler::
     jp   nz, UnloadEntityAndReturn                ; $5FDF: $C2 $8D $3F
 
     ldh  a, [hMapRoom]                            ; $5FE2: $F0 $F6
-    cp   $E3                                      ; House by the Bay
+    cp   UNKNOWN_ROOM_E3                          ; House by the Bay
     jr   nz, jr_003_5FEF                          ; $5FE6: $20 $07
 
     ldh  a, [hRoomStatus]                         ; $5FE8: $F0 $F8
@@ -4187,7 +4185,7 @@ HidingSlimeKeyEntityHandler::
     jr   nz, jr_003_6029                          ; $601C: $20 $0B
 
     ldh  a, [hMapRoom]                            ; $601E: $F0 $F6
-    cp   $C6                                      ; Overworld Pothole Field - Slime Key
+    cp   ROOM_OW_POTHOLE_FIELD_SLIME_KEY          ; Overworld Pothole Field - Slime Key
     jr   nz, jr_003_6029                          ; $6022: $20 $05
 
     ld   a, GOLDEN_LEAVES_5                       ; $6024: $3E $05
@@ -4483,22 +4481,17 @@ jr_003_6200:
     jr   nz, jr_003_622F                          ; $620B: $20 $22
 
     ldh  a, [hMapRoom]                            ; $620D: $F0 $F6
-    cp   $DA                                      ; Overworld room one north of fisherman under bridge
+    cp   UNKNOWN_ROOM_DA                          ; Overworld room one north of fisherman under bridge
     jr   z, jr_003_622F                           ; $6211: $28 $1C
-
-    cp   $A5                                      ; Overworld room two east of Mabe bush field
+    cp   UNKNOWN_ROOM_A5                          ; Overworld room two east of Mabe bush field
     jr   z, jr_003_622F                           ; $6215: $28 $18
-
-    cp   $74                                      ; Overworld room one south of ghost's gravestone (w/zombies)
+    cp   UNKNOWN_ROOM_74                          ; Overworld room one south of ghost's gravestone (w/zombies)
     jr   z, jr_003_622F                           ; $6219: $28 $14
-
-    cp   $3A                                      ; Overworld room with... no seashell?
+    cp   UNKNOWN_ROOM_3A                          ; Overworld room with... no seashell?
     jr   z, jr_003_622F                           ; $621D: $28 $10
-
-    cp   $A8                                      ; Overworld room northeast-ish of Pothole Field
+    cp   UNKNOWN_ROOM_A8                          ; Overworld room northeast-ish of Pothole Field
     jr   z, jr_003_622F                           ; $6221: $28 $0C
-
-    cp   $B2                                      ; Overworld room - Mabe village telephone booth (...no seashell???)
+    cp   UNKNOWN_ROOM_B2                          ; Overworld room - Mabe village telephone booth (...no seashell???)
     jr   z, jr_003_622F                           ; $6225: $28 $08
 
 jr_003_6227:
@@ -4958,11 +4951,11 @@ GiveInventoryItem::     ; @TODO GivePlayerItem or w/e - inserts item in [d] into
 
 PickDroppableKey::
     ldh  a, [hMapRoom]                            ; $648F: $F0 $F6
-    cp   $80                                      ; L5 Master Stalfos's final fight
+    cp   ROOM_INDOOR_A_MASTER_STALFOS_FINAL       ; $6491: $FE $80
     jr   z, jr_003_64A5                           ; $6493: $28 $10
 
     ldh  a, [hMapRoom]                            ; $6495: $F0 $F6
-    cp   $7C                                      ; L4 Side-view room where the key drops
+    cp   MOUNTAIN_CAVE_ROOM_3                     ; L4 Side-view room where the key drops
     jr   nz, jr_003_64A0                          ; $6499: $20 $05
 
     ld   hl, wIndoorARoomStatus + $69             ; $649B: $21 $69 $D9

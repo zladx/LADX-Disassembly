@@ -119,9 +119,8 @@ jr_007_7C36:
     jr   nz, jr_007_7C49                          ; $7C3F: $20 $08
 
     ldh  a, [hMapRoom]                            ; $7C41: $F0 $F6
-    cp   $CE                     ; @TODO ?? L2 power bracelet chest in Face Shrine?
-    jr   nz, jr_007_7C58         ; maybe related to incrementing an item level
-
+    cp   ROOM_INDOOR_A_POWER_BRACELET_LV2         ; $7C43: $FE $CE
+    jr   nz, jr_007_7C58                          ; maybe related to incrementing an item level
     jr   jr_007_7C53                              ; $7C47: $18 $0A
 
 jr_007_7C49:
@@ -129,7 +128,7 @@ jr_007_7C49:
     jr   nz, jr_007_7C58                          ; $7C4B: $20 $0B
 
     ldh  a, [hMapRoom]                            ; $7C4D: $F0 $F6
-    cp   $1A                     ; @TODO ?? L2 shield in Eagle's Tower?
+    cp   ROOM_INDOOR_B_SHIELD_LV2                 ; $7C4F: $FE $1A
     jr   nz, jr_007_7C58                          ; $7C51: $20 $05
 
 jr_007_7C53:
@@ -189,14 +188,14 @@ jr_007_7C93:
     cp   $26                                      ; $7C98: $FE $26
     jr   nz, jr_007_7CEA                          ; $7C9A: $20 $4E
 
-    ldh  a, [hActiveEntitySpriteVariant]               ; $7C9C: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]          ; $7C9C: $F0 $F1
     ld   e, a                                     ; $7C9E: $5F
     ld   d, b                                     ; $7C9F: $50
     cp   CHEST_MESSAGE                            ; $7CA0: $FE $21
     jr   nz, jr_007_7CB1                          ; $7CA2: $20 $0D
 
     ldh  a, [hMapRoom]                            ; $7CA4: $F0 $F6
-    cp   $96                             ; @TODO Master Stalfos "screw you" letter chest?
+    cp   UNKNOWN_ROOM_96                          ; @TODO Master Stalfos "screw you" letter chest?
     jr   nz, jr_007_7CB1                          ; $7CA8: $20 $07
 
     call_open_dialog $111                         ; $7CAA

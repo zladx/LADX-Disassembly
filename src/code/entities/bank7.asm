@@ -3151,20 +3151,17 @@ TradingItemEntityHandler::
     jr   nz, jr_007_552E                          ; $5514: $20 $18
 
     ldh  a, [hMapRoom]                            ; $5516: $F0 $F6
-    cp   $6B                                      ; $5518: $FE $6B
+    cp   UNKNOWN_ROOM_6B                          ; $5518: $FE $6B
     jr   z, jr_007_5528                           ; $551A: $28 $0C
-
-    cp   $7A                                      ; $551C: $FE $7A
+    cp   MOUNTAIN_CAVE_ROOM_1                     ; $551C: $FE $7A
     jr   z, jr_007_5528                           ; $551E: $28 $08
-
-    cp   $8B                                      ; $5520: $FE $8B
+    cp   UNKNOWN_ROOM_8B                          ; $5520: $FE $8B
     jr   z, jr_007_5528                           ; $5522: $28 $04
-
-    cp   $7B                                      ; $5524: $FE $7B
+    cp   MOUNTAIN_CAVE_ROOM_2                     ; $5524: $FE $7B
     jr   nz, jr_007_552E                          ; $5526: $20 $06
 
 jr_007_5528:
-    ld   a, [wOverworldRoomStatus + $7B]                               ; $5528: $FA $7B $D8
+    ld   a, [wOverworldRoomStatus + MOUNTAIN_CAVE_ROOM_2] ; $5528: $FA $7B $D8
     and  $10                                      ; $552B: $E6 $10
     ret  z                                        ; $552D: $C8
 
@@ -3285,7 +3282,7 @@ jr_007_55CD:
     add  hl, bc                                   ; $55D2: $09
     ld   [hl], a                                  ; $55D3: $77
     ldh  a, [hMapRoom]                            ; $55D4: $F0 $F6
-    cp   $C9                                      ; $55D6: $FE $C9
+    cp   UNKNOWN_ROOM_C9                          ; $55D6: $FE $C9
     jr   nz, jr_007_55DF                          ; $55D8: $20 $05
 
     ld   a, $04                                   ; $55DA: $3E $04
@@ -5617,7 +5614,7 @@ jr_007_643B:
 
     ld   e, $04                                   ; $6451: $1E $04
     ldh  a, [hMapRoom]                            ; $6453: $F0 $F6
-    cp   $3B                                      ; $6455: $FE $3B
+    cp   UNKNOWN_ROOM_3B                          ; $6455: $FE $3B
     jr   z, jr_007_6466                           ; $6457: $28 $0D
 
     call GetEntityPrivateCountdown1               ; $6459: $CD $00 $0C
@@ -6758,13 +6755,11 @@ func_007_6B16::
 
     ld   e, $12                                   ; $6B1D: $1E $12
     ldh  a, [hMapRoom]                            ; $6B1F: $F0 $F6
-    cp   $92                                      ; $6B21: $FE $92
+    cp   ROOM_INDOOR_A_MASTER_STALFOS_2           ; $6B21: $FE $92
     jr   z, jr_007_6B2F                           ; $6B23: $28 $0A
-
-    cp   $84                                      ; $6B25: $FE $84
+    cp   ROOM_INDOOR_A_MASTER_STALFOS_3           ; $6B25: $FE $84
     jr   z, jr_007_6B2F                           ; $6B27: $28 $06
-
-    cp   $80                                      ; $6B29: $FE $80
+    cp   ROOM_INDOOR_A_MASTER_STALFOS_FINAL       ; $6B29: $FE $80
     jr   nz, jr_007_6B33                          ; $6B2B: $20 $06
 
     ld   e, $14                                   ; $6B2D: $1E $14
@@ -6779,7 +6774,7 @@ jr_007_6B33:
 
     ld   [hl], $A0                                ; $6B38: $36 $A0
     ldh  a, [hMapRoom]                            ; $6B3A: $F0 $F6
-    cp   $95                                      ; $6B3C: $FE $95
+    cp   UNKNOWN_ROOM_95                          ; $6B3C: $FE $95
     jr   z, jr_007_6B42                           ; $6B3E: $28 $02
 
 jr_007_6B40:
@@ -7229,13 +7224,11 @@ jr_007_6E01:
 
     ld   e, $FF                                   ; $6E06: $1E $FF
     ldh  a, [hMapRoom]                            ; $6E08: $F0 $F6
-    cp   $80                                      ; $6E0A: $FE $80
+    cp   UNKNOWN_ROOM_80                          ; $6E0A: $FE $80
     jr   z, jr_007_6E16                           ; $6E0C: $28 $08
-
     ld   e, $03                                   ; $6E0E: $1E $03
-    cp   $95                                      ; $6E10: $FE $95
+    cp   UNKNOWN_ROOM_95                          ; $6E10: $FE $95
     jr   z, jr_007_6E16                           ; $6E12: $28 $02
-
     ld   e, $02                                   ; $6E14: $1E $02
 
 jr_007_6E16:
@@ -7323,7 +7316,7 @@ jr_007_6E6A:
 func_007_6E7F::
     ld   hl, wIndoorARoomStatus                   ; $6E7F: $21 $00 $D9
     ldh  a, [hMapRoom]                            ; $6E82: $F0 $F6
-    cp   $FF                                      ; $6E84: $FE $FF
+    cp   UNKNOWN_ROOM_FF                          ; $6E84: $FE $FF
     jr   nz, jr_007_6E8D                          ; $6E86: $20 $05
 
     ld   hl, wColorDungeonRoomStatus              ; $6E88: $21 $E0 $DD
@@ -7394,7 +7387,7 @@ func_007_6ED0::
     add  hl, bc                                   ; $6EE5: $09
     ld   [hl], $FF                                ; $6EE6: $36 $FF
     ldh  a, [hMapRoom]                            ; $6EE8: $F0 $F6
-    cp   $80                                      ; $6EEA: $FE $80
+    cp   UNKNOWN_ROOM_80                          ; $6EEA: $FE $80
     jr   nz, func_007_6EF0                        ; $6EEC: $20 $02
 
     ld   [hl], $C0                                ; $6EEE: $36 $C0

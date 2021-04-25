@@ -1822,7 +1822,7 @@ jr_002_4CC1:
     jr   nz, jr_002_4CD3                          ; $4CCC: $20 $05
 
     ldh  a, [hMapRoom]                            ; $4CCE: $F0 $F6
-    cp   $0E                                      ; $4CD0: $FE $0E
+    cp   ROOM_OW_EAGLE_TOWER                      ; $4CD0: $FE $0E
     ret  z                                        ; $4CD2: $C8
 
 jr_002_4CD3:
@@ -2397,54 +2397,58 @@ jr_002_5015:
     call func_002_753A                            ; $5015: $CD $3A $75
     ldh  a, [hFF9C]                               ; $5018: $F0 $9C
     and  a                                        ; $501A: $A7
-    jr   z, jr_002_5079                           ; $501B: $28 $5C
+    jr   z, .return                               ; $501B: $28 $5C
 
     ldh  a, [hFFB7]                               ; $501D: $F0 $B7
     and  a                                        ; $501F: $A7
-    jr   nz, jr_002_5024                          ; $5020: $20 $02
+    jr   nz, .jr_002_5024                         ; $5020: $20 $02
 
     ldh  [hFF9C], a                               ; $5022: $E0 $9C
 
-jr_002_5024:
+.jr_002_5024
+    ;
+    ; Spawn a piece of heart hidden in water if needed
+    ;
+
     ldh  a, [hMapId]                              ; $5024: $F0 $F7
     and  a                                        ; $5026: $A7
-    jr   z, jr_002_5035                           ; $5027: $28 $0C
+    jr   z, .overworld                            ; $5027: $28 $0C
 
-    cp   $1F                                      ; $5029: $FE $1F
-    jr   nz, jr_002_507A                          ; $502B: $20 $4D
+    cp   MAP_CAVE_E                               ; $5029: $FE $1F
+    jr   nz, .jr_002_507A                         ; $502B: $20 $4D
 
     ldh  a, [hMapRoom]                            ; $502D: $F0 $F6
-    cp   $F2                                      ; $502F: $FE $F2
-    jr   nz, jr_002_5079                          ; $5031: $20 $46
+    cp   ROOM_INDOOR_A_WATER_FLOODED_GROTTO       ; $502F: $FE $F2
+    jr   nz, .return                              ; $5031: $20 $46
 
-    jr   jr_002_503B                              ; $5033: $18 $06
+    jr   .roomHasSunkPieceOfHeart                 ; $5033: $18 $06
 
-jr_002_5035:
+.overworld
     ldh  a, [hMapRoom]                            ; $5035: $F0 $F6
-    cp   $78                                      ; $5037: $FE $78
-    jr   nz, jr_002_5079                          ; $5039: $20 $3E
+    cp   ROOM_OW_KANALET_MOAT                     ; $5037: $FE $78
+    jr   nz, .return                              ; $5039: $20 $3E
 
-jr_002_503B:
+.roomHasSunkPieceOfHeart
     ldh  a, [hLinkPositionY]                      ; $503B: $F0 $99
     sub  $50                                      ; $503D: $D6 $50
     add  $08                                      ; $503F: $C6 $08
     cp   $10                                      ; $5041: $FE $10
-    jr   nc, jr_002_50A2                          ; $5043: $30 $5D
+    jr   nc, .done                                ; $5043: $30 $5D
 
     ldh  a, [hLinkPositionX]                      ; $5045: $F0 $98
     sub  $58                                      ; $5047: $D6 $58
     add  $08                                      ; $5049: $C6 $08
     cp   $10                                      ; $504B: $FE $10
-    jr   nc, jr_002_50A2                          ; $504D: $30 $53
+    jr   nc, .done                                ; $504D: $30 $53
 
     ld   hl, hRoomStatus                          ; $504F: $21 $F8 $FF
     bit  5, [hl]                                  ; $5052: $CB $6E
-    jr   nz, jr_002_5079                          ; $5054: $20 $23
+    jr   nz, .return                              ; $5054: $20 $23
 
     set  5, [hl]                                  ; $5056: $CB $EE
     ld   a, ENTITY_HEART_PIECE                    ; $5058: $3E $35
     call SpawnNewEntity_trampoline                ; $505A: $CD $86 $3B
-    jr   c, jr_002_5079                           ; $505D: $38 $1A
+    jr   c, .return                               ; $505D: $38 $1A
 
     ldh  a, [hLinkPositionX]                      ; $505F: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $5061: $21 $00 $C2
@@ -2461,25 +2465,25 @@ jr_002_503B:
     add  hl, de                                   ; $5076: $19
     res  4, [hl]                                  ; $5077: $CB $A6
 
-jr_002_5079:
+.return
     ret                                           ; $5079: $C9
 
-jr_002_507A:
+.jr_002_507A
     ldh  a, [hMapRoom]                            ; $507A: $F0 $F6
-    cp   $8D                                      ; $507C: $FE $8D
-    jr   nz, jr_002_50A2                          ; $507E: $20 $22
+    cp   UNKNOWN_ROOM_8D                          ; $507C: $FE $8D
+    jr   nz, .done                                ; $507E: $20 $22
 
     ldh  a, [hLinkPositionY]                      ; $5080: $F0 $99
     sub  $50                                      ; $5082: $D6 $50
     add  $08                                      ; $5084: $C6 $08
     cp   $10                                      ; $5086: $FE $10
-    jr   nc, jr_002_50A2                          ; $5088: $30 $18
+    jr   nc, .done                                ; $5088: $30 $18
 
     ldh  a, [hLinkPositionX]                      ; $508A: $F0 $98
     sub  $58                                      ; $508C: $D6 $58
     add  $08                                      ; $508E: $C6 $08
     cp   $10                                      ; $5090: $FE $10
-    jr   nc, jr_002_50A2                          ; $5092: $30 $0E
+    jr   nc, .done                                ; $5092: $30 $0E
 
     ldh  a, [hLinkPositionX]                      ; $5094: $F0 $98
     ld   [wWarp0DestinationX], a                  ; $5096: $EA $04 $D4
@@ -2487,7 +2491,7 @@ jr_002_507A:
     ld   [wD463], a                               ; $509C: $EA $63 $D4
     jp   ApplyMapFadeOutTransitionWithNoise       ; $509F: $C3 $7D $0C
 
-jr_002_50A2:
+.done
     ret                                           ; $50A2: $C9
 
 LinkMotionUnknownHandler::
@@ -2555,16 +2559,13 @@ jr_002_50F6:
     jr   nz, jr_002_512B                          ; $5107: $20 $22
 
     ldh  a, [hMapRoom]                            ; $5109: $F0 $F6
-    cp   $01                                      ; $510B: $FE $01
+    cp   UNKNOWN_ROOM_01                          ; $510B: $FE $01
     jr   z, jr_002_511B                           ; $510D: $28 $0C
-
-    cp   $95                                      ; $510F: $FE $95
+    cp   UNKNOWN_ROOM_95                          ; $510F: $FE $95
     jr   z, jr_002_511B                           ; $5111: $28 $08
-
-    cp   $2C                                      ; $5113: $FE $2C
+    cp   UNKNOWN_ROOM_2C                          ; $5113: $FE $2C
     jr   z, jr_002_511B                           ; $5115: $28 $04
-
-    cp   $EC                                      ; $5117: $FE $EC
+    cp   UNKNOWN_ROOM_EC                          ; $5117: $FE $EC
     jr   nz, jr_002_512B                          ; $5119: $20 $10
 
 jr_002_511B:
@@ -2622,7 +2623,7 @@ jr_002_516A:
     jr   nz, jr_002_5176                          ; $516E: $20 $06
 
     ldh  a, [hMapRoom]                            ; $5170: $F0 $F6
-    cp   $1E                                      ; $5172: $FE $1E
+    cp   UNKNOWN_ROOM_1E                          ; $5172: $FE $1E
     jr   z, jr_002_5155                           ; $5174: $28 $DF
 
 jr_002_5176:
@@ -2630,17 +2631,14 @@ jr_002_5176:
     cp   MAP_CAVE_B                               ; $5178: $FE $0A
     jr   nz, jr_002_51AC                          ; $517A: $20 $30
 
-    ldh  a, [hMapRoom]                          ; Underworld 2:
-    cp   $7A                                    ; 7A, 7B, 7C, and 7D are the caves
-    jr   z, jr_002_518E                         ; in the mountains where falling in a pit
-                                                ; will spit you out of a waterfall
-    cp   $7B                                      ; $5182: $FE $7B
+    ldh  a, [hMapRoom]                            ; Underworld 2:
+    cp   MOUNTAIN_CAVE_ROOM_1                     ; caves in the mountains where falling in a pit will spit you out of a waterfall
+    jr   z, jr_002_518E                           ;
+    cp   MOUNTAIN_CAVE_ROOM_2                     ; $5182: $FE $7B
     jr   z, jr_002_518E                           ; $5184: $28 $08
-
-    cp   $7C                                      ; $5186: $FE $7C
+    cp   MOUNTAIN_CAVE_ROOM_3                     ; $5186: $FE $7C
     jr   z, jr_002_518E                           ; $5188: $28 $04
-
-    cp   $7D                                      ; $518A: $FE $7D
+    cp   MOUNTAIN_CAVE_ROOM_4                     ; $518A: $FE $7D
     jr   nz, jr_002_51AC                          ; $518C: $20 $1E
 
 jr_002_518E:
@@ -2814,7 +2812,7 @@ jr_002_5283:
     jr   nz, jr_002_529C                          ; $528A: $20 $10
 
     ldh  a, [hMapRoom]                            ; $528C: $F0 $F6
-    cp   $2B                                      ; $528E: $FE $2B
+    cp   UNKNOWN_ROOM_2B                          ; $528E: $FE $2B
     jr   nz, jr_002_529C                          ; $5290: $20 $0A
 
     ld   a, $48                                   ; $5292: $3E $48
@@ -3122,7 +3120,7 @@ label_002_5425:
 
     ld   [hl], $48                                ; $5449: $36 $48
     ldh  a, [hMapRoom]                            ; $544B: $F0 $F6
-    cp   $08                                      ; $544D: $FE $08
+    cp   ROOM_OW_MARIN_BRIDGE                     ; $544D: $FE $08
     jr   nz, jr_002_5453                          ; $544F: $20 $02
 
     ld   [hl], $58                                ; $5451: $36 $58
@@ -3137,7 +3135,7 @@ jr_002_5453:
 
     ld   [hl], $3C                                ; $545F: $36 $3C
     ldh  a, [hMapRoom]                            ; $5461: $F0 $F6
-    cp   $08                                      ; $5463: $FE $08
+    cp   ROOM_OW_MARIN_BRIDGE                     ; $5463: $FE $08
     jr   nz, jr_002_5469                          ; $5465: $20 $02
 
     ld   [hl], $3C                                ; $5467: $36 $3C
@@ -3340,7 +3338,7 @@ jr_002_552A:
     jr   nz, jr_002_5566                          ; $554B: $20 $19
 
     ldh  a, [hMapRoom]                            ; $554D: $F0 $F6
-    cp   $77                                      ; $554F: $FE $77
+    cp   ROOM_OW_COLOR_DUNGEON_ENTRANCE           ; $554F: $FE $77
     jr   nz, jr_002_5560                          ; $5551: $20 $0D
 
     ld   a, [wIsIndoor]                           ; $5553: $FA $A5 $DB
@@ -3565,7 +3563,7 @@ jr_002_568C:
     ld   a, $60                                   ; $56A6: $3E $60
     ldh  [hSwordIntersectedAreaX], a              ; $56A8: $E0 $CE
     ldh  a, [hMapRoom]                            ; $56AA: $F0 $F6
-    cp   $B5                                      ; $56AC: $FE $B5
+    cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $56AC: $FE $B5
     ld   a, $10                                   ; $56AE: $3E $10
     jr   nz, jr_002_56B8                          ; $56B0: $20 $06
 
@@ -3610,7 +3608,7 @@ jr_002_56B8:
 
     ld   hl, $D727                                ; $56F0: $21 $27 $D7
     ldh  a, [hMapRoom]                            ; $56F3: $F0 $F6
-    cp   $B5                                      ; $56F5: $FE $B5
+    cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $56F5: $FE $B5
     jr   nz, jr_002_56FC                          ; $56F7: $20 $03
 
     ld   hl, $D727                                ; $56F9: $21 $27 $D7
@@ -5463,7 +5461,7 @@ func_002_6A01::
     jr   nz, jr_002_6A24                          ; $6A05: $20 $1D
 
     ldh  a, [hMapRoom]                            ; $6A07: $F0 $F6
-    cp   $F8                                      ; $6A09: $FE $F8
+    cp   UNKNOWN_ROOM_F8                          ; $6A09: $FE $F8
     jr   nz, jr_002_6A24                          ; $6A0B: $20 $17
 
     ld   a, [wIsLinkInTheAir]                     ; $6A0D: $FA $46 $C1
@@ -5918,11 +5916,11 @@ CheckPositionForMapTransition::
 
     ; … and room is $EB…
     ldh  a, [hMapRoom]                            ; $6C88: $F0 $F6
-    cp   $EB                                      ; $6C8A: $FE $EB
+    cp   UNKNOWN_ROOM_EB                          ; $6C8A: $FE $EB
     jr   z, .doBoundsCheck                        ; $6C8C: $28 $04
 
     ; … or $EC…
-    cp   $EC                                      ; $6C8E: $FE $EC
+    cp   UNKNOWN_ROOM_EC                          ; $6C8E: $FE $EC
     jr   nz, .kanaletEnd                          ; $6C90: $20 $07
 
 .doBoundsCheck
@@ -5982,13 +5980,13 @@ CheckPositionForMapTransition::
     cp   MAP_CAVE_E                               ; $6CBD: $FE $1F
     jp   nz, .manualEntryPointsEnd                ; $6CBF: $C2 $5C $6D
 
-    ; … and room is $F5 (Hidden fairy grotto)…
+    ; … and room is $F5 (Goriya's room)…
     ldh  a, [hMapRoom]                            ; $6CC2: $F0 $F6
-    cp   $F5                                      ; $6CC4: $FE $F5
+    cp   ROOM_INDOOR_A_GORIYA                     ; $6CC4: $FE $F5
     jp   z, ApplyMapFadeOutTransitionWithNoise    ; $6CC6: $CA $7D $0C
 
     ; … or room is $F2 (Water-flooded grotto)…
-    cp   $F2                                      ; $6CC9: $FE $F2
+    cp   ROOM_INDOOR_A_WATER_FLOODED_GROTTO       ; $6CC9: $FE $F2
     jp   nz, .manualEntryPointsEnd                ; $6CCB: $C2 $5C $6D
 
     ; … exit the map directly.
@@ -6000,25 +5998,19 @@ CheckPositionForMapTransition::
     ;
 
     ldh  a, [hMapRoom]                            ; $6CD1: $F0 $F6
-    cp   $E8                                      ; $6CD3: $FE $E8
+    cp   ROOM_INDOOR_B_EAGLE_TOWER_BOSS           ; $6CD3: $FE $E8
     jp   z, .manualEntryPointsEnd                 ; $6CD5: $CA $5C $6D
-
-    cp   $F8                                      ; $6CD8: $FE $F8
+    cp   UNKNOWN_ROOM_F8                          ; $6CD8: $FE $F8
     jp   z, .manualEntryPointsEnd                 ; $6CDA: $CA $5C $6D
-
-    cp   $FD                                      ; $6CDD: $FE $FD
+    cp   ROOM_INDOOR_B_MANBO                      ; $6CDD: $FE $FD
     jr   z, .jr_002_6D00                          ; $6CDF: $28 $1F
-
-    cp   $A3                                      ; $6CE1: $FE $A3
+    cp   ROOM_INDOOR_A_WATER_HOLE                 ; $6CE1: $FE $A3
     jp   z, ApplyMapFadeOutTransitionWithNoise    ; $6CE3: $CA $7D $0C
-
-    cp   $C0                                      ; $6CE6: $FE $C0
+    cp   UNKNOWN_ROOM_C0                          ; $6CE6: $FE $C0
     jp   z, ApplyMapFadeOutTransitionWithNoise    ; $6CE8: $CA $7D $0C
-
-    cp   $C1                                      ; $6CEB: $FE $C1
+    cp   UNKNOWN_ROOM_C1                          ; $6CEB: $FE $C1
     jp   z, ApplyMapFadeOutTransitionWithNoise    ; $6CED: $CA $7D $0C
-
-    cp   $FF                                      ; $6CF0: $FE $FF
+    cp   UNKNOWN_ROOM_FF                          ; $6CF0: $FE $FF
     jr   nz, .jr_002_6D0A                         ; $6CF2: $20 $16
 
     ldh  a, [hLinkPositionY]                      ; $6CF4: $F0 $99
@@ -6061,28 +6053,21 @@ CheckPositionForMapTransition::
     ; Side-scrolling rooms exit points
     ;
     ldh  a, [hMapRoom]                            ; $6D1F: $F0 $F6
-    cp   $F5                                      ; $6D21: $FE $F5
+    cp   ROOM_INDOOR_B_FISHERMAN_UNDER_BRIDGE     ; $6D21: $FE $F5
     jp   z, ApplyMapFadeOutTransition             ; $6D23: $CA $83 $0C
-
-    cp   $FD                                      ; $6D26: $FE $FD
+    cp   ROOM_INDOOR_B_MANBO                      ; $6D26: $FE $FD
     jp   z, ApplyMapFadeOutTransition             ; $6D28: $CA $83 $0C
-
-    cp   $E9                                      ; $6D2B: $FE $E9
+    cp   ROOM_INDOOR_B_SEASHELL_MANSION           ; $6D2B: $FE $E9
     jp   z, ApplyMapFadeOutTransitionWithNoise    ; $6D2D: $CA $7D $0C
-
-    cp   $E8                                      ; $6D30: $FE $E8
+    cp   ROOM_INDOOR_B_EAGLE_TOWER_BOSS           ; $6D30: $FE $E8
     jp   z, .return                               ; $6D32: $CA $09 $6E
-
-    cp   $F8                                      ; $6D35: $FE $F8
+    cp   UNKNOWN_ROOM_F8                          ; $6D35: $FE $F8
     jp   z, .return                               ; $6D37: $CA $09 $6E
-
-    cp   $EF                                      ; $6D3A: $FE $EF
+    cp   UNKNOWN_ROOM_EF                          ; $6D3A: $FE $EF
     jp   z, .return                               ; $6D3C: $CA $09 $6E
-
-    cp   $FF                                      ; $6D3F: $FE $FF
+    cp   UNKNOWN_ROOM_FF                          ; $6D3F: $FE $FF
     jp   z, .return                               ; $6D41: $CA $09 $6E
-
-    cp   $C0                                      ; $6D44: $FE $C0
+    cp   UNKNOWN_ROOM_C0                          ; $6D44: $FE $C0
     jr   nz, .jr_002_6D51                         ; $6D46: $20 $09
 
     ldh  a, [hLinkPositionX]                      ; $6D48: $F0 $98
@@ -6182,7 +6167,7 @@ CheckPositionForMapTransition::
 
     ; If room is $E8 (Eagle's Tower boss)…
     ldh  a, [hMapRoom]                            ; $6DCC: $F0 $F6
-    cp   $E8                                      ; $6DCE: $FE $E8
+    cp   ROOM_INDOOR_B_EAGLE_TOWER_BOSS           ; $6DCE: $FE $E8
     jr   nz, .eagleTowerBossEnd                   ; $6DD0: $20 $12
 
     ; … and map is not CAVE_E…
@@ -6523,7 +6508,7 @@ func_002_6F2C::
     jp   nz, label_002_703B                       ; $6FAD: $C2 $3B $70
 
     ldh  a, [hMapRoom]                            ; $6FB0: $F0 $F6
-    cp   $0E                                      ; L7 Eagle's Tower overworld entrance
+    cp   ROOM_OW_EAGLE_TOWER                      ; L7 Eagle's Tower overworld entrance
     jr   nz, jr_002_6FBD                          ; $6FB4: $20 $07
 
     ld   a, [wHasBirdKey]                         ; $6FB6: $FA $14 $DB
@@ -6542,7 +6527,7 @@ jr_002_6FC6:
     jr   z, jr_002_703E                           ; $6FC7: $28 $75
 
     ldh  a, [hMapRoom]                            ; $6FC9: $F0 $F6
-    cp   $8C                                      ; L6 Face Shrine overworld entrance
+    cp   ROOM_OW_FACE_SHRINE_ENTRANCE             ; L6 Face Shrine overworld entrance
     jr   nz, jr_002_6FD4                          ; $6FCD: $20 $05
 
     call label_27F2                               ; $6FCF: $CD $F2 $27
@@ -6889,7 +6874,7 @@ label_002_71BB:
     jr   nz, jr_002_722C                          ; $71CF: $20 $5B
 
     ld   a, [wIsGhostFollowingLink]               ; $71D1: $FA $79 $DB
-    cp   $01                                      ; $71D4: $FE $01
+    cp   TRUE                                     ; $71D4: $FE $01
     jr   z, jr_002_71DE                           ; $71D6: $28 $06
 
     ld   a, [wIsMarinFollowingLink]               ; $71D8: $FA $73 $DB
@@ -6898,36 +6883,28 @@ label_002_71BB:
 
 jr_002_71DE:
     ldh  a, [hMapRoom]                            ; $71DE: $F0 $F6
-    cp   $77                                      ; $71E0: $FE $77
+    cp   ROOM_OW_COLOR_DUNGEON_ENTRANCE           ; $71E0: $FE $77
     jr   z, jr_002_7204                           ; $71E2: $28 $20
-
-    cp   $D3                                      ; $71E4: $FE $D3
+    cp   UNKNOWN_ROOM_D3                          ; $71E4: $FE $D3
     jr   z, jr_002_7204                           ; $71E6: $28 $1C
-
-    cp   $24                                      ; $71E8: $FE $24
+    cp   UNKNOWN_ROOM_24                          ; $71E8: $FE $24
     jr   z, jr_002_7204                           ; $71EA: $28 $18
-
-    cp   $B5                                      ; $71EC: $FE $B5
+    cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $71EC: $FE $B5
     jr   z, jr_002_7204                           ; $71EE: $28 $14
-
-    cp   $2B                                      ; $71F0: $FE $2B
+    cp   UNKNOWN_ROOM_2B                          ; $71F0: $FE $2B
     jr   z, jr_002_7204                           ; $71F2: $28 $10
-
-    cp   $D9                                      ; $71F4: $FE $D9
+    cp   UNKNOWN_ROOM_D9                          ; $71F4: $FE $D9
     jr   z, jr_002_7204                           ; $71F6: $28 $0C
-
-    cp   $AC                                      ; $71F8: $FE $AC
+    cp   UNKNOWN_ROOM_AC                          ; $71F8: $FE $AC
     jr   z, jr_002_7204                           ; $71FA: $28 $08
-
-    cp   $8C                                      ; $71FC: $FE $8C
+    cp   ROOM_OW_FACE_SHRINE_ENTRANCE             ; $71FC: $FE $8C
     jr   z, jr_002_7204                           ; $71FE: $28 $04
-
-    cp   $0E                                      ; $7200: $FE $0E
+    cp   ROOM_OW_EAGLE_TOWER                      ; $7200: $FE $0E
     jr   nz, jr_002_722C                          ; $7202: $20 $28
 
 jr_002_7204:
     ld   a, [wIsGhostFollowingLink]               ; $7204: $FA $79 $DB
-    cp   $01                                      ; $7207: $FE $01
+    cp   TRUE                                     ; $7207: $FE $01
     jr   nz, jr_002_7213                          ; $7209: $20 $08
 
     ld   a, $12                                   ; $720B: $3E $12
@@ -7213,7 +7190,7 @@ label_002_73AD:
     jp   nz, collisionEnd                         ; $73B7: $C2 $54 $74
 
     ldh  a, [hMapRoom]                            ; $73BA: $F0 $F6
-    cp   $77                                      ; $73BC: $FE $77
+    cp   ROOM_OW_COLOR_DUNGEON_ENTRANCE           ; $73BC: $FE $77
     jr   nz, jr_002_742D                          ; $73BE: $20 $6D
 
     ld   a, [wColorDungonCorrectTombStones]       ; $73C0: $FA $D9 $DD
@@ -7334,7 +7311,7 @@ interactiveBlock:
 
     ; … and on room 77 (graveyard with entry to color dungeon)…
     ldh  a, [hMapRoom]                            ; $7449: $F0 $F6
-    cp   $77                                      ; $744B: $FE $77
+    cp   ROOM_OW_COLOR_DUNGEON_ENTRANCE           ; $744B: $FE $77
     jr   nz, collisionEnd                         ; $744D: $20 $05
 
 IF __PATCH_0__
@@ -8019,7 +7996,7 @@ jr_002_77F7:
     ld   a, $03                                   ; $7824: $3E $03
     ldh  [hFFA5], a                               ; $7826: $E0 $A5
     ldh  a, [hMapRoom]                            ; $7828: $F0 $F6
-    cp   $C3                                      ; $782A: $FE $C3
+    cp   UNKNOWN_ROOM_C3                          ; $782A: $FE $C3
     jr   nz, jr_002_7833                          ; $782C: $20 $05
 
     ld   hl, wOverworldRoomStatus + $79           ; $782E: $21 $79 $D8
@@ -8101,7 +8078,7 @@ label_002_787D:
     jr   nz, jr_002_78A9                          ; $789C: $20 $0B
 
     ldh  a, [hMapRoom]                            ; $789E: $F0 $F6
-    cp   $32                                      ; $78A0: $FE $32
+    cp   UNKNOWN_ROOM_32                          ; $78A0: $FE $32
     jr   nz, jr_002_78A9                          ; $78A2: $20 $05
 
     pop  af                                       ; $78A4: $F1
@@ -8130,7 +8107,7 @@ jr_002_78AA:
     jr   nz, jr_002_78CE                          ; $78C1: $20 $0B
 
     ldh  a, [hMapRoom]                            ; $78C3: $F0 $F6
-    cp   $32                                      ; $78C5: $FE $32
+    cp   UNKNOWN_ROOM_32                          ; $78C5: $FE $32
     jr   nz, jr_002_78CE                          ; $78C7: $20 $05
 
     pop  af                                       ; $78C9: $F1

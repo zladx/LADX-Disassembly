@@ -3,7 +3,7 @@ Data_006_5C89::
 
 CrowEntityHandler::
     ldh  a, [hMapRoom]                            ; $5C99: $F0 $F6
-    cp   $58                                      ; $5C9B: $FE $58
+    cp   ROOM_OW_KANALET_CASTLE_CROW              ; $5C9B: $FE $58
     jr   nz, jr_006_5CBE                          ; $5C9D: $20 $1F
 
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5C9F: $21 $10 $C4
@@ -71,7 +71,7 @@ jr_006_5CE5:
 
 CrowState0Handler::
     ldh  a, [hMapRoom]                            ; $5CF7: $F0 $F6
-    cp   $58                                      ; $5CF9: $FE $58
+    cp   ROOM_OW_KANALET_CASTLE_CROW              ; $5CF9: $FE $58
     jp   nz, label_006_5D8A                       ; $5CFB: $C2 $8A $5D
 
     ld   hl, wEntitiesPosXTable                   ; $5CFE: $21 $00 $C2

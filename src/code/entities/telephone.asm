@@ -13,7 +13,7 @@ TelephoneEntityHandler::
 
     ld   e, $FD                                   ; $6A8F: $1E $FD
     ldh  a, [hMapRoom]                            ; $6A91: $F0 $F6
-    cp   $A9                           ; Ulrira's house
+    cp   UNKNOWN_ROOM_A9                          ; Ulrira's house
     jp   z, label_006_6BAD                        ; $6A95: $CA $AD $6B
 
     ld   e, $6E                                   ; $6A98: $1E $6E

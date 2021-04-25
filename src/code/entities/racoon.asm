@@ -56,7 +56,7 @@ jr_005_4995:
 
     ldh  a, [hRoomStatus]                         ; $499C: $F0 $F8
     and  ROOM_STATUS_EVENT_1                      ; $499E: $E6 $10
-    jp   nz, func_005_7B4B                        ; $49A0: $C2 $4B $7B
+    jp   nz, ClearEntityStatus_05                 ; $49A0: $C2 $4B $7B
 
     ldh  a, [hActiveEntityState]                  ; $49A3: $F0 $F0
     and  a                                        ; $49A5: $A7
@@ -446,7 +446,7 @@ label_005_4BC1:
     call func_005_7A3A                            ; $4BCF: $CD $3A $7A
     call UpdateEntityPosWithSpeed_05              ; $4BD2: $CD $B1 $7A
     call GetEntityTransitionCountdown             ; $4BD5: $CD $05 $0C
-    jp   z, func_005_7B4B                         ; $4BD8: $CA $4B $7B
+    jp   z, ClearEntityStatus_05                  ; $4BD8: $CA $4B $7B
 
     and  $10                                      ; $4BDB: $E6 $10
     ld   e, $01                                   ; $4BDD: $1E $01
@@ -475,11 +475,11 @@ jr_005_4BF1:
 
     ld   a, [wHasInstrument3]                     ; $4BF7: $FA $67 $DB
     and  $02                                      ; $4BFA: $E6 $02
-    jp   nz, func_005_7B4B                        ; $4BFC: $C2 $4B $7B
+    jp   nz, ClearEntityStatus_05                 ; $4BFC: $C2 $4B $7B
 
     ld   a, [wTradeSequenceItem]                  ; $4BFF: $FA $0E $DB
     cp   $04                                      ; $4C02: $FE $04
-    jp   nc, func_005_7B4B                        ; $4C04: $D2 $4B $7B
+    jp   nc, ClearEntityStatus_05                 ; $4C04: $D2 $4B $7B
 
 jr_005_4C07:
     ld   a, [$DB48]                               ; $4C07: $FA $48 $DB
@@ -488,7 +488,7 @@ jr_005_4C07:
 
     ld   a, [wSwordLevel]                         ; $4C0D: $FA $4E $DB
     and  a                                        ; $4C10: $A7
-    jp   nz, func_005_7B4B                        ; $4C11: $C2 $4B $7B
+    jp   nz, ClearEntityStatus_05                 ; $4C11: $C2 $4B $7B
 
 jr_005_4C14:
     ld   a, [wIsMarinFollowingLink]               ; $4C14: $FA $73 $DB

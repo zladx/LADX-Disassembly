@@ -168,8 +168,7 @@ GetColorDungeonTilesAddress::
     ldh  a, [hMapRoom]                            ; $4617: $F0 $F6
     and  a                                        ; $4619: $A7
     jr   z, jr_020_4620                           ; $461A: $28 $04
-
-    cp   $05                                      ; $461C: $FE $05
+    cp   UNKNOWN_ROOM_05                          ; $461C: $FE $05
     jr   nz, jr_020_4640                          ; $461E: $20 $20
 
 jr_020_4620:
@@ -404,7 +403,7 @@ jr_020_47A2:
 
 jr_020_47B7:
     ldh  a, [hMapRoom]                            ; $47B7: $F0 $F6
-    cp   $01                                      ; $47B9: $FE $01
+    cp   UNKNOWN_ROOM_01                          ; $47B9: $FE $01
     jr   nz, jr_020_47C2                          ; $47BB: $20 $05
 
     ld   a, $20                                   ; $47BD: $3E $20
@@ -417,52 +416,16 @@ data_020_47C3::
     db   $00, $40, $80, $C0, $00, $40, $80, $C0
 
 MapRoomTable_b0::
-    nop                                           ; $47CB: $00
-    nop                                           ; $47CC: $00
-    nop                                           ; $47CD: $00
-    nop                                           ; $47CE: $00
-    nop                                           ; $47CF: $00
-    nop                                           ; $47D0: $00
-    nop                                           ; $47D1: $00
-    nop                                           ; $47D2: $00
-    nop                                           ; $47D3: $00
-    nop                                           ; $47D4: $00
-    nop                                           ; $47D5: $00
-    nop                                           ; $47D6: $00
-    nop                                           ; $47D7: $00
-    nop                                           ; $47D8: $00
-    nop                                           ; $47D9: $00
-    inc  b                                        ; $47DA: $04
-    nop                                           ; $47DB: $00
-    nop                                           ; $47DC: $00
-    nop                                           ; $47DD: $00
-    inc  b                                        ; $47DE: $04
-    nop                                           ; $47DF: $00
-    nop                                           ; $47E0: $00
+    ; indexed by hMapRoom
+    db   $00, $00, $00, $00, $00, $00, $00, $00
+    db   $00, $00, $00, $00, $00, $00, $00, $04
+    db   $00, $00, $00, $04, $00, $00
 
 MapRoomTable_b1::
-    nop                                           ; $47E1: $00
-    nop                                           ; $47E2: $00
-    nop                                           ; $47E3: $00
-    nop                                           ; $47E4: $00
-    nop                                           ; $47E5: $00
-    nop                                           ; $47E6: $00
-    nop                                           ; $47E7: $00
-    nop                                           ; $47E8: $00
-    nop                                           ; $47E9: $00
-    dec  b                                        ; $47EA: $05
-    nop                                           ; $47EB: $00
-    nop                                           ; $47EC: $00
-    nop                                           ; $47ED: $00
-    nop                                           ; $47EE: $00
-    dec  b                                        ; $47EF: $05
-    nop                                           ; $47F0: $00
-    nop                                           ; $47F1: $00
-    nop                                           ; $47F2: $00
-    nop                                           ; $47F3: $00
-    nop                                           ; $47F4: $00
-    nop                                           ; $47F5: $00
-    dec  b                                        ; $47F6: $05
+    ; indexed by hMapRoom
+    db   $00, $00, $00, $00, $00, $00, $00, $00
+    db   $00, $05, $00, $00, $00, $00, $05, $00
+    db   $00, $00, $00, $00, $00, $05
 
 ; Configure the parameters for copying the animated tiles.
 ; First called with b=1, then with b=0
@@ -4391,7 +4354,7 @@ InventoryFadeOutHandler::
     jr   nz, jr_020_6628                          ; $6610: $20 $16
 
     ldh  a, [hMapRoom]                            ; $6612: $F0 $F6
-    cp   $64                                      ; @TODO ?? Map screen where you take the ghost after the house
+    cp   UNKNOWN_ROOM_64                          ;
     jr   nz, useOverworldTileset                  ; $6616: $20 $0E
 
     ld   hl, wLoadedEntitySpritesheets                                ; $6618: $21 $93 $C1
@@ -5293,69 +5256,62 @@ LoadRoomObjectsAttributes::
     ret  nz                                       ; $6DB3: $C0
 
     ldh  a, [hMapRoom]                            ; $6DB4: $F0 $F6
-    cp   $0E                                      ; $6DB6: $FE $0E
+    cp   ROOM_OW_EAGLE_TOWER                      ; $6DB6: $FE $0E
     jr   nz, .jr_020_6DC6                         ; $6DB8: $20 $0C
 
-    ld   a, [wOverworldRoomStatus + $0E]                               ; $6DBA: $FA $0E $D8
-    and  $10                                      ; $6DBD: $E6 $10
+    ld   a, [wOverworldRoomStatus + ROOM_OW_EAGLE_TOWER           ] ; $6DBA: $FA $0E $D8
+    and  OW_ROOM_STATUS_CHANGED                      ; $6DBD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DBF: $28 $59
-
     ld   hl, RoomGBCOverlay0EAlt                  ; $6DC1: $21 $90 $50
     jr   .jr_020_6E14                             ; $6DC4: $18 $4E
 
 .jr_020_6DC6
-    cp   $8C                                      ; $6DC6: $FE $8C
+    cp   ROOM_OW_FACE_SHRINE_ENTRANCE             ; $6DC6: $FE $8C
     jr   nz, .jr_020_6DD6                         ; $6DC8: $20 $0C
 
-    ld   a, [wOverworldRoomStatus + $8C]                               ; $6DCA: $FA $8C $D8
-    and  $10                                      ; $6DCD: $E6 $10
+    ld   a, [wOverworldRoomStatus + ROOM_OW_FACE_SHRINE_ENTRANCE ] ; $6DCA: $FA $8C $D8
+    and  OW_ROOM_STATUS_CHANGED                      ; $6DCD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DCF: $28 $49
-
     ld   hl, RoomGBCOverlay8CAlt                  ; $6DD1: $21 $D0 $51
     jr   .jr_020_6E14                             ; $6DD4: $18 $3E
 
 .jr_020_6DD6
-    cp   $79                                      ; $6DD6: $FE $79
+    cp   UNKNOWN_ROOM_79                          ; $6DD6: $FE $79
     jr   nz, .jr_020_6DE6                         ; $6DD8: $20 $0C
 
-    ld   a, [wOverworldRoomStatus + $79]                               ; $6DDA: $FA $79 $D8
-    and  $10                                      ; $6DDD: $E6 $10
+    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_79] ; $6DDA: $FA $79 $D8
+    and  OW_ROOM_STATUS_CHANGED                      ; $6DDD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DDF: $28 $39
-
     ld   hl, RoomGBCOverlay79Alt                  ; $6DE1: $21 $80 $51
     jr   .jr_020_6E14                             ; $6DE4: $18 $2E
 
 .jr_020_6DE6
-    cp   $06                                      ; $6DE6: $FE $06
+    cp   UNKNOWN_ROOM_06                          ; $6DE6: $FE $06
     jr   nz, .jr_020_6DF6                         ; $6DE8: $20 $0C
 
-    ld   a, [wOverworldRoomStatus + $06]                               ; $6DEA: $FA $06 $D8
-    and  $10                                      ; $6DED: $E6 $10
+    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_06] ; $6DEA: $FA $06 $D8
+    and  OW_ROOM_STATUS_CHANGED                      ; $6DED: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DEF: $28 $29
-
     ld   hl, RoomGBCOverlay06Alt                  ; $6DF1: $21 $40 $50
     jr   .jr_020_6E14                             ; $6DF4: $18 $1E
 
 .jr_020_6DF6
-    cp   $1B                                      ; $6DF6: $FE $1B
+    cp   UNKNOWN_ROOM_1B                          ; $6DF6: $FE $1B
     jr   nz, .jr_020_6E06                         ; $6DF8: $20 $0C
-
-    ld   a, [wOverworldRoomStatus + $2B]                               ; $6DFA: $FA $2B $D8
-    and  $10                                      ; $6DFD: $E6 $10
+    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_2B] ; $6DFA: $FA $2B $D8
+    and  OW_ROOM_STATUS_CHANGED                      ; $6DFD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DFF: $28 $19
-
     ld   hl, RoomGBCOverlay1BAlt                  ; $6E01: $21 $E0 $50
     jr   .jr_020_6E14                             ; $6E04: $18 $0E
 
 .jr_020_6E06
-    cp   $2B                                      ; $6E06: $FE $2B
+    cp   UNKNOWN_ROOM_2B                          ; $6E06: $FE $2B
     jr   nz, .jr_020_6E1A                         ; $6E08: $20 $10
 
-    ld   a, [wOverworldRoomStatus + $2B]                               ; $6E0A: $FA $2B $D8
-    and  $10                                      ; $6E0D: $E6 $10
+    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_2B] ; $6E0A: $FA $2B $D8
+    and  OW_ROOM_STATUS_CHANGED                      ; $6E0D: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6E0F: $28 $09
-
-    ld   hl, RoomGBCOverlay2BAlt                 ; $6E11: $21 $30 $51
+    ld   hl, RoomGBCOverlay2BAlt                  ; $6E11: $21 $30 $51
 
 .jr_020_6E14
     ld   a, BANK(RoomGBCOverlay2BAlt)             ; $6E14: $3E $27
@@ -5368,7 +5324,7 @@ LoadRoomObjectsAttributes::
     ldh  [hMultiPurpose0], a                      ; $6E1C: $E0 $D7
     ; If the room id >= $CC…
     ldh  a, [hMapRoom]                            ; $6E1E: $F0 $F6
-    cp   $CC                                      ; $6E20: $FE $CC
+    cp   UNKNOWN_ROOM_CC                          ; $6E20: $FE $CC
     jr   c, .bankEnd                              ; $6E22: $38 $06
     ld   hl, hMultiPurpose0                            ; $6E24: $21 $D7 $FF
     ; … use BANK(RoomGBCOverlaysA) + 1 for the overlay bank

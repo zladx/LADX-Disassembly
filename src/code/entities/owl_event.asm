@@ -15,7 +15,7 @@ OwlEventEntityHandler::
 
 jr_006_680D:
     ldh  a, [hMapRoom]                            ; $680D: $F0 $F6
-    cp   $AC                        ; Southern Face Shrine
+    cp   UNKNOWN_ROOM_AC                          ; Southern Face Shrine
     jr   nz, jr_006_681A                          ; $6811: $20 $07
 
     ldh  a, [hRoomStatus]                         ; $6813: $F0 $F8
@@ -24,7 +24,7 @@ jr_006_680D:
 
 jr_006_681A:
     ldh  a, [hMapRoom]                            ; $681A: $F0 $F6
-    cp   $41                        ; Tail Cave key chest
+    cp   UNKNOWN_ROOM_41                          ; Tail Cave key chest
     jr   nz, jr_006_6829                          ; $681E: $20 $09
 
     ld   a, [wHasTailKey]                         ; $6820: $FA $11 $DB
@@ -36,7 +36,7 @@ jr_006_681A:
 
 jr_006_6829:
     ldh  a, [hMapRoom]                            ; $6829: $F0 $F6
-    cp   $EE                        ; Yarna Desert
+    cp   UNKNOWN_ROOM_EE                          ; Yarna Desert
     jr   nz, jr_006_6835                          ; $682D: $20 $06
 
     ld   a, [wHasAnglerKey]                       ; $682F: $FA $12 $DB
@@ -45,10 +45,9 @@ jr_006_6829:
 
 jr_006_6835:
     ldh  a, [hMapRoom]                            ; $6835: $F0 $F6
-    cp   $D2                        ; 1 room west of Tail Cave
+    cp   UNKNOWN_ROOM_D2                          ; 1 room west of Tail Cave
     jr   z, jr_006_684E                           ; $6839: $28 $13
-
-    cp   $36                        ; 1 room east of Moblin Hideout
+    cp   UNKNOWN_ROOM_36                          ; 1 room east of Moblin Hideout
     jr   nz, jr_006_6853                          ; $683D: $20 $14
 
     ld   a, [wHasInstrument2]                     ; $683F: $FA $66 $DB
@@ -65,48 +64,48 @@ jr_006_684E:
 
 jr_006_6853:
     ldh  a, [hMapRoom]                            ; $6853: $F0 $F6
-    cp   $08                        ; Bridge where Marin gets trapped
+    cp   ROOM_OW_MARIN_BRIDGE                     ; Bridge where Marin gets trapped
     jr   nz, jr_006_6869                          ; $6857: $20 $10
 
     ld   a, [wHasInstrument8]                     ; $6859: $FA $6C $DB
     and  $02                                      ; $685C: $E6 $02
     jp   nz, ClearEntityStatus_06                 ; $685E: $C2 $DB $65
 
-    ld   a, [wOverworldRoomStatus + $08]                               ; $6861: $FA $08 $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_MARIN_BRIDGE] ; $6861: $FA $08 $D8
     and  $10                                      ; $6864: $E6 $10
     ret  z                                        ; $6866: $C8
 
     jr   jr_006_68A0                              ; $6867: $18 $37
 
 jr_006_6869:
-    cp   $9D                        ; Room with staircase leading to Face Shrine dungeon passage
+    cp   UNKNOWN_ROOM_9D                          ; Room with staircase leading to Face Shrine dungeon passage
     jr   nz, jr_006_6872                          ; $686B: $20 $05
 
     ld   a, [wHasInstrument5]                     ; $686D: $FA $69 $DB
     jr   jr_006_689B                              ; $6870: $18 $29
 
 jr_006_6872:
-    cp   $06                        ; Wind Fish's Egg
+    cp   UNKNOWN_ROOM_06                          ; Wind Fish's Egg
     jr   nz, jr_006_687E                          ; $6874: $20 $08
 
-    ld   a, [wOverworldRoomStatus + $06]                               ; $6876: $FA $06 $D8
+    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_06] ; $6876: $FA $06 $D8
     and  $10                                      ; $6879: $E6 $10
     ret  z                                        ; $687B: $C8
 
     jr   jr_006_68A0                              ; $687C: $18 $22
 
 jr_006_687E:
-    cp   $B6                        ; One east of Key Cavern
+    cp   UNKNOWN_ROOM_B6                          ; One east of Key Cavern
     jr   nz, jr_006_6887                          ; $6880: $20 $05
 
     ld   a, [wHasInstrument3]                     ; $6882: $FA $67 $DB
     jr   jr_006_689B                              ; $6885: $18 $14
 
 jr_006_6887:
-    cp   $17                        ; One south-east of Wind Fish's Egg
+    cp   UNKNOWN_ROOM_17                          ; One south-east of Wind Fish's Egg
     jr   z, jr_006_688F                           ; $6889: $28 $04
 
-    cp   $9C                        ; One south of Face Shrine dungeon
+    cp   UNKNOWN_ROOM_9C                          ; One south of Face Shrine dungeon
     jr   nz, jr_006_6894                          ; $688D: $20 $05
 
 jr_006_688F:
@@ -114,7 +113,7 @@ jr_006_688F:
     jr   jr_006_689B                              ; $6892: $18 $07
 
 jr_006_6894:
-    cp   $16                        ; One south of Wind Fish's Egg
+    cp   UNKNOWN_ROOM_16                          ; One south of Wind Fish's Egg
     jr   nz, jr_006_68A0                          ; $6896: $20 $08
 
     ld   a, [wHasInstrument2]                     ; $6898: $FA $66 $DB
@@ -127,13 +126,11 @@ jr_006_689D:
 
 jr_006_68A0:
     ldh  a, [hMapRoom]                            ; $68A0: $F0 $F6
-    cp   $D2                        ; 1 room west of Tail Cave
+    cp   UNKNOWN_ROOM_D2                          ; 1 room west of Tail Cave
     jr   z, jr_006_68B4                           ; $68A4: $28 $0E
-
-    cp   $16                        ; One south of Wind Fish's Egg
+    cp   UNKNOWN_ROOM_16                          ; One south of Wind Fish's Egg
     jr   z, jr_006_68B4                           ; $68A8: $28 $0A
-
-    cp   $36                        ; 1 room east of Moblin Hideout
+    cp   UNKNOWN_ROOM_36                          ; 1 room east of Moblin Hideout
     jr   z, jr_006_68B4                           ; $68AC: $28 $06
 
     ldh  a, [hActiveEntityState]                  ; $68AE: $F0 $F0
@@ -167,7 +164,7 @@ jr_006_68C0:
 
 OwlState0Handler::
     ldh  a, [hMapRoom]
-    cp   $F2                                      ; Sword on the beach
+    cp   ROOM_OW_BEACH_WITH_SWORD
     jr   nz, jr_006_68EF                          ; $68D9: $20 $14
 
     ld   a, MUSIC_SWORD_SEARCH                    ; $68DB: $3E $1D
@@ -198,14 +195,13 @@ jr_006_68F6:
     ld   [wMusicTrackToPlay], a                   ; $68FF: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $6902: $E0 $B0
     ldh  [hFFBD], a                               ; $6904: $E0 $BD
+
     ldh  a, [hMapRoom]                            ; $6906: $F0 $F6
-    cp   $16                                      ; $6908: $FE $16
+    cp   UNKNOWN_ROOM_16                          ; $6908: $FE $16
     jr   z, jr_006_6914                           ; $690A: $28 $08
-
-    cp   $36                                      ; $690C: $FE $36
+    cp   UNKNOWN_ROOM_36                          ; $690C: $FE $36
     jr   z, jr_006_6914                           ; $690E: $28 $04
-
-    cp   $D2                                      ; $6910: $FE $D2
+    cp   UNKNOWN_ROOM_D2                          ; $6910: $FE $D2
     jr   nz, jr_006_691A                          ; $6912: $20 $06
 
 jr_006_6914:
@@ -273,7 +269,7 @@ OwlState2Handler::
     ret  nz                                       ; $6982: $C0
 
     ldh  a, [hMapRoom]                            ; $6983: $F0 $F6
-    cp   $06                                      ; $6985: $FE $06
+    cp   UNKNOWN_ROOM_06                          ; $6985: $FE $06
     jr   nz, jr_006_6990                          ; $6987: $20 $07
 
     call_open_dialog $0CD                         ; $6989
@@ -293,7 +289,7 @@ jr_006_6993:
 OwlState3Handler::
     call func_006_64C6                            ; $69A1: $CD $C6 $64
     ldh  a, [hMapRoom]                            ; $69A4: $F0 $F6
-    cp   $06                                      ; $69A6: $FE $06
+    cp   UNKNOWN_ROOM_06                          ; $69A6: $FE $06
     jr   z, jr_006_69B2                           ; $69A8: $28 $08
 
     call GetEntityTransitionCountdown             ; $69AA: $CD $05 $0C
@@ -412,7 +408,7 @@ func_006_6A4F::
 
 func_006_6A55::
     ld   de, Data_006_6A37                        ; $6A55: $11 $37 $6A
-    jp   RenderActiveEntitySpritesPair                ; $6A58: $C3 $C0 $3B
+    jp   RenderActiveEntitySpritesPair            ; $6A58: $C3 $C0 $3B
 
 jr_006_6A5B:
     ld   hl, Data_006_6A3F                        ; $6A5B: $21 $3F $6A
@@ -421,12 +417,12 @@ jr_006_6A5B:
     ld   a, $04                                   ; $6A63: $3E $04
     call label_3DA0                               ; $6A65: $CD $A0 $3D
     ldh  a, [hMapRoom]                            ; $6A68: $F0 $F6
-    cp   $08                                      ; $6A6A: $FE $08
+    cp   ROOM_OW_MARIN_BRIDGE                     ; $6A6A: $FE $08
     jr   z, jr_006_6A71                           ; $6A6C: $28 $03
     jp   label_3CD9                               ; $6A6E: $C3 $D9 $3C
 
 jr_006_6A71:
-    ld   hl, wEntitiesPhysicsFlagsTable                ; $6A71: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $6A71: $21 $40 $C3
     add  hl, bc                                   ; $6A74: $09
     res  4, [hl]                                  ; $6A75: $CB $A6
     ret                                           ; $6A77: $C9

@@ -437,11 +437,11 @@ jr_001_531D::
     ld   [wMaxBombs], a                           ; $539B: $EA $77 $DB
     ld   a, $20                                   ; $539E: $3E $20
     ld   [wMaxMagicPowder], a                     ; $53A0: $EA $76 $DB
-    ld   a, $A3                                   ; $53A3: $3E $A3
+    ld   a, ROOM_INDOOR_B_MARIN_HOUSE             ; $53A3: $3E $A3
     ld   [wMapEntranceRoom], a                    ; $53A5: $EA $9C $DB
     ldh  [hMapRoom], a                            ; $53A8: $E0 $F6
-    ld   [$DB54], a                               ; $53AA: $EA $54 $DB
-    ld   a, $01                                   ; $53AD: $3E $01
+    ld   [wDB54], a                               ; $53AA: $EA $54 $DB
+    ld   a, TRUE                                  ; $53AD: $3E $01
     ld   [wIsIndoor], a                           ; $53AF: $EA $A5 $DB
     ld   a, MAP_HOUSE                             ; $53B2: $3E $10
     ldh  [hMapId], a                              ; $53B4: $E0 $F7
@@ -1935,9 +1935,9 @@ CreateFollowingNpcEntity::
     ; POI: Curiously, these should be excluded by the
     ; check against side-scrolling rooms...
     ldh  a, [hMapRoom]                            ; $5FCB: $F0 $F6
-    cp   $FD ; Manbo the Sun Fish                 ; $5FCD: $FE $FD
+    cp   ROOM_INDOOR_B_MANBO                      ; $5FCD: $FE $FD
     ret  z                                        ; $5FCF: $C8
-    cp   $B1 ; Fishing minigame                   ; $5FD0: $FE $B1
+    cp   ROOM_INDOOR_B_FISHING_MINIGAME           ; $5FD0: $FE $B1
     ret  z                                        ; $5FD2: $C8
 .excludedRoomsEnd
 
@@ -1947,7 +1947,7 @@ CreateFollowingNpcEntity::
 
     ; If the Rooster is following Link…
     ld   a, [wIsRoosterFollowingLink]             ; $5FD3: $FA $7B $DB
-    cp   $01                                      ; $5FD6: $FE $01
+    cp   TRUE                                     ; $5FD6: $FE $01
     jr   nz, .roosterEnd                          ; $5FD8: $20 $3A
 
     ; Search existing entities for an already loaded Roster
@@ -2005,7 +2005,7 @@ CreateFollowingNpcEntity::
     and  a                                        ; $6022: $A7
     jr   nz, .ghostEnd                            ; $6023: $20 $5A
     ldh  a, [hMapRoom]                            ; $6025: $F0 $F6
-    cp   $40                                      ; $6027: $FE $40
+    cp   ROOM_SECTION_OW_GHOST_TRIGGER            ; $6027: $FE $40
     jr   c, .ghostEnd                             ; $6029: $38 $54
     ld   a, [$DB68]                               ; $602B: $FA $68 $DB
     and  $02                                      ; $602E: $E6 $02
@@ -2136,7 +2136,7 @@ CreateFollowingNpcEntity::
     ; If on room $A4 (bottom of the well),
     ; make Marin being dropped from above.
     ldh  a, [hMapRoom]                            ; $60DE: $F0 $F6
-    cp   $A4                                      ; $60E0: $FE $A4
+    cp   UNKNOWN_ROOM_A4                          ; $60E0: $FE $A4
     jr   nz, .marinFallEnd                        ; $60E2: $20 $13
     ldh  a, [hMapId]                              ; $60E4: $F0 $F7
     cp   MAP_CAVE_C                               ; $60E6: $FE $11
@@ -2184,12 +2184,12 @@ CreateFollowingNpcEntity::
 
     ; If inside Mrs. Meow-Meow house, never load Bow-Wow
     ldh  a, [hMapRoom]                            ; $611F: $F0 $F6
-    cp   $A7                                      ; $6121: $FE $A7
+    cp   ROOM_INDOOR_B_MRS_MEOW_MEOW              ; $6121: $FE $A7
     ret  z                                        ; $6123: $C8
 
     ; If Bow-Wow is following Link…
     ld   a, [wIsBowWowFollowingLink]              ; $6124: $FA $56 $DB
-    cp   $01                                      ; $6127: $FE $01
+    cp   TRUE                                     ; $6127: $FE $01
     jr   nz, .bowWowEnd                           ; $6129: $20 $36
 
     ; Search for an existing Bow-Wow entity
@@ -2380,13 +2380,13 @@ jr_001_6849::
 
 jr_001_6855::
     ret                                           ; $6855: $C9
-PeachPictureState2Handler::          ; This is for full-screen images ...
+PeachPictureState2Handler::     ; This is for full-screen images ...
     ld   e, TILESET_EAGLES_TOWER_TOP ; First, check if it's Eagle's Tower ; $6856: $1E $21
-    ldh  a, [hMapId]                 ; If so, load the tower graphics for when the pillars are knocked out ; $6858: $F0 $F7
-    cp   MAP_EAGLES_TOWER            ; Otherwise, check if it's room $DD (Schule's house) ; $685A: $FE $06
-    jr   z, jr_001_6868              ; If it is, load the ... whatever it is painting ; $685C: $28 $0A
-    ldh  a, [hMapRoom]               ; Otherwise, load the Christine picture ; $685E: $F0 $F6
-    cp   $DD                                      ; $6860: $FE $DD
+    ldh  a, [hMapId]            ; If so, load the tower graphics for when the pillars are knocked out ; $6858: $F0 $F7
+    cp   MAP_EAGLES_TOWER       ; Otherwise, check if it's room $DD (Schule's house) ; $685A: $FE $06
+    jr   z, jr_001_6868         ; If it is, load the ... whatever it is painting ; $685C: $28 $0A
+    ldh  a, [hMapRoom]          ; Otherwise, load the Christine picture ; $685E: $F0 $F6
+    cp   ROOM_INDOOR_B_SCHULE_HOUSE               ; $6860: $FE $DD
     ld   e, TILESET_CHRISTINE                     ; $6862: $1E $12
     jr   nz, jr_001_6868                          ; $6864: $20 $02
     ld   e, TILESET_SCHULE_PAINTING               ; $6866: $1E $20
@@ -2404,7 +2404,7 @@ PeachPictureState3Handler::     ; Determines the tilemap to load (?)
     cp   MAP_EAGLES_TOWER                         ; $6877: $FE $06
     jr   z, jr_001_6885                           ; $6879: $28 $0A
     ldh  a, [hMapRoom]                            ; $687B: $F0 $F6
-    cp   $DD                                      ; $687D: $FE $DD
+    cp   ROOM_INDOOR_B_SCHULE_HOUSE               ; $687D: $FE $DD
     ld   e, $12                                   ; $687F: $1E $12
     jr   nz, jr_001_6885                          ; $6881: $20 $02
     ld   e, $23                                   ; $6883: $1E $23

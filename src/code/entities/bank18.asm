@@ -1168,7 +1168,7 @@ ZoraEntityHandler::
     jr   z, jr_018_4A2A                           ; $49DE: $28 $4A
 
     ldh  a, [hMapRoom]                            ; $49E0: $F0 $F6
-    cp   $DA                                      ; $49E2: $FE $DA
+    cp   UNKNOWN_ROOM_DA                          ; $49E2: $FE $DA
     jr   nz, jr_018_4A2A                          ; $49E4: $20 $44
 
     ld   a, [wDialogState]                        ; $49E6: $FA $9F $C1
@@ -1391,7 +1391,7 @@ MrWriteEntityHandler::
     ld   e, a                                     ; $4BA5: $5F
     ld   d, b                                     ; $4BA6: $50
     ldh  a, [hMapRoom]                            ; $4BA7: $F0 $F6
-    cp   $A8                                      ; $4BA9: $FE $A8
+    cp   UNKNOWN_ROOM_A8                          ; $4BA9: $FE $A8
     jr   nz, jr_018_4BB2                          ; $4BAB: $20 $05
 
     ld   hl, Data_018_4B55                        ; $4BAD: $21 $55 $4B
@@ -1431,7 +1431,7 @@ jr_018_4BB5:
 jr_018_4BE4:
     call func_018_7D36                            ; $4BE4: $CD $36 $7D
     ldh  a, [hMapRoom]                            ; $4BE7: $F0 $F6
-    cp   $A8                                      ; $A8 = Mr. Write's house
+    cp   UNKNOWN_ROOM_A8                          ; $A8 = Mr. Write's house
     jp   z, label_018_4C75                        ; $4BEB: $CA $75 $4C
 
     ld   de, Data_018_4B95                        ; $4BEE: $11 $95 $4B
@@ -1626,7 +1626,7 @@ GrandmaUlriraEntityHandler::
 
     inc  [hl]                                     ; $4D1F: $34
     ld   a, $18                                   ; $4D20: $3E $18
-    call func_036_7161_trampoline                 ; $4D22: $CD $F6 $0A
+    call SpawnPhotographer_trampoline             ; $4D22: $CD $F6 $0A
     ld   a, [wHasInstrument5]                     ; $4D25: $FA $69 $DB
     ld   d, $B1                                   ; $4D28: $16 $B1
     and  $02                                      ; $4D2A: $E6 $02
@@ -2368,13 +2368,11 @@ jr_018_521C:
 
     inc  e                                        ; $5232: $1C
     ldh  a, [hMapRoom]                            ; $5233: $F0 $F6
-    cp   $CC                                      ; $5235: $FE $CC
+    cp   UNKNOWN_ROOM_CC                          ; $5235: $FE $CC
     jr   z, jr_018_523F                           ; $5237: $28 $06
-
     inc  e                                        ; $5239: $1C
-    cp   $CD                                      ; $523A: $FE $CD
+    cp   UNKNOWN_ROOM_CD                          ; $523A: $FE $CD
     jr   z, jr_018_523F                           ; $523C: $28 $01
-
     inc  e                                        ; $523E: $1C
 
 jr_018_523F:
@@ -4808,7 +4806,13 @@ MazeSignpostEntityPosition::
     db   $65, $64, $54, $52, $22, $22, $32, $37, $37, $37, $57, $56, $26, $21
 
 MazeSignpostEntityRoom::
-    db   $C4, $C5, $D5, $D4, $C4, $C5, $D5, $D5, $C5, $C4, $C4, $C5, $D5, $D4
+    db   UNKNOWN_ROOM_C4, UNKNOWN_ROOM_C5
+    db   UNKNOWN_ROOM_D5, UNKNOWN_ROOM_D4
+    db   UNKNOWN_ROOM_C4, UNKNOWN_ROOM_C5
+    db   UNKNOWN_ROOM_D5, UNKNOWN_ROOM_D5
+    db   UNKNOWN_ROOM_C5, UNKNOWN_ROOM_C4
+    db   UNKNOWN_ROOM_C4, UNKNOWN_ROOM_C5
+    db   UNKNOWN_ROOM_D5, UNKNOWN_ROOM_D4
 
 MazeSignpostEntityDialog::
     db   $AB, $A9, $AC, $AA, $AB, $A9, $AB, $AA, $AC, $A9, $AB, $A9, $AC, $AE
@@ -4816,7 +4820,7 @@ MazeSignpostEntityDialog::
 MazeSignpostEntityHandler::
     call func_018_7DE8
     ldh  a, [hMapRoom]
-    cp   $B4                                      ; are we in the starting room?
+    cp   UNKNOWN_ROOM_B4                          ; are we in the starting room?
     jr   nz, .in_maze_proper
 
     xor  a                                        ; if so, then re-initialize
@@ -8301,7 +8305,7 @@ label_018_7A5D:
     ld   [wDDD8], a                               ; $7A7D: $EA $D8 $DD
     call ClearEntityStatusBank18                  ; $7A80: $CD $08 $7F
     ldh  a, [hMapRoom]                            ; $7A83: $F0 $F6
-    cp   $74                                      ; $7A85: $FE $74
+    cp   UNKNOWN_ROOM_74                          ; $7A85: $FE $74
     ret  z                                        ; $7A87: $C8
 
     ld   hl, wC1A2                                ; $7A88: $21 $A2 $C1

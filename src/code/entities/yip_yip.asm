@@ -51,7 +51,7 @@ jr_006_5A1B:
     jr   nz, jr_006_5A33                          ; $5A24: $20 $0D
 
     ldh  a, [hMapRoom]                            ; $5A26: $F0 $F6
-    cp   $B2                                      ; Inside the dog house
+    cp   UNKNOWN_ROOM_B2                          ; Inside the dog house
     jr   nz, jr_006_5A36                          ; $5A2A: $20 $0A
 
     ld   a, [wTradeSequenceItem]                  ; $5A2C: $FA $0E $DB
@@ -102,7 +102,7 @@ jr_006_5A67:
 
     ld   e, $23                                   ; $5A72: $1E $23
     ldh  a, [hMapRoom]                            ; $5A74: $F0 $F6
-    cp   $B2                                      ; Inside the dog house
+    cp   UNKNOWN_ROOM_B2                          ; Inside the dog house
     jr   nz, jr_006_5A91                          ; $5A78: $20 $17
 
     ld   e, $80                                   ; $5A7A: $1E $80

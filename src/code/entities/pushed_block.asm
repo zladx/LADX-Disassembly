@@ -12,13 +12,13 @@ data_003_5245::
 
 PushedBlockEntityHandler::
     ld   a, [wIsIndoor]                           ; $5249: $FA $A5 $DB
-    ldh  [hActiveEntitySpriteVariant], a               ; $524C: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a          ; $524C: $E0 $F1
     ld   de, data_003_5235                        ; $524E: $11 $35 $52
     and  a                                        ; $5251: $A7
     jr   nz, jr_003_525D                          ; $5252: $20 $09
 
     ldh  a, [hMapRoom]                            ; $5254: $F0 $F6
-    cp   $77                                      ; $5256: $FE $77
+    cp   ROOM_OW_COLOR_DUNGEON_ENTRANCE           ; $5256: $FE $77
     jr   nz, jr_003_525D                          ; $5258: $20 $03
 
     ld   de, data_003_5245                        ; $525A: $11 $45 $52
@@ -33,11 +33,11 @@ jr_003_525D:
 
     call CopyLinkFinalPositionToPosition          ; $526E: $CD $BE $0C
     ld   a, $03                                   ; $5271: $3E $03
-    ld   [wIsLinkPushing], a                               ; $5273: $EA $44 $C1
+    ld   [wIsLinkPushing], a                      ; $5273: $EA $44 $C1
 
 jr_003_5276:
     ldh  a, [hMapRoom]                            ; $5276: $F0 $F6
-    cp   $C7                                      ; $5278: $FE $C7
+    cp   UNKNOWN_ROOM_C7                          ; $5278: $FE $C7
     jr   z, jr_003_5282                           ; $527A: $28 $06
 
     ld   a, [wIsIndoor]                           ; $527C: $FA $A5 $DB

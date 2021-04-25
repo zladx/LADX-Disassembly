@@ -1883,6 +1883,7 @@ label_014_5767:
     pop  bc                                       ; $5788: $C1
 
 jr_014_5789:
+    ; Make staircase appear
     ld   hl, wRequestDestinationHigh              ; $5789: $21 $01 $D6
     ld   a, [wRequests]                           ; $578C: $FA $00 $D6
     ld   e, a                                     ; $578F: $5F
@@ -1912,16 +1913,16 @@ jr_014_5789:
     ld   a, $4B                                   ; $57B4: $3E $4B
     ld   [hl+], a                                 ; $57B6: $22
     ld   [hl], $00                                ; $57B7: $36 $00
-    ld   a, $01                                   ; $57B9: $3E $01
-    ldh  [hFFAC], a                               ; $57BB: $E0 $AC
+    ld   a, STAIRCASE_INACTIVE                    ; $57B9: $3E $01
+    ldh  [hStaircase], a                          ; $57BB: $E0 $AC
     ldh  a, [hSwordIntersectedAreaY]              ; $57BD: $F0 $CD
     and  $F0                                      ; $57BF: $E6 $F0
     add  $10                                      ; $57C1: $C6 $10
-    ldh  [hFFAE], a                               ; $57C3: $E0 $AE
+    ldh  [hStaircasePosY], a                      ; $57C3: $E0 $AE
     ldh  a, [hSwordIntersectedAreaX]              ; $57C5: $F0 $CE
     and  $F0                                      ; $57C7: $E6 $F0
     add  $08                                      ; $57C9: $C6 $08
-    ldh  [hFFAD], a                               ; $57CB: $E0 $AD
+    ldh  [hStaircasePosX], a                      ; $57CB: $E0 $AD
     ldh  a, [hSwordIntersectedAreaX]              ; $57CD: $F0 $CE
     swap a                                        ; $57CF: $CB $37
     and  $0F                                      ; $57D1: $E6 $0F

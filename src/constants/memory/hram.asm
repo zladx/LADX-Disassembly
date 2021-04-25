@@ -191,16 +191,20 @@ hVolumeLeft::
 hMusicFadeInTimer::
   ds 1 ; FFAB
 
-; Unlabeled
-hFFAC::
+; Status of the staircase in the current room.
+; (There can be only one staircase per room.)
+; See STAIRCASE_* constants for possible values.
+hStaircase::
   ds 1 ; FFAC
 
-; Unlabeled
-hFFAD::
+; X position of staircase in the current room, in pixels
+; (unlike warp data, which uses tile position).
+hStaircasePosX::
   ds 1 ; FFAD
 
-; Unlabeled
-hFFAE::
+; Y position of staircase in the current room, in pixels
+; (unlike warp data, which uses tile position).
+hStaircasePosY::
   ds 1 ; FFAE
 
 ; Type of the object under the active entity

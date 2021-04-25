@@ -391,16 +391,16 @@ Data_002_5F54::
     db $6A, $7A, $6B, $7B, $00, $00, $00, $00
 
 func_002_5F5C::
-    ld   a, $01                                   ; $5F5C: $3E $01
-    ldh  [hFFAC], a                               ; $5F5E: $E0 $AC
+    ld   a, STAIRCASE_INACTIVE                    ; $5F5C: $3E $01
+    ldh  [hStaircase], a                          ; $5F5E: $E0 $AC
     ld   a, $10                                   ; $5F60: $3E $10
     ldh  [hSwordIntersectedAreaY], a                               ; $5F62: $E0 $CD
     add  $10                                      ; $5F64: $C6 $10
-    ldh  [hFFAE], a                               ; $5F66: $E0 $AE
+    ldh  [hStaircasePosY], a                      ; $5F66: $E0 $AE
     ld   a, $80                                   ; $5F68: $3E $80
     ldh  [hSwordIntersectedAreaX], a                               ; $5F6A: $E0 $CE
     add  $08                                      ; $5F6C: $C6 $08
-    ldh  [hFFAD], a                               ; $5F6E: $E0 $AD
+    ldh  [hStaircasePosX], a                      ; $5F6E: $E0 $AD
     swap a                                        ; $5F70: $CB $37
     and  $0F                                      ; $5F72: $E6 $0F
     ld   e, a                                     ; $5F74: $5F

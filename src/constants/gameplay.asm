@@ -363,6 +363,11 @@ OW_ROOM_STATUS_CHANGED      equ $10 ; e.g. sword taken on the beach
 OW_ROOM_STATUS_OWL_TALKED   equ $20
 OW_ROOM_STATUS_VISITED      equ $80
 
+; Values for hStaircase
+STAIRCASE_NONE     equ $00 ; no staircase in the room
+STAIRCASE_INACTIVE equ $01 ; staircase in the room, but can't be used yet (e.g. when Link just landed on top of it)
+STAIRCASE_ACTIVE   equ $02 ; staircase in the room, can be used
+
 ; Price to pay to play the fishing game
 FISHING_GAME_PRICE        equ 10
 

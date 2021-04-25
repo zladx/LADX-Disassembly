@@ -294,7 +294,7 @@ rules = [
         0x94: "ENTITY_KANALET_BOMBABLE_WALL",
         0x95: "ENTITY_RICHARD",
         0x96: "ENTITY_RICHARD_FROG",
-        0x97: "ENTITY_97",
+        0x97: "ENTITY_DIVABLE_WATER",
         0x98: "ENTITY_HORSE_PIECE",
         0x99: "ENTITY_WATER_TEKTITE",
         0x9A: "ENTITY_FLYING_TILES",

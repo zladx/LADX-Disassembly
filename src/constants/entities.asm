@@ -188,7 +188,7 @@ ENTITY_MAD_BOMBER                    equ $93
 ENTITY_KANALET_BOMBABLE_WALL         equ $94
 ENTITY_RICHARD                       equ $95
 ENTITY_RICHARD_FROG                  equ $96
-ENTITY_97                            equ $97 ; unknown
+ENTITY_DIVABLE_WATER                 equ $97
 ENTITY_HORSE_PIECE                   equ $98
 ENTITY_WATER_TEKTITE                 equ $99
 ENTITY_FLYING_TILES                  equ $9A

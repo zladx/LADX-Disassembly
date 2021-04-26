@@ -6507,17 +6507,17 @@ LoadRoomObject::
 
 .configureStairs
     dec  bc                                       ; $347D: $0B
-    ld   a, $01                                   ; $347E: $3E $01
-    ldh  [hFFAC], a                               ; $3480: $E0 $AC
+    ld   a, STAIRCASE_INACTIVE                    ; $347E: $3E $01
+    ldh  [hStaircase], a                          ; $3480: $E0 $AC
     ld   a, [bc]                                  ; $3482: $0A
     and  $F0                                      ; $3483: $E6 $F0
     add  a, $10                                   ; $3485: $C6 $10
-    ldh  [hFFAE], a                               ; $3487: $E0 $AE
+    ldh  [hStaircasePosY], a                      ; $3487: $E0 $AE
     ld   a, [bc]                                  ; $3489: $0A
     swap a                                        ; $348A: $CB $37
     and  $F0                                      ; $348C: $E6 $F0
     add  a, $08                                   ; $348E: $C6 $08
-    ldh  [hFFAD], a                               ; $3490: $E0 $AD
+    ldh  [hStaircasePosX], a                      ; $3490: $E0 $AD
     inc  bc                                       ; $3492: $03
     jp   .breakableObjectEnd                      ; $3493: $C3 $CE $34
 .stairsEnd

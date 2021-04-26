@@ -2861,14 +2861,14 @@ label_002_52B9:
     call func_002_4EDD                            ; $52D3: $CD $DD $4E
 
 func_002_52D6::
-    ldh  a, [hFFAC]                               ; $52D6: $F0 $AC
+    ldh  a, [hStaircase]                          ; $52D6: $F0 $AC
     and  a                                        ; $52D8: $A7
-    jr   z, jr_002_52DF                           ; $52D9: $28 $04
+    jr   z, .return                               ; $52D9: $28 $04
 
-    ld   a, $01                                   ; $52DB: $3E $01
-    ldh  [hFFAC], a                               ; $52DD: $E0 $AC
+    ld   a, STAIRCASE_INACTIVE                    ; $52DB: $3E $01
+    ldh  [hStaircase], a                          ; $52DD: $E0 $AC
 
-jr_002_52DF:
+.return
     ret                                           ; $52DF: $C9
 
 ; convert Link's view direction to ???
@@ -3283,79 +3283,88 @@ renderTranscientVFXs:
 
     ld   a, [wRoomTransitionState]                ; $54FD: $FA $24 $C1
     and  a                                        ; $5500: $A7
-    jr   nz, jr_002_5529                          ; $5501: $20 $26
+    jr   nz, .return                              ; $5501: $20 $26
 
-    ldh  a, [hFFAC]                               ; $5503: $F0 $AC
+    ldh  a, [hStaircase]                          ; $5503: $F0 $AC
     and  a                                        ; $5505: $A7
-    jr   z, jr_002_5529                           ; $5506: $28 $21
+    jr   z, .return                               ; $5506: $28 $21
 
-    cp   $01                                      ; $5508: $FE $01
-    jr   nz, jr_002_552A                          ; $550A: $20 $1E
+    cp   STAIRCASE_INACTIVE                       ; $5508: $FE $01
+    jr   nz, staircaseIsActive                    ; $550A: $20 $1E
 
-    ld   hl, hFFAD                                ; $550C: $21 $AD $FF
+    ;
+    ; If the player left an inactive staircase, mark it as active
+    ;
+
+    ld   hl, hStaircasePosX                       ; $550C: $21 $AD $FF
     ldh  a, [hLinkPositionX]                      ; $550F: $F0 $98
     sub  [hl]                                     ; $5511: $96
     add  $06                                      ; $5512: $C6 $06
     cp   $0C                                      ; $5514: $FE $0C
-    jr   nc, jr_002_5524                          ; $5516: $30 $0C
+    jr   nc, .makeStaircaseActive                 ; $5516: $30 $0C
 
-    ld   hl, hFFAE                                ; $5518: $21 $AE $FF
+    ld   hl, hStaircasePosY                       ; $5518: $21 $AE $FF
     ldh  a, [hLinkPositionY]                      ; $551B: $F0 $99
     sub  [hl]                                     ; $551D: $96
     add  $06                                      ; $551E: $C6 $06
     cp   $0C                                      ; $5520: $FE $0C
-    jr   c, jr_002_5529                           ; $5522: $38 $05
+    jr   c, .return                               ; $5522: $38 $05
 
-jr_002_5524:
-    ldh  a, [hFFAC]                               ; $5524: $F0 $AC
+.makeStaircaseActive
+    ; hStaircase = STAIRCASE_ACTIVE
+    ldh  a, [hStaircase]                          ; $5524: $F0 $AC
     inc  a                                        ; $5526: $3C
-    ldh  [hFFAC], a                               ; $5527: $E0 $AC
+    ldh  [hStaircase], a                          ; $5527: $E0 $AC
 
-jr_002_5529:
+.return
     ret                                           ; $5529: $C9
 
-jr_002_552A:
+staircaseIsActive:
+    ; Don't trigger staircase when jumping over it
     ldh  a, [hLinkPositionZ]                      ; $552A: $F0 $A2
     and  a                                        ; $552C: $A7
-    jr   nz, jr_002_5566                          ; $552D: $20 $37
+    jr   nz, .return                              ; $552D: $20 $37
 
-    ld   hl, hFFAD                                ; $552F: $21 $AD $FF
+    ; Don't trigger staircase if not over it
+    ld   hl, hStaircasePosX                       ; $552F: $21 $AD $FF
     ldh  a, [hLinkPositionX]                      ; $5532: $F0 $98
     sub  [hl]                                     ; $5534: $96
     add  $05                                      ; $5535: $C6 $05
     cp   $0A                                      ; $5537: $FE $0A
-    jr   nc, jr_002_5566                          ; $5539: $30 $2B
+    jr   nc, .return                              ; $5539: $30 $2B
 
-    ld   hl, hFFAE                                ; $553B: $21 $AE $FF
+    ld   hl, hStaircasePosY                       ; $553B: $21 $AE $FF
     ldh  a, [hLinkPositionY]                      ; $553E: $F0 $99
     sub  [hl]                                     ; $5540: $96
     add  $05                                      ; $5541: $C6 $05
     cp   $0A                                      ; $5543: $FE $0A
-    jr   nc, jr_002_5566                          ; $5545: $30 $1F
+    jr   nc, .return                              ; $5545: $30 $1F
 
+    ; Don't trigger staircase when carrying an object
     ld   a, [wIsCarryingLiftedObject]             ; $5547: $FA $5C $C1
     and  a                                        ; $554A: $A7
-    jr   nz, jr_002_5566                          ; $554B: $20 $19
+    jr   nz, .return                              ; $554B: $20 $19
 
+    ; Don't trigger staircase when color dungeon entrance is not open
     ldh  a, [hMapRoom]                            ; $554D: $F0 $F6
     cp   ROOM_OW_COLOR_DUNGEON_ENTRANCE           ; $554F: $FE $77
-    jr   nz, jr_002_5560                          ; $5551: $20 $0D
+    jr   nz, .colorDungeonEnd                     ; $5551: $20 $0D
 
     ld   a, [wIsIndoor]                           ; $5553: $FA $A5 $DB
     and  a                                        ; $5556: $A7
-    jr   nz, jr_002_5560                          ; $5557: $20 $07
+    jr   nz, .colorDungeonEnd                     ; $5557: $20 $07
 
-    ; If the color dungeon is open…
     ld   a, [wColorDungonCorrectTombStones]       ; $5559: $FA $D9 $DD
     cp   $80                                      ; $555C: $FE $80
-    jr   nz, jr_002_5566                          ; $555E: $20 $06
+    jr   nz, .return                              ; $555E: $20 $06
+.colorDungeonEnd
 
-jr_002_5560:
+    ; Trigger staircase warp
     call ApplyMapFadeOutTransitionWithSound       ; $5560: $CD $89 $0C
     xor  a                                        ; $5563: $AF
-    ldh  [hFFAC], a                               ; $5564: $E0 $AC
+    ldh  [hStaircase], a                          ; $5564: $E0 $AC
 
-jr_002_5566:
+.return
     ret                                           ; $5566: $C9
 
 ; Render a transcient visual effet.

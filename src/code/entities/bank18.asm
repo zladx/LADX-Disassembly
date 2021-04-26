@@ -4941,16 +4941,16 @@ jr_018_632D:
     ld   a, $4B                                   ; $6358: $3E $4B
     ld   [hl+], a                                 ; $635A: $22
     ld   [hl], $00                                ; $635B: $36 $00
-    ld   a, $01                                   ; $635D: $3E $01
-    ldh  [hFFAC], a                               ; $635F: $E0 $AC
+    ld   a, STAIRCASE_INACTIVE                    ; $635D: $3E $01
+    ldh  [hStaircase], a                          ; $635F: $E0 $AC
     ldh  a, [hSwordIntersectedAreaY]              ; $6361: $F0 $CD
     and  $F0                                      ; $6363: $E6 $F0
     add  $10                                      ; $6365: $C6 $10
-    ldh  [hFFAE], a                               ; $6367: $E0 $AE
+    ldh  [hStaircasePosY], a                      ; $6367: $E0 $AE
     ldh  a, [hSwordIntersectedAreaX]              ; $6369: $F0 $CE
     and  $F0                                      ; $636B: $E6 $F0
     add  $08                                      ; $636D: $C6 $08
-    ldh  [hFFAD], a                               ; $636F: $E0 $AD
+    ldh  [hStaircasePosX], a                      ; $636F: $E0 $AD
     ldh  a, [hMapRoom]                            ; $6371: $F0 $F6
     ld   e, a                                     ; $6373: $5F
     ld   d, $00                                   ; $6374: $16 $00

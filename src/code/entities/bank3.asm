@@ -2,47 +2,7 @@
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-; Array of wEntitiesOptions1Table, indexed by entity index
-
-IF __PATCH_0__
-ENTITY_4A_VAL = $02
-ELSE
-ENTITY_4A_VAL = $42
-ENDC
-
-Data_003_42F1::
-    db   $12, $12, $0A, $12, $12, $0A, $02, $02   ; $42F1
-    db   $02, $08, $12, $08, $12, $08, $00, $40   ; $42F9
-    db   $11, $11, $11, $00, $08, $12, $12, $12   ; $4301
-    db   $08, $11, $08, $08, $08, $10, $08, $08   ; $4309
-    db   $08, $08, $12, $08, $08, $08, $08, $52   ; $4311
-    db   $08, $08, $0A, $12, $08, $0A, $0A, $13   ; $4319
-    db   $0A, $0A, $0A, $0A, $0A, $0A, $08, $0A   ; $4321
-    db   $0A, $08, $0A, $0A, $1B, $1A, $02, $02   ; $4329
-    db   $02, $02, $02, $02, $02, $42, $02, $02   ; $4331
-    db   $02, $02, ENTITY_4A_VAL, $02, $12, $00, $02, $02   ; $4339
-    db   $30, $08, $02, $02, $02, $08, $08, $08   ; $4341
-    db   $12, $D0, $90, $90, $D0, $90, $D4, $84   ; $4349
-    db   $D4, $02, $D0, $90, $02, $80, $02, $42   ; $4351
-    db   $12, $02, $02, $02, $02, $43, $00, $00   ; $4359
-    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $4361
-    db   $00, $00, $20, $00, $02, $02, $02, $40   ; $4369
-    db   $00, $84, $40, $00, $00, $00, $02, $84   ; $4371
-    db   $C4, $94, $00, $00, $00, $00, $84, $00   ; $4379
-    db   $00, $00, $C4, $10, $00, $00, $00, $00   ; $4381
-    db   $00, $10, $00, $00, $00, $42, $02, $00   ; $4389
-    db   $00, $00, $00, $02, $02, $02, $02, $42   ; $4391
-    db   $42, $00, $10, $10, $08, $18, $00, $13   ; $4399
-    db   $00, $12, $00, $02, $02, $02, $02, $02   ; $43A1
-    db   $02, $00, $01, $00, $84, $11, $84, $00   ; $43A9
-    db   $00, $03, $02, $02, $02, $02, $02, $02   ; $43B1
-    db   $02, $02, $02, $02, $02, $02, $02, $02   ; $43B9
-    db   $00, $00, $00, $00, $00, $03, $02, $42   ; $43C1
-    db   $42, $02, $02, $02, $02, $02, $02, $12   ; $43C9
-    db   $02, $02, $02, $02, $00, $02, $00, $02   ; $43D1
-    db   $02, $00, $00, $00, $00, $00, $00, $00   ; $43D9
-    db   $00, $00, $04, $04, $94, $42, $00, $00   ; $43E1
-    db   $94, $90, $12                            ; $43E9
+include "data/entities/options1.asm"
 
 ; Indexed by wEntitiesHealthGroup, 16 bytes per entry, sub indexed by damage type (wC19E)
 ; $00-$03) sword, sword level add +1, spin attack adds +1, pegasus boots adds +1, piece of power OR damage tunic adds +1 (tunic makes piece of power useless)
@@ -190,12 +150,13 @@ ConfigureNewEntity::
 
     call ConfigureEntityHealth                    ; $4885: $CD $95 $48
 
-    ld   hl, Data_003_42F1                        ; $4888: $21 $F1 $42
+    ld   hl, Options1ForEntity                    ; $4888: $21 $F1 $42
     add  hl, de                                   ; $488B: $19
     ld   a, [hl]                                  ; $488C: $7E
     ld   hl, wEntitiesOptions1Table               ; $488D: $21 $30 $C4
     add  hl, bc                                   ; $4890: $09
     ld   [hl], a                                  ; $4891: $77
+
     jp   ConfigureEntityHitbox                    ; $4892: $C3 $EA $3A
 
 ConfigureEntityHealth::

@@ -2073,10 +2073,8 @@ PlaceBomb::
     ld   a, ENTITY_BOMB                           ; $136D: $3E $02
     call SpawnPlayerProjectile                    ; $136F: $CD $2F $14
     ret  c                                        ; $1372: $D8
-    ; fallthrough
 
-func_1373::
-    callsb func_020_4B81                          ; $1373: $3E $20 $EA $00 $21 $CD $81 $4B
+    callsb ConvertToBombArrowIfNeeded             ; $1373: $3E $20 $EA $00 $21 $CD $81 $4B
     ld   a, [wCurrentBank]                        ; $137B: $FA $AF $DB
     ld   [MBC3SelectBank], a                      ; $137E: $EA $00 $21
     ret                                           ; $1381: $C9

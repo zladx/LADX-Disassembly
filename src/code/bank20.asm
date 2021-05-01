@@ -1110,7 +1110,7 @@ IF __PATCH_0__
     ret  nz
 ENDC
 
-    ld   a, [wC1C2]                               ; $4B92: $FA $C2 $C1
+    ld   a, [wLatestShotArrowEntityIndex]         ; $4B92: $FA $C2 $C1
     ld   c, a                                     ; $4B95: $4F
     ld   b, d                                     ; $4B96: $42
     ld   hl, wEntitiesStateTable                  ; $4B97: $21 $90 $C2
@@ -1122,7 +1122,7 @@ label_020_4B9E:
     ld   a, BOMB_ARROW_COOLDOWN                   ; $4B9E: $3E $06
     ld   [wBombArrowCooldown], a                  ; $4BA0: $EA $C0 $C1
     ld   a, e                                     ; $4BA3: $7B
-    ld   [wC1C1], a                               ; $4BA4: $EA $C1 $C1
+    ld   [wLatestDroppedBombEntityIndex], a       ; $4BA4: $EA $C1 $C1
     ld   a, $0C                                   ; $4BA7: $3E $0C
     ld   [wC19B], a                               ; $4BA9: $EA $9B $C1
     ld   hl, wEntitiesTransitionCountdownTable    ; $4BAC: $21 $E0 $C2

@@ -2145,11 +2145,11 @@ ShootArrow::
     call SpawnPlayerProjectile                    ; $13E0: $CD $2F $14
     ret  c                                        ; $13E3: $D8
     ld   a, e                                     ; $13E4: $7B
-    ld   [wC1C2], a                               ; $13E5: $EA $C2 $C1
+    ld   [wLatestShotArrowEntityIndex], a         ; $13E5: $EA $C2 $C1
     ld   a, [wBombArrowCooldown]                  ; $13E8: $FA $C0 $C1
     and  a                                        ; $13EB: $A7
-    jr   z, .label_1401                           ; $13EC: $28 $13
-    ld   a, [wC1C1]                               ; $13EE: $FA $C1 $C1
+    jr   z, .initBombArrowCooldown                ; $13EC: $28 $13
+    ld   a, [wLatestDroppedBombEntityIndex]       ; $13EE: $FA $C1 $C1
     ld   c, a                                     ; $13F1: $4F
     ld   b, d                                     ; $13F2: $42
     ld   hl, wEntitiesStatusTable                 ; $13F3: $21 $80 $C2
@@ -2159,15 +2159,16 @@ ShootArrow::
     add  hl, de                                   ; $13FB: $19
     ld   [hl], $01                                ; $13FC: $36 $01
     xor  a                                        ; $13FE: $AF
-    jr   .label_1407                              ; $13FF: $18 $06
+    jr   .setBombArrowCooldown                    ; $13FF: $18 $06
 
-.label_1401::
+.initBombArrowCooldown
     ld   a, NOISE_SFX_SHOOT_ARROW                 ; $1401: $3E $0A
     ldh  [hNoiseSfx], a                           ; $1403: $E0 $F4
     ld   a, BOMB_ARROW_COOLDOWN                   ; $1405: $3E $06
 
-.label_1407::
+.setBombArrowCooldown
     ld   [wBombArrowCooldown], a                  ; $1407: $EA $C0 $C1
+
     ldh  a, [hLinkDirection]                      ; $140A: $F0 $9E
     ld   c, a                                     ; $140C: $4F
     ld   b, $00                                   ; $140D: $06 $00

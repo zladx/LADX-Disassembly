@@ -1067,8 +1067,8 @@ OverworldD8Entities::
   entities_end
 
 OverworldD9Entities::
-  entity $5, $2, ENTITY_97
-  entity $5, $4, ENTITY_97
+  entity $5, $2, ENTITY_DIVABLE_WATER
+  entity $5, $4, ENTITY_DIVABLE_WATER
   entities_end
 
 OverworldDAEntities::
@@ -1164,7 +1164,7 @@ OverworldE9Entities::
   entities_end
 
 OverworldEAEntities::
-  entity $2, $6, ENTITY_97
+  entity $2, $6, ENTITY_DIVABLE_WATER
   entity $6, $6, ENTITY_BUZZ_BLOB
   entities_end
 

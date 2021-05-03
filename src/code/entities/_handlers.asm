@@ -63,7 +63,7 @@ EntityHandlersTable::
 ._2F far_pointer DroppableFairyEntityHandler
 ._30 far_pointer KeyDropPointEntityHandler ; $30
 ._31 far_pointer SwordShieldPickableEntityHandler
-._32 far_pointer Entity32Handler
+._32 far_pointer IronMasksMaskEntityHandler
 ._33 far_pointer PieceOfPowerEntityHandler
 ._34 far_pointer GuardianAcornEntityHandler ; $34
 ._35 far_pointer HeartPieceEntityHandler
@@ -164,7 +164,7 @@ EntityHandlersTable::
 ._94 far_pointer KanaletBombableWallEntityHandler ; $94
 ._95 far_pointer RichardEntityHandler
 ._96 far_pointer RichardFrogEntityHandler
-._97 far_pointer Entity97Handler
+._97 far_pointer DivableWaterEntityHandler
 ._98 far_pointer HorsePieceEntityHandler ; $98
 ._99 far_pointer WaterTektiteEntityHandler
 ._9A far_pointer FlyingTilesEntityHandler

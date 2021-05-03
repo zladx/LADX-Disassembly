@@ -1131,7 +1131,7 @@ Data_019_483D::
 Data_019_4842::
     db   $02, $0F, $F5, $94, $52
 
-Entity97Handler::
+DivableWaterEntityHandler::
     call func_019_7D3D                            ; $4847: $CD $3D $7D
     call GetEntityTransitionCountdown             ; $484A: $CD $05 $0C
     jr   z, jr_019_4869                           ; $484D: $28 $1A

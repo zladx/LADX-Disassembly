@@ -87,7 +87,7 @@ ENTITY_DROPPABLE_RUPEE               equ $2E
 ENTITY_DROPPABLE_FAIRY               equ $2F
 ENTITY_KEY_DROP_POINT                equ $30
 ENTITY_SWORD_SHIELD_PICKUP           equ $31
-ENTITY_32                            equ $32 ; unknown
+ENTITY_IRON_MASKS_MASK               equ $32
 ENTITY_PIECE_OF_POWER                equ $33
 ENTITY_GUARDIAN_ACORN                equ $34
 ENTITY_HEART_PIECE                   equ $35
@@ -115,7 +115,7 @@ ENTITY_COLOR_DUNGEON_BOOK            equ $4A
 ENTITY_POT                           equ $4B
 ;ENTITY_DISABLED                     equ $4C
 ENTITY_SHOP_OWNER                    equ $4D
-ENTITY_4D                            equ $4E ; unknown
+ENTITY_4E                            equ $4E ; unknown
 ENTITY_TRENDY_GAME_OWNER             equ $4F
 ENTITY_BOO_BUDDY                     equ $50
 ENTITY_KNIGHT                        equ $51
@@ -188,7 +188,7 @@ ENTITY_MAD_BOMBER                    equ $93
 ENTITY_KANALET_BOMBABLE_WALL         equ $94
 ENTITY_RICHARD                       equ $95
 ENTITY_RICHARD_FROG                  equ $96
-ENTITY_97                            equ $97 ; unknown
+ENTITY_DIVABLE_WATER                 equ $97
 ENTITY_HORSE_PIECE                   equ $98
 ENTITY_WATER_TEKTITE                 equ $99
 ENTITY_FLYING_TILES                  equ $9A

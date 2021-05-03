@@ -3388,7 +3388,7 @@ jr_003_5B7D:
 Data_003_5B80::
     db   $74, $00, $76, $00, $76, $20, $74, $20
 
-Entity32Handler::
+IronMasksMaskEntityHandler::
     ld   de, Data_003_5B80                        ; $5B88: $11 $80 $5B
     call RenderActiveEntitySpritesPair            ; $5B8B: $CD $C0 $3B
     call func_003_7F78                            ; $5B8E: $CD $78 $7F
@@ -4584,7 +4584,7 @@ Data_003_629E::
     db   FALSE                                    ; ENTITY_DROPPABLE_FAIRY
     db   FALSE                                    ; ENTITY_KEY_DROP_POINT
     db   TRUE                                     ; ENTITY_SWORD_SHIELD_PICKUP
-    db   FALSE                                    ; ENTITY_32
+    db   FALSE                                    ; ENTITY_IRON_MASKS_MASK
     db   TRUE                                     ; ENTITY_PIECE_OF_POWER
     db   TRUE                                     ; ENTITY_GUARDIAN_ACORN
     db   FALSE                                    ; ENTITY_HEART_PIECE
@@ -8048,7 +8048,7 @@ jr_003_76AC:
     ld   [hl], $01                                ; $76E5: $36 $01
     push de                                       ; $76E7: $D5
 
-    ld   a, ENTITY_32                             ; $76E8: $3E $32
+    ld   a, ENTITY_IRON_MASKS_MASK                ; $76E8: $3E $32
     call SpawnNewEntity                           ; $76EA: $CD $CA $64
     jr   c, jr_003_770D                           ; $76ED: $38 $1E
 

@@ -1013,10 +1013,10 @@ SelectRoomTilesets::
     jr   .readTilesetFromTable                    ; $0D3A: $18 $09
 .colorDungeonEnd
 
-    ; If 06 < mapId < MAP_UNKNOWN_1A, add $100 to the table address
-    cp   MAP_UNKNOWN_1A                           ; $0D3C: $FE $1A
+    ; If the map uses rooms in the indoors_b rooms group, add $100 to the table address
+    cp   MAP_INDOORS_B_END                        ; $0D3C: $FE $1A
     jr   nc, .readTilesetFromTable                ; $0D3E: $30 $05
-    cp   MAP_EAGLES_TOWER                         ; $0D40: $FE $06
+    cp   MAP_INDOORS_B_START                      ; $0D40: $FE $06
     jr   c, .readTilesetFromTable                 ; $0D42: $38 $01
     inc  h                                        ; $0D44: $24
 
@@ -5825,7 +5825,7 @@ LoadRoom::
     and  a                                        ; $3179: $A7
     jr   z, .isIndoorEnd                          ; $317A: $28 $43
 
-    ; …use the bank for IndoorA map
+    ; …by default use the bank for IndoorsA map
     ld   a, BANK(IndoorsARoomPointers)            ; $317C: $3E $0A
     ld   [MBC3SelectBank], a                      ; $317E: $EA $00 $21
     ldh  [hRoomBank], a                           ; $3181: $E0 $E8
@@ -5835,12 +5835,12 @@ LoadRoom::
     cp   MAP_COLOR_DUNGEON                        ; $3185: $FE $FF
     jr   nz, .colorDungeonEnd                     ; $3187: $20 $06
     ; …use the map pointers table specific to the color dungeon.
-    ld   hl, ColorDungeonRoomPointers ; color dungeon map pointers table ; $3189: $21 $77 $7B
+    ld   hl, ColorDungeonRoomPointers             ; $3189: $21 $77 $7B
     jp   .fetchRoomAddress                        ; $318C: $C3 $24 $32
 .colorDungeonEnd
 
     ; If have the Magnifying Lens, load an alternate Goriya room (where the Goriya NPC is actually present)
-    cp   MAP_CAVE_E                               ; $318F: $FE $1F
+    cp   MAP_CAVE_WATER                           ; $318F: $FE $1F
     jr   nz, .goriyaRoomEnd                       ; $3191: $20 $13
     ldh  a, [hMapRoom]                            ; $3193: $F0 $F6
     cp   ROOM_INDOOR_A_GORIYA                     ; $3195: $FE $F5
@@ -5852,13 +5852,12 @@ LoadRoom::
     jp   .parseRoomHeader                         ; $31A3: $C3 $3A $32
 .goriyaRoomEnd
 
-    ; If the map is less than MAP_UNKNOWN_1A…
+    ; If the map is in between MAP_INDOORS_B_START and MAP_INDOORS_B_END…
     ld   hl, IndoorsARoomPointers                 ; $31A6: $21 $00 $40
     ldh  a, [hMapId]                              ; $31A9: $F0 $F7
-    cp   MAP_UNKNOWN_1A                           ; $31AB: $FE $1A
+    cp   MAP_INDOORS_B_END                         ; $31AB: $FE $1A
     jr   nc, .fetchRoomAddress                    ; $31AD: $30 $75
-    ; …and the map is greater than the first 6 dungeons…
-    cp   MAP_EAGLES_TOWER                         ; $31AF: $FE $06
+    cp   MAP_INDOORS_B_START                       ; $31AF: $FE $06
     jr   c, .fetchRoomAddress                     ; $31B1: $38 $71
     ; …use the bank for IndoorB map.
     ld   a, BANK(IndoorsBRoomPointers)            ; $31B3: $3E $0B
@@ -6996,12 +6995,12 @@ UpdateIndoorRoomStatus::
     jr   .setStatus                               ; $36D6: $18 $09
 
 .checkForOffsetIncrease::
-    ; do not increase d to 1 if MAP_EAGLES_TOWER > hMapId > MAP_UNKNOWN_1A
-    cp   MAP_UNKNOWN_1A                           ; $36D8: $FE $1A
+    ; If the map uses rooms in the indoors_b rooms group…
+    cp   MAP_INDOORS_B_END                        ; $36D8: $FE $1A
     jr   nc, .setStatus                           ; $36DA: $30 $05
-    cp   MAP_EAGLES_TOWER                         ; $36DC: $FE $06
+    cp   MAP_INDOORS_B_START                      ; $36DC: $FE $06
     jr   c, .setStatus                            ; $36DE: $38 $01
-    ; increase offset in wIndoorARoomStatus by 0x0100
+    ; increase offset in wIndoorARoomStatus by 0x100
     inc  d                                        ; $36E0: $14
 
 .setStatus::
@@ -7271,10 +7270,10 @@ LoadRoomEntities::
     ld   hl, ColorDungeonEntitiesPointersTable    ; $3859: $21 $00 $46
     jr   .pointersTableEnd                        ; $385C: $18 $0A
 .useIndoorsBTable
-    ; If on a map between $06 and $1A…
-    cp   MAP_UNKNOWN_1A                           ; $385E: $FE $1A
+    ; If the map uses rooms in the indoors_b rooms group…
+    cp   MAP_INDOORS_B_END                        ; $385E: $FE $1A
     jr   nc, .pointersTableEnd                    ; $3860: $30 $06
-    cp   MAP_EAGLES_TOWER                         ; $3862: $FE $06
+    cp   MAP_INDOORS_B_START                      ; $3862: $FE $06
     jr   c, .pointersTableEnd                     ; $3864: $38 $02
     ; … use IndoorsBEntitiesPointersTable
     ; (by incrementing H from $42 to $44)

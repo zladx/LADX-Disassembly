@@ -5408,7 +5408,7 @@ OverworldTilesetsTable::
     db   $0F, $24, $2E, $2E, $3A, $0F, $26, $2C
     db   $22, $22, $22, $0F, $3A, $3A, $0F, $2C
 
-; Constants for Indoors tilesets
+; Constants for Indoors tilesets, indexed by hRoomId.
 ; See W_TILESET_* constants for values
 IndoorsTilesetsTable::
     db   $FF, $00, $00, $00, $FF, $01, $00, $05, $00, $09, $00, $00, $05, $05, $05, $FF

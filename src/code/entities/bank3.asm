@@ -1812,24 +1812,24 @@ GetRoomStatusAddressInHL::
     ld   hl, wOverworldRoomStatus                 ; $5138: $21 $00 $D8
     ldh  a, [hMapRoom]                            ; $513B: $F0 $F6
     ld   e, a                                     ; $513D: $5F
+
     ldh  a, [hMapId]                              ; $513E: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $5140: $FE $FF
-    jr   nz, jr_003_514B                          ; $5142: $20 $07
-
+    jr   nz, .colorDungeonEnd                     ; $5142: $20 $07
     ld   d, $00                                   ; $5144: $16 $00
     ld   hl, wColorDungeonRoomStatus              ; $5146: $21 $E0 $DD
-    jr   jr_003_5154                              ; $5149: $18 $09
+    jr   .done                                    ; $5149: $18 $09
+.colorDungeonEnd
 
-jr_003_514B:
-    cp   $1A                                      ; @TODO MAP_UNKNOWN_1A (?)
-    jr   nc, jr_003_5154                          ; $514D: $30 $05
-
-    cp   $06                                      ; @tODO MAP_EAGLES_TOWER (?)
-    jr   c, jr_003_5154                           ; $5151: $38 $01
-
+    ; If the map uses rooms in the indoors_b rooms group…
+    cp   MAP_INDOORS_B_END                        ;
+    jr   nc, .done                                ; $514D: $30 $05
+    cp   MAP_INDOORS_B_START                      ;
+    jr   c, .done                                 ; $5151: $38 $01
+    ; increase offset in wIndoorARoomStatus by 0x100
     inc  d                                        ; $5153: $14
 
-jr_003_5154:
+.done
     add  hl, de                                   ; $5154: $19
     ret                                           ; $5155: $C9
 

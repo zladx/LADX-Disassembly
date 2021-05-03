@@ -66,6 +66,7 @@ ROOM_INDOOR_B_SHIELD_LV2                 equ $1A
 ROOM_INDOOR_B_97                         equ $97
 ROOM_INDOOR_B_98                         equ $98
 
+ROOM_INDOOR_B_TRENDY_MINIGAME            equ $A0
 ROOM_INDOOR_B_MARIN_HOUSE                equ $A3
 ROOM_INDOOR_B_MRS_MEOW_MEOW              equ $A7
 
@@ -164,7 +165,6 @@ UNKNOWN_ROOM_9A                          equ $9A
 UNKNOWN_ROOM_9C                          equ $9C ; One south of Face Shrine dungeon
 UNKNOWN_ROOM_9D                          equ $9D ; Room with staircase leading to Face Shrine dungeon passage
 
-UNKNOWN_ROOM_A0                          equ $A0
 UNKNOWN_ROOM_A1                          equ $A1
 UNKNOWN_ROOM_A4                          equ $A4 ; 1 east of Mabe's big bush field
 UNKNOWN_ROOM_A5                          equ $A5 ; Overworld room two east of Mabe bush field

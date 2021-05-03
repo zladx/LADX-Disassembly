@@ -41,21 +41,21 @@ LiftableRockEntityHandler::
 jr_003_5369:
     ldh  a, [hActiveEntitySpriteVariant]               ; $5369: $F0 $F1
     and  a                                        ; $536B: $A7
-    jr   nz, jr_003_5392                          ; $536C: $20 $24
+    jr   nz, .marinReactionEnd                    ; $536C: $20 $24
 
-    ; If not in a house, and not on map MAP_UNKNOWN_1E…
+    ; If inside a house…
     ldh  a, [hMapId]                              ; $536E: $F0 $F7
-    cp   MAP_UNKNOWN_1E                           ; $5370: $FE $1E
-    jr   z, jr_003_5378                           ; $5372: $28 $04
+    cp   MAP_GHOST_HOUSE                          ; $5370: $FE $1E
+    jr   z, .insideHouse                          ; $5372: $28 $04
 
     cp   MAP_HOUSE                                ; $5374: $FE $10
-    jr   nz, jr_003_5392                          ; $5376: $20 $1A
+    jr   nz, .marinReactionEnd                    ; $5376: $20 $1A
 
-jr_003_5378:
+.insideHouse
     ; … and Marin is following Link…
     ld   a, [wIsMarinFollowingLink]               ; $5378: $FA $73 $DB
     and  a                                        ; $537B: $A7
-    jr   z, jr_003_5392                           ; $537C: $28 $14
+    jr   z, .marinReactionEnd                     ; $537C: $28 $14
 
     ; draw a random number
     call GetRandomByte                            ; $537E: $CD $0D $28
@@ -70,7 +70,7 @@ jr_003_5378:
     ; Open Marin reaction 2
     call_open_dialog $199                         ; $538D
 
-jr_003_5392:
+.marinReactionEnd
     jp   UnloadEntityAndReturn                    ; $5392: $C3 $8D $3F
 
 jr_003_5395:

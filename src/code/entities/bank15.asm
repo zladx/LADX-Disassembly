@@ -7906,11 +7906,12 @@ func_015_7CDB::
     ld   e, a                                     ; $7CE0: $5F
     ld   a, [wIsIndoor]                           ; $7CE1: $FA $A5 $DB
     ld   d, a                                     ; $7CE4: $57
+
     ldh  a, [hMapId]                              ; $7CE5: $F0 $F7
-    cp   MAP_UNKNOWN_1A                           ; $7CE7: $FE $1A
+    cp   MAP_INDOORS_B_END                        ; $7CE7: $FE $1A
     jr   nc, jr_015_7CF0                          ; $7CE9: $30 $05
 
-    cp   $06                                      ; $7CEB: $FE $06
+    cp   MAP_INDOORS_B_START                      ; $7CEB: $FE $06
     jr   c, jr_015_7CF0                           ; $7CED: $38 $01
 
     inc  d                                        ; $7CEF: $14

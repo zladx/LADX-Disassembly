@@ -3320,16 +3320,15 @@ func_007_560D::
     ld   e, a                                     ; $5612: $5F
     ld   a, [wIsIndoor]                           ; $5613: $FA $A5 $DB
     ld   d, a                                     ; $5616: $57
+
     ldh  a, [hMapId]                              ; $5617: $F0 $F7
-    cp   MAP_UNKNOWN_1A                           ; $5619: $FE $1A
-    jr   nc, jr_007_5622                          ; $561B: $30 $05
-
-    cp   $06                                      ; $561D: $FE $06
-    jr   c, jr_007_5622                           ; $561F: $38 $01
-
+    cp   MAP_INDOORS_B_END                        ; $5619: $FE $1A
+    jr   nc, .indoorBEnd                          ; $561B: $30 $05
+    cp   MAP_INDOORS_B_START                      ; $561D: $FE $06
+    jr   c, .indoorBEnd                           ; $561F: $38 $01
     inc  d                                        ; $5621: $14
+.indoorBEnd
 
-jr_007_5622:
     add  hl, de                                   ; $5622: $19
     ld   a, [hl]                                  ; $5623: $7E
     ret                                           ; $5624: $C9
@@ -7325,16 +7324,17 @@ func_007_6E7F::
 jr_007_6E8D:
     ld   e, a                                     ; $6E8D: $5F
     ld   d, b                                     ; $6E8E: $50
+
+    ; If the map uses rooms in the indoors_b rooms group…
     ldh  a, [hMapId]                              ; $6E8F: $F0 $F7
-    cp   MAP_UNKNOWN_1A                           ; $6E91: $FE $1A
+    cp   MAP_INDOORS_B_END                        ; $6E91: $FE $1A
     jr   nc, jr_007_6E9A                          ; $6E93: $30 $05
-
-    cp   $06                                      ; $6E95: $FE $06
+    cp   MAP_INDOORS_B_START                      ; $6E95: $FE $06
     jr   c, jr_007_6E9A                           ; $6E97: $38 $01
-
+    ; increase offset in wIndoorARoomStatus by 0x100
     inc  d                                        ; $6E99: $14
-
 jr_007_6E9A:
+
     add  hl, de                                   ; $6E9A: $19
     ld   a, [hl]                                  ; $6E9B: $7E
     or   ROOM_STATUS_EVENT_2                      ; $6E9C: $F6 $20

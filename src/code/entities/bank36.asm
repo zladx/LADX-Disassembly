@@ -8302,7 +8302,7 @@ label_036_728B:
 
 jr_036_729E:
     ldh  a, [hMapId]                              ; $729E: $F0 $F7
-    cp   MAP_FISHING                              ; $72A0: $FE $0F
+    cp   MAP_MINIGAME                              ; $72A0: $FE $0F
     jr   nz, jr_036_72A9                          ; $72A2: $20 $05
 
     ldh  a, [hIsSideScrolling]                    ; $72A4: $F0 $F9

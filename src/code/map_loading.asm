@@ -85,14 +85,15 @@ GetBGAttributesAddressForObject::
     cp   MAP_WINDFISHS_EGG + 1                    ; $65B7: $FE $09
     jr   c, .indoorPaletteEnd                     ; $65B9: $38 $75
 
+
     cp   MAP_CAVE_B                               ; $65BB: $FE $0A
-    jr   nz, .jr_01A_65C5                         ; $65BD: $20 $06
+    jr   nz, .caveMapEnd                          ; $65BD: $20 $06
 
     ldh  a, [hMapRoom]                            ; $65BF: $F0 $F6
     cp   ROOM_INDOOR_B_MANBO                      ; $65C1: $FE $FD
     jr   z, .jr_01A_65D5                          ; $65C3: $28 $10
+.caveMapEnd
 
-.jr_01A_65C5
     ldh  a, [hMapId]                              ; $65C5: $F0 $F7
     cp   MAP_CAVE_C                               ; $65C7: $FE $11
     jr   nz, .jr_01A_65D9                         ; $65C9: $20 $0E
@@ -109,11 +110,11 @@ GetBGAttributesAddressForObject::
 
 .jr_01A_65D9
     ldh  a, [hMapId]                              ; $65D9: $F0 $F7
-    cp   MAP_FISHING                              ; $65DB: $FE $0F
+    cp   MAP_MINIGAME                             ; $65DB: $FE $0F
     jr   nz, .jr_01A_65E9                         ; $65DD: $20 $0A
 
     ldh  a, [hMapRoom]                            ; $65DF: $F0 $F6
-    cp   UNKNOWN_ROOM_A0                          ; $65E1: $FE $A0
+    cp   ROOM_INDOOR_B_TRENDY_MINIGAME            ; $65E1: $FE $A0
     jr   nz, .jr_01A_65E9                         ; $65E3: $20 $04
 
     ld   c, $00                                   ; $65E5: $0E $00
@@ -121,7 +122,7 @@ GetBGAttributesAddressForObject::
 
 .jr_01A_65E9
     ldh  a, [hMapId]                              ; $65E9: $F0 $F7
-    cp   MAP_CAVE_E                               ; $65EB: $FE $1F
+    cp   MAP_CAVE_WATER                               ; $65EB: $FE $1F
     jr   nz, .jr_01A_65FD                         ; $65ED: $20 $0E
 
     ldh  a, [hMapRoom]                            ; $65EF: $F0 $F6

@@ -1047,7 +1047,7 @@ Data_019_47B9::
 
 MaskedMimicGoriyaEntityHandler::
     ldh  a, [hMapId]                              ; $47BC: $F0 $F7
-    cp   MAP_CAVE_E                               ; $47BE: $FE $1F
+    cp   MAP_CAVE_WATER                               ; $47BE: $FE $1F
     jp   z, GoriyaEntityHandler                   ; $47C0: $CA $E4 $45
 
     ld   de, Data_019_4796                        ; $47C3: $11 $96 $47
@@ -4526,7 +4526,7 @@ ENDC
 GhostInHouseSequence:
     call func_019_7D3D                            ; $5FBF: $CD $3D $7D
     ldh  a, [hMapId]                              ; $5FC2: $F0 $F7
-    cp   MAP_UNKNOWN_1E                           ; $5FC4: $FE $1E
+    cp   MAP_GHOST_HOUSE                          ; $5FC4: $FE $1E
     ret  nz                                       ; $5FC6: $C0
 
     ldh  a, [hMapRoom]                            ; $5FC7: $F0 $F6
@@ -8446,16 +8446,16 @@ func_019_7F0E::
     ld   e, a                                     ; $7F13: $5F
     ld   a, [wIsIndoor]                           ; $7F14: $FA $A5 $DB
     ld   d, a                                     ; $7F17: $57
+
+    ; If the map uses rooms in the indoors_b rooms group…
     ldh  a, [hMapId]                              ; $7F18: $F0 $F7
-    cp   MAP_UNKNOWN_1A                           ; $7F1A: $FE $1A
-    jr   nc, jr_019_7F23                          ; $7F1C: $30 $05
-
-    cp   $06                                      ; $7F1E: $FE $06
-    jr   c, jr_019_7F23                           ; $7F20: $38 $01
-
+    cp   MAP_INDOORS_B_END                        ; $7F1A: $FE $1A
+    jr   nc, .indoorsBEnd                         ; $7F1C: $30 $05
+    cp   MAP_INDOORS_B_START                      ; $7F1E: $FE $06
+    jr   c, .indoorsBEnd                          ; $7F20: $38 $01
     inc  d                                        ; $7F22: $14
+.indoorsBEnd
 
-jr_019_7F23:
     add  hl, de                                   ; $7F23: $19
     ld   a, [hl]                                  ; $7F24: $7E
     or   ROOM_STATUS_EVENT_2                      ; $7F25: $F6 $20

@@ -9055,16 +9055,16 @@ SetRoomStatus20::
     ld   e, a                                     ; $7FBE: $5F
     ld   a, [wIsIndoor]                           ; $7FBF: $FA $A5 $DB
     ld   d, a                                     ; $7FC2: $57
+
+    ; If the map uses rooms in the indoors_b rooms group…
     ldh  a, [hMapId]                              ; $7FC3: $F0 $F7
-    cp   MAP_UNKNOWN_1A                           ; $7FC5: $FE $1A
+    cp   MAP_INDOORS_B_END                        ; $7FC5: $FE $1A
     jr   nc, .notIndoorB                          ; $7FC7: $30 $05
-
-    cp   $06                                      ; $7FC9: $FE $06
+    cp   MAP_INDOORS_B_START                      ; $7FC9: $FE $06
     jr   c, .notIndoorB                           ; $7FCB: $38 $01
-
     inc  d                                        ; $7FCD: $14
+.notIndoorB
 
-.notIndoorB:
     add  hl, de                                   ; $7FCE: $19
     ld   a, [hl]                                  ; $7FCF: $7E
     or   ROOM_STATUS_EVENT_2                      ; $7FD0: $F6 $20

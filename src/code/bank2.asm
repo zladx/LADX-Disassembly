@@ -2414,7 +2414,7 @@ jr_002_5015:
     and  a                                        ; $5026: $A7
     jr   z, .overworld                            ; $5027: $28 $0C
 
-    cp   MAP_CAVE_E                               ; $5029: $FE $1F
+    cp   MAP_CAVE_WATER                               ; $5029: $FE $1F
     jr   nz, .jr_002_507A                         ; $502B: $20 $4D
 
     ldh  a, [hMapRoom]                            ; $502D: $F0 $F6
@@ -4322,10 +4322,10 @@ GetRoomStatusAddress::
     jr   .computeAddress                          ; $5BB7: $18 $09
 
 .regularDungeon
-    ; If map > $1A && map < 6…
-    cp   MAP_UNKNOWN_1A                           ; $5BB9: $FE $1A
+    ; If the map uses rooms in the indoors_b rooms group…
+    cp   MAP_INDOORS_B_END                        ; $5BB9: $FE $1A
     jr   nc, .computeAddress                      ; $5BBB: $30 $05
-    cp   $06                                      ; $5BBD: $FE $06
+    cp   MAP_INDOORS_B_START                      ; $5BBD: $FE $06
     jr   c, .computeAddress                       ; $5BBF: $38 $01
     ; d += 1
     inc  d                                        ; $5BC1: $14
@@ -5913,9 +5913,9 @@ CheckPositionForMapTransition::
     ; Kanulet Castle underground special case
     ;
 
-    ; If on MAP_CAVE_E…
+    ; If on MAP_CAVE_WATER…
     ldh  a, [hMapId]                              ; $6C7D: $F0 $F7
-    cp   MAP_CAVE_E                               ; $6C7F: $FE $1F
+    cp   MAP_CAVE_WATER                               ; $6C7F: $FE $1F
     jr   nz, .kanaletEnd                          ; $6C81: $20 $16
 
     ; … and not side-scrolling…
@@ -5986,7 +5986,7 @@ CheckPositionForMapTransition::
 
     ; … and on CAVE_E map…
     ldh  a, [hMapId]                              ; $6CBB: $F0 $F7
-    cp   MAP_CAVE_E                               ; $6CBD: $FE $1F
+    cp   MAP_CAVE_WATER                               ; $6CBD: $FE $1F
     jp   nz, .manualEntryPointsEnd                ; $6CBF: $C2 $5C $6D
 
     ; … and room is $F5 (Goriya's room)…
@@ -6181,7 +6181,7 @@ CheckPositionForMapTransition::
 
     ; … and map is not CAVE_E…
     ldh  a, [hMapId]                              ; $6DD2: $F0 $F7
-    cp   MAP_CAVE_E                               ; $6DD4: $FE $1F
+    cp   MAP_CAVE_WATER                               ; $6DD4: $FE $1F
     jr   z, .eagleTowerBossEnd                    ; $6DD6: $28 $0C
 
     ; … and is indoor…

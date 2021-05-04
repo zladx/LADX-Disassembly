@@ -35,9 +35,11 @@ ROOM_OW_ULRIRA_HOUSE                     equ $B1
 
 ROOM_SECTION_OW_VILLAGES                 equ $C0
 ROOM_OW_POTHOLE_FIELD_SLIME_KEY          equ $C6
+ROOM_OW_SIREN                            equ $C9
 ROOM_OW_YARNA_LANMOLA                    equ $CE
 
 ROOM_OW_BEACH_WITH_SWORD                 equ $F2
+ROOM_OW_WALRUS                           equ $FD
 
 ;
 ; Indoor A rooms
@@ -186,7 +188,6 @@ UNKNOWN_ROOM_C4                          equ $C4
 UNKNOWN_ROOM_C5                          equ $C5
 
 UNKNOWN_ROOM_C7                          equ $C7 ; Richard's Villa ?
-UNKNOWN_ROOM_C9                          equ $C9
 UNKNOWN_ROOM_CC                          equ $CC
 UNKNOWN_ROOM_CD                          equ $CD
 UNKNOWN_ROOM_CF                          equ $CF
@@ -217,6 +218,5 @@ UNKNOWN_ROOM_F4                          equ $F4
 UNKNOWN_ROOM_F6                          equ $F6 ; ghost jingle is played in this room
 UNKNOWN_ROOM_F8                          equ $F8
 UNKNOWN_ROOM_FA                          equ $FA
-UNKNOWN_ROOM_FD                          equ $FD
 UNKNOWN_ROOM_FE                          equ $FE
 UNKNOWN_ROOM_FF                          equ $FF

@@ -312,19 +312,76 @@ ColorDungeonEntitySpritesheetsTable_Slot1::
     db   HIGH($0000), $00
 
 ColorDungeonEntitySpritesheetsTable_Slot2::
-    db   $00, $00, $4D, $31, $00, $00, $4C, $35, $51, $2E, $45, $35, $45, $35, $00, $00
-    db   $45, $35, $00, $00, $45, $35, $00, $00, $49, $35, $00, $00, $00, $00, $45, $35
-    db   $00, $00, $45, $35, $00, $00, $00, $00, $00, $00, $00, $00
+    db   HIGH($0000), $00
+    db   HIGH(Npc2TilesCGB + $0D00),         BANK(Npc2TilesCGB)
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0C00), BANK(ColorDungeonNpcTiles)
+    db   HIGH(Npc1TilesCGB + $1100),         BANK(Npc1TilesCGB)
+    db   HIGH(ColorDungeonNpcTiles + $0500), BANK(ColorDungeonNpcTiles)
+    db   HIGH(ColorDungeonNpcTiles + $0500), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0500), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0500), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0900), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0500), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0500), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
 
 ColorDungeonEntitySpritesheetsTable_Slot3::
-    db   $50, $35, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db   $00, $00, $46, $35, $00, $00, $00, $00, $4A, $35, $00, $00, $46, $35, $00, $00
-    db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $46, $35
+    db   HIGH(ColorDungeonNpcTiles + $1000), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0600), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0A00), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0600), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0600), BANK(ColorDungeonNpcTiles)
 
 ColorDungeonEntitySpritesheetsTable_Slot4::
-    db   $00, $00, $00, $00, $00, $00, $4D, $35, $00, $00, $00, $00, $00, $00, $00, $00
-    db   $47, $35, $00, $00, $47, $35, $47, $35, $00, $00, $47, $35, $00, $00, $47, $35
-    db   $47, $35, $00, $00, $00, $00, $00, $00, $47, $35, $00, $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0D00), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0700), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0700), BANK(ColorDungeonNpcTiles)
+    db   HIGH(ColorDungeonNpcTiles + $0700), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0700), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0700), BANK(ColorDungeonNpcTiles)
+    db   HIGH(ColorDungeonNpcTiles + $0700), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH($0000), $00
+    db   HIGH(ColorDungeonNpcTiles + $0700), BANK(ColorDungeonNpcTiles)
+    db   HIGH($0000), $00
 
 LoadColorDungeonTiles::
     ld   hl, ColorDungeonEntitySpritesheetsTable_Slot1 ; $475A: $21 $AA $46

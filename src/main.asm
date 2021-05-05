@@ -411,6 +411,7 @@ DungeonsTilesCGB::
 incbin "gfx/dungeons/dungeons.cgb.2bpp"
 
 section "bank2E",romx[$4000],bank[$2E]
+Npc1TilesCGB::
 incbin "gfx/characters/oam_npc_1.cgb.2bpp"
 
 section "bank2F",romx[$4000],bank[$2F]
@@ -432,6 +433,7 @@ incbin "gfx/scenes/relief.cgb.2bpp"
 incbin "gfx/scenes/painting.cgb.2bpp"
 
 section "bank31",romx[$4000],bank[$31]
+Npc2TilesCGB::
 incbin "gfx/characters/oam_npc_2.cgb.2bpp"
 
 section "bank32",romx[$4000],bank[$32]

@@ -1089,18 +1089,24 @@ Data_020_4B7D::
 .up:    db  -3
 .down:  db   4
 
-func_020_4B81::
+; Convert last placed bomb to a bomb arrow
+; (if all conditions are met)
+ConvertToBombArrowIfNeeded::
     ld   hl, wEntitiesPrivateCountdown1Table      ; $4B81: $21 $F0 $C2
     add  hl, de                                   ; $4B84: $19
     ld   [hl], $10                                ; $4B85: $36 $10
     ; reset wBombArrowCooldown if not already zero
     ld   a, [wBombArrowCooldown]                  ; $4B87: $FA $C0 $C1
     and  a                                        ; $4B8A: $A7
-    jp   z, label_020_4B9E                        ; $4B8B: $CA $9E $4B
+    jp   z, .label_020_4B9E                       ; $4B8B: $CA $9E $4B
     xor  a                                        ; $4B8E: $AF
     ld   [wBombArrowCooldown], a                  ; $4B8F: $EA $C0 $C1
 
 IF __PATCH_0__
+    ; This patch is meant to fix the bomb triggers bug.
+    ;
+    ; But as both conditions will never be true, it results in bomb arrows
+    ;  not working when firing the arrow first and place the bomb second.
     ld   a, [wAButtonSlot]
     cp   INVENTORY_BOW
     ret  nz
@@ -1110,7 +1116,7 @@ IF __PATCH_0__
     ret  nz
 ENDC
 
-    ld   a, [wC1C2]                               ; $4B92: $FA $C2 $C1
+    ld   a, [wLatestShotArrowEntityIndex]         ; $4B92: $FA $C2 $C1
     ld   c, a                                     ; $4B95: $4F
     ld   b, d                                     ; $4B96: $42
     ld   hl, wEntitiesStateTable                  ; $4B97: $21 $90 $C2
@@ -1118,11 +1124,11 @@ ENDC
     ld   [hl], $01                                ; $4B9B: $36 $01
     ret                                           ; $4B9D: $C9
 
-label_020_4B9E:
+.label_020_4B9E
     ld   a, BOMB_ARROW_COOLDOWN                   ; $4B9E: $3E $06
     ld   [wBombArrowCooldown], a                  ; $4BA0: $EA $C0 $C1
     ld   a, e                                     ; $4BA3: $7B
-    ld   [wC1C1], a                               ; $4BA4: $EA $C1 $C1
+    ld   [wLatestDroppedBombEntityIndex], a       ; $4BA4: $EA $C1 $C1
     ld   a, $0C                                   ; $4BA7: $3E $0C
     ld   [wC19B], a                               ; $4BA9: $EA $9B $C1
     ld   hl, wEntitiesTransitionCountdownTable    ; $4BAC: $21 $E0 $C2

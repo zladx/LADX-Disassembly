@@ -839,12 +839,14 @@ wScrollXOffset::
 wBombArrowCooldown::
   ds 1 ; C1C0
 
-; Unlabeled
-wC1C1::
+; Entity index of last bomb dropped by the player.
+; Used to turn it into a bomb arrow if you drop a bomb within the time window.wLatestDroppedBombEntityIndex::
+wLatestDroppedBombEntityIndex::
   ds 1 ; C1C1
 
-; Unlabeled
-wC1C2::
+; Entity index of last shot arrow by the player.
+; Used to turn it into a bomb arrow if you drop a bomb within the time window.
+wLatestShotArrowEntityIndex::
   ds 1 ; C1C2
 
 ; Unlabeled
@@ -2546,7 +2548,7 @@ wHasStolenFromShop::
 ; Unlabeled
 wDB47::
   ds 1 ; DB47
-  
+
 ; Unlabeled
 ; possible values 01, 02, ..
 wDB48::

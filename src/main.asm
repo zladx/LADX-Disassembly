@@ -282,7 +282,7 @@ include "code/entities/bank19.asm"
 section "bank1A",romx[$4000],bank[$1A]
 OverworldRoomsSecondHalf::
 include "data/rooms/overworld_b.asm"
-include "data/object_attributes/overworld_pointers.asm"
+include "data/object_attributes/pointers.asm"
 include "data/object_attributes/overworld_banks.asm"
 include "code/map_loading.asm"
 OverworldObjectsTilemapDMG::

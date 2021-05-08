@@ -260,6 +260,7 @@ OverworldBGAttributesPointers::
 ._FF dw Data_022_6C00
 
 ; Object attributes groups for Indoor rooms, indexed by hRoomId.
+; TODO: resolve these pointers
 IndoorsBGAttributesPointers:;
     dw $4000
     dw $4400

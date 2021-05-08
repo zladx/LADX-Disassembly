@@ -3994,44 +3994,83 @@ UpdateBGRegion::
     ; Reload saved bank and return
     jp   ReloadSavedBank                          ; $2211: $C3 $1D $08
 
-IncrementBGMapSourceAndDestination_Vertical::
+; Copy two horizontally-adjacent bytes, from the object tilemap/attrmap to the BG tilemap.
+;
+; The object tilemap/attrmap is made of 4 bytes (one for each tile), laid out as:
+;  0 1
+;  2 3
+;
+; This function will copy either bytes 0 and 1, or bytes 2 and 3.
+;
+; Inputs:
+;   hl   pointer to the object tilemap/attrmap (4 bytes)
+;   bc   the BG map location to copy the tiles to
+CopyObjectRowToBGMap::
+    ; If copying the lower part of the tilemap/attrmap…
     ld   a, [wBGUpdateRegionOriginLow]            ; $2214: $FA $27 $C1
     and  $20                                      ; $2217: $E6 $20
-    jr   z, .noColumnEnd                          ; $2219: $28 $02
+    jr   z, .lowerPartEnd                         ; $2219: $28 $02
+    ; …skip bytes 0 and 1 (the bytes of the upper part)
     inc  hl                                       ; $221B: $23
     inc  hl                                       ; $221C: $23
-.noColumnEnd
+.lowerPartEnd
 
+    ; Copy the first byte of the row
     ld   a, [hli]                                 ; $221D: $2A
     ld   [bc], a                                  ; $221E: $02
+
+    ; Copy the second byte of the row
     inc  bc                                       ; $221F: $03
     ld   a, [hl]                                  ; $2220: $7E
     ld   [bc], a                                  ; $2221: $02
+
+    ; bc = bc + 1
     inc  bc                                       ; $2222: $03
     ret                                           ; $2223: $C9
 
-IncrementBGMapSourceAndDestination_Horizontal::
+; Copy two vertically-adjacent bytes, from the object tilemap/attrmap to the BG tilemap.
+;
+; The object tilemap/attrmap is made of 4 bytes (one for each tile), laid out as:
+;  0 1
+;  2 3
+;
+; This function will copy either bytes 0 and 2, or bytes 1 and 3.
+;
+; Inputs:
+;   hl   pointer to the object tilemap/attrmap (4 bytes)
+;   bc   the BG map location to copy the tiles to
+CopyObjectColumnToBGMap::
+    ; If copying the right side of the tilemap/attrmap…
     ld   a, [wBGUpdateRegionOriginLow]            ; $2224: $FA $27 $C1
     and  $01                                      ; $2227: $E6 $01
-    jr   z, .noColumnEnd                          ; $2229: $28 $01
+    jr   z, .rightHandEnd                         ; $2229: $28 $01
+    ; …start the copy from byte 1 (the first byte of the right side)
     inc  hl                                       ; $222B: $23
-.noColumnEnd
+.rightHandEnd
 
+    ; Copy the first byte of the column
+    ; [bc] = [hl]
     ld   a, [hli]                                 ; $222C: $2A
     ld   [bc], a                                  ; $222D: $02
+
+    ; Copy the second byte of the column
+    ; [bc + 1] = [hl + 2]
     inc  hl                                       ; $222E: $23
     inc  bc                                       ; $222F: $03
     ld   a, [hl]                                  ; $2230: $7E
     ld   [bc], a                                  ; $2231: $02
+
+    ; bc = bc + 1
     inc  bc                                       ; $2232: $03
     ret                                           ; $2233: $C9
 
-; Update a region (row or column) of the BG map during room transition
+; Update a region (row or column) of the BG map with object tiles
+; and attributes during a room transition
 DoUpdateBGRegion::
-    ; Configures an async data request to copy background tilemap
+    ; Configures an async data request to copy the BG tilemap
     callsb func_020_4A76                          ; $2234: $3E $20 $EA $00 $21 $CD $76 $4A
 
-    ; Switch back to Map Data bank
+    ; Switch back to the objects tilemap bank
     ld   a, $08                                   ; $223C: $3E $08
     ld   [MBC3SelectBank], a                      ; $223E: $EA $00 $21
 
@@ -4039,14 +4078,13 @@ DoUpdateBGRegion::
     push bc                                       ; $2241: $C5
     push de                                       ; $2242: $D5
 
-    ; hl = wRoomObjects + hMultiPurpose2
+    ; Store the room object to be copied into bc
+    ; bc = wRoomObjects[hMultiPurpose2]
     ldh  a, [hMultiPurpose2]                      ; $2243: $F0 $D9
     ld   c, a                                     ; $2245: $4F
     ld   b, $00                                   ; $2246: $06 $00
     ld   hl, wRoomObjects                         ; $2248: $21 $11 $D7
     add  hl, bc                                   ; $224B: $09
-
-    ; c = wRoomObjects[hMultiPurpose2]
     ld   b, $00                                   ; $224C: $06 $00
     ld   c, [hl]                                  ; $224E: $4E
 
@@ -4068,13 +4106,14 @@ DoUpdateBGRegion::
     ld   [rSVBK], a                               ; $2260: $E0 $70
 .ramSwitchEnd
 
+    ; bc = bc * 4
     sla  c                                        ; $2262: $CB $21
     rl   b                                        ; $2264: $CB $10
     sla  c                                        ; $2266: $CB $21
     rl   b                                        ; $2268: $CB $10
 
     ;
-    ; Map base address selection
+    ; Select the base objects tilemap
     ;
 
     ; If IsIndoor…
@@ -4090,59 +4129,61 @@ DoUpdateBGRegion::
     ld   hl, IndoorObjectsTilemapCGB              ; $2278: $21 $B0 $43
     ldh  a, [hMapId]                              ; $227B: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $227D: $FE $FF
-    jr   nz, .configurePalettes                   ; $227F: $20 $10
+    jr   nz, .configureAttributesAddress          ; $227F: $20 $10
     ld   hl, ColorDungeonObjectsTilemap           ; $2281: $21 $60 $47
-    jr   .configurePalettes                       ; $2284: $18 $0B
+    jr   .configureAttributesAddress              ; $2284: $18 $0B
 
 .baseAddress_isOverworld
-    ; hl = (hIsGBC ? OverworldObjectsTilemapCGB : OverworldObjectsTilemapDMG)
     ld   hl, OverworldObjectsTilemapDMG           ; $2286: $21 $49 $67
+
+    ; On GBC, use the GBC objects tilemap, and configure the objects attributes
     ldh  a, [hIsGBC]                              ; $2289: $F0 $FE
     and  a                                        ; $228B: $A7
     jr   z, .palettesskipEntityLoad               ; $228C: $28 $0B
     ld   hl, OverworldObjectsTilemapCGB           ; $228E: $21 $1D $6B
 
     ;
-    ; Palettes configuration (GBC only)
+    ; Tile attributes configuration (GBC only)
     ;
 
-.configurePalettes
-    ; Set the BG attributes bank in hMultiPurpose8,
+.configureAttributesAddress
+    ; Set the object attributes bank in hMultiPurpose8,
     ; and the target BG attributes address in FFE0-FFE1
     callsb GetBGAttributesAddressForObject        ; $2291: $3E $1A $EA $00 $21 $CD $76 $65
 .palettesskipEntityLoad
 
     ;
-    ; BG map offset selection
+    ; Copy a single row or column of the object tilemap and attributes
     ;
 
-    ; Switch to the bank containing the BG map
-    call SwitchToMapDataBank                      ; $2299: $CD $05 $39
-    ; hl = base map address + BG map offset
+    ; Switch to the bank containing the objects tilemap
+    call SwitchToObjectsTilemapBank               ; $2299: $CD $05 $39
+    ; hl = objects tilemap address + object index
     add  hl, bc                                   ; $229C: $09
     pop  de                                       ; $229D: $D1
     pop  bc                                       ; $229E: $C1
 
     ; If the Room transition is vertical…
     ld   a, [wRoomTransitionDirection]            ; $229F: $FA $25 $C1
-    and  $02                                      ; $22A2: $E6 $02
+    and  DIRECTION_VERTICAL_MASK                  ; $22A2: $E6 $02
     jr   z, .horizontalRoomTransition             ; $22A4: $28 $2D
-    ; Increment the source and target destination
-    call IncrementBGMapSourceAndDestination_Vertical ; $22A6: $CD $14 $22
 
-    ; If IsGBC, load BG palette data
+    ; Copy a row of the object tilemap
+    call CopyObjectRowToBGMap                     ; $22A6: $CD $14 $22
+
+    ; On GBC, load object attributes data
     ldh  a, [hIsGBC]                              ; $22A9: $F0 $FE
     and  a                                        ; $22AB: $A7
-    jr   z, .verticalIncrementEnd                 ; $22AC: $28 $23
+    jr   z, .verticalTileAttributesEnd            ; $22AC: $28 $23
     push bc                                       ; $22AE: $C5
     push de                                       ; $22AF: $D5
     callsb func_020_49D9                          ; $22B0: $3E $20 $EA $00 $21 $CD $D9 $49
 
-    ; Select BG attributes bank
+    ; Select object attributes bank
     ldh  a, [hMultiPurpose8]                      ; $22B8: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $22BA: $EA $00 $21
-    ; Increment again the source and target destination
-    call IncrementBGMapSourceAndDestination_Vertical ; $22BD: $CD $14 $22
+    ; Copy a row of the object attributes
+    call CopyObjectRowToBGMap                     ; $22BD: $CD $14 $22
     ld   a, b                                     ; $22C0: $78
     ldh  [hMultiPurposeB], a                               ; $22C1: $E0 $E2
     ld   a, c                                     ; $22C3: $79
@@ -4152,19 +4193,21 @@ DoUpdateBGRegion::
     ld   a, e                                     ; $22C9: $7B
     ldh  [hMultiPurposeE], a                               ; $22CA: $E0 $E5
     ; Restore state
-    call SwitchToMapDataBank                      ; $22CC: $CD $05 $39
+    call SwitchToObjectsTilemapBank               ; $22CC: $CD $05 $39
     pop  de                                       ; $22CF: $D1
     pop  bc                                       ; $22D0: $C1
+.verticalTileAttributesEnd
 
-.verticalIncrementEnd
-    jr   .incrementEnd                            ; $22D1: $18 $2B
+    jr   .horizontalTileAttributesEnd             ; $22D1: $18 $2B
 
 .horizontalRoomTransition
-    call IncrementBGMapSourceAndDestination_Horizontal ; $22D3: $CD $24 $22
+    ; Copy a column of the object tilemap
+    call CopyObjectColumnToBGMap                  ; $22D3: $CD $24 $22
+
     ; If IsGBC…
     ldh  a, [hIsGBC]                              ; $22D6: $F0 $FE
     and  a                                        ; $22D8: $A7
-    jr   z, .incrementEnd                         ; $22D9: $28 $23
+    jr   z, .horizontalTileAttributesEnd          ; $22D9: $28 $23
     ; Load BG palette data
     push bc                                       ; $22DB: $C5
     push de                                       ; $22DC: $D5
@@ -4172,7 +4215,8 @@ DoUpdateBGRegion::
     ; Select BG attributes bank
     ldh  a, [hMultiPurpose8]                      ; $22E5: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $22E7: $EA $00 $21
-    call IncrementBGMapSourceAndDestination_Horizontal ; $22EA: $CD $24 $22
+    ; Copy a column of the object attributes
+    call CopyObjectColumnToBGMap                  ; $22EA: $CD $24 $22
     ld   a, b                                     ; $22ED: $78
     ldh  [hMultiPurposeB], a                               ; $22EE: $E0 $E2
     ld   a, c                                     ; $22F0: $79
@@ -4182,11 +4226,10 @@ DoUpdateBGRegion::
     ld   a, e                                     ; $22F6: $7B
     ldh  [hMultiPurposeE], a                               ; $22F7: $E0 $E5
     ; Cleanup
-    call SwitchToMapDataBank                      ; $22F9: $CD $05 $39
+    call SwitchToObjectsTilemapBank               ; $22F9: $CD $05 $39
     pop  de                                       ; $22FC: $D1
     pop  bc                                       ; $22FD: $C1
-
-.incrementEnd
+.horizontalTileAttributesEnd
 
     push bc                                       ; $22FE: $C5
     ; Increment BG destination address
@@ -5554,7 +5597,7 @@ doCopyObjectToBG:
 
     callsb GetBGAttributesAddressForObject        ; $3023: $3E $1A $EA $00 $21 $CD $76 $65
 
-    call SwitchToMapDataBank                      ; $302B: $CD $05 $39
+    call SwitchToObjectsTilemapBank               ; $302B: $CD $05 $39
 
     ;
     ; Select the base address for the source tile map
@@ -5608,7 +5651,7 @@ doCopyObjectToBG:
     ; Restore RAM and ROM banks
     xor  a                                        ; $3068: $AF
     ld   [rVBK], a                                ; $3069: $E0 $4F
-    call SwitchToMapDataBank                      ; $306B: $CD $05 $39
+    call SwitchToObjectsTilemapBank               ; $306B: $CD $05 $39
 
     ; Update palette offset
     ld   a, h                                     ; $306E: $7C
@@ -5644,7 +5687,7 @@ doCopyObjectToBG:
     ; Restore RAM and ROM banks
     xor  a                                        ; $3094: $AF
     ld   [rVBK], a                                ; $3095: $E0 $4F
-    call SwitchToMapDataBank                      ; $3097: $CD $05 $39
+    call SwitchToObjectsTilemapBank               ; $3097: $CD $05 $39
 
     ret                                           ; $309A: $C9
 
@@ -5654,7 +5697,7 @@ doCopyObjectToBG:
 ; of having a sliding screen transition.)
 ; (called by LoadRequestedGfx)
 LoadRoomTilemap:
-    call SwitchToMapDataBank                      ; $309B: $CD $05 $39
+    call SwitchToObjectsTilemapBank               ; $309B: $CD $05 $39
     call SwitchBank                               ; $309E: $CD $0C $08
     ld   de, vBGMap0                              ; $30A1: $11 $00 $98
     ld   hl, wRoomObjects                         ; $30A4: $21 $11 $D7
@@ -7437,7 +7480,7 @@ LoadWorldMapBGMap_trampoline::
     callsb LoadWorldMapBGMap                      ; $38FC: $3E $20 $EA $00 $21 $CD $8B $58
     ret                                           ; $3904: $C9
 
-SwitchToMapDataBank::
+SwitchToObjectsTilemapBank::
     ; mapBank = (IsIndoor ? $08 : $1A)
     ld   a, [wIsIndoor]                           ; $3905: $FA $A5 $DB
     and  a                                        ; $3908: $A7
@@ -7445,7 +7488,7 @@ SwitchToMapDataBank::
     ld   a, BANK(OverworldObjectsTilemapDMG)      ; $390B: $3E $1A
     jr   .end                                     ; $390D: $18 $02
 .indoor
-    ld   a, $08                                   ; $390F: $3E $08
+    ld   a, BANK(IndoorObjectsTilemapDMG)         ; $390F: $3E $08
 .end
     ; Switch to map bank
     ld   [MBC3SelectBank], a                      ; $3911: $EA $00 $21

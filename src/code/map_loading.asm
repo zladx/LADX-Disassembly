@@ -58,9 +58,9 @@ GetBGAttributesAddressForObject::
     ld   a, BANK(IndoorsBGAttributesA)            ; $659E: $3E $23
     ldh  [hMultiPurpose8], a                      ; $65A0: $E0 $DF
 
+    ; Use the attributes group pointer for indoors
     ; hl += $200
-    ; Assertions were introduced in rgbds 0.4.0
-    ; ASSERT OverworldBGAttributesPointers + $200 == IndoorsBGAttributesPointers
+    ASSERT OverworldBGAttributesPointers + $200 == IndoorsBGAttributesPointers
     inc  h                                        ; $65A2: $24
     inc  h                                        ; $65A3: $24
 
@@ -71,7 +71,7 @@ GetBGAttributesAddressForObject::
     cp   MAP_COLOR_DUNGEON                        ; $65A8: $FE $FF
     jr   nz, .colorDungeonEnd                     ; $65AA: $20 $06
 
-    ; Set palette pointers base for color dungeon
+    ; Use the attributes group pointer for color dungeon
     ld   hl, ColorDungeonBGAttributes             ; $65AC: $21 $00 $60
     jp   .loadPalettesAdress                      ; $65AF: $C3 $36 $66
 .colorDungeonEnd
@@ -177,9 +177,11 @@ GetBGAttributesAddressForObject::
 
 .indoorPaletteEnd
 
-    ; Load adress of palettes table
+    ;
+    ; Load adress of object attributes group
+    ;
 
-    ; bc = OverworldBGAttributesPointers[hMapId * 2]
+    ; bc = attributes-group-table[hMapId * 2]
     add  hl, bc                                   ; $6630: $09
     ld   c, [hl]                                  ; $6631: $4E
     inc  hl                                       ; $6632: $23

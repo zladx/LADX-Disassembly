@@ -284,7 +284,7 @@ OverworldRoomsSecondHalf::
 include "data/rooms/overworld_b.asm"
 include "data/object_attributes/pointers.asm"
 include "data/object_attributes/overworld_banks.asm"
-include "code/map_loading.asm"
+include "code/object_attributes.asm"
 OverworldObjectsTilemapDMG::
 include "data/objects_tilemaps/overworld.dmg.asm"
 OverworldObjectsTilemapCGB::

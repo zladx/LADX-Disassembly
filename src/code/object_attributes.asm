@@ -1,5 +1,3 @@
-; Map-loading routines called from bank0
-
 ; Retrieve the address of the BG attributes for a given object.
 ;
 ; BG attributes are represented by 4 bytes; each byte is a BG

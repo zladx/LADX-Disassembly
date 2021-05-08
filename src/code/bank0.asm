@@ -1105,94 +1105,103 @@ SelectRoomTilesets::
     ; ------------------------------------------------------------
     ;
     ; Select the new OAM tileset
-    ; Main theme is data_020_70D3. Final subset is selected by the room/scene
-    ; TODO: multible iterations of commenting needed. This code is total spagetti.
     ;
+    ; First lookup the spritesheet group index for the room.
+    ; Then this group index references a 4-bytes value, where each
+    ; byte is a spritesheet.
     ; ------------------------------------------------------------
 
-    ; $hMultiPurpose0 = 0
+    ; [hMultiPurpose0] = 0
     xor  a                                        ; $0D91: $AF
     ldh  [hMultiPurpose0], a                      ; $0D92: $E0 $D7
-    ; e = $hMapRoom
+    ; de = [hMapRoom]
     ldh  a, [hMapRoom]                            ; $0D94: $F0 $F6
     ld   e, a                                     ; $0D96: $5F
-    ; d = 0, but never used
     ld   d, $00                                   ; $0D97: $16 $00
-    ; hl points to tileset data_020_70D3
-    ld   hl, data_020_70D3                        ; $0D99: $21 $D3 $70
-    ; d = $wIsIndoor
+    ; Data starts at RoomSpritesheetGroupsTable
+    ld   hl, RoomSpritesheetGroupsTable           ; $0D99: $21 $D3 $70
+    ; If indoors, add $100 to de
     ld   a, [wIsIndoor]                           ; $0D9C: $FA $A5 $DB
     ld   d, a                                     ; $0D9F: $57
-    ; inc d if MAP_EAGLES_TOWER <= $hMapId > $1A
+    ; If the map uses rooms in the indoors_b rooms group, add $100 to de again
     ldh  a, [hMapId]                              ; $0DA0: $F0 $F7
-    ; TODO: for which MAP does $1A stands for? Also edit 2 lines above
-    cp   $1A                                      ; $0DA2: $FE $1A
-    jr   nc, .skipIncD                            ; $0DA4: $30 $05
-    cp   MAP_EAGLES_TOWER                         ; $0DA6: $FE $06
-    jr   c, .skipIncD                             ; $0DA8: $38 $01
+    cp   MAP_INDOORS_B_END                        ; $0DA2: $FE $1A
+    jr   nc, .indoorsBEnd                         ; $0DA4: $30 $05
+    cp   MAP_INDOORS_B_START                      ; $0DA6: $FE $06
+    jr   c, .indoorsBEnd                          ; $0DA8: $38 $01
     inc  d                                        ; $0DAA: $14
+.indoorsBEnd
 
-.skipIncD
-    ; hl = $data_020_70D3 + room-offset
+    ; Read the spritesheet group for the room.
+    ; e = RoomSpritesheetGroupsTable[de + roomId]
     add  hl, de                                   ; $0DAB: $19
     ld   e, [hl]                                  ; $0DAC: $5E
-    ; If on the overworld, jump to on_overworld
+
+    ; Special cases for the spritesheet group
+
+    ; If not the overworld…
     ld   a, d                                     ; $0DAD: $7A
     and  a                                        ; $0DAE: $A7
-    jr   z, .label_DC1_on_overworld               ; $0DAF: $28 $10
-    ; If inside the camera shop…
+    jr   z, .oamTilesetOnOverworld                ; $0DAF: $28 $10
+    ; …and inside the camera shop…
     ldh  a, [hMapId]                              ; $0DB1: $F0 $F7
     cp   MAP_HOUSE                                ; $0DB3: $FE $10
-    jr   nz, .label_DDB                           ; $0DB5: $20 $24
+    jr   nz, .spritesheetGroupDone                ; $0DB5: $20 $24
     ldh  a, [hMapRoom]                            ; $0DB7: $F0 $F6
     cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $0DB9: $FE $B5
-    jr   nz, .label_DDB                           ; $0DBB: $20 $1E
+    jr   nz, .spritesheetGroupDone                ; $0DBB: $20 $1E
     ; e = 0x3D
     ld   e, $3D                                   ; $0DBD: $1E $3D
-    jr   .label_DDB                               ; $0DBF: $18 $1A
+    jr   .spritesheetGroupDone                    ; $0DBF: $18 $1A
 
-.label_DC1_on_overworld
+.oamTilesetOnOverworld
     ld   a, e                                     ; $0DC1: $7B
     cp   $23                                      ; $0DC2: $FE $23
-    jr   nz, .label_DCE                           ; $0DC4: $20 $08
-    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_C9] ; $0DC6: $FA $C9 $D8
-    and  $20                                      ; $0DC9: $E6 $20
-    jr   z, .label_DCE                            ; $0DCB: $28 $01
+    jr   nz, .sirenRoomEnd                        ; $0DC4: $20 $08
+    ld   a, [wOverworldRoomStatus + ROOM_OW_SIREN] ; $0DC6: $FA $C9 $D8
+    and  OW_ROOM_STATUS_OWL_TALKED                ; $0DC9: $E6 $20
+    jr   z, .sirenRoomEnd                         ; $0DCB: $28 $01
     inc  e                                        ; $0DCD: $1C
+.sirenRoomEnd
 
-.label_DCE
     ld   a, e                                     ; $0DCE: $7B
     cp   $21                                      ; $0DCF: $FE $21
-    jr   nz, .label_DDB                           ; $0DD1: $20 $08
-    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_FD] ; $0DD3: $FA $FD $D8
+    jr   nz, .spritesheetGroupDone                ; $0DD1: $20 $08
+    ld   a, [wOverworldRoomStatus + ROOM_OW_WALRUS] ; $0DD3: $FA $FD $D8
     and  $20                                      ; $0DD6: $E6 $20
-    jr   z, .label_DDB                            ; $0DD8: $28 $01
+    jr   z, .spritesheetGroupDone                 ; $0DD8: $28 $01
     inc  e                                        ; $0DDA: $1C
 
-.label_DDB
+.spritesheetGroupDone
+
+    ; Compute the starting address of the 4 spritesheets ids
+
+    ; de = e * 4
     ld   d, $00                                   ; $0DDB: $16 $00
     sla  e                                        ; $0DDD: $CB $23
     rl   d                                        ; $0DDF: $CB $12
     sla  e                                        ; $0DE1: $CB $23
     rl   d                                        ; $0DE3: $CB $12
+
+    ; On the Color Dungeon, spritesheets are loaded in a different way. Exit now.
     ldh  a, [hMapId]                              ; $0DE5: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $0DE7: $FE $FF
     jr   nz, .useStandardSpritesheetsTables       ; $0DE9: $20 $06
     ld   a, TRUE                                  ; $0DEB: $3E $01
     ldh  [hNeedsUpdatingEntityTilesA], a          ; $0DED: $E0 $91
     jr   .return                                  ; $0DEF: $18 $40
-
 .useStandardSpritesheetsTables
+    ; Select which spritesheets table to use (overworld or indoors)
     ld   hl, OverworldEntitySpritesheetsTable     ; $0DF1: $21 $F3 $73
     ld   a, [wIsIndoor]                           ; $0DF4: $FA $A5 $DB
     and  a                                        ; $0DF7: $A7
     jr   z, .spritesheetsTableEnd                 ; $0DF8: $28 $03
     ld   hl, IndoorEntitySpritesheetsTable        ; $0DFA: $21 $3B $76
-
 .spritesheetsTableEnd
+
+    ; Make hl point at the first of the 4-bytes spritesheets
+    ; hl = spritesheets-table[spritesheet-group]
     add  hl, de                                   ; $0DFD: $19
-    ld   d, $00                                   ; $0DFE: $16 $00
-    ld   bc, wLoadedEntitySpritesheets            ; $0E00: $01 $93 $C1
 
     ; ------------------------------------------------------------
     ;
@@ -1208,6 +1217,9 @@ SelectRoomTilesets::
     ; that are not loaded yet. (If more than two spritesheets are different,
     ; only the last two ones are scheduled.)
     ;
+
+    ld   d, $00                                   ; $0DFE: $16 $00
+    ld   bc, wLoadedEntitySpritesheets            ; $0E00: $01 $93 $C1
 
 .loop
     ld   e, [hl]                                  ; $0E03: $5E

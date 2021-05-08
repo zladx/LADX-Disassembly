@@ -3282,7 +3282,7 @@ jr_007_55CD:
     add  hl, bc                                   ; $55D2: $09
     ld   [hl], a                                  ; $55D3: $77
     ldh  a, [hMapRoom]                            ; $55D4: $F0 $F6
-    cp   UNKNOWN_ROOM_C9                          ; $55D6: $FE $C9
+    cp   ROOM_OW_SIREN                            ; $55D6: $FE $C9
     jr   nz, jr_007_55DF                          ; $55D8: $20 $05
 
     ld   a, $04                                   ; $55DA: $3E $04

@@ -1,5 +1,6 @@
 ; TODO: convert this to proper references to the BG attributes data
 
+; Object attributes groups for Overworld rooms, indexed by hRoomId.
 OverworldBGAttributesPointers::
     dw Data_025_7400, Data_025_7400, Data_025_7400, Data_025_7400, Data_025_7400, Data_025_7400, Data_027_5620, Data_027_5620, Data_027_5A20, Data_027_5A20, Data_027_5A20, Data_027_5A20, Data_027_6240, Data_027_5A20, Data_027_5E40, Data_027_5E40
     dw Data_025_7400, Data_025_7800, Data_025_7400, Data_025_7400, Data_025_7400, Data_025_7400, Data_027_5620, Data_027_5620, Data_027_5A20, Data_027_5A20, Data_027_6240, Data_027_6240, Data_027_6240, Data_027_5A20, Data_027_5A20, Data_027_5A20
@@ -18,6 +19,7 @@ OverworldBGAttributesPointers::
     dw Data_022_5000, Data_022_5000, Data_022_5000, Data_022_5000, Data_022_5000, Data_022_5000, Data_022_6400, Data_022_6400, Data_022_6400, Data_022_6400, Data_022_6400, Data_022_6400, Data_022_6800, Data_022_6800, Data_022_6C00, Data_022_6C00
     dw Data_022_5000, Data_022_5000, Data_022_5000, Data_022_5000, Data_022_5000, Data_022_5000, Data_022_6400, Data_022_6400, Data_022_6400, Data_022_6400, Data_022_6400, Data_022_6400, Data_022_6800, Data_022_6800, Data_022_6C00, Data_022_6C00
 
+; Object attributes groups for Indoor rooms, indexed by hRoomId.
 IndoorsBGAttributesPointers:
     dw $4000
     dw $4400

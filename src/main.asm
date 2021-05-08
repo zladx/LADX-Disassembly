@@ -282,8 +282,8 @@ include "code/entities/bank19.asm"
 section "bank1A",romx[$4000],bank[$1A]
 OverworldRoomsSecondHalf::
 include "data/rooms/overworld_b.asm"
-include "data/bg_attributes/overworld_pointers.asm"
-include "data/bg_attributes/overworld_banks.asm"
+include "data/object_attributes/overworld_pointers.asm"
+include "data/object_attributes/overworld_banks.asm"
 include "code/map_loading.asm"
 OverworldObjectsTilemapDMG::
 include "data/objects_tilemaps/overworld.dmg.asm"
@@ -335,27 +335,27 @@ section "bank21",romx[$4000],bank[$21]
 include "code/palettes.asm"
 
 section "bank22",romx[$4000],bank[$22]
-include "data/bg_attributes/overworld_a.asm"
+include "data/object_attributes/overworld_a.asm"
 
 section "bank23",romx[$4000],bank[$23]
-include "data/bg_attributes/indoors_a.asm"
+include "data/object_attributes/indoors_a.asm"
 include "code/bank23.asm"
 
 section "bank24",romx[$4000],bank[$24]
-include "data/bg_attributes/indoors_b.asm"
+include "data/object_attributes/indoors_b.asm"
 include "code/background_colors.asm"
 include "data/backgrounds/palettes.asm"
 include "code/overworld_macros.asm"
 
 section "bank25",romx[$4000],bank[$25]
-include "data/bg_attributes/overworld_b.asm"
+include "data/object_attributes/overworld_b.asm"
 
 section "bank26",romx[$4000],bank[$26]
 include "data/rooms_gbc_overlays/overworld_a.asm"
 
 section "bank27",romx[$4000],bank[$27]
 include "data/rooms_gbc_overlays/overworld_b.asm"
-include "data/bg_attributes/overworld_c.asm"
+include "data/object_attributes/overworld_c.asm"
 include "code/bank27.asm"
 
 section "bank28",romx[$4000],bank[$28]

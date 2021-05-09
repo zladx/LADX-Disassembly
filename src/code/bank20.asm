@@ -942,7 +942,7 @@ func_020_4A22::
     ldh  [hMultiPurposeE], a                           ; $4A73: $E0 $E5
     ret                                           ; $4A75: $C9
 
-; Configures an async data request to copy background tilemap
+; Configures an async data request to copy BG tilemap
 func_020_4A76::
     ld   a, [wRoomTransitionDirection]            ; $4A76: $FA $25 $C1
     ld   c, a                                     ; $4A79: $4F
@@ -951,17 +951,19 @@ func_020_4A76::
     ldh  [hMultiPurpose2], a                      ; $4A7F: $E0 $D9
     ld   hl, Data_020_49EC                        ; $4A81: $21 $EC $49
     add  hl, bc                                   ; $4A84: $09
+
     ldh  a, [hIsGBC]                              ; $4A85: $F0 $FE
     and  a                                        ; $4A87: $A7
-    jr   nz, jr_020_4A8F                          ; $4A88: $20 $05
+    jr   nz, .gbc                                 ; $4A88: $20 $05
 
+    ; DMG
     call func_020_49F4                            ; $4A8A: $CD $F4 $49
-    jr   jr_020_4A92                              ; $4A8D: $18 $03
-
-jr_020_4A8F:
+    jr   .return                                  ; $4A8D: $18 $03
+.gbc
+    ; GBC
     call func_020_4A22                            ; $4A8F: $CD $22 $4A
 
-jr_020_4A92:
+.return
     ret                                           ; $4A92: $C9
 
 Data_020_4A93::

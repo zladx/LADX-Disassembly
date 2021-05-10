@@ -418,7 +418,7 @@ jr_002_43E6:
     ld   a, [wConsecutiveStepsCount]                               ; $43E6: $FA $20 $C1
     add  $02                                      ; $43E9: $C6 $02
     ld   [wConsecutiveStepsCount], a                               ; $43EB: $EA $20 $C1
-    call func_1756                                ; $43EE: $CD $56 $17
+    call DisplayTransientVfxForLinkRunning        ; $43EE: $CD $56 $17
     jp   label_002_4464                           ; $43F1: $C3 $64 $44
 
 jr_002_43F4:
@@ -5499,7 +5499,7 @@ jr_002_6A24:
     ld   a, [wConsecutiveStepsCount]              ; $6A30: $FA $20 $C1
     add  $02                                      ; $6A33: $C6 $02
     ld   [wConsecutiveStepsCount], a              ; $6A35: $EA $20 $C1
-    call func_1756                                ; $6A38: $CD $56 $17
+    call DisplayTransientVfxForLinkRunning        ; $6A38: $CD $56 $17
     jp   label_002_6ADB                           ; $6A3B: $C3 $DB $6A
 
 jr_002_6A3E:

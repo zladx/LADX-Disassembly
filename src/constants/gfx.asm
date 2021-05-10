@@ -83,6 +83,7 @@ OBJECT_STEPS                equ $E0
 OBJECT_GROUND_HOLE          equ $E8
 OBJECT_ROCKY_CAVE_DOOR      equ $E1
 OBJECT_CAVE_DOOR            equ $E3
+OBJECT_PIT                  equ $E8
 OBJECT_WATERFALL            equ $E9
 ; Overworld macros
 OBJECT_MACRO_F5             equ $F5

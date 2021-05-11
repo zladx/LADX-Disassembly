@@ -366,6 +366,10 @@ wC145::
   ds 1 ; C145
 
 ; Is Link in the air (jumping with the feather, flying with roaster, etc)?
+; Possible values:
+; 0 = not in the air
+; 1 = ?
+; 2 = above a pit?
 wIsLinkInTheAir::
   ds 1 ; C146
 

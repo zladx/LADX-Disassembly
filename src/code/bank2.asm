@@ -5250,35 +5250,37 @@ Data_002_68B4::
     db   $FF, $00, $01
 
 jp_002_68B7::
+    ; Return if Link is not in the air, and it's interactive motion is blocked.
     ld   a, [wIsLinkInTheAir]                     ; $68B7: $FA $46 $C1
     and  a                                        ; $68BA: $A7
-    jr   nz, jr_002_68C7                          ; $68BB: $20 $0A
+    jr   nz, .notInTheAirEnd                      ; $68BB: $20 $0A
 
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $68BD: $F0 $A1
     cp   $01                                      ; $68BF: $FE $01
-    jr   z, jr_002_68E3                           ; $68C1: $28 $20
+    jr   z, .return                               ; $68C1: $28 $20
 
     cp   $02                                      ; $68C3: $FE $02
-    jr   z, jr_002_68E3                           ; $68C5: $28 $1C
+    jr   z, .return                               ; $68C5: $28 $1C
+.notInTheAirEnd
 
-jr_002_68C7:
     ld   a, [wC13E]                               ; $68C7: $FA $3E $C1
     and  a                                        ; $68CA: $A7
     jr   z, jr_002_68E4                           ; $68CB: $28 $17
 
+    ; Decrement wC13E
     dec  a                                        ; $68CD: $3D
     ld   [wC13E], a                               ; $68CE: $EA $3E $C1
     call UpdateFinalLinkPosition                  ; $68D1: $CD $A8 $21
     call CheckPositionForMapTransition            ; $68D4: $CD $75 $6C
     ldh  a, [hFF9C]                               ; $68D7: $F0 $9C
     cp   $02                                      ; $68D9: $FE $02
-    jr   z, jr_002_68E3                           ; $68DB: $28 $06
+    jr   z, .return                               ; $68DB: $28 $06
 
     ldh  a, [hLinkSpeedY]                         ; $68DD: $F0 $9B
     add  $03                                      ; $68DF: $C6 $03
     ldh  [hLinkSpeedY], a                         ; $68E1: $E0 $9B
 
-jr_002_68E3:
+.return
     ret                                           ; $68E3: $C9
 
 jr_002_68E4:
@@ -7621,12 +7623,17 @@ jr_002_75E7:
     cp   $E0                                      ; $75F1: $FE $E0
     jr   nz, jr_002_7635                          ; $75F3: $20 $40
 
+; Hurt Link when bumbing into spikes?
+; Makes Link recoil, and lose one heart
 func_002_75F5::
+    ; If already fallen, return
     ld   a, [wInvincibilityCounter]               ; $75F5: $FA $C7 $DB
     and  a                                        ; $75F8: $A7
-    jr   nz, jr_002_7634                          ; $75F9: $20 $39
+    jr   nz, .return                              ; $75F9: $20 $39
 
     call ResetSpinAttack                          ; $75FB: $CD $AF $0C
+
+    ; Invert Link speed
     ldh  a, [hLinkSpeedX]                         ; $75FE: $F0 $9A
     cpl                                           ; $7600: $2F
     inc  a                                        ; $7601: $3C
@@ -7635,30 +7642,40 @@ func_002_75F5::
     cpl                                           ; $7606: $2F
     inc  a                                        ; $7607: $3C
     ldh  [hLinkSpeedY], a                         ; $7608: $E0 $9B
+
+    ; Mark Link as in the air
     ld   a, $02                                   ; $760A: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $760C: $EA $46 $C1
+
+    ; If in top-view…
     ldh  a, [hIsSideScrolling]                    ; $760F: $F0 $F9
     and  a                                        ; $7611: $A7
-    jr   nz, jr_002_761E                          ; $7612: $20 $0A
-
+    jr   nz, .topViewEnd                          ; $7612: $20 $0A
+    ; … move Link slighly above the ground
     ld   a, $10                                   ; $7614: $3E $10
     ldh  [hLinkVelocityZ], a                               ; $7616: $E0 $A3
     ldh  a, [hLinkPositionZ]                      ; $7618: $F0 $A2
     add  $02                                      ; $761A: $C6 $02
     ldh  [hLinkPositionZ], a                      ; $761C: $E0 $A2
+.topViewEnd
 
-jr_002_761E:
     ld   a, $10                                   ; $761E: $3E $10
     ld   [wC13E], a                               ; $7620: $EA $3E $C1
+
+    ; Make Link invicible during 48 frames
     ld   a, $30                                   ; $7623: $3E $30
     ld   [wInvincibilityCounter], a               ; $7625: $EA $C7 $DB
+
+    ; Loose one full heart
     ld   a, [wSubtractHealthBuffer]               ; $7628: $FA $94 $DB
     add  $04                                      ; $762B: $C6 $04
     ld   [wSubtractHealthBuffer], a               ; $762D: $EA $94 $DB
+
+    ; Play the "hurt" sfx
     ld   a, WAVE_SFX_LINK_HURT                    ; $7630: $3E $03
     ldh  [hWaveSfx], a                            ; $7632: $E0 $F3
 
-jr_002_7634:
+.return
     ret                                           ; $7634: $C9
 
 jr_002_7635:

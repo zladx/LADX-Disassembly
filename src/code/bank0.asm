@@ -3936,16 +3936,19 @@ UpdateFinalLinkPosition::
     ld   c, $00                                   ; $21B2: $0E $00
     ldh  [hMultiPurpose0], a                      ; $21B4: $E0 $D7
 
+; Update Link position from its speed, in either horizontal
+; or vertical direction.
+;
 ; Inputs:
 ;   c : direction (0: horizontal ; 1: vertical)
 ComputeLinkPosition::
-    ; b = 0
+    ; Read hLinkSpeedX or hLinkSpeedY (depending on the direction)
     ld   b, $00                                   ; $21B6: $06 $00
-    ; a = [hLinkSpeedX + direction]
     ld   hl, hLinkSpeedX                          ; $21B8: $21 $9A $FF
     add  hl, bc                                   ; $21BB: $09
     ld   a, [hl]                                  ; $21BC: $7E
 
+    ; Write swap(speed) & $F0 to wC11A or wC11B (depending on the direction)
     push af                                       ; $21BD: $F5
     swap a                                        ; $21BE: $CB $37
     and  $F0                                      ; $21C0: $E6 $F0
@@ -3955,17 +3958,21 @@ ComputeLinkPosition::
     ld   [hl], a                                  ; $21C7: $77
 
     rl   d                                        ; $21C8: $CB $12
-    ; hl = [hLinkPositionX + direction]
+
+    ; hl = hLinkPositionX or hLinkPositionY
     ld   hl, hLinkPositionX                       ; $21CA: $21 $98 $FF
     add  hl, bc                                   ; $21CD: $09
 
     pop  af                                       ; $21CE: $F1
+
+    ; e = speed mask (avoids the speed from overflowing the max speed, and wrap around)
     ld   e, $00                                   ; $21CF: $1E $00
     bit  7, a                                     ; $21D1: $CB $7F
-    jr   z, .label_21D7                           ; $21D3: $28 $02
+    jr   z, .positiveSpeedEnd                     ; $21D3: $28 $02
     ld   e, $F0                                   ; $21D5: $1E $F0
-.label_21D7
+.positiveSpeedEnd
 
+    ; Add the speed to the horizontal or vertical position
     swap a                                        ; $21D7: $CB $37
     and  $0F                                      ; $21D9: $E6 $0F
     or   e                                        ; $21DB: $B3

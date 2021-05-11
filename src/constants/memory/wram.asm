@@ -165,16 +165,20 @@ wC118:
 wC119:
   ds 1 ; C119
 
-; Unlabeled
-wC11A:
+; Written when updating Link's X position from its speed,
+; but never read again.
+; (unused)
+wC11A:;
   ds 1 ; C11A
 
-; Unlabeled
-wC11B:
+; Written when updating Link's Y position from its speed,
+; but never read again.
+; (unused)
+wC11B:;
   ds 1 ; C11B
 
 ; See LINK_MOTION_* constants for possible values.
-wLinkMotionState:
+wLinkMotionState:;
   ds 1 ; C11C
 
 ; Unlabeled

@@ -1146,7 +1146,7 @@ func_015_499C::
     ld   hl, wEntitiesSpeedXTable                 ; $49A4: $21 $40 $C2
     add  hl, bc                                   ; $49A7: $09
     ld   a, [hl]                                  ; $49A8: $7E
-    ldh  [hLinkPositionXIncrement], a             ; $49A9: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $49A9: $E0 $9A
     ld   a, $28                                   ; $49AB: $3E $28
     ld   [wC13E], a                               ; $49AD: $EA $3E $C1
     ld   a, $40                                   ; $49B0: $3E $40
@@ -1610,7 +1610,7 @@ label_015_4DB5:
     ld   a, $30                                   ; $4DE9: $3E $30
     call GetVectorTowardsLink_trampoline          ; $4DEB: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $4DEE: $F0 $D7
-    ldh  [hLinkPositionYIncrement], a             ; $4DF0: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $4DF0: $E0 $9B
 
 jr_015_4DF2:
     call UpdateEntityYPosWithSpeed_15             ; $4DF2: $CD $8B $7B
@@ -3735,14 +3735,14 @@ func_015_5E85::
     ld   a, $18                                   ; $5E89: $3E $18
     call GetVectorTowardsLink_trampoline          ; $5E8B: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $5E8E: $F0 $D7
-    ldh  [hLinkPositionYIncrement], a             ; $5E90: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $5E90: $E0 $9B
     cpl                                           ; $5E92: $2F
     inc  a                                        ; $5E93: $3C
     ld   hl, wEntitiesSpeedYTable                 ; $5E94: $21 $50 $C2
     add  hl, bc                                   ; $5E97: $09
     ld   [hl], a                                  ; $5E98: $77
     ldh  a, [hMultiPurpose1]                      ; $5E99: $F0 $D8
-    ldh  [hLinkPositionXIncrement], a             ; $5E9B: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $5E9B: $E0 $9A
     cpl                                           ; $5E9D: $2F
     inc  a                                        ; $5E9E: $3C
     ld   hl, wEntitiesSpeedXTable                 ; $5E9F: $21 $40 $C2
@@ -6224,9 +6224,9 @@ ENDC
     ld   a, $20                                   ; $7302: $3E $20
     call GetVectorTowardsLink_trampoline          ; $7304: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $7307: $F0 $D7
-    ldh  [hLinkPositionYIncrement], a             ; $7309: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $7309: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $730B: $F0 $D8
-    ldh  [hLinkPositionXIncrement], a             ; $730D: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $730D: $E0 $9A
     ld   a, $10                                   ; $730F: $3E $10
     ld   [wC13E], a                               ; $7311: $EA $3E $C1
     ld   a, $30                                   ; $7314: $3E $30
@@ -6728,11 +6728,11 @@ jr_015_7619:
     ld   hl, Data_015_75CE                        ; $762A: $21 $CE $75
     add  hl, de                                   ; $762D: $19
     ld   a, [hl]                                  ; $762E: $7E
-    ldh  [hLinkPositionXIncrement], a             ; $762F: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $762F: $E0 $9A
     ld   hl, Data_015_75D2                        ; $7631: $21 $D2 $75
     add  hl, de                                   ; $7634: $19
     ld   a, [hl]                                  ; $7635: $7E
-    ldh  [hLinkPositionYIncrement], a             ; $7636: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $7636: $E0 $9B
     ret                                           ; $7638: $C9
 
 jr_015_7639:
@@ -7961,9 +7961,9 @@ func_015_7D01::
     ld   a, $12                                   ; $7D2F: $3E $12
     ldh  [hLinkVelocityZ], a                               ; $7D31: $E0 $A3
     ld   a, $0C                                   ; $7D33: $3E $0C
-    ldh  [hLinkPositionXIncrement], a             ; $7D35: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $7D35: $E0 $9A
     xor  a                                        ; $7D37: $AF
-    ldh  [hLinkPositionYIncrement], a             ; $7D38: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $7D38: $E0 $9B
     ld   a, $00                                   ; $7D3A: $3E $00
     ldh  [hLinkDirection], a                      ; $7D3C: $E0 $9E
     ld   a, $01                                   ; $7D3E: $3E $01

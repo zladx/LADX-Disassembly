@@ -60,11 +60,11 @@ jr_018_7C21:
     ldh  a, [hMultiPurpose0]                      ; $7C26: $F0 $D7
     cpl                                           ; $7C28: $2F
     inc  a                                        ; $7C29: $3C
-    ldh  [hLinkPositionYIncrement], a             ; $7C2A: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $7C2A: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $7C2C: $F0 $D8
     cpl                                           ; $7C2E: $2F
     inc  a                                        ; $7C2F: $3C
-    ldh  [hLinkPositionXIncrement], a             ; $7C30: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $7C30: $E0 $9A
     push bc                                       ; $7C32: $C5
     call UpdateFinalLinkPosition                  ; $7C33: $CD $A8 $21
     pop  bc                                       ; $7C36: $C1

@@ -2336,7 +2336,7 @@ UseRocsFeather::
     ld   a, $E8                                   ; $14F6: $3E $E8
 
 .label_14F8
-    ldh  [hLinkPositionYIncrement], a             ; $14F8: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $14F8: $E0 $9B
     xor  a                                        ; $14FA: $AF
     ldh  [hLinkVelocityZ], a                   ; $14FB: $E0 $A3
     call UpdateFinalLinkPosition                  ; $14FD: $CD $A8 $21
@@ -2357,11 +2357,11 @@ UseRocsFeather::
     ld   hl, PegasusBootsJumpBoostXTable          ; $1515: $21 $C3 $14
     add  hl, de                                   ; $1518: $19
     ld   a, [hl]                                  ; $1519: $7E
-    ldh  [hLinkPositionXIncrement], a             ; $151A: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $151A: $E0 $9A
     ld   hl, PegasusBootsJumpBoostYTable          ; $151C: $21 $C7 $14
     add  hl, de                                   ; $151F: $19
     ld   a, [hl]                                  ; $1520: $7E
-    ldh  [hLinkPositionYIncrement], a             ; $1521: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $1521: $E0 $9B
     ret                                           ; $1523: $C9
 
 SwordRandomSfxTable::
@@ -2738,11 +2738,11 @@ UsePegasusBoots::
     ld   hl, XPositionIncrementPegasusRunning     ; $1743: $21 $FD $16
     add  hl, de                                   ; $1746: $19
     ld   a, [hl]                                  ; $1747: $7E
-    ldh  [hLinkPositionXIncrement], a             ; $1748: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $1748: $E0 $9A
     ld   hl, YPositionIncrementPegasusRunning     ; $174A: $21 $01 $17
     add  hl, de                                   ; $174D: $19
     ld   a, [hl]                                  ; $174E: $7E
-    ldh  [hLinkPositionYIncrement], a             ; $174F: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $174F: $E0 $9B
     xor  a                                        ; $1751: $AF
     ld   [wC1AC], a                               ; $1752: $EA $AC $C1
     ret                                           ; $1755: $C9
@@ -2788,8 +2788,8 @@ DisplayTransientVfxForLinkRunning::
 
 ClearLinkPositionIncrement::
     xor  a                                        ; $178E: $AF
-    ldh  [hLinkPositionXIncrement], a             ; $178F: $E0 $9A
-    ldh  [hLinkPositionYIncrement], a             ; $1791: $E0 $9B
+    ldh  [hLinkSpeedX], a                         ; $178F: $E0 $9A
+    ldh  [hLinkSpeedY], a                         ; $1791: $E0 $9B
     ret                                           ; $1793: $C9
 
 ; Animate Link motion?
@@ -3941,8 +3941,8 @@ UpdateFinalLinkPosition::
 ComputeLinkPosition::
     ; b = 0
     ld   b, $00                                   ; $21B6: $06 $00
-    ; a = [hLinkPositionXIncrement + direction]
-    ld   hl, hLinkPositionXIncrement              ; $21B8: $21 $9A $FF
+    ; a = [hLinkSpeedX + direction]
+    ld   hl, hLinkSpeedX                          ; $21B8: $21 $9A $FF
     add  hl, bc                                   ; $21BB: $09
     ld   a, [hl]                                  ; $21BC: $7E
 

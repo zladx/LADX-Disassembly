@@ -782,7 +782,7 @@ jr_005_5E67:
     ld   hl, Data_005_5E19                        ; $5E72: $21 $19 $5E
     add  hl, de                                   ; $5E75: $19
     ld   a, [hl]                                  ; $5E76: $7E
-    ld   hl, hLinkPositionXIncrement              ; $5E77: $21 $9A $FF
+    ld   hl, hLinkSpeedX                          ; $5E77: $21 $9A $FF
     sub  [hl]                                     ; $5E7A: $96
     and  a                                        ; $5E7B: $A7
     jr   z, jr_005_5EA3                           ; $5E7C: $28 $25
@@ -810,7 +810,7 @@ jr_005_5E8A:
     ld   hl, Data_005_5E17                        ; $5E94: $21 $17 $5E
     add  hl, de                                   ; $5E97: $19
     ld   a, [hl]                                  ; $5E98: $7E
-    ldh  [hLinkPositionXIncrement], a             ; $5E99: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $5E99: $E0 $9A
     push bc                                       ; $5E9B: $C5
     call UpdateFinalLinkPosition.horizontal       ; $5E9C: $CD $B2 $21
     call label_3E19                               ; $5E9F: $CD $19 $3E
@@ -1023,9 +1023,9 @@ func_005_5FA8::
     ld   hl, Data_005_5FA6                        ; $5FDA: $21 $A6 $5F
     add  hl, de                                   ; $5FDD: $19
     ld   a, [hl]                                  ; $5FDE: $7E
-    ldh  [hLinkPositionXIncrement], a             ; $5FDF: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $5FDF: $E0 $9A
     ld   a, $F0                                   ; $5FE1: $3E $F0
-    ldh  [hLinkPositionYIncrement], a             ; $5FE3: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $5FE3: $E0 $9B
     ld   hl, hLinkPositionY                       ; $5FE5: $21 $99 $FF
     dec  [hl]                                     ; $5FE8: $35
 

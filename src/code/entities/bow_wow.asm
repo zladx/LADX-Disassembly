@@ -696,8 +696,8 @@ func_005_43FE::
     cp   $80                                      ; $4403: $FE $80
     ret  z                                        ; $4405: $C8
 
-    ldh  a, [hLinkPositionYIncrement]             ; $4406: $F0 $9B
-    ld   hl, hLinkPositionXIncrement              ; $4408: $21 $9A $FF
+    ldh  a, [hLinkSpeedY]                         ; $4406: $F0 $9B
+    ld   hl, hLinkSpeedX                          ; $4408: $21 $9A $FF
     or   [hl]                                     ; $440B: $B6
     ld   hl, hLinkVelocityZ                                ; $440C: $21 $A3 $FF
     or   [hl]                                     ; $440F: $B6

@@ -752,9 +752,9 @@ func_005_52DB::
     ld   a, $12                                   ; $52FB: $3E $12
     ldh  [hLinkVelocityZ], a                               ; $52FD: $E0 $A3
     ld   a, $0C                                   ; $52FF: $3E $0C
-    ldh  [hLinkPositionXIncrement], a             ; $5301: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $5301: $E0 $9A
     xor  a                                        ; $5303: $AF
-    ldh  [hLinkPositionYIncrement], a             ; $5304: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $5304: $E0 $9B
     ld   a, $00                                   ; $5306: $3E $00
     ldh  [hLinkDirection], a                      ; $5308: $E0 $9E
     ldh  [hLinkInteractiveMotionBlocked], a       ; $530A: $E0 $A1

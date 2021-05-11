@@ -195,8 +195,8 @@ label_002_4287:
 
     xor  a                                        ; $42B8: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42B9: $E0 $A1
-    ldh  [hLinkPositionXIncrement], a             ; $42BB: $E0 $9A
-    ldh  [hLinkPositionYIncrement], a             ; $42BD: $E0 $9B
+    ldh  [hLinkSpeedX], a                         ; $42BB: $E0 $9A
+    ldh  [hLinkSpeedY], a                         ; $42BD: $E0 $9B
     ldh  [hLinkVelocityZ], a                               ; $42BF: $E0 $A3
     call LinkPlayingOcarinaHandler                ; $42C1: $CD $16 $4A
     jp   func_002_753A                            ; $42C4: $C3 $3A $75
@@ -336,16 +336,16 @@ MoveLinkToPressedButtonDirection::
     and  $0F                                      ; $437C: $E6 $0F
     or   e                                        ; $437E: $B3
     ld   e, a                                     ; $437F: $5F
-    ; hLinkPositionXIncrement = [HorizontalIncrementForLinkPosition + de]
+    ; hLinkSpeedX = [HorizontalIncrementForLinkPosition + de]
     ld   hl, HorizontalIncrementForLinkPosition   ; $4380: $21 $C5 $48
     add  hl, de                                   ; $4383: $19
     ld   a, [hl]                                  ; $4384: $7E
-    ldh  [hLinkPositionXIncrement], a             ; $4385: $E0 $9A
-    ; hLinkPositionYIncrement = [VerticalIncrementForLinkPosition + de]
+    ldh  [hLinkSpeedX], a                         ; $4385: $E0 $9A
+    ; hLinkSpeedY = [VerticalIncrementForLinkPosition + de]
     ld   hl, VerticalIncrementForLinkPosition     ; $4387: $21 $E5 $48
     add  hl, de                                   ; $438A: $19
     ld   a, [hl]                                  ; $438B: $7E
-    ldh  [hLinkPositionYIncrement], a             ; $438C: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $438C: $E0 $9B
     ret                                           ; $438E: $C9
 
 func_002_438F::
@@ -356,7 +356,7 @@ func_002_438F::
     ld   hl, HorizontalIncrementForLinkPosition   ; $4395: $21 $C5 $48
     add  hl, de                                   ; $4398: $19
     ld   a, [hl]                                  ; $4399: $7E
-    ld   hl, hLinkPositionXIncrement              ; $439A: $21 $9A $FF
+    ld   hl, hLinkSpeedX                          ; $439A: $21 $9A $FF
     sub  [hl]                                     ; $439D: $96
     jr   z, jr_002_43A7                           ; $439E: $28 $07
 
@@ -371,7 +371,7 @@ jr_002_43A7:
     ld   hl, VerticalIncrementForLinkPosition     ; $43A7: $21 $E5 $48
     add  hl, de                                   ; $43AA: $19
     ld   a, [hl]                                  ; $43AB: $7E
-    ld   hl, hLinkPositionYIncrement              ; $43AC: $21 $9B $FF
+    ld   hl, hLinkSpeedY                          ; $43AC: $21 $9B $FF
     sub  [hl]                                     ; $43AF: $96
     jr   z, jr_002_43B9                           ; $43B0: $28 $07
 
@@ -465,9 +465,9 @@ jr_002_442A:
     and  a                                        ; $442D: $A7
     jr   z, jr_002_443A                           ; $442E: $28 $0A
 
-    ld   hl, hLinkPositionXIncrement              ; $4430: $21 $9A $FF
+    ld   hl, hLinkSpeedX                          ; $4430: $21 $9A $FF
     sla  [hl]                                     ; $4433: $CB $26
-    ld   hl, hLinkPositionYIncrement              ; $4435: $21 $9B $FF
+    ld   hl, hLinkSpeedY                          ; $4435: $21 $9B $FF
     sla  [hl]                                     ; $4438: $CB $26
 
 jr_002_443A:
@@ -592,12 +592,12 @@ func_002_44C2::
     jr   z, jr_002_44E0                           ; $44D9: $28 $05
 
     xor  a                                        ; $44DB: $AF
-    ldh  [hLinkPositionYIncrement], a             ; $44DC: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $44DC: $E0 $9B
     jr   jr_002_44E3                              ; $44DE: $18 $03
 
 jr_002_44E0:
     xor  a                                        ; $44E0: $AF
-    ldh  [hLinkPositionXIncrement], a             ; $44E1: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $44E1: $E0 $9A
 
 jr_002_44E3:
     pop  af                                       ; $44E3: $F1
@@ -648,7 +648,7 @@ jr_002_4523:
     ld   d, $00                                   ; $452A: $16 $00
     ld   hl, Data_002_68B1                        ; $452C: $21 $B1 $68
     add  hl, de                                   ; $452F: $19
-    ldh  a, [hLinkPositionXIncrement]             ; $4530: $F0 $9A
+    ldh  a, [hLinkSpeedX]                         ; $4530: $F0 $9A
     sub  [hl]                                     ; $4532: $96
     jr   z, jr_002_4542                           ; $4533: $28 $0D
 
@@ -659,9 +659,9 @@ jr_002_4523:
     ld   e, $FF                                   ; $453B: $1E $FF
 
 jr_002_453D:
-    ldh  a, [hLinkPositionXIncrement]             ; $453D: $F0 $9A
+    ldh  a, [hLinkSpeedX]                         ; $453D: $F0 $9A
     add  e                                        ; $453F: $83
-    ldh  [hLinkPositionXIncrement], a             ; $4540: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $4540: $E0 $9A
 
 jr_002_4542:
     ldh  a, [hPressedButtonsMask]                 ; $4542: $F0 $CB
@@ -674,7 +674,7 @@ jr_002_4542:
     ld   d, $00                                   ; $454B: $16 $00
     ld   hl, Data_002_44E7                        ; $454D: $21 $E7 $44
     add  hl, de                                   ; $4550: $19
-    ldh  a, [hLinkPositionYIncrement]             ; $4551: $F0 $9B
+    ldh  a, [hLinkSpeedY]                         ; $4551: $F0 $9B
     sub  [hl]                                     ; $4553: $96
     jr   z, jr_002_4563                           ; $4554: $28 $0D
 
@@ -685,9 +685,9 @@ jr_002_4542:
     ld   e, $FF                                   ; $455C: $1E $FF
 
 jr_002_455E:
-    ldh  a, [hLinkPositionYIncrement]             ; $455E: $F0 $9B
+    ldh  a, [hLinkSpeedY]                         ; $455E: $F0 $9B
     add  e                                        ; $4560: $83
-    ldh  [hLinkPositionYIncrement], a             ; $4561: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $4561: $E0 $9B
 
 jr_002_4563:
     ldh  a, [hLinkPositionZ]                      ; $4563: $F0 $A2
@@ -1273,9 +1273,9 @@ LinkMotionJumpingHandler::
 
 jr_002_4978:
     ld   a, $FF                                   ; $4978: $3E $FF
-    ldh  [hLinkPositionYIncrement], a             ; $497A: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $497A: $E0 $9B
     xor  a                                        ; $497C: $AF
-    ldh  [hLinkPositionXIncrement], a             ; $497D: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $497D: $E0 $9A
     ldh  a, [hLinkPositionY]                      ; $497F: $F0 $99
     add  $08                                      ; $4981: $C6 $08
     ldh  [hLinkPositionY], a                      ; $4983: $E0 $99
@@ -2323,7 +2323,7 @@ jr_002_4FA1:
 jr_002_4FBB:
     add  hl, de                                   ; $4FBB: $19
     ld   a, [hl]                                  ; $4FBC: $7E
-    ld   hl, hLinkPositionXIncrement              ; $4FBD: $21 $9A $FF
+    ld   hl, hLinkSpeedX                          ; $4FBD: $21 $9A $FF
     sub  [hl]                                     ; $4FC0: $96
     jr   z, jr_002_4FCA                           ; $4FC1: $28 $07
 
@@ -2345,7 +2345,7 @@ jr_002_4FCA:
 jr_002_4FD7:
     add  hl, de                                   ; $4FD7: $19
     ld   a, [hl]                                  ; $4FD8: $7E
-    ld   hl, hLinkPositionYIncrement              ; $4FD9: $21 $9B $FF
+    ld   hl, hLinkSpeedY                          ; $4FD9: $21 $9B $FF
     sub  [hl]                                     ; $4FDC: $96
     jr   z, jr_002_4FE6                           ; $4FDD: $28 $07
 
@@ -2357,7 +2357,7 @@ jr_002_4FD7:
     dec  [hl]                                     ; $4FE5: $35
 
 jr_002_4FE6:
-    ldh  a, [hLinkPositionXIncrement]             ; $4FE6: $F0 $9A
+    ldh  a, [hLinkSpeedX]                         ; $4FE6: $F0 $9A
     or   [hl]                                     ; $4FE8: $B6
     ld   hl, hFF9C                                ; $4FE9: $21 $9C $FF
     or   [hl]                                     ; $4FEC: $B6
@@ -5274,9 +5274,9 @@ jr_002_68C7:
     cp   $02                                      ; $68D9: $FE $02
     jr   z, jr_002_68E3                           ; $68DB: $28 $06
 
-    ldh  a, [hLinkPositionYIncrement]             ; $68DD: $F0 $9B
+    ldh  a, [hLinkSpeedY]                         ; $68DD: $F0 $9B
     add  $03                                      ; $68DF: $C6 $03
-    ldh  [hLinkPositionYIncrement], a             ; $68E1: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $68E1: $E0 $9B
 
 jr_002_68E3:
     ret                                           ; $68E3: $C9
@@ -5332,7 +5332,7 @@ jr_002_692B:
     ld   hl, Data_002_68ED                        ; $694A: $21 $ED $68
     add  hl, de                                   ; $694D: $19
     ld   a, [hl]                                  ; $694E: $7E
-    ld   hl, hLinkPositionXIncrement              ; $694F: $21 $9A $FF
+    ld   hl, hLinkSpeedX                          ; $694F: $21 $9A $FF
     sub  [hl]                                     ; $6952: $96
     jr   z, jr_002_695C                           ; $6953: $28 $07
 
@@ -5347,7 +5347,7 @@ jr_002_695C:
     ld   hl, Data_002_68FD                        ; $695C: $21 $FD $68
     add  hl, de                                   ; $695F: $19
     ld   a, [hl]                                  ; $6960: $7E
-    ld   hl, hLinkPositionYIncrement              ; $6961: $21 $9B $FF
+    ld   hl, hLinkSpeedY                          ; $6961: $21 $9B $FF
     sub  [hl]                                     ; $6964: $96
     jr   z, jr_002_696E                           ; $6965: $28 $07
 
@@ -5410,7 +5410,7 @@ func_002_69A1::
     ld   hl, Data_002_68AB                        ; $69B4: $21 $AB $68
     add  hl, de                                   ; $69B7: $19
     ld   a, [hl]                                  ; $69B8: $7E
-    ldh  [hLinkPositionXIncrement], a             ; $69B9: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $69B9: $E0 $9A
     ldh  a, [hPressedButtonsMask]                 ; $69BB: $F0 $CB
     rra                                           ; $69BD: $1F
     rra                                           ; $69BE: $1F
@@ -5419,7 +5419,7 @@ func_002_69A1::
     ld   hl, Data_002_68AE                        ; $69C2: $21 $AE $68
     add  hl, de                                   ; $69C5: $19
     ld   a, [hl]                                  ; $69C6: $7E
-    ldh  [hLinkPositionYIncrement], a             ; $69C7: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $69C7: $E0 $9B
     ld   a, $02                                   ; $69C9: $3E $02
     ldh  [hLinkDirection], a                      ; $69CB: $E0 $9E
     ldh  a, [hPressedButtonsMask]                 ; $69CD: $F0 $CB
@@ -5528,7 +5528,7 @@ jr_002_6A4C:
 jr_002_6A64:
     ld   a, $0A                                   ; $6A64: $3E $0A
     ld   [wConsecutiveStepsCount], a              ; $6A66: $EA $20 $C1
-    ldh  a, [hLinkPositionXIncrement]             ; $6A69: $F0 $9A
+    ldh  a, [hLinkSpeedX]                         ; $6A69: $F0 $9A
     and  a                                        ; $6A6B: $A7
     jr   z, jr_002_6A73                           ; $6A6C: $28 $05
 
@@ -5545,7 +5545,7 @@ jr_002_6A73:
     ld   d, $00                                   ; $6A7A: $16 $00
     ld   hl, Data_002_68B1                        ; $6A7C: $21 $B1 $68
     add  hl, de                                   ; $6A7F: $19
-    ldh  a, [hLinkPositionXIncrement]             ; $6A80: $F0 $9A
+    ldh  a, [hLinkSpeedX]                         ; $6A80: $F0 $9A
     sub  [hl]                                     ; $6A82: $96
     jr   z, jr_002_6A92                           ; $6A83: $28 $0D
 
@@ -5556,9 +5556,9 @@ jr_002_6A73:
     ld   e, $FF                                   ; $6A8B: $1E $FF
 
 jr_002_6A8D:
-    ldh  a, [hLinkPositionXIncrement]             ; $6A8D: $F0 $9A
+    ldh  a, [hLinkSpeedX]                         ; $6A8D: $F0 $9A
     add  e                                        ; $6A8F: $83
-    ldh  [hLinkPositionXIncrement], a             ; $6A90: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $6A90: $E0 $9A
 
 jr_002_6A92:
     jr   label_002_6ADB                           ; $6A92: $18 $47
@@ -5583,7 +5583,7 @@ jr_002_6AAA:
     ld   hl, Data_002_68B1                        ; $6AB1: $21 $B1 $68
     add  hl, de                                   ; $6AB4: $19
     ld   a, [hl]                                  ; $6AB5: $7E
-    ldh  [hLinkPositionXIncrement], a             ; $6AB6: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $6AB6: $E0 $9A
     ld   hl, Data_002_68B4                        ; $6AB8: $21 $B4 $68
     add  hl, de                                   ; $6ABB: $19
     ld   a, [hl]                                  ; $6ABC: $7E
@@ -5663,9 +5663,9 @@ jr_002_6AFC:
 
 jr_002_6B1F:
     ld   a, $04                                   ; $6B1F: $3E $04
-    ldh  [hLinkPositionYIncrement], a             ; $6B21: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $6B21: $E0 $9B
     xor  a                                        ; $6B23: $AF
-    ldh  [hLinkPositionXIncrement], a             ; $6B24: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $6B24: $E0 $9A
 
 jr_002_6B26:
     ld   a, $02                                   ; $6B26: $3E $02
@@ -5682,14 +5682,14 @@ jr_002_6B32:
     ldh  [hFF9C], a                               ; $6B32: $E0 $9C
 
 jr_002_6B34:
-    ld   hl, hLinkPositionYIncrement              ; $6B34: $21 $9B $FF
+    ld   hl, hLinkSpeedY                          ; $6B34: $21 $9B $FF
     ld   a, [hl]                                  ; $6B37: $7E
     sub  $40                                      ; $6B38: $D6 $40
     and  $80                                      ; $6B3A: $E6 $80
     jr   z, func_002_6B56                         ; $6B3C: $28 $18
 
     inc  [hl]                                     ; $6B3E: $34
-    ldh  a, [hLinkPositionYIncrement]             ; $6B3F: $F0 $9B
+    ldh  a, [hLinkSpeedY]                         ; $6B3F: $F0 $9B
     and  $80                                      ; $6B41: $E6 $80
     jr   z, jr_002_6B55                           ; $6B43: $28 $10
 
@@ -5733,7 +5733,7 @@ label_002_6B66:
     xor  a                                        ; $6B71: $AF
     ld   [wCollisionType], a                      ; $6B72: $EA $33 $C1
     ld   c, $00                                   ; $6B75: $0E $00
-    ldh  a, [hLinkPositionXIncrement]             ; $6B77: $F0 $9A
+    ldh  a, [hLinkSpeedX]                         ; $6B77: $F0 $9A
     and  a                                        ; $6B79: $A7
     jr   z, jr_002_6BA2                           ; $6B7A: $28 $26
 
@@ -5765,7 +5765,7 @@ jr_002_6B99:
 
 jr_002_6BA2:
     ld   c, $02                                   ; $6BA2: $0E $02
-    ldh  a, [hLinkPositionYIncrement]             ; $6BA4: $F0 $9B
+    ldh  a, [hLinkSpeedY]                         ; $6BA4: $F0 $9B
     and  a                                        ; $6BA6: $A7
     and  $80                                      ; $6BA7: $E6 $80
     jr   nz, jr_002_6BAC                          ; $6BA9: $20 $01
@@ -5774,7 +5774,7 @@ jr_002_6BA2:
 
 jr_002_6BAC:
     call func_002_6C2F                            ; $6BAC: $CD $2F $6C
-    ldh  a, [hLinkPositionYIncrement]             ; $6BAF: $F0 $9B
+    ldh  a, [hLinkSpeedY]                         ; $6BAF: $F0 $9B
     and  $80                                      ; $6BB1: $E6 $80
     jr   nz, jr_002_6BD1                          ; $6BB3: $20 $1C
 
@@ -5808,7 +5808,7 @@ jr_002_6BD8:
     or   COLLISION_TYPE_RIGHT                     ; $6BDB: $F6 $08
     ld   [wCollisionType], a                      ; $6BDD: $EA $33 $C1
     xor  a                                        ; $6BE0: $AF
-    ldh  [hLinkPositionYIncrement], a             ; $6BE1: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $6BE1: $E0 $9B
     ldh  a, [hLinkPositionY]                      ; $6BE3: $F0 $99
     and  $F0                                      ; $6BE5: $E6 $F0
     add  $00                                      ; $6BE7: $C6 $00
@@ -5834,14 +5834,14 @@ jr_002_6BF6:
     ret  z                                        ; $6C04: $C8
 
     call ResetSpinAttack                          ; $6C05: $CD $AF $0C
-    ldh  a, [hLinkPositionXIncrement]             ; $6C08: $F0 $9A
+    ldh  a, [hLinkSpeedX]                         ; $6C08: $F0 $9A
     cpl                                           ; $6C0A: $2F
     inc  a                                        ; $6C0B: $3C
     sra  a                                        ; $6C0C: $CB $2F
     sra  a                                        ; $6C0E: $CB $2F
-    ldh  [hLinkPositionXIncrement], a             ; $6C10: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $6C10: $E0 $9A
     ld   a, $E8                                   ; $6C12: $3E $E8
-    ldh  [hLinkPositionYIncrement], a             ; $6C14: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $6C14: $E0 $9B
     call UpdateFinalLinkPosition                  ; $6C16: $CD $A8 $21
     call CheckPositionForMapTransition            ; $6C19: $CD $75 $6C
     ld   a, $20                                   ; $6C1C: $3E $20
@@ -6034,7 +6034,7 @@ CheckPositionForMapTransition::
     ldh  a, [hLinkFinalPositionY]                 ; $6D00: $F0 $A0
     ldh  [hLinkPositionY], a                      ; $6D02: $E0 $99
     xor  a                                        ; $6D04: $AF
-    ldh  [hLinkPositionYIncrement], a             ; $6D05: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $6D05: $E0 $9B
     jp   .return                                  ; $6D07: $C3 $09 $6E
 
 .jr_002_6D0A
@@ -6049,9 +6049,9 @@ CheckPositionForMapTransition::
     ldh  a, [hLinkFinalPositionX]                 ; $6D13: $F0 $9F
     ldh  [hLinkPositionX], a                      ; $6D15: $E0 $98
 
-    ; Clear hLinkPositionXIncrement
+    ; Clear hLinkSpeedX
     xor  a                                        ; $6D17: $AF
-    ldh  [hLinkPositionXIncrement], a             ; $6D18: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $6D18: $E0 $9A
 
     ; If in a side-scrolling room…
     ldh  a, [hIsSideScrolling]                    ; $6D1A: $F0 $F9
@@ -6284,7 +6284,7 @@ CheckForLedgeJumpAndReturn::
 jr_002_6E55:
     xor  a                                        ; $6E55: $AF
     ld   [wCollisionType], a                      ; $6E56: $EA $33 $C1
-    ldh  a, [hLinkPositionYIncrement]             ; $6E59: $F0 $9B
+    ldh  a, [hLinkSpeedY]                         ; $6E59: $F0 $9B
     cp   $00                                      ; $6E5B: $FE $00
     jr   z, jr_002_6EDD                           ; $6E5D: $28 $7E
 
@@ -6314,7 +6314,7 @@ jr_002_6E72:
     dec  e                                        ; $6E7A: $1D
     jr   nz, jr_002_6E72                          ; $6E7B: $20 $F5
 
-    ldh  a, [hLinkPositionYIncrement]             ; $6E7D: $F0 $9B
+    ldh  a, [hLinkSpeedY]                         ; $6E7D: $F0 $9B
     and  $80                                      ; $6E7F: $E6 $80
     jr   nz, jr_002_6EC6                          ; $6E81: $20 $43
 
@@ -6378,7 +6378,7 @@ jr_002_6EC6:
     ldh  [hLinkPositionY], a                      ; $6EDB: $E0 $99
 
 jr_002_6EDD:
-    ldh  a, [hLinkPositionXIncrement]             ; $6EDD: $F0 $9A
+    ldh  a, [hLinkSpeedX]                         ; $6EDD: $F0 $9A
     cp   $00                                      ; $6EDF: $FE $00
     jr   z, jr_002_6F1C                           ; $6EE1: $28 $39
 
@@ -6705,11 +6705,11 @@ jr_002_70B5:
     ld   hl, Data_002_6E3D                        ; $70B8: $21 $3D $6E
     add  hl, de                                   ; $70BB: $19
     ld   a, [hl]                                  ; $70BC: $7E
-    ldh  [hLinkPositionXIncrement], a             ; $70BD: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $70BD: $E0 $9A
     ld   hl, Data_002_6E41                        ; $70BF: $21 $41 $6E
     add  hl, de                                   ; $70C2: $19
     ld   a, [hl]                                  ; $70C3: $7E
-    ldh  [hLinkPositionYIncrement], a             ; $70C4: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $70C4: $E0 $9B
     ld   a, $1C                                   ; $70C6: $3E $1C
     ldh  [hLinkVelocityZ], a                               ; $70C8: $E0 $A3
     ld   a, $01                                   ; $70CA: $3E $01
@@ -7423,18 +7423,18 @@ label_002_74AD:
 
 jr_002_74C9:
     call ResetSpinAttack                          ; $74C9: $CD $AF $0C
-    ldh  a, [hLinkPositionXIncrement]             ; $74CC: $F0 $9A
+    ldh  a, [hLinkSpeedX]                         ; $74CC: $F0 $9A
     cpl                                           ; $74CE: $2F
     inc  a                                        ; $74CF: $3C
     sra  a                                        ; $74D0: $CB $2F
     sra  a                                        ; $74D2: $CB $2F
-    ldh  [hLinkPositionXIncrement], a             ; $74D4: $E0 $9A
-    ldh  a, [hLinkPositionYIncrement]             ; $74D6: $F0 $9B
+    ldh  [hLinkSpeedX], a                         ; $74D4: $E0 $9A
+    ldh  a, [hLinkSpeedY]                         ; $74D6: $F0 $9B
     cpl                                           ; $74D8: $2F
     inc  a                                        ; $74D9: $3C
     sra  a                                        ; $74DA: $CB $2F
     sra  a                                        ; $74DC: $CB $2F
-    ldh  [hLinkPositionYIncrement], a             ; $74DE: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $74DE: $E0 $9B
     ld   a, $18                                   ; $74E0: $3E $18
     ldh  [hLinkVelocityZ], a                               ; $74E2: $E0 $A3
     ld   a, $02                                   ; $74E4: $3E $02
@@ -7627,14 +7627,14 @@ func_002_75F5::
     jr   nz, jr_002_7634                          ; $75F9: $20 $39
 
     call ResetSpinAttack                          ; $75FB: $CD $AF $0C
-    ldh  a, [hLinkPositionXIncrement]             ; $75FE: $F0 $9A
+    ldh  a, [hLinkSpeedX]                         ; $75FE: $F0 $9A
     cpl                                           ; $7600: $2F
     inc  a                                        ; $7601: $3C
-    ldh  [hLinkPositionXIncrement], a             ; $7602: $E0 $9A
-    ldh  a, [hLinkPositionYIncrement]             ; $7604: $F0 $9B
+    ldh  [hLinkSpeedX], a                         ; $7602: $E0 $9A
+    ldh  a, [hLinkSpeedY]                         ; $7604: $F0 $9B
     cpl                                           ; $7606: $2F
     inc  a                                        ; $7607: $3C
-    ldh  [hLinkPositionYIncrement], a             ; $7608: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $7608: $E0 $9B
     ld   a, $02                                   ; $760A: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $760C: $EA $46 $C1
     ldh  a, [hIsSideScrolling]                    ; $760F: $F0 $F9
@@ -7836,11 +7836,11 @@ ENDC
     ld   hl, Data_002_750A                        ; $7741: $21 $0A $75
     add  hl, de                                   ; $7744: $19
     ld   a, [hl]                                  ; $7745: $7E
-    ldh  [hLinkPositionXIncrement], a             ; $7746: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $7746: $E0 $9A
     ld   hl, Data_002_750E                        ; $7748: $21 $0E $75
     add  hl, de                                   ; $774B: $19
     ld   a, [hl]                                  ; $774C: $7E
-    ldh  [hLinkPositionYIncrement], a             ; $774D: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $774D: $E0 $9B
 
 jr_002_774F:
     ret                                           ; $774F: $C9

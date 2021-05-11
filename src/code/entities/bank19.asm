@@ -3098,16 +3098,16 @@ ThwompRammableState0Handler::
     call ResetSpinAttack                          ; $55BB: $CD $AF $0C
 
 jr_019_55BE:
-    ldh  a, [hLinkPositionXIncrement]             ; $55BE: $F0 $9A
+    ldh  a, [hLinkSpeedX]                         ; $55BE: $F0 $9A
     cpl                                           ; $55C0: $2F
     inc  a                                        ; $55C1: $3C
     sra  a                                        ; $55C2: $CB $2F
     sra  a                                        ; $55C4: $CB $2F
-    ldh  [hLinkPositionXIncrement], a             ; $55C6: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $55C6: $E0 $9A
     ld   a, $E8                                   ; $55C8: $3E $E8
 
 jr_019_55CA:
-    ldh  [hLinkPositionYIncrement], a             ; $55CA: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $55CA: $E0 $9B
     call GetEntityTransitionCountdown             ; $55CC: $CD $05 $0C
     ld   [hl], $20                                ; $55CF: $36 $20
     ld   a, $01                                   ; $55D1: $3E $01
@@ -3514,13 +3514,13 @@ func_019_58A2::
     ld   a, $10                                   ; $58B2: $3E $10
     call GetVectorTowardsLink_trampoline          ; $58B4: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $58B7: $F0 $D7
-    ldh  [hLinkPositionYIncrement], a             ; $58B9: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $58B9: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $58BB: $F0 $D8
-    ldh  [hLinkPositionXIncrement], a             ; $58BD: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $58BD: $E0 $9A
     ret                                           ; $58BF: $C9
 
 jr_019_58C0:
-    ldh  a, [hLinkPositionYIncrement]             ; $58C0: $F0 $9B
+    ldh  a, [hLinkSpeedY]                         ; $58C0: $F0 $9B
     and  $80                                      ; $58C2: $E6 $80
     jr   nz, jr_019_58D8                          ; $58C4: $20 $12
 
@@ -3530,7 +3530,7 @@ jr_019_58C0:
     sub  $10                                      ; $58CB: $D6 $10
     ldh  [hLinkPositionY], a                      ; $58CD: $E0 $99
     ld   a, $02                                   ; $58CF: $3E $02
-    ldh  [hLinkPositionYIncrement], a             ; $58D1: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $58D1: $E0 $9B
     ld   a, $01                                   ; $58D3: $3E $01
     ld   [wC147], a                               ; $58D5: $EA $47 $C1
 
@@ -3563,7 +3563,7 @@ SideViewPotState0Handler::
     call func_019_599B                            ; $58FE: $CD $9B $59
 
 jr_019_5901:
-    ldh  a, [hLinkPositionYIncrement]             ; $5901: $F0 $9B
+    ldh  a, [hLinkSpeedY]                         ; $5901: $F0 $9B
     and  $80                                      ; $5903: $E6 $80
     jr   nz, jr_019_5922                          ; $5905: $20 $1B
 
@@ -3578,7 +3578,7 @@ jr_019_5901:
     sub  $10                                      ; $5915: $D6 $10
     ldh  [hLinkPositionY], a                      ; $5917: $E0 $99
     ld   a, $02                                   ; $5919: $3E $02
-    ldh  [hLinkPositionYIncrement], a             ; $591B: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $591B: $E0 $9B
     ld   a, $01                                   ; $591D: $3E $01
     ld   [wC147], a                               ; $591F: $EA $47 $C1
 
@@ -3682,7 +3682,7 @@ func_019_599B::
     ld   a, $F0                                   ; $59B2: $3E $F0
 
 jr_019_59B4:
-    ldh  [hLinkPositionXIncrement], a             ; $59B4: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $59B4: $E0 $9A
     ret                                           ; $59B6: $C9
 
 jr_019_59B7:
@@ -3993,7 +3993,7 @@ jr_019_5B89:
     jr   z, jr_019_5B93                           ; $5B8E: $28 $03
 
     xor  a                                        ; $5B90: $AF
-    ldh  [hLinkPositionYIncrement], a             ; $5B91: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $5B91: $E0 $9B
 
 jr_019_5B93:
     ld   a, [wCollisionType]                      ; $5B93: $FA $33 $C1
@@ -4001,7 +4001,7 @@ jr_019_5B93:
     jr   z, jr_019_5B9D                           ; $5B98: $28 $03
 
     xor  a                                        ; $5B9A: $AF
-    ldh  [hLinkPositionXIncrement], a             ; $5B9B: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $5B9B: $E0 $9A
 
 jr_019_5B9D:
     jp   PlayBoomerangSfx_trampoline              ; $5B9D: $C3 $F8 $29

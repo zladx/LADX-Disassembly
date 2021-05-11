@@ -3949,8 +3949,8 @@ label_018_5C6A:
     and  a                                        ; $5CDF: $A7
     jr   nz, jr_018_5CEF                          ; $5CE0: $20 $0D
 
-    ld   hl, hLinkPositionXIncrement              ; $5CE2: $21 $9A $FF
-    ldh  a, [hLinkPositionYIncrement]             ; $5CE5: $F0 $9B
+    ld   hl, hLinkSpeedX                          ; $5CE2: $21 $9A $FF
+    ldh  a, [hLinkSpeedY]                         ; $5CE5: $F0 $9B
     or   [hl]                                     ; $5CE7: $B6
     jr   z, jr_018_5CEF                           ; $5CE8: $28 $05
 
@@ -7762,9 +7762,9 @@ jr_018_76C9:
 
 jr_018_76FE:
     ld   a, e                                     ; $76FE: $7B
-    ldh  [hLinkPositionXIncrement], a             ; $76FF: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $76FF: $E0 $9A
     xor  a                                        ; $7701: $AF
-    ldh  [hLinkPositionYIncrement], a             ; $7702: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $7702: $E0 $9B
     ld   a, $18                                   ; $7704: $3E $18
     ld   [wC13E], a                               ; $7706: $EA $3E $C1
     ld   a, $10                                   ; $7709: $3E $10

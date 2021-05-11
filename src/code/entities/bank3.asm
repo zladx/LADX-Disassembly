@@ -5180,9 +5180,9 @@ jr_003_6625:
     jr   nc, jr_003_664A                          ; $663B: $30 $0D
 
     call ApplyLinkCollisionWithEnemy              ; $663D: $CD $D5 $6C
-    ld   hl, hLinkPositionXIncrement              ; $6640: $21 $9A $FF
+    ld   hl, hLinkSpeedX                          ; $6640: $21 $9A $FF
     sla  [hl]                                     ; $6643: $CB $26
-    ld   hl, hLinkPositionYIncrement              ; $6645: $21 $9B $FF
+    ld   hl, hLinkSpeedY                          ; $6645: $21 $9B $FF
     sla  [hl]                                     ; $6648: $CB $26
 
 jr_003_664A:
@@ -6198,7 +6198,7 @@ ApplyLinkCollisionWithEnemy::
     ld   a, $02                                   ; $6CE8: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $6CEA: $EA $46 $C1
     ld   a, $F0                                   ; $6CED: $3E $F0
-    ldh  [hLinkPositionYIncrement], a             ; $6CEF: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $6CEF: $E0 $9B
     call ClearEntitySpeed                         ; $6CF1: $CD $7F $3D
     ld   a, $0E                                   ; $6CF4: $3E $0E
     ldh  [hWaveSfx], a                            ; $6CF6: $E0 $F3
@@ -6230,7 +6230,7 @@ ApplyLinkCollisionWithEnemy::
     jr   .jr_003_6D17                             ; $6D13: $18 $02
 
 .jr_003_6D15
-    ldh  a, [hLinkPositionYIncrement]             ; $6D15: $F0 $9B
+    ldh  a, [hLinkSpeedY]                         ; $6D15: $F0 $9B
 
 .jr_003_6D17
     and  $80                                      ; $6D17: $E6 $80
@@ -6256,7 +6256,7 @@ ApplyLinkCollisionWithEnemy::
 
 .jr_003_6D38
     ld   a, $F0                                   ; $6D38: $3E $F0
-    ldh  [hLinkPositionYIncrement], a             ; $6D3A: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $6D3A: $E0 $9B
     ret                                           ; $6D3C: $C9
 .goombaEnd
 
@@ -6420,9 +6420,9 @@ jr_003_6E0E:
     ld   hl, Data_003_6E0C                        ; $6E18: $21 $0C $6E
     add  hl, de                                   ; $6E1B: $19
     ld   a, [hl]                                  ; $6E1C: $7E
-    ldh  [hLinkPositionXIncrement], a             ; $6E1D: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $6E1D: $E0 $9A
     ld   a, $F4                                   ; $6E1F: $3E $F4
-    ldh  [hLinkPositionYIncrement], a             ; $6E21: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $6E21: $E0 $9B
     xor  a                                        ; $6E23: $AF
     ldh  [hFF9C], a                               ; $6E24: $E0 $9C
     scf                                           ; $6E26: $37
@@ -6543,7 +6543,7 @@ jr_003_6E8E:
     ret  nz                                       ; $6EC4: $C0
 
     ld   a, $04                                   ; $6EC5: $3E $04
-    ldh  [hLinkPositionYIncrement], a             ; $6EC7: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $6EC7: $E0 $9B
     ld   a, $08                                   ; $6EC9: $3E $08
     ld   [wC13E], a                               ; $6ECB: $EA $3E $C1
     jp   IncrementEntityState                     ; $6ECE: $C3 $12 $3B
@@ -6718,9 +6718,9 @@ label_003_6FA7:
     inc  a                                        ; $6FB2: $3C
 
 jr_003_6FB3:
-    ldh  [hLinkPositionXIncrement], a             ; $6FB3: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $6FB3: $E0 $9A
     xor  a                                        ; $6FB5: $AF
-    ldh  [hLinkPositionYIncrement], a             ; $6FB6: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $6FB6: $E0 $9B
     ret                                           ; $6FB8: $C9
 
 jr_003_6FB9:
@@ -7738,9 +7738,9 @@ jr_003_752D:
 func_003_7565::
     call GetVectorTowardsLink                     ; $7565: $CD $45 $7E
     ldh  a, [hMultiPurpose0]                      ; $7568: $F0 $D7
-    ldh  [hLinkPositionYIncrement], a             ; $756A: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $756A: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $756C: $F0 $D8
-    ldh  [hLinkPositionXIncrement], a             ; $756E: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $756E: $E0 $9A
 
 jr_003_7570:
     ret                                           ; $7570: $C9
@@ -7764,9 +7764,9 @@ jr_003_7571:
     ld   a, $D0                                   ; $7589: $3E $D0
 
 jr_003_758B:
-    ldh  [hLinkPositionXIncrement], a             ; $758B: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $758B: $E0 $9A
     xor  a                                        ; $758D: $AF
-    ldh  [hLinkPositionYIncrement], a             ; $758E: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $758E: $E0 $9B
     ld   a, $30                                   ; $7590: $3E $30
     ldh  [hLinkVelocityZ], a                               ; $7592: $E0 $A3
     ld   a, JINGLE_HUGE_BUMP                      ; $7594: $3E $0B

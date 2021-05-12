@@ -1,3 +1,4 @@
+; Bank of object attributes data for Overworld rooms, indexed by hRoomId.
 OverworldBGAttributesBanks::
     db BANK(Data_025_7400), BANK(Data_025_7400), BANK(Data_025_7400), BANK(Data_025_7400), BANK(Data_025_7400), BANK(Data_025_7400), BANK(Data_027_5620), BANK(Data_027_5620), BANK(Data_027_5A20), BANK(Data_027_5A20), BANK(Data_027_5A20), BANK(Data_027_5A20), BANK(Data_027_6240), BANK(Data_027_5A20), BANK(Data_027_5E40), BANK(Data_027_5E40)
     db BANK(Data_025_7400), BANK(Data_025_7800), BANK(Data_025_7400), BANK(Data_025_7400), BANK(Data_025_7400), BANK(Data_025_7400), BANK(Data_027_5620), BANK(Data_027_5620), BANK(Data_027_5A20), BANK(Data_027_5A20), BANK(Data_027_6240), BANK(Data_027_6240), BANK(Data_027_6240), BANK(Data_027_5A20), BANK(Data_027_5A20), BANK(Data_027_5A20)

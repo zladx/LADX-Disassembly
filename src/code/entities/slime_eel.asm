@@ -786,7 +786,7 @@ func_005_7283::
     and  a                                        ; $72B6: $A7
     jr   nz, jr_005_72C9                          ; $72B7: $20 $10
 
-    call label_3B18                               ; $72B9: $CD $18 $3B
+    call HurtBySpikes_trampoline                  ; $72B9: $CD $18 $3B
     ld   a, $18                                   ; $72BC: $3E $18
     call GetVectorTowardsLink_trampoline          ; $72BE: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $72C1: $F0 $D7

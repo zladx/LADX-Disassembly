@@ -190,10 +190,8 @@ wC11E:
   ds 1 ; C11E
 
 ; The condition of the ground Link is standing on:
-; 0 = dry ground,
-; 1 = steps (only when moving),
-; 3 = wet or grassy,
-; 7 = pit,
+; See GROUND_STATUS_* constants for possible values.
+;
 ; Also see: wLinkGroundVfx
 wLinkGroundStatus::
   ds 1 ; C11F
@@ -822,8 +820,11 @@ wOcarinaMenuClosing::
 wC1BA::
   ds 1 ; C1BA
 
-; Unlabeled
-wC1BB::
+; Number of consecutives frames during which the player is slipping
+; over a pit without falling down into it.
+;
+; The counter is reset to 0 when reaching solid ground again.
+wPitSlippingCounter::
   ds 1 ; C1BB
 
 ; Number of frames to wait before loading the previous map and room
@@ -2983,6 +2984,7 @@ wDBCA::
   ds 1 ; DBCA
 
 ; Unlabeled
+; (wGroundVfx is sometimes copied there)
 wDBCB::
   ds 1 ; DBCB
 

@@ -3510,7 +3510,7 @@ func_019_58A2::
     bit  7, a                                     ; $58AB: $CB $7F
     jr   nz, jr_019_58C0                          ; $58AD: $20 $11
 
-    call label_3B18                               ; $58AF: $CD $18 $3B
+    call HurtBySpikes_trampoline                  ; $58AF: $CD $18 $3B
     ld   a, $10                                   ; $58B2: $3E $10
     call GetVectorTowardsLink_trampoline          ; $58B4: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $58B7: $F0 $D7

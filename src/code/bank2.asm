@@ -543,8 +543,8 @@ jr_002_4481:
     jr   nz, func_002_44AD                        ; $4495: $20 $16
 
     ld   e, $01                                   ; $4497: $1E $01
-    ld   a, [wC1BB]                               ; $4499: $FA $BB $C1
-    cp   $18                                      ; $449C: $FE $18
+    ld   a, [wPitSlippingCounter]                 ; $4499: $FA $BB $C1
+    cp   PIT_MAX_SLIPPING                         ; $449C: $FE $18
     jr   c, jr_002_44A2                           ; $449E: $38 $02
 
     ld   e, $07                                   ; $44A0: $1E $07
@@ -6998,7 +6998,7 @@ label_002_7277:
     jr   nz, jr_002_728E                          ; $7289: $20 $03
 
 jr_002_728B:
-    call func_002_75F5                            ; $728B: $CD $F5 $75
+    call HurtBySpikes                             ; $728B: $CD $F5 $75
 
 jr_002_728E:
     ld   hl, hMultiPurposeC                            ; $728E: $21 $E3 $FF
@@ -7465,7 +7465,12 @@ Data_002_750A::
 Data_002_750E::
     db   $00, $00, $F8, $08
 
-func_002_7512::
+; Retrieve the ID of the room object currently under the player's feets.
+; See OBJECT_* constants for possible values.
+;
+; Return:
+;   a    the object id
+GetObjectUnderLink::
     ldh  a, [hLinkPositionX]                      ; $7512: $F0 $98
     and  $F0                                      ; $7514: $E6 $F0
     ldh  [hMultiPurpose0], a                      ; $7516: $E0 $D7
@@ -7515,7 +7520,7 @@ func_002_754F::
 
 ; Called when getting an item, and showing a location on the mini-map
 func_002_755B::
-    call func_002_7512                            ; $755B: $CD $12 $75
+    call GetObjectUnderLink                       ; $755B: $CD $12 $75
     ld   c, $04                                   ; $755E: $0E $04
     ld   a, [wD463]                               ; $7560: $FA $63 $D4
     cp   $01                                      ; $7563: $FE $01
@@ -7585,47 +7590,54 @@ jr_002_75B2:
     cp   $02                                      ; $75B9: $FE $02
     jr   z, jr_002_75B1                           ; $75BB: $28 $F4
 
+; Handle physics between Link and the ground
 func_002_75BD::
     ld   a, [wRoomTransitionState]                ; $75BD: $FA $24 $C1
     ld   hl, wDialogState                         ; $75C0: $21 $9F $C1
     or   [hl]                                     ; $75C3: $B6
     jp   nz, label_002_76C0                       ; $75C4: $C2 $C0 $76
 
-    call func_002_7512                            ; $75C7: $CD $12 $75
+    ; Store id of the object under Link's feets into a
+    call GetObjectUnderLink                       ; $75C7: $CD $12 $75
+
+    ; If over an overworld well, fall immediately into it
     ld   c, a                                     ; $75CA: $4F
     ld   a, [wIsIndoor]                           ; $75CB: $FA $A5 $DB
     and  a                                        ; $75CE: $A7
-    jr   nz, jr_002_75D9                          ; $75CF: $20 $08
+    jr   nz, .indoor                              ; $75CF: $20 $08
 
     ld   a, c                                     ; $75D1: $79
-    cp   $61                                      ; $75D2: $FE $61
-    jp   z, label_002_76AA                        ; $75D4: $CA $AA $76
+    cp   OBJECT_WELL                              ; $75D2: $FE $61
+    jp   z, label_002_7635.makeLinkFallInPit      ; $75D4: $CA $AA $76
 
-    jr   jr_002_75E7                              ; $75D7: $18 $0E
+    jr   .specialCasesEnd                         ; $75D7: $18 $0E
 
-jr_002_75D9:
+.indoor
+    ; If over side-view spikes, hurt the player imediately
     ld   a, c                                     ; $75D9: $79
-    cp   $4C                                      ; $75DA: $FE $4C
-    jr   nz, jr_002_75E7                          ; $75DC: $20 $09
+    cp   OBJECT_SIDE_VIEW_SPIKES                  ; $75DA: $FE $4C
+    jr   nz, .specialCasesEnd                     ; $75DC: $20 $09
 
     ldh  a, [hLinkPositionY]                      ; $75DE: $F0 $99
     dec  a                                        ; $75E0: $3D
     and  $0F                                      ; $75E1: $E6 $0F
     cp   $0C                                      ; $75E3: $FE $0C
-    jr   nc, func_002_75F5                        ; $75E5: $30 $0E
+    jr   nc, HurtBySpikes                         ; $75E5: $30 $0E
 
-jr_002_75E7:
+.specialCasesEnd
+
     call GetObjectPhysicsFlags_trampoline         ; $75E7: $CD $26 $2A
     ld   [wLinkGroundVfx], a                      ; $75EA: $EA $81 $C1
     and  a                                        ; $75ED: $A7
     jp   z, label_002_77A2                        ; $75EE: $CA $A2 $77
 
-    cp   $E0                                      ; $75F1: $FE $E0
-    jr   nz, jr_002_7635                          ; $75F3: $20 $40
+    cp   GROUND_VFX_SPIKES                        ; $75F1: $FE $E0
+    jr   nz, label_002_7635                       ; $75F3: $20 $40
+    ; fallthrough
 
-; Hurt Link when bumbing into spikes?
-; Makes Link recoil, and lose one heart
-func_002_75F5::
+; Hurt Link when bumbing into spikes (object, thwomp, etc.)
+; Makes Link recoil, and lose one heart.
+HurtBySpikes::
     ; If already fallen, return
     ld   a, [wInvincibilityCounter]               ; $75F5: $FA $C7 $DB
     and  a                                        ; $75F8: $A7
@@ -7678,92 +7690,107 @@ func_002_75F5::
 .return
     ret                                           ; $7634: $C9
 
-jr_002_7635:
+; player physics continued
+label_002_7635::
     ld   a, [wLinkGroundVfx]                      ; $7635: $FA $81 $C1
-    cp   $FF                                      ; $7638: $FE $FF
+    cp   GROUND_VFX_FF                            ; $7638: $FE $FF
     jp   z, label_002_77A2                        ; $763A: $CA $A2 $77
 
-    cp   $F0                                      ; $763D: $FE $F0
-    jr   c, jr_002_7644                           ; $763F: $38 $03
+    cp   GROUND_VFX_F0                            ; $763D: $FE $F0
+    jr   c, .jr_002_7644                          ; $763F: $38 $03
 
     jp   label_002_7C14                           ; $7641: $C3 $14 $7C
 
-jr_002_7644:
-    cp   $51                                      ; $7644: $FE $51
-    jr   z, jr_002_764C                           ; $7646: $28 $04
+.jr_002_7644
+    cp   GROUND_VFX_51                            ; $7644: $FE $51
+    jr   z, .slipIntoPit                          ; $7646: $28 $04
 
-    cp   $50                                      ; $7648: $FE $50
+    cp   GROUND_VFX_PIT                           ; $7648: $FE $50
     jr   nz, label_002_76C0                       ; $764A: $20 $74
 
-jr_002_764C:
+; handle pit physics
+; called when slipping into a pit before falling
+.slipIntoPit
     call ResetSpinAttack                          ; $764C: $CD $AF $0C
-    ld   a, $07                                   ; $764F: $3E $07
+
+    ld   a, GROUND_STATUS_PIT                     ; $764F: $3E $07
     ld   [wLinkGroundStatus], a                   ; $7651: $EA $1F $C1
-    ld   hl, wC1BB                                ; $7654: $21 $BB $C1
+
+    ld   hl, wPitSlippingCounter                  ; $7654: $21 $BB $C1
     inc  [hl]                                     ; $7657: $34
+
+    ; If in free-movment debug mode, or not every 4th frame, return.
     ld   hl, wFreeMovementMode                    ; $7658: $21 $7B $C1
     ldh  a, [hFrameCounter]                       ; $765B: $F0 $E7
     and  $03                                      ; $765D: $E6 $03
     or   [hl]                                     ; $765F: $B6
-    jr   nz, jr_002_76BF                          ; $7660: $20 $5D
+    jr   nz, .return                              ; $7660: $20 $5D
 
+    ; Adjust Link X position (using content of hMultiPurpose1)
     ldh  a, [hLinkPositionX]                      ; $7662: $F0 $98
     sub  $08                                      ; $7664: $D6 $08
     ld   hl, hMultiPurpose0                            ; $7666: $21 $D7 $FF
     sub  [hl]                                     ; $7669: $96
     bit  7, a                                     ; $766A: $CB $7F
     ld   a, $FF                                   ; $766C: $3E $FF
-    jr   z, jr_002_7672                           ; $766E: $28 $02
-
+    jr   z, .jr_002_7672                          ; $766E: $28 $02
     ld   a, $01                                   ; $7670: $3E $01
+.jr_002_7672
 
-jr_002_7672:
     ld   hl, hLinkPositionX                       ; $7672: $21 $98 $FF
     add  [hl]                                     ; $7675: $86
     ld   [hl], a                                  ; $7676: $77
+
+    ; Adjust Link Y position (using content of hMultiPurpose1)
     ldh  a, [hMultiPurpose1]                      ; $7677: $F0 $D8
     add  $10                                      ; $7679: $C6 $10
     ld   hl, hLinkPositionY                       ; $767B: $21 $99 $FF
     sub  [hl]                                     ; $767E: $96
     bit  7, a                                     ; $767F: $CB $7F
     ld   a, $FF                                   ; $7681: $3E $FF
-    jr   nz, jr_002_7687                          ; $7683: $20 $02
-
+    jr   nz, .jr_002_7687                         ; $7683: $20 $02
     ld   a, $01                                   ; $7685: $3E $01
+.jr_002_7687
 
-jr_002_7687:
     ld   hl, hLinkPositionY                       ; $7687: $21 $99 $FF
     add  [hl]                                     ; $768A: $86
     ld   [hl], a                                  ; $768B: $77
+
+    ; If Link is close from pit center (?), make it fall down
     ldh  a, [hLinkPositionX]                      ; $768C: $F0 $98
     sub  $08                                      ; $768E: $D6 $08
     add  $02                                      ; $7690: $C6 $02
     and  $0F                                      ; $7692: $E6 $0F
     cp   $04                                      ; $7694: $FE $04
-    jr   nc, jr_002_76BF                          ; $7696: $30 $27
+    jr   nc, .return                              ; $7696: $30 $27
 
     ldh  a, [hLinkPositionY]                      ; $7698: $F0 $99
     sub  $10                                      ; $769A: $D6 $10
     add  $02                                      ; $769C: $C6 $02
     and  $0F                                      ; $769E: $E6 $0F
     cp   $04                                      ; $76A0: $FE $04
-    jr   nc, jr_002_76BF                          ; $76A2: $30 $1B
+    jr   nc, .return                              ; $76A2: $30 $1B
 
     ldh  a, [hLinkPositionY]                      ; $76A4: $F0 $99
     add  $03                                      ; $76A6: $C6 $03
     ldh  [hLinkPositionY], a                      ; $76A8: $E0 $99
 
-label_002_76AA:
+.makeLinkFallInPit
+    ; Make Link fall down the pit
     ld   a, LINK_MOTION_FALLING_DOWN              ; $76AA: $3E $06
     ld   [wLinkMotionState], a                    ; $76AC: $EA $1C $C1
+
     call ResetSpinAttack                          ; $76AF: $CD $AF $0C
+
     ld   [wC198], a                               ; $76B2: $EA $98 $C1
+
     ld   a, [wLinkGroundVfx]                      ; $76B5: $FA $81 $C1
     ld   [wDBCB], a                               ; $76B8: $EA $CB $DB
+
     ld   a, WAVE_SFX_LINK_FALLS                   ; $76BB: $3E $0C
     ldh  [hWaveSfx], a                            ; $76BD: $E0 $F3
 
-jr_002_76BF:
+.return
     ret                                           ; $76BF: $C9
 
 label_002_76C0:
@@ -7939,9 +7966,12 @@ jr_002_779A:
     add  $02                                      ; $779D: $C6 $02
     ld   [wC13B], a                               ; $779F: $EA $3B $C1
 
+; Ground physics default (solid ground)
 label_002_77A2:
+    ; Reset wPitSlippingCounter
     xor  a                                        ; $77A2: $AF
-    ld   [wC1BB], a                               ; $77A3: $EA $BB $C1
+    ld   [wPitSlippingCounter], a                 ; $77A3: $EA $BB $C1
+
     ld   a, [wLinkMotionState]                    ; $77A6: $FA $1C $C1
     cp   $01                                      ; $77A9: $FE $01
     jr   nz, jr_002_77B2                          ; $77AB: $20 $05

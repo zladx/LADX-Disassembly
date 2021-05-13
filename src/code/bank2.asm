@@ -710,7 +710,8 @@ jr_002_456C:
     cp   $88                                      ; $4584: $FE $88
     jr   nc, groundVfxEnd                         ; $4586: $30 $24
 
-    call func_002_75BD                            ; $4588: $CD $BD $75
+    call ApplyLinkGroundPhysics                   ; $4588: $CD $BD $75
+
     ldh  a, [hFFB8]                               ; $458B: $F0 $B8
     cp   $61                                      ; $458D: $FE $61
     jr   z, groundVfxEnd                          ; $458F: $28 $1B
@@ -7590,8 +7591,10 @@ jr_002_75B2:
     cp   $02                                      ; $75B9: $FE $02
     jr   z, jr_002_75B1                           ; $75BB: $28 $F4
 
-; Handle physics between Link and the ground
-func_002_75BD::
+; Handle physics between Link and the ground.
+;
+; This includes spikes, pits, normal ground, etc.
+ApplyLinkGroundPhysics::
     ld   a, [wRoomTransitionState]                ; $75BD: $FA $24 $C1
     ld   hl, wDialogState                         ; $75C0: $21 $9F $C1
     or   [hl]                                     ; $75C3: $B6
@@ -7608,7 +7611,7 @@ func_002_75BD::
 
     ld   a, c                                     ; $75D1: $79
     cp   OBJECT_WELL                              ; $75D2: $FE $61
-    jp   z, label_002_7635.makeLinkFallInPit      ; $75D4: $CA $AA $76
+    jp   z, ApplyLinkGroundPhysics_part2.makeLinkFallInPit ; $75D4: $CA $AA $76
 
     jr   .specialCasesEnd                         ; $75D7: $18 $0E
 
@@ -7629,10 +7632,10 @@ func_002_75BD::
     call GetObjectPhysicsFlags_trampoline         ; $75E7: $CD $26 $2A
     ld   [wLinkGroundVfx], a                      ; $75EA: $EA $81 $C1
     and  a                                        ; $75ED: $A7
-    jp   z, label_002_77A2                        ; $75EE: $CA $A2 $77
+    jp   z, ApplyLinkGroundPhysics_Default        ; $75EE: $CA $A2 $77
 
     cp   GROUND_VFX_SPIKES                        ; $75F1: $FE $E0
-    jr   nz, label_002_7635                       ; $75F3: $20 $40
+    jr   nz, ApplyLinkGroundPhysics_part2         ; $75F3: $20 $40
     ; fallthrough
 
 ; Hurt Link when bumbing into spikes (object, thwomp, etc.)
@@ -7690,11 +7693,10 @@ HurtBySpikes::
 .return
     ret                                           ; $7634: $C9
 
-; player physics continued
-label_002_7635::
+ApplyLinkGroundPhysics_part2::
     ld   a, [wLinkGroundVfx]                      ; $7635: $FA $81 $C1
     cp   GROUND_VFX_FF                            ; $7638: $FE $FF
-    jp   z, label_002_77A2                        ; $763A: $CA $A2 $77
+    jp   z, ApplyLinkGroundPhysics_Default        ; $763A: $CA $A2 $77
 
     cp   GROUND_VFX_F0                            ; $763D: $FE $F0
     jr   c, .jr_002_7644                          ; $763F: $38 $03
@@ -7793,6 +7795,7 @@ label_002_7635::
 .return
     ret                                           ; $76BF: $C9
 
+; Link ground physics during dialog or room transitions
 label_002_76C0:
     ld   hl, wLinkOAMBuffer                           ; $76C0: $21 $00 $C0
     ld   a, [wLinkGroundVfx]                      ; $76C3: $FA $81 $C1
@@ -7802,7 +7805,7 @@ label_002_76C0:
     ld   a, [wC13B]                               ; $76CA: $FA $3B $C1
     add  $FD                                      ; $76CD: $C6 $FD
     ld   [wC13B], a                               ; $76CF: $EA $3B $C1
-    jp   label_002_77A2                           ; $76D2: $C3 $A2 $77
+    jp   ApplyLinkGroundPhysics_Default           ; $76D2: $C3 $A2 $77
 
 jr_002_76D5:
     cp   $09                                      ; $76D5: $FE $09
@@ -7811,7 +7814,7 @@ jr_002_76D5:
     ld   a, [wC13B]                               ; $76D9: $FA $3B $C1
     add  $02                                      ; $76DC: $C6 $02
     ld   [wC13B], a                               ; $76DE: $EA $3B $C1
-    jp   label_002_77A2                           ; $76E1: $C3 $A2 $77
+    jp   ApplyLinkGroundPhysics_Default           ; $76E1: $C3 $A2 $77
 
 jr_002_76E4:
     cp   $0B                                      ; $76E4: $FE $0B
@@ -7894,7 +7897,7 @@ jr_002_7750:
     jp   z, label_002_787D                        ; $7752: $CA $7D $78
 
     cp   $05                                      ; $7755: $FE $05
-    jr   nz, label_002_77A2                       ; $7757: $20 $49
+    jr   nz, ApplyLinkGroundPhysics_Default       ; $7757: $20 $49
 
     ldh  a, [hLinkPositionY]                      ; $7759: $F0 $99
     add  $0C                                      ; $775B: $C6 $0C
@@ -7966,20 +7969,20 @@ jr_002_779A:
     add  $02                                      ; $779D: $C6 $02
     ld   [wC13B], a                               ; $779F: $EA $3B $C1
 
-; Ground physics default (solid ground)
-label_002_77A2:
+; Apply default ground physics to Link (solid ground)
+ApplyLinkGroundPhysics_Default::
     ; Reset wPitSlippingCounter
     xor  a                                        ; $77A2: $AF
     ld   [wPitSlippingCounter], a                 ; $77A3: $EA $BB $C1
 
+    ; If Link was swimming, mark it as no longer swimming
     ld   a, [wLinkMotionState]                    ; $77A6: $FA $1C $C1
-    cp   $01                                      ; $77A9: $FE $01
-    jr   nz, jr_002_77B2                          ; $77AB: $20 $05
-
-    ld   a, $00                                   ; $77AD: $3E $00
+    cp   LINK_MOTION_SWIMMING                     ; $77A9: $FE $01
+    jr   nz, .swimmingEnd                         ; $77AB: $20 $05
+    ld   a, LINK_MOTION_INTERACTIVE               ; $77AD: $3E $00
     ld   [wLinkMotionState], a                    ; $77AF: $EA $1C $C1
+.swimmingEnd
 
-jr_002_77B2:
     ld   a, [wLinkGroundVfx]                      ; $77B2: $FA $81 $C1
     cp   $04                                      ; $77B5: $FE $04
     jr   nz, .grassVfxEnd                         ; $77B7: $20 $30
@@ -8011,8 +8014,8 @@ jr_002_77B2:
     ld   a, $01                                   ; $77E3: $3E $01
     ld   [$D6F9], a                               ; $77E5: $EA $F9 $D6
     ret                                           ; $77E8: $C9
-
 .grassVfxEnd
+
     ld   a, [$D6F9]                               ; $77E9: $FA $F9 $D6
     and  a                                        ; $77EC: $A7
     jr   z, jr_002_77F7                           ; $77ED: $28 $08

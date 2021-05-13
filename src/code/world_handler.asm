@@ -264,7 +264,7 @@ GameplayWorldLoadRoomTilemapHandler::
     and  a                                        ; $44E3: $A7
     jr   z, jr_001_44F5                           ; $44E4: $28 $0F
     ld   a, $05                                   ; $44E6: $3E $05
-    ld   [$D6F8], a                               ; $44E8: $EA $F8 $D6
+    ld   [wD6F8], a                               ; $44E8: $EA $F8 $D6
     ld   a, [wC1CB]                               ; $44EB: $FA $CB $C1
     and  a                                        ; $44EE: $A7
     jr   z, jr_001_44F5                           ; $44EF: $28 $04

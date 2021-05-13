@@ -3053,7 +3053,7 @@ LinkMotionMapFadeOutHandler::
     ldh  [hFFB4], a                               ; $1965: $E0 $B4
     xor  a                                        ; $1967: $AF
     ld   [wD6FB], a                               ; $1968: $EA $FB $D6
-    ld   [$D6F8], a                               ; $196B: $EA $F8 $D6
+    ld   [wD6F8], a                               ; $196B: $EA $F8 $D6
 
 .label_196E
     pop  hl                                       ; $196E: $E1
@@ -3435,7 +3435,7 @@ label_1ED7::
     pop  af                                       ; $1EFA: $F1
 
 label_1EFB::
-    ld   [$D6F8], a                               ; $1EFB: $EA $F8 $D6
+    ld   [wD6F8], a                               ; $1EFB: $EA $F8 $D6
     cp   $04                                      ; $1EFE: $FE $04
 
 label_1F00::
@@ -3463,7 +3463,7 @@ label_1F1D::
     cp   $0A                                      ; $1F1D: $FE $0A
     jr   nz, label_1F35                           ; $1F1F: $20 $14
     xor  a                                        ; $1F21: $AF
-    ld   [$D6F8], a                               ; $1F22: $EA $F8 $D6
+    ld   [wD6F8], a                               ; $1F22: $EA $F8 $D6
     ld   hl, data_1ED3                            ; $1F25: $21 $D3 $1E
 
 label_1F28::

@@ -2377,7 +2377,15 @@ wRequestLength::
 
 ; Request data (variable length)
 wRequestData:
-  ds 246  ; D604 - D6F9
+  ds 244  ; D604 - D6F7
+
+; Unlabeled
+wD6F8::
+  ds 1 ; D6F8
+
+; Unlabeled
+wD6F9::
+  ds 1 ; D6F9
 
 ; Is there one or more switchable objects in the room
 ; See ROOM_SWITCHABLE_OBJECT_* constants

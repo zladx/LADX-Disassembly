@@ -8960,7 +8960,7 @@ jr_003_7C2B:
     cp   ENTITY_HOOKSHOT_CHAIN                    ; $7C4F: $FE $03
     jr   nz, jr_003_7C5A                          ; $7C51: $20 $07
 
-    ld   a, [$D6F9]                               ; $7C53: $FA $F9 $D6
+    ld   a, [wD6F9]                               ; $7C53: $FA $F9 $D6
     and  a                                        ; $7C56: $A7
     jp   nz, setCarryFlagAndReturn                ; $7C57: $C2 $A7 $7C
 

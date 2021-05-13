@@ -6947,7 +6947,7 @@ jr_002_722C:
     jp   ApplyMapFadeOutTransitionWithNoise       ; $723A: $C3 $7D $0C
 
 label_002_723D:
-    ld   a, [$D6F9]                               ; $723D: $FA $F9 $D6
+    ld   a, [wD6F9]                               ; $723D: $FA $F9 $D6
     and  a                                        ; $7240: $A7
     jp   nz, label_002_7461                       ; $7241: $C2 $61 $74
 
@@ -7528,7 +7528,7 @@ func_002_755B::
     jr   z, jr_002_7582                           ; $7565: $28 $1B
 
     ld   c, $FC                                   ; $7567: $0E $FC
-    ld   a, [$D6F9]                               ; $7569: $FA $F9 $D6
+    ld   a, [wD6F9]                               ; $7569: $FA $F9 $D6
     and  a                                        ; $756C: $A7
     jr   nz, jr_002_7582                          ; $756D: $20 $13
 
@@ -8003,7 +8003,7 @@ ApplyLinkGroundPhysics_Default::
     xor  [hl]                                     ; $77CF: $AE
     jr   z, .grassVfxEnd                          ; $77D0: $28 $17
 
-    ld   a, [$D6F8]                               ; $77D2: $FA $F8 $D6
+    ld   a, [wD6F8]                               ; $77D2: $FA $F8 $D6
     ld   e, a                                     ; $77D5: $5F
     ld   d, $00                                   ; $77D6: $16 $00
     ld   hl, Data_002_786F                        ; $77D8: $21 $6F $78
@@ -8012,18 +8012,18 @@ ApplyLinkGroundPhysics_Default::
     add  [hl]                                     ; $77DF: $86
     ld   [wC13B], a                               ; $77E0: $EA $3B $C1
     ld   a, $01                                   ; $77E3: $3E $01
-    ld   [$D6F9], a                               ; $77E5: $EA $F9 $D6
+    ld   [wD6F9], a                               ; $77E5: $EA $F9 $D6
     ret                                           ; $77E8: $C9
 .grassVfxEnd
 
-    ld   a, [$D6F9]                               ; $77E9: $FA $F9 $D6
+    ld   a, [wD6F9]                               ; $77E9: $FA $F9 $D6
     and  a                                        ; $77EC: $A7
     jr   z, jr_002_77F7                           ; $77ED: $28 $08
 
     ld   a, NOISE_SFX_FOOTSTEP                    ; $77EF: $3E $07
     ldh  [hNoiseSfx], a                           ; $77F1: $E0 $F4
     xor  a                                        ; $77F3: $AF
-    ld   [$D6F9], a                               ; $77F4: $EA $F9 $D6
+    ld   [wD6F9], a                               ; $77F4: $EA $F9 $D6
 
 jr_002_77F7:
     ld   a, [wIsIndoor]                           ; $77F7: $FA $A5 $DB

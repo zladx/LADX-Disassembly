@@ -360,8 +360,8 @@ InterruptVBlank::
     ld   hl, data_046A                            ; $0514: $21 $6A $04
     add  hl, de                                   ; $0517: $19
     ld   a, [hl]                                  ; $0518: $7E
-    ; Store this value to $D6F8
-    ld   [$D6F8], a                               ; $0519: $EA $F8 $D6
+    ; Store this value to wD6F8
+    ld   [wD6F8], a                               ; $0519: $EA $F8 $D6
     ; Switch Link's sprite ?
     call label_1ED7                               ; $051C: $CD $D7 $1E
     jr   .drawLinkSprite                          ; $051F: $18 $E0

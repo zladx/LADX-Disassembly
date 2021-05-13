@@ -2249,7 +2249,7 @@ func_001_6162::
     ldh  [hBaseScrollY], a                               ; $617B: $E0 $97
     ldh  [hBaseScrollX], a                        ; $617D: $E0 $96
     ld   [wD6FB], a                               ; $617F: $EA $FB $D6
-    ld   [$D6F8], a                               ; $6182: $EA $F8 $D6
+    ld   [wD6F8], a                               ; $6182: $EA $F8 $D6
     ld   a, $18                                   ; $6185: $3E $18
     ldh  [hButtonsInactiveDelay], a                               ; $6187: $E0 $B5
     ret                                           ; $6189: $C9

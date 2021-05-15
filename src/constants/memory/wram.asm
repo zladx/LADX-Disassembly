@@ -165,16 +165,20 @@ wC118:
 wC119:
   ds 1 ; C119
 
-; Unlabeled
-wC11A:
+; Written when updating Link's X position from its speed,
+; but never read again.
+; (unused)
+wC11A:;
   ds 1 ; C11A
 
-; Unlabeled
-wC11B:
+; Written when updating Link's Y position from its speed,
+; but never read again.
+; (unused)
+wC11B:;
   ds 1 ; C11B
 
 ; See LINK_MOTION_* constants for possible values.
-wLinkMotionState:
+wLinkMotionState:;
   ds 1 ; C11C
 
 ; Unlabeled
@@ -186,10 +190,8 @@ wC11E:
   ds 1 ; C11E
 
 ; The condition of the ground Link is standing on:
-; 0 = dry ground,
-; 1 = steps (only when moving),
-; 3 = wet or grassy,
-; 7 = pit,
+; See GROUND_STATUS_* constants for possible values.
+;
 ; Also see: wLinkGroundVfx
 wLinkGroundStatus::
   ds 1 ; C11F
@@ -362,6 +364,10 @@ wC145::
   ds 1 ; C145
 
 ; Is Link in the air (jumping with the feather, flying with roaster, etc)?
+; Possible values:
+; 0 = not in the air
+; 1 = ?
+; 2 = above a pit?
 wIsLinkInTheAir::
   ds 1 ; C146
 
@@ -814,8 +820,11 @@ wOcarinaMenuClosing::
 wC1BA::
   ds 1 ; C1BA
 
-; Unlabeled
-wC1BB::
+; Number of consecutives frames during which the player is slipping
+; over a pit without falling down into it.
+;
+; The counter is reset to 0 when reaching solid ground again.
+wPitSlippingCounter::
   ds 1 ; C1BB
 
 ; Number of frames to wait before loading the previous map and room
@@ -2975,6 +2984,7 @@ wDBCA::
   ds 1 ; DBCA
 
 ; Unlabeled
+; (wGroundVfx is sometimes copied there)
 wDBCB::
   ds 1 ; DBCB
 

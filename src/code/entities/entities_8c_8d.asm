@@ -77,9 +77,9 @@ jr_006_4EF2:
     ld   a, $10                                   ; $4F00: $3E $10
     call GetVectorTowardsLink_trampoline          ; $4F02: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $4F05: $F0 $D7
-    ldh  [hLinkPositionYIncrement], a             ; $4F07: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $4F07: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $4F09: $F0 $D8
-    ldh  [hLinkPositionXIncrement], a             ; $4F0B: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $4F0B: $E0 $9A
 
 jr_006_4F0D:
     ret                                           ; $4F0D: $C9

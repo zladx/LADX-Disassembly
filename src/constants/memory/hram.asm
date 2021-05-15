@@ -101,12 +101,11 @@ hLinkPositionY::
  ds 1 ; FF99
 
 ; Increment applied to hLinkPositionX at the end of the frame
-hLinkPositionXIncrement::
+hLinkSpeedX::
  ds 1 ; FF9A
 
-
 ; Increment applied to hLinkPositionY at the end of the frame
-hLinkPositionYIncrement::
+hLinkSpeedY::
  ds 1 ; FF9B
 
 ; used when jumping

@@ -6132,7 +6132,7 @@ func_017_7AC1::
 
 jr_017_7AEB:
     ld   a, $FF                                   ; $7AEB: $3E $FF
-    ldh  [hLinkPositionYIncrement], a             ; $7AED: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $7AED: $E0 $9B
 
 func_017_7AEF::
     ldh  a, [hFrameCounter]                       ; $7AEF: $F0 $E7
@@ -6146,7 +6146,7 @@ func_017_7AEF::
 func_017_7AFA::
     push bc                                       ; $7AFA: $C5
     xor  a                                        ; $7AFB: $AF
-    ldh  [hLinkPositionXIncrement], a             ; $7AFC: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $7AFC: $E0 $9A
     call UpdateFinalLinkPosition                  ; $7AFE: $CD $A8 $21
     call func_017_7D34                            ; $7B01: $CD $34 $7D
     pop  bc                                       ; $7B04: $C1
@@ -6154,14 +6154,14 @@ func_017_7AFA::
 
 func_017_7B06::
     ld   a, $F8                                   ; $7B06: $3E $F8
-    ldh  [hLinkPositionYIncrement], a             ; $7B08: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $7B08: $E0 $9B
     call func_017_7AEF                            ; $7B0A: $CD $EF $7A
     ldh  a, [hLinkPositionY]                      ; $7B0D: $F0 $99
     cp   $5C                                      ; $7B0F: $FE $5C
     jr   nz, jr_017_7B40                          ; $7B11: $20 $2D
 
     xor  a                                        ; $7B13: $AF
-    ldh  [hLinkPositionYIncrement], a             ; $7B14: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $7B14: $E0 $9B
     ld   a, $02                                   ; $7B16: $3E $02
     ldh  [hLinkAnimationState], a                 ; $7B18: $E0 $9D
     ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $7B1A: $3E $E8

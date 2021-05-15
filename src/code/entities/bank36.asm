@@ -853,7 +853,7 @@ jr_036_452D:
 
     inc  [hl]                                     ; $4535: $34
     ld   a, [hl]                                  ; $4536: $7E
-    ldh  [hLinkPositionXIncrement], a             ; $4537: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $4537: $E0 $9A
     push bc                                       ; $4539: $C5
     call UpdateFinalLinkPosition                  ; $453A: $CD $A8 $21
     call label_3E19                               ; $453D: $CD $19 $3E
@@ -977,7 +977,7 @@ jr_036_45E6:
 
     inc  [hl]                                     ; $45EE: $34
     ld   a, [hl]                                  ; $45EF: $7E
-    ldh  [hLinkPositionYIncrement], a             ; $45F0: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $45F0: $E0 $9B
     push bc                                       ; $45F2: $C5
     call UpdateFinalLinkPosition                  ; $45F3: $CD $A8 $21
     call label_3E19                               ; $45F6: $CD $19 $3E
@@ -2224,9 +2224,9 @@ jr_036_4D5C:
     ld   a, $14                                   ; $4D61: $3E $14
     call GetVectorTowardsLink_trampoline          ; $4D63: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $4D66: $F0 $D7
-    ldh  [hLinkPositionYIncrement], a             ; $4D68: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $4D68: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $4D6A: $F0 $D8
-    ldh  [hLinkPositionXIncrement], a             ; $4D6C: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $4D6C: $E0 $9A
 
 jr_036_4D6E:
     ld   hl, wEntitiesHealthTable                 ; $4D6E: $21 $60 $C3
@@ -3608,9 +3608,9 @@ jr_036_5661:
     ld   a, $20                                   ; $5666: $3E $20
     call GetVectorTowardsLink_trampoline          ; $5668: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $566B: $F0 $D7
-    ldh  [hLinkPositionYIncrement], a             ; $566D: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $566D: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $566F: $F0 $D8
-    ldh  [hLinkPositionXIncrement], a             ; $5671: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $5671: $E0 $9A
 
 jr_036_5673:
     ldh  a, [hFrameCounter]                       ; $5673: $F0 $E7
@@ -4671,9 +4671,9 @@ ENDC
     ld   a, $20                                   ; $5CCC: $3E $20
     call GetVectorTowardsLink_trampoline          ; $5CCE: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $5CD1: $F0 $D7
-    ldh  [hLinkPositionYIncrement], a             ; $5CD3: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $5CD3: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $5CD5: $F0 $D8
-    ldh  [hLinkPositionXIncrement], a             ; $5CD7: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $5CD7: $E0 $9A
 
 jr_036_5CD9:
     ld   a, $30                                   ; $5CD9: $3E $30

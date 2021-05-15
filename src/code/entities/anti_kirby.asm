@@ -218,11 +218,11 @@ jr_006_434B:
     ldh  a, [hMultiPurpose0]                      ; $4384: $F0 $D7
     cpl                                           ; $4386: $2F
     inc  a                                        ; $4387: $3C
-    ldh  [hLinkPositionYIncrement], a             ; $4388: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $4388: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $438A: $F0 $D8
     cpl                                           ; $438C: $2F
     inc  a                                        ; $438D: $3C
-    ldh  [hLinkPositionXIncrement], a             ; $438E: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $438E: $E0 $9A
     push bc                                       ; $4390: $C5
     call UpdateFinalLinkPosition                  ; $4391: $CD $A8 $21
     call label_3E19                               ; $4394: $CD $19 $3E
@@ -293,7 +293,7 @@ jr_006_43F5:
     add  hl, bc                                   ; $43FA: $09
     ld   [hl], b                                  ; $43FB: $70
     xor  a                                        ; $43FC: $AF
-    ldh  [hLinkPositionYIncrement], a             ; $43FD: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $43FD: $E0 $9B
     ld   hl, wEntitiesDirectionTable              ; $43FF: $21 $80 $C3
     add  hl, bc                                   ; $4402: $09
     ld   a, [hl]                                  ; $4403: $7E
@@ -304,7 +304,7 @@ jr_006_43F5:
     ld   a, $E8                                   ; $440A: $3E $E8
 
 jr_006_440C:
-    ldh  [hLinkPositionXIncrement], a             ; $440C: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $440C: $E0 $9A
     ld   a, $10                                   ; $440E: $3E $10
     ldh  [hLinkVelocityZ], a                               ; $4410: $E0 $A3
     ld   a, $20                                   ; $4412: $3E $20

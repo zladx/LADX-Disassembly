@@ -18,8 +18,13 @@ TRANSCIENT_VFX_UNUSED_1       equ $0E
 TRANSCIENT_VFX_UNUSED_2       equ $0F
 
 ; Values for wLinkGroundVfx
+; (maybe a better label would be wLinkGroundPhysics? But wLinkGroundStatus
+; already exists.)
 GROUND_VFX_NONE          equ $00
 GROUND_VFX_SHALLOW_WATER equ $05
 GROUND_VFX_GRASS         equ $06
 GROUND_VFX_PIT           equ $50
-
+GROUND_VFX_51            equ $51
+GROUND_VFX_SPIKES        equ $E0 ; spikes?
+GROUND_VFX_F0            equ $F0
+GROUND_VFX_FF            equ $FF

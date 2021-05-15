@@ -252,7 +252,7 @@ jr_006_5145:
     jr   nz, jr_006_5179                          ; $5147: $20 $30
 
     ld   a, $20                                   ; $5149: $3E $20
-    ldh  [hLinkPositionYIncrement], a             ; $514B: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $514B: $E0 $9B
     ldh  a, [hLinkPositionX]                      ; $514D: $F0 $98
     cp   $50                                      ; $514F: $FE $50
     ld   a, $E0                                   ; $5151: $3E $E0
@@ -261,7 +261,7 @@ jr_006_5145:
     ld   a, $20                                   ; $5155: $3E $20
 
 jr_006_5157:
-    ldh  [hLinkPositionXIncrement], a             ; $5157: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $5157: $E0 $9A
     ld   a, $10                                   ; $5159: $3E $10
     ldh  [hLinkVelocityZ], a                               ; $515B: $E0 $A3
     ld   a, $02                                   ; $515D: $3E $02

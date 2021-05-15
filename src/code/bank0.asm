@@ -2301,11 +2301,15 @@ UseMagicPowder::
     ld   [MBC3SelectBank], a                      ; $14BF: $EA $00 $21
     ret                                           ; $14C2: $C9
 
-data_14C3::
-    db $1C, $E4, 0, 0                             ; $14C3
+; Horizontal speed boost when jumping while using Pegasus Boots
+; Indexed by hLinkDirection
+PegasusBootsJumpBoostXTable::
+    db 28, -28, 0, 0                              ; $14C3
 
-data_14C7::
-    db 0, 0, $E4, $1C                             ; $14C7
+; Vertical speed boost when jumping while using Pegasus Boots
+; Indexed by hLinkDirection
+PegasusBootsJumpBoostYTable::
+    db 0, 0, -28, 28                              ; $14C7
 
 UseRocsFeather::
     ld   a, [wC130]                               ; $14CB: $FA $30 $C1
@@ -2323,40 +2327,41 @@ UseRocsFeather::
     ldh  [hJingle], a                             ; $14E4: $E0 $F2
     ldh  a, [hIsSideScrolling]                    ; $14E6: $F0 $F9
     and  a                                        ; $14E8: $A7
-    jr   z, label_1508                            ; $14E9: $28 $1D
-    call label_1508                               ; $14EB: $CD $08 $15
+    jr   z, .label_1508                           ; $14E9: $28 $1D
+    call .label_1508                              ; $14EB: $CD $08 $15
     ldh  a, [hPressedButtonsMask]                 ; $14EE: $F0 $CB
     and  J_LEFT | J_RIGHT                         ; $14F0: $E6 $03
     ld   a, $EA                                   ; $14F2: $3E $EA
-    jr   z, label_14F8                            ; $14F4: $28 $02
+    jr   z, .label_14F8                           ; $14F4: $28 $02
     ld   a, $E8                                   ; $14F6: $3E $E8
 
-label_14F8::
-    ldh  [hLinkPositionYIncrement], a             ; $14F8: $E0 $9B
+.label_14F8
+    ldh  [hLinkSpeedY], a                         ; $14F8: $E0 $9B
     xor  a                                        ; $14FA: $AF
     ldh  [hLinkVelocityZ], a                   ; $14FB: $E0 $A3
     call UpdateFinalLinkPosition                  ; $14FD: $CD $A8 $21
     jpsw CheckPositionForMapTransition            ; $1500: $3E $02 $CD $0C $08 $C3 $75 $6C
 
-label_1508::
+.label_1508
     ld   a, $20                                   ; $1508: $3E $20
     ldh  [hLinkVelocityZ], a                   ; $150A: $E0 $A3
+
+    ; If running with Pegasus Boots, jump further
     ld   a, [wIsRunningWithPegasusBoots]          ; $150C: $FA $4A $C1
     and  a                                        ; $150F: $A7
     ret  z                                        ; $1510: $C8
+
     ldh  a, [hLinkDirection]                      ; $1511: $F0 $9E
     ld   e, a                                     ; $1513: $5F
     ld   d, b                                     ; $1514: $50
-    ld   hl, data_14C3                            ; $1515: $21 $C3 $14
+    ld   hl, PegasusBootsJumpBoostXTable          ; $1515: $21 $C3 $14
     add  hl, de                                   ; $1518: $19
     ld   a, [hl]                                  ; $1519: $7E
-    ldh  [hLinkPositionXIncrement], a             ; $151A: $E0 $9A
-    ld   hl, data_14C7                            ; $151C: $21 $C7 $14
+    ldh  [hLinkSpeedX], a                         ; $151A: $E0 $9A
+    ld   hl, PegasusBootsJumpBoostYTable          ; $151C: $21 $C7 $14
     add  hl, de                                   ; $151F: $19
     ld   a, [hl]                                  ; $1520: $7E
-    ldh  [hLinkPositionYIncrement], a             ; $1521: $E0 $9B
-
-label_1523::
+    ldh  [hLinkSpeedY], a                         ; $1521: $E0 $9B
     ret                                           ; $1523: $C9
 
 SwordRandomSfxTable::
@@ -2672,46 +2677,57 @@ CheckItemsSwordCollision::
     ret                                           ; $16FC: $C9
 
 XPositionIncrementPegasusRunning::
-.right: db  $20                                    ; $16FD
-.left:  db  $E0                                    ; $16FE
+.right: db  32                                     ; $16FD
+.left:  db  -32                                    ; $16FE
 .up:    db  0                                      ; $16FF
 .down:  db  0                                      ; $1700
 
 YPositionIncrementPegasusRunning::
 .right: db  0                                      ; $1701
 .left:  db  0                                      ; $1702
-.up:    db  $E0                                    ; $1703
-.down:  db  $20                                    ; $1704
+.up:    db  -32                                    ; $1703
+.down:  db  32                                     ; $1704
 
 UsePegasusBoots::
+    ; Disable running with Pegasus Boots vertically in side-scrolling sections
     ldh  a, [hIsSideScrolling]                    ; $1705: $F0 $F9
     and  a                                        ; $1707: $A7
-    jr   z, .label_1713                           ; $1708: $28 $09
+    jr   z, .sideScrollingEnd                     ; $1708: $28 $09
     ldh  a, [hFF9C]                               ; $170A: $F0 $9C
     and  a                                        ; $170C: $A7
     ret  nz                                       ; $170D: $C0
     ldh  a, [hLinkDirection]                      ; $170E: $F0 $9E
     and  DIRECTION_VERTICAL_MASK                  ; $1710: $E6 $02
     ret  nz                                       ; $1712: $C0
+.sideScrollingEnd
 
-.label_1713
     ld   a, [wIsRunningWithPegasusBoots]          ; $1713: $FA $4A $C1
     and  a                                        ; $1716: $A7
     ret  nz                                       ; $1717: $C0
+
+    ; Don't apply running effect when in the air
     ldh  a, [hLinkPositionZ]                      ; $1718: $F0 $A2
     ld   hl, wIsLinkInTheAir                      ; $171A: $21 $46 $C1
     or   [hl]                                     ; $171D: $B6
     ret  nz                                       ; $171E: $C0
+
+    ; Increment wConsecutiveStepsCount
     ld   a, [wConsecutiveStepsCount]              ; $171F: $FA $20 $C1
     add  a, $02                                   ; $1722: $C6 $02
     ld   [wConsecutiveStepsCount], a              ; $1724: $EA $20 $C1
-    call func_1756                                ; $1727: $CD $56 $17
+
+    call DisplayTransientVfxForLinkRunning        ; $1727: $CD $56 $17
+
+    ; Increment wPegasusBootsChargeMeter
     ld   a, [wPegasusBootsChargeMeter]            ; $172A: $FA $4B $C1
     inc  a                                        ; $172D: $3C
     ld   [wPegasusBootsChargeMeter], a            ; $172E: $EA $4B $C1
+
     cp   MAX_PEGASUS_BOOTS_CHARGE                 ; $1731: $FE $20
     ret  nz                                       ; $1733: $C0
+
     ld   [wIsRunningWithPegasusBoots], a          ; $1734: $EA $4A $C1
+
     ; reset spin marker and sword charge
     xor  a                                        ; $1737: $AF
     ld   [wIsUsingSpinAttack], a                  ; $1738: $EA $21 $C1
@@ -2722,16 +2738,21 @@ UsePegasusBoots::
     ld   hl, XPositionIncrementPegasusRunning     ; $1743: $21 $FD $16
     add  hl, de                                   ; $1746: $19
     ld   a, [hl]                                  ; $1747: $7E
-    ldh  [hLinkPositionXIncrement], a             ; $1748: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $1748: $E0 $9A
     ld   hl, YPositionIncrementPegasusRunning     ; $174A: $21 $01 $17
     add  hl, de                                   ; $174D: $19
     ld   a, [hl]                                  ; $174E: $7E
-    ldh  [hLinkPositionYIncrement], a             ; $174F: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $174F: $E0 $9B
     xor  a                                        ; $1751: $AF
     ld   [wC1AC], a                               ; $1752: $EA $AC $C1
     ret                                           ; $1755: $C9
 
-func_1756::
+; When Link is running using Pegasus Boots, display a transient VFX
+; every 8 frame.
+;
+; The effect may be either the boots dust poofs (when running on the ground),
+; or water splashes (when running on shallow water).
+DisplayTransientVfxForLinkRunning::
     ldh  a, [hFrameCounter]                       ; $1756: $F0 $E7
     and  $07                                      ; $1758: $E6 $07
     ld   hl, hLinkPositionZ                       ; $175A: $21 $A2 $FF
@@ -2767,8 +2788,8 @@ func_1756::
 
 ClearLinkPositionIncrement::
     xor  a                                        ; $178E: $AF
-    ldh  [hLinkPositionXIncrement], a             ; $178F: $E0 $9A
-    ldh  [hLinkPositionYIncrement], a             ; $1791: $E0 $9B
+    ldh  [hLinkSpeedX], a                         ; $178F: $E0 $9A
+    ldh  [hLinkSpeedY], a                         ; $1791: $E0 $9B
     ret                                           ; $1793: $C9
 
 ; Animate Link motion?
@@ -3915,16 +3936,19 @@ UpdateFinalLinkPosition::
     ld   c, $00                                   ; $21B2: $0E $00
     ldh  [hMultiPurpose0], a                      ; $21B4: $E0 $D7
 
+; Update Link position from its speed, in either horizontal
+; or vertical direction.
+;
 ; Inputs:
 ;   c : direction (0: horizontal ; 1: vertical)
 ComputeLinkPosition::
-    ; b = 0
+    ; Read hLinkSpeedX or hLinkSpeedY (depending on the direction)
     ld   b, $00                                   ; $21B6: $06 $00
-    ; a = [hLinkPositionXIncrement + direction]
-    ld   hl, hLinkPositionXIncrement              ; $21B8: $21 $9A $FF
+    ld   hl, hLinkSpeedX                          ; $21B8: $21 $9A $FF
     add  hl, bc                                   ; $21BB: $09
     ld   a, [hl]                                  ; $21BC: $7E
 
+    ; Write swap(speed) & $F0 to wC11A or wC11B (depending on the direction)
     push af                                       ; $21BD: $F5
     swap a                                        ; $21BE: $CB $37
     and  $F0                                      ; $21C0: $E6 $F0
@@ -3934,17 +3958,21 @@ ComputeLinkPosition::
     ld   [hl], a                                  ; $21C7: $77
 
     rl   d                                        ; $21C8: $CB $12
-    ; hl = [hLinkPositionX + direction]
+
+    ; hl = hLinkPositionX or hLinkPositionY
     ld   hl, hLinkPositionX                       ; $21CA: $21 $98 $FF
     add  hl, bc                                   ; $21CD: $09
 
     pop  af                                       ; $21CE: $F1
+
+    ; e = speed mask (avoids the speed from overflowing the max speed, and wrap around)
     ld   e, $00                                   ; $21CF: $1E $00
     bit  7, a                                     ; $21D1: $CB $7F
-    jr   z, .label_21D7                           ; $21D3: $28 $02
+    jr   z, .positiveSpeedEnd                     ; $21D3: $28 $02
     ld   e, $F0                                   ; $21D5: $1E $F0
-.label_21D7
+.positiveSpeedEnd
 
+    ; Add the speed to the horizontal or vertical position
     swap a                                        ; $21D7: $CB $37
     and  $0F                                      ; $21D9: $E6 $0F
     or   e                                        ; $21DB: $B3

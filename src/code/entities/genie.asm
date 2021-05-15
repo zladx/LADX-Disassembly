@@ -121,9 +121,9 @@ func_004_40A3::
     ld   a, $14                                   ; $40BA: $3E $14
     call GetVectorTowardsLink_trampoline          ; $40BC: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                               ; $40BF: $F0 $D7
-    ldh  [hLinkPositionYIncrement], a                               ; $40C1: $E0 $9B
+    ldh  [hLinkSpeedY], a                               ; $40C1: $E0 $9B
     ldh  a, [hMultiPurpose1]                               ; $40C3: $F0 $D8
-    ldh  [hLinkPositionXIncrement], a                               ; $40C5: $E0 $9A
+    ldh  [hLinkSpeedX], a                               ; $40C5: $E0 $9A
 
 jr_004_40C7:
     ld   hl, wEntitiesUnknownTableD               ; $40C7: $21 $D0 $C2

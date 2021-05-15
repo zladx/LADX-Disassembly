@@ -65,6 +65,7 @@ OBJECT_PHONE_BOOTH_TOP      equ $45
 OBJECT_CLIFF_TOP            equ $4D
 OBJECT_BUSH                 equ $5C
 OBJECT_WEATHER_VANE_BASE    equ $5E
+OBJECT_WELL                 equ $61
 OBJECT_ROUNDED_BLOCK        equ $6E
 OBJECT_OWN_STATUE           equ $6F
 OBJECT_WEATHER_VANE_TOP     equ $91
@@ -83,6 +84,7 @@ OBJECT_STEPS                equ $E0
 OBJECT_GROUND_HOLE          equ $E8
 OBJECT_ROCKY_CAVE_DOOR      equ $E1
 OBJECT_CAVE_DOOR            equ $E3
+OBJECT_PIT                  equ $E8
 OBJECT_WATERFALL            equ $E9
 ; Overworld macros
 OBJECT_MACRO_F5             equ $F5
@@ -104,6 +106,7 @@ OBJECT_HIDDEN_BOMBABLE_WALL_TOP    equ $47
 OBJECT_HIDDEN_BOMBABLE_WALL_BOTTOM equ $48
 OBJECT_HIDDEN_BOMBABLE_WALL_LEFT   equ $49
 OBJECT_HIDDEN_BOMBABLE_WALL_RIGHT  equ $4A
+OBJECT_SIDE_VIEW_SPIKES            equ $4C
 OBJECT_POT_WITH_SWITCH             equ $8E
 OBJECT_CHEST_CLOSED                equ $A0
 OBJECT_CHEST_OPEN                  equ $A1

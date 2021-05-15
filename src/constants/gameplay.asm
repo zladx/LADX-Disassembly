@@ -274,6 +274,16 @@ USING_SPIN_ATTACK_MAX     equ $20
 ; Charge amount needed to run
 MAX_PEGASUS_BOOTS_CHARGE  equ $20
 
+; Values for wLinkGroundStatus
+GROUND_STATUS_NORMAL  equ $00
+GROUND_STATUS_STEPS   equ $01
+GROUND_STATUS_SLOW    equ $03 ; wet or grassy
+GROUND_STATUS_PIT     equ $07
+
+; Maximum number of frames during which the player can
+; slip over a pit without falling into it.
+PIT_MAX_SLIPPING       equ 24
+
 ; Values for wTransitionGfx
 TRANSITION_GFX_NONE         equ $00 ; no transition
 TRANSITION_GFX_DREAM_SHRINE equ $01 ; wavy transition when sleeping in the Dream Shrine

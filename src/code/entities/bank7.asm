@@ -911,7 +911,7 @@ jr_007_461A:
     call CheckLinkCollisionWithEnemy_trampoline   ; $461D: $CD $5A $3B
     jr   nc, jr_007_4640                          ; $4620: $30 $1E
 
-    ldh  a, [hLinkPositionYIncrement]             ; $4622: $F0 $9B
+    ldh  a, [hLinkSpeedY]                         ; $4622: $F0 $9B
     and  $80                                      ; $4624: $E6 $80
     jr   nz, jr_007_4640                          ; $4626: $20 $18
 
@@ -924,7 +924,7 @@ jr_007_461A:
     sub  $0F                                      ; $4633: $D6 $0F
     ldh  [hLinkPositionY], a                      ; $4635: $E0 $99
     ld   a, $02                                   ; $4637: $3E $02
-    ldh  [hLinkPositionYIncrement], a             ; $4639: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $4639: $E0 $9B
     ld   a, $01                                   ; $463B: $3E $01
     ld   [wC147], a                               ; $463D: $EA $47 $C1
 
@@ -5519,7 +5519,7 @@ func_007_639E::
     call CheckLinkCollisionWithEnemy_trampoline   ; $63B6: $CD $5A $3B
     jr   nc, jr_007_63F6                          ; $63B9: $30 $3B
 
-    ldh  a, [hLinkPositionYIncrement]             ; $63BB: $F0 $9B
+    ldh  a, [hLinkSpeedY]                         ; $63BB: $F0 $9B
     and  $80                                      ; $63BD: $E6 $80
     jr   nz, jr_007_63F6                          ; $63BF: $20 $35
 
@@ -5533,10 +5533,10 @@ func_007_639E::
     ld   a, [hl]                                  ; $63CE: $7E
     sub  $10                                      ; $63CF: $D6 $10
     ldh  [hLinkPositionY], a                      ; $63D1: $E0 $99
-    ldh  a, [hLinkPositionXIncrement]             ; $63D3: $F0 $9A
+    ldh  a, [hLinkSpeedX]                         ; $63D3: $F0 $9A
     push af                                       ; $63D5: $F5
     ldh  a, [hMultiPurposeG]                               ; $63D6: $F0 $E8
-    ldh  [hLinkPositionXIncrement], a             ; $63D8: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $63D8: $E0 $9A
     ld   hl, hLinkPositionX                       ; $63DA: $21 $98 $FF
     add  [hl]                                     ; $63DD: $86
     ld   [hl], a                                  ; $63DE: $77
@@ -5544,9 +5544,9 @@ func_007_639E::
     call label_3E19                               ; $63E0: $CD $19 $3E
     pop  bc                                       ; $63E3: $C1
     pop  af                                       ; $63E4: $F1
-    ldh  [hLinkPositionXIncrement], a             ; $63E5: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $63E5: $E0 $9A
     ld   a, $02                                   ; $63E7: $3E $02
-    ldh  [hLinkPositionYIncrement], a             ; $63E9: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $63E9: $E0 $9B
     ld   a, $01                                   ; $63EB: $3E $01
     ld   [wC147], a                               ; $63ED: $EA $47 $C1
     ld   hl, wEntitiesPrivateState2Table          ; $63F0: $21 $C0 $C2
@@ -7627,9 +7627,9 @@ jr_007_70E0:
     ld   a, $28                                   ; $70ED: $3E $28
     call GetVectorTowardsLink_trampoline          ; $70EF: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $70F2: $F0 $D7
-    ldh  [hLinkPositionYIncrement], a             ; $70F4: $E0 $9B
+    ldh  [hLinkSpeedY], a                         ; $70F4: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $70F6: $F0 $D8
-    ldh  [hLinkPositionXIncrement], a             ; $70F8: $E0 $9A
+    ldh  [hLinkSpeedX], a                         ; $70F8: $E0 $9A
     ld   a, $02                                   ; $70FA: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $70FC: $EA $46 $C1
     ld   a, $13                                   ; $70FF: $3E $13

@@ -84,6 +84,11 @@ ROOM_INDOOR_B_FISHERMAN_UNDER_BRIDGE     equ $F5
 ROOM_INDOOR_B_MANBO                      equ $FD
 
 ;
+; Color Dungeon rooms
+;
+
+ROOM_CD_05                               equ $05
+;
 ; Unlabeled rooms
 ;
 ; TODO: sort them into Overworld/Indoor A/Indoor B, and label them.

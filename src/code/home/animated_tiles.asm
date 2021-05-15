@@ -130,11 +130,11 @@ AnimateTiles::
     or   [hl]                                     ; $1B6D: $B6
     jp   nz, DrawLinkSpriteAndReturn              ; $1B6E: $C2 $2E $1D
 
-    ; If wD6F8 != 0, handle special case
-    ld   a, [wD6F8]                               ; $1B71: $FA $F8 $D6
+    ; If wSwitchableObjectAnimationStage != 0, handle special case
+    ld   a, [wSwitchableObjectAnimationStage]                               ; $1B71: $FA $F8 $D6
     and  a                                        ; $1B74: $A7
     jr   z, .notD6F8                              ; $1B75: $28 $06
-    call label_1ED7                               ; $1B77: $CD $D7 $1E
+    call UpdateSwitchBlockTiles                               ; $1B77: $CD $D7 $1E
     jp   DrawLinkSpriteAndReturn                  ; $1B7A: $C3 $2E $1D
 
 .notD6F8

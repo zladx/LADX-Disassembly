@@ -11,6 +11,8 @@ vTiles1::
 
 section "Tiles 2", vram[$9000], BANK[0]
 vTiles2::
+vTilesSwitchBlockA equ $9040
+vTilesSwitchBlockB equ $9080
 
 section "BG Map 0", vram[$9800], BANK[0]
 vBGMap0::

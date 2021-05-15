@@ -112,6 +112,12 @@ OverworldLandscapeTiles::
 incbin "gfx/world/overworld_landscape.dmg.2bpp"
 LinkCharacter2Tiles::
 incbin "gfx/characters/oam_link_2.dmg.2bpp"
+SwitchBlockTiles::
+incbin "gfx/items/switch_block.dmg.2bpp"
+MushroomTiles::
+incbin "gfx/items/mushroom.dmg.2bpp"
+CyclopKeyTiles::
+incbin "gfx/items/cyclop_key.dmg.2bpp"
 PieceOfHeartMeterTiles::
 incbin "gfx/items/piece_of_heart_meter.dmg.2bpp"
 OcarinaSymbolsTiles::
@@ -401,6 +407,9 @@ incbin "gfx/items/inventory_overworld_items.cgb.2bpp"
 incbin "gfx/items/instruments.cgb.2bpp"
 incbin "gfx/world/overworld_1.cgb.2bpp"
 incbin "gfx/characters/oam_link_2.cgb.2bpp"
+incbin "gfx/items/switch_block.cgb.2bpp"
+incbin "gfx/items/mushroom.cgb.2bpp"
+incbin "gfx/items/cyclop_key.cgb.2bpp"
 incbin "gfx/items/piece_of_heart_meter.cgb.2bpp"
 incbin "gfx/items/ocarina_symbols.cgb.2bpp"
 incbin "gfx/world/animated_tiles.w32.cgb.2bpp"

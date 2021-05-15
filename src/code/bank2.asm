@@ -6963,7 +6963,7 @@ label_002_723D:
     ld   d, $00                                   ; $7251: $16 $00
     ld   hl, Data_002_787B                        ; $7253: $21 $7B $78
     add  hl, de                                   ; $7256: $19
-    ld   a, [wD6FB]                               ; $7257: $FA $FB $D6
+    ld   a, [hSwitchBlocksState]                  ; $7257: $FA $FB $D6
     xor  [hl]                                     ; $725A: $AE
     jr   nz, label_002_7277                       ; $725B: $20 $1A
 
@@ -7999,11 +7999,11 @@ ApplyLinkGroundPhysics_Default::
     ld   d, $00                                   ; $77C6: $16 $00
     ld   hl, Data_002_787B                        ; $77C8: $21 $7B $78
     add  hl, de                                   ; $77CB: $19
-    ld   a, [wD6FB]                               ; $77CC: $FA $FB $D6
+    ld   a, [hSwitchBlocksState]                  ; $77CC: $FA $FB $D6
     xor  [hl]                                     ; $77CF: $AE
     jr   z, .grassVfxEnd                          ; $77D0: $28 $17
 
-    ld   a, [wD6F8]                               ; $77D2: $FA $F8 $D6
+    ld   a, [wSwitchableObjectAnimationStage]     ; $77D2: $FA $F8 $D6
     ld   e, a                                     ; $77D5: $5F
     ld   d, $00                                   ; $77D6: $16 $00
     ld   hl, Data_002_786F                        ; $77D8: $21 $6F $78

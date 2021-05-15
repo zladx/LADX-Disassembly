@@ -2379,8 +2379,13 @@ wRequestLength::
 wRequestData:
   ds 244  ; D604 - D6F7
 
-; Unlabeled
-wD6F8::
+; Animation stage during a switchable object animation.
+;
+; Incremented each frame, but may also be set manually to
+; skip most of the animation and reach the final state directly.
+;
+; Values go from 1 to 9
+wSwitchableObjectAnimationStage::
   ds 1 ; D6F8
 
 ; Unlabeled
@@ -2392,8 +2397,12 @@ wD6F9::
 wRoomSwitchableObject::
   ds 1 ; D6FA
 
-; Unlabeled
-wD6FB::
+; State of switch blocks.
+;
+; Values:
+;  0  blocks of kind A lowered, blocks of kind B raised
+;  2  blocks of kind A raised, blocks of kind B lowered
+hSwitchBlocksState::
   ds 1 ; D6FB
 
 ; TODO comment

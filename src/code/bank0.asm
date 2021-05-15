@@ -3052,8 +3052,8 @@ LinkMotionMapFadeOutHandler::
     ld   a, $30                                   ; $1963: $3E $30
     ldh  [hFFB4], a                               ; $1965: $E0 $B4
     xor  a                                        ; $1967: $AF
-    ld   [wD6FB], a                               ; $1968: $EA $FB $D6
-    ld   [wD6F8], a                               ; $196B: $EA $F8 $D6
+    ld   [hSwitchBlocksState], a                  ; $1968: $EA $FB $D6
+    ld   [wSwitchableObjectAnimationStage], a     ; $196B: $EA $F8 $D6
 
 .label_196E
     pop  hl                                       ; $196E: $E1
@@ -3405,79 +3405,121 @@ label_1EC1::
     ld   de, vTiles2 + $140                       ; $1EC7: $11 $40 $91
     jp   label_1F38                               ; $1ECA: $C3 $38 $1F
 
-data_1ECD::
-    db $40, $68, $40, $68                         ; $1ECD
+; Tiles for switch blocks during a transition
+; Indexed by block kind.
+SwitchBlockTransitionTilesTable:: ; $1ECD
+.kindA dw SwitchBlockTiles + $40 ; half-raised
+.kindB dw SwitchBlockTiles + $40 ; half-raised
 
-data_1ED1::
-    db 0, $68                                     ; $1ED1
+; Tiles for switch blocks in state 0
+; (blocks of kind A lowered, blocks of kind B raised).
+;
+; Indexed by block kind.
+SwitchBlockState0TilesTable:: ; $1ED1
+.kindA dw SwitchBlockTiles ; lowered
+.kindB ; uses the first item below
 
-data_1ED3::
-    db $80, $68, 0, $68                           ; $1ED3
+; Tiles for switch blocks in state 1
+; (blocks of kind A raised, blocks of kind B lowered).
+;
+; Indexed by block kind.
+SwitchBlockState1TilesTable:: ; $1ED3
+.kindA dw SwitchBlockTiles + $80 ; raised
+.kindB dw SwitchBlockTiles + $00 ; lowered
 
-label_1ED7::
+; Modify switch block tiles during V-blank, depending on the blocks state
+; and animation frame.
+;
+; This may be called either when loading a new room from scratch, when transitioning
+; to a new room, or when switching the blocks interactively by hitting a crystal switch.
+;
+; As there are two kind of blocks in the game (normal and inverted), two sets of 2x2 tiles
+; are used in vram: when one has tiles for lowered blocks, the other has tiles for raised
+; blocks.
+;
+; Input:
+;   a   current animation frame
+;       (usually the content wSwitchableObjectAnimationStage, but may be set explicitely when loading a new room).
+UpdateSwitchBlockTiles::
+    ; Select graphics bank
     push af                                       ; $1ED7: $F5
-    ld   a, $0C                                   ; $1ED8: $3E $0C
+    ld   a, BANK(SwitchBlockTiles)                ; $1ED8: $3E $0C
     call AdjustBankNumberForGBC                   ; $1EDA: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $1EDD: $EA $00 $21
     pop  af                                       ; $1EE0: $F1
+
+    ; Mark Link as not interactive during the animation
     ld   hl, hLinkInteractiveMotionBlocked        ; $1EE1: $21 $A1 $FF
     ld   [hl], $01                                ; $1EE4: $36 $01
-    ld   hl, wD6FB                                ; $1EE6: $21 $FB $D6
+
+    ; de = [hSwitchBlocksState]
+    ld   hl, hSwitchBlocksState                   ; $1EE6: $21 $FB $D6
     ld   e, [hl]                                  ; $1EE9: $5E
     ld   d, $00                                   ; $1EEA: $16 $00
     inc  a                                        ; $1EEC: $3C
-    cp   $03                                      ; $1EED: $FE $03
-    jr   nz, label_1EFB                           ; $1EEF: $20 $0A
+
+    ; On stage 3…
+    cp   03                                       ; $1EED: $FE $03
+    jr   nz, .stage3End                           ; $1EEF: $20 $0A
+    ; Invert second bit of hSwitchBlocksState (toggle between 0 and 2)
     push af                                       ; $1EF1: $F5
-    ld   a, [wD6FB]                               ; $1EF2: $FA $FB $D6
+    ld   a, [hSwitchBlocksState]                  ; $1EF2: $FA $FB $D6
     xor  $02                                      ; $1EF5: $EE $02
-    ld   [wD6FB], a                               ; $1EF7: $EA $FB $D6
+    ld   [hSwitchBlocksState], a                  ; $1EF7: $EA $FB $D6
     pop  af                                       ; $1EFA: $F1
+.stage3End
 
-label_1EFB::
-    ld   [wD6F8], a                               ; $1EFB: $EA $F8 $D6
-    cp   $04                                      ; $1EFE: $FE $04
+    ; Increment wSwitchableObjectAnimationStage
+    ld   [wSwitchableObjectAnimationStage], a                               ; $1EFB: $EA $F8 $D6
 
-label_1F00::
-    jr   nz, label_1F07                           ; $1F00: $20 $05
-    ld   hl, data_1ECD                            ; $1F02: $21 $CD $1E
-    jr   label_1F0E                               ; $1F05: $18 $07
+    ; On stage 4…
+    cp   04                                       ; $1EFE: $FE $04
+    jr   nz, .stage4End                           ; $1F00: $20 $05
+    ; … use tiles with both kind of blocks being half-raised
+    ld   hl, SwitchBlockTransitionTilesTable      ; $1F02: $21 $CD $1E
+    jr   .configureCopyForSwitchBlockA            ; $1F05: $18 $07
+.stage4End
 
-label_1F07::
-    cp   $08                                      ; $1F07: $FE $08
-    jr   nz, label_1F14                           ; $1F09: $20 $09
-    ld   hl, data_1ED1                            ; $1F0B: $21 $D1 $1E
+    ; On stage 8…
+    cp   08                                       ; $1F07: $FE $08
+    jr   nz, .stage8End                           ; $1F09: $20 $09
+    ld   hl, SwitchBlockState0TilesTable          ; $1F0B: $21 $D1 $1E
 
-label_1F0E::
+.configureCopyForSwitchBlockA
     add  hl, de                                   ; $1F0E: $19
-    ld   de, $9040                                ; $1F0F: $11 $40 $90
-    jr   label_1F2C                               ; $1F12: $18 $18
+    ld   de, vTilesSwitchBlockA                   ; $1F0F: $11 $40 $90
+    jr   .copyData                                ; $1F12: $18 $18
+.stage8End
 
-label_1F14::
-    cp   $06                                      ; $1F14: $FE $06
-    jr   nz, label_1F1D                           ; $1F16: $20 $05
-    ld   hl, data_1ECD                            ; $1F18: $21 $CD $1E
-    jr   label_1F28                               ; $1F1B: $18 $0B
+    ; On stage 6…
+    cp   06                                       ; $1F14: $FE $06
+    jr   nz, .stage6End                           ; $1F16: $20 $05
+    ld   hl, SwitchBlockTransitionTilesTable      ; $1F18: $21 $CD $1E
+    jr   .configureCopyForSwitchBlockB            ; $1F1B: $18 $0B
+.stage6End
 
-label_1F1D::
-    cp   $0A                                      ; $1F1D: $FE $0A
-    jr   nz, label_1F35                           ; $1F1F: $20 $14
+    ; On stage 10…
+    cp   10                                       ; $1F1D: $FE $0A
+    jr   nz, .skipCopyData                        ; $1F1F: $20 $14
+    ; Clear wSwitchableObjectAnimationStage
     xor  a                                        ; $1F21: $AF
-    ld   [wD6F8], a                               ; $1F22: $EA $F8 $D6
-    ld   hl, data_1ED3                            ; $1F25: $21 $D3 $1E
+    ld   [wSwitchableObjectAnimationStage], a                               ; $1F22: $EA $F8 $D6
+    ; Copy final tiles for switch block B
+    ld   hl, SwitchBlockState1TilesTable          ; $1F25: $21 $D3 $1E
 
-label_1F28::
+.configureCopyForSwitchBlockB
     add  hl, de                                   ; $1F28: $19
-    ld   de, $9080                                ; $1F29: $11 $80 $90
+    ld   de, vTilesSwitchBlockB                   ; $1F29: $11 $80 $90
 
-label_1F2C::
+.copyData
+    ; Copy the tiles from ROM to VRAM
     ld   bc, $40                                  ; $1F2C: $01 $40 $00
     ld   a, [hli]                                 ; $1F2F: $2A
     ld   h, [hl]                                  ; $1F30: $66
     ld   l, a                                     ; $1F31: $6F
     jp   CopyData                                 ; $1F32: $C3 $14 $29
 
-label_1F35::
+.skipCopyData
     jp   DrawLinkSpriteAndReturn                  ; $1F35: $C3 $2E $1D
 
 label_1F38::

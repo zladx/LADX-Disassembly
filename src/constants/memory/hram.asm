@@ -256,8 +256,12 @@ hFFB9::
 hFFBA::
   ds 1 ; FFBA
 
-; Unlabeled
-hFFBB::
+; Kind of switchable block needing its tiles to be updated during V-Blank.
+; Possible values:
+;  0  none
+;  1  switchable block kind A
+;  2  switchable block kind B
+hSwitchBlockNeedingUpdate::
   ds 1 ; FFBB
 
 ; Unknown; stores previous gameplay type before a transition?

@@ -129,12 +129,12 @@ CrystalSwitchEntityHandler::
     jr   z, jr_015_4364                           ; $434D: $28 $15
 
     ld   [hl], b                                  ; $434F: $70
-    ld   a, [wD6F8]                               ; $4350: $FA $F8 $D6
+    ld   a, [wSwitchableObjectAnimationStage]     ; $4350: $FA $F8 $D6
     and  a                                        ; $4353: $A7
     jr   nz, jr_015_4364                          ; $4354: $20 $0E
 
     ld   a, $01                                   ; $4356: $3E $01
-    ld   [wD6F8], a                               ; $4358: $EA $F8 $D6
+    ld   [wSwitchableObjectAnimationStage], a     ; $4358: $EA $F8 $D6
     call GetEntityTransitionCountdown             ; $435B: $CD $05 $0C
     ld   [hl], $18                                ; $435E: $36 $18
     ld   a, $0E                                   ; $4360: $3E $0E

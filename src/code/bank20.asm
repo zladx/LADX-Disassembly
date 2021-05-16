@@ -165,14 +165,15 @@ data_020_45EA::
 ;   a    tiles target bank
 GetColorDungeonTilesAddress::
     push de                                       ; $4616: $D5
+
     ldh  a, [hMapRoom]                            ; $4617: $F0 $F6
     and  a                                        ; $4619: $A7
     jr   z, jr_020_4620                           ; $461A: $28 $04
-    cp   UNKNOWN_ROOM_05                          ; $461C: $FE $05
+    cp   ROOM_CD_05                               ; $461C: $FE $05
     jr   nz, jr_020_4640                          ; $461E: $20 $20
 
 jr_020_4620:
-    ld   a, [wD6FB]                               ; $4620: $FA $FB $D6
+    ld   a, [hSwitchBlocksState]                  ; $4620: $FA $FB $D6
     and  a                                        ; $4623: $A7
     jr   z, jr_020_4640                           ; $4624: $28 $1A
 
@@ -187,8 +188,8 @@ jr_020_462F:
     xor  $C0                                      ; $462F: $EE $C0
     ld   l, a                                     ; $4631: $6F
     ld   h, $5E                                   ; $4632: $26 $5E
-    ld   a, [wD6FB]                               ; $4634: $FA $FB $D6
-    ldh  [hFFBB], a                               ; $4637: $E0 $BB
+    ld   a, [hSwitchBlocksState]                  ; $4634: $FA $FB $D6
+    ldh  [hSwitchBlockNeedingUpdate], a           ; $4637: $E0 $BB
     ld   [wRoomSwitchableObject], a               ; $4639: $EA $FA $D6
     pop  de                                       ; $463C: $D1
     ld   a, $2D                                   ; $463D: $3E $2D

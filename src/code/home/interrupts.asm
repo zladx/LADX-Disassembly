@@ -204,8 +204,14 @@ LoadRequestedGfx::
 .return
     ret                                           ; $0469: $C9
 
-data_046A::
-    db   7, 9                                     ; $046A
+; Animation stage to update the tiles of each kind of switch block in
+; their final state.
+; Indexed by hSwitchBlockNeedingUpdate
+;
+; See wSwitchableObjectAnimationStage
+BlockUpdateAnimationStageTable:: ; $046A
+.kindA db 07
+.kindB db 09
 
 ;
 ; InterruptVBlank
@@ -345,28 +351,37 @@ InterruptVBlank::
     ; Otherwise, when there are not tiles to update, we can perform a bit
     ; more GFX code – like animating the tiles and palettes.
 
-    ; If hFFBB == 0, move on
-    ldh  a, [hFFBB]                               ; $0509: $F0 $BB
+    ;
+    ; Update tiles for switch blocks
+    ;
+
+    ; If switch block tiles don't need to be updated, move on
+    ldh  a, [hSwitchBlockNeedingUpdate]           ; $0509: $F0 $BB
     and  a                                        ; $050B: $A7
-    jr   z, .animateTiles                         ; $050C: $28 $13
+    jr   z, .switchBlockEnd                       ; $050C: $28 $13
 
-    ; Decrement hFFBB
+    ; Decrement hSwitchBlockNeedingUpdate
+    ;
+    ; This means it will go either:
+    ; - from 2 to 1 (so that next step is updating blocks of kind B)
+    ; - from 1 to 0 (so that next step is updating blocks of kind A)
     dec  a                                        ; $050E: $3D
-    ldh  [hFFBB], a                               ; $050F: $E0 $BB
+    ldh  [hSwitchBlockNeedingUpdate], a           ; $050F: $E0 $BB
 
-    ; Read [data_046A + A]
+    ; wSwitchableObjectAnimationStage = BlockUpdateAnimationStageTable[hSwitchBlockNeedingUpdate]
     ld   e, a                                     ; $0511: $5F
     ld   d, $00                                   ; $0512: $16 $00
-    ld   hl, data_046A                            ; $0514: $21 $6A $04
+    ld   hl, BlockUpdateAnimationStageTable       ; $0514: $21 $6A $04
     add  hl, de                                   ; $0517: $19
     ld   a, [hl]                                  ; $0518: $7E
-    ; Store this value to $D6F8
-    ld   [$D6F8], a                               ; $0519: $EA $F8 $D6
-    ; Switch Link's sprite ?
-    call label_1ED7                               ; $051C: $CD $D7 $1E
-    jr   .drawLinkSprite                          ; $051F: $18 $E0
+    ; Store the stage to wSwitchableObjectAnimationStage
+    ld   [wSwitchableObjectAnimationStage], a                               ; $0519: $EA $F8 $D6
 
-.animateTiles
+    call UpdateSwitchBlockTiles                   ; $051C: $CD $D7 $1E
+
+    jr   .drawLinkSprite                          ; $051F: $18 $E0
+.switchBlockEnd
+
     ; If GameplayType != PHOTO_ALBUM, animate tiles
     ld   a, [wGameplayType]                       ; $0521: $FA $95 $DB
     cp   GAMEPLAY_PHOTO_ALBUM                     ; $0524: $FE $0D
@@ -536,7 +551,7 @@ ENDC
     ld   h, a                                     ; $0633: $67
     add  hl, bc                                   ; $0634: $09
 
-    ldh  a, [hFFBB]                               ; $0635: $F0 $BB
+    ldh  a, [hSwitchBlockNeedingUpdate]           ; $0635: $F0 $BB
     and  a                                        ; $0637: $A7
     jr   z, .copyData                             ; $0638: $28 $07
     ldh  a, [hBGTilesLoadingStage]                ; $063A: $F0 $92

@@ -2246,12 +2246,12 @@ func_001_6162::
     ld   [rBGP], a                                ; $6175: $E0 $47
     ld   [rOBP0], a                               ; $6177: $E0 $48
     ld   [rOBP1], a                               ; $6179: $E0 $49
-    ldh  [hBaseScrollY], a                               ; $617B: $E0 $97
+    ldh  [hBaseScrollY], a                        ; $617B: $E0 $97
     ldh  [hBaseScrollX], a                        ; $617D: $E0 $96
-    ld   [wD6FB], a                               ; $617F: $EA $FB $D6
-    ld   [$D6F8], a                               ; $6182: $EA $F8 $D6
+    ld   [hSwitchBlocksState], a                  ; $617F: $EA $FB $D6
+    ld   [wSwitchableObjectAnimationStage], a     ; $6182: $EA $F8 $D6
     ld   a, $18                                   ; $6185: $3E $18
-    ldh  [hButtonsInactiveDelay], a                               ; $6187: $E0 $B5
+    ldh  [hButtonsInactiveDelay], a               ; $6187: $E0 $B5
     ret                                           ; $6189: $C9
 
 Data_001_618A::

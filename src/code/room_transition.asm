@@ -570,15 +570,14 @@ IncrementRoomTransitionStateAndReturn::
 RoomTransitionLoadTiles::
     call SelectRoomTilesets                       ; $7B3E: $CD $1E $0D
 
-    ; If room has mobile blocks…
+    ; If room has switch blocks…
     ld   a, [wRoomSwitchableObject]               ; $7B41: $FA $FA $D6
     cp   ROOM_SWITCHABLE_OBJECT_MOBILE_BLOCK      ; $7B44: $FE $02
-    jr   nz, .mobileBlocksEnd                     ; $7B46: $20 $04
-    ; … hFFBB == 2
+    jr   nz, .switchBlocksEnd                     ; $7B46: $20 $04
+    ; … mark both kind of blocks as needing their tiles to be updated
     ld   a, $02                                   ; $7B48: $3E $02
-    ldh  [hFFBB], a                               ; $7B4A: $E0 $BB
-
-.mobileBlocksEnd
+    ldh  [hSwitchBlockNeedingUpdate], a           ; $7B4A: $E0 $BB
+.switchBlocksEnd
 
     jp   IncrementRoomTransitionStateAndReturn    ; $7B4C: $C3 $36 $7B
 
@@ -653,8 +652,8 @@ IndoorRoomIncrement::
 .bottom: db $08
 
 RoomTransitionConfigureScrollTargets::
-    ; If hFFBB == 0, return
-    ldh  a, [hFFBB]                               ; $7B7F: $F0 $BB
+    ; If hSwitchBlockNeedingUpdate != 0, return
+    ldh  a, [hSwitchBlockNeedingUpdate]           ; $7B7F: $F0 $BB
     and  a                                        ; $7B81: $A7
     ret  nz                                       ; $7B82: $C0
 

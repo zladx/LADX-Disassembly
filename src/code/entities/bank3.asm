@@ -8960,7 +8960,7 @@ jr_003_7C2B:
     cp   ENTITY_HOOKSHOT_CHAIN                    ; $7C4F: $FE $03
     jr   nz, jr_003_7C5A                          ; $7C51: $20 $07
 
-    ld   a, [$D6F9]                               ; $7C53: $FA $F9 $D6
+    ld   a, [wD6F9]                               ; $7C53: $FA $F9 $D6
     and  a                                        ; $7C56: $A7
     jp   nz, setCarryFlagAndReturn                ; $7C57: $C2 $A7 $7C
 
@@ -8979,7 +8979,7 @@ jr_003_7C5A:
     ld   hl, Data_003_7CA9                        ; $7C6A: $21 $A9 $7C
     add  hl, de                                   ; $7C6D: $19
     pop  de                                       ; $7C6E: $D1
-    ld   a, [wD6FB]                               ; $7C6F: $FA $FB $D6
+    ld   a, [hSwitchBlocksState]                  ; $7C6F: $FA $FB $D6
     xor  [hl]                                     ; $7C72: $AE
     jr   z, setCarryFlagAndReturn                 ; $7C73: $28 $32
 

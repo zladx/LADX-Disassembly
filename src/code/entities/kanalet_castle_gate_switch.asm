@@ -11,15 +11,15 @@ KanaletCastleGateSwitchEntityHandler::
 ._02 dw func_015_40D5                             ; $40B0
 
 func_015_40B2::
-    ld   a, [wC1CB]                               ; $40B2: $FA $CB $C1
+    ld   a, [wSwitchButtonPressed]                ; $40B2: $FA $CB $C1
     and  a                                        ; $40B5: $A7
-    jr   z, jr_015_40C0                           ; $40B6: $28 $08
+    jr   z, .return                               ; $40B6: $28 $08
 
     call IncrementEntityState                     ; $40B8: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $40BB: $CD $05 $0C
     ld   [hl], $20                                ; $40BE: $36 $20
 
-jr_015_40C0:
+.return
     ret                                           ; $40C0: $C9
 
 func_015_40C1::

@@ -117,7 +117,7 @@ func_004_40A3::
     ld   a, JINGLE_BUMP                           ; $40B1: $3E $09
     ldh  [hJingle], a                             ; $40B3: $E0 $F2
     ld   a, $10                                   ; $40B5: $3E $10
-    ld   [wC13E], a                               ; $40B7: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $40B7: $EA $3E $C1
     ld   a, $14                                   ; $40BA: $3E $14
     call GetVectorTowardsLink_trampoline          ; $40BC: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                               ; $40BF: $F0 $D7

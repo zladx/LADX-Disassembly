@@ -94,12 +94,18 @@ hLinkSpeedX::
 hLinkSpeedY::
  ds 1 ; FF9B
 
-; used when jumping
+; Used when jumping
 ; possible values:
-; 0 = reset,
-; 1 = ??? => TRUE?,
-; 2 = ??? => different use?
-; Unlabeled
+; 0 = none,
+; 1 =
+;   when jumping off a cliff;
+;   when on a ladder in a side-scrolling section;
+;   NOT when juming with feather
+; 2 = ?
+; 4 = ?
+; 6 = ?
+;
+; Jump-table at 02:68E4
 hFF9C::
  ds 1 ; FF9C
 

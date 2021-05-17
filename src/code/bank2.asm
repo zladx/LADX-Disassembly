@@ -576,12 +576,12 @@ label_002_44B5:
     jp   CheckPositionForMapTransition            ; $44BF: $C3 $75 $6C
 
 func_002_44C2::
-    ld   a, [wC13E]                               ; $44C2: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $44C2: $FA $3E $C1
     and  a                                        ; $44C5: $A7
     ret  z                                        ; $44C6: $C8
 
     dec  a                                        ; $44C7: $3D
-    ld   [wC13E], a                               ; $44C8: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $44C8: $EA $3E $C1
     call UpdateFinalLinkPosition                  ; $44CB: $CD $A8 $21
     call CheckPositionForMapTransition            ; $44CE: $CD $75 $6C
     ld   a, [wCollisionType]                      ; $44D1: $FA $33 $C1
@@ -617,11 +617,15 @@ func_002_44ED::
 
 func_002_44FA::
     call func_21E1                                ; $44FA: $CD $E1 $21
-    ldh  a, [hLinkVelocityZ]                               ; $44FD: $F0 $A3
+
+    ; hLinkVelocityZ = hLinkVelocityZ - 2
+    ldh  a, [hLinkVelocityZ]                      ; $44FD: $F0 $A3
     sub  $02                                      ; $44FF: $D6 $02
-    ldh  [hLinkVelocityZ], a                               ; $4501: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $4501: $E0 $A3
+
     ld   a, -1                                    ; $4503: $3E $FF
-    ld   [wConsecutiveStepsCount], a                               ; $4505: $EA $20 $C1
+    ld   [wConsecutiveStepsCount], a              ; $4505: $EA $20 $C1
+
     ld   a, [wC10A]                               ; $4508: $FA $0A $C1
     ld   hl, wIsRunningWithPegasusBoots           ; $450B: $21 $4A $C1
     or   [hl]                                     ; $450E: $B6
@@ -2551,7 +2555,7 @@ LinkMotionFallingDownHandler::
 jr_002_50F6:
     ; reset sword parameter
     xor  a                                        ; $50F6: $AF
-    ld   [wC13E], a                               ; $50F7: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $50F7: $EA $3E $C1
     ld   [wIsUsingSpinAttack], a                  ; $50FA: $EA $21 $C1
     ld   [wSwordCharge], a                        ; $50FD: $EA $22 $C1
     call func_002_52D6                            ; $5100: $CD $D6 $52
@@ -2683,7 +2687,7 @@ HandleGotItemB::
     ; reset all states after spin attack
     ld   [wC16A], a                               ; $51CA: $EA $6A $C1
     ld   [wSwordAnimationState], a                ; $51CD: $EA $37 $C1
-    ld   [wC13E], a                               ; $51D0: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $51D0: $EA $3E $C1
     call ApplyLinkMotionState                     ; $51D3: $CD $94 $17
     call func_21E1                                ; $51D6: $CD $E1 $21
     ldh  a, [hLinkVelocityZ]                   ; $51D9: $F0 $A3
@@ -2795,19 +2799,20 @@ LinkMotionRecoverHandler::
     ldh  a, [hFFB7]                               ; $526D: $F0 $B7
     and  a                                        ; $526F: $A7
     jr   nz, jr_002_529F                          ; $5270: $20 $2D
-
     ld   [wC167], a                               ; $5272: $EA $67 $C1
+
     ldh  a, [hFF9C]                               ; $5275: $F0 $9C
     cp   $06                                      ; $5277: $FE $06
-    jr   nz, jr_002_5283                          ; $5279: $20 $08
-
+    jr   nz, .reduceHealthEnd                      ; $5279: $20 $08
     ld   a, [wSubtractHealthBuffer]               ; $527B: $FA $94 $DB
     add  $04                                      ; $527E: $C6 $04
     ld   [wSubtractHealthBuffer], a               ; $5280: $EA $94 $DB
+.reduceHealthEnd
 
-jr_002_5283:
+    ; Clear hFF9C
     xor  a                                        ; $5283: $AF
     ldh  [hFF9C], a                               ; $5284: $E0 $9C
+
     ld   a, [wIsIndoor]                           ; $5286: $FA $A5 $DB
     and  a                                        ; $5289: $A7
     jr   nz, jr_002_529C                          ; $528A: $20 $10
@@ -4607,6 +4612,7 @@ func_002_60E0::
     ld   de, wArrowCount                          ; $60EF: $11 $45 $DB
     call ClampItemCount                           ; $60F2: $CD $D8 $60
 
+    ; If Link is not interactive or swimming, return
     ld   a, [wLinkMotionState]                    ; $60F5: $FA $1C $C1
     cp   LINK_MOTION_JUMPING                      ; $60F8: $FE $02
     ret  nc                                       ; $60FA: $D0
@@ -5264,19 +5270,21 @@ jp_002_68B7::
     jr   z, .return                               ; $68C5: $28 $1C
 .notInTheAirEnd
 
-    ld   a, [wC13E]                               ; $68C7: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $68C7: $FA $3E $C1
     and  a                                        ; $68CA: $A7
-    jr   z, jr_002_68E4                           ; $68CB: $28 $17
+    jr   z, .ignoreCollisionsEnd                  ; $68CB: $28 $17
 
-    ; Decrement wC13E
+    ; Decrement wIgnoreLinkCollisionsCountdown
     dec  a                                        ; $68CD: $3D
-    ld   [wC13E], a                               ; $68CE: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $68CE: $EA $3E $C1
+
     call UpdateFinalLinkPosition                  ; $68D1: $CD $A8 $21
     call CheckPositionForMapTransition            ; $68D4: $CD $75 $6C
+
+    ; If Link is ???, increment its vertical speed
     ldh  a, [hFF9C]                               ; $68D7: $F0 $9C
     cp   $02                                      ; $68D9: $FE $02
     jr   z, .return                               ; $68DB: $28 $06
-
     ldh  a, [hLinkSpeedY]                         ; $68DD: $F0 $9B
     add  $03                                      ; $68DF: $C6 $03
     ldh  [hLinkSpeedY], a                         ; $68E1: $E0 $9B
@@ -5284,7 +5292,8 @@ jp_002_68B7::
 .return
     ret                                           ; $68E3: $C9
 
-jr_002_68E4:
+.ignoreCollisionsEnd
+
     ldh  a, [hFF9C]                               ; $68E4: $F0 $9C
     JP_TABLE                                      ; $68E6
 ._00 dw func_002_6A01                             ; $68E7
@@ -6133,7 +6142,7 @@ CheckPositionForMapTransition::
     jr   nz, clearIncrementAndReturn              ; $6D92: $20 $78
 
 .jr_002_6D94
-    ld   a, [wC13E]                               ; $6D94: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $6D94: $FA $3E $C1
     ld   hl, wC157                                ; $6D97: $21 $57 $C1
     or   [hl]                                     ; $6D9A: $B6
     jr   nz, clearIncrementAndReturn              ; $6D9B: $20 $6F
@@ -6237,7 +6246,7 @@ ENDC
 
 clearIncrementAndReturn::
     call ClearLinkPositionIncrement               ; $6E0C: $CD $8E $17
-    ld   [wC13E], a                               ; $6E0F: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $6E0F: $EA $3E $C1
     jp   CheckForLedgeJumpAndReturn               ; $6E12: $C3 $45 $6E
 
 Data_002_6E15::
@@ -6680,7 +6689,7 @@ ENDC
     cp   e                                        ; $7089: $BB
     jp   nz, label_002_70D8                       ; $708A: $C2 $D8 $70
 
-    ld   a, [wC13E]                               ; $708D: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $708D: $FA $3E $C1
     ld   hl, wIsUsingSpinAttack                   ; $7090: $21 $21 $C1
     or   [hl]                                     ; $7093: $B6
     ld   hl, wD45E                                ; $7094: $21 $5E $D4
@@ -6936,7 +6945,7 @@ jr_002_7213:
     jp   collisionEnd                             ; $7229: $C3 $54 $74
 
 jr_002_722C:
-    ld   a, [wC13E]                               ; $722C: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $722C: $FA $3E $C1
     and  a                                        ; $722F: $A7
     jp   nz, collisionEnd                         ; $7230: $C2 $54 $74
 
@@ -7007,7 +7016,7 @@ jr_002_728E:
     cp   [hl]                                     ; $7293: $BE
     jr   nz, jr_002_72FA                          ; $7294: $20 $64
 
-    ld   a, [wC13E]                               ; $7296: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $7296: $FA $3E $C1
     ld   hl, wIsLinkInTheAir                      ; $7299: $21 $46 $C1
     or   [hl]                                     ; $729C: $B6
     jr   nz, jr_002_72FA                          ; $729D: $20 $5B
@@ -7675,7 +7684,7 @@ HurtBySpikes::
 .topViewEnd
 
     ld   a, $10                                   ; $761E: $3E $10
-    ld   [wC13E], a                               ; $7620: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $7620: $EA $3E $C1
 
     ; Make Link invicible during 48 frames
     ld   a, $30                                   ; $7623: $3E $30

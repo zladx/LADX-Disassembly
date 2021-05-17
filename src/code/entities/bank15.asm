@@ -1148,7 +1148,7 @@ func_015_499C::
     ld   a, [hl]                                  ; $49A8: $7E
     ldh  [hLinkSpeedX], a                         ; $49A9: $E0 $9A
     ld   a, $28                                   ; $49AB: $3E $28
-    ld   [wC13E], a                               ; $49AD: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $49AD: $EA $3E $C1
     ld   a, $40                                   ; $49B0: $3E $40
     ld   [wInvincibilityCounter], a               ; $49B2: $EA $C7 $DB
     ld   a, [wSubtractHealthBuffer]               ; $49B5: $FA $94 $DB
@@ -3749,7 +3749,7 @@ func_015_5E85::
     add  hl, bc                                   ; $5EA2: $09
     ld   [hl], a                                  ; $5EA3: $77
     ld   a, $10                                   ; $5EA4: $3E $10
-    ld   [wC13E], a                               ; $5EA6: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $5EA6: $EA $3E $C1
     jp   IncrementEntityState                     ; $5EA9: $C3 $12 $3B
 
 func_015_5EAC::
@@ -6228,7 +6228,7 @@ ENDC
     ldh  a, [hMultiPurpose1]                      ; $730B: $F0 $D8
     ldh  [hLinkSpeedX], a                         ; $730D: $E0 $9A
     ld   a, $10                                   ; $730F: $3E $10
-    ld   [wC13E], a                               ; $7311: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $7311: $EA $3E $C1
     ld   a, $30                                   ; $7314: $3E $30
     ld   [wInvincibilityCounter], a               ; $7316: $EA $C7 $DB
     ld   a, $03                                   ; $7319: $3E $03
@@ -6721,7 +6721,7 @@ jr_015_7619:
     ld   [hl], a                                  ; $761D: $77
     call ResetSpinAttack                          ; $761E: $CD $AF $0C
     ld   a, $10                                   ; $7621: $3E $10
-    ld   [wC13E], a                               ; $7623: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $7623: $EA $3E $C1
     ldh  a, [hLinkDirection]                      ; $7626: $F0 $9E
     ld   e, a                                     ; $7628: $5F
     ld   d, b                                     ; $7629: $50

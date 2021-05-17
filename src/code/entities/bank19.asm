@@ -456,7 +456,7 @@ WarpState3Handler::
     ; reset parameter to 0
     ld   [wSubtractHealthBuffer], a               ; $42F8: $EA $94 $DB
     ld   [wInvincibilityCounter], a               ; $42FB: $EA $C7 $DB
-    ld   [wC13E], a                               ; $42FE: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $42FE: $EA $3E $C1
     ld   [wSwordAnimationState], a                ; $4301: $EA $37 $C1
     ld   [wC16A], a                               ; $4304: $EA $6A $C1
     ld   [wLinkPlayingOcarinaCountdown], a        ; $4307: $EA $66 $C1
@@ -3672,7 +3672,7 @@ func_019_599B::
     jr   nz, jr_019_59B7                          ; $59A2: $20 $13
 
     ld   a, $02                                   ; $59A4: $3E $02
-    ld   [wC13E], a                               ; $59A6: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $59A6: $EA $3E $C1
     call func_019_7E0B                            ; $59A9: $CD $0B $7E
     ld   a, e                                     ; $59AC: $7B
     and  a                                        ; $59AD: $A7

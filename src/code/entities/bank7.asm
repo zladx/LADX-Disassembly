@@ -6677,7 +6677,7 @@ jr_007_6AA6:
     call label_3B65                               ; $6AAC: $CD $65 $3B
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $6AAF: $21 $10 $C4
     add  hl, bc                                   ; $6AB2: $09
-    ld   a, [wC13E]                               ; $6AB3: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $6AB3: $FA $3E $C1
     or   [hl]                                     ; $6AB6: $B6
     and  a                                        ; $6AB7: $A7
     jr   nz, jr_007_6AC0                          ; $6AB8: $20 $06

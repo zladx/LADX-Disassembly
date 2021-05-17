@@ -5186,7 +5186,7 @@ jr_018_64EA:
     call GetEntityPrivateCountdown1               ; $64EA: $CD $00 $0C
     jr   z, jr_018_650A                           ; $64ED: $28 $1B
 
-    ld   a, [wC13E]                               ; $64EF: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $64EF: $FA $3E $C1
     and  a                                        ; $64F2: $A7
     cp   $01                                      ; $64F3: $FE $01
     jr   nz, jr_018_64FC                          ; $64F5: $20 $05
@@ -5207,7 +5207,7 @@ jr_018_64FC:
 jr_018_650A:
     call func_018_7E15                            ; $650A: $CD $15 $7E
     call label_3B65                               ; $650D: $CD $65 $3B
-    ld   a, [wC13E]                               ; $6510: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $6510: $FA $3E $C1
     and  a                                        ; $6513: $A7
     jr   nz, jr_018_6519                          ; $6514: $20 $03
 
@@ -7766,7 +7766,7 @@ jr_018_76FE:
     xor  a                                        ; $7701: $AF
     ldh  [hLinkSpeedY], a                         ; $7702: $E0 $9B
     ld   a, $18                                   ; $7704: $3E $18
-    ld   [wC13E], a                               ; $7706: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $7706: $EA $3E $C1
     ld   a, $10                                   ; $7709: $3E $10
     ld   [wInvincibilityCounter], a               ; $770B: $EA $C7 $DB
     ld   a, $08                                   ; $770E: $3E $08

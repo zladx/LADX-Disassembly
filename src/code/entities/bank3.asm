@@ -6280,7 +6280,7 @@ ApplyLinkCollisionWithEnemy::
     cp   ENTITY_ROLLING_BONES_BAR                 ; $6D52: $FE $82
     jr   z, jr_003_6D5D                           ; $6D54: $28 $07
 
-    ld   a, [wC13E]                               ; $6D56: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $6D56: $FA $3E $C1
     and  a                                        ; $6D59: $A7
     jp   nz, setCarryAndReturn                    ; $6D5A: $C2 $0A $6E
 
@@ -6379,7 +6379,7 @@ jr_003_6DDD:
 func_003_6DDF::
     call ResetPegasusBoots                        ; $6DDF: $CD $B6 $0C
     ld   a, $10                                   ; $6DE2: $3E $10
-    ld   [wC13E], a                               ; $6DE4: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $6DE4: $EA $3E $C1
     ldh  a, [hActiveEntityType]                   ; $6DE7: $F0 $EB
     ld   e, $18                                   ; $6DE9: $1E $18
     cp   ENTITY_ROLLING_BONES_BAR                 ; $6DEB: $FE $82
@@ -6545,7 +6545,7 @@ jr_003_6E8E:
     ld   a, $04                                   ; $6EC5: $3E $04
     ldh  [hLinkSpeedY], a                         ; $6EC7: $E0 $9B
     ld   a, $08                                   ; $6EC9: $3E $08
-    ld   [wC13E], a                               ; $6ECB: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $6ECB: $EA $3E $C1
     jp   IncrementEntityState                     ; $6ECE: $C3 $12 $3B
 .flameShooterEnd
 
@@ -6697,7 +6697,7 @@ func_003_6F93::
     ldh  [hJingle], a                             ; $6F95: $E0 $F2
     call ResetPegasusBoots                        ; $6F97: $CD $B6 $0C
     ld   a, $0C                                   ; $6F9A: $3E $0C
-    ld   [wC13E], a                               ; $6F9C: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $6F9C: $EA $3E $C1
 
     ldh  a, [hActiveEntityType]                   ; $6F9F: $F0 $EB
     cp   ENTITY_ROLLING_BONES_BAR                 ; $6FA1: $FE $82
@@ -6851,7 +6851,7 @@ FinalNightmareForm6Collisions::
 
     call func_003_6DDF                            ; $7073: $CD $DF $6D
     ld   a, $08                                   ; $7076: $3E $08
-    ld   [wC13E], a                               ; $7078: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $7078: $EA $3E $C1
     jr   jr_003_70B9                              ; $707B: $18 $3C
 .anglerFishEnd
 
@@ -6896,7 +6896,7 @@ ENDC
 
 jr_003_70AC:
     ld   a, $04                                   ; $70AC: $3E $04
-    ld   [wC13E], a                               ; $70AE: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $70AE: $EA $3E $C1
     ld   a, $10                                   ; $70B1: $3E $10
     call func_003_7565                            ; $70B3: $CD $65 $75
     jp   label_003_7102                           ; $70B6: $C3 $02 $71
@@ -6980,7 +6980,7 @@ label_003_7102:
 
     call ResetPegasusBoots                        ; $7129: $CD $B6 $0C
     ld   a, $10                                   ; $712C: $3E $10
-    ld   [wC13E], a                               ; $712E: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $712E: $EA $3E $C1
     ld   a, $10                                   ; $7131: $3E $10
     call func_003_7565                            ; $7133: $CD $65 $75
     ld   a, $10                                   ; $7136: $3E $10
@@ -7475,7 +7475,7 @@ Data_003_73E7::
 
 func_003_73EB::
     ld   hl, wC1AC                                ; $73EB: $21 $AC $C1
-    ld   a, [wC13E]                               ; $73EE: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $73EE: $FA $3E $C1
     or   [hl]                                     ; $73F1: $B6
     ld   hl, hFFB6                                ; $73F2: $21 $B6 $FF
     or   [hl]                                     ; $73F5: $B6
@@ -7543,7 +7543,7 @@ jr_003_7440:
 
     call ResetPegasusBoots                        ; $744D: $CD $B6 $0C
     ld   a, $08                                   ; $7450: $3E $08
-    ld   [wC13E], a                               ; $7452: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $7452: $EA $3E $C1
     ld   a, $12                                   ; $7455: $3E $12
     call func_003_7565                            ; $7457: $CD $65 $75
     ld   a, $18                                   ; $745A: $3E $18
@@ -7595,7 +7595,7 @@ jr_003_748B:
     jp   z, jr_003_7571                           ; $74A6: $CA $71 $75
 
     ld   a, $20                                   ; $74A9: $3E $20
-    ld   [wC13E], a                               ; $74AB: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $74AB: $EA $3E $C1
 IF !__PATCH_0__
     ld   a, $20                                   ; $74AE: $3E $20
 ENDC
@@ -7604,7 +7604,7 @@ ENDC
 
 jr_003_74B5:
     ld   a, $10                                   ; $74B5: $3E $10
-    ld   [wC13E], a                               ; $74B7: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $74B7: $EA $3E $C1
     ld   a, $20                                   ; $74BA: $3E $20
     call func_003_7565                            ; $74BC: $CD $65 $75
 
@@ -7732,7 +7732,7 @@ jr_003_752D:
     call GetEntityPrivateCountdown1               ; $7559: $CD $00 $0C
     ld   [hl], $A0                                ; $755C: $36 $A0
     ld   a, $20                                   ; $755E: $3E $20
-    ld   [wC13E], a                               ; $7560: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $7560: $EA $3E $C1
     ld   a, $30                                   ; $7563: $3E $30
 
 func_003_7565::
@@ -7774,7 +7774,7 @@ jr_003_758B:
     ret                                           ; $7598: $C9
 
     ld   a, $20                                   ; $7599: $3E $20
-    ld   [wC13E], a                               ; $759B: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $759B: $EA $3E $C1
     ld   a, $20                                   ; $759E: $3E $20
     jr   func_003_7565                            ; $75A0: $18 $C3
 

@@ -331,8 +331,11 @@ wC13C::
 wRandomSeed::
   ds 1 ; C13D
 
-; Unlabeled
-wC13E::
+; Ignore Link's collision with entities and some hurting objects when non-zero
+; (for instance after being hurt).
+;
+; Decremented every frame.
+wIgnoreLinkCollisionsCountdown::
   ds 1 ; C13E
 
 ; Unlabeled

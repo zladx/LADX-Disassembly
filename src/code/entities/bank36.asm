@@ -2220,7 +2220,7 @@ func_036_4D4B::
 
 jr_036_4D5C:
     ld   a, $10                                   ; $4D5C: $3E $10
-    ld   [wC13E], a                               ; $4D5E: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $4D5E: $EA $3E $C1
     ld   a, $14                                   ; $4D61: $3E $14
     call GetVectorTowardsLink_trampoline          ; $4D63: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $4D66: $F0 $D7
@@ -3604,7 +3604,7 @@ jr_036_5652:
 
 jr_036_5661:
     ld   a, $10                                   ; $5661: $3E $10
-    ld   [wC13E], a                               ; $5663: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $5663: $EA $3E $C1
     ld   a, $20                                   ; $5666: $3E $20
     call GetVectorTowardsLink_trampoline          ; $5668: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $566B: $F0 $D7
@@ -4667,7 +4667,7 @@ IF __PATCH_0__
 ENDC
 
     ld   a, $10                                   ; $5CC7: $3E $10
-    ld   [wC13E], a                               ; $5CC9: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $5CC9: $EA $3E $C1
     ld   a, $20                                   ; $5CCC: $3E $20
     call GetVectorTowardsLink_trampoline          ; $5CCE: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $5CD1: $F0 $D7

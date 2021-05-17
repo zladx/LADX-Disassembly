@@ -5968,7 +5968,7 @@ Data_003_6BDA::
 CheckLinkCollisionWithProjectile::
     ; If Link is not interactive or swimming, return.
     ld   a, [wLinkMotionState]                    ; $6BDE: $FA $1C $C1
-    cp   LINK_MOTION_JUMPING                      ; $6BE1: $FE $02
+    cp   LINK_MOTION_UNSTUCKING                   ; $6BE1: $FE $02
     jr   nc, .return                              ; $6BE3: $30 $75
 
     ; If Link is in the air, return.
@@ -6097,7 +6097,7 @@ CheckLinkCollisionWithEnemy::
 .collisionEvenInTheAir
     ; If Link is not interactive or swimming…
     ld   a, [wLinkMotionState]                    ; $6C77: $FA $1C $C1
-    cp   LINK_MOTION_JUMPING                      ; $6C7A: $FE $02
+    cp   LINK_MOTION_UNSTUCKING                   ; $6C7A: $FE $02
     ; … return.
     jr   nc, CheckLinkCollisionWithProjectile.return; $6C7C: $30 $DC
 

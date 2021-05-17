@@ -4614,7 +4614,7 @@ func_002_60E0::
 
     ; If Link is not interactive or swimming, return
     ld   a, [wLinkMotionState]                    ; $60F5: $FA $1C $C1
-    cp   LINK_MOTION_JUMPING                      ; $60F8: $FE $02
+    cp   LINK_MOTION_UNSTUCKING                   ; $60F8: $FE $02
     ret  nc                                       ; $60FA: $D0
 
     ld   a, [wDialogState]                        ; $60FB: $FA $9F $C1
@@ -6367,8 +6367,10 @@ func_002_6EAD::
 jr_002_6EB5:
     ld   a, $02                                   ; $6EB5: $3E $02
     ld   [wLinkMotionState], a                    ; $6EB7: $EA $1C $C1
+
     xor  a                                        ; $6EBA: $AF
     ldh  [hFF9C], a                               ; $6EBB: $E0 $9C
+
     ldh  a, [hLinkPositionY]                      ; $6EBD: $F0 $99
     sub  $08                                      ; $6EBF: $D6 $08
     ldh  [hLinkPositionY], a                      ; $6EC1: $E0 $99

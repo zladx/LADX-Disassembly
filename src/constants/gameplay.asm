@@ -131,9 +131,10 @@ DIALOG_GOT_ROD            equ $04
 DIALOG_GOT_GUARDIAN_ACORN equ $05
 
 ; Values for wLinkMotionState
+; Only the first two values are interactive
 LINK_MOTION_INTERACTIVE    equ $00
 LINK_MOTION_SWIMMING       equ $01
-LINK_MOTION_JUMPING        equ $02
+LINK_MOTION_UNSTUCKING     equ $02
 LINK_MOTION_MAP_FADE_OUT   equ $03
 LINK_MOTION_MAP_FADE_IN    equ $04
 LINK_MOTION_REVOLVING_DOOR equ $05

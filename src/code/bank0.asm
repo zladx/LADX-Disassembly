@@ -4399,31 +4399,36 @@ ReadJoypadState::
     and  a                                        ; $2821: $A7
     jr   nz, .return                              ; $2822: $20 $62
 
+    ; Ignore joypad while the world is not interactive
     ld   a, [wGameplayType]                       ; $2824: $FA $95 $DB
     cp   GAMEPLAY_WORLD                           ; $2827: $FE $0B
     jr   nz, .readState                           ; $2829: $20 $27
     ld   a, [wGameplaySubtype]                    ; $282B: $FA $96 $DB
     cp   GAMEPLAY_WORLD_INTERACTIVE               ; $282E: $FE $07
-    jr   nz, .notWorld                            ; $2830: $20 $1A
+    jr   nz, .notInteractive                      ; $2830: $20 $1A
+
+    ; TODO: document this case
     ld   a, [wLinkMotionState]                    ; $2832: $FA $1C $C1
     cp   LINK_MOTION_PASS_OUT                     ; $2835: $FE $07
-    jr   nz, .linkNotPassingOut                   ; $2837: $20 $06
+    jr   nz, .linkPassingOutEnd                   ; $2837: $20 $06
     ldh  a, [hFF9C]                               ; $2839: $F0 $9C
     cp   $04                                      ; $283B: $FE $04
     jr   z, .readState                            ; $283D: $28 $13
+.linkPassingOutEnd
 
-.linkNotPassingOut
     ld   a, [wTransitionSequenceCounter]          ; $283F: $FA $6B $C1
     cp   $04                                      ; $2842: $FE $04
-    jr   nz, .notWorld                            ; $2844: $20 $06
+    jr   nz, .notInteractive                      ; $2844: $20 $06
     ld   a, [$DDD5]                               ; $2846: $FA $D5 $DD
     and  a                                        ; $2849: $A7
     jr   z, .readState                            ; $284A: $28 $06
 
-.notWorld
+.notInteractive
+    ; Clear joypad and return
     xor  a                                        ; $284C: $AF
     ldh  [hPressedButtonsMask], a                 ; $284D: $E0 $CB
     ldh  [hJoypadState], a                        ; $284F: $E0 $CC
+
     ret                                           ; $2851: $C9
 
 .readState

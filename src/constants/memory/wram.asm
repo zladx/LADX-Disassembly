@@ -996,7 +996,7 @@ wEntitiesStatusTable::
 wEntitiesStateTable::
   ds $10 ; C290 - C29F
 
-; Indicates if the entity is collisioning:
+; Indicates if the entity is colliding:
 ; 0 = no collisions,
 ; 1 = collision on the right,
 ; 2 = collision on the left,

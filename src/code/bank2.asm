@@ -7990,7 +7990,7 @@ ApplyLinkGroundPhysics_Default::
     ld   a, [wLinkMotionState]                    ; $77A6: $FA $1C $C1
     cp   LINK_MOTION_SWIMMING                     ; $77A9: $FE $01
     jr   nz, .swimmingEnd                         ; $77AB: $20 $05
-    ld   a, LINK_MOTION_INTERACTIVE               ; $77AD: $3E $00
+    ld   a, LINK_MOTION_DEFAULT                   ; $77AD: $3E $00
     ld   [wLinkMotionState], a                    ; $77AF: $EA $1C $C1
 .swimmingEnd
 

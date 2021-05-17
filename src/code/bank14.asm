@@ -441,7 +441,7 @@ Data_014_4C20::
 ; Indicates whether the palette effects applied by some specific
 ; objects are disabled, depending on Link's motion state.
 PaletteEffectDisabledTable::
-.LINK_MOTION_INTERACTIVE    db 0
+.LINK_MOTION_DEFAULT        db 0
 .LINK_MOTION_SWIMMING       db 0
 .LINK_MOTION_UNSTUCKING     db 0
 .LINK_MOTION_MAP_FADE_OUT   db 1

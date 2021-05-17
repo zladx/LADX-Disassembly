@@ -132,7 +132,7 @@ DIALOG_GOT_GUARDIAN_ACORN equ $05
 
 ; Values for wLinkMotionState
 ; Only the first two values are interactive
-LINK_MOTION_INTERACTIVE    equ $00
+LINK_MOTION_DEFAULT        equ $00 ; ground, flying with rooster, etc
 LINK_MOTION_SWIMMING       equ $01
 LINK_MOTION_UNSTUCKING     equ $02
 LINK_MOTION_MAP_FADE_OUT   equ $03

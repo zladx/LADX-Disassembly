@@ -3575,7 +3575,7 @@ label_1F69_trampoline::
 ; Physics for Link interactive motion?
 ; (Only ever called from label_002_4287)
 label_1F69::
-    ; If running with pegagus boots, or hLinkPositionZ != 0, or Link's motion != LINK_MOTION_INTERACTIVE, return
+    ; If running with pegagus boots, or hLinkPositionZ != 0, or Link's motion != LINK_MOTION_DEFAULT, return
     ld   hl, wIsRunningWithPegasusBoots           ; $1F69: $21 $4A $C1
     ld   a, [wIsCarryingLiftedObject]             ; $1F6C: $FA $5C $C1
     or   [hl]                                     ; $1F6F: $B6

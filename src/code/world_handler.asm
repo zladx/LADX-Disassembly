@@ -262,16 +262,17 @@ GameplayWorldLoadRoomTilemapHandler::
 
     ld   a, [wRoomSwitchableObject]               ; $44E0: $FA $FA $D6
     and  a                                        ; $44E3: $A7
-    jr   z, jr_001_44F5                           ; $44E4: $28 $0F
+    jr   z, .switchableObjectEnd                  ; $44E4: $28 $0F
+
     ld   a, $05                                   ; $44E6: $3E $05
     ld   [wSwitchableObjectAnimationStage], a     ; $44E8: $EA $F8 $D6
-    ld   a, [wC1CB]                               ; $44EB: $FA $CB $C1
+    ld   a, [wSwitchButtonPressed]                ; $44EB: $FA $CB $C1
     and  a                                        ; $44EE: $A7
-    jr   z, jr_001_44F5                           ; $44EF: $28 $04
+    jr   z, .switchableObjectEnd                  ; $44EF: $28 $04
     ld   a, $03                                   ; $44F1: $3E $03
     ldh  [hFFA5], a                               ; $44F3: $E0 $A5
 
-jr_001_44F5::
+.switchableObjectEnd
     call IncrementGameplaySubtype                 ; $44F5: $CD $D6 $44
     ret                                           ; $44F8: $C9
 

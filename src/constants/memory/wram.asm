@@ -886,11 +886,17 @@ wC1C9::
   ds 1 ; C1C9
 
 ; Unlabeled
+; Related to switch buttons
 wC1CA::
   ds 1 ; C1CA
 
-; Unlabeled
-wC1CB::
+; Whether a ROOM_SWITCHABLE_OBJECT_SWITCH_BUTTON has been pressed in the current floor.
+; Reset when moving through stairs.
+;
+; Possible values:
+;  0    button has not been pressed yet
+;  $60  button pressed
+wSwitchButtonPressed::
   ds 1 ; C1CB
 
 ; Unlabeled

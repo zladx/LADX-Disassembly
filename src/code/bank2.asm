@@ -8018,67 +8018,75 @@ ApplyLinkGroundPhysics_Default::
 
     ld   a, [wD6F9]                               ; $77E9: $FA $F9 $D6
     and  a                                        ; $77EC: $A7
-    jr   z, jr_002_77F7                           ; $77ED: $28 $08
+    jr   z, .jr_002_77F7                          ; $77ED: $28 $08
 
     ld   a, NOISE_SFX_FOOTSTEP                    ; $77EF: $3E $07
     ldh  [hNoiseSfx], a                           ; $77F1: $E0 $F4
     xor  a                                        ; $77F3: $AF
     ld   [wD6F9], a                               ; $77F4: $EA $F9 $D6
 
-jr_002_77F7:
+.jr_002_77F7
     ld   a, [wIsIndoor]                           ; $77F7: $FA $A5 $DB
     and  a                                        ; $77FA: $A7
-    jp   z, label_002_786E                        ; $77FB: $CA $6E $78
+    jp   z, .return                               ; $77FB: $CA $6E $78
 
     ld   a, [wRoomTransitionState]                ; $77FE: $FA $24 $C1
     and  a                                        ; $7801: $A7
-    jr   nz, label_002_786E                       ; $7802: $20 $6A
+    jr   nz, .return                              ; $7802: $20 $6A
+
+    ;
+    ; When stepping over a switch button, activate it
+    ;
 
     ldh  a, [hObjectUnderEntity]                  ; $7804: $F0 $AF
-    cp   $AA                                      ; $7806: $FE $AA
-    jr   nz, jr_002_783C                          ; $7808: $20 $32
+    cp   OBJECT_SWITCH_BUTTON                     ; $7806: $FE $AA
+    jr   nz, .switchButtonEnd                     ; $7808: $20 $32
 
-    ld   a, [wC1CB]                               ; $780A: $FA $CB $C1
+    ld   a, [wSwitchButtonPressed]                ; $780A: $FA $CB $C1
     and  a                                        ; $780D: $A7
-    jr   nz, jr_002_783C                          ; $780E: $20 $2C
+    jr   nz, .switchButtonEnd                     ; $780E: $20 $2C
 
     ld   a, [wC1CA]                               ; $7810: $FA $CA $C1
     inc  a                                        ; $7813: $3C
     ld   [wC1CA], a                               ; $7814: $EA $CA $C1
     cp   $18                                      ; $7817: $FE $18
-    jr   nz, jr_002_7833                          ; $7819: $20 $18
+    jr   nz, .kanaletGateEnd                      ; $7819: $20 $18
 
     ld   a, $60                                   ; $781B: $3E $60
-    ld   [wC1CB], a                               ; $781D: $EA $CB $C1
-    ld   a, $0E                                   ; $7820: $3E $0E
+    ld   [wSwitchButtonPressed], a                ; $781D: $EA $CB $C1
+
+    ld   a, WAVE_SFX_SWITCH_BUTTON                ; $7820: $3E $0E
     ldh  [hWaveSfx], a                            ; $7822: $E0 $F3
+
     ld   a, $03                                   ; $7824: $3E $03
     ldh  [hFFA5], a                               ; $7826: $E0 $A5
+
+    ; If switch pressed is kanalet gate switch, mark the gate as opened
     ldh  a, [hMapRoom]                            ; $7828: $F0 $F6
-    cp   UNKNOWN_ROOM_C3                          ; $782A: $FE $C3
-    jr   nz, jr_002_7833                          ; $782C: $20 $05
-
-    ld   hl, wOverworldRoomStatus + $79           ; $782E: $21 $79 $D8
+    cp   ROOM_INDOOR_B_KANALET_GATE_SWITCH        ; $782A: $FE $C3
+    jr   nz, .kanaletGateEnd                      ; $782C: $20 $05
+    ld   hl, wOverworldRoomStatus + ROOM_OW_KANALET_GATE ; $782E: $21 $79 $D8
     set  4, [hl]                                  ; $7831: $CB $E6
+.kanaletGateEnd
 
-jr_002_7833:
     ld   a, [wC13B]                               ; $7833: $FA $3B $C1
     add  $FD                                      ; $7836: $C6 $FD
     ld   [wC13B], a                               ; $7838: $EA $3B $C1
     ret                                           ; $783B: $C9
 
-jr_002_783C:
+.switchButtonEnd
+
     xor  a                                        ; $783C: $AF
     ld   [wC1CA], a                               ; $783D: $EA $CA $C1
     ldh  a, [hLinkRoomPosition]                   ; $7840: $F0 $FA
     ld   hl, hLinkFinalRoomPosition               ; $7842: $21 $FB $FF
     cp   [hl]                                     ; $7845: $BE
     ld   hl, wC1C9                                ; $7846: $21 $C9 $C1
-    jr   nz, jr_002_786C                          ; $7849: $20 $21
+    jr   nz, .jr_002_786C                         ; $7849: $20 $21
 
     ldh  a, [hObjectUnderEntity]                  ; $784B: $F0 $AF
     cp   $DF                                      ; $784D: $FE $DF
-    jr   nz, jr_002_786C                          ; $784F: $20 $1B
+    jr   nz, .jr_002_786C                         ; $784F: $20 $1B
 
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $7851: $F0 $A1
     ld   e, a                                     ; $7853: $5F
@@ -8087,21 +8095,21 @@ jr_002_783C:
     ld   a, [wDialogState]                        ; $7858: $FA $9F $C1
     or   e                                        ; $785B: $B3
     or   d                                        ; $785C: $B2
-    jr   nz, jr_002_786C                          ; $785D: $20 $0D
+    jr   nz, .jr_002_786C                         ; $785D: $20 $0D
 
     inc  [hl]                                     ; $785F: $34
     ld   a, [hl]                                  ; $7860: $7E
     cp   $28                                      ; $7861: $FE $28
-    jr   c, label_002_786E                        ; $7863: $38 $09
+    jr   c, .return                               ; $7863: $38 $09
 
     ld   a, NOISE_SFX_ROCK_RUMBLE                 ; $7865: $3E $2B
     ldh  [hNoiseSfx], a                           ; $7867: $E0 $F4
     jp   label_002_4D97                           ; $7869: $C3 $97 $4D
 
-jr_002_786C:
+.jr_002_786C
     ld   [hl], $00                                ; $786C: $36 $00
 
-label_002_786E:
+.return
     ret                                           ; $786E: $C9
 
 Data_002_786F::

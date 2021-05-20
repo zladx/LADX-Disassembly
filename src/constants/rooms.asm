@@ -21,6 +21,7 @@ ROOM_OW_ANGLERS_TUNNEL                   equ $69
 
 ROOM_OW_COLOR_DUNGEON_ENTRANCE           equ $77
 ROOM_OW_KANALET_MOAT                     equ $78
+ROOM_OW_KANALET_GATE                     equ $79
 MOUNTAIN_CAVE_ROOM_1                     equ $7A
 MOUNTAIN_CAVE_ROOM_2                     equ $7B
 MOUNTAIN_CAVE_ROOM_3                     equ $7C ; is also Side-view room where the key drops ? double use ?
@@ -74,6 +75,8 @@ ROOM_INDOOR_B_MRS_MEOW_MEOW              equ $A7
 
 ROOM_INDOOR_B_FISHING_MINIGAME           equ $B1
 ROOM_INDOOR_B_CAMERA_SHOP                equ $B5
+
+ROOM_INDOOR_B_KANALET_GATE_SWITCH        equ $C3
 
 ROOM_INDOOR_B_SCHULE_HOUSE               equ $DD
 

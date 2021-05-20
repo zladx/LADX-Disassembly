@@ -1531,7 +1531,7 @@ WorldInteractiveHandler::
     or   [hl]                                     ; $0FF2: $B6
     jr   nz, label_1012                           ; $0FF3: $20 $1D
     ld   a, [wLinkMotionState]                    ; $0FF5: $FA $1C $C1
-    cp   $02                                      ; $0FF8: $FE $02
+    cp   LINK_MOTION_TYPE_NON_INTERACTIVE         ; $0FF8: $FE $02
     jr   nc, label_1012                           ; $0FFA: $30 $16
     ld   c, $01                                   ; $0FFC: $0E $01
     ld   b, $00                                   ; $0FFE: $06 $00
@@ -1637,10 +1637,10 @@ InitGotItemSequence::
     cp   $02                                      ; $1098: $FE $02
     jr   z, .jp_10DB                              ; $109A: $28 $3F
     ldh  a, [hLinkAnimationState]                 ; $109C: $F0 $9D
-    cp   LINK_ANIMATION_STATE_NO_UPDATE          ; $109E: $FE $FF
+    cp   LINK_ANIMATION_STATE_NO_UPDATE           ; $109E: $FE $FF
     jr   z, .jp_10DB                              ; $10A0: $28 $39
     ld   a, [wLinkMotionState]                    ; $10A2: $FA $1C $C1
-    cp   $02                                      ; $10A5: $FE $02
+    cp   LINK_MOTION_TYPE_NON_INTERACTIVE         ; $10A5: $FE $02
     jr   nc, .jp_10DB                             ; $10A7: $30 $32
     ld   a, [wDialogState]                        ; $10A9: $FA $9F $C1
     ld   hl, wC167                                ; $10AC: $21 $67 $C1
@@ -1699,7 +1699,7 @@ InitGotItemSequence::
     ld   hl, wInventoryAppearing                  ; $110B: $21 $4F $C1
     or   [hl]                                     ; $110E: $B6
     jr   nz, .handleLinkMotion                    ; $110F: $20 $24
-    ld   a, $07                                   ; $1111: $3E $07
+    ld   a, LINK_MOTION_PASS_OUT                  ; $1111: $3E $07
     ld   [wLinkMotionState], a                    ; $1113: $EA $1C $C1
     ld   a, $BF                                   ; $1116: $3E $BF
     ldh  [hFFB7], a                               ; $1118: $E0 $B7
@@ -1721,7 +1721,7 @@ InitGotItemSequence::
     JP_TABLE                                      ; $1138: $C7
 ._00 dw LinkMotionInteractiveHandler              ; $1139
 ._01 dw LinkMotionSwimmingHandler                 ; $113B
-._02 dw LinkMotionJumpingHandler                  ; $113D
+._02 dw LinkMotionUnstuckingHandler               ; $113D
 ._03 dw LinkMotionMapFadeOutHandler               ; $113F
 ._04 dw LinkMotionMapFadeInHandler                ; $1141
 ._05 dw LinkMotionRevolvingDoorHandler            ; $1143
@@ -2797,8 +2797,9 @@ ApplyLinkMotionState::
     call func_002_753A                            ; $1794: $CD $3A $75
 .skipInitialCall
     ld   a, [wLinkMotionState]                    ; $1797: $FA $1C $C1
-    cp   $01                                      ; $179A: $FE $01
+    cp   LINK_MOTION_SWIMMING                     ; $179A: $FE $01
     ret  z                                        ; $179C: $C8
+
     ld   a, [wC16A]                               ; $179D: $FA $6A $C1
     and  a                                        ; $17A0: $A7
     jr   z, .label_17DB                           ; $17A1: $28 $38
@@ -3178,7 +3179,7 @@ ENDC
     ld   a, [wD463]                               ; $1A06: $FA $63 $D4
     cp   $01                                      ; $1A09: $FE $01
     jr   z, .label_1A0F                           ; $1A0B: $28 $02
-    ld   a, $00                                   ; $1A0D: $3E $00
+    ld   a, LINK_MOTION_DEFAULT                   ; $1A0D: $3E $00
 
 .label_1A0F
     ld   [wLinkMotionState], a                    ; $1A0F: $EA $1C $C1

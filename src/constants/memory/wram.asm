@@ -2230,7 +2230,7 @@ wD461::
 wCompassSfxCountdown::
   ds 1 ; D462
 
-; Unlabeled
+; Temporary copy of wLinkMotionState, used in various cases.
 wD463::
   ds 1 ; D463
 

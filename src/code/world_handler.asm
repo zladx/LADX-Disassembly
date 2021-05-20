@@ -328,7 +328,8 @@ GameplayWorldLoad6Handler::
 
     ld   a, [wLinkMotionState]                    ; $4516: $FA $1C $C1
     ld   [wD463], a                               ; $4519: $EA $63 $D4
-    ld   a, $04                                   ; $451C: $3E $04
+
+    ld   a, LINK_MOTION_MAP_FADE_IN               ; $451C: $3E $04
     ld   [wLinkMotionState], a                    ; $451E: $EA $1C $C1
 
     xor  a                                        ; $4521: $AF

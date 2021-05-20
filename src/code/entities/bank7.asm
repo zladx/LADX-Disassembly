@@ -4873,7 +4873,7 @@ ENDC
     jr   nz, jr_007_602A                          ; $600B: $20 $1D
 
     ld   a, [wLinkMotionState]                    ; $600D: $FA $1C $C1
-    cp   $05                                      ; $6010: $FE $05
+    cp   LINK_MOTION_REVOLVING_DOOR               ; $6010: $FE $05
     jr   nz, jr_007_6019                          ; $6012: $20 $05
 
     ld   a, $10                                   ; $6014: $3E $10

@@ -1261,7 +1261,7 @@ LinkAnimationsList_WalkSideScrolling::
 .up:    db LINK_ANIMATION_STATE_STANDING_SIDE_SCROLL_RIGHT_UP,  LINK_ANIMATION_STATE_WALKING_SIDE_SCROLL_RIGHT_UP
 .down:  db LINK_ANIMATION_STATE_STANDING_SIDE_SCROLL_LEFT_DOWN, LINK_ANIMATION_STATE_WALKING_SIDE_SCROLL_LEFT_DOWN
 
-LinkMotionJumpingHandler::
+LinkMotionUnstuckingHandler::
     ld   a, $02                                   ; $4960: $3E $02
     ld   [wC1C4], a                               ; $4962: $EA $C4 $C1
     ldh  a, [hFF9C]                               ; $4965: $F0 $9C
@@ -2207,7 +2207,7 @@ IF !__PATCH_0__
     ld   [wDDD7], a                               ; $4EE7: $EA $D7 $DD
 ENDC
 
-    ld   a, $00                                   ; $4EEA: $3E $00
+    ld   a, LINK_MOTION_DEFAULT                   ; $4EEA: $3E $00
     ld   [wLinkMotionState], a                    ; $4EEC: $EA $1C $C1
 
 jr_002_4EEF:
@@ -2241,7 +2241,7 @@ ENDC
     and  a                                        ; $4F33: $A7
     jr   z, jr_002_4F3C                           ; $4F34: $28 $06
 
-    ld   a, $00                                   ; $4F36: $3E $00
+    ld   a, LINK_MOTION_DEFAULT                   ; $4F36: $3E $00
     ld   [wLinkMotionState], a                    ; $4F38: $EA $1C $C1
     ret                                           ; $4F3B: $C9
 
@@ -2574,7 +2574,7 @@ jr_002_50F6:
     jr   nz, jr_002_512B                          ; $5119: $20 $10
 
 jr_002_511B:
-    ld   a, $09                                   ; $511B: $3E $09
+    ld   a, LINK_MOTION_TELEPORT                  ; $511B: $3E $09
     ld   [wLinkMotionState], a                    ; $511D: $EA $1C $C1
     ld   a, $40                                   ; $5120: $3E $40
     ldh  [hFFB7], a                               ; $5122: $E0 $B7
@@ -4612,9 +4612,9 @@ func_002_60E0::
     ld   de, wArrowCount                          ; $60EF: $11 $45 $DB
     call ClampItemCount                           ; $60F2: $CD $D8 $60
 
-    ; If Link is not interactive or swimming, return
+    ; If Link is not interactive, return
     ld   a, [wLinkMotionState]                    ; $60F5: $FA $1C $C1
-    cp   LINK_MOTION_UNSTUCKING                   ; $60F8: $FE $02
+    cp   LINK_MOTION_TYPE_NON_INTERACTIVE         ; $60F8: $FE $02
     ret  nc                                       ; $60FA: $D0
 
     ld   a, [wDialogState]                        ; $60FB: $FA $9F $C1
@@ -6347,7 +6347,7 @@ jr_002_6E72:
     jr   z, jr_002_6EC6                           ; $6E9A: $28 $2A
 
     ld   a, [wLinkMotionState]                    ; $6E9C: $FA $1C $C1
-    cp   $02                                      ; $6E9F: $FE $02
+    cp   LINK_MOTION_UNSTUCKING                   ; $6E9F: $FE $02
     jr   z, jr_002_6EDD                           ; $6EA1: $28 $3A
 
     ld   a, JINGLE_JUMP_DOWN                      ; $6EA3: $3E $08
@@ -6365,7 +6365,7 @@ func_002_6EAD::
     ldh  [hLinkPositionX], a                      ; $6EB3: $E0 $98
 
 jr_002_6EB5:
-    ld   a, $02                                   ; $6EB5: $3E $02
+    ld   a, LINK_MOTION_UNSTUCKING                ; $6EB5: $3E $02
     ld   [wLinkMotionState], a                    ; $6EB7: $EA $1C $C1
 
     xor  a                                        ; $6EBA: $AF
@@ -6867,7 +6867,7 @@ jr_002_716E:
 
 label_002_719C:
     ld   a, [wLinkMotionState]                    ; $719C: $FA $1C $C1
-    cp   $02                                      ; $719F: $FE $02
+    cp   LINK_MOTION_UNSTUCKING                   ; $719F: $FE $02
     jp   z, collisionEnd                          ; $71A1: $CA $54 $74
 
     ld   a, [wLiftedEntityType]                   ; $71A4: $FA $A8 $C5
@@ -7385,8 +7385,10 @@ jr_002_7472:
 
     ld   a, JINGLE_REVOLVING_DOOR                 ; $747A: $3E $0C
     ldh  [hJingle], a                             ; $747C: $E0 $F2
-    ld   a, $05                                   ; $747E: $3E $05
+
+    ld   a, LINK_MOTION_REVOLVING_DOOR            ; $747E: $3E $05
     ld   [wLinkMotionState], a                    ; $7480: $EA $1C $C1
+
     call ClearLinkPositionIncrement               ; $7483: $CD $8E $17
     ld   [wInvincibilityCounter], a               ; $7486: $EA $C7 $DB
     ld   [wC198], a                               ; $7489: $EA $98 $C1
@@ -7510,7 +7512,7 @@ GetObjectUnderLink::
 
 func_002_753A::
     ld   a, [wLinkMotionState]                    ; $753A: $FA $1C $C1
-    cp   $01                                      ; $753D: $FE $01
+    cp   LINK_MOTION_SWIMMING                     ; $753D: $FE $01
     jr   nz, jr_002_7549                          ; $753F: $20 $08
 
     ld   a, [wC13B]                               ; $7541: $FA $3B $C1
@@ -7599,7 +7601,7 @@ jr_002_75B2:
     xor  a                                        ; $75B2: $AF
     ld   [wD475], a                               ; $75B3: $EA $75 $D4
     ld   a, [wLinkMotionState]                    ; $75B6: $FA $1C $C1
-    cp   $02                                      ; $75B9: $FE $02
+    cp   LINK_MOTION_UNSTUCKING                   ; $75B9: $FE $02
     jr   z, jr_002_75B1                           ; $75BB: $28 $F4
 
 ; Handle physics between Link and the ground.
@@ -7847,10 +7849,10 @@ jr_002_76F4:
     jr   z, jr_002_7750                           ; $76F9: $28 $55
 
     ld   a, [wLinkMotionState]                    ; $76FB: $FA $1C $C1
-    cp   $08                                      ; $76FE: $FE $08
+    cp   LINK_MOTION_RECOVER                      ; $76FE: $FE $08
     jr   z, jr_002_774F                           ; $7700: $28 $4D
 
-    cp   $01                                      ; $7702: $FE $01
+    cp   LINK_MOTION_SWIMMING                     ; $7702: $FE $01
     jr   z, jr_002_774F                           ; $7704: $28 $49
 
     ldh  a, [hLinkPositionY]                      ; $7706: $F0 $99
@@ -7867,8 +7869,10 @@ jr_002_76F4:
 label_002_7719:
     ld   a, $50                                   ; $7719: $3E $50
     ldh  [hFFB7], a                               ; $771B: $E0 $B7
-    ld   a, $08                                   ; $771D: $3E $08
+
+    ld   a, LINK_MOTION_RECOVER                   ; $771D: $3E $08
     ld   [wLinkMotionState], a                    ; $771F: $EA $1C $C1
+
     ldh  a, [hObjectUnderEntity]                  ; $7722: $F0 $AF
     ldh  [hFF9C], a                               ; $7724: $E0 $9C
     ldh  a, [hLinkPositionY]                      ; $7726: $F0 $99

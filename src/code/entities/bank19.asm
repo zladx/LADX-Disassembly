@@ -369,7 +369,7 @@ jr_019_4226:
     ldh  [hLinkPositionY], a                      ; $425B: $E0 $99
     ld   a, $45                                   ; $425D: $3E $45
     ld   [wWarp0PositionTileIndex], a             ; $425F: $EA $16 $D4
-    ld   a, $06                                   ; $4262: $3E $06
+    ld   a, LINK_MOTION_FALLING_DOWN              ; $4262: $3E $06
     ld   [wLinkMotionState], a                    ; $4264: $EA $1C $C1
     call ResetSpinAttack                          ; $4267: $CD $AF $0C
     ld   [wC198], a                               ; $426A: $EA $98 $C1
@@ -1153,7 +1153,7 @@ jr_019_485C:
 
 jr_019_4869:
     ld   a, [wLinkMotionState]                    ; $4869: $FA $1C $C1
-    cp   $01                                      ; $486C: $FE $01
+    cp   LINK_MOTION_SWIMMING                     ; $486C: $FE $01
     jr   nz, jr_019_4890                          ; $486E: $20 $20
 
     ldh  a, [hFF9C]                               ; $4870: $F0 $9C
@@ -3716,7 +3716,7 @@ RoosterEntityHandler::
     jp   z, label_019_5B3C                        ; $59FE: $CA $3C $5B
 
     ld   a, [wLinkMotionState]                    ; $5A01: $FA $1C $C1
-    cp   $01                                      ; $5A04: $FE $01
+    cp   LINK_MOTION_SWIMMING                     ; $5A04: $FE $01
     jr   nz, jr_019_5A0D                          ; $5A06: $20 $05
 
     call func_019_5B00                            ; $5A08: $CD $00 $5B
@@ -3858,8 +3858,9 @@ jr_019_5AB9:
     ret  z                                        ; $5AC3: $C8
 
 jr_019_5AC4:
+    ; If Link is not interactive, return
     ld   a, [wLinkMotionState]                    ; $5AC4: $FA $1C $C1
-    cp   $02                                      ; $5AC7: $FE $02
+    cp   LINK_MOTION_TYPE_NON_INTERACTIVE         ; $5AC7: $FE $02
     ret  nc                                       ; $5AC9: $D0
 
     ld   a, [wC3CF]                               ; $5ACA: $FA $CF $C3

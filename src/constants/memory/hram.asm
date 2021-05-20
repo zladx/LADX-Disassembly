@@ -106,6 +106,9 @@ hLinkSpeedY::
 ; 6 = ?
 ;
 ; Jump-table at 02:68E4
+; Related to diving?
+;
+; Maybe hLinkMotionModifier?
 hFF9C::
  ds 1 ; FF9C
 

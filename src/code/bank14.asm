@@ -451,7 +451,7 @@ PaletteEffectDisabledTable::
 .LINK_MOTION_PASS_OUT       db 0
 .LINK_MOTION_RECOVER        db 0
 .LINK_MOTION_TELEPORT       db 0
-.LINK_MOTION_UNKNOWN        db 0
+.LINK_MOTION_UNKNOWN_0A     db 0
 
 ; Update the palette effects for interactive objects
 ; (for instance a dark palette when torches are not lit)
@@ -551,7 +551,7 @@ jr_014_4CB2:
 
 jr_014_4CC7:
     ld   a, [wLinkMotionState]                    ; $4CC7: $FA $1C $C1
-    cp   $00                                      ; $4CCA: $FE $00
+    cp   LINK_MOTION_DEFAULT                      ; $4CCA: $FE $00
     ret  nz                                       ; $4CCC: $C0
 
     ld   a, [wRoomTransitionDirection]            ; $4CCD: $FA $25 $C1
@@ -800,8 +800,10 @@ Data_014_4E41::
 TeleportToManboPond::
     ld   a, $01                                   ; $4E51: $3E $01
     ld   [wD474], a                               ; $4E53: $EA $74 $D4
-    ld   a, $03                                   ; $4E56: $3E $03
+
+    ld   a, LINK_MOTION_MAP_FADE_OUT              ; $4E56: $3E $03
     ld   [wLinkMotionState], a                    ; $4E58: $EA $1C $C1
+
     ld   a, [wIsIndoor]                           ; $4E5B: $FA $A5 $DB
     and  a                                        ; $4E5E: $A7
     jr   z, jr_014_4E88                           ; $4E5F: $28 $27
@@ -1147,7 +1149,7 @@ func_014_5347::
     jr   nz, jr_014_5354                          ; $534B: $20 $07
 
     ld   a, [wLinkMotionState]                    ; $534D: $FA $1C $C1
-    cp   $06                                      ; $5350: $FE $06
+    cp   LINK_MOTION_FALLING_DOWN                 ; $5350: $FE $06
     jr   nz, jr_014_5360                          ; $5352: $20 $0C
 
 jr_014_5354:
@@ -1335,10 +1337,10 @@ DialogOpenAnimationStart::
     jr   nz, jr_014_545A                          ; $544D: $20 $0B
 
     ld   a, [wLinkMotionState]                    ; $544F: $FA $1C $C1
-    cp   $03                                      ; $5452: $FE $03
+    cp   LINK_MOTION_MAP_FADE_OUT                 ; $5452: $FE $03
     jr   z, jr_014_5444                           ; $5454: $28 $EE
 
-    cp   $04                                      ; $5456: $FE $04
+    cp   LINK_MOTION_MAP_FADE_IN                  ; $5456: $FE $04
     jr   z, jr_014_5444                           ; $5458: $28 $EA
 
 jr_014_545A:

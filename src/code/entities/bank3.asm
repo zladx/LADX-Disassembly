@@ -5966,9 +5966,9 @@ Data_003_6BDA::
 ; Check the collision of the active entity (an enemy projectile) with Link.
 ; If the entity is collisioning, handle whether Link has its shield up or not.
 CheckLinkCollisionWithProjectile::
-    ; If Link is not interactive or swimming, return.
+    ; If Link is not interactive, return.
     ld   a, [wLinkMotionState]                    ; $6BDE: $FA $1C $C1
-    cp   LINK_MOTION_UNSTUCKING                   ; $6BE1: $FE $02
+    cp   LINK_MOTION_TYPE_NON_INTERACTIVE         ; $6BE1: $FE $02
     jr   nc, .return                              ; $6BE3: $30 $75
 
     ; If Link is in the air, return.
@@ -6095,10 +6095,9 @@ CheckLinkCollisionWithEnemy::
     jr   nz, CheckLinkCollisionWithProjectile.return; $6C75: $20 $E3
 
 .collisionEvenInTheAir
-    ; If Link is not interactive or swimming…
+    ; If Link is not interactive, return.
     ld   a, [wLinkMotionState]                    ; $6C77: $FA $1C $C1
-    cp   LINK_MOTION_UNSTUCKING                   ; $6C7A: $FE $02
-    ; … return.
+    cp   LINK_MOTION_TYPE_NON_INTERACTIVE         ; $6C7A: $FE $02
     jr   nc, CheckLinkCollisionWithProjectile.return; $6C7C: $30 $DC
 
     push bc                                       ; $6C7E: $C5
@@ -7752,8 +7751,9 @@ jr_003_7571:
     cp   $22                                      ; $7576: $FE $22
     jr   c, jr_003_7570                           ; $7578: $38 $F6
 
-    ld   a, $0A                                   ; $757A: $3E $0A
+    ld   a, LINK_MOTION_UNKNOWN_0A                ; $757A: $3E $0A
     ld   [wLinkMotionState], a                    ; $757C: $EA $1C $C1
+
     ld   hl, wEntitiesDirectionTable              ; $757F: $21 $80 $C3
     add  hl, bc                                   ; $7582: $09
     ld   a, [hl]                                  ; $7583: $7E
@@ -8518,7 +8518,7 @@ jr_003_79AC:
     jr   nz, jr_003_79CB                          ; $79BC: $20 $0D
 
     ld   a, [wLinkMotionState]                    ; $79BE: $FA $1C $C1
-    cp   $06                                      ; $79C1: $FE $06
+    cp   LINK_MOTION_FALLING_DOWN                 ; $79C1: $FE $06
     jr   nz, jr_003_7A18                          ; $79C3: $20 $53
 
     ldh  a, [hObjectUnderEntity]                  ; $79C5: $F0 $AF
@@ -9076,7 +9076,7 @@ ApplySwordIntersectionWithObjects::
     jr   z, jr_003_7CFD                           ; $7CE7: $28 $14
 
     ld   a, [wLinkMotionState]                    ; $7CE9: $FA $1C $C1
-    cp   $05                                      ; $7CEC: $FE $05
+    cp   LINK_MOTION_REVOLVING_DOOR               ; $7CEC: $FE $05
     ret  z                                        ; $7CEE: $C8
 
     ld   a, [wDDD6]                               ; $7CEF: $FA $D6 $DD

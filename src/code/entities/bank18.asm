@@ -3743,7 +3743,7 @@ jr_018_5B90:
 
 func_018_5B9D::
     ld   a, [wLinkMotionState]                    ; $5B9D: $FA $1C $C1
-    cp   $03                                      ; $5BA0: $FE $03
+    cp   LINK_MOTION_MAP_FADE_OUT                 ; $5BA0: $FE $03
     ret  z                                        ; $5BA2: $C8
 
     ld   a, $40                                   ; $5BA3: $3E $40
@@ -3938,7 +3938,7 @@ label_018_5C6A:
     ldh  a, [hLinkPositionZ]                      ; $5CCC: $F0 $A2
     ld   [hl], a                                  ; $5CCE: $77
     ld   a, [wLinkMotionState]                    ; $5CCF: $FA $1C $C1
-    cp   $02                                      ; $5CD2: $FE $02
+    cp   LINK_MOTION_UNSTUCKING                   ; $5CD2: $FE $02
     jr   z, jr_018_5CEA                           ; $5CD4: $28 $14
 
     ld   a, [wRoomTransitionState]                ; $5CD6: $FA $24 $C1
@@ -5456,7 +5456,7 @@ func_018_66CD::
     jr   nz, jr_018_66E8                          ; $66DF: $20 $07
 
     ld   a, [wLinkMotionState]                    ; $66E1: $FA $1C $C1
-    cp   $0A                                      ; $66E4: $FE $0A
+    cp   LINK_MOTION_UNKNOWN_0A                   ; $66E4: $FE $0A
     jr   z, jr_018_66E9                           ; $66E6: $28 $01
 
 jr_018_66E8:
@@ -8203,7 +8203,7 @@ jr_018_79CF:
     jr   z, jr_018_79F0                           ; $79DE: $28 $10
 
     ld   a, [wLinkMotionState]                    ; $79E0: $FA $1C $C1
-    cp   $05                                      ; $79E3: $FE $05
+    cp   LINK_MOTION_REVOLVING_DOOR               ; $79E3: $FE $05
     ret  z                                        ; $79E5: $C8
 
     ld   a, [wDDD6]                               ; $79E6: $FA $D6 $DD

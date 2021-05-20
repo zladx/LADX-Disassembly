@@ -89,7 +89,7 @@ jr_006_7E4E:
 
 jr_006_7E55:
     ld   a, [wLinkMotionState]                    ; $7E55: $FA $1C $C1
-    cp   $00                                      ; $7E58: $FE $00
+    cp   LINK_MOTION_DEFAULT                      ; $7E58: $FE $00
     ret  nz                                       ; $7E5A: $C0
 
     ldh  a, [hActiveEntityPosX]                   ; $7E5B: $F0 $EE

@@ -277,7 +277,7 @@ label_036_4178:
     jr   nz, jr_036_41A0                          ; $4194: $20 $0A
 
     ld   a, [wLinkMotionState]                    ; $4196: $FA $1C $C1
-    cp   $03                                      ; $4199: $FE $03
+    cp   LINK_MOTION_MAP_FADE_OUT                 ; $4199: $FE $03
     jr   z, jr_036_41A0                           ; $419B: $28 $03
 
     call func_036_41B2                            ; $419D: $CD $B2 $41
@@ -490,11 +490,11 @@ jr_036_42D4:
     jr   nz, jr_036_4329                          ; $42FF: $20 $28
 
     ld   a, [wGameplayType]                       ; $4301: $FA $95 $DB
-    cp   $0B                                      ; $4304: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $4304: $FE $0B
     jr   nz, jr_036_4329                          ; $4306: $20 $21
 
     ld   a, [wLinkMotionState]                    ; $4308: $FA $1C $C1
-    cp   $03                                      ; $430B: $FE $03
+    cp   LINK_MOTION_MAP_FADE_OUT                 ; $430B: $FE $03
     jr   z, jr_036_4329                           ; $430D: $28 $1A
 
     call func_036_436D                            ; $430F: $CD $6D $43

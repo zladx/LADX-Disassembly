@@ -205,7 +205,7 @@ jr_006_50D7:
     jr   nc, jr_006_5102                          ; $50ED: $30 $13
 
     ld   a, [wLinkMotionState]                    ; $50EF: $FA $1C $C1
-    cp   $00                                      ; $50F2: $FE $00
+    cp   LINK_MOTION_DEFAULT                      ; $50F2: $FE $00
     jr   nz, jr_006_5102                          ; $50F4: $20 $0C
 
     call IncrementEntityState                     ; $50F6: $CD $12 $3B

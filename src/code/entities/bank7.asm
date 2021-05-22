@@ -3343,7 +3343,7 @@ Data_007_562D::
     db   $50, $02, $50, $22, $52, $02, $52, $22, $50, $42, $50, $62, $52, $42, $52, $62
     db   $54, $02, $56, $02, $58, $02, $5A, $02, $56, $22, $54, $22, $5A, $22, $58, $22
 
-WingedOctorockEntityHandler::
+WingedOctorokEntityHandler::
     ld   de, Data_007_562D                        ; $564D: $11 $2D $56
     call RenderActiveEntitySpritesPair            ; $5650: $CD $C0 $3B
     call func_007_5805                            ; $5653: $CD $05 $58
@@ -3573,7 +3573,7 @@ Data_007_57AC::
     db   $00, $00, $E0, $20
 
 func_007_57B0::
-    ld   a, ENTITY_OCTOROCK_ROCK                  ; $57B0: $3E $0A
+    ld   a, ENTITY_OCTOROK_ROCK                   ; $57B0: $3E $0A
     call SpawnNewEntity_trampoline                ; $57B2: $CD $86 $3B
     jr   c, jr_007_57F4                           ; $57B5: $38 $3D
 

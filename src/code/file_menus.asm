@@ -60,7 +60,7 @@ CopyDeathCountsToBG::
     ld   h, a                                     ; $4816: $67
     ld   a, [wFile1DeathCountLow]                 ; $4817: $FA $01 $DC
     ld   l, a                                     ; $481A: $6F
-    ld   de, vBGMap0 + $00E7                      ; $481B: $11 $E7 $98
+    ld   de, vBGMap0 + $0E7                       ; $481B: $11 $E7 $98
     call CopyDigitsToFileScreenBG                 ; $481E: $CD $45 $4F
 
 .file2
@@ -72,7 +72,7 @@ CopyDeathCountsToBG::
     ld   h, a                                     ; $482B: $67
     ld   a, [wFile2DeathCountLow]                 ; $482C: $FA $03 $DC
     ld   l, a                                     ; $482F: $6F
-    ld   de, vBGMap0 + $0147                      ; $4830: $11 $47 $99
+    ld   de, vBGMap0 + $147                       ; $4830: $11 $47 $99
     call CopyDigitsToFileScreenBG                 ; $4833: $CD $45 $4F
 
 .file3
@@ -84,7 +84,7 @@ CopyDeathCountsToBG::
     ld   h, a                                     ; $4840: $67
     ld   a, [wFile3DeathCountLow]                 ; $4841: $FA $05 $DC
     ld   l, a                                     ; $4844: $6F
-    ld   de, vBGMap0 + $01A7                      ; $4845: $11 $A7 $99
+    ld   de, vBGMap0 + $1A7                       ; $4845: $11 $A7 $99
     call CopyDigitsToFileScreenBG                 ; $4848: $CD $45 $4F
 
 .return

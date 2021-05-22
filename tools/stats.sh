@@ -44,7 +44,8 @@ EXCLUDED_FILES="\
 --exclude */home/init.asm \
 --exclude */home/clear_memory.asm \
 --exclude */audio/sfx.asm \
---exclude */audio/music_1.asm"
+--exclude */audio/music_1.asm \
+--exclude */palettes.asm"
 count_matches '[^;] \$[0-3][0-9A-F]{3}' "$EXCLUDED_FILES"
 
 echo "   Referencing non-Home ROM banks (4000-7FFF):"

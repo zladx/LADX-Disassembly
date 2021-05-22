@@ -6,6 +6,7 @@
 
 VERBOSE=${1:-"disabled"}
 SOURCE_DIR="src/code"
+SYM_FILE="azle.sym"
 
 count_matches()
 {
@@ -57,9 +58,11 @@ echo "   Referencing RAM (8000-FFFF):"
 count_matches '(, | \[|call |jp   )\$[89A-Z][A-Z0-9]{3}'
 
 echo ""
-echo "Number of unlabeled functions:"
-count_matches '^[Ff]unc'
-
-echo ""
-echo "Number of unlabeled jumps:"
-count_matches '^label_|^jr_|^\.jr_|^\.loop_|^\.else_'
+echo "Documented labels:"
+UNDOCUMENTED_LABEL='[A-Za-z0-9_\.]*[0-9A-F]{4}[A-Za-z0-9_]*'
+ANY_LABEL='[A-Za-z0-9_\.]*'
+undocumented_labels=$(grep -E --only-matching " $UNDOCUMENTED_LABEL" "$SYM_FILE" | sort -u | wc -l)
+documented_labels=$(grep -E -v " $UNDOCUMENTED_LABEL" "$SYM_FILE" | grep --only-matching " $ANY_LABEL" | sort -u | wc -l)
+all_labels=$(expr $documented_labels + $undocumented_labels)
+completion_percentage=$(awk "BEGIN {print $documented_labels / $all_labels * 100}")
+echo "$documented_labels / $all_labels ($completion_percentage %)"

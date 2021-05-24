@@ -22,8 +22,8 @@ EntityHandlersTable::
 ._06 far_pointer PushedBlockEntityHandler
 ._07 far_pointer ChestWithItemEntityHandler
 ._08 far_pointer MagicPowderSprinkleEntityHandler
-._09 far_pointer OctorockEntityHandler
-._0A far_pointer OctorockRockEntityHandler
+._09 far_pointer OctorokEntityHandler
+._0A far_pointer OctorokRockEntityHandler
 ._0B far_pointer MoblinEntityHandler
 ._0C far_pointer MoblinArrowEntityHandler
 ._0D far_pointer TektiteEntityHandler
@@ -187,7 +187,7 @@ EntityHandlersTable::
 ._AB far_pointer CheepCheepVerticalEntityHandler
 ._AC far_pointer CheepCheepJumpingEntityHandler ; $AC
 ._AD far_pointer KikiTheMonkeyEntityHandler
-._AE far_pointer WingedOctorockEntityHandler
+._AE far_pointer WingedOctorokEntityHandler
 ._AF far_pointer TradingItemEntityHandler
 ._B0 far_pointer PincerEntityHandler ; $B0
 ._B1 far_pointer HoleFillerEntityHandler

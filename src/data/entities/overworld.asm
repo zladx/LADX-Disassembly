@@ -210,8 +210,8 @@ Overworld2EEntities::
   entities_end
 
 Overworld2FEntities::
-  entity $4, $3, ENTITY_OCTOROCK
-  entity $5, $4, ENTITY_OCTOROCK
+  entity $4, $3, ENTITY_OCTOROK
+  entity $5, $4, ENTITY_OCTOROK
   entities_end
 
 Overworld30Entities::
@@ -943,20 +943,20 @@ OverworldC0Entities::
   entities_end
 
 OverworldC1Entities::
-  entity $3, $3, ENTITY_OCTOROCK
-  entity $5, $4, ENTITY_OCTOROCK
+  entity $3, $3, ENTITY_OCTOROK
+  entity $5, $4, ENTITY_OCTOROK
   entities_end
 
 OverworldC2Entities::
-  entity $1, $3, ENTITY_OCTOROCK
-  entity $2, $6, ENTITY_OCTOROCK
-  entity $5, $6, ENTITY_OCTOROCK
+  entity $1, $3, ENTITY_OCTOROK
+  entity $2, $6, ENTITY_OCTOROK
+  entity $5, $6, ENTITY_OCTOROK
   entities_end
 
 OverworldC3Entities::
-  entity $2, $4, ENTITY_OCTOROCK
-  entity $4, $7, ENTITY_OCTOROCK
-  entity $5, $2, ENTITY_OCTOROCK
+  entity $2, $4, ENTITY_OCTOROK
+  entity $4, $7, ENTITY_OCTOROK
+  entity $5, $2, ENTITY_OCTOROK
   entities_end
 
 OverworldC4Entities::
@@ -1025,12 +1025,12 @@ OverworldCFEntities::
   entities_end
 
 OverworldD0Entities::
-  entity $1, $7, ENTITY_OCTOROCK
+  entity $1, $7, ENTITY_OCTOROK
   entities_end
 
 OverworldD1Entities::
-  entity $3, $7, ENTITY_OCTOROCK
-  entity $4, $3, ENTITY_OCTOROCK
+  entity $3, $7, ENTITY_OCTOROK
+  entity $4, $3, ENTITY_OCTOROK
   entities_end
 
 OverworldD2Entities::
@@ -1115,8 +1115,8 @@ OverworldDFEntities::
   entities_end
 
 OverworldE0Entities::
-  entity $1, $4, ENTITY_OCTOROCK
-  entity $4, $2, ENTITY_OCTOROCK
+  entity $1, $4, ENTITY_OCTOROK
+  entity $4, $2, ENTITY_OCTOROK
   entities_end
 
 OverworldE1Entities::
@@ -1126,8 +1126,8 @@ OverworldE1Entities::
   entities_end
 
 OverworldE2Entities::
-  entity $2, $6, ENTITY_OCTOROCK
-  entity $5, $5, ENTITY_OCTOROCK
+  entity $2, $6, ENTITY_OCTOROK
+  entity $5, $5, ENTITY_OCTOROK
   entity $5, $2, ENTITY_URCHIN
   entity $6, $2, ENTITY_URCHIN
   entities_end
@@ -1193,11 +1193,11 @@ OverworldEFEntities::
 OverworldF0Entities::
   entity $4, $4, ENTITY_LEEVER
   entity $4, $7, ENTITY_LEEVER
-  entity $2, $2, ENTITY_OCTOROCK
+  entity $2, $2, ENTITY_OCTOROK
   entities_end
 
 OverworldF1Entities::
-  entity $1, $3, ENTITY_OCTOROCK
+  entity $1, $3, ENTITY_OCTOROK
   entity $2, $3, ENTITY_LEEVER
   entity $4, $5, ENTITY_LEEVER
   entities_end

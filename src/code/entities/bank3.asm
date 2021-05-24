@@ -1027,7 +1027,7 @@ jr_003_4D07:
     jr   c, jr_003_4D29                           ; $4D09: $38 $1E
 
     ldh  a, [hActiveEntityType]                   ; $4D0B: $F0 $EB
-    cp   ENTITY_OCTOROCK                          ; $4D0D: $FE $09
+    cp   ENTITY_OCTOROK                           ; $4D0D: $FE $09
     jr   z, jr_003_4D19                           ; $4D0F: $28 $08
 
     cp   ENTITY_MOBLIN                            ; $4D11: $FE $0B
@@ -2761,7 +2761,7 @@ jr_003_57D7:
 label_003_57E6:
     jp   label_397B                               ; $57E6: $C3 $7B $39
 
-OctorockEntityHandler::
+OctorokEntityHandler::
     ld   de, Data_003_57FB                        ; $57E9: $11 $FB $57
     ld   a, [wGameplayType]                       ; $57EC: $FA $95 $DB
     cp   $01                                      ; $57EF: $FE $01
@@ -2847,7 +2847,7 @@ jr_003_5858:
     cp   ENTITY_IRON_MASK                         ; $587E: $FE $24
     jr   z, jr_003_5889                           ; $5880: $28 $07
 
-    cp   ENTITY_OCTOROCK                          ; $5882: $FE $09
+    cp   ENTITY_OCTOROK                           ; $5882: $FE $09
     jr   z, jr_003_588D                           ; $5884: $28 $07
 
     call SpawnMoblinArrow                         ; $5886: $CD $47 $59
@@ -2861,7 +2861,7 @@ jr_003_588D:
     cp   $01                                      ; $5890: $FE $01
     ret  z                                        ; $5892: $C8
 
-    jp   SpawnOctorockRock                        ; $5893: $C3 $98 $59
+    jp   SpawnOctorokRock                         ; $5893: $C3 $98 $59
 
 jr_003_5896:
     call GetRandomByte                            ; $5896: $CD $0D $28
@@ -3027,8 +3027,8 @@ Data_003_5992::
 Data_003_5994::
     db   $00, $00, $E0, $20
 
-SpawnOctorockRock::
-    ld   a, ENTITY_OCTOROCK_ROCK                  ; $5998: $3E $0A
+SpawnOctorokRock::
+    ld   a, ENTITY_OCTOROK_ROCK                   ; $5998: $3E $0A
     call SpawnNewEntity                           ; $599A: $CD $CA $64
     jr   c, jr_003_59D6                           ; $599D: $38 $37
 
@@ -5674,7 +5674,7 @@ include "code/entities/hookshot_hit.asm"
 Data_003_6A1E::
     db   $6C, $01, $6C, $21, $5C, $01, $5C, $21
 
-OctorockRockEntityHandler::
+OctorokRockEntityHandler::
     call GetEntityTransitionCountdown             ; $6A26: $CD $05 $0C
     jr   nz, jr_003_6A2E                          ; $6A29: $20 $03
 
@@ -5858,8 +5858,8 @@ ENDC
 
 jr_003_6B53:
     ldh  a, [hActiveEntityType]                   ; $6B53: $F0 $EB
-    cp   ENTITY_OCTOROCK_ROCK                     ; $6B55: $FE $0A
-    jr   z, .octorockRockEnd                      ; $6B57: $28 $15
+    cp   ENTITY_OCTOROK_ROCK                      ; $6B55: $FE $0A
+    jr   z, .octorokRockEnd                       ; $6B57: $28 $15
 
     call GetEntityTransitionCountdown             ; $6B59: $CD $05 $0C
     srl  a                                        ; $6B5C: $CB $3F
@@ -5872,7 +5872,7 @@ jr_003_6B53:
     add  hl, de                                   ; $6B69: $19
     ld   a, [hl]                                  ; $6B6A: $7E
     call SetEntitySpriteVariant                   ; $6B6B: $CD $0C $3B
-.octorockRockEnd
+.octorokRockEnd
 
     call UpdateEntityPosWithSpeed_03              ; $6B6E: $CD $25 $7F
     jr   func_003_6B7B                            ; $6B71: $18 $08
@@ -8559,7 +8559,7 @@ jr_003_79CB:
     cp   ENTITY_MOBLIN                            ; $79FD: $FE $0B
     jr   z, jr_003_7A18                           ; $79FF: $28 $17
 
-    cp   ENTITY_OCTOROCK                          ; $7A01: $FE $09
+    cp   ENTITY_OCTOROK                           ; $7A01: $FE $09
     jr   z, jr_003_7A18                           ; $7A03: $28 $13
 
     ld   [hl], $48                                ; $7A05: $36 $48

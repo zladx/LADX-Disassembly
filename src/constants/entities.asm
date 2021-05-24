@@ -46,8 +46,8 @@ ENTITY_ENTITY_LIFTABLE_ROCK          equ $05
 ENTITY_PUSHED_BLOCK                  equ $06
 ENTITY_CHEST_WITH_ITEM               equ $07
 ENTITY_MAGIC_POWDER_SPRINKLE         equ $08
-ENTITY_OCTOROCK                      equ $09
-ENTITY_OCTOROCK_ROCK                 equ $0A
+ENTITY_OCTOROK                       equ $09
+ENTITY_OCTOROK_ROCK                  equ $0A
 ENTITY_MOBLIN                        equ $0B
 ENTITY_MOBLIN_ARROW                  equ $0C
 ENTITY_TEKTITE                       equ $0D

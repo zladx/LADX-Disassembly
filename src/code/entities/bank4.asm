@@ -1119,7 +1119,7 @@ jr_004_547E:
     jr   nz, jr_004_54F0                          ; $548F: $20 $5F
 
     ld   a, [wLinkMotionState]                    ; $5491: $FA $1C $C1
-    cp   $06                                      ; $5494: $FE $06
+    cp   LINK_MOTION_FALLING_DOWN                 ; $5494: $FE $06
     jr   z, jr_004_54F0                           ; $5496: $28 $58
 
     ldh  a, [hLinkPositionZ]                      ; $5498: $F0 $A2
@@ -1161,7 +1161,7 @@ jr_004_547E:
 
     ldh  a, [hActiveEntityPosX]                   ; $54D7: $F0 $EE
     ldh  [hLinkPositionX], a                      ; $54D9: $E0 $98
-    ld   a, $06                                   ; $54DB: $3E $06
+    ld   a, LINK_MOTION_FALLING_DOWN              ; $54DB: $3E $06
     ld   [wLinkMotionState], a                    ; $54DD: $EA $1C $C1
     call ResetSpinAttack                          ; $54E0: $CD $AF $0C
     ld   [wC198], a                               ; $54E3: $EA $98 $C1
@@ -4137,7 +4137,7 @@ func_004_6848::
 
 jr_004_6852:
     ld   a, [wLinkMotionState]                    ; $6852: $FA $1C $C1
-    cp   $00                                      ; $6855: $FE $00
+    cp   LINK_MOTION_DEFAULT                      ; $6855: $FE $00
     jp   nz, label_004_68E4                       ; $6857: $C2 $E4 $68
 
     ldh  a, [hLinkSpeedX]                         ; $685A: $F0 $9A
@@ -6866,7 +6866,7 @@ func_004_78AF::
     jr   z, jr_004_78D4                           ; $78BC: $28 $16
 
     ld   a, [wLinkMotionState]                    ; $78BE: $FA $1C $C1
-    cp   $00                                      ; $78C1: $FE $00
+    cp   LINK_MOTION_DEFAULT                      ; $78C1: $FE $00
     jr   nz, jr_004_78D4                          ; $78C3: $20 $0F
 
     ldh  a, [hLinkPositionY]                      ; $78C5: $F0 $99

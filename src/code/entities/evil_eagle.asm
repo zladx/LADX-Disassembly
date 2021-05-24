@@ -1003,17 +1003,17 @@ func_005_5FA8::
 
     ld   a, $01                                   ; $5FB7: $3E $01
     call SetEntitySpriteVariant                   ; $5FB9: $CD $0C $3B
-    ld   a, [wC13E]                               ; $5FBC: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $5FBC: $FA $3E $C1
     and  a                                        ; $5FBF: $A7
     jr   nz, jr_005_5FE9                          ; $5FC0: $20 $27
 
     call label_3B39                               ; $5FC2: $CD $39 $3B
-    ld   a, [wC13E]                               ; $5FC5: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $5FC5: $FA $3E $C1
     and  a                                        ; $5FC8: $A7
     jr   z, jr_005_5FE9                           ; $5FC9: $28 $1E
 
     ld   a, $10                                   ; $5FCB: $3E $10
-    ld   [wC13E], a                               ; $5FCD: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $5FCD: $EA $3E $C1
     ld   hl, wEntitiesDirectionTable              ; $5FD0: $21 $80 $C3
     add  hl, bc                                   ; $5FD3: $09
     ld   e, [hl]                                  ; $5FD4: $5E

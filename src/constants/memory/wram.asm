@@ -331,8 +331,11 @@ wC13C::
 wRandomSeed::
   ds 1 ; C13D
 
-; Unlabeled
-wC13E::
+; Ignore Link's collision with entities and some hurting objects when non-zero
+; (for instance after being hurt).
+;
+; Decremented every frame.
+wIgnoreLinkCollisionsCountdown::
   ds 1 ; C13E
 
 ; Unlabeled
@@ -996,7 +999,7 @@ wEntitiesStatusTable::
 wEntitiesStateTable::
   ds $10 ; C290 - C29F
 
-; Indicates if the entity is collisioning:
+; Indicates if the entity is colliding:
 ; 0 = no collisions,
 ; 1 = collision on the right,
 ; 2 = collision on the left,
@@ -2227,7 +2230,7 @@ wD461::
 wCompassSfxCountdown::
   ds 1 ; D462
 
-; Unlabeled
+; Temporary copy of wLinkMotionState, used in various cases.
 wD463::
   ds 1 ; D463
 

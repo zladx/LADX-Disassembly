@@ -2297,9 +2297,9 @@ jr_001_61E9::
     ret                                           ; $61ED: $C9
 
 OpenDungeonNameDialog::
-    ; If wLinkMotionState == LINK_MOTION_INTERACTIVE…
+    ; If wLinkMotionState == LINK_MOTION_DEFAULT…
     ld   a, [wLinkMotionState]                    ; $61EE: $FA $1C $C1
-    cp   $00                                      ; $61F1: $FE $00
+    cp   LINK_MOTION_DEFAULT                      ; $61F1: $FE $00
     jr   nz, .return                              ; $61F3: $20 $0D
     ; … and Free Movement Mode is disabled…
     ld   a, [wFreeMovementMode]                   ; $61F5: $FA $7B $C1

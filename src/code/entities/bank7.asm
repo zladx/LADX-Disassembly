@@ -4873,7 +4873,7 @@ ENDC
     jr   nz, jr_007_602A                          ; $600B: $20 $1D
 
     ld   a, [wLinkMotionState]                    ; $600D: $FA $1C $C1
-    cp   $05                                      ; $6010: $FE $05
+    cp   LINK_MOTION_REVOLVING_DOOR               ; $6010: $FE $05
     jr   nz, jr_007_6019                          ; $6012: $20 $05
 
     ld   a, $10                                   ; $6014: $3E $10
@@ -6677,7 +6677,7 @@ jr_007_6AA6:
     call label_3B65                               ; $6AAC: $CD $65 $3B
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $6AAF: $21 $10 $C4
     add  hl, bc                                   ; $6AB2: $09
-    ld   a, [wC13E]                               ; $6AB3: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $6AB3: $FA $3E $C1
     or   [hl]                                     ; $6AB6: $B6
     and  a                                        ; $6AB7: $A7
     jr   nz, jr_007_6AC0                          ; $6AB8: $20 $06

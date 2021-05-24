@@ -18,7 +18,7 @@ HookshotChainEntityHandler::
     ld   [wC1A6], a                               ; $7BF6: $EA $A6 $C1
     xor  a                                        ; $7BF9: $AF
     call ResetSpinAttack                                ; $7BFA: $CD $AF $0C
-    ld   [wC13E], a                               ; $7BFD: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $7BFD: $EA $3E $C1
     ldh  a, [hLinkDirection]                      ; $7C00: $F0 $9E
     ld   e, a                                     ; $7C02: $5F
     ld   d, $00                                   ; $7C03: $16 $00

@@ -14,21 +14,8 @@ section "HRAM", HRAM[$ff80]
 ; *                                                                 *
 ; *******************************************************************
 
-; TODO comment
-hRomBank::
- ds 1 ; FF80
-
-; used as tempory variable
-hTemp::
- ds 1 ; FF81
-
-; used as tempory variable
-hCodeTemp::
- ds 1 ; FF82
-
-; not used
-hFF83:
- ds $D ; FF83 - FF8F
+; Unused
+ ds $10 ; FF80 - FF8F
 
 ; Beginning of the game-variables section of the HRAM
 hGameValuesSection::
@@ -80,9 +67,8 @@ hEntityTilesLoadingStageA::
 hWorldTileset::
   ds 1 ; FF94
 
-; not used
-hFF95:
-  ds 1 ; FF95
+; Unused
+ds 1 ; FF95
 
 ; offset of the main window in X direction
 hBaseScrollX::
@@ -108,12 +94,21 @@ hLinkSpeedX::
 hLinkSpeedY::
  ds 1 ; FF9B
 
-; used when jumping
+; Used when jumping
 ; possible values:
-; 0 = reset,
-; 1 = ??? => TRUE?,
-; 2 = ??? => different use?
-; Unlabeled
+; 0 = none,
+; 1 =
+;   when jumping off a cliff;
+;   when on a ladder in a side-scrolling section;
+;   NOT when juming with feather
+; 2 = ?
+; 4 = ?
+; 6 = ?
+;
+; Jump-table at 02:68E4
+; Related to diving?
+;
+; Maybe hLinkMotionModifier?
 hFF9C::
  ds 1 ; FF9C
 

@@ -131,17 +131,19 @@ DIALOG_GOT_ROD            equ $04
 DIALOG_GOT_GUARDIAN_ACORN equ $05
 
 ; Values for wLinkMotionState
-LINK_MOTION_INTERACTIVE    equ $00
-LINK_MOTION_SWIMMING       equ $01
-LINK_MOTION_JUMPING        equ $02
-LINK_MOTION_MAP_FADE_OUT   equ $03
-LINK_MOTION_MAP_FADE_IN    equ $04
-LINK_MOTION_REVOLVING_DOOR equ $05
-LINK_MOTION_FALLING_DOWN   equ $06
-LINK_MOTION_PASS_OUT       equ $07
-LINK_MOTION_RECOVER        equ $08
-LINK_MOTION_TELEPORT       equ $09
-LINK_MOTION_UNKNOWN        equ $0F
+; Only the first two values are interactive
+LINK_MOTION_DEFAULT              equ $00 ; ground, flying with rooster, etc
+LINK_MOTION_SWIMMING             equ $01
+LINK_MOTION_TYPE_NON_INTERACTIVE equ $02
+LINK_MOTION_UNSTUCKING           equ $02
+LINK_MOTION_MAP_FADE_OUT         equ $03
+LINK_MOTION_MAP_FADE_IN          equ $04
+LINK_MOTION_REVOLVING_DOOR       equ $05
+LINK_MOTION_FALLING_DOWN         equ $06
+LINK_MOTION_PASS_OUT             equ $07
+LINK_MOTION_RECOVER              equ $08
+LINK_MOTION_TELEPORT             equ $09
+LINK_MOTION_UNKNOWN_0A           equ $0A ; sliding? used with blaino
 
 ; Values for hLinkAnimationState
 LINK_ANIMATION_STATE_STANDING_DOWN                     equ $00

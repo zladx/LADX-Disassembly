@@ -114,36 +114,39 @@ ApplyRoomTransition::
     ; If the transition direction was to the bottom…
     ld   a, [wRoomTransitionDirection]            ; $794F: $FA $25 $C1
     cp   DIRECTION_DOWN                           ; $7952: $FE $03
-    jr   nz, .bottomDirectionEnd                  ; $7954: $20 $24
+    jr   nz, .bottomCaseEnd                       ; $7954: $20 $24
 
     ; Initiate a jump if Link landed on a ledge
     ld   a, $01                                   ; $7956: $3E $01
     ldh  [hLinkSpeedY], a                         ; $7958: $E0 $9B
     call CheckForLedgeJump                        ; $795A: $CD $45 $6E
 
-    ; If (hObjectUnderEntity != $DB && hObjectUnderEntity != $DC && (hObjectUnderEntity == $E1 || wCollisionType != 0),
-    ; handle special case.
+    ; If transitioning over an object with collisions, unstuck the player
+
+    ; If     hObjectUnderEntity != $DB
+    ;     && hObjectUnderEntity != $DC
+    ;     && (hObjectUnderEntity == $E1 || wCollisionType != 0)
     ldh  a, [hObjectUnderEntity]                  ; $795D: $F0 $AF
     cp   $DB                                      ; $795F: $FE $DB
-    jr   z, .bottomDirectionEnd                   ; $7961: $28 $17
+    jr   z, .bottomCaseEnd                        ; $7961: $28 $17
 
     cp   $DC                                      ; $7963: $FE $DC
-    jr   z, .bottomDirectionEnd                   ; $7965: $28 $13
+    jr   z, .bottomCaseEnd                        ; $7965: $28 $13
 
-    cp   $E1                                      ; $7967: $FE $E1
-    jr   z, .handleFFAFSpecialCase                ; $7969: $28 $06
+    cp   OBJECT_ROCKY_CAVE_DOOR ; or Evil Eagle tower left side? ; $7967: $FE $E1
+    jr   z, .unstuckLink                        ; $7969: $28 $06
 
     ld   a, [wCollisionType]                      ; $796B: $FA $33 $C1
     and  a                                        ; $796E: $A7
-    jr   z, .bottomDirectionEnd                   ; $796F: $28 $09
+    jr   z, .bottomCaseEnd                        ; $796F: $28 $09
 
-.handleFFAFSpecialCase
+.unstuckLink
     ld   a, [wFreeMovementMode]                   ; $7971: $FA $7B $C1
     and  a                                        ; $7974: $A7
-    jr   nz, .bottomDirectionEnd                  ; $7975: $20 $03
+    jr   nz, .bottomCaseEnd                       ; $7975: $20 $03
 
     call func_002_6EAD                            ; $7977: $CD $AD $6E
-.bottomDirectionEnd
+.bottomCaseEnd
 
     ; If a jingle has been configured…
     ld   a, [wNextJingle]                         ; $797A: $FA $69 $C1

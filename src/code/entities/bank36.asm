@@ -277,7 +277,7 @@ label_036_4178:
     jr   nz, jr_036_41A0                          ; $4194: $20 $0A
 
     ld   a, [wLinkMotionState]                    ; $4196: $FA $1C $C1
-    cp   $03                                      ; $4199: $FE $03
+    cp   LINK_MOTION_MAP_FADE_OUT                 ; $4199: $FE $03
     jr   z, jr_036_41A0                           ; $419B: $28 $03
 
     call func_036_41B2                            ; $419D: $CD $B2 $41
@@ -490,11 +490,11 @@ jr_036_42D4:
     jr   nz, jr_036_4329                          ; $42FF: $20 $28
 
     ld   a, [wGameplayType]                       ; $4301: $FA $95 $DB
-    cp   $0B                                      ; $4304: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $4304: $FE $0B
     jr   nz, jr_036_4329                          ; $4306: $20 $21
 
     ld   a, [wLinkMotionState]                    ; $4308: $FA $1C $C1
-    cp   $03                                      ; $430B: $FE $03
+    cp   LINK_MOTION_MAP_FADE_OUT                 ; $430B: $FE $03
     jr   z, jr_036_4329                           ; $430D: $28 $1A
 
     call func_036_436D                            ; $430F: $CD $6D $43
@@ -2220,7 +2220,7 @@ func_036_4D4B::
 
 jr_036_4D5C:
     ld   a, $10                                   ; $4D5C: $3E $10
-    ld   [wC13E], a                               ; $4D5E: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $4D5E: $EA $3E $C1
     ld   a, $14                                   ; $4D61: $3E $14
     call GetVectorTowardsLink_trampoline          ; $4D63: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $4D66: $F0 $D7
@@ -3604,7 +3604,7 @@ jr_036_5652:
 
 jr_036_5661:
     ld   a, $10                                   ; $5661: $3E $10
-    ld   [wC13E], a                               ; $5663: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $5663: $EA $3E $C1
     ld   a, $20                                   ; $5666: $3E $20
     call GetVectorTowardsLink_trampoline          ; $5668: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $566B: $F0 $D7
@@ -4667,7 +4667,7 @@ IF __PATCH_0__
 ENDC
 
     ld   a, $10                                   ; $5CC7: $3E $10
-    ld   [wC13E], a                               ; $5CC9: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $5CC9: $EA $3E $C1
     ld   a, $20                                   ; $5CCC: $3E $20
     call GetVectorTowardsLink_trampoline          ; $5CCE: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $5CD1: $F0 $D7

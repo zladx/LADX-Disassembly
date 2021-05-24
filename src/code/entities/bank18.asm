@@ -3743,7 +3743,7 @@ jr_018_5B90:
 
 func_018_5B9D::
     ld   a, [wLinkMotionState]                    ; $5B9D: $FA $1C $C1
-    cp   $03                                      ; $5BA0: $FE $03
+    cp   LINK_MOTION_MAP_FADE_OUT                 ; $5BA0: $FE $03
     ret  z                                        ; $5BA2: $C8
 
     ld   a, $40                                   ; $5BA3: $3E $40
@@ -3938,7 +3938,7 @@ label_018_5C6A:
     ldh  a, [hLinkPositionZ]                      ; $5CCC: $F0 $A2
     ld   [hl], a                                  ; $5CCE: $77
     ld   a, [wLinkMotionState]                    ; $5CCF: $FA $1C $C1
-    cp   $02                                      ; $5CD2: $FE $02
+    cp   LINK_MOTION_UNSTUCKING                   ; $5CD2: $FE $02
     jr   z, jr_018_5CEA                           ; $5CD4: $28 $14
 
     ld   a, [wRoomTransitionState]                ; $5CD6: $FA $24 $C1
@@ -5186,7 +5186,7 @@ jr_018_64EA:
     call GetEntityPrivateCountdown1               ; $64EA: $CD $00 $0C
     jr   z, jr_018_650A                           ; $64ED: $28 $1B
 
-    ld   a, [wC13E]                               ; $64EF: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $64EF: $FA $3E $C1
     and  a                                        ; $64F2: $A7
     cp   $01                                      ; $64F3: $FE $01
     jr   nz, jr_018_64FC                          ; $64F5: $20 $05
@@ -5207,7 +5207,7 @@ jr_018_64FC:
 jr_018_650A:
     call func_018_7E15                            ; $650A: $CD $15 $7E
     call label_3B65                               ; $650D: $CD $65 $3B
-    ld   a, [wC13E]                               ; $6510: $FA $3E $C1
+    ld   a, [wIgnoreLinkCollisionsCountdown]      ; $6510: $FA $3E $C1
     and  a                                        ; $6513: $A7
     jr   nz, jr_018_6519                          ; $6514: $20 $03
 
@@ -5456,7 +5456,7 @@ func_018_66CD::
     jr   nz, jr_018_66E8                          ; $66DF: $20 $07
 
     ld   a, [wLinkMotionState]                    ; $66E1: $FA $1C $C1
-    cp   $0A                                      ; $66E4: $FE $0A
+    cp   LINK_MOTION_UNKNOWN_0A                   ; $66E4: $FE $0A
     jr   z, jr_018_66E9                           ; $66E6: $28 $01
 
 jr_018_66E8:
@@ -7766,7 +7766,7 @@ jr_018_76FE:
     xor  a                                        ; $7701: $AF
     ldh  [hLinkSpeedY], a                         ; $7702: $E0 $9B
     ld   a, $18                                   ; $7704: $3E $18
-    ld   [wC13E], a                               ; $7706: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $7706: $EA $3E $C1
     ld   a, $10                                   ; $7709: $3E $10
     ld   [wInvincibilityCounter], a               ; $770B: $EA $C7 $DB
     ld   a, $08                                   ; $770E: $3E $08
@@ -8203,7 +8203,7 @@ jr_018_79CF:
     jr   z, jr_018_79F0                           ; $79DE: $28 $10
 
     ld   a, [wLinkMotionState]                    ; $79E0: $FA $1C $C1
-    cp   $05                                      ; $79E3: $FE $05
+    cp   LINK_MOTION_REVOLVING_DOOR               ; $79E3: $FE $05
     ret  z                                        ; $79E5: $C8
 
     ld   a, [wDDD6]                               ; $79E6: $FA $D6 $DD

@@ -73,7 +73,7 @@ jr_006_4EF2:
     ret  nc                                       ; $4EFA: $D0
 
     ld   a, $08                                   ; $4EFB: $3E $08
-    ld   [wC13E], a                               ; $4EFD: $EA $3E $C1
+    ld   [wIgnoreLinkCollisionsCountdown], a      ; $4EFD: $EA $3E $C1
     ld   a, $10                                   ; $4F00: $3E $10
     call GetVectorTowardsLink_trampoline          ; $4F02: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $4F05: $F0 $D7

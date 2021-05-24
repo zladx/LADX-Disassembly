@@ -2348,7 +2348,7 @@ jr_017_57BF:
     add  hl, de                                   ; $57D0: $19
     ld   [hl], $40                                ; $57D1: $36 $40
 
-    ld   a, ENTITY_OCTOROCK                       ; $57D3: $3E $09
+    ld   a, ENTITY_OCTOROK                        ; $57D3: $3E $09
     call SpawnNewEntity_trampoline                ; $57D5: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $57D8: $21 $00 $C2
     add  hl, de                                   ; $57DB: $19
@@ -2357,7 +2357,7 @@ jr_017_57BF:
     add  hl, de                                   ; $57E1: $19
     ld   [hl], $50                                ; $57E2: $36 $50
 
-    ld   a, ENTITY_OCTOROCK                       ; $57E4: $3E $09
+    ld   a, ENTITY_OCTOROK                        ; $57E4: $3E $09
     call SpawnNewEntity_trampoline                ; $57E6: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $57E9: $21 $00 $C2
     add  hl, de                                   ; $57EC: $19

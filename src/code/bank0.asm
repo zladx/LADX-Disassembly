@@ -4025,7 +4025,7 @@ ComputeLinkPosition::
 
     pop  af                                       ; $21CE: $F1
 
-    ; e = speed mask (avoids the speed from overflowing the max speed, and wrap around)
+    ; e = speed mask (avoids the speed from overflowing the max speed and wrapping around)
     ld   e, $00                                   ; $21CF: $1E $00
     bit  7, a                                     ; $21D1: $CB $7F
     jr   z, .positiveSpeedEnd                     ; $21D3: $28 $02

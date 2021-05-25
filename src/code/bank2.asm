@@ -207,7 +207,7 @@ label_002_4287:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42CB: $E0 $A1
     call label_1F69_trampoline                    ; $42CD: $CD $61 $1F
     call CheckItemsToUse                          ; $42D0: $CD $77 $11
-    call func_002_44ED                            ; $42D3: $CD $ED $44
+    call ApplyLinkGroundMotion                    ; $42D3: $CD $ED $44
     call func_002_434A                            ; $42D6: $CD $4A $43
     call RotateLinkClockwise                      ; $42D9: $CD $8C $47
     call func_002_4B49                            ; $42DC: $CD $49 $4B
@@ -604,18 +604,19 @@ jr_002_44E3:
     jp   ApplyLinkMotionState                     ; $44E4: $C3 $94 $17
 
 Data_002_44E7::
-    db   $00, $F0, $10, $00, $FF, $01
+    db   0, -16, 16, 0, -1, 1
 
-func_002_44ED::
+; If on the ground, update Link speed from gravity and joypad input.
+ApplyLinkGroundMotion::
     ld   a, [wIsLinkInTheAir]                     ; $44ED: $FA $46 $C1
     and  a                                        ; $44F0: $A7
-    jp   z, groundVfxEnd                          ; $44F1: $CA $AC $45
+    jp   z, .return                               ; $44F1: $CA $AC $45
 
     ldh  a, [hIsSideScrolling]                    ; $44F4: $F0 $F9
     and  a                                        ; $44F6: $A7
-    jp   nz, groundVfxEnd                         ; $44F7: $C2 $AC $45
+    jp   nz, .return                              ; $44F7: $C2 $AC $45
 
-func_002_44FA::
+.noChecks
     call func_21E1                                ; $44FA: $CD $E1 $21
 
     ; hLinkVelocityZ = hLinkVelocityZ - 2
@@ -629,24 +630,28 @@ func_002_44FA::
     ld   a, [wC10A]                               ; $4508: $FA $0A $C1
     ld   hl, wIsRunningWithPegasusBoots           ; $450B: $21 $4A $C1
     or   [hl]                                     ; $450E: $B6
-    jr   nz, jr_002_4563                          ; $450F: $20 $52
+    jr   nz, .joypadVerticalEnd                          ; $450F: $20 $52
 
     ld   a, [wD475]                               ; $4511: $FA $75 $D4
     and  a                                        ; $4514: $A7
-    jr   nz, jr_002_451E                          ; $4515: $20 $07
+    jr   nz, .jr_002_451E                         ; $4515: $20 $07
 
     ld   a, [wC1AD]                               ; $4517: $FA $AD $C1
     cp   $80                                      ; $451A: $FE $80
-    jr   nz, jr_002_4523                          ; $451C: $20 $05
+    jr   nz, .jr_002_4523                         ; $451C: $20 $05
 
-jr_002_451E:
+.jr_002_451E
     call ClearLinkPositionIncrement               ; $451E: $CD $8E $17
-    jr   jr_002_4563                              ; $4521: $18 $40
+    jr   .joypadVerticalEnd                       ; $4521: $18 $40
 
-jr_002_4523:
+.jr_002_4523
+    ;
+    ; Move Link to the direction pressed on the Joypad
+    ;
+
     ldh  a, [hPressedButtonsMask]                 ; $4523: $F0 $CB
-    and  $03                                      ; $4525: $E6 $03
-    jr   z, jr_002_4542                           ; $4527: $28 $19
+    and  J_RIGHT | J_LEFT                         ; $4525: $E6 $03
+    jr   z, .joypadHorizontalEnd                  ; $4527: $28 $19
 
     ld   e, a                                     ; $4529: $5F
     ld   d, $00                                   ; $452A: $16 $00
@@ -654,25 +659,25 @@ jr_002_4523:
     add  hl, de                                   ; $452F: $19
     ldh  a, [hLinkSpeedX]                         ; $4530: $F0 $9A
     sub  [hl]                                     ; $4532: $96
-    jr   z, jr_002_4542                           ; $4533: $28 $0D
 
+    jr   z, .joypadHorizontalEnd                  ; $4533: $28 $0D
     ld   e, $01                                   ; $4535: $1E $01
     bit  7, a                                     ; $4537: $CB $7F
-    jr   nz, jr_002_453D                          ; $4539: $20 $02
-
+    jr   nz, .jr_002_453D                         ; $4539: $20 $02
     ld   e, $FF                                   ; $453B: $1E $FF
+.jr_002_453D
 
-jr_002_453D:
     ldh  a, [hLinkSpeedX]                         ; $453D: $F0 $9A
     add  e                                        ; $453F: $83
     ldh  [hLinkSpeedX], a                         ; $4540: $E0 $9A
+.joypadHorizontalEnd
 
-jr_002_4542:
+    ; If [hPressedButtonsMask] & J_UP | J_DOWN…
     ldh  a, [hPressedButtonsMask]                 ; $4542: $F0 $CB
     rra                                           ; $4544: $1F
     rra                                           ; $4545: $1F
     and  $03                                      ; $4546: $E6 $03
-    jr   z, jr_002_4563                           ; $4548: $28 $19
+    jr   z, .joypadVerticalEnd                    ; $4548: $28 $19
 
     ld   e, a                                     ; $454A: $5F
     ld   d, $00                                   ; $454B: $16 $00
@@ -680,28 +685,27 @@ jr_002_4542:
     add  hl, de                                   ; $4550: $19
     ldh  a, [hLinkSpeedY]                         ; $4551: $F0 $9B
     sub  [hl]                                     ; $4553: $96
-    jr   z, jr_002_4563                           ; $4554: $28 $0D
 
-    ld   e, $01                                   ; $4556: $1E $01
+    jr   z, .joypadVerticalEnd                    ; $4554: $28 $0D
+    ld   e, +1                                    ; $4556: $1E $01
     bit  7, a                                     ; $4558: $CB $7F
-    jr   nz, jr_002_455E                          ; $455A: $20 $02
+    jr   nz, .jr_002_455E                         ; $455A: $20 $02
+    ld   e, -1                                    ; $455C: $1E $FF
+.jr_002_455E
 
-    ld   e, $FF                                   ; $455C: $1E $FF
-
-jr_002_455E:
     ldh  a, [hLinkSpeedY]                         ; $455E: $F0 $9B
     add  e                                        ; $4560: $83
     ldh  [hLinkSpeedY], a                         ; $4561: $E0 $9B
+.joypadVerticalEnd
 
-jr_002_4563:
     ldh  a, [hLinkPositionZ]                      ; $4563: $F0 $A2
     and  a                                        ; $4565: $A7
-    jr   z, jr_002_456C                           ; $4566: $28 $04
+    jr   z, .jr_002_456C                          ; $4566: $28 $04
 
     and  $80                                      ; $4568: $E6 $80
-    jr   z, groundVfxEnd                          ; $456A: $28 $40
+    jr   z, .return                               ; $456A: $28 $40
 
-jr_002_456C:
+.jr_002_456C
     call ResetPegasusBoots                        ; $456C: $CD $B6 $0C
     ldh  [hLinkPositionZ], a                      ; $456F: $E0 $A2
     ld   [wC149], a                               ; $4571: $EA $49 $C1
@@ -712,34 +716,34 @@ jr_002_456C:
     ld   [wC10A], a                               ; $457F: $EA $0A $C1
     ldh  a, [hLinkPositionY]                      ; $4582: $F0 $99
     cp   $88                                      ; $4584: $FE $88
-    jr   nc, groundVfxEnd                         ; $4586: $30 $24
+    jr   nc, .return                              ; $4586: $30 $24
 
     call ApplyLinkGroundPhysics                   ; $4588: $CD $BD $75
 
     ldh  a, [hFFB8]                               ; $458B: $F0 $B8
     cp   $61                                      ; $458D: $FE $61
-    jr   z, groundVfxEnd                          ; $458F: $28 $1B
+    jr   z, .return                               ; $458F: $28 $1B
 
     ld   a, [wLinkGroundVfx]                      ; $4591: $FA $81 $C1
     cp   GROUND_VFX_SHALLOW_WATER                 ; $4594: $FE $05
     jr   z, shallowWaterVfx                       ; $4596: $28 $15
 
     cp   $07                                      ; $4598: $FE $07
-    jr   z, groundVfxEnd                          ; $459A: $28 $10
+    jr   z, .return                               ; $459A: $28 $10
 
     cp   $0B                                      ; $459C: $FE $0B
-    jr   z, groundVfxEnd                          ; $459E: $28 $0C
+    jr   z, .return                               ; $459E: $28 $0C
 
     cp   $50                                      ; $45A0: $FE $50
-    jr   z, groundVfxEnd                          ; $45A2: $28 $08
+    jr   z, .return                               ; $45A2: $28 $08
 
     cp   $51                                      ; $45A4: $FE $51
-    jr   z, groundVfxEnd                          ; $45A6: $28 $04
+    jr   z, .return                               ; $45A6: $28 $04
 
     ld   a, NOISE_SFX_FOOTSTEP                    ; $45A8: $3E $07
     ldh  [hNoiseSfx], a                           ; $45AA: $E0 $F4
 
-groundVfxEnd:
+.return
     ret                                           ; $45AC: $C9
 
 shallowWaterVfx:
@@ -1308,7 +1312,7 @@ jr_002_49A0:
     ldh  [hLinkPositionY], a                      ; $49A8: $E0 $99
 
 jr_002_49AA:
-    call func_002_44FA                            ; $49AA: $CD $FA $44
+    call ApplyLinkGroundMotion.noChecks           ; $49AA: $CD $FA $44
     ldh  a, [hLinkPositionZ]                      ; $49AD: $F0 $A2
     and  a                                        ; $49AF: $A7
     jr   nz, jr_002_49B6                          ; $49B0: $20 $04
@@ -5550,7 +5554,7 @@ jr_002_6A64:
 
 jr_002_6A73:
     ldh  a, [hPressedButtonsMask]                 ; $6A73: $F0 $CB
-    and  $03                                      ; $6A75: $E6 $03
+    and  J_RIGHT | J_LEFT                         ; $6A75: $E6 $03
     jr   z, jr_002_6A92                           ; $6A77: $28 $19
 
     ld   e, a                                     ; $6A79: $5F
@@ -5589,7 +5593,7 @@ jr_002_6A94:
 
 jr_002_6AAA:
     ldh  a, [hPressedButtonsMask]                 ; $6AAA: $F0 $CB
-    and  $03                                      ; $6AAC: $E6 $03
+    and  J_RIGHT | J_LEFT                         ; $6AAC: $E6 $03
     ld   e, a                                     ; $6AAE: $5F
     ld   d, $00                                   ; $6AAF: $16 $00
     ld   hl, Data_002_68B1                        ; $6AB1: $21 $B1 $68

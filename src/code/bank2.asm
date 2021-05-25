@@ -155,33 +155,37 @@ ENDC
 .return
     ret                                           ; $4286: $C9
 
-label_002_4287:
+; Main handler for LINK_MOTION_DEFAULT.
+;
+; Applies physics, motion, animations and all
+LinkMotionDefault::
+    ; Decrement wIsShootingArrow if not already zero
     ld   a, [wIsShootingArrow]                    ; $4287: $FA $4C $C1
     and  a                                        ; $428A: $A7
-    jr   z, .jr_002_4291                          ; $428B: $28 $04
-
+    jr   z, .decrementShootingArrowEnd            ; $428B: $28 $04
     dec  a                                        ; $428D: $3D
     ld   [wIsShootingArrow], a                    ; $428E: $EA $4C $C1
+.decrementShootingArrowEnd
 
-.jr_002_4291
+    ; Decrement wC1C4 if not already zero
     ld   a, [wC1C4]                               ; $4291: $FA $C4 $C1
     and  a                                        ; $4294: $A7
-    jr   z, .jr_002_429B                          ; $4295: $28 $04
-
+    jr   z, .decrementC1C4End                     ; $4295: $28 $04
     dec  a                                        ; $4297: $3D
     ld   [wC1C4], a                               ; $4298: $EA $C4 $C1
+.decrementC1C4End
 
-.jr_002_429B
-    ; decrement wBombArrowCooldown if not allready zero
+    ; Decrement wBombArrowCooldown if not already zero
     ld   a, [wBombArrowCooldown]                  ; $429B: $FA $C0 $C1
     and  a                                        ; $429E: $A7
-    jr   z, .skipBombArrowCooldownDecrement       ; $429F: $28 $04
+    jr   z, .bombArrowCooldownDecrementEnd        ; $429F: $28 $04
     dec  a                                        ; $42A1: $3D
     ld   [wBombArrowCooldown], a                  ; $42A2: $EA $C0 $C1
+.bombArrowCooldownDecrementEnd
 
-.skipBombArrowCooldownDecrement
     call func_002_436C                            ; $42A5: $CD $6C $43
 
+    ; Decrement wC16E if not already zero
     ld   a, [wC16E]                               ; $42A8: $FA $6E $C1
     and  a                                        ; $42AB: $A7
     jr   z, .wC16EEnd                             ; $42AC: $28 $04
@@ -191,20 +195,22 @@ label_002_4287:
 
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $42B2: $F0 $A1
     cp   $02                                      ; $42B4: $FE $02
-    jr   nz, .jr_002_42C7                         ; $42B6: $20 $0F
+    jr   nz, .interactiveMotionBlockedEnd         ; $42B6: $20 $0F
 
     xor  a                                        ; $42B8: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42B9: $E0 $A1
     ldh  [hLinkSpeedX], a                         ; $42BB: $E0 $9A
     ldh  [hLinkSpeedY], a                         ; $42BD: $E0 $9B
-    ldh  [hLinkVelocityZ], a                               ; $42BF: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $42BF: $E0 $A3
     call LinkPlayingOcarinaHandler                ; $42C1: $CD $16 $4A
     jp   func_002_753A                            ; $42C4: $C3 $3A $75
+.interactiveMotionBlockedEnd
 
-.jr_002_42C7
     call UpdateLinkWalkingAnimation               ; $42C7: $CD $50 $1A
+
     xor  a                                        ; $42CA: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42CB: $E0 $A1
+
     call label_1F69_trampoline                    ; $42CD: $CD $61 $1F
     call CheckItemsToUse                          ; $42D0: $CD $77 $11
     call ApplyLinkGroundMotion                    ; $42D3: $CD $ED $44
@@ -214,6 +220,7 @@ label_002_4287:
     call ApplyLinkMotionState                     ; $42DF: $CD $94 $17
     call func_002_4338                            ; $42E2: $CD $38 $43
     call LinkPlayingOcarinaHandler                ; $42E5: $CD $16 $4A
+
     ld   a, [wRoomTransitionState]                ; $42E8: $FA $24 $C1
     and  a                                        ; $42EB: $A7
     jr   nz, .return                              ; $42EC: $20 $27
@@ -328,6 +335,8 @@ func_002_436C::
     ; Side-scrolling code
     jp   jp_002_68B7                              ; $4377: $C3 $B7 $68
 
+; Only used in debug free movement mode?
+;
 ; Inputs:
 ;   e : sequence count
 MoveLinkToPressedButtonDirection::

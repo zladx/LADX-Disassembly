@@ -1719,7 +1719,7 @@ InitGotItemSequence::
     ld   a, [wLinkMotionState]                    ; $1135: $FA $1C $C1
 .linkMotionJumpTable
     JP_TABLE                                      ; $1138: $C7
-._00 dw LinkMotionInteractiveHandler              ; $1139
+._00 dw LinkMotionDefaultHandler                  ; $1139
 ._01 dw LinkMotionSwimmingHandler                 ; $113B
 ._02 dw LinkMotionUnstuckingHandler               ; $113D
 ._03 dw LinkMotionMapFadeOutHandler               ; $113F
@@ -1741,12 +1741,12 @@ LinkMotionTeleportUpHandler::
 LinkMotionPassOutHandler::
     jpsw LinkPassOut                              ; $115D: $3E $01 $CD $0C $08 $C3 $C2 $41
 
-LinkMotionInteractiveHandler::
+LinkMotionDefaultHandler::
     callsb IsInteractiveMotionAllowed             ; $1165: $3E $36 $EA $00 $21 $CD $5A $72
     and  a                                        ; $116D: $A7
     ret  z                                        ; $116E: $C8
 
-    jpsw label_002_4287                           ; $116F: $3E $02 $CD $0C $08 $C3 $87 $42
+    jpsw LinkMotionDefault                        ; $116F: $3E $02 $CD $0C $08 $C3 $87 $42
 
 ; Check if one of the inventory item should be used
 CheckItemsToUse::
@@ -3584,14 +3584,14 @@ data_1F5D::
     db   0, 0, 4, 0                               ; $1F5D
 
 ; Call label_1F69, then restore bank 2
-; (Only ever called from label_002_4287)
+; (Only ever called from LinkMotionDefault)
 label_1F69_trampoline::
     call label_1F69                               ; $1F61: $CD $69 $1F
     ld   a, $02                                   ; $1F64: $3E $02
     jp   SwitchBank                               ; $1F66: $C3 $0C $08
 
 ; Physics for Link interactive motion?
-; (Only ever called from label_002_4287)
+; (Only ever called from LinkMotionDefault)
 label_1F69::
     ; If running with pegagus boots, or hLinkPositionZ != 0, or Link's motion != LINK_MOTION_DEFAULT, return
     ld   hl, wIsRunningWithPegasusBoots           ; $1F69: $21 $4A $C1

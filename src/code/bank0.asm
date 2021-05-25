@@ -1742,7 +1742,7 @@ LinkMotionPassOutHandler::
     jpsw LinkPassOut                              ; $115D: $3E $01 $CD $0C $08 $C3 $C2 $41
 
 LinkMotionInteractiveHandler::
-    callsb func_036_725A                          ; $1165: $3E $36 $EA $00 $21 $CD $5A $72
+    callsb IsInteractiveMotionAllowed             ; $1165: $3E $36 $EA $00 $21 $CD $5A $72
     and  a                                        ; $116D: $A7
     ret  z                                        ; $116E: $C8
 

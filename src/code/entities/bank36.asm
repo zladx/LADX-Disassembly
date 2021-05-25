@@ -8055,25 +8055,25 @@ jr_036_70F3:
 label_036_7101:
     ld   a, [wIsMarinFollowingLink]               ; $7101: $FA $73 $DB
     and  a                                        ; $7104: $A7
-    jp   z, label_036_7288                        ; $7105: $CA $88 $72
+    jp   z, IsInteractiveMotionAllowed.allow      ; $7105: $CA $88 $72
 
     ld   a, [wPhotos1]                            ; $7108: $FA $0C $DC
     and  $02                                      ; $710B: $E6 $02
-    jp   nz, label_036_7288                       ; $710D: $C2 $88 $72
+    jp   nz, IsInteractiveMotionAllowed.allow     ; $710D: $C2 $88 $72
 
     ldh  a, [hLinkPositionX]                      ; $7110: $F0 $98
     cp   $24                                      ; $7112: $FE $24
-    jp   c, label_036_7288                        ; $7114: $DA $88 $72
+    jp   c, IsInteractiveMotionAllowed.allow      ; $7114: $DA $88 $72
 
     cp   $2C                                      ; $7117: $FE $2C
-    jp   nc, label_036_7288                       ; $7119: $D2 $88 $72
+    jp   nc, IsInteractiveMotionAllowed.allow     ; $7119: $D2 $88 $72
 
     ldh  a, [hLinkPositionY]                      ; $711C: $F0 $99
     cp   $4E                                      ; $711E: $FE $4E
-    jp   c, label_036_7288                        ; $7120: $DA $88 $72
+    jp   c, IsInteractiveMotionAllowed.allow      ; $7120: $DA $88 $72
 
     cp   $52                                      ; $7123: $FE $52
-    jp   nc, label_036_7288                       ; $7125: $D2 $88 $72
+    jp   nc, IsInteractiveMotionAllowed.allow     ; $7125: $D2 $88 $72
 
     ld   e, $10                                   ; $7128: $1E $10
     jp   label_036_728B                           ; $712A: $C3 $8B $72
@@ -8081,25 +8081,25 @@ label_036_7101:
 label_036_712D:
     ld   a, [wIsMarinFollowingLink]               ; $712D: $FA $73 $DB
     and  a                                        ; $7130: $A7
-    jp   z, label_036_7288                        ; $7131: $CA $88 $72
+    jp   z, IsInteractiveMotionAllowed.allow      ; $7131: $CA $88 $72
 
     ld   a, [wPhotos1]                            ; $7134: $FA $0C $DC
     and  $08                                      ; $7137: $E6 $08
-    jp   nz, label_036_7288                       ; $7139: $C2 $88 $72
+    jp   nz, IsInteractiveMotionAllowed.allow     ; $7139: $C2 $88 $72
 
     ldh  a, [hLinkPositionX]                      ; $713C: $F0 $98
     cp   $50                                      ; $713E: $FE $50
-    jp   c, label_036_7288                        ; $7140: $DA $88 $72
+    jp   c, IsInteractiveMotionAllowed.allow      ; $7140: $DA $88 $72
 
     cp   $60                                      ; $7143: $FE $60
-    jp   nc, label_036_7288                       ; $7145: $D2 $88 $72
+    jp   nc, IsInteractiveMotionAllowed.allow     ; $7145: $D2 $88 $72
 
     ldh  a, [hLinkPositionY]                      ; $7148: $F0 $99
     cp   $58                                      ; $714A: $FE $58
-    jp   c, label_036_7288                        ; $714C: $DA $88 $72
+    jp   c, IsInteractiveMotionAllowed.allow      ; $714C: $DA $88 $72
 
     cp   $68                                      ; $714F: $FE $68
-    jp   nc, label_036_7288                       ; $7151: $D2 $88 $72
+    jp   nc, IsInteractiveMotionAllowed.allow     ; $7151: $D2 $88 $72
 
     ld   e, $12                                   ; $7154: $1E $12
     jp   label_036_728B                           ; $7156: $C3 $8B $72
@@ -8160,14 +8160,14 @@ jr_036_71A5:
 label_036_71AD:
     ld   a, [wPhotos1]                            ; $71AD: $FA $0C $DC
     and  $20                                      ; $71B0: $E6 $20
-    jp   nz, label_036_7288                       ; $71B2: $C2 $88 $72
+    jp   nz, IsInteractiveMotionAllowed.allow     ; $71B2: $C2 $88 $72
 
     ld   hl, wBButtonSlot                         ; $71B5: $21 $00 $DB
     ld   e, INVENTORY_SLOT_COUNT                  ; $71B8: $1E $0C
 
 jr_036_71BA:
     ld   a, [hl+]                                 ; $71BA: $2A
-    cp   INVENTORY_SWORD                                      ; $71BB: $FE $01
+    cp   INVENTORY_SWORD                          ; $71BB: $FE $01
     jr   z, jr_036_71C7                           ; $71BD: $28 $08
 
     dec  e                                        ; $71BF: $1D
@@ -8175,12 +8175,12 @@ jr_036_71BA:
     and  a                                        ; $71C1: $A7
     jr   nz, jr_036_71BA                          ; $71C2: $20 $F6
 
-    jp   label_036_7288                           ; $71C4: $C3 $88 $72
+    jp   IsInteractiveMotionAllowed.allow         ; $71C4: $C3 $88 $72
 
 jr_036_71C7:
     ld   a, [wIsBowWowFollowingLink]              ; $71C7: $FA $56 $DB
     and  a                                        ; $71CA: $A7
-    jp   nz, label_036_7288                       ; $71CB: $C2 $88 $72
+    jp   nz, IsInteractiveMotionAllowed.allow     ; $71CB: $C2 $88 $72
 
     ld   a, [wIsMarinFollowingLink]               ; $71CE: $FA $73 $DB
     ld   hl, wIsGhostFollowingLink                ; $71D1: $21 $79 $DB
@@ -8188,96 +8188,100 @@ jr_036_71C7:
     ld   hl, wIsRoosterFollowingLink              ; $71D5: $21 $7B $DB
     or   [hl]                                     ; $71D8: $B6
     and  a                                        ; $71D9: $A7
-    jp   nz, label_036_7288                       ; $71DA: $C2 $88 $72
+    jp   nz, IsInteractiveMotionAllowed.allow     ; $71DA: $C2 $88 $72
 
     ldh  a, [hLinkPositionX]                      ; $71DD: $F0 $98
     cp   $38                                      ; $71DF: $FE $38
-    jp   c, label_036_7288                        ; $71E1: $DA $88 $72
+    jp   c, IsInteractiveMotionAllowed.allow      ; $71E1: $DA $88 $72
 
     cp   $58                                      ; $71E4: $FE $58
-    jp   nc, label_036_7288                       ; $71E6: $D2 $88 $72
+    jp   nc, IsInteractiveMotionAllowed.allow     ; $71E6: $D2 $88 $72
 
     ldh  a, [hLinkPositionY]                      ; $71E9: $F0 $99
     cp   $50                                      ; $71EB: $FE $50
-    jp   c, label_036_7288                        ; $71ED: $DA $88 $72
+    jp   c, IsInteractiveMotionAllowed.allow      ; $71ED: $DA $88 $72
 
     cp   $60                                      ; $71F0: $FE $60
-    jp   nc, label_036_7288                       ; $71F2: $D2 $88 $72
+    jp   nc, IsInteractiveMotionAllowed.allow     ; $71F2: $D2 $88 $72
 
     ld   e, $14                                   ; $71F5: $1E $14
     jp   label_036_728B                           ; $71F7: $C3 $8B $72
 
 label_036_71FA:
-    ld   a, [wOverworldRoomStatus + $79]                               ; $71FA: $FA $79 $D8
+    ld   a, [wOverworldRoomStatus + $79]          ; $71FA: $FA $79 $D8
     and  $10                                      ; $71FD: $E6 $10
-    jp   nz, label_036_7288                       ; $71FF: $C2 $88 $72
+    jp   nz, IsInteractiveMotionAllowed.allow     ; $71FF: $C2 $88 $72
 
     ld   a, [wPhotos2]                            ; $7202: $FA $0D $DC
     and  $02                                      ; $7205: $E6 $02
-    jr   nz, label_036_7288                       ; $7207: $20 $7F
+    jr   nz, IsInteractiveMotionAllowed.allow     ; $7207: $20 $7F
 
     ld   a, [wGoldenLeavesCount]                  ; $7209: $FA $15 $DB
     cp   GOLDEN_LEAVES_5                          ; $720C: $FE $05
-    jr   nc, label_036_7288                       ; $720E: $30 $78
+    jr   nc, IsInteractiveMotionAllowed.allow     ; $720E: $30 $78
 
     ldh  a, [hLinkPositionX]                      ; $7210: $F0 $98
     cp   $50                                      ; $7212: $FE $50
-    jr   c, label_036_7288                        ; $7214: $38 $72
+    jr   c, IsInteractiveMotionAllowed.allow      ; $7214: $38 $72
 
     cp   $60                                      ; $7216: $FE $60
-    jr   nc, label_036_7288                       ; $7218: $30 $6E
+    jr   nc, IsInteractiveMotionAllowed.allow     ; $7218: $30 $6E
 
     ld   e, $18                                   ; $721A: $1E $18
     ldh  a, [hLinkPositionY]                      ; $721C: $F0 $99
     cp   $38                                      ; $721E: $FE $38
-    jr   c, label_036_7288                        ; $7220: $38 $66
+    jr   c, IsInteractiveMotionAllowed.allow      ; $7220: $38 $66
 
     cp   $40                                      ; $7222: $FE $40
     jr   c, label_036_728B                        ; $7224: $38 $65
 
-    jr   label_036_7288                           ; $7226: $18 $60
+    jr   IsInteractiveMotionAllowed.allow         ; $7226: $18 $60
 
 label_036_7228:
     ld   a, [wPhotos2]                            ; $7228: $FA $0D $DC
     and  $04                                      ; $722B: $E6 $04
-    jr   nz, label_036_7288                       ; $722D: $20 $59
+    jr   nz, IsInteractiveMotionAllowed.allow     ; $722D: $20 $59
 
     ld   a, [wGoldenLeavesCount]                  ; $722F: $FA $15 $DB
     cp   SLIME_KEY                                ; $7232: $FE $06
-    jr   nz, label_036_7288                       ; $7234: $20 $52
+    jr   nz, IsInteractiveMotionAllowed.allow     ; $7234: $20 $52
 
     ld   hl, wIndoorARoomStatus                   ; $7236: $21 $00 $D9
     ld   de, $E3                                  ; $7239: $11 $E3 $00
     add  hl, de                                   ; $723C: $19
     ld   a, [hl]                                  ; $723D: $7E
     and  $40                                      ; $723E: $E6 $40
-    jr   z, label_036_7288                        ; $7240: $28 $46
+    jr   z, IsInteractiveMotionAllowed.allow      ; $7240: $28 $46
 
     ldh  a, [hLinkPositionX]                      ; $7242: $F0 $98
     cp   $25                                      ; $7244: $FE $25
-    jr   c, label_036_7288                        ; $7246: $38 $40
+    jr   c, IsInteractiveMotionAllowed.allow      ; $7246: $38 $40
 
     cp   $30                                      ; $7248: $FE $30
-    jr   nc, label_036_7288                       ; $724A: $30 $3C
+    jr   nc, IsInteractiveMotionAllowed.allow     ; $724A: $30 $3C
 
     ld   e, $19                                   ; $724C: $1E $19
     ldh  a, [hLinkPositionY]                      ; $724E: $F0 $99
     cp   $68                                      ; $7250: $FE $68
-    jr   c, label_036_7288                        ; $7252: $38 $34
+    jr   c, IsInteractiveMotionAllowed.allow      ; $7252: $38 $34
 
     cp   $6E                                      ; $7254: $FE $6E
     jr   c, label_036_728B                        ; $7256: $38 $33
 
-    jr   label_036_7288                           ; $7258: $18 $2E
+    jr   IsInteractiveMotionAllowed.allow         ; $7258: $18 $2E
 
-func_036_725A::
+; Is Link interactive motion allowed?
+;
+; Returns:
+;   a    0 (denied) or 1 (allowed)
+IsInteractiveMotionAllowed::
     ld   a, [wRoomTransitionState]                ; $725A: $FA $24 $C1
     and  a                                        ; $725D: $A7
-    jr   nz, label_036_7288                       ; $725E: $20 $28
+    jr   nz, .allow                               ; $725E: $20 $28
 
     ld   a, [wPhotos1]                            ; $7260: $FA $0C $DC
     and  $01                                      ; $7263: $E6 $01
-    jr   z, label_036_7288                        ; $7265: $28 $21
+    jr   z, .allow                                ; $7265: $28 $21
 
     ld   a, [wIsIndoor]                           ; $7267: $FA $A5 $DB
     and  a                                        ; $726A: $A7
@@ -8295,8 +8299,8 @@ func_036_725A::
     cp   UNKNOWN_ROOM_64                          ; $7283: $FE $64
     jp   z, label_036_7228                        ; $7285: $CA $28 $72
 
-label_036_7288:
-    ld   a, $01                                   ; $7288: $3E $01
+.allow
+    ld   a, TRUE                                  ; $7288: $3E $01
     ret                                           ; $728A: $C9
 
 label_036_728B:
@@ -8312,15 +8316,15 @@ label_036_728B:
 
 jr_036_729E:
     ldh  a, [hMapId]                              ; $729E: $F0 $F7
-    cp   MAP_MINIGAME                              ; $72A0: $FE $0F
+    cp   MAP_MINIGAME                             ; $72A0: $FE $0F
     jr   nz, jr_036_72A9                          ; $72A2: $20 $05
 
     ldh  a, [hIsSideScrolling]                    ; $72A4: $F0 $F9
     and  a                                        ; $72A6: $A7
-    jr   z, label_036_7288                        ; $72A7: $28 $DF
+    jr   z, IsInteractiveMotionAllowed.allow      ; $72A7: $28 $DF
 
 jr_036_72A9:
-    jr   label_036_7288                           ; $72A9: $18 $DD
+    jr   IsInteractiveMotionAllowed.allow         ; $72A9: $18 $DD
 
 EntityInitGenie::
     xor  a                                        ; $72AB: $AF

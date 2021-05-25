@@ -8147,6 +8147,7 @@ Data_002_787B::
     db   $00, $02
 
 label_002_787D:
+    ; Write transient vfx position to wLinkOAMBuffer
     ldh  a, [hLinkPositionY]                      ; $787D: $F0 $99
     add  $08                                      ; $787F: $C6 $08
     ld   [hl+], a                                 ; $7881: $22

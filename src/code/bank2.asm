@@ -181,14 +181,14 @@ label_002_4287:
 
 .skipBombArrowCooldownDecrement
     call func_002_436C                            ; $42A5: $CD $6C $43
+
     ld   a, [wC16E]                               ; $42A8: $FA $6E $C1
     and  a                                        ; $42AB: $A7
-    jr   z, .jr_002_42B2                          ; $42AC: $28 $04
-
+    jr   z, .wC16EEnd                             ; $42AC: $28 $04
     dec  a                                        ; $42AE: $3D
     ld   [wC16E], a                               ; $42AF: $EA $6E $C1
+.wC16EEnd
 
-.jr_002_42B2
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $42B2: $F0 $A1
     cp   $02                                      ; $42B4: $FE $02
     jr   nz, .jr_002_42C7                         ; $42B6: $20 $0F
@@ -209,7 +209,7 @@ label_002_4287:
     call CheckItemsToUse                          ; $42D0: $CD $77 $11
     call ApplyLinkGroundMotion                    ; $42D3: $CD $ED $44
     call func_002_434A                            ; $42D6: $CD $4A $43
-    call RotateLinkClockwise                      ; $42D9: $CD $8C $47
+    call UpdateLinkAnimation                      ; $42D9: $CD $8C $47
     call func_002_4B49                            ; $42DC: $CD $49 $4B
     call ApplyLinkMotionState                     ; $42DF: $CD $94 $17
     call func_002_4338                            ; $42E2: $CD $38 $43
@@ -861,7 +861,7 @@ LinkDirectionToAbsolute::
     db  DIRECTION_DOWN,     DIRECTION_LEFT,     DIRECTION_LEFT,      DIRECTION_UP       ;  270°
     db  DIRECTION_UP,       DIRECTION_RIGHT,    DIRECTION_RIGHT,     DIRECTION_DOWN     ;  315°
 
-label_002_4709:
+UpdateSpinAttackAnimation::
     dec  a                                        ; $4709: $3D
     ld   [wIsUsingSpinAttack], a                  ; $470A: $EA $21 $C1
     ; motion blocked during spin attack
@@ -947,10 +947,11 @@ jr_002_4781:
 jr_002_4789:
     jp   label_002_4827                           ; $4789: $C3 $27 $48
 
-RotateLinkClockwise::
+; Update various automatic animations applied to Link: rotation, sword motion, etc.
+UpdateLinkAnimation::
     ld   a, [wD475]                               ; $478C: $FA $75 $D4
     and  a                                        ; $478F: $A7
-    jr   z, .jr_002_47A3                           ; $4790: $28 $11
+    jr   z, .rotateEnd                            ; $4790: $28 $11
     ; rotate Link every 4th frame clockwise
     ldh  a, [hFrameCounter]                       ; $4792: $F0 $E7
     ; hFrameCounter/4
@@ -966,18 +967,18 @@ RotateLinkClockwise::
     ld   a, [hl]                                  ; $479F: $7E
     ldh  [hLinkDirection], a                      ; $47A0: $E0 $9E
     ret                                           ; $47A2: $C9
+.rotateEnd
 
-.jr_002_47A3:
-    ; if link is in the air jump to jr_002_47E0
+    ; if link is in the air, jump to .jr_002_47E0
     ld   a, [wIsLinkInTheAir]                     ; $47A3: $FA $46 $C1
     cp   TRUE                                     ; $47A6: $FE $01
-    jr   nz, jr_002_47E0                          ; $47A8: $20 $36
+    jr   nz, .jr_002_47E0                         ; $47A8: $20 $36
 
     ld   a, [wC3CF]                               ; $47AA: $FA $CF $C3
-    ; if in sword animation jump to jr_002_47E0
+    ; if in sword animation, jump to .jr_002_47E0
     ld   hl, wSwordAnimationState                 ; $47AD: $21 $37 $C1
     or   [hl]                                     ; $47B0: $B6
-    jr   nz, jr_002_47E0                          ; $47B1: $20 $2D
+    jr   nz, .jr_002_47E0                         ; $47B1: $20 $2D
 
     ldh  a, [hLinkDirection]                      ; $47B3: $F0 $9E
     rla                                           ; $47B5: $17
@@ -987,7 +988,7 @@ RotateLinkClockwise::
     ld   b, $00                                   ; $47BA: $06 $00
     ld   a, [wC152]                               ; $47BC: $FA $52 $C1
     cp   $03                                      ; $47BF: $FE $03
-    jr   nc, jr_002_47E0                          ; $47C1: $30 $1D
+    jr   nc, .jr_002_47E0                         ; $47C1: $30 $1D
 
     ld   e, a                                     ; $47C3: $5F
     ld   d, $00                                   ; $47C4: $16 $00
@@ -1000,16 +1001,17 @@ RotateLinkClockwise::
     inc  a                                        ; $47D1: $3C
     ld   [wC153], a                               ; $47D2: $EA $53 $C1
     and  $07                                      ; $47D5: $E6 $07
-    jr   nz, jr_002_47E0                          ; $47D7: $20 $07
+    jr   nz, .jr_002_47E0                         ; $47D7: $20 $07
 
     ld   a, [wC152]                               ; $47D9: $FA $52 $C1
     inc  a                                        ; $47DC: $3C
     ld   [wC152], a                               ; $47DD: $EA $52 $C1
 
-jr_002_47E0:
+.jr_002_47E0
+
     ld   a, [wIsUsingSpinAttack]                  ; $47E0: $FA $21 $C1
     and  a                                        ; $47E3: $A7
-    jp   nz, label_002_4709                       ; $47E4: $C2 $09 $47
+    jp   nz, UpdateSpinAttackAnimation            ; $47E4: $C2 $09 $47
 
     ld   a, [wC16D]                               ; $47E7: $FA $6D $C1
     and  a                                        ; $47EA: $A7
@@ -1028,15 +1030,14 @@ jr_002_47E0:
 
     ld   a, [wIsRunningWithPegasusBoots]          ; $47FF: $FA $4A $C1
     and  a                                        ; $4802: $A7
-    jr   nz, jr_002_4809                          ; $4803: $20 $04
-
+    jr   nz, .jr_002_4809                         ; $4803: $20 $04
     ld   a, $01                                   ; $4805: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4807: $E0 $A1
+.jr_002_4809
 
-jr_002_4809:
     ld   a, [wC138]                               ; $4809: $FA $38 $C1
     and  a                                        ; $480C: $A7
-    jr   nz, jr_002_4823                          ; $480D: $20 $14
+    jr   nz, .jr_002_4823                         ; $480D: $20 $14
     ; go to next sword animation state
     ld   a, [wSwordAnimationState]                ; $480F: $FA $37 $C1
     inc  a                                        ; $4812: $3C
@@ -1051,8 +1052,7 @@ jr_002_4809:
     ld   hl, SwordAnimationStateToUnknow                        ; $481E: $21 $AD $46
     add  hl, bc                                   ; $4821: $09
     ld   a, [hl]                                  ; $4822: $7E
-
-jr_002_4823:
+.jr_002_4823
     dec  a                                        ; $4823: $3D
     ld   [wC138], a                               ; $4824: $EA $38 $C1
 
@@ -1324,7 +1324,7 @@ jr_002_49B6:
     ld   a, $01                                   ; $49B6: $3E $01
     ld   [wIsLinkInTheAir], a                     ; $49B8: $EA $46 $C1
     call CheckItemsToUse                          ; $49BB: $CD $77 $11
-    call RotateLinkClockwise                      ; $49BE: $CD $8C $47
+    call UpdateLinkAnimation                      ; $49BE: $CD $8C $47
     ld   a, [wSwordAnimationState]                ; $49C1: $FA $37 $C1
     ld   [wC16A], a                               ; $49C4: $EA $6A $C1
     jp   ApplyLinkMotionState                     ; $49C7: $C3 $94 $17

@@ -441,6 +441,7 @@ SkipTilesGroupAnimation::
     call AdjustBankNumberForGBC                   ; $1D28: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $1D2B: $EA $00 $21
 
+; Called during V-Blank
 DrawLinkSprite::
 DrawLinkSpriteAndReturn::
     ldh  a, [hLinkAnimationState]                 ; $1D2E: $F0 $9D
@@ -448,20 +449,20 @@ DrawLinkSpriteAndReturn::
     ret  z                                        ; $1D31: $C8
     ldh  a, [hIsGBC]                              ; $1D32: $F0 $FE
     and  a                                        ; $1D34: $A7
-    jr   z, label_1D42                            ; $1D35: $28 $0B
+    jr   z, .jr_1D42                              ; $1D35: $28 $0B
     ld   a, [wInvincibilityCounter]               ; $1D37: $FA $C7 $DB
     and  $04                                      ; $1D3A: $E6 $04
-    jr   z, label_1D49                            ; $1D3C: $28 $0B
+    jr   z, .jr_1D49                              ; $1D3C: $28 $0B
     ld   a, $04                                   ; $1D3E: $3E $04
-    jr   label_1D49                               ; $1D40: $18 $07
+    jr   .jr_1D49                                 ; $1D40: $18 $07
 
-label_1D42::
+.jr_1D42
     ld   a, [wInvincibilityCounter]               ; $1D42: $FA $C7 $DB
     rla                                           ; $1D45: $17
     rla                                           ; $1D46: $17
     and  $10                                      ; $1D47: $E6 $10
 
-label_1D49::
+.jr_1D49
     ld   [wC135], a                               ; $1D49: $EA $35 $C1
 
     ld   hl, wLinkOAMBuffer+8                     ; $1D4C: $21 $08 $C0

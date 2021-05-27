@@ -9288,22 +9288,30 @@ label_003_7E09:
 
 func_003_7E0E::
     push bc                                       ; $7E0E: $C5
+
+    ; hMultiPurpose4 = entityPosX - 1
+    ; hSwordIntersectedAreaX = hMultiPurpose4 - (hMultiPurpose4 % $10)
     ld   hl, wEntitiesPosXTable                   ; $7E0F: $21 $00 $C2
     add  hl, bc                                   ; $7E12: $09
     ld   a, [hl]                                  ; $7E13: $7E
     sub  $01                                      ; $7E14: $D6 $01
     ldh  [hMultiPurpose4], a                      ; $7E16: $E0 $DB
-    and  $F0                                      ; $7E18: $E6 $F0
+    and  $F0 ; a - a % $10                        ; $7E18: $E6 $F0
     ldh  [hSwordIntersectedAreaX], a              ; $7E1A: $E0 $CE
+
     swap a                                        ; $7E1C: $CB $37
+
+    ; hMultiPurpose5 = entityPosX - 7
+    ; hSwordIntersectedAreaY = hMultiPurpose5 - (hMultiPurpose5 % $10)
     ld   hl, wEntitiesPosYTable                   ; $7E1E: $21 $10 $C2
     add  hl, bc                                   ; $7E21: $09
     ld   c, a                                     ; $7E22: $4F
     ld   a, [hl]                                  ; $7E23: $7E
     sub  $07                                      ; $7E24: $D6 $07
     ldh  [hMultiPurpose5], a                      ; $7E26: $E0 $DC
-    and  $F0                                      ; $7E28: $E6 $F0
+    and  $F0 ; a - a % $10                        ; $7E28: $E6 $F0
     ldh  [hSwordIntersectedAreaY], a              ; $7E2A: $E0 $CD
+
     or   c                                        ; $7E2C: $B1
     ld   c, a                                     ; $7E2D: $4F
     ld   b, $00                                   ; $7E2E: $06 $00

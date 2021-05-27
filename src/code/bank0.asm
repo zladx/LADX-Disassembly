@@ -4484,37 +4484,46 @@ ReadJoypadState::
 .return
     ret                                           ; $2886: $C9
 
+; Get BG address of the object under hSwordIntersectedAreaX/Y
+; Return:
+;   hFFCF / hFFD0: BG address of the top-left tile of the object
 label_2887::
     push bc                                       ; $2887: $C5
+
+    ;
+    ; de = ([hSwordIntersectedAreaY] + [hBaseScrollY]) / 8
     ldh  a, [hSwordIntersectedAreaY]              ; $2888: $F0 $CD
     ld   hl, hBaseScrollY                         ; $288A: $21 $97 $FF
     add  a, [hl]                                  ; $288D: $86
-    and  $F8                                      ; $288E: $E6 $F8
+    and  $F8 ; a - a % $8                         ; $288E: $E6 $F8
     srl  a                                        ; $2890: $CB $3F
     srl  a                                        ; $2892: $CB $3F
     srl  a                                        ; $2894: $CB $3F
     ld   de, $00                                  ; $2896: $11 $00 $00
     ld   e, a                                     ; $2899: $5F
+
+    ; hl = hl + (de * $20)
     ld   hl, vBGMap0                              ; $289A: $21 $00 $98
     ld   b, $20                                   ; $289D: $06 $20
-
 .loop
     add  hl, de                                   ; $289F: $19
     dec  b                                        ; $28A0: $05
     jr   nz, .loop                                ; $28A1: $20 $FC
-
     push hl                                       ; $28A3: $E5
+
+    ; a = (([hSwordIntersectedAreaX] + [hBaseScrollX]) / 8)
     ldh  a, [hSwordIntersectedAreaX]              ; $28A4: $F0 $CE
     ld   hl, hBaseScrollX                         ; $28A6: $21 $96 $FF
     add  a, [hl]                                  ; $28A9: $86
     pop  hl                                       ; $28AA: $E1
-    and  $F8                                      ; $28AB: $E6 $F8
+    and  $F8 ; a - a % $8                         ; $28AB: $E6 $F8
     srl  a                                        ; $28AD: $CB $3F
     srl  a                                        ; $28AF: $CB $3F
     srl  a                                        ; $28B1: $CB $3F
     ld   de, $00                                  ; $28B3: $11 $00 $00
     ld   e, a                                     ; $28B6: $5F
     add  hl, de                                   ; $28B7: $19
+
     ld   a, h                                     ; $28B8: $7C
     ldh  [hFFCF], a                               ; $28B9: $E0 $CF
     ld   a, l                                     ; $28BB: $7D

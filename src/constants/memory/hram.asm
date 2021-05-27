@@ -306,19 +306,23 @@ hJoypadState::
 
 ; Topmost corner of the area intercepted by Link's sword
 ; Vary from 00 to 80 by increments of 10
+;
+; FIXME: also used for entities (see func_003_7E0E)
 hSwordIntersectedAreaY::
   ds 1 ; FFCD
 
 ; Leftmost corner of the area intercepted by Link's sword
 ; Vary from 00 to A0 by increments of 10
+;
+; FIXME: also used for entities (see func_003_7E0E)
 hSwordIntersectedAreaX::
   ds 1 ; FFCE
 
-; Unlabeled
+; See label_2887
 hFFCF::
   ds $1 ; FFCF
 
-; Unlabeled
+; See label_2887
 hFFD0::
   ds $1 ; FFD0
 

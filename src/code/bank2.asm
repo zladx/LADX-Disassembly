@@ -7600,9 +7600,11 @@ jr_002_7587:
     jr   nc, jr_002_75B1                          ; $75A4: $30 $0B
 
     ld   [hl+], a                                 ; $75A6: $22
+
     ldh  a, [hLinkPositionX]                      ; $75A7: $F0 $98
     add  $04                                      ; $75A9: $C6 $04
     ld   [hl+], a                                 ; $75AB: $22
+
     ld   a, $26                                   ; $75AC: $3E $26
     ld   [hl+], a                                 ; $75AE: $22
     ld   [hl], $00                                ; $75AF: $36 $00
@@ -8148,6 +8150,7 @@ Data_002_787B::
 
 label_002_787D:
     ; Write transient vfx position to wLinkOAMBuffer
+
     ldh  a, [hLinkPositionY]                      ; $787D: $F0 $99
     add  $08                                      ; $787F: $C6 $08
     ld   [hl+], a                                 ; $7881: $22

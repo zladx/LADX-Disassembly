@@ -4910,14 +4910,27 @@ jr_020_6B5C:
     ld   a, $03                                   ; $6B7C: $3E $03
     ld   [wPaletteDataFlags], a                   ; $6B7E: $EA $D1 $DD
 
+; Jumped to when running on DMG: don't do anything with palettes
 label_020_6B81:
     xor  a                                        ; $6B81: $AF
     ld   [wPaletteUnknownE], a                    ; $6B82: $EA $D5 $DD
     ret                                           ; $6B85: $C9
 
-func_020_6B86::
+; Copy a color (two bytes) from RAM2 (where the original color is stored)
+; to RAM0 (where the final blended color is).
+;
+; Inputs:
+;   bc   address of the blending color
+;   hl   address of the source color in RAM2, and destination color in RAM0
+;
+; Ouputs:
+;   hl and bc are incremented by 2
+IntroCopyAndBlendColor::
+    ; Switch to RAM bank 2
     ld   a, $02                                   ; $6B86: $3E $02
     ldh  [rSVBK], a                               ; $6B88: $E0 $70
+
+    ; Copy two bytes from [hl] in RAM 2 to de (masked with [bc])
     ld   a, [bc]                                  ; $6B8A: $0A
     or   [hl]                                     ; $6B8B: $B6
     ld   e, a                                     ; $6B8C: $5F
@@ -4928,55 +4941,79 @@ func_020_6B86::
     ld   d, a                                     ; $6B91: $57
     dec  bc                                       ; $6B92: $0B
     dec  hl                                       ; $6B93: $2B
+
+    ; Switch back to RAM bank 0
     xor  a                                        ; $6B94: $AF
     ldh  [rSVBK], a                               ; $6B95: $E0 $70
+
+    ; Copy two bytes from de to [hl] in RAM0
     ld   [hl], e                                  ; $6B97: $73
     inc  hl                                       ; $6B98: $23
     ld   [hl], d                                  ; $6B99: $72
     inc  hl                                       ; $6B9A: $23
+
     ret                                           ; $6B9B: $C9
 
-Data_020_6B9C::
-    db   $00, $00, $84, $10, $8C, $31, $84, $10
+; Value blended with the palette when a lighting strikes.
+IntroColorModifierTable::
+._00  db   $00, $00 ; no color modification
+._01  db   $84, $10
+._02  db   $8C, $31
+._03  db   $84, $10
 
-func_020_6BA4::
+; Update the BG palette for the intro sea sequence, optionaly blending each
+; color with a color modifier.
+;
+; The palettes are copied from wBGPal1 in RAM2 (original colors)
+; to wBGPal1 in RAM0 (blended colors).
+;
+; Inputs:
+;   e    color modifier (index in IntroColorModifierTable)
+UpdateIntroSeaBGPalettes::
     ldh  a, [hIsGBC]                              ; $6BA4: $F0 $FE
     and  a                                        ; $6BA6: $A7
     jp   z, label_020_6B81                        ; $6BA7: $CA $81 $6B
 
     ld   a, [wIntroSubTimer]                      ; $6BAA: $FA $02 $D0
     and  a                                        ; $6BAD: $A7
-    jr   z, jr_020_6BB4                           ; $6BAE: $28 $04
-
+    jr   z, .jr_020_6BB4                          ; $6BAE: $28 $04
     cp   $18                                      ; $6BB0: $FE $18
-    jr   nc, jr_020_6BDB                          ; $6BB2: $30 $27
+    jr   nc, .return                              ; $6BB2: $30 $27
+.jr_020_6BB4
 
-jr_020_6BB4:
-    ld   hl, Data_020_6B9C                        ; $6BB4: $21 $9C $6B
+    ; bc = IntroColorModifierTable + (e * 2)
+    ld   hl, IntroColorModifierTable              ; $6BB4: $21 $9C $6B
     sla  e                                        ; $6BB7: $CB $23
     add  hl, de                                   ; $6BB9: $19
     push hl                                       ; $6BBA: $E5
     pop  bc                                       ; $6BBB: $C1
+
     ld   hl, wBGPal1                              ; $6BBC: $21 $10 $DC
+
+    ; For each 8 BG color palettes…
     ld   a, $08                                   ; $6BBF: $3E $08
     ldh  [hMultiPurpose0], a                      ; $6BC1: $E0 $D7
-
-jr_020_6BC3:
-    call func_020_6B86                            ; $6BC3: $CD $86 $6B
-    call func_020_6B86                            ; $6BC6: $CD $86 $6B
-    call func_020_6B86                            ; $6BC9: $CD $86 $6B
+.loop
+    ; Copy and blend the first 3 colors of the palette
+    call IntroCopyAndBlendColor                   ; $6BC3: $CD $86 $6B
+    call IntroCopyAndBlendColor                   ; $6BC6: $CD $86 $6B
+    call IntroCopyAndBlendColor                   ; $6BC9: $CD $86 $6B
+    ; The 4th color is always black: skip it
     inc  hl                                       ; $6BCC: $23
     inc  hl                                       ; $6BCD: $23
+
+    ; Decrement loop counter
     ldh  a, [hMultiPurpose0]                      ; $6BCE: $F0 $D7
     dec  a                                        ; $6BD0: $3D
     and  a                                        ; $6BD1: $A7
     ldh  [hMultiPurpose0], a                      ; $6BD2: $E0 $D7
-    jr   nz, jr_020_6BC3                          ; $6BD4: $20 $ED
+
+    jr   nz, .loop                                ; $6BD4: $20 $ED
 
     ld   a, $01                                   ; $6BD6: $3E $01
     ld   [wPaletteDataFlags], a                   ; $6BD8: $EA $D1 $DD
 
-jr_020_6BDB:
+.return
     ret                                           ; $6BDB: $C9
 
 func_020_6BDC::

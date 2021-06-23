@@ -159,8 +159,8 @@ func_020_6AC1_trampoline::
     callsb func_020_6AC1                          ; $08E6: $3E $20 $EA $00 $21 $CD $C1 $6A
     jr   RestoreBankAndReturn                     ; $08EE: $18 $EF
 
-func_020_6BA4_trampoline::
-    callsb func_020_6BA4                          ; $08F0: $3E $20 $EA $00 $21 $CD $A4 $6B
+UpdateIntroSeaBGPalettes_trampoline::
+    callsb UpdateIntroSeaBGPalettes               ; $08F0: $3E $20 $EA $00 $21 $CD $A4 $6B
     jr   RestoreBankAndReturn                     ; $08F8: $18 $E5
 
 ClearFileMenuBG_trampoline::

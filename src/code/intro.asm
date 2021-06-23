@@ -105,24 +105,27 @@ RenderIntroFrame::
     cp   GAMEPLAY_INTRO_LIGHTNING                 ; $6EB8: $FE $05
     jr   nc, .dispatchScene                       ; $6EBA: $30 $1C
 
-    ; Decrement wIsFileSelectionArrowShifted if > 0
-    ld   a, [wIsFileSelectionArrowShifted]                               ; $6EBC: $FA $00 $D0
+    ; Decrement wIntroLightningVisibleCountdown if > 0
+    ld   a, [wIntroLightningVisibleCountdown]     ; $6EBC: $FA $00 $D0
     and  a                                        ; $6EBF: $A7
-    jr   z, .jp_6EC6                              ; $6EC0: $28 $04
+    jr   z, .decrementEnd                         ; $6EC0: $28 $04
     dec  a                                        ; $6EC2: $3D
-    ld   [wIsFileSelectionArrowShifted], a                               ; $6EC3: $EA $00 $D0
-.jp_6EC6
+    ld   [wIntroLightningVisibleCountdown], a     ; $6EC3: $EA $00 $D0
+.decrementEnd
 
+    ; Compute the palette modifier during lightning
+    ; e = (wIntroLightningVisibleCountdown / 2) % 3
     rra                                           ; $6EC6: $1F
     nop                                           ; $6EC7: $00
     and  $03                                      ; $6EC8: $E6 $03
     ld   e, a                                     ; $6ECA: $5F
     ld   d, $00                                   ; $6ECB: $16 $00
+
     ld   hl, IntroSeaPaletteTable                 ; $6ECD: $21 $19 $6E
     add  hl, de                                   ; $6ED0: $19
     ld   a, [hl]                                  ; $6ED1: $7E
     ld   [wBGPalette], a                          ; $6ED2: $EA $97 $DB
-    call func_020_6BA4_trampoline ; Load BG palette ; $6ED5: $CD $F0 $08
+    call UpdateIntroSeaBGPalettes_trampoline      ; $6ED5: $CD $F0 $08
 
 .dispatchScene
     ld   a, [wGameplaySubtype]                    ; $6ED8: $FA $96 $DB
@@ -201,7 +204,7 @@ IntroSceneStage2Handler::
     ld   a, $00                                   ; $6F55: $3E $00
     ld   [rLYC], a                                ; $6F57: $E0 $45
     ld   e, $11                                   ; $6F59: $1E $11
-    ld   hl, wIsFileSelectionArrowShifted                                ; $6F5B: $21 $00 $D0
+    ld   hl, wIntroLightningVisibleCountdown      ; $6F5B: $21 $00 $D0
     xor  a                                        ; $6F5E: $AF
 
 .loop
@@ -402,7 +405,7 @@ RenderLightning::
 
 .playSfx
     ld   a, $1C                                   ; $70A9: $3E $1C
-    ld   [wIsFileSelectionArrowShifted], a                               ; $70AB: $EA $00 $D0
+    ld   [wIntroLightningVisibleCountdown], a     ; $70AB: $EA $00 $D0
 
     call PlayBombExplosionSfx                     ; $70AE: $CD $4B $0C
 

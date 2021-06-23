@@ -10,6 +10,13 @@ Data_006_7AFB::
 Data_006_7B03::
     db   $00, $00, $01, $02, $02, $02, $01, $00
 
+; The ENTITY_FLOATING_ITEM item type depends on its position in the room.
+;
+;         | X even | X odd  |
+; --------|--------|--------|
+;  Y even | Rupees | Bombs  |
+;  Y odd  | Powder | Rupees |
+;
 FloatingItemEntityHandler::
     ld   a, [wIsIndoor]                           ; $7B0B: $FA $A5 $DB
     and  a                                        ; $7B0E: $A7
@@ -22,6 +29,12 @@ FloatingItemEntityHandler::
     ld   a, $06                                   ; $7B17: $3E $06
     jp   func_036_4F9B_trampoline                 ; $7B19: $C3 $53 $0A
 
+; The ENTITY_FLOATING_ITEM_2 item type depends on its position in the room.
+;
+; --------|--------|
+;  X even | Arrows |
+;  X odd  | Hearts |
+;
 FloatingItem2EntityHandler::
     ld   a, [wIsIndoor]                           ; $7B1C: $FA $A5 $DB
     and  a                                        ; $7B1F: $A7

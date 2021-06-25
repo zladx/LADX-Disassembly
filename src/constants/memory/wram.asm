@@ -1458,11 +1458,13 @@ wEntitiesClearedRooms::
 section "WRAM Bank1", wramx[$D000], bank[1]
 
 ; This location has multiple uses.
-; Is the arrow on the File Selection screen on the COPY item
-wIsFileSelectionArrowShifted::
-; This location has multiple uses.
+; Time during which the palette is modified by lightning during
+; the intro sequence (both on sea and on Link's face).
+wIntroLightningVisibleCountdown::
 ; Scratch variable using during the Credits sequence
 wCreditsScratch0::
+; Is the arrow on the File Selection screen on the COPY item
+wIsFileSelectionArrowShifted::
   ds 1 ; D000
 
 ; TODO comment

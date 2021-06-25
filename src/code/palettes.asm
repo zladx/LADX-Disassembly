@@ -2094,7 +2094,7 @@ Data_021_74F0::
     dw 0
     dw 0
     dw Data_021_7536
-    dw Data_021_7DEE
+    dw TitleBGPalettes
     dw Data_021_7696
     dw Data_021_7636
     dw Data_021_76D6
@@ -2433,7 +2433,8 @@ Data_021_7D6E:
     db   $00, $00, $FF, $03, $73, $02, $CE, $01
     db   $00, $00, $9B, $1B, $90, $45, $A9, $30
 
-Data_021_7DEE:
+; BG palettes data for the title screen.
+TitleBGPalettes::
 IF __PATCH_6__
     db   $FF, $7F, $DD, $14, $17, $14, $00, $00
     db   $FF, $7F, $1F, $13, $DF, $11, $00, $00

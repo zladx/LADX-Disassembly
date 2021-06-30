@@ -108,7 +108,7 @@ ENDC
     ld   a, DEBUG_SAVE_MAGIC_COUNT                ; $46FF: $3E $40
     ld   [$A47B], a ; 40 max magic powder         ; $4701: $EA $7B $A4
     ld   [$A451], a ; 40 magic powder             ; $4704: $EA $51 $A4
-IF !__PATCH_6__
+IF !LANG_JP
     ld   a, $89                                   ; $4707: $3E $89
     ld   [$A44C], a ; "time/animation?" (unknown) ; $4709: $EA $4C $A4
 ENDC
@@ -713,7 +713,7 @@ jr_001_55F5::
     ldh  [hMultiPurpose3], a                      ; $560C: $E0 $DA
     pop  hl                                       ; $560E: $E1
     call func_001_5619 ;show dungeon map no       ; $560F: $CD $19 $56
-IF __PATCH_6__
+IF LANG_JP
     push hl
     pop  hl
 ENDC
@@ -1601,7 +1601,7 @@ SynchronizeDungeonsItemFlags::
 
     ; Select the correct item flags slot for the current dungeon
     ; hl = wDungeonItemFlags + (hMapId * 5)
-IF !__PATCH_5__
+IF !LANG_DE
     ld   hl, wDungeonItemFlags                    ; $5E7D: $21 $16 $DB
 ENDC
     ld   e, a                                     ; $5E80: $5F
@@ -1610,7 +1610,7 @@ ENDC
     add  a, e                                     ; $5E85: $83
     ld   e, a                                     ; $5E86: $5F
     ld   d, $00                                   ; $5E87: $16 $00
-IF __PATCH_5__
+IF LANG_DE
     ld   hl, wDungeonItemFlags
 ENDC
     add  hl, de                                   ; $5E89: $19

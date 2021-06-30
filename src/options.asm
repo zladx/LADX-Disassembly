@@ -51,6 +51,11 @@ ENDC
 FALSE equ 0
 TRUE equ 1
 
+LANG_JP = FALSE
+LANG_EN = FALSE
+LANG_FR = FALSE
+LANG_DE = FALSE
+
 BANK_1C_VAR = 1
 
 
@@ -75,14 +80,10 @@ __PATCH_1__ = FALSE ; Applies to DE, FR
 __PATCH_2__ = FALSE ; Applies to DE, JP1+, EN2+, FR
 __PATCH_3__ = FALSE ; Applies to JP1+, EN1+
 __PATCH_4__ = FALSE ; Applies to DE1+, JP2+, EN2+, FR1+
-__PATCH_5__ = FALSE ; Applies to DE
-__PATCH_6__ = FALSE ; Applies to JP
-__PATCH_7__ = FALSE ; Applies to FR
 __PATCH_8__ = FALSE ; Applies to JP1+
 __PATCH_9__ = FALSE ; Applies to DE, JP
 __PATCH_A__ = 0 ; 1 in JP, 2 in DE
 __PATCH_B__ = 0 ; 1 in JP/DE, 2 in FR
-__PATCH_C__ = FALSE ; Applies to EN
 __DO_CHECK_DAKUTEN__ = FALSE ; TRUE in JP, DE
 __USE_FIXED_DIALOG_BANKS__ = FALSE ; TRUE in JP
 
@@ -108,7 +109,7 @@ DEBUG_SAVE_SWITCH_ARROWS = FALSE
 ; 0  EC  --  7F
 ; 1  E8  B1  EC
 ; 2  E8  B1  --
-; FR changes "[B-][1F]" into "[SS][1]", DE changes it into just "[ ][KI]". 
+; FR changes "[B-][1F]" into "[SS][1]", DE changes it into just "[ ][KI]".
 ; See also: https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening/Version_Differences#Key_Cavern
 ; (examples of different languages)
 MINIMAP_VAR_0 = $EC
@@ -123,6 +124,7 @@ CREDITS_VAR_2 = $0F
 
 
 IF ("{LANG}" == "JP")
+LANG_JP = TRUE
 FILE_28 = $14
 FILE_6C = $6C
 FILE_2C = $54
@@ -143,7 +145,6 @@ GAMEOVER_OPTION_CONTINUE_Y equ 104
 SAVE_OPTION_X equ 36
 __USE_FIXED_DIALOG_BANKS__ = TRUE
 __DO_CHECK_DAKUTEN__ = TRUE
-__PATCH_6__ = TRUE
 __PATCH_9__ = TRUE
 __PATCH_A__ = 1
 __PATCH_B__ = 1
@@ -156,7 +157,9 @@ ENDC
 IF (VERSION > 1)
 __PATCH_4__ = TRUE
 ENDC
+
 ELIF ("{LANG}" == "EN")
+LANG_EN = TRUE
 FILE_28 = $28
 FILE_6C = $6C
 FILE_2C = $2C
@@ -165,7 +168,6 @@ EASTER_EGG_FILENAME_1 equs "ZELDA"
 EASTER_EGG_SONG_1 equ $60 ; MUSIC_ZELDA_NICKNAME_EASTER_EGG
 THIEF_NAME equs "THIEF"
 __SPLIT_KEY_CAVERN_MAP__ = FALSE
-__PATCH_C__ = TRUE
 IF (VERSION > 0)
 __PATCH_0__ = TRUE
 __PATCH_3__ = TRUE
@@ -174,7 +176,9 @@ IF (VERSION > 1)
 __PATCH_2__ = TRUE
 __PATCH_4__ = TRUE
 ENDC
+
 ELIF ("{LANG}" == "FR")
+LANG_FR = TRUE
 FILE_28 = $1E
 FILE_6C = $6D
 FILE_2C = $2E
@@ -193,12 +197,13 @@ GAMEOVER_OPTION_CONTINUE_Y equ 104
 __PATCH_0__ = TRUE
 __PATCH_1__ = TRUE
 __PATCH_2__ = TRUE
-__PATCH_7__ = TRUE
 __PATCH_B__ = 2
 IF (VERSION > 0)
 __PATCH_4__ = TRUE
 ENDC
+
 ELIF ("{LANG}" == "DE")
+LANG_DE = TRUE
 FILE_28 = $1E
 FILE_6C = $66
 FILE_2C = $2E
@@ -220,7 +225,6 @@ __DO_CHECK_DAKUTEN__ = TRUE
 __PATCH_0__ = TRUE
 __PATCH_1__ = TRUE
 __PATCH_2__ = TRUE
-__PATCH_5__ = TRUE
 __PATCH_9__ = TRUE
 __PATCH_A__ = 2
 __PATCH_B__ = 1

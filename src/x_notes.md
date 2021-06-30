@@ -7,6 +7,23 @@ Misc notes that have not been translated into disassembly comments yet
 
 ### Patch matrix
 
+Note: the graph is still wrong:
+- FR should not have PATCH_9
+
+
+                                                    -- LANG_FR -- [FR 1.0] -- [FR 1.1]
+                                                   /                       /
+                                       -- PATCH_1 -- LANG_DE -- [DE 1.0] -- [DE 1.1]
+                                      /                                  /
+BASE -- PATCH_9 -- PATCH_0 -- PATCH_2 - -- PATCH_4 ----------------------
+   \           \                      \                                  \
+    \           \                      \- PATCH_3 -- PATCH_8 --\          \
+     \           \                                              \          \
+      \           -- LANG_JP -- [JP 1.0] ---------------------- [JP 1.1] --- [JP 1.2]
+       \
+        -- LANG_EN -- [US 1.0]
+
+
 |       -       | JP 1.0 | JP 1.1 | JP 1.2 | US 1.0 | US 1.1 | US 1.2 | FR 1.0 | FR 1.1 | DE 1.0 | DE 1.1 |
 |:-------------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
 | `__PATCH_0__` |        |  Yes   |  Yes   |        |  Yes   |  Yes   |  Yes   |  Yes   |  Yes   |  Yes   |
@@ -14,14 +31,10 @@ Misc notes that have not been translated into disassembly comments yet
 | `__PATCH_2__` |        |  Yes   |  Yes   |        |        |  Yes   |  Yes   |  Yes   |  Yes   |  Yes   |
 | `__PATCH_3__` |        |  Yes   |  Yes   |        |  Yes   |  Yes   |        |        |        |        |
 | `__PATCH_4__` |        |        |  Yes   |        |        |  Yes   |        |  Yes   |        |  Yes   |
-| `__PATCH_5__` |        |        |        |        |        |        |        |        |  Yes   |  Yes   |
-| `__PATCH_6__` |  Yes   |  Yes   |  Yes   |        |        |        |        |        |        |        |
-| `__PATCH_7__` |        |        |        |        |        |        |  Yes   |  Yes   |        |        |
 | `__PATCH_8__` |        |  Yes   |  Yes   |        |        |        |        |        |        |        |
 | `__PATCH_9__` |  Yes   |  Yes   |  Yes   |        |        |        |        |        |  Yes   |  Yes   |
 | `__PATCH_A__` |    1   |    1   |    1   |        |        |        |        |        |    2   |    2   |
 | `__PATCH_B__` |    1   |    1   |    1   |        |        |        |    2   |    2   |    1   |    1   |
-| `__PATCH_C__` |        |        |        |  Yes   |  Yes   |  Yes   |        |        |        |        |
 
 ### Patch notes
 
@@ -65,7 +78,7 @@ _(To-do)_
   * File menu
   * Photo interface
 
-#### `__PATCH_5__`
+#### `LANG_DE`
 * Removes the bizarre feature where debug flag 2 writes a weird BG map to the subscreen
   * `src/code/world_handler.asm -> GameplayWorldLoad0Handler`
 * Various other undocumented changes
@@ -73,7 +86,7 @@ _(To-do)_
   * File menus
 
 
-#### `__PATCH_6__`
+#### `LANG_JP`
 * Seems to be a "reverse history patch". The disassembly is based on DX US 1.0 and this is for the JP versions only
   * That is, rather than representing a change in a future version, this change reverts to an older version of code
 * Pointless `push hl`, `pop hl` instruction
@@ -85,7 +98,7 @@ _(To-do)_
 * Various other undocumented changes
 
 
-#### `__PATCH_7__`
+#### `LANG_FR`
 * Changes to credits code
   * `src/code/credits.asm -> AnimateCreditsIslandFadeTiles`
   * Some other changes throughout the credits
@@ -128,7 +141,7 @@ _(To-do)_
 * No other changes
 
 
-#### `__PATCH_C__`
+#### `LANG_EN`
 * More changes in the file menus
   * `src/code/file_menus.asm -> jr_001_4894`, etc.
   * Effects of this patch are unknown

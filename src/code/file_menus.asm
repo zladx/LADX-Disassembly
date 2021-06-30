@@ -151,7 +151,7 @@ jr_001_4894::
     ld   a, [de]                                  ; $4896: $1A
     and  a                                        ; $4897: $A7
 
-IF __PATCH_C__
+IF LANG_EN
     jr   jr_001_489D                              ; $4898: $18 $03
     dec  a                                        ; $489A: $3D
     and  $C0                                      ; $489B: $E6 $C0
@@ -219,7 +219,7 @@ FileSelectionPrepare6::
 
     ; If there are no saved files yet…
     ld   a, [wSaveFilesCount]                     ; $48C2: $FA $A7 $DB
-IF __PATCH_5__
+IF LANG_DE
     ldh [hLinkInteractiveMotionBlocked], a
 ENDC
     and  a                                        ; $48C5: $A7
@@ -247,7 +247,7 @@ Data_001_48E4::
     ld   l, e                                     ; $48E6: $6B
     add  a, e                                     ; $48E7: $83
 
-IF __PATCH_5__
+IF LANG_DE
 Data_001_48EB:
     ; bg copy requests
     db   $99, $C6, $00, $AA
@@ -259,7 +259,7 @@ ENDC
 
 
 FileSelectionInteractiveHandler::
-IF __PATCH_5__
+IF LANG_DE
     ldh a, [hLinkInteractiveMotionBlocked]
     and a
     jr z, .start
@@ -535,7 +535,7 @@ FileCreationInit2Handler::
     ld   [hl], a                                  ; $4A3B: $77
     jp   IncrementGameplaySubtypeAndReturn        ; $4A3C: $C3 $D6 $44
 
-IF !__PATCH_5__
+IF !LANG_DE
 ; Write a single byte to the save file.
 ; Inputs:
 ;   hl   address of the save file start
@@ -1164,7 +1164,7 @@ jr_001_4E2B::
 jr_001_4E3B::
     call PlayValidationJingleAndReturn            ; $4E3B: $CD $BE $49 ; $4E3B: $CD $BE $49
     call IncrementGameplaySubtype                 ; $4E3E: $CD $D6 $44 ; $4E3E: $CD $D6 $44
-IF __PATCH_6__
+IF LANG_JP
 label_001_4E55:
     ld hl, wRequestDestination
     ld a, $99
@@ -1193,7 +1193,7 @@ include "data/file_menu_bg.asm"
 label_001_4E55::
     ld   hl, wRequestDestinationHigh              ; $4E55: $21 $01 $D6 ; $4E55: $21 $01 $D6
     ld   de, Data_001_4E43                        ; $4E58: $11 $43 $4E ; $4E58: $11 $43 $4E
-IF __PATCH_C__
+IF LANG_EN
     ld   c, Data_001_4E43.end - Data_001_4E43 - 1 ; $4E5B: $0E $11 ; $4E5B: $0E $11
 ELSE
     ld   c, Data_001_4E43.end - Data_001_4E43
@@ -1204,7 +1204,7 @@ ENDC
     inc  de                                       ; $4E5E: $13 ; $4E5E: $13
     ld   [hl+], a                                 ; $4E5F: $22 ; $4E5F: $22
     dec  c                                        ; $4E60: $0D ; $4E60: $0D
-IF __PATCH_C__
+IF LANG_EN
     ld   a, c                                     ; $4E61: $79 ; $4E61: $79
     cp   $FF                                      ; $4E62: $FE $FF ; $4E62: $FE $FF
 ENDC
@@ -1223,7 +1223,7 @@ FileDeletionState11Handler::
     jr   nz, jr_001_4E9E                          ; $4E6F: $20 $2D ; $4E6F: $20 $2D
 
     and  $90                                      ; $4E71: $E6 $90 ; $4E71: $E6 $90
-IF __PATCH_5__
+IF LANG_DE
     jp   z, jr_001_4ED9
 ELSE
     jr   z, jr_001_4ED9                           ; $4E73: $28 $64 ; $4E73: $28 $64
@@ -1263,7 +1263,7 @@ jr_001_4E9E::
     dec  [hl]                                     ; $4EA7: $35 ; $4EA7: $35
     ret                                           ; $4EA8: $C9 ; $4EA8: $C9
 
-IF __PATCH_6__
+IF LANG_JP
 func_001_4EBB::
     ld   a, [wRequests]                             ; $4eff: $fa $00 $d6
     ld   e, a                                       ; $4f02: $5f
@@ -1289,7 +1289,7 @@ Data_001_4EA9::
 include "data/file_menu_bg_2.asm"
 .end
 
-IF __PATCH_5__
+IF LANG_DE
 Data_001_4EA9_alt::
 include "data/file_menu_bg_2_alt.asm"
 .end
@@ -1305,7 +1305,7 @@ func_001_4EBB::
     add  hl, de                                   ; $4EC9: $19 ; $4EC9: $19
     ld   de, Data_001_4EA9                        ; $4ECA: $11 $A9 $4E ; $4ECA: $11 $A9 $4E
 
-IF __PATCH_5__
+IF LANG_DE
     ld   a, [wGameplayType]
     cp   GAMEPLAY_FILE_COPY
     jr   nz, .endIfFileCopy
@@ -1313,7 +1313,7 @@ IF __PATCH_5__
 .endIfFileCopy
 ENDC
 
-IF __PATCH_C__
+IF LANG_EN
     ld   c, Data_001_4EA9.end - Data_001_4EA9 - 1 ; $4ECD: $0E $11 ; $4ECD: $0E $11
 ELSE
     ld   c, Data_001_4EA9.end - Data_001_4EA9
@@ -1323,7 +1323,7 @@ ENDC
     inc  de                                       ; $4ED0: $13 ; $4ED0: $13
     ld   [hl+], a                                 ; $4ED1: $22 ; $4ED1: $22
     dec  c                                        ; $4ED2: $0D ; $4ED2: $0D
-IF __PATCH_C__
+IF LANG_EN
     ld   a, c                                     ; $4ED3: $79 ; $4ED3: $79
     cp   $FF                                      ; $4ED4: $FE $FF ; $4ED4: $FE $FF
 ENDC
@@ -1387,7 +1387,7 @@ jr_001_4F1D::
 
     ld   a, [wCreditsScratch0]                    ; $4F23: $FA $00 $D0 ; $4F23: $FA $00 $D0
     ld   e, a                                     ; $4F26: $5F ; $4F26: $5F
-IF __PATCH_6__
+IF LANG_JP
     ld   a, [wGameplayType]
     cp   GAMEPLAY_FILE_COPY
     ld   a, $1c

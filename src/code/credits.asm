@@ -54,7 +54,7 @@ Data_017_4048::
     db   $70, $91, $80, $91, $90, $91, $A0, $91, $40, $94
 
 AnimateCreditsIslandFadeTiles::
-IF __PATCH_7__
+IF LANG_FR
     ldh a, [hFFA5]
     cp $11
     jr nc, jr_017_40c1
@@ -103,7 +103,7 @@ jr_017_407D:
     ldh  [hFFA5], a                               ; $4098: $E0 $A5
     ret                                           ; $409A: $C9
 
-IF __PATCH_7__
+IF LANG_FR
 Data_017_40A1:
     ; tile
     db   $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $F3, $F3, $ED, $ED, $FF, $FF
@@ -452,7 +452,7 @@ jr_017_46D8:
     inc  hl                                       ; $46E5: $23
     push hl                                       ; $46E6: $E5
     push de                                       ; $46E7: $D5
-IF __PATCH_5__
+IF LANG_DE
     cp   $2E
     jr   nz, jr_017_46EA
 
@@ -4991,7 +4991,7 @@ CreditsTheEnd4Handler::
     ld   [wPalettePartialCopyColorCount], a       ; $704B: $EA $D4 $DD
     ld   a, $81                                   ; $704E: $3E $81
     ld   [wPaletteDataFlags], a                   ; $7050: $EA $D1 $DD
-IF __PATCH_5__
+IF LANG_DE
     xor  a
     ldh  [hBaseScrollX], a
     ldh  [hBaseScrollY], a
@@ -6206,7 +6206,7 @@ func_017_7B43::
     call IncrementEntityState                     ; $7B58: $CD $12 $3B
 
 func_017_7B5B::
-IF __PATCH_5__
+IF LANG_DE
     call func_017_7AFA
     ret
 ENDC

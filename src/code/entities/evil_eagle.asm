@@ -1,11 +1,11 @@
-Data_005_59DE:
+EvilEagleRiderVisibleTiles::
 IF __PATCH_0__
 incbin "gfx/characters/evil_eagle/oam_rider_v1.2bpp"
 ELSE
 incbin "gfx/characters/evil_eagle/oam_rider_v0.2bpp"
 ENDC
 
-Data_005_59FE::
+EvilEagleRiderHiddenTiles::
 incbin "gfx/characters/evil_eagle/oam_rider_hidden.2bpp"
 
 ; Note: this entity, unlike most others, use all 4 spriteslots available.
@@ -47,8 +47,8 @@ ENDC
     ld   hl, wEntitiesTransitionCountdownTable    ; $5A48: $21 $E0 $C2
     add  hl, de                                   ; $5A4B: $19
     ld   [hl], $60                                ; $5A4C: $36 $60
-    ld   a, $01                                   ; $5A4E: $3E $01
-    ldh  [hFFA5], a                               ; $5A50: $E0 $A5
+    ld   a, REPLACE_TILES_EE_RIDER_VISIBLE        ; $5A4E: $3E $01
+    ldh  [hReplaceTiles], a                       ; $5A50: $E0 $A5
     call IncrementEntityState                     ; $5A52: $CD $12 $3B
     ld   [hl], $04                                ; $5A55: $36 $04
     ld   a, $C0                                   ; $5A57: $3E $C0
@@ -56,8 +56,8 @@ ENDC
     ret                                           ; $5A5C: $C9
 
 jr_005_5A5D:
-    ld   a, $02                                   ; $5A5D: $3E $02
-    ldh  [hFFA5], a                               ; $5A5F: $E0 $A5
+    ld   a, REPLACE_TILES_EE_RIDER_HIDDEN         ; $5A5D: $3E $02
+    ldh  [hReplaceTiles], a                       ; $5A5F: $E0 $A5
     ld   [wD478], a                               ; $5A61: $EA $78 $D4
     call GetEntityTransitionCountdown             ; $5A64: $CD $05 $0C
     ld   [hl], $80                                ; $5A67: $36 $80
@@ -442,8 +442,8 @@ func_005_5C8B::
     call GetEntityTransitionCountdown             ; $5C8F: $CD $05 $0C
     jr   nz, jr_005_5CA6                          ; $5C92: $20 $12
 
-    ld   a, $01                                   ; $5C94: $3E $01
-    ldh  [hFFA5], a                               ; $5C96: $E0 $A5
+    ld   a, REPLACE_TILES_EE_RIDER_VISIBLE        ; $5C94: $3E $01
+    ldh  [hReplaceTiles], a                       ; $5C96: $E0 $A5
     ld   [hl], $20                                ; $5C98: $36 $20
     call IncrementEntityState                     ; $5C9A: $CD $12 $3B
     ld   hl, wEntitiesStateTable                  ; $5C9D: $21 $90 $C2

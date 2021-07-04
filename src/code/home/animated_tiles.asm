@@ -40,6 +40,16 @@ AnimateMarinBeachTiles::
     ldh  [hLinkFinalPositionY], a                 ; $1B0A: $E0 $A0
     ld   h, b                                     ; $1B0C: $60
 
+; Update tiles during V-Blank.
+;
+; This can be either:
+;
+; - a special case during the intro sequence,
+; - a replacement of some individual tiles (if hReplaceTiles is set)
+; - an update to the BG animated tiles group (if hAnimatedTilesGroup is set)
+;
+; After any of these cases, the code then jumps to DrawLinkSprite.
+;
 ; Animated tiles work in groups of 4 tiles.
 ; Every n frame, the animation frame pointer is incremented,
 ; and the next frame of the animation is copied into the Tiles memory.
@@ -60,7 +70,7 @@ AnimateTiles::
     ; If GameplayType == INTRO, handle the tile animation manually,
     ; and don't perform any further animation.
     cp   GAMEPLAY_INTRO                           ; $1B14: $FE $00
-    jr   nz, .notIntro                            ; $1B16: $20 $2E
+    jr   nz, .introEnd                            ; $1B16: $20 $2E
     ; If there is no transfer request pending…
     ld   a, [wRequest]                            ; $1B18: $FA $01 $D6
     and  a                                        ; $1B1B: $A7
@@ -88,21 +98,20 @@ AnimateTiles::
 .return
     ; Return early
     ret                                           ; $1B45: $C9
+.introEnd
 
-.notIntro
-
-    ; If GameplayType != CREDITS, continue
+    ; If during Credits…
     ld   a, [wGameplayType]                       ; $1B46: $FA $95 $DB
     cp   GAMEPLAY_CREDITS                         ; $1B49: $FE $01
-    jr   nz, .notCredits                          ; $1B4B: $20 $06
-
-    ; GameplayType == CREDITS
-    ldh  a, [hFFA5]                               ; $1B4D: $F0 $A5
-    and  a                          ; if hFFA5 != 0 ; $1B4F: $A7
-    jr   nz, AnimateTiles.animateEndCredits ;   handle end credits animated tiles ; $1B50: $20 $30
+    jr   nz, .creditsEnd                          ; $1B4B: $20 $06
+    ; …and there are tiles to replace…
+    ldh  a, [hReplaceTiles]                       ; $1B4D: $F0 $A5
+    and  a                                        ; $1B4F: $A7
+    ; …jump directly to tiles replacing.
+    jr   nz, AnimateTiles.replaceTiles            ; $1B50: $20 $30
     ret                                           ; $1B52: $C9
+.creditsEnd
 
-.notCredits
     ;
     ; Animate World tiles
     ;
@@ -130,53 +139,63 @@ AnimateTiles::
     or   [hl]                                     ; $1B6D: $B6
     jp   nz, DrawLinkSpriteAndReturn              ; $1B6E: $C2 $2E $1D
 
-    ; If wSwitchableObjectAnimationStage != 0, handle special case
-    ld   a, [wSwitchableObjectAnimationStage]                               ; $1B71: $FA $F8 $D6
+    ; If a switchable object is being animated, update its tiles and return.
+    ld   a, [wSwitchableObjectAnimationStage]     ; $1B71: $FA $F8 $D6
     and  a                                        ; $1B74: $A7
-    jr   z, .notD6F8                              ; $1B75: $28 $06
-    call UpdateSwitchBlockTiles                               ; $1B77: $CD $D7 $1E
+    jr   z, .switchableObjectEnd                  ; $1B75: $28 $06
+    call UpdateSwitchBlockTiles                   ; $1B77: $CD $D7 $1E
     jp   DrawLinkSpriteAndReturn                  ; $1B7A: $C3 $2E $1D
+.switchableObjectEnd
 
-.notD6F8
-    ldh  a, [hFFA5]                               ; $1B7D: $F0 $A5
+    ;
+    ; Replace individual tiles
+    ;
+
+    ; If hReplaceTiles != 0, update individual tiles and return.
+    ldh  a, [hReplaceTiles]                       ; $1B7D: $F0 $A5
     and  a                                        ; $1B7F: $A7
-    jr   z, .notFFA5                              ; $1B80: $28 $4B
+    jr   z, .tilesReplacementEnd                  ; $1B80: $28 $4B
 
-.animateEndCredits
-    ; a == hFFA5
-    cp   $01                                      ; $1B82: $FE $01
-    jp   z, label_3F93                            ; $1B84: $CA $93 $3F
-    cp   $02                                      ; $1B87: $FE $02
-    jp   z, label_3FA9                            ; $1B89: $CA $A9 $3F
-    cp   $03                                      ; $1B8C: $FE $03
-    jp   z, label_1EB5                            ; $1B8E: $CA $B5 $1E
-    cp   $04                                      ; $1B91: $FE $04
-    jp   z, label_1EBC                            ; $1B93: $CA $BC $1E
-    cp   $08                                      ; $1B96: $FE $08
-    jp   z, label_1E69                            ; $1B98: $CA $69 $1E
-    cp   $09                                      ; $1B9B: $FE $09
+.replaceTiles
+    cp   REPLACE_TILES_EE_RIDER_VISIBLE           ; $1B82: $FE $01
+    jp   z, ReplaceEvilEagleRiderVisibleTiles     ; $1B84: $CA $93 $3F
+    cp   REPLACE_TILES_EE_RIDER_HIDDEN            ; $1B87: $FE $02
+    jp   z, ReplaceEvilEagleRiderHiddenTiles      ; $1B89: $CA $A9 $3F
+    cp   REPLACE_TILES_BUTTON_PRESSED             ; $1B8C: $FE $03
+    jp   z, ReplaceTilesButtonPressed             ; $1B8E: $CA $B5 $1E
+    cp   REPLACE_TILES_UNKNOWN_04                 ; $1B91: $FE $04
+    jp   z, ReplaceTiles_04                       ; $1B93: $CA $BC $1E
+    cp   REPLACE_TILES_UNKNOWN_08                 ; $1B96: $FE $08
+    jp   z, ReplaceTiles_08                       ; $1B98: $CA $69 $1E
+    cp   REPLACE_TILES_GOLDEN_LEAF                ; $1B9B: $FE $09
     jp   z, ReplaceSlimeKeyTilesByGoldenLeaf      ; $1B9D: $CA $A1 $1E
-    cp   $0A                                      ; $1BA0: $FE $0A
+    cp   REPLACE_TILES_TOADSTOOL                  ; $1BA0: $FE $0A
     jp   z, ReplaceMagicPowderTilesByToadstool    ; $1BA2: $CA $2B $1E
-    cp   $0B                                      ; $1BA5: $FE $0B
-    jp   z, label_1E8D                            ; $1BA7: $CA $8D $1E
-    cp   $0C                                      ; $1BAA: $FE $0C
-    jp   z, label_1E33                            ; $1BAC: $CA $33 $1E
-    cp   $0D                                      ; $1BAF: $FE $0D
-    jp   z, label_1E01                            ; $1BB1: $CA $01 $1E
-    cp   $0E                                      ; $1BB4: $FE $0E
+    cp   REPLACE_TILES_MAGIC_POWDER               ; $1BA5: $FE $0B
+    jp   z, ReplaceToadstoolTilesByMagicPowder    ; $1BA7: $CA $8D $1E
+    cp   REPLACE_TILES_SIRENS_INSTRUMENT          ; $1BAA: $FE $0C
+    jp   z, ReplaceDialogTilesByInstruments       ; $1BAC: $CA $33 $1E
+    cp   REPLACE_TILES_TRADING_ITEM               ; $1BAF: $FE $0D
+    jp   z, ReplaceTradingItemTiles               ; $1BB1: $CA $01 $1E
+    cp   REPLACE_TILES_ISLAND_FADE                ; $1BB4: $FE $0E
     jr   z, .animateCreditsIslandFadeTiles        ; $1BB6: $28 $0D
-    cp   $0F                                      ; $1BB8: $FE $0F
-    jp   z, label_1DF0                            ; $1BBA: $CA $F0 $1D
-    cp   $10                                      ; $1BBD: $FE $10
-    jp   z, label_1DE9                            ; $1BBF: $CA $E9 $1D
+    cp   REPLACE_TILES_MARIN_SITTING              ; $1BB8: $FE $0F
+    jp   z, ReplaceMarinTiles.sitting             ; $1BBA: $CA $F0 $1D
+    cp   REPLACE_TILES_MARIN_STANDING             ; $1BBD: $FE $10
+    jp   z, ReplaceMarinTiles.standingUp          ; $1BBF: $CA $E9 $1D
+
+    ; Invalid tiles replacement id: draw Link's sprite and return.
     jp   DrawLinkSpriteAndReturn                  ; $1BC2: $C3 $2E $1D
 
 .animateCreditsIslandFadeTiles
     jpsb AnimateCreditsIslandFadeTiles            ; $1BC5: $3E $17 $EA $00 $21 $C3 $62 $40
 
-.notFFA5
-    ; Increment hAnimatedTilesFrameCount
+.tilesReplacementEnd
+
+    ;
+    ; Animate tiles groups
+    ;
+
     ldh  a, [hAnimatedTilesFrameCount]            ; $1BCD: $F0 $A6
     inc  a                                        ; $1BCF: $3C
     ldh  [hAnimatedTilesFrameCount], a            ; $1BD0: $E0 $A6
@@ -558,28 +577,37 @@ label_1DE7::
 AnimateTiles_return::
     ret                                           ; $1DE8: $C9
 
-label_1DE9::
+; Switch a single Marin sprite (4 tiles) between the default
+; one (Marin standing up) and a special one (Marin sitting on the
+; ground).
+ReplaceMarinTiles::
+.standingUp
+    ; Marin default tile
     ld   hl, Npc1Tiles + $F00                     ; $1DE9: $21 $00 $4F
     ld   a, BANK(Npc1Tiles)                       ; $1DEC: $3E $0E
-    jr   label_1DF0.loadTiles                     ; $1DEE: $18 $05
+    jr   .copyTiles                               ; $1DEE: $18 $05
 
-label_1DF0::
+.sitting
+    ; Marin sitting on the ground
     ld   a, BANK(Npc3Tiles)                       ; $1DF0: $3E $12
     ld   hl, Npc3Tiles + $2080                    ; $1DF2: $21 $80 $60
 
-.loadTiles
+.copyTiles
     ld   [MBC3SelectBank], a                      ; $1DF5: $EA $00 $21
     ld   de, vTiles0 + $400                       ; $1DF8: $11 $00 $84
-    ld   bc, $40                                  ; $1DFB: $01 $40 $00
+    ld   bc, TILE_SIZE * 4                        ; $1DFB: $01 $40 $00
     jp   CopyDataAndDrawLinkSprite                ; $1DFE: $C3 $3B $1F
 
-label_1E01::
-    ; This has something to do with drawing the trading sequence item ...
-    ; changing TRADING_ITEM_RIBBON to 0 changes the order of shown trading items
-    ; @TODO Probably able to figure this out with a few minutes of time
+; Update the tile for the current trading item (4 tile),
+; then draw Link's sprite.
+ReplaceTradingItemTiles::
+    ; If the first object wasn't traded yet, skip tiles update
+    ; and just draw Link's prite.
     ld   a, [wTradeSequenceItem]                  ; $1E01: $FA $0E $DB
     cp   TRADING_ITEM_RIBBON                      ; $1E04: $FE $02
     jp  c, CopyDataAndDrawLinkSprite.drawLinkSprite ; $1E06: $DA $3E $1F
+
+    ; de = wTradeSequenceItem * 4
     sub  a, TRADING_ITEM_RIBBON                   ; $1E09: $D6 $02
     ld   d, a                                     ; $1E0B: $57
     ld   e, $00                                   ; $1E0C: $1E $00
@@ -587,11 +615,14 @@ label_1E01::
     rr   e                                        ; $1E10: $CB $1B
     sra  d                                        ; $1E12: $CB $2A
     rr   e                                        ; $1E14: $CB $1B
+
+    ; Copy 4 tiles from Items1Tiles + de to VRAM
     ld   hl, Items1Tiles                          ; $1E16: $21 $00 $44
     add  hl, de                                   ; $1E19: $19
     ld   de, vTiles1 + $1A0                       ; $1E1A: $11 $A0 $89
-    ld   bc, $40                                  ; $1E1D: $01 $40 $00
+    ld   bc, TILE_SIZE * 4                        ; $1E1D: $01 $40 $00
     ld   a, BANK(Items1Tiles)                     ; $1E20: $3E $0C
     call AdjustBankNumberForGBC                   ; $1E22: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $1E25: $EA $00 $21
+
     jp   CopyDataAndDrawLinkSprite                ; $1E28: $C3 $3B $1F

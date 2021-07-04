@@ -6204,8 +6204,8 @@ BananasSchuleState3Handler::
     ld   [wC167], a                               ; $6DED: $EA $67 $C1
     ld   a, $04                                   ; $6DF0: $3E $04
     ld   [wTradeSequenceItem], a                  ; $6DF2: $EA $0E $DB
-    ld   a, $0D                                   ; $6DF5: $3E $0D
-    ldh  [hFFA5], a                               ; $6DF7: $E0 $A5
+    ld   a, REPLACE_TILES_TRADING_ITEM            ; $6DF5: $3E $0D
+    ldh  [hReplaceTiles], a                       ; $6DF7: $E0 $A5
     call CreateTradingItemEntity                  ; $6DF9: $CD $0C $0C
     call IncrementEntityState                     ; $6DFC: $CD $12 $3B
     ld   [hl], b                                  ; $6DFF: $70

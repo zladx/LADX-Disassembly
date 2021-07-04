@@ -99,8 +99,8 @@ jr_006_40A0:
     ; reset wGoldenLeavesCount ???
     ld   a, $FF                                   ; $40B6: $3E $FF
     ld   [wGoldenLeavesCount], a                  ; $40B8: $EA $15 $DB
-    ld   a, $09                                   ; $40BB: $3E $09
-    ldh  [hFFA5], a                               ; $40BD: $E0 $A5
+    ld   a, REPLACE_TILES_GOLDEN_LEAF             ; $40BB: $3E $09
+    ldh  [hReplaceTiles], a                       ; $40BD: $E0 $A5
     ld   e, $3D                                   ; $40BF: $1E $3D
 
 label_006_40C1:

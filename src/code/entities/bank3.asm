@@ -3282,8 +3282,8 @@ HeartPieceState8Handler::
     ld   a, $06                                   ; $5B05: $3E $06
     ldh  [hNeedsUpdatingBGTiles], a               ; $5B07: $E0 $90
     call UnloadEntity                             ; $5B09: $CD $8D $3F
-    ld   a, $0D                                   ; $5B0C: $3E $0D
-    ldh  [hFFA5], a                               ; $5B0E: $E0 $A5
+    ld   a, REPLACE_TILES_TRADING_ITEM            ; $5B0C: $3E $0D
+    ldh  [hReplaceTiles], a                       ; $5B0E: $E0 $A5
     xor  a                                        ; $5B10: $AF
     ld   [wC167], a                               ; $5B11: $EA $67 $C1
     jp   MarkRoomCompleted                        ; $5B14: $C3 $2A $51
@@ -3689,8 +3689,8 @@ ELSE
     jr   nz, jr_003_5D80                          ; $5D6D: $20 $11
 ENDC
 
-    ld   a, $0A                                   ; $5D6F: $3E $0A
-    ldh  [hFFA5], a                               ; $5D71: $E0 $A5
+    ld   a, REPLACE_TILES_TOADSTOOL               ; $5D6F: $3E $0A
+    ldh  [hReplaceTiles], a                       ; $5D71: $E0 $A5
     ld   d, INVENTORY_MAGIC_POWDER                ; $5D73: $16 $0C
     call GiveInventoryItem                        ; $5D75: $CD $72 $64
     ld   a, TRUE                                  ; $5D78: $3E $01
@@ -4675,10 +4675,12 @@ collectPickableItem:
 ._3D dw PickSecretSeashell
 
 PickDroppableMagicPowder::
-    ld   a, $0B                                   ; $6350: $3E $0B
-    ldh  [hFFA5], a                               ; $6352: $E0 $A5
+    ld   a, REPLACE_TILES_MAGIC_POWDER            ; $6350: $3E $0B
+    ldh  [hReplaceTiles], a                       ; $6352: $E0 $A5
+
     ld   d, $0C                                   ; $6354: $16 $0C
-    call GiveInventoryItem                            ; $6356: $CD $72 $64
+    call GiveInventoryItem                        ; $6356: $CD $72 $64
+
     ld   hl, wMaxMagicPowder                      ; $6359: $21 $76 $DB
     ld   de, wMagicPowderCount                    ; $635C: $11 $4C $DB
 
@@ -4691,7 +4693,7 @@ jr_003_635F:
     daa                                           ; $6365: $27
     ld   [de], a                                  ; $6366: $12
 
-.return:
+.return
     ret                                           ; $6367: $C9
 
 PickSecretSeashell::

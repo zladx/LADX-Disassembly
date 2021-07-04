@@ -1513,8 +1513,8 @@ MrWriteState2Handler::
     call CreateTradingItemEntity                  ; $4C68: $CD $0C $0C
     ld   a, TRADING_ITEM_LETTER                   ; $4C6B: $3E $09
     ld   [wTradeSequenceItem], a                  ; $4C6D: $EA $0E $DB
-    ld   a, $0D                                   ; $4C70: $3E $0D
-    ldh  [hFFA5], a                               ; $4C72: $E0 $A5
+    ld   a, REPLACE_TILES_TRADING_ITEM            ; $4C70: $3E $0D
+    ldh  [hReplaceTiles], a                       ; $4C72: $E0 $A5
 
 jr_018_4C74:
     ret                                           ; $4C74: $C9
@@ -1594,8 +1594,8 @@ func_018_4CD1::
     call CreateTradingItemEntity                  ; $4CDF: $CD $0C $0C
     ld   a, TRADING_ITEM_BROOM                    ; $4CE2: $3E $0A
     ld   [wTradeSequenceItem], a                  ; $4CE4: $EA $0E $DB
-    ld   a, $0D                                   ; $4CE7: $3E $0D
-    ldh  [hFFA5], a                               ; $4CE9: $E0 $A5
+    ld   a, REPLACE_TILES_TRADING_ITEM            ; $4CE7: $3E $0D
+    ldh  [hReplaceTiles], a                       ; $4CE9: $E0 $A5
     ret                                           ; $4CEB: $C9
 
 jr_018_4CEC:
@@ -1747,8 +1747,8 @@ GrandmaUlriraState2Handler::
 
     ld   a, TRADING_ITEM_FISHING_HOOK             ; $4DE2: $3E $0B
     ld   [wTradeSequenceItem], a                  ; $4DE4: $EA $0E $DB
-    ld   a, $0D                                   ; $4DE7: $3E $0D
-    ldh  [hFFA5], a                               ; $4DE9: $E0 $A5
+    ld   a, REPLACE_TILES_TRADING_ITEM            ; $4DE7: $3E $0D
+    ldh  [hReplaceTiles], a                       ; $4DE9: $E0 $A5
     call_open_dialog $15D                         ; $4DEB
     jp   IncrementEntityState                     ; $4DF0: $C3 $12 $3B
 
@@ -1863,8 +1863,8 @@ PapahlsWifeState1Handler::
 
     ld   a, TRADING_ITEM_RIBBON                   ; $4EB4: $3E $02
     ld   [wTradeSequenceItem], a                  ; $4EB6: $EA $0E $DB
-    ld   a, $0D                                   ; $4EB9: $3E $0D
-    ldh  [hFFA5], a                               ; $4EBB: $E0 $A5
+    ld   a, REPLACE_TILES_TRADING_ITEM            ; $4EB9: $3E $0D
+    ldh  [hReplaceTiles], a                       ; $4EBB: $E0 $A5
     call_open_dialog $128                         ; $4EBD
     jp   IncrementEntityState                     ; $4EC2: $C3 $12 $3B
 
@@ -2110,8 +2110,8 @@ MadBatterState7Handler::
     call GiveInventoryItem_trampoline                               ; $5038: $CD $6B $3E
     xor  a                                        ; $503B: $AF
     ld   [wHasToadstool], a                       ; $503C: $EA $4B $DB
-    ld   a, $0B                                   ; $503F: $3E $0B
-    ldh  [hFFA5], a                               ; $5041: $E0 $A5
+    ld   a, REPLACE_TILES_MAGIC_POWDER            ; $503F: $3E $0B
+    ldh  [hReplaceTiles], a                       ; $5041: $E0 $A5
     ret                                           ; $5043: $C9
 
 jr_018_5044:
@@ -3751,8 +3751,8 @@ func_018_5B9D::
 
     ld   a, $40                                   ; $5BA3: $3E $40
     ld   [wD468], a                               ; $5BA5: $EA $68 $D4
-    ld   a, $0F                                   ; $5BA8: $3E $0F
-    ldh  [hFFA5], a                               ; $5BAA: $E0 $A5
+    ld   a, REPLACE_TILES_MARIN_SITTING           ; $5BA8: $3E $0F
+    ldh  [hReplaceTiles], a                       ; $5BAA: $E0 $A5
     ld   a, $01                                   ; $5BAC: $3E $01
     call SetEntitySpriteVariant                   ; $5BAE: $CD $0C $3B
     jp   IncrementEntityState                     ; $5BB1: $C3 $12 $3B
@@ -3769,8 +3769,8 @@ func_018_5BB4::
     ld   [hl], $01                                ; $5BC2: $36 $01
     ld   a, $04                                   ; $5BC4: $3E $04
     call SetEntitySpriteVariant                   ; $5BC6: $CD $0C $3B
-    ld   a, $10                                   ; $5BC9: $3E $10
-    ldh  [hFFA5], a                               ; $5BCB: $E0 $A5
+    ld   a, REPLACE_TILES_MARIN_STANDING          ; $5BC9: $3E $10
+    ldh  [hReplaceTiles], a                       ; $5BCB: $E0 $A5
     jp   IncrementEntityState                     ; $5BCD: $C3 $12 $3B
 
 func_018_5BD0::
@@ -3827,16 +3827,16 @@ func_018_5C07::
     and  $3F                                      ; $5C1F: $E6 $3F
     jr   nz, jr_018_5C32                          ; $5C21: $20 $0F
 
-    ld   e, $1E                                   ; $5C23: $1E $1E
+    ld   e, LOW($21E)                             ; $5C23: $1E $1E
     jr   jr_018_5C32                              ; $5C25: $18 $0B
 
 jr_018_5C27:
-    ld   e, $1B                                   ; $5C27: $1E $1B
+    ld   e, LOW($21B)                             ; $5C27: $1E $1B
     ld   a, [$DB47]                               ; $5C29: $FA $47 $DB
     cp   $80                                      ; $5C2C: $FE $80
     jr   nc, jr_018_5C32                          ; $5C2E: $30 $02
 
-    ld   e, $1D                                   ; $5C30: $1E $1D
+    ld   e, LOW($21D)                             ; $5C30: $1E $1D
 
 jr_018_5C32:
     ld   a, e                                     ; $5C32: $7B

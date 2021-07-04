@@ -15,7 +15,7 @@ section "HRAM", HRAM[$ff80]
 ; *******************************************************************
 
 ; Unused
- ds $10 ; FF80 - FF8F
+ds $10 ; FF80 - FF8F
 
 ; Beginning of the game-variables section of the HRAM
 hGameValuesSection::
@@ -156,8 +156,9 @@ hLinkVelocityZ::
 hAnimatedTilesGroup::
   ds 1 ; FFA4
 
-; Unlabeled
-hFFA5::
+; Individual tile to update
+; See REPLACE_TILES_* constants for possible values.
+hReplaceTiles::
   ds 1 ; FFA5
 
 ; Incremented every frame, wraps around $FF
@@ -285,9 +286,8 @@ hNextDefaultMusicTrack::
 hDMARoutine::
   ds $A ; FFC0 - FFC9
 
-; not used
-hFFCA:
-  ds 1 ; FFCA
+; Unused
+ds 1 ; FFCA
 
 ; The pressed buttons on the joypad.
 ; During all the time a button is pressed, the matching bit on this variable is set.
@@ -521,9 +521,8 @@ hLinkRoomPosition::
 hLinkFinalRoomPosition::
   ds 1 ; FFFB
 
-; not used
-hFFFC:
-  ds 1 ; FFFC
+; Unused
+ds 1 ; FFFC
 
 ; Is the engine currently rendering a frame.
 ; 0 = rendering is done, a frame is ready to be copied to VRAM,

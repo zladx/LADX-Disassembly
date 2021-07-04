@@ -8073,8 +8073,8 @@ ApplyLinkGroundPhysics_Default::
     ld   a, WAVE_SFX_SWITCH_BUTTON                ; $7820: $3E $0E
     ldh  [hWaveSfx], a                            ; $7822: $E0 $F3
 
-    ld   a, $03                                   ; $7824: $3E $03
-    ldh  [hFFA5], a                               ; $7826: $E0 $A5
+    ld   a, REPLACE_TILES_BUTTON_PRESSED          ; $7824: $3E $03
+    ldh  [hReplaceTiles], a                       ; $7826: $E0 $A5
 
     ; If switch pressed is kanalet gate switch, mark the gate as opened
     ldh  a, [hMapRoom]                            ; $7828: $F0 $F6

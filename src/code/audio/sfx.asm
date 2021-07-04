@@ -5218,7 +5218,7 @@ func_01F_66F3::
 
     call IncrementValueAtBC                       ; $66F7: $CD $75 $7A
     cp   $04                                      ; $66FA: $FE $04
-    jr   z, @+$0B                                 ; $66FC: $28 $09
+    jr   z, jr_01F_6707                           ; $66FC: $28 $09
 
 jr_01F_66FE:
     ld   hl, Data_01F_6712                        ; $66FE: $21 $12 $67

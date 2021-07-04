@@ -5763,7 +5763,7 @@ func_003_6AD7::
 jr_003_6ADA:
     call func_003_7F78                            ; $6ADA: $CD $78 $7F
     call GetEntityTransitionCountdown             ; $6ADD: $CD $05 $0C
-    jr   nz, @+$6C                                ; $6AE0: $20 $6A
+    jr   nz, func_003_6B48                        ; $6AE0: $20 $6A
 
     call UpdateEntityPosWithSpeed_03              ; $6AE2: $CD $25 $7F
     call ApplySwordIntersectionWithObjects        ; $6AE5: $CD $AB $7C

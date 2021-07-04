@@ -3515,7 +3515,7 @@ jr_018_5A3F:
     add  hl, bc                                   ; $5A42: $09
     ld   a, [hl]                                  ; $5A43: $7E
     and  a                                        ; $5A44: $A7
-    jr   nz, @+$47                                ; $5A45: $20 $45
+    jr   nz, jr_018_5A8C                          ; $5A45: $20 $45
 
     ld   a, [wTransitionSequenceCounter]          ; $5A47: $FA $6B $C1
     cp   $04                                      ; $5A4A: $FE $04
@@ -3561,10 +3561,13 @@ Data_018_5A88::
     db   $08, $F8
 
 Data_018_5A8A::
-    db   $06, $01, $FA, $C8, $C3, $A7, $28
+    db   $06, $01
 
-func_018_5A91::
-    ld   d, l                                     ; $5A91: $55
+jr_018_5A8C::
+    ld   a, [wC3C8]
+    and  a
+    jr   z, jr_018_5AE7
+
     ldh  a, [hFrameCounter]                       ; $5A92: $F0 $E7
     rra                                           ; $5A94: $1F
     rra                                           ; $5A95: $1F

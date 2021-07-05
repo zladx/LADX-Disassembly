@@ -496,7 +496,7 @@ jr_005_65D3:
 func_005_65D9::
     ld   a, ENTITY_HOT_HEAD                       ; $65D9: $3E $62
     call SpawnNewEntity_trampoline                ; $65DB: $CD $86 $3B
-    jr   c, @+$22                                 ; $65DE: $38 $20
+    jr   c, Data_005_6601 - 1                     ; $65DE: $38 $20
 
     ld   hl, wEntitiesPrivateState1Table          ; $65E0: $21 $B0 $C2
     add  hl, de                                   ; $65E3: $19
@@ -515,18 +515,19 @@ func_005_65D9::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $65FA: $21 $40 $C3
     add  hl, de                                   ; $65FD: $19
     ld   [hl], $C4                                ; $65FE: $36 $C4
+    ret                                           ; $6600: $C9
 
-Data_005_6600::
-    db   $C9, $F8, $08, $F8
+Data_005_6601::
+    db   $F8, $08, $F8, $08
 
-Data_005_6604::
-    db   $08, $FC, $FC, $04
+Data_005_6605::
+    db   $FC, $FC, $04, $04
 
-Data_005_6608::
-    db   $04, $F4, $0C, $F4
+Data_005_6609::
+    db   $F4, $0C, $F4, $0C
 
-Data_005_660C::
-    db   $0C, $F4, $F4, $0C, $0C
+Data_005_660D::
+    db   $F4, $F4, $0C, $0C
 
 func_005_6611::
     ld   a, $04                                   ; $6611: $3E $04
@@ -543,27 +544,27 @@ jr_005_6613:
     push bc                                       ; $6622: $C5
     ldh  a, [hMultiPurposeG]                               ; $6623: $F0 $E8
     ld   c, a                                     ; $6625: $4F
-    ld   hl, Data_005_6600                        ; $6626: $21 $00 $66
+    ld   hl, Data_005_6601 - 1                    ; $6626: $21 $00 $66
     add  hl, bc                                   ; $6629: $09
     ldh  a, [hMultiPurpose0]                      ; $662A: $F0 $D7
     add  [hl]                                     ; $662C: $86
     ld   hl, wEntitiesPosXTable                   ; $662D: $21 $00 $C2
     add  hl, de                                   ; $6630: $19
     ld   [hl], a                                  ; $6631: $77
-    ld   hl, Data_005_6604                        ; $6632: $21 $04 $66
+    ld   hl, Data_005_6605 - 1                    ; $6632: $21 $04 $66
     add  hl, bc                                   ; $6635: $09
     ldh  a, [hMultiPurpose1]                      ; $6636: $F0 $D8
     add  [hl]                                     ; $6638: $86
     ld   hl, wEntitiesPosYTable                   ; $6639: $21 $10 $C2
     add  hl, de                                   ; $663C: $19
     ld   [hl], a                                  ; $663D: $77
-    ld   hl, Data_005_6608                        ; $663E: $21 $08 $66
+    ld   hl, Data_005_6609 - 1                    ; $663E: $21 $08 $66
     add  hl, bc                                   ; $6641: $09
     ld   a, [hl]                                  ; $6642: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $6643: $21 $40 $C2
     add  hl, de                                   ; $6646: $19
     ld   [hl], a                                  ; $6647: $77
-    ld   hl, Data_005_660C                        ; $6648: $21 $0C $66
+    ld   hl, Data_005_660D - 1                    ; $6648: $21 $0C $66
     add  hl, bc                                   ; $664B: $09
     ld   a, [hl]                                  ; $664C: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $664D: $21 $50 $C2

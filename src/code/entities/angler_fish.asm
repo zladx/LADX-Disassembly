@@ -17,7 +17,7 @@ func_005_5584::
     call func_005_58D4                            ; $5587: $CD $D4 $58
     ldh  a, [hActiveEntityStatus]                 ; $558A: $F0 $EA
     cp   $05                                      ; $558C: $FE $05
-    jr   z, @+$3C                                 ; $558E: $28 $3A
+    jr   z, func_005_55CA                         ; $558E: $28 $3A
 
     ld   [wC1C6], a                               ; $5590: $EA $C6 $C1
     ld   hl, wEntitiesPrivateState2Table          ; $5593: $21 $C0 $C2

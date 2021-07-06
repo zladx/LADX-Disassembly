@@ -837,10 +837,10 @@ func_007_4537::
     call func_007_48FD                            ; $4576: $CD $FD $48
     ld   a, JINGLE_JUMP_DOWN                      ; $4579: $3E $08
     ldh  [hJingle], a                             ; $457B: $E0 $F2
-    ld   a, $0C                                   ; $457D: $3E $0C
+    ld   a, TRADING_ITEM_NECKLACE                 ; $457D: $3E $0C
     ld   [wTradeSequenceItem], a                  ; $457F: $EA $0E $DB
-    ld   a, $0D                                   ; $4582: $3E $0D
-    ldh  [hFFA5], a                               ; $4584: $E0 $A5
+    ld   a, REPLACE_TILES_TRADING_ITEM            ; $4582: $3E $0D
+    ldh  [hReplaceTiles], a                       ; $4584: $E0 $A5
 
 jr_007_4586:
     ld   a, $03                                   ; $4586: $3E $03
@@ -1258,9 +1258,9 @@ jr_007_4846:
     ret                                           ; $4853: $C9
 
 jr_007_4854:
-    ld   a, $0D                                   ; $4854: $3E $0D
+    ld   a, TRADING_ITEM_SCALE & REPLACE_TILES_TRADING_ITEM ; $4854: $3E $0D
     ld   [wTradeSequenceItem], a                  ; $4856: $EA $0E $DB
-    ldh  [hFFA5], a                               ; $4859: $E0 $A5
+    ldh  [hReplaceTiles], a                       ; $4859: $E0 $A5
     call CreateTradingItemEntity                  ; $485B: $CD $0C $0C
     call IncrementEntityState                     ; $485E: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $4861: $CD $05 $0C
@@ -1660,10 +1660,10 @@ func_007_4B1C::
 
     ld   [wMusicTrackTiming], a                               ; $4B27: $EA $0B $C1
     call_open_dialog $173                         ; $4B2A
-    ld   a, $08                                   ; $4B2F: $3E $08
+    ld   a, TRADING_ITEM_HIBISCUS                 ; $4B2F: $3E $08
     ld   [wTradeSequenceItem], a                  ; $4B31: $EA $0E $DB
-    ld   a, $0D                                   ; $4B34: $3E $0D
-    ldh  [hFFA5], a                               ; $4B36: $E0 $A5
+    ld   a, REPLACE_TILES_TRADING_ITEM            ; $4B34: $3E $0D
+    ldh  [hReplaceTiles], a                       ; $4B36: $E0 $A5
     jp   IncrementEntityState                     ; $4B38: $C3 $12 $3B
 
 jr_007_4B3B:
@@ -1820,8 +1820,8 @@ func_007_4C49::
 jr_007_4C5E:
     ld   a, TRADING_ITEM_PINEAPPLE                ; $4C5E: $3E $07
     ld   [wTradeSequenceItem], a                  ; $4C60: $EA $0E $DB
-    ld   a, $0D                                   ; $4C63: $3E $0D
-    ldh  [hFFA5], a                               ; $4C65: $E0 $A5
+    ld   a, REPLACE_TILES_TRADING_ITEM            ; $4C63: $3E $0D
+    ldh  [hReplaceTiles], a                       ; $4C65: $E0 $A5
     call CreateTradingItemEntity                  ; $4C67: $CD $0C $0C
     call GetEntityTransitionCountdown             ; $4C6A: $CD $05 $0C
     ld   [hl], $70                                ; $4C6D: $36 $70
@@ -2007,10 +2007,10 @@ func_007_4D4E::
 
     xor  a                                        ; $4D6D: $AF
     ld   [$DB7F], a                               ; $4D6E: $EA $7F $DB
-    ld   a, $06                                   ; $4D71: $3E $06
+    ld   a, TRADING_ITEM_HONEYCOMB                ; $4D71: $3E $06
     ld   [wTradeSequenceItem], a                  ; $4D73: $EA $0E $DB
-    ld   a, $0D                                   ; $4D76: $3E $0D
-    ldh  [hFFA5], a                               ; $4D78: $E0 $A5
+    ld   a, REPLACE_TILES_TRADING_ITEM            ; $4D76: $3E $0D
+    ldh  [hReplaceTiles], a                       ; $4D78: $E0 $A5
     call CreateTradingItemEntity                  ; $4D7A: $CD $0C $0C
     jp   func_007_7EA4                            ; $4D7D: $C3 $A4 $7E
 
@@ -3896,10 +3896,10 @@ jr_007_59C8:
     cp   $01                                      ; $59C8: $FE $01
     jr   nz, jr_007_59D5                          ; $59CA: $20 $09
 
-    ld   a, $05                                   ; $59CC: $3E $05
+    ld   a, TRADING_ITEM_STICK                    ; $59CC: $3E $05
     ld   [wTradeSequenceItem], a                  ; $59CE: $EA $0E $DB
-    ld   a, $0D                                   ; $59D1: $3E $0D
-    ldh  [hFFA5], a                               ; $59D3: $E0 $A5
+    ld   a, REPLACE_TILES_TRADING_ITEM            ; $59D1: $3E $0D
+    ldh  [hReplaceTiles], a                       ; $59D3: $E0 $A5
 
 jr_007_59D5:
     ldh  a, [hFrameCounter]                       ; $59D5: $F0 $E7

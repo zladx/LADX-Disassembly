@@ -2661,8 +2661,8 @@ func_036_503C::
     ldh  [hWaveSfx], a                            ; $5041: $E0 $F3
     ld   d, $0C                                   ; $5043: $16 $0C
     call GiveInventoryItem_trampoline                               ; $5045: $CD $6B $3E
-    ld   a, $0B                                   ; $5048: $3E $0B
-    ldh  [hFFA5], a                               ; $504A: $E0 $A5
+    ld   a, REPLACE_TILES_MAGIC_POWDER            ; $5048: $3E $0B
+    ldh  [hReplaceTiles], a                       ; $504A: $E0 $A5
     ld   hl, wMaxMagicPowder                      ; $504C: $21 $76 $DB
     ld   de, wMagicPowderCount                    ; $504F: $11 $4C $DB
     ld   a, [de]                                  ; $5052: $1A

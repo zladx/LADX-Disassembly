@@ -764,10 +764,10 @@ TarinShield4Handler::
     and  a                                        ; $4DAC: $A7
     jr   nz, jr_005_4DBD                          ; $4DAD: $20 $0E
 
-    ld   a, $04                                   ; $4DAF: $3E $04
+    ld   a, TRADING_ITEM_BANANAS                  ; $4DAF: $3E $04
     ld   [wTradeSequenceItem], a                  ; $4DB1: $EA $0E $DB
-    ld   a, $0D                                   ; $4DB4: $3E $0D
-    ldh  [hFFA5], a                               ; $4DB6: $E0 $A5
+    ld   a, REPLACE_TILES_TRADING_ITEM            ; $4DB4: $3E $0D
+    ldh  [hReplaceTiles], a                       ; $4DB6: $E0 $A5
     call CreateTradingItemEntity                  ; $4DB8: $CD $0C $0C
     jr   jr_005_4DC2                              ; $4DBB: $18 $05
 

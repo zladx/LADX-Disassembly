@@ -6545,8 +6545,8 @@ jr_004_7666:
     ld   [wMagicPowderCount], a                   ; $7666: $EA $4C $DB
     ld   d, $0C                                   ; $7669: $16 $0C
     call GiveInventoryItem_trampoline                               ; $766B: $CD $6B $3E
-    ld   a, $0B                                   ; $766E: $3E $0B
-    ldh  [hFFA5], a                               ; $7670: $E0 $A5
+    ld   a, REPLACE_TILES_MAGIC_POWDER            ; $766E: $3E $0B
+    ldh  [hReplaceTiles], a                       ; $7670: $E0 $A5
     ret                                           ; $7672: $C9
 
 jr_004_7673:

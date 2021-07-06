@@ -3315,11 +3315,20 @@ ReplaceMagicPowderTilesByToadstool::
     ld   de, $88E0                                ; $1E2E: $11 $E0 $88
     jr   ReplaceTilesPairAndDrawLinkSprite        ; $1E31: $18 $74
 
-label_1E33::
+; During the ending, progressively load the Sirens Instruments tiles
+; over the dialog text tiles (when Link faces the screen to play the
+; song of Awakening).
+;
+; Each call loads one instrument (4 tiles).
+;
+; Inputs:
+;   wCreditsScratch0  index of the instrument to load (0-7)
+ReplaceDialogTilesByInstruments::
     ld   a, BANK(Npc2Tiles)                       ; $1E33: $3E $11
     call AdjustBankNumberForGBC                   ; $1E35: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $1E38: $EA $00 $21
-    ld   a, [wIsFileSelectionArrowShifted]                               ; $1E3B: $FA $00 $D0
+
+    ld   a, [wCreditsScratch0]                    ; $1E3B: $FA $00 $D0
     swap a                                        ; $1E3E: $CB $37
     and  $F0                                      ; $1E40: $E6 $F0
     ld   e, a                                     ; $1E42: $5F
@@ -3328,28 +3337,32 @@ label_1E33::
     rl   d                                        ; $1E47: $CB $12
     sla  e                                        ; $1E49: $CB $23
     rl   d                                        ; $1E4B: $CB $12
+
     ld   hl, vTiles1 + $500                       ; $1E4D: $21 $00 $8D
     add  hl, de                                   ; $1E50: $19
     push hl                                       ; $1E51: $E5
     ld   hl, Npc2Tiles + $1000                    ; $1E52: $21 $00 $50
 
-label_1E55::
+ReplaceEndCreditsTiles::
     add  hl, de                                   ; $1E55: $19
     pop  de                                       ; $1E56: $D1
-    ld   bc, $40                                  ; $1E57: $01 $40 $00
+    ld   bc, TILE_SIZE * $4                       ; $1E57: $01 $40 $00
     call CopyData                                 ; $1E5A: $CD $14 $29
+
     xor  a                                        ; $1E5D: $AF
-    ldh  [hFFA5], a                               ; $1E5E: $E0 $A5
+    ldh  [hReplaceTiles], a                       ; $1E5E: $E0 $A5
+
     ld   a, $0C                                   ; $1E60: $3E $0C
     call AdjustBankNumberForGBC                   ; $1E62: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $1E65: $EA $00 $21
     ret                                           ; $1E68: $C9
 
-label_1E69::
+ReplaceTiles_08::
     ld   a, BANK(EndingTiles)                     ; $1E69: $3E $13
     call AdjustBankNumberForGBC                   ; $1E6B: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $1E6E: $EA $00 $21
-    ld   a, [wIsFileSelectionArrowShifted]                               ; $1E71: $FA $00 $D0
+
+    ld   a, [wCreditsScratch0]                    ; $1E71: $FA $00 $D0
     swap a                                        ; $1E74: $CB $37
     and  $F0                                      ; $1E76: $E6 $F0
     ld   e, a                                     ; $1E78: $5F
@@ -3362,15 +3375,15 @@ label_1E69::
     add  hl, de                                   ; $1E86: $19
     push hl                                       ; $1E87: $E5
     ld   hl, EndingTiles + $D00                   ; $1E88: $21 $00 $4D
-    jr   label_1E55                               ; $1E8B: $18 $C8
+    jr   ReplaceEndCreditsTiles                   ; $1E8B: $18 $C8
 
-label_1E8D::
+ReplaceToadstoolTilesByMagicPowder::
     ld   hl, InventoryEquipmentItemsTiles + $E0   ; $1E8D: $21 $E0 $48
     ld   de, $88E0                                ; $1E90: $11 $E0 $88
     ld   a, BANK(InventoryEquipmentItemsTiles)    ; $1E93: $3E $0C
     call AdjustBankNumberForGBC                   ; $1E95: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $1E98: $EA $00 $21
-    ld   bc, $20                                  ; $1E9B: $01 $20 $00
+    ld   bc, TILE_SIZE * 2                        ; $1E9B: $01 $20 $00
     jp   CopyDataAndDrawLinkSprite                ; $1E9E: $C3 $3B $1F
 
 ReplaceSlimeKeyTilesByGoldenLeaf::
@@ -3391,20 +3404,24 @@ ReplaceTilesPairAndDrawLinkSprite::
     ld   bc, TILE_SIZE * $2                       ; $1EAF: $01 $20 $00
     jp   CopyDataAndDrawLinkSprite                ; $1EB2: $C3 $3B $1F
 
-label_1EB5::
-    ld   hl, DungeonMinimapTiles + $100           ; $1EB5: $21 $00 $7F
+; TODO: label this.
+; Seems to be related to the tiles for a floor button being
+; pressed or not (but the tiles location don't match?)
+ReplaceTilesButtonPressed::
+    ld   hl, DungeonMinimapTiles + TILE_SIZE * 16 ; $1EB5: $21 $00 $7F
     ld   a, BANK(DungeonMinimapTiles)             ; $1EB8: $3E $12
-    jr   label_1EC1                               ; $1EBA: $18 $05
+    jr   ReplaceTiles_04.replaceTiles             ; $1EBA: $18 $05
 
-label_1EBC::
+; TODO: label this.
+ReplaceTiles_04::
     ld   hl, DungeonsTiles + $C40                 ; $1EBC: $21 $40 $4C
     ld   a, BANK(DungeonsTiles)                   ; $1EBF: $3E $0D
 
-label_1EC1::
+.replaceTiles
     call AdjustBankNumberForGBC                   ; $1EC1: $CD $0B $0B
     ld   [MBC3SelectBank], a                      ; $1EC4: $EA $00 $21
     ld   de, vTiles2 + $140                       ; $1EC7: $11 $40 $91
-    jp   label_1F38                               ; $1ECA: $C3 $38 $1F
+    jp   Copy4TilesAndDrawLinkSprite              ; $1ECA: $C3 $38 $1F
 
 ; Tiles for switch blocks during a transition
 ; Indexed by block kind.
@@ -3523,15 +3540,15 @@ UpdateSwitchBlockTiles::
 .skipCopyData
     jp   DrawLinkSpriteAndReturn                  ; $1F35: $C3 $2E $1D
 
-label_1F38::
-    ld   bc, $40                                  ; $1F38: $01 $40 $00
+Copy4TilesAndDrawLinkSprite::
+    ld   bc, TILE_SIZE * 4                        ; $1F38: $01 $40 $00
 
 CopyDataAndDrawLinkSprite::
     call CopyData                                 ; $1F3B: $CD $14 $29
 
 .drawLinkSprite
     xor  a                                        ; $1F3E: $AF
-    ldh  [hFFA5], a                               ; $1F3F: $E0 $A5
+    ldh  [hReplaceTiles], a                       ; $1F3F: $E0 $A5
     ld   a, BANK(LinkCharacterTiles)              ; $1F41: $3E $0C
     ld   [MBC3SelectBank], a                      ; $1F43: $EA $00 $21
     jp   DrawLinkSpriteAndReturn                  ; $1F46: $C3 $2E $1D
@@ -5062,33 +5079,35 @@ LoadIndoorTiles::
 
 .patchInventoryTiles
 
+    ; Replace Magic Powder tile by Toadstool if needed
     ld   a, [wHasToadstool]                       ; $2CFE: $FA $4B $DB
     and  a                                        ; $2D01: $A7
     jr   z, .noToadstoolEnd                       ; $2D02: $28 $03
     call ReplaceMagicPowderTilesByToadstool       ; $2D04: $CD $2B $1E
 .noToadstoolEnd
 
+    ; Replace Slime Key tile by Golden Leaf if needed
     ld   a, [wIsIndoor]                           ; $2D07: $FA $A5 $DB
     and  a                                        ; $2D0A: $A7
     jr   z, .jr_2D17                              ; $2D0B: $28 $0A
     ldh  a, [hMapId]                              ; $2D0D: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $2D0F: $FE $FF
-    jr   z, .jr_2D21                              ; $2D11: $28 $0E
+    jr   z, .goldenLeafEnd                        ; $2D11: $28 $0E
     cp   MAP_CAVE_B                               ; $2D13: $FE $0A
-    jr   c, .jr_2D21                              ; $2D15: $38 $0A
+    jr   c, .goldenLeafEnd                        ; $2D15: $38 $0A
 .jr_2D17
-
     ld   a, [wGoldenLeavesCount]                  ; $2D17: $FA $15 $DB
     cp   SLIME_KEY                                ; $2D1A: $FE $06
-    jr   c, .jr_2D21                              ; $2D1C: $38 $03
+    jr   c, .goldenLeafEnd                        ; $2D1C: $38 $03
     call ReplaceSlimeKeyTilesByGoldenLeaf         ; $2D1E: $CD $A1 $1E
+.goldenLeafEnd
 
-.jr_2D21
+    ; Update the trading sequence item tile if needed
     ld   a, [wTradeSequenceItem]                  ; $2D21: $FA $0E $DB
     cp   TRADING_ITEM_RIBBON                      ; $2D24: $FE $02
     jr   c, .return                               ; $2D26: $38 $04
-    ld   a, $0D                                   ; $2D28: $3E $0D
-    ldh  [hFFA5], a                               ; $2D2A: $E0 $A5
+    ld   a, REPLACE_TILES_TRADING_ITEM            ; $2D28: $3E $0D
+    ldh  [hReplaceTiles], a                       ; $2D2A: $E0 $A5
 
 .return
     ret                                           ; $2D2C: $C9
@@ -7578,31 +7597,33 @@ LoadThanksForPlayingTiles_trampoline::
 
 include "code/home/entities.asm"
 
-label_3F93::
-    ld   a, BANK(Data_005_59DE)                   ; $3F93: $3E $05
+ReplaceEvilEagleRiderVisibleTiles::
+    ld   a, BANK(EvilEagleRiderVisibleTiles)      ; $3F93: $3E $05
     ld   [MBC3SelectBank], a                      ; $3F95: $EA $00 $21
-    ld   hl, Data_005_59DE                        ; $3F98: $21 $DE $59
+    ld   hl, EvilEagleRiderVisibleTiles           ; $3F98: $21 $DE $59
     ld   de, vTiles0 + $460                       ; $3F9B: $11 $60 $84
-    ld   bc, $10                                  ; $3F9E: $01 $10 $00
+    ld   bc, TILE_SIZE * 1                        ; $3F9E: $01 $10 $00
     call CopyData                                 ; $3FA1: $CD $14 $29
-    ld   hl, Data_005_59DE + TILE_SIZE            ; $3FA4: $21 $EE $59
-    jr   label_3FBD                               ; $3FA7: $18 $14
+    ld   hl, EvilEagleRiderVisibleTiles + TILE_SIZE ; $3FA4: $21 $EE $59
+    jr   ReplaceEvilEagleRiderHiddenTiles.copyData ; $3FA7: $18 $14
 
-label_3FA9::
-    ld   a, BANK(Data_005_59FE)                   ; $3FA9: $3E $05
+ReplaceEvilEagleRiderHiddenTiles::
+    ld   a, BANK(EvilEagleRiderHiddenTiles)       ; $3FA9: $3E $05
     ld   [MBC3SelectBank], a                      ; $3FAB: $EA $00 $21
-    ld   hl, Data_005_59FE                        ; $3FAE: $21 $FE $59
+    ld   hl, EvilEagleRiderHiddenTiles            ; $3FAE: $21 $FE $59
     ld   de, vTiles0 + $460                       ; $3FB1: $11 $60 $84
-    ld   bc, $10                                  ; $3FB4: $01 $10 $00
+    ld   bc, TILE_SIZE * 1                        ; $3FB4: $01 $10 $00
     call CopyData                                 ; $3FB7: $CD $14 $29
-    ld   hl, Data_005_59FE + TILE_SIZE            ; $3FBA: $21 $0E $5A
+    ld   hl, EvilEagleRiderHiddenTiles + TILE_SIZE ; $3FBA: $21 $0E $5A
 
-label_3FBD::
+.copyData
     ld   de, vTiles0 + $480                       ; $3FBD: $11 $80 $84
     ld   bc, $10                                  ; $3FC0: $01 $10 $00
     call CopyData                                 ; $3FC3: $CD $14 $29
+
     xor  a                                        ; $3FC6: $AF
-    ldh  [hFFA5], a                               ; $3FC7: $E0 $A5
+    ldh  [hReplaceTiles], a                       ; $3FC7: $E0 $A5
+
     ld   a, BANK(LinkCharacterTiles)              ; $3FC9: $3E $0C
     ld   [MBC3SelectBank], a                      ; $3FCB: $EA $00 $21
     jp   DrawLinkSpriteAndReturn                  ; $3FCE: $C3 $2E $1D

@@ -143,8 +143,8 @@ YipYipState2Handler::
 
     ld   a, TRADING_ITEM_DOG_FOOD                 ; $5AAF: $3E $03
     ld   [wTradeSequenceItem], a                  ; $5AB1: $EA $0E $DB
-    ld   a, $0D                                   ; $5AB4: $3E $0D
-    ldh  [hFFA5], a                               ; $5AB6: $E0 $A5
+    ld   a, REPLACE_TILES_TRADING_ITEM            ; $5AB4: $3E $0D
+    ldh  [hReplaceTiles], a                       ; $5AB6: $E0 $A5
     call_open_dialog $183                         ; $5AB8
     call func_006_5ACC                            ; $5ABD: $CD $CC $5A
     jp   IncrementEntityState                     ; $5AC0: $C3 $12 $3B

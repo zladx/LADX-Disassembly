@@ -55,7 +55,9 @@ Data_017_4048::
 
 AnimateCreditsIslandFadeTiles::
 IF LANG_FR
-    ldh a, [hFFA5]
+    ; TODO: document what this code is doing
+    ; (hReplaceTiles isn't supposed to go above $10)
+    ldh a, [hReplaceTiles]
     cp $11
     jr nc, jr_017_40c1
 ENDC
@@ -100,7 +102,7 @@ jr_017_407D:
     jr   nz, jr_017_407D                          ; $4095: $20 $E6
 
     xor  a                                        ; $4097: $AF
-    ldh  [hFFA5], a                               ; $4098: $E0 $A5
+    ldh  [hReplaceTiles], a                       ; $4098: $E0 $A5
     ret                                           ; $409A: $C9
 
 IF LANG_FR
@@ -122,11 +124,11 @@ jr_017_40c8:
     ld hl, Data_017_40B1
 
 jr_017_40cb:
-    ld de, $8c80
-    ld bc, $0010
+    ld de, vTiles1 + $0480
+    ld bc, TILE_SIZE
     call CopyData
     xor a
-    ldh [hFFA5], a
+    ldh [hReplaceTiles], a
     jp DrawLinkSpriteAndReturn
 ENDC
 
@@ -1923,8 +1925,8 @@ CreditsPlayInstrumentsDialogHandler::
     call ResetCreditsSceneVariables               ; $5511: $CD $A5 $4D
     ld   a, LINK_ANIMATION_STATE_UNKNOWN_03       ; $5514: $3E $03
     ldh  [hLinkAnimationState], a                 ; $5516: $E0 $9D
-    ld   a, $0C                                   ; $5518: $3E $0C
-    ldh  [hFFA5], a                               ; $551A: $E0 $A5
+    ld   a, REPLACE_TILES_SIRENS_INSTRUMENT       ; $5518: $3E $0C
+    ldh  [hReplaceTiles], a                       ; $551A: $E0 $A5
     call IncrementCreditsSubscene                 ; $551C: $CD $D9 $4C
 
 jr_017_551F:
@@ -1943,8 +1945,8 @@ CreditsLinkTurnsToPlayHandler::
 jr_017_5532:
     inc  a                                        ; $5532: $3C
     ld   [wCreditsScratch0], a                    ; $5533: $EA $00 $D0
-    ld   a, $0C                                   ; $5536: $3E $0C
-    ldh  [hFFA5], a                               ; $5538: $E0 $A5
+    ld   a, REPLACE_TILES_SIRENS_INSTRUMENT       ; $5536: $3E $0C
+    ldh  [hReplaceTiles], a                       ; $5538: $E0 $A5
     ret                                           ; $553A: $C9
 
 Data_017_553B::
@@ -2573,8 +2575,8 @@ jr_017_5917:
 
     inc  a                                        ; $5927: $3C
     ld   [wD00B], a                               ; $5928: $EA $0B $D0
-    ld   a, $0E                                   ; $592B: $3E $0E
-    ldh  [hFFA5], a                               ; $592D: $E0 $A5
+    ld   a, REPLACE_TILES_ISLAND_FADE             ; $592B: $3E $0E
+    ldh  [hReplaceTiles], a                       ; $592D: $E0 $A5
     ret                                           ; $592F: $C9
 
 jr_017_5930:

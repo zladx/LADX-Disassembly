@@ -4,7 +4,7 @@ Data_003_7DD4::
 LikeLikeEntityHandler::
     ld   de, Data_003_7DD4                        ; $7DDC: $11 $D4 $7D
     call RenderActiveEntitySpritesPair            ; $7DDF: $CD $C0 $3B
-    call func_006_64C6                            ; $7DE2: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $7DE2: $CD $C6 $64
     call func_006_64F7                            ; $7DE5: $CD $F7 $64
     ld   hl, wEntitiesUnknownTableD               ; $7DE8: $21 $D0 $C2
     add  hl, bc                                   ; $7DEB: $09

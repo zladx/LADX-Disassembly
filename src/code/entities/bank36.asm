@@ -19,7 +19,7 @@ label_036_4000:
     call RenderActiveEntitySpritesPair            ; $400E: $CD $C0 $3B
 
 jr_036_4011:
-    call func_036_6A40                            ; $4011: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $4011: $CD $40 $6A
     ld   a, [wPhotos2]                            ; $4014: $FA $0D $DC
     and  $08                                      ; $4017: $E6 $08
     jp   nz, UnloadEntityAndReturn                ; $4019: $C2 $8D $3F
@@ -263,7 +263,7 @@ label_036_4178:
     ld   de, Data_036_48F2                        ; $4178: $11 $F2 $48
     call RenderActiveEntitySpritesPair            ; $417B: $CD $C0 $3B
     call func_036_6B5C                            ; $417E: $CD $5C $6B
-    call func_036_6A46                            ; $4181: $CD $46 $6A
+    call ReturnIfNonInteractive_36.allowInactiveEntity ; $4181: $CD $46 $6A
     ldh  a, [hActiveEntityState]                  ; $4184: $F0 $F0
     and  a                                        ; $4186: $A7
     jr   z, jr_036_41A0                           ; $4187: $28 $17
@@ -480,7 +480,7 @@ jr_036_42D4:
     call label_3DA0                               ; $42EA: $CD $A0 $3D
     call func_036_6B5C                            ; $42ED: $CD $5C $6B
     call CheckLinkCollisionWithEnemy_trampoline   ; $42F0: $CD $5A $3B
-    call func_036_6A46                            ; $42F3: $CD $46 $6A
+    call ReturnIfNonInteractive_36.allowInactiveEntity ; $42F3: $CD $46 $6A
     ldh  a, [hActiveEntityState]                  ; $42F6: $F0 $F0
     and  a                                        ; $42F8: $A7
     jr   z, jr_036_4329                           ; $42F9: $28 $2E
@@ -1277,7 +1277,7 @@ label_036_4791:
 
     ld   de, Data_036_48FA                        ; $4796: $11 $FA $48
     call RenderActiveEntitySpritesPair            ; $4799: $CD $C0 $3B
-    call func_036_6A40                            ; $479C: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $479C: $CD $40 $6A
     ld   a, [wGameplayType]                       ; $479F: $FA $95 $DB
     cp   $0B                                      ; $47A2: $FE $0B
     ret  nz                                       ; $47A4: $C0
@@ -1519,7 +1519,7 @@ PhotographerEntityHandler::
 
     ld   de, Data_036_48CE                        ; $4950: $11 $CE $48
     call RenderActiveEntitySpritesPair            ; $4953: $CD $C0 $3B
-    call func_036_6A40                            ; $4956: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $4956: $CD $40 $6A
     ldh  a, [hActiveEntityState]                  ; $4959: $F0 $F0
     JP_TABLE                                      ; $495B: $C7
 ._00 dw func_036_49D0
@@ -2136,7 +2136,7 @@ HardhitBeetleEntityHandler::
 
 jr_036_4CD5:
     call BossIntro                                ; $4CD5: $CD $E8 $3E
-    call func_036_6A40                            ; $4CD8: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $4CD8: $CD $40 $6A
     call UpdateEntityPosWithSpeed_36              ; $4CDB: $CD $62 $6A
     ld   de, Data_036_4CB4                        ; $4CDE: $11 $B4 $4C
     call func_036_6C90                            ; $4CE1: $CD $90 $6C
@@ -2587,7 +2587,7 @@ jr_036_4FB1:
     call label_3DA0                               ; $4FC6: $CD $A0 $3D
     pop  af                                       ; $4FC9: $F1
     ld   [wCurrentBank], a                        ; $4FCA: $EA $AF $DB
-    call func_036_6A40                            ; $4FCD: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $4FCD: $CD $40 $6A
     ld   a, [wCurrentBank]                        ; $4FD0: $FA $AF $DB
     push af                                       ; $4FD3: $F5
     ld   a, $36                                   ; $4FD4: $3E $36
@@ -3379,7 +3379,7 @@ GiantBuzzBlobEntityHandler::
 jr_036_54FE:
     call BossIntro                                ; $54FE: $CD $E8 $3E
     call DecrementEntityIgnoreHitsCountdown       ; $5501: $CD $56 $0C
-    call func_036_6A40                            ; $5504: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $5504: $CD $40 $6A
     ldh  a, [hActiveEntityState]                  ; $5507: $F0 $F0
     cp   $03                                      ; $5509: $FE $03
     jr   c, jr_036_5510                           ; $550B: $38 $03
@@ -4383,7 +4383,7 @@ Data_036_5ADC::
 label_036_5AE4:
     ld   de, Data_036_5ADC                        ; $5AE4: $11 $DC $5A
     call RenderActiveEntitySpritesPair            ; $5AE7: $CD $C0 $3B
-    call func_036_6A40                            ; $5AEA: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $5AEA: $CD $40 $6A
     call DecrementEntityIgnoreHitsCountdown       ; $5AED: $CD $56 $0C
     call label_3B39                               ; $5AF0: $CD $39 $3B
     call UpdateEntityPosWithSpeed_36              ; $5AF3: $CD $62 $6A
@@ -4398,7 +4398,7 @@ Data_036_5AFC::
 jr_036_5B1C:
     ld   de, Data_036_5AFC                        ; $5B1C: $11 $FC $5A
     call RenderActiveEntitySpritesPair            ; $5B1F: $CD $C0 $3B
-    call func_036_6A40                            ; $5B22: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $5B22: $CD $40 $6A
     call DecrementEntityIgnoreHitsCountdown       ; $5B25: $CD $56 $0C
     call label_3B39                               ; $5B28: $CD $39 $3B
     call UpdateEntityPosWithSpeed_36              ; $5B2B: $CD $62 $6A
@@ -4448,7 +4448,7 @@ jr_036_5B73:
 
     ld   de, Data_036_5B42                        ; $5B7E: $11 $42 $5B
     call RenderActiveEntitySpritesPair            ; $5B81: $CD $C0 $3B
-    call func_036_6A40                            ; $5B84: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $5B84: $CD $40 $6A
     call DecrementEntityIgnoreHitsCountdown       ; $5B87: $CD $56 $0C
     call label_3B39                               ; $5B8A: $CD $39 $3B
     ldh  a, [hFrameCounter]                       ; $5B8D: $F0 $E7
@@ -4529,7 +4529,7 @@ AvalaunchEntityHandler::
     jr   nz, label_036_5C3C                       ; $5C08: $20 $32
 
     call BossIntro                                ; $5C0A: $CD $E8 $3E
-    call func_036_6A40                            ; $5C0D: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $5C0D: $CD $40 $6A
     ld   a, [wC190]                               ; $5C10: $FA $90 $C1
     and  a                                        ; $5C13: $A7
     ret  z                                        ; $5C14: $C8
@@ -4633,7 +4633,7 @@ func_036_5C8B::
     ld   hl, hActiveEntityVisualPosY              ; $5CA3: $21 $EC $FF
     add  [hl]                                     ; $5CA6: $86
     ld   [hl], a                                  ; $5CA7: $77
-    call func_036_6A46                            ; $5CA8: $CD $46 $6A
+    call ReturnIfNonInteractive_36.allowInactiveEntity ; $5CA8: $CD $46 $6A
 
 func_036_5CAB::
     ldh  a, [hActiveEntityPosX]                   ; $5CAB: $F0 $EE
@@ -5148,7 +5148,7 @@ jr_036_5F92:
 FlyingHopperBombsEntityHandler::
 HopperEntityHandler::
     call func_036_6219                            ; $5FA2: $CD $19 $62
-    call func_036_6A40                            ; $5FA5: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $5FA5: $CD $40 $6A
     call label_3B70                               ; $5FA8: $CD $70 $3B
     call UpdateEntityPosWithSpeed_36              ; $5FAB: $CD $62 $6A
     call label_3CD9                               ; $5FAE: $CD $D9 $3C
@@ -5645,7 +5645,7 @@ jr_036_625F:
 ._02 dw RotoswitchState2Handler
 
 RotoswitchState0Handler::
-    call func_036_6A40                            ; $626D: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $626D: $CD $40 $6A
     call label_3B70                               ; $6270: $CD $70 $3B
 
 jr_036_6273:
@@ -5890,7 +5890,7 @@ ColorGhoulBlueEntityHandler::
     call func_036_6629                            ; $63C9: $CD $29 $66
     ldh  a, [hActiveEntityStatus]                 ; $63CC: $F0 $EA
     cp   $05                                      ; $63CE: $FE $05
-    call func_036_6A40                            ; $63D0: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $63D0: $CD $40 $6A
     call PointHLToEntitySpriteVariant             ; $63D3: $CD $02 $6C
     ld   a, [hl]                                  ; $63D6: $7E
     and  a                                        ; $63D7: $A7
@@ -6282,7 +6282,7 @@ ColorShellRedEntityHandler::
 ColorShellGreenEntityHandler::
 ColorShellBlueEntityHandler::
     call func_036_69D9                            ; $6668: $CD $D9 $69
-    call func_036_6A40                            ; $666B: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $666B: $CD $40 $6A
     ldh  a, [hActiveEntityState]                  ; $666E: $F0 $F0
     cp   $0C                                      ; $6670: $FE $0C
     jr   z, jr_036_6677                           ; $6672: $28 $03
@@ -6972,32 +6972,42 @@ jr_036_6A32:
     call label_3DA0                               ; $6A3C: $CD $A0 $3D
     ret                                           ; $6A3F: $C9
 
+; ----------------------------------------------------------------------
+;
+; ENTITY COMMON HELPERS
+;
+; These helpers are defined (with small variants) in most entity banks.
+;
+; ----------------------------------------------------------------------
 
-func_036_6A40::
+; If the entity is disabled or the game is in a dialog or transition,
+; return to the caller directly, skipping the rest of the code.
+ReturnIfNonInteractive_36::
     ldh  a, [hActiveEntityStatus]                 ; $6A40: $F0 $EA
     cp   $05                                      ; $6A42: $FE $05
-    jr   nz, jr_036_6A60                          ; $6A44: $20 $1A
+    jr   nz, .skip                                ; $6A44: $20 $1A
 
-func_036_6A46::
+.allowInactiveEntity
     ld   a, [wGameplayType]                       ; $6A46: $FA $95 $DB
-    cp   $07                                      ; $6A49: $FE $07
-    jr   z, jr_036_6A60                           ; $6A4B: $28 $13
+    cp   GAMEPLAY_WORLD_MAP                       ; $6A49: $FE $07
+    jr   z, .skip                                 ; $6A4B: $28 $13
 
     ld   a, [wDialogState]                        ; $6A4D: $FA $9F $C1
     ld   hl, wC1A8                                ; $6A50: $21 $A8 $C1
     or   [hl]                                     ; $6A53: $B6
     ld   hl, wInventoryAppearing                  ; $6A54: $21 $4F $C1
     or   [hl]                                     ; $6A57: $B6
-    jr   nz, jr_036_6A60                          ; $6A58: $20 $06
+    jr   nz, .skip                                ; $6A58: $20 $06
 
     ld   a, [wRoomTransitionState]                ; $6A5A: $FA $24 $C1
     and  a                                        ; $6A5D: $A7
-    jr   z, jr_036_6A61                           ; $6A5E: $28 $01
+    jr   z, .return                               ; $6A5E: $28 $01
 
-jr_036_6A60:
+.skip
+    ; pop the return address to return to caller
     pop  af                                       ; $6A60: $F1
 
-jr_036_6A61:
+.return
     ret                                           ; $6A61: $C9
 
 UpdateEntityPosWithSpeed_36::
@@ -7650,7 +7660,7 @@ jr_036_6E3B:
     ret                                           ; $6E3E: $C9
 
 jr_036_6E3F:
-    call func_036_6A40                            ; $6E3F: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $6E3F: $CD $40 $6A
     ldh  a, [hActiveEntityType]                   ; $6E42: $F0 $EB
     cp   ENTITY_TILE_GLINT_SHOWN                  ; $6E44: $FE $8A
     jr   nz, .tileGlintShownEnd                   ; $6E46: $20 $0F
@@ -7764,7 +7774,7 @@ PiranhaPlantEntityHandler::
     cp   $04                                      ; $6EEB: $FE $04
     ret  nz                                       ; $6EED: $C0
 
-    call func_036_6A40                            ; $6EEE: $CD $40 $6A
+    call ReturnIfNonInteractive_36                ; $6EEE: $CD $40 $6A
     ld   hl, wEntitiesPrivateState2Table          ; $6EF1: $21 $C0 $C2
     add  hl, bc                                   ; $6EF4: $09
     ld   a, [hl]                                  ; $6EF5: $7E

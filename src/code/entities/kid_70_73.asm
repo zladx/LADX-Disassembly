@@ -11,7 +11,7 @@ Kid73EntityHandler::
 jr_006_621C:
     ld   de, Data_006_604D                        ; $621C: $11 $4D $60
     call RenderActiveEntitySpritesPair            ; $621F: $CD $C0 $3B
-    call func_006_64C6                            ; $6222: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $6222: $CD $C6 $64
     ldh  a, [hFrameCounter]                       ; $6225: $F0 $E7
     rra                                           ; $6227: $1F
     rra                                           ; $6228: $1F

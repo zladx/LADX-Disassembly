@@ -20,7 +20,7 @@ Kid72EntityHandler::
 
     ld   de, Data_006_607D                        ; $6087: $11 $7D $60
     call RenderActiveEntitySprite                 ; $608A: $CD $77 $3C
-    call func_006_64C6                            ; $608D: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $608D: $CD $C6 $64
     call UpdateEntityPosWithSpeed_06              ; $6090: $CD $41 $65
     call AddEntityZSpeedToPos_06                  ; $6093: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $6096: $21 $20 $C3
@@ -81,7 +81,7 @@ jr_006_60D0:
 ._02 dw func_006_6134                             ; $60E3
 
 func_006_60E5::
-    call func_006_64C6                            ; $60E5: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $60E5: $CD $C6 $64
     ld   hl, wEntitiesPrivateState2Table          ; $60E8: $21 $C0 $C2
     add  hl, bc                                   ; $60EB: $09
     ld   [hl], $30                                ; $60EC: $36 $30
@@ -99,7 +99,7 @@ label_006_60F7:
     ret                                           ; $60FC: $C9
 
 func_006_60FD::
-    call func_006_64C6                            ; $60FD: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $60FD: $CD $C6 $64
     call func_006_65A4                            ; $6100: $CD $A4 $65
     add  $20                                      ; $6103: $C6 $20
     cp   $40                                      ; $6105: $FE $40
@@ -182,7 +182,7 @@ label_006_6170:
     ldh  [hActiveEntitySpriteVariant], a          ; $6177: $E0 $F1
     ld   de, Data_006_606D                        ; $6179: $11 $6D $60
     call RenderActiveEntitySpritesPair            ; $617C: $CD $C0 $3B
-    call func_006_64C6                            ; $617F: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $617F: $CD $C6 $64
     call func_006_6230                            ; $6182: $CD $30 $62
     call AddEntityZSpeedToPos_06                  ; $6185: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $6188: $21 $20 $C3

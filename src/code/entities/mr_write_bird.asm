@@ -39,7 +39,7 @@ jr_006_725A:
 
 jr_006_7266:
     call RenderActiveEntitySpritesPair            ; $7266: $CD $C0 $3B
-    call func_006_64C6                            ; $7269: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $7269: $CD $C6 $64
     ld   a, [wIsIndoor]                           ; $726C: $FA $A5 $DB
     and  a                                        ; $726F: $A7
     jp   z, label_006_7372                        ; $7270: $CA $72 $73

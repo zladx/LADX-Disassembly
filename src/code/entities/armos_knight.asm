@@ -92,7 +92,7 @@ ArmosKnightPrivateState3Handler::
     ret                                           ; $5360: $C9
 
 jr_006_5361:
-    call func_006_64C6                            ; $5361: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $5361: $CD $C6 $64
     call BossIntro                                ; $5364: $CD $E8 $3E
     call label_3B70                               ; $5367: $CD $70 $3B
     call func_006_641A                            ; $536A: $CD $1A $64

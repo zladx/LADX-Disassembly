@@ -29,7 +29,7 @@ jr_006_4B98:
     cp   $05                                      ; $4BA0: $FE $05
     jp   nz, label_006_5308                       ; $4BA2: $C2 $08 $53
 
-    call func_006_64C6                            ; $4BA5: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $4BA5: $CD $C6 $64
     call BossIntro                                ; $4BA8: $CD $E8 $3E
     call DecrementEntityIgnoreHitsCountdown       ; $4BAB: $CD $56 $0C
     call label_3B44                               ; $4BAE: $CD $44 $3B
@@ -357,7 +357,7 @@ Data_006_4E78::
 label_006_4E88:
     ld   de, Data_006_4E78                        ; $4E88: $11 $78 $4E
     call RenderActiveEntitySpritesPair            ; $4E8B: $CD $C0 $3B
-    call func_006_64C6                            ; $4E8E: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $4E8E: $CD $C6 $64
     call GetEntityTransitionCountdown             ; $4E91: $CD $05 $0C
     jp   z, ClearEntityStatus_06                  ; $4E94: $CA $DB $65
 

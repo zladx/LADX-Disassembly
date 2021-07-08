@@ -27,7 +27,7 @@ HookshotHitEntityHandler::
 jr_003_69D9:
     ld   de, Data_003_69AA                        ; $69D9: $11 $AA $69
     call func_003_6AD7                            ; $69DC: $CD $D7 $6A
-    call func_003_7F78                            ; $69DF: $CD $78 $7F
+    call ReturnIfNonInteractive_03                ; $69DF: $CD $78 $7F
     ld   a, [wIsIndoor]                           ; $69E2: $FA $A5 $DB
     and  a                                        ; $69E5: $A7
     ldh  a, [hObjectUnderEntity]                  ; $69E6: $F0 $AF

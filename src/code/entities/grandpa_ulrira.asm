@@ -17,7 +17,7 @@ GrandpaUlriraEntityHandler::
     ld   [hl], a                                  ; $5C26: $77
     pop  bc                                       ; $5C27: $C1
     call func_006_5C71                            ; $5C28: $CD $71 $5C
-    call func_006_64C6                            ; $5C2B: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $5C2B: $CD $C6 $64
     ldh  a, [hFrameCounter]                       ; $5C2E: $F0 $E7
     rra                                           ; $5C30: $1F
     rra                                           ; $5C31: $1F

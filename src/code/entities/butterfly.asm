@@ -22,7 +22,7 @@ ButterflyEntityHandler::
 
     ld   de, ButterflyOAMAttributes                     ; $6BD5: $11 $BD $6B
     call RenderActiveEntitySprite                 ; $6BD8: $CD $77 $3C
-    call func_006_64C6                            ; $6BDB: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $6BDB: $CD $C6 $64
 
     ;
     ; Flip the wings every $1F frames

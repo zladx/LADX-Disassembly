@@ -128,7 +128,7 @@ jr_006_714A:
     add  hl, bc                                   ; $714D: $09
     ld   [hl], e                                  ; $714E: $73
     call AddEntityZSpeedToPos_06                  ; $714F: $CD $7A $65
-    call func_006_64C6                            ; $7152: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $7152: $CD $C6 $64
     ldh  a, [hActiveEntityState]                  ; $7155: $F0 $F0
     JP_TABLE                                      ; $7157
 ._00 dw BigFairyWaitingHandler
@@ -173,7 +173,7 @@ jr_006_7197:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7199: $E0 $A1
     ld   a, JINGLE_FAIRY_HEALING                  ; $719B: $3E $1A
     ldh  [hJingle], a                             ; $719D: $E0 $F2
-    call func_006_64C6                            ; $719F: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $719F: $CD $C6 $64
     ld   hl, wEntitiesPrivateCountdown2Table      ; $71A2: $21 $00 $C3
     add  hl, bc                                   ; $71A5: $09
     ld   a, [hl]                                  ; $71A6: $7E

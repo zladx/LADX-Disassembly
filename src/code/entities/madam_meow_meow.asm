@@ -55,7 +55,7 @@ jr_006_5BB6:
     ld   [hl], $10                                ; $5BC2: $36 $10
 
 jr_006_5BC4:
-    call func_006_64C6                            ; $5BC4: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $5BC4: $CD $C6 $64
     ldh  a, [hActiveEntityPosY]                   ; $5BC7: $F0 $EF
     ldh  [hActiveEntityVisualPosY], a             ; $5BC9: $E0 $EC
     call func_006_641A                            ; $5BCB: $CD $1A $64

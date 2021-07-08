@@ -6,7 +6,7 @@ DroppableFairyEntityHandler::
     call func_003_608C                            ; $615E: $CD $8C $60
     ld   de, data_003_6157                        ; $6161: $11 $57 $61
     call RenderActiveEntitySprite                 ; $6164: $CD $77 $3C
-    call func_003_7F78                            ; $6167: $CD $78 $7F
+    call ReturnIfNonInteractive_03                ; $6167: $CD $78 $7F
     call func_003_62AF                            ; $616A: $CD $AF $62
     call func_003_62EB                            ; $616D: $CD $EB $62
     ld   hl, wEntitiesSpeedXTable                       ; $6170: $21 $40 $C2

@@ -39,7 +39,7 @@ jr_006_453F:
     cp   $05                                      ; $4547: $FE $05
     jp   nz, label_006_5308                       ; $4549: $C2 $08 $53
 
-    call func_006_64C6                            ; $454C: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $454C: $CD $C6 $64
     call func_006_64F7                            ; $454F: $CD $F7 $64
     call label_3B39                               ; $4552: $CD $39 $3B
     call AddEntityZSpeedToPos_06                  ; $4555: $CD $7A $65
@@ -366,7 +366,7 @@ label_006_4781:
     ld   [hl], $FF                                ; $478B: $36 $FF
     ld   de, Data_006_477D                        ; $478D: $11 $7D $47
     call RenderActiveEntitySpritesPair            ; $4790: $CD $C0 $3B
-    call func_006_64C6                            ; $4793: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $4793: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $4796: $CD $56 $0C
     call label_3B70                               ; $4799: $CD $70 $3B
     call UpdateEntityPosWithSpeed_06              ; $479C: $CD $41 $65

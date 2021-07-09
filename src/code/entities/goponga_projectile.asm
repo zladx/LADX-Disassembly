@@ -65,7 +65,7 @@ jr_006_63CE:
 
 jr_006_63DD:
     ld   [hl], b                                  ; $63DD: $70
-    call func_006_64C6                            ; $63DE: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $63DE: $CD $C6 $64
     ldh  a, [hFrameCounter]                       ; $63E1: $F0 $E7
     rra                                           ; $63E3: $1F
     rra                                           ; $63E4: $1F

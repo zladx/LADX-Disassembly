@@ -14,7 +14,7 @@ HardHatBeetleEntityHandler::
 
 jr_006_4F48:
     call RenderActiveEntitySpritesPair            ; $4F48: $CD $C0 $3B
-    call func_006_64C6                            ; $4F4B: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $4F4B: $CD $C6 $64
     call func_006_64F7                            ; $4F4E: $CD $F7 $64
     call label_3B39                               ; $4F51: $CD $39 $3B
     call UpdateEntityPosWithSpeed_06              ; $4F54: $CD $41 $65

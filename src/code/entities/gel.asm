@@ -30,7 +30,7 @@ jr_006_7C2B:
 jr_006_7C2E:
     ld   hl, wC1AE                                ; $7C2E: $21 $AE $C1
     inc  [hl]                                     ; $7C31: $34
-    call func_006_64C6                            ; $7C32: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $7C32: $CD $C6 $64
     call AddEntityZSpeedToPos_06                  ; $7C35: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $7C38: $21 $20 $C3
     add  hl, bc                                   ; $7C3B: $09

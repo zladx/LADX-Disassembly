@@ -155,7 +155,7 @@ func_006_56C7::
     ret                                           ; $56C7: $C9
 
 label_006_56C8:
-    call func_006_64C6                            ; $56C8: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $56C8: $CD $C6 $64
     call BossIntro                                ; $56CB: $CD $E8 $3E
     call GetEntityPrivateCountdown1               ; $56CE: $CD $00 $0C
     jr   z, jr_006_5726                           ; $56D1: $28 $53
@@ -618,7 +618,7 @@ Data_006_5980::
 label_006_5988:
     ld   de, Data_006_5980                        ; $5988: $11 $80 $59
     call RenderActiveEntitySprite                 ; $598B: $CD $77 $3C
-    call func_006_64C6                            ; $598E: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $598E: $CD $C6 $64
     call UpdateEntityPosWithSpeed_06              ; $5991: $CD $41 $65
     ld   hl, wEntitiesSpeedYTable                 ; $5994: $21 $50 $C2
     add  hl, bc                                   ; $5997: $09

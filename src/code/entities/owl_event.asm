@@ -258,7 +258,7 @@ jr_006_6951:
     jp   func_006_6A2B                            ; $696F: $C3 $2B $6A
 
 OwlState2Handler::
-    call func_006_64C6                            ; $6972: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $6972: $CD $C6 $64
     call func_006_641A                            ; $6975: $CD $1A $64
     ld   a, [wTransitionSequenceCounter]          ; $6978: $FA $6B $C1
     cp   $04                                      ; $697B: $FE $04
@@ -287,7 +287,7 @@ jr_006_6993:
     ret                                           ; $69A0: $C9
 
 OwlState3Handler::
-    call func_006_64C6                            ; $69A1: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $69A1: $CD $C6 $64
     ldh  a, [hMapRoom]                            ; $69A4: $F0 $F6
     cp   UNKNOWN_ROOM_06                          ; $69A6: $FE $06
     jr   z, jr_006_69B2                           ; $69A8: $28 $08
@@ -316,7 +316,7 @@ func_006_69BD::
     jp   SetEntitySpriteVariant                   ; $69C7: $C3 $0C $3B
 
 OwlState4Handler::
-    call func_006_64C6                            ; $69CA: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $69CA: $CD $C6 $64
     call func_006_69BD                            ; $69CD: $CD $BD $69
     call UpdateEntityPosWithSpeed_06              ; $69D0: $CD $41 $65
     call func_006_5E54                            ; $69D3: $CD $54 $5E

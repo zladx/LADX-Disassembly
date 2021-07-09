@@ -20,7 +20,7 @@ jr_006_6EED:
     ld   a, c                                     ; $6EF4: $79
     ld   [$D201], a                               ; $6EF5: $EA $01 $D2
     call func_006_6FEA                            ; $6EF8: $CD $EA $6F
-    call func_006_64C6                            ; $6EFB: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $6EFB: $CD $C6 $64
     ld   a, [$D202]                               ; $6EFE: $FA $02 $D2
     ld   e, a                                     ; $6F01: $5F
     ld   d, b                                     ; $6F02: $50

@@ -916,7 +916,7 @@ EntityDestructionHandler::
     ld   a, [hl]                                  ; $4C64: $7E
     ldh  [hActiveEntitySpriteVariant], a          ; $4C65: $E0 $F1
     call ExecuteActiveEntityHandler_trampoline    ; $4C67: $CD $81 $3A
-    call func_003_7F7E                            ; $4C6A: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity ; $4C6A: $CD $7E $7F
     call func_003_7FA9                            ; $4C6D: $CD $A9 $7F
     call func_003_60B3                            ; $4C70: $CD $B3 $60
 IF __PATCH_0__
@@ -1043,7 +1043,7 @@ jr_003_4D19:
 
 jr_003_4D22:
     call ExecuteActiveEntityHandler_trampoline    ; $4D22: $CD $81 $3A
-    call func_003_7F7E                            ; $4D25: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity ; $4D25: $CD $7E $7F
     ret                                           ; $4D28: $C9
 
 jr_003_4D29:
@@ -1078,7 +1078,7 @@ jr_003_4D51:
     call RenderActiveEntitySprite                 ; $4D54: $CD $77 $3C
 
 jr_003_4D57:
-    call func_003_7F7E                            ; $4D57: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity ; $4D57: $CD $7E $7F
     call GetEntityTransitionCountdown             ; $4D5A: $CD $05 $0C
     cp   $3F                                      ; $4D5D: $FE $3F
     jr   nz, jr_003_4D66                          ; $4D5F: $20 $05
@@ -1119,7 +1119,7 @@ jr_003_4D66:
 
 EntityThrownHandler::
     call ExecuteActiveEntityHandler_trampoline    ; $4D94: $CD $81 $3A
-    call func_003_7F7E                            ; $4D97: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity ; $4D97: $CD $7E $7F
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $4D9A: $21 $10 $C4
     add  hl, bc                                   ; $4D9D: $09
     ld   [hl], $02                                ; $4D9E: $36 $02
@@ -1196,7 +1196,7 @@ Data_003_4E05::
 
 EntityStunnedHandler::
     call ExecuteActiveEntityHandler_trampoline    ; $4E07: $CD $81 $3A
-    call func_003_7F7E                            ; $4E0A: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity ; $4E0A: $CD $7E $7F
     call func_003_7FA9                            ; $4E0D: $CD $A9 $7F
     call func_003_60B3                            ; $4E10: $CD $B3 $60
     call ClearEntitySpeed                         ; $4E13: $CD $7F $3D
@@ -1548,7 +1548,7 @@ IronMaskEntityHandler::
 
     ld   de, Data_003_4FEB                        ; $5003: $11 $EB $4F
     call RenderActiveEntitySpritesPair            ; $5006: $CD $C0 $3B
-    call func_003_7F78                            ; $5009: $CD $78 $7F
+    call ReturnIfNonInteractive_03                ; $5009: $CD $78 $7F
     call func_003_7FA9                            ; $500C: $CD $A9 $7F
     call func_003_6E28                            ; $500F: $CD $28 $6E
     call UpdateEntityPosWithSpeed_03              ; $5012: $CD $25 $7F
@@ -2039,7 +2039,7 @@ ENDC
 
 .render
     call RenderActiveEntitySpritesPair            ; $53B6: $CD $C0 $3B
-    call func_003_7F78                            ; $53B9: $CD $78 $7F
+    call ReturnIfNonInteractive_03                ; $53B9: $CD $78 $7F
     ld   a, $0B                                   ; $53BC: $3E $0B
     ld   [wC19E], a                               ; $53BE: $EA $9E $C1
     call func_003_75A2                            ; $53C1: $CD $A2 $75
@@ -2264,13 +2264,13 @@ jr_003_555C:
     jr   jr_003_5568                              ; $5566: $18 $00
 
 jr_003_5568:
-    call func_003_7F78                            ; $5568: $CD $78 $7F
+    call ReturnIfNonInteractive_03                ; $5568: $CD $78 $7F
     call func_003_7FA9                            ; $556B: $CD $A9 $7F
     ret                                           ; $556E: $C9
 
 jr_003_556F:
     call ExecuteActiveEntityHandler_trampoline    ; $556F: $CD $81 $3A
-    call func_003_7F7E                            ; $5572: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity        ; $5572: $CD $7E $7F
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5575: $21 $10 $C4
     add  hl, bc                                   ; $5578: $09
     ld   a, [hl]                                  ; $5579: $7E
@@ -2803,7 +2803,7 @@ jr_003_5835:
 
 func_003_583C::
     call RenderActiveEntitySpritesPair            ; $583C: $CD $C0 $3B
-    call func_003_7F78                            ; $583F: $CD $78 $7F
+    call ReturnIfNonInteractive_03                ; $583F: $CD $78 $7F
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5842: $21 $10 $C4
     add  hl, bc                                   ; $5845: $09
     ld   a, [hl]                                  ; $5846: $7E
@@ -3352,7 +3352,7 @@ Data_003_5B80::
 IronMasksMaskEntityHandler::
     ld   de, Data_003_5B80                        ; $5B88: $11 $80 $5B
     call RenderActiveEntitySpritesPair            ; $5B8B: $CD $C0 $3B
-    call func_003_7F78                            ; $5B8E: $CD $78 $7F
+    call ReturnIfNonInteractive_03                ; $5B8E: $CD $78 $7F
     call func_003_62AF                            ; $5B91: $CD $AF $62
     ret                                           ; $5B94: $C9
 
@@ -3584,7 +3584,7 @@ jr_003_5CD3:
 ENDC
 
 label_003_5CD6:
-    call func_003_7F78                            ; $5CD6: $CD $78 $7F
+    call ReturnIfNonInteractive_03                ; $5CD6: $CD $78 $7F
     call func_003_62AF                            ; $5CD9: $CD $AF $62
     ld   hl, wEntitiesPosZTable                   ; $5CDC: $21 $10 $C3
     add  hl, bc                                   ; $5CDF: $09
@@ -4244,7 +4244,7 @@ DroppableRupeeEntityHandler::
     call RenderActiveEntitySprite                 ; $60A7: $CD $77 $3C
 
 label_003_60AA:
-    call func_003_7F78                            ; $60AA: $CD $78 $7F
+    call ReturnIfNonInteractive_03                ; $60AA: $CD $78 $7F
     call func_003_62AF                            ; $60AD: $CD $AF $62
     call func_003_62EB                            ; $60B0: $CD $EB $62
 
@@ -5117,7 +5117,7 @@ Data_003_65CA::
 
 label_003_65E2:
     call func_003_6650                            ; $65E2: $CD $50 $66
-    call func_003_7F78                            ; $65E5: $CD $78 $7F
+    call ReturnIfNonInteractive_03                ; $65E5: $CD $78 $7F
     call GetEntityTransitionCountdown             ; $65E8: $CD $05 $0C
     and  a                                        ; $65EB: $A7
 IF __PATCH_0__
@@ -5238,7 +5238,7 @@ jr_003_668B:
 jr_003_668C:
     ld   de, Data_003_5484                        ; $668C: $11 $84 $54
     call RenderActiveEntitySpritesPair            ; $668F: $CD $C0 $3B
-    call func_003_7F78                            ; $6692: $CD $78 $7F
+    call ReturnIfNonInteractive_03                ; $6692: $CD $78 $7F
     ret                                           ; $6695: $C9
 
 include "code/entities/bomb.asm"
@@ -5763,7 +5763,7 @@ func_003_6AD7::
     call RenderActiveEntitySpritesPair            ; $6AD7: $CD $C0 $3B
 
 jr_003_6ADA:
-    call func_003_7F78                            ; $6ADA: $CD $78 $7F
+    call ReturnIfNonInteractive_03                ; $6ADA: $CD $78 $7F
     call GetEntityTransitionCountdown             ; $6ADD: $CD $05 $0C
     jr   nz, func_003_6B48                        ; $6AE0: $20 $6A
 
@@ -9615,42 +9615,45 @@ AddEntityZSpeedToPos_03::
     ld   hl, wEntitiesPosZTable                   ; $7F73: $21 $10 $C3
     jr   AddEntitySpeedToPos_03.updatePosition    ; $7F76: $18 $D2
 
-func_003_7F78::
+; If the entity is disabled or the game is in a dialog or transition,
+; return to the caller directly, skipping the rest of the code.
+ReturnIfNonInteractive_03::
     ldh  a, [hActiveEntityStatus]                 ; $7F78: $F0 $EA
-    cp   $05                                      ; $7F7A: $FE $05
-    jr   nz, jr_003_7FA7                          ; $7F7C: $20 $29
+    cp   ENTITY_STATUS_ACTIVE                     ; $7F7A: $FE $05
+    jr   nz, .skip                                ; $7F7C: $20 $29
 
-func_003_7F7E::
-    ld   a, [wGameplayType]                       ; $7F7E: $FA $95 $DB
-    cp   $07                                      ; $7F81: $FE $07
-    jr   z, jr_003_7FA7                           ; $7F83: $28 $22
+.allowInactiveEntity
+    ld   a, [wGameplayType]                       ; $7D43: $FA $95 $DB                       ; $7F7E: $FA $95 $DB
+    cp   GAMEPLAY_WORLD_MAP                       ; $7F81: $FE $07
+    jr   z, .skip                                 ; $7F83: $28 $22
 
-    cp   $01                                      ; $7F85: $FE $01
-    jr   z, jr_003_7F94                           ; $7F87: $28 $0B
+    cp   GAMEPLAY_CREDITS                         ; $7F85: $FE $01
+    jr   z, .creditsEnd                           ; $7F87: $28 $0B
 
-    cp   $0B                                      ; $7F89: $FE $0B
-    jr   nz, jr_003_7FA7                          ; $7F8B: $20 $1A
+    cp   GAMEPLAY_WORLD                           ; $7F89: $FE $0B
+    jr   nz, .skip                                ; $7F8B: $20 $1A
 
     ld   a, [wTransitionSequenceCounter]          ; $7F8D: $FA $6B $C1
     cp   $04                                      ; $7F90: $FE $04
-    jr   nz, jr_003_7FA7                          ; $7F92: $20 $13
+    jr   nz, .skip                                ; $7F92: $20 $13
+.creditsEnd
 
-jr_003_7F94:
     ld   a, [wDialogState]                        ; $7F94: $FA $9F $C1
     ld   hl, wC1A8                                ; $7F97: $21 $A8 $C1
     or   [hl]                                     ; $7F9A: $B6
     ld   hl, wInventoryAppearing                  ; $7F9B: $21 $4F $C1
     or   [hl]                                     ; $7F9E: $B6
-    jr   nz, jr_003_7FA7                          ; $7F9F: $20 $06
+    jr   nz, .skip                                ; $7F9F: $20 $06
 
     ld   a, [wRoomTransitionState]                ; $7FA1: $FA $24 $C1
     and  a                                        ; $7FA4: $A7
-    jr   z, jr_003_7FA8                           ; $7FA5: $28 $01
+    jr   z, .return                               ; $7FA5: $28 $01
 
-jr_003_7FA7:
+.skip
+    ; pop the return address to return to caller
     pop  af                                       ; $7FA7: $F1
 
-jr_003_7FA8:
+.return
     ret                                           ; $7FA8: $C9
 
 ; Inputs:

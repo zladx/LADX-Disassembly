@@ -12,7 +12,7 @@ HinoxEntityHandler::
     cp   $05                                      ; $4FC1: $FE $05
     jp   nz, label_006_5308                       ; $4FC3: $C2 $08 $53
 
-    call func_006_64C6                            ; $4FC6: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $4FC6: $CD $C6 $64
     call BossIntro                                ; $4FC9: $CD $E8 $3E
     call func_006_64F7                            ; $4FCC: $CD $F7 $64
     call GetEntityPrivateCountdown1               ; $4FCF: $CD $00 $0C

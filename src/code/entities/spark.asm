@@ -20,7 +20,7 @@ SparkCounterClockwiseEntityHandler::
     ldh  [hActiveEntitySpriteVariant], a          ; $663E: $E0 $F1
     ld   de, Data_006_6615                        ; $6640: $11 $15 $66
     call RenderActiveEntitySpritesPair            ; $6643: $CD $C0 $3B
-    call func_006_64C6                            ; $6646: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $6646: $CD $C6 $64
     call func_006_64F7                            ; $6649: $CD $F7 $64
     call label_3B44                               ; $664C: $CD $44 $3B
     call UpdateEntityPosWithSpeed_06              ; $664F: $CD $41 $65

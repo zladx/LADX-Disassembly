@@ -96,7 +96,7 @@ jr_006_7B61:
     ld   a, $01                                   ; $7B70: $3E $01
     call label_3DA0                               ; $7B72: $CD $A0 $3D
     call CopyEntityPositionToActivePosition       ; $7B75: $CD $8A $3D
-    call func_006_64C6                            ; $7B78: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $7B78: $CD $C6 $64
     ldh  a, [hIsSideScrolling]                    ; $7B7B: $F0 $F9
     and  a                                        ; $7B7D: $A7
     jr   nz, jr_006_7B85                          ; $7B7E: $20 $05

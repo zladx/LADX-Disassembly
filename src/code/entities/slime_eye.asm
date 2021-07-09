@@ -128,7 +128,7 @@ jr_004_4A2C:
 
 SlimeEyeState1Handler::
     call func_004_4DB5                            ; $4A2D: $CD $B5 $4D
-    call func_004_7FA3                            ; $4A30: $CD $A3 $7F
+    call ReturnIfNonInteractive_04                ; $4A30: $CD $A3 $7F
     call AddEntityZSpeedToPos_04                            ; $4A33: $CD $03 $6E
     ld   hl, wEntitiesSpeedZTable                                ; $4A36: $21 $20 $C3
     add  hl, bc                                   ; $4A39: $09
@@ -166,7 +166,7 @@ jr_004_4A67:
 
 SlimeEyeState2Handler::
     call func_004_4DB5                            ; $4A6A: $CD $B5 $4D
-    call func_004_7FA3                            ; $4A6D: $CD $A3 $7F
+    call ReturnIfNonInteractive_04                ; $4A6D: $CD $A3 $7F
     call GetEntityTransitionCountdown                 ; $4A70: $CD $05 $0C
     jr   nz, jr_004_4A78                          ; $4A73: $20 $03
 
@@ -178,7 +178,7 @@ jr_004_4A78:
 
 SlimeEyeState3Handler::
     call func_004_4DB5                            ; $4A7E: $CD $B5 $4D
-    call func_004_7FA3                            ; $4A81: $CD $A3 $7F
+    call ReturnIfNonInteractive_04                ; $4A81: $CD $A3 $7F
     call DecrementEntityIgnoreHitsCountdown       ; $4A84: $CD $56 $0C
     ld   hl, wEntitiesPrivateCountdown2Table                                ; $4A87: $21 $00 $C3
     add  hl, bc                                   ; $4A8A: $09

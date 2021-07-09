@@ -3,7 +3,7 @@ KanaletCastleGateSwitchEntityHandler::
     and  ROOM_STATUS_EVENT_2                      ; $40A1: $E6 $20
     jp   nz, ClearEntityStatus_15                 ; $40A3: $C2 $31 $7C
 
-    call func_015_7B0D                            ; $40A6: $CD $0D $7B
+    call ReturnIfNonInteractive_15                ; $40A6: $CD $0D $7B
     ldh  a, [hActiveEntityState]                  ; $40A9: $F0 $F0
     JP_TABLE                                      ; $40AB
 ._00 dw func_015_40B2                             ; $40AC

@@ -25,9 +25,13 @@ include "code/entities/giant_goponga_flower.asm"
 include "code/entities/goponga_projectile.asm"
 include "code/entities/goponga_flower.asm"
 
+; ----------------------------------------------------------------------
 ;
-; Entity helpers
+; ENTITY COMMON HELPERS
 ;
+; These helpers are defined (with small variants) in most entity banks.
+;
+; ----------------------------------------------------------------------
 
 func_006_641A::
     call CheckLinkCollisionWithEnemy_trampoline   ; $641A: $CD $5A $3B
@@ -159,42 +163,45 @@ func_006_645D::
     and  a                                        ; $64C4: $A7
     ret                                           ; $64C5: $C9
 
-func_006_64C6::
+; If the entity is disabled or the game is in a dialog or transition,
+; return to the caller directly, skipping the rest of the code.
+ReturnIfNonInteractive_06::
     ldh  a, [hActiveEntityStatus]                 ; $64C6: $F0 $EA
-    cp   $05                                      ; $64C8: $FE $05
-    jr   nz, jr_006_64F5                          ; $64CA: $20 $29
+    cp   ENTITY_STATUS_ACTIVE                     ; $64C8: $FE $05
+    jr   nz, .skip                                ; $64CA: $20 $29
 
-func_006_64CC::
+.allowInactiveEntity
     ld   a, [wGameplayType]                       ; $64CC: $FA $95 $DB
-    cp   $07                                      ; $64CF: $FE $07
-    jr   z, jr_006_64F5                           ; $64D1: $28 $22
+    cp   GAMEPLAY_WORLD_MAP                       ; $64CF: $FE $07
+    jr   z, .skip                                 ; $64D1: $28 $22
 
-    cp   $01                                      ; $64D3: $FE $01
-    jr   z, jr_006_64E2                           ; $64D5: $28 $0B
+    cp   GAMEPLAY_CREDITS                         ; $64D3: $FE $01
+    jr   z, .creditsEnd                           ; $64D5: $28 $0B
 
-    cp   $0B                                      ; $64D7: $FE $0B
-    jr   nz, jr_006_64F5                          ; $64D9: $20 $1A
+    cp   GAMEPLAY_WORLD                           ; $64D7: $FE $0B
+    jr   nz, .skip                                ; $64D9: $20 $1A
 
     ld   a, [wTransitionSequenceCounter]          ; $64DB: $FA $6B $C1
     cp   $04                                      ; $64DE: $FE $04
-    jr   nz, jr_006_64F5                          ; $64E0: $20 $13
+    jr   nz, .skip                                ; $64E0: $20 $13
+.creditsEnd
 
-jr_006_64E2:
     ld   hl, wC1A8                                ; $64E2: $21 $A8 $C1
     ld   a, [wDialogState]                        ; $64E5: $FA $9F $C1
     or   [hl]                                     ; $64E8: $B6
     ld   hl, wInventoryAppearing                  ; $64E9: $21 $4F $C1
     or   [hl]                                     ; $64EC: $B6
-    jr   nz, jr_006_64F5                          ; $64ED: $20 $06
+    jr   nz, .skip                                ; $64ED: $20 $06
 
     ld   a, [wRoomTransitionState]                ; $64EF: $FA $24 $C1
     and  a                                        ; $64F2: $A7
-    jr   z, jr_006_64F6                           ; $64F3: $28 $01
+    jr   z, .return                               ; $64F3: $28 $01
 
-jr_006_64F5:
+.skip
+    ; pop the return address to return to caller
     pop  af                                       ; $64F5: $F1
 
-jr_006_64F6:
+.return
     ret                                           ; $64F6: $C9
 
 func_006_64F7::
@@ -436,7 +443,7 @@ func_006_700A::
     jp   label_006_702A                           ; $7027: $C3 $2A $70
 
 label_006_702A:
-    call func_006_64CC                            ; $702A: $CD $CC $64
+    call ReturnIfNonInteractive_06.allowInactiveEntity ; $702A: $CD $CC $64
     ldh  a, [hActiveEntityPosX]                   ; $702D: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $702F: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $7031: $F0 $EC
@@ -507,7 +514,7 @@ Data_006_773C::
 
 ; Helper called from bank 3
 func_006_783C::
-    call func_006_64C6                            ; $783C: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $783C: $CD $C6 $64
 
 jr_006_783F:
     ldh  a, [hFrameCounter]                       ; $783F: $F0 $E7

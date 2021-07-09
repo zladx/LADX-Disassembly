@@ -17,7 +17,7 @@ GibdoEntityHandler::
 
 jr_006_7E91:
     call RenderActiveEntitySpritesPair            ; $7E91: $CD $C0 $3B
-    call func_006_64C6                            ; $7E94: $CD $C6 $64
+    call ReturnIfNonInteractive_06                ; $7E94: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $7E97: $CD $56 $0C
     call label_3B39                               ; $7E9A: $CD $39 $3B
 

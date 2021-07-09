@@ -27,7 +27,7 @@ HookshotChainEntityHandler::
     ld   a, [hl]                                  ; $7C09: $7E
     ldh  [hLinkAnimationState], a                 ; $7C0A: $E0 $9D
     call func_018_7CC8                            ; $7C0C: $CD $C8 $7C
-    call func_018_7DE8                            ; $7C0F: $CD $E8 $7D
+    call ReturnIfNonInteractive_18                ; $7C0F: $CD $E8 $7D
     ldh  a, [hFrameCounter]                       ; $7C12: $F0 $E7
     and  $03                                      ; $7C14: $E6 $03
     jr   nz, jr_018_7C1C                          ; $7C16: $20 $04

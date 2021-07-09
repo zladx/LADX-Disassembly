@@ -59,7 +59,7 @@ jr_004_404E:
     ld   a, c                                     ; $4054: $79
     ld   [wIntroSubTimer], a                      ; $4055: $EA $02 $D0
     call func_004_42B3                            ; $4058: $CD $B3 $42
-    call func_004_7FA3                            ; $405B: $CD $A3 $7F
+    call ReturnIfNonInteractive_04                ; $405B: $CD $A3 $7F
     ld   hl, wEntitiesPhysicsFlagsTable                ; $405E: $21 $40 $C3
     add  hl, bc                                   ; $4061: $09
     ld   [hl], $81                                ; $4062: $36 $81
@@ -487,7 +487,7 @@ GenieKilledHandler2::
     jp   label_004_50EF                           ; $4317: $C3 $EF $50
 
 jr_004_431A:
-    call func_004_7FA3                            ; $431A: $CD $A3 $7F
+    call ReturnIfNonInteractive_04                ; $431A: $CD $A3 $7F
     ld   hl, wEntitiesSpeedXTable                                ; $431D: $21 $40 $C2
     add  hl, bc                                   ; $4320: $09
     ld   a, [hl]                                  ; $4321: $7E
@@ -1144,7 +1144,7 @@ GenieState2Handler::
     db   $CD                                      ; $483F
     cp   b                                        ; $4840: $B8
     ld   c, b                                     ; $4841: $48
-    call func_004_7FA3                            ; $4842: $CD $A3 $7F
+    call ReturnIfNonInteractive_04                ; $4842: $CD $A3 $7F
     call GetEntityTransitionCountdown                 ; $4845: $CD $05 $0C
     bit  7, a                                     ; $4848: $CB $7F
     jr   z, jr_004_486D                           ; $484A: $28 $21
@@ -1243,7 +1243,7 @@ Data_004_48D1::
 GenieState3Handler::
     ld   de, Data_004_48D1                        ; $48D9: $11 $D1 $48
     call RenderActiveEntitySpritesPair            ; $48DC: $CD $C0 $3B
-    call func_004_7FA3                            ; $48DF: $CD $A3 $7F
+    call ReturnIfNonInteractive_04                ; $48DF: $CD $A3 $7F
     ldh  a, [hFrameCounter]                       ; $48E2: $F0 $E7
     rra                                           ; $48E4: $1F
     rra                                           ; $48E5: $1F
@@ -1306,7 +1306,7 @@ jr_004_4938:
 GenieState4Handler::
     ld   de, Data_004_48D1                        ; $493E: $11 $D1 $48
     call RenderActiveEntitySpritesPair            ; $4941: $CD $C0 $3B
-    call func_004_7FA3                            ; $4944: $CD $A3 $7F
+    call ReturnIfNonInteractive_04                ; $4944: $CD $A3 $7F
     ldh  a, [hFrameCounter]                       ; $4947: $F0 $E7
     rra                                           ; $4949: $1F
     rra                                           ; $494A: $1F

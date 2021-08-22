@@ -25,11 +25,11 @@ hGameValuesSection::
  ;   0:   do nothing
  ;   1:   load world tiles
  ;   2:   load dungeon minimap tiles
- ;   3:
- ;   4:
- ;   5:
- ;   6:
- ;   7:
+ ;   3:   load tiles for the piece of heart meter (part 1)
+ ;   4:   load tiles for the piece of heart meter (part 1)
+ ;   5:   clear tiles for the piece of heart meter (part 1)
+ ;   6:   clear tiles for the piece of heart meter (part 1)
+ ;   7:   load inventory tiles and BG map for siren instruments
  ;   8-A: load inventory tiles for ocarina songs
  ;   B-D: load shared gfx: shadows, explosions, etc
 hNeedsUpdatingBGTiles::

@@ -2726,18 +2726,24 @@ func_001_6BAE::
 jr_001_6BB4::
     ret                                           ; $6BB4: $C9
 
-func_001_6BB5::
+; Copy the tiles and BG map for the inventory Siren Instruments to VRAM.
+LoadSirenInstruments::
+    ; If hBGTilesLoadingStage < 8, load tiles
     ldh  a, [hBGTilesLoadingStage]                ; $6BB5: $F0 $92
     cp   $08                                      ; $6BB7: $FE $08
-    jp  c, LoadSirenInstrumentTiles               ; $6BB9: $DA $77 $6C
-    jr   nz, jr_001_6BC6                          ; $6BBC: $20 $08
-    call func_001_6BF0                            ; $6BBE: $CD $F0 $6B
+    jp   c, LoadSirenInstrumentTiles              ; $6BB9: $DA $77 $6C
+    ; else if hBGTilesLoadingStage > 8,
+    ; load BG left side and finish
+    jr   nz, .loadLeftSide                        ; $6BBC: $20 $08
+    ; else if if hBGTilesLoadingStage == 8,
+    ; load BG right side and increment
+    call LoadInstrumentsBG.rightSide              ; $6BBE: $CD $F0 $6B
     ld   hl, hBGTilesLoadingStage                 ; $6BC1: $21 $92 $FF
     inc  [hl]                                     ; $6BC4: $34
     ret                                           ; $6BC5: $C9
 
-jr_001_6BC6::
-    call func_001_6BEA                            ; $6BC6: $CD $EA $6B
+.loadLeftSide
+    call LoadInstrumentsBG.leftSide               ; $6BC6: $CD $EA $6B
     xor  a                                        ; $6BC9: $AF
     ldh  [hNeedsUpdatingBGTiles], a               ; $6BCA: $E0 $90
     ldh  [hBGTilesLoadingStage], a                ; $6BCC: $E0 $92
@@ -2755,28 +2761,44 @@ Data_001_6BDF::  ; Instrument on inventory menu, instrument tile (top left corne
 Data_001_6BE7::
     db 1, $1F, 1                                  ; $6BE7
 
-func_001_6BEA::
-    db $E, 8, $1E, 4, $18, 4                      ; $6BEA
+; CopyToBG the BG map for the Siren Instruments in the inventory.
+;
+; The BG map for 4 instruments will be loaded–either for instruments
+; on the left side of the inventory, or for those on the right side.
+LoadInstrumentsBG::
+.leftSide
+    ; loop from 8 to 4
+    ld   c, $08                                   ; $6BEA
+    ld   e, $04                                   ; $6BEC
+    jr   LoadInstrumentsBG.start                  ; $6BEE
 
-func_001_6BF0::
-    db $E, 4, $1E, 0                              ; $6BF0
+.rightSide
+    ; loop from 4 to 0
+    ld   c, $04                                   ; $6BF0
+    ld   e, $00                                   ; $6BF2
 
-jr_001_6BF4::
+.start
+    ; hMultiPurpose9 = c (loop counter)
     ld   a, c                                     ; $6BF4: $79
     ldh  [hMultiPurpose9], a                      ; $6BF5: $E0 $E0
     ld   d, $00                                   ; $6BF7: $16 $00
 
-label_001_6BF9::
+.loop
     xor  a                                        ; $6BF9: $AF
     ldh  [hMultiPurpose0], a                      ; $6BFA: $E0 $D7
     ldh  [hMultiPurpose1], a                      ; $6BFC: $E0 $D8
     ldh  [hMultiPurpose2], a                      ; $6BFE: $E0 $D9
     ldh  [hMultiPurpose3], a                      ; $6C00: $E0 $DA
-    ld   hl, $DB65                                ; $6C02: $21 $65 $DB
+
+    ; If the player got the instrument already, display its picture;
+    ; otherwise display a numbered placeholder.
+    ld   hl, wHasInstrument1                      ; $6C02: $21 $65 $DB
     add  hl, de                                   ; $6C05: $19
     ld   a, [hl]                                  ; $6C06: $7E
     bit  1, a                                     ; $6C07: $CB $4F
-    jp   nz, label_001_6C2A                       ; $6C09: $C2 $2A $6C
+    jp   nz, .loadInstrumentTilemap               ; $6C09: $C2 $2A $6C
+
+.loadPlaceholderTilemap
     ld   c, $00                                   ; $6C0C: $0E $00
     ld   b, c                                     ; $6C0E: $41
     ld   hl, Data_001_6BCF                        ; $6C0F: $21 $CF $6B
@@ -2794,9 +2816,9 @@ label_001_6BF9::
     ld   a, [hl]                                  ; $6C24: $7E
     ldh  [hMultiPurpose3], a                      ; $6C25: $E0 $DA
     pop  hl                                       ; $6C27: $E1
-    jr   jr_001_6C48                              ; $6C28: $18 $1E
+    jr   .copyToBG                                ; $6C28: $18 $1E
 
-label_001_6C2A::
+.loadInstrumentTilemap
     ld   c, $00                                   ; $6C2A: $0E $00
     ld   b, c                                     ; $6C2C: $41
     ld   hl, Data_001_6BCF                        ; $6C2D: $21 $CF $6B
@@ -2817,28 +2839,32 @@ label_001_6C2A::
     ldh  [hMultiPurpose3], a                      ; $6C45: $E0 $DA
     pop  hl                                       ; $6C47: $E1
 
-jr_001_6C48::
+.copyToBG
     ldh  a, [hMultiPurpose0]                      ; $6C48: $F0 $D7
     ld   [hl], a                                  ; $6C4A: $77
-    call func_001_6C69                            ; $6C4B: $CD $69 $6C
+    call GetInstrumentNextBGAddress               ; $6C4B: $CD $69 $6C
     ldh  a, [hMultiPurpose1]                      ; $6C4E: $F0 $D8
     ld   [hl], a                                  ; $6C50: $77
     inc  c                                        ; $6C51: $0C
-    call func_001_6C69                            ; $6C52: $CD $69 $6C
+    call GetInstrumentNextBGAddress               ; $6C52: $CD $69 $6C
     ldh  a, [hMultiPurpose2]                      ; $6C55: $F0 $D9
     ld   [hl], a                                  ; $6C57: $77
     inc  c                                        ; $6C58: $0C
-    call func_001_6C69                            ; $6C59: $CD $69 $6C
+    call GetInstrumentNextBGAddress               ; $6C59: $CD $69 $6C
     ldh  a, [hMultiPurpose3]                      ; $6C5C: $F0 $DA
     ld   [hl], a                                  ; $6C5E: $77
+
+    ; loop while c > e
     inc  e                                        ; $6C5F: $1C
     ld   a, e                                     ; $6C60: $7B
-    ld   hl, hMultiPurpose9                            ; $6C61: $21 $E0 $FF
+    ld   hl, hMultiPurpose9                       ; $6C61: $21 $E0 $FF
     cp   [hl]                                     ; $6C64: $BE
-    jp   nz, label_001_6BF9                       ; $6C65: $C2 $F9 $6B
+    jp   nz, .loop                                ; $6C65: $C2 $F9 $6B
+
     ret                                           ; $6C68: $C9
 
-func_001_6C69::
+; Return the address of the next BG location for an instrument.
+GetInstrumentNextBGAddress::
     push hl                                       ; $6C69: $E5
     ld   hl, Data_001_6BE7                        ; $6C6A: $21 $E7 $6B
     add  hl, bc                                   ; $6C6D: $09

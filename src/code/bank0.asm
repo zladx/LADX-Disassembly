@@ -1719,7 +1719,7 @@ InitGotItemSequence::
     ld   a, [wLinkMotionState]                    ; $1135: $FA $1C $C1
 .linkMotionJumpTable
     JP_TABLE                                      ; $1138: $C7
-._00 dw LinkMotionInteractiveHandler              ; $1139
+._00 dw LinkMotionDefaultHandler                  ; $1139
 ._01 dw LinkMotionSwimmingHandler                 ; $113B
 ._02 dw LinkMotionUnstuckingHandler               ; $113D
 ._03 dw LinkMotionMapFadeOutHandler               ; $113F
@@ -1741,12 +1741,12 @@ LinkMotionTeleportUpHandler::
 LinkMotionPassOutHandler::
     jpsw LinkPassOut                              ; $115D: $3E $01 $CD $0C $08 $C3 $C2 $41
 
-LinkMotionInteractiveHandler::
-    callsb func_036_725A                          ; $1165: $3E $36 $EA $00 $21 $CD $5A $72
+LinkMotionDefaultHandler::
+    callsb IsInteractiveMotionAllowed             ; $1165: $3E $36 $EA $00 $21 $CD $5A $72
     and  a                                        ; $116D: $A7
     ret  z                                        ; $116E: $C8
 
-    jpsw label_002_4287                           ; $116F: $3E $02 $CD $0C $08 $C3 $87 $42
+    jpsw LinkMotionDefault                        ; $116F: $3E $02 $CD $0C $08 $C3 $87 $42
 
 ; Check if one of the inventory item should be used
 CheckItemsToUse::
@@ -3584,14 +3584,14 @@ data_1F5D::
     db   0, 0, 4, 0                               ; $1F5D
 
 ; Call label_1F69, then restore bank 2
-; (Only ever called from label_002_4287)
+; (Only ever called from LinkMotionDefault)
 label_1F69_trampoline::
     call label_1F69                               ; $1F61: $CD $69 $1F
     ld   a, $02                                   ; $1F64: $3E $02
     jp   SwitchBank                               ; $1F66: $C3 $0C $08
 
 ; Physics for Link interactive motion?
-; (Only ever called from label_002_4287)
+; (Only ever called from LinkMotionDefault)
 label_1F69::
     ; If running with pegagus boots, or hLinkPositionZ != 0, or Link's motion != LINK_MOTION_DEFAULT, return
     ld   hl, wIsRunningWithPegasusBoots           ; $1F69: $21 $4A $C1
@@ -4025,7 +4025,7 @@ ComputeLinkPosition::
 
     pop  af                                       ; $21CE: $F1
 
-    ; e = speed mask (avoids the speed from overflowing the max speed, and wrap around)
+    ; e = speed mask (avoids the speed from overflowing the max speed and wrapping around)
     ld   e, $00                                   ; $21CF: $1E $00
     bit  7, a                                     ; $21D1: $CB $7F
     jr   z, .positiveSpeedEnd                     ; $21D3: $28 $02
@@ -4484,37 +4484,46 @@ ReadJoypadState::
 .return
     ret                                           ; $2886: $C9
 
+; Get BG address of the object under hSwordIntersectedAreaX/Y
+; Return:
+;   hFFCF / hFFD0: BG address of the top-left tile of the object
 label_2887::
     push bc                                       ; $2887: $C5
+
+    ;
+    ; de = ([hSwordIntersectedAreaY] + [hBaseScrollY]) / 8
     ldh  a, [hSwordIntersectedAreaY]              ; $2888: $F0 $CD
     ld   hl, hBaseScrollY                         ; $288A: $21 $97 $FF
     add  a, [hl]                                  ; $288D: $86
-    and  $F8                                      ; $288E: $E6 $F8
+    and  $F8 ; a - a % $8                         ; $288E: $E6 $F8
     srl  a                                        ; $2890: $CB $3F
     srl  a                                        ; $2892: $CB $3F
     srl  a                                        ; $2894: $CB $3F
     ld   de, $00                                  ; $2896: $11 $00 $00
     ld   e, a                                     ; $2899: $5F
+
+    ; hl = hl + (de * $20)
     ld   hl, vBGMap0                              ; $289A: $21 $00 $98
     ld   b, $20                                   ; $289D: $06 $20
-
 .loop
     add  hl, de                                   ; $289F: $19
     dec  b                                        ; $28A0: $05
     jr   nz, .loop                                ; $28A1: $20 $FC
-
     push hl                                       ; $28A3: $E5
+
+    ; a = (([hSwordIntersectedAreaX] + [hBaseScrollX]) / 8)
     ldh  a, [hSwordIntersectedAreaX]              ; $28A4: $F0 $CE
     ld   hl, hBaseScrollX                         ; $28A6: $21 $96 $FF
     add  a, [hl]                                  ; $28A9: $86
     pop  hl                                       ; $28AA: $E1
-    and  $F8                                      ; $28AB: $E6 $F8
+    and  $F8 ; a - a % $8                         ; $28AB: $E6 $F8
     srl  a                                        ; $28AD: $CB $3F
     srl  a                                        ; $28AF: $CB $3F
     srl  a                                        ; $28B1: $CB $3F
     ld   de, $00                                  ; $28B3: $11 $00 $00
     ld   e, a                                     ; $28B6: $5F
     add  hl, de                                   ; $28B7: $19
+
     ld   a, h                                     ; $28B8: $7C
     ldh  [hFFCF], a                               ; $28B9: $E0 $CF
     ld   a, l                                     ; $28BB: $7D

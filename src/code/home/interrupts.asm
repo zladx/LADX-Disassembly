@@ -491,7 +491,7 @@ LoadTiles::
     jp   z, LoadEntityTiles                       ; $05BF: $CA $9E $06
 
     cp   $07                                      ; $05C2: $FE $07
-    jp   z, label_7B0                             ; $05C4: $CA $B0 $07
+    jp   z, LoadInventorySirenInstruments         ; $05C4: $CA $B0 $07
     cp   $03                                      ; $05C7: $FE $03
     jp   z, LoadPieceOfHeartMeterTiles1           ; $05C9: $CA $62 $00
     cp   $04                                      ; $05CC: $FE $04
@@ -808,8 +808,8 @@ UpdateEntityTilesB::
 .return
     ret                                           ; $07AF: $C9
 
-label_7B0::
-    callsb func_001_6BB5                          ; $07B0: $3E $01 $EA $00 $21 $CD $B5 $6B
+LoadInventorySirenInstruments::
+    callsb LoadSirenInstruments                     ; $07B0: $3E $01 $EA $00 $21 $CD $B5 $6B
     jp   CopyTilesToPieceOfHeartMeter.restoreBank0C ; $07B8: $C3 $8B $00
 
 ; Data origin table (in bank $0C)

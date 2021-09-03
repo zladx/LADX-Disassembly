@@ -25,11 +25,11 @@ hGameValuesSection::
  ;   0:   do nothing
  ;   1:   load world tiles
  ;   2:   load dungeon minimap tiles
- ;   3:
- ;   4:
- ;   5:
- ;   6:
- ;   7:
+ ;   3:   load tiles for the piece of heart meter (part 1)
+ ;   4:   load tiles for the piece of heart meter (part 1)
+ ;   5:   clear tiles for the piece of heart meter (part 1)
+ ;   6:   clear tiles for the piece of heart meter (part 1)
+ ;   7:   load inventory tiles and BG map for siren instruments
  ;   8-A: load inventory tiles for ocarina songs
  ;   B-D: load shared gfx: shadows, explosions, etc
 hNeedsUpdatingBGTiles::
@@ -306,19 +306,23 @@ hJoypadState::
 
 ; Topmost corner of the area intercepted by Link's sword
 ; Vary from 00 to 80 by increments of 10
+;
+; FIXME: also used for entities (see func_003_7E0E)
 hSwordIntersectedAreaY::
   ds 1 ; FFCD
 
 ; Leftmost corner of the area intercepted by Link's sword
 ; Vary from 00 to A0 by increments of 10
+;
+; FIXME: also used for entities (see func_003_7E0E)
 hSwordIntersectedAreaX::
   ds 1 ; FFCE
 
-; Unlabeled
+; See label_2887
 hFFCF::
   ds $1 ; FFCF
 
-; Unlabeled
+; See label_2887
 hFFD0::
   ds $1 ; FFD0
 

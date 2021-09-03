@@ -155,65 +155,72 @@ ENDC
 .return
     ret                                           ; $4286: $C9
 
-label_002_4287:
+; Main handler for LINK_MOTION_DEFAULT.
+;
+; Applies physics, motion, animations and all
+LinkMotionDefault::
+    ; Decrement wIsShootingArrow if not already zero
     ld   a, [wIsShootingArrow]                    ; $4287: $FA $4C $C1
     and  a                                        ; $428A: $A7
-    jr   z, .jr_002_4291                          ; $428B: $28 $04
-
+    jr   z, .decrementShootingArrowEnd            ; $428B: $28 $04
     dec  a                                        ; $428D: $3D
     ld   [wIsShootingArrow], a                    ; $428E: $EA $4C $C1
+.decrementShootingArrowEnd
 
-.jr_002_4291
+    ; Decrement wC1C4 if not already zero
     ld   a, [wC1C4]                               ; $4291: $FA $C4 $C1
     and  a                                        ; $4294: $A7
-    jr   z, .jr_002_429B                          ; $4295: $28 $04
-
+    jr   z, .decrementC1C4End                     ; $4295: $28 $04
     dec  a                                        ; $4297: $3D
     ld   [wC1C4], a                               ; $4298: $EA $C4 $C1
+.decrementC1C4End
 
-.jr_002_429B
-    ; decrement wBombArrowCooldown if not allready zero
+    ; Decrement wBombArrowCooldown if not already zero
     ld   a, [wBombArrowCooldown]                  ; $429B: $FA $C0 $C1
     and  a                                        ; $429E: $A7
-    jr   z, .skipBombArrowCooldownDecrement       ; $429F: $28 $04
+    jr   z, .bombArrowCooldownDecrementEnd        ; $429F: $28 $04
     dec  a                                        ; $42A1: $3D
     ld   [wBombArrowCooldown], a                  ; $42A2: $EA $C0 $C1
+.bombArrowCooldownDecrementEnd
 
-.skipBombArrowCooldownDecrement
     call func_002_436C                            ; $42A5: $CD $6C $43
+
+    ; Decrement wC16E if not already zero
     ld   a, [wC16E]                               ; $42A8: $FA $6E $C1
     and  a                                        ; $42AB: $A7
-    jr   z, .jr_002_42B2                          ; $42AC: $28 $04
-
+    jr   z, .wC16EEnd                             ; $42AC: $28 $04
     dec  a                                        ; $42AE: $3D
     ld   [wC16E], a                               ; $42AF: $EA $6E $C1
+.wC16EEnd
 
-.jr_002_42B2
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $42B2: $F0 $A1
     cp   $02                                      ; $42B4: $FE $02
-    jr   nz, .jr_002_42C7                         ; $42B6: $20 $0F
+    jr   nz, .interactiveMotionBlockedEnd         ; $42B6: $20 $0F
 
     xor  a                                        ; $42B8: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42B9: $E0 $A1
     ldh  [hLinkSpeedX], a                         ; $42BB: $E0 $9A
     ldh  [hLinkSpeedY], a                         ; $42BD: $E0 $9B
-    ldh  [hLinkVelocityZ], a                               ; $42BF: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $42BF: $E0 $A3
     call LinkPlayingOcarinaHandler                ; $42C1: $CD $16 $4A
     jp   func_002_753A                            ; $42C4: $C3 $3A $75
+.interactiveMotionBlockedEnd
 
-.jr_002_42C7
     call UpdateLinkWalkingAnimation               ; $42C7: $CD $50 $1A
+
     xor  a                                        ; $42CA: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42CB: $E0 $A1
+
     call label_1F69_trampoline                    ; $42CD: $CD $61 $1F
     call CheckItemsToUse                          ; $42D0: $CD $77 $11
-    call func_002_44ED                            ; $42D3: $CD $ED $44
+    call ApplyLinkGroundMotion                    ; $42D3: $CD $ED $44
     call func_002_434A                            ; $42D6: $CD $4A $43
-    call RotateLinkClockwise                      ; $42D9: $CD $8C $47
+    call UpdateLinkAnimation                      ; $42D9: $CD $8C $47
     call func_002_4B49                            ; $42DC: $CD $49 $4B
     call ApplyLinkMotionState                     ; $42DF: $CD $94 $17
     call func_002_4338                            ; $42E2: $CD $38 $43
     call LinkPlayingOcarinaHandler                ; $42E5: $CD $16 $4A
+
     ld   a, [wRoomTransitionState]                ; $42E8: $FA $24 $C1
     and  a                                        ; $42EB: $A7
     jr   nz, .return                              ; $42EC: $20 $27
@@ -328,6 +335,8 @@ func_002_436C::
     ; Side-scrolling code
     jp   jp_002_68B7                              ; $4377: $C3 $B7 $68
 
+; Only used in debug free movement mode?
+;
 ; Inputs:
 ;   e : sequence count
 MoveLinkToPressedButtonDirection::
@@ -604,18 +613,19 @@ jr_002_44E3:
     jp   ApplyLinkMotionState                     ; $44E4: $C3 $94 $17
 
 Data_002_44E7::
-    db   $00, $F0, $10, $00, $FF, $01
+    db   0, -16, 16, 0, -1, 1
 
-func_002_44ED::
+; If on the ground, update Link speed from gravity and joypad input.
+ApplyLinkGroundMotion::
     ld   a, [wIsLinkInTheAir]                     ; $44ED: $FA $46 $C1
     and  a                                        ; $44F0: $A7
-    jp   z, groundVfxEnd                          ; $44F1: $CA $AC $45
+    jp   z, .return                               ; $44F1: $CA $AC $45
 
     ldh  a, [hIsSideScrolling]                    ; $44F4: $F0 $F9
     and  a                                        ; $44F6: $A7
-    jp   nz, groundVfxEnd                         ; $44F7: $C2 $AC $45
+    jp   nz, .return                              ; $44F7: $C2 $AC $45
 
-func_002_44FA::
+.noChecks
     call func_21E1                                ; $44FA: $CD $E1 $21
 
     ; hLinkVelocityZ = hLinkVelocityZ - 2
@@ -629,24 +639,28 @@ func_002_44FA::
     ld   a, [wC10A]                               ; $4508: $FA $0A $C1
     ld   hl, wIsRunningWithPegasusBoots           ; $450B: $21 $4A $C1
     or   [hl]                                     ; $450E: $B6
-    jr   nz, jr_002_4563                          ; $450F: $20 $52
+    jr   nz, .joypadVerticalEnd                          ; $450F: $20 $52
 
     ld   a, [wD475]                               ; $4511: $FA $75 $D4
     and  a                                        ; $4514: $A7
-    jr   nz, jr_002_451E                          ; $4515: $20 $07
+    jr   nz, .jr_002_451E                         ; $4515: $20 $07
 
     ld   a, [wC1AD]                               ; $4517: $FA $AD $C1
     cp   $80                                      ; $451A: $FE $80
-    jr   nz, jr_002_4523                          ; $451C: $20 $05
+    jr   nz, .jr_002_4523                         ; $451C: $20 $05
 
-jr_002_451E:
+.jr_002_451E
     call ClearLinkPositionIncrement               ; $451E: $CD $8E $17
-    jr   jr_002_4563                              ; $4521: $18 $40
+    jr   .joypadVerticalEnd                       ; $4521: $18 $40
 
-jr_002_4523:
+.jr_002_4523
+    ;
+    ; Move Link to the direction pressed on the Joypad
+    ;
+
     ldh  a, [hPressedButtonsMask]                 ; $4523: $F0 $CB
-    and  $03                                      ; $4525: $E6 $03
-    jr   z, jr_002_4542                           ; $4527: $28 $19
+    and  J_RIGHT | J_LEFT                         ; $4525: $E6 $03
+    jr   z, .joypadHorizontalEnd                  ; $4527: $28 $19
 
     ld   e, a                                     ; $4529: $5F
     ld   d, $00                                   ; $452A: $16 $00
@@ -654,25 +668,25 @@ jr_002_4523:
     add  hl, de                                   ; $452F: $19
     ldh  a, [hLinkSpeedX]                         ; $4530: $F0 $9A
     sub  [hl]                                     ; $4532: $96
-    jr   z, jr_002_4542                           ; $4533: $28 $0D
 
+    jr   z, .joypadHorizontalEnd                  ; $4533: $28 $0D
     ld   e, $01                                   ; $4535: $1E $01
     bit  7, a                                     ; $4537: $CB $7F
-    jr   nz, jr_002_453D                          ; $4539: $20 $02
-
+    jr   nz, .jr_002_453D                         ; $4539: $20 $02
     ld   e, $FF                                   ; $453B: $1E $FF
+.jr_002_453D
 
-jr_002_453D:
     ldh  a, [hLinkSpeedX]                         ; $453D: $F0 $9A
     add  e                                        ; $453F: $83
     ldh  [hLinkSpeedX], a                         ; $4540: $E0 $9A
+.joypadHorizontalEnd
 
-jr_002_4542:
+    ; If [hPressedButtonsMask] & J_UP | J_DOWN…
     ldh  a, [hPressedButtonsMask]                 ; $4542: $F0 $CB
     rra                                           ; $4544: $1F
     rra                                           ; $4545: $1F
     and  $03                                      ; $4546: $E6 $03
-    jr   z, jr_002_4563                           ; $4548: $28 $19
+    jr   z, .joypadVerticalEnd                    ; $4548: $28 $19
 
     ld   e, a                                     ; $454A: $5F
     ld   d, $00                                   ; $454B: $16 $00
@@ -680,28 +694,27 @@ jr_002_4542:
     add  hl, de                                   ; $4550: $19
     ldh  a, [hLinkSpeedY]                         ; $4551: $F0 $9B
     sub  [hl]                                     ; $4553: $96
-    jr   z, jr_002_4563                           ; $4554: $28 $0D
 
-    ld   e, $01                                   ; $4556: $1E $01
+    jr   z, .joypadVerticalEnd                    ; $4554: $28 $0D
+    ld   e, +1                                    ; $4556: $1E $01
     bit  7, a                                     ; $4558: $CB $7F
-    jr   nz, jr_002_455E                          ; $455A: $20 $02
+    jr   nz, .jr_002_455E                         ; $455A: $20 $02
+    ld   e, -1                                    ; $455C: $1E $FF
+.jr_002_455E
 
-    ld   e, $FF                                   ; $455C: $1E $FF
-
-jr_002_455E:
     ldh  a, [hLinkSpeedY]                         ; $455E: $F0 $9B
     add  e                                        ; $4560: $83
     ldh  [hLinkSpeedY], a                         ; $4561: $E0 $9B
+.joypadVerticalEnd
 
-jr_002_4563:
     ldh  a, [hLinkPositionZ]                      ; $4563: $F0 $A2
     and  a                                        ; $4565: $A7
-    jr   z, jr_002_456C                           ; $4566: $28 $04
+    jr   z, .jr_002_456C                          ; $4566: $28 $04
 
     and  $80                                      ; $4568: $E6 $80
-    jr   z, groundVfxEnd                          ; $456A: $28 $40
+    jr   z, .return                               ; $456A: $28 $40
 
-jr_002_456C:
+.jr_002_456C
     call ResetPegasusBoots                        ; $456C: $CD $B6 $0C
     ldh  [hLinkPositionZ], a                      ; $456F: $E0 $A2
     ld   [wC149], a                               ; $4571: $EA $49 $C1
@@ -712,34 +725,34 @@ jr_002_456C:
     ld   [wC10A], a                               ; $457F: $EA $0A $C1
     ldh  a, [hLinkPositionY]                      ; $4582: $F0 $99
     cp   $88                                      ; $4584: $FE $88
-    jr   nc, groundVfxEnd                         ; $4586: $30 $24
+    jr   nc, .return                              ; $4586: $30 $24
 
     call ApplyLinkGroundPhysics                   ; $4588: $CD $BD $75
 
     ldh  a, [hFFB8]                               ; $458B: $F0 $B8
     cp   $61                                      ; $458D: $FE $61
-    jr   z, groundVfxEnd                          ; $458F: $28 $1B
+    jr   z, .return                               ; $458F: $28 $1B
 
     ld   a, [wLinkGroundVfx]                      ; $4591: $FA $81 $C1
     cp   GROUND_VFX_SHALLOW_WATER                 ; $4594: $FE $05
     jr   z, shallowWaterVfx                       ; $4596: $28 $15
 
     cp   $07                                      ; $4598: $FE $07
-    jr   z, groundVfxEnd                          ; $459A: $28 $10
+    jr   z, .return                               ; $459A: $28 $10
 
     cp   $0B                                      ; $459C: $FE $0B
-    jr   z, groundVfxEnd                          ; $459E: $28 $0C
+    jr   z, .return                               ; $459E: $28 $0C
 
     cp   $50                                      ; $45A0: $FE $50
-    jr   z, groundVfxEnd                          ; $45A2: $28 $08
+    jr   z, .return                               ; $45A2: $28 $08
 
     cp   $51                                      ; $45A4: $FE $51
-    jr   z, groundVfxEnd                          ; $45A6: $28 $04
+    jr   z, .return                               ; $45A6: $28 $04
 
     ld   a, NOISE_SFX_FOOTSTEP                    ; $45A8: $3E $07
     ldh  [hNoiseSfx], a                           ; $45AA: $E0 $F4
 
-groundVfxEnd:
+.return
     ret                                           ; $45AC: $C9
 
 shallowWaterVfx:
@@ -857,7 +870,7 @@ LinkDirectionToAbsolute::
     db  DIRECTION_DOWN,     DIRECTION_LEFT,     DIRECTION_LEFT,      DIRECTION_UP       ;  270°
     db  DIRECTION_UP,       DIRECTION_RIGHT,    DIRECTION_RIGHT,     DIRECTION_DOWN     ;  315°
 
-label_002_4709:
+UpdateSpinAttackAnimation::
     dec  a                                        ; $4709: $3D
     ld   [wIsUsingSpinAttack], a                  ; $470A: $EA $21 $C1
     ; motion blocked during spin attack
@@ -943,10 +956,11 @@ jr_002_4781:
 jr_002_4789:
     jp   label_002_4827                           ; $4789: $C3 $27 $48
 
-RotateLinkClockwise::
+; Update various automatic animations applied to Link: rotation, sword motion, etc.
+UpdateLinkAnimation::
     ld   a, [wD475]                               ; $478C: $FA $75 $D4
     and  a                                        ; $478F: $A7
-    jr   z, .jr_002_47A3                           ; $4790: $28 $11
+    jr   z, .rotateEnd                            ; $4790: $28 $11
     ; rotate Link every 4th frame clockwise
     ldh  a, [hFrameCounter]                       ; $4792: $F0 $E7
     ; hFrameCounter/4
@@ -962,18 +976,18 @@ RotateLinkClockwise::
     ld   a, [hl]                                  ; $479F: $7E
     ldh  [hLinkDirection], a                      ; $47A0: $E0 $9E
     ret                                           ; $47A2: $C9
+.rotateEnd
 
-.jr_002_47A3:
-    ; if link is in the air jump to jr_002_47E0
+    ; if link is in the air, jump to .jr_002_47E0
     ld   a, [wIsLinkInTheAir]                     ; $47A3: $FA $46 $C1
     cp   TRUE                                     ; $47A6: $FE $01
-    jr   nz, jr_002_47E0                          ; $47A8: $20 $36
+    jr   nz, .jr_002_47E0                         ; $47A8: $20 $36
 
     ld   a, [wC3CF]                               ; $47AA: $FA $CF $C3
-    ; if in sword animation jump to jr_002_47E0
+    ; if in sword animation, jump to .jr_002_47E0
     ld   hl, wSwordAnimationState                 ; $47AD: $21 $37 $C1
     or   [hl]                                     ; $47B0: $B6
-    jr   nz, jr_002_47E0                          ; $47B1: $20 $2D
+    jr   nz, .jr_002_47E0                         ; $47B1: $20 $2D
 
     ldh  a, [hLinkDirection]                      ; $47B3: $F0 $9E
     rla                                           ; $47B5: $17
@@ -983,7 +997,7 @@ RotateLinkClockwise::
     ld   b, $00                                   ; $47BA: $06 $00
     ld   a, [wC152]                               ; $47BC: $FA $52 $C1
     cp   $03                                      ; $47BF: $FE $03
-    jr   nc, jr_002_47E0                          ; $47C1: $30 $1D
+    jr   nc, .jr_002_47E0                         ; $47C1: $30 $1D
 
     ld   e, a                                     ; $47C3: $5F
     ld   d, $00                                   ; $47C4: $16 $00
@@ -996,16 +1010,17 @@ RotateLinkClockwise::
     inc  a                                        ; $47D1: $3C
     ld   [wC153], a                               ; $47D2: $EA $53 $C1
     and  $07                                      ; $47D5: $E6 $07
-    jr   nz, jr_002_47E0                          ; $47D7: $20 $07
+    jr   nz, .jr_002_47E0                         ; $47D7: $20 $07
 
     ld   a, [wC152]                               ; $47D9: $FA $52 $C1
     inc  a                                        ; $47DC: $3C
     ld   [wC152], a                               ; $47DD: $EA $52 $C1
 
-jr_002_47E0:
+.jr_002_47E0
+
     ld   a, [wIsUsingSpinAttack]                  ; $47E0: $FA $21 $C1
     and  a                                        ; $47E3: $A7
-    jp   nz, label_002_4709                       ; $47E4: $C2 $09 $47
+    jp   nz, UpdateSpinAttackAnimation            ; $47E4: $C2 $09 $47
 
     ld   a, [wC16D]                               ; $47E7: $FA $6D $C1
     and  a                                        ; $47EA: $A7
@@ -1024,15 +1039,14 @@ jr_002_47E0:
 
     ld   a, [wIsRunningWithPegasusBoots]          ; $47FF: $FA $4A $C1
     and  a                                        ; $4802: $A7
-    jr   nz, jr_002_4809                          ; $4803: $20 $04
-
+    jr   nz, .jr_002_4809                         ; $4803: $20 $04
     ld   a, $01                                   ; $4805: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4807: $E0 $A1
+.jr_002_4809
 
-jr_002_4809:
     ld   a, [wC138]                               ; $4809: $FA $38 $C1
     and  a                                        ; $480C: $A7
-    jr   nz, jr_002_4823                          ; $480D: $20 $14
+    jr   nz, .jr_002_4823                         ; $480D: $20 $14
     ; go to next sword animation state
     ld   a, [wSwordAnimationState]                ; $480F: $FA $37 $C1
     inc  a                                        ; $4812: $3C
@@ -1047,8 +1061,7 @@ jr_002_4809:
     ld   hl, SwordAnimationStateToUnknow                        ; $481E: $21 $AD $46
     add  hl, bc                                   ; $4821: $09
     ld   a, [hl]                                  ; $4822: $7E
-
-jr_002_4823:
+.jr_002_4823
     dec  a                                        ; $4823: $3D
     ld   [wC138], a                               ; $4824: $EA $38 $C1
 
@@ -1308,7 +1321,7 @@ jr_002_49A0:
     ldh  [hLinkPositionY], a                      ; $49A8: $E0 $99
 
 jr_002_49AA:
-    call func_002_44FA                            ; $49AA: $CD $FA $44
+    call ApplyLinkGroundMotion.noChecks           ; $49AA: $CD $FA $44
     ldh  a, [hLinkPositionZ]                      ; $49AD: $F0 $A2
     and  a                                        ; $49AF: $A7
     jr   nz, jr_002_49B6                          ; $49B0: $20 $04
@@ -1320,7 +1333,7 @@ jr_002_49B6:
     ld   a, $01                                   ; $49B6: $3E $01
     ld   [wIsLinkInTheAir], a                     ; $49B8: $EA $46 $C1
     call CheckItemsToUse                          ; $49BB: $CD $77 $11
-    call RotateLinkClockwise                      ; $49BE: $CD $8C $47
+    call UpdateLinkAnimation                      ; $49BE: $CD $8C $47
     ld   a, [wSwordAnimationState]                ; $49C1: $FA $37 $C1
     ld   [wC16A], a                               ; $49C4: $EA $6A $C1
     jp   ApplyLinkMotionState                     ; $49C7: $C3 $94 $17
@@ -5550,7 +5563,7 @@ jr_002_6A64:
 
 jr_002_6A73:
     ldh  a, [hPressedButtonsMask]                 ; $6A73: $F0 $CB
-    and  $03                                      ; $6A75: $E6 $03
+    and  J_RIGHT | J_LEFT                         ; $6A75: $E6 $03
     jr   z, jr_002_6A92                           ; $6A77: $28 $19
 
     ld   e, a                                     ; $6A79: $5F
@@ -5589,7 +5602,7 @@ jr_002_6A94:
 
 jr_002_6AAA:
     ldh  a, [hPressedButtonsMask]                 ; $6AAA: $F0 $CB
-    and  $03                                      ; $6AAC: $E6 $03
+    and  J_RIGHT | J_LEFT                         ; $6AAC: $E6 $03
     ld   e, a                                     ; $6AAE: $5F
     ld   d, $00                                   ; $6AAF: $16 $00
     ld   hl, Data_002_68B1                        ; $6AB1: $21 $B1 $68
@@ -7587,9 +7600,11 @@ jr_002_7587:
     jr   nc, jr_002_75B1                          ; $75A4: $30 $0B
 
     ld   [hl+], a                                 ; $75A6: $22
+
     ldh  a, [hLinkPositionX]                      ; $75A7: $F0 $98
     add  $04                                      ; $75A9: $C6 $04
     ld   [hl+], a                                 ; $75AB: $22
+
     ld   a, $26                                   ; $75AC: $3E $26
     ld   [hl+], a                                 ; $75AE: $22
     ld   [hl], $00                                ; $75AF: $36 $00
@@ -8134,6 +8149,8 @@ Data_002_787B::
     db   $00, $02
 
 label_002_787D:
+    ; Write transient vfx position to wLinkOAMBuffer
+
     ldh  a, [hLinkPositionY]                      ; $787D: $F0 $99
     add  $08                                      ; $787F: $C6 $08
     ld   [hl+], a                                 ; $7881: $22

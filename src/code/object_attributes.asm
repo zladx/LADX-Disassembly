@@ -41,7 +41,7 @@ GetBGAttributesAddressForObject::
     ld   c, a                                     ; $6591: $4F
     rl   b                                        ; $6592: $CB $10
 
-    ld   hl, OverworldBGAttributesPointers            ; $6594: $21 $76 $5E
+    ld   hl, BGAttributesPointers_Overworld            ; $6594: $21 $76 $5E
 
     ;
     ; Retrieve indoors bank and pointers
@@ -53,12 +53,13 @@ GetBGAttributesAddressForObject::
     jp   z, .indoorPaletteEnd                     ; $659B: $CA $30 $66
 
 
+    ; Use the IndoorsBGAttributesA bank
     ld   a, BANK(IndoorsBGAttributesA)            ; $659E: $3E $23
     ldh  [hMultiPurpose8], a                      ; $65A0: $E0 $DF
 
-    ; Use the attributes group pointer for indoors
+    ; Use the attributes group pointer for indoors A
     ; hl += $200
-    ASSERT OverworldBGAttributesPointers + $200 == IndoorsBGAttributesPointers
+    ASSERT BGAttributesPointers_Overworld + $200 == BGAttributesPointers_IndoorsA
     inc  h                                        ; $65A2: $24
     inc  h                                        ; $65A3: $24
 
@@ -104,7 +105,7 @@ GetBGAttributesAddressForObject::
 
 .jr_01A_65D5
     ld   c, $1E                                   ; $65D5: $0E $1E
-    jr   .useSecondaryIndoorsPaletteBank          ; $65D7: $18 $51
+    jr   .useIndoorsBAttributes                   ; $65D7: $18 $51
 
 .jr_01A_65D9
     ldh  a, [hMapId]                              ; $65D9: $F0 $F7
@@ -116,7 +117,7 @@ GetBGAttributesAddressForObject::
     jr   nz, .jr_01A_65E9                         ; $65E3: $20 $04
 
     ld   c, $00                                   ; $65E5: $0E $00
-    jr   .useSecondaryIndoorsPaletteBank          ; $65E7: $18 $41
+    jr   .useIndoorsBAttributes                   ; $65E7: $18 $41
 
 .jr_01A_65E9
     ldh  a, [hMapId]                              ; $65E9: $F0 $F7
@@ -131,7 +132,7 @@ GetBGAttributesAddressForObject::
 
 .jr_01A_65F9
     ld   c, $28                                   ; $65F9: $0E $28
-    jr   .useSecondaryIndoorsPaletteBank          ; $65FB: $18 $2D
+    jr   .useIndoorsBAttributes                   ; $65FB: $18 $2D
 
 .jr_01A_65FD
     ldh  a, [hMapId]                              ; $65FD: $F0 $F7
@@ -143,33 +144,37 @@ GetBGAttributesAddressForObject::
     jr   nz, .jr_01A_660D                         ; $6607: $20 $04
 
     ld   c, $26                                   ; $6609: $0E $26
-    jr   .useSecondaryIndoorsPaletteBank          ; $660B: $18 $1D
+    jr   .useIndoorsBAttributes                   ; $660B: $18 $1D
 
 .jr_01A_660D
     cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $660D: $FE $B5
     jr   nz, .jr_01A_6616                         ; $660F: $20 $05
 
     ld   bc, $1FE                                 ; $6611: $01 $FE $01
-    jr   .useSecondaryIndoorsPaletteBank          ; $6614: $18 $14
+    jr   .useIndoorsBAttributes                   ; $6614: $18 $14
 
 .jr_01A_6616
     ldh  a, [hMapId]                              ; $6616: $F0 $F7
     cp   MAP_S_FACE_SHRINE                        ; $6618: $FE $16
-    jr   nz, .useSecondaryIndoorsPaletteBank      ; $661A: $20 $0E
+    jr   nz, .useIndoorsBAttributes               ; $661A: $20 $0E
 
     ldh  a, [hMapRoom]                            ; $661C: $F0 $F6
     cp   UNKNOWN_ROOM_6F                          ; $661E: $FE $6F
-    jr   z, .jr_01A_662E                          ; $6620: $28 $0C
+    jr   z, .useIndoorsBPointers                  ; $6620: $28 $0C
     cp   UNKNOWN_ROOM_7F                          ; $6622: $FE $7F
-    jr   z, .jr_01A_662E                          ; $6624: $28 $08
+    jr   z, .useIndoorsBPointers                  ; $6624: $28 $08
     cp   UNKNOWN_ROOM_8F                          ; $6626: $FE $8F
-    jr   z, .jr_01A_662E                          ; $6628: $28 $04
+    jr   z, .useIndoorsBPointers                  ; $6628: $28 $04
 
-.useSecondaryIndoorsPaletteBank
+.useIndoorsBAttributes
+    ; Use the attributes group bank for indoors B
     ld   a, BANK(IndoorsBGAttributesB)            ; $662A: $3E $24
     ldh  [hMultiPurpose8], a                      ; $662C: $E0 $DF
 
-.jr_01A_662E
+.useIndoorsBPointers
+    ; Use the attributes group pointer for indoors B
+    ; hl += $200
+    ASSERT BGAttributesPointers_IndoorsA + $200 == BGAttributesPointers_IndoorsB
     inc  h                                        ; $662E: $24
     inc  h                                        ; $662F: $24
 

@@ -1,7 +1,6 @@
-; Lists of Background attributes for overworld rooms
+; Lists of tile attributes for overworld rooms
 ;
-; TODO: write a Python script to properly cross-reference
-; with the pointers table
+; Each group contains 4 tile attribute for each object.
 
 OverworldBGAttributesB::
 

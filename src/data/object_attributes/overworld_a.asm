@@ -1,4 +1,6 @@
-; Lists of Background attributes for overworld rooms
+; Lists of tile attributes groups for overworld rooms.
+;
+; Each group contains 4 tile attribute for each object.
 
 OverworldBGAttributesA::
 ; Used by overworld rooms: $A0, $A1, $B0, $C0, $C1, $D0, $D1

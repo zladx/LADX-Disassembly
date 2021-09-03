@@ -503,6 +503,7 @@ Data_021_42B1::
     dw   Data_021_5D20
     dw   Data_021_5A50
 
+; Which palettes set is used for which room.
 ; Array indexed by hMapRoom
 Data_021_42EF::
     db   $0F, $0F, $0F, $0F, $0F, $0F, $13, $14, $14, $15, $15, $15, $15, $15, $16, $16

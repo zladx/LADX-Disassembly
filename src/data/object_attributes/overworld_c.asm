@@ -1,3 +1,7 @@
+; Lists of tile attributes for overworld rooms
+;
+; Each group contains 4 tile attribute for each object.
+
 ; Used by overworld rooms: $8E, $8F, $9E, $9F
 Data_027_5220:
     db   $04, $04, $04, $04, $04, $04, $04, $04

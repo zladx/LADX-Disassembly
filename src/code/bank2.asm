@@ -2826,20 +2826,22 @@ LinkMotionRecoverHandler::
     xor  a                                        ; $5283: $AF
     ldh  [hFF9C], a                               ; $5284: $E0 $9C
 
+    ; If on Angler's Tunnel entrance room…
     ld   a, [wIsIndoor]                           ; $5286: $FA $A5 $DB
     and  a                                        ; $5289: $A7
-    jr   nz, jr_002_529C                          ; $528A: $20 $10
+    jr   nz, .anglersTunnelEntranceEnd            ; $528A: $20 $10
 
     ldh  a, [hMapRoom]                            ; $528C: $F0 $F6
-    cp   UNKNOWN_ROOM_2B                          ; $528E: $FE $2B
-    jr   nz, jr_002_529C                          ; $5290: $20 $0A
+    cp   ROOM_OW_ANGLERS_TUNNEL_ENTRANCE          ; $528E: $FE $2B
+    jr   nz, .anglersTunnelEntranceEnd            ; $5290: $20 $0A
 
+    ; … position Link at a specific location
     ld   a, $48                                   ; $5292: $3E $48
     ld   [wLinkMapEntryPositionX], a              ; $5294: $EA $B1 $DB
     ld   a, $30                                   ; $5297: $3E $30
     ld   [wLinkMapEntryPositionY], a              ; $5299: $EA $B2 $DB
+.anglersTunnelEntranceEnd
 
-jr_002_529C:
     jp   label_002_52B9                           ; $529C: $C3 $B9 $52
 
 jr_002_529F:
@@ -6905,6 +6907,11 @@ label_002_71BB:
     cp   $06                                      ; $71C6: $FE $06
     jp   nc, label_002_726A                       ; $71C8: $D2 $6A $72
 
+    ;
+    ; Special cases for passing through an entrance to a dungeon
+    ; while being followed by the Ghost or Marin.
+    ;
+
     ld   a, [wIsIndoor]                           ; $71CB: $FA $A5 $DB
     and  a                                        ; $71CE: $A7
     jr   nz, jr_002_722C                          ; $71CF: $20 $5B
@@ -6918,20 +6925,27 @@ label_002_71BB:
     jr   z, jr_002_722C                           ; $71DC: $28 $4E
 
 jr_002_71DE:
+    ; Check all dungeon entrances
+    ;
+    ; @bug: Because the Color Dungeon is a staircase and not door,
+    ; this check is never hit for the Color Dungeon entrance.
+    ; That's probably why the developers added an extra "you should
+    ; not have followers" check for the Color Dungeon as well.
+
     ldh  a, [hMapRoom]                            ; $71DE: $F0 $F6
     cp   ROOM_OW_COLOR_DUNGEON_ENTRANCE           ; $71E0: $FE $77
     jr   z, jr_002_7204                           ; $71E2: $28 $20
     cp   ROOM_OW_TAIL_CAVE_ENTRANCE               ; $71E4: $FE $D3
     jr   z, jr_002_7204                           ; $71E6: $28 $1C
-    cp   UNKNOWN_ROOM_24                          ; $71E8: $FE $24
+    cp   ROOM_OW_BOTTLE_GROTTO_ENTRANCE           ; $71E8: $FE $24
     jr   z, jr_002_7204                           ; $71EA: $28 $18
-    cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $71EC: $FE $B5
+    cp   ROOM_OW_KEY_CAVERN_ENTRANCE              ; $71EC: $FE $B5
     jr   z, jr_002_7204                           ; $71EE: $28 $14
-    cp   UNKNOWN_ROOM_2B                          ; $71F0: $FE $2B
+    cp   ROOM_OW_ANGLERS_TUNNEL_ENTRANCE          ; $71F0: $FE $2B
     jr   z, jr_002_7204                           ; $71F2: $28 $10
-    cp   UNKNOWN_ROOM_D9                          ; $71F4: $FE $D9
+    cp   ROOM_OW_CATFISHS_MAW_ENTRANCE            ; $71F4: $FE $D9
     jr   z, jr_002_7204                           ; $71F6: $28 $0C
-    cp   UNKNOWN_ROOM_AC                          ; $71F8: $FE $AC
+    cp   ROOM_OW_SOUTHERN_FACE_SHRINE_ENTRANCE    ; $71F8: $FE $AC
     jr   z, jr_002_7204                           ; $71FA: $28 $08
     cp   ROOM_OW_FACE_SHRINE_ENTRANCE             ; $71FC: $FE $8C
     jr   z, jr_002_7204                           ; $71FE: $28 $04

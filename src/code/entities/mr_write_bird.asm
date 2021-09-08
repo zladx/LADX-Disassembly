@@ -32,7 +32,7 @@ jr_006_7255:
 jr_006_725A:
     ld   de, Data_006_720C                        ; $725A: $11 $0C $72
     ldh  a, [hMapRoom]                            ; $725D: $F0 $F6
-    cp   UNKNOWN_ROOM_D9                          ; $725F: $FE $D9
+    cp   ROOM_INDOOR_B_CHRISTINE_HOUSE            ; $725F: $FE $D9
     jr   nz, jr_006_7266                          ; $7261: $20 $03
 
     ld   de, Data_006_7224                        ; $7263: $11 $24 $72

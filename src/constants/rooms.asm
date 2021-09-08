@@ -39,6 +39,8 @@ ROOM_OW_POTHOLE_FIELD_SLIME_KEY          equ $C6
 ROOM_OW_SIREN                            equ $C9
 ROOM_OW_YARNA_LANMOLA                    equ $CE
 
+ROOM_OW_TAIL_CAVE_ENTRANCE               equ $D3
+
 ROOM_OW_BEACH_WITH_SWORD                 equ $F2
 ROOM_OW_WALRUS                           equ $FD
 
@@ -78,6 +80,7 @@ ROOM_INDOOR_B_CAMERA_SHOP                equ $B5
 
 ROOM_INDOOR_B_KANALET_GATE_SWITCH        equ $C3
 
+ROOM_INDOOR_B_KANALET_MAIN_ENTRANCE      equ $D3
 ROOM_INDOOR_B_SCHULE_HOUSE               equ $DD
 
 ROOM_INDOOR_B_EAGLE_TOWER_BOSS           equ $E8
@@ -201,7 +204,6 @@ UNKNOWN_ROOM_CD                          equ $CD
 UNKNOWN_ROOM_CF                          equ $CF
 
 UNKNOWN_ROOM_D2                          equ $D2 ; 1 west of Tail Cave
-UNKNOWN_ROOM_D3                          equ $D3
 UNKNOWN_ROOM_D4                          equ $D4
 UNKNOWN_ROOM_D5                          equ $D5
 UNKNOWN_ROOM_D7                          equ $D7

@@ -7294,26 +7294,40 @@ data_37B4::
     db   $C1, $C2                                 ; $37B4
 
 LoadObject_IndoorEntrance::
-    ; If MapId < $1A…
-    ldh  a, [hMapId]                              ; $37B6: $F0 $F7
-    cp   MAP_UNKNOWN_1A                           ; $37B8: $FE $1A
-    jr   nc, .end                                 ; $37BA: $30 $13
+    ;
+    ; @bug
+    ;
+    ; This code is supposed to replace the Shop's indoor entrance
+    ; by a closed door if Link has stolen from the shop
+    ; (presumably for dramatic effect).
+    ;
+    ; However it doesn't work, because:
+    ; 1. the Shop's room was moved from $D3 to $A1, but the code was never updated,
+    ; 2. even when fixing the room id, the closed door has garbled tiles.
+    ;
+    ; In the final version, this code is never triggered, because the
+    ; $D3 room (Kanalet's Castle main entrance) doesn't have a
+    ; IndoorEntrance object at all.
+    ;
 
-    ; … and MapId >= MAP_EAGLES_TOWER…
-    cp   MAP_EAGLES_TOWER                         ; $37BC: $FE $06
+    ; If on an Indoor B map…
+    ldh  a, [hMapId]                              ; $37B6: $F0 $F7
+    cp   MAP_INDOORS_B_END                        ; $37B8: $FE $1A
+    jr   nc, .end                                 ; $37BA: $30 $13
+    cp   MAP_INDOORS_B_START                      ; $37BC: $FE $06
     jr   c, .end                                  ; $37BE: $38 $0F
 
-    ; … and MapRoom == $D3…
+    ; … and in Kanalet main entrance room (probably used to be the Shop's room)…
     ldh  a, [hMapRoom]                            ; $37C0: $F0 $F6
-    cp   UNKNOWN_ROOM_D3                          ; $37C2: $FE $D3
+    cp   ROOM_INDOOR_B_KANALET_MAIN_ENTRANCE      ; $37C2: $FE $D3
     jr   nz, .end                                 ; $37C4: $20 $09
 
-    ; … and HasStolenFromShop != 0…
+    ; … and has stolen from shop…
     ld   a, [wHasStolenFromShop]                  ; $37C6: $FA $46 $DB
     and  a                                        ; $37C9: $A7
     jr   z, .end                                  ; $37CA: $28 $03
 
-    ; … handle special case.
+    ; … load a closed entrance instead of a open one.
     jp   LoadObject_ClosedDoorBottom              ; $37CC: $C3 $77 $36
 
 .end

@@ -6921,7 +6921,7 @@ jr_002_71DE:
     ldh  a, [hMapRoom]                            ; $71DE: $F0 $F6
     cp   ROOM_OW_COLOR_DUNGEON_ENTRANCE           ; $71E0: $FE $77
     jr   z, jr_002_7204                           ; $71E2: $28 $20
-    cp   UNKNOWN_ROOM_D3                          ; $71E4: $FE $D3
+    cp   ROOM_OW_TAIL_CAVE_ENTRANCE               ; $71E4: $FE $D3
     jr   z, jr_002_7204                           ; $71E6: $28 $1C
     cp   UNKNOWN_ROOM_24                          ; $71E8: $FE $24
     jr   z, jr_002_7204                           ; $71EA: $28 $18

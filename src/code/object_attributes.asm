@@ -72,7 +72,7 @@ GetBGAttributesAddressForObject::
 
     ; Use the attributes group pointer for color dungeon
     ld   hl, ColorDungeonBGAttributes             ; $65AC: $21 $00 $60
-    jp   .loadPalettesAdress                      ; $65AF: $C3 $36 $66
+    jp   .loadObjectAttrmapAddress                ; $65AF: $C3 $36 $66
 .colorDungeonEnd
 
     ; bc = hMapId * 2
@@ -121,7 +121,7 @@ GetBGAttributesAddressForObject::
 
 .jr_01A_65E9
     ldh  a, [hMapId]                              ; $65E9: $F0 $F7
-    cp   MAP_CAVE_WATER                           ; $65EB: $FE $1F
+    cp   MAP_CAVE_WATER                               ; $65EB: $FE $1F
     jr   nz, .jr_01A_65FD                         ; $65ED: $20 $0E
 
     ldh  a, [hMapRoom]                            ; $65EF: $F0 $F6
@@ -181,8 +181,10 @@ GetBGAttributesAddressForObject::
 .indoorPaletteEnd
 
     ;
-    ; Load adress of object attributes group
+    ; Load address of the object attrmap
     ;
+
+    ; Read the attrmap group pointer
 
     ; bc = attributes-group-table[hMapId * 2]
     add  hl, bc                                   ; $6630: $09
@@ -193,10 +195,10 @@ GetBGAttributesAddressForObject::
     push bc                                       ; $6634: $C5
     pop  hl                                       ; $6635: $E1
 
-.loadPalettesAdress
+.loadObjectAttrmapAddress
     pop  bc                                       ; $6636: $C1
     add  hl, bc                                   ; $6637: $09
-    ; hMultiPurpose9, hMultiPurposeA = PalettesTable[ObjectAttributeValue * 4]
+    ; hMultiPurpose9, hMultiPurposeA = objects-attrmap[object-id * 4]
     ld   a, h                                     ; $6638: $7C
     ldh  [hMultiPurpose9], a                      ; $6639: $E0 $E0
     ld   a, l                                     ; $663B: $7D
@@ -227,16 +229,24 @@ Data_01A_66A8::
     db   $03, $02, $03, $02, $01, $00, $01, $00
     db   $03, $03, $01, $01, $02, $02, $00, $00
     db   $01, $00, $03, $02, $01, $00, $03, $02
-    db   $01, $00, $03, $02, $02, $03, $00, $01, $02, $03, $00, $01, $01, $00, $03, $02
-    db   $01, $00, $03, $02, $02, $03, $00, $01, $02, $03, $00, $01, $01, $00, $03, $02
+    db   $01, $00, $03, $02, $02, $03, $00, $01
+    db   $02, $03, $00, $01, $01, $00, $03, $02
+    db   $01, $00, $03, $02, $02, $03, $00, $01
+    db   $02, $03, $00, $01, $01, $00, $03, $02
 
 Data_01A_66F0::
     db   $03, $02, $03, $02, $01, $00, $01, $00, $03, $03, $01, $01, $02, $02, $00, $00
     db   $01, $00, $03, $02, $01, $00, $03, $02, $02, $03, $00, $01, $02, $03, $00, $01
 
+; Retrieve the attrmap address for a given object, and manipulate it further.;
 ; Inputs:
 ;   b     ???
 ;   de    ???
+; Returns:
+;   hMultiPurpose8                  the bank of the BG attributes
+;   hMultiPurpose9, hMultiPurposeA  the address of the BG attributes
+;
+; TODO: understand and document this further.
 func_01A_6710::
     ld   hl, Data_01A_6640                        ; $6710: $21 $40 $66
     push bc                                       ; $6713: $C5

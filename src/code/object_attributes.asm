@@ -7,8 +7,8 @@
 ;   hl   address of the object in the object map (see wRoomObjects)
 ;   bc   object attribute value * 4
 ; Returns:
-;   hMultiPurpose8      the bank of the BG attributes
-;   hMultiPurpose9, hMultiPurposeA   the address of the BG attributes
+;   hMultiPurpose8                  the bank of the BG attributes
+;   hMultiPurpose9, hMultiPurposeA  the address of the BG attributes
 GetBGAttributesAddressForObject::
     push hl                                       ; $6576: $E5
     push bc                                       ; $6577: $C5
@@ -53,8 +53,8 @@ GetBGAttributesAddressForObject::
     jp   z, .indoorPaletteEnd                     ; $659B: $CA $30 $66
 
 
-    ; Use the IndoorsBGAttributesA bank
-    ld   a, BANK(IndoorsBGAttributesA)            ; $659E: $3E $23
+    ; Use the IndoorsAObjectsAttrmaps bank by default
+    ld   a, BANK(IndoorsAObjectsAttrmaps)         ; $659E: $3E $23
     ldh  [hMultiPurpose8], a                      ; $65A0: $E0 $DF
 
     ; Use the attributes group pointer for indoors A
@@ -121,7 +121,7 @@ GetBGAttributesAddressForObject::
 
 .jr_01A_65E9
     ldh  a, [hMapId]                              ; $65E9: $F0 $F7
-    cp   MAP_CAVE_WATER                               ; $65EB: $FE $1F
+    cp   MAP_CAVE_WATER                           ; $65EB: $FE $1F
     jr   nz, .jr_01A_65FD                         ; $65ED: $20 $0E
 
     ldh  a, [hMapRoom]                            ; $65EF: $F0 $F6
@@ -168,7 +168,7 @@ GetBGAttributesAddressForObject::
 
 .useIndoorsBAttributes
     ; Use the attributes group bank for indoors B
-    ld   a, BANK(IndoorsBGAttributesB)            ; $662A: $3E $24
+    ld   a, BANK(IndoorsBObjectsAttrmaps)         ; $662A: $3E $24
     ldh  [hMultiPurpose8], a                      ; $662C: $E0 $DF
 
 .useIndoorsBPointers
@@ -258,7 +258,7 @@ func_01A_6710::
     rl   b                                        ; $6725: $CB $10
     ld   c, a                                     ; $6727: $4F
 
-    call GetBGAttributesAddressForObject                    ; $6728: $CD $76 $65
+    call GetBGAttributesAddressForObject          ; $6728: $CD $76 $65
 
     pop  bc                                       ; $672B: $C1
     ld   hl, Data_01A_66A8                        ; $672C: $21 $A8 $66

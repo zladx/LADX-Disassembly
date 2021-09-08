@@ -2,7 +2,7 @@
 ;
 ; Each group contains 4 tile attribute for each object.
 
-IndoorsBGAttributesB::
+IndoorsBObjectsAttrmaps::
 
 Data_024_4000::
     db   $01, $01, $01, $01, $01, $01, $01, $01  ; $4000

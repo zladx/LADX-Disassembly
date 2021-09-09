@@ -190,7 +190,7 @@ func_005_4F64::
     ret  nz                                       ; $4F6E: $C0
 
 jr_005_4F6F:
-    call func_005_5506                            ; $4F6F: $CD $06 $55
+    call ShouldLinkTalkToEntity_05                ; $4F6F: $CD $06 $55
     ret  nc                                       ; $4F72: $D0
 
     ld   a, [wOverworldRoomStatus + $08]          ; $4F73: $FA $08 $D8
@@ -588,7 +588,7 @@ func_005_51BC::
     and  a                                        ; $51BF: $A7
     ret  nz                                       ; $51C0: $C0
 
-    call func_005_5506                            ; $51C1: $CD $06 $55
+    call ShouldLinkTalkToEntity_05                ; $51C1: $CD $06 $55
     ret  nc                                       ; $51C4: $D0
 
     jp_open_dialog $197
@@ -615,7 +615,7 @@ MarinEntityHandler_Indoor::
     ld   de, Data_005_51CA                        ; $51E9: $11 $CA $51
     call RenderActiveEntitySpritesPair            ; $51EC: $CD $C0 $3B
     call func_005_7A3A                            ; $51EF: $CD $3A $7A
-    call func_005_5506                            ; $51F2: $CD $06 $55
+    call ShouldLinkTalkToEntity_05                ; $51F2: $CD $06 $55
     ret  nc                                       ; $51F5: $D0
 
     jp_open_dialog $1D7                           ; $51F6: $3E $D7
@@ -769,7 +769,7 @@ jr_005_5311:
 func_005_5312::
     call func_005_7A3A                            ; $5312: $CD $3A $7A
     call func_005_54C3                            ; $5315: $CD $C3 $54
-    call func_005_5506                            ; $5318: $CD $06 $55
+    call ShouldLinkTalkToEntity_05                ; $5318: $CD $06 $55
     ret  nc                                       ; $531B: $D0
 
     jp_open_dialog $002                           ; $531C

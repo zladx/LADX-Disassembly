@@ -34,7 +34,7 @@ func_005_538A::
     and  a                                        ; $538D: $A7
     jr   nz, func_005_53CB                        ; $538E: $20 $3B
 
-    call func_005_5506                            ; $5390: $CD $06 $55
+    call ShouldLinkTalkToEntity_05                ; $5390: $CD $06 $55
     ret  nc                                       ; $5393: $D0
 
     ld   a, $F0                                   ; $5394: $3E $F0
@@ -77,7 +77,7 @@ jr_005_53C5:
     jp   OpenDialog                               ; $53C8: $C3 $85 $23
 
 func_005_53CB::
-    call func_005_5506                            ; $53CB: $CD $06 $55
+    call ShouldLinkTalkToEntity_05                ; $53CB: $CD $06 $55
     ret  nc                                       ; $53CE: $D0
 
     jp_open_dialog $0F1                           ; $53CF
@@ -289,40 +289,49 @@ func_005_54EA::
     or   [hl]                                     ; $5502: $B6
     jp   SetEntitySpriteVariant                   ; $5503: $C3 $0C $3B
 
-func_005_5506::
+ShouldLinkTalkToEntity_05::
+    ;
+    ; Check if Link is vertically close from the entity
+    ;
+
     ld   e, b                                     ; $5506: $58
     ldh  a, [hActiveEntityType]                   ; $5507: $F0 $EB
     cp   ENTITY_WITCH                             ; $5509: $FE $40
-    jr   nz, jr_005_5519                          ; $550B: $20 $0C
+    jr   nz, .witchYPosCheck                          ; $550B: $20 $0C
 
+    ; Normal check for Y position
     ldh  a, [hLinkPositionY]                      ; $550D: $F0 $99
-    ld   hl, hActiveEntityPosY                                ; $550F: $21 $EF $FF
+    ld   hl, hActiveEntityPosY                    ; $550F: $21 $EF $FF
     sub  [hl]                                     ; $5512: $96
     add  $14                                      ; $5513: $C6 $14
     cp   $2B                                      ; $5515: $FE $2B
-    jr   jr_005_5523                              ; $5517: $18 $0A
-
-jr_005_5519:
+    jr   .checkYPosEnd                            ; $5517: $18 $0A
+.witchYPosCheck
+    ; Allow Link to talk to the witch accross her cauldron
     ldh  a, [hLinkPositionY]                      ; $5519: $F0 $99
-    ld   hl, hActiveEntityPosY                                ; $551B: $21 $EF $FF
+    ld   hl, hActiveEntityPosY                    ; $551B: $21 $EF $FF
     sub  [hl]                                     ; $551E: $96
     add  $14                                      ; $551F: $C6 $14
     cp   $28                                      ; $5521: $FE $28
+.checkYPosEnd
 
-jr_005_5523:
-    jr   nc, jr_005_5569                          ; $5523: $30 $44
+    jr   nc, .dontTalk                             ; $5523: $30 $44
+
+    ;
+    ; Check if Link is horizontally close from the entity
+    ;
 
     ldh  a, [hLinkPositionX]                      ; $5525: $F0 $98
     ld   hl, hActiveEntityPosX                    ; $5527: $21 $EE $FF
     sub  [hl]                                     ; $552A: $96
     add  $10                                      ; $552B: $C6 $10
     cp   $20                                      ; $552D: $FE $20
-    jr   nc, jr_005_5569                          ; $552F: $30 $38
+    jr   nc, .dontTalk                            ; $552F: $30 $38
 
     inc  e                                        ; $5531: $1C
     ldh  a, [hActiveEntityType]                   ; $5532: $F0 $EB
     cp   ENTITY_BOW_WOW                           ; $5534: $FE $6D
-    jr   z, jr_005_5544                           ; $5536: $28 $0C
+    jr   z, .bowWowEnd                            ; $5536: $28 $0C
 
     push de                                       ; $5538: $D5
     call func_005_7B24                            ; $5539: $CD $24 $7B
@@ -330,9 +339,9 @@ jr_005_5523:
     xor  $01                                      ; $553E: $EE $01
     cp   e                                        ; $5540: $BB
     pop  de                                       ; $5541: $D1
-    jr   nz, jr_005_5569                          ; $5542: $20 $25
+    jr   nz, .dontTalk                            ; $5542: $20 $25
+.bowWowEnd
 
-jr_005_5544:
     ld   hl, wC1AD                                ; $5544: $21 $AD $C1
     ld   [hl], $01                                ; $5547: $36 $01
     ld   a, [wDialogState]                        ; $5549: $FA $9F $C1
@@ -342,19 +351,20 @@ jr_005_5544:
     or   [hl]                                     ; $5553: $B6
     ld   hl, wC134                                ; $5554: $21 $34 $C1
     or   [hl]                                     ; $5557: $B6
-    jr   nz, jr_005_5569                          ; $5558: $20 $0F
+    jr   nz, .dontTalk                            ; $5558: $20 $0F
 
     ld   a, [wWindowY]                            ; $555A: $FA $9A $DB
     cp   $80                                      ; $555D: $FE $80
-    jr   nz, jr_005_5569                          ; $555F: $20 $08
+    jr   nz, .dontTalk                            ; $555F: $20 $08
 
     ldh  a, [hJoypadState]                        ; $5561: $F0 $CC
     and  J_A                                      ; $5563: $E6 $10
-    jr   z, jr_005_5569                           ; $5565: $28 $02
+    jr   z, .dontTalk                             ; $5565: $28 $02
 
+    ; c = 1 (Link should talk to entity)
     scf                                           ; $5567: $37
     ret                                           ; $5568: $C9
 
-jr_005_5569:
+.dontTalk
     and  a                                        ; $5569: $A7
     ret                                           ; $556A: $C9

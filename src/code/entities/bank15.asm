@@ -342,7 +342,7 @@ jr_015_448C:
 
 SeashellMansionTreesEntityHandler::
     call ReturnIfNonInteractive_15                ; $4493: $CD $0D $7B
-    call ShouldLinkTalkToEntity                   ; $4496: $CD $BC $7A
+    call ShouldLinkTalkToEntity_15                ; $4496: $CD $BC $7A
     ret  nc                                       ; $4499: $D0
 
     jp_open_dialog $012                           ; $449A
@@ -7485,7 +7485,7 @@ label_015_7AA0:
 ; Return:
 ;   The carry flag is set if Link is trying to talk to the entity.
 ;   It is not set otherwise.
-ShouldLinkTalkToEntity::
+ShouldLinkTalkToEntity_15::
     ld   e, b                                     ; $7ABC: $58
     ldh  a, [hLinkPositionY]                      ; $7ABD: $F0 $99
     ld   hl, hActiveEntityPosY                                ; $7ABF: $21 $EF $FF
@@ -8241,7 +8241,7 @@ func_015_7EB9::
 jr_015_7EC4:
     xor  a                                        ; $7EC4: $AF
     call SetEntitySpriteVariant                   ; $7EC5: $CD $0C $3B
-    call ShouldLinkTalkToEntity                   ; $7EC8: $CD $BC $7A
+    call ShouldLinkTalkToEntity_15                ; $7EC8: $CD $BC $7A
     ret  nc                                       ; $7ECB: $D0
 
     ldh  a, [hMapRoom]                            ; $7ECC: $F0 $F6
@@ -8406,6 +8406,6 @@ jr_015_7FB5:
     call SetEntitySpriteVariant                   ; $7FBF: $CD $0C $3B
     call func_015_7A6E                            ; $7FC2: $CD $6E $7A
 
-    call ShouldLinkTalkToEntity                   ; $7FC5: $CD $BC $7A
+    call ShouldLinkTalkToEntity_15                ; $7FC5: $CD $BC $7A
     ret  nc                                       ; $7FC8: $D0
     jp_open_dialog $196                           ; $7FC9

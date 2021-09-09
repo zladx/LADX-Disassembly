@@ -116,7 +116,7 @@ func_005_49E5::
     jp_open_dialog $021                           ; $49F8
 
 jr_005_49FD:
-    call func_005_5506                            ; $49FD: $CD $06 $55
+    call ShouldLinkTalkToEntity_05                ; $49FD: $CD $06 $55
     jr   nc, jr_005_4A0C                          ; $4A00: $30 $0A
 
     ld   a, [wC19B]                               ; $4A02: $FA $9B $C1
@@ -426,7 +426,7 @@ jr_005_4BAB:
     call func_005_54C3                            ; $4BB3: $CD $C3 $54
 
 jr_005_4BB6:
-    call func_005_5506                            ; $4BB6: $CD $06 $55
+    call ShouldLinkTalkToEntity_05                ; $4BB6: $CD $06 $55
     ret  nc                                       ; $4BB9: $D0
 
     jp_open_dialog $00B                           ; $4BBA
@@ -552,25 +552,29 @@ jr_005_4C57:
 TarinShield0Handler::
     ld   a, [wShieldLevel]                        ; $4C6D: $FA $44 $DB
     and  a                                        ; $4C70: $A7
-    jr   z, jr_005_4C79                           ; $4C71: $28 $06
+    jr   z, .noShield                             ; $4C71: $28 $06
 
     call IncrementEntityState                     ; $4C73: $CD $12 $3B
     ld   [hl], $03                                ; $4C76: $36 $03
     ret                                           ; $4C78: $C9
 
-jr_005_4C79:
+.noShield
+    ; If Link is nearing the door…
     ldh  a, [hLinkPositionY]                      ; $4C79: $F0 $99
     cp   $7B                                      ; $4C7B: $FE $7B
-    jr   c, jr_005_4C88                           ; $4C7D: $38 $09
-
+    jr   c, .whoahWaitEnd                         ; $4C7D: $38 $09
+    ; … move Link slighly backwards…
     sub  $02                                      ; $4C7F: $D6 $02
     ldh  [hLinkPositionY], a                      ; $4C81: $E0 $99
+    ; … and open the "Woah, wait" dialog.
     jp_open_dialog $000                           ; $4C83
+.whoahWaitEnd
 
-jr_005_4C88:
-    call func_005_5506                            ; $4C88: $CD $06 $55
+
+    call ShouldLinkTalkToEntity_05                ; $4C88: $CD $06 $55
     ret  nc                                       ; $4C8B: $D0
 
+    ; Open the "There's your shield" dialog
     call_open_dialog $054                         ; $4C8C
     jp   IncrementEntityState                     ; $4C91: $C3 $12 $3B
 
@@ -658,7 +662,7 @@ TarinShield3Handler::
     cp   $01                                      ; $4D0F: $FE $01
     jr   z, jr_005_4D38                           ; $4D11: $28 $25
 
-    call func_005_5506                            ; $4D13: $CD $06 $55
+    call ShouldLinkTalkToEntity_05                ; $4D13: $CD $06 $55
     jr   nc, jr_005_4D2C                          ; $4D16: $30 $14
 
     ld   a, [wIsMarinFollowingLink]               ; $4D18: $FA $73 $DB
@@ -686,7 +690,7 @@ jr_005_4D35:
     jp   OpenDialogInTable1                       ; $4D35: $C3 $73 $23
 
 jr_005_4D38:
-    call func_005_5506                            ; $4D38: $CD $06 $55
+    call ShouldLinkTalkToEntity_05                ; $4D38: $CD $06 $55
     jr   nc, jr_005_4D4B                          ; $4D3B: $30 $0E
 
     ld   a, [wHasInstrument1]                     ; $4D3D: $FA $65 $DB
@@ -703,7 +707,7 @@ jr_005_4D4B:
     jr   jr_005_4D56                              ; $4D4B: $18 $09
 
 jr_005_4D4D:
-    call func_005_5506                            ; $4D4D: $CD $06 $55
+    call ShouldLinkTalkToEntity_05                ; $4D4D: $CD $06 $55
     ret  nc                                       ; $4D50: $D0
 
     jp_open_dialog $055                           ; $4D51

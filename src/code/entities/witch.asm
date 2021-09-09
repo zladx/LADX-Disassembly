@@ -84,7 +84,7 @@ func_005_4815::
     and  a                                        ; $481D: $A7
     jr   z, jr_005_484A                           ; $481E: $28 $2A
 
-    call func_005_5506                            ; $4820: $CD $06 $55
+    call ShouldLinkTalkToEntity_05                ; $4820: $CD $06 $55
     ld   a, e                                     ; $4823: $7B
     and  a                                        ; $4824: $A7
     ret  z                                        ; $4825: $C8
@@ -120,7 +120,7 @@ jr_005_4847:
     jr   jr_005_4853                              ; $4848: $18 $09
 
 jr_005_484A:
-    call func_005_5506                            ; $484A: $CD $06 $55
+    call ShouldLinkTalkToEntity_05                ; $484A: $CD $06 $55
     ret  nc                                       ; $484D: $D0
 
     jp_open_dialog $00C                           ; $484E

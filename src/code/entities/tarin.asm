@@ -18,9 +18,9 @@ Data_005_495A::
     db   $F1, $FA, $2A, $02, $F1, $02, $2A, $22, $00, $00, $24, $02, $00, $08, $28, $02
 
 ; Entity handler for:
-;  - Mysterious wood racoon
 ;  - All appearances of Tarin (except when with the bees)
-RacoonEntityHandler::
+;  - Mysterious wood racoon
+TarinEntityHandler::
     ld   a, [wGameplayType]                       ; $496A: $FA $95 $DB
     cp   $01                                      ; $496D: $FE $01
     jr   nz, jr_005_4995                          ; $496F: $20 $24
@@ -725,7 +725,7 @@ jr_005_4D5D:
     ld   [hl], a                                  ; $4D64: $77
     jr   nc, jr_005_4DA2                          ; $4D65: $30 $3B
 
-    ld   a, ENTITY_RACOON                         ; $4D67: $3E $3F
+    ld   a, ENTITY_TARIN                          ; $4D67: $3E $3F
     call SpawnNewEntity_trampoline                ; $4D69: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $4D6C: $F0 $D7
     add  $06                                      ; $4D6E: $C6 $06

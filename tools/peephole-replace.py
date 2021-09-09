@@ -206,7 +206,7 @@ rules = [
         0x3C: "ENTITY_HIDING_SLIME_KEY",
         0x3D: "ENTITY_DROPPABLE_SECRET_SEASHELL",
         0x3E: "ENTITY_MARIN",
-        0x3F: "ENTITY_RACOON",
+        0x3F: "ENTITY_TARIN",
         0x40: "ENTITY_WITCH",
         0x41: "ENTITY_OWL_EVENT",
         0x42: "ENTITY_OWL_STATUE",

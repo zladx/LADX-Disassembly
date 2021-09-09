@@ -39,7 +39,7 @@ section "bank5",romx[$4000],bank[$05]
 include "code/entities/bow_wow.asm"
 include "code/entities/cucco.asm"
 include "code/entities/witch.asm"
-include "code/entities/racoon.asm"
+include "code/entities/tarin.asm"
 include "code/entities/marin.asm"
 include "code/entities/raft_owner.asm"
 include "code/entities/entity_67.asm"

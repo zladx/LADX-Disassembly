@@ -600,7 +600,7 @@ EntityInitMarin::
 Data_003_4AC6::
     db   $FF, $7F, $BE, $0F, $13, $02, $00, $00
 
-EntityInitRacoon::
+EntityInitTarin::
     ldh  a, [hIsGBC]                              ; $4ACE: $F0 $FE
     and  a                                        ; $4AD0: $A7
     jr   z, EntityInitNpcFacingDown               ; $4AD1: $28 $5C

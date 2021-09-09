@@ -76,7 +76,7 @@ EntityHandlersTable::
 ._3C far_pointer HidingSlimeKeyEntityHandler ; $3C
 ._3D far_pointer DroppableSeashellEntityHandler
 ._3E far_pointer MarinEntityHandler
-._3F far_pointer RacoonEntityHandler
+._3F far_pointer TarinEntityHandler
 ._40 far_pointer WitchEntityHandler ; $40
 ._41 far_pointer OwlEventEntityHandler
 ._42 far_pointer OwlStatueEntityHandler
@@ -355,7 +355,7 @@ EntityInitHandlersTable::
 ._3C dw   EntityInitPermanentDroppable
 ._3D dw   EntityInitSecretSeashell
 ._3E dw   EntityInitMarin
-._3F dw   EntityInitRacoon
+._3F dw   EntityInitTarin
 ._40 dw   EntityInitWitch
 ._41 dw   EntityInitOwlEvent
 ._42 dw   EntityInitWithRandomDirection

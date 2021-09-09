@@ -323,7 +323,7 @@ rules = [
         0xB1: "ENTITY_HOLE_FILLER",
         0xB2: "ENTITY_BEETLE_SPAWNER",
         0xB3: "ENTITY_HONEYCOMB",
-        0xB4: "ENTITY_TARIN",
+        0xB4: "ENTITY_TARIN_BEEKEEPER",
         0xB5: "ENTITY_BEAR",
         0xB6: "ENTITY_PAPAHL",
         0xB7: "ENTITY_MERMAID",

@@ -217,7 +217,7 @@ ENTITY_PINCER                        equ $B0
 ENTITY_HOLE_FILLER                   equ $B1
 ENTITY_BEETLE_SPAWNER                equ $B2
 ENTITY_HONEYCOMB                     equ $B3
-ENTITY_TARIN                         equ $B4
+ENTITY_TARIN_BEEKEEPER               equ $B4
 ENTITY_BEAR                          equ $B5
 ENTITY_PAPAHL                        equ $B6
 ENTITY_MERMAID                       equ $B7

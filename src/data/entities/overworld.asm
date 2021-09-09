@@ -625,7 +625,7 @@ Overworld86Entities::
 
 Overworld87Entities::
   entity $2, $4, ENTITY_HONEYCOMB
-  entity $4, $5, ENTITY_TARIN
+  entity $4, $5, ENTITY_TARIN_BEEKEEPER
   entities_end
 
 Overworld88Entities::

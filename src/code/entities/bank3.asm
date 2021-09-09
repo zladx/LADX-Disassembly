@@ -339,7 +339,7 @@ EntityInitBomber::
 EntityInitBushCrawler::
     ret                                           ; $4973: $C9
 
-EntityInitTarin::
+EntityInitTarinBeekeeper::
     call EntityShiftPosition                      ; $4974: $CD $83 $4F
     ld   a, $02                                   ; $4977: $3E $02
     jp   SetEntitySpriteVariant                   ; $4979: $C3 $0C $3B

@@ -193,7 +193,7 @@ EntityHandlersTable::
 ._B1 far_pointer HoleFillerEntityHandler
 ._B2 far_pointer BeetleSpawnerEntityHandler
 ._B3 far_pointer HoneycombEntityHandler
-._B4 far_pointer TarinEntityHandler ; $B4
+._B4 far_pointer TarinBeekeeperEntityHandler ; $B4
 ._B5 far_pointer BearEntityHandler
 ._B6 far_pointer PapahlEntityHandler
 ._B7 far_pointer MermaidEntityHandler
@@ -472,7 +472,7 @@ EntityInitHandlersTable::
 ._B1 dw   EntityInitNoop
 ._B2 dw   EntityInitNoop
 ._B3 dw   EntityInitWithShiftedPosition
-._B4 dw   EntityInitTarin
+._B4 dw   EntityInitTarinBeekeeper
 ._B5 dw   EntityInitNoop
 ._B6 dw   EntityInitNoop
 ._B7 dw   EntityInitNoop

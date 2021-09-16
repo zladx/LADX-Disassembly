@@ -5401,18 +5401,18 @@ LoadRoomObjectsAttributes::
 .jr_020_6DF6
     cp   UNKNOWN_ROOM_1B                          ; $6DF6: $FE $1B
     jr   nz, .jr_020_6E06                         ; $6DF8: $20 $0C
-    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_2B] ; $6DFA: $FA $2B $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_ANGLERS_TUNNEL_ENTRANCE] ; $6DFA: $FA $2B $D8
     and  OW_ROOM_STATUS_CHANGED                      ; $6DFD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DFF: $28 $19
     ld   hl, RoomGBCOverlay1BAlt                  ; $6E01: $21 $E0 $50
     jr   .jr_020_6E14                             ; $6E04: $18 $0E
 
 .jr_020_6E06
-    cp   UNKNOWN_ROOM_2B                          ; $6E06: $FE $2B
+    cp   ROOM_OW_ANGLERS_TUNNEL_ENTRANCE          ; $6E06: $FE $2B
     jr   nz, .jr_020_6E1A                         ; $6E08: $20 $10
 
-    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_2B] ; $6E0A: $FA $2B $D8
-    and  OW_ROOM_STATUS_CHANGED                      ; $6E0D: $E6 $10
+    ld   a, [wOverworldRoomStatus + ROOM_OW_ANGLERS_TUNNEL_ENTRANCE] ; $6E0A: $FA $2B $D8
+    and  OW_ROOM_STATUS_CHANGED                   ; $6E0D: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6E0F: $28 $09
     ld   hl, RoomGBCOverlay2BAlt                  ; $6E11: $21 $30 $51
 

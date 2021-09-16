@@ -479,7 +479,7 @@ EntityInitKid72::
 
 EntityInitMrWrite::
     ldh  a, [hMapRoom]                            ; $4A28: $F0 $F6
-    cp   UNKNOWN_ROOM_D9                          ; $4A2A: $FE $D9
+    cp   ROOM_INDOOR_B_CHRISTINE_HOUSE            ; $4A2A: $FE $D9
     ld   a, $32                                   ; $4A2C: $3E $32
     jr   nz, jr_003_4A32                          ; $4A2E: $20 $02
 

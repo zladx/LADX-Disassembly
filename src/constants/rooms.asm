@@ -10,6 +10,9 @@ ROOM_OW_EAGLE_TOWER                      equ $0E
 
 ROOM_SECTION_OW_SOUTH_OF_TAL_TAL_HEIGHTS equ $20
 
+ROOM_OW_BOTTLE_GROTTO_ENTRANCE           equ $24
+ROOM_OW_ANGLERS_TUNNEL_ENTRANCE          equ $2B
+
 ROOM_OW_CAMERA_SHOP                      equ $37
 
 ROOM_SECTION_OW_GHOST_TRIGGER            equ $40
@@ -32,12 +35,18 @@ ROOM_OW_FACE_SHRINE_ENTRANCE             equ $8C
 
 ROOM_OW_GIANT_SKULL                      equ $97
 
+ROOM_OW_SOUTHERN_FACE_SHRINE_ENTRANCE    equ $AC
+
 ROOM_OW_ULRIRA_HOUSE                     equ $B1
+ROOM_OW_KEY_CAVERN_ENTRANCE              equ $B5
 
 ROOM_SECTION_OW_VILLAGES                 equ $C0
 ROOM_OW_POTHOLE_FIELD_SLIME_KEY          equ $C6
 ROOM_OW_SIREN                            equ $C9
 ROOM_OW_YARNA_LANMOLA                    equ $CE
+
+ROOM_OW_TAIL_CAVE_ENTRANCE               equ $D3
+ROOM_OW_CATFISHS_MAW_ENTRANCE            equ $D9
 
 ROOM_OW_BEACH_WITH_SWORD                 equ $F2
 ROOM_OW_WALRUS                           equ $FD
@@ -78,6 +87,8 @@ ROOM_INDOOR_B_CAMERA_SHOP                equ $B5
 
 ROOM_INDOOR_B_KANALET_GATE_SWITCH        equ $C3
 
+ROOM_INDOOR_B_KANALET_MAIN_ENTRANCE      equ $D3
+ROOM_INDOOR_B_CHRISTINE_HOUSE            equ $D9
 ROOM_INDOOR_B_SCHULE_HOUSE               equ $DD
 
 ROOM_INDOOR_B_EAGLE_TOWER_BOSS           equ $E8
@@ -116,10 +127,8 @@ UNKNOWN_ROOM_1B                          equ $1B ; The drainable water above Ang
 UNKNOWN_ROOM_1C                          equ $1C
 UNKNOWN_ROOM_1E                          equ $1E
 
-UNKNOWN_ROOM_24                          equ $24
 UNKNOWN_ROOM_28                          equ $28
 UNKNOWN_ROOM_29                          equ $29
-UNKNOWN_ROOM_2B                          equ $2B
 UNKNOWN_ROOM_2C                          equ $2C
 UNKNOWN_ROOM_2F                          equ $2F
 
@@ -181,7 +190,6 @@ UNKNOWN_ROOM_A5                          equ $A5 ; Overworld room two east of Ma
 UNKNOWN_ROOM_A8                          equ $A8 ; Overworld room northeast-ish of Pothole Field, Mr. Write's house
 UNKNOWN_ROOM_A9                          equ $A9 ; Ulrira's house
 UNKNOWN_ROOM_AA                          equ $AA
-UNKNOWN_ROOM_AC                          equ $AC ; Southern Face Shrine
 
 UNKNOWN_ROOM_B2                          equ $B2 ; Overworld room - Mabe village telephone booth (...no seashell???), Inside the dog house ?
 UNKNOWN_ROOM_B4                          equ $B4 ; starting room ?
@@ -201,11 +209,9 @@ UNKNOWN_ROOM_CD                          equ $CD
 UNKNOWN_ROOM_CF                          equ $CF
 
 UNKNOWN_ROOM_D2                          equ $D2 ; 1 west of Tail Cave
-UNKNOWN_ROOM_D3                          equ $D3
 UNKNOWN_ROOM_D4                          equ $D4
 UNKNOWN_ROOM_D5                          equ $D5
 UNKNOWN_ROOM_D7                          equ $D7
-UNKNOWN_ROOM_D9                          equ $D9
 UNKNOWN_ROOM_DA                          equ $DA ; Overworld room one north of fisherman under bridge
 UNKNOWN_ROOM_DE                          equ $DE
 UNKNOWN_ROOM_DF                          equ $DF

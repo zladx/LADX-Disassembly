@@ -15,7 +15,7 @@ OwlEventEntityHandler::
 
 jr_006_680D:
     ldh  a, [hMapRoom]                            ; $680D: $F0 $F6
-    cp   UNKNOWN_ROOM_AC                          ; Southern Face Shrine
+    cp   ROOM_OW_SOUTHERN_FACE_SHRINE_ENTRANCE    ; $680F: $FE $AC
     jr   nz, jr_006_681A                          ; $6811: $20 $07
 
     ldh  a, [hRoomStatus]                         ; $6813: $F0 $F8

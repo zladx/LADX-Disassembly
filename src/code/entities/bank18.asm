@@ -4284,7 +4284,7 @@ MarinAtTalTalHeightsEntityHandler::
     add  hl, bc                                   ; $5EF0: $09
     ld   a, [hl]                                  ; $5EF1: $7E
     and  a                                        ; $5EF2: $A7
-    jp   nz, label_018_60F5                       ; $5EF3: $C2 $F5 $60
+    jp   nz, TarinAtTalTalHeights                 ; $5EF3: $C2 $F5 $60
 
     ld   a, c                                     ; $5EF6: $79
     ld   [wC50F], a                               ; $5EF7: $EA $0F $C5
@@ -4577,18 +4577,18 @@ Data_018_60D5::
     db   $50, $02, $52, $02, $52, $22, $50, $22, $54, $02, $56, $02, $56, $22, $54, $22
     db   $58, $02, $5A, $02, $5C, $02, $5E, $02, $5A, $22, $58, $22, $5E, $22, $5C, $22
 
-label_018_60F5:
+TarinAtTalTalHeights:
     ld   de, Data_018_60D5                        ; $60F5: $11 $D5 $60
     call RenderActiveEntitySpritesPair            ; $60F8: $CD $C0 $3B
     call func_018_7D60                            ; $60FB: $CD $60 $7D
     ldh  a, [hActiveEntityState]                  ; $60FE: $F0 $F0
     JP_TABLE                                      ; $6100
-._00 dw func_018_6109                             ; $6101
-._01 dw func_018_6139                             ; $6103
-._02 dw func_018_614F                             ; $6105
-._03 dw func_018_6173                             ; $6107
+._00 dw TarinAtTalTalHeightsState0Handler         ; $6101
+._01 dw TarinAtTalTalHeightsState1Handler         ; $6103
+._02 dw TarinAtTalTalHeightsState2Handler         ; $6105
+._03 dw TarinAtTalTalHeightsState3Handler         ; $6107
 
-func_018_6109::
+TarinAtTalTalHeightsState0Handler::
     ld   hl, wEntitiesDirectionTable              ; $6109: $21 $80 $C3
     add  hl, bc                                   ; $610C: $09
     ld   [hl], $02                                ; $610D: $36 $02
@@ -4614,7 +4614,7 @@ func_018_6109::
     pop  bc                                       ; $6135: $C1
     jp   IncrementEntityState                     ; $6136: $C3 $12 $3B
 
-func_018_6139::
+TarinAtTalTalHeightsState1Handler::
     ld   a, [wC50F]                               ; $6139: $FA $0F $C5
     ld   e, a                                     ; $613C: $5F
     ld   d, b                                     ; $613D: $50
@@ -4625,7 +4625,7 @@ func_018_6139::
     call_open_dialog $23A                         ; $6147
     jp   IncrementEntityState                     ; $614C: $C3 $12 $3B
 
-func_018_614F::
+TarinAtTalTalHeightsState2Handler::
     ld   a, [wC50F]                               ; $614F: $FA $0F $C5
     ld   e, a                                     ; $6152: $5F
     ld   d, b                                     ; $6153: $50
@@ -4648,7 +4648,7 @@ jr_018_6163:
     inc  [hl]                                     ; $616F: $34
     jp   IncrementEntityState                     ; $6170: $C3 $12 $3B
 
-func_018_6173::
+TarinAtTalTalHeightsState3Handler::
     ld   hl, wEntitiesDirectionTable              ; $6173: $21 $80 $C3
     add  hl, bc                                   ; $6176: $09
     ld   [hl], $01                                ; $6177: $36 $01

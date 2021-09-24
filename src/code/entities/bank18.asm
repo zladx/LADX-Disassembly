@@ -2403,7 +2403,7 @@ AnimalD2EntityHandler::
     call func_018_51B0                            ; $526B: $CD $B0 $51
     ld   de, Data_018_525B                        ; $526E: $11 $5B $52
     call RenderActiveEntitySpritesPair            ; $5271: $CD $C0 $3B
-    ld   a, [wC50F]                               ; $5274: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                   ; $5274: $FA $0F $C5
     ld   e, a                                     ; $5277: $5F
     ld   d, b                                     ; $5278: $50
     ld   hl, wEntitiesPosXTable                   ; $5279: $21 $00 $C2
@@ -2589,7 +2589,7 @@ jr_018_5375:
     call AddEntitySpeedToPos_18                   ; $5394: $CD $6C $7E
 
 jr_018_5397:
-    ld   a, [wC50F]                               ; $5397: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                               ; $5397: $FA $0F $C5
     ld   e, a                                     ; $539A: $5F
     ld   d, b                                     ; $539B: $50
     ld   hl, wEntitiesSpeedXTable                 ; $539C: $21 $40 $C2
@@ -2944,7 +2944,7 @@ jr_018_558A:
     and  a                                        ; $55A3: $A7
     ret  nz                                       ; $55A4: $C0
 
-    ld   a, [wC50F]                               ; $55A5: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                               ; $55A5: $FA $0F $C5
     ld   e, a                                     ; $55A8: $5F
     ld   d, b                                     ; $55A9: $50
     ld   hl, wEntitiesPosZTable                   ; $55AA: $21 $10 $C3
@@ -3456,7 +3456,7 @@ Data_018_59E4::
 ; Marin beach cutscene related.
 label_018_59E8:
     ld   a, c                                     ; $59E8: $79
-    ld   [wC50F], a                               ; $59E9: $EA $0F $C5
+    ld   [wMarinEntityIndex], a                               ; $59E9: $EA $0F $C5
     call GetEntityTransitionCountdown             ; $59EC: $CD $05 $0C
 
     jr   z, jr_018_5A3F                           ; $59EF: $28 $4E
@@ -4287,7 +4287,7 @@ MarinAtTalTalHeightsEntityHandler::
     jp   nz, TarinAtTalTalHeights                 ; $5EF3: $C2 $F5 $60
 
     ld   a, c                                     ; $5EF6: $79
-    ld   [wC50F], a                               ; $5EF7: $EA $0F $C5
+    ld   [wMarinEntityIndex], a                               ; $5EF7: $EA $0F $C5
     ld   de, Data_018_5EB7                        ; $5EFA: $11 $B7 $5E
     call RenderActiveEntitySpritesPair            ; $5EFD: $CD $C0 $3B
     call func_018_7D60                            ; $5F00: $CD $60 $7D
@@ -4603,7 +4603,7 @@ TarinAtTalTalHeightsState0Handler::
     call_open_dialog $23B                         ; $611D
     ld   a, $03                                   ; $6122: $3E $03
     ldh  [hLinkDirection], a                      ; $6124: $E0 $9E
-    ld   a, [wC50F]                               ; $6126: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                               ; $6126: $FA $0F $C5
     ld   e, a                                     ; $6129: $5F
     ld   d, b                                     ; $612A: $50
     ld   hl, wEntitiesDirectionTable              ; $612B: $21 $80 $C3
@@ -4615,7 +4615,7 @@ TarinAtTalTalHeightsState0Handler::
     jp   IncrementEntityState                     ; $6136: $C3 $12 $3B
 
 TarinAtTalTalHeightsState1Handler::
-    ld   a, [wC50F]                               ; $6139: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                   ; $6139: $FA $0F $C5
     ld   e, a                                     ; $613C: $5F
     ld   d, b                                     ; $613D: $50
     ld   hl, wEntitiesDirectionTable              ; $613E: $21 $80 $C3
@@ -4626,7 +4626,7 @@ TarinAtTalTalHeightsState1Handler::
     jp   IncrementEntityState                     ; $614C: $C3 $12 $3B
 
 TarinAtTalTalHeightsState2Handler::
-    ld   a, [wC50F]                               ; $614F: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                   ; $614F: $FA $0F $C5
     ld   e, a                                     ; $6152: $5F
     ld   d, b                                     ; $6153: $50
     ld   hl, wEntitiesDirectionTable              ; $6154: $21 $80 $C3
@@ -4640,7 +4640,7 @@ TarinAtTalTalHeightsState2Handler::
 
 jr_018_6163:
     call ReturnIfNonInteractive_18                ; $6163: $CD $E8 $7D
-    ld   a, [wC50F]                               ; $6166: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                               ; $6166: $FA $0F $C5
     ld   e, a                                     ; $6169: $5F
     ld   d, b                                     ; $616A: $50
     ld   hl, wEntitiesStateTable                  ; $616B: $21 $90 $C2

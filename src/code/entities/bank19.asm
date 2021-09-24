@@ -1263,7 +1263,7 @@ jr_019_4914:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $491A: $21 $40 $C3
     add  hl, bc                                   ; $491D: $09
     set  6, [hl]                                  ; $491E: $CB $F6
-    ld   a, [wC50F]                               ; $4920: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                   ; $4920: $FA $0F $C5
     ld   e, a                                     ; $4923: $5F
     ld   d, b                                     ; $4924: $50
     ld   hl, wEntitiesPosXTable                   ; $4925: $21 $00 $C2

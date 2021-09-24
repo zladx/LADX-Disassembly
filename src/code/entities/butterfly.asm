@@ -98,10 +98,12 @@ ButterflyEntityHandler::
     push af                                       ; $6C38: $F5
     ldh  a, [hLinkPositionY]                      ; $6C39: $F0 $99
     push af                                       ; $6C3B: $F5
-    ld   a, [wC50F]                               ; $6C3C: $FA $0F $C5
-    cp   $FF                                      ; $6C3F: $FE $FF
-    jr   z, .C50FEnd                              ; $6C41: $28 $10
 
+    ; If Marin is following Link…
+    ld   a, [wMarinEntityIndex]                   ; $6C3C: $FA $0F $C5
+    cp   $FF                                      ; $6C3F: $FE $FF
+    jr   z, .moveTowardsMarinEnd                  ; $6C41: $28 $10
+    ; … move towards Marin instead
     ld   e, a                                     ; $6C43: $5F
     ld   d, b                                     ; $6C44: $50
     ld   hl, wEntitiesPosXTable                   ; $6C45: $21 $00 $C2
@@ -112,7 +114,7 @@ ButterflyEntityHandler::
     add  hl, de                                   ; $6C4F: $19
     ld   a, [hl]                                  ; $6C50: $7E
     ldh  [hLinkPositionY], a                      ; $6C51: $E0 $99
-.C50FEnd
+.moveTowardsMarinEnd
 
     ; Move closer to Link by $02 pixels
     ld   a, $02                                   ; $6C53: $3E $02

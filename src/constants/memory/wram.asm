@@ -1314,8 +1314,8 @@ wC50D::
 wC50E::
   ds 1 ; C50E
 
-; Unlabeled
-wC50F::
+; Entity index of Marin (as follower, or on the bridge on Tal Tal Heights)
+wMarinEntityIndex::
   ds 1 ; C50F
 
 ; Temporary visual effects displayed as non-interactive sprites.

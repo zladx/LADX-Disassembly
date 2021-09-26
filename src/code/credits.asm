@@ -2406,7 +2406,7 @@ jr_017_581F:
 jr_017_5824:
     call DisableAllEntities                       ; $5824: $CD $2A $56
 
-    ld   a, ENTITY_RACOON                         ; $5827: $3E $3F
+    ld   a, ENTITY_TARIN                          ; $5827: $3E $3F
     call SpawnNewEntity_trampoline                ; $5829: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $582C: $21 $00 $C2
     add  hl, de                                   ; $582F: $19

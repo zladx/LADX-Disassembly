@@ -100,7 +100,7 @@ ENTITY_DROPPABLE_MAGIC_POWDER        equ $3B
 ENTITY_HIDING_SLIME_KEY              equ $3C
 ENTITY_DROPPABLE_SECRET_SEASHELL     equ $3D
 ENTITY_MARIN                         equ $3E
-ENTITY_RACOON                        equ $3F
+ENTITY_TARIN                         equ $3F
 ENTITY_WITCH                         equ $40
 ENTITY_OWL_EVENT                     equ $41
 ENTITY_OWL_STATUE                    equ $42
@@ -217,7 +217,7 @@ ENTITY_PINCER                        equ $B0
 ENTITY_HOLE_FILLER                   equ $B1
 ENTITY_BEETLE_SPAWNER                equ $B2
 ENTITY_HONEYCOMB                     equ $B3
-ENTITY_TARIN                         equ $B4
+ENTITY_TARIN_BEEKEEPER               equ $B4
 ENTITY_BEAR                          equ $B5
 ENTITY_PAPAHL                        equ $B6
 ENTITY_MERMAID                       equ $B7

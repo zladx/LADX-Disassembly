@@ -820,7 +820,7 @@ IndoorsBA2Entities::
 
 IndoorsBA3Entities::
   entity $3, $5, ENTITY_MARIN
-  entity $4, $7, ENTITY_RACOON
+  entity $4, $7, ENTITY_TARIN
   entity $6, $1, ENTITY_DROPPABLE_HEART
   entity $6, $2, ENTITY_DROPPABLE_HEART
   entities_end

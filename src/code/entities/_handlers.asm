@@ -76,7 +76,7 @@ EntityHandlersTable::
 ._3C far_pointer HidingSlimeKeyEntityHandler ; $3C
 ._3D far_pointer DroppableSeashellEntityHandler
 ._3E far_pointer MarinEntityHandler
-._3F far_pointer RacoonEntityHandler
+._3F far_pointer TarinEntityHandler
 ._40 far_pointer WitchEntityHandler ; $40
 ._41 far_pointer OwlEventEntityHandler
 ._42 far_pointer OwlStatueEntityHandler
@@ -193,7 +193,7 @@ EntityHandlersTable::
 ._B1 far_pointer HoleFillerEntityHandler
 ._B2 far_pointer BeetleSpawnerEntityHandler
 ._B3 far_pointer HoneycombEntityHandler
-._B4 far_pointer TarinEntityHandler ; $B4
+._B4 far_pointer TarinBeekeeperEntityHandler ; $B4
 ._B5 far_pointer BearEntityHandler
 ._B6 far_pointer PapahlEntityHandler
 ._B7 far_pointer MermaidEntityHandler
@@ -355,7 +355,7 @@ EntityInitHandlersTable::
 ._3C dw   EntityInitPermanentDroppable
 ._3D dw   EntityInitSecretSeashell
 ._3E dw   EntityInitMarin
-._3F dw   EntityInitRacoon
+._3F dw   EntityInitTarin
 ._40 dw   EntityInitWitch
 ._41 dw   EntityInitOwlEvent
 ._42 dw   EntityInitWithRandomDirection
@@ -472,7 +472,7 @@ EntityInitHandlersTable::
 ._B1 dw   EntityInitNoop
 ._B2 dw   EntityInitNoop
 ._B3 dw   EntityInitWithShiftedPosition
-._B4 dw   EntityInitTarin
+._B4 dw   EntityInitTarinBeekeeper
 ._B5 dw   EntityInitNoop
 ._B6 dw   EntityInitNoop
 ._B7 dw   EntityInitNoop

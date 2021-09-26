@@ -31,7 +31,7 @@ jr_005_7F4D:
     add  e                                        ; $7F56: $83
     call SetEntitySpriteVariant                   ; $7F57: $CD $0C $3B
     call func_005_54C3                            ; $7F5A: $CD $C3 $54
-    call func_005_5506                            ; $7F5D: $CD $06 $55
+    call ShouldLinkTalkToEntity_05                ; $7F5D: $CD $06 $55
     ret  nc                                       ; $7F60: $D0
 
     jp_open_dialog $196                           ; $7F61

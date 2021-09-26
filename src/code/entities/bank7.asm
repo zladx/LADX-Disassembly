@@ -2187,7 +2187,7 @@ Data_007_4E8D::
     db   $54, $02, $56, $02, $56, $22, $54, $22, $50, $02, $52, $02, $52, $22, $50, $22
     db   $74, $02, $76, $02
 
-TarinEntityHandler::
+TarinBeekeeperEntityHandler::
     ld   a, c                                     ; $4EB1: $79
     ld   [$D204], a                               ; $4EB2: $EA $04 $D2
     ld   hl, wEntitiesUnknowTableR                ; $4EB5: $21 $90 $C3

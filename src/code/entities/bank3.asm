@@ -339,7 +339,7 @@ EntityInitBomber::
 EntityInitBushCrawler::
     ret                                           ; $4973: $C9
 
-EntityInitTarin::
+EntityInitTarinBeekeeper::
     call EntityShiftPosition                      ; $4974: $CD $83 $4F
     ld   a, $02                                   ; $4977: $3E $02
     jp   SetEntitySpriteVariant                   ; $4979: $C3 $0C $3B
@@ -600,7 +600,7 @@ EntityInitMarin::
 Data_003_4AC6::
     db   $FF, $7F, $BE, $0F, $13, $02, $00, $00
 
-EntityInitRacoon::
+EntityInitTarin::
     ldh  a, [hIsGBC]                              ; $4ACE: $F0 $FE
     and  a                                        ; $4AD0: $A7
     jr   z, EntityInitNpcFacingDown               ; $4AD1: $28 $5C

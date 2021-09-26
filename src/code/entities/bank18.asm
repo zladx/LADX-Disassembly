@@ -1468,7 +1468,7 @@ MrWriteState0Handler::
     cp   $04                                      ; $4C25: $FE $04
     ret  nz                                       ; $4C27: $C0
 
-    call func_018_7D89                            ; $4C28: $CD $89 $7D
+    call ShouldLinkTalkToEntity_18                ; $4C28: $CD $89 $7D
     ret  nc                                       ; $4C2B: $D0
 
     ld   a, [wTradeSequenceItem]                  ; $4C2C: $FA $0E $DB
@@ -1531,7 +1531,7 @@ label_018_4C75:
 ._05 dw func_018_4CF2                             ; $4C85
 
 func_018_4C87::
-    call func_018_7D89                            ; $4C87: $CD $89 $7D
+    call ShouldLinkTalkToEntity_18                ; $4C87: $CD $89 $7D
     ret  nc                                       ; $4C8A: $D0
 
     ld   a, [wTradeSequenceItem]                  ; $4C8B: $FA $0E $DB
@@ -1603,7 +1603,7 @@ jr_018_4CEC:
     jp_open_dialog $137                           ; $4CED
 
 func_018_4CF2::
-    call func_018_7D89                            ; $4CF2: $CD $89 $7D
+    call ShouldLinkTalkToEntity_18                ; $4CF2: $CD $89 $7D
     ret  nc                                       ; $4CF5: $D0
 
     jp_open_dialog $138                           ; $4CF6
@@ -8627,8 +8627,7 @@ func_018_7D7C::
     cp   $38                                      ; $7D85: $FE $38
     jr   func_018_7DA0                            ; $7D87: $18 $17
 
-; A variant of ShouldLinkTalkToEntity
-func_018_7D89::
+ShouldLinkTalkToEntity_18::
     ldh  a, [hLinkPositionY]                      ; $7D89: $F0 $99
     ld   hl, hActiveEntityPosY                    ; $7D8B: $21 $EF $FF
     sub  [hl]                                     ; $7D8E: $96

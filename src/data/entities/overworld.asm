@@ -358,7 +358,7 @@ Overworld50Entities::
   entities_end
 
 Overworld51Entities::
-  entity $3, $7, ENTITY_RACOON
+  entity $3, $7, ENTITY_TARIN
   entities_end
 
 Overworld52Entities::
@@ -625,7 +625,7 @@ Overworld86Entities::
 
 Overworld87Entities::
   entity $2, $4, ENTITY_HONEYCOMB
-  entity $4, $5, ENTITY_TARIN
+  entity $4, $5, ENTITY_TARIN_BEEKEEPER
   entities_end
 
 Overworld88Entities::

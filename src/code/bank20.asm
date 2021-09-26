@@ -1404,7 +1404,7 @@ ResetRoomVariables::
     ld   [wColorDungonCorrectTombStones], a       ; $4CD8: $EA $D9 $DD
     ld   a, $FF                                   ; $4CDB: $3E $FF
     ld   [wWarpStructs], a                        ; $4CDD: $EA $01 $D4
-    ld   [wC50F], a                               ; $4CE0: $EA $0F $C5
+    ld   [wMarinEntityIndex], a                   ; $4CE0: $EA $0F $C5
     ret                                           ; $4CE3: $C9
 
 ;

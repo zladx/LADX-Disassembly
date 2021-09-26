@@ -8382,7 +8382,7 @@ AnimalD1EntityHandler::
 
     ld   de, Data_015_7F86                        ; $7F9D: $11 $86 $7F
     call RenderActiveEntitySpritesPair            ; $7FA0: $CD $C0 $3B
-    ld   a, [wC50F]                               ; $7FA3: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                   ; $7FA3: $FA $0F $C5
     ld   e, a                                     ; $7FA6: $5F
     ld   d, b                                     ; $7FA7: $50
     ld   hl, wEntitiesPosXTable                   ; $7FA8: $21 $00 $C2

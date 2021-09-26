@@ -153,8 +153,10 @@ MarinCreditsHandler:
     pop  bc                                       ; $4F38: $C1
 
 jr_005_4F39:
+    ; Save Marin's entity index
     ld   a, c                                     ; $4F39: $79
-    ld   [wC50F], a                               ; $4F3A: $EA $0F $C5
+    ld   [wMarinEntityIndex], a                   ; $4F3A: $EA $0F $C5
+
     ld   de, Data_005_4E2A                        ; $4F3D: $11 $2A $4E
     call RenderActiveEntitySpritesPair            ; $4F40: $CD $C0 $3B
     call func_005_54C3                            ; $4F43: $CD $C3 $54

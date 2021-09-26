@@ -5585,7 +5585,7 @@ jr_004_70A6:
 jr_004_70B9:
     call ReturnIfNonInteractive_04                ; $70B9: $CD $A3 $7F
     push bc                                       ; $70BC: $C5
-    ld   a, [wC50F]                               ; $70BD: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                   ; $70BD: $FA $0F $C5
     ld   c, a                                     ; $70C0: $4F
     ldh  a, [hFrameCounter]                       ; $70C1: $F0 $E7
     and  $10                                      ; $70C3: $E6 $10
@@ -5609,7 +5609,7 @@ jr_004_70CA:
 
     call GetEntityDropTimer                       ; $70DF: $CD $FB $0B
     ld   [hl], $18                                ; $70E2: $36 $18
-    ld   a, [wC50F]                               ; $70E4: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                               ; $70E4: $FA $0F $C5
     ld   e, a                                     ; $70E7: $5F
     ld   d, b                                     ; $70E8: $50
     ld   hl, wEntitiesSpriteVariantTable          ; $70E9: $21 $B0 $C3

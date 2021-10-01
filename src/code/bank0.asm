@@ -1975,12 +1975,14 @@ UseItem::
     jp   z, UseShovel                             ; $12D1: $CA $F8 $12
     cp   INVENTORY_MAGIC_ROD                      ; $12D4: $FE $07
     jr   nz, .return                              ; $12D6: $20 $15
+    ; fallthrough
 
-    ; Use Magic Rod
+.useMagicRod
     ld   hl, wSwordAnimationState                 ; $12D8: $21 $37 $C1
     ld   a, [wC19B]                               ; $12DB: $FA $9B $C1
     or   [hl]                                     ; $12DE: $B6
     jr   nz, .return                              ; $12DF: $20 $0C
+
     ld   a, [wActiveProjectileCount]              ; $12E1: $FA $4D $C1
     cp   $02                                      ; $12E4: $FE $02
     jr   nc, .return                              ; $12E6: $30 $05

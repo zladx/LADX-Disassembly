@@ -41,7 +41,7 @@ ENTITY_ARROW                         equ $00
 ENTITY_BOOMERANG                     equ $01
 ENTITY_BOMB                          equ $02
 ENTITY_HOOKSHOT_CHAIN                equ $03
-ENTITY_HOOKSHOT_HIT                  equ $04
+ENTITY_MAGIC_ROD_FIREBALL            equ $04
 ENTITY_ENTITY_LIFTABLE_ROCK          equ $05
 ENTITY_PUSHED_BLOCK                  equ $06
 ENTITY_CHEST_WITH_ITEM               equ $07

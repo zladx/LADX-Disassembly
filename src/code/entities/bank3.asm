@@ -5778,7 +5778,7 @@ jr_003_6ADA:
     call GetEntityTransitionCountdown             ; $6AF0: $CD $05 $0C
 
     ldh  a, [hActiveEntityType]                   ; $6AF3: $F0 $EB
-    cp   ENTITY_HOOKSHOT_HIT                      ; $6AF5: $FE $04
+    cp   ENTITY_MAGIC_ROD_FIREBALL                ; $6AF5: $FE $04
     jr   nz, .hookshotHitEnd                      ; $6AF7: $20 $06
 
     call GetEntityPrivateCountdown1               ; $6AF9: $CD $00 $0C
@@ -9091,7 +9091,7 @@ ApplySwordIntersectionWithObjects::
 
 jr_003_7CFD:
     ldh  a, [hActiveEntityType]                   ; $7CFD: $F0 $EB
-    cp   ENTITY_HOOKSHOT_HIT                      ; $7CFF: $FE $04
+    cp   ENTITY_MAGIC_ROD_FIREBALL                ; $7CFF: $FE $04
     jr   nz, jr_003_7D6B                          ; $7D01: $20 $68
 
     ld   a, [wIsIndoor]                           ; $7D03: $FA $A5 $DB

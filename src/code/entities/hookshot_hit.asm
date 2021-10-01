@@ -1,7 +1,7 @@
 Data_003_69AA::
     db   $36, $02, $36, $22, $36, $12, $36, $32   ; $69AA
 
-HookshotHitEntityHandler::
+MagicRodFireballEntityHandler::
     ld   hl, wActiveProjectileCount               ; $69B2: $21 $4D $C1
     inc  [hl]                                     ; $69B5: $34
     ld   a, $0A                                   ; $69B6: $3E $0A

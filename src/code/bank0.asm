@@ -2848,7 +2848,7 @@ ApplyLinkMotionState::
     or   [hl]                                     ; $17FB: $B6
     jr   nz, .magicRodEnd                         ; $17FC: $20 $16
     call func_157C                                ; $17FE: $CD $7C $15
-    ld   a, ENTITY_HOOKSHOT_HIT                   ; $1801: $3E $04
+    ld   a, ENTITY_MAGIC_ROD_FIREBALL             ; $1801: $3E $04
     call SpawnPlayerProjectile                    ; $1803: $CD $2F $14
     jr   c, .magicRodEnd                          ; $1806: $38 $0C
     ld   a, NOISE_SFX_MAGIC_ROD                   ; $1808: $3E $0D

@@ -160,5 +160,10 @@ ROOM_SWITCHABLE_OBJECT_NONE          equ $0
 ROOM_SWITCHABLE_OBJECT_SWITCH_BUTTON equ $1
 ROOM_SWITCHABLE_OBJECT_MOBILE_BLOCK  equ $2
 
+; Values for the highest bit of wLinkAttackStepAnimationCountdown
+ATTACK_STEP_ITEM_ANY                 equ $00
+ATTACK_STEP_ITEM_MAGIC_ROD           equ $80
+ATTACK_STEP_DURATION_MASK            equ $7F ; extract the duration value, without the item type part
+
 ; height of the window on the top of the screen
 WINDOW_HEIGHT equ 2 ; number in tiles

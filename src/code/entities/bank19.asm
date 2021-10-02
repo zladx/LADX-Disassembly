@@ -69,7 +69,7 @@ LiftableStatueState0Handler::
     cp   $30                                      ; $4085: $FE $30
     jp   nc, label_019_411C                       ; $4087: $D2 $1C $41
 
-    ld   a, [wC19B]                               ; $408A: $FA $9B $C1
+    ld   a, [wLinkAttackStepAnimationCountdown]   ; $408A: $FA $9B $C1
     and  a                                        ; $408D: $A7
     jp   nz, label_019_411C                       ; $408E: $C2 $1C $41
 
@@ -3593,7 +3593,7 @@ jr_019_5922:
     cp   $24                                      ; $592F: $FE $24
     ret  nc                                       ; $5931: $D0
 
-    ld   a, [wC19B]                               ; $5932: $FA $9B $C1
+    ld   a, [wLinkAttackStepAnimationCountdown]   ; $5932: $FA $9B $C1
     and  a                                        ; $5935: $A7
     ret  nz                                       ; $5936: $C0
 
@@ -3834,7 +3834,7 @@ jr_019_5A9F:
     call CheckLinkCollisionWithEnemy_trampoline   ; $5AA2: $CD $5A $3B
     ret  nc                                       ; $5AA5: $D0
 
-    ld   a, [wC19B]                               ; $5AA6: $FA $9B $C1
+    ld   a, [wLinkAttackStepAnimationCountdown]   ; $5AA6: $FA $9B $C1
     and  a                                        ; $5AA9: $A7
     ret  nz                                       ; $5AAA: $C0
 

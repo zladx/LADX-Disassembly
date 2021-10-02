@@ -119,7 +119,7 @@ jr_005_49FD:
     call ShouldLinkTalkToEntity_05                ; $49FD: $CD $06 $55
     jr   nc, jr_005_4A0C                          ; $4A00: $30 $0A
 
-    ld   a, [wC19B]                               ; $4A02: $FA $9B $C1
+    ld   a, [wLinkAttackStepAnimationCountdown]   ; $4A02: $FA $9B $C1
     and  a                                        ; $4A05: $A7
     ret  nz                                       ; $4A06: $C0
 
@@ -136,8 +136,10 @@ Data_005_4A11::
 func_005_4A17::
     ld   a, $02                                   ; $4A17: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4A19: $E0 $A1
+
     xor  a                                        ; $4A1B: $AF
-    ld   [wC19B], a                               ; $4A1C: $EA $9B $C1
+    ld   [wLinkAttackStepAnimationCountdown], a   ; $4A1C: $EA $9B $C1
+
     call func_005_7B24                            ; $4A1F: $CD $24 $7B
     ld   a, e                                     ; $4A22: $7B
     xor  $01                                      ; $4A23: $EE $01

@@ -449,7 +449,7 @@ jr_006_4806:
     call CheckLinkCollisionWithEnemy_trampoline   ; $4806: $CD $5A $3B
     jr   nc, jr_006_4852                          ; $4809: $30 $47
 
-    ld   a, [wC19B]                               ; $480B: $FA $9B $C1
+    ld   a, [wLinkAttackStepAnimationCountdown]   ; $480B: $FA $9B $C1
     and  a                                        ; $480E: $A7
     jr   nz, jr_006_4852                          ; $480F: $20 $41
 

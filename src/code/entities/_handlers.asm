@@ -17,7 +17,7 @@ EntityHandlersTable::
 ._01 far_pointer BoomerangEntityHandler
 ._02 far_pointer BombEntityHandler
 ._03 far_pointer HookshotChainEntityHandler
-._04 far_pointer HookshotHitEntityHandler
+._04 far_pointer MagicRodFireballEntityHandler
 ._05 far_pointer LiftableRockEntityHandler
 ._06 far_pointer PushedBlockEntityHandler
 ._07 far_pointer ChestWithItemEntityHandler

@@ -1189,8 +1189,10 @@ ENDC
     ld   [wBombArrowCooldown], a                  ; $4BA0: $EA $C0 $C1
     ld   a, e                                     ; $4BA3: $7B
     ld   [wLatestDroppedBombEntityIndex], a       ; $4BA4: $EA $C1 $C1
-    ld   a, $0C                                   ; $4BA7: $3E $0C
-    ld   [wC19B], a                               ; $4BA9: $EA $9B $C1
+
+    ld   a, $0C | ATTACK_STEP_ITEM_ANY            ; $4BA7: $3E $0C
+    ld   [wLinkAttackStepAnimationCountdown], a   ; $4BA9: $EA $9B $C1
+
     ld   hl, wEntitiesTransitionCountdownTable    ; $4BAC: $21 $E0 $C2
     add  hl, de                                   ; $4BAF: $19
     ld   [hl], $A0                                ; $4BB0: $36 $A0
@@ -1314,8 +1316,10 @@ SprinkleMagicPowder::
     ; play powder jingle
     ld   a, JINGLE_POWDER                         ; $4C47: $3E $05
     ldh  [hJingle], a                             ; $4C49: $E0 $F2
-    ld   a, $0E                                   ; $4C4B: $3E $0E
-    ld   [wC19B], a                               ; $4C4D: $EA $9B $C1
+
+    ld   a, $0E | ATTACK_STEP_ITEM_ANY            ; $4C4B: $3E $0E
+    ld   [wLinkAttackStepAnimationCountdown], a   ; $4C4D: $EA $9B $C1
+
     ; reduce wMagicPowderCount
     ld   a, [wMagicPowderCount]                   ; $4C50: $FA $4C $DB
     sub  $01                                      ; $4C53: $D6 $01

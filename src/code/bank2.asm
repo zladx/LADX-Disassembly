@@ -301,14 +301,15 @@ DirectionToLinkAnimationState::
 .down:  db  LINK_ANIMATION_STATE_HOOKSHOT_CHAIN_DOWN     ; $4346 $0E
 
 func_002_434A::
-    ld   a, [wC19B]                               ; $434A: $FA $9B $C1
-    and  $7F                                      ; $434D: $E6 $7F
+    ld   a, [wLinkAttackStepAnimationCountdown]   ; $434A: $FA $9B $C1
+    and  ATTACK_STEP_DURATION_MASK                ; $434D: $E6 $7F
     jr   z, jr_002_4367                           ; $434F: $28 $16
 
-    ld   a, [wC19B]                               ; $4351: $FA $9B $C1
+    ld   a, [wLinkAttackStepAnimationCountdown]   ; $4351: $FA $9B $C1
     dec  a                                        ; $4354: $3D
-    ld   [wC19B], a                               ; $4355: $EA $9B $C1
-    and  $7F                                      ; $4358: $E6 $7F
+    ld   [wLinkAttackStepAnimationCountdown], a   ; $4355: $EA $9B $C1
+    and  ATTACK_STEP_DURATION_MASK                ; $4358: $E6 $7F
+
     ldh  a, [hLinkDirection]                      ; $435A: $F0 $9E
     ld   e, a                                     ; $435C: $5F
     ld   d, $00                                   ; $435D: $16 $00
@@ -320,7 +321,7 @@ func_002_434A::
 
 jr_002_4367:
     xor  a                                        ; $4367: $AF
-    ld   [wC19B], a                               ; $4368: $EA $9B $C1
+    ld   [wLinkAttackStepAnimationCountdown], a   ; $4368: $EA $9B $C1
     ret                                           ; $436B: $C9
 
 func_002_436C::
@@ -2264,7 +2265,7 @@ jr_002_4F3C:
     ; reset all states after spin attack
     ldh  [hLinkPositionZ], a                      ; $4F3F: $E0 $A2
     ld   [wIsLinkInTheAir], a                     ; $4F41: $EA $46 $C1
-    ld   [wC19B], a                               ; $4F44: $EA $9B $C1
+    ld   [wLinkAttackStepAnimationCountdown], a   ; $4F44: $EA $9B $C1
     ld   [wSwordAnimationState], a                ; $4F47: $EA $37 $C1
     ld   [wC16A], a                               ; $4F4A: $EA $6A $C1
     ld   [wC16D], a                               ; $4F4D: $EA $6D $C1
@@ -2918,15 +2919,15 @@ LinkDirectionTohMultiPurpose4_5::
 
 label_002_5310::
     ; TODO label and also add row comment for data above
-    ld   a, [wC19B]                               ; $5310: $FA $9B $C1
-    and  $7F                                      ; $5313: $E6 $7F
+    ld   a, [wLinkAttackStepAnimationCountdown]   ; $5310: $FA $9B $C1
+    and  ATTACK_STEP_DURATION_MASK                ; $5313: $E6 $7F
     cp   $08                                      ; $5315: $FE $08
     ldh  a, [hLinkDirection]                      ; $5317: $F0 $9E
     jr   c, .skipOffset                           ; $5319: $38 $02
 
     add  $04                                      ; $531B: $C6 $04
 
-.skipOffset::
+.skipOffset
     ld   e, a                                     ; $531D: $5F
     ld   d, $00                                   ; $531E: $16 $00
     ld   hl, LinkDirectionTohMultiPurpose0        ; $5320: $21 $E8 $52

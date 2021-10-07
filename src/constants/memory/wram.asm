@@ -698,8 +698,16 @@ wC198::
 wC199::
   ds 2 ; C199 - C19A
 
-; Unlabeled
-wC19B::
+; Link attack-step animation timer.
+;
+; When the timer is non-zero, display an attack-step animation for Link –
+; for instance when slashing the sword, or when throwing a projectile.
+;
+; Bit 7: is the attack step triggered by the magic rod
+; Bits 6-0: countdown until the animation ends
+;
+; See ATTACK_STEP_ITEM constants
+wLinkAttackStepAnimationCountdown::
   ds 1 ; C19B
 
 ; Unlabeled

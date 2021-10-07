@@ -195,7 +195,7 @@ jr_007_4128:
     call CheckLinkCollisionWithEnemy_trampoline   ; $4137: $CD $5A $3B
     ret  nc                                       ; $413A: $D0
 
-    ld   a, [wC19B]                               ; $413B: $FA $9B $C1
+    ld   a, [wLinkAttackStepAnimationCountdown]   ; $413B: $FA $9B $C1
     and  a                                        ; $413E: $A7
     ret  nz                                       ; $413F: $C0
 
@@ -5015,7 +5015,7 @@ jr_007_60DD:
     call CheckLinkCollisionWithEnemy_trampoline   ; $60DD: $CD $5A $3B
     jr   nc, jr_007_6133                          ; $60E0: $30 $51
 
-    ld   a, [wC19B]                               ; $60E2: $FA $9B $C1
+    ld   a, [wLinkAttackStepAnimationCountdown]   ; $60E2: $FA $9B $C1
     and  a                                        ; $60E5: $A7
     jr   nz, jr_007_6133                          ; $60E6: $20 $4B
 
@@ -8595,7 +8595,7 @@ label_007_7733:
     call CheckLinkCollisionWithEnemy_trampoline   ; $7733: $CD $5A $3B
     jr   nc, jr_007_7783                          ; $7736: $30 $4B
 
-    ld   a, [wC19B]                               ; $7738: $FA $9B $C1
+    ld   a, [wLinkAttackStepAnimationCountdown]   ; $7738: $FA $9B $C1
     and  a                                        ; $773B: $A7
     jr   nz, jr_007_7783                          ; $773C: $20 $45
 

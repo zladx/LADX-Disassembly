@@ -1320,8 +1320,9 @@ jr_014_541B:
     ld   hl, wEntitiesSpeedZTable                 ; $5439: $21 $20 $C3
     add  hl, bc                                   ; $543C: $09
     ld   [hl], a                                  ; $543D: $77
-    ld   a, $0C                                   ; $543E: $3E $0C
-    ld   [wC19B], a                               ; $5440: $EA $9B $C1
+
+    ld   a, $0C | ATTACK_STEP_ITEM_ANY            ; $543E: $3E $0C
+    ld   [wLinkAttackStepAnimationCountdown], a   ; $5440: $EA $9B $C1
 
 label_014_5443:
     ret                                           ; $5443: $C9

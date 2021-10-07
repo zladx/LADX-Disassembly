@@ -5633,7 +5633,8 @@ func_003_68F8::
     jr   c, .return                               ; $696C: $38 $32
 
     xor  a                                        ; $696E: $AF
-    ld   [wC19B], a                               ; $696F: $EA $9B $C1
+    ld   [wLinkAttackStepAnimationCountdown], a   ; $696F: $EA $9B $C1
+
     ld   hl, wEntitiesPosXTable                         ; $6972: $21 $00 $C2
     add  hl, de                                   ; $6975: $19
     ldh  a, [hSwordIntersectedAreaX]              ; $6976: $F0 $CE

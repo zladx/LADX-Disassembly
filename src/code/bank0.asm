@@ -1979,15 +1979,16 @@ UseItem::
 
 .useMagicRod
     ld   hl, wSwordAnimationState                 ; $12D8: $21 $37 $C1
-    ld   a, [wC19B]                               ; $12DB: $FA $9B $C1
+    ld   a, [wLinkAttackStepAnimationCountdown]   ; $12DB: $FA $9B $C1
     or   [hl]                                     ; $12DE: $B6
     jr   nz, .return                              ; $12DF: $20 $0C
 
     ld   a, [wActiveProjectileCount]              ; $12E1: $FA $4D $C1
     cp   $02                                      ; $12E4: $FE $02
     jr   nc, .return                              ; $12E6: $30 $05
-    ld   a, $8E                                   ; $12E8: $3E $8E
-    ld   [wC19B], a                               ; $12EA: $EA $9B $C1
+
+    ld   a, $0E | ATTACK_STEP_ITEM_MAGIC_ROD      ; $12E8: $3E $8E
+    ld   [wLinkAttackStepAnimationCountdown], a   ; $12EA: $EA $9B $C1
 
 .return
     ret                                           ; $12ED: $C9
@@ -2219,8 +2220,9 @@ SpawnPlayerProjectile::
     call SpawnNewEntity_trampoline                ; $142F: $CD $86 $3B
     ret  c                                        ; $1432: $D8
 
-    ld   a, $0C                                   ; $1433: $3E $0C
-    ld   [wC19B], a                               ; $1435: $EA $9B $C1
+    ld   a, $0C | ATTACK_STEP_ITEM_ANY            ; $1433: $3E $0C
+    ld   [wLinkAttackStepAnimationCountdown], a   ; $1435: $EA $9B $C1
+
     push bc                                       ; $1438: $C5
     ldh  a, [hLinkDirection]                      ; $1439: $F0 $9E
     ld   c, a                                     ; $143B: $4F
@@ -2275,9 +2277,10 @@ SpawnPlayerProjectile::
     ret                                           ; $148C: $C9
 
 UseMagicPowder::
-    ld   a, [wC19B]                               ; $148D: $FA $9B $C1
+    ld   a, [wLinkAttackStepAnimationCountdown]   ; $148D: $FA $9B $C1
     and  a                                        ; $1490: $A7
     ret  nz                                       ; $1491: $C0
+
     ld   a, [wHasToadstool]                       ; $1492: $FA $4B $DB
     and  a                                        ; $1495: $A7
     jr   z, .jr_14A7                              ; $1496: $28 $0F
@@ -2413,8 +2416,10 @@ label_1562::
     ret  nz                                       ; $1571: $C0
     ld   a, ENTITY_SWORD_BEAM                     ; $1572: $3E $DF
     call SpawnPlayerProjectile                    ; $1574: $CD $2F $14
+
     xor  a                                        ; $1577: $AF
-    ld   [wC19B], a                               ; $1578: $EA $9B $C1
+    ld   [wLinkAttackStepAnimationCountdown], a   ; $1578: $EA $9B $C1
+
     ret                                           ; $157B: $C9
 
 func_157C::
@@ -2565,8 +2570,10 @@ label_1653::
     ld   a, ENTITY_ENTITY_LIFTABLE_ROCK           ; $1653: $3E $05
     call SpawnPlayerProjectile                    ; $1655: $CD $2F $14
     jr   c, .dropRandomItem                       ; $1658: $38 $22
+
     xor  a                                        ; $165A: $AF
-    ld   [wC19B], a                               ; $165B: $EA $9B $C1
+    ld   [wLinkAttackStepAnimationCountdown], a   ; $165B: $EA $9B $C1
+
     ld   hl, wEntitiesPosXTable                   ; $165E: $21 $00 $C2
     add  hl, de                                   ; $1661: $19
     ldh  a, [hSwordIntersectedAreaX]              ; $1662: $F0 $CE
@@ -2836,19 +2843,28 @@ ApplyLinkMotionState::
     jp   func_1819                                ; $17D8: $C3 $19 $18
 
 .label_17DB
-    ld   a, [wC19B]                               ; $17DB: $FA $9B $C1
+    ld   a, [wLinkAttackStepAnimationCountdown]   ; $17DB: $FA $9B $C1
     push af                                       ; $17DE: $F5
-    bit  7, a                                     ; $17DF: $CB $7F
+    bit  7, a ; extract the highest-bit (ATTACK_STEP_ITEM_MAGIC_ROD) ; $17DF: $CB $7F
     jp   z, .magicRodEnd                          ; $17E1: $CA $14 $18
+
+    ;
+    ; The attack step was triggered by firing the magic rod
+    ;
+
     callsw label_002_5310                         ; $17E4: $3E $02 $CD $0C $08 $CD $10 $53
-    ld   a, [wC19B]                               ; $17EC: $FA $9B $C1
-    and  $7F                                      ; $17EF: $E6 $7F
+
+    ; If this is exactly the second frame of the magic rod attack step animation…
+    ld   a, [wLinkAttackStepAnimationCountdown]   ; $17EC: $FA $9B $C1
+    and  ATTACK_STEP_DURATION_MASK                ; $17EF: $E6 $7F
     cp   $0C                                      ; $17F1: $FE $0C
     jr   nz, .magicRodEnd                         ; $17F3: $20 $1F
+    ; … and no dialog or room transition is happening…
     ld   hl, wDialogState                         ; $17F5: $21 $9F $C1
     ld   a, [wRoomTransitionState]                ; $17F8: $FA $24 $C1
     or   [hl]                                     ; $17FB: $B6
     jr   nz, .magicRodEnd                         ; $17FC: $20 $16
+    ; … fire a magic rod fireball projectile
     call func_157C                                ; $17FE: $CD $7C $15
     ld   a, ENTITY_MAGIC_ROD_FIREBALL             ; $1801: $3E $04
     call SpawnPlayerProjectile                    ; $1803: $CD $2F $14
@@ -2859,7 +2875,7 @@ ApplyLinkMotionState::
 .magicRodEnd
 
     pop  af                                       ; $1814: $F1
-    ld   [wC19B], a                               ; $1815: $EA $9B $C1
+    ld   [wLinkAttackStepAnimationCountdown], a   ; $1815: $EA $9B $C1
     ret                                           ; $1818: $C9
 
 func_1819::

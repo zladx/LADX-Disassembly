@@ -1009,10 +1009,10 @@ wEntitiesStateTable::
 
 ; Indicates if the entity is colliding:
 ; 0 = no collisions,
-; 1 = collision on the right,
-; 2 = collision on the left,
-; 3 = collision on the bottom,
-; 4 = collision on the top
+; bit 1 = collision on the right,
+; bit 2 = collision on the left,
+; bit 3 = collision on the bottom,
+; bit 4 = collision on the top
 wEntitiesCollisionsTable::
   ds $10 ; C2A0 - C2AF
 

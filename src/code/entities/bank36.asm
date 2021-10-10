@@ -7195,7 +7195,7 @@ jr_036_6B4D:
     pop  af                                       ; $6B55: $F1
     ld   [hl], a                                  ; $6B56: $77
     pop  af                                       ; $6B57: $F1
-    call label_3EAF                               ; $6B58: $CD $AF $3E
+    call StopEntityRecoilOnCollision              ; $6B58: $CD $AF $3E
 
 jr_036_6B5B:
     ret                                           ; $6B5B: $C9

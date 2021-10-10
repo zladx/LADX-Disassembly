@@ -9720,5 +9720,5 @@ jr_003_7FE4:
     pop  af                                       ; $7FEE: $F1
     ld   [hl], a                                  ; $7FEF: $77
     pop  af                                       ; $7FF0: $F1
-    call label_3EAF                               ; $7FF1: $CD $AF $3E
+    call StopEntityRecoilOnCollision              ; $7FF1: $CD $AF $3E
     ret                                           ; $7FF4: $C9

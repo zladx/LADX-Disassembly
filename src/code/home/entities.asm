@@ -1034,43 +1034,56 @@ label_3E8E::
     ld   [hl], $0F                                ; $3EAC: $36 $0F
     ret                                           ; $3EAE: $C9
 
-label_3EAF::
+; Clear the entity "ignore hits" countdown when the entity is
+; recoiling, but collisions with something.
+StopEntityRecoilOnCollision::
+    ; [hMultiPurpose0] = abs(wEntitiesUnknowTableT[bc])
     ld   hl, wEntitiesUnknowTableT                ; $3EAF: $21 $F0 $C3
     add  hl, bc                                   ; $3EB2: $09
     ld   a, [hl]                                  ; $3EB3: $7E
+
     bit  7, a                                     ; $3EB4: $CB $7F
-    jr   z, .jr_3EBA                              ; $3EB6: $28 $02
+    jr   z, .negativeTEnd                         ; $3EB6: $28 $02
     cpl                                           ; $3EB8: $2F
     inc  a                                        ; $3EB9: $3C
-
-.jr_3EBA
+.negativeTEnd
     ldh  [hMultiPurpose0], a                      ; $3EBA: $E0 $D7
+
+    ; a = abs(wEntitiesUnknowTableS[bc])
     ld   hl, wEntitiesUnknowTableS                ; $3EBC: $21 $00 $C4
     add  hl, bc                                   ; $3EBF: $09
     ld   a, [hl]                                  ; $3EC0: $7E
+
     bit  7, a                                     ; $3EC1: $CB $7F
-    jr   z, .jr_3EC7                              ; $3EC3: $28 $02
+    jr   z, .negativeSEnd                         ; $3EC3: $28 $02
     cpl                                           ; $3EC5: $2F
     inc  a                                        ; $3EC6: $3C
+.negativeSEnd
 
-.jr_3EC7
-    ld   e, $03                                   ; $3EC7: $1E $03
-    ld   hl, hMultiPurpose0                            ; $3EC9: $21 $D7 $FF
+    ; if the entity is mostly recoiling horizontaly, check horizontal directions;
+    ; else check vertical directions.
+    ld   e, $03 ; directions: right | left        ; $3EC7: $1E $03
+    ld   hl, hMultiPurpose0                       ; $3EC9: $21 $D7 $FF
     cp   [hl]                                     ; $3ECC: $BE
-    jr   c, .jr_3ED1                              ; $3ECD: $38 $02
-    ld   e, $0C                                   ; $3ECF: $1E $0C
-
-.jr_3ED1
+    jr   c, .checkHorizontalCollisions            ; $3ECD: $38 $02
+    ; check vertical collisions
+    ld   e, $0C  ; directions: top | bottom       ; $3ECF: $1E $0C
+.checkHorizontalCollisions
     ld   a, e                                     ; $3ED1: $7B
+
+    ; Check if the entity is collisionning in the given directions
     ld   hl, wEntitiesCollisionsTable             ; $3ED2: $21 $A0 $C2
     add  hl, bc                                   ; $3ED5: $09
     and  [hl]                                     ; $3ED6: $A6
-    jr   z, .jr_3EDE                              ; $3ED7: $28 $05
+    jr   z, .return                               ; $3ED7: $28 $05
+
+    ; If collisionning, clear the entity "Ignore hits" countdown
+    ; (by setting wEntitiesIgnoreHitsCountdownTable[bc] to 0)
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $3ED9: $21 $10 $C4
     add  hl, bc                                   ; $3EDC: $09
     ld   [hl], b                                  ; $3EDD: $70
 
-.jr_3EDE
+.return
     ret                                           ; $3EDE: $C9
 
 BossIntroDialogTable::

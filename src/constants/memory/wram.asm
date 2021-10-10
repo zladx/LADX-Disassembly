@@ -1180,11 +1180,13 @@ wEntitiesUnknowTableY::
 wEntitiesRoomTable::
   ds $10 ; C3E0 - C3EF
 
-; Unlabeled
+; Recoil velocity X
+; (e.g. when hit by the sword, or bumped against the shield)
 wEntitiesUnknowTableT::
   ds $10 ; C3F0 - C3FF
 
-; TODO comment
+; Recoil velocity Y
+; (e.g. when hit by the sword, or bumped against the shield)
 wEntitiesUnknowTableS::
   ds $10 ; C400 - C40F
 

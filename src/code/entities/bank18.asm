@@ -8751,13 +8751,13 @@ func_018_7E15::
     add  hl, bc                                   ; $7E2B: $09
     ld   a, [hl]                                  ; $7E2C: $7E
     push af                                       ; $7E2D: $F5
-    ld   hl, wEntitiesUnknowTableT                ; $7E2E: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilVelocityX             ; $7E2E: $21 $F0 $C3
     add  hl, bc                                   ; $7E31: $09
     ld   a, [hl]                                  ; $7E32: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $7E33: $21 $40 $C2
     add  hl, bc                                   ; $7E36: $09
     ld   [hl], a                                  ; $7E37: $77
-    ld   hl, wEntitiesUnknowTableS                ; $7E38: $21 $00 $C4
+    ld   hl, wEntitiesRecoilVelocityY             ; $7E38: $21 $00 $C4
     add  hl, bc                                   ; $7E3B: $09
     ld   a, [hl]                                  ; $7E3C: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $7E3D: $21 $50 $C2

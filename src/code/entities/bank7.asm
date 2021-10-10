@@ -2899,10 +2899,10 @@ PincerEntityHandler::
     ld   hl, wEntitiesUnknowTableI                ; $5322: $21 $70 $C4
     add  hl, bc                                   ; $5325: $09
     ld   [hl], b                                  ; $5326: $70
-    ld   hl, wEntitiesUnknowTableT                ; $5327: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilVelocityX             ; $5327: $21 $F0 $C3
     add  hl, bc                                   ; $532A: $09
     ld   [hl], b                                  ; $532B: $70
-    ld   hl, wEntitiesUnknowTableS                ; $532C: $21 $00 $C4
+    ld   hl, wEntitiesRecoilVelocityY             ; $532C: $21 $00 $C4
     add  hl, bc                                   ; $532F: $09
     ld   [hl], b                                  ; $5330: $70
     call func_007_5453                            ; $5331: $CD $53 $54
@@ -9446,13 +9446,13 @@ func_007_7DC3::
     call GetEntitySpeedYAddress                   ; $7DD6: $CD $05 $40
     ld   a, [hl]                                  ; $7DD9: $7E
     push af                                       ; $7DDA: $F5
-    ld   hl, wEntitiesUnknowTableT                ; $7DDB: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilVelocityX             ; $7DDB: $21 $F0 $C3
     add  hl, bc                                   ; $7DDE: $09
     ld   a, [hl]                                  ; $7DDF: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $7DE0: $21 $40 $C2
     add  hl, bc                                   ; $7DE3: $09
     ld   [hl], a                                  ; $7DE4: $77
-    ld   hl, wEntitiesUnknowTableS                ; $7DE5: $21 $00 $C4
+    ld   hl, wEntitiesRecoilVelocityY             ; $7DE5: $21 $00 $C4
     add  hl, bc                                   ; $7DE8: $09
     ld   a, [hl]                                  ; $7DE9: $7E
     call GetEntitySpeedYAddress                   ; $7DEA: $CD $05 $40

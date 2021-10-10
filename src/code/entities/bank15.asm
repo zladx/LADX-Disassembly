@@ -3781,14 +3781,14 @@ func_015_5EAC::
     add  hl, bc                                   ; $5ED6: $09
     ld   a, [hl]                                  ; $5ED7: $7E
     sla  a                                        ; $5ED8: $CB $27
-    ld   hl, wEntitiesUnknowTableT                ; $5EDA: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilVelocityX             ; $5EDA: $21 $F0 $C3
     add  hl, de                                   ; $5EDD: $19
     ld   [hl], a                                  ; $5EDE: $77
     ld   hl, wEntitiesSpeedYTable                 ; $5EDF: $21 $50 $C2
     add  hl, bc                                   ; $5EE2: $09
     ld   a, [hl]                                  ; $5EE3: $7E
     sla  a                                        ; $5EE4: $CB $27
-    ld   hl, wEntitiesUnknowTableS                ; $5EE6: $21 $00 $C4
+    ld   hl, wEntitiesRecoilVelocityY             ; $5EE6: $21 $00 $C4
     add  hl, de                                   ; $5EE9: $19
     ld   [hl], a                                  ; $5EEA: $77
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5EEB: $21 $10 $C4
@@ -7597,13 +7597,13 @@ func_015_7B3E::
     add  hl, bc                                   ; $7B54: $09
     ld   a, [hl]                                  ; $7B55: $7E
     push af                                       ; $7B56: $F5
-    ld   hl, wEntitiesUnknowTableT                ; $7B57: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilVelocityX             ; $7B57: $21 $F0 $C3
     add  hl, bc                                   ; $7B5A: $09
     ld   a, [hl]                                  ; $7B5B: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $7B5C: $21 $40 $C2
     add  hl, bc                                   ; $7B5F: $09
     ld   [hl], a                                  ; $7B60: $77
-    ld   hl, wEntitiesUnknowTableS                ; $7B61: $21 $00 $C4
+    ld   hl, wEntitiesRecoilVelocityY             ; $7B61: $21 $00 $C4
     add  hl, bc                                   ; $7B64: $09
     ld   a, [hl]                                  ; $7B65: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $7B66: $21 $50 $C2

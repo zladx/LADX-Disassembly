@@ -5004,13 +5004,13 @@ func_004_6D80::
     add  hl, bc                                   ; $6D96: $09
     ld   a, [hl]                                  ; $6D97: $7E
     push af                                       ; $6D98: $F5
-    ld   hl, wEntitiesUnknowTableT                ; $6D99: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilVelocityX             ; $6D99: $21 $F0 $C3
     add  hl, bc                                   ; $6D9C: $09
     ld   a, [hl]                                  ; $6D9D: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $6D9E: $21 $40 $C2
     add  hl, bc                                   ; $6DA1: $09
     ld   [hl], a                                  ; $6DA2: $77
-    ld   hl, wEntitiesUnknowTableS                ; $6DA3: $21 $00 $C4
+    ld   hl, wEntitiesRecoilVelocityY             ; $6DA3: $21 $00 $C4
     add  hl, bc                                   ; $6DA6: $09
     ld   a, [hl]                                  ; $6DA7: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $6DA8: $21 $50 $C2

@@ -222,13 +222,13 @@ func_006_64F7::
     add  hl, bc                                   ; $650D: $09
     ld   a, [hl]                                  ; $650E: $7E
     push af                                       ; $650F: $F5
-    ld   hl, wEntitiesUnknowTableT                ; $6510: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilVelocityX             ; $6510: $21 $F0 $C3
     add  hl, bc                                   ; $6513: $09
     ld   a, [hl]                                  ; $6514: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $6515: $21 $40 $C2
     add  hl, bc                                   ; $6518: $09
     ld   [hl], a                                  ; $6519: $77
-    ld   hl, wEntitiesUnknowTableS                ; $651A: $21 $00 $C4
+    ld   hl, wEntitiesRecoilVelocityY             ; $651A: $21 $00 $C4
     add  hl, bc                                   ; $651D: $09
     ld   a, [hl]                                  ; $651E: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $651F: $21 $50 $C2

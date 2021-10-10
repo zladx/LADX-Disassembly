@@ -531,7 +531,7 @@ func_006_4855::
     add  hl, bc                                   ; $4884: $09
     ld   a, [hl]                                  ; $4885: $7E
     push hl                                       ; $4886: $E5
-    ld   hl, wC3F0                                ; $4887: $21 $F0 $C3
+    ld   hl, wEntitiesUnknowTableT                ; $4887: $21 $F0 $C3
     add  hl, de                                   ; $488A: $19
     ld   [hl], a                                  ; $488B: $77
     pop  hl                                       ; $488C: $E1

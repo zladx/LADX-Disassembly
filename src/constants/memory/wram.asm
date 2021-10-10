@@ -1181,7 +1181,7 @@ wEntitiesRoomTable::
   ds $10 ; C3E0 - C3EF
 
 ; Unlabeled
-wC3F0::
+wEntitiesUnknowTableT::
   ds $10 ; C3F0 - C3FF
 
 ; TODO comment

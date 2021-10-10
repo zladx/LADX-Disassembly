@@ -222,7 +222,7 @@ func_006_64F7::
     add  hl, bc                                   ; $650D: $09
     ld   a, [hl]                                  ; $650E: $7E
     push af                                       ; $650F: $F5
-    ld   hl, wC3F0                                ; $6510: $21 $F0 $C3
+    ld   hl, wEntitiesUnknowTableT                ; $6510: $21 $F0 $C3
     add  hl, bc                                   ; $6513: $09
     ld   a, [hl]                                  ; $6514: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $6515: $21 $40 $C2

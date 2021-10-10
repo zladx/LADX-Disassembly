@@ -1035,7 +1035,7 @@ label_3E8E::
     ret                                           ; $3EAE: $C9
 
 label_3EAF::
-    ld   hl, wC3F0                                ; $3EAF: $21 $F0 $C3
+    ld   hl, wEntitiesUnknowTableT                ; $3EAF: $21 $F0 $C3
     add  hl, bc                                   ; $3EB2: $09
     ld   a, [hl]                                  ; $3EB3: $7E
     bit  7, a                                     ; $3EB4: $CB $7F

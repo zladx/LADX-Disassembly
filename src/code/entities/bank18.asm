@@ -8751,7 +8751,7 @@ func_018_7E15::
     add  hl, bc                                   ; $7E2B: $09
     ld   a, [hl]                                  ; $7E2C: $7E
     push af                                       ; $7E2D: $F5
-    ld   hl, wC3F0                                ; $7E2E: $21 $F0 $C3
+    ld   hl, wEntitiesUnknowTableT                ; $7E2E: $21 $F0 $C3
     add  hl, bc                                   ; $7E31: $09
     ld   a, [hl]                                  ; $7E32: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $7E33: $21 $40 $C2

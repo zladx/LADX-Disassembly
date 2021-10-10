@@ -5004,7 +5004,7 @@ func_004_6D80::
     add  hl, bc                                   ; $6D96: $09
     ld   a, [hl]                                  ; $6D97: $7E
     push af                                       ; $6D98: $F5
-    ld   hl, wC3F0                                ; $6D99: $21 $F0 $C3
+    ld   hl, wEntitiesUnknowTableT                ; $6D99: $21 $F0 $C3
     add  hl, bc                                   ; $6D9C: $09
     ld   a, [hl]                                  ; $6D9D: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $6D9E: $21 $40 $C2

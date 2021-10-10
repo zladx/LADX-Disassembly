@@ -7168,7 +7168,7 @@ func_036_6B15::
     call PointHLToEntitySpeedY                    ; $6B27: $CD $F3 $6B
     ld   a, [hl]                                  ; $6B2A: $7E
     push af                                       ; $6B2B: $F5
-    ld   hl, wC3F0                                ; $6B2C: $21 $F0 $C3
+    ld   hl, wEntitiesUnknowTableT                ; $6B2C: $21 $F0 $C3
     add  hl, bc                                   ; $6B2F: $09
     ld   a, [hl]                                  ; $6B30: $7E
     call PointHLToEntitySpeedX                    ; $6B31: $CD $EE $6B
@@ -7759,7 +7759,7 @@ jr_036_6ECD:
     ret                                           ; $6ED4: $C9
 
 PiranhaPlantEntityHandler::
-    ld   hl, wC3F0                                ; $6ED5: $21 $F0 $C3
+    ld   hl, wEntitiesUnknowTableT                ; $6ED5: $21 $F0 $C3
     add  hl, bc                                   ; $6ED8: $09
     ld   [hl], b                                  ; $6ED9: $70
     ld   hl, wEntitiesUnknowTableS                ; $6EDA: $21 $00 $C4

@@ -6748,7 +6748,7 @@ func_003_6FCC::
     ldh  a, [hMultiPurpose1]                      ; $6FD8: $F0 $D8
     cpl                                           ; $6FDA: $2F
     inc  a                                        ; $6FDB: $3C
-    ld   hl, wC3F0                                ; $6FDC: $21 $F0 $C3
+    ld   hl, wEntitiesUnknowTableT                ; $6FDC: $21 $F0 $C3
     add  hl, bc                                   ; $6FDF: $09
     ld   [hl], a                                  ; $6FE0: $77
     jp   func_003_73DB                            ; $6FE1: $C3 $DB $73
@@ -6943,7 +6943,7 @@ jr_003_70E7:
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $70EF: $21 $10 $C4
     add  hl, bc                                   ; $70F2: $09
     ld   [hl], $10                                ; $70F3: $36 $10
-    ld   hl, wC3F0                                ; $70F5: $21 $F0 $C3
+    ld   hl, wEntitiesUnknowTableT                ; $70F5: $21 $F0 $C3
     add  hl, bc                                   ; $70F8: $09
     ld   [hl], b                                  ; $70F9: $70
     ld   hl, wEntitiesUnknowTableS                ; $70FA: $21 $00 $C4
@@ -7559,7 +7559,7 @@ jr_003_7440:
     ldh  a, [hMultiPurpose1]                      ; $7468: $F0 $D8
     cpl                                           ; $746A: $2F
     inc  a                                        ; $746B: $3C
-    ld   hl, wC3F0                                ; $746C: $21 $F0 $C3
+    ld   hl, wEntitiesUnknowTableT                ; $746C: $21 $F0 $C3
     add  hl, bc                                   ; $746F: $09
     ld   [hl], a                                  ; $7470: $77
     call func_003_73DB                            ; $7471: $CD $DB $73
@@ -8174,7 +8174,7 @@ jr_003_77B8:
     ld   hl, wEntitiesSpeedXTable                 ; $77B8: $21 $40 $C2
     add  hl, bc                                   ; $77BB: $09
     ld   a, [hl]                                  ; $77BC: $7E
-    ld   hl, wC3F0                                ; $77BD: $21 $F0 $C3
+    ld   hl, wEntitiesUnknowTableT                ; $77BD: $21 $F0 $C3
     add  hl, de                                   ; $77C0: $19
     ld   [hl], a                                  ; $77C1: $77
     ld   hl, wEntitiesSpeedYTable                 ; $77C2: $21 $50 $C2
@@ -8247,7 +8247,7 @@ jr_003_77DD:
     add  hl, de                                   ; $7829: $19
     ldh  a, [hMultiPurpose0]                      ; $782A: $F0 $D7
     ld   [hl], a                                  ; $782C: $77
-    ld   hl, wC3F0                                ; $782D: $21 $F0 $C3
+    ld   hl, wEntitiesUnknowTableT                ; $782D: $21 $F0 $C3
     add  hl, de                                   ; $7830: $19
     ldh  a, [hMultiPurpose1]                      ; $7831: $F0 $D8
     ld   [hl], a                                  ; $7833: $77
@@ -9689,7 +9689,7 @@ func_003_7FA9::
     add  hl, bc                                   ; $7FBE: $09
     ld   a, [hl]                                  ; $7FBF: $7E
     push af                                       ; $7FC0: $F5
-    ld   hl, wC3F0                                ; $7FC1: $21 $F0 $C3
+    ld   hl, wEntitiesUnknowTableT                ; $7FC1: $21 $F0 $C3
     add  hl, bc                                   ; $7FC4: $09
     ld   a, [hl]                                  ; $7FC5: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $7FC6: $21 $40 $C2

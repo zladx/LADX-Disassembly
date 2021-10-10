@@ -3781,7 +3781,7 @@ func_015_5EAC::
     add  hl, bc                                   ; $5ED6: $09
     ld   a, [hl]                                  ; $5ED7: $7E
     sla  a                                        ; $5ED8: $CB $27
-    ld   hl, wC3F0                                ; $5EDA: $21 $F0 $C3
+    ld   hl, wEntitiesUnknowTableT                ; $5EDA: $21 $F0 $C3
     add  hl, de                                   ; $5EDD: $19
     ld   [hl], a                                  ; $5EDE: $77
     ld   hl, wEntitiesSpeedYTable                 ; $5EDF: $21 $50 $C2
@@ -7597,7 +7597,7 @@ func_015_7B3E::
     add  hl, bc                                   ; $7B54: $09
     ld   a, [hl]                                  ; $7B55: $7E
     push af                                       ; $7B56: $F5
-    ld   hl, wC3F0                                ; $7B57: $21 $F0 $C3
+    ld   hl, wEntitiesUnknowTableT                ; $7B57: $21 $F0 $C3
     add  hl, bc                                   ; $7B5A: $09
     ld   a, [hl]                                  ; $7B5B: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $7B5C: $21 $40 $C2

@@ -35,7 +35,7 @@ jr_006_73AD:
     ld   de, Data_006_7373                        ; $73AD: $11 $73 $73
     call RenderActiveEntitySpritesPair            ; $73B0: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $73B3: $CD $C6 $64
-    call func_006_64F7                            ; $73B6: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $73B6: $CD $F7 $64
     call UpdateEntityPosWithSpeed_06              ; $73B9: $CD $41 $65
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $73BC: $21 $10 $C4
     add  hl, bc                                   ; $73BF: $09

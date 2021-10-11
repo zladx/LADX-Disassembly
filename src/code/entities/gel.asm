@@ -115,7 +115,7 @@ jr_006_7C6A:
     ld   [hl], $20                                ; $7CB5: $36 $20
 
 jr_006_7CB7:
-    call func_006_64F7                            ; $7CB7: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $7CB7: $CD $F7 $64
     ld   hl, wEntitiesPrivateCountdown2Table      ; $7CBA: $21 $00 $C3
     add  hl, bc                                   ; $7CBD: $09
     ld   a, [hl]                                  ; $7CBE: $7E

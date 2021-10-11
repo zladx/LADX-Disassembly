@@ -24,7 +24,7 @@ KeeseEntityHandler::
 jr_006_673C:
     call RenderActiveEntitySpritesPair            ; $673C: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $673F: $CD $C6 $64
-    call func_006_64F7                            ; $6742: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $6742: $CD $F7 $64
     call label_3B39                               ; $6745: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $6748: $F0 $F0
     JP_TABLE                                      ; $674A

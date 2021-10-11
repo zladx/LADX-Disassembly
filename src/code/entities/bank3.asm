@@ -917,7 +917,7 @@ EntityDestructionHandler::
     ldh  [hActiveEntitySpriteVariant], a          ; $4C65: $E0 $F1
     call ExecuteActiveEntityHandler_trampoline    ; $4C67: $CD $81 $3A
     call ReturnIfNonInteractive_03.allowInactiveEntity ; $4C6A: $CD $7E $7F
-    call func_003_7FA9                            ; $4C6D: $CD $A9 $7F
+    call ApplyRecoilIfNeeded_03                   ; $4C6D: $CD $A9 $7F
     call func_003_60B3                            ; $4C70: $CD $B3 $60
 IF __PATCH_0__
     jp   ClearEntitySpeed
@@ -1197,7 +1197,7 @@ Data_003_4E05::
 EntityStunnedHandler::
     call ExecuteActiveEntityHandler_trampoline    ; $4E07: $CD $81 $3A
     call ReturnIfNonInteractive_03.allowInactiveEntity ; $4E0A: $CD $7E $7F
-    call func_003_7FA9                            ; $4E0D: $CD $A9 $7F
+    call ApplyRecoilIfNeeded_03                   ; $4E0D: $CD $A9 $7F
     call func_003_60B3                            ; $4E10: $CD $B3 $60
     call ClearEntitySpeed                         ; $4E13: $CD $7F $3D
     call func_003_6E2B                            ; $4E16: $CD $2B $6E
@@ -1549,7 +1549,7 @@ IronMaskEntityHandler::
     ld   de, Data_003_4FEB                        ; $5003: $11 $EB $4F
     call RenderActiveEntitySpritesPair            ; $5006: $CD $C0 $3B
     call ReturnIfNonInteractive_03                ; $5009: $CD $78 $7F
-    call func_003_7FA9                            ; $500C: $CD $A9 $7F
+    call ApplyRecoilIfNeeded_03                   ; $500C: $CD $A9 $7F
     call func_003_6E28                            ; $500F: $CD $28 $6E
     call UpdateEntityPosWithSpeed_03              ; $5012: $CD $25 $7F
     call func_003_7893                            ; $5015: $CD $93 $78
@@ -2265,7 +2265,7 @@ jr_003_555C:
 
 jr_003_5568:
     call ReturnIfNonInteractive_03                ; $5568: $CD $78 $7F
-    call func_003_7FA9                            ; $556B: $CD $A9 $7F
+    call ApplyRecoilIfNeeded_03                   ; $556B: $CD $A9 $7F
     ret                                           ; $556E: $C9
 
 jr_003_556F:
@@ -2296,7 +2296,7 @@ jr_003_5594:
     ld   [hl], $13                                ; $5597: $36 $13
 
 jr_003_5599:
-    call func_003_7FA9                            ; $5599: $CD $A9 $7F
+    call ApplyRecoilIfNeeded_03                   ; $5599: $CD $A9 $7F
     ret                                           ; $559C: $C9
 
 DropTableByIndex::
@@ -2821,7 +2821,7 @@ jr_003_5847:
     ld   [hl], $40                                ; $5856: $36 $40
 
 jr_003_5858:
-    call func_003_7FA9                            ; $5858: $CD $A9 $7F
+    call ApplyRecoilIfNeeded_03                   ; $5858: $CD $A9 $7F
     call func_003_6E28                            ; $585B: $CD $28 $6E
     ldh  a, [hActiveEntityState]                  ; $585E: $F0 $F0
     and  a                                        ; $5860: $A7
@@ -9665,52 +9665,58 @@ ReturnIfNonInteractive_03::
 .return
     ret                                           ; $7FA8: $C9
 
-; Inputs:
-;   bc   entity index
-func_003_7FA9::
-    ; If entity's wEntitiesIgnoreHitsCountdownTable   != 0, return.
+; If the entity is ignoring hits, apply its recoil velocity.
+ApplyRecoilIfNeeded_03::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7FA9: $21 $10 $C4
     add  hl, bc                                   ; $7FAC: $09
     ld   a, [hl]                                  ; $7FAD: $7E
     and  a                                        ; $7FAE: $A7
     ret  z                                        ; $7FAF: $C8
 
-    ; Decrement wEntitiesIgnoreHitsCountdownTable
     dec  a                                        ; $7FB0: $3D
     ld   [hl], a                                  ; $7FB1: $77
 
     call label_3E8E                               ; $7FB2: $CD $8E $3E
 
+    ;
+    ; Temporarily replace the entity speed by the recoil speed
+    ;
+
     ld   hl, wEntitiesSpeedXTable                 ; $7FB5: $21 $40 $C2
     add  hl, bc                                   ; $7FB8: $09
     ld   a, [hl]                                  ; $7FB9: $7E
     push af                                       ; $7FBA: $F5
+
     ld   hl, wEntitiesSpeedYTable                 ; $7FBB: $21 $50 $C2
     add  hl, bc                                   ; $7FBE: $09
     ld   a, [hl]                                  ; $7FBF: $7E
     push af                                       ; $7FC0: $F5
+
     ld   hl, wEntitiesRecoilVelocityX             ; $7FC1: $21 $F0 $C3
     add  hl, bc                                   ; $7FC4: $09
     ld   a, [hl]                                  ; $7FC5: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $7FC6: $21 $40 $C2
     add  hl, bc                                   ; $7FC9: $09
     ld   [hl], a                                  ; $7FCA: $77
+
     ld   hl, wEntitiesRecoilVelocityY             ; $7FCB: $21 $00 $C4
     add  hl, bc                                   ; $7FCE: $09
     ld   a, [hl]                                  ; $7FCF: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $7FD0: $21 $50 $C2
     add  hl, bc                                   ; $7FD3: $09
     ld   [hl], a                                  ; $7FD4: $77
+
     call UpdateEntityPosWithSpeed_03              ; $7FD5: $CD $25 $7F
+
     ld   hl, wEntitiesOptions1Table               ; $7FD8: $21 $30 $C4
     add  hl, bc                                   ; $7FDB: $09
     ld   a, [hl]                                  ; $7FDC: $7E
     and  $20                                      ; $7FDD: $E6 $20
-    jr   nz, jr_003_7FE4                          ; $7FDF: $20 $03
+    jr   nz, .restoreOriginalSpeed                ; $7FDF: $20 $03
 
     call func_003_7893                            ; $7FE1: $CD $93 $78
 
-jr_003_7FE4:
+.restoreOriginalSpeed
     ld   hl, wEntitiesSpeedYTable                 ; $7FE4: $21 $50 $C2
     add  hl, bc                                   ; $7FE7: $09
     pop  af                                       ; $7FE8: $F1
@@ -9720,5 +9726,7 @@ jr_003_7FE4:
     pop  af                                       ; $7FEE: $F1
     ld   [hl], a                                  ; $7FEF: $77
     pop  af                                       ; $7FF0: $F1
+
     call StopEntityRecoilOnCollision              ; $7FF1: $CD $AF $3E
+
     ret                                           ; $7FF4: $C9

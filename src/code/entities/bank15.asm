@@ -374,7 +374,7 @@ jr_015_44D1:
 
 jr_015_44D7:
     call ReturnIfNonInteractive_15                ; $44D7: $CD $0D $7B
-    call func_015_7B3E                            ; $44DA: $CD $3E $7B
+    call ApplyRecoilIfNeeded_15                   ; $44DA: $CD $3E $7B
     call UpdateEntityPosWithSpeed_15              ; $44DD: $CD $88 $7B
     call label_3B23                               ; $44E0: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $44E3: $F0 $F0
@@ -690,7 +690,7 @@ jr_015_46D0:
 jr_015_46E1:
     call label_394D                               ; $46E1: $CD $4D $39
     call ReturnIfNonInteractive_15                ; $46E4: $CD $0D $7B
-    call func_015_7B3E                            ; $46E7: $CD $3E $7B
+    call ApplyRecoilIfNeeded_15                   ; $46E7: $CD $3E $7B
     call label_3B39                               ; $46EA: $CD $39 $3B
     ld   hl, wEntitiesOptions1Table               ; $46ED: $21 $30 $C4
     add  hl, bc                                   ; $46F0: $09
@@ -1446,7 +1446,7 @@ label_015_4CD9:
     ld   de, Data_015_4CD5
     call RenderActiveEntitySpritesPair            ; $4CDC: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $4CDF: $CD $0D $7B
-    call func_015_7B3E                            ; $4CE2: $CD $3E $7B
+    call ApplyRecoilIfNeeded_15                   ; $4CE2: $CD $3E $7B
     call GetEntityTransitionCountdown             ; $4CE5: $CD $05 $0C
     jr   nz, jr_015_4CED                          ; $4CE8: $20 $03
 
@@ -1771,7 +1771,7 @@ jr_015_4EEE:
     ld   de, Data_015_4E7D                        ; $4EEE: $11 $7D $4E
     call RenderActiveEntitySpritesPair            ; $4EF1: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $4EF4: $CD $0D $7B
-    call func_015_7B3E                            ; $4EF7: $CD $3E $7B
+    call ApplyRecoilIfNeeded_15                   ; $4EF7: $CD $3E $7B
     call GetEntityTransitionCountdown             ; $4EFA: $CD $05 $0C
     jr   nz, jr_015_4F02                          ; $4EFD: $20 $03
 
@@ -2940,7 +2940,7 @@ FinalNightmareForm3Handler::
 
 jr_015_575E:
     call ReturnIfNonInteractive_15                ; $575E: $CD $0D $7B
-    call func_015_7B3E                            ; $5761: $CD $3E $7B
+    call ApplyRecoilIfNeeded_15                   ; $5761: $CD $3E $7B
     ldh  a, [hActiveEntityState]                  ; $5764: $F0 $F0
     JP_TABLE                                      ; $5766
 ._00 dw func_015_577B                             ; $5767
@@ -6250,7 +6250,7 @@ SandCrabEntityHandler::
     ld   de, Data_015_7320                        ; $7330: $11 $20 $73
     call RenderActiveEntitySpritesPair            ; $7333: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $7336: $CD $0D $7B
-    call func_015_7B3E                            ; $7339: $CD $3E $7B
+    call ApplyRecoilIfNeeded_15                   ; $7339: $CD $3E $7B
     call UpdateEntityPosWithSpeed_15              ; $733C: $CD $88 $7B
     call label_3B23                               ; $733F: $CD $23 $3B
     call label_3B39                               ; $7342: $CD $39 $3B
@@ -6318,7 +6318,7 @@ UrchinEntityHandler::
 jr_015_73B8:
     call RenderActiveEntitySpritesPair            ; $73B8: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $73BB: $CD $0D $7B
-    call func_015_7B3E                            ; $73BE: $CD $3E $7B
+    call ApplyRecoilIfNeeded_15                   ; $73BE: $CD $3E $7B
     ldh  a, [hFrameCounter]                       ; $73C1: $F0 $E7
     rra                                           ; $73C3: $1F
     rra                                           ; $73C4: $1F
@@ -6620,7 +6620,7 @@ label_015_757F:
     ld   de, Data_015_7577                        ; $757F: $11 $77 $75
     call RenderActiveEntitySpritesPair            ; $7582: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $7585: $CD $0D $7B
-    call func_015_7B3E                            ; $7588: $CD $3E $7B
+    call ApplyRecoilIfNeeded_15                   ; $7588: $CD $3E $7B
     ldh  a, [hFrameCounter]                       ; $758B: $F0 $E7
     rra                                           ; $758D: $1F
     rra                                           ; $758E: $1F
@@ -7024,7 +7024,7 @@ label_015_7825:
     ld   de, Data_015_7813                        ; $7825: $11 $13 $78
     call RenderActiveEntitySpritesPair            ; $7828: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $782B: $CD $0D $7B
-    call func_015_7B3E                            ; $782E: $CD $3E $7B
+    call ApplyRecoilIfNeeded_15                   ; $782E: $CD $3E $7B
     ldh  a, [hFrameCounter]                       ; $7831: $F0 $E7
     rra                                           ; $7833: $1F
     rra                                           ; $7834: $1F
@@ -7579,46 +7579,58 @@ ReturnIfNonInteractive_15::
 .return
     ret                                           ; $7B3D: $C9
 
-func_015_7B3E::
+; If the entity is ignoring hits, apply its recoil velocity.
+ApplyRecoilIfNeeded_15::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7B3E: $21 $10 $C4
     add  hl, bc                                   ; $7B41: $09
     ld   a, [hl]                                  ; $7B42: $7E
     and  a                                        ; $7B43: $A7
-    jr   z, jr_015_7B87                           ; $7B44: $28 $41
+    jr   z, .return                               ; $7B44: $28 $41
 
     dec  a                                        ; $7B46: $3D
     ld   [hl], a                                  ; $7B47: $77
+
     call label_3E8E                               ; $7B48: $CD $8E $3E
+
+    ;
+    ; Temporarily replace the entity speed by the recoil speed
+    ;
+
     ld   hl, wEntitiesSpeedXTable                 ; $7B4B: $21 $40 $C2
     add  hl, bc                                   ; $7B4E: $09
     ld   a, [hl]                                  ; $7B4F: $7E
     push af                                       ; $7B50: $F5
+
     ld   hl, wEntitiesSpeedYTable                 ; $7B51: $21 $50 $C2
     add  hl, bc                                   ; $7B54: $09
     ld   a, [hl]                                  ; $7B55: $7E
     push af                                       ; $7B56: $F5
+
     ld   hl, wEntitiesRecoilVelocityX             ; $7B57: $21 $F0 $C3
     add  hl, bc                                   ; $7B5A: $09
     ld   a, [hl]                                  ; $7B5B: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $7B5C: $21 $40 $C2
     add  hl, bc                                   ; $7B5F: $09
     ld   [hl], a                                  ; $7B60: $77
+
     ld   hl, wEntitiesRecoilVelocityY             ; $7B61: $21 $00 $C4
     add  hl, bc                                   ; $7B64: $09
     ld   a, [hl]                                  ; $7B65: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $7B66: $21 $50 $C2
     add  hl, bc                                   ; $7B69: $09
     ld   [hl], a                                  ; $7B6A: $77
+
     call UpdateEntityPosWithSpeed_15              ; $7B6B: $CD $88 $7B
+
     ld   hl, wEntitiesOptions1Table               ; $7B6E: $21 $30 $C4
     add  hl, bc                                   ; $7B71: $09
     ld   a, [hl]                                  ; $7B72: $7E
     and  $20                                      ; $7B73: $E6 $20
-    jr   nz, jr_015_7B7A                          ; $7B75: $20 $03
+    jr   nz, .restoreOriginalSpeed                ; $7B75: $20 $03
 
     call label_3B23                               ; $7B77: $CD $23 $3B
 
-jr_015_7B7A:
+.restoreOriginalSpeed
     ld   hl, wEntitiesSpeedYTable                 ; $7B7A: $21 $50 $C2
     add  hl, bc                                   ; $7B7D: $09
     pop  af                                       ; $7B7E: $F1
@@ -7629,7 +7641,7 @@ jr_015_7B7A:
     ld   [hl], a                                  ; $7B85: $77
     pop  af                                       ; $7B86: $F1
 
-jr_015_7B87:
+.return
     ret                                           ; $7B87: $C9
 
 UpdateEntityPosWithSpeed_15::

@@ -278,7 +278,7 @@ jr_006_547E:
     jp   AddEntitySpeedToPos_06                   ; $5483: $C3 $4E $65
 
 ArmosKnightState3Handler::
-    call func_006_64F7                            ; $5486: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $5486: $CD $F7 $64
     call GetEntityTransitionCountdown             ; $5489: $CD $05 $0C
     jr   nz, jr_006_549C                          ; $548C: $20 $0E
 
@@ -316,7 +316,7 @@ jr_006_54BB:
     jp   UpdateEntityPosWithSpeed_06              ; $54BB: $C3 $41 $65
 
 ArmosKnightState4Handler::
-    call func_006_64F7                            ; $54BE: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $54BE: $CD $F7 $64
     ld   hl, wEntitiesSpeedZTable                 ; $54C1: $21 $20 $C3
     add  hl, bc                                   ; $54C4: $09
     ld   a, [hl]                                  ; $54C5: $7E
@@ -332,7 +332,7 @@ jr_006_54D5:
     jp   UpdateEntityPosWithSpeed_06              ; $54D5: $C3 $41 $65
 
 ArmosKnightState5Handler::
-    call func_006_64F7                            ; $54D8: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $54D8: $CD $F7 $64
     call GetEntityTransitionCountdown             ; $54DB: $CD $05 $0C
     ld   a, $00                                   ; $54DE: $3E $00
     jr   nz, jr_006_54E7                          ; $54E0: $20 $05
@@ -347,7 +347,7 @@ jr_006_54E7:
     ret                                           ; $54EC: $C9
 
 ArmosKnightState6Handler::
-    call func_006_64F7                            ; $54ED: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $54ED: $CD $F7 $64
     ldh  a, [hMultiPurposeG]                               ; $54F0: $F0 $E8
     and  a                                        ; $54F2: $A7
     ret  z                                        ; $54F3: $C8
@@ -371,7 +371,7 @@ jr_006_5512:
     jp   IncrementEntityState                     ; $5512: $C3 $12 $3B
 
 ArmosKnightState7Handler::
-    call func_006_64F7                            ; $5515: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $5515: $CD $F7 $64
     call GetEntityTransitionCountdown             ; $5518: $CD $05 $0C
     jr   nz, jr_006_5522                          ; $551B: $20 $05
 

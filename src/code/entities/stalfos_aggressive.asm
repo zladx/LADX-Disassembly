@@ -6,7 +6,7 @@ StalfosAggressiveEntityHandler::
     ld   de, Data_006_4AA8
     call RenderActiveEntitySpritesPair            ; $4AB7: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $4ABA: $CD $C6 $64
-    call func_006_64F7                            ; $4ABD: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $4ABD: $CD $F7 $64
     call label_3B39                               ; $4AC0: $CD $39 $3B
     ldh  a, [hMapId]                              ; $4AC3: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $4AC5: $FE $FF

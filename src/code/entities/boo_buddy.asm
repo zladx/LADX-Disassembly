@@ -6,7 +6,7 @@ BooBuddyEntityHandler::
     ld   de, Data_006_7989                        ; $79A9: $11 $89 $79
     call RenderActiveEntitySpritesPair            ; $79AC: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $79AF: $CD $C6 $64
-    call func_006_64F7                            ; $79B2: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $79B2: $CD $F7 $64
     call UpdateEntityPosWithSpeed_06              ; $79B5: $CD $41 $65
     call func_006_5E54                            ; $79B8: $CD $54 $5E
     ldh  a, [hActiveEntityState]                  ; $79BB: $F0 $F0

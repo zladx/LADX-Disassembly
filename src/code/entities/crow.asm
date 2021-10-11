@@ -60,7 +60,7 @@ jr_006_5CCC:
 
 jr_006_5CE5:
     call ReturnIfNonInteractive_06                ; $5CE5: $CD $C6 $64
-    call func_006_64F7                            ; $5CE8: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $5CE8: $CD $F7 $64
     ldh  a, [hActiveEntityState]                  ; $5CEB: $F0 $F0
     dec  a                                        ; $5CED: $3D
     JP_TABLE                                      ; $5CEE

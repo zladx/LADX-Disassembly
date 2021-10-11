@@ -1182,11 +1182,15 @@ wEntitiesRoomTable::
 
 ; Recoil velocity X
 ; (e.g. when hit by the sword, or bumped against the shield)
+;
+; NB: recoil is applied only when wEntitiesIgnoreHitsCountdownTable is non-zero for this entity.
 wEntitiesRecoilVelocityX::
   ds $10 ; C3F0 - C3FF
 
 ; Recoil velocity Y
 ; (e.g. when hit by the sword, or bumped against the shield)
+;
+; NB: recoil is applied only when wEntitiesIgnoreHitsCountdownTable is non-zero for this entity.
 wEntitiesRecoilVelocityY::
   ds $10 ; C400 - C40F
 

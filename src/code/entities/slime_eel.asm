@@ -1721,45 +1721,59 @@ jr_005_7A65:
 jr_005_7A66:
     ret                                           ; $7A66: $C9
 
+; If the entity is ignoring hits, apply its recoil velocity.
+; (Unused in this bank)
+ApplyRecoilIfNeeded_05::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7A67: $21 $10 $C4
     add  hl, bc                                   ; $7A6A: $09
     ld   a, [hl]                                  ; $7A6B: $7E
     and  a                                        ; $7A6C: $A7
-    jr   z, jr_005_7AB0                           ; $7A6D: $28 $41
+    jr   z, .return                               ; $7A6D: $28 $41
 
     dec  a                                        ; $7A6F: $3D
     ld   [hl], a                                  ; $7A70: $77
+
     call label_3E8E                               ; $7A71: $CD $8E $3E
+
+    ;
+    ; Temporarily replace the entity speed by the recoil speed
+    ;
+
     ld   hl, wEntitiesSpeedXTable                 ; $7A74: $21 $40 $C2
     add  hl, bc                                   ; $7A77: $09
     ld   a, [hl]                                  ; $7A78: $7E
     push af                                       ; $7A79: $F5
+
     ld   hl, wEntitiesSpeedYTable                 ; $7A7A: $21 $50 $C2
     add  hl, bc                                   ; $7A7D: $09
     ld   a, [hl]                                  ; $7A7E: $7E
     push af                                       ; $7A7F: $F5
+
     ld   hl, wEntitiesRecoilVelocityX             ; $7A80: $21 $F0 $C3
     add  hl, bc                                   ; $7A83: $09
     ld   a, [hl]                                  ; $7A84: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $7A85: $21 $40 $C2
     add  hl, bc                                   ; $7A88: $09
     ld   [hl], a                                  ; $7A89: $77
+
     ld   hl, wEntitiesRecoilVelocityY             ; $7A8A: $21 $00 $C4
     add  hl, bc                                   ; $7A8D: $09
     ld   a, [hl]                                  ; $7A8E: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $7A8F: $21 $50 $C2
     add  hl, bc                                   ; $7A92: $09
     ld   [hl], a                                  ; $7A93: $77
+
     call UpdateEntityPosWithSpeed_05              ; $7A94: $CD $B1 $7A
+
     ld   hl, wEntitiesOptions1Table               ; $7A97: $21 $30 $C4
     add  hl, bc                                   ; $7A9A: $09
     ld   a, [hl]                                  ; $7A9B: $7E
     and  $20                                      ; $7A9C: $E6 $20
-    jr   nz, jr_005_7AA3                          ; $7A9E: $20 $03
+    jr   nz, .restoreOriginalSpeed                ; $7A9E: $20 $03
 
     call label_3B23                               ; $7AA0: $CD $23 $3B
 
-jr_005_7AA3:
+.restoreOriginalSpeed
     ld   hl, wEntitiesSpeedYTable                 ; $7AA3: $21 $50 $C2
     add  hl, bc                                   ; $7AA6: $09
     pop  af                                       ; $7AA7: $F1
@@ -1770,7 +1784,7 @@ jr_005_7AA3:
     ld   [hl], a                                  ; $7AAE: $77
     pop  af                                       ; $7AAF: $F1
 
-jr_005_7AB0:
+.return
     ret                                           ; $7AB0: $C9
 
 UpdateEntityPosWithSpeed_05::

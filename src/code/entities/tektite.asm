@@ -13,7 +13,7 @@ TektiteEntityHandler::
 
 jr_006_78CD:
     call ReturnIfNonInteractive_06                ; $78CD: $CD $C6 $64
-    call func_006_64F7                            ; $78D0: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $78D0: $CD $F7 $64
     call label_3B39                               ; $78D3: $CD $39 $3B
     call UpdateEntityPosWithSpeed_06              ; $78D6: $CD $41 $65
     call label_3B23                               ; $78D9: $CD $23 $3B

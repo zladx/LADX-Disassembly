@@ -1214,7 +1214,7 @@ jr_018_4A18:
 
 jr_018_4A2A:
     call ReturnIfNonInteractive_18                ; $4A2A: $CD $E8 $7D
-    call func_018_7E15                            ; $4A2D: $CD $15 $7E
+    call ApplyRecoilIfNeeded_18                   ; $4A2D: $CD $15 $7E
     ldh  a, [hActiveEntityState]                  ; $4A30: $F0 $F0
     JP_TABLE                                      ; $4A32
 ._00 dw ZoraState0Handler
@@ -5050,7 +5050,7 @@ label_018_640C:
     ld   de, Data_018_63F8                        ; $640C: $11 $F8 $63
     call RenderActiveEntitySpritesPair            ; $640F: $CD $C0 $3B
     call ReturnIfNonInteractive_18                ; $6412: $CD $E8 $7D
-    call func_018_7E15                            ; $6415: $CD $15 $7E
+    call ApplyRecoilIfNeeded_18                   ; $6415: $CD $15 $7E
     ldh  a, [hActiveEntityState]                  ; $6418: $F0 $F0
     JP_TABLE                                      ; $641A
 ._00 dw ZombieState0Handler
@@ -5211,7 +5211,7 @@ jr_018_64FC:
     call func_018_69C5                            ; $6507: $CD $C5 $69
 
 jr_018_650A:
-    call func_018_7E15                            ; $650A: $CD $15 $7E
+    call ApplyRecoilIfNeeded_18                   ; $650A: $CD $15 $7E
     call label_3B65                               ; $650D: $CD $65 $3B
     ld   a, [wIgnoreLinkCollisionsCountdown]      ; $6510: $FA $3E $C1
     and  a                                        ; $6513: $A7
@@ -5863,7 +5863,7 @@ jr_018_6A71:
 
 jr_018_6A8B:
     call ReturnIfNonInteractive_18                ; $6A8B: $CD $E8 $7D
-    call func_018_7E15                            ; $6A8E: $CD $15 $7E
+    call ApplyRecoilIfNeeded_18                   ; $6A8E: $CD $15 $7E
     call UpdateEntityPosWithSpeed_18              ; $6A91: $CD $5F $7E
     call AddEntityZSpeedToPos_18                  ; $6A94: $CD $98 $7E
     ldh  a, [hActiveEntityState]                  ; $6A97: $F0 $F0
@@ -6685,7 +6685,7 @@ label_018_6F70:
     ld   de, Data_018_6F68
     call RenderActiveEntitySpritesPair            ; $6F73: $CD $C0 $3B
     call ReturnIfNonInteractive_18                ; $6F76: $CD $E8 $7D
-    call func_018_7E15                            ; $6F79: $CD $15 $7E
+    call ApplyRecoilIfNeeded_18                   ; $6F79: $CD $15 $7E
     call UpdateEntityPosWithSpeed_18              ; $6F7C: $CD $5F $7E
     ldh  a, [hFrameCounter]                       ; $6F7F: $F0 $E7
     and  $03                                      ; $6F81: $E6 $03
@@ -7824,7 +7824,7 @@ jr_018_7764:
     ld   de, Data_018_7729                        ; $7764: $11 $29 $77
     call RenderActiveEntitySpritesPair            ; $7767: $CD $C0 $3B
     call ReturnIfNonInteractive_18                ; $776A: $CD $E8 $7D
-    call func_018_7E15                            ; $776D: $CD $15 $7E
+    call ApplyRecoilIfNeeded_18                   ; $776D: $CD $15 $7E
     call label_3B39                               ; $7770: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $7773: $F0 $F0
     JP_TABLE                                      ; $7775
@@ -7951,7 +7951,7 @@ BomberEntityHandler::
     ld   hl, wEntitiesPosZTable                   ; $784E: $21 $10 $C3
     add  hl, bc                                   ; $7851: $09
     ld   [hl], a                                  ; $7852: $77
-    call func_018_7E15                            ; $7853: $CD $15 $7E
+    call ApplyRecoilIfNeeded_18                   ; $7853: $CD $15 $7E
     call UpdateEntityPosWithSpeed_18              ; $7856: $CD $5F $7E
     call label_3B23                               ; $7859: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $785C: $F0 $F0
@@ -8733,46 +8733,58 @@ ReturnIfNonInteractive_18::
 .return
     ret                                           ; $7E14: $C9
 
-func_018_7E15::
+; If the entity is ignoring hits, apply its recoil velocity.
+ApplyRecoilIfNeeded_18::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7E15: $21 $10 $C4
     add  hl, bc                                   ; $7E18: $09
     ld   a, [hl]                                  ; $7E19: $7E
     and  a                                        ; $7E1A: $A7
-    jr   z, jr_018_7E5E                           ; $7E1B: $28 $41
+    jr   z, .return                               ; $7E1B: $28 $41
 
     dec  a                                        ; $7E1D: $3D
     ld   [hl], a                                  ; $7E1E: $77
+
     call label_3E8E                               ; $7E1F: $CD $8E $3E
+
+    ;
+    ; Temporarily replace the entity speed by the recoil speed
+    ;
+
     ld   hl, wEntitiesSpeedXTable                 ; $7E22: $21 $40 $C2
     add  hl, bc                                   ; $7E25: $09
     ld   a, [hl]                                  ; $7E26: $7E
     push af                                       ; $7E27: $F5
+
     ld   hl, wEntitiesSpeedYTable                 ; $7E28: $21 $50 $C2
     add  hl, bc                                   ; $7E2B: $09
     ld   a, [hl]                                  ; $7E2C: $7E
     push af                                       ; $7E2D: $F5
+
     ld   hl, wEntitiesRecoilVelocityX             ; $7E2E: $21 $F0 $C3
     add  hl, bc                                   ; $7E31: $09
     ld   a, [hl]                                  ; $7E32: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $7E33: $21 $40 $C2
     add  hl, bc                                   ; $7E36: $09
     ld   [hl], a                                  ; $7E37: $77
+
     ld   hl, wEntitiesRecoilVelocityY             ; $7E38: $21 $00 $C4
     add  hl, bc                                   ; $7E3B: $09
     ld   a, [hl]                                  ; $7E3C: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $7E3D: $21 $50 $C2
     add  hl, bc                                   ; $7E40: $09
     ld   [hl], a                                  ; $7E41: $77
+
     call UpdateEntityPosWithSpeed_18              ; $7E42: $CD $5F $7E
+
     ld   hl, wEntitiesOptions1Table               ; $7E45: $21 $30 $C4
     add  hl, bc                                   ; $7E48: $09
     ld   a, [hl]                                  ; $7E49: $7E
     and  $20                                      ; $7E4A: $E6 $20
-    jr   nz, jr_018_7E51                          ; $7E4C: $20 $03
+    jr   nz, .restoreOriginalSpeed                ; $7E4C: $20 $03
 
     call label_3B23                               ; $7E4E: $CD $23 $3B
 
-jr_018_7E51:
+.restoreOriginalSpeed
     ld   hl, wEntitiesSpeedYTable                 ; $7E51: $21 $50 $C2
     add  hl, bc                                   ; $7E54: $09
     pop  af                                       ; $7E55: $F1
@@ -8783,7 +8795,7 @@ jr_018_7E51:
     ld   [hl], a                                  ; $7E5C: $77
     pop  af                                       ; $7E5D: $F1
 
-jr_018_7E5E:
+.return
     ret                                           ; $7E5E: $C9
 
 UpdateEntityPosWithSpeed_18::

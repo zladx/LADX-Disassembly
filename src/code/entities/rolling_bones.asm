@@ -87,7 +87,7 @@ jr_006_6CE4:
 
 jr_006_6CE8:
     call ReturnIfNonInteractive_06                ; $6CE8: $CD $C6 $64
-    call func_006_64F7                            ; $6CEB: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $6CEB: $CD $F7 $64
     call label_3B39                               ; $6CEE: $CD $39 $3B
     ld   hl, wEntitiesHealthTable                 ; $6CF1: $21 $60 $C3
     add  hl, bc                                   ; $6CF4: $09

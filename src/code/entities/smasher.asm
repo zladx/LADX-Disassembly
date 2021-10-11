@@ -40,7 +40,7 @@ jr_006_453F:
     jp   nz, label_006_5308                       ; $4549: $C2 $08 $53
 
     call ReturnIfNonInteractive_06                ; $454C: $CD $C6 $64
-    call func_006_64F7                            ; $454F: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $454F: $CD $F7 $64
     call label_3B39                               ; $4552: $CD $39 $3B
     call AddEntityZSpeedToPos_06                  ; $4555: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $4558: $21 $20 $C3

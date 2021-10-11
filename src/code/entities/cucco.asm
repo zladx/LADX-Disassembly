@@ -37,7 +37,7 @@ jr_005_454E:
     jp   SetEntitySpriteVariant                   ; $4554: $C3 $0C $3B
 
 jr_005_4557:
-    call func_005_7A3A                            ; $4557: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $4557: $CD $3A $7A
     call label_3B70                               ; $455A: $CD $70 $3B
     call DecrementEntityIgnoreHitsCountdown       ; $455D: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $4560: $F0 $F0

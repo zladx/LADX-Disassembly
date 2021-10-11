@@ -141,7 +141,7 @@ jr_005_5AA7:
 
 func_005_5ADB::
     call func_005_5B5A                            ; $5ADB: $CD $5A $5B
-    call func_005_7A3A                            ; $5ADE: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $5ADE: $CD $3A $7A
     ld   a, $02                                   ; $5AE1: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5AE3: $E0 $A1
 IF __PATCH_0__
@@ -218,7 +218,7 @@ func_005_5B38::
 
 func_005_5B3B::
     call func_005_5B5A                            ; $5B3B: $CD $5A $5B
-    call func_005_7A3A                            ; $5B3E: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $5B3E: $CD $3A $7A
     call UpdateEntityPosWithSpeed_05              ; $5B41: $CD $B1 $7A
     ld   hl, wEntitiesSpeedYTable                 ; $5B44: $21 $50 $C2
     add  hl, bc                                   ; $5B47: $09
@@ -254,7 +254,7 @@ func_005_5B6B::
     cp   $05                                      ; $5B70: $FE $05
     jp   nz, label_005_7E6C                       ; $5B72: $C2 $6C $7E
 
-    call func_005_7A3A                            ; $5B75: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $5B75: $CD $3A $7A
     call DecrementEntityIgnoreHitsCountdown       ; $5B78: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $5B7B: $F0 $F0
     cp   $0E                                      ; $5B7D: $FE $0E
@@ -1297,7 +1297,7 @@ func_005_6256::
     ldh  [hLinkInteractiveMotionBlocked], a       ; $6258: $E0 $A1
     ld   de, Data_005_624E                        ; $625A: $11 $4E $62
     call RenderActiveEntitySpritesPair            ; $625D: $CD $C0 $3B
-    call func_005_7A3A                            ; $6260: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $6260: $CD $3A $7A
     ldh  a, [hFrameCounter]                       ; $6263: $F0 $E7
     rra                                           ; $6265: $1F
     rra                                           ; $6266: $1F
@@ -1375,7 +1375,7 @@ Data_005_62B8::
 func_005_62C8::
     ld   de, Data_005_62B8                        ; $62C8: $11 $B8 $62
     call RenderActiveEntitySpritesPair            ; $62CB: $CD $C0 $3B
-    call func_005_7A3A                            ; $62CE: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $62CE: $CD $3A $7A
     call UpdateEntityPosWithSpeed_05              ; $62D1: $CD $B1 $7A
     ldh  a, [hActiveEntityState]                  ; $62D4: $F0 $F0
     JP_TABLE                                      ; $62D6

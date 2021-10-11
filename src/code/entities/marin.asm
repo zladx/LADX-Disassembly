@@ -321,7 +321,7 @@ jr_005_5018:
     jp   IncrementEntityState                     ; $501D: $C3 $12 $3B
 
 func_005_5020::
-    call func_005_7A3A                            ; $5020: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $5020: $CD $3A $7A
     ld   hl, wEntitiesUnknowTableP                ; $5023: $21 $40 $C4
     add  hl, bc                                   ; $5026: $09
     ld   d, [hl]                                  ; $5027: $56
@@ -614,7 +614,7 @@ MarinEntityHandler_Indoor::
     ld   [hl], $7A                                ; $51E7: $36 $7A
     ld   de, Data_005_51CA                        ; $51E9: $11 $CA $51
     call RenderActiveEntitySpritesPair            ; $51EC: $CD $C0 $3B
-    call func_005_7A3A                            ; $51EF: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $51EF: $CD $3A $7A
     call ShouldLinkTalkToEntity_05                ; $51F2: $CD $06 $55
     ret  nc                                       ; $51F5: $D0
 
@@ -767,7 +767,7 @@ jr_005_5311:
     ret                                           ; $5311: $C9
 
 func_005_5312::
-    call func_005_7A3A                            ; $5312: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $5312: $CD $3A $7A
     call func_005_54C3                            ; $5315: $CD $C3 $54
     call ShouldLinkTalkToEntity_05                ; $5318: $CD $06 $55
     ret  nc                                       ; $531B: $D0

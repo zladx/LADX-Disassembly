@@ -811,7 +811,7 @@ func_005_72E0::
 
 func_005_72E6::
     call func_005_7982                            ; $72E6: $CD $82 $79
-    call func_005_7A3A                            ; $72E9: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $72E9: $CD $3A $7A
     ldh  a, [hActiveEntityState]                  ; $72EC: $F0 $F0
     JP_TABLE                                      ; $72EE
 ._00 dw func_005_7305                             ; $72EF
@@ -1200,7 +1200,7 @@ label_005_7550:
     jp   label_005_7570                           ; $756D: $C3 $70 $75
 
 label_005_7570:
-    call func_005_7A40                            ; $7570: $CD $40 $7A
+    call ReturnIfNonInteractive_05.allowInactiveEntity ; $7570: $CD $40 $7A
     ldh  a, [hActiveEntityPosX]                   ; $7573: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $7575: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $7577: $F0 $EC
@@ -1262,7 +1262,7 @@ Data_005_75C9::
 func_005_75D1::
     call func_005_766E                            ; $75D1: $CD $6E $76
     call CopyEntityPositionToActivePosition       ; $75D4: $CD $8A $3D
-    call func_005_7A3A                            ; $75D7: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $75D7: $CD $3A $7A
     ld   a, $01                                   ; $75DA: $3E $01
     ld   [$D200], a                               ; $75DC: $EA $00 $D2
     call GetEntityDropTimer                       ; $75DF: $CD $FB $0B

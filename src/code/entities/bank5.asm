@@ -8,38 +8,39 @@
 
 ; If the entity is disabled or the game is in a dialog or transition,
 ; return to the caller directly, skipping the rest of the code.
-func_005_7A3A::
+ReturnIfNonInteractive_05::
     ldh  a, [hActiveEntityStatus]                 ; $7A3A: $F0 $EA
-    cp   $05                                      ; $7A3C: $FE $05
-    jr   nz, jr_005_7A65                          ; $7A3E: $20 $25
+    cp   ENTITY_STATUS_ACTIVE                     ; $7A3C: $FE $05
+    jr   nz, .skip                                ; $7A3E: $20 $25
 
-func_005_7A40::
+.allowInactiveEntity
     ld   a, [wGameplayType]                       ; $7A40: $FA $95 $DB
-    cp   $07                                      ; $7A43: $FE $07
-    jr   z, jr_005_7A65                           ; $7A45: $28 $1E
+    cp   GAMEPLAY_WORLD_MAP                       ; $7A43: $FE $07
+    jr   z, .skip                                 ; $7A45: $28 $1E
 
-    cp   $0B                                      ; $7A47: $FE $0B
-    jr   nz, jr_005_7A65                          ; $7A49: $20 $1A
+    cp   GAMEPLAY_WORLD                           ; $7A47: $FE $0B
+    jr   nz, .skip                                ; $7A49: $20 $1A
 
     ld   a, [wTransitionSequenceCounter]          ; $7A4B: $FA $6B $C1
     cp   $04                                      ; $7A4E: $FE $04
-    jr   nz, jr_005_7A65                          ; $7A50: $20 $13
+    jr   nz, .skip                                ; $7A50: $20 $13
 
     ld   hl, wC1A8                                ; $7A52: $21 $A8 $C1
     ld   a, [wDialogState]                        ; $7A55: $FA $9F $C1
     or   [hl]                                     ; $7A58: $B6
     ld   hl, wInventoryAppearing                  ; $7A59: $21 $4F $C1
     or   [hl]                                     ; $7A5C: $B6
-    jr   nz, jr_005_7A65                          ; $7A5D: $20 $06
+    jr   nz, .skip                                ; $7A5D: $20 $06
 
     ld   a, [wRoomTransitionState]                ; $7A5F: $FA $24 $C1
     and  a                                        ; $7A62: $A7
-    jr   z, jr_005_7A66                           ; $7A63: $28 $01
+    jr   z, .return                               ; $7A63: $28 $01
 
-jr_005_7A65:
+.skip
+    ; pop the return address to return to caller
     pop  af                                       ; $7A65: $F1
 
-jr_005_7A66:
+.return
     ret                                           ; $7A66: $C9
 
 ; If the entity is ignoring hits, apply its recoil velocity.

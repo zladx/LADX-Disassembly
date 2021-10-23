@@ -14,7 +14,7 @@ HinoxEntityHandler::
 
     call ReturnIfNonInteractive_06                ; $4FC6: $CD $C6 $64
     call BossIntro                                ; $4FC9: $CD $E8 $3E
-    call func_006_64F7                            ; $4FCC: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $4FCC: $CD $F7 $64
     call GetEntityPrivateCountdown1               ; $4FCF: $CD $00 $0C
     jr   z, jr_006_4FD7                           ; $4FD2: $28 $03
 

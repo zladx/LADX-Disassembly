@@ -374,7 +374,7 @@ func_004_4214::
     ret                                           ; $4244: $C9
 
 jr_004_4245:
-    call func_004_6D80                            ; $4245: $CD $80 $6D
+    call ApplyRecoilIfNeeded_04                   ; $4245: $CD $80 $6D
     ld   hl, wEntitiesPhysicsFlagsTable                ; $4248: $21 $40 $C3
     add  hl, bc                                   ; $424B: $09
     ld   [hl], $01                                ; $424C: $36 $01
@@ -844,7 +844,7 @@ func_004_4517::
     ret                                           ; $4534: $C9
 
 jr_004_4535:
-    call func_004_6D80                            ; $4535: $CD $80 $6D
+    call ApplyRecoilIfNeeded_04                   ; $4535: $CD $80 $6D
     call label_3B70                               ; $4538: $CD $70 $3B
     call UpdateEntityPosWithSpeed_04              ; $453B: $CD $CA $6D
     call label_3B23                               ; $453E: $CD $23 $3B

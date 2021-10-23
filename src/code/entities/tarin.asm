@@ -92,7 +92,7 @@ jr_005_49CC:
 jr_005_49D1:
     ld   de, Data_005_4912                        ; $49D1: $11 $12 $49
     call RenderActiveEntitySpritesPair            ; $49D4: $CD $C0 $3B
-    call func_005_7A3A                            ; $49D7: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $49D7: $CD $3A $7A
     ldh  a, [hActiveEntityState]                  ; $49DA: $F0 $F0
     JP_TABLE                                      ; $49DC
 ._00 dw func_005_49E5                             ; $49DD
@@ -445,7 +445,7 @@ label_005_4BC1:
 
     ld   de, Data_005_4BBF                        ; $4BC9: $11 $BF $4B
     call RenderActiveEntitySprite                 ; $4BCC: $CD $77 $3C
-    call func_005_7A3A                            ; $4BCF: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $4BCF: $CD $3A $7A
     call UpdateEntityPosWithSpeed_05              ; $4BD2: $CD $B1 $7A
     call GetEntityTransitionCountdown             ; $4BD5: $CD $05 $0C
     jp   z, ClearEntityStatus_05                  ; $4BD8: $CA $4B $7B
@@ -539,7 +539,7 @@ jr_005_4C54:
 
 jr_005_4C57:
     call RenderActiveEntitySpritesPair            ; $4C57: $CD $C0 $3B
-    call func_005_7A3A                            ; $4C5A: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $4C5A: $CD $3A $7A
     call func_005_54C3                            ; $4C5D: $CD $C3 $54
 
     ; Jump table excuted when Tarin is giving the shield

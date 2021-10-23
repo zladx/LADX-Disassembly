@@ -1053,7 +1053,7 @@ MaskedMimicGoriyaEntityHandler::
     ld   de, Data_019_4796                        ; $47C3: $11 $96 $47
     call RenderActiveEntitySpritesPair            ; $47C6: $CD $C0 $3B
     call ReturnIfNonInteractive_19                ; $47C9: $CD $3D $7D
-    call func_019_7D6E                            ; $47CC: $CD $6E $7D
+    call ApplyRecoilIfNeeded_19                   ; $47CC: $CD $6E $7D
     ld   hl, wEntitiesOptions1Table               ; $47CF: $21 $30 $C4
     add  hl, bc                                   ; $47D2: $09
     ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_SPLASH_IN_WATER                                ; $47D3: $36 $48
@@ -5687,7 +5687,7 @@ jr_019_6ACE:
 
 jr_019_6AD4:
     call ReturnIfNonInteractive_19                ; $6AD4: $CD $3D $7D
-    call func_019_7D6E                            ; $6AD7: $CD $6E $7D
+    call ApplyRecoilIfNeeded_19                   ; $6AD7: $CD $6E $7D
     call label_3B39                               ; $6ADA: $CD $39 $3B
     call UpdateEntityPosWithSpeed_19              ; $6ADD: $CD $B8 $7D
     call label_3B23                               ; $6AE0: $CD $23 $3B
@@ -5867,7 +5867,7 @@ jr_019_6BD3:
     rlca                                          ; $6BE2: $07
     and  $02                                      ; $6BE3: $E6 $02
     ld   e, a                                     ; $6BE5: $5F
-    call func_019_7D6E                            ; $6BE6: $CD $6E $7D
+    call ApplyRecoilIfNeeded_19                   ; $6BE6: $CD $6E $7D
     ldh  a, [hActiveEntityState]                  ; $6BE9: $F0 $F0
     cp   $05                                      ; $6BEB: $FE $05
     jr   z, jr_019_6BFD                           ; $6BED: $28 $0E
@@ -8124,46 +8124,58 @@ ReturnIfNonInteractive_19::
 .return
     ret                                           ; $7D6D: $C9
 
-func_019_7D6E::
+; If the entity is ignoring hits, apply its recoil velocity.
+ApplyRecoilIfNeeded_19::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7D6E: $21 $10 $C4
     add  hl, bc                                   ; $7D71: $09
     ld   a, [hl]                                  ; $7D72: $7E
     and  a                                        ; $7D73: $A7
-    jr   z, jr_019_7DB7                           ; $7D74: $28 $41
+    jr   z, .return                               ; $7D74: $28 $41
 
     dec  a                                        ; $7D76: $3D
     ld   [hl], a                                  ; $7D77: $77
+
     call label_3E8E                               ; $7D78: $CD $8E $3E
+
+    ;
+    ; Temporarily replace the entity speed by the recoil speed
+    ;
+
     ld   hl, wEntitiesSpeedXTable                 ; $7D7B: $21 $40 $C2
     add  hl, bc                                   ; $7D7E: $09
     ld   a, [hl]                                  ; $7D7F: $7E
     push af                                       ; $7D80: $F5
+
     ld   hl, wEntitiesSpeedYTable                 ; $7D81: $21 $50 $C2
     add  hl, bc                                   ; $7D84: $09
     ld   a, [hl]                                  ; $7D85: $7E
     push af                                       ; $7D86: $F5
-    ld   hl, wC3F0                                ; $7D87: $21 $F0 $C3
+
+    ld   hl, wEntitiesRecoilVelocityX             ; $7D87: $21 $F0 $C3
     add  hl, bc                                   ; $7D8A: $09
     ld   a, [hl]                                  ; $7D8B: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $7D8C: $21 $40 $C2
     add  hl, bc                                   ; $7D8F: $09
     ld   [hl], a                                  ; $7D90: $77
-    ld   hl, wEntitiesUnknowTableS                ; $7D91: $21 $00 $C4
+
+    ld   hl, wEntitiesRecoilVelocityY             ; $7D91: $21 $00 $C4
     add  hl, bc                                   ; $7D94: $09
     ld   a, [hl]                                  ; $7D95: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $7D96: $21 $50 $C2
     add  hl, bc                                   ; $7D99: $09
     ld   [hl], a                                  ; $7D9A: $77
+
     call UpdateEntityPosWithSpeed_19              ; $7D9B: $CD $B8 $7D
+
     ld   hl, wEntitiesOptions1Table               ; $7D9E: $21 $30 $C4
     add  hl, bc                                   ; $7DA1: $09
     ld   a, [hl]                                  ; $7DA2: $7E
     and  $20                                      ; $7DA3: $E6 $20
-    jr   nz, jr_019_7DAA                          ; $7DA5: $20 $03
+    jr   nz, .restoreOriginalSpeed                ; $7DA5: $20 $03
 
     call label_3B23                               ; $7DA7: $CD $23 $3B
 
-jr_019_7DAA:
+.restoreOriginalSpeed
     ld   hl, wEntitiesSpeedYTable                 ; $7DAA: $21 $50 $C2
     add  hl, bc                                   ; $7DAD: $09
     pop  af                                       ; $7DAE: $F1
@@ -8174,7 +8186,7 @@ jr_019_7DAA:
     ld   [hl], a                                  ; $7DB5: $77
     pop  af                                       ; $7DB6: $F1
 
-jr_019_7DB7:
+.return
     ret                                           ; $7DB7: $C9
 
 UpdateEntityPosWithSpeed_19::

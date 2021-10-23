@@ -61,7 +61,7 @@ Data_005_55C8::
     db   $08, $F8
 
 func_005_55CA::
-    call func_005_7A3A
+    call ReturnIfNonInteractive_05
     ld   hl, wEntitiesPrivateCountdown2Table
     add  hl, bc                                   ; $55D0: $09
     ld   a, [hl]                                  ; $55D1: $7E
@@ -412,7 +412,7 @@ Data_005_58FD::
 func_005_5901::
     ld   de, Data_005_58FD
     call RenderActiveEntitySprite                 ; $5904: $CD $77 $3C
-    call func_005_7A3A                            ; $5907: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $5907: $CD $3A $7A
     ld   hl, wEntitiesUnknowTableY                ; $590A: $21 $D0 $C3
 
 jr_005_590D:
@@ -450,7 +450,7 @@ Data_005_5932::
 func_005_593A::
     ld   de, Data_005_5932                        ; $593A: $11 $32 $59
     call RenderActiveEntitySpritesPair            ; $593D: $CD $C0 $3B
-    call func_005_7A3A                            ; $5940: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $5940: $CD $3A $7A
     call DecrementEntityIgnoreHitsCountdown       ; $5943: $CD $56 $0C
     ld   hl, wEntitiesUnknowTableY                ; $5946: $21 $D0 $C3
     add  hl, bc                                   ; $5949: $09
@@ -505,7 +505,7 @@ func_005_5984::
     ldh  [hActiveEntityFlipAttribute], a          ; $598E: $E0 $ED
     ld   de, Data_005_5978                        ; $5990: $11 $78 $59
     call RenderActiveEntitySpritesPair            ; $5993: $CD $C0 $3B
-    call func_005_7A3A                            ; $5996: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $5996: $CD $3A $7A
     call DecrementEntityIgnoreHitsCountdown       ; $5999: $CD $56 $0C
     ldh  a, [hFrameCounter]                       ; $599C: $F0 $E7
     rra                                           ; $599E: $1F

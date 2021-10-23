@@ -1,7 +1,7 @@
 AntiKirbyEntityHandler::
     call func_006_44B6                            ; $423A: $CD $B6 $44
     call ReturnIfNonInteractive_06                ; $423D: $CD $C6 $64
-    call func_006_64F7                            ; $4240: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $4240: $CD $F7 $64
     call AddEntityZSpeedToPos_06                  ; $4243: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $4246: $21 $20 $C3
     add  hl, bc                                   ; $4249: $09

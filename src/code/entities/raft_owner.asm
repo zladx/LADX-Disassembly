@@ -21,7 +21,7 @@ jr_005_5372:
     call func_005_54EA                            ; $5372: $CD $EA $54
     ld   de, Data_005_533E                        ; $5375: $11 $3E $53
     call RenderActiveEntitySpritesPair            ; $5378: $CD $C0 $3B
-    call func_005_7A3A                            ; $537B: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $537B: $CD $3A $7A
     call func_005_54C3                            ; $537E: $CD $C3 $54
     ldh  a, [hActiveEntityState]                  ; $5381: $F0 $F0
     JP_TABLE                                      ; $5383
@@ -120,7 +120,7 @@ jr_005_53FF:
 
     ld   de, Data_005_53D4                        ; $5405: $11 $D4 $53
     call RenderActiveEntitySpritesPair            ; $5408: $CD $C0 $3B
-    call func_005_7A3A                            ; $540B: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $540B: $CD $3A $7A
     jp   func_005_54C3                            ; $540E: $C3 $C3 $54
 
 jr_005_5411:

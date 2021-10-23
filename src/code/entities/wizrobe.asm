@@ -18,7 +18,7 @@ WizrobeEntityHandler::
     ld   de, Data_006_7604                        ; $7628: $11 $04 $76
     call RenderActiveEntitySpritesPair            ; $762B: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $762E: $CD $C6 $64
-    call func_006_64F7                            ; $7631: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $7631: $CD $F7 $64
     call UpdateEntityPosWithSpeed_06              ; $7634: $CD $41 $65
     call label_3B23                               ; $7637: $CD $23 $3B
     ld   hl, wEntitiesStateTable                  ; $763A: $21 $90 $C2

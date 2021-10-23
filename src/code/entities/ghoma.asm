@@ -48,7 +48,7 @@ jr_005_7BF6:
     cp   $05                                      ; $7C14: $FE $05
     jp   nz, label_005_7E6C                       ; $7C16: $C2 $6C $7E
 
-    call func_005_7A3A                            ; $7C19: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $7C19: $CD $3A $7A
 
 jr_005_7C1C:
     call BossIntro                                ; $7C1C: $CD $E8 $3E

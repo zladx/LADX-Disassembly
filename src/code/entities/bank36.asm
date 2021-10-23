@@ -7152,42 +7152,54 @@ jr_036_6B0B:
     ld   [hl], a                                  ; $6B13: $77
     ret                                           ; $6B14: $C9
 
-func_036_6B15::
+; If the entity is ignoring hits, apply its recoil velocity.
+ApplyRecoilIfNeeded_36::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $6B15: $21 $10 $C4
     add  hl, bc                                   ; $6B18: $09
     ld   a, [hl]                                  ; $6B19: $7E
     and  a                                        ; $6B1A: $A7
-    jr   z, jr_036_6B5B                           ; $6B1B: $28 $3E
+    jr   z, .return                               ; $6B1B: $28 $3E
 
     dec  a                                        ; $6B1D: $3D
     ld   [hl], a                                  ; $6B1E: $77
+
     call label_3E8E                               ; $6B1F: $CD $8E $3E
+
+    ;
+    ; Temporarily replace the entity speed by the recoil speed
+    ;
+
     call PointHLToEntitySpeedX                    ; $6B22: $CD $EE $6B
     ld   a, [hl]                                  ; $6B25: $7E
     push af                                       ; $6B26: $F5
+
     call PointHLToEntitySpeedY                    ; $6B27: $CD $F3 $6B
     ld   a, [hl]                                  ; $6B2A: $7E
     push af                                       ; $6B2B: $F5
-    ld   hl, wC3F0                                ; $6B2C: $21 $F0 $C3
+
+    ld   hl, wEntitiesRecoilVelocityX             ; $6B2C: $21 $F0 $C3
     add  hl, bc                                   ; $6B2F: $09
     ld   a, [hl]                                  ; $6B30: $7E
     call PointHLToEntitySpeedX                    ; $6B31: $CD $EE $6B
     ld   [hl], a                                  ; $6B34: $77
-    ld   hl, wEntitiesUnknowTableS                ; $6B35: $21 $00 $C4
+
+    ld   hl, wEntitiesRecoilVelocityY             ; $6B35: $21 $00 $C4
     add  hl, bc                                   ; $6B38: $09
     ld   a, [hl]                                  ; $6B39: $7E
     call PointHLToEntitySpeedY                    ; $6B3A: $CD $F3 $6B
     ld   [hl], a                                  ; $6B3D: $77
+
     call UpdateEntityPosWithSpeed_36              ; $6B3E: $CD $62 $6A
+
     ld   hl, wEntitiesOptions1Table               ; $6B41: $21 $30 $C4
     add  hl, bc                                   ; $6B44: $09
     ld   a, [hl]                                  ; $6B45: $7E
     and  $20                                      ; $6B46: $E6 $20
-    jr   nz, jr_036_6B4D                          ; $6B48: $20 $03
+    jr   nz, .restoreOriginalSpeed                ; $6B48: $20 $03
 
     call label_3B23                               ; $6B4A: $CD $23 $3B
 
-jr_036_6B4D:
+.restoreOriginalSpeed
     call PointHLToEntitySpeedY                    ; $6B4D: $CD $F3 $6B
     pop  af                                       ; $6B50: $F1
     ld   [hl], a                                  ; $6B51: $77
@@ -7195,9 +7207,10 @@ jr_036_6B4D:
     pop  af                                       ; $6B55: $F1
     ld   [hl], a                                  ; $6B56: $77
     pop  af                                       ; $6B57: $F1
-    call label_3EAF                               ; $6B58: $CD $AF $3E
 
-jr_036_6B5B:
+    call StopEntityRecoilOnCollision              ; $6B58: $CD $AF $3E
+
+.return
     ret                                           ; $6B5B: $C9
 
 func_036_6B5C::
@@ -7759,10 +7772,10 @@ jr_036_6ECD:
     ret                                           ; $6ED4: $C9
 
 PiranhaPlantEntityHandler::
-    ld   hl, wC3F0                                ; $6ED5: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilVelocityX             ; $6ED5: $21 $F0 $C3
     add  hl, bc                                   ; $6ED8: $09
     ld   [hl], b                                  ; $6ED9: $70
-    ld   hl, wEntitiesUnknowTableS                ; $6EDA: $21 $00 $C4
+    ld   hl, wEntitiesRecoilVelocityY             ; $6EDA: $21 $00 $C4
     add  hl, bc                                   ; $6EDD: $09
     ld   [hl], b                                  ; $6EDE: $70
     call func_036_7022                            ; $6EDF: $CD $22 $70
@@ -7788,7 +7801,7 @@ PiranhaPlantEntityHandler::
     ld   [hl], a                                  ; $6F00: $77
 
 jr_036_6F01:
-    call func_036_6B15                            ; $6F01: $CD $15 $6B
+    call ApplyRecoilIfNeeded_36                   ; $6F01: $CD $15 $6B
     ldh  a, [hActiveEntityState]                  ; $6F04: $F0 $F0
     JP_TABLE                                      ; $6F06
 ._00 dw PiranhaPlantState0Handler

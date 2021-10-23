@@ -76,7 +76,7 @@ label_005_635E:
     ret                                           ; $6374: $C9
 
 jr_005_6375:
-    call func_005_7A3A                            ; $6375: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $6375: $CD $3A $7A
     call DecrementEntityIgnoreHitsCountdown       ; $6378: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $637B: $F0 $F0
     JP_TABLE                                      ; $637D
@@ -697,7 +697,7 @@ Data_005_6788::
 label_005_6798:
     ld   de, Data_005_6788                        ; $6798: $11 $88 $67
     call RenderActiveEntitySpritesPair            ; $679B: $CD $C0 $3B
-    call func_005_7A3A                            ; $679E: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $679E: $CD $3A $7A
     call label_3B44                               ; $67A1: $CD $44 $3B
     ldh  a, [hActiveEntityState]                  ; $67A4: $F0 $F0
     JP_TABLE                                      ; $67A6
@@ -747,7 +747,7 @@ Data_005_67E2::
 label_005_67EA:
     ld   de, Data_005_67E2                        ; $67EA: $11 $E2 $67
     call RenderActiveEntitySpritesPair            ; $67ED: $CD $C0 $3B
-    call func_005_7A3A                            ; $67F0: $CD $3A $7A
+    call ReturnIfNonInteractive_05                ; $67F0: $CD $3A $7A
     call UpdateEntityPosWithSpeed_05              ; $67F3: $CD $B1 $7A
     call AddEntityZSpeedToPos_05                  ; $67F6: $CD $EA $7A
     ld   hl, wEntitiesSpeedZTable                 ; $67F9: $21 $20 $C3

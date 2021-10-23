@@ -1009,10 +1009,10 @@ wEntitiesStateTable::
 
 ; Indicates if the entity is colliding:
 ; 0 = no collisions,
-; 1 = collision on the right,
-; 2 = collision on the left,
-; 3 = collision on the bottom,
-; 4 = collision on the top
+; bit 1 = collision on the right,
+; bit 2 = collision on the left,
+; bit 3 = collision on the bottom,
+; bit 4 = collision on the top
 wEntitiesCollisionsTable::
   ds $10 ; C2A0 - C2AF
 
@@ -1180,12 +1180,18 @@ wEntitiesUnknowTableY::
 wEntitiesRoomTable::
   ds $10 ; C3E0 - C3EF
 
-; Unlabeled
-wC3F0::
+; Recoil velocity X
+; (e.g. when hit by the sword, or bumped against the shield)
+;
+; NB: recoil is applied only when wEntitiesIgnoreHitsCountdownTable is non-zero for this entity.
+wEntitiesRecoilVelocityX::
   ds $10 ; C3F0 - C3FF
 
-; TODO comment
-wEntitiesUnknowTableS::
+; Recoil velocity Y
+; (e.g. when hit by the sword, or bumped against the shield)
+;
+; NB: recoil is applied only when wEntitiesIgnoreHitsCountdownTable is non-zero for this entity.
+wEntitiesRecoilVelocityY::
   ds $10 ; C400 - C40F
 
 ; Invulnerability countdown?

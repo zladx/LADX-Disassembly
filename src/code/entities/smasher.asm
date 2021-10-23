@@ -40,7 +40,7 @@ jr_006_453F:
     jp   nz, label_006_5308                       ; $4549: $C2 $08 $53
 
     call ReturnIfNonInteractive_06                ; $454C: $CD $C6 $64
-    call func_006_64F7                            ; $454F: $CD $F7 $64
+    call ApplyRecoilIfNeeded_06                   ; $454F: $CD $F7 $64
     call label_3B39                               ; $4552: $CD $39 $3B
     call AddEntityZSpeedToPos_06                  ; $4555: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $4558: $21 $20 $C3
@@ -531,7 +531,7 @@ func_006_4855::
     add  hl, bc                                   ; $4884: $09
     ld   a, [hl]                                  ; $4885: $7E
     push hl                                       ; $4886: $E5
-    ld   hl, wC3F0                                ; $4887: $21 $F0 $C3
+    ld   hl, wEntitiesRecoilVelocityX             ; $4887: $21 $F0 $C3
     add  hl, de                                   ; $488A: $19
     ld   [hl], a                                  ; $488B: $77
     pop  hl                                       ; $488C: $E1
@@ -543,7 +543,7 @@ func_006_4855::
     add  hl, bc                                   ; $4895: $09
     ld   a, [hl]                                  ; $4896: $7E
     push hl                                       ; $4897: $E5
-    ld   hl, wEntitiesUnknowTableS                ; $4898: $21 $00 $C4
+    ld   hl, wEntitiesRecoilVelocityY             ; $4898: $21 $00 $C4
     add  hl, de                                   ; $489B: $19
     ld   [hl], a                                  ; $489C: $77
     pop  hl                                       ; $489D: $E1

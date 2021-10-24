@@ -409,7 +409,7 @@ func_006_55B3::
     ld   c, $08                                   ; $55C2: $0E $08
     call RenderActiveEntitySpritesRect            ; $55C4: $CD $E6 $3C
     ld   a, $04                                   ; $55C7: $3E $04
-    call label_3DA0                               ; $55C9: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $55C9: $CD $A0 $3D
     ld   hl, wEntitiesPosZTable                   ; $55CC: $21 $10 $C3
     add  hl, bc                                   ; $55CF: $09
     ld   a, [hl]                                  ; $55D0: $7E

@@ -572,7 +572,7 @@ jr_005_6C92:
     ld   c, $0A                                   ; $6CA4: $0E $0A
     call RenderActiveEntitySpritesRect            ; $6CA6: $CD $E6 $3C
     ld   a, $08                                   ; $6CA9: $3E $08
-    jp   label_3DA0                               ; $6CAB: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $6CAB: $C3 $A0 $3D
 
 jr_005_6CAE:
     ldh  a, [hActiveEntitySpriteVariant]          ; $6CAE: $F0 $F1
@@ -588,4 +588,4 @@ jr_005_6CAE:
     ld   c, $04                                   ; $6CBC: $0E $04
     call RenderActiveEntitySpritesRect            ; $6CBE: $CD $E6 $3C
     ld   a, $02                                   ; $6CC1: $3E $02
-    jp   label_3DA0                               ; $6CC3: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $6CC3: $C3 $A0 $3D

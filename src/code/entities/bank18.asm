@@ -379,7 +379,7 @@ jr_018_435F:
     ld   c, $08                                   ; $4369: $0E $08
     call RenderActiveEntitySpritesRect            ; $436B: $CD $E6 $3C
     ld   a, $04                                   ; $436E: $3E $04
-    jp   label_3DA0                               ; $4370: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $4370: $C3 $A0 $3D
 
 label_018_4373:
     ld   hl, wEntitiesPosYTable                   ; $4373: $21 $10 $C2
@@ -949,7 +949,7 @@ func_018_4833::
     ld   de, Data_018_481F                        ; $4840: $11 $1F $48
     call RenderActiveEntitySpritesPair            ; $4843: $CD $C0 $3B
     ld   a, $02                                   ; $4846: $3E $02
-    call label_3DA0                               ; $4848: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $4848: $CD $A0 $3D
     call CopyEntityPositionToActivePosition       ; $484B: $CD $8A $3D
     call GetEntityPrivateCountdown1               ; $484E: $CD $00 $0C
     jr   z, jr_018_4857                           ; $4851: $28 $04
@@ -981,7 +981,7 @@ jr_018_485C:
     ld   c, $09                                   ; $486D: $0E $09
     call RenderActiveEntitySpritesRect            ; $486F: $CD $E6 $3C
     ld   a, $09                                   ; $4872: $3E $09
-    call label_3DA0                               ; $4874: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $4874: $CD $A0 $3D
     call GetEntityPrivateCountdown1               ; $4877: $CD $00 $0C
     ret  z                                        ; $487A: $C8
 
@@ -995,7 +995,7 @@ jr_018_485C:
     ld   c, $03                                   ; $488A: $0E $03
     call RenderActiveEntitySpritesRect            ; $488C: $CD $E6 $3C
     ld   a, $03                                   ; $488F: $3E $03
-    jp   label_3DA0                               ; $4891: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $4891: $C3 $A0 $3D
 
 Data_018_4894::
     db   $00, $FC, $76, $00, $00, $04, $78, $00, $00, $0C, $7A, $00
@@ -1038,7 +1038,7 @@ func_018_48DE::
     ld   c, $03                                   ; $48F3: $0E $03
     call RenderActiveEntitySpritesRect            ; $48F5: $CD $E6 $3C
     ld   a, $03                                   ; $48F8: $3E $03
-    call label_3DA0                               ; $48FA: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $48FA: $CD $A0 $3D
     call CopyEntityPositionToActivePosition       ; $48FD: $CD $8A $3D
     ld   a, $07                                   ; $4900: $3E $07
     ldh  [hActiveEntitySpriteVariant], a          ; $4902: $E0 $F1
@@ -1058,7 +1058,7 @@ jr_018_4913:
     ld   c, $03                                   ; $4913: $0E $03
     call RenderActiveEntitySpritesRect            ; $4915: $CD $E6 $3C
     ld   a, $03                                   ; $4918: $3E $03
-    jp   label_3DA0                               ; $491A: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $491A: $C3 $A0 $3D
 
 jr_018_491D:
     ld   de, Data_018_48A4                        ; $491D: $11 $A4 $48
@@ -1066,7 +1066,7 @@ jr_018_491D:
 
 jr_018_4923:
     ld   a, $02                                   ; $4923: $3E $02
-    jp   label_3DA0                               ; $4925: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $4925: $C3 $A0 $3D
 
 Data_018_4928::
     db   $F0, $00, $70, $01, $F0, $08, $72, $01, $00, $00, $74, $01, $00, $08, $76, $01
@@ -1405,7 +1405,7 @@ jr_018_4BB5:
     ld   c, $04                                   ; $4BB6: $0E $04
     call RenderActiveEntitySpritesRect            ; $4BB8: $CD $E6 $3C
     ld   a, $04                                   ; $4BBB: $3E $04
-    call label_3DA0                               ; $4BBD: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $4BBD: $CD $A0 $3D
     ldh  a, [hFrameCounter]                       ; $4BC0: $F0 $E7
     rra                                           ; $4BC2: $1F
     rra                                           ; $4BC3: $1F
@@ -2291,7 +2291,7 @@ jr_018_5190:
 jr_018_519C:
     call RenderActiveEntitySpritesRect            ; $519C: $CD $E6 $3C
     ld   a, $04                                   ; $519F: $3E $04
-    jp   label_3DA0                               ; $51A1: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $51A1: $C3 $A0 $3D
 
 label_018_51A4:
     call func_018_7D36                            ; $51A4: $CD $36 $7D
@@ -3271,7 +3271,7 @@ func_018_586B::
     ld   c, $04                                   ; $588D: $0E $04
     call RenderActiveEntitySpritesRect            ; $588F: $CD $E6 $3C
     ld   a, $04                                   ; $5892: $3E $04
-    call label_3DA0                               ; $5894: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $5894: $CD $A0 $3D
     jp   CopyEntityPositionToActivePosition       ; $5897: $C3 $8A $3D
 
 label_018_589A:
@@ -4170,7 +4170,7 @@ jr_018_5E27:
     ld   c, $04                                   ; $5E27: $0E $04
     call RenderActiveEntitySpritesRect            ; $5E29: $CD $E6 $3C
     ld   a, $02                                   ; $5E2C: $3E $02
-    call label_3DA0                               ; $5E2E: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $5E2E: $CD $A0 $3D
     ldh  a, [hActiveEntityState]                  ; $5E31: $F0 $F0
     JP_TABLE                                      ; $5E33
 ._00 dw func_018_5E3A                             ; $5E34
@@ -5727,7 +5727,7 @@ jr_018_699A:
     ld   a, [wActiveEntityIndex]                  ; $69A9: $FA $23 $C1
     ld   c, a                                     ; $69AC: $4F
     ld   a, $06                                   ; $69AD: $3E $06
-    call label_3DA0                               ; $69AF: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $69AF: $CD $A0 $3D
     jp   label_3CD9                               ; $69B2: $C3 $D9 $3C
 
 Data_018_69B5::
@@ -7028,7 +7028,7 @@ func_018_7181::
     ld   c, $03                                   ; $7191: $0E $03
     call RenderActiveEntitySpritesRect            ; $7193: $CD $E6 $3C
     ld   a, $01                                   ; $7196: $3E $01
-    jp   label_3DA0                               ; $7198: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $7198: $C3 $A0 $3D
 
 Data_018_719B::
     db   $6E, $00, $6E, $20, $6E, $40, $6E, $60
@@ -7690,7 +7690,7 @@ func_018_766A::
     ld   c, $06                                   ; $767A: $0E $06
     call RenderActiveEntitySpritesRect            ; $767C: $CD $E6 $3C
     ld   a, $06                                   ; $767F: $3E $06
-    call label_3DA0                               ; $7681: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $7681: $CD $A0 $3D
     ldh  a, [hActiveEntityStatus]                 ; $7684: $F0 $EA
     cp   $01                                      ; $7686: $FE $01
     jr   z, jr_018_7691                           ; $7688: $28 $07
@@ -8556,7 +8556,7 @@ jr_018_7D09:
     jr   nz, jr_018_7CF8                          ; $7D2F: $20 $C7
 
     ld   a, $03                                   ; $7D31: $3E $03
-    jp   label_3DA0                               ; $7D33: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $7D33: $C3 $A0 $3D
 
 ; ----------------------------------------------------------------------
 ;

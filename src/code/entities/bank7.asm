@@ -1752,7 +1752,7 @@ jr_007_4BF2:
     ld   c, $08                                   ; $4BF2: $0E $08
     call RenderActiveEntitySpritesRect            ; $4BF4: $CD $E6 $3C
     ld   a, $06                                   ; $4BF7: $3E $06
-    call label_3DA0                               ; $4BF9: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $4BF9: $CD $A0 $3D
     xor  a                                        ; $4BFC: $AF
     call SetEntitySpriteVariant                   ; $4BFD: $CD $0C $3B
 
@@ -3128,7 +3128,7 @@ jr_007_549C:
     jr   nz, jr_007_548A                          ; $54BB: $20 $CD
 
     ld   a, $03                                   ; $54BD: $3E $03
-    jp   label_3DA0
+    jp   func_015_7964_trampoline
 
 Data_007_54C2::
     db   $44, $29, $82, $CB, $64, $C1, $D0, $74, $6A, $36, $5E, $EC, $F5, $9D
@@ -4448,7 +4448,7 @@ jr_007_5CDF:
     ld   a, [wActiveEntityIndex]                  ; $5CEA: $FA $23 $C1
     ld   c, a                                     ; $5CED: $4F
     ld   a, $0A                                   ; $5CEE: $3E $0A
-    jp   label_3DA0                               ; $5CF0: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $5CF0: $C3 $A0 $3D
 
 jr_007_5CF3:
     ld   a, [wActiveEntityIndex]                  ; $5CF3: $FA $23 $C1
@@ -7460,7 +7460,7 @@ func_007_6FB1::
     ld   c, $04                                   ; $6FD9: $0E $04
     call RenderActiveEntitySpritesRect            ; $6FDB: $CD $E6 $3C
     ld   a, $04                                   ; $6FDE: $3E $04
-    call label_3DA0                               ; $6FE0: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $6FE0: $CD $A0 $3D
 
 jr_007_6FE3:
     jp   CopyEntityPositionToActivePosition       ; $6FE3: $C3 $8A $3D
@@ -7517,7 +7517,7 @@ jr_007_702D:
     ld   a, $05                                   ; $7032: $3E $05
 
 label_007_7034:
-    call label_3DA0                               ; $7034: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $7034: $CD $A0 $3D
     jp   CopyEntityPositionToActivePosition       ; $7037: $C3 $8A $3D
 
 func_007_703A::
@@ -9235,7 +9235,7 @@ jr_007_7AD1:
     pop  hl                                       ; $7B18: $E1
     call func_1819                               ; $7B19: $CD $19 $18
     ld   a, $02                                   ; $7B1C: $3E $02
-    call label_3DA0                               ; $7B1E: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $7B1E: $CD $A0 $3D
     pop  bc                                       ; $7B21: $C1
     ldh  a, [hActiveEntitySpriteVariant]          ; $7B22: $F0 $F1
     cp   $02                                      ; $7B24: $FE $02
@@ -9267,7 +9267,7 @@ func_007_7B30::
     ld   [hl+], a                                 ; $7B4B: $22
     ld   [hl], $16                                ; $7B4C: $36 $16
     ld   a, $01                                   ; $7B4E: $3E $01
-    jp   label_3DA0                               ; $7B50: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $7B50: $C3 $A0 $3D
 
 include "code/entities/chest_with_item.asm"
 

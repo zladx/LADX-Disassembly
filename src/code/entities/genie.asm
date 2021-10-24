@@ -432,7 +432,7 @@ func_004_42B3::
     ld   c, $04                                   ; $42C4: $0E $04
     call RenderActiveEntitySpritesRect            ; $42C6: $CD $E6 $3C
     ld   a, $04                                   ; $42C9: $3E $04
-    call label_3DA0                               ; $42CB: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $42CB: $CD $A0 $3D
     ld   hl, wEntitiesPosZTable                                ; $42CE: $21 $10 $C3
     add  hl, bc                                   ; $42D1: $09
     ld   a, [hl]                                  ; $42D2: $7E
@@ -1090,7 +1090,7 @@ jr_004_4713:
     ld   c, $0A                                   ; $472B: $0E $0A
     call RenderActiveEntitySpritesRect            ; $472D: $CD $E6 $3C
     ld   a, $0A                                   ; $4730: $3E $0A
-    call label_3DA0                               ; $4732: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $4732: $CD $A0 $3D
     ldh  a, [hActiveEntityVisualPosY]             ; $4735: $F0 $EC
     add  $10                                      ; $4737: $C6 $10
     ldh  [hActiveEntityVisualPosY], a             ; $4739: $E0 $EC
@@ -1235,7 +1235,7 @@ jr_004_48A6:
     ld   c, $08                                   ; $48C7: $0E $08
     call RenderActiveEntitySpritesRect            ; $48C9: $CD $E6 $3C
     ld   a, $08                                   ; $48CC: $3E $08
-    jp   label_3DA0                               ; $48CE: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $48CE: $C3 $A0 $3D
 
 Data_004_48D1::
     db   $34, $02, $34, $22, $34, $12, $34, $32   ; $48D1

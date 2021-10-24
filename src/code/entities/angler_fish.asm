@@ -404,7 +404,7 @@ jr_005_58F2:
     ld   c, $13                                   ; $58F3: $0E $13
     call RenderActiveEntitySpritesRect            ; $58F5: $CD $E6 $3C
     ld   a, $13                                   ; $58F8: $3E $13
-    jp   label_3DA0                               ; $58FA: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $58FA: $C3 $A0 $3D
 
 Data_005_58FD::
     db   $72, $00, $72, $20

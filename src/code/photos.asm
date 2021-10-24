@@ -1209,7 +1209,7 @@ JumpTable_037_4781::
     call func_037_49FB                            ; $47AC: $CD $FB $49
     call func_037_4552                            ; $47AF: $CD $52 $45
     ld   a, [wEntitiesPosXTable]                  ; $47B2: $FA $00 $C2
-    call label_3DA0                               ; $47B5: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $47B5: $CD $A0 $3D
     ld   a, $37                                   ; $47B8: $3E $37
     call func_A9B                                 ; $47BA: $CD $9B $0A
     ld   a, $37                                   ; $47BD: $3E $37

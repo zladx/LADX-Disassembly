@@ -910,7 +910,7 @@ CopyEntityPositionToActivePosition::
     ldh  [hActiveEntityVisualPosY], a             ; $3D9D: $E0 $EC
     ret                                           ; $3D9F: $C9
 
-label_3DA0::
+func_015_7964_trampoline::
     callhl func_015_7964                          ; $3DA0: $21 $00 $21 $36 $15 $CD $64 $79
     jp   ReloadSavedBank                          ; $3DA8: $C3 $1D $08
 

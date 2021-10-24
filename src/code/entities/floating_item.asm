@@ -94,7 +94,7 @@ jr_006_7B61:
     ld   c, $02                                   ; $7B6B: $0E $02
     call RenderActiveEntitySpritesRect            ; $7B6D: $CD $E6 $3C
     ld   a, $01                                   ; $7B70: $3E $01
-    call label_3DA0                               ; $7B72: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $7B72: $CD $A0 $3D
     call CopyEntityPositionToActivePosition       ; $7B75: $CD $8A $3D
     call ReturnIfNonInteractive_06                ; $7B78: $CD $C6 $64
     ldh  a, [hIsSideScrolling]                    ; $7B7B: $F0 $F9

@@ -1247,7 +1247,7 @@ jr_005_6205:
     ld   c, $0C                                   ; $6215: $0E $0C
     call RenderActiveEntitySpritesRect            ; $6217: $CD $E6 $3C
     ld   a, $0A                                   ; $621A: $3E $0A
-    call label_3DA0                               ; $621C: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $621C: $CD $A0 $3D
     ld   e, $00                                   ; $621F: $1E $00
     ldh  a, [hActiveEntitySpriteVariant]          ; $6221: $F0 $F1
     and  a                                        ; $6223: $A7

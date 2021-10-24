@@ -2260,7 +2260,7 @@ jr_003_555C:
     ld   c, $08                                   ; $555C: $0E $08
     call RenderActiveEntitySpritesRect            ; $555E: $CD $E6 $3C
     ld   a, $04                                   ; $5561: $3E $04
-    call label_3DA0                               ; $5563: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $5563: $CD $A0 $3D
     jr   jr_003_5568                              ; $5566: $18 $00
 
 jr_003_5568:

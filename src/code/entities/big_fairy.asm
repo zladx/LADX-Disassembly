@@ -111,7 +111,7 @@ jr_006_712F:
     ld   c, $06                                   ; $712F: $0E $06
     call RenderActiveEntitySpritesRect            ; $7131: $CD $E6 $3C
     ld   a, $06                                   ; $7134: $3E $06
-    call label_3DA0                               ; $7136: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $7136: $CD $A0 $3D
     call label_3CD9                               ; $7139: $CD $D9 $3C
     ld   e, $FE                                   ; $713C: $1E $FE
     ld   hl, wEntitiesUnknowTableY                ; $713E: $21 $D0 $C3

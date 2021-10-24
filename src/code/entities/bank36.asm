@@ -461,7 +461,7 @@ label_036_429A:
     ld   c, $06                                   ; $42C3: $0E $06
     call RenderActiveEntitySpritesRect            ; $42C5: $CD $E6 $3C
     ld   a, $06                                   ; $42C8: $3E $06
-    call label_3DA0                               ; $42CA: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $42CA: $CD $A0 $3D
     call func_036_6B5C                            ; $42CD: $CD $5C $6B
     call CheckLinkCollisionWithEnemy_trampoline   ; $42D0: $CD $5A $3B
     ret                                           ; $42D3: $C9
@@ -477,7 +477,7 @@ jr_036_42D4:
     ld   c, $03                                   ; $42E3: $0E $03
     call RenderActiveEntitySpritesRect            ; $42E5: $CD $E6 $3C
     ld   a, $03                                   ; $42E8: $3E $03
-    call label_3DA0                               ; $42EA: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $42EA: $CD $A0 $3D
     call func_036_6B5C                            ; $42ED: $CD $5C $6B
     call CheckLinkCollisionWithEnemy_trampoline   ; $42F0: $CD $5A $3B
     call ReturnIfNonInteractive_36.allowInactiveEntity ; $42F3: $CD $46 $6A
@@ -2516,7 +2516,7 @@ func_036_4F4E::
     ld   c, $0C                                   ; $4F5D: $0E $0C
     call RenderActiveEntitySpritesRect            ; $4F5F: $CD $E6 $3C
     ld   a, $0C                                   ; $4F62: $3E $0C
-    call label_3DA0                               ; $4F64: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $4F64: $CD $A0 $3D
     ret                                           ; $4F67: $C9
 
 func_036_4F68::
@@ -2546,7 +2546,7 @@ jr_036_4F7F:
     ld   a, $36                                   ; $4F81: $3E $36
     call func_A5F                                 ; $4F83: $CD $5F $0A
     ld   a, $02                                   ; $4F86: $3E $02
-    call label_3DA0                               ; $4F88: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $4F88: $CD $A0 $3D
     ld   hl, wEntitiesPrivateState1Table          ; $4F8B: $21 $B0 $C2
     add  hl, bc                                   ; $4F8E: $09
     ld   a, [hl]                                  ; $4F8F: $7E
@@ -2584,7 +2584,7 @@ jr_036_4FB1:
     ld   a, $36                                   ; $4FBF: $3E $36
     call func_A5F                                 ; $4FC1: $CD $5F $0A
     ld   a, $02                                   ; $4FC4: $3E $02
-    call label_3DA0                               ; $4FC6: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $4FC6: $CD $A0 $3D
     pop  af                                       ; $4FC9: $F1
     ld   [wCurrentBank], a                        ; $4FCA: $EA $AF $DB
     call ReturnIfNonInteractive_36                ; $4FCD: $CD $40 $6A
@@ -2700,7 +2700,7 @@ jr_036_506B:
     ld   a, $36                                   ; $5076: $3E $36
     ld   [wCurrentBank], a                        ; $5078: $EA $AF $DB
     ld   a, $06                                   ; $507B: $3E $06
-    call label_3DA0                               ; $507D: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $507D: $CD $A0 $3D
     call label_3CD9                               ; $5080: $CD $D9 $3C
     pop  af                                       ; $5083: $F1
     ld   [wCurrentBank], a                        ; $5084: $EA $AF $DB
@@ -3937,7 +3937,7 @@ jr_036_5855:
     ld   a, $06                                   ; $5863: $3E $06
 
 jr_036_5865:
-    call label_3DA0                               ; $5865: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $5865: $CD $A0 $3D
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5868: $21 $40 $C3
     add  hl, bc                                   ; $586B: $09
     ld   a, [hl]                                  ; $586C: $7E
@@ -5142,7 +5142,7 @@ jr_036_5F92:
     ld   a, $36                                   ; $5F97: $3E $36
     call func_A5F                                 ; $5F99: $CD $5F $0A
     ld   a, $08                                   ; $5F9C: $3E $08
-    call label_3DA0                               ; $5F9E: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $5F9E: $CD $A0 $3D
     ret                                           ; $5FA1: $C9
 
 FlyingHopperBombsEntityHandler::
@@ -5609,7 +5609,7 @@ func_036_6219::
     ld   a, $36                                   ; $6236: $3E $36
     call func_A5F                                 ; $6238: $CD $5F $0A
     ld   a, $04                                   ; $623B: $3E $04
-    call label_3DA0                               ; $623D: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $623D: $CD $A0 $3D
     ret                                           ; $6240: $C9
 
 RotoswitchRedEntityHandler::
@@ -6274,7 +6274,7 @@ jr_036_665C:
     call RenderActiveEntitySpritesRect            ; $665E: $CD $E6 $3C
     pop  bc                                       ; $6661: $C1
     ld   a, c                                     ; $6662: $79
-    call label_3DA0                               ; $6663: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $6663: $CD $A0 $3D
     pop  bc                                       ; $6666: $C1
     ret                                           ; $6667: $C9
 
@@ -6969,7 +6969,7 @@ jr_036_6A32:
     ld   a, $36                                   ; $6A35: $3E $36
     call func_A5F                                ; $6A37: $CD $5F $0A
     ld   a, $03                                   ; $6A3A: $3E $03
-    call label_3DA0                               ; $6A3C: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $6A3C: $CD $A0 $3D
     ret                                           ; $6A3F: $C9
 
 ; ----------------------------------------------------------------------
@@ -7669,7 +7669,7 @@ jr_036_6E39:
     ld   a, $02                                   ; $6E39: $3E $02
 
 jr_036_6E3B:
-    call label_3DA0                               ; $6E3B: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $6E3B: $CD $A0 $3D
     ret                                           ; $6E3E: $C9
 
 jr_036_6E3F:

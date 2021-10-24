@@ -331,7 +331,7 @@ func_006_6E7E::
     ld   c, $04                                   ; $6E91: $0E $04
     call RenderActiveEntitySpritesRect            ; $6E93: $CD $E6 $3C
     ld   a, $04                                   ; $6E96: $3E $04
-    call label_3DA0                               ; $6E98: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $6E98: $CD $A0 $3D
     ld   hl, wEntitiesPosZTable                   ; $6E9B: $21 $10 $C3
     add  hl, bc                                   ; $6E9E: $09
     ld   a, [hl]                                  ; $6E9F: $7E
@@ -368,4 +368,4 @@ func_006_6E7E::
     ld   a, $00                                   ; $6ECD: $3E $00
     ld   [hl+], a                                 ; $6ECF: $22
     ld   a, $02                                   ; $6ED0: $3E $02
-    jp   label_3DA0                               ; $6ED2: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $6ED2: $C3 $A0 $3D

@@ -419,7 +419,6 @@ PIECE_OF_POWER_COUNTER_MAX_LOW_MAX_HEALTH    equ $1E ; defines after how many ra
 PIECE_OF_POWER_COUNTER_MAX_MEDIUM_MAX_HEALTH equ $23
 PIECE_OF_POWER_COUNTER_MAX_HIGH_MAX_HEALTH   equ $28
 
-
 ; values for wGoldenLeavesCount
 GOLDEN_LEAVES_5 equ 5
 SLIME_KEY       equ 6
@@ -435,3 +434,8 @@ DROP_CHANCE_25_PERCENT equ %00000011
 
 DROP_DESPAWN_TIME   equ $80 ; frames until entity despawns
 DROP_COUNTDOWN_TIME equ $18 ; frames dropped entity is blinking before despawn
+
+; Recoil from sword hits
+SWORD_RECOIL_GENIE_JAR_DEFAULT  equ $20
+SWORD_RECOIL_GENIE_JAR_STRONGER equ $30
+SWORD_RECOIL_DEFAULT            equ $30

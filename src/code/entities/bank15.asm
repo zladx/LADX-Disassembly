@@ -96,7 +96,7 @@ ResetEntity::
     ld   hl, wC5D0                                ; $4093: $21 $D0 $C5
     add  hl, bc                                   ; $4096: $09
     ld   [hl], $FF                                ; $4097: $36 $FF
-    ld   hl, wEntitiesUnknowTableZ                ; $4099: $21 $A0 $C4
+    ld   hl, wEntitiesPowerRecoilingTable         ; $4099: $21 $A0 $C4
     add  hl, bc                                   ; $409C: $09
     ld   [hl], b                                  ; $409D: $70
     ret                                           ; $409E: $C9
@@ -7214,28 +7214,36 @@ func_015_795D::
     ld   a, [hl]                                  ; $7961: $7E
     and  $0F                                      ; $7962: $E6 $0F
 
+; Increment wOAMNextAvailableSlot by `a * 4` tiles
+; (plus special conditions)
+;
+; Inputs:
+;   a  number of tiles / 4
 func_015_7964::
+    ; e = a * 4
     sla  a                                        ; $7964: $CB $27
     sla  a                                        ; $7966: $CB $27
     ld   e, a                                     ; $7968: $5F
+
     ld   a, [wOAMNextAvailableSlot]               ; $7969: $FA $C0 $C3
     add  e                                        ; $796C: $83
     cp   $60                                      ; $796D: $FE $60
-    jr   c, jr_015_7973                           ; $796F: $38 $02
-
+    jr   c, .overflowEnd                          ; $796F: $38 $02
     sub  $60                                      ; $7971: $D6 $60
+.overflowEnd
 
-jr_015_7973:
     ld   [wOAMNextAvailableSlot], a               ; $7973: $EA $C0 $C3
+
+    ; [wC3C1] += e
     ld   a, [wC3C1]                               ; $7976: $FA $C1 $C3
     add  e                                        ; $7979: $83
     ld   [wC3C1], a                               ; $797A: $EA $C1 $C3
+
     cp   $60                                      ; $797D: $FE $60
-    jr   c, jr_015_7994                           ; $797F: $38 $13
+    jr   c, .return                               ; $797F: $38 $13
 
     ldh  a, [hFrameCounter]                       ; $7981: $F0 $E7
 
-jr_015_7983:
     ld   hl, wActiveEntityIndex                   ; $7983: $21 $23 $C1
     add  [hl]                                     ; $7986: $86
     and  $07                                      ; $7987: $E6 $07
@@ -7246,7 +7254,7 @@ jr_015_7983:
     ld   a, [hl]                                  ; $7990: $7E
     ld   [wOAMNextAvailableSlot], a               ; $7991: $EA $C0 $C3
 
-jr_015_7994:
+.return
     ret                                           ; $7994: $C9
 
 func_015_7995::

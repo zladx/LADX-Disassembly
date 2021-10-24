@@ -718,7 +718,8 @@ wC19C::
 wC19D::
   ds 1 ; C19D
 
-; Unlabeled
+; Damage level for the current sword hit?
+; (more or less `sword-level + power-ups - 1`)
 wC19E::
   ds 1 ; C19E
 
@@ -1106,6 +1107,7 @@ wEntitiesUnknowTableR::
   ds $10 ; C390 - C39F
 
 ; Type of the entity
+; See ENTITY_* constants for possible values.
 wEntitiesTypeTable::
   ds $10 ; C3A0 - C3AF
 
@@ -1217,7 +1219,7 @@ wEntitiesFlashCountdownTable::
 ; bit 5: allow out-of-bounds
 ; bit 6: sword doesn't clink
 ; bit 7: is boss
-; See ENTITY_OPT_* for possible values
+; See ENTITY_OPT1* for possible values
 wEntitiesOptions1Table::
   ds $10 ; C430 - C43F
 
@@ -1249,9 +1251,9 @@ wEntitiesUnknowTableV::
 wEntitiesUnknowTableW::
   ds $10 ; C490 - C49F
 
-; See label_3E8E
-; (whether smoke vfx should spawn?)
-wEntitiesUnknowTableZ::
+; Is the entity recoiling from a power hit
+; (e.g. hit with the power tunic or while having a Piece of power)
+wEntitiesPowerRecoilingTable::
   ds $10 ; C4A0 - C4AF
 
 ; Unlabeled

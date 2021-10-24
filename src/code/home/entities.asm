@@ -1012,7 +1012,7 @@ UnloadAllEntities::
     ret                                           ; $3E8D: $C9
 
 label_3E8E::
-    ld   hl, wEntitiesUnknowTableZ                ; $3E8E: $21 $A0 $C4
+    ld   hl, wEntitiesPowerRecoilingTable         ; $3E8E: $21 $A0 $C4
     add  hl, bc                                   ; $3E91: $09
     ld   a, [hl]                                  ; $3E92: $7E
     and  a                                        ; $3E93: $A7

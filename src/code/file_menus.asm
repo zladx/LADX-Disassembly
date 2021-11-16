@@ -7,7 +7,7 @@
 
 ; -----------------------------------------------------------------------------
 ;
-; FILE SELECTION
+; GAMEPLAY_FILE_SELECT
 ; Screen for selecting a save file
 ;
 ; -----------------------------------------------------------------------------
@@ -495,11 +495,16 @@ FileSelectionLoadSavedFile::
 
 ; -----------------------------------------------------------------------------
 ;
-; FILE CREATION
+; GAMEPLAY_FILE_NEW
 ; Screen for creating a new file
 ;
 ; -----------------------------------------------------------------------------
 
+; Address of the tile indicating the save slot index in the BG Map
+FILE_NEW_SAVE_SLOT_INDEX_BG   equ vBGMap0 + $49
+; Offset of the tile indicating the save slot index "1" in the "menu.dmg.2bpp" tileset
+; The tiles for index "2" and "3" follow next in the tileset.
+FILE_NEW_SAVE_SLOT_1_TILE equ $AB
 
 FileCreationEntryPoint::
     ld   a, [wGameplaySubtype]                    ; $4A07: $FA $96 $DB
@@ -521,18 +526,25 @@ FileCreationInit1Handler::
 FileCreationInit2Handler::
     ld   a, $05                                   ; $4A24: $3E $05
     ld   [wBGMapToLoad], a                        ; $4A26: $EA $FF $D6
-    ld   hl, $D601                                ; $4A29: $21 $01 $D6
-    ld   a, $98                                   ; $4A2C: $3E $98
-    ldi  [hl], a                                  ; $4A2E: $22
-    ld   a, $49                                   ; $4A2F: $3E $49
-    ldi  [hl], a                                  ; $4A31: $22
+
+    ;
+    ; Write the proper tile for the save file number at the top
+    ;
+
+    ; Configure a wRequest to copy the tile number to the BG map
+    ; during the next vblank period.
+    ld   hl, wRequest                             ; $4A29: $21 $01 $D6
+    ld   a, HIGH(FILE_NEW_SAVE_SLOT_INDEX_BG)     ; $4A2C: $3E $98
+    ldi  [hl], a ; wRequestDestinationHigh        ; $4A2E: $22
+    ld   a, LOW(FILE_NEW_SAVE_INDEX_BG)           ; $4A2F: $3E $49
+    ldi  [hl], a ; wRequestDestinationLow         ; $4A31: $22
     xor  a                                        ; $4A32: $AF
-    ldi  [hl], a                                  ; $4A33: $22
+    ldi  [hl], a ; wRequestLength                 ; $4A33: $22
     ld   a, [wSaveSlot]                           ; $4A34: $FA $A6 $DB
-    add  a, $AB                                   ; $4A37: $C6 $AB
-    ldi  [hl], a                                  ; $4A39: $22
+    add  a, FILE_NEW_SAVE_SLOT_1_TILE             ; $4A37: $C6 $AB
+    ldi  [hl], a ; wRequestData[0]                ; $4A39: $22
     xor  a                                        ; $4A3A: $AF
-    ld   [hl], a                                  ; $4A3B: $77
+    ld   [hl], a ; wRequestData[1]                ; $4A3B: $77
     jp   IncrementGameplaySubtypeAndReturn        ; $4A3C: $C3 $D6 $44
 
 IF !LANG_DE
@@ -589,6 +601,7 @@ jr_001_4A4D::
     ret                                           ; $4A97: $C9
 ENDC
 
+; Indexed by wSaveSlot
 Data_001_4A98::
     db   $00, $05, $0A                            ; $4A98
 

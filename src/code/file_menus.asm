@@ -95,7 +95,7 @@ CopyDeathCountsToBG::
 FileSelectionPrepare5::
     jp   FileDeletionState4Handler                ; $484F: $C3 $6D $4D
 
-func_4852::
+func_001_4852::
     push de                                       ; $4852: $D5
     ld   a, [$D600]                               ; $4853: $FA $00 $D6
     ld   e, a                                     ; $4856: $5F
@@ -635,7 +635,7 @@ FileCreationInteractiveHandler::
     ld   e, l                                     ; $4AAA: $5D
     ld   d, h                                     ; $4AAB: $54
     ld   bc, $984A                                ; $4AAC: $01 $4A $98
-    call func_4852                                ; $4AAF: $CD $52 $48
+    call func_001_4852                            ; $4AAF: $CD $52 $48
 
     ldh  a, [hJoypadState]                        ; $4AB2: $F0 $CC
     and  J_START                                  ; $4AB4: $E6 $80
@@ -1024,17 +1024,17 @@ FileDeletionState7Handler::
 func_001_4D8B::
     ld   bc, $98C5                                ; $4D8B: $01 $C5 $98 ; $4D8B: $01 $C5 $98
     ld   de, wDB80                                ; $4D8E: $11 $80 $DB ; $4D8E: $11 $80 $DB
-    jp   func_4852                                ; $4D91: $C3 $52 $48 ; $4D91: $C3 $52 $48
+    jp   func_001_4852                            ; $4D91: $C3 $52 $48 ; $4D91: $C3 $52 $48
 
 func_001_4D94::
     ld   bc, $9925                                ; $4D94: $01 $25 $99 ; $4D94: $01 $25 $99
     ld   de, wDB85                                ; $4D97: $11 $85 $DB ; $4D97: $11 $85 $DB
-    jp   func_4852                                ; $4D9A: $C3 $52 $48 ; $4D9A: $C3 $52 $48
+    jp   func_001_4852                            ; $4D9A: $C3 $52 $48 ; $4D9A: $C3 $52 $48
 
 func_001_4D9D::
     ld   bc, $9985                                ; $4D9D: $01 $85 $99 ; $4D9D: $01 $85 $99
     ld   de, wDB8A                                ; $4DA0: $11 $8A $DB ; $4DA0: $11 $8A $DB
-    jp   func_4852                                ; $4DA3: $C3 $52 $48 ; $4DA3: $C3 $52 $48
+    jp   func_001_4852                            ; $4DA3: $C3 $52 $48 ; $4DA3: $C3 $52 $48
 
 func_001_4DA6::
     ld   a, [wSaveFilesCount]                     ; $4DA6: $FA $A7 $DB ; $4DA6: $FA $A7 $DB
@@ -1524,25 +1524,25 @@ FileCopyState3Handler::
 FileCopyState4Handler::
     ld   bc, $98C4                                ; $4FC3: $01 $C4 $98 ; $4FC3: $01 $C4 $98
     ld   de, wDB80                                ; $4FC6: $11 $80 $DB ; $4FC6: $11 $80 $DB
-    call func_4852                                ; $4FC9: $CD $52 $48 ; $4FC9: $CD $52 $48
+    call func_001_4852                            ; $4FC9: $CD $52 $48 ; $4FC9: $CD $52 $48
     ld   bc, $9924                                ; $4FCC: $01 $24 $99 ; $4FCC: $01 $24 $99
     ld   de, wDB85                                ; $4FCF: $11 $85 $DB ; $4FCF: $11 $85 $DB
-    call func_4852                                ; $4FD2: $CD $52 $48 ; $4FD2: $CD $52 $48
+    call func_001_4852                            ; $4FD2: $CD $52 $48 ; $4FD2: $CD $52 $48
     ld   bc, $9984                                ; $4FD5: $01 $84 $99 ; $4FD5: $01 $84 $99
     ld   de, wDB8A                                ; $4FD8: $11 $8A $DB ; $4FD8: $11 $8A $DB
-    call func_4852                                ; $4FDB: $CD $52 $48 ; $4FDB: $CD $52 $48
+    call func_001_4852                            ; $4FDB: $CD $52 $48 ; $4FDB: $CD $52 $48
     jp   IncrementGameplaySubtypeAndReturn        ; $4FDE: $C3 $D6 $44 ; $4FDE: $C3 $D6 $44
 
 FileCopyState5Handler::
     ld   bc, $98CD                                ; $4FE1: $01 $CD $98 ; $4FE1: $01 $CD $98
     ld   de, wDB80                                ; $4FE4: $11 $80 $DB ; $4FE4: $11 $80 $DB
-    call func_4852                                ; $4FE7: $CD $52 $48 ; $4FE7: $CD $52 $48
+    call func_001_4852                            ; $4FE7: $CD $52 $48 ; $4FE7: $CD $52 $48
     ld   bc, $992D                                ; $4FEA: $01 $2D $99 ; $4FEA: $01 $2D $99
     ld   de, wDB85                                ; $4FED: $11 $85 $DB ; $4FED: $11 $85 $DB
-    call func_4852                                ; $4FF0: $CD $52 $48 ; $4FF0: $CD $52 $48
+    call func_001_4852                            ; $4FF0: $CD $52 $48 ; $4FF0: $CD $52 $48
     ld   bc, $998D                                ; $4FF3: $01 $8D $99 ; $4FF3: $01 $8D $99
     ld   de, wDB8A                                ; $4FF6: $11 $8A $DB ; $4FF6: $11 $8A $DB
-    call func_4852                                ; $4FF9: $CD $52 $48 ; $4FF9: $CD $52 $48
+    call func_001_4852                            ; $4FF9: $CD $52 $48 ; $4FF9: $CD $52 $48
     jp   IncrementGameplaySubtypeAndReturn        ; $4FFC: $C3 $D6 $44 ; $4FFC: $C3 $D6 $44
 
 FileCopyState8Handler::
@@ -1787,17 +1787,17 @@ label_001_514F::
 
     ld   bc, $98C4                                ; $515A: $01 $C4 $98 ; $515A: $01 $C4 $98
     ld   de, wDB80                                ; $515D: $11 $80 $DB ; $515D: $11 $80 $DB
-    jp   func_4852                                ; $5160: $C3 $52 $48 ; $5160: $C3 $52 $48
+    jp   func_001_4852                            ; $5160: $C3 $52 $48 ; $5160: $C3 $52 $48
 
 jr_001_5163::
     ld   bc, $9924                                ; $5163: $01 $24 $99 ; $5163: $01 $24 $99
     ld   de, wDB85                                ; $5166: $11 $85 $DB ; $5166: $11 $85 $DB
-    jp   func_4852                                ; $5169: $C3 $52 $48 ; $5169: $C3 $52 $48
+    jp   func_001_4852                            ; $5169: $C3 $52 $48 ; $5169: $C3 $52 $48
 
 jr_001_516C::
     ld   bc, $9984                                ; $516C: $01 $84 $99 ; $516C: $01 $84 $99
     ld   de, wDB8A                                ; $516F: $11 $8A $DB ; $516F: $11 $8A $DB
-    jp   func_4852                                ; $5172: $C3 $52 $48 ; $5172: $C3 $52 $48
+    jp   func_001_4852                            ; $5172: $C3 $52 $48 ; $5172: $C3 $52 $48
 
 func_001_5175::
     ld   a, [wIntroSubTimer]                      ; $5175: $FA $02 $D0 ; $5175: $FA $02 $D0
@@ -1979,14 +1979,14 @@ label_001_526F::
 
     ld   bc, $98CD                                ; $527A: $01 $CD $98 ; $527A: $01 $CD $98
     ld   de, wDB80                                ; $527D: $11 $80 $DB ; $527D: $11 $80 $DB
-    jp   func_4852                                ; $5280: $C3 $52 $48 ; $5280: $C3 $52 $48
+    jp   func_001_4852                            ; $5280: $C3 $52 $48 ; $5280: $C3 $52 $48
 
 jr_001_5283::
     ld   bc, $992D                                ; $5283: $01 $2D $99 ; $5283: $01 $2D $99
     ld   de, wDB85                                ; $5286: $11 $85 $DB ; $5286: $11 $85 $DB
-    jp   func_4852                                ; $5289: $C3 $52 $48 ; $5289: $C3 $52 $48
+    jp   func_001_4852                            ; $5289: $C3 $52 $48 ; $5289: $C3 $52 $48
 
 jr_001_528C::
     ld   bc, $998D                                ; $528C: $01 $8D $99 ; $528C: $01 $8D $99
     ld   de, wDB8A                                ; $528F: $11 $8A $DB ; $528F: $11 $8A $DB
-    jp   func_4852                                ; $5292: $C3 $52 $48 ; $5292: $C3 $52 $48
+    jp   func_001_4852                            ; $5292: $C3 $52 $48 ; $5292: $C3 $52 $48

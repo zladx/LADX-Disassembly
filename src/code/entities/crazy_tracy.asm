@@ -99,7 +99,7 @@ CrazyTracyEntityHandler::
     ld   c, $04                                   ; $5F03: $0E $04
     call RenderActiveEntitySpritesRect            ; $5F05: $CD $E6 $3C
     ld   a, $04                                   ; $5F08: $3E $04
-    call label_3DA0                               ; $5F0A: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $5F0A: $CD $A0 $3D
     call CopyEntityPositionToActivePosition       ; $5F0D: $CD $8A $3D
     call ReturnIfNonInteractive_06                ; $5F10: $CD $C6 $64
     call func_006_641A                            ; $5F13: $CD $1A $64

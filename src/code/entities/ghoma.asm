@@ -43,7 +43,7 @@ jr_005_7BF6:
     ld   c, $06                                   ; $7C08: $0E $06
     call RenderActiveEntitySpritesRect            ; $7C0A: $CD $E6 $3C
     ld   a, $06                                   ; $7C0D: $3E $06
-    call label_3DA0                               ; $7C0F: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $7C0F: $CD $A0 $3D
     ldh  a, [hActiveEntityStatus]                 ; $7C12: $F0 $EA
     cp   $05                                      ; $7C14: $FE $05
     jp   nz, label_005_7E6C                       ; $7C16: $C2 $6C $7E

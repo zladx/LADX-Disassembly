@@ -1996,7 +1996,7 @@ label_003_52D7:
     ld   b, d                                     ; $5315: $42
     push de                                       ; $5316: $D5
     ld   a, $08                                   ; $5317: $3E $08
-    call func_003_6FCC                            ; $5319: $CD $CC $6F
+    call ConfigureEntityRecoil                    ; $5319: $CD $CC $6F
     pop  de                                       ; $531C: $D1
     pop  bc                                       ; $531D: $C1
 
@@ -2220,17 +2220,18 @@ ENDC
     and  a                                        ; $5529: $A7
     jp   z, DidKillEnemy                          ; $552A: $CA $50 $3F
 
+    ; hl = (wEntitiesPowerRecoilingTable[bc] == 1 ? Data_003_54C8 : Data_003_5488)
     push af                                       ; $552D: $F5
-    ld   hl, wEntitiesUnknowTableZ                ; $552E: $21 $A0 $C4
+    ld   hl, wEntitiesPowerRecoilingTable         ; $552E: $21 $A0 $C4
     add  hl, bc                                   ; $5531: $09
     ld   a, [hl]                                  ; $5532: $7E
     ld   hl, Data_003_5488                        ; $5533: $21 $88 $54
     and  a                                        ; $5536: $A7
-    jr   z, jr_003_553C                           ; $5537: $28 $03
-
+    jr   z, .jr_003_553C                          ; $5537: $28 $03
     ld   hl, Data_003_54C8                        ; $5539: $21 $C8 $54
+.jr_003_553C
 
-jr_003_553C:
+    ; a = wEntitiesUnknowTableV[bc]
     pop  af                                       ; $553C: $F1
     cp   $20                                      ; $553D: $FE $20
     jr   nc, jr_003_556F                          ; $553F: $30 $2E
@@ -2241,29 +2242,29 @@ jr_003_553C:
     ld   d, b                                     ; $5545: $50
     add  hl, de                                   ; $5546: $19
     cp   $30                                      ; $5547: $FE $30
-    jr   nz, jr_003_5555                          ; $5549: $20 $0A
+    jr   nz, .jr_003_5555                         ; $5549: $20 $0A
 
+    ; If the entity is recoiling from a power hit…
     push hl                                       ; $554B: $E5
-    ld   hl, wEntitiesUnknowTableZ                ; $554C: $21 $A0 $C4
+    ld   hl, wEntitiesPowerRecoilingTable         ; $554C: $21 $A0 $C4
     add  hl, bc                                   ; $554F: $09
     ld   a, [hl]                                  ; $5550: $7E
     pop  hl                                       ; $5551: $E1
     and  a                                        ; $5552: $A7
-    jr   nz, jr_003_555C                          ; $5553: $20 $07
+    jr   nz, .powerRecoil                         ; $5553: $20 $07
 
-jr_003_5555:
+.jr_003_5555
     ld   c, $04                                   ; $5555: $0E $04
     call RenderActiveEntitySpritesRect            ; $5557: $CD $E6 $3C
-    jr   jr_003_5568                              ; $555A: $18 $0C
-
-jr_003_555C:
+    jr   .renderEnd                               ; $555A: $18 $0C
+.powerRecoil
     ld   c, $08                                   ; $555C: $0E $08
     call RenderActiveEntitySpritesRect            ; $555E: $CD $E6 $3C
     ld   a, $04                                   ; $5561: $3E $04
-    call label_3DA0                               ; $5563: $CD $A0 $3D
-    jr   jr_003_5568                              ; $5566: $18 $00
+    call func_015_7964_trampoline                 ; $5563: $CD $A0 $3D
+    jr   .renderEnd                               ; $5566: $18 $00
+.renderEnd
 
-jr_003_5568:
     call ReturnIfNonInteractive_03                ; $5568: $CD $78 $7F
     call ApplyRecoilIfNeeded_03                   ; $556B: $CD $A9 $7F
     ret                                           ; $556E: $C9
@@ -6523,10 +6524,10 @@ jr_003_6E8E:
     ld   a, [hl]                                  ; $6E9F: $7E
     and  %00100000                                ; $6EA0: $E6 $20
     jp   nz, collectPickableItem                  ; $6EA2: $C2 $11 $63
-    ; if sword collision is enabled jump to label_003_6FE8
+    ; if sword collision is enabled jump to EnemyCollidedWithSword
     ld   a, [wSwordCollisionEnabled]              ; $6EA5: $FA $B0 $C5
     and  a                                        ; $6EA8: $A7
-    jp   nz, label_003_6FE8                       ; $6EA9: $C2 $E8 $6F
+    jp   nz, EnemyCollidedWithSword               ; $6EA9: $C2 $E8 $6F
 
     ld   a, [wIsRunningWithPegasusBoots]          ; $6EAC: $FA $4A $C1
     ldh  [hIndexOfObjectBelowLink], a             ; $6EAF: $E0 $E9
@@ -6600,7 +6601,7 @@ label_003_6F04:
     ; reset sword charge
     xor  a                                        ; $6F19: $AF
     ld   [wSwordCharge], a                        ; $6F1A: $EA $22 $C1
-    jp   label_003_713B                           ; $6F1D: $C3 $3B $71
+    jp   EnemyCollidedWithSword.label_003_713B    ; $6F1D: $C3 $3B $71
 
 jr_003_6F20:
     cp   ENTITY_PAIRODD_PROJECTILE                ; $6F20: $FE $58
@@ -6733,25 +6734,35 @@ jr_003_6FB9:
     and  $0F                                      ; $6FC3: $E6 $0F
     ld   a, $08                                   ; $6FC5: $3E $08
     or   [hl]                                     ; $6FC7: $B6
-    jr   z, func_003_6FCC                         ; $6FC8: $28 $02
+    jr   z, ConfigureEntityRecoil                 ; $6FC8: $28 $02
 
     ld   a, $20                                   ; $6FCA: $3E $20
 
-func_003_6FCC::
+; Make enemy recoil from sword hit.
+;
+; Inputs:
+;   a  amount of recoil
+ConfigureEntityRecoil::
+    ; Get a vector _towards_ Link of length a
     call GetVectorTowardsLink                     ; $6FCC: $CD $45 $7E
+
+    ; Negate the X vector component, and set recoilX
     ldh  a, [hMultiPurpose0]                      ; $6FCF: $F0 $D7
     cpl                                           ; $6FD1: $2F
     inc  a                                        ; $6FD2: $3C
     ld   hl, wEntitiesRecoilVelocityY             ; $6FD3: $21 $00 $C4
     add  hl, bc                                   ; $6FD6: $09
     ld   [hl], a                                  ; $6FD7: $77
+
+    ; Negate the Y vector component, and set recoilX
     ldh  a, [hMultiPurpose1]                      ; $6FD8: $F0 $D8
     cpl                                           ; $6FDA: $2F
     inc  a                                        ; $6FDB: $3C
     ld   hl, wEntitiesRecoilVelocityX             ; $6FDC: $21 $F0 $C3
     add  hl, bc                                   ; $6FDF: $09
     ld   [hl], a                                  ; $6FE0: $77
-    jp   func_003_73DB                            ; $6FE1: $C3 $DB $73
+
+    jp   StartIgnoringHitsForEntity               ; $6FE1: $C3 $DB $73
 
 Data_003_6FE4::
 .right: db  $00
@@ -6759,50 +6770,61 @@ Data_003_6FE4::
 .up:    db  $02
 .down:  db  $03
 
-label_003_6FE8:
+; Apply the collision between Link's sword and an enemy.
+; In most cases, this will result in the enemy being hurt and recoil away from the player.
+EnemyCollidedWithSword::
+    ; Ignore collisions between the flame shooter and the player sword.
     ldh  a, [hActiveEntityType]                   ; $6FE8: $F0 $EB
     cp   ENTITY_FLAME_SHOOTER                     ; $6FEA: $FE $E2
     ret  z                                        ; $6FEC: $C8
 
+    ;
+    ; Special cases for the Final Nightmare
+    ;
+
     cp   ENTITY_FINAL_NIGHTMARE                   ; $6FED: $FE $E6
-    jr   nz, jr_003_7018                          ; $6FEF: $20 $27
+    jr   nz, .defaultSwordCollision               ; $6FEF: $20 $27
 
     ld   a, [wFinalNightmareForm]                 ; $6FF1: $FA $19 $D2
     JP_TABLE                                      ; $6FF4
 ._00 dw NoopFunction
-._01 dw FinalNightmareForm2Collisions
-._02 dw FinalNightmareForm3Collisions
-._03 dw FinalNightmareForm4And5Collisions
-._04 dw FinalNightmareForm4And5Collisions
-._05 dw FinalNightmareForm6Collisions
+._01 dw .finalNightmareForm2Collisions
+._02 dw .finalNightmareForm3Collisions
+._03 dw .finalNightmareDefaultCollisions
+._04 dw .finalNightmareDefaultCollisions
+._05 dw .standardSwordCollision
 
-FinalNightmareForm2Collisions::
+.finalNightmareForm2Collisions
     call IncrementEntityState                     ; $7001: $CD $12 $3B
     ld   [hl], $06                                ; $7004: $36 $06
     ret                                           ; $7006: $C9
 
-FinalNightmareForm3Collisions::
+.finalNightmareForm3Collisions::
     ld   a, [wIsUsingSpinAttack]                  ; $7007: $FA $21 $C1
     and  a                                        ; $700A: $A7
-    jr   nz, jr_003_7013                          ; $700B: $20 $06
+    jr   nz, .usingSpinAttack                     ; $700B: $20 $06
 
     ld   a, [wC16A]                               ; $700D: $FA $6A $C1
     cp   $04                                      ; $7010: $FE $04
     ret  nc                                       ; $7012: $D0
 
-jr_003_7013:
+.usingSpinAttack
     jp   IncrementEntityState                     ; $7013: $C3 $12 $3B
 
-FinalNightmareForm4And5Collisions::
+.finalNightmareDefaultCollisions
     ldh  a, [hActiveEntityType]                   ; $7016: $F0 $EB
 
-jr_003_7018:
+.defaultSwordCollision
+    ;
+    ; Special case for Buzz Blob
+    ;
+
     cp   ENTITY_BUZZ_BLOB                         ; $7018: $FE $B9
     jr   nz, .buzzBlobEnd                         ; $701A: $20 $26
 
     ldh  a, [hActiveEntityStatus]                 ; $701C: $F0 $EA
-    cp   $05                                      ; $701E: $FE $05
-    jr   nz, FinalNightmareForm6Collisions        ; $7020: $20 $20
+    cp   ENTITY_STATUS_ACTIVE                     ; $701E: $FE $05
+    jr   nz, .buzzBlobEnd                         ; $7020: $20 $20
 
     call IncrementEntityState                     ; $7022: $CD $12 $3B
     ld   [hl], $01                                ; $7025: $36 $01
@@ -6820,7 +6842,11 @@ jr_003_7018:
     jp   ApplyLinkCollisionWithEnemy              ; $703F: $C3 $D5 $6C
 .buzzBlobEnd
 
-FinalNightmareForm6Collisions::
+.standardSwordCollision
+    ;
+    ; Special case for Bouncing Bombite
+    ;
+
     ldh  a, [hActiveEntityType]                   ; $7042: $F0 $EB
     cp   ENTITY_BOUNCING_BOMBITE                  ; $7044: $FE $55
     jr   nz, .bouncingBombiteEnd                  ; $7046: $20 $27
@@ -6848,94 +6874,104 @@ FinalNightmareForm6Collisions::
     ret                                           ; $706E: $C9
 .bouncingBombiteEnd
 
+    ;
+    ; Special case for Angler Fish
+    ;
+
     cp   ENTITY_ANGLER_FISH                       ; $706F: $FE $65
     jr   nz, .anglerFishEnd                       ; $7071: $20 $0A
 
     call func_003_6DDF                            ; $7073: $CD $DF $6D
     ld   a, $08                                   ; $7076: $3E $08
     ld   [wIgnoreLinkCollisionsCountdown], a      ; $7078: $EA $3E $C1
-    jr   jr_003_70B9                              ; $707B: $18 $3C
+    jr   .slimeEyeEnd                             ; $707B: $18 $3C
 .anglerFishEnd
 
+    ;
+    ; Special case for Slime Eye
+    ;
+
     cp   ENTITY_SLIME_EYE                         ; $707D: $FE $5B
-    jr   nz, jr_003_70B9                          ; $707F: $20 $38
+    jr   nz, .slimeEyeEnd                         ; $707F: $20 $38
 
     ldh  a, [hMultiPurposeG]                               ; $7081: $F0 $E8
     and  a                                        ; $7083: $A7
 IF __PATCH_3__
     jp   nz, func_003_6DDF
 ELSE
-    jr   nz, jr_003_70A9                          ; $7084: $20 $23
+    jr   nz, .jr_003_70A9                         ; $7084: $20 $23
 ENDC
 
     ld   hl, wEntitiesPrivateState1Table          ; $7086: $21 $B0 $C2
     add  hl, bc                                   ; $7089: $09
     ld   a, [hl]                                  ; $708A: $7E
     cp   $04                                      ; $708B: $FE $04
-    jp   nz, label_003_709D                       ; $708D: $C2 $9D $70
+    jp   nz, .jr_003_709D                         ; $708D: $C2 $9D $70
 
     ld   a, [wIsRunningWithPegasusBoots]          ; $7090: $FA $4A $C1
     and  a                                        ; $7093: $A7
-    jr   z, label_003_7102                        ; $7094: $28 $6C
+    jr   z, .continueDefaultCollision             ; $7094: $28 $6C
 
     ld   hl, wEntitiesPrivateCountdown2Table      ; $7096: $21 $00 $C3
     add  hl, bc                                   ; $7099: $09
     ld   [hl], $0C                                ; $709A: $36 $0C
     ret                                           ; $709C: $C9
 
-label_003_709D:
+.jr_003_709D
     ld   a, [wIsRunningWithPegasusBoots]          ; $709D: $FA $4A $C1
     and  a                                        ; $70A0: $A7
-    jr   z, jr_003_70AC                           ; $70A1: $28 $09
+    jr   z, .jr_003_70AC                          ; $70A1: $28 $09
 
     call func_003_6DDF                            ; $70A3: $CD $DF $6D
-    jp   label_003_7102                           ; $70A6: $C3 $02 $71
+    jp   .continueDefaultCollision                ; $70A6: $C3 $02 $71
 
 IF !__PATCH_3__
-jr_003_70A9:
+.jr_003_70A9
     jp   func_003_6DDF                            ; $70A9: $C3 $DF $6D
 ENDC
 
-jr_003_70AC:
+.jr_003_70AC
     ld   a, $04                                   ; $70AC: $3E $04
     ld   [wIgnoreLinkCollisionsCountdown], a      ; $70AE: $EA $3E $C1
     ld   a, $10                                   ; $70B1: $3E $10
     call func_003_7565                            ; $70B3: $CD $65 $75
-    jp   label_003_7102                           ; $70B6: $C3 $02 $71
+    jp   .continueDefaultCollision                ; $70B6: $C3 $02 $71
+.slimeEyeEnd
 
-jr_003_70B9:
+    ; If sword clink is disabled…
     ld   hl, wEntitiesOptions1Table               ; $70B9: $21 $30 $C4
     add  hl, bc                                   ; $70BC: $09
     ld   a, [hl]                                  ; $70BD: $7E
-    and  $40                                      ; $70BE: $E6 $40
-    jr   z, label_003_7102                        ; $70C0: $28 $40
+    and  ENTITY_OPT1_SWORD_CLINK_OFF              ; $70BE: $E6 $40
+    jr   z, .continueDefaultCollision             ; $70C0: $28 $40
 
     ldh  a, [hActiveEntityType]                   ; $70C2: $F0 $EB
     cp   ENTITY_KNIGHT                            ; $70C4: $FE $51
     jp   z, label_003_6F04                        ; $70C6: $CA $04 $6F
 
+    ; … and colliding with the Genie…
     cp   ENTITY_GENIE                             ; $70C9: $FE $5C
-    jr   nz, jr_003_70E7                          ; $70CB: $20 $1A
+    jr   nz, .genieEnd                            ; $70CB: $20 $1A
 
+    ; … make the Genie jar recoil less than usual enemies…
     ld   a, [wTunicType]                          ; $70CD: $FA $0F $DC
     cp   $01                                      ; $70D0: $FE $01
-    jr   z, jr_003_70DD                           ; $70D2: $28 $09
-
+    jr   z, .genieJarExtraRecoil                  ; $70D2: $28 $09
     ld   a, [wActivePowerUp]                      ; $70D4: $FA $7C $D4
     cp   ACTIVE_POWER_UP_PIECE_OF_POWER           ; $70D7: $FE $01
-    ld   a, $20                                   ; $70D9: $3E $20
-    jr   nz, jr_003_70DF                          ; $70DB: $20 $02
+    ld   a, SWORD_RECOIL_GENIE_JAR_DEFAULT        ; $70D9: $3E $20
+    jr   nz, .genieJarStandardRecoil              ; $70DB: $20 $02
+.genieJarExtraRecoil
+    ld   a, SWORD_RECOIL_GENIE_JAR_STRONGER       ; $70DD: $3E $30
+.genieJarStandardRecoil
+    call ConfigureEntityRecoil                    ; $70DF: $CD $CC $6F
 
-jr_003_70DD:
-    ld   a, $30                                   ; $70DD: $3E $30
-
-jr_003_70DF:
-    call func_003_6FCC                            ; $70DF: $CD $CC $6F
+    ; …but without flashing from damages.
     ld   hl, wEntitiesFlashCountdownTable         ; $70E2: $21 $20 $C4
     add  hl, bc                                   ; $70E5: $09
     ld   [hl], b                                  ; $70E6: $70
+.genieEnd
 
-jr_003_70E7:
     ld   a, c                                     ; $70E7: $79
     inc  a                                        ; $70E8: $3C
     ld   [wC1AC], a                               ; $70E9: $EA $AC $C1
@@ -6951,23 +6987,28 @@ jr_003_70E7:
     ld   [hl], b                                  ; $70FE: $70
     jp   func_003_6DDF                            ; $70FF: $C3 $DF $6D
 
-label_003_7102:
+.continueDefaultCollision
+
     ldh  a, [hActiveEntityType]                   ; $7102: $F0 $EB
     cp   ENTITY_CUE_BALL                          ; $7104: $FE $8E
     jr   nz, .cueBallEnd                          ; $7106: $20 $05
 
     call ResetPegasusBoots                        ; $7108: $CD $B6 $0C
-    jr   jr_003_714D                              ; $710B: $18 $40
+    jr   .jr_003_714D                             ; $710B: $18 $40
 .cueBallEnd
 
+    ;
+    ; Special case for Iron Mask
+    ;
+
     cp   ENTITY_IRON_MASK                         ; $710D: $FE $24
-    jr   nz, jr_003_7146                          ; $710F: $20 $35
+    jr   nz, .ironMaskEnd                         ; $710F: $20 $35
 
     ld   hl, wEntitiesPrivateState2Table          ; $7111: $21 $C0 $C2
     add  hl, bc                                   ; $7114: $09
     ld   a, [hl]                                  ; $7115: $7E
     and  a                                        ; $7116: $A7
-    jr   nz, jr_003_7146                          ; $7117: $20 $2D
+    jr   nz, .ironMaskEnd                         ; $7117: $20 $2D
 
     ldh  a, [hLinkDirection]                      ; $7119: $F0 $9E
     ld   e, a                                     ; $711B: $5F
@@ -6978,7 +7019,7 @@ label_003_7102:
     ld   hl, wEntitiesDirectionTable              ; $7122: $21 $80 $C3
     add  hl, bc                                   ; $7125: $09
     cp   [hl]                                     ; $7126: $BE
-    jr   z, jr_003_714D                           ; $7127: $28 $24
+    jr   z, .jr_003_714D                          ; $7127: $28 $24
 
     call ResetPegasusBoots                        ; $7129: $CD $B6 $0C
     ld   a, $10                                   ; $712C: $3E $10
@@ -6986,91 +7027,117 @@ label_003_7102:
     ld   a, $10                                   ; $7131: $3E $10
     call func_003_7565                            ; $7133: $CD $65 $75
     ld   a, $10                                   ; $7136: $3E $10
-    call func_003_6FCC                            ; $7138: $CD $CC $6F
+    call ConfigureEntityRecoil                    ; $7138: $CD $CC $6F
 
-label_003_713B:
+.label_003_713B
     ldh  a, [hActiveEntityPosX]                   ; $713B: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $713D: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $713F: $F0 $EC
     ldh  [hMultiPurpose1], a                      ; $7141: $E0 $D8
     jp   label_D15                                ; $7143: $C3 $15 $0D
 
-jr_003_7146:
+.ironMaskEnd
+
     ldh  a, [hActiveEntityType]                   ; $7146: $F0 $EB
     cp   ENTITY_ANTI_FAIRY                        ; $7148: $FE $15
     jp   z, label_003_73E6                        ; $714A: $CA $E6 $73
 
-jr_003_714D:
+.jr_003_714D
     ld   a, $01                                   ; $714D: $3E $01
     ld   [wC160], a                               ; $714F: $EA $60 $C1
     ld   a, [wC16A]                               ; $7152: $FA $6A $C1
     cp   $05                                      ; $7155: $FE $05
-    jr   nz, jr_003_715E                          ; $7157: $20 $05
-
+    jr   nz, .jr_003_715E                         ; $7157: $20 $05
     ld   a, $0C                                   ; $7159: $3E $0C
     ld   [wC16D], a                               ; $715B: $EA $6D $C1
+.jr_003_715E
 
-jr_003_715E:
-    ; reset sword charge
+    ; Reset sword charge
     xor  a                                        ; $715E: $AF
     ld   [wSwordCharge], a                        ; $715F: $EA $22 $C1
-    ld   a, $30                                   ; $7162: $3E $30
-    call func_003_6FCC                            ; $7164: $CD $CC $6F
+
+    ; Apply default sword recoil
+    ld   a, SWORD_RECOIL_DEFAULT                  ; $7162: $3E $30
+    call ConfigureEntityRecoil                    ; $7164: $CD $CC $6F
+
+    ; Play the recoil sound
     ld   hl, hJingle                              ; $7167: $21 $F2 $FF
     ld   [hl], JINGLE_BUMP                        ; $716A: $36 $09
+
+    ;
+    ; Power recoil
+    ;
+
+    ; If wearing the attack tunic or having a Piece of power…
     ld   a, [wTunicType]                          ; $716C: $FA $0F $DC
     cp   $01                                      ; $716F: $FE $01
-    jr   z, jr_003_717A                           ; $7171: $28 $07
+    jr   z, .powerRecoil                          ; $7171: $28 $07
 
     ld   a, [wActivePowerUp]                      ; $7173: $FA $7C $D4
     cp   ACTIVE_POWER_UP_PIECE_OF_POWER           ; $7176: $FE $01
-    jr   nz, func_003_719D                        ; $7178: $20 $23
+    jr   nz, ApplySwordDamagesToEnemy             ; $7178: $20 $23
 
-jr_003_717A:
-    call func_003_719D                            ; $717A: $CD $9D $71
+.powerRecoil
+    ; Damage the enemy
+    call ApplySwordDamagesToEnemy                 ; $717A: $CD $9D $71
+
+    ; Ignore hits for longer than usual
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $717D: $21 $10 $C4
     add  hl, bc                                   ; $7180: $09
     ld   [hl], $20                                ; $7181: $36 $20
-    ld   hl, wEntitiesUnknowTableZ                ; $7183: $21 $A0 $C4
+
+    ; Mark the entity as recoiling from a power sword hit
+    ld   hl, wEntitiesPowerRecoilingTable         ; $7183: $21 $A0 $C4
     add  hl, bc                                   ; $7186: $09
-    ld   [hl], $01                                ; $7187: $36 $01
-    ld   a, $11                                   ; $7189: $3E $11
+    ld   [hl], TRUE                               ; $7187: $36 $01
+
+    ; Play the power recoil SFX
+    ld   a, WAFE_SFX_POWER_HIT                    ; $7189: $3E $11
     ldh  [hWaveSfx], a                            ; $718B: $E0 $F3
+
     ld   hl, wEntitiesStatusTable                 ; $718D: $21 $80 $C2
     add  hl, bc                                   ; $7190: $09
     ld   a, [hl]                                  ; $7191: $7E
-    cp   $01                                      ; $7192: $FE $01
-    jr   nz, jr_003_719C                          ; $7194: $20 $06
+    cp   ENTITY_STATUS_DYING                      ; $7192: $FE $01
+    jr   nz, .dyingEnd                            ; $7194: $20 $06
 
     ld   hl, wEntitiesUnknowTableV                ; $7196: $21 $80 $C4
     add  hl, bc                                   ; $7199: $09
     ld   [hl], $40                                ; $719A: $36 $40
+.dyingEnd
 
-jr_003_719C:
     ret                                           ; $719C: $C9
 
-func_003_719D::
+; Apply enemy damages from sword collision
+;
+; Inputs:
+;   bc   entity slot of enemy
+ApplySwordDamagesToEnemy::
     ld   a, c                                     ; $719D: $79
     inc  a                                        ; $719E: $3C
     ld   [wC1AC], a                               ; $719F: $EA $AC $C1
+
+    ; If the player:
+    ; - wears the attack tunic,
+    ; - or has a Piece of power,
+    ; - or is using a Spin attack…
+    ; - or is running with the Pegasus boots…
     ld   a, [wTunicType]                          ; $71A2: $FA $0F $DC
     and  $01                                      ; $71A5: $E6 $01
-    jr   nz, jr_003_71AE                          ; $71A7: $20 $05
-
+    jr   nz, .wearingAttackTunic                  ; $71A7: $20 $05
     ld   a, [wActivePowerUp]                      ; $71A9: $FA $7C $D4
     and  ACTIVE_POWER_UP_PIECE_OF_POWER           ; $71AC: $E6 $01
-
-jr_003_71AE:
+.wearingAttackTunic
     ld   hl, wIsUsingSpinAttack                   ; $71AE: $21 $21 $C1
     or   [hl]                                     ; $71B1: $B6
     ld   hl, wIsRunningWithPegasusBoots           ; $71B2: $21 $4A $C1
     or   [hl]                                     ; $71B5: $B6
+    ; … increase the sword level for this hit.
     ld   a, [wSwordLevel]                         ; $71B6: $FA $4E $DB
-    jr   z, jr_003_71BC                           ; $71B9: $28 $01
-
+    jr   z, .useStandardSwordLevel                ; $71B9: $28 $01
     inc  a                                        ; $71BB: $3C
+.useStandardSwordLevel
 
-jr_003_71BC:
     dec  a                                        ; $71BC: $3D
     ld   [wC19E], a                               ; $71BD: $EA $9E $C1
 
@@ -7149,26 +7216,28 @@ jr_003_7228:
     ld   hl, wEntitiesTypeTable                   ; $7228: $21 $A0 $C3
     add  hl, bc                                   ; $722B: $09
     ld   a, [hl]                                  ; $722C: $7E
-    cp   $6C                                      ; $722D: $FE $6C
+    cp   ENTITY_CUCCO                             ; $722D: $FE $6C
     jr   nz, jr_003_7235                          ; $722F: $20 $04
 
     ld   a, WAVE_SFX_CUCCO_HURT                   ; $7231: $3E $13
     ldh  [hWaveSfx], a                            ; $7233: $E0 $F3
 
 jr_003_7235:
+    ; pop damages type and amount
     pop  af                                       ; $7235: $F1
+
     cp   $F0                                      ; $7236: $FE $F0
     jr   c, jr_003_72B5                           ; $7238: $38 $7B
 
-    cp   $FE                                      ; $723A: $FE $FE
+    cp   $FE ; damage-type: burn                               ; $723A: $FE $FE
     jr   nz, jr_003_7260                          ; $723C: $20 $22
 
     ld   hl, hNoiseSfx                            ; $723E: $21 $F4 $FF
-    ld   [hl], $12                                ; $7241: $36 $12
-    call func_003_73DB                            ; $7243: $CD $DB $73
+    ld   [hl], NOISE_SFX_BURSTING_FLAME           ; $7241: $36 $12
+    call StartIgnoringHitsForEntity               ; $7243: $CD $DB $73
     ld   hl, wEntitiesStatusTable                 ; $7246: $21 $80 $C2
     add  hl, bc                                   ; $7249: $09
-    ld   [hl], $03                                ; $724A: $36 $03
+    ld   [hl], ENTITY_STATUS_DESTROYING           ; $724A: $36 $03
     call GetEntityTransitionCountdown             ; $724C: $CD $05 $0C
     ld   [hl], $60                                ; $724F: $36 $60
     ld   hl, wEntitiesPhysicsFlagsTable           ; $7251: $21 $40 $C3
@@ -7186,7 +7255,7 @@ jr_003_7260:
     cp   $FF                                      ; $7260: $FE $FF
     jr   nz, jr_003_7279                          ; $7262: $20 $15
 
-    call func_003_73DB                            ; $7264: $CD $DB $73
+    call StartIgnoringHitsForEntity               ; $7264: $CD $DB $73
 
 func_003_7267::
     ld   hl, wEntitiesStatusTable                 ; $7267: $21 $80 $C2
@@ -7461,8 +7530,8 @@ jr_003_73D0:
 jr_003_73D9:
     ld   [hl], $18                                ; $73D9: $36 $18
 
-func_003_73DB::
-    ld   hl, wEntitiesUnknowTableZ                ; $73DB: $21 $A0 $C4
+StartIgnoringHitsForEntity::
+    ld   hl, wEntitiesPowerRecoilingTable         ; $73DB: $21 $A0 $C4
     add  hl, bc                                   ; $73DE: $09
     ld   [hl], b                                  ; $73DF: $70
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $73E0: $21 $10 $C4
@@ -7562,7 +7631,7 @@ jr_003_7440:
     ld   hl, wEntitiesRecoilVelocityX             ; $746C: $21 $F0 $C3
     add  hl, bc                                   ; $746F: $09
     ld   [hl], a                                  ; $7470: $77
-    call func_003_73DB                            ; $7471: $CD $DB $73
+    call StartIgnoringHitsForEntity               ; $7471: $CD $DB $73
     ld   [hl], $08                                ; $7474: $36 $08
     ; reset sword charge
     xor  a                                        ; $7476: $AF

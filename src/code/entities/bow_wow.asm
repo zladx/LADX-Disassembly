@@ -420,7 +420,7 @@ jr_005_428E:
 
     pop  bc                                       ; $4291: $C1
     ld   a, $03                                   ; $4292: $3E $03
-    jp   label_3DA0                               ; $4294: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $4294: $C3 $A0 $3D
 
 label_005_4297:
     ld   a, [wIsBowWowFollowingLink]              ; $4297: $FA $56 $DB

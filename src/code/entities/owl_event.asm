@@ -415,7 +415,7 @@ jr_006_6A5B:
     ld   c, $04                                   ; $6A5E: $0E $04
     call RenderActiveEntitySpritesRect            ; $6A60: $CD $E6 $3C
     ld   a, $04                                   ; $6A63: $3E $04
-    call label_3DA0                               ; $6A65: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $6A65: $CD $A0 $3D
     ldh  a, [hMapRoom]                            ; $6A68: $F0 $F6
     cp   ROOM_OW_MARIN_BRIDGE                     ; $6A6A: $FE $08
     jr   z, jr_006_6A71                           ; $6A6C: $28 $03

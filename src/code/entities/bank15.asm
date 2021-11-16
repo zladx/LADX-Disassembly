@@ -96,7 +96,7 @@ ResetEntity::
     ld   hl, wC5D0                                ; $4093: $21 $D0 $C5
     add  hl, bc                                   ; $4096: $09
     ld   [hl], $FF                                ; $4097: $36 $FF
-    ld   hl, wEntitiesUnknowTableZ                ; $4099: $21 $A0 $C4
+    ld   hl, wEntitiesPowerRecoilingTable         ; $4099: $21 $A0 $C4
     add  hl, bc                                   ; $409C: $09
     ld   [hl], b                                  ; $409D: $70
     ret                                           ; $409E: $C9
@@ -518,7 +518,7 @@ label_015_45CB:
     ld   hl, Data_015_45A3                        ; $45D5: $21 $A3 $45
     call RenderActiveEntitySpritesRect            ; $45D8: $CD $E6 $3C
     ld   a, $0A                                   ; $45DB: $3E $0A
-    call label_3DA0                               ; $45DD: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $45DD: $CD $A0 $3D
     call ReturnIfNonInteractive_15                ; $45E0: $CD $0D $7B
     ld   a, [wGameplayType]                       ; $45E3: $FA $95 $DB
     cp   $01                                      ; $45E6: $FE $01
@@ -1045,7 +1045,7 @@ jr_015_48F8:
     and  $07                                      ; $4912: $E6 $07
     call func_015_491C                            ; $4914: $CD $1C $49
     ld   a, $02                                   ; $4917: $3E $02
-    jp   label_3DA0                               ; $4919: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $4919: $C3 $A0 $3D
 
 func_015_491C::
     call func_015_4928                            ; $491C: $CD $28 $49
@@ -1407,7 +1407,7 @@ func_015_4C85::
     ld   c, $06                                   ; $4C9F: $0E $06
     call RenderActiveEntitySpritesRect            ; $4CA1: $CD $E6 $3C
     ld   a, $04                                   ; $4CA4: $3E $04
-    jp   label_3DA0                               ; $4CA6: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $4CA6: $C3 $A0 $3D
 
 jr_015_4CA9:
     cp   $02                                      ; $4CA9: $FE $02
@@ -1425,7 +1425,7 @@ jr_015_4CA9:
     ld   c, $04                                   ; $4CBA: $0E $04
     call RenderActiveEntitySpritesRect            ; $4CBC: $CD $E6 $3C
     ld   a, $02                                   ; $4CBF: $3E $02
-    jp   label_3DA0                               ; $4CC1: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $4CC1: $C3 $A0 $3D
 
 jr_015_4CC4:
     ldh  a, [hActiveEntitySpriteVariant]          ; $4CC4: $F0 $F1
@@ -2848,7 +2848,7 @@ jr_015_566B:
 jr_015_566E:
     call RenderActiveEntitySpritesPair            ; $566E: $CD $C0 $3B
     ld   a, $02                                   ; $5671: $3E $02
-    call label_3DA0                               ; $5673: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $5673: $CD $A0 $3D
 
 jr_015_5676:
     ldh  a, [hMultiPurposeG]                               ; $5676: $F0 $E8
@@ -2893,7 +2893,7 @@ func_015_569F::
     ld   c, $08                                   ; $56B1: $0E $08
     call RenderActiveEntitySpritesRect            ; $56B3: $CD $E6 $3C
     ld   a, $08                                   ; $56B6: $3E $08
-    jp   label_3DA0                               ; $56B8: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $56B8: $C3 $A0 $3D
 
 Data_015_56BB::
     db   $00, $00, $4A, $00, $00, $08, $4A, $20, $00, $00, $FF, $00, $00, $00, $FF, $00
@@ -2918,7 +2918,7 @@ func_015_572B::
     ld   c, $04                                   ; $5739: $0E $04
     call RenderActiveEntitySpritesRect            ; $573B: $CD $E6 $3C
     ld   a, $04                                   ; $573E: $3E $04
-    jp   label_3DA0                               ; $5740: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $5740: $C3 $A0 $3D
 
 FinalNightmareForm3Handler::
     ld   hl, wEntitiesUnknowTableP                ; $5743: $21 $40 $C4
@@ -3503,7 +3503,7 @@ jr_015_5B5A:
 
 jr_015_5B6C:
     ld   a, $02                                   ; $5B6C: $3E $02
-    call label_3DA0                               ; $5B6E: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $5B6E: $CD $A0 $3D
     jp   CopyEntityPositionToActivePosition       ; $5B71: $C3 $8A $3D
 
 Data_015_5B74::
@@ -3566,7 +3566,7 @@ label_015_5D48:
     ld   c, $08                                   ; $5D6F: $0E $08
     call RenderActiveEntitySpritesRect            ; $5D71: $CD $E6 $3C
     ld   a, $08                                   ; $5D74: $3E $08
-    jp   label_3DA0                               ; $5D76: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $5D76: $C3 $A0 $3D
 
 Data_015_5D79::
     db   $1E, $00, $1E, $60, $7C, $00, $7C, $20, $7E, $00, $7E, $20
@@ -3616,7 +3616,7 @@ jr_015_5D9A:
     ld   de, Data_015_5D79                        ; $5DBF: $11 $79 $5D
     call RenderActiveEntitySpritesPair            ; $5DC2: $CD $C0 $3B
     ld   a, $02                                   ; $5DC5: $3E $02
-    call label_3DA0                               ; $5DC7: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $5DC7: $CD $A0 $3D
     jp   CopyEntityPositionToActivePosition       ; $5DCA: $C3 $8A $3D
 
 Data_015_5DCD::
@@ -4000,7 +4000,7 @@ jr_015_6069:
     ld   c, $06                                   ; $607A: $0E $06
     call RenderActiveEntitySpritesRect            ; $607C: $CD $E6 $3C
     ld   a, $06                                   ; $607F: $3E $06
-    jp   label_3DA0                               ; $6081: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $6081: $C3 $A0 $3D
 
 Data_015_6084::
     db   $00, $00, $01, $01, $02, $02, $03, $03
@@ -4551,7 +4551,7 @@ jr_015_652E:
     ld   c, $06                                   ; $6549: $0E $06
     call RenderActiveEntitySpritesRect            ; $654B: $CD $E6 $3C
     ld   a, $06                                   ; $654E: $3E $06
-    jp   label_3DA0                               ; $6550: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $6550: $C3 $A0 $3D
 
 func_015_6553::
     call GetEntityTransitionCountdown             ; $6553: $CD $05 $0C
@@ -5198,7 +5198,7 @@ func_015_69D2::
     ld   c, $07                                   ; $69E7: $0E $07
     call RenderActiveEntitySpritesRect            ; $69E9: $CD $E6 $3C
     ld   a, $07                                   ; $69EC: $3E $07
-    jp   label_3DA0                               ; $69EE: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $69EE: $C3 $A0 $3D
 
 Data_015_69F1::
     db   $F4, $F8, $64, $00, $FE, $11, $60, $00, $FE, $19, $62, $00, $F4, $F9, $64, $00
@@ -5226,7 +5226,7 @@ func_015_6A69::
     ld   c, $03                                   ; $6A7A: $0E $03
     call RenderActiveEntitySpritesRect            ; $6A7C: $CD $E6 $3C
     ld   a, $03                                   ; $6A7F: $3E $03
-    jp   label_3DA0                               ; $6A81: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $6A81: $C3 $A0 $3D
 
 Data_015_6A84::
     db   $EC, $00, $70, $00, $EC, $08, $70, $20, $F4, $00, $7C, $00, $F4, $08, $7C, $20
@@ -5297,7 +5297,7 @@ func_015_6C10::
     call RenderActiveEntitySpritesRect            ; $6C4E: $CD $E6 $3C
     pop  de                                       ; $6C51: $D1
     ld   a, e                                     ; $6C52: $7B
-    call label_3DA0                               ; $6C53: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $6C53: $CD $A0 $3D
     jp   CopyEntityPositionToActivePosition       ; $6C56: $C3 $8A $3D
 
 Data_015_6C59::
@@ -5908,7 +5908,7 @@ func_015_7056::
     ld   c, $03                                   ; $706C: $0E $03
     call RenderActiveEntitySpritesRect            ; $706E: $CD $E6 $3C
     ld   a, $03                                   ; $7071: $3E $03
-    call label_3DA0                               ; $7073: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $7073: $CD $A0 $3D
     ldh  a, [hActiveEntitySpriteVariant]          ; $7076: $F0 $F1
     rla                                           ; $7078: $17
     rla                                           ; $7079: $17
@@ -5924,7 +5924,7 @@ func_015_7056::
     ld   c, $03                                   ; $7087: $0E $03
     call RenderActiveEntitySpritesRect            ; $7089: $CD $E6 $3C
     ld   a, $03                                   ; $708C: $3E $03
-    call label_3DA0                               ; $708E: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $708E: $CD $A0 $3D
     ld   hl, wEntitiesPosYTable                   ; $7091: $21 $10 $C2
     add  hl, bc                                   ; $7094: $09
     ld   a, [hl]                                  ; $7095: $7E
@@ -6192,7 +6192,7 @@ func_015_72CF::
     ld   de, Data_015_716F                        ; $72D1: $11 $6F $71
     call RenderActiveEntitySpritesPair            ; $72D4: $CD $C0 $3B
     ld   a, $02                                   ; $72D7: $3E $02
-    call label_3DA0                               ; $72D9: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $72D9: $CD $A0 $3D
 
 IF __PATCH_0__
     ldh  a, [hActiveEntityState]
@@ -7214,28 +7214,36 @@ func_015_795D::
     ld   a, [hl]                                  ; $7961: $7E
     and  $0F                                      ; $7962: $E6 $0F
 
+; Increment wOAMNextAvailableSlot by `a * 4` tiles
+; (plus special conditions)
+;
+; Inputs:
+;   a  number of tiles / 4
 func_015_7964::
+    ; e = a * 4
     sla  a                                        ; $7964: $CB $27
     sla  a                                        ; $7966: $CB $27
     ld   e, a                                     ; $7968: $5F
+
     ld   a, [wOAMNextAvailableSlot]               ; $7969: $FA $C0 $C3
     add  e                                        ; $796C: $83
     cp   $60                                      ; $796D: $FE $60
-    jr   c, jr_015_7973                           ; $796F: $38 $02
-
+    jr   c, .overflowEnd                          ; $796F: $38 $02
     sub  $60                                      ; $7971: $D6 $60
+.overflowEnd
 
-jr_015_7973:
     ld   [wOAMNextAvailableSlot], a               ; $7973: $EA $C0 $C3
+
+    ; [wC3C1] += e
     ld   a, [wC3C1]                               ; $7976: $FA $C1 $C3
     add  e                                        ; $7979: $83
     ld   [wC3C1], a                               ; $797A: $EA $C1 $C3
+
     cp   $60                                      ; $797D: $FE $60
-    jr   c, jr_015_7994                           ; $797F: $38 $13
+    jr   c, .return                               ; $797F: $38 $13
 
     ldh  a, [hFrameCounter]                       ; $7981: $F0 $E7
 
-jr_015_7983:
     ld   hl, wActiveEntityIndex                   ; $7983: $21 $23 $C1
     add  [hl]                                     ; $7986: $86
     and  $07                                      ; $7987: $E6 $07
@@ -7246,7 +7254,7 @@ jr_015_7983:
     ld   a, [hl]                                  ; $7990: $7E
     ld   [wOAMNextAvailableSlot], a               ; $7991: $EA $C0 $C3
 
-jr_015_7994:
+.return
     ret                                           ; $7994: $C9
 
 func_015_7995::

@@ -87,4 +87,4 @@ func_006_6376::
     ld   c, $08                                   ; $6385: $0E $08
     call RenderActiveEntitySpritesRect            ; $6387: $CD $E6 $3C
     ld   a, $08                                   ; $638A: $3E $08
-    jp   label_3DA0                               ; $638C: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $638C: $C3 $A0 $3D

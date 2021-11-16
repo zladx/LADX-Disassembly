@@ -1377,7 +1377,7 @@ func_005_766E::
     ld   c, $08                                   ; $767D: $0E $08
     call RenderActiveEntitySpritesRect            ; $767F: $CD $E6 $3C
     ld   a, $08                                   ; $7682: $3E $08
-    call label_3DA0                               ; $7684: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $7684: $CD $A0 $3D
     ld   hl, wEntitiesUnknowTableY                ; $7687: $21 $D0 $C3
     add  hl, bc                                   ; $768A: $09
     ld   a, [hl]                                  ; $768B: $7E
@@ -1585,7 +1585,7 @@ func_005_7982::
     ld   c, $08                                   ; $799B: $0E $08
     call RenderActiveEntitySpritesRect            ; $799D: $CD $E6 $3C
     ld   a, $08                                   ; $79A0: $3E $08
-    jp   label_3DA0                               ; $79A2: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $79A2: $C3 $A0 $3D
 
 Data_005_79A5::
     db   $F2, $0E

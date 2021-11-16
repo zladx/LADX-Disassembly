@@ -553,7 +553,7 @@ jr_006_783F:
     ld   c, $10                                   ; $7864: $0E $10
     call RenderActiveEntitySpritesRect            ; $7866: $CD $E6 $3C
     ld   a, $10                                   ; $7869: $3E $10
-    jp   label_3DA0                               ; $786B: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $786B: $C3 $A0 $3D
 
 include "code/entities/anti_fairy.asm"
 include "code/entities/tektite.asm"

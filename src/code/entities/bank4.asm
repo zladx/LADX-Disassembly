@@ -207,7 +207,7 @@ jr_004_4DBE:
     ld   c, $10                                   ; $4DD4: $0E $10
     call RenderActiveEntitySpritesRect            ; $4DD6: $CD $E6 $3C
     ld   a, $10                                   ; $4DD9: $3E $10
-    call label_3DA0                               ; $4DDB: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $4DDB: $CD $A0 $3D
     ld   hl, wEntitiesPosZTable                   ; $4DDE: $21 $10 $C3
     add  hl, bc                                   ; $4DE1: $09
     ld   a, [hl]                                  ; $4DE2: $7E
@@ -221,7 +221,7 @@ jr_004_4DBE:
     ld   c, $06                                   ; $4DEE: $0E $06
     call RenderActiveEntitySpritesRect            ; $4DF0: $CD $E6 $3C
     ld   a, $06                                   ; $4DF3: $3E $06
-    call label_3DA0                               ; $4DF5: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $4DF5: $CD $A0 $3D
     jp   CopyEntityPositionToActivePosition       ; $4DF8: $C3 $8A $3D
 
 func_004_4DFB::
@@ -539,7 +539,7 @@ func_004_4FFE::
     ld   c, $08                                   ; $501A: $0E $08
     call RenderActiveEntitySpritesRect            ; $501C: $CD $E6 $3C
     ld   a, $08                                   ; $501F: $3E $08
-    call label_3DA0                               ; $5021: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $5021: $CD $A0 $3D
     ld   hl, wEntitiesSpriteVariantTable          ; $5024: $21 $B0 $C3
     add  hl, bc                                   ; $5027: $09
     ld   a, [hl]                                  ; $5028: $7E
@@ -559,7 +559,7 @@ func_004_4FFE::
     ld   c, $04                                   ; $503E: $0E $04
     call RenderActiveEntitySpritesRect            ; $5040: $CD $E6 $3C
     ld   a, $04                                   ; $5043: $3E $04
-    call label_3DA0                               ; $5045: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $5045: $CD $A0 $3D
 
 jr_004_5048:
     jp   CopyEntityPositionToActivePosition       ; $5048: $C3 $8A $3D
@@ -2722,7 +2722,7 @@ jr_004_5FC2:
     ld   c, $04                                   ; $5FC2: $0E $04
     call RenderActiveEntitySpritesRect            ; $5FC4: $CD $E6 $3C
     ld   a, $04                                   ; $5FC7: $3E $04
-    call label_3DA0                               ; $5FC9: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $5FC9: $CD $A0 $3D
     call func_004_7BE3                            ; $5FCC: $CD $E3 $7B
     ldh  a, [hActiveEntityState]                  ; $5FCF: $F0 $F0
     JP_TABLE                                      ; $5FD1
@@ -4739,7 +4739,7 @@ jr_004_6BAD:
     jr   nz, jr_004_6BAD                          ; $6BDA: $20 $D1
 
     ld   a, $03                                   ; $6BDC: $3E $03
-    jp   label_3DA0                               ; $6BDE: $C3 $A0 $3D
+    jp   func_015_7964_trampoline                 ; $6BDE: $C3 $A0 $3D
 
 func_004_6BE1::
     ldh  a, [hActiveEntityPosX]                   ; $6BE1: $F0 $EE

@@ -5096,7 +5096,7 @@ jr_017_7188:
     ld   c, $0A                                   ; $71A2: $0E $0A
     call RenderActiveEntitySpritesRectUsingAllOAM ; $71A4: $CD $E0 $3C
     ld   a, $0A                                   ; $71A7: $3E $0A
-    call label_3DA0                               ; $71A9: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $71A9: $CD $A0 $3D
 
 jr_017_71AC:
     ldh  a, [hFrameCounter]                       ; $71AC: $F0 $E7
@@ -5185,7 +5185,7 @@ func_017_725F::
     ld   c, $08                                   ; $7289: $0E $08
     call RenderActiveEntitySpritesRectUsingAllOAM ; $728B: $CD $E0 $3C
     ld   a, $08                                   ; $728E: $3E $08
-    call label_3DA0                               ; $7290: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $7290: $CD $A0 $3D
 
 jr_017_7293:
     call UpdateEntityPosWithSpeed_17              ; $7293: $CD $2D $7E
@@ -5309,7 +5309,7 @@ jr_017_73AF:
     ld   c, $0C                                   ; $73E2: $0E $0C
     call RenderActiveEntitySpritesRectUsingAllOAM ; $73E4: $CD $E0 $3C
     ld   a, $0C                                   ; $73E7: $3E $0C
-    call label_3DA0                               ; $73E9: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $73E9: $CD $A0 $3D
     ret                                           ; $73EC: $C9
 
 jr_017_73ED:
@@ -5365,7 +5365,7 @@ jr_017_74E0:
     ld   c, $1B                                   ; $74E5: $0E $1B
     call RenderActiveEntitySpritesRectUsingAllOAM ; $74E7: $CD $E0 $3C
     ld   a, $1B                                   ; $74EA: $3E $1B
-    call label_3DA0                               ; $74EC: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $74EC: $CD $A0 $3D
     ld   a, [wD003]                               ; $74EF: $FA $03 $D0
     rla                                           ; $74F2: $17
     rla                                           ; $74F3: $17
@@ -5382,7 +5382,7 @@ jr_017_74E0:
     ld   [wOAMNextAvailableSlot], a               ; $7503: $EA $C0 $C3
     call RenderActiveEntitySpritesRect            ; $7506: $CD $E6 $3C
     ld   a, $07                                   ; $7509: $3E $07
-    call label_3DA0                               ; $750B: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $750B: $CD $A0 $3D
     ret                                           ; $750E: $C9
 
 jr_017_750F:
@@ -5457,7 +5457,7 @@ func_017_75AA::
     ld   c, $0E                                   ; $75B9: $0E $0E
     call RenderActiveEntitySpritesRect            ; $75BB: $CD $E6 $3C
     ld   a, $0E                                   ; $75BE: $3E $0E
-    call label_3DA0                               ; $75C0: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $75C0: $CD $A0 $3D
     ld   hl, wEntitiesSpeedYTable                 ; $75C3: $21 $50 $C2
     add  hl, bc                                   ; $75C6: $09
     ld   [hl], $FE                                ; $75C7: $36 $FE
@@ -5573,7 +5573,7 @@ jr_017_76FD:
     ld   c, $11                                   ; $772E: $0E $11
     call RenderActiveEntitySpritesRect            ; $7730: $CD $E6 $3C
     ld   a, $11                                   ; $7733: $3E $11
-    call label_3DA0                               ; $7735: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $7735: $CD $A0 $3D
     ret                                           ; $7738: $C9
 
 jr_017_7739:
@@ -6318,7 +6318,7 @@ func_017_7C1B::
     ld   c, $04                                   ; $7C2E: $0E $04
     call RenderActiveEntitySpritesRect            ; $7C30: $CD $E6 $3C
     ld   a, $04                                   ; $7C33: $3E $04
-    call label_3DA0                               ; $7C35: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $7C35: $CD $A0 $3D
     ldh  a, [hFrameCounter]                       ; $7C38: $F0 $E7
     rra                                           ; $7C3A: $1F
     rra                                           ; $7C3B: $1F

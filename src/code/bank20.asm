@@ -4093,7 +4093,7 @@ jr_020_63AB:
 
 jr_020_63BE:
     ld   a, $01                                   ; $63BE: $3E $01
-    call label_3DA0                               ; $63C0: $CD $A0 $3D
+    call func_015_7964_trampoline                 ; $63C0: $CD $A0 $3D
     ret                                           ; $63C3: $C9
 
 InventoryVisibleHandler::

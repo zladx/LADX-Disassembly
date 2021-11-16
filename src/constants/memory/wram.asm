@@ -2852,16 +2852,20 @@ wKidSaveHintIndex::
 wDB7F::
   ds 1 ; DB7F
 
-; Unlabeled, outside the area that is stored in the savegame.
-wDB80::
+; Names of the saved files.
+; (outside the area that is stored in the savegame)
+wSaveSlotNames::
+
+; Name of the file in save slot 1
+wSaveSlot1Name::
   ds 5 ; DB80 - DB84
 
-; Unlabeled
-wDB85::
+; Name of the file in save slot 2
+wSaveSlot2Name::
   ds 5 ; DB85 - DB89
 
-; Unlabeled
-wDB8A::
+; Name of the file in save slot 3
+wSaveSlot3Name::
   ds 5 ; DB8A - DB8E
 
 ; Higher digits of the amount of rupees to be added to your wallet (high digits)

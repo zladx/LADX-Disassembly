@@ -10,6 +10,7 @@
 import sys
 import argparse
 from textwrap import wrap
+from functools import reduce
 from lib.background_coder import BackgroundCoder
 
 def write_result(bytes, outfile, wrap_count=None):
@@ -29,6 +30,8 @@ if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
     options_parser = argparse.ArgumentParser(add_help=False)
     options_parser.add_argument('--output', '-o', type=str, metavar='outfile', action='store', help='file to write the output to')
+    options_parser.add_argument('--width', type=int, metavar='tiles_count', default=20, action='store', help='number of tiles in the tilemap width')
+    options_parser.add_argument('--filler', type=lambda x: int(x, 0), metavar='filler', default=None, action='store', help='filler byte used as the tilemap background')
 
     operations_subparser = arg_parser.add_subparsers(title='commands', dest='command', required=True)
     decoding_parser = operations_subparser.add_parser('decode',  parents=[options_parser], help='convert a tilemap encoded with the ZLADX format to a raw tilemap')
@@ -37,7 +40,6 @@ if __name__ == "__main__":
 
     encoding_parser = operations_subparser.add_parser('encode',  parents=[options_parser], help='convert a raw tilemap to the encoded ZLADX format')
     encoding_parser.add_argument('infile', type=str, help='raw tilemap file to encode')
-    encoding_parser.add_argument('--width', type=int, metavar="tiles_count", default=20, action='store', help='number of tiles in the tilemap width')
     encoding_parser.add_argument('--location', type=int, metavar="VRAM_address", default=0x9800, action='store', help='start address of the tilemap in VRAM')
 
     args = arg_parser.parse_args()
@@ -47,12 +49,9 @@ if __name__ == "__main__":
     infile.close()
 
     outfile = (args.output and open(args.output, 'wb')) or sys.stdout
-    result = bytearray()
 
     if args.command == 'decode':
-        tilemap_bytes = BackgroundCoder.decode(data)
-        for address in sorted(tilemap_bytes):
-            result.append(tilemap_bytes[address])
+        result = BackgroundCoder.decode(data, args.width, args.filler or 0x00)
         write_result(result, outfile, wrap_count=args.wrap)
 
     elif args.command == 'encode':

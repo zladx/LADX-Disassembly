@@ -1347,7 +1347,7 @@ func_5DC0::
     ld   [de], a                                  ; $5DC4: $12
     ld   b, $01                                   ; $5DC5: $06 $01
     ld   c, $00                                   ; $5DC7: $0E $00
-    ld   hl, wDB80                                ; $5DC9: $21 $80 $DB
+    ld   hl, wSaveSlotNames                       ; $5DC9: $21 $80 $DB
 
 jr_001_5DCC::
     ld   a, [hli]                                 ; $5DCC: $2A

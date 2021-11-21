@@ -7,7 +7,7 @@
 
 ; -----------------------------------------------------------------------------
 ;
-; FILE SELECTION
+; GAMEPLAY_FILE_SELECT
 ; Screen for selecting a save file
 ;
 ; -----------------------------------------------------------------------------
@@ -95,7 +95,7 @@ CopyDeathCountsToBG::
 FileSelectionPrepare5::
     jp   FileDeletionState4Handler                ; $484F: $C3 $6D $4D
 
-func_4852::
+func_001_4852::
     push de                                       ; $4852: $D5
     ld   a, [$D600]                               ; $4853: $FA $00 $D6
     ld   e, a                                     ; $4856: $5F
@@ -412,7 +412,7 @@ FileSelectionExecuteChoice::
     ld   e, a                                     ; $49A5: $5F
     ld   d, $00                                   ; $49A6: $16 $00
     ld   c, $05                                   ; $49A8: $0E $05
-    ld   hl, wDB80                                ; $49AA: $21 $80 $DB
+    ld   hl, wSaveSlotNames                       ; $49AA: $21 $80 $DB
     add  hl, de                                   ; $49AD: $19
 
 .loop
@@ -495,11 +495,16 @@ FileSelectionLoadSavedFile::
 
 ; -----------------------------------------------------------------------------
 ;
-; FILE CREATION
+; GAMEPLAY_FILE_NEW
 ; Screen for creating a new file
 ;
 ; -----------------------------------------------------------------------------
 
+; Address of the tile indicating the save slot index in the BG Map
+FILE_NEW_SAVE_SLOT_INDEX_BG   equ vBGMap0 + $49
+; Offset of the tile indicating the save slot index "1" in the "menu.dmg.2bpp" tileset
+; The tiles for index "2" and "3" follow next in the tileset.
+FILE_NEW_SAVE_SLOT_1_TILE equ $AB
 
 FileCreationEntryPoint::
     ld   a, [wGameplaySubtype]                    ; $4A07: $FA $96 $DB
@@ -521,18 +526,25 @@ FileCreationInit1Handler::
 FileCreationInit2Handler::
     ld   a, $05                                   ; $4A24: $3E $05
     ld   [wBGMapToLoad], a                        ; $4A26: $EA $FF $D6
-    ld   hl, $D601                                ; $4A29: $21 $01 $D6
-    ld   a, $98                                   ; $4A2C: $3E $98
-    ldi  [hl], a                                  ; $4A2E: $22
-    ld   a, $49                                   ; $4A2F: $3E $49
-    ldi  [hl], a                                  ; $4A31: $22
+
+    ;
+    ; Write the proper tile for the save file number at the top
+    ;
+
+    ; Configure a wRequest to copy the tile number to the BG map
+    ; during the next vblank period.
+    ld   hl, wRequest                             ; $4A29: $21 $01 $D6
+    ld   a, HIGH(FILE_NEW_SAVE_SLOT_INDEX_BG)     ; $4A2C: $3E $98
+    ldi  [hl], a ; wRequestDestinationHigh        ; $4A2E: $22
+    ld   a, LOW(FILE_NEW_SAVE_SLOT_INDEX_BG)      ; $4A2F: $3E $49
+    ldi  [hl], a ; wRequestDestinationLow         ; $4A31: $22
     xor  a                                        ; $4A32: $AF
-    ldi  [hl], a                                  ; $4A33: $22
+    ldi  [hl], a ; wRequestLength                 ; $4A33: $22
     ld   a, [wSaveSlot]                           ; $4A34: $FA $A6 $DB
-    add  a, $AB                                   ; $4A37: $C6 $AB
-    ldi  [hl], a                                  ; $4A39: $22
+    add  a, FILE_NEW_SAVE_SLOT_1_TILE             ; $4A37: $C6 $AB
+    ldi  [hl], a ; wRequestData[0]                ; $4A39: $22
     xor  a                                        ; $4A3A: $AF
-    ld   [hl], a                                  ; $4A3B: $77
+    ld   [hl], a ; wRequestData[1]                ; $4A3B: $77
     jp   IncrementGameplaySubtypeAndReturn        ; $4A3C: $C3 $D6 $44
 
 IF !LANG_DE
@@ -589,12 +601,15 @@ jr_001_4A4D::
     ret                                           ; $4A97: $C9
 ENDC
 
-Data_001_4A98::
-    db   $00, $05, $0A                            ; $4A98
-
+; Index of the 5-letters save file name in memory.
+; Indexed by wSaveSlot
+SaveSlotNameAddresses::
+._01 db  wSaveSlot1Name - wSaveSlotNames
+._02 db  wSaveSlot2Name - wSaveSlotNames
+._03 db  wSaveSlot3Name - wSaveSlotNames                           ; $4A98
 
 CHECKNAME: macro
-    ld   hl, wDB80
+    ld   hl, wSaveSlotNames
     add  hl, de
 I = 0
 REPT 5
@@ -611,25 +626,27 @@ ENDR
 ENDM
 
 FileCreationInteractiveHandler::
+    ; hl = address of the save file name for the current slot
     ld   a, [wSaveSlot]                           ; $4A9B: $FA $A6 $DB
     ld   e, a                                     ; $4A9E: $5F
     ld   d, $00                                   ; $4A9F: $16 $00
-    ld   hl, Data_001_4A98                        ; $4AA1: $21 $98 $4A
+    ld   hl, SaveSlotNameAddresses                ; $4AA1: $21 $98 $4A
     add  hl, de                                   ; $4AA4: $19
     ld   e, [hl]                                  ; $4AA5: $5E
-    ld   hl, wDB80                                ; $4AA6: $21 $80 $DB
+    ld   hl, wSaveSlotNames                       ; $4AA6: $21 $80 $DB
     add  hl, de                                   ; $4AA9: $19
     ld   e, l                                     ; $4AAA: $5D
     ld   d, h                                     ; $4AAB: $54
     ld   bc, $984A                                ; $4AAC: $01 $4A $98
-    call func_4852                                ; $4AAF: $CD $52 $48
+    call func_001_4852                            ; $4AAF: $CD $52 $48
 
+    ; If START is pressed, record the save file name
     ldh  a, [hJoypadState]                        ; $4AB2: $F0 $CC
     and  J_START                                  ; $4AB4: $E6 $80
 IF __PATCH_9__
-    jp   z, jr_001_4B29
+    jp   z, .validationEnd
 ELSE
-    jr   z, jr_001_4B29                           ; $4AB6: $28 $71
+    jr   z, .validationEnd                        ; $4AB6: $28 $71
 ENDC
     call PlayValidationJingle                     ; $4AB8: $CD $BE $49
     ld   a, [wSaveSlot]                           ; $4ABB: $FA $A6 $DB
@@ -657,27 +674,28 @@ IF (DEF(EASTER_EGG_FILENAME_2))
     CHECKNAME "{EASTER_EGG_FILENAME_1}", EASTER_EGG_SONG_1, .checkOtherName
     jr .foundName
 .checkOtherName
-    CHECKNAME "{EASTER_EGG_FILENAME_2}", EASTER_EGG_SONG_2, jr_001_4AFE
+    CHECKNAME "{EASTER_EGG_FILENAME_2}", EASTER_EGG_SONG_2, .easterEggEnd
 ELSE
-    CHECKNAME "{EASTER_EGG_FILENAME_1}", EASTER_EGG_SONG_1, jr_001_4AFE
+    CHECKNAME "{EASTER_EGG_FILENAME_1}", EASTER_EGG_SONG_1, .easterEggEnd
 ENDC
 
 .foundName
     ld   [wMusicTrackToPlay], a                   ; $4AFB: $EA $68 $D3
+.easterEggEnd
 
-jr_001_4AFE::
-    ld   hl, wDB80                                ; $4AFE: $21 $80 $DB
+    ; Write the slot name to the save file
+    ld   hl, wSaveSlotNames                       ; $4AFE: $21 $80 $DB
     add  hl, de                                   ; $4B01: $19
     pop  bc                                       ; $4B02: $C1
     ld   e, $05                                   ; $4B03: $1E $05
-
-jr_001_4B05::
+.loop
     call EnableExternalRAMWriting                 ; $4B05: $CD $D0 $27
     ld   a, [hli]                                 ; $4B08: $2A
     ld   [bc], a                                  ; $4B09: $02
     inc  bc                                       ; $4B0A: $03
     dec  e                                        ; $4B0B: $1D
-    jr   nz, jr_001_4B05                          ; $4B0C: $20 $F7
+    jr   nz, .loop                                ; $4B0C: $20 $F7
+
     pop  hl                                       ; $4B0E: $E1
     push hl                                       ; $4B0F: $E5
     ld   de, $5A                                  ; $4B10: $11 $5A $00
@@ -687,8 +705,6 @@ jr_001_4B05::
     push hl                                       ; $4B17: $E5
     ld   de, $5B                                  ; $4B18: $11 $5B $00
     add  hl, de                                   ; $4B1B: $19
-
-Data_001_4B1C::
     ld   [hl], $03  ; write new save max health   ; $4B1C: $36 $03
     pop  hl                                       ; $4B1E: $E1
     ld   de, $57                                  ; $4B1F: $11 $57 $00
@@ -698,7 +714,7 @@ Data_001_4B1C::
     ld   [hl], a                                  ; $4B25: $77
     jp   label_001_4555                           ; $4B26: $C3 $55 $45
 
-jr_001_4B29::
+.validationEnd
     call func_001_4BF5                            ; $4B29: $CD $F5 $4B
     call func_001_4C8A                            ; $4B2C: $CD $8A $4C
     ret                                           ; $4B2F: $C9
@@ -902,7 +918,7 @@ func_001_4CDA::
     sla  a                                        ; $4CEC: $CB $27
     add  a, c                                     ; $4CEE: $81
     ld   c, a                                     ; $4CEF: $4F
-    ld   hl, wDB80                                ; $4CF0: $21 $80 $DB
+    ld   hl, wSaveSlot1Name                                ; $4CF0: $21 $80 $DB
     add  hl, bc                                   ; $4CF3: $09
     ld   a, [wDBAA]                               ; $4CF4: $FA $AA $DB
     ld   c, a                                     ; $4CF7: $4F
@@ -1010,18 +1026,18 @@ FileDeletionState7Handler::
 
 func_001_4D8B::
     ld   bc, $98C5                                ; $4D8B: $01 $C5 $98 ; $4D8B: $01 $C5 $98
-    ld   de, wDB80                                ; $4D8E: $11 $80 $DB ; $4D8E: $11 $80 $DB
-    jp   func_4852                                ; $4D91: $C3 $52 $48 ; $4D91: $C3 $52 $48
+    ld   de, wSaveSlot1Name                       ; $4D8E: $11 $80 $DB ; $4D8E: $11 $80 $DB
+    jp   func_001_4852                            ; $4D91: $C3 $52 $48 ; $4D91: $C3 $52 $48
 
 func_001_4D94::
     ld   bc, $9925                                ; $4D94: $01 $25 $99 ; $4D94: $01 $25 $99
-    ld   de, wDB85                                ; $4D97: $11 $85 $DB ; $4D97: $11 $85 $DB
-    jp   func_4852                                ; $4D9A: $C3 $52 $48 ; $4D9A: $C3 $52 $48
+    ld   de, wSaveSlot2Name                       ; $4D97: $11 $85 $DB ; $4D97: $11 $85 $DB
+    jp   func_001_4852                            ; $4D9A: $C3 $52 $48 ; $4D9A: $C3 $52 $48
 
 func_001_4D9D::
     ld   bc, $9985                                ; $4D9D: $01 $85 $99 ; $4D9D: $01 $85 $99
-    ld   de, wDB8A                                ; $4DA0: $11 $8A $DB ; $4DA0: $11 $8A $DB
-    jp   func_4852                                ; $4DA3: $C3 $52 $48 ; $4DA3: $C3 $52 $48
+    ld   de, wSaveSlot3Name                       ; $4DA0: $11 $8A $DB ; $4DA0: $11 $8A $DB
+    jp   func_001_4852                            ; $4DA3: $C3 $52 $48 ; $4DA3: $C3 $52 $48
 
 func_001_4DA6::
     ld   a, [wSaveFilesCount]                     ; $4DA6: $FA $A7 $DB ; $4DA6: $FA $A7 $DB
@@ -1510,26 +1526,26 @@ FileCopyState3Handler::
 
 FileCopyState4Handler::
     ld   bc, $98C4                                ; $4FC3: $01 $C4 $98 ; $4FC3: $01 $C4 $98
-    ld   de, wDB80                                ; $4FC6: $11 $80 $DB ; $4FC6: $11 $80 $DB
-    call func_4852                                ; $4FC9: $CD $52 $48 ; $4FC9: $CD $52 $48
+    ld   de, wSaveSlot1Name                       ; $4FC6: $11 $80 $DB ; $4FC6: $11 $80 $DB
+    call func_001_4852                            ; $4FC9: $CD $52 $48 ; $4FC9: $CD $52 $48
     ld   bc, $9924                                ; $4FCC: $01 $24 $99 ; $4FCC: $01 $24 $99
-    ld   de, wDB85                                ; $4FCF: $11 $85 $DB ; $4FCF: $11 $85 $DB
-    call func_4852                                ; $4FD2: $CD $52 $48 ; $4FD2: $CD $52 $48
+    ld   de, wSaveSlot2Name                       ; $4FCF: $11 $85 $DB ; $4FCF: $11 $85 $DB
+    call func_001_4852                            ; $4FD2: $CD $52 $48 ; $4FD2: $CD $52 $48
     ld   bc, $9984                                ; $4FD5: $01 $84 $99 ; $4FD5: $01 $84 $99
-    ld   de, wDB8A                                ; $4FD8: $11 $8A $DB ; $4FD8: $11 $8A $DB
-    call func_4852                                ; $4FDB: $CD $52 $48 ; $4FDB: $CD $52 $48
+    ld   de, wSaveSlot3Name                       ; $4FD8: $11 $8A $DB ; $4FD8: $11 $8A $DB
+    call func_001_4852                            ; $4FDB: $CD $52 $48 ; $4FDB: $CD $52 $48
     jp   IncrementGameplaySubtypeAndReturn        ; $4FDE: $C3 $D6 $44 ; $4FDE: $C3 $D6 $44
 
 FileCopyState5Handler::
     ld   bc, $98CD                                ; $4FE1: $01 $CD $98 ; $4FE1: $01 $CD $98
-    ld   de, wDB80                                ; $4FE4: $11 $80 $DB ; $4FE4: $11 $80 $DB
-    call func_4852                                ; $4FE7: $CD $52 $48 ; $4FE7: $CD $52 $48
+    ld   de, wSaveSlot1Name                       ; $4FE4: $11 $80 $DB ; $4FE4: $11 $80 $DB
+    call func_001_4852                            ; $4FE7: $CD $52 $48 ; $4FE7: $CD $52 $48
     ld   bc, $992D                                ; $4FEA: $01 $2D $99 ; $4FEA: $01 $2D $99
-    ld   de, wDB85                                ; $4FED: $11 $85 $DB ; $4FED: $11 $85 $DB
-    call func_4852                                ; $4FF0: $CD $52 $48 ; $4FF0: $CD $52 $48
+    ld   de, wSaveSlot2Name                       ; $4FED: $11 $85 $DB ; $4FED: $11 $85 $DB
+    call func_001_4852                            ; $4FF0: $CD $52 $48 ; $4FF0: $CD $52 $48
     ld   bc, $998D                                ; $4FF3: $01 $8D $99 ; $4FF3: $01 $8D $99
-    ld   de, wDB8A                                ; $4FF6: $11 $8A $DB ; $4FF6: $11 $8A $DB
-    call func_4852                                ; $4FF9: $CD $52 $48 ; $4FF9: $CD $52 $48
+    ld   de, wSaveSlot3Name                       ; $4FF6: $11 $8A $DB ; $4FF6: $11 $8A $DB
+    call func_001_4852                            ; $4FF9: $CD $52 $48 ; $4FF9: $CD $52 $48
     jp   IncrementGameplaySubtypeAndReturn        ; $4FFC: $C3 $D6 $44 ; $4FFC: $C3 $D6 $44
 
 FileCopyState8Handler::
@@ -1563,7 +1579,7 @@ jr_001_501D::
     cp   $03                                      ; $5026: $FE $03 ; $5026: $FE $03
     jp   z, label_001_4555                        ; $5028: $CA $55 $45 ; $5028: $CA $55 $45
 
-    ld   hl, wDB80                                ; $502B: $21 $80 $DB ; $502B: $21 $80 $DB
+    ld   hl, wSaveSlot1Name                       ; $502B: $21 $80 $DB ; $502B: $21 $80 $DB
     ld   b, $00                                   ; $502E: $06 $00 ; $502E: $06 $00
     ld   a, [wIntroTimer]                         ; $5030: $FA $01 $D0 ; $5030: $FA $01 $D0
     and  a                                        ; $5033: $A7 ; $5033: $A7
@@ -1572,11 +1588,11 @@ jr_001_501D::
     cp   $01                                      ; $5036: $FE $01 ; $5036: $FE $01
     jr   z, jr_001_503F                           ; $5038: $28 $05 ; $5038: $28 $05
 
-    ld   hl, wDB8A                                ; $503A: $21 $8A $DB ; $503A: $21 $8A $DB
+    ld   hl, wSaveSlot3Name                       ; $503A: $21 $8A $DB ; $503A: $21 $8A $DB
     jr   jr_001_5042                              ; $503D: $18 $03 ; $503D: $18 $03
 
 jr_001_503F::
-    ld   hl, wDB85                                ; $503F: $21 $85 $DB ; $503F: $21 $85 $DB
+    ld   hl, wSaveSlot2Name                       ; $503F: $21 $85 $DB ; $503F: $21 $85 $DB
 
 jr_001_5042::
     xor  a                                        ; $5042: $AF ; $5042: $AF
@@ -1773,18 +1789,18 @@ label_001_514F::
     jr   z, jr_001_516C                            ; $5158: $28 $12 ; $5158: $28 $12
 
     ld   bc, $98C4                                ; $515A: $01 $C4 $98 ; $515A: $01 $C4 $98
-    ld   de, wDB80                                ; $515D: $11 $80 $DB ; $515D: $11 $80 $DB
-    jp   func_4852                                ; $5160: $C3 $52 $48 ; $5160: $C3 $52 $48
+    ld   de, wSaveSlot1Name                       ; $515D: $11 $80 $DB ; $515D: $11 $80 $DB
+    jp   func_001_4852                            ; $5160: $C3 $52 $48 ; $5160: $C3 $52 $48
 
 jr_001_5163::
     ld   bc, $9924                                ; $5163: $01 $24 $99 ; $5163: $01 $24 $99
-    ld   de, wDB85                                ; $5166: $11 $85 $DB ; $5166: $11 $85 $DB
-    jp   func_4852                                ; $5169: $C3 $52 $48 ; $5169: $C3 $52 $48
+    ld   de, wSaveSlot2Name                       ; $5166: $11 $85 $DB ; $5166: $11 $85 $DB
+    jp   func_001_4852                            ; $5169: $C3 $52 $48 ; $5169: $C3 $52 $48
 
 jr_001_516C::
     ld   bc, $9984                                ; $516C: $01 $84 $99 ; $516C: $01 $84 $99
-    ld   de, wDB8A                                ; $516F: $11 $8A $DB ; $516F: $11 $8A $DB
-    jp   func_4852                                ; $5172: $C3 $52 $48 ; $5172: $C3 $52 $48
+    ld   de, wSaveSlot3Name                       ; $516F: $11 $8A $DB ; $516F: $11 $8A $DB
+    jp   func_001_4852                            ; $5172: $C3 $52 $48 ; $5172: $C3 $52 $48
 
 func_001_5175::
     ld   a, [wIntroSubTimer]                      ; $5175: $FA $02 $D0 ; $5175: $FA $02 $D0
@@ -1950,7 +1966,7 @@ jr_001_5266::
     ld   [de], a                                  ; $5267: $12 ; $5267: $12
     inc  de                                       ; $5268: $13 ; $5268: $13
     dec  c                                        ; $5269: $0D ; $5269: $0D
-    jr   nz, jr_001_5266                           ; $526A: $20 $FA ; $526A: $20 $FA
+    jr   nz, jr_001_5266                          ; $526A: $20 $FA ; $526A: $20 $FA
 
     xor  a                                        ; $526C: $AF ; $526C: $AF
     ld   [de], a                                  ; $526D: $12 ; $526D: $12
@@ -1959,21 +1975,21 @@ jr_001_5266::
 label_001_526F::
     ld   a, [wIntroSubTimer]                      ; $526F: $FA $02 $D0 ; $526F: $FA $02 $D0
     cp   $01                                      ; $5272: $FE $01 ; $5272: $FE $01
-    jr   z, jr_001_5283                            ; $5274: $28 $0D ; $5274: $28 $0D
+    jr   z, jr_001_5283                           ; $5274: $28 $0D ; $5274: $28 $0D
 
     cp   $02                                      ; $5276: $FE $02 ; $5276: $FE $02
-    jr   z, jr_001_528C                            ; $5278: $28 $12 ; $5278: $28 $12
+    jr   z, jr_001_528C                           ; $5278: $28 $12 ; $5278: $28 $12
 
     ld   bc, $98CD                                ; $527A: $01 $CD $98 ; $527A: $01 $CD $98
-    ld   de, wDB80                                ; $527D: $11 $80 $DB ; $527D: $11 $80 $DB
-    jp   func_4852                                ; $5280: $C3 $52 $48 ; $5280: $C3 $52 $48
+    ld   de, wSaveSlot1Name                       ; $527D: $11 $80 $DB ; $527D: $11 $80 $DB
+    jp   func_001_4852                            ; $5280: $C3 $52 $48 ; $5280: $C3 $52 $48
 
 jr_001_5283::
     ld   bc, $992D                                ; $5283: $01 $2D $99 ; $5283: $01 $2D $99
-    ld   de, wDB85                                ; $5286: $11 $85 $DB ; $5286: $11 $85 $DB
-    jp   func_4852                                ; $5289: $C3 $52 $48 ; $5289: $C3 $52 $48
+    ld   de, wSaveSlot2Name                       ; $5286: $11 $85 $DB ; $5286: $11 $85 $DB
+    jp   func_001_4852                            ; $5289: $C3 $52 $48 ; $5289: $C3 $52 $48
 
 jr_001_528C::
     ld   bc, $998D                                ; $528C: $01 $8D $99 ; $528C: $01 $8D $99
-    ld   de, wDB8A                                ; $528F: $11 $8A $DB ; $528F: $11 $8A $DB
-    jp   func_4852                                ; $5292: $C3 $52 $48 ; $5292: $C3 $52 $48
+    ld   de, wSaveSlot3Name                       ; $528F: $11 $8A $DB ; $528F: $11 $8A $DB
+    jp   func_001_4852                            ; $5292: $C3 $52 $48 ; $5292: $C3 $52 $48

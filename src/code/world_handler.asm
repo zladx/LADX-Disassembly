@@ -362,19 +362,19 @@ TransitionToFileMenu::
 label_001_4555::
     call EnableExternalRAMWriting                 ; $4555: $CD $D0 $27
     ld   a, [$A454]                               ; $4558: $FA $54 $A4
-    ld   [wDB80], a                               ; $455B: $EA $80 $DB
+    ld   [wSaveSlot1Name], a                      ; $455B: $EA $80 $DB
     call EnableExternalRAMWriting                 ; $455E: $CD $D0 $27
     ld   a, [$A455]                               ; $4561: $FA $55 $A4
-    ld   [wDB80+1], a                               ; $4564: $EA $81 $DB
+    ld   [wSaveSlot1Name+1], a                    ; $4564: $EA $81 $DB
     call EnableExternalRAMWriting                 ; $4567: $CD $D0 $27
     ld   a, [$A456]                               ; $456A: $FA $56 $A4
-    ld   [wDB80+2], a                               ; $456D: $EA $82 $DB
+    ld   [wSaveSlot1Name+2], a                    ; $456D: $EA $82 $DB
     call EnableExternalRAMWriting                 ; $4570: $CD $D0 $27
     ld   a, [$A457]                               ; $4573: $FA $57 $A4
-    ld   [wDB80+3], a                               ; $4576: $EA $83 $DB
+    ld   [wSaveSlot1Name+3], a                    ; $4576: $EA $83 $DB
     call EnableExternalRAMWriting                 ; $4579: $CD $D0 $27
     ld   a, [$A458]                               ; $457C: $FA $58 $A4
-    ld   [wDB80+4], a                               ; $457F: $EA $84 $DB
+    ld   [wSaveSlot1Name+4], a                    ; $457F: $EA $84 $DB
     call EnableExternalRAMWriting                 ; $4582: $CD $D0 $27
     ld   a, [$A45F]                               ; $4585: $FA $5F $A4
     ld   [wDC06], a                               ; $4588: $EA $06 $DC
@@ -389,19 +389,19 @@ label_001_4555::
     ld   [wFile1DeathCountLow], a                 ; $45A3: $EA $01 $DC
     call EnableExternalRAMWriting                 ; $45A6: $CD $D0 $27
     ld   a, [$A801]                               ; $45A9: $FA $01 $A8
-    ld   [wDB85], a                               ; $45AC: $EA $85 $DB
+    ld   [wSaveSlot2Name], a                      ; $45AC: $EA $85 $DB
     call EnableExternalRAMWriting                 ; $45AF: $CD $D0 $27
     ld   a, [$A802]                               ; $45B2: $FA $02 $A8
-    ld   [wDB85+1], a                               ; $45B5: $EA $86 $DB
+    ld   [wSaveSlot2Name+1], a                    ; $45B5: $EA $86 $DB
     call EnableExternalRAMWriting                 ; $45B8: $CD $D0 $27
     ld   a, [$A803]                               ; $45BB: $FA $03 $A8
-    ld   [wDB85+2], a                               ; $45BE: $EA $87 $DB
+    ld   [wSaveSlot2Name+2], a                    ; $45BE: $EA $87 $DB
     call EnableExternalRAMWriting                 ; $45C1: $CD $D0 $27
     ld   a, [$A804]                               ; $45C4: $FA $04 $A8
-    ld   [wDB85+3], a                               ; $45C7: $EA $88 $DB
+    ld   [wSaveSlot2Name+3], a                    ; $45C7: $EA $88 $DB
     call EnableExternalRAMWriting                 ; $45CA: $CD $D0 $27
     ld   a, [$A805]                               ; $45CD: $FA $05 $A8
-    ld   [wDB85+4], a                               ; $45D0: $EA $89 $DB
+    ld   [wSaveSlot2Name+4], a                    ; $45D0: $EA $89 $DB
     call EnableExternalRAMWriting                 ; $45D3: $CD $D0 $27
     ld   a, [$A80C]                               ; $45D6: $FA $0C $A8
     ld   [wDC07], a                               ; $45D9: $EA $07 $DC
@@ -416,19 +416,19 @@ label_001_4555::
     ld   [wFile2DeathCountLow], a                 ; $45F4: $EA $03 $DC
     call EnableExternalRAMWriting                 ; $45F7: $CD $D0 $27
     ld   a, [$ABAE]                               ; $45FA: $FA $AE $AB
-    ld   [wDB8A], a                               ; $45FD: $EA $8A $DB
+    ld   [wSaveSlot3Name], a                      ; $45FD: $EA $8A $DB
     call EnableExternalRAMWriting                 ; $4600: $CD $D0 $27
     ld   a, [$ABAF]                               ; $4603: $FA $AF $AB
-    ld   [wDB8A+1], a                               ; $4606: $EA $8B $DB
+    ld   [wSaveSlot3Name+1], a                    ; $4606: $EA $8B $DB
     call EnableExternalRAMWriting                 ; $4609: $CD $D0 $27
     ld   a, [$ABB0]                               ; $460C: $FA $B0 $AB
-    ld   [wDB8A+2], a                               ; $460F: $EA $8C $DB
+    ld   [wSaveSlot3Name+2], a                    ; $460F: $EA $8C $DB
     call EnableExternalRAMWriting                 ; $4612: $CD $D0 $27
     ld   a, [$ABB1]                               ; $4615: $FA $B1 $AB
-    ld   [wDB8A+3], a                               ; $4618: $EA $8D $DB
+    ld   [wSaveSlot3Name+3], a                    ; $4618: $EA $8D $DB
     call EnableExternalRAMWriting                 ; $461B: $CD $D0 $27
     ld   a, [$ABB2]                               ; $461E: $FA $B2 $AB
-    ld   [wDB8A+4], a                               ; $4621: $EA $8E $DB
+    ld   [wSaveSlot3Name+4], a                    ; $4621: $EA $8E $DB
     call EnableExternalRAMWriting                 ; $4624: $CD $D0 $27
     ld   a, [$ABB9]                               ; $4627: $FA $B9 $AB
     ld   [wDC08], a                               ; $462A: $EA $08 $DC
@@ -446,7 +446,7 @@ label_001_4555::
     xor  a                                        ; $464D: $AF
     ld   [wGameplaySubtype], a                    ; $464E: $EA $96 $DB
     xor  a                                        ; $4651: $AF
-    ldh  [hBaseScrollY], a                               ; $4652: $E0 $97
+    ldh  [hBaseScrollY], a                        ; $4652: $E0 $97
     ldh  [hBaseScrollX], a                        ; $4654: $E0 $96
     ld   a, $00                                   ; $4656: $3E $00
     ld   [wBGPalette], a                          ; $4658: $EA $97 $DB

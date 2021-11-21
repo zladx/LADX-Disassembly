@@ -1,7 +1,24 @@
+from itertools import groupby
+from functools import reduce
+
 class BackgroundCoder:
     """
     Decode and encode BG tilemaps and attributes with the compression
     format used by LADX.
+
+    Format:
+    ===
+
+    A compressed background is a list of commands, terminated by NULL (0x00).
+
+    Each command has the following format:
+    - byte 0: target address high byte
+    - byte 1: target address low byte
+    - byte 2: options:
+        - bits 0-6: number of data bytes - 1
+        - bit 7: is the target the same byte repeated?
+        - bit 8: is the target area vertical (instead of horizontal)?
+    - a variable number of data bytes
     """
 
     @staticmethod
@@ -56,33 +73,61 @@ class BackgroundCoder:
         return result
 
     @staticmethod
-    def encode(bytes, tilemap_location=0x9800, tilemap_width=20):
+    def encode(bytes, tilemap_location=0x9800, tilemap_width=20, filler=None):
         """
         Encode a raw BG tilemap to the LADX commands format.
 
         NOTES:
-        - This is not a very good encoder, but the background back has so much free space
-          that we really don't care. Improvements can be done to find long sequences of
-          bytes and store those as repeated.
-
         - Encoding a tilemap decoded from the original game will NOT result in a similar
           compressed tilemap. Original tilemaps were probably hand-coded, and so cannot
           be reproduced byte-for-byte by this encoder.
         """
 
-        # Split the tilemap into chunks
-        chunk_size = tilemap_width
-        chunks = [bytes[i:i + chunk_size] for i in range(0, len(bytes), chunk_size)]
+        def merge_non_repeatable_groups(acc, group):
+            """
+            [[A, A, A, A, A], [B], [C, C], [D], [C, C, C, C]]
+            -> [[A, A, A, A, A], [B, C, C, D], [C, C, C, C]]
+            """
+            latest_group = acc[-1] if len(acc) else []
+            is_repetition = len(group) > 1
+            has_min_repetition_length = len(group) > 4
+            is_previous_group_a_repetition = len(latest_group) > 1 and len(set(latest_group)) == 1
+
+            if len(acc) == 0 or (is_repetition and has_min_repetition_length) or (not is_repetition and is_previous_group_a_repetition):
+                new_group = []
+                acc.append(new_group)
+                latest_group = new_group
+
+            latest_group.extend(group)
+            return acc
+
+        # Split the tilemap into rows
+        rows = [bytes[i:i + tilemap_width] for i in range(0, len(bytes), tilemap_width)]
+
+        grouped_rows = []
+        for i, row in enumerate(rows):
+            # Group identical consecutive values together
+            groups = [list(g) for k, g in groupby(row)]
+            # Merge the non-identical consecutive values together
+            merged_groups = reduce(merge_non_repeatable_groups, groups, [])
+            grouped_rows.append(merged_groups)
 
         encoded_bytes = bytearray()
-        address = tilemap_location
+        for i, grouped_row in enumerate(grouped_rows):
+            address = tilemap_location + i * 0x20
+            for group in grouped_row:
+                amount = len(group) - 1
+                is_repetition = len(group) > 1 and len(set(group)) == 1
+                if is_repetition and group[0] == filler:
+                    address += len(group)
+                    continue
 
-        for chunk in chunks:
-            encoded_bytes.append(address >> 8)
-            encoded_bytes.append(address & 0xFF)
-            encoded_bytes.append(len(chunk) - 1)
-            encoded_bytes.extend(chunk)
-            address += 0x20
+                encoded_bytes.append(address >> 8)
+                encoded_bytes.append(address & 0xFF)
+                encoded_bytes.append(amount | (0x40 if is_repetition else 0))
+                encoded_bytes.extend([group[0]] if is_repetition else group)
+
+                address += len(group)
 
         encoded_bytes.append(0x00)
         return encoded_bytes

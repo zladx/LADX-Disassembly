@@ -55,7 +55,7 @@ if __name__ == "__main__":
         write_result(result, outfile, wrap_count=args.wrap)
 
     elif args.command == 'encode':
-        result = BackgroundCoder.encode(data, args.location, args.width)
+        result = BackgroundCoder.encode(data, args.location, args.width, args.filler)
         write_result(result, outfile)
 
     outfile.close()

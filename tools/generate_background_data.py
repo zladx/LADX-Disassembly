@@ -56,7 +56,7 @@ background_names = [
   'Tilemap03',                       #03
   'MenuFileSelectionTilemap',        #04
   'MenuFileCreationTilemap',         #05
-  'Tilemap06',                       #06
+  'MenuFileEraseTilemap',            #06
   'Tilemap07',                       #07
   'WorldMapTilemap',                 #08
   'Tilemap09',                       #09 (inventory no minimap?)

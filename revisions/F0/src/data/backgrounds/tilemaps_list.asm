@@ -44,8 +44,8 @@ Tilemap03::
 incbin "data/backgrounds/tilemap03.tilemap.encoded"
 MenuFileCreationTilemap::
 incbin "data/backgrounds/menu_file_creation.tilemap.encoded"
-Tilemap06::
-incbin "data/backgrounds/tilemap06.tilemap.encoded"
+MenuFileEraseTilemap::
+incbin "data/backgrounds/menu_file_erase.tilemap.encoded"
 MenuFileCopyTilemap::
 incbin "data/backgrounds/menu_file_copy.tilemap.encoded"
 InventoryTilemap::

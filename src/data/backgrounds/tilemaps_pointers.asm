@@ -5,7 +5,7 @@ TilemapsPointersTable::
 ._03 dw Tilemap03                        ; $6336
 ._04 dw MenuFileSelectionTilemap         ; $6328
 ._05 dw MenuFileCreationTilemap          ; $644D
-._06 dw Tilemap06                        ; $6589
+._06 dw MenuFileEraseTilemap             ; $6589
 ._07 dw $D651
 ._08 dw WorldMapTilemap                  ; $62E9
 ._09 dw Tilemap09                        ; $67C9

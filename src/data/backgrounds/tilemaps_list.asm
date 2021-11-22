@@ -32,8 +32,8 @@ WorldMapTilemap::
 incbin "data/backgrounds/world_map.tilemap.encoded"
 MenuFileSelectionCommandsTilemap::
 incbin "data/backgrounds/menu_file_selection_commands.tilemap.encoded"
-Tilemap03::
-incbin "data/backgrounds/tilemap03.tilemap.encoded"
+MenuFileSelection::
+incbin "data/backgrounds/menu_file_selection.tilemap.encoded"
 MenuFileCreationTilemap::
 incbin "data/backgrounds/menu_file_creation.tilemap.encoded"
 MenuFileEraseTilemap::

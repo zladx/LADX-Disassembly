@@ -53,8 +53,8 @@ background_names = [
   None,                              #00
   'CreditsIslandTilemap',            #01
   'InventoryTilemap',                #02
-  'Tilemap03',                       #03
-  'MenuFileSelectionCommandsTilemap',        #04
+  'MenuFileSelection',               #03
+  'MenuFileSelectionCommandsTilemap',#04
   'MenuFileCreationTilemap',         #05
   'MenuFileEraseTilemap',            #06
   'Tilemap07',                       #07

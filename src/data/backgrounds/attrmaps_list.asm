@@ -6,8 +6,8 @@ IntroSeaDMGAttrmap::
 incbin "data/backgrounds/intro_sea_dmg.attrmap.encoded"
 IntroLinkFaceAttrmap::
 incbin "data/backgrounds/intro_link_face.attrmap.encoded"
-MenuFileSelectionAttrmap::
-incbin "data/backgrounds/menu_file_selection.attrmap.encoded"
+MenuFileSelectionCommandsAttrmap::
+incbin "data/backgrounds/menu_file_selection_commands.attrmap.encoded"
 Attrmap03::
 incbin "data/backgrounds/tilemap03.attrmap.encoded"
 MenuFileCreationAttrmap::

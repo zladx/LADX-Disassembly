@@ -30,8 +30,8 @@ MamuTilemap::
 incbin "data/backgrounds/mamu.tilemap.encoded"
 WorldMapTilemap::
 incbin "data/backgrounds/world_map.tilemap.encoded"
-MenuFileSelectionTilemap::
-incbin "data/backgrounds/menu_file_selection.tilemap.encoded"
+MenuFileSelectionCommandsTilemap::
+incbin "data/backgrounds/menu_file_selection_commands.tilemap.encoded"
 Tilemap03::
 incbin "data/backgrounds/tilemap03.tilemap.encoded"
 MenuFileCreationTilemap::

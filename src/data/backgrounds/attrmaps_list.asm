@@ -6,14 +6,14 @@ IntroSeaDMGAttrmap::
 incbin "data/backgrounds/intro_sea_dmg.attrmap.encoded"
 IntroLinkFaceAttrmap::
 incbin "data/backgrounds/intro_link_face.attrmap.encoded"
+MenuFileSelectionCommandsAttrmap::
+incbin "data/backgrounds/menu_file_selection_commands.attrmap.encoded"
 MenuFileSelectionAttrmap::
 incbin "data/backgrounds/menu_file_selection.attrmap.encoded"
-Attrmap03::
-incbin "data/backgrounds/tilemap03.attrmap.encoded"
 MenuFileCreationAttrmap::
 incbin "data/backgrounds/menu_file_creation.attrmap.encoded"
-Attrmap06::
-incbin "data/backgrounds/tilemap06.attrmap.encoded"
+MenuFileEraseAttrmap::
+incbin "data/backgrounds/menu_file_erase.attrmap.encoded"
 MenuFileCopyAttrmap::
 incbin "data/backgrounds/menu_file_copy.attrmap.encoded"
 GameOverAttrmap::

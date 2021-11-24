@@ -2,10 +2,10 @@ AttrmapsPointersTable::
 ._00 dw $0000
 ._01 dw CreditsIslandAttrmap             ; $66E6
 ._02 dw InventoryAttrmap                 ; $6340
-._03 dw Attrmap03                        ; $5F80
-._04 dw MenuFileSelectionAttrmap         ; $5F74
+._03 dw MenuFileSelectionAttrmap         ; $5F80
+._04 dw MenuFileSelectionCommandsAttrmap ; $5F74
 ._05 dw MenuFileCreationAttrmap          ; $6045
-._06 dw Attrmap06                        ; $6119
+._06 dw MenuFileEraseAttrmap             ; $6119
 ._07 dw Attrmap07                        ; $641B
 ._08 dw WorldMapAttrmap                  ; $66CD
 ._09 dw Attrmap09                        ; $5C97

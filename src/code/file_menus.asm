@@ -1203,7 +1203,7 @@ ELSE
     jr   label_001_4E55                               ; $4E41: $18 $12 ; $4E41: $18 $12
 
 Data_001_4E43::
-include "data/file_menu_bg.asm"
+include "data/file_menu_quit_ok.asm"
 .end
 
 label_001_4E55::

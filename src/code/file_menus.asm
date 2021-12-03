@@ -929,7 +929,7 @@ func_001_4CDA::
 
 ; -----------------------------------------------------------------------------
 ;
-; FILE DELETION
+; GAMEPLAY_FILE_DELETE
 ; Screen for deleting a file
 ;
 ; -----------------------------------------------------------------------------
@@ -1180,8 +1180,9 @@ jr_001_4E2B::
 jr_001_4E3B::
     call PlayValidationJingleAndReturn            ; $4E3B: $CD $BE $49 ; $4E3B: $CD $BE $49
     call IncrementGameplaySubtype                 ; $4E3E: $CD $D6 $44 ; $4E3E: $CD $D6 $44
+
 IF LANG_JP
-label_001_4E55:
+CopyQuitOkTilemap::
     ld hl, wRequestDestination
     ld a, $99
     ld [hl+], a
@@ -1200,19 +1201,20 @@ label_001_4E55:
     ld [hl], a                                    ; $4ebb: $77
     ret                                           ; $4ebc: $c9
 ELSE
-    jr   label_001_4E55                               ; $4E41: $18 $12 ; $4E41: $18 $12
+    jr   CopyQuitOkTilemap                        ; $4E41: $18 $12 ; $4E41: $18 $12
 
-Data_001_4E43::
+; Tilemap for the "QUIT / OK" text, formatted as wRequest data
+FileMenuQuitOkTilemap::
 include "data/file_menu_quit_ok.asm"
 .end
 
-label_001_4E55::
-    ld   hl, wRequestDestinationHigh              ; $4E55: $21 $01 $D6 ; $4E55: $21 $01 $D6
-    ld   de, Data_001_4E43                        ; $4E58: $11 $43 $4E ; $4E58: $11 $43 $4E
+CopyQuitOkTilemap::
+    ld   hl, wRequest                             ; $4E55: $21 $01 $D6
+    ld   de, FileMenuQuitOkTilemap                ; $4E58: $11 $43 $4E
 IF LANG_EN
-    ld   c, Data_001_4E43.end - Data_001_4E43 - 1 ; $4E5B: $0E $11 ; $4E5B: $0E $11
+    ld   c, FileMenuQuitOkTilemap.end - FileMenuQuitOkTilemap - 1 ; $4E5B: $0E $11
 ELSE
-    ld   c, Data_001_4E43.end - Data_001_4E43
+    ld   c, FileMenuQuitOkTilemap.end - FileMenuQuitOkTilemap
 ENDC
 
 .loop
@@ -1222,10 +1224,9 @@ ENDC
     dec  c                                        ; $4E60: $0D ; $4E60: $0D
 IF LANG_EN
     ld   a, c                                     ; $4E61: $79 ; $4E61: $79
-    cp   $FF                                      ; $4E62: $FE $FF ; $4E62: $FE $FF
+    cp   -1                                       ; $4E62: $FE $FF ; $4E62: $FE $FF
 ENDC
     jr   nz, .loop                                ; $4E64: $20 $F7 ; $4E64: $20 $F7
-
     ret                                           ; $4E66: $C9 ; $4E66: $C9
 ENDC
 
@@ -1238,7 +1239,7 @@ FileDeletionState11Handler::
     bit  J_BIT_B, a                               ; $4E6D: $CB $6F ; $4E6D: $CB $6F
     jr   nz, jr_001_4E9E                          ; $4E6F: $20 $2D ; $4E6F: $20 $2D
 
-    and  $90                                      ; $4E71: $E6 $90 ; $4E71: $E6 $90
+    and  J_A | J_START                            ; $4E71: $E6 $90 ; $4E71: $E6 $90
 IF LANG_DE
     jp   z, jr_001_4ED9
 ELSE
@@ -1274,13 +1275,13 @@ jr_001_4E91::
 
 jr_001_4E9E::
     call func_001_4EE5                               ; $4E9E: $CD $E5 $4E ; $4E9E: $CD $E5 $4E
-    call func_001_4EBB                               ; $4EA1: $CD $BB $4E ; $4EA1: $CD $BB $4E
+    call CopyReturnToMenuTilemap                               ; $4EA1: $CD $BB $4E ; $4EA1: $CD $BB $4E
     ld   hl, wGameplaySubtype                     ; $4EA4: $21 $96 $DB ; $4EA4: $21 $96 $DB
     dec  [hl]                                     ; $4EA7: $35 ; $4EA7: $35
     ret                                           ; $4EA8: $C9 ; $4EA8: $C9
 
 IF LANG_JP
-func_001_4EBB::
+CopyReturnToMenuTilemap::
     ld   a, [wRequests]                             ; $4eff: $fa $00 $d6
     ld   e, a                                       ; $4f02: $5f
     add  $04                                       ; $4f03: $c6 $04
@@ -1301,38 +1302,40 @@ func_001_4EBB::
     ret                                           ; $4f1c: $c9
 ELSE
 
-Data_001_4EA9::
+; Tilemap for the "RETURN TO MENU" text, formatted as wRequest data
+FileReturnToMenuTilemap::
 include "data/file_menu_return_to_menu.asm"
 .end
 
 IF LANG_DE
-Data_001_4EA9_alt::
+FileReturnToMenuTilemap_alt::
 include "data/file_menu_return_to_menu_alt.asm"
 .end
 ENDC
 
-func_001_4EBB::
-    ld   a, [wRequests]                           ; $4EBB: $FA $00 $D6 ; $4EBB: $FA $00 $D6
-    ld   e, a                                     ; $4EBE: $5F ; $4EBE: $5F
-    add  Data_001_4EA9.end - Data_001_4EA9 - 1    ; $4EBF: $C6 $11
-    ld   [wRequests], a                           ; $4EC1: $EA $00 $D6 ; $4EC1: $EA $00 $D6
-    ld   d, $00                                   ; $4EC4: $16 $00 ; $4EC4: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $4EC6: $21 $01 $D6 ; $4EC6: $21 $01 $D6
-    add  hl, de                                   ; $4EC9: $19 ; $4EC9: $19
-    ld   de, Data_001_4EA9                        ; $4ECA: $11 $A9 $4E ; $4ECA: $11 $A9 $4E
+CopyReturnToMenuTilemap::
+    ld   a, [wRequests]                           ; $4EBB: $FA $00 $D6
+    ld   e, a                                     ; $4EBE: $5F
+    add  FileReturnToMenuTilemap.end - FileReturnToMenuTilemap - 1    ; $4EBF: $C6 $11
+    ld   [wRequests], a                           ; $4EC1: $EA $00 $D6
+    ld   d, $00                                   ; $4EC4: $16 $00
+    ld   hl, wRequestDestinationHigh              ; $4EC6: $21 $01 $D6
+    add  hl, de                                   ; $4EC9: $19
+    ld   de, FileReturnToMenuTilemap                        ; $4ECA: $11 $A9 $4E
 
 IF LANG_DE
+    ; On German version, if on the File Copy screen, use an alternate version
     ld   a, [wGameplayType]
     cp   GAMEPLAY_FILE_COPY
-    jr   nz, .endIfFileCopy
-    ld   de, Data_001_4EA9_alt
-.endIfFileCopy
+    jr   nz, .fileCopyEnd
+    ld   de, FileReturnToMenuTilemap_alt
+.fileCopyEnd
 ENDC
 
 IF LANG_EN
-    ld   c, Data_001_4EA9.end - Data_001_4EA9 - 1 ; $4ECD: $0E $11 ; $4ECD: $0E $11
+    ld   c, FileReturnToMenuTilemap.end - FileReturnToMenuTilemap - 1 ; $4ECD: $0E $11
 ELSE
-    ld   c, Data_001_4EA9.end - Data_001_4EA9
+    ld   c, FileReturnToMenuTilemap.end - FileReturnToMenuTilemap
 ENDC
 .loop
     ld   a, [de]                                  ; $4ECF: $1A ; $4ECF: $1A
@@ -1341,7 +1344,7 @@ ENDC
     dec  c                                        ; $4ED2: $0D ; $4ED2: $0D
 IF LANG_EN
     ld   a, c                                     ; $4ED3: $79 ; $4ED3: $79
-    cp   $FF                                      ; $4ED4: $FE $FF ; $4ED4: $FE $FF
+    cp   -1                                       ; $4ED4: $FE $FF ; $4ED4: $FE $FF
 ENDC
     jr   nz, .loop                                ; $4ED6: $20 $F7 ; $4ED6: $20 $F7
 
@@ -1747,7 +1750,7 @@ jr_001_5114::
 
     call PlayValidationJingleAndReturn            ; $5120: $CD $BE $49 ; $5120: $CD $BE $49
     call IncrementGameplaySubtype                 ; $5123: $CD $D6 $44 ; $5123: $CD $D6 $44
-    jp   label_001_4E55                               ; $5126: $C3 $55 $4E ; $5126: $C3 $55 $4E
+    jp   CopyQuitOkTilemap                        ; $5126: $C3 $55 $4E ; $5126: $C3 $55 $4E
 
 jr_001_5129::
     call func_001_5175                               ; $5129: $CD $75 $51 ; $5129: $CD $75 $51
@@ -1940,7 +1943,7 @@ jr_001_5235::
     dec  [hl]                                     ; $523E: $35 ; $523E: $35
     xor  a                                        ; $523F: $AF ; $523F: $AF
     ld   [wCreditsScratch0], a                    ; $5240: $EA $00 $D0 ; $5240: $EA $00 $D0
-    call func_001_4EBB                            ; $5243: $CD $BB $4E ; $5243: $CD $BB $4E
+    call CopyReturnToMenuTilemap                            ; $5243: $CD $BB $4E ; $5243: $CD $BB $4E
     jp   label_001_526F                           ; $5246: $C3 $6F $52 ; $5246: $C3 $6F $52
 
 jr_001_5249::

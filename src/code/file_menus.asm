@@ -1302,12 +1302,12 @@ func_001_4EBB::
 ELSE
 
 Data_001_4EA9::
-include "data/file_menu_bg_2.asm"
+include "data/file_menu_return_to_menu.asm"
 .end
 
 IF LANG_DE
 Data_001_4EA9_alt::
-include "data/file_menu_bg_2_alt.asm"
+include "data/file_menu_return_to_menu_alt.asm"
 .end
 ENDC
 

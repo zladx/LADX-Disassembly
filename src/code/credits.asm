@@ -148,7 +148,7 @@ jr_017_4493:
     and  a                                        ; $4493: $A7
     jr   nz, jr_017_449C                          ; $4494: $20 $06
 
-    call func_017_469D                            ; $4496: $CD $9D $46
+    call LayoutRoleLetters                        ; $4496: $CD $9D $46
     call func_017_4784                            ; $4499: $CD $84 $47
 
 jr_017_449C:
@@ -385,22 +385,98 @@ jr_017_466B:
 func_017_4678::
     ret                                           ; $4678: $C9
 
-Data_017_4679::
+; Charmap for the credits roles
+; Maps a letter code (A = 0, B = 1…) to the proper tile index
+CreditsRolesCharmap::
 IF __PATCH_1__
-    db   $40, $56, $41, $42, $43, $57, $44, $45, $46, $58, $47, $48, $49, $4A, $4B, $50
-    db   $59, $51, $52, $53, $54, $55, $2F, $3F, $5A, $5B, $00, $0D, $00, $0F, $00, $00
-    db   $00, $00, $0C, $0E
+    db   $40 ; A
+    db   $56 ; B
+    db   $41 ; C
+    db   $42 ; D
+    db   $43 ; E
+    db   $57 ; F
+    db   $44 ; G
+    db   $45 ; H
+    db   $46 ; I
+    db   $58 ; J
+    db   $47 ; K
+    db   $48 ; L
+    db   $49 ; M
+    db   $4A ; N
+    db   $4B ; O
+    db   $50 ; P
+    db   $59 ; Q
+    db   $51 ; R
+    db   $52 ; S
+    db   $53 ; T
+    db   $54 ; U
+    db   $55 ; V
+    db   $2F ; W
+    db   $3F ; X
+    db   $5A ; Y
+    db   $5B ; Z
+    db   $00 ; (unused)
+    db   $0D ; 1
+    db   $00 ; (unused)
+    db   $0F ; 3
+    db   $00 ; (unused)
+    db   $00 ; (unused)
+    db   $00 ; (unused)
+    db   $00 ; (unused)
+    db   $0C ; 8
+    db   $0E ; 9
 ELSE
-    db   $40, $18, $41, $42, $43, $19, $44, $45, $46, $00, $47, $48, $49, $4A, $4B, $50
-    db   $00, $51, $52, $53, $54, $55, $2F, $3F, $00, $00, $00, $1A, $00, $1C, $00, $00
-    db   $00, $00, $1D, $1B
+    db   $40 ; A
+    db   $18 ; B
+    db   $41 ; C
+    db   $42 ; D
+    db   $43 ; E
+    db   $19 ; F
+    db   $44 ; G
+    db   $45 ; H
+    db   $46 ; I
+    db   $00 ; (unused)
+    db   $47 ; K
+    db   $48 ; L
+    db   $49 ; M
+    db   $4A ; N
+    db   $4B ; O
+    db   $50 ; P
+    db   $00 ; (unused)
+    db   $51 ; R
+    db   $52 ; S
+    db   $53 ; T
+    db   $54 ; U
+    db   $55 ; V
+    db   $2F ; W
+    db   $3F ; X
+    db   $00 ; (unused)
+    db   $00 ; (unused)
+    db   $00 ; (unused)
+    db   $1A ; 1
+    db   $00 ; (unused)
+    db   $1C ; 3
+    db   $00 ; (unused)
+    db   $00 ; (unused)
+    db   $00 ; (unused)
+    db   $00 ; (unused)
+    db   $1D ; 8
+    db   $1B ; 9
 ENDC
 
-func_017_469D::
+; Set the position of the staff role letters in the OAM buffer.
+;
+; Note that only even letters will be displayed on even frames (and only
+; odd letters on odd frames).
+;
+; This is because the Game Boy can only display 10 sprites per line, and
+; some roles have more letter than that.
+LayoutRoleLetters::
     ld   a, [wD010]                               ; $469D: $FA $10 $D0
-    cp   $FF                                      ; $46A0: $FE $FF
+    cp   -1                                       ; $46A0: $FE $FF
     ret  z                                        ; $46A2: $C8
 
+    ; Retrieve the current role to display
     rla                                           ; $46A3: $17
     and  $FE                                      ; $46A4: $E6 $FE
     ld   e, a                                     ; $46A6: $5F
@@ -418,91 +494,104 @@ func_017_469D::
     adc  $00                                      ; $46B7: $CE $00
     ld   d, a                                     ; $46B9: $57
     ld   hl, NewStaffRoles                        ; $46BA: $21 $9B $40
-
-jr_017_46BD:
     add  hl, de                                   ; $46BD: $19
+
+    ; Set the target OAM buffer address
     ld   de, wDynamicOAMBuffer                    ; $46BE: $11 $30 $C0
     ldh  a, [hIsGBC]                              ; $46C1: $F0 $FE
     and  a                                        ; $46C3: $A7
-    jr   z, jr_017_46C9                           ; $46C4: $28 $03
+    jr   z, .oamEnd                               ; $46C4: $28 $03
+    ld   de, wOAMBuffer                           ; $46C6: $11 $00 $C0
+.oamEnd
 
-    ld   de, wOAMBuffer                       ; $46C6: $11 $00 $C0
-
-jr_017_46C9:
+    ; On even frames, start at letter 0.
+    ; On odd frames, start at letter 1.
     ldh  a, [hFrameCounter]                       ; $46C9: $F0 $E7
     and  $01                                      ; $46CB: $E6 $01
     ld   a, $10                                   ; $46CD: $3E $10
-    jr   z, jr_017_46D4                           ; $46CF: $28 $03
-
+    jr   z, .oddFrameEnd                          ; $46CF: $28 $03
     inc  hl                                       ; $46D1: $23
     ld   a, $18                                   ; $46D2: $3E $18
+.oddFrameEnd
 
-jr_017_46D4:
     ldh  [hMultiPurpose0], a                      ; $46D4: $E0 $D7
     ld   c, $09                                   ; $46D6: $0E $09
 
-jr_017_46D8:
-    ld   a, $40                                   ; $46D8: $3E $40
+    ; For each letter…
+.loop
+    ld   a, $40 ; OAM Y position                  ; $46D8: $3E $40
     ld   [de], a                                  ; $46DA: $12
     inc  de                                       ; $46DB: $13
-    ldh  a, [hMultiPurpose0]                      ; $46DC: $F0 $D7
+    ldh  a, [hMultiPurpose0] ; OAM X position     ; $46DC: $F0 $D7
     ld   [de], a                                  ; $46DE: $12
     inc  de                                       ; $46DF: $13
+
+    ; Increment X position
     add  $10                                      ; $46E0: $C6 $10
     ldh  [hMultiPurpose0], a                      ; $46E2: $E0 $D7
+
+    ; Read the ASCII code for the current role letter
     ld   a, [hl+]                                 ; $46E4: $2A
+    ; Skip the next letter (because only every other letter is ever displayed in one frame)
     inc  hl                                       ; $46E5: $23
+
     push hl                                       ; $46E6: $E5
     push de                                       ; $46E7: $D5
+
+    ;
+    ; Adjust the letter ASCII code, to map to a tile indice
+    ;
 IF LANG_DE
     cp   $2E
-    jr   nz, jr_017_46EA
+    jr   nz, .jr_017_46EA
 
     ld   a, $14
-    jr   jr_017_4708
-jr_017_46EA:
+    jr   .jr_017_4708
+.jr_017_46EA
 ENDC
     cp   $30                                      ; $46E8: $FE $30
-    jr   c, jr_017_46F6                           ; $46EA: $38 $0A
+    jr   c, .jr_017_46F6                          ; $46EA: $38 $0A
 
     cp   $3A                                      ; $46EC: $FE $3A
-    jr   nc, jr_017_46F6                          ; $46EE: $30 $06
+    jr   nc, .jr_017_46F6                         ; $46EE: $30 $06
 
     sub  $30                                      ; $46F0: $D6 $30
     add  $1A                                      ; $46F2: $C6 $1A
-    jr   jr_017_4700                              ; $46F4: $18 $0A
+    jr   .jr_017_4700                             ; $46F4: $18 $0A
 
-jr_017_46F6:
+.jr_017_46F6
     cp   $20                                      ; $46F6: $FE $20
-    jr   nz, jr_017_46FE                          ; $46F8: $20 $04
+    jr   nz, .jr_017_46FE                         ; $46F8: $20 $04
 
 IF __PATCH_1__
     ld   a, $13
 ELSE
     ld   a, $0F                                   ; $46FA: $3E $0F
 ENDC
-    jr   jr_017_4708                              ; $46FC: $18 $0A
+    jr   .jr_017_4708                             ; $46FC: $18 $0A
 
-jr_017_46FE:
+.jr_017_46FE
+    ; Substract $41 the letter ASCII code (so that A becomes 0, B becomes 1, etc.)
     sub  $41                                      ; $46FE: $D6 $41
 
-jr_017_4700:
+.jr_017_4700
+    ; Map the letter code to the tile index
     ld   e, a                                     ; $4700: $5F
     ld   d, $00                                   ; $4701: $16 $00
-    ld   hl, Data_017_4679                        ; $4703: $21 $79 $46
+    ld   hl, CreditsRolesCharmap                        ; $4703: $21 $79 $46
     add  hl, de                                   ; $4706: $19
     ld   a, [hl]                                  ; $4707: $7E
 
-jr_017_4708:
+.jr_017_4708
     pop  de                                       ; $4708: $D1
     pop  hl                                       ; $4709: $E1
-    ld   [de], a                                  ; $470A: $12
+    ld   [de], a ; OAM tile index                 ; $470A: $12
     inc  de                                       ; $470B: $13
-    ld   a, $10                                   ; $470C: $3E $10
+    ld   a, $10 ; OAM attribute                   ; $470C: $3E $10
     ld   [de], a                                  ; $470E: $12
     inc  de                                       ; $470F: $13
     dec  c                                        ; $4710: $0D
-    jr   nz, jr_017_46D8                          ; $4711: $20 $C5
+    jr   nz, .loop                                ; $4711: $20 $C5
 
     ret                                           ; $4713: $C9
 
@@ -4937,7 +5026,7 @@ CreditsTheEnd0Handler::
     jp   IncrementCreditsSubscene                 ; $6FF4: $C3 $D9 $4C
 
 CreditsTheEnd1Handler::
-    call func_017_469D                            ; $6FF7: $CD $9D $46
+    call LayoutRoleLetters                        ; $6FF7: $CD $9D $46
     call func_017_4784                            ; $6FFA: $CD $84 $47
     ld   hl, wDeathCount                          ; $6FFD: $21 $57 $DB
     ld   a, [hl+]                                 ; $7000: $2A

@@ -149,7 +149,7 @@ jr_017_4493:
     jr   nz, jr_017_449C                          ; $4494: $20 $06
 
     call LayoutRoleLetters                        ; $4496: $CD $9D $46
-    call func_017_4784                            ; $4499: $CD $84 $47
+    call LayoutStaffLetters                       ; $4499: $CD $84 $47
 
 jr_017_449C:
     ld   a, [wD012]                               ; $449C: $FA $12 $D0
@@ -595,9 +595,9 @@ ENDC
 
     ret                                           ; $4713: $C9
 
-include "data/credits_2.asm"
+include "data/credits_staff_charmap.asm"
 
-func_017_4784::
+LayoutStaffLetters::
     ld   a, [wD011]                               ; $4784: $FA $11 $D0
     rla                                           ; $4787: $17
     and  $FE                                      ; $4788: $E6 $FE
@@ -620,117 +620,139 @@ func_017_4784::
     push hl                                       ; $47A2: $E5
     xor  a                                        ; $47A3: $AF
     ldh  [hMultiPurpose1], a                      ; $47A4: $E0 $D8
-    ld   de, wDynamicOAMBuffer+$24                                ; $47A6: $11 $54 $C0
+
+    ; Select OAM buffer for the top part
+    ld   de, wDynamicOAMBuffer+$24                ; $47A6: $11 $54 $C0
     ldh  a, [hIsGBC]                              ; $47A9: $F0 $FE
     and  a                                        ; $47AB: $A7
-    jr   z, jr_017_47B1                           ; $47AC: $28 $03
+    jr   z, .topOAMBufferEnd                      ; $47AC: $28 $03
+    ld   de, wOAMBuffer+$24                       ; $47AE: $11 $24 $C0
+.topOAMBufferEnd
 
-    ld   de, wOAMBuffer+$24                                ; $47AE: $11 $24 $C0
-
-jr_017_47B1:
+    ; Lay out the top part of the letters
     ld   a, $55                                   ; $47B1: $3E $55
-    call func_017_47C8                            ; $47B3: $CD $C8 $47
-    ld   hl, hMultiPurpose1                            ; $47B6: $21 $D8 $FF
+    call LayoutRowOfStaffLetters                  ; $47B3: $CD $C8 $47
+
+    ld   hl, hMultiPurpose1                       ; $47B6: $21 $D8 $FF
     inc  [hl]                                     ; $47B9: $34
     pop  hl                                       ; $47BA: $E1
-    ld   de, wDynamicOAMBuffer+$48                                ; $47BB: $11 $78 $C0
+
+    ; Select OAM buffer for the bottom part
+    ld   de, wDynamicOAMBuffer+$48                ; $47BB: $11 $78 $C0
     ldh  a, [hIsGBC]                              ; $47BE: $F0 $FE
     and  a                                        ; $47C0: $A7
-    jr   z, jr_017_47C6                           ; $47C1: $28 $03
+    jr   z, .bottomOAMBufferEnd                   ; $47C1: $28 $03
+    ld   de, wDynamicOAMBuffer+$18                ; $47C3: $11 $48 $C0
+.bottomOAMBufferEnd
 
-    ld   de, wDynamicOAMBuffer+$18                                ; $47C3: $11 $48 $C0
-
-jr_017_47C6:
+    ; Lay out the bottom part of the letters
     ld   a, $5D                                   ; $47C6: $3E $5D
+    ; fallthrough to LayoutRowOfStaffLetters
 
-func_017_47C8::
+; Layout the top or bottom part of the letters.
+;
+; Input:
+;   a    ???
+LayoutRowOfStaffLetters::
     ldh  [hMultiPurposeH], a                               ; $47C8: $E0 $E9
     ld   c, $12                                   ; $47CA: $0E $12
     ld   b, $08                                   ; $47CC: $06 $08
     ld   a, [wD011]                               ; $47CE: $FA $11 $D0
     cp   $25                                      ; $47D1: $FE $25
     ld   a, $38                                   ; $47D3: $3E $38
-    jr   z, jr_017_47E6                           ; $47D5: $28 $0F
+    jr   z, .jr_017_47E6                          ; $47D5: $28 $0F
 
     ld   c, $09                                   ; $47D7: $0E $09
     ld   b, $10                                   ; $47D9: $06 $10
     ldh  a, [hFrameCounter]                       ; $47DB: $F0 $E7
     and  $01                                      ; $47DD: $E6 $01
     ld   a, $10                                   ; $47DF: $3E $10
-    jr   z, jr_017_47E6                           ; $47E1: $28 $03
+    jr   z, .jr_017_47E6                          ; $47E1: $28 $03
 
     inc  hl                                       ; $47E3: $23
     ld   a, $18                                   ; $47E4: $3E $18
 
-jr_017_47E6:
+.jr_017_47E6
     ldh  [hMultiPurpose0], a                      ; $47E6: $E0 $D7
 
-jr_017_47E8:
-    ldh  a, [hMultiPurposeH]                               ; $47E8: $F0 $E9
-    ld   [de], a                                  ; $47EA: $12
+    ; For each letter…
+.loop
+    ldh  a, [hMultiPurposeH]                      ; $47E8: $F0 $E9
+    ld   [de], a ; OAM Y position                 ; $47EA: $12
     inc  de                                       ; $47EB: $13
     ldh  a, [hMultiPurpose0]                      ; $47EC: $F0 $D7
-    ld   [de], a                                  ; $47EE: $12
+    ld   [de], a  ; OAM X position                ; $47EE: $12
     inc  de                                       ; $47EF: $13
+
+    ; Increment X position
     add  b                                        ; $47F0: $80
     ldh  [hMultiPurpose0], a                      ; $47F1: $E0 $D7
+
     ld   a, [wD011]                               ; $47F3: $FA $11 $D0
     cp   $25                                      ; $47F6: $FE $25
     ld   a, [hl+]                                 ; $47F8: $2A
-    jr   z, jr_017_47FC                           ; $47F9: $28 $01
+    jr   z, .jr_017_47FC                          ; $47F9: $28 $01
 
     inc  hl                                       ; $47FB: $23
 
-jr_017_47FC:
+    ;
+    ; Adjust the letter ASCII code, to map to a tile indice
+    ;
+
+.jr_017_47FC
     push hl                                       ; $47FC: $E5
     push de                                       ; $47FD: $D5
     cp   $26                                      ; $47FE: $FE $26
-    jr   nz, jr_017_4806                          ; $4800: $20 $04
+    jr   nz, .jr_017_4806                         ; $4800: $20 $04
 
     ld   a, CREDITS_VAR_0                         ; $4802: $3E $1A
-    jr   jr_017_4818                              ; $4804: $18 $12
+    jr   .jr_017_4818                             ; $4804: $18 $12
 
-jr_017_4806:
+.jr_017_4806
     cp   $32                                      ; $4806: $FE $32
-    jr   nz, jr_017_480E                          ; $4808: $20 $04
+    jr   nz, .jr_017_480E                         ; $4808: $20 $04
 
     ld   a, CREDITS_VAR_1                         ; $480A: $3E $1B
-    jr   jr_017_4818                              ; $480C: $18 $0A
+    jr   .jr_017_4818                             ; $480C: $18 $0A
 
-jr_017_480E:
+.jr_017_480E
     cp   $20                                      ; $480E: $FE $20
-    jr   nz, jr_017_4816                          ; $4810: $20 $04
+    jr   nz, .jr_017_4816                         ; $4810: $20 $04
 
     ld   a, CREDITS_VAR_2                         ; $4812: $3E $0F
-    jr   jr_017_482D                              ; $4814: $18 $17
+    jr   .jr_017_482D                             ; $4814: $18 $17
 
-jr_017_4816:
+.jr_017_4816
+
+    ; Substract $41 the letter ASCII code (so that A becomes 0, B becomes 1, etc.)
     sub  $41                                      ; $4816: $D6 $41
 
-jr_017_4818:
+.jr_017_4818
+
+    ; Map the letter code to the tile index and attribute
     sla  a                                        ; $4818: $CB $27
-    ld   hl, hMultiPurpose1                            ; $481A: $21 $D8 $FF
+    ld   hl, hMultiPurpose1                       ; $481A: $21 $D8 $FF
     add  [hl]                                     ; $481D: $86
     ld   e, a                                     ; $481E: $5F
     ld   d, $00                                   ; $481F: $16 $00
-    ld   hl, Data_017_474C                        ; $4821: $21 $4C $47
+    ld   hl, CreditsStaffAttrmap                  ; $4821: $21 $4C $47
     add  hl, de                                   ; $4824: $19
     ld   a, [hl]                                  ; $4825: $7E
-    ldh  [hMultiPurposeG], a                               ; $4826: $E0 $E8
-    ld   hl, Data_017_4714                        ; $4828: $21 $14 $47
+    ldh  [hMultiPurposeG], a                      ; $4826: $E0 $E8
+    ld   hl, CreditsStaffCharmap                  ; $4828: $21 $14 $47
     add  hl, de                                   ; $482B: $19
     ld   a, [hl]                                  ; $482C: $7E
 
-jr_017_482D:
+.jr_017_482D
     pop  de                                       ; $482D: $D1
     pop  hl                                       ; $482E: $E1
-    ld   [de], a                                  ; $482F: $12
+    ld   [de], a ; OAM tile index                 ; $482F: $12
     inc  de                                       ; $4830: $13
-    ldh  a, [hMultiPurposeG]                               ; $4831: $F0 $E8
-    ld   [de], a                                  ; $4833: $12
+    ldh  a, [hMultiPurposeG]                      ; $4831: $F0 $E8
+    ld   [de], a ; OAM attribute                  ; $4833: $12
     inc  de                                       ; $4834: $13
     dec  c                                        ; $4835: $0D
-    jr   nz, jr_017_47E8                          ; $4836: $20 $B0
+    jr   nz, .loop                                ; $4836: $20 $B0
 
     ret                                           ; $4838: $C9
 
@@ -5027,7 +5049,7 @@ CreditsTheEnd0Handler::
 
 CreditsTheEnd1Handler::
     call LayoutRoleLetters                        ; $6FF7: $CD $9D $46
-    call func_017_4784                            ; $6FFA: $CD $84 $47
+    call LayoutStaffLetters                       ; $6FFA: $CD $84 $47
     ld   hl, wDeathCount                          ; $6FFD: $21 $57 $DB
     ld   a, [hl+]                                 ; $7000: $2A
     or   [hl]                                     ; $7001: $B6

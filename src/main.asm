@@ -36,22 +36,22 @@ section "bank4",romx[$4000],bank[$04]
 include "code/entities/bank4.asm"
 
 section "bank5",romx[$4000],bank[$05]
-include "code/entities/bow_wow.asm"
-include "code/entities/cucco.asm"
-include "code/entities/witch.asm"
-include "code/entities/tarin.asm"
-include "code/entities/marin.asm"
-include "code/entities/raft_owner.asm"
-include "code/entities/entity_67.asm"
-include "code/entities/angler_fish.asm"
-include "code/entities/evil_eagle.asm"
-include "code/entities/hot_head.asm"
-include "code/entities/dodongo_snake.asm"
-include "code/entities/slime_eel.asm"
-include "code/entities/bank5.asm"
-include "code/entities/ghoma.asm"
-include "code/entities/musical_note.asm"
-include "code/entities/animal_d0.asm"
+include "code/entities/05_bow_wow.asm"
+include "code/entities/05_cucco.asm"
+include "code/entities/05_witch.asm"
+include "code/entities/05_tarin.asm"
+include "code/entities/05_marin.asm"
+include "code/entities/05_raft_owner.asm"
+include "code/entities/05_entity_67.asm"
+include "code/entities/05_angler_fish.asm"
+include "code/entities/05_evil_eagle.asm"
+include "code/entities/05_hot_head.asm"
+include "code/entities/05_dodongo_snake.asm"
+include "code/entities/05_slime_eel.asm"
+include "code/entities/05__helpers.asm"
+include "code/entities/05_ghoma.asm"
+include "code/entities/05_musical_note.asm"
+include "code/entities/05_animal_d0.asm"
 
 section "bank6",romx[$4000],bank[$06]
 include "code/entities/bank6.asm"
@@ -296,7 +296,7 @@ OverworldObjectsTilemapDMG::
 include "data/objects_tilemaps/overworld.dmg.asm"
 OverworldObjectsTilemapCGB::
 include "data/objects_tilemaps/overworld.cgb.asm"
-include "code/entities/anglers_tunnel_door.asm"
+include "code/entities/1A_anglers_tunnel_door.asm"
 
 section "bank1B",romx[$4000],bank[$1B]
 include "code/audio/music_1.asm"

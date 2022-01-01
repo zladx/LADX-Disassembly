@@ -2,28 +2,28 @@
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-include "code/entities/richard.asm"
-include "code/entities/mad_bomber.asm"
-include "code/entities/anti_kirby.asm"
-include "code/entities/smasher.asm"
-include "code/entities/three_of_a_kind.asm"
-include "code/entities/stalfos_aggressive.asm"
-include "code/entities/cue_ball.asm"
-include "code/entities/entities_8c_8d.asm"
-include "code/entities/hard_hat_beetle.asm"
-include "code/entities/hinox.asm"
-include "code/entities/armos_knight.asm"
-include "code/entities/desert_lanmola.asm"
-include "code/entities/yip_yip.asm"
-include "code/entities/madam_meow_meow.asm"
-include "code/entities/grandpa_ulrira.asm"
-include "code/entities/crow.asm"
-include "code/entities/crazy_tracy.asm"
-include "code/entities/kid_71_72.asm"
-include "code/entities/kid_70_73.asm"
-include "code/entities/giant_goponga_flower.asm"
-include "code/entities/goponga_projectile.asm"
-include "code/entities/goponga_flower.asm"
+include "code/entities/06_richard.asm"
+include "code/entities/06_mad_bomber.asm"
+include "code/entities/06_anti_kirby.asm"
+include "code/entities/06_smasher.asm"
+include "code/entities/06_three_of_a_kind.asm"
+include "code/entities/06_stalfos_aggressive.asm"
+include "code/entities/06_cue_ball.asm"
+include "code/entities/06_entities_8c_8d.asm"
+include "code/entities/06_hard_hat_beetle.asm"
+include "code/entities/06_hinox.asm"
+include "code/entities/06_armos_knight.asm"
+include "code/entities/06_desert_lanmola.asm"
+include "code/entities/06_yip_yip.asm"
+include "code/entities/06_madam_meow_meow.asm"
+include "code/entities/06_grandpa_ulrira.asm"
+include "code/entities/06_crow.asm"
+include "code/entities/06_crazy_tracy.asm"
+include "code/entities/06_kid_71_72.asm"
+include "code/entities/06_kid_70_73.asm"
+include "code/entities/06_giant_goponga_flower.asm"
+include "code/entities/06_goponga_projectile.asm"
+include "code/entities/06_goponga_flower.asm"
 
 ; ----------------------------------------------------------------------
 ;
@@ -425,14 +425,14 @@ ClearEntityStatus_06::
     ld   [hl], b                                  ; $65DF: $70
     ret                                           ; $65E0: $C9
 
-include "code/entities/wizrobe_projectile.asm"
-include "code/entities/spark.asm"
-include "code/entities/keese.asm"
-include "code/entities/owl_event.asm"
-include "code/entities/telephone.asm"
-include "code/entities/butterfly.asm"
-include "code/entities/rolling_bones.asm"
-include "code/entities/rolling_bones_bar.asm"
+include "code/entities/06_wizrobe_projectile.asm"
+include "code/entities/06_spark.asm"
+include "code/entities/06_keese.asm"
+include "code/entities/06_owl_event.asm"
+include "code/entities/06_telephone.asm"
+include "code/entities/06_butterfly.asm"
+include "code/entities/06_rolling_bones.asm"
+include "code/entities/06_rolling_bones_bar.asm"
 
 func_006_700A::
     and  $07                                      ; $700A: $E6 $07
@@ -499,12 +499,12 @@ jr_006_706B:
     call ClearEntityStatus_06                     ; $706B: $CD $DB $65
     jp   PlayBombExplosionSfx                     ; $706E: $C3 $4B $0C
 
-include "code/entities/big_fairy.asm"
-include "code/entities/mr_write_bird.asm"
-include "code/entities/pols_voice.asm"
-include "code/entities/armos_statue.asm"
-include "code/entities/spike_trap.asm"
-include "code/entities/wizrobe.asm"
+include "code/entities/06_big_fairy.asm"
+include "code/entities/06_mr_write_bird.asm"
+include "code/entities/06_pols_voice.asm"
+include "code/entities/06_armos_statue.asm"
+include "code/entities/06_spike_trap.asm"
+include "code/entities/06_wizrobe.asm"
 
 Data_006_773C::
     db   $00, $D8, $60, $00, $00, $E0, $60, $20, $00, $28, $60, $00, $00, $30, $60, $20
@@ -555,13 +555,13 @@ jr_006_783F:
     ld   a, $10                                   ; $7869: $3E $10
     jp   func_015_7964_trampoline                 ; $786B: $C3 $A0 $3D
 
-include "code/entities/anti_fairy.asm"
-include "code/entities/tektite.asm"
-include "code/entities/boo_buddy.asm"
-include "code/entities/floating_item.asm"
-include "code/entities/gel.asm"
-include "code/entities/like_like.asm"
-include "code/entities/gibdo.asm"
+include "code/entities/06_anti_fairy.asm"
+include "code/entities/06_tektite.asm"
+include "code/entities/06_boo_buddy.asm"
+include "code/entities/06_floating_item.asm"
+include "code/entities/06_gel.asm"
+include "code/entities/06_like_like.asm"
+include "code/entities/06_gibdo.asm"
 
 ; Helper used by the Like Like entity
 func_006_7F05::

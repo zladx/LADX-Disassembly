@@ -8486,7 +8486,7 @@ jr_018_7BD1:
     ld   a, [hl]                                  ; $7BDD: $7E
     ret                                           ; $7BDE: $C9
 
-include "code/entities/hookshot_chain.asm"
+include "code/entities/18_hookshot_chain.asm"
 
 Data_018_7CC4::
     db   $36, $00, $36, $20

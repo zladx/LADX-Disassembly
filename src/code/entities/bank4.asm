@@ -2,8 +2,8 @@
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-include "code/entities/genie.asm"
-include "code/entities/slime_eye.asm"
+include "code/entities/04_genie.asm"
+include "code/entities/04_slime_eye.asm"
 
 ;
 ; Utility functions

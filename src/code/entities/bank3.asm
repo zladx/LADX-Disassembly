@@ -1946,7 +1946,7 @@ label_003_51F5:
 jr_003_5234:
     ret                                           ; $5234: $C9
 
-include "code/entities/pushed_block.asm"
+include "code/entities/03_pushed_block.asm"
 
 func_003_52D4::
     ld   e, $0F                                   ; $52D4: $1E $0F
@@ -2011,7 +2011,7 @@ jr_003_531E:
 PotEntityHandler::
     ld   d, $03                                   ; $5326: $16 $03
 
-include "code/entities/liftable_rock.asm"
+include "code/entities/03_liftable_rock.asm"
 
 Data_003_5398::
     db   $F0, $17, $F2, $17, $F4, $16, $F6, $16
@@ -4378,7 +4378,7 @@ jr_003_6155:
 jr_003_6156:
     ret                                           ; $6156: $C9
 
-include "code/entities/droppable_fairy.asm"
+include "code/entities/03_droppable_fairy.asm"
 
 func_003_61C0::
     ldh  a, [hFrameCounter]                       ; $61C0: $F0 $E7
@@ -5242,7 +5242,7 @@ jr_003_668C:
     call ReturnIfNonInteractive_03                ; $6692: $CD $78 $7F
     ret                                           ; $6695: $C9
 
-include "code/entities/bomb.asm"
+include "code/entities/03_bomb.asm"
 
 func_003_6711::
     ld   hl, hActiveEntityVisualPosY              ; $6711: $21 $EC $FF
@@ -5672,7 +5672,7 @@ func_003_68F8::
 Data_003_69A2::
     db   $6C, $74, $6D, $75, $00, $00, $00, $00   ; $69A2
 
-include "code/entities/hookshot_hit.asm"
+include "code/entities/03_hookshot_hit.asm"
 
 
 Data_003_6A1E::
@@ -5688,7 +5688,7 @@ jr_003_6A2E:
     ld   de, Data_003_6A1E                        ; $6A2E: $11 $1E $6A
     jp   func_003_6AD7                            ; $6A31: $C3 $D7 $6A
 
-include "code/entities/arrow.asm"
+include "code/entities/03_arrow.asm"
 
 Data_003_6A66::
     db   $80, $15

@@ -676,7 +676,7 @@ func_019_442C::
     ld   de, Data_019_4404                        ; $444B: $11 $04 $44
     jp   RenderActiveEntitySprite                 ; $444E: $C3 $77 $3C
 
-include "code/entities/boomerang.asm"
+include "code/entities/19_boomerang.asm"
 
 Data_019_44FC::
     db   $00, $00, $08, $20, $00, $08, $06, $20, $00, $00, $06, $00, $00, $08, $08, $00

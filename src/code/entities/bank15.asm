@@ -101,8 +101,8 @@ ResetEntity::
     ld   [hl], b                                  ; $409D: $70
     ret                                           ; $409E: $C9
 
-include "code/entities/kanalet_castle_gate_switch.asm"
-include "code/entities/moving_block.asm"
+include "code/entities/15_kanalet_castle_gate_switch.asm"
+include "code/entities/15_moving_block.asm"
 
 Data_015_4320::
     db   $58, $03, $58, $23

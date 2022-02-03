@@ -97,3 +97,4 @@ jp_open_dialog: macro
         jp   OpenDialog
     endc
 endm
+

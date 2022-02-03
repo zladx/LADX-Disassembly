@@ -1,3 +1,8 @@
+; A pot is a specialy-configured liftable rock.
+PotEntityHandler::
+    ld   d, $03                                   ; $5326: $16 $03
+    ; fallthrough
+
 LiftableRockEntityHandler::
     ld   a, c                                     ; $5328: $79
     ld   [wC50C], a                               ; $5329: $EA $0C $C5
@@ -75,3 +80,54 @@ jr_003_5369:
 
 jr_003_5395:
     jp   label_3935                               ; $5395: $C3 $35 $39
+
+Data_003_5398::
+    db   $F0, $17, $F2, $17, $F4, $16, $F6, $16
+
+Data_003_53A0::
+    db   $F0, $16, $F2, $16, $F4, $16, $F6, $16
+
+jp_003_53A8::
+IF __PATCH_3__
+    ld   de, Data_003_5398
+    ld   a, [wIsIndoor]
+    and  a
+    jr   z, .render
+    ld   de, Data_003_53A0
+ELSE
+    ld   a, [wIsIndoor]                           ; $53A8: $FA $A5 $DB
+    and  a                                        ; $53AB: $A7
+    jr   z, .isNotIndoor                          ; $53AC: $28 $05
+    ld   de, Data_003_53A0                        ; $53AE: $11 $A0 $53
+    jr   .render                                  ; $53B1: $18 $03
+
+.isNotIndoor
+    ld   de, Data_003_5398                        ; $53B3: $11 $98 $53
+ENDC
+
+.render
+    call RenderActiveEntitySpritesPair            ; $53B6: $CD $C0 $3B
+    call ReturnIfNonInteractive_03                ; $53B9: $CD $78 $7F
+    ld   a, $0B                                   ; $53BC: $3E $0B
+    ld   [wC19E], a                               ; $53BE: $EA $9E $C1
+    call func_003_75A2                            ; $53C1: $CD $A2 $75
+    call func_003_60B3                            ; $53C4: $CD $B3 $60
+    ld   hl, wEntitiesStatusTable                 ; $53C7: $21 $80 $C2
+    add  hl, bc                                   ; $53CA: $09
+    ld   a, [hl]                                  ; $53CB: $7E
+    cp   $02                                      ; $53CC: $FE $02
+    jp   z, jr_003_5406                           ; $53CE: $CA $06 $54
+
+    ld   hl, wEntitiesPosZTable                   ; $53D1: $21 $10 $C3
+    add  hl, bc                                   ; $53D4: $09
+    ld   a, [hl]                                  ; $53D5: $7E
+    and  a                                        ; $53D6: $A7
+    jr   z, func_003_53E4                         ; $53D7: $28 $0B
+
+    ld   hl, wEntitiesCollisionsTable             ; $53D9: $21 $A0 $C2
+    add  hl, bc                                   ; $53DC: $09
+    ld   a, [hl]                                  ; $53DD: $7E
+    and  a                                        ; $53DE: $A7
+    jr   z, jr_003_5406                           ; $53DF: $28 $25
+
+    call func_003_5438                            ; $53E1: $CD $38 $54

@@ -9269,7 +9269,7 @@ func_007_7B30::
     ld   a, $01                                   ; $7B4E: $3E $01
     jp   func_015_7964_trampoline                 ; $7B50: $C3 $A0 $3D
 
-include "code/entities/chest_with_item.asm"
+include "code/entities/07_chest_with_item.asm"
 
 func_007_7CF0::
     call CheckLinkCollisionWithEnemy_trampoline   ; $7CF0: $CD $5A $3B

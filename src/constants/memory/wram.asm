@@ -1037,6 +1037,11 @@ wEntitiesPrivateState2Table::
   ds $10 ; C2C0 - C2CF
 
 ; Is the item a droppable? Or pickable?
+;
+; Possible values:
+;   0: ??
+;   1: ??
+;   2: pickable item cannot be picked up by sword
 wEntitiesUnknownTableD::
   ds $10 ; C2D0 - C2DF
 

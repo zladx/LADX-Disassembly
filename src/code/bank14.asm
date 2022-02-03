@@ -1052,14 +1052,14 @@ func_014_50C3::
     cp   ENTITY_STATUS_ACTIVE                     ; $50CC: $FE $05
     jr   nz, .continue                            ; $50CE: $20 $41
 
-    ; and the wEntitiesPhysicsFlagsTable flag 00100000 is set
+    ; and the item is pickable…
     ld   hl, wEntitiesPhysicsFlagsTable           ; $50D0: $21 $40 $C3
     add  hl, de                                   ; $50D3: $19
     ld   a, [hl]                                  ; $50D4: $7E
     and  %00100000                                ; $50D5: $E6 $20
     jr   z, .continue                             ; $50D7: $28 $38
 
-    ; and the wEntitiesUnknownTableD value == 2
+    ; and the wEntitiesUnknownTableD value != 2…
     ld   hl, wEntitiesUnknownTableD               ; $50D9: $21 $D0 $C2
     add  hl, de                                   ; $50DC: $19
     ld   a, [hl]                                  ; $50DD: $7E

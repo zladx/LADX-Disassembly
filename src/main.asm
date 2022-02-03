@@ -7,10 +7,8 @@ include "options.asm"
 include "constants/constants.asm"
 
 ; Utilities functions and ROM header
-include "code/macros.asm"
 include "code/header.asm"
-
-; For audio
+include "code/macros.asm"
 include "code/audio_macros.asm"
 
 ; Sources

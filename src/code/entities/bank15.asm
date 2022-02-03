@@ -34,7 +34,7 @@ ResetEntity::
     ld   hl, wEntitiesUnknownTableD               ; $402B: $21 $D0 $C2
     add  hl, bc                                   ; $402E: $09
     ld   [hl], b                                  ; $402F: $70
-    ld   hl, wEntitiesUnknowTableP                ; $4030: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState3Table          ; $4030: $21 $40 $C4
     add  hl, bc                                   ; $4033: $09
     ld   [hl], b                                  ; $4034: $70
     ld   hl, wEntitiesUnknowTableR                ; $4035: $21 $90 $C3
@@ -2921,7 +2921,7 @@ func_015_572B::
     jp   func_015_7964_trampoline                 ; $5740: $C3 $A0 $3D
 
 FinalNightmareForm3Handler::
-    ld   hl, wEntitiesUnknowTableP                ; $5743: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5743: $21 $40 $C4
     add  hl, bc                                   ; $5746: $09
     ld   a, [hl]                                  ; $5747: $7E
     cp   $02                                      ; $5748: $FE $02
@@ -3087,7 +3087,7 @@ func_015_5854::
     ld   [hl], $50                                ; $585C: $36 $50
     ld   a, ENTITY_FINAL_NIGHTMARE                ; $585E: $3E $E6
     call SpawnNewEntity_trampoline                ; $5860: $CD $86 $3B
-    ld   hl, wEntitiesUnknowTableP                ; $5863: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5863: $21 $40 $C4
     add  hl, de                                   ; $5866: $19
     inc  [hl]                                     ; $5867: $34
     push bc                                       ; $5868: $C5
@@ -3696,7 +3696,7 @@ func_015_5E38::
     ld   hl, wEntitiesHitboxFlagsTable            ; $5E4F: $21 $50 $C3
     add  hl, de                                   ; $5E52: $19
     ld   [hl], d                                  ; $5E53: $72
-    ld   hl, wEntitiesUnknowTableP                ; $5E54: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5E54: $21 $40 $C4
     add  hl, de                                   ; $5E57: $19
     inc  [hl]                                     ; $5E58: $34
     ldh  a, [hMultiPurpose0]                      ; $5E59: $F0 $D7
@@ -6923,7 +6923,7 @@ jr_015_776B:
     ld   hl, wEntitiesTransitionCountdownTable    ; $7786: $21 $E0 $C2
     add  hl, de                                   ; $7789: $19
     ld   [hl], $60                                ; $778A: $36 $60
-    ld   hl, wEntitiesUnknowTableP                ; $778C: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $778C: $21 $40 $C4
     add  hl, de                                   ; $778F: $19
     ld   [hl], $01                                ; $7790: $36 $01
 

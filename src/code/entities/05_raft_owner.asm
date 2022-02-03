@@ -86,7 +86,7 @@ Data_005_53D4::
     db   $5C, $01, $5C, $21, $5E, $01, $5E, $21   ; $53D4
 
 raftOnOverworld:
-    ld   hl, wEntitiesUnknowTableP                ; $53DC: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $53DC: $21 $40 $C4
     add  hl, bc                                   ; $53DF: $09
     ld   a, [wD477]                               ; $53E0: $FA $77 $D4
     or   [hl]                                     ; $53E3: $B6
@@ -191,7 +191,7 @@ func_005_546C::
     sub  $05                                      ; $5472: $D6 $05
     ldh  [hLinkPositionY], a                      ; $5474: $E0 $99
     call IncrementEntityState                     ; $5476: $CD $12 $3B
-    ld   hl, wEntitiesUnknowTableP                ; $5479: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5479: $21 $40 $C4
     add  hl, bc                                   ; $547C: $09
     ld   [hl], $01                                ; $547D: $36 $01
     xor  a                                        ; $547F: $AF

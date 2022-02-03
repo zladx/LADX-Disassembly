@@ -243,7 +243,7 @@ MadBatterState8Handler::
     and  a                                        ; $5058: $A7
     ret  nz                                       ; $5059: $C0
 
-    ld   hl, wEntitiesUnknowTableP                ; $505A: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $505A: $21 $40 $C4
     add  hl, bc                                   ; $505D: $09
     ld   a, [hl]                                  ; $505E: $7E
     and  a                                        ; $505F: $A7

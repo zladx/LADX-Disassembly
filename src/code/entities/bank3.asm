@@ -1145,7 +1145,7 @@ EntityThrownHandler::
     ld   [hl], $20                                ; $4DC0: $36 $20
     ld   hl, hWaveSfx                             ; $4DC2: $21 $F3 $FF
     ld   [hl], WAVE_SFX_BOSS_GRAWL                ; $4DC5: $36 $07
-    ld   hl, wEntitiesUnknowTableP                ; $4DC7: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4DC7: $21 $40 $C4
     add  hl, bc                                   ; $4DCA: $09
 IF __PATCH_0__
     inc  [hl]
@@ -3659,7 +3659,7 @@ jr_003_5F5F:
     jr   nz, jr_003_5FB9                          ; $5F67: $20 $50
 
     ld   [hl], $17                                ; $5F69: $36 $17
-    ld   hl, wEntitiesUnknowTableP                ; $5F6B: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5F6B: $21 $40 $C4
     add  hl, bc                                   ; $5F6E: $09
     inc  [hl]                                     ; $5F6F: $34
     ld   a, [hl]                                  ; $5F70: $7E
@@ -4102,7 +4102,7 @@ jr_003_6227:
     jr   jr_003_6235                              ; $622D: $18 $06
 
 jr_003_622F:
-    ld   hl, wEntitiesUnknowTableP                ; $622F: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $622F: $21 $40 $C4
     add  hl, bc                                   ; $6232: $09
     ld   [hl], $01                                ; $6233: $36 $01
 
@@ -4146,7 +4146,7 @@ jr_003_626B:
     ld   hl, wEntitiesUnknownTableD               ; $626B: $21 $D0 $C2
     add  hl, bc                                   ; $626E: $09
     ld   [hl], b                                  ; $626F: $70
-    ld   hl, wEntitiesUnknowTableP                ; $6270: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $6270: $21 $40 $C4
     add  hl, bc                                   ; $6273: $09
     ld   [hl], b                                  ; $6274: $70
     call GetEntityPrivateCountdown1               ; $6275: $CD $00 $0C
@@ -4769,7 +4769,7 @@ ENDC
 
 label_003_65F2:
     ld   e, a                                     ; $65F2: $5F
-    ld   hl, wEntitiesUnknowTableP                ; $65F3: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $65F3: $21 $40 $C4
     add  hl, bc                                   ; $65F6: $09
     ld   a, [hl]                                  ; $65F7: $7E
     cp   $4C                                      ; $65F8: $FE $4C
@@ -4796,7 +4796,7 @@ jr_003_6614:
     cp   $12                                      ; $6614: $FE $12
     jr   nz, jr_003_664F                          ; $6616: $20 $37
 
-    ld   hl, wEntitiesUnknowTableP                ; $6618: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $6618: $21 $40 $C4
     add  hl, bc                                   ; $661B: $09
     ld   a, [hl]                                  ; $661C: $7E
     and  a                                        ; $661D: $A7

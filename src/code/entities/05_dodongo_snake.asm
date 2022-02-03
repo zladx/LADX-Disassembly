@@ -197,7 +197,7 @@ jr_005_68F6:
     ld   hl, wEntitiesFlashCountdownTable         ; $6943: $21 $20 $C4
     add  hl, bc                                   ; $6946: $09
     ld   [hl], $0C                                ; $6947: $36 $0C
-    ld   hl, wEntitiesUnknowTableP                ; $6949: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $6949: $21 $40 $C4
     add  hl, bc                                   ; $694C: $09
     inc  [hl]                                     ; $694D: $34
     ld   a, JINGLE_DODONGO_EAT_BOMB               ; $694E: $3E $2A
@@ -318,7 +318,7 @@ jr_005_69EB:
     cp   $20                                      ; $69EB: $FE $20
     ret  nz                                       ; $69ED: $C0
 
-    ld   hl, wEntitiesUnknowTableP                ; $69EE: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $69EE: $21 $40 $C4
     add  hl, bc                                   ; $69F1: $09
     ld   a, [hl]                                  ; $69F2: $7E
     cp   $03                                      ; $69F3: $FE $03

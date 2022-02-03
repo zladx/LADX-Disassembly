@@ -126,7 +126,7 @@ label_006_41F8:
     ld   hl, wEntitiesTransitionCountdownTable    ; $41FE: $21 $E0 $C2
     add  hl, de                                   ; $4201: $19
     ld   [hl], $40                                ; $4202: $36 $40
-    ld   hl, wEntitiesUnknowTableP                ; $4204: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4204: $21 $40 $C4
     add  hl, de                                   ; $4207: $19
     ld   [hl], $01                                ; $4208: $36 $01
     push bc                                       ; $420A: $C5

@@ -560,7 +560,7 @@ jr_005_7151:
     ld   [hl], a                                  ; $7166: $77
 
 jr_005_7167:
-    ld   hl, wEntitiesUnknowTableP                ; $7167: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $7167: $21 $40 $C4
     add  hl, bc                                   ; $716A: $09
     ld   a, [hl]                                  ; $716B: $7E
     and  $07                                      ; $716C: $E6 $07
@@ -588,7 +588,7 @@ jr_005_7188:
     ld   a, $00                                   ; $718C: $3E $00
     jr   nz, jr_005_719A                          ; $718E: $20 $0A
 
-    ld   hl, wEntitiesUnknowTableP                ; $7190: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $7190: $21 $40 $C4
     add  hl, bc                                   ; $7193: $09
     inc  [hl]                                     ; $7194: $34
     ld   a, [hl]                                  ; $7195: $7E
@@ -1294,7 +1294,7 @@ func_005_75D1::
     ld   hl, wEntitiesTransitionCountdownTable    ; $760A: $21 $E0 $C2
     add  hl, de                                   ; $760D: $19
     ld   [hl], $17                                ; $760E: $36 $17
-    ld   hl, wEntitiesUnknowTableP                ; $7610: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $7610: $21 $40 $C4
     add  hl, de                                   ; $7613: $19
     ld   [hl], $01                                ; $7614: $36 $01
     jp   func_005_7535                            ; $7616: $C3 $35 $75

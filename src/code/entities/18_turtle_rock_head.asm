@@ -128,7 +128,7 @@ TurtleRockHeadState1Handler::
 
 TurtleRockHeadState2Handler::
     ldh  a, [hActiveEntityPosX]                   ; $73C4: $F0 $EE
-    ld   hl, wEntitiesUnknowTableP                ; $73C6: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $73C6: $21 $40 $C4
     add  hl, bc                                   ; $73C9: $09
     ld   [hl], a                                  ; $73CA: $77
     ldh  a, [hActiveEntityVisualPosY]             ; $73CB: $F0 $EC
@@ -477,7 +477,7 @@ func_018_766A::
     jp   c, label_018_7726                        ; $768E: $DA $26 $77
 
 jr_018_7691:
-    ld   hl, wEntitiesUnknowTableP                ; $7691: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $7691: $21 $40 $C4
     add  hl, bc                                   ; $7694: $09
     ld   a, [hl]                                  ; $7695: $7E
     ldh  [hMultiPurposeG], a                               ; $7696: $E0 $E8

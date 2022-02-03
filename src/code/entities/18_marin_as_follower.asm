@@ -67,7 +67,7 @@ jr_018_5A18:
 
 ; 'You got Marin!' joke
 jr_018_5A3F:
-    ld   hl, wEntitiesUnknowTableP                ; $5A3F: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5A3F: $21 $40 $C4
     add  hl, bc                                   ; $5A42: $09
     ld   a, [hl]                                  ; $5A43: $7E
     and  a                                        ; $5A44: $A7

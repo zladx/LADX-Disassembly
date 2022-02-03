@@ -77,7 +77,7 @@ label_005_40A2:
     jp   label_005_4253                           ; $40A2: $C3 $53 $42
 
 func_005_40A5::
-    ld   hl, wEntitiesUnknowTableP                ; $40A5: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $40A5: $21 $40 $C4
     add  hl, bc                                   ; $40A8: $09
     ld   a, [hl]                                  ; $40A9: $7E
     JP_TABLE                                      ; $40AA
@@ -120,7 +120,7 @@ jr_005_40DC:
     dec  e                                        ; $40DD: $1D
     jr   nz, jr_005_40DC                          ; $40DE: $20 $FC
 
-    ld   hl, wEntitiesUnknowTableP                ; $40E0: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $40E0: $21 $40 $C4
     add  hl, bc                                   ; $40E3: $09
     inc  [hl]                                     ; $40E4: $34
     ret                                           ; $40E5: $C9
@@ -562,7 +562,7 @@ label_005_4335:
     cp   $3D                                      ; $435E: $FE $3D
     jr   nz, jr_005_4380                          ; $4360: $20 $1E
 
-    ld   hl, wEntitiesUnknowTableP                ; $4362: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4362: $21 $40 $C4
     add  hl, de                                   ; $4365: $19
     ld   a, [hl]                                  ; $4366: $7E
     and  a                                        ; $4367: $A7

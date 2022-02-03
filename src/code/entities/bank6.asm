@@ -565,7 +565,7 @@ include "code/entities/06_gibdo.asm"
 
 ; Helper used by the Like Like entity
 func_006_7F05::
-    ld   hl, wEntitiesUnknowTableP                ; $7F05: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $7F05: $21 $40 $C4
     add  hl, bc                                   ; $7F08: $09
     ld   a, [hl]                                  ; $7F09: $7E
     inc  [hl]                                     ; $7F0A: $34

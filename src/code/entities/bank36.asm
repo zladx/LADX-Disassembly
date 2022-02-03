@@ -5571,7 +5571,7 @@ jr_036_61AA:
     ld   hl, wEntitiesTransitionCountdownTable    ; $61F9: $21 $E0 $C2
     add  hl, de                                   ; $61FC: $19
     ld   [hl], $48                                ; $61FD: $36 $48
-    ld   hl, wEntitiesUnknowTableP                ; $61FF: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $61FF: $21 $40 $C4
     add  hl, de                                   ; $6202: $19
     ld   [hl], $01                                ; $6203: $36 $01
 

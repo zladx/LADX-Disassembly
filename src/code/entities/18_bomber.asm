@@ -127,7 +127,7 @@ label_018_78A6:
     ld   hl, wEntitiesTransitionCountdownTable    ; $78D8: $21 $E0 $C2
     add  hl, de                                   ; $78DB: $19
     ld   [hl], $40                                ; $78DC: $36 $40
-    ld   hl, wEntitiesUnknowTableP                ; $78DE: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $78DE: $21 $40 $C4
     add  hl, de                                   ; $78E1: $19
     ld   [hl], $01                                ; $78E2: $36 $01
     push bc                                       ; $78E4: $C5

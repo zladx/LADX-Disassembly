@@ -6544,7 +6544,7 @@ jr_017_7CD4:
 
     add  $02                                      ; $7CDE: $C6 $02
     ld   [hl], a                                  ; $7CE0: $77
-    ld   hl, wEntitiesUnknowTableP                ; $7CE1: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $7CE1: $21 $40 $C4
     add  hl, bc                                   ; $7CE4: $09
     ld   a, [hl]                                  ; $7CE5: $7E
     add  e                                        ; $7CE6: $83

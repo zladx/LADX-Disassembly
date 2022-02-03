@@ -65,7 +65,7 @@ func_006_563A::
 
     ld   [hl], $CF                                ; $563F: $36 $CF
     call IncrementEntityPrivateState2             ; $5641: $CD $34 $56
-    ld   hl, wEntitiesUnknowTableP                ; $5644: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5644: $21 $40 $C4
     add  hl, bc                                   ; $5647: $09
     ld   [hl], $05                                ; $5648: $36 $05
 
@@ -113,7 +113,7 @@ jr_006_568A:
     ld   hl, wEntitiesUnknowTableY                ; $568E: $21 $D0 $C3
     add  hl, bc                                   ; $5691: $09
     ld   a, [hl]                                  ; $5692: $7E
-    ld   hl, wEntitiesUnknowTableP                ; $5693: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5693: $21 $40 $C4
     add  hl, bc                                   ; $5696: $09
     ld   e, [hl]                                  ; $5697: $5E
     dec  [hl]                                     ; $5698: $35

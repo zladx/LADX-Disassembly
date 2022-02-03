@@ -8,7 +8,7 @@ Data_018_4D13::
     db   $9A, $14, $9C, $14
 
 GrandmaUlriraEntityHandler::
-    ld   hl, wEntitiesUnknowTableP                ; $4D17: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4D17: $21 $40 $C4
     add  hl, bc                                   ; $4D1A: $09
     ld   a, [hl]                                  ; $4D1B: $7E
     and  a                                        ; $4D1C: $A7

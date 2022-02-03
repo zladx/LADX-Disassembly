@@ -526,7 +526,7 @@ jr_019_4355:
     push bc                                       ; $436B: $C5
     call UpdateLinkWalkingAnimation_trampoline    ; $436C: $CD $F0 $0B
     pop  bc                                       ; $436F: $C1
-    ld   hl, wEntitiesUnknowTableP                ; $4370: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4370: $21 $40 $C4
     add  hl, bc                                   ; $4373: $09
     pop  af                                       ; $4374: $F1
     cp   $40                                      ; $4375: $FE $40
@@ -2322,7 +2322,7 @@ jr_019_506C:
     ld   hl, wEntitiesTransitionCountdownTable    ; $5086: $21 $E0 $C2
     add  hl, de                                   ; $5089: $19
     ld   [hl], $17                                ; $508A: $36 $17
-    ld   hl, wEntitiesUnknowTableP                ; $508C: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $508C: $21 $40 $C4
     add  hl, de                                   ; $508F: $19
     inc  [hl]                                     ; $5090: $34
     pop  bc                                       ; $5091: $C1
@@ -4494,7 +4494,7 @@ label_019_5F84:
     and  $01                                      ; $5F96: $E6 $01
     ret  nz                                       ; $5F98: $C0
 
-    ld   hl, wEntitiesUnknowTableP                ; $5F99: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5F99: $21 $40 $C4
     add  hl, bc                                   ; $5F9C: $09
     dec  [hl]                                     ; $5F9D: $35
     ret  nz                                       ; $5F9E: $C0
@@ -7596,7 +7596,7 @@ jr_019_7985:
     cp   ENTITY_TURTLE_ROCK_HEAD                  ; $79B8: $FE $7F
     jr   nz, .turtleRockHeadEnd                   ; $79BA: $20 $13
 
-    ld   hl, wEntitiesUnknowTableP                ; $79BC: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $79BC: $21 $40 $C4
     add  hl, bc                                   ; $79BF: $09
     ldh  a, [hMultiPurpose0]                      ; $79C0: $F0 $D7
     add  [hl]                                     ; $79C2: $86

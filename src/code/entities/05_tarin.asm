@@ -85,7 +85,7 @@ jr_005_4995:
     jr   jr_005_49D1                              ; $49CA: $18 $05
 
 jr_005_49CC:
-    ld   hl, wEntitiesUnknowTableP                ; $49CC: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $49CC: $21 $40 $C4
     add  hl, bc                                   ; $49CF: $09
     ld   [hl], b                                  ; $49D0: $70
 
@@ -106,7 +106,7 @@ func_005_49E5::
     cp   $20                                      ; $49EA: $FE $20
     jr   nc, jr_005_49FD                          ; $49EC: $30 $0F
 
-    ld   hl, wEntitiesUnknowTableP                ; $49EE: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $49EE: $21 $40 $C4
     add  hl, bc                                   ; $49F1: $09
     ld   a, [hl]                                  ; $49F2: $7E
     and  a                                        ; $49F3: $A7
@@ -196,7 +196,7 @@ jr_005_4A46:
     ld   hl, wEntitiesPosZTable                   ; $4A6E: $21 $10 $C3
     add  hl, de                                   ; $4A71: $19
     ld   [hl], a                                  ; $4A72: $77
-    ld   hl, wEntitiesUnknowTableP                ; $4A73: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4A73: $21 $40 $C4
     add  hl, de                                   ; $4A76: $19
     ld   [hl], $4C                                ; $4A77: $36 $4C
     ld   hl, wEntitiesTransitionCountdownTable    ; $4A79: $21 $E0 $C2

@@ -1223,8 +1223,8 @@ wEntitiesFlashCountdownTable::
 wEntitiesOptions1Table::
   ds $10 ; C430 - C43F
 
-; Entities-specific private state?
-wEntitiesUnknowTableP::
+; Entity-specific state.
+wEntitiesPrivateState4Table::
   ds $10 ; C440 - C44F
 
 ; Number of frame before a dropped item disappears

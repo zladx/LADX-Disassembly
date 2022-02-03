@@ -315,14 +315,14 @@ jr_005_5008:
     pop  de                                       ; $5017: $D1
 
 jr_005_5018:
-    ld   hl, wEntitiesUnknowTableP                ; $5018: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5018: $21 $40 $C4
     add  hl, bc                                   ; $501B: $09
     ld   [hl], d                                  ; $501C: $72
     jp   IncrementEntityState                     ; $501D: $C3 $12 $3B
 
 func_005_5020::
     call ReturnIfNonInteractive_05                ; $5020: $CD $3A $7A
-    ld   hl, wEntitiesUnknowTableP                ; $5023: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5023: $21 $40 $C4
     add  hl, bc                                   ; $5026: $09
     ld   d, [hl]                                  ; $5027: $56
     ld   hl, wEntitiesUnknownTableD               ; $5028: $21 $D0 $C2

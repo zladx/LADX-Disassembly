@@ -20,7 +20,7 @@ GenieEntityHandler::
 ._04 dw GenieState4Handler
 
 GenieState0Handler::
-    ld   hl, wEntitiesUnknowTableP                ; $4016: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4016: $21 $40 $C4
     add  hl, bc                                   ; $4019: $09
     ld   a, [hl]                                  ; $401A: $7E
     cp   GENIE_VAR_A                              ; $401B: $FE $03
@@ -912,7 +912,7 @@ func_004_4575::
     ld   hl, wEntitiesPosYTable                   ; $4597: $21 $10 $C2
     add  hl, bc                                   ; $459A: $09
     ld   [hl], a                                  ; $459B: $77
-    ld   hl, wEntitiesUnknowTableP                ; $459C: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $459C: $21 $40 $C4
     add  hl, bc                                   ; $459F: $09
     ld   a, [hl]                                  ; $45A0: $7E
     ld   hl, wEntitiesPosXTable                         ; $45A1: $21 $00 $C2
@@ -1023,7 +1023,7 @@ func_004_4634::
     ld   e, a                                     ; $464B: $5F
     ld   a, $50                                   ; $464C: $3E $50
     sub  e                                        ; $464E: $93
-    ld   hl, wEntitiesUnknowTableP                ; $464F: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $464F: $21 $40 $C4
     add  hl, bc                                   ; $4652: $09
     ld   [hl], a                                  ; $4653: $77
     ret                                           ; $4654: $C9
@@ -1066,7 +1066,7 @@ func_004_46F9::
     add  hl, bc                                   ; $4708: $09
     ld   a, [hl]                                  ; $4709: $7E
     ldh  [hActiveEntityVisualPosY], a             ; $470A: $E0 $EC
-    ld   hl, wEntitiesUnknowTableP                ; $470C: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $470C: $21 $40 $C4
     add  hl, bc                                   ; $470F: $09
     ld   a, [hl]                                  ; $4710: $7E
     ldh  [hActiveEntityPosX], a                               ; $4711: $E0 $EE

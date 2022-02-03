@@ -151,7 +151,7 @@ label_018_7A4B:
     cp   $10                                      ; $7A4B: $FE $10
     ret  nc                                       ; $7A4D: $D0
 
-    ld   hl, wEntitiesUnknowTableP                ; $7A4E: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $7A4E: $21 $40 $C4
     add  hl, bc                                   ; $7A51: $09
     ld   a, [hl]                                  ; $7A52: $7E
     and  a                                        ; $7A53: $A7

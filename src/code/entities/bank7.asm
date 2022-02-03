@@ -53,7 +53,7 @@ BushCrawlerEntityHandler::
     rra                                           ; $404A: $1F
     rra                                           ; $404B: $1F
     and  $01                                      ; $404C: $E6 $01
-    ld   hl, wEntitiesUnknowTableP                ; $404E: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $404E: $21 $40 $C4
     add  hl, bc                                   ; $4051: $09
     ld   [hl], a                                  ; $4052: $77
 
@@ -63,7 +63,7 @@ jr_007_4053:
     ldh  a, [hActiveEntityVisualPosY]             ; $4057: $F0 $EC
     sub  [hl]                                     ; $4059: $96
     ldh  [hActiveEntityVisualPosY], a             ; $405A: $E0 $EC
-    ld   hl, wEntitiesUnknowTableP                ; $405C: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $405C: $21 $40 $C4
     add  hl, bc                                   ; $405F: $09
     ld   a, [hl]                                  ; $4060: $7E
     ldh  [hActiveEntitySpriteVariant], a          ; $4061: $E0 $F1
@@ -102,7 +102,7 @@ jr_007_408A:
     jr   z, jr_007_40C1                           ; $4099: $28 $26
 
     ld   [hl], b                                  ; $409B: $70
-    ld   hl, wEntitiesUnknowTableP                ; $409C: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $409C: $21 $40 $C4
     add  hl, bc                                   ; $409F: $09
     ld   a, [hl]                                  ; $40A0: $7E
     xor  $01                                      ; $40A1: $EE $01
@@ -245,7 +245,7 @@ jr_007_415A:
     ld   hl, wEntitiesTypeTable                   ; $4188: $21 $A0 $C3
     add  hl, bc                                   ; $418B: $09
     ld   [hl], $05                                ; $418C: $36 $05
-    ld   hl, wEntitiesUnknowTableP                ; $418E: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $418E: $21 $40 $C4
     add  hl, bc                                   ; $4191: $09
     ld   a, [hl]                                  ; $4192: $7E
     xor  $01                                      ; $4193: $EE $01
@@ -825,7 +825,7 @@ func_007_4537::
     ld   hl, wEntitiesSpeedZTable                 ; $4561: $21 $20 $C3
     add  hl, de                                   ; $4564: $19
     ld   [hl], $20                                ; $4565: $36 $20
-    ld   hl, wEntitiesUnknowTableP                ; $4567: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4567: $21 $40 $C4
     add  hl, de                                   ; $456A: $19
     ld   [hl], $01                                ; $456B: $36 $01
     push bc                                       ; $456D: $C5
@@ -1864,7 +1864,7 @@ HoneycombEntityHandler::
     and  ROOM_STATUS_EVENT_2                      ; $4C99: $E6 $20
     jp   nz, func_007_7EA4                        ; $4C9B: $C2 $A4 $7E
 
-    ld   hl, wEntitiesUnknowTableP                ; $4C9E: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4C9E: $21 $40 $C4
     add  hl, bc                                   ; $4CA1: $09
     ld   a, [hl]                                  ; $4CA2: $7E
     and  a                                        ; $4CA3: $A7
@@ -1926,7 +1926,7 @@ func_007_4CEE::
     ld   hl, wEntitiesPosYTable                   ; $4CFE: $21 $10 $C2
     add  hl, de                                   ; $4D01: $19
     ld   [hl], a                                  ; $4D02: $77
-    ld   hl, wEntitiesUnknowTableP                ; $4D03: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4D03: $21 $40 $C4
     add  hl, de                                   ; $4D06: $19
     ld   [hl], $01                                ; $4D07: $36 $01
     ld   hl, wEntitiesSpeedXTable                 ; $4D09: $21 $40 $C2
@@ -3965,7 +3965,7 @@ jr_007_5A2A:
     and  $3F                                      ; $5A32: $E6 $3F
     ret  nz                                       ; $5A34: $C0
 
-    ld   hl, wEntitiesUnknowTableP                ; $5A35: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5A35: $21 $40 $C4
     add  hl, bc                                   ; $5A38: $09
     ld   a, [hl]                                  ; $5A39: $7E
     cp   $03                                      ; $5A3A: $FE $03
@@ -5625,7 +5625,7 @@ jr_007_643B:
     ld   e, $04                                   ; $6464: $1E $04
 
 jr_007_6466:
-    ld   hl, wEntitiesUnknowTableP                ; $6466: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $6466: $21 $40 $C4
     add  hl, bc                                   ; $6469: $09
     ld   a, [hl]                                  ; $646A: $7E
     cp   $04                                      ; $646B: $FE $04
@@ -5659,7 +5659,7 @@ jr_007_6488:
 jr_007_6489:
     call GetEntitySpeedYAddress                   ; $6489: $CD $05 $40
     ld   [hl], b                                  ; $648C: $70
-    ld   hl, wEntitiesUnknowTableP                ; $648D: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $648D: $21 $40 $C4
     add  hl, bc                                   ; $6490: $09
     ld   [hl], b                                  ; $6491: $70
     ret                                           ; $6492: $C9
@@ -6243,12 +6243,12 @@ jr_007_67F6:
     ld   hl, wEntitiesPrivateState2Table          ; $6801: $21 $C0 $C2
     add  hl, bc                                   ; $6804: $09
     ld   a, [hl]                                  ; $6805: $7E
-    ld   hl, wEntitiesUnknowTableP                ; $6806: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $6806: $21 $40 $C4
     add  hl, bc                                   ; $6809: $09
     add  [hl]                                     ; $680A: $86
     and  $0F                                      ; $680B: $E6 $0F
     ld   [hl], a                                  ; $680D: $77
-    ld   hl, wEntitiesUnknowTableP                ; $680E: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $680E: $21 $40 $C4
     add  hl, bc                                   ; $6811: $09
     ld   e, [hl]                                  ; $6812: $5E
     ld   d, b                                     ; $6813: $50
@@ -6604,7 +6604,7 @@ label_007_6A34:
 ;  - Master Stalfos
 ;  - Angler's Tunnel cascade
 MasterStalfosEntityHandler::
-    ld   hl, wEntitiesUnknowTableP                ; $6A41: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $6A41: $21 $40 $C4
     add  hl, bc                                   ; $6A44: $09
     ld   a, [hl]                                  ; $6A45: $7E
     cp   $FF                                      ; $6A46: $FE $FF
@@ -8190,7 +8190,7 @@ jr_007_74D1:
     add  [hl]                                     ; $74D8: $86
     inc  [hl]                                     ; $74D9: $34
     ld   c, a                                     ; $74DA: $4F
-    ld   hl, wEntitiesUnknowTableP                ; $74DB: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $74DB: $21 $40 $C4
     add  hl, de                                   ; $74DE: $19
     ldh  a, [hActiveEntityPosY]                   ; $74DF: $F0 $EF
     sub  $10                                      ; $74E1: $D6 $10

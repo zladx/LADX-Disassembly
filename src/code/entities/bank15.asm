@@ -2927,7 +2927,7 @@ jr_015_57E5:
     call GetEntityTransitionCountdown             ; $57F4: $CD $05 $0C
     ld   [hl], $40                                ; $57F7: $36 $40
     call IncrementEntityState                     ; $57F9: $CD $12 $3B
-    ld   hl, wEntitiesUnknownTableD               ; $57FC: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $57FC: $21 $D0 $C2
     add  hl, bc                                   ; $57FF: $09
     ld   a, [hl]                                  ; $5800: $7E
     and  a                                        ; $5801: $A7
@@ -5712,7 +5712,7 @@ jr_015_6F8B:
     ld   hl, wEntitiesPrivateState2Table          ; $6F8B: $21 $C0 $C2
     add  hl, bc                                   ; $6F8E: $09
     ld   e, [hl]                                  ; $6F8F: $5E
-    ld   hl, wEntitiesUnknownTableD               ; $6F90: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $6F90: $21 $D0 $C2
     add  hl, bc                                   ; $6F93: $09
     ld   a, [hl]                                  ; $6F94: $7E
     add  e                                        ; $6F95: $83
@@ -6449,7 +6449,7 @@ jr_015_7506:
     ret                                           ; $750C: $C9
 
 BeetleSpawnerEntityHandler::
-    ld   hl, wEntitiesUnknownTableD               ; $750D: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $750D: $21 $D0 $C2
     add  hl, bc                                   ; $7510: $09
     ld   a, [hl]                                  ; $7511: $7E
     and  a                                        ; $7512: $A7
@@ -6490,7 +6490,7 @@ BeetleSpawnerEntityHandler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $754D: $21 $40 $C3
     add  hl, de                                   ; $7550: $19
     ld   [hl], $12                                ; $7551: $36 $12
-    ld   hl, wEntitiesUnknownTableD               ; $7553: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $7553: $21 $D0 $C2
     add  hl, de                                   ; $7556: $19
     ld   [hl], $01                                ; $7557: $36 $01
     ld   hl, wEntitiesTransitionCountdownTable    ; $7559: $21 $E0 $C2

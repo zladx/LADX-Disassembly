@@ -72,7 +72,7 @@ jr_006_60D0:
     and  $01                                      ; $60D3: $E6 $01
     add  e                                        ; $60D5: $83
     call SetEntitySpriteVariant                   ; $60D6: $CD $0C $3B
-    ld   hl, wEntitiesUnknownTableD               ; $60D9: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $60D9: $21 $D0 $C2
     add  hl, bc                                   ; $60DC: $09
     ld   a, [hl]                                  ; $60DD: $7E
     JP_TABLE                                      ; $60DE
@@ -93,7 +93,7 @@ jr_006_60F0:
     ldh  [hFFBD], a                               ; $60F5: $E0 $BD
 
 label_006_60F7:
-    ld   hl, wEntitiesUnknownTableD               ; $60F7: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $60F7: $21 $D0 $C2
     add  hl, bc                                   ; $60FA: $09
     inc  [hl]                                     ; $60FB: $34
     ret                                           ; $60FC: $C9

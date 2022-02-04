@@ -66,7 +66,7 @@ jr_006_5017:
     jp   label_3B23                               ; $5017: $C3 $23 $3B
 
 jr_006_501A:
-    ld   hl, wEntitiesUnknownTableD               ; $501A: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $501A: $21 $D0 $C2
     add  hl, bc                                   ; $501D: $09
     inc  [hl]                                     ; $501E: $34
     ld   a, [hl]                                  ; $501F: $7E

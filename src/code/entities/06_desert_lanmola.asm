@@ -5,7 +5,7 @@ Data_006_55E5::
     db   $FC, $08, $F8
 
 DesertLanmolaEntityHandler::
-    ld   hl, wEntitiesUnknownTableD               ; $55E8: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $55E8: $21 $D0 $C2
     add  hl, bc                                   ; $55EB: $09
     ld   a, [hl]                                  ; $55EC: $7E
     cp   $02                                      ; $55ED: $FE $02
@@ -199,7 +199,7 @@ jr_006_56D9:
     ld   hl, wEntitiesSpeedYTable                 ; $570E: $21 $50 $C2
     add  hl, de                                   ; $5711: $19
     ld   [hl], $F0                                ; $5712: $36 $F0
-    ld   hl, wEntitiesUnknownTableD               ; $5714: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5714: $21 $D0 $C2
     add  hl, de                                   ; $5717: $19
     ld   [hl], $02                                ; $5718: $36 $02
     ld   hl, wEntitiesPhysicsFlagsTable           ; $571A: $21 $40 $C3

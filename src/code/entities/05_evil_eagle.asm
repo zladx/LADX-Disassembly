@@ -277,7 +277,7 @@ func_005_5B6B::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5B9B: $21 $40 $C3
     add  hl, bc                                   ; $5B9E: $09
     ld   [hl], $42                                ; $5B9F: $36 $42
-    ld   hl, wEntitiesUnknownTableD               ; $5BA1: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5BA1: $21 $D0 $C2
     add  hl, bc                                   ; $5BA4: $09
     inc  [hl]                                     ; $5BA5: $34
     ld   a, [hl]                                  ; $5BA6: $7E

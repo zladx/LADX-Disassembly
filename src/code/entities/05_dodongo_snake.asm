@@ -220,7 +220,7 @@ func_005_6957::
     ld   [hl], a                                  ; $6963: $77
     call IncrementEntityState                     ; $6964: $CD $12 $3B
     ld   [hl], b                                  ; $6967: $70
-    ld   hl, wEntitiesUnknownTableD               ; $6968: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $6968: $21 $D0 $C2
     add  hl, bc                                   ; $696B: $09
     ld   a, [hl]                                  ; $696C: $7E
     inc  a                                        ; $696D: $3C

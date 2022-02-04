@@ -7,7 +7,7 @@ SmasherEntityHandler::
 
     ld   a, c                                     ; $4512: $79
     ld   [$D202], a                               ; $4513: $EA $02 $D2
-    ld   hl, wEntitiesUnknownTableD               ; $4516: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4516: $21 $D0 $C2
     add  hl, bc                                   ; $4519: $09
     ld   a, [hl]                                  ; $451A: $7E
     and  a                                        ; $451B: $A7

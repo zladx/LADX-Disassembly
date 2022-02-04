@@ -18,7 +18,7 @@ jr_018_6FDB:
     and  a                                        ; $6FF4: $A7
     jr   z, jr_018_7028                           ; $6FF5: $28 $31
 
-    ld   hl, wEntitiesUnknownTableD               ; $6FF7: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $6FF7: $21 $D0 $C2
     add  hl, bc                                   ; $6FFA: $09
     ld   a, [hl]                                  ; $6FFB: $7E
     and  a                                        ; $6FFC: $A7

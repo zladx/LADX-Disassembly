@@ -986,7 +986,7 @@ Data_007_46B3::
     db   $00, $00, $01, $02, $02, $02, $01, $00
 
 MermaidEntityHandler::
-    ld   hl, wEntitiesUnknownTableD               ; $46BB: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $46BB: $21 $D0 $C2
     add  hl, bc                                   ; $46BE: $09
     ld   a, [hl]                                  ; $46BF: $7E
     and  a                                        ; $46C0: $A7
@@ -2957,7 +2957,7 @@ func_007_5383::
     call GetEntityTransitionCountdown             ; $5383: $CD $05 $0C
     jr   nz, jr_007_539E                          ; $5386: $20 $16
 
-    ld   hl, wEntitiesUnknownTableD               ; $5388: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5388: $21 $D0 $C2
     add  hl, bc                                   ; $538B: $09
     ld   a, [hl]                                  ; $538C: $7E
     call SetEntitySpriteVariant                   ; $538D: $CD $0C $3B
@@ -2977,7 +2977,7 @@ jr_007_539E:
     call func_007_52E0                            ; $53A7: $CD $E0 $52
     sra  a                                        ; $53AA: $CB $2F
     add  $02                                      ; $53AC: $C6 $02
-    ld   hl, wEntitiesUnknownTableD               ; $53AE: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $53AE: $21 $D0 $C2
     add  hl, bc                                   ; $53B1: $09
     ld   [hl], a                                  ; $53B2: $77
     ld   a, $18                                   ; $53B3: $3E $18
@@ -3906,7 +3906,7 @@ jr_007_59D5:
     and  $1F                                      ; $59D7: $E6 $1F
     jr   nz, jr_007_5A2A                          ; $59D9: $20 $4F
 
-    ld   hl, wEntitiesUnknownTableD               ; $59DB: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $59DB: $21 $D0 $C2
     add  hl, bc                                   ; $59DE: $09
     ld   a, [hl]                                  ; $59DF: $7E
     cp   $07                                      ; $59E0: $FE $07
@@ -3920,7 +3920,7 @@ jr_007_59E2:
 
     push bc                                       ; $59EB: $C5
     call func_007_733F                            ; $59EC: $CD $3F $73
-    ld   hl, wEntitiesUnknownTableD               ; $59EF: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $59EF: $21 $D0 $C2
     add  hl, bc                                   ; $59F2: $09
     ld   c, [hl]                                  ; $59F3: $4E
     inc  [hl]                                     ; $59F4: $34
@@ -5194,7 +5194,7 @@ SideViewWeightsEntityHandler::
     call RenderActiveEntitySpritesPair            ; $61D5: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $61D8: $CD $96 $7D
     call func_007_639E                            ; $61DB: $CD $9E $63
-    ld   hl, wEntitiesUnknownTableD               ; $61DE: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $61DE: $21 $D0 $C2
     add  hl, bc                                   ; $61E1: $09
     ld   a, [hl]                                  ; $61E2: $7E
     ld   e, a                                     ; $61E3: $5F
@@ -5208,7 +5208,7 @@ SideViewWeightsEntityHandler::
     jr   z, jr_007_6248                           ; $61ED: $28 $59
 
     call func_007_631C                            ; $61EF: $CD $1C $63
-    ld   hl, wEntitiesUnknownTableD               ; $61F2: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $61F2: $21 $D0 $C2
     add  hl, de                                   ; $61F5: $19
     ld   [hl], $F0                                ; $61F6: $36 $F0
     ld   e, $10                                   ; $61F8: $1E $10
@@ -5289,7 +5289,7 @@ jr_007_6255:
 
 jr_007_6256:
     call func_007_631C                            ; $6256: $CD $1C $63
-    ld   hl, wEntitiesUnknownTableD               ; $6259: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $6259: $21 $D0 $C2
     add  hl, de                                   ; $625C: $19
     ld   [hl], $00                                ; $625D: $36 $00
 
@@ -6232,7 +6232,7 @@ jr_007_67EB:
     ld   [hl], b                                  ; $67F5: $70
 
 jr_007_67F6:
-    ld   hl, wEntitiesUnknownTableD               ; $67F6: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $67F6: $21 $D0 $C2
     add  hl, bc                                   ; $67F9: $09
     inc  [hl]                                     ; $67FA: $34
     ld   a, [hl]                                  ; $67FB: $7E
@@ -9063,7 +9063,7 @@ func_007_79D7::
     cp   MAP_BOWWOW_HIDEOUT                       ; $79E5: $FE $15
     jr   nz, jr_007_79F9                          ; $79E7: $20 $10
 
-    ld   hl, wEntitiesUnknownTableD               ; $79E9: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $79E9: $21 $D0 $C2
     add  hl, bc                                   ; $79EC: $09
     ld   a, [hl]                                  ; $79ED: $7E
     and  a                                        ; $79EE: $A7

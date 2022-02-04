@@ -8,7 +8,7 @@ CueBallEntityHandler::
     and  a                                        ; $4B7F: $A7
     jp   nz, label_006_4E88                       ; $4B80: $C2 $88 $4E
 
-    ld   hl, wEntitiesUnknownTableD               ; $4B83: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4B83: $21 $D0 $C2
     add  hl, bc                                   ; $4B86: $09
     ld   a, [hl]                                  ; $4B87: $7E
     and  a                                        ; $4B88: $A7

@@ -78,7 +78,7 @@ KeeseFlyingHandler::
     jr   label_006_67E6                           ; $67A0: $18 $44
 
 jr_006_67A2:
-    ld   hl, wEntitiesUnknownTableD               ; $67A2: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $67A2: $21 $D0 $C2
     add  hl, bc                                   ; $67A5: $09
     inc  [hl]                                     ; $67A6: $34
     ld   a, [hl]                                  ; $67A7: $7E

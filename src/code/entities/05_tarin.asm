@@ -147,7 +147,7 @@ func_005_4A17::
     push bc                                       ; $4A27: $C5
     call UpdateLinkWalkingAnimation_trampoline    ; $4A28: $CD $F0 $0B
     pop  bc                                       ; $4A2B: $C1
-    ld   hl, wEntitiesUnknownTableD               ; $4A2C: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4A2C: $21 $D0 $C2
     add  hl, bc                                   ; $4A2F: $09
     ld   e, [hl]                                  ; $4A30: $5E
     ld   hl, wEntitiesPrivateState2Table          ; $4A31: $21 $C0 $C2
@@ -221,7 +221,7 @@ jr_005_4A46:
     ret                                           ; $4A9D: $C9
 
 jr_005_4A9E:
-    ld   hl, wEntitiesUnknownTableD               ; $4A9E: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4A9E: $21 $D0 $C2
     add  hl, bc                                   ; $4AA1: $09
     ldh  a, [hFrameCounter]                       ; $4AA2: $F0 $E7
     and  $01                                      ; $4AA4: $E6 $01

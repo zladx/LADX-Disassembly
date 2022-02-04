@@ -31,10 +31,10 @@ ResetEntity::
     ld   hl, wEntitiesPrivateState2Table          ; $4026: $21 $C0 $C2
     add  hl, bc                                   ; $4029: $09
     ld   [hl], b                                  ; $402A: $70
-    ld   hl, wEntitiesUnknownTableD               ; $402B: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $402B: $21 $D0 $C2
     add  hl, bc                                   ; $402E: $09
     ld   [hl], b                                  ; $402F: $70
-    ld   hl, wEntitiesPrivateState3Table          ; $4030: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4030: $21 $40 $C4
     add  hl, bc                                   ; $4033: $09
     ld   [hl], b                                  ; $4034: $70
     ld   hl, wEntitiesUnknowTableR                ; $4035: $21 $90 $C3

@@ -1036,13 +1036,13 @@ wEntitiesPrivateState1Table::
 wEntitiesPrivateState2Table::
   ds $10 ; C2C0 - C2CF
 
-; Is the item a droppable? Or pickable?
+; Entity-specific state.
 ;
-; Possible values:
+; When used by a droppble entity, possible values:
 ;   0: ??
 ;   1: ??
 ;   2: pickable item cannot be picked up by sword
-wEntitiesUnknownTableD::
+wEntitiesPrivateState3Table::
   ds $10 ; C2D0 - C2DF
 
 ; Frames before the next state transition of the entity

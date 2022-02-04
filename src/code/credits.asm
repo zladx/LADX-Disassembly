@@ -6535,7 +6535,7 @@ jr_017_7CC8:
     ldh  [hJingle], a                             ; $7CD2: $E0 $F2
 
 jr_017_7CD4:
-    ld   hl, wEntitiesUnknownTableD               ; $7CD4: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $7CD4: $21 $D0 $C2
     add  hl, bc                                   ; $7CD7: $09
     ld   e, [hl]                                  ; $7CD8: $5E
     ld   a, [hl]                                  ; $7CD9: $7E

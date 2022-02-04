@@ -28,7 +28,7 @@ BigFairyEntityHandler::
     jp   func_036_505F_trampoline                 ; $70B5: $C3 $47 $0A
 
 jr_006_70B8:
-    ld   hl, wEntitiesUnknownTableD               ; $70B8: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $70B8: $21 $D0 $C2
     add  hl, bc                                   ; $70BB: $09
     ld   a, [hl]                                  ; $70BC: $7E
     and  a                                        ; $70BD: $A7
@@ -206,7 +206,7 @@ jr_006_71BA:
     call SpawnNewEntity_trampoline                ; $71CD: $CD $86 $3B
     jr   c, jr_006_71F0                           ; $71D0: $38 $1E
 
-    ld   hl, wEntitiesUnknownTableD               ; $71D2: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $71D2: $21 $D0 $C2
     add  hl, de                                   ; $71D5: $19
     ld   [hl], $01                                ; $71D6: $36 $01
     ldh  a, [hMultiPurpose0]                      ; $71D8: $F0 $D7

@@ -816,7 +816,7 @@ EntityInitAvalaunch::
     ld   hl, wEntitiesPosXTable                   ; $4BDC: $21 $00 $C2
     add  hl, bc                                   ; $4BDF: $09
     ld   [hl], $50                                ; $4BE0: $36 $50
-    ld   hl, wEntitiesUnknownTableD               ; $4BE2: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4BE2: $21 $D0 $C2
     add  hl, bc                                   ; $4BE5: $09
     ld   [hl], $00                                ; $4BE6: $36 $00
     jp   EntityInitNoop                           ; $4BE8: $C3 $56 $4B
@@ -876,7 +876,7 @@ EntityInitGiantBuzzBlob::
     add  hl, bc                                   ; $4C30: $09
     ld   [hl], $0C                                ; $4C31: $36 $0C
     xor  a                                        ; $4C33: $AF
-    ld   hl, wEntitiesUnknownTableD               ; $4C34: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4C34: $21 $D0 $C2
     add  hl, bc                                   ; $4C37: $09
     ld   [hl], a                                  ; $4C38: $77
     ld   hl, wEntitiesPosXTable                   ; $4C39: $21 $00 $C2
@@ -1184,7 +1184,7 @@ ENDC
     ld   [hl], $01                                ; $4DF8: $36 $01
     call GetEntityTransitionCountdown             ; $4DFA: $CD $05 $0C
     ld   [hl], $80                                ; $4DFD: $36 $80
-    ld   hl, wEntitiesUnknownTableD               ; $4DFF: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4DFF: $21 $D0 $C2
     add  hl, bc                                   ; $4E02: $09
     ld   [hl], b                                  ; $4E03: $70
 
@@ -1359,7 +1359,7 @@ jr_003_4EEC:
     ret                                           ; $4EFA: $C9
 
 EntityInitSecretSeashell::
-    ld   hl, wEntitiesUnknownTableD               ; $4EFB: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4EFB: $21 $D0 $C2
     add  hl, bc                                   ; $4EFE: $09
     ld   [hl], $02                                ; $4EFF: $36 $02
     ldh  a, [hMapRoom]                            ; $4F01: $F0 $F6
@@ -1377,7 +1377,7 @@ jr_003_4F0F:
     jp   jr_003_4F24                              ; $4F0F: $C3 $24 $4F
 
 func_003_4F12::
-    ld   hl, wEntitiesUnknownTableD               ; $4F12: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4F12: $21 $D0 $C2
     add  hl, bc                                   ; $4F15: $09
     ld   [hl], $01                                ; $4F16: $36 $01
     ld   a, [wIsIndoor]                           ; $4F18: $FA $A5 $DB
@@ -1385,7 +1385,7 @@ func_003_4F12::
     jr   z, jr_003_4F24                           ; $4F1C: $28 $06
 
 EntityInitPermanentDroppable::
-    ld   hl, wEntitiesUnknownTableD               ; $4F1E: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4F1E: $21 $D0 $C2
     add  hl, bc                                   ; $4F21: $09
     ld   [hl], $02                                ; $4F22: $36 $02
 
@@ -1516,7 +1516,7 @@ EntityInitGhini::
     cp   ENTITY_GHINI                             ; $4FB7: $FE $12
     jr   nz, .ghiniEnd                            ; $4FB9: $20 $0D
 
-    ld   hl, wEntitiesUnknownTableD               ; $4FBB: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4FBB: $21 $D0 $C2
     add  hl, bc                                   ; $4FBE: $09
     ld   [hl], $01                                ; $4FBF: $36 $01
     ld   hl, wEntitiesPosZTable                   ; $4FC1: $21 $10 $C3
@@ -3651,7 +3651,7 @@ func_003_5F33::
     jp   IncrementEntityState                     ; $5F5C: $C3 $12 $3B
 
 jr_003_5F5F:
-    ld   hl, wEntitiesUnknownTableD               ; $5F5F: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5F5F: $21 $D0 $C2
     add  hl, bc                                   ; $5F62: $09
     dec  [hl]                                     ; $5F63: $35
     ld   a, [hl]                                  ; $5F64: $7E
@@ -4049,7 +4049,7 @@ jr_003_61DD:
     ret                                           ; $61DD: $C9
 
 func_003_61DE::
-    ld   hl, wEntitiesUnknownTableD               ; $61DE: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $61DE: $21 $D0 $C2
     add  hl, bc                                   ; $61E1: $09
     ld   a, [hl]                                  ; $61E2: $7E
     and  a                                        ; $61E3: $A7
@@ -4143,7 +4143,7 @@ jr_003_6243:
     jr   nc, jr_003_629C                          ; $6269: $30 $31
 
 jr_003_626B:
-    ld   hl, wEntitiesUnknownTableD               ; $626B: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $626B: $21 $D0 $C2
     add  hl, bc                                   ; $626E: $09
     ld   [hl], b                                  ; $626F: $70
     ld   hl, wEntitiesPrivateState4Table          ; $6270: $21 $40 $C4

@@ -1245,11 +1245,14 @@ func_003_4E35::
     ld   hl, wEntitiesStatusTable                 ; $4E56: $21 $80 $C2
     add  hl, bc                                   ; $4E59: $09
     ld   [hl], $07                                ; $4E5A: $36 $07
-    ld   a, $02                                   ; $4E5C: $3E $02
+
+    ld   a, WAVE_SFX_ZIP                          ; $4E5C: $3E $02
     ldh  [hWaveSfx], a                            ; $4E5E: $E0 $F3
-    ld   hl, wEntitiesUnknowTableW                ; $4E60: $21 $90 $C4
+
+    ld   hl, wEntitiesLiftedTable                 ; $4E60: $21 $90 $C4
     add  hl, bc                                   ; $4E63: $09
     ld   [hl], b                                  ; $4E64: $70
+
     call GetEntityTransitionCountdown             ; $4E65: $CD $05 $0C
     ld   [hl], $02                                ; $4E68: $36 $02
     ldh  a, [hLinkDirection]                      ; $4E6A: $F0 $9E
@@ -2594,7 +2597,7 @@ jr_003_5745:
     call ExecuteActiveEntityHandler_trampoline    ; $5745: $CD $81 $3A
 
 jr_003_5748:
-    ld   hl, wEntitiesUnknowTableW                ; $5748: $21 $90 $C4
+    ld   hl, wEntitiesLiftedTable                 ; $5748: $21 $90 $C4
     add  hl, bc                                   ; $574B: $09
     ld   a, [hl]                                  ; $574C: $7E
     ld   e, a                                     ; $574D: $5F

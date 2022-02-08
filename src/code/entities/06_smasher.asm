@@ -482,7 +482,7 @@ jr_006_482D:
     ld   hl, wEntitiesStatusTable                 ; $4838: $21 $80 $C2
     add  hl, bc                                   ; $483B: $09
     ld   [hl], $07                                ; $483C: $36 $07
-    ld   hl, wEntitiesUnknowTableW                ; $483E: $21 $90 $C4
+    ld   hl, wEntitiesLiftedTable                 ; $483E: $21 $90 $C4
     add  hl, bc                                   ; $4841: $09
     ld   [hl], b                                  ; $4842: $70
     ldh  a, [hLinkDirection]                      ; $4843: $F0 $9E

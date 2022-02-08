@@ -147,7 +147,7 @@ jr_019_40F4:
     ld   hl, wEntitiesStatusTable                 ; $4102: $21 $80 $C2
     add  hl, bc                                   ; $4105: $09
     ld   [hl], $07                                ; $4106: $36 $07
-    ld   hl, wEntitiesUnknowTableW                ; $4108: $21 $90 $C4
+    ld   hl, wEntitiesLiftedTable                 ; $4108: $21 $90 $C4
     add  hl, bc                                   ; $410B: $09
     ld   [hl], b                                  ; $410C: $70
     ldh  a, [hLinkDirection]                      ; $410D: $F0 $9E
@@ -3626,7 +3626,7 @@ jr_019_5950:
     ld   hl, wEntitiesStatusTable                 ; $5959: $21 $80 $C2
     add  hl, bc                                   ; $595C: $09
     ld   [hl], $07                                ; $595D: $36 $07
-    ld   hl, wEntitiesUnknowTableW                ; $595F: $21 $90 $C4
+    ld   hl, wEntitiesLiftedTable                 ; $595F: $21 $90 $C4
     add  hl, bc                                   ; $5962: $09
     ld   [hl], b                                  ; $5963: $70
     call GetEntityTransitionCountdown             ; $5964: $CD $05 $0C
@@ -3873,7 +3873,7 @@ jr_019_5AC4:
     ld   hl, wEntitiesStatusTable                 ; $5AD6: $21 $80 $C2
     add  hl, bc                                   ; $5AD9: $09
     ld   [hl], $07                                ; $5ADA: $36 $07
-    ld   hl, wEntitiesUnknowTableW                ; $5ADC: $21 $90 $C4
+    ld   hl, wEntitiesLiftedTable                 ; $5ADC: $21 $90 $C4
     add  hl, bc                                   ; $5ADF: $09
     ld   [hl], b                                  ; $5AE0: $70
     call GetEntityTransitionCountdown             ; $5AE1: $CD $05 $0C

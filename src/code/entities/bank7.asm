@@ -233,7 +233,7 @@ jr_007_415A:
     ld   hl, wEntitiesPrivateState5Table          ; $416E: $21 $90 $C3
     add  hl, bc                                   ; $4171: $09
     ld   [hl], $01                                ; $4172: $36 $01
-    ld   hl, wEntitiesUnknowTableW                ; $4174: $21 $90 $C4
+    ld   hl, wEntitiesLiftedTable                 ; $4174: $21 $90 $C4
     add  hl, bc                                   ; $4177: $09
     ld   [hl], b                                  ; $4178: $70
     ldh  a, [hLinkDirection]                      ; $4179: $F0 $9E
@@ -5060,7 +5060,7 @@ ENDC
     ld   hl, wEntitiesStatusTable                 ; $6119: $21 $80 $C2
     add  hl, bc                                   ; $611C: $09
     ld   [hl], $07                                ; $611D: $36 $07
-    ld   hl, wEntitiesUnknowTableW                ; $611F: $21 $90 $C4
+    ld   hl, wEntitiesLiftedTable                 ; $611F: $21 $90 $C4
     add  hl, bc                                   ; $6122: $09
     ld   [hl], b                                  ; $6123: $70
     ldh  a, [hLinkDirection]                      ; $6124: $F0 $9E
@@ -8630,7 +8630,7 @@ jr_007_775A:
     ld   hl, wEntitiesStatusTable                 ; $7769: $21 $80 $C2
     add  hl, bc                                   ; $776C: $09
     ld   [hl], $07                                ; $776D: $36 $07
-    ld   hl, wEntitiesUnknowTableW                ; $776F: $21 $90 $C4
+    ld   hl, wEntitiesLiftedTable                 ; $776F: $21 $90 $C4
     add  hl, bc                                   ; $7772: $09
     ld   [hl], b                                  ; $7773: $70
     ldh  a, [hLinkDirection]                      ; $7774: $F0 $9E

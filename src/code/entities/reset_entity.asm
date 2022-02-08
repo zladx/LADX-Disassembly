@@ -81,7 +81,7 @@ ResetEntity::
     ld   hl, wEntitiesPrivateCountdown3Table      ; $407A: $21 $80 $C4
     add  hl, bc                                   ; $407D: $09
     ld   [hl], b                                  ; $407E: $70
-    ld   hl, wEntitiesUnknowTableW                ; $407F: $21 $90 $C4
+    ld   hl, wEntitiesLiftedTable                 ; $407F: $21 $90 $C4
     add  hl, bc                                   ; $4082: $09
     ld   [hl], b                                  ; $4083: $70
     ld   hl, wEntitiesFlashCountdownTable         ; $4084: $21 $20 $C4

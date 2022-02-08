@@ -1256,8 +1256,13 @@ wEntitiesUnknowTableI::
 wEntitiesPrivateCountdown3Table::
   ds $10 ; C480 - C48F
 
-; TODO comment
-wEntitiesUnknowTableW::
+; Is the entity being lifted by Link?
+;
+; Possible values:
+;  0:   not lifted
+;  1-3: being lifted (during the animation)
+;  4:   lifted
+wEntitiesLiftedTable::
   ds $10 ; C490 - C49F
 
 ; Is the entity recoiling from a power hit

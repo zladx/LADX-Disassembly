@@ -328,7 +328,7 @@ jr_004_41EC:
     ld   hl, wEntitiesStatusTable                   ; $41F6: $21 $80 $C2
     add  hl, bc                                   ; $41F9: $09
     ld   [hl], $07                                ; $41FA: $36 $07
-    ld   hl, wEntitiesUnknowTableW                ; $41FC: $21 $90 $C4
+    ld   hl, wEntitiesLiftedTable                 ; $41FC: $21 $90 $C4
     add  hl, bc                                   ; $41FF: $09
     ld   [hl], b                                  ; $4200: $70
     ldh  a, [hLinkDirection]                      ; $4201: $F0 $9E

@@ -57,7 +57,7 @@ ResetEntity::
     ld   [hl], b                                  ; $4052: $70
     xor  a                                        ; $4053: $AF
     call SetEntitySpriteVariant                   ; $4054: $CD $0C $3B
-    ld   hl, wEntitiesUnknowTableY                ; $4057: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4057: $21 $D0 $C3
     add  hl, bc                                   ; $405A: $09
     ld   [hl], b                                  ; $405B: $70
     ld   hl, wEntitiesHealthTable                 ; $405C: $21 $60 $C3

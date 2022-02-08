@@ -671,6 +671,7 @@ Data_027_7A0B::
     db   $02, $02, $02, $02, $03, $03, $03, $03   ; $7ABB
     db   $04, $04, $04, $04, $05, $05, $05, $05   ; $7AC3
 
+; Fly Marin as seagull upwards?
 func_027_7ACB::
     ld   a, [wD016]                               ; $7ACB: $FA $16 $D0
     cp   $C0                                      ; $7ACE: $FE $C0
@@ -694,24 +695,27 @@ jr_027_7ADE:
     jr   jr_027_7B07                              ; $7AE6: $18 $1F
 
 jr_027_7AE8:
-    ld   hl, wEntitiesUnknowTableY                ; $7AE8: $21 $D0 $C3
+    ; Increment wEntitiesInertiaTable[bc]
+    ld   hl, wEntitiesInertiaTable                ; $7AE8: $21 $D0 $C3
     add  hl, bc                                   ; $7AEB: $09
     ld   a, [hl]                                  ; $7AEC: $7E
     inc  a                                        ; $7AED: $3C
     ld   [hl], a                                  ; $7AEE: $77
-    and  $1F                                      ; $7AEF: $E6 $1F
-    jr   nz, jr_027_7AFD                          ; $7AF1: $20 $0A
 
+    ; Every 32 frames…
+    and  $1F                                      ; $7AEF: $E6 $1F
+    jr   nz, .done                                ; $7AF1: $20 $0A
+    ; if the Y speed hasn't maxed out yet…
     ld   hl, wEntitiesSpeedYTable                 ; $7AF3: $21 $50 $C2
     add  hl, bc                                   ; $7AF6: $09
     ld   a, [hl]                                  ; $7AF7: $7E
     cp   $FF                                      ; $7AF8: $FE $FF
-    jr   z, jr_027_7AFD                           ; $7AFA: $28 $01
-
+    jr   z, .done                                 ; $7AFA: $28 $01
+    ; increment the Y speed.
     inc  [hl]                                     ; $7AFC: $34
-
-jr_027_7AFD:
+.done
     call UpdateEntityPosWithSpeed_27              ; $7AFD: $CD $18 $7B
+
     ldh  a, [hActiveEntityPosX]                   ; $7B00: $F0 $EE
     cp   $B0                                      ; $7B02: $FE $B0
     jp   nc, label_027_7B51                       ; $7B04: $D2 $51 $7B

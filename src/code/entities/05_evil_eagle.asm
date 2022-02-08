@@ -423,7 +423,7 @@ func_005_5C5B::
     call IncrementEntityState                     ; $5C78: $CD $12 $3B
 
 jr_005_5C7B:
-    ld   hl, wEntitiesUnknowTableY                ; $5C7B: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5C7B: $21 $D0 $C3
     add  hl, bc                                   ; $5C7E: $09
     inc  [hl]                                     ; $5C7F: $34
     ld   a, [hl]                                  ; $5C80: $7E
@@ -466,7 +466,7 @@ func_005_5CAD::
     call IncrementEntityState                     ; $5CB6: $CD $12 $3B
 
 func_005_5CB9::
-    ld   hl, wEntitiesUnknowTableY                ; $5CB9: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5CB9: $21 $D0 $C3
     add  hl, bc                                   ; $5CBC: $09
     inc  [hl]                                     ; $5CBD: $34
     ld   a, [hl]                                  ; $5CBE: $7E

@@ -89,7 +89,7 @@ func_005_6891::
     call IncrementEntityState                     ; $6898: $CD $12 $3B
 
 jr_005_689B:
-    ld   hl, wEntitiesUnknowTableY                ; $689B: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $689B: $21 $D0 $C3
     add  hl, bc                                   ; $689E: $09
     ld   a, [hl]                                  ; $689F: $7E
     inc  a                                        ; $68A0: $3C
@@ -379,7 +379,7 @@ jr_005_6A56:
     jp   CopyEntityPositionToActivePosition       ; $6A5C: $C3 $8A $3D
 
 func_005_6A5F::
-    ld   hl, wEntitiesUnknowTableY                ; $6A5F: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6A5F: $21 $D0 $C3
     add  hl, bc                                   ; $6A62: $09
     ld   a, [hl]                                  ; $6A63: $7E
     ldh  [hMultiPurpose0], a                      ; $6A64: $E0 $D7
@@ -424,7 +424,7 @@ func_005_6A5F::
     jp   RenderActiveEntitySpritesPair                ; $6AA2: $C3 $C0 $3B
 
 func_005_6AA5::
-    ld   hl, wEntitiesUnknowTableY                ; $6AA5: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6AA5: $21 $D0 $C3
     add  hl, bc                                   ; $6AA8: $09
     ld   a, [hl]                                  ; $6AA9: $7E
     ldh  [hMultiPurpose0], a                      ; $6AAA: $E0 $D7

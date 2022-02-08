@@ -47,7 +47,7 @@ jr_018_552F:
 ._08 dw WalrusState8Handler                       ; $5545
 
 WalrusState0Handler::
-    ld   hl, wEntitiesUnknowTableY                ; $5547: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5547: $21 $D0 $C3
     add  hl, bc                                   ; $554A: $09
     inc  [hl]                                     ; $554B: $34
     ld   a, $7F                                   ; $554C: $3E $7F

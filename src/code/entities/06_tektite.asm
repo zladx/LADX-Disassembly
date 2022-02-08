@@ -65,7 +65,7 @@ jr_006_7918:
     ret                                           ; $7920: $C9
 
 jr_006_7921:
-    ld   hl, wEntitiesUnknowTableY                ; $7921: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7921: $21 $D0 $C3
     add  hl, bc                                   ; $7924: $09
     inc  [hl]                                     ; $7925: $34
     ld   a, [hl]                                  ; $7926: $7E

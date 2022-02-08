@@ -27,7 +27,7 @@ label_006_4EB7:
     and  a                                        ; $4EC6: $A7
     jr   z, jr_006_4EE3                           ; $4EC7: $28 $1A
 
-    ld   hl, wEntitiesUnknowTableY                ; $4EC9: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4EC9: $21 $D0 $C3
     add  hl, bc                                   ; $4ECC: $09
     inc  [hl]                                     ; $4ECD: $34
     ld   a, [hl]                                  ; $4ECE: $7E

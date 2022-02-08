@@ -28,7 +28,7 @@ TarinEntityHandler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4971: $21 $40 $C3
     add  hl, bc                                   ; $4974: $09
     ld   [hl], $C4                                ; $4975: $36 $C4
-    ld   hl, wEntitiesUnknowTableY                ; $4977: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4977: $21 $D0 $C3
     add  hl, bc                                   ; $497A: $09
     ld   a, [hl]                                  ; $497B: $7E
     ld   hl, Data_005_494A                        ; $497C: $21 $4A $49
@@ -40,7 +40,7 @@ TarinEntityHandler::
 jr_005_4986:
     ld   c, $04                                   ; $4986: $0E $04
     call RenderActiveEntitySpritesRect            ; $4988: $CD $E6 $3C
-    ld   hl, wEntitiesUnknowTableY                ; $498B: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $498B: $21 $D0 $C3
     add  hl, bc                                   ; $498E: $09
     ld   a, [hl]                                  ; $498F: $7E
     cp   $70                                      ; $4990: $FE $70
@@ -720,7 +720,7 @@ jr_005_4D56:
     jr   nz, jr_005_4DA2                          ; $4D5B: $20 $45
 
 jr_005_4D5D:
-    ld   hl, wEntitiesUnknowTableY                ; $4D5D: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4D5D: $21 $D0 $C3
     add  hl, bc                                   ; $4D60: $09
     ld   a, [hl]                                  ; $4D61: $7E
     add  $07                                      ; $4D62: $C6 $07

@@ -884,7 +884,7 @@ Data_007_45EF::
     db   $00, $00, $01, $02, $02, $02, $01, $00
 
 label_007_45F7:
-    ld   hl, wEntitiesUnknowTableY                ; $45F7: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $45F7: $21 $D0 $C3
     add  hl, bc                                   ; $45FA: $09
     ld   a, [hl]                                  ; $45FB: $7E
     rra                                           ; $45FC: $1F
@@ -930,7 +930,7 @@ jr_007_461A:
 
 jr_007_4640:
     call ReturnIfNonInteractive_07                ; $4640: $CD $96 $7D
-    ld   hl, wEntitiesUnknowTableY                ; $4643: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4643: $21 $D0 $C3
     add  hl, bc                                   ; $4646: $09
     inc  [hl]                                     ; $4647: $34
     ld   a, [hl]                                  ; $4648: $7E
@@ -1953,7 +1953,7 @@ func_007_4D1F::
     ret                                           ; $4D26: $C9
 
 func_007_4D27::
-    ld   hl, wEntitiesUnknowTableY                ; $4D27: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4D27: $21 $D0 $C3
     add  hl, bc                                   ; $4D2A: $09
     ld   a, [hl]                                  ; $4D2B: $7E
     cp   $05                                      ; $4D2C: $FE $05
@@ -1966,11 +1966,11 @@ func_007_4D27::
     call func_007_4CEE                            ; $4D37: $CD $EE $4C
     jr   c, jr_007_4D4C                           ; $4D3A: $38 $10
 
-    ld   hl, wEntitiesUnknowTableY                ; $4D3C: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4D3C: $21 $D0 $C3
     add  hl, bc                                   ; $4D3F: $09
     inc  [hl]                                     ; $4D40: $34
     ld   a, [hl]                                  ; $4D41: $7E
-    ld   hl, wEntitiesUnknowTableY                ; $4D42: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4D42: $21 $D0 $C3
     add  hl, de                                   ; $4D45: $19
     ld   [hl], a                                  ; $4D46: $77
     ld   hl, wEntitiesSpeedXTable                 ; $4D47: $21 $40 $C2
@@ -2122,7 +2122,7 @@ jr_007_4E34:
 
     ldh  a, [hFrameCounter]                       ; $4E37: $F0 $E7
     and  $07                                      ; $4E39: $E6 $07
-    ld   hl, wEntitiesUnknowTableY                ; $4E3B: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4E3B: $21 $D0 $C3
 
 jr_007_4E3E:
     add  hl, bc                                   ; $4E3E: $09
@@ -2136,7 +2136,7 @@ jr_007_4E3E:
     add  hl, de                                   ; $4E4A: $19
     ld   a, [hl]                                  ; $4E4B: $7E
     ld   e, a                                     ; $4E4C: $5F
-    ld   hl, wEntitiesUnknowTableY                ; $4E4D: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4E4D: $21 $D0 $C3
     add  hl, bc                                   ; $4E50: $09
     rla                                           ; $4E51: $17
     rla                                           ; $4E52: $17
@@ -2438,7 +2438,7 @@ func_007_504E::
     call GetEntityTransitionCountdown             ; $5052: $CD $05 $0C
     jr   nz, jr_007_506E                          ; $5055: $20 $17
 
-    ld   hl, wEntitiesUnknowTableY                ; $5057: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5057: $21 $D0 $C3
     add  hl, bc                                   ; $505A: $09
     ld   a, [hl]                                  ; $505B: $7E
     inc  a                                        ; $505C: $3C
@@ -2459,7 +2459,7 @@ jr_007_506D:
     ld   [hl], e                                  ; $506D: $73
 
 jr_007_506E:
-    ld   hl, wEntitiesUnknowTableY                ; $506E: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $506E: $21 $D0 $C3
 
 jr_007_5071:
     add  hl, bc                                   ; $5071: $09
@@ -2588,7 +2588,7 @@ func_007_512F::
 
     ld   a, $01                                   ; $513A: $3E $01
     ld   [wIsLinkPushing], a                               ; $513C: $EA $44 $C1
-    ld   hl, wEntitiesUnknowTableY                ; $513F: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $513F: $21 $D0 $C3
     add  hl, bc                                   ; $5142: $09
     ld   a, [hl]                                  ; $5143: $7E
     inc  a                                        ; $5144: $3C
@@ -2621,7 +2621,7 @@ func_007_5159::
     ret                                           ; $516D: $C9
 
 jr_007_516E:
-    ld   hl, wEntitiesUnknowTableY                ; $516E: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $516E: $21 $D0 $C3
     add  hl, bc                                   ; $5171: $09
     ld   [hl], b                                  ; $5172: $70
 
@@ -3885,7 +3885,7 @@ jr_007_59A1:
     call func_007_58D5                            ; $59B9: $CD $D5 $58
     call IncrementEntityState                     ; $59BC: $CD $12 $3B
     ld   [hl], $05                                ; $59BF: $36 $05
-    ld   hl, wEntitiesUnknowTableY                ; $59C1: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $59C1: $21 $D0 $C3
     add  hl, bc                                   ; $59C4: $09
 
 jr_007_59C5:
@@ -4040,7 +4040,7 @@ func_007_5AAC::
     jr   nz, jr_007_5B19                          ; $5AAF: $20 $68
 
     call IncrementEntityState                     ; $5AB1: $CD $12 $3B
-    ld   hl, wEntitiesUnknowTableY                ; $5AB4: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5AB4: $21 $D0 $C3
     add  hl, bc                                   ; $5AB7: $09
     ld   a, [hl]                                  ; $5AB8: $7E
     cp   $05                                      ; $5AB9: $FE $05
@@ -4121,7 +4121,7 @@ func_007_5B25::
     cp   $08                                      ; $5B2A: $FE $08
     jp   c, func_007_7EA4                         ; $5B2C: $DA $A4 $7E
 
-    ld   hl, wEntitiesUnknowTableY                ; $5B2F: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5B2F: $21 $D0 $C3
     add  hl, bc                                   ; $5B32: $09
     ld   a, [hl]                                  ; $5B33: $7E
     cp   $05                                      ; $5B34: $FE $05
@@ -4136,7 +4136,7 @@ jr_007_5B3B:
 
     call IncrementEntityState                     ; $5B40: $CD $12 $3B
     ld   [hl], $05                                ; $5B43: $36 $05
-    ld   hl, wEntitiesUnknowTableY                ; $5B45: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5B45: $21 $D0 $C3
     add  hl, bc                                   ; $5B48: $09
     ld   a, [hl]                                  ; $5B49: $7E
     cp   $05                                      ; $5B4A: $FE $05
@@ -5465,7 +5465,7 @@ SideViewPlatformVerticalEntityHandler::
     call ReturnIfNonInteractive_07                ; $6360: $CD $96 $7D
     call GetEntityTransitionCountdown             ; $6363: $CD $05 $0C
     ld   e, a                                     ; $6366: $5F
-    ld   hl, wEntitiesUnknowTableY                ; $6367: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6367: $21 $D0 $C3
     add  hl, bc                                   ; $636A: $09
     inc  [hl]                                     ; $636B: $34
     ld   a, [hl]                                  ; $636C: $7E
@@ -5721,7 +5721,7 @@ label_007_6523:
     ld   [wBGOriginHigh], a                       ; $652B: $EA $2E $C1
     ld   hl, wLCDControl                          ; $652E: $21 $FD $D6
     res  5, [hl]                                  ; $6531: $CB $AE
-    ld   hl, wEntitiesUnknowTableY                ; $6533: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6533: $21 $D0 $C3
     add  hl, bc                                   ; $6536: $09
     ld   a, [hl]                                  ; $6537: $7E
     cp   $09                                      ; $6538: $FE $09
@@ -5737,7 +5737,7 @@ ENDC
     ld   [wRequests], a                           ; $6542: $EA $00 $D6
     ld   d, b                                     ; $6545: $50
     push bc                                       ; $6546: $C5
-    ld   hl, wEntitiesUnknowTableY                ; $6547: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6547: $21 $D0 $C3
     add  hl, bc                                   ; $654A: $09
     ld   c, [hl]                                  ; $654B: $4E
     sla  c                                        ; $654C: $CB $21
@@ -5770,7 +5770,7 @@ jr_007_655E:
     ld   [wDC90], a                               ; $6572: $EA $90 $DC
     ld   d, b                                     ; $6575: $50
     push bc                                       ; $6576: $C5
-    ld   hl, wEntitiesUnknowTableY                ; $6577: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6577: $21 $D0 $C3
     add  hl, bc                                   ; $657A: $09
     ld   c, [hl]                                  ; $657B: $4E
     sla  c                                        ; $657C: $CB $21
@@ -5799,7 +5799,7 @@ jr_007_658E:
 
 jr_007_6596:
     pop  bc                                       ; $6596: $C1
-    ld   hl, wEntitiesUnknowTableY                ; $6597: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6597: $21 $D0 $C3
     add  hl, bc                                   ; $659A: $09
     inc  [hl]                                     ; $659B: $34
 IF __PATCH_0__
@@ -5899,7 +5899,7 @@ func_007_6606::
     and  $3F                                      ; $6614: $E6 $3F
     add  $30                                      ; $6616: $C6 $30
     ld   [hl], a                                  ; $6618: $77
-    ld   hl, wEntitiesUnknowTableY                ; $6619: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6619: $21 $D0 $C3
     add  hl, bc                                   ; $661C: $09
     ld   a, [hl]                                  ; $661D: $7E
     inc  a                                        ; $661E: $3C
@@ -6188,7 +6188,7 @@ func_007_67AE::
     ld   hl, wEntitiesPrivateState1Table          ; $67AE: $21 $B0 $C2
     add  hl, bc                                   ; $67B1: $09
     ld   a, [hl]                                  ; $67B2: $7E
-    ld   hl, wEntitiesUnknowTableY                ; $67B3: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $67B3: $21 $D0 $C3
     add  hl, bc                                   ; $67B6: $09
     add  [hl]                                     ; $67B7: $86
     ld   [hl], a                                  ; $67B8: $77
@@ -6511,7 +6511,7 @@ jr_007_69AC:
     and  $1F                                      ; $69BF: $E6 $1F
     jp   nz, label_007_69D0                       ; $69C1: $C2 $D0 $69
 
-    ld   hl, wEntitiesUnknowTableY                ; $69C4: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $69C4: $21 $D0 $C3
     add  hl, bc                                   ; $69C7: $09
     ld   a, [hl]                                  ; $69C8: $7E
     cp   $0A                                      ; $69C9: $FE $0A
@@ -6521,7 +6521,7 @@ jr_007_69AC:
     ld   [hl], a                                  ; $69CF: $77
 
 label_007_69D0:
-    ld   hl, wEntitiesUnknowTableY                ; $69D0: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $69D0: $21 $D0 $C3
     add  hl, bc                                   ; $69D3: $09
     push hl                                       ; $69D4: $E5
     ld   a, [hl]                                  ; $69D5: $7E
@@ -6550,7 +6550,7 @@ label_007_69D0:
     call Farcall                                  ; $69F8: $CD $D7 $0B
 
     push bc                                       ; $69FB: $C5
-    ld   hl, wEntitiesUnknowTableY                ; $69FC: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $69FC: $21 $D0 $C3
     add  hl, bc                                   ; $69FF: $09
     ld   a, [hl]                                  ; $6A00: $7E
     dec  a                                        ; $6A01: $3D
@@ -6646,7 +6646,7 @@ jr_007_6A52:
     jr   jr_007_6A89                              ; $6A82: $18 $05
 
 jr_007_6A84:
-    ld   hl, wEntitiesUnknowTableY                ; $6A84: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6A84: $21 $D0 $C3
     add  hl, bc                                   ; $6A87: $09
     inc  [hl]                                     ; $6A88: $34
 
@@ -7231,7 +7231,7 @@ jr_007_6E01:
     ld   e, $02                                   ; $6E14: $1E $02
 
 jr_007_6E16:
-    ld   hl, wEntitiesUnknowTableY                ; $6E16: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6E16: $21 $D0 $C3
     add  hl, bc                                   ; $6E19: $09
     ld   a, [hl]                                  ; $6E1A: $7E
     cp   e                                        ; $6E1B: $BB
@@ -8155,7 +8155,7 @@ Data_007_749F::
     db   $30, $30, $30, $30, $30, $30, $30, $28, $28
 
 func_007_74A8::
-    ld   hl, wEntitiesUnknowTableY                ; $74A8: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $74A8: $21 $D0 $C3
     add  hl, bc                                   ; $74AB: $09
     ld   a, [hl]                                  ; $74AC: $7E
     cp   $10                                      ; $74AD: $FE $10
@@ -8185,7 +8185,7 @@ jr_007_74CA:
 
 jr_007_74D1:
     ld   a, [$D201]                               ; $74D1: $FA $01 $D2
-    ld   hl, wEntitiesUnknowTableY                ; $74D4: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $74D4: $21 $D0 $C3
     add  hl, bc                                   ; $74D7: $09
     add  [hl]                                     ; $74D8: $86
     inc  [hl]                                     ; $74D9: $34
@@ -8992,7 +8992,7 @@ Data_007_797C::
 
 func_007_7980::
     call label_3B23                               ; $7980: $CD $23 $3B
-    ld   hl, wEntitiesUnknowTableY                ; $7983: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7983: $21 $D0 $C3
     add  hl, bc                                   ; $7986: $09
     ld   [hl], $00                                ; $7987: $36 $00
     call func_007_7A2D                            ; $7989: $CD $2D $7A
@@ -9312,7 +9312,7 @@ func_007_7D1A::
     ld   hl, Data_007_7D16                        ; $7D20: $21 $16 $7D
     add  hl, de                                   ; $7D23: $19
     push hl                                       ; $7D24: $E5
-    ld   hl, wEntitiesUnknowTableY                ; $7D25: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7D25: $21 $D0 $C3
     add  hl, bc                                   ; $7D28: $09
     inc  [hl]                                     ; $7D29: $34
     ld   a, [hl]                                  ; $7D2A: $7E

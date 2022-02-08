@@ -161,7 +161,7 @@ func_005_63EB::
     cp   $0B                                      ; $63F8: $FE $0B
     jr   c, jr_005_6444                           ; $63FA: $38 $48
 
-    ld   hl, wEntitiesUnknowTableY                ; $63FC: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $63FC: $21 $D0 $C3
     add  hl, bc                                   ; $63FF: $09
     ld   a, [hl]                                  ; $6400: $7E
     cp   $05                                      ; $6401: $FE $05
@@ -227,7 +227,7 @@ jr_005_6444:
     jp   SetEntitySpriteVariant                   ; $646E: $C3 $0C $3B
 
 jr_005_6471:
-    ld   hl, wEntitiesUnknowTableY                ; $6471: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6471: $21 $D0 $C3
     add  hl, bc                                   ; $6474: $09
     ld   a, [hl]                                  ; $6475: $7E
     cp   $05                                      ; $6476: $FE $05
@@ -315,7 +315,7 @@ ELSE
 ENDC
     jr   nc, jr_005_64F7                          ; $64DF: $30 $16
 
-    ld   hl, wEntitiesUnknowTableY                ; $64E1: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $64E1: $21 $D0 $C3
     add  hl, bc                                   ; $64E4: $09
     inc  [hl]                                     ; $64E5: $34
     ld   a, [hl]                                  ; $64E6: $7E

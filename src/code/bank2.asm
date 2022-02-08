@@ -1540,7 +1540,7 @@ jr_002_4AF1:
     ld   hl, wEntitiesSpeedYTable                 ; $4B34: $21 $50 $C2
     add  hl, de                                   ; $4B37: $19
     ld   [hl], $FC                                ; $4B38: $36 $FC
-    ld   hl, wEntitiesUnknowTableY                ; $4B3A: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4B3A: $21 $D0 $C3
     add  hl, de                                   ; $4B3D: $19
     ld   [hl], $40                                ; $4B3E: $36 $40
 

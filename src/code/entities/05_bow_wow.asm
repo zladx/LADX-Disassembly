@@ -601,7 +601,7 @@ jr_005_4380:
     ld   hl, wEntitiesFlashCountdownTable         ; $4394: $21 $20 $C4
     add  hl, de                                   ; $4397: $19
     ld   [hl], $18                                ; $4398: $36 $18
-    ld   hl, wEntitiesUnknowTableY                ; $439A: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $439A: $21 $D0 $C3
     add  hl, de                                   ; $439D: $19
     inc  [hl]                                     ; $439E: $34
     ret                                           ; $439F: $C9

@@ -147,7 +147,7 @@ MarinCreditsHandler:
     ld   hl, wEntitiesSpeedYTable                 ; $4F2C: $21 $50 $C2
     add  hl, de                                   ; $4F2F: $19
     ld   [hl], $FC                                ; $4F30: $36 $FC
-    ld   hl, wEntitiesUnknowTableY                ; $4F32: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4F32: $21 $D0 $C3
     add  hl, de                                   ; $4F35: $19
     ld   [hl], $40                                ; $4F36: $36 $40
     pop  bc                                       ; $4F38: $C1
@@ -486,7 +486,7 @@ jr_005_50E2:
     ld   hl, wEntitiesSpeedYTable                 ; $511E: $21 $50 $C2
     add  hl, de                                   ; $5121: $19
     ld   [hl], $FC                                ; $5122: $36 $FC
-    ld   hl, wEntitiesUnknowTableY                ; $5124: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5124: $21 $D0 $C3
     add  hl, de                                   ; $5127: $19
     ld   [hl], $40                                ; $5128: $36 $40
 

@@ -165,7 +165,7 @@ label_018_65B8:
 jr_018_65C3:
     call GetEntityTransitionCountdown             ; $65C3: $CD $05 $0C
     ld   [hl], $00                                ; $65C6: $36 $00
-    ld   hl, wEntitiesUnknowTableY                ; $65C8: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $65C8: $21 $D0 $C3
     add  hl, bc                                   ; $65CB: $09
     ld   [hl], $00                                ; $65CC: $36 $00
 
@@ -192,7 +192,7 @@ func_018_65EC::
     call GetEntityTransitionCountdown             ; $65EC: $CD $05 $0C
     jr   nz, jr_018_660B                          ; $65EF: $20 $1A
 
-    ld   hl, wEntitiesUnknowTableY                ; $65F1: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $65F1: $21 $D0 $C3
     add  hl, bc                                   ; $65F4: $09
     ld   a, [hl]                                  ; $65F5: $7E
     cp   $0D                                      ; $65F6: $FE $0D
@@ -231,7 +231,7 @@ func_018_6643::
     call GetEntityTransitionCountdown             ; $6643: $CD $05 $0C
     jr   nz, jr_018_6678                          ; $6646: $20 $30
 
-    ld   hl, wEntitiesUnknowTableY                ; $6648: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6648: $21 $D0 $C3
     add  hl, bc                                   ; $664B: $09
     ld   a, [hl]                                  ; $664C: $7E
     cp   $15                                      ; $664D: $FE $15
@@ -282,7 +282,7 @@ func_018_66CD::
     call GetEntityTransitionCountdown             ; $66CD: $CD $05 $0C
     jr   nz, jr_018_6729                          ; $66D0: $20 $57
 
-    ld   hl, wEntitiesUnknowTableY                ; $66D2: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $66D2: $21 $D0 $C3
     add  hl, bc                                   ; $66D5: $09
     ld   a, [hl]                                  ; $66D6: $7E
     cp   $2A                                      ; $66D7: $FE $2A
@@ -331,7 +331,7 @@ jr_018_6703:
     cp   $60                                      ; $6712: $FE $60
     jr   c, jr_018_6724                           ; $6714: $38 $0E
 
-    ld   hl, wEntitiesUnknowTableY                ; $6716: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6716: $21 $D0 $C3
     add  hl, bc                                   ; $6719: $09
     ld   a, [hl]                                  ; $671A: $7E
     cp   $18                                      ; $671B: $FE $18

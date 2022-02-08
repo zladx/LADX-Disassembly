@@ -23,7 +23,7 @@ LikeLikeState0Handler::
     ld   hl, wEntitiesPrivateState3Table          ; $7DFC: $21 $D0 $C2
     add  hl, bc                                   ; $7DFF: $09
     inc  [hl]                                     ; $7E00: $34
-    ld   hl, wEntitiesUnknowTableY                ; $7E01: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7E01: $21 $D0 $C3
     add  hl, bc                                   ; $7E04: $09
     ld   [hl], b                                  ; $7E05: $70
 
@@ -38,7 +38,7 @@ LikeLikeState1Handler::
     and  J_A | J_B                                ; $7E0E: $E6 $30
     jr   z, jr_006_7E27                           ; $7E10: $28 $15
 
-    ld   hl, wEntitiesUnknowTableY                ; $7E12: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7E12: $21 $D0 $C3
     add  hl, bc                                   ; $7E15: $09
     inc  [hl]                                     ; $7E16: $34
     ld   a, [hl]                                  ; $7E17: $7E

@@ -36,7 +36,7 @@ MovingBlockLeftTopState1Handler::
     and  a                                        ; $412D: $A7
     jr   z, jr_015_414D                           ; $412E: $28 $1D
 
-    ld   hl, wEntitiesUnknowTableY                ; $4130: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4130: $21 $D0 $C3
     add  hl, bc                                   ; $4133: $09
     inc  [hl]                                     ; $4134: $34
     ld   a, [hl]                                  ; $4135: $7E
@@ -68,7 +68,7 @@ jr_015_414D:
     cp   [hl]                                     ; $4156: $BE
     jr   z, jr_015_416B                           ; $4157: $28 $12
 
-    ld   hl, wEntitiesUnknowTableY                ; $4159: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4159: $21 $D0 $C3
     add  hl, bc                                   ; $415C: $09
     ld   a, [hl]                                  ; $415D: $7E
     inc  [hl]                                     ; $415E: $34
@@ -187,7 +187,7 @@ MovingBlockLeftBottomState1Handler::
     and  a                                        ; $41F7: $A7
     jr   z, jr_015_4217                           ; $41F8: $28 $1D
 
-    ld   hl, wEntitiesUnknowTableY                ; $41FA: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $41FA: $21 $D0 $C3
     add  hl, bc                                   ; $41FD: $09
     inc  [hl]                                     ; $41FE: $34
     ld   a, [hl]                                  ; $41FF: $7E
@@ -219,7 +219,7 @@ jr_015_4217:
     cp   [hl]                                     ; $4220: $BE
     jr   z, jr_015_4235                           ; $4221: $28 $12
 
-    ld   hl, wEntitiesUnknowTableY                ; $4223: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4223: $21 $D0 $C3
     add  hl, bc                                   ; $4226: $09
     ld   a, [hl]                                  ; $4227: $7E
     inc  [hl]                                     ; $4228: $34
@@ -272,7 +272,7 @@ MovingBlockBottomLeftState1Handler::
     and  a                                        ; $4269: $A7
     jr   z, jr_015_4289                           ; $426A: $28 $1D
 
-    ld   hl, wEntitiesUnknowTableY                ; $426C: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $426C: $21 $D0 $C3
     add  hl, bc                                   ; $426F: $09
     inc  [hl]                                     ; $4270: $34
     ld   a, [hl]                                  ; $4271: $7E
@@ -304,7 +304,7 @@ jr_015_4289:
     cp   [hl]                                     ; $4292: $BE
     jr   z, jr_015_42A7                           ; $4293: $28 $12
 
-    ld   hl, wEntitiesUnknowTableY                ; $4295: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4295: $21 $D0 $C3
     add  hl, bc                                   ; $4298: $09
     ld   a, [hl]                                  ; $4299: $7E
     inc  [hl]                                     ; $429A: $34
@@ -357,7 +357,7 @@ MovingBlockBottomRightState1Handler::
     and  a                                        ; $42DB: $A7
     jr   z, jr_015_42FB                           ; $42DC: $28 $1D
 
-    ld   hl, wEntitiesUnknowTableY                ; $42DE: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $42DE: $21 $D0 $C3
     add  hl, bc                                   ; $42E1: $09
     inc  [hl]                                     ; $42E2: $34
     ld   a, [hl]                                  ; $42E3: $7E
@@ -389,7 +389,7 @@ jr_015_42FB:
     cp   [hl]                                     ; $4304: $BE
     jr   z, jr_015_4319                           ; $4305: $28 $12
 
-    ld   hl, wEntitiesUnknowTableY                ; $4307: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4307: $21 $D0 $C3
     add  hl, bc                                   ; $430A: $09
     ld   a, [hl]                                  ; $430B: $7E
     inc  [hl]                                     ; $430C: $34

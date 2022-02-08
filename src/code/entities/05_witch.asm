@@ -53,7 +53,7 @@ WitchEntityHandler::
     ld   a, $40                                   ; $47EA: $3E $40
     ld   [hl], a                                  ; $47EC: $77
     call func_005_47C0                            ; $47ED: $CD $C0 $47
-    ld   hl, wEntitiesUnknowTableY                ; $47F0: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $47F0: $21 $D0 $C3
     add  hl, bc                                   ; $47F3: $09
     inc  [hl]                                     ; $47F4: $34
     ld   a, [hl]                                  ; $47F5: $7E
@@ -182,7 +182,7 @@ func_005_4896::
 
 jr_005_48AE:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $48AE: $E0 $A1
-    ld   hl, wEntitiesUnknowTableY                ; $48B0: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $48B0: $21 $D0 $C3
     add  hl, bc                                   ; $48B3: $09
     inc  [hl]                                     ; $48B4: $34
     inc  [hl]                                     ; $48B5: $34

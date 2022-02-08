@@ -149,7 +149,7 @@ jr_006_5093:
     call label_3B23                               ; $5096: $CD $23 $3B
 
 func_006_5099::
-    ld   hl, wEntitiesUnknowTableY                ; $5099: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5099: $21 $D0 $C3
     add  hl, bc                                   ; $509C: $09
     inc  [hl]                                     ; $509D: $34
     ld   a, [hl]                                  ; $509E: $7E

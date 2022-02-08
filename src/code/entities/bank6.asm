@@ -75,7 +75,7 @@ SetEntitySpriteVariantForDirection::
     ld   hl, Data_006_643D                        ; $6447: $21 $3D $64
     add  hl, de                                   ; $644A: $19
     push hl                                       ; $644B: $E5
-    ld   hl, wEntitiesUnknowTableY                ; $644C: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $644C: $21 $D0 $C3
     add  hl, bc                                   ; $644F: $09
     inc  [hl]                                     ; $6450: $34
     ld   a, [hl]                                  ; $6451: $7E

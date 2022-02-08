@@ -2720,7 +2720,7 @@ jr_036_506B:
     pop  af                                       ; $509F: $F1
     ld   [wCurrentBank], a                        ; $50A0: $EA $AF $DB
     ld   e, $FE                                   ; $50A3: $1E $FE
-    ld   hl, wEntitiesUnknowTableY                ; $50A5: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $50A5: $21 $D0 $C3
     add  hl, bc                                   ; $50A8: $09
     inc  [hl]                                     ; $50A9: $34
     ld   a, [hl]                                  ; $50AA: $7E
@@ -7687,7 +7687,7 @@ jr_036_6E3F:
     call RenderActiveEntitySpritesPair            ; $6E54: $CD $C0 $3B
 .tileGlintShownEnd
 
-    ld   hl, wEntitiesUnknowTableY                ; $6E57: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6E57: $21 $D0 $C3
     add  hl, bc                                   ; $6E5A: $09
     ldh  a, [hFFB9]                               ; $6E5B: $F0 $B9
     ld   e, a                                     ; $6E5D: $5F
@@ -7722,7 +7722,7 @@ jr_036_6E3F:
     call CheckLinkCollisionWithEnemy_trampoline   ; $6E8A: $CD $5A $3B
     jr   nc, jr_036_6EC8                          ; $6E8D: $30 $39
 
-    ld   hl, wEntitiesUnknowTableY                ; $6E8F: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6E8F: $21 $D0 $C3
     add  hl, bc                                   ; $6E92: $09
     ld   a, [hl]                                  ; $6E93: $7E
     cp   $04                                      ; $6E94: $FE $04
@@ -7760,7 +7760,7 @@ jr_036_6EC6:
     jr   jr_036_6ECD                              ; $6EC6: $18 $05
 
 jr_036_6EC8:
-    ld   hl, wEntitiesUnknowTableY                ; $6EC8: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6EC8: $21 $D0 $C3
     add  hl, bc                                   ; $6ECB: $09
     ld   [hl], b                                  ; $6ECC: $70
 

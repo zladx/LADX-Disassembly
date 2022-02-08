@@ -4,7 +4,7 @@ MusicalNoteSpriteVariants::
 MusicalNoteEntityHandler::
     ld   de, MusicalNoteSpriteVariants            ; $7EF8: $11 $F6 $7E
     call RenderActiveEntitySprite                 ; $7EFB: $CD $77 $3C
-    ld   hl, wEntitiesUnknowTableY                ; $7EFE: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7EFE: $21 $D0 $C3
     add  hl, bc                                   ; $7F01: $09
     ld   a, [hl]                                  ; $7F02: $7E
     dec  a                                        ; $7F03: $3D

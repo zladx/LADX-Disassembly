@@ -276,7 +276,7 @@ func_005_54EA::
     ld   hl, Data_005_54E6                        ; $54F0: $21 $E6 $54
     add  hl, de                                   ; $54F3: $19
     push hl                                       ; $54F4: $E5
-    ld   hl, wEntitiesUnknowTableY                ; $54F5: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $54F5: $21 $D0 $C3
     add  hl, bc                                   ; $54F8: $09
     inc  [hl]                                     ; $54F9: $34
     ld   a, [hl]                                  ; $54FA: $7E

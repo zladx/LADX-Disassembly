@@ -102,7 +102,7 @@ func_005_55CA::
 
 jr_005_5610:
     call GetRandomByte                            ; $5610: $CD $0D $28
-    ld   hl, wEntitiesUnknowTableY                ; $5613: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5613: $21 $D0 $C3
     add  hl, de                                   ; $5616: $19
     ld   [hl], a                                  ; $5617: $77
     ld   hl, wEntitiesPosYTable                         ; $5618: $21 $10 $C2
@@ -198,7 +198,7 @@ jr_005_5650:
 
 jr_005_56B1:
     call DecrementEntityIgnoreHitsCountdown       ; $56B1: $CD $56 $0C
-    ld   hl, wEntitiesUnknowTableY                ; $56B4: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $56B4: $21 $D0 $C3
     add  hl, bc                                   ; $56B7: $09
     ld   a, [hl]                                  ; $56B8: $7E
     inc  [hl]                                     ; $56B9: $34
@@ -283,7 +283,7 @@ jr_005_572A:
     jp   UpdateEntityYPosWithSpeed_05             ; $5734: $C3 $B4 $7A
 
 func_005_5737::
-    ld   hl, wEntitiesUnknowTableY                ; $5737: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5737: $21 $D0 $C3
     add  hl, bc                                   ; $573A: $09
     ld   a, [hl]                                  ; $573B: $7E
     inc  [hl]                                     ; $573C: $34
@@ -317,7 +317,7 @@ jr_005_574A:
     jp   IncrementEntityState                     ; $576B: $C3 $12 $3B
 
 func_005_576E::
-    ld   hl, wEntitiesUnknowTableY                ; $576E: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $576E: $21 $D0 $C3
     add  hl, bc                                   ; $5771: $09
     ld   a, [hl]                                  ; $5772: $7E
     inc  [hl]                                     ; $5773: $34
@@ -413,7 +413,7 @@ func_005_5901::
     ld   de, Data_005_58FD
     call RenderActiveEntitySprite                 ; $5904: $CD $77 $3C
     call ReturnIfNonInteractive_05                ; $5907: $CD $3A $7A
-    ld   hl, wEntitiesUnknowTableY                ; $590A: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $590A: $21 $D0 $C3
 
 jr_005_590D:
     add  hl, bc                                   ; $590D: $09
@@ -426,7 +426,7 @@ jr_005_590D:
 jr_005_5913:
     and  $01                                      ; $5913: $E6 $01
     call SetEntitySpriteVariant                   ; $5915: $CD $0C $3B
-    ld   hl, wEntitiesUnknowTableY                ; $5918: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5918: $21 $D0 $C3
     add  hl, bc                                   ; $591B: $09
     ld   a, [hl]                                  ; $591C: $7E
     and  $30                                      ; $591D: $E6 $30
@@ -452,7 +452,7 @@ func_005_593A::
     call RenderActiveEntitySpritesPair            ; $593D: $CD $C0 $3B
     call ReturnIfNonInteractive_05                ; $5940: $CD $3A $7A
     call DecrementEntityIgnoreHitsCountdown       ; $5943: $CD $56 $0C
-    ld   hl, wEntitiesUnknowTableY                ; $5946: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5946: $21 $D0 $C3
     add  hl, bc                                   ; $5949: $09
     inc  [hl]                                     ; $594A: $34
     ld   a, [hl]                                  ; $594B: $7E

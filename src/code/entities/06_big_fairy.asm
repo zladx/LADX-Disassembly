@@ -114,7 +114,7 @@ jr_006_712F:
     call func_015_7964_trampoline                 ; $7136: $CD $A0 $3D
     call label_3CD9                               ; $7139: $CD $D9 $3C
     ld   e, $FE                                   ; $713C: $1E $FE
-    ld   hl, wEntitiesUnknowTableY                ; $713E: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $713E: $21 $D0 $C3
     add  hl, bc                                   ; $7141: $09
     inc  [hl]                                     ; $7142: $34
     ld   a, [hl]                                  ; $7143: $7E

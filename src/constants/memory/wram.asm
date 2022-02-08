@@ -1179,8 +1179,13 @@ wC3CE::
 wC3CF::
   ds 1 ; C3CF
 
-; TODO comment
-wEntitiesUnknowTableY::
+; How often should an entity speed be updated.
+;
+; For instance, a value of 4 means that the entity speedX or speedY
+; will be updated every 4 frames.
+;
+; Each entity uses this value differently.
+wEntitiesInertiaTable::
   ds $10 ; C3D0 - C3DF
 
 ; Room id of the entity

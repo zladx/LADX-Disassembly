@@ -278,7 +278,7 @@ func_005_6E7D::
     ret  nz                                       ; $6EAF: $C0
 
 jr_005_6EB0:
-    ld   hl, wEntitiesUnknowTableY                ; $6EB0: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6EB0: $21 $D0 $C3
     add  hl, bc                                   ; $6EB3: $09
     ld   a, [hl]                                  ; $6EB4: $7E
     cp   $04                                      ; $6EB5: $FE $04
@@ -385,7 +385,7 @@ jr_005_6EB0:
     ld   hl, wEntitiesTransitionCountdownTable    ; $6F5D: $21 $E0 $C2
     add  hl, de                                   ; $6F60: $19
     ld   [hl], $2F                                ; $6F61: $36 $2F
-    ld   hl, wEntitiesUnknowTableY                ; $6F63: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6F63: $21 $D0 $C3
     add  hl, bc                                   ; $6F66: $09
     ld   a, [hl]                                  ; $6F67: $7E
     cp   $03                                      ; $6F68: $FE $03
@@ -1323,7 +1323,7 @@ jr_005_7621:
     dec  [hl]                                     ; $7634: $35
 
 jr_005_7635:
-    ld   hl, wEntitiesUnknowTableY                ; $7635: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7635: $21 $D0 $C3
     add  hl, bc                                   ; $7638: $09
     ld   a, [hl]                                  ; $7639: $7E
     inc  a                                        ; $763A: $3C
@@ -1378,7 +1378,7 @@ func_005_766E::
     call RenderActiveEntitySpritesRect            ; $767F: $CD $E6 $3C
     ld   a, $08                                   ; $7682: $3E $08
     call func_015_7964_trampoline                 ; $7684: $CD $A0 $3D
-    ld   hl, wEntitiesUnknowTableY                ; $7687: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7687: $21 $D0 $C3
     add  hl, bc                                   ; $768A: $09
     ld   a, [hl]                                  ; $768B: $7E
     ldh  [hMultiPurpose0], a                      ; $768C: $E0 $D7

@@ -65,7 +65,7 @@ jr_018_5F20:
 ._0C dw MarinAtTalTalHeightsStateCHandler
 
 func_018_5F3D::
-    ld   hl, wEntitiesUnknowTableY                ; $5F3D: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5F3D: $21 $D0 $C3
     add  hl, bc                                   ; $5F40: $09
     ld   [hl], b                                  ; $5F41: $70
     ret                                           ; $5F42: $C9

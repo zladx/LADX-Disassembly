@@ -73,7 +73,7 @@ ENDC
     and  $08                                      ; $543F: $E6 $08
     jr   z, jr_018_545F                           ; $5441: $28 $1C
 
-    ld   hl, wEntitiesUnknowTableY                ; $5443: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5443: $21 $D0 $C3
     add  hl, bc                                   ; $5446: $09
     ld   a, [hl]                                  ; $5447: $7E
     inc  [hl]                                     ; $5448: $34
@@ -93,7 +93,7 @@ jr_018_545E:
     ret                                           ; $545E: $C9
 
 jr_018_545F:
-    ld   hl, wEntitiesUnknowTableY                ; $545F: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $545F: $21 $D0 $C3
     add  hl, bc                                   ; $5462: $09
     ld   [hl], $08                                ; $5463: $36 $08
     ret                                           ; $5465: $C9

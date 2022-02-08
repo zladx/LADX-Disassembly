@@ -165,7 +165,7 @@ func_003_58FC::
     ld   hl, Data_003_5823                        ; $5902: $21 $23 $58
     add  hl, de                                   ; $5905: $19
     push hl                                       ; $5906: $E5
-    ld   hl, wEntitiesUnknowTableY                ; $5907: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5907: $21 $D0 $C3
     add  hl, bc                                   ; $590A: $09
     inc  [hl]                                     ; $590B: $34
     ld   a, [hl]                                  ; $590C: $7E

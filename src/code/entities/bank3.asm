@@ -332,7 +332,7 @@ EntityInitBomber::
     add  hl, bc                                   ; $4968: $09
     ld   [hl], $10                                ; $4969: $36 $10
     call GetRandomByte                            ; $496B: $CD $0D $28
-    ld   hl, wEntitiesUnknowTableY                ; $496E: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $496E: $21 $D0 $C3
     add  hl, bc                                   ; $4971: $09
     ld   [hl], a                                  ; $4972: $77
 
@@ -2855,7 +2855,7 @@ HeartPieceState5Handler::
     ld   de, Data_003_5A4D                        ; $5A9B: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5A9E: $CD $C0 $3B
     call func_003_5B2B                            ; $5AA1: $CD $2B $5B
-    ld   hl, wEntitiesUnknowTableY                ; $5AA4: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5AA4: $21 $D0 $C3
     add  hl, bc                                   ; $5AA7: $09
     inc  [hl]                                     ; $5AA8: $34
     ld   a, [hl]                                  ; $5AA9: $7E
@@ -7455,7 +7455,7 @@ jr_003_7570:
     ret                                           ; $7570: $C9
 
 jr_003_7571:
-    ld   hl, wEntitiesUnknowTableY                ; $7571: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7571: $21 $D0 $C3
     add  hl, bc                                   ; $7574: $09
     ld   a, [hl]                                  ; $7575: $7E
     cp   $22                                      ; $7576: $FE $22

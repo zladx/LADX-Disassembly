@@ -108,7 +108,7 @@ ZoraState2Handler::
     jr   nz, jr_018_4A90                          ; $4A7E: $20 $10
 
     ld   [hl], $60                                ; $4A80: $36 $60
-    ld   hl, wEntitiesUnknowTableY                ; $4A82: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4A82: $21 $D0 $C3
     add  hl, bc                                   ; $4A85: $09
     ld   [hl], b                                  ; $4A86: $70
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4A87: $21 $40 $C3
@@ -130,7 +130,7 @@ Data_018_4A9A::
     db   $00, $00, $01, $02, $02, $02, $01, $00
 
 ZoraState3Handler::
-    ld   hl, wEntitiesUnknowTableY                ; $4AA2: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4AA2: $21 $D0 $C3
     add  hl, bc                                   ; $4AA5: $09
     ld   a, [hl]                                  ; $4AA6: $7E
     inc  [hl]                                     ; $4AA7: $34

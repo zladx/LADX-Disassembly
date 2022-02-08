@@ -45,7 +45,7 @@ func_018_7D60::
     ld   hl, Data_018_7D5C                        ; $7D66: $21 $5C $7D
     add  hl, de                                   ; $7D69: $19
     push hl                                       ; $7D6A: $E5
-    ld   hl, wEntitiesUnknowTableY                ; $7D6B: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7D6B: $21 $D0 $C3
     add  hl, bc                                   ; $7D6E: $09
     inc  [hl]                                     ; $7D6F: $34
     ld   a, [hl]                                  ; $7D70: $7E

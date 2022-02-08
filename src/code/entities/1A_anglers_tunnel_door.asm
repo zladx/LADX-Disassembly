@@ -79,7 +79,7 @@ Data_01A_70AD::
 ; water tiles, until the animation is done.
 ;
 ; Inputs:
-;   de      wEntitiesUnknowTableY + entity index
+;   de      wEntitiesInertiaTable + entity index
 ;   hMultiPurposeG   entity substate 1
 ;   hFFCF   unknown
 ;   hFFD0   unknown

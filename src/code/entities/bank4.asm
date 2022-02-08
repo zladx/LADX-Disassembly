@@ -821,7 +821,7 @@ jr_004_5202:
     and  $0F                                      ; $5213: $E6 $0F
     add  $18                                      ; $5215: $C6 $18
     ld   [hl], a                                  ; $5217: $77
-    ld   hl, wEntitiesUnknowTableY                ; $5218: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5218: $21 $D0 $C3
     add  hl, bc                                   ; $521B: $09
     ld   a, [hl]                                  ; $521C: $7E
     cp   $14                                      ; $521D: $FE $14
@@ -884,7 +884,7 @@ jr_004_5273:
     jr   nz, jr_004_52C9                          ; $5276: $20 $51
 
     ld   [hl], $40                                ; $5278: $36 $40
-    ld   hl, wEntitiesUnknowTableY                ; $527A: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $527A: $21 $D0 $C3
     add  hl, bc                                   ; $527D: $09
     ld   a, [hl]                                  ; $527E: $7E
     cp   $14                                      ; $527F: $FE $14
@@ -898,7 +898,7 @@ jr_004_5273:
     add  hl, de                                   ; $528D: $19
     ld   [hl], $02                                ; $528E: $36 $02
     push bc                                       ; $5290: $C5
-    ld   hl, wEntitiesUnknowTableY                ; $5291: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5291: $21 $D0 $C3
     add  hl, bc                                   ; $5294: $09
     ld   c, [hl]                                  ; $5295: $4E
     inc  [hl]                                     ; $5296: $34
@@ -945,7 +945,7 @@ jr_004_52C9:
     cp   $04                                      ; $52D8: $FE $04
     jr   nc, jr_004_5340                          ; $52DA: $30 $64
 
-    ld   hl, wEntitiesUnknowTableY                ; $52DC: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $52DC: $21 $D0 $C3
     add  hl, bc                                   ; $52DF: $09
     ld   a, [hl]                                  ; $52E0: $7E
     cp   $12                                      ; $52E1: $FE $12
@@ -1657,7 +1657,7 @@ jr_004_57B8:
     ldh  [hNoiseSfx], a                           ; $57C4: $E0 $F4
 
 jr_004_57C6:
-    ld   hl, wEntitiesUnknowTableY                ; $57C6: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $57C6: $21 $D0 $C3
     add  hl, bc                                   ; $57C9: $09
     ld   a, [hl]                                  ; $57CA: $7E
     inc  a                                        ; $57CB: $3C
@@ -1752,7 +1752,7 @@ jr_004_5924:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5929: $21 $40 $C3
     add  hl, bc                                   ; $592C: $09
     ld   [hl], $02                                ; $592D: $36 $02
-    ld   hl, wEntitiesUnknowTableY                ; $592F: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $592F: $21 $D0 $C3
     add  hl, bc                                   ; $5932: $09
     ld   a, [hl]                                  ; $5933: $7E
     ldh  [hMultiPurpose0], a                      ; $5934: $E0 $D7
@@ -1960,7 +1960,7 @@ jr_004_5AA6:
 
 jr_004_5AA9:
     call ReturnIfNonInteractive_04                ; $5AA9: $CD $A3 $7F
-    ld   hl, wEntitiesUnknowTableY                ; $5AAC: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5AAC: $21 $D0 $C3
     add  hl, bc                                   ; $5AAF: $09
     ld   a, [hl]                                  ; $5AB0: $7E
     inc  a                                        ; $5AB1: $3C
@@ -2108,7 +2108,7 @@ func_004_5B7F::
     ld   de, Data_004_5A49                        ; $5B7F: $11 $49 $5A
     call RenderActiveEntitySpritesPair            ; $5B82: $CD $C0 $3B
     call ReturnIfNonInteractive_04                ; $5B85: $CD $A3 $7F
-    ld   hl, wEntitiesUnknowTableY                ; $5B88: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5B88: $21 $D0 $C3
     add  hl, bc                                   ; $5B8B: $09
     ld   a, [hl]                                  ; $5B8C: $7E
     ldh  [hMultiPurpose0], a                      ; $5B8D: $E0 $D7
@@ -2708,7 +2708,7 @@ jr_004_5F96:
     ld   hl, Data_004_5F48                        ; $5FAD: $21 $48 $5F
     jr   nz, jr_004_5FC2                          ; $5FB0: $20 $10
 
-    ld   hl, wEntitiesUnknowTableY                ; $5FB2: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5FB2: $21 $D0 $C3
     add  hl, bc                                   ; $5FB5: $09
     ld   a, [hl]                                  ; $5FB6: $7E
     inc  [hl]                                     ; $5FB7: $34
@@ -3182,7 +3182,7 @@ jr_004_62C1:
     inc  [hl]                                     ; $62D0: $34
 
 jr_004_62D1:
-    ld   hl, wEntitiesUnknowTableY                ; $62D1: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $62D1: $21 $D0 $C3
     add  hl, bc                                   ; $62D4: $09
     ld   a, [hl]                                  ; $62D5: $7E
     inc  a                                        ; $62D6: $3C
@@ -4458,7 +4458,7 @@ jr_004_6A25:
     jr   nz, jr_004_6A24                          ; $6A29: $20 $F9
 
 label_004_6A2B:
-    ld   hl, wEntitiesUnknowTableY                ; $6A2B: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6A2B: $21 $D0 $C3
     add  hl, bc                                   ; $6A2E: $09
     inc  [hl]                                     ; $6A2F: $34
     ld   a, [hl]                                  ; $6A30: $7E
@@ -4480,7 +4480,7 @@ func_004_6A3D::
     add  hl, bc                                   ; $6A48: $09
     ld   [hl], e                                  ; $6A49: $73
     ld   d, b                                     ; $6A4A: $50
-    ld   hl, wEntitiesUnknowTableY                ; $6A4B: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6A4B: $21 $D0 $C3
     add  hl, bc                                   ; $6A4E: $09
     ld   a, [hl]                                  ; $6A4F: $7E
     and  $0F                                      ; $6A50: $E6 $0F
@@ -4538,7 +4538,7 @@ jr_004_6A8A:
     add  hl, de                                   ; $6A9D: $19
     ld   a, [hl]                                  ; $6A9E: $7E
     add  $08                                      ; $6A9F: $C6 $08
-    ld   hl, wEntitiesUnknowTableY                ; $6AA1: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6AA1: $21 $D0 $C3
     add  hl, bc                                   ; $6AA4: $09
     ld   [hl], a                                  ; $6AA5: $77
 
@@ -4635,7 +4635,7 @@ jr_004_6B28:
     jr   jr_004_6B51                              ; $6B2F: $18 $20
 
 jr_004_6B31:
-    ld   hl, wEntitiesUnknowTableY                ; $6B31: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6B31: $21 $D0 $C3
     add  hl, bc                                   ; $6B34: $09
     ld   a, [hl]                                  ; $6B35: $7E
     and  $0F                                      ; $6B36: $E6 $0F
@@ -4851,7 +4851,7 @@ jr_004_6CB3:
     ret                                           ; $6CB3: $C9
 
 jr_004_6CB4:
-    ld   hl, wEntitiesUnknowTableY                ; $6CB4: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6CB4: $21 $D0 $C3
     add  hl, bc                                   ; $6CB7: $09
     ld   a, [hl]                                  ; $6CB8: $7E
     inc  a                                        ; $6CB9: $3C
@@ -7574,7 +7574,7 @@ func_004_7C98::
     ld   hl, Data_004_7C94                        ; $7C9E: $21 $94 $7C
     add  hl, de                                   ; $7CA1: $19
     push hl                                       ; $7CA2: $E5
-    ld   hl, wEntitiesUnknowTableY                ; $7CA3: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7CA3: $21 $D0 $C3
     add  hl, bc                                   ; $7CA6: $09
     inc  [hl]                                     ; $7CA7: $34
     ld   a, [hl]                                  ; $7CA8: $7E

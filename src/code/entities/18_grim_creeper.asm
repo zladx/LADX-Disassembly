@@ -137,7 +137,7 @@ jr_018_70A4:
     and  $1F                                      ; $70A4: $E6 $1F
     jr   nz, label_018_70FD                       ; $70A6: $20 $55
 
-    ld   hl, wEntitiesUnknowTableY                ; $70A8: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $70A8: $21 $D0 $C3
     add  hl, bc                                   ; $70AB: $09
     ld   a, [hl]                                  ; $70AC: $7E
     cp   $06                                      ; $70AD: $FE $06
@@ -149,7 +149,7 @@ jr_018_70A4:
 
     ld   a, JINGLE_GRIM_CREEPER                   ; $70B8: $3E $31
     ldh  [hJingle], a                             ; $70BA: $E0 $F2
-    ld   hl, wEntitiesUnknowTableY                ; $70BC: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $70BC: $21 $D0 $C3
     add  hl, bc                                   ; $70BF: $09
     push bc                                       ; $70C0: $C5
     ld   c, [hl]                                  ; $70C1: $4E
@@ -169,7 +169,7 @@ jr_018_70A4:
     ld   hl, wEntitiesPosZTable                   ; $70D7: $21 $10 $C3
     add  hl, de                                   ; $70DA: $19
     ld   [hl], $1C                                ; $70DB: $36 $1C
-    ld   hl, wEntitiesUnknowTableY                ; $70DD: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $70DD: $21 $D0 $C3
     add  hl, de                                   ; $70E0: $19
     ld   [hl], c                                  ; $70E1: $71
     ld   hl, wEntitiesOptions1Table               ; $70E2: $21 $30 $C4
@@ -203,7 +203,7 @@ GrimCreeperState4Handler::
     cp   $06                                      ; $710C: $FE $06
     jr   nz, jr_018_7121                          ; $710E: $20 $11
 
-    ld   hl, wEntitiesUnknowTableY                ; $7110: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7110: $21 $D0 $C3
     add  hl, bc                                   ; $7113: $09
     ld   [hl], b                                  ; $7114: $70
     xor  a                                        ; $7115: $AF
@@ -320,7 +320,7 @@ jr_018_721E:
 
 jr_018_722C:
     add  e                                        ; $722C: $83
-    ld   hl, wEntitiesUnknowTableY                ; $722D: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $722D: $21 $D0 $C3
 
 jr_018_7230:
     add  hl, bc                                   ; $7230: $09
@@ -399,7 +399,7 @@ func_018_7288::
     cp   $FF                                      ; $728B: $FE $FF
     jr   nz, jr_018_72A2                          ; $728D: $20 $13
 
-    ld   hl, wEntitiesUnknowTableY                ; $728F: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $728F: $21 $D0 $C3
     add  hl, bc                                   ; $7292: $09
     ld   e, [hl]                                  ; $7293: $5E
     ld   d, b                                     ; $7294: $50

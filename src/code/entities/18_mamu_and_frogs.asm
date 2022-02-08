@@ -394,7 +394,7 @@ label_018_4373:
 
 func_018_438F::
     call GetRandomByte                            ; $438F: $CD $0D $28
-    ld   hl, wEntitiesUnknowTableY                ; $4392: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4392: $21 $D0 $C3
     add  hl, bc                                   ; $4395: $09
     ld   [hl], a                                  ; $4396: $77
     call IncrementEntityState                     ; $4397: $CD $12 $3B
@@ -405,7 +405,7 @@ func_018_439A::
     jp   nz, label_018_43B2                       ; $439E: $C2 $B2 $43
 
 jr_018_43A1:
-    ld   hl, wEntitiesUnknowTableY                ; $43A1: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $43A1: $21 $D0 $C3
     add  hl, bc                                   ; $43A4: $09
     inc  [hl]                                     ; $43A5: $34
     ld   a, [hl]                                  ; $43A6: $7E

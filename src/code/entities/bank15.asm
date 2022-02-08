@@ -7164,7 +7164,7 @@ func_015_7995::
     cp   ENTITY_STATUS_LIFTED                     ; $7997: $FE $07
     ret  z                                        ; $7999: $C8
 
-    ld   hl, wEntitiesUnknowTableI                ; $799A: $21 $70 $C4
+    ld   hl, wEntitiesGroundStatusTable           ; $799A: $21 $70 $C4
     add  hl, bc                                   ; $799D: $09
     ld   a, [hl]                                  ; $799E: $7E
     cp   $02                                      ; $799F: $FE $02

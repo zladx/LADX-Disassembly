@@ -6003,7 +6003,7 @@ CheepCheepJumpingState5Handler::
     add  hl, bc                                   ; $6CB4: $09
     inc  [hl]                                     ; $6CB5: $34
     push hl                                       ; $6CB6: $E5
-    ld   hl, wEntitiesUnknowTableI                ; $6CB7: $21 $70 $C4
+    ld   hl, wEntitiesGroundStatusTable           ; $6CB7: $21 $70 $C4
     add  hl, bc                                   ; $6CBA: $09
     ld   a, [hl]                                  ; $6CBB: $7E
     pop  hl                                       ; $6CBC: $E1

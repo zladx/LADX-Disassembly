@@ -72,7 +72,7 @@ ResetEntity::
     ld   hl, wEntitiesPosYSignTable               ; $406B: $21 $30 $C2
     add  hl, bc                                   ; $406E: $09
     ld   [hl], b                                  ; $406F: $70
-    ld   hl, wEntitiesUnknowTableI                ; $4070: $21 $70 $C4
+    ld   hl, wEntitiesGroundStatusTable           ; $4070: $21 $70 $C4
     add  hl, bc                                   ; $4073: $09
     ld   [hl], b                                  ; $4074: $70
     ld   hl, wEntitiesDropTimerTable              ; $4075: $21 $50 $C4

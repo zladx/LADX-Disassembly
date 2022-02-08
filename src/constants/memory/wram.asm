@@ -1245,11 +1245,14 @@ wEntitiesDropTimerTable::
 wEntitiesLoadOrderTable::
   ds $10 ; C460 - C46F
 
-; TODO find better name
-; Some physics flags?
-; Used by func_015_7995
-; Possible values: 02, 03
-wEntitiesUnknowTableI::
+; Entity ground effect modifier
+;
+; Possible values:
+;  0: on standard solid ground
+;  1: ???
+;  2: on shallow water (draws ripples)
+;  3: on tall grass (draws pushed-away grasses)
+wEntitiesGroundStatusTable::
   ds $10 ; C470 - C47F
 
 ; Entity-specific countdown 3

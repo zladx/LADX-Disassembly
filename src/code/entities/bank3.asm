@@ -2800,7 +2800,7 @@ func_003_5A2E::
     ld   [wC16A], a                               ; $5A3A: $EA $6A $C1
     ld   [wSwordCharge], a                        ; $5A3D: $EA $22 $C1
     ld   [wIsUsingSpinAttack], a                  ; $5A40: $EA $21 $C1
-    ld   hl, wEntitiesUnknowTableI                ; $5A43: $21 $70 $C4
+    ld   hl, wEntitiesGroundStatusTable           ; $5A43: $21 $70 $C4
     add  hl, bc                                   ; $5A46: $09
     ld   [hl], a                                  ; $5A47: $77
     ld   a, $02                                   ; $5A48: $3E $02
@@ -3929,7 +3929,7 @@ jr_003_60E3:
 
     xor  a                                        ; $60EC: $AF
     ld   [hl], a                                  ; $60ED: $77
-    ld   hl, wEntitiesUnknowTableI                ; $60EE: $21 $70 $C4
+    ld   hl, wEntitiesGroundStatusTable           ; $60EE: $21 $70 $C4
     add  hl, bc                                   ; $60F1: $09
     ld   a, [hl]                                  ; $60F2: $7E
     ld   hl, wEntitiesSpeedZTable                 ; $60F3: $21 $20 $C3
@@ -5542,7 +5542,7 @@ func_003_6B7B::
     ret                                           ; $6B8B: $C9
 
 jr_003_6B8C:
-    ld   hl, wEntitiesUnknowTableI                ; $6B8C: $21 $70 $C4
+    ld   hl, wEntitiesGroundStatusTable           ; $6B8C: $21 $70 $C4
     add  hl, bc                                   ; $6B8F: $09
     ld   a, [hl]                                  ; $6B90: $7E
     ld   e, a                                     ; $6B91: $5F
@@ -8012,7 +8012,7 @@ Data_003_788B::
 
 ; Another function for entity physics
 func_003_7893::
-    ld   hl, wEntitiesUnknowTableI                ; $7893: $21 $70 $C4
+    ld   hl, wEntitiesGroundStatusTable           ; $7893: $21 $70 $C4
     add  hl, bc                                   ; $7896: $09
     ld   a, [hl]                                  ; $7897: $7E
     ldh  [hMultiPurpose0], a                      ; $7898: $E0 $D7
@@ -8096,7 +8096,7 @@ jr_003_78E3:
     inc  e                                        ; $7906: $1C
 
 jr_003_7907:
-    ld   hl, wEntitiesUnknowTableI                ; $7907: $21 $70 $C4
+    ld   hl, wEntitiesGroundStatusTable           ; $7907: $21 $70 $C4
     add  hl, bc                                   ; $790A: $09
     ld   [hl], e                                  ; $790B: $73
 
@@ -8107,7 +8107,7 @@ jr_003_790C:
     and  $08                                      ; $7911: $E6 $08
     jr   z, jr_003_7973                           ; $7913: $28 $5E
 
-    ld   hl, wEntitiesUnknowTableI                ; $7915: $21 $70 $C4
+    ld   hl, wEntitiesGroundStatusTable           ; $7915: $21 $70 $C4
     add  hl, bc                                   ; $7918: $09
     ldh  a, [hMultiPurpose0]                      ; $7919: $F0 $D7
     cp   [hl]                                     ; $791B: $BE

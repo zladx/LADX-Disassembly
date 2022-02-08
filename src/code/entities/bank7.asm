@@ -2896,7 +2896,7 @@ jr_007_5314:
     ret                                           ; $5321: $C9
 
 PincerEntityHandler::
-    ld   hl, wEntitiesUnknowTableI                ; $5322: $21 $70 $C4
+    ld   hl, wEntitiesGroundStatusTable           ; $5322: $21 $70 $C4
     add  hl, bc                                   ; $5325: $09
     ld   [hl], b                                  ; $5326: $70
     ld   hl, wEntitiesRecoilVelocityX             ; $5327: $21 $F0 $C3
@@ -4266,7 +4266,7 @@ BlooperEntityHandler::
 
 jr_007_5C0B:
     call label_3B23                               ; $5C0B: $CD $23 $3B
-    ld   hl, wEntitiesUnknowTableI                ; $5C0E: $21 $70 $C4
+    ld   hl, wEntitiesGroundStatusTable           ; $5C0E: $21 $70 $C4
     add  hl, bc                                   ; $5C11: $09
     ld   a, [hl]                                  ; $5C12: $7E
     and  a                                        ; $5C13: $A7

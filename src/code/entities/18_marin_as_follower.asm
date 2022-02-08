@@ -582,7 +582,7 @@ jr_018_5CEF:
     cp   $02                                      ; $5D4C: $FE $02
     ret  z                                        ; $5D4E: $C8
 
-    ld   hl, wEntitiesUnknowTableI                ; $5D4F: $21 $70 $C4
+    ld   hl, wEntitiesGroundStatusTable           ; $5D4F: $21 $70 $C4
     add  hl, bc                                   ; $5D52: $09
     ld   a, [hl]                                  ; $5D53: $7E
     dec  a                                        ; $5D54: $3D

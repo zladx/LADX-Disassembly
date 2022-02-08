@@ -2126,7 +2126,7 @@ CreateFollowingNpcEntity::
     ld   [hl], a                                  ; $60CB: $77
     ld   hl, $D195                                ; $60CC: $21 $95 $D1
     call .decrementConsecutiveBytes               ; $60CF: $CD $18 $61
-    ld   hl, wEntitiesUnknowTableP                ; $60D2: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $60D2: $21 $40 $C4
     add  hl, de                                   ; $60D5: $19
     ld   [hl], $01                                ; $60D6: $36 $01
     ld   hl, wEntitiesPrivateCountdown1Table                                ; $60D8: $21 $F0 $C2

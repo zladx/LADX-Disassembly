@@ -8,7 +8,7 @@ CueBallEntityHandler::
     and  a                                        ; $4B7F: $A7
     jp   nz, label_006_4E88                       ; $4B80: $C2 $88 $4E
 
-    ld   hl, wEntitiesUnknownTableD               ; $4B83: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4B83: $21 $D0 $C2
     add  hl, bc                                   ; $4B86: $09
     ld   a, [hl]                                  ; $4B87: $7E
     and  a                                        ; $4B88: $A7
@@ -18,7 +18,7 @@ CueBallEntityHandler::
     ld   hl, wEntitiesHealthTable                 ; $4B8C: $21 $60 $C3
     add  hl, bc                                   ; $4B8F: $09
     ld   [hl], $08                                ; $4B90: $36 $08
-    ld   hl, wEntitiesUnknowTableP                ; $4B92: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4B92: $21 $40 $C4
     add  hl, bc                                   ; $4B95: $09
     ld   [hl], $01                                ; $4B96: $36 $01
 
@@ -118,7 +118,7 @@ jr_006_4C32:
     and  $01                                      ; $4C40: $E6 $01
     jr   nz, jr_006_4C4C                          ; $4C42: $20 $08
 
-    ld   hl, wEntitiesUnknowTableP                ; $4C44: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4C44: $21 $40 $C4
     add  hl, bc                                   ; $4C47: $09
     ld   a, [hl]                                  ; $4C48: $7E
     cpl                                           ; $4C49: $2F
@@ -171,7 +171,7 @@ jr_006_4C7B:
     jp   ClearEntitySpeed                         ; $4C80: $C3 $7F $3D
 
 jr_006_4C83:
-    ld   hl, wEntitiesUnknowTableP                ; $4C83: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4C83: $21 $40 $C4
     add  hl, bc                                   ; $4C86: $09
     ld   e, [hl]                                  ; $4C87: $5E
     ld   hl, wEntitiesDirectionTable              ; $4C88: $21 $80 $C3

@@ -128,11 +128,11 @@ TurtleRockHeadState1Handler::
 
 TurtleRockHeadState2Handler::
     ldh  a, [hActiveEntityPosX]                   ; $73C4: $F0 $EE
-    ld   hl, wEntitiesUnknowTableP                ; $73C6: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $73C6: $21 $40 $C4
     add  hl, bc                                   ; $73C9: $09
     ld   [hl], a                                  ; $73CA: $77
     ldh  a, [hActiveEntityVisualPosY]             ; $73CB: $F0 $EC
-    ld   hl, wEntitiesUnknownTableD               ; $73CD: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $73CD: $21 $D0 $C2
     add  hl, bc                                   ; $73D0: $09
     sub  $14                                      ; $73D1: $D6 $14
     ld   [hl], a                                  ; $73D3: $77
@@ -477,7 +477,7 @@ func_018_766A::
     jp   c, label_018_7726                        ; $768E: $DA $26 $77
 
 jr_018_7691:
-    ld   hl, wEntitiesUnknowTableP                ; $7691: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $7691: $21 $40 $C4
     add  hl, bc                                   ; $7694: $09
     ld   a, [hl]                                  ; $7695: $7E
     ldh  [hMultiPurposeG], a                               ; $7696: $E0 $E8
@@ -495,7 +495,7 @@ jr_018_7691:
     ldh  [hMultiPurposeE], a                           ; $76AD: $E0 $E5
     sra  a                                        ; $76AF: $CB $2F
     ldh  [hFreeWarpDataAddress], a                ; $76B1: $E0 $E6
-    ld   hl, wEntitiesUnknownTableD               ; $76B3: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $76B3: $21 $D0 $C2
     add  hl, bc                                   ; $76B6: $09
     ld   a, [hl]                                  ; $76B7: $7E
     ldh  [hMultiPurposeH], a                               ; $76B8: $E0 $E9

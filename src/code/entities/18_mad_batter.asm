@@ -1,5 +1,5 @@
 MadBatterEntityHandler::
-    ld   hl, wEntitiesUnknownTableD               ; $4EDD: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4EDD: $21 $D0 $C2
     add  hl, bc                                   ; $4EE0: $09
     ld   a, [hl]                                  ; $4EE1: $7E
     and  a                                        ; $4EE2: $A7
@@ -173,7 +173,7 @@ MadBatterState6Handler::
     ld   hl, wEntitiesPosYTable                   ; $4FEA: $21 $10 $C2
     add  hl, de                                   ; $4FED: $19
     ld   [hl], a                                  ; $4FEE: $77
-    ld   hl, wEntitiesUnknownTableD               ; $4FEF: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4FEF: $21 $D0 $C2
     add  hl, de                                   ; $4FF2: $19
     ld   [hl], $01                                ; $4FF3: $36 $01
     ld   hl, wEntitiesTransitionCountdownTable    ; $4FF5: $21 $E0 $C2
@@ -243,7 +243,7 @@ MadBatterState8Handler::
     and  a                                        ; $5058: $A7
     ret  nz                                       ; $5059: $C0
 
-    ld   hl, wEntitiesUnknowTableP                ; $505A: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $505A: $21 $40 $C4
     add  hl, bc                                   ; $505D: $09
     ld   a, [hl]                                  ; $505E: $7E
     and  a                                        ; $505F: $A7

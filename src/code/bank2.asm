@@ -6598,7 +6598,7 @@ jr_002_6FE3:
     ld   a, ENTITY_MASTER_STALFOS                 ; $6FF2: $3E $5F
     call SpawnNewEntity_trampoline                ; $6FF4: $CD $86 $3B
 
-    ld   hl, wEntitiesUnknowTableP                ; $6FF7: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $6FF7: $21 $40 $C4
     add  hl, de                                   ; $6FFA: $19
     dec  [hl]                                     ; $6FFB: $35
     jr   jr_002_702C                              ; $6FFC: $18 $2E

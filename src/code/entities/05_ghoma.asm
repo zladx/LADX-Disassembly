@@ -238,7 +238,7 @@ jr_005_7D21:
     ld   hl, wEntitiesPosYTable                   ; $7D34: $21 $10 $C2
     add  hl, bc                                   ; $7D37: $09
     ld   a, [hl]                                  ; $7D38: $7E
-    ld   hl, wEntitiesUnknownTableD               ; $7D39: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $7D39: $21 $D0 $C2
     add  hl, bc                                   ; $7D3C: $09
     ld   [hl], a                                  ; $7D3D: $77
     jr   jr_005_7D48                              ; $7D3E: $18 $08
@@ -352,7 +352,7 @@ jr_005_7DD8:
     jr   label_005_7DF0                           ; $7DDA: $18 $14
 
 label_005_7DDC:
-    ld   hl, wEntitiesUnknownTableD               ; $7DDC: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $7DDC: $21 $D0 $C2
     add  hl, bc                                   ; $7DDF: $09
     ld   a, [hl]                                  ; $7DE0: $7E
     ld   hl, wEntitiesPosYTable                   ; $7DE1: $21 $10 $C2

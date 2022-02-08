@@ -526,7 +526,7 @@ jr_019_4355:
     push bc                                       ; $436B: $C5
     call UpdateLinkWalkingAnimation_trampoline    ; $436C: $CD $F0 $0B
     pop  bc                                       ; $436F: $C1
-    ld   hl, wEntitiesUnknowTableP                ; $4370: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4370: $21 $40 $C4
     add  hl, bc                                   ; $4373: $09
     pop  af                                       ; $4374: $F1
     cp   $40                                      ; $4375: $FE $40
@@ -2240,7 +2240,7 @@ func_019_500D::
     ld   [hl], $D2                                ; $5011: $36 $D2
     ld   de, Data_019_4FDB                        ; $5013: $11 $DB $4F
     call RenderActiveEntitySpritesPair            ; $5016: $CD $C0 $3B
-    ld   hl, wEntitiesUnknownTableD               ; $5019: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5019: $21 $D0 $C2
     add  hl, bc                                   ; $501C: $09
     ld   a, [hl]                                  ; $501D: $7E
     and  a                                        ; $501E: $A7
@@ -2322,7 +2322,7 @@ jr_019_506C:
     ld   hl, wEntitiesTransitionCountdownTable    ; $5086: $21 $E0 $C2
     add  hl, de                                   ; $5089: $19
     ld   [hl], $17                                ; $508A: $36 $17
-    ld   hl, wEntitiesUnknowTableP                ; $508C: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $508C: $21 $40 $C4
     add  hl, de                                   ; $508F: $19
     inc  [hl]                                     ; $5090: $34
     pop  bc                                       ; $5091: $C1
@@ -4455,7 +4455,7 @@ jr_019_5F5C:
 
 label_019_5F5F:
     call ReturnIfNonInteractive_19                ; $5F5F: $CD $3D $7D
-    ld   hl, wEntitiesUnknownTableD               ; $5F62: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5F62: $21 $D0 $C2
     add  hl, bc                                   ; $5F65: $09
     ld   a, [hl]                                  ; $5F66: $7E
     and  a                                        ; $5F67: $A7
@@ -4480,7 +4480,7 @@ label_019_5F5F:
 
 label_019_5F84:
     call ReturnIfNonInteractive_19                ; $5F84: $CD $3D $7D
-    ld   hl, wEntitiesUnknownTableD               ; $5F87: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5F87: $21 $D0 $C2
     add  hl, bc                                   ; $5F8A: $09
     ld   a, [hl]                                  ; $5F8B: $7E
     and  a                                        ; $5F8C: $A7
@@ -4494,7 +4494,7 @@ label_019_5F84:
     and  $01                                      ; $5F96: $E6 $01
     ret  nz                                       ; $5F98: $C0
 
-    ld   hl, wEntitiesUnknowTableP                ; $5F99: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5F99: $21 $40 $C4
     add  hl, bc                                   ; $5F9C: $09
     dec  [hl]                                     ; $5F9D: $35
     ret  nz                                       ; $5F9E: $C0
@@ -4511,7 +4511,7 @@ IF __PATCH_0__
     ret  nz
 ENDC
 
-    ld   hl, wEntitiesUnknownTableD               ; $5FA9: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5FA9: $21 $D0 $C2
     add  hl, bc                                   ; $5FAC: $09
     inc  [hl]                                     ; $5FAD: $34
     ld   a, JINGLE_GHOST_PRESENCE                 ; $5FAE: $3E $2D
@@ -7596,12 +7596,12 @@ jr_019_7985:
     cp   ENTITY_TURTLE_ROCK_HEAD                  ; $79B8: $FE $7F
     jr   nz, .turtleRockHeadEnd                   ; $79BA: $20 $13
 
-    ld   hl, wEntitiesUnknowTableP                ; $79BC: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $79BC: $21 $40 $C4
     add  hl, bc                                   ; $79BF: $09
     ldh  a, [hMultiPurpose0]                      ; $79C0: $F0 $D7
     add  [hl]                                     ; $79C2: $86
     ld   [hl], a                                  ; $79C3: $77
-    ld   hl, wEntitiesUnknownTableD               ; $79C4: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $79C4: $21 $D0 $C2
     add  hl, bc                                   ; $79C7: $09
     ldh  a, [hMultiPurpose2]                      ; $79C8: $F0 $D9
     add  [hl]                                     ; $79CA: $86
@@ -7612,7 +7612,7 @@ jr_019_7985:
     cp   ENTITY_DESERT_LANMOLA                    ; $79CF: $FE $87
     jr   nz, .desertLanmolaEnd                    ; $79D1: $20 $3C
 
-    ld   hl, wEntitiesUnknownTableD               ; $79D3: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $79D3: $21 $D0 $C2
     add  hl, bc                                   ; $79D6: $09
     ld   a, [hl]                                  ; $79D7: $7E
     cp   $02                                      ; $79D8: $FE $02

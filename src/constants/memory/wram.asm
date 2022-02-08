@@ -1036,8 +1036,13 @@ wEntitiesPrivateState1Table::
 wEntitiesPrivateState2Table::
   ds $10 ; C2C0 - C2CF
 
-; Is the item a droppable? Or pickable?
-wEntitiesUnknownTableD::
+; Entity-specific state.
+;
+; When used by a droppble entity, possible values:
+;   0: ??
+;   1: ??
+;   2: pickable item cannot be picked up by sword
+wEntitiesPrivateState3Table::
   ds $10 ; C2D0 - C2DF
 
 ; Frames before the next state transition of the entity
@@ -1223,8 +1228,8 @@ wEntitiesFlashCountdownTable::
 wEntitiesOptions1Table::
   ds $10 ; C430 - C43F
 
-; Entities-specific private state?
-wEntitiesUnknowTableP::
+; Entity-specific state.
+wEntitiesPrivateState4Table::
   ds $10 ; C440 - C44F
 
 ; Number of frame before a dropped item disappears

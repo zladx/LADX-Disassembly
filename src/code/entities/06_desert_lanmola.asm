@@ -5,7 +5,7 @@ Data_006_55E5::
     db   $FC, $08, $F8
 
 DesertLanmolaEntityHandler::
-    ld   hl, wEntitiesUnknownTableD               ; $55E8: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $55E8: $21 $D0 $C2
     add  hl, bc                                   ; $55EB: $09
     ld   a, [hl]                                  ; $55EC: $7E
     cp   $02                                      ; $55ED: $FE $02
@@ -65,7 +65,7 @@ func_006_563A::
 
     ld   [hl], $CF                                ; $563F: $36 $CF
     call IncrementEntityPrivateState2             ; $5641: $CD $34 $56
-    ld   hl, wEntitiesUnknowTableP                ; $5644: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5644: $21 $40 $C4
     add  hl, bc                                   ; $5647: $09
     ld   [hl], $05                                ; $5648: $36 $05
 
@@ -113,7 +113,7 @@ jr_006_568A:
     ld   hl, wEntitiesUnknowTableY                ; $568E: $21 $D0 $C3
     add  hl, bc                                   ; $5691: $09
     ld   a, [hl]                                  ; $5692: $7E
-    ld   hl, wEntitiesUnknowTableP                ; $5693: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5693: $21 $40 $C4
     add  hl, bc                                   ; $5696: $09
     ld   e, [hl]                                  ; $5697: $5E
     dec  [hl]                                     ; $5698: $35
@@ -199,7 +199,7 @@ jr_006_56D9:
     ld   hl, wEntitiesSpeedYTable                 ; $570E: $21 $50 $C2
     add  hl, de                                   ; $5711: $19
     ld   [hl], $F0                                ; $5712: $36 $F0
-    ld   hl, wEntitiesUnknownTableD               ; $5714: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5714: $21 $D0 $C2
     add  hl, de                                   ; $5717: $19
     ld   [hl], $02                                ; $5718: $36 $02
     ld   hl, wEntitiesPhysicsFlagsTable           ; $571A: $21 $40 $C3

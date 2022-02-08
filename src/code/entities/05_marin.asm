@@ -252,7 +252,7 @@ jr_005_4FAC:
     push de                                       ; $4FC4: $D5
     call label_27DD                               ; $4FC5: $CD $DD $27
     pop  de                                       ; $4FC8: $D1
-    ld   hl, wEntitiesUnknownTableD               ; $4FC9: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4FC9: $21 $D0 $C2
     add  hl, bc                                   ; $4FCC: $09
     ld   [hl], b                                  ; $4FCD: $70
     ld   e, $92                                   ; $4FCE: $1E $92
@@ -307,7 +307,7 @@ jr_005_5008:
     cp   ROOM_SECTION_OW_VILLAGES                 ; $500A: $FE $C0
     jr   c, jr_005_5018                           ; $500C: $38 $0A
 
-    ld   hl, wEntitiesUnknownTableD               ; $500E: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $500E: $21 $D0 $C2
     add  hl, bc                                   ; $5011: $09
     ld   [hl], b                                  ; $5012: $70
     push de                                       ; $5013: $D5
@@ -315,17 +315,17 @@ jr_005_5008:
     pop  de                                       ; $5017: $D1
 
 jr_005_5018:
-    ld   hl, wEntitiesUnknowTableP                ; $5018: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5018: $21 $40 $C4
     add  hl, bc                                   ; $501B: $09
     ld   [hl], d                                  ; $501C: $72
     jp   IncrementEntityState                     ; $501D: $C3 $12 $3B
 
 func_005_5020::
     call ReturnIfNonInteractive_05                ; $5020: $CD $3A $7A
-    ld   hl, wEntitiesUnknowTableP                ; $5023: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5023: $21 $40 $C4
     add  hl, bc                                   ; $5026: $09
     ld   d, [hl]                                  ; $5027: $56
-    ld   hl, wEntitiesUnknownTableD               ; $5028: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5028: $21 $D0 $C2
     add  hl, bc                                   ; $502B: $09
     ld   a, [hl]                                  ; $502C: $7E
     and  a                                        ; $502D: $A7
@@ -518,7 +518,7 @@ jr_005_514F:
     call OpenDialog                               ; $5151: $CD $85 $23
     call IncrementEntityState                     ; $5154: $CD $12 $3B
     ld   [hl], $01                                ; $5157: $36 $01
-    ld   hl, wEntitiesUnknownTableD               ; $5159: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5159: $21 $D0 $C2
     add  hl, bc                                   ; $515C: $09
     ld   [hl], b                                  ; $515D: $70
 

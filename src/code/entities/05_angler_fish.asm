@@ -3,7 +3,7 @@
 ; Normally only 2 spriteslots can be loaded on a map transition, but this
 ; boss is behind a warp. And warps will load all 4 tileslots at once.
 AnglerFishEntityHandler::
-    ld   hl, wEntitiesUnknownTableD               ; $5576: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5576: $21 $D0 $C2
     add  hl, bc                                   ; $5579: $09
     ld   a, [hl]                                  ; $557A: $7E
     JP_TABLE                                      ; $557B
@@ -85,7 +85,7 @@ func_005_55CA::
     ld   hl, wEntitiesOptions1Table               ; $55EE: $21 $30 $C4
     add  hl, de                                   ; $55F1: $19
     ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF        ; $55F2: $36 $40
-    ld   hl, wEntitiesUnknownTableD               ; $55F4: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $55F4: $21 $D0 $C2
     add  hl, de                                   ; $55F7: $19
     ld   [hl], $01                                ; $55F8: $36 $01
     ld   hl, wEntitiesPosXTable                         ; $55FA: $21 $00 $C2
@@ -124,7 +124,7 @@ jr_005_561E:
     ld   hl, wEntitiesPhysicsFlagsTable                ; $5632: $21 $40 $C3
     add  hl, de                                   ; $5635: $19
     ld   [hl], $41                                ; $5636: $36 $41
-    ld   hl, wEntitiesUnknownTableD               ; $5638: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5638: $21 $D0 $C2
     add  hl, de                                   ; $563B: $19
     ld   [hl], $02                                ; $563C: $36 $02
     ldh  a, [hMultiPurpose0]                      ; $563E: $F0 $D7
@@ -167,7 +167,7 @@ jr_005_5650:
     ld   hl, wEntitiesHealthTable                                ; $567B: $21 $60 $C3
     add  hl, de                                   ; $567E: $19
     ld   [hl], d                                  ; $567F: $72
-    ld   hl, wEntitiesUnknownTableD               ; $5680: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5680: $21 $D0 $C2
     add  hl, de                                   ; $5683: $19
     ld   [hl], $03                                ; $5684: $36 $03
     call GetRandomByte                            ; $5686: $CD $0D $28

@@ -205,7 +205,7 @@ WalrusState3Handler::
     jp   IncrementEntityState                     ; $5695: $C3 $12 $3B
 
 jr_018_5698:
-    ld   hl, wEntitiesUnknownTableD               ; $5698: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5698: $21 $D0 $C2
     add  hl, bc                                   ; $569B: $09
     ld   e, [hl]                                  ; $569C: $5E
     ld   d, b                                     ; $569D: $50

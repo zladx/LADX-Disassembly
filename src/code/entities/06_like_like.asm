@@ -6,7 +6,7 @@ LikeLikeEntityHandler::
     call RenderActiveEntitySpritesPair            ; $7DDF: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $7DE2: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $7DE5: $CD $F7 $64
-    ld   hl, wEntitiesUnknownTableD               ; $7DE8: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $7DE8: $21 $D0 $C2
     add  hl, bc                                   ; $7DEB: $09
     ld   a, [hl]                                  ; $7DEC: $7E
     JP_TABLE                                      ; $7DED
@@ -20,7 +20,7 @@ LikeLikeState0Handler::
     call label_3B44                               ; $7DF7: $CD $44 $3B
     jr   nc, jr_006_7E06                          ; $7DFA: $30 $0A
 
-    ld   hl, wEntitiesUnknownTableD               ; $7DFC: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $7DFC: $21 $D0 $C2
     add  hl, bc                                   ; $7DFF: $09
     inc  [hl]                                     ; $7E00: $34
     ld   hl, wEntitiesUnknowTableY                ; $7E01: $21 $D0 $C3
@@ -47,7 +47,7 @@ LikeLikeState1Handler::
 
     call GetEntityDropTimer                       ; $7E1C: $CD $FB $0B
     ld   [hl], $15                                ; $7E1F: $36 $15
-    ld   hl, wEntitiesUnknownTableD               ; $7E21: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $7E21: $21 $D0 $C2
     add  hl, bc                                   ; $7E24: $09
     ld   [hl], b                                  ; $7E25: $70
     ret                                           ; $7E26: $C9

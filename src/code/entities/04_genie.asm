@@ -20,7 +20,7 @@ GenieEntityHandler::
 ._04 dw GenieState4Handler
 
 GenieState0Handler::
-    ld   hl, wEntitiesUnknowTableP                ; $4016: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4016: $21 $40 $C4
     add  hl, bc                                   ; $4019: $09
     ld   a, [hl]                                  ; $401A: $7E
     cp   GENIE_VAR_A                              ; $401B: $FE $03
@@ -126,7 +126,7 @@ func_004_40A3::
     ldh  [hLinkSpeedX], a                               ; $40C5: $E0 $9A
 
 jr_004_40C7:
-    ld   hl, wEntitiesUnknownTableD               ; $40C7: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $40C7: $21 $D0 $C2
     add  hl, bc                                   ; $40CA: $09
     ld   a, [hl]                                  ; $40CB: $7E
     and  a                                        ; $40CC: $A7
@@ -167,7 +167,7 @@ jr_004_40DF:
     cp   $04                                      ; $4106: $FE $04
     jr   nc, jr_004_410F                          ; $4108: $30 $05
 
-    ld   hl, wEntitiesUnknownTableD               ; $410A: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $410A: $21 $D0 $C2
     add  hl, bc                                   ; $410D: $09
     inc  [hl]                                     ; $410E: $34
 
@@ -906,13 +906,13 @@ func_004_4575::
     and  $01                                      ; $458E: $E6 $01
     jr   nz, jr_004_45A6                          ; $4590: $20 $14
 
-    ld   hl, wEntitiesUnknownTableD               ; $4592: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4592: $21 $D0 $C2
     add  hl, bc                                   ; $4595: $09
     ld   a, [hl]                                  ; $4596: $7E
     ld   hl, wEntitiesPosYTable                   ; $4597: $21 $10 $C2
     add  hl, bc                                   ; $459A: $09
     ld   [hl], a                                  ; $459B: $77
-    ld   hl, wEntitiesUnknowTableP                ; $459C: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $459C: $21 $40 $C4
     add  hl, bc                                   ; $459F: $09
     ld   a, [hl]                                  ; $45A0: $7E
     ld   hl, wEntitiesPosXTable                         ; $45A1: $21 $00 $C2
@@ -1013,7 +1013,7 @@ func_004_4634::
     ld   e, a                                     ; $463B: $5F
     ld   a, $48                                   ; $463C: $3E $48
     sub  e                                        ; $463E: $93
-    ld   hl, wEntitiesUnknownTableD               ; $463F: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $463F: $21 $D0 $C2
     add  hl, bc                                   ; $4642: $09
     ld   [hl], a                                  ; $4643: $77
     ld   hl, wEntitiesPosXTable                         ; $4644: $21 $00 $C2
@@ -1023,7 +1023,7 @@ func_004_4634::
     ld   e, a                                     ; $464B: $5F
     ld   a, $50                                   ; $464C: $3E $50
     sub  e                                        ; $464E: $93
-    ld   hl, wEntitiesUnknowTableP                ; $464F: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $464F: $21 $40 $C4
     add  hl, bc                                   ; $4652: $09
     ld   [hl], a                                  ; $4653: $77
     ret                                           ; $4654: $C9
@@ -1062,11 +1062,11 @@ func_004_46F9::
     and  $01                                      ; $4701: $E6 $01
     jr   nz, jr_004_4713                          ; $4703: $20 $0E
 
-    ld   hl, wEntitiesUnknownTableD               ; $4705: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4705: $21 $D0 $C2
     add  hl, bc                                   ; $4708: $09
     ld   a, [hl]                                  ; $4709: $7E
     ldh  [hActiveEntityVisualPosY], a             ; $470A: $E0 $EC
-    ld   hl, wEntitiesUnknowTableP                ; $470C: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $470C: $21 $40 $C4
     add  hl, bc                                   ; $470F: $09
     ld   a, [hl]                                  ; $4710: $7E
     ldh  [hActiveEntityPosX], a                               ; $4711: $E0 $EE

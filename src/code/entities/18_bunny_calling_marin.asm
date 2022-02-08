@@ -81,7 +81,7 @@ func_018_5321::
     and  a                                        ; $5323: $A7
     jr   z, jr_018_5337                           ; $5324: $28 $11
 
-    ld   hl, wEntitiesUnknowTableP                ; $5326: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $5326: $21 $40 $C4
     add  hl, bc                                   ; $5329: $09
     ld   a, [hl]                                  ; $532A: $7E
     dec  [hl]                                     ; $532B: $35

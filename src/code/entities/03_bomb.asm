@@ -36,7 +36,7 @@ jr_003_66BF:
     add  hl, bc                                   ; $66CE: $09
     ld   [hl], $FF                                ; $66CF: $36 $FF
     call GetEntityPrivateCountdown1                                      ; $66D1: $CD $00 $0C
-    ld   hl, wEntitiesUnknowTableP                ; $66D4: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $66D4: $21 $40 $C4
     add  hl, bc                                   ; $66D7: $09
     or   [hl]                                     ; $66D8: $B6
     jr   nz, jr_003_66FA                          ; $66D9: $20 $1F

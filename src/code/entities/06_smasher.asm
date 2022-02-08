@@ -1,5 +1,5 @@
 SmasherEntityHandler::
-    ld   hl, wEntitiesUnknowTableP                ; $4509: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $4509: $21 $40 $C4
     add  hl, bc                                   ; $450C: $09
     ld   a, [hl]                                  ; $450D: $7E
     and  a                                        ; $450E: $A7
@@ -7,7 +7,7 @@ SmasherEntityHandler::
 
     ld   a, c                                     ; $4512: $79
     ld   [$D202], a                               ; $4513: $EA $02 $D2
-    ld   hl, wEntitiesUnknownTableD               ; $4516: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4516: $21 $D0 $C2
     add  hl, bc                                   ; $4519: $09
     ld   a, [hl]                                  ; $451A: $7E
     and  a                                        ; $451B: $A7
@@ -28,7 +28,7 @@ SmasherEntityHandler::
     ld   hl, wEntitiesPosXTable                   ; $4535: $21 $00 $C2
     add  hl, de                                   ; $4538: $19
     ld   [hl], a                                  ; $4539: $77
-    ld   hl, wEntitiesUnknowTableP                ; $453A: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $453A: $21 $40 $C4
     add  hl, de                                   ; $453D: $19
     inc  [hl]                                     ; $453E: $34
 

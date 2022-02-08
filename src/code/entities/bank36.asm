@@ -839,13 +839,13 @@ jr_036_4517:
     cp   $0C                                      ; $4522: $FE $0C
     jr   nc, jr_036_452D                          ; $4524: $30 $07
 
-    ld   hl, wEntitiesUnknownTableD               ; $4526: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $4526: $21 $D0 $C2
     add  hl, bc                                   ; $4529: $09
     ld   a, $E2                                   ; $452A: $3E $E2
     ld   [hl], a                                  ; $452C: $77
 
 jr_036_452D:
-    ld   hl, wEntitiesUnknownTableD               ; $452D: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $452D: $21 $D0 $C2
     add  hl, bc                                   ; $4530: $09
     ld   a, [hl]                                  ; $4531: $7E
     and  a                                        ; $4532: $A7
@@ -940,7 +940,7 @@ jr_036_45A4:
     cp   $0C                                      ; $45B8: $FE $0C
     jr   nc, jr_036_45E6                          ; $45BA: $30 $2A
 
-    ld   hl, wEntitiesUnknownTableD               ; $45BC: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $45BC: $21 $D0 $C2
     add  hl, bc                                   ; $45BF: $09
     ld   a, $DD                                   ; $45C0: $3E $DD
     ld   [hl], a                                  ; $45C2: $77
@@ -963,13 +963,13 @@ jr_036_45D8:
     cp   $0C                                      ; $45DB: $FE $0C
     jr   nc, jr_036_45E6                          ; $45DD: $30 $07
 
-    ld   hl, wEntitiesUnknownTableD               ; $45DF: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $45DF: $21 $D0 $C2
     add  hl, bc                                   ; $45E2: $09
     ld   a, $E8                                   ; $45E3: $3E $E8
     ld   [hl], a                                  ; $45E5: $77
 
 jr_036_45E6:
-    ld   hl, wEntitiesUnknownTableD               ; $45E6: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $45E6: $21 $D0 $C2
     add  hl, bc                                   ; $45E9: $09
     ld   a, [hl]                                  ; $45EA: $7E
     and  a                                        ; $45EB: $A7
@@ -2868,7 +2868,7 @@ TunicFairyState3::
     call func_036_5153                            ; $5185: $CD $53 $51
     ld   a, $60                                   ; $5188: $3E $60
     call func_036_6C83                            ; $518A: $CD $83 $6C
-    ld   hl, wEntitiesUnknownTableD               ; $518D: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $518D: $21 $D0 $C2
     add  hl, bc                                   ; $5190: $09
     ld   [hl], e                                  ; $5191: $73
     call IncrementEntityState                     ; $5192: $CD $12 $3B
@@ -2892,7 +2892,7 @@ TunicFairyState5::
     and  a                                        ; $51B3: $A7
     ret  nz                                       ; $51B4: $C0
 
-    ld   hl, wEntitiesUnknownTableD               ; $51B5: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $51B5: $21 $D0 $C2
     add  hl, bc                                   ; $51B8: $09
     ld   [hl], $00                                ; $51B9: $36 $00
     call IncrementEntityState                     ; $51BB: $CD $12 $3B
@@ -2905,7 +2905,7 @@ Data_036_51BF::
 func_036_51DF::
     ld   a, $07                                   ; $51DF: $3E $07
     ldh  [hAnimatedTilesGroup], a                 ; $51E1: $E0 $A4
-    ld   hl, wEntitiesUnknownTableD               ; $51E3: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $51E3: $21 $D0 $C2
     add  hl, bc                                   ; $51E6: $09
     ld   e, [hl]                                  ; $51E7: $5E
     ld   d, $00                                   ; $51E8: $16 $00
@@ -2996,7 +2996,7 @@ TunicFairyState6::
     and  $03                                      ; $5254: $E6 $03
     ret  nz                                       ; $5256: $C0
 
-    ld   hl, wEntitiesUnknownTableD               ; $5257: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5257: $21 $D0 $C2
     add  hl, bc                                   ; $525A: $09
     inc  [hl]                                     ; $525B: $34
     ld   hl, wObjPal1 + 2*2                       ; $525C: $21 $54 $DC
@@ -3059,7 +3059,7 @@ jr_036_5297:
     ld   a, $02                                   ; $52AE: $3E $02
     ld   [wPaletteDataFlags], a                   ; $52B0: $EA $D1 $DD
     call func_036_51DF                            ; $52B3: $CD $DF $51
-    ld   hl, wEntitiesUnknownTableD               ; $52B6: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $52B6: $21 $D0 $C2
     add  hl, bc                                   ; $52B9: $09
     ld   a, [hl]                                  ; $52BA: $7E
     cp   $20                                      ; $52BB: $FE $20
@@ -3070,7 +3070,7 @@ jr_036_5297:
     ld   a, [hl]                                  ; $52C2: $7E
     inc  a                                        ; $52C3: $3C
     ld   [wTunicType], a                          ; $52C4: $EA $0F $DC
-    ld   hl, wEntitiesUnknownTableD               ; $52C7: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $52C7: $21 $D0 $C2
     add  hl, bc                                   ; $52CA: $09
     ld   e, [hl]                                  ; $52CB: $5E
     ld   d, $00                                   ; $52CC: $16 $00
@@ -3514,7 +3514,7 @@ func_036_55B1::
     ld   [hl], a                                  ; $55CA: $77
     call PointHLToEntitySpeedY                    ; $55CB: $CD $F3 $6B
     ld   [hl], a                                  ; $55CE: $77
-    ld   hl, wEntitiesUnknownTableD               ; $55CF: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $55CF: $21 $D0 $C2
     add  hl, bc                                   ; $55D2: $09
     ld   [hl], $01                                ; $55D3: $36 $01
     ld   a, $20                                   ; $55D5: $3E $20
@@ -3593,7 +3593,7 @@ jr_036_5603:
     jr   jr_036_5673                              ; $5650: $18 $21
 
 jr_036_5652:
-    ld   hl, wEntitiesUnknownTableD               ; $5652: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5652: $21 $D0 $C2
     add  hl, bc                                   ; $5655: $09
     ld   a, [hl]                                  ; $5656: $7E
     and  a                                        ; $5657: $A7
@@ -4719,7 +4719,7 @@ AvalaunchState3Handler::
     ld   [hl], a                                  ; $5D17: $77
     call PointHLToEntitySpeedY                    ; $5D18: $CD $F3 $6B
     ld   [hl], a                                  ; $5D1B: $77
-    ld   hl, wEntitiesUnknownTableD               ; $5D1C: $21 $D0 $C2
+    ld   hl, wEntitiesPrivateState3Table          ; $5D1C: $21 $D0 $C2
     add  hl, bc                                   ; $5D1F: $09
     call GetRandomByte                            ; $5D20: $CD $0D $28
     and  [hl]                                     ; $5D23: $A6
@@ -5571,7 +5571,7 @@ jr_036_61AA:
     ld   hl, wEntitiesTransitionCountdownTable    ; $61F9: $21 $E0 $C2
     add  hl, de                                   ; $61FC: $19
     ld   [hl], $48                                ; $61FD: $36 $48
-    ld   hl, wEntitiesUnknowTableP                ; $61FF: $21 $40 $C4
+    ld   hl, wEntitiesPrivateState4Table          ; $61FF: $21 $40 $C4
     add  hl, de                                   ; $6202: $19
     ld   [hl], $01                                ; $6203: $36 $01
 

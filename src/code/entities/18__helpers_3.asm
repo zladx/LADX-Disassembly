@@ -16,7 +16,7 @@ func_018_7D3B::
 
     ld   e, a                                     ; $7D47: $5F
     ld   d, b                                     ; $7D48: $50
-    ld   hl, wEntitiesUnknowTableR+15                                ; $7D49: $21 $9F $C3
+    ld   hl, wEntitiesPrivateState5Table+15       ; $7D49: $21 $9F $C3
     add  hl, de                                   ; $7D4C: $19
     ld   a, [hl]                                  ; $7D4D: $7E
     cp   $03                                      ; $7D4E: $FE $03

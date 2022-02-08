@@ -37,7 +37,7 @@ ResetEntity::
     ld   hl, wEntitiesPrivateState4Table          ; $4030: $21 $40 $C4
     add  hl, bc                                   ; $4033: $09
     ld   [hl], b                                  ; $4034: $70
-    ld   hl, wEntitiesUnknowTableR                ; $4035: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $4035: $21 $90 $C3
     add  hl, bc                                   ; $4038: $09
     ld   [hl], b                                  ; $4039: $70
     ld   hl, wEntitiesTransitionCountdownTable    ; $403A: $21 $E0 $C2

@@ -705,7 +705,7 @@ label_004_510F:
     and  a                                        ; $5117: $A7
     jr   z, jr_004_5120                           ; $5118: $28 $06
 
-    ld   hl, wEntitiesUnknowTableR                ; $511A: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $511A: $21 $90 $C3
     add  hl, bc                                   ; $511D: $09
     ld   [hl], $FF                                ; $511E: $36 $FF
 
@@ -1028,7 +1028,7 @@ jr_004_5340:
     call SetEntitySpriteVariant                   ; $535C: $CD $0C $3B
 
 jr_004_535F:
-    ld   hl, wEntitiesUnknowTableR                ; $535F: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $535F: $21 $90 $C3
     add  hl, bc                                   ; $5362: $09
     ld   a, [hl]                                  ; $5363: $7E
     and  a                                        ; $5364: $A7
@@ -2699,7 +2699,7 @@ jr_004_5F96:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5F9C: $21 $40 $C3
     add  hl, bc                                   ; $5F9F: $09
     ld   [hl], $84                                ; $5FA0: $36 $84
-    ld   hl, wEntitiesUnknowTableR                ; $5FA2: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $5FA2: $21 $90 $C3
     add  hl, bc                                   ; $5FA5: $09
     ld   a, [hl]                                  ; $5FA6: $7E
     ldh  [hMultiPurposeG], a                               ; $5FA7: $E0 $E8
@@ -5403,7 +5403,7 @@ jr_004_6F6C:
     ld   [$D201], a                               ; $6FA4: $EA $01 $D2
     call IncrementEntityState                     ; $6FA7: $CD $12 $3B
     ld   a, [wTradeSequenceItem]                  ; $6FAA: $FA $0E $DB
-    ld   hl, wEntitiesUnknowTableR                ; $6FAD: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $6FAD: $21 $90 $C3
     add  hl, bc                                   ; $6FB0: $09
     ld   [hl], a                                  ; $6FB1: $77
     ld   hl, wObjPal6                             ; $6FB2: $21 $78 $DC
@@ -5449,7 +5449,7 @@ jr_004_6FE6:
     ld   [wConsecutiveStepsCount], a                               ; $6FE7: $EA $20 $C1
     ldh  [hLinkSpeedX], a                         ; $6FEA: $E0 $9A
     ld   e, $06                                   ; $6FEC: $1E $06
-    ld   hl, wEntitiesUnknowTableR                ; $6FEE: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $6FEE: $21 $90 $C3
     add  hl, bc                                   ; $6FF1: $09
     ld   a, [hl]                                  ; $6FF2: $7E
     and  a                                        ; $6FF3: $A7
@@ -7458,7 +7458,7 @@ func_004_7BE3::
 
     ld   e, a                                     ; $7BF4: $5F
     ld   d, b                                     ; $7BF5: $50
-    ld   hl, wEntitiesUnknowTableR+15                                ; $7BF6: $21 $9F $C3
+    ld   hl, wEntitiesPrivateState5Table+15                                ; $7BF6: $21 $9F $C3
     add  hl, de                                   ; $7BF9: $19
     ld   a, [hl]                                  ; $7BFA: $7E
     cp   $03                                      ; $7BFB: $FE $03

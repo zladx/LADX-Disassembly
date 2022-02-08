@@ -46,7 +46,7 @@ label_006_641F:
 
     ld   e, a                                     ; $642B: $5F
     ld   d, b                                     ; $642C: $50
-    ld   hl, wEntitiesUnknowTableR+15                                ; $642D: $21 $9F $C3
+    ld   hl, wEntitiesPrivateState5Table+15       ; $642D: $21 $9F $C3
     add  hl, de                                   ; $6430: $19
     ld   a, [hl]                                  ; $6431: $7E
     cp   $03                                      ; $6432: $FE $03

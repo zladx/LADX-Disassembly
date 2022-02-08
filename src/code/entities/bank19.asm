@@ -6625,7 +6625,7 @@ jr_019_71C0:
     cp   $05                                      ; $71D1: $FE $05
     jr   nc, jr_019_71FD                          ; $71D3: $30 $28
 
-    ld   hl, wEntitiesUnknowTableR                ; $71D5: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $71D5: $21 $90 $C3
     add  hl, bc                                   ; $71D8: $09
     ld   a, [hl]                                  ; $71D9: $7E
     and  $02                                      ; $71DA: $E6 $02
@@ -7982,7 +7982,7 @@ func_019_7CA2::
 
     ld   e, a                                     ; $7CB0: $5F
     ld   d, b                                     ; $7CB1: $50
-    ld   hl, wEntitiesUnknowTableR+15                                ; $7CB2: $21 $9F $C3
+    ld   hl, wEntitiesPrivateState5Table+15                                ; $7CB2: $21 $9F $C3
     add  hl, de                                   ; $7CB5: $19
     ld   a, [hl]                                  ; $7CB6: $7E
     cp   $03                                      ; $7CB7: $FE $03

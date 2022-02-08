@@ -157,7 +157,7 @@ func_005_4A17::
     ld   [hl], a                                  ; $4A37: $77
     jr   nc, jr_005_4A46                          ; $4A38: $30 $0C
 
-    ld   hl, wEntitiesUnknowTableR                ; $4A3A: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $4A3A: $21 $90 $C3
     add  hl, bc                                   ; $4A3D: $09
     ld   a, [hl]                                  ; $4A3E: $7E
     inc  a                                        ; $4A3F: $3C
@@ -170,7 +170,7 @@ jr_005_4A45:
     ld   [hl], a                                  ; $4A45: $77
 
 jr_005_4A46:
-    ld   hl, wEntitiesUnknowTableR                ; $4A46: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $4A46: $21 $90 $C3
     add  hl, bc                                   ; $4A49: $09
     ld   e, [hl]                                  ; $4A4A: $5E
     ld   d, b                                     ; $4A4B: $50

@@ -5,7 +5,7 @@ EntityInitSlimeEel::
     ld   [$D200], a                               ; $6CCC: $EA $00 $D2
     ld   [$D203], a                               ; $6CCF: $EA $03 $D2
     ld   [$D204], a                               ; $6CD2: $EA $04 $D2
-    ld   hl, wEntitiesUnknowTableR                ; $6CD5: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $6CD5: $21 $90 $C3
     add  hl, bc                                   ; $6CD8: $09
     ld   [hl], $01                                ; $6CD9: $36 $01
     ret
@@ -572,7 +572,7 @@ jr_005_7167:
     cp   $03                                      ; $7176: $FE $03
     jr   nz, jr_005_7188                          ; $7178: $20 $0E
 
-    ld   hl, wEntitiesUnknowTableR                ; $717A: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $717A: $21 $90 $C3
     add  hl, bc                                   ; $717D: $09
     ld   e, [hl]                                  ; $717E: $5E
     ld   hl, wEntitiesPrivateState2Table          ; $717F: $21 $C0 $C2
@@ -992,7 +992,7 @@ jr_005_7414:
     ld   a, [$D201]                               ; $7417: $FA $01 $D2
     ld   e, a                                     ; $741A: $5F
     ld   d, b                                     ; $741B: $50
-    ld   hl, wEntitiesUnknowTableR                ; $741C: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $741C: $21 $90 $C3
     add  hl, de                                   ; $741F: $19
     ld   a, [hl]                                  ; $7420: $7E
     cpl                                           ; $7421: $2F

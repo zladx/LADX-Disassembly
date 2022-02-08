@@ -247,7 +247,7 @@ jr_004_4163:
     or   [hl]                                     ; $417B: $B6
     jr   z, jr_004_418D                           ; $417C: $28 $0F
 
-    ld   hl, wEntitiesUnknowTableR                ; $417E: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $417E: $21 $90 $C3
     add  hl, bc                                   ; $4181: $09
     ld   a, [hl]                                  ; $4182: $7E
     and  $01                                      ; $4183: $E6 $01

@@ -1107,8 +1107,8 @@ wEntitiesUnusedTableA::
 wEntitiesDirectionTable::
   ds $10 ; C380 - C38F
 
-; TODO comment
-wEntitiesUnknowTableR::
+; Entity-specific state.
+wEntitiesPrivateState5Table::
   ds $10 ; C390 - C39F
 
 ; Type of the entity

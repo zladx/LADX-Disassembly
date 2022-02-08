@@ -289,7 +289,7 @@ func_005_7D62::
 
     ld   hl, hLinkPositionY                       ; $7D76: $21 $99 $FF
     ld   a, [hl]                                  ; $7D79: $7E
-    ld   hl, wEntitiesUnknowTableR                ; $7D7A: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $7D7A: $21 $90 $C3
     add  hl, bc                                   ; $7D7D: $09
     ld   [hl], a                                  ; $7D7E: $77
     call GetRandomByte                            ; $7D7F: $CD $0D $28
@@ -318,7 +318,7 @@ label_005_7D97:
     jp   label_005_7DF0                           ; $7DA5: $C3 $F0 $7D
 
 jr_005_7DA8:
-    ld   hl, wEntitiesUnknowTableR                ; $7DA8: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $7DA8: $21 $90 $C3
     add  hl, bc                                   ; $7DAB: $09
     ld   a, [hl]                                  ; $7DAC: $7E
     sub  $08                                      ; $7DAD: $D6 $08

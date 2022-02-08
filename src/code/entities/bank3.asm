@@ -4198,7 +4198,7 @@ Data_003_629E::
     db   FALSE                                    ; ENTITY_DROPPABLE_SECRET_SEASHELL
 
 func_003_62AF::
-    ld   hl, wEntitiesUnknowTableR                ; $62AF: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $62AF: $21 $90 $C3
     add  hl, bc                                   ; $62B2: $09
     ld   a, [hl]                                  ; $62B3: $7E
     and  a                                        ; $62B4: $A7
@@ -7731,7 +7731,7 @@ jr_003_76AC:
     ld   hl, wEntitiesPosYTable                   ; $76F8: $21 $10 $C2
     add  hl, de                                   ; $76FB: $19
     ld   [hl], a                                  ; $76FC: $77
-    ld   hl, wEntitiesUnknowTableR                ; $76FD: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $76FD: $21 $90 $C3
     add  hl, de                                   ; $7700: $19
     ld   a, c                                     ; $7701: $79
     inc  a                                        ; $7702: $3C
@@ -7770,7 +7770,7 @@ jr_003_771F:
 
     ld   a, c                                     ; $772D: $79
     inc  a                                        ; $772E: $3C
-    ld   hl, wEntitiesUnknowTableR                ; $772F: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $772F: $21 $90 $C3
     add  hl, de                                   ; $7732: $19
     ld   [hl], a                                  ; $7733: $77
 

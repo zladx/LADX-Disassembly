@@ -527,7 +527,7 @@ jr_018_590D:
     inc  d                                        ; $591D: $14
 
 jr_018_591E:
-    ld   hl, wEntitiesUnknowTableR                ; $591E: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $591E: $21 $90 $C3
     add  hl, bc                                   ; $5921: $09
     ld   [hl], d                                  ; $5922: $72
     ld   a, e                                     ; $5923: $7B
@@ -558,7 +558,7 @@ func_018_596B::
     ldh  a, [hActiveEntityVisualPosY]             ; $597B: $F0 $EC
     add  [hl]                                     ; $597D: $86
     ldh  [hActiveEntityVisualPosY], a             ; $597E: $E0 $EC
-    ld   hl, wEntitiesUnknowTableR                ; $5980: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $5980: $21 $90 $C3
     add  hl, bc                                   ; $5983: $09
     ld   a, [hl]                                  ; $5984: $7E
     and  a                                        ; $5985: $A7

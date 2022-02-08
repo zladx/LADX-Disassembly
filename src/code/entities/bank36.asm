@@ -1899,7 +1899,7 @@ func_036_4B57::
     ld   hl, wEntitiesPosYTable                   ; $4B67: $21 $10 $C2
     add  hl, de                                   ; $4B6A: $19
     ld   [hl], $7C                                ; $4B6B: $36 $7C
-    ld   hl, wEntitiesUnknowTableR                ; $4B6D: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $4B6D: $21 $90 $C3
     add  hl, bc                                   ; $4B70: $09
     ld   [hl], e                                  ; $4B71: $73
     call GetEntityTransitionCountdown             ; $4B72: $CD $05 $0C
@@ -1907,7 +1907,7 @@ func_036_4B57::
     jp   IncrementEntityState                     ; $4B77: $C3 $12 $3B
 
 func_036_4B7A::
-    ld   hl, wEntitiesUnknowTableR                ; $4B7A: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $4B7A: $21 $90 $C3
     add  hl, bc                                   ; $4B7D: $09
     ld   e, [hl]                                  ; $4B7E: $5E
     ld   d, $00                                   ; $4B7F: $16 $00
@@ -4561,7 +4561,7 @@ jr_036_5C23:
 ._0A dw AvalaunchStateAHandler
 
 label_036_5C3C:
-    ld   hl, wEntitiesUnknowTableR                ; $5C3C: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $5C3C: $21 $90 $C3
     add  hl, bc                                   ; $5C3F: $09
     ld   a, [hl]                                  ; $5C40: $7E
     JP_TABLE                                      ; $5C41
@@ -4577,7 +4577,7 @@ func_036_5C48::
     ld   [hl], $FF                                ; $5C51: $36 $FF
 
 func_036_5C53::
-    ld   hl, wEntitiesUnknowTableR                ; $5C53: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $5C53: $21 $90 $C3
     add  hl, bc                                   ; $5C56: $09
     inc  [hl]                                     ; $5C57: $34
     ret                                           ; $5C58: $C9
@@ -7224,7 +7224,7 @@ func_036_6B5C::
 
     ld   e, a                                     ; $6B6A: $5F
     ld   d, b                                     ; $6B6B: $50
-    ld   hl, wEntitiesUnknowTableR+15                                ; $6B6C: $21 $9F $C3
+    ld   hl, wEntitiesPrivateState5Table+15                                ; $6B6C: $21 $9F $C3
     add  hl, de                                   ; $6B6F: $19
     ld   a, [hl]                                  ; $6B70: $7E
     cp   $03                                      ; $6B71: $FE $03
@@ -8341,7 +8341,7 @@ jr_036_72A9:
 
 EntityInitGenie::
     xor  a                                        ; $72AB: $AF
-    ld   hl, wEntitiesUnknowTableR                ; $72AC: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $72AC: $21 $90 $C3
     add  hl, bc                                   ; $72AF: $09
     ld   [hl], a                                  ; $72B0: $77
     ld   hl, wEntitiesPosXTable                   ; $72B1: $21 $00 $C2

@@ -230,7 +230,7 @@ jr_007_415A:
     ld   hl, wEntitiesStatusTable                 ; $4168: $21 $80 $C2
     add  hl, bc                                   ; $416B: $09
     ld   [hl], $07                                ; $416C: $36 $07
-    ld   hl, wEntitiesUnknowTableR                ; $416E: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $416E: $21 $90 $C3
     add  hl, bc                                   ; $4171: $09
     ld   [hl], $01                                ; $4172: $36 $01
     ld   hl, wEntitiesUnknowTableW                ; $4174: $21 $90 $C4
@@ -485,7 +485,7 @@ jr_007_4342:
     ld   a, l                                     ; $4342: $7D
     dec  a                                        ; $4343: $3D
     and  $0F                                      ; $4344: $E6 $0F
-    ld   hl, wEntitiesUnknowTableR                ; $4346: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $4346: $21 $90 $C3
     add  hl, bc                                   ; $4349: $09
     ld   [hl], a                                  ; $434A: $77
     jp   IncrementEntityState                     ; $434B: $C3 $12 $3B
@@ -532,7 +532,7 @@ func_007_4382::
 
 func_007_438C::
     call func_007_44DC                            ; $438C: $CD $DC $44
-    ld   hl, wEntitiesUnknowTableR                ; $438F: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $438F: $21 $90 $C3
     add  hl, bc                                   ; $4392: $09
     ld   e, [hl]                                  ; $4393: $5E
     ld   d, $00                                   ; $4394: $16 $00
@@ -555,7 +555,7 @@ func_007_43AD::
     and  $07                                      ; $43AF: $E6 $07
     ret  nz                                       ; $43B1: $C0
 
-    ld   hl, wEntitiesUnknowTableR                ; $43B2: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $43B2: $21 $90 $C3
     add  hl, bc                                   ; $43B5: $09
     ld   e, [hl]                                  ; $43B6: $5E
     ld   d, $00                                   ; $43B7: $16 $00
@@ -569,7 +569,7 @@ func_007_43AD::
     jp   IncrementEntityState                     ; $43C2: $C3 $12 $3B
 
 func_007_43C5::
-    ld   hl, wEntitiesUnknowTableR                ; $43C5: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $43C5: $21 $90 $C3
     add  hl, bc                                   ; $43C8: $09
     ld   e, [hl]                                  ; $43C9: $5E
     ld   d, $00                                   ; $43CA: $16 $00
@@ -641,7 +641,7 @@ func_007_4429::
     ret  z                                        ; $4435: $C8
 
 jr_007_4436:
-    ld   hl, wEntitiesUnknowTableR                ; $4436: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $4436: $21 $90 $C3
     add  hl, bc                                   ; $4439: $09
     ld   e, [hl]                                  ; $443A: $5E
     ld   d, $00                                   ; $443B: $16 $00
@@ -1337,7 +1337,7 @@ func_007_48CA::
     call GetEntityTransitionCountdown             ; $48CA: $CD $05 $0C
     ret  nz                                       ; $48CD: $C0
 
-    ld   hl, wEntitiesUnknowTableR                ; $48CE: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $48CE: $21 $90 $C3
     add  hl, bc                                   ; $48D1: $09
     ld   a, [hl]                                  ; $48D2: $7E
     cp   $03                                      ; $48D3: $FE $03
@@ -2190,7 +2190,7 @@ Data_007_4E8D::
 TarinBeekeeperEntityHandler::
     ld   a, c                                     ; $4EB1: $79
     ld   [$D204], a                               ; $4EB2: $EA $04 $D2
-    ld   hl, wEntitiesUnknowTableR                ; $4EB5: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $4EB5: $21 $90 $C3
     add  hl, bc                                   ; $4EB8: $09
     ld   a, [hl]                                  ; $4EB9: $7E
     and  a                                        ; $4EBA: $A7
@@ -7380,7 +7380,7 @@ func_007_6ED0::
     call GetEntityTransitionCountdown             ; $6ED6: $CD $05 $0C
     ld   [hl], $80                                ; $6ED9: $36 $80
     ldh  a, [hDefaultMusicTrack]                  ; $6EDB: $F0 $B0
-    ld   hl, wEntitiesUnknowTableR                ; $6EDD: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $6EDD: $21 $90 $C3
     add  hl, bc                                   ; $6EE0: $09
     ld   [hl], a                                  ; $6EE1: $77
     ld   hl, wEntitiesHealthTable                 ; $6EE2: $21 $60 $C3
@@ -9283,7 +9283,7 @@ func_007_7CF0::
 
     ld   e, a                                     ; $7D01: $5F
     ld   d, b                                     ; $7D02: $50
-    ld   hl, wEntitiesUnknowTableR+15                                ; $7D03: $21 $9F $C3
+    ld   hl, wEntitiesPrivateState5Table+15                                ; $7D03: $21 $9F $C3
     add  hl, de                                   ; $7D06: $19
     ld   a, [hl]                                  ; $7D07: $7E
     cp   $03                                      ; $7D08: $FE $03
@@ -9699,7 +9699,7 @@ func_007_7ED6::
     ld   hl, wEntitiesPrivateCountdown1Table      ; $7EFA: $21 $F0 $C2
     add  hl, de                                   ; $7EFD: $19
     ld   [hl], $20                                ; $7EFE: $36 $20
-    ld   hl, wEntitiesUnknowTableR                ; $7F00: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $7F00: $21 $90 $C3
     add  hl, bc                                   ; $7F03: $09
     ld   a, [hl]                                  ; $7F04: $7E
     ldh  [hDefaultMusicTrack], a                  ; $7F05: $E0 $B0

@@ -1940,7 +1940,7 @@ FinalNightmareEntityHandler::
     call func_015_5064                            ; $5090: $CD $64 $50
 
 jr_015_5093:
-    ld   hl, wEntitiesUnknowTableR                ; $5093: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $5093: $21 $90 $C3
     add  hl, bc                                   ; $5096: $09
     ld   a, [hl]                                  ; $5097: $7E
     cp   $02                                      ; $5098: $FE $02
@@ -2473,7 +2473,7 @@ jr_015_53AF:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $53C9: $21 $40 $C3
     add  hl, de                                   ; $53CC: $19
     ld   [hl], $C2                                ; $53CD: $36 $C2
-    ld   hl, wEntitiesUnknowTableR                ; $53CF: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $53CF: $21 $90 $C3
     add  hl, de                                   ; $53D2: $19
     inc  [hl]                                     ; $53D3: $34
     pop  bc                                       ; $53D4: $C1
@@ -5759,7 +5759,7 @@ func_015_6FBC::
     call ClearEntityStatus_15                        ; $6FD0: $CD $31 $7C
     ld   a, ENTITY_FINAL_NIGHTMARE                ; $6FD3: $3E $E6
     call SpawnNewEntity_trampoline                ; $6FD5: $CD $86 $3B
-    ld   hl, wEntitiesUnknowTableR                ; $6FD8: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $6FD8: $21 $90 $C3
     add  hl, de                                   ; $6FDB: $19
     ld   [hl], $02                                ; $6FDC: $36 $02
     ld   hl, wEntitiesPosYTable                   ; $6FDE: $21 $10 $C2
@@ -7338,7 +7338,7 @@ func_015_7A6E::
 
     ld   e, a                                     ; $7A7C: $5F
     ld   d, b                                     ; $7A7D: $50
-    ld   hl, wEntitiesUnknowTableR+15                                ; $7A7E: $21 $9F $C3
+    ld   hl, wEntitiesPrivateState5Table+15                                ; $7A7E: $21 $9F $C3
     add  hl, de                                   ; $7A81: $19
     ld   a, [hl]                                  ; $7A82: $7E
     cp   $03                                      ; $7A83: $FE $03

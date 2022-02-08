@@ -185,7 +185,7 @@ jr_018_5AE7:
     and  a                                        ; $5AF0: $A7
     ret  nz                                       ; $5AF1: $C0
 
-    ld   hl, wEntitiesUnknowTableV                ; $5AF2: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $5AF2: $21 $80 $C4
     add  hl, bc                                   ; $5AF5: $09
     ld   a, [hl]                                  ; $5AF6: $7E
     and  a                                        ; $5AF7: $A7
@@ -234,7 +234,7 @@ jr_018_5B13:
 
 jr_018_5B33:
     ld   [hl], b                                  ; $5B33: $70
-    ld   hl, wEntitiesUnknowTableV                ; $5B34: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $5B34: $21 $80 $C4
     add  hl, bc                                   ; $5B37: $09
     ld   [hl], $1C                                ; $5B38: $36 $1C
     ret                                           ; $5B3A: $C9

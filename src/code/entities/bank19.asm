@@ -5892,7 +5892,7 @@ jr_019_6BFD:
 ._05 dw CheepCheepJumpingState5Handler
 
 CheepCheepJumpingState0Handler::
-    ld   hl, wEntitiesUnknowTableV                ; $6C0C: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $6C0C: $21 $80 $C4
     add  hl, bc                                   ; $6C0F: $09
     ld   [hl], $03                                ; $6C10: $36 $03
     ldh  a, [hActiveEntityPosY]                   ; $6C12: $F0 $EF

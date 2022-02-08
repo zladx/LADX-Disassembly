@@ -740,8 +740,8 @@ UpdateEntityTimers::
     dec  [hl]                                     ; $4DC2: $35
 .privateCountdown2End
 
-    ; If wEntitiesUnknowTableV > 0, decrement it
-    ld   hl, wEntitiesUnknowTableV                ; $4DC3: $21 $80 $C4
+    ; If wEntitiesPrivateCountdown3Table > 0, decrement it
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $4DC3: $21 $80 $C4
     add  hl, bc                                   ; $4DC6: $09
     ld   a, [hl]                                  ; $4DC7: $7E
     and  a                                        ; $4DC8: $A7

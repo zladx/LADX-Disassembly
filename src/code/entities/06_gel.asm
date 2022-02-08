@@ -139,7 +139,7 @@ jr_006_7CD4:
     cp   $04                                      ; $7CD6: $FE $04
     jr   z, jr_006_7CE5                           ; $7CD8: $28 $0B
 
-    ld   hl, wEntitiesUnknowTableV                ; $7CDA: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $7CDA: $21 $80 $C4
     add  hl, bc                                   ; $7CDD: $09
     ld   a, [hl]                                  ; $7CDE: $7E
     and  a                                        ; $7CDF: $A7
@@ -245,7 +245,7 @@ GelState4Handler::
     call GetEntityTransitionCountdown             ; $7D70: $CD $05 $0C
     jr   nz, jr_006_7D91                          ; $7D73: $20 $1C
 
-    ld   hl, wEntitiesUnknowTableV                ; $7D75: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $7D75: $21 $80 $C4
     add  hl, bc                                   ; $7D78: $09
     ld   [hl], $30                                ; $7D79: $36 $30
     ld   a, $10                                   ; $7D7B: $3E $10

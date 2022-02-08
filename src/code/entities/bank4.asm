@@ -644,7 +644,7 @@ jr_004_50AD:
     jr   c, jr_004_50D5                           ; $50C1: $38 $12
 
     ld   [hl], $01                                ; $50C3: $36 $01
-    ld   hl, wEntitiesUnknowTableV                ; $50C5: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $50C5: $21 $80 $C4
     add  hl, de                                   ; $50C8: $19
     ld   [hl], $1F                                ; $50C9: $36 $1F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $50CB: $21 $40 $C3
@@ -6495,7 +6495,7 @@ jr_004_75F8:
     ld   a, [$D210]                               ; $760E: $FA $10 $D2
     ld   e, a                                     ; $7611: $5F
     ld   d, b                                     ; $7612: $50
-    ld   hl, wEntitiesUnknowTableV                ; $7613: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $7613: $21 $80 $C4
     add  hl, de                                   ; $7616: $19
     ld   a, [hl]                                  ; $7617: $7E
     and  a                                        ; $7618: $A7

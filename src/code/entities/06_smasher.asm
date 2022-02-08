@@ -568,7 +568,7 @@ func_006_4855::
     ld   hl, wEntitiesStatusTable                 ; $48BA: $21 $80 $C2
     add  hl, bc                                   ; $48BD: $09
     ld   [hl], $01                                ; $48BE: $36 $01
-    ld   hl, wEntitiesUnknowTableV                ; $48C0: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $48C0: $21 $80 $C4
     add  hl, bc                                   ; $48C3: $09
     ld   [hl], $1F                                ; $48C4: $36 $1F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $48C6: $21 $40 $C3

@@ -3660,7 +3660,7 @@ KikiTheMonkeyEntityHandler::
 
 jr_007_5857:
     call RenderActiveEntitySpritesPair            ; $5857: $CD $C0 $3B
-    ld   hl, wEntitiesUnknowTableV                ; $585A: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $585A: $21 $80 $C4
     add  hl, bc                                   ; $585D: $09
     ld   a, [hl]                                  ; $585E: $7E
     and  a                                        ; $585F: $A7
@@ -3809,7 +3809,7 @@ func_007_5934::
     jr   nz, jr_007_5948                          ; $5937: $20 $0F
 
     ld   [hl], $80                                ; $5939: $36 $80
-    ld   hl, wEntitiesUnknowTableV                ; $593B: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $593B: $21 $80 $C4
     add  hl, bc                                   ; $593E: $09
     ld   [hl], $80                                ; $593F: $36 $80
     ld   a, JINGLE_TREASURE_FOUND                 ; $5941: $3E $01
@@ -4272,7 +4272,7 @@ jr_007_5C0B:
     and  a                                        ; $5C13: $A7
     jr   nz, jr_007_5C2A                          ; $5C14: $20 $14
 
-    ld   hl, wEntitiesUnknowTableV                ; $5C16: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $5C16: $21 $80 $C4
     add  hl, bc                                   ; $5C19: $09
     ld   [hl], $10                                ; $5C1A: $36 $10
     ldh  a, [hActiveEntityPosX]                   ; $5C1C: $F0 $EE
@@ -5967,7 +5967,7 @@ func_007_666B::
     ld   hl, wEntitiesDroppedItemTable            ; $6676: $21 $E0 $C4
     add  hl, bc                                   ; $6679: $09
     ld   [hl], ENTITY_DROPPABLE_HEART             ; $667A: $36 $2D
-    ld   hl, wEntitiesUnknowTableV                ; $667C: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $667C: $21 $80 $C4
     add  hl, bc                                   ; $667F: $09
     ld   [hl], $0C                                ; $6680: $36 $0C
     ld   hl, wEntitiesStatusTable                 ; $6682: $21 $80 $C2

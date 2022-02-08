@@ -51,7 +51,7 @@ KillAllEnemiesEffectHandler::
 
     ; make the entity explode
     ld   [hl], $01                                ; $5D92: $36 $01
-    ld   hl, wEntitiesUnknowTableV                ; $5D94: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $5D94: $21 $80 $C4
     add  hl, bc                                   ; $5D97: $09
     ld   [hl], $1F                                ; $5D98: $36 $1F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5D9A: $21 $40 $C3

@@ -941,7 +941,7 @@ ENDC
     jp   ConfigureNewEntity.attributes            ; $4C89: $C3 $6B $48
 .gibdoEnd
 
-    ld   hl, wEntitiesUnknowTableV                ; $4C8C: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $4C8C: $21 $80 $C4
     add  hl, bc                                   ; $4C8F: $09
     ld   [hl], $1F                                ; $4C90: $36 $1F
     ld   hl, wEntitiesStatusTable                 ; $4C92: $21 $80 $C2
@@ -2160,7 +2160,7 @@ ELSE
 ENDC
 
 .dying
-    ld   hl, wEntitiesUnknowTableV                ; $5524: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $5524: $21 $80 $C4
     add  hl, bc                                   ; $5527: $09
     ld   a, [hl]                                  ; $5528: $7E
     and  a                                        ; $5529: $A7
@@ -2177,7 +2177,7 @@ ENDC
     ld   hl, Data_003_54C8                        ; $5539: $21 $C8 $54
 .jr_003_553C
 
-    ; a = wEntitiesUnknowTableV[bc]
+    ; a = wEntitiesPrivateCountdown3Table[bc]
     pop  af                                       ; $553C: $F1
     cp   $20                                      ; $553D: $FE $20
     jr   nc, jr_003_556F                          ; $553F: $30 $2E
@@ -2224,7 +2224,7 @@ jr_003_556F:
     and  a                                        ; $557A: $A7
     jr   nz, jr_003_5599                          ; $557B: $20 $1C
 
-    ld   hl, wEntitiesUnknowTableV                ; $557D: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $557D: $21 $80 $C4
     add  hl, bc                                   ; $5580: $09
     ld   [hl], $1F                                ; $5581: $36 $1F
     ld   a, [wTunicType]                          ; $5583: $FA $0F $DC
@@ -2483,7 +2483,7 @@ SpawnEnemyDrop::
     add  hl, de                                   ; $5695: $19
     ld   [hl], DROP_COUNTDOWN_TIME                ; $5696: $36 $18
 
-    ld   hl, wEntitiesUnknowTableV                ; $5698: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $5698: $21 $80 $C4
     add  hl, de                                   ; $569B: $19
     ld   [hl], $03                                ; $569C: $36 $03
 
@@ -6739,7 +6739,7 @@ ENDC
     cp   ENTITY_STATUS_DYING                      ; $7192: $FE $01
     jr   nz, .dyingEnd                            ; $7194: $20 $06
 
-    ld   hl, wEntitiesUnknowTableV                ; $7196: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $7196: $21 $80 $C4
     add  hl, bc                                   ; $7199: $09
     ld   [hl], $40                                ; $719A: $36 $40
 .dyingEnd
@@ -7055,7 +7055,7 @@ ENDC
 jr_003_733E:
     call IncrementEntityState                     ; $733E: $CD $12 $3B
     ld   [hl], b                                  ; $7341: $70
-    ld   hl, wEntitiesUnknowTableV                ; $7342: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $7342: $21 $80 $C4
     add  hl, bc                                   ; $7345: $09
     ld   [hl], $2F                                ; $7346: $36 $2F
     ld   hl, wEntitiesFlashCountdownTable         ; $7348: $21 $20 $C4
@@ -7113,7 +7113,7 @@ jr_003_737E:
     jr   z, jr_003_73AA                           ; $738C: $28 $1C
 
     ld   [hl], $01                                ; $738E: $36 $01
-    ld   hl, wEntitiesUnknowTableV                ; $7390: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $7390: $21 $80 $C4
     add  hl, de                                   ; $7393: $19
     ld   [hl], $1F                                ; $7394: $36 $1F
     call GetRandomByte                            ; $7396: $CD $0D $28
@@ -7804,7 +7804,7 @@ jr_003_7751:
     jr   nz, jr_003_7782                          ; $7758: $20 $28
 
 jr_003_775A:
-    ld   hl, wEntitiesUnknowTableV                ; $775A: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $775A: $21 $80 $C4
     add  hl, bc                                   ; $775D: $09
     ld   a, [hl]                                  ; $775E: $7E
     and  a                                        ; $775F: $A7
@@ -8150,7 +8150,7 @@ jr_003_793D:
     sra  [hl]                                     ; $7952: $CB $2E
 
 jr_003_7954:
-    ld   hl, wEntitiesUnknowTableV                ; $7954: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $7954: $21 $80 $C4
     add  hl, bc                                   ; $7957: $09
     ld   a, [hl]                                  ; $7958: $7E
     and  a                                        ; $7959: $A7

@@ -18,7 +18,7 @@ PolsVoiceEntityHandler::
     cp   $01                                      ; $7391: $FE $01
     jr   z, jr_006_73AD                           ; $7393: $28 $18
 
-    ld   hl, wEntitiesUnknowTableV                ; $7395: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $7395: $21 $80 $C4
     add  hl, bc                                   ; $7398: $09
     ld   [hl], $1F                                ; $7399: $36 $1F
     ld   hl, wEntitiesStatusTable                 ; $739B: $21 $80 $C2

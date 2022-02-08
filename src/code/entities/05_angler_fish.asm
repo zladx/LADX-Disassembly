@@ -49,7 +49,7 @@ func_005_55AB::
 
 label_005_55BC:
     call func_005_7585                            ; $55BC: $CD $85 $75
-    ld   hl, wEntitiesUnknowTableV                ; $55BF: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $55BF: $21 $80 $C4
     add  hl, de                                   ; $55C2: $19
     ld   [hl], $08                                ; $55C3: $36 $08
     ret                                           ; $55C5: $C9

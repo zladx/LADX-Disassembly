@@ -3940,7 +3940,7 @@ jr_015_60B5:
     jr   jr_015_6069                              ; $60BF: $18 $A8
 
 func_015_60C1::
-    ld   hl, wEntitiesUnknowTableV                ; $60C1: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $60C1: $21 $80 $C4
     add  hl, bc                                   ; $60C4: $09
     ld   a, [hl]                                  ; $60C5: $7E
     and  a                                        ; $60C6: $A7
@@ -4170,7 +4170,7 @@ jr_015_6324:
     jr   nc, jr_015_6330                          ; $6325: $30 $09
 
     call IncrementEntityState                     ; $6327: $CD $12 $3B
-    ld   hl, wEntitiesUnknowTableV                ; $632A: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $632A: $21 $80 $C4
     add  hl, bc                                   ; $632D: $09
     ld   [hl], $50                                ; $632E: $36 $50
 

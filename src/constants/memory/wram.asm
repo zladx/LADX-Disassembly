@@ -1252,9 +1252,8 @@ wEntitiesLoadOrderTable::
 wEntitiesUnknowTableI::
   ds $10 ; C470 - C47F
 
-; TODO find better name
-; Some kind of countdown
-wEntitiesUnknowTableV::
+; Entity-specific countdown 3
+wEntitiesPrivateCountdown3Table::
   ds $10 ; C480 - C48F
 
 ; TODO comment

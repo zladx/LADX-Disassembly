@@ -151,7 +151,7 @@ label_005_7CB3:
     cp   $28                                      ; $7CBA: $FE $28
     jr   nc, label_005_7CE8                       ; $7CBC: $30 $2A
 
-    ld   hl, wEntitiesUnknowTableV                ; $7CBE: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $7CBE: $21 $80 $C4
     add  hl, bc                                   ; $7CC1: $09
     ld   a, [hl]                                  ; $7CC2: $7E
     and  a                                        ; $7CC3: $A7

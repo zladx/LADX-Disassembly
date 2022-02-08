@@ -253,7 +253,7 @@ jr_006_4A85:
     ld   hl, wEntitiesDroppedItemTable            ; $4A85: $21 $E0 $C4
     add  hl, de                                   ; $4A88: $19
     ld   [hl], a                                  ; $4A89: $77
-    ld   hl, wEntitiesUnknowTableV                ; $4A8A: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $4A8A: $21 $80 $C4
     add  hl, de                                   ; $4A8D: $19
     ld   [hl], $1F                                ; $4A8E: $36 $1F
     ld   hl, wEntitiesStatusTable                 ; $4A90: $21 $80 $C2

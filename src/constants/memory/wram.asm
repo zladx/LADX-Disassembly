@@ -1094,8 +1094,7 @@ wEntitiesHitboxFlagsTable::
 wEntitiesHealthTable::
   ds $10 ; C360 - C36F
 
-; Unused value
-; TODO discripe more specific
+; Unused value, likely declared for entities but never actually used.
 wEntitiesUnusedTableA::
   ds $10 ; C370 - C37F
 

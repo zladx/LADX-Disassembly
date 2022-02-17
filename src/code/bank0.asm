@@ -3278,7 +3278,7 @@ UpdateLinkWalkingAnimation::
     ld   a, [wIsCarryingLiftedObject]             ; $1A88: $FA $5C $C1
     cp   $01                                      ; $1A8B: $FE $01
     jr   z, .liftingObject                        ; $1A8D: $28 $35
-    ldh  a, [slowWalkingSpeed]                               ; $1A8F: $F0 $B2
+    ldh  a, [hLinkSlowWalkingSpeed]               ; $1A8F: $F0 $B2
     and  a                                        ; $1A91: $A7
     jr   nz, .label_1A9A                          ; $1A92: $20 $06
     ld   a, [wIsLinkPushing]                      ; $1A94: $FA $44 $C1

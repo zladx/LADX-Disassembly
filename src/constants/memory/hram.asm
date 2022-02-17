@@ -217,7 +217,7 @@ hNextMusicTrackToFadeInto::
 
 ; When 1, Link is moving much slower, like when being
 ; incapacited by a mini-gel.
-slowWalkingSpeed::
+hLinkSlowWalkingSpeed::
   ds 1 ; FFB1
 
 ; Unlabeled

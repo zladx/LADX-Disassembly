@@ -536,7 +536,7 @@ label_002_4464:
     jr   nz, jr_002_44A2                          ; $447F: $20 $21
 
 jr_002_4481:
-    ldh  a, [slowWalkingSpeed]                               ; $4481: $F0 $B2
+    ldh  a, [hLinkSlowWalkingSpeed]               ; $4481: $F0 $B2
     and  a                                        ; $4483: $A7
     jr   nz, jr_002_44A2                          ; $4484: $20 $1C
 
@@ -6170,7 +6170,7 @@ CheckPositionForMapTransition::
     ld   a, [wIsRunningWithPegasusBoots]          ; $6DA3: $FA $4A $C1
     ld   hl, hIsSideScrolling                     ; $6DA6: $21 $F9 $FF
     or   [hl]                                     ; $6DA9: $B6
-    ld   hl, slowWalkingSpeed                                ; $6DAA: $21 $B2 $FF
+    ld   hl, hLinkSlowWalkingSpeed                ; $6DAA: $21 $B2 $FF
     or   [hl]                                     ; $6DAD: $B6
     jr   nz, .initiateRoomTransition              ; $6DAE: $20 $1C
 
@@ -7867,7 +7867,7 @@ jr_002_76E4:
     jr   nz, jr_002_7750                          ; $76EA: $20 $64
 
 jr_002_76EC:
-    ldh  a, [slowWalkingSpeed]                               ; $76EC: $F0 $B2
+    ldh  a, [hLinkSlowWalkingSpeed]                               ; $76EC: $F0 $B2
     and  a                                        ; $76EE: $A7
     jr   z, jr_002_76F4                           ; $76EF: $28 $03
 

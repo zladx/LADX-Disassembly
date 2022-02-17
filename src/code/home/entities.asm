@@ -181,7 +181,7 @@ AnimateEntity::
     ldh  a, [hActiveEntityType]                   ; $3A35: $F0 $EB
     cp   ENTITY_RAFT_RAFT_OWNER                   ; $3A37: $FE $6A
     jr   nz, .raftManEnd                          ; $3A39: $20 $05
-    ldh  a, [slowWalkingSpeed]                               ; $3A3B: $F0 $B2
+    ldh  a, [hLinkSlowWalkingSpeed]               ; $3A3B: $F0 $B2
     and  a                                        ; $3A3D: $A7
     jr   nz, .entityLifted                        ; $3A3E: $20 $06
 .raftManEnd

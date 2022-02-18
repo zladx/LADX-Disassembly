@@ -224,8 +224,9 @@ hLinkSlowWalkingSpeed::
 hFFB3::
   ds 1 ; FFB3
 
-; Unlabeled
-hFFB4::
+; Countdown for displaying the message presenting the
+; dungeon name when entering a dungeon.
+hDungeonTitleMessageCountdown::
   ds 1 ; FFB4
 
 ; Number of frames during which joypad is ignored

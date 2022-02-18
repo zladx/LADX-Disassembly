@@ -1436,8 +1436,8 @@ WorldInteractiveHandler::
     and  a                                        ; $0F50: $A7
     jr   nz, .normalFlow                          ; $0F51: $20 $3C
 
-    ; If [hFFB4] != 0…
-    ld   hl, hFFB4                                ; $0F53: $21 $B4 $FF
+    ; If the dungeon name should be displayed…
+    ld   hl, hDungeonTitleMessageCountdown        ; $0F53: $21 $B4 $FF
     ld   a, [hl]                                  ; $0F56: $7E
     and  a                                        ; $0F57: $A7
     jr   z, .noDungeonName                        ; $0F58: $28 $1B
@@ -2911,7 +2911,7 @@ LinkMotionMapFadeOutHandler::
     xor  a                                        ; $185A: $AF
     ldh  [hBaseScrollX], a                        ; $185B: $E0 $96
     ldh  [hBaseScrollY], a                        ; $185D: $E0 $97
-    ldh  [hFFB4], a                               ; $185F: $E0 $B4
+    ldh  [hDungeonTitleMessageCountdown], a       ; $185F: $E0 $B4
     ld   [wDDD6], a                               ; $1861: $EA $D6 $DD
     ld   [wDDD7], a                               ; $1864: $EA $D7 $DD
 
@@ -3069,7 +3069,7 @@ LinkMotionMapFadeOutHandler::
     jr   nc, .label_196E                          ; $1959: $30 $13
     callsw LoadMinimap                            ; $195B: $3E $02 $CD $0C $08 $CD $09 $67
     ld   a, $30                                   ; $1963: $3E $30
-    ldh  [hFFB4], a                               ; $1965: $E0 $B4
+    ldh  [hDungeonTitleMessageCountdown], a       ; $1965: $E0 $B4
     xor  a                                        ; $1967: $AF
     ld   [hSwitchBlocksState], a                  ; $1968: $EA $FB $D6
     ld   [wSwitchableObjectAnimationStage], a     ; $196B: $EA $F8 $D6

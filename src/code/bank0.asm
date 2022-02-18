@@ -1491,10 +1491,10 @@ WorldInteractiveHandler::
     ldh  [hLinkFinalPositionX], a                 ; $0F99: $E0 $9F
     ldh  a, [hLinkPositionY]                      ; $0F9B: $F0 $99
     ldh  [hLinkFinalPositionY], a                 ; $0F9D: $E0 $A0
-
     ld   hl, hLinkPositionZ                       ; $0F9F: $21 $A2 $FF
     sub  a, [hl]                                  ; $0FA2: $96
-    ldh  [hFFB3], a                               ; $0FA3: $E0 $B3
+    ldh  [hLinkPositionZModified], a              ; $0FA3: $E0 $B3
+
     call func_002_60E0                            ; $0FA5: $CD $E0 $60
 
     xor  a                                        ; $0FA8: $AF

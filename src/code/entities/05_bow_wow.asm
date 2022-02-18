@@ -135,7 +135,7 @@ func_005_40E6::
 
     ldh  a, [hLinkPositionX]                      ; $40F0: $F0 $98
     ldh  [hMultiPurpose0], a                      ; $40F2: $E0 $D7
-    ldh  a, [hFFB3]                               ; $40F4: $F0 $B3
+    ldh  a, [hLinkPositionZModified]              ; $40F4: $F0 $B3
     ldh  [hMultiPurpose1], a                      ; $40F6: $E0 $D8
     jr   jr_005_4129                              ; $40F8: $18 $2F
 

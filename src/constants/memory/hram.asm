@@ -218,10 +218,13 @@ hNextMusicTrackToFadeInto::
 ; When 1, Link is moving much slower, like when being
 ; incapacited by a mini-gel.
 hLinkSlowWalkingSpeed::
-  ds 1 ; FFB1
+  ds 1 ; FFB2
 
-; Unlabeled
-hFFB3::
+; Set to "hLinkPositionZ - wInvincibilityCounter" every frame
+;
+; Seems unused besides that.
+; Maybe it was used differently at some point?
+hLinkPositionZModified::
   ds 1 ; FFB3
 
 ; Countdown for displaying the message presenting the

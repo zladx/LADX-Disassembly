@@ -331,7 +331,7 @@ func_036_41DF::
     ld   a, $02                                   ; $41E3: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $41E5: $EA $46 $C1
     ld   a, $E0                                   ; $41E8: $3E $E0
-    ldh  [hFFB3], a                               ; $41EA: $E0 $B3
+    ldh  [hLinkPositionZModified], a              ; $41EA: $E0 $B3
     ld   [wC145], a                               ; $41EC: $EA $45 $C1
     ld   a, $01                                   ; $41EF: $3E $01
     ld   [wD475], a                               ; $41F1: $EA $75 $D4

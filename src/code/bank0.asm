@@ -1677,13 +1677,15 @@ InitGotItemSequence::
     ldh  [hFFB7], a                               ; $10E5: $E0 $B7
 
 .jp_10E7
-    ldh  a, [hFFB6]                               ; $10E7: $F0 $B6
-    and  a                                        ; $10E9: $A7
-    jr   z, .jp_10EF                              ; $10EA: $28 $03
-    dec  a                                        ; $10EC: $3D
-    ldh  [hFFB6], a                               ; $10ED: $E0 $B6
 
-.jp_10EF
+    ; Decrement the hLinkPunchedAwayCountdown timer if needed
+    ldh  a, [hLinkPunchedAwayCountdown]           ; $10E7: $F0 $B6
+    and  a                                        ; $10E9: $A7
+    jr   z, .punchedAwayDecrementEnd              ; $10EA: $28 $03
+    dec  a                                        ; $10EC: $3D
+    ldh  [hLinkPunchedAwayCountdown], a           ; $10ED: $E0 $B6
+.punchedAwayDecrementEnd
+
     ld   a, [wDialogState]                        ; $10EF: $FA $9F $C1
     and  a                                        ; $10F2: $A7
     jp   nz, ApplyLinkMotionState                 ; $10F3: $C2 $94 $17

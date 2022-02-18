@@ -7189,7 +7189,7 @@ func_003_73EB::
     ld   hl, wC1AC                                ; $73EB: $21 $AC $C1
     ld   a, [wIgnoreLinkCollisionsCountdown]      ; $73EE: $FA $3E $C1
     or   [hl]                                     ; $73F1: $B6
-    ld   hl, hFFB6                                ; $73F2: $21 $B6 $FF
+    ld   hl, hLinkPunchedAwayCountdown            ; $73F2: $21 $B6 $FF
     or   [hl]                                     ; $73F5: $B6
     ld   hl, wIsUsingSpinAttack                   ; $73F6: $21 $21 $C1
     or   [hl]                                     ; $73F9: $B6
@@ -7341,7 +7341,7 @@ jr_003_74C1:
 
 jr_003_74DC:
     ld   a, $0C                                   ; $74DC: $3E $0C
-    ldh  [hFFB6], a                               ; $74DE: $E0 $B6
+    ldh  [hLinkPunchedAwayCountdown], a           ; $74DE: $E0 $B6
     ret                                           ; $74E0: $C9
 
 label_003_74E1:

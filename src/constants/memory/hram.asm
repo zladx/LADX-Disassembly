@@ -236,8 +236,9 @@ hDungeonTitleMessageCountdown::
 hButtonsInactiveDelay::
   ds 1 ; FFB5
 
-; Unlabeled
-hFFB6::
+; Invicibility duration when Link is punched away
+; (by Master Stalfos or Blaino).
+hLinkPunchedAwayCountdown::
   ds 1 ; FFB6
 
 ; Unlabeled

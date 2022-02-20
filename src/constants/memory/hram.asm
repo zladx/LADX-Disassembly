@@ -94,22 +94,19 @@ hLinkSpeedX::
 hLinkSpeedY::
  ds 1 ; FF9B
 
-; Used when jumping
-; possible values:
-; 0 = none,
+; Used mostly in side-scrolling sections, but also in some
+; places (like when displaying the Game Over screen)
+;
+; Possible values:
+; 0 = normal physics,
 ; 1 =
 ;   when jumping off a cliff;
 ;   when on a ladder in a side-scrolling section;
-;   NOT when juming with feather
-; 2 = ?
-; 4 = ?
-; 6 = ?
+;   when diving in a top-view section
+; 2 = when diving in a side-scrolling section
 ;
-; Jump-table at 02:68E4
-; Related to diving?
-;
-; Maybe hLinkMotionModifier?
-hFF9C::
+; See jump-table at 02:68E4
+hLinkPhysicsModifier::
  ds 1 ; FF9C
 
 ; How the Link sprite should be drawn.
@@ -241,7 +238,7 @@ hButtonsInactiveDelay::
 hLinkPunchedAwayCountdown::
   ds 1 ; FFB6
 
-; Unlabeled
+; Countown
 hFFB7::
   ds 1 ; FFB7
 

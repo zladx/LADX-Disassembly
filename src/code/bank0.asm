@@ -1709,7 +1709,7 @@ InitGotItemSequence::
     ld   [wBGPaletteEffectAddress], a                               ; $111C: $EA $CC $C3
     xor  a                                        ; $111F: $AF
     ld   [wInvincibilityCounter], a               ; $1120: $EA $C7 $DB
-    ldh  [hFF9C], a                               ; $1123: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $1123: $E0 $9C
     ld   [wDDD6], a                               ; $1125: $EA $D6 $DD
     ld   [wDDD7], a                               ; $1128: $EA $D7 $DD
     ld   [wD464], a                               ; $112B: $EA $64 $D4
@@ -2704,7 +2704,7 @@ UsePegasusBoots::
     ldh  a, [hIsSideScrolling]                    ; $1705: $F0 $F9
     and  a                                        ; $1707: $A7
     jr   z, .sideScrollingEnd                     ; $1708: $28 $09
-    ldh  a, [hFF9C]                               ; $170A: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $170A: $F0 $9C
     and  a                                        ; $170C: $A7
     ret  nz                                       ; $170D: $C0
     ldh  a, [hLinkDirection]                      ; $170E: $F0 $9E
@@ -2998,7 +2998,7 @@ LinkMotionMapFadeOutHandler::
     dec  a                                        ; $18EA: $3D
     ld   [wIsIndoor], a                           ; $18EB: $EA $A5 $DB
     ld   a, $01                                   ; $18EE: $3E $01
-    ldh  [hFF9C], a                               ; $18F0: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $18F0: $E0 $9C
 
 .label_18F2
     ld   a, [hli]                                 ; $18F2: $2A
@@ -3259,7 +3259,7 @@ UpdateLinkWalkingAnimation::
     ld   a, [wLinkMotionState]                    ; $1A67: $FA $1C $C1
     cp   LINK_MOTION_SWIMMING                     ; $1A6A: $FE $01
     jr   nz, .notSwimming                         ; $1A6C: $20 $0A
-    ldh  a, [hFF9C]                               ; $1A6E: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $1A6E: $F0 $9C
     and  a                                        ; $1A70: $A7
     jr   z, .swimmingEnd                          ; $1A71: $28 $03
     ld   hl, Data_002_4950                        ; $1A73: $21 $50 $49
@@ -3270,7 +3270,7 @@ UpdateLinkWalkingAnimation::
     ldh  a, [hIsSideScrolling]                    ; $1A78: $F0 $F9
     and  a                                        ; $1A7A: $A7
     jr   z, .notSideScrolling                     ; $1A7B: $28 $0B
-    ldh  a, [hFF9C]                               ; $1A7D: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $1A7D: $F0 $9C
     cp   $02                                      ; $1A7F: $FE $02
     jr   nz, .notSideScrolling                    ; $1A81: $20 $05
     ld   hl, LinkAnimationsList_WalkSideScrolling ; $1A83: $21 $58 $49
@@ -4449,7 +4449,7 @@ ReadJoypadState::
     ld   a, [wLinkMotionState]                    ; $2832: $FA $1C $C1
     cp   LINK_MOTION_PASS_OUT                     ; $2835: $FE $07
     jr   nz, .linkPassingOutEnd                   ; $2837: $20 $06
-    ldh  a, [hFF9C]                               ; $2839: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $2839: $F0 $9C
     cp   $04                                      ; $283B: $FE $04
     jr   z, .readState                            ; $283D: $28 $13
 .linkPassingOutEnd

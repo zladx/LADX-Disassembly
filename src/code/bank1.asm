@@ -368,7 +368,7 @@ jr_001_531D::
     ld   [wGameplaySubtype], a                    ; $5323: $EA $96 $DB
     xor  a                                        ; $5326: $AF
     ld   [wLinkMotionState], a                    ; $5327: $EA $1C $C1
-    ldh  [hFF9C], a                               ; $532A: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $532A: $E0 $9C
     ld   [wAddHealthBuffer], a                    ; $532C: $EA $93 $DB
     ld   [wSubtractHealthBuffer], a               ; $532F: $EA $94 $DB
     ld   [wAddRupeeBufferLow], a                  ; $5332: $EA $90 $DB

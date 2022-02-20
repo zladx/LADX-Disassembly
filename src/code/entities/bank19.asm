@@ -1156,7 +1156,7 @@ jr_019_4869:
     cp   LINK_MOTION_SWIMMING                     ; $486C: $FE $01
     jr   nz, jr_019_4890                          ; $486E: $20 $20
 
-    ldh  a, [hFF9C]                               ; $4870: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $4870: $F0 $9C
     and  a                                        ; $4872: $A7
     jr   z, jr_019_4890                           ; $4873: $28 $1B
 
@@ -4145,7 +4145,7 @@ func_019_5D6A::
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5D6C: $E0 $A1
     ld   [wC167], a                               ; $5D6E: $EA $67 $C1
     call ClearLinkPositionIncrement               ; $5D71: $CD $8E $17
-    ldh  a, [hFF9C]                               ; $5D74: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $5D74: $F0 $9C
     JP_TABLE                                      ; $5D76
 ._00 dw func_019_5D7D                             ; $5D77
 ._01 dw func_019_5D8F                             ; $5D79
@@ -4157,7 +4157,7 @@ func_019_5D7D::
     jr   nz, jr_019_5D8A                          ; $5D80: $20 $08
 
     ld   a, $01                                   ; $5D82: $3E $01
-    ldh  [hFF9C], a                               ; $5D84: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $5D84: $E0 $9C
     ld   a, JINGLE_OVERWORLD_WARP                 ; $5D86: $3E $25
     ldh  [hJingle], a                             ; $5D88: $E0 $F2
 
@@ -4173,7 +4173,7 @@ func_019_5D8F::
     jr   nz, func_019_5D99                        ; $5D92: $20 $05
 
     ld   a, $02                                   ; $5D94: $3E $02
-    ldh  [hFF9C], a                               ; $5D96: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $5D96: $E0 $9C
     ret                                           ; $5D98: $C9
 
 func_019_5D99::

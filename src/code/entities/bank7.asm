@@ -1117,7 +1117,7 @@ func_007_4759::
     cp   $24                                      ; $477D: $FE $24
     jr   nc, jr_007_4793                          ; $477F: $30 $12
 
-    ldh  a, [hFF9C]                               ; $4781: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $4781: $F0 $9C
     and  a                                        ; $4783: $A7
     jr   z, jr_007_4793                           ; $4784: $28 $0D
 
@@ -1250,7 +1250,7 @@ jr_007_483A:
 
 jr_007_4846:
     ld   a, e                                     ; $4846: $7B
-    ldh  [hFF9C], a                               ; $4847: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $4847: $E0 $9C
     ld   hl, hLinkInteractiveMotionBlocked        ; $4849: $21 $A1 $FF
     ld   [hl], $02                                ; $484C: $36 $02
     ld   a, $04                                   ; $484E: $3E $04

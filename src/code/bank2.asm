@@ -1278,7 +1278,7 @@ LinkAnimationsList_WalkSideScrolling::
 LinkMotionUnstuckingHandler::
     ld   a, $02                                   ; $4960: $3E $02
     ld   [wC1C4], a                               ; $4962: $EA $C4 $C1
-    ldh  a, [hFF9C]                               ; $4965: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $4965: $F0 $9C
     and  a                                        ; $4967: $A7
     jr   nz, jr_002_49AA                          ; $4968: $20 $40
 
@@ -1316,7 +1316,7 @@ jr_002_4978:
 
 jr_002_49A0:
     ld   a, $01                                   ; $49A0: $3E $01
-    ldh  [hFF9C], a                               ; $49A2: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $49A2: $E0 $9C
     ldh  a, [hLinkPositionY]                      ; $49A4: $F0 $99
     sub  $03                                      ; $49A6: $D6 $03
     ldh  [hLinkPositionY], a                      ; $49A8: $E0 $99
@@ -2293,9 +2293,9 @@ label_002_4F6D:
     and  J_B                                      ; $4F6F: $E6 $20
     jr   z, jr_002_4F86                           ; $4F71: $28 $13
 
-    ldh  a, [hFF9C]                               ; $4F73: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $4F73: $F0 $9C
     xor  $01                                      ; $4F75: $EE $01
-    ldh  [hFF9C], a                               ; $4F77: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $4F77: $E0 $9C
     jr   z, jr_002_4F86                           ; $4F79: $28 $0B
 
     ld   a, $A0                                   ; $4F7B: $3E $A0
@@ -2378,7 +2378,7 @@ jr_002_4FD7:
 jr_002_4FE6:
     ldh  a, [hLinkSpeedX]                         ; $4FE6: $F0 $9A
     or   [hl]                                     ; $4FE8: $B6
-    ld   hl, hFF9C                                ; $4FE9: $21 $9C $FF
+    ld   hl, hLinkPhysicsModifier                 ; $4FE9: $21 $9C $FF
     or   [hl]                                     ; $4FEC: $B6
     jr   z, jr_002_4FF5                           ; $4FED: $28 $06
 
@@ -2414,7 +2414,7 @@ jr_002_5012:
 
 jr_002_5015:
     call func_002_753A                            ; $5015: $CD $3A $75
-    ldh  a, [hFF9C]                               ; $5018: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $5018: $F0 $9C
     and  a                                        ; $501A: $A7
     jr   z, .return                               ; $501B: $28 $5C
 
@@ -2422,7 +2422,7 @@ jr_002_5015:
     and  a                                        ; $501F: $A7
     jr   nz, .jr_002_5024                         ; $5020: $20 $02
 
-    ldh  [hFF9C], a                               ; $5022: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $5022: $E0 $9C
 
 .jr_002_5024
     ;
@@ -2593,7 +2593,7 @@ jr_002_511B:
     ld   a, $40                                   ; $5120: $3E $40
     ldh  [hFFB7], a                               ; $5122: $E0 $B7
     xor  a                                        ; $5124: $AF
-    ldh  [hFF9C], a                               ; $5125: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $5125: $E0 $9C
     dec  a                                        ; $5127: $3D
     ldh  [hLinkAnimationState], a                 ; $5128: $E0 $9D
     ret                                           ; $512A: $C9
@@ -2815,7 +2815,7 @@ LinkMotionRecoverHandler::
     jr   nz, jr_002_529F                          ; $5270: $20 $2D
     ld   [wC167], a                               ; $5272: $EA $67 $C1
 
-    ldh  a, [hFF9C]                               ; $5275: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $5275: $F0 $9C
     cp   $06                                      ; $5277: $FE $06
     jr   nz, .reduceHealthEnd                      ; $5279: $20 $08
     ld   a, [wSubtractHealthBuffer]               ; $527B: $FA $94 $DB
@@ -2823,9 +2823,9 @@ LinkMotionRecoverHandler::
     ld   [wSubtractHealthBuffer], a               ; $5280: $EA $94 $DB
 .reduceHealthEnd
 
-    ; Clear hFF9C
+    ; Clear hLinkPhysicsModifier
     xor  a                                        ; $5283: $AF
-    ldh  [hFF9C], a                               ; $5284: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $5284: $E0 $9C
 
     ; If on Angler's Tunnel entrance room…
     ld   a, [wIsIndoor]                           ; $5286: $FA $A5 $DB
@@ -5272,6 +5272,7 @@ Data_002_68B1::
 Data_002_68B4::
     db   $FF, $00, $01
 
+; Side-scrolling collisions
 jp_002_68B7::
     ; Return if Link is not in the air, and it's interactive motion is blocked.
     ld   a, [wIsLinkInTheAir]                     ; $68B7: $FA $46 $C1
@@ -5298,7 +5299,7 @@ jp_002_68B7::
     call CheckPositionForMapTransition            ; $68D4: $CD $75 $6C
 
     ; If Link is ???, increment its vertical speed
-    ldh  a, [hFF9C]                               ; $68D7: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $68D7: $F0 $9C
     cp   $02                                      ; $68D9: $FE $02
     jr   z, .return                               ; $68DB: $28 $06
     ldh  a, [hLinkSpeedY]                         ; $68DD: $F0 $9B
@@ -5310,11 +5311,11 @@ jp_002_68B7::
 
 .ignoreCollisionsEnd
 
-    ldh  a, [hFF9C]                               ; $68E4: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $68E4: $F0 $9C
     JP_TABLE                                      ; $68E6
-._00 dw func_002_6A01                             ; $68E7
-._01 dw func_002_69A1                             ; $68E9
-._02 dw func_002_6910                             ; $68EB
+._00 dw LinkSideScrollingPhysicsHandler           ; $68E7
+._01 dw LinkSideScrollingLadderPhysicsHandler     ; $68E9
+._02 dw LinkSideScrollingDivingPhysicsHandler     ; $68EB
 
 Data_002_68ED::
     db   $00, $08, $F8, $00, $00, $06, $FA, $00, $00, $06, $FA, $00, $00, $00, $00, $00
@@ -5325,7 +5326,7 @@ Data_002_68FD::
 Data_002_690D::
     db   $00, $00, $01
 
-func_002_6910::
+LinkSideScrollingDivingPhysicsHandler::
     ldh  a, [hMapId]                              ; $6910: $F0 $F7
     cp   MAP_TURTLE_ROCK                          ; $6912: $FE $07
     jr   nz, jr_002_692B                          ; $6914: $20 $15
@@ -5421,12 +5422,12 @@ jr_002_699B:
     xor  a                                        ; $699B: $AF
 
 jr_002_699C:
-    ldh  [hFF9C], a                               ; $699C: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $699C: $E0 $9C
 
 jr_002_699E:
     jp   func_002_6B56                            ; $699E: $C3 $56 $6B
 
-func_002_69A1::
+LinkSideScrollingLadderPhysicsHandler::
     call ResetPegasusBoots                        ; $69A1: $CD $B6 $0C
     ld   [wIsLinkInTheAir], a                     ; $69A4: $EA $46 $C1
     ld   [wC153], a                               ; $69A7: $EA $53 $C1
@@ -5478,7 +5479,7 @@ jr_002_69F0:
     xor  a                                        ; $69F0: $AF
 
 jr_002_69F1:
-    ldh  [hFF9C], a                               ; $69F1: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $69F1: $E0 $9C
 
 jr_002_69F3:
     call func_002_6B56                            ; $69F3: $CD $56 $6B
@@ -5487,12 +5488,12 @@ jr_002_69F3:
     jr   z, jr_002_6A00                           ; $69FB: $28 $03
 
     xor  a                                        ; $69FD: $AF
-    ldh  [hFF9C], a                               ; $69FE: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $69FE: $E0 $9C
 
 jr_002_6A00:
     ret                                           ; $6A00: $C9
 
-func_002_6A01::
+LinkSideScrollingPhysicsHandler::
     ldh  a, [hMapId]                              ; $6A01: $F0 $F7
     cp   MAP_EAGLES_TOWER                         ; $6A03: $FE $06
     jr   nz, jr_002_6A24                          ; $6A05: $20 $1D
@@ -5707,7 +5708,7 @@ jr_002_6B2A:
     ld   a, $01                                   ; $6B30: $3E $01
 
 jr_002_6B32:
-    ldh  [hFF9C], a                               ; $6B32: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $6B32: $E0 $9C
 
 jr_002_6B34:
     ld   hl, hLinkSpeedY                          ; $6B34: $21 $9B $FF
@@ -6066,7 +6067,7 @@ CheckPositionForMapTransition::
     jp   .return                                  ; $6D07: $C3 $09 $6E
 
 .jr_002_6D0A
-    ldh  a, [hFF9C]                               ; $6D0A: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $6D0A: $F0 $9C
     cp   $02                                      ; $6D0C: $FE $02
     jr   z, .manualEntryPointsEnd                 ; $6D0E: $28 $4C
 
@@ -6385,7 +6386,7 @@ jr_002_6EB5:
     ld   [wLinkMotionState], a                    ; $6EB7: $EA $1C $C1
 
     xor  a                                        ; $6EBA: $AF
-    ldh  [hFF9C], a                               ; $6EBB: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $6EBB: $E0 $9C
 
     ldh  a, [hLinkPositionY]                      ; $6EBD: $F0 $99
     sub  $08                                      ; $6EBF: $D6 $08
@@ -7904,7 +7905,7 @@ label_002_7719:
     ld   [wLinkMotionState], a                    ; $771F: $EA $1C $C1
 
     ldh  a, [hObjectUnderEntity]                  ; $7722: $F0 $AF
-    ldh  [hFF9C], a                               ; $7724: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $7724: $E0 $9C
     ldh  a, [hLinkPositionY]                      ; $7726: $F0 $99
     add  $02                                      ; $7728: $C6 $02
     ldh  [hLinkPositionY], a                      ; $772A: $E0 $99
@@ -7916,7 +7917,7 @@ jr_002_7732:
     ld   a, $01                                   ; $7732: $3E $01
     ld   [wLinkMotionState], a                    ; $7734: $EA $1C $C1
     xor  a                                        ; $7737: $AF
-    ldh  [hFF9C], a                               ; $7738: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $7738: $E0 $9C
     call ClearLinkPositionIncrement               ; $773A: $CD $8E $17
     ldh  a, [hLinkDirection]                      ; $773D: $F0 $9E
     ld   e, a                                     ; $773F: $5F

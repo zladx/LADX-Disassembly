@@ -3,7 +3,7 @@
 ;
 
 LinkPassOut::
-    ldh  a, [hFF9C]                               ; $41C2: $F0 $9C ; $41C2: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $41C2: $F0 $9C ; $41C2: $F0 $9C
     JP_TABLE                                      ; $41C4 ; $41C4: $C7
 ._00 dw LinkPassOut0Handler                       ; $41C5
 ._01 dw LinkPassOut1Handler                       ; $41C7
@@ -35,7 +35,7 @@ jr_001_420D::
     ld   a, $10                                   ; $420F: $3E $10 ; $420F: $3E $10
     ldh  [hFFB7], a                               ; $4211: $E0 $B7 ; $4211: $E0 $B7
     ld   a, $01                                   ; $4213: $3E $01 ; $4213: $3E $01
-    ldh  [hFF9C], a                               ; $4215: $E0 $9C ; $4215: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $4215: $E0 $9C ; $4215: $E0 $9C
 
     ld   a, TILESET_0F                            ; $4217: $3E $0F ; $4217: $3E $0F
     ld   [wTilesetToLoad], a                      ; $4219: $EA $FE $D6 ; $4219: $EA $FE $D6
@@ -105,7 +105,7 @@ jr_001_4259::
 LinkPassOut1Handler::
     ld   a, TILESET_SAVE_MENU                     ; $4291: $3E $0D ; $4291: $3E $0D
     ld   [wTilesetToLoad], a                      ; $4293: $EA $FE $D6 ; $4293: $EA $FE $D6
-    ld   hl, hFF9C                                ; $4296: $21 $9C $FF ; $4296: $21 $9C $FF
+    ld   hl, hLinkPhysicsModifier                 ; $4296: $21 $9C $FF ; $4296: $21 $9C $FF
     inc  [hl]                                     ; $4299: $34 ; $4299: $34
     ret                                           ; $429A: $C9 ; $429A: $C9
 
@@ -119,7 +119,7 @@ LinkPassOut2Handler::
     xor  a                                        ; $42AA: $AF ; $42AA: $AF
     ldh  [hBaseScrollX], a                        ; $42AB: $E0 $96 ; $42AB: $E0 $96
     ldh  [hBaseScrollY], a                        ; $42AD: $E0 $97 ; $42AD: $E0 $97
-    ld   hl, hFF9C                                ; $42AF: $21 $9C $FF ; $42AF: $21 $9C $FF
+    ld   hl, hLinkPhysicsModifier                 ; $42AF: $21 $9C $FF ; $42AF: $21 $9C $FF
     inc  [hl]                                     ; $42B2: $34 ; $42B2: $34
     call LoadFileMenuBG_trampoline                ; $42B3: $CD $05 $09 ; $42B3: $CD $05 $09
     call SynchronizeDungeonsItemFlags_trampoline  ; $42B6: $CD $02 $28 ; $42B6: $CD $02 $28
@@ -135,7 +135,7 @@ LinkPassOut3Handler::
     and  a                                        ; $42CC: $A7 ; $42CC: $A7
     jr   nz, jr_001_42D8                          ; $42CD: $20 $09 ; $42CD: $20 $09
 
-    ld   hl, hFF9C                                ; $42CF: $21 $9C $FF ; $42CF: $21 $9C $FF
+    ld   hl, hLinkPhysicsModifier                 ; $42CF: $21 $9C $FF ; $42CF: $21 $9C $FF
     inc  [hl]                                     ; $42D2: $34 ; $42D2: $34
     ld   a, MUSIC_GAME_OVER                       ; $42D3: $3E $03 ; $42D3: $3E $03
     ld   [wMusicTrackToPlay], a                   ; $42D5: $EA $68 $D3 ; $42D5: $EA $68 $D3

@@ -1516,7 +1516,7 @@ label_01B_485E:
     call func_01B_4879                            ; $4867: $CD $79 $48
 
 jr_01B_486A:
-    ld   hl, hFF9C                                ; $486A: $21 $9C $FF
+    ld   hl, hLinkPhysicsModifier                 ; $486A: $21 $9C $FF
     add  hl, de                                   ; $486D: $19
     call func_01B_4884                            ; $486E: $CD $84 $48
     jp   label_01B_46FC                           ; $4871: $C3 $FC $46

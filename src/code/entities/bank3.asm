@@ -6055,7 +6055,7 @@ Data_003_6E0C::
     db   $0C, $F4
 
 jr_003_6E0E:
-    ldh  a, [hFF9C]                               ; $6E0E: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $6E0E: $F0 $9C
     cp   $02                                      ; $6E10: $FE $02
     jr   z, setCarryAndReturn                           ; $6E12: $28 $F6
 
@@ -6068,7 +6068,7 @@ jr_003_6E0E:
     ld   a, $F4                                   ; $6E1F: $3E $F4
     ldh  [hLinkSpeedY], a                         ; $6E21: $E0 $9B
     xor  a                                        ; $6E23: $AF
-    ldh  [hFF9C], a                               ; $6E24: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $6E24: $E0 $9C
     scf                                           ; $6E26: $37
     ret                                           ; $6E27: $C9
 

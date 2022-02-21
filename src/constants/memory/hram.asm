@@ -94,8 +94,7 @@ hLinkSpeedX::
 hLinkSpeedY::
  ds 1 ; FF9B
 
-; Used mostly in side-scrolling sections, but also in some
-; places (like when displaying the Game Over screen)
+; During gameplay: Link physics, mostly in side-scrolling sections.
 ;
 ; Possible values:
 ; 0 = normal physics,
@@ -107,6 +106,8 @@ hLinkSpeedY::
 ;
 ; See jump-table at 02:68E4
 hLinkPhysicsModifier::
+; On the Game Over screen: the loading stage of the screen.
+hGameOverStage::
  ds 1 ; FF9C
 
 ; How the Link sprite should be drawn.

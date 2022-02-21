@@ -2674,9 +2674,9 @@ wRichardSpokenFlag::
 wIsBowWowFollowingLink::
   ds 1 ; DB56
 
-; Death count (one per save slot)
+; Current file death count (first is low, second is high, third is unused)
 wDeathCount::
-  ds 3 ; DB57 DB59
+  ds 3 ; DB57 DB58 DB59
 
 ; Number of hearts ($08 = 1 heart)
 wHealth::

@@ -244,8 +244,9 @@ hLinkPunchedAwayCountdown::
 hLinkCountdown::
   ds 1 ; FFB7
 
-; Unlabeled
-hFFB8::
+; Type of the object under Link.
+; See hObjectUnderEntity
+hObjectUnderLink::
   ds 1 ; FFB8
 
 ; Unlabeled

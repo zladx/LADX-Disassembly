@@ -730,7 +730,7 @@ ApplyLinkGroundMotion::
 
     call ApplyLinkGroundPhysics                   ; $4588: $CD $BD $75
 
-    ldh  a, [hFFB8]                               ; $458B: $F0 $B8
+    ldh  a, [hObjectUnderLink]                    ; $458B: $F0 $B8
     cp   $61                                      ; $458D: $FE $61
     jr   z, .return                               ; $458F: $28 $1B
 
@@ -7536,9 +7536,11 @@ GetObjectUnderLink::
     ld   h, a                                     ; $752E: $67
     ld   a, [wIsIndoor]                           ; $752F: $FA $A5 $DB
     ld   d, a                                     ; $7532: $57
+
     ld   a, [hl]                                  ; $7533: $7E
-    ldh  [hFFB8], a                               ; $7534: $E0 $B8
+    ldh  [hObjectUnderLink], a                    ; $7534: $E0 $B8
     ldh  [hObjectUnderEntity], a                  ; $7536: $E0 $AF
+
     ld   e, a                                     ; $7538: $5F
     ret                                           ; $7539: $C9
 

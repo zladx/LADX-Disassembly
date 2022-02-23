@@ -7712,7 +7712,7 @@ jr_036_6E3F:
     call CopyEntityPositionToActivePosition       ; $6E7A: $CD $8A $3D
     ld   hl, wEntitiesPrivateState1Table          ; $6E7D: $21 $B0 $C2
     add  hl, bc                                   ; $6E80: $09
-    ldh  a, [hFFB8]                               ; $6E81: $F0 $B8
+    ldh  a, [hObjectUnderLink]                    ; $6E81: $F0 $B8
     cp   [hl]                                     ; $6E83: $BE
     jr   z, jr_036_6ECD                           ; $6E84: $28 $47
 
@@ -7765,7 +7765,7 @@ jr_036_6EC8:
     ld   [hl], b                                  ; $6ECC: $70
 
 jr_036_6ECD:
-    ldh  a, [hFFB8]                               ; $6ECD: $F0 $B8
+    ldh  a, [hObjectUnderLink]                    ; $6ECD: $F0 $B8
     ld   hl, wEntitiesPrivateState1Table          ; $6ECF: $21 $B0 $C2
     add  hl, bc                                   ; $6ED2: $09
     ld   [hl], a                                  ; $6ED3: $77

@@ -28,7 +28,7 @@ LinkPassOutHandler::
     ld   [wScreenShakeVertical], a                ; $4207: $EA $56 $C1 ; $4207: $EA $56 $C1
 
     ; If the passing out animation is running, jump to it.
-    ldh  a, [hFFB7]                               ; $420A: $F0 $B7 ; $420A: $F0 $B7
+    ldh  a, [hLinkCountdown]                      ; $420A: $F0 $B7 ; $420A: $F0 $B7
     and  a                                        ; $420C: $A7 ; $420C: $A7
     jr   nz, .passingOutAnimation                 ; $420D: $20 $4A ; $420D: $20 $4A
 
@@ -36,8 +36,9 @@ LinkPassOutHandler::
     ; Passing out animation finished: start loading the Game Over screen
     ;
 
-    ld   a, $10                                   ; $420F: $3E $10 ; $420F: $3E $10
-    ldh  [hFFB7], a                               ; $4211: $E0 $B7 ; $4211: $E0 $B7
+    ; Wait 16 frames before actually displaying the screen
+    ld   a, 16                                    ; $420F: $3E $10 ; $420F: $3E $10
+    ldh  [hLinkCountdown], a                      ; $4211: $E0 $B7 ; $4211: $E0 $B7
     ld   a, $01                                   ; $4213: $3E $01 ; $4213: $3E $01
     ldh  [hGameOverStage], a                      ; $4215: $E0 $9C ; $4215: $E0 $9C
 
@@ -88,7 +89,7 @@ LinkPassOutHandler::
     add  hl, de                                   ; $4264: $19 ; $4264: $19
     ld   a, [hl]                                  ; $4265: $7E ; $4265: $7E
     ldh  [hLinkAnimationState], a                 ; $4266: $E0 $9D ; $4266: $E0 $9D
-    ldh  a, [hFFB7]                               ; $4268: $F0 $B7 ; $4268: $F0 $B7
+    ldh  a, [hLinkCountdown]                      ; $4268: $F0 $B7 ; $4268: $F0 $B7
     rra                                           ; $426A: $1F ; $426A: $1F
     rra                                           ; $426B: $1F ; $426B: $1F
     rra                                           ; $426C: $1F ; $426C: $1F
@@ -138,16 +139,18 @@ Data_001_42BA::
     db   $00, $04, $08, $0C, $10, $0C, $08, $04   ; $42C2 ; $42C2
 
 LoadGameOverStage3Handler::
-    ldh  a, [hFFB7]                               ; $42CA: $F0 $B7
+    ; Wait until hLinkCountdown reaches 0…
+    ldh  a, [hLinkCountdown]                      ; $42CA: $F0 $B7
     and  a                                        ; $42CC: $A7 ; $42CC: $A7
-    jr   nz, jr_001_42D8                          ; $42CD: $20 $09 ; $42CD: $20 $09
+    jr   nz, .return                              ; $42CD: $20 $09 ; $42CD: $20 $09
 
+    ; …then display the "Game Over" screen.
     ld   hl, hGameOverStage                       ; $42CF: $21 $9C $FF ; $42CF: $21 $9C $FF
     inc  [hl]                                     ; $42D2: $34 ; $42D2: $34
     ld   a, MUSIC_GAME_OVER                       ; $42D3: $3E $03 ; $42D3: $3E $03
     ld   [wMusicTrackToPlay], a                   ; $42D5: $EA $68 $D3 ; $42D5: $EA $68 $D3
 
-jr_001_42D8::
+.return
     ret                                           ; $42D8: $C9 ; $42D8: $C9
 
 GameOverInteractiveHandler::

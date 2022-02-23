@@ -4152,23 +4152,25 @@ func_019_5D6A::
 ._02 dw func_019_5DAC                             ; $5D7B
 
 func_019_5D7D::
-    ldh  a, [hFFB7]                               ; $5D7D: $F0 $B7
+    ; Wait until the warp countdown reaches 0…
+    ldh  a, [hLinkCountdown]                      ; $5D7D: $F0 $B7
     and  a                                        ; $5D7F: $A7
-    jr   nz, jr_019_5D8A                          ; $5D80: $20 $08
+    jr   nz, .return                              ; $5D80: $20 $08
 
+    ; … then teleport Link
     ld   a, $01                                   ; $5D82: $3E $01
     ldh  [hLinkPhysicsModifier], a                ; $5D84: $E0 $9C
     ld   a, JINGLE_OVERWORLD_WARP                 ; $5D86: $3E $25
     ldh  [hJingle], a                             ; $5D88: $E0 $F2
 
-jr_019_5D8A:
+.return
     ret                                           ; $5D8A: $C9
 
 Data_019_5D8B::
     db   $00, $03, $01, $02
 
 func_019_5D8F::
-    ldh  a, [hFFB7]                               ; $5D8F: $F0 $B7
+    ldh  a, [hLinkCountdown]                      ; $5D8F: $F0 $B7
     and  a                                        ; $5D91: $A7
     jr   nz, func_019_5D99                        ; $5D92: $20 $05
 

@@ -239,8 +239,9 @@ hButtonsInactiveDelay::
 hLinkPunchedAwayCountdown::
   ds 1 ; FFB6
 
-; Countown
-hFFB7::
+; Countdown specific to Link.
+; Used for various purposes in different areas.
+hLinkCountdown::
   ds 1 ; FFB7
 
 ; Unlabeled

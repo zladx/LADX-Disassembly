@@ -2289,22 +2289,24 @@ jr_002_4F6A:
     jp   UpdateLinkWalkingAnimation               ; $4F6A: $C3 $50 $1A
 
 label_002_4F6D:
+    ; If pressing B…
     ldh  a, [hJoypadState]                        ; $4F6D: $F0 $CC
     and  J_B                                      ; $4F6F: $E6 $20
-    jr   z, jr_002_4F86                           ; $4F71: $28 $13
-
+    jr   z, .divingEnd                            ; $4F71: $28 $13
+    ; …toggle diving on or off
     ldh  a, [hLinkPhysicsModifier]                ; $4F73: $F0 $9C
     xor  $01                                      ; $4F75: $EE $01
+    ; If the player actually dived…
     ldh  [hLinkPhysicsModifier], a                ; $4F77: $E0 $9C
-    jr   z, jr_002_4F86                           ; $4F79: $28 $0B
-
+    jr   z, .divingEnd                            ; $4F79: $28 $0B
+    ; … configure the diving duration
     ld   a, $A0                                   ; $4F7B: $3E $A0
-    ldh  [hFFB7], a                               ; $4F7D: $E0 $B7
+    ldh  [hLinkCountdown], a                      ; $4F7D: $E0 $B7
     ldh  a, [hLinkPositionY]                      ; $4F7F: $F0 $99
     sub  $03                                      ; $4F81: $D6 $03
     call func_002_5928                            ; $4F83: $CD $28 $59
+.divingEnd
 
-jr_002_4F86:
     ld   a, [wC183]                               ; $4F86: $FA $83 $C1
     and  a                                        ; $4F89: $A7
     jr   z, jr_002_4F92                           ; $4F8A: $28 $06
@@ -2418,7 +2420,7 @@ jr_002_5015:
     and  a                                        ; $501A: $A7
     jr   z, .return                               ; $501B: $28 $5C
 
-    ldh  a, [hFFB7]                               ; $501D: $F0 $B7
+    ldh  a, [hLinkCountdown]                      ; $501D: $F0 $B7
     and  a                                        ; $501F: $A7
     jr   nz, .jr_002_5024                         ; $5020: $20 $02
 
@@ -2590,8 +2592,9 @@ jr_002_50F6:
 jr_002_511B:
     ld   a, LINK_MOTION_TELEPORT                  ; $511B: $3E $09
     ld   [wLinkMotionState], a                    ; $511D: $EA $1C $C1
+    ; Set teleport animation duration
     ld   a, $40                                   ; $5120: $3E $40
-    ldh  [hFFB7], a                               ; $5122: $E0 $B7
+    ldh  [hLinkCountdown], a                      ; $5122: $E0 $B7
     xor  a                                        ; $5124: $AF
     ldh  [hLinkPhysicsModifier], a                ; $5125: $E0 $9C
     dec  a                                        ; $5127: $3D
@@ -2810,7 +2813,7 @@ jr_002_524F:
 LinkMotionRecoverHandler::
     call ResetSpinAttack                          ; $5267: $CD $AF $0C
     call ClearLinkPositionIncrement               ; $526A: $CD $8E $17
-    ldh  a, [hFFB7]                               ; $526D: $F0 $B7
+    ldh  a, [hLinkCountdown]                      ; $526D: $F0 $B7
     and  a                                        ; $526F: $A7
     jr   nz, jr_002_529F                          ; $5270: $20 $2D
     ld   [wC167], a                               ; $5272: $EA $67 $C1
@@ -2847,7 +2850,7 @@ LinkMotionRecoverHandler::
 
 jr_002_529F:
     ld   e, LINK_ANIMATION_STATE_NO_UPDATE       ; $529F: $1E $FF
-    ldh  a, [hFFB7]                               ; $52A1: $F0 $B7
+    ldh  a, [hLinkCountdown]                      ; $52A1: $F0 $B7
     cp   $30                                      ; $52A3: $FE $30
     jr   c, .jr_002_52B5                          ; $52A5: $38 $0E
 
@@ -7899,7 +7902,7 @@ jr_002_76F4:
 
 label_002_7719:
     ld   a, $50                                   ; $7719: $3E $50
-    ldh  [hFFB7], a                               ; $771B: $E0 $B7
+    ldh  [hLinkCountdown], a                      ; $771B: $E0 $B7
 
     ld   a, LINK_MOTION_RECOVER                   ; $771D: $3E $08
     ld   [wLinkMotionState], a                    ; $771F: $EA $1C $C1

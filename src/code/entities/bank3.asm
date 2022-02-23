@@ -5861,7 +5861,7 @@ ApplyLinkCollisionWithEnemy::
     and  a                                        ; $6D02: $A7
     jr   z, .goombaEnd                            ; $6D03: $28 $38
 
-    ldh  a, [hFFB7]                               ; $6D05: $F0 $B7
+    ldh  a, [hLinkCountdown]                      ; $6D05: $F0 $B7
     and  a                                        ; $6D07: $A7
     jr   nz, .jr_003_6D1B                         ; $6D08: $20 $11
 
@@ -5882,7 +5882,7 @@ ApplyLinkCollisionWithEnemy::
 
 .jr_003_6D1B
     ld   a, $02                                   ; $6D1B: $3E $02
-    ldh  [hFFB7], a                               ; $6D1D: $E0 $B7
+    ldh  [hLinkCountdown], a                      ; $6D1D: $E0 $B7
     ld   hl, wEntitiesStateTable                  ; $6D1F: $21 $90 $C2
     add  hl, bc                                   ; $6D22: $09
     ld   [hl], $02                                ; $6D23: $36 $02

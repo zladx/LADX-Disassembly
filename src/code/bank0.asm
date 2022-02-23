@@ -1668,15 +1668,15 @@ InitGotItemSequence::
 .jp_10DB
     xor  a                                        ; $10DB: $AF
     ld   [wD45F], a                               ; $10DC: $EA $5F $D4
-
 .jp_10DF
-    ldh  a, [hFFB7]                               ; $10DF: $F0 $B7
-    and  a                                        ; $10E1: $A7
-    jr   z, .jp_10E7                              ; $10E2: $28 $03
-    dec  a                                        ; $10E4: $3D
-    ldh  [hFFB7], a                               ; $10E5: $E0 $B7
 
-.jp_10E7
+    ; Decrement hLinkCountdown timer if needed
+    ldh  a, [hLinkCountdown]                      ; $10DF: $F0 $B7
+    and  a                                        ; $10E1: $A7
+    jr   z, .linkCountdownEnd                     ; $10E2: $28 $03
+    dec  a                                        ; $10E4: $3D
+    ldh  [hLinkCountdown], a                      ; $10E5: $E0 $B7
+.linkCountdownEnd
 
     ; Decrement the hLinkPunchedAwayCountdown timer if needed
     ldh  a, [hLinkPunchedAwayCountdown]           ; $10E7: $F0 $B6
@@ -1703,10 +1703,11 @@ InitGotItemSequence::
     jr   nz, .handleLinkMotion                    ; $110F: $20 $24
     ld   a, LINK_MOTION_PASS_OUT                  ; $1111: $3E $07
     ld   [wLinkMotionState], a                    ; $1113: $EA $1C $C1
+    ; Set the pass out animation duration
     ld   a, $BF                                   ; $1116: $3E $BF
-    ldh  [hFFB7], a                               ; $1118: $E0 $B7
+    ldh  [hLinkCountdown], a                      ; $1118: $E0 $B7
     ld   a, $10                                   ; $111A: $3E $10
-    ld   [wBGPaletteEffectAddress], a                               ; $111C: $EA $CC $C3
+    ld   [wBGPaletteEffectAddress], a             ; $111C: $EA $CC $C3
     xor  a                                        ; $111F: $AF
     ld   [wInvincibilityCounter], a               ; $1120: $EA $C7 $DB
     ldh  [hLinkPhysicsModifier], a                ; $1123: $E0 $9C

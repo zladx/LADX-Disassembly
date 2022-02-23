@@ -253,8 +253,13 @@ hObjectUnderLink::
 hTileGlintAnimation::
   ds 1 ; FFB9
 
-; Unlabeled;
-hFFBA::
+; State of a pull switch used to move blocks
+;
+; Possible values:
+;  0   not moving
+;  1   pulled?
+;  2   moving back to normal position?
+hMovingBlockMoverState::
   ds 1 ; FFBA
 
 ; Kind of switchable block needing its tiles to be updated during V-Blank.

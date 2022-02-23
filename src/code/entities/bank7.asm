@@ -5044,7 +5044,7 @@ jr_007_6104:
     jr   nz, jr_007_6133                          ; $6108: $20 $29
 
 IF __PATCH_0__
-    ldh  a, [hFFBA]
+    ldh  a, [hMovingBlockMoverState]
     and  a
     jr   nz, jr_007_6133
 ENDC

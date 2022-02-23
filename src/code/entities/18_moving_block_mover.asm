@@ -53,7 +53,7 @@ ENDC
     jr   z, jr_018_5466                           ; $541A: $28 $4A
 
     ld   a, $02                                   ; $541C: $3E $02
-    ldh  [hFFBA], a                               ; $541E: $E0 $BA
+    ldh  [hMovingBlockMoverState], a              ; $541E: $E0 $BA
     ld   a, LINK_ANIMATION_STATE_UNKNOWN_3A       ; $5420: $3E $3A
     ldh  [hLinkAnimationState], a                 ; $5422: $E0 $9D
     ld   a, $02                                   ; $5424: $3E $02
@@ -87,7 +87,7 @@ ENDC
     ld   [hl], $04                                ; $5455: $36 $04
     call UpdateEntityYPosWithSpeed_18             ; $5457: $CD $62 $7E
     ld   a, $01                                   ; $545A: $3E $01
-    ldh  [hFFBA], a                               ; $545C: $E0 $BA
+    ldh  [hMovingBlockMoverState], a              ; $545C: $E0 $BA
 
 jr_018_545E:
     ret                                           ; $545E: $C9
@@ -110,7 +110,7 @@ jr_018_5466:
 
 IF !__PATCH_0__
     ld   a, $00                                   ; $5475: $3E $00
-    ldh  [hFFBA], a                               ; $5477: $E0 $BA
+    ldh  [hMovingBlockMoverState], a              ; $5477: $E0 $BA
 ENDC
 
 jr_018_5479:
@@ -119,7 +119,7 @@ IF __PATCH_0__
     cp   $1a
     ret  c
     xor  a
-    ldh  [hFFBA], a
+    ldh  [hMovingBlockMoverState], a
 ENDC
     ret                                           ; $5479: $C9
 

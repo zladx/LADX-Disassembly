@@ -20,7 +20,7 @@ label_006_4EB7:
     ld   de, Data_006_4E9D                        ; $4EB7: $11 $9D $4E
     call RenderActiveEntitySpritesPair            ; $4EBA: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $4EBD: $CD $C6 $64
-    ldh  a, [hFFBA]                               ; $4EC0: $F0 $BA
+    ldh  a, [hMovingBlockMoverState]              ; $4EC0: $F0 $BA
     cp   $02                                      ; $4EC2: $FE $02
     jr   z, jr_006_4EF2                           ; $4EC4: $28 $2C
 

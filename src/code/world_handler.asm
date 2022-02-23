@@ -137,11 +137,13 @@ jr_001_440B::
 jr_001_4414::
     ld   a, $02                                   ; $4414: $3E $02
     ld   [wBGMapToLoad], a                        ; $4416: $EA $FF $D6
+
     call GetRandomByte                            ; $4419: $CD $0D $28
     ld   hl, hFrameCounter                        ; $441C: $21 $E7 $FF
     or   [hl]                                     ; $441F: $B6
     and  $03                                      ; $4420: $E6 $03
-    ldh  [hFFB9], a                               ; $4422: $E0 $B9
+    ldh  [hTileGlintAnimation], a                 ; $4422: $E0 $B9
+
     ret                                           ; $4424: $C9
 
 jr_001_4425::

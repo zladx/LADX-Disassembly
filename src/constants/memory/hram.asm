@@ -249,11 +249,11 @@ hLinkCountdown::
 hObjectUnderLink::
   ds 1 ; FFB8
 
-; Unlabeled
-hFFB9::
+; Animation frame of the glinting tiles in D4?
+hTileGlintAnimation::
   ds 1 ; FFB9
 
-; Unlabeled
+; Unlabeled;
 hFFBA::
   ds 1 ; FFBA
 

@@ -869,7 +869,7 @@ ApplyMapFadeOutTransitionWithSound::
     jr   z, ApplyMapFadeOutTransitionWithNoise    ; $0C94: $28 $E7
     ; Link is indoors
     ld   a, $01                                   ; $0C96: $3E $01
-    ldh  [hFFBC], a                               ; $0C98: $E0 $BC
+    ldh  [hContinueMusicAfterWarp], a             ; $0C98: $E0 $BC
 
 playNoiseStairs::
     ld   a, NOISE_SFX_STAIRS                      ; $0C9A: $3E $06
@@ -4408,7 +4408,7 @@ ResetMusicFadeTimer::
     ret                                           ; $27F1: $C9
 
 label_27F2::
-    ldh  a, [hFFBC]                               ; $27F2: $F0 $BC
+    ldh  a, [hContinueMusicAfterWarp]             ; $27F2: $F0 $BC
     and  a                                        ; $27F4: $A7
     jr   nz, .skip                                ; $27F5: $20 $08
     callsb func_01F_4003                          ; $27F7: $3E $1F $EA $00 $21 $CD $03 $40

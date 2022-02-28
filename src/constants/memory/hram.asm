@@ -270,11 +270,11 @@ hMovingBlockMoverState::
 hSwitchBlockNeedingUpdate::
   ds 1 ; FFBB
 
-; Unknown; stores previous gameplay type before a transition?
-; Related to fade-out/fade-in transitions
-; Seems to affect whether a music track is restarted afer
-; a transition
-hFFBC::
+; Whether the music track is restarted after a warp (staircase, exit door, etc.)
+; Possible values:
+;  0:                  the music track is restarted after the warp
+;  any non-zero value: the music track continues to play as-this after the warp
+hContinueMusicAfterWarp::
   ds 1 ; FFBC
 
 ; Unlabeled

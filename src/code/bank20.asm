@@ -4415,7 +4415,7 @@ InventoryFadeOutHandler::
     ldh  [hVolumeLeft], a                      ; $65FC: $E0 $AA
     ld   a, $0B                                   ; $65FE: $3E $0B
     ld   [wGameplayType], a                       ; $6600: $EA $95 $DB
-    ldh  [hFFBC], a                               ; $6603: $E0 $BC
+    ldh  [hContinueMusicAfterWarp], a             ; $6603: $E0 $BC
     ld   a, $02                                   ; $6605: $3E $02
     ld   [wGameplaySubtype], a                    ; $6607: $EA $96 $DB
     ld   a, [wIsIndoor]                           ; $660A: $FA $A5 $DB

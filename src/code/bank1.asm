@@ -786,8 +786,8 @@ jr_001_5854::
     ldh  [hVolumeLeft], a                      ; $586D: $E0 $AA
     ld   a, GAMEPLAY_WORLD                        ; $586F: $3E $0B
     ld   [wGameplayType], a                       ; $5871: $EA $95 $DB
-    ldh  [hFFBC], a                               ; $5874: $E0 $BC
-    ld   a, $02                                   ; $5876: $3E $02
+    ldh  [hContinueMusicAfterWarp], a             ; $5874: $E0 $BC
+    ld   a, GAMEPLAY_WORLD_LOAD_2                 ; $5876: $3E $02
     ld   [wGameplaySubtype], a                    ; $5878: $EA $96 $DB
 
     ld   a, [wIsIndoor]                           ; $587B: $FA $A5 $DB

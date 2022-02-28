@@ -8323,7 +8323,8 @@ jr_003_7A47:
 
     ldh  a, [hObjectUnderEntity]                  ; $7A4C: $F0 $AF
     ld   [wC503], a                               ; $7A4E: $EA $03 $C5
-    ldh  a, [hFFBE]                               ; $7A51: $F0 $BE
+
+    ldh  a, [hActiveEntityNoBGCollision]          ; $7A51: $F0 $BE
     and  a                                        ; $7A53: $A7
     jr   nz, jr_003_7A5D                          ; $7A54: $20 $07
 
@@ -8351,7 +8352,7 @@ jr_003_7A6E:
 
     ldh  a, [hObjectUnderEntity]                  ; $7A73: $F0 $AF
     ld   [wC50D], a                               ; $7A75: $EA $0D $C5
-    ldh  a, [hFFBE]                               ; $7A78: $F0 $BE
+    ldh  a, [hActiveEntityNoBGCollision]          ; $7A78: $F0 $BE
     and  a                                        ; $7A7A: $A7
     jr   nz, jr_003_7A84                          ; $7A7B: $20 $07
 
@@ -8381,6 +8382,7 @@ Data_003_7A85::
 ;   bc   entity index
 ;
 ; Output:
+;   c                  wether the physics changes should be ignored (?)
 ;   hObjectUnderEntity type of the object under the entity
 ApplyEntityPhysics::
     ;

@@ -676,7 +676,7 @@ jr_014_4D6F:
 ;   bc   entity index
 UpdateEntityTimers::
     xor  a                                        ; $4D73: $AF
-    ldh  [hFFBE], a                               ; $4D74: $E0 $BE
+    ldh  [hActiveEntityNoBGCollision], a          ; $4D74: $E0 $BE
     ldh  [hActiveEntityTilesOffset], a            ; $4D76: $E0 $F5
 
     ld   a, [wGameplayType]                       ; $4D78: $FA $95 $DB

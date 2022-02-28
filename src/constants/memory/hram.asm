@@ -283,8 +283,10 @@ hContinueMusicAfterWarp::
 hDefaultMusicTrackAlt::
   ds 1 ; FFBD
 
-; Unlabeled
-hFFBE::
+; Disable BG collisions for the current entity.
+;
+; The engine resets this value to 0 before animating each entity.
+hActiveEntityNoBGCollision::
   ds 1 ; FFBE
 
 ; Music track to be played after countdown

@@ -1125,7 +1125,7 @@ BossIntro::
 .endIf:
     ld   [wMusicTrackToPlay], a                   ; $3F11: $EA $68 $D3
 
-ldh  [hFFBD], a                                   ; $3F14: $E0 $BD
+    ldh  [hDefaultMusicTrackAlt], a               ; $3F14: $E0 $BD
     ld   a, [wTransitionSequenceCounter]          ; $3F16: $FA $6B $C1
     cp   $04                                      ; $3F19: $FE $04
     ret  nz                                       ; $3F1B: $C0

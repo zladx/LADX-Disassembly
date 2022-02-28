@@ -122,7 +122,7 @@ TurtleRockHeadState1Handler::
     ld   a, MUSIC_TURTLE_ROCK_ENTRANCE_BOSS       ; $73B6: $3E $39
     ld   [wMusicTrackToPlay], a                   ; $73B8: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $73BB: $E0 $B0
-    ldh  [hFFBD], a                               ; $73BD: $E0 $BD
+    ldh  [hDefaultMusicTrackAlt], a               ; $73BD: $E0 $BD
     ldh  [hNextDefaultMusicTrack], a              ; $73BF: $E0 $BF
     jp   IncrementEntityState                     ; $73C1: $C3 $12 $3B
 

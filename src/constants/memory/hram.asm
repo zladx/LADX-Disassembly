@@ -277,9 +277,10 @@ hSwitchBlockNeedingUpdate::
 hContinueMusicAfterWarp::
   ds 1 ; FFBC
 
-; Unlabeled
-; used for music
-hFFBD::
+; A copy of hDefaultMusicTrack
+; Used to see wether the power-up music track should override
+; the current music track.
+hDefaultMusicTrackAlt::
   ds 1 ; FFBD
 
 ; Unlabeled

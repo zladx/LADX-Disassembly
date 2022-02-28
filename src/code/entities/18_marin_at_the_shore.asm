@@ -44,7 +44,7 @@ MarinAtTheShoreTransitionHandler::
     ld   a, MUSIC_MARIN_BEACH_TRANSITION          ; $61D1: $3E $4D
     ld   [wMusicTrackToPlay], a                   ; $61D3: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $61D6: $E0 $B0
-    ldh  [hFFBD], a                               ; $61D8: $E0 $BD
+    ldh  [hDefaultMusicTrackAlt], a               ; $61D8: $E0 $BD
     jp   IncrementEntityState                     ; $61DA: $C3 $12 $3B
 
 MarinAtTheShoreState1Handler::

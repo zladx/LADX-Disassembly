@@ -375,7 +375,7 @@ SetMusicTrackIfHasSword::
 SetMusicTrack::
     ld   [wMusicTrackToPlay], a                   ; $499C: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $499F: $E0 $B0
-    ldh  [hFFBD], a                               ; $49A1: $E0 $BD
+    ldh  [hDefaultMusicTrackAlt], a               ; $49A1: $E0 $BD
     ldh  [hNextDefaultMusicTrack], a              ; $49A3: $E0 $BF
     ret                                           ; $49A5: $C9
 
@@ -569,7 +569,7 @@ EntityInitMarin::
     ld   a, MUSIC_MARIN_SINGING                   ; $4A98: $3E $2F
     ldh  [hNextMusicTrackToFadeInto], a           ; $4A9A: $E0 $B1
     ldh  [hDefaultMusicTrack], a                  ; $4A9C: $E0 $B0
-    ldh  [hFFBD], a                               ; $4A9E: $E0 $BD
+    ldh  [hDefaultMusicTrackAlt], a               ; $4A9E: $E0 $BD
     call ResetMusicFadeTimer                      ; $4AA0: $CD $EA $27
 
 .mabeWeatherVaneEnd
@@ -4462,7 +4462,7 @@ ProcessPowerUp:
     ld   a, MUSIC_POWERUP_ACQUIRED                ; $6413: $3E $27
     ld   [wMusicTrackToPlay], a                   ; $6415: $EA $68 $D3
     ld   a, MUSIC_ACTIVE_POWER_UP                 ; $6418: $3E $49
-    ldh  [hFFBD], a                               ; $641A: $E0 $BD
+    ldh  [hDefaultMusicTrackAlt], a               ; $641A: $E0 $BD
     ldh  [hNextDefaultMusicTrack], a              ; $641C: $E0 $BF
 
 MovePickupInTheAir::

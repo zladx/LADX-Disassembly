@@ -1913,7 +1913,7 @@ label_003_51F5:
     pop  de                                       ; $5207: $D1
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5208: $F0 $CF
     ld   [hl+], a                                 ; $520A: $22
-    ldh  a, [hFFD0]                               ; $520B: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $520B: $F0 $D0
     ld   [hl+], a                                 ; $520D: $22
     ld   a, $81                                   ; $520E: $3E $81
     ld   [hl+], a                                 ; $5210: $22
@@ -1925,7 +1925,7 @@ label_003_51F5:
     ld   [hl+], a                                 ; $5216: $22
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5217: $F0 $CF
     ld   [hl+], a                                 ; $5219: $22
-    ldh  a, [hFFD0]                               ; $521A: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $521A: $F0 $D0
     inc  a                                        ; $521C: $3C
     ld   [hl+], a                                 ; $521D: $22
     ld   a, $81                                   ; $521E: $3E $81

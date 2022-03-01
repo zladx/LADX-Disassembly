@@ -462,7 +462,7 @@ label_018_4402:
 
 jr_018_4412:
     ld   [hl+], a                                 ; $4412: $22
-    ldh  a, [hFFD0]                               ; $4413: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $4413: $F0 $D0
     ld   [hl+], a                                 ; $4415: $22
     ld   a, $85                                   ; $4416: $3E $85
 
@@ -483,7 +483,7 @@ jr_018_441E:
     ld   [hl+], a                                 ; $4427: $22
     ld   a, e                                     ; $4428: $7B
     ld   [hl+], a                                 ; $4429: $22
-    ldh  a, [hFFD0]                               ; $442A: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $442A: $F0 $D0
     add  $01                                      ; $442C: $C6 $01
     ld   [hl+], a                                 ; $442E: $22
     ld   a, $85                                   ; $442F: $3E $85
@@ -499,7 +499,7 @@ jr_018_441E:
     ld   [hl+], a                                 ; $443D: $22
     ld   a, e                                     ; $443E: $7B
     ld   [hl+], a                                 ; $443F: $22
-    ldh  a, [hFFD0]                               ; $4440: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $4440: $F0 $D0
     add  $02                                      ; $4442: $C6 $02
     ld   [hl+], a                                 ; $4444: $22
     ld   a, $C5                                   ; $4445: $3E $C5
@@ -518,7 +518,7 @@ label_018_444E:
     add  $02                                      ; $445B: $C6 $02
     ld   e, a                                     ; $445D: $5F
     ld   [hl+], a                                 ; $445E: $22
-    ldh  a, [hFFD0]                               ; $445F: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $445F: $F0 $D0
     add  $03                                      ; $4461: $C6 $03
     ld   [hl+], a                                 ; $4463: $22
     ld   a, $C5                                   ; $4464: $3E $C5
@@ -527,7 +527,7 @@ label_018_444E:
     ld   [hl+], a                                 ; $4469: $22
     ld   a, e                                     ; $446A: $7B
     ld   [hl+], a                                 ; $446B: $22
-    ldh  a, [hFFD0]                               ; $446C: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $446C: $F0 $D0
     add  $04                                      ; $446E: $C6 $04
     ld   [hl+], a                                 ; $4470: $22
     ld   a, $85                                   ; $4471: $3E $85
@@ -543,7 +543,7 @@ label_018_444E:
     ld   [hl+], a                                 ; $447F: $22
     ld   a, e                                     ; $4480: $7B
     ld   [hl+], a                                 ; $4481: $22
-    ldh  a, [hFFD0]                               ; $4482: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $4482: $F0 $D0
     add  $05                                      ; $4484: $C6 $05
     ld   [hl+], a                                 ; $4486: $22
     ld   a, $85                                   ; $4487: $3E $85
@@ -571,7 +571,7 @@ label_018_449D:
     add  $02                                      ; $44AA: $C6 $02
     ld   e, a                                     ; $44AC: $5F
     ld   [hl+], a                                 ; $44AD: $22
-    ldh  a, [hFFD0]                               ; $44AE: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $44AE: $F0 $D0
     ld   [hl+], a                                 ; $44B0: $22
     ld   a, $83                                   ; $44B1: $3E $83
     ld   [hl+], a                                 ; $44B3: $22
@@ -585,7 +585,7 @@ label_018_449D:
     ld   [hl+], a                                 ; $44BE: $22
     ld   a, e                                     ; $44BF: $7B
     ld   [hl+], a                                 ; $44C0: $22
-    ldh  a, [hFFD0]                               ; $44C1: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $44C1: $F0 $D0
     add  $01                                      ; $44C3: $C6 $01
     ld   [hl+], a                                 ; $44C5: $22
     ld   a, $83                                   ; $44C6: $3E $83
@@ -599,7 +599,7 @@ label_018_449D:
     ld   [hl+], a                                 ; $44D2: $22
     ld   a, e                                     ; $44D3: $7B
     ld   [hl+], a                                 ; $44D4: $22
-    ldh  a, [hFFD0]                               ; $44D5: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $44D5: $F0 $D0
     add  $02                                      ; $44D7: $C6 $02
     ld   [hl+], a                                 ; $44D9: $22
     ld   a, $83                                   ; $44DA: $3E $83
@@ -613,7 +613,7 @@ label_018_449D:
     ld   [hl+], a                                 ; $44E6: $22
     ld   a, e                                     ; $44E7: $7B
     ld   [hl+], a                                 ; $44E8: $22
-    ldh  a, [hFFD0]                               ; $44E9: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $44E9: $F0 $D0
     add  $03                                      ; $44EB: $C6 $03
     ld   [hl+], a                                 ; $44ED: $22
     ld   a, $83                                   ; $44EE: $3E $83

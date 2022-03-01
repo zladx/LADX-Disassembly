@@ -1658,7 +1658,7 @@ func_002_4BC8::
 func_002_4BD4::
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4BD4: $F0 $CF
     ld   [hl+], a                                 ; $4BD6: $22
-    ldh  a, [hFFD0]                               ; $4BD7: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $4BD7: $F0 $D0
     ld   [hl+], a                                 ; $4BD9: $22
     ld   a, $81                                   ; $4BDA: $3E $81
     ld   [hl+], a                                 ; $4BDC: $22
@@ -1672,7 +1672,7 @@ func_002_4BD4::
     ld   [hl+], a                                 ; $4BE8: $22
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4BE9: $F0 $CF
     ld   [hl+], a                                 ; $4BEB: $22
-    ldh  a, [hFFD0]                               ; $4BEC: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $4BEC: $F0 $D0
     inc  a                                        ; $4BEE: $3C
     ld   [hl+], a                                 ; $4BEF: $22
     ld   a, $81                                   ; $4BF0: $3E $81
@@ -1689,7 +1689,7 @@ jr_002_4BFA:
     ld   [hl+], a                                 ; $4BFF: $22
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4C00: $F0 $CF
     ld   [hl+], a                                 ; $4C02: $22
-    ldh  a, [hFFD0]                               ; $4C03: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $4C03: $F0 $D0
     inc  a                                        ; $4C05: $3C
     ld   [hl+], a                                 ; $4C06: $22
     ld   a, $81                                   ; $4C07: $3E $81
@@ -1720,7 +1720,7 @@ func_002_4C14::
     ld   [hl+], a                                 ; $4C28: $22
     ld   [de], a                                  ; $4C29: $12
     inc  de                                       ; $4C2A: $13
-    ldh  a, [hFFD0]                               ; $4C2B: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $4C2B: $F0 $D0
     ld   [hl+], a                                 ; $4C2D: $22
     ld   [de], a                                  ; $4C2E: $12
     inc  de                                       ; $4C2F: $13
@@ -1745,7 +1745,7 @@ func_002_4C14::
     ld   [hl+], a                                 ; $4C49: $22
     ld   [de], a                                  ; $4C4A: $12
     inc  de                                       ; $4C4B: $13
-    ldh  a, [hFFD0]                               ; $4C4C: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $4C4C: $F0 $D0
     inc  a                                        ; $4C4E: $3C
     ld   [hl+], a                                 ; $4C4F: $22
     ld   [de], a                                  ; $4C50: $12
@@ -1778,7 +1778,7 @@ jr_002_4C64:
     ld   [hl+], a                                 ; $4C72: $22
     ld   [de], a                                  ; $4C73: $12
     inc  de                                       ; $4C74: $13
-    ldh  a, [hFFD0]                               ; $4C75: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $4C75: $F0 $D0
     inc  a                                        ; $4C77: $3C
     ld   [hl+], a                                 ; $4C78: $22
     ld   [de], a                                  ; $4C79: $12
@@ -2022,7 +2022,7 @@ jr_002_4DCB:
     add  hl, de                                   ; $4DD9: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4DDA: $F0 $CF
     ld   [hl+], a                                 ; $4DDC: $22
-    ldh  a, [hFFD0]                               ; $4DDD: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $4DDD: $F0 $D0
     ld   [hl+], a                                 ; $4DDF: $22
     ld   a, $81                                   ; $4DE0: $3E $81
     ld   [hl+], a                                 ; $4DE2: $22
@@ -2032,7 +2032,7 @@ jr_002_4DCB:
     ld   [hl+], a                                 ; $4DE8: $22
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4DE9: $F0 $CF
     ld   [hl+], a                                 ; $4DEB: $22
-    ldh  a, [hFFD0]                               ; $4DEC: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $4DEC: $F0 $D0
     inc  a                                        ; $4DEE: $3C
     ld   [hl+], a                                 ; $4DEF: $22
     ld   a, $81                                   ; $4DF0: $3E $81
@@ -3615,7 +3615,7 @@ jr_002_56B8:
     add  hl, de                                   ; $56C5: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $56C6: $F0 $CF
     ld   [hl+], a                                 ; $56C8: $22
-    ldh  a, [hFFD0]                               ; $56C9: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $56C9: $F0 $D0
     ld   [hl+], a                                 ; $56CB: $22
     ld   a, $41                                   ; $56CC: $3E $41
     ld   [hl+], a                                 ; $56CE: $22
@@ -3623,7 +3623,7 @@ jr_002_56B8:
     ld   [hl+], a                                 ; $56D1: $22
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $56D2: $F0 $CF
     ld   [hl+], a                                 ; $56D4: $22
-    ldh  a, [hFFD0]                               ; $56D5: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $56D5: $F0 $D0
     add  $20                                      ; $56D7: $C6 $20
     ld   [hl+], a                                 ; $56D9: $22
     ld   a, $41                                   ; $56DA: $3E $41
@@ -4199,7 +4199,7 @@ jr_002_5AD5:
     add  hl, bc                                   ; $5AE3: $09
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5AE4: $F0 $CF
     ld   [hl+], a                                 ; $5AE6: $22
-    ldh  a, [hFFD0]                               ; $5AE7: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $5AE7: $F0 $D0
     ld   [hl+], a                                 ; $5AE9: $22
     ld   a, $01                                   ; $5AEA: $3E $01
     ld   [hl+], a                                 ; $5AEC: $22
@@ -4479,7 +4479,7 @@ jr_002_5C89:
     add  hl, bc                                   ; $5C97: $09
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5C98: $F0 $CF
     ld   [hl+], a                                 ; $5C9A: $22
-    ldh  a, [hFFD0]                               ; $5C9B: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $5C9B: $F0 $D0
     ld   [hl+], a                                 ; $5C9D: $22
     ld   a, $01                                   ; $5C9E: $3E $01
     ld   [hl+], a                                 ; $5CA0: $22

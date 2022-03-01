@@ -268,7 +268,7 @@ jr_018_7B2C:
     pop  de                                       ; $7B3B: $D1
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $7B3C: $F0 $CF
     ld   [hl+], a                                 ; $7B3E: $22
-    ldh  a, [hFFD0]                               ; $7B3F: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $7B3F: $F0 $D0
     ld   [hl+], a                                 ; $7B41: $22
     ld   a, $81                                   ; $7B42: $3E $81
     ld   [hl+], a                                 ; $7B44: $22
@@ -280,7 +280,7 @@ jr_018_7B2C:
     ld   [hl+], a                                 ; $7B4A: $22
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $7B4B: $F0 $CF
     ld   [hl+], a                                 ; $7B4D: $22
-    ldh  a, [hFFD0]                               ; $7B4E: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $7B4E: $F0 $D0
     inc  a                                        ; $7B50: $3C
     ld   [hl+], a                                 ; $7B51: $22
     ld   a, $81                                   ; $7B52: $3E $81

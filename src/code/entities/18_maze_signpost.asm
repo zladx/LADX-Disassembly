@@ -117,7 +117,7 @@ jr_018_632D:
     add  hl, de                                   ; $633B: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $633C: $F0 $CF
     ld   [hl+], a                                 ; $633E: $22
-    ldh  a, [hFFD0]                               ; $633F: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $633F: $F0 $D0
     ld   [hl+], a                                 ; $6341: $22
     ld   a, $81                                   ; $6342: $3E $81
     ld   [hl+], a                                 ; $6344: $22
@@ -127,7 +127,7 @@ jr_018_632D:
     ld   [hl+], a                                 ; $634A: $22
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $634B: $F0 $CF
     ld   [hl+], a                                 ; $634D: $22
-    ldh  a, [hFFD0]                               ; $634E: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $634E: $F0 $D0
     inc  a                                        ; $6350: $3C
     ld   [hl+], a                                 ; $6351: $22
     ld   a, $81                                   ; $6352: $3E $81

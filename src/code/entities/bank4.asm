@@ -1422,7 +1422,7 @@ jr_004_565F:
     pop  de                                       ; $566E: $D1
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $566F: $F0 $CF
     ld   [hl+], a                                 ; $5671: $22
-    ldh  a, [hFFD0]                               ; $5672: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $5672: $F0 $D0
     ld   [hl+], a                                 ; $5674: $22
     ld   a, $81                                   ; $5675: $3E $81
     ld   [hl+], a                                 ; $5677: $22
@@ -1434,7 +1434,7 @@ jr_004_565F:
     ld   [hl+], a                                 ; $567D: $22
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $567E: $F0 $CF
     ld   [hl+], a                                 ; $5680: $22
-    ldh  a, [hFFD0]                               ; $5681: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $5681: $F0 $D0
     inc  a                                        ; $5683: $3C
     ld   [hl+], a                                 ; $5684: $22
     ld   a, $81                                   ; $5685: $3E $81

@@ -157,30 +157,30 @@ jr_018_40F0:
 
 func_018_40F1::
     ld   a, $30                                   ; $40F1: $3E $30
-    ldh  [hSwordIntersectedAreaY], a              ; $40F3: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $40F3: $E0 $CD
     ld   a, $18                                   ; $40F5: $3E $18
-    ldh  [hSwordIntersectedAreaX], a              ; $40F7: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $40F7: $E0 $CE
     jp   label_018_449D                           ; $40F9: $C3 $9D $44
 
 func_018_40FC::
     ld   a, $30                                   ; $40FC: $3E $30
-    ldh  [hSwordIntersectedAreaY], a              ; $40FE: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $40FE: $E0 $CD
     ld   a, $68                                   ; $4100: $3E $68
-    ldh  [hSwordIntersectedAreaX], a              ; $4102: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $4102: $E0 $CE
     jp   label_018_449D                           ; $4104: $C3 $9D $44
 
 func_018_4107::
     ld   a, $38                                   ; $4107: $3E $38
-    ldh  [hSwordIntersectedAreaX], a              ; $4109: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $4109: $E0 $CE
     ld   a, $08                                   ; $410B: $3E $08
-    ldh  [hSwordIntersectedAreaY], a              ; $410D: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $410D: $E0 $CD
     jp   label_018_4402                           ; $410F: $C3 $02 $44
 
 func_018_4112::
     ld   a, $38                                   ; $4112: $3E $38
-    ldh  [hSwordIntersectedAreaX], a              ; $4114: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $4114: $E0 $CE
     ld   a, $08                                   ; $4116: $3E $08
-    ldh  [hSwordIntersectedAreaY], a              ; $4118: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $4118: $E0 $CD
     jp   label_018_444E                           ; $411A: $C3 $4E $44
 
     ret                                           ; $411D: $C9

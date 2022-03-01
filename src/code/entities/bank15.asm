@@ -6334,14 +6334,14 @@ Entity68Handler::
 jr_015_746A:
     ldh  a, [hActiveEntityPosX]                   ; $746A: $F0 $EE
     sub  $08                                      ; $746C: $D6 $08
-    ldh  [hSwordIntersectedAreaX], a              ; $746E: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $746E: $E0 $CE
     swap a                                        ; $7470: $CB $37
     and  $0F                                      ; $7472: $E6 $0F
     ld   e, a                                     ; $7474: $5F
     ldh  a, [hActiveEntityVisualPosY]             ; $7475: $F0 $EC
     add  $04                                      ; $7477: $C6 $04
     sub  $10                                      ; $7479: $D6 $10
-    ldh  [hSwordIntersectedAreaY], a              ; $747B: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $747B: $E0 $CD
     and  $F0                                      ; $747D: $E6 $F0
     or   e                                        ; $747F: $B3
     ld   e, a                                     ; $7480: $5F

@@ -606,7 +606,7 @@ func_020_4874::
     add  [hl]                                     ; $487A: $86
     sub  $08                                      ; $487B: $D6 $08
     and  $F0                                      ; $487D: $E6 $F0
-    ldh  [hSwordIntersectedAreaX], a              ; $487F: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $487F: $E0 $CE
     swap a                                        ; $4881: $CB $37
     ldh  [hMultiPurpose0], a                      ; $4883: $E0 $D7
     ld   hl, Data_020_4870                        ; $4885: $21 $70 $48
@@ -616,7 +616,7 @@ func_020_4874::
     sub  $10                                      ; $488C: $D6 $10
     and  $F0                                      ; $488E: $E6 $F0
     ld   e, a                                     ; $4890: $5F
-    ldh  [hSwordIntersectedAreaY], a              ; $4891: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $4891: $E0 $CD
     ldh  a, [hMultiPurpose0]                      ; $4893: $F0 $D7
     or   e                                        ; $4895: $B3
     ld   e, a                                     ; $4896: $5F
@@ -671,9 +671,9 @@ func_020_48CA::
     cp   MAP_COLOR_DUNGEON                        ; $48D1: $FE $FF
     ret  nz                                       ; $48D3: $C0
 
-    ldh  a, [hSwordIntersectedAreaY]              ; $48D4: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $48D4: $F0 $CD
     ld   d, a                                     ; $48D6: $57
-    ldh  a, [hSwordIntersectedAreaX]              ; $48D7: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $48D7: $F0 $CE
     ld   e, a                                     ; $48D9: $5F
     push de                                       ; $48DA: $D5
     ld   d, $00                                   ; $48DB: $16 $00
@@ -719,9 +719,9 @@ jr_020_4912:
 jr_020_4917:
     pop  de                                       ; $4917: $D1
     ld   a, d                                     ; $4918: $7A
-    ldh  [hSwordIntersectedAreaY], a              ; $4919: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $4919: $E0 $CD
     ld   a, e                                     ; $491B: $7B
-    ldh  [hSwordIntersectedAreaX], a              ; $491C: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $491C: $E0 $CE
     ret                                           ; $491E: $C9
 
 Data_020_491F::

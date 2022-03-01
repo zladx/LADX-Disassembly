@@ -1383,14 +1383,14 @@ jr_004_5628:
     push de                                       ; $562A: $D5
     ldh  a, [hActiveEntityPosY]                   ; $562B: $F0 $EF
     sub  $0F                                      ; $562D: $D6 $0F
-    ldh  [hSwordIntersectedAreaY], a              ; $562F: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $562F: $E0 $CD
     ldh  a, [hActiveEntityPosX]                   ; $5631: $F0 $EE
     sub  $07                                      ; $5633: $D6 $07
-    ldh  [hSwordIntersectedAreaX], a              ; $5635: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $5635: $E0 $CE
     swap a                                        ; $5637: $CB $37
     and  $0F                                      ; $5639: $E6 $0F
     ld   e, a                                     ; $563B: $5F
-    ldh  a, [hSwordIntersectedAreaY]              ; $563C: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $563C: $F0 $CD
     and  $F0                                      ; $563E: $E6 $F0
     or   e                                        ; $5640: $B3
     ld   e, a                                     ; $5641: $5F

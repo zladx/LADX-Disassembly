@@ -58,13 +58,13 @@ Data_005_6D22::
 
 func_005_6D42::
     ld   a, $38                                   ; $6D42: $3E $38
-    ldh  [hSwordIntersectedAreaX], a              ; $6D44: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $6D44: $E0 $CE
     add  $10                                      ; $6D46: $C6 $10
     ld   hl, wEntitiesPosXTable                   ; $6D48: $21 $00 $C2
     add  hl, bc                                   ; $6D4B: $09
     ld   [hl], a                                  ; $6D4C: $77
     ld   a, $30                                   ; $6D4D: $3E $30
-    ldh  [hSwordIntersectedAreaY], a              ; $6D4F: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $6D4F: $E0 $CD
     add  $18                                      ; $6D51: $C6 $18
     ld   hl, wEntitiesPosYTable                   ; $6D53: $21 $10 $C2
     add  hl, bc                                   ; $6D56: $09
@@ -290,11 +290,11 @@ jr_005_6EB0:
     ld   hl, Data_005_6D1A                        ; $6EBB: $21 $1A $6D
     add  hl, de                                   ; $6EBE: $19
     ld   a, [hl]                                  ; $6EBF: $7E
-    ldh  [hSwordIntersectedAreaX], a              ; $6EC0: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $6EC0: $E0 $CE
     ld   hl, Data_005_6D1E                        ; $6EC2: $21 $1E $6D
     add  hl, de                                   ; $6EC5: $19
     ld   a, [hl]                                  ; $6EC6: $7E
-    ldh  [hSwordIntersectedAreaY], a              ; $6EC7: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $6EC7: $E0 $CD
     sla  e                                        ; $6EC9: $CB $23
     sla  e                                        ; $6ECB: $CB $23
     sla  e                                        ; $6ECD: $CB $23
@@ -367,7 +367,7 @@ jr_005_6EB0:
     ld   [hl], $01                                ; $6F3D: $36 $01
     ld   hl, wEntitiesPosXTable                   ; $6F3F: $21 $00 $C2
     add  hl, de                                   ; $6F42: $19
-    ldh  a, [hSwordIntersectedAreaX]              ; $6F43: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $6F43: $F0 $CE
     add  $10                                      ; $6F45: $C6 $10
     ld   [hl], a                                  ; $6F47: $77
     ld   hl, wEntitiesPosXTable                   ; $6F48: $21 $00 $C2
@@ -375,7 +375,7 @@ jr_005_6EB0:
     ld   [hl], a                                  ; $6F4C: $77
     ld   hl, wEntitiesPosYTable                   ; $6F4D: $21 $10 $C2
     add  hl, de                                   ; $6F50: $19
-    ldh  a, [hSwordIntersectedAreaY]              ; $6F51: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $6F51: $F0 $CD
     add  $10                                      ; $6F53: $C6 $10
     ld   [hl], a                                  ; $6F55: $77
     ld   hl, wEntitiesPosYTable                   ; $6F56: $21 $10 $C2

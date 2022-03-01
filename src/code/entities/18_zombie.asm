@@ -175,7 +175,7 @@ func_018_6493::
     sub  $01                                      ; $6499: $D6 $01
     ldh  [hMultiPurpose4], a                      ; $649B: $E0 $DB
     and  $F0                                      ; $649D: $E6 $F0
-    ldh  [hSwordIntersectedAreaX], a              ; $649F: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $649F: $E0 $CE
     swap a                                        ; $64A1: $CB $37
     ld   hl, wEntitiesPosYTable                   ; $64A3: $21 $10 $C2
     add  hl, bc                                   ; $64A6: $09
@@ -184,7 +184,7 @@ func_018_6493::
     sub  $07                                      ; $64A9: $D6 $07
     ldh  [hMultiPurpose5], a                      ; $64AB: $E0 $DC
     and  $F0                                      ; $64AD: $E6 $F0
-    ldh  [hSwordIntersectedAreaY], a              ; $64AF: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $64AF: $E0 $CD
     or   c                                        ; $64B1: $B1
     ld   c, a                                     ; $64B2: $4F
     ld   b, $00                                   ; $64B3: $06 $00

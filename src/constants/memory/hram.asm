@@ -317,18 +317,14 @@ hPressedButtonsMask::
 hJoypadState::
   ds 1 ; FFCC
 
-; Topmost corner of the area intercepted by Link's sword
-; Vary from 00 to 80 by increments of 10
-;
-; FIXME: also used for entities (see func_003_7E0E)
-hSwordIntersectedAreaY::
+; Topmost corner of the object intersected by Link or Link's sword
+; Vary from $00 to $80 by increments of $10
+hIntersectedObjectTop::
   ds 1 ; FFCD
 
-; Leftmost corner of the area intercepted by Link's sword
-; Vary from 00 to A0 by increments of 10
-;
-; FIXME: also used for entities (see func_003_7E0E)
-hSwordIntersectedAreaX::
+; Topmost corner of the object intersected by Link or Link's sword
+; Vary from $00 to $A0 by increments of $10
+hIntersectedObjectLeft::
   ds 1 ; FFCE
 
 ; BG address of the top-left tile of the intersected object (high byte)
@@ -345,8 +341,8 @@ hIntersectedObjectBGAddressLow::
 hNeedsRenderingFrame::
   ds 1 ; FFD1
 
-; Unlabeled
-hFFD2::
+; Copy of the rIE register
+hInterrupts::
   ds 5 ; FFD2
 
 ; used in many different cases

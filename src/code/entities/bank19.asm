@@ -1741,9 +1741,9 @@ jr_019_4C21:
     ld   a, $99                                   ; $4C45: $3E $99
     call func_2BF                                ; $4C47: $CD $2F $0B
     ld   a, $50                                   ; $4C4A: $3E $50
-    ldh  [hSwordIntersectedAreaX], a              ; $4C4C: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $4C4C: $E0 $CE
     ld   a, $20                                   ; $4C4E: $3E $20
-    ldh  [hSwordIntersectedAreaY], a              ; $4C50: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $4C50: $E0 $CD
     call label_2887                               ; $4C52: $CD $87 $28
     ldh  a, [hIsGBC]                              ; $4C55: $F0 $FE
     and  a                                        ; $4C57: $A7
@@ -2577,9 +2577,9 @@ FlyingRoosterState0Handler::
     ld   a, $99                                   ; $5224: $3E $99
     call func_2BF                                 ; $5226: $CD $2F $0B
     ld   a, $50                                   ; $5229: $3E $50
-    ldh  [hSwordIntersectedAreaX], a              ; $522B: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $522B: $E0 $CE
     ld   a, $30                                   ; $522D: $3E $30
-    ldh  [hSwordIntersectedAreaY], a              ; $522F: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $522F: $E0 $CD
     call label_2887                               ; $5231: $CD $87 $28
     ldh  a, [hIsGBC]                              ; $5234: $F0 $FE
     and  a                                        ; $5236: $A7
@@ -2682,9 +2682,9 @@ FlyingRoosterState1Handler::
     ld   a, $99                                   ; $52DB: $3E $99
     call func_2BF                                 ; $52DD: $CD $2F $0B
     ld   a, $50                                   ; $52E0: $3E $50
-    ldh  [hSwordIntersectedAreaX], a              ; $52E2: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $52E2: $E0 $CE
     ld   a, $20                                   ; $52E4: $3E $20
-    ldh  [hSwordIntersectedAreaY], a              ; $52E6: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $52E6: $E0 $CD
     call label_2887                               ; $52E8: $CD $87 $28
     ldh  a, [hIsGBC]                              ; $52EB: $F0 $FE
     and  a                                        ; $52ED: $A7

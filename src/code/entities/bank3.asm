@@ -1881,14 +1881,14 @@ func_003_51C9::
     ld   b, $00                                   ; $51CC: $06 $00
     ldh  a, [hActiveEntityPosY]                   ; $51CE: $F0 $EF
     sub  $0F                                      ; $51D0: $D6 $0F
-    ldh  [hSwordIntersectedAreaY], a              ; $51D2: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $51D2: $E0 $CD
     ldh  a, [hActiveEntityPosX]                   ; $51D4: $F0 $EE
     sub  $07                                      ; $51D6: $D6 $07
-    ldh  [hSwordIntersectedAreaX], a              ; $51D8: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $51D8: $E0 $CE
     swap a                                        ; $51DA: $CB $37
     and  $0F                                      ; $51DC: $E6 $0F
     ld   e, a                                     ; $51DE: $5F
-    ldh  a, [hSwordIntersectedAreaY]              ; $51DF: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $51DF: $F0 $CD
     and  $F0                                      ; $51E1: $E6 $F0
     or   e                                        ; $51E3: $B3
     ld   e, a                                     ; $51E4: $5F
@@ -2099,9 +2099,9 @@ func_003_5438::
 
 jr_003_5455:
     ld   a, $30                                   ; $5455: $3E $30
-    ldh  [hSwordIntersectedAreaX], a              ; $5457: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $5457: $E0 $CE
     ld   a, $20                                   ; $5459: $3E $20
-    ldh  [hSwordIntersectedAreaY], a              ; $545B: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $545B: $E0 $CD
     ld   a, $19                                   ; $545D: $3E $19
     ldh  [hMultiPurpose8], a                      ; $545F: $E0 $DF
     call label_3E4D                               ; $5461: $CD $4D $3E
@@ -4944,7 +4944,7 @@ func_003_6771::
     add  hl, de                                   ; $6782: $19
     add  [hl]                                     ; $6783: $86
     and  $F0                                      ; $6784: $E6 $F0
-    ldh  [hSwordIntersectedAreaX], a              ; $6786: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $6786: $E0 $CE
     swap a                                        ; $6788: $CB $37
     ld   hl, wEntitiesPosYTable                   ; $678A: $21 $10 $C2
     add  hl, bc                                   ; $678D: $09
@@ -4955,7 +4955,7 @@ func_003_6771::
     add  hl, de                                   ; $6795: $19
     add  [hl]                                     ; $6796: $86
     and  $F0                                      ; $6797: $E6 $F0
-    ldh  [hSwordIntersectedAreaY], a              ; $6799: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $6799: $E0 $CD
     or   c                                        ; $679B: $B1
     ld   c, a                                     ; $679C: $4F
     ld   b, $00                                   ; $679D: $06 $00
@@ -4980,12 +4980,12 @@ func_003_6771::
 
     ld   a, JINGLE_PUZZLE_SOLVED                  ; $67BA: $3E $02
     ldh  [hJingle], a                             ; $67BC: $E0 $F2
-    ldh  a, [hSwordIntersectedAreaY]              ; $67BE: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $67BE: $F0 $CD
     and  $E0                                      ; $67C0: $E6 $E0
-    ldh  [hSwordIntersectedAreaY], a              ; $67C2: $E0 $CD
-    ldh  a, [hSwordIntersectedAreaX]              ; $67C4: $F0 $CE
+    ldh  [hIntersectedObjectTop], a               ; $67C2: $E0 $CD
+    ldh  a, [hIntersectedObjectLeft]              ; $67C4: $F0 $CE
     and  $E0                                      ; $67C6: $E6 $E0
-    ldh  [hSwordIntersectedAreaX], a              ; $67C8: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $67C8: $E0 $CE
     ld   a, $03                                   ; $67CA: $3E $03
     call func_036_705A_trampoline                 ; $67CC: $CD $A7 $0A
     ld   a, c                                     ; $67CF: $79
@@ -5023,13 +5023,13 @@ jr_003_6802:
     ld   hl, Data_003_6769                        ; $6805: $21 $69 $67
     add  hl, bc                                   ; $6808: $09
     ld   a, [hl]                                  ; $6809: $7E
-    ld   hl, hSwordIntersectedAreaX               ; $680A: $21 $CE $FF
+    ld   hl, hIntersectedObjectLeft               ; $680A: $21 $CE $FF
     add  [hl]                                     ; $680D: $86
     ld   [hl], a                                  ; $680E: $77
     ld   hl, Data_003_676D                        ; $680F: $21 $6D $67
     add  hl, bc                                   ; $6812: $09
     ld   a, [hl]                                  ; $6813: $7E
-    ld   hl, hSwordIntersectedAreaY               ; $6814: $21 $CD $FF
+    ld   hl, hIntersectedObjectTop               ; $6814: $21 $CD $FF
     add  [hl]                                     ; $6817: $86
     ld   [hl], a                                  ; $6818: $77
     dec  c                                        ; $6819: $0D
@@ -5146,13 +5146,13 @@ jr_003_6894:
     ld   a, [de]                                  ; $68B4: $1A
     or   [hl]                                     ; $68B5: $B6
     ld   [de], a                                  ; $68B6: $12
-    ldh  a, [hSwordIntersectedAreaX]              ; $68B7: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $68B7: $F0 $CE
     swap a                                        ; $68B9: $CB $37
     and  $0F                                      ; $68BB: $E6 $0F
     ld   e, a                                     ; $68BD: $5F
 
 jr_003_68BE:
-    ldh  a, [hSwordIntersectedAreaY]              ; $68BE: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $68BE: $F0 $CD
     and  $F0                                      ; $68C0: $E6 $F0
     or   e                                        ; $68C2: $B3
     ld   e, a                                     ; $68C3: $5F
@@ -5199,7 +5199,7 @@ func_003_68F8::
     add  [hl]                                     ; $68FF: $86
     sub  $08                                      ; $6900: $D6 $08
     and  $F0                                      ; $6902: $E6 $F0
-    ldh  [hSwordIntersectedAreaX], a              ; $6904: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $6904: $E0 $CE
     swap a                                        ; $6906: $CB $37
     ld   c, a                                     ; $6908: $4F
     ld   hl, Data_003_68EF                        ; $6909: $21 $EF $68
@@ -5209,7 +5209,7 @@ func_003_68F8::
     add  [hl]                                     ; $690F: $86
     sub  $10                                      ; $6910: $D6 $10
     and  $F0                                      ; $6912: $E6 $F0
-    ldh  [hSwordIntersectedAreaY], a              ; $6914: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $6914: $E0 $CD
     or   c                                        ; $6916: $B1
     ld   e, a                                     ; $6917: $5F
     ld   hl, wRoomObjects                         ; $6918: $21 $11 $D7
@@ -5279,12 +5279,12 @@ func_003_68F8::
 
     ld   hl, wEntitiesPosXTable                         ; $6972: $21 $00 $C2
     add  hl, de                                   ; $6975: $19
-    ldh  a, [hSwordIntersectedAreaX]              ; $6976: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $6976: $F0 $CE
     add  $08                                      ; $6978: $C6 $08
     ld   [hl], a                                  ; $697A: $77
     ld   hl, wEntitiesPosYTable                         ; $697B: $21 $10 $C2
     add  hl, de                                   ; $697E: $19
-    ldh  a, [hSwordIntersectedAreaY]              ; $697F: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $697F: $F0 $CD
     add  $10                                      ; $6981: $C6 $10
     ld   [hl], a                                  ; $6983: $77
     ld   hl, wEntitiesSpriteVariantTable               ; $6984: $21 $B0 $C3
@@ -8252,12 +8252,12 @@ jr_003_79CB:
     ld   hl, wEntitiesStatusTable                 ; $79DA: $21 $80 $C2
     add  hl, bc                                   ; $79DD: $09
     ld   [hl], $02                                ; $79DE: $36 $02
-    ldh  a, [hSwordIntersectedAreaX]              ; $79E0: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $79E0: $F0 $CE
     add  $08                                      ; $79E2: $C6 $08
     ld   hl, wC4B0                                ; $79E4: $21 $B0 $C4
     add  hl, bc                                   ; $79E7: $09
     ld   [hl], a                                  ; $79E8: $77
-    ldh  a, [hSwordIntersectedAreaY]              ; $79E9: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $79E9: $F0 $CD
     add  $10                                      ; $79EB: $C6 $10
     ld   hl, wC4C0                                ; $79ED: $21 $C0 $C4
     add  hl, bc                                   ; $79F0: $09
@@ -8759,7 +8759,7 @@ ApplySwordIntersectionWithObjects::
     ld   a, [hl]                                  ; $7CB3: $7E
     ldh  [hMultiPurpose4], a                      ; $7CB4: $E0 $DB
     and  $F0                                      ; $7CB6: $E6 $F0
-    ldh  [hSwordIntersectedAreaX], a              ; $7CB8: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $7CB8: $E0 $CE
     swap a                                        ; $7CBA: $CB $37
     ld   hl, wEntitiesPosYTable                   ; $7CBC: $21 $10 $C2
     add  hl, bc                                   ; $7CBF: $09
@@ -8768,7 +8768,7 @@ ApplySwordIntersectionWithObjects::
     sub  $08                                      ; $7CC2: $D6 $08
     ldh  [hMultiPurpose5], a                      ; $7CC4: $E0 $DC
     and  $F0                                      ; $7CC6: $E6 $F0
-    ldh  [hSwordIntersectedAreaY], a              ; $7CC8: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $7CC8: $E0 $CD
     or   c                                        ; $7CCA: $B1
     ld   c, a                                     ; $7CCB: $4F
     ldh  [hIndexOfObjectBelowLink], a             ; $7CCC: $E0 $E9
@@ -8834,11 +8834,11 @@ jr_003_7CFD:
     ld   hl, wEntitiesPrivateState2Table          ; $7D26: $21 $C0 $C2
     add  hl, bc                                   ; $7D29: $09
     ld   [hl], e                                  ; $7D2A: $73
-    ldh  a, [hSwordIntersectedAreaX]              ; $7D2B: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $7D2B: $F0 $CE
     ld   hl, wEntitiesPosXTable                   ; $7D2D: $21 $00 $C2
     add  hl, bc                                   ; $7D30: $09
     ld   [hl], a                                  ; $7D31: $77
-    ldh  a, [hSwordIntersectedAreaY]              ; $7D32: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $7D32: $F0 $CD
     ld   hl, wEntitiesPosYTable                   ; $7D34: $21 $10 $C2
     add  hl, bc                                   ; $7D37: $09
     ld   [hl], a                                  ; $7D38: $77
@@ -9003,19 +9003,19 @@ func_003_7E0E::
     push bc                                       ; $7E0E: $C5
 
     ; hMultiPurpose4 = entityPosX - 1
-    ; hSwordIntersectedAreaX = hMultiPurpose4 - (hMultiPurpose4 % $10)
+    ; hIntersectedObjectLeft = hMultiPurpose4 - (hMultiPurpose4 % $10)
     ld   hl, wEntitiesPosXTable                   ; $7E0F: $21 $00 $C2
     add  hl, bc                                   ; $7E12: $09
     ld   a, [hl]                                  ; $7E13: $7E
     sub  $01                                      ; $7E14: $D6 $01
     ldh  [hMultiPurpose4], a                      ; $7E16: $E0 $DB
     and  $F0 ; a - a % $10                        ; $7E18: $E6 $F0
-    ldh  [hSwordIntersectedAreaX], a              ; $7E1A: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $7E1A: $E0 $CE
 
     swap a                                        ; $7E1C: $CB $37
 
     ; hMultiPurpose5 = entityPosX - 7
-    ; hSwordIntersectedAreaY = hMultiPurpose5 - (hMultiPurpose5 % $10)
+    ; hIntersectedObjectTop = hMultiPurpose5 - (hMultiPurpose5 % $10)
     ld   hl, wEntitiesPosYTable                   ; $7E1E: $21 $10 $C2
     add  hl, bc                                   ; $7E21: $09
     ld   c, a                                     ; $7E22: $4F
@@ -9023,7 +9023,7 @@ func_003_7E0E::
     sub  $07                                      ; $7E24: $D6 $07
     ldh  [hMultiPurpose5], a                      ; $7E26: $E0 $DC
     and  $F0 ; a - a % $10                        ; $7E28: $E6 $F0
-    ldh  [hSwordIntersectedAreaY], a              ; $7E2A: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $7E2A: $E0 $CD
 
     or   c                                        ; $7E2C: $B1
     ld   c, a                                     ; $7E2D: $4F

@@ -7990,7 +7990,7 @@ jr_036_705F:
     ld   hl, wEntitiesPrivateCountdown1Table      ; $7066: $21 $F0 $C2
     add  hl, de                                   ; $7069: $19
     ld   [hl], $0F                                ; $706A: $36 $0F
-    ldh  a, [hSwordIntersectedAreaX]              ; $706C: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $706C: $F0 $CE
     ld   hl, Data_036_7052                        ; $706E: $21 $52 $70
 
 jr_036_7071:
@@ -7999,7 +7999,7 @@ jr_036_7071:
     ld   hl, wEntitiesPosXTable                   ; $7073: $21 $00 $C2
     add  hl, de                                   ; $7076: $19
     ld   [hl], a                                  ; $7077: $77
-    ldh  a, [hSwordIntersectedAreaY]              ; $7078: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $7078: $F0 $CD
 
 jr_036_707A:
     ld   hl, Data_036_7056                        ; $707A: $21 $56 $70

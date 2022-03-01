@@ -1069,7 +1069,7 @@ func_014_50C3::
     ; and the sword X position intersects with the entity…
     ld   hl, wEntitiesPosXTable                   ; $50E2: $21 $00 $C2
     add  hl, de                                   ; $50E5: $19
-    ldh  a, [hSwordIntersectedAreaX]              ; $50E6: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $50E6: $F0 $CE
     add  $08                                      ; $50E8: $C6 $08
     sub  [hl]                                     ; $50EA: $96
     add  $08                                      ; $50EB: $C6 $08
@@ -1079,7 +1079,7 @@ func_014_50C3::
     ; and the sword Y position intersects with the entity…
     ld   hl, wEntitiesPosYTable                   ; $50F1: $21 $10 $C2
     add  hl, de                                   ; $50F4: $19
-    ldh  a, [hSwordIntersectedAreaY]              ; $50F5: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $50F5: $F0 $CD
     add  $10                                      ; $50F7: $C6 $10
     sub  [hl]                                     ; $50F9: $96
     add  $08                                      ; $50FA: $C6 $08
@@ -1918,19 +1918,19 @@ jr_014_5789:
     ld   [hl], $00                                ; $57B7: $36 $00
     ld   a, STAIRCASE_INACTIVE                    ; $57B9: $3E $01
     ldh  [hStaircase], a                          ; $57BB: $E0 $AC
-    ldh  a, [hSwordIntersectedAreaY]              ; $57BD: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $57BD: $F0 $CD
     and  $F0                                      ; $57BF: $E6 $F0
     add  $10                                      ; $57C1: $C6 $10
     ldh  [hStaircasePosY], a                      ; $57C3: $E0 $AE
-    ldh  a, [hSwordIntersectedAreaX]              ; $57C5: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $57C5: $F0 $CE
     and  $F0                                      ; $57C7: $E6 $F0
     add  $08                                      ; $57C9: $C6 $08
     ldh  [hStaircasePosX], a                      ; $57CB: $E0 $AD
-    ldh  a, [hSwordIntersectedAreaX]              ; $57CD: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $57CD: $F0 $CE
     swap a                                        ; $57CF: $CB $37
     and  $0F                                      ; $57D1: $E6 $0F
     ld   e, a                                     ; $57D3: $5F
-    ldh  a, [hSwordIntersectedAreaY]              ; $57D4: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $57D4: $F0 $CD
     and  $F0                                      ; $57D6: $E6 $F0
     or   e                                        ; $57D8: $B3
     ld   [wWarp0PositionTileIndex], a             ; $57D9: $EA $16 $D4

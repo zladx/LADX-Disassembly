@@ -2687,16 +2687,16 @@ jr_007_51AA:
 
     ld   a, [hl]                                  ; $51BE: $7E
     sub  $10                                      ; $51BF: $D6 $10
-    ldh  [hSwordIntersectedAreaY], a              ; $51C1: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $51C1: $E0 $CD
     ld   hl, wEntitiesPosXTable                   ; $51C3: $21 $00 $C2
     add  hl, bc                                   ; $51C6: $09
     ld   a, [hl]                                  ; $51C7: $7E
     sub  $08                                      ; $51C8: $D6 $08
-    ldh  [hSwordIntersectedAreaX], a              ; $51CA: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $51CA: $E0 $CE
     swap a                                        ; $51CC: $CB $37
     and  $0F                                      ; $51CE: $E6 $0F
     ld   e, a                                     ; $51D0: $5F
-    ldh  a, [hSwordIntersectedAreaY]              ; $51D1: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $51D1: $F0 $CD
     and  $F0                                      ; $51D3: $E6 $F0
     or   e                                        ; $51D5: $B3
     ld   e, a                                     ; $51D6: $5F
@@ -2756,7 +2756,7 @@ jr_007_51F2:
     ld   d, b                                     ; $522E: $50
     ld   hl, Data_007_5174                        ; $522F: $21 $74 $51
     add  hl, de                                   ; $5232: $19
-    ldh  a, [hSwordIntersectedAreaX]              ; $5233: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $5233: $F0 $CE
     add  [hl]                                     ; $5235: $86
     swap a                                        ; $5236: $CB $37
     and  $0F                                      ; $5238: $E6 $0F
@@ -2765,7 +2765,7 @@ jr_007_51F2:
     add  hl, de                                   ; $523E: $19
     pop  af                                       ; $523F: $F1
     ld   e, a                                     ; $5240: $5F
-    ldh  a, [hSwordIntersectedAreaY]              ; $5241: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $5241: $F0 $CD
     add  [hl]                                     ; $5243: $86
     and  $F0                                      ; $5244: $E6 $F0
     or   e                                        ; $5246: $B3
@@ -3977,9 +3977,9 @@ jr_007_5A2A:
     ld   hl, Data_007_5994                        ; $5A40: $21 $94 $59
     add  hl, de                                   ; $5A43: $19
     ld   a, [hl]                                  ; $5A44: $7E
-    ldh  [hSwordIntersectedAreaY], a              ; $5A45: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $5A45: $E0 $CD
     ld   a, $40                                   ; $5A47: $3E $40
-    ldh  [hSwordIntersectedAreaX], a              ; $5A49: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $5A49: $E0 $CE
     call label_2887                               ; $5A4B: $CD $87 $28
     ldh  a, [hIsGBC]                              ; $5A4E: $F0 $FE
     and  a                                        ; $5A50: $A7
@@ -5301,12 +5301,12 @@ jr_007_625F:
 
     ldh  a, [hActiveEntityPosY]                   ; $6267: $F0 $EF
     sub  $10                                      ; $6269: $D6 $10
-    ldh  [hSwordIntersectedAreaY], a              ; $626B: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $626B: $E0 $CD
     and  $F0                                      ; $626D: $E6 $F0
     ld   e, a                                     ; $626F: $5F
     ldh  a, [hActiveEntityPosX]                   ; $6270: $F0 $EE
     sub  $08                                      ; $6272: $D6 $08
-    ldh  [hSwordIntersectedAreaX], a              ; $6274: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $6274: $E0 $CE
     swap a                                        ; $6276: $CB $37
     and  $0F                                      ; $6278: $E6 $0F
     or   e                                        ; $627A: $B3
@@ -6530,9 +6530,9 @@ label_007_69D0:
     ld   hl, Data_007_695F                        ; $69D8: $21 $5F $69
     add  hl, de                                   ; $69DB: $19
     ld   a, [hl]                                  ; $69DC: $7E
-    ldh  [hSwordIntersectedAreaY], a              ; $69DD: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $69DD: $E0 $CD
     ld   a, $20                                   ; $69DF: $3E $20
-    ldh  [hSwordIntersectedAreaX], a              ; $69E1: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $69E1: $E0 $CE
     call label_2887                               ; $69E3: $CD $87 $28
     pop  hl                                       ; $69E6: $E1
     ld   d, h                                     ; $69E7: $54
@@ -7792,15 +7792,15 @@ jr_007_71B4:
     call label_3E34                               ; $71E6: $CD $34 $3E
     ldh  a, [hActiveEntityPosX]                   ; $71E9: $F0 $EE
     sub  $08                                      ; $71EB: $D6 $08
-    ldh  [hSwordIntersectedAreaX], a              ; $71ED: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $71ED: $E0 $CE
     ldh  a, [hActiveEntityPosY]                   ; $71EF: $F0 $EF
     sub  $10                                      ; $71F1: $D6 $10
-    ldh  [hSwordIntersectedAreaY], a              ; $71F3: $E0 $CD
-    ldh  a, [hSwordIntersectedAreaX]              ; $71F5: $F0 $CE
+    ldh  [hIntersectedObjectTop], a               ; $71F3: $E0 $CD
+    ldh  a, [hIntersectedObjectLeft]              ; $71F5: $F0 $CE
     swap a                                        ; $71F7: $CB $37
     and  $0F                                      ; $71F9: $E6 $0F
     ld   e, a                                     ; $71FB: $5F
-    ldh  a, [hSwordIntersectedAreaY]              ; $71FC: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $71FC: $F0 $CD
     and  $F0                                      ; $71FE: $E6 $F0
     or   e                                        ; $7200: $B3
     ld   e, a                                     ; $7201: $5F

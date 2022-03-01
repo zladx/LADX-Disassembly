@@ -124,12 +124,12 @@ jr_018_7C80:
     call SpawnNewEntity_trampoline                ; $7C87: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                         ; $7C8A: $21 $00 $C2
     add  hl, de                                   ; $7C8D: $19
-    ldh  a, [hSwordIntersectedAreaX]              ; $7C8E: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $7C8E: $F0 $CE
     add  $08                                      ; $7C90: $C6 $08
     ld   [hl], a                                  ; $7C92: $77
     ld   hl, wEntitiesPosYTable                         ; $7C93: $21 $10 $C2
     add  hl, de                                   ; $7C96: $19
-    ldh  a, [hSwordIntersectedAreaY]              ; $7C97: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $7C97: $F0 $CD
     add  $10                                      ; $7C99: $C6 $10
     ld   [hl], a                                  ; $7C9B: $77
     ldh  a, [hObjectUnderEntity]                  ; $7C9C: $F0 $AF

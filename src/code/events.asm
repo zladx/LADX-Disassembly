@@ -317,13 +317,13 @@ jr_002_5EEB:
     ld   a, $20                                   ; $5EEB: $3E $20
 
 jr_002_5EED:
-    ldh  [hSwordIntersectedAreaY], a                               ; $5EED: $E0 $CD
+    ldh  [hIntersectedObjectTop], a                                ; $5EED: $E0 $CD
     ld   a, $80                                   ; $5EEF: $3E $80
-    ldh  [hSwordIntersectedAreaX], a                               ; $5EF1: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a                               ; $5EF1: $E0 $CE
     swap a                                        ; $5EF3: $CB $37
     and  $0F                                      ; $5EF5: $E6 $0F
     ld   e, a                                     ; $5EF7: $5F
-    ldh  a, [hSwordIntersectedAreaY]                               ; $5EF8: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]                                ; $5EF8: $F0 $CD
     and  $F0                                      ; $5EFA: $E6 $F0
     or   e                                        ; $5EFC: $B3
     ld   e, a                                     ; $5EFD: $5F
@@ -394,17 +394,17 @@ func_002_5F5C::
     ld   a, STAIRCASE_INACTIVE                    ; $5F5C: $3E $01
     ldh  [hStaircase], a                          ; $5F5E: $E0 $AC
     ld   a, $10                                   ; $5F60: $3E $10
-    ldh  [hSwordIntersectedAreaY], a                               ; $5F62: $E0 $CD
+    ldh  [hIntersectedObjectTop], a                                ; $5F62: $E0 $CD
     add  $10                                      ; $5F64: $C6 $10
     ldh  [hStaircasePosY], a                      ; $5F66: $E0 $AE
     ld   a, $80                                   ; $5F68: $3E $80
-    ldh  [hSwordIntersectedAreaX], a                               ; $5F6A: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a                               ; $5F6A: $E0 $CE
     add  $08                                      ; $5F6C: $C6 $08
     ldh  [hStaircasePosX], a                      ; $5F6E: $E0 $AD
     swap a                                        ; $5F70: $CB $37
     and  $0F                                      ; $5F72: $E6 $0F
     ld   e, a                                     ; $5F74: $5F
-    ldh  a, [hSwordIntersectedAreaY]                               ; $5F75: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]                                ; $5F75: $F0 $CD
     and  $F0                                      ; $5F77: $E6 $F0
     or   e                                        ; $5F79: $B3
     ld   e, a                                     ; $5F7A: $5F

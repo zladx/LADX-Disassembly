@@ -210,7 +210,7 @@ func_91D::
     ld   d, a                                     ; $094D: $57
     ldh  a, [hMultiPurposeA]                           ; $094E: $F0 $E1
     ld   e, a                                     ; $0950: $5F
-    ldh  a, [hFFCF]                               ; $0951: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $0951: $F0 $CF
     ldi  [hl], a                                  ; $0953: $22
     ldh  a, [hFFD0]                               ; $0954: $F0 $D0
     ldi  [hl], a                                  ; $0956: $22
@@ -223,7 +223,7 @@ func_91D::
     ld   a, [de]                                  ; $095E: $1A
     ldi  [hl], a                                  ; $095F: $22
     dec  de                                       ; $0960: $1B
-    ldh  a, [hFFCF]                               ; $0961: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $0961: $F0 $CF
     ldi  [hl], a                                  ; $0963: $22
     ldh  a, [hFFD0]                               ; $0964: $F0 $D0
     inc  a                                        ; $0966: $3C
@@ -294,7 +294,7 @@ func_999::
     ld   [wDC90], a                               ; $09AE: $EA $90 $DC
     ld   hl, wDC91                                ; $09B1: $21 $91 $DC
     add  hl, bc                                   ; $09B4: $09
-    ldh  a, [hFFCF]                               ; $09B5: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $09B5: $F0 $CF
     ldi  [hl], a                                  ; $09B7: $22
     ldh  a, [hFFD0]                               ; $09B8: $F0 $D0
     ldi  [hl], a                                  ; $09BA: $22
@@ -4507,7 +4507,7 @@ ReadJoypadState::
 
 ; Get BG address of the object under hSwordIntersectedAreaX/Y
 ; Return:
-;   hFFCF / hFFD0: BG address of the top-left tile of the object
+;   hIntersectedObjectBGAddressHigh / hFFD0: BG address of the top-left tile of the object
 label_2887::
     push bc                                       ; $2887: $C5
 
@@ -4546,7 +4546,7 @@ label_2887::
     add  hl, de                                   ; $28B7: $19
 
     ld   a, h                                     ; $28B8: $7C
-    ldh  [hFFCF], a                               ; $28B9: $E0 $CF
+    ldh  [hIntersectedObjectBGAddressHigh], a     ; $28B9: $E0 $CF
     ld   a, l                                     ; $28BB: $7D
     ldh  [hFFD0], a                               ; $28BC: $E0 $D0
     pop  bc                                       ; $28BE: $C1

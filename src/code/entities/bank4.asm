@@ -1420,7 +1420,7 @@ jr_004_565F:
     add  $0A                                      ; $5669: $C6 $0A
     ld   [wRequests], a                           ; $566B: $EA $00 $D6
     pop  de                                       ; $566E: $D1
-    ldh  a, [hFFCF]                               ; $566F: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $566F: $F0 $CF
     ld   [hl+], a                                 ; $5671: $22
     ldh  a, [hFFD0]                               ; $5672: $F0 $D0
     ld   [hl+], a                                 ; $5674: $22
@@ -1432,7 +1432,7 @@ jr_004_565F:
     ld   a, [de]                                  ; $567B: $1A
     inc  de                                       ; $567C: $13
     ld   [hl+], a                                 ; $567D: $22
-    ldh  a, [hFFCF]                               ; $567E: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $567E: $F0 $CF
     ld   [hl+], a                                 ; $5680: $22
     ldh  a, [hFFD0]                               ; $5681: $F0 $D0
     inc  a                                        ; $5683: $3C

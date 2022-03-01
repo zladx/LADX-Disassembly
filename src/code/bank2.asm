@@ -1656,7 +1656,7 @@ func_002_4BC8::
     jp   label_002_4C92                           ; $4BD1: $C3 $92 $4C
 
 func_002_4BD4::
-    ldh  a, [hFFCF]                               ; $4BD4: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4BD4: $F0 $CF
     ld   [hl+], a                                 ; $4BD6: $22
     ldh  a, [hFFD0]                               ; $4BD7: $F0 $D0
     ld   [hl+], a                                 ; $4BD9: $22
@@ -1670,7 +1670,7 @@ func_002_4BD4::
     ld   [hl+], a                                 ; $4BE5: $22
     ld   a, $06                                   ; $4BE6: $3E $06
     ld   [hl+], a                                 ; $4BE8: $22
-    ldh  a, [hFFCF]                               ; $4BE9: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4BE9: $F0 $CF
     ld   [hl+], a                                 ; $4BEB: $22
     ldh  a, [hFFD0]                               ; $4BEC: $F0 $D0
     inc  a                                        ; $4BEE: $3C
@@ -1687,7 +1687,7 @@ jr_002_4BFA:
     ld   [hl+], a                                 ; $4BFC: $22
     ld   a, $7A                                   ; $4BFD: $3E $7A
     ld   [hl+], a                                 ; $4BFF: $22
-    ldh  a, [hFFCF]                               ; $4C00: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4C00: $F0 $CF
     ld   [hl+], a                                 ; $4C02: $22
     ldh  a, [hFFD0]                               ; $4C03: $F0 $D0
     inc  a                                        ; $4C05: $3C
@@ -1716,7 +1716,7 @@ func_002_4C14::
     ld   e, l                                     ; $4C23: $5D
     ld   d, h                                     ; $4C24: $54
     pop  hl                                       ; $4C25: $E1
-    ldh  a, [hFFCF]                               ; $4C26: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4C26: $F0 $CF
     ld   [hl+], a                                 ; $4C28: $22
     ld   [de], a                                  ; $4C29: $12
     inc  de                                       ; $4C2A: $13
@@ -1741,7 +1741,7 @@ func_002_4C14::
     inc  de                                       ; $4C44: $13
     ld   [de], a                                  ; $4C45: $12
     inc  de                                       ; $4C46: $13
-    ldh  a, [hFFCF]                               ; $4C47: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4C47: $F0 $CF
     ld   [hl+], a                                 ; $4C49: $22
     ld   [de], a                                  ; $4C4A: $12
     inc  de                                       ; $4C4B: $13
@@ -1774,7 +1774,7 @@ jr_002_4C64:
     inc  de                                       ; $4C6D: $13
     ld   [de], a                                  ; $4C6E: $12
     inc  de                                       ; $4C6F: $13
-    ldh  a, [hFFCF]                               ; $4C70: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4C70: $F0 $CF
     ld   [hl+], a                                 ; $4C72: $22
     ld   [de], a                                  ; $4C73: $12
     inc  de                                       ; $4C74: $13
@@ -2020,7 +2020,7 @@ jr_002_4DCB:
     ld   [wRequests], a                           ; $4DD4: $EA $00 $D6
     ld   d, $00                                   ; $4DD7: $16 $00
     add  hl, de                                   ; $4DD9: $19
-    ldh  a, [hFFCF]                               ; $4DDA: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4DDA: $F0 $CF
     ld   [hl+], a                                 ; $4DDC: $22
     ldh  a, [hFFD0]                               ; $4DDD: $F0 $D0
     ld   [hl+], a                                 ; $4DDF: $22
@@ -2030,7 +2030,7 @@ jr_002_4DCB:
     ld   [hl+], a                                 ; $4DE5: $22
     ld   a, $77                                   ; $4DE6: $3E $77
     ld   [hl+], a                                 ; $4DE8: $22
-    ldh  a, [hFFCF]                               ; $4DE9: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4DE9: $F0 $CF
     ld   [hl+], a                                 ; $4DEB: $22
     ldh  a, [hFFD0]                               ; $4DEC: $F0 $D0
     inc  a                                        ; $4DEE: $3C
@@ -3613,7 +3613,7 @@ jr_002_56B8:
     ld   d, b                                     ; $56C1: $50
     ld   hl, wRequestDestinationHigh              ; $56C2: $21 $01 $D6
     add  hl, de                                   ; $56C5: $19
-    ldh  a, [hFFCF]                               ; $56C6: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $56C6: $F0 $CF
     ld   [hl+], a                                 ; $56C8: $22
     ldh  a, [hFFD0]                               ; $56C9: $F0 $D0
     ld   [hl+], a                                 ; $56CB: $22
@@ -3621,7 +3621,7 @@ jr_002_56B8:
     ld   [hl+], a                                 ; $56CE: $22
     ldh  a, [hMultiPurpose0]                      ; $56CF: $F0 $D7
     ld   [hl+], a                                 ; $56D1: $22
-    ldh  a, [hFFCF]                               ; $56D2: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $56D2: $F0 $CF
     ld   [hl+], a                                 ; $56D4: $22
     ldh  a, [hFFD0]                               ; $56D5: $F0 $D0
     add  $20                                      ; $56D7: $C6 $20
@@ -4197,7 +4197,7 @@ jr_002_5AD5:
     ld   [wRequests], a                           ; $5ADD: $EA $00 $D6
     ld   hl, wRequestDestinationHigh              ; $5AE0: $21 $01 $D6
     add  hl, bc                                   ; $5AE3: $09
-    ldh  a, [hFFCF]                               ; $5AE4: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5AE4: $F0 $CF
     ld   [hl+], a                                 ; $5AE6: $22
     ldh  a, [hFFD0]                               ; $5AE7: $F0 $D0
     ld   [hl+], a                                 ; $5AE9: $22
@@ -4477,7 +4477,7 @@ jr_002_5C89:
     ld   [wRequests], a                           ; $5C91: $EA $00 $D6
     ld   hl, wRequestDestinationHigh              ; $5C94: $21 $01 $D6
     add  hl, bc                                   ; $5C97: $09
-    ldh  a, [hFFCF]                               ; $5C98: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5C98: $F0 $CF
     ld   [hl+], a                                 ; $5C9A: $22
     ldh  a, [hFFD0]                               ; $5C9B: $F0 $D0
     ld   [hl+], a                                 ; $5C9D: $22

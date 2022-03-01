@@ -456,7 +456,7 @@ label_018_4402:
     ld   a, $1B                                   ; $4405: $3E $1B
     ld   [wRequests], a                           ; $4407: $EA $00 $D6
     ld   hl, wRequestDestinationHigh              ; $440A: $21 $01 $D6
-    ldh  a, [hFFCF]                               ; $440D: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $440D: $F0 $CF
     add  $02                                      ; $440F: $C6 $02
     ld   e, a                                     ; $4411: $5F
 
@@ -514,7 +514,7 @@ label_018_444E:
     ld   a, $1B                                   ; $4451: $3E $1B
     ld   [wRequests], a                           ; $4453: $EA $00 $D6
     ld   hl, wRequestDestinationHigh              ; $4456: $21 $01 $D6
-    ldh  a, [hFFCF]                               ; $4459: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4459: $F0 $CF
     add  $02                                      ; $445B: $C6 $02
     ld   e, a                                     ; $445D: $5F
     ld   [hl+], a                                 ; $445E: $22
@@ -567,7 +567,7 @@ label_018_449D:
     ld   a, $15                                   ; $44A0: $3E $15
     ld   [wRequests], a                           ; $44A2: $EA $00 $D6
     ld   hl, wRequestDestinationHigh              ; $44A5: $21 $01 $D6
-    ldh  a, [hFFCF]                               ; $44A8: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $44A8: $F0 $CF
     add  $02                                      ; $44AA: $C6 $02
     ld   e, a                                     ; $44AC: $5F
     ld   [hl+], a                                 ; $44AD: $22

@@ -349,7 +349,7 @@ jr_002_5EED:
     ld   de, Data_002_5EA7                        ; $5F24: $11 $A7 $5E
 
 label_002_5F27:
-    ldh  a, [hFFCF]                               ; $5F27: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5F27: $F0 $CF
     ld   [hl+], a                                 ; $5F29: $22
     ldh  a, [hFFD0]                               ; $5F2A: $F0 $D0
     ld   [hl+], a                                 ; $5F2C: $22
@@ -361,7 +361,7 @@ label_002_5F27:
     ld   a, [de]                                  ; $5F33: $1A
     inc  de                                       ; $5F34: $13
     ld   [hl+], a                                 ; $5F35: $22
-    ldh  a, [hFFCF]                               ; $5F36: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5F36: $F0 $CF
     ld   [hl+], a                                 ; $5F38: $22
     ldh  a, [hFFD0]                               ; $5F39: $F0 $D0
     inc  a                                        ; $5F3B: $3C

@@ -331,8 +331,8 @@ hSwordIntersectedAreaY::
 hSwordIntersectedAreaX::
   ds 1 ; FFCE
 
-; See label_2887
-hFFCF::
+; BG address of the top-left tile of the intersected object (high byte)
+hIntersectedObjectBGAddressHigh::
   ds $1 ; FFCF
 
 ; See label_2887

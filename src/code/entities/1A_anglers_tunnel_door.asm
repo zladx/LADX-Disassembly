@@ -81,7 +81,7 @@ Data_01A_70AD::
 ; Inputs:
 ;   de      wEntitiesInertiaTable + entity index
 ;   hMultiPurposeG   entity substate 1
-;   hFFCF   unknown
+;   hIntersectedObjectBGAddressHigh   unknown
 ;   hFFD0   unknown
 AnglersTunnelDoorEntityHandler::
     ; hl = de
@@ -119,7 +119,7 @@ AnglersTunnelDoorEntityHandler::
     ld   c, $0A                                   ; $7137: $0E $0A
     ld   hl, wDC91                                ; $7139: $21 $91 $DC
     ld   a, [wDC90]                               ; $713C: $FA $90 $DC
-    ldh  a, [hFFCF]                               ; $713F: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $713F: $F0 $CF
     ld   [hl+], a                                 ; $7141: $22
     ldh  a, [hFFD0]                               ; $7142: $F0 $D0
     ld   [hl+], a                                 ; $7144: $22
@@ -173,7 +173,7 @@ AnglersTunnelDoorEntityHandler::
     ld   [wRequests], a                           ; $717C: $EA $00 $D6
     ld   hl, wRequestDestinationHigh              ; $717F: $21 $01 $D6
     add  hl, de                                   ; $7182: $19
-    ldh  a, [hFFCF]                               ; $7183: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $7183: $F0 $CF
     ld   [hl+], a                                 ; $7185: $22
     ldh  a, [hFFD0]                               ; $7186: $F0 $D0
     ld   [hl+], a                                 ; $7188: $22

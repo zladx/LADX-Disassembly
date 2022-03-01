@@ -115,7 +115,7 @@ jr_018_632D:
     ld   [wRequests], a                           ; $6336: $EA $00 $D6
     ld   d, $00                                   ; $6339: $16 $00
     add  hl, de                                   ; $633B: $19
-    ldh  a, [hFFCF]                               ; $633C: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $633C: $F0 $CF
     ld   [hl+], a                                 ; $633E: $22
     ldh  a, [hFFD0]                               ; $633F: $F0 $D0
     ld   [hl+], a                                 ; $6341: $22
@@ -125,7 +125,7 @@ jr_018_632D:
     ld   [hl+], a                                 ; $6347: $22
     ld   a, $77                                   ; $6348: $3E $77
     ld   [hl+], a                                 ; $634A: $22
-    ldh  a, [hFFCF]                               ; $634B: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $634B: $F0 $CF
     ld   [hl+], a                                 ; $634D: $22
     ldh  a, [hFFD0]                               ; $634E: $F0 $D0
     inc  a                                        ; $6350: $3C

@@ -6369,7 +6369,7 @@ jr_015_749D:
     ld   [wRequests], a                           ; $74A6: $EA $00 $D6
     ld   d, $00                                   ; $74A9: $16 $00
     add  hl, de                                   ; $74AB: $19
-    ldh  a, [hFFCF]                               ; $74AC: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $74AC: $F0 $CF
     ld   [hl+], a                                 ; $74AE: $22
     ldh  a, [hFFD0]                               ; $74AF: $F0 $D0
     ld   [hl+], a                                 ; $74B1: $22
@@ -6394,7 +6394,7 @@ jr_015_749D:
 
 jr_015_74CB:
     ld   [hl+], a                                 ; $74CB: $22
-    ldh  a, [hFFCF]                               ; $74CC: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $74CC: $F0 $CF
     ld   [hl+], a                                 ; $74CE: $22
     ldh  a, [hFFD0]                               ; $74CF: $F0 $D0
     inc  a                                        ; $74D1: $3C
@@ -6427,7 +6427,7 @@ jr_015_74EF:
     ld   [hl+], a                                 ; $74EF: $22
     ld   a, $04                                   ; $74F0: $3E $04
     ld   [hl+], a                                 ; $74F2: $22
-    ldh  a, [hFFCF]                               ; $74F3: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $74F3: $F0 $CF
     ld   [hl+], a                                 ; $74F5: $22
     ldh  a, [hFFD0]                               ; $74F6: $F0 $D0
     inc  a                                        ; $74F8: $3C

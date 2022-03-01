@@ -632,7 +632,7 @@ func_020_4898::
     ld   d, $00                                   ; $48A5: $16 $00
     add  hl, de                                   ; $48A7: $19
     pop  de                                       ; $48A8: $D1
-    ldh  a, [hFFCF]                               ; $48A9: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $48A9: $F0 $CF
     ld   [hl+], a                                 ; $48AB: $22
     ldh  a, [hFFD0]                               ; $48AC: $F0 $D0
     ld   [hl+], a                                 ; $48AE: $22
@@ -644,7 +644,7 @@ func_020_4898::
     ld   a, [de]                                  ; $48B5: $1A
     inc  de                                       ; $48B6: $13
     ld   [hl+], a                                 ; $48B7: $22
-    ldh  a, [hFFCF]                               ; $48B8: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $48B8: $F0 $CF
     ld   [hl+], a                                 ; $48BA: $22
     ldh  a, [hFFD0]                               ; $48BB: $F0 $D0
     inc  a                                        ; $48BD: $3C

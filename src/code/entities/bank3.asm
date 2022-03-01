@@ -1911,7 +1911,7 @@ label_003_51F5:
     add  $0A                                      ; $5202: $C6 $0A
     ld   [wRequests], a                           ; $5204: $EA $00 $D6
     pop  de                                       ; $5207: $D1
-    ldh  a, [hFFCF]                               ; $5208: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5208: $F0 $CF
     ld   [hl+], a                                 ; $520A: $22
     ldh  a, [hFFD0]                               ; $520B: $F0 $D0
     ld   [hl+], a                                 ; $520D: $22
@@ -1923,7 +1923,7 @@ label_003_51F5:
     ld   a, [de]                                  ; $5214: $1A
     inc  de                                       ; $5215: $13
     ld   [hl+], a                                 ; $5216: $22
-    ldh  a, [hFFCF]                               ; $5217: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5217: $F0 $CF
     ld   [hl+], a                                 ; $5219: $22
     ldh  a, [hFFD0]                               ; $521A: $F0 $D0
     inc  a                                        ; $521C: $3C

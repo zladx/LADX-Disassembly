@@ -472,7 +472,7 @@ jr_001_655F::
     ld   a, $48                                   ; $656D: $3E $48
     ldh  [hActiveEntityPosX], a                   ; $656F: $E0 $EE
     ld   de, Data_001_6512                        ; $6571: $11 $12 $65
-    ld   a, [$DC0F]                               ; $6574: $FA $0F $DC
+    ld   a, [wTunicType]                          ; $6574: $FA $0F $DC
     and  a                                        ; $6577: $A7
     jr   z, jr_001_6584                           ; $6578: $28 $0A
     ld   de, Data_001_6516                        ; $657A: $11 $16 $65

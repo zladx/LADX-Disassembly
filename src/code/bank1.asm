@@ -351,15 +351,15 @@ jr_001_52FB::
     jr   nz, jr_001_52FB                          ; $5304: $20 $F5
     call EnableExternalRAMWriting                 ; $5306: $CD $D0 $27
     ld   a, [bc]                                  ; $5309: $0A
-    ld   [$DC0F], a                               ; $530A: $EA $0F $DC
+    ld   [wTunicType], a                          ; $530A: $EA $0F $DC
     inc  bc                                       ; $530D: $03
     call EnableExternalRAMWriting                 ; $530E: $CD $D0 $27
     ld   a, [bc]                                  ; $5311: $0A
-    ld   [$DC0C], a                               ; $5312: $EA $0C $DC
+    ld   [wPhotos1], a                            ; $5312: $EA $0C $DC
     inc  bc                                       ; $5315: $03
     call EnableExternalRAMWriting                 ; $5316: $CD $D0 $27
     ld   a, [bc]                                  ; $5319: $0A
-    ld   [$DC0D], a                               ; $531A: $EA $0D $DC
+    ld   [wPhotos2], a                            ; $531A: $EA $0D $DC
 
 jr_001_531D::
     ld   a, GAMEPLAY_WORLD                        ; $531D: $3E $0B
@@ -1440,11 +1440,11 @@ jr_001_5E3A::
     or   d                                        ; $5E45: $B2
     jr   nz, jr_001_5E3A                          ; $5E46: $20 $F2
     call EnableExternalRAMWriting                 ; $5E48: $CD $D0 $27
-    ld   a, [$DC0F]                               ; $5E4B: $FA $0F $DC
+    ld   a, [wTunicType]                          ; $5E4B: $FA $0F $DC
     call EnableExternalRAMWriting                 ; $5E4E: $CD $D0 $27
     ldi  [hl], a                                  ; $5E51: $22
     call EnableExternalRAMWriting                 ; $5E52: $CD $D0 $27
-    ld   a, [$DC0C]                               ; $5E55: $FA $0C $DC
+    ld   a, [wPhotos1]                            ; $5E55: $FA $0C $DC
     call EnableExternalRAMWriting                 ; $5E58: $CD $D0 $27
     ldi  [hl], a                                  ; $5E5B: $22
     call EnableExternalRAMWriting                 ; $5E5C: $CD $D0 $27

@@ -240,9 +240,9 @@ func_028_4185::
     jr   z, .else_4195_28                       ; $4189: $28 $0A
 
     ld   a, $FF                                 ; $418B: $3E $FF
-    ld   [$DC0C], a                             ; $418D: $EA $0C $DC
+    ld   [wPhotos1], a                          ; $418D: $EA $0C $DC
     ld   a, $0F                                 ; $4190: $3E $0F
-    ld   [$DC0D], a                             ; $4192: $EA $0D $DC
+    ld   [wPhotos2], a                          ; $4192: $EA $0D $DC
 .else_4195_28:
     ld   bc, $01                                ; $4195: $01 $01 $00
 .loop_4198_28:
@@ -251,7 +251,7 @@ func_028_4185::
     ld   a, [hl]                                ; $419C: $7E
     ld   e, a                                   ; $419D: $5F
     ld   d, $00                                 ; $419E: $16 $00
-    ld   hl, $DC0C                              ; $41A0: $21 $0C $DC
+    ld   hl, wPhotos1                           ; $41A0: $21 $0C $DC
     add  hl, de                                 ; $41A3: $19
     ld   a, [hl]                                ; $41A4: $7E
     ld   hl, Data_028_4259                      ; $41A5: $21 $59 $42
@@ -500,7 +500,7 @@ func_028_427D::
     add  hl, bc                                 ; $430A: $09
     ld   a, [hl]                                ; $430B: $7E
     ld   c, a                                   ; $430C: $4F
-    ld   hl, $DC0C                              ; $430D: $21 $0C $DC
+    ld   hl, wPhotos1                           ; $430D: $21 $0C $DC
     add  hl, bc                                 ; $4310: $09
     ld   a, [hl]                                ; $4311: $7E
     ld   c, d                                   ; $4312: $4A
@@ -645,7 +645,7 @@ func_028_43CC::
     ld   b, a                                   ; $43ED: $47
     ld   [$D169], a                             ; $43EE: $EA $69 $D1
     ld   a, [hl]                                ; $43F1: $7E
-    ld   [$D16A], a                             ; $43F2: $EA $6A $D1
+    ld   [wD16A], a                             ; $43F2: $EA $6A $D1
     ld   h, b                                   ; $43F5: $60
     ld   l, c                                   ; $43F6: $69
     push hl                                     ; $43F7: $E5
@@ -656,7 +656,7 @@ func_028_43CC::
     ld   bc, $800                               ; $4402: $01 $00 $08
     add  hl, bc                                 ; $4405: $09
     ld   de, $8800                              ; $4406: $11 $00 $88
-    ld   a, [$D16A]                             ; $4409: $FA $6A $D1
+    ld   a, [wD16A]                             ; $4409: $FA $6A $D1
     call CopyData_trampoline                    ; $440C: $CD $5D $0B
     pop  de                                     ; $440F: $D1
     ret                                         ; $4410: $C9

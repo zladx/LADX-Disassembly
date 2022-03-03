@@ -1700,7 +1700,15 @@ wD116::
 
 ; not used
 wD117::
-  ds $9E ; D117 - D1B4
+  ds $53 ; D117 - D169
+
+; Something rombank and photographs related
+wD16A::
+  ds 1 ; 
+
+; not used
+wD16B::
+  ds $4A ; D16B - D1B4
 
 ; Unlabeled
 wD1B5::

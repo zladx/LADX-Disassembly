@@ -666,7 +666,7 @@ LoadBaseTiles_trampoline::
     jp   RestoreStackedBankAndReturn              ; $0BC2: $C3 $73 $09
 
 func_BC5::
-    ld   a, [$D16A]                               ; $0BC5: $FA $6A $D1
+    ld   a, [wD16A]                               ; $0BC5: $FA $6A $D1
     ld   [MBC3SelectBank], a                      ; $0BC8: $EA $00 $21
 .loop
     ld   a, [hli]                                 ; $0BCB: $2A
@@ -2940,9 +2940,9 @@ LinkMotionMapFadeOutHandler::
     inc  [hl]                                     ; $1883: $34
     ld   hl, wHasStolenFromShop                   ; $1884: $21 $46 $DB
     inc  [hl]                                     ; $1887: $34
-    ld   a, [$DC0C]                               ; $1888: $FA $0C $DC
+    ld   a, [wPhotos1]                            ; $1888: $FA $0C $DC
     or   $40                                      ; $188B: $F6 $40
-    ld   [$DC0C], a                               ; $188D: $EA $0C $DC
+    ld   [wPhotos1], a                            ; $188D: $EA $0C $DC
     ld   a, $01                                   ; $1890: $3E $01
     ld   [wDidStealItem], a                       ; $1892: $EA $7E $D4
     xor  a                                        ; $1895: $AF

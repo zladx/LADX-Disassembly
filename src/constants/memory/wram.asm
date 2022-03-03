@@ -3266,8 +3266,24 @@ wFarcallReturnBank::
 wDE05:
   ds 1 ; DE05
 
-; maximal depth the stack can grow
-wStackMax equ $DE04
+wDE06:
+  ds 1 ; DE06
+
+wDE07:
+  ds 1 ; DE07
+
+wDE08:
+  ds 1 ; DE08
+
+wDE09:
+  ds 1 ; DE09
+
+wDE0A:
+  ds 1 ; DE0A
+
+wDE0B:
+  ds 1 ; DE0B
+
 ; top of WRAM is used as Stack
 wStack::
   ds $DFFF - @ + 1 ; DE04 - DFFF

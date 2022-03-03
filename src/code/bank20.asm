@@ -2432,10 +2432,10 @@ InventoryMapFadeOutHandler::
     ld   a, $30                                   ; $5955: $3E $30
     ldh  [hVolumeLeft], a                      ; $5957: $E0 $AA
     xor  a                                        ; $5959: $AF
-    ld   [$DE06], a                               ; $595A: $EA $06 $DE
-    ld   [$DE07], a                               ; $595D: $EA $07 $DE
-    ld   [$DE08], a                               ; $5960: $EA $08 $DE
-    ld   [$DE09], a                               ; $5963: $EA $09 $DE
+    ld   [wDE06], a                               ; $595A: $EA $06 $DE
+    ld   [wDE07], a                               ; $595D: $EA $07 $DE
+    ld   [wDE08], a                               ; $5960: $EA $08 $DE
+    ld   [wDE09], a                               ; $5963: $EA $09 $DE
     call IncrementGameplaySubtype_20                            ; $5966: $CD $83 $66
 
 .return
@@ -3310,20 +3310,20 @@ func_020_5EB5::
     and  a                                        ; $5EB7: $A7
     jr   z, jr_020_5EEE                           ; $5EB8: $28 $34
 
-    ld   a, [$DE07]                               ; $5EBA: $FA $07 $DE
+    ld   a, [wDE07]                               ; $5EBA: $FA $07 $DE
     ld   c, a                                     ; $5EBD: $4F
-    ld   a, [$DE06]                               ; $5EBE: $FA $06 $DE
+    ld   a, [wDE06]                               ; $5EBE: $FA $06 $DE
     inc  a                                        ; $5EC1: $3C
-    ld   [$DE06], a                               ; $5EC2: $EA $06 $DE
+    ld   [wDE06], a                               ; $5EC2: $EA $06 $DE
     cp   $08                                      ; $5EC5: $FE $08
     jr   c, jr_020_5ED6                           ; $5EC7: $38 $0D
 
     xor  a                                        ; $5EC9: $AF
-    ld   [$DE06], a                               ; $5ECA: $EA $06 $DE
+    ld   [wDE06], a                               ; $5ECA: $EA $06 $DE
     ld   a, c                                     ; $5ECD: $79
     add  $04                                      ; $5ECE: $C6 $04
     and  $3C                                      ; $5ED0: $E6 $3C
-    ld   [$DE07], a                               ; $5ED2: $EA $07 $DE
+    ld   [wDE07], a                               ; $5ED2: $EA $07 $DE
     ld   c, a                                     ; $5ED5: $4F
 
 jr_020_5ED6:
@@ -3928,21 +3928,21 @@ jr_020_62DD:
     ret                                           ; $62DD: $C9
 
 func_020_62DE::
-    ld   a, [$DE09]                               ; $62DE: $FA $09 $DE
+    ld   a, [wDE09]                               ; $62DE: $FA $09 $DE
     ld   b, a                                     ; $62E1: $47
-    ld   a, [$DE08]                               ; $62E2: $FA $08 $DE
+    ld   a, [wDE08]                               ; $62E2: $FA $08 $DE
     inc  a                                        ; $62E5: $3C
-    ld   [$DE08], a                               ; $62E6: $EA $08 $DE
+    ld   [wDE08], a                               ; $62E6: $EA $08 $DE
     cp   $10                                      ; $62E9: $FE $10
     jr   c, jr_020_62F2                           ; $62EB: $38 $05
 
     xor  a                                        ; $62ED: $AF
-    ld   [$DE08], a                               ; $62EE: $EA $08 $DE
+    ld   [wDE08], a                               ; $62EE: $EA $08 $DE
     inc  b                                        ; $62F1: $04
 
 jr_020_62F2:
     ld   a, b                                     ; $62F2: $78
-    ld   [$DE09], a                               ; $62F3: $EA $09 $DE
+    ld   [wDE09], a                               ; $62F3: $EA $09 $DE
     ldh  [hFreeWarpDataAddress], a                ; $62F6: $E0 $E6
     ld   hl, wDynamicOAMBuffer+$20                                ; $62F8: $21 $50 $C0
     ld   b, $4A                                   ; $62FB: $06 $4A
@@ -4129,7 +4129,7 @@ jr_020_63F5:
     ld   a, $09                                   ; $63FB: $3E $09
     ld   [wGameplaySubtype], a                    ; $63FD: $EA $96 $DB
     ld   a, $90                                   ; $6400: $3E $90
-    ld   [$DE0A], a                               ; $6402: $EA $0A $DE
+    ld   [wDE0A], a                               ; $6402: $EA $0A $DE
     ld   a, [ROM_DebugTool3]                      ; $6405: $FA $05 $00
     and  a                                        ; $6408: $A7
     jr   z, jr_020_641C                           ; $6409: $28 $11
@@ -4248,7 +4248,7 @@ func_020_64EE::
     ld   hl, wOAMBuffer+$10                                ; $64EE: $21 $10 $C0
     ld   a, $53                                   ; $64F1: $3E $53
     ldh  [hBGMapOffsetLow], a                     ; $64F3: $E0 $E1
-    ld   a, [$DE0A]                               ; $64F5: $FA $0A $DE
+    ld   a, [wDE0A]                               ; $64F5: $FA $0A $DE
     ldh  [hMultiPurposeB], a                           ; $64F8: $E0 $E2
     push hl                                       ; $64FA: $E5
     ld   c, $04                                   ; $64FB: $0E $04
@@ -4288,7 +4288,7 @@ func_020_64EE::
     call func_020_6446                            ; $6533: $CD $46 $64
     ld   a, $53                                   ; $6536: $3E $53
     ldh  [hBGMapOffsetLow], a                     ; $6538: $E0 $E1
-    ld   a, [$DE0A]                               ; $653A: $FA $0A $DE
+    ld   a, [wDE0A]                               ; $653A: $FA $0A $DE
     add  $10                                      ; $653D: $C6 $10
     ldh  [hMultiPurposeB], a                           ; $653F: $E0 $E2
     ld   c, $03                                   ; $6541: $0E $03
@@ -4351,7 +4351,7 @@ InventoryInteractiveHandler::
     jr   jr_020_65A7                              ; $6594: $18 $11
 
 jr_020_6596:
-    ld   a, [$DE0A]                               ; $6596: $FA $0A $DE
+    ld   a, [wDE0A]                               ; $6596: $FA $0A $DE
     sub  $04                                      ; $6599: $D6 $04
     cp   $78                                      ; $659B: $FE $78
     jr   nc, jr_020_65A4                          ; $659D: $30 $05
@@ -4360,7 +4360,7 @@ jr_020_6596:
     ld   a, $78                                   ; $65A2: $3E $78
 
 jr_020_65A4:
-    ld   [$DE0A], a                               ; $65A4: $EA $0A $DE
+    ld   [wDE0A], a                               ; $65A4: $EA $0A $DE
 
 jr_020_65A7:
     ret                                           ; $65A7: $C9
@@ -4380,7 +4380,7 @@ jr_020_65B7:
 InventoryStatusOutHandler::
     call func_020_5EB5                            ; $65B8: $CD $B5 $5E
     call func_020_64EE                            ; $65BB: $CD $EE $64
-    ld   a, [$DE0A]                               ; $65BE: $FA $0A $DE
+    ld   a, [wDE0A]                               ; $65BE: $FA $0A $DE
     add  $04                                      ; $65C1: $C6 $04
     cp   $90                                      ; $65C3: $FE $90
     jr   c, jr_020_65CE                           ; $65C5: $38 $07
@@ -4390,7 +4390,7 @@ InventoryStatusOutHandler::
     ld   a, $90                                   ; $65CC: $3E $90
 
 jr_020_65CE:
-    ld   [$DE0A], a                               ; $65CE: $EA $0A $DE
+    ld   [wDE0A], a                               ; $65CE: $EA $0A $DE
     ret                                           ; $65D1: $C9
 
 InventoryFadeOutHandler::

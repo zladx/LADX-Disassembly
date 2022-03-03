@@ -7044,7 +7044,7 @@ jr_003_7325:
 jr_003_7330:
 IF __PATCH_0__
     ld   a, $01
-    ld   [$de0b], a
+    ld   [wDE0B], a
 ENDC
     ldh  a, [hLinkPositionY]                      ; $7330: $F0 $99
     push af                                       ; $7332: $F5

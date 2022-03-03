@@ -60,7 +60,7 @@ ENDC
     ldh  a, [hMapId]                              ; $43AD: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $43AF: $FE $FF
     jr   nz, jr_001_43B8                          ; $43B1: $20 $05
-    ld   hl, $DDDA                                ; $43B3: $21 $DA $DD
+    ld   hl, wColorDungeonItemFlags               ; $43B3: $21 $DA $DD
     jr   jr_001_43C5                              ; $43B6: $18 $0D
 
 jr_001_43B8::
@@ -363,19 +363,19 @@ TransitionToFileMenu::
 
 label_001_4555::
     call EnableExternalRAMWriting                 ; $4555: $CD $D0 $27
-    ld   a, [$A454]                               ; $4558: $FA $54 $A4
+    ld   a, [SaveGame1 + 5 + wName - wOverworldRoomStatus]                               ; $4558: $FA $54 $A4
     ld   [wSaveSlot1Name], a                      ; $455B: $EA $80 $DB
     call EnableExternalRAMWriting                 ; $455E: $CD $D0 $27
-    ld   a, [$A455]                               ; $4561: $FA $55 $A4
+    ld   a, [SaveGame1 + 5 + wName - wOverworldRoomStatus + 1]                               ; $4561: $FA $55 $A4
     ld   [wSaveSlot1Name+1], a                    ; $4564: $EA $81 $DB
     call EnableExternalRAMWriting                 ; $4567: $CD $D0 $27
-    ld   a, [$A456]                               ; $456A: $FA $56 $A4
+    ld   a, [SaveGame1 + 5 + wName - wOverworldRoomStatus + 2]                               ; $456A: $FA $56 $A4
     ld   [wSaveSlot1Name+2], a                    ; $456D: $EA $82 $DB
     call EnableExternalRAMWriting                 ; $4570: $CD $D0 $27
-    ld   a, [$A457]                               ; $4573: $FA $57 $A4
+    ld   a, [SaveGame1 + 5 + wName - wOverworldRoomStatus + 3]                               ; $4573: $FA $57 $A4
     ld   [wSaveSlot1Name+3], a                    ; $4576: $EA $83 $DB
     call EnableExternalRAMWriting                 ; $4579: $CD $D0 $27
-    ld   a, [$A458]                               ; $457C: $FA $58 $A4
+    ld   a, [SaveGame1 + 5 + wName - wOverworldRoomStatus + 4]                               ; $457C: $FA $58 $A4
     ld   [wSaveSlot1Name+4], a                    ; $457F: $EA $84 $DB
     call EnableExternalRAMWriting                 ; $4582: $CD $D0 $27
     ld   a, [$A45F]                               ; $4585: $FA $5F $A4
@@ -384,25 +384,25 @@ label_001_4555::
     ld   a, [$A460]                               ; $458E: $FA $60 $A4
     ld   [wDC09], a                               ; $4591: $EA $09 $DC
     call EnableExternalRAMWriting                 ; $4594: $CD $D0 $27
-    ld   a, [$A45C]                               ; $4597: $FA $5C $A4
+    ld   a, [SaveGame1 + 5 + wDeathCount - wOverworldRoomStatus]                               ; $4597: $FA $5C $A4
     ld   [wFile1DeathCountHigh], a                ; $459A: $EA $00 $DC
     call EnableExternalRAMWriting                 ; $459D: $CD $D0 $27
-    ld   a, [$A45D]                               ; $45A0: $FA $5D $A4
+    ld   a, [SaveGame1 + 5 + wDeathCount - wOverworldRoomStatus + 1]                               ; $45A0: $FA $5D $A4
     ld   [wFile1DeathCountLow], a                 ; $45A3: $EA $01 $DC
     call EnableExternalRAMWriting                 ; $45A6: $CD $D0 $27
-    ld   a, [$A801]                               ; $45A9: $FA $01 $A8
+    ld   a, [SaveGame2 + 5 + wName - wOverworldRoomStatus]                               ; $45A9: $FA $01 $A8
     ld   [wSaveSlot2Name], a                      ; $45AC: $EA $85 $DB
     call EnableExternalRAMWriting                 ; $45AF: $CD $D0 $27
-    ld   a, [$A802]                               ; $45B2: $FA $02 $A8
+    ld   a, [SaveGame2 + 5 + wName - wOverworldRoomStatus + 1]                               ; $45B2: $FA $02 $A8
     ld   [wSaveSlot2Name+1], a                    ; $45B5: $EA $86 $DB
     call EnableExternalRAMWriting                 ; $45B8: $CD $D0 $27
-    ld   a, [$A803]                               ; $45BB: $FA $03 $A8
+    ld   a, [SaveGame2 + 5 + wName - wOverworldRoomStatus + 2]                               ; $45BB: $FA $03 $A8
     ld   [wSaveSlot2Name+2], a                    ; $45BE: $EA $87 $DB
     call EnableExternalRAMWriting                 ; $45C1: $CD $D0 $27
-    ld   a, [$A804]                               ; $45C4: $FA $04 $A8
+    ld   a, [SaveGame2 + 5 + wName - wOverworldRoomStatus + 3]                               ; $45C4: $FA $04 $A8
     ld   [wSaveSlot2Name+3], a                    ; $45C7: $EA $88 $DB
     call EnableExternalRAMWriting                 ; $45CA: $CD $D0 $27
-    ld   a, [$A805]                               ; $45CD: $FA $05 $A8
+    ld   a, [SaveGame2 + 5 + wName - wOverworldRoomStatus + 4]                               ; $45CD: $FA $05 $A8
     ld   [wSaveSlot2Name+4], a                    ; $45D0: $EA $89 $DB
     call EnableExternalRAMWriting                 ; $45D3: $CD $D0 $27
     ld   a, [$A80C]                               ; $45D6: $FA $0C $A8
@@ -411,25 +411,25 @@ label_001_4555::
     ld   a, [$A80D]                               ; $45DF: $FA $0D $A8
     ld   [wDC0A], a                               ; $45E2: $EA $0A $DC
     call EnableExternalRAMWriting                 ; $45E5: $CD $D0 $27
-    ld   a, [$A809]                               ; $45E8: $FA $09 $A8
+    ld   a, [SaveGame2 + 5 + wDeathCount - wOverworldRoomStatus]                               ; $45E8: $FA $09 $A8
     ld   [wFile2DeathCountHigh], a                ; $45EB: $EA $02 $DC
     call EnableExternalRAMWriting                 ; $45EE: $CD $D0 $27
-    ld   a, [$A80A]                               ; $45F1: $FA $0A $A8
+    ld   a, [SaveGame2 + 5 + wDeathCount - wOverworldRoomStatus + 1]                               ; $45F1: $FA $0A $A8
     ld   [wFile2DeathCountLow], a                 ; $45F4: $EA $03 $DC
     call EnableExternalRAMWriting                 ; $45F7: $CD $D0 $27
-    ld   a, [$ABAE]                               ; $45FA: $FA $AE $AB
+    ld   a, [SaveGame3 + 5 + wName - wOverworldRoomStatus]                               ; $45FA: $FA $AE $AB
     ld   [wSaveSlot3Name], a                      ; $45FD: $EA $8A $DB
     call EnableExternalRAMWriting                 ; $4600: $CD $D0 $27
-    ld   a, [$ABAF]                               ; $4603: $FA $AF $AB
+    ld   a, [SaveGame3 + 5 + wName - wOverworldRoomStatus + 1]                               ; $4603: $FA $AF $AB
     ld   [wSaveSlot3Name+1], a                    ; $4606: $EA $8B $DB
     call EnableExternalRAMWriting                 ; $4609: $CD $D0 $27
-    ld   a, [$ABB0]                               ; $460C: $FA $B0 $AB
+    ld   a, [SaveGame3 + 5 + wName - wOverworldRoomStatus + 2]                               ; $460C: $FA $B0 $AB
     ld   [wSaveSlot3Name+2], a                    ; $460F: $EA $8C $DB
     call EnableExternalRAMWriting                 ; $4612: $CD $D0 $27
-    ld   a, [$ABB1]                               ; $4615: $FA $B1 $AB
+    ld   a, [SaveGame3 + 5 + wName - wOverworldRoomStatus + 3]                               ; $4615: $FA $B1 $AB
     ld   [wSaveSlot3Name+3], a                    ; $4618: $EA $8D $DB
     call EnableExternalRAMWriting                 ; $461B: $CD $D0 $27
-    ld   a, [$ABB2]                               ; $461E: $FA $B2 $AB
+    ld   a, [SaveGame3 + 5 + wName - wOverworldRoomStatus + 4]                               ; $461E: $FA $B2 $AB
     ld   [wSaveSlot3Name+4], a                    ; $4621: $EA $8E $DB
     call EnableExternalRAMWriting                 ; $4624: $CD $D0 $27
     ld   a, [$ABB9]                               ; $4627: $FA $B9 $AB
@@ -438,10 +438,10 @@ label_001_4555::
     ld   a, [$ABBA]                               ; $4630: $FA $BA $AB
     ld   [wDC0B], a                               ; $4633: $EA $0B $DC
     call EnableExternalRAMWriting                 ; $4636: $CD $D0 $27
-    ld   a, [$ABB6]                               ; $4639: $FA $B6 $AB
+    ld   a, [SaveGame3 + 5 + wDeathCount - wOverworldRoomStatus]                               ; $4639: $FA $B6 $AB
     ld   [wFile3DeathCountHigh], a                ; $463C: $EA $04 $DC
     call EnableExternalRAMWriting                 ; $463F: $CD $D0 $27
-    ld   a, [$ABB7]                               ; $4642: $FA $B7 $AB
+    ld   a, [SaveGame3 + 5 + wDeathCount - wOverworldRoomStatus + 1]                               ; $4642: $FA $B7 $AB
     ld   [wFile3DeathCountLow], a                 ; $4645: $EA $05 $DC
     ld   a, GAMEPLAY_FILE_SELECT                  ; $4648: $3E $02
     ld   [wGameplayType], a                       ; $464A: $EA $95 $DB

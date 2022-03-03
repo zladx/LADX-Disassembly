@@ -4461,7 +4461,7 @@ ReadJoypadState::
     ld   a, [wTransitionSequenceCounter]          ; $283F: $FA $6B $C1
     cp   $04                                      ; $2842: $FE $04
     jr   nz, .notInteractive                      ; $2844: $20 $06
-    ld   a, [$DDD5]                               ; $2846: $FA $D5 $DD
+    ld   a, [wPaletteUnknownE]                    ; $2846: $FA $D5 $DD
     and  a                                        ; $2849: $A7
     jr   z, .readState                            ; $284A: $28 $06
 

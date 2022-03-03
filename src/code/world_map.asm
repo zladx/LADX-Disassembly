@@ -132,7 +132,7 @@ WorldMapState3Handler::
     ld   [wTilesetToLoad], a                      ; $56FF: $EA $FE $D6
 
     ld   a, $01                                   ; $5702: $3E $01
-    ld   [$DDD5], a                               ; $5704: $EA $D5 $DD
+    ld   [wPaletteUnknownE], a                    ; $5704: $EA $D5 $DD
 
     call IncrementGameplaySubtype                 ; $5707: $CD $D6 $44
     ret                                           ; $570A: $C9
@@ -300,7 +300,7 @@ jr_001_5804::
     ld   [wTransitionSequenceCounter], a                               ; $580A: $EA $6B $C1
     ld   [wC16C], a                               ; $580D: $EA $6C $C1
     ld   a, $01                                   ; $5810: $3E $01
-    ld   [$DDD5], a                               ; $5812: $EA $D5 $DD
+    ld   [wPaletteUnknownE], a                    ; $5812: $EA $D5 $DD
     call IncrementGameplaySubtype                 ; $5815: $CD $D6 $44
 
 label_001_5818::

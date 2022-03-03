@@ -62,11 +62,11 @@ func_038_7830::
 
 
 func_038_785A::
-    ld   a, [wDialogState]                              ; $785A: $FA $9F $C1
+    ld   a, [wDialogState]                       ; $785A: $FA $9F $C1
     and  a                                       ; $785D: $A7
     ret  nz                                      ; $785E: $C0
 
-    ld   a, [$DDD1]                              ; $785F: $FA $D1 $DD
+    ld   a, [wPaletteDataFlags]                  ; $785F: $FA $D1 $DD
     and  a                                       ; $7862: $A7
     ret  nz                                      ; $7863: $C0
 

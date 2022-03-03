@@ -51,11 +51,11 @@ DEBUG_SAVE_FILE_SIZE equ @ - DebugSaveFileData
 ; Initialize save files, and load debug save file if needed
 InitSaveFiles::
     ; Initialize the battery-backed memory used for save files
-    ld   de, $00                                  ; $46AA: $11 $00 $00
+    ld   de, SaveGame1 - SaveGame1                ; $46AA: $11 $00 $00
     call func_001_4794                            ; $46AD: $CD $94 $47
-    ld   de, $3AD                                 ; $46B0: $11 $AD $03
+    ld   de, SaveGame2 - SaveGame1                ; $46B0: $11 $AD $03
     call func_001_4794                            ; $46B3: $CD $94 $47
-    ld   de, $75A                                 ; $46B6: $11 $5A $07
+    ld   de, SaveGame3 - SaveGame1                ; $46B6: $11 $5A $07
     call func_001_4794                            ; $46B9: $CD $94 $47
 
     ; POI: If DebugTool1 is enabled,
@@ -66,7 +66,7 @@ InitSaveFiles::
 
     ld   e, $00                                   ; $46C3: $1E $00
     ld   d, $00                                   ; $46C5: $16 $00
-    ld   bc, $A405                                ; $46C7: $01 $05 $A4
+    ld   bc, SaveGame1 + 5 + wBButtonSlot - wOverworldRoomStatus ; $46C7: $01 $05 $A4
 .loop
     ld   hl, DebugSaveFileData                    ; $46CA: $21 $67 $46
     add  hl, de                                   ; $46CD: $19
@@ -80,14 +80,14 @@ InitSaveFiles::
 
     ; Set some other parts of the first save file ...
     ld   a, $01                                   ; $46D7: $3E $01
-    ld   [$A453], a ; Sword level 1               ; $46D9: $EA $53 $A4
+    ld   [SaveGame1 + 5 + wSwordLevel - wOverworldRoomStatus], a ; Sword level 1               ; $46D9: $EA $53 $A4
     ld   a, $01                                   ; $46DC: $3E $01
-    ld   [$A449], a ; Shield level 1              ; $46DE: $EA $49 $A4
+    ld   [SaveGame1 + 5 + wShieldLevel - wOverworldRoomStatus], a ; Shield level 1              ; $46DE: $EA $49 $A4
     ld   a, $02                                   ; $46E1: $3E $02
-    ld   [$A448], a ; Power bracelet level 2      ; $46E3: $EA $48 $A4
+    ld   [SaveGame1 + 5 + wPowerBraceletLevel - wOverworldRoomStatus], a ; Power bracelet level 2      ; $46E3: $EA $48 $A4
 
     ; Set boss flags for all dungeons
-    ld   hl, $A46A ; Dungeon boss flags = 00000010 ; $46E6: $21 $6A $A4
+    ld   hl, SaveGame1 + 5 + wHasInstrument1 - wOverworldRoomStatus ; Dungeon boss flags = 00000010 ; $46E6: $21 $6A $A4
     ld   e, $09 ; POI: Sets 9 flags (but only 8 dungeons...?) ; $46E9: $1E $09
     ld   a, $02 ; Sets 46A~447                    ; $46EB: $3E $02
 .loop2
@@ -96,36 +96,36 @@ InitSaveFiles::
     jr   nz, .loop2                               ; $46EF: $20 $FC
 
     ld   a, DEBUG_SAVE_BOMB_COUNT                 ; $46F1: $3E $60
-    ld   [$A452], a ; 60 bombs                    ; $46F3: $EA $52 $A4
+    ld   [SaveGame1 + 5 + wBombCount - wOverworldRoomStatus], a ; 60 bombs                    ; $46F3: $EA $52 $A4
 IF DEBUG_SAVE_SWITCH_ARROWS
-    ld   [$A47C], a ; 60 max bombs
-    ld   [$A47D], a ; 60 max arrows
+    ld   [SaveGame1 + 5 + wMaxBombs - wOverworldRoomStatus], a ; 60 max bombs
+    ld   [SaveGame1 + 5 + wMaxArrows - wOverworldRoomStatus], a ; 60 max arrows
 ELSE
-    ld   [$A47D], a ; 60 max arrows               ; $46F6: $EA $7D $A4
-    ld   [$A47C], a ; 60 max bombs                ; $46F9: $EA $7C $A4
+    ld   [SaveGame1 + 5 + wMaxArrows - wOverworldRoomStatus], a ; 60 max arrows               ; $46F6: $EA $7D $A4
+    ld   [SaveGame1 + 5 + wMaxBombs - wOverworldRoomStatus], a ; 60 max bombs                ; $46F9: $EA $7C $A4
 ENDC
-    ld   [$A44A], a ; 60 arrows                   ; $46FC: $EA $4A $A4
+    ld   [SaveGame1 + 5 + wArrowCount - wOverworldRoomStatus], a ; 60 arrows                   ; $46FC: $EA $4A $A4
     ld   a, DEBUG_SAVE_MAGIC_COUNT                ; $46FF: $3E $40
-    ld   [$A47B], a ; 40 max magic powder         ; $4701: $EA $7B $A4
-    ld   [$A451], a ; 40 magic powder             ; $4704: $EA $51 $A4
+    ld   [SaveGame1 + 5 + wMaxMagicPowder - wOverworldRoomStatus], a ; 40 max magic powder         ; $4701: $EA $7B $A4
+    ld   [SaveGame1 + 5 + wMagicPowderCount - wOverworldRoomStatus], a ; 40 magic powder             ; $4704: $EA $51 $A4
 IF !LANG_JP
     ld   a, $89                                   ; $4707: $3E $89
-    ld   [$A44C], a ; "time/animation?" (unknown) ; $4709: $EA $4C $A4
+    ld   [SaveGame1 + 5 + wDB47 - wOverworldRoomStatus], a ; "time/animation?" (unknown) ; $4709: $EA $4C $A4
 ENDC
     xor  a                                        ; $470C: $AF
-    ld   [$A414], a ; 0 secret seashells          ; $470D: $EA $14 $A4
+    ld   [SaveGame1 + 5 + wSeashellsCount - wOverworldRoomStatus], a ; 0 secret seashells          ; $470D: $EA $14 $A4
     ld   a, %00000111 ; @TODO Ocarina song constants? ; $4710: $3E $07
-    ld   [$A44E], a ; all 3 Ocarina songs         ; $4712: $EA $4E $A4
+    ld   [SaveGame1 + 5 + wOcarinaSongFlags - wOverworldRoomStatus], a ; all 3 Ocarina songs         ; $4712: $EA $4E $A4
     ld   a, $05                                   ; $4715: $3E $05
-    ld   [$A462], a ; 5xx rupees                  ; $4717: $EA $62 $A4
+    ld   [SaveGame1 + 5 + wRupeeCountHigh - wOverworldRoomStatus], a ; 5xx rupees                  ; $4717: $EA $62 $A4
     ld   a, $09                                   ; $471A: $3E $09
-    ld   [$A463], a ; x09 rupees                  ; $471C: $EA $63 $A4
+    ld   [SaveGame1 + 5 + wRupeeCountLow - wOverworldRoomStatus], a ; x09 rupees                  ; $471C: $EA $63 $A4
     ld   a, $01                                   ; $471F: $3E $01
-    ld   [$A44D], a ; "Tarin at home flag"        ; $4721: $EA $4D $A4
+    ld   [SaveGame1 + 5 + wDB48 - wOverworldRoomStatus], a ; "Tarin at home flag"        ; $4721: $EA $4D $A4
     ld   a, $50                                   ; $4724: $3E $50
-    ld   [$A45F], a ; 10 hearts of health         ; $4726: $EA $5F $A4
+    ld   [SaveGame1 + 5 + wHealth - wOverworldRoomStatus], a ; 10 hearts of health         ; $4726: $EA $5F $A4
     ld   a, $0A                                   ; $4729: $3E $0A
-    ld   [$A460], a ; 10 heart containers         ; $472B: $EA $60 $A4
+    ld   [SaveGame1 + 5 + wMaxHealth - wOverworldRoomStatus], a ; 10 heart containers         ; $472B: $EA $60 $A4
 
     ld   a, [wGameplayType]                       ; $472E: $FA $95 $DB
     cp   GAMEPLAY_FILE_NEW                        ; $4731: $FE $03
@@ -137,26 +137,26 @@ ENDC
 INDEX = 0
 REPT 5
     ld   a, STRSUB("{DEBUG_SAVE_FILE_NAME}", INDEX + 1, 1) + 1
-    ld   [$A454 + INDEX], a
+    ld   [SaveGame1 + 5 + wName - wOverworldRoomStatus + INDEX], a
 INDEX = INDEX + 1
 ENDR
 
 .notOnNewFileScreen
     xor  a                                        ; $474E: $AF
-    ld   [$A45C], a ; death counter = 0           ; $474F: $EA $5C $A4
-    ld   [$A45D], a ; death counter = 0           ; $4752: $EA $5D $A4
-    ld   [$A45B], a ; bowwow flag = off           ; $4755: $EA $5B $A4
-    ld   [$A464], a ; current map = overworld     ; $4758: $EA $64 $A4
-    ld   [$A465], a ; current submap = none       ; $475B: $EA $65 $A4
+    ld   [SaveGame1 + 5 + wDeathCount - wOverworldRoomStatus], a ; death counter = 0           ; $474F: $EA $5C $A4
+    ld   [SaveGame1 + 5 + wDeathCount + 1 - wOverworldRoomStatus], a ; death counter = 0           ; $4752: $EA $5D $A4
+    ld   [SaveGame1 + 5 + wIsBowWowFollowingLink - wOverworldRoomStatus], a ; bowwow flag = off           ; $4755: $EA $5B $A4
+    ld   [SaveGame1 + 5 + wSpawnIsIndoor - wOverworldRoomStatus], a ; current map = overworld     ; $4758: $EA $64 $A4
+    ld   [SaveGame1 + 5 + wSpawnMapId - wOverworldRoomStatus], a ; current submap = none       ; $475B: $EA $65 $A4
     ld   a, $92                                   ; $475E: $3E $92
-    ld   [$A466], a ; saved room = flying rooster in mabe village ; $4760: $EA $66 $A4
+    ld   [SaveGame1 + 5 + wSpawnMapRoom - wOverworldRoomStatus], a ; saved room = flying rooster in mabe village ; $4760: $EA $66 $A4
     ld   a, $48                                   ; $4763: $3E $48
-    ld   [$A467], a ; saved y position            ; $4765: $EA $67 $A4
+    ld   [SaveGame1 + 5 + wSpawnPositionX - wOverworldRoomStatus], a ; saved y position            ; $4765: $EA $67 $A4
     ld   a, $62                                   ; $4768: $3E $62
-    ld   [$A468], a ; saved x position            ; $476A: $EA $68 $A4
+    ld   [SaveGame1 + 5 + wSpawnPositionY - wOverworldRoomStatus], a ; saved x position            ; $476A: $EA $68 $A4
 
     ; Set all overworld map tiles as seen (80)
-    ld   hl, $A105                                ; $476D: $21 $05 $A1
+    ld   hl, SaveGame1 + 5                        ; $476D: $21 $05 $A1
     ld   a, $80                                   ; $4770: $3E $80
     ld   e, $00                                   ; $4772: $1E $00
 .loop3
@@ -165,11 +165,11 @@ ENDR
     jr   nz, .loop3                               ; $4776: $20 $FC
 
     ld   a, $01                                   ; $4778: $3E $01
-    ld   [$DDDA], a                               ; $477A: $EA $DA $DD
-    ld   [$DDDB], a                               ; $477D: $EA $DB $DD
-    ld   [$DDDC], a                               ; $4780: $EA $DC $DD
-    ld   [$DDDD], a                               ; $4783: $EA $DD $DD
-    ld   [$DDDE], a                               ; $4786: $EA $DE $DD
+    ld   [wColorDungeonItemFlags], a              ; $477A: $EA $DA $DD
+    ld   [wColorDungeonItemFlags + 1], a          ; $477D: $EA $DB $DD
+    ld   [wColorDungeonItemFlags + 2], a          ; $4780: $EA $DC $DD
+    ld   [wColorDungeonItemFlags + 3], a          ; $4783: $EA $DD $DD
+    ld   [wColorDungeonItemFlags + 4], a          ; $4786: $EA $DE $DD
     ld   a, $FF                                   ; $4789: $3E $FF
     ld   [wPhotos1], a                            ; $478B: $EA $0C $DC
     ld   a, $0F                                   ; $478E: $3E $0F
@@ -181,7 +181,7 @@ ENDR
 func_001_4794::
     ld   c, $01                                   ; $4794: $0E $01
     ld   b, $05                                   ; $4796: $06 $05
-    ld   hl, $A100                                ; $4798: $21 $00 $A1
+    ld   hl, SaveGame1                            ; $4798: $21 $00 $A1
     add  hl, de                                   ; $479B: $19
 
 jr_001_479C::
@@ -198,11 +198,11 @@ jr_001_479C::
 jr_001_47AA::
     push de                                       ; $47AA: $D5
     ; hl = savefile
-    ld   hl, $A105                                ; $47AB: $21 $05 $A1
+    ld   hl, SaveGame1 + 5                        ; $47AB: $21 $05 $A1
     add  hl, de                                   ; $47AE: $19
 
     ; de = sizeof(save)
-    ld   de, $3A8                                 ; $47AF: $11 $A8 $03
+    ld   de, SaveGame2 - SaveGame1 - 5            ; $47AF: $11 $A8 $03
 
 jr_001_47B2::
     call EnableExternalRAMWriting                 ; $47B2: $CD $D0 $27
@@ -213,7 +213,7 @@ jr_001_47B2::
     or   d                                        ; $47B9: $B2
     jr   nz, jr_001_47B2                          ; $47BA: $20 $F6
     pop  de                                       ; $47BC: $D1
-    ld   hl, $A100                                ; $47BD: $21 $00 $A1
+    ld   hl, SaveGame1                            ; $47BD: $21 $00 $A1
     add  hl, de                                   ; $47C0: $19
     ld   a, $01                                   ; $47C1: $3E $01
 
@@ -325,7 +325,7 @@ jr_001_535b:
 jr_001_5364:
 ENDC
 
-    ld   hl, $DDDA                                ; $52E4: $21 $DA $DD
+    ld   hl, wColorDungeonItemFlags               ; $52E4: $21 $DA $DD
     ld   de, $05                                  ; $52E7: $11 $05 $00
 
 jr_001_52EA::
@@ -773,7 +773,7 @@ jr_001_583A::
 
 jr_001_5854::
     ld   a, $01                                   ; $5854: $3E $01
-    ld   [$DDD5], a                               ; $5856: $EA $D5 $DD
+    ld   [wPaletteUnknownE], a                    ; $5856: $EA $D5 $DD
     xor  a                                        ; $5859: $AF
     ld   [wBlockItemUsage], a                     ; $585A: $EA $0A $C5
     ld   [wC116], a                               ; $585D: $EA $16 $C1
@@ -1413,7 +1413,7 @@ jr_001_5E12::
     ld   a, e                                     ; $5E1C: $7B
     or   d                                        ; $5E1D: $B2
     jr   nz, jr_001_5E12                          ; $5E1E: $20 $F2
-    ld   bc, $DDDA                                ; $5E20: $01 $DA $DD
+    ld   bc, wColorDungeonItemFlags               ; $5E20: $01 $DA $DD
     ld   de, $05                                  ; $5E23: $11 $05 $00
 
 jr_001_5E26::
@@ -1591,7 +1591,7 @@ SynchronizeDungeonsItemFlags::
     jr   nz, .notColorDungeon                     ; $5E72: $20 $05
 
     ; hl = $DDDA
-    ld   hl, $DDDA                                ; $5E74: $21 $DA $DD
+    ld   hl, wColorDungeonItemFlags               ; $5E74: $21 $DA $DD
     jr   .endIf                                   ; $5E77: $18 $11
 
 .notColorDungeon
@@ -2427,7 +2427,7 @@ jr_001_689E::
     dec  e                                        ; $689F: $1D
     jr   nz, jr_001_689E                          ; $68A0: $20 $FC
     ld   a, $01                                   ; $68A2: $3E $01
-    ld   [$DDD5], a                               ; $68A4: $EA $D5 $DD
+    ld   [wPaletteUnknownE], a                    ; $68A4: $EA $D5 $DD
     jp   IncrementGameplaySubtypeAndReturn        ; $68A7: $C3 $D6 $44
 
 PeachPictureState4Handler::

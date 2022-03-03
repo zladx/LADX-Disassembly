@@ -112,7 +112,7 @@ FileSaveDelay2::
     ld   [wTransitionSequenceCounter], a                               ; $408E: $EA $6B $C1
     ld   [wC16C], a                               ; $4091: $EA $6C $C1
     ld   a, $01                                   ; $4094: $3E $01
-    ld   [$DDD5], a                               ; $4096: $EA $D5 $DD
+    ld   [wPaletteUnknownE], a                    ; $4096: $EA $D5 $DD
     jp   IncrementGameplaySubtypeAndReturn        ; $4099: $C3 $D6 $44
 
 FileSaveVisible::

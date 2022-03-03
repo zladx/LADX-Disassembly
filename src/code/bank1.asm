@@ -66,7 +66,7 @@ InitSaveFiles::
 
     ld   e, $00                                   ; $46C3: $1E $00
     ld   d, $00                                   ; $46C5: $16 $00
-    ld   bc, SaveGame1 + 5 + wBButtonSlot - wOverworldRoomStatus ; $46C7: $01 $05 $A4
+    ld   bc, SaveGame1.main + wBButtonSlot - wOverworldRoomStatus ; $46C7: $01 $05 $A4
 .loop
     ld   hl, DebugSaveFileData                    ; $46CA: $21 $67 $46
     add  hl, de                                   ; $46CD: $19
@@ -80,14 +80,14 @@ InitSaveFiles::
 
     ; Set some other parts of the first save file ...
     ld   a, $01                                   ; $46D7: $3E $01
-    ld   [SaveGame1 + 5 + wSwordLevel - wOverworldRoomStatus], a ; Sword level 1               ; $46D9: $EA $53 $A4
+    ld   [SaveGame1.main + wSwordLevel - wOverworldRoomStatus], a ; Sword level 1               ; $46D9: $EA $53 $A4
     ld   a, $01                                   ; $46DC: $3E $01
-    ld   [SaveGame1 + 5 + wShieldLevel - wOverworldRoomStatus], a ; Shield level 1              ; $46DE: $EA $49 $A4
+    ld   [SaveGame1.main + wShieldLevel - wOverworldRoomStatus], a ; Shield level 1              ; $46DE: $EA $49 $A4
     ld   a, $02                                   ; $46E1: $3E $02
-    ld   [SaveGame1 + 5 + wPowerBraceletLevel - wOverworldRoomStatus], a ; Power bracelet level 2      ; $46E3: $EA $48 $A4
+    ld   [SaveGame1.main + wPowerBraceletLevel - wOverworldRoomStatus], a ; Power bracelet level 2      ; $46E3: $EA $48 $A4
 
     ; Set boss flags for all dungeons
-    ld   hl, SaveGame1 + 5 + wHasInstrument1 - wOverworldRoomStatus ; Dungeon boss flags = 00000010 ; $46E6: $21 $6A $A4
+    ld   hl, SaveGame1.main + wHasInstrument1 - wOverworldRoomStatus ; Dungeon boss flags = 00000010 ; $46E6: $21 $6A $A4
     ld   e, $09 ; POI: Sets 9 flags (but only 8 dungeons...?) ; $46E9: $1E $09
     ld   a, $02 ; Sets 46A~447                    ; $46EB: $3E $02
 .loop2
@@ -96,36 +96,36 @@ InitSaveFiles::
     jr   nz, .loop2                               ; $46EF: $20 $FC
 
     ld   a, DEBUG_SAVE_BOMB_COUNT                 ; $46F1: $3E $60
-    ld   [SaveGame1 + 5 + wBombCount - wOverworldRoomStatus], a ; 60 bombs                    ; $46F3: $EA $52 $A4
+    ld   [SaveGame1.main + wBombCount - wOverworldRoomStatus], a ; 60 bombs                    ; $46F3: $EA $52 $A4
 IF DEBUG_SAVE_SWITCH_ARROWS
-    ld   [SaveGame1 + 5 + wMaxBombs - wOverworldRoomStatus], a ; 60 max bombs
-    ld   [SaveGame1 + 5 + wMaxArrows - wOverworldRoomStatus], a ; 60 max arrows
+    ld   [SaveGame1.main + wMaxBombs - wOverworldRoomStatus], a ; 60 max bombs
+    ld   [SaveGame1.main + wMaxArrows - wOverworldRoomStatus], a ; 60 max arrows
 ELSE
-    ld   [SaveGame1 + 5 + wMaxArrows - wOverworldRoomStatus], a ; 60 max arrows               ; $46F6: $EA $7D $A4
-    ld   [SaveGame1 + 5 + wMaxBombs - wOverworldRoomStatus], a ; 60 max bombs                ; $46F9: $EA $7C $A4
+    ld   [SaveGame1.main + wMaxArrows - wOverworldRoomStatus], a ; 60 max arrows               ; $46F6: $EA $7D $A4
+    ld   [SaveGame1.main + wMaxBombs - wOverworldRoomStatus], a ; 60 max bombs                ; $46F9: $EA $7C $A4
 ENDC
-    ld   [SaveGame1 + 5 + wArrowCount - wOverworldRoomStatus], a ; 60 arrows                   ; $46FC: $EA $4A $A4
+    ld   [SaveGame1.main + wArrowCount - wOverworldRoomStatus], a ; 60 arrows                   ; $46FC: $EA $4A $A4
     ld   a, DEBUG_SAVE_MAGIC_COUNT                ; $46FF: $3E $40
-    ld   [SaveGame1 + 5 + wMaxMagicPowder - wOverworldRoomStatus], a ; 40 max magic powder         ; $4701: $EA $7B $A4
-    ld   [SaveGame1 + 5 + wMagicPowderCount - wOverworldRoomStatus], a ; 40 magic powder             ; $4704: $EA $51 $A4
+    ld   [SaveGame1.main + wMaxMagicPowder - wOverworldRoomStatus], a ; 40 max magic powder         ; $4701: $EA $7B $A4
+    ld   [SaveGame1.main + wMagicPowderCount - wOverworldRoomStatus], a ; 40 magic powder             ; $4704: $EA $51 $A4
 IF !LANG_JP
     ld   a, $89                                   ; $4707: $3E $89
-    ld   [SaveGame1 + 5 + wDB47 - wOverworldRoomStatus], a ; "time/animation?" (unknown) ; $4709: $EA $4C $A4
+    ld   [SaveGame1.main + wDB47 - wOverworldRoomStatus], a ; "time/animation?" (unknown) ; $4709: $EA $4C $A4
 ENDC
     xor  a                                        ; $470C: $AF
-    ld   [SaveGame1 + 5 + wSeashellsCount - wOverworldRoomStatus], a ; 0 secret seashells          ; $470D: $EA $14 $A4
+    ld   [SaveGame1.main + wSeashellsCount - wOverworldRoomStatus], a ; 0 secret seashells          ; $470D: $EA $14 $A4
     ld   a, %00000111 ; @TODO Ocarina song constants? ; $4710: $3E $07
-    ld   [SaveGame1 + 5 + wOcarinaSongFlags - wOverworldRoomStatus], a ; all 3 Ocarina songs         ; $4712: $EA $4E $A4
+    ld   [SaveGame1.main + wOcarinaSongFlags - wOverworldRoomStatus], a ; all 3 Ocarina songs         ; $4712: $EA $4E $A4
     ld   a, $05                                   ; $4715: $3E $05
-    ld   [SaveGame1 + 5 + wRupeeCountHigh - wOverworldRoomStatus], a ; 5xx rupees                  ; $4717: $EA $62 $A4
+    ld   [SaveGame1.main + wRupeeCountHigh - wOverworldRoomStatus], a ; 5xx rupees                  ; $4717: $EA $62 $A4
     ld   a, $09                                   ; $471A: $3E $09
-    ld   [SaveGame1 + 5 + wRupeeCountLow - wOverworldRoomStatus], a ; x09 rupees                  ; $471C: $EA $63 $A4
+    ld   [SaveGame1.main + wRupeeCountLow - wOverworldRoomStatus], a ; x09 rupees                  ; $471C: $EA $63 $A4
     ld   a, $01                                   ; $471F: $3E $01
-    ld   [SaveGame1 + 5 + wDB48 - wOverworldRoomStatus], a ; "Tarin at home flag"        ; $4721: $EA $4D $A4
+    ld   [SaveGame1.main + wDB48 - wOverworldRoomStatus], a ; "Tarin at home flag"        ; $4721: $EA $4D $A4
     ld   a, $50                                   ; $4724: $3E $50
-    ld   [SaveGame1 + 5 + wHealth - wOverworldRoomStatus], a ; 10 hearts of health         ; $4726: $EA $5F $A4
+    ld   [SaveGame1.main + wHealth - wOverworldRoomStatus], a ; 10 hearts of health         ; $4726: $EA $5F $A4
     ld   a, $0A                                   ; $4729: $3E $0A
-    ld   [SaveGame1 + 5 + wMaxHealth - wOverworldRoomStatus], a ; 10 heart containers         ; $472B: $EA $60 $A4
+    ld   [SaveGame1.main + wMaxHealth - wOverworldRoomStatus], a ; 10 heart containers         ; $472B: $EA $60 $A4
 
     ld   a, [wGameplayType]                       ; $472E: $FA $95 $DB
     cp   GAMEPLAY_FILE_NEW                        ; $4731: $FE $03
@@ -137,26 +137,26 @@ ENDC
 INDEX = 0
 REPT 5
     ld   a, STRSUB("{DEBUG_SAVE_FILE_NAME}", INDEX + 1, 1) + 1
-    ld   [SaveGame1 + 5 + wName - wOverworldRoomStatus + INDEX], a
+    ld   [SaveGame1.main + wName - wOverworldRoomStatus + INDEX], a
 INDEX = INDEX + 1
 ENDR
 
 .notOnNewFileScreen
     xor  a                                        ; $474E: $AF
-    ld   [SaveGame1 + 5 + wDeathCount - wOverworldRoomStatus], a ; death counter = 0           ; $474F: $EA $5C $A4
-    ld   [SaveGame1 + 5 + wDeathCount + 1 - wOverworldRoomStatus], a ; death counter = 0           ; $4752: $EA $5D $A4
-    ld   [SaveGame1 + 5 + wIsBowWowFollowingLink - wOverworldRoomStatus], a ; bowwow flag = off           ; $4755: $EA $5B $A4
-    ld   [SaveGame1 + 5 + wSpawnIsIndoor - wOverworldRoomStatus], a ; current map = overworld     ; $4758: $EA $64 $A4
-    ld   [SaveGame1 + 5 + wSpawnMapId - wOverworldRoomStatus], a ; current submap = none       ; $475B: $EA $65 $A4
+    ld   [SaveGame1.main + wDeathCount - wOverworldRoomStatus], a ; death counter = 0           ; $474F: $EA $5C $A4
+    ld   [SaveGame1.main + wDeathCount + 1 - wOverworldRoomStatus], a ; death counter = 0           ; $4752: $EA $5D $A4
+    ld   [SaveGame1.main + wIsBowWowFollowingLink - wOverworldRoomStatus], a ; bowwow flag = off           ; $4755: $EA $5B $A4
+    ld   [SaveGame1.main + wSpawnIsIndoor - wOverworldRoomStatus], a ; current map = overworld     ; $4758: $EA $64 $A4
+    ld   [SaveGame1.main + wSpawnMapId - wOverworldRoomStatus], a ; current submap = none       ; $475B: $EA $65 $A4
     ld   a, $92                                   ; $475E: $3E $92
-    ld   [SaveGame1 + 5 + wSpawnMapRoom - wOverworldRoomStatus], a ; saved room = flying rooster in mabe village ; $4760: $EA $66 $A4
+    ld   [SaveGame1.main + wSpawnMapRoom - wOverworldRoomStatus], a ; saved room = flying rooster in mabe village ; $4760: $EA $66 $A4
     ld   a, $48                                   ; $4763: $3E $48
-    ld   [SaveGame1 + 5 + wSpawnPositionX - wOverworldRoomStatus], a ; saved y position            ; $4765: $EA $67 $A4
+    ld   [SaveGame1.main + wSpawnPositionX - wOverworldRoomStatus], a ; saved y position            ; $4765: $EA $67 $A4
     ld   a, $62                                   ; $4768: $3E $62
-    ld   [SaveGame1 + 5 + wSpawnPositionY - wOverworldRoomStatus], a ; saved x position            ; $476A: $EA $68 $A4
+    ld   [SaveGame1.main + wSpawnPositionY - wOverworldRoomStatus], a ; saved x position            ; $476A: $EA $68 $A4
 
     ; Set all overworld map tiles as seen (80)
-    ld   hl, SaveGame1 + 5                        ; $476D: $21 $05 $A1
+    ld   hl, SaveGame1.main                       ; $476D: $21 $05 $A1
     ld   a, $80                                   ; $4770: $3E $80
     ld   e, $00                                   ; $4772: $1E $00
 .loop3
@@ -180,7 +180,7 @@ ENDR
 
 func_001_4794::
     ld   c, $01                                   ; $4794: $0E $01
-    ld   b, $05                                   ; $4796: $06 $05
+    ld   b, SAVE_PREFIX_SIZE                      ; $4796: $06 $05
     ld   hl, SaveGame1                            ; $4798: $21 $00 $A1
     add  hl, de                                   ; $479B: $19
 
@@ -198,11 +198,11 @@ jr_001_479C::
 jr_001_47AA::
     push de                                       ; $47AA: $D5
     ; hl = savefile
-    ld   hl, SaveGame1 + 5                        ; $47AB: $21 $05 $A1
+    ld   hl, SaveGame1.main                       ; $47AB: $21 $05 $A1
     add  hl, de                                   ; $47AE: $19
 
     ; de = sizeof(save)
-    ld   de, SaveGame2 - SaveGame1 - 5            ; $47AF: $11 $A8 $03
+    ld   de, SaveGame2 - SaveGame1.main           ; $47AF: $11 $A8 $03
 
 jr_001_47B2::
     call EnableExternalRAMWriting                 ; $47B2: $CD $D0 $27
@@ -286,7 +286,7 @@ jr_001_52C7::
     inc  hl                                       ; $52D1: $23
     ld   b, [hl]                                  ; $52D2: $46
     ld   hl, wOverworldRoomStatus                 ; $52D3: $21 $00 $D8
-    ld   de, $0380                                ; $52D6: $11 $80 $03
+    ld   de, SAVE_MAIN_SIZE                       ; $52D6: $11 $80 $03
 
 jr_001_52D9::
     call EnableExternalRAMWriting                 ; $52D9: $CD $D0 $27
@@ -1401,7 +1401,7 @@ ENDC
     ld   h, [hl]                                  ; $5E0A: $66
     ld   l, a                                     ; $5E0B: $6F
     ld   bc, wOverworldRoomStatus                 ; $5E0C: $01 $00 $D8
-    ld   de, $0380                                ; $5E0F: $11 $80 $03
+    ld   de, SAVE_MAIN_SIZE                       ; $5E0F: $11 $80 $03
 
 jr_001_5E12::
     call EnableExternalRAMWriting                 ; $5E12: $CD $D0 $27

@@ -70,7 +70,7 @@ FaceShrineMuralStage2Handler::
     ld   [wTransitionSequenceCounter], a                               ; $6B61: $EA $6B $C1
     ld   [wC16C], a                               ; $6B64: $EA $6C $C1
     ld   a, $01                                   ; $6B67: $3E $01
-    ld   [$DDD5], a                               ; $6B69: $EA $D5 $DD
+    ld   [wPaletteUnknownE], a                    ; $6B69: $EA $D5 $DD
     jp   IncrementGameplaySubtypeAndReturn        ; $6B6C: $C3 $D6 $44
 
 FaceShrineMuralStage3Handler::

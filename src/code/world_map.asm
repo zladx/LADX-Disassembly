@@ -80,7 +80,7 @@ WorldMapState1Handler::
     ld   [wInventoryAppearing], a                 ; $56A1: $EA $4F $C1
     ld   [wC1B2], a                               ; $56A4: $EA $B2 $C1
     ld   [wC1B3], a                               ; $56A7: $EA $B3 $C1
-    ld   a, [$DB54]                               ; $56AA: $FA $54 $DB
+    ld   a, [wDB54]                               ; $56AA: $FA $54 $DB
     ld   [wDBB4], a                               ; $56AD: $EA $B4 $DB
     ld   e, a                                     ; $56B0: $5F
     ld   d, $00                                   ; $56B1: $16 $00
@@ -110,7 +110,7 @@ jr_001_56D9::
     ld   [wC1B1], a                               ; $56D9: $EA $B1 $C1
     ld   a, [wDBB4]                               ; $56DC: $FA $B4 $DB
     ld   [wC1B4], a                               ; $56DF: $EA $B4 $C1
-    ld   a, [$FF40]                               ; $56E2: $F0 $40
+    ld   a, [rLCDC]                               ; $56E2: $F0 $40
     and  $DF                                      ; $56E4: $E6 $DF
     ld   [wLCDControl], a                         ; $56E6: $EA $FD $D6
     ld   [rLCDC], a                               ; $56E9: $E0 $40
@@ -132,7 +132,7 @@ WorldMapState3Handler::
     ld   [wTilesetToLoad], a                      ; $56FF: $EA $FE $D6
 
     ld   a, $01                                   ; $5702: $3E $01
-    ld   [$DDD5], a                               ; $5704: $EA $D5 $DD
+    ld   [wPaletteUnknownE], a                    ; $5704: $EA $D5 $DD
 
     call IncrementGameplaySubtype                 ; $5707: $CD $D6 $44
     ret                                           ; $570A: $C9
@@ -300,7 +300,7 @@ jr_001_5804::
     ld   [wTransitionSequenceCounter], a                               ; $580A: $EA $6B $C1
     ld   [wC16C], a                               ; $580D: $EA $6C $C1
     ld   a, $01                                   ; $5810: $3E $01
-    ld   [$DDD5], a                               ; $5812: $EA $D5 $DD
+    ld   [wPaletteUnknownE], a                    ; $5812: $EA $D5 $DD
     call IncrementGameplaySubtype                 ; $5815: $CD $D6 $44
 
 label_001_5818::

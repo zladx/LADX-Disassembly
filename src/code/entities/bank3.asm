@@ -582,7 +582,7 @@ EntityInitMarin::
     and  a                                        ; $4AAD: $A7
     jr   nz, EntityInitNpcFacingDown              ; $4AAE: $20 $7F
 
-    ld   a, [$DB50]                               ; $4AB0: $FA $50 $DB
+    ld   a, [wName + 1]                           ; $4AB0: $FA $50 $DB
     and  a                                        ; $4AB3: $A7
     jr   nz, .enableTextDebugger                  ; $4AB4: $20 $09
 
@@ -621,7 +621,7 @@ EntityInitTarin::
     cp   TRADING_ITEM_BANANAS                     ; $4AE9: $FE $04
     jr   nc, EntityInitNpcFacingDown              ; $4AEB: $30 $42
 
-    ld   a, [$DB48]                               ; $4AED: $FA $48 $DB
+    ld   a, [wDB48]                               ; $4AED: $FA $48 $DB
     and  a                                        ; $4AF0: $A7
     jr   z, EntityInitNpcFacingDown               ; $4AF1: $28 $3C
 
@@ -3402,7 +3402,7 @@ AfterSirensInstrumentD1::
 
 AfterSirensInstrumentD2::
     ld   a, $02                                   ; $5E12: $3E $02
-    ld   [$DB48], a                               ; $5E14: $EA $48 $DB
+    ld   [wDB48], a                               ; $5E14: $EA $48 $DB
 IF !__PATCH_0__
     ret                                           ; $5E17: $C9
 ENDC
@@ -3420,7 +3420,7 @@ AfterSirensInstrumentNone::
 
 AfterSirensInstrumentD6::
     xor  a                                        ; $5E1F: $AF
-    ld   [$DB74], a                               ; $5E20: $EA $74 $DB
+    ld   [wDB74], a                               ; $5E20: $EA $74 $DB
     ret                                           ; $5E23: $C9
 
 AfterSirensInstrumentD7::
@@ -7044,7 +7044,7 @@ jr_003_7325:
 jr_003_7330:
 IF __PATCH_0__
     ld   a, $01
-    ld   [$de0b], a
+    ld   [wDE0B], a
 ENDC
     ldh  a, [hLinkPositionY]                      ; $7330: $F0 $99
     push af                                       ; $7332: $F5

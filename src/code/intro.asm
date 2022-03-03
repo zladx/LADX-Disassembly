@@ -50,7 +50,7 @@ IntroHandlerEntryPoint::
     ld   a, $01                                   ; $6E57: $3E $01
     call ClearFileMenuBG_trampoline               ; $6E59: $CD $FA $08
     xor  a                                        ; $6E5C: $AF
-    ld   [$DDD5], a                               ; $6E5D: $EA $D5 $DD
+    ld   [wPaletteUnknownE], a                    ; $6E5D: $EA $D5 $DD
     ld   a, $08                                   ; $6E60: $3E $08
 .paletteEnd
 
@@ -165,7 +165,7 @@ ENDC
     ldh  [hFrameCounter], a                       ; $6F0E: $E0 $E7
     ld   a, $A2                                   ; $6F10: $3E $A2
     ld   [wRandomSeed], a                               ; $6F12: $EA $3D $C1
-    ld   a, [$FF40]                               ; $6F15: $F0 $40
+    ld   a, [rLCDC]                               ; $6F15: $F0 $40
     and  $DF                                      ; $6F17: $E6 $DF
     ld   [wLCDControl], a                         ; $6F19: $EA $FD $D6
     ld   [rLCDC], a                               ; $6F1C: $E0 $40
@@ -179,7 +179,7 @@ IntroSceneStage1Handler::
     ld   a, TILESET_INTRO                         ; $6F2A: $3E $10
     ld   [wTilesetToLoad], a                      ; $6F2C: $EA $FE $D6
     xor  a                                        ; $6F2F: $AF
-    ld   [$DDD5], a                               ; $6F30: $EA $D5 $DD
+    ld   [wPaletteUnknownE], a                    ; $6F30: $EA $D5 $DD
     jp   IncrementGameplaySubtypeAndReturn        ; $6F33: $C3 $D6 $44
 
 IntroSceneStage2Handler::
@@ -488,7 +488,7 @@ IntroStage5Handler::
     ld   a, $10                                   ; $711A: $3E $10
     ld   [wBGMapToLoad], a                        ; $711C: $EA $FF $D6
     ld   a, $01                                   ; $711F: $3E $01
-    ld   [$DDD5], a                               ; $7121: $EA $D5 $DD
+    ld   [wPaletteUnknownE], a                    ; $7121: $EA $D5 $DD
     call IncrementGameplaySubtype                 ; $7124: $CD $D6 $44
     ret                                           ; $7127: $C9
 
@@ -1849,11 +1849,11 @@ ENDC
     jr   nz, .loop                                ; $79DA: $20 $FA
 
     ld   a, $14                                   ; $79DC: $3E $14
-    ld   [$DDD3], a                               ; $79DE: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $79DE: $EA $D3 $DD
     ld   a, CHUNKSIZE / 2                         ; $79E1: $3E $08
-    ld   [$DDD4], a                               ; $79E3: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $79E3: $EA $D4 $DD
     ld   a, $82                                   ; $79E6: $3E $82
-    ld   [$DDD1], a                               ; $79E8: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $79E8: $EA $D1 $DD
     ret                                           ; $79EB: $C9
 
 IF LANG_JP

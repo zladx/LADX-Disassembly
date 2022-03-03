@@ -828,8 +828,9 @@ wOcarinaMenuOpening::
 wOcarinaMenuClosing::
   ds 1 ; C1B9
 
-; Unlabeled
-wC1BA::
+; This is set when start is pressed and the ocarina menu is open,
+; the ocarina menu is closed first before the inventory menu is closed.
+wCloseInventoryAfterOcarinaMenuClosed::
   ds 1 ; C1BA
 
 ; Number of consecutives frames during which the player is slipping
@@ -1699,7 +1700,15 @@ wD116::
 
 ; not used
 wD117::
-  ds $9E ; D117 - D1B4
+  ds $53 ; D117 - D169
+
+; Something rombank and photographs related
+wD16A::
+  ds 1 ; 
+
+; not used
+wD16B::
+  ds $4A ; D16B - D1B4
 
 ; Unlabeled
 wD1B5::
@@ -2504,44 +2513,8 @@ wAButtonSlot::
   ds 1 ; DB01
 
 ; TODO comment
-wInventoryItem1::
-  ds 1 ; DB02
-
-; TODO comment
-wInventoryItem2::
-  ds 1 ; DB03
-
-; TODO comment
-wInventoryItem3::
-  ds 1 ; DB04
-
-; TODO comment
-wInventoryItem4::
-  ds 1 ; DB05
-
-; TODO comment
-wInventoryItem5::
-  ds 1 ; DB06
-
-; TODO comment
-wInventoryItem6::
-  ds 1 ; DB07
-
-; TODO comment
-wInventoryItem7::
-  ds 1 ; DB08
-
-; TODO comment
-wInventoryItem8::
-  ds 1 ; DB09
-
-; TODO comment
-wInventoryItem9::
-  ds 1 ; DB0A
-
-; TODO comment
-wInventoryItem10::
-  ds 1 ; DB0B
+wInventoryItems::
+  ds INVENTORY_SLOT_COUNT - 2 ; DB02-DB0B
 
 ; TODO comment
 wHasFlippers::
@@ -3290,11 +3263,30 @@ wFarcallAdressLow::
 wFarcallReturnBank::
   ds 1 ; DE04
 
-; maximal depth the stack can grow
-wStackMax equ $DE05
+wDE05:
+  ds 1 ; DE05
+
+wDE06:
+  ds 1 ; DE06
+
+wDE07:
+  ds 1 ; DE07
+
+wDE08:
+  ds 1 ; DE08
+
+wDE09:
+  ds 1 ; DE09
+
+wDE0A:
+  ds 1 ; DE0A
+
+wDE0B:
+  ds 1 ; DE0B
+
 ; top of WRAM is used as Stack
 wStack::
-  ds $DFFF - $DE05 +1 ; DE05 - DFFF
+  ds $DFFF - @ + 1 ; DE04 - DFFF
 
 ; init puts the SP here
 wStackTop equ $DFFF

@@ -240,9 +240,9 @@ func_028_4185::
     jr   z, .else_4195_28                       ; $4189: $28 $0A
 
     ld   a, $FF                                 ; $418B: $3E $FF
-    ld   [$DC0C], a                             ; $418D: $EA $0C $DC
+    ld   [wPhotos1], a                          ; $418D: $EA $0C $DC
     ld   a, $0F                                 ; $4190: $3E $0F
-    ld   [$DC0D], a                             ; $4192: $EA $0D $DC
+    ld   [wPhotos2], a                          ; $4192: $EA $0D $DC
 .else_4195_28:
     ld   bc, $01                                ; $4195: $01 $01 $00
 .loop_4198_28:
@@ -251,7 +251,7 @@ func_028_4185::
     ld   a, [hl]                                ; $419C: $7E
     ld   e, a                                   ; $419D: $5F
     ld   d, $00                                 ; $419E: $16 $00
-    ld   hl, $DC0C                              ; $41A0: $21 $0C $DC
+    ld   hl, wPhotos1                           ; $41A0: $21 $0C $DC
     add  hl, de                                 ; $41A3: $19
     ld   a, [hl]                                ; $41A4: $7E
     ld   hl, Data_028_4259                      ; $41A5: $21 $59 $42
@@ -500,7 +500,7 @@ func_028_427D::
     add  hl, bc                                 ; $430A: $09
     ld   a, [hl]                                ; $430B: $7E
     ld   c, a                                   ; $430C: $4F
-    ld   hl, $DC0C                              ; $430D: $21 $0C $DC
+    ld   hl, wPhotos1                           ; $430D: $21 $0C $DC
     add  hl, bc                                 ; $4310: $09
     ld   a, [hl]                                ; $4311: $7E
     ld   c, d                                   ; $4312: $4A
@@ -624,7 +624,7 @@ func_028_43CC::
     and  a                                      ; $43CF: $A7
     jr   nz, .else_43DB_28                      ; $43D0: $20 $09
 
-    ld   a, [$DC0D]                             ; $43D2: $FA $0D $DC
+    ld   a, [wPhotos2]                          ; $43D2: $FA $0D $DC
     and  %10000000                              ; $43D5: $E6 $80
     jr   z, .else_43DB_28                       ; $43D7: $28 $02
 
@@ -645,7 +645,7 @@ func_028_43CC::
     ld   b, a                                   ; $43ED: $47
     ld   [$D169], a                             ; $43EE: $EA $69 $D1
     ld   a, [hl]                                ; $43F1: $7E
-    ld   [$D16A], a                             ; $43F2: $EA $6A $D1
+    ld   [wD16A], a                             ; $43F2: $EA $6A $D1
     ld   h, b                                   ; $43F5: $60
     ld   l, c                                   ; $43F6: $69
     push hl                                     ; $43F7: $E5
@@ -656,7 +656,7 @@ func_028_43CC::
     ld   bc, $800                               ; $4402: $01 $00 $08
     add  hl, bc                                 ; $4405: $09
     ld   de, $8800                              ; $4406: $11 $00 $88
-    ld   a, [$D16A]                             ; $4409: $FA $6A $D1
+    ld   a, [wD16A]                             ; $4409: $FA $6A $D1
     call CopyData_trampoline                    ; $440C: $CD $5D $0B
     pop  de                                     ; $440F: $D1
     ret                                         ; $4410: $C9
@@ -774,15 +774,15 @@ JumpTable_028_44AA:
     ld   a, $28                                 ; $44AD: JumpTable_028_44AA $3E $28
     call LoadBaseTiles_trampoline               ; $44AF: JumpTable_028_44AA $CD $BE $0B
     ldh  a, [hLinkPositionX]                    ; $44B2: JumpTable_028_44AA $F0 $98
-    ld   [$DB9D], a                             ; $44B4: JumpTable_028_44AA $EA $9D $DB
+    ld   [wMapEntrancePositionX], a             ; $44B4: JumpTable_028_44AA $EA $9D $DB
     ldh  a, [hLinkPositionY]                    ; $44B7: JumpTable_028_44AA $F0 $99
-    ld   [$DB9E], a                             ; $44B9: JumpTable_028_44AA $EA $9E $DB
+    ld   [wMapEntrancePositionY], a             ; $44B9: JumpTable_028_44AA $EA $9E $DB
     ld   a, GAMEPLAY_WORLD                      ; $44BC: JumpTable_028_44AA $3E $0B
     ld   [wGameplayType], a                     ; $44BE: JumpTable_028_44AA $EA $95 $DB
     xor  a                                      ; $44C1: JumpTable_028_44AA $AF
     ld   [wGameplaySubtype], a                  ; $44C2: JumpTable_028_44AA $EA $96 $DB
     ld   a, $18                                 ; $44C5: JumpTable_028_44AA $3E $18
-    ld   [$DE05], a                             ; $44C7: JumpTable_028_44AA $EA $05 $DE
+    ld   [wDE05], a                             ; $44C7: JumpTable_028_44AA $EA $05 $DE
     ld   a, $07                                 ; $44CA: JumpTable_028_44AA $3E $07
     ldh  [hVolumeRight], a                    ; $44CC: JumpTable_028_44AA $E0 $A9
     ld   a, $70                                 ; $44CE: JumpTable_028_44AA $3E $70

@@ -104,7 +104,7 @@ MarineBeachPrepare3::
     ld   a, $A0                                   ; $62AA: $3E $A0
     ld   [wD466], a                               ; $62AC: $EA $66 $D4
     ld   a, $01                                   ; $62AF: $3E $01
-    ld   [$DDD5], a                               ; $62B1: $EA $D5 $DD
+    ld   [wPaletteUnknownE], a                    ; $62B1: $EA $D5 $DD
     ld   a, $E0                                   ; $62B4: $3E $E0
     ld   [wTranscientVfxPosYTable], a             ; $62B6: $EA $40 $C5
     ld   a, $00                                   ; $62B9: $3E $00
@@ -472,7 +472,7 @@ jr_001_655F::
     ld   a, $48                                   ; $656D: $3E $48
     ldh  [hActiveEntityPosX], a                   ; $656F: $E0 $EE
     ld   de, Data_001_6512                        ; $6571: $11 $12 $65
-    ld   a, [$DC0F]                               ; $6574: $FA $0F $DC
+    ld   a, [wTunicType]                          ; $6574: $FA $0F $DC
     and  a                                        ; $6577: $A7
     jr   z, jr_001_6584                           ; $6578: $28 $0A
     ld   de, Data_001_6516                        ; $657A: $11 $16 $65

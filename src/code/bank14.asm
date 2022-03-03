@@ -273,12 +273,12 @@ jr_014_4B2A:
     and  $3F                                      ; $4B2F: $E6 $3F
     jr   nz, jr_014_4B3E                          ; $4B31: $20 $0B
 
-    ld   a, [$DB47]                               ; $4B33: $FA $47 $DB
+    ld   a, [wDB47]                               ; $4B33: $FA $47 $DB
     cp   $FF                                      ; $4B36: $FE $FF
     jr   z, jr_014_4B3E                           ; $4B38: $28 $04
 
     inc  a                                        ; $4B3A: $3C
-    ld   [$DB47], a                               ; $4B3B: $EA $47 $DB
+    ld   [wDB47], a                               ; $4B3B: $EA $47 $DB
 
 jr_014_4B3E:
     ld   a, [wD464]                               ; $4B3E: $FA $64 $D4

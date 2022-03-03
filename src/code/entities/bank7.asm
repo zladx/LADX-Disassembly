@@ -759,7 +759,7 @@ func_007_44E8::
     jr   nz, jr_007_4503                          ; $44EF: $20 $12
 
     ld   a, $01                                   ; $44F1: $3E $01
-    ld   [$DB7F], a                               ; $44F3: $EA $7F $DB
+    ld   [wDB7F], a                               ; $44F3: $EA $7F $DB
     ld   [wC167], a                               ; $44F6: $EA $67 $C1
     call GetEntityTransitionCountdown             ; $44F9: $CD $05 $0C
     ld   [hl], $D0                                ; $44FC: $36 $D0
@@ -1892,7 +1892,7 @@ jr_007_4CB6:
 ._04 dw func_007_4D4E                             ; $4CCA
 
 func_007_4CCC::
-    ld   a, [$DB7F]                               ; $4CCC: $FA $7F $DB
+    ld   a, [wDB7F]                               ; $4CCC: $FA $7F $DB
     cp   $02                                      ; $4CCF: $FE $02
     jr   nz, jr_007_4CE7                          ; $4CD1: $20 $14
 
@@ -2006,7 +2006,7 @@ func_007_4D4E::
     ret  nc                                       ; $4D6C: $D0
 
     xor  a                                        ; $4D6D: $AF
-    ld   [$DB7F], a                               ; $4D6E: $EA $7F $DB
+    ld   [wDB7F], a                               ; $4D6E: $EA $7F $DB
     ld   a, TRADING_ITEM_HONEYCOMB                ; $4D71: $3E $06
     ld   [wTradeSequenceItem], a                  ; $4D73: $EA $0E $DB
     ld   a, REPLACE_TILES_TRADING_ITEM            ; $4D76: $3E $0D
@@ -2263,7 +2263,7 @@ func_007_4F1F::
     jr   nz, jr_007_4F44                          ; $4F2C: $20 $16
 
     ld   a, $02                                   ; $4F2E: $3E $02
-    ld   [$DB7F], a                               ; $4F30: $EA $7F $DB
+    ld   [wDB7F], a                               ; $4F30: $EA $7F $DB
     ld   hl, wOverworldRoomStatus + $87                                ; $4F33: $21 $87 $D8
     set  6, [hl]                                  ; $4F36: $CB $F6
     call GetEntityTransitionCountdown             ; $4F38: $CD $05 $0C
@@ -3269,7 +3269,7 @@ jr_007_55BA:
     jr   nz, jr_007_55CD                          ; $55BB: $20 $10
 
     xor  a                                        ; $55BD: $AF
-    ld   [$DB7F], a                               ; $55BE: $EA $7F $DB
+    ld   [wDB7F], a                               ; $55BE: $EA $7F $DB
     ld   [wC167], a                               ; $55C1: $EA $67 $C1
     call func_007_560D                            ; $55C4: $CD $0D $56
     or   $20                                      ; $55C7: $F6 $20
@@ -3879,7 +3879,7 @@ jr_007_59A1:
     or   $10                                      ; $59AA: $F6 $10
     ld   [wOverworldRoomStatus + $7B], a                               ; $59AC: $EA $7B $D8
     ld   a, $01                                   ; $59AF: $3E $01
-    ld   [$DB7F], a                               ; $59B1: $EA $7F $DB
+    ld   [wDB7F], a                               ; $59B1: $EA $7F $DB
     ld   a, $63                                   ; $59B4: $3E $63
     ld   [wC168], a                               ; $59B6: $EA $68 $C1
     call func_007_58D5                            ; $59B9: $CD $D5 $58

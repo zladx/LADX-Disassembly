@@ -2432,10 +2432,10 @@ InventoryMapFadeOutHandler::
     ld   a, $30                                   ; $5955: $3E $30
     ldh  [hVolumeLeft], a                      ; $5957: $E0 $AA
     xor  a                                        ; $5959: $AF
-    ld   [$DE06], a                               ; $595A: $EA $06 $DE
-    ld   [$DE07], a                               ; $595D: $EA $07 $DE
-    ld   [$DE08], a                               ; $5960: $EA $08 $DE
-    ld   [$DE09], a                               ; $5963: $EA $09 $DE
+    ld   [wDE06], a                               ; $595A: $EA $06 $DE
+    ld   [wDE07], a                               ; $595D: $EA $07 $DE
+    ld   [wDE08], a                               ; $5960: $EA $08 $DE
+    ld   [wDE09], a                               ; $5963: $EA $09 $DE
     call IncrementGameplaySubtype_20                            ; $5966: $CD $83 $66
 
 .return
@@ -2558,7 +2558,7 @@ inventoryDisplayLoop:
     jr   nz, .tradeSequenceItemEnd                ; $5A2C: $20 $06
 
     ; Only executed for Trade Sequence items
-    ld   a, [$DB7F]                               ; $5A2E: $FA $7F $DB
+    ld   a, [wDB7F]                               ; $5A2E: $FA $7F $DB
     and  a                                        ; $5A31: $A7
     jr   nz, overwriteInventoryDisplaySprite      ; $5A32: $20 $23
 .tradeSequenceItemEnd
@@ -2837,7 +2837,7 @@ jr_020_5B8B:
     and  a                                        ; $5B8E: $A7
     jp   z, label_020_5B62                        ; $5B8F: $CA $62 $5B
 
-    ld   a, [$DB4A]                               ; $5B92: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                  ; $5B92: $FA $4A $DB
     inc  a                                        ; $5B95: $3C
     swap a                                        ; $5B96: $CB $37
     call func_020_5BA8                            ; $5B98: $CD $A8 $5B
@@ -3310,20 +3310,20 @@ func_020_5EB5::
     and  a                                        ; $5EB7: $A7
     jr   z, jr_020_5EEE                           ; $5EB8: $28 $34
 
-    ld   a, [$DE07]                               ; $5EBA: $FA $07 $DE
+    ld   a, [wDE07]                               ; $5EBA: $FA $07 $DE
     ld   c, a                                     ; $5EBD: $4F
-    ld   a, [$DE06]                               ; $5EBE: $FA $06 $DE
+    ld   a, [wDE06]                               ; $5EBE: $FA $06 $DE
     inc  a                                        ; $5EC1: $3C
-    ld   [$DE06], a                               ; $5EC2: $EA $06 $DE
+    ld   [wDE06], a                               ; $5EC2: $EA $06 $DE
     cp   $08                                      ; $5EC5: $FE $08
     jr   c, jr_020_5ED6                           ; $5EC7: $38 $0D
 
     xor  a                                        ; $5EC9: $AF
-    ld   [$DE06], a                               ; $5ECA: $EA $06 $DE
+    ld   [wDE06], a                               ; $5ECA: $EA $06 $DE
     ld   a, c                                     ; $5ECD: $79
     add  $04                                      ; $5ECE: $C6 $04
     and  $3C                                      ; $5ED0: $E6 $3C
-    ld   [$DE07], a                               ; $5ED2: $EA $07 $DE
+    ld   [wDE07], a                               ; $5ED2: $EA $07 $DE
     ld   c, a                                     ; $5ED5: $4F
 
 jr_020_5ED6:
@@ -3360,13 +3360,13 @@ InventoryFadeInHandler::
 
     ret                                           ; $5EFF: $C9
 
-Data_020_5F00::
+InventoryCursorLeftRightOffset:: ; Indexed by left/right button press to offset the inventory cursor
     db   $00, $01, $FF
 
-Data_020_5F03::
+InventoryCursorUpDownOffset::  ; Indexed by up/down button press to offset the inventory cursor
     db   $00, $FE, $02
 
-func_020_5F06::
+moveInventoryCursor::
     ld   a, [wInventorySelection]                 ; $5F06: $FA $A3 $DB
     ld   [wC1B6], a                               ; $5F09: $EA $B6 $C1
     ld   a, [wOcarinaMenuOpening]                 ; $5F0C: $FA $B8 $C1
@@ -3382,18 +3382,18 @@ func_020_5F06::
     and  J_RIGHT | J_LEFT              ; $5F1D: $E6 $03
     ld   e, a                                     ; $5F1F: $5F
     ld   d, $00                                   ; $5F20: $16 $00
-    ld   hl, Data_020_5F00                        ; $5F22: $21 $00 $5F
+    ld   hl, InventoryCursorLeftRightOffset       ; $5F22: $21 $00 $5F
     add  hl, de                                   ; $5F25: $19
     ld   a, [wInventorySelection]                 ; $5F26: $FA $A3 $DB
     add  [hl]                                     ; $5F29: $86
-    cp   $0A                                      ; $5F2A: $FE $0A
+    cp   INVENTORY_SLOT_COUNT - 2                 ; $5F2A: $FE $0A
     jr   c, jr_020_5F35                           ; $5F2C: $38 $07
 
     rla                                           ; $5F2E: $17
     ld   a, $00                                   ; $5F2F: $3E $00
     jr   nc, jr_020_5F35                          ; $5F31: $30 $02
 
-    ld   a, $09                                   ; $5F33: $3E $09
+    ld   a, INVENTORY_SLOT_COUNT - 3              ; $5F33: $3E $09
 
 jr_020_5F35:
     ld   [wInventorySelection], a                 ; $5F35: $EA $A3 $DB
@@ -3405,18 +3405,18 @@ jr_020_5F38:
     and  J_RIGHT | J_LEFT              ; $5F3E: $E6 $03
     ld   e, a                                     ; $5F40: $5F
     ld   d, $00                                   ; $5F41: $16 $00
-    ld   hl, Data_020_5F03                        ; $5F43: $21 $03 $5F
+    ld   hl, InventoryCursorUpDownOffset          ; $5F43: $21 $03 $5F
     add  hl, de                                   ; $5F46: $19
     ld   a, [wInventorySelection]                 ; $5F47: $FA $A3 $DB
     add  [hl]                                     ; $5F4A: $86
-    cp   $0A                                      ; $5F4B: $FE $0A
+    cp   INVENTORY_SLOT_COUNT - 2                 ; $5F4B: $FE $0A
     jr   c, jr_020_5F56                           ; $5F4D: $38 $07
 
     rla                                           ; $5F4F: $17
     ld   a, $00                                   ; $5F50: $3E $00
     jr   nc, jr_020_5F56                          ; $5F52: $30 $02
 
-    ld   a, $09                                   ; $5F54: $3E $09
+    ld   a, INVENTORY_SLOT_COUNT - 3              ; $5F54: $3E $09
 
 jr_020_5F56:
     ld   [wInventorySelection], a                 ; $5F56: $EA $A3 $DB
@@ -3448,7 +3448,7 @@ jr_020_5F69:
     jr   z, jr_020_5F85                           ; $5F7C: $28 $07
 
     ld   a, $01                                   ; $5F7E: $3E $01
-    ld   [wC1BA], a                               ; $5F80: $EA $BA $C1
+    ld   [wCloseInventoryAfterOcarinaMenuClosed], a ; $5F80: $EA $BA $C1
     jr   jr_020_5FB2                              ; $5F83: $18 $2D
 
 jr_020_5F85:
@@ -3461,7 +3461,7 @@ jr_020_5F85:
     ld   [hl], JINGLE_MOVE_SELECTION              ; $5F91: $36 $0A
     ld   e, a                                     ; $5F93: $5F
     ld   d, $00                                   ; $5F94: $16 $00
-    ld   hl, wInventoryItem1                      ; $5F96: $21 $02 $DB
+    ld   hl, wInventoryItems                      ; $5F96: $21 $02 $DB
     add  hl, de                                   ; $5F99: $19
     ld   a, [hl]                                  ; $5F9A: $7E
     cp   INVENTORY_OCARINA                        ; $5F9B: $FE $09
@@ -3502,7 +3502,7 @@ jr_020_5FC1:
 
     ld   a, [wAButtonSlot]                        ; $5FD1: $FA $01 $DB
     push af                                       ; $5FD4: $F5
-    ld   hl, wInventoryItem1                      ; $5FD5: $21 $02 $DB
+    ld   hl, wInventoryItems                      ; $5FD5: $21 $02 $DB
     ld   a, [wInventorySelection]                 ; $5FD8: $FA $A3 $DB
 
 label_020_5FDB:
@@ -3525,7 +3525,7 @@ jr_020_5FED:
 
     ld   a, [wBButtonSlot]                        ; $5FF3: $FA $00 $DB
     push af                                       ; $5FF6: $F5
-    ld   hl, wInventoryItem1                      ; $5FF7: $21 $02 $DB
+    ld   hl, wInventoryItems                      ; $5FF7: $21 $02 $DB
     ld   a, [wInventorySelection]                 ; $5FFA: $FA $A3 $DB
     ld   c, a                                     ; $5FFD: $4F
     ld   b, $00                                   ; $5FFE: $06 $00
@@ -3614,7 +3614,7 @@ func_020_6111::
 
     ld   hl, hNeedsUpdatingBGTiles                ; $611D: $21 $90 $FF
     ld   [hl], $0B                                ; $6120: $36 $0B
-    ld   a, [wC1BA]                               ; $6122: $FA $BA $C1
+    ld   a, [wCloseInventoryAfterOcarinaMenuClosed] ; $6122: $FA $BA $C1
     and  a                                        ; $6125: $A7
     jr   z, jr_020_612D                           ; $6126: $28 $05
 
@@ -3727,7 +3727,7 @@ jr_020_619A:
     jr   z, jr_020_61C5                           ; $61AB: $28 $18
 
 jr_020_61AD:
-    ld   hl, $DB4A                                ; $61AD: $21 $4A $DB
+    ld   hl, wSelectedSongIndex                   ; $61AD: $21 $4A $DB
     ld   a, [hl]                                  ; $61B0: $7E
     inc  a                                        ; $61B1: $3C
     cp   $03                                      ; $61B2: $FE $03
@@ -3751,7 +3751,7 @@ jr_020_61C5:
     jr   z, jr_020_61E4                           ; $61C9: $28 $19
 
 jr_020_61CB:
-    ld   hl, $DB4A                                ; $61CB: $21 $4A $DB
+    ld   hl, wSelectedSongIndex                   ; $61CB: $21 $4A $DB
     ld   a, [hl]                                  ; $61CE: $7E
     dec  a                                        ; $61CF: $3D
     cp   $80                                      ; $61D0: $FE $80
@@ -3781,7 +3781,7 @@ jr_020_61ED:
     ld   a, $38                                   ; $61F0: $3E $38
     ld   [hl+], a                                 ; $61F2: $22
     push hl                                       ; $61F3: $E5
-    ld   a, [$DB4A]                               ; $61F4: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                  ; $61F4: $FA $4A $DB
     ld   e, a                                     ; $61F7: $5F
     ld   d, $00                                   ; $61F8: $16 $00
     ld   hl, Data_020_610B                        ; $61FA: $21 $0B $61
@@ -3928,21 +3928,21 @@ jr_020_62DD:
     ret                                           ; $62DD: $C9
 
 func_020_62DE::
-    ld   a, [$DE09]                               ; $62DE: $FA $09 $DE
+    ld   a, [wDE09]                               ; $62DE: $FA $09 $DE
     ld   b, a                                     ; $62E1: $47
-    ld   a, [$DE08]                               ; $62E2: $FA $08 $DE
+    ld   a, [wDE08]                               ; $62E2: $FA $08 $DE
     inc  a                                        ; $62E5: $3C
-    ld   [$DE08], a                               ; $62E6: $EA $08 $DE
+    ld   [wDE08], a                               ; $62E6: $EA $08 $DE
     cp   $10                                      ; $62E9: $FE $10
     jr   c, jr_020_62F2                           ; $62EB: $38 $05
 
     xor  a                                        ; $62ED: $AF
-    ld   [$DE08], a                               ; $62EE: $EA $08 $DE
+    ld   [wDE08], a                               ; $62EE: $EA $08 $DE
     inc  b                                        ; $62F1: $04
 
 jr_020_62F2:
     ld   a, b                                     ; $62F2: $78
-    ld   [$DE09], a                               ; $62F3: $EA $09 $DE
+    ld   [wDE09], a                               ; $62F3: $EA $09 $DE
     ldh  [hFreeWarpDataAddress], a                ; $62F6: $E0 $E6
     ld   hl, wDynamicOAMBuffer+$20                                ; $62F8: $21 $50 $C0
     ld   b, $4A                                   ; $62FB: $06 $4A
@@ -4099,12 +4099,12 @@ jr_020_63BE:
 InventoryVisibleHandler::
     call func_020_5EB5                            ; $63C4: $CD $B5 $5E
     call func_020_6215                            ; $63C7: $CD $15 $62
-    call func_020_5F06                            ; $63CA: $CD $06 $5F
+    call moveInventoryCursor                      ; $63CA: $CD $06 $5F
     call func_020_6111                            ; $63CD: $CD $11 $61
     call func_020_62A2                            ; $63D0: $CD $A2 $62
     call func_020_635C                            ; $63D3: $CD $5C $63
     call func_020_62DE                            ; $63D6: $CD $DE $62
-    ld   a, [wC1BA]                               ; $63D9: $FA $BA $C1
+    ld   a, [wCloseInventoryAfterOcarinaMenuClosed] ; $63D9: $FA $BA $C1
     and  a                                        ; $63DC: $A7
     jr   z, jr_020_63F5                           ; $63DD: $28 $16
 
@@ -4113,7 +4113,7 @@ InventoryVisibleHandler::
     jr   nz, jr_020_6445                          ; $63E4: $20 $5F
 
     xor  a                                        ; $63E6: $AF
-    ld   [wC1BA], a                               ; $63E7: $EA $BA $C1
+    ld   [wCloseInventoryAfterOcarinaMenuClosed], a ; $63E7: $EA $BA $C1
     ld   [wOcarinaMenuOpen], a                    ; $63EA: $EA $B5 $C1
     ld   [wOcarinaMenuOpening], a                 ; $63ED: $EA $B8 $C1
     ld   [wOcarinaMenuClosing], a                 ; $63F0: $EA $B9 $C1
@@ -4129,7 +4129,7 @@ jr_020_63F5:
     ld   a, $09                                   ; $63FB: $3E $09
     ld   [wGameplaySubtype], a                    ; $63FD: $EA $96 $DB
     ld   a, $90                                   ; $6400: $3E $90
-    ld   [$DE0A], a                               ; $6402: $EA $0A $DE
+    ld   [wDE0A], a                               ; $6402: $EA $0A $DE
     ld   a, [ROM_DebugTool3]                      ; $6405: $FA $05 $00
     and  a                                        ; $6408: $A7
     jr   z, jr_020_641C                           ; $6409: $28 $11
@@ -4248,7 +4248,7 @@ func_020_64EE::
     ld   hl, wOAMBuffer+$10                                ; $64EE: $21 $10 $C0
     ld   a, $53                                   ; $64F1: $3E $53
     ldh  [hBGMapOffsetLow], a                     ; $64F3: $E0 $E1
-    ld   a, [$DE0A]                               ; $64F5: $FA $0A $DE
+    ld   a, [wDE0A]                               ; $64F5: $FA $0A $DE
     ldh  [hMultiPurposeB], a                           ; $64F8: $E0 $E2
     push hl                                       ; $64FA: $E5
     ld   c, $04                                   ; $64FB: $0E $04
@@ -4288,7 +4288,7 @@ func_020_64EE::
     call func_020_6446                            ; $6533: $CD $46 $64
     ld   a, $53                                   ; $6536: $3E $53
     ldh  [hBGMapOffsetLow], a                     ; $6538: $E0 $E1
-    ld   a, [$DE0A]                               ; $653A: $FA $0A $DE
+    ld   a, [wDE0A]                               ; $653A: $FA $0A $DE
     add  $10                                      ; $653D: $C6 $10
     ldh  [hMultiPurposeB], a                           ; $653F: $E0 $E2
     ld   c, $03                                   ; $6541: $0E $03
@@ -4351,7 +4351,7 @@ InventoryInteractiveHandler::
     jr   jr_020_65A7                              ; $6594: $18 $11
 
 jr_020_6596:
-    ld   a, [$DE0A]                               ; $6596: $FA $0A $DE
+    ld   a, [wDE0A]                               ; $6596: $FA $0A $DE
     sub  $04                                      ; $6599: $D6 $04
     cp   $78                                      ; $659B: $FE $78
     jr   nc, jr_020_65A4                          ; $659D: $30 $05
@@ -4360,7 +4360,7 @@ jr_020_6596:
     ld   a, $78                                   ; $65A2: $3E $78
 
 jr_020_65A4:
-    ld   [$DE0A], a                               ; $65A4: $EA $0A $DE
+    ld   [wDE0A], a                               ; $65A4: $EA $0A $DE
 
 jr_020_65A7:
     ret                                           ; $65A7: $C9
@@ -4380,7 +4380,7 @@ jr_020_65B7:
 InventoryStatusOutHandler::
     call func_020_5EB5                            ; $65B8: $CD $B5 $5E
     call func_020_64EE                            ; $65BB: $CD $EE $64
-    ld   a, [$DE0A]                               ; $65BE: $FA $0A $DE
+    ld   a, [wDE0A]                               ; $65BE: $FA $0A $DE
     add  $04                                      ; $65C1: $C6 $04
     cp   $90                                      ; $65C3: $FE $90
     jr   c, jr_020_65CE                           ; $65C5: $38 $07
@@ -4390,7 +4390,7 @@ InventoryStatusOutHandler::
     ld   a, $90                                   ; $65CC: $3E $90
 
 jr_020_65CE:
-    ld   [$DE0A], a                               ; $65CE: $EA $0A $DE
+    ld   [wDE0A], a                               ; $65CE: $EA $0A $DE
     ret                                           ; $65D1: $C9
 
 InventoryFadeOutHandler::

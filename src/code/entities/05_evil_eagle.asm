@@ -166,7 +166,7 @@ ENDC
 jr_005_5AFE:
 IF __PATCH_0__
     xor  a
-    ld   [$de0b], a
+    ld   [wDE0B], a
 ENDC
     ld   a, MUSIC_EAGLES_TOWER_BOSS_CUTSCENE      ; $5AFE: $3E $54
 IF __PATCH_0__
@@ -175,11 +175,11 @@ ENDC
 
 func_005_5B09:
 IF __PATCH_0__
-    ld   a, [$de0b]
+    ld   a, [wDE0B]
     and  a
     jr   z, func_005_5B03
     xor  a
-    ld   [$de0b], a
+    ld   [wDE0B], a
     ld   a, MUSIC_BOSS_BATTLE
 ENDC
 

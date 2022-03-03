@@ -7429,7 +7429,7 @@ ShouldLinkTalkToEntity_15::
     or   [hl]                                     ; $7AF1: $B6
     ld   hl, wC134                                ; $7AF2: $21 $34 $C1
     or   [hl]                                     ; $7AF5: $B6
-    ld   hl, $DE05                                ; $7AF6: $21 $05 $DE
+    ld   hl, wDE05                                ; $7AF6: $21 $05 $DE
     or   [hl]                                     ; $7AF9: $B6
     jr   nz, jr_015_7B0B                          ; $7AFA: $20 $0F
 
@@ -8234,7 +8234,7 @@ func_015_7F04::
     cp   $0E                                      ; $7F26: $FE $0E
     jr   nz, jr_015_7F4F                          ; $7F28: $20 $25
 
-    ld   a, [$DB7F]                               ; $7F2A: $FA $7F $DB
+    ld   a, [wDB7F]                               ; $7F2A: $FA $7F $DB
     and  a                                        ; $7F2D: $A7
     jr   nz, jr_015_7F4F                          ; $7F2E: $20 $1F
 
@@ -8298,7 +8298,7 @@ Data_015_7F86::
     db   $74, $03, $76, $03, $70, $03, $72, $03, $76, $23, $74, $23, $72, $23, $70, $23
 
 AnimalD1EntityHandler::
-    ld   a, [$DB74]                               ; $7F96: $FA $74 $DB
+    ld   a, [wDB74]                               ; $7F96: $FA $74 $DB
     and  a                                        ; $7F99: $A7
     jp   z, ClearEntityStatus_15            ; $7F9A: $CA $31 $7C
 

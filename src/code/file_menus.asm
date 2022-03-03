@@ -97,13 +97,13 @@ FileSelectionPrepare5::
 
 func_001_4852::
     push de                                       ; $4852: $D5
-    ld   a, [$D600]                               ; $4853: $FA $00 $D6
+    ld   a, [wRequests]                           ; $4853: $FA $00 $D6
     ld   e, a                                     ; $4856: $5F
     ld   d, $00                                   ; $4857: $16 $00
-    ld   hl, $D601                                ; $4859: $21 $01 $D6
+    ld   hl, wRequest                             ; $4859: $21 $01 $D6
     add  hl, de                                   ; $485C: $19
     add  a, $10                                   ; $485D: $C6 $10
-    ld   [$D600], a                               ; $485F: $EA $00 $D6
+    ld   [wRequests], a                           ; $485F: $EA $00 $D6
     ld   a, b                                     ; $4862: $78
     ldi  [hl], a                                  ; $4863: $22
     ld   a, c                                     ; $4864: $79

@@ -724,7 +724,7 @@ ENDC
     ldh  a, [hDialogBackgroundTile]               ; $2708: $F0 $E8
     ld   [wRequestLength + 1], a                  ; $270A: $EA $04 $D6
     xor  a                                        ; $270D: $AF
-    ld   [$D605], a                               ; $270E: $EA $05 $D6
+    ld   [wRequestData + 1], a                    ; $270E: $EA $05 $D6
 IF __PATCH_9__
     jp   IncrementDialogState
 ELSE
@@ -813,8 +813,8 @@ data_276B::
 
 DialogFinishScrolling::
     ld   e, 0                                     ; $276D: $1E $00
-    ld   a, [$C0FB+$A4]                           ; $276F: $FA $9F $C1
-    and  $80 ; 'Ç'                                ; $2772: $E6 $80
+    ld   a, [wDialogState]                        ; $276F: $FA $9F $C1
+    and  $80                                      ; $2772: $E6 $80
     jr   z, label_2777                            ; $2774: $28 $01
     inc  e                                        ; $2776: $1C
 

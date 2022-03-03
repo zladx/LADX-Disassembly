@@ -172,7 +172,7 @@ jr_001_40F9::
     xor  a                                        ; $4102: $AF
     ldh  [hActiveEntityTilesOffset], a            ; $4103: $E0 $F5
     ld   a, $01                                   ; $4105: $3E $01
-    ld   [$DBAF], a                               ; $4107: $EA $AF $DB
+    ld   [wCurrentBank], a                        ; $4107: $EA $AF $DB
     call func_001_6162                            ; $410A: $CD $62 $61
 IF __PATCH_3__
     call LCDOff

@@ -208,7 +208,7 @@ jr_001_447E::
     jr   nz, jr_001_44A6                          ; $4493: $20 $11
 
 jr_001_4495::
-    ld   a, [$DBCD]                               ; $4495: $FA $CD $DB
+    ld   a, [wHasDungeonCompass]                  ; $4495: $FA $CD $DB
     and  a                                        ; $4498: $A7
     jr   z, jr_001_44A6                           ; $4499: $28 $0B
     ldh  a, [hRoomStatus]                         ; $449B: $F0 $F8
@@ -320,7 +320,7 @@ GameplayWorldLoad6Handler::
     ; Finish preparations
     ;
 
-    ld   a, [$FF40]                               ; $450A: $F0 $40
+    ld   a, [rLCDC]                               ; $450A: $F0 $40
     or   $20                                      ; $450C: $F6 $20
     ld   [wLCDControl], a                         ; $450E: $EA $FD $D6
     ld   [rLCDC], a                               ; $4511: $E0 $40

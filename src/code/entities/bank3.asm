@@ -582,7 +582,7 @@ EntityInitMarin::
     and  a                                        ; $4AAD: $A7
     jr   nz, EntityInitNpcFacingDown              ; $4AAE: $20 $7F
 
-    ld   a, [$DB50]                               ; $4AB0: $FA $50 $DB
+    ld   a, [wName + 1]                           ; $4AB0: $FA $50 $DB
     and  a                                        ; $4AB3: $A7
     jr   nz, .enableTextDebugger                  ; $4AB4: $20 $09
 

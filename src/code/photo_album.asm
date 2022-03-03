@@ -774,9 +774,9 @@ JumpTable_028_44AA:
     ld   a, $28                                 ; $44AD: JumpTable_028_44AA $3E $28
     call LoadBaseTiles_trampoline               ; $44AF: JumpTable_028_44AA $CD $BE $0B
     ldh  a, [hLinkPositionX]                    ; $44B2: JumpTable_028_44AA $F0 $98
-    ld   [$DB9D], a                             ; $44B4: JumpTable_028_44AA $EA $9D $DB
+    ld   [wMapEntrancePositionX], a             ; $44B4: JumpTable_028_44AA $EA $9D $DB
     ldh  a, [hLinkPositionY]                    ; $44B7: JumpTable_028_44AA $F0 $99
-    ld   [$DB9E], a                             ; $44B9: JumpTable_028_44AA $EA $9E $DB
+    ld   [wMapEntrancePositionY], a             ; $44B9: JumpTable_028_44AA $EA $9E $DB
     ld   a, GAMEPLAY_WORLD                      ; $44BC: JumpTable_028_44AA $3E $0B
     ld   [wGameplayType], a                     ; $44BE: JumpTable_028_44AA $EA $95 $DB
     xor  a                                      ; $44C1: JumpTable_028_44AA $AF

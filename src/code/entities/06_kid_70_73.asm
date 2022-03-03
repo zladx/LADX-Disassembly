@@ -78,7 +78,7 @@ jr_006_6277:
     jp_open_dialog $122                           ; $628B
 
 jr_006_6290:
-    ld   hl, $DB7E                                ; $6290: $21 $7E $DB
+    ld   hl, wKidSaveHintIndex                    ; $6290: $21 $7E $DB
     ld   a, [hl]                                  ; $6293: $7E
     push af                                       ; $6294: $F5
     inc  a                                        ; $6295: $3C

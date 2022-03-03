@@ -94,22 +94,20 @@ hLinkSpeedX::
 hLinkSpeedY::
  ds 1 ; FF9B
 
-; Used when jumping
-; possible values:
-; 0 = none,
+; During gameplay: Link physics, mostly in side-scrolling sections.
+;
+; Possible values:
+; 0 = normal physics,
 ; 1 =
 ;   when jumping off a cliff;
 ;   when on a ladder in a side-scrolling section;
-;   NOT when juming with feather
-; 2 = ?
-; 4 = ?
-; 6 = ?
+;   when diving in a top-view section
+; 2 = when diving in a side-scrolling section
 ;
-; Jump-table at 02:68E4
-; Related to diving?
-;
-; Maybe hLinkMotionModifier?
-hFF9C::
+; See jump-table at 02:68E4
+hLinkPhysicsModifier::
+; On the Game Over screen: the loading stage of the screen.
+hGameOverStage::
  ds 1 ; FF9C
 
 ; How the Link sprite should be drawn.
@@ -217,39 +215,51 @@ hNextMusicTrackToFadeInto::
 
 ; When 1, Link is moving much slower, like when being
 ; incapacited by a mini-gel.
-slowWalkingSpeed::
-  ds 1 ; FFB1
+hLinkSlowWalkingSpeed::
+  ds 1 ; FFB2
 
-; Unlabeled
-hFFB3::
+; Set to "hLinkPositionZ - wInvincibilityCounter" every frame
+;
+; Seems unused besides that.
+; Maybe it was used differently at some point?
+hLinkPositionZModified::
   ds 1 ; FFB3
 
-; Unlabeled
-hFFB4::
+; Countdown for displaying the message presenting the
+; dungeon name when entering a dungeon.
+hDungeonTitleMessageCountdown::
   ds 1 ; FFB4
 
 ; Number of frames during which joypad is ignored
 hButtonsInactiveDelay::
   ds 1 ; FFB5
 
-; Unlabeled
-hFFB6::
+; Invicibility duration when Link is punched away
+; (by Master Stalfos or Blaino).
+hLinkPunchedAwayCountdown::
   ds 1 ; FFB6
 
-; Unlabeled
-hFFB7::
+; Countdown specific to Link.
+; Used for various purposes in different areas.
+hLinkCountdown::
   ds 1 ; FFB7
 
-; Unlabeled
-hFFB8::
+; Type of the object under Link.
+; See hObjectUnderEntity
+hObjectUnderLink::
   ds 1 ; FFB8
 
-; Unlabeled
-hFFB9::
+; Animation frame of the glinting tiles in D4?
+hTileGlintAnimation::
   ds 1 ; FFB9
 
-; Unlabeled
-hFFBA::
+; State of a pull switch used to move blocks
+;
+; Possible values:
+;  0   not moving
+;  1   pulled?
+;  2   moving back to normal position?
+hMovingBlockMoverState::
   ds 1 ; FFBA
 
 ; Kind of switchable block needing its tiles to be updated during V-Blank.
@@ -260,20 +270,23 @@ hFFBA::
 hSwitchBlockNeedingUpdate::
   ds 1 ; FFBB
 
-; Unknown; stores previous gameplay type before a transition?
-; Related to fade-out/fade-in transitions
-; Seems to affect whether a music track is restarted afer
-; a transition
-hFFBC::
+; Whether the music track is restarted after a warp (staircase, exit door, etc.)
+; Possible values:
+;  0:                  the music track is restarted after the warp
+;  any non-zero value: the music track continues to play as-this after the warp
+hContinueMusicAfterWarp::
   ds 1 ; FFBC
 
-; Unlabeled
-; used for music
-hFFBD::
+; A copy of hDefaultMusicTrack
+; Used to see wether the power-up music track should override
+; the current music track.
+hDefaultMusicTrackAlt::
   ds 1 ; FFBD
 
-; Unlabeled
-hFFBE::
+; Disable BG collisions for the current entity.
+;
+; The engine resets this value to 0 before animating each entity.
+hActiveEntityNoBGCollision::
   ds 1 ; FFBE
 
 ; Music track to be played after countdown
@@ -304,26 +317,22 @@ hPressedButtonsMask::
 hJoypadState::
   ds 1 ; FFCC
 
-; Topmost corner of the area intercepted by Link's sword
-; Vary from 00 to 80 by increments of 10
-;
-; FIXME: also used for entities (see func_003_7E0E)
-hSwordIntersectedAreaY::
+; Topmost corner of the object intersected by Link or Link's sword
+; Vary from $00 to $80 by increments of $10
+hIntersectedObjectTop::
   ds 1 ; FFCD
 
-; Leftmost corner of the area intercepted by Link's sword
-; Vary from 00 to A0 by increments of 10
-;
-; FIXME: also used for entities (see func_003_7E0E)
-hSwordIntersectedAreaX::
+; Topmost corner of the object intersected by Link or Link's sword
+; Vary from $00 to $A0 by increments of $10
+hIntersectedObjectLeft::
   ds 1 ; FFCE
 
-; See label_2887
-hFFCF::
+; BG address of the top-left tile of the intersected object (high byte)
+hIntersectedObjectBGAddressHigh::
   ds $1 ; FFCF
 
-; See label_2887
-hFFD0::
+; BG address of the top-left tile of the intersected object (low byte)
+hIntersectedObjectBGAddressLow::
   ds $1 ; FFD0
 
 ; boolean value if changes needs to be rendered
@@ -332,8 +341,8 @@ hFFD0::
 hNeedsRenderingFrame::
   ds 1 ; FFD1
 
-; Unlabeled
-hFFD2::
+; Copy of the rIE register
+hInterrupts::
   ds 5 ; FFD2
 
 ; used in many different cases

@@ -528,7 +528,7 @@ IntroStage6Handler::
     ld   a, $68                                   ; $717D: $3E $68
     ld   [wEntitiesPosYTable], a                  ; $717F: $EA $10 $C2
     ld   a, $01                                   ; $7182: $3E $01
-    ld   [wEntitiesUnknowTableY], a               ; $7184: $EA $D0 $C3
+    ld   [wEntitiesInertiaTable], a               ; $7184: $EA $D0 $C3
     ret                                           ; $7187: $C9
 
 .jr_001_7188
@@ -1240,16 +1240,17 @@ IntroMarinState0::
     call IncrementEntityState                     ; $7699: $CD $12 $3B
 
 .jr_769C
-    ld   hl, wEntitiesUnknowTableY                ; $769C: $21 $D0 $C3
+    ; Every 4 frames, decrease the entity pos X by 1
+    ld   hl, wEntitiesInertiaTable                ; $769C: $21 $D0 $C3
     add  hl, bc                                   ; $769F: $09
     dec  [hl]                                     ; $76A0: $35
-    jr   nz, .jr_76AA                             ; $76A1: $20 $07
+    jr   nz, .return                              ; $76A1: $20 $07
     ld   [hl], $04                                ; $76A3: $36 $04
     ld   hl, wEntitiesPosXTable                   ; $76A5: $21 $00 $C2
     add  hl, bc                                   ; $76A8: $09
     dec  [hl]                                     ; $76A9: $35
 
-.jr_76AA
+.return
     ret                                           ; $76AA: $C9
 
 IntroMarinState1::

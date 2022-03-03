@@ -210,9 +210,9 @@ func_91D::
     ld   d, a                                     ; $094D: $57
     ldh  a, [hMultiPurposeA]                           ; $094E: $F0 $E1
     ld   e, a                                     ; $0950: $5F
-    ldh  a, [hFFCF]                               ; $0951: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $0951: $F0 $CF
     ldi  [hl], a                                  ; $0953: $22
-    ldh  a, [hFFD0]                               ; $0954: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $0954: $F0 $D0
     ldi  [hl], a                                  ; $0956: $22
     ld   a, $81                                   ; $0957: $3E $81
     ldi  [hl], a                                  ; $0959: $22
@@ -223,9 +223,9 @@ func_91D::
     ld   a, [de]                                  ; $095E: $1A
     ldi  [hl], a                                  ; $095F: $22
     dec  de                                       ; $0960: $1B
-    ldh  a, [hFFCF]                               ; $0961: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $0961: $F0 $CF
     ldi  [hl], a                                  ; $0963: $22
-    ldh  a, [hFFD0]                               ; $0964: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $0964: $F0 $D0
     inc  a                                        ; $0966: $3C
     ldi  [hl], a                                  ; $0967: $22
     ld   a, $81                                   ; $0968: $3E $81
@@ -294,9 +294,9 @@ func_999::
     ld   [wDC90], a                               ; $09AE: $EA $90 $DC
     ld   hl, wDC91                                ; $09B1: $21 $91 $DC
     add  hl, bc                                   ; $09B4: $09
-    ldh  a, [hFFCF]                               ; $09B5: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $09B5: $F0 $CF
     ldi  [hl], a                                  ; $09B7: $22
-    ldh  a, [hFFD0]                               ; $09B8: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $09B8: $F0 $D0
     ldi  [hl], a                                  ; $09BA: $22
     ld   a, $01                                   ; $09BB: $3E $01
     ldi  [hl], a                                  ; $09BD: $22
@@ -869,7 +869,7 @@ ApplyMapFadeOutTransitionWithSound::
     jr   z, ApplyMapFadeOutTransitionWithNoise    ; $0C94: $28 $E7
     ; Link is indoors
     ld   a, $01                                   ; $0C96: $3E $01
-    ldh  [hFFBC], a                               ; $0C98: $E0 $BC
+    ldh  [hContinueMusicAfterWarp], a             ; $0C98: $E0 $BC
 
 playNoiseStairs::
     ld   a, NOISE_SFX_STAIRS                      ; $0C9A: $3E $06
@@ -1436,8 +1436,8 @@ WorldInteractiveHandler::
     and  a                                        ; $0F50: $A7
     jr   nz, .normalFlow                          ; $0F51: $20 $3C
 
-    ; If [hFFB4] != 0…
-    ld   hl, hFFB4                                ; $0F53: $21 $B4 $FF
+    ; If the dungeon name should be displayed…
+    ld   hl, hDungeonTitleMessageCountdown        ; $0F53: $21 $B4 $FF
     ld   a, [hl]                                  ; $0F56: $7E
     and  a                                        ; $0F57: $A7
     jr   z, .noDungeonName                        ; $0F58: $28 $1B
@@ -1491,10 +1491,10 @@ WorldInteractiveHandler::
     ldh  [hLinkFinalPositionX], a                 ; $0F99: $E0 $9F
     ldh  a, [hLinkPositionY]                      ; $0F9B: $F0 $99
     ldh  [hLinkFinalPositionY], a                 ; $0F9D: $E0 $A0
-
     ld   hl, hLinkPositionZ                       ; $0F9F: $21 $A2 $FF
     sub  a, [hl]                                  ; $0FA2: $96
-    ldh  [hFFB3], a                               ; $0FA3: $E0 $B3
+    ldh  [hLinkPositionZModified], a              ; $0FA3: $E0 $B3
+
     call func_002_60E0                            ; $0FA5: $CD $E0 $60
 
     xor  a                                        ; $0FA8: $AF
@@ -1668,22 +1668,24 @@ InitGotItemSequence::
 .jp_10DB
     xor  a                                        ; $10DB: $AF
     ld   [wD45F], a                               ; $10DC: $EA $5F $D4
-
 .jp_10DF
-    ldh  a, [hFFB7]                               ; $10DF: $F0 $B7
+
+    ; Decrement hLinkCountdown timer if needed
+    ldh  a, [hLinkCountdown]                      ; $10DF: $F0 $B7
     and  a                                        ; $10E1: $A7
-    jr   z, .jp_10E7                              ; $10E2: $28 $03
+    jr   z, .linkCountdownEnd                     ; $10E2: $28 $03
     dec  a                                        ; $10E4: $3D
-    ldh  [hFFB7], a                               ; $10E5: $E0 $B7
+    ldh  [hLinkCountdown], a                      ; $10E5: $E0 $B7
+.linkCountdownEnd
 
-.jp_10E7
-    ldh  a, [hFFB6]                               ; $10E7: $F0 $B6
+    ; Decrement the hLinkPunchedAwayCountdown timer if needed
+    ldh  a, [hLinkPunchedAwayCountdown]           ; $10E7: $F0 $B6
     and  a                                        ; $10E9: $A7
-    jr   z, .jp_10EF                              ; $10EA: $28 $03
+    jr   z, .punchedAwayDecrementEnd              ; $10EA: $28 $03
     dec  a                                        ; $10EC: $3D
-    ldh  [hFFB6], a                               ; $10ED: $E0 $B6
+    ldh  [hLinkPunchedAwayCountdown], a           ; $10ED: $E0 $B6
+.punchedAwayDecrementEnd
 
-.jp_10EF
     ld   a, [wDialogState]                        ; $10EF: $FA $9F $C1
     and  a                                        ; $10F2: $A7
     jp   nz, ApplyLinkMotionState                 ; $10F3: $C2 $94 $17
@@ -1701,13 +1703,14 @@ InitGotItemSequence::
     jr   nz, .handleLinkMotion                    ; $110F: $20 $24
     ld   a, LINK_MOTION_PASS_OUT                  ; $1111: $3E $07
     ld   [wLinkMotionState], a                    ; $1113: $EA $1C $C1
+    ; Set the pass out animation duration
     ld   a, $BF                                   ; $1116: $3E $BF
-    ldh  [hFFB7], a                               ; $1118: $E0 $B7
+    ldh  [hLinkCountdown], a                      ; $1118: $E0 $B7
     ld   a, $10                                   ; $111A: $3E $10
-    ld   [wBGPaletteEffectAddress], a                               ; $111C: $EA $CC $C3
+    ld   [wBGPaletteEffectAddress], a             ; $111C: $EA $CC $C3
     xor  a                                        ; $111F: $AF
     ld   [wInvincibilityCounter], a               ; $1120: $EA $C7 $DB
-    ldh  [hFF9C], a                               ; $1123: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $1123: $E0 $9C
     ld   [wDDD6], a                               ; $1125: $EA $D6 $DD
     ld   [wDDD7], a                               ; $1128: $EA $D7 $DD
     ld   [wD464], a                               ; $112B: $EA $64 $D4
@@ -2488,7 +2491,7 @@ CheckStaticSwordCollision::
     add  a, [hl]                                  ; $15D8: $86
     sub  a, $08                                   ; $15D9: $D6 $08
     and  $F0                                      ; $15DB: $E6 $F0
-    ldh  [hSwordIntersectedAreaX], a              ; $15DD: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $15DD: $E0 $CE
 
     ; Compute the vertical intersected area
     swap a                                        ; $15DF: $CB $37
@@ -2499,7 +2502,9 @@ CheckStaticSwordCollision::
     add  a, [hl]                                  ; $15E8: $86
     sub  a, $10                                   ; $15E9: $D6 $10
     and  $F0                                      ; $15EB: $E6 $F0
-    ldh  [hSwordIntersectedAreaY], a              ; $15ED: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $15ED: $E0 $CD
+
+    ; Set hObjectUnderEntity
     or   c                                        ; $15EF: $B1
     ld   e, a                                     ; $15F0: $5F
     ld   hl, wRoomObjects                         ; $15F1: $21 $11 $D7
@@ -2510,6 +2515,7 @@ CheckStaticSwordCollision::
     push de                                       ; $15F9: $D5
     ld   a, [hl]                                  ; $15FA: $7E
     ldh  [hObjectUnderEntity], a                  ; $15FB: $E0 $AF
+
     ld   e, a                                     ; $15FD: $5F
     ld   a, [wIsIndoor]                           ; $15FE: $FA $A5 $DB
     ld   d, a                                     ; $1601: $57
@@ -2576,12 +2582,12 @@ label_1653::
 
     ld   hl, wEntitiesPosXTable                   ; $165E: $21 $00 $C2
     add  hl, de                                   ; $1661: $19
-    ldh  a, [hSwordIntersectedAreaX]              ; $1662: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $1662: $F0 $CE
     add  a, $08                                   ; $1664: $C6 $08
     ld   [hl], a                                  ; $1666: $77
     ld   hl, wEntitiesPosYTable                   ; $1667: $21 $10 $C2
     add  hl, de                                   ; $166A: $19
-    ldh  a, [hSwordIntersectedAreaY]              ; $166B: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $166B: $F0 $CD
     add  a, $10                                   ; $166D: $C6 $10
     ld   [hl], a                                  ; $166F: $77
     ld   hl, wEntitiesSpriteVariantTable                                ; $1670: $21 $B0 $C3
@@ -2617,12 +2623,12 @@ label_1653::
     ; Configure the dropped entity
     ld   hl, wEntitiesPosXTable                   ; $1695: $21 $00 $C2
     add  hl, de                                   ; $1698: $19
-    ldh  a, [hSwordIntersectedAreaX]              ; $1699: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $1699: $F0 $CE
     add  a, $08                                   ; $169B: $C6 $08
     ld   [hl], a                                  ; $169D: $77
     ld   hl, wEntitiesPosYTable                   ; $169E: $21 $10 $C2
     add  hl, de                                   ; $16A1: $19
-    ldh  a, [hSwordIntersectedAreaY]              ; $16A2: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $16A2: $F0 $CD
     add  a, $10                                   ; $16A4: $C6 $10
     ld   [hl], a                                  ; $16A6: $77
     ld   hl, wEntitiesDropTimerTable              ; $16A7: $21 $50 $C4
@@ -2702,7 +2708,7 @@ UsePegasusBoots::
     ldh  a, [hIsSideScrolling]                    ; $1705: $F0 $F9
     and  a                                        ; $1707: $A7
     jr   z, .sideScrollingEnd                     ; $1708: $28 $09
-    ldh  a, [hFF9C]                               ; $170A: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $170A: $F0 $9C
     and  a                                        ; $170C: $A7
     ret  nz                                       ; $170D: $C0
     ldh  a, [hLinkDirection]                      ; $170E: $F0 $9E
@@ -2911,7 +2917,7 @@ LinkMotionMapFadeOutHandler::
     xor  a                                        ; $185A: $AF
     ldh  [hBaseScrollX], a                        ; $185B: $E0 $96
     ldh  [hBaseScrollY], a                        ; $185D: $E0 $97
-    ldh  [hFFB4], a                               ; $185F: $E0 $B4
+    ldh  [hDungeonTitleMessageCountdown], a       ; $185F: $E0 $B4
     ld   [wDDD6], a                               ; $1861: $EA $D6 $DD
     ld   [wDDD7], a                               ; $1864: $EA $D7 $DD
 
@@ -2996,7 +3002,7 @@ LinkMotionMapFadeOutHandler::
     dec  a                                        ; $18EA: $3D
     ld   [wIsIndoor], a                           ; $18EB: $EA $A5 $DB
     ld   a, $01                                   ; $18EE: $3E $01
-    ldh  [hFF9C], a                               ; $18F0: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $18F0: $E0 $9C
 
 .label_18F2
     ld   a, [hli]                                 ; $18F2: $2A
@@ -3069,7 +3075,7 @@ LinkMotionMapFadeOutHandler::
     jr   nc, .label_196E                          ; $1959: $30 $13
     callsw LoadMinimap                            ; $195B: $3E $02 $CD $0C $08 $CD $09 $67
     ld   a, $30                                   ; $1963: $3E $30
-    ldh  [hFFB4], a                               ; $1965: $E0 $B4
+    ldh  [hDungeonTitleMessageCountdown], a       ; $1965: $E0 $B4
     xor  a                                        ; $1967: $AF
     ld   [hSwitchBlocksState], a                  ; $1968: $EA $FB $D6
     ld   [wSwitchableObjectAnimationStage], a     ; $196B: $EA $F8 $D6
@@ -3257,7 +3263,7 @@ UpdateLinkWalkingAnimation::
     ld   a, [wLinkMotionState]                    ; $1A67: $FA $1C $C1
     cp   LINK_MOTION_SWIMMING                     ; $1A6A: $FE $01
     jr   nz, .notSwimming                         ; $1A6C: $20 $0A
-    ldh  a, [hFF9C]                               ; $1A6E: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $1A6E: $F0 $9C
     and  a                                        ; $1A70: $A7
     jr   z, .swimmingEnd                          ; $1A71: $28 $03
     ld   hl, Data_002_4950                        ; $1A73: $21 $50 $49
@@ -3268,7 +3274,7 @@ UpdateLinkWalkingAnimation::
     ldh  a, [hIsSideScrolling]                    ; $1A78: $F0 $F9
     and  a                                        ; $1A7A: $A7
     jr   z, .notSideScrolling                     ; $1A7B: $28 $0B
-    ldh  a, [hFF9C]                               ; $1A7D: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $1A7D: $F0 $9C
     cp   $02                                      ; $1A7F: $FE $02
     jr   nz, .notSideScrolling                    ; $1A81: $20 $05
     ld   hl, LinkAnimationsList_WalkSideScrolling ; $1A83: $21 $58 $49
@@ -3278,7 +3284,7 @@ UpdateLinkWalkingAnimation::
     ld   a, [wIsCarryingLiftedObject]             ; $1A88: $FA $5C $C1
     cp   $01                                      ; $1A8B: $FE $01
     jr   z, .liftingObject                        ; $1A8D: $28 $35
-    ldh  a, [slowWalkingSpeed]                               ; $1A8F: $F0 $B2
+    ldh  a, [hLinkSlowWalkingSpeed]               ; $1A8F: $F0 $B2
     and  a                                        ; $1A91: $A7
     jr   nz, .label_1A9A                          ; $1A92: $20 $06
     ld   a, [wIsLinkPushing]                      ; $1A94: $FA $44 $C1
@@ -3625,7 +3631,7 @@ ELSE
     jp   nz, func_2165.return                     ; $1F78: $C2 $77 $21
 ENDC
 
-    ; Update hSwordIntersectedAreaX according to Link's position and direction
+    ; Update hIntersectedObjectLeft according to Link's position and direction
     ldh  a, [hLinkDirection]                      ; $1F7B: $F0 $9E
     ld   e, a                                     ; $1F7D: $5F
     ld   d, $00                                   ; $1F7E: $16 $00
@@ -3636,9 +3642,9 @@ ENDC
     add  a, [hl]                                  ; $1F86: $86
     sub  a, $08                                   ; $1F87: $D6 $08
     and  $F0                                      ; $1F89: $E6 $F0
-    ldh  [hSwordIntersectedAreaX], a              ; $1F8B: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $1F8B: $E0 $CE
 
-    ; Update hSwordIntersectedAreaY according to Link's position and direction
+    ; Update hIntersectedObjectTop according to Link's position and direction
     swap a                                        ; $1F8D: $CB $37
     ld   c, a                                     ; $1F8F: $4F
     ld   hl, SwordAreaYForDirection               ; $1F90: $21 $4D $1F
@@ -3647,7 +3653,7 @@ ENDC
     add  a, [hl]                                  ; $1F96: $86
     sub  a, $10                                   ; $1F97: $D6 $10
     and  $F0                                      ; $1F99: $E6 $F0
-    ldh  [hSwordIntersectedAreaY], a              ; $1F9B: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $1F9B: $E0 $CD
 
     ; hl = address of the room object that would intersect with the sword
     or   c                                        ; $1F9D: $B1
@@ -3790,11 +3796,11 @@ ENDC
     jr   nz, .jr_2080                             ; $2068: $20 $16
     bit  0, e                                     ; $206A: $CB $43
     jr   nz, .jr_2080                             ; $206C: $20 $12
-    ldh  a, [hSwordIntersectedAreaX]              ; $206E: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $206E: $F0 $CE
     swap a                                        ; $2070: $CB $37
     and  $0F                                      ; $2072: $E6 $0F
     ld   e, a                                     ; $2074: $5F
-    ldh  a, [hSwordIntersectedAreaY]              ; $2075: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $2075: $F0 $CD
     and  $F0                                      ; $2077: $E6 $F0
     or   e                                        ; $2079: $B3
     ld   [wMazeSignpostPos], a                    ; $207A: $EA $73 $D4
@@ -4405,7 +4411,7 @@ ResetMusicFadeTimer::
     ret                                           ; $27F1: $C9
 
 label_27F2::
-    ldh  a, [hFFBC]                               ; $27F2: $F0 $BC
+    ldh  a, [hContinueMusicAfterWarp]             ; $27F2: $F0 $BC
     and  a                                        ; $27F4: $A7
     jr   nz, .skip                                ; $27F5: $20 $08
     callsb func_01F_4003                          ; $27F7: $3E $1F $EA $00 $21 $CD $03 $40
@@ -4447,7 +4453,7 @@ ReadJoypadState::
     ld   a, [wLinkMotionState]                    ; $2832: $FA $1C $C1
     cp   LINK_MOTION_PASS_OUT                     ; $2835: $FE $07
     jr   nz, .linkPassingOutEnd                   ; $2837: $20 $06
-    ldh  a, [hFF9C]                               ; $2839: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $2839: $F0 $9C
     cp   $04                                      ; $283B: $FE $04
     jr   z, .readState                            ; $283D: $28 $13
 .linkPassingOutEnd
@@ -4502,15 +4508,15 @@ ReadJoypadState::
 .return
     ret                                           ; $2886: $C9
 
-; Get BG address of the object under hSwordIntersectedAreaX/Y
+; Get BG address of the object under hIntersectedObjectLeft/Y
 ; Return:
-;   hFFCF / hFFD0: BG address of the top-left tile of the object
+;   hIntersectedObjectBGAddressHigh / hIntersectedObjectBGAddressLow: BG address of the top-left tile of the object
 label_2887::
     push bc                                       ; $2887: $C5
 
     ;
-    ; de = ([hSwordIntersectedAreaY] + [hBaseScrollY]) / 8
-    ldh  a, [hSwordIntersectedAreaY]              ; $2888: $F0 $CD
+    ; de = ([hIntersectedObjectTop]  + [hBaseScrollY]) / 8
+    ldh  a, [hIntersectedObjectTop]               ; $2888: $F0 $CD
     ld   hl, hBaseScrollY                         ; $288A: $21 $97 $FF
     add  a, [hl]                                  ; $288D: $86
     and  $F8 ; a - a % $8                         ; $288E: $E6 $F8
@@ -4529,8 +4535,8 @@ label_2887::
     jr   nz, .loop                                ; $28A1: $20 $FC
     push hl                                       ; $28A3: $E5
 
-    ; a = (([hSwordIntersectedAreaX] + [hBaseScrollX]) / 8)
-    ldh  a, [hSwordIntersectedAreaX]              ; $28A4: $F0 $CE
+    ; a = (([hIntersectedObjectLeft] + [hBaseScrollX]) / 8)
+    ldh  a, [hIntersectedObjectLeft]              ; $28A4: $F0 $CE
     ld   hl, hBaseScrollX                         ; $28A6: $21 $96 $FF
     add  a, [hl]                                  ; $28A9: $86
     pop  hl                                       ; $28AA: $E1
@@ -4543,9 +4549,9 @@ label_2887::
     add  hl, de                                   ; $28B7: $19
 
     ld   a, h                                     ; $28B8: $7C
-    ldh  [hFFCF], a                               ; $28B9: $E0 $CF
+    ldh  [hIntersectedObjectBGAddressHigh], a     ; $28B9: $E0 $CF
     ld   a, l                                     ; $28BB: $7D
-    ldh  [hFFD0], a                               ; $28BC: $E0 $D0
+    ldh  [hIntersectedObjectBGAddressLow], a      ; $28BC: $E0 $D0
     pop  bc                                       ; $28BE: $C1
     ret                                           ; $28BF: $C9
 
@@ -4576,19 +4582,28 @@ TableJump::
 
 ; Turn off LCD at next vertical blanking
 LCDOff::
+    ; Save interrupts configuration
     ld   a, [rIE]                                 ; $28CF: $F0 $FF
-    ldh  [hFFD2], a ; Save interrupts configuration ; $28D1: $E0 $D2
+    ldh  [hInterrupts], a                         ; $28D1: $E0 $D2
+    ; Disable all interrupts
     res  0, a                                     ; $28D3: $CB $87
-    ld   [rIE], a   ; Disable all interrupts      ; $28D5: $E0 $FF
+    ld   [rIE], a                                 ; $28D5: $E0 $FF
+
+    ; Wait for row 145
 .waitForEndOfLine
     ld   a, [rLY]                                 ; $28D7: $F0 $44
-    cp   $91                                      ; $28D9: $FE $91
-    jr   nz, .waitForEndOfLine ; Wait for row 145 ; $28DB: $20 $FA
-    ld   a, [rLCDC]  ; \                          ; $28DD: $F0 $40
-    and  $7F         ; | Switch off LCD screen    ; $28DF: $E6 $7F
-    ld   [rLCDC], a  ; /                          ; $28E1: $E0 $40
-    ldh  a, [hFFD2]                               ; $28E3: $F0 $D2
-    ld   [rIE], a    ; Restore interrupts configuration ; $28E5: $E0 $FF
+    cp   145                                      ; $28D9: $FE $91
+    jr   nz, .waitForEndOfLine                    ; $28DB: $20 $FA
+
+    ; Switch off LCD screen
+    ld   a, [rLCDC]                               ; $28DD: $F0 $40
+    and  $7F                                      ; $28DF: $E6 $7F
+    ld   [rLCDC], a                               ; $28E1: $E0 $40
+
+    ; Restore interrupts configuration
+    ldh  a, [hInterrupts]                         ; $28E3: $F0 $D2
+    ld   [rIE], a                                 ; $28E5: $E0 $FF
+
     ret                                           ; $28E7: $C9
 
 LoadTileset0F_trampoline::

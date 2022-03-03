@@ -37,7 +37,7 @@ ResetEntity::
     ld   hl, wEntitiesPrivateState4Table          ; $4030: $21 $40 $C4
     add  hl, bc                                   ; $4033: $09
     ld   [hl], b                                  ; $4034: $70
-    ld   hl, wEntitiesUnknowTableR                ; $4035: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $4035: $21 $90 $C3
     add  hl, bc                                   ; $4038: $09
     ld   [hl], b                                  ; $4039: $70
     ld   hl, wEntitiesTransitionCountdownTable    ; $403A: $21 $E0 $C2
@@ -57,7 +57,7 @@ ResetEntity::
     ld   [hl], b                                  ; $4052: $70
     xor  a                                        ; $4053: $AF
     call SetEntitySpriteVariant                   ; $4054: $CD $0C $3B
-    ld   hl, wEntitiesUnknowTableY                ; $4057: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4057: $21 $D0 $C3
     add  hl, bc                                   ; $405A: $09
     ld   [hl], b                                  ; $405B: $70
     ld   hl, wEntitiesHealthTable                 ; $405C: $21 $60 $C3
@@ -72,16 +72,16 @@ ResetEntity::
     ld   hl, wEntitiesPosYSignTable               ; $406B: $21 $30 $C2
     add  hl, bc                                   ; $406E: $09
     ld   [hl], b                                  ; $406F: $70
-    ld   hl, wEntitiesUnknowTableI                ; $4070: $21 $70 $C4
+    ld   hl, wEntitiesGroundStatusTable           ; $4070: $21 $70 $C4
     add  hl, bc                                   ; $4073: $09
     ld   [hl], b                                  ; $4074: $70
     ld   hl, wEntitiesDropTimerTable              ; $4075: $21 $50 $C4
     add  hl, bc                                   ; $4078: $09
     ld   [hl], b                                  ; $4079: $70
-    ld   hl, wEntitiesUnknowTableV                ; $407A: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $407A: $21 $80 $C4
     add  hl, bc                                   ; $407D: $09
     ld   [hl], b                                  ; $407E: $70
-    ld   hl, wEntitiesUnknowTableW                ; $407F: $21 $90 $C4
+    ld   hl, wEntitiesLiftedTable                 ; $407F: $21 $90 $C4
     add  hl, bc                                   ; $4082: $09
     ld   [hl], b                                  ; $4083: $70
     ld   hl, wEntitiesFlashCountdownTable         ; $4084: $21 $20 $C4

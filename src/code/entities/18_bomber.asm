@@ -23,7 +23,7 @@ BomberEntityHandler::
     call RenderActiveEntitySpritesRect            ; $7834: $CD $E6 $3C
     call ReturnIfNonInteractive_18                ; $7837: $CD $E8 $7D
     call label_3CD9                               ; $783A: $CD $D9 $3C
-    ld   hl, wEntitiesUnknowTableY                ; $783D: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $783D: $21 $D0 $C3
     add  hl, bc                                   ; $7840: $09
     ld   a, [hl]                                  ; $7841: $7E
     rra                                           ; $7842: $1F
@@ -95,7 +95,7 @@ jr_018_78A3:
     call IncrementEntityState                     ; $78A3: $CD $12 $3B
 
 label_018_78A6:
-    ld   hl, wEntitiesUnknowTableY                ; $78A6: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $78A6: $21 $D0 $C3
     add  hl, bc                                   ; $78A9: $09
     ld   a, [hl]                                  ; $78AA: $7E
     inc  [hl]                                     ; $78AB: $34

@@ -31,17 +31,16 @@ MusicOverridesPowerUpTrack::
     db   $00, $00, $01, $00, $01, $00
 
 SelectMusicTrackAfterTransition::
-    ldh  a, [hFFBC]                               ; $4146: $F0 $BC
+    ; If the game requested the music track to continue after the transition,
+    ; return immediately.
+    ldh  a, [hContinueMusicAfterWarp]             ; $4146: $F0 $BC
     and  a                                        ; $4148: $A7
-    jr   z, .noPendingGameplayTransition          ; $4149: $28 $04
-
-    ; Gameplay transition is pending:
-    ; clear the transition flag and return.
+    jr   z, .startNewMusicTrack                   ; $4149: $28 $04
     xor  a                                        ; $414B: $AF
-    ldh  [hFFBC], a                               ; $414C: $E0 $BC
+    ldh  [hContinueMusicAfterWarp], a             ; $414C: $E0 $BC
     ret                                           ; $414E: $C9
+.startNewMusicTrack
 
-.noPendingGameplayTransition
     ; If wSwordLevel == 0 (Link doesn’t have its sword yet), use adventure start music
     ld   d, MUSIC_SWORD_SEARCH                    ; $414F: $16 $1D
     ld   a, [wSwordLevel]                         ; $4151: $FA $4E $DB
@@ -150,7 +149,7 @@ SelectMusicTrackAfterTransition::
     ; Replace the current music by the power-up music
     ld   a, MUSIC_ACTIVE_POWER_UP                 ; $41C2: $3E $49
     ld   [wMusicTrackToPlay], a                   ; $41C4: $EA $68 $D3
-    ldh  [hFFBD], a                               ; $41C7: $E0 $BD
+    ldh  [hDefaultMusicTrackAlt], a               ; $41C7: $E0 $BD
     ldh  [hNextDefaultMusicTrack], a              ; $41C9: $E0 $BF
     xor  a                                        ; $41CB: $AF
     ld   [wC1CF], a                               ; $41CC: $EA $CF $C1

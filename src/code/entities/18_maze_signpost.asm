@@ -86,11 +86,11 @@ RevealMamuCave::
     ld   a, $28                                   ; $62FF: $3E $28
     ld   [wWarp0PositionTileIndex], a             ; $6301: $EA $16 $D4
     ld   a, $20                                   ; $6304: $3E $20
-    ldh  [hSwordIntersectedAreaY], a              ; $6306: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $6306: $E0 $CD
     add  $10                                      ; $6308: $C6 $10
     ldh  [hMultiPurpose1], a                      ; $630A: $E0 $D8
     ld   a, $80                                   ; $630C: $3E $80
-    ldh  [hSwordIntersectedAreaX], a              ; $630E: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $630E: $E0 $CE
     add  $08                                      ; $6310: $C6 $08
     ldh  [hMultiPurpose0], a                      ; $6312: $E0 $D7
     ld   a, TRANSCIENT_VFX_POOF                   ; $6314: $3E $02
@@ -115,9 +115,9 @@ jr_018_632D:
     ld   [wRequests], a                           ; $6336: $EA $00 $D6
     ld   d, $00                                   ; $6339: $16 $00
     add  hl, de                                   ; $633B: $19
-    ldh  a, [hFFCF]                               ; $633C: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $633C: $F0 $CF
     ld   [hl+], a                                 ; $633E: $22
-    ldh  a, [hFFD0]                               ; $633F: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $633F: $F0 $D0
     ld   [hl+], a                                 ; $6341: $22
     ld   a, $81                                   ; $6342: $3E $81
     ld   [hl+], a                                 ; $6344: $22
@@ -125,9 +125,9 @@ jr_018_632D:
     ld   [hl+], a                                 ; $6347: $22
     ld   a, $77                                   ; $6348: $3E $77
     ld   [hl+], a                                 ; $634A: $22
-    ldh  a, [hFFCF]                               ; $634B: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $634B: $F0 $CF
     ld   [hl+], a                                 ; $634D: $22
-    ldh  a, [hFFD0]                               ; $634E: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $634E: $F0 $D0
     inc  a                                        ; $6350: $3C
     ld   [hl+], a                                 ; $6351: $22
     ld   a, $81                                   ; $6352: $3E $81
@@ -139,11 +139,11 @@ jr_018_632D:
     ld   [hl], $00                                ; $635B: $36 $00
     ld   a, STAIRCASE_INACTIVE                    ; $635D: $3E $01
     ldh  [hStaircase], a                          ; $635F: $E0 $AC
-    ldh  a, [hSwordIntersectedAreaY]              ; $6361: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $6361: $F0 $CD
     and  $F0                                      ; $6363: $E6 $F0
     add  $10                                      ; $6365: $C6 $10
     ldh  [hStaircasePosY], a                      ; $6367: $E0 $AE
-    ldh  a, [hSwordIntersectedAreaX]              ; $6369: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $6369: $F0 $CE
     and  $F0                                      ; $636B: $E6 $F0
     add  $08                                      ; $636D: $C6 $08
     ldh  [hStaircasePosX], a                      ; $636F: $E0 $AD

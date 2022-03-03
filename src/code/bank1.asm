@@ -368,7 +368,7 @@ jr_001_531D::
     ld   [wGameplaySubtype], a                    ; $5323: $EA $96 $DB
     xor  a                                        ; $5326: $AF
     ld   [wLinkMotionState], a                    ; $5327: $EA $1C $C1
-    ldh  [hFF9C], a                               ; $532A: $E0 $9C
+    ldh  [hLinkPhysicsModifier], a                ; $532A: $E0 $9C
     ld   [wAddHealthBuffer], a                    ; $532C: $EA $93 $DB
     ld   [wSubtractHealthBuffer], a               ; $532F: $EA $94 $DB
     ld   [wAddRupeeBufferLow], a                  ; $5332: $EA $90 $DB
@@ -786,8 +786,8 @@ jr_001_5854::
     ldh  [hVolumeLeft], a                      ; $586D: $E0 $AA
     ld   a, GAMEPLAY_WORLD                        ; $586F: $3E $0B
     ld   [wGameplayType], a                       ; $5871: $EA $95 $DB
-    ldh  [hFFBC], a                               ; $5874: $E0 $BC
-    ld   a, $02                                   ; $5876: $3E $02
+    ldh  [hContinueMusicAfterWarp], a             ; $5874: $E0 $BC
+    ld   a, GAMEPLAY_WORLD_LOAD_2                 ; $5876: $3E $02
     ld   [wGameplaySubtype], a                    ; $5878: $EA $96 $DB
 
     ld   a, [wIsIndoor]                           ; $587B: $FA $A5 $DB

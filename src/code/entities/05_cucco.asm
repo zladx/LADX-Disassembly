@@ -146,7 +146,7 @@ jr_005_45EC:
     ld   hl, wEntitiesStatusTable                 ; $45F6: $21 $80 $C2
     add  hl, bc                                   ; $45F9: $09
     ld   [hl], $07                                ; $45FA: $36 $07
-    ld   hl, wEntitiesUnknowTableW                ; $45FC: $21 $90 $C4
+    ld   hl, wEntitiesLiftedTable                 ; $45FC: $21 $90 $C4
     add  hl, bc                                   ; $45FF: $09
     ld   [hl], b                                  ; $4600: $70
     ldh  a, [hLinkDirection]                      ; $4601: $F0 $9E

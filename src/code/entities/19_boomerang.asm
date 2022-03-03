@@ -95,10 +95,10 @@ jr_019_44DA:
     ld   e, a                                     ; $44E1: $5F
     ld   d, b                                     ; $44E2: $50
     call func_014_5526_trampoline                 ; $44E3: $CD $78 $21
-    ldh  a, [hSwordIntersectedAreaX]              ; $44E6: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $44E6: $F0 $CE
     add  $08                                      ; $44E8: $C6 $08
     ldh  [hMultiPurpose0], a                      ; $44EA: $E0 $D7
-    ldh  a, [hSwordIntersectedAreaY]              ; $44EC: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $44EC: $F0 $CD
     add  $10                                      ; $44EE: $C6 $10
     ldh  [hMultiPurpose1], a                      ; $44F0: $E0 $D8
     ld   a, TRANSCIENT_VFX_SMOKE                  ; $44F2: $3E $08

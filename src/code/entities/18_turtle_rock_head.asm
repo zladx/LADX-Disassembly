@@ -122,7 +122,7 @@ TurtleRockHeadState1Handler::
     ld   a, MUSIC_TURTLE_ROCK_ENTRANCE_BOSS       ; $73B6: $3E $39
     ld   [wMusicTrackToPlay], a                   ; $73B8: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $73BB: $E0 $B0
-    ldh  [hFFBD], a                               ; $73BD: $E0 $BD
+    ldh  [hDefaultMusicTrackAlt], a               ; $73BD: $E0 $BD
     ldh  [hNextDefaultMusicTrack], a              ; $73BF: $E0 $BF
     jp   IncrementEntityState                     ; $73C1: $C3 $12 $3B
 
@@ -325,7 +325,7 @@ TurtleRockHeadState8Handler::
     call GetEntityTransitionCountdown             ; $74EA: $CD $05 $0C
     jr   nz, jr_018_751E                          ; $74ED: $20 $2F
 
-    ld   hl, wEntitiesUnknowTableR                ; $74EF: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $74EF: $21 $90 $C3
     add  hl, bc                                   ; $74F2: $09
     inc  [hl]                                     ; $74F3: $34
     ld   a, [hl]                                  ; $74F4: $7E

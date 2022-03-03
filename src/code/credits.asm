@@ -5317,7 +5317,7 @@ jr_017_72A6:
     cp   $A8                                      ; $72A8: $FE $A8
     jp   z, label_017_7CC2                        ; $72AA: $CA $C2 $7C
 
-    ld   hl, wEntitiesUnknowTableY                ; $72AD: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $72AD: $21 $D0 $C3
     add  hl, bc                                   ; $72B0: $09
     ld   a, [hl]                                  ; $72B1: $7E
     inc  a                                        ; $72B2: $3C
@@ -5998,7 +5998,7 @@ jr_017_7934:
     ld   [hl], a                                  ; $793D: $77
 
 jr_017_793E:
-    ld   hl, wEntitiesUnknowTableY                ; $793E: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $793E: $21 $D0 $C3
     add  hl, bc                                   ; $7941: $09
     ld   a, [hl]                                  ; $7942: $7E
     inc  a                                        ; $7943: $3C
@@ -6479,7 +6479,7 @@ func_017_7C7B::
     call IncrementEntityState                     ; $7C8A: $CD $12 $3B
 
 func_017_7C8D::
-    ld   hl, wEntitiesUnknowTableY                ; $7C8D: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7C8D: $21 $D0 $C3
     add  hl, bc                                   ; $7C90: $09
     ld   a, [hl]                                  ; $7C91: $7E
     ld   a, [hl]                                  ; $7C92: $7E

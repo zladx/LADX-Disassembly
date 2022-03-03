@@ -423,7 +423,7 @@ func_005_5C5B::
     call IncrementEntityState                     ; $5C78: $CD $12 $3B
 
 jr_005_5C7B:
-    ld   hl, wEntitiesUnknowTableY                ; $5C7B: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5C7B: $21 $D0 $C3
     add  hl, bc                                   ; $5C7E: $09
     inc  [hl]                                     ; $5C7F: $34
     ld   a, [hl]                                  ; $5C80: $7E
@@ -466,7 +466,7 @@ func_005_5CAD::
     call IncrementEntityState                     ; $5CB6: $CD $12 $3B
 
 func_005_5CB9::
-    ld   hl, wEntitiesUnknowTableY                ; $5CB9: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5CB9: $21 $D0 $C3
     add  hl, bc                                   ; $5CBC: $09
     inc  [hl]                                     ; $5CBD: $34
     ld   a, [hl]                                  ; $5CBE: $7E
@@ -668,7 +668,7 @@ func_005_5DA3::
     ld   hl, wEntitiesPosYTable                   ; $5DD4: $21 $10 $C2
     add  hl, bc                                   ; $5DD7: $09
     ld   [hl], a                                  ; $5DD8: $77
-    ldh  a, [hFF9C]                               ; $5DD9: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $5DD9: $F0 $9C
     and  a                                        ; $5DDB: $A7
     jr   z, jr_005_5DE1                           ; $5DDC: $28 $03
 
@@ -759,7 +759,7 @@ jr_005_5E56:
 
 jr_005_5E59:
     call func_005_5CB9                            ; $5E59: $CD $B9 $5C
-    ldh  a, [hFF9C]                               ; $5E5C: $F0 $9C
+    ldh  a, [hLinkPhysicsModifier]                ; $5E5C: $F0 $9C
     and  a                                        ; $5E5E: $A7
     jr   nz, jr_005_5E8A                          ; $5E5F: $20 $29
 

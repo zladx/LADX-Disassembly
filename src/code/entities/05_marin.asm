@@ -147,7 +147,7 @@ MarinCreditsHandler:
     ld   hl, wEntitiesSpeedYTable                 ; $4F2C: $21 $50 $C2
     add  hl, de                                   ; $4F2F: $19
     ld   [hl], $FC                                ; $4F30: $36 $FC
-    ld   hl, wEntitiesUnknowTableY                ; $4F32: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4F32: $21 $D0 $C3
     add  hl, de                                   ; $4F35: $19
     ld   [hl], $40                                ; $4F36: $36 $40
     pop  bc                                       ; $4F38: $C1
@@ -335,7 +335,7 @@ func_005_5020::
     inc  [hl]                                     ; $5031: $34
     ld   [wMusicTrackToPlay], a                   ; $5032: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $5035: $E0 $B0
-    ldh  [hFFBD], a                               ; $5037: $E0 $BD
+    ldh  [hDefaultMusicTrackAlt], a               ; $5037: $E0 $BD
     ld   hl, wC3C8                                ; $5039: $21 $C8 $C3
     ld   [hl], $01                                ; $503C: $36 $01
 
@@ -486,7 +486,7 @@ jr_005_50E2:
     ld   hl, wEntitiesSpeedYTable                 ; $511E: $21 $50 $C2
     add  hl, de                                   ; $5121: $19
     ld   [hl], $FC                                ; $5122: $36 $FC
-    ld   hl, wEntitiesUnknowTableY                ; $5124: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5124: $21 $D0 $C3
     add  hl, de                                   ; $5127: $19
     ld   [hl], $40                                ; $5128: $36 $40
 

@@ -242,7 +242,7 @@ jr_001_413B::
     ldi  [hl], a                                  ; $414C: $22
     ld   [hl], $00                                ; $414D: $36 $00
     ret                                           ; $414F: $C9
-    ldh  a, [hFFB7]                               ; $4150: $F0 $B7
+    ldh  a, [hLinkCountdown]                      ; $4150: $F0 $B7
     and  a                                        ; $4152: $A7
     jp   nz, .cleanup                             ; $4153: $C2 $BB $41
     ld   e, $70                                   ; $4156: $1E $70

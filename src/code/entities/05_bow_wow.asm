@@ -135,7 +135,7 @@ func_005_40E6::
 
     ldh  a, [hLinkPositionX]                      ; $40F0: $F0 $98
     ldh  [hMultiPurpose0], a                      ; $40F2: $E0 $D7
-    ldh  a, [hFFB3]                               ; $40F4: $F0 $B3
+    ldh  a, [hLinkPositionZModified]              ; $40F4: $F0 $B3
     ldh  [hMultiPurpose1], a                      ; $40F6: $E0 $D8
     jr   jr_005_4129                              ; $40F8: $18 $2F
 
@@ -601,7 +601,7 @@ jr_005_4380:
     ld   hl, wEntitiesFlashCountdownTable         ; $4394: $21 $20 $C4
     add  hl, de                                   ; $4397: $19
     ld   [hl], $18                                ; $4398: $36 $18
-    ld   hl, wEntitiesUnknowTableY                ; $439A: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $439A: $21 $D0 $C3
     add  hl, de                                   ; $439D: $19
     inc  [hl]                                     ; $439E: $34
     ret                                           ; $439F: $C9

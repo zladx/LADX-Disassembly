@@ -13,7 +13,7 @@ LiftableRockEntityHandler::
     cp   $01                                      ; $5334: $FE $01
     jr   nz, jr_003_5395                          ; $5336: $20 $5D
 
-    ld   hl, wEntitiesUnknowTableR                ; $5338: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $5338: $21 $90 $C3
     add  hl, bc                                   ; $533B: $09
     ld   a, [hl]                                  ; $533C: $7E
     and  a                                        ; $533D: $A7

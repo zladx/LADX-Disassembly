@@ -28,7 +28,7 @@ ThreeOfAKindState0Handler::
     call IncrementEntityState                     ; $495F: $CD $12 $3B
 
 jr_006_4962:
-    ld   hl, wEntitiesUnknowTableY                ; $4962: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4962: $21 $D0 $C3
     add  hl, bc                                   ; $4965: $09
     inc  [hl]                                     ; $4966: $34
 
@@ -47,7 +47,7 @@ jr_006_4967:
 jr_006_4976:
     ld   e, [hl]                                  ; $4976: $5E
     sla  e                                        ; $4977: $CB $23
-    ld   hl, wEntitiesUnknowTableY                ; $4979: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4979: $21 $D0 $C3
     add  hl, bc                                   ; $497C: $09
     ld   a, [hl]                                  ; $497D: $7E
     rra                                           ; $497E: $1F
@@ -253,7 +253,7 @@ jr_006_4A85:
     ld   hl, wEntitiesDroppedItemTable            ; $4A85: $21 $E0 $C4
     add  hl, de                                   ; $4A88: $19
     ld   [hl], a                                  ; $4A89: $77
-    ld   hl, wEntitiesUnknowTableV                ; $4A8A: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $4A8A: $21 $80 $C4
     add  hl, de                                   ; $4A8D: $19
     ld   [hl], $1F                                ; $4A8E: $36 $1F
     ld   hl, wEntitiesStatusTable                 ; $4A90: $21 $80 $C2

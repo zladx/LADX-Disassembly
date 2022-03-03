@@ -181,7 +181,7 @@ AnimateEntity::
     ldh  a, [hActiveEntityType]                   ; $3A35: $F0 $EB
     cp   ENTITY_RAFT_RAFT_OWNER                   ; $3A37: $FE $6A
     jr   nz, .raftManEnd                          ; $3A39: $20 $05
-    ldh  a, [slowWalkingSpeed]                               ; $3A3B: $F0 $B2
+    ldh  a, [hLinkSlowWalkingSpeed]               ; $3A3B: $F0 $B2
     and  a                                        ; $3A3D: $A7
     jr   nz, .entityLifted                        ; $3A3E: $20 $06
 .raftManEnd
@@ -1125,7 +1125,7 @@ BossIntro::
 .endIf:
     ld   [wMusicTrackToPlay], a                   ; $3F11: $EA $68 $D3
 
-ldh  [hFFBD], a                                   ; $3F14: $E0 $BD
+    ldh  [hDefaultMusicTrackAlt], a               ; $3F14: $E0 $BD
     ld   a, [wTransitionSequenceCounter]          ; $3F16: $FA $6B $C1
     cp   $04                                      ; $3F19: $FE $04
     ret  nz                                       ; $3F1B: $C0

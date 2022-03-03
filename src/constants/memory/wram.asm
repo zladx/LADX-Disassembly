@@ -1094,8 +1094,7 @@ wEntitiesHitboxFlagsTable::
 wEntitiesHealthTable::
   ds $10 ; C360 - C36F
 
-; Unused value
-; TODO discripe more specific
+; Unused value, likely declared for entities but never actually used.
 wEntitiesUnusedTableA::
   ds $10 ; C370 - C37F
 
@@ -1107,8 +1106,8 @@ wEntitiesUnusedTableA::
 wEntitiesDirectionTable::
   ds $10 ; C380 - C38F
 
-; TODO comment
-wEntitiesUnknowTableR::
+; Entity-specific state.
+wEntitiesPrivateState5Table::
   ds $10 ; C390 - C39F
 
 ; Type of the entity
@@ -1179,8 +1178,13 @@ wC3CE::
 wC3CF::
   ds 1 ; C3CF
 
-; TODO comment
-wEntitiesUnknowTableY::
+; How often should an entity speed be updated.
+;
+; For instance, a value of 4 means that the entity speedX or speedY
+; will be updated every 4 frames.
+;
+; Each entity uses this value differently.
+wEntitiesInertiaTable::
   ds $10 ; C3D0 - C3DF
 
 ; Room id of the entity
@@ -1240,20 +1244,27 @@ wEntitiesDropTimerTable::
 wEntitiesLoadOrderTable::
   ds $10 ; C460 - C46F
 
-; TODO find better name
-; Some physics flags?
-; Used by func_015_7995
-; Possible values: 02, 03
-wEntitiesUnknowTableI::
+; Entity ground effect modifier
+;
+; Possible values:
+;  0: on standard solid ground
+;  1: ???
+;  2: on shallow water (draws ripples)
+;  3: on tall grass (draws pushed-away grasses)
+wEntitiesGroundStatusTable::
   ds $10 ; C470 - C47F
 
-; TODO find better name
-; Some kind of countdown
-wEntitiesUnknowTableV::
+; Entity-specific countdown 3
+wEntitiesPrivateCountdown3Table::
   ds $10 ; C480 - C48F
 
-; TODO comment
-wEntitiesUnknowTableW::
+; Is the entity being lifted by Link?
+;
+; Possible values:
+;  0:   not lifted
+;  1-3: being lifted (during the animation)
+;  4:   lifted
+wEntitiesLiftedTable::
   ds $10 ; C490 - C49F
 
 ; Is the entity recoiling from a power hit
@@ -2663,9 +2674,9 @@ wRichardSpokenFlag::
 wIsBowWowFollowingLink::
   ds 1 ; DB56
 
-; Death count (one per save slot)
+; Current file death count (first is low, second is high, third is unused)
 wDeathCount::
-  ds 3 ; DB57 DB59
+  ds 3 ; DB57 DB58 DB59
 
 ; Number of hearts ($08 = 1 heart)
 wHealth::

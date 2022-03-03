@@ -199,7 +199,7 @@ func_005_546C::
 
 jr_005_5483:
     ld   a, $01                                   ; $5483: $3E $01
-    ldh  [slowWalkingSpeed], a                               ; $5485: $E0 $B2
+    ldh  [hLinkSlowWalkingSpeed], a               ; $5485: $E0 $B2
 
 jr_005_5487:
     call CopyEntityPositionToActivePosition       ; $5487: $CD $8A $3D
@@ -252,7 +252,7 @@ func_005_54C3::
 
     ld   e, a                                     ; $54D4: $5F
     ld   d, b                                     ; $54D5: $50
-    ld   hl, wEntitiesUnknowTableR+15                                ; $54D6: $21 $9F $C3
+    ld   hl, wEntitiesPrivateState5Table+15       ; $54D6: $21 $9F $C3
     add  hl, de                                   ; $54D9: $19
     ld   a, [hl]                                  ; $54DA: $7E
     cp   $03                                      ; $54DB: $FE $03
@@ -276,7 +276,7 @@ func_005_54EA::
     ld   hl, Data_005_54E6                        ; $54F0: $21 $E6 $54
     add  hl, de                                   ; $54F3: $19
     push hl                                       ; $54F4: $E5
-    ld   hl, wEntitiesUnknowTableY                ; $54F5: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $54F5: $21 $D0 $C3
     add  hl, bc                                   ; $54F8: $09
     inc  [hl]                                     ; $54F9: $34
     ld   a, [hl]                                  ; $54FA: $7E

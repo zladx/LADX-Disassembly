@@ -151,7 +151,7 @@ label_005_7CB3:
     cp   $28                                      ; $7CBA: $FE $28
     jr   nc, label_005_7CE8                       ; $7CBC: $30 $2A
 
-    ld   hl, wEntitiesUnknowTableV                ; $7CBE: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $7CBE: $21 $80 $C4
     add  hl, bc                                   ; $7CC1: $09
     ld   a, [hl]                                  ; $7CC2: $7E
     and  a                                        ; $7CC3: $A7
@@ -256,7 +256,7 @@ jr_005_7D48:
     jr   nz, jr_005_7D5A                          ; $7D4C: $20 $0C
 
 jr_005_7D4E:
-    ld   hl, wEntitiesUnknowTableY                ; $7D4E: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7D4E: $21 $D0 $C3
     add  hl, bc                                   ; $7D51: $09
     inc  [hl]                                     ; $7D52: $34
     ld   a, [hl]                                  ; $7D53: $7E
@@ -266,7 +266,7 @@ jr_005_7D4E:
     ld   [hl], $00                                ; $7D58: $36 $00
 
 jr_005_7D5A:
-    ld   hl, wEntitiesUnknowTableY                ; $7D5A: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7D5A: $21 $D0 $C3
     add  hl, bc                                   ; $7D5D: $09
     ld   a, [hl]                                  ; $7D5E: $7E
 
@@ -289,7 +289,7 @@ func_005_7D62::
 
     ld   hl, hLinkPositionY                       ; $7D76: $21 $99 $FF
     ld   a, [hl]                                  ; $7D79: $7E
-    ld   hl, wEntitiesUnknowTableR                ; $7D7A: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $7D7A: $21 $90 $C3
     add  hl, bc                                   ; $7D7D: $09
     ld   [hl], a                                  ; $7D7E: $77
     call GetRandomByte                            ; $7D7F: $CD $0D $28
@@ -318,7 +318,7 @@ label_005_7D97:
     jp   label_005_7DF0                           ; $7DA5: $C3 $F0 $7D
 
 jr_005_7DA8:
-    ld   hl, wEntitiesUnknowTableR                ; $7DA8: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $7DA8: $21 $90 $C3
     add  hl, bc                                   ; $7DAB: $09
     ld   a, [hl]                                  ; $7DAC: $7E
     sub  $08                                      ; $7DAD: $D6 $08
@@ -370,7 +370,7 @@ label_005_7DF0:
     and  $0F                                      ; $7DF2: $E6 $0F
     jr   nz, jr_005_7E02                          ; $7DF4: $20 $0C
 
-    ld   hl, wEntitiesUnknowTableY                ; $7DF6: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7DF6: $21 $D0 $C3
     add  hl, bc                                   ; $7DF9: $09
     inc  [hl]                                     ; $7DFA: $34
     ld   a, [hl]                                  ; $7DFB: $7E
@@ -380,7 +380,7 @@ label_005_7DF0:
     ld   [hl], $00                                ; $7E00: $36 $00
 
 jr_005_7E02:
-    ld   hl, wEntitiesUnknowTableY                ; $7E02: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7E02: $21 $D0 $C3
     add  hl, bc                                   ; $7E05: $09
     ld   a, [hl]                                  ; $7E06: $7E
     jp   SetEntitySpriteVariant                   ; $7E07: $C3 $0C $3B

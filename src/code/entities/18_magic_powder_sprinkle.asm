@@ -24,7 +24,7 @@ MagicPowderSprinkleEntityHandler::
     add  $07                                      ; $7983: $C6 $07
     sub  $08                                      ; $7985: $D6 $08
     and  $F0                                      ; $7987: $E6 $F0
-    ldh  [hSwordIntersectedAreaX], a              ; $7989: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $7989: $E0 $CE
     swap a                                        ; $798B: $CB $37
     ld   hl, wEntitiesPosYTable                   ; $798D: $21 $10 $C2
     add  hl, bc                                   ; $7990: $09
@@ -33,7 +33,7 @@ MagicPowderSprinkleEntityHandler::
     add  $07                                      ; $7993: $C6 $07
     sub  $10                                      ; $7995: $D6 $10
     and  $F0                                      ; $7997: $E6 $F0
-    ldh  [hSwordIntersectedAreaY], a              ; $7999: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $7999: $E0 $CD
     or   c                                        ; $799B: $B1
     ld   c, a                                     ; $799C: $4F
     ld   b, $00                                   ; $799D: $06 $00
@@ -112,11 +112,11 @@ jr_018_79F0:
     ld   [hl], $80                                ; $7A0B: $36 $80
     ld   hl, wEntitiesPosXTable                   ; $7A0D: $21 $00 $C2
     add  hl, bc                                   ; $7A10: $09
-    ldh  a, [hSwordIntersectedAreaX]              ; $7A11: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $7A11: $F0 $CE
     ld   [hl], a                                  ; $7A13: $77
     ld   hl, wEntitiesPosYTable                   ; $7A14: $21 $10 $C2
     add  hl, bc                                   ; $7A17: $09
-    ldh  a, [hSwordIntersectedAreaY]              ; $7A18: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $7A18: $F0 $CD
     ld   [hl], a                                  ; $7A1A: $77
     ld   hl, wC1A2                                ; $7A1B: $21 $A2 $C1
     inc  [hl]                                     ; $7A1E: $34
@@ -168,11 +168,11 @@ label_018_7A5D:
     ld   hl, wEntitiesPosXTable                   ; $7A62: $21 $00 $C2
     add  hl, bc                                   ; $7A65: $09
     ld   a, [hl]                                  ; $7A66: $7E
-    ldh  [hSwordIntersectedAreaX], a              ; $7A67: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $7A67: $E0 $CE
     ld   hl, wEntitiesPosYTable                   ; $7A69: $21 $10 $C2
     add  hl, bc                                   ; $7A6C: $09
     ld   a, [hl]                                  ; $7A6D: $7E
-    ldh  [hSwordIntersectedAreaY], a              ; $7A6E: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $7A6E: $E0 $CD
     ld   hl, wEntitiesPrivateState1Table          ; $7A70: $21 $B0 $C2
     add  hl, bc                                   ; $7A73: $09
     ld   d, [hl]                                  ; $7A74: $56
@@ -266,9 +266,9 @@ jr_018_7B2C:
     add  $0A                                      ; $7B36: $C6 $0A
     ld   [wRequests], a                           ; $7B38: $EA $00 $D6
     pop  de                                       ; $7B3B: $D1
-    ldh  a, [hFFCF]                               ; $7B3C: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $7B3C: $F0 $CF
     ld   [hl+], a                                 ; $7B3E: $22
-    ldh  a, [hFFD0]                               ; $7B3F: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $7B3F: $F0 $D0
     ld   [hl+], a                                 ; $7B41: $22
     ld   a, $81                                   ; $7B42: $3E $81
     ld   [hl+], a                                 ; $7B44: $22
@@ -278,9 +278,9 @@ jr_018_7B2C:
     ld   a, [de]                                  ; $7B48: $1A
     inc  de                                       ; $7B49: $13
     ld   [hl+], a                                 ; $7B4A: $22
-    ldh  a, [hFFCF]                               ; $7B4B: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $7B4B: $F0 $CF
     ld   [hl+], a                                 ; $7B4D: $22
-    ldh  a, [hFFD0]                               ; $7B4E: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $7B4E: $F0 $D0
     inc  a                                        ; $7B50: $3C
     ld   [hl+], a                                 ; $7B51: $22
     ld   a, $81                                   ; $7B52: $3E $81

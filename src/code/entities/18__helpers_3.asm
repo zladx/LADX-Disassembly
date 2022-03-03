@@ -16,7 +16,7 @@ func_018_7D3B::
 
     ld   e, a                                     ; $7D47: $5F
     ld   d, b                                     ; $7D48: $50
-    ld   hl, wEntitiesUnknowTableR+15                                ; $7D49: $21 $9F $C3
+    ld   hl, wEntitiesPrivateState5Table+15       ; $7D49: $21 $9F $C3
     add  hl, de                                   ; $7D4C: $19
     ld   a, [hl]                                  ; $7D4D: $7E
     cp   $03                                      ; $7D4E: $FE $03
@@ -45,7 +45,7 @@ func_018_7D60::
     ld   hl, Data_018_7D5C                        ; $7D66: $21 $5C $7D
     add  hl, de                                   ; $7D69: $19
     push hl                                       ; $7D6A: $E5
-    ld   hl, wEntitiesUnknowTableY                ; $7D6B: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7D6B: $21 $D0 $C3
     add  hl, bc                                   ; $7D6E: $09
     inc  [hl]                                     ; $7D6F: $34
     ld   a, [hl]                                  ; $7D70: $7E

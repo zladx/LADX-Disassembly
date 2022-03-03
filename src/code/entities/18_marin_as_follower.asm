@@ -173,7 +173,7 @@ jr_018_5A8C::
     ld   hl, wEntitiesSpeedYTable                 ; $5ADA: $21 $50 $C2
     add  hl, de                                   ; $5ADD: $19
     ld   [hl], $FC                                ; $5ADE: $36 $FC
-    ld   hl, wEntitiesUnknowTableY                ; $5AE0: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5AE0: $21 $D0 $C3
     add  hl, de                                   ; $5AE3: $19
     ld   [hl], $40                                ; $5AE4: $36 $40
     pop  bc                                       ; $5AE6: $C1
@@ -185,7 +185,7 @@ jr_018_5AE7:
     and  a                                        ; $5AF0: $A7
     ret  nz                                       ; $5AF1: $C0
 
-    ld   hl, wEntitiesUnknowTableV                ; $5AF2: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $5AF2: $21 $80 $C4
     add  hl, bc                                   ; $5AF5: $09
     ld   a, [hl]                                  ; $5AF6: $7E
     and  a                                        ; $5AF7: $A7
@@ -234,7 +234,7 @@ jr_018_5B13:
 
 jr_018_5B33:
     ld   [hl], b                                  ; $5B33: $70
-    ld   hl, wEntitiesUnknowTableV                ; $5B34: $21 $80 $C4
+    ld   hl, wEntitiesPrivateCountdown3Table      ; $5B34: $21 $80 $C4
     add  hl, bc                                   ; $5B37: $09
     ld   [hl], $1C                                ; $5B38: $36 $1C
     ret                                           ; $5B3A: $C9
@@ -404,7 +404,7 @@ func_018_5C39::
     ld   [wC167], a                               ; $5C3D: $EA $67 $C1
     call IncrementEntityState                     ; $5C40: $CD $12 $3B
     ld   [hl], b                                  ; $5C43: $70
-    ld   hl, wEntitiesUnknowTableY                ; $5C44: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5C44: $21 $D0 $C3
     add  hl, bc                                   ; $5C47: $09
     ld   [hl], $FF                                ; $5C48: $36 $FF
     ldh  a, [hActiveEntityPosX]                   ; $5C4A: $F0 $EE
@@ -463,7 +463,7 @@ label_018_5C6A:
     and  $01                                      ; $5C93: $E6 $01
     or   [hl]                                     ; $5C95: $B6
     call SetEntitySpriteVariant                   ; $5C96: $CD $0C $3B
-    ld   hl, wEntitiesUnknowTableY                ; $5C99: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5C99: $21 $D0 $C3
     add  hl, bc                                   ; $5C9C: $09
     ld   a, [hl]                                  ; $5C9D: $7E
     ldh  [hMultiPurposeG], a                               ; $5C9E: $E0 $E8
@@ -513,7 +513,7 @@ label_018_5C6A:
     jr   z, jr_018_5CEF                           ; $5CE8: $28 $05
 
 jr_018_5CEA:
-    ld   hl, wEntitiesUnknowTableY                ; $5CEA: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5CEA: $21 $D0 $C3
     add  hl, bc                                   ; $5CED: $09
     inc  [hl]                                     ; $5CEE: $34
 
@@ -582,7 +582,7 @@ jr_018_5CEF:
     cp   $02                                      ; $5D4C: $FE $02
     ret  z                                        ; $5D4E: $C8
 
-    ld   hl, wEntitiesUnknowTableI                ; $5D4F: $21 $70 $C4
+    ld   hl, wEntitiesGroundStatusTable           ; $5D4F: $21 $70 $C4
     add  hl, bc                                   ; $5D52: $09
     ld   a, [hl]                                  ; $5D53: $7E
     dec  a                                        ; $5D54: $3D

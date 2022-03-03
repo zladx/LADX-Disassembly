@@ -55,10 +55,10 @@ jr_003_69F8:
     ld   e, a                                     ; $6A03: $5F
     ld   d, b                                     ; $6A04: $50
     call func_014_5526_trampoline                 ; $6A05: $CD $78 $21
-    ldh  a, [hSwordIntersectedAreaX]              ; $6A08: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $6A08: $F0 $CE
     add  $08                                      ; $6A0A: $C6 $08
     ldh  [hMultiPurpose0], a                      ; $6A0C: $E0 $D7
-    ldh  a, [hSwordIntersectedAreaY]              ; $6A0E: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $6A0E: $F0 $CD
     add  $10                                      ; $6A10: $C6 $10
     ldh  [hMultiPurpose1], a                      ; $6A12: $E0 $D8
     ld   a, $08                                   ; $6A14: $3E $08

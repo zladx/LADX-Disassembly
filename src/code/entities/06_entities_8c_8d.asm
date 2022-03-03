@@ -20,14 +20,14 @@ label_006_4EB7:
     ld   de, Data_006_4E9D                        ; $4EB7: $11 $9D $4E
     call RenderActiveEntitySpritesPair            ; $4EBA: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $4EBD: $CD $C6 $64
-    ldh  a, [hFFBA]                               ; $4EC0: $F0 $BA
+    ldh  a, [hMovingBlockMoverState]              ; $4EC0: $F0 $BA
     cp   $02                                      ; $4EC2: $FE $02
     jr   z, jr_006_4EF2                           ; $4EC4: $28 $2C
 
     and  a                                        ; $4EC6: $A7
     jr   z, jr_006_4EE3                           ; $4EC7: $28 $1A
 
-    ld   hl, wEntitiesUnknowTableY                ; $4EC9: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4EC9: $21 $D0 $C3
     add  hl, bc                                   ; $4ECC: $09
     inc  [hl]                                     ; $4ECD: $34
     ld   a, [hl]                                  ; $4ECE: $7E

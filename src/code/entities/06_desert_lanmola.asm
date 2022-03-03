@@ -110,7 +110,7 @@ jr_006_568A:
     and  $1F                                      ; $568A: $E6 $1F
     jr   nz, jr_006_56C6                          ; $568C: $20 $38
 
-    ld   hl, wEntitiesUnknowTableY                ; $568E: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $568E: $21 $D0 $C3
     add  hl, bc                                   ; $5691: $09
     ld   a, [hl]                                  ; $5692: $7E
     ld   hl, wEntitiesPrivateState4Table          ; $5693: $21 $40 $C4
@@ -217,7 +217,7 @@ jr_006_5726:
     cp   $02                                      ; $572E: $FE $02
     jr   c, jr_006_5754                           ; $5730: $38 $22
 
-    ld   hl, wEntitiesUnknowTableY                ; $5732: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5732: $21 $D0 $C3
     add  hl, bc                                   ; $5735: $09
     ld   a, [hl]                                  ; $5736: $7E
     inc  [hl]                                     ; $5737: $34
@@ -484,7 +484,7 @@ func_006_58C9::
     call RenderActiveEntitySpritesPair            ; $58D5: $CD $C0 $3B
 
 jr_006_58D8:
-    ld   hl, wEntitiesUnknowTableY                ; $58D8: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $58D8: $21 $D0 $C3
     add  hl, bc                                   ; $58DB: $09
     ld   a, [hl]                                  ; $58DC: $7E
     ldh  [hMultiPurpose0], a                      ; $58DD: $E0 $D7

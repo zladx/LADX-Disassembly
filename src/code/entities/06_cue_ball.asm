@@ -109,7 +109,7 @@ CueBallState0Handler::
 
 jr_006_4C32:
     ld   a, [hl]                                  ; $4C32: $7E
-    ld   hl, wEntitiesUnknowTableR                ; $4C33: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $4C33: $21 $90 $C3
     add  hl, bc                                   ; $4C36: $09
     ld   [hl], a                                  ; $4C37: $77
     call GetEntityTransitionCountdown             ; $4C38: $CD $05 $0C
@@ -292,7 +292,7 @@ CueBallState1Handler::
     call GetEntityTransitionCountdown             ; $4D3B: $CD $05 $0C
     jr   nz, jr_006_4D51                          ; $4D3E: $20 $11
 
-    ld   hl, wEntitiesUnknowTableR                ; $4D40: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $4D40: $21 $90 $C3
     add  hl, bc                                   ; $4D43: $09
     ld   a, [hl]                                  ; $4D44: $7E
     xor  $02                                      ; $4D45: $EE $02

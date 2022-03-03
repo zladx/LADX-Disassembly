@@ -331,7 +331,7 @@ func_036_41DF::
     ld   a, $02                                   ; $41E3: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $41E5: $EA $46 $C1
     ld   a, $E0                                   ; $41E8: $3E $E0
-    ldh  [hFFB3], a                               ; $41EA: $E0 $B3
+    ldh  [hLinkPositionZModified], a              ; $41EA: $E0 $B3
     ld   [wC145], a                               ; $41EC: $EA $45 $C1
     ld   a, $01                                   ; $41EF: $3E $01
     ld   [wD475], a                               ; $41F1: $EA $75 $D4
@@ -1899,7 +1899,7 @@ func_036_4B57::
     ld   hl, wEntitiesPosYTable                   ; $4B67: $21 $10 $C2
     add  hl, de                                   ; $4B6A: $19
     ld   [hl], $7C                                ; $4B6B: $36 $7C
-    ld   hl, wEntitiesUnknowTableR                ; $4B6D: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $4B6D: $21 $90 $C3
     add  hl, bc                                   ; $4B70: $09
     ld   [hl], e                                  ; $4B71: $73
     call GetEntityTransitionCountdown             ; $4B72: $CD $05 $0C
@@ -1907,7 +1907,7 @@ func_036_4B57::
     jp   IncrementEntityState                     ; $4B77: $C3 $12 $3B
 
 func_036_4B7A::
-    ld   hl, wEntitiesUnknowTableR                ; $4B7A: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $4B7A: $21 $90 $C3
     add  hl, bc                                   ; $4B7D: $09
     ld   e, [hl]                                  ; $4B7E: $5E
     ld   d, $00                                   ; $4B7F: $16 $00
@@ -2720,7 +2720,7 @@ jr_036_506B:
     pop  af                                       ; $509F: $F1
     ld   [wCurrentBank], a                        ; $50A0: $EA $AF $DB
     ld   e, $FE                                   ; $50A3: $1E $FE
-    ld   hl, wEntitiesUnknowTableY                ; $50A5: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $50A5: $21 $D0 $C3
     add  hl, bc                                   ; $50A8: $09
     inc  [hl]                                     ; $50A9: $34
     ld   a, [hl]                                  ; $50AA: $7E
@@ -4561,7 +4561,7 @@ jr_036_5C23:
 ._0A dw AvalaunchStateAHandler
 
 label_036_5C3C:
-    ld   hl, wEntitiesUnknowTableR                ; $5C3C: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $5C3C: $21 $90 $C3
     add  hl, bc                                   ; $5C3F: $09
     ld   a, [hl]                                  ; $5C40: $7E
     JP_TABLE                                      ; $5C41
@@ -4577,7 +4577,7 @@ func_036_5C48::
     ld   [hl], $FF                                ; $5C51: $36 $FF
 
 func_036_5C53::
-    ld   hl, wEntitiesUnknowTableR                ; $5C53: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $5C53: $21 $90 $C3
     add  hl, bc                                   ; $5C56: $09
     inc  [hl]                                     ; $5C57: $34
     ret                                           ; $5C58: $C9
@@ -7224,7 +7224,7 @@ func_036_6B5C::
 
     ld   e, a                                     ; $6B6A: $5F
     ld   d, b                                     ; $6B6B: $50
-    ld   hl, wEntitiesUnknowTableR+15                                ; $6B6C: $21 $9F $C3
+    ld   hl, wEntitiesPrivateState5Table+15                                ; $6B6C: $21 $9F $C3
     add  hl, de                                   ; $6B6F: $19
     ld   a, [hl]                                  ; $6B70: $7E
     cp   $03                                      ; $6B71: $FE $03
@@ -7687,9 +7687,9 @@ jr_036_6E3F:
     call RenderActiveEntitySpritesPair            ; $6E54: $CD $C0 $3B
 .tileGlintShownEnd
 
-    ld   hl, wEntitiesUnknowTableY                ; $6E57: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6E57: $21 $D0 $C3
     add  hl, bc                                   ; $6E5A: $09
-    ldh  a, [hFFB9]                               ; $6E5B: $F0 $B9
+    ldh  a, [hTileGlintAnimation]                 ; $6E5B: $F0 $B9
     ld   e, a                                     ; $6E5D: $5F
     sla  a                                        ; $6E5E: $CB $27
     sla  a                                        ; $6E60: $CB $27
@@ -7712,7 +7712,7 @@ jr_036_6E3F:
     call CopyEntityPositionToActivePosition       ; $6E7A: $CD $8A $3D
     ld   hl, wEntitiesPrivateState1Table          ; $6E7D: $21 $B0 $C2
     add  hl, bc                                   ; $6E80: $09
-    ldh  a, [hFFB8]                               ; $6E81: $F0 $B8
+    ldh  a, [hObjectUnderLink]                    ; $6E81: $F0 $B8
     cp   [hl]                                     ; $6E83: $BE
     jr   z, jr_036_6ECD                           ; $6E84: $28 $47
 
@@ -7722,7 +7722,7 @@ jr_036_6E3F:
     call CheckLinkCollisionWithEnemy_trampoline   ; $6E8A: $CD $5A $3B
     jr   nc, jr_036_6EC8                          ; $6E8D: $30 $39
 
-    ld   hl, wEntitiesUnknowTableY                ; $6E8F: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6E8F: $21 $D0 $C3
     add  hl, bc                                   ; $6E92: $09
     ld   a, [hl]                                  ; $6E93: $7E
     cp   $04                                      ; $6E94: $FE $04
@@ -7760,12 +7760,12 @@ jr_036_6EC6:
     jr   jr_036_6ECD                              ; $6EC6: $18 $05
 
 jr_036_6EC8:
-    ld   hl, wEntitiesUnknowTableY                ; $6EC8: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6EC8: $21 $D0 $C3
     add  hl, bc                                   ; $6ECB: $09
     ld   [hl], b                                  ; $6ECC: $70
 
 jr_036_6ECD:
-    ldh  a, [hFFB8]                               ; $6ECD: $F0 $B8
+    ldh  a, [hObjectUnderLink]                    ; $6ECD: $F0 $B8
     ld   hl, wEntitiesPrivateState1Table          ; $6ECF: $21 $B0 $C2
     add  hl, bc                                   ; $6ED2: $09
     ld   [hl], a                                  ; $6ED3: $77
@@ -7990,7 +7990,7 @@ jr_036_705F:
     ld   hl, wEntitiesPrivateCountdown1Table      ; $7066: $21 $F0 $C2
     add  hl, de                                   ; $7069: $19
     ld   [hl], $0F                                ; $706A: $36 $0F
-    ldh  a, [hSwordIntersectedAreaX]              ; $706C: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $706C: $F0 $CE
     ld   hl, Data_036_7052                        ; $706E: $21 $52 $70
 
 jr_036_7071:
@@ -7999,7 +7999,7 @@ jr_036_7071:
     ld   hl, wEntitiesPosXTable                   ; $7073: $21 $00 $C2
     add  hl, de                                   ; $7076: $19
     ld   [hl], a                                  ; $7077: $77
-    ldh  a, [hSwordIntersectedAreaY]              ; $7078: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $7078: $F0 $CD
 
 jr_036_707A:
     ld   hl, Data_036_7056                        ; $707A: $21 $56 $70
@@ -8341,7 +8341,7 @@ jr_036_72A9:
 
 EntityInitGenie::
     xor  a                                        ; $72AB: $AF
-    ld   hl, wEntitiesUnknowTableR                ; $72AC: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $72AC: $21 $90 $C3
     add  hl, bc                                   ; $72AF: $09
     ld   [hl], a                                  ; $72B0: $77
     ld   hl, wEntitiesPosXTable                   ; $72B1: $21 $00 $C2

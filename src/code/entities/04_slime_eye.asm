@@ -16,7 +16,7 @@ label_004_496F:
 .loop
     ld   a, ENTITY_SLIME_EYE                      ; $4972: $3E $5B
     call SpawnNewEntity_trampoline                ; $4974: $CD $86 $3B
-    ld   hl, wEntitiesUnknowTableR                ; $4977: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $4977: $21 $90 $C3
     add  hl, de                                   ; $497A: $19
     ld   [hl], $01                                ; $497B: $36 $01
     push bc                                       ; $497D: $C5
@@ -69,7 +69,7 @@ SlimeEyeEntityHandler::
     call label_394D                               ; $49C9: $CD $4D $39
     call BossIntro                                ; $49CC: $CD $E8 $3E
     call func_004_4E52                            ; $49CF: $CD $52 $4E
-    ld   hl, wEntitiesUnknowTableR                ; $49D2: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $49D2: $21 $90 $C3
     add  hl, bc                                   ; $49D5: $09
     ld   a, [hl]                                  ; $49D6: $7E
     JP_TABLE                                      ; $49D7: $C7

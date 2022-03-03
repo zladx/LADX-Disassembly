@@ -5,7 +5,7 @@ EntityInitSlimeEel::
     ld   [$D200], a                               ; $6CCC: $EA $00 $D2
     ld   [$D203], a                               ; $6CCF: $EA $03 $D2
     ld   [$D204], a                               ; $6CD2: $EA $04 $D2
-    ld   hl, wEntitiesUnknowTableR                ; $6CD5: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $6CD5: $21 $90 $C3
     add  hl, bc                                   ; $6CD8: $09
     ld   [hl], $01                                ; $6CD9: $36 $01
     ret
@@ -58,13 +58,13 @@ Data_005_6D22::
 
 func_005_6D42::
     ld   a, $38                                   ; $6D42: $3E $38
-    ldh  [hSwordIntersectedAreaX], a              ; $6D44: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $6D44: $E0 $CE
     add  $10                                      ; $6D46: $C6 $10
     ld   hl, wEntitiesPosXTable                   ; $6D48: $21 $00 $C2
     add  hl, bc                                   ; $6D4B: $09
     ld   [hl], a                                  ; $6D4C: $77
     ld   a, $30                                   ; $6D4D: $3E $30
-    ldh  [hSwordIntersectedAreaY], a              ; $6D4F: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $6D4F: $E0 $CD
     add  $18                                      ; $6D51: $C6 $18
     ld   hl, wEntitiesPosYTable                   ; $6D53: $21 $10 $C2
     add  hl, bc                                   ; $6D56: $09
@@ -114,47 +114,47 @@ jr_005_6D7E:
     jr   z, jr_005_6DFD                           ; $6DB1: $28 $4A
 
     push bc                                       ; $6DB3: $C5
-    ldh  a, [hFFCF]                               ; $6DB4: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $6DB4: $F0 $CF
     ld   h, a                                     ; $6DB6: $67
-    ldh  a, [hFFD0]                               ; $6DB7: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $6DB7: $F0 $D0
     ld   l, a                                     ; $6DB9: $6F
     push hl                                       ; $6DBA: $E5
     inc  l                                        ; $6DBB: $2C
     ld   a, l                                     ; $6DBC: $7D
-    ldh  [hFFD0], a                               ; $6DBD: $E0 $D0
+    ldh  [hIntersectedObjectBGAddressLow], a      ; $6DBD: $E0 $D0
     push hl                                       ; $6DBF: $E5
     ld   a, $AF                                   ; $6DC0: $3E $AF
     ld   [wDDD8], a                               ; $6DC2: $EA $D8 $DD
     ld   a, $05                                   ; $6DC5: $3E $05
     call func_91D                                ; $6DC7: $CD $1D $09
-    ldh  a, [hFFD0]                               ; $6DCA: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $6DCA: $F0 $D0
     inc  a                                        ; $6DCC: $3C
     inc  a                                        ; $6DCD: $3C
-    ldh  [hFFD0], a                               ; $6DCE: $E0 $D0
+    ldh  [hIntersectedObjectBGAddressLow], a      ; $6DCE: $E0 $D0
     ld   a, $05                                   ; $6DD0: $3E $05
     call func_91D                                ; $6DD2: $CD $1D $09
     pop  hl                                       ; $6DD5: $E1
     ld   de, $40                                  ; $6DD6: $11 $40 $00
     add  hl, de                                   ; $6DD9: $19
     ld   a, h                                     ; $6DDA: $7C
-    ldh  [hFFCF], a                               ; $6DDB: $E0 $CF
+    ldh  [hIntersectedObjectBGAddressHigh], a     ; $6DDB: $E0 $CF
     ld   a, l                                     ; $6DDD: $7D
-    ldh  [hFFD0], a                               ; $6DDE: $E0 $D0
+    ldh  [hIntersectedObjectBGAddressLow], a      ; $6DDE: $E0 $D0
     ld   a, $B0                                   ; $6DE0: $3E $B0
     ld   [wDDD8], a                               ; $6DE2: $EA $D8 $DD
     ld   a, $05                                   ; $6DE5: $3E $05
     call func_91D                                ; $6DE7: $CD $1D $09
-    ldh  a, [hFFD0]                               ; $6DEA: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $6DEA: $F0 $D0
     inc  a                                        ; $6DEC: $3C
     inc  a                                        ; $6DED: $3C
-    ldh  [hFFD0], a                               ; $6DEE: $E0 $D0
+    ldh  [hIntersectedObjectBGAddressLow], a      ; $6DEE: $E0 $D0
     ld   a, $05                                   ; $6DF0: $3E $05
     call func_91D                                ; $6DF2: $CD $1D $09
     pop  hl                                       ; $6DF5: $E1
     ld   a, h                                     ; $6DF6: $7C
-    ldh  [hFFCF], a                               ; $6DF7: $E0 $CF
+    ldh  [hIntersectedObjectBGAddressHigh], a     ; $6DF7: $E0 $CF
     ld   a, l                                     ; $6DF9: $7D
-    ldh  [hFFD0], a                               ; $6DFA: $E0 $D0
+    ldh  [hIntersectedObjectBGAddressLow], a      ; $6DFA: $E0 $D0
     pop  bc                                       ; $6DFC: $C1
 
 jr_005_6DFD:
@@ -170,11 +170,11 @@ jr_005_6DFD:
     call func_005_6E15                            ; $6E12: $CD $15 $6E
 
 func_005_6E15::
-    ldh  a, [hFFCF]                               ; $6E15: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $6E15: $F0 $CF
     ld   [hl+], a                                 ; $6E17: $22
-    ldh  a, [hFFD0]                               ; $6E18: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $6E18: $F0 $D0
     inc  a                                        ; $6E1A: $3C
-    ldh  [hFFD0], a                               ; $6E1B: $E0 $D0
+    ldh  [hIntersectedObjectBGAddressLow], a      ; $6E1B: $E0 $D0
     ld   [hl+], a                                 ; $6E1D: $22
     ld   a, $83                                   ; $6E1E: $3E $83
     ld   [hl+], a                                 ; $6E20: $22
@@ -205,11 +205,11 @@ label_005_6E30:
     call func_005_6E4A                            ; $6E47: $CD $4A $6E
 
 func_005_6E4A::
-    ldh  a, [hFFCF]                               ; $6E4A: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $6E4A: $F0 $CF
     ld   [hl+], a                                 ; $6E4C: $22
-    ldh  a, [hFFD0]                               ; $6E4D: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $6E4D: $F0 $D0
     inc  a                                        ; $6E4F: $3C
-    ldh  [hFFD0], a                               ; $6E50: $E0 $D0
+    ldh  [hIntersectedObjectBGAddressLow], a      ; $6E50: $E0 $D0
     ld   [hl+], a                                 ; $6E52: $22
     ld   a, $83                                   ; $6E53: $3E $83
     ld   [hl+], a                                 ; $6E55: $22
@@ -221,11 +221,11 @@ func_005_6E4A::
     ld   [hl+], a                                 ; $6E5E: $22
     ld   a, $1E                                   ; $6E5F: $3E $1E
     ld   [hl+], a                                 ; $6E61: $22
-    ldh  a, [hFFCF]                               ; $6E62: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $6E62: $F0 $CF
     ld   [hl+], a                                 ; $6E64: $22
-    ldh  a, [hFFD0]                               ; $6E65: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $6E65: $F0 $D0
     inc  a                                        ; $6E67: $3C
-    ldh  [hFFD0], a                               ; $6E68: $E0 $D0
+    ldh  [hIntersectedObjectBGAddressLow], a      ; $6E68: $E0 $D0
     ld   [hl+], a                                 ; $6E6A: $22
     ld   a, $83                                   ; $6E6B: $3E $83
     ld   [hl+], a                                 ; $6E6D: $22
@@ -278,7 +278,7 @@ func_005_6E7D::
     ret  nz                                       ; $6EAF: $C0
 
 jr_005_6EB0:
-    ld   hl, wEntitiesUnknowTableY                ; $6EB0: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6EB0: $21 $D0 $C3
     add  hl, bc                                   ; $6EB3: $09
     ld   a, [hl]                                  ; $6EB4: $7E
     cp   $04                                      ; $6EB5: $FE $04
@@ -290,11 +290,11 @@ jr_005_6EB0:
     ld   hl, Data_005_6D1A                        ; $6EBB: $21 $1A $6D
     add  hl, de                                   ; $6EBE: $19
     ld   a, [hl]                                  ; $6EBF: $7E
-    ldh  [hSwordIntersectedAreaX], a              ; $6EC0: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $6EC0: $E0 $CE
     ld   hl, Data_005_6D1E                        ; $6EC2: $21 $1E $6D
     add  hl, de                                   ; $6EC5: $19
     ld   a, [hl]                                  ; $6EC6: $7E
-    ldh  [hSwordIntersectedAreaY], a              ; $6EC7: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $6EC7: $E0 $CD
     sla  e                                        ; $6EC9: $CB $23
     sla  e                                        ; $6ECB: $CB $23
     sla  e                                        ; $6ECD: $CB $23
@@ -310,9 +310,9 @@ jr_005_6EB0:
     add  $0E                                      ; $6EE1: $C6 $0E
     ld   [wRequests], a                           ; $6EE3: $EA $00 $D6
     pop  de                                       ; $6EE6: $D1
-    ldh  a, [hFFCF]                               ; $6EE7: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $6EE7: $F0 $CF
     ld   [hl+], a                                 ; $6EE9: $22
-    ldh  a, [hFFD0]                               ; $6EEA: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $6EEA: $F0 $D0
     ld   [hl+], a                                 ; $6EEC: $22
     ld   a, $03                                   ; $6EED: $3E $03
     ld   [hl+], a                                 ; $6EEF: $22
@@ -328,9 +328,9 @@ jr_005_6EB0:
     ld   a, [de]                                  ; $6EF9: $1A
     inc  de                                       ; $6EFA: $13
     ld   [hl+], a                                 ; $6EFB: $22
-    ldh  a, [hFFCF]                               ; $6EFC: $F0 $CF
+    ldh  a, [hIntersectedObjectBGAddressHigh]     ; $6EFC: $F0 $CF
     ld   [hl+], a                                 ; $6EFE: $22
-    ldh  a, [hFFD0]                               ; $6EFF: $F0 $D0
+    ldh  a, [hIntersectedObjectBGAddressLow]      ; $6EFF: $F0 $D0
     add  $20                                      ; $6F01: $C6 $20
     ld   [hl+], a                                 ; $6F03: $22
     ld   a, $03                                   ; $6F04: $3E $03
@@ -367,7 +367,7 @@ jr_005_6EB0:
     ld   [hl], $01                                ; $6F3D: $36 $01
     ld   hl, wEntitiesPosXTable                   ; $6F3F: $21 $00 $C2
     add  hl, de                                   ; $6F42: $19
-    ldh  a, [hSwordIntersectedAreaX]              ; $6F43: $F0 $CE
+    ldh  a, [hIntersectedObjectLeft]              ; $6F43: $F0 $CE
     add  $10                                      ; $6F45: $C6 $10
     ld   [hl], a                                  ; $6F47: $77
     ld   hl, wEntitiesPosXTable                   ; $6F48: $21 $00 $C2
@@ -375,7 +375,7 @@ jr_005_6EB0:
     ld   [hl], a                                  ; $6F4C: $77
     ld   hl, wEntitiesPosYTable                   ; $6F4D: $21 $10 $C2
     add  hl, de                                   ; $6F50: $19
-    ldh  a, [hSwordIntersectedAreaY]              ; $6F51: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $6F51: $F0 $CD
     add  $10                                      ; $6F53: $C6 $10
     ld   [hl], a                                  ; $6F55: $77
     ld   hl, wEntitiesPosYTable                   ; $6F56: $21 $10 $C2
@@ -385,7 +385,7 @@ jr_005_6EB0:
     ld   hl, wEntitiesTransitionCountdownTable    ; $6F5D: $21 $E0 $C2
     add  hl, de                                   ; $6F60: $19
     ld   [hl], $2F                                ; $6F61: $36 $2F
-    ld   hl, wEntitiesUnknowTableY                ; $6F63: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $6F63: $21 $D0 $C3
     add  hl, bc                                   ; $6F66: $09
     ld   a, [hl]                                  ; $6F67: $7E
     cp   $03                                      ; $6F68: $FE $03
@@ -572,7 +572,7 @@ jr_005_7167:
     cp   $03                                      ; $7176: $FE $03
     jr   nz, jr_005_7188                          ; $7178: $20 $0E
 
-    ld   hl, wEntitiesUnknowTableR                ; $717A: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $717A: $21 $90 $C3
     add  hl, bc                                   ; $717D: $09
     ld   e, [hl]                                  ; $717E: $5E
     ld   hl, wEntitiesPrivateState2Table          ; $717F: $21 $C0 $C2
@@ -992,7 +992,7 @@ jr_005_7414:
     ld   a, [$D201]                               ; $7417: $FA $01 $D2
     ld   e, a                                     ; $741A: $5F
     ld   d, b                                     ; $741B: $50
-    ld   hl, wEntitiesUnknowTableR                ; $741C: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $741C: $21 $90 $C3
     add  hl, de                                   ; $741F: $19
     ld   a, [hl]                                  ; $7420: $7E
     cpl                                           ; $7421: $2F
@@ -1323,7 +1323,7 @@ jr_005_7621:
     dec  [hl]                                     ; $7634: $35
 
 jr_005_7635:
-    ld   hl, wEntitiesUnknowTableY                ; $7635: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7635: $21 $D0 $C3
     add  hl, bc                                   ; $7638: $09
     ld   a, [hl]                                  ; $7639: $7E
     inc  a                                        ; $763A: $3C
@@ -1378,7 +1378,7 @@ func_005_766E::
     call RenderActiveEntitySpritesRect            ; $767F: $CD $E6 $3C
     ld   a, $08                                   ; $7682: $3E $08
     call func_015_7964_trampoline                 ; $7684: $CD $A0 $3D
-    ld   hl, wEntitiesUnknowTableY                ; $7687: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $7687: $21 $D0 $C3
     add  hl, bc                                   ; $768A: $09
     ld   a, [hl]                                  ; $768B: $7E
     ldh  [hMultiPurpose0], a                      ; $768C: $E0 $D7

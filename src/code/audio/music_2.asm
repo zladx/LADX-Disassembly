@@ -1508,7 +1508,7 @@ label_01E_4905:
     call func_01E_4920                            ; $490E: $CD $20 $49
 
 jr_01E_4911:
-    ld   hl, hFF9C                                ; $4911: $21 $9C $FF
+    ld   hl, hLinkPhysicsModifier                 ; $4911: $21 $9C $FF
     add  hl, de                                   ; $4914: $19
     call func_01E_492B                            ; $4915: $CD $2B $49
     jp   label_01E_4770                           ; $4918: $C3 $70 $47

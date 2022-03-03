@@ -527,34 +527,41 @@ ENDC
 
     ld   c, a                                     ; $7B05: $4F
     cp   $25                                      ; $7B06: $FE $25
-    jr   nc, jr_002_7B14                          ; $7B08: $30 $0A
+    jr   nc, .jr_002_7B14                         ; $7B08: $30 $0A
 
+    ; If the music track has precedence over the PowerUp track,
+    ; skip the power-up music.
     ld   b, $00                                   ; $7B0A: $06 $00
     ld   hl, MusicOverridesPowerUpTrack           ; $7B0C: $21 $20 $41
     add  hl, bc                                   ; $7B0F: $09
     ld   a, [hl]                                  ; $7B10: $7E
     and  a                                        ; $7B11: $A7
-    jr   nz, jr_002_7B2A                          ; $7B12: $20 $16
+    jr   nz, .overridePowerUpTrack                ; $7B12: $20 $16
 
-jr_002_7B14:
+.jr_002_7B14
+
     ld   a, [wActivePowerUp]                      ; $7B14: $FA $7C $D4
     and  a                                        ; $7B17: $A7
     jr   z, SetNextMusicTrack                     ; $7B18: $28 $13
 
-    ldh  a, [hFFBD]                               ; $7B1A: $F0 $BD
+    ldh  a, [hDefaultMusicTrackAlt]               ; $7B1A: $F0 $BD
     cp   MUSIC_ACTIVE_POWER_UP                    ; $7B1C: $FE $49
     jr   z, SetNextMusicTrack.setMusicTrack       ; $7B1E: $28 $13
 
     call SetNextMusicTrack                        ; $7B20: $CD $2D $7B
     ld   a, MUSIC_ACTIVE_POWER_UP                 ; $7B23: $3E $49
     ldh  [hNextMusicTrackToFadeInto], a           ; $7B25: $E0 $B1
-    ldh  [hFFBD], a                               ; $7B27: $E0 $BD
+    ldh  [hDefaultMusicTrackAlt], a               ; $7B27: $E0 $BD
     ret                                           ; $7B29: $C9
 
-jr_002_7B2A:
+.overridePowerUpTrack
+    ; Copy the actual (non-power-up) music track to hDefaultMusicTrackAlt
     ld   a, c                                     ; $7B2A: $79
-    ldh  [hFFBD], a                               ; $7B2B: $E0 $BD
+    ldh  [hDefaultMusicTrackAlt], a               ; $7B2B: $E0 $BD
+    ; fallthrough
 
+; Inputs:
+;   c   index of the music track to play
 SetNextMusicTrack::
     ld   a, c                                     ; $7B2D: $79
     ldh  [hNextMusicTrackToFadeInto], a           ; $7B2E: $E0 $B1

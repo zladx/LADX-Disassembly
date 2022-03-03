@@ -49,7 +49,7 @@ jr_003_5282:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5284: $E0 $A1
 
 jr_003_5286:
-    ld   hl, wEntitiesUnknowTableY                ; $5286: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $5286: $21 $D0 $C3
     add  hl, bc                                   ; $5289: $09
     ld   a, [hl]                                  ; $528A: $7E
     inc  a                                        ; $528B: $3C

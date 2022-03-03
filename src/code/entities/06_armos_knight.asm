@@ -138,7 +138,7 @@ jr_006_5394:
     cp   $04                                      ; $53A6: $FE $04
     jr   nc, jr_006_53D3                          ; $53A8: $30 $29
 
-    ld   hl, wEntitiesUnknowTableY                ; $53AA: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $53AA: $21 $D0 $C3
     add  hl, bc                                   ; $53AD: $09
     ld   a, [hl]                                  ; $53AE: $7E
     cp   $02                                      ; $53AF: $FE $02
@@ -164,7 +164,7 @@ jr_006_5394:
     jr   jr_006_53F9                              ; $53D1: $18 $26
 
 jr_006_53D3:
-    ld   hl, wEntitiesUnknowTableY                ; $53D3: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $53D3: $21 $D0 $C3
     add  hl, bc                                   ; $53D6: $09
     ld   a, [hl]                                  ; $53D7: $7E
     cp   $01                                      ; $53D8: $FE $01

@@ -247,7 +247,7 @@ jr_004_4163:
     or   [hl]                                     ; $417B: $B6
     jr   z, jr_004_418D                           ; $417C: $28 $0F
 
-    ld   hl, wEntitiesUnknowTableR                ; $417E: $21 $90 $C3
+    ld   hl, wEntitiesPrivateState5Table          ; $417E: $21 $90 $C3
     add  hl, bc                                   ; $4181: $09
     ld   a, [hl]                                  ; $4182: $7E
     and  $01                                      ; $4183: $E6 $01
@@ -328,7 +328,7 @@ jr_004_41EC:
     ld   hl, wEntitiesStatusTable                   ; $41F6: $21 $80 $C2
     add  hl, bc                                   ; $41F9: $09
     ld   [hl], $07                                ; $41FA: $36 $07
-    ld   hl, wEntitiesUnknowTableW                ; $41FC: $21 $90 $C4
+    ld   hl, wEntitiesLiftedTable                 ; $41FC: $21 $90 $C4
     add  hl, bc                                   ; $41FF: $09
     ld   [hl], b                                  ; $4200: $70
     ldh  a, [hLinkDirection]                      ; $4201: $F0 $9E
@@ -634,7 +634,7 @@ jr_004_43DD:
     jr   nz, jr_004_4438                          ; $43EB: $20 $4B
 
     push hl                                       ; $43ED: $E5
-    ld   hl, wEntitiesUnknowTableY                ; $43EE: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $43EE: $21 $D0 $C3
     add  hl, bc                                   ; $43F1: $09
     ld   a, [hl]                                  ; $43F2: $7E
     ld   e, a                                     ; $43F3: $5F
@@ -692,7 +692,7 @@ jr_004_4438:
     jr   c, jr_004_4487                           ; $4444: $38 $41
 
     push bc                                       ; $4446: $C5
-    ld   hl, wEntitiesUnknowTableY                ; $4447: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $4447: $21 $D0 $C3
     add  hl, bc                                   ; $444A: $09
     ld   a, [hl]                                  ; $444B: $7E
     inc  [hl]                                     ; $444C: $34
@@ -736,7 +736,7 @@ jr_004_4487:
     and  a                                        ; $448C: $A7
     ret  z                                        ; $448D: $C8
 
-    ld   hl, wEntitiesUnknowTableY                ; $448E: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $448E: $21 $D0 $C3
     add  hl, bc                                   ; $4491: $09
     ld   a, [hl]                                  ; $4492: $7E
     and  $01                                      ; $4493: $E6 $01
@@ -929,7 +929,7 @@ jr_004_45A6:
     jr   c, jr_004_45F0                           ; $45B3: $38 $3B
 
     push bc                                       ; $45B5: $C5
-    ld   hl, wEntitiesUnknowTableY                ; $45B6: $21 $D0 $C3
+    ld   hl, wEntitiesInertiaTable                ; $45B6: $21 $D0 $C3
     add  hl, bc                                   ; $45B9: $09
     ld   a, [hl]                                  ; $45BA: $7E
     inc  [hl]                                     ; $45BB: $34

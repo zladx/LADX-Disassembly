@@ -45,9 +45,8 @@ wLinkOAMBuffer::
 wDynamicOAMBuffer::
   ds 4 * 28 ; C030 - C09F
 
-; Unlabeled
-wC0A0::
-  ds $60 ; C0A0
+; Unused
+ds $60 ; C0A0-C0FF
 
 ; Table of the scrollX offset to add for each screen section being drawn
 wScrollXOffsetForSection::

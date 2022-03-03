@@ -274,7 +274,7 @@ jr_018_5B6A:
     or   [hl]                                     ; $5B70: $B6
     ret  nz                                       ; $5B71: $C0
 
-    ld   a, [$DB10]                               ; $5B72: $FA $10 $DB
+    ld   a, [wDB10]                               ; $5B72: $FA $10 $DB
     and  a                                        ; $5B75: $A7
     jp   z, label_018_5C6A                        ; $5B76: $CA $6A $5C
 
@@ -367,7 +367,7 @@ func_018_5C07::
     and  a                                        ; $5C0A: $A7
     ret  nz                                       ; $5C0B: $C0
 
-    ld   a, [$DB10]                               ; $5C0C: $FA $10 $DB
+    ld   a, [wDB10]                               ; $5C0C: $FA $10 $DB
     dec  a                                        ; $5C0F: $3D
     ld   e, a                                     ; $5C10: $5F
     ld   a, [wIsOnLowHeath]                               ; $5C11: $FA $63 $C1
@@ -400,7 +400,7 @@ jr_018_5C32:
 
 func_018_5C39::
     xor  a                                        ; $5C39: $AF
-    ld   [$DB10], a                               ; $5C3A: $EA $10 $DB
+    ld   [wDB10], a                               ; $5C3A: $EA $10 $DB
     ld   [wC167], a                               ; $5C3D: $EA $67 $C1
     call IncrementEntityState                     ; $5C40: $CD $12 $3B
     ld   [hl], b                                  ; $5C43: $70

@@ -50,7 +50,7 @@ UseOcarina::
     and  $07                                      ;
     jr   z, jr_002_4241                           ; If no, play the tone-deaf notes
 
-    ld   a, [$DB4A]                               ; $4218: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                  ; $4218: $FA $4A $DB
     cp   $01                                      ; $421B: $FE $01
     jr   z, jr_002_422D                           ; $421D: $28 $0E
 
@@ -1438,7 +1438,7 @@ jr_002_4A7C:
     and  a                                        ; $4A8B: $A7
     jr   z, jr_002_4AA2                           ; $4A8C: $28 $14
 
-    ld   a, [$DB4A]                               ; $4A8E: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                  ; $4A8E: $FA $4A $DB
     cp   $01                                      ; $4A91: $FE $01
     jr   z, jr_002_4AB2                           ; $4A93: $28 $1D
 
@@ -1462,7 +1462,7 @@ jr_002_4AA2:
 jr_002_4AB2:
     xor  a                                        ; $4AB2: $AF
     ld   [wC167], a                               ; $4AB3: $EA $67 $C1
-    ld   a, [$DB4A]                               ; $4AB6: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                  ; $4AB6: $FA $4A $DB
     cp   $01                                      ; $4AB9: $FE $01
     jr   nz, jr_002_4AD0                          ; $4ABB: $20 $13
 
@@ -6974,7 +6974,7 @@ jr_002_7213:
     call OpenDialogInTable1                       ; $721C: $CD $73 $23
     ld   a, [wIsOnLowHeath]                               ; $721F: $FA $63 $C1
     inc  a                                        ; $7222: $3C
-    ld   [$DB10], a                               ; $7223: $EA $10 $DB
+    ld   [wDB10], a                               ; $7223: $EA $10 $DB
     call disableMovementInTransition              ; $7226: $CD $9E $0C
     jp   collisionEnd                             ; $7229: $C3 $54 $74
 

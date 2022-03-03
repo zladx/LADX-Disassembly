@@ -2837,7 +2837,7 @@ jr_020_5B8B:
     and  a                                        ; $5B8E: $A7
     jp   z, label_020_5B62                        ; $5B8F: $CA $62 $5B
 
-    ld   a, [$DB4A]                               ; $5B92: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                  ; $5B92: $FA $4A $DB
     inc  a                                        ; $5B95: $3C
     swap a                                        ; $5B96: $CB $37
     call func_020_5BA8                            ; $5B98: $CD $A8 $5B
@@ -3727,7 +3727,7 @@ jr_020_619A:
     jr   z, jr_020_61C5                           ; $61AB: $28 $18
 
 jr_020_61AD:
-    ld   hl, $DB4A                                ; $61AD: $21 $4A $DB
+    ld   hl, wSelectedSongIndex                   ; $61AD: $21 $4A $DB
     ld   a, [hl]                                  ; $61B0: $7E
     inc  a                                        ; $61B1: $3C
     cp   $03                                      ; $61B2: $FE $03
@@ -3751,7 +3751,7 @@ jr_020_61C5:
     jr   z, jr_020_61E4                           ; $61C9: $28 $19
 
 jr_020_61CB:
-    ld   hl, $DB4A                                ; $61CB: $21 $4A $DB
+    ld   hl, wSelectedSongIndex                   ; $61CB: $21 $4A $DB
     ld   a, [hl]                                  ; $61CE: $7E
     dec  a                                        ; $61CF: $3D
     cp   $80                                      ; $61D0: $FE $80
@@ -3781,7 +3781,7 @@ jr_020_61ED:
     ld   a, $38                                   ; $61F0: $3E $38
     ld   [hl+], a                                 ; $61F2: $22
     push hl                                       ; $61F3: $E5
-    ld   a, [$DB4A]                               ; $61F4: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                  ; $61F4: $FA $4A $DB
     ld   e, a                                     ; $61F7: $5F
     ld   d, $00                                   ; $61F8: $16 $00
     ld   hl, Data_020_610B                        ; $61FA: $21 $0B $61

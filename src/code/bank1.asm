@@ -1259,12 +1259,12 @@ Data_001_5D3E::
     db  $00                                       ; $5D52
 
 label_001_5D53::
-    ld   a, [$D600]                               ; $5D53: $FA $00 $D6
+    ld   a, [wRequests]                           ; $5D53: $FA $00 $D6
     ld   e, a                                     ; $5D56: $5F
     ld   d, $00                                   ; $5D57: $16 $00
     add  a, $14                                   ; $5D59: $C6 $14
-    ld   [$D600], a                               ; $5D5B: $EA $00 $D6
-    ld   hl, $D601                                ; $5D5E: $21 $01 $D6
+    ld   [wRequests], a                           ; $5D5B: $EA $00 $D6
+    ld   hl, wRequest                             ; $5D5E: $21 $01 $D6
     add  hl, de                                   ; $5D61: $19
     push de                                       ; $5D62: $D5
     ld   bc, Data_001_5D14                        ; $5D63: $01 $14 $5D
@@ -2007,7 +2007,7 @@ CreateFollowingNpcEntity::
     ldh  a, [hMapRoom]                            ; $6025: $F0 $F6
     cp   ROOM_SECTION_OW_GHOST_TRIGGER            ; $6027: $FE $40
     jr   c, .ghostEnd                             ; $6029: $38 $54
-    ld   a, [$DB68]                               ; $602B: $FA $68 $DB
+    ld   a, [wHasInstrument4]                     ; $602B: $FA $68 $DB
     and  $02                                      ; $602E: $E6 $02
     jr   z, .ghostEnd                             ; $6030: $28 $4D
     ld   a, [wPowerBraceletLevel]                 ; $6032: $FA $43 $DB
@@ -2152,7 +2152,7 @@ CreateFollowingNpcEntity::
     ldh  a, [hLinkDirection]                      ; $60F7: $F0 $9E
     ld   hl, wD1B5                                ; $60F9: $21 $B5 $D1
     call .decrementConsecutiveBytes               ; $60FC: $CD $18 $61
-    ld   a, [$DB10]                               ; $60FF: $FA $10 $DB
+    ld   a, [wDB10]                               ; $60FF: $FA $10 $DB
     and  a                                        ; $6102: $A7
     jr   z, .jp_6117                              ; $6103: $28 $12
     ldh  a, [hLinkPositionX]                      ; $6105: $F0 $98

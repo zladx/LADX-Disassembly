@@ -7228,7 +7228,7 @@ boughtOcarina:
     jp   GiveInventoryItem_trampoline             ; $7A8E: $C3 $6B $3E
 
 boughtShop08:                           ; POI: Appears as a guardian acorn, but...???
-    ld   a, [$DB47]                     ; Add 10 to DB47 (?)
+    ld   a, [wDB47]                     ; Add 10 to DB47 (?)
     add  $0A                            ; This code is similar to that for adding bought arrows
     daa                                 ; But DB47 isn't one of those (?)
     jr   nc, jr_004_7A9B                ; Still attempts to cap to 99
@@ -7236,7 +7236,7 @@ boughtShop08:                           ; POI: Appears as a guardian acorn, but.
     ld   a, $99                         ; ????????
 
 jr_004_7A9B:
-    ld   [$DB47], a                               ; $7A9B: $EA $47 $DB
+    ld   [wDB47], a                               ; $7A9B: $EA $47 $DB
     ret                                           ; $7A9E: $C9
 
 boughtMedicine:

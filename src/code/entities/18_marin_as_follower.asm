@@ -387,7 +387,7 @@ func_018_5C07::
 
 jr_018_5C27:
     ld   e, LOW($21B) ; "I thought you'd never come back!" ; $5C27: $1E $1B
-    ld   a, [$DB47]                               ; $5C29: $FA $47 $DB
+    ld   a, [wDB47]                               ; $5C29: $FA $47 $DB
     cp   $80                                      ; $5C2C: $FE $80
     jr   nc, jr_018_5C32                          ; $5C2E: $30 $02
 

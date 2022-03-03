@@ -624,7 +624,7 @@ func_028_43CC::
     and  a                                      ; $43CF: $A7
     jr   nz, .else_43DB_28                      ; $43D0: $20 $09
 
-    ld   a, [$DC0D]                             ; $43D2: $FA $0D $DC
+    ld   a, [wPhotos2]                          ; $43D2: $FA $0D $DC
     and  %10000000                              ; $43D5: $E6 $80
     jr   z, .else_43DB_28                       ; $43D7: $28 $02
 
@@ -782,7 +782,7 @@ JumpTable_028_44AA:
     xor  a                                      ; $44C1: JumpTable_028_44AA $AF
     ld   [wGameplaySubtype], a                  ; $44C2: JumpTable_028_44AA $EA $96 $DB
     ld   a, $18                                 ; $44C5: JumpTable_028_44AA $3E $18
-    ld   [$DE05], a                             ; $44C7: JumpTable_028_44AA $EA $05 $DE
+    ld   [wDE05], a                             ; $44C7: JumpTable_028_44AA $EA $05 $DE
     ld   a, $07                                 ; $44CA: JumpTable_028_44AA $3E $07
     ldh  [hVolumeRight], a                    ; $44CC: JumpTable_028_44AA $E0 $A9
     ld   a, $70                                 ; $44CE: JumpTable_028_44AA $3E $70

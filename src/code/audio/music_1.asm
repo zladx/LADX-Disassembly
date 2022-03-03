@@ -561,8 +561,8 @@ jr_01B_435E:
     jr   nz, .loop                                ; $43B4: $20 $F8
 
     xor  a                                        ; $43B6: $AF
-    ld   [$D31E], a                               ; $43B7: $EA $1E $D3
-    ld   [$D32E], a                               ; $43BA: $EA $2E $D3
+    ld   [wD31E], a                               ; $43B7: $EA $1E $D3
+    ld   [wD320 + $0E], a                               ; $43BA: $EA $2E $D3
     ld   [wD330 + $0E], a                               ; $43BD: $EA $3E $D3
     ret                                           ; $43C0: $C9
 
@@ -1248,9 +1248,9 @@ UpdateNextMusicChannel_1B::
 
 .lastChannel
     ; This was the last channel. Done updating sound for now.
-    ld   hl, $D31E                                ; $46EF: $21 $1E $D3
+    ld   hl, wD31E                                ; $46EF: $21 $1E $D3
     inc  [hl]                                     ; $46F2: $34
-    ld   hl, $D32E                                ; $46F3: $21 $2E $D3
+    ld   hl, wD320 + $0E                                ; $46F3: $21 $2E $D3
     inc  [hl]                                     ; $46F6: $34
     ld   hl, wD330 + $0E                                ; $46F7: $21 $3E $D3
     inc  [hl]                                     ; $46FA: $34
@@ -1348,7 +1348,7 @@ jr_01B_4762:
     jp   label_01B_4720                           ; $4784: $C3 $20 $47
 
 func_01B_4787::
-    ld   a, [$D31B]                               ; $4787: $FA $1B $D3
+    ld   a, [wD31B]                               ; $4787: $FA $1B $D3
     and  a                                        ; $478A: $A7
     jr   nz, jr_01B_47AE                          ; $478B: $20 $21
 
@@ -1359,35 +1359,35 @@ func_01B_4787::
     and  $0F                                      ; $4793: $E6 $0F
     ld   b, a                                     ; $4795: $47
     ld   hl, wD307                                ; $4796: $21 $07 $D3
-    ld   a, [$D31E]                               ; $4799: $FA $1E $D3
+    ld   a, [wD31E]                               ; $4799: $FA $1E $D3
     cp   [hl]                                     ; $479C: $BE
     jr   nz, jr_01B_47AE                          ; $479D: $20 $0F
 
     ld   c, $12                                   ; $479F: $0E $12
     ld   de, wD31A                                ; $47A1: $11 $1A $D3
-    ld   a, [$D31F]                               ; $47A4: $FA $1F $D3
+    ld   a, [wD31F]                               ; $47A4: $FA $1F $D3
     bit  7, a                                     ; $47A7: $CB $7F
     jr   nz, jr_01B_47AE                          ; $47A9: $20 $03
 
     call func_01B_47D2                            ; $47AB: $CD $D2 $47
 
 jr_01B_47AE:
-    ld   a, [$D32B]                               ; $47AE: $FA $2B $D3
+    ld   a, [wD320 + $0B]                               ; $47AE: $FA $2B $D3
     and  a                                        ; $47B1: $A7
     ret  nz                                       ; $47B2: $C0
 
-    ld   a, [$D327]                               ; $47B3: $FA $27 $D3
+    ld   a, [wD320 + $07]                               ; $47B3: $FA $27 $D3
     and  a                                        ; $47B6: $A7
     ret  z                                        ; $47B7: $C8
 
     and  $0F                                      ; $47B8: $E6 $0F
     ld   b, a                                     ; $47BA: $47
     ld   hl, wD308                                ; $47BB: $21 $08 $D3
-    ld   a, [$D32E]                               ; $47BE: $FA $2E $D3
+    ld   a, [wD320 + $0E]                               ; $47BE: $FA $2E $D3
     cp   [hl]                                     ; $47C1: $BE
     ret  nz                                       ; $47C2: $C0
 
-    ld   a, [$D32F]                               ; $47C3: $FA $2F $D3
+    ld   a, [wD320 + $0F]                               ; $47C3: $FA $2F $D3
     bit  7, a                                     ; $47C6: $CB $7F
     ret  nz                                       ; $47C8: $C0
 
@@ -1786,8 +1786,8 @@ StopSquareAndWaveChannels_1B::
     xor  a                                        ; $4E57: $AF
     ld   [wD361], a                               ; $4E58: $EA $61 $D3
     ld   [wD371], a                               ; $4E5B: $EA $71 $D3
-    ld   [$D31F], a                               ; $4E5E: $EA $1F $D3
-    ld   [$D32F], a                               ; $4E61: $EA $2F $D3
+    ld   [wD31F], a                               ; $4E5E: $EA $1F $D3
+    ld   [wD320 + $0F], a                               ; $4E61: $EA $2F $D3
     ld   [wD330 + $0F], a                               ; $4E64: $EA $3F $D3
     ld   [wD39E], a                               ; $4E67: $EA $9E $D3
     ld   [wD39F], a                               ; $4E6A: $EA $9F $D3

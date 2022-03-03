@@ -3263,11 +3263,14 @@ wFarcallAdressLow::
 wFarcallReturnBank::
   ds 1 ; DE04
 
+wDE05:
+  ds 1 ; DE05
+
 ; maximal depth the stack can grow
-wStackMax equ $DE05
+wStackMax equ $DE04
 ; top of WRAM is used as Stack
 wStack::
-  ds $DFFF - $DE05 +1 ; DE05 - DFFF
+  ds $DFFF - @ + 1 ; DE04 - DFFF
 
 ; init puts the SP here
 wStackTop equ $DFFF

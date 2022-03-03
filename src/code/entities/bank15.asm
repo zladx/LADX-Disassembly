@@ -7429,7 +7429,7 @@ ShouldLinkTalkToEntity_15::
     or   [hl]                                     ; $7AF1: $B6
     ld   hl, wC134                                ; $7AF2: $21 $34 $C1
     or   [hl]                                     ; $7AF5: $B6
-    ld   hl, $DE05                                ; $7AF6: $21 $05 $DE
+    ld   hl, wDE05                                ; $7AF6: $21 $05 $DE
     or   [hl]                                     ; $7AF9: $B6
     jr   nz, jr_015_7B0B                          ; $7AFA: $20 $0F
 

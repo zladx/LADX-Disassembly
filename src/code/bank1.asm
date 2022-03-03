@@ -1448,7 +1448,7 @@ jr_001_5E3A::
     call EnableExternalRAMWriting                 ; $5E58: $CD $D0 $27
     ldi  [hl], a                                  ; $5E5B: $22
     call EnableExternalRAMWriting                 ; $5E5C: $CD $D0 $27
-    ld   a, [$DC0D]                               ; $5E5F: $FA $0D $DC
+    ld   a, [wPhotos2]                            ; $5E5F: $FA $0D $DC
     call EnableExternalRAMWriting                 ; $5E62: $CD $D0 $27
     ldi  [hl], a                                  ; $5E65: $22
     ret                                           ; $5E66: $C9

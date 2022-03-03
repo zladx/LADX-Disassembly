@@ -573,8 +573,8 @@ jr_01E_4432:
     jr   nz, jr_01E_4432                          ; $4438: $20 $F8
 
     xor  a                                        ; $443A: $AF
-    ld   [$D31E], a                               ; $443B: $EA $1E $D3
-    ld   [$D32E], a                               ; $443E: $EA $2E $D3
+    ld   [wD31E], a                               ; $443B: $EA $1E $D3
+    ld   [wD320 + $0E], a                               ; $443E: $EA $2E $D3
     ld   [wD330 + $0E], a                               ; $4441: $EA $3E $D3
     ret                                           ; $4444: $C9
 
@@ -1215,9 +1215,9 @@ label_01E_4752:
     jp   label_01E_4599                           ; $4760: $C3 $99 $45
 
 jr_01E_4763:
-    ld   hl, $D31E                                ; $4763: $21 $1E $D3
+    ld   hl, wD31E                                ; $4763: $21 $1E $D3
     inc  [hl]                                     ; $4766: $34
-    ld   hl, $D32E                                ; $4767: $21 $2E $D3
+    ld   hl, wD320 + $0E                                ; $4767: $21 $2E $D3
     inc  [hl]                                     ; $476A: $34
     ld   hl, wD330 + $0E                                ; $476B: $21 $3E $D3
     inc  [hl]                                     ; $476E: $34
@@ -1312,7 +1312,7 @@ jr_01E_47D6:
     jp   label_01E_4794                           ; $47F3: $C3 $94 $47
 
 func_01E_47F6::
-    ld   a, [$D31B]                               ; $47F6: $FA $1B $D3
+    ld   a, [wD31B]                               ; $47F6: $FA $1B $D3
     and  a                                        ; $47F9: $A7
     jr   nz, jr_01E_481D                          ; $47FA: $20 $21
 
@@ -1323,40 +1323,40 @@ func_01E_47F6::
     and  $0F                                      ; $4802: $E6 $0F
     ld   b, a                                     ; $4804: $47
     ld   hl, wD307                                ; $4805: $21 $07 $D3
-    ld   a, [$D31E]                               ; $4808: $FA $1E $D3
+    ld   a, [wD31E]                               ; $4808: $FA $1E $D3
     cp   [hl]                                     ; $480B: $BE
     jr   nz, jr_01E_481D                          ; $480C: $20 $0F
 
     ld   c, $12                                   ; $480E: $0E $12
     ld   de, wD31A                                ; $4810: $11 $1A $D3
-    ld   a, [$D31F]                               ; $4813: $FA $1F $D3
+    ld   a, [wD31F]                               ; $4813: $FA $1F $D3
     bit  7, a                                     ; $4816: $CB $7F
     jr   nz, jr_01E_481D                          ; $4818: $20 $03
 
     call func_01E_4841                            ; $481A: $CD $41 $48
 
 jr_01E_481D:
-    ld   a, [$D32B]                               ; $481D: $FA $2B $D3
+    ld   a, [wD320 + $0B]                               ; $481D: $FA $2B $D3
     and  a                                        ; $4820: $A7
     ret  nz                                       ; $4821: $C0
 
-    ld   a, [$D327]                               ; $4822: $FA $27 $D3
+    ld   a, [wD320 + $07]                               ; $4822: $FA $27 $D3
     and  a                                        ; $4825: $A7
     ret  z                                        ; $4826: $C8
 
     and  $0F                                      ; $4827: $E6 $0F
     ld   b, a                                     ; $4829: $47
     ld   hl, wD308                                ; $482A: $21 $08 $D3
-    ld   a, [$D32E]                               ; $482D: $FA $2E $D3
+    ld   a, [wD320 + $0E]                               ; $482D: $FA $2E $D3
     cp   [hl]                                     ; $4830: $BE
     ret  nz                                       ; $4831: $C0
 
-    ld   a, [$D32F]                               ; $4832: $FA $2F $D3
+    ld   a, [wD320 + $0F]                               ; $4832: $FA $2F $D3
     bit  7, a                                     ; $4835: $CB $7F
     ret  nz                                       ; $4837: $C0
 
     ld   c, $17                                   ; $4838: $0E $17
-    ld   de, $D32A                                ; $483A: $11 $2A $D3
+    ld   de, wD320 + $0A                                ; $483A: $11 $2A $D3
     call func_01E_4841                            ; $483D: $CD $41 $48
     ret                                           ; $4840: $C9
 
@@ -1689,8 +1689,8 @@ func_01E_4D2A::
     xor  a                                        ; $4D2A: $AF
     ld   [wD361], a                               ; $4D2B: $EA $61 $D3
     ld   [wD371], a                               ; $4D2E: $EA $71 $D3
-    ld   [$D31F], a                               ; $4D31: $EA $1F $D3
-    ld   [$D32F], a                               ; $4D34: $EA $2F $D3
+    ld   [wD31F], a                               ; $4D31: $EA $1F $D3
+    ld   [wD320 + $0F], a                               ; $4D34: $EA $2F $D3
     ld   [wD330 + $0F], a                               ; $4D37: $EA $3F $D3
     ld   [wD39E], a                               ; $4D3A: $EA $9E $D3
     ld   [wD39F], a                               ; $4D3D: $EA $9F $D3

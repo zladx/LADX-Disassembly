@@ -41,7 +41,7 @@ BeginJingleTreasureFound::
     ldh  [rNR30], a                               ; $4234: $E0 $1A
     ld   a, $01                                   ; $4236: $3E $01
     ld   [wD3C8], a                               ; $4238: $EA $C8 $D3
-    ld   hl, $D32F                                ; $423B: $21 $2F $D3
+    ld   hl, wD320 + $0F                                ; $423B: $21 $2F $D3
     set  7, [hl]                                  ; $423E: $CB $FE
     ld   hl, wD330 + $0F                                ; $4240: $21 $3F $D3
     set  7, [hl]                                  ; $4243: $CB $FE
@@ -105,7 +105,7 @@ ContinueJingleTreasureFound::
     jp   WriteChannel3AndDE                       ; $42B8: $C3 $85 $7A
 
 .jr_01F_42BB:
-    ld   hl, $D32F                                ; $42BB: $21 $2F $D3
+    ld   hl, wD320 + $0F                                ; $42BB: $21 $2F $D3
     res  7, [hl]                                  ; $42BE: $CB $BE
     ld   hl, wD330 + $0F                                ; $42C0: $21 $3F $D3
     res  7, [hl]                                  ; $42C3: $CB $BE
@@ -585,7 +585,7 @@ BeginJingleUnknown10::
 BeginJingleOpenInventory::
     ld   a, $17                                   ; $45F3: $3E $17
     ld   [wD3BC], a                               ; $45F5: $EA $BC $D3
-    ld   hl, $D32F                                ; $45F8: $21 $2F $D3
+    ld   hl, wD320 + $0F                                ; $45F8: $21 $2F $D3
     set  7, [hl]                                  ; $45FB: $CB $FE
     ld   hl, Data_01F_4632                        ; $45FD: $21 $32 $46
     call func_01F_7AD0                            ; $4600: $CD $D0 $7A
@@ -624,7 +624,7 @@ Data_01F_4637::
     db   $00, $85, $0B, $00, $81, $12
 
 label_01F_463D:
-    ld   hl, $D32F                                ; $463D: $21 $2F $D3
+    ld   hl, wD320 + $0F                                ; $463D: $21 $2F $D3
     res  7, [hl]                                  ; $4640: $CB $BE
     ld   hl, Data_01F_431D                        ; $4642: $21 $1D $43
     call WriteChannel2AndDE                       ; $4645: $CD $7F $7A
@@ -637,7 +637,7 @@ BeginJingleCloseInventory::
 
     ld   a, $08                                   ; $4653: $3E $08
     ld   [wD3BC], a                               ; $4655: $EA $BC $D3
-    ld   hl, $D32F                                ; $4658: $21 $2F $D3
+    ld   hl, wD320 + $0F                                ; $4658: $21 $2F $D3
     set  7, [hl]                                  ; $465B: $CB $FE
     ld   hl, Data_01F_4692                        ; $465D: $21 $92 $46
     call func_01F_7AD0                            ; $4660: $CD $D0 $7A
@@ -1286,7 +1286,7 @@ Data_01F_4A64::
     db   $15, $38, $90, $34, $C6, $02, $15, $38, $D0, $30, $C6, $02
 
 BeginJingleDungeonOpened::
-    ld   hl, $D32F                                ; $4A70: $21 $2F $D3
+    ld   hl, wD320 + $0F                                ; $4A70: $21 $2F $D3
     set  7, [hl]                                  ; $4A73: $CB $FE
     ld   hl, Data_01F_4AAD                        ; $4A75: $21 $AD $4A
     jp   label_01F_5395                           ; $4A78: $C3 $95 $53
@@ -1308,7 +1308,7 @@ ContinueJingleDungeonOpened::
     jp   WriteChannel1AndDE                       ; $4A94: $C3 $79 $7A
 
 .jr_01F_4A97:
-    ld   hl, $D32F                                ; $4A97: $21 $2F $D3
+    ld   hl, wD320 + $0F                                ; $4A97: $21 $2F $D3
     res  7, [hl]                                  ; $4A9A: $CB $BE
     jp   label_01F_53B5                           ; $4A9C: $C3 $B5 $53
 
@@ -2640,9 +2640,9 @@ label_01F_539A:
     ld   [wD390], a                               ; $53A1: $EA $90 $D3
     ld   [wD394], a                               ; $53A4: $EA $94 $D3
     ld   [wD3E2], a                               ; $53A7: $EA $E2 $D3
-    ld   a, [$D31F]                               ; $53AA: $FA $1F $D3
+    ld   a, [wD31F]                               ; $53AA: $FA $1F $D3
     set  7, a                                     ; $53AD: $CB $FF
-    ld   [$D31F], a                               ; $53AF: $EA $1F $D3
+    ld   [wD31F], a                               ; $53AF: $EA $1F $D3
     jp   WriteChannel1AndDE                       ; $53B2: $C3 $79 $7A
 
 label_01F_53B5:
@@ -2658,9 +2658,9 @@ func_01F_53BB::
     ld   [wD3BC], a                               ; $53C7: $EA $BC $D3
     ld   [wD3A0], a                               ; $53CA: $EA $A0 $D3
     ld   [wD3C6], a                               ; $53CD: $EA $C6 $D3
-    ld   a, [$D31F]                               ; $53D0: $FA $1F $D3
+    ld   a, [wD31F]                               ; $53D0: $FA $1F $D3
     res  7, a                                     ; $53D3: $CB $BF
-    ld   [$D31F], a                               ; $53D5: $EA $1F $D3
+    ld   [wD31F], a                               ; $53D5: $EA $1F $D3
     ret                                           ; $53D8: $C9
 
 Data_01F_53D9::
@@ -3130,7 +3130,7 @@ func_01F_572C::
     jp   func_01F_635A                            ; $572F: $C3 $5A $63
 
 func_01F_5732::
-    ld   hl, $D32F                                ; $5732: $21 $2F $D3
+    ld   hl, wD320 + $0F                                ; $5732: $21 $2F $D3
     set  7, [hl]                                  ; $5735: $CB $FE
     call func_01F_572C                            ; $5737: $CD $2C $57
     ld   hl, Data_01F_5790                        ; $573A: $21 $90 $57
@@ -3159,7 +3159,7 @@ label_01F_5751:
 label_01F_575C:
     ld   hl, Data_01F_431D                        ; $575C: $21 $1D $43
     call WriteChannel2AndDE                       ; $575F: $CD $7F $7A
-    ld   hl, $D32F                                ; $5762: $21 $2F $D3
+    ld   hl, wD320 + $0F                                ; $5762: $21 $2F $D3
     res  7, [hl]                                  ; $5765: $CB $BE
     jp   label_01F_6327                           ; $5767: $C3 $27 $63
 
@@ -3245,7 +3245,7 @@ Data_01F_57F9::
     db   $80, $20, $79, $87, $48
 
 func_01F_57FE::
-    ld   hl, $D32F                                ; $57FE: $21 $2F $D3
+    ld   hl, wD320 + $0F                                ; $57FE: $21 $2F $D3
     set  7, [hl]                                  ; $5801: $CB $FE
     call func_01F_572C                            ; $5803: $CD $2C $57
     ld   hl, Data_01F_584B                        ; $5806: $21 $4B $58
@@ -4458,7 +4458,7 @@ func_01F_61A2::
     ld   [wD371], a                               ; $61AA: $EA $71 $D3
     ld   a, $01                                   ; $61AD: $3E $01
     ld   [wD3C8], a                               ; $61AF: $EA $C8 $D3
-    ld   hl, $D32F                                ; $61B2: $21 $2F $D3
+    ld   hl, wD320 + $0F                                ; $61B2: $21 $2F $D3
     set  7, [hl]                                  ; $61B5: $CB $FE
     xor  a                                        ; $61B7: $AF
     ld   [wD392], a                               ; $61B8: $EA $92 $D3
@@ -4500,9 +4500,9 @@ jr_01F_61ED:
     ld   [wD396], a                               ; $61F1: $EA $96 $D3
     ld   [wD371], a                               ; $61F4: $EA $71 $D3
     ld   [wD3C8], a                               ; $61F7: $EA $C8 $D3
-    ld   hl, $D32F                                ; $61FA: $21 $2F $D3
+    ld   hl, wD320 + $0F                                ; $61FA: $21 $2F $D3
     res  7, [hl]                                  ; $61FD: $CB $BE
-    ld   hl, $D32F                                ; $61FF: $21 $2F $D3
+    ld   hl, wD320 + $0F                                ; $61FF: $21 $2F $D3
     res  7, [hl]                                  ; $6202: $CB $BE
     ret                                           ; $6204: $C9
 
@@ -7230,7 +7230,7 @@ Data_01F_72DF::
 
 func_01F_72E4::
     ld   a, $2B                                   ; $72E4: $3E $2B
-    ld   [$D3DF], a                               ; $72E6: $EA $DF $D3
+    ld   [wD3DF], a                               ; $72E6: $EA $DF $D3
     ld   a, $15                                   ; $72E9: $3E $15
     ld   [wD3E0], a                               ; $72EB: $EA $E0 $D3
     ld   hl, Data_01F_7415                        ; $72EE: $21 $15 $74
@@ -7907,7 +7907,7 @@ Data_01F_7717::
 func_01F_771C::
     xor  a                                        ; $771C: $AF
     ld   [wD361], a                               ; $771D: $EA $61 $D3
-    ld   hl, $D31F                                ; $7720: $21 $1F $D3
+    ld   hl, wD31F                                ; $7720: $21 $1F $D3
     set  7, [hl]                                  ; $7723: $CB $FE
     ld   a, $01                                   ; $7725: $3E $01
     ld   [wD3C6], a                               ; $7727: $EA $C6 $D3
@@ -7938,7 +7938,7 @@ jr_01F_774F:
     ld   [wD3C6], a                               ; $774F: $EA $C6 $D3
 
 jr_01F_7752:
-    ld   hl, $D31F                                ; $7752: $21 $1F $D3
+    ld   hl, wD31F                                ; $7752: $21 $1F $D3
     res  7, [hl]                                  ; $7755: $CB $BE
     jp   func_01F_7A07                            ; $7757: $C3 $07 $7A
 
@@ -7958,7 +7958,7 @@ Data_01F_7769::
 func_01F_776E::
     xor  a                                        ; $776E: $AF
     ld   [wD361], a                               ; $776F: $EA $61 $D3
-    ld   hl, $D31F                                ; $7772: $21 $1F $D3
+    ld   hl, wD31F                                ; $7772: $21 $1F $D3
     set  7, [hl]                                  ; $7775: $CB $FE
     ld   a, $01                                   ; $7777: $3E $01
     ld   [wD3C6], a                               ; $7779: $EA $C6 $D3
@@ -8008,7 +8008,7 @@ jr_01F_77B3:
 func_01F_77C0::
     xor  a                                        ; $77C0: $AF
     ld   [wD3C6], a                               ; $77C1: $EA $C6 $D3
-    ld   hl, $D31F                                ; $77C4: $21 $1F $D3
+    ld   hl, wD31F                                ; $77C4: $21 $1F $D3
     res  7, [hl]                                  ; $77C7: $CB $BE
     ld   hl, Data_01F_53D9                        ; $77C9: $21 $D9 $53
     call WriteChannel1AndDE                       ; $77CC: $CD $79 $7A
@@ -8402,7 +8402,7 @@ label_01F_7A2C:
 func_01F_7A33::
     ld   a, [wActiveNoiseSfx]                     ; $7A33: $FA $78 $D3
     ld   [wD379], a                               ; $7A36: $EA $79 $D3
-    ld   hl, $D32F                                ; $7A39: $21 $2F $D3
+    ld   hl, wD320 + $0F                                ; $7A39: $21 $2F $D3
     set  7, [hl]                                  ; $7A3C: $CB $FE
     ld   a, $01                                   ; $7A3E: $3E $01
     ld   [wD3C9], a                               ; $7A40: $EA $C9 $D3
@@ -8419,7 +8419,7 @@ label_01F_7A51:
     ld   [wD398], a                               ; $7A55: $EA $98 $D3
     ld   [wD379], a                               ; $7A58: $EA $79 $D3
     ld   [wD3C9], a                               ; $7A5B: $EA $C9 $D3
-    ld   hl, $D32F                                ; $7A5E: $21 $2F $D3
+    ld   hl, wD320 + $0F                                ; $7A5E: $21 $2F $D3
     res  7, [hl]                                  ; $7A61: $CB $BE
     ret                                           ; $7A63: $C9
 
@@ -8645,8 +8645,8 @@ func_01F_7B5C::
     ld   [wD361], a                               ; $7B6A: $EA $61 $D3
     ld   [wD371], a                               ; $7B6D: $EA $71 $D3
     ld   [wD379], a                               ; $7B70: $EA $79 $D3
-    ld   [$D31F], a                               ; $7B73: $EA $1F $D3
-    ld   [$D32F], a                               ; $7B76: $EA $2F $D3
+    ld   [wD31F], a                               ; $7B73: $EA $1F $D3
+    ld   [wD320 + $0F], a                               ; $7B76: $EA $2F $D3
     ld   [wD330 + $0F], a                               ; $7B79: $EA $3F $D3
     ld   [wD34F], a                               ; $7B7C: $EA $4F $D3
     ld   [wD39E], a                               ; $7B7F: $EA $9E $D3

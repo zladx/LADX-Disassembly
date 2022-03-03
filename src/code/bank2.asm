@@ -3235,12 +3235,12 @@ label_002_5487:
     ld   [wC134], a                               ; $5495: $EA $34 $C1
 
 jr_002_5498:
-    ld   a, [$DE05]                               ; $5498: $FA $05 $DE
+    ld   a, [wDE05]                               ; $5498: $FA $05 $DE
     and  a                                        ; $549B: $A7
     jr   z, jr_002_54A2                           ; $549C: $28 $04
 
     dec  a                                        ; $549E: $3D
-    ld   [$DE05], a                               ; $549F: $EA $05 $DE
+    ld   [wDE05], a                               ; $549F: $EA $05 $DE
 
 jr_002_54A2:
     ldh  a, [hPressedButtonsMask]                 ; $54A2: $F0 $CB
@@ -6968,7 +6968,7 @@ jr_002_7204:
 
 jr_002_7213:
     xor  a                                        ; $7213: $AF
-    ld   [$DB47], a                               ; $7214: $EA $47 $DB
+    ld   [wDB47], a                               ; $7214: $EA $47 $DB
     ld   a, $98                                   ; $7217: $3E $98
     ld   [wC3C9], a                               ; $7219: $EA $C9 $C3
     call OpenDialogInTable1                       ; $721C: $CD $73 $23

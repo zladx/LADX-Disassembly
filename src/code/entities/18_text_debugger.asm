@@ -1,3 +1,23 @@
+; Text debugger
+;
+; The Marin entity will replace itself with the text debugger entity
+; when the player's name begins with exactly one space.
+; You couldn't enter zero letters at the beginning of the name, so this
+; clearly must be done with some precomposed save state.
+;
+; You can enter the text debugger on any map Marin is on.
+;
+; The text debugger will draw digits to the middle of the screen.
+; Left/Right increase/decrease the ones (note that this will wrap and not increase the tens),
+; while Up/Down increase/decrease the tens.
+;
+; Once you're done assigning this dialogue number,
+; press A to display text 00XX,
+; press B to display text 01XX,
+; and Select to display text 02XX.
+; XX is of course the digit you just entered on the screen.
+;
+; From https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening_(Game_Boy)#Text_Debugger
 
 Data_018_5D7F::
     db   $00, $01, $FF

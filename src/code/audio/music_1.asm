@@ -67,7 +67,7 @@ func_01B_4037::
 
 jr_01B_4048:
     ld   a, $01                                   ; $4048: $3E $01
-    ld   [$D379], a                               ; $404A: $EA $79 $D3
+    ld   [wD379], a                               ; $404A: $EA $79 $D3
     ld   hl, Data_01B_4060                        ; $404D: $21 $60 $40
     jp   label_01B_406A                           ; $4050: $C3 $6A $40
 
@@ -78,7 +78,7 @@ jr_01B_4053:
     ret  nz                                       ; $4056: $C0
 
     xor  a                                        ; $4057: $AF
-    ld   [$D379], a                               ; $4058: $EA $79 $D3
+    ld   [wD379], a                               ; $4058: $EA $79 $D3
     ld   hl, Data_01B_4065                        ; $405B: $21 $65 $40
     jr   jr_01B_406A                              ; $405E: $18 $0A
 
@@ -202,11 +202,11 @@ SetWaveform_1B::
 
 StopNoiseChannel_1B::
     xor  a                                        ; $40F3: $AF
-    ld   [$D379], a                               ; $40F4: $EA $79 $D3
+    ld   [wD379], a                               ; $40F4: $EA $79 $D3
     ld   [wD34F], a                               ; $40F7: $EA $4F $D3
     ld   [wD398], a                               ; $40FA: $EA $98 $D3
     ld   [wD393], a                               ; $40FD: $EA $93 $D3
-    ld   [$D3C9], a                               ; $4100: $EA $C9 $D3
+    ld   [wD3C9], a                               ; $4100: $EA $C9 $D3
     ld   [wD3A3], a                               ; $4103: $EA $A3 $D3
     ld   a, $08                                   ; $4106: $3E $08
     ldh  [rNR42], a                               ; $4108: $E0 $21
@@ -217,7 +217,7 @@ StopNoiseChannel_1B::
 ; Called when music ends?
 func_01B_410F::
 jr_01B_410F:
-    ld   a, [$D379]                               ; $410F: $FA $79 $D3
+    ld   a, [wD379]                               ; $410F: $FA $79 $D3
     cp   $0C                                      ; $4112: $FE $0C
     jp   z, label_01B_4E4A                        ; $4114: $CA $4A $4E
 
@@ -246,12 +246,12 @@ BeginMusicTrack_Dispatch_1B::
     cp   $FF                                      ; $413B: $FE $FF
     jr   z, jr_01B_410F                           ; $413D: $28 $D0
 
-    ld   a, [$D3CA]                               ; $413F: $FA $CA $D3
+    ld   a, [wD3CA]                               ; $413F: $FA $CA $D3
     ld   [wPreviousMusicTrack], a                 ; $4142: $EA $CB $D3
 
-    ; [$D3CA] = [wActiveMusicIndex]
+    ; [wD3CA] = [wActiveMusicIndex]
     ld   a, [hl]                                  ; $4145: $7E
-    ld   [$D3CA], a                               ; $4146: $EA $CA $D3
+    ld   [wD3CA], a                               ; $4146: $EA $CA $D3
 
     cp   $11                                      ; $4149: $FE $11
     jr   nc, .above10                             ; $414B: $30 $02
@@ -361,9 +361,9 @@ label_01B_42AB:
     ldh  [rNR30], a                               ; $42B3: $E0 $1A
     ld   [wD3E7], a                               ; $42B5: $EA $E7 $D3
     push hl                                       ; $42B8: $E5
-    ld   a, [$D336]                               ; $42B9: $FA $36 $D3
+    ld   a, [wD330 + 6]                               ; $42B9: $FA $36 $D3
     ld   l, a                                     ; $42BC: $6F
-    ld   a, [$D337]                               ; $42BD: $FA $37 $D3
+    ld   a, [wD330 + 7]                               ; $42BD: $FA $37 $D3
     ld   h, a                                     ; $42C0: $67
     push bc                                       ; $42C1: $C5
     ld   c, $30                                   ; $42C2: $0E $30
@@ -496,7 +496,7 @@ Copy2Bytes_1B::
 ; Input:
 ;   hl:  Pointer to start of music data
 LoadMusicData_1B::
-    ld   a, [$D379]                               ; $433C: $FA $79 $D3
+    ld   a, [wD379]                               ; $433C: $FA $79 $D3
     cp   $05                                      ; $433F: $FE $05
     jr   z, jr_01B_435E                           ; $4341: $28 $1B
 
@@ -532,7 +532,7 @@ jr_01B_435E:
     call Copy2Bytes_1B                            ; $436F: $CD $36 $43
     ld   de, $D320                                ; $4372: $11 $20 $D3
     call Copy2Bytes_1B                            ; $4375: $CD $36 $43
-    ld   de, $D330                                ; $4378: $11 $30 $D3
+    ld   de, wD330                                ; $4378: $11 $30 $D3
     call Copy2Bytes_1B                            ; $437B: $CD $36 $43
     ld   de, wD340                                ; $437E: $11 $40 $D3
     call Copy2Bytes_1B                            ; $4381: $CD $36 $43
@@ -542,8 +542,8 @@ jr_01B_435E:
     ld   hl, $D320                                ; $438D: $21 $20 $D3
     ld   de, $D324                                ; $4390: $11 $24 $D3
     call LoadSoundDefinitionData                  ; $4393: $CD $2B $43
-    ld   hl, $D330                                ; $4396: $21 $30 $D3
-    ld   de, $D334                                ; $4399: $11 $34 $D3
+    ld   hl, wD330                                ; $4396: $21 $30 $D3
+    ld   de, wD330 + 4                                ; $4399: $11 $34 $D3
     call LoadSoundDefinitionData                  ; $439C: $CD $2B $43
     ld   hl, wD340                                ; $439F: $21 $40 $D3
     ld   de, wD344                                ; $43A2: $11 $44 $D3
@@ -563,7 +563,7 @@ jr_01B_435E:
     xor  a                                        ; $43B6: $AF
     ld   [$D31E], a                               ; $43B7: $EA $1E $D3
     ld   [$D32E], a                               ; $43BA: $EA $2E $D3
-    ld   [$D33E], a                               ; $43BD: $EA $3E $D3
+    ld   [wD330 + $0E], a                               ; $43BD: $EA $3E $D3
     ret                                           ; $43C0: $C9
 
 ; Input:
@@ -571,9 +571,9 @@ jr_01B_435E:
 soundOpcode9DChannel3Handler_1B::
     push hl                                       ; $43C1: $E5
     ld   a, e                                     ; $43C2: $7B
-    ld   [$D336], a                               ; $43C3: $EA $36 $D3
+    ld   [wD330 + 6], a                               ; $43C3: $EA $36 $D3
     ld   a, d                                     ; $43C6: $7A
-    ld   [$D337], a                               ; $43C7: $EA $37 $D3
+    ld   [wD330 + 7], a                               ; $43C7: $EA $37 $D3
     ld   a, [wD371]                               ; $43CA: $FA $71 $D3
     and  a                                        ; $43CD: $A7
     jr   nz, .nextOpcode                          ; $43CE: $20 $08
@@ -671,7 +671,7 @@ label_01B_442A:
     cp   $03                                      ; $442D: $FE $03
     jr   nz, .channel3Done                        ; $442F: $20 $10
 
-    ld   a, [$D338]                               ; $4431: $FA $38 $D3
+    ld   a, [wD330 + 8]                               ; $4431: $FA $38 $D3
     bit  7, a                                     ; $4434: $CB $7F
     jr   z, .channel3Done                         ; $4436: $28 $09
 
@@ -749,7 +749,7 @@ soundOpcode00:
 
 ; Item acquired fanfare ends
 .val00
-    ld   a, [$D3CA]                               ; $4492: $FA $CA $D3
+    ld   a, [wD3CA]                               ; $4492: $FA $CA $D3
     cp   MUSIC_SWORD_ACQUIRED                     ; $4495: $FE $0F
     jp   z, ContinueCurrentScreenMusic_1B         ; $4497: $CA $E5 $47
 
@@ -1143,7 +1143,7 @@ HandleNote::
 
     ; Channel 3
     ld   c, rNR30 & $ff                           ; $4688: $0E $1A
-    ld   a, [$D33F]                               ; $468A: $FA $3F $D3
+    ld   a, [wD330 + $0F]                               ; $468A: $FA $3F $D3
     bit  7, a                                     ; $468D: $CB $7F
     jr   nz, .jr_01B_4696                         ; $468F: $20 $05
 
@@ -1252,7 +1252,7 @@ UpdateNextMusicChannel_1B::
     inc  [hl]                                     ; $46F2: $34
     ld   hl, $D32E                                ; $46F3: $21 $2E $D3
     inc  [hl]                                     ; $46F6: $34
-    ld   hl, $D33E                                ; $46F7: $21 $3E $D3
+    ld   hl, wD330 + $0E                                ; $46F7: $21 $3E $D3
     inc  [hl]                                     ; $46FA: $34
     ret                                           ; $46FB: $C9
 
@@ -1762,11 +1762,11 @@ include "data/music/music_tracks_data_1b_1.asm"
 
 label_01B_4E2C:
     xor  a                                        ; $4E2C: $AF
-    ld   [$D379], a                               ; $4E2D: $EA $79 $D3
+    ld   [wD379], a                               ; $4E2D: $EA $79 $D3
     ld   [wD34F], a                               ; $4E30: $EA $4F $D3
     ld   [wD398], a                               ; $4E33: $EA $98 $D3
     ld   [wD393], a                               ; $4E36: $EA $93 $D3
-    ld   [$D3C9], a                               ; $4E39: $EA $C9 $D3
+    ld   [wD3C9], a                               ; $4E39: $EA $C9 $D3
     ld   [wD3A3], a                               ; $4E3C: $EA $A3 $D3
     ld   [wD3E2+3], a                               ; $4E3F: $EA $E5 $D3
     ld   a, $08                                   ; $4E42: $3E $08
@@ -1788,7 +1788,7 @@ StopSquareAndWaveChannels_1B::
     ld   [wD371], a                               ; $4E5B: $EA $71 $D3
     ld   [$D31F], a                               ; $4E5E: $EA $1F $D3
     ld   [$D32F], a                               ; $4E61: $EA $2F $D3
-    ld   [$D33F], a                               ; $4E64: $EA $3F $D3
+    ld   [wD330 + $0F], a                               ; $4E64: $EA $3F $D3
     ld   [wD39E], a                               ; $4E67: $EA $9E $D3
     ld   [wD39F], a                               ; $4E6A: $EA $9F $D3
     ld   [wActiveMusicTableIndex], a              ; $4E6D: $EA $D9 $D3
@@ -1807,7 +1807,7 @@ StopSquareAndWaveChannels_1B::
     ld   [wD392], a                               ; $4E94: $EA $92 $D3
     ld   [wD3C6], a                               ; $4E97: $EA $C6 $D3
     ld   [wD3C7], a                               ; $4E9A: $EA $C7 $D3
-    ld   [$D3C8], a                               ; $4E9D: $EA $C8 $D3
+    ld   [wD3C8], a                               ; $4E9D: $EA $C8 $D3
     ld   [wD3A0], a                               ; $4EA0: $EA $A0 $D3
     ld   [wD3A1], a                               ; $4EA3: $EA $A1 $D3
     ld   [wD3A2], a                               ; $4EA6: $EA $A2 $D3

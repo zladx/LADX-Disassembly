@@ -80,7 +80,7 @@ WorldMapState1Handler::
     ld   [wInventoryAppearing], a                 ; $56A1: $EA $4F $C1
     ld   [wC1B2], a                               ; $56A4: $EA $B2 $C1
     ld   [wC1B3], a                               ; $56A7: $EA $B3 $C1
-    ld   a, [$DB54]                               ; $56AA: $FA $54 $DB
+    ld   a, [wDB54]                               ; $56AA: $FA $54 $DB
     ld   [wDBB4], a                               ; $56AD: $EA $B4 $DB
     ld   e, a                                     ; $56B0: $5F
     ld   d, $00                                   ; $56B1: $16 $00

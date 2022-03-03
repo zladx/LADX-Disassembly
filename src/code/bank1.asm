@@ -825,12 +825,12 @@ jr_001_58A7::
 
 func_001_58A8::
     ld   hl, wDynamicOAMBuffer+$6C                                ; $58A8: $21 $9C $C0
-    ld   a, [$DB54]                               ; $58AB: $FA $54 $DB
+    ld   a, [wDB54]                               ; $58AB: $FA $54 $DB
     rra                                           ; $58AE: $1F
     and  $78                                      ; $58AF: $E6 $78
     add  a, $18                                   ; $58B1: $C6 $18
     ldi  [hl], a                                  ; $58B3: $22
-    ld   a, [$DB54]                               ; $58B4: $FA $54 $DB
+    ld   a, [wDB54]                               ; $58B4: $FA $54 $DB
     swap a                                        ; $58B7: $CB $37
     rra                                           ; $58B9: $1F
     and  $78                                      ; $58BA: $E6 $78

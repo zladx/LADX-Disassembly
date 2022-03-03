@@ -217,12 +217,13 @@ jr_001_47B2::
     add  hl, de                                   ; $47C0: $19
     ld   a, $01                                   ; $47C1: $3E $01
 
+    ; Store the sequence 1,3,5,7,9 into the prefix.
 jr_001_47C3::
     call EnableExternalRAMWriting                 ; $47C3: $CD $D0 $27
     ldi  [hl], a                                  ; $47C6: $22
     inc  a                                        ; $47C7: $3C
     inc  a                                        ; $47C8: $3C
-    cp   $0B                                      ; $47C9: $FE $0B
+    cp   SAVE_PREFIX_SIZE * 2 + 1                 ; $47C9: $FE $0B
     jr   c, jr_001_47C3                           ; $47CB: $38 $F6
 
 jr_001_47CD::

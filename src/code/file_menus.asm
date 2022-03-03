@@ -606,7 +606,7 @@ CHECKNAME: macro
     ld   hl, wSaveSlotNames
     add  hl, de
 I = 0
-REPT 5
+REPT NAME_LENGTH
     ld   a, [hli]
 IF STRLEN(\1) < I + 1
     cp   0
@@ -681,7 +681,7 @@ ENDC
     ld   hl, wSaveSlotNames                       ; $4AFE: $21 $80 $DB
     add  hl, de                                   ; $4B01: $19
     pop  bc                                       ; $4B02: $C1
-    ld   e, $05                                   ; $4B03: $1E $05
+    ld   e, NAME_LENGTH                           ; $4B03: $1E $05
 .loop
     call EnableExternalRAMWriting                 ; $4B05: $CD $D0 $27
     ld   a, [hli]                                 ; $4B08: $2A

@@ -3,7 +3,7 @@ Data_018_51B8::
     db   $58, $01, $5A, $01, $58, $01, $5A, $01, $5A, $21, $58, $21, $5A, $21, $58, $21
 
 BunnyD3EntityHandler::
-    ld   a, [$DB74]                               ; $51D8: $FA $74 $DB
+    ld   a, [wDB74]                               ; $51D8: $FA $74 $DB
     and  a                                        ; $51DB: $A7
     jp   nz, ClearEntityStatusBank18              ; $51DC: $C2 $08 $7F
 

@@ -2682,7 +2682,7 @@ FishermanFishingGameEntityHandler::
 
     call func_004_6D7A                            ; $5F84: $CD $7A $6D
     xor  a                                        ; $5F87: $AF
-    ld   [$DB7F], a                               ; $5F88: $EA $7F $DB
+    ld   [wDB7F], a                               ; $5F88: $EA $7F $DB
     ld   [wC167], a                               ; $5F8B: $EA $67 $C1
     jp   CreateTradingItemEntity                  ; $5F8E: $C3 $0C $0C
 
@@ -5535,7 +5535,7 @@ jr_004_705D:
     and  a                                        ; $7060: $A7
     jr   z, jr_004_7066                           ; $7061: $28 $03
 
-    ld   [$DB74], a                               ; $7063: $EA $74 $DB
+    ld   [wDB74], a                               ; $7063: $EA $74 $DB
 
 jr_004_7066:
     ld   hl, wEntitiesPrivateState3Table          ; $7066: $21 $D0 $C2
@@ -6583,7 +6583,7 @@ func_004_7681::
     and  a                                        ; $768B: $A7
     ret  nz                                       ; $768C: $C0
 
-    ld   [$DB74], a                               ; $768D: $EA $74 $DB
+    ld   [wDB74], a                               ; $768D: $EA $74 $DB
     ld   a, $18                                   ; $7690: $3E $18
     ld   [wLoadPreviousMapCountdown], a           ; $7692: $EA $BC $C1
     jp   IncrementEntityState                     ; $7695: $C3 $12 $3B

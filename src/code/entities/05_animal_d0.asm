@@ -2,7 +2,7 @@ Data_005_7F1E::
     db   $50, $01, $52, $01, $52, $21, $50, $21, $54, $01, $56, $01, $56, $21, $54, $21
 
 AnimalD0EntityHandler::
-    ld   a, [$DB74]                               ; $7F2E: $FA $74 $DB
+    ld   a, [wDB74]                               ; $7F2E: $FA $74 $DB
     and  a                                        ; $7F31: $A7
     jp   z, ClearEntityStatus_05                  ; $7F32: $CA $4B $7B
 

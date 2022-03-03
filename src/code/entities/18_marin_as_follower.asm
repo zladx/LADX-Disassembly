@@ -269,7 +269,7 @@ jr_018_5B61:
     ret                                           ; $5B69: $C9
 
 jr_018_5B6A:
-    ld   a, [$DB74]                               ; $5B6A: $FA $74 $DB
+    ld   a, [wDB74]                               ; $5B6A: $FA $74 $DB
     ld   hl, wLoadPreviousMapCountdown            ; $5B6D: $21 $BC $C1
     or   [hl]                                     ; $5B70: $B6
     ret  nz                                       ; $5B71: $C0

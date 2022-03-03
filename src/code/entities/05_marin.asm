@@ -236,7 +236,7 @@ jr_005_4FA7:
 jr_005_4FAC:
     ld   d, $2F                                   ; $4FAC: $16 $2F
     ld   e, $03                                   ; $4FAE: $1E $03
-    ld   a, [$DB48]                               ; $4FB0: $FA $48 $DB
+    ld   a, [wDB48]                               ; $4FB0: $FA $48 $DB
     and  a                                        ; $4FB3: $A7
     jr   z, jr_005_4FFB                           ; $4FB4: $28 $45
 

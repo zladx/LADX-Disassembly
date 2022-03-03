@@ -828,8 +828,9 @@ wOcarinaMenuOpening::
 wOcarinaMenuClosing::
   ds 1 ; C1B9
 
-; Unlabeled
-wC1BA::
+; This is set when start is pressed and the ocarina menu is open,
+; the ocarina menu is closed first before the inventory menu is closed.
+wCloseInventoryAfterOcarinaMenuClosed::
   ds 1 ; C1BA
 
 ; Number of consecutives frames during which the player is slipping
@@ -2504,44 +2505,8 @@ wAButtonSlot::
   ds 1 ; DB01
 
 ; TODO comment
-wInventoryItem1::
-  ds 1 ; DB02
-
-; TODO comment
-wInventoryItem2::
-  ds 1 ; DB03
-
-; TODO comment
-wInventoryItem3::
-  ds 1 ; DB04
-
-; TODO comment
-wInventoryItem4::
-  ds 1 ; DB05
-
-; TODO comment
-wInventoryItem5::
-  ds 1 ; DB06
-
-; TODO comment
-wInventoryItem6::
-  ds 1 ; DB07
-
-; TODO comment
-wInventoryItem7::
-  ds 1 ; DB08
-
-; TODO comment
-wInventoryItem8::
-  ds 1 ; DB09
-
-; TODO comment
-wInventoryItem9::
-  ds 1 ; DB0A
-
-; TODO comment
-wInventoryItem10::
-  ds 1 ; DB0B
+wInventoryItems::
+  ds INVENTORY_SLOT_COUNT - 2 ; DB02-DB0B
 
 ; TODO comment
 wHasFlippers::

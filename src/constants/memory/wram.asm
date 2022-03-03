@@ -63,7 +63,7 @@ wIntroBGYOffset::
 ; Unused
 ds 1 ; C107
 
-; TODO comment
+; Index of the player's name letter being drawn in a dialog
 wNameIndex::
   ds 1 ; C108
 

@@ -60,9 +60,8 @@ wLCDSectionIndex::
 wIntroBGYOffset::
   ds 1 ; C106
 
-; Unlabeled
-wC107:
-  ds 1 ; C107
+; Unused
+ds 1 ; C107
 
 ; TODO comment
 wNameIndex::

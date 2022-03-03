@@ -67,8 +67,8 @@ ds 1 ; C107
 wNameIndex::
   ds 1 ; C108
 
-; Unlabeled
-wC109:
+; Dialog ID to display in the text debugger
+wTextDebuggerDialogId::
   ds 1 ; C109
 
 ; Unlabeled

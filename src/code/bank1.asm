@@ -2260,7 +2260,7 @@ Data_001_618A::
     db $80, $57, $90, $57, 0, $58, $10, $58, $20, $58, $30, $58, $40, $58, $50, $58 ; $619A
 
 LoadCounterAnimatedTiles::
-    ld   a, [wC109]                               ; $61AA: $FA $09 $C1
+    ld   a, [wTextDebuggerDialogId]               ; $61AA: $FA $09 $C1
     and  $0F                                      ; $61AD: $E6 $0F
     sla  a                                        ; $61AF: $CB $27
     ld   e, a                                     ; $61B1: $5F
@@ -2274,7 +2274,7 @@ LoadCounterAnimatedTiles::
     ld   bc, $10    ; count                       ; $61BE: $01 $10 $00
     ld   a, $0F     ; bank                        ; $61C1: $3E $0F
     call CopyDataFromBank                         ; $61C3: $CD $08 $29
-    ld   a, [wC109]                               ; $61C6: $FA $09 $C1
+    ld   a, [wTextDebuggerDialogId]               ; $61C6: $FA $09 $C1
     swap a                                        ; $61C9: $CB $37
     and  $0F                                      ; $61CB: $E6 $0F
     sla  a                                        ; $61CD: $CB $27

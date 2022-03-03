@@ -18,7 +18,7 @@ TextDebuggerEntityHandler::                       ; POI: Text debugging tool
     ld   d, b                                     ; $5D97: $50
     ld   hl, Data_018_5D7F                        ; $5D98: $21 $7F $5D
     add  hl, de                                   ; $5D9B: $19
-    ld   a, [wC109]                               ; $5D9C: $FA $09 $C1
+    ld   a, [wTextDebuggerDialogId]               ; $5D9C: $FA $09 $C1
     push af                                       ; $5D9F: $F5
     add  [hl]                                     ; $5DA0: $86
     and  $0F                                      ; $5DA1: $E6 $0F
@@ -26,7 +26,7 @@ TextDebuggerEntityHandler::                       ; POI: Text debugging tool
     pop  af                                       ; $5DA4: $F1
     and  $F0                                      ; $5DA5: $E6 $F0
     or   e                                        ; $5DA7: $B3
-    ld   [wC109], a                               ; $5DA8: $EA $09 $C1
+    ld   [wTextDebuggerDialogId], a               ; $5DA8: $EA $09 $C1
     ldh  a, [hJoypadState]                        ; $5DAB: $F0 $CC
     rra                                           ; $5DAD: $1F
     rra                                           ; $5DAE: $1F
@@ -35,9 +35,9 @@ TextDebuggerEntityHandler::                       ; POI: Text debugging tool
     ld   d, b                                     ; $5DB2: $50
     ld   hl, Data_018_5D82                        ; $5DB3: $21 $82 $5D
     add  hl, de                                   ; $5DB6: $19
-    ld   a, [wC109]                               ; $5DB7: $FA $09 $C1
+    ld   a, [wTextDebuggerDialogId]               ; $5DB7: $FA $09 $C1
     add  [hl]                                     ; $5DBA: $86
-    ld   [wC109], a                               ; $5DBB: $EA $09 $C1
+    ld   [wTextDebuggerDialogId], a               ; $5DBB: $EA $09 $C1
     ld   a, [wDialogState]                        ; $5DBE: $FA $9F $C1
     and  a                                        ; $5DC1: $A7
     jr   nz, jr_018_5DDC                          ; $5DC2: $20 $18
@@ -46,7 +46,7 @@ TextDebuggerEntityHandler::                       ; POI: Text debugging tool
     and  J_A                                      ; $5DC6: $E6 $10
     jr   z, jr_018_5DD0                           ; $5DC8: $28 $06
 
-    ld   a, [wC109]                               ; $5DCA: $FA $09 $C1
+    ld   a, [wTextDebuggerDialogId]               ; $5DCA: $FA $09 $C1
     jp   OpenDialog                               ; $5DCD: $C3 $85 $23
 
 jr_018_5DD0:
@@ -54,7 +54,7 @@ jr_018_5DD0:
     and  J_B                                      ; $5DD2: $E6 $20
     jr   z, jr_018_5DDC                           ; $5DD4: $28 $06
 
-    ld   a, [wC109]                               ; $5DD6: $FA $09 $C1
+    ld   a, [wTextDebuggerDialogId]               ; $5DD6: $FA $09 $C1
     jp   OpenDialogInTable1                       ; $5DD9: $C3 $73 $23
 
 jr_018_5DDC:
@@ -62,7 +62,7 @@ jr_018_5DDC:
     and  J_SELECT                                 ; $5DDE: $E6 $40
     jr   z, jr_018_5DE8                           ; $5DE0: $28 $06
 
-    ld   a, [wC109]                               ; $5DE2: $FA $09 $C1
+    ld   a, [wTextDebuggerDialogId]               ; $5DE2: $FA $09 $C1
     jp   OpenDialogInTable2                       ; $5DE5: $C3 $7C $23
 
 jr_018_5DE8:

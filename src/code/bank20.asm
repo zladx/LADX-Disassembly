@@ -903,8 +903,8 @@ func_020_49F4::
     ld   [$D615], a                               ; $4A14: $EA $15 $D6
     ld   [$D616], a                               ; $4A17: $EA $16 $D6
     ld   [$D617], a                               ; $4A1A: $EA $17 $D6
-    ld   b, $D6                                   ; $4A1D: $06 $D6
-    ld   c, $04                                   ; $4A1F: $0E $04
+    ld   b, HIGH(wRequestData)                    ; $4A1D: $06 $D6
+    ld   c, LOW(wRequestData)                     ; $4A1F: $0E $04
     ret                                           ; $4A21: $C9
 
 func_020_4A22::
@@ -928,18 +928,19 @@ func_020_4A22::
     ld   [$D615], a                               ; $4A4E: $EA $15 $D6
     ld   [$D616], a                               ; $4A51: $EA $16 $D6
     ld   [$D617], a                               ; $4A54: $EA $17 $D6
-    ld   b, $D6                                   ; $4A57: $06 $D6
-    ld   c, $04                                   ; $4A59: $0E $04
+    ld   b, HIGH(wRequestData)                    ; $4A57: $06 $D6
+    ld   c, LOW(wRequestData)                     ; $4A59: $0E $04
     ld   [wDC91+19], a                               ; $4A5B: $EA $A4 $DC
     ld   [wDC91+20], a                               ; $4A5E: $EA $A5 $DC
     ld   [wDC91+21], a                               ; $4A61: $EA $A6 $DC
     ld   [wDC91+22], a                               ; $4A64: $EA $A7 $DC
-    ld   a, $DC                                   ; $4A67: $3E $DC
+    ld   a, HIGH(wDC90 + $04)                            ; $4A67: $3E $DC
+ASSERT HIGH(wDC90 + $04) == HIGH(wDC90 + $1B)
     ldh  [hMultiPurposeB], a                           ; $4A69: $E0 $E2
     ldh  [hMultiPurposeD], a                           ; $4A6B: $E0 $E4
-    ld   a, $94                                   ; $4A6D: $3E $94
+    ld   a, LOW(wDC90 + $04)                             ; $4A6D: $3E $94
     ldh  [hMultiPurposeC], a                           ; $4A6F: $E0 $E3
-    ld   a, $AB                                   ; $4A71: $3E $AB
+    ld   a, LOW(wDC90 + $1B)                                   ; $4A71: $3E $AB
     ldh  [hMultiPurposeE], a                           ; $4A73: $E0 $E5
     ret                                           ; $4A75: $C9
 

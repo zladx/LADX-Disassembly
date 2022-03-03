@@ -3155,7 +3155,7 @@ wObjPal7::
 wObjPal8::
   ds 8 ; DC88 - DC8F
 
-; Unlabeled
+; This seems to be some secondary wRequest buffer used during map scrolling.
 wDC90::
   ds 1 ; DC90
 

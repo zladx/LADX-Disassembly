@@ -163,7 +163,7 @@ RollingBonesBarRollingHandler::
     call IncrementEntityState                     ; $6FB0: $CD $12 $3B
 
 jr_006_6FB3:
-    ld   a, [$D210]                               ; $6FB3: $FA $10 $D2
+    ld   a, [wD210]                               ; $6FB3: $FA $10 $D2
     inc  a                                        ; $6FB6: $3C
     cp   $09                                      ; $6FB7: $FE $09
     jr   c, jr_006_6FC0                           ; $6FB9: $38 $05
@@ -173,7 +173,7 @@ jr_006_6FB3:
     xor  a                                        ; $6FBF: $AF
 
 jr_006_6FC0:
-    ld   [$D210], a                               ; $6FC0: $EA $10 $D2
+    ld   [wD210], a                               ; $6FC0: $EA $10 $D2
     ret                                           ; $6FC3: $C9
 
 RollingBonesBarDeceleratingHandler::

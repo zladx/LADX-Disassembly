@@ -1830,7 +1830,16 @@ wD215::
   ds 1 ; D215
 
 ; Unlabeled
-ds 3 ; D215-D218
+wD216::
+  ds 1 ; D216
+
+; Unlabeled
+wD217::
+  ds 1 ; D217
+
+; Unlabeled
+wD218::
+  ds 1 ; D218
 
 ; Current form of the Final Nightmare (0-5)
 wFinalNightmareForm::

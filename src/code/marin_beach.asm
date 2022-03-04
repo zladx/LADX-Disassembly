@@ -117,7 +117,7 @@ MarineBeachPrepare3::
     ld   [wC550], a                               ; $62CA: $EA $50 $C5
     ld   a, $00                                   ; $62CD: $3E $00
     ld   [wTranscientVfxCountdownTable], a        ; $62CF: $EA $20 $C5
-    ld   [$D200], a                               ; $62D2: $EA $00 $D2
+    ld   [wD200], a                               ; $62D2: $EA $00 $D2
     ld   a, $20                                   ; $62D5: $3E $20
     ld   [wTranscientVfxPosYTable+1], a                               ; $62D7: $EA $41 $C5
     ld   a, $A0                                   ; $62DA: $3E $A0
@@ -604,7 +604,7 @@ func_001_6673::
     ld   a, [hl]                                  ; $6677: $7E
     and  a                                        ; $6678: $A7
     ret  nz                                       ; $6679: $C0
-    ld   hl, $D210                                ; $667A: $21 $10 $D2
+    ld   hl, wD210                                ; $667A: $21 $10 $D2
     add  hl, bc                                   ; $667D: $09
     ld   a, [hl]                                  ; $667E: $7E
     inc  a                                        ; $667F: $3C
@@ -612,12 +612,12 @@ func_001_6673::
     cp   $06                                      ; $6681: $FE $06
     jr   c, jr_001_668B                           ; $6683: $38 $06
     ld   [hl], b                                  ; $6685: $70
-    ld   hl, $D200                                ; $6686: $21 $00 $D2
+    ld   hl, wD200                                ; $6686: $21 $00 $D2
     add  hl, bc                                   ; $6689: $09
     inc  [hl]                                     ; $668A: $34
 
 jr_001_668B::
-    ld   hl, $D200                                ; $668B: $21 $00 $D2
+    ld   hl, wD200                                ; $668B: $21 $00 $D2
     add  hl, bc                                   ; $668E: $09
     ld   e, [hl]                                  ; $668F: $5E
     ld   d, b                                     ; $6690: $50
@@ -704,7 +704,7 @@ func_001_66FD::
     ld   e, $03                                   ; $6702: $1E $03
     and  $80                                      ; $6704: $E6 $80
     jr   z, jr_001_6718                           ; $6706: $28 $10
-    ld   hl, $D200                                ; $6708: $21 $00 $D2
+    ld   hl, wD200                                ; $6708: $21 $00 $D2
     add  hl, bc                                   ; $670B: $09
     ldh  a, [hFrameCounter]                       ; $670C: $F0 $E7
     and  $07                                      ; $670E: $E6 $07

@@ -1719,7 +1719,11 @@ wD1B5::
   ds $10
 
 ; Unused?
-ds ($D201 - $D1C5)
+ds ($D200 - $D1C5)
+
+; Unlabeled
+wD200::
+  ds 1 ; D200
 
 ; Unlabeled
 wD201::

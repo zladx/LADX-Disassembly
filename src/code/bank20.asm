@@ -886,6 +886,7 @@ Data_020_49EC::
 Data_020_49F0::
     db   $93, $93, $13, $13
 
+; DMG version
 func_020_49F4::
     ld   a, [wBGUpdateRegionOriginLow]            ; $49F4: $FA $27 $C1
     ld   [wRequestDestinationLow], a              ; $49F7: $EA $02 $D6
@@ -897,51 +898,56 @@ func_020_49F4::
     ld   a, [hl]                                  ; $4A06: $7E
     ld   [wRequestLength], a                      ; $4A07: $EA $03 $D6
     ld   a, $00                                   ; $4A0A: $3E $00
-    ld   [$D618], a                               ; $4A0C: $EA $18 $D6
+    ld   [wRequestData + $14], a                  ; $4A0C: $EA $18 $D6
     ld   a, $EE                                   ; $4A0F: $3E $EE
-    ld   [$D614], a                               ; $4A11: $EA $14 $D6
-    ld   [$D615], a                               ; $4A14: $EA $15 $D6
-    ld   [$D616], a                               ; $4A17: $EA $16 $D6
-    ld   [$D617], a                               ; $4A1A: $EA $17 $D6
+    ld   [wRequestData + $10], a                  ; $4A11: $EA $14 $D6
+    ld   [wRequestData + $11], a                  ; $4A14: $EA $15 $D6
+    ld   [wRequestData + $12], a                  ; $4A17: $EA $16 $D6
+    ld   [wRequestData + $13], a                  ; $4A1A: $EA $17 $D6
     ld   b, HIGH(wRequestData)                    ; $4A1D: $06 $D6
     ld   c, LOW(wRequestData)                     ; $4A1F: $0E $04
     ret                                           ; $4A21: $C9
 
+; CGB version
 func_020_4A22::
     ld   a, [wBGUpdateRegionOriginLow]            ; $4A22: $FA $27 $C1
     ld   [wRequestDestinationLow], a              ; $4A25: $EA $02 $D6
-    ld   [wDC91+1], a                               ; $4A28: $EA $92 $DC
+    ld   [wDC92], a                               ; $4A28: $EA $92 $DC
+
     ld   a, [wBGUpdateRegionOriginHigh]           ; $4A2B: $FA $26 $C1
     or   $98                                      ; $4A2E: $F6 $98
     ld   [wRequestDestinationHigh], a             ; $4A30: $EA $01 $D6
     ld   [wDC91], a                               ; $4A33: $EA $91 $DC
+
     ld   hl, Data_020_49F0                        ; $4A36: $21 $F0 $49
     add  hl, bc                                   ; $4A39: $09
     ld   a, [hl]                                  ; $4A3A: $7E
     ld   [wRequestLength], a                      ; $4A3B: $EA $03 $D6
-    ld   [wDC91+2], a                               ; $4A3E: $EA $93 $DC
+    ld   [wDC93], a                               ; $4A3E: $EA $93 $DC
+
     ld   a, $00                                   ; $4A41: $3E $00
-    ld   [$D618], a                               ; $4A43: $EA $18 $D6
-    ld   [wDC91+23], a                               ; $4A46: $EA $A8 $DC
+    ld   [wRequestData + $14], a                  ; $4A43: $EA $18 $D6
+    ld   [wDC94 + $14], a                         ; $4A46: $EA $A8 $DC
+
     ld   a, $EE                                   ; $4A49: $3E $EE
-    ld   [$D614], a                               ; $4A4B: $EA $14 $D6
-    ld   [$D615], a                               ; $4A4E: $EA $15 $D6
-    ld   [$D616], a                               ; $4A51: $EA $16 $D6
-    ld   [$D617], a                               ; $4A54: $EA $17 $D6
+    ld   [wRequestData + $10], a                  ; $4A4B: $EA $14 $D6
+    ld   [wRequestData + $11], a                  ; $4A4E: $EA $15 $D6
+    ld   [wRequestData + $12], a                  ; $4A51: $EA $16 $D6
+    ld   [wRequestData + $13], a                  ; $4A54: $EA $17 $D6
     ld   b, HIGH(wRequestData)                    ; $4A57: $06 $D6
     ld   c, LOW(wRequestData)                     ; $4A59: $0E $04
-    ld   [wDC91+19], a                               ; $4A5B: $EA $A4 $DC
-    ld   [wDC91+20], a                               ; $4A5E: $EA $A5 $DC
-    ld   [wDC91+21], a                               ; $4A61: $EA $A6 $DC
-    ld   [wDC91+22], a                               ; $4A64: $EA $A7 $DC
-    ld   a, HIGH(wDC90 + $04)                            ; $4A67: $3E $DC
-ASSERT HIGH(wDC90 + $04) == HIGH(wDC90 + $1B)
-    ldh  [hMultiPurposeB], a                           ; $4A69: $E0 $E2
-    ldh  [hMultiPurposeD], a                           ; $4A6B: $E0 $E4
-    ld   a, LOW(wDC90 + $04)                             ; $4A6D: $3E $94
-    ldh  [hMultiPurposeC], a                           ; $4A6F: $E0 $E3
-    ld   a, LOW(wDC90 + $1B)                                   ; $4A71: $3E $AB
-    ldh  [hMultiPurposeE], a                           ; $4A73: $E0 $E5
+    ld   [wDC94 + $10], a                         ; $4A5B: $EA $A4 $DC
+    ld   [wDC94 + $11], a                         ; $4A5E: $EA $A5 $DC
+    ld   [wDC94 + $12], a                         ; $4A61: $EA $A6 $DC
+    ld   [wDC94 + $13], a                         ; $4A64: $EA $A7 $DC
+    ld   a, HIGH(wDC94)                           ; $4A67: $3E $DC
+ASSERT HIGH(wDC94) == HIGH(wDC94 + $17)
+    ldh  [hMultiPurposeB], a                      ; $4A69: $E0 $E2
+    ldh  [hMultiPurposeD], a                      ; $4A6B: $E0 $E4
+    ld   a, LOW(wDC94)                            ; $4A6D: $3E $94
+    ldh  [hMultiPurposeC], a                      ; $4A6F: $E0 $E3
+    ld   a, LOW(wDC94 + $17)                      ; $4A71: $3E $AB
+    ldh  [hMultiPurposeE], a                      ; $4A73: $E0 $E5
     ret                                           ; $4A75: $C9
 
 ; Configures an async data request to copy BG tilemap

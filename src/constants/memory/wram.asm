@@ -2522,7 +2522,7 @@ wRequestLength::
   ds 1 ; D603
 
 ; Request data (variable length)
-wRequestData:
+wRequestData::
   ds 244  ; D604 - D6F7
 
 ; Animation stage during a switchable object animation.
@@ -3253,9 +3253,21 @@ wObjPal8::
 wDC90::
   ds 1 ; DC90
 
-; Unlabeled
+; Request Destination high
 wDC91::
-  ds $2F ; DC91 - DCBF
+  ds 1 ; DC91
+
+; Request Destination low
+wDC92::
+  ds 1 ; DC92
+
+; Request Data Length
+wDC93::
+  ds 1 ; DC93 - DCBF
+
+; Request Data
+wDC94::
+  ds $2C ; DC93 - DCBF
 
 ; Unlabeled
 wDCC0::

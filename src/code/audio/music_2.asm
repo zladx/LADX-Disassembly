@@ -543,7 +543,7 @@ jr_01E_43E2:
     call func_01E_43BA                            ; $43ED: $CD $BA $43
     ld   de, wD310                                ; $43F0: $11 $10 $D3
     call func_01E_43BA                            ; $43F3: $CD $BA $43
-    ld   de, $D320                                ; $43F6: $11 $20 $D3
+    ld   de, wD320                                ; $43F6: $11 $20 $D3
     call func_01E_43BA                            ; $43F9: $CD $BA $43
     ld   de, wD330                                ; $43FC: $11 $30 $D3
     call func_01E_43BA                            ; $43FF: $CD $BA $43
@@ -552,8 +552,8 @@ jr_01E_43E2:
     ld   hl, wD310                                ; $4408: $21 $10 $D3
     ld   de, wD314                                ; $440B: $11 $14 $D3
     call func_01E_43AF                            ; $440E: $CD $AF $43
-    ld   hl, $D320                                ; $4411: $21 $20 $D3
-    ld   de, $D324                                ; $4414: $11 $24 $D3
+    ld   hl, wD320                                ; $4411: $21 $20 $D3
+    ld   de, wD320 + 4                            ; $4414: $11 $24 $D3
     call func_01E_43AF                            ; $4417: $CD $AF $43
     ld   hl, wD330 + 0                                ; $441A: $21 $30 $D3
     ld   de, wD330 + 4                                ; $441D: $11 $34 $D3

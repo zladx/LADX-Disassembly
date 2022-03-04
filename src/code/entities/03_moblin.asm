@@ -22,7 +22,7 @@ MoblinEntityHandler::
 
 jr_003_5835:
     ld   a, c                                     ; $5835: $79
-    ld   [$D153], a                               ; $5836: $EA $53 $D1
+    ld   [wD153], a                               ; $5836: $EA $53 $D1
     ld   de, Data_003_5917                        ; $5839: $11 $17 $59
     ; fallthrough
 

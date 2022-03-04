@@ -349,8 +349,8 @@ jr_005_503E:
 
     call IncrementEntityState                     ; $5049: $CD $12 $3B
     xor  a                                        ; $504C: $AF
-    ld   [$D210], a                               ; $504D: $EA $10 $D2
-    ld   [$D211], a                               ; $5050: $EA $11 $D2
+    ld   [wD210], a                               ; $504D: $EA $10 $D2
+    ld   [wD211], a                               ; $5050: $EA $11 $D2
     ret                                           ; $5053: $C9
 
 jr_005_5054:
@@ -367,11 +367,11 @@ func_005_5059::
     push bc                                       ; $5060: $C5
     call UpdateLinkWalkingAnimation_trampoline    ; $5061: $CD $F0 $0B
     pop  bc                                       ; $5064: $C1
-    ld   a, [$D211]                               ; $5065: $FA $11 $D2
+    ld   a, [wD211]                               ; $5065: $FA $11 $D2
     cp   $07                                      ; $5068: $FE $07
     jr   nz, jr_005_508A                          ; $506A: $20 $1E
 
-    ld   a, [$D210]                               ; $506C: $FA $10 $D2
+    ld   a, [wD210]                               ; $506C: $FA $10 $D2
     cp   $E8                                      ; $506F: $FE $E8
     jr   nz, jr_005_508A                          ; $5071: $20 $17
 
@@ -381,8 +381,8 @@ func_005_5059::
     call UpdateLinkWalkingAnimation_trampoline    ; $5079: $CD $F0 $0B
     pop  bc                                       ; $507C: $C1
     xor  a                                        ; $507D: $AF
-    ld   [$D210], a                               ; $507E: $EA $10 $D2
-    ld   [$D211], a                               ; $5081: $EA $11 $D2
+    ld   [wD210], a                               ; $507E: $EA $10 $D2
+    ld   [wD211], a                               ; $5081: $EA $11 $D2
     call label_27F2                               ; $5084: $CD $F2 $27
     jp   IncrementEntityState                     ; $5087: $C3 $12 $3B
 
@@ -391,19 +391,19 @@ jr_005_508A:
     ld   a, e                                     ; $508D: $7B
     xor  $01                                      ; $508E: $EE $01
     ldh  [hLinkDirection], a                      ; $5090: $E0 $9E
-    ld   a, [$D210]                               ; $5092: $FA $10 $D2
+    ld   a, [wD210]                               ; $5092: $FA $10 $D2
     add  $01                                      ; $5095: $C6 $01
-    ld   [$D210], a                               ; $5097: $EA $10 $D2
+    ld   [wD210], a                               ; $5097: $EA $10 $D2
     ld   e, a                                     ; $509A: $5F
-    ld   a, [$D211]                               ; $509B: $FA $11 $D2
+    ld   a, [wD211]                               ; $509B: $FA $11 $D2
     adc  $00                                      ; $509E: $CE $00
-    ld   [$D211], a                               ; $50A0: $EA $11 $D2
+    ld   [wD211], a                               ; $50A0: $EA $11 $D2
     ld   d, a                                     ; $50A3: $57
-    ld   a, [$D211]                               ; $50A4: $FA $11 $D2
+    ld   a, [wD211]                               ; $50A4: $FA $11 $D2
     cp   $07                                      ; $50A7: $FE $07
     jr   nz, jr_005_50B7                          ; $50A9: $20 $0C
 
-    ld   a, [$D210]                               ; $50AB: $FA $10 $D2
+    ld   a, [wD210]                               ; $50AB: $FA $10 $D2
     cp   $E0                                      ; $50AE: $FE $E0
     jr   c, jr_005_50B7                           ; $50B0: $38 $05
 

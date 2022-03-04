@@ -1376,16 +1376,16 @@ ENDC
     cp   $FF                                      ; $4A20: $FE $FF
     jr   nz, jr_002_4A7C                          ; $4A22: $20 $58
 
-    ld   a, [$D210]                               ; $4A24: $FA $10 $D2
+    ld   a, [wD210]                               ; $4A24: $FA $10 $D2
     add  $01                                      ; $4A27: $C6 $01
-    ld   [$D210], a                               ; $4A29: $EA $10 $D2
-    ld   a, [$D211]                               ; $4A2C: $FA $11 $D2
+    ld   [wD210], a                               ; $4A29: $EA $10 $D2
+    ld   a, [wD211]                               ; $4A2C: $FA $11 $D2
     adc  $00                                      ; $4A2F: $CE $00
-    ld   [$D211], a                               ; $4A31: $EA $11 $D2
+    ld   [wD211], a                               ; $4A31: $EA $11 $D2
     cp   $08                                      ; $4A34: $FE $08
     jr   nz, jr_002_4A53                          ; $4A36: $20 $1B
 
-    ld   a, [$D210]                               ; $4A38: $FA $10 $D2
+    ld   a, [wD210]                               ; $4A38: $FA $10 $D2
     cp   $D0                                      ; $4A3B: $FE $D0
     jr   nz, jr_002_4A53                          ; $4A3D: $20 $14
 
@@ -3640,12 +3640,12 @@ jr_002_56B8:
     cp   $08                                      ; $56EC: $FE $08
     jr   nz, label_002_5707                       ; $56EE: $20 $17
 
-    ld   hl, $D727                                ; $56F0: $21 $27 $D7
+    ld   hl, wRoomObjectsArea + $27               ; $56F0: $21 $27 $D7
     ldh  a, [hMapRoom]                            ; $56F3: $F0 $F6
     cp   ROOM_INDOOR_B_CAMERA_SHOP                ; $56F5: $FE $B5
     jr   nz, jr_002_56FC                          ; $56F7: $20 $03
 
-    ld   hl, $D727                                ; $56F9: $21 $27 $D7
+    ld   hl, wRoomObjectsArea + $27               ; $56F9: $21 $27 $D7
 
 jr_002_56FC:
     ld   [hl], $E3                                ; $56FC: $36 $E3

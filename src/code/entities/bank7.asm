@@ -4022,18 +4022,18 @@ jr_007_5A5F:
     ld   a, $1D                                   ; $5A8A: $3E $1D
     ld   [hl+], a                                 ; $5A8C: $22
     ld   [hl], b                                  ; $5A8D: $70
-    ld   hl, $D725                                ; $5A8E: $21 $25 $D7
+    ld   hl, wRoomObjectsArea + $25               ; $5A8E: $21 $25 $D7
     ld   [hl], $DB                                ; $5A91: $36 $DB
     ld   a, $87                                   ; $5A93: $3E $87
-    call func_2BF                                ; $5A95: $CD $2F $0B
-    ld   hl, $D735                                ; $5A98: $21 $35 $D7
+    call func_2BF                                 ; $5A95: $CD $2F $0B
+    ld   hl, wRoomObjectsArea + $35               ; $5A98: $21 $35 $D7
     ld   [hl], $DB                                ; $5A9B: $36 $DB
     ld   a, $87                                   ; $5A9D: $3E $87
-    call func_2BF                                ; $5A9F: $CD $2F $0B
-    ld   hl, $D745                                ; $5AA2: $21 $45 $D7
+    call func_2BF                                 ; $5A9F: $CD $2F $0B
+    ld   hl, wRoomObjectsArea + $45               ; $5AA2: $21 $45 $D7
     ld   [hl], $DB                                ; $5AA5: $36 $DB
     ld   a, $87                                   ; $5AA7: $3E $87
-    jp   func_2BF                                ; $5AA9: $C3 $2F $0B
+    jp   func_2BF                                 ; $5AA9: $C3 $2F $0B
 
 func_007_5AAC::
     call GetEntityTransitionCountdown             ; $5AAC: $CD $05 $0C
@@ -4074,7 +4074,7 @@ jr_007_5ADE:
     push af                                       ; $5AE6: $F5
     ldh  a, [hLinkPositionY]                      ; $5AE7: $F0 $99
     push af                                       ; $5AE9: $F5
-    ld   a, [$D154]                               ; $5AEA: $FA $54 $D1
+    ld   a, [wD154]                               ; $5AEA: $FA $54 $D1
     ld   e, a                                     ; $5AED: $5F
     ld   d, b                                     ; $5AEE: $50
     ld   hl, wEntitiesPosXTable                   ; $5AEF: $21 $00 $C2

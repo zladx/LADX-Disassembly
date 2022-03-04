@@ -468,20 +468,14 @@ HandleFileSelectionCommand::
 
 ; File creation data
 Data_001_49F2::
-    dec  b                                        ; $49F2: $05
-    and  h                                        ; $49F3: $A4
-    or   d                                        ; $49F4: $B2
-    and  a                                        ; $49F5: $A7
-    ld   e, a                                     ; $49F6: $5F
-    xor  e                                        ; $49F7: $AB
+    dw   SaveGame1.main + wBButtonSlot - wOverworldRoomStatus
+    dw   SaveGame2.main + wBButtonSlot - wOverworldRoomStatus
+    dw   SaveGame3.main + wBButtonSlot - wOverworldRoomStatus
 
 Data_001_49F8::
-    dec  b                                        ; $49F8: $05
-    and  c                                        ; $49F9: $A1
-    or   d                                        ; $49FA: $B2
-    and  h                                        ; $49FB: $A4
-    ld   e, a                                     ; $49FC: $5F
-    xor  b                                        ; $49FD: $A8
+    dw   SaveGame1.main
+    dw   SaveGame2.main
+    dw   SaveGame3.main
 
 ; Part of file copy
 Data_001_49FE::
@@ -612,7 +606,7 @@ CHECKNAME: macro
     ld   hl, wSaveSlotNames
     add  hl, de
 I = 0
-REPT 5
+REPT NAME_LENGTH
     ld   a, [hli]
 IF STRLEN(\1) < I + 1
     cp   0
@@ -659,7 +653,7 @@ ENDC
     ld   h, [hl]                                  ; $4AC8: $66
     ld   l, a                                     ; $4AC9: $6F
     push hl                                       ; $4ACA: $E5
-    ld   de, $4F                                  ; $4ACB: $11 $4F $00
+    ld   de, wName - wBButtonSlot                 ; $4ACB: $11 $4F $00
     add  hl, de                                   ; $4ACE: $19
     push hl                                       ; $4ACF: $E5
     ld   a, [wSaveSlot]                           ; $4AD0: $FA $A6 $DB
@@ -687,7 +681,7 @@ ENDC
     ld   hl, wSaveSlotNames                       ; $4AFE: $21 $80 $DB
     add  hl, de                                   ; $4B01: $19
     pop  bc                                       ; $4B02: $C1
-    ld   e, $05                                   ; $4B03: $1E $05
+    ld   e, NAME_LENGTH                           ; $4B03: $1E $05
 .loop
     call EnableExternalRAMWriting                 ; $4B05: $CD $D0 $27
     ld   a, [hli]                                 ; $4B08: $2A
@@ -698,16 +692,16 @@ ENDC
 
     pop  hl                                       ; $4B0E: $E1
     push hl                                       ; $4B0F: $E5
-    ld   de, $5A                                  ; $4B10: $11 $5A $00
+    ld   de, wHealth - wBButtonSlot               ; $4B10: $11 $5A $00
     add  hl, de                                   ; $4B13: $19
     ld   [hl], $18  ; write new save current health ; $4B14: $36 $18
     pop  hl                                       ; $4B16: $E1
     push hl                                       ; $4B17: $E5
-    ld   de, $5B                                  ; $4B18: $11 $5B $00
+    ld   de, wMaxHealth - wBButtonSlot            ; $4B18: $11 $5B $00
     add  hl, de                                   ; $4B1B: $19
     ld   [hl], $03  ; write new save max health   ; $4B1C: $36 $03
     pop  hl                                       ; $4B1E: $E1
-    ld   de, $57                                  ; $4B1F: $11 $57 $00
+    ld   de, wDeathCount - wBButtonSlot           ; $4B1F: $11 $57 $00
     add  hl, de                                   ; $4B22: $19
     xor  a                                        ; $4B23: $AF
     ldi  [hl], a                                  ; $4B24: $22
@@ -1260,9 +1254,9 @@ ENDC
     ld   a, [hl+]                                 ; $4E8B: $2A ; $4E8B: $2A
     ld   h, [hl]                                  ; $4E8C: $66 ; $4E8C: $66
     ld   l, a                                     ; $4E8D: $6F ; $4E8D: $6F
-    ld   de, $3a8                                 ; $4E8E: $11 $A8 $03 ; $4E8E: $11 $A8 $03
+    ld   de, SaveGame1.end - SaveGame1.main       ; $4E8E: $11 $A8 $03 ; $4E8E: $11 $A8 $03
 
-jr_001_4E91::
+jr_001_4E91:: ; Clear the save
     call EnableExternalRAMWriting                 ; $4E91: $CD $D0 $27 ; $4E91: $CD $D0 $27
     xor  a                                        ; $4E94: $AF ; $4E94: $AF
     ld   [hl+], a                                 ; $4E95: $22 ; $4E95: $22
@@ -1918,8 +1912,8 @@ FileCopyStateAHandler::
     ld   h, [hl]                                  ; $521F: $66 ; $521F: $66
     ld   l, a                                     ; $5220: $6F ; $5220: $6F
 
-    ; sizeof save data + extra bytes?
-    ld   de, $3ad                                 ; $5221: $11 $AD $03 ; $5221: $11 $AD $03
+    ; sizeof save data
+    ld   de, (SaveGame2 - SaveGame1)              ; $5221: $11 $AD $03 ; $5221: $11 $AD $03
 
 jr_001_5224::
     call EnableExternalRAMWriting                 ; $5224: $CD $D0 $27 ; $5224: $CD $D0 $27

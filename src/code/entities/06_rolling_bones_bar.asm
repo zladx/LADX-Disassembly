@@ -18,10 +18,10 @@ jr_006_6EED:
     jp   nz, ClearEntityStatus_06                 ; $6EF1: $C2 $DB $65
 
     ld   a, c                                     ; $6EF4: $79
-    ld   [$D201], a                               ; $6EF5: $EA $01 $D2
+    ld   [wD201], a                               ; $6EF5: $EA $01 $D2
     call func_006_6FEA                            ; $6EF8: $CD $EA $6F
     call ReturnIfNonInteractive_06                ; $6EFB: $CD $C6 $64
-    ld   a, [$D202]                               ; $6EFE: $FA $02 $D2
+    ld   a, [wD202]                               ; $6EFE: $FA $02 $D2
     ld   e, a                                     ; $6F01: $5F
     ld   d, b                                     ; $6F02: $50
 

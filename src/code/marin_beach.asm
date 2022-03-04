@@ -131,7 +131,7 @@ MarineBeachPrepare3::
     ld   a, $40                                   ; $62EE: $3E $40
     ld   [wTranscientVfxCountdownTable+1], a                               ; $62F0: $EA $21 $C5
     ld   a, $24                                   ; $62F3: $3E $24
-    ld   [$D201], a                               ; $62F5: $EA $01 $D2
+    ld   [wD201], a                               ; $62F5: $EA $01 $D2
     ld   a, $48                                   ; $62F8: $3E $48
     ld   [wTranscientVfxPosYTable+2], a                               ; $62FA: $EA $42 $C5
     ld   a, $30                                   ; $62FD: $3E $30
@@ -145,7 +145,7 @@ MarineBeachPrepare3::
     ld   a, $00                                   ; $6311: $3E $00
     ld   [wTranscientVfxCountdownTable+2], a                               ; $6313: $EA $22 $C5
     ld   a, $02                                   ; $6316: $3E $02
-    ld   [$D202], a                               ; $6318: $EA $02 $D2
+    ld   [wD202], a                               ; $6318: $EA $02 $D2
     ld   a, $3C                                   ; $631B: $3E $3C
     ld   [wTranscientVfxPosYTable+3], a                               ; $631D: $EA $43 $C5
     ld   a, $40                                   ; $6320: $3E $40
@@ -159,7 +159,7 @@ MarineBeachPrepare3::
     ld   a, $00                                   ; $6334: $3E $00
     ld   [wTranscientVfxCountdownTable+3], a                               ; $6336: $EA $23 $C5
     ld   a, $00                                   ; $6339: $3E $00
-    ld   [$D203], a                               ; $633B: $EA $03 $D2
+    ld   [wD203], a                               ; $633B: $EA $03 $D2
     ld   a, $40                                   ; $633E: $3E $40
     ld   [wTranscientVfxPosYTable+4], a                               ; $6340: $EA $44 $C5
     ld   a, $50                                   ; $6343: $3E $50
@@ -173,7 +173,7 @@ MarineBeachPrepare3::
     ld   a, $00                                   ; $6357: $3E $00
     ld   [wTranscientVfxCountdownTable+4], a                               ; $6359: $EA $24 $C5
     ld   a, $00                                   ; $635C: $3E $00
-    ld   [$D204], a                               ; $635E: $EA $04 $D2
+    ld   [wD204], a                               ; $635E: $EA $04 $D2
     ld   a, $3C                                   ; $6361: $3E $3C
     ld   [wTranscientVfxPosYTable+5], a                               ; $6363: $EA $45 $C5
     ld   a, $60                                   ; $6366: $3E $60
@@ -187,7 +187,7 @@ MarineBeachPrepare3::
     ld   a, $00                                   ; $637A: $3E $00
     ld   [wTranscientVfxCountdownTable+5], a                               ; $637C: $EA $25 $C5
     ld   a, $00                                   ; $637F: $3E $00
-    ld   [$D205], a                               ; $6381: $EA $05 $D2
+    ld   [wD205], a                               ; $6381: $EA $05 $D2
     ld   a, $44                                   ; $6384: $3E $44
     ld   [wTranscientVfxPosYTable+6], a                               ; $6386: $EA $46 $C5
     ld   a, $68                                   ; $6389: $3E $68
@@ -201,7 +201,7 @@ MarineBeachPrepare3::
     ld   a, $00                                   ; $639D: $3E $00
     ld   [wTranscientVfxCountdownTable+6], a                               ; $639F: $EA $26 $C5
     ld   a, $00                                   ; $63A2: $3E $00
-    ld   [$D206], a                               ; $63A4: $EA $06 $D2
+    ld   [wD206], a                               ; $63A4: $EA $06 $D2
     jp   IncrementGameplaySubtypeAndReturn        ; $63A7: $C3 $D6 $44
 
 Data_001_63AA::

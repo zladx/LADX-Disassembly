@@ -6,7 +6,7 @@ SmasherEntityHandler::
     jp   nz, label_006_4781                       ; $450F: $C2 $81 $47
 
     ld   a, c                                     ; $4512: $79
-    ld   [$D202], a                               ; $4513: $EA $02 $D2
+    ld   [wD202], a                               ; $4513: $EA $02 $D2
     ld   hl, wEntitiesPrivateState3Table          ; $4516: $21 $D0 $C2
     add  hl, bc                                   ; $4519: $09
     ld   a, [hl]                                  ; $451A: $7E
@@ -17,7 +17,7 @@ SmasherEntityHandler::
     ld   a, ENTITY_SMASHER                        ; $451F: $3E $92
     call SpawnNewEntity_trampoline                ; $4521: $CD $86 $3B
     ld   a, e                                     ; $4524: $7B
-    ld   [$D201], a                               ; $4525: $EA $01 $D2
+    ld   [wD201], a                               ; $4525: $EA $01 $D2
     ldh  a, [hMultiPurpose1]                      ; $4528: $F0 $D8
     add  $10                                      ; $452A: $C6 $10
     ld   hl, wEntitiesPosYTable                   ; $452C: $21 $10 $C2
@@ -70,7 +70,7 @@ jr_006_4570:
 ._04 dw SmasherState4Handler
 
 SmasherState0Handler::
-    ld   a, [$D201]                               ; $457D: $FA $01 $D2
+    ld   a, [wD201]                               ; $457D: $FA $01 $D2
     ld   e, a                                     ; $4580: $5F
     ld   d, b                                     ; $4581: $50
     ld   hl, wEntitiesStateTable                  ; $4582: $21 $90 $C2
@@ -110,7 +110,7 @@ SmasherState0Handler::
 
     call IncrementEntityState                     ; $45C1: $CD $12 $3B
     ld   [hl], $02                                ; $45C4: $36 $02
-    ld   a, [$D201]                               ; $45C6: $FA $01 $D2
+    ld   a, [wD201]                               ; $45C6: $FA $01 $D2
     ld   e, a                                     ; $45C9: $5F
     ld   d, b                                     ; $45CA: $50
     ld   hl, wEntitiesStateTable                  ; $45CB: $21 $90 $C2
@@ -154,7 +154,7 @@ Data_006_45FE::
     db   $FC, $FC, $04, $04
 
 SmasherState1Handler::
-    ld   a, [$D201]                               ; $4602: $FA $01 $D2
+    ld   a, [wD201]                               ; $4602: $FA $01 $D2
     ld   e, a                                     ; $4605: $5F
     ld   d, b                                     ; $4606: $50
     ld   hl, wEntitiesStateTable                  ; $4607: $21 $90 $C2
@@ -238,7 +238,7 @@ jr_006_4687:
 func_006_468C::
     push bc                                       ; $468C: $C5
     ld   c, a                                     ; $468D: $4F
-    ld   a, [$D201]                               ; $468E: $FA $01 $D2
+    ld   a, [wD201]                               ; $468E: $FA $01 $D2
     ld   e, a                                     ; $4691: $5F
     ld   d, b                                     ; $4692: $50
     ldh  a, [hActiveEntityPosX]                   ; $4693: $F0 $EE
@@ -283,7 +283,7 @@ SmasherState3Handler::
     jr   nz, jr_006_46FB                          ; $46D0: $20 $29
 
     ld   [hl], $20                                ; $46D2: $36 $20
-    ld   a, [$D201]                               ; $46D4: $FA $01 $D2
+    ld   a, [wD201]                               ; $46D4: $FA $01 $D2
     ld   e, a                                     ; $46D7: $5F
     ld   d, b                                     ; $46D8: $50
     ld   hl, wEntitiesStateTable                  ; $46D9: $21 $90 $C2
@@ -502,7 +502,7 @@ func_006_4854::
     ret                                           ; $4854: $C9
 
 func_006_4855::
-    ld   a, [$D202]                               ; $4855: $FA $02 $D2
+    ld   a, [wD202]                               ; $4855: $FA $02 $D2
     ld   e, a                                     ; $4858: $5F
     ld   d, b                                     ; $4859: $50
     ld   hl, wEntitiesPosXTable                   ; $485A: $21 $00 $C2

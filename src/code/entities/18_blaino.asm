@@ -155,7 +155,7 @@ jr_018_65B2:
     inc  a                                        ; $65B7: $3C
 
 label_018_65B8:
-    ld   [$D205], a                               ; $65B8: $EA $05 $D2
+    ld   [wD205], a                               ; $65B8: $EA $05 $D2
     cp   $01                                      ; $65BB: $FE $01
     jr   nz, jr_018_65C3                          ; $65BD: $20 $04
 
@@ -173,7 +173,7 @@ jr_018_65CE:
     ret                                           ; $65CE: $C9
 
 func_018_65CF::
-    ld   a, [$D205]                               ; $65CF: $FA $05 $D2
+    ld   a, [wD205]                               ; $65CF: $FA $05 $D2
     and  a                                        ; $65D2: $A7
     ret  z                                        ; $65D3: $C8
 
@@ -349,7 +349,7 @@ jr_018_6729:
 
 label_018_672A:
     xor  a                                        ; $672A: $AF
-    ld   [$D205], a                               ; $672B: $EA $05 $D2
+    ld   [wD205], a                               ; $672B: $EA $05 $D2
     call GetEntityDropTimer                       ; $672E: $CD $FB $0B
     call GetRandomByte                            ; $6731: $CD $0D $28
     and  $0F                                      ; $6734: $E6 $0F

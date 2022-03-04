@@ -127,7 +127,7 @@ jr_018_4F9E:
     ld   e, [hl]                                  ; $4FA2: $5E
     ld   d, $00                                   ; $4FA3: $16 $00
     ld   a, e                                     ; $4FA5: $7B
-    ld   [$D201], a                               ; $4FA6: $EA $01 $D2
+    ld   [wD201], a                               ; $4FA6: $EA $01 $D2
     inc  a                                        ; $4FA9: $3C
     cp   $03                                      ; $4FAA: $FE $03
     jr   nz, jr_018_4FAF                          ; $4FAC: $20 $01
@@ -200,7 +200,7 @@ MadBatterState7Handler::
     ld   a, $E5                                   ; $5016: $3E $E5
     call OpenDialogAtBottom                            ; $5018: $CD $80 $50
     call IncrementEntityState                     ; $501B: $CD $12 $3B
-    ld   a, [$D201]                               ; $501E: $FA $01 $D2
+    ld   a, [wD201]                               ; $501E: $FA $01 $D2
     ld   e, a                                     ; $5021: $5F
     ld   d, b                                     ; $5022: $50
     ld   hl, MadBatterUpgradedMaximumTable        ; $5023: $21 $90 $4F

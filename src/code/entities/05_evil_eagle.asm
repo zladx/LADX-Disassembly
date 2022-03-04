@@ -71,7 +71,7 @@ jr_005_5A5D:
     jr   nz, .loop                                ; $5A71: $20 $FC
 
     ld   a, $02                                   ; $5A73: $3E $02
-    ld   [$D205], a                               ; $5A75: $EA $05 $D2
+    ld   [wD205], a                               ; $5A75: $EA $05 $D2
     ld   a, MUSIC_GRIM_CREEPER_DIALOG             ; $5A78: $3E $5C
     ld   [wMusicTrackToPlay], a                   ; $5A7A: $EA $68 $D3
 
@@ -292,7 +292,7 @@ jr_005_5BAC:
     ld   hl, Data_005_5B60                        ; $5BAE: $21 $60 $5B
     add  hl, de                                   ; $5BB1: $19
     ld   a, [hl]                                  ; $5BB2: $7E
-    ld   [$D205], a                               ; $5BB3: $EA $05 $D2
+    ld   [wD205], a                               ; $5BB3: $EA $05 $D2
     ret                                           ; $5BB6: $C9
 
 jr_005_5BB7:
@@ -546,7 +546,7 @@ func_005_5D14::
     call GetEntityTransitionCountdown             ; $5D14: $CD $05 $0C
     jr   nz, jr_005_5D68                          ; $5D17: $20 $4F
 
-    ld   a, [$D205]                               ; $5D19: $FA $05 $D2
+    ld   a, [wD205]                               ; $5D19: $FA $05 $D2
     JP_TABLE                                      ; $5D1C
 ._00 dw func_005_5D27                             ; $5D1D
 ._01 dw func_005_5D69                             ; $5D1F
@@ -557,7 +557,7 @@ func_005_5D14::
 func_005_5D27::
     call GetRandomByte                            ; $5D27: $CD $0D $28
     and  $03                                      ; $5D2A: $E6 $03
-    ld   [$D205], a                               ; $5D2C: $EA $05 $D2
+    ld   [wD205], a                               ; $5D2C: $EA $05 $D2
     ld   e, $00                                   ; $5D2F: $1E $00
     ldh  a, [hLinkPositionX]                      ; $5D31: $F0 $98
     cp   $50                                      ; $5D33: $FE $50
@@ -966,7 +966,7 @@ label_005_5F78:
     call IncrementEntityState                     ; $5F7E: $CD $12 $3B
     ld   [hl], $07                                ; $5F81: $36 $07
     call GetEntityTransitionCountdown             ; $5F83: $CD $05 $0C
-    ld   a, [$D205]                               ; $5F86: $FA $05 $D2
+    ld   a, [wD205]                               ; $5F86: $FA $05 $D2
     cp   $04                                      ; $5F89: $FE $04
     jr   nz, jr_005_5F90                          ; $5F8B: $20 $03
 

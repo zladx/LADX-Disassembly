@@ -1965,7 +1965,7 @@ Data_019_4DB8::
 ; Spawns the flying rooster?
 func_019_4DBC::
     ld   a, c                                     ; $4DBC: $79
-    ld   [$D201], a                               ; $4DBD: $EA $01 $D2
+    ld   [wD201], a                               ; $4DBD: $EA $01 $D2
     ld   hl, wEntitiesPosXTable                   ; $4DC0: $21 $00 $C2
     add  hl, bc                                   ; $4DC3: $09
     ld   [hl], $50                                ; $4DC4: $36 $50
@@ -2161,7 +2161,7 @@ jr_019_4F5A:
     cp   $49                                      ; $4F72: $FE $49
     jr   nz, jr_019_4F8F                          ; $4F74: $20 $19
 
-    ld   a, [$D201]                               ; $4F76: $FA $01 $D2
+    ld   a, [wD201]                               ; $4F76: $FA $01 $D2
     ld   e, a                                     ; $4F79: $5F
     ld   d, b                                     ; $4F7A: $50
     ld   hl, wEntitiesStateTable                  ; $4F7B: $21 $90 $C2

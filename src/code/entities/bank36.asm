@@ -1983,7 +1983,7 @@ func_036_4BCF::
     ret                                           ; $4BE7: $C9
 
 func_036_4BE8::
-    ld   a, [$D202]                               ; $4BE8: $FA $02 $D2
+    ld   a, [wD202]                               ; $4BE8: $FA $02 $D2
     ld   e, a                                     ; $4BEB: $5F
     ld   d, $00                                   ; $4BEC: $16 $00
     ld   hl, wEntitiesStatusTable                 ; $4BEE: $21 $80 $C2
@@ -2118,7 +2118,7 @@ Data_036_4CB4::
 HardhitBeetleEntityHandler::
     call label_394D                               ; $4CB6: $CD $4D $39
     ld   a, c                                     ; $4CB9: $79
-    ld   [$D202], a                               ; $4CBA: $EA $02 $D2
+    ld   [wD202], a                               ; $4CBA: $EA $02 $D2
     call func_036_4F4E                            ; $4CBD: $CD $4E $4F
     ldh  a, [hActiveEntityStatus]                 ; $4CC0: $F0 $EA
     cp   $05                                      ; $4CC2: $FE $05
@@ -2561,7 +2561,7 @@ jr_036_4F96:
     ret                                           ; $4F9A: $C9
 
 func_036_4F9B::
-    ld   a, [$D202]                               ; $4F9B: $FA $02 $D2
+    ld   a, [wD202]                               ; $4F9B: $FA $02 $D2
     ld   e, a                                     ; $4F9E: $5F
     ld   d, $00                                   ; $4F9F: $16 $00
     ld   hl, wEntitiesStatusTable                 ; $4FA1: $21 $80 $C2
@@ -3362,7 +3362,7 @@ jr_036_54D3:
 GiantBuzzBlobEntityHandler::
     call label_394D                               ; $54E2: $CD $4D $39
     ld   a, c                                     ; $54E5: $79
-    ld   [$D202], a                               ; $54E6: $EA $02 $D2
+    ld   [wD202], a                               ; $54E6: $EA $02 $D2
     call func_036_5844                            ; $54E9: $CD $44 $58
     ldh  a, [hActiveEntityStatus]                 ; $54EC: $F0 $EA
     cp   $05                                      ; $54EE: $FE $05
@@ -4426,7 +4426,7 @@ Data_036_5B5A::
     db   $18, $20, $1C, $28
 
 BouncingBoulderEntityHandler::
-    ld   a, [$D202]                               ; $5B5E: $FA $02 $D2
+    ld   a, [wD202]                               ; $5B5E: $FA $02 $D2
     ld   e, a                                     ; $5B61: $5F
     ld   d, $00                                   ; $5B62: $16 $00
     ld   hl, wEntitiesStatusTable                 ; $5B64: $21 $80 $C2
@@ -4521,7 +4521,7 @@ label_036_5BE8:
 AvalaunchEntityHandler::
     call label_394D                               ; $5BF7: $CD $4D $39
     ld   a, c                                     ; $5BFA: $79
-    ld   [$D202], a                               ; $5BFB: $EA $02 $D2
+    ld   [wD202], a                               ; $5BFB: $EA $02 $D2
     call func_036_5F75                            ; $5BFE: $CD $75 $5F
     call label_3CD9                               ; $5C01: $CD $D9 $3C
     ldh  a, [hActiveEntityStatus]                 ; $5C04: $F0 $EA

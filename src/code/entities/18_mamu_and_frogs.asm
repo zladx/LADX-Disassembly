@@ -32,7 +32,7 @@ jr_018_400F:
 
 MamuAndFrogsState0Handler::
     xor  a                                        ; $402D: $AF
-    ld   [$D201], a                               ; $402E: $EA $01 $D2
+    ld   [wD201], a                               ; $402E: $EA $01 $D2
     ld   a, [wOcarinaSongFlags]                   ; $4031: $FA $49 $DB
     and  FROGS_SONG_OF_THE_SOUL_FLAG              ; $4034: $E6 $01
     jr   z, jr_018_404A                           ; $4036: $28 $12

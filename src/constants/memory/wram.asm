@@ -1697,7 +1697,19 @@ wD116::
   ds 1 ; D116
 
 ; Unlabeled
-ds ($D153 - $D117)
+ds ($D150 - $D117)
+
+; Unlabeled
+wD150::
+  ds 1 ; D150
+
+; Unlabeled
+wD151::
+  ds 1 ; D151
+
+; Unlabeled
+wD152::
+  ds 1 ; D152
 
 ; Unlabeled
 wD153::

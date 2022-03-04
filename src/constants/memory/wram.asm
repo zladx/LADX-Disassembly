@@ -1697,7 +1697,15 @@ wD116::
   ds 1 ; D116
 
 ; Unlabeled
-ds ($D155 - $D117)
+ds ($D153 - $D117)
+
+; Unlabeled
+wD153::
+  ds 1 ; D153
+
+; Unlabeled
+wD154::
+  ds 1 ; D154
 
 ; History of Link's last 32 horizontal positions
 ; (Used for NPCs that follow Link)

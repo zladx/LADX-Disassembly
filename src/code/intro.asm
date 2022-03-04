@@ -645,7 +645,7 @@ IntroStage8Handler::
     ld   a, [hli]                                 ; $727E: $2A
     ld   d, [hl]                                  ; $727F: $56
     ld   e, a                                     ; $7280: $5F
-    ld   hl, $D601                                ; $7281: $21 $01 $D6
+    ld   hl, wRequest                             ; $7281: $21 $01 $D6
     ld   c, $13                                   ; $7284: $0E $13
 
 .loop
@@ -775,7 +775,7 @@ Data_001_7364::
 
 IntroStageAHandler::
     ld   de, Data_001_7364                        ; $7376: $11 $64 $73
-    ld   hl, $D601                                ; $7379: $21 $01 $D6
+    ld   hl, wRequest                             ; $7379: $21 $01 $D6
     ld   c, $12                                   ; $737C: $0E $12
 
 .loop
@@ -978,7 +978,7 @@ Data_001_74B8::
     db $99, $2B, $83, $1E, $20, $22, $24, $99, $2C, $83, $1F, $21, $23, $25, 0 ; $74B8
 
 IntroLinkScream::
-    ld   de, $D601                                ; $74C7: $11 $01 $D6
+    ld   de, wRequest                             ; $74C7: $11 $01 $D6
     ld   hl, Data_001_74B8                        ; $74CA: $21 $B8 $74
     ld   c, $0F                                   ; $74CD: $0E $0F
 
@@ -1884,7 +1884,7 @@ func_001_7A16::
     ld   hl, Data_001_79EC                        ; $7A16: $21 $EC $79
 
 jr_001_7A19::
-    ld   de, $D601                                ; $7A19: $11 $01 $D6
+    ld   de, wRequest                             ; $7A19: $11 $01 $D6
     push bc                                       ; $7A1C: $C5
     ld   c, $18                                   ; $7A1D: $0E $18
 
@@ -2092,7 +2092,7 @@ func_7C60::
     adc  a, $00                                   ; $7C8A: $CE $00
     ld   d, a                                     ; $7C8C: $57
     ld   c, $00                                   ; $7C8D: $0E $00
-    ld   hl, $D601                                ; $7C8F: $21 $01 $D6
+    ld   hl, wRequest                             ; $7C8F: $21 $01 $D6
     ld   a, [wD00C]                               ; $7C92: $FA $0C $D0
     ldi  [hl], a                                  ; $7C95: $22
     ld   a, [wD00B]                               ; $7C96: $FA $0B $D0

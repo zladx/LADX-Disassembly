@@ -5238,7 +5238,7 @@ func_004_6E92::
     jp   nz, label_004_74D9                       ; $6E98: $C2 $D9 $74
 
     ld   a, c                                     ; $6E9B: $79
-    ld   [$D210], a                               ; $6E9C: $EA $10 $D2
+    ld   [wD210], a                               ; $6E9C: $EA $10 $D2
     ld   a, $02                                   ; $6E9F: $3E $02
     ld   [wBlockItemUsage], a                     ; $6EA1: $EA $0A $C5
     call GetEntityPrivateCountdown1               ; $6EA4: $CD $00 $0C
@@ -5398,7 +5398,7 @@ jr_004_6F6C:
     ld   a, $18                                   ; $6F98: $3E $18
     ld   [wD204], a                               ; $6F9A: $EA $04 $D2
     ld   a, $00                                   ; $6F9D: $3E $00
-    ld   [$D200], a                               ; $6F9F: $EA $00 $D2
+    ld   [wD200], a                               ; $6F9F: $EA $00 $D2
     ld   a, $04                                   ; $6FA2: $3E $04
     ld   [wD201], a                               ; $6FA4: $EA $01 $D2
     call IncrementEntityState                     ; $6FA7: $CD $12 $3B
@@ -5561,7 +5561,7 @@ func_004_707F::
     rra                                           ; $7083: $1F
     rra                                           ; $7084: $1F
     and  $01                                      ; $7085: $E6 $01
-    ld   [$D200], a                               ; $7087: $EA $00 $D2
+    ld   [wD200], a                               ; $7087: $EA $00 $D2
     ld   a, $10                                   ; $708A: $3E $10
     ld   [wD203], a                               ; $708C: $EA $03 $D2
     ldh  a, [hIsGBC]                              ; $708F: $F0 $FE
@@ -5721,7 +5721,7 @@ func_004_7165::
     rra                                           ; $7169: $1F
     rra                                           ; $716A: $1F
     and  $01                                      ; $716B: $E6 $01
-    ld   [$D200], a                               ; $716D: $EA $00 $D2
+    ld   [wD200], a                               ; $716D: $EA $00 $D2
     ld   a, $01                                   ; $7170: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7172: $E0 $A1
     ld   a, DIRECTION_UP                          ; $7174: $3E $02
@@ -5823,7 +5823,7 @@ func_004_71FF::
     rra                                           ; $7202: $1F
     rra                                           ; $7203: $1F
     and  $01                                      ; $7204: $E6 $01
-    ld   [$D200], a                               ; $7206: $EA $00 $D2
+    ld   [wD200], a                               ; $7206: $EA $00 $D2
     ld   a, $10                                   ; $7209: $3E $10
     ld   [wD202], a                               ; $720B: $EA $02 $D2
     ld   [wD203], a                               ; $720E: $EA $03 $D2
@@ -5873,7 +5873,7 @@ func_004_7249::
     rra                                           ; $724C: $1F
     rra                                           ; $724D: $1F
     and  $01                                      ; $724E: $E6 $01
-    ld   [$D200], a                               ; $7250: $EA $00 $D2
+    ld   [wD200], a                               ; $7250: $EA $00 $D2
     call GetEntityTransitionCountdown             ; $7253: $CD $05 $0C
     cp   $C8                                      ; $7256: $FE $C8
     jr   nz, jr_004_725F                          ; $7258: $20 $05
@@ -5909,7 +5909,7 @@ func_004_727C::
     rra                                           ; $727F: $1F
     rra                                           ; $7280: $1F
     and  $01                                      ; $7281: $E6 $01
-    ld   [$D200], a                               ; $7283: $EA $00 $D2
+    ld   [wD200], a                               ; $7283: $EA $00 $D2
     ldh  a, [hFrameCounter]                       ; $7286: $F0 $E7
     and  $03                                      ; $7288: $E6 $03
     ret  nz                                       ; $728A: $C0
@@ -5927,7 +5927,7 @@ func_004_7296::
     rra                                           ; $7299: $1F
     rra                                           ; $729A: $1F
     and  $01                                      ; $729B: $E6 $01
-    ld   [$D200], a                               ; $729D: $EA $00 $D2
+    ld   [wD200], a                               ; $729D: $EA $00 $D2
     ldh  a, [hLinkPositionX]                      ; $72A0: $F0 $98
     push af                                       ; $72A2: $F5
     ldh  a, [hLinkPositionY]                      ; $72A3: $F0 $99
@@ -5973,7 +5973,7 @@ func_004_72EF::
     rra                                           ; $72F2: $1F
     rra                                           ; $72F3: $1F
     and  $01                                      ; $72F4: $E6 $01
-    ld   [$D200], a                               ; $72F6: $EA $00 $D2
+    ld   [wD200], a                               ; $72F6: $EA $00 $D2
     call GetEntityTransitionCountdown             ; $72F9: $CD $05 $0C
     cp   $60                                      ; $72FC: $FE $60
     jr   nz, jr_004_7325                          ; $72FE: $20 $25
@@ -6155,7 +6155,7 @@ func_004_73FE::
     ldh  [hActiveEntityPosX], a                   ; $741C: $E0 $EE
     ld   a, [wD205]                               ; $741E: $FA $05 $D2
     ldh  [hActiveEntityVisualPosY], a             ; $7421: $E0 $EC
-    ld   a, [$D200]                               ; $7423: $FA $00 $D2
+    ld   a, [wD200]                               ; $7423: $FA $00 $D2
     ldh  [hActiveEntitySpriteVariant], a          ; $7426: $E0 $F1
     ld   de, Data_004_73E2                        ; $7428: $11 $E2 $73
     call RenderActiveEntitySpritesPair            ; $742B: $CD $C0 $3B
@@ -6492,7 +6492,7 @@ jr_004_75F8:
     cp   $0A                                      ; $760B: $FE $0A
     ret  nc                                       ; $760D: $D0
 
-    ld   a, [$D210]                               ; $760E: $FA $10 $D2
+    ld   a, [wD210]                               ; $760E: $FA $10 $D2
     ld   e, a                                     ; $7611: $5F
     ld   d, b                                     ; $7612: $50
     ld   hl, wEntitiesPrivateCountdown3Table      ; $7613: $21 $80 $C4

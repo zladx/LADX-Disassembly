@@ -535,9 +535,9 @@ Data_001_54E8::
     db $9D, $E9, $49, $7F, $9E, $09, $49, $7F, $00 ; $5508
 
 func_001_5511::
-    ; Copy $29 bytes from Data_001_54E8 to $D650
+    ; Copy $29 bytes from Data_001_54E8 to somewhere in wRequestData
     ld   hl, Data_001_54E8                        ; $5511: $21 $E8 $54
-    ld   de, $D650                                ; $5514: $11 $50 $D6
+    ld   de, wRequestData + $4C                   ; $5514: $11 $50 $D6
     ld   c, $29                                   ; $5517: $0E $29
 .copyLoop
     ld   a, [hli]                                 ; $5519: $2A
@@ -1287,7 +1287,7 @@ jr_001_5D77::
     dec  e                                        ; $5D7A: $1D
     jr   nz, jr_001_5D77                          ; $5D7B: $20 $FA
     pop  de                                       ; $5D7D: $D1
-    ld   hl, $D604                                ; $5D7E: $21 $04 $D6
+    ld   hl, wRequestData                         ; $5D7E: $21 $04 $D6
     add  hl, de                                   ; $5D81: $19
     ld   c, $00                                   ; $5D82: $0E $00
     ldh  a, [hMultiPurpose2]                      ; $5D84: $F0 $D9
@@ -1591,7 +1591,7 @@ SynchronizeDungeonsItemFlags::
     cp   MAP_COLOR_DUNGEON                        ; $5E70: $FE $FF
     jr   nz, .notColorDungeon                     ; $5E72: $20 $05
 
-    ; hl = $DDDA
+    ; hl = wColorDungeonItemFlags
     ld   hl, wColorDungeonItemFlags               ; $5E74: $21 $DA $DD
     jr   .endIf                                   ; $5E77: $18 $11
 
@@ -2111,22 +2111,25 @@ CreateFollowingNpcEntity::
     ld   hl, wEntitiesPosXTable                   ; $60A9: $21 $00 $C2
     add  hl, de                                   ; $60AC: $19
     ld   [hl], a                                  ; $60AD: $77
-    ld   hl, $D155                                ; $60AE: $21 $55 $D1
+    ld   hl, wLinkPositionXHistory                ; $60AE: $21 $55 $D1
     call .decrementConsecutiveBytes               ; $60B1: $CD $18 $61
+
     ldh  a, [hLinkPositionY]                      ; $60B4: $F0 $99
     ld   hl, wC13B                                ; $60B6: $21 $3B $C1
     add  a, [hl]                                  ; $60B9: $86
     ld   hl, wEntitiesPosYTable                   ; $60BA: $21 $10 $C2
     add  hl, de                                   ; $60BD: $19
     ld   [hl], a                                  ; $60BE: $77
-    ld   hl, $D175                                ; $60BF: $21 $75 $D1
+    ld   hl, wLinkPositionYHistory                ; $60BF: $21 $75 $D1
     call .decrementConsecutiveBytes               ; $60C2: $CD $18 $61
+
     ldh  a, [hLinkPositionZ]                      ; $60C5: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $60C7: $21 $10 $C3
     add  hl, de                                   ; $60CA: $19
     ld   [hl], a                                  ; $60CB: $77
-    ld   hl, $D195                                ; $60CC: $21 $95 $D1
+    ld   hl, wLinkPositionZHistory                ; $60CC: $21 $95 $D1
     call .decrementConsecutiveBytes               ; $60CF: $CD $18 $61
+
     ld   hl, wEntitiesPrivateState4Table          ; $60D2: $21 $40 $C4
     add  hl, de                                   ; $60D5: $19
     ld   [hl], $01                                ; $60D6: $36 $01
@@ -2421,7 +2424,7 @@ jr_001_6885::
     ld   [wTransitionSequenceCounter], a                               ; $6893: $EA $6B $C1
     ld   [wC16C], a                               ; $6896: $EA $6C $C1
     ld   e, $08                                   ; $6899: $1E $08
-    ld   hl, $D210                                ; $689B: $21 $10 $D2
+    ld   hl, wD210                                ; $689B: $21 $10 $D2
 
 jr_001_689E::
     ldi  [hl], a                                  ; $689E: $22
@@ -2439,7 +2442,7 @@ PeachPictureState4Handler::
     jr   nz, jr_001_68BF                          ; $68B5: $20 $08
     call IncrementGameplaySubtype                 ; $68B7: $CD $D6 $44
     ld   a, $80                                   ; $68BA: $3E $80
-    ld   [$D210], a                               ; $68BC: $EA $10 $D2
+    ld   [wD210], a                               ; $68BC: $EA $10 $D2
 
 jr_001_68BF::
     ret                                           ; $68BF: $C9
@@ -2471,13 +2474,13 @@ jr_001_68E3::
     ret                                           ; $68E3: $C9
 PeachPictureState7Handler::
     call func_6A7C                                ; $68E4: $CD $7C $6A
-    ld   a, [$D210]                               ; $68E7: $FA $10 $D2
+    ld   a, [wD210]                               ; $68E7: $FA $10 $D2
     dec  a                                        ; $68EA: $3D
-    ld   [$D210], a                               ; $68EB: $EA $10 $D2
+    ld   [wD210], a                               ; $68EB: $EA $10 $D2
     jr   nz, jr_001_68FB                          ; $68EE: $20 $0B
     ld   [wScreenShakeVertical], a                ; $68F0: $EA $56 $C1
     ld   a, $20                                   ; $68F3: $3E $20
-    ld   [$D210], a                               ; $68F5: $EA $10 $D2
+    ld   [wD210], a                               ; $68F5: $EA $10 $D2
     jp   IncrementGameplaySubtypeAndReturn        ; $68F8: $C3 $D6 $44
 
 jr_001_68FB::
@@ -2493,27 +2496,27 @@ jr_001_6903::
 PeachPictureState8Handler::
     call func_6A7C                                ; $6908: $CD $7C $6A
     call func_001_695B                            ; $690B: $CD $5B $69
-    ld   a, [$D210]                               ; $690E: $FA $10 $D2
+    ld   a, [wD210]                               ; $690E: $FA $10 $D2
     dec  a                                        ; $6911: $3D
-    ld   [$D210], a                               ; $6912: $EA $10 $D2
+    ld   [wD210], a                               ; $6912: $EA $10 $D2
     jr   nz, jr_001_6944                          ; $6915: $20 $2D
     call PlayBombExplosionSfx                     ; $6917: $CD $4B $0C
     ld   a, $30                                   ; $691A: $3E $30
-    ld   [$D210], a                               ; $691C: $EA $10 $D2
+    ld   [wD210], a                               ; $691C: $EA $10 $D2
     ld   a, $30                                   ; $691F: $3E $30
-    ld   [$D214], a                               ; $6921: $EA $14 $D2
+    ld   [wD214], a                               ; $6921: $EA $14 $D2
     ld   a, $18                                   ; $6924: $3E $18
-    ld   [$D215], a                               ; $6926: $EA $15 $D2
-    ld   a, [$D211]                               ; $6929: $FA $11 $D2
+    ld   [wD215], a                               ; $6926: $EA $15 $D2
+    ld   a, [wD211]                               ; $6929: $FA $11 $D2
     add  a, $08                                   ; $692C: $C6 $08
-    ld   [$D211], a                               ; $692E: $EA $11 $D2
-    ld   a, [$D213]                               ; $6931: $FA $13 $D2
+    ld   [wD211], a                               ; $692E: $EA $11 $D2
+    ld   a, [wD213]                               ; $6931: $FA $13 $D2
     inc  a                                        ; $6934: $3C
-    ld   [$D213], a                               ; $6935: $EA $13 $D2
+    ld   [wD213], a                               ; $6935: $EA $13 $D2
     cp   $04                                      ; $6938: $FE $04
     jr   nz, jr_001_6944                          ; $693A: $20 $08
     ld   a, $80                                   ; $693C: $3E $80
-    ld   [$D210], a                               ; $693E: $EA $10 $D2
+    ld   [wD210], a                               ; $693E: $EA $10 $D2
     call IncrementGameplaySubtype                 ; $6941: $CD $D6 $44
 
 jr_001_6944::
@@ -2521,7 +2524,7 @@ jr_001_6944::
 PeachPictureState9Handler::
     call func_6A7C                                ; $6945: $CD $7C $6A
     call func_001_695B                            ; $6948: $CD $5B $69
-    ld   hl, $D210                                ; $694B: $21 $10 $D2
+    ld   hl, wD210                                ; $694B: $21 $10 $D2
     dec  [hl]                                     ; $694E: $35
     ret  nz                                       ; $694F: $C0
     call IncrementGameplaySubtype                 ; $6950: $CD $D6 $44
@@ -2533,11 +2536,11 @@ PeachPictureState9Handler::
 func_001_695B::
     xor  a                                        ; $695B: $AF
     ld   [wScreenShakeVertical], a                ; $695C: $EA $56 $C1
-    ld   a, [$D215]                               ; $695F: $FA $15 $D2
+    ld   a, [wD215]                               ; $695F: $FA $15 $D2
     and  a                                        ; $6962: $A7
     jr   z, jr_001_6975                           ; $6963: $28 $10
     dec  a                                        ; $6965: $3D
-    ld   [$D215], a                               ; $6966: $EA $15 $D2
+    ld   [wD215], a                               ; $6966: $EA $15 $D2
     ld   e, $FE                                   ; $6969: $1E $FE
     and  $04                                      ; $696B: $E6 $04
     jr   z, jr_001_6971                           ; $696D: $28 $02
@@ -2649,15 +2652,15 @@ func_6A7C::
     ld   a, $20                                   ; $6A90: $3E $20
     sub  a, e                                     ; $6A92: $93
     ldh  [hActiveEntityVisualPosY], a             ; $6A93: $E0 $EC
-    ld   a, [$D214]                               ; $6A95: $FA $14 $D2
+    ld   a, [wD214]                               ; $6A95: $FA $14 $D2
     and  a                                        ; $6A98: $A7
     jr   z, .jr_6AC2                              ; $6A99: $28 $27
     dec  a                                        ; $6A9B: $3D
-    ld   [$D214], a                               ; $6A9C: $EA $14 $D2
+    ld   [wD214], a                               ; $6A9C: $EA $14 $D2
 
     ldh  a, [hFrameCounter]                       ; $6A9F: $F0 $E7
     and  $07                                      ; $6AA1: $E6 $07
-    ld   a, [$D212]                               ; $6AA3: $FA $12 $D2
+    ld   a, [wD212]                               ; $6AA3: $FA $12 $D2
     jr   nz, .jr_6AAE                             ; $6AA6: $20 $06
     inc  a                                        ; $6AA8: $3C
     cp   $03                                      ; $6AA9: $FE $03
@@ -2665,7 +2668,7 @@ func_6A7C::
     xor  a                                        ; $6AAD: $AF
 .jr_6AAE
 
-    ld   [$D212], a                               ; $6AAE: $EA $12 $D2
+    ld   [wD212], a                               ; $6AAE: $EA $12 $D2
     rla                                           ; $6AB1: $17
     and  $06                                      ; $6AB2: $E6 $06
     ld   e, a                                     ; $6AB4: $5F
@@ -2683,11 +2686,11 @@ func_6A7C::
     ldh  [hActiveEntityPosX], a                   ; $6AC4: $E0 $EE
     ld   a, [wScreenShakeVertical]                ; $6AC6: $FA $56 $C1
     ld   e, a                                     ; $6AC9: $5F
-    ld   a, [$D211]                               ; $6ACA: $FA $11 $D2
+    ld   a, [wD211]                               ; $6ACA: $FA $11 $D2
     add  a, $20                                   ; $6ACD: $C6 $20
     sub  a, e                                     ; $6ACF: $93
     ldh  [hActiveEntityVisualPosY], a             ; $6AD0: $E0 $EC
-    ld   a, [$D213]                               ; $6AD2: $FA $13 $D2
+    ld   a, [wD213]                               ; $6AD2: $FA $13 $D2
     ld   e, a                                     ; $6AD5: $5F
     ld   d, $00                                   ; $6AD6: $16 $00
     ld   hl, Data_001_6976                        ; $6AD8: $21 $76 $69

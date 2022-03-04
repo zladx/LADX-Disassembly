@@ -1696,21 +1696,54 @@ wD115::
 wD116::
   ds 1 ; D116
 
-; not used
-wD117::
-  ds $53 ; D117 - D169
+; Unlabeled
+ds ($D155 - $D117)
 
-; Something rombank and photographs related
-wD16A::
-  ds 1 ; 
+; History of Link's last 32 horizontal positions
+; (Used for NPCs that follow Link)
+wLinkPositionXHistory::
+  ds $20 ; D155
 
-; not used
-wD16B::
-  ds $4A ; D16B - D1B4
+; History of Link's last 32 vertical positions
+; (Used for NPCs that follow Link)
+wLinkPositionYHistory::
+  ds $20 ; D175
+
+; History of Link's last 32 Z positions
+; (Used for NPCs that follow Link)
+wLinkPositionZHistory::
+  ds $20 ; D195
 
 ; Unlabeled
 wD1B5::
-  ds $64 ; D1B5 - D218
+  ds $5B ; D1B5 - D211
+
+; Unlabeled
+wD210::
+  ds 1 ; D210
+
+; Unlabeled
+wD211::
+  ds 1 ; D211
+
+; Unlabeled
+wD212::
+  ds 1 ; D212
+
+; Unlabeled
+wD213::
+  ds 1 ; D213
+
+; Unlabeled
+wD214::
+  ds 1 ; D214
+
+; Unlabeled
+wD215::
+  ds 1 ; D215
+
+; Unlabeled
+ds 3 ; D215-D218
 
 ; Current form of the Final Nightmare (0-5)
 wFinalNightmareForm::
@@ -3288,3 +3321,11 @@ wStack::
 
 ; init puts the SP here
 wStackTop equ $DFFF
+
+section "WRAM Bank2", wramx[$D000], bank[2]
+
+; TODO
+
+; Something rombank and photographs related
+w2_D16A EQU $D16A
+

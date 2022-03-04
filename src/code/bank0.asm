@@ -666,7 +666,7 @@ LoadBaseTiles_trampoline::
     jp   RestoreStackedBankAndReturn              ; $0BC2: $C3 $73 $09
 
 func_BC5::
-    ld   a, [wD16A]                               ; $0BC5: $FA $6A $D1
+    ld   a, [w2_D16A]                             ; $0BC5: $FA $6A $D1
     ld   [MBC3SelectBank], a                      ; $0BC8: $EA $00 $21
 .loop
     ld   a, [hli]                                 ; $0BCB: $2A

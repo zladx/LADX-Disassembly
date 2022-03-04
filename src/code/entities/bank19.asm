@@ -7664,9 +7664,9 @@ jr_019_7985:
     and  a                                        ; $7A16: $A7
     jr   z, label_019_7A74                        ; $7A17: $28 $5B
 
-    ; increment $10 bytes at $D155 by hMultiPurpose0
+    ; increment $10 bytes at wLinkPositionXHistory by hMultiPurpose0
     ld   e, $10                                   ; $7A19: $1E $10
-    ld   hl, $D155                                ; $7A1B: $21 $55 $D1
+    ld   hl, wLinkPositionXHistory                ; $7A1B: $21 $55 $D1
 .loop_019_7A1E
     ldh  a, [hMultiPurpose0]                      ; $7A1E: $F0 $D7
     add  [hl]                                     ; $7A20: $86
@@ -7674,9 +7674,9 @@ jr_019_7985:
     dec  e                                        ; $7A22: $1D
     jr   nz, .loop_019_7A1E                       ; $7A23: $20 $F9
 
-    ; increment $10 bytes at $D175 by hMultiPurpose2
+    ; increment $10 bytes at wLinkPositionYHistory by hMultiPurpose2
     ld   e, $10                                   ; $7A25: $1E $10
-    ld   hl, $D175                                ; $7A27: $21 $75 $D1
+    ld   hl, wLinkPositionYHistory                ; $7A27: $21 $75 $D1
 .loop_019_7A2A
     ldh  a, [hMultiPurpose2]                      ; $7A2A: $F0 $D9
     add  [hl]                                     ; $7A2C: $86

@@ -340,7 +340,7 @@ func_036_41DF::
     jr   z, label_036_4217                        ; $41F8: $28 $1D
 
     ld   a, $70                                   ; $41FA: $3E $70
-    ld   hl, $D195                                ; $41FC: $21 $95 $D1
+    ld   hl, wLinkPositionZHistory                                ; $41FC: $21 $95 $D1
     ld   e, $10                                   ; $41FF: $1E $10
 
 jr_036_4201:

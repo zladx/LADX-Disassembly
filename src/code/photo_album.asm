@@ -645,7 +645,7 @@ func_028_43CC::
     ld   b, a                                   ; $43ED: $47
     ld   [$D169], a                             ; $43EE: $EA $69 $D1
     ld   a, [hl]                                ; $43F1: $7E
-    ld   [wD16A], a                             ; $43F2: $EA $6A $D1
+    ld   [w2_D16A], a                           ; $43F2: $EA $6A $D1
     ld   h, b                                   ; $43F5: $60
     ld   l, c                                   ; $43F6: $69
     push hl                                     ; $43F7: $E5
@@ -656,7 +656,7 @@ func_028_43CC::
     ld   bc, $800                               ; $4402: $01 $00 $08
     add  hl, bc                                 ; $4405: $09
     ld   de, $8800                              ; $4406: $11 $00 $88
-    ld   a, [wD16A]                             ; $4409: $FA $6A $D1
+    ld   a, [w2_D16A]                           ; $4409: $FA $6A $D1
     call CopyData_trampoline                    ; $440C: $CD $5D $0B
     pop  de                                     ; $440F: $D1
     ret                                         ; $4410: $C9

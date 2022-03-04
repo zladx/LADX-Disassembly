@@ -45,9 +45,8 @@ wLinkOAMBuffer::
 wDynamicOAMBuffer::
   ds 4 * 28 ; C030 - C09F
 
-; Unlabeled
-wC0A0::
-  ds $60 ; C0A0
+; Unused
+ds $60 ; C0A0-C0FF
 
 ; Table of the scrollX offset to add for each screen section being drawn
 wScrollXOffsetForSection::
@@ -61,16 +60,15 @@ wLCDSectionIndex::
 wIntroBGYOffset::
   ds 1 ; C106
 
-; Unlabeled
-wC107:
-  ds 1 ; C107
+; Unused
+ds 1 ; C107
 
-; TODO comment
+; Index of the player's name letter being drawn in a dialog
 wNameIndex::
   ds 1 ; C108
 
-; Unlabeled
-wC109:
+; Dialog ID to display in the text debugger
+wTextDebuggerDialogId::
   ds 1 ; C109
 
 ; Unlabeled

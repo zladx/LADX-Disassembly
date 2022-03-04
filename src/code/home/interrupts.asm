@@ -401,8 +401,8 @@ InterruptVBlank::
     xor  a                                        ; $053E: $AF
     ld   [wRequests], a                           ; $053F: $EA $00 $D6
     ld   [wRequest], a                            ; $0542: $EA $01 $D6
-    ld   [wDC90], a                               ; $0545: $EA $90 $DC
-    ld   [wDC91], a                               ; $0548: $EA $91 $DC
+    ld   [wRequestsAlt], a                        ; $0545: $EA $90 $DC
+    ld   [wRequestAlt], a                         ; $0548: $EA $91 $DC
 
     ; On Overworld, copy some palette data to OAM buffer
     callsb func_036_72BA                          ; $054B: $3E $36 $EA $00 $21 $CD $BA $72
@@ -458,8 +458,8 @@ PhotoAlbumVBlankHandler::
     xor  a                                        ; $059E: $AF
     ld   [wRequests], a                           ; $059F: $EA $00 $D6
     ld   [wRequest], a                            ; $05A2: $EA $01 $D6
-    ld   [wDC90], a                               ; $05A5: $EA $90 $DC
-    ld   [wDC91], a                               ; $05A8: $EA $91 $DC
+    ld   [wRequestsAlt], a                        ; $05A5: $EA $90 $DC
+    ld   [wRequestAlt], a                         ; $05A8: $EA $91 $DC
 
 .clearBGTilesFlag
     callsw PrinterInterruptVBlank                 ; $05AB: $3E $28 $CD $0C $08 $CD $16 $46

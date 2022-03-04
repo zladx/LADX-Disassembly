@@ -3250,23 +3250,27 @@ wObjPal8::
   ds 8 ; DC88 - DC8F
 
 ; This seems to be some secondary wRequest buffer used during map scrolling.
-wDC90::
+;
+; TODO: find a better name
+wRequestsAlt::
   ds 1 ; DC90
 
-; Request Destination high
-wDC91::
+; Secondary wRequest destination (higher byte)
+wRequestAlt::
+wRequestAltDestination::
+wRequestAltDestinationHigh::
   ds 1 ; DC91
 
-; Request Destination low
-wDC92::
+; Secondary wRequest destination (lower byte)
+wRequestAltDestinationLow::
   ds 1 ; DC92
 
-; Request Data Length
-wDC93::
-  ds 1 ; DC93 - DCBF
+; Secondary wRequest data Length
+wRequestAltLength::
+  ds 1 ; DC93
 
-; Request Data
-wDC94::
+; Secondary wRequest data
+wRequestAltData::
   ds $2C ; DC93 - DCBF
 
 ; Unlabeled

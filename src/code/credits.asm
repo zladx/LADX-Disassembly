@@ -1478,7 +1478,7 @@ CreditsStairsOwlSpeechHandler::
     ret  z                                        ; $4E4F: $C8
 
     ld   bc, wRequestDestinationHigh              ; $4E50: $01 $01 $D6
-    ld   de, wDC91                                ; $4E53: $11 $91 $DC
+    ld   de, wRequestAltDestinationHigh           ; $4E53: $11 $91 $DC
     ld   hl, $9880                                ; $4E56: $21 $80 $98
     swap a                                        ; $4E59: $CB $37
     sla  a                                        ; $4E5B: $CB $27
@@ -1673,7 +1673,7 @@ jr_017_5115:
 
     ld   hl, Data_017_4FDF                        ; $5120: $21 $DF $4F
     add  hl, de                                   ; $5123: $19
-    ld   de, wDC91                                ; $5124: $11 $91 $DC
+    ld   de, wRequestAltDestinationHigh           ; $5124: $11 $91 $DC
     ld   c, $18                                   ; $5127: $0E $18
 
 jr_017_5129:
@@ -2012,7 +2012,7 @@ jr_017_54F6:
 
     ld   hl, Data_017_5494                        ; $54F7: $21 $94 $54
     add  hl, de                                   ; $54FA: $19
-    ld   de, wDC91                                ; $54FB: $11 $91 $DC
+    ld   de, wRequestAltDestinationHigh           ; $54FB: $11 $91 $DC
     ld   c, $03                                   ; $54FE: $0E $03
 
 jr_017_5500:
@@ -3232,7 +3232,7 @@ jr_017_5F75:
     and  a                                        ; $5F7E: $A7
     ret  z                                        ; $5F7F: $C8
 
-    ld   de, wDC91                                ; $5F80: $11 $91 $DC
+    ld   de, wRequestAltDestinationHigh           ; $5F80: $11 $91 $DC
     ld   a, [hl+]                                 ; $5F83: $2A
     ld   [de], a                                  ; $5F84: $12
     inc  de                                       ; $5F85: $13
@@ -4153,7 +4153,7 @@ jr_017_67E7:
     ld   a, [hl+]                                 ; $67F8: $2A
     ld   h, [hl]                                  ; $67F9: $66
     ld   l, a                                     ; $67FA: $6F
-    ld   de, wDC91                                ; $67FB: $11 $91 $DC
+    ld   de, wRequestAltDestinationHigh           ; $67FB: $11 $91 $DC
     ld   c, $36                                   ; $67FE: $0E $36
 
 jr_017_6800:
@@ -5004,7 +5004,7 @@ jr_017_6FA7:
     ret  z                                        ; $6FB0: $C8
 
     ld   hl, Data_017_6F8E                        ; $6FB1: $21 $8E $6F
-    ld   de, wDC91                                ; $6FB4: $11 $91 $DC
+    ld   de, wRequestAltDestinationHigh           ; $6FB4: $11 $91 $DC
     ld   c, $11                                   ; $6FB7: $0E $11
 
 jr_017_6FB9:
@@ -5131,7 +5131,7 @@ CreditsTheEnd5Handler::
     jr   nz, .loop_017_70B9                       ; $70BD: $20 $FA
 
     ld   hl, Data_017_70A0                        ; $70BF: $21 $A0 $70
-    ld   de, wDC91                                ; $70C2: $11 $91 $DC
+    ld   de, wRequestAltDestinationHigh           ; $70C2: $11 $91 $DC
     ld   c, Data_017_70A0.end - Data_017_70A0                                   ; $70C5: $0E $11
 
 .loop_017_70C7

@@ -3374,7 +3374,7 @@ SirensInstrumentState2Handler::
     call UnloadEntity                             ; $5DE6: $CD $8D $3F
     xor  a                                        ; $5DE9: $AF
     ldh  [hLinkAnimationState], a                 ; $5DEA: $E0 $9D
-    ld   a, [$D201]                               ; $5DEC: $FA $01 $D2
+    ld   a, [wD201]                               ; $5DEC: $FA $01 $D2
     ld   e, a                                     ; $5DEF: $5F
     ld   d, b                                     ; $5DF0: $50
     ld   hl, wEntitiesStateTable                  ; $5DF1: $21 $90 $C2
@@ -3522,7 +3522,7 @@ SirensInstrumentState0Handler::
 
 jr_003_5EAE:
     ld   a, c                                     ; $5EAE: $79
-    ld   [$D201], a                               ; $5EAF: $EA $01 $D2
+    ld   [wD201], a                               ; $5EAF: $EA $01 $D2
     ldh  a, [hRoomStatus]                         ; $5EB2: $F0 $F8
     and  ROOM_STATUS_EVENT_1                      ; $5EB4: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $5EB6: $C2 $8D $3F
@@ -7293,7 +7293,7 @@ jr_003_748B:
 
     ld   a, JINGLE_BUMP                           ; $7491: $3E $09
     ldh  [hJingle], a                             ; $7493: $E0 $F2
-    ld   a, [$D205]                               ; $7495: $FA $05 $D2
+    ld   a, [wD205]                               ; $7495: $FA $05 $D2
     cp   $00                                      ; $7498: $FE $00
     jr   z, jr_003_74BF                           ; $749A: $28 $23
 
@@ -7428,7 +7428,7 @@ jr_003_752D:
     cp   ENTITY_BLAINO                            ; $7543: $FE $BE
     jr   nz, jr_003_7570                          ; $7545: $20 $29
 
-    ld   a, [$D205]                               ; $7547: $FA $05 $D2
+    ld   a, [wD205]                               ; $7547: $FA $05 $D2
     and  a                                        ; $754A: $A7
     jr   z, jr_003_7570                           ; $754B: $28 $23
 

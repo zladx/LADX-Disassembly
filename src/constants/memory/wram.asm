@@ -1714,9 +1714,72 @@ wLinkPositionYHistory::
 wLinkPositionZHistory::
   ds $20 ; D195
 
-; Unlabeled
+; History of Link's directions ($10)
 wD1B5::
-  ds $5B ; D1B5 - D211
+  ds $10
+
+; Unused?
+ds ($D201 - $D1C5)
+
+; Unlabeled
+wD201::
+  ds 1 ; D201
+
+; Unlabeled
+wD202::
+  ds 1 ; D202
+
+; Unlabeled
+wD203::
+  ds 1 ; D203
+
+; Unlabeled
+wD204::
+  ds 1 ; D204
+
+; Unlabeled
+wD205::
+  ds 1 ; D205
+
+; Unlabeled
+wD206::
+  ds 1 ; D206
+
+; Unlabeled
+wD207::
+  ds 1 ; D207
+
+; Unlabeled
+wD208::
+  ds 1 ; D208
+
+; Unlabeled
+wD209::
+  ds 1 ; D209
+
+; Unlabeled
+wD20A::
+  ds 1 ; D20A
+
+; Unlabeled
+wD20B::
+  ds 1 ; D20B
+
+; Unlabeled
+wD20C::
+  ds 1 ; D20C
+
+; Unlabeled
+wD20D::
+  ds 1 ; D20D
+
+; Unlabeled
+wD20E::
+  ds 1 ; D20E
+
+; Unlabeled
+wD20F::
+  ds 1 ; D20F
 
 ; Unlabeled
 wD210::

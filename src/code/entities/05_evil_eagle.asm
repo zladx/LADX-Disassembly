@@ -63,7 +63,7 @@ jr_005_5A5D:
     ld   [hl], $80                                ; $5A67: $36 $80
     ld   e, $0C                                   ; $5A69: $1E $0C
     xor  a                                        ; $5A6B: $AF
-    ld   hl, $D790                                ; $5A6C: $21 $90 $D7
+    ld   hl, wRoomObjectsArea + $90               ; $5A6C: $21 $90 $D7
 
 .loop
     ld   [hl+], a                                 ; $5A6F: $22
@@ -817,7 +817,7 @@ jr_005_5E8A:
     pop  bc                                       ; $5EA2: $C1
 
 jr_005_5EA3:
-    ld   a, [$D210]                               ; $5EA3: $FA $10 $D2
+    ld   a, [wD210]                               ; $5EA3: $FA $10 $D2
     inc  a                                        ; $5EA6: $3C
     cp   $22                                      ; $5EA7: $FE $22
     jr   c, jr_005_5EB0                           ; $5EA9: $38 $05
@@ -827,7 +827,7 @@ jr_005_5EA3:
     xor  a                                        ; $5EAF: $AF
 
 jr_005_5EB0:
-    ld   [$D210], a                               ; $5EB0: $EA $10 $D2
+    ld   [wD210], a                               ; $5EB0: $EA $10 $D2
     call GetEntityTransitionCountdown             ; $5EB3: $CD $05 $0C
     cp   $C0                                      ; $5EB6: $FE $C0
     jr   nc, jr_005_5F2F                          ; $5EB8: $30 $75

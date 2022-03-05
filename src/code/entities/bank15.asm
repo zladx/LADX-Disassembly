@@ -2833,7 +2833,7 @@ FinalNightmareForm3Handler::
     jp   nz, label_015_5DED                       ; $574E: $C2 $ED $5D
 
     ld   a, c                                     ; $5751: $79
-    ld   [$D201], a                               ; $5752: $EA $01 $D2
+    ld   [wD201], a                               ; $5752: $EA $01 $D2
     ld   a, [wD21A]                               ; $5755: $FA $1A $D2
     and  a                                        ; $5758: $A7
     jr   nz, jr_015_575E                          ; $5759: $20 $03
@@ -3660,7 +3660,7 @@ func_015_5EAC::
     and  a                                        ; $5EB2: $A7
     ret  nz                                       ; $5EB3: $C0
 
-    ld   a, [$D201]                               ; $5EB4: $FA $01 $D2
+    ld   a, [wD201]                               ; $5EB4: $FA $01 $D2
     ld   e, a                                     ; $5EB7: $5F
     ld   d, b                                     ; $5EB8: $50
     ld   hl, wEntitiesPosXTable                   ; $5EB9: $21 $00 $C2
@@ -3972,7 +3972,7 @@ func_015_60D4::
     ld   e, $0C                                   ; $60F9: $1E $0C
 
 jr_015_60FB:
-    ld   hl, $D202                                ; $60FB: $21 $02 $D2
+    ld   hl, wD202                                ; $60FB: $21 $02 $D2
     ld   a, [hl]                                  ; $60FE: $7E
     inc  a                                        ; $60FF: $3C
     ld   [hl], a                                  ; $6100: $77
@@ -5209,7 +5209,7 @@ Data_015_6C5D::
     db   $00, $01, $02, $03
 
 label_015_6C61:
-    ld   a, [$D201]                               ; $6C61: $FA $01 $D2
+    ld   a, [wD201]                               ; $6C61: $FA $01 $D2
     ld   e, a                                     ; $6C64: $5F
     ld   d, b                                     ; $6C65: $50
     ld   hl, wEntitiesStateTable                  ; $6C66: $21 $90 $C2
@@ -5271,7 +5271,7 @@ jr_015_6CBC:
     push af                                       ; $6CBE: $F5
     ldh  a, [hLinkPositionY]                      ; $6CBF: $F0 $99
     push af                                       ; $6CC1: $F5
-    ld   a, [$D201]                               ; $6CC2: $FA $01 $D2
+    ld   a, [wD201]                               ; $6CC2: $FA $01 $D2
     ld   e, a                                     ; $6CC5: $5F
     ld   d, b                                     ; $6CC6: $50
     ld   hl, wEntitiesPosXTable                   ; $6CC7: $21 $00 $C2
@@ -5323,7 +5323,7 @@ jr_015_6CF7:
     cp   $06                                      ; $6D0C: $FE $06
     jr   nc, jr_015_6D29                          ; $6D0E: $30 $19
 
-    ld   a, [$D201]                               ; $6D10: $FA $01 $D2
+    ld   a, [wD201]                               ; $6D10: $FA $01 $D2
     ld   e, a                                     ; $6D13: $5F
     ld   d, b                                     ; $6D14: $50
     ld   hl, wEntitiesStateTable                  ; $6D15: $21 $90 $C2

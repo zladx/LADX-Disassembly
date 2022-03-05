@@ -88,13 +88,13 @@ jr_018_5A3F:
 
     ; Link lifting Marin animation
     ldh  a, [hLinkPositionX]                      ; $5A5D: $F0 $98
-    ld   hl, $D155                                ; $5A5F: $21 $55 $D1
+    ld   hl, wLinkPositionXHistory                ; $5A5F: $21 $55 $D1
     call func_018_5A79                            ; $5A62: $CD $79 $5A
     ldh  a, [hLinkPositionY]                      ; $5A65: $F0 $99
-    ld   hl, $D175                                ; $5A67: $21 $75 $D1
+    ld   hl, wLinkPositionYHistory                ; $5A67: $21 $75 $D1
     call func_018_5A79                            ; $5A6A: $CD $79 $5A
     xor  a                                        ; $5A6D: $AF
-    ld   hl, $D195                                ; $5A6E: $21 $95 $D1
+    ld   hl, wLinkPositionZHistory                ; $5A6E: $21 $95 $D1
     call func_018_5A79                            ; $5A71: $CD $79 $5A
     ldh  a, [hLinkDirection]                      ; $5A74: $F0 $9E
     ld   hl, wD1B5                                ; $5A76: $21 $B5 $D1
@@ -408,9 +408,9 @@ func_018_5C39::
     add  hl, bc                                   ; $5C47: $09
     ld   [hl], $FF                                ; $5C48: $36 $FF
     ldh  a, [hActiveEntityPosX]                   ; $5C4A: $F0 $EE
-    ld   hl, $D155                                ; $5C4C: $21 $55 $D1
+    ld   hl, wLinkPositionXHistory                ; $5C4C: $21 $55 $D1
     call func_018_5C63                            ; $5C4F: $CD $63 $5C
-    ld   hl, $D175                                ; $5C52: $21 $75 $D1
+    ld   hl, wLinkPositionYHistory                ; $5C52: $21 $75 $D1
     ldh  a, [hActiveEntityVisualPosY]             ; $5C55: $F0 $EC
     ld   e, $10                                   ; $5C57: $1E $10
 
@@ -466,18 +466,18 @@ label_018_5C6A:
     ld   hl, wEntitiesInertiaTable                ; $5C99: $21 $D0 $C3
     add  hl, bc                                   ; $5C9C: $09
     ld   a, [hl]                                  ; $5C9D: $7E
-    ldh  [hMultiPurposeG], a                               ; $5C9E: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $5C9E: $E0 $E8
     and  $0F                                      ; $5CA0: $E6 $0F
     ld   e, a                                     ; $5CA2: $5F
     ld   d, b                                     ; $5CA3: $50
-    ld   hl, $D155                                ; $5CA4: $21 $55 $D1
+    ld   hl, wLinkPositionXHistory                ; $5CA4: $21 $55 $D1
     add  hl, de                                   ; $5CA7: $19
     ldh  a, [hLinkFinalPositionX]                 ; $5CA8: $F0 $9F
     ld   [hl], a                                  ; $5CAA: $77
     ldh  a, [hLinkFinalPositionY]                 ; $5CAB: $F0 $A0
     ld   hl, wC13B                                ; $5CAD: $21 $3B $C1
     add  [hl]                                     ; $5CB0: $86
-    ld   hl, $D175                                ; $5CB1: $21 $75 $D1
+    ld   hl, wLinkPositionYHistory                ; $5CB1: $21 $75 $D1
     add  hl, de                                   ; $5CB4: $19
     ld   [hl], a                                  ; $5CB5: $77
     ld   hl, wD1B5                                ; $5CB6: $21 $B5 $D1
@@ -491,7 +491,7 @@ label_018_5C6A:
     and  $0F                                      ; $5CC4: $E6 $0F
     ld   e, a                                     ; $5CC6: $5F
     ld   d, b                                     ; $5CC7: $50
-    ld   hl, $D195                                ; $5CC8: $21 $95 $D1
+    ld   hl, wLinkPositionZHistory                                ; $5CC8: $21 $95 $D1
     add  hl, de                                   ; $5CCB: $19
     ldh  a, [hLinkPositionZ]                      ; $5CCC: $F0 $A2
     ld   [hl], a                                  ; $5CCE: $77
@@ -526,13 +526,13 @@ jr_018_5CEF:
     and  $0F                                      ; $5CF7: $E6 $0F
     ld   e, a                                     ; $5CF9: $5F
     ld   d, b                                     ; $5CFA: $50
-    ld   hl, $D155                                ; $5CFB: $21 $55 $D1
+    ld   hl, wLinkPositionXHistory                ; $5CFB: $21 $55 $D1
     add  hl, de                                   ; $5CFE: $19
     ld   a, [hl]                                  ; $5CFF: $7E
     ld   hl, wEntitiesPosXTable                   ; $5D00: $21 $00 $C2
     add  hl, bc                                   ; $5D03: $09
     ld   [hl], a                                  ; $5D04: $77
-    ld   hl, $D175                                ; $5D05: $21 $75 $D1
+    ld   hl, wLinkPositionYHistory                ; $5D05: $21 $75 $D1
     add  hl, de                                   ; $5D08: $19
     ld   a, [hl]                                  ; $5D09: $7E
     ld   hl, wEntitiesPosYTable                   ; $5D0A: $21 $10 $C2
@@ -553,7 +553,7 @@ jr_018_5CEF:
     add  hl, bc                                   ; $5D23: $09
     ld   a, [hl]                                  ; $5D24: $7E
     push af                                       ; $5D25: $F5
-    ld   hl, $D195                                ; $5D26: $21 $95 $D1
+    ld   hl, wLinkPositionZHistory                                ; $5D26: $21 $95 $D1
     add  hl, de                                   ; $5D29: $19
     ld   e, [hl]                                  ; $5D2A: $5E
     ld   hl, wEntitiesPosZTable                   ; $5D2B: $21 $10 $C3

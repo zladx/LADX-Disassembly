@@ -530,7 +530,7 @@ jr_01B_435E:
     call Copy2Bytes_1B                            ; $4369: $CD $36 $43
     ld   de, wD310                                ; $436C: $11 $10 $D3
     call Copy2Bytes_1B                            ; $436F: $CD $36 $43
-    ld   de, $D320                                ; $4372: $11 $20 $D3
+    ld   de, wD320                                ; $4372: $11 $20 $D3
     call Copy2Bytes_1B                            ; $4375: $CD $36 $43
     ld   de, wD330                                ; $4378: $11 $30 $D3
     call Copy2Bytes_1B                            ; $437B: $CD $36 $43
@@ -539,8 +539,8 @@ jr_01B_435E:
     ld   hl, wD310                                ; $4384: $21 $10 $D3
     ld   de, wD314                                ; $4387: $11 $14 $D3
     call LoadSoundDefinitionData                  ; $438A: $CD $2B $43
-    ld   hl, $D320                                ; $438D: $21 $20 $D3
-    ld   de, $D324                                ; $4390: $11 $24 $D3
+    ld   hl, wD320                                ; $438D: $21 $20 $D3
+    ld   de, wD320 + 4                            ; $4390: $11 $24 $D3
     call LoadSoundDefinitionData                  ; $4393: $CD $2B $43
     ld   hl, wD330                                ; $4396: $21 $30 $D3
     ld   de, wD330 + 4                                ; $4399: $11 $34 $D3
@@ -1392,7 +1392,7 @@ jr_01B_47AE:
     ret  nz                                       ; $47C8: $C0
 
     ld   c, $17                                   ; $47C9: $0E $17
-    ld   de, $D32A                                ; $47CB: $11 $2A $D3
+    ld   de, wD320 + $0A                          ; $47CB: $11 $2A $D3
     call func_01B_47D2                            ; $47CE: $CD $D2 $47
     ret                                           ; $47D1: $C9
 

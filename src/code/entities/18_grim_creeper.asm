@@ -63,19 +63,19 @@ jr_018_7028:
 
 GrimCreeperState0Handler::
     ld   a, $07                                   ; $7039: $3E $07
-    ld   [$D205], a                               ; $703B: $EA $05 $D2
+    ld   [wD205], a                               ; $703B: $EA $05 $D2
     jp   IncrementEntityState                     ; $703E: $C3 $12 $3B
 
 GrimCreeperState1Handler::
     call GetEntityTransitionCountdown             ; $7041: $CD $05 $0C
     ld   [hl], $80                                ; $7044: $36 $80
     xor  a                                        ; $7046: $AF
-    ld   [$D201], a                               ; $7047: $EA $01 $D2
-    ld   [$D202], a                               ; $704A: $EA $02 $D2
-    ld   a, [$D205]                               ; $704D: $FA $05 $D2
+    ld   [wD201], a                               ; $7047: $EA $01 $D2
+    ld   [wD202], a                               ; $704A: $EA $02 $D2
+    ld   a, [wD205]                               ; $704D: $FA $05 $D2
     inc  a                                        ; $7050: $3C
     and  $07                                      ; $7051: $E6 $07
-    ld   [$D205], a                               ; $7053: $EA $05 $D2
+    ld   [wD205], a                               ; $7053: $EA $05 $D2
     jp   IncrementEntityState                     ; $7056: $C3 $12 $3B
 
 GrimCreeperState2Handler::
@@ -199,7 +199,7 @@ label_018_70FD:
     jp   SetEntitySpriteVariant                   ; $7106: $C3 $0C $3B
 
 GrimCreeperState4Handler::
-    ld   a, [$D201]                               ; $7109: $FA $01 $D2
+    ld   a, [wD201]                               ; $7109: $FA $01 $D2
     cp   $06                                      ; $710C: $FE $06
     jr   nz, jr_018_7121                          ; $710E: $20 $11
 
@@ -207,7 +207,7 @@ GrimCreeperState4Handler::
     add  hl, bc                                   ; $7113: $09
     ld   [hl], b                                  ; $7114: $70
     xor  a                                        ; $7115: $AF
-    ld   [$D201], a                               ; $7116: $EA $01 $D2
+    ld   [wD201], a                               ; $7116: $EA $01 $D2
     call GetEntityTransitionCountdown             ; $7119: $CD $05 $0C
     ld   [hl], $40                                ; $711C: $36 $40
     call IncrementEntityState                     ; $711E: $CD $12 $3B
@@ -220,7 +220,7 @@ GrimCreeperState5Handler::
     ret  nz                                       ; $7127: $C0
 
     ld   a, $FF                                   ; $7128: $3E $FF
-    ld   [$D201], a                               ; $712A: $EA $01 $D2
+    ld   [wD201], a                               ; $712A: $EA $01 $D2
     ld   hl, wEntitiesDropTimerTable              ; $712D: $21 $50 $C4
     add  hl, bc                                   ; $7130: $09
     ld   [hl], $40                                ; $7131: $36 $40
@@ -311,7 +311,7 @@ jr_018_721E:
     push af                                       ; $721E: $F5
     ldh  a, [hLinkPositionY]                      ; $721F: $F0 $99
     push af                                       ; $7221: $F5
-    ld   a, [$D205]                               ; $7222: $FA $05 $D2
+    ld   a, [wD205]                               ; $7222: $FA $05 $D2
     rla                                           ; $7225: $17
     and  $FE                                      ; $7226: $E6 $FE
     ld   e, a                                     ; $7228: $5F
@@ -370,7 +370,7 @@ jr_018_7260:
     cp   $06                                      ; $7262: $FE $06
     jr   nc, jr_018_726D                          ; $7264: $30 $07
 
-    ld   hl, $D201                                ; $7266: $21 $01 $D2
+    ld   hl, wD201                                ; $7266: $21 $01 $D2
     inc  [hl]                                     ; $7269: $34
     call IncrementEntityState                     ; $726A: $CD $12 $3B
 
@@ -395,7 +395,7 @@ Data_018_7280::
     db   $04, $0C, $14, $1C, $24, $2C, $34, $3C
 
 func_018_7288::
-    ld   a, [$D201]                               ; $7288: $FA $01 $D2
+    ld   a, [wD201]                               ; $7288: $FA $01 $D2
     cp   $FF                                      ; $728B: $FE $FF
     jr   nz, jr_018_72A2                          ; $728D: $20 $13
 

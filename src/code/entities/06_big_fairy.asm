@@ -35,7 +35,7 @@ jr_006_70B8:
     jp   z, label_006_7123                        ; $70BE: $CA $23 $71
 
     ld   hl, wEntitiesStatusTable                 ; $70C1: $21 $80 $C2
-    ld   a, [$D201]                               ; $70C4: $FA $01 $D2
+    ld   a, [wD201]                               ; $70C4: $FA $01 $D2
     ld   e, a                                     ; $70C7: $5F
     ld   d, b                                     ; $70C8: $50
     add  hl, de                                   ; $70C9: $19
@@ -43,7 +43,7 @@ jr_006_70B8:
     and  a                                        ; $70CB: $A7
     jp   z, ClearEntityStatus_06                  ; $70CC: $CA $DB $65
 
-    ld   a, [$D202]                               ; $70CF: $FA $02 $D2
+    ld   a, [wD202]                               ; $70CF: $FA $02 $D2
     ldh  [hActiveEntitySpriteVariant], a          ; $70D2: $E0 $F1
     ld   de, Data_006_70A1                        ; $70D4: $11 $A1 $70
     call RenderActiveEntitySprite                 ; $70D7: $CD $77 $3C
@@ -137,9 +137,9 @@ jr_006_714A:
 
 BigFairyWaitingHandler::
     xor  a                                        ; $715E: $AF
-    ld   [$D202], a                               ; $715F: $EA $02 $D2
+    ld   [wD202], a                               ; $715F: $EA $02 $D2
     ld   a, c                                     ; $7162: $79
-    ld   [$D201], a                               ; $7163: $EA $01 $D2
+    ld   [wD201], a                               ; $7163: $EA $01 $D2
     ldh  a, [hLinkPositionX]                      ; $7166: $F0 $98
     sub  $50                                      ; $7168: $D6 $50
     add  $08                                      ; $716A: $C6 $08
@@ -238,7 +238,7 @@ BigFairyDisappearingHandler::
     ld   a, $FF                                   ; $71FF: $3E $FF
 
 jr_006_7201:
-    ld   [$D202], a                               ; $7201: $EA $02 $D2
+    ld   [wD202], a                               ; $7201: $EA $02 $D2
     call SetEntitySpriteVariant                   ; $7204: $CD $0C $3B
     ld   a, $02                                   ; $7207: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7209: $E0 $A1

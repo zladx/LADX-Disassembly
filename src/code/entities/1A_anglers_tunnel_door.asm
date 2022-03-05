@@ -117,8 +117,8 @@ AnglersTunnelDoorEntityHandler::
     ld   d, h                                     ; $7135: $54
     ld   e, l                                     ; $7136: $5D
     ld   c, $0A                                   ; $7137: $0E $0A
-    ld   hl, wDC91                                ; $7139: $21 $91 $DC
-    ld   a, [wDC90]                               ; $713C: $FA $90 $DC
+    ld   hl, wRequestAltDestinationHigh           ; $7139: $21 $91 $DC
+    ld   a, [wRequestsAlt]                        ; $713C: $FA $90 $DC
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $713F: $F0 $CF
     ld   [hl+], a                                 ; $7141: $22
     ldh  a, [hIntersectedObjectBGAddressLow]      ; $7142: $F0 $D0

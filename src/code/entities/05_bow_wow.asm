@@ -8,7 +8,7 @@ Data_005_401C::
 
 BowWowEntityHandler::
     ld   a, c                                     ; $4038: $79
-    ld   [$D154], a                               ; $4039: $EA $54 $D1
+    ld   [wD154], a                               ; $4039: $EA $54 $D1
     ld   a, [wIsBowWowFollowingLink]              ; $403C: $FA $56 $DB
     cp   $01                                      ; $403F: $FE $01
     jr   nz, jr_005_4054                          ; $4041: $20 $11
@@ -182,11 +182,11 @@ jr_005_4137:
     ld   hl, wEntitiesPrivateState1Table          ; $4137: $21 $B0 $C2
     add  hl, bc                                   ; $413A: $09
     ld   a, [hl]                                  ; $413B: $7E
-    ld   [$D150], a                               ; $413C: $EA $50 $D1
+    ld   [wD150], a                               ; $413C: $EA $50 $D1
     ld   hl, wEntitiesPrivateState2Table          ; $413F: $21 $C0 $C2
     add  hl, bc                                   ; $4142: $09
     ld   a, [hl]                                  ; $4143: $7E
-    ld   [$D151], a                               ; $4144: $EA $51 $D1
+    ld   [wD151], a                               ; $4144: $EA $51 $D1
     call AddEntityZSpeedToPos_05                  ; $4147: $CD $EA $7A
     ld   hl, wEntitiesSpeedZTable                 ; $414A: $21 $20 $C3
     add  hl, bc                                   ; $414D: $09
@@ -492,7 +492,7 @@ jr_005_42B9:
     jr   nc, jr_005_4323                          ; $42F6: $30 $2B
 
     ld   a, e                                     ; $42F8: $7B
-    ld   [$D152], a                               ; $42F9: $EA $52 $D1
+    ld   [wD152], a                               ; $42F9: $EA $52 $D1
     ldh  a, [hLinkPositionY]                      ; $42FC: $F0 $99
     push af                                       ; $42FE: $F5
     ldh  a, [hLinkPositionX]                      ; $42FF: $F0 $98
@@ -531,7 +531,7 @@ label_005_432F:
     ret                                           ; $4334: $C9
 
 label_005_4335:
-    ld   a, [$D152]                               ; $4335: $FA $52 $D1
+    ld   a, [wD152]                               ; $4335: $FA $52 $D1
     ld   e, a                                     ; $4338: $5F
     ld   d, b                                     ; $4339: $50
     ld   hl, wEntitiesStatusTable                 ; $433A: $21 $80 $C2
@@ -798,7 +798,7 @@ jr_005_4473:
     ld   e, $06                                   ; $4483: $1E $06
 
 jr_005_4485:
-    ld   a, [$D151]                               ; $4485: $FA $51 $D1
+    ld   a, [wD151]                               ; $4485: $FA $51 $D1
     sub  [hl]                                     ; $4488: $96
     jr   z, jr_005_4492                           ; $4489: $28 $07
 
@@ -827,7 +827,7 @@ jr_005_4499:
     ld   e, $06                                   ; $44A2: $1E $06
 
 jr_005_44A4:
-    ld   a, [$D150]                               ; $44A4: $FA $50 $D1
+    ld   a, [wD150]                               ; $44A4: $FA $50 $D1
     sub  [hl]                                     ; $44A7: $96
     jr   z, jr_005_44B1                           ; $44A8: $28 $07
 

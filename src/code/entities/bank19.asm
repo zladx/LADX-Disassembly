@@ -1965,7 +1965,7 @@ Data_019_4DB8::
 ; Spawns the flying rooster?
 func_019_4DBC::
     ld   a, c                                     ; $4DBC: $79
-    ld   [$D201], a                               ; $4DBD: $EA $01 $D2
+    ld   [wD201], a                               ; $4DBD: $EA $01 $D2
     ld   hl, wEntitiesPosXTable                   ; $4DC0: $21 $00 $C2
     add  hl, bc                                   ; $4DC3: $09
     ld   [hl], $50                                ; $4DC4: $36 $50
@@ -2161,7 +2161,7 @@ jr_019_4F5A:
     cp   $49                                      ; $4F72: $FE $49
     jr   nz, jr_019_4F8F                          ; $4F74: $20 $19
 
-    ld   a, [$D201]                               ; $4F76: $FA $01 $D2
+    ld   a, [wD201]                               ; $4F76: $FA $01 $D2
     ld   e, a                                     ; $4F79: $5F
     ld   d, b                                     ; $4F7A: $50
     ld   hl, wEntitiesStateTable                  ; $4F7B: $21 $90 $C2
@@ -4988,8 +4988,8 @@ func_019_63B5::
     jr   z, jr_019_63D8                           ; $63B8: $28 $1E
 
     ld   a, $05                                   ; $63BA: $3E $05
-    ld   [wDC90], a                               ; $63BC: $EA $90 $DC
-    ld   hl, wDC91                                ; $63BF: $21 $91 $DC
+    ld   [wRequestsAlt], a                        ; $63BC: $EA $90 $DC
+    ld   hl, wRequestAltDestinationHigh           ; $63BF: $21 $91 $DC
     ld   de, Data_019_63A3                        ; $63C2: $11 $A3 $63
     ldh  a, [hBaseScrollX]                        ; $63C5: $F0 $96
     and  a                                        ; $63C7: $A7
@@ -5368,7 +5368,7 @@ jr_019_68BA:
     ld   e, a                                     ; $68CF: $5F
     push bc                                       ; $68D0: $C5
     ld   c, $10                                   ; $68D1: $0E $10
-    ld   hl, wDC91                                ; $68D3: $21 $91 $DC
+    ld   hl, wRequestAltDestinationHigh           ; $68D3: $21 $91 $DC
 
 jr_019_68D6:
     ld   a, [de]                                  ; $68D6: $1A
@@ -5451,7 +5451,7 @@ jr_019_691E:
     ld   d, [hl]                                  ; $6936: $56
     ld   e, a                                     ; $6937: $5F
     ld   c, $34                                   ; $6938: $0E $34
-    ld   hl, wDC91                                ; $693A: $21 $91 $DC
+    ld   hl, wRequestAltDestinationHigh           ; $693A: $21 $91 $DC
 
 jr_019_693D:
     ld   a, [de]                                  ; $693D: $1A
@@ -7502,8 +7502,8 @@ jr_019_792F:
 IF __PATCH_0__
     ld   c, Data_019_78FE_B.end - Data_019_78FE_B
     ld   a, $08
-    ld   [wDC90], a
-    ld   hl, wDC91
+    ld   [wRequestsAlt], a
+    ld   hl, wRequestAlt
     ld   de, Data_019_78FE_B
 
 jr_019_7951:
@@ -7664,9 +7664,9 @@ jr_019_7985:
     and  a                                        ; $7A16: $A7
     jr   z, label_019_7A74                        ; $7A17: $28 $5B
 
-    ; increment $10 bytes at $D155 by hMultiPurpose0
+    ; increment $10 bytes at wLinkPositionXHistory by hMultiPurpose0
     ld   e, $10                                   ; $7A19: $1E $10
-    ld   hl, $D155                                ; $7A1B: $21 $55 $D1
+    ld   hl, wLinkPositionXHistory                ; $7A1B: $21 $55 $D1
 .loop_019_7A1E
     ldh  a, [hMultiPurpose0]                      ; $7A1E: $F0 $D7
     add  [hl]                                     ; $7A20: $86
@@ -7674,9 +7674,9 @@ jr_019_7985:
     dec  e                                        ; $7A22: $1D
     jr   nz, .loop_019_7A1E                       ; $7A23: $20 $F9
 
-    ; increment $10 bytes at $D175 by hMultiPurpose2
+    ; increment $10 bytes at wLinkPositionYHistory by hMultiPurpose2
     ld   e, $10                                   ; $7A25: $1E $10
-    ld   hl, $D175                                ; $7A27: $21 $75 $D1
+    ld   hl, wLinkPositionYHistory                ; $7A27: $21 $75 $D1
 .loop_019_7A2A
     ldh  a, [hMultiPurpose2]                      ; $7A2A: $F0 $D9
     add  [hl]                                     ; $7A2C: $86

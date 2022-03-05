@@ -1696,21 +1696,150 @@ wD115::
 wD116::
   ds 1 ; D116
 
-; not used
-wD117::
-  ds $53 ; D117 - D169
-
-; Something rombank and photographs related
-wD16A::
-  ds 1 ; 
-
-; not used
-wD16B::
-  ds $4A ; D16B - D1B4
+; Unlabeled
+ds ($D150 - $D117)
 
 ; Unlabeled
+wD150::
+  ds 1 ; D150
+
+; Unlabeled
+wD151::
+  ds 1 ; D151
+
+; Unlabeled
+wD152::
+  ds 1 ; D152
+
+; Unlabeled
+wD153::
+  ds 1 ; D153
+
+; Unlabeled
+wD154::
+  ds 1 ; D154
+
+; History of Link's last 32 horizontal positions
+; (Used for NPCs that follow Link)
+wLinkPositionXHistory::
+  ds $20 ; D155
+
+; History of Link's last 32 vertical positions
+; (Used for NPCs that follow Link)
+wLinkPositionYHistory::
+  ds $20 ; D175
+
+; History of Link's last 32 Z positions
+; (Used for NPCs that follow Link)
+wLinkPositionZHistory::
+  ds $20 ; D195
+
+; History of Link's directions ($10)
 wD1B5::
-  ds $64 ; D1B5 - D218
+  ds $10
+
+; Unused?
+ds ($D200 - $D1C5)
+
+; Unlabeled
+wD200::
+  ds 1 ; D200
+
+; Unlabeled
+wD201::
+  ds 1 ; D201
+
+; Unlabeled
+wD202::
+  ds 1 ; D202
+
+; Unlabeled
+wD203::
+  ds 1 ; D203
+
+; Unlabeled
+wD204::
+  ds 1 ; D204
+
+; Unlabeled
+wD205::
+  ds 1 ; D205
+
+; Unlabeled
+wD206::
+  ds 1 ; D206
+
+; Unlabeled
+wD207::
+  ds 1 ; D207
+
+; Unlabeled
+wD208::
+  ds 1 ; D208
+
+; Unlabeled
+wD209::
+  ds 1 ; D209
+
+; Unlabeled
+wD20A::
+  ds 1 ; D20A
+
+; Unlabeled
+wD20B::
+  ds 1 ; D20B
+
+; Unlabeled
+wD20C::
+  ds 1 ; D20C
+
+; Unlabeled
+wD20D::
+  ds 1 ; D20D
+
+; Unlabeled
+wD20E::
+  ds 1 ; D20E
+
+; Unlabeled
+wD20F::
+  ds 1 ; D20F
+
+; Unlabeled
+wD210::
+  ds 1 ; D210
+
+; Unlabeled
+wD211::
+  ds 1 ; D211
+
+; Unlabeled
+wD212::
+  ds 1 ; D212
+
+; Unlabeled
+wD213::
+  ds 1 ; D213
+
+; Unlabeled
+wD214::
+  ds 1 ; D214
+
+; Unlabeled
+wD215::
+  ds 1 ; D215
+
+; Unlabeled
+wD216::
+  ds 1 ; D216
+
+; Unlabeled
+wD217::
+  ds 1 ; D217
+
+; Unlabeled
+wD218::
+  ds 1 ; D218
 
 ; Current form of the Final Nightmare (0-5)
 wFinalNightmareForm::
@@ -2426,7 +2555,7 @@ wRequestLength::
   ds 1 ; D603
 
 ; Request data (variable length)
-wRequestData:
+wRequestData::
   ds 244  ; D604 - D6F7
 
 ; Animation stage during a switchable object animation.
@@ -3154,12 +3283,28 @@ wObjPal8::
   ds 8 ; DC88 - DC8F
 
 ; This seems to be some secondary wRequest buffer used during map scrolling.
-wDC90::
+;
+; TODO: find a better name
+wRequestsAlt::
   ds 1 ; DC90
 
-; Unlabeled
-wDC91::
-  ds $2F ; DC91 - DCBF
+; Secondary wRequest destination (higher byte)
+wRequestAlt::
+wRequestAltDestination::
+wRequestAltDestinationHigh::
+  ds 1 ; DC91
+
+; Secondary wRequest destination (lower byte)
+wRequestAltDestinationLow::
+  ds 1 ; DC92
+
+; Secondary wRequest data Length
+wRequestAltLength::
+  ds 1 ; DC93
+
+; Secondary wRequest data
+wRequestAltData::
+  ds $2C ; DC93 - DCBF
 
 ; Unlabeled
 wDCC0::
@@ -3288,3 +3433,11 @@ wStack::
 
 ; init puts the SP here
 wStackTop equ $DFFF
+
+section "WRAM Bank2", wramx[$D000], bank[2]
+
+; TODO
+
+; Something rombank and photographs related
+w2_D16A EQU $D16A
+

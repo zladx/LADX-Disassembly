@@ -7282,7 +7282,7 @@ jr_01F_730C:
 
 jr_01F_733B:
     push de                                       ; $733B: $D5
-    ld   de, $D3DF                                ; $733C: $11 $DF $D3
+    ld   de, wD3DF                                ; $733C: $11 $DF $D3
     call DecrementValueAtDE                       ; $733F: $CD $71 $7A
     pop  de                                       ; $7342: $D1
     jr   z, jr_01F_7359                           ; $7343: $28 $14

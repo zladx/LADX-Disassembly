@@ -286,9 +286,9 @@ TurtleRockHeadState5Handler::
     res  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $74AC: $CB $B6
     call IncrementEntityState                     ; $74AE: $CD $12 $3B
     ldh  a, [hActiveEntityPosX]                   ; $74B1: $F0 $EE
-    ld   [$D201], a                               ; $74B3: $EA $01 $D2
+    ld   [wD201], a                               ; $74B3: $EA $01 $D2
     ldh  a, [hActiveEntityVisualPosY]             ; $74B6: $F0 $EC
-    ld   [$D202], a                               ; $74B8: $EA $02 $D2
+    ld   [wD202], a                               ; $74B8: $EA $02 $D2
     ret                                           ; $74BB: $C9
 
 jr_018_74BC:
@@ -400,20 +400,20 @@ TurtleRockHeadStateBHandler::
     push af                                       ; $754E: $F5
     ldh  a, [hLinkPositionY]                      ; $754F: $F0 $99
     push af                                       ; $7551: $F5
-    ld   a, [$D201]                               ; $7552: $FA $01 $D2
+    ld   a, [wD201]                               ; $7552: $FA $01 $D2
     ldh  [hLinkPositionX], a                      ; $7555: $E0 $98
-    ld   a, [$D202]                               ; $7557: $FA $02 $D2
+    ld   a, [wD202]                               ; $7557: $FA $02 $D2
     ldh  [hLinkPositionY], a                      ; $755A: $E0 $99
     ld   a, $08                                   ; $755C: $3E $08
     call ApplyVectorTowardsLink_trampoline        ; $755E: $CD $AA $3B
-    ld   a, [$D201]                               ; $7561: $FA $01 $D2
+    ld   a, [wD201]                               ; $7561: $FA $01 $D2
     ld   hl, hActiveEntityPosX                    ; $7564: $21 $EE $FF
     sub  [hl]                                     ; $7567: $96
     add  $01                                      ; $7568: $C6 $01
     cp   $02                                      ; $756A: $FE $02
     jr   nc, jr_018_7585                          ; $756C: $30 $17
 
-    ld   a, [$D202]                               ; $756E: $FA $02 $D2
+    ld   a, [wD202]                               ; $756E: $FA $02 $D2
     ld   hl, hActiveEntityVisualPosY                                ; $7571: $21 $EC $FF
     sub  [hl]                                     ; $7574: $96
     add  $01                                      ; $7575: $C6 $01

@@ -18,10 +18,10 @@ jr_006_6EED:
     jp   nz, ClearEntityStatus_06                 ; $6EF1: $C2 $DB $65
 
     ld   a, c                                     ; $6EF4: $79
-    ld   [$D201], a                               ; $6EF5: $EA $01 $D2
+    ld   [wD201], a                               ; $6EF5: $EA $01 $D2
     call func_006_6FEA                            ; $6EF8: $CD $EA $6F
     call ReturnIfNonInteractive_06                ; $6EFB: $CD $C6 $64
-    ld   a, [$D202]                               ; $6EFE: $FA $02 $D2
+    ld   a, [wD202]                               ; $6EFE: $FA $02 $D2
     ld   e, a                                     ; $6F01: $5F
     ld   d, b                                     ; $6F02: $50
 
@@ -163,7 +163,7 @@ RollingBonesBarRollingHandler::
     call IncrementEntityState                     ; $6FB0: $CD $12 $3B
 
 jr_006_6FB3:
-    ld   a, [$D210]                               ; $6FB3: $FA $10 $D2
+    ld   a, [wD210]                               ; $6FB3: $FA $10 $D2
     inc  a                                        ; $6FB6: $3C
     cp   $09                                      ; $6FB7: $FE $09
     jr   c, jr_006_6FC0                           ; $6FB9: $38 $05
@@ -173,7 +173,7 @@ jr_006_6FB3:
     xor  a                                        ; $6FBF: $AF
 
 jr_006_6FC0:
-    ld   [$D210], a                               ; $6FC0: $EA $10 $D2
+    ld   [wD210], a                               ; $6FC0: $EA $10 $D2
     ret                                           ; $6FC3: $C9
 
 RollingBonesBarDeceleratingHandler::

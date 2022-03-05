@@ -8,7 +8,7 @@ func_01C_49F1::
     ld   hl, DialogCharacterYTable              ; $49FD: $21 $81 $45
     add  hl, de                                 ; $4A00: $19
     ld   a, [hl]                                ; $4A01: $7E
-    ld   hl, $D600                              ; $4A02: $21 $00 $D6
+    ld   hl, wRequests                          ; $4A02: $21 $00 $D6
     add  hl, bc                                 ; $4A05: $09
     ldi  [hl], a                                ; $4A06: $22
     push hl                                     ; $4A07: $E5
@@ -51,7 +51,7 @@ func_01C_4A3D::
     ld   hl, Data_01C_4A22                      ; $4A47: $21 $22 $4A
     add  hl, bc                                 ; $4A4A: $09
     add  [hl]                                   ; $4A4B: $86
-    ld   hl, $D600                              ; $4A4C: $21 $00 $D6
+    ld   hl, wRequests                          ; $4A4C: $21 $00 $D6
     add  hl, de                                 ; $4A4F: $19
     ldi  [hl], a                                ; $4A50: $22
     push hl                                     ; $4A51: $E5
@@ -83,8 +83,8 @@ func_01C_4A71::
     ret                                         ; $4A75: $C9
 
 func_01C_4A76::
-    ld   hl, wDC90                              ; $4A76: $21 $90 $DC
-    ld   de, $D600                              ; $4A79: $11 $00 $D6
+    ld   hl, wRequestsAlt                       ; $4A76: $21 $90 $DC
+    ld   de, wRequests                          ; $4A79: $11 $00 $D6
     ld   b, $04                                 ; $4A7C: $06 $04
 .loop_4A7E_1C:
     ld   a, [de]                                ; $4A7E: $1A
@@ -130,7 +130,7 @@ func_01C_4AB9::
     ld   hl, Data_01C_4A94                      ; $4AC3: $21 $94 $4A
     add  hl, bc                                 ; $4AC6: $09
     add  [hl]                                   ; $4AC7: $86
-    ld   hl, $D600                              ; $4AC8: $21 $00 $D6
+    ld   hl, wRequests                          ; $4AC8: $21 $00 $D6
     add  hl, de                                 ; $4ACB: $19
     ldi  [hl], a                                ; $4ACC: $22
     push hl                                     ; $4ACD: $E5
@@ -181,8 +181,8 @@ func_01C_4AFD::
 
 func_01C_4B02::
     push bc                                     ; $4B02: $C5
-    ld   hl, wDC90                              ; $4B03: $21 $90 $DC
-    ld   de, $D600                              ; $4B06: $11 $00 $D6
+    ld   hl, wRequestsAlt                       ; $4B03: $21 $90 $DC
+    ld   de, wRequests                          ; $4B06: $11 $00 $D6
     ld   b, $04                                 ; $4B09: $06 $04
 .loop_4B0B_1C:
     ld   a, [de]                                ; $4B0B: $1A

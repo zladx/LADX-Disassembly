@@ -117,7 +117,7 @@ MarineBeachPrepare3::
     ld   [wC550], a                               ; $62CA: $EA $50 $C5
     ld   a, $00                                   ; $62CD: $3E $00
     ld   [wTranscientVfxCountdownTable], a        ; $62CF: $EA $20 $C5
-    ld   [$D200], a                               ; $62D2: $EA $00 $D2
+    ld   [wD200], a                               ; $62D2: $EA $00 $D2
     ld   a, $20                                   ; $62D5: $3E $20
     ld   [wTranscientVfxPosYTable+1], a                               ; $62D7: $EA $41 $C5
     ld   a, $A0                                   ; $62DA: $3E $A0
@@ -131,7 +131,7 @@ MarineBeachPrepare3::
     ld   a, $40                                   ; $62EE: $3E $40
     ld   [wTranscientVfxCountdownTable+1], a                               ; $62F0: $EA $21 $C5
     ld   a, $24                                   ; $62F3: $3E $24
-    ld   [$D201], a                               ; $62F5: $EA $01 $D2
+    ld   [wD201], a                               ; $62F5: $EA $01 $D2
     ld   a, $48                                   ; $62F8: $3E $48
     ld   [wTranscientVfxPosYTable+2], a                               ; $62FA: $EA $42 $C5
     ld   a, $30                                   ; $62FD: $3E $30
@@ -145,7 +145,7 @@ MarineBeachPrepare3::
     ld   a, $00                                   ; $6311: $3E $00
     ld   [wTranscientVfxCountdownTable+2], a                               ; $6313: $EA $22 $C5
     ld   a, $02                                   ; $6316: $3E $02
-    ld   [$D202], a                               ; $6318: $EA $02 $D2
+    ld   [wD202], a                               ; $6318: $EA $02 $D2
     ld   a, $3C                                   ; $631B: $3E $3C
     ld   [wTranscientVfxPosYTable+3], a                               ; $631D: $EA $43 $C5
     ld   a, $40                                   ; $6320: $3E $40
@@ -159,7 +159,7 @@ MarineBeachPrepare3::
     ld   a, $00                                   ; $6334: $3E $00
     ld   [wTranscientVfxCountdownTable+3], a                               ; $6336: $EA $23 $C5
     ld   a, $00                                   ; $6339: $3E $00
-    ld   [$D203], a                               ; $633B: $EA $03 $D2
+    ld   [wD203], a                               ; $633B: $EA $03 $D2
     ld   a, $40                                   ; $633E: $3E $40
     ld   [wTranscientVfxPosYTable+4], a                               ; $6340: $EA $44 $C5
     ld   a, $50                                   ; $6343: $3E $50
@@ -173,7 +173,7 @@ MarineBeachPrepare3::
     ld   a, $00                                   ; $6357: $3E $00
     ld   [wTranscientVfxCountdownTable+4], a                               ; $6359: $EA $24 $C5
     ld   a, $00                                   ; $635C: $3E $00
-    ld   [$D204], a                               ; $635E: $EA $04 $D2
+    ld   [wD204], a                               ; $635E: $EA $04 $D2
     ld   a, $3C                                   ; $6361: $3E $3C
     ld   [wTranscientVfxPosYTable+5], a                               ; $6363: $EA $45 $C5
     ld   a, $60                                   ; $6366: $3E $60
@@ -187,7 +187,7 @@ MarineBeachPrepare3::
     ld   a, $00                                   ; $637A: $3E $00
     ld   [wTranscientVfxCountdownTable+5], a                               ; $637C: $EA $25 $C5
     ld   a, $00                                   ; $637F: $3E $00
-    ld   [$D205], a                               ; $6381: $EA $05 $D2
+    ld   [wD205], a                               ; $6381: $EA $05 $D2
     ld   a, $44                                   ; $6384: $3E $44
     ld   [wTranscientVfxPosYTable+6], a                               ; $6386: $EA $46 $C5
     ld   a, $68                                   ; $6389: $3E $68
@@ -201,7 +201,7 @@ MarineBeachPrepare3::
     ld   a, $00                                   ; $639D: $3E $00
     ld   [wTranscientVfxCountdownTable+6], a                               ; $639F: $EA $26 $C5
     ld   a, $00                                   ; $63A2: $3E $00
-    ld   [$D206], a                               ; $63A4: $EA $06 $D2
+    ld   [wD206], a                               ; $63A4: $EA $06 $D2
     jp   IncrementGameplaySubtypeAndReturn        ; $63A7: $C3 $D6 $44
 
 Data_001_63AA::
@@ -604,7 +604,7 @@ func_001_6673::
     ld   a, [hl]                                  ; $6677: $7E
     and  a                                        ; $6678: $A7
     ret  nz                                       ; $6679: $C0
-    ld   hl, $D210                                ; $667A: $21 $10 $D2
+    ld   hl, wD210                                ; $667A: $21 $10 $D2
     add  hl, bc                                   ; $667D: $09
     ld   a, [hl]                                  ; $667E: $7E
     inc  a                                        ; $667F: $3C
@@ -612,12 +612,12 @@ func_001_6673::
     cp   $06                                      ; $6681: $FE $06
     jr   c, jr_001_668B                           ; $6683: $38 $06
     ld   [hl], b                                  ; $6685: $70
-    ld   hl, $D200                                ; $6686: $21 $00 $D2
+    ld   hl, wD200                                ; $6686: $21 $00 $D2
     add  hl, bc                                   ; $6689: $09
     inc  [hl]                                     ; $668A: $34
 
 jr_001_668B::
-    ld   hl, $D200                                ; $668B: $21 $00 $D2
+    ld   hl, wD200                                ; $668B: $21 $00 $D2
     add  hl, bc                                   ; $668E: $09
     ld   e, [hl]                                  ; $668F: $5E
     ld   d, b                                     ; $6690: $50
@@ -704,7 +704,7 @@ func_001_66FD::
     ld   e, $03                                   ; $6702: $1E $03
     and  $80                                      ; $6704: $E6 $80
     jr   z, jr_001_6718                           ; $6706: $28 $10
-    ld   hl, $D200                                ; $6708: $21 $00 $D2
+    ld   hl, wD200                                ; $6708: $21 $00 $D2
     add  hl, bc                                   ; $670B: $09
     ldh  a, [hFrameCounter]                       ; $670C: $F0 $E7
     and  $07                                      ; $670E: $E6 $07

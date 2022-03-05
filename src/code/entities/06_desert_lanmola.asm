@@ -24,7 +24,7 @@ DesertLanmolaEntityHandler::
     ld   [hl], $50                                ; $5604: $36 $50
     ld   e, $00                                   ; $5606: $1E $00
     ld   a, $FF                                   ; $5608: $3E $FF
-    ld   hl, $D200                                ; $560A: $21 $00 $D2
+    ld   hl, wD200                                ; $560A: $21 $00 $D2
 
 jr_006_560D:
     ld   [hl+], a                                 ; $560D: $22
@@ -127,7 +127,7 @@ jr_006_568A:
     add  hl, de                                   ; $56A4: $19
     ld   a, [hl]                                  ; $56A5: $7E
     ldh  [hMultiPurpose0], a                      ; $56A6: $E0 $D7
-    ld   hl, $D200                                ; $56A8: $21 $00 $D2
+    ld   hl, wD200                                ; $56A8: $21 $00 $D2
     add  hl, de                                   ; $56AB: $19
     ld   a, [hl]                                  ; $56AC: $7E
     and  $80                                      ; $56AD: $E6 $80
@@ -235,7 +235,7 @@ jr_006_5726:
     ld   hl, wEntitiesPosZTable                   ; $574A: $21 $10 $C3
     add  hl, bc                                   ; $574D: $09
     ld   a, [hl]                                  ; $574E: $7E
-    ld   hl, $D200                                ; $574F: $21 $00 $D2
+    ld   hl, wD200                                ; $574F: $21 $00 $D2
     add  hl, de                                   ; $5752: $19
     ld   [hl], a                                  ; $5753: $77
 
@@ -521,7 +521,7 @@ jr_006_58F3:
     add  hl, de                                   ; $590D: $19
     ld   a, [hl]                                  ; $590E: $7E
     ldh  [hActiveEntityPosY], a                   ; $590F: $E0 $EF
-    ld   hl, $D200                                ; $5911: $21 $00 $D2
+    ld   hl, wD200                                ; $5911: $21 $00 $D2
     add  hl, de                                   ; $5914: $19
     sub  [hl]                                     ; $5915: $96
     ldh  [hActiveEntityVisualPosY], a             ; $5916: $E0 $EC

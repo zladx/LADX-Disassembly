@@ -32,7 +32,7 @@ jr_018_400F:
 
 MamuAndFrogsState0Handler::
     xor  a                                        ; $402D: $AF
-    ld   [$D201], a                               ; $402E: $EA $01 $D2
+    ld   [wD201], a                               ; $402E: $EA $01 $D2
     ld   a, [wOcarinaSongFlags]                   ; $4031: $FA $49 $DB
     and  FROGS_SONG_OF_THE_SOUL_FLAG              ; $4034: $E6 $01
     jr   z, jr_018_404A                           ; $4036: $28 $12
@@ -149,7 +149,7 @@ MamuAndFrogsSingingHandler::
     ld   a, MUSIC_MAMU_SONG                       ; $40E3: $3E $35
     ld   [wMusicTrackToPlay], a                   ; $40E5: $EA $68 $D3
     ld   a, $01                                   ; $40E8: $3E $01
-    ld   [$D215], a                               ; $40EA: $EA $15 $D2
+    ld   [wD215], a                               ; $40EA: $EA $15 $D2
     jp   IncrementEntityState                     ; $40ED: $C3 $12 $3B
 
 jr_018_40F0:
@@ -207,31 +207,31 @@ MamuAndFrogsState3Handler::
     ld   a, $02                                   ; $41CC: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $41CE: $E0 $A1
     ld   [wC167], a                               ; $41D0: $EA $67 $C1
-    ld   a, [$D211]                               ; $41D3: $FA $11 $D2
+    ld   a, [wD211]                               ; $41D3: $FA $11 $D2
     and  a                                        ; $41D6: $A7
     jr   nz, jr_018_41F9                          ; $41D7: $20 $20
 
-    ld   a, [$D210]                               ; $41D9: $FA $10 $D2
+    ld   a, [wD210]                               ; $41D9: $FA $10 $D2
     cp   $00                                      ; $41DC: $FE $00
     call z, func_018_4107                         ; $41DE: $CC $07 $41
-    ld   a, [$D210]                               ; $41E1: $FA $10 $D2
+    ld   a, [wD210]                               ; $41E1: $FA $10 $D2
     cp   $01                                      ; $41E4: $FE $01
     call z, func_018_4112                         ; $41E6: $CC $12 $41
-    ld   a, [$D210]                               ; $41E9: $FA $10 $D2
+    ld   a, [wD210]                               ; $41E9: $FA $10 $D2
     cp   $38                                      ; $41EC: $FE $38
     call z, func_018_40F1                         ; $41EE: $CC $F1 $40
-    ld   a, [$D210]                               ; $41F1: $FA $10 $D2
+    ld   a, [wD210]                               ; $41F1: $FA $10 $D2
     cp   $70                                      ; $41F4: $FE $70
     call z, func_018_40FC                         ; $41F6: $CC $FC $40
 
 jr_018_41F9:
-    ld   a, [$D210]                               ; $41F9: $FA $10 $D2
+    ld   a, [wD210]                               ; $41F9: $FA $10 $D2
     add  $01                                      ; $41FC: $C6 $01
-    ld   [$D210], a                               ; $41FE: $EA $10 $D2
+    ld   [wD210], a                               ; $41FE: $EA $10 $D2
     ld   e, a                                     ; $4201: $5F
-    ld   a, [$D211]                               ; $4202: $FA $11 $D2
+    ld   a, [wD211]                               ; $4202: $FA $11 $D2
     adc  $00                                      ; $4205: $CE $00
-    ld   [$D211], a                               ; $4207: $EA $11 $D2
+    ld   [wD211], a                               ; $4207: $EA $11 $D2
     ld   d, a                                     ; $420A: $57
     cp   $06                                      ; $420B: $FE $06
     jr   nz, jr_018_4220                          ; $420D: $20 $11
@@ -247,19 +247,19 @@ jr_018_41F9:
     jp   IncrementEntityState                     ; $421D: $C3 $12 $3B
 
 jr_018_4220:
-    ld   a, [$D212]                               ; $4220: $FA $12 $D2
+    ld   a, [wD212]                               ; $4220: $FA $12 $D2
     inc  a                                        ; $4223: $3C
     cp   $1C                                      ; $4224: $FE $1C
     jr   nz, jr_018_4230                          ; $4226: $20 $08
 
-    ld   a, [$D213]                               ; $4228: $FA $13 $D2
+    ld   a, [wD213]                               ; $4228: $FA $13 $D2
     inc  a                                        ; $422B: $3C
-    ld   [$D213], a                               ; $422C: $EA $13 $D2
+    ld   [wD213], a                               ; $422C: $EA $13 $D2
     xor  a                                        ; $422F: $AF
 
 jr_018_4230:
-    ld   [$D212], a                               ; $4230: $EA $12 $D2
-    ld   a, [$D213]                               ; $4233: $FA $13 $D2
+    ld   [wD212], a                               ; $4230: $EA $12 $D2
+    ld   a, [wD213]                               ; $4233: $FA $13 $D2
     ld   e, a                                     ; $4236: $5F
     ld   d, b                                     ; $4237: $50
     ld   hl, Data_018_411E                        ; $4238: $21 $1E $41
@@ -286,7 +286,7 @@ MamuAndFrogsGrantSongHandler::
     and  a                                        ; $4255: $A7
     jr   nz, jr_018_4268                          ; $4256: $20 $10
 
-    ld   [$D215], a                               ; $4258: $EA $15 $D2
+    ld   [wD215], a                               ; $4258: $EA $15 $D2
     call GetEntityTransitionCountdown             ; $425B: $CD $05 $0C
     ld   [hl], $70                                ; $425E: $36 $70
     ld   a, MUSIC_TOOL_ACQUIRED                 ; $4260: $3E $10
@@ -400,7 +400,7 @@ func_018_438F::
     call IncrementEntityState                     ; $4397: $CD $12 $3B
 
 func_018_439A::
-    ld   a, [$D215]                               ; $439A: $FA $15 $D2
+    ld   a, [wD215]                               ; $439A: $FA $15 $D2
     and  a                                        ; $439D: $A7
     jp   nz, label_018_43B2                       ; $439E: $C2 $B2 $43
 

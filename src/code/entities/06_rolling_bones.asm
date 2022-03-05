@@ -1,6 +1,6 @@
 RollingBonesEntityHandler::
     ld   a, c                                     ; $6C6D: $79
-    ld   [$D202], a                               ; $6C6E: $EA $02 $D2
+    ld   [wD202], a                               ; $6C6E: $EA $02 $D2
     ldh  a, [hMapId]                              ; $6C71: $F0 $F7
     cp   MAP_TURTLE_ROCK                          ; $6C73: $FE $07
     jr   nz, jr_006_6C7B                          ; $6C75: $20 $04
@@ -148,7 +148,7 @@ RollingBonesState0Handler::
     call GetEntityTransitionCountdown             ; $6D3D: $CD $05 $0C
     ret  nz                                       ; $6D40: $C0
 
-    ld   a, [$D201]                               ; $6D41: $FA $01 $D2
+    ld   a, [wD201]                               ; $6D41: $FA $01 $D2
     ld   e, a                                     ; $6D44: $5F
     ld   d, b                                     ; $6D45: $50
     ld   hl, wEntitiesPosXTable                   ; $6D46: $21 $00 $C2
@@ -202,7 +202,7 @@ RollingBonesState1Handler::
 
 jr_006_6D8B:
     push af                                       ; $6D8B: $F5
-    ld   a, [$D201]                               ; $6D8C: $FA $01 $D2
+    ld   a, [wD201]                               ; $6D8C: $FA $01 $D2
     ld   e, a                                     ; $6D8F: $5F
     ld   d, b                                     ; $6D90: $50
     ld   hl, wEntitiesSpeedXTable                 ; $6D91: $21 $40 $C2

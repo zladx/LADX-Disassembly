@@ -2,9 +2,9 @@ EntityInitSlimeEel::
     call GetEntityTransitionCountdown             ; $6CC6: $CD $05 $0C
     ld   [hl], $80                                ; $6CC9: $36 $80
     xor  a                                        ; $6CCB: $AF
-    ld   [$D200], a                               ; $6CCC: $EA $00 $D2
-    ld   [$D203], a                               ; $6CCF: $EA $03 $D2
-    ld   [$D204], a                               ; $6CD2: $EA $04 $D2
+    ld   [wD200], a                               ; $6CCC: $EA $00 $D2
+    ld   [wD203], a                               ; $6CCF: $EA $03 $D2
+    ld   [wD204], a                               ; $6CD2: $EA $04 $D2
     ld   hl, wEntitiesPrivateState5Table          ; $6CD5: $21 $90 $C3
     add  hl, bc                                   ; $6CD8: $09
     ld   [hl], $01                                ; $6CD9: $36 $01
@@ -24,7 +24,7 @@ SlimeEelEntityHandler::
 
 func_005_6CF1::
     ld   a, c                                     ; $6CF1: $79
-    ld   [$D201], a                               ; $6CF2: $EA $01 $D2
+    ld   [wD201], a                               ; $6CF2: $EA $01 $D2
     ldh  a, [hActiveEntityState]                  ; $6CF5: $F0 $F0
     JP_TABLE                                      ; $6CF7
 ._00 dw func_005_6D00                             ; $6CF8
@@ -77,13 +77,13 @@ func_005_6D42::
     ld   [wD3E8], a                               ; $6D61: $EA $E8 $D3
     call IncrementEntityState                     ; $6D64: $CD $12 $3B
     ld   a, $AF                                   ; $6D67: $3E $AF
-    ld   [$D745], a                               ; $6D69: $EA $45 $D7
+    ld   [wRoomObjectsArea + $45], a              ; $6D69: $EA $45 $D7
     ld   a, $AF                                   ; $6D6C: $3E $AF
-    ld   [$D746], a                               ; $6D6E: $EA $46 $D7
+    ld   [wRoomObjectsArea + $46], a              ; $6D6E: $EA $46 $D7
     ld   a, $B0                                   ; $6D71: $3E $B0
-    ld   [$D755], a                               ; $6D73: $EA $55 $D7
+    ld   [wRoomObjectsArea + $55], a              ; $6D73: $EA $55 $D7
     ld   a, $B0                                   ; $6D76: $3E $B0
-    ld   [$D756], a                               ; $6D78: $EA $56 $D7
+    ld   [wRoomObjectsArea + $56], a              ; $6D78: $EA $56 $D7
     call GetEntityPrivateCountdown1               ; $6D7B: $CD $00 $0C
 
 jr_005_6D7E:
@@ -349,17 +349,17 @@ jr_005_6EB0:
     xor  a                                        ; $6F12: $AF
     ld   [hl], a                                  ; $6F13: $77
     ld   a, $D5                                   ; $6F14: $3E $D5
-    ld   [$D713], a                               ; $6F16: $EA $13 $D7
-    ld   [$D717], a                               ; $6F19: $EA $17 $D7
+    ld   [wRoomObjectsArea + $13], a              ; $6F16: $EA $13 $D7
+    ld   [wRoomObjectsArea + $17], a              ; $6F19: $EA $17 $D7
     ld   a, $D6                                   ; $6F1C: $3E $D6
-    ld   [$D714], a                               ; $6F1E: $EA $14 $D7
-    ld   [$D718], a                               ; $6F21: $EA $18 $D7
+    ld   [wRoomObjectsArea + $14], a              ; $6F1E: $EA $14 $D7
+    ld   [wRoomObjectsArea + $18], a              ; $6F21: $EA $18 $D7
     ld   a, $D7                                   ; $6F24: $3E $D7
-    ld   [$D783], a                               ; $6F26: $EA $83 $D7
-    ld   [$D787], a                               ; $6F29: $EA $87 $D7
+    ld   [wRoomObjectsArea + $83], a              ; $6F26: $EA $83 $D7
+    ld   [wRoomObjectsArea + $87], a              ; $6F29: $EA $87 $D7
     ld   a, $D8                                   ; $6F2C: $3E $D8
-    ld   [$D784], a                               ; $6F2E: $EA $84 $D7
-    ld   [$D788], a                               ; $6F31: $EA $88 $D7
+    ld   [wRoomObjectsArea + $84], a              ; $6F2E: $EA $84 $D7
+    ld   [wRoomObjectsArea + $88], a              ; $6F31: $EA $88 $D7
     ld   a, ENTITY_SLIME_EEL                      ; $6F34: $3E $5D
     call SpawnNewEntity_trampoline                ; $6F36: $CD $86 $3B
     ld   hl, wEntitiesPrivateState1Table          ; $6F39: $21 $B0 $C2
@@ -481,7 +481,7 @@ Data_005_70E7::
 
 func_005_70EB::
     call GetEntityDropTimer                       ; $70EB: $CD $FB $0B
-    ld   a, [$D200]                               ; $70EE: $FA $00 $D2
+    ld   a, [wD200]                               ; $70EE: $FA $00 $D2
     and  a                                        ; $70F1: $A7
     jr   z, jr_005_70F6                           ; $70F2: $28 $02
 
@@ -564,7 +564,7 @@ jr_005_7167:
     add  hl, bc                                   ; $716A: $09
     ld   a, [hl]                                  ; $716B: $7E
     and  $07                                      ; $716C: $E6 $07
-    ld   hl, $D200                                ; $716E: $21 $00 $D2
+    ld   hl, wD200                                ; $716E: $21 $00 $D2
     or   [hl]                                     ; $7171: $B6
     jr   nz, jr_005_7188                          ; $7172: $20 $14
 
@@ -583,7 +583,7 @@ jr_005_7167:
     ld   [hl], a                                  ; $7187: $77
 
 jr_005_7188:
-    ld   a, [$D200]                               ; $7188: $FA $00 $D2
+    ld   a, [wD200]                               ; $7188: $FA $00 $D2
     and  a                                        ; $718B: $A7
     ld   a, $00                                   ; $718C: $3E $00
     jr   nz, jr_005_719A                          ; $718E: $20 $0A
@@ -920,7 +920,7 @@ jr_005_7395:
     jp   z, jr_005_7424                           ; $73A0: $CA $24 $74
 
     dec  a                                        ; $73A3: $3D
-    ld   [$D202], a                               ; $73A4: $EA $02 $D2
+    ld   [wD202], a                               ; $73A4: $EA $02 $D2
     ld   e, a                                     ; $73A7: $5F
     ld   d, b                                     ; $73A8: $50
     ld   hl, wEntitiesStatusTable                 ; $73A9: $21 $80 $C2
@@ -951,9 +951,9 @@ jr_005_7395:
     cp   $18                                      ; $73D0: $FE $18
     jr   nc, jr_005_7424                          ; $73D2: $30 $50
 
-    ld   a, [$D203]                               ; $73D4: $FA $03 $D2
+    ld   a, [wD203]                               ; $73D4: $FA $03 $D2
     inc  a                                        ; $73D7: $3C
-    ld   [$D203], a                               ; $73D8: $EA $03 $D2
+    ld   [wD203], a                               ; $73D8: $EA $03 $D2
     cp   $04                                      ; $73DB: $FE $04
     jr   c, jr_005_7414                           ; $73DD: $38 $35
 
@@ -989,7 +989,7 @@ jr_005_7395:
 
 jr_005_7414:
     call IncrementEntityState                     ; $7414: $CD $12 $3B
-    ld   a, [$D201]                               ; $7417: $FA $01 $D2
+    ld   a, [wD201]                               ; $7417: $FA $01 $D2
     ld   e, a                                     ; $741A: $5F
     ld   d, b                                     ; $741B: $50
     ld   hl, wEntitiesPrivateState5Table          ; $741C: $21 $90 $C3
@@ -1005,8 +1005,8 @@ jr_005_7424:
 func_005_7425::
     call func_005_79A7                            ; $7425: $CD $A7 $79
     ld   a, $01                                   ; $7428: $3E $01
-    ld   [$D200], a                               ; $742A: $EA $00 $D2
-    ld   a, [$D202]                               ; $742D: $FA $02 $D2
+    ld   [wD200], a                               ; $742A: $EA $00 $D2
+    ld   a, [wD202]                               ; $742D: $FA $02 $D2
     ld   e, a                                     ; $7430: $5F
     ld   d, b                                     ; $7431: $50
     ld   hl, wEntitiesStatusTable                 ; $7432: $21 $80 $C2
@@ -1025,7 +1025,7 @@ func_005_7425::
     ld   hl, wEntitiesPosYTable                   ; $7445: $21 $10 $C2
     add  hl, bc                                   ; $7448: $09
     ld   [hl], a                                  ; $7449: $77
-    ld   a, [$D201]                               ; $744A: $FA $01 $D2
+    ld   a, [wD201]                               ; $744A: $FA $01 $D2
     ld   e, a                                     ; $744D: $5F
     ld   d, b                                     ; $744E: $50
     ld   hl, wEntitiesPrivateState3Table          ; $744F: $21 $D0 $C2
@@ -1078,7 +1078,7 @@ Data_005_7499::
 func_005_74B1::
     call func_005_79A7                            ; $74B1: $CD $A7 $79
     ld   a, $01                                   ; $74B4: $3E $01
-    ld   [$D200], a                               ; $74B6: $EA $00 $D2
+    ld   [wD200], a                               ; $74B6: $EA $00 $D2
     ld   hl, wEntitiesDirectionTable              ; $74B9: $21 $80 $C3
     add  hl, bc                                   ; $74BC: $09
     ld   a, [hl]                                  ; $74BD: $7E
@@ -1147,7 +1147,7 @@ jr_005_750D:
     and  [hl]                                     ; $7522: $A6
     jr   nz, jr_005_7534                          ; $7523: $20 $0F
 
-    ld   a, [$D201]                               ; $7525: $FA $01 $D2
+    ld   a, [wD201]                               ; $7525: $FA $01 $D2
     ld   e, a                                     ; $7528: $5F
     ld   d, b                                     ; $7529: $50
     ld   hl, wEntitiesPrivateState3Table          ; $752A: $21 $D0 $C2
@@ -1163,7 +1163,7 @@ jr_005_7534:
 
 func_005_7535::
     xor  a                                        ; $7535: $AF
-    ld   [$D200], a                               ; $7536: $EA $00 $D2
+    ld   [wD200], a                               ; $7536: $EA $00 $D2
     jp   ClearEntityStatus_05                     ; $7539: $C3 $4B $7B
 
 func_005_753C::
@@ -1264,7 +1264,7 @@ func_005_75D1::
     call CopyEntityPositionToActivePosition       ; $75D4: $CD $8A $3D
     call ReturnIfNonInteractive_05                ; $75D7: $CD $3A $7A
     ld   a, $01                                   ; $75DA: $3E $01
-    ld   [$D200], a                               ; $75DC: $EA $00 $D2
+    ld   [wD200], a                               ; $75DC: $EA $00 $D2
     call GetEntityDropTimer                       ; $75DF: $CD $FB $0B
     cp   $10                                      ; $75E2: $FE $10
     jr   nc, jr_005_7621                          ; $75E4: $30 $3B
@@ -1272,7 +1272,7 @@ func_005_75D1::
     and  a                                        ; $75E6: $A7
     jr   nz, jr_005_7619                          ; $75E7: $20 $30
 
-    ld   a, [$D201]                               ; $75E9: $FA $01 $D2
+    ld   a, [wD201]                               ; $75E9: $FA $01 $D2
     ld   e, a                                     ; $75EC: $5F
     ld   d, b                                     ; $75ED: $50
 
@@ -1311,7 +1311,7 @@ jr_005_7621:
     and  $07                                      ; $7623: $E6 $07
     jr   nz, jr_005_7635                          ; $7625: $20 $0E
 
-    ld   a, [$D201]                               ; $7627: $FA $01 $D2
+    ld   a, [wD201]                               ; $7627: $FA $01 $D2
     ld   e, a                                     ; $762A: $5F
     ld   d, b                                     ; $762B: $50
     ld   hl, wEntitiesPrivateState3Table          ; $762C: $21 $D0 $C2
@@ -1638,13 +1638,13 @@ jr_005_79B3:
     cp   $16                                      ; $79E7: $FE $16
     jr   nz, jr_005_7A1A                          ; $79E9: $20 $2F
 
-    ld   hl, $D204                                ; $79EB: $21 $04 $D2
+    ld   hl, wD204                                ; $79EB: $21 $04 $D2
     inc  [hl]                                     ; $79EE: $34
     ld   a, [hl]                                  ; $79EF: $7E
     cp   $08                                      ; $79F0: $FE $08
     jr   nz, jr_005_7A1A                          ; $79F2: $20 $26
 
-    ld   a, [$D201]                               ; $79F4: $FA $01 $D2
+    ld   a, [wD201]                               ; $79F4: $FA $01 $D2
     ld   e, a                                     ; $79F7: $5F
     ld   d, b                                     ; $79F8: $50
     ld   hl, wEntitiesStatusTable                 ; $79F9: $21 $80 $C2

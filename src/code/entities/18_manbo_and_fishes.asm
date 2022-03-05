@@ -10,20 +10,20 @@ ManboAndFishesEntityHandler::
     ld   hl, wEntitiesPosYTable                   ; $4507: $21 $10 $C2
     add  hl, bc                                   ; $450A: $09
     ld   [hl], $3E                                ; $450B: $36 $3E
-    ld   a, [$D214]                               ; $450D: $FA $14 $D2
+    ld   a, [wD214]                               ; $450D: $FA $14 $D2
     and  a                                        ; $4510: $A7
     jr   z, jr_018_4517                           ; $4511: $28 $04
 
     dec  a                                        ; $4513: $3D
-    ld   [$D214], a                               ; $4514: $EA $14 $D2
+    ld   [wD214], a                               ; $4514: $EA $14 $D2
 
 jr_018_4517:
-    ld   a, [$D218]                               ; $4517: $FA $18 $D2
+    ld   a, [wD218]                               ; $4517: $FA $18 $D2
     and  a                                        ; $451A: $A7
     jr   z, jr_018_4521                           ; $451B: $28 $04
 
     dec  a                                        ; $451D: $3D
-    ld   [$D218], a                               ; $451E: $EA $18 $D2
+    ld   [wD218], a                               ; $451E: $EA $18 $D2
 
 jr_018_4521:
     call func_018_4833                            ; $4521: $CD $33 $48
@@ -113,13 +113,13 @@ ManboAndFishesSingHandler::
 
 func_018_45A0::
     xor  a                                        ; $45A0: $AF
-    ld   [$D210], a                               ; $45A1: $EA $10 $D2
-    ld   [$D211], a                               ; $45A4: $EA $11 $D2
-    ld   [$D212], a                               ; $45A7: $EA $12 $D2
-    ld   [$D213], a                               ; $45AA: $EA $13 $D2
-    ld   [$D217], a                               ; $45AD: $EA $17 $D2
-    ld   [$D214], a                               ; $45B0: $EA $14 $D2
-    ld   [$D218], a                               ; $45B3: $EA $18 $D2
+    ld   [wD210], a                               ; $45A1: $EA $10 $D2
+    ld   [wD211], a                               ; $45A4: $EA $11 $D2
+    ld   [wD212], a                               ; $45A7: $EA $12 $D2
+    ld   [wD213], a                               ; $45AA: $EA $13 $D2
+    ld   [wD217], a                               ; $45AD: $EA $17 $D2
+    ld   [wD214], a                               ; $45B0: $EA $14 $D2
+    ld   [wD218], a                               ; $45B3: $EA $18 $D2
 
 jr_018_45B6:
     ret                                           ; $45B6: $C9
@@ -149,17 +149,17 @@ ManboAndFishesState3Handler::
     ld   a, $02                                   ; $46A1: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $46A3: $E0 $A1
     ld   [wC167], a                               ; $46A5: $EA $67 $C1
-    ld   a, [$D210]                               ; $46A8: $FA $10 $D2
+    ld   a, [wD210]                               ; $46A8: $FA $10 $D2
     add  $01                                      ; $46AB: $C6 $01
-    ld   [$D210], a                               ; $46AD: $EA $10 $D2
-    ld   a, [$D211]                               ; $46B0: $FA $11 $D2
+    ld   [wD210], a                               ; $46AD: $EA $10 $D2
+    ld   a, [wD211]                               ; $46B0: $FA $11 $D2
     adc  $00                                      ; $46B3: $CE $00
-    ld   [$D211], a                               ; $46B5: $EA $11 $D2
-    ld   a, [$D211]                               ; $46B8: $FA $11 $D2
+    ld   [wD211], a                               ; $46B5: $EA $11 $D2
+    ld   a, [wD211]                               ; $46B8: $FA $11 $D2
     cp   $05                                      ; $46BB: $FE $05
     jr   nz, jr_018_46CF                          ; $46BD: $20 $10
 
-    ld   a, [$D210]                               ; $46BF: $FA $10 $D2
+    ld   a, [wD210]                               ; $46BF: $FA $10 $D2
     cp   $F0                                      ; $46C2: $FE $F0
     jr   nz, jr_018_46CF                          ; $46C4: $20 $09
 
@@ -169,19 +169,19 @@ ManboAndFishesState3Handler::
     ret                                           ; $46CE: $C9
 
 jr_018_46CF:
-    ld   a, [$D212]                               ; $46CF: $FA $12 $D2
+    ld   a, [wD212]                               ; $46CF: $FA $12 $D2
     inc  a                                        ; $46D2: $3C
     cp   $14                                      ; $46D3: $FE $14
     jr   nz, jr_018_46DF                          ; $46D5: $20 $08
 
-    ld   a, [$D213]                               ; $46D7: $FA $13 $D2
+    ld   a, [wD213]                               ; $46D7: $FA $13 $D2
     inc  a                                        ; $46DA: $3C
-    ld   [$D213], a                               ; $46DB: $EA $13 $D2
+    ld   [wD213], a                               ; $46DB: $EA $13 $D2
     xor  a                                        ; $46DE: $AF
 
 jr_018_46DF:
-    ld   [$D212], a                               ; $46DF: $EA $12 $D2
-    ld   a, [$D213]                               ; $46E2: $FA $13 $D2
+    ld   [wD212], a                               ; $46DF: $EA $12 $D2
+    ld   a, [wD213]                               ; $46E2: $FA $13 $D2
     ld   e, a                                     ; $46E5: $5F
     ld   d, b                                     ; $46E6: $50
     ld   hl, Data_018_4605                        ; $46E7: $21 $05 $46
@@ -197,10 +197,10 @@ jr_018_46DF:
     ld   hl, Data_018_4653                        ; $46F9: $21 $53 $46
     add  hl, de                                   ; $46FC: $19
     ld   a, [hl]                                  ; $46FD: $7E
-    ld   [$D215], a                               ; $46FE: $EA $15 $D2
-    ld   a, [$D211]                               ; $4701: $FA $11 $D2
+    ld   [wD215], a                               ; $46FE: $EA $15 $D2
+    ld   a, [wD211]                               ; $4701: $FA $11 $D2
     ld   d, a                                     ; $4704: $57
-    ld   a, [$D210]                               ; $4705: $FA $10 $D2
+    ld   a, [wD210]                               ; $4705: $FA $10 $D2
     ld   e, a                                     ; $4708: $5F
     cp   $CC                                      ; $4709: $FE $CC
     jr   nz, jr_018_4712                          ; $470B: $20 $05
@@ -223,7 +223,7 @@ jr_018_471C:
 
 jr_018_471D:
     ld   a, $28                                   ; $471D: $3E $28
-    ld   [$D214], a                               ; $471F: $EA $14 $D2
+    ld   [wD214], a                               ; $471F: $EA $14 $D2
 
 jr_018_4722:
     call GetEntityPrivateCountdown1               ; $4722: $CD $00 $0C
@@ -382,14 +382,14 @@ label_018_48C8::
     rra                                           ; $48D0: $1F
     and  $01                                      ; $48D1: $E6 $01
     call SetEntitySpriteVariant                   ; $48D3: $CD $0C $3B
-    ld   a, [$D215]                               ; $48D6: $FA $15 $D2
+    ld   a, [wD215]                               ; $48D6: $FA $15 $D2
     and  a                                        ; $48D9: $A7
     ret  z                                        ; $48DA: $C8
 
     jp   SetEntitySpriteVariant                   ; $48DB: $C3 $0C $3B
 
 func_018_48DE::
-    ld   a, [$D214]                               ; $48DE: $FA $14 $D2
+    ld   a, [wD214]                               ; $48DE: $FA $14 $D2
     and  a                                        ; $48E1: $A7
     jr   z, jr_018_4904                           ; $48E2: $28 $20
 

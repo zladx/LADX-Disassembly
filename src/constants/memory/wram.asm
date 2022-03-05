@@ -2597,7 +2597,8 @@ wLCDControl::
 wTilesetToLoad::
   ds 1 ; D6FE
 
-; TODO comment
+; Index of a tilemap that will be copied to VRAM on next vblank.
+; See possible values at TilemapsPointersTable
 wBGMapToLoad::
   ds 1 ; D6FF
 

@@ -534,10 +534,20 @@ Data_001_54E8::
     db $9D, $69, $49, $7F, $9D, $89, $49, $7F, $9D, $A9, $49, $7F, $9D, $C9, $49, $7F ; $54F8
     db $9D, $E9, $49, $7F, $9E, $09, $49, $7F, $00 ; $5508
 
-func_001_5511::
-    ; Copy $29 bytes from Data_001_54E8 to somewhere in wRequestData
+; Create an in-memory wRequest data structure to clear the background of the minimap,
+; and to place the "L-?" dungeon label and the entrance arrow.
+;
+; As this depends on which dungeon, the wRequest is built dynamically
+;
+; This wRequest is executed later by the tilemap drawing code.
+; See data/backgrounds/tilemap_pointers.asm
+CreateMinimapTilemap::
+    ; Copy $29 bytes from Data_001_54E8 to $D651
+    ; ($D651 is normally in the middle of wRequestData - but is here used as some temporary free memory)
+    ;
+    ; This will later be used by the BGMapToLoad 7 (see tilemaps_pointers.asm)
     ld   hl, Data_001_54E8                        ; $5511: $21 $E8 $54
-    ld   de, wRequestData + $4C                   ; $5514: $11 $50 $D6
+    ld   de, $D651 - 1                            ; $5514: $11 $50 $D6
     ld   c, $29                                   ; $5517: $0E $29
 .copyLoop
     ld   a, [hli]                                 ; $5519: $2A
@@ -561,7 +571,7 @@ func_001_5511::
     and  $03                                      ; $5532: $E6 $03
     ld   e, a                                     ; $5534: $5F
     and  a                                        ; $5535: $A7
-    jr   z, jr_001_5543                           ; $5536: $28 $0B
+    jr   z, .jr_001_5543                          ; $5536: $28 $0B
 
 .loop
     ld   a, c                                     ; $5538: $79
@@ -573,10 +583,10 @@ func_001_5511::
     jr   nz, .loop                                ; $553F: $20 $F7
     ld   b, $00                                   ; $5541: $06 $00
 
-jr_001_5543::
+.jr_001_5543
     pop  hl                                       ; $5543: $E1
 
-jr_001_5544::
+.loop2
     push hl                                       ; $5544: $E5
     ld   hl, Data_001_53D8                        ; $5545: $21 $D8 $53
     add  hl, bc                                   ; $5548: $09
@@ -604,7 +614,8 @@ jr_001_5544::
     pop  hl                                       ; $556C: $E1
     inc  hl                                       ; $556D: $23
     cp   $FF                                      ; $556E: $FE $FF
-    jr   nz, jr_001_5544                          ; $5570: $20 $D2
+    jr   nz, .loop2                               ; $5570: $20 $D2
+
     xor  a                                        ; $5572: $AF
     ld   [hl], a                                  ; $5573: $77
     xor  a                                        ; $5574: $AF
@@ -621,9 +632,9 @@ jr_001_5544::
     and  $03                                      ; $5586: $E6 $03
     ld   e, a                                     ; $5588: $5F
     and  a                                        ; $5589: $A7
-    jr   z, jr_001_55EA                           ; $558A: $28 $5E
+    jr   z, .jr_001_55E                           ; $558A: $28 $5E
 
-jr_001_558C::
+.loop3
     ld   b, $00                                   ; $558C: $06 $00
     ld   a, c                                     ; $558E: $79
     add  a, $08                                   ; $558F: $C6 $08
@@ -631,10 +642,11 @@ jr_001_558C::
     dec  e                                        ; $5592: $1D
     ld   a, e                                     ; $5593: $7B
     and  a                                        ; $5594: $A7
-    jr   nz, jr_001_558C                          ; $5595: $20 $F5
+    jr   nz, .loop3                               ; $5595: $20 $F5
+
     ld   a, [wMinimapLayout]                      ; $5597: $FA $B0 $DB
     and  $03                                      ; $559A: $E6 $03
-    jr   z, .loop                                 ; $559C: $28 $22
+    jr   z, .loop4                                ; $559C: $28 $22
     ld   a, [wMinimapLayout]                      ; $559E: $FA $B0 $DB
     and  $30                                      ; $55A1: $E6 $30
     cp   $30                                      ; $55A3: $FE $30
@@ -643,7 +655,7 @@ jr_001_558C::
     add  a, $04                                   ; $55A8: $C6 $04
     ld   c, a                                     ; $55AA: $4F
     ld   b, $00                                   ; $55AB: $06 $00
-    jr   .loop                                    ; $55AD: $18 $11
+    jr   .loop4                                   ; $55AD: $18 $11
 
 .jr_001_55AF
     ld   a, [wMinimapLayout]                      ; $55AF: $FA $B0 $DB
@@ -660,7 +672,7 @@ jr_001_558C::
     and  a                                        ; $55BD: $A7
     jr   nz, .jr_001_55B5                         ; $55BE: $20 $F5
 
-.loop
+.loop4
     push hl                                       ; $55C0: $E5
     ld   hl, Data_001_5418                        ; $55C1: $21 $18 $54
     add  hl, bc                                   ; $55C4: $09
@@ -686,18 +698,18 @@ jr_001_558C::
     pop  hl                                       ; $55E4: $E1
     inc  hl                                       ; $55E5: $23
     cp   $FF                                      ; $55E6: $FE $FF
-    jr   nz, .loop                                ; $55E8: $20 $D6
+    jr   nz, .loop4                               ; $55E8: $20 $D6
 
-jr_001_55EA::
+.jr_001_55E
     xor  a                                        ; $55EA: $AF
     ld   b, a                                     ; $55EB: $47
     ld   c, a                                     ; $55EC: $4F
     ld   a, [wMinimapLayout]                      ; $55ED: $FA $B0 $DB
     bit  5, a                                     ; $55F0: $CB $6F
-    jr   z, jr_001_55F5                           ; $55F2: $28 $01
+    jr   z, .jr_001_55F5                          ; $55F2: $28 $01
     inc  bc                                       ; $55F4: $03
 
-jr_001_55F5::
+.jr_001_55F5
     push hl                                       ; $55F5: $E5
     ld   hl, Data_001_54E4                        ; $55F6: $21 $E4 $54
     add  hl, bc                                   ; $55F9: $09

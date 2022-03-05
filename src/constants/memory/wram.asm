@@ -2558,6 +2558,14 @@ wRequestLength::
 wRequestData::
   ds 244  ; D604 - D6F7
 
+; Temporary storage for the tilemap of the dungeon minimap.
+;
+; This tilemap is built dynamically, using the end of the wRequestData memory
+; as a temporary buffer.
+;
+; TODO: convert this to a sub-label of wRequest
+wMinimapTilemap EQU $D651
+
 ; Animation stage during a switchable object animation.
 ;
 ; Incremented each frame, but may also be set manually to

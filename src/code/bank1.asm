@@ -534,20 +534,21 @@ Data_001_54E8::
     db $9D, $69, $49, $7F, $9D, $89, $49, $7F, $9D, $A9, $49, $7F, $9D, $C9, $49, $7F ; $54F8
     db $9D, $E9, $49, $7F, $9E, $09, $49, $7F, $00 ; $5508
 
-; Create an in-memory wRequest data structure to clear the background of the minimap,
-; and to place the "L-?" dungeon label and the entrance arrow.
+; Create an in-memory tilemap of the dungeon minimap,
+; plus the place the "L-?" dungeon label and entrance arrow.
 ;
-; As this depends on which dungeon, the wRequest is built dynamically
+; As this depends on which dungeon, this tilemap is built dynamically.
 ;
-; This wRequest is executed later by the tilemap drawing code.
+; This tilemap is copied to VRAM later, using the wBGMapToLoad variable.
 ; See data/backgrounds/tilemap_pointers.asm
 CreateMinimapTilemap::
-    ; Copy $29 bytes from Data_001_54E8 to $D651
-    ; ($D651 is normally in the middle of wRequestData - but is here used as some temporary free memory)
+    ; Copy $29 bytes from Data_001_54E8 to wMinimapTilemap
+    ; (wMinimapTilemap is normally in the middle of wRequestData - but is here used as some temporary free memory
+    ; to store the tilemap)
     ;
     ; This will later be used by the BGMapToLoad 7 (see tilemaps_pointers.asm)
     ld   hl, Data_001_54E8                        ; $5511: $21 $E8 $54
-    ld   de, $D651 - 1                            ; $5514: $11 $50 $D6
+    ld   de, wMinimapTilemap - 1                  ; $5514: $11 $50 $D6
     ld   c, $29                                   ; $5517: $0E $29
 .copyLoop
     ld   a, [hli]                                 ; $5519: $2A

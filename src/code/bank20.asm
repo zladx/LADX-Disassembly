@@ -896,7 +896,7 @@ func_020_49F4::
     ld   hl, Data_020_49F0                        ; $4A02: $21 $F0 $49
     add  hl, bc                                   ; $4A05: $09
     ld   a, [hl]                                  ; $4A06: $7E
-    ld   [wRequestLength], a                      ; $4A07: $EA $03 $D6
+    ld   [wRequest.length], a                     ; $4A07: $EA $03 $D6
     ld   a, $00                                   ; $4A0A: $3E $00
     ld   [wRequestData + $14], a                  ; $4A0C: $EA $18 $D6
     ld   a, $EE                                   ; $4A0F: $3E $EE
@@ -922,7 +922,7 @@ func_020_4A22::
     ld   hl, Data_020_49F0                        ; $4A36: $21 $F0 $49
     add  hl, bc                                   ; $4A39: $09
     ld   a, [hl]                                  ; $4A3A: $7E
-    ld   [wRequestLength], a                      ; $4A3B: $EA $03 $D6
+    ld   [wRequest.length], a                     ; $4A3B: $EA $03 $D6
     ld   [wRequestAltLength], a                   ; $4A3E: $EA $93 $DC
 
     ld   a, $00                                   ; $4A41: $3E $00

@@ -2547,15 +2547,13 @@ wRequest::
 ; Request destination address high byte
 .destinationHigh
   ds 1 ; D601
-
 ; Request destination address low byte
 .destinationLow
   ds 1 ; D602
-
 ; Request data length and mode.
 ; bits 0-6: data length,
 ; bits 7-8: copy mode (see BG_COPY_MODE_* constants)
-wRequestLength::
+.length::
   ds 1 ; D603
 
 ; Request data (variable length)

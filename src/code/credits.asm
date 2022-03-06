@@ -3790,7 +3790,7 @@ func_017_63BC::
     ld   d, $00                                   ; $63DB: $16 $00
     ld   hl, Data_017_637C                        ; $63DD: $21 $7C $63
     add  hl, de                                   ; $63E0: $19
-    ld   de, wRequestLength                       ; $63E1: $11 $03 $D6
+    ld   de, wRequest.length                      ; $63E1: $11 $03 $D6
     ld   c, $10                                   ; $63E4: $0E $10
 
 jr_017_63E6:

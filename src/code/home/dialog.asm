@@ -720,9 +720,9 @@ ENDC
     add  a, [hl]                                  ; $26FF: $86
     ld   [wRequest.destinationLow], a             ; $2700: $EA $02 $D6
     ld   a, BG_COPY_MODE_ROW_SINGLE_VALUE | $0F   ; $2703: $3E $4F
-    ld   [wRequestLength], a                      ; $2705: $EA $03 $D6
+    ld   [wRequest.length], a                     ; $2705: $EA $03 $D6
     ldh  a, [hDialogBackgroundTile]               ; $2708: $F0 $E8
-    ld   [wRequestLength + 1], a                  ; $270A: $EA $04 $D6
+    ld   [wRequest.length+ 1], a                  ; $270A: $EA $04 $D6
     xor  a                                        ; $270D: $AF
     ld   [wRequestData + 1], a                    ; $270E: $EA $05 $D6
 IF __PATCH_9__

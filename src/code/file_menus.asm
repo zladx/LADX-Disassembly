@@ -533,7 +533,7 @@ FileCreationInit2Handler::
     ld   a, LOW(FILE_NEW_SAVE_SLOT_INDEX_BG)      ; $4A2F: $3E $49
     ldi  [hl], a ; wRequest.destinationLow        ; $4A31: $22
     xor  a                                        ; $4A32: $AF
-    ldi  [hl], a ; wRequestLength                 ; $4A33: $22
+    ldi  [hl], a ; wRequest.length                ; $4A33: $22
     ld   a, [wSaveSlot]                           ; $4A34: $FA $A6 $DB
     add  a, FILE_NEW_SAVE_SLOT_1_TILE             ; $4A37: $C6 $AB
     ldi  [hl], a ; wRequestData[0]                ; $4A39: $22

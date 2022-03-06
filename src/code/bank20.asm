@@ -892,7 +892,7 @@ func_020_49F4::
     ld   [wRequestDestinationLow], a              ; $49F7: $EA $02 $D6
     ld   a, [wBGUpdateRegionOriginHigh]           ; $49FA: $FA $26 $C1
     or   $98                                      ; $49FD: $F6 $98
-    ld   [wRequestDestinationHigh], a             ; $49FF: $EA $01 $D6
+    ld   [wRequest.destinationHigh], a            ; $49FF: $EA $01 $D6
     ld   hl, Data_020_49F0                        ; $4A02: $21 $F0 $49
     add  hl, bc                                   ; $4A05: $09
     ld   a, [hl]                                  ; $4A06: $7E
@@ -916,7 +916,7 @@ func_020_4A22::
 
     ld   a, [wBGUpdateRegionOriginHigh]           ; $4A2B: $FA $26 $C1
     or   $98                                      ; $4A2E: $F6 $98
-    ld   [wRequestDestinationHigh], a             ; $4A30: $EA $01 $D6
+    ld   [wRequest.destinationHigh], a            ; $4A30: $EA $01 $D6
     ld   [wRequestAltDestinationHigh], a          ; $4A33: $EA $91 $DC
 
     ld   hl, Data_020_49F0                        ; $4A36: $21 $F0 $49

@@ -713,7 +713,7 @@ ENDC
     add  hl, de                                   ; $26F0: $19
     ld   a, [wBGOriginHigh]                       ; $26F1: $FA $2E $C1
     add  a, [hl]                                  ; $26F4: $86
-    ld   [wRequestDestinationHigh], a             ; $26F5: $EA $01 $D6
+    ld   [wRequest.destinationHigh], a            ; $26F5: $EA $01 $D6
     ld   hl, data_2691                            ; $26F8: $21 $91 $26
     add  hl, de                                   ; $26FB: $19
     ld   a, [wBGOriginLow]                        ; $26FC: $FA $2F $C1

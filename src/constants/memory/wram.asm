@@ -2545,7 +2545,7 @@ wRequestsSize::               ; D600
 ; Request destination address (big endian)
 wRequest::
 ; Request destination address high byte
-wRequestDestinationHigh::
+.destinationHigh
   ds 1 ; D601
 
 ; Request destination address low byte

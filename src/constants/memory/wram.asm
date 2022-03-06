@@ -2531,9 +2531,13 @@ wD5C2::
 wD5C4::
   ds 60 ; D5C4 - D600
 
+;
 ; Data structures for copying data to vram during blanking times.
-; 0 if background copy was executed
-wRequests::               ; D600
+;
+
+; Size of all cumulated wRequestsSize
+; When 0, no wRequest is executed on vblank
+wRequestsSize::               ; D600
   ds 1
 
 ; Request destination address (big endian)
@@ -3291,9 +3295,12 @@ wObjPal7::
 wObjPal8::
   ds 8 ; DC88 - DC8F
 
-; This seems to be some secondary wRequest buffer used during map scrolling.
+; This seems to be some secondary wRequests buffer used during map scrolling.
 ;
 ; TODO: find a better name
+
+; Size of all cumulated wRequestsSize
+; When 0, no wRequest is executed on vblanks
 wRequestsAlt::
   ds 1 ; DC90
 

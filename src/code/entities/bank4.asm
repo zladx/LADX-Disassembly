@@ -1412,13 +1412,13 @@ jr_004_5628:
     pop  bc                                       ; $565E: $C1
 
 jr_004_565F:
-    ld   a, [wRequests]                           ; $565F: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $565F: $FA $00 $D6
     ld   e, a                                     ; $5662: $5F
     ld   d, $00                                   ; $5663: $16 $00
     ld   hl, wRequestDestinationHigh              ; $5665: $21 $01 $D6
     add  hl, de                                   ; $5668: $19
     add  $0A                                      ; $5669: $C6 $0A
-    ld   [wRequests], a                           ; $566B: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $566B: $EA $00 $D6
     pop  de                                       ; $566E: $D1
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $566F: $F0 $CF
     ld   [hl+], a                                 ; $5671: $22

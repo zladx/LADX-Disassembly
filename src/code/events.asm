@@ -334,13 +334,13 @@ jr_002_5EED:
     ld   [hl], a                                  ; $5F06: $77
     ld   [wDDD8], a                               ; $5F07: $EA $D8 $DD
     call label_2887                               ; $5F0A: $CD $87 $28
-    ld   a, [wRequests]                           ; $5F0D: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $5F0D: $FA $00 $D6
     ld   e, a                                     ; $5F10: $5F
     ld   d, $00                                   ; $5F11: $16 $00
     ld   hl, wRequestDestinationHigh              ; $5F13: $21 $01 $D6
     add  hl, de                                   ; $5F16: $19
     add  $0A                                      ; $5F17: $C6 $0A
-    ld   [wRequests], a                           ; $5F19: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5F19: $EA $00 $D6
     ld   de, Data_002_5EA3                        ; $5F1C: $11 $A3 $5E
     ldh  a, [hIsGBC]                              ; $5F1F: $F0 $FE
     and  a                                        ; $5F21: $A7
@@ -415,13 +415,13 @@ func_002_5F5C::
     ld   [hl], a                                  ; $5F83: $77
     ld   [wDDD8], a                               ; $5F84: $EA $D8 $DD
     call label_2887                               ; $5F87: $CD $87 $28
-    ld   a, [wRequests]                           ; $5F8A: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $5F8A: $FA $00 $D6
     ld   e, a                                     ; $5F8D: $5F
     ld   d, $00                                   ; $5F8E: $16 $00
     ld   hl, wRequestDestinationHigh              ; $5F90: $21 $01 $D6
     add  hl, de                                   ; $5F93: $19
     add  $0A                                      ; $5F94: $C6 $0A
-    ld   [wRequests], a                           ; $5F96: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5F96: $EA $00 $D6
     ld   de, Data_002_5F54                        ; $5F99: $11 $54 $5F
     jp   label_002_5F27                           ; $5F9C: $C3 $27 $5F
 

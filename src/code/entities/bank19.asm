@@ -1778,10 +1778,10 @@ jr_019_4C21:
 
 jr_019_4C88:
     ld   hl, wRequestDestinationHigh              ; $4C88: $21 $01 $D6
-    ld   a, [wRequests]                           ; $4C8B: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $4C8B: $FA $00 $D6
     ld   e, a                                     ; $4C8E: $5F
     add  $07                                      ; $4C8F: $C6 $07
-    ld   [wRequests], a                           ; $4C91: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $4C91: $EA $00 $D6
     ld   d, $00                                   ; $4C94: $16 $00
     add  hl, de                                   ; $4C96: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4C97: $F0 $CF
@@ -2614,10 +2614,10 @@ FlyingRoosterState0Handler::
 
 jr_019_5267:
     ld   hl, wRequestDestinationHigh              ; $5267: $21 $01 $D6
-    ld   a, [wRequests]                           ; $526A: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $526A: $FA $00 $D6
     ld   e, a                                     ; $526D: $5F
     add  $0E                                      ; $526E: $C6 $0E
-    ld   [wRequests], a                           ; $5270: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5270: $EA $00 $D6
     ld   d, $00                                   ; $5273: $16 $00
     add  hl, de                                   ; $5275: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5276: $F0 $CF
@@ -2719,10 +2719,10 @@ FlyingRoosterState1Handler::
 
 jr_019_531E:
     ld   hl, wRequestDestinationHigh              ; $531E: $21 $01 $D6
-    ld   a, [wRequests]                           ; $5321: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $5321: $FA $00 $D6
     ld   e, a                                     ; $5324: $5F
     add  $0E                                      ; $5325: $C6 $0E
-    ld   [wRequests], a                           ; $5327: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5327: $EA $00 $D6
     ld   d, $00                                   ; $532A: $16 $00
     add  hl, de                                   ; $532C: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $532D: $F0 $CF
@@ -4940,7 +4940,7 @@ Data_019_6354::
 
 func_019_6374::
     ld   a, $20                                   ; $6374: $3E $20
-    ld   [wRequests], a                           ; $6376: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $6376: $EA $00 $D6
     ld   hl, wRequestDestinationHigh              ; $6379: $21 $01 $D6
     ld   de, Data_019_62F4                        ; $637C: $11 $F4 $62
     ldh  a, [hIsGBC]                              ; $637F: $F0 $FE
@@ -7488,7 +7488,7 @@ func_019_7921::
     push bc                                       ; $7921: $C5
     ld   c, $23                                   ; $7922: $0E $23
     ld   a, $22                                   ; $7924: $3E $22
-    ld   [wRequests], a                           ; $7926: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $7926: $EA $00 $D6
     ld   hl, wRequestDestinationHigh              ; $7929: $21 $01 $D6
     ld   de, Data_019_78FE                        ; $792C: $11 $FE $78
 

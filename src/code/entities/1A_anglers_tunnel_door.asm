@@ -166,11 +166,11 @@ AnglersTunnelDoorEntityHandler::
 
     add  hl, de                                   ; $7173: $19
     push hl                                       ; $7174: $E5
-    ld   a, [wRequests]                           ; $7175: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $7175: $FA $00 $D6
     ld   e, a                                     ; $7178: $5F
     ld   d, b                                     ; $7179: $50
     add  $0D                                      ; $717A: $C6 $0D
-    ld   [wRequests], a                           ; $717C: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $717C: $EA $00 $D6
     ld   hl, wRequestDestinationHigh              ; $717F: $21 $01 $D6
     add  hl, de                                   ; $7182: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $7183: $F0 $CF

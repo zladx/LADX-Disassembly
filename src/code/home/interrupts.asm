@@ -399,7 +399,7 @@ InterruptVBlank::
     ld   de, wRequest                             ; $0538: $11 $01 $D6
     call ExecuteBGCopyRequest ; Load BG column tiles ; $053B: $CD $27 $29
     xor  a                                        ; $053E: $AF
-    ld   [wRequests], a                           ; $053F: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $053F: $EA $00 $D6
     ld   [wRequest], a                            ; $0542: $EA $01 $D6
     ld   [wRequestsAlt], a                        ; $0545: $EA $90 $DC
     ld   [wRequestAlt], a                         ; $0548: $EA $91 $DC
@@ -456,7 +456,7 @@ PhotoAlbumVBlankHandler::
     ld   de, wRequest                             ; $0598: $11 $01 $D6
     call ExecuteBGCopyRequest                     ; $059B: $CD $27 $29
     xor  a                                        ; $059E: $AF
-    ld   [wRequests], a                           ; $059F: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $059F: $EA $00 $D6
     ld   [wRequest], a                            ; $05A2: $EA $01 $D6
     ld   [wRequestsAlt], a                        ; $05A5: $EA $90 $DC
     ld   [wRequestAlt], a                         ; $05A8: $EA $91 $DC

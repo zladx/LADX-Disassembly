@@ -1273,11 +1273,11 @@ Data_001_5D3E::
     db  $00                                       ; $5D52
 
 label_001_5D53::
-    ld   a, [wRequests]                           ; $5D53: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $5D53: $FA $00 $D6
     ld   e, a                                     ; $5D56: $5F
     ld   d, $00                                   ; $5D57: $16 $00
     add  a, $14                                   ; $5D59: $C6 $14
-    ld   [wRequests], a                           ; $5D5B: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5D5B: $EA $00 $D6
     ld   hl, wRequest                             ; $5D5E: $21 $01 $D6
     add  hl, de                                   ; $5D61: $19
     push de                                       ; $5D62: $D5

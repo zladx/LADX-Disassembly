@@ -97,13 +97,13 @@ FileSelectionPrepare5::
 
 func_001_4852::
     push de                                       ; $4852: $D5
-    ld   a, [wRequests]                           ; $4853: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $4853: $FA $00 $D6
     ld   e, a                                     ; $4856: $5F
     ld   d, $00                                   ; $4857: $16 $00
     ld   hl, wRequest                             ; $4859: $21 $01 $D6
     add  hl, de                                   ; $485C: $19
     add  a, $10                                   ; $485D: $C6 $10
-    ld   [wRequests], a                           ; $485F: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $485F: $EA $00 $D6
     ld   a, b                                     ; $4862: $78
     ldi  [hl], a                                  ; $4863: $22
     ld   a, c                                     ; $4864: $79
@@ -1276,10 +1276,10 @@ jr_001_4E9E::
 
 IF LANG_JP
 CopyReturnToMenuTilemap::
-    ld   a, [wRequests]                             ; $4eff: $fa $00 $d6
+    ld   a, [wRequestsSize]                         ; $4eff: $fa $00 $d6
     ld   e, a                                       ; $4f02: $5f
     add  $04                                       ; $4f03: $c6 $04
-    ld   [wRequests], a                             ; $4f05: $ea $00 $d6
+    ld   [wRequestsSize], a                         ; $4f05: $ea $00 $d6
     ld   d, $00                                     ; $4f08: $16 $00
     ld   hl, wRequestDestination                    ; $4f0a: $21 $01 $d6
     add  hl, de                                    ; $4f0d: $19
@@ -1308,10 +1308,10 @@ include "data/file_menu_return_to_menu_alt.asm"
 ENDC
 
 CopyReturnToMenuTilemap::
-    ld   a, [wRequests]                           ; $4EBB: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $4EBB: $FA $00 $D6
     ld   e, a                                     ; $4EBE: $5F
     add  FileReturnToMenuTilemap.end - FileReturnToMenuTilemap - 1    ; $4EBF: $C6 $11
-    ld   [wRequests], a                           ; $4EC1: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $4EC1: $EA $00 $D6
     ld   d, $00                                   ; $4EC4: $16 $00
     ld   hl, wRequestDestinationHigh              ; $4EC6: $21 $01 $D6
     add  hl, de                                   ; $4EC9: $19
@@ -1433,10 +1433,10 @@ Data_001_4F3B::
 
 CopyDigitsToFileScreenBG::
     push hl                                       ; $4F45: $E5 ; $4F45: $E5
-    ld   a, [wRequests]                           ; $4F46: $FA $00 $D6 ; $4F46: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $4F46: $FA $00 $D6 ; $4F46: $FA $00 $D6
     ld   c, a                                     ; $4F49: $4F ; $4F49: $4F
     add  $06                                      ; $4F4A: $C6 $06 ; $4F4A: $C6 $06
-    ld   [wRequests], a                           ; $4F4C: $EA $00 $D6 ; $4F4C: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $4F4C: $EA $00 $D6 ; $4F4C: $EA $00 $D6
     ld   b, $00                                   ; $4F4F: $06 $00 ; $4F4F: $06 $00
     ld   hl, wRequestDestinationHigh              ; $4F51: $21 $01 $D6 ; $4F51: $21 $01 $D6
     add  hl, bc                                   ; $4F54: $09 ; $4F54: $09

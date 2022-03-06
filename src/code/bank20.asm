@@ -2,7 +2,7 @@
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-; Contains pointers to wRequests data.
+; Contains pointers to wRequest data.
 ; (The requests themselves load data in bank 8.)
 include "data/backgrounds/tilemaps_pointers.asm"
 
@@ -625,10 +625,10 @@ func_020_4874::
 func_020_4898::
     push de                                       ; $4898: $D5
     ld   hl, wRequestDestinationHigh              ; $4899: $21 $01 $D6
-    ld   a, [wRequests]                           ; $489C: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $489C: $FA $00 $D6
     ld   e, a                                     ; $489F: $5F
     add  $0A                                      ; $48A0: $C6 $0A
-    ld   [wRequests], a                           ; $48A2: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $48A2: $EA $00 $D6
     ld   d, $00                                   ; $48A5: $16 $00
     add  hl, de                                   ; $48A7: $19
     pop  de                                       ; $48A8: $D1
@@ -2714,7 +2714,7 @@ DrawKeyCounter:
 
 jr_020_5ADE:
     ld   a, $32                                   ; $5ADE: $3E $32
-    ld   [wRequests], a                           ; $5AE0: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5AE0: $EA $00 $D6
     ld   a, $03                                   ; $5AE3: $3E $03
     ldh  [hVolumeRight], a                      ; $5AE5: $E0 $A9
     ld   a, $30                                   ; $5AE7: $3E $30
@@ -3028,8 +3028,8 @@ func_020_5C9C::
     call func_020_5BB9                            ; $5CB2: $CD $B9 $5B
 
 jr_020_5CB5:
-    ; de = [wRequests]
-    ld   a, [wRequests]                           ; $5CB5: $FA $00 $D6
+    ; de = [wRequestsSize]
+    ld   a, [wRequestsSize]                       ; $5CB5: $FA $00 $D6
     ld   e, a                                     ; $5CB8: $5F
     ld   d, $00                                   ; $5CB9: $16 $00
 
@@ -3039,7 +3039,7 @@ jr_020_5CB5:
 
     ; Increment the request start by 0C
     add  $0C                                      ; $5CBF: $C6 $0C
-    ld   [wRequests], a                           ; $5CC1: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5CC1: $EA $00 $D6
     push hl                                       ; $5CC4: $E5
 
     ; de = InventoryTileMapPositions + c * 2
@@ -3150,7 +3150,7 @@ label_020_5D34:
     ld   a, $20                                   ; $5D3A: $3E $20
     call func_AB5                                 ; $5D3C: $CD $B5 $0A
     xor  a                                        ; $5D3F: $AF
-    ld   [wRequests], a                           ; $5D40: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5D40: $EA $00 $D6
     ld   [wRequestDestinationHigh], a             ; $5D43: $EA $01 $D6
     ld   [wRequestsAlt], a                        ; $5D46: $EA $90 $DC
     ld   [wRequestAltDestinationHigh], a          ; $5D49: $EA $91 $DC

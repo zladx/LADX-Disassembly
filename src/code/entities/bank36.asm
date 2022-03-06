@@ -3166,10 +3166,10 @@ jr_036_53D2:
     add  hl, bc                                   ; $53D2: $09
     ld   c, l                                     ; $53D3: $4D
     ld   b, h                                     ; $53D4: $44
-    ld   a, [wRequests]                           ; $53D5: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $53D5: $FA $00 $D6
     ld   e, a                                     ; $53D8: $5F
     add  $08                                      ; $53D9: $C6 $08
-    ld   [wRequests], a                           ; $53DB: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $53DB: $EA $00 $D6
     ld   d, $00                                   ; $53DE: $16 $00
     ld   hl, wRequestDestinationHigh              ; $53E0: $21 $01 $D6
     add  hl, de                                   ; $53E3: $19

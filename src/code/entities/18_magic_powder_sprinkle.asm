@@ -258,13 +258,13 @@ label_018_7B1D:
     pop  bc                                       ; $7B2B: $C1
 
 jr_018_7B2C:
-    ld   a, [wRequests]                           ; $7B2C: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $7B2C: $FA $00 $D6
     ld   e, a                                     ; $7B2F: $5F
     ld   d, $00                                   ; $7B30: $16 $00
     ld   hl, wRequestDestinationHigh              ; $7B32: $21 $01 $D6
     add  hl, de                                   ; $7B35: $19
     add  $0A                                      ; $7B36: $C6 $0A
-    ld   [wRequests], a                           ; $7B38: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $7B38: $EA $00 $D6
     pop  de                                       ; $7B3B: $D1
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $7B3C: $F0 $CF
     ld   [hl+], a                                 ; $7B3E: $22

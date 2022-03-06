@@ -1504,10 +1504,10 @@ func_014_5526::
 
 jr_014_554D:
     ld   hl, wRequestDestinationHigh              ; $554D: $21 $01 $D6
-    ld   a, [wRequests]                           ; $5550: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $5550: $FA $00 $D6
     ld   e, a                                     ; $5553: $5F
     add  $0A                                      ; $5554: $C6 $0A
-    ld   [wRequests], a                           ; $5556: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5556: $EA $00 $D6
     ld   d, $00                                   ; $5559: $16 $00
     add  hl, de                                   ; $555B: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $555C: $F0 $CF
@@ -1570,10 +1570,10 @@ jr_014_5584:
 
 jr_014_55B3:
     ld   hl, wRequestDestinationHigh              ; $55B3: $21 $01 $D6
-    ld   a, [wRequests]                           ; $55B6: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $55B6: $FA $00 $D6
     ld   e, a                                     ; $55B9: $5F
     add  $0A                                      ; $55BA: $C6 $0A
-    ld   [wRequests], a                           ; $55BC: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $55BC: $EA $00 $D6
     ld   d, $00                                   ; $55BF: $16 $00
     add  hl, de                                   ; $55C1: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $55C2: $F0 $CF
@@ -1618,10 +1618,10 @@ jr_014_55E3:
 
 jr_014_5600:
     ld   hl, wRequestDestinationHigh              ; $5600: $21 $01 $D6
-    ld   a, [wRequests]                           ; $5603: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $5603: $FA $00 $D6
     ld   e, a                                     ; $5606: $5F
     add  $0A                                      ; $5607: $C6 $0A
-    ld   [wRequests], a                           ; $5609: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5609: $EA $00 $D6
     ld   d, $00                                   ; $560C: $16 $00
     add  hl, de                                   ; $560E: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $560F: $F0 $CF
@@ -1758,10 +1758,10 @@ jr_014_56B9:
 
 jr_014_56C9:
     ld   hl, wRequestDestinationHigh              ; $56C9: $21 $01 $D6
-    ld   a, [wRequests]                           ; $56CC: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $56CC: $FA $00 $D6
     ld   e, a                                     ; $56CF: $5F
     add  $0A                                      ; $56D0: $C6 $0A
-    ld   [wRequests], a                           ; $56D2: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $56D2: $EA $00 $D6
     ld   d, $00                                   ; $56D5: $16 $00
     add  hl, de                                   ; $56D7: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $56D8: $F0 $CF
@@ -1888,10 +1888,10 @@ label_014_5767:
 jr_014_5789:
     ; Make staircase appear
     ld   hl, wRequestDestinationHigh              ; $5789: $21 $01 $D6
-    ld   a, [wRequests]                           ; $578C: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $578C: $FA $00 $D6
     ld   e, a                                     ; $578F: $5F
     add  $0A                                      ; $5790: $C6 $0A
-    ld   [wRequests], a                           ; $5792: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5792: $EA $00 $D6
     ld   d, $00                                   ; $5795: $16 $00
     add  hl, de                                   ; $5797: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5798: $F0 $CF
@@ -1962,10 +1962,10 @@ label_014_57E1:
 
 jr_014_5807:
     ld   hl, wRequestDestinationHigh              ; $5807: $21 $01 $D6
-    ld   a, [wRequests]                           ; $580A: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $580A: $FA $00 $D6
     ld   e, a                                     ; $580D: $5F
     add  $0A                                      ; $580E: $C6 $0A
-    ld   [wRequests], a                           ; $5810: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5810: $EA $00 $D6
     ld   d, $00                                   ; $5813: $16 $00
     add  hl, de                                   ; $5815: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5816: $F0 $CF

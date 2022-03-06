@@ -266,7 +266,7 @@ IF LANG_DE
 
     xor a
     ldh [hLinkInteractiveMotionBlocked], a
-    ld hl, wRequestDestination
+    ld hl, wRequest
     ld de, Data_001_48EB
     ld c, Data_001_48EB.end - Data_001_48EB
 
@@ -1177,18 +1177,18 @@ jr_001_4E3B::
 
 IF LANG_JP
 CopyQuitOkTilemap::
-    ld hl, wRequestDestination
-    ld a, $99
+    ld hl, wRequest
+    ld a, HIGH(vBGMap0 + $1EE)
     ld [hl+], a
-    ld a, $ee
+    ld a, LOW(vBGMap0 + $1EE)
     ld [hl+], a
     ld a, $02
     ld [hl+], a
-    ld a, $ba
+    ld a, $BA
     ld [hl+], a
-    ld a, $bb
+    ld a, $BB
     ld [hl+], a
-    ld a, $3d
+    ld a, $3D
 
     ld [hl+], a                                   ; $4eb9: $22
     xor a                                         ; $4eba: $af
@@ -1278,22 +1278,22 @@ IF LANG_JP
 CopyReturnToMenuTilemap::
     ld   a, [wRequestsSize]                         ; $4eff: $fa $00 $d6
     ld   e, a                                       ; $4f02: $5f
-    add  $04                                       ; $4f03: $c6 $04
+    add  $04                                        ; $4f03: $c6 $04
     ld   [wRequestsSize], a                         ; $4f05: $ea $00 $d6
     ld   d, $00                                     ; $4f08: $16 $00
-    ld   hl, wRequestDestination                    ; $4f0a: $21 $01 $d6
-    add  hl, de                                    ; $4f0d: $19
-    ld   a, $99                                     ; $4f0e: $3e $99
+    ld   hl, wRequest                               ; $4f0a: $21 $01 $d6
+    add  hl, de                                     ; $4f0d: $19
+    ld   a, HIGH(vBGMap0 + $1EE)                    ; $4f0e: $3e $99
     ld   [hl+], a                                   ; $4f10: $22
-    ld   a, $ee                                     ; $4f11: $3e $ee
+    ld   a, LOW(vBGMap0 + $1EE)                        ; $4f11: $3e $ee
     ld   [hl+], a                                   ; $4f13: $22
     ld   a, $42                                     ; $4f14: $3e $42
     ld   [hl+], a                                   ; $4f16: $22
     ld   a, $7e                                     ; $4f17: $3e $7e
     ld   [hl+], a                                   ; $4f19: $22
-    xor  a                                         ; $4f1a: $af
+    xor  a                                          ; $4f1a: $af
     ld   [hl], a                                    ; $4f1b: $77
-    ret                                           ; $4f1c: $c9
+    ret                                             ; $4f1c: $c9
 ELSE
 
 ; Tilemap for the "RETURN TO MENU" text, formatted as wRequest data

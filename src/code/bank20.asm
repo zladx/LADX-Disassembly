@@ -2475,11 +2475,11 @@ data_020_5994::
 data_020_59C7::
     ; These are actually indexes in the precious table of bytes that need to be set to 7F to hide items.
     ; It uses this offset to write 2x7F byte when an item is not available
-    db   $03, $0A, $11, $22, $05, $0C, $13, $1D, $27
+    db   $03, $0A, $11, $22, $05, $0C, $13, $1D, $27 ; $59CF
 
 ; Start building display of inventory
 ; Called from jp hl in 00:28CE (TABLEJUMP)
-; Copies 51 bytes from data_020_5994 (above) to wRequestDestination (D601)                                          ; $59CF: $27
+; Copies 51 bytes from data_020_5994 (above) to wRequest (D601)
 InventoryLoad1Handler::
     ld   hl, wRequestDestinationHigh              ; $59D0: $21 $01 $D6
     ld   bc, data_020_5994                        ; $59D3: $01 $94 $59

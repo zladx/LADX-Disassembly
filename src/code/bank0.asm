@@ -1525,7 +1525,7 @@ WorldInteractiveHandler::
     call AnimateEntities                          ; $0FE0: $CD $8D $39
     callsw label_002_5487                         ; $0FE3: $3E $02 $CD $0C $08 $CD $87 $54
 
-    ld   hl, wRequestDestination                  ; $0FEB: $21 $01 $D6
+    ld   hl, wRequest                             ; $0FEB: $21 $01 $D6
     ldh  a, [hFrameCounter]                       ; $0FEE: $F0 $E7
     and  $03                                      ; $0FF0: $E6 $03
     or   [hl]                                     ; $0FF2: $B6

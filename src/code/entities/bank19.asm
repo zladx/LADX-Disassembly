@@ -1777,7 +1777,7 @@ jr_019_4C21:
     pop  bc                                       ; $4C87: $C1
 
 jr_019_4C88:
-    ld   hl, wRequestDestinationHigh              ; $4C88: $21 $01 $D6
+    ld   hl, wRequest                             ; $4C88: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $4C8B: $FA $00 $D6
     ld   e, a                                     ; $4C8E: $5F
     add  $07                                      ; $4C8F: $C6 $07
@@ -2613,7 +2613,7 @@ FlyingRoosterState0Handler::
     pop  bc                                       ; $5266: $C1
 
 jr_019_5267:
-    ld   hl, wRequestDestinationHigh              ; $5267: $21 $01 $D6
+    ld   hl, wRequest                             ; $5267: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $526A: $FA $00 $D6
     ld   e, a                                     ; $526D: $5F
     add  $0E                                      ; $526E: $C6 $0E
@@ -2718,7 +2718,7 @@ FlyingRoosterState1Handler::
     pop  bc                                       ; $531D: $C1
 
 jr_019_531E:
-    ld   hl, wRequestDestinationHigh              ; $531E: $21 $01 $D6
+    ld   hl, wRequest                             ; $531E: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $5321: $FA $00 $D6
     ld   e, a                                     ; $5324: $5F
     add  $0E                                      ; $5325: $C6 $0E
@@ -4843,7 +4843,7 @@ func_019_6262::
     ld   d, [hl]                                  ; $6271: $56
     ld   e, a                                     ; $6272: $5F
     ld   c, $34                                   ; $6273: $0E $34
-    ld   hl, wRequestDestinationHigh              ; $6275: $21 $01 $D6
+    ld   hl, wRequest                             ; $6275: $21 $01 $D6
 
 jr_019_6278:
     dec  de                                       ; $6278: $1B
@@ -4941,7 +4941,7 @@ Data_019_6354::
 func_019_6374::
     ld   a, $20                                   ; $6374: $3E $20
     ld   [wRequestsSize], a                       ; $6376: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $6379: $21 $01 $D6
+    ld   hl, wRequest                             ; $6379: $21 $01 $D6
     ld   de, Data_019_62F4                        ; $637C: $11 $F4 $62
     ldh  a, [hIsGBC]                              ; $637F: $F0 $FE
     and  a                                        ; $6381: $A7
@@ -5333,7 +5333,7 @@ func_019_6894::
     ld   e, a                                     ; $68A5: $5F
     push bc                                       ; $68A6: $C5
     ld   c, $34                                   ; $68A7: $0E $34
-    ld   hl, wRequestDestinationHigh              ; $68A9: $21 $01 $D6
+    ld   hl, wRequest                             ; $68A9: $21 $01 $D6
 
 jr_019_68AC:
     ld   a, [de]                                  ; $68AC: $1A
@@ -5415,7 +5415,7 @@ func_019_68F9::
     ld   d, [hl]                                  ; $6909: $56
     ld   e, a                                     ; $690A: $5F
     ld   c, $34                                   ; $690B: $0E $34
-    ld   hl, wRequestDestinationHigh              ; $690D: $21 $01 $D6
+    ld   hl, wRequest                             ; $690D: $21 $01 $D6
 
 jr_019_6910:
     ld   a, [de]                                  ; $6910: $1A
@@ -7489,7 +7489,7 @@ func_019_7921::
     ld   c, $23                                   ; $7922: $0E $23
     ld   a, $22                                   ; $7924: $3E $22
     ld   [wRequestsSize], a                       ; $7926: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $7929: $21 $01 $D6
+    ld   hl, wRequest                             ; $7929: $21 $01 $D6
     ld   de, Data_019_78FE                        ; $792C: $11 $FE $78
 
 jr_019_792F:

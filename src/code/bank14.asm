@@ -1366,7 +1366,7 @@ jr_014_545A:
     ld   [wOBJ0Palette], a                        ; $547C: $EA $98 $DB
 
 jr_014_547F:
-    ld   a, [wRequestDestinationHigh]             ; $547F: $FA $01 $D6
+    ld   a, [wRequest]                            ; $547F: $FA $01 $D6
     and  a                                        ; $5482: $A7
     ret  nz                                       ; $5483: $C0
 
@@ -1503,7 +1503,7 @@ func_014_5526::
     pop  bc                                       ; $554C: $C1
 
 jr_014_554D:
-    ld   hl, wRequestDestinationHigh              ; $554D: $21 $01 $D6
+    ld   hl, wRequest                             ; $554D: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $5550: $FA $00 $D6
     ld   e, a                                     ; $5553: $5F
     add  $0A                                      ; $5554: $C6 $0A
@@ -1569,7 +1569,7 @@ jr_014_5584:
     pop  bc                                       ; $55B2: $C1
 
 jr_014_55B3:
-    ld   hl, wRequestDestinationHigh              ; $55B3: $21 $01 $D6
+    ld   hl, wRequest                             ; $55B3: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $55B6: $FA $00 $D6
     ld   e, a                                     ; $55B9: $5F
     add  $0A                                      ; $55BA: $C6 $0A
@@ -1617,7 +1617,7 @@ jr_014_55E3:
     pop  bc                                       ; $55FF: $C1
 
 jr_014_5600:
-    ld   hl, wRequestDestinationHigh              ; $5600: $21 $01 $D6
+    ld   hl, wRequest                             ; $5600: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $5603: $FA $00 $D6
     ld   e, a                                     ; $5606: $5F
     add  $0A                                      ; $5607: $C6 $0A
@@ -1757,7 +1757,7 @@ jr_014_56B9:
     pop  bc                                       ; $56C8: $C1
 
 jr_014_56C9:
-    ld   hl, wRequestDestinationHigh              ; $56C9: $21 $01 $D6
+    ld   hl, wRequest                             ; $56C9: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $56CC: $FA $00 $D6
     ld   e, a                                     ; $56CF: $5F
     add  $0A                                      ; $56D0: $C6 $0A
@@ -1887,7 +1887,7 @@ label_014_5767:
 
 jr_014_5789:
     ; Make staircase appear
-    ld   hl, wRequestDestinationHigh              ; $5789: $21 $01 $D6
+    ld   hl, wRequest                             ; $5789: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $578C: $FA $00 $D6
     ld   e, a                                     ; $578F: $5F
     add  $0A                                      ; $5790: $C6 $0A
@@ -1961,7 +1961,7 @@ label_014_57E1:
     pop  bc                                       ; $5806: $C1
 
 jr_014_5807:
-    ld   hl, wRequestDestinationHigh              ; $5807: $21 $01 $D6
+    ld   hl, wRequest                             ; $5807: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $580A: $FA $00 $D6
     ld   e, a                                     ; $580D: $5F
     add  $0A                                      ; $580E: $C6 $0A

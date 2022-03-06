@@ -337,7 +337,7 @@ jr_002_5EED:
     ld   a, [wRequestsSize]                       ; $5F0D: $FA $00 $D6
     ld   e, a                                     ; $5F10: $5F
     ld   d, $00                                   ; $5F11: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $5F13: $21 $01 $D6
+    ld   hl, wRequest                             ; $5F13: $21 $01 $D6
     add  hl, de                                   ; $5F16: $19
     add  $0A                                      ; $5F17: $C6 $0A
     ld   [wRequestsSize], a                       ; $5F19: $EA $00 $D6
@@ -418,7 +418,7 @@ func_002_5F5C::
     ld   a, [wRequestsSize]                       ; $5F8A: $FA $00 $D6
     ld   e, a                                     ; $5F8D: $5F
     ld   d, $00                                   ; $5F8E: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $5F90: $21 $01 $D6
+    ld   hl, wRequest                             ; $5F90: $21 $01 $D6
     add  hl, de                                   ; $5F93: $19
     add  $0A                                      ; $5F94: $C6 $0A
     ld   [wRequestsSize], a                       ; $5F96: $EA $00 $D6

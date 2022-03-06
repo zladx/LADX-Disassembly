@@ -6362,7 +6362,7 @@ jr_015_746A:
     pop  bc                                       ; $749C: $C1
 
 jr_015_749D:
-    ld   hl, wRequestDestinationHigh              ; $749D: $21 $01 $D6
+    ld   hl, wRequest                             ; $749D: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $74A0: $FA $00 $D6
     ld   e, a                                     ; $74A3: $5F
     add  $0A                                      ; $74A4: $C6 $0A
@@ -7977,7 +7977,7 @@ jr_015_7DAF:
     ld   d, b                                     ; $7DC1: $50
     add  $05                                      ; $7DC2: $C6 $05
     ld   [wRequestsSize], a                       ; $7DC4: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $7DC7: $21 $01 $D6
+    ld   hl, wRequest                             ; $7DC7: $21 $01 $D6
     add  hl, de                                   ; $7DCA: $19
     push hl                                       ; $7DCB: $E5
     ld   hl, wEntitiesPrivateState2Table          ; $7DCC: $21 $C0 $C2

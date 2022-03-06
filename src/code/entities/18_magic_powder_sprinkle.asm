@@ -261,7 +261,7 @@ jr_018_7B2C:
     ld   a, [wRequestsSize]                       ; $7B2C: $FA $00 $D6
     ld   e, a                                     ; $7B2F: $5F
     ld   d, $00                                   ; $7B30: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $7B32: $21 $01 $D6
+    ld   hl, wRequest                             ; $7B32: $21 $01 $D6
     add  hl, de                                   ; $7B35: $19
     add  $0A                                      ; $7B36: $C6 $0A
     ld   [wRequestsSize], a                       ; $7B38: $EA $00 $D6

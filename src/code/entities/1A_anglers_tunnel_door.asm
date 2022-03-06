@@ -171,7 +171,7 @@ AnglersTunnelDoorEntityHandler::
     ld   d, b                                     ; $7179: $50
     add  $0D                                      ; $717A: $C6 $0D
     ld   [wRequestsSize], a                       ; $717C: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $717F: $21 $01 $D6
+    ld   hl, wRequest                             ; $717F: $21 $01 $D6
     add  hl, de                                   ; $7182: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $7183: $F0 $CF
     ld   [hl+], a                                 ; $7185: $22

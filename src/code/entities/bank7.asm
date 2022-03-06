@@ -2717,7 +2717,7 @@ jr_007_51AA:
     pop  bc                                       ; $51F1: $C1
 
 jr_007_51F2:
-    ld   hl, wRequestDestinationHigh              ; $51F2: $21 $01 $D6
+    ld   hl, wRequest                             ; $51F2: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $51F5: $FA $00 $D6
     ld   e, a                                     ; $51F8: $5F
     add  $0A                                      ; $51F9: $C6 $0A
@@ -3993,7 +3993,7 @@ jr_007_5A2A:
     pop  bc                                       ; $5A5E: $C1
 
 jr_007_5A5F:
-    ld   hl, wRequestDestinationHigh              ; $5A5F: $21 $01 $D6
+    ld   hl, wRequest                             ; $5A5F: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $5A62: $FA $00 $D6
     ld   e, a                                     ; $5A65: $5F
     add  $0A                                      ; $5A66: $C6 $0A
@@ -5336,7 +5336,7 @@ jr_007_625F:
     pop  bc                                       ; $62A1: $C1
 
 jr_007_62A2:
-    ld   hl, wRequestDestinationHigh              ; $62A2: $21 $01 $D6
+    ld   hl, wRequest                             ; $62A2: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $62A5: $FA $00 $D6
     ld   e, a                                     ; $62A8: $5F
     add  $0A                                      ; $62A9: $C6 $0A
@@ -5386,7 +5386,7 @@ jr_007_62D2:
     pop  bc                                       ; $62EB: $C1
 
 jr_007_62EC:
-    ld   hl, wRequestDestinationHigh              ; $62EC: $21 $01 $D6
+    ld   hl, wRequest                             ; $62EC: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $62EF: $FA $00 $D6
     ld   e, a                                     ; $62F2: $5F
     add  $0A                                      ; $62F3: $C6 $0A
@@ -5747,7 +5747,7 @@ ENDC
     add  hl, bc                                   ; $6555: $09
     ld   c, l                                     ; $6556: $4D
     ld   b, h                                     ; $6557: $44
-    ld   hl, wRequestDestinationHigh              ; $6558: $21 $01 $D6
+    ld   hl, wRequest                             ; $6558: $21 $01 $D6
     add  hl, de                                   ; $655B: $19
     ld   e, $08                                   ; $655C: $1E $08
 
@@ -7824,7 +7824,7 @@ jr_007_721D:
     ld   a, [wRequestsSize]                       ; $721D: $FA $00 $D6
     ld   e, a                                     ; $7220: $5F
     ld   d, $00                                   ; $7221: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $7223: $21 $01 $D6
+    ld   hl, wRequest                             ; $7223: $21 $01 $D6
     add  hl, de                                   ; $7226: $19
     add  $0A                                      ; $7227: $C6 $0A
     ld   [wRequestsSize], a                       ; $7229: $EA $00 $D6

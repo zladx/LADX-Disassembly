@@ -298,7 +298,7 @@ func_023_7E95::
     ld   hl, Data_023_7610                        ; $7EB4: $21 $10 $76
     add  hl, de                                   ; $7EB7: $19
     push hl                                       ; $7EB8: $E5
-    ld   de, wRequestDestinationHigh              ; $7EB9: $11 $01 $D6
+    ld   de, wRequest                             ; $7EB9: $11 $01 $D6
     ld   c, $18                                   ; $7EBC: $0E $18
 
 jr_023_7EBE:

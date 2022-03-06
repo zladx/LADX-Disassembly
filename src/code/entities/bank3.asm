@@ -1906,7 +1906,7 @@ label_003_51F5:
     ld   a, [wRequestsSize]                       ; $51F8: $FA $00 $D6
     ld   e, a                                     ; $51FB: $5F
     ld   d, $00                                   ; $51FC: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $51FE: $21 $01 $D6
+    ld   hl, wRequest                             ; $51FE: $21 $01 $D6
     add  hl, de                                   ; $5201: $19
     add  $0A                                      ; $5202: $C6 $0A
     ld   [wRequestsSize], a                       ; $5204: $EA $00 $D6

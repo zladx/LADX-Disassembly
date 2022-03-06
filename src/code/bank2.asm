@@ -1814,7 +1814,7 @@ label_002_4C92:
     ld   a, $82                                   ; $4C9D: $3E $82
     call func_2BF                                 ; $4C9F: $CD $2F $0B
     call label_2887                               ; $4CA2: $CD $87 $28
-    ld   hl, wRequestDestinationHigh              ; $4CA5: $21 $01 $D6
+    ld   hl, wRequest                             ; $4CA5: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $4CA8: $FA $00 $D6
     ld   e, a                                     ; $4CAB: $5F
     add  $0A                                      ; $4CAC: $C6 $0A
@@ -2013,7 +2013,7 @@ label_002_4D97:
     pop  bc                                       ; $4DCA: $C1
 
 jr_002_4DCB:
-    ld   hl, wRequestDestinationHigh              ; $4DCB: $21 $01 $D6
+    ld   hl, wRequest                             ; $4DCB: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $4DCE: $FA $00 $D6
     ld   e, a                                     ; $4DD1: $5F
     add  $0A                                      ; $4DD2: $C6 $0A
@@ -3611,7 +3611,7 @@ jr_002_56B8:
     ld   a, [wRequestsSize]                       ; $56BD: $FA $00 $D6
     ld   e, a                                     ; $56C0: $5F
     ld   d, b                                     ; $56C1: $50
-    ld   hl, wRequestDestinationHigh              ; $56C2: $21 $01 $D6
+    ld   hl, wRequest                             ; $56C2: $21 $01 $D6
     add  hl, de                                   ; $56C5: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $56C6: $F0 $CF
     ld   [hl+], a                                 ; $56C8: $22
@@ -4195,7 +4195,7 @@ jr_002_5AD5:
     ld   b, $00                                   ; $5AD9: $06 $00
     add  $05                                      ; $5ADB: $C6 $05
     ld   [wRequestsSize], a                       ; $5ADD: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $5AE0: $21 $01 $D6
+    ld   hl, wRequest                             ; $5AE0: $21 $01 $D6
     add  hl, bc                                   ; $5AE3: $09
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5AE4: $F0 $CF
     ld   [hl+], a                                 ; $5AE6: $22
@@ -4475,7 +4475,7 @@ jr_002_5C89:
     ld   b, $00                                   ; $5C8D: $06 $00
     add  $05                                      ; $5C8F: $C6 $05
     ld   [wRequestsSize], a                       ; $5C91: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $5C94: $21 $01 $D6
+    ld   hl, wRequest                             ; $5C94: $21 $01 $D6
     add  hl, bc                                   ; $5C97: $09
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5C98: $F0 $CF
     ld   [hl+], a                                 ; $5C9A: $22
@@ -4748,7 +4748,7 @@ label_002_61A9:
     and  a                                        ; $61AC: $A7
     jr   nz, jr_002_61C6                          ; $61AD: $20 $17
 
-    ld   a, [wRequestDestinationHigh]             ; $61AF: $FA $01 $D6
+    ld   a, [wRequest]                            ; $61AF: $FA $01 $D6
     and  a                                        ; $61B2: $A7
     jr   nz, jr_002_61B9                          ; $61B3: $20 $04
 
@@ -4947,7 +4947,7 @@ LoadRupeesDigits::
     ld   d, $00                                   ; $62D2: $16 $00
     add  $06                                      ; $62D4: $C6 $06
     ld   [wRequestsSize], a                       ; $62D6: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $62D9: $21 $01 $D6
+    ld   hl, wRequest                             ; $62D9: $21 $01 $D6
     add  hl, de                                   ; $62DC: $19
     ld   a, $9C                                   ; $62DD: $3E $9C
     ld   [hl+], a                                 ; $62DF: $22
@@ -5129,7 +5129,7 @@ UpdateHealth:
     ld   d, $00                                   ; $63C3: $16 $00
     add  $04                                      ; $63C5: $C6 $04
     ld   [wRequestsSize], a                       ; $63C7: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; POI: Updates (old) medicine counter on the subscreen
+    ld   hl, wRequest                             ; POI: Updates (old) medicine counter on the subscreen
     add  hl, de                                   ; $63CD: $19
     ld   a, $9C                                   ; $63CE: $3E $9C
     ld   [hl+], a                                 ; $63D0: $22
@@ -5178,7 +5178,7 @@ LoadHeartsCount::
     ld   d, $00                                   ; $6418: $16 $00
     add  $14                                      ; $641A: $C6 $14
     ld   [wRequestsSize], a                       ; $641C: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $641F: $21 $01 $D6
+    ld   hl, wRequest                             ; $641F: $21 $01 $D6
     add  hl, de                                   ; $6422: $19
     push de                                       ; $6423: $D5
     ld   bc, Data_002_63FF                        ; $6424: $01 $FF $63

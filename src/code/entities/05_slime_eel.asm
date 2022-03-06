@@ -161,7 +161,7 @@ jr_005_6DFD:
     ld   a, [wRequestsSize]                       ; $6DFD: $FA $00 $D6
     ld   e, a                                     ; $6E00: $5F
     ld   d, $00                                   ; $6E01: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $6E03: $21 $01 $D6
+    ld   hl, wRequest                             ; $6E03: $21 $01 $D6
     add  hl, de                                   ; $6E06: $19
     add  $1C                                      ; $6E07: $C6 $1C
     ld   [wRequestsSize], a                       ; $6E09: $EA $00 $D6
@@ -198,7 +198,7 @@ label_005_6E30:
     ld   a, [wRequestsSize]                       ; $6E38: $FA $00 $D6
     ld   e, a                                     ; $6E3B: $5F
     ld   d, $00                                   ; $6E3C: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $6E3E: $21 $01 $D6
+    ld   hl, wRequest                             ; $6E3E: $21 $01 $D6
     add  hl, de                                   ; $6E41: $19
     add  $1C                                      ; $6E42: $C6 $1C
     ld   [wRequestsSize], a                       ; $6E44: $EA $00 $D6
@@ -305,7 +305,7 @@ jr_005_6EB0:
     ld   a, [wRequestsSize]                       ; $6ED7: $FA $00 $D6
     ld   e, a                                     ; $6EDA: $5F
     ld   d, $00                                   ; $6EDB: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $6EDD: $21 $01 $D6
+    ld   hl, wRequest                             ; $6EDD: $21 $01 $D6
     add  hl, de                                   ; $6EE0: $19
     add  $0E                                      ; $6EE1: $C6 $0E
     ld   [wRequestsSize], a                       ; $6EE3: $EA $00 $D6

@@ -4,7 +4,7 @@
 
 ; Special case for the sequence with Marin and Link chatting on the beach
 AnimateMarinBeachTiles::
-    ld   a, [wRequestDestinationHigh]             ; $1ACC: $FA $01 $D6
+    ld   a, [wRequest]                            ; $1ACC: $FA $01 $D6
     and  a                                        ; $1ACF: $A7
     ret  nz                                       ; $1AD0: $C0
     ld   a, BANK(MarinBeachWavesTiles)            ; $1AD1: $3E $10

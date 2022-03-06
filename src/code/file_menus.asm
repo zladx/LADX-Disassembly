@@ -1313,7 +1313,7 @@ CopyReturnToMenuTilemap::
     add  FileReturnToMenuTilemap.end - FileReturnToMenuTilemap - 1    ; $4EBF: $C6 $11
     ld   [wRequestsSize], a                       ; $4EC1: $EA $00 $D6
     ld   d, $00                                   ; $4EC4: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $4EC6: $21 $01 $D6
+    ld   hl, wRequest                             ; $4EC6: $21 $01 $D6
     add  hl, de                                   ; $4EC9: $19
     ld   de, FileReturnToMenuTilemap                        ; $4ECA: $11 $A9 $4E
 
@@ -1369,7 +1369,7 @@ jr_001_4EEF::
     ld   d, $00                                   ; $4EF8: $16 $00 ; $4EF8: $16 $00
     ld   hl, Data_001_4DEE                        ; $4EFA: $21 $EE $4D ; $4EFA: $21 $EE $4D
     add  hl, de                                   ; $4EFD: $19 ; $4EFD: $19
-    ld   de, wRequestDestinationHigh              ; $4EFE: $11 $01 $D6 ; $4EFE: $11 $01 $D6
+    ld   de, wRequest                             ; $4EFE: $11 $01 $D6 ; $4EFE: $11 $01 $D6
     ld   c, $08                                   ; $4F01: $0E $08 ; $4F01: $0E $08
 
 jr_001_4F03::
@@ -1438,7 +1438,7 @@ CopyDigitsToFileScreenBG::
     add  $06                                      ; $4F4A: $C6 $06 ; $4F4A: $C6 $06
     ld   [wRequestsSize], a                       ; $4F4C: $EA $00 $D6 ; $4F4C: $EA $00 $D6
     ld   b, $00                                   ; $4F4F: $06 $00 ; $4F4F: $06 $00
-    ld   hl, wRequestDestinationHigh              ; $4F51: $21 $01 $D6 ; $4F51: $21 $01 $D6
+    ld   hl, wRequest                             ; $4F51: $21 $01 $D6 ; $4F51: $21 $01 $D6
     add  hl, bc                                   ; $4F54: $09 ; $4F54: $09
     ld   a, d                                     ; $4F55: $7A ; $4F55: $7A
     ld   [hl+], a                                 ; $4F56: $22 ; $4F56: $22
@@ -1763,7 +1763,7 @@ func_001_512C::
     ld   d, $00                                   ; $513B: $16 $00 ; $513B: $16 $00
     ld   hl, Data_001_50AF                        ; $513D: $21 $AF $50 ; $513D: $21 $AF $50
     add  hl, de                                   ; $5140: $19 ; $5140: $19
-    ld   de, wRequestDestinationHigh              ; $5141: $11 $01 $D6 ; $5141: $11 $01 $D6
+    ld   de, wRequest                             ; $5141: $11 $01 $D6 ; $5141: $11 $01 $D6
     ld   c, $08                                   ; $5144: $0E $08 ; $5144: $0E $08
 
 jr_001_5146::

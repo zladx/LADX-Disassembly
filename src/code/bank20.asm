@@ -624,7 +624,7 @@ func_020_4874::
 
 func_020_4898::
     push de                                       ; $4898: $D5
-    ld   hl, wRequestDestinationHigh              ; $4899: $21 $01 $D6
+    ld   hl, wRequest                             ; $4899: $21 $01 $D6
     ld   a, [wRequestsSize]                       ; $489C: $FA $00 $D6
     ld   e, a                                     ; $489F: $5F
     add  $0A                                      ; $48A0: $C6 $0A
@@ -2481,7 +2481,7 @@ data_020_59C7::
 ; Called from jp hl in 00:28CE (TABLEJUMP)
 ; Copies 51 bytes from data_020_5994 (above) to wRequest (D601)
 InventoryLoad1Handler::
-    ld   hl, wRequestDestinationHigh              ; $59D0: $21 $01 $D6
+    ld   hl, wRequest                             ; $59D0: $21 $01 $D6
     ld   bc, data_020_5994                        ; $59D3: $01 $94 $59
     ld   e, $33                                   ; $59D6: $1E $33
 
@@ -2607,7 +2607,7 @@ overwriteInventoryDisplaySprite:
     add  hl, bc                                   ; $5A5B: $09
     ld   e, [hl]                                  ; $5A5C: $5E
     ld   d, $00                                   ; $5A5D: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $5A5F: $21 $01 $D6
+    ld   hl, wRequest                             ; $5A5F: $21 $01 $D6
     add  hl, de                                   ; $5A62: $19
 
     ; Write $7F over sprite data (won't display)
@@ -2641,7 +2641,7 @@ incrementInventoryDisplay:
     jr   nz, inventoryDisplayLoop                 ; $5A7A: $20 $AD
 
 
-    ld   hl, wRequestDestinationHigh              ; $5A7C: $21 $01 $D6
+    ld   hl, wRequest                             ; $5A7C: $21 $01 $D6
     ld   de, $2C                                  ; $5A7F: $11 $2C $00
     add  hl, de                                   ; $5A82: $19
     ld   a, [wSeashellsCount]                     ; $5A83: $FA $0F $DB
@@ -2660,7 +2660,7 @@ incrementInventoryDisplay:
     ld   [hl+], a                                 ; $5A96: $22
 
 jr_020_5A97:
-    ld   hl, wRequestDestinationHigh              ; $5A97: $21 $01 $D6
+    ld   hl, wRequest                             ; $5A97: $21 $01 $D6
     ld   de, $31                                  ; $5A9A: $11 $31 $00
     add  hl, de                                   ; $5A9D: $19
     ld   a, [wIsIndoor]                           ; $5A9E: $FA $A5 $DB
@@ -3034,7 +3034,7 @@ jr_020_5CB5:
     ld   d, $00                                   ; $5CB9: $16 $00
 
     ; hl = request start address
-    ld   hl, wRequestDestinationHigh              ; $5CBB: $21 $01 $D6
+    ld   hl, wRequest                             ; $5CBB: $21 $01 $D6
     add  hl, de                                   ; $5CBE: $19
 
     ; Increment the request start by 0C
@@ -3151,7 +3151,7 @@ label_020_5D34:
     call func_AB5                                 ; $5D3C: $CD $B5 $0A
     xor  a                                        ; $5D3F: $AF
     ld   [wRequestsSize], a                       ; $5D40: $EA $00 $D6
-    ld   [wRequestDestinationHigh], a             ; $5D43: $EA $01 $D6
+    ld   [wRequest]               , a             ; $5D43: $EA $01 $D6
     ld   [wRequestsAlt], a                        ; $5D46: $EA $90 $DC
     ld   [wRequestAltDestinationHigh], a          ; $5D49: $EA $91 $DC
     ld   a, [wLCDControl]                         ; $5D4C: $FA $FD $D6

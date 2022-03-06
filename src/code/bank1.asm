@@ -543,7 +543,7 @@ Data_001_54E8::
 ; See data/backgrounds/tilemap_pointers.asm
 CreateMinimapTilemap::
     ; Copy $29 bytes from Data_001_54E8 to wMinimapTilemap
-    ; (wMinimapTilemap is normally in the middle of wRequestData - but is here used as some temporary free memory
+    ; (wMinimapTilemap is normally in the middle of wRequest.data - but is here used as some temporary free memory
     ; to store the tilemap)
     ;
     ; This will later be used by the BGMapToLoad 7 (see tilemaps_pointers.asm)
@@ -1300,7 +1300,7 @@ jr_001_5D77::
     dec  e                                        ; $5D7A: $1D
     jr   nz, jr_001_5D77                          ; $5D7B: $20 $FA
     pop  de                                       ; $5D7D: $D1
-    ld   hl, wRequestData                         ; $5D7E: $21 $04 $D6
+    ld   hl, wRequest.data                        ; $5D7E: $21 $04 $D6
     add  hl, de                                   ; $5D81: $19
     ld   c, $00                                   ; $5D82: $0E $00
     ldh  a, [hMultiPurpose2]                      ; $5D84: $F0 $D9

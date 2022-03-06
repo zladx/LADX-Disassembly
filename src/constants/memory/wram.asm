@@ -2553,11 +2553,10 @@ wRequest::
 ; Request data length and mode.
 ; bits 0-6: data length,
 ; bits 7-8: copy mode (see BG_COPY_MODE_* constants)
-.length::
+.length
   ds 1 ; D603
-
 ; Request data (variable length)
-wRequestData::
+.data
   ds 244  ; D604 - D6F7
 
 ; Temporary storage for the tilemap of the dungeon minimap.

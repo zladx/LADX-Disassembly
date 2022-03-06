@@ -5196,7 +5196,7 @@ LoadHeartsCount::
     nop                                           ; $6431: $00
     nop                                           ; $6432: $00
     pop  de                                       ; $6433: $D1
-    ld   hl, wRequestData                         ; $6434: $21 $04 $D6
+    ld   hl, wRequest.data                        ; $6434: $21 $04 $D6
     add  hl, de                                   ; $6437: $19
     ld   c, $00                                   ; $6438: $0E $00
     ld   a, [wHealth]                             ; $643A: $FA $5A $DB

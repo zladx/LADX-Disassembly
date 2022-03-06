@@ -724,7 +724,7 @@ ENDC
     ldh  a, [hDialogBackgroundTile]               ; $2708: $F0 $E8
     ld   [wRequest.length+ 1], a                  ; $270A: $EA $04 $D6
     xor  a                                        ; $270D: $AF
-    ld   [wRequestData + 1], a                    ; $270E: $EA $05 $D6
+    ld   [wRequest.data + 1], a                   ; $270E: $EA $05 $D6
 IF __PATCH_9__
     jp   IncrementDialogState
 ELSE

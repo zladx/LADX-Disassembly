@@ -898,14 +898,14 @@ func_020_49F4::
     ld   a, [hl]                                  ; $4A06: $7E
     ld   [wRequest.length], a                     ; $4A07: $EA $03 $D6
     ld   a, $00                                   ; $4A0A: $3E $00
-    ld   [wRequestData + $14], a                  ; $4A0C: $EA $18 $D6
+    ld   [wRequest.data + $14], a                 ; $4A0C: $EA $18 $D6
     ld   a, $EE                                   ; $4A0F: $3E $EE
-    ld   [wRequestData + $10], a                  ; $4A11: $EA $14 $D6
-    ld   [wRequestData + $11], a                  ; $4A14: $EA $15 $D6
-    ld   [wRequestData + $12], a                  ; $4A17: $EA $16 $D6
-    ld   [wRequestData + $13], a                  ; $4A1A: $EA $17 $D6
-    ld   b, HIGH(wRequestData)                    ; $4A1D: $06 $D6
-    ld   c, LOW(wRequestData)                     ; $4A1F: $0E $04
+    ld   [wRequest.data + $10], a                 ; $4A11: $EA $14 $D6
+    ld   [wRequest.data + $11], a                 ; $4A14: $EA $15 $D6
+    ld   [wRequest.data + $12], a                 ; $4A17: $EA $16 $D6
+    ld   [wRequest.data + $13], a                 ; $4A1A: $EA $17 $D6
+    ld   b, HIGH(wRequest.data)                   ; $4A1D: $06 $D6
+    ld   c, LOW(wRequest.data)                    ; $4A1F: $0E $04
     ret                                           ; $4A21: $C9
 
 ; CGB version
@@ -926,16 +926,16 @@ func_020_4A22::
     ld   [wRequestAltLength], a                   ; $4A3E: $EA $93 $DC
 
     ld   a, $00                                   ; $4A41: $3E $00
-    ld   [wRequestData + $14], a                  ; $4A43: $EA $18 $D6
+    ld   [wRequest.data + $14], a                 ; $4A43: $EA $18 $D6
     ld   [wRequestAltData + $14], a               ; $4A46: $EA $A8 $DC
 
     ld   a, $EE                                   ; $4A49: $3E $EE
-    ld   [wRequestData + $10], a                  ; $4A4B: $EA $14 $D6
-    ld   [wRequestData + $11], a                  ; $4A4E: $EA $15 $D6
-    ld   [wRequestData + $12], a                  ; $4A51: $EA $16 $D6
-    ld   [wRequestData + $13], a                  ; $4A54: $EA $17 $D6
-    ld   b, HIGH(wRequestData)                    ; $4A57: $06 $D6
-    ld   c, LOW(wRequestData)                     ; $4A59: $0E $04
+    ld   [wRequest.data + $10], a                 ; $4A4B: $EA $14 $D6
+    ld   [wRequest.data + $11], a                 ; $4A4E: $EA $15 $D6
+    ld   [wRequest.data + $12], a                 ; $4A51: $EA $16 $D6
+    ld   [wRequest.data + $13], a                 ; $4A54: $EA $17 $D6
+    ld   b, HIGH(wRequest.data)                   ; $4A57: $06 $D6
+    ld   c, LOW(wRequest.data)                    ; $4A59: $0E $04
     ld   [wRequestAltData + $10], a               ; $4A5B: $EA $A4 $DC
     ld   [wRequestAltData + $11], a               ; $4A5E: $EA $A5 $DC
     ld   [wRequestAltData + $12], a               ; $4A61: $EA $A6 $DC

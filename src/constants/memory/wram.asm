@@ -2534,15 +2534,16 @@ wD5C4::
 ;
 ; Data structures for copying data to vram during blanking times.
 ;
-; There can be several wRequests appended together in this area.
+; There can be several wRequests stacked together in this area.
 ;
 
 ; Size of all cumulated wRequestsSize
 ; When 0, no wRequest is executed on vblank
-wRequestsSize::               ; D600
-  ds 1
+wRequestsSize::
+  ds 1 ; D600
 
-; Request destination address (big endian)
+; Format of a wRequest data structure
+; (This is the address of first one in memory; but several of them can be stacked.)
 wRequest::
 ; Request destination address high byte
 .destinationHigh

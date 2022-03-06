@@ -2556,17 +2556,20 @@ wRequest::
 ; bits 7-8: copy mode (see BG_COPY_MODE_* constants)
 .length
   ds 1 ; D603
-; Request data (variable length)
+; Request data
+;
+; There are $4F bytes reserved for data - except when drawing
+; the dungeon minimap, where the end of the data is used as a temporary
+; buffer to store the minimap tilemap.
 .data
-  ds 244  ; D604 - D6F7
-
+UNION
+  ds $F4  ; D604 - D6F7
+NEXTU
+  ds $4D ; D604 - D651
 ; Temporary storage for the tilemap of the dungeon minimap.
-;
-; This tilemap is built dynamically, using the end of the wRequestData memory
-; as a temporary buffer.
-;
-; TODO: convert this to a sub-label of wRequest
-wMinimapTilemap EQU $D651
+wMinimapTilemap::
+  ds $A7 ; D651 - D6F7
+ENDU
 
 ; Animation stage during a switchable object animation.
 ;

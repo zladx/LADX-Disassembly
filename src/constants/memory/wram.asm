@@ -3302,25 +3302,23 @@ wObjPal8::
 
 ; Size of all cumulated wRequestsSize
 ; When 0, no wRequest is executed on vblanks
-wRequestsAlt::
+wRequestsAltSize::
   ds 1 ; DC90
 
 ; Secondary wRequest destination (higher byte)
 wRequestAlt::
-wRequestAltDestination::
-wRequestAltDestinationHigh::
+.destinationHigh
   ds 1 ; DC91
-
 ; Secondary wRequest destination (lower byte)
-wRequestAltDestinationLow::
+.destinationLow
   ds 1 ; DC92
-
-; Secondary wRequest data Length
-wRequestAltLength::
+; Secondary wRequest data length and options
+; bits 0-6: data length,
+; bits 7-8: copy mode (see BG_COPY_MODE_* constants)
+.length
   ds 1 ; DC93
-
 ; Secondary wRequest data
-wRequestAltData::
+.data
   ds $2C ; DC93 - DCBF
 
 ; Unlabeled

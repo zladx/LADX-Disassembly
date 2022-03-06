@@ -3195,12 +3195,12 @@ jr_036_53E6:
     add  hl, bc                                   ; $53FE: $09
     ld   c, l                                     ; $53FF: $4D
     ld   b, h                                     ; $5400: $44
-    ld   a, [wRequestsAlt]                        ; $5401: $FA $90 $DC
+    ld   a, [wRequestsAltSize]                    ; $5401: $FA $90 $DC
     ld   e, a                                     ; $5404: $5F
     add  $08                                      ; $5405: $C6 $08
-    ld   [wRequestsAlt], a                        ; $5407: $EA $90 $DC
+    ld   [wRequestsAltSize], a                    ; $5407: $EA $90 $DC
     ld   d, $00                                   ; $540A: $16 $00
-    ld   hl, wRequestAltDestinationHigh           ; $540C: $21 $91 $DC
+    ld   hl, wRequestAlt                          ; $540C: $21 $91 $DC
     add  hl, de                                   ; $540F: $19
     ld   e, $08                                   ; $5410: $1E $08
 

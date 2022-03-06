@@ -199,11 +199,11 @@ func_91D::
     callsb GetBGAttributesAddressForObject        ; $092F: $3E $1A $EA $00 $21 $CD $76 $65
     ldh  a, [hMultiPurpose8]                      ; $0937: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $0939: $EA $00 $21
-    ld   hl, wRequestAltDestinationHigh           ; $093C: $21 $91 $DC
-    ld   a, [wRequestsAlt]                        ; $093F: $FA $90 $DC
+    ld   hl, wRequestAlt                          ; $093C: $21 $91 $DC
+    ld   a, [wRequestsAltSize]                    ; $093F: $FA $90 $DC
     ld   e, a                                     ; $0942: $5F
     add  a, $0A                                   ; $0943: $C6 $0A
-    ld   [wRequestsAlt], a                        ; $0945: $EA $90 $DC
+    ld   [wRequestsAltSize], a                    ; $0945: $EA $90 $DC
     ld   d, $00                                   ; $0948: $16 $00
     add  hl, de                                   ; $094A: $19
     ldh  a, [hMultiPurpose9]                      ; $094B: $F0 $E0
@@ -287,12 +287,12 @@ func_999::
     pop  bc                                       ; $09A0: $C1
     call func_983                                 ; $09A1: $CD $83 $09
     ldh  [hMultiPurpose1], a                      ; $09A4: $E0 $D8
-    ld   a, [wRequestsAlt]                        ; $09A6: $FA $90 $DC
+    ld   a, [wRequestsAltSize]                    ; $09A6: $FA $90 $DC
     ld   c, a                                     ; $09A9: $4F
     ld   b, $00                                   ; $09AA: $06 $00
     add  a, $05                                   ; $09AC: $C6 $05
-    ld   [wRequestsAlt], a                        ; $09AE: $EA $90 $DC
-    ld   hl, wRequestAltDestinationHigh           ; $09B1: $21 $91 $DC
+    ld   [wRequestsAltSize], a                    ; $09AE: $EA $90 $DC
+    ld   hl, wRequestAlt                          ; $09B1: $21 $91 $DC
     add  hl, bc                                   ; $09B4: $09
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $09B5: $F0 $CF
     ldi  [hl], a                                  ; $09B7: $22

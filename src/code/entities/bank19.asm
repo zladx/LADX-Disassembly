@@ -4988,8 +4988,8 @@ func_019_63B5::
     jr   z, jr_019_63D8                           ; $63B8: $28 $1E
 
     ld   a, $05                                   ; $63BA: $3E $05
-    ld   [wRequestsAlt], a                        ; $63BC: $EA $90 $DC
-    ld   hl, wRequestAltDestinationHigh           ; $63BF: $21 $91 $DC
+    ld   [wRequestsAltSize], a                    ; $63BC: $EA $90 $DC
+    ld   hl, wRequestAlt                          ; $63BF: $21 $91 $DC
     ld   de, Data_019_63A3                        ; $63C2: $11 $A3 $63
     ldh  a, [hBaseScrollX]                        ; $63C5: $F0 $96
     and  a                                        ; $63C7: $A7
@@ -5368,7 +5368,7 @@ jr_019_68BA:
     ld   e, a                                     ; $68CF: $5F
     push bc                                       ; $68D0: $C5
     ld   c, $10                                   ; $68D1: $0E $10
-    ld   hl, wRequestAltDestinationHigh           ; $68D3: $21 $91 $DC
+    ld   hl, wRequestAlt                          ; $68D3: $21 $91 $DC
 
 jr_019_68D6:
     ld   a, [de]                                  ; $68D6: $1A
@@ -5451,7 +5451,7 @@ jr_019_691E:
     ld   d, [hl]                                  ; $6936: $56
     ld   e, a                                     ; $6937: $5F
     ld   c, $34                                   ; $6938: $0E $34
-    ld   hl, wRequestAltDestinationHigh           ; $693A: $21 $91 $DC
+    ld   hl, wRequestAlt                          ; $693A: $21 $91 $DC
 
 jr_019_693D:
     ld   a, [de]                                  ; $693D: $1A
@@ -7502,7 +7502,7 @@ jr_019_792F:
 IF __PATCH_0__
     ld   c, Data_019_78FE_B.end - Data_019_78FE_B
     ld   a, $08
-    ld   [wRequestsAlt], a
+    ld   [wRequestsAltSize], a
     ld   hl, wRequestAlt
     ld   de, Data_019_78FE_B
 

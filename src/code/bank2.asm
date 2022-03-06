@@ -1707,11 +1707,11 @@ jr_002_4C0F:
 func_002_4C14::
     push de                                       ; $4C14: $D5
     push hl                                       ; $4C15: $E5
-    ld   hl, wRequestAltDestinationHigh           ; $4C16: $21 $91 $DC
-    ld   a, [wRequestsAlt]                        ; $4C19: $FA $90 $DC
+    ld   hl, wRequestAlt                          ; $4C16: $21 $91 $DC
+    ld   a, [wRequestsAltSize]                    ; $4C19: $FA $90 $DC
     ld   e, a                                     ; $4C1C: $5F
     add  $0A                                      ; $4C1D: $C6 $0A
-    ld   [wRequestsAlt], a                        ; $4C1F: $EA $90 $DC
+    ld   [wRequestsAltSize], a                    ; $4C1F: $EA $90 $DC
     add  hl, de                                   ; $4C22: $19
     ld   e, l                                     ; $4C23: $5D
     ld   d, h                                     ; $4C24: $54

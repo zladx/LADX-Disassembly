@@ -5764,10 +5764,10 @@ jr_007_655E:
     jr   z, jr_007_6596                           ; $6569: $28 $2B
 
     pop  bc                                       ; $656B: $C1
-    ld   a, [wRequestsAlt]                        ; $656C: $FA $90 $DC
+    ld   a, [wRequestsAltSize]                    ; $656C: $FA $90 $DC
     ld   e, a                                     ; $656F: $5F
     add  $08                                      ; $6570: $C6 $08
-    ld   [wRequestsAlt], a                        ; $6572: $EA $90 $DC
+    ld   [wRequestsAltSize], a                    ; $6572: $EA $90 $DC
     ld   d, b                                     ; $6575: $50
     push bc                                       ; $6576: $C5
     ld   hl, wEntitiesInertiaTable                ; $6577: $21 $D0 $C3
@@ -5784,7 +5784,7 @@ ENDC
     add  hl, bc                                   ; $6585: $09
     ld   c, l                                     ; $6586: $4D
     ld   b, h                                     ; $6587: $44
-    ld   hl, wRequestAltDestinationHigh           ; $6588: $21 $91 $DC
+    ld   hl, wRequestAlt                          ; $6588: $21 $91 $DC
     add  hl, de                                   ; $658B: $19
     ld   e, $08                                   ; $658C: $1E $08
 

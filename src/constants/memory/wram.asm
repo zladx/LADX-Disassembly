@@ -2549,7 +2549,7 @@ wRequest::
   ds 1 ; D601
 
 ; Request destination address low byte
-wRequestDestinationLow::
+.destinationLow
   ds 1 ; D602
 
 ; Request data length and mode.

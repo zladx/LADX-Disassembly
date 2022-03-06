@@ -889,7 +889,7 @@ Data_020_49F0::
 ; DMG version
 func_020_49F4::
     ld   a, [wBGUpdateRegionOriginLow]            ; $49F4: $FA $27 $C1
-    ld   [wRequestDestinationLow], a              ; $49F7: $EA $02 $D6
+    ld   [wRequest.destinationLow], a             ; $49F7: $EA $02 $D6
     ld   a, [wBGUpdateRegionOriginHigh]           ; $49FA: $FA $26 $C1
     or   $98                                      ; $49FD: $F6 $98
     ld   [wRequest.destinationHigh], a            ; $49FF: $EA $01 $D6
@@ -911,7 +911,7 @@ func_020_49F4::
 ; CGB version
 func_020_4A22::
     ld   a, [wBGUpdateRegionOriginLow]            ; $4A22: $FA $27 $C1
-    ld   [wRequestDestinationLow], a              ; $4A25: $EA $02 $D6
+    ld   [wRequest.destinationLow], a             ; $4A25: $EA $02 $D6
     ld   [wRequestAltDestinationLow], a           ; $4A28: $EA $92 $DC
 
     ld   a, [wBGUpdateRegionOriginHigh]           ; $4A2B: $FA $26 $C1

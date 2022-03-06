@@ -2,7 +2,7 @@
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-; Contains pointers to wRequests data.
+; Contains pointers to wRequest data.
 ; (The requests themselves load data in bank 8.)
 include "data/backgrounds/tilemaps_pointers.asm"
 
@@ -624,11 +624,11 @@ func_020_4874::
 
 func_020_4898::
     push de                                       ; $4898: $D5
-    ld   hl, wRequestDestinationHigh              ; $4899: $21 $01 $D6
-    ld   a, [wRequests]                           ; $489C: $FA $00 $D6
+    ld   hl, wRequest                             ; $4899: $21 $01 $D6
+    ld   a, [wRequestsSize]                       ; $489C: $FA $00 $D6
     ld   e, a                                     ; $489F: $5F
     add  $0A                                      ; $48A0: $C6 $0A
-    ld   [wRequests], a                           ; $48A2: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $48A2: $EA $00 $D6
     ld   d, $00                                   ; $48A5: $16 $00
     add  hl, de                                   ; $48A7: $19
     pop  de                                       ; $48A8: $D1
@@ -889,64 +889,64 @@ Data_020_49F0::
 ; DMG version
 func_020_49F4::
     ld   a, [wBGUpdateRegionOriginLow]            ; $49F4: $FA $27 $C1
-    ld   [wRequestDestinationLow], a              ; $49F7: $EA $02 $D6
+    ld   [wRequest.destinationLow], a             ; $49F7: $EA $02 $D6
     ld   a, [wBGUpdateRegionOriginHigh]           ; $49FA: $FA $26 $C1
     or   $98                                      ; $49FD: $F6 $98
-    ld   [wRequestDestinationHigh], a             ; $49FF: $EA $01 $D6
+    ld   [wRequest.destinationHigh], a            ; $49FF: $EA $01 $D6
     ld   hl, Data_020_49F0                        ; $4A02: $21 $F0 $49
     add  hl, bc                                   ; $4A05: $09
     ld   a, [hl]                                  ; $4A06: $7E
-    ld   [wRequestLength], a                      ; $4A07: $EA $03 $D6
+    ld   [wRequest.length], a                     ; $4A07: $EA $03 $D6
     ld   a, $00                                   ; $4A0A: $3E $00
-    ld   [wRequestData + $14], a                  ; $4A0C: $EA $18 $D6
+    ld   [wRequest.data + $14], a                 ; $4A0C: $EA $18 $D6
     ld   a, $EE                                   ; $4A0F: $3E $EE
-    ld   [wRequestData + $10], a                  ; $4A11: $EA $14 $D6
-    ld   [wRequestData + $11], a                  ; $4A14: $EA $15 $D6
-    ld   [wRequestData + $12], a                  ; $4A17: $EA $16 $D6
-    ld   [wRequestData + $13], a                  ; $4A1A: $EA $17 $D6
-    ld   b, HIGH(wRequestData)                    ; $4A1D: $06 $D6
-    ld   c, LOW(wRequestData)                     ; $4A1F: $0E $04
+    ld   [wRequest.data + $10], a                 ; $4A11: $EA $14 $D6
+    ld   [wRequest.data + $11], a                 ; $4A14: $EA $15 $D6
+    ld   [wRequest.data + $12], a                 ; $4A17: $EA $16 $D6
+    ld   [wRequest.data + $13], a                 ; $4A1A: $EA $17 $D6
+    ld   b, HIGH(wRequest.data)                   ; $4A1D: $06 $D6
+    ld   c, LOW(wRequest.data)                    ; $4A1F: $0E $04
     ret                                           ; $4A21: $C9
 
 ; CGB version
 func_020_4A22::
     ld   a, [wBGUpdateRegionOriginLow]            ; $4A22: $FA $27 $C1
-    ld   [wRequestDestinationLow], a              ; $4A25: $EA $02 $D6
-    ld   [wRequestAltDestinationLow], a           ; $4A28: $EA $92 $DC
+    ld   [wRequest.destinationLow], a             ; $4A25: $EA $02 $D6
+    ld   [wRequestAlt.destinationLow], a          ; $4A28: $EA $92 $DC
 
     ld   a, [wBGUpdateRegionOriginHigh]           ; $4A2B: $FA $26 $C1
     or   $98                                      ; $4A2E: $F6 $98
-    ld   [wRequestDestinationHigh], a             ; $4A30: $EA $01 $D6
-    ld   [wRequestAltDestinationHigh], a          ; $4A33: $EA $91 $DC
+    ld   [wRequest.destinationHigh], a            ; $4A30: $EA $01 $D6
+    ld   [wRequestAlt.destinationHigh], a         ; $4A33: $EA $91 $DC
 
     ld   hl, Data_020_49F0                        ; $4A36: $21 $F0 $49
     add  hl, bc                                   ; $4A39: $09
     ld   a, [hl]                                  ; $4A3A: $7E
-    ld   [wRequestLength], a                      ; $4A3B: $EA $03 $D6
-    ld   [wRequestAltLength], a                   ; $4A3E: $EA $93 $DC
+    ld   [wRequest.length], a                     ; $4A3B: $EA $03 $D6
+    ld   [wRequestAlt.length], a                  ; $4A3E: $EA $93 $DC
 
     ld   a, $00                                   ; $4A41: $3E $00
-    ld   [wRequestData + $14], a                  ; $4A43: $EA $18 $D6
-    ld   [wRequestAltData + $14], a               ; $4A46: $EA $A8 $DC
+    ld   [wRequest.data + $14], a                 ; $4A43: $EA $18 $D6
+    ld   [wRequestAlt.data + $14], a              ; $4A46: $EA $A8 $DC
 
     ld   a, $EE                                   ; $4A49: $3E $EE
-    ld   [wRequestData + $10], a                  ; $4A4B: $EA $14 $D6
-    ld   [wRequestData + $11], a                  ; $4A4E: $EA $15 $D6
-    ld   [wRequestData + $12], a                  ; $4A51: $EA $16 $D6
-    ld   [wRequestData + $13], a                  ; $4A54: $EA $17 $D6
-    ld   b, HIGH(wRequestData)                    ; $4A57: $06 $D6
-    ld   c, LOW(wRequestData)                     ; $4A59: $0E $04
-    ld   [wRequestAltData + $10], a               ; $4A5B: $EA $A4 $DC
-    ld   [wRequestAltData + $11], a               ; $4A5E: $EA $A5 $DC
-    ld   [wRequestAltData + $12], a               ; $4A61: $EA $A6 $DC
-    ld   [wRequestAltData + $13], a               ; $4A64: $EA $A7 $DC
-    ld   a, HIGH(wRequestAltData)                 ; $4A67: $3E $DC
-ASSERT HIGH(wRequestAltData) == HIGH(wRequestAltData + $17)
+    ld   [wRequest.data + $10], a                 ; $4A4B: $EA $14 $D6
+    ld   [wRequest.data + $11], a                 ; $4A4E: $EA $15 $D6
+    ld   [wRequest.data + $12], a                 ; $4A51: $EA $16 $D6
+    ld   [wRequest.data + $13], a                 ; $4A54: $EA $17 $D6
+    ld   b, HIGH(wRequest.data)                   ; $4A57: $06 $D6
+    ld   c, LOW(wRequest.data)                    ; $4A59: $0E $04
+    ld   [wRequestAlt.data + $10], a              ; $4A5B: $EA $A4 $DC
+    ld   [wRequestAlt.data + $11], a              ; $4A5E: $EA $A5 $DC
+    ld   [wRequestAlt.data + $12], a              ; $4A61: $EA $A6 $DC
+    ld   [wRequestAlt.data + $13], a              ; $4A64: $EA $A7 $DC
+    ld   a, HIGH(wRequestAlt.data)                ; $4A67: $3E $DC
+ASSERT HIGH(wRequestAlt.data) == HIGH(wRequestAlt.data + $17)
     ldh  [hMultiPurposeB], a                      ; $4A69: $E0 $E2
     ldh  [hMultiPurposeD], a                      ; $4A6B: $E0 $E4
-    ld   a, LOW(wRequestAltData)                  ; $4A6D: $3E $94
+    ld   a, LOW(wRequestAlt.data)                 ; $4A6D: $3E $94
     ldh  [hMultiPurposeC], a                      ; $4A6F: $E0 $E3
-    ld   a, LOW(wRequestAltData + $17)            ; $4A71: $3E $AB
+    ld   a, LOW(wRequestAlt.data + $17)           ; $4A71: $3E $AB
     ldh  [hMultiPurposeE], a                      ; $4A73: $E0 $E5
     ret                                           ; $4A75: $C9
 
@@ -2475,13 +2475,13 @@ data_020_5994::
 data_020_59C7::
     ; These are actually indexes in the precious table of bytes that need to be set to 7F to hide items.
     ; It uses this offset to write 2x7F byte when an item is not available
-    db   $03, $0A, $11, $22, $05, $0C, $13, $1D, $27
+    db   $03, $0A, $11, $22, $05, $0C, $13, $1D, $27 ; $59CF
 
 ; Start building display of inventory
 ; Called from jp hl in 00:28CE (TABLEJUMP)
-; Copies 51 bytes from data_020_5994 (above) to wRequestDestination (D601)                                          ; $59CF: $27
+; Copies 51 bytes from data_020_5994 (above) to wRequest (D601)
 InventoryLoad1Handler::
-    ld   hl, wRequestDestinationHigh              ; $59D0: $21 $01 $D6
+    ld   hl, wRequest                             ; $59D0: $21 $01 $D6
     ld   bc, data_020_5994                        ; $59D3: $01 $94 $59
     ld   e, $33                                   ; $59D6: $1E $33
 
@@ -2498,7 +2498,7 @@ jr_020_59D8:
 
 ; GBC Exclusive code
 ; Load 32 bytes from 596A into DC91
-    ld   hl, wRequestAltDestinationHigh           ; $59E3: $21 $91 $DC
+    ld   hl, wRequestAlt                          ; $59E3: $21 $91 $DC
     ld   bc, data_020_596A                        ; $59E6: $01 $6A $59
     ld   e, $1F                                   ; $59E9: $1E $1F
 
@@ -2510,7 +2510,7 @@ jr_020_59EB:
     jr   nz, jr_020_59EB                          ; $59EF: $20 $FA
 
     ld   a, $1E                                   ; $59F1: $3E $1E
-    ld   [wRequestsAlt], a                        ; $59F3: $EA $90 $DC
+    ld   [wRequestsAltSize], a                    ; $59F3: $EA $90 $DC
 
     ; If on the overworld…
     ld   a, [wIsIndoor]                           ; $59F6: $FA $A5 $DB
@@ -2533,8 +2533,8 @@ jr_020_59EB:
 .colorDungeonEnd
 
 ; Set BC and E to point to the end of the "Palette Data?" (12 bytes) above
-    ld   hl, wRequestAltDestinationHigh           ; $5A06: $21 $91 $DC
-    ld   a, [wRequestsAlt]                        ; $5A09: $FA $90 $DC
+    ld   hl, wRequestAlt                          ; $5A06: $21 $91 $DC
+    ld   a, [wRequestsAltSize]                    ; $5A09: $FA $90 $DC
     ld   c, a                                     ; $5A0C: $4F
     ld   b, $00                                   ; $5A0D: $06 $00
     add  hl, bc                                   ; $5A0F: $09
@@ -2549,9 +2549,9 @@ jr_020_5A15:
     dec  e                                        ; $5A18: $1D
     jr   nz, jr_020_5A15                          ; $5A19: $20 $FA
 
-    ld   a, [wRequestsAlt]                        ; $5A1B: $FA $90 $DC
+    ld   a, [wRequestsAltSize]                    ; $5A1B: $FA $90 $DC
     add  $0A                                      ; $5A1E: $C6 $0A
-    ld   [wRequestsAlt], a                        ; $5A20: $EA $90 $DC
+    ld   [wRequestsAltSize], a                    ; $5A20: $EA $90 $DC
 
 ; Palette loading complete, start building inventory
 inventoryDisplayEntryPoint:
@@ -2607,7 +2607,7 @@ overwriteInventoryDisplaySprite:
     add  hl, bc                                   ; $5A5B: $09
     ld   e, [hl]                                  ; $5A5C: $5E
     ld   d, $00                                   ; $5A5D: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $5A5F: $21 $01 $D6
+    ld   hl, wRequest                             ; $5A5F: $21 $01 $D6
     add  hl, de                                   ; $5A62: $19
 
     ; Write $7F over sprite data (won't display)
@@ -2641,7 +2641,7 @@ incrementInventoryDisplay:
     jr   nz, inventoryDisplayLoop                 ; $5A7A: $20 $AD
 
 
-    ld   hl, wRequestDestinationHigh              ; $5A7C: $21 $01 $D6
+    ld   hl, wRequest                             ; $5A7C: $21 $01 $D6
     ld   de, $2C                                  ; $5A7F: $11 $2C $00
     add  hl, de                                   ; $5A82: $19
     ld   a, [wSeashellsCount]                     ; $5A83: $FA $0F $DB
@@ -2660,7 +2660,7 @@ incrementInventoryDisplay:
     ld   [hl+], a                                 ; $5A96: $22
 
 jr_020_5A97:
-    ld   hl, wRequestDestinationHigh              ; $5A97: $21 $01 $D6
+    ld   hl, wRequest                             ; $5A97: $21 $01 $D6
     ld   de, $31                                  ; $5A9A: $11 $31 $00
     add  hl, de                                   ; $5A9D: $19
     ld   a, [wIsIndoor]                           ; $5A9E: $FA $A5 $DB
@@ -2682,9 +2682,9 @@ jr_020_5AAE:
     push af                                       ; $5AB4: $F5
     push hl                                       ; $5AB5: $E5
     ld   b, $00                                   ; $5AB6: $06 $00
-    ld   a, [wRequestsAlt]                        ; $5AB8: $FA $90 $DC
+    ld   a, [wRequestsAltSize]                    ; $5AB8: $FA $90 $DC
     ld   c, a                                     ; $5ABB: $4F
-    ld   hl, wRequestAltDestinationHigh           ; $5ABC: $21 $91 $DC
+    ld   hl, wRequestAlt                          ; $5ABC: $21 $91 $DC
     add  hl, bc                                   ; $5ABF: $09
     ld   a, l                                     ; $5AC0: $7D
     sub  $11                                      ; $5AC1: $D6 $11
@@ -2714,7 +2714,7 @@ DrawKeyCounter:
 
 jr_020_5ADE:
     ld   a, $32                                   ; $5ADE: $3E $32
-    ld   [wRequests], a                           ; $5AE0: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5AE0: $EA $00 $D6
     ld   a, $03                                   ; $5AE3: $3E $03
     ldh  [hVolumeRight], a                      ; $5AE5: $E0 $A9
     ld   a, $30                                   ; $5AE7: $3E $30
@@ -2751,24 +2751,24 @@ InventoryLoad2Handler::
     ld   a, [hl]                                  ; $5B0C: $7E
     ldh  [hMultiPurpose0], a                      ; $5B0D: $E0 $D7
     ld   a, HIGH($9C6E)                           ; $5B0F: $3E $9C
-    ld   [wRequestAltDestinationHigh], a          ; $5B11: $EA $91 $DC
-    ld   [wRequestAltData+1], a                   ; $5B14: $EA $95 $DC
+    ld   [wRequestAlt.destinationHigh], a         ; $5B11: $EA $91 $DC
+    ld   [wRequestAlt.data+1], a                  ; $5B14: $EA $95 $DC
     ld   a, LOW($9C6E)                            ; $5B17: $3E $6E
-    ld   [wRequestAltDestinationLow], a           ; $5B19: $EA $92 $DC
+    ld   [wRequestAlt.destinationLow], a          ; $5B19: $EA $92 $DC
     ld   a, $8E                                   ; $5B1C: $3E $8E
-    ld   [wRequestAltData+2], a                   ; $5B1E: $EA $96 $DC
+    ld   [wRequestAlt.data+2], a                   ; $5B1E: $EA $96 $DC
     ld   a, $41                                   ; $5B21: $3E $41
-    ld   [wRequestAltLength], a                   ; $5B23: $EA $93 $DC
-    ld   [wRequestAltData+3], a                   ; $5B26: $EA $97 $DC
+    ld   [wRequestAlt.length], a                  ; $5B23: $EA $93 $DC
+    ld   [wRequestAlt.data+3], a                  ; $5B26: $EA $97 $DC
     ldh  a, [hMultiPurpose0]                      ; $5B29: $F0 $D7
-    ld   [wRequestAltData], a                     ; $5B2B: $EA $94 $DC
-    ld   [wRequestAltData+4], a                   ; $5B2E: $EA $98 $DC
+    ld   [wRequestAlt.data], a                    ; $5B2B: $EA $94 $DC
+    ld   [wRequestAlt.data+4], a                  ; $5B2E: $EA $98 $DC
     xor  a                                        ; $5B31: $AF
-    ld   [wRequestAltData+5], a                   ; $5B32: $EA $99 $DC
+    ld   [wRequestAlt.data+5], a                  ; $5B32: $EA $99 $DC
 
-    ld   a, [wRequestsAlt]                        ; $5B35: $FA $90 $DC
+    ld   a, [wRequestsAltSize]                    ; $5B35: $FA $90 $DC
     add  $08                                      ; $5B38: $C6 $08
-    ld   [wRequestsAlt], a                        ; $5B3A: $EA $90 $DC
+    ld   [wRequestsAltSize], a                    ; $5B3A: $EA $90 $DC
 
 jr_020_5B3D:
     ld   a, $03                                   ; $5B3D: $3E $03
@@ -2878,13 +2878,13 @@ func_020_5BA8::
 ; Configure request for loading inventory plette
 func_020_5BB9::
     push bc                                       ; $5BB9: $C5
-    ld   a, [wRequestsAlt]                        ; $5BBA: $FA $90 $DC
+    ld   a, [wRequestsAltSize]                    ; $5BBA: $FA $90 $DC
     ld   e, a                                     ; $5BBD: $5F
     ld   d, $00                                   ; $5BBE: $16 $00
-    ld   hl, wRequestAltDestinationHigh           ; $5BC0: $21 $91 $DC
+    ld   hl, wRequestAlt                          ; $5BC0: $21 $91 $DC
     add  hl, de                                   ; $5BC3: $19
     add  $05                                      ; $5BC4: $C6 $05
-    ld   [wRequestsAlt], a                        ; $5BC6: $EA $90 $DC
+    ld   [wRequestsAltSize], a                    ; $5BC6: $EA $90 $DC
     push hl                                       ; $5BC9: $E5
     sla  c                                        ; $5BCA: $CB $21
     ld   hl, InventoryTileMapPositions            ; $5BCC: $21 $84 $5C
@@ -3028,18 +3028,18 @@ func_020_5C9C::
     call func_020_5BB9                            ; $5CB2: $CD $B9 $5B
 
 jr_020_5CB5:
-    ; de = [wRequests]
-    ld   a, [wRequests]                           ; $5CB5: $FA $00 $D6
+    ; de = [wRequestsSize]
+    ld   a, [wRequestsSize]                       ; $5CB5: $FA $00 $D6
     ld   e, a                                     ; $5CB8: $5F
     ld   d, $00                                   ; $5CB9: $16 $00
 
     ; hl = request start address
-    ld   hl, wRequestDestinationHigh              ; $5CBB: $21 $01 $D6
+    ld   hl, wRequest                             ; $5CBB: $21 $01 $D6
     add  hl, de                                   ; $5CBE: $19
 
     ; Increment the request start by 0C
     add  $0C                                      ; $5CBF: $C6 $0C
-    ld   [wRequests], a                           ; $5CC1: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5CC1: $EA $00 $D6
     push hl                                       ; $5CC4: $E5
 
     ; de = InventoryTileMapPositions + c * 2
@@ -3150,10 +3150,10 @@ label_020_5D34:
     ld   a, $20                                   ; $5D3A: $3E $20
     call func_AB5                                 ; $5D3C: $CD $B5 $0A
     xor  a                                        ; $5D3F: $AF
-    ld   [wRequests], a                           ; $5D40: $EA $00 $D6
-    ld   [wRequestDestinationHigh], a             ; $5D43: $EA $01 $D6
-    ld   [wRequestsAlt], a                        ; $5D46: $EA $90 $DC
-    ld   [wRequestAltDestinationHigh], a          ; $5D49: $EA $91 $DC
+    ld   [wRequestsSize], a                       ; $5D40: $EA $00 $D6
+    ld   [wRequest]               , a             ; $5D43: $EA $01 $D6
+    ld   [wRequestsAltSize], a                    ; $5D46: $EA $90 $DC
+    ld   [wRequestAlt.destinationHigh], a         ; $5D49: $EA $91 $DC
     ld   a, [wLCDControl]                         ; $5D4C: $FA $FD $D6
     ldh  [rLCDC], a                               ; $5D4F: $E0 $40
     ret                                           ; $5D51: $C9

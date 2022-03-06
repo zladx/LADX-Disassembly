@@ -1707,11 +1707,11 @@ jr_002_4C0F:
 func_002_4C14::
     push de                                       ; $4C14: $D5
     push hl                                       ; $4C15: $E5
-    ld   hl, wRequestAltDestinationHigh           ; $4C16: $21 $91 $DC
-    ld   a, [wRequestsAlt]                        ; $4C19: $FA $90 $DC
+    ld   hl, wRequestAlt                          ; $4C16: $21 $91 $DC
+    ld   a, [wRequestsAltSize]                    ; $4C19: $FA $90 $DC
     ld   e, a                                     ; $4C1C: $5F
     add  $0A                                      ; $4C1D: $C6 $0A
-    ld   [wRequestsAlt], a                        ; $4C1F: $EA $90 $DC
+    ld   [wRequestsAltSize], a                    ; $4C1F: $EA $90 $DC
     add  hl, de                                   ; $4C22: $19
     ld   e, l                                     ; $4C23: $5D
     ld   d, h                                     ; $4C24: $54
@@ -1814,11 +1814,11 @@ label_002_4C92:
     ld   a, $82                                   ; $4C9D: $3E $82
     call func_2BF                                 ; $4C9F: $CD $2F $0B
     call label_2887                               ; $4CA2: $CD $87 $28
-    ld   hl, wRequestDestinationHigh              ; $4CA5: $21 $01 $D6
-    ld   a, [wRequests]                           ; $4CA8: $FA $00 $D6
+    ld   hl, wRequest                             ; $4CA5: $21 $01 $D6
+    ld   a, [wRequestsSize]                       ; $4CA8: $FA $00 $D6
     ld   e, a                                     ; $4CAB: $5F
     add  $0A                                      ; $4CAC: $C6 $0A
-    ld   [wRequests], a                           ; $4CAE: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $4CAE: $EA $00 $D6
     ld   d, $00                                   ; $4CB1: $16 $00
     add  hl, de                                   ; $4CB3: $19
     ldh  a, [hIsGBC]                              ; $4CB4: $F0 $FE
@@ -2013,11 +2013,11 @@ label_002_4D97:
     pop  bc                                       ; $4DCA: $C1
 
 jr_002_4DCB:
-    ld   hl, wRequestDestinationHigh              ; $4DCB: $21 $01 $D6
-    ld   a, [wRequests]                           ; $4DCE: $FA $00 $D6
+    ld   hl, wRequest                             ; $4DCB: $21 $01 $D6
+    ld   a, [wRequestsSize]                       ; $4DCE: $FA $00 $D6
     ld   e, a                                     ; $4DD1: $5F
     add  $0A                                      ; $4DD2: $C6 $0A
-    ld   [wRequests], a                           ; $4DD4: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $4DD4: $EA $00 $D6
     ld   d, $00                                   ; $4DD7: $16 $00
     add  hl, de                                   ; $4DD9: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4DDA: $F0 $CF
@@ -3608,10 +3608,10 @@ jr_002_568C:
 jr_002_56B8:
     ldh  [hIntersectedObjectTop], a               ; $56B8: $E0 $CD
     call label_2887                               ; $56BA: $CD $87 $28
-    ld   a, [wRequests]                           ; $56BD: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $56BD: $FA $00 $D6
     ld   e, a                                     ; $56C0: $5F
     ld   d, b                                     ; $56C1: $50
-    ld   hl, wRequestDestinationHigh              ; $56C2: $21 $01 $D6
+    ld   hl, wRequest                             ; $56C2: $21 $01 $D6
     add  hl, de                                   ; $56C5: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $56C6: $F0 $CF
     ld   [hl+], a                                 ; $56C8: $22
@@ -3633,7 +3633,7 @@ jr_002_56B8:
     ld   [hl], b                                  ; $56E0: $70
     ld   a, e                                     ; $56E1: $7B
     add  $08                                      ; $56E2: $C6 $08
-    ld   [wRequests], a                           ; $56E4: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $56E4: $EA $00 $D6
     ld   hl, wTranscientVfxCountdownTable         ; $56E7: $21 $20 $C5
     add  hl, bc                                   ; $56EA: $09
     ld   a, [hl]                                  ; $56EB: $7E
@@ -4190,12 +4190,12 @@ jr_002_5AC7:
     pop  de                                       ; $5AD4: $D1
 
 jr_002_5AD5:
-    ld   a, [wRequests]                           ; $5AD5: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $5AD5: $FA $00 $D6
     ld   c, a                                     ; $5AD8: $4F
     ld   b, $00                                   ; $5AD9: $06 $00
     add  $05                                      ; $5ADB: $C6 $05
-    ld   [wRequests], a                           ; $5ADD: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $5AE0: $21 $01 $D6
+    ld   [wRequestsSize], a                       ; $5ADD: $EA $00 $D6
+    ld   hl, wRequest                             ; $5AE0: $21 $01 $D6
     add  hl, bc                                   ; $5AE3: $09
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5AE4: $F0 $CF
     ld   [hl+], a                                 ; $5AE6: $22
@@ -4470,12 +4470,12 @@ jr_002_5C7B:
     pop  de                                       ; $5C88: $D1
 
 jr_002_5C89:
-    ld   a, [wRequests]                           ; $5C89: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $5C89: $FA $00 $D6
     ld   c, a                                     ; $5C8C: $4F
     ld   b, $00                                   ; $5C8D: $06 $00
     add  $05                                      ; $5C8F: $C6 $05
-    ld   [wRequests], a                           ; $5C91: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $5C94: $21 $01 $D6
+    ld   [wRequestsSize], a                       ; $5C91: $EA $00 $D6
+    ld   hl, wRequest                             ; $5C94: $21 $01 $D6
     add  hl, bc                                   ; $5C97: $09
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5C98: $F0 $CF
     ld   [hl+], a                                 ; $5C9A: $22
@@ -4748,7 +4748,7 @@ label_002_61A9:
     and  a                                        ; $61AC: $A7
     jr   nz, jr_002_61C6                          ; $61AD: $20 $17
 
-    ld   a, [wRequestDestinationHigh]             ; $61AF: $FA $01 $D6
+    ld   a, [wRequest]                            ; $61AF: $FA $01 $D6
     and  a                                        ; $61B2: $A7
     jr   nz, jr_002_61B9                          ; $61B3: $20 $04
 
@@ -4817,7 +4817,7 @@ label_002_61F5:
 
 ; Decrement the rupees count and play the associated sound effect
 UpdateRupeesCount::
-    ld   hl, wRequests                            ; $6209: $21 $00 $D6
+    ld   hl, wRequestsSize                        ; $6209: $21 $00 $D6
     ldh  a, [hFrameCounter]                       ; $620C: $F0 $E7
     and  $01                                      ; $620E: $E6 $01
     or   [hl]                                     ; $6210: $B6
@@ -4942,12 +4942,12 @@ UpdateRupeesCount::
 
 ; Load the rupees digit tiles for the current rupees count
 LoadRupeesDigits::
-    ld   a, [wRequests]                           ; $62CE: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $62CE: $FA $00 $D6
     ld   e, a                                     ; $62D1: $5F
     ld   d, $00                                   ; $62D2: $16 $00
     add  $06                                      ; $62D4: $C6 $06
-    ld   [wRequests], a                           ; $62D6: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $62D9: $21 $01 $D6
+    ld   [wRequestsSize], a                       ; $62D6: $EA $00 $D6
+    ld   hl, wRequest                             ; $62D9: $21 $01 $D6
     add  hl, de                                   ; $62DC: $19
     ld   a, $9C                                   ; $62DD: $3E $9C
     ld   [hl+], a                                 ; $62DF: $22
@@ -5035,7 +5035,7 @@ UpdateHealth:
     and  $01                                      ; $6344: $E6 $01
     jr   z, .return2                              ; $6346: $28 $5A
     ; return if background copy was not executed yet
-    ld   a, [wRequests]                           ; $6348: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $6348: $FA $00 $D6
     and  a                                        ; $634B: $A7
     jr   nz, .return2                             ; $634C: $20 $54
     ; if no health has to be added go to health reduce section
@@ -5124,12 +5124,12 @@ UpdateHealth:
     ld   a, DAMAGE_COOLDOWN_TIME                  ; $63BA: $3E $A0
     ld   [wInvincibilityCounter], a               ; $63BC: $EA $C7 $DB
     ; TODO: comment what is going one here
-    ld   a, [wRequests]                           ; $63BF: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $63BF: $FA $00 $D6
     ld   e, a                                     ; $63C2: $5F
     ld   d, $00                                   ; $63C3: $16 $00
     add  $04                                      ; $63C5: $C6 $04
-    ld   [wRequests], a                           ; $63C7: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; POI: Updates (old) medicine counter on the subscreen
+    ld   [wRequestsSize], a                       ; $63C7: $EA $00 $D6
+    ld   hl, wRequest                             ; POI: Updates (old) medicine counter on the subscreen
     add  hl, de                                   ; $63CD: $19
     ld   a, $9C                                   ; $63CE: $3E $9C
     ld   [hl+], a                                 ; $63D0: $22
@@ -5160,9 +5160,9 @@ UpdateHealth:
     ld   [hl+], a                                 ; $63F2: $22
     xor  a                                        ; $63F3: $AF
     ld   [hl], a                                  ; $63F4: $77
-    ld   a, [wRequests]                           ; $63F5: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $63F5: $FA $00 $D6
     add  $04                                      ; $63F8: $C6 $04
-    ld   [wRequests], a                           ; $63FA: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $63FA: $EA $00 $D6
     ret                                           ; $63FD: $C9
 
 .return:
@@ -5173,12 +5173,12 @@ Data_002_63FF::
     db   $7F, $7F, $7F, $7F, $00
 
 LoadHeartsCount::
-    ld   a, [wRequests]                           ; $6414: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $6414: $FA $00 $D6
     ld   e, a                                     ; $6417: $5F
     ld   d, $00                                   ; $6418: $16 $00
     add  $14                                      ; $641A: $C6 $14
-    ld   [wRequests], a                           ; $641C: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $641F: $21 $01 $D6
+    ld   [wRequestsSize], a                       ; $641C: $EA $00 $D6
+    ld   hl, wRequest                             ; $641F: $21 $01 $D6
     add  hl, de                                   ; $6422: $19
     push de                                       ; $6423: $D5
     ld   bc, Data_002_63FF                        ; $6424: $01 $FF $63
@@ -5196,7 +5196,7 @@ LoadHeartsCount::
     nop                                           ; $6431: $00
     nop                                           ; $6432: $00
     pop  de                                       ; $6433: $D1
-    ld   hl, wRequestData                         ; $6434: $21 $04 $D6
+    ld   hl, wRequest.data                        ; $6434: $21 $04 $D6
     add  hl, de                                   ; $6437: $19
     ld   c, $00                                   ; $6438: $0E $00
     ld   a, [wHealth]                             ; $643A: $FA $5A $DB

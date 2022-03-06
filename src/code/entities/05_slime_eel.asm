@@ -158,13 +158,13 @@ jr_005_6D7E:
     pop  bc                                       ; $6DFC: $C1
 
 jr_005_6DFD:
-    ld   a, [wRequests]                           ; $6DFD: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $6DFD: $FA $00 $D6
     ld   e, a                                     ; $6E00: $5F
     ld   d, $00                                   ; $6E01: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $6E03: $21 $01 $D6
+    ld   hl, wRequest                             ; $6E03: $21 $01 $D6
     add  hl, de                                   ; $6E06: $19
     add  $1C                                      ; $6E07: $C6 $1C
-    ld   [wRequests], a                           ; $6E09: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $6E09: $EA $00 $D6
     call func_005_6E15                            ; $6E0C: $CD $15 $6E
     call func_005_6E15                            ; $6E0F: $CD $15 $6E
     call func_005_6E15                            ; $6E12: $CD $15 $6E
@@ -195,13 +195,13 @@ label_005_6E30:
     jp   nz, label_005_6E7C                       ; $6E32: $C2 $7C $6E
 
     call label_2887                               ; $6E35: $CD $87 $28
-    ld   a, [wRequests]                           ; $6E38: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $6E38: $FA $00 $D6
     ld   e, a                                     ; $6E3B: $5F
     ld   d, $00                                   ; $6E3C: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $6E3E: $21 $01 $D6
+    ld   hl, wRequest                             ; $6E3E: $21 $01 $D6
     add  hl, de                                   ; $6E41: $19
     add  $1C                                      ; $6E42: $C6 $1C
-    ld   [wRequests], a                           ; $6E44: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $6E44: $EA $00 $D6
     call func_005_6E4A                            ; $6E47: $CD $4A $6E
 
 func_005_6E4A::
@@ -302,13 +302,13 @@ jr_005_6EB0:
     add  hl, de                                   ; $6ED2: $19
     push hl                                       ; $6ED3: $E5
     call label_2887                               ; $6ED4: $CD $87 $28
-    ld   a, [wRequests]                           ; $6ED7: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $6ED7: $FA $00 $D6
     ld   e, a                                     ; $6EDA: $5F
     ld   d, $00                                   ; $6EDB: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $6EDD: $21 $01 $D6
+    ld   hl, wRequest                             ; $6EDD: $21 $01 $D6
     add  hl, de                                   ; $6EE0: $19
     add  $0E                                      ; $6EE1: $C6 $0E
-    ld   [wRequests], a                           ; $6EE3: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $6EE3: $EA $00 $D6
     pop  de                                       ; $6EE6: $D1
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $6EE7: $F0 $CF
     ld   [hl+], a                                 ; $6EE9: $22

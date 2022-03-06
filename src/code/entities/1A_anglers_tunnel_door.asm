@@ -117,8 +117,8 @@ AnglersTunnelDoorEntityHandler::
     ld   d, h                                     ; $7135: $54
     ld   e, l                                     ; $7136: $5D
     ld   c, $0A                                   ; $7137: $0E $0A
-    ld   hl, wRequestAltDestinationHigh           ; $7139: $21 $91 $DC
-    ld   a, [wRequestsAlt]                        ; $713C: $FA $90 $DC
+    ld   hl, wRequestAlt                          ; $7139: $21 $91 $DC
+    ld   a, [wRequestsAltSize]                    ; $713C: $FA $90 $DC
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $713F: $F0 $CF
     ld   [hl+], a                                 ; $7141: $22
     ldh  a, [hIntersectedObjectBGAddressLow]      ; $7142: $F0 $D0
@@ -166,12 +166,12 @@ AnglersTunnelDoorEntityHandler::
 
     add  hl, de                                   ; $7173: $19
     push hl                                       ; $7174: $E5
-    ld   a, [wRequests]                           ; $7175: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $7175: $FA $00 $D6
     ld   e, a                                     ; $7178: $5F
     ld   d, b                                     ; $7179: $50
     add  $0D                                      ; $717A: $C6 $0D
-    ld   [wRequests], a                           ; $717C: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $717F: $21 $01 $D6
+    ld   [wRequestsSize], a                       ; $717C: $EA $00 $D6
+    ld   hl, wRequest                             ; $717F: $21 $01 $D6
     add  hl, de                                   ; $7182: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $7183: $F0 $CF
     ld   [hl+], a                                 ; $7185: $22

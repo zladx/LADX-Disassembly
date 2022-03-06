@@ -2531,32 +2531,45 @@ wD5C2::
 wD5C4::
   ds 60 ; D5C4 - D600
 
+;
 ; Data structures for copying data to vram during blanking times.
-; 0 if background copy was executed
-wRequests::               ; D600
-  ds 1
+;
+; There can be several wRequests stacked together in this area.
+;
 
-; Request destination address (big endian)
-wRequest:
-; Request destination address (big endian)
-wRequestDestination:
+; Size of all cumulated wRequestsSize
+; When 0, no wRequest is executed on vblank
+wRequestsSize::
+  ds 1 ; D600
+
+; Format of a wRequest data structure
+; (This is the address of first one in memory; but several of them can be stacked.)
+wRequest::
 ; Request destination address high byte
-wRequestDestinationHigh::
+.destinationHigh
   ds 1 ; D601
-
 ; Request destination address low byte
-wRequestDestinationLow::
+.destinationLow
   ds 1 ; D602
-
 ; Request data length and mode.
 ; bits 0-6: data length,
 ; bits 7-8: copy mode (see BG_COPY_MODE_* constants)
-wRequestLength::
+.length
   ds 1 ; D603
-
-; Request data (variable length)
-wRequestData::
-  ds 244  ; D604 - D6F7
+; Request data
+;
+; There are $4F bytes reserved for data - except when drawing
+; the dungeon minimap, where the end of the data is used as a temporary
+; buffer to store the minimap tilemap.
+.data
+UNION
+  ds $F4  ; D604 - D6F7
+NEXTU
+  ds $4D ; D604 - D651
+; Temporary storage for the tilemap of the dungeon minimap.
+wMinimapTilemap::
+  ds $A7 ; D651 - D6F7
+ENDU
 
 ; Animation stage during a switchable object animation.
 ;
@@ -2597,7 +2610,8 @@ wLCDControl::
 wTilesetToLoad::
   ds 1 ; D6FE
 
-; TODO comment
+; Index of a tilemap that will be copied to VRAM on next vblank.
+; See possible values at TilemapsPointersTable
 wBGMapToLoad::
   ds 1 ; D6FF
 
@@ -3282,28 +3296,29 @@ wObjPal7::
 wObjPal8::
   ds 8 ; DC88 - DC8F
 
-; This seems to be some secondary wRequest buffer used during map scrolling.
+; This seems to be some secondary wRequests buffer used during map scrolling.
 ;
 ; TODO: find a better name
-wRequestsAlt::
+
+; Size of all cumulated wRequestsSize
+; When 0, no wRequest is executed on vblanks
+wRequestsAltSize::
   ds 1 ; DC90
 
 ; Secondary wRequest destination (higher byte)
 wRequestAlt::
-wRequestAltDestination::
-wRequestAltDestinationHigh::
+.destinationHigh
   ds 1 ; DC91
-
 ; Secondary wRequest destination (lower byte)
-wRequestAltDestinationLow::
+.destinationLow
   ds 1 ; DC92
-
-; Secondary wRequest data Length
-wRequestAltLength::
+; Secondary wRequest data length and options
+; bits 0-6: data length,
+; bits 7-8: copy mode (see BG_COPY_MODE_* constants)
+.length
   ds 1 ; DC93
-
 ; Secondary wRequest data
-wRequestAltData::
+.data
   ds $2C ; DC93 - DCBF
 
 ; Unlabeled

@@ -349,7 +349,7 @@ DialogLetterAnimationEndHandler::
     ld   hl, Data_01C_45C1                        ; $24E9: $21 $C1 $45
     add  hl, bc                                   ; $24EC: $09
     add  a, [hl]                                  ; $24ED: $86
-    ld   hl, wRequests                            ; $24EE: $21 $00 $D6
+    ld   hl, wRequestsSize                        ; $24EE: $21 $00 $D6
     add  hl, de                                   ; $24F1: $19
     ldi  [hl], a                                  ; $24F2: $22
     ld   [wC175], a                               ; $24F3: $EA $75 $C1
@@ -401,7 +401,7 @@ DialogDrawNextCharacterHandler::
     add  hl, bc                                   ; $253D: $09
     ld   a, [hl]                                  ; $253E: $7E
 
-    ld   hl, wRequests                            ; $253F: $21 $00 $D6
+    ld   hl, wRequestsSize                        ; $253F: $21 $00 $D6
     add  hl, de                                   ; $2542: $19
     ldi  [hl], a ; high byte of tile destination address ; $2543: $22
     push hl                                       ; $2544: $E5
@@ -713,18 +713,18 @@ ENDC
     add  hl, de                                   ; $26F0: $19
     ld   a, [wBGOriginHigh]                       ; $26F1: $FA $2E $C1
     add  a, [hl]                                  ; $26F4: $86
-    ld   [wRequestDestinationHigh], a             ; $26F5: $EA $01 $D6
+    ld   [wRequest.destinationHigh], a            ; $26F5: $EA $01 $D6
     ld   hl, data_2691                            ; $26F8: $21 $91 $26
     add  hl, de                                   ; $26FB: $19
     ld   a, [wBGOriginLow]                        ; $26FC: $FA $2F $C1
     add  a, [hl]                                  ; $26FF: $86
-    ld   [wRequestDestinationLow], a              ; $2700: $EA $02 $D6
+    ld   [wRequest.destinationLow], a             ; $2700: $EA $02 $D6
     ld   a, BG_COPY_MODE_ROW_SINGLE_VALUE | $0F   ; $2703: $3E $4F
-    ld   [wRequestLength], a                      ; $2705: $EA $03 $D6
+    ld   [wRequest.length], a                     ; $2705: $EA $03 $D6
     ldh  a, [hDialogBackgroundTile]               ; $2708: $F0 $E8
-    ld   [wRequestLength + 1], a                  ; $270A: $EA $04 $D6
+    ld   [wRequest.length+ 1], a                  ; $270A: $EA $04 $D6
     xor  a                                        ; $270D: $AF
-    ld   [wRequestData + 1], a                    ; $270E: $EA $05 $D6
+    ld   [wRequest.data + 1], a                   ; $270E: $EA $05 $D6
 IF __PATCH_9__
     jp   IncrementDialogState
 ELSE

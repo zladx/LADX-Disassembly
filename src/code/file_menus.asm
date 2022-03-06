@@ -97,13 +97,13 @@ FileSelectionPrepare5::
 
 func_001_4852::
     push de                                       ; $4852: $D5
-    ld   a, [wRequests]                           ; $4853: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $4853: $FA $00 $D6
     ld   e, a                                     ; $4856: $5F
     ld   d, $00                                   ; $4857: $16 $00
     ld   hl, wRequest                             ; $4859: $21 $01 $D6
     add  hl, de                                   ; $485C: $19
     add  a, $10                                   ; $485D: $C6 $10
-    ld   [wRequests], a                           ; $485F: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $485F: $EA $00 $D6
     ld   a, b                                     ; $4862: $78
     ldi  [hl], a                                  ; $4863: $22
     ld   a, c                                     ; $4864: $79
@@ -266,7 +266,7 @@ IF LANG_DE
 
     xor a
     ldh [hLinkInteractiveMotionBlocked], a
-    ld hl, wRequestDestination
+    ld hl, wRequest
     ld de, Data_001_48EB
     ld c, Data_001_48EB.end - Data_001_48EB
 
@@ -531,9 +531,9 @@ FileCreationInit2Handler::
     ld   a, HIGH(FILE_NEW_SAVE_SLOT_INDEX_BG)     ; $4A2C: $3E $98
     ldi  [hl], a ; wRequestDestinationHigh        ; $4A2E: $22
     ld   a, LOW(FILE_NEW_SAVE_SLOT_INDEX_BG)      ; $4A2F: $3E $49
-    ldi  [hl], a ; wRequestDestinationLow         ; $4A31: $22
+    ldi  [hl], a ; wRequest.destinationLow        ; $4A31: $22
     xor  a                                        ; $4A32: $AF
-    ldi  [hl], a ; wRequestLength                 ; $4A33: $22
+    ldi  [hl], a ; wRequest.length                ; $4A33: $22
     ld   a, [wSaveSlot]                           ; $4A34: $FA $A6 $DB
     add  a, FILE_NEW_SAVE_SLOT_1_TILE             ; $4A37: $C6 $AB
     ldi  [hl], a ; wRequestData[0]                ; $4A39: $22
@@ -1177,18 +1177,18 @@ jr_001_4E3B::
 
 IF LANG_JP
 CopyQuitOkTilemap::
-    ld hl, wRequestDestination
-    ld a, $99
+    ld hl, wRequest
+    ld a, HIGH(vBGMap0 + $1EE)
     ld [hl+], a
-    ld a, $ee
+    ld a, LOW(vBGMap0 + $1EE)
     ld [hl+], a
     ld a, $02
     ld [hl+], a
-    ld a, $ba
+    ld a, $BA
     ld [hl+], a
-    ld a, $bb
+    ld a, $BB
     ld [hl+], a
-    ld a, $3d
+    ld a, $3D
 
     ld [hl+], a                                   ; $4eb9: $22
     xor a                                         ; $4eba: $af
@@ -1276,24 +1276,24 @@ jr_001_4E9E::
 
 IF LANG_JP
 CopyReturnToMenuTilemap::
-    ld   a, [wRequests]                             ; $4eff: $fa $00 $d6
+    ld   a, [wRequestsSize]                         ; $4eff: $fa $00 $d6
     ld   e, a                                       ; $4f02: $5f
-    add  $04                                       ; $4f03: $c6 $04
-    ld   [wRequests], a                             ; $4f05: $ea $00 $d6
+    add  $04                                        ; $4f03: $c6 $04
+    ld   [wRequestsSize], a                         ; $4f05: $ea $00 $d6
     ld   d, $00                                     ; $4f08: $16 $00
-    ld   hl, wRequestDestination                    ; $4f0a: $21 $01 $d6
-    add  hl, de                                    ; $4f0d: $19
-    ld   a, $99                                     ; $4f0e: $3e $99
+    ld   hl, wRequest                               ; $4f0a: $21 $01 $d6
+    add  hl, de                                     ; $4f0d: $19
+    ld   a, HIGH(vBGMap0 + $1EE)                    ; $4f0e: $3e $99
     ld   [hl+], a                                   ; $4f10: $22
-    ld   a, $ee                                     ; $4f11: $3e $ee
+    ld   a, LOW(vBGMap0 + $1EE)                        ; $4f11: $3e $ee
     ld   [hl+], a                                   ; $4f13: $22
     ld   a, $42                                     ; $4f14: $3e $42
     ld   [hl+], a                                   ; $4f16: $22
     ld   a, $7e                                     ; $4f17: $3e $7e
     ld   [hl+], a                                   ; $4f19: $22
-    xor  a                                         ; $4f1a: $af
+    xor  a                                          ; $4f1a: $af
     ld   [hl], a                                    ; $4f1b: $77
-    ret                                           ; $4f1c: $c9
+    ret                                             ; $4f1c: $c9
 ELSE
 
 ; Tilemap for the "RETURN TO MENU" text, formatted as wRequest data
@@ -1308,12 +1308,12 @@ include "data/file_menu_return_to_menu_alt.asm"
 ENDC
 
 CopyReturnToMenuTilemap::
-    ld   a, [wRequests]                           ; $4EBB: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $4EBB: $FA $00 $D6
     ld   e, a                                     ; $4EBE: $5F
     add  FileReturnToMenuTilemap.end - FileReturnToMenuTilemap - 1    ; $4EBF: $C6 $11
-    ld   [wRequests], a                           ; $4EC1: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $4EC1: $EA $00 $D6
     ld   d, $00                                   ; $4EC4: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $4EC6: $21 $01 $D6
+    ld   hl, wRequest                             ; $4EC6: $21 $01 $D6
     add  hl, de                                   ; $4EC9: $19
     ld   de, FileReturnToMenuTilemap                        ; $4ECA: $11 $A9 $4E
 
@@ -1369,7 +1369,7 @@ jr_001_4EEF::
     ld   d, $00                                   ; $4EF8: $16 $00 ; $4EF8: $16 $00
     ld   hl, Data_001_4DEE                        ; $4EFA: $21 $EE $4D ; $4EFA: $21 $EE $4D
     add  hl, de                                   ; $4EFD: $19 ; $4EFD: $19
-    ld   de, wRequestDestinationHigh              ; $4EFE: $11 $01 $D6 ; $4EFE: $11 $01 $D6
+    ld   de, wRequest                             ; $4EFE: $11 $01 $D6 ; $4EFE: $11 $01 $D6
     ld   c, $08                                   ; $4F01: $0E $08 ; $4F01: $0E $08
 
 jr_001_4F03::
@@ -1433,12 +1433,12 @@ Data_001_4F3B::
 
 CopyDigitsToFileScreenBG::
     push hl                                       ; $4F45: $E5 ; $4F45: $E5
-    ld   a, [wRequests]                           ; $4F46: $FA $00 $D6 ; $4F46: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $4F46: $FA $00 $D6 ; $4F46: $FA $00 $D6
     ld   c, a                                     ; $4F49: $4F ; $4F49: $4F
     add  $06                                      ; $4F4A: $C6 $06 ; $4F4A: $C6 $06
-    ld   [wRequests], a                           ; $4F4C: $EA $00 $D6 ; $4F4C: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $4F4C: $EA $00 $D6 ; $4F4C: $EA $00 $D6
     ld   b, $00                                   ; $4F4F: $06 $00 ; $4F4F: $06 $00
-    ld   hl, wRequestDestinationHigh              ; $4F51: $21 $01 $D6 ; $4F51: $21 $01 $D6
+    ld   hl, wRequest                             ; $4F51: $21 $01 $D6 ; $4F51: $21 $01 $D6
     add  hl, bc                                   ; $4F54: $09 ; $4F54: $09
     ld   a, d                                     ; $4F55: $7A ; $4F55: $7A
     ld   [hl+], a                                 ; $4F56: $22 ; $4F56: $22
@@ -1763,7 +1763,7 @@ func_001_512C::
     ld   d, $00                                   ; $513B: $16 $00 ; $513B: $16 $00
     ld   hl, Data_001_50AF                        ; $513D: $21 $AF $50 ; $513D: $21 $AF $50
     add  hl, de                                   ; $5140: $19 ; $5140: $19
-    ld   de, wRequestDestinationHigh              ; $5141: $11 $01 $D6 ; $5141: $11 $01 $D6
+    ld   de, wRequest                             ; $5141: $11 $01 $D6 ; $5141: $11 $01 $D6
     ld   c, $08                                   ; $5144: $0E $08 ; $5144: $0E $08
 
 jr_001_5146::
@@ -1955,7 +1955,7 @@ jr_001_5249::
     ld   d, $00                                   ; $525B: $16 $00 ; $525B: $16 $00
     ld   hl, Data_001_50C7                        ; $525D: $21 $C7 $50 ; $525D: $21 $C7 $50
     add  hl, de                                   ; $5260: $19 ; $5260: $19
-    ld   de, wRequestData + 5                     ; $5261: $11 $09 $D6 ; $5261: $11 $09 $D6
+    ld   de, wRequest.data + 5                    ; $5261: $11 $09 $D6 ; $5261: $11 $09 $D6
     ld   c, $08                                   ; $5264: $0E $08 ; $5264: $0E $08
 
 jr_001_5266::

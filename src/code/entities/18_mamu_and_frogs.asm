@@ -454,8 +454,8 @@ jr_018_43EF:
 label_018_4402:
     call label_2887                               ; $4402: $CD $87 $28
     ld   a, $1B                                   ; $4405: $3E $1B
-    ld   [wRequests], a                           ; $4407: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $440A: $21 $01 $D6
+    ld   [wRequestsSize], a                       ; $4407: $EA $00 $D6
+    ld   hl, wRequest                             ; $440A: $21 $01 $D6
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $440D: $F0 $CF
     add  $02                                      ; $440F: $C6 $02
     ld   e, a                                     ; $4411: $5F
@@ -512,8 +512,8 @@ jr_018_441E:
 label_018_444E:
     call label_2887                               ; $444E: $CD $87 $28
     ld   a, $1B                                   ; $4451: $3E $1B
-    ld   [wRequests], a                           ; $4453: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $4456: $21 $01 $D6
+    ld   [wRequestsSize], a                       ; $4453: $EA $00 $D6
+    ld   hl, wRequest                             ; $4456: $21 $01 $D6
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4459: $F0 $CF
     add  $02                                      ; $445B: $C6 $02
     ld   e, a                                     ; $445D: $5F
@@ -565,8 +565,8 @@ label_018_444E:
 label_018_449D:
     call label_2887                               ; $449D: $CD $87 $28
     ld   a, $15                                   ; $44A0: $3E $15
-    ld   [wRequests], a                           ; $44A2: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $44A5: $21 $01 $D6
+    ld   [wRequestsSize], a                       ; $44A2: $EA $00 $D6
+    ld   hl, wRequest                             ; $44A5: $21 $01 $D6
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $44A8: $F0 $CF
     add  $02                                      ; $44AA: $C6 $02
     ld   e, a                                     ; $44AC: $5F

@@ -2717,11 +2717,11 @@ jr_007_51AA:
     pop  bc                                       ; $51F1: $C1
 
 jr_007_51F2:
-    ld   hl, wRequestDestinationHigh              ; $51F2: $21 $01 $D6
-    ld   a, [wRequests]                           ; $51F5: $FA $00 $D6
+    ld   hl, wRequest                             ; $51F2: $21 $01 $D6
+    ld   a, [wRequestsSize]                       ; $51F5: $FA $00 $D6
     ld   e, a                                     ; $51F8: $5F
     add  $0A                                      ; $51F9: $C6 $0A
-    ld   [wRequests], a                           ; $51FB: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $51FB: $EA $00 $D6
     ld   d, $00                                   ; $51FE: $16 $00
     add  hl, de                                   ; $5200: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5201: $F0 $CF
@@ -3993,11 +3993,11 @@ jr_007_5A2A:
     pop  bc                                       ; $5A5E: $C1
 
 jr_007_5A5F:
-    ld   hl, wRequestDestinationHigh              ; $5A5F: $21 $01 $D6
-    ld   a, [wRequests]                           ; $5A62: $FA $00 $D6
+    ld   hl, wRequest                             ; $5A5F: $21 $01 $D6
+    ld   a, [wRequestsSize]                       ; $5A62: $FA $00 $D6
     ld   e, a                                     ; $5A65: $5F
     add  $0A                                      ; $5A66: $C6 $0A
-    ld   [wRequests], a                           ; $5A68: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5A68: $EA $00 $D6
     ld   d, $00                                   ; $5A6B: $16 $00
     add  hl, de                                   ; $5A6D: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5A6E: $F0 $CF
@@ -5336,11 +5336,11 @@ jr_007_625F:
     pop  bc                                       ; $62A1: $C1
 
 jr_007_62A2:
-    ld   hl, wRequestDestinationHigh              ; $62A2: $21 $01 $D6
-    ld   a, [wRequests]                           ; $62A5: $FA $00 $D6
+    ld   hl, wRequest                             ; $62A2: $21 $01 $D6
+    ld   a, [wRequestsSize]                       ; $62A5: $FA $00 $D6
     ld   e, a                                     ; $62A8: $5F
     add  $0A                                      ; $62A9: $C6 $0A
-    ld   [wRequests], a                           ; $62AB: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $62AB: $EA $00 $D6
     ld   d, $00                                   ; $62AE: $16 $00
     add  hl, de                                   ; $62B0: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $62B1: $F0 $CF
@@ -5386,11 +5386,11 @@ jr_007_62D2:
     pop  bc                                       ; $62EB: $C1
 
 jr_007_62EC:
-    ld   hl, wRequestDestinationHigh              ; $62EC: $21 $01 $D6
-    ld   a, [wRequests]                           ; $62EF: $FA $00 $D6
+    ld   hl, wRequest                             ; $62EC: $21 $01 $D6
+    ld   a, [wRequestsSize]                       ; $62EF: $FA $00 $D6
     ld   e, a                                     ; $62F2: $5F
     add  $0A                                      ; $62F3: $C6 $0A
-    ld   [wRequests], a                           ; $62F5: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $62F5: $EA $00 $D6
     ld   d, $00                                   ; $62F8: $16 $00
     add  hl, de                                   ; $62FA: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $62FB: $F0 $CF
@@ -5731,10 +5731,10 @@ ELSE
     jr   z, jr_007_659D                           ; $653A: $28 $61
 ENDC
 
-    ld   a, [wRequests]                           ; $653C: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $653C: $FA $00 $D6
     ld   e, a                                     ; $653F: $5F
     add  $08                                      ; $6540: $C6 $08
-    ld   [wRequests], a                           ; $6542: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $6542: $EA $00 $D6
     ld   d, b                                     ; $6545: $50
     push bc                                       ; $6546: $C5
     ld   hl, wEntitiesInertiaTable                ; $6547: $21 $D0 $C3
@@ -5747,7 +5747,7 @@ ENDC
     add  hl, bc                                   ; $6555: $09
     ld   c, l                                     ; $6556: $4D
     ld   b, h                                     ; $6557: $44
-    ld   hl, wRequestDestinationHigh              ; $6558: $21 $01 $D6
+    ld   hl, wRequest                             ; $6558: $21 $01 $D6
     add  hl, de                                   ; $655B: $19
     ld   e, $08                                   ; $655C: $1E $08
 
@@ -5764,10 +5764,10 @@ jr_007_655E:
     jr   z, jr_007_6596                           ; $6569: $28 $2B
 
     pop  bc                                       ; $656B: $C1
-    ld   a, [wRequestsAlt]                        ; $656C: $FA $90 $DC
+    ld   a, [wRequestsAltSize]                    ; $656C: $FA $90 $DC
     ld   e, a                                     ; $656F: $5F
     add  $08                                      ; $6570: $C6 $08
-    ld   [wRequestsAlt], a                        ; $6572: $EA $90 $DC
+    ld   [wRequestsAltSize], a                    ; $6572: $EA $90 $DC
     ld   d, b                                     ; $6575: $50
     push bc                                       ; $6576: $C5
     ld   hl, wEntitiesInertiaTable                ; $6577: $21 $D0 $C3
@@ -5784,7 +5784,7 @@ ENDC
     add  hl, bc                                   ; $6585: $09
     ld   c, l                                     ; $6586: $4D
     ld   b, h                                     ; $6587: $44
-    ld   hl, wRequestAltDestinationHigh           ; $6588: $21 $91 $DC
+    ld   hl, wRequestAlt                          ; $6588: $21 $91 $DC
     add  hl, de                                   ; $658B: $19
     ld   e, $08                                   ; $658C: $1E $08
 
@@ -7821,13 +7821,13 @@ jr_007_71B4:
     pop  bc                                       ; $721C: $C1
 
 jr_007_721D:
-    ld   a, [wRequests]                           ; $721D: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $721D: $FA $00 $D6
     ld   e, a                                     ; $7220: $5F
     ld   d, $00                                   ; $7221: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $7223: $21 $01 $D6
+    ld   hl, wRequest                             ; $7223: $21 $01 $D6
     add  hl, de                                   ; $7226: $19
     add  $0A                                      ; $7227: $C6 $0A
-    ld   [wRequests], a                           ; $7229: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $7229: $EA $00 $D6
     ld   e, $08                                   ; $722C: $1E $08
     call func_007_7233                            ; $722E: $CD $33 $72
     ld   e, $09                                   ; $7231: $1E $09

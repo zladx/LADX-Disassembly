@@ -799,7 +799,7 @@ func_017_488C::
     jr   nz, jr_017_48CC                          ; $4892: $20 $38
 
     push de                                       ; $4894: $D5
-    ld   hl, wRequestDestinationHigh              ; $4895: $21 $01 $D6
+    ld   hl, wRequest                             ; $4895: $21 $01 $D6
     ld   a, d                                     ; $4898: $7A
     ld   [hl+], a                                 ; $4899: $22
     ld   a, e                                     ; $489A: $7B
@@ -1454,7 +1454,7 @@ jr_017_4E27:
     ld   d, $00                                   ; $4E32: $16 $00
     ld   hl, Data_017_4DD1                        ; $4E34: $21 $D1 $4D
     add  hl, de                                   ; $4E37: $19
-    ld   de, wRequestDestinationHigh              ; $4E38: $11 $01 $D6
+    ld   de, wRequest                             ; $4E38: $11 $01 $D6
     ld   c, $08                                   ; $4E3B: $0E $08
 
 jr_017_4E3D:
@@ -1477,8 +1477,8 @@ CreditsStairsOwlSpeechHandler::
     cp   $0E                                      ; $4E4D: $FE $0E
     ret  z                                        ; $4E4F: $C8
 
-    ld   bc, wRequestDestinationHigh              ; $4E50: $01 $01 $D6
-    ld   de, wRequestAltDestinationHigh           ; $4E53: $11 $91 $DC
+    ld   bc, wRequest                             ; $4E50: $01 $01 $D6
+    ld   de, wRequestAlt                          ; $4E53: $11 $91 $DC
     ld   hl, $9880                                ; $4E56: $21 $80 $98
     swap a                                        ; $4E59: $CB $37
     sla  a                                        ; $4E5B: $CB $27
@@ -1656,7 +1656,7 @@ jr_017_50F9:
     ld   hl, Data_017_4EEF                        ; $510B: $21 $EF $4E
     add  hl, de                                   ; $510E: $19
     push de                                       ; $510F: $D5
-    ld   de, wRequestDestinationHigh              ; $5110: $11 $01 $D6
+    ld   de, wRequest                             ; $5110: $11 $01 $D6
     ld   c, $18                                   ; $5113: $0E $18
 
 jr_017_5115:
@@ -1673,7 +1673,7 @@ jr_017_5115:
 
     ld   hl, Data_017_4FDF                        ; $5120: $21 $DF $4F
     add  hl, de                                   ; $5123: $19
-    ld   de, wRequestAltDestinationHigh           ; $5124: $11 $91 $DC
+    ld   de, wRequestAlt                          ; $5124: $11 $91 $DC
     ld   c, $18                                   ; $5127: $0E $18
 
 jr_017_5129:
@@ -1991,7 +1991,7 @@ jr_017_54D5:
 IF !__PATCH_1__
     push de                                       ; $54E4: $D5
 ENDC
-    ld   de, wRequestDestinationHigh              ; $54E5: $11 $01 $D6
+    ld   de, wRequest                             ; $54E5: $11 $01 $D6
     ld   c, $04                                   ; $54E8: $0E $04
 
 jr_017_54EA:
@@ -2012,7 +2012,7 @@ jr_017_54F6:
 
     ld   hl, Data_017_5494                        ; $54F7: $21 $94 $54
     add  hl, de                                   ; $54FA: $19
-    ld   de, wRequestAltDestinationHigh           ; $54FB: $11 $91 $DC
+    ld   de, wRequestAlt                          ; $54FB: $11 $91 $DC
     ld   c, $03                                   ; $54FE: $0E $03
 
 jr_017_5500:
@@ -3217,7 +3217,7 @@ jr_017_5F4D:
     ld   hl, Data_017_5BED                        ; $5F6B: $21 $ED $5B
     add  hl, de                                   ; $5F6E: $19
     push hl                                       ; $5F6F: $E5
-    ld   de, wRequestDestinationHigh              ; $5F70: $11 $01 $D6
+    ld   de, wRequest                             ; $5F70: $11 $01 $D6
     ld   c, $18                                   ; $5F73: $0E $18
 
 jr_017_5F75:
@@ -3232,7 +3232,7 @@ jr_017_5F75:
     and  a                                        ; $5F7E: $A7
     ret  z                                        ; $5F7F: $C8
 
-    ld   de, wRequestAltDestinationHigh           ; $5F80: $11 $91 $DC
+    ld   de, wRequestAlt                          ; $5F80: $11 $91 $DC
     ld   a, [hl+]                                 ; $5F83: $2A
     ld   [de], a                                  ; $5F84: $12
     inc  de                                       ; $5F85: $13
@@ -3772,7 +3772,7 @@ func_017_63BC::
     and  $07                                      ; $63BE: $E6 $07
     jr   nz, jr_017_63EE                          ; $63C0: $20 $2C
 
-    ld   hl, wRequestDestinationHigh              ; $63C2: $21 $01 $D6
+    ld   hl, wRequest                             ; $63C2: $21 $01 $D6
     ld   a, $9A                                   ; $63C5: $3E $9A
     ld   [hl+], a                                 ; $63C7: $22
     ld   a, $23                                   ; $63C8: $3E $23
@@ -3790,7 +3790,7 @@ func_017_63BC::
     ld   d, $00                                   ; $63DB: $16 $00
     ld   hl, Data_017_637C                        ; $63DD: $21 $7C $63
     add  hl, de                                   ; $63E0: $19
-    ld   de, wRequestLength                       ; $63E1: $11 $03 $D6
+    ld   de, wRequest.length                      ; $63E1: $11 $03 $D6
     ld   c, $10                                   ; $63E4: $0E $10
 
 jr_017_63E6:
@@ -4131,7 +4131,7 @@ func_017_67CA::
     ld   a, [hl+]                                 ; $67DF: $2A
     ld   h, [hl]                                  ; $67E0: $66
     ld   l, a                                     ; $67E1: $6F
-    ld   de, wRequestDestinationHigh              ; $67E2: $11 $01 $D6
+    ld   de, wRequest                             ; $67E2: $11 $01 $D6
     ld   c, $36                                   ; $67E5: $0E $36
 
 jr_017_67E7:
@@ -4153,7 +4153,7 @@ jr_017_67E7:
     ld   a, [hl+]                                 ; $67F8: $2A
     ld   h, [hl]                                  ; $67F9: $66
     ld   l, a                                     ; $67FA: $6F
-    ld   de, wRequestAltDestinationHigh           ; $67FB: $11 $91 $DC
+    ld   de, wRequestAlt                          ; $67FB: $11 $91 $DC
     ld   c, $36                                   ; $67FE: $0E $36
 
 jr_017_6800:
@@ -4989,7 +4989,7 @@ Data_017_6F8E::
 
 label_017_6F9F:
     ld   hl, Data_017_6F6A                        ; $6F9F: $21 $6A $6F
-    ld   de, wRequestDestinationHigh              ; $6FA2: $11 $01 $D6
+    ld   de, wRequest                             ; $6FA2: $11 $01 $D6
     ld   c, $24                                   ; $6FA5: $0E $24
 
 jr_017_6FA7:
@@ -5004,7 +5004,7 @@ jr_017_6FA7:
     ret  z                                        ; $6FB0: $C8
 
     ld   hl, Data_017_6F8E                        ; $6FB1: $21 $8E $6F
-    ld   de, wRequestAltDestinationHigh           ; $6FB4: $11 $91 $DC
+    ld   de, wRequestAlt                          ; $6FB4: $11 $91 $DC
     ld   c, $11                                   ; $6FB7: $0E $11
 
 jr_017_6FB9:
@@ -5120,7 +5120,7 @@ include "data/credits_3.asm"
 
 CreditsTheEnd5Handler::
     ld   hl, Data_017_705D                        ; $70B1: $21 $5D $70
-    ld   de, wRequestDestinationHigh              ; $70B4: $11 $01 $D6
+    ld   de, wRequest                             ; $70B4: $11 $01 $D6
     ld   c, Data_017_705D.end - Data_017_705D     ; $70B7: $0E $43
 
 .loop_017_70B9
@@ -5131,7 +5131,7 @@ CreditsTheEnd5Handler::
     jr   nz, .loop_017_70B9                       ; $70BD: $20 $FA
 
     ld   hl, Data_017_70A0                        ; $70BF: $21 $A0 $70
-    ld   de, wRequestAltDestinationHigh           ; $70C2: $11 $91 $DC
+    ld   de, wRequestAlt                          ; $70C2: $11 $91 $DC
     ld   c, Data_017_70A0.end - Data_017_70A0                                   ; $70C5: $0E $11
 
 .loop_017_70C7

@@ -5466,6 +5466,8 @@ LoadRoomObjectsAttributes::
 
 .copyAttributes
     ; Copy the objects attributes to the room objects attributes in WRAM 2
+    ; (NB: this assumes that wRoomObjectsArea is $10-bytes aligned)
+ASSERT LOW(wRoomObjectsArea) & $0F == 0, "wRoomObjectsArea must be aligned on $10 addresses"
     ld   de, wRoomObjects                         ; $6E3C: $11 $11 $D7
 .loop
     ld   bc, OBJECTS_PER_ROW                      ; $6E3F: $01 $0A $00

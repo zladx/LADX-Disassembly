@@ -5879,6 +5879,8 @@ LoadRoomTilemap:
     ; Increment the object pointer in wRoomObjects
     inc  hl                                       ; $30C7: $23
     ; When the end of a objects line is reached, move to the next one.
+    ; (NB: this assumes that wRoomObjectsArea is $10-bytes aligned)
+ASSERT LOW(wRoomObjectsArea) & $0F == 0, "wRoomObjectsArea must be aligned on $10 addresses"
     ld   a, l                                     ; $30C8: $7D
     and  $0F                                      ; $30C9: $E6 $0F
     cp   OBJECTS_PER_ROW + 1                      ; $30CB: $FE $0B

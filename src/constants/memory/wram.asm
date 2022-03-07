@@ -2629,8 +2629,9 @@ wBGMapToLoad::
 ; When loading a new room, room data is read and decoded into this
 ; area.
 ;
-; NB: this area is also used in RAM bank 2, where it contains
-; the object attributes.
+; Notes on wram hiftability:
+; - This area is also used in RAM bank 2, where it contains the object attributes.
+; - wRoomObjectsArea must be $10-bytes aligned (otherwise various copy loops break)
 ;
 ; First section is FF values padding…
 wRoomObjectsArea::

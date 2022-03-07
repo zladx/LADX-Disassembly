@@ -181,7 +181,7 @@ EntityHandlersTable::
 ._A5 far_pointer SideViewPlatformEntityHandler
 ._A6 far_pointer SideViewWeightsEntityHandler
 ._A7 far_pointer SmashablePillarEntityHandler
-._A8 far_pointer EntityA8Handler ; $A8
+._A8 far_pointer WreckingBallEntityHandler ; $A8
 ._A9 far_pointer BlooperEntityHandler
 ._AA far_pointer CheepCheepHorizontalEntityHandler
 ._AB far_pointer CheepCheepVerticalEntityHandler

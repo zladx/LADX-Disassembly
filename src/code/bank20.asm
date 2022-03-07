@@ -5475,7 +5475,7 @@ LoadRoomObjectsAttributes::
     ld   a, e                                     ; $6E47: $7B
     add  $10                                      ; $6E48: $C6 $10
     ld   e, a                                     ; $6E4A: $5F
-    cp   OBJECTS_PER_COLUMN * $10                 ; $6E4B: $FE $91
+    cp   LOW(wRoomObjects) + OBJECTS_PER_COLUMN * $10 ; $6E4B: $FE $91
     jr   nz, .loop                                ; $6E4D: $20 $F0
 
     ret                                           ; $6E4F: $C9

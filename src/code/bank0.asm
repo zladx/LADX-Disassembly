@@ -552,6 +552,9 @@ CopyObjectsAttributesToWRAM2::
     ret                                           ; $0B2E: $C9
 
 ; On GBC, copy some overworld objects to ram bank 2
+; Inputs:
+;   a  data bank?
+;   hl destination in RAM bank 2
 func_2BF::
     ldh  [hMultiPurpose2], a                      ; $0B2F: $E0 $D9
     ldh  a, [hIsGBC]                              ; $0B31: $F0 $FE
@@ -5873,10 +5876,12 @@ LoadRoomTilemap:
     pop  hl                                       ; $30C5: $E1
     pop  de                                       ; $30C6: $D1
 
+    ; Increment the object pointer in wRoomObjects
     inc  hl                                       ; $30C7: $23
+    ; When the end of a objects line is reached, move to the next one.
     ld   a, l                                     ; $30C8: $7D
     and  $0F                                      ; $30C9: $E6 $0F
-    cp   $0B                                      ; $30CB: $FE $0B
+    cp   OBJECTS_PER_ROW + 1                      ; $30CB: $FE $0B
     jr   nz, .lEnd                                ; $30CD: $20 $06
     ld   a, l                                     ; $30CF: $7D
     and  $F0                                      ; $30D0: $E6 $F0
@@ -5884,12 +5889,14 @@ LoadRoomTilemap:
     ld   l, a                                     ; $30D4: $6F
 .lEnd
 
+    ; Increment the tiles pointer in vBGMap0
     ld   a, e                                     ; $30D5: $7B
     add  a, $02                                   ; $30D6: $C6 $02
     ld   e, a                                     ; $30D8: $5F
+    ; When the end of a tiles line is reached, move to the next one.
     and  $1F                                      ; $30D9: $E6 $1F
-    cp   $14                                      ; $30DB: $FE $14
-    jr   nz, .aEnd                                ; $30DD: $20 $0A
+    cp   (DISPLAY_WIDTH / TILE_WIDTH)             ; $30DB: $FE $14
+    jr   nz, .eEnd                                ; $30DD: $20 $0A
     ld   a, e                                     ; $30DF: $7B
     and  $E0                                      ; $30E0: $E6 $E0
     add  a, $40                                   ; $30E2: $C6 $40
@@ -5897,7 +5904,7 @@ LoadRoomTilemap:
     ld   a, d                                     ; $30E5: $7A
     adc  a, $00                                   ; $30E6: $CE $00
     ld   d, a                                     ; $30E8: $57
-.aEnd
+.eEnd
 
     ; Loop until all objects of the room are copied to the BG
     dec  c                                        ; $30E9: $0D

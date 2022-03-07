@@ -5468,14 +5468,14 @@ LoadRoomObjectsAttributes::
     ; Copy the objects attributes to the room objects attributes in WRAM 2
     ld   de, wRoomObjects                         ; $6E3C: $11 $11 $D7
 .loop
-    ld   bc, $0A                                  ; $6E3F: $01 $0A $00
+    ld   bc, OBJECTS_PER_ROW                      ; $6E3F: $01 $0A $00
     push de                                       ; $6E42: $D5
-    call CopyObjectsAttributesToWRAM2                  ; $6E43: $CD $1A $0B
+    call CopyObjectsAttributesToWRAM2             ; $6E43: $CD $1A $0B
     pop  de                                       ; $6E46: $D1
     ld   a, e                                     ; $6E47: $7B
     add  $10                                      ; $6E48: $C6 $10
     ld   e, a                                     ; $6E4A: $5F
-    cp   $91                                      ; $6E4B: $FE $91
+    cp   OBJECTS_PER_COLUMN * $10                 ; $6E4B: $FE $91
     jr   nz, .loop                                ; $6E4D: $20 $F0
 
     ret                                           ; $6E4F: $C9
@@ -5486,22 +5486,22 @@ func_020_6E50::
     ld   b, $0E                                   ; $6E52: $06 $0E
     ld   hl, Data_020_6E65                        ; $6E54: $21 $65 $6E
 
-jr_020_6E57:
+.loop
     ld   a, [hl+]                                 ; $6E57: $2A
     cp   c                                        ; $6E58: $B9
-    jr   nz, jr_020_6E5F                          ; $6E59: $20 $04
+    jr   nz, .jr_020_6E5F                         ; $6E59: $20 $04
 
     scf                                           ; $6E5B: $37
     ccf                                           ; $6E5C: $3F
-    jr   jr_020_6E63                              ; $6E5D: $18 $04
+    jr   .done                                    ; $6E5D: $18 $04
 
-jr_020_6E5F:
+.jr_020_6E5F
     dec  b                                        ; $6E5F: $05
-    jr   nz, jr_020_6E57                          ; $6E60: $20 $F5
+    jr   nz, .loop                                ; $6E60: $20 $F5
 
     scf                                           ; $6E62: $37
 
-jr_020_6E63:
+.done
     pop  hl                                       ; $6E63: $E1
     ret                                           ; $6E64: $C9
 

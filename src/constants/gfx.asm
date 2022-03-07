@@ -1,4 +1,11 @@
-; constants for graphic constants
+; constants for graphics
+
+; Number of game objects in one BG map row
+OBJECTS_PER_ROW    equ DISPLAY_WIDTH/(TILE_WIDTH*2)
+; Number of game objects in one BG map column
+OBJECTS_PER_COLUMN equ DISPLAY_HEIGHT/(TILE_HEIGHT*2) - 1
+; Number of game objects in a whole room BG map
+OBJECTS_PER_ROOM   equ OBJECTS_PER_ROW * OBJECTS_PER_COLUMN
 
 ; Values for wTilesetToLoad
 TILESET_ROOM_TILEMAP                  equ $01

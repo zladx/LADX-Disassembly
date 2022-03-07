@@ -1909,6 +1909,12 @@ wD228::
 wD229::
   ds 215 ; D220 - D2FF
 
+;
+; Audio section
+;
+
+wAudioSection::
+
 ; Note transpose value applied to all channels. Should be multiple of 2.
 wMusicTranspose::
   ds 1 ; D300
@@ -2536,6 +2542,8 @@ wD5C4::
 ;
 ; There can be several wRequests stacked together in this area.
 ;
+
+wRequestsSection::
 
 ; Size of all cumulated wRequestsSize
 ; When 0, no wRequest is executed on vblank

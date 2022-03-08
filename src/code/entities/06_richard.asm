@@ -18,7 +18,7 @@ RichardEntityHandler::
     ld   [hl], e                                  ; $403A: $73
 
 jr_006_403B:
-    call SetEntitySpriteVariantForDirection                            ; $403B: $CD $41 $64
+    call SetEntitySpriteVariantForDirection       ; $403B: $CD $41 $64
     ld   hl, wEntitiesPrivateState1Table          ; $403E: $21 $B0 $C2
     add  hl, bc                                   ; $4041: $09
     ld   a, [hl]                                  ; $4042: $7E
@@ -72,7 +72,7 @@ jr_006_4083:
     ldh  a, [hRoomStatus]                         ; $4083: $F0 $F8
     or   $10                                      ; $4085: $F6 $10
     ldh  [hRoomStatus], a                         ; $4087: $E0 $F8
-    ld   [wIndoorBRoomStatus + $C7], a                               ; $4089: $EA $C7 $DA
+    ld   [wIndoorBRoomStatus + $C7], a            ; $4089: $EA $C7 $DA
     call_open_dialog $13A                         ; $408C
     ld   a, [wRichardSpokenFlag]                  ; $4091: $FA $55 $DB
     cp   $02                                      ; $4094: $FE $02
@@ -108,7 +108,7 @@ label_006_40C1:
     jp   OpenDialogInTable1                       ; $40C2: $C3 $73 $23
 
 RichardState2Handler::
-    ld   a, [wDialogAskSelectionIndex]                               ; $40C5: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $40C5: $FA $77 $C1
     and  a                                        ; $40C8: $A7
     ld   a, $3B                                   ; $40C9: $3E $3B
     jr   z, jr_006_40CF                           ; $40CB: $28 $02

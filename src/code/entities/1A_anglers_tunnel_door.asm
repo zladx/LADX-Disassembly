@@ -106,7 +106,7 @@ AnglersTunnelDoorEntityHandler::
     ld   e, a                                     ; $7125: $5F
     ld   d, $00                                   ; $7126: $16 $00
     ld   hl, Data_01A_7049                        ; $7128: $21 $49 $70
-    ldh  a, [hMultiPurposeG]                               ; $712B: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $712B: $F0 $E8
     and  $01                                      ; $712D: $E6 $01
     jr   z, .jr_01A_7134                          ; $712F: $28 $03
 
@@ -152,7 +152,7 @@ AnglersTunnelDoorEntityHandler::
     ld   d, b                                     ; $715E: $50
 
     ld   hl, Data_01A_6FE5                        ; $715F: $21 $E5 $6F
-    ldh  a, [hMultiPurposeG]                               ; $7162: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $7162: $F0 $E8
     and  $01                                      ; $7164: $E6 $01
     jr   nz, .dataSourceEnd                       ; $7166: $20 $0B
 

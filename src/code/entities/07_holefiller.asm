@@ -32,7 +32,7 @@ func_007_512F::
     jr   z, jr_007_516E                           ; $5138: $28 $34
 
     ld   a, $01                                   ; $513A: $3E $01
-    ld   [wIsLinkPushing], a                               ; $513C: $EA $44 $C1
+    ld   [wIsLinkPushing], a                      ; $513C: $EA $44 $C1
     ld   hl, wEntitiesInertiaTable                ; $513F: $21 $D0 $C3
     add  hl, bc                                   ; $5142: $09
     ld   a, [hl]                                  ; $5143: $7E
@@ -85,7 +85,7 @@ func_007_517C::
     ld   a, JINGLE_URCHIN_PUSH                    ; $5180: $3E $3E
     ldh  [hJingle], a                             ; $5182: $E0 $F2
     ldh  a, [hJoypadState]                        ; $5184: $F0 $CC
-    and  J_RIGHT | J_LEFT | J_UP | J_DOWN                         ; $5186: $E6 $0F
+    and  J_RIGHT | J_LEFT | J_UP | J_DOWN         ; $5186: $E6 $0F
     ld   d, a                                     ; $5188: $57
     jr   z, jr_007_51AA                           ; $5189: $28 $1F
 
@@ -158,7 +158,7 @@ jr_007_51AA:
     ld   a, $0D                                   ; $51E7: $3E $0D
     ld   [wDDD8], a                               ; $51E9: $EA $D8 $DD
     ld   a, $07                                   ; $51EC: $3E $07
-    call func_91D                                ; $51EE: $CD $1D $09
+    call func_91D                                 ; $51EE: $CD $1D $09
     pop  bc                                       ; $51F1: $C1
 
 jr_007_51F2:
@@ -238,7 +238,7 @@ jr_007_51F2:
     ldh  [hJingle], a                             ; $5269: $E0 $F2
     ld   a, TRANSCIENT_VFX_POOF                   ; $526B: $3E $02
     call AddTranscientVfx                         ; $526D: $CD $C7 $0C
-    ld   hl, wTranscientVfxCountdownTable                                ; $5270: $21 $20 $C5
+    ld   hl, wTranscientVfxCountdownTable         ; $5270: $21 $20 $C5
     add  hl, de                                   ; $5273: $19
     ld   [hl], $0F                                ; $5274: $36 $0F
     call func_007_7EA4                            ; $5276: $CD $A4 $7E

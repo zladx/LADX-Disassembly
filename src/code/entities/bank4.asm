@@ -285,7 +285,7 @@ func_004_7C4B:: ; called only from fishing minigame
     jr   nc, jr_004_7C92                          ; $7C6D: $30 $23
 
     ldh  a, [hLinkPositionY]                      ; $7C6F: $F0 $99
-    ld   hl, hActiveEntityPosY                                ; $7C71: $21 $EF $FF
+    ld   hl, hActiveEntityPosY                    ; $7C71: $21 $EF $FF
     sub  [hl]                                     ; $7C74: $96
     add  $14                                      ; $7C75: $C6 $14
     cp   $28                                      ; $7C77: $FE $28

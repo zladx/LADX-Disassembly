@@ -221,7 +221,7 @@ func_007_47D9::
 
 func_007_47F5::
     call IncrementEntityState                     ; $47F5: $CD $12 $3B
-    ld   a, [wDialogAskSelectionIndex]                               ; $47F8: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $47F8: $FA $77 $C1
     and  a                                        ; $47FB: $A7
     jr   nz, jr_007_4804                          ; $47FC: $20 $06
 
@@ -284,7 +284,7 @@ jr_007_4846:
     ret                                           ; $4853: $C9
 
 jr_007_4854:
-    ld   a, TRADING_ITEM_SCALE & REPLACE_TILES_TRADING_ITEM ; $4854: $3E $0D
+    ld   a, TRADING_ITEM_SCALE & REPLACE_TILES_TRADING_ITEM; $4854: $3E $0D
     ld   [wTradeSequenceItem], a                  ; $4856: $EA $0E $DB
     ldh  [hReplaceTiles], a                       ; $4859: $E0 $A5
     call CreateTradingItemEntity                  ; $485B: $CD $0C $0C
@@ -508,4 +508,4 @@ func_007_49DC::
     ld   hl, Data_007_499C                        ; $49E6: $21 $9C $49
     add  hl, de                                   ; $49E9: $19
     ld   c, $04                                   ; $49EA: $0E $04
-    jp   RenderActiveEntitySpritesRect           ; $49EC: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect            ; $49EC: $C3 $E6 $3C

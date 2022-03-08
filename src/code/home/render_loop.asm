@@ -95,7 +95,7 @@ ENDC
 
     ; Load the requested tileset or BG map
     di                                            ; $022F: $F3
-    call LoadRequestedGfx                              ; $0230: $CD $19 $04
+    call LoadRequestedGfx                         ; $0230: $CD $19 $04
     ei                                            ; $0233: $FB
     ; Play more audio
     call PlayAudioStep                            ; $0234: $CD $A4 $08
@@ -251,9 +251,9 @@ ENDC
 
     ; If NeedsUpdatingBGTiles || NeedsUpdatingEnnemiesTiles || NeedsUpdatingNPCTiles…
     ldh  a, [hNeedsUpdatingBGTiles]               ; $02EF: $F0 $90
-    ld   hl, hNeedsUpdatingEntityTilesA          ; $02F1: $21 $91 $FF
+    ld   hl, hNeedsUpdatingEntityTilesA           ; $02F1: $21 $91 $FF
     or   [hl]                                     ; $02F4: $B6
-    ld   hl, wNeedsUpdatingEntityTilesB               ; $02F5: $21 $0E $C1
+    ld   hl, wNeedsUpdatingEntityTilesB           ; $02F5: $21 $0E $C1
     or   [hl]                                     ; $02F8: $B6
     ; skip further rendering: the vblank interrupt will load the required data
     jr   nz, .waitForNextFrame                    ; $02F9: $20 $64

@@ -195,7 +195,7 @@ func_005_6432::
     ldh  [hMultiPurpose1], a                      ; $6436: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $6438: $3E $02
     call AddTranscientVfx                         ; $643A: $CD $C7 $0C
-    ld   hl, wTranscientVfxCountdownTable                                ; $643D: $21 $20 $C5
+    ld   hl, wTranscientVfxCountdownTable         ; $643D: $21 $20 $C5
     add  hl, de                                   ; $6440: $19
     ld   [hl], $0F                                ; $6441: $36 $0F
 
@@ -438,7 +438,7 @@ func_005_657F::
     ld   a, $02                                   ; $657F: $3E $02
 
 jr_005_6581:
-    ldh  [hMultiPurposeG], a                               ; $6581: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $6581: $E0 $E8
     ld   a, ENTITY_HOT_HEAD                       ; $6583: $3E $62
     call SpawnNewEntity_trampoline                ; $6585: $CD $86 $3B
     jr   c, jr_005_65D3                           ; $6588: $38 $49
@@ -447,7 +447,7 @@ jr_005_6581:
     add  hl, de                                   ; $658D: $19
     ld   [hl], $03                                ; $658E: $36 $03
     push bc                                       ; $6590: $C5
-    ldh  a, [hMultiPurposeG]                               ; $6591: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $6591: $F0 $E8
     ld   c, a                                     ; $6593: $4F
     ld   hl, Data_005_657A                        ; $6594: $21 $7A $65
     add  hl, bc                                   ; $6597: $09
@@ -466,7 +466,7 @@ jr_005_6581:
     ld   [hl], a                                  ; $65AD: $77
     ld   hl, wEntitiesSpriteVariantTable          ; $65AE: $21 $B0 $C3
     add  hl, de                                   ; $65B1: $19
-    ldh  a, [hMultiPurposeG]                               ; $65B2: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $65B2: $F0 $E8
     dec  a                                        ; $65B4: $3D
     ld   [hl], a                                  ; $65B5: $77
     ld   hl, Data_005_657C                        ; $65B6: $21 $7C $65
@@ -487,7 +487,7 @@ jr_005_6581:
     ld   [hl], $42                                ; $65D1: $36 $42
 
 jr_005_65D3:
-    ldh  a, [hMultiPurposeG]                               ; $65D3: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $65D3: $F0 $E8
     dec  a                                        ; $65D5: $3D
     jr   nz, jr_005_6581                          ; $65D6: $20 $A9
 
@@ -533,7 +533,7 @@ func_005_6611::
     ld   a, $04                                   ; $6611: $3E $04
 
 jr_005_6613:
-    ldh  [hMultiPurposeG], a                               ; $6613: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $6613: $E0 $E8
     ld   a, ENTITY_HOT_HEAD                       ; $6615: $3E $62
     call SpawnNewEntity_trampoline                ; $6617: $CD $86 $3B
     jr   c, jr_005_665F                           ; $661A: $38 $43
@@ -542,7 +542,7 @@ jr_005_6613:
     add  hl, de                                   ; $661F: $19
     ld   [hl], $02                                ; $6620: $36 $02
     push bc                                       ; $6622: $C5
-    ldh  a, [hMultiPurposeG]                               ; $6623: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $6623: $F0 $E8
     ld   c, a                                     ; $6625: $4F
     ld   hl, Data_005_6601 - 1                    ; $6626: $21 $00 $66
     add  hl, bc                                   ; $6629: $09
@@ -579,7 +579,7 @@ jr_005_6613:
     ld   [hl], $42                                ; $665D: $36 $42
 
 jr_005_665F:
-    ldh  a, [hMultiPurposeG]                               ; $665F: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $665F: $F0 $E8
     dec  a                                        ; $6661: $3D
     jr   nz, jr_005_6613                          ; $6662: $20 $AF
 

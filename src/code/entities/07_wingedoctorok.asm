@@ -38,7 +38,7 @@ jr_007_566F:
     add  hl, bc                                   ; $5680: $09
     ld   a, [hl]                                  ; $5681: $7E
     and  $80                                      ; $5682: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $5684: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $5684: $E0 $E8
     jr   z, jr_007_5693                           ; $5686: $28 $0B
 
     ld   [hl], b                                  ; $5688: $70
@@ -213,7 +213,7 @@ label_007_577A:
     add  hl, bc                                   ; $578B: $09
     ld   [hl], e                                  ; $578C: $73
     call func_007_7D1A                            ; $578D: $CD $1A $7D
-    ldh  a, [hMultiPurposeG]                               ; $5790: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5790: $F0 $E8
     and  a                                        ; $5792: $A7
     jr   z, jr_007_579F                           ; $5793: $28 $0A
 
@@ -299,4 +299,4 @@ func_007_5805::
     ld   hl, Data_007_57F5                        ; $5811: $21 $F5 $57
     add  hl, de                                   ; $5814: $19
     ld   c, $02                                   ; $5815: $0E $02
-    jp   RenderActiveEntitySpritesRect           ; $5817: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect            ; $5817: $C3 $E6 $3C

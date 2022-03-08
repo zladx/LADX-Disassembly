@@ -62,7 +62,7 @@ SelectMusicTrackAfterTransition::
     ldh  [hNextMusicTrackToFadeInto], a           ; $4164: $E0 $B1
 
     ; If wIsIndoor == 0, skip further code and load the soundtrack
-    ld   a, [wIsIndoor]                         ; $4166: $FA $A5 $DB
+    ld   a, [wIsIndoor]                           ; $4166: $FA $A5 $DB
     and  a                                        ; $4169: $A7
     jr   z, .clearEventFlagsAndLoadSoundtrack     ; $416A: $28 $36
 
@@ -74,7 +74,7 @@ SelectMusicTrackAfterTransition::
 
     ; Set a depending on the world map
     ldh  a, [hMapId]                              ; $4174: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                              ; $4176: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $4176: $FE $FF
     jr   nz, .mapNotFF                            ; $4178: $20 $04
 
     ld   a, $09                                   ; $417A: $3E $09

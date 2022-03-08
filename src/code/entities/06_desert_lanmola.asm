@@ -166,13 +166,13 @@ label_006_56C8:
     ld   a, $02                                   ; $56D7: $3E $02
 
 jr_006_56D9:
-    ldh  [hMultiPurposeG], a                               ; $56D9: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $56D9: $E0 $E8
     ld   a, ENTITY_DESERT_LANMOLA                 ; $56DB: $3E $87
     call SpawnNewEntity_trampoline                ; $56DD: $CD $86 $3B
     jr   c, jr_006_5726                           ; $56E0: $38 $44
 
     push bc                                       ; $56E2: $C5
-    ldh  a, [hMultiPurposeG]                               ; $56E3: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $56E3: $F0 $E8
     ld   c, a                                     ; $56E5: $4F
     ld   hl, wEntitiesSpriteVariantTable          ; $56E6: $21 $B0 $C3
     add  hl, de                                   ; $56E9: $19
@@ -206,7 +206,7 @@ jr_006_56D9:
     add  hl, de                                   ; $571D: $19
     ld   [hl], $C1                                ; $571E: $36 $C1
     pop  bc                                       ; $5720: $C1
-    ldh  a, [hMultiPurposeG]                               ; $5721: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5721: $F0 $E8
     dec  a                                        ; $5723: $3D
     jr   nz, jr_006_56D9                          ; $5724: $20 $B3
 
@@ -503,7 +503,7 @@ jr_006_58ED:
     ld   a, $05                                   ; $58F1: $3E $05
 
 jr_006_58F3:
-    ldh  [hMultiPurposeG], a                               ; $58F3: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $58F3: $E0 $E8
     ld   e, a                                     ; $58F5: $5F
     ld   d, b                                     ; $58F6: $50
     ld   hl, Data_006_58C3                        ; $58F7: $21 $C3 $58
@@ -529,7 +529,7 @@ jr_006_58F3:
     and  $80                                      ; $5919: $E6 $80
     jr   nz, jr_006_5936                          ; $591B: $20 $19
 
-    ldh  a, [hMultiPurposeG]                               ; $591D: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $591D: $F0 $E8
     cp   $05                                      ; $591F: $FE $05
     ld   a, $04                                   ; $5921: $3E $04
     jr   nz, jr_006_592E                          ; $5923: $20 $09
@@ -556,7 +556,7 @@ jr_006_5936:
 
 jr_006_5940:
     ld   hl, hIndexOfObjectBelowLink              ; $5940: $21 $E9 $FF
-    ldh  a, [hMultiPurposeG]                               ; $5943: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5943: $F0 $E8
     add  e                                        ; $5945: $83
     cp   [hl]                                     ; $5946: $BE
     jr   nz, jr_006_58F3                          ; $5947: $20 $AA

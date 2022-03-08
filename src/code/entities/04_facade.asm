@@ -517,7 +517,7 @@ func_004_542F::
     ld   hl, Data_004_538F                        ; $543D: $21 $8F $53
     add  hl, de                                   ; $5440: $19
     ld   c, $08                                   ; $5441: $0E $08
-    jp   RenderActiveEntitySpritesRect           ; $5443: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect            ; $5443: $C3 $E6 $3C
 
 Data_004_5446::
     db   $68, $06, $68, $26, $6A, $06, $6A, $26, $6C, $06, $6C, $26, $6E, $06, $6E, $26
@@ -842,7 +842,7 @@ jr_004_5628:
     ldh  a, [hMultiPurpose0]                      ; $5654: $F0 $D7
     ld   [wDDD8], a                               ; $5656: $EA $D8 $DD
     ld   a, $04                                   ; $5659: $3E $04
-    call func_91D                                ; $565B: $CD $1D $09
+    call func_91D                                 ; $565B: $CD $1D $09
     pop  bc                                       ; $565E: $C1
 
 jr_004_565F:

@@ -58,7 +58,7 @@ func_007_639E::
     add  hl, bc                                   ; $63AE: $09
     ld   a, [hl]                                  ; $63AF: $7E
     sub  e                                        ; $63B0: $93
-    ldh  [hMultiPurposeG], a                               ; $63B1: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $63B1: $E0 $E8
     call label_3B23                               ; $63B3: $CD $23 $3B
     call CheckLinkCollisionWithEnemy_trampoline   ; $63B6: $CD $5A $3B
     jr   nc, jr_007_63F6                          ; $63B9: $30 $3B
@@ -79,7 +79,7 @@ func_007_639E::
     ldh  [hLinkPositionY], a                      ; $63D1: $E0 $99
     ldh  a, [hLinkSpeedX]                         ; $63D3: $F0 $9A
     push af                                       ; $63D5: $F5
-    ldh  a, [hMultiPurposeG]                               ; $63D6: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $63D6: $F0 $E8
     ldh  [hLinkSpeedX], a                         ; $63D8: $E0 $9A
     ld   hl, hLinkPositionX                       ; $63DA: $21 $98 $FF
     add  [hl]                                     ; $63DD: $86

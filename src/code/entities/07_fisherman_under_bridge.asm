@@ -366,7 +366,7 @@ func_007_44B0::
     jr   nc, func_007_44DC                        ; $44B3: $30 $27
 
     ldh  a, [hLinkAnimationState]                 ; $44B5: $F0 $9D
-    cp   LINK_ANIMATION_STATE_STANDING_SIDE_SCROLL_LEFT_DOWN          ; $44B7: $FE $58
+    cp   LINK_ANIMATION_STATE_STANDING_SIDE_SCROLL_LEFT_DOWN; $44B7: $FE $58
     jr   c, jr_007_44BF                           ; $44B9: $38 $04
 
     cp   $5E                                      ; $44BB: $FE $5E
@@ -403,7 +403,7 @@ jr_007_44E4:
 
 func_007_44E8::
     call IncrementEntityState                     ; $44E8: $CD $12 $3B
-    ld   a, [wDialogAskSelectionIndex]                               ; $44EB: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $44EB: $FA $77 $C1
     and  a                                        ; $44EE: $A7
     jr   nz, jr_007_4503                          ; $44EF: $20 $12
 
@@ -514,7 +514,7 @@ func_007_4594::
     ld   hl, Data_007_4234                        ; $459E: $21 $34 $42
     add  hl, de                                   ; $45A1: $19
     ld   c, $04                                   ; $45A2: $0E $04
-    jp   RenderActiveEntitySpritesRect           ; $45A4: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect            ; $45A4: $C3 $E6 $3C
 
 ; Unused data
 ; (Maybe was intended to be the Fisherman bobbing positions)
@@ -619,4 +619,4 @@ Data_007_4667::
 func_007_467B::
     ld   hl, Data_007_4667                        ; $467B: $21 $67 $46
     ld   c, $05                                   ; $467E: $0E $05
-    jp   RenderActiveEntitySpritesRect           ; $4680: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect            ; $4680: $C3 $E6 $3C

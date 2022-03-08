@@ -94,13 +94,13 @@ OpenDialog::
 
     ; Initialize dialog variables
     xor  a                                        ; $238E: $AF
-    ld   [wDialogOpenCloseAnimationFrame], a                               ; $238F: $EA $6F $C1
+    ld   [wDialogOpenCloseAnimationFrame], a      ; $238F: $EA $6F $C1
     ld   [wDialogCharacterIndex], a               ; $2392: $EA $70 $C1
     ld   [wDialogCharacterIndexHi], a             ; $2395: $EA $64 $C1
-    ld   [wNameIndex], a                               ; $2398: $EA $08 $C1
+    ld   [wNameIndex], a                          ; $2398: $EA $08 $C1
     ld   [wDialogIndexHi], a                      ; $239B: $EA $12 $C1
     ld   a, $0F                                   ; $239E: $3E $0F
-    ld   [wDialogSFX], a                               ; $23A0: $EA $AB $C5
+    ld   [wDialogSFX], a                          ; $23A0: $EA $AB $C5
     ; Determine if the dialog is displayed on top or bottom
     ; wDialogState = hLinkPositionY < $48 ? $81 : $01
     ldh  a, [hLinkPositionY]                      ; $23A3: $F0 $99
@@ -127,7 +127,7 @@ DialogClosingEndHandler::
     cp   a, GAMEPLAY_WORLD                        ; $23C1: $FE $0B
     ret  nz                                       ; $23C3: $C0
 
-    ld   a, [wBGPaletteEffectAddress]                               ; $23C4: $FA $CC $C3
+    ld   a, [wBGPaletteEffectAddress]             ; $23C4: $FA $CC $C3
     cp   a, $08                                   ; $23C7: $FE $08
     ret  c                                        ; $23C9: $D8
 
@@ -288,7 +288,7 @@ DialogFinishedHandler::
 UpdateDialogState::
     ; Clear wDialogOpenCloseAnimationFrame
     xor  a                                        ; $2496: $AF
-    ld   [wDialogOpenCloseAnimationFrame], a                               ; $2497: $EA $6F $C1
+    ld   [wDialogOpenCloseAnimationFrame], a      ; $2497: $EA $6F $C1
 
 .if
     ; If GameplayType == PHOTO_ALBUM
@@ -658,7 +658,7 @@ DialogBreakHandler::
     jr   nz, .jp_26E1                             ; $269A: $20 $45
     ld   a, [wC3C3]                               ; $269C: $FA $C3 $C3
     cp   $FF                                      ; $269F: $FE $FF
-    jp   z, DialogDrawNextCharacterHandler.label_25AD ; $26A1: $CA $AD $25
+    jp   z, DialogDrawNextCharacterHandler.label_25AD; $26A1: $CA $AD $25
     cp   $FE                                      ; $26A4: $FE $FE
     jp   z, DialogDrawNextCharacterHandler.choice ; $26A6: $CA $95 $25
     ; wC1CC = 01 when an unfinished textbox is waiting for a button press to continue.

@@ -144,7 +144,7 @@ jr_007_625F:
     ld   a, $4D                                   ; $6297: $3E $4D
     ld   [wDDD8], a                               ; $6299: $EA $D8 $DD
     ld   a, $07                                   ; $629C: $3E $07
-    call func_91D                                ; $629E: $CD $1D $09
+    call func_91D                                 ; $629E: $CD $1D $09
     pop  bc                                       ; $62A1: $C1
 
 jr_007_62A2:
@@ -194,7 +194,7 @@ jr_007_62D2:
     ld   a, $04                                   ; $62E1: $3E $04
     ld   [wDDD8], a                               ; $62E3: $EA $D8 $DD
     ld   a, $07                                   ; $62E6: $3E $07
-    call func_91D                                ; $62E8: $CD $1D $09
+    call func_91D                                 ; $62E8: $CD $1D $09
     pop  bc                                       ; $62EB: $C1
 
 jr_007_62EC:

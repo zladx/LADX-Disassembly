@@ -22,7 +22,7 @@ MarinAtTalTalHeightsEntityHandler::
     jp   nz, TarinAtTalTalHeights                 ; $5EF3: $C2 $F5 $60
 
     ld   a, c                                     ; $5EF6: $79
-    ld   [wMarinEntityIndex], a                               ; $5EF7: $EA $0F $C5
+    ld   [wMarinEntityIndex], a                   ; $5EF7: $EA $0F $C5
     ld   de, Data_018_5EB7                        ; $5EFA: $11 $B7 $5E
     call RenderActiveEntitySpritesPair            ; $5EFD: $CD $C0 $3B
     call func_018_7D60                            ; $5F00: $CD $60 $7D
@@ -35,7 +35,7 @@ MarinAtTalTalHeightsEntityHandler::
     add  hl, bc                                   ; $5F0F: $09
     ld   a, [hl]                                  ; $5F10: $7E
     and  a                                        ; $5F11: $A7
-    ldh  [hMultiPurposeG], a                               ; $5F12: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $5F12: $E0 $E8
     jr   z, jr_018_5F1A                           ; $5F14: $28 $04
 
     and  $80                                      ; $5F16: $E6 $80
@@ -85,7 +85,7 @@ MarinAtTalTalHeightsState0Handler::
     jp   IncrementEntityState                     ; $5F5B: $C3 $12 $3B
 
 func_018_5F5E::
-    ldh  a, [hMultiPurposeG]                               ; $5F5E: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5F5E: $F0 $E8
     and  a                                        ; $5F60: $A7
     jr   z, jr_018_5F66                           ; $5F61: $28 $03
 
@@ -293,7 +293,7 @@ jr_018_60A3:
 IF __PATCH_0__
     ld   [wDB74], a
 ENDC
-    ld   hl, wOverworldRoomStatus + $08                                ; $60BC: $21 $08 $D8
+    ld   hl, wOverworldRoomStatus + $08           ; $60BC: $21 $08 $D8
     set  4, [hl]                                  ; $60BF: $CB $E6
     ld   a, [hl]                                  ; $60C1: $7E
     ldh  [hRoomStatus], a                         ; $60C2: $E0 $F8
@@ -339,7 +339,7 @@ TarinAtTalTalHeightsState0Handler::
     call_open_dialog $23B                         ; $611D
     ld   a, $03                                   ; $6122: $3E $03
     ldh  [hLinkDirection], a                      ; $6124: $E0 $9E
-    ld   a, [wMarinEntityIndex]                               ; $6126: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                   ; $6126: $FA $0F $C5
     ld   e, a                                     ; $6129: $5F
     ld   d, b                                     ; $612A: $50
     ld   hl, wEntitiesDirectionTable              ; $612B: $21 $80 $C3
@@ -376,7 +376,7 @@ TarinAtTalTalHeightsState2Handler::
 
 jr_018_6163:
     call ReturnIfNonInteractive_18                ; $6163: $CD $E8 $7D
-    ld   a, [wMarinEntityIndex]                               ; $6166: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                   ; $6166: $FA $0F $C5
     ld   e, a                                     ; $6169: $5F
     ld   d, b                                     ; $616A: $50
     ld   hl, wEntitiesStateTable                  ; $616B: $21 $90 $C2

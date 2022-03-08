@@ -237,7 +237,7 @@ Data_004_78A5::
     db   $00, $00, $00, $01, $01, $02, $02, $03, $03, $03
 
 func_004_78AF::
-    ld   a, [wItemPickedUpInShop]                               ; $78AF: $FA $09 $C5
+    ld   a, [wItemPickedUpInShop]                 ; $78AF: $FA $09 $C5
     and  a                                        ; $78B2: $A7
     jr   z, jr_004_78D4                           ; $78B3: $28 $1F
 
@@ -272,7 +272,7 @@ jr_004_78D4:
     and  J_A | J_B                                ; $78E2: $E6 $30
     jr   z, jr_004_7940                           ; $78E4: $28 $5A
 
-    ld   a, [wItemPickedUpInShop]                               ; $78E6: $FA $09 $C5
+    ld   a, [wItemPickedUpInShop]                 ; $78E6: $FA $09 $C5
     and  a                                        ; $78E9: $A7
     jr   z, jr_004_7907                           ; $78EA: $28 $1B
 
@@ -320,7 +320,7 @@ ENDC
     ld   hl, wC505                                ; $791B: $21 $05 $C5
     add  hl, de                                   ; $791E: $19
     ld   a, [hl]                                  ; $791F: $7E
-    ld   [wItemPickedUpInShop], a                               ; $7920: $EA $09 $C5
+    ld   [wItemPickedUpInShop], a                 ; $7920: $EA $09 $C5
     ld   [hl], b                                  ; $7923: $70
     and  a                                        ; $7924: $A7
     jr   z, jr_004_792B                           ; $7925: $28 $04
@@ -351,7 +351,7 @@ jr_004_7940:
     call func_004_7C06                            ; $7940: $CD $06 $7C
     ret  nc                                       ; $7943: $D0
 
-    ld   a, [wItemPickedUpInShop]                               ; $7944: $FA $09 $C5
+    ld   a, [wItemPickedUpInShop]                 ; $7944: $FA $09 $C5
     and  a                                        ; $7947: $A7
     jr   z, jr_004_7958                           ; $7948: $28 $0E
 
@@ -372,7 +372,7 @@ func_004_795D::
     and  a                                        ; $7960: $A7
     ret  nz                                       ; $7961: $C0
 
-    ld   a, [wDialogAskSelectionIndex]                               ; $7962: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $7962: $FA $77 $C1
     cp   $00                                      ; $7965: $FE $00
     jr   z, jr_004_79AB                           ; $7967: $28 $42
 
@@ -385,12 +385,12 @@ label_004_796D:
     ld   d, b                                     ; $7971: $50
     ld   hl, wC505                                ; $7972: $21 $05 $C5
     add  hl, de                                   ; $7975: $19
-    ld   a, [wItemPickedUpInShop]                               ; $7976: $FA $09 $C5
+    ld   a, [wItemPickedUpInShop]                 ; $7976: $FA $09 $C5
     ld   [hl], a                                  ; $7979: $77
     ld   de, wRequest                             ; $797A: $11 $01 $D6
     call func_004_798B                            ; $797D: $CD $8B $79
     xor  a                                        ; $7980: $AF
-    ld   [wItemPickedUpInShop], a                               ; $7981: $EA $09 $C5
+    ld   [wItemPickedUpInShop], a                 ; $7981: $EA $09 $C5
 
 jr_004_7984:
     ld   hl, wEntitiesStateTable                  ; $7984: $21 $90 $C2
@@ -429,7 +429,7 @@ jr_004_79A1:
     ret                                           ; $79AA: $C9
 
 jr_004_79AB:
-    ld   a, [wItemPickedUpInShop]                               ; $79AB: $FA $09 $C5
+    ld   a, [wItemPickedUpInShop]                 ; $79AB: $FA $09 $C5
     ld   e, a                                     ; $79AE: $5F
     cp   $02                                      ; $79AF: $FE $02
     jr   nz, jr_004_79BB                          ; $79B1: $20 $08
@@ -535,7 +535,7 @@ jr_004_7A24:
     ret                                           ; $7A2D: $C9
 
 jr_004_7A2E:
-    ld   hl, wItemPickedUpInShop                                ; $7A2E: $21 $09 $C5
+    ld   hl, wItemPickedUpInShop                  ; $7A2E: $21 $09 $C5
     ld   a, [hl]                                  ; $7A31: $7E
     push af                                       ; $7A32: $F5
     ld   [hl], $00                                ; $7A33: $36 $00
@@ -791,14 +791,14 @@ jr_004_7BAC:
     jp   CopyEntityPositionToActivePosition       ; $7BB4: $C3 $8A $3D
 
 func_004_7BB7::
-    ld   a, [wItemPickedUpInShop]                               ; $7BB7: $FA $09 $C5
+    ld   a, [wItemPickedUpInShop]                 ; $7BB7: $FA $09 $C5
     and  a                                        ; $7BBA: $A7
     ret  z                                        ; $7BBB: $C8
 
     dec  a                                        ; $7BBC: $3D
     ldh  [hActiveEntitySpriteVariant], a          ; $7BBD: $E0 $F1
     ld   a, $01                                   ; $7BBF: $3E $01
-    ld   [wIsCarryingLiftedObject], a                               ; $7BC1: $EA $5C $C1
+    ld   [wIsCarryingLiftedObject], a             ; $7BC1: $EA $5C $C1
     call ResetSpinAttack                          ; $7BC4: $CD $AF $0C
     ldh  a, [hLinkPositionX]                      ; $7BC7: $F0 $98
     ldh  [hActiveEntityPosX], a                   ; $7BC9: $E0 $EE
@@ -810,7 +810,7 @@ func_004_7BB7::
     jr   nz, jr_004_7BDD                          ; $7BD5: $20 $06
 
     ld   de, Data_004_7B58                        ; $7BD7: $11 $58 $7B
-    jp   RenderActiveEntitySpritesPair                ; $7BDA: $C3 $C0 $3B
+    jp   RenderActiveEntitySpritesPair            ; $7BDA: $C3 $C0 $3B
 
 jr_004_7BDD:
     ld   de, Data_004_7B5A                        ; $7BDD: $11 $5A $7B
@@ -828,13 +828,13 @@ func_004_7BE3::
 
     ld   e, a                                     ; $7BF4: $5F
     ld   d, b                                     ; $7BF5: $50
-    ld   hl, wEntitiesPrivateState5Table+15                                ; $7BF6: $21 $9F $C3
+    ld   hl, wEntitiesPrivateState5Table+15       ; $7BF6: $21 $9F $C3
     add  hl, de                                   ; $7BF9: $19
     ld   a, [hl]                                  ; $7BFA: $7E
     cp   $03                                      ; $7BFB: $FE $03
     jr   nz, jr_004_7C05                          ; $7BFD: $20 $06
 
-    ld   hl, wEntitiesStatusTable+15                                ; $7BFF: $21 $8F $C2
+    ld   hl, wEntitiesStatusTable+15              ; $7BFF: $21 $8F $C2
     add  hl, de                                   ; $7C02: $19
     ld   [hl], $00                                ; $7C03: $36 $00
 
@@ -850,7 +850,7 @@ func_004_7C06::
     jr   nc, jr_004_7C49                          ; $7C10: $30 $37
 
     ldh  a, [hLinkPositionY]                      ; $7C12: $F0 $99
-    ld   hl, hActiveEntityPosY                                ; $7C14: $21 $EF $FF
+    ld   hl, hActiveEntityPosY                    ; $7C14: $21 $EF $FF
     sub  [hl]                                     ; $7C17: $96
     add  $10                                      ; $7C18: $C6 $10
     cp   $20                                      ; $7C1A: $FE $20

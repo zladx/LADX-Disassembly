@@ -196,7 +196,7 @@ func_004_6AC7::
     ld   a, [hl]                                  ; $6AE7: $7E
     jr   nz, jr_004_6AF0                          ; $6AE8: $20 $06
 
-    ld   hl, hMultiPurpose0                            ; $6AEA: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $6AEA: $21 $D7 $FF
     inc  [hl]                                     ; $6AED: $34
     cpl                                           ; $6AEE: $2F
     inc  a                                        ; $6AEF: $3C
@@ -227,7 +227,7 @@ jr_004_6B0B:
     ld   a, [hl]                                  ; $6B0D: $7E
     jr   nz, jr_004_6B16                          ; $6B0E: $20 $06
 
-    ld   hl, hMultiPurpose0                            ; $6B10: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $6B10: $21 $D7 $FF
     inc  [hl]                                     ; $6B13: $34
     cpl                                           ; $6B14: $2F
     inc  a                                        ; $6B15: $3C
@@ -330,12 +330,12 @@ jr_004_6B7C:
 jr_004_6BAD:
     ldh  [hMultiPurpose4], a                      ; $6BAD: $E0 $DB
     ldh  a, [hActiveEntityVisualPosY]             ; $6BAF: $F0 $EC
-    ld   hl, hMultiPurpose1                            ; $6BB1: $21 $D8 $FF
+    ld   hl, hMultiPurpose1                       ; $6BB1: $21 $D8 $FF
     add  [hl]                                     ; $6BB4: $86
     ld   [de], a                                  ; $6BB5: $12
     inc  de                                       ; $6BB6: $13
     ldh  a, [hActiveEntityPosX]                   ; $6BB7: $F0 $EE
-    ld   hl, hMultiPurpose0                            ; $6BB9: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $6BB9: $21 $D7 $FF
     add  [hl]                                     ; $6BBC: $86
     ld   [de], a                                  ; $6BBD: $12
     inc  de                                       ; $6BBE: $13
@@ -346,11 +346,11 @@ jr_004_6BAD:
     ld   [de], a                                  ; $6BC5: $12
     inc  de                                       ; $6BC6: $13
     ldh  a, [hMultiPurpose0]                      ; $6BC7: $F0 $D7
-    ld   hl, hMultiPurpose2                            ; $6BC9: $21 $D9 $FF
+    ld   hl, hMultiPurpose2                       ; $6BC9: $21 $D9 $FF
     add  [hl]                                     ; $6BCC: $86
     ldh  [hMultiPurpose0], a                      ; $6BCD: $E0 $D7
     ldh  a, [hMultiPurpose1]                      ; $6BCF: $F0 $D8
-    ld   hl, hMultiPurpose3                            ; $6BD1: $21 $DA $FF
+    ld   hl, hMultiPurpose3                       ; $6BD1: $21 $DA $FF
     add  [hl]                                     ; $6BD4: $86
     ldh  [hMultiPurpose1], a                      ; $6BD5: $E0 $D8
     ldh  a, [hMultiPurpose4]                      ; $6BD7: $F0 $DB

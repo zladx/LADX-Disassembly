@@ -550,10 +550,10 @@ EntityInitHandlersTable::
 ; Returns:
 ;   de   an address
 GetEntityInitHandler::
-    ldh  a, [hActiveEntityType]                     ; $4518: $F0 $EB
+    ldh  a, [hActiveEntityType]                   ; $4518: $F0 $EB
     ld   e, a                                     ; $451A: $5F
     ld   d, $00                                   ; $451B: $16 $00
-    ld   hl, EntityInitHandlersTable                        ; $451D: $21 $22 $43
+    ld   hl, EntityInitHandlersTable              ; $451D: $21 $22 $43
     sla  e                                        ; $4520: $CB $23
     rl   d                                        ; $4522: $CB $12
     add  hl, de                                   ; $4524: $19

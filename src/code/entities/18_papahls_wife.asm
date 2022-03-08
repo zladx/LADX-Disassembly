@@ -73,7 +73,7 @@ PapahlsWifeState1Handler::
     and  a                                        ; $4EAB: $A7
     jr   nz, jr_018_4ECE                          ; $4EAC: $20 $20
 
-    ld   a, [wDialogAskSelectionIndex]                               ; $4EAE: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $4EAE: $FA $77 $C1
     and  a                                        ; $4EB1: $A7
     jr   nz, jr_018_4EC5                          ; $4EB2: $20 $11
 

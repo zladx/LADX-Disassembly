@@ -14,14 +14,14 @@ ClearLowerWRAM::
 
 ; Clear lower values of HRAM (from hGameValuesSection to hNextDefaultMusicTrack) and all WRAM
 ClearWRAMAndLowerHRAM::
-    ld   bc, hNextDefaultMusicTrack - hGameValuesSection ; $29CB: $01 $2F $00
+    ld   bc, hNextDefaultMusicTrack - hGameValuesSection; $29CB: $01 $2F $00
     jr   ClearHRAMBytesAndWRAM                    ; $29CE: $18 $03
 
 ; Clear all values from HRAM and WRAM
 ; (only `hIsGBC` is kept)
 ClearHRAMAndWRAM::
     ; Set all bytes of HRAM (from hGameValuesSection to hIsRenderingFrame) to zero
-    ld   bc, hIsRenderingFrame - hGameValuesSection ; $29D0: $01 $6D $00
+    ld   bc, hIsRenderingFrame - hGameValuesSection; $29D0: $01 $6D $00
 
 ClearHRAMBytesAndWRAM::
     ; Set BC bytes of HRAM (starting from $FF90) to zero

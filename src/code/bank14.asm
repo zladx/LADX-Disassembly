@@ -754,7 +754,7 @@ UpdateEntityTimers::
     and  $03                                      ; $4DCE: $E6 $03
     jr   nz, .dropTimerEnd                        ; $4DD0: $20 $0
 
-    ld   hl, wEntitiesDropTimerTable                                ; $4DD2: $21 $50 $C4
+    ld   hl, wEntitiesDropTimerTable              ; $4DD2: $21 $50 $C4
     add  hl, bc                                   ; $4DD5: $09
     ld   a, [hl]                                  ; $4DD6: $7E
     and  a                                        ; $4DD7: $A7
@@ -1014,7 +1014,7 @@ jr_014_509B:
     ldh  a, [hMultiPurpose0]                      ; $509B: $F0 $D7
     add  [hl]                                     ; $509D: $86
     and  $1F                                      ; $509E: $E6 $1F
-    ld   hl, hMultiPurpose1                            ; $50A0: $21 $D8 $FF
+    ld   hl, hMultiPurpose1                       ; $50A0: $21 $D8 $FF
     or   [hl]                                     ; $50A3: $B6
     ld   e, a                                     ; $50A4: $5F
     ld   hl, Data_014_4EE8                        ; $50A5: $21 $E8 $4E
@@ -1046,7 +1046,7 @@ func_014_50C3::
     ; For each entity:
 .loop
     ; If the entity is active…
-    ld   hl, wEntitiesStatusTable                         ; $50C7: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                 ; $50C7: $21 $80 $C2
     add  hl, de                                   ; $50CA: $19
     ld   a, [hl]                                  ; $50CB: $7E
     cp   ENTITY_STATUS_ACTIVE                     ; $50CC: $FE $05

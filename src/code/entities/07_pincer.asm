@@ -284,11 +284,11 @@ jr_007_549C:
     ld   [de], a                                  ; $54A6: $12
     inc  de                                       ; $54A7: $13
     ldh  a, [hMultiPurpose0]                      ; $54A8: $F0 $D7
-    ld   hl, hMultiPurpose2                            ; $54AA: $21 $D9 $FF
+    ld   hl, hMultiPurpose2                       ; $54AA: $21 $D9 $FF
     add  [hl]                                     ; $54AD: $86
     ldh  [hMultiPurpose0], a                      ; $54AE: $E0 $D7
     ldh  a, [hMultiPurpose1]                      ; $54B0: $F0 $D8
-    ld   hl, hMultiPurpose3                            ; $54B2: $21 $DA $FF
+    ld   hl, hMultiPurpose3                       ; $54B2: $21 $DA $FF
     add  [hl]                                     ; $54B5: $86
     ldh  [hMultiPurpose1], a                      ; $54B6: $E0 $D8
     ldh  a, [hMultiPurpose4]                      ; $54B8: $F0 $DB

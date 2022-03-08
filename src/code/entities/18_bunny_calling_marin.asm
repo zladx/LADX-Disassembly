@@ -22,7 +22,7 @@ BunnyCallingMarinEntityHandler::
     add  hl, bc                                   ; $52C9: $09
     ld   a, [hl]                                  ; $52CA: $7E
     and  $80                                      ; $52CB: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $52CD: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $52CD: $E0 $E8
     jr   z, jr_018_52D7                           ; $52CF: $28 $06
 
     ld   [hl], b                                  ; $52D1: $70
@@ -77,7 +77,7 @@ BunnyCallingMarinState1Handler::
     call IncrementEntityState                     ; $531E: $CD $12 $3B
 
 func_018_5321::
-    ldh  a, [hMultiPurposeG]                               ; $5321: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5321: $F0 $E8
     and  a                                        ; $5323: $A7
     jr   z, jr_018_5337                           ; $5324: $28 $11
 
@@ -160,7 +160,7 @@ jr_018_5375:
     call AddEntitySpeedToPos_18                   ; $5394: $CD $6C $7E
 
 jr_018_5397:
-    ld   a, [wMarinEntityIndex]                               ; $5397: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                   ; $5397: $FA $0F $C5
     ld   e, a                                     ; $539A: $5F
     ld   d, b                                     ; $539B: $50
     ld   hl, wEntitiesSpeedXTable                 ; $539C: $21 $40 $C2

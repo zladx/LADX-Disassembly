@@ -63,7 +63,7 @@ jr_018_6519:
     add  hl, bc                                   ; $652C: $09
     ld   a, [hl]                                  ; $652D: $7E
     and  $80                                      ; $652E: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $6530: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $6530: $E0 $E8
     and  a                                        ; $6532: $A7
     jr   z, jr_018_653E                           ; $6533: $28 $09
 
@@ -92,7 +92,7 @@ jr_018_653E:
     ld   [hl], a                                  ; $655A: $77
 
 jr_018_655B:
-    ldh  a, [hMultiPurposeG]                               ; $655B: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $655B: $F0 $E8
     and  a                                        ; $655D: $A7
     jr   z, jr_018_6588                           ; $655E: $28 $28
 
@@ -484,7 +484,7 @@ jr_018_6949:
     ld   a, [wScreenShakeHorizontal]              ; $6950: $FA $55 $C1
     ld   c, a                                     ; $6953: $4F
     ld   b, [hl]                                  ; $6954: $46
-    ldh  a, [hMultiPurposeG]                               ; $6955: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $6955: $F0 $E8
     and  a                                        ; $6957: $A7
     jr   z, jr_018_6960                           ; $6958: $28 $06
 
@@ -499,7 +499,7 @@ jr_018_6960:
     cp   $80                                      ; $6963: $FE $80
     jr   nz, jr_018_6972                          ; $6965: $20 $0B
 
-    ldh  a, [hMultiPurposeG]                               ; $6967: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $6967: $F0 $E8
     and  a                                        ; $6969: $A7
     ld   a, b                                     ; $696A: $78
     jr   nz, jr_018_696F                          ; $696B: $20 $02
@@ -552,9 +552,9 @@ jr_018_699A:
     jr   nz, jr_018_693C                          ; $699D: $20 $9D
 
     ld   a, $08                                   ; $699F: $3E $08
-    ld   [wD5C0+1], a                               ; $69A1: $EA $C1 $D5
+    ld   [wD5C0+1], a                             ; $69A1: $EA $C1 $D5
     ld   a, $04                                   ; $69A4: $3E $04
-    ld   [wD5C2+1], a                               ; $69A6: $EA $C3 $D5
+    ld   [wD5C2+1], a                             ; $69A6: $EA $C3 $D5
     ld   a, [wActiveEntityIndex]                  ; $69A9: $FA $23 $C1
     ld   c, a                                     ; $69AC: $4F
     ld   a, $06                                   ; $69AD: $3E $06
@@ -568,7 +568,7 @@ Data_018_69BD::
     db   $00, $04, $08, $0C, $10, $0C, $08, $04
 
 func_018_69C5::
-    ld   hl, wOAMBuffer+$10                                ; $69C5: $21 $10 $C0
+    ld   hl, wOAMBuffer+$10                       ; $69C5: $21 $10 $C0
     ldh  a, [hFrameCounter]                       ; $69C8: $F0 $E7
     rra                                           ; $69CA: $1F
     rra                                           ; $69CB: $1F

@@ -147,7 +147,7 @@ Floating10RupeesHandler::
 
 FloatingMagicPowderHandler::
     ld   d, $0C                                   ; $7BBF: $16 $0C
-    call GiveInventoryItem_trampoline                               ; $7BC1: $CD $6B $3E
+    call GiveInventoryItem_trampoline             ; $7BC1: $CD $6B $3E
     ld   a, REPLACE_TILES_MAGIC_POWDER            ; $7BC4: $3E $0B
     ldh  [hReplaceTiles], a                       ; $7BC6: $E0 $A5
     ld   hl, wMaxMagicPowder                      ; $7BC8: $21 $76 $DB

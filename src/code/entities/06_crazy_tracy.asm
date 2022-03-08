@@ -47,7 +47,7 @@ CrazyTracyEntityHandler::
     ldh  [hActiveEntityVisualPosY], a             ; $5EBA: $E0 $EC
 
     ; Configure Link appearance
-    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $5EBC: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $5EBC: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $5EBE: $E0 $9D
     ld   a, $02                                   ; $5EC0: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5EC2: $E0 $A1
@@ -91,7 +91,7 @@ CrazyTracyEntityHandler::
     and  $F0                                      ; $5EF5: $E6 $F0
     ld   e, a                                     ; $5EF7: $5F
     ld   d, b                                     ; $5EF8: $50
-    ld   hl, CrazyTracySpriteAttributes                        ; $5EF9: $21 $63 $5E
+    ld   hl, CrazyTracySpriteAttributes           ; $5EF9: $21 $63 $5E
     add  hl, de                                   ; $5EFC: $19
     ldh  a, [hActiveEntityVisualPosY]             ; $5EFD: $F0 $EC
     sub  $04                                      ; $5EFF: $D6 $04
@@ -115,7 +115,7 @@ CrazyTracyEntityHandler::
 ; Set c if Link is close to Tracy, and pressed a button to talk to her.
 ShouldLinkTalkToTracy::
     ldh  a, [hLinkPositionY]                      ; $5F23: $F0 $99
-    ld   hl, hActiveEntityPosY                                ; $5F25: $21 $EF $FF
+    ld   hl, hActiveEntityPosY                    ; $5F25: $21 $EF $FF
     sub  [hl]                                     ; $5F28: $96
     add  $28                                      ; $5F29: $C6 $28
     cp   $50                                      ; $5F2B: $FE $50
@@ -152,7 +152,7 @@ CrazyTracyGreetingHandler::
     jp   IncrementEntityState                     ; $5F51: $C3 $12 $3B
 
 CrazyTracyProposingPriceHandler::
-    call ShouldLinkTalkToTracy                            ; $5F54: $CD $23 $5F
+    call ShouldLinkTalkToTracy                    ; $5F54: $CD $23 $5F
     ret  nc                                       ; $5F57: $D0
 
     ; If Link doesn’t already have the medecine…
@@ -198,9 +198,9 @@ Data_006_5F8D::
 CrazyTracySellingHandler::
     ld   a, [wDialogState]                        ; $5F91: $FA $9F $C1
     and  a                                        ; $5F94: $A7
-    jp   nz, CrazyTracySellingHandler.return                 ; $5F95: $C2 $1B $60
+    jp   nz, CrazyTracySellingHandler.return      ; $5F95: $C2 $1B $60
 
-    ld   a, [wDialogAskSelectionIndex]                               ; $5F98: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $5F98: $FA $77 $C1
     and  a                                        ; $5F9B: $A7
     jr   nz, .refusedMedecine
 
@@ -277,7 +277,7 @@ CrazyTracySellingHandler::
 
 .refusedMedecine
     ; Open the "Too bad" dialog
-    ld   a, $01D                                   ; $600D: $3E $1D
+    ld   a, $01D                                  ; $600D: $3E $1D
 
 .openFinalDialog
     call OpenDialog                               ; $600F: $CD $85 $23

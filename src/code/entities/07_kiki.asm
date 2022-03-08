@@ -48,7 +48,7 @@ jr_007_5874:
     add  hl, bc                                   ; $5883: $09
     ld   a, [hl]                                  ; $5884: $7E
     and  $80                                      ; $5885: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $5887: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $5887: $E0 $E8
     jr   z, jr_007_5891                           ; $5889: $28 $06
 
     ld   [hl], b                                  ; $588B: $70
@@ -153,7 +153,7 @@ func_007_591A::
     ret  nz                                       ; $591E: $C0
 
     call IncrementEntityState                     ; $591F: $CD $12 $3B
-    ld   a, [wDialogAskSelectionIndex]                               ; $5922: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $5922: $FA $77 $C1
     and  a                                        ; $5925: $A7
     jr   nz, jr_007_592E                          ; $5926: $20 $06
 
@@ -237,9 +237,9 @@ jr_007_59A1:
 
     ld   a, JINGLE_PUZZLE_SOLVED                  ; $59A3: $3E $02
     ldh  [hJingle], a                             ; $59A5: $E0 $F2
-    ld   a, [wOverworldRoomStatus + $7B]                               ; $59A7: $FA $7B $D8
+    ld   a, [wOverworldRoomStatus + $7B]          ; $59A7: $FA $7B $D8
     or   $10                                      ; $59AA: $F6 $10
-    ld   [wOverworldRoomStatus + $7B], a                               ; $59AC: $EA $7B $D8
+    ld   [wOverworldRoomStatus + $7B], a          ; $59AC: $EA $7B $D8
     ld   a, $01                                   ; $59AF: $3E $01
     ld   [wDB7F], a                               ; $59B1: $EA $7F $DB
     ld   a, $63                                   ; $59B4: $3E $63
@@ -351,7 +351,7 @@ jr_007_5A2A:
     ld   a, $DB                                   ; $5A54: $3E $DB
     ld   [wDDD8], a                               ; $5A56: $EA $D8 $DD
     ld   a, $07                                   ; $5A59: $3E $07
-    call func_91D                                ; $5A5B: $CD $1D $09
+    call func_91D                                 ; $5A5B: $CD $1D $09
     pop  bc                                       ; $5A5E: $C1
 
 jr_007_5A5F:
@@ -492,7 +492,7 @@ func_007_5B25::
     call label_3B23                               ; $5B38: $CD $23 $3B
 
 jr_007_5B3B:
-    ldh  a, [hMultiPurposeG]                               ; $5B3B: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5B3B: $F0 $E8
     and  a                                        ; $5B3D: $A7
     jr   z, jr_007_5B64                           ; $5B3E: $28 $24
 
@@ -597,7 +597,7 @@ jr_007_5BD6:
     jp   SetEntitySpriteVariant                   ; $5BD6: $C3 $0C $3B
 
 func_007_5BD9::
-    ldh  a, [hMultiPurposeG]                               ; $5BD9: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5BD9: $F0 $E8
     and  a                                        ; $5BDB: $A7
     jr   z, jr_007_5BE8                           ; $5BDC: $28 $0A
 

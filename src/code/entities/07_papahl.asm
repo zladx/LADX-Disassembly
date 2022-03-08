@@ -142,7 +142,7 @@ jr_007_4AE9:
     jp   SetEntitySpriteVariant                   ; $4AF0: $C3 $0C $3B
 
 func_007_4AF3::
-    ld   a, [wDialogAskSelectionIndex]                               ; $4AF3: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $4AF3: $FA $77 $C1
     and  a                                        ; $4AF6: $A7
     jr   nz, jr_007_4B0E                          ; $4AF7: $20 $15
 
@@ -152,7 +152,7 @@ func_007_4AF3::
 
     call_open_dialog $172                         ; $4B00
     call IncrementEntityState                     ; $4B05: $CD $12 $3B
-    call GetEntityTransitionCountdown                 ; $4B08: $CD $05 $0C
+    call GetEntityTransitionCountdown             ; $4B08: $CD $05 $0C
     ld   [hl], $C0                                ; $4B0B: $36 $C0
     ret                                           ; $4B0D: $C9
 
@@ -172,7 +172,7 @@ func_007_4B1C::
     call GetEntityTransitionCountdown             ; $4B22: $CD $05 $0C
     jr   nz, jr_007_4B3B                          ; $4B25: $20 $14
 
-    ld   [wMusicTrackTiming], a                               ; $4B27: $EA $0B $C1
+    ld   [wMusicTrackTiming], a                   ; $4B27: $EA $0B $C1
     call_open_dialog $173                         ; $4B2A
     ld   a, TRADING_ITEM_HIBISCUS                 ; $4B2F: $3E $08
     ld   [wTradeSequenceItem], a                  ; $4B31: $EA $0E $DB

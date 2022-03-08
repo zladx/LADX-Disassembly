@@ -35,7 +35,7 @@ GopongaProjectileEntityHandler::
 .flashEnd
 
     ; Render the projectile
-    ld   de, GopongaFlowerDisplayList                        ; $63B5: $11 $8F $63
+    ld   de, GopongaFlowerDisplayList             ; $63B5: $11 $8F $63
     call RenderActiveEntitySpritesPair            ; $63B8: $CD $C0 $3B
 
     call GetEntityTransitionCountdown             ; $63BB: $CD $05 $0C

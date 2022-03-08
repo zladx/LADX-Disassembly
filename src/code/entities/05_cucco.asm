@@ -52,7 +52,7 @@ jr_005_4557:
     add  hl, bc                                   ; $4571: $09
     ld   a, [hl]                                  ; $4572: $7E
     and  $80                                      ; $4573: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $4575: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $4575: $E0 $E8
     jr   z, jr_005_4580                           ; $4577: $28 $07
 
     xor  a                                        ; $4579: $AF
@@ -208,7 +208,7 @@ func_005_4624::
 func_005_4663::
     call UpdateEntityPosWithSpeed_05              ; $4663: $CD $B1 $7A
     call label_3B23                               ; $4666: $CD $23 $3B
-    ldh  a, [hMultiPurposeG]                               ; $4669: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $4669: $F0 $E8
     and  a                                        ; $466B: $A7
     jr   z, jr_005_4685                           ; $466C: $28 $17
 

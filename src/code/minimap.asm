@@ -45,7 +45,7 @@ ENDC
 
     ; Load the minimap into WRAM
     ld   de, wDungeonMinimap                      ; $673A: $11 $80 $D4
-    ld   bc, $40                                ; $673D: $01 $40 $00
+    ld   bc, $40                                  ; $673D: $01 $40 $00
     call CopyData                                 ; $6740: $CD $14 $29
     ld   d, $00                                   ; $6743: $16 $00
     ld   e, $00                                   ; $6745: $1E $00
@@ -185,7 +185,7 @@ ENDC
 
 ; Configure palette copy, then jump to do the copy
 label_002_67E5:
-    ld   a, [wMinimapLayout]                               ; $67E5: $FA $B0 $DB
+    ld   a, [wMinimapLayout]                      ; $67E5: $FA $B0 $DB
     and  $30                                      ; $67E8: $E6 $30
     swap a                                        ; $67EA: $CB $37
     JP_TABLE                                      ; $67EC: $C7
@@ -215,7 +215,7 @@ jr_002_6807:
 
 ; Configure palette copy, then jump to do the copy
 label_002_680B:
-    ld   a, [wMinimapLayout]                               ; $680B: $FA $B0 $DB
+    ld   a, [wMinimapLayout]                      ; $680B: $FA $B0 $DB
     and  $30                                      ; $680E: $E6 $30
     swap a                                        ; $6810: $CB $37
     JP_TABLE                                      ; $6812: $C7
@@ -237,7 +237,7 @@ jr_002_6823:
 
 ; Configure palette copy, then jump to do the copy
 label_002_6827:
-    ld   a, [wMinimapLayout]                               ; $6827: $FA $B0 $DB
+    ld   a, [wMinimapLayout]                      ; $6827: $FA $B0 $DB
     and  $30                                      ; $682A: $E6 $30
     swap a                                        ; $682C: $CB $37
     JP_TABLE                                      ; $682E: $C7

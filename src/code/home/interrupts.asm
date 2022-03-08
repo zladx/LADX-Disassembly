@@ -268,7 +268,7 @@ InterruptVBlank::
     jr   nc, .renderDialogText                    ; $04A0: $30 $0A
     ; DialogState < 5
     ; Open dialog
-    call label_23E4                               ; $04A2: $CD $E4 $23
+    call func_23E4                                ; $04A2: $CD $E4 $23
     ld   hl, wDialogState                         ; $04A5: $21 $9F $C1
     inc  [hl]  ; Increment DialogState            ; $04A8: $34
     jp   .vblankDone                              ; $04A9: $C3 $69 $05

@@ -2521,7 +2521,7 @@ wDungeonMinimap::
 wD4C0::
   ds $40 ; D4C0 - D4FF
 
-; Unlabeled
+; BG tilemap under a dialog box?
 wD500::
   ds $80 ; D500 - D57F
 

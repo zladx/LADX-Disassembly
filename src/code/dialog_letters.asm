@@ -99,51 +99,95 @@ func_01C_4A76::
     ld   [hl], a                                  ; $4A88: $77
     ret                                           ; $4A89: $C9
 
-Data_01C_4A8A::
-    db   $A1, $21, $81, $41, $61, $C1, $41, $A1, $61, $81
+; Where to ultimately write the saved BG tilemap in VRAM.
+; Indexed by animation frame.
+DialogRestoreBGMapLocationTable::
+.low
+    db   LOW(vBGMap0 + $00A1)
+    db   LOW(vBGMap0 + $0021)
+    db   LOW(vBGMap0 + $0081)
+    db   LOW(vBGMap0 + $0041)
+    db   LOW(vBGMap0 + $0061)
+    db   LOW(vBGMap0 + $01C1)
+    db   LOW(vBGMap0 + $0141)
+    db   LOW(vBGMap0 + $01A1)
+    db   LOW(vBGMap0 + $0161)
+    db   LOW(vBGMap0 + $0181)
+.high
+    db   HIGH(vBGMap0 + $00A1)
+    db   HIGH(vBGMap0 + $0021)
+    db   HIGH(vBGMap0 + $0081)
+    db   HIGH(vBGMap0 + $0041)
+    db   HIGH(vBGMap0 + $0061)
+    db   HIGH(vBGMap0 + $01C1)
+    db   HIGH(vBGMap0 + $0141)
+    db   HIGH(vBGMap0 + $01A1)
+    db   HIGH(vBGMap0 + $0161)
+    db   HIGH(vBGMap0 + $0181)
 
-Data_01C_4A94::
-    db   $98, $98, $98, $98, $98, $99, $99, $99, $99, $99
+; Where to read the saved BG tilemap depending on the frame,
+; as an offset to wD500.
+DialogSavedBGMapOffsetTable::
+    db   $48                                    ; $4A9E
+    db   $00                                    ; $4A9F
+    db   $36                                    ; $4AA0
+    db   $12                                    ; $4AA1
+    db   $24                                    ; $4AA2
+    db   $48                                    ; $4AA3
+    db   $00                                    ; $4AA3
+    db   $36                                    ; $4AA5
+    db   $12                                    ; $4AA6
+    db   $24                                    ; $4AA7
 
-Data_01C_4A9E::
-    db   $48, $00, $36, $12 ; $4A9A |....H.6.|
-    db   $24, $48, $00, $36, $12, $24           ; $4AA2 |$H.6.$|
-
-func_01C_4AA8::
+; Restore BG tiles under the dialog box, line by line, during 5 frames
+AnimateDialogClosing::
     ld   a, [wDialogState]                        ; $4AA8: $FA $9F $C1
     ld   c, a                                     ; $4AAB: $4F
+
     ld   a, [wDialogOpenCloseAnimationFrame]      ; $4AAC: $FA $6F $C1
     cp   $05                                      ; $4AAF: $FE $05
     jr   z, func_01C_4A71                         ; $4AB1: $28 $BE
 
     bit  7, c                                     ; $4AB3: $CB $79
-    jr   z, func_01C_4AB9                         ; $4AB5: $28 $02
-
+    jr   z, .cEnd                                 ; $4AB5: $28 $02
     add  $05                                      ; $4AB7: $C6 $05
+ .cEnd
 
-func_01C_4AB9::
+    ; bc = animation frame index
+    ; (goes from 0->4 for top of the dialog, and 5->9 for the bottom?)
     ld   c, a                                     ; $4AB9: $4F
     ld   b, $00                                   ; $4ABA: $06 $00
+
+    ; de = 0001
     ld   e, $01                                   ; $4ABC: $1E $01
     ld   d, $00                                   ; $4ABE: $16 $00
+
+    ; Set wRequest.destinationHigh
+    ; a = [wBGOriginHigh] + DialogRestoreBGMapHighTable[frame index]
     ld   a, [wBGOriginHigh]                       ; $4AC0: $FA $2E $C1
-    ld   hl, Data_01C_4A94                        ; $4AC3: $21 $94 $4A
+    ld   hl, DialogRestoreBGMapLocationTable.high ; $4AC3: $21 $94 $4A
     add  hl, bc                                   ; $4AC6: $09
     add  [hl]                                     ; $4AC7: $86
     ld   hl, wRequestsSize                        ; $4AC8: $21 $00 $D6
     add  hl, de                                   ; $4ACB: $19
-    ldi  [hl], a                                  ; $4ACC: $22
+    ldi  [hl], a ; wRequest.destinationHigh     ; $4ACC: $22
     push hl                                       ; $4ACD: $E5
+
+    ; Set wRequest.destinationLow
     ld   a, [wBGOriginLow]                        ; $4ACE: $FA $2F $C1
-    ld   hl, Data_01C_4A8A                        ; $4AD1: $21 $8A $4A
+    ld   hl, DialogRestoreBGMapLocationTable.low  ; $4AD1: $21 $8A $4A
     add  hl, bc                                   ; $4AD4: $09
     add  [hl]                                     ; $4AD5: $86
     pop  hl                                       ; $4AD6: $E1
-    ldi  [hl], a                                  ; $4AD7: $22
+    ldi  [hl], a ; ; wRequest.destinationLow   ; $4AD7: $22
+
+    ; Set wRequest.length
     ld   a, $11                                   ; $4AD8: $3E $11
-    ldi  [hl], a                                  ; $4ADA: $22
+    ldi  [hl], a ; wRequest.length              ; $4ADA: $22
     push hl                                       ; $4ADB: $E5
-    ld   hl, Data_01C_4A9E                        ; $4ADC: $21 $9E $4A
+
+    ; Configure where to read the saved BG map from
+    ld   hl, DialogSavedBGMapOffsetTable          ; $4ADC: $21 $9E $4A
     add  hl, bc                                   ; $4ADF: $09
     ld   a, [hl]                                  ; $4AE0: $7E
     ld   c, a                                     ; $4AE1: $4F
@@ -158,28 +202,33 @@ ELSE
     pop  bc                                       ; $4AE9: $C1
 ENDC
     pop  hl                                       ; $4AEA: $E1
-    ld   e, $12                                   ; $4AEB: $1E $12
 
-func_01C_4AED::
+    ; Loop from 12 to 1…
+    ld   e, $12                                   ; $4AEB: $1E $12
+.loop
+    ; Copy a byte from BG map to restore to wRequest.data
     ld   a, [bc]                                  ; $4AED: $0A
     inc  bc                                       ; $4AEE: $03
     ldi  [hl], a                                  ; $4AEF: $22
     dec  e                                        ; $4AF0: $1D
-    jr   nz, func_01C_4AED                        ; $4AF1: $20 $FA
+    jr   nz, .loop                                ; $4AF1: $20 $FA
 
+    ; Write the END byte of wRequest.data
     ld   [hl], $00                                ; $4AF3: $36 $00
+
     ldh  a, [hIsGBC]                              ; $4AF5: $F0 $FE
     and  a                                        ; $4AF7: $A7
-    jr   z, func_01C_4AFD                         ; $4AF8: $28 $03
+    jr   z, .gbcEnd                               ; $4AF8: $28 $03
+    call AnimateDialogClosingAttrs                ; $4AFA: $CD $02 $4B
+.gbcEnd
 
-    call func_01C_4B02                            ; $4AFA: $CD $02 $4B
-
-func_01C_4AFD::
     ld   hl, wDialogOpenCloseAnimationFrame       ; $4AFD: $21 $6F $C1
     inc  [hl]                                     ; $4B00: $34
     ret                                           ; $4B01: $C9
 
-func_01C_4B02::
+; Restore BG tile attributes under the dialog box, line by line, during 5 frames
+; (CGB only)
+AnimateDialogClosingAttrs::
     push bc                                       ; $4B02: $C5
     ld   hl, wRequestsAltSize                     ; $4B03: $21 $90 $DC
     ld   de, wRequestsSize                        ; $4B06: $11 $00 $D6

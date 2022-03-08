@@ -238,7 +238,7 @@ jr_003_5974:
     ld   [hl], a                                  ; $5989: $77
     pop  bc                                       ; $598A: $C1
 
-jr_003_598B:
+ret_003_598B:
     ret                                           ; $598B: $C9
 
 Data_003_598C::
@@ -293,7 +293,7 @@ SpawnOctorokRock::
     pop  bc                                       ; $59D4: $C1
     and  a                                        ; $59D5: $A7
 
-jr_003_59D6:
+ret_003_59D6:
 IF !__PATCH_0__
     ret                                           ; $59D6: $C9
 ENDC

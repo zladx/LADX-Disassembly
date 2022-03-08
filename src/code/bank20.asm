@@ -467,7 +467,7 @@ jr_020_47B7:
     ld   a, $20                                   ; $47BD: $3E $20
     call CopyColorDungeonSymbols                  ; $47BF: $CD $32 $0A
 
-jr_020_47C2:
+ret_020_47C2:
     ret                                           ; $47C2: $C9
 
 data_020_47C3::
@@ -783,7 +783,7 @@ jr_020_4961:
     ld   de, Data_020_4950                        ; $4979: $11 $50 $49
     call func_020_4898                            ; $497C: $CD $98 $48
 
-jr_020_497F:
+ret_020_497F:
     ret                                           ; $497F: $C9
 
 ; Order in which the tomb stones should be pushed
@@ -1069,7 +1069,7 @@ jr_020_4AEF:
     or   $04                                      ; $4B1B: $F6 $04
     ld   [bc], a                                  ; $4B1D: $02
 
-jr_020_4B1E:
+ret_020_4B1E:
     ret                                           ; $4B1E: $C9
 
 func_20_4B1F::
@@ -1086,7 +1086,7 @@ func_20_4B1F::
     dec  a                                        ; $4B35: $3D
     ld   [wIsLinkPushing], a                      ; $4B36: $EA $44 $C1
 
-jr_020_4B39:
+ret_020_4B39:
     ret                                           ; $4B39: $C9
 
 ; Link's direction table
@@ -1302,7 +1302,7 @@ jr_020_4C10:
     add  hl, de                                   ; $4C3C: $19
     ld   [hl], a                                  ; $4C3D: $77
 
-jr_020_4C3E:
+ret_020_4C3E:
     ret                                           ; $4C3E: $C9
 
 ; some conversion table to X direction
@@ -2139,7 +2139,7 @@ jr_020_561C:
     inc  [hl]                                     ; $562B: $34
     jr   jr_020_5605                              ; $562C: $18 $D7
 
-jr_020_562E:
+ret_020_562E:
     ret                                           ; $562E: $C9
 
 Data_020_562F::
@@ -2209,7 +2209,7 @@ jr_020_5677:
     inc  [hl]                                     ; $5687: $34
     jr   jr_020_5652                              ; $5688: $18 $C8
 
-jr_020_568A:
+ret_020_568A:
     ret                                           ; $568A: $C9
 
 Data_20_568B::
@@ -2376,7 +2376,7 @@ jr_020_58EC:
 jr_020_5901:
     jr   jr_020_58B3                              ; $5901: $18 $B0
 
-jr_020_5903:
+ret_020_5903:
     ret                                           ; $5903: $C9
 
 InventoryEntryPoint::
@@ -3353,7 +3353,7 @@ jr_020_5EE1:
     ld   a, $01                                   ; $5EE9: $3E $01
     ld   [wPaletteDataFlags], a                   ; $5EEB: $EA $D1 $DD
 
-jr_020_5EEE:
+ret_020_5EEE:
     ret                                           ; $5EEE: $C9
 
 InventoryFadeInHandler::
@@ -3586,7 +3586,7 @@ func_020_6039:
     ld   e, a                                     ; $6046: $5F
     call func_020_5C9C                            ; $6047: $CD $9C $5C
 
-jr_020_604A:
+ret_020_604A:
     ret                                           ; $604A: $C9
 
 Data_020_604B::
@@ -3629,7 +3629,7 @@ func_020_6111::
     ld   a, $0C                                   ; $6128: $3E $0C
     ld   [wGameplaySubtype], a                    ; $612A: $EA $96 $DB
 
-jr_020_612D:
+ret_020_612D:
     ret                                           ; $612D: $C9
 
 jr_020_612E:
@@ -3811,7 +3811,7 @@ jr_020_61ED:
     ld   [hl+], a                                 ; $6211: $22
     ld   [hl], $26                                ; $6212: $36 $26
 
-jr_020_6214:
+ret_020_6214:
     ret                                           ; $6214: $C9
 
 func_020_6215::
@@ -3932,7 +3932,7 @@ jr_020_62C1:
     ld   a, $14                                   ; $62D8: $3E $14
     ld   [wOAMBuffer+11], a                               ; $62DA: $EA $0B $C0
 
-jr_020_62DD:
+ret_020_62DD:
     ret                                           ; $62DD: $C9
 
 func_020_62DE::
@@ -4180,7 +4180,7 @@ jr_020_6436:
     ld   a, JINGLE_CLOSE_INVENTORY                ; $6441: $3E $12
     ldh  [hJingle], a                             ; $6443: $E0 $F2
 
-jr_020_6445:
+ret_020_6445:
     ret                                           ; $6445: $C9
 
 func_020_6446::
@@ -4370,7 +4370,7 @@ jr_020_6596:
 jr_020_65A4:
     ld   [wDE0A], a                               ; $65A4: $EA $0A $DE
 
-jr_020_65A7:
+ret_020_65A7:
     ret                                           ; $65A7: $C9
 
 InventoryStatusInHandler::
@@ -4382,7 +4382,7 @@ InventoryStatusInHandler::
 
     call IncrementGameplaySubtype_20                            ; $65B4: $CD $83 $66
 
-jr_020_65B7:
+ret_020_65B7:
     ret                                           ; $65B7: $C9
 
 InventoryStatusOutHandler::
@@ -4509,7 +4509,7 @@ jr_020_667C:
     ei                                            ; $6681: $FB
 
 label_020_6682:
-jr_020_6682:
+ret_020_6682:
     ret                                           ; $6682: $C9
 
 IncrementGameplaySubtype_20::
@@ -5238,7 +5238,7 @@ jr_020_6CFA:
     pop  af                                       ; $6D09: $F1
     ld   [wPaletteDataFlags], a                   ; $6D0A: $EA $D1 $DD
 
-jr_020_6D0D:
+ret_020_6D0D:
     ret                                           ; $6D0D: $C9
 
 func_020_6D0E::
@@ -5289,7 +5289,7 @@ jr_020_6D38:
 jr_020_6D4E:
     ld   [wPaletteDataFlags], a                   ; $6D4E: $EA $D1 $DD
 
-jr_020_6D51:
+ret_020_6D51:
     ret                                           ; $6D51: $C9
 
 func_020_6D52::

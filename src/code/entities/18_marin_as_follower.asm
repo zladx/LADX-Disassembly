@@ -106,7 +106,7 @@ func_018_5A79::
     dec  e                                        ; $5A7C: $1D
     jr   nz, .loop                                ; $5A7D: $20 $FC
 
-jr_018_5A7F:
+ret_018_5A7F:
     ret                                           ; $5A7F: $C9
 
 Data_018_5A80::

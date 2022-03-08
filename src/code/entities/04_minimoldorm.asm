@@ -170,7 +170,7 @@ jr_004_5B66:
     add  hl, bc                                   ; $5B7C: $09
     ld   [hl], a                                  ; $5B7D: $77
 
-jr_004_5B7E:
+ret_004_5B7E:
     ret                                           ; $5B7E: $C9
 
 func_004_5B7F::

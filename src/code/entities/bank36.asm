@@ -153,7 +153,7 @@ func_036_40C5::
     xor  $01                                      ; $40DB: $EE $01
     ld   [hl], a                                  ; $40DD: $77
 
-jr_036_40DE:
+ret_036_40DE:
     ret                                           ; $40DE: $C9
 
 jr_036_40DF:
@@ -2634,7 +2634,7 @@ func_036_5007::
     ld   [hl], a                                  ; $5017: $77
     call IncrementEntityState                     ; $5018: $CD $12 $3B
 
-jr_036_501B:
+ret_036_501B:
     ret                                           ; $501B: $C9
 
 func_036_501C::
@@ -2679,7 +2679,7 @@ func_036_503C::
 jr_036_505D:
     ld   [de], a                                  ; $505D: $12
 
-jr_036_505E:
+ret_036_505E:
     ret                                           ; $505E: $C9
 
 ; @TODO Big Fairy in the Color Dungeon
@@ -3998,7 +3998,7 @@ func_036_58A1::
     ld   [hl], $10                                ; $58B3: $36 $10
     call IncrementEntityState                     ; $58B5: $CD $12 $3B
 
-jr_036_58B8:
+ret_036_58B8:
     ret                                           ; $58B8: $C9
 
 func_036_58B9::
@@ -4029,7 +4029,7 @@ jr_036_58CD:
     ld   [hl], $10                                ; $58DE: $36 $10
     call IncrementEntityState                     ; $58E0: $CD $12 $3B
 
-jr_036_58E3:
+ret_036_58E3:
     ret                                           ; $58E3: $C9
 
 func_036_58E4::
@@ -4060,7 +4060,7 @@ jr_036_58FA:
     call_open_dialog $266                         ; $5909
     call IncrementEntityState                     ; $590E: $CD $12 $3B
 
-jr_036_5911:
+ret_036_5911:
     ret                                           ; $5911: $C9
 
 func_036_5912::
@@ -4081,7 +4081,7 @@ jr_036_592A:
     ld   a, $03                                   ; $592A: $3E $03
     call SetEntityState                           ; $592C: $CD $07 $6C
 
-jr_036_592F:
+ret_036_592F:
     ret                                           ; $592F: $C9
 
 func_036_5930::
@@ -4093,7 +4093,7 @@ func_036_5930::
     ld   a, $03                                   ; $5939: $3E $03
     call SetEntityState                           ; $593B: $CD $07 $6C
 
-jr_036_593E:
+ret_036_593E:
     ret                                           ; $593E: $C9
 
 ColorGuardianBlueEntityHandler::
@@ -4790,7 +4790,7 @@ AvalaunchState4Handler::
     call func_036_6C83                            ; $5D91: $CD $83 $6C
     call IncrementEntityState                     ; $5D94: $CD $12 $3B
 
-jr_036_5D97:
+ret_036_5D97:
     ret                                           ; $5D97: $C9
 
 AvalaunchState5Handler::
@@ -4817,7 +4817,7 @@ AvalaunchState5Handler::
     ld   a, $03                                   ; $5DBD: $3E $03
     call SetEntityState                           ; $5DBF: $CD $07 $6C
 
-jr_036_5DC2:
+ret_036_5DC2:
     ret                                           ; $5DC2: $C9
 
 AvalaunchState6Handler::
@@ -4987,7 +4987,7 @@ jr_036_5EB6:
     call func_036_6C83                            ; $5EBB: $CD $83 $6C
     call IncrementEntityState                     ; $5EBE: $CD $12 $3B
 
-jr_036_5EC1:
+ret_036_5EC1:
     ret                                           ; $5EC1: $C9
 
 func_036_5EC2::
@@ -5094,7 +5094,7 @@ jr_036_5F43:
     ld   a, $03                                   ; $5F53: $3E $03
     call SetEntityState                           ; $5F55: $CD $07 $6C
 
-jr_036_5F58:
+ret_036_5F58:
     ret                                           ; $5F58: $C9
 
 Data_036_5F59::
@@ -5258,7 +5258,7 @@ jr_036_6049:
     ld   a, $36                                   ; $6049: $3E $36
     call func_020_4954_trampoline                 ; $604B: $CD $E9 $09
 
-jr_036_604E:
+ret_036_604E:
     ret                                           ; $604E: $C9
 
 HopperState3Handler::
@@ -5296,7 +5296,7 @@ jr_036_607A:
 
     call func_036_6C0D                            ; $6080: $CD $0D $6C
 
-jr_036_6083:
+ret_036_6083:
     ret                                           ; $6083: $C9
 
 func_036_6084::
@@ -5330,7 +5330,7 @@ jr_036_60AD:
     ld   a, $02                                   ; $60AD: $3E $02
     call SetEntityState                           ; $60AF: $CD $07 $6C
 
-jr_036_60B2:
+ret_036_60B2:
     ret                                           ; $60B2: $C9
 
 Data_036_60B3::
@@ -5673,7 +5673,7 @@ jr_036_6273:
     call IncrementEntityState                     ; $6298: $CD $12 $3B
     call IncrementEntityState                     ; $629B: $CD $12 $3B
 
-jr_036_629E:
+ret_036_629E:
     ret                                           ; $629E: $C9
 
 func_036_629F::
@@ -5854,7 +5854,7 @@ jr_036_637C:
     ld   a, $04                                   ; $637C: $3E $04
     call func_036_6C83                            ; $637E: $CD $83 $6C
 
-jr_036_6381:
+ret_036_6381:
     ret                                           ; $6381: $C9
 
 func_036_6382::
@@ -6045,7 +6045,7 @@ jr_036_64A4:
     ld   a, $01                                   ; $64B4: $3E $01
     call SetEntityState                           ; $64B6: $CD $07 $6C
 
-jr_036_64B9:
+ret_036_64B9:
     ret                                           ; $64B9: $C9
 
 Data_036_64BA::
@@ -6076,7 +6076,7 @@ ColorGhoulState3Handler::
     add  [hl]                                     ; $64E4: $86
     ld   [hl], a                                  ; $64E5: $77
 
-jr_036_64E6:
+ret_036_64E6:
     ret                                           ; $64E6: $C9
 
 ColorGhoulCommonStateHandler::
@@ -6624,7 +6624,7 @@ jr_036_683F:
     ld   a, $01                                   ; $6851: $3E $01
     call SetEntityState                           ; $6853: $CD $07 $6C
 
-jr_036_6856:
+ret_036_6856:
     ret                                           ; $6856: $C9
 
 ColorShellState6Handler::
@@ -6668,7 +6668,7 @@ ColorShellState7Handler::
 jr_036_688A:
     call IncrementEntityState                     ; $688A: $CD $12 $3B
 
-jr_036_688D:
+ret_036_688D:
     ret                                           ; $688D: $C9
 
 Data_036_688E::
@@ -6729,7 +6729,7 @@ jr_036_68D3:
     ld   a, $09                                   ; $68E6: $3E $09
     call SetEntityState                           ; $68E8: $CD $07 $6C
 
-jr_036_68EB:
+ret_036_68EB:
     ret                                           ; $68EB: $C9
 
 ColorShellState9Handler::
@@ -6762,7 +6762,7 @@ jr_036_68FB:
     ld   a, $0A                                   ; $6919: $3E $0A
     call SetEntityState                           ; $691B: $CD $07 $6C
 
-jr_036_691E:
+ret_036_691E:
     ret                                           ; $691E: $C9
 
 ColorShellStateAHandler::
@@ -6782,7 +6782,7 @@ ColorShellStateAHandler::
     call func_036_6C83                            ; $6938: $CD $83 $6C
     call IncrementEntityState                     ; $693B: $CD $12 $3B
 
-jr_036_693E:
+ret_036_693E:
     ret                                           ; $693E: $C9
 
 ColorShellStateBHandler::
@@ -6803,7 +6803,7 @@ ColorShellStateBHandler::
     and  $7F                                      ; $6958: $E6 $7F
     ld   [hl], a                                  ; $695A: $77
 
-jr_036_695B:
+ret_036_695B:
     ret                                           ; $695B: $C9
 
 ColorShellStateCHandler::
@@ -6851,7 +6851,7 @@ jr_036_6981:
     add  $67                                      ; $6996: $C6 $67
     ld   [hl], a                                  ; $6998: $77
 
-jr_036_6999:
+ret_036_6999:
     ret                                           ; $6999: $C9
 
 Data_036_699A::
@@ -6884,7 +6884,7 @@ ColorShellStateDHandler::
     call AddTranscientVfx                         ; $69C6: $CD $C7 $0C
     call DidKillEnemy.label_3F5E                  ; $69C9: $CD $5E $3F
 
-jr_036_69CC:
+ret_036_69CC:
     ret                                           ; $69CC: $C9
 
 Data_036_69CD::
@@ -7259,7 +7259,7 @@ func_036_6B8A::
     cpl                                           ; $6B97: $2F
     inc  a                                        ; $6B98: $3C
 
-jr_036_6B99:
+ret_036_6B99:
     ret                                           ; $6B99: $C9
 
 func_036_6B9A::
@@ -7274,7 +7274,7 @@ func_036_6B9A::
     cpl                                           ; $6BA8: $2F
     inc  a                                        ; $6BA9: $3C
 
-jr_036_6BAA:
+ret_036_6BAA:
     ret                                           ; $6BAA: $C9
 
 func_036_6BAB::
@@ -7518,7 +7518,7 @@ jr_036_6CB7:
 jr_036_6CBF:
     ld   [hl], a                                  ; $6CBF: $77
 
-jr_036_6CC0:
+ret_036_6CC0:
     ret                                           ; $6CC0: $C9
 
 Data_036_6CC1::
@@ -7831,7 +7831,7 @@ jr_036_6F23:
 
     call IncrementEntityState                     ; $6F2A: $CD $12 $3B
 
-jr_036_6F2D:
+ret_036_6F2D:
     ret                                           ; $6F2D: $C9
 
 Data_036_6F2E::

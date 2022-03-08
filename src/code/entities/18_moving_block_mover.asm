@@ -89,7 +89,7 @@ ENDC
     ld   a, $01                                   ; $545A: $3E $01
     ldh  [hMovingBlockMoverState], a              ; $545C: $E0 $BA
 
-jr_018_545E:
+ret_018_545E:
     ret                                           ; $545E: $C9
 
 jr_018_545F:

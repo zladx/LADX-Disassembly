@@ -207,7 +207,7 @@ jr_001_432C::
     ldh  [hActiveEntityTilesOffset], a            ; $4330: $E0 $F5 ; $4330: $E0 $F5
     call func_001_6162                            ; $4332: $CD $62 $61 ; $4332: $CD $62 $61
 
-jr_001_4335::
+ret_001_4335::
     ret                                           ; $4335: $C9 ; $4335: $C9
 
 Data_001_4336::

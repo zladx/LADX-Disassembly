@@ -384,7 +384,7 @@ label_002_5F27:
     call func_91D                                ; $5F4F: $CD $1D $09
     pop  bc                                       ; $5F52: $C1
 
-jr_002_5F53:
+ret_002_5F53:
     ret                                           ; $5F53: $C9
 
 Data_002_5F54::
@@ -542,7 +542,7 @@ jr_002_6011:
 jr_002_6029:
     jp   MarkTriggerAsResolved                   ; $6029: $C3 $60 $0C
 
-jr_002_602C:
+ret_002_602C:
     ret                                           ; $602C: $C9
 
 CheckAnswerTunicsTrigger::

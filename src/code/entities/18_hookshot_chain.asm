@@ -146,7 +146,7 @@ jr_018_7CA5:
     call GetEntityTransitionCountdown             ; $7CAA: $CD $05 $0C
     ld   [hl], b                                  ; $7CAD: $70
 
-jr_018_7CAE:
+ret_018_7CAE:
     ret                                           ; $7CAE: $C9
 
 jr_018_7CAF:

@@ -350,7 +350,7 @@ jr_005_4B3E:
     add  e                                        ; $4B3E: $83
     ld   [hl], a                                  ; $4B3F: $77
 
-jr_005_4B40:
+ret_005_4B40:
     ret                                           ; $4B40: $C9
 
 func_005_4B41::
@@ -467,7 +467,7 @@ jr_005_4BE3:
     add  e                                        ; $4BEE: $83
     ld   [hl], a                                  ; $4BEF: $77
 
-jr_005_4BF0:
+ret_005_4BF0:
     ret                                           ; $4BF0: $C9
 
 jr_005_4BF1:
@@ -758,7 +758,7 @@ jr_005_4D5D:
     add  hl, de                                   ; $4D9F: $19
     ld   [hl], $00                                ; $4DA0: $36 $00
 
-jr_005_4DA2:
+ret_005_4DA2:
     ret                                           ; $4DA2: $C9
 
 TarinShield4Handler::
@@ -784,7 +784,7 @@ jr_005_4DC2:
     call IncrementEntityState                     ; $4DC2: $CD $12 $3B
     ld   [hl], b                                  ; $4DC5: $70
 
-jr_005_4DC6:
+ret_005_4DC6:
     ret                                           ; $4DC6: $C9
 
 Data_005_4DC7::

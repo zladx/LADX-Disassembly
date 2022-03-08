@@ -906,7 +906,7 @@ jr_021_51D1:
     dec  b                                        ; $51D2: $05
     jr   nz, jr_021_5190                          ; $51D3: $20 $BB
 
-jr_021_51D5:
+ret_021_51D5:
     ret                                           ; $51D5: $C9
 
 jr_021_51D6:
@@ -938,7 +938,7 @@ jr_021_51F1:
     dec  b                                        ; $51F2: $05
     jr   nz, jr_021_51DB                          ; $51F3: $20 $E6
 
-jr_021_51F5:
+ret_021_51F5:
     ret                                           ; $51F5: $C9
 
 ; Array indexed by wPaletteToLoadForTileMap
@@ -1025,7 +1025,7 @@ jr_021_533E:
     dec  b                                        ; $533F: $05
     jr   nz, jr_021_5323                          ; $5340: $20 $E1
 
-jr_021_5342:
+ret_021_5342:
     ret                                           ; $5342: $C9
 
 ; Array indexed by wRoomTransitionDirection
@@ -1228,7 +1228,7 @@ jr_021_5460:
     ld   a, $01                                   ; $5460: $3E $01
     ld   [wPaletteDataFlags], a                    ; $5462: $EA $D1 $DD
 
-jr_021_5465:
+ret_021_5465:
     ret                                           ; $5465: $C9
 
 func_021_5466::

@@ -101,7 +101,7 @@ func_004_4090::
     call GetEntityTransitionCountdown                 ; $4099: $CD $05 $0C
     ld   [hl], $FF                                ; $409C: $36 $FF
 
-jr_004_409E:
+ret_004_409E:
     ret                                           ; $409E: $C9
 
 Data_004_409F::
@@ -822,7 +822,7 @@ func_004_44E9::
     ld   a, JINGLE_ENEMY_MORPH_OUT                ; $4512: $3E $1F
     ldh  [hJingle], a                             ; $4514: $E0 $F2
 
-jr_004_4516:
+ret_004_4516:
     ret                                           ; $4516: $C9
 
 func_004_4517::
@@ -963,7 +963,7 @@ jr_004_45A6:
     ld   a, $28                                   ; $45EC: $3E $28
     ldh  [hNoiseSfx], a                            ; $45EE: $E0 $F4
 
-jr_004_45F0:
+ret_004_45F0:
     ret                                           ; $45F0: $C9
 
 jr_004_45F1:
@@ -1296,7 +1296,7 @@ GenieState3Handler::
     add  hl, bc                                   ; $4934: $09
     ld   [hl], $E0                                ; $4935: $36 $E0
 
-jr_004_4937:
+ret_004_4937:
     ret                                           ; $4937: $C9
 
 jr_004_4938:

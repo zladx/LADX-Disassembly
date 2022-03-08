@@ -85,5 +85,5 @@ jr_018_5DDC:
     ld   a, [wTextDebuggerDialogId]               ; $5DE2: $FA $09 $C1
     jp   OpenDialogInTable2                       ; $5DE5: $C3 $7C $23
 
-jr_018_5DE8:
+ret_018_5DE8:
     ret                                           ; $5DE8: $C9

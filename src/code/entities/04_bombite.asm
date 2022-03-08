@@ -308,5 +308,5 @@ func_004_7EC0::
     add  hl, de                                   ; $7EE1: $19
     ld   [hl], $01                                ; $7EE2: $36 $01
 
-jr_004_7EE4:
+ret_004_7EE4:
     ret                                           ; $7EE4: $C9

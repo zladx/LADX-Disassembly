@@ -101,7 +101,7 @@ jr_018_5F66:
     add  hl, bc                                   ; $5F6F: $09
     ld   [hl], $10                                ; $5F70: $36 $10
 
-jr_018_5F72:
+ret_018_5F72:
     ret                                           ; $5F72: $C9
 
 MarinAtTalTalHeightsState1Handler::

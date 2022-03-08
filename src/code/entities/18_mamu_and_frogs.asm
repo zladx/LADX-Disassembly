@@ -135,7 +135,7 @@ jr_018_40AF:
     ld   a, $01                                   ; $40D1: $3E $01
     ld   [wAlternateBackgroundEnabled], a         ; $40D3: $EA $00 $C5
 
-jr_018_40D6:
+ret_018_40D6:
     ret                                           ; $40D6: $C9
 
 ; Frogs start singing
@@ -152,7 +152,7 @@ MamuAndFrogsSingingHandler::
     ld   [wD215], a                               ; $40EA: $EA $15 $D2
     jp   IncrementEntityState                     ; $40ED: $C3 $12 $3B
 
-jr_018_40F0:
+ret_018_40F0:
     ret                                           ; $40F0: $C9
 
 func_018_40F1::

@@ -223,7 +223,7 @@ jr_006_71BA:
     add  hl, de                                   ; $71ED: $19
     ld   [hl], $E8                                ; $71EE: $36 $E8
 
-jr_006_71F0:
+ret_006_71F0:
     ret                                           ; $71F0: $C9
 
 BigFairyDisappearingHandler::

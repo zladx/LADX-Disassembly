@@ -151,7 +151,7 @@ MrWriteState2Handler::
     ld   a, REPLACE_TILES_TRADING_ITEM            ; $4C70: $3E $0D
     ldh  [hReplaceTiles], a                       ; $4C72: $E0 $A5
 
-jr_018_4C74:
+ret_018_4C74:
     ret                                           ; $4C74: $C9
 
 label_018_4C75:

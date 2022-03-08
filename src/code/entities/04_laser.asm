@@ -55,7 +55,7 @@ LaserEntityHandler::
     add  hl, de                                   ; $6CB1: $19
     ld   [hl], a                                  ; $6CB2: $77
 
-jr_004_6CB3:
+ret_004_6CB3:
     ret                                           ; $6CB3: $C9
 
 jr_004_6CB4:
@@ -115,7 +115,7 @@ jr_004_6CB4:
     ld   [hl], a                                  ; $6D0C: $77
     pop  bc                                       ; $6D0D: $C1
 
-jr_004_6D0E:
+ret_004_6D0E:
     ret                                           ; $6D0E: $C9
 
 label_004_6D0F:

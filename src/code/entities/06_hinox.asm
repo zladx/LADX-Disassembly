@@ -180,7 +180,7 @@ jr_006_50BA:
     ld   a, JINGLE_BIG_BUMP                       ; $50C6: $3E $20
     ldh  [hJingle], a                             ; $50C8: $E0 $F2
 
-jr_006_50CA:
+ret_006_50CA:
     ret                                           ; $50CA: $C9
 
 HinoxState3Handler::
@@ -320,7 +320,7 @@ func_006_51B0::
     ldh  [hLinkAnimationState], a                 ; $51B6: $E0 $9D
     ld   [wC167], a                               ; $51B8: $EA $67 $C1
 
-jr_006_51BB:
+ret_006_51BB:
     ret                                           ; $51BB: $C9
 
 HinoxState5Handler::

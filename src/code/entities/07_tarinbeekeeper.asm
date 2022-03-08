@@ -94,7 +94,7 @@ jr_007_4F44:
     call IncrementEntityState                     ; $4F49: $CD $12 $3B
     ld   [hl], b                                  ; $4F4C: $70
 
-jr_007_4F4D:
+ret_007_4F4D:
     ret                                           ; $4F4D: $C9
 
 Data_007_4F4E::

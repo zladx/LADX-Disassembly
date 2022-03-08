@@ -89,7 +89,7 @@ jr_018_4EC5:
     call IncrementEntityState                     ; $4ECA: $CD $12 $3B
     ld   [hl], b                                  ; $4ECD: $70
 
-jr_018_4ECE:
+ret_018_4ECE:
     ret                                           ; $4ECE: $C9
 
 PapahlsWifeState2Handler::
@@ -101,5 +101,5 @@ PapahlsWifeState2Handler::
     call IncrementEntityState                     ; $4ED8: $CD $12 $3B
     ld   [hl], b                                  ; $4EDB: $70
 
-jr_018_4EDC:
+ret_018_4EDC:
     ret                                           ; $4EDC: $C9

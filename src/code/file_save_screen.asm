@@ -91,7 +91,7 @@ FileSaveMapFadeOut::
     ld   a, TILESET_0F                            ; $406D: $3E $0F
     ld   [wTilesetToLoad], a                      ; $406F: $EA $FE $D6
 
-jr_001_4072::
+ret_001_4072::
     ret                                           ; $4072: $C9
 
 FileSaveDelay1::

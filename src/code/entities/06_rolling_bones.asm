@@ -49,7 +49,7 @@ func_006_6CAB::
 
     call func_006_700A                            ; $6CBA: $CD $0A $70
 
-jr_006_6CBD:
+ret_006_6CBD:
     ret                                           ; $6CBD: $C9
 
 label_006_6CBE:

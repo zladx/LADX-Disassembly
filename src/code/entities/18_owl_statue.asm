@@ -64,7 +64,7 @@ func_018_5E5D::
     ld   hl, wOverworldRoomStatus + $AC           ; $5E74: $21 $AC $D8
     set  4, [hl]                                  ; $5E77: $CB $E6
 
-jr_018_5E79:
+ret_018_5E79:
     ret                                           ; $5E79: $C9
 
 OwlStatueEntityHandler::

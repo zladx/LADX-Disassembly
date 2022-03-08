@@ -102,7 +102,7 @@ jr_007_5572:
     ld   [wC111], a                               ; $5593: $EA $11 $C1
     jp   ResetSpinAttack                          ; $5596: $C3 $AF $0C
 
-jr_007_5599:
+ret_007_5599:
     ret                                           ; $5599: $C9
 
 jr_007_559A:

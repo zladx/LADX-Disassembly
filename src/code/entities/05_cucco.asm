@@ -340,7 +340,7 @@ jr_005_46E9:
     call ApplyVectorTowardsLink_trampoline        ; $4749: $CD $AA $3B
     pop  bc                                       ; $474C: $C1
 
-jr_005_474D:
+ret_005_474D:
     ret                                           ; $474D: $C9
 
 func_005_474E::

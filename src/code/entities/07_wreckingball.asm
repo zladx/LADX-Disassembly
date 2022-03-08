@@ -199,7 +199,7 @@ jr_007_6104:
 IF __PATCH_0__
     ldh  a, [hMovingBlockMoverState]
     and  a
-    jr   nz, jr_007_6133
+    jr   nz, ret_007_6133
 ENDC
 
     inc  a                                        ; $610A: $3C
@@ -223,7 +223,7 @@ ENDC
     ld   hl, hWaveSfx                             ; $612E: $21 $F3 $FF
     ld   [hl], $02                                ; $6131: $36 $02
 
-jr_007_6133:
+ret_007_6133:
     ret                                           ; $6133: $C9
 
 func_007_6134::
@@ -336,5 +336,5 @@ func_007_618F::
     add  hl, de                                   ; $61CA: $19
     ld   [hl], $50                                ; $61CB: $36 $50
 
-jr_007_61CD:
+ret_007_61CD:
     ret                                           ; $61CD: $C9

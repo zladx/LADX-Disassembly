@@ -103,7 +103,7 @@ func_007_58D5::
     ld   a, $14                                   ; $58D8: $3E $14
     ld   [wDialogSFX], a                          ; $58DA: $EA $AB $C5
 
-jr_007_58DD:
+ret_007_58DD:
     ret                                           ; $58DD: $C9
 
 jr_007_58DE:
@@ -144,7 +144,7 @@ func_007_58FA::
     xor  $01                                      ; $5916: $EE $01
     ld   [hl], a                                  ; $5918: $77
 
-jr_007_5919:
+ret_007_5919:
     ret                                           ; $5919: $C9
 
 func_007_591A::

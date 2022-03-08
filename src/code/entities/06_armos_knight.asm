@@ -229,7 +229,7 @@ ArmosKnightState0Handler::
     call GetEntityTransitionCountdown             ; $543C: $CD $05 $0C
     ld   [hl], $30                                ; $543F: $36 $30
 
-jr_006_5441:
+ret_006_5441:
     ret                                           ; $5441: $C9
 
 ArmosKnightState1Handler::
@@ -378,7 +378,7 @@ ArmosKnightState7Handler::
     call IncrementEntityState                     ; $551D: $CD $12 $3B
     ld   [hl], $02                                ; $5520: $36 $02
 
-jr_006_5522:
+ret_006_5522:
     ret                                           ; $5522: $C9
 
 Data_006_5523::

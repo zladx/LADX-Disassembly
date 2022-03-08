@@ -62,7 +62,7 @@ jr_006_4F8C:
     add  hl, bc                                   ; $4FA0: $09
     ld   [hl], b                                  ; $4FA1: $70
 
-jr_006_4FA2:
+ret_006_4FA2:
     ret                                           ; $4FA2: $C9
 
 func_006_4FA3::
@@ -79,5 +79,5 @@ func_006_4FA3::
 jr_006_4FAE:
     inc  [hl]                                     ; $4FAE: $34
 
-jr_006_4FAF:
+ret_006_4FAF:
     ret                                           ; $4FAF: $C9

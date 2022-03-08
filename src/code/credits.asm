@@ -336,7 +336,7 @@ jr_017_4612:
     ld   [wBGPalette], a                          ; $4629: $EA $97 $DB
     ld   [wOBJ1Palette], a                        ; $462C: $EA $99 $DB
 
-jr_017_462F:
+ret_017_462F:
     ret                                           ; $462F: $C9
 
 func_017_4630::
@@ -848,7 +848,7 @@ jr_017_48C6:
 
     ld   [hl], c                                  ; $48CB: $71
 
-jr_017_48CC:
+ret_017_48CC:
     ret                                           ; $48CC: $C9
 
 Data_017_48CD::
@@ -1425,7 +1425,7 @@ ResetCreditsSceneVariables::
     ld   [wD008], a                               ; $4DCA: $EA $08 $D0
     ld   [wD009], a                               ; $4DCD: $EA $09 $D0
 
-jr_017_4DD0:
+ret_017_4DD0:
     ret                                           ; $4DD0: $C9
 
 Data_017_4DD1::
@@ -1581,7 +1581,7 @@ CreditsWindFishPrepare2Handler::
     call ResetCreditsSceneVariables               ; $4EE8: $CD $A5 $4D
     jp   IncrementCreditsSubscene                 ; $4EEB: $C3 $D9 $4C
 
-jr_017_4EEE:
+ret_017_4EEE:
     ret                                           ; $4EEE: $C9
 
 Data_017_4EEF::
@@ -1751,7 +1751,7 @@ jr_017_5176:
     ldh  [rIE], a                                 ; $51A1: $E0 $FF
     jp   IncrementCreditsSubscene                 ; $51A3: $C3 $D9 $4C
 
-jr_017_51A6:
+ret_017_51A6:
     ret                                           ; $51A6: $C9
 
 ; Windfish palette data.
@@ -1859,7 +1859,7 @@ CreditsOpenWindFishDialog::
     ld   a, $17                                   ; $53EE: $3E $17
     ldh  [hWaveSfx], a                            ; $53F0: $E0 $F3
 
-jr_017_53F2:
+ret_017_53F2:
     ret                                           ; $53F2: $C9
 
 CreditsWindFishSpeechHandler::
@@ -1869,7 +1869,7 @@ CreditsWindFishSpeechHandler::
 
     call IncrementCreditsSubscene                 ; $53F9: $CD $D9 $4C
 
-jr_017_53FC:
+ret_017_53FC:
     ret                                           ; $53FC: $C9
 
 CreditsWindFishPrepareDisapparitionHandler::
@@ -1889,7 +1889,7 @@ CreditsWindFishPrepareDisapparitionHandler::
     ldh  [hWaveSfx], a                            ; $5418: $E0 $F3
     call IncrementCreditsSubscene                 ; $541A: $CD $D9 $4C
 
-jr_017_541D:
+ret_017_541D:
     ret                                           ; $541D: $C9
 
 Data_017_541E::
@@ -1955,7 +1955,7 @@ jr_017_547D:
     sub  $20                                      ; $548E: $D6 $20
     ld   [wD005], a                               ; $5490: $EA $05 $D0
 
-jr_017_5493:
+ret_017_5493:
     ret                                           ; $5493: $C9
 
 Data_017_5494::
@@ -2040,7 +2040,7 @@ CreditsPlayInstrumentsDialogHandler::
     ldh  [hReplaceTiles], a                       ; $551A: $E0 $A5
     call IncrementCreditsSubscene                 ; $551C: $CD $D9 $4C
 
-jr_017_551F:
+ret_017_551F:
     ret                                           ; $551F: $C9
 
 CreditsLinkTurnsToPlayHandler::
@@ -2153,7 +2153,7 @@ jr_017_55A3:
     ld   [wD006], a                               ; $55E3: $EA $06 $D0
     call IncrementCreditsSubscene                 ; $55E6: $CD $D9 $4C
 
-jr_017_55E9:
+ret_017_55E9:
     ret                                           ; $55E9: $C9
 
 CreditsLinkShowsInstrumentsHandler::
@@ -2170,7 +2170,7 @@ jr_017_55F6:
 
     call IncrementCreditsSubscene                 ; $55F9: $CD $D9 $4C
 
-jr_017_55FC:
+ret_017_55FC:
     ret                                           ; $55FC: $C9
 
 ; Handles:
@@ -2353,7 +2353,7 @@ func_017_5728::
     ld   [wD006], a                               ; $572F: $EA $06 $D0
     jp   IncrementD000AndReturn                                    ; $5732: $C3 $25 $56
 
-jr_017_5735:
+ret_017_5735:
     ret                                           ; $5735: $C9
 
 func_017_5736::
@@ -2415,7 +2415,7 @@ jr_017_575A:
     ld   [hl], $50                                ; $578E: $36 $50
     jp   IncrementD000AndReturn                   ; $5790: $C3 $25 $56
 
-jr_017_5793:
+ret_017_5793:
     ret                                           ; $5793: $C9
 
 func_017_5794::
@@ -2426,7 +2426,7 @@ func_017_5794::
     ld   [wD006], a                               ; $579B: $EA $06 $D0
     jp   IncrementD000AndReturn                                    ; $579E: $C3 $25 $56
 
-jr_017_57A1:
+ret_017_57A1:
     ret                                           ; $57A1: $C9
 
 BeachSceneHandler::
@@ -2480,7 +2480,7 @@ jr_017_57BF:
     ld   [hl], $60                                ; $57F3: $36 $60
     jp   IncrementD000AndReturn                   ; $57F5: $C3 $25 $56
 
-jr_017_57F8:
+ret_017_57F8:
     ret                                           ; $57F8: $C9
 
 func_017_57F9::
@@ -2491,7 +2491,7 @@ func_017_57F9::
     ld   [wD006], a                               ; $5800: $EA $06 $D0
     jp   IncrementD000AndReturn                                    ; $5803: $C3 $25 $56
 
-jr_017_5806:
+ret_017_5806:
     ret                                           ; $5806: $C9
 
 TarinSceneHandler::
@@ -2527,7 +2527,7 @@ jr_017_5824:
     ld   [hl], $50                                ; $5836: $36 $50
     jp   IncrementD000AndReturn                                    ; $5838: $C3 $25 $56
 
-jr_017_583B:
+ret_017_583B:
     ret                                           ; $583B: $C9
 
 func_017_583C::
@@ -2538,7 +2538,7 @@ func_017_583C::
     ld   [wD006], a                               ; $5843: $EA $06 $D0
     jp   IncrementD000AndReturn                                    ; $5846: $C3 $25 $56
 
-jr_017_5849:
+ret_017_5849:
     ret                                           ; $5849: $C9
 
 MarinSingingSceneHandler:
@@ -2610,7 +2610,7 @@ jr_017_5867:
     ld   [hl], $60                                ; $58BD: $36 $60
     jp   IncrementD000AndReturn                                    ; $58BF: $C3 $25 $56
 
-jr_017_58C2:
+ret_017_58C2:
     ret                                           ; $58C2: $C9
 
 func_017_58C3::
@@ -2621,7 +2621,7 @@ func_017_58C3::
     ld   [wD006], a                               ; $58CA: $EA $06 $D0
     jp   IncrementD000AndReturn                                    ; $58CD: $C3 $25 $56
 
-jr_017_58D0:
+ret_017_58D0:
     ret                                           ; $58D0: $C9
 
 ; Load koholint island disapearing GFX
@@ -2643,7 +2643,7 @@ func_017_58D1::
     call DisableAllEntities                       ; $58E9: $CD $2A $56
     jp   IncrementD000AndReturn                                    ; $58EC: $C3 $25 $56
 
-jr_017_58EF:
+ret_017_58EF:
     ret                                           ; $58EF: $C9
 
 func_017_58F0::
@@ -2661,7 +2661,7 @@ func_017_58F8::
     ld   [wD00B], a                               ; $5904: $EA $0B $D0
     jp   IncrementD000AndReturn                                    ; $5907: $C3 $25 $56
 
-jr_017_590A:
+ret_017_590A:
     ret                                           ; $590A: $C9
 
 func_017_590B::
@@ -2708,7 +2708,7 @@ func_017_5938::
     call ClearFileMenuBG_trampoline               ; $5949: $CD $FA $08
     jp   IncrementD000AndReturn                   ; $594C: $C3 $25 $56
 
-jr_017_594F:
+ret_017_594F:
     ret                                           ; $594F: $C9
 
 Data_017_5950::
@@ -3335,7 +3335,7 @@ CreditsWaterNoiseFadingOutHandler::
     ld   hl, wGameplaySubtype                     ; $6041: $21 $96 $DB
     inc  [hl]                                     ; $6044: $34
 
-jr_017_6045:
+ret_017_6045:
     ret                                           ; $6045: $C9
 
 CreditsLinkOnSeaLargeHandler::
@@ -3447,7 +3447,7 @@ LinkOnSeaLarge3Handler::
     ld   hl, wGameplaySubtype                     ; $6110: $21 $96 $DB
     inc  [hl]                                     ; $6113: $34
 
-jr_017_6114:
+ret_017_6114:
     ret                                           ; $6114: $C9
 
 CreditsSunAboveHandler::
@@ -3603,7 +3603,7 @@ CreditsSunAbove3Handler::
     call ResetCreditsSceneVariables               ; $6229: $CD $A5 $4D
     jp   IncrementCreditsSubscene                 ; $622C: $C3 $D9 $4C
 
-jr_017_622F:
+ret_017_622F:
     ret                                           ; $622F: $C9
 
 CreditsSunAbove4Handler::
@@ -3821,7 +3821,7 @@ label_017_6401:
     ld   hl, wIntroTimer                          ; $6401: $21 $01 $D0
     inc  [hl]                                     ; $6404: $34
 
-jr_017_6405:
+ret_017_6405:
     ret                                           ; $6405: $C9
 
 Data_017_6406::
@@ -3856,7 +3856,7 @@ jr_017_642E:
 
     jp   label_017_6401                           ; $6443: $C3 $01 $64
 
-jr_017_6446:
+ret_017_6446:
     ret                                           ; $6446: $C9
 
 func_017_6447::
@@ -3869,7 +3869,7 @@ func_017_6447::
     call IncrementCreditsSubscene                 ; $6451: $CD $D9 $4C
     ret                                           ; $6454: $C9
 
-jr_017_6455:
+ret_017_6455:
     ret                                           ; $6455: $C9
 
 ; Palettes indices
@@ -3978,7 +3978,7 @@ func_017_64DE::
 
     ld   [hl], $00                                ; $651B: $36 $00
 
-jr_017_651D:
+ret_017_651D:
     ret                                           ; $651D: $C9
 
 Data_017_651E::
@@ -4166,7 +4166,7 @@ jr_017_6800:
     xor  a                                        ; $6806: $AF
     ld   [de], a                                  ; $6807: $12
 
-jr_017_6808:
+ret_017_6808:
     ret                                           ; $6808: $C9
 
 CreditsLinkSeatedOnLogHandler::
@@ -4265,7 +4265,7 @@ LinkSeatedOnLog3Handler::
     call ResetCreditsSceneVariables               ; $68B0: $CD $A5 $4D
     jp   IncrementCreditsSubscene                 ; $68B3: $C3 $D9 $4C
 
-jr_017_68B6:
+ret_017_68B6:
     ret                                           ; $68B6: $C9
 
 ; Palettes indices
@@ -4381,7 +4381,7 @@ LinkSeatedOnLog5Handler::
     ld   [wD006], a                               ; $6ACA: $EA $06 $D0
     jp   IncrementCreditsSubscene                 ; $6ACD: $C3 $D9 $4C
 
-jr_017_6AD0:
+ret_017_6AD0:
     ret                                           ; $6AD0: $C9
 
 LinkSeatedOnLog6Handler::
@@ -4393,7 +4393,7 @@ LinkSeatedOnLog6Handler::
 
     jp   IncrementCreditsSubscene                 ; $6ADD: $C3 $D9 $4C
 
-jr_017_6AE0:
+ret_017_6AE0:
     ret                                           ; $6AE0: $C9
 
 Data_017_6AE1::
@@ -4602,7 +4602,7 @@ jr_017_6CDD:
     add  hl, de                                   ; $6D07: $19
     ld   [hl], $60                                ; $6D08: $36 $60
 
-jr_017_6D0A:
+ret_017_6D0A:
     ret                                           ; $6D0A: $C9
 
 func_017_6D0B::
@@ -4773,7 +4773,7 @@ jr_017_6E0F:
     ld   hl, wD003                                ; $6E0F: $21 $03 $D0
     inc  [hl]                                     ; $6E12: $34
 
-jr_017_6E13:
+ret_017_6E13:
     ret                                           ; $6E13: $C9
 
 CreditsLinkFaceCloseUp5Handler::
@@ -4830,7 +4830,7 @@ CreditsLinkFaceCloseUp6Handler::
 
     jp   func_017_64DE                            ; $6E6B: $C3 $DE $64
 
-jr_017_6E6E:
+ret_017_6E6E:
     ret                                           ; $6E6E: $C9
 
 CreditsRollHandler::
@@ -4969,7 +4969,7 @@ jr_017_6F4C:
     add  hl, de                                   ; $6F64: $19
     ld   [hl], $0F                                ; $6F65: $36 $0F
 
-jr_017_6F67:
+ret_017_6F67:
     ret                                           ; $6F67: $C9
 
 CreditsRoll4Handler::
@@ -5228,7 +5228,7 @@ jr_017_71AC:
     call IncrementCreditsSubscene                            ; $71C6: $CD $D9 $4C
     jp   label_017_7CC2                           ; $71C9: $C3 $C2 $7C
 
-jr_017_71CC:
+ret_017_71CC:
     ret                                           ; $71CC: $C9
 
 func_017_71CD::
@@ -5328,7 +5328,7 @@ jr_017_72A6:
     ld   a, JINGLE_SEAGULL                        ; $72B8: $3E $21
     ldh  [hJingle], a                             ; $72BA: $E0 $F2
 
-jr_017_72BC:
+ret_017_72BC:
     ret                                           ; $72BC: $C9
 
 jr_017_72BD:
@@ -5543,7 +5543,7 @@ jr_017_756C:
     add  hl, bc                                   ; $756F: $09
     inc  [hl]                                     ; $7570: $34
 
-jr_017_7571:
+ret_017_7571:
     ret                                           ; $7571: $C9
 
 Data_017_7572::
@@ -5586,7 +5586,7 @@ jr_017_75D7:
     ld   a, $17                                   ; $75DC: $3E $17
     ldh  [hWaveSfx], a                               ; $75DE: $E0 $F3
 
-jr_017_75E0:
+ret_017_75E0:
     ret                                           ; $75E0: $C9
 
 Data_017_75E1::
@@ -6296,7 +6296,7 @@ func_017_7B06::
     ld   [hl], $30                                ; $7B3B: $36 $30
     call IncrementEntityState                     ; $7B3D: $CD $12 $3B
 
-jr_017_7B40:
+ret_017_7B40:
     ret                                           ; $7B40: $C9
 
 func_017_7B41::
@@ -6461,7 +6461,7 @@ func_017_7C4D::
     ld   [hl], $80                                ; $7C65: $36 $80
     call IncrementEntityState                     ; $7C67: $CD $12 $3B
 
-jr_017_7C6A:
+ret_017_7C6A:
     ret                                           ; $7C6A: $C9
 
 Data_017_7C6B::
@@ -6507,7 +6507,7 @@ func_017_7CA5::
     ld   [hl], $FF                                ; $7CB1: $36 $FF
     call IncrementEntityState                     ; $7CB3: $CD $12 $3B
 
-jr_017_7CB6:
+ret_017_7CB6:
     ret                                           ; $7CB6: $C9
 
 func_017_7CB7::
@@ -6554,7 +6554,7 @@ jr_017_7CD4:
     ld   a, $FF                                   ; $7CEA: $3E $FF
     call SetEntitySpriteVariant                   ; $7CEC: $CD $0C $3B
 
-jr_017_7CEF:
+ret_017_7CEF:
     ret                                           ; $7CEF: $C9
 
 CreditsOpenDialog::

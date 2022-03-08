@@ -56,7 +56,7 @@ FaceShrineMuralStage1Handler::
     ld   a, TILESET_FACE_SHRINE_MURAL             ; $6B4C: $3E $14
     ld   [wTilesetToLoad], a                      ; $6B4E: $EA $FE $D6
 
-jr_001_6B51::
+ret_001_6B51::
     ret                                           ; $6B51: $C9
 
 FaceShrineMuralStage2Handler::
@@ -82,7 +82,7 @@ FaceShrineMuralStage3Handler::
     xor  a                                        ; $6B7C: $AF
     ld   [wC3C4], a                               ; $6B7D: $EA $C4 $C3
 
-jr_001_6B80::
+ret_001_6B80::
     ret                                           ; $6B80: $C9
 
 FaceShrineMuralStage4Handler::
@@ -98,7 +98,7 @@ FaceShrineMuralStage4Handler::
     ld   a, $E7                                   ; $6B94: $3E $E7
     call OpenDialog                               ; $6B96: $CD $85 $23
 
-jr_001_6B99::
+ret_001_6B99::
     ret                                           ; $6B99: $C9
 
 FaceShrineMuralStage5Handler::

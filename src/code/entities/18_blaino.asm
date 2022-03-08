@@ -169,7 +169,7 @@ jr_018_65C3:
     add  hl, bc                                   ; $65CB: $09
     ld   [hl], $00                                ; $65CC: $36 $00
 
-jr_018_65CE:
+ret_018_65CE:
     ret                                           ; $65CE: $C9
 
 func_018_65CF::
@@ -208,7 +208,7 @@ func_018_65EC::
     call GetEntityTransitionCountdown             ; $6606: $CD $05 $0C
     ld   [hl], $01                                ; $6609: $36 $01
 
-jr_018_660B:
+ret_018_660B:
     ret                                           ; $660B: $C9
 
 label_018_660C:
@@ -265,7 +265,7 @@ jr_018_666E:
     call GetEntityTransitionCountdown             ; $6673: $CD $05 $0C
     ld   [hl], $03                                ; $6676: $36 $03
 
-jr_018_6678:
+ret_018_6678:
     ret                                           ; $6678: $C9
 
 Data_018_6679::
@@ -344,7 +344,7 @@ jr_018_6724:
     call GetEntityTransitionCountdown             ; $6724: $CD $05 $0C
     ld   [hl], $03                                ; $6727: $36 $03
 
-jr_018_6729:
+ret_018_6729:
     ret                                           ; $6729: $C9
 
 label_018_672A:

@@ -45,7 +45,7 @@ label_006_4EB7:
 
     inc  [hl]                                     ; $4EE1: $34
 
-jr_006_4EE2:
+ret_006_4EE2:
     ret                                           ; $4EE2: $C9
 
 jr_006_4EE3:
@@ -81,7 +81,7 @@ jr_006_4EF2:
     ldh  a, [hMultiPurpose1]                      ; $4F09: $F0 $D8
     ldh  [hLinkSpeedX], a                         ; $4F0B: $E0 $9A
 
-jr_006_4F0D:
+ret_006_4F0D:
     ret                                           ; $4F0D: $C9
 
 jr_006_4F0E:

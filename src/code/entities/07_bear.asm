@@ -126,7 +126,7 @@ jr_007_4C5E:
     call GetEntityTransitionCountdown             ; $4C6A: $CD $05 $0C
     ld   [hl], $70                                ; $4C6D: $36 $70
 
-jr_007_4C6F:
+ret_007_4C6F:
     ret                                           ; $4C6F: $C9
 
 func_007_4C70::
@@ -141,7 +141,7 @@ func_007_4C70::
     call IncrementEntityState                     ; $4C7E: $CD $12 $3B
     ld   [hl], b                                  ; $4C81: $70
 
-jr_007_4C82:
+ret_007_4C82:
     ret                                           ; $4C82: $C9
 
 func_007_4C83::

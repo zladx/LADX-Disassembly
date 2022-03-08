@@ -158,7 +158,7 @@ func_006_5ACC::
     ld   a, $18                                   ; $5ACC: $3E $18
     ldh  [hWaveSfx], a                            ; $5ACE: $E0 $F3
 
-jr_006_5AD0:
+ret_006_5AD0:
     ret                                           ; $5AD0: $C9
 
 YipYipState3Handler::
@@ -170,7 +170,7 @@ YipYipState3Handler::
     call IncrementEntityState                     ; $5ADA: $CD $12 $3B
     ld   [hl], b                                  ; $5ADD: $70
 
-jr_006_5ADE:
+ret_006_5ADE:
     ret                                           ; $5ADE: $C9
 
 Data_006_5ADF::

@@ -138,7 +138,7 @@ label_006_41F8:
     ld   a, JINGLE_JUMP_DOWN                      ; $4213: $3E $08
     ldh  [hJingle], a                             ; $4215: $E0 $F2
 
-jr_006_4217:
+ret_006_4217:
     ret                                           ; $4217: $C9
 
 jr_006_4218:

@@ -65,7 +65,7 @@ func_018_6A31::
     add  hl, de                                   ; $6A6D: $19
     ld   [hl], $01                                ; $6A6E: $36 $01
 
-jr_018_6A70:
+ret_018_6A70:
     ret                                           ; $6A70: $C9
 
 jr_018_6A71:
@@ -297,7 +297,7 @@ VireState2Handler::
     call GetEntityTransitionCountdown             ; $6BCE: $CD $05 $0C
     ld   [hl], $10                                ; $6BD1: $36 $10
 
-jr_018_6BD3:
+ret_018_6BD3:
     ret                                           ; $6BD3: $C9
 
 jr_018_6BD4:
@@ -520,7 +520,7 @@ VireState4Handler::
     add  hl, bc                                   ; $6D15: $09
     ld   [hl], a                                  ; $6D16: $77
 
-jr_018_6D17:
+ret_018_6D17:
     ret                                           ; $6D17: $C9
 
 VireState5Handler::
@@ -706,7 +706,7 @@ jr_018_6DDE:
     ld   [hl], $20                                ; $6E32: $36 $20
     pop  bc                                       ; $6E34: $C1
 
-jr_018_6E35:
+ret_018_6E35:
     ret                                           ; $6E35: $C9
 
 label_018_6E36:

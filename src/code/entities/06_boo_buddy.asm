@@ -153,7 +153,7 @@ jr_006_7A87:
     inc  [hl]                                     ; $7A89: $34
     inc  [hl]                                     ; $7A8A: $34
 
-jr_006_7A8B:
+ret_006_7A8B:
     ret                                           ; $7A8B: $C9
 
 func_006_7A8C::

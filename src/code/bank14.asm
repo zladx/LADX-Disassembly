@@ -335,7 +335,7 @@ jr_014_4B8A:
     ld   a, $02                                   ; $4B8A: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4B8C: $E0 $A1
 
-jr_014_4B8E:
+ret_014_4B8E:
     ret                                           ; $4B8E: $C9
 
 Data_014_4B8F::
@@ -1437,7 +1437,7 @@ jr_014_54DE:
     ld   a, $02                                   ; $54E2: $3E $02
     ld   [wC111], a                               ; $54E4: $EA $11 $C1
 
-jr_014_54E7:
+ret_014_54E7:
     ret                                           ; $54E7: $C9
 
 Data_014_54E8::
@@ -1475,7 +1475,7 @@ jr_014_5502:
     ld   a, [hl]                                  ; $5521: $7E
     ld   [wScreenShakeVertical], a                ; $5522: $EA $56 $C1
 
-jr_014_5525:
+ret_014_5525:
     ret                                           ; $5525: $C9
 
 func_014_5526::
@@ -2045,7 +2045,7 @@ jr_014_5879:
 jr_014_5882:
     add  hl, de                                   ; $5882: $19
 
-jr_014_5883:
+ret_014_5883:
     ret                                           ; $5883: $C9
 
 ; Retrieve the status of chests in the given room

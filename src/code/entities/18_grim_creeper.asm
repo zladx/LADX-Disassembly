@@ -114,7 +114,7 @@ jr_018_707F:
 
     jp   IncrementEntityState                     ; $7085: $C3 $12 $3B
 
-jr_018_7088:
+ret_018_7088:
     ret                                           ; $7088: $C9
 
 Data_018_7089::

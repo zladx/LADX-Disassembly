@@ -57,7 +57,7 @@ jr_019_44A6:
     ld   a, JINGLE_SWORD_POKING                   ; $44B5: $3E $07
     ldh  [hJingle], a                             ; $44B7: $E0 $F2
 
-jr_019_44B9:
+ret_019_44B9:
     ret                                           ; $44B9: $C9
 
 func_019_44BA::

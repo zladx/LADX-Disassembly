@@ -73,7 +73,7 @@ jr_018_63D1:
     add  hl, de                                   ; $63F4: $19
     res  6, [hl]                                  ; $63F5: $CB $B6
 
-jr_018_63F7:
+ret_018_63F7:
     ret                                           ; $63F7: $C9
 
 Data_018_63F8::

@@ -257,7 +257,7 @@ label_007_4198:
     add  hl, de                                   ; $41B5: $19
     ld   [hl], $40                                ; $41B6: $36 $40
 
-jr_007_41B8:
+ret_007_41B8:
     ret                                           ; $41B8: $C9
 
 BushCrawlerState1Handler::
@@ -332,5 +332,5 @@ label_007_41F0:
     call GetEntitySpeedYAddress                   ; $422F: $CD $05 $40
     ld   [hl], a                                  ; $4232: $77
 
-jr_007_4233:
+ret_007_4233:
     ret                                           ; $4233: $C9

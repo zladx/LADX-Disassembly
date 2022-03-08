@@ -349,7 +349,7 @@ ENDC
     ld   [wMusicTrackToPlay], a                   ; $69FF: $EA $68 $D3
     ldh  [hDefaultMusicTrackAlt], a               ; $6A02: $E0 $BD
 
-jr_006_6A04:
+ret_006_6A04:
     ret                                           ; $6A04: $C9
 
 jr_006_6A05:
@@ -391,7 +391,7 @@ func_006_6A2B::
 jr_006_6A35:
     inc  [hl]                                     ; $6A35: $34
 
-jr_006_6A36:
+ret_006_6A36:
     ret                                           ; $6A36: $C9
 
 Data_006_6A37::

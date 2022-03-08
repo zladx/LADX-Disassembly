@@ -336,7 +336,7 @@ func_007_488E::
     call GetEntityTransitionCountdown             ; $48AA: $CD $05 $0C
     ld   [hl], $10                                ; $48AD: $36 $10
 
-jr_007_48AF:
+ret_007_48AF:
     ret                                           ; $48AF: $C9
 
 func_007_48B0::

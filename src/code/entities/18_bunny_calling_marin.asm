@@ -93,7 +93,7 @@ func_018_5321::
     add  hl, bc                                   ; $5334: $09
     ld   [hl], $12                                ; $5335: $36 $12
 
-jr_018_5337:
+ret_018_5337:
     ret                                           ; $5337: $C9
 
 BunnyCallingMarinState2Handler::
@@ -194,5 +194,5 @@ jr_018_5397:
     xor  a                                        ; $53C9: $AF
     ld   [wC167], a                               ; $53CA: $EA $67 $C1
 
-jr_018_53CD:
+ret_018_53CD:
     ret                                           ; $53CD: $C9

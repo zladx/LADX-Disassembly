@@ -285,7 +285,7 @@ jr_006_4CCE:
     cp   $FF                                      ; $4D36: $FE $FF
     jr   nz, jr_006_4CCE                          ; $4D38: $20 $94
 
-jr_006_4D3A:
+ret_006_4D3A:
     ret                                           ; $4D3A: $C9
 
 CueBallState1Handler::

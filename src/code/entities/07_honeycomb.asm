@@ -119,7 +119,7 @@ func_007_4D27::
     add  hl, de                                   ; $4D4A: $19
     ld   [hl], b                                  ; $4D4B: $70
 
-jr_007_4D4C:
+ret_007_4D4C:
     ret                                           ; $4D4C: $C9
 
 func_007_4D4D::

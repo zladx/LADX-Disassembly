@@ -83,5 +83,5 @@ jr_01F_7FE2:
     xor  a                                        ; $7FEA: $AF
     ldh  [hNoiseSfx], a                           ; $7FEB: $E0 $F4
 
-jr_01F_7FED:
+ret_01F_7FED:
     ret                                           ; $7FED: $C9

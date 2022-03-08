@@ -96,7 +96,7 @@ jr_006_7585:
     call GetEntityTransitionCountdown             ; $7595: $CD $05 $0C
     ld   [hl], b                                  ; $7598: $70
 
-jr_006_7599:
+ret_006_7599:
     ret                                           ; $7599: $C9
 
 jr_006_759A:

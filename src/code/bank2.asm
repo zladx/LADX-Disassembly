@@ -290,7 +290,7 @@ func_002_4338::
     ld   a, $01                                   ; $4341: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4343: $E0 $A1
 
-jr_002_4345:
+ret_002_4345:
     ret                                           ; $4345: $C9
 
 ; conversion table from view direction to animation state
@@ -392,7 +392,7 @@ jr_002_43A7:
     dec  [hl]                                     ; $43B7: $35
     dec  [hl]                                     ; $43B8: $35
 
-jr_002_43B9:
+ret_002_43B9:
     ret                                           ; $43B9: $C9
 
 jr_002_43BA:
@@ -1475,7 +1475,7 @@ jr_002_4AB2:
     ld   a, JINGLE_MANBO_WARP                     ; $4ACC: $3E $2C
     ldh  [hJingle], a                             ; $4ACE: $E0 $F2
 
-jr_002_4AD0:
+ret_002_4AD0:
     ret                                           ; $4AD0: $C9
 
 jr_002_4AD1:
@@ -1544,7 +1544,7 @@ jr_002_4AF1:
     add  hl, de                                   ; $4B3D: $19
     ld   [hl], $40                                ; $4B3E: $36 $40
 
-jr_002_4B40:
+ret_002_4B40:
     ret                                           ; $4B40: $C9
 
 LinkDirectionToLinkAnimationState2::
@@ -1891,7 +1891,7 @@ jr_002_4CD3:
     add  hl, bc                                   ; $4D1D: $09
     ld   [hl], a                                  ; $4D1E: $77
 
-jr_002_4D1F:
+ret_002_4D1F:
     ret                                           ; $4D1F: $C9
 
 func_002_4D20::
@@ -2224,7 +2224,7 @@ ENDC
     ld   a, LINK_MOTION_DEFAULT                   ; $4EEA: $3E $00
     ld   [wLinkMotionState], a                    ; $4EEC: $EA $1C $C1
 
-jr_002_4EEF:
+ret_002_4EEF:
     ret                                           ; $4EEF: $C9
 
 Data_002_4EF0::
@@ -3921,7 +3921,7 @@ ClearTranscientVfx::
     xor  a                                        ; $58EA: $AF
     ld   [hl], a                                  ; $58EB: $77
 
-jr_002_58EC:
+ret_002_58EC:
     ret                                           ; $58EC: $C9
 
 Data_002_58ED::
@@ -3959,7 +3959,7 @@ jr_002_591B:
     ld   a, [hl]                                  ; $5921: $7E
     ld   [wOAMNextAvailableSlot], a               ; $5922: $EA $C0 $C3
 
-jr_002_5925:
+ret_002_5925:
     ret                                           ; $5925: $C9
 
 func_002_5926::
@@ -5493,7 +5493,7 @@ jr_002_69F3:
     xor  a                                        ; $69FD: $AF
     ldh  [hLinkPhysicsModifier], a                ; $69FE: $E0 $9C
 
-jr_002_6A00:
+ret_002_6A00:
     ret                                           ; $6A00: $C9
 
 LinkSideScrollingPhysicsHandler::
@@ -5929,7 +5929,7 @@ func_002_6C69::
     or   [hl]                                     ; $6C70: $B6
     ld   [wCollisionType], a                      ; $6C71: $EA $33 $C1
 
-jr_002_6C74:
+ret_002_6C74:
     ret                                           ; $6C74: $C9
 
 ; Check Link's position, and initiate a map or room transition if needed
@@ -7447,7 +7447,7 @@ jr_002_74A3:
     cp   $0C                                      ; $74A7: $FE $0C
     jp   nc, ApplyMapFadeOutTransitionWithNoise   ; $74A9: $D2 $7D $0C
 
-jr_002_74AC:
+ret_002_74AC:
     ret                                           ; $74AC: $C9
 
 label_002_74AD:
@@ -7596,7 +7596,7 @@ jr_002_7582:
     ld   a, c                                     ; $7582: $79
     ld   [wC13B], a                               ; $7583: $EA $3B $C1
 
-jr_002_7586:
+ret_002_7586:
     ret                                           ; $7586: $C9
 
 jr_002_7587:
@@ -7630,7 +7630,7 @@ jr_002_7587:
     ld   [hl+], a                                 ; $75AE: $22
     ld   [hl], $00                                ; $75AF: $36 $00
 
-jr_002_75B1:
+ret_002_75B1:
     ret                                           ; $75B1: $C9
 
 jr_002_75B2:
@@ -7940,7 +7940,7 @@ ENDC
     ld   a, [hl]                                  ; $774C: $7E
     ldh  [hLinkSpeedY], a                         ; $774D: $E0 $9B
 
-jr_002_774F:
+ret_002_774F:
     ret                                           ; $774F: $C9
 
 jr_002_7750:

@@ -118,7 +118,7 @@ jr_001_56D9::
     ld   a, $08                                   ; $56EE: $3E $08
     ld   [wBGMapToLoad], a                        ; $56F0: $EA $FF $D6
 
-jr_001_56F3::
+ret_001_56F3::
     ret                                           ; $56F3: $C9
 
 WorldMapState2Handler::

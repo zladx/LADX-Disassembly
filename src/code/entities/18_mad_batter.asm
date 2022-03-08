@@ -38,7 +38,7 @@ MadBatterState0Handler::
     cp   [hl]                                     ; $4F19: $BE
     jp   z, ClearEntityStatusBank18               ; $4F1A: $CA $08 $7F
 
-jr_018_4F1D:
+ret_018_4F1D:
     ret                                           ; $4F1D: $C9
 
 MadBatterState1Handler::

@@ -145,7 +145,7 @@ label_004_68E4:
     ld   a, $1F                                   ; $68F8: $3E $1F
     ldh  [hNoiseSfx], a                           ; $68FA: $E0 $F4
 
-jr_004_68FC:
+ret_004_68FC:
     ret                                           ; $68FC: $C9
 
 func_004_68FD::

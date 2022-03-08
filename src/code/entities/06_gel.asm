@@ -238,7 +238,7 @@ GelState3Handler::
     call IncrementEntityState                     ; $7D6B: $CD $12 $3B
     ld   [hl], b                                  ; $7D6E: $70
 
-jr_006_7D6F:
+ret_006_7D6F:
     ret                                           ; $7D6F: $C9
 
 GelState4Handler::
@@ -303,5 +303,5 @@ func_006_7DCD::
 
     dec  [hl]                                     ; $7DD2: $35
 
-jr_006_7DD3:
+ret_006_7DD3:
     ret                                           ; $7DD3: $C9

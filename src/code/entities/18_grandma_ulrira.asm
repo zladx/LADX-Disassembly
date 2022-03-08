@@ -171,5 +171,5 @@ GrandmaUlriraState3Handler::
     call IncrementEntityState                     ; $4E26: $CD $12 $3B
     ld   [hl], b                                  ; $4E29: $70
 
-jr_018_4E2A:
+ret_018_4E2A:
     ret                                           ; $4E2A: $C9

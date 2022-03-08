@@ -66,5 +66,5 @@ jr_003_69F8:
     ld   a, $13                                   ; $6A19: $3E $13
     ldh  [hNoiseSfx], a                            ; $6A1B: $E0 $F4
 
-jr_003_6A1D:
+ret_003_6A1D:
     ret                                           ; $6A1D: $C9

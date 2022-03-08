@@ -56,7 +56,7 @@ MovingBlockLeftTopState1Handler::
 
     dec  [hl]                                     ; $414B: $35
 
-jr_015_414C:
+ret_015_414C:
     ret                                           ; $414C: $C9
 
 jr_015_414D:
@@ -151,7 +151,7 @@ jr_015_41C3:
     add  $0C                                      ; $41C5: $C6 $0C
     ldh  [hLinkPositionY], a                      ; $41C7: $E0 $99
 
-jr_015_41C9:
+ret_015_41C9:
     ret                                           ; $41C9: $C9
 
 MovingBlockLeftBottomEntityHandler::
@@ -207,7 +207,7 @@ MovingBlockLeftBottomState1Handler::
 
     inc  [hl]                                     ; $4215: $34
 
-jr_015_4216:
+ret_015_4216:
     ret                                           ; $4216: $C9
 
 jr_015_4217:
@@ -292,7 +292,7 @@ MovingBlockBottomLeftState1Handler::
 
     dec  [hl]                                     ; $4287: $35
 
-jr_015_4288:
+ret_015_4288:
     ret                                           ; $4288: $C9
 
 jr_015_4289:
@@ -377,7 +377,7 @@ MovingBlockBottomRightState1Handler::
 
     inc  [hl]                                     ; $42F9: $34
 
-jr_015_42FA:
+ret_015_42FA:
     ret                                           ; $42FA: $C9
 
 jr_015_42FB:

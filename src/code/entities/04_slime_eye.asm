@@ -123,7 +123,7 @@ jr_004_49FB:
     add  hl, de                                   ; $4A29: $19
     ld   [hl], $70                                ; $4A2A: $36 $70
 
-jr_004_4A2C:
+ret_004_4A2C:
     ret                                           ; $4A2C: $C9
 
 SlimeEyeState1Handler::
@@ -269,7 +269,7 @@ jr_004_4AEF:
 
     inc  [hl]                                     ; $4B10: $34
 
-jr_004_4B11:
+ret_004_4B11:
     ret                                           ; $4B11: $C9
 
 Data_004_4B12::
@@ -390,7 +390,7 @@ jr_004_4BA2:
     add  hl, bc                                   ; $4BC4: $09
     ld   [hl], a                                  ; $4BC5: $77
 
-jr_004_4BC6:
+ret_004_4BC6:
     ret                                           ; $4BC6: $C9
 
 func_004_4BC7::
@@ -562,7 +562,7 @@ func_004_4E52::
     ld   a, LINK_ANIMATION_STATE_UNKNOWN_6A       ; $4E5B: $3E $6A
     ldh  [hLinkAnimationState], a                 ; $4E5D: $E0 $9D
 
-jr_004_4E5F:
+ret_004_4E5F:
     ret                                           ; $4E5F: $C9
 
 label_004_4E60:
@@ -768,7 +768,7 @@ func_004_4F7E::
     ld   a, JINGLE_JUMP_DOWN                      ; $4FA9: $3E $08
     ldh  [hJingle], a                             ; $4FAB: $E0 $F2
 
-jr_004_4FAD:
+ret_004_4FAD:
     ret                                           ; $4FAD: $C9
 
 Data_004_4FAE::

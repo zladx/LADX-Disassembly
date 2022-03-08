@@ -163,7 +163,7 @@ label_019_411C:
     ld   [hl], b                                  ; $4120: $70
     ret                                           ; $4121: $C9
 
-jr_019_4122:
+ret_019_4122:
     ret                                           ; $4122: $C9
 
 LiftableStatueState1And2Handler::
@@ -758,7 +758,7 @@ jr_019_4562:
     add  hl, de                                   ; $459D: $19
     ld   [hl], a                                  ; $459E: $77
 
-jr_019_459F:
+ret_019_459F:
     ret                                           ; $459F: $C9
 
 jr_019_45A0:
@@ -1175,7 +1175,7 @@ jr_019_4869:
     call GetEntityTransitionCountdown             ; $488B: $CD $05 $0C
     ld   [hl], $10                                ; $488E: $36 $10
 
-jr_019_4890:
+ret_019_4890:
     ret                                           ; $4890: $C9
 
 func_019_4891::
@@ -1458,7 +1458,7 @@ DogState3Handler::
     call GetEntityTransitionCountdown             ; $4A4A: $CD $05 $0C
     ld   [hl], $20                                ; $4A4D: $36 $20
 
-jr_019_4A4F:
+ret_019_4A4F:
     ret                                           ; $4A4F: $C9
 
 Data_019_4A50::
@@ -1655,7 +1655,7 @@ func_019_4B6E::
     inc  [hl]                                     ; $4BA9: $34
     pop  bc                                       ; $4BAA: $C1
 
-jr_019_4BAB:
+ret_019_4BAB:
     ret                                           ; $4BAB: $C9
 
 Data_019_4BAC::
@@ -2031,7 +2031,7 @@ func_019_4E09::
     add  hl, de                                   ; $4E33: $19
     ld   [hl], $20                                ; $4E34: $36 $20
 
-jr_019_4E36:
+ret_019_4E36:
     ret                                           ; $4E36: $C9
 
 Data_019_4E37::
@@ -2054,7 +2054,7 @@ func_019_4E43::
     ld   a, MUSIC_TOOL_ACQUIRED                   ; $4E5C: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $4E5E: $EA $68 $D3
 
-jr_019_4E61:
+ret_019_4E61:
     ret                                           ; $4E61: $C9
 
 label_019_4E62:
@@ -2221,7 +2221,7 @@ jr_019_4F8F:
     add  hl, de                                   ; $4FD7: $19
     ld   [hl], $1F                                ; $4FD8: $36 $1F
 
-jr_019_4FDA:
+ret_019_4FDA:
     ret                                           ; $4FDA: $C9
 
 Data_019_4FDB::
@@ -2327,7 +2327,7 @@ jr_019_506C:
     inc  [hl]                                     ; $5090: $34
     pop  bc                                       ; $5091: $C1
 
-jr_019_5092:
+ret_019_5092:
     ret                                           ; $5092: $C9
 
 jr_019_5093:
@@ -2825,7 +2825,7 @@ jr_019_53CE:
     inc  a                                        ; $53DD: $3C
     ld   [hl], a                                  ; $53DE: $77
 
-jr_019_53DF:
+ret_019_53DF:
     ret                                           ; $53DF: $C9
 
 Data_019_53E0::
@@ -2920,7 +2920,7 @@ jr_019_542C:
 
     ret                                           ; $546D: $C9
 
-jr_019_546E:
+ret_019_546E:
     ret                                           ; $546E: $C9
 
 PodobooState2Handler::
@@ -3031,7 +3031,7 @@ jr_019_5519:
     inc  [hl]                                     ; $552A: $34
     inc  [hl]                                     ; $552B: $34
 
-jr_019_552C:
+ret_019_552C:
     ret                                           ; $552C: $C9
 
 jr_019_552D:
@@ -3534,7 +3534,7 @@ jr_019_58C0:
     ld   a, $01                                   ; $58D3: $3E $01
     ld   [wC147], a                               ; $58D5: $EA $47 $C1
 
-jr_019_58D8:
+ret_019_58D8:
     ret                                           ; $58D8: $C9
 
 Data_019_58D9::
@@ -4234,7 +4234,7 @@ func_019_5DAC::
     xor  a                                        ; $5DF3: $AF
     ld   [wC167], a                               ; $5DF4: $EA $67 $C1
 
-jr_019_5DF7:
+ret_019_5DF7:
     ret                                           ; $5DF7: $C9
 
 Data_019_5DF8::
@@ -5011,7 +5011,7 @@ jr_019_63D0:
     pop  bc                                       ; $63D6: $C1
     ld   [hl], b                                  ; $63D7: $70
 
-jr_019_63D8:
+ret_019_63D8:
     ret                                           ; $63D8: $C9
 
 Data_019_63D9::
@@ -5645,7 +5645,7 @@ jr_019_6A6D:
     add  hl, de                                   ; $6A89: $19
     ld   [hl], $01                                ; $6A8A: $36 $01
 
-jr_019_6A8C:
+ret_019_6A8C:
     ret                                           ; $6A8C: $C9
 
 Data_019_6A8D::
@@ -5846,7 +5846,7 @@ CheepCheepState2Handler::
     ld   [hl], a                                  ; $6BC2: $77
     jp   label_019_6B8D                           ; $6BC3: $C3 $8D $6B
 
-jr_019_6BC6:
+ret_019_6BC6:
     ret                                           ; $6BC6: $C9
 
 CheepCheepJumpingEntityHandler::
@@ -6711,7 +6711,7 @@ SeashellMansionState0Handler::
     call GetEntityTransitionCountdown             ; $7250: $CD $05 $0C
     ld   [hl], $58                                ; $7253: $36 $58
 
-jr_019_7255:
+ret_019_7255:
     ret                                           ; $7255: $C9
 
 SeashellMansionState1Handler::
@@ -6766,7 +6766,7 @@ jr_019_7294:
     ld   a, $06                                   ; $7296: $3E $06
     ldh  [hWaveSfx], a                            ; $7298: $E0 $F3
 
-jr_019_729A:
+ret_019_729A:
     ret                                           ; $729A: $C9
 
 SeashellMansionState3Handler::
@@ -6854,7 +6854,7 @@ jr_019_731A:
     call IncrementEntityState                     ; $7322: $CD $12 $3B
     ld   [hl], $08                                ; $7325: $36 $08
 
-jr_019_7327:
+ret_019_7327:
     ret                                           ; $7327: $C9
 
 SeashellMansionState5Handler::
@@ -6897,7 +6897,7 @@ SeashellMansionState6Handler::
     add  hl, de                                   ; $7370: $19
     ld   [hl], $20                                ; $7371: $36 $20
 
-jr_019_7373:
+ret_019_7373:
     ret                                           ; $7373: $C9
 
 SeashellMansionState7Handler::
@@ -7228,7 +7228,7 @@ func_019_767B::
     sra  a                                        ; $76AD: $CB $2F
     ld   [hl], a                                  ; $76AF: $77
 
-jr_019_76B0:
+ret_019_76B0:
     ret                                           ; $76B0: $C9
 
 func_019_76B1::
@@ -7244,7 +7244,7 @@ func_019_76B1::
     call GetEntityTransitionCountdown             ; $76C5: $CD $05 $0C
     ld   [hl], $FF                                ; $76C8: $36 $FF
 
-jr_019_76CA:
+ret_019_76CA:
     ret                                           ; $76CA: $C9
 
 func_019_76CB::
@@ -7449,7 +7449,7 @@ jr_019_78C0:
     ld   [wSeashellsCount], a                     ; $78C3: $EA $0F $DB
     call_open_dialog $0EF                         ; $78C6
 
-jr_019_78CB:
+ret_019_78CB:
     ret                                           ; $78CB: $C9
 
 Data_019_78CC::

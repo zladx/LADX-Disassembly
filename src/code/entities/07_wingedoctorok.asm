@@ -222,7 +222,7 @@ label_007_577A:
     call GetEntityTransitionCountdown             ; $579A: $CD $05 $0C
     ld   [hl], $20                                ; $579D: $36 $20
 
-jr_007_579F:
+ret_007_579F:
     ret                                           ; $579F: $C9
 
 Data_007_57A0::
@@ -280,7 +280,7 @@ func_007_57B0::
     pop  bc                                       ; $57F2: $C1
     and  a                                        ; $57F3: $A7
 
-jr_007_57F4:
+ret_007_57F4:
     ret                                           ; $57F4: $C9
 
 Data_007_57F5::

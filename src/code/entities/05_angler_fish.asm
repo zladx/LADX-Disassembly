@@ -343,7 +343,7 @@ func_005_576E::
     call IncrementEntityState                     ; $5797: $CD $12 $3B
     ld   [hl], b                                  ; $579A: $70
 
-jr_005_579B:
+ret_005_579B:
     ret                                           ; $579B: $C9
 
 Data_005_579C::
@@ -548,5 +548,5 @@ jr_005_59CE:
     cp   $A8                                      ; $59D8: $FE $A8
     jp   nc, ClearEntityStatus_05                 ; $59DA: $D2 $4B $7B
 
-jr_005_59DD:
+ret_005_59DD:
     ret                                           ; $59DD: $C9

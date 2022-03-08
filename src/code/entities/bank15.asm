@@ -42,7 +42,7 @@ CrystalSwitchEntityHandler::
     ld   a, $0E                                   ; $4360: $3E $0E
     ldh  [hWaveSfx], a                            ; $4362: $E0 $F3
 
-jr_015_4364:
+ret_015_4364:
     ret                                           ; $4364: $C9
 
 BouldersEntityHandler::
@@ -89,7 +89,7 @@ BouldersEntityHandler::
     add  hl, de                                   ; $43AB: $19
     inc  [hl]                                     ; $43AC: $34
 
-jr_015_43AD:
+ret_015_43AD:
     ret                                           ; $43AD: $C9
 
 Data_015_43AE::
@@ -502,7 +502,7 @@ func_015_463D::
     add  hl, bc                                   ; $465C: $09
     ld   [hl], $30                                ; $465D: $36 $30
 
-jr_015_465F:
+ret_015_465F:
     ret                                           ; $465F: $C9
 
 func_015_4660::
@@ -808,7 +808,7 @@ jr_015_4816:
     call GetEntityPrivateCountdown1               ; $4837: $CD $00 $0C
     ld   [hl], $18                                ; $483A: $36 $18
 
-jr_015_483C:
+ret_015_483C:
     ret                                           ; $483C: $C9
 
 Data_015_483D::
@@ -1466,7 +1466,7 @@ jr_015_4D5B:
     add  hl, de                                   ; $4D99: $19
     ld   [hl], $30                                ; $4D9A: $36 $30
 
-jr_015_4D9C:
+ret_015_4D9C:
     ret                                           ; $4D9C: $C9
 
 Data_015_4D9D::
@@ -1589,7 +1589,7 @@ jr_015_4E5B:
 
     inc  [hl]                                     ; $4E60: $34
 
-jr_015_4E61:
+ret_015_4E61:
     ret                                           ; $4E61: $C9
 
 label_015_4E62:
@@ -1897,7 +1897,7 @@ func_015_501A::
     call GetEntityPrivateCountdown1               ; $5052: $CD $00 $0C
     ld   [hl], $10                                ; $5055: $36 $10
 
-jr_015_5057:
+ret_015_5057:
     ret                                           ; $5057: $C9
 
 Data_015_5058::
@@ -2048,7 +2048,7 @@ jr_015_512D:
     ld   a, MUSIC_FINAL_BOSS                      ; $5132: $3E $23
     ld   [wMusicTrackToPlay], a                   ; $5134: $EA $68 $D3
 
-jr_015_5137:
+ret_015_5137:
     ret                                           ; $5137: $C9
 
 func_015_5138::
@@ -2100,7 +2100,7 @@ func_015_516E::
 
     inc  [hl]                                     ; $5183: $34
 
-jr_015_5184:
+ret_015_5184:
     ret                                           ; $5184: $C9
 
 jr_015_5185:
@@ -2398,7 +2398,7 @@ label_015_5335:
     call IncrementEntityState                     ; $5350: $CD $12 $3B
     ld   [hl], $01                                ; $5353: $36 $01
 
-jr_015_5355:
+ret_015_5355:
     ret                                           ; $5355: $C9
 
 Data_015_5356::
@@ -3628,7 +3628,7 @@ jr_015_5E79:
 
     jp   ClearEntityStatus_15               ; $5E81: $C3 $31 $7C
 
-jr_015_5E84:
+ret_015_5E84:
     ret                                           ; $5E84: $C9
 
 func_015_5E85::
@@ -3721,7 +3721,7 @@ jr_015_5F0F:
     ld   a, $07                                   ; $5F15: $3E $07
     ldh  [hWaveSfx], a                            ; $5F17: $E0 $F3
 
-jr_015_5F19:
+ret_015_5F19:
     ret                                           ; $5F19: $C9
 
 Data_015_5F1A::
@@ -3810,7 +3810,7 @@ jr_015_5F4C:
 jr_015_5F96:
     jp   ClearEntityStatus_15               ; $5F96: $C3 $31 $7C
 
-jr_015_5F99:
+ret_015_5F99:
     ret                                           ; $5F99: $C9
 
 func_015_5F9A::
@@ -4174,7 +4174,7 @@ jr_015_6324:
     add  hl, bc                                   ; $632D: $09
     ld   [hl], $50                                ; $632E: $36 $50
 
-jr_015_6330:
+ret_015_6330:
     ret                                           ; $6330: $C9
 
 func_015_6331::
@@ -4280,7 +4280,7 @@ jr_015_63AF:
     add  hl, bc                                   ; $63C5: $09
     ld   [hl], a                                  ; $63C6: $77
 
-jr_015_63C7:
+ret_015_63C7:
     ret                                           ; $63C7: $C9
 
 FinalNightmareForm5Handler::
@@ -4468,7 +4468,7 @@ func_015_655D::
     ld   [wD21E], a                               ; $6561: $EA $1E $D2
     ret                                           ; $6564: $C9
 
-jr_015_6565:
+ret_015_6565:
     ret                                           ; $6565: $C9
 
 Data_015_6566::
@@ -4661,7 +4661,7 @@ jr_015_66A0:
     inc  [hl]                                     ; $66C5: $34
     pop  bc                                       ; $66C6: $C1
 
-jr_015_66C7:
+ret_015_66C7:
     ret                                           ; $66C7: $C9
 
 Data_015_66C8::
@@ -4852,7 +4852,7 @@ func_015_67E3::
     xor  a                                        ; $67F5: $AF
     ld   [wD224], a                               ; $67F6: $EA $24 $D2
 
-jr_015_67F9:
+ret_015_67F9:
     ret                                           ; $67F9: $C9
 
 func_015_67FA::
@@ -5723,7 +5723,7 @@ jr_015_6F8B:
     dec  a                                        ; $6F9C: $3D
     ld   [wD222], a                               ; $6F9D: $EA $22 $D2
 
-jr_015_6FA0:
+ret_015_6FA0:
     ret                                           ; $6FA0: $C9
 
 func_015_6FA1::
@@ -5777,7 +5777,7 @@ jr_015_6FF1:
     dec  a                                        ; $6FF1: $3D
     ld   [wD223], a                               ; $6FF2: $EA $23 $D2
 
-jr_015_6FF5:
+ret_015_6FF5:
     ret                                           ; $6FF5: $C9
 
 Data_015_6FF6::
@@ -6194,7 +6194,7 @@ jr_015_735C:
     add  hl, bc                                   ; $7380: $09
     ld   [hl], a                                  ; $7381: $77
 
-jr_015_7382:
+ret_015_7382:
     ret                                           ; $7382: $C9
 
 Data_015_7383::
@@ -6506,7 +6506,7 @@ BeetleSpawnerEntityHandler::
     call ApplyVectorTowardsLink_trampoline        ; $756A: $CD $AA $3B
     pop  bc                                       ; $756D: $C1
 
-jr_015_756E:
+ret_015_756E:
     ret                                           ; $756E: $C9
 
 Data_015_756F::
@@ -6829,7 +6829,7 @@ jr_015_776B:
     add  hl, de                                   ; $778F: $19
     ld   [hl], $01                                ; $7790: $36 $01
 
-jr_015_7792:
+ret_015_7792:
     ret                                           ; $7792: $C9
 
 func_015_7793::
@@ -6858,7 +6858,7 @@ jr_015_77BA:
     ld   a, $14                                   ; $77BA: $3E $14
     ldh  [hWaveSfx], a                            ; $77BC: $E0 $F3
 
-jr_015_77BE:
+ret_015_77BE:
     ret                                           ; $77BE: $C9
 
 func_015_77BF::
@@ -6981,7 +6981,7 @@ label_015_7825:
     ld   a, JINGLE_BUMP                           ; $7888: $3E $09
     ldh  [hJingle], a                             ; $788A: $E0 $F2
 
-jr_015_788C:
+ret_015_788C:
     ret                                           ; $788C: $C9
 
 Data_015_788D::
@@ -7077,7 +7077,7 @@ jr_015_791A:
     xor  $04                                      ; $792A: $EE $04
     ld   [hl], a                                  ; $792C: $77
 
-jr_015_792D:
+ret_015_792D:
     ret                                           ; $792D: $C9
 
 func_015_792E::
@@ -7907,7 +7907,7 @@ func_015_7D01::
     ld   [wTransitionSequenceCounter], a          ; $7D49: $EA $6B $C1
     ld   [wC16C], a                               ; $7D4C: $EA $6C $C1
 
-jr_015_7D4F:
+ret_015_7D4F:
     ret                                           ; $7D4F: $C9
 
 Data_015_7D50::

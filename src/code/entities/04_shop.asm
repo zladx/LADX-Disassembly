@@ -139,7 +139,7 @@ jr_004_77FC:
     ld   a, MUSIC_BOSS_BATTLE                     ; $7833: $3E $19
     ld   [wMusicTrackToPlay], a                   ; $7835: $EA $68 $D3
 
-jr_004_7838:
+ret_004_7838:
     ret                                           ; $7838: $C9
 
 jr_004_7839:
@@ -713,7 +713,7 @@ jr_004_7B32:
     ld   a, $02                                   ; $7B3A: $3E $02
     ld   [wPaletteDataFlags], a                   ; $7B3C: $EA $D1 $DD
 
-jr_004_7B3F:
+ret_004_7B3F:
     ret                                           ; $7B3F: $C9
 
 func_004_7B40::
@@ -838,7 +838,7 @@ func_004_7BE3::
     add  hl, de                                   ; $7C02: $19
     ld   [hl], $00                                ; $7C03: $36 $00
 
-jr_004_7C05:
+ret_004_7C05:
     ret                                           ; $7C05: $C9
 
 func_004_7C06::

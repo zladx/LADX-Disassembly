@@ -73,7 +73,7 @@ jr_006_6F3C:
     ldh  [hMultiPurpose1], a                      ; $6F42: $E0 $D8
     jp   label_006_7035                           ; $6F44: $C3 $35 $70
 
-jr_006_6F47:
+ret_006_6F47:
     ret                                           ; $6F47: $C9
 
 jr_006_6F48:
@@ -198,7 +198,7 @@ jr_006_6FCD:
 jr_006_6FD8:
     dec  [hl]                                     ; $6FD8: $35
 
-jr_006_6FD9:
+ret_006_6FD9:
     ret                                           ; $6FD9: $C9
 
 jr_006_6FDA:

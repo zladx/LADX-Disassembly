@@ -80,7 +80,7 @@ jr_018_7363:
     ld   a, JINGLE_PUZZLE_SOLVED                  ; $7379: $3E $02
     ldh  [hJingle], a                             ; $737B: $E0 $F2
 
-jr_018_737D:
+ret_018_737D:
     ret                                           ; $737D: $C9
 
 jr_018_737E:
@@ -242,7 +242,7 @@ jr_018_746E:
     inc  a                                        ; $7477: $3C
     ld   [hl], a                                  ; $7478: $77
 
-jr_018_7479:
+ret_018_7479:
     ret                                           ; $7479: $C9
 
 TurtleRockHeadState4Handler::
@@ -356,7 +356,7 @@ jr_018_750C:
     inc  a                                        ; $751C: $3C
     ld   [hl], a                                  ; $751D: $77
 
-jr_018_751E:
+ret_018_751E:
     ret                                           ; $751E: $C9
 
 TurtleRockHeadState9Handler::

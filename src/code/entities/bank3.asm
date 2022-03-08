@@ -531,7 +531,7 @@ jr_003_4A6B:
     and  a                                        ; $4A6E: $A7
     jp   nz, UnloadEntityAndReturn                ; $4A6F: $C2 $8D $3F
 
-jr_003_4A72:
+ret_003_4A72:
     ret                                           ; $4A72: $C9
 
 EntityInitOwlEvent::
@@ -653,7 +653,7 @@ EntityInitMadamMeowMeow::
     ld   a, MUSIC_BOWWOW_KIDNAPPED                ; $4B15: $3E $0E
     ld   [wMusicTrackToPlay], a                   ; $4B17: $EA $68 $D3
 
-jr_003_4B1A:
+ret_003_4B1A:
     ret                                           ; $4B1A: $C9
 
 EntityInitRaftRaftOwner::
@@ -1448,7 +1448,7 @@ jr_003_4F54:
     and  ROOM_STATUS_EVENT_1                      ; $4F62: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $4F64: $C2 $8D $3F
 
-jr_003_4F67:
+ret_003_4F67:
     ret                                           ; $4F67: $C9
 
 EntityInitTradingItem::
@@ -1946,7 +1946,7 @@ label_003_51F5:
     call func_91D                                 ; $5230: $CD $1D $09
     pop  bc                                       ; $5233: $C1
 
-jr_003_5234:
+ret_003_5234:
     ret                                           ; $5234: $C9
 
 include "code/entities/03_pushed_block.asm"
@@ -2042,7 +2042,7 @@ ELSE
     ld   [hl], a                                  ; $5405: $77
 ENDC
 
-jr_003_5406:
+ret_003_5406:
     ret                                           ; $5406: $C9
 
 SmashRock::
@@ -2872,7 +2872,7 @@ HeartPieceState5Handler::
     inc  a                                        ; $5AB6: $3C
     ld   [wHeartPiecesCount], a                   ; $5AB7: $EA $5C $DB
 
-jr_003_5ABA:
+ret_003_5ABA:
     ret                                           ; $5ABA: $C9
 
 HeartPieceState6Handler::
@@ -3497,7 +3497,7 @@ jr_003_5E76:
     xor  a                                        ; $5E86: $AF
     ld   [wOBJ1Palette], a                        ; $5E87: $EA $99 $DB
 
-jr_003_5E8A:
+ret_003_5E8A:
     ret                                           ; $5E8A: $C9
 
 Data_003_5E8B::
@@ -4016,7 +4016,7 @@ jr_003_6143:
 jr_003_6155:
     ld   [hl], a                                  ; $6155: $77
 
-jr_003_6156:
+ret_003_6156:
     ret                                           ; $6156: $C9
 
 include "code/entities/03_droppable_fairy.asm"
@@ -4048,7 +4048,7 @@ jr_003_61D6:
 jr_003_61DC:
     dec  [hl]                                     ; $61DC: $35
 
-jr_003_61DD:
+ret_003_61DD:
     ret                                           ; $61DD: $C9
 
 func_003_61DE::
@@ -4244,7 +4244,7 @@ jr_003_62D0:
     add  hl, bc                                   ; $62E8: $09
     ld   [hl], a                                  ; $62E9: $77
 
-jr_003_62EA:
+ret_003_62EA:
     ret                                           ; $62EA: $C9
 
 func_003_62EB::
@@ -4356,7 +4356,7 @@ IncreaseValueAtHLClampAt99::
     daa                                           ; $637A: $27
     ld   [hl], a                                  ; $637B: $77
 
-jr_003_637C:
+ret_003_637C:
     ret                                           ; $637C: $C9
 
 PickDroppableArrows::
@@ -4833,7 +4833,7 @@ jr_003_664A:
     ld   a, $04                                   ; $664A: $3E $04
     ld   [wC502], a                               ; $664C: $EA $02 $C5
 
-jr_003_664F:
+ret_003_664F:
     ret                                           ; $664F: $C9
 
 func_003_6650::
@@ -4874,7 +4874,7 @@ jr_003_6687:
     ld   hl, wBGPalette                           ; $6687: $21 $97 $DB
     ld   [hl], e                                  ; $668A: $73
 
-jr_003_668B:
+ret_003_668B:
     ret                                           ; $668B: $C9
 
 jr_003_668C:
@@ -5482,7 +5482,7 @@ jr_003_6B37:
     sra  a                                        ; $6B3F: $CB $2F
     ld   [hl], a                                  ; $6B41: $77
 
-jr_003_6B42:
+ret_003_6B42:
     ret                                           ; $6B42: $C9
 
 func_003_6B43::
@@ -5588,7 +5588,7 @@ jr_003_6BAB:
     add  hl, bc                                   ; $6BC3: $09
     ld   [hl], a                                  ; $6BC4: $77
 
-jr_003_6BC5:
+ret_003_6BC5:
     ret                                           ; $6BC5: $C9
 
 Data_003_6BC6::
@@ -7454,7 +7454,7 @@ func_003_7565::
     ldh  a, [hMultiPurpose1]                      ; $756C: $F0 $D8
     ldh  [hLinkSpeedX], a                         ; $756E: $E0 $9A
 
-jr_003_7570:
+ret_003_7570:
     ret                                           ; $7570: $C9
 
 jr_003_7571:
@@ -8361,7 +8361,7 @@ jr_003_7A6E:
     ldh  a, [hActiveEntityPosY]                   ; $7A81: $F0 $EF
     ld   [hl], a                                  ; $7A83: $77
 
-jr_003_7A84:
+ret_003_7A84:
     ret                                           ; $7A84: $C9
 
 Data_003_7A85::

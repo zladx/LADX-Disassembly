@@ -2269,7 +2269,7 @@ func_001_7D4E::
     ld   a, d                                     ; $7D97: $7A
     ld   [wD009], a                               ; $7D98: $EA $09 $D0
 
-jr_001_7D9B::
+ret_001_7D9B::
     ret                                           ; $7D9B: $C9
 
 func_001_7D9C::

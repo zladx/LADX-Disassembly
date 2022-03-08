@@ -68,7 +68,7 @@ jr_004_6A04:
     ld   [hl], $28                                ; $6A1F: $36 $28
     jp   IncrementEntityState                     ; $6A21: $C3 $12 $3B
 
-jr_004_6A24:
+ret_004_6A24:
     ret                                           ; $6A24: $C9
 
 jr_004_6A25:
@@ -161,7 +161,7 @@ jr_004_6A8A:
     add  hl, bc                                   ; $6AA4: $09
     ld   [hl], a                                  ; $6AA5: $77
 
-jr_004_6AA6:
+ret_004_6AA6:
     ret                                           ; $6AA6: $C9
 
 Data_004_6AA7::

@@ -426,7 +426,7 @@ jr_004_5963:
     add  hl, bc                                   ; $5A01: $09
     ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT                                ; $5A02: $36 $D0
 
-jr_004_5A04:
+ret_004_5A04:
     ret                                           ; $5A04: $C9
 
 func_004_5A05::

@@ -163,7 +163,7 @@ jr_007_5E67:
     add  hl, de                                   ; $5EA3: $19
     ld   [hl], $01                                ; $5EA4: $36 $01
 
-jr_007_5EA6:
+ret_007_5EA6:
     ret                                           ; $5EA6: $C9
 
 label_007_5EA7:
@@ -267,7 +267,7 @@ jr_007_5F37:
     ld   hl, hNoiseSfx                            ; $5F3F: $21 $F4 $FF
     ld   [hl], $0C                                ; $5F42: $36 $0C
 
-jr_007_5F44:
+ret_007_5F44:
     ret                                           ; $5F44: $C9
 
 Data_007_5F45::
@@ -316,7 +316,7 @@ func_007_5F61::
     add  hl, de                                   ; $5F98: $19
     ld   [hl], a                                  ; $5F99: $77
 
-jr_007_5F9A:
+ret_007_5F9A:
     ret                                           ; $5F9A: $C9
 
 Data_007_5F9B::

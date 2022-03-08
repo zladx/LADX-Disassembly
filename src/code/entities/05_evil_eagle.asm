@@ -97,7 +97,7 @@ func_005_5A8E::
 ._03 dw func_005_5B3B                             ; $5A97
 ._04 dw func_005_5B4B                             ; $5A99
 
-jr_005_5A9B:
+ret_005_5A9B:
     ret                                           ; $5A9B: $C9
 
 func_005_5A9C::
@@ -363,7 +363,7 @@ func_005_5C20::
     ld   a, $22                                   ; $5C20: $3E $22
     ldh  [hNoiseSfx], a                           ; $5C22: $E0 $F4
 
-jr_005_5C24:
+ret_005_5C24:
     ret                                           ; $5C24: $C9
 
 jr_005_5C25:
@@ -594,7 +594,7 @@ jr_005_5D38:
     call IncrementEntityState                     ; $5D63: $CD $12 $3B
     ld   [hl], $08                                ; $5D66: $36 $08
 
-jr_005_5D68:
+ret_005_5D68:
     ret                                           ; $5D68: $C9
 
 func_005_5D69::
@@ -709,7 +709,7 @@ func_005_5E01::
 jr_005_5E0C:
     inc  [hl]                                     ; $5E0C: $34
 
-jr_005_5E0D:
+ret_005_5E0D:
     ret                                           ; $5E0D: $C9
 
 jr_005_5E0E:
@@ -900,7 +900,7 @@ jr_005_5EB0:
     add  hl, de                                   ; $5F2C: $19
     ld   [hl], $02                                ; $5F2D: $36 $02
 
-jr_005_5F2F:
+ret_005_5F2F:
     ret                                           ; $5F2F: $C9
 
 label_005_5F30:
@@ -956,7 +956,7 @@ jr_005_5F68:
     add  hl, bc                                   ; $5F75: $09
     dec  [hl]                                     ; $5F76: $35
 
-jr_005_5F77:
+ret_005_5F77:
     ret                                           ; $5F77: $C9
 
 label_005_5F78:
@@ -1029,7 +1029,7 @@ func_005_5FA8::
     ld   hl, hLinkPositionY                       ; $5FE5: $21 $99 $FF
     dec  [hl]                                     ; $5FE8: $35
 
-jr_005_5FE9:
+ret_005_5FE9:
     ret                                           ; $5FE9: $C9
 
 jr_005_5FEA:
@@ -1112,7 +1112,7 @@ jr_005_6053:
 
     jp   label_005_5F78                           ; $605E: $C3 $78 $5F
 
-jr_005_6061:
+ret_005_6061:
     ret                                           ; $6061: $C9
 
 ; Evil Eagle display list
@@ -1340,7 +1340,7 @@ func_005_6283::
 jr_005_6297:
     dec  [hl]                                     ; $6297: $35
 
-jr_005_6298:
+ret_005_6298:
     ret                                           ; $6298: $C9
 
 func_005_6299::

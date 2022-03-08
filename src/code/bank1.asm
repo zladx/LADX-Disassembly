@@ -226,7 +226,7 @@ jr_001_47C3::
     cp   SAVE_PREFIX_SIZE * 2 + 1                 ; $47C9: $FE $0B
     jr   c, jr_001_47C3                           ; $47CB: $38 $F6
 
-jr_001_47CD::
+ret_001_47CD::
     ret                                           ; $47CD: $C9
 
 include "code/file_menus.asm"
@@ -834,7 +834,7 @@ func_001_5895::
     xor  a                                        ; $58A3: $AF
     ld   [wInventoryAppearing], a                 ; $58A4: $EA $4F $C1
 
-jr_001_58A7::
+ret_001_58A7::
     ret                                           ; $58A7: $C9
 
 func_001_58A8::
@@ -1094,7 +1094,7 @@ label_001_5B3F::
     ld   a, $40                                   ; $5BA9: $3E $40
     ldi  [hl], a                                  ; $5BAB: $22
 
-jr_001_5BAC::
+ret_001_5BAC::
     ret                                           ; $5BAC: $C9
 
 Data_001_5BAD::
@@ -1352,7 +1352,7 @@ jr_001_5DB3::
 jr_001_5DBD::
     jr   jr_001_5DAB                              ; $5DBD: $18 $EC
 
-jr_001_5DBF::
+ret_001_5DBF::
     ret                                           ; $5DBF: $C9
 
 func_5DC0::
@@ -2395,7 +2395,7 @@ jr_001_6849::
     ld   a, TILESET_0F                            ; $6850: $3E $0F
     ld   [wTilesetToLoad], a                      ; $6852: $EA $FE $D6
 
-jr_001_6855::
+ret_001_6855::
     ret                                           ; $6855: $C9
 PeachPictureState2Handler::     ; This is for full-screen images ...
     ld   e, TILESET_EAGLES_TOWER_TOP ; First, check if it's Eagle's Tower ; $6856: $1E $21
@@ -2457,7 +2457,7 @@ PeachPictureState4Handler::
     ld   a, $80                                   ; $68BA: $3E $80
     ld   [wD210], a                               ; $68BC: $EA $10 $D2
 
-jr_001_68BF::
+ret_001_68BF::
     ret                                           ; $68BF: $C9
 
 PeachPictureState5Handler::
@@ -2483,7 +2483,7 @@ func_001_68D9::
     ld   [wTransitionSequenceCounter], a                               ; $68DD: $EA $6B $C1
     ld   [wC16C], a                               ; $68E0: $EA $6C $C1
 
-jr_001_68E3::
+ret_001_68E3::
     ret                                           ; $68E3: $C9
 PeachPictureState7Handler::
     call func_6A7C                                ; $68E4: $CD $7C $6A
@@ -2532,7 +2532,7 @@ PeachPictureState8Handler::
     ld   [wD210], a                               ; $693E: $EA $10 $D2
     call IncrementGameplaySubtype                 ; $6941: $CD $D6 $44
 
-jr_001_6944::
+ret_001_6944::
     ret                                           ; $6944: $C9
 PeachPictureState9Handler::
     call func_6A7C                                ; $6945: $CD $7C $6A
@@ -2563,7 +2563,7 @@ jr_001_6971::
     ld   a, e                                     ; $6971: $7B
     ld   [wScreenShakeVertical], a                ; $6972: $EA $56 $C1
 
-jr_001_6975::
+ret_001_6975::
     ret                                           ; $6975: $C9
 
 Data_001_6976::
@@ -2740,7 +2740,7 @@ func_001_6BAE::
     ldh  [hJingle], a                             ; $6BB1: $E0 $F2
     pop  af                                       ; $6BB3: $F1
 
-jr_001_6BB4::
+ret_001_6BB4::
     ret                                           ; $6BB4: $C9
 
 ; Copy the tiles and BG map for the inventory Siren Instruments to VRAM.

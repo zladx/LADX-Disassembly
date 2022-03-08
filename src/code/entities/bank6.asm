@@ -56,7 +56,7 @@ label_006_641F:
     add  hl, de                                   ; $6439: $19
     ld   [hl], $00                                ; $643A: $36 $00
 
-jr_006_643C:
+ret_006_643C:
     ret                                           ; $643C: $C9
 
 ; Array indexed by direction

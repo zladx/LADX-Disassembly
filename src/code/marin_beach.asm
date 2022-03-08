@@ -282,7 +282,7 @@ MarineBeachScrollStop::
     call OpenMarinBeachDialog                     ; $6443: $CD $DE $67
     call IncrementGameplaySubtype                 ; $6446: $CD $D6 $44
 
-jr_001_6449::
+ret_001_6449::
     ret                                           ; $6449: $C9
 
 jr_001_644A::
@@ -301,7 +301,7 @@ MarineBeachDialog1::
     ld   [wC3C7], a                               ; $6460: $EA $C7 $C3
     call IncrementGameplaySubtype                 ; $6463: $CD $D6 $44
 
-jr_001_6466::
+ret_001_6466::
     ret                                           ; $6466: $C9
 
 MarineBeachPause1::
@@ -313,7 +313,7 @@ MarineBeachPause1::
     call OpenMarinBeachDialog                     ; $6472: $CD $DE $67
     jp   IncrementGameplaySubtypeAndReturn        ; $6475: $C3 $D6 $44
 
-jr_001_6478::
+ret_001_6478::
     ret                                           ; $6478: $C9
 
 MarineBeachDialog2::
@@ -327,7 +327,7 @@ MarineBeachDialog2::
     ld   [wC3C7], a                               ; $6489: $EA $C7 $C3
     call IncrementGameplaySubtype                 ; $648C: $CD $D6 $44
 
-jr_001_648F::
+ret_001_648F::
     ret                                           ; $648F: $C9
 
 MarineBeachPause2::
@@ -339,7 +339,7 @@ MarineBeachPause2::
     call OpenMarinBeachDialog                     ; $649B: $CD $DE $67
     jp   IncrementGameplaySubtypeAndReturn        ; $649E: $C3 $D6 $44
 
-jr_001_64A1::
+ret_001_64A1::
     ret                                           ; $64A1: $C9
 
 MarineBeachAreYouListening::
@@ -380,7 +380,7 @@ MarineBeachDialog3::
     ld   [wC3C7], a                               ; $64E0: $EA $C7 $C3
     call IncrementGameplaySubtype                 ; $64E3: $CD $D6 $44
 
-jr_001_64E6::
+ret_001_64E6::
     ret                                           ; $64E6: $C9
 
 MarineBeachDialog4::
@@ -667,7 +667,7 @@ jr_001_66C4::
     add  hl, bc                                   ; $66D5: $09
     ld   [hl], b                                  ; $66D6: $70
 
-jr_001_66D7::
+ret_001_66D7::
     ret                                           ; $66D7: $C9
 
 Data_001_66D8::
@@ -819,7 +819,7 @@ jr_001_67A4::
     add  a, e                                     ; $67A5: $83
     ld   [hl], a                                  ; $67A6: $77
 
-jr_001_67A7::
+ret_001_67A7::
     ret                                           ; $67A7: $C9
 
 func_001_67A8::

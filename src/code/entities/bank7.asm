@@ -114,7 +114,7 @@ func_007_68AD::
     add  hl, bc                                   ; $68CD: $09
     ld   [hl], a                                  ; $68CE: $77
 
-jr_007_68CF:
+ret_007_68CF:
     ret                                           ; $68CF: $C9
 
 jr_007_68D0:
@@ -164,7 +164,7 @@ jr_007_6901:
     call GetEntityTransitionCountdown             ; $6914: $CD $05 $0C
     ld   [hl], $30                                ; $6917: $36 $30
 
-jr_007_6919:
+ret_007_6919:
     ret                                           ; $6919: $C9
 
 jr_007_691A:
@@ -176,7 +176,7 @@ jr_007_691A:
     call func_007_7E5D                            ; $6923: $CD $5D $7E
     jr   jr_007_6901                              ; $6926: $18 $D9
 
-jr_007_6928:
+ret_007_6928:
     ret                                           ; $6928: $C9
 
 func_007_6929::
@@ -470,7 +470,7 @@ func_007_6ADF::
     add  hl, bc                                   ; $6AF1: $09
     ld   [hl], $6F                                ; $6AF2: $36 $6F
 
-jr_007_6AF4:
+ret_007_6AF4:
     ret                                           ; $6AF4: $C9
 
 func_007_6AF5::
@@ -498,7 +498,7 @@ jr_007_6B08:
     ld   [hl], $40                                ; $6B10: $36 $40
     call IncrementEntityState                     ; $6B12: $CD $12 $3B
 
-jr_007_6B15:
+ret_007_6B15:
     ret                                           ; $6B15: $C9
 
 func_007_6B16::
@@ -553,7 +553,7 @@ jr_007_6B45:
     ld   hl, wD20D                                ; $6B62: $21 $0D $D2
     ld   [hl], $F2                                ; $6B65: $36 $F2
 
-jr_007_6B67:
+ret_007_6B67:
     ret                                           ; $6B67: $C9
 
 func_007_6B68::
@@ -937,7 +937,7 @@ jr_007_6DC7:
     inc  a                                        ; $6DD4: $3C
     ld   [wD20E], a                               ; $6DD5: $EA $0E $D2
 
-jr_007_6DD8:
+ret_007_6DD8:
     ret                                           ; $6DD8: $C9
 
 func_007_6DD9::
@@ -960,7 +960,7 @@ jr_007_6DE3:
     inc  a                                        ; $6DF1: $3C
     ld   [wD20E], a                               ; $6DF2: $EA $0E $D2
 
-jr_007_6DF5:
+ret_007_6DF5:
     ret                                           ; $6DF5: $C9
 
 func_007_6DF6::
@@ -1036,7 +1036,7 @@ jr_007_6E48:
 jr_007_6E56:
     dec  [hl]                                     ; $6E56: $35
 
-jr_007_6E57:
+ret_007_6E57:
     ret                                           ; $6E57: $C9
 
 func_007_6E58::
@@ -1095,7 +1095,7 @@ jr_007_6E9A:
     ld   [hl], a                                  ; $6E9E: $77
     ldh  [hRoomStatus], a                         ; $6E9F: $E0 $F8
 
-jr_007_6EA1:
+ret_007_6EA1:
     ret                                           ; $6EA1: $C9
 
 func_007_6EA2::
@@ -1395,7 +1395,7 @@ jr_007_70E0:
     ld   a, $03                                   ; $710D: $3E $03
     ldh  [hWaveSfx], a                            ; $710F: $E0 $F3
 
-jr_007_7111:
+ret_007_7111:
     ret                                           ; $7111: $C9
 
 Data_007_7112::
@@ -1492,7 +1492,7 @@ jr_007_7193:
     call ApplyVectorTowardsLink_trampoline        ; $7193: $CD $AA $3B
     pop  bc                                       ; $7196: $C1
 
-jr_007_7197:
+ret_007_7197:
     ret                                           ; $7197: $C9
 
 KanaletBombableWallEntityHandler::
@@ -1603,7 +1603,7 @@ func_007_7233::
     xor  a                                        ; $7244: $AF
     ld   [hl], a                                  ; $7245: $77
 
-jr_007_7246:
+ret_007_7246:
     ret                                           ; $7246: $C9
 
 Data_007_7247::
@@ -1729,7 +1729,7 @@ jr_007_7302:
     add  hl, bc                                   ; $731D: $09
     ld   [hl], a                                  ; $731E: $77
 
-jr_007_731F:
+ret_007_731F:
     ret                                           ; $731F: $C9
 
 func_007_7320::
@@ -1996,7 +1996,7 @@ jr_007_74F8:
     ld   [hl], $00                                ; $7529: $36 $00
     pop  bc                                       ; $752B: $C1
 
-jr_007_752C:
+ret_007_752C:
     ret                                           ; $752C: $C9
 
 Data_007_752D::
@@ -2059,7 +2059,7 @@ func_007_7576::
     add  hl, bc                                   ; $7594: $09
     ld   [hl], a                                  ; $7595: $77
 
-jr_007_7596:
+ret_007_7596:
     ret                                           ; $7596: $C9
 
 func_007_7597::
@@ -2085,7 +2085,7 @@ jr_007_75A4:
     add  [hl]                                     ; $75B4: $86
     ld   [hl], a                                  ; $75B5: $77
 
-jr_007_75B6:
+ret_007_75B6:
     ret                                           ; $75B6: $C9
 
 func_007_75B7::
@@ -2120,7 +2120,7 @@ func_007_75D6::
 jr_007_75DC:
     dec  [hl]                                     ; $75DC: $35
 
-jr_007_75DD:
+ret_007_75DD:
     ret                                           ; $75DD: $C9
 
 Data_007_75DE::
@@ -2295,7 +2295,7 @@ func_007_76E7::
     add  hl, bc                                   ; $76EA: $09
     ld   [hl], $FF                                ; $76EB: $36 $FF
 
-jr_007_76ED:
+ret_007_76ED:
     ret                                           ; $76ED: $C9
 
 func_007_76EE::
@@ -2394,7 +2394,7 @@ jr_007_775A:
     ld   hl, hWaveSfx                             ; $777E: $21 $F3 $FF
     ld   [hl], $02                                ; $7781: $36 $02
 
-jr_007_7783:
+ret_007_7783:
     ret                                           ; $7783: $C9
 
 Data_007_7784::
@@ -2572,7 +2572,7 @@ jr_007_788C:
     call GetEntityTransitionCountdown             ; $7897: $CD $05 $0C
     ld   [hl], $FF                                ; $789A: $36 $FF
 
-jr_007_789C:
+ret_007_789C:
     ret                                           ; $789C: $C9
 
 Data_007_789D::
@@ -2776,7 +2776,7 @@ func_007_7996::
     call GetEntitySpeedYAddress                   ; $79AF: $CD $05 $40
     ld   [hl], a                                  ; $79B2: $77
 
-jr_007_79B3:
+ret_007_79B3:
     ret                                           ; $79B3: $C9
 
 func_007_79B4::
@@ -2802,7 +2802,7 @@ func_007_79D2::
     call IncrementEntityState                     ; $79D2: $CD $12 $3B
     ld   [hl], b                                  ; $79D5: $70
 
-jr_007_79D6:
+ret_007_79D6:
     ret                                           ; $79D6: $C9
 
 func_007_79D7::
@@ -2903,7 +2903,7 @@ jr_007_7A65:
     call GetEntityTransitionCountdown             ; $7A67: $CD $05 $0C
     ld   [hl], $80                                ; $7A6A: $36 $80
 
-jr_007_7A6C:
+ret_007_7A6C:
     ret                                           ; $7A6C: $C9
 
 Data_007_7A6D::

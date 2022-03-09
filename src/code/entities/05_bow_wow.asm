@@ -198,7 +198,7 @@ jr_005_4137:
     add  hl, bc                                   ; $4155: $09
     ld   a, [hl]                                  ; $4156: $7E
     and  $80                                      ; $4157: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $4159: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $4159: $E0 $E8
     jr   z, jr_005_4160                           ; $415B: $28 $03
 
     xor  a                                        ; $415D: $AF
@@ -280,7 +280,7 @@ func_005_41CF::
     ld   [hl], b                                  ; $41D9: $70
 
 jr_005_41DA:
-    ldh  a, [hMultiPurposeG]                               ; $41DA: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $41DA: $F0 $E8
     and  a                                        ; $41DC: $A7
     jr   z, jr_005_41E5                           ; $41DD: $28 $06
 
@@ -470,7 +470,7 @@ jr_005_42B9:
     ld   hl, wEntitiesTypeTable                   ; $42D2: $21 $A0 $C3
     add  hl, de                                   ; $42D5: $19
     ld   e, [hl]                                  ; $42D6: $5E
-    call CanBowWowEatEntity                               ; $42D7: $CD $25 $39
+    call CanBowWowEatEntity                       ; $42D7: $CD $25 $39
     pop  de                                       ; $42DA: $D1
     and  a                                        ; $42DB: $A7
     jr   z, jr_005_4323                           ; $42DC: $28 $45
@@ -517,11 +517,11 @@ jr_005_42B9:
     ret                                           ; $4322: $C9
 
 jr_005_4323:
-    ld   hl, hMultiPurpose0                            ; $4323: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $4323: $21 $D7 $FF
     ld   a, e                                     ; $4326: $7B
     add  [hl]                                     ; $4327: $86
     ld   e, a                                     ; $4328: $5F
-    ld   hl, hMultiPurpose1                            ; $4329: $21 $D8 $FF
+    ld   hl, hMultiPurpose1                       ; $4329: $21 $D8 $FF
     cp   [hl]                                     ; $432C: $BE
     jr   nz, jr_005_42B9                          ; $432D: $20 $8A
 
@@ -699,7 +699,7 @@ func_005_43FE::
     ldh  a, [hLinkSpeedY]                         ; $4406: $F0 $9B
     ld   hl, hLinkSpeedX                          ; $4408: $21 $9A $FF
     or   [hl]                                     ; $440B: $B6
-    ld   hl, hLinkVelocityZ                                ; $440C: $21 $A3 $FF
+    ld   hl, hLinkVelocityZ                       ; $440C: $21 $A3 $FF
     or   [hl]                                     ; $440F: $B6
     jp   z, jr_005_44CA                           ; $4410: $CA $CA $44
 

@@ -20,7 +20,7 @@ ButterflyEntityHandler::
     ldh  [hActiveEntityVisualPosY], a             ; $6BD3: $E0 $EC
 .downwardsEnd
 
-    ld   de, ButterflyOAMAttributes                     ; $6BD5: $11 $BD $6B
+    ld   de, ButterflyOAMAttributes               ; $6BD5: $11 $BD $6B
     call RenderActiveEntitySprite                 ; $6BD8: $CD $77 $3C
     call ReturnIfNonInteractive_06                ; $6BDB: $CD $C6 $64
 
@@ -53,13 +53,13 @@ ButterflyEntityHandler::
     and  $07                                      ; $6BFF: $E6 $07
     ld   e, a                                     ; $6C01: $5F
     ld   d, b                                     ; $6C02: $50
-    ld   hl, ButterflyPossibleSpeeds                        ; $6C03: $21 $C1 $6B
+    ld   hl, ButterflyPossibleSpeeds              ; $6C03: $21 $C1 $6B
     add  hl, de                                   ; $6C06: $19
     ld   a, [hl]                                  ; $6C07: $7E
     ld   hl, wEntitiesPrivateState1Table          ; $6C08: $21 $B0 $C2
     add  hl, bc                                   ; $6C0B: $09
     add  [hl]                                     ; $6C0C: $86
-    ld   hl, wEntitiesSpeedXTable                       ; $6C0D: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                 ; $6C0D: $21 $40 $C2
     add  hl, bc                                   ; $6C10: $09
     ld   [hl], a                                  ; $6C11: $77
 .speedXEnd
@@ -74,13 +74,13 @@ ButterflyEntityHandler::
     and  $07                                      ; $6C1D: $E6 $07
     ld   e, a                                     ; $6C1F: $5F
     ld   d, b                                     ; $6C20: $50
-    ld   hl, ButterflyPossibleSpeeds                        ; $6C21: $21 $C1 $6B
+    ld   hl, ButterflyPossibleSpeeds              ; $6C21: $21 $C1 $6B
     add  hl, de                                   ; $6C24: $19
     ld   a, [hl]                                  ; $6C25: $7E
     ld   hl, wEntitiesPrivateState2Table          ; $6C26: $21 $C0 $C2
     add  hl, bc                                   ; $6C29: $09
     add  [hl]                                     ; $6C2A: $86
-    ld   hl, wEntitiesSpeedYTable                       ; $6C2B: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                 ; $6C2B: $21 $50 $C2
     add  hl, bc                                   ; $6C2E: $09
     ld   [hl], a                                  ; $6C2F: $77
 .speedYEnd

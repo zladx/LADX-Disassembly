@@ -326,10 +326,10 @@ jr_006_5E51:
 func_006_5E54::
     ldh  a, [hActiveEntityVisualPosY]             ; $5E54: $F0 $EC
     cp   $88                                      ; $5E56: $FE $88
-    jp   nc, ClearEntityStatus_06                        ; $5E58: $D2 $DB $65
+    jp   nc, ClearEntityStatus_06                 ; $5E58: $D2 $DB $65
 
     ldh  a, [hActiveEntityPosX]                   ; $5E5B: $F0 $EE
     cp   $A8                                      ; $5E5D: $FE $A8
-    jp   nc, ClearEntityStatus_06                        ; $5E5F: $D2 $DB $65
+    jp   nc, ClearEntityStatus_06                 ; $5E5F: $D2 $DB $65
 
     ret                                           ; $5E62: $C9

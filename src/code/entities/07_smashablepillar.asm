@@ -140,7 +140,7 @@ jr_007_5E67:
     call GetRandomByte                            ; $5E74: $CD $0D $28
     and  $07                                      ; $5E77: $E6 $07
     sub  $04                                      ; $5E79: $D6 $04
-    ld   hl, hMultiPurpose1                            ; $5E7B: $21 $D8 $FF
+    ld   hl, hMultiPurpose1                       ; $5E7B: $21 $D8 $FF
     add  [hl]                                     ; $5E7E: $86
     ld   hl, wEntitiesPosYTable                   ; $5E7F: $21 $10 $C2
     add  hl, de                                   ; $5E82: $19
@@ -148,7 +148,7 @@ jr_007_5E67:
     call GetRandomByte                            ; $5E84: $CD $0D $28
     and  $1F                                      ; $5E87: $E6 $1F
     sub  $10                                      ; $5E89: $D6 $10
-    ld   hl, hMultiPurpose0                            ; $5E8B: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $5E8B: $21 $D7 $FF
     add  [hl]                                     ; $5E8E: $86
     ld   hl, wEntitiesPosXTable                   ; $5E8F: $21 $00 $C2
     add  hl, de                                   ; $5E92: $19
@@ -302,7 +302,7 @@ func_007_5F61::
     call GetRandomByte                            ; $5F7A: $CD $0D $28
     and  $3F                                      ; $5F7D: $E6 $3F
     sub  $20                                      ; $5F7F: $D6 $20
-    ld   hl, hMultiPurpose0                            ; $5F81: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $5F81: $21 $D7 $FF
     add  [hl]                                     ; $5F84: $86
     ld   hl, wEntitiesPosXTable                   ; $5F85: $21 $00 $C2
     add  hl, de                                   ; $5F88: $19
@@ -310,7 +310,7 @@ func_007_5F61::
     call GetRandomByte                            ; $5F8A: $CD $0D $28
     and  $3F                                      ; $5F8D: $E6 $3F
     sub  $20                                      ; $5F8F: $D6 $20
-    ld   hl, hMultiPurpose1                            ; $5F91: $21 $D8 $FF
+    ld   hl, hMultiPurpose1                       ; $5F91: $21 $D8 $FF
     add  [hl]                                     ; $5F94: $86
     ld   hl, wEntitiesPosYTable                   ; $5F95: $21 $10 $C2
     add  hl, de                                   ; $5F98: $19

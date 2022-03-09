@@ -68,12 +68,12 @@ MarineBeachPrepare1::
     ld   a, $01                                   ; $6260: $3E $01
     ld   [wC167], a                               ; $6262: $EA $67 $C1
     call func_1A22                                ; $6265: $CD $22 $1A
-    ld   a, [wTransitionSequenceCounter]                               ; $6268: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]          ; $6268: $FA $6B $C1
     cp   $04                                      ; $626B: $FE $04
     jr   nz, .return                              ; $626D: $20 $12
     call IncrementGameplaySubtype                 ; $626F: $CD $D6 $44
     xor  a                                        ; $6272: $AF
-    ld   [wScrollXOffset], a                               ; $6273: $EA $BF $C1
+    ld   [wScrollXOffset], a                      ; $6273: $EA $BF $C1
     call func_001_5888                            ; $6276: $CD $88 $58
     call func_001_64FF                            ; $6279: $CD $FF $64
     ld   a, TILESET_0F                            ; $627C: $3E $0F
@@ -95,12 +95,12 @@ MarineBeachPrepare3::
     ld   [wWindowY], a                            ; $6295: $EA $9A $DB
     xor  a                                        ; $6298: $AF
     ldh  [hBaseScrollX], a                        ; $6299: $E0 $96
-    ld   [wTransitionSequenceCounter], a                               ; $629B: $EA $6B $C1
+    ld   [wTransitionSequenceCounter], a          ; $629B: $EA $6B $C1
     ld   [wC16C], a                               ; $629E: $EA $6C $C1
     ld   a, $90                                   ; $62A1: $3E $90
-    ldh  [hBaseScrollY], a                               ; $62A3: $E0 $97
+    ldh  [hBaseScrollY], a                        ; $62A3: $E0 $97
     ld   a, $40                                   ; $62A5: $3E $40
-    ld   [wNoiseSfxSeaWavesCounter], a                               ; $62A7: $EA $14 $C1
+    ld   [wNoiseSfxSeaWavesCounter], a            ; $62A7: $EA $14 $C1
     ld   a, $A0                                   ; $62AA: $3E $A0
     ld   [wD466], a                               ; $62AC: $EA $66 $D4
     ld   a, $01                                   ; $62AF: $3E $01
@@ -119,87 +119,87 @@ MarineBeachPrepare3::
     ld   [wTranscientVfxCountdownTable], a        ; $62CF: $EA $20 $C5
     ld   [wD200], a                               ; $62D2: $EA $00 $D2
     ld   a, $20                                   ; $62D5: $3E $20
-    ld   [wTranscientVfxPosYTable+1], a                               ; $62D7: $EA $41 $C5
+    ld   [wTranscientVfxPosYTable+1], a           ; $62D7: $EA $41 $C5
     ld   a, $A0                                   ; $62DA: $3E $A0
-    ld   [wTranscientVfxPosXTable+1], a                               ; $62DC: $EA $31 $C5
+    ld   [wTranscientVfxPosXTable+1], a           ; $62DC: $EA $31 $C5
     ld   a, $01                                   ; $62DF: $3E $01
-    ld   [wTranscientVfxTypeTable+1], a                               ; $62E1: $EA $11 $C5
+    ld   [wTranscientVfxTypeTable+1], a           ; $62E1: $EA $11 $C5
     ld   a, $08                                   ; $62E4: $3E $08
-    ld   [wC560+1], a                               ; $62E6: $EA $61 $C5
+    ld   [wC560+1], a                             ; $62E6: $EA $61 $C5
     ld   a, $F8                                   ; $62E9: $3E $F8
-    ld   [wC550+1], a                               ; $62EB: $EA $51 $C5
+    ld   [wC550+1], a                             ; $62EB: $EA $51 $C5
     ld   a, $40                                   ; $62EE: $3E $40
-    ld   [wTranscientVfxCountdownTable+1], a                               ; $62F0: $EA $21 $C5
+    ld   [wTranscientVfxCountdownTable+1], a      ; $62F0: $EA $21 $C5
     ld   a, $24                                   ; $62F3: $3E $24
     ld   [wD201], a                               ; $62F5: $EA $01 $D2
     ld   a, $48                                   ; $62F8: $3E $48
-    ld   [wTranscientVfxPosYTable+2], a                               ; $62FA: $EA $42 $C5
+    ld   [wTranscientVfxPosYTable+2], a           ; $62FA: $EA $42 $C5
     ld   a, $30                                   ; $62FD: $3E $30
-    ld   [wTranscientVfxPosXTable+2], a                               ; $62FF: $EA $32 $C5
+    ld   [wTranscientVfxPosXTable+2], a           ; $62FF: $EA $32 $C5
     ld   a, $02                                   ; $6302: $3E $02
-    ld   [wTranscientVfxTypeTable+2], a                               ; $6304: $EA $12 $C5
+    ld   [wTranscientVfxTypeTable+2], a           ; $6304: $EA $12 $C5
     ld   a, $00                                   ; $6307: $3E $00
-    ld   [wC560+2], a                               ; $6309: $EA $62 $C5
+    ld   [wC560+2], a                             ; $6309: $EA $62 $C5
     ld   a, $00                                   ; $630C: $3E $00
-    ld   [wC550+2], a                               ; $630E: $EA $52 $C5
+    ld   [wC550+2], a                             ; $630E: $EA $52 $C5
     ld   a, $00                                   ; $6311: $3E $00
-    ld   [wTranscientVfxCountdownTable+2], a                               ; $6313: $EA $22 $C5
+    ld   [wTranscientVfxCountdownTable+2], a      ; $6313: $EA $22 $C5
     ld   a, $02                                   ; $6316: $3E $02
     ld   [wD202], a                               ; $6318: $EA $02 $D2
     ld   a, $3C                                   ; $631B: $3E $3C
-    ld   [wTranscientVfxPosYTable+3], a                               ; $631D: $EA $43 $C5
+    ld   [wTranscientVfxPosYTable+3], a           ; $631D: $EA $43 $C5
     ld   a, $40                                   ; $6320: $3E $40
-    ld   [wTranscientVfxPosXTable+3], a                               ; $6322: $EA $33 $C5
+    ld   [wTranscientVfxPosXTable+3], a           ; $6322: $EA $33 $C5
     ld   a, $02                                   ; $6325: $3E $02
-    ld   [wTranscientVfxTypeTable+3], a                               ; $6327: $EA $13 $C5
+    ld   [wTranscientVfxTypeTable+3], a           ; $6327: $EA $13 $C5
     ld   a, $00                                   ; $632A: $3E $00
-    ld   [wC560+3], a                               ; $632C: $EA $63 $C5
+    ld   [wC560+3], a                             ; $632C: $EA $63 $C5
     ld   a, $00                                   ; $632F: $3E $00
-    ld   [wC550+3], a                               ; $6331: $EA $53 $C5
+    ld   [wC550+3], a                             ; $6331: $EA $53 $C5
     ld   a, $00                                   ; $6334: $3E $00
-    ld   [wTranscientVfxCountdownTable+3], a                               ; $6336: $EA $23 $C5
+    ld   [wTranscientVfxCountdownTable+3], a      ; $6336: $EA $23 $C5
     ld   a, $00                                   ; $6339: $3E $00
     ld   [wD203], a                               ; $633B: $EA $03 $D2
     ld   a, $40                                   ; $633E: $3E $40
-    ld   [wTranscientVfxPosYTable+4], a                               ; $6340: $EA $44 $C5
+    ld   [wTranscientVfxPosYTable+4], a           ; $6340: $EA $44 $C5
     ld   a, $50                                   ; $6343: $3E $50
-    ld   [wTranscientVfxPosXTable+4], a                               ; $6345: $EA $34 $C5
+    ld   [wTranscientVfxPosXTable+4], a           ; $6345: $EA $34 $C5
     ld   a, $02                                   ; $6348: $3E $02
-    ld   [wTranscientVfxTypeTable+4], a                               ; $634A: $EA $14 $C5
+    ld   [wTranscientVfxTypeTable+4], a           ; $634A: $EA $14 $C5
     ld   a, $00                                   ; $634D: $3E $00
-    ld   [wC560+4], a                               ; $634F: $EA $64 $C5
+    ld   [wC560+4], a                             ; $634F: $EA $64 $C5
     ld   a, $00                                   ; $6352: $3E $00
-    ld   [wC550+4], a                               ; $6354: $EA $54 $C5
+    ld   [wC550+4], a                             ; $6354: $EA $54 $C5
     ld   a, $00                                   ; $6357: $3E $00
-    ld   [wTranscientVfxCountdownTable+4], a                               ; $6359: $EA $24 $C5
+    ld   [wTranscientVfxCountdownTable+4], a      ; $6359: $EA $24 $C5
     ld   a, $00                                   ; $635C: $3E $00
     ld   [wD204], a                               ; $635E: $EA $04 $D2
     ld   a, $3C                                   ; $6361: $3E $3C
-    ld   [wTranscientVfxPosYTable+5], a                               ; $6363: $EA $45 $C5
+    ld   [wTranscientVfxPosYTable+5], a           ; $6363: $EA $45 $C5
     ld   a, $60                                   ; $6366: $3E $60
-    ld   [wTranscientVfxPosXTable+5], a                               ; $6368: $EA $35 $C5
+    ld   [wTranscientVfxPosXTable+5], a           ; $6368: $EA $35 $C5
     ld   a, $02                                   ; $636B: $3E $02
-    ld   [wTranscientVfxTypeTable+5], a                               ; $636D: $EA $15 $C5
+    ld   [wTranscientVfxTypeTable+5], a           ; $636D: $EA $15 $C5
     ld   a, $00                                   ; $6370: $3E $00
-    ld   [wC560+5], a                               ; $6372: $EA $65 $C5
+    ld   [wC560+5], a                             ; $6372: $EA $65 $C5
     ld   a, $00                                   ; $6375: $3E $00
-    ld   [wC550+5], a                               ; $6377: $EA $55 $C5
+    ld   [wC550+5], a                             ; $6377: $EA $55 $C5
     ld   a, $00                                   ; $637A: $3E $00
-    ld   [wTranscientVfxCountdownTable+5], a                               ; $637C: $EA $25 $C5
+    ld   [wTranscientVfxCountdownTable+5], a      ; $637C: $EA $25 $C5
     ld   a, $00                                   ; $637F: $3E $00
     ld   [wD205], a                               ; $6381: $EA $05 $D2
     ld   a, $44                                   ; $6384: $3E $44
-    ld   [wTranscientVfxPosYTable+6], a                               ; $6386: $EA $46 $C5
+    ld   [wTranscientVfxPosYTable+6], a           ; $6386: $EA $46 $C5
     ld   a, $68                                   ; $6389: $3E $68
-    ld   [wTranscientVfxPosXTable+6], a                               ; $638B: $EA $36 $C5
+    ld   [wTranscientVfxPosXTable+6], a           ; $638B: $EA $36 $C5
     ld   a, $02                                   ; $638E: $3E $02
-    ld   [wTranscientVfxTypeTable+6], a                               ; $6390: $EA $16 $C5
+    ld   [wTranscientVfxTypeTable+6], a           ; $6390: $EA $16 $C5
     ld   a, $00                                   ; $6393: $3E $00
-    ld   [wC560+6], a                               ; $6395: $EA $66 $C5
+    ld   [wC560+6], a                             ; $6395: $EA $66 $C5
     ld   a, $00                                   ; $6398: $3E $00
-    ld   [wC550+6], a                               ; $639A: $EA $56 $C5
+    ld   [wC550+6], a                             ; $639A: $EA $56 $C5
     ld   a, $00                                   ; $639D: $3E $00
-    ld   [wTranscientVfxCountdownTable+6], a                               ; $639F: $EA $26 $C5
+    ld   [wTranscientVfxCountdownTable+6], a      ; $639F: $EA $26 $C5
     ld   a, $00                                   ; $63A2: $3E $00
     ld   [wD206], a                               ; $63A4: $EA $06 $D2
     jp   IncrementGameplaySubtypeAndReturn        ; $63A7: $C3 $D6 $44
@@ -218,7 +218,7 @@ MarineBeachScroll1::
     and  $07                                      ; $63D1: $E6 $07
     jr   nz, MarineBeachScroll2                   ; $63D3: $20 $42
     call func_1A39                                ; $63D5: $CD $39 $1A
-    ld   a, [wTransitionSequenceCounter]                               ; $63D8: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]          ; $63D8: $FA $6B $C1
     cp   $04                                      ; $63DB: $FE $04
     jr   nz, MarineBeachScroll2                   ; $63DD: $20 $38
     call IncrementGameplaySubtype                 ; $63DF: $CD $D6 $44
@@ -257,9 +257,9 @@ MarineBeachScroll2::
     ldh  a, [hFrameCounter]                       ; $6417: $F0 $E7
     and  $03                                      ; $6419: $E6 $03
     jr   nz, jr_001_642E                          ; $641B: $20 $11
-    ldh  a, [hBaseScrollY]                               ; $641D: $F0 $97
+    ldh  a, [hBaseScrollY]                        ; $641D: $F0 $97
     inc  a                                        ; $641F: $3C
-    ldh  [hBaseScrollY], a                               ; $6420: $E0 $97
+    ldh  [hBaseScrollY], a                        ; $6420: $E0 $97
     cp   $00                                      ; $6422: $FE $00
     jr   nz, jr_001_642E                          ; $6424: $20 $08
     ld   a, $80                                   ; $6426: $3E $80
@@ -427,7 +427,7 @@ Data_001_651A::
 
 func_001_651E::
     call func_001_65AE                            ; $651E: $CD $AE $65
-    ld   a, [wNoiseSfxSeaWavesCounter]                               ; $6521: $FA $14 $C1
+    ld   a, [wNoiseSfxSeaWavesCounter]            ; $6521: $FA $14 $C1
     inc  a                                        ; $6524: $3C
     cp   $A0                                      ; $6525: $FE $A0
     jr   nz, jr_001_652E                          ; $6527: $20 $05
@@ -436,7 +436,7 @@ func_001_651E::
     xor  a                                        ; $652D: $AF
 
 jr_001_652E::
-    ld   [wNoiseSfxSeaWavesCounter], a                               ; $652E: $EA $14 $C1
+    ld   [wNoiseSfxSeaWavesCounter], a            ; $652E: $EA $14 $C1
     ld   a, [wD466]                               ; $6531: $FA $66 $D4
     and  a                                        ; $6534: $A7
     jr   nz, jr_001_6545                          ; $6535: $20 $0E
@@ -450,7 +450,7 @@ jr_001_652E::
 jr_001_6545::
     dec  a                                        ; $6545: $3D
     ld   [wD466], a                               ; $6546: $EA $66 $D4
-    ldh  a, [hBaseScrollY]                               ; $6549: $F0 $97
+    ldh  a, [hBaseScrollY]                        ; $6549: $F0 $97
     dec  a                                        ; $654B: $3D
     cp   $C0                                      ; $654C: $FE $C0
     ret  c                                        ; $654E: $D8
@@ -481,17 +481,17 @@ jr_001_655F::
     ld   de, Data_001_651A                        ; $6581: $11 $1A $65
 
 jr_001_6584::
-    ld   hl, wDynamicOAMBuffer+8                                ; $6584: $21 $38 $C0
+    ld   hl, wDynamicOAMBuffer+8                  ; $6584: $21 $38 $C0
     call func_001_658B                            ; $6587: $CD $8B $65
     ret                                           ; $658A: $C9
 
 func_001_658B::
     push bc                                       ; $658B: $C5
-    ldh  a, [hBaseScrollY]                               ; $658C: $F0 $97
+    ldh  a, [hBaseScrollY]                        ; $658C: $F0 $97
     ld   c, a                                     ; $658E: $4F
     ldh  a, [hActiveEntityVisualPosY]             ; $658F: $F0 $EC
     sub  a, c                                     ; $6591: $91
-    ldh  [hMultiPurposeG], a                               ; $6592: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $6592: $E0 $E8
     ldi  [hl], a                                  ; $6594: $22
     ldh  a, [hActiveEntityPosX]                   ; $6595: $F0 $EE
     ldi  [hl], a                                  ; $6597: $22
@@ -632,7 +632,7 @@ jr_001_668B::
     ld   d, [hl]                                  ; $669E: $56
     ld   e, a                                     ; $669F: $5F
     push de                                       ; $66A0: $D5
-    ld   hl, wDynamicOAMBuffer+$10                                ; $66A1: $21 $40 $C0
+    ld   hl, wDynamicOAMBuffer+$10                ; $66A1: $21 $40 $C0
     ld   a, c                                     ; $66A4: $79
     rla                                           ; $66A5: $17
     rla                                           ; $66A6: $17
@@ -655,7 +655,7 @@ jr_001_668B::
     dec  [hl]                                     ; $66C3: $35
 
 jr_001_66C4::
-    ldh  a, [hMultiPurposeG]                               ; $66C4: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $66C4: $F0 $E8
     cp   $F0                                      ; $66C6: $FE $F0
     jr   c, jr_001_66D7                           ; $66C8: $38 $0D
     ld   hl, wC560                                ; $66CA: $21 $60 $C5
@@ -726,7 +726,7 @@ jr_001_6718::
     ld   d, [hl]                                  ; $6720: $56
     ld   e, a                                     ; $6721: $5F
     push de                                       ; $6722: $D5
-    ld   hl, wDynamicOAMBuffer+$10                                ; $6723: $21 $40 $C0
+    ld   hl, wDynamicOAMBuffer+$10                ; $6723: $21 $40 $C0
     ld   a, c                                     ; $6726: $79
     rla                                           ; $6727: $17
     rla                                           ; $6728: $17
@@ -748,7 +748,7 @@ jr_001_6733::
     ld   e, a                                     ; $673F: $5F
     ldh  a, [hFrameCounter]                       ; $6740: $F0 $E7
     add  a, e                                     ; $6742: $83
-    ldh  [hMultiPurposeH], a                               ; $6743: $E0 $E9
+    ldh  [hMultiPurposeH], a                      ; $6743: $E0 $E9
 
 jr_001_6745::
     and  $3F                                      ; $6745: $E6 $3F
@@ -765,7 +765,7 @@ jr_001_6745::
     ld   [hl], a                                  ; $6759: $77
 
 jr_001_675A::
-    ldh  a, [hMultiPurposeH]                               ; $675A: $F0 $E9
+    ldh  a, [hMultiPurposeH]                      ; $675A: $F0 $E9
     add  a, $40                                   ; $675C: $C6 $40
     and  $3F                                      ; $675E: $E6 $3F
     jr   nz, jr_001_6773                          ; $6760: $20 $11

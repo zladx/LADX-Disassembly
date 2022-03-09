@@ -15,7 +15,7 @@ CrystalSwitchEntityHandler::
     ld   [hl], $FF                                ; $4328: $36 $FF
     call GetEntityTransitionCountdown             ; $432A: $CD $05 $0C
     rla                                           ; $432D: $17
-    and  OAMF_PAL1 ; $432E: $E6 $10
+    and  OAMF_PAL1                                ; $432E: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4330: $E0 $ED
     ld   de, Data_015_4320                        ; $4332: $11 $20 $43
     call RenderActiveEntitySpritesPair            ; $4335: $CD $C0 $3B
@@ -172,11 +172,11 @@ jr_015_4415:
 jr_015_4430:
     ldh  a, [hActiveEntityPosX]                   ; $4430: $F0 $EE
     cp   $A8                                      ; $4432: $FE $A8
-    jp   nc, ClearEntityStatus_15                       ; $4434: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                 ; $4434: $D2 $31 $7C
 
     ldh  a, [hActiveEntityVisualPosY]             ; $4437: $F0 $EC
     cp   $84                                      ; $4439: $FE $84
-    jp   nc, ClearEntityStatus_15                       ; $443B: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                 ; $443B: $D2 $31 $7C
 
     ret                                           ; $443E: $C9
 
@@ -550,7 +550,7 @@ jr_015_469C:
     ldh  [hLinkDirection], a                      ; $469E: $E0 $9E
     ldh  a, [hFrameCounter]                       ; $46A0: $F0 $E7
     and  $08                                      ; $46A2: $E6 $08
-    ld   [wConsecutiveStepsCount], a                               ; $46A4: $EA $20 $C1
+    ld   [wConsecutiveStepsCount], a              ; $46A4: $EA $20 $C1
     push bc                                       ; $46A7: $C5
     call UpdateLinkWalkingAnimation_trampoline    ; $46A8: $CD $F0 $0B
     pop  bc                                       ; $46AB: $C1
@@ -564,7 +564,7 @@ jr_015_469C:
 MoblinKingEntityHandler::
     ld   a, [wIsBowWowFollowingLink]              ; $46B6: $FA $56 $DB
     cp   $80                                      ; $46B9: $FE $80
-    jp   nz, ClearEntityStatus_15           ; $46BB: $C2 $31 $7C
+    jp   nz, ClearEntityStatus_15                 ; $46BB: $C2 $31 $7C
 
     ld   hl, wEntitiesDirectionTable              ; $46BE: $21 $80 $C3
     add  hl, bc                                   ; $46C1: $09
@@ -612,7 +612,7 @@ jr_015_46E1:
     add  hl, bc                                   ; $470C: $09
     ld   a, [hl]                                  ; $470D: $7E
     and  $80                                      ; $470E: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $4710: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $4710: $E0 $E8
     jr   z, jr_015_471A                           ; $4712: $28 $06
 
     ld   [hl], b                                  ; $4714: $70
@@ -669,7 +669,7 @@ jr_015_475C:
     ld   [hl], $30                                ; $4764: $36 $30
     ld   hl, wEntitiesOptions1Table               ; $4766: $21 $30 $C4
     add  hl, bc                                   ; $4769: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IS_MINI_BOSS                                ; $476A: $36 $84
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IS_MINI_BOSS; $476A: $36 $84
     ld   a, $01                                   ; $476C: $3E $01
     ld   [wD228], a                               ; $476E: $EA $28 $D2
     ld   a, $01                                   ; $4771: $3E $01
@@ -764,7 +764,7 @@ jr_015_47E3:
     jp   IncrementEntityState                     ; $47F0: $C3 $12 $3B
 
 jr_015_47F3:
-    ldh  a, [hMultiPurposeG]                               ; $47F3: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $47F3: $F0 $E8
     and  a                                        ; $47F5: $A7
     jr   z, jr_015_4816                           ; $47F6: $28 $1E
 
@@ -921,7 +921,7 @@ func_015_48CF::
     jp   SetEntitySpriteVariant                   ; $48ED: $C3 $0C $3B
 
 jr_015_48F0:
-    ldh  a, [hMultiPurposeG]                               ; $48F0: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $48F0: $F0 $E8
     and  a                                        ; $48F2: $A7
     jr   z, jr_015_48F8                           ; $48F3: $28 $03
 
@@ -1188,7 +1188,7 @@ PokeyEntityHandler::
     add  hl, bc                                   ; $4BE4: $09
     ld   a, [hl]                                  ; $4BE5: $7E
     and  a                                        ; $4BE6: $A7
-    jp   nz, label_015_4CD9                                ; $4BE7: $C2 $D9 $4C
+    jp   nz, label_015_4CD9                       ; $4BE7: $C2 $D9 $4C
 
     call func_015_4C85                            ; $4BEA: $CD $85 $4C
     call ReturnIfNonInteractive_15                ; $4BED: $CD $0D $7B
@@ -1339,7 +1339,7 @@ jr_015_4CC4:
     ld   hl, Data_015_4BB7                        ; $4CCC: $21 $B7 $4B
     add  hl, de                                   ; $4CCF: $19
     ld   c, $02                                   ; $4CD0: $0E $02
-    jp   RenderActiveEntitySpritesRect           ; $4CD2: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect            ; $4CD2: $C3 $E6 $3C
 
 Data_015_4CD5::
     db   $76, $00, $76, $20
@@ -1400,7 +1400,7 @@ func_015_4D0F::
     call AddTranscientVfx                         ; $4D2D: $CD $C7 $0C
     ld   a, JINGLE_POOF                           ; $4D30: $3E $2F
     ldh  [hJingle], a                             ; $4D32: $E0 $F2
-    call ClearEntityStatus_15                        ; $4D34: $CD $31 $7C
+    call ClearEntityStatus_15                     ; $4D34: $CD $31 $7C
     scf                                           ; $4D37: $37
     ret                                           ; $4D38: $C9
 
@@ -1488,7 +1488,7 @@ label_015_4DB5:
     ldh  a, [hFrameCounter]                       ; $4DBA: $F0 $E7
     rla                                           ; $4DBC: $17
     rla                                           ; $4DBD: $17
-    and  OAMF_PAL1 ; $4DBE: $E6 $10
+    and  OAMF_PAL1                                ; $4DBE: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4DC0: $E0 $ED
     ld   de, Data_015_4D9D                        ; $4DC2: $11 $9D $4D
     call RenderActiveEntitySpritesPair            ; $4DC5: $CD $C0 $3B
@@ -1523,7 +1523,7 @@ jr_015_4DF2:
     xor  a                                        ; $4DFA: $AF
 
 jr_015_4DFB:
-    ldh  [hMultiPurposeG], a                               ; $4DFB: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $4DFB: $E0 $E8
     ld   a, ENTITY_FLAME_SHOOTER                  ; $4DFD: $3E $E2
     call SpawnNewEntity_trampoline                ; $4DFF: $CD $86 $3B
     jr   c, jr_015_4E46                           ; $4E02: $38 $42
@@ -1532,7 +1532,7 @@ jr_015_4DFB:
     add  hl, de                                   ; $4E07: $19
     ld   [hl], $02                                ; $4E08: $36 $02
     push bc                                       ; $4E0A: $C5
-    ldh  a, [hMultiPurposeG]                               ; $4E0B: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $4E0B: $F0 $E8
     ld   c, a                                     ; $4E0D: $4F
     ld   hl, wEntitiesSpriteVariantTable          ; $4E0E: $21 $B0 $C3
     add  hl, de                                   ; $4E11: $19
@@ -1562,17 +1562,17 @@ jr_015_4DFB:
     add  hl, de                                   ; $4E3B: $19
     ld   [hl], $20                                ; $4E3C: $36 $20
     pop  bc                                       ; $4E3E: $C1
-    ldh  a, [hMultiPurposeG]                               ; $4E3F: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $4E3F: $F0 $E8
     inc  a                                        ; $4E41: $3C
     cp   $02                                      ; $4E42: $FE $02
     jr   c, jr_015_4DFB                           ; $4E44: $38 $B5
 
 jr_015_4E46:
-    jp   ClearEntityStatus_15               ; $4E46: $C3 $31 $7C
+    jp   ClearEntityStatus_15                     ; $4E46: $C3 $31 $7C
 
 jr_015_4E49:
     call GetEntityTransitionCountdown             ; $4E49: $CD $05 $0C
-    jp   z, ClearEntityStatus_15            ; $4E4C: $CA $31 $7C
+    jp   z, ClearEntityStatus_15                  ; $4E4C: $CA $31 $7C
 
     ld   hl, wEntitiesSpriteVariantTable          ; $4E4F: $21 $B0 $C3
     add  hl, bc                                   ; $4E52: $09
@@ -1596,14 +1596,14 @@ label_015_4E62:
     ldh  a, [hFrameCounter]                       ; $4E62: $F0 $E7
     rla                                           ; $4E64: $17
     rla                                           ; $4E65: $17
-    and  OAMF_PAL1 ; $4E66: $E6 $10
+    and  OAMF_PAL1                                ; $4E66: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4E68: $E0 $ED
     ld   de, Data_015_4DA9                        ; $4E6A: $11 $A9 $4D
     call RenderActiveEntitySpritesPair            ; $4E6D: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $4E70: $CD $0D $7B
     call UpdateEntityPosWithSpeed_15              ; $4E73: $CD $88 $7B
     call GetEntityTransitionCountdown             ; $4E76: $CD $05 $0C
-    jp   z, ClearEntityStatus_15            ; $4E79: $CA $31 $7C
+    jp   z, ClearEntityStatus_15                  ; $4E79: $CA $31 $7C
 
     ret                                           ; $4E7C: $C9
 
@@ -1656,16 +1656,16 @@ label_015_4ECB:
     ldh  [hJingle], a                             ; $4ED5: $E0 $F2
     ld   a, TRANSCIENT_VFX_SWORD_POKE             ; $4ED7: $3E $05
     call AddTranscientVfx                         ; $4ED9: $CD $C7 $0C
-    jp   ClearEntityStatus_15               ; $4EDC: $C3 $31 $7C
+    jp   ClearEntityStatus_15                     ; $4EDC: $C3 $31 $7C
 
 jr_015_4EDF:
     ldh  a, [hActiveEntityPosX]                   ; $4EDF: $F0 $EE
     cp   $A8                                      ; $4EE1: $FE $A8
-    jp   nc, ClearEntityStatus_15                       ; $4EE3: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                 ; $4EE3: $D2 $31 $7C
 
     ldh  a, [hActiveEntityVisualPosY]             ; $4EE6: $F0 $EC
     cp   $84                                      ; $4EE8: $FE $84
-    jp   nc, ClearEntityStatus_15                       ; $4EEA: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                 ; $4EEA: $D2 $31 $7C
 
     ret                                           ; $4EED: $C9
 
@@ -1703,7 +1703,7 @@ jr_015_4F02:
     set  4, [hl]                                  ; $4F23: $CB $E6
     ld   hl, wEntitiesOptions1Table               ; $4F25: $21 $30 $C4
     add  hl, de                                   ; $4F28: $19
-    set  ENTITY_OPT1_B_EXCLUDED_FROM_KILL_ALL, [hl]                                  ; $4F29: $CB $CE
+    set  ENTITY_OPT1_B_EXCLUDED_FROM_KILL_ALL, [hl]; $4F29: $CB $CE
     set  4, [hl]                                  ; $4F2B: $CB $E6
     ldh  a, [hMultiPurpose0]                      ; $4F2D: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $4F2F: $21 $00 $C2
@@ -1912,12 +1912,12 @@ func_015_5064::
     ld   hl, Data_015_5058                        ; $506C: $21 $58 $50
     add  hl, de                                   ; $506F: $19
     ld   a, [hl+]                                 ; $5070: $2A
-    ld   [wLoadedEntitySpritesheets+2], a                             ; $5071: $EA $95 $C1
+    ld   [wLoadedEntitySpritesheets+2], a         ; $5071: $EA $95 $C1
     ld   a, [hl]                                  ; $5074: $7E
-    ld   [wLoadedEntitySpritesheets+3], a                             ; $5075: $EA $96 $C1
+    ld   [wLoadedEntitySpritesheets+3], a         ; $5075: $EA $96 $C1
     ld   a, TRUE                                  ; $5078: $3E $01
-    ldh  [hNeedsUpdatingEntityTilesA], a         ; $507A: $E0 $91
-    ld   [wNeedsUpdatingEntityTilesB], a              ; $507C: $EA $0E $C1
+    ldh  [hNeedsUpdatingEntityTilesA], a          ; $507A: $E0 $91
+    ld   [wNeedsUpdatingEntityTilesB], a          ; $507C: $EA $0E $C1
     ret                                           ; $507F: $C9
 
 ; Note: this entity, unlike most others, use all 4 spriteslots available.
@@ -1949,7 +1949,7 @@ jr_015_5093:
     and  a                                        ; $509D: $A7
     jp   nz, label_015_54D6                       ; $509E: $C2 $D6 $54
 
-    ld   a, [wFinalNightmareForm]                               ; $50A1: $FA $19 $D2
+    ld   a, [wFinalNightmareForm]                 ; $50A1: $FA $19 $D2
     JP_TABLE                                      ; $50A4: $C7
 ._00 dw FinalNightmareForm1Handler
 ._01 dw FinalNightmareForm2Handler
@@ -1983,7 +1983,7 @@ ENDC
 
     ld   a, MUSIC_FINAL_BOSS_DIALOG               ; $50C7: $3E $5D
     ld   [wMusicTrackToPlay], a                   ; $50C9: $EA $68 $D3
-    ld   hl, wIndoorBRoomStatus + $74                                ; $50CC: $21 $74 $DA
+    ld   hl, wIndoorBRoomStatus + $74             ; $50CC: $21 $74 $DA
     set  6, [hl]                                  ; $50CF: $CB $F6
     call_open_dialog $0F5                         ; $50D1
     call GetEntityTransitionCountdown             ; $50D6: $CD $05 $0C
@@ -2427,13 +2427,13 @@ func_015_5383::
     xor  a                                        ; $5383: $AF
 
 jr_015_5384:
-    ldh  [hMultiPurposeG], a                               ; $5384: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $5384: $E0 $E8
     ld   a, ENTITY_FINAL_NIGHTMARE                ; $5386: $3E $E6
     call SpawnNewEntity_trampoline                ; $5388: $CD $86 $3B
     ret  c                                        ; $538B: $D8
 
     push bc                                       ; $538C: $C5
-    ldh  a, [hMultiPurposeG]                               ; $538D: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $538D: $F0 $E8
     ld   c, a                                     ; $538F: $4F
     ldh  a, [hMultiPurpose0]                      ; $5390: $F0 $D7
     ld   hl, Data_015_5356                        ; $5392: $21 $56 $53
@@ -2477,7 +2477,7 @@ jr_015_53AF:
     add  hl, de                                   ; $53D2: $19
     inc  [hl]                                     ; $53D3: $34
     pop  bc                                       ; $53D4: $C1
-    ldh  a, [hMultiPurposeG]                               ; $53D5: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $53D5: $F0 $E8
     inc  a                                        ; $53D7: $3C
     cp   $08                                      ; $53D8: $FE $08
     jr   nz, jr_015_5384                          ; $53DA: $20 $A8
@@ -2651,7 +2651,7 @@ label_015_54D6:
     call RenderActiveEntitySpritesPair            ; $54D9: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $54DC: $CD $0D $7B
     call GetEntityTransitionCountdown             ; $54DF: $CD $05 $0C
-    jp   z, ClearEntityStatus_15            ; $54E2: $CA $31 $7C
+    jp   z, ClearEntityStatus_15                  ; $54E2: $CA $31 $7C
 
     rra                                           ; $54E5: $1F
     rra                                           ; $54E6: $1F
@@ -2710,7 +2710,7 @@ func_015_5631::
     xor  a                                        ; $5638: $AF
 
 jr_015_5639:
-    ldh  [hMultiPurposeG], a                               ; $5639: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $5639: $E0 $E8
     ld   e, a                                     ; $563B: $5F
     ld   d, b                                     ; $563C: $50
     ld   hl, Data_015_5629                        ; $563D: $21 $29 $56
@@ -2731,7 +2731,7 @@ jr_015_5652:
     ld   a, [hl]                                  ; $5653: $7E
     ldh  [hActiveEntityVisualPosY], a             ; $5654: $E0 $EC
     ld   de, Data_015_5625                        ; $5656: $11 $25 $56
-    ldh  a, [hMultiPurposeG]                               ; $5659: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5659: $F0 $E8
     cp   $00                                      ; $565B: $FE $00
     jr   z, jr_015_566B                           ; $565D: $28 $0C
 
@@ -2753,7 +2753,7 @@ jr_015_566E:
     call func_015_7964_trampoline                 ; $5673: $CD $A0 $3D
 
 jr_015_5676:
-    ldh  a, [hMultiPurposeG]                               ; $5676: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5676: $F0 $E8
     inc  a                                        ; $5678: $3C
     cp   $08                                      ; $5679: $FE $08
     jr   nz, jr_015_5639                          ; $567B: $20 $BC
@@ -3548,7 +3548,7 @@ label_015_5DED:
     jr   nz, jr_015_5E24                          ; $5E06: $20 $1C
 
     call GetEntityPrivateCountdown1               ; $5E08: $CD $00 $0C
-    jp   z, ClearEntityStatus_15            ; $5E0B: $CA $31 $7C
+    jp   z, ClearEntityStatus_15                  ; $5E0B: $CA $31 $7C
 
     xor  c                                        ; $5E0E: $A9
     bit  0, a                                     ; $5E0F: $CB $47
@@ -3626,7 +3626,7 @@ jr_015_5E79:
     and  a                                        ; $5E7E: $A7
     jr   z, jr_015_5E84                           ; $5E7F: $28 $03
 
-    jp   ClearEntityStatus_15               ; $5E81: $C3 $31 $7C
+    jp   ClearEntityStatus_15                     ; $5E81: $C3 $31 $7C
 
 jr_015_5E84:
     ret                                           ; $5E84: $C9
@@ -3696,7 +3696,7 @@ func_015_5EAC::
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5EEB: $21 $10 $C4
     add  hl, de                                   ; $5EEE: $19
     ld   [hl], $12                                ; $5EEF: $36 $12
-    call ClearEntityStatus_15                        ; $5EF1: $CD $31 $7C
+    call ClearEntityStatus_15                     ; $5EF1: $CD $31 $7C
     ld   a, [wD220]                               ; $5EF4: $FA $20 $D2
     inc  a                                        ; $5EF7: $3C
     ld   [wD220], a                               ; $5EF8: $EA $20 $D2
@@ -3762,7 +3762,7 @@ jr_015_5F3F:
     xor  a                                        ; $5F4B: $AF
 
 jr_015_5F4C:
-    ldh  [hMultiPurposeG], a                               ; $5F4C: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $5F4C: $E0 $E8
     ld   a, ENTITY_GOPONGA_FLOWER_PROJECTILE      ; $5F4E: $3E $7D
     call SpawnNewEntity_trampoline                ; $5F50: $CD $86 $3B
     jr   c, jr_015_5F96                           ; $5F53: $38 $41
@@ -3787,7 +3787,7 @@ jr_015_5F4C:
     ld   hl, wEntitiesPosYTable                   ; $5F72: $21 $10 $C2
     add  hl, de                                   ; $5F75: $19
     ld   [hl], a                                  ; $5F76: $77
-    ldh  a, [hMultiPurposeG]                               ; $5F77: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5F77: $F0 $E8
     ld   c, a                                     ; $5F79: $4F
     ld   hl, Data_015_5F1A                        ; $5F7A: $21 $1A $5F
     add  hl, bc                                   ; $5F7D: $09
@@ -3802,13 +3802,13 @@ jr_015_5F4C:
     add  hl, de                                   ; $5F8C: $19
     ld   [hl], a                                  ; $5F8D: $77
     pop  bc                                       ; $5F8E: $C1
-    ldh  a, [hMultiPurposeG]                               ; $5F8F: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5F8F: $F0 $E8
     inc  a                                        ; $5F91: $3C
     cp   $04                                      ; $5F92: $FE $04
     jr   nz, jr_015_5F4C                          ; $5F94: $20 $B6
 
 jr_015_5F96:
-    jp   ClearEntityStatus_15               ; $5F96: $C3 $31 $7C
+    jp   ClearEntityStatus_15                     ; $5F96: $C3 $31 $7C
 
 jr_015_5F99:
     ret                                           ; $5F99: $C9
@@ -3926,7 +3926,7 @@ func_015_608C::
     ld   [hl], $0A                                ; $60AA: $36 $0A
     ld   hl, wEntitiesOptions1Table               ; $60AC: $21 $30 $C4
     add  hl, bc                                   ; $60AF: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT                                ; $60B0: $36 $90
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT; $60B0: $36 $90
     jp   ConfigureEntityHitbox                    ; $60B2: $C3 $EA $3A
 
 jr_015_60B5:
@@ -3944,7 +3944,7 @@ func_015_60C1::
     add  hl, bc                                   ; $60C4: $09
     ld   a, [hl]                                  ; $60C5: $7E
     and  a                                        ; $60C6: $A7
-    jr   nz, func_015_60D4                          ; $60C7: $20 $0B
+    jr   nz, func_015_60D4                        ; $60C7: $20 $0B
 
     call GetEntityTransitionCountdown             ; $60C9: $CD $05 $0C
     ld   [hl], $1F                                ; $60CC: $36 $1F
@@ -4134,7 +4134,7 @@ jr_015_62AC:
     ldh  a, [hFrameCounter]                       ; $62F0: $F0 $E7
     rla                                           ; $62F2: $17
     rla                                           ; $62F3: $17
-    and  OAMF_PAL1 ; $62F4: $E6 $10
+    and  OAMF_PAL1                                ; $62F4: $E6 $10
     ld   hl, hActiveEntityFlipAttribute           ; $62F6: $21 $ED $FF
     xor  [hl]                                     ; $62F9: $AE
     ld   [hl], a                                  ; $62FA: $77
@@ -4156,11 +4156,11 @@ ENDC
 
     ld   hl, wEntitiesOptions1Table               ; $630F: $21 $30 $C4
     add  hl, bc                                   ; $6312: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT                                ; $6313: $36 $90
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT; $6313: $36 $90
     call label_3B70                               ; $6315: $CD $70 $3B
     ld   hl, wEntitiesOptions1Table               ; $6318: $21 $30 $C4
     add  hl, bc                                   ; $631B: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT                                ; $631C: $36 $D0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT; $631C: $36 $D0
 
 jr_015_6324:
     ld   hl, wEntitiesHealthTable                 ; $631E: $21 $60 $C3
@@ -4643,7 +4643,7 @@ jr_015_66A0:
     add  hl, bc                                   ; $66A4: $09
     ld   a, [wD225]                               ; $66A5: $FA $25 $D2
     add  [hl]                                     ; $66A8: $86
-    ld   hl, hMultiPurpose0                            ; $66A9: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $66A9: $21 $D7 $FF
     add  [hl]                                     ; $66AC: $86
     ld   hl, wEntitiesPosXTable                   ; $66AD: $21 $00 $C2
     add  hl, de                                   ; $66B0: $19
@@ -4652,7 +4652,7 @@ jr_015_66A0:
     add  hl, bc                                   ; $66B5: $09
     ld   a, [hl]                                  ; $66B6: $7E
     sub  $0C                                      ; $66B7: $D6 $0C
-    ld   hl, hMultiPurpose1                            ; $66B9: $21 $D8 $FF
+    ld   hl, hMultiPurpose1                       ; $66B9: $21 $D8 $FF
     add  [hl]                                     ; $66BC: $86
     ld   hl, wEntitiesPosYTable                   ; $66BD: $21 $10 $C2
     add  hl, de                                   ; $66C0: $19
@@ -4723,7 +4723,7 @@ jr_015_66D6:
     ld   a, $F8                                   ; $6722: $3E $F8
 
 jr_015_6724:
-    ld   hl, hMultiPurpose0                            ; $6724: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $6724: $21 $D7 $FF
     add  [hl]                                     ; $6727: $86
     ld   hl, wEntitiesPosXTable                   ; $6728: $21 $00 $C2
     add  hl, de                                   ; $672B: $19
@@ -4999,7 +4999,7 @@ jr_015_68D6:
     ldh  [hLinkPositionY], a                      ; $68D7: $E0 $99
     pop  af                                       ; $68D9: $F1
     ldh  [hLinkPositionX], a                      ; $68DA: $E0 $98
-    jp   UpdateEntityPosWithSpeed_15                            ; $68DC: $C3 $88 $7B
+    jp   UpdateEntityPosWithSpeed_15              ; $68DC: $C3 $88 $7B
 
 Data_015_68DF::
     db   $00, $00, $00, $01, $01, $01, $02, $02
@@ -5018,7 +5018,7 @@ func_015_68E7::
     ld   [hl], $00                                ; $68FC: $36 $00
     ld   hl, wEntitiesOptions1Table               ; $68FE: $21 $30 $C4
     add  hl, bc                                   ; $6901: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF                                ; $6902: $36 $C0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF; $6902: $36 $C0
     call GetEntityDropTimer                       ; $6904: $CD $FB $0B
     ld   [hl], $90                                ; $6907: $36 $90
     xor  a                                        ; $6909: $AF
@@ -5216,7 +5216,7 @@ label_015_6C61:
     add  hl, de                                   ; $6C69: $19
     ld   a, [hl]                                  ; $6C6A: $7E
     cp   $09                                      ; $6C6B: $FE $09
-    jp   nc, ClearEntityStatus_15                       ; $6C6D: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                 ; $6C6D: $D2 $31 $7C
 
     ld   hl, wEntitiesInertiaTable                ; $6C70: $21 $D0 $C3
     add  hl, bc                                   ; $6C73: $09
@@ -5336,7 +5336,7 @@ jr_015_6CF7:
     ld   hl, wEntitiesTransitionCountdownTable    ; $6D20: $21 $E0 $C2
     add  hl, de                                   ; $6D23: $19
     ld   [hl], $4C                                ; $6D24: $36 $4C
-    call ClearEntityStatus_15                        ; $6D26: $CD $31 $7C
+    call ClearEntityStatus_15                     ; $6D26: $CD $31 $7C
 
 jr_015_6D29:
     pop  af                                       ; $6D29: $F1
@@ -5357,7 +5357,7 @@ label_015_6D40:
     call RenderActiveEntitySpritesPair            ; $6D43: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $6D46: $CD $0D $7B
     call GetEntityTransitionCountdown             ; $6D49: $CD $05 $0C
-    jp   z, ClearEntityStatus_15            ; $6D4C: $CA $31 $7C
+    jp   z, ClearEntityStatus_15                  ; $6D4C: $CA $31 $7C
 
     rra                                           ; $6D4F: $1F
     rra                                           ; $6D50: $1F
@@ -5377,7 +5377,7 @@ label_015_6D6E:
     ldh  a, [hFrameCounter]                       ; $6D6E: $F0 $E7
     rla                                           ; $6D70: $17
     rla                                           ; $6D71: $17
-    and  OAMF_PAL1 ; $6D72: $E6 $10
+    and  OAMF_PAL1                                ; $6D72: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $6D74: $E0 $ED
     ld   de, Data_015_6D5E                        ; $6D76: $11 $5E $6D
     call RenderActiveEntitySpritesPair            ; $6D79: $CD $C0 $3B
@@ -5440,11 +5440,11 @@ jr_015_6DC1:
 jr_015_6DC4:
     ldh  a, [hActiveEntityPosX]                   ; $6DC4: $F0 $EE
     cp   $A8                                      ; $6DC6: $FE $A8
-    jp   nc, ClearEntityStatus_15                       ; $6DC8: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                 ; $6DC8: $D2 $31 $7C
 
     ldh  a, [hActiveEntityVisualPosY]             ; $6DCB: $F0 $EC
     cp   $88                                      ; $6DCD: $FE $88
-    jp   nc, ClearEntityStatus_15                       ; $6DCF: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                 ; $6DCF: $D2 $31 $7C
 
     ret                                           ; $6DD2: $C9
 
@@ -5756,7 +5756,7 @@ func_015_6FBC::
 
     call PlayBombExplosionSfx                     ; $6FCA: $CD $4B $0C
     call func_015_5383                            ; $6FCD: $CD $83 $53
-    call ClearEntityStatus_15                        ; $6FD0: $CD $31 $7C
+    call ClearEntityStatus_15                     ; $6FD0: $CD $31 $7C
     ld   a, ENTITY_FINAL_NIGHTMARE                ; $6FD3: $3E $E6
     call SpawnNewEntity_trampoline                ; $6FD5: $CD $86 $3B
     ld   hl, wEntitiesPrivateState5Table          ; $6FD8: $21 $90 $C3
@@ -6325,7 +6325,7 @@ Entity68Handler::
     and  a                                        ; $745D: $A7
     jr   nz, jr_015_746A                          ; $745E: $20 $0A
 
-    call ClearEntityStatus_15                        ; $7460: $CD $31 $7C
+    call ClearEntityStatus_15                     ; $7460: $CD $31 $7C
     ld   hl, wEntitiesStatusTable                 ; $7463: $21 $80 $C2
     add  hl, bc                                   ; $7466: $09
     ld   a, [hl]                                  ; $7467: $7E
@@ -6358,7 +6358,7 @@ jr_015_746A:
     ld   a, $9D                                   ; $7492: $3E $9D
     ld   [wDDD8], a                               ; $7494: $EA $D8 $DD
     ld   a, $15                                   ; $7497: $3E $15
-    call func_91D                                ; $7499: $CD $1D $09
+    call func_91D                                 ; $7499: $CD $1D $09
     pop  bc                                       ; $749C: $C1
 
 jr_015_749D:
@@ -6599,7 +6599,7 @@ jr_015_75E1:
     pop  hl                                       ; $75FD: $E1
     ld   a, [hl]                                  ; $75FE: $7E
     cp   $02                                      ; $75FF: $FE $02
-    jp   nz, ClearEntityStatus_15           ; $7601: $C2 $31 $7C
+    jp   nz, ClearEntityStatus_15                 ; $7601: $C2 $31 $7C
 
     ld   [hl], $00                                ; $7604: $36 $00
     ld   hl, wEntitiesStateTable                  ; $7606: $21 $90 $C2
@@ -6901,11 +6901,11 @@ func_015_77BF::
 jr_015_77FE:
     ldh  a, [hActiveEntityPosX]                   ; $77FE: $F0 $EE
     cp   $A8                                      ; $7800: $FE $A8
-    jp   nc, ClearEntityStatus_15                       ; $7802: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                 ; $7802: $D2 $31 $7C
 
     ldh  a, [hActiveEntityVisualPosY]             ; $7805: $F0 $EC
     cp   $80                                      ; $7807: $FE $80
-    jp   nc, ClearEntityStatus_15                       ; $7809: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                 ; $7809: $D2 $31 $7C
 
     ldh  a, [hFrameCounter]                       ; $780C: $F0 $E7
     and  $0F                                      ; $780E: $E6 $0F
@@ -6976,7 +6976,7 @@ label_015_7825:
     inc  [hl]                                     ; $7881: $34
     ld   a, [hl]                                  ; $7882: $7E
     cp   $04                                      ; $7883: $FE $04
-    jp   z, ClearEntityStatus_15            ; $7885: $CA $31 $7C
+    jp   z, ClearEntityStatus_15                  ; $7885: $CA $31 $7C
 
     ld   a, JINGLE_BUMP                           ; $7888: $3E $09
     ldh  [hJingle], a                             ; $788A: $E0 $F2
@@ -7011,7 +7011,7 @@ jr_015_78AB:
     add  hl, bc                                   ; $78C0: $09
     ld   a, [hl]                                  ; $78C1: $7E
     and  $80                                      ; $78C2: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $78C4: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $78C4: $E0 $E8
     jr   z, jr_015_78CF                           ; $78C6: $28 $07
 
     xor  a                                        ; $78C8: $AF
@@ -7083,7 +7083,7 @@ jr_015_792D:
 func_015_792E::
     call UpdateEntityPosWithSpeed_15              ; $792E: $CD $88 $7B
     call label_3B23                               ; $7931: $CD $23 $3B
-    ldh  a, [hMultiPurposeG]                               ; $7934: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $7934: $F0 $E8
     and  a                                        ; $7936: $A7
     jr   z, jr_015_7950                           ; $7937: $28 $17
 
@@ -7216,7 +7216,7 @@ label_015_79DF:
     cp   ENTITY_BOMB                              ; $79E1: $FE $02
     jr   nz, func_015_79F0                        ; $79E3: $20 $0B
 
-    ld   hl, hActiveEntityVisualPosY                                ; $79E5: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $79E5: $21 $EC $FF
     dec  [hl]                                     ; $79E8: $35
     dec  [hl]                                     ; $79E9: $35
     call func_015_79F0                            ; $79EA: $CD $F0 $79
@@ -7338,13 +7338,13 @@ func_015_7A6E::
 
     ld   e, a                                     ; $7A7C: $5F
     ld   d, b                                     ; $7A7D: $50
-    ld   hl, wEntitiesPrivateState5Table+15                                ; $7A7E: $21 $9F $C3
+    ld   hl, wEntitiesPrivateState5Table+15       ; $7A7E: $21 $9F $C3
     add  hl, de                                   ; $7A81: $19
     ld   a, [hl]                                  ; $7A82: $7E
     cp   $03                                      ; $7A83: $FE $03
     jr   nz, jr_015_7A8D                          ; $7A85: $20 $06
 
-    ld   hl, wEntitiesStatusTable + $0F                        ; $7A87: $21 $8F $C2
+    ld   hl, wEntitiesStatusTable + $0F           ; $7A87: $21 $8F $C2
     add  hl, de                                   ; $7A8A: $19
     ld   [hl], $00                                ; $7A8B: $36 $00
 
@@ -7398,7 +7398,7 @@ label_015_7AA0:
 ShouldLinkTalkToEntity_15::
     ld   e, b                                     ; $7ABC: $58
     ldh  a, [hLinkPositionY]                      ; $7ABD: $F0 $99
-    ld   hl, hActiveEntityPosY                                ; $7ABF: $21 $EF $FF
+    ld   hl, hActiveEntityPosY                    ; $7ABF: $21 $EF $FF
     sub  [hl]                                     ; $7AC2: $96
     add  $14                                      ; $7AC3: $C6 $14
     cp   $28                                      ; $7AC5: $FE $28
@@ -7789,7 +7789,7 @@ label_015_7C71:
     jp   label_015_7C91                           ; $7C8E: $C3 $91 $7C
 
 label_015_7C91:
-    call ReturnIfNonInteractive_15.allowInactiveEntity        ; $7C91: $CD $13 $7B
+    call ReturnIfNonInteractive_15.allowInactiveEntity; $7C91: $CD $13 $7B
     ldh  a, [hActiveEntityPosX]                   ; $7C94: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $7C96: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $7C98: $F0 $EC
@@ -7828,7 +7828,7 @@ jr_015_7CC6:
     ld   [hl], $08                                ; $7CD0: $36 $08
 
 jr_015_7CD2:
-    call ClearEntityStatus_15                        ; $7CD2: $CD $31 $7C
+    call ClearEntityStatus_15                     ; $7CD2: $CD $31 $7C
     ld   hl, hNoiseSfx                            ; $7CD5: $21 $F4 $FF
     ld   [hl], $1A                                ; $7CD8: $36 $1A
     ret                                           ; $7CDA: $C9
@@ -7892,7 +7892,7 @@ func_015_7D01::
     ld   a, $02                                   ; $7D2A: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $7D2C: $EA $46 $C1
     ld   a, $12                                   ; $7D2F: $3E $12
-    ldh  [hLinkVelocityZ], a                               ; $7D31: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $7D31: $E0 $A3
     ld   a, $0C                                   ; $7D33: $3E $0C
     ldh  [hLinkSpeedX], a                         ; $7D35: $E0 $9A
     xor  a                                        ; $7D37: $AF
@@ -7958,7 +7958,7 @@ jr_015_7D94:
     ld   a, $03                                   ; $7DA5: $3E $03
     ld   [wC16C], a                               ; $7DA7: $EA $6C $C1
     push bc                                       ; $7DAA: $C5
-    call func_1A22                               ; $7DAB: $CD $22 $1A
+    call func_1A22                                ; $7DAB: $CD $22 $1A
     pop  bc                                       ; $7DAE: $C1
 
 jr_015_7DAF:
@@ -8026,7 +8026,7 @@ func_015_7DF5::
     ldh  [hLinkPositionY], a                      ; $7E01: $E0 $99
     ld   a, $02                                   ; $7E03: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7E05: $E0 $A1
-    ld   a, LINK_ANIMATION_STATE_NO_UPDATE       ; $7E07: $3E $FF
+    ld   a, LINK_ANIMATION_STATE_NO_UPDATE        ; $7E07: $3E $FF
     ldh  [hLinkAnimationState], a                 ; $7E09: $E0 $9D
     ld   de, Data_015_7D50                        ; $7E0B: $11 $50 $7D
     ld   a, [wTunicType]                          ; $7E0E: $FA $0F $DC
@@ -8072,7 +8072,7 @@ func_015_7E31::
     ld   [hl+], a                                 ; $7E4B: $22
     ld   a, $7C                                   ; $7E4C: $3E $7C
     ld   [hl], a                                  ; $7E4E: $77
-    call ClearEntityStatus_15                        ; $7E4F: $CD $31 $7C
+    call ClearEntityStatus_15                     ; $7E4F: $CD $31 $7C
     jp   disableMovementInTransition              ; $7E52: $C3 $9E $0C
 
 Data_015_7E55:
@@ -8300,7 +8300,7 @@ Data_015_7F86::
 AnimalD1EntityHandler::
     ld   a, [wDB74]                               ; $7F96: $FA $74 $DB
     and  a                                        ; $7F99: $A7
-    jp   z, ClearEntityStatus_15            ; $7F9A: $CA $31 $7C
+    jp   z, ClearEntityStatus_15                  ; $7F9A: $CA $31 $7C
 
     ld   de, Data_015_7F86                        ; $7F9D: $11 $86 $7F
     call RenderActiveEntitySpritesPair            ; $7FA0: $CD $C0 $3B

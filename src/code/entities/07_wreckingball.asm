@@ -78,7 +78,7 @@ jr_007_602A:
     ld   a, [hl]                                  ; $6064: $7E
     ldh  [hDungeonFloorTile], a                   ; $6065: $E0 $E9
     and  $80                                      ; $6067: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $6069: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $6069: $E0 $E8
     jr   z, jr_007_608F                           ; $606B: $28 $22
 
     ld   [hl], b                                  ; $606D: $70
@@ -230,7 +230,7 @@ func_007_6134::
     ret                                           ; $6134: $C9
 
 func_007_6135::
-    ldh  a, [hMultiPurposeG]                               ; $6135: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $6135: $F0 $E8
     and  a                                        ; $6137: $A7
     jr   nz, jr_007_6159                          ; $6138: $20 $1F
 

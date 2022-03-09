@@ -218,7 +218,7 @@ func_004_6FC6::
     cp   $6C                                      ; $6FD3: $FE $6C
     jr   c, jr_004_6FE2                           ; $6FD5: $38 $0B
 
-    ld   hl, wIndoorBRoomStatus + $A0                                ; $6FD7: $21 $A0 $DA
+    ld   hl, wIndoorBRoomStatus + $A0             ; $6FD7: $21 $A0 $DA
     set  4, [hl]                                  ; $6FDA: $CB $E6
     ld   a, $6B                                   ; $6FDC: $3E $6B
     ldh  [hLinkPositionX], a                      ; $6FDE: $E0 $98
@@ -230,7 +230,7 @@ jr_004_6FE2:
 
 jr_004_6FE6:
     xor  a                                        ; $6FE6: $AF
-    ld   [wConsecutiveStepsCount], a                               ; $6FE7: $EA $20 $C1
+    ld   [wConsecutiveStepsCount], a              ; $6FE7: $EA $20 $C1
     ldh  [hLinkSpeedX], a                         ; $6FEA: $E0 $9A
     ld   e, $06                                   ; $6FEC: $1E $06
     ld   hl, wEntitiesPrivateState5Table          ; $6FEE: $21 $90 $C3
@@ -283,7 +283,7 @@ func_004_7020::
     cp   $F8                                      ; $702D: $FE $F8
     jr   z, jr_004_7038                           ; $702F: $28 $07
 
-    ld   a, [wDialogAskSelectionIndex]                               ; $7031: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $7031: $FA $77 $C1
     cp   $01                                      ; $7034: $FE $01
     jr   nc, jr_004_704B                          ; $7036: $30 $13
 
@@ -405,7 +405,7 @@ jr_004_70CA:
 
     call GetEntityDropTimer                       ; $70DF: $CD $FB $0B
     ld   [hl], $18                                ; $70E2: $36 $18
-    ld   a, [wMarinEntityIndex]                               ; $70E4: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                   ; $70E4: $FA $0F $C5
     ld   e, a                                     ; $70E7: $5F
     ld   d, b                                     ; $70E8: $50
     ld   hl, wEntitiesSpriteVariantTable          ; $70E9: $21 $B0 $C3
@@ -723,7 +723,7 @@ func_004_7296::
     ld   a, [wD204]                               ; $72AE: $FA $04 $D2
     ld   [wEntitiesPosXTable + $01], a            ; $72B1: $EA $01 $C2
     ld   a, [wD205]                               ; $72B4: $FA $05 $D2
-    ld   [wEntitiesPosYTable+1], a                               ; $72B7: $EA $11 $C2
+    ld   [wEntitiesPosYTable+1], a                ; $72B7: $EA $11 $C2
     push bc                                       ; $72BA: $C5
     ld   c, $01                                   ; $72BB: $0E $01
     ld   a, $04                                   ; $72BD: $3E $04
@@ -731,7 +731,7 @@ func_004_7296::
     call UpdateEntityPosWithSpeed_04              ; $72C2: $CD $CA $6D
     ld   a, [wEntitiesPosXTable + $01]            ; $72C5: $FA $01 $C2
     ld   [wD204], a                               ; $72C8: $EA $04 $D2
-    ld   a, [wEntitiesPosYTable+1]                               ; $72CB: $FA $11 $C2
+    ld   a, [wEntitiesPosYTable+1]                ; $72CB: $FA $11 $C2
     ld   [wD205], a                               ; $72CE: $EA $05 $D2
     pop  bc                                       ; $72D1: $C1
     pop  af                                       ; $72D2: $F1
@@ -976,7 +976,7 @@ jr_004_744B:
     pop  af                                       ; $746A: $F1
     ld   e, a                                     ; $746B: $5F
     ld   d, b                                     ; $746C: $50
-    ld   hl, wDynamicOAMBuffer+1                                ; $746D: $21 $31 $C0
+    ld   hl, wDynamicOAMBuffer+1                  ; $746D: $21 $31 $C0
     add  hl, de                                   ; $7470: $19
     inc  [hl]                                     ; $7471: $34
     inc  hl                                       ; $7472: $23
@@ -986,7 +986,7 @@ jr_004_744B:
     dec  [hl]                                     ; $7476: $35
 
 jr_004_7477:
-    ld   hl, wOAMBuffer+$20                                ; $7477: $21 $20 $C0
+    ld   hl, wOAMBuffer+$20                       ; $7477: $21 $20 $C0
     ld   a, $50                                   ; $747A: $3E $50
     ld   [hl+], a                                 ; $747C: $22
     ld   a, $28                                   ; $747D: $3E $28
@@ -1299,7 +1299,7 @@ jr_004_762D:
     call ClearEntityStatusBank04                  ; $762D: $CD $7A $6D
     ld   hl, hWaveSfx                             ; $7630: $21 $F3 $FF
     ld   [hl], WAVE_SFX_SEASHELL                  ; $7633: $36 $01
-    ldh  a, [hActiveEntitySpriteVariant]                               ; $7635: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]          ; $7635: $F0 $F1
     ld   e, a                                     ; $7637: $5F
     ld   d, b                                     ; $7638: $50
     ld   hl, Data_004_75B6                        ; $7639: $21 $B6 $75
@@ -1340,7 +1340,7 @@ jr_004_7653:
 jr_004_7666:
     ld   [wMagicPowderCount], a                   ; $7666: $EA $4C $DB
     ld   d, $0C                                   ; $7669: $16 $0C
-    call GiveInventoryItem_trampoline                               ; $766B: $CD $6B $3E
+    call GiveInventoryItem_trampoline             ; $766B: $CD $6B $3E
     ld   a, REPLACE_TILES_MAGIC_POWDER            ; $766E: $3E $0B
     ldh  [hReplaceTiles], a                       ; $7670: $E0 $A5
     ret                                           ; $7672: $C9
@@ -1350,7 +1350,7 @@ jr_004_7673:
     jr   nz, jr_004_767B                          ; $7674: $20 $05
 
     ld   d, $04                                   ; $7676: $16 $04
-    jp   GiveInventoryItem_trampoline                               ; $7678: $C3 $6B $3E
+    jp   GiveInventoryItem_trampoline             ; $7678: $C3 $6B $3E
 
 jr_004_767B:
     ld   a, $FF                                   ; $767B: $3E $FF

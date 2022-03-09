@@ -7,7 +7,7 @@ MarinAtTheShoreEntityHandler::
     and  a                                        ; $6194: $A7
     ret  nz                                       ; $6195: $C0
 
-    ld   a, [wOverworldRoomStatus + $FD]                               ; $6196: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + $FD]          ; $6196: $FA $FD $D8
     and  $20                                      ; $6199: $E6 $20
     jp   nz, ClearEntityStatusBank18              ; $619B: $C2 $08 $7F
 
@@ -91,7 +91,7 @@ MarinAtTheShoreState3Handler::
     ret  nz                                       ; $6219: $C0
 
     call IncrementEntityState                     ; $621A: $CD $12 $3B
-    ld   a, [wDialogAskSelectionIndex]                               ; $621D: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $621D: $FA $77 $C1
     and  a                                        ; $6220: $A7
     jr   nz, .playerDoesntWantToTalk              ; $6221: $20 $1A
 

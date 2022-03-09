@@ -75,7 +75,7 @@ ManboAndFishesState1Handler::
     and  a                                        ; $4569: $A7
     ret  nz                                       ; $456A: $C0
 
-    ld   a, [wDialogAskSelectionIndex]                               ; $456B: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $456B: $FA $77 $C1
     and  a                                        ; $456E: $A7
     jr   nz, jr_018_4581                          ; $456F: $20 $10
 
@@ -274,7 +274,7 @@ jr_018_476A:
     call_open_dialog $188                         ; $476F
 
 jr_018_4774:
-    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $4774: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $4774: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $4776: $E0 $9D
     ld   a, $02                                   ; $4778: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $477A: $E0 $A1

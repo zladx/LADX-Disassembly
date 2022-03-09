@@ -42,17 +42,17 @@ FaceShrineMuralStage1Handler::
     ld   a, $01                                   ; $6B2B: $3E $01
     ld   [wC167], a                               ; $6B2D: $EA $67 $C1
     call func_1A22                                ; $6B30: $CD $22 $1A
-    ld   a, [wTransitionSequenceCounter]                               ; $6B33: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]          ; $6B33: $FA $6B $C1
     cp   $04                                      ; $6B36: $FE $04
     jr   nz, jr_001_6B51                          ; $6B38: $20 $17
     call func_001_5888                            ; $6B3A: $CD $88 $58
     ld   a, $03                                   ; $6B3D: $3E $03
-    ldh  [hVolumeRight], a                      ; $6B3F: $E0 $A9
+    ldh  [hVolumeRight], a                        ; $6B3F: $E0 $A9
     ld   a, $30                                   ; $6B41: $3E $30
-    ldh  [hVolumeLeft], a                      ; $6B43: $E0 $AA
+    ldh  [hVolumeLeft], a                         ; $6B43: $E0 $AA
     call IncrementGameplaySubtype                 ; $6B45: $CD $D6 $44
     xor  a                                        ; $6B48: $AF
-    ld   [wScrollXOffset], a                               ; $6B49: $EA $BF $C1
+    ld   [wScrollXOffset], a                      ; $6B49: $EA $BF $C1
     ld   a, TILESET_FACE_SHRINE_MURAL             ; $6B4C: $3E $14
     ld   [wTilesetToLoad], a                      ; $6B4E: $EA $FE $D6
 
@@ -66,8 +66,8 @@ FaceShrineMuralStage2Handler::
     ld   [wWindowY], a                            ; $6B59: $EA $9A $DB
     xor  a                                        ; $6B5C: $AF
     ldh  [hBaseScrollX], a                        ; $6B5D: $E0 $96
-    ldh  [hBaseScrollY], a                               ; $6B5F: $E0 $97
-    ld   [wTransitionSequenceCounter], a                               ; $6B61: $EA $6B $C1
+    ldh  [hBaseScrollY], a                        ; $6B5F: $E0 $97
+    ld   [wTransitionSequenceCounter], a          ; $6B61: $EA $6B $C1
     ld   [wC16C], a                               ; $6B64: $EA $6C $C1
     ld   a, $01                                   ; $6B67: $3E $01
     ld   [wPaletteUnknownE], a                    ; $6B69: $EA $D5 $DD
@@ -75,7 +75,7 @@ FaceShrineMuralStage2Handler::
 
 FaceShrineMuralStage3Handler::
     call func_1A39                                ; $6B6F: $CD $39 $1A
-    ld   a, [wTransitionSequenceCounter]                               ; $6B72: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]          ; $6B72: $FA $6B $C1
     cp   $04                                      ; $6B75: $FE $04
     jr   nz, jr_001_6B80                          ; $6B77: $20 $07
     call IncrementGameplaySubtype                 ; $6B79: $CD $D6 $44

@@ -52,7 +52,7 @@ label_006_641F:
     cp   $03                                      ; $6432: $FE $03
     jr   nz, jr_006_643C                          ; $6434: $20 $06
 
-    ld   hl, wEntitiesStatusTable + $0F                        ; $6436: $21 $8F $C2
+    ld   hl, wEntitiesStatusTable + $0F           ; $6436: $21 $8F $C2
     add  hl, de                                   ; $6439: $19
     ld   [hl], $00                                ; $643A: $36 $00
 
@@ -96,11 +96,11 @@ func_006_645D::
     jr   z, .jr_006_6468                          ; $6462: $28 $04
 
     cp   ENTITY_CRAZY_TRACY                       ; $6464: $FE $7B
-    jr   nz, .jr_006_6474                          ; $6466: $20 $0C
+    jr   nz, .jr_006_6474                         ; $6466: $20 $0C
 
 .jr_006_6468
     ldh  a, [hLinkPositionY]                      ; $6468: $F0 $99
-    ld   hl, hActiveEntityPosY                                ; $646A: $21 $EF $FF
+    ld   hl, hActiveEntityPosY                    ; $646A: $21 $EF $FF
     sub  [hl]                                     ; $646D: $96
     add  $14                                      ; $646E: $C6 $14
     cp   $2C                                      ; $6470: $FE $2C
@@ -108,7 +108,7 @@ func_006_645D::
 
 .jr_006_6474
     ldh  a, [hLinkPositionY]                      ; $6474: $F0 $99
-    ld   hl, hActiveEntityPosY                                ; $6476: $21 $EF $FF
+    ld   hl, hActiveEntityPosY                    ; $6476: $21 $EF $FF
     sub  [hl]                                     ; $6479: $96
     add  $14                                      ; $647A: $C6 $14
     cp   $28                                      ; $647C: $FE $28
@@ -455,7 +455,7 @@ func_006_700A::
     jp   label_006_702A                           ; $7027: $C3 $2A $70
 
 label_006_702A:
-    call ReturnIfNonInteractive_06.allowInactiveEntity ; $702A: $CD $CC $64
+    call ReturnIfNonInteractive_06.allowInactiveEntity; $702A: $CD $CC $64
     ldh  a, [hActiveEntityPosX]                   ; $702D: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $702F: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $7031: $F0 $EC

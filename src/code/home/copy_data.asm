@@ -42,7 +42,7 @@ ExpandCopyRequestArgs::
     ld   a, [de]                                  ; $2922: $1A
     ; Move de to the data start
     inc  de                                       ; $2923: $13
-    call CopyDataToBGMap                       ; $2924: $CD $41 $29
+    call CopyDataToBGMap                          ; $2924: $CD $41 $29
     ; fallthrough
 
 ; Copy data from a wRequest structure to the BG map,

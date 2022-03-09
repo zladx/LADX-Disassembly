@@ -32,7 +32,7 @@ jr_018_4D30:
 jr_018_4D36:
     ld   de, Data_018_4CFB                        ; $4D36: $11 $FB $4C
     xor  a                                        ; $4D39: $AF
-    ldh  [hMultiPurposeG], a                               ; $4D3A: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $4D3A: $E0 $E8
     ld   a, [wTradeSequenceItem]                  ; $4D3C: $FA $0E $DB
     cp   TRADING_ITEM_FISHING_HOOK                ; $4D3F: $FE $0B
     jr   nc, jr_018_4D58                          ; $4D41: $30 $15
@@ -47,7 +47,7 @@ jr_018_4D36:
 
 jr_018_4D51:
     ld   a, $01                                   ; $4D51: $3E $01
-    ldh  [hMultiPurposeG], a                               ; $4D53: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $4D53: $E0 $E8
     ld   de, Data_018_4D07                        ; $4D55: $11 $07 $4D
 
 jr_018_4D58:
@@ -85,7 +85,7 @@ GrandmaUlriraState0Handler::
     ld   a, $78                                   ; $4D8C: $3E $78
     jr   z, jr_018_4DA0                           ; $4D8E: $28 $10
 
-    ldh  a, [hMultiPurposeG]                               ; $4D90: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $4D90: $F0 $E8
     and  a                                        ; $4D92: $A7
     jr   nz, jr_018_4DA3                          ; $4D93: $20 $0E
 
@@ -112,7 +112,7 @@ jr_018_4DB5:
     jp_open_dialog $15B                           ; $4DB5
 
 GrandmaUlriraState1Handler::
-    ld   a, [wDialogAskSelectionIndex]                               ; $4DBA: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $4DBA: $FA $77 $C1
     and  a                                        ; $4DBD: $A7
     jr   nz, jr_018_4DCF                          ; $4DBE: $20 $0F
 

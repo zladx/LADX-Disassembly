@@ -41,7 +41,7 @@ GetBGAttributesAddressForObject::
     ld   c, a                                     ; $6591: $4F
     rl   b                                        ; $6592: $CB $10
 
-    ld   hl, BGAttributesPointers_Overworld            ; $6594: $21 $76 $5E
+    ld   hl, BGAttributesPointers_Overworld       ; $6594: $21 $76 $5E
 
     ;
     ; Retrieve indoors bank and pointers
@@ -121,7 +121,7 @@ GetBGAttributesAddressForObject::
 
 .jr_01A_65E9
     ldh  a, [hMapId]                              ; $65E9: $F0 $F7
-    cp   MAP_CAVE_WATER                               ; $65EB: $FE $1F
+    cp   MAP_CAVE_WATER                           ; $65EB: $FE $1F
     jr   nz, .jr_01A_65FD                         ; $65ED: $20 $0E
 
     ldh  a, [hMapRoom]                            ; $65EF: $F0 $F6
@@ -202,7 +202,7 @@ GetBGAttributesAddressForObject::
     ld   a, h                                     ; $6638: $7C
     ldh  [hMultiPurpose9], a                      ; $6639: $E0 $E0
     ld   a, l                                     ; $663B: $7D
-    ldh  [hMultiPurposeA], a                           ; $663C: $E0 $E1
+    ldh  [hMultiPurposeA], a                      ; $663C: $E0 $E1
     pop  hl                                       ; $663E: $E1
     ret                                           ; $663F: $C9
 
@@ -285,11 +285,11 @@ jr_01A_6736:
     ld   c, a                                     ; $673A: $4F
     ldh  a, [hMultiPurpose9]                      ; $673B: $F0 $E0
     ld   h, a                                     ; $673D: $67
-    ldh  a, [hMultiPurposeA]                           ; $673E: $F0 $E1
+    ldh  a, [hMultiPurposeA]                      ; $673E: $F0 $E1
     ld   l, a                                     ; $6740: $6F
     add  hl, bc                                   ; $6741: $09
     ld   a, h                                     ; $6742: $7C
     ldh  [hMultiPurpose9], a                      ; $6743: $E0 $E0
     ld   a, l                                     ; $6745: $7D
-    ldh  [hMultiPurposeA], a                           ; $6746: $E0 $E1
+    ldh  [hMultiPurposeA], a                      ; $6746: $E0 $E1
     ret                                           ; $6748: $C9

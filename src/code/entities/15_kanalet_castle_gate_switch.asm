@@ -44,7 +44,7 @@ func_015_40D5::
     ld   [wScreenShakeHorizontal], a              ; $40E1: $EA $55 $C1
     call_open_dialog $039                         ; $40E4
     call func_015_7CDB                            ; $40E9: $CD $DB $7C
-    jp   ClearEntityStatus_15               ; $40EC: $C3 $31 $7C
+    jp   ClearEntityStatus_15                     ; $40EC: $C3 $31 $7C
 
 jr_015_40EF:
     ld   e, $01                                   ; $40EF: $1E $01

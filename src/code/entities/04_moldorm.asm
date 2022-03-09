@@ -26,7 +26,7 @@ MoldormEntityHandler::
     call DecrementEntityIgnoreHitsCountdown       ; $56B6: $CD $56 $0C
     ld   a, [wRoomTransitionState]                ; $56B9: $FA $24 $C1
     and  a                                        ; $56BC: $A7
-    jp   nz, EntityInitMoldorm                        ; $56BD: $C2 $90 $56
+    jp   nz, EntityInitMoldorm                    ; $56BD: $C2 $90 $56
 
     call BossIntro                                ; $56C0: $CD $E8 $3E
     ldh  a, [hActiveEntityStatus]                 ; $56C3: $F0 $EA
@@ -420,17 +420,17 @@ jr_004_5963:
 
     ld   hl, wEntitiesOptions1Table               ; $59F5: $21 $30 $C4
     add  hl, bc                                   ; $59F8: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT                                ; $59F9: $36 $90
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT; $59F9: $36 $90
     call label_3B70                               ; $59FB: $CD $70 $3B
     ld   hl, wEntitiesOptions1Table               ; $59FE: $21 $30 $C4
     add  hl, bc                                   ; $5A01: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT                                ; $5A02: $36 $D0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT; $5A02: $36 $D0
 
 jr_004_5A04:
     ret                                           ; $5A04: $C9
 
 func_004_5A05::
-    call ReturnIfNonInteractive_04.allowInactiveEntity ; $5A05: $CD $A9 $7F
+    call ReturnIfNonInteractive_04.allowInactiveEntity; $5A05: $CD $A9 $7F
     ldh  a, [hActiveEntityPosX]                   ; $5A08: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $5A0A: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $5A0C: $F0 $EC

@@ -256,4 +256,4 @@ func_004_5DA6::
     ld   hl, Data_004_5D26                        ; $5DC8: $21 $26 $5D
     add  hl, de                                   ; $5DCB: $19
     ld   c, $08                                   ; $5DCC: $0E $08
-    jp   RenderActiveEntitySpritesRect           ; $5DCE: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect            ; $5DCE: $C3 $E6 $3C

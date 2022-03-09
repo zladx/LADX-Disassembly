@@ -35,7 +35,7 @@ FileSaveInitial::
     ld   [rSVBK], a                               ; $4022: $E0 $70
 
     ; If wIsFileSelectionArrowShifted == 0...
-    ld   a, [wIsFileSelectionArrowShifted]                               ; $4024: $FA $00 $D0
+    ld   a, [wIsFileSelectionArrowShifted]        ; $4024: $FA $00 $D0
     and  a                                        ; $4027: $A7
     jr   nz, .done                                ; $4028: $20 $14
 
@@ -60,7 +60,7 @@ FileSaveInitial::
 
     ; Set wIsFileSelectionArrowShifted to 1
     ld   a, $01                                   ; $4039: $3E $01
-    ld   [wIsFileSelectionArrowShifted], a                               ; $403B: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a        ; $403B: $EA $00 $D0
 
 .done
     ; Switch back to WRAM bank 0
@@ -73,16 +73,16 @@ FileSaveMapFadeOut::
     call DrawLinkSprite                           ; $4042: $CD $2E $1D
     call AnimateEntitiesAndRestoreBank01          ; $4045: $CD $FC $0E
     call func_1A22                                ; $4048: $CD $22 $1A
-    ld   a, [wTransitionSequenceCounter]                               ; $404B: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]          ; $404B: $FA $6B $C1
     cp   $04                                      ; $404E: $FE $04
     jr   nz, jr_001_4072                          ; $4050: $20 $20
     ld   a, $03                                   ; $4052: $3E $03
-    ldh  [hVolumeRight], a                      ; $4054: $E0 $A9
+    ldh  [hVolumeRight], a                        ; $4054: $E0 $A9
     ld   a, $30                                   ; $4056: $3E $30
-    ldh  [hVolumeLeft], a                      ; $4058: $E0 $AA
+    ldh  [hVolumeLeft], a                         ; $4058: $E0 $AA
     call IncrementGameplaySubtype                 ; $405A: $CD $D6 $44
     xor  a                                        ; $405D: $AF
-    ld   [wScrollXOffset], a                               ; $405E: $EA $BF $C1
+    ld   [wScrollXOffset], a                      ; $405E: $EA $BF $C1
     ld   [wInventoryAppearing], a                 ; $4061: $EA $4F $C1
     ld   [wOcarinaMenuOpening], a                 ; $4064: $EA $B8 $C1
     ld   [wOcarinaMenuClosing], a                 ; $4067: $EA $B9 $C1
@@ -108,8 +108,8 @@ FileSaveDelay2::
     ld   [wWindowY], a                            ; $4086: $EA $9A $DB
     xor  a                                        ; $4089: $AF
     ldh  [hBaseScrollX], a                        ; $408A: $E0 $96
-    ldh  [hBaseScrollY], a                               ; $408C: $E0 $97
-    ld   [wTransitionSequenceCounter], a                               ; $408E: $EA $6B $C1
+    ldh  [hBaseScrollY], a                        ; $408C: $E0 $97
+    ld   [wTransitionSequenceCounter], a          ; $408E: $EA $6B $C1
     ld   [wC16C], a                               ; $4091: $EA $6C $C1
     ld   a, $01                                   ; $4094: $3E $01
     ld   [wPaletteUnknownE], a                    ; $4096: $EA $D5 $DD
@@ -117,7 +117,7 @@ FileSaveDelay2::
 
 FileSaveVisible::
     call func_1A39                                ; $409C: $CD $39 $1A
-    ld   a, [wTransitionSequenceCounter]                               ; $409F: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]          ; $409F: $FA $6B $C1
     cp   $04                                      ; $40A2: $FE $04
     jr   nz, .return                              ; $40A4: $20 $03
     call IncrementGameplaySubtype                 ; $40A6: $CD $D6 $44
@@ -136,7 +136,7 @@ FileSaveInteractive::
     jr   z, jr_001_40F9                           ; $40BC: $28 $3B
     call IncrementGameplaySubtype                 ; $40BE: $CD $D6 $44
     xor  a                                        ; $40C1: $AF
-    ld   [wTransitionSequenceCounter], a                               ; $40C2: $EA $6B $C1
+    ld   [wTransitionSequenceCounter], a          ; $40C2: $EA $6B $C1
     ld   [wC16C], a                               ; $40C5: $EA $6C $C1
     ld   a, [wIsIndoor]                           ; $40C8: $FA $A5 $DB
     and  a                                        ; $40CB: $A7
@@ -205,9 +205,9 @@ LCDOn::
 
     ; Configure Window
     ld   a, $07                                   ; $411F: $3E $07
-    ldh  [hVolumeRight], a                      ; $4121: $E0 $A9
+    ldh  [hVolumeRight], a                        ; $4121: $E0 $A9
     ld   a, $70                                   ; $4123: $3E $70
-    ldh  [hVolumeLeft], a                      ; $4125: $E0 $AA
+    ldh  [hVolumeLeft], a                         ; $4125: $E0 $AA
 .return
     ret                                           ; $4127: $C9
 
@@ -221,7 +221,7 @@ func_001_412A::
     ld   hl, wC13F                                ; $412A: $21 $3F $C1
     call func_001_6BA8                            ; $412D: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $4130: $F0 $CC
-    and  J_UP | J_DOWN                ; $4132: $E6 $0C
+    and  J_UP | J_DOWN                            ; $4132: $E6 $0C
     jr   z, jr_001_413B                           ; $4134: $28 $05
     ld   a, [hl]                                  ; $4136: $7E
     inc  a                                        ; $4137: $3C
@@ -234,7 +234,7 @@ jr_001_413B::
     ld   hl, Data_001_4128                        ; $413E: $21 $28 $41
     add  hl, de                                   ; $4141: $19
     ld   a, [hl]                                  ; $4142: $7E
-    ld   hl, wOAMBuffer+$18                                ; $4143: $21 $18 $C0
+    ld   hl, wOAMBuffer+$18                       ; $4143: $21 $18 $C0
     ldi  [hl], a                                  ; $4146: $22
     ld   a, SAVE_OPTION_X + $8                    ; $4147: $3E $24
     ldi  [hl], a                                  ; $4149: $22

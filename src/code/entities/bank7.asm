@@ -260,7 +260,7 @@ jr_007_69AC:
     ld   e, a                                     ; $69B9: $5F
     inc  a                                        ; $69BA: $3C
     ld   [hl], a                                  ; $69BB: $77
-    ldh  [hMultiPurposeG], a                               ; $69BC: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $69BC: $E0 $E8
     ld   a, e                                     ; $69BE: $7B
     and  $1F                                      ; $69BF: $E6 $1F
     jp   nz, label_007_69D0                       ; $69C1: $C2 $D0 $69
@@ -293,11 +293,11 @@ label_007_69D0:
     ld   e, l                                     ; $69E8: $5D
 
     ld   hl, wFarcallParams                       ; $69E9: $21 $01 $DE
-    ld   a, BANK(AnglersTunnelDoorEntityHandler)                   ; $69EC: $3E $1A
+    ld   a, BANK(AnglersTunnelDoorEntityHandler)  ; $69EC: $3E $1A
     ld   [hl+], a                                 ; $69EE: $22
-    ld   a, HIGH(AnglersTunnelDoorEntityHandler)                   ; $69EF: $3E $71
+    ld   a, HIGH(AnglersTunnelDoorEntityHandler)  ; $69EF: $3E $71
     ld   [hl+], a                                 ; $69F1: $22
-    ld   a, LOW(AnglersTunnelDoorEntityHandler)                    ; $69F2: $3E $11
+    ld   a, LOW(AnglersTunnelDoorEntityHandler)   ; $69F2: $3E $11
     ld   [hl+], a                                 ; $69F4: $22
     ld   a, BANK(@)                               ; $69F5: $3E $07
     ld   [hl], a                                  ; $69F7: $77
@@ -338,7 +338,7 @@ jr_007_6A23:
     ld   h, b                                     ; $6A26: $60
     ld   l, c                                     ; $6A27: $69
     ld   a, $87                                   ; $6A28: $3E $87
-    call func_2BF                                ; $6A2A: $CD $2F $0B
+    call func_2BF                                 ; $6A2A: $CD $2F $0B
     pop  hl                                       ; $6A2D: $E1
     inc  bc                                       ; $6A2E: $03
     dec  e                                        ; $6A2F: $1D
@@ -415,7 +415,7 @@ jr_007_6A89:
     add  hl, bc                                   ; $6A98: $09
     ld   a, [hl]                                  ; $6A99: $7E
     and  $80                                      ; $6A9A: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $6A9C: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $6A9C: $E0 $E8
     jr   z, jr_007_6AA6                           ; $6A9E: $28 $06
 
     ld   [hl], b                                  ; $6AA0: $70
@@ -490,7 +490,7 @@ jr_007_6B02:
     ret                                           ; $6B07: $C9
 
 jr_007_6B08:
-    ldh  a, [hMultiPurposeG]                               ; $6B08: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $6B08: $F0 $E8
     and  a                                        ; $6B0A: $A7
     jr   z, jr_007_6B15                           ; $6B0B: $28 $08
 
@@ -860,7 +860,7 @@ jr_007_6D6A:
 
 jr_007_6D70:
     call func_007_6C33                            ; $6D70: $CD $33 $6C
-    ldh  a, [hMultiPurposeG]                               ; $6D73: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $6D73: $F0 $E8
     and  a                                        ; $6D75: $A7
     ret  z                                        ; $6D76: $C8
 
@@ -869,7 +869,7 @@ jr_007_6D70:
     jp   jr_007_6B15                              ; $6D7C: $C3 $15 $6B
 
 func_007_6D7F::
-    ldh  a, [hMultiPurposeG]                               ; $6D7F: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $6D7F: $F0 $E8
     and  a                                        ; $6D81: $A7
     jr   z, jr_007_6D9C                           ; $6D82: $28 $18
 
@@ -1290,9 +1290,9 @@ func_007_703A::
     add  $08                                      ; $7055: $C6 $08
     ld   [wD5C2], a                               ; $7057: $EA $C2 $D5
     ld   a, $08                                   ; $705A: $3E $08
-    ld   [wD5C0+1], a                               ; $705C: $EA $C1 $D5
+    ld   [wD5C0+1], a                             ; $705C: $EA $C1 $D5
     ld   a, $06                                   ; $705F: $3E $06
-    ld   [wD5C2+1], a                               ; $7061: $EA $C3 $D5
+    ld   [wD5C2+1], a                             ; $7061: $EA $C3 $D5
     ld   de, Data_007_6F15                        ; $7064: $11 $15 $6F
     call RenderActiveEntitySpritesPair            ; $7067: $CD $C0 $3B
     ld   a, $02                                   ; $706A: $3E $02
@@ -1387,7 +1387,7 @@ jr_007_70E0:
     ld   a, $02                                   ; $70FA: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $70FC: $EA $46 $C1
     ld   a, $13                                   ; $70FF: $3E $13
-    ldh  [hLinkVelocityZ], a                               ; $7101: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $7101: $E0 $A3
     ld   a, $08                                   ; $7103: $3E $08
     ld   [wSubtractHealthBuffer], a               ; $7105: $EA $94 $DB
     ld   a, $20                                   ; $7108: $3E $20
@@ -1571,7 +1571,7 @@ jr_007_71B4:
     ld   a, $91                                   ; $7212: $3E $91
     ld   [wDDD8], a                               ; $7214: $EA $D8 $DD
     ld   a, $07                                   ; $7217: $3E $07
-    call func_91D                                ; $7219: $CD $1D $09
+    call func_91D                                 ; $7219: $CD $1D $09
     pop  bc                                       ; $721C: $C1
 
 jr_007_721D:
@@ -1685,7 +1685,7 @@ jr_007_72C3:
     add  hl, bc                                   ; $72D5: $09
     ld   a, [hl]                                  ; $72D6: $7E
     and  $80                                      ; $72D7: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $72D9: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $72D9: $E0 $E8
     jr   z, jr_007_72E3                           ; $72DB: $28 $06
 
     ld   [hl], b                                  ; $72DD: $70
@@ -1766,7 +1766,7 @@ jr_007_734C:
     jp   SetEntitySpriteVariant                   ; $734D: $C3 $0C $3B
 
 func_007_7350::
-    ldh  a, [hMultiPurposeG]                               ; $7350: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $7350: $F0 $E8
     and  a                                        ; $7352: $A7
     ret  z                                        ; $7353: $C8
 
@@ -1819,7 +1819,7 @@ func_007_73A0::
     call label_3B39                               ; $73A0: $CD $39 $3B
     call UpdateEntityPosWithSpeed_07              ; $73A3: $CD $0A $7E
     call func_007_73F7                            ; $73A6: $CD $F7 $73
-    ldh  a, [hMultiPurposeG]                               ; $73A9: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $73A9: $F0 $E8
     and  a                                        ; $73AB: $A7
     jr   z, jr_007_73D2                           ; $73AC: $28 $24
 
@@ -2151,7 +2151,7 @@ jr_007_75FE:
     ld   hl, wEntitiesPosZTable                   ; $7616: $21 $10 $C3
     add  hl, bc                                   ; $7619: $09
     ld   a, [hl]                                  ; $761A: $7E
-    ldh  [hMultiPurposeG], a                               ; $761B: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $761B: $E0 $E8
     dec  a                                        ; $761D: $3D
     and  $80                                      ; $761E: $E6 $80
     jr   z, jr_007_7633                           ; $7620: $28 $11
@@ -2219,7 +2219,7 @@ jr_007_7671:
     ld   [hl], a                                  ; $767D: $77
 
 jr_007_767E:
-    ldh  a, [hMultiPurposeG]                               ; $767E: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $767E: $F0 $E8
     dec  a                                        ; $7680: $3D
     and  $80                                      ; $7681: $E6 $80
     jr   z, jr_007_76C2                           ; $7683: $28 $3D
@@ -2552,7 +2552,7 @@ jr_007_786E:
     ld   [hl], $80                                ; $7872: $36 $80
     ld   hl, wEntitiesOptions1Table               ; $7874: $21 $30 $C4
     add  hl, bc                                   ; $7877: $09
-    ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_SPLASH_IN_WATER                                ; $7878: $36 $48
+    ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_SPLASH_IN_WATER; $7878: $36 $48
     call func_007_7E5D                            ; $787A: $CD $5D $7E
     add  $06                                      ; $787D: $C6 $06
     cp   $0A                                      ; $787F: $FE $0A
@@ -2963,8 +2963,8 @@ jr_007_7AD1:
     ld   a, [hl]                                  ; $7AEA: $7E
     ld   [wD5C2], a                               ; $7AEB: $EA $C2 $D5
     ld   a, $02                                   ; $7AEE: $3E $02
-    ld   [wD5C0+1], a                               ; $7AF0: $EA $C1 $D5
-    ld   [wD5C2+1], a                               ; $7AF3: $EA $C3 $D5
+    ld   [wD5C0+1], a                             ; $7AF0: $EA $C1 $D5
+    ld   [wD5C2+1], a                             ; $7AF3: $EA $C3 $D5
     ld   hl, Data_007_7A7D                        ; $7AF6: $21 $7D $7A
     add  hl, de                                   ; $7AF9: $19
     ld   a, [hl]                                  ; $7AFA: $7E
@@ -2987,7 +2987,7 @@ jr_007_7AD1:
     xor  a                                        ; $7B15: $AF
     ldh  [hMultiPurpose3], a                      ; $7B16: $E0 $DA
     pop  hl                                       ; $7B18: $E1
-    call func_1819                               ; $7B19: $CD $19 $18
+    call func_1819                                ; $7B19: $CD $19 $18
     ld   a, $02                                   ; $7B1C: $3E $02
     call func_015_7964_trampoline                 ; $7B1E: $CD $A0 $3D
     pop  bc                                       ; $7B21: $C1
@@ -2999,7 +2999,7 @@ jr_007_7AD1:
     ret  z                                        ; $7B29: $C8
 
     ld   de, Data_007_7A95                        ; $7B2A: $11 $95 $7A
-    jp   RenderActiveEntitySpritesPair                ; $7B2D: $C3 $C0 $3B
+    jp   RenderActiveEntitySpritesPair            ; $7B2D: $C3 $C0 $3B
 
 func_007_7B30::
     xor  $01                                      ; $7B30: $EE $01
@@ -3037,13 +3037,13 @@ func_007_7CF0::
 
     ld   e, a                                     ; $7D01: $5F
     ld   d, b                                     ; $7D02: $50
-    ld   hl, wEntitiesPrivateState5Table+15                                ; $7D03: $21 $9F $C3
+    ld   hl, wEntitiesPrivateState5Table+15       ; $7D03: $21 $9F $C3
     add  hl, de                                   ; $7D06: $19
     ld   a, [hl]                                  ; $7D07: $7E
     cp   $03                                      ; $7D08: $FE $03
     jr   nz, jr_007_7D12                          ; $7D0A: $20 $06
 
-    ld   hl, wEntitiesStatusTable + $0F                         ; $7D0C: $21 $8F $C2
+    ld   hl, wEntitiesStatusTable + $0F           ; $7D0C: $21 $8F $C2
     add  hl, de                                   ; $7D0F: $19
     ld   [hl], $00                                ; $7D10: $36 $00
 
@@ -3082,7 +3082,7 @@ func_007_7D1A::
 func_007_7D36::
     ld   e, b                                     ; $7D36: $58
     ldh  a, [hLinkPositionY]                      ; $7D37: $F0 $99
-    ld   hl, hActiveEntityPosY                                ; $7D39: $21 $EF $FF
+    ld   hl, hActiveEntityPosY                    ; $7D39: $21 $EF $FF
     sub  [hl]                                     ; $7D3C: $96
     add  $14                                      ; $7D3D: $C6 $14
     cp   $38                                      ; $7D3F: $FE $38
@@ -3091,7 +3091,7 @@ func_007_7D36::
 func_007_7D43::
     ld   e, b                                     ; $7D43: $58
     ldh  a, [hLinkPositionY]                      ; $7D44: $F0 $99
-    ld   hl, hActiveEntityPosY                                ; $7D46: $21 $EF $FF
+    ld   hl, hActiveEntityPosY                    ; $7D46: $21 $EF $FF
     sub  [hl]                                     ; $7D49: $96
     add  $14                                      ; $7D4A: $C6 $14
     cp   $28                                      ; $7D4C: $FE $28
@@ -3488,7 +3488,7 @@ label_007_7F16:
     jp   label_007_7F36                           ; $7F33: $C3 $36 $7F
 
 label_007_7F36:
-    call ReturnIfNonInteractive_07.allowInactiveEntity ; $7F36: $CD $9C $7D
+    call ReturnIfNonInteractive_07.allowInactiveEntity; $7F36: $CD $9C $7D
     ldh  a, [hActiveEntityPosX]                   ; $7F39: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $7F3B: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $7F3D: $F0 $EC

@@ -42,7 +42,7 @@ MarinEntityHandler::
     jr   c, .notInAnyVillage                      ; $4E83: $38 $02
     jr   .continue                                ; $4E85: $18 $0F
 .notInAnyVillage
-    ld   a, [wOverworldRoomStatus + ROOM_OW_MARIN_BRIDGE] ; $4E87: $FA $08 $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_MARIN_BRIDGE]; $4E87: $FA $08 $D8
     and  $10                                      ; $4E8A: $E6 $10
     jr   nz, .continue                            ; $4E8C: $20 $08
     ld   a, [wTradeSequenceItem]                  ; $4E8E: $FA $0E $DB
@@ -499,7 +499,7 @@ func_005_512B::
     jr   nz, jr_005_515E                          ; $512F: $20 $2D
 
     call IncrementEntityState                     ; $5131: $CD $12 $3B
-    ld   a, [wDialogAskSelectionIndex]                               ; $5134: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $5134: $FA $77 $C1
     and  a                                        ; $5137: $A7
     jr   nz, jr_005_514F                          ; $5138: $20 $15
 
@@ -569,7 +569,7 @@ jr_005_5197:
     call_open_dialog $013
 
 jr_005_51A1:
-    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $51A1: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $51A1: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $51A3: $E0 $9D
     ld   a, $02                                   ; $51A5: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $51A7: $E0 $A1
@@ -602,7 +602,7 @@ MarinEntityHandler_Indoor::
     cp   TRADING_ITEM_PINEAPPLE                   ; $51D1: $FE $07
     jr   c, jr_005_51FB                           ; $51D3: $38 $26
 
-    ld   a, [wOverworldRoomStatus + $FD]                               ; $51D5: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + $FD]          ; $51D5: $FA $FD $D8
     and  $30                                      ; $51D8: $E6 $30
     jp   nz, ClearEntityStatus_05                 ; $51DA: $C2 $4B $7B
 
@@ -719,7 +719,7 @@ func_005_52AF::
     ldh  [hLinkPositionY], a                      ; $52BB: $E0 $99
     ld   a, $02                                   ; $52BD: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $52BF: $E0 $A1
-    ld   a, LINK_ANIMATION_STATE_NO_UPDATE       ; $52C1: $3E $FF
+    ld   a, LINK_ANIMATION_STATE_NO_UPDATE        ; $52C1: $3E $FF
     ldh  [hLinkAnimationState], a                 ; $52C3: $E0 $9D
     ld   de, Data_005_5258                        ; $52C5: $11 $58 $52
     call RenderActiveEntitySpritesPair            ; $52C8: $CD $C0 $3B
@@ -752,7 +752,7 @@ func_005_52DB::
     ld   a, $02                                   ; $52F6: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $52F8: $EA $46 $C1
     ld   a, $12                                   ; $52FB: $3E $12
-    ldh  [hLinkVelocityZ], a                               ; $52FD: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $52FD: $E0 $A3
     ld   a, $0C                                   ; $52FF: $3E $0C
     ldh  [hLinkSpeedX], a                         ; $5301: $E0 $9A
     xor  a                                        ; $5303: $AF

@@ -12,7 +12,7 @@ Data_018_59E4::
 ; entity ID of ENTITY_MARIN_AT_THE_SHORE.
 MarinAsFollowerHandler::
     ld   a, c                                     ; $59E8: $79
-    ld   [wMarinEntityIndex], a                               ; $59E9: $EA $0F $C5
+    ld   [wMarinEntityIndex], a                   ; $59E9: $EA $0F $C5
     call GetEntityTransitionCountdown             ; $59EC: $CD $05 $0C
 
     jr   z, jr_018_5A3F                           ; $59EF: $28 $4E
@@ -48,7 +48,7 @@ jr_018_5A18:
     ld   [wEntitiesSpriteVariantTable], a         ; $5A19: $EA $B0 $C3
     ld   de, Data_018_59B8                        ; $5A1C: $11 $B8 $59
     call RenderActiveEntitySpritesPair            ; $5A1F: $CD $C0 $3B
-    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $5A22: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $5A22: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $5A24: $E0 $9D
     ld   a, $02                                   ; $5A26: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5A28: $E0 $A1
@@ -370,7 +370,7 @@ func_018_5C07::
     ld   a, [wDB10]                               ; $5C0C: $FA $10 $DB
     dec  a                                        ; $5C0F: $3D
     ld   e, a                                     ; $5C10: $5F
-    ld   a, [wIsOnLowHeath]                               ; $5C11: $FA $63 $C1
+    ld   a, [wIsOnLowHeath]                       ; $5C11: $FA $63 $C1
     cp   e                                        ; $5C14: $BB
     jr   z, jr_018_5C27                           ; $5C15: $28 $10
 
@@ -487,11 +487,11 @@ label_018_5C6A:
     ld   hl, wEntitiesPrivateState1Table          ; $5CBD: $21 $B0 $C2
     add  hl, bc                                   ; $5CC0: $09
     ld   a, [hl]                                  ; $5CC1: $7E
-    ldh  [hMultiPurposeH], a                               ; $5CC2: $E0 $E9
+    ldh  [hMultiPurposeH], a                      ; $5CC2: $E0 $E9
     and  $0F                                      ; $5CC4: $E6 $0F
     ld   e, a                                     ; $5CC6: $5F
     ld   d, b                                     ; $5CC7: $50
-    ld   hl, wLinkPositionZHistory                                ; $5CC8: $21 $95 $D1
+    ld   hl, wLinkPositionZHistory                ; $5CC8: $21 $95 $D1
     add  hl, de                                   ; $5CCB: $19
     ldh  a, [hLinkPositionZ]                      ; $5CCC: $F0 $A2
     ld   [hl], a                                  ; $5CCE: $77
@@ -521,7 +521,7 @@ jr_018_5CEF:
     ld   hl, wEntitiesPrivateState1Table          ; $5CEF: $21 $B0 $C2
     add  hl, bc                                   ; $5CF2: $09
     inc  [hl]                                     ; $5CF3: $34
-    ldh  a, [hMultiPurposeG]                               ; $5CF4: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5CF4: $F0 $E8
     inc  a                                        ; $5CF6: $3C
     and  $0F                                      ; $5CF7: $E6 $0F
     ld   e, a                                     ; $5CF9: $5F
@@ -544,7 +544,7 @@ jr_018_5CEF:
     ld   hl, wEntitiesDirectionTable              ; $5D14: $21 $80 $C3
     add  hl, bc                                   ; $5D17: $09
     ld   [hl], a                                  ; $5D18: $77
-    ldh  a, [hMultiPurposeH]                               ; $5D19: $F0 $E9
+    ldh  a, [hMultiPurposeH]                      ; $5D19: $F0 $E9
     inc  a                                        ; $5D1B: $3C
     and  $0F                                      ; $5D1C: $E6 $0F
     ld   e, a                                     ; $5D1E: $5F
@@ -553,7 +553,7 @@ jr_018_5CEF:
     add  hl, bc                                   ; $5D23: $09
     ld   a, [hl]                                  ; $5D24: $7E
     push af                                       ; $5D25: $F5
-    ld   hl, wLinkPositionZHistory                                ; $5D26: $21 $95 $D1
+    ld   hl, wLinkPositionZHistory                ; $5D26: $21 $95 $D1
     add  hl, de                                   ; $5D29: $19
     ld   e, [hl]                                  ; $5D2A: $5E
     ld   hl, wEntitiesPosZTable                   ; $5D2B: $21 $10 $C3

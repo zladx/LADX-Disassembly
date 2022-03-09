@@ -73,7 +73,7 @@ func_007_4C16::
     ret  nc                                       ; $4C19: $D0
 
     ld   e, $D3                                   ; $4C1A: $1E $D3
-    ld   a, [wOverworldRoomStatus + $FD]                               ; $4C1C: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + $FD]          ; $4C1C: $FA $FD $D8
     and  $30                                      ; $4C1F: $E6 $30
     jr   nz, jr_007_4C45                          ; $4C21: $20 $22
 
@@ -109,7 +109,7 @@ func_007_4C49::
     jr   nz, jr_007_4C6F                          ; $4C4D: $20 $20
 
     call IncrementEntityState                     ; $4C4F: $CD $12 $3B
-    ld   a, [wDialogAskSelectionIndex]                               ; $4C52: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $4C52: $FA $77 $C1
     and  a                                        ; $4C55: $A7
     jr   z, jr_007_4C5E                           ; $4C56: $28 $06
 

@@ -83,7 +83,7 @@ jr_004_6884:
     pop  af                                       ; $6891: $F1
     ldh  [hLinkSpeedX], a                         ; $6892: $E0 $9A
     xor  a                                        ; $6894: $AF
-    ld   [wIsLinkPushing], a                               ; $6895: $EA $44 $C1
+    ld   [wIsLinkPushing], a                      ; $6895: $EA $44 $C1
     ldh  a, [hActiveEntityType]                   ; $6898: $F0 $EB
     cp   ENTITY_TRACTOR_DEVICE                    ; $689A: $FE $52
     jp   nz, label_004_68E4                       ; $689C: $C2 $E4 $68
@@ -108,7 +108,7 @@ jr_004_6884:
     ldh  [hLinkPositionY], a                      ; $68BD: $E0 $99
     ld   a, LINK_MOTION_FALLING_DOWN              ; $68BF: $3E $06
     ld   [wLinkMotionState], a                    ; $68C1: $EA $1C $C1
-    call ResetSpinAttack                                ; $68C4: $CD $AF $0C
+    call ResetSpinAttack                          ; $68C4: $CD $AF $0C
     ld   [wC198], a                               ; $68C7: $EA $98 $C1
     ld   a, $FF                                   ; $68CA: $3E $FF
     ld   [wDBCB], a                               ; $68CC: $EA $CB $DB

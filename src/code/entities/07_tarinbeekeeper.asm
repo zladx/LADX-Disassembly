@@ -75,13 +75,13 @@ func_007_4F1F::
     and  a                                        ; $4F25: $A7
     jr   nz, jr_007_4F4D                          ; $4F26: $20 $25
 
-    ld   a, [wDialogAskSelectionIndex]                               ; $4F28: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $4F28: $FA $77 $C1
     and  a                                        ; $4F2B: $A7
     jr   nz, jr_007_4F44                          ; $4F2C: $20 $16
 
     ld   a, $02                                   ; $4F2E: $3E $02
     ld   [wDB7F], a                               ; $4F30: $EA $7F $DB
-    ld   hl, wOverworldRoomStatus + $87                                ; $4F33: $21 $87 $D8
+    ld   hl, wOverworldRoomStatus + $87           ; $4F33: $21 $87 $D8
     set  6, [hl]                                  ; $4F36: $CB $F6
     call GetEntityTransitionCountdown             ; $4F38: $CD $05 $0C
     ld   [hl], $A0                                ; $4F3B: $36 $A0

@@ -45,7 +45,7 @@ jr_018_733C:
     and  a                                        ; $7341: $A7
     jr   nz, jr_018_7363                          ; $7342: $20 $1F
 
-    ld   a, [wSelectedSongIndex]                               ; $7344: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                  ; $7344: $FA $4A $DB
     cp   $02                                      ; $7347: $FE $02
     jr   nz, jr_018_7363                          ; $7349: $20 $18
 
@@ -75,7 +75,7 @@ jr_018_7363:
     and  a                                        ; $7371: $A7
     jr   nz, jr_018_737D                          ; $7372: $20 $09
 
-    ld   hl, wOverworldRoomStatus + $10                                ; $7374: $21 $10 $D8
+    ld   hl, wOverworldRoomStatus + $10           ; $7374: $21 $10 $D8
     set  5, [hl]                                  ; $7377: $CB $EE
     ld   a, JINGLE_PUZZLE_SOLVED                  ; $7379: $3E $02
     ldh  [hJingle], a                             ; $737B: $E0 $F2
@@ -414,7 +414,7 @@ TurtleRockHeadStateBHandler::
     jr   nc, jr_018_7585                          ; $756C: $30 $17
 
     ld   a, [wD202]                               ; $756E: $FA $02 $D2
-    ld   hl, hActiveEntityVisualPosY                                ; $7571: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $7571: $21 $EC $FF
     sub  [hl]                                     ; $7574: $96
     add  $01                                      ; $7575: $C6 $01
     cp   $02                                      ; $7577: $FE $02
@@ -480,25 +480,25 @@ jr_018_7691:
     ld   hl, wEntitiesPrivateState4Table          ; $7691: $21 $40 $C4
     add  hl, bc                                   ; $7694: $09
     ld   a, [hl]                                  ; $7695: $7E
-    ldh  [hMultiPurposeG], a                               ; $7696: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $7696: $E0 $E8
     ldh  a, [hActiveEntityPosX]                   ; $7698: $F0 $EE
     sub  [hl]                                     ; $769A: $96
     sra  a                                        ; $769B: $CB $2F
     ldh  [hBGMapOffsetLow], a                     ; $769D: $E0 $E1
     sra  a                                        ; $769F: $CB $2F
-    ldh  [hMultiPurposeB], a                           ; $76A1: $E0 $E2
+    ldh  [hMultiPurposeB], a                      ; $76A1: $E0 $E2
     sra  a                                        ; $76A3: $CB $2F
-    ldh  [hMultiPurposeC], a                           ; $76A5: $E0 $E3
+    ldh  [hMultiPurposeC], a                      ; $76A5: $E0 $E3
     sra  a                                        ; $76A7: $CB $2F
-    ldh  [hMultiPurposeD], a                           ; $76A9: $E0 $E4
+    ldh  [hMultiPurposeD], a                      ; $76A9: $E0 $E4
     sra  a                                        ; $76AB: $CB $2F
-    ldh  [hMultiPurposeE], a                           ; $76AD: $E0 $E5
+    ldh  [hMultiPurposeE], a                      ; $76AD: $E0 $E5
     sra  a                                        ; $76AF: $CB $2F
     ldh  [hFreeWarpDataAddress], a                ; $76B1: $E0 $E6
     ld   hl, wEntitiesPrivateState3Table          ; $76B3: $21 $D0 $C2
     add  hl, bc                                   ; $76B6: $09
     ld   a, [hl]                                  ; $76B7: $7E
-    ldh  [hMultiPurposeH], a                               ; $76B8: $E0 $E9
+    ldh  [hMultiPurposeH], a                      ; $76B8: $E0 $E9
     ldh  a, [hActiveEntityVisualPosY]             ; $76BA: $F0 $EC
     sub  $20                                      ; $76BC: $D6 $20
     cp   [hl]                                     ; $76BE: $BE
@@ -510,7 +510,7 @@ jr_018_7691:
     ld   hl, hBGMapOffsetLow                      ; $76C6: $21 $E1 $FF
 
 jr_018_76C9:
-    ldh  a, [hMultiPurposeG]                               ; $76C9: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $76C9: $F0 $E8
     add  [hl]                                     ; $76CB: $86
     ldh  [hActiveEntityPosX], a                   ; $76CC: $E0 $EE
     inc  hl                                       ; $76CE: $23
@@ -521,7 +521,7 @@ jr_018_76C9:
     and  a                                        ; $76D9: $A7
     jr   nz, jr_018_7717                          ; $76DA: $20 $3B
 
-    ld   hl, hActiveEntityVisualPosY                                ; $76DC: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $76DC: $21 $EC $FF
     ldh  a, [hLinkPositionY]                      ; $76DF: $F0 $99
     sub  [hl]                                     ; $76E1: $96
     add  $0C                                      ; $76E2: $C6 $0C
@@ -559,7 +559,7 @@ jr_018_76FE:
 
 jr_018_7717:
     pop  hl                                       ; $7717: $E1
-    ldh  a, [hMultiPurposeH]                               ; $7718: $F0 $E9
+    ldh  a, [hMultiPurposeH]                      ; $7718: $F0 $E9
     ld   e, a                                     ; $771A: $5F
     ldh  a, [hActiveEntityVisualPosY]             ; $771B: $F0 $EC
     sub  $10                                      ; $771D: $D6 $10

@@ -73,14 +73,14 @@ ChestWithItemEntityHandler::
     jp   c, func_007_7EA4                         ; $7BF3: $DA $A4 $7E
 
     ldh  a, [hMultiPurpose0]                      ; $7BF6: $F0 $D7
-    ld   hl, wEntitiesPosXTable                         ; $7BF8: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $7BF8: $21 $00 $C2
     add  hl, de                                   ; $7BFB: $19
     ld   [hl], a                                  ; $7BFC: $77
     ldh  a, [hMultiPurpose1]                      ; $7BFD: $F0 $D8
-    ld   hl, wEntitiesPosYTable                         ; $7BFF: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $7BFF: $21 $10 $C2
     add  hl, de                                   ; $7C02: $19
     ld   [hl], a                                  ; $7C03: $77
-    ld   hl, wEntitiesSpeedZTable                                ; $7C04: $21 $20 $C3
+    ld   hl, wEntitiesSpeedZTable                 ; $7C04: $21 $20 $C3
     add  hl, de                                   ; $7C07: $19
     ld   [hl], $18                                ; $7C08: $36 $18
     ld   hl, wEntitiesPosZTable                   ; $7C0A: $21 $10 $C3
@@ -132,7 +132,7 @@ jr_007_7C49:
     jr   nz, jr_007_7C58                          ; $7C51: $20 $05
 
 jr_007_7C53:
-    ld   de, ChestItemSpriteTableAlt                        ; $7C53: $11 $53 $7B
+    ld   de, ChestItemSpriteTableAlt              ; $7C53: $11 $53 $7B
     jr   jr_007_7C5B                              ; $7C56: $18 $03
 
 jr_007_7C58:
@@ -155,7 +155,7 @@ jr_007_7C5E:
     cp   $10                                      ; $7C6D: $FE $10
     jr   nz, jr_007_7C76                          ; $7C6F: $20 $05
 
-    call GetEntitySpeedYAddress                            ; $7C71: $CD $05 $40
+    call GetEntitySpeedYAddress                   ; $7C71: $CD $05 $40
     ld   [hl], $00                                ; $7C74: $36 $00
 
 jr_007_7C76:

@@ -55,7 +55,7 @@ jr_004_5F96:
     ld   hl, wEntitiesPrivateState5Table          ; $5FA2: $21 $90 $C3
     add  hl, bc                                   ; $5FA5: $09
     ld   a, [hl]                                  ; $5FA6: $7E
-    ldh  [hMultiPurposeG], a                               ; $5FA7: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $5FA7: $E0 $E8
     ld   a, [wDialogState]                        ; $5FA9: $FA $9F $C1
     and  a                                        ; $5FAC: $A7
     ld   hl, Data_004_5F48                        ; $5FAD: $21 $48 $5F
@@ -102,7 +102,7 @@ func_004_5FEF::
     ret  nz                                       ; $5FF3: $C0
 
     call IncrementEntityState                     ; $5FF4: $CD $12 $3B
-    ld   a, [wDialogAskSelectionIndex]                               ; $5FF7: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $5FF7: $FA $77 $C1
     and  a                                        ; $5FFA: $A7
     jr   z, jr_004_6007                           ; $5FFB: $28 $0A
 
@@ -390,7 +390,7 @@ func_004_61E5::
     and  a                                        ; $61E8: $A7
     ret  nz                                       ; $61E9: $C0
 
-    ld   a, [wDialogAskSelectionIndex]                               ; $61EA: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $61EA: $FA $77 $C1
     and  a                                        ; $61ED: $A7
     jr   nz, jr_004_6237                          ; $61EE: $20 $47
 
@@ -466,7 +466,7 @@ func_004_6252::
 
     call IncrementEntityState                     ; $6257: $CD $12 $3B
     ld   [hl], $04                                ; $625A: $36 $04
-    ld   a, [wDialogAskSelectionIndex]                               ; $625C: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $625C: $FA $77 $C1
     and  a                                        ; $625F: $A7
     jr   nz, jr_004_6267                          ; $6260: $20 $05
 
@@ -1350,7 +1350,7 @@ jr_004_676D:
     and  $03                                      ; $6779: $E6 $03
     jr   nz, jr_004_679A                          ; $677B: $20 $1D
 
-    ld   hl, wEntitiesSpeedXTable                                ; $677D: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                 ; $677D: $21 $40 $C2
     add  hl, bc                                   ; $6780: $09
     ld   a, [hl]                                  ; $6781: $7E
     push hl                                       ; $6782: $E5
@@ -1416,7 +1416,7 @@ func_004_679B::
     jr   nc, jr_004_67FA                          ; $67D3: $30 $25
 
     ld   a, [wIntroTimer]                         ; $67D5: $FA $01 $D0
-    ld   hl, hActiveEntityPosY                                ; $67D8: $21 $EF $FF
+    ld   hl, hActiveEntityPosY                    ; $67D8: $21 $EF $FF
     sub  [hl]                                     ; $67DB: $96
     add  $10                                      ; $67DC: $C6 $10
     cp   $20                                      ; $67DE: $FE $20

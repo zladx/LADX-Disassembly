@@ -29,7 +29,7 @@ TradingItemEntityHandler::
     jr   nz, jr_007_552E                          ; $5526: $20 $06
 
 jr_007_5528:
-    ld   a, [wOverworldRoomStatus + MOUNTAIN_CAVE_ROOM_2] ; $5528: $FA $7B $D8
+    ld   a, [wOverworldRoomStatus + MOUNTAIN_CAVE_ROOM_2]; $5528: $FA $7B $D8
     and  $10                                      ; $552B: $E6 $10
     ret  z                                        ; $552D: $C8
 
@@ -164,11 +164,11 @@ jr_007_55DF:
     add  hl, bc                                   ; $55E8: $09
     sub  $10                                      ; $55E9: $D6 $10
     ld   [hl], a                                  ; $55EB: $77
-    ldh  a, [hLinkPositionZ]                  ; $55EC: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $55EC: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $55EE: $21 $10 $C3
     add  hl, bc                                   ; $55F1: $09
     ld   [hl], a                                  ; $55F2: $77
-    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $55F3: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $55F3: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $55F5: $E0 $9D
     ld   a, $02                                   ; $55F7: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $55F9: $E0 $A1

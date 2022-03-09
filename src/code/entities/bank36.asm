@@ -263,7 +263,7 @@ label_036_4178:
     ld   de, Data_036_48F2                        ; $4178: $11 $F2 $48
     call RenderActiveEntitySpritesPair            ; $417B: $CD $C0 $3B
     call func_036_6B5C                            ; $417E: $CD $5C $6B
-    call ReturnIfNonInteractive_36.allowInactiveEntity ; $4181: $CD $46 $6A
+    call ReturnIfNonInteractive_36.allowInactiveEntity; $4181: $CD $46 $6A
     ldh  a, [hActiveEntityState]                  ; $4184: $F0 $F0
     and  a                                        ; $4186: $A7
     jr   z, jr_036_41A0                           ; $4187: $28 $17
@@ -340,7 +340,7 @@ func_036_41DF::
     jr   z, label_036_4217                        ; $41F8: $28 $1D
 
     ld   a, $70                                   ; $41FA: $3E $70
-    ld   hl, wLinkPositionZHistory                                ; $41FC: $21 $95 $D1
+    ld   hl, wLinkPositionZHistory                ; $41FC: $21 $95 $D1
     ld   e, $10                                   ; $41FF: $1E $10
 
 jr_036_4201:
@@ -348,7 +348,7 @@ jr_036_4201:
     dec  e                                        ; $4202: $1D
     jr   nz, jr_036_4201                          ; $4203: $20 $FC
 
-    ld   [wEntitiesPosZTable+15], a                               ; $4205: $EA $1F $C3
+    ld   [wEntitiesPosZTable+15], a               ; $4205: $EA $1F $C3
     ld   a, [wPhotos1]                            ; $4208: $FA $0C $DC
     and  $01                                      ; $420B: $E6 $01
     jp   z, label_036_4217                        ; $420D: $CA $17 $42
@@ -393,7 +393,7 @@ func_036_4221::
     jp   IncrementEntityState                     ; $424A: $C3 $12 $3B
 
 func_036_424D::
-    ld   hl, wEntitiesPrivateCountdown2Table+15                                ; $424D: $21 $0F $C3
+    ld   hl, wEntitiesPrivateCountdown2Table+15   ; $424D: $21 $0F $C3
     inc  [hl]                                     ; $4250: $34
     jp   func_036_467F                            ; $4251: $C3 $7F $46
 
@@ -480,7 +480,7 @@ jr_036_42D4:
     call func_015_7964_trampoline                 ; $42EA: $CD $A0 $3D
     call func_036_6B5C                            ; $42ED: $CD $5C $6B
     call CheckLinkCollisionWithEnemy_trampoline   ; $42F0: $CD $5A $3B
-    call ReturnIfNonInteractive_36.allowInactiveEntity ; $42F3: $CD $46 $6A
+    call ReturnIfNonInteractive_36.allowInactiveEntity; $42F3: $CD $46 $6A
     ldh  a, [hActiveEntityState]                  ; $42F6: $F0 $F0
     and  a                                        ; $42F8: $A7
     jr   z, jr_036_4329                           ; $42F9: $28 $2E
@@ -634,7 +634,7 @@ jr_036_43E6:
     jp   IncrementEntityState                     ; $43F0: $C3 $12 $3B
 
 func_036_43F3::
-    ld   a, [wDialogAskSelectionIndex]                               ; $43F3: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $43F3: $FA $77 $C1
     and  a                                        ; $43F6: $A7
     jr   nz, jr_036_4405                          ; $43F7: $20 $0C
 
@@ -779,7 +779,7 @@ func_036_44B3::
 
 func_036_44C2::
     call func_036_4365                            ; $44C2: $CD $65 $43
-    ld   a, [wDialogAskSelectionIndex]                               ; $44C5: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $44C5: $FA $77 $C1
     and  a                                        ; $44C8: $A7
     jr   nz, jr_036_44DA                          ; $44C9: $20 $0F
 
@@ -1373,7 +1373,7 @@ func_036_4820::
     call GetEntityTransitionCountdown             ; $4820: $CD $05 $0C
     ret  nz                                       ; $4823: $C0
 
-    ld   a, LINK_ANIMATION_STATE_STANDING_RIGHT       ; $4824: $3E $0A
+    ld   a, LINK_ANIMATION_STATE_STANDING_RIGHT   ; $4824: $3E $0A
     ldh  [hLinkAnimationState], a                 ; $4826: $E0 $9D
     call_open_dialog $108                         ; $4828
     jp   IncrementEntityState                     ; $482D: $C3 $12 $3B
@@ -1833,7 +1833,7 @@ func_036_4AF3::
 
     ld   a, $42                                   ; $4B02: $3E $42
     ld   [hl], a                                  ; $4B04: $77
-    ld   a, LINK_ANIMATION_STATE_STANDING_RIGHT       ; $4B05: $3E $0A
+    ld   a, LINK_ANIMATION_STATE_STANDING_RIGHT   ; $4B05: $3E $0A
     ldh  [hLinkAnimationState], a                 ; $4B07: $E0 $9D
     jp   IncrementEntityState                     ; $4B09: $C3 $12 $3B
 
@@ -2430,7 +2430,7 @@ jr_036_4E84:
     and  a                                        ; $4E92: $A7
     jr   z, jr_036_4E99                           ; $4E93: $28 $04
 
-    ld   hl, hMultiPurpose0                            ; $4E95: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $4E95: $21 $D7 $FF
     inc  [hl]                                     ; $4E98: $34
 
 jr_036_4E99:
@@ -2660,7 +2660,7 @@ func_036_503C::
     ld   a, $01                                   ; $503F: $3E $01
     ldh  [hWaveSfx], a                            ; $5041: $E0 $F3
     ld   d, $0C                                   ; $5043: $16 $0C
-    call GiveInventoryItem_trampoline                               ; $5045: $CD $6B $3E
+    call GiveInventoryItem_trampoline             ; $5045: $CD $6B $3E
     ld   a, REPLACE_TILES_MAGIC_POWDER            ; $5048: $3E $0B
     ldh  [hReplaceTiles], a                       ; $504A: $E0 $A5
     ld   hl, wMaxMagicPowder                      ; $504C: $21 $76 $DB
@@ -2793,7 +2793,7 @@ TunicFairyState1::
     and  a                                        ; $511A: $A7
     ret  nz                                       ; $511B: $C0
 
-    ld   a, [wDialogAskSelectionIndex]                               ; $511C: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $511C: $FA $77 $C1
     and  a                                        ; $511F: $A7
 IF __PATCH_1__
     xor  $01
@@ -2818,7 +2818,7 @@ TunicFairyState2::
     and  a                                        ; $5137: $A7
     ret  nz                                       ; $5138: $C0
 
-    ld   a, [wDialogAskSelectionIndex]                               ; $5139: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $5139: $FA $77 $C1
     and  a                                        ; $513C: $A7
     jr   nz, jr_036_5148                          ; $513D: $20 $09
 
@@ -2852,11 +2852,11 @@ TunicFairyState3::
     ld   a, ENTITY_BUZZ_BLOB                      ; $5168: $3E $B9
     call SpawnNewEntity_trampoline                ; $516A: $CD $86 $3B
     ldh  a, [hLinkPositionX]                      ; $516D: $F0 $98
-    ld   hl, wEntitiesPosXTable                         ; $516F: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $516F: $21 $00 $C2
     add  hl, de                                   ; $5172: $19
     ld   [hl], a                                  ; $5173: $77
     ldh  a, [hLinkPositionY]                      ; $5174: $F0 $99
-    ld   hl, wEntitiesPosYTable                         ; $5176: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $5176: $21 $10 $C2
     add  hl, de                                   ; $5179: $19
     ld   [hl], a                                  ; $517A: $77
     ld   hl, wEntitiesPrivateState2Table          ; $517B: $21 $C0 $C2
@@ -4068,7 +4068,7 @@ func_036_5912::
     and  a                                        ; $5915: $A7
     ret  nz                                       ; $5916: $C0
 
-    ld   a, [wDialogAskSelectionIndex]                               ; $5917: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $5917: $FA $77 $C1
     and  a                                        ; $591A: $A7
     jr   nz, jr_036_592A                          ; $591B: $20 $0D
 
@@ -4236,7 +4236,7 @@ IF __PATCH_1__
     xor  $01
 ENDC
     ld   e, a                                     ; $5A0E: $5F
-    ld   a, [wDialogAskSelectionIndex]                               ; $5A0F: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $5A0F: $FA $77 $C1
     cp   e                                        ; $5A12: $BB
     jr   nz, jr_036_5A1E                          ; $5A13: $20 $09
 
@@ -4633,7 +4633,7 @@ func_036_5C8B::
     ld   hl, hActiveEntityVisualPosY              ; $5CA3: $21 $EC $FF
     add  [hl]                                     ; $5CA6: $86
     ld   [hl], a                                  ; $5CA7: $77
-    call ReturnIfNonInteractive_36.allowInactiveEntity ; $5CA8: $CD $46 $6A
+    call ReturnIfNonInteractive_36.allowInactiveEntity; $5CA8: $CD $46 $6A
 
 func_036_5CAB::
     ldh  a, [hActiveEntityPosX]                   ; $5CAB: $F0 $EE
@@ -5009,7 +5009,7 @@ jr_036_5EC7:
     and  a                                        ; $5ED5: $A7
     jr   z, jr_036_5EDC                           ; $5ED6: $28 $04
 
-    ld   hl, hMultiPurpose0                            ; $5ED8: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $5ED8: $21 $D7 $FF
     inc  [hl]                                     ; $5EDB: $34
 
 jr_036_5EDC:
@@ -6397,7 +6397,7 @@ jr_036_66F9:
     and  a                                        ; $6707: $A7
     ret  nz                                       ; $6708: $C0
 
-    ld   hl, hMultiPurpose0                            ; $6709: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $6709: $21 $D7 $FF
     inc  [hl]                                     ; $670C: $34
 
 jr_036_670D:
@@ -6967,7 +6967,7 @@ jr_036_6A32:
     add  hl, de                                   ; $6A32: $19
     ld   c, $03                                   ; $6A33: $0E $03
     ld   a, $36                                   ; $6A35: $3E $36
-    call func_A5F                                ; $6A37: $CD $5F $0A
+    call func_A5F                                 ; $6A37: $CD $5F $0A
     ld   a, $03                                   ; $6A3A: $3E $03
     call func_015_7964_trampoline                 ; $6A3C: $CD $A0 $3D
     ret                                           ; $6A3F: $C9
@@ -7224,13 +7224,13 @@ func_036_6B5C::
 
     ld   e, a                                     ; $6B6A: $5F
     ld   d, b                                     ; $6B6B: $50
-    ld   hl, wEntitiesPrivateState5Table+15                                ; $6B6C: $21 $9F $C3
+    ld   hl, wEntitiesPrivateState5Table+15       ; $6B6C: $21 $9F $C3
     add  hl, de                                   ; $6B6F: $19
     ld   a, [hl]                                  ; $6B70: $7E
     cp   $03                                      ; $6B71: $FE $03
     jr   nz, jr_036_6B7B                          ; $6B73: $20 $06
 
-    ld   hl, wEntitiesStatusTable + $0F                        ; $6B75: $21 $8F $C2
+    ld   hl, wEntitiesStatusTable + $0F           ; $6B75: $21 $8F $C2
     add  hl, de                                   ; $6B78: $19
     ld   [hl], $00                                ; $6B79: $36 $00
 
@@ -8005,7 +8005,7 @@ jr_036_707A:
     ld   hl, Data_036_7056                        ; $707A: $21 $56 $70
     add  hl, bc                                   ; $707D: $09
     add  [hl]                                     ; $707E: $86
-    ld   hl, hMultiPurpose3                            ; $707F: $21 $DA $FF
+    ld   hl, hMultiPurpose3                       ; $707F: $21 $DA $FF
     sub  [hl]                                     ; $7082: $96
     ld   hl, wEntitiesPosYTable                   ; $7083: $21 $10 $C2
     add  hl, de                                   ; $7086: $19

@@ -421,7 +421,7 @@ func_005_6A5F::
     ldh  [hActiveEntityVisualPosY], a             ; $6A9C: $E0 $EC
     pop  bc                                       ; $6A9E: $C1
     ld   de, Data_005_6A24                        ; $6A9F: $11 $24 $6A
-    jp   RenderActiveEntitySpritesPair                ; $6AA2: $C3 $C0 $3B
+    jp   RenderActiveEntitySpritesPair            ; $6AA2: $C3 $C0 $3B
 
 func_005_6AA5::
     ld   hl, wEntitiesInertiaTable                ; $6AA5: $21 $D0 $C3

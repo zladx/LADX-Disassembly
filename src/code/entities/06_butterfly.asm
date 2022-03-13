@@ -2,9 +2,8 @@
 ;  byte 0: tile n°
 ;  byte 1: OAM attribute (palette index and flags)
 ButterflyOAMAttributes::
-;       n°   OAM
-._00 db $5E, OAM_GBC_PAL_1
-._01 db $5E, OAM_GBC_PAL_1 | OAM_Y_FLIP
+._00 db $5E, %001
+._01 db $5E, %001 | OAMF_YFLIP
 
 ; Randomly-selected X or Y speed
 ButterflyPossibleSpeeds::

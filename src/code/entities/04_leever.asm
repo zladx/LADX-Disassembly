@@ -118,10 +118,10 @@ func_004_7F90:: ; also called from ghini code
     add  hl, bc                                   ; $7F93: $09
     ld   a, [hl]                                  ; $7F94: $7E
     rl   a                                        ; $7F95: $CB $17
-    ld   a, OAM_NO_FLIP                           ; $7F97: $3E $00
+    ld   a, OAMF_NO_FLIP                          ; $7F97: $3E $00
     jr   c, jr_004_7F9D                           ; $7F99: $38 $02
 
-    ld   a, OAM_X_FLIP                            ; $7F9B: $3E $20
+    ld   a, OAMF_XFLIP                            ; $7F9B: $3E $20
 
 jr_004_7F9D:
     ld   hl, hActiveEntityFlipAttribute           ; $7F9D: $21 $ED $FF

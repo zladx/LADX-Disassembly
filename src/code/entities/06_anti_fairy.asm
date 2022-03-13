@@ -1,11 +1,11 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 AntiFairySpriteVariants::
 .variant1
-    db   $5A, OAM_GBC_PAL_0
-    db   $5A, OAM_GBC_PAL_0 | OAM_X_FLIP
+    db   $5A, %000
+    db   $5A, %000 | OAMF_XFLIP
 .variant2
-    db   $5A, OAM_GBC_PAL_4 | OAM_GB_PAL_1
-    db   $5A, OAM_GBC_PAL_4 | OAM_GB_PAL_1 | OAM_X_FLIP
+    db   $5A, %100 | OAMF_PAL1
+    db   $5A, %100 | OAMF_PAL1 | OAMF_XFLIP
 
 AntiFairyEntityHandler::
     ld   de, AntiFairySpriteVariants              ; $7876: $11 $6E $78

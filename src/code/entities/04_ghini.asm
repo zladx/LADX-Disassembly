@@ -238,7 +238,7 @@ func_004_5DA6::
     and  $40                                      ; $5DAD: $E6 $40
     ldh  [hMultiPurpose0], a                      ; $5DAF: $E0 $D7
     pop  af                                       ; $5DB1: $F1
-    and  OAMF_BANK1 | OAMF_PALMASK                ; $5DB2: $E6 $0F
+    and  OAM_BANK_1 | OAM_GBC_PAL_MASK            ; $5DB2: $E6 $0F
     ldh  [hActiveEntityFlipAttribute], a          ; $5DB4: $E0 $ED
     ld   hl, wEntitiesSpriteVariantTable          ; $5DB6: $21 $B0 $C3
     add  hl, bc                                   ; $5DB9: $09

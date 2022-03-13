@@ -501,7 +501,7 @@ func_005_5984::
     cpl                                           ; $5989: $2F
     rra                                           ; $598A: $1F
     rra                                           ; $598B: $1F
-    and  OAMF_XFLIP                               ; $598C: $E6 $20
+    and  OAM_X_FLIP                               ; $598C: $E6 $20
     ldh  [hActiveEntityFlipAttribute], a          ; $598E: $E0 $ED
     ld   de, Data_005_5978                        ; $5990: $11 $78 $59
     call RenderActiveEntitySpritesPair            ; $5993: $CD $C0 $3B

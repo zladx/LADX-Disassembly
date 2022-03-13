@@ -1,5 +1,7 @@
-Data_007_4C93::
-    db   $70, $01, $70, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+HoneycombSpriteVariants::
+    db $70, $01
+    db $70, $21
 
 HoneycombEntityHandler::
     ldh  a, [hRoomStatus]                         ; $4C97: $F0 $F8
@@ -22,7 +24,7 @@ HoneycombEntityHandler::
     dec  [hl]                                     ; $4CB5: $35
 
 jr_007_4CB6:
-    ld   de, Data_007_4C93                        ; $4CB6: $11 $93 $4C
+    ld   de, HoneycombSpriteVariants              ; $4CB6: $11 $93 $4C
     call RenderActiveEntitySpritesPair            ; $4CB9: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $4CBC: $CD $96 $7D
     ldh  a, [hActiveEntityState]                  ; $4CBF: $F0 $F0

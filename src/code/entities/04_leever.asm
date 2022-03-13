@@ -1,8 +1,20 @@
-Data_004_7EE5::
-    db   $56, $02, $56, $22, $54, $02, $54, $22, $52, $02, $52, $22, $50, $02, $50, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+LeeverSpriteVariants::
+.variant0
+    db $56, $02
+    db $56, $22
+.variant1
+    db $54, $02
+    db $54, $22
+.variant2
+    db $52, $02
+    db $52, $22
+.variant3
+    db $50, $02
+    db $50, $22
 
 LeeverEntityHandler::
-    ld   de, Data_004_7EE5                        ; $7EF5: $11 $E5 $7E
+    ld   de, LeeverSpriteVariants                 ; $7EF5: $11 $E5 $7E
     call RenderActiveEntitySpritesPair            ; $7EF8: $CD $C0 $3B
     call ReturnIfNonInteractive_04                ; $7EFB: $CD $A3 $7F
     call ApplyRecoilIfNeeded_04                   ; $7EFE: $CD $80 $6D

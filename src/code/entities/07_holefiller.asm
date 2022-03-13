@@ -1,8 +1,14 @@
-Data_007_5104::
-    db   $40, $02, $40, $22, $42, $02, $42, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+HoleFillerSpriteVariants::
+.variant0
+    db $40, $02
+    db $40, $22
+.variant1
+    db $42, $02
+    db $42, $22
 
 HoleFillerEntityHandler::
-    ld   de, Data_007_5104                        ; $510C: $11 $04 $51
+    ld   de, HoleFillerSpriteVariants             ; $510C: $11 $04 $51
     call RenderActiveEntitySpritesPair            ; $510F: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $5112: $CD $96 $7D
     ldh  a, [hFrameCounter]                       ; $5115: $F0 $E7

@@ -4,12 +4,35 @@ Data_007_5625::
 Data_007_5629::
     db   $00, $00, $F8, $08
 
-Data_007_562D::
-    db   $50, $02, $50, $22, $52, $02, $52, $22, $50, $42, $50, $62, $52, $42, $52, $62
-    db   $54, $02, $56, $02, $58, $02, $5A, $02, $56, $22, $54, $22, $5A, $22, $58, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+WingedOctorokSpriteVariants::
+.variant0
+    db $50, $02
+    db $50, $22
+.variant1
+    db $52, $02
+    db $52, $22
+.variant2
+    db $50, $42
+    db $50, $62
+.variant3
+    db $52, $42
+    db $52, $62
+.variant4
+    db $54, $02
+    db $56, $02
+.variant5
+    db $58, $02
+    db $5A, $02
+.variant6
+    db $56, $22
+    db $54, $22
+.variant7
+    db $5A, $22
+    db $58, $22
 
 WingedOctorokEntityHandler::
-    ld   de, Data_007_562D                        ; $564D: $11 $2D $56
+    ld   de, WingedOctorokSpriteVariants          ; $564D: $11 $2D $56
     call RenderActiveEntitySpritesPair            ; $5650: $CD $C0 $3B
     call func_007_5805                            ; $5653: $CD $05 $58
     call ReturnIfNonInteractive_07                ; $5656: $CD $96 $7D

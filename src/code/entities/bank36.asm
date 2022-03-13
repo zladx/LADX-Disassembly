@@ -1550,7 +1550,7 @@ PhotographerEntityHandler::
     cp   UNKNOWN_ROOM_DA                          ; $491A: $FE $DA
     jr   nz, .jr_036_4925                         ; $491C: $20 $07
 
-    ld   de, Photographer1SpriteVariants          ; $491E: $11 $E2 $48
+    ld   de, Photographer2SpriteVariants          ; $491E: $11 $E2 $48
     call RenderActiveEntitySpritesPair            ; $4921: $CD $C0 $3B
     ret                                           ; $4924: $C9
 
@@ -5980,7 +5980,7 @@ func_036_6382::
     ret                                           ; $6391: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-Unknown079SpriteVariants::
+Unknown090SpriteVariants::
 .variant0
     db $70, $02
     db $70, $22
@@ -6019,7 +6019,7 @@ Unknown079SpriteVariants::
     db $72, $22
 
 func_036_63C2::
-    ld   de, Unknown079SpriteVariants             ; $63C2: $11 $92 $63
+    ld   de, Unknown090SpriteVariants             ; $63C2: $11 $92 $63
     call RenderActiveEntitySpritesPair            ; $63C5: $CD $C0 $3B
     ret                                           ; $63C8: $C9
 

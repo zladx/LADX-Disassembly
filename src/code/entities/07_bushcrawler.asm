@@ -1,11 +1,29 @@
-Data_007_400A::
-    db   $7C, $02, $7E, $02, $7E, $22, $7C, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Bushcrawler2SpriteVariants::
+.variant0
+    db $7C, $02
+    db $7E, $02
+.variant1
+    db $7E, $22
+    db $7C, $22
 
-Data_007_4012::
-    db   $F4, $16, $F6, $16, $F0, $17, $F2, $17
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+BushcrawlerOutdoorSpriteVariants::
+.variant0
+    db $F4, $16
+    db $F6, $16
+.variant1
+    db $F0, $17
+    db $F2, $17
 
-Data_007_401A::
-    db   $F4, $16, $F6, $16, $F0, $16, $F2, $16
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+BushcrawlerIndoorSpriteVariants::
+.variant0
+    db $F4, $16
+    db $F6, $16
+.variant1
+    db $F0, $16
+    db $F2, $16
 
 BushCrawlerEntityHandler::
     ld   hl, wEntitiesPrivateState1Table          ; $4022: $21 $B0 $C2
@@ -53,14 +71,14 @@ jr_007_4053:
     add  hl, bc                                   ; $405F: $09
     ld   a, [hl]                                  ; $4060: $7E
     ldh  [hActiveEntitySpriteVariant], a          ; $4061: $E0 $F1
-    ld   de, Data_007_4012                        ; $4063: $11 $12 $40
+    ld   de, BushcrawlerOutdoorSpriteVariants     ; $4063: $11 $12 $40
     ld   a, [wIsIndoor]                           ; $4066: $FA $A5 $DB
     and  a                                        ; $4069: $A7
-    jr   z, jr_007_406F                           ; $406A: $28 $03
+    jr   z, .render                               ; $406A: $28 $03
 
-    ld   de, Data_007_401A                        ; $406C: $11 $1A $40
+    ld   de, BushcrawlerIndoorSpriteVariants      ; $406C: $11 $1A $40
 
-jr_007_406F:
+.render:
     call RenderActiveEntitySpritesPair            ; $406F: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4072: $CD $8A $3D
     ld   hl, wEntitiesPrivateState2Table          ; $4075: $21 $C0 $C2
@@ -73,7 +91,7 @@ jr_007_406F:
     add  hl, bc                                   ; $4080: $09
     ld   a, [hl]                                  ; $4081: $7E
     ldh  [hActiveEntitySpriteVariant], a          ; $4082: $E0 $F1
-    ld   de, Data_007_400A                        ; $4084: $11 $0A $40
+    ld   de, Bushcrawler2SpriteVariants           ; $4084: $11 $0A $40
     call RenderActiveEntitySpritesPair            ; $4087: $CD $C0 $3B
 
 jr_007_408A:
@@ -297,7 +315,7 @@ Data_007_41E8::
     db   $00, $0C, $10, $0C, $00, $F4, $F0, $F4
 
 label_007_41F0:
-    ld   de, Data_007_400A                        ; $41F0: $11 $0A $40
+    ld   de, Bushcrawler2SpriteVariants           ; $41F0: $11 $0A $40
     call RenderActiveEntitySpritesPair            ; $41F3: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $41F6: $CD $96 $7D
     call ApplyRecoilIfNeeded_07                   ; $41F9: $CD $C3 $7D

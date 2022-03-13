@@ -1,5 +1,11 @@
-Data_004_5BFC::
-    db   $58, $02, $5A, $02, $5C, $02, $5E, $02
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+GhiniSpriteVariants::
+.variant0
+    db $58, $02
+    db $5A, $02
+.variant1
+    db $5C, $02
+    db $5E, $02
 
 Data_004_5C04::
     db   $0C, $F4
@@ -14,7 +20,7 @@ GiantGhiniEntityHandler::
 GhiniEntityHandler::
 HidingGhiniEntityHandler::
     call func_004_7F90                            ; $5C0D: $CD $90 $7F
-    ld   de, Data_004_5BFC                        ; $5C10: $11 $FC $5B
+    ld   de, GhiniSpriteVariants                  ; $5C10: $11 $FC $5B
     call RenderActiveEntitySpritesPair            ; $5C13: $CD $C0 $3B
 
 jr_004_5C16:

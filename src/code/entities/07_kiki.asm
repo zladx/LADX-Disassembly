@@ -1,26 +1,54 @@
-Data_007_581A::
-    db   $78, $02, $72, $02, $7A, $02, $72, $02, $70, $02, $72, $02, $7C, $02, $7E, $02
-    db   $74, $02, $76, $02
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+KikiTheMonkey2SpriteVariants::
+.variant0
+    db $78, $02
+    db $72, $02
+.variant1
+    db $7A, $02
+    db $72, $02
+.variant2
+    db $70, $02
+    db $72, $02
+.variant3
+    db $7C, $02
+    db $7E, $02
+.variant4
+    db $74, $02
+    db $76, $02
 
-Data_007_582E::
-    db   $72, $22, $78, $22, $72, $22, $7A, $22, $72, $22, $70, $22, $7E, $22, $7C, $22
-    db   $76, $22, $74, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+KikiTheMonkey1SpriteVariants::
+.variant0
+    db $72, $22
+    db $78, $22
+.variant1
+    db $72, $22
+    db $7A, $22
+.variant2
+    db $72, $22
+    db $70, $22
+.variant3
+    db $7E, $22
+    db $7C, $22
+.variant4
+    db $76, $22
+    db $74, $22
 
 KikiTheMonkeyEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5842: $F0 $F8
     and  ROOM_STATUS_EVENT_1                      ; $5844: $E6 $10
     jp   nz, func_007_7EA4                        ; $5846: $C2 $A4 $7E
 
-    ld   de, Data_007_581A                        ; $5849: $11 $1A $58
+    ld   de, KikiTheMonkey2SpriteVariants         ; $5849: $11 $1A $58
     ld   hl, wEntitiesDirectionTable              ; $584C: $21 $80 $C3
     add  hl, bc                                   ; $584F: $09
     ld   a, [hl]                                  ; $5850: $7E
     and  a                                        ; $5851: $A7
-    jr   nz, jr_007_5857                          ; $5852: $20 $03
+    jr   nz, .render                              ; $5852: $20 $03
 
-    ld   de, Data_007_582E                        ; $5854: $11 $2E $58
+    ld   de, KikiTheMonkey1SpriteVariants         ; $5854: $11 $2E $58
 
-jr_007_5857:
+.render:
     call RenderActiveEntitySpritesPair            ; $5857: $CD $C0 $3B
     ld   hl, wEntitiesPrivateCountdown3Table      ; $585A: $21 $80 $C4
     add  hl, bc                                   ; $585D: $09
@@ -33,7 +61,7 @@ jr_007_5857:
     ldh  a, [hActiveEntityVisualPosY]             ; $5865: $F0 $EC
     sub  $0E                                      ; $5867: $D6 $0E
     ldh  [hActiveEntityVisualPosY], a             ; $5869: $E0 $EC
-    ld   de, Data_007_594D                        ; $586B: $11 $4D $59
+    ld   de, KikiTheMonkey3SpriteVariants         ; $586B: $11 $4D $59
     call RenderActiveEntitySpritesPair            ; $586E: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $5871: $CD $8A $3D
 
@@ -183,8 +211,11 @@ jr_007_5948:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $594A: $E0 $A1
     ret                                           ; $594C: $C9
 
-Data_007_594D::
-    db   $9A, $17, $9C, $17
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+KikiTheMonkey3SpriteVariants::
+.variant0
+    db $9A, $17
+    db $9C, $17
 
 func_007_5951::
     ld   a, $03                                   ; $5951: $3E $03

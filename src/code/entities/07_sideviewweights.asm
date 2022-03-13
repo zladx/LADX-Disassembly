@@ -1,8 +1,11 @@
-Data_007_61CE::
-    db   $50, $07, $50, $27
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+SideViewWeightsSpriteVariants::
+.variant0
+    db $50, $07
+    db $50, $27
 
 SideViewWeightsEntityHandler::
-    ld   de, Data_007_61CE                        ; $61D2: $11 $CE $61
+    ld   de, SideViewWeightsSpriteVariants        ; $61D2: $11 $CE $61
     call RenderActiveEntitySpritesPair            ; $61D5: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $61D8: $CD $96 $7D
     call func_007_639E                            ; $61DB: $CD $9E $63

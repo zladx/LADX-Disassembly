@@ -1,8 +1,33 @@
 ; Tarin picking up the honeycomb
-Data_007_4E8D::
-    db   $5A, $22, $58, $22, $5E, $22, $5C, $22, $58, $02, $5A, $02, $5C, $02, $5E, $02
-    db   $54, $02, $56, $02, $56, $22, $54, $22, $50, $02, $52, $02, $52, $22, $50, $22
-    db   $74, $02, $76, $02
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+TarinBeekeeperSpriteVariants::
+.variant0
+    db $5A, $22
+    db $58, $22
+.variant1
+    db $5E, $22
+    db $5C, $22
+.variant2
+    db $58, $02
+    db $5A, $02
+.variant3
+    db $5C, $02
+    db $5E, $02
+.variant4
+    db $54, $02
+    db $56, $02
+.variant5
+    db $56, $22
+    db $54, $22
+.variant6
+    db $50, $02
+    db $52, $02
+.variant7
+    db $52, $22
+    db $50, $22
+.variant8
+    db $74, $02
+    db $76, $02
 
 TarinBeekeeperEntityHandler::
     ld   a, c                                     ; $4EB1: $79
@@ -23,7 +48,7 @@ jr_007_4EC5:
     and  $02                                      ; $4EC8: $E6 $02
     jp   z, func_007_7EA4                         ; $4ECA: $CA $A4 $7E
 
-    ld   de, Data_007_4E8D                        ; $4ECD: $11 $8D $4E
+    ld   de, TarinBeekeeperSpriteVariants         ; $4ECD: $11 $8D $4E
     call RenderActiveEntitySpritesPair            ; $4ED0: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $4ED3: $CD $96 $7D
     call AddEntityZSpeedToPos_07                  ; $4ED6: $CD $43 $7E
@@ -97,8 +122,14 @@ jr_007_4F44:
 jr_007_4F4D:
     ret                                           ; $4F4D: $C9
 
-Data_007_4F4E::
-    db   $78, $01, $FF, $00, $7A, $01, $7C, $01
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown102SpriteVariants::
+.variant0
+    db $78, $01
+    db $FF, $00
+.variant1
+    db $7A, $01
+    db $7C, $01
 
 func_007_4F56::
     ld   a, $01                                   ; $4F56: $3E $01
@@ -113,7 +144,7 @@ func_007_4F56::
     ldh  a, [hActiveEntityVisualPosY]             ; $4F67: $F0 $EC
     sub  $10                                      ; $4F69: $D6 $10
     ldh  [hActiveEntityVisualPosY], a             ; $4F6B: $E0 $EC
-    ld   de, Data_007_4F4E                        ; $4F6D: $11 $4E $4F
+    ld   de, Unknown102SpriteVariants             ; $4F6D: $11 $4E $4F
     call RenderActiveEntitySpritesPair            ; $4F70: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4F73: $CD $8A $3D
     ld   a, $08                                   ; $4F76: $3E $08
@@ -148,7 +179,7 @@ jr_007_4FA5:
     ldh  a, [hActiveEntityPosX]                   ; $4FA9: $F0 $EE
     sub  $0C                                      ; $4FAB: $D6 $0C
     ldh  [hActiveEntityPosX], a                   ; $4FAD: $E0 $EE
-    ld   de, Data_007_4F4E                        ; $4FAF: $11 $4E $4F
+    ld   de, Unknown102SpriteVariants             ; $4FAF: $11 $4E $4F
     call RenderActiveEntitySpritesPair            ; $4FB2: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4FB5: $CD $8A $3D
     call GetEntityTransitionCountdown             ; $4FB8: $CD $05 $0C
@@ -220,7 +251,7 @@ jr_007_5012:
     ldh  [hActiveEntityVisualPosY], a             ; $5019: $E0 $EC
 
 jr_007_501B:
-    ld   de, Data_007_4F4E                        ; $501B: $11 $4E $4F
+    ld   de, Unknown102SpriteVariants             ; $501B: $11 $4E $4F
     call RenderActiveEntitySpritesPair            ; $501E: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $5021: $CD $8A $3D
     call GetEntityTransitionCountdown             ; $5024: $CD $05 $0C

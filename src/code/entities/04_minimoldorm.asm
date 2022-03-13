@@ -1,7 +1,35 @@
-Data_004_5A49::
-    db   $70, $00, $70, $20, $70, $40, $70, $60, $72, $00, $74, $00, $74, $20, $72, $20
-    db   $76, $00, $78, $00, $78, $20, $76, $20, $76, $40, $78, $40, $78, $60, $76, $60
-    db   $7A, $00, $7A, $20, $7C, $00, $7C, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MinimoldormSpriteVariants::
+.variant0
+    db $70, $00
+    db $70, $20
+.variant1
+    db $70, $40
+    db $70, $60
+.variant2
+    db $72, $00
+    db $74, $00
+.variant3
+    db $74, $20
+    db $72, $20
+.variant4
+    db $76, $00
+    db $78, $00
+.variant5
+    db $78, $20
+    db $76, $20
+.variant6
+    db $76, $40
+    db $78, $40
+.variant7
+    db $78, $60
+    db $76, $60
+.variant8
+    db $7A, $00
+    db $7A, $20
+.variant9
+    db $7C, $00
+    db $7C, $20
 
 Data_004_5A71::
     db   $03, $03, $05, $05, $00, $00, $04, $04, $02, $02, $06, $06, $01, $01, $07, $07
@@ -174,7 +202,7 @@ jr_004_5B7E:
     ret                                           ; $5B7E: $C9
 
 func_004_5B7F::
-    ld   de, Data_004_5A49                        ; $5B7F: $11 $49 $5A
+    ld   de, MinimoldormSpriteVariants            ; $5B7F: $11 $49 $5A
     call RenderActiveEntitySpritesPair            ; $5B82: $CD $C0 $3B
     call ReturnIfNonInteractive_04                ; $5B85: $CD $A3 $7F
     ld   hl, wEntitiesInertiaTable                ; $5B88: $21 $D0 $C3
@@ -215,7 +243,7 @@ func_004_5B7F::
     ldh  [hActiveEntityVisualPosY], a             ; $5BC0: $E0 $EC
     ld   a, $08                                   ; $5BC2: $3E $08
     ldh  [hActiveEntitySpriteVariant], a          ; $5BC4: $E0 $F1
-    ld   de, Data_004_5A49                        ; $5BC6: $11 $49 $5A
+    ld   de, MinimoldormSpriteVariants            ; $5BC6: $11 $49 $5A
     call RenderActiveEntitySpritesPair            ; $5BC9: $CD $C0 $3B
     pop  de                                       ; $5BCC: $D1
     push de                                       ; $5BCD: $D5
@@ -242,6 +270,6 @@ func_004_5B7F::
     ldh  [hActiveEntityVisualPosY], a             ; $5BED: $E0 $EC
     ld   a, $09                                   ; $5BEF: $3E $09
     ldh  [hActiveEntitySpriteVariant], a          ; $5BF1: $E0 $F1
-    ld   de, Data_004_5A49                        ; $5BF3: $11 $49 $5A
+    ld   de, MinimoldormSpriteVariants            ; $5BF3: $11 $49 $5A
     call RenderActiveEntitySpritesPair            ; $5BF6: $CD $C0 $3B
     jp   CopyEntityPositionToActivePosition       ; $5BF9: $C3 $8A $3D

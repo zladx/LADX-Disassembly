@@ -48,7 +48,7 @@ jr_004_6EAE:
 
 jr_004_6EC1:
     call func_004_7C98                            ; $6EC1: $CD $98 $7C
-    ld   de, Data_004_76CB                        ; $6EC4: $11 $CB $76
+    ld   de, ShopOwnerSpriteVariants              ; $6EC4: $11 $CB $76
     call RenderActiveEntitySpritesPair            ; $6EC7: $CD $C0 $3B
 
 jr_004_6ECA:
@@ -916,12 +916,31 @@ func_004_73B7::
 jr_004_73E1:
     ret                                           ; $73E1: $C9
 
-Data_004_73E2::
-    db   $76, $03, $78, $03, $78, $23, $76, $23, $70, $03, $70, $23, $72, $03, $70, $23
-    db   $72, $03, $72, $23, $7E, $00, $7E, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown093SpriteVariants::
+.variant0
+    db $76, $03
+    db $78, $03
+.variant1
+    db $78, $23
+    db $76, $23
+.variant2
+    db $70, $03
+    db $70, $23
+.variant3
+    db $72, $03
+    db $70, $23
+.variant4
+    db $72, $03
+    db $72, $23
+.variant5
+    db $7E, $00
+    db $7E, $20
 
-Data_004_73FA::
-    db   $26, $00, $26, $00
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown094SpriteVariants::
+    db $26, $00
+    db $26, $00
 
 func_004_73FE::
     ld   a, [wD204]                               ; $73FE: $FA $04 $D2
@@ -933,7 +952,7 @@ func_004_73FE::
     ldh  [hActiveEntityVisualPosY], a             ; $740C: $E0 $EC
     ld   a, [wD201]                               ; $740E: $FA $01 $D2
     ldh  [hActiveEntitySpriteVariant], a          ; $7411: $E0 $F1
-    ld   de, Data_004_73E2                        ; $7413: $11 $E2 $73
+    ld   de, Unknown093SpriteVariants             ; $7413: $11 $E2 $73
     call RenderActiveEntitySpritesPair            ; $7416: $CD $C0 $3B
     ld   a, [wD204]                               ; $7419: $FA $04 $D2
     ldh  [hActiveEntityPosX], a                   ; $741C: $E0 $EE
@@ -941,7 +960,7 @@ func_004_73FE::
     ldh  [hActiveEntityVisualPosY], a             ; $7421: $E0 $EC
     ld   a, [wD200]                               ; $7423: $FA $00 $D2
     ldh  [hActiveEntitySpriteVariant], a          ; $7426: $E0 $F1
-    ld   de, Data_004_73E2                        ; $7428: $11 $E2 $73
+    ld   de, Unknown093SpriteVariants             ; $7428: $11 $E2 $73
     call RenderActiveEntitySpritesPair            ; $742B: $CD $C0 $3B
     ld   a, [wD206]                               ; $742E: $FA $06 $D2
     cp   $08                                      ; $7431: $FE $08
@@ -954,7 +973,7 @@ func_004_73FE::
     ldh  [hActiveEntityVisualPosY], a             ; $743F: $E0 $EC
     ld   a, $05                                   ; $7441: $3E $05
     ldh  [hActiveEntitySpriteVariant], a          ; $7443: $E0 $F1
-    ld   de, Data_004_73E2                        ; $7445: $11 $E2 $73
+    ld   de, Unknown093SpriteVariants             ; $7445: $11 $E2 $73
     call RenderActiveEntitySpritesPair            ; $7448: $CD $C0 $3B
 
 jr_004_744B:
@@ -969,7 +988,7 @@ jr_004_744B:
     ldh  [hActiveEntityVisualPosY], a             ; $745B: $E0 $EC
     xor  a                                        ; $745D: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $745E: $E0 $F1
-    ld   de, Data_004_73FA                        ; $7460: $11 $FA $73
+    ld   de, Unknown094SpriteVariants             ; $7460: $11 $FA $73
     ld   a, [wOAMNextAvailableSlot]               ; $7463: $FA $C0 $C3
     push af                                       ; $7466: $F5
     call RenderActiveEntitySpritesPair            ; $7467: $CD $C0 $3B
@@ -1036,39 +1055,54 @@ jr_004_74B2:
     ld   a, $30                                   ; $74B6: $3E $30
     ld   [hl+], a                                 ; $74B8: $22
 
-Data_004_74B9::
-    db   $3E, $3E, $22, $FA
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown097SpriteVariants::
+.variant0
+    db $3E, $3E
+    db $22, $FA
 
-Data_004_74BD::
-    db   $03, $D2, $22, $C9
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown096SpriteVariants::
+.variant0
+    db $03, $D2
+    db $22, $C9
 
 Data_004_74C1::
     db   $FF, $FF, $9E, $10, $A6, $14, $8E, $16, $86, $15, $A8, $14
 
-Data_004_74CD::
-    db   $9A, $17, $9C, $17, $6C, $03, $6E, $03, $6E, $23, $6C, $23
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown095SpriteVariants::
+.variant0
+    db $9A, $17
+    db $9C, $17
+.variant1
+    db $6C, $03
+    db $6E, $03
+.variant2
+    db $6E, $23
+    db $6C, $23
 
 label_004_74D9:
     ldh  a, [hActiveEntitySpriteVariant]          ; $74D9: $F0 $F1
     cp   $06                                      ; $74DB: $FE $06
-    jr   c, jr_004_74F1                           ; $74DD: $38 $12
+    jr   c, .jr_004_74F1                          ; $74DD: $38 $12
 
-    ld   de, Data_004_74B9                        ; $74DF: $11 $B9 $74
+    ld   de, Unknown097SpriteVariants             ; $74DF: $11 $B9 $74
     cp   $07                                      ; $74E2: $FE $07
-    jr   z, jr_004_74EF                           ; $74E4: $28 $09
+    jr   z, .to_render                            ; $74E4: $28 $09
 
     ldh  a, [hFrameCounter]                       ; $74E6: $F0 $E7
     and  $10                                      ; $74E8: $E6 $10
-    jr   nz, jr_004_74EF                          ; $74EA: $20 $03
+    jr   nz, .to_render                           ; $74EA: $20 $03
 
-    ld   de, Data_004_74BD                        ; $74EC: $11 $BD $74
+    ld   de, Unknown096SpriteVariants             ; $74EC: $11 $BD $74
 
-jr_004_74EF:
-    jr   jr_004_750C                              ; $74EF: $18 $1B
+.to_render:
+    jr   .render                                  ; $74EF: $18 $1B
 
-jr_004_74F1:
+.jr_004_74F1:
     cp   $03                                      ; $74F1: $FE $03
-    jr   nz, jr_004_74FE                          ; $74F3: $20 $09
+    jr   nz, .jr_004_74FE                         ; $74F3: $20 $09
 
     ld   a, [wHasToadstool]                       ; $74F5: $FA $4B $DB
     and  a                                        ; $74F8: $A7
@@ -1076,7 +1110,7 @@ jr_004_74F1:
 
     jr   jr_004_7511                              ; $74FC: $18 $13
 
-jr_004_74FE:
+.jr_004_74FE:
     cp   $00                                      ; $74FE: $FE $00
     jr   nz, jr_004_7511                          ; $7500: $20 $0F
 
@@ -1084,9 +1118,9 @@ jr_004_74FE:
     and  a                                        ; $7505: $A7
     jp   nz, ClearEntityStatusBank04              ; $7506: $C2 $7A $6D
 
-    ld   de, Data_004_74CD                        ; $7509: $11 $CD $74
+    ld   de, Unknown095SpriteVariants             ; $7509: $11 $CD $74
 
-jr_004_750C:
+.render:
     call RenderActiveEntitySpritesPair            ; $750C: $CD $C0 $3B
     jr   jr_004_7517                              ; $750F: $18 $06
 

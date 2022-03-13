@@ -270,11 +270,17 @@ jr_007_5F37:
 jr_007_5F44:
     ret                                           ; $5F44: $C9
 
-Data_007_5F45::
-    db   $30, $01, $30, $21, $32, $01, $32, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown101SpriteVariants::
+.variant0
+    db $30, $01
+    db $30, $21
+.variant1
+    db $32, $01
+    db $32, $21
 
 label_007_5F4D:
-    ld   de, Data_007_5F45                        ; $5F4D: $11 $45 $5F
+    ld   de, Unknown101SpriteVariants             ; $5F4D: $11 $45 $5F
     call RenderActiveEntitySpritesPair            ; $5F50: $CD $C0 $3B
     call GetEntityTransitionCountdown             ; $5F53: $CD $05 $0C
     jp   z, func_007_7EA4                         ; $5F56: $CA $A4 $7E

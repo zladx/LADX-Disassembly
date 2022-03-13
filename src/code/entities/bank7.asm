@@ -32,9 +32,20 @@ include "code/entities/07_sideviewplatform.asm"
 include "code/entities/07_goomba.asm"
 include "code/entities/07_peahat.asm"
 
-
-Data_007_683E::
-    db   $44, $03, $46, $03, $44, $03, $48, $03, $46, $23, $44, $23, $48, $23, $44, $23
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+SnakeSpriteVariants::
+.variant0
+    db $44, $03
+    db $46, $03
+.variant1
+    db $44, $03
+    db $48, $03
+.variant2
+    db $46, $23
+    db $44, $23
+.variant3
+    db $48, $23
+    db $44, $23
 
 SnakeEntityHandler::
     ld   hl, wEntitiesDirectionTable              ; $684E: $21 $80 $C3

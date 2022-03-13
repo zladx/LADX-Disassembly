@@ -1,14 +1,46 @@
-Data_007_49EF::
-    db   $6E, $20, $6C, $20, $6C, $00, $6E, $00
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Papahl1SpriteVariants::
+.variant0
+    db $6E, $20
+    db $6C, $20
+.variant1
+    db $6C, $00
+    db $6E, $00
 
-Data_007_49F7::
-    db   $70, $00, $72, $01, $74, $00, $76, $01, $78, $00, $7A, $01, $7C, $00, $76, $01
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+PapahlDirectionSpriteVariants::
+.right
+    db $70, $00
+    db $72, $01
+.up
+    db $74, $00
+    db $76, $01
+.left
+    db $78, $00
+    db $7A, $01
+.down
+    db $7C, $00
+    db $76, $01
 
-Data_007_4A07::
-    db   $72, $20, $70, $21, $76, $20, $74, $21, $7A, $20, $78, $21, $76, $20, $7C, $21
+Papahl2SpriteVariants::
+.variant0
+    db $72, $20
+    db $70, $21
+.variant1
+    db $76, $20
+    db $74, $21
+.variant2
+    db $7A, $20
+    db $78, $21
+.variant3
+    db $76, $20
+    db $7C, $21
 
-Data_007_4A17::
-    db   $7E, $01, $7E, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Papahl4SpriteVariants::
+.variant0
+    db $7E, $01
+    db $7E, $21
 
 PapahlEntityHandler::
     ld   a, [wIsIndoor]                           ; $4A1B: $FA $A5 $DB
@@ -24,17 +56,17 @@ PapahlEntityHandler::
     jp   nz, func_007_7EA4                        ; $4A2D: $C2 $A4 $7E
 
 jr_007_4A30:
-    ld   de, Data_007_4A07                        ; $4A30: $11 $07 $4A
+    ld   de, Papahl2SpriteVariants                ; $4A30: $11 $07 $4A
     ld   a, [wTradeSequenceItem]                  ; $4A33: $FA $0E $DB
     cp   $08                                      ; $4A36: $FE $08
-    jr   nc, jr_007_4A43                          ; $4A38: $30 $09
+    jr   nc, .render                              ; $4A38: $30 $09
 
     call func_007_7E5D                            ; $4A3A: $CD $5D $7E
     ld   a, e                                     ; $4A3D: $7B
     ldh  [hActiveEntitySpriteVariant], a          ; $4A3E: $E0 $F1
-    ld   de, Data_007_49EF                        ; $4A40: $11 $EF $49
+    ld   de, Papahl1SpriteVariants                ; $4A40: $11 $EF $49
 
-jr_007_4A43:
+.render
     call RenderActiveEntitySpritesPair            ; $4A43: $CD $C0 $3B
     ldh  a, [hFrameCounter]                       ; $4A46: $F0 $E7
     rra                                           ; $4A48: $1F
@@ -61,16 +93,16 @@ jr_007_4A69:
     and  ROOM_STATUS_EVENT_2                      ; $4A6B: $E6 $20
     jp   nz, func_007_7EA4                        ; $4A6D: $C2 $A4 $7E
 
-    ld   de, Data_007_49F7                        ; $4A70: $11 $F7 $49
+    ld   de, PapahlDirectionSpriteVariants        ; $4A70: $11 $F7 $49
     ld   hl, wEntitiesDirectionTable              ; $4A73: $21 $80 $C3
     add  hl, bc                                   ; $4A76: $09
     ld   a, [hl]                                  ; $4A77: $7E
     and  a                                        ; $4A78: $A7
-    jr   nz, jr_007_4A7E                          ; $4A79: $20 $03
+    jr   nz, .render                              ; $4A79: $20 $03
 
-    ld   de, Data_007_4A07                        ; $4A7B: $11 $07 $4A
+    ld   de, Papahl2SpriteVariants                ; $4A7B: $11 $07 $4A
 
-jr_007_4A7E:
+.render:
     call RenderActiveEntitySpritesPair            ; $4A7E: $CD $C0 $3B
     ld   a, [wTradeSequenceItem]                  ; $4A81: $FA $0E $DB
     cp   $08                                      ; $4A84: $FE $08
@@ -84,7 +116,7 @@ jr_007_4A7E:
     ldh  [hActiveEntityVisualPosY], a             ; $4A92: $E0 $EC
     xor  a                                        ; $4A94: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4A95: $E0 $F1
-    ld   de, Data_007_4A17                        ; $4A97: $11 $17 $4A
+    ld   de, Papahl4SpriteVariants                ; $4A97: $11 $17 $4A
     call RenderActiveEntitySpritesPair            ; $4A9A: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4A9D: $CD $8A $3D
 

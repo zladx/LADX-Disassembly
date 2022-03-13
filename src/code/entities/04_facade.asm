@@ -519,14 +519,26 @@ func_004_542F::
     ld   c, $08                                   ; $5441: $0E $08
     jp   RenderActiveEntitySpritesRect            ; $5443: $C3 $E6 $3C
 
-Data_004_5446::
-    db   $68, $06, $68, $26, $6A, $06, $6A, $26, $6C, $06, $6C, $26, $6E, $06, $6E, $26
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Facade1SpriteVariants::
+.variant0
+    db $68, $06
+    db $68, $26
+.variant1
+    db $6A, $06
+    db $6A, $26
+.variant2
+    db $6C, $06
+    db $6C, $26
+.variant3
+    db $6E, $06
+    db $6E, $26
 
 Data_004_5456::
     db   $00, $01, $02, $03, $03, $03, $03, $03, $03, $02, $01, $00, $00, $00, $00, $00
 
 FacadeState1Handler:
-    ld   de, Data_004_5446                        ; $5466: $11 $46 $54
+    ld   de, Facade1SpriteVariants                ; $5466: $11 $46 $54
     call RenderActiveEntitySpritesPair            ; $5469: $CD $C0 $3B
     call ReturnIfNonInteractive_04                ; $546C: $CD $A3 $7F
     call GetEntityTransitionCountdown             ; $546F: $CD $05 $0C
@@ -607,11 +619,23 @@ jr_004_547E:
 jr_004_54F0:
     ret                                           ; $54F0: $C9
 
-Data_004_54F1::
-    db   $40, $06, $40, $26, $42, $06, $42, $26
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Facade2SpriteVariants::
+.variant0
+    db $40, $06
+    db $40, $26
+.variant1
+    db $42, $06
+    db $42, $26
 
-Data_004_54F9::
-    db   $70, $06, $70, $26, $72, $06, $72, $26
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Facade3SpriteVariants::
+.variant0
+    db $70, $06
+    db $70, $26
+.variant1
+    db $72, $06
+    db $72, $26
 
 Data_004_5501::
     db   $40, $07, $40, $27, $42, $07, $42, $27
@@ -622,11 +646,11 @@ FacadeState2Handler:
     cp   MAP_EAGLES_TOWER                         ; @TODO ??? Is this right?
     jr   z, jr_004_551C                           ; $5510: $28 $0A
 
-    ld   de, Data_004_54F1                        ; $5512: $11 $F1 $54
+    ld   de, Facade2SpriteVariants                ; $5512: $11 $F1 $54
     cp   $01                                      ; $5515: $FE $01
     jr   nz, jr_004_551C                          ; $5517: $20 $03
 
-    ld   de, Data_004_54F9                        ; $5519: $11 $F9 $54
+    ld   de, Facade3SpriteVariants                ; $5519: $11 $F9 $54
 
 jr_004_551C:
     call RenderActiveEntitySpritesPair            ; $551C: $CD $C0 $3B
@@ -712,11 +736,14 @@ func_004_5586::
 label_004_5596:
     jp   label_3E34                               ; $5596: $C3 $34 $3E
 
-Data_004_559D::
-    db   $F0, $16, $F0, $36
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Facade4SpriteVariants::
+.variant0
+    db $F0, $16
+    db $F0, $36
 
 FacadeState3Handler::
-    ld   de, Data_004_559D                        ; $559D: $11 $99 $55
+    ld   de, Facade4SpriteVariants                ; $559D: $11 $99 $55
     call RenderActiveEntitySpritesPair            ; $55A0: $CD $C0 $3B
     ld   hl, wEntitiesFlashCountdownTable         ; $55A3: $21 $20 $C4
     add  hl, bc                                   ; $55A6: $09

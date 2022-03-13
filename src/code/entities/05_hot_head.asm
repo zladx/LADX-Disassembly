@@ -691,11 +691,23 @@ jr_005_6783:
     ldh  [hActiveEntitySpriteVariant], a          ; $6783: $E0 $F1
     jp   label_005_6754                           ; $6785: $C3 $54 $67
 
-Data_005_6788::
-    db   $1E, $02, $1E, $62, $1E, $42, $1E, $22, $7A, $02, $7A, $22, $78, $02, $78, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+HotHead1SpriteVariants::
+.variant0
+    db $1E, $02
+    db $1E, $62
+.variant1
+    db $1E, $42
+    db $1E, $22
+.variant2
+    db $7A, $02
+    db $7A, $22
+.variant3
+    db $78, $02
+    db $78, $22
 
 label_005_6798:
-    ld   de, Data_005_6788                        ; $6798: $11 $88 $67
+    ld   de, HotHead1SpriteVariants               ; $6798: $11 $88 $67
     call RenderActiveEntitySpritesPair            ; $679B: $CD $C0 $3B
     call ReturnIfNonInteractive_05                ; $679E: $CD $3A $7A
     call label_3B44                               ; $67A1: $CD $44 $3B
@@ -741,11 +753,17 @@ func_005_67D2::
     inc  a                                        ; $67DE: $3C
     jp   SetEntitySpriteVariant                   ; $67DF: $C3 $0C $3B
 
-Data_005_67E2::
-    db   $6C, $02, $6E, $02, $6E, $22, $6C, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+HotHead2SpriteVariants::
+.variant0
+    db $6C, $02
+    db $6E, $02
+.variant1
+    db $6E, $22
+    db $6C, $22
 
 label_005_67EA:
-    ld   de, Data_005_67E2                        ; $67EA: $11 $E2 $67
+    ld   de, HotHead2SpriteVariants               ; $67EA: $11 $E2 $67
     call RenderActiveEntitySpritesPair            ; $67ED: $CD $C0 $3B
     call ReturnIfNonInteractive_05                ; $67F0: $CD $3A $7A
     call UpdateEntityPosWithSpeed_05              ; $67F3: $CD $B1 $7A

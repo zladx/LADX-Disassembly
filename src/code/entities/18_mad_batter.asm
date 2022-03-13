@@ -300,8 +300,14 @@ jr_018_50B4:
     call RenderActiveEntitySpritesRect            ; $50B6: $CD $E6 $3C
     jr   func_018_50D2                            ; $50B9: $18 $17
 
-Data_018_50BB::
-    db   $7E, $03, $7E, $23, $7E, $43, $7E, $63
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MadBatterSpriteVariants::
+.variant0
+    db $7E, $03
+    db $7E, $23
+.variant1
+    db $7E, $43
+    db $7E, $63
 
 MadBatterRenderSmallSprite::
     ldh  a, [hFrameCounter]                       ; $50C3: $F0 $E7
@@ -310,7 +316,7 @@ MadBatterRenderSmallSprite::
     rra                                           ; $50C7: $1F
     and  $01                                      ; $50C8: $E6 $01
     ldh  [hActiveEntitySpriteVariant], a          ; $50CA: $E0 $F1
-    ld   de, Data_018_50BB                        ; $50CC: $11 $BB $50
+    ld   de, MadBatterSpriteVariants              ; $50CC: $11 $BB $50
     call RenderActiveEntitySpritesPair            ; $50CF: $CD $C0 $3B
 
 func_018_50D2::

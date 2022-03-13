@@ -1,21 +1,72 @@
-Data_005_4912::
-    db   $78, $02, $7A, $02, $7A, $22, $78, $22, $7C, $02, $7E, $02, $78, $02, $7A, $02
-    db   $70, $02, $72, $02, $74, $02, $76, $02, $76, $22, $74, $22, $72, $22, $70, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Tarin1SpriteVariants::
+.variant0
+    db $78, $02
+    db $7A, $02
+.variant1
+    db $7A, $22
+    db $78, $22
+.variant2
+    db $7C, $02
+    db $7E, $02
+.variant3
+    db $78, $02
+    db $7A, $02
+.variant4
+    db $70, $02
+    db $72, $02
+.variant5
+    db $74, $02
+    db $76, $02
+.variant6
+    db $76, $22
+    db $74, $22
+.variant7
+    db $72, $22
+    db $70, $22
 
-Data_005_4932::
-    db   $5A, $22, $58, $22, $58, $02, $5A, $02, $50, $02, $52, $02, $50, $02, $52, $02
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Tarin3SpriteVariants::
+.variant0
+    db $5A, $22
+    db $58, $22
+.variant1
+    db $58, $02
+    db $5A, $02
+.variant2
+    db $50, $02
+    db $52, $02
+.variant3
+    db $50, $02
+    db $52, $02
 
-Data_005_4942::
-    db   $54, $02, $56, $02
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Tarin4SpriteVariants::
+.variant0
+    db $54, $02
+    db $56, $02
 
-Data_005_4946::
-    db   $7A, $07, $7C, $07
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Tarin2SpriteVariants::
+.variant0
+    db $7A, $07
+    db $7C, $07
 
-Data_005_494A::
-    db   $00, $00, $20, $02, $00, $08, $22, $02, $00, $00, $20, $02, $00, $08, $22, $02
+; define sprites and there OAM Attributes in a list
+Tarin1SpriteList::
+    ;  x    y    n°   OAM
+    db $00, $00, $20, $02
+    db $00, $08, $22, $02
+    db $00, $00, $20, $02
+    db $00, $08, $22, $02
 
-Data_005_495A::
-    db   $F1, $FA, $2A, $02, $F1, $02, $2A, $22, $00, $00, $24, $02, $00, $08, $28, $02
+; define sprites and there OAM Attributes in a list
+Tarin2SpriteList::
+    ;  x    y    n°   OAM
+    db $F1, $FA, $2A, $02
+    db $F1, $02, $2A, $22
+    db $00, $00, $24, $02
+    db $00, $08, $28, $02
 
 ; Entity handler for:
 ;  - All appearances of Tarin (except when with the bees)
@@ -31,11 +82,11 @@ TarinEntityHandler::
     ld   hl, wEntitiesInertiaTable                ; $4977: $21 $D0 $C3
     add  hl, bc                                   ; $497A: $09
     ld   a, [hl]                                  ; $497B: $7E
-    ld   hl, Data_005_494A                        ; $497C: $21 $4A $49
+    ld   hl, Tarin1SpriteList                        ; $497C: $21 $4A $49
     cp   $70                                      ; $497F: $FE $70
     jr   nz, jr_005_4986                          ; $4981: $20 $03
 
-    ld   hl, Data_005_495A                        ; $4983: $21 $5A $49
+    ld   hl, Tarin2SpriteList                        ; $4983: $21 $5A $49
 
 jr_005_4986:
     ld   c, $04                                   ; $4986: $0E $04
@@ -90,7 +141,7 @@ jr_005_49CC:
     ld   [hl], b                                  ; $49D0: $70
 
 jr_005_49D1:
-    ld   de, Data_005_4912                        ; $49D1: $11 $12 $49
+    ld   de, Tarin1SpriteVariants                 ; $49D1: $11 $12 $49
     call RenderActiveEntitySpritesPair            ; $49D4: $CD $C0 $3B
     call ReturnIfNonInteractive_05                ; $49D7: $CD $3A $7A
     ldh  a, [hActiveEntityState]                  ; $49DA: $F0 $F0
@@ -516,11 +567,11 @@ jr_005_4C24:
     and  a                                        ; $4C35: $A7
     jr   z, jr_005_4C3E                           ; $4C36: $28 $06
 
-    ld   de, Data_005_4946                        ; $4C38: $11 $46 $49
+    ld   de, Tarin2SpriteVariants                 ; $4C38: $11 $46 $49
     call RenderActiveEntitySpritesPair            ; $4C3B: $CD $C0 $3B
 
 jr_005_4C3E:
-    ld   de, Data_005_4942                        ; $4C3E: $11 $42 $49
+    ld   de, Tarin4SpriteVariants                 ; $4C3E: $11 $42 $49
     jr   jr_005_4C57                              ; $4C41: $18 $14
 
 jr_005_4C43:
@@ -535,7 +586,7 @@ jr_005_4C43:
     ld   [hl], e                                  ; $4C53: $73
 
 jr_005_4C54:
-    ld   de, Data_005_4932                        ; $4C54: $11 $32 $49
+    ld   de, Tarin3SpriteVariants                 ; $4C54: $11 $32 $49
 
 jr_005_4C57:
     call RenderActiveEntitySpritesPair            ; $4C57: $CD $C0 $3B
@@ -787,10 +838,10 @@ jr_005_4DC2:
 jr_005_4DC6:
     ret                                           ; $4DC6: $C9
 
-Data_005_4DC7::
+Tarin6SpriteVariants::
     db   $74, $07, $76, $07
 
-Data_005_4DCB::
+Tarin5SpriteVariants::
     db   $70, $00, $72, $00
 
 func_005_4DCF::
@@ -803,7 +854,7 @@ func_005_4DCF::
     jr   nc, jr_005_4DE3                          ; $4DDA: $30 $07
 
     ld   a, $78                                   ; $4DDC: $3E $78
-    ld   de, Data_005_4DC7                        ; $4DDE: $11 $C7 $4D
+    ld   de, Tarin6SpriteVariants                 ; $4DDE: $11 $C7 $4D
     jr   jr_005_4DF3                              ; $4DE1: $18 $10
 
 jr_005_4DE3:
@@ -814,7 +865,7 @@ jr_005_4DE3:
     ld   hl, wEntitiesPosYTable                   ; $4DE8: $21 $10 $C2
     add  hl, bc                                   ; $4DEB: $09
     ld   [hl], $4B                                ; $4DEC: $36 $4B
-    ld   de, Data_005_4DCB                        ; $4DEE: $11 $CB $4D
+    ld   de, Tarin5SpriteVariants                 ; $4DEE: $11 $CB $4D
     ld   a, $7C                                   ; $4DF1: $3E $7C
 
 jr_005_4DF3:

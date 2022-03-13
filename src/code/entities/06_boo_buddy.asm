@@ -1,9 +1,32 @@
-Data_006_7989::
-    db   $62, $20, $60, $20, $66, $20, $64, $20, $60, $00, $62, $00, $64, $00, $66, $00
-    db   $68, $00, $68, $20, $6A, $00, $6A, $20, $6E, $20, $6C, $20, $6C, $00, $6E, $00
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+BooBuddySpriteVariants::
+.variant0
+    db $62, $20
+    db $60, $20
+.variant1
+    db $66, $20
+    db $64, $20
+.variant2
+    db $60, $00
+    db $62, $00
+.variant3
+    db $64, $00
+    db $66, $00
+.variant4
+    db $68, $00
+    db $68, $20
+.variant5
+    db $6A, $00
+    db $6A, $20
+.variant6
+    db $6E, $20
+    db $6C, $20
+.variant7
+    db $6C, $00
+    db $6E, $00
 
 BooBuddyEntityHandler::
-    ld   de, Data_006_7989                        ; $79A9: $11 $89 $79
+    ld   de, BooBuddySpriteVariants               ; $79A9: $11 $89 $79
     call RenderActiveEntitySpritesPair            ; $79AC: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $79AF: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $79B2: $CD $F7 $64

@@ -448,8 +448,11 @@ Data_018_758E::
     db   $F0, $F8, $70, $07, $F0, $00, $72, $07, $F0, $08, $72, $27, $F0, $10, $70, $27
     db   $00, $00, $74, $07, $00, $08, $74, $27
 
-Data_018_7666::
-    db   $76, $07, $76, $27
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+TurtleRockHeadSpriteVariants::
+.variant0
+    db $76, $07
+    db $76, $27
 
 func_018_766A::
     ldh  a, [hActiveEntitySpriteVariant]          ; $766A: $F0 $F1
@@ -515,7 +518,7 @@ jr_018_76C9:
     ldh  [hActiveEntityPosX], a                   ; $76CC: $E0 $EE
     inc  hl                                       ; $76CE: $23
     push hl                                       ; $76CF: $E5
-    ld   de, Data_018_7666                        ; $76D0: $11 $66 $76
+    ld   de, TurtleRockHeadSpriteVariants         ; $76D0: $11 $66 $76
     call RenderActiveEntitySpritesPair            ; $76D3: $CD $C0 $3B
     ld   a, [wInvincibilityCounter]               ; $76D6: $FA $C7 $DB
     and  a                                        ; $76D9: $A7

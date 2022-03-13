@@ -1,9 +1,21 @@
-Data_018_525B::
-    db   $78, $01, $7A, $01, $7C, $01, $7E, $01, $7A, $21, $78, $21, $7E, $21, $7C, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+AnimalD2SpriteVariants::
+.variant0
+    db $78, $01
+    db $7A, $01
+.variant1
+    db $7C, $01
+    db $7E, $01
+.variant2
+    db $7A, $21
+    db $78, $21
+.variant3
+    db $7E, $21
+    db $7C, $21
 
 AnimalD2EntityHandler::
     call func_018_51B0                            ; $526B: $CD $B0 $51
-    ld   de, Data_018_525B                        ; $526E: $11 $5B $52
+    ld   de, AnimalD2SpriteVariants               ; $526E: $11 $5B $52
     call RenderActiveEntitySpritesPair            ; $5271: $CD $C0 $3B
     ld   a, [wMarinEntityIndex]                   ; $5274: $FA $0F $C5
     ld   e, a                                     ; $5277: $5F

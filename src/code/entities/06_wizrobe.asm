@@ -1,6 +1,20 @@
-Data_006_7604::
-    db   $6E, $00, $6E, $20, $66, $20, $64, $20, $64, $00, $66, $00, $62, $00, $62, $20
-    db   $60, $00, $60, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+WizrobeSpriteVariants::
+.variant0
+    db $6E, $00
+    db $6E, $20
+.variant1
+    db $66, $20
+    db $64, $20
+.variant2
+    db $64, $00
+    db $66, $00
+.variant3
+    db $62, $00
+    db $62, $20
+.variant4
+    db $60, $00
+    db $60, $20
 
 Data_006_7618::
     db   $08, $F8, $00, $00
@@ -15,7 +29,7 @@ Data_006_7624::
     db   $00, $00, $E0, $20
 
 WizrobeEntityHandler::
-    ld   de, Data_006_7604                        ; $7628: $11 $04 $76
+    ld   de, WizrobeSpriteVariants                ; $7628: $11 $04 $76
     call RenderActiveEntitySpritesPair            ; $762B: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $762E: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $7631: $CD $F7 $64
@@ -25,10 +39,10 @@ WizrobeEntityHandler::
     add  hl, bc                                   ; $763D: $09
     ld   a, [hl]                                  ; $763E: $7E
     JP_TABLE                                      ; $763F
-._00 dw WizrobeState0Handler                             ; $7640
-._01 dw WizrobeState1Handler                             ; $7642
-._02 dw WizrobeState2Handler                             ; $7644
-._03 dw WizrobeState3Handler                             ; $7646
+._00 dw WizrobeState0Handler                      ; $7640
+._01 dw WizrobeState1Handler                      ; $7642
+._02 dw WizrobeState2Handler                      ; $7644
+._03 dw WizrobeState3Handler                      ; $7646
 
 WizrobeState0Handler::
     ld   hl, wEntitiesTransitionCountdownTable    ; $7648: $21 $E0 $C2

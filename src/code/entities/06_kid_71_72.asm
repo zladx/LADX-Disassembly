@@ -1,11 +1,47 @@
-Data_006_604D::
-    db   $70, $00, $72, $00, $72, $20, $70, $20, $74, $00, $76, $00, $76, $20, $74, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Kid71SpriteVariants::
+.variant0
+    db $70, $00
+    db $72, $00
+.variant1
+    db $72, $20
+    db $70, $20
+.variant2
+    db $74, $00
+    db $76, $00
+.variant3
+    db $76, $20
+    db $74, $20
 
-Data_006_605D::
-    db   $70, $02, $72, $02, $72, $22, $70, $22, $74, $02, $76, $02, $76, $22, $74, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Kid72SpriteVariants::
+.variant0
+    db $70, $02
+    db $72, $02
+.variant1
+    db $72, $22
+    db $70, $22
+.variant2
+    db $74, $02
+    db $76, $02
+.variant3
+    db $76, $22
+    db $74, $22
 
-Data_006_606D::
-    db   $78, $02, $7A, $02, $7C, $02, $7E, $02, $7A, $20, $78, $20, $7E, $20, $7C, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown019SpriteVariants::
+.variant0
+    db $78, $02
+    db $7A, $02
+.variant1
+    db $7C, $02
+    db $7E, $02
+.variant2
+    db $7A, $20
+    db $78, $20
+.variant3
+    db $7E, $20
+    db $7C, $20
 
 Data_006_607D::
     db   $3E, $00
@@ -40,18 +76,16 @@ jr_006_60A2:
     cp   $01                                      ; $60AD: $FE $01
     jp   z, label_006_6170                        ; $60AF: $CA $70 $61
 
-    ld   de, Data_006_604D                        ; $60B2: $11 $4D $60
+    ld   de, Kid71SpriteVariants                  ; $60B2: $11 $4D $60
     ld   hl, wEntitiesTypeTable                   ; $60B5: $21 $A0 $C3
     add  hl, bc                                   ; $60B8: $09
     ld   a, [hl]                                  ; $60B9: $7E
-    cp   $72                                      ; $60BA: $FE $72
+    cp   ENTITY_KID_72                            ; $60BA: $FE $72
+    jr   nz, .render                              ; $60BC: $20 $03
 
-jr_006_60BC:
-    jr   nz, jr_006_60C1                          ; $60BC: $20 $03
+    ld   de, Kid72SpriteVariants                  ; $60BE: $11 $5D $60
 
-    ld   de, Data_006_605D                        ; $60BE: $11 $5D $60
-
-jr_006_60C1:
+.render:
     call RenderActiveEntitySpritesPair            ; $60C1: $CD $C0 $3B
 
 jr_006_60C4:
@@ -180,7 +214,7 @@ label_006_6170:
     ldh  a, [hActiveEntitySpriteVariant]          ; $6174: $F0 $F1
     or   [hl]                                     ; $6176: $B6
     ldh  [hActiveEntitySpriteVariant], a          ; $6177: $E0 $F1
-    ld   de, Data_006_606D                        ; $6179: $11 $6D $60
+    ld   de, Unknown019SpriteVariants             ; $6179: $11 $6D $60
     call RenderActiveEntitySpritesPair            ; $617C: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $617F: $CD $C6 $64
     call func_006_6230                            ; $6182: $CD $30 $62

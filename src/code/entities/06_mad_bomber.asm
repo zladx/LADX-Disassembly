@@ -1,6 +1,20 @@
-Data_006_4126::
-    db   $FF, $00, $FF, $20, $70, $02, $70, $22, $72, $02, $72, $22, $74, $02, $76, $02
-    db   $76, $22, $74, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MadBomberSpriteVariants::
+.variant0
+    db $FF, $00
+    db $FF, $20
+.variant1
+    db $70, $02
+    db $70, $22
+.variant2
+    db $72, $02
+    db $72, $22
+.variant3
+    db $74, $02
+    db $76, $02
+.variant4
+    db $76, $22
+    db $74, $22
 
 Data_006_413A::
     db   $28, $38, $58, $58, $78, $88, $28, $88
@@ -19,7 +33,7 @@ MadBomberEntityHandler::
     ld   hl, wEntitiesLoadOrderTable              ; $4157: $21 $60 $C4
     add  hl, bc                                   ; $415A: $09
     ld   [hl], $FF                                ; $415B: $36 $FF
-    ld   de, Data_006_4126                        ; $415D: $11 $26 $41
+    ld   de, MadBomberSpriteVariants              ; $415D: $11 $26 $41
     call RenderActiveEntitySpritesPair            ; $4160: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $4163: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $4166: $CD $56 $0C

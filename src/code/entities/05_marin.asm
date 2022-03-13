@@ -1,11 +1,65 @@
-Data_005_4E0A::
-    db   $60, $01, $62, $01, $62, $21, $60, $21, $64, $01, $66, $01, $66, $21, $64, $21
-    db   $68, $01, $6A, $01, $6C, $01, $6E, $01, $6A, $21, $68, $21, $6E, $21, $6C, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MarinIndoor2SpriteVariants::
+.variant0
+    db $60, $01
+    db $62, $01
+.variant1
+    db $62, $21
+    db $60, $21
+.variant2
+    db $64, $01
+    db $66, $01
+.variant3
+    db $66, $21
+    db $64, $21
+.variant4
+    db $68, $01
+    db $6A, $01
+.variant5
+    db $6C, $01
+    db $6E, $01
+.variant6
+    db $6A, $21
+    db $68, $21
+.variant7
+    db $6E, $21
+    db $6C, $21
 
-Data_005_4E2A::
-    db   $68, $01, $6A, $01, $6A, $21, $68, $21, $66, $01, $66, $21, $66, $01, $66, $21
-    db   $6C, $01, $6E, $01, $6C, $01, $6E, $01, $6E, $21, $6C, $21, $6E, $21, $6C, $21
-    db   $60, $01, $62, $01, $64, $01, $64, $21, $62, $21, $60, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MarinCreditsSpriteVariants::
+.variant0
+    db $68, $01
+    db $6A, $01
+.variant1
+    db $6A, $21
+    db $68, $21
+.variant2
+    db $66, $01
+    db $66, $21
+.variant3
+    db $66, $01
+    db $66, $21
+.variant4
+    db $6C, $01
+    db $6E, $01
+.variant5
+    db $6C, $01
+    db $6E, $01
+.variant6
+    db $6E, $21
+    db $6C, $21
+.variant7
+    db $6E, $21
+    db $6C, $21
+.variant8
+    db $60, $01
+    db $62, $01
+.variant9
+    db $64, $01
+    db $64, $21
+.variant10
+    db $62, $21
+    db $60, $21
 
 Data_005_4E56::
     db   $08, $08, $08, $09, $0A, $0A, $0A, $09
@@ -157,7 +211,7 @@ jr_005_4F39:
     ld   a, c                                     ; $4F39: $79
     ld   [wMarinEntityIndex], a                   ; $4F3A: $EA $0F $C5
 
-    ld   de, Data_005_4E2A                        ; $4F3D: $11 $2A $4E
+    ld   de, MarinCreditsSpriteVariants           ; $4F3D: $11 $2A $4E
     call RenderActiveEntitySpritesPair            ; $4F40: $CD $C0 $3B
     call func_005_54C3                            ; $4F43: $CD $C3 $54
     ld   a, [wGameplayType]                       ; $4F46: $FA $95 $DB
@@ -594,8 +648,10 @@ func_005_51BC::
     jp_open_dialog $197
 
 
-Data_005_51CA::
-    db   $5C, $00, $5C, $20
+MarinIndoor1SpriteVariants::
+.variant0
+    db $5C, $00
+    db $5C, $20
 
 MarinEntityHandler_Indoor::
     ld   a, [wTradeSequenceItem]                  ; $51CE: $FA $0E $DB
@@ -612,7 +668,7 @@ MarinEntityHandler_Indoor::
     ld   hl, wEntitiesPosXTable                   ; $51E3: $21 $00 $C2
     add  hl, bc                                   ; $51E6: $09
     ld   [hl], $7A                                ; $51E7: $36 $7A
-    ld   de, Data_005_51CA                        ; $51E9: $11 $CA $51
+    ld   de, MarinIndoor1SpriteVariants           ; $51E9: $11 $CA $51
     call RenderActiveEntitySpritesPair            ; $51EC: $CD $C0 $3B
     call ReturnIfNonInteractive_05                ; $51EF: $CD $3A $7A
     call ShouldLinkTalkToEntity_05                ; $51F2: $CD $06 $55
@@ -670,7 +726,7 @@ jr_005_5237:
 
 jr_005_5245:
     call func_005_54EA                            ; $5245: $CD $EA $54
-    ld   de, Data_005_4E0A                        ; $5248: $11 $0A $4E
+    ld   de, MarinIndoor2SpriteVariants           ; $5248: $11 $0A $4E
     call RenderActiveEntitySpritesPair            ; $524B: $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ; $524E: $F0 $F0
     dec  a                                        ; $5250: $3D
@@ -679,12 +735,28 @@ jr_005_5245:
 ._01 dw func_005_52DB                             ; $5254
 ._02 dw func_005_5312                             ; $5256
 
-Data_005_5258::
-    db   $40, $07, $42, $07, $42, $27, $40, $27, $44, $00, $46, $00, $48, $00, $4A, $00
-    db   $48, $00, $4C, $00
+MarinDropSpriteVariants::
+.variant0
+    db $40, $07
+    db $42, $07
+.variant1
+    db $42, $27
+    db $40, $27
+.variant2
+    db $44, $00
+    db $46, $00
+.variant3
+    db $48, $00
+    db $4A, $00
+.variant4
+    db $48, $00
+    db $4C, $00
 
-Data_005_526C::
-    db   $00, $00, $4E, $06, $00, $08, $4E, $26
+; define sprites and there OAM Attributes in a list
+MarinDropGBCSpriteList::
+    ;  x    y    n°   OAM
+    db $00, $00, $4E, $06
+    db $00, $08, $4E, $26
 
 Data_005_5274::
     db   $03, $03, $03, $03, $03, $04, $03, $04, $03, $03, $03, $02, $02, $02, $02, $02
@@ -721,13 +793,13 @@ func_005_52AF::
     ldh  [hLinkInteractiveMotionBlocked], a       ; $52BF: $E0 $A1
     ld   a, LINK_ANIMATION_STATE_NO_UPDATE        ; $52C1: $3E $FF
     ldh  [hLinkAnimationState], a                 ; $52C3: $E0 $9D
-    ld   de, Data_005_5258                        ; $52C5: $11 $58 $52
+    ld   de, MarinDropSpriteVariants              ; $52C5: $11 $58 $52
     call RenderActiveEntitySpritesPair            ; $52C8: $CD $C0 $3B
     ldh  a, [hIsGBC]                              ; $52CB: $F0 $FE
     and  a                                        ; $52CD: $A7
     jr   z, jr_005_52D8                           ; $52CE: $28 $08
 
-    ld   hl, Data_005_526C                        ; $52D0: $21 $6C $52
+    ld   hl, MarinDropGBCSpriteList               ; $52D0: $21 $6C $52
     ld   c, $02                                   ; $52D3: $0E $02
     call RenderActiveEntitySpritesRect            ; $52D5: $CD $E6 $3C
 

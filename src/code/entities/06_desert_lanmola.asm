@@ -247,7 +247,7 @@ jr_006_5754:
 ._02 dw func_006_57ED                             ; $575B
 ._03 dw func_006_580C                             ; $575D
 ._04 dw func_006_5835                             ; $575F
-._05 dw Data_006_589F                             ; $5761
+._05 dw DesertLanmolaSpriteVariants               ; $5761
 
 Data_006_5763::
     db   $28, $38, $48, $58, $68, $78, $88, $28
@@ -465,10 +465,35 @@ jr_006_589A:
     ld   a, $02                                   ; $589A: $3E $02
     jp   SetEntitySpriteVariant                   ; $589C: $C3 $0C $3B
 
-Data_006_589F::
-    db   $72, $03, $74, $03, $74, $23, $72, $23, $70, $03, $70, $23, $70, $43, $70, $63
-    db   $76, $03, $76, $23, $7A, $01, $7A, $61, $7A, $41, $7A, $21, $78, $03, $78, $63
-    db   $78, $43, $78, $23
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+DesertLanmolaSpriteVariants::
+.variant0
+    db $72, $03
+    db $74, $03
+.variant1
+    db $74, $23
+    db $72, $23
+.variant2
+    db $70, $03
+    db $70, $23
+.variant3
+    db $70, $43
+    db $70, $63
+.variant4
+    db $76, $03
+    db $76, $23
+.variant5
+    db $7A, $01
+    db $7A, $61
+.variant6
+    db $7A, $41
+    db $7A, $21
+.variant7
+    db $78, $03
+    db $78, $63
+.variant8
+    db $78, $43
+    db $78, $23
 
 Data_006_58C3::
     db   $0C, $18, $24, $30, $3C, $48
@@ -480,7 +505,7 @@ func_006_58C9::
     and  $80                                      ; $58CE: $E6 $80
     jr   nz, jr_006_58D8                          ; $58D0: $20 $06
 
-    ld   de, Data_006_589F                        ; $58D2: $11 $9F $58
+    ld   de, DesertLanmolaSpriteVariants          ; $58D2: $11 $9F $58
     call RenderActiveEntitySpritesPair            ; $58D5: $CD $C0 $3B
 
 jr_006_58D8:
@@ -543,7 +568,7 @@ jr_006_58F3:
 
 jr_006_592E:
     ldh  [hActiveEntitySpriteVariant], a          ; $592E: $E0 $F1
-    ld   de, Data_006_589F                        ; $5930: $11 $9F $58
+    ld   de, DesertLanmolaSpriteVariants          ; $5930: $11 $9F $58
     call RenderActiveEntitySpritesPair            ; $5933: $CD $C0 $3B
 
 jr_006_5936:

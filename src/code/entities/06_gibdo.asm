@@ -1,21 +1,33 @@
-Data_006_7E6F::
-    db   $74, $02, $76, $02, $76, $22, $74, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+GibdoSpriteVariants::
+.variant0
+    db $74, $02
+    db $76, $02
+.variant1
+    db $76, $22
+    db $74, $22
 
-Data_006_7E77::
-    db   $44, $02, $46, $02, $46, $22, $44, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+GibdoTurtleRockSpriteVariants::
+.variant0
+    db $44, $02
+    db $46, $02
+.variant1
+    db $46, $22
+    db $44, $22
 
 Data_006_7E7F::
     db   $00, $08, $F8, $00, $F8, $08
 
 GibdoEntityHandler::
-    ld   de, Data_006_7E6F                        ; $7E85: $11 $6F $7E
+    ld   de, GibdoSpriteVariants                  ; $7E85: $11 $6F $7E
     ldh  a, [hMapId]                              ; $7E88: $F0 $F7
     cp   MAP_TURTLE_ROCK                          ; $7E8A: $FE $07
-    jr   nz, jr_006_7E91                          ; $7E8C: $20 $03
+    jr   nz, .render                              ; $7E8C: $20 $03
 
-    ld   de, Data_006_7E77                        ; $7E8E: $11 $77 $7E
+    ld   de, GibdoTurtleRockSpriteVariants        ; $7E8E: $11 $77 $7E
 
-jr_006_7E91:
+.render:
     call RenderActiveEntitySpritesPair            ; $7E91: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $7E94: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $7E97: $CD $56 $0C

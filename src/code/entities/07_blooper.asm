@@ -1,8 +1,14 @@
-Data_007_5BF1::
-    db   $6A, $00, $6A, $20, $68, $00, $68, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+BlooperSpriteVariants::
+.variant0
+    db $6A, $00
+    db $6A, $20
+.variant1
+    db $68, $00
+    db $68, $20
 
 BlooperEntityHandler::
-    ld   de, Data_007_5BF1                        ; $5BF9: $11 $F1 $5B
+    ld   de, BlooperSpriteVariants                ; $5BF9: $11 $F1 $5B
     call RenderActiveEntitySpritesPair            ; $5BFC: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $5BFF: $CD $96 $7D
     call ApplyRecoilIfNeeded_07                   ; $5C02: $CD $C3 $7D

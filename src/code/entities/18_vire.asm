@@ -849,11 +849,17 @@ func_018_6EFB::
     call RenderActiveEntitySpritesRect            ; $6F11: $CD $E6 $3C
     jp   label_3CD9                               ; $6F14: $C3 $D9 $3C
 
-Data_018_6F17::
-    db   $1E, $03, $1E, $63, $1E, $43, $1E, $23
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Vire1SpriteVariants::
+.variant0
+    db $1E, $03
+    db $1E, $63
+.variant1
+    db $1E, $43
+    db $1E, $23
 
 label_018_6F1F:
-    ld   de, Data_018_6F17                        ; $6F1F: $11 $17 $6F
+    ld   de, Vire1SpriteVariants                  ; $6F1F: $11 $17 $6F
     call RenderActiveEntitySpritesPair            ; $6F22: $CD $C0 $3B
     call ReturnIfNonInteractive_18                ; $6F25: $CD $E8 $7D
     call DecrementEntityIgnoreHitsCountdown       ; $6F28: $CD $56 $0C
@@ -896,16 +902,16 @@ jr_018_6F54:
 
     ret                                           ; $6F67: $C9
 
-Data_018_6F68::
+Vire2SpriteVariants::
 .variant0
-    db   $6C, $00
-    db   $6C, $20
+    db $6C, $00
+    db $6C, $20
 .variant1
-    db   $6E, $00
-    db   $6E, $20
+    db $6E, $00
+    db $6E, $20
 
 label_018_6F70:
-    ld   de, Data_018_6F68
+    ld   de, Vire2SpriteVariants
     call RenderActiveEntitySpritesPair            ; $6F73: $CD $C0 $3B
     call ReturnIfNonInteractive_18                ; $6F76: $CD $E8 $7D
     call ApplyRecoilIfNeeded_18                   ; $6F79: $CD $15 $7E

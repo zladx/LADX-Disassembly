@@ -1,6 +1,29 @@
-Data_018_5EB7::
-    db   $60, $01, $62, $01, $62, $21, $60, $21, $64, $01, $66, $01, $66, $21, $64, $21
-    db   $68, $01, $6A, $01, $6C, $01, $6E, $01, $6A, $21, $68, $21, $6E, $21, $6C, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MarinAtTalTalAndInStoreSpriteVariants::
+.variant0
+    db $60, $01
+    db $62, $01
+.variant1
+    db $62, $21
+    db $60, $21
+.variant2
+    db $64, $01
+    db $66, $01
+.variant3
+    db $66, $21
+    db $64, $21
+.variant4
+    db $68, $01
+    db $6A, $01
+.variant5
+    db $6C, $01
+    db $6E, $01
+.variant6
+    db $6A, $21
+    db $68, $21
+.variant7
+    db $6E, $21
+    db $6C, $21
 
 MarinAtTalTalHeightsEntityHandler::
     ld   a, [wHasInstrument7]                     ; $5ED7: $FA $6B $DB
@@ -23,7 +46,7 @@ MarinAtTalTalHeightsEntityHandler::
 
     ld   a, c                                     ; $5EF6: $79
     ld   [wMarinEntityIndex], a                   ; $5EF7: $EA $0F $C5
-    ld   de, Data_018_5EB7                        ; $5EFA: $11 $B7 $5E
+    ld   de, MarinAtTalTalAndInStoreSpriteVariants ; $5EFA: $11 $B7 $5E
     call RenderActiveEntitySpritesPair            ; $5EFD: $CD $C0 $3B
     call func_018_7D60                            ; $5F00: $CD $60 $7D
     call AddEntityZSpeedToPos_18                  ; $5F03: $CD $98 $7E
@@ -309,12 +332,35 @@ jr_018_60C7:
     pop  bc                                       ; $60D3: $C1
     ret                                           ; $60D4: $C9
 
-Data_018_60D5::
-    db   $50, $02, $52, $02, $52, $22, $50, $22, $54, $02, $56, $02, $56, $22, $54, $22
-    db   $58, $02, $5A, $02, $5C, $02, $5E, $02, $5A, $22, $58, $22, $5E, $22, $5C, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MarinAtTalTal2SpriteVariants::
+.variant0
+    db $50, $02
+    db $52, $02
+.variant1
+    db $52, $22
+    db $50, $22
+.variant2
+    db $54, $02
+    db $56, $02
+.variant3
+    db $56, $22
+    db $54, $22
+.variant4
+    db $58, $02
+    db $5A, $02
+.variant5
+    db $5C, $02
+    db $5E, $02
+.variant6
+    db $5A, $22
+    db $58, $22
+.variant7
+    db $5E, $22
+    db $5C, $22
 
 TarinAtTalTalHeights:
-    ld   de, Data_018_60D5                        ; $60F5: $11 $D5 $60
+    ld   de, MarinAtTalTal2SpriteVariants         ; $60F5: $11 $D5 $60
     call RenderActiveEntitySpritesPair            ; $60F8: $CD $C0 $3B
     call func_018_7D60                            ; $60FB: $CD $60 $7D
     ldh  a, [hActiveEntityState]                  ; $60FE: $F0 $F0

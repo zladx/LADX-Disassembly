@@ -1,7 +1,5 @@
-; Array indexed by hActiveEntitySpriteVariant
-;  byte 0: tile n°
-;  byte 1: OAM attribute (palette index and flags)
-AntiFairyOAMAttributes::
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+AntiFairySpriteVariants::
 .variant1
     db   $5A, %000
     db   $5A, %000 | OAMF_XFLIP
@@ -10,7 +8,7 @@ AntiFairyOAMAttributes::
     db   $5A, %100 | OAMF_PAL1 | OAMF_XFLIP
 
 AntiFairyEntityHandler::
-    ld   de, AntiFairyOAMAttributes               ; $7876: $11 $6E $78
+    ld   de, AntiFairySpriteVariants              ; $7876: $11 $6E $78
     call RenderActiveEntitySpritesPair            ; $7879: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $787C: $CD $C6 $64
 

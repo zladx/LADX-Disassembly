@@ -1,13 +1,36 @@
-Data_018_51B8::
-    db   $50, $01, $52, $01, $52, $21, $50, $21, $54, $01, $56, $01, $56, $21, $54, $21
-    db   $58, $01, $5A, $01, $58, $01, $5A, $01, $5A, $21, $58, $21, $5A, $21, $58, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+BunnyD3SpriteVariants::
+.variant0
+    db $50, $01
+    db $52, $01
+.variant1
+    db $52, $21
+    db $50, $21
+.variant2
+    db $54, $01
+    db $56, $01
+.variant3
+    db $56, $21
+    db $54, $21
+.variant4
+    db $58, $01
+    db $5A, $01
+.variant5
+    db $58, $01
+    db $5A, $01
+.variant6
+    db $5A, $21
+    db $58, $21
+.variant7
+    db $5A, $21
+    db $58, $21
 
 BunnyD3EntityHandler::
     ld   a, [wDB74]                               ; $51D8: $FA $74 $DB
     and  a                                        ; $51DB: $A7
     jp   nz, ClearEntityStatusBank18              ; $51DC: $C2 $08 $7F
 
-    ld   de, Data_018_51B8                        ; $51DF: $11 $B8 $51
+    ld   de, BunnyD3SpriteVariants                ; $51DF: $11 $B8 $51
     call RenderActiveEntitySpritesPair            ; $51E2: $CD $C0 $3B
     ldh  a, [hFrameCounter]                       ; $51E5: $F0 $E7
     and  $3F                                      ; $51E7: $E6 $3F

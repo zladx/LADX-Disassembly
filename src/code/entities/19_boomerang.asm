@@ -1,13 +1,24 @@
-Data_019_4451::
-    db   $38, $14, $38, $34, $A4, $14, $FF, $FF   ; $4451
-    db   $38, $54, $38, $74, $FF, $FF, $A4, $34   ; $4459
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+BoomerangSpriteVariants:: ; $4451
+.variant0
+    db $38, $14
+    db $38, $34
+.variant1
+    db $A4, $14
+    db $FF, $FF  
+.variant2
+    db $38, $54
+    db $38, $74
+.variant3
+    db $FF, $FF
+    db $A4, $34
 
 BoomerangEntityHandler::
     ; wActiveProjectileCount = 1
     ld   a, $01                                   ; $4461: $3E $01
     ld   [wActiveProjectileCount], a              ; $4463: $EA $4D $C1
 
-    ld   de, Data_019_4451                        ; $4466: $11 $51 $44
+    ld   de, BoomerangSpriteVariants              ; $4466: $11 $51 $44
     call RenderActiveEntitySpritesPair            ; $4469: $CD $C0 $3B
     call ReturnIfNonInteractive_19                ; $446C: $CD $3D $7D
     call PlayBoomerangSfx_trampoline              ; $446F: $CD $F8 $29

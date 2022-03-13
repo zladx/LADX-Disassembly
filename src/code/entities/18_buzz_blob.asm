@@ -3,10 +3,37 @@
 ;
 ; In usual gameplay, only 2 spriteslots are updated during a room transition.
 ; The map transition code is special-cased for the color-dungeon to handle this.
-Data_018_7729::
-    db   $62, $00, $64, $00, $60, $00, $60, $20, $64, $20, $62, $20, $66, $00, $68, $00
-    db   $60, $00, $60, $20, $68, $20, $66, $20, $6C, $00, $6E, $00, $6A, $00, $6A, $20
-    db   $6E, $20, $6C, $20
+
+
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+BuzzBlobSpriteVariants::
+.variant0
+    db $62, $00
+    db $64, $00
+.variant1
+    db $60, $00
+    db $60, $20
+.variant2
+    db $64, $20
+    db $62, $20
+.variant3
+    db $66, $00
+    db $68, $00
+.variant4
+    db $60, $00
+    db $60, $20
+.variant5
+    db $68, $20
+    db $66, $20
+.variant6
+    db $6C, $00
+    db $6E, $00
+.variant7
+    db $6A, $00
+    db $6A, $20
+.variant8
+    db $6E, $20
+    db $6C, $20
 
 Data_018_774D::
     db   $00, $01, $02, $01
@@ -26,7 +53,7 @@ BuzzBlobEntityHandler::
     jp   func_036_4F68_trampoline                 ; $7761: $C3 $77 $0A
 
 jr_018_7764:
-    ld   de, Data_018_7729                        ; $7764: $11 $29 $77
+    ld   de, BuzzBlobSpriteVariants               ; $7764: $11 $29 $77
     call RenderActiveEntitySpritesPair            ; $7767: $CD $C0 $3B
     call ReturnIfNonInteractive_18                ; $776A: $CD $E8 $7D
     call ApplyRecoilIfNeeded_18                   ; $776D: $CD $15 $7E

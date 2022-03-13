@@ -1,9 +1,17 @@
-Data_006_4AA8::
-    db   $4A, $00, $4C, $00, $4C, $20, $4A, $20   ; $4AA8
-    db   $4E, $00, $4E, $20                       ; $4AB0
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+StalfosAggressiveSpriteVariants:: ; $4AA8
+.variant0
+    db $4A, $00
+    db $4C, $00
+.variant1
+    db $4C, $20
+    db $4A, $20
+.variant2
+    db $4E, $00
+    db $4E, $20
 
 StalfosAggressiveEntityHandler::
-    ld   de, Data_006_4AA8
+    ld   de, StalfosAggressiveSpriteVariants
     call RenderActiveEntitySpritesPair            ; $4AB7: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $4ABA: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $4ABD: $CD $F7 $64

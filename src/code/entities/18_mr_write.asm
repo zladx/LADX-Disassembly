@@ -10,11 +10,17 @@ Data_018_4B55::
     db   $00, $00, $78, $20, $00, $08, $76, $20, $10, $00, $74, $00, $10, $08, $74, $20
     db   $00, $00, $76, $00, $00, $08, $78, $00, $10, $00, $74, $00, $10, $08, $74, $20
 
-Data_018_4B95::
-    db   $7A, $02, $7C, $02
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MrWrite2SpriteVariants::
+.variant0
+    db $7A, $02
+    db $7C, $02
 
-Data_018_4B99::
-    db   $7E, $02, $7E, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MrWrite1SpriteVariants::
+.variant0
+    db $7E, $02
+    db $7E, $22
 
 MrWriteEntityHandler::
     ldh  a, [hActiveEntitySpriteVariant]          ; $4B9D: $F0 $F1
@@ -69,12 +75,12 @@ jr_018_4BE4:
     cp   UNKNOWN_ROOM_A8                          ; $A8 = Mr. Write's house
     jp   z, label_018_4C75                        ; $4BEB: $CA $75 $4C
 
-    ld   de, Data_018_4B95                        ; $4BEE: $11 $95 $4B
+    ld   de, MrWrite2SpriteVariants               ; $4BEE: $11 $95 $4B
     ld   a, [wTradeSequenceItem]                  ; $4BF1: $FA $0E $DB
     cp   TRADING_ITEM_LETTER                      ; $4BF4: $FE $09
     jr   nc, jr_018_4BFB                          ; $4BF6: $30 $03
 
-    ld   de, Data_018_4B99                        ; $4BF8: $11 $99 $4B
+    ld   de, MrWrite1SpriteVariants               ; $4BF8: $11 $99 $4B
 
 jr_018_4BFB:
     xor  a                                        ; $4BFB: $AF

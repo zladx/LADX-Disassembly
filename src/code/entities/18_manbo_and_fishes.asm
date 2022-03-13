@@ -299,9 +299,23 @@ Data_018_478F::
     db   $00, $08, $48, $00, $10, $00, $4A, $00, $10, $08, $4C, $00, $F8, $10, $60, $00
     db   $08, $10, $4E, $00, $18, $10, $62, $00, $00, $18, $5E, $00, $10, $18, $5E, $40
 
-Data_018_481F::
-    db   $FF, $FF, $FF, $FF, $64, $00, $66, $00, $64, $40, $66, $40, $66, $60, $64, $60
-    db   $66, $20, $64, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+ManboAndFishes1SpriteVariants::
+.variant0
+    db $FF, $FF
+    db $FF, $FF
+.variant1
+    db $64, $00
+    db $66, $00
+.varaiant2
+    db $64, $40
+    db $66, $40
+.variant3
+    db $66, $60
+    db $64, $60
+.variant4
+    db $66, $20
+    db $64, $20
 
 func_018_4833::
     ld   hl, wEntitiesPrivateState1Table          ; $4833: $21 $B0 $C2
@@ -311,7 +325,7 @@ func_018_4833::
     ldh  a, [hActiveEntityVisualPosY]             ; $483A: $F0 $EC
     add  $03                                      ; $483C: $C6 $03
     ldh  [hActiveEntityVisualPosY], a             ; $483E: $E0 $EC
-    ld   de, Data_018_481F                        ; $4840: $11 $1F $48
+    ld   de, ManboAndFishes1SpriteVariants        ; $4840: $11 $1F $48
     call RenderActiveEntitySpritesPair            ; $4843: $CD $C0 $3B
     ld   a, $02                                   ; $4846: $3E $02
     call func_015_7964_trampoline                 ; $4848: $CD $A0 $3D
@@ -368,10 +382,35 @@ Data_018_4894::
 Data_018_48A0::
     db   $00, $FC, $7C, $00
 
-Data_018_48A4::
-    db   $00, $04, $78, $00, $00, $0C, $7E, $00, $68, $00, $6A, $00, $6C, $00, $6E, $00
-    db   $70, $00, $70, $20, $6A, $20, $68, $20, $6E, $20, $6C, $20, $72, $00, $74, $00
-    db   $74, $20, $72, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+ManboAndFishes2SpriteVariants::
+.variant0
+    db $00, $04
+    db $78, $00
+.variant1
+    db $00, $0C
+    db $7E, $00
+.variant2
+    db $68, $00
+    db $6A, $00
+.variant3
+    db $6C, $00
+    db $6E, $00
+.variant4
+    db $70, $00
+    db $70, $20
+.variant5
+    db $6A, $20
+    db $68, $20
+.variant6
+    db $6E, $20
+    db $6C, $20
+.varaiant7
+    db $72, $00
+    db $74, $00
+.variant8
+    db $74, $20
+    db $72, $20
 
 label_018_48C8::
     call func_018_48DE
@@ -426,7 +465,7 @@ jr_018_4913:
     jp   func_015_7964_trampoline                 ; $491A: $C3 $A0 $3D
 
 jr_018_491D:
-    ld   de, Data_018_48A4                        ; $491D: $11 $A4 $48
+    ld   de, ManboAndFishes2SpriteVariants        ; $491D: $11 $A4 $48
     call RenderActiveEntitySpritesPair            ; $4920: $CD $C0 $3B
 
 jr_018_4923:

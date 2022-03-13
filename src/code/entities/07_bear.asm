@@ -9,22 +9,28 @@ Data_007_4B8B::
 Data_007_4BAB::
     db   $7E, $07
 
-Data_007_4BAD::
-    db   $7A, $01, $7C, $01
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Bear1SpriteVariants::
+.variant0
+    db $7A, $01
+    db $7C, $01
 
-Data_007_4BB1::
-    db   $7C, $21, $7A, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Bear2SpriteVariants::
+.variant0
+    db $7C, $21
+    db $7A, $21
 
 BearEntityHandler::
     xor  a                                        ; $4BB5: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4BB6: $E0 $F1
     ld   a, $4A                                   ; $4BB8: $3E $4A
     ldh  [hActiveEntityVisualPosY], a             ; $4BBA: $E0 $EC
-    ld   de, Data_007_4BAD                        ; $4BBC: $11 $AD $4B
+    ld   de, Bear1SpriteVariants                  ; $4BBC: $11 $AD $4B
     call RenderActiveEntitySpritesPair            ; $4BBF: $CD $C0 $3B
     ld   a, $68                                   ; $4BC2: $3E $68
     ldh  [hActiveEntityPosX], a                   ; $4BC4: $E0 $EE
-    ld   de, Data_007_4BB1                        ; $4BC6: $11 $B1 $4B
+    ld   de, Bear2SpriteVariants                  ; $4BC6: $11 $B1 $4B
     call RenderActiveEntitySpritesPair            ; $4BC9: $CD $C0 $3B
     ld   a, [wTradeSequenceItem]                  ; $4BCC: $FA $0E $DB
     cp   $06                                      ; $4BCF: $FE $06

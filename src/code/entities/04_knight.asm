@@ -164,8 +164,17 @@ jr_004_6A8A:
 jr_004_6AA6:
     ret                                           ; $6AA6: $C9
 
-Data_004_6AA7::
-    db   $70, $02, $72, $02, $74, $02, $76, $02, $78, $02, $78, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+KnightSpriteVariants::
+.variant0
+    db $70, $02
+    db $72, $02
+.variant1
+    db $74, $02
+    db $76, $02
+.variant2
+    db $78, $02
+    db $78, $22
 
 Data_004_6AB3::
     db   $0A, $06, $03, $01
@@ -174,7 +183,7 @@ Data_004_6AB7::
     db   $00, $01, $03, $06, $0A, $0E, $11, $13, $14, $13, $11, $0E, $0A, $06, $03, $01
 
 func_004_6AC7::
-    ld   de, Data_004_6AA7                        ; $6AC7: $11 $A7 $6A
+    ld   de, KnightSpriteVariants                 ; $6AC7: $11 $A7 $6A
     call RenderActiveEntitySpritesPair            ; $6ACA: $CD $C0 $3B
     ld   hl, wEntitiesPrivateState3Table          ; $6ACD: $21 $D0 $C2
     add  hl, bc                                   ; $6AD0: $09
@@ -276,7 +285,7 @@ jr_004_6B31:
 jr_004_6B51:
     ld   a, $02                                   ; $6B51: $3E $02
     ldh  [hActiveEntitySpriteVariant], a          ; $6B53: $E0 $F1
-    ld   de, Data_004_6AA7                        ; $6B55: $11 $A7 $6A
+    ld   de, KnightSpriteVariants                 ; $6B55: $11 $A7 $6A
     call RenderActiveEntitySpritesPair            ; $6B58: $CD $C0 $3B
     ld   hl, wEntitiesPrivateState4Table          ; $6B5B: $21 $40 $C4
     add  hl, bc                                   ; $6B5E: $09

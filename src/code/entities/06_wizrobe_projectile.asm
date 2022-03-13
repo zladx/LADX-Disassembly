@@ -1,5 +1,17 @@
-Data_006_65E1::
-    db   $6A, $23, $68, $23, $68, $03, $6A, $03, $6C, $43, $6C, $63, $6C, $03, $6C, $23
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+WizrobeProjectileSpriteVariants::
+.variant0
+    db $6A, $23
+    db $68, $23
+.variant1
+    db $68, $03
+    db $6A, $03
+.variant2
+    db $6C, $43
+    db $6C, $63
+.variant3
+    db $6C, $03
+    db $6C, $23
 
 WizrobeProjectileEntityHandler::
     ; Flip palette every 8 frame
@@ -9,7 +21,7 @@ WizrobeProjectileEntityHandler::
     and  OAMF_PAL1                                ; $65F5: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $65F7: $E0 $ED
 
-    ld   de, Data_006_65E1                        ; $65F9: $11 $E1 $65
+    ld   de, WizrobeProjectileSpriteVariants      ; $65F9: $11 $E1 $65
     call RenderActiveEntitySpritesPair            ; $65FC: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $65FF: $CD $C6 $64
     call CheckLinkCollisionWithProjectile_trampoline; $6602: $CD $4F $3B

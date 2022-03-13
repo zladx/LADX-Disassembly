@@ -1,7 +1,38 @@
-Data_018_59B8::
-    db   $42, $21, $40, $21, $40, $01, $42, $01, $44, $01, $46, $01, $46, $21, $44, $21
-    db   $48, $01, $4A, $01, $4C, $01, $4E, $01, $4A, $21, $48, $21, $4E, $21, $4C, $21
-    db   $50, $01, $52, $01, $54, $01, $54, $21, $52, $21, $50, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MarinAsFollowerSpriteVariants::
+.variant0
+    db $42, $21
+    db $40, $21
+.variant1
+    db $40, $01
+    db $42, $01
+.variant2
+    db $44, $01
+    db $46, $01
+.variant3
+    db $46, $21
+    db $44, $21
+.variant4
+    db $48, $01
+    db $4A, $01
+.variant5
+    db $4C, $01
+    db $4E, $01
+.variant6
+    db $4A, $21
+    db $48, $21
+.variant7
+    db $4E, $21
+    db $4C, $21
+.variant8
+    db $50, $01
+    db $52, $01
+.variant9
+    db $54, $01
+    db $54, $21
+.variant10
+    db $52, $21
+    db $50, $21
 
 Data_018_59E4::
     db   $06, $04, $02, $00
@@ -46,7 +77,7 @@ jr_018_5A07:
 jr_018_5A18:
     xor  a                                        ; $5A18: $AF
     ld   [wEntitiesSpriteVariantTable], a         ; $5A19: $EA $B0 $C3
-    ld   de, Data_018_59B8                        ; $5A1C: $11 $B8 $59
+    ld   de, MarinAsFollowerSpriteVariants        ; $5A1C: $11 $B8 $59
     call RenderActiveEntitySpritesPair            ; $5A1F: $CD $C0 $3B
     ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $5A22: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $5A24: $E0 $9D
@@ -179,7 +210,7 @@ jr_018_5A8C::
     pop  bc                                       ; $5AE6: $C1
 
 jr_018_5AE7:
-    ld   de, Data_018_59B8                        ; $5AE7: $11 $B8 $59
+    ld   de, MarinAsFollowerSpriteVariants        ; $5AE7: $11 $B8 $59
     call RenderActiveEntitySpritesPair            ; $5AEA: $CD $C0 $3B
     ld   a, [wInventoryAppearing]                 ; $5AED: $FA $4F $C1
     and  a                                        ; $5AF0: $A7

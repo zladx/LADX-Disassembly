@@ -1,11 +1,34 @@
-Data_006_4000::
-    db   $50, $03, $52, $03, $54, $03, $56, $03, $50, $03, $52, $03, $54, $03, $56, $03
-    db   $58, $03, $5A, $03, $5C, $03, $5E, $03, $5A, $23, $58, $23, $5E, $23, $5C, $23
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+RichardSpriteVariants::
+.variant0
+    db $50, $03
+    db $52, $03
+.variant1
+    db $54, $03
+    db $56, $03
+.variant2
+    db $50, $03
+    db $52, $03
+.variant3
+    db $54, $03
+    db $56, $03
+.variant4
+    db $58, $03
+    db $5A, $03
+.variant5
+    db $5C, $03
+    db $5E, $03
+.variant6
+    db $5A, $23
+    db $58, $23
+.variant7
+    db $5E, $23
+    db $5C, $23
 
 RichardEntityHandler::
     ld   a, $21                                   ; $4020: $3E $21
     ldh  [hActiveEntityVisualPosY], a             ; $4022: $E0 $EC
-    ld   de, Data_006_4000                        ; $4024: $11 $00 $40
+    ld   de, RichardSpriteVariants                ; $4024: $11 $00 $40
     call RenderActiveEntitySpritesPair            ; $4027: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $402A: $CD $C6 $64
     ldh  a, [hFrameCounter]                       ; $402D: $F0 $E7

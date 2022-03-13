@@ -886,17 +886,14 @@ EntityInitGiantBuzzBlob::
     ld   [hl], a                                  ; $4C40: $77
     jp   EntityInitNoop                           ; $4C41: $C3 $56 $4B
 
-; Seems to be both code and data
-EntityInitSmallExplosion::
-EntityExplosionDisplayList::
-    inc  [hl]                                     ; $4C44: $34
-    ld   [bc], a                                  ; $4C45: $02
-    inc  [hl]                                     ; $4C46: $34
-    ld   [hl+], a                                 ; $4C47: $22
-    inc  [hl]                                     ; $4C48: $34
-    inc  d                                        ; $4C49: $14
-    inc  [hl]                                     ; $4C4A: $34
-    inc  [hl]                                     ; $4C4B: $34
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+EntityExplosionSpriteVariants::
+.variant0 ; $4C44
+    db $34, $02
+    db $34, $22
+.variant1 ; $4C48
+    db $34, $14
+    db $34, $34
 
 EntityDestructionHandler::
     call GetEntityTransitionCountdown             ; $4C4C: $CD $05 $0C
@@ -909,7 +906,7 @@ EntityDestructionHandler::
     rra                                           ; $4C55: $1F
     and  $01                                      ; $4C56: $E6 $01
     ldh  [hActiveEntitySpriteVariant], a          ; $4C58: $E0 $F1
-    ld   de, EntityExplosionDisplayList           ; $4C5A: $11 $44 $4C
+    ld   de, EntityExplosionSpriteVariants        ; $4C5A: $11 $44 $4C
     call RenderActiveEntitySpritesPair            ; $4C5D: $CD $C0 $3B
     ld   hl, wEntitiesSpriteVariantTable          ; $4C60: $21 $B0 $C3
     add  hl, bc                                   ; $4C63: $09
@@ -963,8 +960,11 @@ Data_003_4CA8::
 Data_003_4CAC::
     db   $24, $01, $24, $01, $3E, $01
 
-Data_003_4CB2::
-    db   $1E, $01, $1E, $61
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown020SpriteVariants::
+.variant0
+    db $1E, $01
+    db $1E, $61
 
 EntityFallHandler::
     ldh  a, [hMapId]                              ; $4CB6: $F0 $F7
@@ -1069,7 +1069,7 @@ jr_003_4D29:
 
     xor  a                                        ; $4D46: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4D47: $E0 $F1
-    ld   de, Data_003_4CB2                        ; $4D49: $11 $B2 $4C
+    ld   de, Unknown020SpriteVariants             ; $4D49: $11 $B2 $4C
     call RenderActiveEntitySpritesPair            ; $4D4C: $CD $C0 $3B
     jr   jr_003_4D57                              ; $4D4F: $18 $06
 
@@ -1533,8 +1533,14 @@ Data_003_4FCB::
     db   $60, $02, $62, $02, $62, $22, $60, $22, $64, $02, $66, $02, $66, $22, $64, $22
     db   $68, $02, $6A, $02, $6C, $02, $6E, $02, $6A, $22, $68, $22, $6E, $22, $6C, $22
 
-Data_003_4FEB::
-    db   $70, $02, $72, $02, $72, $22, $70, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+IronMaskSpriteVariants::
+.variant0
+    db $70, $02
+    db $72, $02
+.variant1
+    db $72, $22
+    db $70, $22
 
 Data_003_4FF3::
     db   $0C, $F4, $00, $00
@@ -1549,7 +1555,7 @@ IronMaskEntityHandler::
     and  a                                        ; $5000: $A7
     jr   z, .return                               ; $5001: $28 $45
 
-    ld   de, Data_003_4FEB                        ; $5003: $11 $EB $4F
+    ld   de, IronMaskSpriteVariants               ; $5003: $11 $EB $4F
     call RenderActiveEntitySpritesPair            ; $5006: $CD $C0 $3B
     call ReturnIfNonInteractive_03                ; $5009: $CD $78 $7F
     call ApplyRecoilIfNeeded_03                   ; $500C: $CD $A9 $7F
@@ -2133,8 +2139,11 @@ Data_003_5480::
     db   $32, $01, $32, $61
 
 ; Explosion GFX display list
-Data_003_5484::
-    db   $30, $01, $30, $61
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown022SpriteVariants::
+.variant0
+    db $30, $01
+    db $30, $61
 
 Data_003_5488::
     db   $00, $00, $3C, $01, $00, $08, $3C, $21, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
@@ -2717,13 +2726,15 @@ include "code/entities/03_moblin.asm"
 EntityInitBrokenHeartContainer::
     ret                                           ; $59D7: $C9
 
-HeartContainerTilesTable::
-    ;   Tile Attr Tile Attr
-    db   $AA, $14, $AA, $34
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+HeartContainerSpriteVariants::
+.variant0
+    db $AA, $14
+    db $AA, $34
 
 ; Loop run every frame heart container is on screen
 HeartContainerEntityHandler::
-    ld   de, HeartContainerTilesTable             ; $59DC: $11 $D8 $59
+    ld   de, HeartContainerSpriteVariants         ; $59DC: $11 $D8 $59
     call RenderActiveEntitySpritesPair            ; $59DF: $CD $C0 $3B
     call GetEntityTransitionCountdown             ; $59E2: $CD $05 $0C
     jp   z, label_003_60AA                        ; $59E5: $CA $AA $60
@@ -2807,8 +2818,11 @@ func_003_5A2E::
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5A4A: $E0 $A1
     ret                                           ; $5A4C: $C9
 
-Data_003_5A4D::
-    db   $AC, $02, $AC, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+HeartPieceSpriteVariants::
+.variant0
+    db $AC, $02
+    db $AC, $22
 
 HeartPieceEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5A51: $F0 $F8
@@ -2855,7 +2869,7 @@ HeartPieceState4Handler::
 
 HeartPieceState5Handler::
     call HoldEntityAboveLink                      ; $5A98: $CD $17 $5A
-    ld   de, Data_003_5A4D                        ; $5A9B: $11 $4D $5A
+    ld   de, HeartPieceSpriteVariants             ; $5A9B: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5A9E: $CD $C0 $3B
     call func_003_5B2B                            ; $5AA1: $CD $2B $5B
     ld   hl, wEntitiesInertiaTable                ; $5AA4: $21 $D0 $C3
@@ -2877,7 +2891,7 @@ jr_003_5ABA:
 
 HeartPieceState6Handler::
     call HoldEntityAboveLink                      ; $5ABB: $CD $17 $5A
-    ld   de, Data_003_5A4D                        ; $5ABE: $11 $4D $5A
+    ld   de, HeartPieceSpriteVariants             ; $5ABE: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5AC1: $CD $C0 $3B
     xor  a                                        ; $5AC4: $AF
     ld   [wC1AB], a                               ; $5AC5: $EA $AB $C1
@@ -2910,7 +2924,7 @@ jr_003_5AED:
 
 HeartPieceState7Handler::
     call HoldEntityAboveLink                      ; $5AF0: $CD $17 $5A
-    ld   de, Data_003_5A4D                        ; $5AF3: $11 $4D $5A
+    ld   de, HeartPieceSpriteVariants             ; $5AF3: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5AF6: $CD $C0 $3B
     ld   a, [wDialogState]                        ; $5AF9: $FA $9F $C1
     and  a                                        ; $5AFC: $A7
@@ -2930,9 +2944,23 @@ HeartPieceState8Handler::
     ld   [wC167], a                               ; $5B11: $EA $67 $C1
     jp   MarkRoomCompleted                        ; $5B14: $C3 $2A $51
 
-Data_003_5B17::
-    db   $9A, $02, $9A, $22, $9C, $02, $9A, $22, $9E, $02, $9A, $22, $9E, $02, $9C, $22
-    db   $9E, $02, $9E, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown021SpriteVariants::
+.variant0
+    db $9A, $02
+    db $9A, $22
+.variant1
+    db $9C, $02
+    db $9A, $22
+.variant2
+    db $9E, $02
+    db $9A, $22
+.variant3
+    db $9E, $02
+    db $9C, $22
+.variant4
+    db $9E, $02
+    db $9E, $22
 
 func_003_5B2B::
     ld   a, [wDialogState]                        ; $5B2B: $FA $9F $C1
@@ -2956,11 +2984,11 @@ jr_003_5B41:
     ldh  [hActiveEntitySpriteVariant], a          ; $5B46: $E0 $F1
     ld   a, $8E                                   ; $5B48: $3E $8E
     ldh  [hActiveEntityPosX], a                   ; $5B4A: $E0 $EE
-    ld   de, Data_003_5B17                        ; $5B4C: $11 $17 $5B
+    ld   de, Unknown021SpriteVariants             ; $5B4C: $11 $17 $5B
     jp   RenderActiveEntitySpritesPair            ; $5B4F: $C3 $C0 $3B
 
 HeartPieceState0Handler::
-    ld   de, Data_003_5A4D                        ; $5B52: $11 $4D $5A
+    ld   de, HeartPieceSpriteVariants             ; $5B52: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5B55: $CD $C0 $3B
     jp   label_003_60AA                           ; $5B58: $C3 $AA $60
 
@@ -2972,11 +3000,17 @@ GuardianAcornEntityHandler::
     call RenderActiveEntitySprite                 ; $5B60: $CD $77 $3C
     jr   jr_003_5B7D                              ; $5B63: $18 $18
 
-Data_003_5B65::
-    db   $14, $02, $14, $22, $14, $14, $14, $34
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+PieceOfPowerSpriteVariants::
+.variant0
+    db $14, $02
+    db $14, $22
+.variant1
+    db $14, $14
+    db $14, $34
 
 PieceOfPowerEntityHandler::
-    ld   de, Data_003_5B65                        ; $5B6D: $11 $65 $5B
+    ld   de, PieceOfPowerSpriteVariants           ; $5B6D: $11 $65 $5B
     call RenderActiveEntitySpritesPair            ; $5B70: $CD $C0 $3B
     ldh  a, [hFrameCounter]                       ; $5B73: $F0 $E7
     rra                                           ; $5B75: $1F
@@ -2988,11 +3022,17 @@ PieceOfPowerEntityHandler::
 jr_003_5B7D:
     jp   label_003_60AA                           ; $5B7D: $C3 $AA $60
 
-Data_003_5B80::
-    db   $74, $00, $76, $00, $76, $20, $74, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+IronMasksMaskSpriteVariants::
+.variant0
+    db $74, $00
+    db $76, $00
+.variant1
+    db $76, $20
+    db $74, $20
 
 IronMasksMaskEntityHandler::
-    ld   de, Data_003_5B80                        ; $5B88: $11 $80 $5B
+    ld   de, IronMasksMaskSpriteVariants          ; $5B88: $11 $80 $5B
     call RenderActiveEntitySpritesPair            ; $5B8B: $CD $C0 $3B
     call ReturnIfNonInteractive_03                ; $5B8E: $CD $78 $7F
     call func_003_62AF                            ; $5B91: $CD $AF $62
@@ -3302,8 +3342,11 @@ DroppableHeartEntityHandler::
     call RenderActiveEntitySprite                 ; $5D41: $CD $77 $3C
     jp   label_003_60AA                           ; $5D44: $C3 $AA $60
 
-Data_003_5D47::
-    db   $5E, $02, $5E, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+SleepyToadstoolSpriteVariants::
+.variant0
+    db $5E, $02
+    db $5E, $22
 
 SleepyToadstoolEntityHandler::
     ld   hl, wHasToadstool                        ; $5D4B: $21 $4B $DB
@@ -3311,7 +3354,7 @@ SleepyToadstoolEntityHandler::
     or   [hl]                                     ; $5D51: $B6
     jp   nz, UnloadEntityAndReturn                ; $5D52: $C2 $8D $3F
 
-    ld   de, Data_003_5D47                        ; $5D55: $11 $47 $5D
+    ld   de, SleepyToadstoolSpriteVariants        ; $5D55: $11 $47 $5D
     call RenderActiveEntitySpritesPair            ; $5D58: $CD $C0 $3B
     call GetEntityTransitionCountdown             ; $5D5B: $CD $05 $0C
     jp   z, label_003_60AA                        ; $5D5E: $CA $AA $60
@@ -3344,8 +3387,20 @@ jr_003_5D80:
     jp   HoldEntityAboveLink                      ; $5D80: $C3 $17 $5A
 ENDC
 
-Data_003_5D83::
-    db   $70, $01, $72, $01, $74, $01, $76, $01, $78, $01, $7A, $01, $7C, $01, $7E, $01
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+SirensInstrument2SpriteVariants::
+.variant0
+    db $70, $01
+    db $72, $01
+.variant1
+    db $74, $01
+    db $76, $01
+.variant2
+    db $78, $01
+    db $7A, $01
+.variant3
+    db $7C, $01
+    db $7E, $01
 
 SirensInstrumentEntityHandler::
     ld   hl, wEntitiesPrivateState1Table          ; $5D93: $21 $B0 $C2
@@ -3500,11 +3555,17 @@ jr_003_5E76:
 jr_003_5E8A:
     ret                                           ; $5E8A: $C9
 
-Data_003_5E8B::
-    db   $6C, $00, $FF, $FF, $6C, $00, $6E, $00
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+SirensInstrument1SpriteVariants::
+.variant0
+    db $6C, $00
+    db $FF, $FF
+.variant1
+    db $6C, $00
+    db $6E, $00
 
 SirensInstrumentState1Handler::
-    ld   de, Data_003_5E8B                        ; $5E93: $11 $8B $5E
+    ld   de, SirensInstrument1SpriteVariants      ; $5E93: $11 $8B $5E
     call RenderActiveEntitySpritesPair            ; $5E96: $CD $C0 $3B
     call UpdateEntityPosWithSpeed_03              ; $5E99: $CD $25 $7F
     call GetEntityTransitionCountdown             ; $5E9C: $CD $05 $0C
@@ -3531,7 +3592,7 @@ jr_003_5EAE:
     and  $03                                      ; $5EBB: $E6 $03
     ldh  [hActiveEntitySpriteVariant], a          ; $5EBD: $E0 $F1
     call label_394D                               ; $5EBF: $CD $4D $39
-    ld   de, Data_003_5D83                        ; $5EC2: $11 $83 $5D
+    ld   de, SirensInstrument2SpriteVariants      ; $5EC2: $11 $83 $5D
     call RenderActiveEntitySpritesPair            ; $5EC5: $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ; $5EC8: $F0 $F0
     JP_TABLE                                      ; $5ECA
@@ -3854,13 +3915,16 @@ jr_003_606A:
     call RenderActiveEntitySprite                 ; $6073: $CD $77 $3C
     jp   label_003_60AA                           ; $6076: $C3 $AA $60
 
-Data_003_6079::
-    db   $2A, $41, $2A, $61
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+DroppableArrowSpriteVariants::
+.variant0
+    db $2A, $41
+    db $2A, $61
 
 DroppableArrowsEntityHandler::
     call func_003_61DE                            ; $607D: $CD $DE $61
     call func_003_608C                            ; $6080: $CD $8C $60
-    ld   de, Data_003_6079                        ; $6083: $11 $79 $60
+    ld   de, DroppableArrowSpriteVariants         ; $6083: $11 $79 $60
     call RenderActiveEntitySpritesPair            ; $6086: $CD $C0 $3B
     jp   label_003_60AA                           ; $6089: $C3 $AA $60
 
@@ -4878,7 +4942,7 @@ jr_003_668B:
     ret                                           ; $668B: $C9
 
 jr_003_668C:
-    ld   de, Data_003_5484                        ; $668C: $11 $84 $54
+    ld   de, Unknown022SpriteVariants             ; $668C: $11 $84 $54
     call RenderActiveEntitySpritesPair            ; $668F: $CD $C0 $3B
     call ReturnIfNonInteractive_03                ; $6692: $CD $78 $7F
     ret                                           ; $6695: $C9
@@ -5315,9 +5379,14 @@ Data_003_69A2::
 
 include "code/entities/03_hookshot_hit.asm"
 
-
-Data_003_6A1E::
-    db   $6C, $01, $6C, $21, $5C, $01, $5C, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+OctorokRockSpriteVariants::
+.variant0
+    db $6C, $01
+    db $6C, $21
+.variant1
+    db $5C, $01
+    db $5C, $21
 
 OctorokRockEntityHandler::
     call GetEntityTransitionCountdown             ; $6A26: $CD $05 $0C
@@ -5326,8 +5395,8 @@ OctorokRockEntityHandler::
     call CheckLinkCollisionWithProjectile         ; $6A2B: $CD $DE $6B
 
 jr_003_6A2E:
-    ld   de, Data_003_6A1E                        ; $6A2E: $11 $1E $6A
-    jp   func_003_6AD7                            ; $6A31: $C3 $D7 $6A
+    ld   de, OctorokRockSpriteVariants            ; $6A2E: $11 $1E $6A
+    jp   RenderActiveEntitySpritesPairSubcall     ; $6A31: $C3 $D7 $6A
 
 include "code/entities/03_arrow.asm"
 
@@ -5386,7 +5455,7 @@ jr_003_6A96:
     call CopyEntityPositionToActivePosition       ; $6AB6: $CD $8A $3D
     pop  af                                       ; $6AB9: $F1
     ldh  [hActiveEntitySpriteVariant], a          ; $6ABA: $E0 $F1
-    ld   de, Data_003_6BC6                        ; $6ABC: $11 $C6 $6B
+    ld   de, EntityMoblinArrowSpriteVariants      ; $6ABC: $11 $C6 $6B
     call RenderActiveEntitySpritesPair            ; $6ABF: $CD $C0 $3B
     ld   a, $0C                                   ; $6AC2: $3E $0C
     ld   [wC19E], a                               ; $6AC4: $EA $9E $C1
@@ -5395,14 +5464,14 @@ jr_003_6A96:
 
 MoblinArrowEntityHandler::
     call GetEntityTransitionCountdown             ; $6ACC: $CD $05 $0C
-    jr   nz, func_003_6AD4                        ; $6ACF: $20 $03
+    jr   nz, LoadMobilArrowSpriteVariants         ; $6ACF: $20 $03
 
     call CheckLinkCollisionWithProjectile         ; $6AD1: $CD $DE $6B
 
-func_003_6AD4::
-    ld   de, Data_003_6BC6                        ; $6AD4: $11 $C6 $6B
+LoadMobilArrowSpriteVariants::
+    ld   de, EntityMoblinArrowSpriteVariants      ; $6AD4: $11 $C6 $6B
 
-func_003_6AD7::
+RenderActiveEntitySpritesPairSubcall::
     call RenderActiveEntitySpritesPair            ; $6AD7: $CD $C0 $3B
 
 jr_003_6ADA:
@@ -5591,8 +5660,20 @@ jr_003_6BAB:
 jr_003_6BC5:
     ret                                           ; $6BC5: $C9
 
-Data_003_6BC6::
-    db   $2E, $21, $2C, $21, $2C, $01, $2E, $01, $2A, $41, $2A, $61, $2A, $01, $2A, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+EntityMoblinArrowSpriteVariants::
+.variant0
+    db $2E, $21
+    db $2C, $21
+.variant1
+    db $2C, $01
+    db $2E, $01
+.variant2
+    db $2A, $41
+    db $2A, $61
+.variant3
+    db $2A, $01
+    db $2A, $21
 
 ; For a given direction, get the opposite direction
 ReversedDirectionsTable::

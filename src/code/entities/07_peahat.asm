@@ -1,8 +1,14 @@
-Data_007_6701::
-    db   $40, $02, $40, $22, $42, $02, $42, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+PeaHatSpriteVariants::
+.variant0
+    db $40, $02
+    db $40, $22
+.variant1
+    db $42, $02
+    db $42, $22
 
 PeaHatEntityHandler::
-    ld   de, Data_007_6701                        ; $6709: $11 $01 $67
+    ld   de, PeaHatSpriteVariants                 ; $6709: $11 $01 $67
     call RenderActiveEntitySpritesPair            ; $670C: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $670F: $CD $96 $7D
     call ApplyRecoilIfNeeded_07                   ; $6712: $CD $C3 $7D

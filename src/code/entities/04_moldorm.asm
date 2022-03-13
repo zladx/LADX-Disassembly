@@ -268,9 +268,20 @@ Data_004_57F2::
     db   $08, $F8, $60, $40, $08, $00, $62, $40   ; $58E2
     db   $08, $08, $6E, $20, $08, $10, $6C, $20   ; $58EA
 
-Data_004_58F2::
-    db   $70, $00, $70, $20, $72, $00, $72, $20   ; $58F2
-    db   $74, $00, $74, $20, $76, $00, $76, $20   ; $58FA
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MoldormSpriteVariants:: ; $58F2
+.variant0
+    db $70, $00
+    db $70, $20
+.variant1
+    db $72, $00
+    db $72, $20
+.variant2
+    db $74, $00
+    db $74, $20
+.variant3
+    db $76, $00
+    db $76, $20
 
 func_004_5902::
     ld   hl, wEntitiesPrivateState3Table          ; $5902: $21 $D0 $C2
@@ -327,7 +338,7 @@ jr_004_5924:
     ldh  [hActiveEntityVisualPosY], a             ; $5954: $E0 $EC
     ld   a, $00                                   ; $5956: $3E $00
     ldh  [hActiveEntitySpriteVariant], a          ; $5958: $E0 $F1
-    ld   de, Data_004_58F2                        ; $595A: $11 $F2 $58
+    ld   de, MoldormSpriteVariants                ; $595A: $11 $F2 $58
     call RenderActiveEntitySpritesPair            ; $595D: $CD $C0 $3B
     ld   hl, wEntitiesPrivateState3Table          ; $5960: $21 $D0 $C2
 
@@ -352,7 +363,7 @@ jr_004_5963:
     ldh  [hActiveEntityVisualPosY], a             ; $597E: $E0 $EC
     ld   a, $00                                   ; $5980: $3E $00
     ldh  [hActiveEntitySpriteVariant], a          ; $5982: $E0 $F1
-    ld   de, Data_004_58F2                        ; $5984: $11 $F2 $58
+    ld   de, MoldormSpriteVariants                ; $5984: $11 $F2 $58
     call RenderActiveEntitySpritesPair            ; $5987: $CD $C0 $3B
     ld   hl, wEntitiesPrivateState3Table          ; $598A: $21 $D0 $C2
     add  hl, bc                                   ; $598D: $09
@@ -375,7 +386,7 @@ jr_004_5963:
     ldh  [hActiveEntityVisualPosY], a             ; $59A7: $E0 $EC
     ld   a, $01                                   ; $59A9: $3E $01
     ldh  [hActiveEntitySpriteVariant], a          ; $59AB: $E0 $F1
-    ld   de, Data_004_58F2                        ; $59AD: $11 $F2 $58
+    ld   de, MoldormSpriteVariants                ; $59AD: $11 $F2 $58
     call RenderActiveEntitySpritesPair            ; $59B0: $CD $C0 $3B
     ld   hl, wEntitiesPrivateState3Table          ; $59B3: $21 $D0 $C2
     add  hl, bc                                   ; $59B6: $09
@@ -410,7 +421,7 @@ jr_004_5963:
     ld   hl, hActiveEntityFlipAttribute           ; $59E2: $21 $ED $FF
     xor  [hl]                                     ; $59E5: $AE
     ld   [hl], a                                  ; $59E6: $77
-    ld   de, Data_004_58F2                        ; $59E7: $11 $F2 $58
+    ld   de, MoldormSpriteVariants                ; $59E7: $11 $F2 $58
     call RenderActiveEntitySpritesPair            ; $59EA: $CD $C0 $3B
     ld   hl, wEntitiesFlashCountdownTable         ; $59ED: $21 $20 $C4
     add  hl, bc                                   ; $59F0: $09

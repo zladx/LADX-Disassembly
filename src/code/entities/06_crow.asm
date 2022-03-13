@@ -1,5 +1,17 @@
-Data_006_5C89::
-    db   $50, $03, $52, $03, $54, $03, $56, $03, $52, $23, $50, $23, $56, $23, $54, $23
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+CrowSpriteVariants::
+.variant0
+    db $50, $03
+    db $52, $03
+.variant1
+    db $54, $03
+    db $56, $03
+.variant2
+    db $52, $23
+    db $50, $23
+.variant3
+    db $56, $23
+    db $54, $23
 
 CrowEntityHandler::
     ldh  a, [hMapRoom]                            ; $5C99: $F0 $F6
@@ -43,7 +55,7 @@ jr_006_5CBE:
     ldh  [hActiveEntitySpriteVariant], a          ; $5CCA: $E0 $F1
 
 jr_006_5CCC:
-    ld   de, Data_006_5C89                        ; $5CCC: $11 $89 $5C
+    ld   de, CrowSpriteVariants                   ; $5CCC: $11 $89 $5C
     call RenderActiveEntitySpritesPair            ; $5CCF: $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ; $5CD2: $F0 $F0
     and  a                                        ; $5CD4: $A7

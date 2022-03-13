@@ -1,5 +1,11 @@
-Data_003_69AA::
-    db   $36, $02, $36, $22, $36, $12, $36, $32   ; $69AA
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown005SpriteVariants::
+.variant0 ; $69AA
+    db $36, $02
+    db $36, $22
+.variant1 ; $69AE
+    db $36, $12
+    db $36, $32
 
 MagicRodFireballEntityHandler::
     ld   hl, wActiveProjectileCount               ; $69B2: $21 $4D $C1
@@ -21,12 +27,12 @@ MagicRodFireballEntityHandler::
     dec  a                                        ; $69CF: $3D
     jp   z, UnloadEntity                          ; $69D0: $CA $8D $3F
 
-    ld   de, EntityExplosionDisplayList           ; $69D3: $11 $44 $4C
+    ld   de, EntityExplosionSpriteVariants        ; $69D3: $11 $44 $4C
     jp   RenderActiveEntitySpritesPair            ; $69D6: $C3 $C0 $3B
 
 jr_003_69D9:
-    ld   de, Data_003_69AA                        ; $69D9: $11 $AA $69
-    call func_003_6AD7                            ; $69DC: $CD $D7 $6A
+    ld   de, Unknown005SpriteVariants             ; $69D9: $11 $AA $69
+    call RenderActiveEntitySpritesPairSubcall     ; $69DC: $CD $D7 $6A
     call ReturnIfNonInteractive_03                ; $69DF: $CD $78 $7F
     ld   a, [wIsIndoor]                           ; $69E2: $FA $A5 $DB
     and  a                                        ; $69E5: $A7

@@ -1,18 +1,52 @@
-Data_004_7CEF::
-    db   $7A, $20, $78, $20, $78, $00, $7A, $00, $7E, $00, $7E, $20, $70, $00, $72, $00
-    db   $74, $00, $76, $00, $7C, $00, $7C, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Bombite1SpriteVariants::
+.variant0
+    db $7A, $20
+    db $78, $20
+.variant1
+    db $78, $00
+    db $7A, $00
+.variant2
+    db $7E, $00
+    db $7E, $20
+.variant3
+    db $70, $00
+    db $72, $00
+.variant4
+    db $74, $00
+    db $76, $00
+.variant5
+    db $7C, $00
+    db $7C, $20
 
-Data_004_7D07::
-    db   $6A, $20, $68, $20, $68, $00, $6A, $00, $6E, $00, $6E, $20, $60, $00, $62, $00
-    db   $64, $00, $66, $00, $6C, $00, $6C, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Bombite2SpriteVariants::
+.variant0
+    db $6A, $20
+    db $68, $20
+.variant1
+    db $68, $00
+    db $6A, $00
+.variant2
+    db $6E, $00
+    db $6E, $20
+.variant3
+    db $60, $00
+    db $62, $00
+.variant4
+    db $64, $00
+    db $66, $00
+.variant5
+    db $6C, $00
+    db $6C, $20
 
 TimerBombiteEntityHandler::
-    ld   de, Data_004_7CEF                        ; $7D1F: $11 $EF $7C
+    ld   de, Bombite1SpriteVariants               ; $7D1F: $11 $EF $7C
     ldh  a, [hMapId]                              ; $7D22: $F0 $F7
     cp   MAP_TURTLE_ROCK                          ; $7D24: $FE $07
     jr   nz, jr_004_7D2B                          ; $7D26: $20 $03
 
-    ld   de, Data_004_7D07                        ; $7D28: $11 $07 $7D
+    ld   de, Bombite2SpriteVariants               ; $7D28: $11 $07 $7D
 
 jr_004_7D2B:
     call GetEntityPrivateCountdown1               ; $7D2B: $CD $00 $0C
@@ -149,11 +183,23 @@ jr_004_7DE5:
     ld   a, [hl]                                  ; $7DF1: $7E
     jp   SetEntitySpriteVariant                   ; $7DF2: $C3 $0C $3B
 
-Data_004_7DF5::
-    db   $7A, $22, $78, $22, $78, $02, $7A, $02
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+BouncingBombite1SpriteVariants::
+.variant0
+    db $7A, $22
+    db $78, $22
+.variant1
+    db $78, $02
+    db $7A, $02
 
-Data_004_7DFD::
-    db   $6A, $22, $68, $22, $68, $02, $6A, $02
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+BouncingBombite2SpriteVariants::
+.variant0
+    db $6A, $22
+    db $68, $22
+.variant1
+    db $68, $02
+    db $6A, $02
 
 Data_004_7E05::
     db   $08, $F8, $00, $00
@@ -162,12 +208,12 @@ Data_004_7E09::
     db   $00, $00, $F8, $08
 
 BouncingBombiteEntityHandler::
-    ld   de, Data_004_7DF5                        ; $7E0D: $11 $F5 $7D
+    ld   de, BouncingBombite1SpriteVariants       ; $7E0D: $11 $F5 $7D
     ldh  a, [hMapId]                              ; $7E10: $F0 $F7
     cp   MAP_TURTLE_ROCK                          ; $7E12: $FE $07
     jr   nz, jr_004_7E19                          ; $7E14: $20 $03
 
-    ld   de, Data_004_7DFD                        ; $7E16: $11 $FD $7D
+    ld   de, BouncingBombite2SpriteVariants       ; $7E16: $11 $FD $7D
 
 jr_004_7E19:
     call RenderActiveEntitySpritesPair            ; $7E19: $CD $C0 $3B

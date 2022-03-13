@@ -1,6 +1,29 @@
-Data_004_6C2D::
-    db   $70, $03, $70, $23, $78, $03, $7A, $03, $74, $03, $76, $03, $7C, $03, $7E, $03
-    db   $72, $03, $72, $23, $7E, $23, $7C, $23, $76, $23, $74, $23, $7A, $23, $78, $23
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+LaserSpriteVariants::
+.variant0
+    db $70, $03
+    db $70, $23
+.variant1
+    db $78, $03
+    db $7A, $03
+.variant2
+    db $74, $03
+    db $76, $03
+.variant3
+    db $7C, $03
+    db $7E, $03
+.variant4
+    db $72, $03
+    db $72, $23
+.variant5
+    db $7E, $23
+    db $7C, $23
+.variant6
+    db $76, $23
+    db $74, $23
+.variant7
+    db $7A, $23
+    db $78, $23
 
 Data_004_6C4D::
     db   $10, $0E, $0C, $06
@@ -13,7 +36,7 @@ LaserEntityHandler::
     and  a                                        ; $6C63: $A7
     jp   nz, label_004_6D0F                       ; $6C64: $C2 $0F $6D
 
-    ld   de, Data_004_6C2D                        ; $6C67: $11 $2D $6C
+    ld   de, LaserSpriteVariants                  ; $6C67: $11 $2D $6C
     call RenderActiveEntitySpritesPair            ; $6C6A: $CD $C0 $3B
     call ReturnIfNonInteractive_04                ; $6C6D: $CD $A3 $7F
     call label_3B44                               ; $6C70: $CD $44 $3B

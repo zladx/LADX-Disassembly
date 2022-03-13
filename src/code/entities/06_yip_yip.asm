@@ -1,10 +1,56 @@
-Data_006_59A8::
-    db   $70, $02, $72, $02, $74, $02, $76, $02, $72, $22, $70, $22, $76, $22, $74, $22
-    db   $00, $02, $02, $02, $04, $02, $06, $02, $02, $22, $00, $22, $06, $22, $04, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+YipYip1SpriteVariants::
+.variant0
+    db $70, $02
+    db $72, $02
+.variant1
+    db $74, $02
+    db $76, $02
+.variant2
+    db $72, $22
+    db $70, $22
+.variant3
+    db $76, $22
+    db $74, $22
+.variant4
+    db $00, $02
+    db $02, $02
+.variant5
+    db $04, $02
+    db $06, $02
+.variant6
+    db $02, $22
+    db $00, $22
+.variant7
+    db $06, $22
+    db $04, $22
 
-Data_006_59C8::
-    db   $78, $02, $7A, $02, $7C, $02, $7E, $02, $7A, $22, $78, $22, $7E, $22, $7C, $22
-    db   $10, $02, $12, $02, $14, $02, $16, $02, $12, $22, $10, $22, $16, $22, $14, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+YipYip2SpriteVariants::
+.variant0
+    db $78, $02
+    db $7A, $02
+.variant1
+    db $7C, $02
+    db $7E, $02
+.variant2
+    db $7A, $22
+    db $78, $22
+.variant3
+    db $7E, $22
+    db $7C, $22
+.variant4
+    db $10, $02
+    db $12, $02
+.variant5
+    db $14, $02
+    db $16, $02
+.variant6
+    db $12, $22
+    db $10, $22
+.variant7
+    db $16, $22
+    db $14, $22
 
 YipYipEntityHandler::
     ld   a, [wDialogState]                        ; $59E8: $FA $9F $C1
@@ -43,7 +89,7 @@ jr_006_5A0D:
     ldh  [hActiveEntitySpriteVariant], a          ; $5A19: $E0 $F1
 
 jr_006_5A1B:
-    ld   de, Data_006_59A8                        ; $5A1B: $11 $A8 $59
+    ld   de, YipYip1SpriteVariants                ; $5A1B: $11 $A8 $59
     ld   hl, wEntitiesPrivateState1Table          ; $5A1E: $21 $B0 $C2
     add  hl, bc                                   ; $5A21: $09
     ld   a, [hl]                                  ; $5A22: $7E
@@ -59,7 +105,7 @@ jr_006_5A1B:
     jr   c, jr_006_5A36                           ; $5A31: $38 $03
 
 jr_006_5A33:
-    ld   de, Data_006_59C8                        ; $5A33: $11 $C8 $59
+    ld   de, YipYip2SpriteVariants                ; $5A33: $11 $C8 $59
 
 jr_006_5A36:
     ld   a, [wGameplayType]                       ; $5A36: $FA $95 $DB

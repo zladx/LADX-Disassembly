@@ -76,12 +76,26 @@ jr_018_63D1:
 jr_018_63F7:
     ret                                           ; $63F7: $C9
 
-Data_018_63F8::
-    db   $FF, $FF, $FF, $FF, $6C, $02, $6C, $22, $68, $02, $6A, $02, $60, $02, $62, $02
-    db   $64, $02, $66, $02
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+ZombieSpriteVariants::
+.variant0
+    db $FF, $FF
+    db $FF, $FF
+.variant1
+    db $6C, $02
+    db $6C, $22
+.variant2
+    db $68, $02
+    db $6A, $02
+.variant3
+    db $60, $02
+    db $62, $02
+.variant4
+    db $64, $02
+    db $66, $02
 
 label_018_640C:
-    ld   de, Data_018_63F8                        ; $640C: $11 $F8 $63
+    ld   de, ZombieSpriteVariants                 ; $640C: $11 $F8 $63
     call RenderActiveEntitySpritesPair            ; $640F: $CD $C0 $3B
     call ReturnIfNonInteractive_18                ; $6412: $CD $E8 $7D
     call ApplyRecoilIfNeeded_18                   ; $6415: $CD $15 $7E

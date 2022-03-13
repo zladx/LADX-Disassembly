@@ -1,5 +1,11 @@
-Data_006_6ED5::
-    db   $6C, $07, $6C, $27, $6C, $47, $6C, $67
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+RollingBonesSpriteVariants::
+.variant0
+    db $6C, $07
+    db $6C, $27
+.variant1
+    db $6C, $47
+    db $6C, $67
 
 Data_006_6EDD::
     db   $70, $60, $50, $40, $30, $20
@@ -216,7 +222,7 @@ func_006_6FEA::
     ldh  [hActiveEntityVisualPosY], a
 
 .loop
-    ld   de, Data_006_6ED5                        ; $6FEE: $11 $D5 $6E
+    ld   de, RollingBonesSpriteVariants           ; $6FEE: $11 $D5 $6E
     call RenderActiveEntitySpritesPair            ; $6FF1: $CD $C0 $3B
     ldh  a, [hActiveEntityVisualPosY]             ; $6FF4: $F0 $EC
     add  $10                                      ; $6FF6: $C6 $10

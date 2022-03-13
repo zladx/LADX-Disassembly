@@ -326,9 +326,32 @@ AntiKirbyState4Handler::
     ld   [hl], b                                  ; $4432: $70
     jp   label_006_43B8                           ; $4433: $C3 $B8 $43
 
-Data_006_4436::
-    db   $62, $21, $60, $21, $68, $21, $66, $21, $60, $01, $62, $01, $66, $01, $68, $01
-    db   $62, $21, $60, $21, $68, $21, $66, $21, $60, $01, $62, $01, $66, $01, $68, $01
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+AntiKirbySpriteVariants::
+.variant0
+    db $62, $21
+    db $60, $21
+.variant1
+    db $68, $21
+    db $66, $21
+.variant2
+    db $60, $01
+    db $62, $01
+.variant3
+    db $66, $01
+    db $68, $01
+.variant4
+    db $62, $21
+    db $60, $21
+.variant5
+    db $68, $21
+    db $66, $21
+.variant6
+    db $60, $01
+    db $62, $01
+.variant7
+    db $66, $01
+    db $68, $01
 
 Data_006_4456::
     db   $00, $FC, $62, $21, $00, $04, $6A, $21, $00, $0C, $64, $21, $00, $FC, $64, $01
@@ -345,7 +368,7 @@ func_006_44B6::
     cp   $08                                      ; $44B8: $FE $08
     jr   nc, jr_006_44F1                          ; $44BA: $30 $35
 
-    ld   de, Data_006_4436                        ; $44BC: $11 $36 $44
+    ld   de, AntiKirbySpriteVariants              ; $44BC: $11 $36 $44
     call RenderActiveEntitySpritesPair            ; $44BF: $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ; $44C2: $F0 $F0
     cp   $02                                      ; $44C4: $FE $02

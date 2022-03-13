@@ -196,8 +196,17 @@ jr_007_65B9:
 jr_007_65CB:
     jp   func_007_7EA4                            ; $65CB: $C3 $A4 $7E
 
-Data_007_65CE::
-    db   $4A, $02, $4C, $02, $4C, $22, $4A, $22, $4E, $02, $4E, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+GoombaSpriteVariants::
+.variant0
+    db $4A, $02
+    db $4C, $02
+.variant1
+    db $4C, $22
+    db $4A, $22
+.variant2
+    db $4E, $02
+    db $4E, $22
 
 GoombaEntityHandler::
     ld   hl, wEntitiesPrivateState1Table          ; $65DA: $21 $B0 $C2
@@ -206,7 +215,7 @@ GoombaEntityHandler::
     and  a                                        ; $65DF: $A7
     jp   nz, label_007_6523                       ; $65E0: $C2 $23 $65
 
-    ld   de, Data_007_65CE                        ; $65E3: $11 $CE $65
+    ld   de, GoombaSpriteVariants                 ; $65E3: $11 $CE $65
     call RenderActiveEntitySpritesPair            ; $65E6: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $65E9: $CD $96 $7D
     call ApplyRecoilIfNeeded_07                   ; $65EC: $CD $C3 $7D

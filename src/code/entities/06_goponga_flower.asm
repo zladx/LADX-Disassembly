@@ -1,11 +1,14 @@
-Data_006_63F4::
-    db   $50, $02
-    db   $50, $22
-    db   $52, $02
-    db   $52, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+GopongaFlowerSpriteVariants::
+.variant0
+    db $50, $02
+    db $50, $22
+.variant1
+    db $52, $02
+    db $52, $22
 
 GopongaFlowerEntityHandler::
-    ld   de, Data_006_63F4                        ; $63FC: $11 $F4 $63
+    ld   de, GopongaFlowerSpriteVariants          ; $63FC: $11 $F4 $63
     call RenderActiveEntitySpritesPair            ; $63FF: $CD $C0 $3B
 
     call ReturnIfNonInteractive_06                ; $6402: $CD $C6 $64

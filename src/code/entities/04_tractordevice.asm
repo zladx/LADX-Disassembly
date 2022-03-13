@@ -1,19 +1,33 @@
-Data_004_6814::
-    db   $4C, $07, $4C, $27, $4E, $04, $4E, $24
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; one reversed and one normal ???
+TractorDevice1SpriteVariants::
+.variant0
+    db $4C, $07
+    db $4C, $27
+.variant1
+    db $4E, $04
+    db $4E, $24
 
-Data_004_681C::
-    db   $7C, $07, $7C, $27, $7E, $04, $7E, $24
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; one reversed and one normal ???
+TractorDevice2SpriteVariants::
+.variant0
+    db $7C, $07
+    db $7C, $27
+.variant1
+    db $7E, $04
+    db $7E, $24
 
 TractorDeviceEntityHandler::
 ReversedTractorDeviceEntityHandler::
     ld   hl, wD45E                                ; $6824: $21 $5E $D4
     inc  [hl]                                     ; $6827: $34
-    ld   de, Data_004_6814                        ; $6828: $11 $14 $68
+    ld   de, TractorDevice1SpriteVariants         ; $6828: $11 $14 $68
     ldh  a, [hMapId]                              ; $682B: $F0 $F7
     cp   MAP_BOTTLE_GROTTO                        ; $682D: $FE $01
     jr   nz, jr_004_6834                          ; $682F: $20 $03
 
-    ld   de, Data_004_681C                        ; $6831: $11 $1C $68
+    ld   de, TractorDevice2SpriteVariants         ; $6831: $11 $1C $68
 
 jr_004_6834:
     call RenderActiveEntitySpritesPair            ; $6834: $CD $C0 $3B

@@ -1,58 +1,103 @@
 Data_007_54C2::
     db   $44, $29, $82, $CB, $64, $C1, $D0, $74, $6A, $36, $5E, $EC, $F5, $9D
 
-Data_007_54D0::
-    db   $9A, $16, $9C, $16
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+TradingItem1SpriteVariants::
+.variant0
+    db $9A, $16
+    db $9C, $16
 
-Data_007_54D4::
-    db   $74, $00, $76, $00
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+TradingItem2SpriteVariants::
+.variant0
+    db $74, $00
+    db $76, $00
 
-Data_007_54D8::
-    db   $9A, $17, $9C, $17, $9A, $17, $9C, $17, $9A, $17, $9C, $17, $9A, $17, $9C, $17
-    db   $9A, $14, $9C, $14, $9A, $14, $9C, $14, $9A, $17, $9C, $17, $9A, $14, $9C, $14
-    db   $9A, $17, $9C, $17, $9A, $16, $9C, $16, $9A, $17, $9C, $17, $9A, $16, $9C, $16
-    db   $9A, $17, $9C, $17, $9A, $17, $9C, $17
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+TradingItem3SpriteVariants::
+.variant0
+    db $9A, $17
+    db $9C, $17
+.variant1
+    db $9A, $17
+    db $9C, $17
+.variant2
+    db $9A, $17
+    db $9C, $17
+.variant3
+    db $9A, $17
+    db $9C, $17
+.variant4
+    db $9A, $14
+    db $9C, $14
+.variant5
+    db $9A, $14
+    db $9C, $14
+.variant6
+    db $9A, $17
+    db $9C, $17
+.variant7
+    db $9A, $14
+    db $9C, $14
+.variant8
+    db $9A, $17
+    db $9C, $17
+.variant9
+    db $9A, $16
+    db $9C, $16
+.variant10
+    db $9A, $17
+    db $9C, $17
+.variant11
+    db $9A, $16
+    db $9C, $16
+.variant12
+    db $9A, $17
+    db $9C, $17
+.variant13
+    db $9A, $17
+    db $9C, $17
 
 TradingItemEntityHandler::
     ld   a, [wIsIndoor]                           ; $5510: $FA $A5 $DB
     and  a                                        ; $5513: $A7
-    jr   nz, jr_007_552E                          ; $5514: $20 $18
+    jr   nz, .jr_007_552E                         ; $5514: $20 $18
 
     ldh  a, [hMapRoom]                            ; $5516: $F0 $F6
     cp   UNKNOWN_ROOM_6B                          ; $5518: $FE $6B
-    jr   z, jr_007_5528                           ; $551A: $28 $0C
+    jr   z, .jr_007_5528                          ; $551A: $28 $0C
     cp   MOUNTAIN_CAVE_ROOM_1                     ; $551C: $FE $7A
-    jr   z, jr_007_5528                           ; $551E: $28 $08
+    jr   z, .jr_007_5528                          ; $551E: $28 $08
     cp   UNKNOWN_ROOM_8B                          ; $5520: $FE $8B
-    jr   z, jr_007_5528                           ; $5522: $28 $04
+    jr   z, .jr_007_5528                          ; $5522: $28 $04
     cp   MOUNTAIN_CAVE_ROOM_2                     ; $5524: $FE $7B
-    jr   nz, jr_007_552E                          ; $5526: $20 $06
+    jr   nz, .jr_007_552E                         ; $5526: $20 $06
 
-jr_007_5528:
+.jr_007_5528
     ld   a, [wOverworldRoomStatus + MOUNTAIN_CAVE_ROOM_2]; $5528: $FA $7B $D8
     and  $10                                      ; $552B: $E6 $10
     ret  z                                        ; $552D: $C8
 
-jr_007_552E:
+.jr_007_552E
     ldh  a, [hRoomStatus]                         ; $552E: $F0 $F8
     and  ROOM_STATUS_EVENT_2                      ; $5530: $E6 $20
     jp   nz, func_007_7EA4                        ; $5532: $C2 $A4 $7E
 
     ldh  a, [hIsGBC]                              ; $5535: $F0 $FE
     and  a                                        ; $5537: $A7
-    jr   z, jr_007_555A                           ; $5538: $28 $20
+    jr   z, .jr_007_555A                          ; $5538: $28 $20
 
     ldh  a, [hIsSideScrolling]                    ; $553A: $F0 $F9
     and  a                                        ; $553C: $A7
-    jr   z, jr_007_5545                           ; $553D: $28 $06
+    jr   z, .jr_007_5545                          ; $553D: $28 $06
 
     ldh  a, [hActiveEntityVisualPosY]             ; $553F: $F0 $EC
     add  $02                                      ; $5541: $C6 $02
     ldh  [hActiveEntityVisualPosY], a             ; $5543: $E0 $EC
 
-jr_007_5545:
+.jr_007_5545
     push hl                                       ; $5545: $E5
-    ld   de, Data_007_54D8                        ; $5546: $11 $D8 $54
+    ld   de, TradingItem3SpriteVariants           ; $5546: $11 $D8 $54
     ld   a, [wTradeSequenceItem]                  ; $5549: $FA $0E $DB
     dec  a                                        ; $554C: $3D
     sla  a                                        ; $554D: $CB $27
@@ -63,32 +108,32 @@ jr_007_5545:
     ld   e, l                                     ; $5555: $5D
     ld   d, h                                     ; $5556: $54
     pop  hl                                       ; $5557: $E1
-    jr   jr_007_5572                              ; $5558: $18 $18
+    jr   .render                                  ; $5558: $18 $18
 
-jr_007_555A:
-    ld   de, Data_007_54D4                        ; $555A: $11 $D4 $54
+.jr_007_555A
+    ld   de, TradingItem2SpriteVariants           ; $555A: $11 $D4 $54
     ld   a, [wTradeSequenceItem]                  ; $555D: $FA $0E $DB
     cp   $04                                      ; $5560: $FE $04
-    jr   z, jr_007_5572                           ; $5562: $28 $0E
+    jr   z, .render                               ; $5562: $28 $0E
 
     ldh  a, [hIsSideScrolling]                    ; $5564: $F0 $F9
     and  a                                        ; $5566: $A7
-    jr   z, jr_007_556F                           ; $5567: $28 $06
+    jr   z, .jr_007_556F                          ; $5567: $28 $06
 
     ldh  a, [hActiveEntityVisualPosY]             ; $5569: $F0 $EC
     add  $02                                      ; $556B: $C6 $02
     ldh  [hActiveEntityVisualPosY], a             ; $556D: $E0 $EC
 
-jr_007_556F:
-    ld   de, Data_007_54D0                        ; $556F: $11 $D0 $54
+.jr_007_556F
+    ld   de, TradingItem1SpriteVariants           ; $556F: $11 $D0 $54
 
-jr_007_5572:
+.render
     call RenderActiveEntitySpritesPair            ; $5572: $CD $C0 $3B
     call GetEntityTransitionCountdown             ; $5575: $CD $05 $0C
     jr   nz, jr_007_559A                          ; $5578: $20 $20
 
     call CheckLinkCollisionWithEnemy_trampoline   ; $557A: $CD $5A $3B
-    jr   nc, jr_007_5599                          ; $557D: $30 $1A
+    jr   nc, .return                              ; $557D: $30 $1A
 
     ld   a, MUSIC_TOOL_ACQUIRED                   ; $557F: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $5581: $EA $68 $D3
@@ -102,7 +147,7 @@ jr_007_5572:
     ld   [wC111], a                               ; $5593: $EA $11 $C1
     jp   ResetSpinAttack                          ; $5596: $C3 $AF $0C
 
-jr_007_5599:
+.return
     ret                                           ; $5599: $C9
 
 jr_007_559A:

@@ -1,8 +1,26 @@
-Data_007_4683::
-    db   $72, $21, $70, $21, $70, $01, $72, $01, $76, $01, $78, $01, $78, $21, $76, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Mermaid1SpriteVariants::
+.variant0
+    db $72, $21
+    db $70, $21
+.variant1
+    db $70, $01
+    db $72, $01
+.variant2
+    db $76, $01
+    db $78, $01
+.variant3
+    db $78, $21
+    db $76, $21
 
-Data_007_4693::
-    db   $74, $00, $74, $20, $74, $10, $74, $30
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Mermaid2SpriteVariants::
+.variant0
+    db $74, $00
+    db $74, $20
+.variant1
+    db $74, $10
+    db $74, $30
 
 Data_007_469B::
     db   $00, $FC, $7A, $01, $00, $04, $7C, $01, $00, $0C, $7E, $01, $00, $FC, $7E, $21
@@ -67,7 +85,7 @@ jr_007_46E6:
     jr   jr_007_470B                              ; $4700: $18 $09
 
 jr_007_4702:
-    ld   de, Data_007_4683                        ; $4702: $11 $83 $46
+    ld   de, Mermaid1SpriteVariants               ; $4702: $11 $83 $46
     call RenderActiveEntitySpritesPair            ; $4705: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4708: $CD $8A $3D
 
@@ -85,7 +103,7 @@ jr_007_4715:
     ldh  [hActiveEntityVisualPosY], a             ; $4719: $E0 $EC
     xor  a                                        ; $471B: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $471C: $E0 $F1
-    ld   de, Data_007_4693                        ; $471E: $11 $93 $46
+    ld   de, Mermaid2SpriteVariants               ; $471E: $11 $93 $46
     call RenderActiveEntitySpritesPair            ; $4721: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4724: $CD $8A $3D
 

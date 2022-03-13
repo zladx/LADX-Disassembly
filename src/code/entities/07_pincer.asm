@@ -223,13 +223,41 @@ jr_007_541F:
     call UpdateEntityPosWithSpeed_07              ; $5425: $CD $0A $7E
     jp   label_3B39                               ; $5428: $C3 $39 $3B
 
-Data_007_542B::
-    db   $FF, $00, $FF, $20, $6C, $02, $6C, $22, $64, $22, $62, $22, $68, $22, $66, $22
-    db   $60, $02, $60, $22, $66, $02, $68, $02, $62, $02, $64, $02, $66, $42, $68, $42
-    db   $60, $42, $60, $62, $68, $62, $66, $62
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown100SpriteVariants::
+.variant0
+    db $FF, $00
+    db $FF, $20
+.variant1
+    db $6C, $02
+    db $6C, $22
+.variant2
+    db $64, $22
+    db $62, $22
+.variant3
+    db $68, $22
+    db $66, $22
+.variant4
+    db $60, $02
+    db $60, $22
+.variant5
+    db $66, $02
+    db $68, $02
+.variant6
+    db $62, $02
+    db $64, $02
+.variant7
+    db $66, $42
+    db $68, $42
+.variant8
+    db $60, $42
+    db $60, $62
+.variant9
+    db $68, $62
+    db $66, $62
 
 func_007_5453::
-    ld   de, Data_007_542B                        ; $5453: $11 $2B $54
+    ld   de, Unknown100SpriteVariants             ; $5453: $11 $2B $54
     call RenderActiveEntitySpritesPair            ; $5456: $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ; $5459: $F0 $F0
     cp   $03                                      ; $545B: $FE $03

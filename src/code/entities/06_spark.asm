@@ -1,5 +1,11 @@
-Data_006_6615::
-    db   $5C, $00, $5C, $20, $5C, $14, $5C, $34
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+SparkSpriteVariants::
+.variant0
+    db $5C, $00
+    db $5C, $20
+.variant1
+    db $5C, $14
+    db $5C, $34
 
 Data_006_661D::
     db   $00, $10, $00, $F0, $00, $F0, $00, $10
@@ -18,7 +24,7 @@ SparkCounterClockwiseEntityHandler::
     rra                                           ; $663B: $1F
     and  $01                                      ; $663C: $E6 $01
     ldh  [hActiveEntitySpriteVariant], a          ; $663E: $E0 $F1
-    ld   de, Data_006_6615                        ; $6640: $11 $15 $66
+    ld   de, SparkSpriteVariants                  ; $6640: $11 $15 $66
     call RenderActiveEntitySpritesPair            ; $6643: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $6646: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $6649: $CD $F7 $64

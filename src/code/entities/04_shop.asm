@@ -1,6 +1,29 @@
-Data_004_76CB::
-    db   $60, $03, $62, $03, $62, $23, $60, $23, $64, $03, $66, $03, $66, $23, $64, $23
-    db   $68, $03, $6A, $03, $6C, $03, $6E, $03, $6A, $23, $68, $23, $6E, $23, $6C, $23
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+ShopOwnerSpriteVariants::
+.variant0
+    db $60, $03
+    db $62, $03
+.variant1
+    db $62, $23
+    db $60, $23
+.variant2
+    db $64, $03
+    db $66, $03
+.variant3
+    db $66, $23
+    db $64, $23
+.variant4
+    db $68, $03
+    db $6A, $03
+.variant5
+    db $6C, $03
+    db $6E, $03
+.variant6
+    db $6A, $23
+    db $68, $23
+.variant7
+    db $6E, $23
+    db $6C, $23
 
 ShopOwnerEntityHandler::
     ld   a, [wBlockItemUsage]                     ; $76EB: $FA $0A $C5
@@ -29,7 +52,7 @@ jr_004_7705:
 
 jr_004_770E:
     call func_004_7C98                            ; $770E: $CD $98 $7C
-    ld   de, Data_004_76CB                        ; $7711: $11 $CB $76
+    ld   de, ShopOwnerSpriteVariants              ; $7711: $11 $CB $76
     call RenderActiveEntitySpritesPair            ; $7714: $CD $C0 $3B
     call func_004_7B70                            ; $7717: $CD $70 $7B
     ldh  a, [hActiveEntityState]                  ; $771A: $F0 $F0
@@ -733,7 +756,9 @@ func_004_7B40::
 Data_004_7B56::
     db   $1D, $3D
 
-Data_004_7B58::
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; overlaps with the next list
+Unknown091SpriteVariants::
     db   $5D, $7D
 
 Data_004_7B5A::
@@ -774,7 +799,7 @@ jr_004_7B9A:
     cp   $05                                      ; $7B9A: $FE $05
     jr   nz, jr_004_7BA6                          ; $7B9C: $20 $08
 
-    ld   de, Data_004_7B58                        ; $7B9E: $11 $58 $7B
+    ld   de, Unknown091SpriteVariants             ; $7B9E: $11 $58 $7B
     call RenderActiveEntitySpritesPair            ; $7BA1: $CD $C0 $3B
     jr   jr_004_7BAC                              ; $7BA4: $18 $06
 
@@ -809,7 +834,7 @@ func_004_7BB7::
     cp   $05                                      ; $7BD3: $FE $05
     jr   nz, jr_004_7BDD                          ; $7BD5: $20 $06
 
-    ld   de, Data_004_7B58                        ; $7BD7: $11 $58 $7B
+    ld   de, Unknown091SpriteVariants             ; $7BD7: $11 $58 $7B
     jp   RenderActiveEntitySpritesPair            ; $7BDA: $C3 $C0 $3B
 
 jr_004_7BDD:

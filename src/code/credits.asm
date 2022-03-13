@@ -5869,9 +5869,17 @@ jr_017_7867:
     ld   [hl], a                                  ; $7875: $77
     jp   Farcall                                  ; $7876: $C3 $D7 $0B
 
-Data_017_7879::
-    db   $54, $04, $64, $04, $64, $24, $54, $24   ; $7879
-    db   $4E, $04, $7E, $04                       ; $7881
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknow001SpriteVariants::
+.variant0 ; $7879
+    db $54, $04
+    db $64, $04
+.variant1 ; $787D
+    db $64, $24
+    db $54, $24
+.variant2 ; $7881
+    db $4E, $04
+    db $7E, $04
 
 func_017_7885::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $7885: $21 $40 $C3
@@ -5906,7 +5914,7 @@ jr_017_78A1:
     and  a                                        ; $78AD: $A7
     jr   nz, jr_017_78DD                          ; $78AE: $20 $2D
 
-    ld   de, Data_017_7879                        ; $78B0: $11 $79 $78
+    ld   de, Unknow001SpriteVariants              ; $78B0: $11 $79 $78
     call RenderActiveEntitySpritesPair            ; $78B3: $CD $C0 $3B
     ret                                           ; $78B6: $C9
 
@@ -5951,9 +5959,26 @@ jr_017_78DD:
     ld   [hl], a                                  ; $78EB: $77
     jp   Farcall                                  ; $78EC: $C3 $D7 $0B
 
-Data_017_78EF::
-    db   $72, $00, $72, $20, $74, $00, $74, $20, $76, $00, $76, $20, $78, $00, $78, $20
-    db   $7A, $00, $7A, $20, $7C, $00, $7C, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown002SpriteVariants::
+.variant0
+    db $72, $00
+    db $72, $20
+.variant1
+    db $74, $00
+    db $74, $20
+.variant2
+    db $76, $00
+    db $76, $20
+.variant3
+    db $78, $00
+    db $78, $20
+.variant4
+    db $7A, $00
+    db $7A, $20
+.variant5
+    db $7C, $00
+    db $7C, $20
 
 Data_017_7907::
     db   $08, $06, $06, $06, $06, $08
@@ -5970,7 +5995,7 @@ func_017_790D::
     jr   jr_017_7923                              ; $791B: $18 $06
 
 jr_017_791D:
-    ld   de, Data_017_78EF                        ; $791D: $11 $EF $78
+    ld   de, Unknown002SpriteVariants             ; $791D: $11 $EF $78
     call RenderActiveEntitySpritesPair            ; $7920: $CD $C0 $3B
 
 jr_017_7923:

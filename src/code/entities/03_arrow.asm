@@ -11,8 +11,8 @@ ArrowEntityHandler::
 
     ; If GetEntityTransitionCountdown != 0…
     call GetEntityTransitionCountdown             ; $6A3D: $CD $05 $0C
-    ; call func_003_6AD4 and return
-    jp   nz, func_003_6AD4                        ; $6A40: $C2 $D4 $6A
+    ; call LoadMobilArrowSpriteVariants and return
+    jp   nz, LoadMobilArrowSpriteVariants         ; $6A40: $C2 $D4 $6A
 
     ;
     ; hActiveEntityState == 0 and GetEntityTransitionCountdown == 0
@@ -21,7 +21,7 @@ ArrowEntityHandler::
     ld   a, $05                                   ; $6A43: $3E $05
     ld   [wC19E], a                               ; $6A45: $EA $9E $C1
     call func_003_75A2                            ; $6A48: $CD $A2 $75
-    call func_003_6AD4                            ; $6A4B: $CD $D4 $6A
+    call LoadMobilArrowSpriteVariants             ; $6A4B: $CD $D4 $6A
 
     ;
     ; Allow shooting the Dungeon 8 statue in the eye

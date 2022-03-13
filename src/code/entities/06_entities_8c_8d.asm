@@ -1,5 +1,7 @@
-Data_006_4E9D::
-    db   $F8, $10, $FA, $10
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown017SpriteVariants::
+    db $F8, $10
+    db $FA, $10
 
 Entity8CHandler::
     ldh  a, [hActiveEntityState]                  ; $4EA1: $F0 $F0
@@ -17,7 +19,7 @@ Entity8CHandler::
     jp   IncrementEntityState                     ; $4EB4: $C3 $12 $3B
 
 label_006_4EB7:
-    ld   de, Data_006_4E9D                        ; $4EB7: $11 $9D $4E
+    ld   de, Unknown017SpriteVariants             ; $4EB7: $11 $9D $4E
     call RenderActiveEntitySpritesPair            ; $4EBA: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $4EBD: $CD $C6 $64
     ldh  a, [hMovingBlockMoverState]              ; $4EC0: $F0 $BA

@@ -161,12 +161,14 @@ jr_018_7CAF:
     ld   a, TRANSCIENT_VFX_SWORD_POKE             ; $7CBF: $3E $05
     jp   AddTranscientVfx                         ; $7CC1: $C3 $C7 $0C
 
-
-Data_018_7CC4::
-    db   $36, $00, $36, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+HookshotChainSpriteVariants::
+.variant0
+    db $36, $00
+    db $36, $20
 
 func_018_7CC8::
-    ld   de, Data_018_7CC4                        ; $7CC8: $11 $C4 $7C
+    ld   de, HookshotChainSpriteVariants          ; $7CC8: $11 $C4 $7C
     call RenderActiveEntitySpritesPair            ; $7CCB: $CD $C0 $3B
     ldh  a, [hActiveEntityPosX]                   ; $7CCE: $F0 $EE
     ld   hl, hLinkPositionX                       ; $7CD0: $21 $98 $FF

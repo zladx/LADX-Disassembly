@@ -1,18 +1,30 @@
-Data_006_4F2C::
-    db   $44, $01, $44, $21, $46, $01, $46, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+HardHatBeetleSpriteVariants::
+.variant0
+    db $44, $01
+    db $44, $21
+.variant1
+    db $46, $01
+    db $46, $21
 
-Data_006_4F34::
-    db   $64, $01, $64, $21, $66, $01, $66, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+HardHatBeetleCaveBSpriteVariants::
+.variant0
+    db $64, $01
+    db $64, $21
+.variant1
+    db $66, $01
+    db $66, $21
 
 HardHatBeetleEntityHandler::
-    ld   de, Data_006_4F2C                        ; $4F3C: $11 $2C $4F
+    ld   de, HardHatBeetleSpriteVariants          ; $4F3C: $11 $2C $4F
     ldh  a, [hMapId]                              ; $4F3F: $F0 $F7
     cp   MAP_CAVE_B                               ; $4F41: $FE $0A
-    jr   nz, jr_006_4F48                          ; $4F43: $20 $03
+    jr   nz, .render                              ; $4F43: $20 $03
 
-    ld   de, Data_006_4F34                        ; $4F45: $11 $34 $4F
+    ld   de, HardHatBeetleCaveBSpriteVariants     ; $4F45: $11 $34 $4F
 
-jr_006_4F48:
+.render:
     call RenderActiveEntitySpritesPair            ; $4F48: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $4F4B: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $4F4E: $CD $F7 $64

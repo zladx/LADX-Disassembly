@@ -278,11 +278,17 @@ func_018_7181::
     ld   a, $01                                   ; $7196: $3E $01
     jp   func_015_7964_trampoline                 ; $7198: $C3 $A0 $3D
 
-Data_018_719B::
-    db   $6E, $00, $6E, $20, $6E, $40, $6E, $60
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+GrimCreeperSpriteVariants::
+.variant0
+    db $6E, $00
+    db $6E, $20
+.variant1
+    db $6E, $40
+    db $6E, $60
 
 label_018_71A3:
-    ld   de, Data_018_719B                        ; $71A3: $11 $9B $71
+    ld   de, GrimCreeperSpriteVariants            ; $71A3: $11 $9B $71
     call RenderActiveEntitySpritesPair            ; $71A6: $CD $C0 $3B
     call ReturnIfNonInteractive_18                ; $71A9: $CD $E8 $7D
     call DecrementEntityIgnoreHitsCountdown       ; $71AC: $CD $56 $0C

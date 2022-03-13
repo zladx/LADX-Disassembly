@@ -32,7 +32,7 @@ EntityHandlersTable::
 ._10 far_pointer HidingGhiniEntityHandler
 ._11 far_pointer GiantGhiniEntityHandler
 ._12 far_pointer GhiniEntityHandler
-._13 far_pointer HeartContainerTilesTable
+._13 far_pointer HeartContainerSpriteVariants
 ._14 far_pointer MoblinSwordEntityHandler ; $14
 ._15 far_pointer AntiFairyEntityHandler
 ._16 far_pointer SparkClockwiseEntityHandler
@@ -50,8 +50,8 @@ EntityHandlersTable::
 ._22 far_pointer WizrobeProjectileEntityHandler
 ._23 far_pointer LikeLikeEntityHandler
 ._24 far_pointer IronMaskEntityHandler ; $24
-._25 far_pointer EntityExplosionDisplayList ; small exploding ennemy
-._26 far_pointer EntityExplosionDisplayList ; small exploding ennemy 2
+._25 far_pointer EntityExplosionSpriteVariants ; small exploding ennemy
+._26 far_pointer EntityExplosionSpriteVariants ; small exploding ennemy 2
 ._27 far_pointer SpikeTrapEntityHandler
 ._28 far_pointer MimicEntityHandler ; $28
 ._29 far_pointer MiniMoldromEntityHandler
@@ -329,8 +329,8 @@ EntityInitHandlersTable::
 ._22 dw   EntityInitWithRandomDirection
 ._23 dw   IncrementEntityState
 ._24 dw   EntityInitWithRandomDirection
-._25 dw   EntityInitSmallExplosion
-._26 dw   EntityInitSmallExplosion
+._25 dw   EntityExplosionSpriteVariants
+._26 dw   EntityExplosionSpriteVariants
 ._27 dw   EntityInitWithRandomDirection
 ._28 dw   EntityInitWithRandomDirection
 ._29 dw   label_3DAB

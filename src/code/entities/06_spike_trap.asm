@@ -1,5 +1,8 @@
-Data_006_74FA::
-    db   $50, $02, $50, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+SpikeTrapSpriteVariants::
+.variant0
+    db $50, $02
+    db $50, $22
 
 Data_006_74FE::
     db   $20, $E0, $00, $00
@@ -16,7 +19,7 @@ Data_006_750A::
 SpikeTrapEntityHandler::
     ld   a, $01                                   ; $7510: $3E $01
     ldh  [hActiveEntityNoBGCollision], a          ; $7512: $E0 $BE
-    ld   de, Data_006_74FA                        ; $7514: $11 $FA $74
+    ld   de, SpikeTrapSpriteVariants              ; $7514: $11 $FA $74
     call RenderActiveEntitySpritesPair            ; $7517: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $751A: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $751D: $CD $56 $0C

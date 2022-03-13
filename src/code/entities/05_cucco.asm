@@ -1,5 +1,17 @@
-Data_005_4514::
-    db   $50, $01, $52, $01, $54, $01, $56, $01, $52, $21, $50, $21, $56, $21, $54, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+CuccoSpriteVariants::
+.variant0
+    db $50, $01
+    db $52, $01
+.variant1
+    db $54, $01
+    db $56, $01
+.variant2
+    db $52, $21
+    db $50, $21
+.variant3
+    db $56, $21
+    db $54, $21
 
 CuccoEntityHandler::
     ld   hl, wEntitiesHealthTable                 ; $4524: $21 $60 $C3
@@ -16,7 +28,7 @@ CuccoEntityHandler::
     ldh  [hActiveEntitySpriteVariant], a          ; $4536: $E0 $F1
 
 jr_005_4538:
-    ld   de, Data_005_4514                        ; $4538: $11 $14 $45
+    ld   de, CuccoSpriteVariants                  ; $4538: $11 $14 $45
     call RenderActiveEntitySpritesPair            ; $453B: $CD $C0 $3B
     ldh  a, [hActiveEntityStatus]                 ; $453E: $F0 $EA
     cp   $07                                      ; $4540: $FE $07

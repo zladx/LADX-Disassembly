@@ -1,10 +1,44 @@
-Data_006_720C::
-    db   $68, $01, $6A, $01, $64, $01, $66, $01, $6C, $01, $6E, $01, $6A, $21, $68, $21
-    db   $66, $21, $64, $21, $6E, $21, $6C, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MrWriteSpriteVariants::
+.variant0
+    db $68, $01
+    db $6A, $01
+.variant1
+    db $64, $01
+    db $66, $01
+.variant2
+    db $6C, $01
+    db $6E, $01
+.variant3
+    db $6A, $21
+    db $68, $21
+.variant4
+    db $66, $21
+    db $64, $21
+.variant5
+    db $6E, $21
+    db $6C, $21
 
-Data_006_7224::
-    db   $68, $00, $6A, $00, $64, $00, $66, $00, $6C, $00, $6E, $00, $6A, $20, $68, $20
-    db   $66, $20, $64, $20, $6E, $20, $6C, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MrWriteBirdChristineHouseSpriteVariants::
+.variant0
+    db $68, $00
+    db $6A, $00
+.variant1
+    db $64, $00
+    db $66, $00
+.variant2
+    db $6C, $00
+    db $6E, $00
+.variant3
+    db $6A, $20
+    db $68, $20
+.variant4
+    db $66, $20
+    db $64, $20
+.variant5
+    db $6E, $20
+    db $6C, $20
 
 MrWriteBirdEntityHandler::
     ld   hl, wEntitiesDirectionTable              ; $723C: $21 $80 $C3
@@ -30,12 +64,12 @@ jr_006_7255:
     ld   [hl], a                                  ; $7259: $77
 
 jr_006_725A:
-    ld   de, Data_006_720C                        ; $725A: $11 $0C $72
+    ld   de, MrWriteSpriteVariants                ; $725A: $11 $0C $72
     ldh  a, [hMapRoom]                            ; $725D: $F0 $F6
     cp   ROOM_INDOOR_B_CHRISTINE_HOUSE            ; $725F: $FE $D9
     jr   nz, jr_006_7266                          ; $7261: $20 $03
 
-    ld   de, Data_006_7224                        ; $7263: $11 $24 $72
+    ld   de, MrWriteBirdChristineHouseSpriteVariants ; $7263: $11 $24 $72
 
 jr_006_7266:
     call RenderActiveEntitySpritesPair            ; $7266: $CD $C0 $3B

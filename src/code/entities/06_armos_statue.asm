@@ -1,8 +1,14 @@
-Data_006_7446::
-    db   $60, $07, $62, $07, $64, $07, $66, $07
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+ArmosStatueSpriteVariants::
+.variant0
+    db $60, $07
+    db $62, $07
+.variant1
+    db $64, $07
+    db $66, $07
 
 ArmosStatueEntityHandler::
-    ld   de, Data_006_7446                        ; $744E: $11 $46 $74
+    ld   de, ArmosStatueSpriteVariants            ; $744E: $11 $46 $74
     call RenderActiveEntitySpritesPair            ; $7451: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $7454: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $7457: $CD $F7 $64

@@ -1,10 +1,50 @@
-Data_005_4000::
-    db   $70, $03, $70, $23, $72, $03, $72, $23, $74, $03, $76, $03, $78, $03, $7A, $03
-    db   $76, $23, $74, $23, $7A, $23, $78, $23, $7C, $03, $7C, $23
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+BowWowAtHomeSpriteVariants::
+.variant0
+    db $70, $03
+    db $70, $23
+.variant1
+    db $72, $03
+    db $72, $23
+.variant2
+    db $74, $03
+    db $76, $03
+.variant3
+    db $78, $03
+    db $7A, $03
+.variant4
+    db $76, $23
+    db $74, $23
+.variant5
+    db $7A, $23
+    db $78, $23
+.variant6
+    db $7C, $03
+    db $7C, $23
 
-Data_005_401C::
-    db   $40, $03, $40, $23, $42, $03, $42, $23, $44, $03, $46, $03, $48, $03, $4A, $03
-    db   $46, $23, $44, $23, $4A, $23, $48, $23, $4C, $03, $4C, $23
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+BowWowFollowingSpriteVariants::
+.variant0
+    db $40, $03
+    db $40, $23
+.variant1
+    db $42, $03
+    db $42, $23
+.variant2
+    db $44, $03
+    db $46, $03
+.variant3
+    db $48, $03
+    db $4A, $03
+.variant4
+    db $46, $23
+    db $44, $23
+.variant5
+    db $4A, $23
+    db $48, $23
+.variant6
+    db $4C, $03
+    db $4C, $23
 
 BowWowEntityHandler::
     ld   a, c                                     ; $4038: $79
@@ -25,14 +65,14 @@ BowWowEntityHandler::
     ld   [hl], b                                  ; $4053: $70
 
 jr_005_4054:
-    ld   de, Data_005_401C                        ; $4054: $11 $1C $40
+    ld   de, BowWowFollowingSpriteVariants        ; $4054: $11 $1C $40
     ld   a, [wIsBowWowFollowingLink]              ; $4057: $FA $56 $DB
     and  a                                        ; $405A: $A7
-    jr   nz, jr_005_4060                          ; $405B: $20 $03
+    jr   nz, .render                              ; $405B: $20 $03
 
-    ld   de, Data_005_4000                        ; $405D: $11 $00 $40
+    ld   de, BowWowAtHomeSpriteVariants           ; $405D: $11 $00 $40
 
-jr_005_4060:
+.render:
     call RenderActiveEntitySpritesPair            ; $4060: $CD $C0 $3B
     ld   a, [wRoomTransitionState]                ; $4063: $FA $24 $C1
     and  a                                        ; $4066: $A7

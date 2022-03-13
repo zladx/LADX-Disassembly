@@ -1,8 +1,20 @@
-Data_006_6708::
-    db   $42, $00, $42, $20, $40, $00, $40, $20   ; $6708
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+KeeseSpriteVariants:: ; $6708
+.variant0
+    db $42, $00
+    db $42, $20
+.variant1
+    db $40, $00
+    db $40, $20
 
-Data_006_6710::
-    db   $62, $00, $62, $20, $60, $00, $60, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+KeeseCaveBSpriteVariants::
+.variant0
+    db $62, $00
+    db $62, $20
+.variant1
+    db $60, $00
+    db $60, $20
 
 Data_006_6718::
     db   $00, $05, $0A, $0D
@@ -14,14 +26,14 @@ Data_006_672C::
     db   $0C, $04, $08, $00
 
 KeeseEntityHandler::
-    ld   de, Data_006_6708                        ; $6730: $11 $08 $67
+    ld   de, KeeseSpriteVariants                  ; $6730: $11 $08 $67
     ldh  a, [hMapId]                              ; $6733: $F0 $F7
     cp   MAP_CAVE_B                               ; $6735: $FE $0A
-    jr   nz, jr_006_673C                          ; $6737: $20 $03
+    jr   nz, .render                              ; $6737: $20 $03
 
-    ld   de, Data_006_6710                        ; $6739: $11 $10 $67
+    ld   de, KeeseCaveBSpriteVariants             ; $6739: $11 $10 $67
 
-jr_006_673C:
+.render:
     call RenderActiveEntitySpritesPair            ; $673C: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $673F: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $6742: $CD $F7 $64

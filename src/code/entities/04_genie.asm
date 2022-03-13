@@ -1237,11 +1237,17 @@ jr_004_48A6:
     ld   a, $08                                   ; $48CC: $3E $08
     jp   func_015_7964_trampoline                 ; $48CE: $C3 $A0 $3D
 
-Data_004_48D1::
-    db   $34, $02, $34, $22, $34, $12, $34, $32   ; $48D1
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown012SpriteVariants:: ; $48D1
+.variant0
+    db $34, $02
+    db $34, $22
+.variant1
+    db $34, $12
+    db $34, $32   
 
 GenieState3Handler::
-    ld   de, Data_004_48D1                        ; $48D9: $11 $D1 $48
+    ld   de, Unknown012SpriteVariants             ; $48D9: $11 $D1 $48
     call RenderActiveEntitySpritesPair            ; $48DC: $CD $C0 $3B
     call ReturnIfNonInteractive_04                ; $48DF: $CD $A3 $7F
     ldh  a, [hFrameCounter]                       ; $48E2: $F0 $E7
@@ -1304,7 +1310,7 @@ jr_004_4938:
     jp   z, func_004_6D7A                         ; $493B: $CA $7A $6D
 
 GenieState4Handler::
-    ld   de, Data_004_48D1                        ; $493E: $11 $D1 $48
+    ld   de, Unknown012SpriteVariants             ; $493E: $11 $D1 $48
     call RenderActiveEntitySpritesPair            ; $4941: $CD $C0 $3B
     call ReturnIfNonInteractive_04                ; $4944: $CD $A3 $7F
     ldh  a, [hFrameCounter]                       ; $4947: $F0 $E7

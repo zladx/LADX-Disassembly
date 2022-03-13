@@ -1,12 +1,23 @@
-Data_005_7F1E::
-    db   $50, $01, $52, $01, $52, $21, $50, $21, $54, $01, $56, $01, $56, $21, $54, $21
+AnimalD0SpriteVariants::
+.variant0
+    db $50, $01
+    db $52, $01
+.variant1
+    db $52, $21
+    db $50, $21
+.variant2
+    db $54, $01
+    db $56, $01
+.variant3
+    db $56, $21
+    db $54, $21
 
 AnimalD0EntityHandler::
     ld   a, [wDB74]                               ; $7F2E: $FA $74 $DB
     and  a                                        ; $7F31: $A7
     jp   z, ClearEntityStatus_05                  ; $7F32: $CA $4B $7B
 
-    ld   de, Data_005_7F1E                        ; $7F35: $11 $1E $7F
+    ld   de, AnimalD0SpriteVariants               ; $7F35: $11 $1E $7F
     call RenderActiveEntitySpritesPair            ; $7F38: $CD $C0 $3B
     ld   a, [wMarinEntityIndex]                   ; $7F3B: $FA $0F $C5
     ld   e, a                                     ; $7F3E: $5F

@@ -767,7 +767,7 @@ func_005_7283::
     ld   a, $50                                   ; $7293: $3E $50
     add  [hl]                                     ; $7295: $86
     ldh  [hActiveEntityPosX], a                   ; $7296: $E0 $EE
-    call func_005_72E0                            ; $7298: $CD $E0 $72
+    call RenderSlimeEel                           ; $7298: $CD $E0 $72
     ldh  a, [hLinkPositionX]                      ; $729B: $F0 $98
     ld   hl, hActiveEntityPosX                    ; $729D: $21 $EE $FF
     sub  [hl]                                     ; $72A0: $96
@@ -801,13 +801,27 @@ label_005_72CA:
     pop  de                                       ; $72CA: $D1
     ret                                           ; $72CB: $C9
 
-Data_005_72CC::
-    db   $70, $07, $70, $27, $72, $07, $72, $27, $74, $07, $74, $27, $7C, $06, $7C, $26
-    db   $7E, $06, $7E, $26
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+SlimeEelSpriteVariants::
+.variant0
+    db $70, $07
+    db $70, $27
+.variant1
+    db $72, $07
+    db $72, $27
+.variant2
+    db $74, $07
+    db $74, $27
+.variant3
+    db $7C, $06
+    db $7C, $26
+.variant4
+    db $7E, $06
+    db $7E, $26
 
-func_005_72E0::
-    ld   de, Data_005_72CC                        ; $72E0: $11 $CC $72
-    jp   RenderActiveEntitySpritesPair                ; $72E3: $C3 $C0 $3B
+RenderSlimeEel::
+    ld   de, SlimeEelSpriteVariants               ; $72E0: $11 $CC $72
+    jp   RenderActiveEntitySpritesPair            ; $72E3: $C3 $C0 $3B
 
 func_005_72E6::
     call func_005_7982                            ; $72E6: $CD $82 $79
@@ -1397,7 +1411,7 @@ func_005_766E::
     ldh  [hActiveEntityVisualPosY], a             ; $76A2: $E0 $EC
     ld   a, $00                                   ; $76A4: $3E $00
     ldh  [hActiveEntitySpriteVariant], a          ; $76A6: $E0 $F1
-    ld   de, Data_005_72CC                        ; $76A8: $11 $CC $72
+    ld   de, SlimeEelSpriteVariants               ; $76A8: $11 $CC $72
     call RenderActiveEntitySpritesPair            ; $76AB: $CD $C0 $3B
     ldh  a, [hMultiPurpose0]                      ; $76AE: $F0 $D7
     sub  $18                                      ; $76B0: $D6 $18
@@ -1414,7 +1428,7 @@ func_005_766E::
     ldh  [hActiveEntityVisualPosY], a             ; $76C2: $E0 $EC
     ld   a, $00                                   ; $76C4: $3E $00
     ldh  [hActiveEntitySpriteVariant], a          ; $76C6: $E0 $F1
-    ld   de, Data_005_72CC                        ; $76C8: $11 $CC $72
+    ld   de, SlimeEelSpriteVariants               ; $76C8: $11 $CC $72
     call RenderActiveEntitySpritesPair            ; $76CB: $CD $C0 $3B
     ldh  a, [hMultiPurpose0]                      ; $76CE: $F0 $D7
     sub  $24                                      ; $76D0: $D6 $24
@@ -1431,8 +1445,8 @@ func_005_766E::
     ldh  [hActiveEntityVisualPosY], a             ; $76E2: $E0 $EC
     ld   a, $02                                   ; $76E4: $3E $02
     ldh  [hActiveEntitySpriteVariant], a          ; $76E6: $E0 $F1
-    ld   de, Data_005_72CC                        ; $76E8: $11 $CC $72
-    jp   RenderActiveEntitySpritesPair                ; $76EB: $C3 $C0 $3B
+    ld   de, SlimeEelSpriteVariants               ; $76E8: $11 $CC $72
+    jp   RenderActiveEntitySpritesPair            ; $76EB: $C3 $C0 $3B
 
 Data_005_76EE::
     db   $00, $06, $0C, $0E
@@ -1619,7 +1633,7 @@ jr_005_79B3:
     cp   $7C                                      ; $79C7: $FE $7C
     jr   nc, jr_005_7A1F                          ; $79C9: $30 $54
 
-    ld   de, Data_005_72CC                        ; $79CB: $11 $CC $72
+    ld   de, SlimeEelSpriteVariants               ; $79CB: $11 $CC $72
     call RenderActiveEntitySpritesPair            ; $79CE: $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ; $79D1: $F0 $F0
     cp   $04                                      ; $79D3: $FE $04

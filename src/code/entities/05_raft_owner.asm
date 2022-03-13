@@ -1,6 +1,29 @@
-Data_005_533E::
-    db   $60, $00, $62, $00, $62, $20, $60, $20, $64, $00, $66, $00, $66, $20, $64, $20
-    db   $68, $00, $6A, $00, $6C, $00, $6E, $00, $6A, $20, $68, $20, $6E, $20, $6C, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+RaftOwnerIndoorSpriteVariants::
+.variant0
+    db $60, $00
+    db $62, $00
+.variant1
+    db $62, $20
+    db $60, $20
+.variant2
+    db $64, $00
+    db $66, $00
+.variant3
+    db $66, $20
+    db $64, $20
+.variant4
+    db $68, $00
+    db $6A, $00
+.variant5
+    db $6C, $00
+    db $6E, $00
+.variant6
+    db $6A, $20
+    db $68, $20
+.variant7
+    db $6E, $20
+    db $6C, $20
 
 ; Handler for Raft Owner (and also the raft itself?)
 EntityRaftOwnerHandler::
@@ -19,7 +42,7 @@ EntityRaftOwnerHandler::
 
 jr_005_5372:
     call func_005_54EA                            ; $5372: $CD $EA $54
-    ld   de, Data_005_533E                        ; $5375: $11 $3E $53
+    ld   de, RaftOwnerIndoorSpriteVariants        ; $5375: $11 $3E $53
     call RenderActiveEntitySpritesPair            ; $5378: $CD $C0 $3B
     call ReturnIfNonInteractive_05                ; $537B: $CD $3A $7A
     call func_005_54C3                            ; $537E: $CD $C3 $54
@@ -82,8 +105,14 @@ func_005_53CB::
 
     jp_open_dialog $0F1                           ; $53CF
 
-Data_005_53D4::
-    db   $5C, $01, $5C, $21, $5E, $01, $5E, $21   ; $53D4
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+RaftOwnerOnOverworldSpriteVariants:: ; $53D4
+.variant0
+    db $5C, $01
+    db $5C, $21
+.variant1
+    db $5E, $01
+    db $5E, $21   
 
 raftOnOverworld:
     ld   hl, wEntitiesPrivateState4Table          ; $53DC: $21 $40 $C4
@@ -118,7 +147,7 @@ jr_005_53FF:
     cp   $FF                                      ; $5401: $FE $FF
     jr   nz, jr_005_53E9                          ; $5403: $20 $E4
 
-    ld   de, Data_005_53D4                        ; $5405: $11 $D4 $53
+    ld   de, RaftOwnerOnOverworldSpriteVariants   ; $5405: $11 $D4 $53
     call RenderActiveEntitySpritesPair            ; $5408: $CD $C0 $3B
     call ReturnIfNonInteractive_05                ; $540B: $CD $3A $7A
     jp   func_005_54C3                            ; $540E: $C3 $C3 $54
@@ -203,8 +232,8 @@ jr_005_5483:
 
 jr_005_5487:
     call CopyEntityPositionToActivePosition       ; $5487: $CD $8A $3D
-    ld   de, Data_005_53D4                        ; $548A: $11 $D4 $53
-    jp   RenderActiveEntitySpritesPair                ; $548D: $C3 $C0 $3B
+    ld   de, RaftOwnerOnOverworldSpriteVariants   ; $548A: $11 $D4 $53
+    jp   RenderActiveEntitySpritesPair            ; $548D: $C3 $C0 $3B
 
 func_005_5490::
     ldh  a, [hFrameCounter]                       ; $5490: $F0 $E7

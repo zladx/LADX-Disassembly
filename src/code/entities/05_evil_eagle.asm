@@ -238,12 +238,18 @@ ENDC
 
     ret                                           ; $5B51: $C9
 
-Data_005_5B52::
-    db   $7E, $02, $7E, $22, $7E, $42, $7E, $62
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+EvilEagle1SpriteVariants::
+.variant0
+    db $7E, $02
+    db $7E, $22
+.variant1
+    db $7E, $42
+    db $7E, $62
 
 func_005_5B5A::
-    ld   de, Data_005_5B52                        ; $5B5A: $11 $52 $5B
-    jp   RenderActiveEntitySpritesPair                ; $5B5D: $C3 $C0 $3B
+    ld   de, EvilEagle1SpriteVariants             ; $5B5A: $11 $52 $5B
+    jp   RenderActiveEntitySpritesPair            ; $5B5D: $C3 $C0 $3B
 
 Data_005_5B60::
     db   $02, $02, $02, $00, $01, $00, $01, $04, $04, $04, $04
@@ -1289,13 +1295,19 @@ jr_005_6246:
     pop  bc                                       ; $624C: $C1
     ret                                           ; $624D: $C9
 
-Data_005_624E::
-    db   $7C, $00, $7C, $20, $7C, $40, $7C, $60
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+EvilEagle2SpriteVariants::
+.variant0
+    db $7C, $00
+    db $7C, $20
+.variant1
+    db $7C, $40
+    db $7C, $60
 
 func_005_6256::
     ld   a, $02                                   ; $6256: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $6258: $E0 $A1
-    ld   de, Data_005_624E                        ; $625A: $11 $4E $62
+    ld   de, EvilEagle2SpriteVariants             ; $625A: $11 $4E $62
     call RenderActiveEntitySpritesPair            ; $625D: $CD $C0 $3B
     call ReturnIfNonInteractive_05                ; $6260: $CD $3A $7A
     ldh  a, [hFrameCounter]                       ; $6263: $F0 $E7
@@ -1369,11 +1381,23 @@ jr_005_62B0:
 
     ret                                           ; $62B7: $C9
 
-Data_005_62B8::
-    db   $7A, $22, $78, $22, $78, $02, $7A, $02, $7A, $62, $78, $62, $78, $42, $7A, $42
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+EvilEagle3SpriteVariants::
+.variant0
+    db $7A, $22
+    db $78, $22
+.variant1
+    db $78, $02
+    db $7A, $02
+.variant2
+    db $7A, $62
+    db $78, $62
+.variant3
+    db $78, $42
+    db $7A, $42
 
 func_005_62C8::
-    ld   de, Data_005_62B8                        ; $62C8: $11 $B8 $62
+    ld   de, EvilEagle3SpriteVariants             ; $62C8: $11 $B8 $62
     call RenderActiveEntitySpritesPair            ; $62CB: $CD $C0 $3B
     call ReturnIfNonInteractive_05                ; $62CE: $CD $3A $7A
     call UpdateEntityPosWithSpeed_05              ; $62D1: $CD $B1 $7A

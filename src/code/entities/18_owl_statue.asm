@@ -1,5 +1,8 @@
-Data_018_5DF7::
-    db   $5E, $01, $5E, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+OwlStatueSpriteVariants::
+.variant0
+    db $5E, $01
+    db $5E, $21
 
 Data_018_5DFB::
     db   $00, $F8, $50, $06, $00, $00, $52, $06, $00, $08, $54, $06, $00, $10, $56, $06
@@ -80,7 +83,7 @@ ELSE
     add  $01                                      ; $5E83: $C6 $01
     ldh  [hActiveEntityVisualPosY], a             ; $5E85: $E0 $EC
 ENDC
-    ld   de, Data_018_5DF7                        ; $5E87: $11 $F7 $5D
+    ld   de, OwlStatueSpriteVariants              ; $5E87: $11 $F7 $5D
     call RenderActiveEntitySpritesPair            ; $5E8A: $CD $C0 $3B
 
 IF __PATCH_0__

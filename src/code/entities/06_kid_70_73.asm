@@ -9,7 +9,7 @@ Kid73EntityHandler::
     jp   c, ClearEntityStatus_06                  ; $6219: $DA $DB $65
 
 jr_006_621C:
-    ld   de, Data_006_604D                        ; $621C: $11 $4D $60
+    ld   de, Kid71SpriteVariants                  ; $621C: $11 $4D $60
     call RenderActiveEntitySpritesPair            ; $621F: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $6222: $CD $C6 $64
     ldh  a, [hFrameCounter]                       ; $6225: $F0 $E7

@@ -1,5 +1,11 @@
-Data_006_78B7::
-    db   $58, $02, $58, $22, $5A, $02, $5A, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+TektiteSpriteVariants::
+.variant0
+    db $58, $02
+    db $58, $22
+.variant1
+    db $5A, $02
+    db $5A, $22
 
 Data_006_78BF::
     db   $10, $F0, $10, $F0
@@ -8,7 +14,7 @@ Data_006_78C3::
     db   $10, $10, $F0, $F0
 
 TektiteEntityHandler::
-    ld   de, Data_006_78B7                        ; $78C7: $11 $B7 $78
+    ld   de, TektiteSpriteVariants                ; $78C7: $11 $B7 $78
     call RenderActiveEntitySpritesPair            ; $78CA: $CD $C0 $3B
 
 jr_006_78CD:

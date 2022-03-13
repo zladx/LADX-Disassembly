@@ -1,6 +1,29 @@
-Data_006_5B56::
-    db   $60, $01, $62, $01, $62, $21, $60, $21, $64, $01, $66, $01, $66, $21, $64, $21
-    db   $68, $01, $6A, $01, $6C, $01, $6E, $01, $6A, $21, $68, $21, $6E, $21, $6C, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MadamMeowMeowSpriteVariants::
+.variant0
+    db $60, $01
+    db $62, $01
+.variant1
+    db $62, $21
+    db $60, $21
+.variant2
+    db $64, $01
+    db $66, $01
+.variant3
+    db $66, $21
+    db $64, $21
+.variant4
+    db $68, $01
+    db $6A, $01
+.variant5
+    db $6C, $01
+    db $6E, $01
+.variant6
+    db $6A, $21
+    db $68, $21
+.variant7
+    db $6E, $21
+    db $6C, $21
 
 MadamMeowMeowEntityHandler::
     call GetEntityTransitionCountdown             ; $5B76: $CD $05 $0C
@@ -23,7 +46,7 @@ jr_006_5B83:
 
 jr_006_5B91:
     call SetEntitySpriteVariantForDirection       ; $5B91: $CD $41 $64
-    ld   de, Data_006_5B56                        ; $5B94: $11 $56 $5B
+    ld   de, MadamMeowMeowSpriteVariants          ; $5B94: $11 $56 $5B
     call RenderActiveEntitySpritesPair            ; $5B97: $CD $C0 $3B
     ld   a, [wIsBowWowFollowingLink]              ; $5B9A: $FA $56 $DB
     cp   $80                                      ; $5B9D: $FE $80

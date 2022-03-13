@@ -1,9 +1,23 @@
-Data_018_49C0::
-    db   $FF, $FF, $FF, $FF, $54, $02, $54, $62, $54, $42, $54, $22, $56, $02, $56, $22
-    db   $52, $02, $52, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+ZoraSpriteVariants::
+.variant0
+    db $FF, $FF
+    db $FF, $FF
+.variant1
+    db $54, $02
+    db $54, $62
+.variant2
+    db $54, $42
+    db $54, $22
+.variant3
+    db $56, $02
+    db $56, $22
+.variant4
+    db $52, $02
+    db $52, $22
 
 ZoraEntityHandler::
-    ld   de, Data_018_49C0                        ; $49D4: $11 $C0 $49
+    ld   de, ZoraSpriteVariants                   ; $49D4: $11 $C0 $49
     call RenderActiveEntitySpritesPair            ; $49D7: $CD $C0 $3B
     ld   a, [wIsIndoor]                           ; $49DA: $FA $A5 $DB
     and  a                                        ; $49DD: $A7

@@ -123,11 +123,23 @@ IF __PATCH_0__
 ENDC
     ret                                           ; $5479: $C9
 
-Data_018_547A::
-    db   $44, $01, $44, $21, $74, $01, $74, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MovingBlockMover1SpriteVariants::
+.variant0
+    db $44, $01
+    db $44, $21
+.variant1
+    db $74, $01
+    db $74, $21
 
-Data_018_5482::
-    db   $46, $01, $46, $21, $76, $01, $76, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MovingBlockMover2SpriteVariants::
+.variant0
+    db $46, $01
+    db $46, $21
+.variant1
+    db $76, $01
+    db $76, $21
 
 func_018_548A::
     ldh  a, [hMapId]                              ; $548A: $F0 $F7
@@ -137,7 +149,7 @@ func_018_548A::
     ldh  [hActiveEntitySpriteVariant], a          ; $5490: $E0 $F1
 
 jr_018_5492:
-    ld   de, Data_018_547A                        ; $5492: $11 $7A $54
+    ld   de, MovingBlockMover1SpriteVariants      ; $5492: $11 $7A $54
     call RenderActiveEntitySpritesPair            ; $5495: $CD $C0 $3B
     ld   hl, wEntitiesPrivateState2Table          ; $5498: $21 $C0 $C2
     add  hl, bc                                   ; $549B: $09
@@ -149,7 +161,7 @@ jr_018_5492:
     ldh  [hActiveEntityVisualPosY], a             ; $54A2: $E0 $EC
 
 jr_018_54A4:
-    ld   de, Data_018_5482                        ; $54A4: $11 $82 $54
+    ld   de, MovingBlockMover2SpriteVariants      ; $54A4: $11 $82 $54
     call RenderActiveEntitySpritesPair            ; $54A7: $CD $C0 $3B
     ldh  a, [hActiveEntityVisualPosY]             ; $54AA: $F0 $EC
     add  $10                                      ; $54AC: $C6 $10

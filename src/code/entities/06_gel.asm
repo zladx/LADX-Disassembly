@@ -7,24 +7,37 @@ MiniGelEntityHandler::
     call RenderActiveEntitySprite                 ; $7C04: $CD $77 $3C
     jr   jr_006_7C2E                              ; $7C07: $18 $25
 
-Data_006_7C09::
-    db   $52, $02, $52, $22, $54, $02, $54, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+GelLowHealthSpriteVariants::
+.variant0
+    db $52, $02
+    db $52, $22
+.variant1
+    db $54, $02
+    db $54, $22
 
-Data_006_7C11::
-    db   $52, $00, $52, $20, $54, $00, $54, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+GelSpriteVariants::
+.variant0
+    db $52, $00
+    db $52, $20
+.variant1
+    db $54, $00
+    db $54, $20
 
 GelEntityHandler::
     call func_006_7BE2                            ; $7C19: $CD $E2 $7B
-    ld   de, Data_006_7C09                        ; $7C1C: $11 $09 $7C
+    ld   de, GelLowHealthSpriteVariants           ; $7C1C: $11 $09 $7C
     ld   hl, wEntitiesHealthTable                 ; $7C1F: $21 $60 $C3
     add  hl, bc                                   ; $7C22: $09
     ld   a, [hl]                                  ; $7C23: $7E
     and  $02                                      ; $7C24: $E6 $02
-    jr   nz, jr_006_7C2B                          ; $7C26: $20 $03
+    jr   nz, .render                              ; $7C26: $20 $03
 
-    ld   de, Data_006_7C11                        ; $7C28: $11 $11 $7C
+    ; load different sprite variants, when health bit 2 is set
+    ld   de, GelSpriteVariants                    ; $7C28: $11 $11 $7C
 
-jr_006_7C2B:
+.render:
     call RenderActiveEntitySpritesPair            ; $7C2B: $CD $C0 $3B
 
 jr_006_7C2E:

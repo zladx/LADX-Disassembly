@@ -357,6 +357,11 @@ wC143::
   ds 1 ; C143
 
 ; TODO comment
+; Possible values:
+; 0 = false
+; 1 = true
+; 2 = true
+; 3 = true (?pushing with shield?)
 wIsLinkPushing:: ; C144
   ds 1
 

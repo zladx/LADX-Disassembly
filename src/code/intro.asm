@@ -1191,6 +1191,7 @@ func_001_762B::
     ld   [wOAMNextAvailableSlot], a               ; $764B: $EA $C0 $C3
     ret                                           ; $764E: $C9
 
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 IntroMarinSpriteVariants::
 .variant0
     db $00, $03                                   ; $764F
@@ -1418,15 +1419,32 @@ IntroMarinState4::
 .return
     ret                                           ; $77BC: $C9
 
-Data_001_77BD::
-    db   $38, $00, $38, $20                       ; $77BD
-    db   $3A, $00, $3A, $20                       ; $77C1
-    db   $3A, $00, $3A, $20                       ; $77C5
-    db   $3C, $00, $3E, $00                       ; $77C9
-    db   $3C, $00, $3E, $00                       ; $77CD
-    db   $3A, $00, $3A, $20                       ; $77D1
-    db   $3A, $00, $3A, $20                       ; $77D5
-    db   $38, $00, $38, $20                       ; $77D9
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown003SpriteVariants::
+.variant0 ; $77BD
+    db $38, $00
+    db $38, $20
+.variant1 ; $77C1
+    db $3A, $00
+    db $3A, $20
+.variant2 ; $77C5
+    db $3A, $00
+    db $3A, $20
+.variant3 ; $77C9
+    db $3C, $00
+    db $3E, $00
+.variant4 ; $77CD
+    db $3C, $00
+    db $3E, $00
+.variant5 ; $77D1
+    db $3A, $00
+    db $3A, $20
+.variant6 ; $77D5
+    db $3A, $00
+    db $3A, $20
+.variant7 ; $77D9
+    db $38, $00
+    db $38, $20
 
 RenderIntroSparkle::
     xor  a                                        ; $77DD: $AF
@@ -1450,7 +1468,7 @@ jr_001_77ED::
     ldh  [hActiveEntitySpriteVariant], a          ; $77F3: $E0 $F1
     xor  a                                        ; $77F5: $AF
     ld   [wEntitiesPhysicsFlagsTable], a          ; $77F6: $EA $40 $C3
-    ld   de, Data_001_77BD                        ; $77F9: $11 $BD $77
+    ld   de, Unknown003SpriteVariants             ; $77F9: $11 $BD $77
     call RenderActiveEntitySpritesPair            ; $77FC: $CD $C0 $3B
     ld   a, [wOAMNextAvailableSlot]               ; $77FF: $FA $C0 $C3
     add  a, $08                                   ; $7802: $C6 $08
@@ -1897,8 +1915,14 @@ jr_001_7A1F::
     pop  bc                                       ; $7A25: $C1
     ret                                           ; $7A26: $C9
 
-Data_001_7A27::
-    db   $10, $00, $12, $00, $14, $00, $16, $00   ; $7A27 ; $7A27
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown004SpriteVariants::
+.variant0 ; $7A27
+    db $10, $00
+    db $12, $00
+.variant1 ; $7A2B
+    db $14, $00
+    db $16, $00
 
 RenderIntroInertLink::
     ldh  a, [hActiveEntityPosX]                   ; $7A2F: $F0 $EE
@@ -1906,7 +1930,7 @@ RenderIntroInertLink::
     jr   nc, .jr_001_7A47                         ; $7A33: $30 $12
     xor  a                                        ; $7A35: $AF
     ld   [wEntitiesPhysicsFlagsTable], a          ; $7A36: $EA $40 $C3
-    ld   de, Data_001_7A27                        ; $7A39: $11 $27 $7A
+    ld   de, Unknown004SpriteVariants             ; $7A39: $11 $27 $7A
     call RenderActiveEntitySpritesPair            ; $7A3C: $CD $C0 $3B
     ld   a, [wOAMNextAvailableSlot]               ; $7A3F: $FA $C0 $C3
     add  a, $08                                   ; $7A42: $C6 $08

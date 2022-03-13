@@ -23,7 +23,7 @@ MoblinEntityHandler::
 jr_003_5835:
     ld   a, c                                     ; $5835: $79
     ld   [wD153], a                               ; $5836: $EA $53 $D1
-    ld   de, Data_003_5917                        ; $5839: $11 $17 $59
+    ld   de, Unknown009SpriteVariants             ; $5839: $11 $17 $59
     ; fallthrough
 
 ; Animate roaming enemy (Octorok, Moblin, Iron mask)
@@ -177,9 +177,32 @@ func_003_58FC::
     or   [hl]                                     ; $5913: $B6
     jp   SetEntitySpriteVariant                   ; $5914: $C3 $0C $3B
 
-Data_003_5917::
-    db   $60, $03, $62, $03, $62, $23, $60, $23, $64, $03, $66, $03, $66, $23, $64, $23
-    db   $68, $03, $6A, $03, $6C, $03, $6E, $03, $6A, $23, $68, $23, $6E, $23, $6C, $23
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown009SpriteVariants::
+.variant0
+    db $60, $03
+    db $62, $03
+.variant1
+    db $62, $23
+    db $60, $23
+.variant2
+    db $64, $03
+    db $66, $03
+.variant3
+    db $66, $23
+    db $64, $23
+.variant4
+    db $68, $03
+    db $6A, $03
+.variant5
+    db $6C, $03
+    db $6E, $03
+.variant6
+    db $6A, $23
+    db $68, $23
+.variant7
+    db $6E, $23
+    db $6C, $23
 
 Data_003_5937::
     db   $08, $F8, $04, $FC

@@ -1,8 +1,14 @@
-Data_003_7DD4::
-    db   $7C, $01, $7C, $21, $7E, $01, $7E, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+LikeLikeSpriteVariants::
+.variant0
+    db $7C, $01
+    db $7C, $21
+.variant1
+    db $7E, $01
+    db $7E, $21
 
 LikeLikeEntityHandler::
-    ld   de, Data_003_7DD4                        ; $7DDC: $11 $D4 $7D
+    ld   de, LikeLikeSpriteVariants               ; $7DDC: $11 $D4 $7D
     call RenderActiveEntitySpritesPair            ; $7DDF: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $7DE2: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $7DE5: $CD $F7 $64

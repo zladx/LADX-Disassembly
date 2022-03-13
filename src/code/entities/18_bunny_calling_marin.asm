@@ -1,8 +1,20 @@
-Data_018_5296::
-    db   $5A, $21, $58, $21, $5E, $21, $5C, $21, $58, $01, $5A, $01, $5C, $01, $5E, $01
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+BunnyCallingMarinSpriteVariants::
+.variant0
+    db $5A, $21
+    db $58, $21
+.variant1
+    db $5E, $21
+    db $5C, $21
+.variant2
+    db $58, $01
+    db $5A, $01
+.variant3
+    db $5C, $01
+    db $5E, $01
 
 BunnyCallingMarinEntityHandler::
-    ld   de, Data_018_5296                        ; $52A6: $11 $96 $52
+    ld   de, BunnyCallingMarinSpriteVariants      ; $52A6: $11 $96 $52
     call RenderActiveEntitySpritesPair            ; $52A9: $CD $C0 $3B
     ldh  a, [hFrameCounter]                       ; $52AC: $F0 $E7
     rra                                           ; $52AE: $1F

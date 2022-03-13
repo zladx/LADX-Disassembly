@@ -1,11 +1,14 @@
-Data_006_6A78::
-    db   $50, $02, $52, $02
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+TelephoneSpriteVariants::
+.variant0
+    db $50, $02
+    db $52, $02
 
 TelephoneEntityHandler::
     ldh  a, [hActiveEntityVisualPosY]             ; $6A7C: $F0 $EC
     sub  $05                                      ; $6A7E: $D6 $05
     ldh  [hActiveEntityVisualPosY], a             ; $6A80: $E0 $EC
-    ld   de, Data_006_6A78                        ; $6A82: $11 $78 $6A
+    ld   de, TelephoneSpriteVariants              ; $6A82: $11 $78 $6A
     call RenderActiveEntitySpritesPair            ; $6A85: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $6A88: $CD $C6 $64
     call func_006_645D                            ; $6A8B: $CD $5D $64

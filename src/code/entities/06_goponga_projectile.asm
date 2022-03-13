@@ -1,16 +1,16 @@
-GopongaFlowerDisplayList::
+GopongaFlowerProjectileSpriteList::
 .variant0
-    db   $1E, $02
-    db   $1E, $62
+    db $1E, $02
+    db $1E, $62
 .variant1
-    db   $1E, $42
-    db   $1E, $22
+    db $1E, $42
+    db $1E, $22
 .variant2
-    db   $32, $00
-    db   $32, $20
+    db $32, $00
+    db $32, $20
 .variant3
-    db   $30, $00
-    db   $30, $20
+    db $30, $00
+    db $30, $20
 
 GopongaProjectileEntityHandler::
     ; Make the projectile invicible, by setting its health
@@ -35,7 +35,7 @@ GopongaProjectileEntityHandler::
 .flashEnd
 
     ; Render the projectile
-    ld   de, GopongaFlowerDisplayList                        ; $63B5: $11 $8F $63
+    ld   de, GopongaFlowerProjectileSpriteList    ; $63B5: $11 $8F $63
     call RenderActiveEntitySpritesPair            ; $63B8: $CD $C0 $3B
 
     call GetEntityTransitionCountdown             ; $63BB: $CD $05 $0C

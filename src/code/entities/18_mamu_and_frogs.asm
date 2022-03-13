@@ -422,19 +422,38 @@ jr_018_43AE:
 label_018_43B2:
     ret                                           ; $43B2: $C9
 
-Data_018_43B3::
-    db   $58, $00, $58, $20, $5A, $00, $5A, $20, $5C, $00, $5E, $00, $5E, $20, $5C, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MamuAndFrogsSpriteVariants::
+.variant0
+    db $58, $00
+    db $58, $20
+.variant1
+    db $5A, $00
+    db $5A, $20
+.variant2
+    db $5C, $00
+    db $5E, $00
+.variant3
+    db $5E, $20
+    db $5C, $20
 
-Data_018_43C3::
-    db   $F0, $00, $50, $00, $F0, $08, $52, $00, $00, $00, $54, $00, $00, $08, $56, $00
-    db   $F0, $00, $52, $20, $F0, $08, $50, $20, $00, $00, $56, $20, $00, $08, $54, $20
+MamuAndFrogsSpriteList::
+    ;  x    y    n°   OAM
+    db $F0, $00, $50, $00
+    db $F0, $08, $52, $00
+    db $00, $00, $54, $00
+    db $00, $08, $56, $00
+    db $F0, $00, $52, $20
+    db $F0, $08, $50, $20
+    db $00, $00, $56, $20
+    db $00, $08, $54, $20
 
 func_018_43E3::
     ldh  a, [hActiveEntitySpriteVariant]          ; $43E3: $F0 $F1
     cp   $04                                      ; $43E5: $FE $04
     jr   nc, jr_018_43EF                          ; $43E7: $30 $06
 
-    ld   de, Data_018_43B3                        ; $43E9: $11 $B3 $43
+    ld   de, MamuAndFrogsSpriteVariants           ; $43E9: $11 $B3 $43
     jp   RenderActiveEntitySpritesPair            ; $43EC: $C3 $C0 $3B
 
 jr_018_43EF:
@@ -446,7 +465,7 @@ jr_018_43EF:
     and  $F0                                      ; $43F5: $E6 $F0
     ld   e, a                                     ; $43F7: $5F
     ld   d, b                                     ; $43F8: $50
-    ld   hl, Data_018_43C3                        ; $43F9: $21 $C3 $43
+    ld   hl, MamuAndFrogsSpriteList               ; $43F9: $21 $C3 $43
     add  hl, de                                   ; $43FC: $19
     ld   c, $04                                   ; $43FD: $0E $04
     jp   RenderActiveEntitySpritesRect            ; $43FF: $C3 $E6 $3C

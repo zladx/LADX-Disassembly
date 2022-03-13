@@ -444,11 +444,17 @@ jr_005_592A:
 
     ret                                           ; $5931: $C9
 
-Data_005_5932::
-    db   $74, $05, $76, $05, $76, $25, $74, $25
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown013SpriteVariants::
+.variant0
+    db $74, $05
+    db $76, $05
+.variant1
+    db $76, $25
+    db $74, $25
 
 func_005_593A::
-    ld   de, Data_005_5932                        ; $593A: $11 $32 $59
+    ld   de, Unknown013SpriteVariants             ; $593A: $11 $32 $59
     call RenderActiveEntitySpritesPair            ; $593D: $CD $C0 $3B
     call ReturnIfNonInteractive_05                ; $5940: $CD $3A $7A
     call DecrementEntityIgnoreHitsCountdown       ; $5943: $CD $56 $0C
@@ -485,8 +491,13 @@ jr_005_5962:
 
     ret                                           ; $5977: $C9
 
-Data_005_5978::
-    db   $78, $03, $7A, $03, $7C, $03, $7E, $03
+Unknown014SpriteVariants::
+.variant0
+    db $78, $03
+    db $7A, $03
+.variant1
+    db $7C, $03
+    db $7E, $03
 
 Data_005_5980::
     db   $01, $FF
@@ -503,7 +514,7 @@ func_005_5984::
     rra                                           ; $598B: $1F
     and  OAMF_XFLIP                               ; $598C: $E6 $20
     ldh  [hActiveEntityFlipAttribute], a          ; $598E: $E0 $ED
-    ld   de, Data_005_5978                        ; $5990: $11 $78 $59
+    ld   de, Unknown014SpriteVariants             ; $5990: $11 $78 $59
     call RenderActiveEntitySpritesPair            ; $5993: $CD $C0 $3B
     call ReturnIfNonInteractive_05                ; $5996: $CD $3A $7A
     call DecrementEntityIgnoreHitsCountdown       ; $5999: $CD $56 $0C

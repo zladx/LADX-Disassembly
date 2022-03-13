@@ -354,8 +354,11 @@ func_006_4771::
     call RenderActiveEntitySpritesRect            ; $4777: $CD $E6 $3C
     jp   label_3CD9                               ; $477A: $C3 $D9 $3C
 
-Data_006_477D::
-    db   $6E, $01, $6E, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+SmasherSpriteVariants::
+.variant0
+    db $6E, $01
+    db $6E, $21
 
 label_006_4781:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4781: $21 $40 $C3
@@ -364,7 +367,7 @@ label_006_4781:
     ld   hl, wC5D0                                ; $4787: $21 $D0 $C5
     add  hl, bc                                   ; $478A: $09
     ld   [hl], $FF                                ; $478B: $36 $FF
-    ld   de, Data_006_477D                        ; $478D: $11 $7D $47
+    ld   de, SmasherSpriteVariants                ; $478D: $11 $7D $47
     call RenderActiveEntitySpritesPair            ; $4790: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $4793: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $4796: $CD $56 $0C

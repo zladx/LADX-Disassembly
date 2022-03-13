@@ -1,12 +1,35 @@
-Data_006_4911::
-    db   $74, $02, $76, $02, $76, $22, $74, $22, $70, $01, $72, $01, $72, $21, $70, $21
-    db   $78, $00, $7A, $00, $7A, $20, $78, $20, $7C, $03, $7E, $03, $7E, $23, $7C, $23
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+ThreeOfAKindSpriteVariants::
+.variant0
+    db $74, $02
+    db $76, $02
+.variant1
+    db $76, $22
+    db $74, $22
+.variant2
+    db $70, $01
+    db $72, $01
+.variant3
+    db $72, $21
+    db $70, $21
+.variant4
+    db $78, $00
+    db $7A, $00
+.variant5
+    db $7A, $20
+    db $78, $20
+.variant6
+    db $7C, $03
+    db $7E, $03
+.variant7
+    db $7E, $23
+    db $7C, $23
 
 ThreeOfAKindEntityHandler::
     ld   hl, wEntitiesHealthTable                 ; $4931: $21 $60 $C3
     add  hl, bc                                   ; $4934: $09
     ld   [hl], $20                                ; $4935: $36 $20
-    ld   de, Data_006_4911                        ; $4937: $11 $11 $49
+    ld   de, ThreeOfAKindSpriteVariants           ; $4937: $11 $11 $49
     call RenderActiveEntitySpritesPair            ; $493A: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $493D: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $4940: $CD $56 $0C

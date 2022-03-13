@@ -81,28 +81,42 @@ jr_003_5369:
 jr_003_5395:
     jp   label_3935                               ; $5395: $C3 $35 $39
 
-Data_003_5398::
-    db   $F0, $17, $F2, $17, $F4, $16, $F6, $16
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; maybe for rock or pot entity
+Unknown007SpriteVariants::
+.variant0
+    db $F0, $17
+    db $F2, $17
+.variant1
+    db $F4, $16
+    db $F6, $16
 
-Data_003_53A0::
-    db   $F0, $16, $F2, $16, $F4, $16, $F6, $16
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; maybe for rock or pot entity
+Unknown008SpriteVariants::
+.variant0
+    db $F0, $16
+    db $F2, $16
+.variant1
+    db $F4, $16
+    db $F6, $16
 
 jp_003_53A8::
 IF __PATCH_3__
-    ld   de, Data_003_5398
+    ld   de, Unknown007SpriteVariants
     ld   a, [wIsIndoor]
     and  a
     jr   z, .render
-    ld   de, Data_003_53A0
+    ld   de, Unknown008SpriteVariants
 ELSE
     ld   a, [wIsIndoor]                           ; $53A8: $FA $A5 $DB
     and  a                                        ; $53AB: $A7
     jr   z, .isNotIndoor                          ; $53AC: $28 $05
-    ld   de, Data_003_53A0                        ; $53AE: $11 $A0 $53
+    ld   de, Unknown008SpriteVariants             ; $53AE: $11 $A0 $53
     jr   .render                                  ; $53B1: $18 $03
 
 .isNotIndoor
-    ld   de, Data_003_5398                        ; $53B3: $11 $98 $53
+    ld   de, Unknown007SpriteVariants             ; $53B3: $11 $98 $53
 ENDC
 
 .render

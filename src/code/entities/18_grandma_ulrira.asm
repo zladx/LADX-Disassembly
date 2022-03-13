@@ -1,11 +1,32 @@
-Data_018_4CFB::
-    db   $62, $21, $60, $21, $66, $21, $64, $21, $6C, $01, $6E, $01
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+GrandmaUlrira1SpriteVariants::
+.variant0
+    db $62, $21
+    db $60, $21
+.variant1
+    db $66, $21
+    db $64, $21
+.variant2
+    db $6C, $01
+    db $6E, $01
 
-Data_018_4D07::
-    db   $68, $01, $6A, $01, $6A, $21, $68, $21, $6C, $01, $6E, $01
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+GrandmaUlrira2SpriteVariants::
+.variant0
+    db $68, $01
+    db $6A, $01
+.variant1
+    db $6A, $21
+    db $68, $21
+.variant2
+    db $6C, $01
+    db $6E, $01
 
-Data_018_4D13::
-    db   $9A, $14, $9C, $14
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+GrandmaUlrira3SpriteVariants::
+.variant0
+    db $9A, $14
+    db $9C, $14
 
 GrandmaUlriraEntityHandler::
     ld   hl, wEntitiesPrivateState4Table          ; $4D17: $21 $40 $C4
@@ -30,7 +51,7 @@ jr_018_4D30:
     jp   nz, ClearEntityStatusBank18              ; $4D33: $C2 $08 $7F
 
 jr_018_4D36:
-    ld   de, Data_018_4CFB                        ; $4D36: $11 $FB $4C
+    ld   de, GrandmaUlrira1SpriteVariants         ; $4D36: $11 $FB $4C
     xor  a                                        ; $4D39: $AF
     ldh  [hMultiPurposeG], a                      ; $4D3A: $E0 $E8
     ld   a, [wTradeSequenceItem]                  ; $4D3C: $FA $0E $DB
@@ -48,7 +69,7 @@ jr_018_4D36:
 jr_018_4D51:
     ld   a, $01                                   ; $4D51: $3E $01
     ldh  [hMultiPurposeG], a                      ; $4D53: $E0 $E8
-    ld   de, Data_018_4D07                        ; $4D55: $11 $07 $4D
+    ld   de, GrandmaUlrira2SpriteVariants         ; $4D55: $11 $07 $4D
 
 jr_018_4D58:
     call RenderActiveEntitySpritesPair            ; $4D58: $CD $C0 $3B
@@ -154,7 +175,7 @@ jr_018_4DF3:
     ldh  a, [hActiveEntityPosX]                   ; $4E03: $F0 $EE
     sub  $04                                      ; $4E05: $D6 $04
     ldh  [hActiveEntityPosX], a                   ; $4E07: $E0 $EE
-    ld   de, Data_018_4D13                        ; $4E09: $11 $13 $4D
+    ld   de, GrandmaUlrira3SpriteVariants         ; $4E09: $11 $13 $4D
     call RenderActiveEntitySpritesPair            ; $4E0C: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4E0F: $CD $8A $3D
     ld   a, $02                                   ; $4E12: $3E $02

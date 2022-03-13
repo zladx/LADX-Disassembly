@@ -1,10 +1,11 @@
-Data_015_40FC::
-    db   $F8, $17, $FA, $17                       ; $40FC
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+MovingBlockSpriteVariants:: ; $40FC
+.variant0
+    db $F8, $17
+    db $FA, $17
 
 MovingBlockLeftTopEntityHandler::
-    db   $11                                      ; $4100
-    db   $FC                                      ; $4101: $FC
-    ld   b, b                                     ; $4102: $40
+    ld   de, MovingBlockSpriteVariants            ; $4100 $11 $FC $40
     call RenderActiveEntitySpritesPair            ; $4103: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $4106: $CD $0D $7B
     xor  a                                        ; $4109: $AF
@@ -155,7 +156,7 @@ jr_015_41C9:
     ret                                           ; $41C9: $C9
 
 MovingBlockLeftBottomEntityHandler::
-    ld   de, Data_015_40FC                        ; $41CA: $11 $FC $40
+    ld   de, MovingBlockSpriteVariants            ; $41CA: $11 $FC $40
     call RenderActiveEntitySpritesPair            ; $41CD: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $41D0: $CD $0D $7B
     xor  a                                        ; $41D3: $AF
@@ -240,7 +241,7 @@ jr_015_4239:
     jp   label_015_416F                           ; $4239: $C3 $6F $41
 
 MovingBlockBottomLeftEntityHandler::
-    ld   de, Data_015_40FC                        ; $423C: $11 $FC $40
+    ld   de, MovingBlockSpriteVariants            ; $423C: $11 $FC $40
     call RenderActiveEntitySpritesPair            ; $423F: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $4242: $CD $0D $7B
     xor  a                                        ; $4245: $AF
@@ -325,7 +326,7 @@ jr_015_42AB:
     jp   label_015_416F                           ; $42AB: $C3 $6F $41
 
 MovingBlockBottomRightEntityHandler:
-    ld   de, Data_015_40FC                        ; $42AE: $11 $FC $40
+    ld   de, MovingBlockSpriteVariants            ; $42AE: $11 $FC $40
     call RenderActiveEntitySpritesPair            ; $42B1: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $42B4: $CD $0D $7B
     xor  a                                        ; $42B7: $AF

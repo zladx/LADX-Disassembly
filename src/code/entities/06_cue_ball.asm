@@ -351,11 +351,23 @@ func_006_4E64::
     ld   c, $08                                   ; $4E73: $0E $08
     jp   RenderActiveEntitySpritesRect            ; $4E75: $C3 $E6 $3C
 
-Data_006_4E78::
-    db   $6C, $00, $6E, $00, $6E, $20, $6C, $20, $6C, $40, $6E, $40, $6E, $60, $6C, $60
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+CueBallSpriteVariants::
+.variant0
+    db $6C, $00
+    db $6E, $00
+.variant1
+    db $6E, $20
+    db $6C, $20
+.variant2
+    db $6C, $40
+    db $6E, $40
+.variant3
+    db $6E, $60
+    db $6C, $60
 
 label_006_4E88:
-    ld   de, Data_006_4E78                        ; $4E88: $11 $78 $4E
+    ld   de, CueBallSpriteVariants                ; $4E88: $11 $78 $4E
     call RenderActiveEntitySpritesPair            ; $4E8B: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $4E8E: $CD $C6 $64
     call GetEntityTransitionCountdown             ; $4E91: $CD $05 $0C

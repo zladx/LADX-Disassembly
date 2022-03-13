@@ -1,5 +1,11 @@
-Data_006_7373::
-    db   $70, $01, $70, $21, $72, $01, $72, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+PolsVoiceSpriteVariants::
+.variant0
+    db $70, $01
+    db $70, $21
+.variant1
+    db $72, $01
+    db $72, $21
 
 PolsVoiceEntityHandler::
     ld   a, [wLinkPlayingOcarinaCountdown]        ; $737B: $FA $66 $C1
@@ -32,7 +38,7 @@ PolsVoiceEntityHandler::
     ret                                           ; $73AC: $C9
 
 jr_006_73AD:
-    ld   de, Data_006_7373                        ; $73AD: $11 $73 $73
+    ld   de, PolsVoiceSpriteVariants              ; $73AD: $11 $73 $73
     call RenderActiveEntitySpritesPair            ; $73B0: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $73B3: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $73B6: $CD $F7 $64

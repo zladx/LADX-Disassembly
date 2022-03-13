@@ -352,9 +352,23 @@ jr_005_69EB:
     pop  bc                                       ; $6A20: $C1
     jp   label_005_7E9D                           ; $6A21: $C3 $9D $7E
 
-Data_005_6A24::
-    db   $66, $23, $64, $23, $64, $03, $66, $03, $62, $03, $62, $23, $60, $03, $60, $23
-    db   $68, $03, $68, $23
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+DodongoSnakeSpriteVariants::
+.variant0
+    db $66, $23
+    db $64, $23
+.variant1
+    db $64, $03
+    db $66, $03
+.variant2
+    db $62, $03
+    db $62, $23
+.variant3
+    db $60, $03
+    db $60, $23
+.variant4
+    db $68, $03
+    db $68, $23
 
 func_005_6A38::
     call GetEntityPrivateCountdown1               ; $6A38: $CD $00 $0C
@@ -420,8 +434,8 @@ func_005_6A5F::
     ld   a, [hl]                                  ; $6A9B: $7E
     ldh  [hActiveEntityVisualPosY], a             ; $6A9C: $E0 $EC
     pop  bc                                       ; $6A9E: $C1
-    ld   de, Data_005_6A24                        ; $6A9F: $11 $24 $6A
-    jp   RenderActiveEntitySpritesPair                ; $6AA2: $C3 $C0 $3B
+    ld   de, DodongoSnakeSpriteVariants           ; $6A9F: $11 $24 $6A
+    jp   RenderActiveEntitySpritesPair            ; $6AA2: $C3 $C0 $3B
 
 func_005_6AA5::
     ld   hl, wEntitiesInertiaTable                ; $6AA5: $21 $D0 $C3
@@ -467,7 +481,7 @@ func_005_6AA5::
     pop  bc                                       ; $6AE4: $C1
     ld   a, $04                                   ; $6AE5: $3E $04
     ldh  [hActiveEntitySpriteVariant], a          ; $6AE7: $E0 $F1
-    ld   de, Data_005_6A24                        ; $6AE9: $11 $24 $6A
+    ld   de, DodongoSnakeSpriteVariants           ; $6AE9: $11 $24 $6A
     call RenderActiveEntitySpritesPair            ; $6AEC: $CD $C0 $3B
     ld   hl, wEntitiesSpriteVariantTable          ; $6AEF: $21 $B0 $C3
     add  hl, bc                                   ; $6AF2: $09

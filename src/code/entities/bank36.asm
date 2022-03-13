@@ -15,7 +15,7 @@ label_036_4000:
     cp   $04                                      ; $4007: $FE $04
     jr   c, jr_036_4011                           ; $4009: $38 $06
 
-    ld   de, Data_036_490A                        ; $400B: $11 $0A $49
+    ld   de, Unknown076SpriteVariants             ; $400B: $11 $0A $49
     call RenderActiveEntitySpritesPair            ; $400E: $CD $C0 $3B
 
 jr_036_4011:
@@ -260,7 +260,7 @@ func_036_4161::
     ret                                           ; $4177: $C9
 
 label_036_4178:
-    ld   de, Data_036_48F2                        ; $4178: $11 $F2 $48
+    ld   de, Unknown074SpriteVariants             ; $4178: $11 $F2 $48
     call RenderActiveEntitySpritesPair            ; $417B: $CD $C0 $3B
     call func_036_6B5C                            ; $417E: $CD $5C $6B
     call ReturnIfNonInteractive_36.allowInactiveEntity ; $4181: $CD $46 $6A
@@ -1275,7 +1275,7 @@ label_036_4791:
     and  a                                        ; $4794: $A7
     ret  nz                                       ; $4795: $C0
 
-    ld   de, Data_036_48FA                        ; $4796: $11 $FA $48
+    ld   de, Unknown075SpriteVariants             ; $4796: $11 $FA $48
     call RenderActiveEntitySpritesPair            ; $4799: $CD $C0 $3B
     call ReturnIfNonInteractive_36                ; $479C: $CD $40 $6A
     ld   a, [wGameplayType]                       ; $479F: $FA $95 $DB
@@ -1460,25 +1460,86 @@ Data_036_48C2::
     dw   Data_036_48AA
     dw   Data_036_48B6
 
-Data_036_48CE::
-    db   $44, $07, $46, $07, $48, $07, $4A, $07, $46, $27, $44, $27, $4A, $27, $48, $27
-    db   $40, $07, $42, $07
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+PhotographerOverworldSpriteVariants::
+.variant0
+    db $44, $07
+    db $46, $07
+.variant1
+    db $48, $07
+    db $4A, $07
+.variant2
+    db $46, $27
+    db $44, $27
+.variant3
+    db $4A, $27
+    db $48, $27
+.variant4
+    db $40, $07
+    db $42, $07
 
-Data_036_48E2::
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Photographer2SpriteVariants::
 IF __PATCH_0__
-    db   $70, $06, $72, $06, $74, $06, $76, $06, $6A, $26, $68, $26, $6E, $26, $6C, $26
+.variant0
+    db $70, $06
+    db $72, $06
+.variant1
+    db $74, $06
+    db $76, $06
+.variant2
+    db $6A, $26
+    db $68, $26
+.variant3
+    db $6E, $26
+    db $6C, $26
 ELSE
-    db   $70, $03, $72, $03, $74, $03, $76, $03, $6A, $23, $68, $23, $6E, $23, $6C, $23
+.variant0
+    db $70, $03
+    db $72, $03
+.variant1
+    db $74, $03
+    db $76, $03
+.variant2
+    db $6A, $23
+    db $68, $23
+.variant3
+    db $6E, $23
+    db $6C, $23
 ENDC
 
-Data_036_48F2::
-    db   $70, $06, $72, $06, $74, $06, $76, $06
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown074SpriteVariants::
+.variant0
+    db $70, $06
+    db $72, $06
+.variant1
+    db $74, $06
+    db $76, $06
 
-Data_036_48FA::
-    db   $48, $06, $4A, $06, $4C, $06, $4E, $06, $70, $06, $72, $06, $74, $06, $76, $06
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown075SpriteVariants::
+.variant0
+    db $48, $06
+    db $4A, $06
+.variant1
+    db $4C, $06
+    db $4E, $06
+.variant2
+    db $70, $06
+    db $72, $06
+.variant3
+    db $74, $06
+    db $76, $06
 
-Data_036_490A::
-    db   $4E, $26, $4C, $26, $4A, $26, $48, $26
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown076SpriteVariants::
+.variant0
+    db $4E, $26
+    db $4C, $26
+.variant1
+    db $4A, $26
+    db $48, $26
 
 PhotographerEntityHandler::
     ld   a, [wIsIndoor]                           ; $4912: $FA $A5 $DB
@@ -1489,7 +1550,7 @@ PhotographerEntityHandler::
     cp   UNKNOWN_ROOM_DA                          ; $491A: $FE $DA
     jr   nz, .jr_036_4925                         ; $491C: $20 $07
 
-    ld   de, Data_036_48E2                        ; $491E: $11 $E2 $48
+    ld   de, Photographer1SpriteVariants          ; $491E: $11 $E2 $48
     call RenderActiveEntitySpritesPair            ; $4921: $CD $C0 $3B
     ret                                           ; $4924: $C9
 
@@ -1517,7 +1578,7 @@ PhotographerEntityHandler::
     cp   $0D                                      ; $494B: $FE $0D
     jp   c, UnloadEntityAndReturn                 ; $494D: $DA $8D $3F
 
-    ld   de, Data_036_48CE                        ; $4950: $11 $CE $48
+    ld   de, PhotographerOverworldSpriteVariants  ; $4950: $11 $CE $48
     call RenderActiveEntitySpritesPair            ; $4953: $CD $C0 $3B
     call ReturnIfNonInteractive_36                ; $4956: $CD $40 $6A
     ldh  a, [hActiveEntityState]                  ; $4959: $F0 $F0
@@ -3953,8 +4014,15 @@ jr_036_5870:
     pop  hl                                       ; $5875: $E1
     pop  af                                       ; $5876: $F1
 
-Data_036_5877::
-    db   $77, $C9
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; list overlapps with next list
+DungeonBookSpriteVariants::
+.variant0
+    db $77, $C9
+;   db $58, $02 ; from next list
+.variant1
+;   db $5A, $00 ; from next list
+;   db $5A, $20 ; from next list
 
 Data_036_5879::
     db   $58, $02, $5A, $00, $5A, $20
@@ -3964,7 +4032,7 @@ ColorDungeonBookEntityHandler::
     and  a                                        ; $5881: $A7
     jr   z, jr_036_588C                           ; $5882: $28 $08
 
-    ld   de, Data_036_5877                        ; $5884: $11 $77 $58
+    ld   de, DungeonBookSpriteVariants            ; $5884: $11 $77 $58
     call RenderActiveEntitySpritesPair            ; $5887: $CD $C0 $3B
     jr   jr_036_5892                              ; $588A: $18 $06
 
@@ -4328,7 +4396,7 @@ func_036_5A87::
     call SetEntityState                           ; $5A90: $CD $07 $6C
     ret                                           ; $5A93: $C9
 
-Data_036_5A94:
+Unknown077SpriteVariantsPartE:
     db   $40, $03
     db   $42, $03
     db   $42, $23
@@ -4342,7 +4410,7 @@ Data_036_5A94:
     db   $4E, $23
     db   $4C, $23
 
-Data_036_5AAC:
+Unknown077SpriteVariantsPartD:
     db   $40, $02
     db   $42, $02
     db   $42, $22
@@ -4356,9 +4424,9 @@ Data_036_5AAC:
     db   $4C, $02
     db   $4E, $02
 
-Data_036_5AC4::
-    dw   Data_036_5A94
-    dw   Data_036_5AAC
+Unknown077SpriteVariantsCombiner::
+    dw   Unknown077SpriteVariantsPartE
+    dw   Unknown077SpriteVariantsPartD
 
 func_036_5AC8::
     ld   d, $00                                   ; $5AC8: $16 $00
@@ -4366,7 +4434,7 @@ func_036_5AC8::
     sub  ENTITY_COLOR_GUARDIAN_BLUE               ; $5ACC: $D6 $F6
     sla  a                                        ; $5ACE: $CB $27
     ld   e, a                                     ; $5AD0: $5F
-    ld   hl, Data_036_5AC4                        ; $5AD1: $21 $C4 $5A
+    ld   hl, Unknown077SpriteVariantsCombiner     ; $5AD1: $21 $C4 $5A
     add  hl, de                                   ; $5AD4: $19
     ld   e, [hl]                                  ; $5AD5: $5E
     inc  hl                                       ; $5AD6: $23
@@ -4374,14 +4442,17 @@ func_036_5AC8::
     call RenderActiveEntitySpritesPair            ; $5AD8: $CD $C0 $3B
     ret                                           ; $5ADB: $C9
 
-Data_036_5ADC::
-    db   $40, $01
-    db   $40, $21
-    db   $42, $01
-    db   $42, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown078SpriteVariants::
+.variant0
+    db $40, $01
+    db $40, $21
+.variant1
+    db $42, $01
+    db $42, $21
 
 label_036_5AE4:
-    ld   de, Data_036_5ADC                        ; $5AE4: $11 $DC $5A
+    ld   de, Unknown078SpriteVariants             ; $5AE4: $11 $DC $5A
     call RenderActiveEntitySpritesPair            ; $5AE7: $CD $C0 $3B
     call ReturnIfNonInteractive_36                ; $5AEA: $CD $40 $6A
     call DecrementEntityIgnoreHitsCountdown       ; $5AED: $CD $56 $0C
@@ -4390,13 +4461,35 @@ label_036_5AE4:
     call func_036_6C15                            ; $5AF6: $CD $15 $6C
     jp   label_036_5BE8                           ; $5AF9: $C3 $E8 $5B
 
-
-Data_036_5AFC::
-    db   $74, $01, $76, $01, $74, $04, $76, $04, $70, $01, $72, $01, $70, $04, $72, $04
-    db   $76, $21, $74, $21, $76, $24, $74, $24, $78, $01, $7A, $01, $78, $04, $7A, $04
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown079SpriteVariants::
+.variant0
+    db $74, $01
+    db $76, $01
+.variant1
+    db $74, $04
+    db $76, $04
+.variant2
+    db $70, $01
+    db $72, $01
+.variant3
+    db $70, $04
+    db $72, $04
+.variant4
+    db $76, $21
+    db $74, $21
+.variant5
+    db $76, $24
+    db $74, $24
+.variant6
+    db $78, $01
+    db $7A, $01
+.variant7
+    db $78, $04
+    db $7A, $04
 
 jr_036_5B1C:
-    ld   de, Data_036_5AFC                        ; $5B1C: $11 $FC $5A
+    ld   de, Unknown079SpriteVariants             ; $5B1C: $11 $FC $5A
     call RenderActiveEntitySpritesPair            ; $5B1F: $CD $C0 $3B
     call ReturnIfNonInteractive_36                ; $5B22: $CD $40 $6A
     call DecrementEntityIgnoreHitsCountdown       ; $5B25: $CD $56 $0C
@@ -4413,8 +4506,20 @@ jr_036_5B1C:
     ld   [hl], a                                  ; $5B3E: $77
     jp   label_036_5BE8                           ; $5B3F: $C3 $E8 $5B
 
-Data_036_5B42::
-    db   $6C, $07, $6E, $07, $6E, $27, $6C, $27, $6E, $67, $6C, $67, $6C, $47, $6E, $47
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+BouncingBoulderSpriteVariants::
+.variant0
+    db $6C, $07
+    db $6E, $07
+.variant1
+    db $6E, $27
+    db $6C, $27
+.variant2
+    db $6E, $67
+    db $6C, $67
+.variant3
+    db $6C, $47
+    db $6E, $47
 
 Data_036_5B52::
     db   $0C, $F4, $05, $FB
@@ -4446,7 +4551,7 @@ jr_036_5B73:
     bit  2, a                                     ; $5B79: $CB $57
     jp   nz, label_036_5AE4                       ; $5B7B: $C2 $E4 $5A
 
-    ld   de, Data_036_5B42                        ; $5B7E: $11 $42 $5B
+    ld   de, BouncingBoulderSpriteVariants        ; $5B7E: $11 $42 $5B
     call RenderActiveEntitySpritesPair            ; $5B81: $CD $C0 $3B
     call ReturnIfNonInteractive_36                ; $5B84: $CD $40 $6A
     call DecrementEntityIgnoreHitsCountdown       ; $5B87: $CD $56 $0C
@@ -5874,13 +5979,47 @@ func_036_6382::
     ld   a, $02                                   ; $638F: $3E $02
     ret                                           ; $6391: $C9
 
-Data_036_6392::
-    db   $70, $02, $70, $22, $72, $02, $74, $02, $76, $01, $76, $21, $74, $21, $72, $21
-    db   $70, $01, $70, $21, $72, $01, $74, $01, $76, $03, $76, $23, $74, $23, $72, $23
-    db   $70, $03, $70, $23, $72, $03, $74, $03, $76, $02, $76, $22, $74, $22, $72, $22
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown079SpriteVariants::
+.variant0
+    db $70, $02
+    db $70, $22
+.variant1
+    db $72, $02
+    db $74, $02
+.variant2
+    db $76, $01
+    db $76, $21
+.variant3
+    db $74, $21
+    db $72, $21
+.variant4
+    db $70, $01
+    db $70, $21
+.variant5
+    db $72, $01
+    db $74, $01
+.variant6
+    db $76, $03
+    db $76, $23
+.variant7
+    db $74, $23
+    db $72, $23
+.variant8
+    db $70, $03
+    db $70, $23
+.variant9
+    db $72, $03
+    db $74, $03
+.variant10
+    db $76, $02
+    db $76, $22
+.variant11
+    db $74, $22
+    db $72, $22
 
 func_036_63C2::
-    ld   de, Data_036_6392                        ; $63C2: $11 $92 $63
+    ld   de, Unknown079SpriteVariants             ; $63C2: $11 $92 $63
     call RenderActiveEntitySpritesPair            ; $63C5: $CD $C0 $3B
     ret                                           ; $63C8: $C9
 
@@ -7627,8 +7766,20 @@ jr_036_6D9E:
     ld   [wPaletteDataFlags], a                   ; $6DA3: $EA $D1 $DD
     ret                                           ; $6DA6: $C9
 
-Data_036_6DA7::
-    db   $FF, $00, $FF, $20, $3A, $00, $3A, $20, $3C, $00, $3C, $20, $3C, $00, $3C, $20
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+TileGlintSpriteVariants::
+.variant0
+    db $FF, $00
+    db $FF, $20
+.variant1
+    db $3A, $00
+    db $3A, $20
+.variant2
+    db $3C, $00
+    db $3C, $20
+.varint3
+    db $3C, $00
+    db $3C, $20
 
 Data_036_6DB7::
     db   $58, $78, $78, $28, $28, $28, $78, $58, $28, $78, $28, $78, $28, $78, $58, $58
@@ -7683,7 +7834,7 @@ jr_036_6E3F:
     rra                                           ; $6E4B: $1F
     and  $03                                      ; $6E4C: $E6 $03
     call SetEntitySpriteVariant                   ; $6E4E: $CD $0C $3B
-    ld   de, Data_036_6DA7                        ; $6E51: $11 $A7 $6D
+    ld   de, TileGlintSpriteVariants              ; $6E51: $11 $A7 $6D
     call RenderActiveEntitySpritesPair            ; $6E54: $CD $C0 $3B
 .tileGlintShownEnd
 

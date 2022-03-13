@@ -394,8 +394,14 @@ jr_006_6A35:
 jr_006_6A36:
     ret                                           ; $6A36: $C9
 
-Data_006_6A37::
-    db   $78, $01, $78, $21, $7A, $01, $7A, $21
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+OwlEventSpriteVariants::
+.variant0
+    db $78, $01
+    db $78, $21
+.variant1
+    db $7A, $01
+    db $7A, $21
 
 Data_006_6A3F::
     db   $00, $F8, $7C, $01, $00, $00, $7E, $01
@@ -407,7 +413,7 @@ func_006_6A4F::
     jr   nc, jr_006_6A5B                          ; $6A53: $30 $06
 
 func_006_6A55::
-    ld   de, Data_006_6A37                        ; $6A55: $11 $37 $6A
+    ld   de, OwlEventSpriteVariants               ; $6A55: $11 $37 $6A
     jp   RenderActiveEntitySpritesPair            ; $6A58: $C3 $C0 $3B
 
 jr_006_6A5B:

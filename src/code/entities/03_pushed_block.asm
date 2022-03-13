@@ -1,5 +1,11 @@
-data_003_5235::
-    db   $6E, $07, $6E, $27, $F8, $17, $FA, $17
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown011SpriteVariants::
+.variant0
+    db $6E, $07
+    db $6E, $27
+.variant1
+    db $F8, $17
+    db $FA, $17
 
 Data_003_523D::
     db   $F8, $08, $00, $00
@@ -7,23 +13,26 @@ Data_003_523D::
 Data_003_5241::
     db   $00, $00, $08, $F8
 
-data_003_5245::
-    db   $7E, $07, $7E, $27
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+Unknown010SpriteVariants::
+.variant0
+    db $7E, $07
+    db $7E, $27
 
 PushedBlockEntityHandler::
     ld   a, [wIsIndoor]                           ; $5249: $FA $A5 $DB
     ldh  [hActiveEntitySpriteVariant], a          ; $524C: $E0 $F1
-    ld   de, data_003_5235                        ; $524E: $11 $35 $52
+    ld   de, Unknown011SpriteVariants             ; $524E: $11 $35 $52
     and  a                                        ; $5251: $A7
-    jr   nz, jr_003_525D                          ; $5252: $20 $09
+    jr   nz, .render                              ; $5252: $20 $09
 
     ldh  a, [hMapRoom]                            ; $5254: $F0 $F6
     cp   ROOM_OW_COLOR_DUNGEON_ENTRANCE           ; $5256: $FE $77
-    jr   nz, jr_003_525D                          ; $5258: $20 $03
+    jr   nz, .render                              ; $5258: $20 $03
 
-    ld   de, data_003_5245                        ; $525A: $11 $45 $52
+    ld   de, Unknown010SpriteVariants             ; $525A: $11 $45 $52
 
-jr_003_525D:
+.render:
     call RenderActiveEntitySpritesPair            ; $525D: $CD $C0 $3B
     call ReturnIfNonInteractive_03                ; $5260: $CD $78 $7F
     call UpdateEntityPosWithSpeed_03              ; $5263: $CD $25 $7F

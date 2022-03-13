@@ -161,9 +161,9 @@ func_23E4::
     ld   hl, data_23D2 - $02                      ; $23F2: $21 $D0 $23
     add  hl, de                                   ; $23F5: $19
     ld   a, [hl]                                  ; $23F6: $7E
-    add  a, $00                                   ; $23F7: $C6 $00
+    add  a, LOW(wD500)                            ; $23F7: $C6 $00
     ld   c, a                                     ; $23F9: $4F
-    ld   a, $D5                                   ; $23FA: $3E $D5
+    ld   a, HIGH(wD500)                           ; $23FA: $3E $D5
     adc  a, $00                                   ; $23FC: $CE $00
     ld   b, a                                     ; $23FE: $47
 

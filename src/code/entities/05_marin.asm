@@ -602,7 +602,7 @@ MarinEntityHandler_Indoor::
     cp   TRADING_ITEM_PINEAPPLE                   ; $51D1: $FE $07
     jr   c, jr_005_51FB                           ; $51D3: $38 $26
 
-    ld   a, [wOverworldRoomStatus + $FD]                               ; $51D5: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + $FD]          ; $51D5: $FA $FD $D8
     and  $30                                      ; $51D8: $E6 $30
     jp   nz, ClearEntityStatus_05                 ; $51DA: $C2 $4B $7B
 
@@ -719,7 +719,7 @@ func_005_52AF::
     ldh  [hLinkPositionY], a                      ; $52BB: $E0 $99
     ld   a, $02                                   ; $52BD: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $52BF: $E0 $A1
-    ld   a, LINK_ANIMATION_STATE_NO_UPDATE       ; $52C1: $3E $FF
+    ld   a, LINK_ANIMATION_STATE_NO_UPDATE        ; $52C1: $3E $FF
     ldh  [hLinkAnimationState], a                 ; $52C3: $E0 $9D
     ld   de, Data_005_5258                        ; $52C5: $11 $58 $52
     call RenderActiveEntitySpritesPair            ; $52C8: $CD $C0 $3B

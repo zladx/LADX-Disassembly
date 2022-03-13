@@ -9209,8 +9209,8 @@ jr_007_7AD1:
     ld   a, [hl]                                  ; $7AEA: $7E
     ld   [wD5C2], a                               ; $7AEB: $EA $C2 $D5
     ld   a, $02                                   ; $7AEE: $3E $02
-    ld   [wD5C0+1], a                               ; $7AF0: $EA $C1 $D5
-    ld   [wD5C2+1], a                               ; $7AF3: $EA $C3 $D5
+    ld   [wD5C0+1], a                             ; $7AF0: $EA $C1 $D5
+    ld   [wD5C2+1], a                             ; $7AF3: $EA $C3 $D5
     ld   hl, Data_007_7A7D                        ; $7AF6: $21 $7D $7A
     add  hl, de                                   ; $7AF9: $19
     ld   a, [hl]                                  ; $7AFA: $7E
@@ -9233,7 +9233,7 @@ jr_007_7AD1:
     xor  a                                        ; $7B15: $AF
     ldh  [hMultiPurpose3], a                      ; $7B16: $E0 $DA
     pop  hl                                       ; $7B18: $E1
-    call func_1819                               ; $7B19: $CD $19 $18
+    call func_1819                                ; $7B19: $CD $19 $18
     ld   a, $02                                   ; $7B1C: $3E $02
     call func_015_7964_trampoline                 ; $7B1E: $CD $A0 $3D
     pop  bc                                       ; $7B21: $C1
@@ -9245,7 +9245,7 @@ jr_007_7AD1:
     ret  z                                        ; $7B29: $C8
 
     ld   de, Data_007_7A95                        ; $7B2A: $11 $95 $7A
-    jp   RenderActiveEntitySpritesPair                ; $7B2D: $C3 $C0 $3B
+    jp   RenderActiveEntitySpritesPair            ; $7B2D: $C3 $C0 $3B
 
 func_007_7B30::
     xor  $01                                      ; $7B30: $EE $01

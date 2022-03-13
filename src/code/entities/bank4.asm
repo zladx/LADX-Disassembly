@@ -7421,14 +7421,14 @@ jr_004_7BAC:
     jp   CopyEntityPositionToActivePosition       ; $7BB4: $C3 $8A $3D
 
 func_004_7BB7::
-    ld   a, [wItemPickedUpInShop]                               ; $7BB7: $FA $09 $C5
+    ld   a, [wItemPickedUpInShop]                 ; $7BB7: $FA $09 $C5
     and  a                                        ; $7BBA: $A7
     ret  z                                        ; $7BBB: $C8
 
     dec  a                                        ; $7BBC: $3D
     ldh  [hActiveEntitySpriteVariant], a          ; $7BBD: $E0 $F1
     ld   a, $01                                   ; $7BBF: $3E $01
-    ld   [wIsCarryingLiftedObject], a                               ; $7BC1: $EA $5C $C1
+    ld   [wIsCarryingLiftedObject], a             ; $7BC1: $EA $5C $C1
     call ResetSpinAttack                          ; $7BC4: $CD $AF $0C
     ldh  a, [hLinkPositionX]                      ; $7BC7: $F0 $98
     ldh  [hActiveEntityPosX], a                   ; $7BC9: $E0 $EE
@@ -7440,7 +7440,7 @@ func_004_7BB7::
     jr   nz, jr_004_7BDD                          ; $7BD5: $20 $06
 
     ld   de, Data_004_7B58                        ; $7BD7: $11 $58 $7B
-    jp   RenderActiveEntitySpritesPair                ; $7BDA: $C3 $C0 $3B
+    jp   RenderActiveEntitySpritesPair            ; $7BDA: $C3 $C0 $3B
 
 jr_004_7BDD:
     ld   de, Data_004_7B5A                        ; $7BDD: $11 $5A $7B

@@ -797,11 +797,11 @@ GoriyaEntityHandler::
     set  7, [hl]                                  ; $45EA: $CB $FE
     ld   a, [wTradeSequenceItem]                  ; $45EC: $FA $0E $DB
     cp   $0E                                      ; $45EF: $FE $0E
-    jp   nz, ClearEntityStatus_19                        ; $45F1: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                 ; $45F1: $C2 $61 $7E
 
     ld   a, [wDB7F]                               ; $45F4: $FA $7F $DB
     and  a                                        ; $45F7: $A7
-    jp   nz, ClearEntityStatus_19                        ; $45F8: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                 ; $45F8: $C2 $61 $7E
 
     ld   hl, wEntitiesPosXTable                   ; $45FB: $21 $00 $C2
     add  hl, bc                                   ; $45FE: $09
@@ -1047,7 +1047,7 @@ Data_019_47B9::
 
 MaskedMimicGoriyaEntityHandler::
     ldh  a, [hMapId]                              ; $47BC: $F0 $F7
-    cp   MAP_CAVE_WATER                               ; $47BE: $FE $1F
+    cp   MAP_CAVE_WATER                           ; $47BE: $FE $1F
     jp   z, GoriyaEntityHandler                   ; $47C0: $CA $E4 $45
 
     ld   de, Data_019_4796                        ; $47C3: $11 $96 $47
@@ -1695,7 +1695,7 @@ label_019_4BCC::
 jr_019_4BF7:
     ldh  a, [hActiveEntitySpriteVariant]          ; $4BF7: $F0 $F1
     cp   $07                                      ; $4BF9: $FE $07
-    jp   nz, ClearEntityStatus_19                        ; $4BFB: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                 ; $4BFB: $C2 $61 $7E
 
     ld   e, $08                                   ; $4BFE: $1E $08
     ld   hl, wHasInstrument1                      ; $4C00: $21 $65 $DB
@@ -3021,7 +3021,7 @@ label_019_54FD:
 jr_019_5519:
     call ReturnIfNonInteractive_19                ; $5519: $CD $3D $7D
     call GetEntityTransitionCountdown             ; $551C: $CD $05 $0C
-    jp   z, ClearEntityStatus_19                         ; $551F: $CA $61 $7E
+    jp   z, ClearEntityStatus_19                  ; $551F: $CA $61 $7E
 
     cp   $08                                      ; $5522: $FE $08
     jr   nz, jr_019_552C                          ; $5524: $20 $06
@@ -3697,7 +3697,7 @@ Data_019_59BC::
 RoosterEntityHandler::
     ld   a, [wIsRoosterFollowingLink]             ; $59DC: $FA $7B $DB
     and  a                                        ; $59DF: $A7
-    jp   z, ClearEntityStatus_19                         ; $59E0: $CA $61 $7E
+    jp   z, ClearEntityStatus_19                  ; $59E0: $CA $61 $7E
 
     ldh  a, [hMapRoom]                            ; $59E3: $F0 $F6
     ld   hl, wEntitiesRoomTable                   ; $59E5: $21 $E0 $C3
@@ -4248,7 +4248,7 @@ Data_019_5E10::
 GhostEntityHandler::
     ld   a, [wIsGhostFollowingLink]               ; $5E18: $FA $79 $DB
     cp   $01                                      ; $5E1B: $FE $01
-    jp   nz, ClearEntityStatus_19                        ; $5E1D: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                 ; $5E1D: $C2 $61 $7E
 
     ldh  a, [hMapRoom]                            ; $5E20: $F0 $F6
     ld   hl, wEntitiesRoomTable                   ; $5E22: $21 $E0 $C3
@@ -6051,7 +6051,7 @@ label_019_6CE7:
     add  hl, bc                                   ; $6CF8: $09
     ld   a, [hl]                                  ; $6CF9: $7E
     and  $80                                      ; $6CFA: $E6 $80
-    jp   nz, ClearEntityStatus_19                        ; $6CFC: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                 ; $6CFC: $C2 $61 $7E
 
     ret                                           ; $6CFF: $C9
 
@@ -7405,14 +7405,14 @@ func_019_787D::
     ld   de, Data_019_7879                        ; $7881: $11 $79 $78
     call RenderActiveEntitySpritesPair            ; $7884: $CD $C0 $3B
     call UpdateEntityYPosWithSpeed_19             ; $7887: $CD $BB $7D
-    ld   hl, wEntitiesSpeedYTable                       ; $788A: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                 ; $788A: $21 $50 $C2
     add  hl, bc                                   ; $788D: $09
     inc  [hl]                                     ; $788E: $34
     ld   a, [hl]                                  ; $788F: $7E
     and  $80                                      ; $7890: $E6 $80
     jr   nz, jr_019_78CB                          ; $7892: $20 $37
 
-    ld   hl, wEntitiesPosYTable                         ; $7894: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $7894: $21 $10 $C2
     add  hl, bc                                   ; $7897: $09
 
 jr_019_7898:

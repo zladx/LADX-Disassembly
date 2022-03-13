@@ -32,7 +32,7 @@ jr_018_4D30:
 jr_018_4D36:
     ld   de, Data_018_4CFB                        ; $4D36: $11 $FB $4C
     xor  a                                        ; $4D39: $AF
-    ldh  [hMultiPurposeG], a                               ; $4D3A: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $4D3A: $E0 $E8
     ld   a, [wTradeSequenceItem]                  ; $4D3C: $FA $0E $DB
     cp   TRADING_ITEM_FISHING_HOOK                ; $4D3F: $FE $0B
     jr   nc, jr_018_4D58                          ; $4D41: $30 $15
@@ -47,7 +47,7 @@ jr_018_4D36:
 
 jr_018_4D51:
     ld   a, $01                                   ; $4D51: $3E $01
-    ldh  [hMultiPurposeG], a                               ; $4D53: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $4D53: $E0 $E8
     ld   de, Data_018_4D07                        ; $4D55: $11 $07 $4D
 
 jr_018_4D58:

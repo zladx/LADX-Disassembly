@@ -1300,7 +1300,7 @@ jr_004_4937:
     ret                                           ; $4937: $C9
 
 jr_004_4938:
-    call GetEntityTransitionCountdown                 ; $4938: $CD $05 $0C
+    call GetEntityTransitionCountdown             ; $4938: $CD $05 $0C
     jp   z, func_004_6D7A                         ; $493B: $CA $7A $6D
 
 GenieState4Handler::
@@ -1316,7 +1316,7 @@ GenieState4Handler::
     call label_3B44                               ; $4951: $CD $44 $3B
     call UpdateEntityPosWithSpeed_04              ; $4954: $CD $CA $6D
     call AddEntityZSpeedToPos_04                  ; $4957: $CD $03 $6E
-    ld   hl, wEntitiesSpeedZTable                                ; $495A: $21 $20 $C3
+    ld   hl, wEntitiesSpeedZTable                 ; $495A: $21 $20 $C3
     add  hl, bc                                   ; $495D: $09
     dec  [hl]                                     ; $495E: $35
     dec  [hl]                                     ; $495F: $35

@@ -48,7 +48,7 @@ jr_018_5A18:
     ld   [wEntitiesSpriteVariantTable], a         ; $5A19: $EA $B0 $C3
     ld   de, Data_018_59B8                        ; $5A1C: $11 $B8 $59
     call RenderActiveEntitySpritesPair            ; $5A1F: $CD $C0 $3B
-    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $5A22: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $5A22: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $5A24: $E0 $9D
     ld   a, $02                                   ; $5A26: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5A28: $E0 $A1

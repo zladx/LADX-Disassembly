@@ -83,7 +83,7 @@ jr_006_5A43:
     add  hl, bc                                   ; $5A58: $09
     ld   a, [hl]                                  ; $5A59: $7E
     and  $80                                      ; $5A5A: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $5A5C: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $5A5C: $E0 $E8
     jr   z, jr_006_5A67                           ; $5A5E: $28 $07
 
     xor  a                                        ; $5A60: $AF

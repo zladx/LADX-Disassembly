@@ -25,10 +25,10 @@ WizrobeEntityHandler::
     add  hl, bc                                   ; $763D: $09
     ld   a, [hl]                                  ; $763E: $7E
     JP_TABLE                                      ; $763F
-._00 dw WizrobeState0Handler                             ; $7640
-._01 dw WizrobeState1Handler                             ; $7642
-._02 dw WizrobeState2Handler                             ; $7644
-._03 dw WizrobeState3Handler                             ; $7646
+._00 dw WizrobeState0Handler                      ; $7640
+._01 dw WizrobeState1Handler                      ; $7642
+._02 dw WizrobeState2Handler                      ; $7644
+._03 dw WizrobeState3Handler                      ; $7646
 
 WizrobeState0Handler::
     ld   hl, wEntitiesTransitionCountdownTable    ; $7648: $21 $E0 $C2

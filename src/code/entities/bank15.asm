@@ -15,7 +15,7 @@ CrystalSwitchEntityHandler::
     ld   [hl], $FF                                ; $4328: $36 $FF
     call GetEntityTransitionCountdown             ; $432A: $CD $05 $0C
     rla                                           ; $432D: $17
-    and  OAMF_PAL1 ; $432E: $E6 $10
+    and  OAMF_PAL1                                ; $432E: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4330: $E0 $ED
     ld   de, Data_015_4320                        ; $4332: $11 $20 $43
     call RenderActiveEntitySpritesPair            ; $4335: $CD $C0 $3B
@@ -1488,7 +1488,7 @@ label_015_4DB5:
     ldh  a, [hFrameCounter]                       ; $4DBA: $F0 $E7
     rla                                           ; $4DBC: $17
     rla                                           ; $4DBD: $17
-    and  OAMF_PAL1 ; $4DBE: $E6 $10
+    and  OAMF_PAL1                                ; $4DBE: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4DC0: $E0 $ED
     ld   de, Data_015_4D9D                        ; $4DC2: $11 $9D $4D
     call RenderActiveEntitySpritesPair            ; $4DC5: $CD $C0 $3B
@@ -1596,14 +1596,14 @@ label_015_4E62:
     ldh  a, [hFrameCounter]                       ; $4E62: $F0 $E7
     rla                                           ; $4E64: $17
     rla                                           ; $4E65: $17
-    and  OAMF_PAL1 ; $4E66: $E6 $10
+    and  OAMF_PAL1                                ; $4E66: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4E68: $E0 $ED
     ld   de, Data_015_4DA9                        ; $4E6A: $11 $A9 $4D
     call RenderActiveEntitySpritesPair            ; $4E6D: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $4E70: $CD $0D $7B
     call UpdateEntityPosWithSpeed_15              ; $4E73: $CD $88 $7B
     call GetEntityTransitionCountdown             ; $4E76: $CD $05 $0C
-    jp   z, ClearEntityStatus_15            ; $4E79: $CA $31 $7C
+    jp   z, ClearEntityStatus_15                  ; $4E79: $CA $31 $7C
 
     ret                                           ; $4E7C: $C9
 
@@ -1656,16 +1656,16 @@ label_015_4ECB:
     ldh  [hJingle], a                             ; $4ED5: $E0 $F2
     ld   a, TRANSCIENT_VFX_SWORD_POKE             ; $4ED7: $3E $05
     call AddTranscientVfx                         ; $4ED9: $CD $C7 $0C
-    jp   ClearEntityStatus_15               ; $4EDC: $C3 $31 $7C
+    jp   ClearEntityStatus_15                     ; $4EDC: $C3 $31 $7C
 
 jr_015_4EDF:
     ldh  a, [hActiveEntityPosX]                   ; $4EDF: $F0 $EE
     cp   $A8                                      ; $4EE1: $FE $A8
-    jp   nc, ClearEntityStatus_15                       ; $4EE3: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                 ; $4EE3: $D2 $31 $7C
 
     ldh  a, [hActiveEntityVisualPosY]             ; $4EE6: $F0 $EC
     cp   $84                                      ; $4EE8: $FE $84
-    jp   nc, ClearEntityStatus_15                       ; $4EEA: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                 ; $4EEA: $D2 $31 $7C
 
     ret                                           ; $4EED: $C9
 
@@ -2651,7 +2651,7 @@ label_015_54D6:
     call RenderActiveEntitySpritesPair            ; $54D9: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $54DC: $CD $0D $7B
     call GetEntityTransitionCountdown             ; $54DF: $CD $05 $0C
-    jp   z, ClearEntityStatus_15            ; $54E2: $CA $31 $7C
+    jp   z, ClearEntityStatus_15                  ; $54E2: $CA $31 $7C
 
     rra                                           ; $54E5: $1F
     rra                                           ; $54E6: $1F
@@ -2731,7 +2731,7 @@ jr_015_5652:
     ld   a, [hl]                                  ; $5653: $7E
     ldh  [hActiveEntityVisualPosY], a             ; $5654: $E0 $EC
     ld   de, Data_015_5625                        ; $5656: $11 $25 $56
-    ldh  a, [hMultiPurposeG]                               ; $5659: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5659: $F0 $E8
     cp   $00                                      ; $565B: $FE $00
     jr   z, jr_015_566B                           ; $565D: $28 $0C
 
@@ -2753,7 +2753,7 @@ jr_015_566E:
     call func_015_7964_trampoline                 ; $5673: $CD $A0 $3D
 
 jr_015_5676:
-    ldh  a, [hMultiPurposeG]                               ; $5676: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5676: $F0 $E8
     inc  a                                        ; $5678: $3C
     cp   $08                                      ; $5679: $FE $08
     jr   nz, jr_015_5639                          ; $567B: $20 $BC
@@ -5357,7 +5357,7 @@ label_015_6D40:
     call RenderActiveEntitySpritesPair            ; $6D43: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $6D46: $CD $0D $7B
     call GetEntityTransitionCountdown             ; $6D49: $CD $05 $0C
-    jp   z, ClearEntityStatus_15            ; $6D4C: $CA $31 $7C
+    jp   z, ClearEntityStatus_15                  ; $6D4C: $CA $31 $7C
 
     rra                                           ; $6D4F: $1F
     rra                                           ; $6D50: $1F
@@ -5377,7 +5377,7 @@ label_015_6D6E:
     ldh  a, [hFrameCounter]                       ; $6D6E: $F0 $E7
     rla                                           ; $6D70: $17
     rla                                           ; $6D71: $17
-    and  OAMF_PAL1 ; $6D72: $E6 $10
+    and  OAMF_PAL1                                ; $6D72: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $6D74: $E0 $ED
     ld   de, Data_015_6D5E                        ; $6D76: $11 $5E $6D
     call RenderActiveEntitySpritesPair            ; $6D79: $CD $C0 $3B
@@ -8026,7 +8026,7 @@ func_015_7DF5::
     ldh  [hLinkPositionY], a                      ; $7E01: $E0 $99
     ld   a, $02                                   ; $7E03: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7E05: $E0 $A1
-    ld   a, LINK_ANIMATION_STATE_NO_UPDATE       ; $7E07: $3E $FF
+    ld   a, LINK_ANIMATION_STATE_NO_UPDATE        ; $7E07: $3E $FF
     ldh  [hLinkAnimationState], a                 ; $7E09: $E0 $9D
     ld   de, Data_015_7D50                        ; $7E0B: $11 $50 $7D
     ld   a, [wTunicType]                          ; $7E0E: $FA $0F $DC
@@ -8300,7 +8300,7 @@ Data_015_7F86::
 AnimalD1EntityHandler::
     ld   a, [wDB74]                               ; $7F96: $FA $74 $DB
     and  a                                        ; $7F99: $A7
-    jp   z, ClearEntityStatus_15            ; $7F9A: $CA $31 $7C
+    jp   z, ClearEntityStatus_15                  ; $7F9A: $CA $31 $7C
 
     ld   de, Data_015_7F86                        ; $7F9D: $11 $86 $7F
     call RenderActiveEntitySpritesPair            ; $7FA0: $CD $C0 $3B

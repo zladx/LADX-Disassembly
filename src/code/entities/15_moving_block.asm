@@ -8,7 +8,7 @@ MovingBlockLeftTopEntityHandler::
     call RenderActiveEntitySpritesPair            ; $4103: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $4106: $CD $0D $7B
     xor  a                                        ; $4109: $AF
-    ldh  [hMultiPurposeG], a                               ; $410A: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $410A: $E0 $E8
 
     ldh  a, [hActiveEntityState]                  ; $410C: $F0 $F0
     JP_TABLE                                      ; $410E
@@ -159,10 +159,10 @@ MovingBlockLeftBottomEntityHandler::
     call RenderActiveEntitySpritesPair            ; $41CD: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $41D0: $CD $0D $7B
     xor  a                                        ; $41D3: $AF
-    ldh  [hMultiPurposeG], a                               ; $41D4: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $41D4: $E0 $E8
 
     ldh  a, [hActiveEntityState]                  ; $41D6: $F0 $F0
-    JP_TABLE                                        ; $41D8
+    JP_TABLE                                      ; $41D8
 ._00 dw MovingBlockLeftBottomState0Handler        ; $41D9
 ._01 dw MovingBlockLeftBottomState1Handler        ; $41DB
 
@@ -233,7 +233,7 @@ jr_015_4217:
     jr   jr_015_4239                              ; $4233: $18 $04
 
 jr_015_4235:
-    ld   hl, hMultiPurposeG                                ; $4235: $21 $E8 $FF
+    ld   hl, hMultiPurposeG                       ; $4235: $21 $E8 $FF
     inc  [hl]                                     ; $4238: $34
 
 jr_015_4239:
@@ -244,7 +244,7 @@ MovingBlockBottomLeftEntityHandler::
     call RenderActiveEntitySpritesPair            ; $423F: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $4242: $CD $0D $7B
     xor  a                                        ; $4245: $AF
-    ldh  [hMultiPurposeG], a                               ; $4246: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $4246: $E0 $E8
 
     ldh  a, [hActiveEntityState]                  ; $4248: $F0 $F0
     JP_TABLE                                      ; $424A
@@ -312,13 +312,13 @@ jr_015_4289:
     jr   c, jr_015_42AB                           ; $429D: $38 $0C
 
     ld   [hl], b                                  ; $429F: $70
-    ld   hl, wEntitiesPosXTable                         ; $42A0: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $42A0: $21 $00 $C2
     add  hl, bc                                   ; $42A3: $09
     inc  [hl]                                     ; $42A4: $34
     jr   jr_015_42AB                              ; $42A5: $18 $04
 
 jr_015_42A7:
-    ld   hl, hMultiPurposeG                                ; $42A7: $21 $E8 $FF
+    ld   hl, hMultiPurposeG                       ; $42A7: $21 $E8 $FF
     inc  [hl]                                     ; $42AA: $34
 
 jr_015_42AB:
@@ -329,7 +329,7 @@ MovingBlockBottomRightEntityHandler:
     call RenderActiveEntitySpritesPair            ; $42B1: $CD $C0 $3B
     call ReturnIfNonInteractive_15                ; $42B4: $CD $0D $7B
     xor  a                                        ; $42B7: $AF
-    ldh  [hMultiPurposeG], a                               ; $42B8: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $42B8: $E0 $E8
 
     ldh  a, [hActiveEntityState]                  ; $42BA: $F0 $F0
     JP_TABLE                                      ; $42BC
@@ -370,7 +370,7 @@ MovingBlockBottomRightState1Handler::
     ld   hl, wEntitiesPrivateState2Table          ; $42ED: $21 $C0 $C2
     add  hl, bc                                   ; $42F0: $09
     ld   a, [hl]                                  ; $42F1: $7E
-    ld   hl, wEntitiesPosXTable                         ; $42F2: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $42F2: $21 $00 $C2
     add  hl, bc                                   ; $42F5: $09
     cp   [hl]                                     ; $42F6: $BE
     jr   z, jr_015_42FA                           ; $42F7: $28 $01
@@ -384,7 +384,7 @@ jr_015_42FB:
     ld   hl, wEntitiesPrivateState1Table          ; $42FB: $21 $B0 $C2
     add  hl, bc                                   ; $42FE: $09
     ld   a, [hl]                                  ; $42FF: $7E
-    ld   hl, wEntitiesPosXTable                         ; $4300: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $4300: $21 $00 $C2
     add  hl, bc                                   ; $4303: $09
     cp   [hl]                                     ; $4304: $BE
     jr   z, jr_015_4319                           ; $4305: $28 $12
@@ -397,13 +397,13 @@ jr_015_42FB:
     jr   c, jr_015_431D                           ; $430F: $38 $0C
 
     ld   [hl], b                                  ; $4311: $70
-    ld   hl, wEntitiesPosXTable                         ; $4312: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $4312: $21 $00 $C2
     add  hl, bc                                   ; $4315: $09
     dec  [hl]                                     ; $4316: $35
     jr   jr_015_431D                              ; $4317: $18 $04
 
 jr_015_4319:
-    ld   hl, hMultiPurposeG                                ; $4319: $21 $E8 $FF
+    ld   hl, hMultiPurposeG                       ; $4319: $21 $E8 $FF
     inc  [hl]                                     ; $431C: $34
 
 jr_015_431D:

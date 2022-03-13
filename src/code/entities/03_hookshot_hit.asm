@@ -12,10 +12,10 @@ MagicRodFireballEntityHandler::
     rra                                           ; $69C1: $1F
     rra                                           ; $69C2: $1F
     and  $01                                      ; $69C3: $E6 $01
-    ld   hl, wEntitiesSpriteVariantTable               ; $69C5: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable          ; $69C5: $21 $B0 $C3
     add  hl, bc                                   ; $69C8: $09
     ld   [hl], a                                  ; $69C9: $77
-    call GetEntityPrivateCountdown1                                      ; $69CA: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $69CA: $CD $00 $0C
     jr   z, jr_003_69D9                           ; $69CD: $28 $0A
 
     dec  a                                        ; $69CF: $3D
@@ -49,9 +49,9 @@ jr_003_69F8:
     ld   hl, wEntitiesCollisionsTable             ; $69F8: $21 $A0 $C2
     add  hl, bc                                   ; $69FB: $09
     ld   [hl], b                                  ; $69FC: $70
-    call GetEntityPrivateCountdown1                                      ; $69FD: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $69FD: $CD $00 $0C
     ld   [hl], b                                  ; $6A00: $70
-    ldh  a, [hMultiPurposeH]                               ; $6A01: $F0 $E9
+    ldh  a, [hMultiPurposeH]                      ; $6A01: $F0 $E9
     ld   e, a                                     ; $6A03: $5F
     ld   d, b                                     ; $6A04: $50
     call func_014_5526_trampoline                 ; $6A05: $CD $78 $21

@@ -7,7 +7,7 @@ MarinAtTheShoreEntityHandler::
     and  a                                        ; $6194: $A7
     ret  nz                                       ; $6195: $C0
 
-    ld   a, [wOverworldRoomStatus + $FD]                               ; $6196: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + $FD]          ; $6196: $FA $FD $D8
     and  $20                                      ; $6199: $E6 $20
     jp   nz, ClearEntityStatusBank18              ; $619B: $C2 $08 $7F
 

@@ -13,13 +13,13 @@ ArmosStatueEntityHandler::
     call ReturnIfNonInteractive_06                ; $7454: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $7457: $CD $F7 $64
     xor  a                                        ; $745A: $AF
-    ldh  [hMultiPurposeG], a                               ; $745B: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $745B: $E0 $E8
     call label_3B70                               ; $745D: $CD $70 $3B
     call CheckLinkCollisionWithEnemy_trampoline   ; $7460: $CD $5A $3B
     jr   nc, jr_006_7472                          ; $7463: $30 $0D
 
     ld   a, $01                                   ; $7465: $3E $01
-    ldh  [hMultiPurposeG], a                               ; $7467: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $7467: $E0 $E8
     ldh  a, [hActiveEntityState]                  ; $7469: $F0 $F0
     cp   $02                                      ; $746B: $FE $02
     jr   nc, jr_006_7472                          ; $746D: $30 $03
@@ -38,7 +38,7 @@ jr_006_7472:
 ArmosStatueState0Handler::
     ldh  a, [hMultiPurposeG]
     and  a
-    jr   z, .return                              ; $7484: $28 $0E
+    jr   z, .return                               ; $7484: $28 $0E
 
     call IncrementEntityState                     ; $7486: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $7489: $CD $05 $0C

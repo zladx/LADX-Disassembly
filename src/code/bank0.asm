@@ -199,16 +199,16 @@ func_91D::
     callsb GetBGAttributesAddressForObject        ; $092F: $3E $1A $EA $00 $21 $CD $76 $65
     ldh  a, [hMultiPurpose8]                      ; $0937: $F0 $DF
     ld   [MBC3SelectBank], a                      ; $0939: $EA $00 $21
-    ld   hl, wRequestAltDestinationHigh           ; $093C: $21 $91 $DC
-    ld   a, [wRequestsAlt]                        ; $093F: $FA $90 $DC
+    ld   hl, wRequestAlt                          ; $093C: $21 $91 $DC
+    ld   a, [wRequestsAltSize]                    ; $093F: $FA $90 $DC
     ld   e, a                                     ; $0942: $5F
     add  a, $0A                                   ; $0943: $C6 $0A
-    ld   [wRequestsAlt], a                        ; $0945: $EA $90 $DC
+    ld   [wRequestsAltSize], a                    ; $0945: $EA $90 $DC
     ld   d, $00                                   ; $0948: $16 $00
     add  hl, de                                   ; $094A: $19
     ldh  a, [hMultiPurpose9]                      ; $094B: $F0 $E0
     ld   d, a                                     ; $094D: $57
-    ldh  a, [hMultiPurposeA]                           ; $094E: $F0 $E1
+    ldh  a, [hMultiPurposeA]                      ; $094E: $F0 $E1
     ld   e, a                                     ; $0950: $5F
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $0951: $F0 $CF
     ldi  [hl], a                                  ; $0953: $22
@@ -267,7 +267,7 @@ func_983::
     ; Read value from address [hMultiPurposeA hMultiPurpose9]
     ldh  a, [hMultiPurpose9]                      ; $0990: $F0 $E0
     ld   h, a                                     ; $0992: $67
-    ldh  a, [hMultiPurposeA]                           ; $0993: $F0 $E1
+    ldh  a, [hMultiPurposeA]                      ; $0993: $F0 $E1
     ld   l, a                                     ; $0995: $6F
     ld   a, [hl]                                  ; $0996: $7E
 
@@ -287,12 +287,12 @@ func_999::
     pop  bc                                       ; $09A0: $C1
     call func_983                                 ; $09A1: $CD $83 $09
     ldh  [hMultiPurpose1], a                      ; $09A4: $E0 $D8
-    ld   a, [wRequestsAlt]                        ; $09A6: $FA $90 $DC
+    ld   a, [wRequestsAltSize]                    ; $09A6: $FA $90 $DC
     ld   c, a                                     ; $09A9: $4F
     ld   b, $00                                   ; $09AA: $06 $00
     add  a, $05                                   ; $09AC: $C6 $05
-    ld   [wRequestsAlt], a                        ; $09AE: $EA $90 $DC
-    ld   hl, wRequestAltDestinationHigh           ; $09B1: $21 $91 $DC
+    ld   [wRequestsAltSize], a                    ; $09AE: $EA $90 $DC
+    ld   hl, wRequestAlt                          ; $09B1: $21 $91 $DC
     add  hl, bc                                   ; $09B4: $09
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $09B5: $F0 $CF
     ldi  [hl], a                                  ; $09B7: $22
@@ -552,6 +552,9 @@ CopyObjectsAttributesToWRAM2::
     ret                                           ; $0B2E: $C9
 
 ; On GBC, copy some overworld objects to ram bank 2
+; Inputs:
+;   a  data bank?
+;   hl destination in RAM bank 2
 func_2BF::
     ldh  [hMultiPurpose2], a                      ; $0B2F: $E0 $D9
     ldh  a, [hIsGBC]                              ; $0B31: $F0 $FE
@@ -627,7 +630,7 @@ CopyBGMapFromBank::
     call func_BB5                                 ; $0B8D: $CD $B5 $0B
 .photoAlbumEnd
 
-    ldh  a, [hMultiPurposeF]                           ; $0B90: $F0 $E6
+    ldh  a, [hMultiPurposeF]                      ; $0B90: $F0 $E6
     ld   [MBC3SelectBank], a                      ; $0B92: $EA $00 $21
     ret                                           ; $0B95: $C9
 
@@ -657,7 +660,7 @@ CopyToBGMap0::
 
 func_BB5::
     ld   bc, $168                                 ; $0BB5: $01 $68 $01
-    ld   de, wIsFileSelectionArrowShifted                                ; $0BB8: $11 $00 $D0
+    ld   de, wIsFileSelectionArrowShifted         ; $0BB8: $11 $00 $D0
     jp   CopyData                                 ; $0BBB: $C3 $14 $29
 
 LoadBaseTiles_trampoline::
@@ -1158,7 +1161,7 @@ SelectRoomTilesets::
     ld   a, e                                     ; $0DC1: $7B
     cp   $23                                      ; $0DC2: $FE $23
     jr   nz, .sirenRoomEnd                        ; $0DC4: $20 $08
-    ld   a, [wOverworldRoomStatus + ROOM_OW_SIREN] ; $0DC6: $FA $C9 $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_SIREN]; $0DC6: $FA $C9 $D8
     and  OW_ROOM_STATUS_OWL_TALKED                ; $0DC9: $E6 $20
     jr   z, .sirenRoomEnd                         ; $0DCB: $28 $01
     inc  e                                        ; $0DCD: $1C
@@ -1167,7 +1170,7 @@ SelectRoomTilesets::
     ld   a, e                                     ; $0DCE: $7B
     cp   $21                                      ; $0DCF: $FE $21
     jr   nz, .spritesheetGroupDone                ; $0DD1: $20 $08
-    ld   a, [wOverworldRoomStatus + ROOM_OW_WALRUS] ; $0DD3: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_WALRUS]; $0DD3: $FA $FD $D8
     and  $20                                      ; $0DD6: $E6 $20
     jr   z, .spritesheetGroupDone                 ; $0DD8: $28 $01
     inc  e                                        ; $0DDA: $1C
@@ -1413,7 +1416,7 @@ FileCopyHandler::
     jp   FileCopyEntryPoint                       ; $0F17: $C3 $8C $4F
 
 WorldHandler::
-    callsb UpdatePaletteEffectForInteractiveObjects ; $0F1A: $3E $14 $EA $00 $21 $CD $4B $4C
+    callsb UpdatePaletteEffectForInteractiveObjects; $0F1A: $3E $14 $EA $00 $21 $CD $4B $4C
     call PerformOverworldAudioTasks               ; $0F22: $CD $BC $4A
     jpsw WorldHandlerEntryPoint                   ; $0F25: $3E $01 $CD $0C $08 $C3 $71 $43
 
@@ -1525,7 +1528,7 @@ WorldInteractiveHandler::
     call AnimateEntities                          ; $0FE0: $CD $8D $39
     callsw label_002_5487                         ; $0FE3: $3E $02 $CD $0C $08 $CD $87 $54
 
-    ld   hl, wRequestDestination                  ; $0FEB: $21 $01 $D6
+    ld   hl, wRequest                             ; $0FEB: $21 $01 $D6
     ldh  a, [hFrameCounter]                       ; $0FEE: $F0 $E7
     and  $03                                      ; $0FF0: $E6 $03
     or   [hl]                                     ; $0FF2: $B6
@@ -2262,7 +2265,7 @@ SpawnPlayerProjectile::
     add  hl, de                                   ; $1470: $19
     ld   [hl], a                                  ; $1471: $77
     ldh  a, [hLinkDirection]                      ; $1472: $F0 $9E
-    ld   hl, wEntitiesSpriteVariantTable                                ; $1474: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable          ; $1474: $21 $B0 $C3
     add  hl, de                                   ; $1477: $19
     ld   [hl], a                                  ; $1478: $77
     ld   hl, wEntitiesDirectionTable              ; $1479: $21 $80 $C3
@@ -2287,7 +2290,7 @@ UseMagicPowder::
     ld   a, [wHasToadstool]                       ; $1492: $FA $4B $DB
     and  a                                        ; $1495: $A7
     jr   z, .jr_14A7                              ; $1496: $28 $0F
-    ldh  a, [hLinkPositionZ]                  ; $1498: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $1498: $F0 $A2
     and  a                                        ; $149A: $A7
     ret  nz                                       ; $149B: $C0
     ld   a, DIALOG_GOT_TOADSTOOL                  ; $149C: $3E $02
@@ -2304,7 +2307,7 @@ UseMagicPowder::
     ld   a, ENTITY_MAGIC_POWDER_SPRINKLE          ; $14AE: $3E $08
     call SpawnNewEntity_trampoline                ; $14B0: $CD $86 $3B
     ret  c                                        ; $14B3: $D8
-    callsb SprinkleMagicPowder                      ; $14B4: $3E $20 $EA $00 $21 $CD $47 $4C
+    callsb SprinkleMagicPowder                    ; $14B4: $3E $20 $EA $00 $21 $CD $47 $4C
     ld   a, [wCurrentBank]                        ; $14BC: $FA $AF $DB
     ld   [MBC3SelectBank], a                      ; $14BF: $EA $00 $21
     ret                                           ; $14C2: $C9
@@ -2346,13 +2349,13 @@ UseRocsFeather::
 .label_14F8
     ldh  [hLinkSpeedY], a                         ; $14F8: $E0 $9B
     xor  a                                        ; $14FA: $AF
-    ldh  [hLinkVelocityZ], a                   ; $14FB: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $14FB: $E0 $A3
     call UpdateFinalLinkPosition                  ; $14FD: $CD $A8 $21
     jpsw CheckPositionForMapTransition            ; $1500: $3E $02 $CD $0C $08 $C3 $75 $6C
 
 .label_1508
     ld   a, $20                                   ; $1508: $3E $20
-    ldh  [hLinkVelocityZ], a                   ; $150A: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $150A: $E0 $A3
 
     ; If running with Pegasus Boots, jump further
     ld   a, [wIsRunningWithPegasusBoots]          ; $150C: $FA $4A $C1
@@ -2590,7 +2593,7 @@ label_1653::
     ldh  a, [hIntersectedObjectTop]               ; $166B: $F0 $CD
     add  a, $10                                   ; $166D: $C6 $10
     ld   [hl], a                                  ; $166F: $77
-    ld   hl, wEntitiesSpriteVariantTable                                ; $1670: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable          ; $1670: $21 $B0 $C3
     add  hl, de                                   ; $1673: $19
     ldh  a, [hActiveEntitySpriteVariant]          ; $1674: $F0 $F1
     ld   [hl], a                                  ; $1676: $77
@@ -2634,7 +2637,7 @@ label_1653::
     ld   hl, wEntitiesDropTimerTable              ; $16A7: $21 $50 $C4
     add  hl, de                                   ; $16AA: $19
     ld   [hl], $80                                ; $16AB: $36 $80
-    ld   hl, wEntitiesPrivateCountdown1Table                                ; $16AD: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $16AD: $21 $F0 $C2
     add  hl, de                                   ; $16B0: $19
     ld   [hl], $18                                ; $16B1: $36 $18
     ld   hl, wEntitiesSpeedZTable                 ; $16B3: $21 $20 $C3
@@ -2825,7 +2828,7 @@ ApplyLinkMotionState::
     ldh  [hMultiPurpose0], a                      ; $17AD: $E0 $D7
     ldh  a, [hLinkPositionX]                      ; $17AF: $F0 $98
     ldh  [hMultiPurpose1], a                      ; $17B1: $E0 $D8
-    ld   hl, hMultiPurpose3                            ; $17B3: $21 $DA $FF
+    ld   hl, hMultiPurpose3                       ; $17B3: $21 $DA $FF
     ld   [hl], $00                                ; $17B6: $36 $00
     ld   a, [wSwordCharge]                        ; $17B8: $FA $22 $C1
     cp   MAX_SWORD_CHARGE                         ; $17BB: $FE $28
@@ -2950,7 +2953,7 @@ LinkMotionMapFadeOutHandler::
 
 .label_1898
     ldh  a, [hIsSideScrolling]                    ; $1898: $F0 $F9
-    ldh  [hMultiPurposeD], a                           ; $189A: $E0 $E4
+    ldh  [hMultiPurposeD], a                      ; $189A: $E0 $E4
     ld   a, GAMEPLAY_WORLD                        ; $189C: $3E $0B
     ld   [wGameplayType], a                       ; $189E: $EA $95 $DB
     xor  a                                        ; $18A1: $AF
@@ -3092,7 +3095,7 @@ LinkMotionMapFadeOutHandler::
     ldh  a, [hIsSideScrolling]                    ; $1978: $F0 $F9
     and  a                                        ; $197A: $A7
     jr   nz, label_19DA                           ; $197B: $20 $5D
-    ldh  a, [hMultiPurposeD]                           ; $197D: $F0 $E4
+    ldh  a, [hMultiPurposeD]                      ; $197D: $F0 $E4
     and  a                                        ; $197F: $A7
     jr   nz, SetSpawnLocation.return              ; $1980: $20 $57
     ld   a, [wIsIndoor]                           ; $1982: $FA $A5 $DB
@@ -3182,7 +3185,7 @@ LinkMotionMapFadeInHandler::
     xor  a                                        ; $19E7: $AF
     ld   [wD474], a                               ; $19E8: $EA $74 $D4
     ld   a, $30                                   ; $19EB: $3E $30
-    ld   [wTransitionGfxFrameCount], a                               ; $19ED: $EA $80 $C1
+    ld   [wTransitionGfxFrameCount], a            ; $19ED: $EA $80 $C1
     ld   a, TRANSITION_GFX_MANBO_OUT              ; $19F0: $3E $03
     ld   [wTransitionGfx], a                      ; $19F2: $EA $7F $C1
     ld   a, $04                                   ; $19F5: $3E $04
@@ -3298,10 +3301,10 @@ UpdateLinkWalkingAnimation::
     ld   hl, LinkAnimationsList_WalkingNoShield   ; $1AA0: $21 $10 $49
     jr   .done                                    ; $1AA3: $18 $22
 .hasShield
-    ld   hl, LinkAnimationsList_WalkCarryingDefaultShield ; $1AA5: $21 $18 $49
+    ld   hl, LinkAnimationsList_WalkCarryingDefaultShield; $1AA5: $21 $18 $49
     cp   $02                                      ; $1AA8: $FE $02
     jr   nz, .shieldDone                          ; $1AAA: $20 $03
-    ld   hl, LinkAnimationsList_WalkCarryingMirrorShield ; $1AAC: $21 $28 $49
+    ld   hl, LinkAnimationsList_WalkCarryingMirrorShield; $1AAC: $21 $28 $49
 .shieldDone
 
     ; If the carried shield is actually being used, add 8 to the animation list address
@@ -3512,7 +3515,7 @@ UpdateSwitchBlockTiles::
 .stage3End
 
     ; Increment wSwitchableObjectAnimationStage
-    ld   [wSwitchableObjectAnimationStage], a                               ; $1EFB: $EA $F8 $D6
+    ld   [wSwitchableObjectAnimationStage], a     ; $1EFB: $EA $F8 $D6
 
     ; On stage 4…
     cp   04                                       ; $1EFE: $FE $04
@@ -3545,7 +3548,7 @@ UpdateSwitchBlockTiles::
     jr   nz, .skipCopyData                        ; $1F1F: $20 $14
     ; Clear wSwitchableObjectAnimationStage
     xor  a                                        ; $1F21: $AF
-    ld   [wSwitchableObjectAnimationStage], a                               ; $1F22: $EA $F8 $D6
+    ld   [wSwitchableObjectAnimationStage], a     ; $1F22: $EA $F8 $D6
     ; Copy final tiles for switch block B
     ld   hl, SwitchBlockState1TilesTable          ; $1F25: $21 $D3 $1E
 
@@ -3922,7 +3925,7 @@ ELSE
     jr   c, .return                               ; $2132: $38 $19
 ENDC
     xor  a                                        ; $2134: $AF
-    ldh  [hMultiPurposeE], a                               ; $2135: $E0 $E5
+    ldh  [hMultiPurposeE], a                      ; $2135: $E0 $E5
     ldh  a, [hMultiPurpose0]                      ; $2137: $F0 $D7
     cp   $8E                                      ; $2139: $FE $8E
     jr   z, .jr_2153                              ; $213B: $28 $16
@@ -3991,9 +3994,9 @@ ENDC
     ld   hl, wEntitiesStatusTable                 ; $218E: $21 $80 $C2
     add  hl, de                                   ; $2191: $19
     ld   [hl], $07                                ; $2192: $36 $07
-    ld   hl, wEntitiesSpriteVariantTable                                ; $2194: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable          ; $2194: $21 $B0 $C3
     add  hl, de                                   ; $2197: $19
-    ldh  a, [hMultiPurposeE]                               ; $2198: $F0 $E5
+    ldh  a, [hMultiPurposeE]                      ; $2198: $F0 $E5
     ld   [hl], a                                  ; $219A: $77
     ld   c, e                                     ; $219B: $4B
     ld   b, d                                     ; $219C: $42
@@ -4066,7 +4069,7 @@ ComputeLinkPosition::
     ret                                           ; $21E0: $C9
 
 func_21E1::
-    ldh  a, [hLinkVelocityZ]                               ; $21E1: $F0 $A3
+    ldh  a, [hLinkVelocityZ]                      ; $21E1: $F0 $A3
     push af                                       ; $21E3: $F5
     swap a                                        ; $21E4: $CB $37
     and  $F0                                      ; $21E6: $E6 $F0
@@ -4297,13 +4300,13 @@ DoUpdateBGRegion::
     ; Copy a row of the object attributes
     call CopyObjectRowToBGMap                     ; $22BD: $CD $14 $22
     ld   a, b                                     ; $22C0: $78
-    ldh  [hMultiPurposeB], a                               ; $22C1: $E0 $E2
+    ldh  [hMultiPurposeB], a                      ; $22C1: $E0 $E2
     ld   a, c                                     ; $22C3: $79
-    ldh  [hMultiPurposeC], a                               ; $22C4: $E0 $E3
+    ldh  [hMultiPurposeC], a                      ; $22C4: $E0 $E3
     ld   a, d                                     ; $22C6: $7A
-    ldh  [hMultiPurposeD], a                           ; $22C7: $E0 $E4
+    ldh  [hMultiPurposeD], a                      ; $22C7: $E0 $E4
     ld   a, e                                     ; $22C9: $7B
-    ldh  [hMultiPurposeE], a                               ; $22CA: $E0 $E5
+    ldh  [hMultiPurposeE], a                      ; $22CA: $E0 $E5
     ; Restore state
     call SwitchToObjectsTilemapBank               ; $22CC: $CD $05 $39
     pop  de                                       ; $22CF: $D1
@@ -4330,13 +4333,13 @@ DoUpdateBGRegion::
     ; Copy a column of the object attributes
     call CopyObjectColumnToBGMap                  ; $22EA: $CD $24 $22
     ld   a, b                                     ; $22ED: $78
-    ldh  [hMultiPurposeB], a                               ; $22EE: $E0 $E2
+    ldh  [hMultiPurposeB], a                      ; $22EE: $E0 $E2
     ld   a, c                                     ; $22F0: $79
-    ldh  [hMultiPurposeC], a                               ; $22F1: $E0 $E3
+    ldh  [hMultiPurposeC], a                      ; $22F1: $E0 $E3
     ld   a, d                                     ; $22F3: $7A
-    ldh  [hMultiPurposeD], a                           ; $22F4: $E0 $E4
+    ldh  [hMultiPurposeD], a                      ; $22F4: $E0 $E4
     ld   a, e                                     ; $22F6: $7B
-    ldh  [hMultiPurposeE], a                               ; $22F7: $E0 $E5
+    ldh  [hMultiPurposeE], a                      ; $22F7: $E0 $E5
     ; Cleanup
     call SwitchToObjectsTilemapBank               ; $22F9: $CD $05 $39
     pop  de                                       ; $22FC: $D1
@@ -4365,7 +4368,7 @@ DoUpdateBGRegion::
     jp   nz, .loop                                ; $2316: $C2 $41 $22
 
     ; Set next BG region origin, and decrement wRoomTransitionFramesBeforeMidScreen
-    jpsb UpdateBGRegionOrigin                            ; $2319: $3E $20 $EA $00 $21 $C3 $70 $55
+    jpsb UpdateBGRegionOrigin                     ; $2319: $3E $20 $EA $00 $21 $C3 $70 $55
 
 include "code/home/dialog.asm"
 
@@ -5174,14 +5177,14 @@ LoadBaseOverworldTiles::
     ; Load dungeon keys
     ;
 
-    ld   hl, InventoryOverworldItemsTiles                     ; $2D3E: $21 $00 $4C
+    ld   hl, InventoryOverworldItemsTiles         ; $2D3E: $21 $00 $4C
     ld   de, vTiles1 + $400                       ; $2D41: $11 $00 $8C
     ld   bc, TILE_SIZE * $40                      ; $2D44: $01 $00 $04
     call CopyData                                 ; $2D47: $CD $14 $29
 
     call func_2D50                                ; $2D4A: $CD $50 $2D
 
-    jp   LoadIndoorTiles.patchInventoryTiles     ; $2D4D: $C3 $FE $2C
+    jp   LoadIndoorTiles.patchInventoryTiles      ; $2D4D: $C3 $FE $2C
 
 ; Copy animated tiles, inventory items and character tiles to tile memory
 func_2D50::
@@ -5779,7 +5782,7 @@ doCopyObjectToBG:
     ld   [MBC3SelectBank], a                      ; $3058: $EA $00 $21
     ldh  a, [hMultiPurpose9]                      ; $305B: $F0 $E0
     ld   h, a                                     ; $305D: $67
-    ldh  a, [hMultiPurposeA]                           ; $305E: $F0 $E1
+    ldh  a, [hMultiPurposeA]                      ; $305E: $F0 $E1
     ld   l, a                                     ; $3060: $6F
     ld   a, $01                                   ; $3061: $3E $01
     ld   [rVBK], a                                ; $3063: $E0 $4F
@@ -5794,7 +5797,7 @@ doCopyObjectToBG:
     ld   a, h                                     ; $306E: $7C
     ldh  [hMultiPurpose9], a                      ; $306F: $E0 $E0
     ld   a, l                                     ; $3071: $7D
-    ldh  [hMultiPurposeA], a                           ; $3072: $E0 $E1
+    ldh  [hMultiPurposeA], a                      ; $3072: $E0 $E1
     pop  hl                                       ; $3074: $E1
 
     ; Move BG target down by one row
@@ -5815,7 +5818,7 @@ doCopyObjectToBG:
     ld   [MBC3SelectBank], a                      ; $3084: $EA $00 $21
     ldh  a, [hMultiPurpose9]                      ; $3087: $F0 $E0
     ld   h, a                                     ; $3089: $67
-    ldh  a, [hMultiPurposeA]                           ; $308A: $F0 $E1
+    ldh  a, [hMultiPurposeA]                      ; $308A: $F0 $E1
     ld   l, a                                     ; $308C: $6F
     ld   a, $01                                   ; $308D: $3E $01
     ld   [rVBK], a                                ; $308F: $E0 $4F
@@ -5873,10 +5876,14 @@ LoadRoomTilemap:
     pop  hl                                       ; $30C5: $E1
     pop  de                                       ; $30C6: $D1
 
+    ; Increment the object pointer in wRoomObjects
     inc  hl                                       ; $30C7: $23
+    ; When the end of a objects line is reached, move to the next one.
+    ; (NB: this assumes that wRoomObjectsArea is $10-bytes aligned)
+ASSERT LOW(wRoomObjectsArea) & $0F == 0, "wRoomObjectsArea must be aligned on $10 addresses"
     ld   a, l                                     ; $30C8: $7D
     and  $0F                                      ; $30C9: $E6 $0F
-    cp   $0B                                      ; $30CB: $FE $0B
+    cp   OBJECTS_PER_ROW + 1                      ; $30CB: $FE $0B
     jr   nz, .lEnd                                ; $30CD: $20 $06
     ld   a, l                                     ; $30CF: $7D
     and  $F0                                      ; $30D0: $E6 $F0
@@ -5884,12 +5891,14 @@ LoadRoomTilemap:
     ld   l, a                                     ; $30D4: $6F
 .lEnd
 
+    ; Increment the tiles pointer in vBGMap0
     ld   a, e                                     ; $30D5: $7B
     add  a, $02                                   ; $30D6: $C6 $02
     ld   e, a                                     ; $30D8: $5F
+    ; When the end of a tiles line is reached, move to the next one.
     and  $1F                                      ; $30D9: $E6 $1F
-    cp   $14                                      ; $30DB: $FE $14
-    jr   nz, .aEnd                                ; $30DD: $20 $0A
+    cp   (DISPLAY_WIDTH / TILE_WIDTH)             ; $30DB: $FE $14
+    jr   nz, .eEnd                                ; $30DD: $20 $0A
     ld   a, e                                     ; $30DF: $7B
     and  $E0                                      ; $30E0: $E6 $E0
     add  a, $40                                   ; $30E2: $C6 $40
@@ -5897,7 +5906,7 @@ LoadRoomTilemap:
     ld   a, d                                     ; $30E5: $7A
     adc  a, $00                                   ; $30E6: $CE $00
     ld   d, a                                     ; $30E8: $57
-.aEnd
+.eEnd
 
     ; Loop until all objects of the room are copied to the BG
     dec  c                                        ; $30E9: $0D
@@ -6046,9 +6055,9 @@ LoadRoom::
     ; If the map is in between MAP_INDOORS_B_START and MAP_INDOORS_B_END…
     ld   hl, IndoorsARoomPointers                 ; $31A6: $21 $00 $40
     ldh  a, [hMapId]                              ; $31A9: $F0 $F7
-    cp   MAP_INDOORS_B_END                         ; $31AB: $FE $1A
+    cp   MAP_INDOORS_B_END                        ; $31AB: $FE $1A
     jr   nc, .fetchRoomAddress                    ; $31AD: $30 $75
-    cp   MAP_INDOORS_B_START                       ; $31AF: $FE $06
+    cp   MAP_INDOORS_B_START                      ; $31AF: $FE $06
     jr   c, .fetchRoomAddress                     ; $31B1: $38 $71
     ; …use the bank for IndoorB map.
     ld   a, BANK(IndoorsBRoomPointers)            ; $31B3: $3E $0B
@@ -6066,7 +6075,7 @@ LoadRoom::
     ldh  a, [hMapRoom]                            ; $31BF: $F0 $F6
     cp   ROOM_OW_EAGLE_TOWER                      ; $31C1: $FE $0E
     jr   nz, .endEaglesTowerAlt                   ; $31C3: $20 $0C
-    ld   a, [wOverworldRoomStatus + ROOM_OW_EAGLE_TOWER           ] ; $31C5: $FA $0E $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_EAGLE_TOWER           ]; $31C5: $FA $0E $D8
     and  OW_ROOM_STATUS_CHANGED                   ; $31C8: $E6 $10
     jr   z, .altRoomsEnd                          ; $31CA: $28 $55
     ld   bc, Overworld0EAlt ; Eagle's Tower open  ; $31CC: $01 $EC $47
@@ -6076,7 +6085,7 @@ LoadRoom::
     cp   $8C                                      ; $31D1: $FE $8C
     jr   nz, .endSouthFaceShrineAlt               ; $31D3: $20 $0C
     ld   a, [wOverworldRoomStatus + $8C]          ; $31D5: $FA $8C $D8
-    and  OW_ROOM_STATUS_CHANGED                      ; $31D8: $E6 $10
+    and  OW_ROOM_STATUS_CHANGED                   ; $31D8: $E6 $10
     jr   z, .altRoomsEnd                          ; $31DA: $28 $45
     ld   bc, Overworld8CAlt ; South Face Shrine open ; $31DC: $01 $4E $43
     jr   .loadBankForOverworldRooms               ; $31DF: $18 $4E
@@ -6085,7 +6094,7 @@ LoadRoom::
     cp   $79                                      ; $31E1: $FE $79
     jr   nz, .endUpperTalTalHeightsAlt            ; $31E3: $20 $0C
     ld   a, [wOverworldRoomStatus + $79]          ; $31E5: $FA $79 $D8
-    and  OW_ROOM_STATUS_CHANGED                      ; $31E8: $E6 $10
+    and  OW_ROOM_STATUS_CHANGED                   ; $31E8: $E6 $10
     jr   z, .altRoomsEnd                          ; $31EA: $28 $35
     ld   bc, Overworld79Alt ; Kanalet Castle open ; $31EC: $01 $13 $65
     jr   .loadBankForOverworldRooms               ; $31EF: $18 $3E
@@ -6094,7 +6103,7 @@ LoadRoom::
     cp   $06                                      ; $31F1: $FE $06
     jr   nz, .endWindfishsEggAlt                  ; $31F3: $20 $0C
     ld   a, [wOverworldRoomStatus + $06]          ; $31F5: $FA $06 $D8
-    and  OW_ROOM_STATUS_CHANGED                      ; $31F8: $E6 $10
+    and  OW_ROOM_STATUS_CHANGED                   ; $31F8: $E6 $10
     jr   z, .altRoomsEnd                          ; $31FA: $28 $25
     ld   bc, Overworld06Alt ; Windfish's Egg open ; $31FC: $01 $96 $44
     jr   .loadBankForOverworldRooms               ; $31FF: $18 $2E
@@ -6103,7 +6112,7 @@ LoadRoom::
     cp   $1B                                      ; $3201: $FE $1B
     jr   nz, .endTalTalHeightsAlt                 ; $3203: $20 $0C
     ld   a, [wOverworldRoomStatus + $2B]          ; $3205: $FA $2B $D8
-    and  OW_ROOM_STATUS_CHANGED                      ; $3208: $E6 $10
+    and  OW_ROOM_STATUS_CHANGED                   ; $3208: $E6 $10
     jr   z, .altRoomsEnd                          ; $320A: $28 $15
     ld   bc, Overworld1BAlt ; Angler's Tunnel upper water dry ; $320C: $01 $0F $4C
     jr   .loadBankForOverworldRooms               ; $320F: $18 $1E
@@ -6112,7 +6121,7 @@ LoadRoom::
     cp   $2B                                      ; $3211: $FE $2B
     jr   nz, .altRoomsEnd                         ; $3213: $20 $0C
     ld   a, [wOverworldRoomStatus + $2B]          ; $3215: $FA $2B $D8
-    and  OW_ROOM_STATUS_CHANGED                      ; $3218: $E6 $10
+    and  OW_ROOM_STATUS_CHANGED                   ; $3218: $E6 $10
     jr   z, .altRoomsEnd                          ; $321A: $28 $05
     ld   bc, Overworld2BAlt ; Angler's Tunnel open ; $321C: $01 $9A $50
     jr   .loadBankForOverworldRooms               ; $321F: $18 $0E
@@ -6582,12 +6591,12 @@ LoadRoomObject::
 
 .configureMovableBlock
     ld   hl, wRoomSwitchableObject                ; $3417: $21 $FA $D6
-    ld   [hl], ROOM_SWITCHABLE_OBJECT_MOBILE_BLOCK ; $341A: $36 $02
+    ld   [hl], ROOM_SWITCHABLE_OBJECT_MOBILE_BLOCK; $341A: $36 $02
     jr   .switchableObjectsEnd                    ; $341C: $18 $05
 
 .configureSwitchButton
     ld   hl, wRoomSwitchableObject                ; $341E: $21 $FA $D6
-    ld   [hl], ROOM_SWITCHABLE_OBJECT_SWITCH_BUTTON ; $3421: $36 $01
+    ld   [hl], ROOM_SWITCHABLE_OBJECT_SWITCH_BUTTON; $3421: $36 $01
 .switchableObjectsEnd
 
     ;
@@ -6665,7 +6674,7 @@ LoadRoomObject::
     jr   nz, .chestEnd                            ; $3461: $20 $04
     ; a = [hMultiPurposeH]
     pop  af                                       ; $3463: $F1
-    ldh  a, [hMultiPurposeH]                               ; $3464: $F0 $E9
+    ldh  a, [hMultiPurposeH]                      ; $3464: $F0 $E9
     push af                                       ; $3466: $F5
 .chestEnd
 
@@ -7158,8 +7167,8 @@ data_36B0::
     db   $43, $44                                 ; $36B0
 
 LoadObject_OpenDoorTop::
-    ld   a, ROOM_STATUS_DOOR_OPEN_UP               ; $36B2: $3E $04
-    call UpdateIndoorRoomStatus                               ; $36B4: $CD $C4 $36
+    ld   a, ROOM_STATUS_DOOR_OPEN_UP              ; $36B2: $3E $04
+    call UpdateIndoorRoomStatus                   ; $36B4: $CD $C4 $36
     push bc                                       ; $36B7: $C5
     call label_35EE                               ; $36B8: $CD $EE $35
     ld   bc, data_37E1                            ; $36BB: $01 $E1 $37
@@ -7210,7 +7219,7 @@ data_36E8::
 
 LoadObject_OpenDoorBottom::
     ld   a, 8                                     ; $36EA: $3E $08
-    call UpdateIndoorRoomStatus                      ; $36EC: $CD $C4 $36
+    call UpdateIndoorRoomStatus                   ; $36EC: $CD $C4 $36
     push bc                                       ; $36EF: $C5
     call label_35EE                               ; $36F0: $CD $EE $35
     ld   bc, data_37E1                            ; $36F3: $01 $E1 $37
@@ -7222,7 +7231,7 @@ data_36FC::
 
 LoadObject_OpenDoorLeft::
     ld   a, $02                                   ; $36FE: $3E $02
-    call UpdateIndoorRoomStatus                               ; $3700: $CD $C4 $36
+    call UpdateIndoorRoomStatus                   ; $3700: $CD $C4 $36
     push bc                                       ; $3703: $C5
     call label_35EE                               ; $3704: $CD $EE $35
     ld   bc, data_37E4                            ; $3707: $01 $E4 $37
@@ -7234,7 +7243,7 @@ data_3710::
 
 LoadObject_OpenDoorRight::
     ld   a, $01                                   ; $3712: $3E $01
-    call UpdateIndoorRoomStatus                               ; $3714: $CD $C4 $36
+    call UpdateIndoorRoomStatus                   ; $3714: $CD $C4 $36
     push bc                                       ; $3717: $C5
     call label_35EE                               ; $3718: $CD $EE $35
     ld   bc, data_37E4                            ; $371B: $01 $E4 $37
@@ -7249,7 +7258,7 @@ LoadObject_BossDoor::
     call func_373F                                ; $3728: $CD $3F $37
     ; if boss door is not open load door object
     ldh  a, [hRoomStatus]                         ; $372B: $F0 $F8
-    and  ROOM_STATUS_DOOR_OPEN_UP                  ; $372D: $E6 $04
+    and  ROOM_STATUS_DOOR_OPEN_UP                 ; $372D: $E6 $04
     jp   nz, LoadObject_OpenDoorTop               ; $372F: $C2 $B2 $36
     push bc                                       ; $3732: $C5
     call label_35EE                               ; $3733: $CD $EE $35
@@ -7306,7 +7315,7 @@ LoadObject_OneWayArrow::
     call label_35EE                               ; $377D: $CD $EE $35 ; $377D: $CD $EE $35
     ld   bc, data_37E1                            ; $3780: $01 $E1 $37 ; $3780: $01 $E1 $37
     ld   de, data_377A                            ; $3783: $11 $7A $37 ; $3783: $11 $7A $37
-    jp   Func_354B                               ; $3786: $C3 $4B $35 ; $3786: $C3 $4B $35
+    jp   Func_354B                                ; $3786: $C3 $4B $35 ; $3786: $C3 $4B $35
 
 data_3789::
     db   0, 1, 2, 3, $10, $11, $12, $13, $20, $21, $22, $23, $FF ; $3789
@@ -7316,12 +7325,12 @@ data_3796::
 
 LoadObject_DungeonEntrance::
     ld   a, $08                                   ; $37A2: $3E $08 ; $37A2: $3E $08
-    call UpdateIndoorRoomStatus                               ; $37A4: $CD $C4 $36 ; $37A4: $CD $C4 $36
+    call UpdateIndoorRoomStatus                   ; $37A4: $CD $C4 $36 ; $37A4: $CD $C4 $36
     push bc                                       ; $37A7: $C5 ; $37A7: $C5
     call label_35EE                               ; $37A8: $CD $EE $35 ; $37A8: $CD $EE $35
     ld   bc, data_3789                            ; $37AB: $01 $89 $37 ; $37AB: $01 $89 $37
     ld   de, data_3796                            ; $37AE: $11 $96 $37 ; $37AE: $11 $96 $37
-    jp   Func_354B                               ; $37B1: $C3 $4B $35 ; $37B1: $C3 $4B $35
+    jp   Func_354B                                ; $37B1: $C3 $4B $35 ; $37B1: $C3 $4B $35
 
 data_37B4::
     db   $C1, $C2                                 ; $37B4
@@ -7366,7 +7375,7 @@ LoadObject_IndoorEntrance::
 .end
 
     ld   a, $01                                   ; $37CF: $3E $01
-    call UpdateIndoorRoomStatus                               ; $37D1: $CD $C4 $36
+    call UpdateIndoorRoomStatus                   ; $37D1: $CD $C4 $36
     push bc                                       ; $37D4: $C5
     call label_35EE                               ; $37D5: $CD $EE $35
     ld   bc, data_37E1                            ; $37D8: $01 $E1 $37
@@ -7388,7 +7397,7 @@ data_37E4::
 ; Inputs:
 ;   a   the object type to fill the map with
 FillRoomMapWithObject::
-    ldh  [hMultiPurposeH], a                               ; $37E7: $E0 $E9
+    ldh  [hMultiPurposeH], a                      ; $37E7: $E0 $E9
     ld   d, TILES_PER_MAP                         ; $37E9: $16 $80
     ld   hl, wRoomObjects                         ; $37EB: $21 $11 $D7
     ld   e, a                                     ; $37EE: $5F
@@ -7416,7 +7425,7 @@ LoadRoomEntities::
 
     ; Reset the entities load order
     xor  a                                        ; $380B: $AF
-    ldh  [hMultiPurposeD], a                           ; $380C: $E0 $E4
+    ldh  [hMultiPurposeD], a                      ; $380C: $E0 $E4
 
     ; bc = [hMapRoom] * 2
     ldh  a, [hMapRoom]                            ; $380E: $F0 $F6
@@ -7462,7 +7471,7 @@ LoadRoomEntities::
     add  hl, de                                   ; $384A: $19
     ld   [hl], $FF                                ; $384B: $36 $FF
     xor  a                                        ; $384D: $AF
-    ldh  [hMultiPurposeD], a                           ; $384E: $E0 $E4
+    ldh  [hMultiPurposeD], a                      ; $384E: $E0 $E4
 .eaglesTowerEnd
 
     ; By default, use the IndoorsA pointers table
@@ -7528,7 +7537,7 @@ EntityMask_387B::
 ;   bc   address of the entity definition
 LoadEntityFromDefinition::
     ; a = entity load order
-    ldh  a, [hMultiPurposeD]                           ; $3883: $F0 $E4
+    ldh  a, [hMultiPurposeD]                      ; $3883: $F0 $E4
 
     ; If the load order < 8…
     cp   $08                                      ; $3885: $FE $08
@@ -7567,7 +7576,7 @@ LoadEntityFromDefinition::
 
 .skipEntityLoad
     ; Increment the entity load order anyway
-    ld   hl, hMultiPurposeD                            ; $38AD: $21 $E4 $FF
+    ld   hl, hMultiPurposeD                       ; $38AD: $21 $E4 $FF
     inc  [hl]                                     ; $38B0: $34
     ; Increment the address to the next definition in the list
     inc  bc                                       ; $38B1: $03
@@ -7649,7 +7658,7 @@ LoadCreditsMarinPortraitTiles_trampoline::
     jpsb LoadCreditsMarinPortraitTiles            ; $3915: $3E $27 $EA $00 $21 $C3 $C5 $7F
 
 LoadThanksForPlayingTiles_trampoline::
-    jpsb LoadThanksForPlayingTiles                            ; $391D: $3E $20 $EA $00 $21 $C3 $E6 $7D
+    jpsb LoadThanksForPlayingTiles                ; $391D: $3E $20 $EA $00 $21 $C3 $E6 $7D
 
 include "code/home/entities.asm"
 
@@ -7660,8 +7669,8 @@ ReplaceEvilEagleRiderVisibleTiles::
     ld   de, vTiles0 + $460                       ; $3F9B: $11 $60 $84
     ld   bc, TILE_SIZE * 1                        ; $3F9E: $01 $10 $00
     call CopyData                                 ; $3FA1: $CD $14 $29
-    ld   hl, EvilEagleRiderVisibleTiles + TILE_SIZE ; $3FA4: $21 $EE $59
-    jr   ReplaceEvilEagleRiderHiddenTiles.copyData ; $3FA7: $18 $14
+    ld   hl, EvilEagleRiderVisibleTiles + TILE_SIZE; $3FA4: $21 $EE $59
+    jr   ReplaceEvilEagleRiderHiddenTiles.copyData; $3FA7: $18 $14
 
 ReplaceEvilEagleRiderHiddenTiles::
     ld   a, BANK(EvilEagleRiderHiddenTiles)       ; $3FA9: $3E $05
@@ -7670,7 +7679,7 @@ ReplaceEvilEagleRiderHiddenTiles::
     ld   de, vTiles0 + $460                       ; $3FB1: $11 $60 $84
     ld   bc, TILE_SIZE * 1                        ; $3FB4: $01 $10 $00
     call CopyData                                 ; $3FB7: $CD $14 $29
-    ld   hl, EvilEagleRiderHiddenTiles + TILE_SIZE ; $3FBA: $21 $0E $5A
+    ld   hl, EvilEagleRiderHiddenTiles + TILE_SIZE; $3FBA: $21 $0E $5A
 
 .copyData
     ld   de, vTiles0 + $480                       ; $3FBD: $11 $80 $84

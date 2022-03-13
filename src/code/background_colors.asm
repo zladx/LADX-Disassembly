@@ -32,7 +32,7 @@ func_024_5C1A::
 
     ld   a, $01                                   ; $5C1E: $3E $01
     ldh  [rVBK], a                                ; $5C20: $E0 $4F
-    ld   de, wRequestAltDestinationHigh           ; $5C22: $11 $91 $DC
+    ld   de, wRequestAlt                          ; $5C22: $11 $91 $DC
     call ExecuteBGCopyRequest                     ; $5C25: $CD $27 $29
     xor  a                                        ; $5C28: $AF
     ldh  [rVBK], a                                ; $5C29: $E0 $4F
@@ -135,11 +135,11 @@ jr_024_7436:
     and  $01                                      ; $7456: $E6 $01
     swap a                                        ; $7458: $CB $37
 
-    ld   [wPalettePartialCopyColorIndexStart], a ; $745A: $EA $D3 $DD
+    ld   [wPalettePartialCopyColorIndexStart], a  ; $745A: $EA $D3 $DD
     ld   a, $10                                   ; $745D: $3E $10
-    ld   [wPalettePartialCopyColorCount], a      ; $745F: $EA $D4 $DD
+    ld   [wPalettePartialCopyColorCount], a       ; $745F: $EA $D4 $DD
     ld   a, $81                                   ; $7462: $3E $81
-    ld   [wPaletteDataFlags], a                    ; $7464: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $7464: $EA $D1 $DD
     ld   a, [wDDD6]                               ; $7467: $FA $D6 $DD
     inc  a                                        ; $746A: $3C
     ld   [wDDD6], a                               ; $746B: $EA $D6 $DD

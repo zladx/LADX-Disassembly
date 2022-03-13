@@ -76,10 +76,10 @@ func_005_55CA::
     call SpawnNewEntityInRange_trampoline         ; $55DD: $CD $98 $3B
     jr   c, jr_005_5650                           ; $55E0: $38 $6E
 
-    ld   hl, wEntitiesPhysicsFlagsTable                ; $55E2: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $55E2: $21 $40 $C3
     add  hl, de                                   ; $55E5: $19
     ld   [hl], $02                                ; $55E6: $36 $02
-    ld   hl, wEntitiesHitboxFlagsTable                ; $55E8: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable            ; $55E8: $21 $50 $C3
     add  hl, de                                   ; $55EB: $19
     ld   [hl], $80                                ; $55EC: $36 $80
     ld   hl, wEntitiesOptions1Table               ; $55EE: $21 $30 $C4
@@ -88,7 +88,7 @@ func_005_55CA::
     ld   hl, wEntitiesPrivateState3Table          ; $55F4: $21 $D0 $C2
     add  hl, de                                   ; $55F7: $19
     ld   [hl], $01                                ; $55F8: $36 $01
-    ld   hl, wEntitiesPosXTable                         ; $55FA: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $55FA: $21 $00 $C2
     add  hl, de                                   ; $55FD: $19
     ld   a, [wD202]                               ; $55FE: $FA $02 $D2
     ld   [hl], a                                  ; $5601: $77
@@ -105,7 +105,7 @@ jr_005_5610:
     ld   hl, wEntitiesInertiaTable                ; $5613: $21 $D0 $C3
     add  hl, de                                   ; $5616: $19
     ld   [hl], a                                  ; $5617: $77
-    ld   hl, wEntitiesPosYTable                         ; $5618: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $5618: $21 $10 $C2
     add  hl, de                                   ; $561B: $19
     ld   [hl], $00                                ; $561C: $36 $00
 
@@ -121,7 +121,7 @@ jr_005_561E:
     call SpawnNewEntityInRange_trampoline         ; $562D: $CD $98 $3B
     jr   c, jr_005_5650                           ; $5630: $38 $1E
 
-    ld   hl, wEntitiesPhysicsFlagsTable                ; $5632: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $5632: $21 $40 $C3
     add  hl, de                                   ; $5635: $19
     ld   [hl], $41                                ; $5636: $36 $41
     ld   hl, wEntitiesPrivateState3Table          ; $5638: $21 $D0 $C2
@@ -129,17 +129,17 @@ jr_005_561E:
     ld   [hl], $02                                ; $563C: $36 $02
     ldh  a, [hMultiPurpose0]                      ; $563E: $F0 $D7
     sub  $14                                      ; $5640: $D6 $14
-    ld   hl, wEntitiesPosXTable                         ; $5642: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $5642: $21 $00 $C2
     add  hl, de                                   ; $5645: $19
     ld   [hl], a                                  ; $5646: $77
     ldh  a, [hMultiPurpose1]                      ; $5647: $F0 $D8
     sub  $04                                      ; $5649: $D6 $04
-    ld   hl, wEntitiesPosYTable                         ; $564B: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $564B: $21 $10 $C2
     add  hl, de                                   ; $564E: $19
     ld   [hl], a                                  ; $564F: $77
 
 jr_005_5650:
-    ld   hl, wEntitiesHealthTable                                ; $5650: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                 ; $5650: $21 $60 $C3
     add  hl, bc                                   ; $5653: $09
     ld   a, [hl]                                  ; $5654: $7E
     cp   $0A                                      ; $5655: $FE $0A
@@ -155,16 +155,16 @@ jr_005_5650:
     call SpawnNewEntityInRange_trampoline         ; $5666: $CD $98 $3B
     jr   c, jr_005_56B1                           ; $5669: $38 $46
 
-    ld   hl, wEntitiesHealthGroup                                ; $566B: $21 $D0 $C4
+    ld   hl, wEntitiesHealthGroup                 ; $566B: $21 $D0 $C4
     add  hl, de                                   ; $566E: $19
     ld   [hl], d                                  ; $566F: $72
-    ld   hl, wEntitiesPhysicsFlagsTable                ; $5670: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $5670: $21 $40 $C3
     add  hl, de                                   ; $5673: $19
     ld   [hl], $02                                ; $5674: $36 $02
     ld   hl, wEntitiesOptions1Table               ; $5676: $21 $30 $C4
     add  hl, de                                   ; $5679: $19
     ld   [hl], d                                  ; $567A: $72
-    ld   hl, wEntitiesHealthTable                                ; $567B: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                 ; $567B: $21 $60 $C3
     add  hl, de                                   ; $567E: $19
     ld   [hl], d                                  ; $567F: $72
     ld   hl, wEntitiesPrivateState3Table          ; $5680: $21 $D0 $C2
@@ -173,7 +173,7 @@ jr_005_5650:
     call GetRandomByte                            ; $5686: $CD $0D $28
     and  $3F                                      ; $5689: $E6 $3F
     add  $20                                      ; $568B: $C6 $20
-    ld   hl, wEntitiesPosYTable                         ; $568D: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $568D: $21 $10 $C2
     add  hl, de                                   ; $5690: $19
     ld   [hl], a                                  ; $5691: $77
     push bc                                       ; $5692: $C5
@@ -182,16 +182,16 @@ jr_005_5650:
     ld   hl, Data_005_55C6                        ; $5696: $21 $C6 $55
     add  hl, bc                                   ; $5699: $09
     ld   a, [hl]                                  ; $569A: $7E
-    ld   hl, wEntitiesPosXTable                         ; $569B: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $569B: $21 $00 $C2
     add  hl, de                                   ; $569E: $19
     ld   [hl], a                                  ; $569F: $77
     ld   hl, Data_005_55C8                        ; $56A0: $21 $C8 $55
     add  hl, bc                                   ; $56A3: $09
     ld   a, [hl]                                  ; $56A4: $7E
-    ld   hl, wEntitiesSpeedXTable                       ; $56A5: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                 ; $56A5: $21 $40 $C2
     add  hl, de                                   ; $56A8: $19
     ld   [hl], a                                  ; $56A9: $77
-    ld   hl, wEntitiesTransitionCountdownTable           ; $56AA: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable    ; $56AA: $21 $E0 $C2
     add  hl, de                                   ; $56AD: $19
     ld   [hl], $40                                ; $56AE: $36 $40
     pop  bc                                       ; $56B0: $C1
@@ -207,7 +207,7 @@ jr_005_56B1:
     rra                                           ; $56BC: $1F
     rra                                           ; $56BD: $1F
     and  $01                                      ; $56BE: $E6 $01
-    ld   hl, wEntitiesSpriteVariantTable               ; $56C0: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable          ; $56C0: $21 $B0 $C3
     add  hl, bc                                   ; $56C3: $09
     ld   [hl], a                                  ; $56C4: $77
     ldh  a, [hActiveEntityPosX]                   ; $56C5: $F0 $EE
@@ -218,16 +218,16 @@ jr_005_56C7:
     ldh  a, [hActiveEntityVisualPosY]             ; $56CB: $F0 $EC
     sub  $10                                      ; $56CD: $D6 $10
     ldh  [hActiveEntityVisualPosY], a             ; $56CF: $E0 $EC
-    ld   hl, wEntitiesHitboxFlagsTable                ; $56D1: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable            ; $56D1: $21 $50 $C3
     add  hl, bc                                   ; $56D4: $09
     ld   [hl], $00                                ; $56D5: $36 $00
-    call ConfigureEntityHitbox                               ; $56D7: $CD $EA $3A
+    call ConfigureEntityHitbox                    ; $56D7: $CD $EA $3A
     call label_3B70                               ; $56DA: $CD $70 $3B
     call CopyEntityPositionToActivePosition       ; $56DD: $CD $8A $3D
-    ld   hl, wEntitiesHitboxFlagsTable                ; $56E0: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable            ; $56E0: $21 $50 $C3
     add  hl, bc                                   ; $56E3: $09
     ld   [hl], $14                                ; $56E4: $36 $14
-    call ConfigureEntityHitbox                               ; $56E6: $CD $EA $3A
+    call ConfigureEntityHitbox                    ; $56E6: $CD $EA $3A
     call label_3B44                               ; $56E9: $CD $44 $3B
     ldh  a, [hActiveEntityState]                  ; $56EC: $F0 $F0
     JP_TABLE                                      ; $56EE

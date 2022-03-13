@@ -114,7 +114,7 @@ DropFairyEffectHandler::
     add  hl, de                                   ; $5DD3: $19
     ld   [hl], $30                                ; $5DD4: $36 $30
 
-    ld   hl, wEntitiesDropTimerTable                                ; $5DD6: $21 $50 $C4
+    ld   hl, wEntitiesDropTimerTable              ; $5DD6: $21 $50 $C4
     add  hl, de                                   ; $5DD9: $19
     ld   [hl], $80                                ; $5DDA: $36 $80
 
@@ -190,7 +190,7 @@ jr_002_5E2E:
     ret  z                                        ; $5E32: $C8
 
     ld   a, [wRoomEvent]                          ; $5E33: $FA $8E $C1
-    cp   TRIGGER_KILL_ALL_ENEMIES | EFFECT_CLEAR_MIDBOSS ; $5E36: $FE $C1
+    cp   TRIGGER_KILL_ALL_ENEMIES | EFFECT_CLEAR_MIDBOSS; $5E36: $FE $C1
     jr   nz, jr_002_5E6A                          ; $5E38: $20 $30
 
     ldh  a, [hMapId]                         ; @TODO This sets the miniboss killed flag.
@@ -202,14 +202,14 @@ jr_002_5E2E:
     or   $01                                      ; $5E44: $F6 $01
     ld   [hl], a                                  ; $5E46: $77
     ld   d, $00                                   ; $5E47: $16 $00
-    ldh  a, [hMapRoom]                           ; $5E49: $F0 $F6
+    ldh  a, [hMapRoom]                            ; $5E49: $F0 $F6
     ld   e, a                                     ; $5E4B: $5F
-    ld   hl, wIndoorARoomStatus                                ; $5E4C: $21 $00 $D9
-    ldh  a, [hMapId]                         ; $5E4F: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                                      ; $5E51: $FE $FF
+    ld   hl, wIndoorARoomStatus                   ; $5E4C: $21 $00 $D9
+    ldh  a, [hMapId]                              ; $5E4F: $F0 $F7
+    cp   MAP_COLOR_DUNGEON                        ; $5E51: $FE $FF
     jr   nz, jr_002_5E5A                          ; $5E53: $20 $05
 
-    ld   hl, wColorDungeonRoomStatus                                ; $5E55: $21 $E0 $DD
+    ld   hl, wColorDungeonRoomStatus              ; $5E55: $21 $E0 $DD
     jr   jr_002_5E63                              ; $5E58: $18 $09
 
 jr_002_5E5A:
@@ -225,7 +225,7 @@ jr_002_5E63:
     add  hl, de                                   ; $5E63: $19
     set  5, [hl]                                  ; $5E64: $CB $EE
     ld   a, JINGLE_CLEAR_MIDBOSS                  ; $5E66: $3E $1B
-    ldh  [hJingle], a                               ; $5E68: $E0 $F2
+    ldh  [hJingle], a                             ; $5E68: $E0 $F2
 
 jr_002_5E6A:
     ld   a, [wC190]                               ; $5E6A: $FA $90 $C1
@@ -258,8 +258,8 @@ func_002_5E7B::
     ld   [wC190], a                               ; $5E96: $EA $90 $C1
     ld   a, $04                                   ; $5E99: $3E $04
     ld   [wC111], a                               ; $5E9B: $EA $11 $C1
-    ld   a, WAVE_SFX_BOSS_AGONY                        ; $5E9E: $3E $10
-    ldh  [hNoiseSfx], a                            ; $5EA0: $E0 $F4
+    ld   a, WAVE_SFX_BOSS_AGONY                   ; $5E9E: $3E $10
+    ldh  [hNoiseSfx], a                           ; $5EA0: $E0 $F4
 
 .return
     ret                                           ; $5EA2: $C9
@@ -317,30 +317,30 @@ jr_002_5EEB:
     ld   a, $20                                   ; $5EEB: $3E $20
 
 jr_002_5EED:
-    ldh  [hIntersectedObjectTop], a                                ; $5EED: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $5EED: $E0 $CD
     ld   a, $80                                   ; $5EEF: $3E $80
-    ldh  [hIntersectedObjectLeft], a                               ; $5EF1: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $5EF1: $E0 $CE
     swap a                                        ; $5EF3: $CB $37
     and  $0F                                      ; $5EF5: $E6 $0F
     ld   e, a                                     ; $5EF7: $5F
-    ldh  a, [hIntersectedObjectTop]                                ; $5EF8: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $5EF8: $F0 $CD
     and  $F0                                      ; $5EFA: $E6 $F0
     or   e                                        ; $5EFC: $B3
     ld   e, a                                     ; $5EFD: $5F
     ld   d, $00                                   ; $5EFE: $16 $00
-    ld   hl, wRoomObjects                       ; $5F00: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $5F00: $21 $11 $D7
     add  hl, de                                   ; $5F03: $19
     ld   a, $A0                                   ; $5F04: $3E $A0
     ld   [hl], a                                  ; $5F06: $77
     ld   [wDDD8], a                               ; $5F07: $EA $D8 $DD
     call label_2887                               ; $5F0A: $CD $87 $28
-    ld   a, [wRequests]                           ; $5F0D: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $5F0D: $FA $00 $D6
     ld   e, a                                     ; $5F10: $5F
     ld   d, $00                                   ; $5F11: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $5F13: $21 $01 $D6
+    ld   hl, wRequest                             ; $5F13: $21 $01 $D6
     add  hl, de                                   ; $5F16: $19
     add  $0A                                      ; $5F17: $C6 $0A
-    ld   [wRequests], a                           ; $5F19: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5F19: $EA $00 $D6
     ld   de, Data_002_5EA3                        ; $5F1C: $11 $A3 $5E
     ldh  a, [hIsGBC]                              ; $5F1F: $F0 $FE
     and  a                                        ; $5F21: $A7
@@ -381,7 +381,7 @@ label_002_5F27:
 
     push bc                                       ; $5F4C: $C5
     ld   a, $02                                   ; $5F4D: $3E $02
-    call func_91D                                ; $5F4F: $CD $1D $09
+    call func_91D                                 ; $5F4F: $CD $1D $09
     pop  bc                                       ; $5F52: $C1
 
 jr_002_5F53:
@@ -394,17 +394,17 @@ func_002_5F5C::
     ld   a, STAIRCASE_INACTIVE                    ; $5F5C: $3E $01
     ldh  [hStaircase], a                          ; $5F5E: $E0 $AC
     ld   a, $10                                   ; $5F60: $3E $10
-    ldh  [hIntersectedObjectTop], a                                ; $5F62: $E0 $CD
+    ldh  [hIntersectedObjectTop], a               ; $5F62: $E0 $CD
     add  $10                                      ; $5F64: $C6 $10
     ldh  [hStaircasePosY], a                      ; $5F66: $E0 $AE
     ld   a, $80                                   ; $5F68: $3E $80
-    ldh  [hIntersectedObjectLeft], a                               ; $5F6A: $E0 $CE
+    ldh  [hIntersectedObjectLeft], a              ; $5F6A: $E0 $CE
     add  $08                                      ; $5F6C: $C6 $08
     ldh  [hStaircasePosX], a                      ; $5F6E: $E0 $AD
     swap a                                        ; $5F70: $CB $37
     and  $0F                                      ; $5F72: $E6 $0F
     ld   e, a                                     ; $5F74: $5F
-    ldh  a, [hIntersectedObjectTop]                                ; $5F75: $F0 $CD
+    ldh  a, [hIntersectedObjectTop]               ; $5F75: $F0 $CD
     and  $F0                                      ; $5F77: $E6 $F0
     or   e                                        ; $5F79: $B3
     ld   e, a                                     ; $5F7A: $5F
@@ -415,13 +415,13 @@ func_002_5F5C::
     ld   [hl], a                                  ; $5F83: $77
     ld   [wDDD8], a                               ; $5F84: $EA $D8 $DD
     call label_2887                               ; $5F87: $CD $87 $28
-    ld   a, [wRequests]                           ; $5F8A: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $5F8A: $FA $00 $D6
     ld   e, a                                     ; $5F8D: $5F
     ld   d, $00                                   ; $5F8E: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $5F90: $21 $01 $D6
+    ld   hl, wRequest                             ; $5F90: $21 $01 $D6
     add  hl, de                                   ; $5F93: $19
     add  $0A                                      ; $5F94: $C6 $0A
-    ld   [wRequests], a                           ; $5F96: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5F96: $EA $00 $D6
     ld   de, Data_002_5F54                        ; $5F99: $11 $54 $5F
     jp   label_002_5F27                           ; $5F9C: $C3 $27 $5F
 
@@ -461,11 +461,11 @@ CheckKillSidescrollBossTrigger::
     cp   MAP_EAGLES_TOWER                         ; $5FC8: $FE $06
     jr   nz, jr_002_5FD1                          ; $5FCA: $20 $05
 
-    ld   a, [wIndoorBRoomStatus + $E8]                               ; $5FCC: $FA $E8 $DA
+    ld   a, [wIndoorBRoomStatus + $E8]            ; $5FCC: $FA $E8 $DA
     jr   jr_002_5FD4                              ; $5FCF: $18 $03
 
 jr_002_5FD1:
-    ld   a, [wIndoorARoomStatus + $FF]                               ; $5FD1: $FA $FF $D9
+    ld   a, [wIndoorARoomStatus + $FF]            ; $5FD1: $FA $FF $D9
 
 jr_002_5FD4:
     and  $20                                      ; $5FD4: $E6 $20
@@ -501,7 +501,7 @@ jr_002_5FF0:
     cp   $03                                      ; $5FF5: $FE $03
     jr   nz, jr_002_5FF0                          ; $5FF7: $20 $F7
 
-    jp   MarkTriggerAsResolved                       ; $5FF9: $C3 $60 $0C
+    jp   MarkTriggerAsResolved                    ; $5FF9: $C3 $60 $0C
 
 ; Check for both TRIGGER_KILL_ALL_ENEMIES and TRIGGER_KILL_SPECIALS
 CheckKillEnemiesTrigger::
@@ -509,7 +509,7 @@ CheckKillEnemiesTrigger::
     ld   b, $00                                   ; $5FFE: $06 $00
 
 jr_002_6000:
-    ld   hl, wEntitiesStatusTable                   ; $6000: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                 ; $6000: $21 $80 $C2
     add  hl, bc                                   ; $6003: $09
     ld   a, [hl]                                  ; $6004: $7E
     and  a                                        ; $6005: $A7
@@ -540,7 +540,7 @@ jr_002_6011:
     jr   nz, jr_002_602C                          ; $6027: $20 $03
 
 jr_002_6029:
-    jp   MarkTriggerAsResolved                   ; $6029: $C3 $60 $0C
+    jp   MarkTriggerAsResolved                    ; $6029: $C3 $60 $0C
 
 jr_002_602C:
     ret                                           ; $602C: $C9
@@ -584,7 +584,7 @@ jr_002_604F:
     cp   $08                                      ; $605C: $FE $08
     jr   nz, jr_002_6064                          ; $605E: $20 $04
 
-    ld   hl, hMultiPurpose0                                ; $6060: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $6060: $21 $D7 $FF
     inc  [hl]                                     ; $6063: $34
 
 jr_002_6064:
@@ -601,7 +601,7 @@ jr_002_6064:
     ld   e, $04                                   ; $6072: $1E $04
 
 jr_002_6074:
-    ldh  a, [hMultiPurpose0]                               ; $6074: $F0 $D7
+    ldh  a, [hMultiPurpose0]                      ; $6074: $F0 $D7
     cp   e                                        ; $6076: $BB
     ret  nz                                       ; $6077: $C0
 
@@ -638,7 +638,7 @@ jr_002_609B:
     jr   nz, jr_002_60BD                          ; $60A6: $20 $15
 
 jr_002_60A8:
-    ld   hl, wEntitiesStatusTable                   ; $60A8: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                 ; $60A8: $21 $80 $C2
     add  hl, de                                   ; $60AB: $19
     ld   a, [hl]                                  ; $60AC: $7E
     and  a                                        ; $60AD: $A7
@@ -650,7 +650,7 @@ jr_002_60A8:
     cp   $04                                      ; $60B5: $FE $04
     jr   nz, jr_002_60BD                          ; $60B7: $20 $04
 
-    ld   hl, hMultiPurpose0                                ; $60B9: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $60B9: $21 $D7 $FF
     inc  [hl]                                     ; $60BC: $34
 
 jr_002_60BD:
@@ -671,6 +671,6 @@ jr_002_60BD:
     ld   a, [hl]                                  ; $60D1: $7E
     or   ROOM_STATUS_EVENT_1                      ; $60D2: $F6 $10
     ld   [hl], a                                  ; $60D4: $77
-    ldh  [hRoomStatus], a                               ; $60D5: $E0 $F8
+    ldh  [hRoomStatus], a                         ; $60D5: $E0 $F8
 
     ret                                           ; $60D7: $C9

@@ -85,7 +85,7 @@ IntroHandlerEntryPoint::
     xor  a                                        ; $6E97: $AF
     ld   [wGameplaySubtype], a                    ; $6E98: $EA $96 $DB
     ldh  [hBaseScrollX], a                        ; $6E9B: $E0 $96
-    ldh  [hBaseScrollY], a                               ; $6E9D: $E0 $97
+    ldh  [hBaseScrollY], a                        ; $6E9D: $E0 $97
     ld   [rBGP], a                                ; $6E9F: $E0 $47
     ld   [wBGPalette], a                          ; $6EA1: $EA $97 $DB
     ld   hl, wGameplayType                        ; $6EA4: $21 $95 $DB
@@ -164,7 +164,7 @@ ENDC
     xor  a                                        ; $6F0D: $AF
     ldh  [hFrameCounter], a                       ; $6F0E: $E0 $E7
     ld   a, $A2                                   ; $6F10: $3E $A2
-    ld   [wRandomSeed], a                               ; $6F12: $EA $3D $C1
+    ld   [wRandomSeed], a                         ; $6F12: $EA $3D $C1
     ld   a, [rLCDC]                               ; $6F15: $F0 $40
     and  $DF                                      ; $6F17: $E6 $DF
     ld   [wLCDControl], a                         ; $6F19: $EA $FD $D6
@@ -214,9 +214,9 @@ IntroSceneStage2Handler::
 
     ld   [wEntitiesStatusTable + $00], a          ; $6F63: $EA $80 $C2
     ld   [wEntitiesStatusTable + $01], a          ; $6F66: $EA $81 $C2
-    ld   [wEntitiesSpriteVariantTable], a                               ; $6F69: $EA $B0 $C3
-    ld   [wEntitiesSpriteVariantTable+1], a                               ; $6F6C: $EA $B1 $C3
-    ld   [wEntitiesSpriteVariantTable+2], a                               ; $6F6F: $EA $B2 $C3
+    ld   [wEntitiesSpriteVariantTable], a         ; $6F69: $EA $B0 $C3
+    ld   [wEntitiesSpriteVariantTable+1], a       ; $6F6C: $EA $B1 $C3
+    ld   [wEntitiesSpriteVariantTable+2], a       ; $6F6F: $EA $B2 $C3
     ldh  [hActiveEntityFlipAttribute], a          ; $6F72: $E0 $ED
 
     ; Configure Link's ship entity
@@ -229,9 +229,9 @@ IntroSceneStage2Handler::
 
     xor  a                                        ; $6F83: $AF
     ld   [wEntitiesPhysicsFlagsTable], a          ; $6F84: $EA $40 $C3
-    ld   [wEntitiesPhysicsFlagsTable+1], a                               ; $6F87: $EA $41 $C3
-    ld   [wEntitiesPhysicsFlagsTable+2], a                               ; $6F8A: $EA $42 $C3
-    ld   [wEntitiesPhysicsFlagsTable+3], a                               ; $6F8D: $EA $43 $C3
+    ld   [wEntitiesPhysicsFlagsTable+1], a        ; $6F87: $EA $41 $C3
+    ld   [wEntitiesPhysicsFlagsTable+2], a        ; $6F8A: $EA $42 $C3
+    ld   [wEntitiesPhysicsFlagsTable+3], a        ; $6F8D: $EA $43 $C3
     jp   IncrementGameplaySubtypeAndReturn        ; $6F90: $C3 $D6 $44
 
 Data_001_6F93::
@@ -272,9 +272,9 @@ IntroShipOnSeaHandler::
     jp   nz, .jp_001_7013                         ; $6FD9: $C2 $13 $70
     xor  a                                        ; $6FDC: $AF
     ld   [wEntitiesStatusTable], a                ; $6FDD: $EA $80 $C2
-    ld   [wEntitiesStatusTable+1], a                               ; $6FE0: $EA $81 $C2
-    ld   [wEntitiesStatusTable+2], a                               ; $6FE3: $EA $82 $C2
-    ld   [wEntitiesStateTable], a                               ; $6FE6: $EA $90 $C2
+    ld   [wEntitiesStatusTable+1], a              ; $6FE0: $EA $81 $C2
+    ld   [wEntitiesStatusTable+2], a              ; $6FE3: $EA $82 $C2
+    ld   [wEntitiesStateTable], a                 ; $6FE6: $EA $90 $C2
     ld   a, $05                                   ; $6FE9: $3E $05
     ld   [wGameplaySubtype], a                    ; $6FEB: $EA $96 $DB
     ld   [wD00F], a                               ; $6FEE: $EA $0F $D0
@@ -289,10 +289,10 @@ IntroShipOnSeaHandler::
     xor  a                                        ; $6FFE: $AF
     ldh  [hBaseScrollX], a                        ; $6FFF: $E0 $96
     ld   [wScrollXOffsetForSection], a            ; $7001: $EA $00 $C1
-    ld   [wScrollXOffsetForSection+2], a                               ; $7004: $EA $02 $C1
-    ld   [wScrollXOffsetForSection+3], a                               ; $7007: $EA $03 $C1
+    ld   [wScrollXOffsetForSection+2], a          ; $7004: $EA $02 $C1
+    ld   [wScrollXOffsetForSection+3], a          ; $7007: $EA $03 $C1
     ld   a, $92                                   ; $700A: $3E $92
-    ld   [wScrollXOffsetForSection+1], a                               ; $700C: $EA $01 $C1
+    ld   [wScrollXOffsetForSection+1], a          ; $700C: $EA $01 $C1
     ld   a, $03                                   ; $700F: $3E $03
     ld   [rIE], a                                 ; $7011: $E0 $FF
 
@@ -399,7 +399,7 @@ RenderLightning::
     add  hl, de                                   ; $70A0: $19
     ld   [hl], $30                                ; $70A1: $36 $30
 
-    ld   hl, wEntitiesTransitionCountdownTable                                ; $70A3: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable    ; $70A3: $21 $E0 $C2
     add  hl, de                                   ; $70A6: $19
     ld   [hl], $20                                ; $70A7: $36 $20
 
@@ -454,7 +454,7 @@ IntroLinkFaceHandler::
     ld   [rIE], a ; Enable interrupts on VBlank and LCDStat ; $70E8: $E0 $FF
     xor  a                                        ; $70EA: $AF
     ld   [wEntitiesStatusTable], a                ; $70EB: $EA $80 $C2
-    ld   [wEntitiesStatusTable+1], a                               ; $70EE: $EA $81 $C2
+    ld   [wEntitiesStatusTable+1], a              ; $70EE: $EA $81 $C2
     ld   a, $01                                   ; $70F1: $3E $01
     ld   [wIntroSubTimer], a                      ; $70F3: $EA $02 $D0
     ret                                           ; $70F6: $C9
@@ -474,11 +474,11 @@ IntroLinkFaceHandler::
 
 LoadTileMapZero_trampoline::
     ld   hl, wFarcallParams                       ; $7108: $21 $01 $DE
-    ld   a, BANK(LoadRequestedGfx.loadBGMap)           ; $710B: $3E $00
+    ld   a, BANK(LoadRequestedGfx.loadBGMap)      ; $710B: $3E $00
     ldi  [hl], a                                  ; $710D: $22
-    ld   a, HIGH(LoadRequestedGfx.loadBGMap)           ; $710E: $3E $04
+    ld   a, HIGH(LoadRequestedGfx.loadBGMap)      ; $710E: $3E $04
     ldi  [hl], a                                  ; $7110: $22
-    ld   a, LOW(LoadRequestedGfx.loadBGMap)            ; $7111: $3E $3A
+    ld   a, LOW(LoadRequestedGfx.loadBGMap)       ; $7111: $3E $3A
     ldi  [hl], a                                  ; $7113: $22
     ld   a, BANK(@)                               ; $7114: $3E $01
     ld   [hl], a                                  ; $7116: $77
@@ -507,7 +507,7 @@ label_7154::
 
 IntroStage6Handler::
     call func_001_71C7                            ; $7158: $CD $C7 $71
-    ld   a, [wIntroTimer]                               ; $715B: $FA $01 $D0
+    ld   a, [wIntroTimer]                         ; $715B: $FA $01 $D0
     cp   $A0                                      ; $715E: $FE $A0
     jr   nz, .jr_001_7168                         ; $7160: $20 $06
     push af                                       ; $7162: $F5
@@ -517,7 +517,7 @@ IntroStage6Handler::
 
 .jr_001_7168
     dec  a                                        ; $7168: $3D
-    ld   [wIntroTimer], a                               ; $7169: $EA $01 $D0
+    ld   [wIntroTimer], a                         ; $7169: $EA $01 $D0
     jr   nz, .jr_001_7188                         ; $716C: $20 $1A
     ld   a, $07                                   ; $716E: $3E $07
     ld   [wGameplaySubtype], a                    ; $7170: $EA $96 $DB
@@ -572,10 +572,10 @@ IntroBeachHandler::
     ret                                           ; $71C6: $C9
 
 func_001_71C7::
-    ld   a, [wEntitiesStateTable+1]                               ; $71C7: $FA $91 $C2
+    ld   a, [wEntitiesStateTable+1]               ; $71C7: $FA $91 $C2
     cp   $02                                      ; $71CA: $FE $02
     jr   nc, .return                              ; $71CC: $30 $10
-    ld   a, [wNoiseSfxSeaWavesCounter]                               ; $71CE: $FA $14 $C1
+    ld   a, [wNoiseSfxSeaWavesCounter]            ; $71CE: $FA $14 $C1
     inc  a                                        ; $71D1: $3C
     cp   $A0                                      ; $71D2: $FE $A0
     jr   nz, .jr_001_71DB                         ; $71D4: $20 $05
@@ -584,7 +584,7 @@ func_001_71C7::
     xor  a                                        ; $71DA: $AF
 
 .jr_001_71DB
-    ld   [wNoiseSfxSeaWavesCounter], a                               ; $71DB: $EA $14 $C1
+    ld   [wNoiseSfxSeaWavesCounter], a            ; $71DB: $EA $14 $C1
 
 .return
     ret                                           ; $71DE: $C9
@@ -636,7 +636,7 @@ Data_001_7264::
     dw Data_001_7251                              ; $7270
 
 IntroStage8Handler::
-    ld   a, [wIntroSubTimer]                               ; $7272: $FA $02 $D0
+    ld   a, [wIntroSubTimer]                      ; $7272: $FA $02 $D0
     sla  a                                        ; $7275: $CB $27
     ld   e, a                                     ; $7277: $5F
     ld   d, $00                                   ; $7278: $16 $00
@@ -662,9 +662,9 @@ IntroStage8Handler::
     call func_001_7338                            ; $7293: $CD $38 $73
 .gbc
 
-    ld   a, [wIntroSubTimer]                               ; $7296: $FA $02 $D0
+    ld   a, [wIntroSubTimer]                      ; $7296: $FA $02 $D0
     inc  a                                        ; $7299: $3C
-    ld   [wIntroSubTimer], a                               ; $729A: $EA $02 $D0
+    ld   [wIntroSubTimer], a                      ; $729A: $EA $02 $D0
     cp   $07                                      ; $729D: $FE $07
     jr   nz, .return                              ; $729F: $20 $03
     call IncrementGameplaySubtype                 ; $72A1: $CD $D6 $44
@@ -735,7 +735,7 @@ Data_001_732A::
     dw   Data_001_7317                            ; $7336
 
 func_001_7338::
-    ld   a, [wIntroSubTimer]                               ; $7338: $FA $02 $D0
+    ld   a, [wIntroSubTimer]                      ; $7338: $FA $02 $D0
     sla  a                                        ; $733B: $CB $27
     ld   e, a                                     ; $733D: $5F
     ld   d, $00                                   ; $733E: $16 $00
@@ -744,7 +744,7 @@ func_001_7338::
     ld   a, [hli]                                 ; $7344: $2A
     ld   d, [hl]                                  ; $7345: $56
     ld   e, a                                     ; $7346: $5F
-    ld   hl, wRequestAltDestinationHigh           ; $7347: $21 $91 $DC
+    ld   hl, wRequestAlt                          ; $7347: $21 $91 $DC
     ld   c, $13                                   ; $734A: $0E $13
 
 jr_001_734C::
@@ -815,7 +815,7 @@ Data_001_73AC::
 
 func_001_73B1::
     ld   de, Data_001_73AC                        ; $73B1: $11 $AC $73
-    ld   hl, wRequestAltDestinationHigh           ; $73B4: $21 $91 $DC
+    ld   hl, wRequestAlt                          ; $73B4: $21 $91 $DC
     ld   c, $12                                   ; $73B7: $0E $12
 
 .loop
@@ -855,7 +855,7 @@ TitleScreenHandler::
 
 .jr_001_73F0
     ld   [hl], $08                                ; $73F0: $36 $08
-    ld   hl, wEntitiesTransitionCountdownTable                                ; $73F2: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable    ; $73F2: $21 $E0 $C2
     add  hl, de                                   ; $73F5: $19
     ld   [hl], $3F                                ; $73F6: $36 $3F
     ld   a, [wD003]                               ; $73F8: $FA $03 $D0
@@ -879,18 +879,18 @@ TitleScreenHandler::
     ld   [hl], a                                  ; $7417: $77
 
 .jr_001_7418
-    ld   a, [wIntroSubTimer]                               ; $7418: $FA $02 $D0
+    ld   a, [wIntroSubTimer]                      ; $7418: $FA $02 $D0
     inc  a                                        ; $741B: $3C
-    ld   [wIntroSubTimer], a                               ; $741C: $EA $02 $D0
+    ld   [wIntroSubTimer], a                      ; $741C: $EA $02 $D0
     and  $0F                                      ; $741F: $E6 $0F
     jr   nz, .return                              ; $7421: $20 $16
-    ld   a, [wIntroTimer]                               ; $7423: $FA $01 $D0
+    ld   a, [wIntroTimer]                         ; $7423: $FA $01 $D0
     dec  a                                        ; $7426: $3D
-    ld   [wIntroTimer], a                               ; $7427: $EA $01 $D0
+    ld   [wIntroTimer], a                         ; $7427: $EA $01 $D0
     jr   nz, .return                              ; $742A: $20 $0D
     call IncrementGameplaySubtype                 ; $742C: $CD $D6 $44
     xor  a                                        ; $742F: $AF
-    ld   [wTransitionSequenceCounter], a                               ; $7430: $EA $6B $C1
+    ld   [wTransitionSequenceCounter], a          ; $7430: $EA $6B $C1
     ld   [wC16C], a                               ; $7433: $EA $6C $C1
     call ResetMusicFadeTimer                      ; $7436: $CD $EA $27
 
@@ -899,7 +899,7 @@ TitleScreenHandler::
 
 IntroStageCHandler::
     call func_1A22                                ; $743A: $CD $22 $1A
-    ld   a, [wTransitionSequenceCounter]                               ; $743D: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]          ; $743D: $FA $6B $C1
     cp   $04                                      ; $7440: $FE $04
     jr   nz, .return                              ; $7442: $20 $03
     jp   func_001_6162                            ; $7444: $C3 $62 $61
@@ -918,7 +918,7 @@ IntroStageDHandler::
     ld   [wOBJ0Palette], a                        ; $7459: $EA $98 $DB
     xor  a                                        ; $745C: $AF
     ldh  [hBaseScrollX], a                        ; $745D: $E0 $96
-    ldh  [hBaseScrollY], a                               ; $745F: $E0 $97
+    ldh  [hBaseScrollY], a                        ; $745F: $E0 $97
     dec  a                                        ; $7461: $3D
     ld   [wD018], a                               ; $7462: $EA $18 $D0
     ret                                           ; $7465: $C9
@@ -932,7 +932,7 @@ RenderRain::
     and  $18                                      ; $7472: $E6 $18
     add  a, $10                                   ; $7474: $C6 $10
     ldh  [hMultiPurpose0], a                      ; $7476: $E0 $D7
-    ld   hl, wDynamicOAMBuffer+$1C                                ; $7478: $21 $4C $C0
+    ld   hl, wDynamicOAMBuffer+$1C                ; $7478: $21 $4C $C0
     ; On the sea, limit the rain to the top section of the screen ($10)
     ld   c, $10                                   ; $747B: $0E $10
     ld   a, [wGameplaySubtype]                    ; $747D: $FA $96 $DB
@@ -1129,7 +1129,7 @@ RenderIntroShip::
     cp   $10                                      ; $75A8: $FE $10
     jr   c, .return                               ; $75AA: $38 $1D
     ld   hl, Data_001_7550                        ; $75AC: $21 $50 $75
-    ld   de, wOAMBuffer+$18                                ; $75AF: $11 $18 $C0
+    ld   de, wOAMBuffer+$18                       ; $75AF: $11 $18 $C0
     ld   c, $04                                   ; $75B2: $0E $04
 .loop2
     ldh  a, [hActiveEntityVisualPosY]             ; $75B4: $F0 $EC
@@ -1262,14 +1262,14 @@ IntroMarinState1::
     jr   nz, .jr_76D4                             ; $76B6: $20 $1C
     call IncrementEntityState                     ; $76B8: $CD $12 $3B
     ld   a, $07                                   ; $76BB: $3E $07
-    ld   [wEntitiesStatusTable+1], a                               ; $76BD: $EA $81 $C2
+    ld   [wEntitiesStatusTable+1], a              ; $76BD: $EA $81 $C2
     ld   a, $FE                                   ; $76C0: $3E $FE
-    ld   [wEntitiesPosXTable+1], a                               ; $76C2: $EA $01 $C2
+    ld   [wEntitiesPosXTable+1], a                ; $76C2: $EA $01 $C2
     ld   a, $6E                                   ; $76C5: $3E $6E
-    ld   [wEntitiesPosYTable+1], a                               ; $76C7: $EA $11 $C2
+    ld   [wEntitiesPosYTable+1], a                ; $76C7: $EA $11 $C2
     xor  a                                        ; $76CA: $AF
-    ld   [wEntitiesStateTable+1], a                               ; $76CB: $EA $91 $C2
-    ld   [wEntitiesTransitionCountdownTable+1], a                               ; $76CE: $EA $E1 $C2
+    ld   [wEntitiesStateTable+1], a               ; $76CB: $EA $91 $C2
+    ld   [wEntitiesTransitionCountdownTable+1], a ; $76CE: $EA $E1 $C2
     ldh  [hFrameCounter], a                       ; $76D1: $E0 $E7
     ret                                           ; $76D3: $C9
 
@@ -1279,9 +1279,9 @@ IntroMarinState1::
 
 IntroMarinState2::
     call func_001_7D9C                            ; $76D6: $CD $9C $7D
-    ld   a, [wEntitiesPosXTable+1]                               ; $76D9: $FA $01 $C2
+    ld   a, [wEntitiesPosXTable+1]                ; $76D9: $FA $01 $C2
     dec  a                                        ; $76DC: $3D
-    ld   [wEntitiesPosXTable+1], a                               ; $76DD: $EA $01 $C2
+    ld   [wEntitiesPosXTable+1], a                ; $76DD: $EA $01 $C2
     ldh  a, [hFrameCounter]                       ; $76E0: $F0 $E7
     and  $01                                      ; $76E2: $E6 $01
     jr   nz, .jr_7707                             ; $76E4: $20 $21
@@ -1321,9 +1321,9 @@ IntroMarinState3::
     ldh  a, [hFrameCounter]                       ; $7719: $F0 $E7
     and  $01                                      ; $771B: $E6 $01
     jr   nz, .jr_776C                             ; $771D: $20 $4D
-    ld   a, [wEntitiesPosXTable+1]                               ; $771F: $FA $01 $C2
+    ld   a, [wEntitiesPosXTable+1]                ; $771F: $FA $01 $C2
     dec  a                                        ; $7722: $3D
-    ld   [wEntitiesPosXTable+1], a                               ; $7723: $EA $01 $C2
+    ld   [wEntitiesPosXTable+1], a                ; $7723: $EA $01 $C2
     ldh  a, [hFrameCounter]                       ; $7726: $F0 $E7
     and  $03                                      ; $7728: $E6 $03
     jr   nz, .jr_776C                             ; $772A: $20 $40
@@ -1391,7 +1391,7 @@ IntroMarinState4::
     ld   a, $02                                   ; $778A: $3E $02
     call SetEntitySpriteVariant                   ; $778C: $CD $0C $3B
     ld   a, $00                                   ; $778F: $3E $00
-    ld   [wEntitiesSpriteVariantTable+1], a                               ; $7791: $EA $B1 $C3
+    ld   [wEntitiesSpriteVariantTable+1], a       ; $7791: $EA $B1 $C3
     call GetEntityTransitionCountdown             ; $7794: $CD $05 $0C
     jr   z, .jr_779A                              ; $7797: $28 $01
     dec  [hl]                                     ; $7799: $35
@@ -1414,7 +1414,7 @@ IntroMarinState4::
     ld   a, $03                                   ; $77B2: $3E $03
     call SetEntitySpriteVariant                   ; $77B4: $CD $0C $3B
     ld   a, $01                                   ; $77B7: $3E $01
-    ld   [wEntitiesSpriteVariantTable+1], a                               ; $77B9: $EA $B1 $C3
+    ld   [wEntitiesSpriteVariantTable+1], a       ; $77B9: $EA $B1 $C3
 
 .return
     ret                                           ; $77BC: $C9
@@ -1791,12 +1791,12 @@ ENDC
     jr   z, .jr_001_7990                          ; $7987: $28 $07
     ; Renders both Data_001_7850 and Data_001_7870
     ld   hl, Data_001_7850                        ; $7989: $21 $50 $78
-    ld   c, (Data_001_7870.end - Data_001_7850) / 4 ; $798C: $0E $12
+    ld   c, (Data_001_7870.end - Data_001_7850) / 4; $798C: $0E $12
     jr   .render                                  ; $798E: $18 $1A
 
 .jr_001_7990
     ld   hl, Data_001_7870                        ; $7990: $21 $70 $78
-    ld   c, (Data_001_7870.end - Data_001_7870) / 4 ; $7993: $0E $0A
+    ld   c, (Data_001_7870.end - Data_001_7870) / 4; $7993: $0E $0A
     jr   .render                                  ; $7995: $18 $13
 
 .jr_001_7997
@@ -1810,12 +1810,12 @@ ELSE
 ENDC
     ld   hl, Data_001_7808                        ; $799E: $21 $08 $78
     ; renders both Data_001_7808 and Data_001_7828
-    ld   c, (Data_001_7828.end - Data_001_7808) / 4 ; $79A1: $0E $12
+    ld   c, (Data_001_7828.end - Data_001_7808) / 4; $79A1: $0E $12
     jr   .render                                  ; $79A3: $18 $05
 
 .jr_001_79A5
     ld   hl, Data_001_7828                        ; $79A5: $21 $28 $78
-    ld   c, (Data_001_7828.end - Data_001_7828) / 4 ; $79A8: $0E $0A
+    ld   c, (Data_001_7828.end - Data_001_7828) / 4; $79A8: $0E $0A
 
 .render
     call RenderActiveEntitySpritesRect            ; $79AA: $CD $E6 $3C
@@ -1972,9 +1972,9 @@ InertLinkState2Handler::
     ld   a, [wD00A]                               ; $7A6E: $FA $0A $D0
     cp   $13                                      ; $7A71: $FE $13
     jr   z, .jr_7AB3                              ; $7A73: $28 $3E
-    ld   a, [wCreditsSubscene]                               ; $7A75: $FA $0E $D0
+    ld   a, [wCreditsSubscene]                    ; $7A75: $FA $0E $D0
     inc  a                                        ; $7A78: $3C
-    ld   [wCreditsSubscene], a                               ; $7A79: $EA $0E $D0
+    ld   [wCreditsSubscene], a                    ; $7A79: $EA $0E $D0
     and  $03                                      ; $7A7C: $E6 $03
     jr   nz, .return                              ; $7A7E: $20 $32
     ld   a, [wEntitiesPosYTable]                  ; $7A80: $FA $10 $C2
@@ -1984,17 +1984,17 @@ InertLinkState2Handler::
     ld   [wEntitiesPosYTable], a                  ; $7A88: $EA $10 $C2
 
 .jr_7A8B
-    ld   a, [wEntitiesPosYTable+1]                               ; $7A8B: $FA $11 $C2
+    ld   a, [wEntitiesPosYTable+1]                ; $7A8B: $FA $11 $C2
     cp   $A0                                      ; $7A8E: $FE $A0
     jr   nc, .jr_7A96                             ; $7A90: $30 $04
     inc  a                                        ; $7A92: $3C
-    ld   [wEntitiesPosYTable+1], a                               ; $7A93: $EA $11 $C2
+    ld   [wEntitiesPosYTable+1], a                ; $7A93: $EA $11 $C2
 
 .jr_7A96
-    ldh  a, [hBaseScrollY]                               ; $7A96: $F0 $97
+    ldh  a, [hBaseScrollY]                        ; $7A96: $F0 $97
     push af                                       ; $7A98: $F5
     dec  a                                        ; $7A99: $3D
-    ldh  [hBaseScrollY], a                               ; $7A9A: $E0 $97
+    ldh  [hBaseScrollY], a                        ; $7A9A: $E0 $97
     pop  af                                       ; $7A9C: $F1
     and  $07                                      ; $7A9D: $E6 $07
     jr   nz, .return                              ; $7A9F: $20 $11
@@ -2015,9 +2015,9 @@ InertLinkState2Handler::
     call GetEntityTransitionCountdown             ; $7AB6: $CD $05 $0C
     ld   [hl], $17                                ; $7AB9: $36 $17
     ld   a, $07                                   ; $7ABB: $3E $07
-    ldh  [hVolumeRight], a                      ; $7ABD: $E0 $A9
+    ldh  [hVolumeRight], a                        ; $7ABD: $E0 $A9
     ld   a, $70                                   ; $7ABF: $3E $70
-    ldh  [hVolumeLeft], a                      ; $7AC1: $E0 $AA
+    ldh  [hVolumeLeft], a                         ; $7AC1: $E0 $AA
     ret                                           ; $7AC3: $C9
 
 InertLinkState3Handler::
@@ -2029,11 +2029,11 @@ InertLinkState3Handler::
     jr   nz, .return                              ; $7ACE: $20 $13
     call IncrementGameplaySubtype                 ; $7AD0: $CD $D6 $44
     xor  a                                        ; $7AD3: $AF
-    ld   [wIntroSubTimer], a                               ; $7AD4: $EA $02 $D0
+    ld   [wIntroSubTimer], a                      ; $7AD4: $EA $02 $D0
     ld   [wD003], a                               ; $7AD7: $EA $03 $D0
     ld   [wD004], a                               ; $7ADA: $EA $04 $D0
     ld   [wEntitiesStatusTable], a                ; $7ADD: $EA $80 $C2
-    ld   [wEntitiesStatusTable+1], a                               ; $7AE0: $EA $81 $C2
+    ld   [wEntitiesStatusTable+1], a              ; $7AE0: $EA $81 $C2
 
 .return
     ret                                           ; $7AE3: $C9
@@ -2155,7 +2155,7 @@ func_7C60::
     ret                                           ; $7CCA: $C9
 
 func_001_7CCB::
-    ld   hl, wRequestAltDestinationHigh           ; $7CCB: $21 $91 $DC
+    ld   hl, wRequestAlt                          ; $7CCB: $21 $91 $DC
     ld   a, [wD00C]                               ; $7CCE: $FA $0C $D0
     ldi  [hl], a                                  ; $7CD1: $22
     ld   a, [wD00B]                               ; $7CD2: $FA $0B $D0
@@ -2304,7 +2304,7 @@ func_001_7D9C::
     inc  [hl]                                     ; $7DA5: $34
 
 .jr_001_7DA6
-    ld   hl, wScrollXOffsetForSection+1                                ; $7DA6: $21 $01 $C1
+    ld   hl, wScrollXOffsetForSection+1           ; $7DA6: $21 $01 $C1
     ld   a, [wD004]                               ; $7DA9: $FA $04 $D0
     add  a, $50                                   ; $7DAC: $C6 $50
     ld   [wD004], a                               ; $7DAE: $EA $04 $D0
@@ -2338,7 +2338,7 @@ func_001_7DCF::
     inc  [hl]                                     ; $7DD8: $34
 
 .jr_001_7DD9
-    ld   hl, wScrollXOffsetForSection+1                                ; $7DD9: $21 $01 $C1
+    ld   hl, wScrollXOffsetForSection+1           ; $7DD9: $21 $01 $C1
     ld   a, [wD004]                               ; $7DDC: $FA $04 $D0
     add  a, $28                                   ; $7DDF: $C6 $28
     ld   [wD004], a                               ; $7DE1: $EA $04 $D0

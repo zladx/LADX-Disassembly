@@ -754,7 +754,7 @@ UpdateEntityTimers::
     and  $03                                      ; $4DCE: $E6 $03
     jr   nz, .dropTimerEnd                        ; $4DD0: $20 $0
 
-    ld   hl, wEntitiesDropTimerTable                                ; $4DD2: $21 $50 $C4
+    ld   hl, wEntitiesDropTimerTable              ; $4DD2: $21 $50 $C4
     add  hl, bc                                   ; $4DD5: $09
     ld   a, [hl]                                  ; $4DD6: $7E
     and  a                                        ; $4DD7: $A7
@@ -1014,7 +1014,7 @@ jr_014_509B:
     ldh  a, [hMultiPurpose0]                      ; $509B: $F0 $D7
     add  [hl]                                     ; $509D: $86
     and  $1F                                      ; $509E: $E6 $1F
-    ld   hl, hMultiPurpose1                            ; $50A0: $21 $D8 $FF
+    ld   hl, hMultiPurpose1                       ; $50A0: $21 $D8 $FF
     or   [hl]                                     ; $50A3: $B6
     ld   e, a                                     ; $50A4: $5F
     ld   hl, Data_014_4EE8                        ; $50A5: $21 $E8 $4E
@@ -1046,7 +1046,7 @@ func_014_50C3::
     ; For each entity:
 .loop
     ; If the entity is active…
-    ld   hl, wEntitiesStatusTable                         ; $50C7: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                 ; $50C7: $21 $80 $C2
     add  hl, de                                   ; $50CA: $19
     ld   a, [hl]                                  ; $50CB: $7E
     cp   ENTITY_STATUS_ACTIVE                     ; $50CC: $FE $05
@@ -1366,7 +1366,7 @@ jr_014_545A:
     ld   [wOBJ0Palette], a                        ; $547C: $EA $98 $DB
 
 jr_014_547F:
-    ld   a, [wRequestDestinationHigh]             ; $547F: $FA $01 $D6
+    ld   a, [wRequest]                            ; $547F: $FA $01 $D6
     and  a                                        ; $5482: $A7
     ret  nz                                       ; $5483: $C0
 
@@ -1503,11 +1503,11 @@ func_014_5526::
     pop  bc                                       ; $554C: $C1
 
 jr_014_554D:
-    ld   hl, wRequestDestinationHigh              ; $554D: $21 $01 $D6
-    ld   a, [wRequests]                           ; $5550: $FA $00 $D6
+    ld   hl, wRequest                             ; $554D: $21 $01 $D6
+    ld   a, [wRequestsSize]                       ; $5550: $FA $00 $D6
     ld   e, a                                     ; $5553: $5F
     add  $0A                                      ; $5554: $C6 $0A
-    ld   [wRequests], a                           ; $5556: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5556: $EA $00 $D6
     ld   d, $00                                   ; $5559: $16 $00
     add  hl, de                                   ; $555B: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $555C: $F0 $CF
@@ -1569,11 +1569,11 @@ jr_014_5584:
     pop  bc                                       ; $55B2: $C1
 
 jr_014_55B3:
-    ld   hl, wRequestDestinationHigh              ; $55B3: $21 $01 $D6
-    ld   a, [wRequests]                           ; $55B6: $FA $00 $D6
+    ld   hl, wRequest                             ; $55B3: $21 $01 $D6
+    ld   a, [wRequestsSize]                       ; $55B6: $FA $00 $D6
     ld   e, a                                     ; $55B9: $5F
     add  $0A                                      ; $55BA: $C6 $0A
-    ld   [wRequests], a                           ; $55BC: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $55BC: $EA $00 $D6
     ld   d, $00                                   ; $55BF: $16 $00
     add  hl, de                                   ; $55C1: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $55C2: $F0 $CF
@@ -1617,11 +1617,11 @@ jr_014_55E3:
     pop  bc                                       ; $55FF: $C1
 
 jr_014_5600:
-    ld   hl, wRequestDestinationHigh              ; $5600: $21 $01 $D6
-    ld   a, [wRequests]                           ; $5603: $FA $00 $D6
+    ld   hl, wRequest                             ; $5600: $21 $01 $D6
+    ld   a, [wRequestsSize]                       ; $5603: $FA $00 $D6
     ld   e, a                                     ; $5606: $5F
     add  $0A                                      ; $5607: $C6 $0A
-    ld   [wRequests], a                           ; $5609: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5609: $EA $00 $D6
     ld   d, $00                                   ; $560C: $16 $00
     add  hl, de                                   ; $560E: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $560F: $F0 $CF
@@ -1757,11 +1757,11 @@ jr_014_56B9:
     pop  bc                                       ; $56C8: $C1
 
 jr_014_56C9:
-    ld   hl, wRequestDestinationHigh              ; $56C9: $21 $01 $D6
-    ld   a, [wRequests]                           ; $56CC: $FA $00 $D6
+    ld   hl, wRequest                             ; $56C9: $21 $01 $D6
+    ld   a, [wRequestsSize]                       ; $56CC: $FA $00 $D6
     ld   e, a                                     ; $56CF: $5F
     add  $0A                                      ; $56D0: $C6 $0A
-    ld   [wRequests], a                           ; $56D2: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $56D2: $EA $00 $D6
     ld   d, $00                                   ; $56D5: $16 $00
     add  hl, de                                   ; $56D7: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $56D8: $F0 $CF
@@ -1887,11 +1887,11 @@ label_014_5767:
 
 jr_014_5789:
     ; Make staircase appear
-    ld   hl, wRequestDestinationHigh              ; $5789: $21 $01 $D6
-    ld   a, [wRequests]                           ; $578C: $FA $00 $D6
+    ld   hl, wRequest                             ; $5789: $21 $01 $D6
+    ld   a, [wRequestsSize]                       ; $578C: $FA $00 $D6
     ld   e, a                                     ; $578F: $5F
     add  $0A                                      ; $5790: $C6 $0A
-    ld   [wRequests], a                           ; $5792: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5792: $EA $00 $D6
     ld   d, $00                                   ; $5795: $16 $00
     add  hl, de                                   ; $5797: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5798: $F0 $CF
@@ -1961,11 +1961,11 @@ label_014_57E1:
     pop  bc                                       ; $5806: $C1
 
 jr_014_5807:
-    ld   hl, wRequestDestinationHigh              ; $5807: $21 $01 $D6
-    ld   a, [wRequests]                           ; $580A: $FA $00 $D6
+    ld   hl, wRequest                             ; $5807: $21 $01 $D6
+    ld   a, [wRequestsSize]                       ; $580A: $FA $00 $D6
     ld   e, a                                     ; $580D: $5F
     add  $0A                                      ; $580E: $C6 $0A
-    ld   [wRequests], a                           ; $5810: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5810: $EA $00 $D6
     ld   d, $00                                   ; $5813: $16 $00
     add  hl, de                                   ; $5815: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5816: $F0 $CF

@@ -4,7 +4,7 @@
 
 ; Special case for the sequence with Marin and Link chatting on the beach
 AnimateMarinBeachTiles::
-    ld   a, [wRequestDestinationHigh]             ; $1ACC: $FA $01 $D6
+    ld   a, [wRequest]                            ; $1ACC: $FA $01 $D6
     and  a                                        ; $1ACF: $A7
     ret  nz                                       ; $1AD0: $C0
     ld   a, BANK(MarinBeachWavesTiles)            ; $1AD1: $3E $10
@@ -528,9 +528,9 @@ label_1D8C::
 
 label_1D95::
     ldh  a, [hLinkAnimationState]                 ; $1D95: $F0 $9D
-    cp   LINK_ANIMATION_STATE_HOLD_SWIMMING_2          ; $1D97: $FE $4E
+    cp   LINK_ANIMATION_STATE_HOLD_SWIMMING_2     ; $1D97: $FE $4E
     jr   z, label_1D9F                            ; $1D99: $28 $04
-    cp   LINK_ANIMATION_STATE_MOVING_SWIMMING_2          ; $1D9B: $FE $4F
+    cp   LINK_ANIMATION_STATE_MOVING_SWIMMING_2   ; $1D9B: $FE $4F
     jr   nz, label_1DA1                           ; $1D9D: $20 $02
 
 label_1D9F::
@@ -583,9 +583,9 @@ label_1DD2::
 
 label_1DDB::
     ldh  a, [hLinkAnimationState]                 ; $1DDB: $F0 $9D
-    cp   LINK_ANIMATION_STATE_HOLD_SWIMMING_2          ; $1DDD: $FE $4E
+    cp   LINK_ANIMATION_STATE_HOLD_SWIMMING_2     ; $1DDD: $FE $4E
     jr   z, label_1DE5                            ; $1DDF: $28 $04
-    cp   LINK_ANIMATION_STATE_MOVING_SWIMMING_2          ; $1DE1: $FE $4F
+    cp   LINK_ANIMATION_STATE_MOVING_SWIMMING_2   ; $1DE1: $FE $4F
     jr   nz, label_1DE7                           ; $1DE3: $20 $02
 
 label_1DE5::
@@ -625,7 +625,7 @@ ReplaceTradingItemTiles::
     ; and just draw Link's prite.
     ld   a, [wTradeSequenceItem]                  ; $1E01: $FA $0E $DB
     cp   TRADING_ITEM_RIBBON                      ; $1E04: $FE $02
-    jp  c, CopyDataAndDrawLinkSprite.drawLinkSprite ; $1E06: $DA $3E $1F
+    jp  c, CopyDataAndDrawLinkSprite.drawLinkSprite; $1E06: $DA $3E $1F
 
     ; de = wTradeSequenceItem * 4
     sub  a, TRADING_ITEM_RIBBON                   ; $1E09: $D6 $02

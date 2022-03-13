@@ -26,7 +26,7 @@ jr_018_6FDB:
 
     inc  [hl]                                     ; $6FFF: $34
     call_open_dialog $025                         ; $7000
-    jp   SetRoomStatus20                            ; $7005: $C3 $B9 $7F
+    jp   SetRoomStatus20                          ; $7005: $C3 $B9 $7F
 
 jr_018_7008:
     cp   $01                                      ; $7008: $FE $01
@@ -85,7 +85,7 @@ GrimCreeperState2Handler::
     ld   [hl], $FF                                ; $705E: $36 $FF
     ld   hl, wEntitiesOptions1Table               ; $7060: $21 $30 $C4
     add  hl, bc                                   ; $7063: $09
-    res  ENTITY_OPT1_B_EXCLUDED_FROM_KILL_ALL, [hl]                                  ; $7064: $CB $8E
+    res  ENTITY_OPT1_B_EXCLUDED_FROM_KILL_ALL, [hl]; $7064: $CB $8E
     ld   e, $0F                                   ; $7066: $1E $0F
     ld   d, b                                     ; $7068: $50
 
@@ -129,7 +129,7 @@ GrimCreeperState3Handler::
 
     ld   hl, wEntitiesOptions1Table               ; $709A: $21 $30 $C4
     add  hl, bc                                   ; $709D: $09
-    set  ENTITY_OPT1_B_EXCLUDED_FROM_KILL_ALL, [hl]                                  ; $709E: $CB $CE
+    set  ENTITY_OPT1_B_EXCLUDED_FROM_KILL_ALL, [hl]; $709E: $CB $CE
     call IncrementEntityState                     ; $70A0: $CD $12 $3B
     xor  a                                        ; $70A3: $AF
 
@@ -367,7 +367,7 @@ jr_018_724E:
     cp   $06                                      ; $7256: $FE $06
     jr   nc, jr_018_726D                          ; $7258: $30 $13
 
-    ld   hl, hActiveEntityVisualPosY                                ; $725A: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $725A: $21 $EC $FF
     ldh  a, [hLinkPositionY]                      ; $725D: $F0 $99
     sub  [hl]                                     ; $725F: $96
 

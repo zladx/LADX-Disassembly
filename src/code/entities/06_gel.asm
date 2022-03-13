@@ -54,7 +54,7 @@ jr_006_7C2E:
     add  hl, bc                                   ; $7C42: $09
     ld   a, [hl]                                  ; $7C43: $7E
     and  $80                                      ; $7C44: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $7C46: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $7C46: $E0 $E8
     jr   z, jr_006_7C50                           ; $7C48: $28 $06
 
     ld   [hl], b                                  ; $7C4A: $70
@@ -244,7 +244,7 @@ jr_006_7D5B:
 
 GelState3Handler::
     call func_006_7D0F                            ; $7D63: $CD $0F $7D
-    ldh  a, [hMultiPurposeG]                               ; $7D66: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $7D66: $F0 $E8
     and  a                                        ; $7D68: $A7
     jr   z, jr_006_7D6F                           ; $7D69: $28 $04
 

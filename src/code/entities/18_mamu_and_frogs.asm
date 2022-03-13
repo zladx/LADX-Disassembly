@@ -108,7 +108,7 @@ MamuAndFrogsState1Handler::
     jr   nz, jr_018_40D6                          ; $409E: $20 $36
 
     call IncrementEntityState                     ; $40A0: $CD $12 $3B
-    ld   a, [wDialogAskSelectionIndex]                               ; $40A3: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $40A3: $FA $77 $C1
     and  a                                        ; $40A6: $A7
     jr   z, jr_018_40AF                           ; $40A7: $28 $06
 
@@ -269,11 +269,11 @@ jr_018_4230:
     ld   hl, Data_018_4158                        ; $4240: $21 $58 $41
     add  hl, de                                   ; $4243: $19
     ld   a, [hl]                                  ; $4244: $7E
-    ld   [wEntitiesSpriteVariantTable+1], a                               ; $4245: $EA $B1 $C3
+    ld   [wEntitiesSpriteVariantTable+1], a       ; $4245: $EA $B1 $C3
     ld   hl, Data_018_4192                        ; $4248: $21 $92 $41
     add  hl, de                                   ; $424B: $19
     ld   a, [hl]                                  ; $424C: $7E
-    ld   [wEntitiesSpriteVariantTable+2], a                               ; $424D: $EA $B2 $C3
+    ld   [wEntitiesSpriteVariantTable+2], a       ; $424D: $EA $B2 $C3
     ret                                           ; $4250: $C9
 
 IF !__PATCH_0__
@@ -289,7 +289,7 @@ MamuAndFrogsGrantSongHandler::
     ld   [wD215], a                               ; $4258: $EA $15 $D2
     call GetEntityTransitionCountdown             ; $425B: $CD $05 $0C
     ld   [hl], $70                                ; $425E: $36 $70
-    ld   a, MUSIC_TOOL_ACQUIRED                 ; $4260: $3E $10
+    ld   a, MUSIC_TOOL_ACQUIRED                   ; $4260: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $4262: $EA $68 $D3
     call IncrementEntityState                     ; $4265: $CD $12 $3B
 
@@ -315,7 +315,7 @@ jr_018_427D:
     call func_018_4087                            ; $4284: $CD $87 $40
 
 jr_018_4287:
-    ld   a, LINK_ANIMATION_STATE_GOT_ITEM       ; $4287: $3E $6C
+    ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $4287: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $4289: $E0 $9D
     ld   a, $02                                   ; $428B: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $428D: $E0 $A1
@@ -473,8 +473,8 @@ jr_018_43EF:
 label_018_4402:
     call label_2887                               ; $4402: $CD $87 $28
     ld   a, $1B                                   ; $4405: $3E $1B
-    ld   [wRequests], a                           ; $4407: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $440A: $21 $01 $D6
+    ld   [wRequestsSize], a                       ; $4407: $EA $00 $D6
+    ld   hl, wRequest                             ; $440A: $21 $01 $D6
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $440D: $F0 $CF
     add  $02                                      ; $440F: $C6 $02
     ld   e, a                                     ; $4411: $5F
@@ -531,8 +531,8 @@ jr_018_441E:
 label_018_444E:
     call label_2887                               ; $444E: $CD $87 $28
     ld   a, $1B                                   ; $4451: $3E $1B
-    ld   [wRequests], a                           ; $4453: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $4456: $21 $01 $D6
+    ld   [wRequestsSize], a                       ; $4453: $EA $00 $D6
+    ld   hl, wRequest                             ; $4456: $21 $01 $D6
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4459: $F0 $CF
     add  $02                                      ; $445B: $C6 $02
     ld   e, a                                     ; $445D: $5F
@@ -584,8 +584,8 @@ label_018_444E:
 label_018_449D:
     call label_2887                               ; $449D: $CD $87 $28
     ld   a, $15                                   ; $44A0: $3E $15
-    ld   [wRequests], a                           ; $44A2: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $44A5: $21 $01 $D6
+    ld   [wRequestsSize], a                       ; $44A2: $EA $00 $D6
+    ld   hl, wRequest                             ; $44A5: $21 $01 $D6
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $44A8: $F0 $CF
     add  $02                                      ; $44AA: $C6 $02
     ld   e, a                                     ; $44AC: $5F

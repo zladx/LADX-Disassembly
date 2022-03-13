@@ -37,7 +37,7 @@ PushedBlockEntityHandler::
     call ReturnIfNonInteractive_03                ; $5260: $CD $78 $7F
     call UpdateEntityPosWithSpeed_03              ; $5263: $CD $25 $7F
     call func_003_52D4                            ; $5266: $CD $D4 $52
-    call CheckLinkCollisionWithEnemy.collisionEvenInTheAir  ; $5269: $CD $77 $6C
+    call CheckLinkCollisionWithEnemy.collisionEvenInTheAir; $5269: $CD $77 $6C
     jr   nc, jr_003_5276                          ; $526C: $30 $08
 
     call CopyLinkFinalPositionToPosition          ; $526E: $CD $BE $0C
@@ -70,7 +70,7 @@ jr_003_5286:
     add  hl, bc                                   ; $5293: $09
     ld   [hl], a                                  ; $5294: $77
     call func_003_7893                            ; $5295: $CD $93 $78
-    ld   hl, wEntitiesStatusTable                         ; $5298: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                 ; $5298: $21 $80 $C2
     add  hl, bc                                   ; $529B: $09
     ld   a, [hl]                                  ; $529C: $7E
     and  a                                        ; $529D: $A7
@@ -108,4 +108,4 @@ jr_003_52B5:
     ret  nz                                       ; $52D0: $C0
 
 jr_003_52D1:
-    jp   MarkTriggerAsResolved                       ; $52D1: $C3 $60 $0C
+    jp   MarkTriggerAsResolved                    ; $52D1: $C3 $60 $0C

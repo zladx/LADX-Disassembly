@@ -35,7 +35,7 @@ WorldMapState0Handler::
     di                                            ; $5655: $F3
     ld   a, $03                                   ; $5656: $3E $03
     ld   [rSVBK], a                               ; $5658: $E0 $70
-    ld   a, [wIsFileSelectionArrowShifted]                               ; $565A: $FA $00 $D0
+    ld   a, [wIsFileSelectionArrowShifted]        ; $565A: $FA $00 $D0
     and  a                                        ; $565D: $A7
     jr   nz, jr_001_5674                          ; $565E: $20 $14
 
@@ -52,7 +52,7 @@ jr_001_5660::
     and  a                                        ; $566C: $A7
     jr   nz, jr_001_5660                          ; $566D: $20 $F1
     ld   a, $01                                   ; $566F: $3E $01
-    ld   [wIsFileSelectionArrowShifted], a                               ; $5671: $EA $00 $D0
+    ld   [wIsFileSelectionArrowShifted], a        ; $5671: $EA $00 $D0
 
 jr_001_5674::
     xor  a                                        ; $5674: $AF
@@ -63,20 +63,20 @@ WorldMapState1Handler::
     call DrawLinkSprite                           ; $5678: $CD $2E $1D
     call AnimateEntitiesAndRestoreBank01          ; $567B: $CD $FC $0E
     call func_1A22                                ; $567E: $CD $22 $1A
-    ld   a, [wTransitionSequenceCounter]                               ; $5681: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]          ; $5681: $FA $6B $C1
     cp   $04                                      ; $5684: $FE $04
     jr   nz, jr_001_56F3                          ; $5686: $20 $6B
     ld   a, $03                                   ; $5688: $3E $03
-    ldh  [hVolumeRight], a                      ; $568A: $E0 $A9
+    ldh  [hVolumeRight], a                        ; $568A: $E0 $A9
     ld   a, $30                                   ; $568C: $3E $30
-    ldh  [hVolumeLeft], a                      ; $568E: $E0 $AA
+    ldh  [hVolumeLeft], a                         ; $568E: $E0 $AA
     call IncrementGameplaySubtype                 ; $5690: $CD $D6 $44
     xor  a                                        ; $5693: $AF
-    ld   [wTransitionSequenceCounter], a                               ; $5694: $EA $6B $C1
+    ld   [wTransitionSequenceCounter], a          ; $5694: $EA $6B $C1
     ld   [wC16C], a                               ; $5697: $EA $6C $C1
     ldh  [hBaseScrollX], a                        ; $569A: $E0 $96
-    ld   [wScrollXOffset], a                               ; $569C: $EA $BF $C1
-    ldh  [hBaseScrollY], a                               ; $569F: $E0 $97
+    ld   [wScrollXOffset], a                      ; $569C: $EA $BF $C1
+    ldh  [hBaseScrollY], a                        ; $569F: $E0 $97
     ld   [wInventoryAppearing], a                 ; $56A1: $EA $4F $C1
     ld   [wC1B2], a                               ; $56A4: $EA $B2 $C1
     ld   [wC1B3], a                               ; $56A7: $EA $B3 $C1
@@ -139,7 +139,7 @@ WorldMapState3Handler::
 
 WorldMapState4Handler::
     call func_1A39                                ; $570B: $CD $39 $1A
-    ld   a, [wTransitionSequenceCounter]                               ; $570E: $FA $6B $C1
+    ld   a, [wTransitionSequenceCounter]          ; $570E: $FA $6B $C1
     cp   $04                                      ; $5711: $FE $04
     jr   nz, .return                              ; $5713: $20 $06
     call IncrementGameplaySubtype                 ; $5715: $CD $D6 $44
@@ -230,7 +230,7 @@ jr_001_577E::
 
 jr_001_5792::
     call OpenDialog                               ; $5792: $CD $85 $23
-    ld   a, [wDialogIndex]                               ; $5795: $FA $73 $C1
+    ld   a, [wDialogIndex]                        ; $5795: $FA $73 $C1
     cp   $A7                                      ; $5798: $FE $A7
     jr   z, jr_001_57A3                           ; $579A: $28 $07
     ld   a, [wDBB4]                               ; $579C: $FA $B4 $DB
@@ -239,7 +239,7 @@ jr_001_5792::
 
 jr_001_57A3::
     ld   a, $01                                   ; $57A3: $3E $01
-    ld   [wDialogIndexHi], a                               ; $57A5: $EA $12 $C1
+    ld   [wDialogIndexHi], a                      ; $57A5: $EA $12 $C1
 
 jr_001_57A8::
     ld   a, [wDBB4]                               ; $57A8: $FA $B4 $DB
@@ -297,7 +297,7 @@ jr_001_5804::
     and  e                                        ; $5806: $A3
     jr   z, label_001_5818                        ; $5807: $28 $0F
     xor  a                                        ; $5809: $AF
-    ld   [wTransitionSequenceCounter], a                               ; $580A: $EA $6B $C1
+    ld   [wTransitionSequenceCounter], a          ; $580A: $EA $6B $C1
     ld   [wC16C], a                               ; $580D: $EA $6C $C1
     ld   a, $01                                   ; $5810: $3E $01
     ld   [wPaletteUnknownE], a                    ; $5812: $EA $D5 $DD

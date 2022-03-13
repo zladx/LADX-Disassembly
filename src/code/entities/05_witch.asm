@@ -32,7 +32,7 @@ func_005_47C0::
     ld   hl, Data_005_4780                        ; $47CA: $21 $80 $47
     add  hl, de                                   ; $47CD: $19
     ld   c, $04                                   ; $47CE: $0E $04
-    jp   RenderActiveEntitySpritesRect           ; $47D0: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect            ; $47D0: $C3 $E6 $3C
 
 WitchEntityHandler::
     push bc                                       ; $47D3: $C5

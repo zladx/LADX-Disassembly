@@ -94,13 +94,13 @@ OpenDialog::
 
     ; Initialize dialog variables
     xor  a                                        ; $238E: $AF
-    ld   [wDialogOpenCloseAnimationFrame], a                               ; $238F: $EA $6F $C1
+    ld   [wDialogOpenCloseAnimationFrame], a      ; $238F: $EA $6F $C1
     ld   [wDialogCharacterIndex], a               ; $2392: $EA $70 $C1
     ld   [wDialogCharacterIndexHi], a             ; $2395: $EA $64 $C1
-    ld   [wNameIndex], a                               ; $2398: $EA $08 $C1
+    ld   [wNameIndex], a                          ; $2398: $EA $08 $C1
     ld   [wDialogIndexHi], a                      ; $239B: $EA $12 $C1
     ld   a, $0F                                   ; $239E: $3E $0F
-    ld   [wDialogSFX], a                               ; $23A0: $EA $AB $C5
+    ld   [wDialogSFX], a                          ; $23A0: $EA $AB $C5
     ; Determine if the dialog is displayed on top or bottom
     ; wDialogState = hLinkPositionY < $48 ? $81 : $01
     ldh  a, [hLinkPositionY]                      ; $23A3: $F0 $99
@@ -127,7 +127,7 @@ DialogClosingEndHandler::
     cp   a, GAMEPLAY_WORLD                        ; $23C1: $FE $0B
     ret  nz                                       ; $23C3: $C0
 
-    ld   a, [wBGPaletteEffectAddress]                               ; $23C4: $FA $CC $C3
+    ld   a, [wBGPaletteEffectAddress]             ; $23C4: $FA $CC $C3
     cp   a, $08                                   ; $23C7: $FE $08
     ret  c                                        ; $23C9: $D8
 
@@ -288,7 +288,7 @@ DialogFinishedHandler::
 UpdateDialogState::
     ; Clear wDialogOpenCloseAnimationFrame
     xor  a                                        ; $2496: $AF
-    ld   [wDialogOpenCloseAnimationFrame], a                               ; $2497: $EA $6F $C1
+    ld   [wDialogOpenCloseAnimationFrame], a      ; $2497: $EA $6F $C1
 
 .if
     ; If GameplayType == PHOTO_ALBUM
@@ -349,7 +349,7 @@ DialogLetterAnimationEndHandler::
     ld   hl, Data_01C_45C1                        ; $24E9: $21 $C1 $45
     add  hl, bc                                   ; $24EC: $09
     add  a, [hl]                                  ; $24ED: $86
-    ld   hl, wRequests                            ; $24EE: $21 $00 $D6
+    ld   hl, wRequestsSize                        ; $24EE: $21 $00 $D6
     add  hl, de                                   ; $24F1: $19
     ldi  [hl], a                                  ; $24F2: $22
     ld   [wC175], a                               ; $24F3: $EA $75 $C1
@@ -401,7 +401,7 @@ DialogDrawNextCharacterHandler::
     add  hl, bc                                   ; $253D: $09
     ld   a, [hl]                                  ; $253E: $7E
 
-    ld   hl, wRequests                            ; $253F: $21 $00 $D6
+    ld   hl, wRequestsSize                        ; $253F: $21 $00 $D6
     add  hl, de                                   ; $2542: $19
     ldi  [hl], a ; high byte of tile destination address ; $2543: $22
     push hl                                       ; $2544: $E5
@@ -658,7 +658,7 @@ DialogBreakHandler::
     jr   nz, .jp_26E1                             ; $269A: $20 $45
     ld   a, [wC3C3]                               ; $269C: $FA $C3 $C3
     cp   $FF                                      ; $269F: $FE $FF
-    jp   z, DialogDrawNextCharacterHandler.label_25AD ; $26A1: $CA $AD $25
+    jp   z, DialogDrawNextCharacterHandler.label_25AD; $26A1: $CA $AD $25
     cp   $FE                                      ; $26A4: $FE $FE
     jp   z, DialogDrawNextCharacterHandler.choice ; $26A6: $CA $95 $25
     ; wC1CC = 01 when an unfinished textbox is waiting for a button press to continue.
@@ -713,18 +713,18 @@ ENDC
     add  hl, de                                   ; $26F0: $19
     ld   a, [wBGOriginHigh]                       ; $26F1: $FA $2E $C1
     add  a, [hl]                                  ; $26F4: $86
-    ld   [wRequestDestinationHigh], a             ; $26F5: $EA $01 $D6
+    ld   [wRequest.destinationHigh], a            ; $26F5: $EA $01 $D6
     ld   hl, data_2691                            ; $26F8: $21 $91 $26
     add  hl, de                                   ; $26FB: $19
     ld   a, [wBGOriginLow]                        ; $26FC: $FA $2F $C1
     add  a, [hl]                                  ; $26FF: $86
-    ld   [wRequestDestinationLow], a              ; $2700: $EA $02 $D6
+    ld   [wRequest.destinationLow], a             ; $2700: $EA $02 $D6
     ld   a, BG_COPY_MODE_ROW_SINGLE_VALUE | $0F   ; $2703: $3E $4F
-    ld   [wRequestLength], a                      ; $2705: $EA $03 $D6
+    ld   [wRequest.length], a                     ; $2705: $EA $03 $D6
     ldh  a, [hDialogBackgroundTile]               ; $2708: $F0 $E8
-    ld   [wRequestLength + 1], a                  ; $270A: $EA $04 $D6
+    ld   [wRequest.length+ 1], a                  ; $270A: $EA $04 $D6
     xor  a                                        ; $270D: $AF
-    ld   [wRequestData + 1], a                    ; $270E: $EA $05 $D6
+    ld   [wRequest.data + 1], a                   ; $270E: $EA $05 $D6
 IF __PATCH_9__
     jp   IncrementDialogState
 ELSE

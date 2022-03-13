@@ -49,8 +49,8 @@ Init::
     call ClearBytes                               ; $018C: $CD $DF $29
 
     ; Clear BG Map
-    callsb FillBGMapAttributesWhite              ; $018F: $3E $24 $EA $00 $21 $CD $00 $5C
-    call FillBGMapWhite                          ; $0197: $CD $F7 $28
+    callsb FillBGMapAttributesWhite               ; $018F: $3E $24 $EA $00 $21 $CD $00 $5C
+    call FillBGMapWhite                           ; $0197: $CD $F7 $28
 
     call ClearHRAMAndWRAM                         ; $019A: $CD $D0 $29
 

@@ -55,7 +55,7 @@ MadBatterState1Handler::
     jp   IncrementEntityState                     ; $4F34: $C3 $12 $3B
 
 MadBatterState2Handler::
-    call MadBatterRenderSmallSprite                            ; $4F37: $CD $C3 $50
+    call MadBatterRenderSmallSprite               ; $4F37: $CD $C3 $50
     call GetEntityTransitionCountdown             ; $4F3A: $CD $05 $0C
     jr   nz, .jr_018_4F44                         ; $4F3D: $20 $05
 
@@ -80,7 +80,7 @@ MadBatterState2Handler::
     jp   UpdateEntityPosWithSpeed_18              ; $4F59: $C3 $5F $7E
 
 MadBatterState3Handler::
-    call MadBatterRenderSmallSprite                            ; $4F5C: $CD $C3 $50
+    call MadBatterRenderSmallSprite               ; $4F5C: $CD $C3 $50
     call GetEntityTransitionCountdown             ; $4F5F: $CD $05 $0C
     ret  nz                                       ; $4F62: $C0
 
@@ -106,7 +106,7 @@ MadBatterState4Handler::
     ret  nz                                       ; $4F87: $C0
 
     ld   a, $E1                                   ; $4F88: $3E $E1
-    call OpenDialogAtBottom                            ; $4F8A: $CD $80 $50
+    call OpenDialogAtBottom                       ; $4F8A: $CD $80 $50
     jp   IncrementEntityState                     ; $4F8D: $C3 $12 $3B
 
 MadBatterUpgradedMaximumTable::
@@ -147,7 +147,7 @@ jr_018_4FAF:
     ld   hl, Data_018_4F93                        ; $4FBC: $21 $93 $4F
     add  hl, de                                   ; $4FBF: $19
     ld   a, [hl]                                  ; $4FC0: $7E
-    call OpenDialogAtBottom                            ; $4FC1: $CD $80 $50
+    call OpenDialogAtBottom                       ; $4FC1: $CD $80 $50
     jp   IncrementEntityState                     ; $4FC4: $C3 $12 $3B
 
 MadBatterState6Handler::
@@ -157,7 +157,7 @@ MadBatterState6Handler::
     ret  nz                                       ; $4FCE: $C0
 
     call IncrementEntityState                     ; $4FCF: $CD $12 $3B
-    ld   a, [wDialogAskSelectionIndex]                               ; $4FD2: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $4FD2: $FA $77 $C1
     and  a                                        ; $4FD5: $A7
     jr   nz, jr_018_5001                          ; $4FD6: $20 $29
 
@@ -198,7 +198,7 @@ MadBatterState7Handler::
 
     call ClearEntitySpeed                         ; $5013: $CD $7F $3D
     ld   a, $E5                                   ; $5016: $3E $E5
-    call OpenDialogAtBottom                            ; $5018: $CD $80 $50
+    call OpenDialogAtBottom                       ; $5018: $CD $80 $50
     call IncrementEntityState                     ; $501B: $CD $12 $3B
     ld   a, [wD201]                               ; $501E: $FA $01 $D2
     ld   e, a                                     ; $5021: $5F
@@ -217,7 +217,7 @@ MadBatterState7Handler::
     ld   hl, wMagicPowderCount                    ; $5032: $21 $4C $DB
     ld   [hl], d                                  ; $5035: $72
     ld   d, $0C                                   ; $5036: $16 $0C
-    call GiveInventoryItem_trampoline                               ; $5038: $CD $6B $3E
+    call GiveInventoryItem_trampoline             ; $5038: $CD $6B $3E
     xor  a                                        ; $503B: $AF
     ld   [wHasToadstool], a                       ; $503C: $EA $4B $DB
     ld   a, REPLACE_TILES_MAGIC_POWDER            ; $503F: $3E $0B
@@ -264,7 +264,7 @@ jr_018_5067:
     cp   $F0                                      ; $5073: $FE $F0
     ret  c                                        ; $5075: $D8
 
-    call SetRoomStatus20                            ; $5076: $CD $B9 $7F
+    call SetRoomStatus20                          ; $5076: $CD $B9 $7F
     xor  a                                        ; $5079: $AF
     ld   [wC167], a                               ; $507A: $EA $67 $C1
     jp   ClearEntityStatusBank18                  ; $507D: $C3 $08 $7F

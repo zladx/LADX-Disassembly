@@ -126,13 +126,13 @@ jr_005_6D7E:
     ld   a, $AF                                   ; $6DC0: $3E $AF
     ld   [wDDD8], a                               ; $6DC2: $EA $D8 $DD
     ld   a, $05                                   ; $6DC5: $3E $05
-    call func_91D                                ; $6DC7: $CD $1D $09
+    call func_91D                                 ; $6DC7: $CD $1D $09
     ldh  a, [hIntersectedObjectBGAddressLow]      ; $6DCA: $F0 $D0
     inc  a                                        ; $6DCC: $3C
     inc  a                                        ; $6DCD: $3C
     ldh  [hIntersectedObjectBGAddressLow], a      ; $6DCE: $E0 $D0
     ld   a, $05                                   ; $6DD0: $3E $05
-    call func_91D                                ; $6DD2: $CD $1D $09
+    call func_91D                                 ; $6DD2: $CD $1D $09
     pop  hl                                       ; $6DD5: $E1
     ld   de, $40                                  ; $6DD6: $11 $40 $00
     add  hl, de                                   ; $6DD9: $19
@@ -143,13 +143,13 @@ jr_005_6D7E:
     ld   a, $B0                                   ; $6DE0: $3E $B0
     ld   [wDDD8], a                               ; $6DE2: $EA $D8 $DD
     ld   a, $05                                   ; $6DE5: $3E $05
-    call func_91D                                ; $6DE7: $CD $1D $09
+    call func_91D                                 ; $6DE7: $CD $1D $09
     ldh  a, [hIntersectedObjectBGAddressLow]      ; $6DEA: $F0 $D0
     inc  a                                        ; $6DEC: $3C
     inc  a                                        ; $6DED: $3C
     ldh  [hIntersectedObjectBGAddressLow], a      ; $6DEE: $E0 $D0
     ld   a, $05                                   ; $6DF0: $3E $05
-    call func_91D                                ; $6DF2: $CD $1D $09
+    call func_91D                                 ; $6DF2: $CD $1D $09
     pop  hl                                       ; $6DF5: $E1
     ld   a, h                                     ; $6DF6: $7C
     ldh  [hIntersectedObjectBGAddressHigh], a     ; $6DF7: $E0 $CF
@@ -158,13 +158,13 @@ jr_005_6D7E:
     pop  bc                                       ; $6DFC: $C1
 
 jr_005_6DFD:
-    ld   a, [wRequests]                           ; $6DFD: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $6DFD: $FA $00 $D6
     ld   e, a                                     ; $6E00: $5F
     ld   d, $00                                   ; $6E01: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $6E03: $21 $01 $D6
+    ld   hl, wRequest                             ; $6E03: $21 $01 $D6
     add  hl, de                                   ; $6E06: $19
     add  $1C                                      ; $6E07: $C6 $1C
-    ld   [wRequests], a                           ; $6E09: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $6E09: $EA $00 $D6
     call func_005_6E15                            ; $6E0C: $CD $15 $6E
     call func_005_6E15                            ; $6E0F: $CD $15 $6E
     call func_005_6E15                            ; $6E12: $CD $15 $6E
@@ -195,13 +195,13 @@ label_005_6E30:
     jp   nz, label_005_6E7C                       ; $6E32: $C2 $7C $6E
 
     call label_2887                               ; $6E35: $CD $87 $28
-    ld   a, [wRequests]                           ; $6E38: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $6E38: $FA $00 $D6
     ld   e, a                                     ; $6E3B: $5F
     ld   d, $00                                   ; $6E3C: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $6E3E: $21 $01 $D6
+    ld   hl, wRequest                             ; $6E3E: $21 $01 $D6
     add  hl, de                                   ; $6E41: $19
     add  $1C                                      ; $6E42: $C6 $1C
-    ld   [wRequests], a                           ; $6E44: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $6E44: $EA $00 $D6
     call func_005_6E4A                            ; $6E47: $CD $4A $6E
 
 func_005_6E4A::
@@ -302,13 +302,13 @@ jr_005_6EB0:
     add  hl, de                                   ; $6ED2: $19
     push hl                                       ; $6ED3: $E5
     call label_2887                               ; $6ED4: $CD $87 $28
-    ld   a, [wRequests]                           ; $6ED7: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $6ED7: $FA $00 $D6
     ld   e, a                                     ; $6EDA: $5F
     ld   d, $00                                   ; $6EDB: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $6EDD: $21 $01 $D6
+    ld   hl, wRequest                             ; $6EDD: $21 $01 $D6
     add  hl, de                                   ; $6EE0: $19
     add  $0E                                      ; $6EE1: $C6 $0E
-    ld   [wRequests], a                           ; $6EE3: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $6EE3: $EA $00 $D6
     pop  de                                       ; $6EE6: $D1
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $6EE7: $F0 $CF
     ld   [hl+], a                                 ; $6EE9: $22
@@ -597,14 +597,14 @@ jr_005_7188:
     and  $1F                                      ; $7198: $E6 $1F
 
 jr_005_719A:
-    ldh  [hMultiPurposeG], a                               ; $719A: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $719A: $E0 $E8
     ld   hl, wEntitiesPosXTable                   ; $719C: $21 $00 $C2
     add  hl, bc                                   ; $719F: $09
     ld   [hl], $50                                ; $71A0: $36 $50
     ld   hl, wEntitiesPosYTable                   ; $71A2: $21 $10 $C2
     add  hl, bc                                   ; $71A5: $09
     ld   [hl], $48                                ; $71A6: $36 $48
-    ldh  a, [hMultiPurposeG]                               ; $71A8: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $71A8: $F0 $E8
     ld   e, a                                     ; $71AA: $5F
     ld   d, b                                     ; $71AB: $50
     ld   hl, Data_005_7051                        ; $71AC: $21 $51 $70
@@ -630,7 +630,7 @@ jr_005_719A:
     pop  de                                       ; $71CA: $D1
     ld   a, $02                                   ; $71CB: $3E $02
     call func_005_7283                            ; $71CD: $CD $83 $72
-    ldh  a, [hMultiPurposeG]                               ; $71D0: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $71D0: $F0 $E8
     ld   e, a                                     ; $71D2: $5F
     ld   d, b                                     ; $71D3: $50
     ld   hl, Data_005_7071                        ; $71D4: $21 $71 $70
@@ -661,7 +661,7 @@ jr_005_719A:
     pop  de                                       ; $71F9: $D1
     ld   a, $01                                   ; $71FA: $3E $01
     call func_005_7283                            ; $71FC: $CD $83 $72
-    ldh  a, [hMultiPurposeG]                               ; $71FF: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $71FF: $F0 $E8
     ld   e, a                                     ; $7201: $5F
     ld   d, b                                     ; $7202: $50
     ld   hl, Data_005_7091                        ; $7203: $21 $91 $70
@@ -693,7 +693,7 @@ jr_005_719A:
     pop  de                                       ; $7229: $D1
     ld   a, $01                                   ; $722A: $3E $01
     call func_005_7283                            ; $722C: $CD $83 $72
-    ldh  a, [hMultiPurposeG]                               ; $722F: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $722F: $F0 $E8
     ld   e, a                                     ; $7231: $5F
     ld   d, b                                     ; $7232: $50
     ld   hl, Data_005_70B1                        ; $7233: $21 $B1 $70
@@ -1214,7 +1214,7 @@ label_005_7550:
     jp   label_005_7570                           ; $756D: $C3 $70 $75
 
 label_005_7570:
-    call ReturnIfNonInteractive_05.allowInactiveEntity ; $7570: $CD $40 $7A
+    call ReturnIfNonInteractive_05.allowInactiveEntity; $7570: $CD $40 $7A
     ldh  a, [hActiveEntityPosX]                   ; $7573: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $7575: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $7577: $F0 $EC
@@ -1692,7 +1692,7 @@ jr_005_7A1F:
 
     ld   hl, wEntitiesOptions1Table               ; $7A2A: $21 $30 $C4
     add  hl, bc                                   ; $7A2D: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF                                ; $7A2E: $36 $C0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF; $7A2E: $36 $C0
     call label_3B70                               ; $7A30: $CD $70 $3B
     ld   hl, wEntitiesOptions1Table               ; $7A33: $21 $30 $C4
     add  hl, bc                                   ; $7A36: $09

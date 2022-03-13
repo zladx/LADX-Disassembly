@@ -375,7 +375,7 @@ InterruptVBlank::
     add  hl, de                                   ; $0517: $19
     ld   a, [hl]                                  ; $0518: $7E
     ; Store the stage to wSwitchableObjectAnimationStage
-    ld   [wSwitchableObjectAnimationStage], a                               ; $0519: $EA $F8 $D6
+    ld   [wSwitchableObjectAnimationStage], a     ; $0519: $EA $F8 $D6
 
     call UpdateSwitchBlockTiles                   ; $051C: $CD $D7 $1E
 
@@ -399,9 +399,9 @@ InterruptVBlank::
     ld   de, wRequest                             ; $0538: $11 $01 $D6
     call ExecuteBGCopyRequest ; Load BG column tiles ; $053B: $CD $27 $29
     xor  a                                        ; $053E: $AF
-    ld   [wRequests], a                           ; $053F: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $053F: $EA $00 $D6
     ld   [wRequest], a                            ; $0542: $EA $01 $D6
-    ld   [wRequestsAlt], a                        ; $0545: $EA $90 $DC
+    ld   [wRequestsAltSize], a                    ; $0545: $EA $90 $DC
     ld   [wRequestAlt], a                         ; $0548: $EA $91 $DC
 
     ; On Overworld, copy some palette data to OAM buffer
@@ -440,7 +440,7 @@ InterruptVBlank::
 PhotoAlbumVBlankHandler::
     ld   a, [wCurrentBank]                        ; $0577: $FA $AF $DB
     push af                                       ; $057A: $F5
-    ldh  a, [hIsRenderingFrame]                     ; $057B: $F0 $FD
+    ldh  a, [hIsRenderingFrame]                   ; $057B: $F0 $FD
     and  a                                        ; $057D: $A7
     jr   nz, .clearBGTilesFlag                    ; $057E: $20 $2B
 
@@ -456,9 +456,9 @@ PhotoAlbumVBlankHandler::
     ld   de, wRequest                             ; $0598: $11 $01 $D6
     call ExecuteBGCopyRequest                     ; $059B: $CD $27 $29
     xor  a                                        ; $059E: $AF
-    ld   [wRequests], a                           ; $059F: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $059F: $EA $00 $D6
     ld   [wRequest], a                            ; $05A2: $EA $01 $D6
-    ld   [wRequestsAlt], a                        ; $05A5: $EA $90 $DC
+    ld   [wRequestsAltSize], a                    ; $05A5: $EA $90 $DC
     ld   [wRequestAlt], a                         ; $05A8: $EA $91 $DC
 
 .clearBGTilesFlag
@@ -466,7 +466,7 @@ PhotoAlbumVBlankHandler::
     pop  af                                       ; $05B3: $F1
     ld   [wCurrentBank], a                        ; $05B4: $EA $AF $DB
     ld   [MBC3SelectBank], a                      ; $05B7: $EA $00 $21
-    jr   InterruptVBlank.vblankDoneInterruptsEnabled ; $05BA: $18 $AE
+    jr   InterruptVBlank.vblankDoneInterruptsEnabled; $05BA: $18 $AE
 
 ; Copy requested BG tiles or entity tiles to VRAM during V-Blank.
 ;
@@ -809,8 +809,8 @@ UpdateEntityTilesB::
     ret                                           ; $07AF: $C9
 
 LoadInventorySirenInstruments::
-    callsb LoadSirenInstruments                     ; $07B0: $3E $01 $EA $00 $21 $CD $B5 $6B
-    jp   CopyTilesToPieceOfHeartMeter.restoreBank0C ; $07B8: $C3 $8B $00
+    callsb LoadSirenInstruments                   ; $07B0: $3E $01 $EA $00 $21 $CD $B5 $6B
+    jp   CopyTilesToPieceOfHeartMeter.restoreBank0C; $07B8: $C3 $8B $00
 
 ; Data origin table (in bank $0C)
 TilesGfxSource::

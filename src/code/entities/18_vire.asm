@@ -20,10 +20,10 @@ VireEntityHandler::
     ld   a, TRANSCIENT_VFX_POOF                   ; $6A18: $3E $02
     call AddTranscientVfx                         ; $6A1A: $CD $C7 $0C
     ld   a, $0C                                   ; $6A1D: $3E $0C
-    ldh  [hMultiPurposeG], a                               ; $6A1F: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $6A1F: $E0 $E8
     call func_018_6A31                            ; $6A21: $CD $31 $6A
     ld   a, $F4                                   ; $6A24: $3E $F4
-    ldh  [hMultiPurposeG], a                               ; $6A26: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $6A26: $E0 $E8
     call func_018_6A31                            ; $6A28: $CD $31 $6A
     call DidKillEnemy.label_3F5E                  ; $6A2B: $CD $5E $3F
     jp   ClearEntityStatusBank18                  ; $6A2E: $C3 $08 $7F
@@ -54,7 +54,7 @@ func_018_6A31::
     ld   hl, wEntitiesPrivateState1Table          ; $6A57: $21 $B0 $C2
     add  hl, de                                   ; $6A5A: $19
     ld   [hl], $01                                ; $6A5B: $36 $01
-    ldh  a, [hMultiPurposeG]                               ; $6A5D: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $6A5D: $F0 $E8
     ld   hl, wEntitiesSpeedXTable                 ; $6A5F: $21 $40 $C2
     add  hl, de                                   ; $6A62: $19
     ld   [hl], a                                  ; $6A63: $77
@@ -618,16 +618,16 @@ func_018_6D98::
     ldh  [hLinkPositionY], a                      ; $6DA9: $E0 $99
     call func_018_7B9D                            ; $6DAB: $CD $9D $7B
     and  $0F                                      ; $6DAE: $E6 $0F
-    ldh  [hMultiPurposeG], a                               ; $6DB0: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $6DB0: $E0 $E8
     ld   e, $00                                   ; $6DB2: $1E $00
     call func_018_6DB9                            ; $6DB4: $CD $B9 $6D
     ld   e, $01                                   ; $6DB7: $1E $01
 
 func_018_6DB9::
-    ldh  a, [hMultiPurposeG]                               ; $6DB9: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $6DB9: $F0 $E8
     add  e                                        ; $6DBB: $83
     and  $0F                                      ; $6DBC: $E6 $0F
-    ldh  [hMultiPurposeG], a                               ; $6DBE: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $6DBE: $E0 $E8
     ld   e, $0F                                   ; $6DC0: $1E $0F
     ld   d, b                                     ; $6DC2: $50
 
@@ -672,7 +672,7 @@ jr_018_6DDE:
     add  hl, de                                   ; $6DF7: $19
     ld   [hl], a                                  ; $6DF8: $77
     ldh  a, [hMultiPurpose1]                      ; $6DF9: $F0 $D8
-    ld   hl, hMultiPurpose3                            ; $6DFB: $21 $DA $FF
+    ld   hl, hMultiPurpose3                       ; $6DFB: $21 $DA $FF
     sub  [hl]                                     ; $6DFE: $96
     ld   hl, wEntitiesPosYTable                   ; $6DFF: $21 $10 $C2
     add  hl, de                                   ; $6E02: $19
@@ -687,7 +687,7 @@ jr_018_6DDE:
     add  hl, de                                   ; $6E13: $19
     ld   [hl], $4C                                ; $6E14: $36 $4C
     push bc                                       ; $6E16: $C5
-    ldh  a, [hMultiPurposeG]                               ; $6E17: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $6E17: $F0 $E8
     ld   c, a                                     ; $6E19: $4F
     ld   hl, Data_018_6D59                        ; $6E1A: $21 $59 $6D
     add  hl, bc                                   ; $6E1D: $09

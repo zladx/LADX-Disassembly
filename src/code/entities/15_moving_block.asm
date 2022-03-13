@@ -50,7 +50,7 @@ MovingBlockLeftTopState1Handler::
     ld   hl, wEntitiesPrivateState2Table          ; $413F: $21 $C0 $C2
     add  hl, bc                                   ; $4142: $09
     ld   a, [hl]                                  ; $4143: $7E
-    ld   hl, wEntitiesPosYTable                         ; $4144: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $4144: $21 $10 $C2
     add  hl, bc                                   ; $4147: $09
     cp   [hl]                                     ; $4148: $BE
     jr   z, jr_015_414C                           ; $4149: $28 $01
@@ -64,7 +64,7 @@ jr_015_414D:
     ld   hl, wEntitiesPrivateState1Table          ; $414D: $21 $B0 $C2
     add  hl, bc                                   ; $4150: $09
     ld   a, [hl]                                  ; $4151: $7E
-    ld   hl, wEntitiesPosYTable                         ; $4152: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $4152: $21 $10 $C2
     add  hl, bc                                   ; $4155: $09
     cp   [hl]                                     ; $4156: $BE
     jr   z, jr_015_416B                           ; $4157: $28 $12
@@ -77,13 +77,13 @@ jr_015_414D:
     jr   c, jr_015_416F                           ; $4161: $38 $0C
 
     ld   [hl], b                                  ; $4163: $70
-    ld   hl, wEntitiesPosYTable                         ; $4164: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $4164: $21 $10 $C2
     add  hl, bc                                   ; $4167: $09
     inc  [hl]                                     ; $4168: $34
     jr   jr_015_416F                              ; $4169: $18 $04
 
 jr_015_416B:
-    ld   hl, hMultiPurposeG                                ; $416B: $21 $E8 $FF
+    ld   hl, hMultiPurposeG                       ; $416B: $21 $E8 $FF
     inc  [hl]                                     ; $416E: $34
 
 label_015_416F:
@@ -99,7 +99,7 @@ jr_015_416F:
     cp   $1C                                      ; $4180: $FE $1C
     jr   nc, jr_015_41C9                          ; $4182: $30 $45
 
-    call ResetPegasusBoots                                ; $4184: $CD $B6 $0C
+    call ResetPegasusBoots                        ; $4184: $CD $B6 $0C
     call ClearLinkPositionIncrement               ; $4187: $CD $8E $17
     call func_015_7C0A                            ; $418A: $CD $0A $7C
     ld   a, e                                     ; $418D: $7B
@@ -128,7 +128,7 @@ jr_015_41A4:
     cp   ENTITY_MOVING_BLOCK_LEFT_BOTTOM          ; $41AA: $FE $47
     jr   nz, jr_015_41B2                          ; $41AC: $20 $04
 
-    ldh  a, [hMultiPurposeG]                               ; $41AE: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $41AE: $F0 $E8
     and  a                                        ; $41B0: $A7
     ret  nz                                       ; $41B1: $C0
 
@@ -143,7 +143,7 @@ jr_015_41B9:
     cp   ENTITY_MOVING_BLOCK_LEFT_TOP             ; $41BB: $FE $46
     jr   nz, jr_015_41C3                          ; $41BD: $20 $04
 
-    ldh  a, [hMultiPurposeG]                               ; $41BF: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $41BF: $F0 $E8
     and  a                                        ; $41C1: $A7
     ret  nz                                       ; $41C2: $C0
 
@@ -201,7 +201,7 @@ MovingBlockLeftBottomState1Handler::
     ld   hl, wEntitiesPrivateState2Table          ; $4209: $21 $C0 $C2
     add  hl, bc                                   ; $420C: $09
     ld   a, [hl]                                  ; $420D: $7E
-    ld   hl, wEntitiesPosYTable                         ; $420E: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $420E: $21 $10 $C2
     add  hl, bc                                   ; $4211: $09
     cp   [hl]                                     ; $4212: $BE
     jr   z, jr_015_4216                           ; $4213: $28 $01
@@ -215,7 +215,7 @@ jr_015_4217:
     ld   hl, wEntitiesPrivateState1Table          ; $4217: $21 $B0 $C2
     add  hl, bc                                   ; $421A: $09
     ld   a, [hl]                                  ; $421B: $7E
-    ld   hl, wEntitiesPosYTable                         ; $421C: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $421C: $21 $10 $C2
     add  hl, bc                                   ; $421F: $09
     cp   [hl]                                     ; $4220: $BE
     jr   z, jr_015_4235                           ; $4221: $28 $12
@@ -228,7 +228,7 @@ jr_015_4217:
     jr   c, jr_015_4239                           ; $422B: $38 $0C
 
     ld   [hl], b                                  ; $422D: $70
-    ld   hl, wEntitiesPosYTable                         ; $422E: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $422E: $21 $10 $C2
     add  hl, bc                                   ; $4231: $09
     dec  [hl]                                     ; $4232: $35
     jr   jr_015_4239                              ; $4233: $18 $04
@@ -286,7 +286,7 @@ MovingBlockBottomLeftState1Handler::
     ld   hl, wEntitiesPrivateState2Table          ; $427B: $21 $C0 $C2
     add  hl, bc                                   ; $427E: $09
     ld   a, [hl]                                  ; $427F: $7E
-    ld   hl, wEntitiesPosXTable                         ; $4280: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $4280: $21 $00 $C2
     add  hl, bc                                   ; $4283: $09
     cp   [hl]                                     ; $4284: $BE
     jr   z, jr_015_4288                           ; $4285: $28 $01
@@ -300,7 +300,7 @@ jr_015_4289:
     ld   hl, wEntitiesPrivateState1Table          ; $4289: $21 $B0 $C2
     add  hl, bc                                   ; $428C: $09
     ld   a, [hl]                                  ; $428D: $7E
-    ld   hl, wEntitiesPosXTable                         ; $428E: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $428E: $21 $00 $C2
     add  hl, bc                                   ; $4291: $09
     cp   [hl]                                     ; $4292: $BE
     jr   z, jr_015_42A7                           ; $4293: $28 $12

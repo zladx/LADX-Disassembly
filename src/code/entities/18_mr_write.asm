@@ -134,7 +134,7 @@ MrWriteState1Handler::
     jr   nz, jr_018_4C58                          ; $4C48: $20 $0E
 
     call IncrementEntityState                     ; $4C4A: $CD $12 $3B
-    ld   a, [wDialogAskSelectionIndex]                               ; $4C4D: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $4C4D: $FA $77 $C1
     and  a                                        ; $4C50: $A7
     jr   nz, jr_018_4C58                          ; $4C51: $20 $05
 
@@ -228,7 +228,7 @@ func_018_4CD1::
     ret  nz                                       ; $4CD5: $C0
 
     call IncrementEntityState                     ; $4CD6: $CD $12 $3B
-    ld   a, [wDialogAskSelectionIndex]                               ; $4CD9: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $4CD9: $FA $77 $C1
     and  a                                        ; $4CDC: $A7
     jr   nz, jr_018_4CEC                          ; $4CDD: $20 $0D
 

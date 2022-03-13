@@ -226,7 +226,7 @@ label_006_6170:
     add  hl, bc                                   ; $6190: $09
     ld   a, [hl]                                  ; $6191: $7E
     and  $80                                      ; $6192: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $6194: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $6194: $E0 $E8
     jr   z, jr_006_619F                           ; $6196: $28 $07
 
     xor  a                                        ; $6198: $AF
@@ -301,7 +301,7 @@ jr_006_61F8:
     cp   $40                                      ; $61FB: $FE $40
     jr   nc, jr_006_620A                          ; $61FD: $30 $0B
 
-    ldh  a, [hMultiPurposeG]                               ; $61FF: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $61FF: $F0 $E8
     and  a                                        ; $6201: $A7
     jr   z, jr_006_620A                           ; $6202: $28 $06
 

@@ -12,7 +12,7 @@ AntiKirbyEntityHandler::
     add  hl, bc                                   ; $4250: $09
     ld   a, [hl]                                  ; $4251: $7E
     and  $80                                      ; $4252: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $4254: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $4254: $E0 $E8
     jr   z, jr_006_425E                           ; $4256: $28 $06
 
     ld   [hl], b                                  ; $4258: $70
@@ -62,7 +62,7 @@ jr_006_4294:
     call IncrementEntityState                     ; $429F: $CD $12 $3B
 
 label_006_42A2:
-    ldh  a, [hMultiPurposeG]                               ; $42A2: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $42A2: $F0 $E8
     and  a                                        ; $42A4: $A7
     jr   z, jr_006_42AD                           ; $42A5: $28 $06
 
@@ -180,7 +180,7 @@ jr_006_434A:
 
 jr_006_434B:
     ldh  a, [hLinkAnimationState]                 ; $434B: $F0 $9D
-    cp   LINK_ANIMATION_STATE_NO_UPDATE          ; $434D: $FE $FF
+    cp   LINK_ANIMATION_STATE_NO_UPDATE           ; $434D: $FE $FF
     jr   z, label_006_43B8                        ; $434F: $28 $67
 
     call func_006_6594                            ; $4351: $CD $94 $65
@@ -258,7 +258,7 @@ AntiKirbyState3Handler::
     call GetEntityTransitionCountdown             ; $43C5: $CD $05 $0C
     jr   z, jr_006_43F5                           ; $43C8: $28 $2B
 
-    ldh  a, [hMultiPurposeG]                               ; $43CA: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $43CA: $F0 $E8
     and  a                                        ; $43CC: $A7
     jr   z, jr_006_43E2                           ; $43CD: $28 $13
 
@@ -281,7 +281,7 @@ jr_006_43E2:
     ld   a, [hl]                                  ; $43E6: $7E
     add  $08                                      ; $43E7: $C6 $08
     call SetEntitySpriteVariant                   ; $43E9: $CD $0C $3B
-    ld   a, LINK_ANIMATION_STATE_NO_UPDATE       ; $43EC: $3E $FF
+    ld   a, LINK_ANIMATION_STATE_NO_UPDATE        ; $43EC: $3E $FF
     ldh  [hLinkAnimationState], a                 ; $43EE: $E0 $9D
     ld   a, $02                                   ; $43F0: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $43F2: $E0 $A1
@@ -306,7 +306,7 @@ jr_006_43F5:
 jr_006_440C:
     ldh  [hLinkSpeedX], a                         ; $440C: $E0 $9A
     ld   a, $10                                   ; $440E: $3E $10
-    ldh  [hLinkVelocityZ], a                               ; $4410: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $4410: $E0 $A3
     ld   a, $20                                   ; $4412: $3E $20
     ld   [wInvincibilityCounter], a               ; $4414: $EA $C7 $DB
     ld   a, $02                                   ; $4417: $3E $02

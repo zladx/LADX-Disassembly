@@ -91,7 +91,7 @@ MarinAtTheShoreState3Handler::
     ret  nz                                       ; $6219: $C0
 
     call IncrementEntityState                     ; $621A: $CD $12 $3B
-    ld   a, [wDialogAskSelectionIndex]                               ; $621D: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $621D: $FA $77 $C1
     and  a                                        ; $6220: $A7
     jr   nz, .playerDoesntWantToTalk              ; $6221: $20 $1A
 

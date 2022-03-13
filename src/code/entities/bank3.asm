@@ -133,10 +133,10 @@ ConfigureNewEntity::
     ld   d, b                                     ; $4870: $50
 
     ; wEntitiesPhysicsFlagsTable = PhysicsFlagsForEntity[EntityType]
-    ld   hl, PhysicsFlagsForEntity                        ; $4871: $21 $00 $40
+    ld   hl, PhysicsFlagsForEntity                ; $4871: $21 $00 $40
     add  hl, de                                   ; $4874: $19
     ld   a, [hl]                                  ; $4875: $7E
-    ld   hl, wEntitiesPhysicsFlagsTable                ; $4876: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $4876: $21 $40 $C3
     add  hl, bc                                   ; $4879: $09
     ld   [hl], a                                  ; $487A: $77
 
@@ -220,16 +220,16 @@ ENDC
     cp   ROOM_INDOOR_A_MASTER_STALFOS_3           ; $48D7: $FE $84
     jr   z, .jr_003_48E2                          ; $48D9: $28 $07
 
-    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_3] ; $48DB: $FA $84 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_3]; $48DB: $FA $84 $D9
     and  $30                                      ; $48DE: $E6 $30
     jr   z, MasterStalfosDefeated                 ; $48E0: $28 $CB
 
 .jr_003_48E2
-    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_2] ; $48E2: $FA $92 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_2]; $48E2: $FA $92 $D9
     and  $30                                      ; $48E5: $E6 $30
     jr   z, MasterStalfosDefeated                 ; $48E7: $28 $C4
 
-    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_1] ; $48E9: $FA $95 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_1]; $48E9: $FA $95 $D9
     and  $30                                      ; $48EC: $E6 $30
     jr   z, MasterStalfosDefeated                 ; $48EE: $28 $BD
 .masterStalfosEnd
@@ -643,7 +643,7 @@ jr_003_4B01:
 
     xor  a                                        ; $4B09: $AF
     ldh  [rSVBK], a                               ; $4B0A: $E0 $70
-    jr   EntityInitNpcFacingDown                                   ; $4B0C: $18 $21
+    jr   EntityInitNpcFacingDown                  ; $4B0C: $18 $21
 
 EntityInitMadamMeowMeow::
     ld   a, [wIsBowWowFollowingLink]              ; $4B0E: $FA $56 $DB
@@ -913,7 +913,7 @@ EntityDestructionHandler::
     ld   a, [hl]                                  ; $4C64: $7E
     ldh  [hActiveEntitySpriteVariant], a          ; $4C65: $E0 $F1
     call ExecuteActiveEntityHandler_trampoline    ; $4C67: $CD $81 $3A
-    call ReturnIfNonInteractive_03.allowInactiveEntity ; $4C6A: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity; $4C6A: $CD $7E $7F
     call ApplyRecoilIfNeeded_03                   ; $4C6D: $CD $A9 $7F
     call func_003_60B3                            ; $4C70: $CD $B3 $60
 IF __PATCH_0__
@@ -995,7 +995,7 @@ EntityFallHandler::
     ret                                           ; $4CDB: $C9
 .colorShellEnd
 
-    call GetEntityTransitionCountdown                 ; $4CDC: $CD $05 $0C
+    call GetEntityTransitionCountdown             ; $4CDC: $CD $05 $0C
     jr   nz, jr_003_4D07                          ; $4CDF: $20 $26
 
     ld   hl, wEntitiesOptions1Table               ; $4CE1: $21 $30 $C4
@@ -1043,7 +1043,7 @@ jr_003_4D19:
 
 jr_003_4D22:
     call ExecuteActiveEntityHandler_trampoline    ; $4D22: $CD $81 $3A
-    call ReturnIfNonInteractive_03.allowInactiveEntity ; $4D25: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity; $4D25: $CD $7E $7F
     ret                                           ; $4D28: $C9
 
 jr_003_4D29:
@@ -1078,7 +1078,7 @@ jr_003_4D51:
     call RenderActiveEntitySprite                 ; $4D54: $CD $77 $3C
 
 jr_003_4D57:
-    call ReturnIfNonInteractive_03.allowInactiveEntity ; $4D57: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity; $4D57: $CD $7E $7F
     call GetEntityTransitionCountdown             ; $4D5A: $CD $05 $0C
     cp   $3F                                      ; $4D5D: $FE $3F
     jr   nz, jr_003_4D66                          ; $4D5F: $20 $05
@@ -1119,7 +1119,7 @@ jr_003_4D66:
 
 EntityThrownHandler::
     call ExecuteActiveEntityHandler_trampoline    ; $4D94: $CD $81 $3A
-    call ReturnIfNonInteractive_03.allowInactiveEntity ; $4D97: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity; $4D97: $CD $7E $7F
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $4D9A: $21 $10 $C4
     add  hl, bc                                   ; $4D9D: $09
     ld   [hl], $02                                ; $4D9E: $36 $02
@@ -1196,7 +1196,7 @@ Data_003_4E05::
 
 EntityStunnedHandler::
     call ExecuteActiveEntityHandler_trampoline    ; $4E07: $CD $81 $3A
-    call ReturnIfNonInteractive_03.allowInactiveEntity ; $4E0A: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity; $4E0A: $CD $7E $7F
     call ApplyRecoilIfNeeded_03                   ; $4E0D: $CD $A9 $7F
     call func_003_60B3                            ; $4E10: $CD $B3 $60
     call ClearEntitySpeed                         ; $4E13: $CD $7F $3D
@@ -1302,13 +1302,13 @@ EntityInitWithRandomSpeed::
     and  $03                                      ; $4EAB: $E6 $03
     ld   e, a                                     ; $4EAD: $5F
     ld   d, b                                     ; $4EAE: $50
-    ld   hl, EntityRandomSpeedX                        ; $4EAF: $21 $A0 $4E
+    ld   hl, EntityRandomSpeedX                   ; $4EAF: $21 $A0 $4E
     add  hl, de                                   ; $4EB2: $19
     ld   a, [hl]                                  ; $4EB3: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $4EB4: $21 $40 $C2
     add  hl, bc                                   ; $4EB7: $09
     ld   [hl], a                                  ; $4EB8: $77
-    ld   hl, EntityRandomSpeedY                        ; $4EB9: $21 $A4 $4E
+    ld   hl, EntityRandomSpeedY                   ; $4EB9: $21 $A4 $4E
     add  hl, de                                   ; $4EBC: $19
     ld   a, [hl]                                  ; $4EBD: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $4EBE: $21 $50 $C2
@@ -1440,7 +1440,7 @@ jr_003_4F54:
     cp   MOUNTAIN_CAVE_ROOM_3                     ; $4F54: $FE $7C
     jr   nz, jr_003_4F67                          ; $4F56: $20 $0F
 
-    ld   a, [wIndoorARoomStatus + ROOM_OW_ANGLERS_TUNNEL] ; $4F58: $FA $69 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_OW_ANGLERS_TUNNEL]; $4F58: $FA $69 $D9
     and  $10                                      ; $4F5B: $E6 $10
     jp   z, UnloadEntityAndReturn                 ; $4F5D: $CA $8D $3F
 
@@ -1653,7 +1653,7 @@ jr_003_5081:
     ld   hl, wEntitiesSpriteVariantTable          ; $5094: $21 $B0 $C3
     add  hl, bc                                   ; $5097: $09
     ld   a, [hl]                                  ; $5098: $7E
-    ldh  [hMultiPurposeG], a                               ; $5099: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $5099: $E0 $E8
     ld   d, b                                     ; $509B: $50
     cp   CHEST_TAIL_KEY                           ; $509C: $FE $11
     jr   nz, jr_003_50AC                          ; $509E: $20 $0C
@@ -1670,11 +1670,11 @@ jr_003_5081:
 jr_003_50AC:
     ld   e, a                                     ; $50AC: $5F
     cp   CHEST_MESSAGE                            ; $50AD: $FE $21
-    jp   nc, MarkRoomCompleted                   ; $50AF: $D2 $2A $51
+    jp   nc, MarkRoomCompleted                    ; $50AF: $D2 $2A $51
 
     cp   CHEST_SEASHELL                           ; $50B2: $FE $20
 IF __PATCH_3__
-    jp   z, label_003_636D                          ; $50B4: $20 $03
+    jp   z, label_003_636D                        ; $50B4: $20 $03
 ELSE
     jr   nz, jr_003_50B9                          ; $50B4: $20 $03
 
@@ -1713,15 +1713,15 @@ jr_003_50D8:
     ld   hl, wHasDungeonMap                       ; $50E5: $21 $CC $DB
     add  hl, de                                   ; $50E8: $19
     inc  [hl]                                     ; $50E9: $34
-    call SynchronizeDungeonsItemFlags_trampoline                               ; $50EA: $CD $02 $28
-    jr   MarkRoomCompleted                          ; $50ED: $18 $3B
+    call SynchronizeDungeonsItemFlags_trampoline  ; $50EA: $CD $02 $28
+    jr   MarkRoomCompleted                        ; $50ED: $18 $3B
 
 jr_003_50EF:
     cp   CHEST_FLIPPERS                           ; $50EF: $FE $0C
     jr   nc, ChestGiveNoneInventoryItem           ; $50F1: $30 $32
 
     ; When finding the Shield chest…
-    ldh  a, [hMultiPurposeG]                               ; $50F3: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $50F3: $F0 $E8
     cp   CHEST_SHIELD                             ; $50F5: $FE $01
     jr   nz, .shieldEnd                           ; $50F7: $20 $04
     ; increment the Shield level.
@@ -1743,7 +1743,7 @@ jr_003_50EF:
 .powerBraceletEnd
 
     ; When finding a bomb's chest…
-    ldh  a, [hMultiPurposeG]                               ; $510C: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $510C: $F0 $E8
     cp   CHEST_BOMB                               ; $510E: $FE $0A
     jr   nz, .bombsEnd                            ; $5110: $20 $08
     ; increment the bomb's count by 1
@@ -1909,13 +1909,13 @@ func_003_51C9::
 
 label_003_51F5:
     call label_2887                               ; $51F5: $CD $87 $28
-    ld   a, [wRequests]                           ; $51F8: $FA $00 $D6
+    ld   a, [wRequestsSize]                       ; $51F8: $FA $00 $D6
     ld   e, a                                     ; $51FB: $5F
     ld   d, $00                                   ; $51FC: $16 $00
-    ld   hl, wRequestDestinationHigh              ; $51FE: $21 $01 $D6
+    ld   hl, wRequest                             ; $51FE: $21 $01 $D6
     add  hl, de                                   ; $5201: $19
     add  $0A                                      ; $5202: $C6 $0A
-    ld   [wRequests], a                           ; $5204: $EA $00 $D6
+    ld   [wRequestsSize], a                       ; $5204: $EA $00 $D6
     pop  de                                       ; $5207: $D1
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5208: $F0 $CF
     ld   [hl+], a                                 ; $520A: $22
@@ -2065,7 +2065,7 @@ SmashRock::
     add  hl, de                                   ; $5412: $19
     ld   [hl], a                                  ; $5413: $77
     ldh  a, [hMultiPurpose1]                      ; $5414: $F0 $D8
-    ld   hl, hMultiPurpose3                            ; $5416: $21 $DA $FF
+    ld   hl, hMultiPurpose3                       ; $5416: $21 $DA $FF
     sub  [hl]                                     ; $5419: $96
     ld   hl, wEntitiesPosYTable                   ; $541A: $21 $10 $C2
     add  hl, de                                   ; $541D: $19
@@ -2229,7 +2229,7 @@ ENDC
 
 jr_003_556F:
     call ExecuteActiveEntityHandler_trampoline    ; $556F: $CD $81 $3A
-    call ReturnIfNonInteractive_03.allowInactiveEntity        ; $5572: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity; $5572: $CD $7E $7F
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5575: $21 $10 $C4
     add  hl, bc                                   ; $5578: $09
     ld   a, [hl]                                  ; $5579: $7E
@@ -2392,7 +2392,7 @@ SpawnEnemyDrop::
     add  hl, bc                                   ; $5612: $09
     ld   d, b                                     ; $5613: $50
     ld   e, [hl]                                  ; $5614: $5E
-    ld   hl, DestroyedEntityHealthGroupOffsetTable ; $5615: $21 $26 $48
+    ld   hl, DestroyedEntityHealthGroupOffsetTable; $5615: $21 $26 $48
     add  hl, de                                   ; $5618: $19
     ld   a, [hl]                                  ; $5619: $7E
     and  a                                        ; $561A: $A7
@@ -2710,7 +2710,7 @@ jr_003_57D7:
     ld   hl, Data_003_5721                        ; $57D7: $21 $21 $57
     add  hl, de                                   ; $57DA: $19
     ld   a, [hl]                                  ; $57DB: $7E
-    ld   hl, hLinkPositionZ                   ; $57DC: $21 $A2 $FF
+    ld   hl, hLinkPositionZ                       ; $57DC: $21 $A2 $FF
     add  [hl]                                     ; $57DF: $86
     ld   hl, wEntitiesPosZTable                   ; $57E0: $21 $10 $C3
     add  hl, bc                                   ; $57E3: $09
@@ -2795,7 +2795,7 @@ HoldEntityAboveLink::
     add  hl, bc                                   ; $5A23: $09
     sub  $0C                                      ; $5A24: $D6 $0C
     ld   [hl], a                                  ; $5A26: $77
-    ldh  a, [hLinkPositionZ]                  ; $5A27: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $5A27: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $5A29: $21 $10 $C3
     add  hl, bc                                   ; $5A2C: $09
     ld   [hl], a                                  ; $5A2D: $77
@@ -2861,7 +2861,7 @@ HeartPieceState3Handler::
     jp   IncrementEntityState                     ; $5A87: $C3 $12 $3B
 
 HeartPieceState4Handler::
-    call_open_dialog $04F                          ; $5A8A: $3E $4F
+    call_open_dialog $04F                         ; $5A8A: $3E $4F
     call IncrementEntityState                     ; $5A8F: $CD $12 $3B
     ld   a, $01                                   ; $5A92: $3E $01
     ld   [wC1AB], a                               ; $5A94: $EA $AB $C1
@@ -3151,7 +3151,7 @@ SwordShieldPickableState3Handler::
     ; …activate the sword poke VFX and SFX
     ldh  a, [hActiveEntityPosY]                   ; $5C3B: $F0 $EF
     sub  $0C                                      ; $5C3D: $D6 $0C
-    call CheckLinkCollisionWithProjectile.showSwordPokeVfx ; $5C3F: $CD $36 $6C
+    call CheckLinkCollisionWithProjectile.showSwordPokeVfx; $5C3F: $CD $36 $6C
     ld   a, JINGLE_SWORD_POKING                   ; $5C42: $3E $07
     ldh  [hJingle], a                             ; $5C44: $E0 $F2
 
@@ -3213,9 +3213,9 @@ KeyDropPointEntityHandler::
 
     ; If dropped in the quicksand mark the angler key
     ; as available in the quicksand cave by setting the room flags.
-    ld   hl, wOverworldRoomStatus + ROOM_OW_YARNA_LANMOLA ; $5C8E: $21 $CE $D8
+    ld   hl, wOverworldRoomStatus + ROOM_OW_YARNA_LANMOLA; $5C8E: $21 $CE $D8
     set  4, [hl]                                  ; $5C91: $CB $E6
-    ld   hl, wIndoorARoomStatus + ROOM_INDOOR_A_QUICKSAND_CAVE ; $5C93: $21 $F8 $D9
+    ld   hl, wIndoorARoomStatus + ROOM_INDOOR_A_QUICKSAND_CAVE; $5C93: $21 $F8 $D9
     set  5, [hl]                                  ; $5C96: $CB $EE
     ret                                           ; $5C98: $C9
 
@@ -3728,14 +3728,14 @@ jr_003_5F5F:
     inc  [hl]                                     ; $5F6F: $34
     ld   a, [hl]                                  ; $5F70: $7E
     and  $01                                      ; $5F71: $E6 $01
-    ldh  [hMultiPurposeG], a                               ; $5F73: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $5F73: $E0 $E8
     ld   a, $39                                   ; $5F75: $3E $39
     call SpawnNewEntity                           ; $5F77: $CD $CA $64
     push bc                                       ; $5F7A: $C5
     ld   hl, wEntitiesPrivateState1Table          ; $5F7B: $21 $B0 $C2
     add  hl, de                                   ; $5F7E: $19
     inc  [hl]                                     ; $5F7F: $34
-    ldh  a, [hMultiPurposeG]                               ; $5F80: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5F80: $F0 $E8
     ld   c, a                                     ; $5F82: $4F
     ld   hl, Data_003_5F2F                        ; $5F83: $21 $2F $5F
     add  hl, bc                                   ; $5F86: $09
@@ -4181,7 +4181,7 @@ jr_003_6235:
 jr_003_623B:
     ld   hl, wEntitiesOptions1Table               ; $623B: $21 $30 $C4
     add  hl, bc                                   ; $623E: $09
-    ld   [hl], ENTITY_OPT1_SPLASH_IN_WATER|ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL                                ; $623F: $36 $0A
+    ld   [hl], ENTITY_OPT1_SPLASH_IN_WATER|ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL; $623F: $36 $0A
     jr   jr_003_626B                              ; $6241: $18 $28
 
 jr_003_6243:
@@ -4430,7 +4430,7 @@ PickDroppableArrows::
 
 PickDroppableBombs::
     ld   d, $02                                   ; $6385: $16 $02
-    call GiveInventoryItem                            ; $6387: $CD $72 $64
+    call GiveInventoryItem                        ; $6387: $CD $72 $64
     ld   hl, wMaxBombs                            ; $638A: $21 $77 $DB
     ld   de, wBombCount                           ; $638D: $11 $4D $DB
     jr   jr_003_635F                              ; $6390: $18 $CD
@@ -4691,7 +4691,7 @@ SpawnNewEntityInRange::
     ; For each entity slot:
 .loop
     ; Find an available (i.e. disabled) entity slot
-    ld   hl, wEntitiesStatusTable                   ; $64CF: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                 ; $64CF: $21 $80 $C2
     add  hl, de                                   ; $64D2: $19
     ld   a, [hl]                                  ; $64D3: $7E
     and  a                                        ; $64D4: $A7
@@ -4738,19 +4738,19 @@ SpawnNewEntityInRange::
     ldh  [hMultiPurpose2], a                      ; $64FB: $E0 $D9
 
     ; hMultiPurpose3 = previous entity pos Z
-    ld   hl, wEntitiesPosZTable                                ; $64FD: $21 $10 $C3
+    ld   hl, wEntitiesPosZTable                   ; $64FD: $21 $10 $C3
     add  hl, bc                                   ; $6500: $09
     ld   a, [hl]                                  ; $6501: $7E
     ldh  [hMultiPurpose3], a                      ; $6502: $E0 $DA
 
-    call ConfigureNewEntity_helper                            ; $6504: $CD $24 $65
+    call ConfigureNewEntity_helper                ; $6504: $CD $24 $65
 
     ; entity's wEntitiesIgnoreHitsCountdownTable   = 1
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $6507: $21 $10 $C4
     add  hl, de                                   ; $650A: $19
     ld   [hl], $01                                ; $650B: $36 $01
 
-    ld   hl, wEntitiesPosXSignTable                                ; $650D: $21 $20 $C2
+    ld   hl, wEntitiesPosXSignTable               ; $650D: $21 $20 $C2
     add  hl, bc                                   ; $6510: $09
     ld   a, [hl]                                  ; $6511: $7E
     ld   hl, wEntitiesPosXSignTable               ; $6512: $21 $20 $C2
@@ -4778,7 +4778,7 @@ ConfigureNewEntity_helper::
     ; bc = de
     ld   c, e                                     ; $6526: $4B
     ld   b, d                                     ; $6527: $42
-    call ConfigureNewEntity                            ; $6528: $CD $5B $48
+    call ConfigureNewEntity                       ; $6528: $CD $5B $48
     ; Restore bc and de
     pop  de                                       ; $652B: $D1
     pop  bc                                       ; $652C: $C1
@@ -5093,7 +5093,7 @@ jr_003_6802:
     ld   hl, Data_003_676D                        ; $680F: $21 $6D $67
     add  hl, bc                                   ; $6812: $09
     ld   a, [hl]                                  ; $6813: $7E
-    ld   hl, hIntersectedObjectTop               ; $6814: $21 $CD $FF
+    ld   hl, hIntersectedObjectTop                ; $6814: $21 $CD $FF
     add  [hl]                                     ; $6817: $86
     ld   [hl], a                                  ; $6818: $77
     dec  c                                        ; $6819: $0D
@@ -5288,7 +5288,7 @@ func_003_68F8::
     ldh  [hObjectUnderEntity], a                  ; $6927: $E0 $AF
     jr   nz, .jr_003_693C                         ; $6929: $20 $11
 
-    ldh  [hMultiPurposeH], a                               ; $692B: $E0 $E9
+    ldh  [hMultiPurposeH], a                      ; $692B: $E0 $E9
     cp   $0A                                      ; $692D: $FE $0A
     jr   z, .jr_003_6964                          ; $692F: $28 $33
 
@@ -5341,29 +5341,29 @@ func_003_68F8::
     xor  a                                        ; $696E: $AF
     ld   [wLinkAttackStepAnimationCountdown], a   ; $696F: $EA $9B $C1
 
-    ld   hl, wEntitiesPosXTable                         ; $6972: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $6972: $21 $00 $C2
     add  hl, de                                   ; $6975: $19
     ldh  a, [hIntersectedObjectLeft]              ; $6976: $F0 $CE
     add  $08                                      ; $6978: $C6 $08
     ld   [hl], a                                  ; $697A: $77
-    ld   hl, wEntitiesPosYTable                         ; $697B: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $697B: $21 $10 $C2
     add  hl, de                                   ; $697E: $19
     ldh  a, [hIntersectedObjectTop]               ; $697F: $F0 $CD
     add  $10                                      ; $6981: $C6 $10
     ld   [hl], a                                  ; $6983: $77
-    ld   hl, wEntitiesSpriteVariantTable               ; $6984: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable          ; $6984: $21 $B0 $C3
     add  hl, de                                   ; $6987: $19
     ld   a, [wIsIndoor]                           ; $6988: $FA $A5 $DB
     xor  $01                                      ; $698B: $EE $01
     ld   [hl], a                                  ; $698D: $77
-    ldh  [hActiveEntitySpriteVariant], a               ; $698E: $E0 $F1
-    ldh  a, [hMultiPurposeH]                               ; $6990: $F0 $E9
+    ldh  [hActiveEntitySpriteVariant], a          ; $698E: $E0 $F1
+    ldh  a, [hMultiPurposeH]                      ; $6990: $F0 $E9
     cp   $0A                                      ; $6992: $FE $0A
     jr   nz, .jr_003_699B                         ; $6994: $20 $05
 
     ld   a, $FF                                   ; $6996: $3E $FF
     ld   [hl], a                                  ; $6998: $77
-    ldh  [hActiveEntitySpriteVariant], a               ; $6999: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a          ; $6999: $E0 $F1
 
 .jr_003_699B
     ld   c, e                                     ; $699B: $4B
@@ -5916,7 +5916,7 @@ ApplyLinkCollisionWithEnemy::
     call GetEntityYDistanceAwayFromLink           ; $6CDB: $CD $E9 $7E
     ld   a, e                                     ; $6CDE: $7B
     cp   $02                                      ; $6CDF: $FE $02
-    jr   nz, .goombaEnd                          ; $6CE1: $20 $5A
+    jr   nz, .goombaEnd                           ; $6CE1: $20 $5A
 
     call IncrementEntityState                     ; $6CE3: $CD $12 $3B
     ld   [hl], ENTITY_STATUS_ACTIVE               ; $6CE6: $36 $05
@@ -5950,7 +5950,7 @@ ApplyLinkCollisionWithEnemy::
     and  a                                        ; $6D0C: $A7
     jr   nz, .jr_003_6D15                         ; $6D0D: $20 $06
 
-    ldh  a, [hLinkVelocityZ]                               ; $6D0F: $F0 $A3
+    ldh  a, [hLinkVelocityZ]                      ; $6D0F: $F0 $A3
     xor  $80                                      ; $6D11: $EE $80
     jr   .jr_003_6D17                             ; $6D13: $18 $02
 
@@ -5976,7 +5976,7 @@ ApplyLinkCollisionWithEnemy::
     jr   nz, .jr_003_6D38                         ; $6D31: $20 $05
 
     ld   a, $10                                   ; $6D33: $3E $10
-    ldh  [hLinkVelocityZ], a                               ; $6D35: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $6D35: $E0 $A3
     ret                                           ; $6D37: $C9
 
 .jr_003_6D38
@@ -6138,7 +6138,7 @@ Data_003_6E0C::
 jr_003_6E0E:
     ldh  a, [hLinkPhysicsModifier]                ; $6E0E: $F0 $9C
     cp   $02                                      ; $6E10: $FE $02
-    jr   z, setCarryAndReturn                           ; $6E12: $28 $F6
+    jr   z, setCarryAndReturn                     ; $6E12: $28 $F6
 
     call GetEntityXDistanceAwayFromLink           ; $6E14: $CD $D9 $7E
     ld   d, b                                     ; $6E17: $50
@@ -6217,7 +6217,7 @@ jr_003_6E6E:
 
     inc  hl                                       ; $6E7B: $23
     push hl                                       ; $6E7C: $E5
-    ld   de, hActiveEntityVisualPosY                    ; $6E7D: $11 $EC $FF
+    ld   de, hActiveEntityVisualPosY              ; $6E7D: $11 $EC $FF
     pop  hl                                       ; $6E80: $E1
     ld   a, [de]                                  ; $6E81: $1A
     add  [hl]                                     ; $6E82: $86
@@ -6616,7 +6616,7 @@ EnemyCollidedWithSword::
     cp   ENTITY_SLIME_EYE                         ; $707D: $FE $5B
     jr   nz, .slimeEyeEnd                         ; $707F: $20 $38
 
-    ldh  a, [hMultiPurposeG]                               ; $7081: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $7081: $F0 $E8
     and  a                                        ; $7083: $A7
 IF __PATCH_3__
     jp   nz, func_003_6DDF
@@ -7457,7 +7457,7 @@ label_003_74EC:
     ld   a, [de]                                  ; $7504: $1A
     add  [hl]                                     ; $7505: $86
     push hl                                       ; $7506: $E5
-    ld   hl, hMultiPurpose0                            ; $7507: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $7507: $21 $D7 $FF
     sub  [hl]                                     ; $750A: $96
     cp   $80                                      ; $750B: $FE $80
     jr   c, jr_003_7511                           ; $750D: $38 $02
@@ -7481,7 +7481,7 @@ jr_003_7511:
     ld   a, [de]                                  ; $7520: $1A
     add  [hl]                                     ; $7521: $86
     push hl                                       ; $7522: $E5
-    ld   hl, hMultiPurpose2                            ; $7523: $21 $D9 $FF
+    ld   hl, hMultiPurpose2                       ; $7523: $21 $D9 $FF
     sub  [hl]                                     ; $7526: $96
     cp   $80                                      ; $7527: $FE $80
     jr   c, jr_003_752D                           ; $7529: $38 $02
@@ -7562,7 +7562,7 @@ jr_003_758B:
     xor  a                                        ; $758D: $AF
     ldh  [hLinkSpeedY], a                         ; $758E: $E0 $9B
     ld   a, $30                                   ; $7590: $3E $30
-    ldh  [hLinkVelocityZ], a                               ; $7592: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $7592: $E0 $A3
     ld   a, JINGLE_HUGE_BUMP                      ; $7594: $3E $0B
     ldh  [hJingle], a                             ; $7596: $E0 $F2
     ret                                           ; $7598: $C9
@@ -7591,33 +7591,33 @@ entitiesLoop:
     ldh  a, [hFrameCounter]                       ; $75AB: $F0 $E7
     xor  e                                        ; $75AD: $AB
     and  $01                                      ; $75AE: $E6 $01
-    jp   nz, checkNextEntity                       ; $75B0: $C2 $9F $77
+    jp   nz, checkNextEntity                      ; $75B0: $C2 $9F $77
 
     ; If the entity is not interactive, move to next
-    ld   hl, wEntitiesStatusTable                        ; $75B3: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                 ; $75B3: $21 $80 $C2
     add  hl, de                                   ; $75B6: $19
     ld   a, [hl]                                  ; $75B7: $7E
-    cp   ENTITY_STATUS_ACTIVE                      ; $75B8: $FE $05
-    jp   c, checkNextEntity                    ; $75BA: $DA $9F $77
+    cp   ENTITY_STATUS_ACTIVE                     ; $75B8: $FE $05
+    jp   c, checkNextEntity                       ; $75BA: $DA $9F $77
 
     ; If wEntitiesPhysicsFlagsTable[de] is not 0, move to next
-    ld   hl, wEntitiesPhysicsFlagsTable                ; $75BD: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $75BD: $21 $40 $C3
     add  hl, de                                   ; $75C0: $19
     ld   a, [hl]                                  ; $75C1: $7E
     and  $40                                      ; $75C2: $E6 $40
     jp   nz, checkNextEntity                      ; $75C4: $C2 $9F $77
 
     ; If the entities X are far appart, move to next
-    ld   hl, wEntitiesPosXTable                         ; $75C7: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $75C7: $21 $00 $C2
     add  hl, de                                   ; $75CA: $19
     ldh  a, [hActiveEntityPosX]                   ; $75CB: $F0 $EE
     sub  [hl]                                     ; $75CD: $96
     add  $0C                                      ; $75CE: $C6 $0C
     cp   $18                                      ; $75D0: $FE $18
-    jp   nc, checkNextEntity                       ; $75D2: $D2 $9F $77
+    jp   nc, checkNextEntity                      ; $75D2: $D2 $9F $77
 
     ; If the entitiesY are far appart, more to next
-    ld   hl, wEntitiesPosYTable                         ; $75D5: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $75D5: $21 $10 $C2
     add  hl, de                                   ; $75D8: $19
     ld   a, [hl]                                  ; $75D9: $7E
     ld   hl, wEntitiesPosZTable                   ; $75DA: $21 $10 $C3
@@ -7627,21 +7627,21 @@ entitiesLoop:
     sub  [hl]                                     ; $75E2: $96
     add  $0C                                      ; $75E3: $C6 $0C
     cp   $18                                      ; $75E5: $FE $18
-    jp   nc, checkNextEntity                       ; $75E7: $D2 $9F $77
+    jp   nc, checkNextEntity                      ; $75E7: $D2 $9F $77
 
     ; If wEntitiesSpriteVariantTable is $FF, move to next
-    ld   hl, wEntitiesSpriteVariantTable               ; $75EA: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable          ; $75EA: $21 $B0 $C3
     add  hl, de                                   ; $75ED: $19
     ld   a, [hl]                                  ; $75EE: $7E
     cp   $FF                                      ; $75EF: $FE $FF
-    jp   z, checkNextEntity                        ; $75F1: $CA $9F $77
+    jp   z, checkNextEntity                       ; $75F1: $CA $9F $77
 
     ; If the active entity is a Bouncing Bombite…
-    ldh  a, [hActiveEntityType]                     ; $75F4: $F0 $EB
+    ldh  a, [hActiveEntityType]                   ; $75F4: $F0 $EB
     cp   ENTITY_BOUNCING_BOMBITE                  ; $75F6: $FE $55
-    jr   nz, .selfBombiteEnd                          ; $75F8: $20 $04
+    jr   nz, .selfBombiteEnd                      ; $75F8: $20 $04
     ; wEntitiesSpriteVariantTable[de] = GetEntityTransitionCountdown
-    call GetEntityTransitionCountdown                 ; $75FA: $CD $05 $0C
+    call GetEntityTransitionCountdown             ; $75FA: $CD $05 $0C
     ld   [hl], b                                  ; $75FD: $70
 .selfBombiteEnd
 
@@ -7652,7 +7652,7 @@ entitiesLoop:
     cp   ENTITY_BOUNCING_BOMBITE                  ; $7603: $FE $55
     jr   nz, .bombiteEnd                          ; $7605: $20 $29
 
-    ld   hl, wEntitiesSpeedXTable                       ; $7607: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                 ; $7607: $21 $40 $C2
     add  hl, bc                                   ; $760A: $09
     ld   a, [hl]                                  ; $760B: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $760C: $21 $40 $C2
@@ -7674,10 +7674,10 @@ entitiesLoop:
     add  hl, de                                   ; $762A: $19
     ld   [hl], $08                                ; $762B: $36 $08
 
-    jp   checkNextEntity                           ; $762D: $C3 $9F $77
+    jp   checkNextEntity                          ; $762D: $C3 $9F $77
 .bombiteEnd
 
-    ld   hl, wEntitiesPhysicsFlagsTable                ; $7630: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $7630: $21 $40 $C3
     add  hl, de                                   ; $7633: $19
     ld   a, [hl]                                  ; $7634: $7E
     and  $20                                      ; $7635: $E6 $20
@@ -8533,7 +8533,7 @@ jr_003_7B13:
     add  [hl]                                     ; $7B1F: $86
     ldh  [hMultiPurpose5], a                      ; $7B20: $E0 $DC
     and  $F0                                      ; $7B22: $E6 $F0
-    ld   hl, hMultiPurpose1                            ; $7B24: $21 $D8 $FF
+    ld   hl, hMultiPurpose1                       ; $7B24: $21 $D8 $FF
     or   [hl]                                     ; $7B27: $B6
     ld   c, a                                     ; $7B28: $4F
 
@@ -9153,7 +9153,7 @@ GetVectorTowardsLink::
     inc  a                                        ; $7E59: $3C
 
 .absoluteY
-    ldh  [hMultiPurposeC], a                           ; $7E5A: $E0 $E3
+    ldh  [hMultiPurposeC], a                      ; $7E5A: $E0 $E3
     call GetEntityXDistanceAwayFromLink           ; $7E5C: $CD $D9 $7E
     ld   a, e                                     ; $7E5F: $7B
     ; hMultiPurpose3 = dx < 0 ? 1 : 0
@@ -9166,10 +9166,10 @@ GetVectorTowardsLink::
     inc  a                                        ; $7E68: $3C
 
 .absoluteX
-    ldh  [hMultiPurposeD], a                           ; $7E69: $E0 $E4
+    ldh  [hMultiPurposeD], a                      ; $7E69: $E0 $E4
     ld   e, $00                                   ; $7E6B: $1E $00
-    ld   hl, hMultiPurposeC                            ; $7E6D: $21 $E3 $FF
-    ldh  a, [hMultiPurposeD]                           ; $7E70: $F0 $E4
+    ld   hl, hMultiPurposeC                       ; $7E6D: $21 $E3 $FF
+    ldh  a, [hMultiPurposeD]                      ; $7E70: $F0 $E4
     ; Always divide the larger distance by the smaller distance...
     cp   [hl]                                     ; $7E72: $BE
     jr   nc, .noSwap1                             ; $7E73: $30 $09
@@ -9177,38 +9177,38 @@ GetVectorTowardsLink::
     ; ...so swap them if necessary
     inc  e                                        ; $7E75: $1C
     push af                                       ; $7E76: $F5
-    ldh  a, [hMultiPurposeC]                           ; $7E77: $F0 $E3
-    ldh  [hMultiPurposeD], a                           ; $7E79: $E0 $E4
+    ldh  a, [hMultiPurposeC]                      ; $7E77: $F0 $E3
+    ldh  [hMultiPurposeD], a                      ; $7E79: $E0 $E4
     pop  af                                       ; $7E7B: $F1
-    ldh  [hMultiPurposeC], a                           ; $7E7C: $E0 $E3
+    ldh  [hMultiPurposeC], a                      ; $7E7C: $E0 $E3
 
 .noSwap1
     ; e = dx > dy ? 0 : 1
 
     xor  a                                        ; $7E7E: $AF
-    ldh  [hMultiPurposeB], a                           ; $7E7F: $E0 $E2
+    ldh  [hMultiPurposeB], a                      ; $7E7F: $E0 $E2
     ldh  [hMultiPurpose0], a                      ; $7E81: $E0 $D7
 
     ldh  a, [hMultiPurpose1]                      ; $7E83: $F0 $D8
     ld   d, a                                     ; $7E85: $57
 
 .divideLoop
-    ldh  a, [hMultiPurposeB]                           ; $7E86: $F0 $E2
-    ld   hl, hMultiPurposeC                            ; $7E88: $21 $E3 $FF
+    ldh  a, [hMultiPurposeB]                      ; $7E86: $F0 $E2
+    ld   hl, hMultiPurposeC                       ; $7E88: $21 $E3 $FF
     add  [hl]                                     ; $7E8B: $86
     jr   c, .incResult                            ; $7E8C: $38 $06
 
-    ld   hl, hMultiPurposeD                            ; $7E8E: $21 $E4 $FF
+    ld   hl, hMultiPurposeD                       ; $7E8E: $21 $E4 $FF
     cp   [hl]                                     ; $7E91: $BE
     jr   c, .decCounter                           ; $7E92: $38 $05
 
 .incResult
     sub  [hl]                                     ; $7E94: $96
-    ld   hl, hMultiPurpose0                            ; $7E95: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $7E95: $21 $D7 $FF
     inc  [hl]                                     ; $7E98: $34
 
 .decCounter
-    ldh  [hMultiPurposeB], a                           ; $7E99: $E0 $E2
+    ldh  [hMultiPurposeB], a                      ; $7E99: $E0 $E2
     dec  d                                        ; $7E9B: $15
     jr   nz, .divideLoop                          ; $7E9C: $20 $E8
 

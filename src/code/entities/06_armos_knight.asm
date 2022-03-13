@@ -105,7 +105,7 @@ jr_006_5361:
     add  hl, bc                                   ; $5379: $09
     ld   a, [hl]                                  ; $537A: $7E
     and  $80                                      ; $537B: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $537D: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $537D: $E0 $E8
     jr   z, jr_006_5387                           ; $537F: $28 $06
 
     ld   [hl], b                                  ; $5381: $70
@@ -156,7 +156,7 @@ jr_006_5394:
     ld   [hl], a                                  ; $53C2: $77
     ldh  [hMultiPurpose0], a                      ; $53C3: $E0 $D7
     ldh  a, [hMultiPurpose1]                      ; $53C5: $F0 $D8
-    ld   hl, hMultiPurpose3                            ; $53C7: $21 $DA $FF
+    ld   hl, hMultiPurpose3                       ; $53C7: $21 $DA $FF
     sub  [hl]                                     ; $53CA: $96
     ld   hl, wEntitiesPosYTable                   ; $53CB: $21 $10 $C2
     add  hl, de                                   ; $53CE: $19
@@ -182,7 +182,7 @@ jr_006_53D3:
     ld   [hl], a                                  ; $53EC: $77
     ldh  [hMultiPurpose0], a                      ; $53ED: $E0 $D7
     ldh  a, [hMultiPurpose1]                      ; $53EF: $F0 $D8
-    ld   hl, hMultiPurpose3                            ; $53F1: $21 $DA $FF
+    ld   hl, hMultiPurpose3                       ; $53F1: $21 $DA $FF
     sub  [hl]                                     ; $53F4: $96
     ld   hl, wEntitiesPosYTable                   ; $53F5: $21 $10 $C2
     add  hl, de                                   ; $53F8: $19
@@ -291,7 +291,7 @@ ArmosKnightState3Handler::
     ret                                           ; $549B: $C9
 
 jr_006_549C:
-    ldh  a, [hMultiPurposeG]                               ; $549C: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $549C: $F0 $E8
     and  a                                        ; $549E: $A7
     jr   z, jr_006_54BB                           ; $549F: $28 $1A
 
@@ -348,7 +348,7 @@ jr_006_54E7:
 
 ArmosKnightState6Handler::
     call ApplyRecoilIfNeeded_06                   ; $54ED: $CD $F7 $64
-    ldh  a, [hMultiPurposeG]                               ; $54F0: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $54F0: $F0 $E8
     and  a                                        ; $54F2: $A7
     ret  z                                        ; $54F3: $C8
 

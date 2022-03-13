@@ -673,7 +673,7 @@ data_005_4cc6::
 ; Link lifts the shield
 TarinShield2Handler::
     ; Wait a number of frames to actually add the shield to the inventory
-    call GetEntityTransitionCountdown                 ; $4CC8: $CD $05 $0C
+    call GetEntityTransitionCountdown             ; $4CC8: $CD $05 $0C
     jr   nz, jr_005_4CE6                          ; $4CCB: $20 $19
 
     ld   [wC167], a                               ; $4CCD: $EA $67 $C1
@@ -683,7 +683,7 @@ TarinShield2Handler::
 
     ld   a, $01                                   ; $4CD5: $3E $01
     ld   [wShieldLevel], a                        ; $4CD7: $EA $44 $DB
-    ld   a, LINK_ANIMATION_STATE_STANDING_SHIELD_DOWN       ; $4CDA: $3E $22
+    ld   a, LINK_ANIMATION_STATE_STANDING_SHIELD_DOWN; $4CDA: $3E $22
     ldh  [hLinkAnimationState], a                 ; $4CDC: $E0 $9D
     call_open_dialog $091                         ; $4CDE
     jp   IncrementEntityState                     ; $4CE3: $C3 $12 $3B

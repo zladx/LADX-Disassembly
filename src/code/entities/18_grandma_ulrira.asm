@@ -106,7 +106,7 @@ GrandmaUlriraState0Handler::
     ld   a, $78                                   ; $4D8C: $3E $78
     jr   z, jr_018_4DA0                           ; $4D8E: $28 $10
 
-    ldh  a, [hMultiPurposeG]                               ; $4D90: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $4D90: $F0 $E8
     and  a                                        ; $4D92: $A7
     jr   nz, jr_018_4DA3                          ; $4D93: $20 $0E
 
@@ -133,7 +133,7 @@ jr_018_4DB5:
     jp_open_dialog $15B                           ; $4DB5
 
 GrandmaUlriraState1Handler::
-    ld   a, [wDialogAskSelectionIndex]                               ; $4DBA: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $4DBA: $FA $77 $C1
     and  a                                        ; $4DBD: $A7
     jr   nz, jr_018_4DCF                          ; $4DBE: $20 $0F
 

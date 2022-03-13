@@ -2,33 +2,33 @@
 ; Memory-clearing functions
 ;
 
-; Clear $1600 bytes of WRAM (from $C000 to $D600)
+; Clear $1600 bytes of WRAM (from $C000 to wRequestsSection)
 ClearLowerAndMiddleWRAM::
-    ld   bc, $1600                                ; $29C1: $01 $00 $16
+    ld   bc, wRequestsSection - wram0Section      ; $29C1: $01 $00 $16
     jr   ClearWRAMBytes                           ; $29C4: $18 $16
 
-; Clear $1300 bytes of WRAM (from $C000 to $D300)
+; Clear $1300 bytes of WRAM (from $C000 to wAudioSection)
 ClearLowerWRAM::
-    ld   bc, $1300                                ; $29C6: $01 $00 $13
+    ld   bc, wAudioSection - wram0Section         ; $29C6: $01 $00 $13
     jr   ClearWRAMBytes                           ; $29C9: $18 $11
 
-; Clear lower values of HRAM (from $FF90 to $FFBF) and all WRAM
+; Clear lower values of HRAM (from hGameValuesSection to hNextDefaultMusicTrack) and all WRAM
 ClearWRAMAndLowerHRAM::
-    ld   bc, $2F                                  ; $29CB: $01 $2F $00
+    ld   bc, hNextDefaultMusicTrack - hGameValuesSection; $29CB: $01 $2F $00
     jr   ClearHRAMBytesAndWRAM                    ; $29CE: $18 $03
 
 ; Clear all values from HRAM and WRAM
 ; (only `hIsGBC` is kept)
 ClearHRAMAndWRAM::
-    ; Set all bytes of HRAM (from $FF90 to $FFFD) to zero
-    ld   bc, $6D                                  ; $29D0: $01 $6D $00
+    ; Set all bytes of HRAM (from hGameValuesSection to hIsRenderingFrame) to zero
+    ld   bc, hIsRenderingFrame - hGameValuesSection; $29D0: $01 $6D $00
 
 ClearHRAMBytesAndWRAM::
     ; Set BC bytes of HRAM (starting from $FF90) to zero
     ld   hl, hGameValuesSection                   ; $29D3: $21 $90 $FF
     call ClearBytes                               ; $29D6: $CD $DF $29
     ; Set all bytes of WRAM (from $C000 to $DF00) to zero
-    ld   bc, $1F00                                ; $29D9: $01 $00 $1F
+    ld   bc, $DF00 - wram0Section                 ; $29D9: $01 $00 $1F
 
 ; Set BC bytes of WRAM (starting from $C000) to zero
 ClearWRAMBytes::

@@ -70,7 +70,7 @@ func_005_539C::
     ret  nz                                       ; $53A0: $C0
 
     call IncrementEntityState                     ; $53A1: $CD $12 $3B
-    ld   a, [wDialogAskSelectionIndex]                               ; $53A4: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $53A4: $FA $77 $C1
     and  a                                        ; $53A7: $A7
     jr   z, jr_005_53AC                           ; $53A8: $28 $02
 
@@ -129,7 +129,7 @@ jr_005_53E9:
     cp   c                                        ; $53EA: $B9
     jr   z, jr_005_53FF                           ; $53EB: $28 $12
 
-    ld   hl, wEntitiesStatusTable                         ; $53ED: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                 ; $53ED: $21 $80 $C2
     add  hl, de                                   ; $53F0: $19
     ld   a, [hl]                                  ; $53F1: $7E
     and  a                                        ; $53F2: $A7
@@ -139,7 +139,7 @@ jr_005_53E9:
     add  hl, de                                   ; $53F8: $19
     ld   a, [hl]                                  ; $53F9: $7E
     cp   $6A                                      ; $53FA: $FE $6A
-    jp   z, ClearEntityStatus_05                 ; $53FC: $CA $4B $7B
+    jp   z, ClearEntityStatus_05                  ; $53FC: $CA $4B $7B
 
 jr_005_53FF:
     dec  e                                        ; $53FF: $1D
@@ -168,7 +168,7 @@ jr_005_5411:
     jr   nc, jr_005_5440                          ; $5426: $30 $18
 
     ldh  a, [hLinkPositionY]                      ; $5428: $F0 $99
-    ld   hl, hActiveEntityPosY                                ; $542A: $21 $EF $FF
+    ld   hl, hActiveEntityPosY                    ; $542A: $21 $EF $FF
     sub  [hl]                                     ; $542D: $96
     add  $14                                      ; $542E: $C6 $14
     cp   $1C                                      ; $5430: $FE $1C
@@ -177,7 +177,7 @@ jr_005_5411:
     ld   a, $80                                   ; $5434: $3E $80
     ld   [wC1AD], a                               ; $5436: $EA $AD $C1
     ldh  a, [hLinkPositionX]                      ; $5439: $F0 $98
-    ld   hl, wEntitiesPosXTable                         ; $543B: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $543B: $21 $00 $C2
     add  hl, bc                                   ; $543E: $09
     ld   [hl], a                                  ; $543F: $77
 
@@ -287,7 +287,7 @@ func_005_54C3::
     cp   $03                                      ; $54DB: $FE $03
     jr   nz, jr_005_54E5                          ; $54DD: $20 $06
 
-    ld   hl, wEntitiesStatusTable+15                                ; $54DF: $21 $8F $C2
+    ld   hl, wEntitiesStatusTable+15              ; $54DF: $21 $8F $C2
     add  hl, de                                   ; $54E2: $19
     ld   [hl], $00                                ; $54E3: $36 $00
 
@@ -326,7 +326,7 @@ ShouldLinkTalkToEntity_05::
     ld   e, b                                     ; $5506: $58
     ldh  a, [hActiveEntityType]                   ; $5507: $F0 $EB
     cp   ENTITY_WITCH                             ; $5509: $FE $40
-    jr   nz, .witchYPosCheck                          ; $550B: $20 $0C
+    jr   nz, .witchYPosCheck                      ; $550B: $20 $0C
 
     ; Normal check for Y position
     ldh  a, [hLinkPositionY]                      ; $550D: $F0 $99
@@ -344,7 +344,7 @@ ShouldLinkTalkToEntity_05::
     cp   $28                                      ; $5521: $FE $28
 .checkYPosEnd
 
-    jr   nc, .dontTalk                             ; $5523: $30 $44
+    jr   nc, .dontTalk                            ; $5523: $30 $44
 
     ;
     ; Check if Link is horizontally close from the entity

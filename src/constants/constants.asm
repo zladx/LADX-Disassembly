@@ -1,6 +1,7 @@
 ;
 ; Useful definitions
 ;
+include "constants/gbhw.asm"
 include "constants/defines.asm"
 
 ;
@@ -32,9 +33,8 @@ include "constants/charmaps/main.asm"
 include "constants/charmaps/name_entry.asm"
 
 ;
-; GameBoy hardware and memory setup
+; Memory layout
 ;
-include "constants/gbhw.asm"
 include "constants/memory/hram.asm"
 include "constants/memory/sram.asm"
 include "constants/memory/vram.asm"

@@ -45,7 +45,7 @@ jr_018_733C:
     and  a                                        ; $7341: $A7
     jr   nz, jr_018_7363                          ; $7342: $20 $1F
 
-    ld   a, [wSelectedSongIndex]                               ; $7344: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                  ; $7344: $FA $4A $DB
     cp   $02                                      ; $7347: $FE $02
     jr   nz, jr_018_7363                          ; $7349: $20 $18
 
@@ -75,7 +75,7 @@ jr_018_7363:
     and  a                                        ; $7371: $A7
     jr   nz, jr_018_737D                          ; $7372: $20 $09
 
-    ld   hl, wOverworldRoomStatus + $10                                ; $7374: $21 $10 $D8
+    ld   hl, wOverworldRoomStatus + $10           ; $7374: $21 $10 $D8
     set  5, [hl]                                  ; $7377: $CB $EE
     ld   a, JINGLE_PUZZLE_SOLVED                  ; $7379: $3E $02
     ldh  [hJingle], a                             ; $737B: $E0 $F2
@@ -414,7 +414,7 @@ TurtleRockHeadStateBHandler::
     jr   nc, jr_018_7585                          ; $756C: $30 $17
 
     ld   a, [wD202]                               ; $756E: $FA $02 $D2
-    ld   hl, hActiveEntityVisualPosY                                ; $7571: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $7571: $21 $EC $FF
     sub  [hl]                                     ; $7574: $96
     add  $01                                      ; $7575: $C6 $01
     cp   $02                                      ; $7577: $FE $02

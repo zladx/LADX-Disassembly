@@ -201,7 +201,7 @@ jr_006_4A1B:
     ld   hl, wEntitiesDirectionTable              ; $4A2C: $21 $80 $C3
     add  hl, de                                   ; $4A2F: $19
     ld   a, [hl]                                  ; $4A30: $7E
-    ld   hl, hMultiPurpose2                            ; $4A31: $21 $D9 $FF
+    ld   hl, hMultiPurpose2                       ; $4A31: $21 $D9 $FF
     add  hl, bc                                   ; $4A34: $09
     ld   [hl], a                                  ; $4A35: $77
     inc  bc                                       ; $4A36: $03
@@ -216,7 +216,7 @@ jr_006_4A37:
     call PlayWrongAnswerJingle                    ; $4A3E: $CD $20 $0C
     ld   e, $00                                   ; $4A41: $1E $00
     ldh  a, [hMultiPurpose2]                      ; $4A43: $F0 $D9
-    ld   hl, hMultiPurpose3                            ; $4A45: $21 $DA $FF
+    ld   hl, hMultiPurpose3                       ; $4A45: $21 $DA $FF
     cp   [hl]                                     ; $4A48: $BE
     jr   nz, jr_006_4A62                          ; $4A49: $20 $17
 
@@ -246,7 +246,7 @@ ENDC
 
 jr_006_4A62:
     ld   a, e                                     ; $4A62: $7B
-    ldh  [hMultiPurposeG], a                               ; $4A63: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $4A63: $E0 $E8
     ld   e, $0F                                   ; $4A65: $1E $0F
     ld   d, b                                     ; $4A67: $50
 
@@ -263,7 +263,7 @@ jr_006_4A68:
     cp   $90                                      ; $4A75: $FE $90
     jr   nz, jr_006_4AA1                          ; $4A77: $20 $28
 
-    ldh  a, [hMultiPurposeG]                               ; $4A79: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $4A79: $F0 $E8
     and  a                                        ; $4A7B: $A7
     jr   nz, jr_006_4A85                          ; $4A7C: $20 $07
 

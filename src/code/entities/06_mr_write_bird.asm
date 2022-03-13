@@ -86,7 +86,7 @@ jr_006_7266:
     add  hl, bc                                   ; $727E: $09
     ld   a, [hl]                                  ; $727F: $7E
     and  $80                                      ; $7280: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $7282: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $7282: $E0 $E8
     jr   z, jr_006_728C                           ; $7284: $28 $06
 
     ld   [hl], b                                  ; $7286: $70
@@ -151,7 +151,7 @@ MrWriteBirdState1Handler::
     call func_006_7335                            ; $72E3: $CD $35 $73
     call UpdateEntityPosWithSpeed_06              ; $72E6: $CD $41 $65
     call label_3B23                               ; $72E9: $CD $23 $3B
-    ldh  a, [hMultiPurposeG]                               ; $72EC: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $72EC: $F0 $E8
     and  a                                        ; $72EE: $A7
     jr   z, label_006_7308                        ; $72EF: $28 $17
 
@@ -191,7 +191,7 @@ MrWriteBirdState2Handler::
     inc  [hl]                                     ; $7322: $34
 
 jr_006_7323:
-    ldh  a, [hMultiPurposeG]                               ; $7323: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $7323: $F0 $E8
     and  a                                        ; $7325: $A7
     jr   z, jr_006_732C                           ; $7326: $28 $04
 

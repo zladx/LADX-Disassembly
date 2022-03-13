@@ -22,7 +22,7 @@ func_018_7D3B::
     cp   $03                                      ; $7D4E: $FE $03
     jr   nz, jr_018_7D58                          ; $7D50: $20 $06
 
-    ld   hl, wEntitiesStatusTable + $0F                        ; $7D52: $21 $8F $C2
+    ld   hl, wEntitiesStatusTable + $0F           ; $7D52: $21 $8F $C2
     add  hl, de                                   ; $7D55: $19
     ld   [hl], $00                                ; $7D56: $36 $00
 
@@ -442,7 +442,7 @@ func_018_7F3B::
 
     call PlayBombExplosionSfx                     ; $7F40: $CD $4B $0C
     call label_27DD                               ; $7F43: $CD $DD $27
-    call SetRoomStatus20                            ; $7F46: $CD $B9 $7F
+    call SetRoomStatus20                          ; $7F46: $CD $B9 $7F
     jp   DidKillEnemy                             ; $7F49: $C3 $50 $3F
 
 jr_018_7F4C:
@@ -463,13 +463,13 @@ label_018_7F4F:
     and  $1F                                      ; $7F62: $E6 $1F
     sub  $14                                      ; $7F64: $D6 $14
     ld   e, a                                     ; $7F66: $5F
-    ld   hl, hActiveEntityVisualPosY                                ; $7F67: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $7F67: $21 $EC $FF
     add  [hl]                                     ; $7F6A: $86
     ld   [hl], a                                  ; $7F6B: $77
     jp   label_018_7F6F                           ; $7F6C: $C3 $6F $7F
 
 label_018_7F6F:
-    call ReturnIfNonInteractive_18.allowInactiveEntity ; $7F6F: $CD $EE $7D
+    call ReturnIfNonInteractive_18.allowInactiveEntity; $7F6F: $CD $EE $7D
     ldh  a, [hActiveEntityPosX]                   ; $7F72: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $7F74: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $7F76: $F0 $EC

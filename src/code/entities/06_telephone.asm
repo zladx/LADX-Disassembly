@@ -30,7 +30,7 @@ TelephoneEntityHandler::
 
 jr_006_6AA9:
     ld   e, $41                                   ; $6AA9: $1E $41
-    ld   a, [wIndoorBRoomStatus + $A9]                               ; $6AAB: $FA $A9 $DA
+    ld   a, [wIndoorBRoomStatus + $A9]            ; $6AAB: $FA $A9 $DA
     and  $20                                      ; $6AAE: $E6 $20
     jp   z, label_006_6BAD                        ; $6AB0: $CA $AD $6B
 
@@ -156,7 +156,7 @@ jr_006_6B6E:
 
 jr_006_6B7C:
     ld   e, $4F                                   ; $6B7C: $1E $4F
-    ld   a, [wOverworldRoomStatus + $10]                               ; $6B7E: $FA $10 $D8
+    ld   a, [wOverworldRoomStatus + $10]          ; $6B7E: $FA $10 $D8
     and  $30                                      ; $6B81: $E6 $30
     jr   z, label_006_6BAD                        ; $6B83: $28 $28
 
@@ -166,12 +166,12 @@ jr_006_6B7C:
     jr   z, label_006_6BB3                        ; $6B8C: $28 $25
 
     ld   e, $42                                   ; $6B8E: $1E $42
-    ld   a, [wOverworldRoomStatus + $06]                               ; $6B90: $FA $06 $D8
+    ld   a, [wOverworldRoomStatus + $06]          ; $6B90: $FA $06 $D8
     and  $30                                      ; $6B93: $E6 $30
     jr   z, label_006_6BB3                        ; $6B95: $28 $1C
 
     ld   e, $43                                   ; $6B97: $1E $43
-    ld   a, [wIndoorBRoomStatus + $74]                               ; $6B99: $FA $74 $DA
+    ld   a, [wIndoorBRoomStatus + $74]            ; $6B99: $FA $74 $DA
     and  $40                                      ; $6B9C: $E6 $40
     jr   z, label_006_6BB3                        ; $6B9E: $28 $13
 
@@ -193,6 +193,6 @@ label_006_6BB3:
     call OpenDialogInTable2                       ; $6BB4: $CD $7C $23
 
 jr_006_6BB7:
-    ld   hl, wIndoorBRoomStatus + $A9                                ; $6BB7: $21 $A9 $DA
+    ld   hl, wIndoorBRoomStatus + $A9             ; $6BB7: $21 $A9 $DA
     set  5, [hl]                                  ; $6BBA: $CB $EE
     ret                                           ; $6BBC: $C9

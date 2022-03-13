@@ -83,7 +83,7 @@ jr_019_44C5:
     call label_3B44                               ; $44C5: $CD $44 $3B
     ret  nc                                       ; $44C8: $D0
 
-    jp   ClearEntityStatus_19                       ; $44C9: $C3 $61 $7E
+    jp   ClearEntityStatus_19                     ; $44C9: $C3 $61 $7E
 
 func_019_44CC::
     ld   a, [wIsIndoor]                           ; $44CC: $FA $A5 $DB

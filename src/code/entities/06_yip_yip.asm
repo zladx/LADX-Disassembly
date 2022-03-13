@@ -183,7 +183,7 @@ YipYipState2Handler::
     and  a                                        ; $5AA6: $A7
     jr   nz, jr_006_5AD0                          ; $5AA7: $20 $27
 
-    ld   a, [wDialogAskSelectionIndex]                               ; $5AA9: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $5AA9: $FA $77 $C1
     and  a                                        ; $5AAC: $A7
     jr   nz, jr_006_5AC3                          ; $5AAD: $20 $14
 
@@ -265,7 +265,7 @@ jr_006_5B27:
 YipYipState1Handler::
     call UpdateEntityPosWithSpeed_06              ; $5B2A: $CD $41 $65
     call label_3B23                               ; $5B2D: $CD $23 $3B
-    ldh  a, [hMultiPurposeG]                               ; $5B30: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5B30: $F0 $E8
     and  a                                        ; $5B32: $A7
     jr   z, label_006_5B4C                        ; $5B33: $28 $17
 

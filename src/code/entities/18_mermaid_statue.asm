@@ -51,7 +51,7 @@ MermaidStatueInteractiveHandler::
     ldh  [hNoiseSfx], a                           ; $497C: $E0 $F4
     call GetEntityTransitionCountdown             ; $497E: $CD $05 $0C
     ld   [hl], $60                                ; $4981: $36 $60
-    call SetRoomStatus20                            ; $4983: $CD $B9 $7F
+    call SetRoomStatus20                          ; $4983: $CD $B9 $7F
     call_open_dialog $116                         ; $4986
 
     jp   IncrementEntityState                     ; $498B: $C3 $12 $3B

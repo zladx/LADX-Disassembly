@@ -11,7 +11,7 @@ WalrusEntityHandler::
     and  a                                        ; $5506: $A7
     jp   nz, label_018_54BD                       ; $5507: $C2 $BD $54
 
-    ld   a, [wOverworldRoomStatus + $FD]                               ; $550A: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + $FD]          ; $550A: $FA $FD $D8
     and  $20                                      ; $550D: $E6 $20
     jp   nz, label_018_589A                       ; $550F: $C2 $9A $58
 
@@ -105,7 +105,7 @@ jr_018_558A:
     and  a                                        ; $55A3: $A7
     ret  nz                                       ; $55A4: $C0
 
-    ld   a, [wMarinEntityIndex]                               ; $55A5: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                   ; $55A5: $FA $0F $C5
     ld   e, a                                     ; $55A8: $5F
     ld   d, b                                     ; $55A9: $50
     ld   hl, wEntitiesPosZTable                   ; $55AA: $21 $10 $C3
@@ -124,7 +124,7 @@ WalrusWakingUpHandler::
     ret  nz                                       ; $55C0: $C0
 
     call IncrementEntityState                     ; $55C1: $CD $12 $3B
-    ld   a, [wDialogAskSelectionIndex]                               ; $55C4: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $55C4: $FA $77 $C1
     and  a                                        ; $55C7: $A7
     jr   nz, jr_018_55D8                          ; $55C8: $20 $0E
 
@@ -369,7 +369,7 @@ WalrusState7Handler::
     add  hl, de                                   ; $5791: $19
     ld   [hl], $48                                ; $5792: $36 $48
     call ClearEntityStatusBank18                  ; $5794: $CD $08 $7F
-    jp   SetRoomStatus20                            ; $5797: $C3 $B9 $7F
+    jp   SetRoomStatus20                          ; $5797: $C3 $B9 $7F
 
 WalrusState8Handler::
     ret                                           ; $579A: $C9
@@ -463,7 +463,7 @@ func_018_58C1::
     call GetEntityTransitionCountdown             ; $58C1: $CD $05 $0C
     ret  nz                                       ; $58C4: $C0
 
-    ld   a, [wSelectedSongIndex]                               ; $58C5: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                  ; $58C5: $FA $4A $DB
     cp   $00                                      ; $58C8: $FE $00
     ret  nz                                       ; $58CA: $C0
 

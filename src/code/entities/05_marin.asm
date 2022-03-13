@@ -96,7 +96,7 @@ MarinEntityHandler::
     jr   c, .notInAnyVillage                      ; $4E83: $38 $02
     jr   .continue                                ; $4E85: $18 $0F
 .notInAnyVillage
-    ld   a, [wOverworldRoomStatus + ROOM_OW_MARIN_BRIDGE] ; $4E87: $FA $08 $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_MARIN_BRIDGE]; $4E87: $FA $08 $D8
     and  $10                                      ; $4E8A: $E6 $10
     jr   nz, .continue                            ; $4E8C: $20 $08
     ld   a, [wTradeSequenceItem]                  ; $4E8E: $FA $0E $DB
@@ -553,7 +553,7 @@ func_005_512B::
     jr   nz, jr_005_515E                          ; $512F: $20 $2D
 
     call IncrementEntityState                     ; $5131: $CD $12 $3B
-    ld   a, [wDialogAskSelectionIndex]                               ; $5134: $FA $77 $C1
+    ld   a, [wDialogAskSelectionIndex]            ; $5134: $FA $77 $C1
     and  a                                        ; $5137: $A7
     jr   nz, jr_005_514F                          ; $5138: $20 $15
 
@@ -824,7 +824,7 @@ func_005_52DB::
     ld   a, $02                                   ; $52F6: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $52F8: $EA $46 $C1
     ld   a, $12                                   ; $52FB: $3E $12
-    ldh  [hLinkVelocityZ], a                               ; $52FD: $E0 $A3
+    ldh  [hLinkVelocityZ], a                      ; $52FD: $E0 $A3
     ld   a, $0C                                   ; $52FF: $3E $0C
     ldh  [hLinkSpeedX], a                         ; $5301: $E0 $9A
     xor  a                                        ; $5303: $AF

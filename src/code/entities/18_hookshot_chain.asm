@@ -17,7 +17,7 @@ HookshotChainEntityHandler::
     inc  a                                        ; $7BF5: $3C
     ld   [wC1A6], a                               ; $7BF6: $EA $A6 $C1
     xor  a                                        ; $7BF9: $AF
-    call ResetSpinAttack                                ; $7BFA: $CD $AF $0C
+    call ResetSpinAttack                          ; $7BFA: $CD $AF $0C
     ld   [wIgnoreLinkCollisionsCountdown], a      ; $7BFD: $EA $3E $C1
     ldh  a, [hLinkDirection]                      ; $7C00: $F0 $9E
     ld   e, a                                     ; $7C02: $5F
@@ -103,7 +103,7 @@ jr_018_7C54:
     jr   z, jr_018_7CAE                           ; $7C6B: $28 $41
 
     call func_018_6493                            ; $7C6D: $CD $93 $64
-    ld   hl, wEntitiesSpeedYTable                       ; $7C70: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                 ; $7C70: $21 $50 $C2
     add  hl, bc                                   ; $7C73: $09
     ld   a, [hl]                                  ; $7C74: $7E
     and  a                                        ; $7C75: $A7
@@ -122,12 +122,12 @@ jr_018_7C80:
 
     ld   a, ENTITY_68                             ; $7C85: $3E $68
     call SpawnNewEntity_trampoline                ; $7C87: $CD $86 $3B
-    ld   hl, wEntitiesPosXTable                         ; $7C8A: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $7C8A: $21 $00 $C2
     add  hl, de                                   ; $7C8D: $19
     ldh  a, [hIntersectedObjectLeft]              ; $7C8E: $F0 $CE
     add  $08                                      ; $7C90: $C6 $08
     ld   [hl], a                                  ; $7C92: $77
-    ld   hl, wEntitiesPosYTable                         ; $7C93: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $7C93: $21 $10 $C2
     add  hl, de                                   ; $7C96: $19
     ldh  a, [hIntersectedObjectTop]               ; $7C97: $F0 $CD
     add  $10                                      ; $7C99: $C6 $10
@@ -201,14 +201,14 @@ jr_018_7CF8:
     jr   nz, jr_018_7D09                          ; $7D00: $20 $07
 
     ldh  a, [hLinkPositionY]                      ; $7D02: $F0 $99
-    ld   hl, hMultiPurpose1                            ; $7D04: $21 $D8 $FF
+    ld   hl, hMultiPurpose1                       ; $7D04: $21 $D8 $FF
     add  [hl]                                     ; $7D07: $86
     ld   [de], a                                  ; $7D08: $12
 
 jr_018_7D09:
     inc  de                                       ; $7D09: $13
     ldh  a, [hLinkPositionX]                      ; $7D0A: $F0 $98
-    ld   hl, hMultiPurpose0                            ; $7D0C: $21 $D7 $FF
+    ld   hl, hMultiPurpose0                       ; $7D0C: $21 $D7 $FF
     add  [hl]                                     ; $7D0F: $86
     add  $04                                      ; $7D10: $C6 $04
     ld   [de], a                                  ; $7D12: $12
@@ -220,11 +220,11 @@ jr_018_7D09:
     ld   [de], a                                  ; $7D1A: $12
     inc  de                                       ; $7D1B: $13
     ldh  a, [hMultiPurpose0]                      ; $7D1C: $F0 $D7
-    ld   hl, hMultiPurpose2                            ; $7D1E: $21 $D9 $FF
+    ld   hl, hMultiPurpose2                       ; $7D1E: $21 $D9 $FF
     add  [hl]                                     ; $7D21: $86
     ldh  [hMultiPurpose0], a                      ; $7D22: $E0 $D7
     ldh  a, [hMultiPurpose1]                      ; $7D24: $F0 $D8
-    ld   hl, hMultiPurpose3                            ; $7D26: $21 $DA $FF
+    ld   hl, hMultiPurpose3                       ; $7D26: $21 $DA $FF
     add  [hl]                                     ; $7D29: $86
     ldh  [hMultiPurpose1], a                      ; $7D2A: $E0 $D8
     ldh  a, [hMultiPurpose4]                      ; $7D2C: $F0 $DB

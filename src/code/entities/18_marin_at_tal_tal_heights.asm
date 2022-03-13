@@ -385,7 +385,7 @@ TarinAtTalTalHeightsState0Handler::
     call_open_dialog $23B                         ; $611D
     ld   a, $03                                   ; $6122: $3E $03
     ldh  [hLinkDirection], a                      ; $6124: $E0 $9E
-    ld   a, [wMarinEntityIndex]                               ; $6126: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                   ; $6126: $FA $0F $C5
     ld   e, a                                     ; $6129: $5F
     ld   d, b                                     ; $612A: $50
     ld   hl, wEntitiesDirectionTable              ; $612B: $21 $80 $C3
@@ -422,7 +422,7 @@ TarinAtTalTalHeightsState2Handler::
 
 jr_018_6163:
     call ReturnIfNonInteractive_18                ; $6163: $CD $E8 $7D
-    ld   a, [wMarinEntityIndex]                               ; $6166: $FA $0F $C5
+    ld   a, [wMarinEntityIndex]                   ; $6166: $FA $0F $C5
     ld   e, a                                     ; $6169: $5F
     ld   d, b                                     ; $616A: $50
     ld   hl, wEntitiesStateTable                  ; $616B: $21 $90 $C2

@@ -169,12 +169,12 @@ AnimateEntity::
     ld   a, [hl]                                  ; $3A23: $7E
     ldh  [hActiveEntityState], a                  ; $3A24: $E0 $F0
 
-    ld   hl, wEntitiesSpriteVariantTable                                ; $3A26: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable          ; $3A26: $21 $B0 $C3
     add  hl, bc                                   ; $3A29: $09
     ld   a, [hl]                                  ; $3A2A: $7E
     ldh  [hActiveEntitySpriteVariant], a          ; $3A2B: $E0 $F1
 
-    ld   a, BANK(UpdateEntityPositionForRoomTransition) ; $3A2D: $3E $19
+    ld   a, BANK(UpdateEntityPositionForRoomTransition); $3A2D: $3E $19
     ld   [wCurrentBank], a                        ; $3A2F: $EA $AF $DB
     ld   [MBC3SelectBank], a                      ; $3A32: $EA $00 $21
 
@@ -373,7 +373,7 @@ CheckLinkCollisionWithProjectile_trampoline::
     jp   ReloadSavedBank                          ; $3B57: $C3 $1D $08
 
 CheckLinkCollisionWithEnemy_trampoline::
-    callsb CheckLinkCollisionWithEnemy.collisionEvenInTheAir ; $3B5A: $3E $03 $EA $00 $21 $CD $77 $6C
+    callsb CheckLinkCollisionWithEnemy.collisionEvenInTheAir; $3B5A: $3E $03 $EA $00 $21 $CD $77 $6C
     jp   ReloadSavedBank                          ; $3B62: $C3 $1D $08
 
 label_3B65::
@@ -695,7 +695,7 @@ RenderActiveEntitySprite::
 
 .functionEnd
     inc  de                                       ; $3CD6: $13
-    jr   RenderActiveEntitySpritesPair.paletteFlip1End ; $3CD7: $18 $8A
+    jr   RenderActiveEntitySpritesPair.paletteFlip1End; $3CD7: $18 $8A
 
 label_3CD9::
     ld   a, $15                                   ; $3CD9: $3E $15
@@ -714,7 +714,7 @@ label_3CD9::
 RenderActiveEntitySpritesRectUsingAllOAM::
     push hl                                       ; $3CE0: $E5
     ld   hl, wOAMBuffer                           ; $3CE1: $21 $00 $C0
-    jr   RenderActiveEntitySpritesRect.withDestination ; $3CE4: $18 $10
+    jr   RenderActiveEntitySpritesRect.withDestination; $3CE4: $18 $10
 
 ; Render a large rectangle of sprites for the active entity to the OAM buffer.
 ;

@@ -93,7 +93,7 @@ jr_006_6CE8:
     add  hl, bc                                   ; $6CF4: $09
     ld   a, [hl]                                  ; $6CF5: $7E
     ldh  [hIndexOfObjectBelowLink], a             ; $6CF6: $E0 $E9
-    ld   hl, wEntitiesSpeedXTable                       ; $6CF8: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                 ; $6CF8: $21 $40 $C2
     add  hl, bc                                   ; $6CFB: $09
     ld   a, [hl]                                  ; $6CFC: $7E
     and  a                                        ; $6CFD: $A7
@@ -122,7 +122,7 @@ jr_006_6D0D:
     add  hl, bc                                   ; $6D1B: $09
     ld   a, [hl]                                  ; $6D1C: $7E
     and  $80                                      ; $6D1D: $E6 $80
-    ldh  [hMultiPurposeG], a                               ; $6D1F: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $6D1F: $E0 $E8
     jr   z, jr_006_6D32                           ; $6D21: $28 $0F
 
     ld   [hl], b                                  ; $6D23: $70
@@ -175,7 +175,7 @@ jr_006_6D55:
 
 jr_006_6D68:
     call AddEntitySpeedToPos_06                   ; $6D68: $CD $4E $65
-    ldh  a, [hMultiPurposeG]                               ; $6D6B: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $6D6B: $F0 $E8
     and  a                                        ; $6D6D: $A7
     jr   z, jr_006_6D76                           ; $6D6E: $28 $06
 
@@ -243,7 +243,7 @@ jr_006_6DBC:
     cp   $00                                      ; $6DC6: $FE $00
     ret  nz                                       ; $6DC8: $C0
 
-    ldh  a, [hMultiPurposeG]                               ; $6DC9: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $6DC9: $F0 $E8
     and  a                                        ; $6DCB: $A7
     jr   z, jr_006_6E04                           ; $6DCC: $28 $36
 

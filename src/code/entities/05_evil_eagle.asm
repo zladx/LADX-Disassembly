@@ -109,11 +109,11 @@ func_005_5A9C::
     ld   a, $02                                   ; $5AA5: $3E $02
 
 jr_005_5AA7:
-    ldh  [hMultiPurposeG], a                               ; $5AA7: $E0 $E8
+    ldh  [hMultiPurposeG], a                      ; $5AA7: $E0 $E8
     ld   a, ENTITY_EVIL_EAGLE                     ; $5AA9: $3E $63
     call SpawnNewEntity_trampoline                ; $5AAB: $CD $86 $3B
     push bc                                       ; $5AAE: $C5
-    ldh  a, [hMultiPurposeG]                               ; $5AAF: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5AAF: $F0 $E8
     ld   c, a                                     ; $5AB1: $4F
     ld   hl, Data_005_5A7D                        ; $5AB2: $21 $7D $5A
     add  hl, bc                                   ; $5AB5: $09
@@ -131,7 +131,7 @@ jr_005_5AA7:
     ld   hl, wEntitiesPrivateState1Table          ; $5AC8: $21 $B0 $C2
     add  hl, de                                   ; $5ACB: $19
     ld   [hl], $02                                ; $5ACC: $36 $02
-    ldh  a, [hMultiPurposeG]                               ; $5ACE: $F0 $E8
+    ldh  a, [hMultiPurposeG]                      ; $5ACE: $F0 $E8
     dec  a                                        ; $5AD0: $3D
     jr   nz, jr_005_5AA7                          ; $5AD1: $20 $D4
 
@@ -403,7 +403,7 @@ jr_005_5C41:
     call IncrementEntityState                     ; $5C4A: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $5C4D: $CD $05 $0C
     ld   [hl], $40                                ; $5C50: $36 $40
-    ld   hl, wEntitiesStateTable+14                                ; $5C52: $21 $9E $C2
+    ld   hl, wEntitiesStateTable+14               ; $5C52: $21 $9E $C2
     inc  [hl]                                     ; $5C55: $34
     inc  hl                                       ; $5C56: $23
     inc  [hl]                                     ; $5C57: $34
@@ -1434,4 +1434,4 @@ func_005_62FA::
     jp   nc, ClearEntityStatus_05                 ; $62FE: $D2 $4B $7B
 
     ret                                           ; $6301: $C9
-                                          ; $6313: $C9
+                                                  ; $6313: $C9

@@ -1346,7 +1346,7 @@ DialogOpenAnimationStart::
 
 jr_014_545A:
     ld   a, [wGameplayType]                       ; $545A: $FA $95 $DB
-    cp   $01                                      ; $545D: $FE $01
+    cp   GAMEPLAY_CREDITS                         ; $545D: $FE $01
     jr   z, jr_014_547F                           ; $545F: $28 $1E
 
     ld   a, [wObjectAffectingBGPalette]           ; $5461: $FA $CB $C3
@@ -1377,7 +1377,7 @@ jr_014_547F:
     ret  z                                        ; $548B: $C8
 
     ld   a, [wGameplayType]                       ; $548C: $FA $95 $DB
-    cp   $0B                                      ; $548F: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $548F: $FE $0B
     ret  nz                                       ; $5491: $C0
 
     ld   a, [wBGPaletteEffectAddress]             ; $5492: $FA $CC $C3

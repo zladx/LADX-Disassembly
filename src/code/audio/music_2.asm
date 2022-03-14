@@ -845,6 +845,7 @@ func_01E_4581::
     jp   nz, DontPlayAudio_1E                     ; $458B: $C2 $2B $40
 
     call func_01E_4387                            ; $458E: $CD $87 $43
+
     ld   a, $01                                   ; $4591: $3E $01
     ld   [wActiveChannelIndex], a                 ; $4593: $EA $50 $D3
     ld   hl, wD310                                ; $4596: $21 $10 $D3
@@ -1082,13 +1083,13 @@ label_01E_46BD:
     ld   hl, Data_01E_4A51                        ; $46C6: $21 $51 $4A
     add  hl, bc                                   ; $46C9: $09
 
-jr_01E_46CA:
+.loop
     ld   a, [hl+]                                 ; $46CA: $2A
     ld   [de], a                                  ; $46CB: $12
     inc  e                                        ; $46CC: $1C
     ld   a, e                                     ; $46CD: $7B
-    cp   $4B                                      ; $46CE: $FE $4B
-    jr   nz, jr_01E_46CA                          ; $46D0: $20 $F8
+    cp   LOW(wD346 + 5)                           ; $46CE: $FE $4B
+    jr   nz, .loop                                ; $46D0: $20 $F8
 
     ld   c, $20                                   ; $46D2: $0E $20
     ld   hl, wD344                                ; $46D4: $21 $44 $D3

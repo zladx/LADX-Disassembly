@@ -148,24 +148,25 @@ data_23DC::
 
 ; Open dialog animation
 ; Saves tiles under the dialog box?
-label_23E4::
+func_23E4::
     ld   a, [wDialogState]                        ; $23E4: $FA $9F $C1
     bit  7, a                                     ; $23E7: $CB $7F
-    jr   z, label_23EF                            ; $23E9: $28 $04
+    jr   z, .jr_23EF                              ; $23E9: $28 $04
     and  $7F                                      ; $23EB: $E6 $7F
     add  a, $03                                   ; $23ED: $C6 $03
+.jr_23EF
 
-label_23EF::
     ld   e, a                                     ; $23EF: $5F
     ld   d, $00                                   ; $23F0: $16 $00
     ld   hl, data_23D2 - $02                      ; $23F2: $21 $D0 $23
     add  hl, de                                   ; $23F5: $19
     ld   a, [hl]                                  ; $23F6: $7E
-    add  a, $00                                   ; $23F7: $C6 $00
+    add  a, LOW(wD500)                            ; $23F7: $C6 $00
     ld   c, a                                     ; $23F9: $4F
-    ld   a, $D5                                   ; $23FA: $3E $D5
+    ld   a, HIGH(wD500)                           ; $23FA: $3E $D5
     adc  a, $00                                   ; $23FC: $CE $00
     ld   b, a                                     ; $23FE: $47
+
     ld   hl, data_23DC                            ; $23FF: $21 $DC $23
     add  hl, de                                   ; $2402: $19
     ld   a, [wBGOriginLow]                        ; $2403: $FA $2F $C1
@@ -186,36 +187,39 @@ label_23EF::
     and  a                                        ; $241B: $A7
     jr   nz, label_2444                           ; $241C: $20 $26
 
-label_241E::
+    ; DMG version of the loop
+.loop
     ld   a, [hli]                                 ; $241E: $2A
     ld   [bc], a                                  ; $241F: $02
     inc  bc                                       ; $2420: $03
+
     ld   a, l                                     ; $2421: $7D
     and  $1F                                      ; $2422: $E6 $1F
-    jr   nz, label_242B                           ; $2424: $20 $05
+    jr   nz, .jr_242B                             ; $2424: $20 $05
     ld   a, l                                     ; $2426: $7D
     dec  a                                        ; $2427: $3D
     and  $E0                                      ; $2428: $E6 $E0
     ld   l, a                                     ; $242A: $6F
+.jr_242B
 
-label_242B::
     inc  e                                        ; $242B: $1C
     ld   a, e                                     ; $242C: $7B
     cp   $12                                      ; $242D: $FE $12
-    jr   nz, label_241E                           ; $242F: $20 $ED
+    jr   nz, .loop                                ; $242F: $20 $ED
+
     ld   e, $00                                   ; $2431: $1E $00
     ldh  a, [hMultiPurpose0]                      ; $2433: $F0 $D7
     add  a, $20                                   ; $2435: $C6 $20
     ldh  [hMultiPurpose0], a                      ; $2437: $E0 $D7
-    jr   nc, label_243C                           ; $2439: $30 $01
+    jr   nc, .jr_243C                             ; $2439: $30 $01
     inc  h                                        ; $243B: $24
+.jr_243C
 
-label_243C::
     ld   l, a                                     ; $243C: $6F
     inc  d                                        ; $243D: $14
     ld   a, d                                     ; $243E: $7A
     cp   $02                                      ; $243F: $FE $02
-    jr   nz, label_241E                           ; $2441: $20 $DB
+    jr   nz, .loop                                ; $2441: $20 $DB
     ret                                           ; $2443: $C9
 
 label_2444::
@@ -312,7 +316,7 @@ UpdateDialogState_return:
     ret                                           ; $24AE: $C9
 
 DialogClosingBeginHandler::
-    jpsb func_01C_4AA8                            ; $24AF: $3E $1C $EA $00 $21 $C3 $A8 $4A
+    jpsb AnimateDialogClosing                     ; $24AF: $3E $1C $EA $00 $21 $C3 $A8 $4A
 
 DialogLetterAnimationStartHandler::
     ld   a, BANK(func_01C_49F1)                   ; $24B7: $3E $1C

@@ -1,20 +1,20 @@
 ; Entry point for the Sfx sound system
 SoundSystemInit::
-    jp   label_01F_4009                           ; $4000: $C3 $09 $40
+    jp   _SoundSystemInit                         ; $4000: $C3 $09 $40
 
 func_01F_4003::
     jp   func_01F_7B5C                            ; $4003: $C3 $5C $7B
 
 PlaySfx::
-    jp   label_01F_401E                           ; $4006: $C3 $1E $40
+    jp   _PlaySfx                                 ; $4006: $C3 $1E $40
 
-label_01F_4009:
-    ld   hl, wMusicTranspose                      ; $4009: $21 $00 $D3
-
-jr_01F_400C:
+_SoundSystemInit::
+    ; Clear 16 bytes of memory, starting from wAudioSection
+    ld   hl, wAudioSection                        ; $4009: $21 $00 $D3
+.loop
     ld   [hl], $00                                ; $400C: $36 $00
     inc  l                                        ; $400E: $2C
-    jr   nz, jr_01F_400C                          ; $400F: $20 $FB
+    jr   nz, .loop                                ; $400F: $20 $FB
 
     ld   a, $80                                   ; $4011: $3E $80
     ldh  [rNR52], a                               ; $4013: $E0 $26
@@ -24,7 +24,7 @@ jr_01F_400C:
     ldh  [rNR51], a                               ; $401B: $E0 $25
     ret                                           ; $401D: $C9
 
-label_01F_401E:
+_PlaySfx::
     call PlayActiveJingle                         ; $401E: $CD $04 $42
     call PlayActiveWaveSfx                        ; $4021: $CD $ED $53
     call PlayActiveNoiseSfx                       ; $4024: $CD $EC $64

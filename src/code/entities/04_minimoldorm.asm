@@ -1,35 +1,35 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MinimoldormSpriteVariants::
 .variant0
-    db $70, $00
-    db $70, $20
+    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $70, $40
-    db $70, $60
+    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 .variant2
-    db $72, $00
-    db $74, $00
+    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant3
-    db $74, $20
-    db $72, $20
+    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant4
-    db $76, $00
-    db $78, $00
+    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant5
-    db $78, $20
-    db $76, $20
+    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant6
-    db $76, $40
-    db $78, $40
+    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP
 .variant7
-    db $78, $60
-    db $76, $60
+    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 .variant8
-    db $7A, $00
-    db $7A, $20
+    db $7A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $7A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant9
-    db $7C, $00
-    db $7C, $20
+    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 Data_004_5A71::
     db   $03, $03, $05, $05, $00, $00, $04, $04, $02, $02, $06, $06, $01, $01, $07, $07

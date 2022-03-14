@@ -5872,14 +5872,14 @@ jr_017_7867:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknow001SpriteVariants::
 .variant0 ; $7879
-    db $54, $04
-    db $64, $04
+    db $54, OAM_GBC_PAL_4
+    db $64, OAM_GBC_PAL_4
 .variant1 ; $787D
-    db $64, $24
-    db $54, $24
+    db $64, OAM_GBC_PAL_4 | OAM_X_FLIP
+    db $54, OAM_GBC_PAL_4 | OAM_X_FLIP
 .variant2 ; $7881
-    db $4E, $04
-    db $7E, $04
+    db $4E, OAM_GBC_PAL_4
+    db $7E, OAM_GBC_PAL_4
 
 func_017_7885::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $7885: $21 $40 $C3
@@ -5962,23 +5962,23 @@ jr_017_78DD:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown002SpriteVariants::
 .variant0
-    db $72, $00
-    db $72, $20
+    db $72, OAM_DMG_PAL_0
+    db $72, OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $74, $00
-    db $74, $20
+    db $74, OAM_DMG_PAL_0
+    db $74, OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $76, $00
-    db $76, $20
+    db $76, OAM_DMG_PAL_0
+    db $76, OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3
-    db $78, $00
-    db $78, $20
+    db $78, OAM_DMG_PAL_0
+    db $78, OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant4
-    db $7A, $00
-    db $7A, $20
+    db $7A, OAM_DMG_PAL_0
+    db $7A, OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant5
-    db $7C, $00
-    db $7C, $20
+    db $7C, OAM_DMG_PAL_0
+    db $7C, OAM_DMG_PAL_0 | OAM_X_FLIP
 
 Data_017_7907::
     db   $08, $06, $06, $06, $06, $08

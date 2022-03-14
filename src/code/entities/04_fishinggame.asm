@@ -10,8 +10,8 @@ Data_004_5F48::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 FishermanFishingGameSpriteVariants::
 .variant0
-    db $9A, $16
-    db $9C, $16
+    db $9A, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
+    db $9C, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
 
 FishermanFishingGameEntityHandler::
     ld   hl, wEntitiesPrivateState4Table          ; $5F5C: $21 $40 $C4
@@ -170,35 +170,35 @@ jr_004_6044:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown080SpriteVariants::
 .variant0
-    db $58, $00
-    db $5A, $00
+    db $58, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $5A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant1
-    db $56, $20
-    db $FF, $00
+    db $56, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $FF, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant2
-    db $5C, $00
-    db $5E, $00
+    db $5C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $5E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant3
-    db $58, $00
-    db $5A, $00
+    db $58, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $5A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant4
-    db $58, $00
-    db $5A, $00
+    db $58, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $5A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variatn5
-    db $5C, $00
-    db $5E, $00
+    db $5C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $5E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant6
-    db $5C, $00
-    db $5E, $00
+    db $5C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $5E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant7
-    db $56, $00
-    db $FF, $00
+    db $56, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $FF, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant8
-    db $5E, $20
-    db $5C, $20
+    db $5E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant9
-    db $58, $00
-    db $5A, $00
+    db $58, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $5A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 
 Data_004_6074::
     db   $06, $16, $10, $10, $38, $38, $39, $39, $16, $38
@@ -512,20 +512,20 @@ func_004_626C::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown081SpriteVariants::
 .variant0
-    db $50, $02
-    db $54, $02
+    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant1
-    db $50, $02
-    db $52, $02
+    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant2
-    db $50, $42
-    db $54, $02
+    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant3
-    db $54, $42
-    db $50, $42
+    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
 .variant4
-    db $54, $62
-    db $50, $62
+    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 
 func_004_6281::
     ld   a, c                                     ; $6281: $79
@@ -825,29 +825,29 @@ jr_004_640E:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown082SpriteVariants::
 .variant0
-    db $4C, $00
-    db $4A, $00
+    db $4C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $4A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant1
-    db $4C, $00
-    db $4E, $00
+    db $4C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $4E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant2
-    db $48, $00
-    db $4A, $00
+    db $48, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $4A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant3
-    db $48, $00
-    db $4E, $00
+    db $48, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $4E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant4
-    db $4A, $20
-    db $4C, $20
+    db $4A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $4C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant5
-    db $4E, $20
-    db $4C, $20
+    db $4E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $4C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant6
-    db $4A, $20
-    db $48, $20
+    db $4A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $48, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant7
-    db $4E, $20
-    db $48, $20
+    db $4E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $48, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 func_004_643A::
     ld   hl, wEntitiesDirectionTable              ; $643A: $21 $80 $C3
@@ -1344,29 +1344,29 @@ jr_004_66FE:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown083SpriteVariants::
 .variant0
-    db $44, $00
-    db $42, $00
+    db $44, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $42, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant1
-    db $44, $00
-    db $46, $00
+    db $44, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $46, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant2
-    db $40, $00
-    db $42, $00
+    db $40, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $42, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant3
-    db $40, $00
-    db $46, $00
+    db $40, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $46, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant4
-    db $42, $20
-    db $44, $20
+    db $42, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $44, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant5
-    db $46, $20
-    db $44, $20
+    db $46, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $44, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant6
-    db $42, $20
-    db $40, $20
+    db $42, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $40, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant7
-    db $46, $20
-    db $40, $20
+    db $46, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $40, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 func_004_6721::
     ld   hl, wEntitiesDirectionTable              ; $6721: $21 $80 $C3

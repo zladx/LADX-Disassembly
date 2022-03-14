@@ -1,44 +1,44 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Bombite1SpriteVariants::
 .variant0
-    db $7A, $20
-    db $78, $20
+    db $7A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $78, $00
-    db $7A, $00
+    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $7A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant2
-    db $7E, $00
-    db $7E, $20
+    db $7E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $7E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3
-    db $70, $00
-    db $72, $00
+    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant4
-    db $74, $00
-    db $76, $00
+    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant5
-    db $7C, $00
-    db $7C, $20
+    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Bombite2SpriteVariants::
 .variant0
-    db $6A, $20
-    db $68, $20
+    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $68, $00
-    db $6A, $00
+    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant2
-    db $6E, $00
-    db $6E, $20
+    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3
-    db $60, $00
-    db $62, $00
+    db $60, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $62, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant4
-    db $64, $00
-    db $66, $00
+    db $64, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $66, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant5
-    db $6C, $00
-    db $6C, $20
+    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 TimerBombiteEntityHandler::
     ld   de, Bombite1SpriteVariants               ; $7D1F: $11 $EF $7C
@@ -186,20 +186,20 @@ jr_004_7DE5:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 BouncingBombite1SpriteVariants::
 .variant0
-    db $7A, $22
-    db $78, $22
+    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $78, $02
-    db $7A, $02
+    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 BouncingBombite2SpriteVariants::
 .variant0
-    db $6A, $22
-    db $68, $22
+    db $6A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $68, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $68, $02
-    db $6A, $02
+    db $68, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $6A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 
 Data_004_7E05::
     db   $08, $F8, $00, $00

@@ -53,7 +53,7 @@ jr_004_7D2B:
     rla                                           ; $7D2E: $17
     rla                                           ; $7D2F: $17
     rla                                           ; $7D30: $17
-    and  OAMF_PAL1                                ; $7D31: $E6 $10
+    and  OAM_DMG_PAL_1                            ; $7D31: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $7D33: $E0 $ED
     call RenderActiveEntitySpritesPair            ; $7D35: $CD $C0 $3B
     call ReturnIfNonInteractive_04                ; $7D38: $CD $A3 $7F

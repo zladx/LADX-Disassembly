@@ -6,7 +6,7 @@ WizrobeProjectileEntityHandler::
     ldh  a, [hFrameCounter]                       ; $65F1: $F0 $E7
     rla                                           ; $65F3: $17
     rla                                           ; $65F4: $17
-    and  OAM_GB_PAL_1                             ; $65F5: $E6 $10
+    and  OAM_DMG_PAL_1                            ; $65F5: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $65F7: $E0 $ED
 
     ld   de, Data_006_65E1                        ; $65F9: $11 $E1 $65

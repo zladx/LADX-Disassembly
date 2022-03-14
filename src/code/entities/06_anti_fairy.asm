@@ -6,8 +6,8 @@ AntiFairyOAMAttributes::
     db   $5A, OAM_GBC_PAL_0
     db   $5A, OAM_GBC_PAL_0 | OAM_X_FLIP
 .variant2
-    db   $5A, OAM_GBC_PAL_4 | OAM_GB_PAL_1
-    db   $5A, OAM_GBC_PAL_4 | OAM_GB_PAL_1 | OAM_X_FLIP
+    db   $5A, OAM_GBC_PAL_4 | OAM_DMG_PAL_1
+    db   $5A, OAM_GBC_PAL_4 | OAM_DMG_PAL_1 | OAM_X_FLIP
 
 AntiFairyEntityHandler::
     ld   de, AntiFairyOAMAttributes               ; $7876: $11 $6E $78

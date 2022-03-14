@@ -633,7 +633,7 @@ label_019_4406:
     ldh  a, [hFrameCounter]                       ; $440C: $F0 $E7
     rla                                           ; $440E: $17
     rla                                           ; $440F: $17
-    and  OAM_GB_PAL_1                             ; $4410: $E6 $10
+    and  OAM_DMG_PAL_1                            ; $4410: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4412: $E0 $ED
     ldh  a, [hActiveEntityPosX]                   ; $4414: $F0 $EE
     ldh  [hMultiPurposeE], a                      ; $4416: $E0 $E5
@@ -2120,7 +2120,7 @@ label_019_4F30:
     ldh  a, [hFrameCounter]                       ; $4F30: $F0 $E7
     rla                                           ; $4F32: $17
     rla                                           ; $4F33: $17
-    and  OAM_GB_PAL_1                             ; $4F34: $E6 $10
+    and  OAM_DMG_PAL_1                            ; $4F34: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4F36: $E0 $ED
     ld   de, Data_019_4EAA                        ; $4F38: $11 $AA $4E
     call RenderActiveEntitySprite                 ; $4F3B: $CD $77 $3C
@@ -2777,7 +2777,7 @@ GiantBubbleEntityHandler::
     ldh  a, [hFrameCounter]                       ; $5390: $F0 $E7
     rla                                           ; $5392: $17
     rla                                           ; $5393: $17
-    and  OAM_GB_PAL_1                             ; $5394: $E6 $10
+    and  OAM_DMG_PAL_1                            ; $5394: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $5396: $E0 $ED
     ldh  a, [hFrameCounter]                       ; $5398: $F0 $E7
     rra                                           ; $539A: $1F

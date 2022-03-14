@@ -58,8 +58,8 @@ OAM_X_FLIP        EQU 1 << 5    ; X flip
 OAM_NO_FLIP       EQU 0         ; no flip
 OAM_BANK_0        EQU 0 << 3    ; Palette Bank 0 for GBC only
 OAM_BANK_1        EQU 1 << 3    ; Palette Bank 1 for GBC only
-OAM_GB_PAL_0      EQU 0 << 4    ; Palette 0 for GB only
-OAM_GB_PAL_1      EQU 1 << 4    ; Palette 1 for GB only
+OAM_DMG_PAL_0     EQU 0 << 4    ; Palette 0 for original GB only (gray tones), DMG = Dot Matrix Game
+OAM_DMG_PAL_1     EQU 1 << 4    ; Palette 1 for original GB only (gray tones), DMG = Dot Matrix Game
 OAM_GBC_PAL_0     EQU 0         ; Palette 0 for GBC only
 OAM_GBC_PAL_1     EQU 1         ; Palette 1 for GBC only
 OAM_GBC_PAL_2     EQU 2         ; Palette 2 for GBC only

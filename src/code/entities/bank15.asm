@@ -15,7 +15,7 @@ CrystalSwitchEntityHandler::
     ld   [hl], $FF                                ; $4328: $36 $FF
     call GetEntityTransitionCountdown             ; $432A: $CD $05 $0C
     rla                                           ; $432D: $17
-    and  OAM_GB_PAL_1                             ; $432E: $E6 $10
+    and  OAM_DMG_PAL_1                            ; $432E: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4330: $E0 $ED
     ld   de, Data_015_4320                        ; $4332: $11 $20 $43
     call RenderActiveEntitySpritesPair            ; $4335: $CD $C0 $3B
@@ -1488,7 +1488,7 @@ label_015_4DB5:
     ldh  a, [hFrameCounter]                       ; $4DBA: $F0 $E7
     rla                                           ; $4DBC: $17
     rla                                           ; $4DBD: $17
-    and  OAM_GB_PAL_1                             ; $4DBE: $E6 $10
+    and  OAM_DMG_PAL_1                            ; $4DBE: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4DC0: $E0 $ED
     ld   de, Data_015_4D9D                        ; $4DC2: $11 $9D $4D
     call RenderActiveEntitySpritesPair            ; $4DC5: $CD $C0 $3B
@@ -1596,7 +1596,7 @@ label_015_4E62:
     ldh  a, [hFrameCounter]                       ; $4E62: $F0 $E7
     rla                                           ; $4E64: $17
     rla                                           ; $4E65: $17
-    and  OAM_GB_PAL_1                             ; $4E66: $E6 $10
+    and  OAM_DMG_PAL_1                            ; $4E66: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4E68: $E0 $ED
     ld   de, Data_015_4DA9                        ; $4E6A: $11 $A9 $4D
     call RenderActiveEntitySpritesPair            ; $4E6D: $CD $C0 $3B
@@ -4134,7 +4134,7 @@ jr_015_62AC:
     ldh  a, [hFrameCounter]                       ; $62F0: $F0 $E7
     rla                                           ; $62F2: $17
     rla                                           ; $62F3: $17
-    and  OAM_GB_PAL_1                             ; $62F4: $E6 $10
+    and  OAM_DMG_PAL_1                            ; $62F4: $E6 $10
     ld   hl, hActiveEntityFlipAttribute           ; $62F6: $21 $ED $FF
     xor  [hl]                                     ; $62F9: $AE
     ld   [hl], a                                  ; $62FA: $77
@@ -5377,7 +5377,7 @@ label_015_6D6E:
     ldh  a, [hFrameCounter]                       ; $6D6E: $F0 $E7
     rla                                           ; $6D70: $17
     rla                                           ; $6D71: $17
-    and  OAM_GB_PAL_1                             ; $6D72: $E6 $10
+    and  OAM_DMG_PAL_1                            ; $6D72: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $6D74: $E0 $ED
     ld   de, Data_015_6D5E                        ; $6D76: $11 $5E $6D
     call RenderActiveEntitySpritesPair            ; $6D79: $CD $C0 $3B

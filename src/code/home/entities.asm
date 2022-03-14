@@ -513,7 +513,7 @@ RenderActiveEntitySpritesPair::
     and  a                                        ; $3C12: $A7
     jr   z, .paletteFlip0End                      ; $3C13: $28 $0C
     ldh  a, [hActiveEntityFlipAttribute]          ; $3C15: $F0 $ED
-    and  OAM_GB_PAL_1                             ; $3C17: $E6 $10
+    and  OAM_DMG_PAL_1                            ; $3C17: $E6 $10
     jr   z, .paletteFlip0End                      ; $3C19: $28 $06
     ; …invert the color palette data and set 3th bit.
     ld   a, [de]                                  ; $3C1B: $1A
@@ -572,7 +572,7 @@ RenderActiveEntitySpritesPair::
     and  a                                        ; $3C54: $A7
     jr   z, .paletteFlip1End                      ; $3C55: $28 $0C
     ldh  a, [hActiveEntityFlipAttribute]          ; $3C57: $F0 $ED
-    and  OAM_GB_PAL_1                             ; $3C59: $E6 $10
+    and  OAM_DMG_PAL_1                            ; $3C59: $E6 $10
     jr   z, .paletteFlip1End                      ; $3C5B: $28 $06
     ; …invert the color palette data.
     ld   a, [de]                                  ; $3C5D: $1A

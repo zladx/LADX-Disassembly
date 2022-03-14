@@ -2167,7 +2167,7 @@ CreateFollowingNpcEntity::
 .marinFallEnd
 
     ldh  a, [hLinkDirection]                      ; $60F7: $F0 $9E
-    ld   hl, wD1B5                                ; $60F9: $21 $B5 $D1
+    ld   hl, wLinkDirectionHistory                ; $60F9: $21 $B5 $D1
     call .decrementConsecutiveBytes               ; $60FC: $CD $18 $61
     ld   a, [wDB10]                               ; $60FF: $FA $10 $DB
     and  a                                        ; $6102: $A7

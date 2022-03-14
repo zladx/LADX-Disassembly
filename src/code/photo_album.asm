@@ -1658,7 +1658,7 @@ jr_028_4a0e::
     ret  nc                                     ; $4a18: $d0
 
 jr_028_4a19::
-    ld   a, [wD16d]                             ; $4a19: $fa $6d $d1
+    ld   a, [wD16D]                             ; $4a19: $fa $6d $d1
     cp   $ff                                    ; $4a1c: $fe $ff
     jp   z, func_028_4BA7                       ; $4a1e: $ca $a7 $4b
 

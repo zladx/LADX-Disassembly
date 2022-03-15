@@ -1724,6 +1724,13 @@ wD153::
 wD154::
   ds 1 ; D154
 
+;
+; This section is used for:
+; - Link's position history (during gameplay)
+; - Photo album display and print
+;
+UNION ; Link's position history
+
 ; History of Link's last 32 horizontal positions
 ; (Used for NPCs that follow Link)
 wLinkPositionXHistory::
@@ -1740,11 +1747,308 @@ wLinkPositionZHistory::
   ds $20 ; D195
 
 ; History of Link's directions ($10)
-wD1B5::
-  ds $10
+wLinkDirectionHistory::
+  ds $20 ; D1B5
 
-; Unused?
-ds ($D200 - $D1C5)
+NEXTU ; Photo album display and print
+
+; Unused
+ds $13
+
+wD168::
+  ds 1 ; D168
+
+wD169::
+  ds 1 ; D169
+
+wD16A::
+  ds 1 ; D16A
+
+wD16B::
+  ds 1 ; D16B
+
+wD16C::
+  ds 1 ; D16C
+
+wD16D::
+  ds 1 ; D16D
+
+wD16E::
+  ds 1 ; D16E
+
+wD16F::
+  ds 1 ; D16F
+
+wD170::
+  ds 1 ; D170
+
+wD171::
+  ds 1 ; D171
+
+wD172::
+  ds 1 ; D172
+
+wD173::
+  ds 1 ; D173
+
+wD174::
+  ds 1 ; D174
+
+wD175::
+  ds 1 ; D175
+
+wD176::
+  ds 1 ; D176
+
+wD177::
+  ds 1 ; D177
+
+wD178::
+  ds 1 ; D178
+
+wD179::
+  ds 1 ; D179
+
+wD17A::
+  ds 1 ; D17A
+
+wD17B::
+  ds 1 ; D17B
+
+wD17C::
+  ds 1 ; D17C
+
+wD17D::
+  ds 1 ; D17D
+
+wD17E::
+  ds 1 ; D17E
+
+wD17F::
+  ds 1 ; D17F
+
+wD180::
+  ds 1 ; D180
+
+wD181::
+  ds 1 ; D181
+
+wD182::
+  ds 1 ; D182
+
+; Unlabeled
+wD183::
+  ds 1 ; D183
+
+; Unlabeled
+wD184::
+  ds 1 ; D184
+
+; Unlabeled
+wD185::
+  ds 1 ; D185
+
+; Unlabeled
+wD186::
+  ds 1 ; D186
+
+; Unlabeled
+wD187::
+  ds 1 ; D187
+
+; Unlabeled
+wD188::
+  ds 1 ; D188
+
+; Unlabeled
+wD189::
+  ds 1 ; D189
+
+; Unlabeled
+wD18A::
+  ds 1 ; D18A
+
+; Unlabeled
+wD18B::
+  ds 1 ; D18B
+
+; Unlabeled
+wD18C::
+  ds 1 ; D18C
+
+; Unlabeled
+wD18D::
+  ds 1 ; D18D
+
+; Unlabeled
+wD18E::
+  ds 1 ; D18E
+
+; Unlabeled
+wD18F::
+  ds 1 ; D18F
+
+; Unlabeled
+wD190::
+  ds 1 ; D190
+
+; Unlabeled
+wD191::
+  ds 1 ; D191
+
+; Unlabeled
+wD192::
+  ds 1 ; D192
+
+; Unlabeled
+wD193::
+  ds 1 ; D193
+
+; Unlabeled
+wD194::
+  ds 1 ; D194
+
+; Unlabeled
+wD195::
+  ds 1 ; D195
+
+; Unlabeled
+wD196::
+  ds 1 ; D196
+
+; Unlabeled
+wD197::
+  ds 1 ; D197
+
+; Unlabeled
+wD198::
+  ds 1 ; D198
+
+; Unlabeled
+wD199::
+  ds 1 ; D199
+
+; Unlabeled
+wD19A::
+  ds $12 ; D19A
+
+wD1AC::
+  ds $9; ; D1AC
+
+wD1B5::
+  ds 1 ; D1B5
+
+; Unlabeled
+wD1B6::
+  ds 1 ; D1B6
+
+; Unlabeled
+wD1B7::
+  ds 1 ; D1B7
+
+; Unlabeled
+wD1B8::
+  ds 1 ; D1B8
+
+; Unlabeled
+wD1B9::
+  ds 1 ; D1B9
+
+; Unlabeled
+wD1BA::
+  ds 1 ; D1BA
+
+; Unlabeled
+wD1BB::
+  ds 1 ; D1BB
+
+; Unlabeled
+wD1BC::
+  ds 1 ; D1BC
+
+; Unlabeled
+wD1BD::
+  ds 1 ; D1BD
+
+; Unlabeled
+wD1BE::
+  ds 1 ; D1BE
+
+; Unlabeled
+wD1BF::
+  ds 1 ; D1BF
+
+; Unlabeled
+wD1C0::
+  ds 1 ; D1C0
+
+; Unlabeled
+wD1C1::
+  ds 1 ; D1C1
+
+; Unlabeled
+wD1C2::
+  ds 1 ; D1C2
+
+; Unused
+ds $2
+
+; Unlabeled
+wD1C5::
+  ds 1 ; D1C5
+
+; Unlabeled
+wD1C6::
+  ds 1 ; D1C6
+
+; Unlabeled
+wD1C7::
+  ds 1 ; D1C7
+
+; Unlabeled
+wD1C8::
+  ds 1 ; D1C8
+
+; Unlabeled
+wD1C9::
+  ds 1 ; D1C9
+
+; Unlabeled
+wD1CA::
+  ds 1 ; D1CA
+
+; Unlabeled
+wD1CB::
+  ds 1 ; D1CB
+
+; Unlabeled
+wD1CC::
+  ds 1 ; D1CC
+
+; Unlabeled
+wD1CD::
+  ds 1 ; D1CD
+
+; Unlabeled
+wD1CE::
+  ds 1 ; D1CE
+
+; Unlabeled
+wD1CF::
+  ds 1 ; D1CF
+
+; Unlabeled
+wD1D0::
+  ds 1 ; D1D0
+
+; Unlabeled
+wD1D1::
+  ds 1 ; D1D1
+
+; Unused
+ds ($D200 - $D1D2)
+
+ENDU
 
 ; Unlabeled
 wD200::

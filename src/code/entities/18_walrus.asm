@@ -597,7 +597,7 @@ label_018_59AC:
 
 func_018_59AE::
     ld   e, $10                                   ; $59AE: $1E $10
-    ld   hl, wD1B5                                ; $59B0: $21 $B5 $D1
+    ld   hl, wLinkDirectionHistory                ; $59B0: $21 $B5 $D1
 
 jr_018_59B3:
     ld   [hl+], a                                 ; $59B3: $22

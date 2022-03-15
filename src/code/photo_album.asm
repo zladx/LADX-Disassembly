@@ -3,29 +3,27 @@
 PhotoAlbumEntryPoint::
     call func_028_4033                            ; $4000: $CD $33 $40
     ld   a, [wGameplaySubtype]                    ; $4003: $FA $96 $DB
-    ; TODO: label the different states of the photo album
     JP_TABLE                                      ; $4006: $C7
-    dw JumpTable_028_40A7                       ; $4007 (jumpTable [0]) $A7 $40
-    dw JumpTable_028_40D9                       ; $4009 (jumpTable [1]) $D9 $40
-    dw JumpTable_028_408F                       ; $400B (jumpTable [2]) $8F $40
-    dw JumpTable_028_40FB                       ; $400D (jumpTable [3]) $FB $40
-    dw JumpTable_028_409B                       ; $400F (jumpTable [4]) $9B $40
-    dw JumpTable_028_4218                       ; $4011 (jumpTable [5]) $18 $42
-    dw JumpTable_028_4232                       ; $4013 (jumpTable [6]) $32 $42
-    dw JumpTable_028_408F                       ; $4015 (jumpTable [7]) $8F $40
-    dw JumpTable_028_43B2                       ; $4017 (jumpTable [8]) $B2 $43
-    dw JumpTable_028_409B                       ; $4019 (jumpTable [9]) $9B $40
-    dw JumpTable_028_4469                       ; $401B (jumpTable [10]) $69 $44
-    ; Why does this one use the owl's theme?
-    dw JumpTable_028_457E                       ; $401D (jumpTable [11]) $7E $45
-    dw JumpTable_028_4C0E                       ; $401F (jumpTable [12]) $0E $4C
-    dw JumpTable_028_4C38                       ; $4021 (jumpTable [13]) $38 $4C
-    dw JumpTable_028_4C6C                       ; $4023 (jumpTable [14]) $6C $4C
-    dw JumpTable_028_4CAD                       ; $4025 (jumpTable [15]) $AD $4C
-    dw JumpTable_028_4CCE                       ; $4027 (jumpTable [16]) $CE $4C
-    dw JumpTable_028_4D8C                       ; $4029 (jumpTable [17]) $8C $4D
-    dw JumpTable_028_408F                       ; $402B (jumpTable [18]) $8F $40
-    dw JumpTable_028_44AA                       ; $402D (jumpTable [19]) $AA $44
+._00 dw PhotoAlbumInit1Handler                   ; $4007 (jumpTable [0]) $A7 $40
+._01 dw PhotoAlbumInit2Handler                   ; $4009 (jumpTable [1]) $D9 $40
+._02 dw PhotoAlbumFadeOutHandler                 ; $400B (jumpTable [2]) $8F $40
+._03 dw PhotoAlbumInit3Handler                   ; $400D (jumpTable [3]) $FB $40
+._04 dw PhotoAlbumFadeInHandler                  ; $400F (jumpTable [4]) $9B $40
+._05 dw PhotoAlbumInit4Handler                   ; $4011 (jumpTable [5]) $18 $42
+._06 dw PhotoAlbumInteractiveHandler             ; $4013 (jumpTable [6]) $32 $42
+._07 dw PhotoAlbumFadeOutHandler                 ; $4015 (jumpTable [7]) $8F $40
+._08 dw PhotoAlbumPreparePictureHandler          ; $4017 (jumpTable [8]) $B2 $43
+._09 dw PhotoAlbumFadeInHandler                  ; $4019 (jumpTable [9]) $9B $40
+._0A dw PhotoAlbumPictureInteractiveHandler      ; $401B (jumpTable [10]) $69 $44
+._0B dw PhotoAlbumConfirmPrintingHandler         ; $401D (jumpTable [11]) $7E $45
+._0C dw PhotoAlbumStartPrint1Handler             ; $401F (jumpTable [12]) $0E $4C
+._0D dw PhotoAlbumStartPrint2Handler             ; $4021 (jumpTable [13]) $38 $4C
+._0E dw PhotoAlbumStartPrint3Handler             ; $4023 (jumpTable [14]) $6C $4C
+._0F dw PhotoAlbumStartPrint4Handler             ; $4025 (jumpTable [15]) $AD $4C
+._10 dw PhotoAlbumStartPrint5Handler             ; $4027 (jumpTable [16]) $CE $4C
+._11 dw PhotoAlbumPrintErrorHandler              ; $4029 (jumpTable [17]) $8C $4D
+._12 dw PhotoAlbumFadeOutHandler                 ; $402B (jumpTable [18]) $8F $40
+._13 dw JumpTable_028_44AA                       ; $402D (jumpTable [19]) $AA $44
 
 Data_028_402F::
     db   $40, $00
@@ -42,17 +40,17 @@ func_028_4033::
     jr   nc, .return_408E_28                      ; $403C: $30 $50
 
     ld   b, $00                                   ; $403E: $06 $00
-    ld   a, [$D1C8]                               ; $4040: $FA $C8 $D1
+    ld   a, [wD1C8]                               ; $4040: $FA $C8 $D1
     and  %00000001                                ; $4043: $E6 $01
     jr   nz, .else_4064_28                        ; $4045: $20 $1D
 
-    ld   a, [$D1CA]                               ; $4047: $FA $CA $D1
+    ld   a, [wD1CA]                               ; $4047: $FA $CA $D1
     ld   c, a                                     ; $404A: $4F
     ld   hl, Data_028_4031                        ; $404B: $21 $31 $40
     add  hl, bc                                   ; $404E: $09
-    ld   a, [$D1C9]                               ; $404F: $FA $C9 $D1
+    ld   a, [wD1C9]                               ; $404F: $FA $C9 $D1
     add  [hl]                                     ; $4052: $86
-    ld   [$D1C9], a                               ; $4053: $EA $C9 $D1
+    ld   [wD1C9], a                               ; $4053: $EA $C9 $D1
     ld   hl, Data_028_402F                        ; $4056: $21 $2F $40
     add  hl, bc                                   ; $4059: $09
     cp   [hl]                                     ; $405A: $BE
@@ -61,9 +59,9 @@ func_028_4033::
     inc  c                                        ; $405D: $0C
     ld   a, c                                     ; $405E: $79
     and  %00000001                                ; $405F: $E6 $01
-    ld   [$D1CA], a                               ; $4061: $EA $CA $D1
+    ld   [wD1CA], a                               ; $4061: $EA $CA $D1
 .else_4064_28:
-    ld   hl, $D1C8                                ; $4064: $21 $C8 $D1
+    ld   hl, wD1C8                                ; $4064: $21 $C8 $D1
     inc  [hl]                                     ; $4067: $34
     ld   a, [hl]                                  ; $4068: $7E
 
@@ -84,7 +82,7 @@ func_028_4033::
     ldi  a, [hl]                                  ; $407B: $2A
     ld   [de], a                                  ; $407C: $12
     inc  de                                       ; $407D: $13
-    ld   a, [$D1C9]                               ; $407E: $FA $C9 $D1
+    ld   a, [wD1C9]                               ; $407E: $FA $C9 $D1
     add  [hl]                                     ; $4081: $86
     ld   [de], a                                  ; $4082: $12
     inc  hl                                       ; $4083: $23
@@ -102,95 +100,95 @@ func_028_4033::
     ret                                           ; $408E: $C9
 
 
-JumpTable_028_408F:
-    call func_1A22                                ; $408F: JumpTable_028_408F $CD $22 $1A
-    ld   a, [wTransitionSequenceCounter]          ; $4092: JumpTable_028_408F $FA $6B $C1
-    cp   $04                                      ; $4095: JumpTable_028_408F $FE $04
-    ret  nz                                       ; $4097: JumpTable_028_408F $C0
+PhotoAlbumFadeOutHandler:
+    call func_1A22                                ; $408F: PhotoAlbumFadeOutHandler $CD $22 $1A
+    ld   a, [wTransitionSequenceCounter]          ; $4092: PhotoAlbumFadeOutHandler $FA $6B $C1
+    cp   $04                                      ; $4095: PhotoAlbumFadeOutHandler $FE $04
+    ret  nz                                       ; $4097: PhotoAlbumFadeOutHandler $C0
 
-    jp   func_028_44DB                            ; $4098: JumpTable_028_408F $C3 $DB $44
+    jp   PhotoAlbumIncrementState                 ; $4098: PhotoAlbumFadeOutHandler $C3 $DB $44
 
-JumpTable_028_409B:
-    call func_1A39                                ; $409B: JumpTable_028_409B $CD $39 $1A
-    ld   a, [wTransitionSequenceCounter]          ; $409E: JumpTable_028_409B $FA $6B $C1
-    cp   $04                                      ; $40A1: JumpTable_028_409B $FE $04
-    ret  nz                                       ; $40A3: JumpTable_028_409B $C0
+PhotoAlbumFadeInHandler:
+    call func_1A39                                ; $409B: PhotoAlbumFadeInHandler $CD $39 $1A
+    ld   a, [wTransitionSequenceCounter]          ; $409E: PhotoAlbumFadeInHandler $FA $6B $C1
+    cp   $04                                      ; $40A1: PhotoAlbumFadeInHandler $FE $04
+    ret  nz                                       ; $40A3: PhotoAlbumFadeInHandler $C0
 
-    jp   func_028_44DB                            ; $40A4: JumpTable_028_409B $C3 $DB $44
+    jp   PhotoAlbumIncrementState                 ; $40A4: PhotoAlbumFadeInHandler $C3 $DB $44
 
-JumpTable_028_40A7:
-    ld   bc, $6B                                  ; $40A7: JumpTable_028_40A7 $01 $6B $00
-    ld   hl, $D168                                ; $40AA: JumpTable_028_40A7 $21 $68 $D1
+PhotoAlbumInit1Handler:
+    ld   bc, $6B                                  ; $40A7: PhotoAlbumInit1Handler $01 $6B $00
+    ld   hl, wD168                                ; $40AA: PhotoAlbumInit1Handler $21 $68 $D1
 .loop_40AD_28:
-    xor  a                                        ; $40AD: JumpTable_028_40A7 $AF
-    ldi  [hl], a                                  ; $40AE: JumpTable_028_40A7 $22
-    dec  bc                                       ; $40AF: JumpTable_028_40A7 $0B
-    ld   a, c                                     ; $40B0: JumpTable_028_40A7 $79
-    or   b                                        ; $40B1: JumpTable_028_40A7 $B0
-    jr   nz, .loop_40AD_28                        ; $40B2: JumpTable_028_40A7 $20 $F9
+    xor  a                                        ; $40AD: PhotoAlbumInit1Handler $AF
+    ldi  [hl], a                                  ; $40AE: PhotoAlbumInit1Handler $22
+    dec  bc                                       ; $40AF: PhotoAlbumInit1Handler $0B
+    ld   a, c                                     ; $40B0: PhotoAlbumInit1Handler $79
+    or   b                                        ; $40B1: PhotoAlbumInit1Handler $B0
+    jr   nz, .loop_40AD_28                        ; $40B2: PhotoAlbumInit1Handler $20 $F9
 
-    ld   hl, Data_028_4241                        ; $40B4: JumpTable_028_40A7 $21 $41 $42
-    ld   a, [hl]                                  ; $40B7: JumpTable_028_40A7 $7E
-    ld   [$D1CD], a                               ; $40B8: JumpTable_028_40A7 $EA $CD $D1
-    ld   hl, Data_028_424D                        ; $40BB: JumpTable_028_40A7 $21 $4D $42
-    ld   a, [hl]                                  ; $40BE: JumpTable_028_40A7 $7E
-    ld   [$D1CE], a                               ; $40BF: JumpTable_028_40A7 $EA $CE $D1
-    ld   a, $01                                   ; $40C2: JumpTable_028_40A7 $3E $01
-    ld   [$D1D1], a                               ; $40C4: JumpTable_028_40A7 $EA $D1 $D1
-    ld   a, $03                                   ; $40C7: JumpTable_028_40A7 $3E $03
-    ldh  [hVolumeRight], a                        ; $40C9: JumpTable_028_40A7 $E0 $A9
-    ld   a, $30                                   ; $40CB: JumpTable_028_40A7 $3E $30
-    ldh  [hVolumeLeft], a                         ; $40CD: JumpTable_028_40A7 $E0 $AA
-    call func_028_47CB                            ; $40CF: JumpTable_028_40A7 $CD $CB $47
-    ld   a, $09                                   ; $40D2: JumpTable_028_40A7 $3E $09
-    ld   [rIE], a                                 ; $40D4: JumpTable_028_40A7 $E0 $FF
-    jp   func_028_44DB                            ; $40D6: JumpTable_028_40A7 $C3 $DB $44
+    ld   hl, Data_028_4241                        ; $40B4: PhotoAlbumInit1Handler $21 $41 $42
+    ld   a, [hl]                                  ; $40B7: PhotoAlbumInit1Handler $7E
+    ld   [wD1CD], a                               ; $40B8: PhotoAlbumInit1Handler $EA $CD $D1
+    ld   hl, Data_028_424D                        ; $40BB: PhotoAlbumInit1Handler $21 $4D $42
+    ld   a, [hl]                                  ; $40BE: PhotoAlbumInit1Handler $7E
+    ld   [wD1CE], a                               ; $40BF: PhotoAlbumInit1Handler $EA $CE $D1
+    ld   a, $01                                   ; $40C2: PhotoAlbumInit1Handler $3E $01
+    ld   [wD1D1], a                               ; $40C4: PhotoAlbumInit1Handler $EA $D1 $D1
+    ld   a, $03                                   ; $40C7: PhotoAlbumInit1Handler $3E $03
+    ldh  [hVolumeRight], a                        ; $40C9: PhotoAlbumInit1Handler $E0 $A9
+    ld   a, $30                                   ; $40CB: PhotoAlbumInit1Handler $3E $30
+    ldh  [hVolumeLeft], a                         ; $40CD: PhotoAlbumInit1Handler $E0 $AA
+    call func_028_47CB                            ; $40CF: PhotoAlbumInit1Handler $CD $CB $47
+    ld   a, $09                                   ; $40D2: PhotoAlbumInit1Handler $3E $09
+    ld   [rIE], a                                 ; $40D4: PhotoAlbumInit1Handler $E0 $FF
+    jp   PhotoAlbumIncrementState                 ; $40D6: PhotoAlbumInit1Handler $C3 $DB $44
 
-JumpTable_028_40D9:
-    xor  a                                        ; $40D9: JumpTable_028_40D9 $AF
-    ld   [wTransitionSequenceCounter], a          ; $40DA: JumpTable_028_40D9 $EA $6B $C1
-    call func_028_45CD                            ; $40DD: JumpTable_028_40D9 $CD $CD $45
-    jp   func_028_44DB                            ; $40E0: JumpTable_028_40D9 $C3 $DB $44
+PhotoAlbumInit2Handler:
+    xor  a                                        ; $40D9: PhotoAlbumInit2Handler $AF
+    ld   [wTransitionSequenceCounter], a          ; $40DA: PhotoAlbumInit2Handler $EA $6B $C1
+    call func_028_45CD                            ; $40DD: PhotoAlbumInit2Handler $CD $CD $45
+    jp   PhotoAlbumIncrementState                 ; $40E0: PhotoAlbumInit2Handler $C3 $DB $44
 
 Data_028_40E3::
     db   $E1, $98, $E5, $98, $EC, $98, $F0, $98 ; $40E3 |........|
     db   $61, $99, $65, $99, $6C, $99, $70, $99 ; $40EB |a.e.l.p.|
     db   $E1, $99, $E5, $99, $EC, $99, $F0, $99 ; $40F3 |........|
 
-JumpTable_028_40FB:
-    call LCDOff                                   ; $40FB: JumpTable_028_40FB $CD $CF $28
+PhotoAlbumInit3Handler:
+    call LCDOff                                   ; $40FB: PhotoAlbumInit3Handler $CD $CF $28
 
-    ld   a, BANK(PrintUI2Tiles)                   ; $40FE: JumpTable_028_40FB $3E $35
-    ld   bc, TILE_SIZE * $20                      ; $4100: JumpTable_028_40FB $01 $00 $02
-    ld   hl, PrintUI2Tiles                        ; $4103: JumpTable_028_40FB $21 $00 $57
-    ld   de, vTiles2                              ; $4106: JumpTable_028_40FB $11 $00 $90
-    call CopyData_trampoline                      ; $4109: JumpTable_028_40FB $CD $5D $0B
+    ld   a, BANK(PrintUI2Tiles)                   ; $40FE: PhotoAlbumInit3Handler $3E $35
+    ld   bc, TILE_SIZE * $20                      ; $4100: PhotoAlbumInit3Handler $01 $00 $02
+    ld   hl, PrintUI2Tiles                        ; $4103: PhotoAlbumInit3Handler $21 $00 $57
+    ld   de, vTiles2                              ; $4106: PhotoAlbumInit3Handler $11 $00 $90
+    call CopyData_trampoline                      ; $4109: PhotoAlbumInit3Handler $CD $5D $0B
 
-    ld   a, BANK(Overworld1Tiles)                 ; $410C: JumpTable_028_40FB $3E $0C
-    call AdjustBankNumberForGBC                   ; $410E: JumpTable_028_40FB $CD $0B $0B
-    ld   bc, TILE_SIZE * $4                       ; $4111: JumpTable_028_40FB $01 $40 $00
-    ld   hl, Overworld1Tiles + $8C0               ; $4114: JumpTable_028_40FB $21 $C0 $57
-    ld   de, vTiles2 + $7C0                       ; $4117: JumpTable_028_40FB $11 $C0 $97
-    call CopyData_trampoline                      ; $411A: JumpTable_028_40FB $CD $5D $0B
+    ld   a, BANK(Overworld1Tiles)                 ; $410C: PhotoAlbumInit3Handler $3E $0C
+    call AdjustBankNumberForGBC                   ; $410E: PhotoAlbumInit3Handler $CD $0B $0B
+    ld   bc, TILE_SIZE * $4                       ; $4111: PhotoAlbumInit3Handler $01 $40 $00
+    ld   hl, Overworld1Tiles + $8C0               ; $4114: PhotoAlbumInit3Handler $21 $C0 $57
+    ld   de, vTiles2 + $7C0                       ; $4117: PhotoAlbumInit3Handler $11 $C0 $97
+    call CopyData_trampoline                      ; $411A: PhotoAlbumInit3Handler $CD $5D $0B
 
-    ld   a, BANK(InventoryEquipmentItemsTiles)    ; $411D: JumpTable_028_40FB $3E $0C
-    call AdjustBankNumberForGBC                   ; $411F: JumpTable_028_40FB $CD $0B $0B
-    ld   bc, TILE_SIZE * $30                      ; $4122: JumpTable_028_40FB $01 $00 $03
-    ld   hl, InventoryEquipmentItemsTiles + $200  ; $4125: JumpTable_028_40FB $21 $00 $4A
-    ld   de, vTiles1 + $200                       ; $4128: JumpTable_028_40FB $11 $00 $8A
-    call CopyData_trampoline                      ; $412B: JumpTable_028_40FB $CD $5D $0B
+    ld   a, BANK(InventoryEquipmentItemsTiles)    ; $411D: PhotoAlbumInit3Handler $3E $0C
+    call AdjustBankNumberForGBC                   ; $411F: PhotoAlbumInit3Handler $CD $0B $0B
+    ld   bc, TILE_SIZE * $30                      ; $4122: PhotoAlbumInit3Handler $01 $00 $03
+    ld   hl, InventoryEquipmentItemsTiles + $200  ; $4125: PhotoAlbumInit3Handler $21 $00 $4A
+    ld   de, vTiles1 + $200                       ; $4128: PhotoAlbumInit3Handler $11 $00 $8A
+    call CopyData_trampoline                      ; $412B: PhotoAlbumInit3Handler $CD $5D $0B
 
-    ld   a, BANK(PhotoAlbumTiles)                 ; $412E: JumpTable_028_40FB $3E $35
-    ld   bc, TILE_SIZE * $20                      ; $4130: JumpTable_028_40FB $01 $00 $02
-    ld   hl, PhotoAlbumTiles + $300               ; $4133: JumpTable_028_40FB $21 $00 $6B
-    ld   de, vTiles1 + $500                       ; $4136: JumpTable_028_40FB $11 $00 $8D
-    call CopyData_trampoline                      ; $4139: JumpTable_028_40FB $CD $5D $0B
+    ld   a, BANK(PhotoAlbumTiles)                 ; $412E: PhotoAlbumInit3Handler $3E $35
+    ld   bc, TILE_SIZE * $20                      ; $4130: PhotoAlbumInit3Handler $01 $00 $02
+    ld   hl, PhotoAlbumTiles + $300               ; $4133: PhotoAlbumInit3Handler $21 $00 $6B
+    ld   de, vTiles1 + $500                       ; $4136: PhotoAlbumInit3Handler $11 $00 $8D
+    call CopyData_trampoline                      ; $4139: PhotoAlbumInit3Handler $CD $5D $0B
 
-    ld   a, BANK(PrintUI1Tiles)                   ; $413C: JumpTable_028_40FB $3E $35
-    ld   bc, TILE_SIZE * $50                      ; $413E: JumpTable_028_40FB $01 $00 $05
-    ld   hl, PrintUI1Tiles                        ; $4141: JumpTable_028_40FB $21 $00 $52
-    ld   de, vTiles0                              ; $4144: JumpTable_028_40FB $11 $00 $80
-    call CopyData_trampoline                      ; $4147: JumpTable_028_40FB $CD $5D $0B
+    ld   a, BANK(PrintUI1Tiles)                   ; $413C: PhotoAlbumInit3Handler $3E $35
+    ld   bc, TILE_SIZE * $50                      ; $413E: PhotoAlbumInit3Handler $01 $00 $05
+    ld   hl, PrintUI1Tiles                        ; $4141: PhotoAlbumInit3Handler $21 $00 $52
+    ld   de, vTiles0                              ; $4144: PhotoAlbumInit3Handler $11 $00 $80
+    call CopyData_trampoline                      ; $4147: PhotoAlbumInit3Handler $CD $5D $0B
 
 IF __PATCH_1__
     ld   a, BANK(PrintUI2Tiles)
@@ -200,26 +198,26 @@ IF __PATCH_1__
     call CopyData_trampoline
 ENDC
 
-    ld   a, BANK(@)                               ; $414A: JumpTable_028_40FB $3E $28
-    ldh  [hMultiPurposeF], a                      ; $414C: JumpTable_028_40FB $E0 $E6
-    ld   a, BANK(PhotoAlbumBackgroundMap)         ; $414E: JumpTable_028_40FB $3E $28
-    ld   hl, PhotoAlbumBackgroundMap              ; $4150: JumpTable_028_40FB $21 $E0 $79
-    call CopyBGMapFromBank                        ; $4153: JumpTable_028_40FB $CD $69 $0B
+    ld   a, BANK(@)                               ; $414A: PhotoAlbumInit3Handler $3E $28
+    ldh  [hMultiPurposeF], a                      ; $414C: PhotoAlbumInit3Handler $E0 $E6
+    ld   a, BANK(PhotoAlbumBackgroundMap)         ; $414E: PhotoAlbumInit3Handler $3E $28
+    ld   hl, PhotoAlbumBackgroundMap              ; $4150: PhotoAlbumInit3Handler $21 $E0 $79
+    call CopyBGMapFromBank                        ; $4153: PhotoAlbumInit3Handler $CD $69 $0B
 
-    call func_028_4185                            ; $4156: JumpTable_028_40FB $CD $85 $41
-    call func_028_41FC                            ; $4159: JumpTable_028_40FB $CD $FC $41
+    call func_028_4185                            ; $4156: PhotoAlbumInit3Handler $CD $85 $41
+    call func_028_41FC                            ; $4159: PhotoAlbumInit3Handler $CD $FC $41
 
-    ld   bc, $80                                  ; $415C: JumpTable_028_40FB $01 $80 $00
-    ld   hl, PhotoAlbumPalettes                   ; $415F: JumpTable_028_40FB $21 $B0 $7C
-    ld   de, wBGPal1                              ; $4162: JumpTable_028_40FB $11 $10 $DC
-    call func_028_4176                            ; $4165: JumpTable_028_40FB $CD $76 $41
-                                                  ; $4168: JumpTable_028_40FB $3E $C7
+    ld   bc, $80                                  ; $415C: PhotoAlbumInit3Handler $01 $80 $00
+    ld   hl, PhotoAlbumPalettes                   ; $415F: PhotoAlbumInit3Handler $21 $B0 $7C
+    ld   de, wBGPal1                              ; $4162: PhotoAlbumInit3Handler $11 $10 $DC
+    call func_028_4176                            ; $4165: PhotoAlbumInit3Handler $CD $76 $41
+                                                  ; $4168: PhotoAlbumInit3Handler $3E $C7
     ld   a, $C7
-    ld   [wLCDControl], a                         ; $416A: JumpTable_028_40FB $EA $FD $D6
-    ld   [rLCDC], a                               ; $416D: JumpTable_028_40FB $E0 $40
-    xor  a                                        ; $416F: JumpTable_028_40FB $AF
-    ld   [wTransitionSequenceCounter], a          ; $4170: JumpTable_028_40FB $EA $6B $C1
-    jp   func_028_44DB                            ; $4173: JumpTable_028_40FB $C3 $DB $44
+    ld   [wLCDControl], a                         ; $416A: PhotoAlbumInit3Handler $EA $FD $D6
+    ld   [rLCDC], a                               ; $416D: PhotoAlbumInit3Handler $E0 $40
+    xor  a                                        ; $416F: PhotoAlbumInit3Handler $AF
+    ld   [wTransitionSequenceCounter], a          ; $4170: PhotoAlbumInit3Handler $EA $6B $C1
+    jp   PhotoAlbumIncrementState                 ; $4173: PhotoAlbumInit3Handler $C3 $DB $44
 
 func_028_4176::
     ldh  a, [hIsGBC]                              ; $4176: $F0 $FE
@@ -322,7 +320,7 @@ func_028_4185::
 
 
 func_028_41FC::
-    ld   a, [$D1D1]                               ; $41FC: $FA $D1 $D1
+    ld   a, [wD1D1]                               ; $41FC: $FA $D1 $D1
     and  a                                        ; $41FF: $A7
     ret  z                                        ; $4200: $C8
 
@@ -344,30 +342,31 @@ func_028_41FC::
     ld   l, a                                     ; $4215: $6F
     jr   .loop_4206_28                            ; $4216: $18 $EE
 
-JumpTable_028_4218:
-    ld   a, [$D1D1]                               ; $4218: JumpTable_028_4218 $FA $D1 $D1
-    and  a                                        ; $421B: JumpTable_028_4218 $A7
-    jr   z, .else_422F_28                         ; $421C: JumpTable_028_4218 $28 $11
+PhotoAlbumInit4Handler:
+    ld   a, [wD1D1]                               ; $4218: PhotoAlbumInit4Handler $FA $D1 $D1
+    and  a                                        ; $421B: PhotoAlbumInit4Handler $A7
+    jr   z, .else_422F_28                         ; $421C: PhotoAlbumInit4Handler $28 $11
 
-    xor  a                                        ; $421E: JumpTable_028_4218 $AF
-    ld   [$D1D1], a                               ; $421F: JumpTable_028_4218 $EA $D1 $D1
-    ld   a, $2C                                   ; $4222: JumpTable_028_4218 $3E $2C
-    ld   [wDialogIndex], a                        ; $4224: JumpTable_028_4218 $EA $73 $C1
-    call OpenDialogInTable2                       ; $4227: JumpTable_028_4218 $CD $7C $23
-    ld   a, $01                                   ; $422A: JumpTable_028_4218 $3E $01
-    ld   [wDialogState], a                        ; $422C: JumpTable_028_4218 $EA $9F $C1
+    xor  a                                        ; $421E: PhotoAlbumInit4Handler $AF
+    ld   [wD1D1], a                               ; $421F: PhotoAlbumInit4Handler $EA $D1 $D1
+    ld   a, $2C                                   ; $4222: PhotoAlbumInit4Handler $3E $2C
+    ld   [wDialogIndex], a                        ; $4224: PhotoAlbumInit4Handler $EA $73 $C1
+    call OpenDialogInTable2                       ; $4227: PhotoAlbumInit4Handler $CD $7C $23
+    ld   a, $01                                   ; $422A: PhotoAlbumInit4Handler $3E $01
+    ld   [wDialogState], a                        ; $422C: PhotoAlbumInit4Handler $EA $9F $C1
 .else_422F_28:
-    jp   func_028_44DB                            ; $422F: JumpTable_028_4218 $C3 $DB $44
+    jp   PhotoAlbumIncrementState                 ; $422F: PhotoAlbumInit4Handler $C3 $DB $44
 
-JumpTable_028_4232:
-    ld   a, [wDialogState]                        ; $4232: JumpTable_028_4232 $FA $9F $C1
-    and  a                                        ; $4235: JumpTable_028_4232 $A7
-    ret  nz                                       ; $4236: JumpTable_028_4232 $C0
+; Moving the cursor to select a picture
+PhotoAlbumInteractiveHandler:
+    ld   a, [wDialogState]                        ; $4232: PhotoAlbumInteractiveHandler $FA $9F $C1
+    and  a                                        ; $4235: PhotoAlbumInteractiveHandler $A7
+    ret  nz                                       ; $4236: PhotoAlbumInteractiveHandler $C0
 
-    call func_028_427D                            ; $4237: JumpTable_028_4232 $CD $7D $42
-    call func_028_433A                            ; $423A: JumpTable_028_4232 $CD $3A $43
-    call func_028_4385                            ; $423D: JumpTable_028_4232 $CD $85 $43
-    ret                                           ; $4240: JumpTable_028_4232 $C9
+    call func_028_427D                            ; $4237: PhotoAlbumInteractiveHandler $CD $7D $42
+    call func_028_433A                            ; $423A: PhotoAlbumInteractiveHandler $CD $3A $43
+    call func_028_4385                            ; $423D: PhotoAlbumInteractiveHandler $CD $85 $43
+    ret                                           ; $4240: PhotoAlbumInteractiveHandler $C9
 
 Data_028_4241::
     db   $20, $40, $78, $98, $20, $40, $78, $98 ; $4241 | @x. @x.|
@@ -390,7 +389,7 @@ Data_028_4271::
     db   $02, $03, $08, $09, $04, $05, $0A, $0B   ; $4275
 
 func_028_427D::
-    ld   a, [$D1CF]                               ; $427D: $FA $CF $D1
+    ld   a, [wD1CF]                               ; $427D: $FA $CF $D1
     and  a                                        ; $4280: $A7
     ret  nz                                       ; $4281: $C0
     ; return if nothing is pressed
@@ -414,7 +413,7 @@ func_028_427D::
     bit  1, a                                     ; $4298: $CB $4F
     jr   z, .else_42A9_28                         ; $429A: $28 $0D
 
-    ld   a, [$D1CC]                               ; $429C: $FA $CC $D1
+    ld   a, [wD1CC]                               ; $429C: $FA $CC $D1
     and  a                                        ; $429F: $A7
     jr   z, .else_42A5_28                         ; $42A0: $28 $03
 
@@ -429,7 +428,7 @@ func_028_427D::
     bit  0, a                                     ; $42A9: $CB $47
     jr   z, .else_42BA_28                         ; $42AB: $28 $0D
 
-    ld   a, [$D1CC]                               ; $42AD: $FA $CC $D1
+    ld   a, [wD1CC]                               ; $42AD: $FA $CC $D1
     cp   $0B                                      ; $42B0: $FE $0B
     jr   z, .else_42B7_28                         ; $42B2: $28 $03
 
@@ -444,7 +443,7 @@ func_028_427D::
     bit  2, a                                     ; $42BA: $CB $57
     jr   z, .else_42CD_28                         ; $42BC: $28 $0F
 
-    ld   a, [$D1CC]                               ; $42BE: $FA $CC $D1
+    ld   a, [wD1CC]                               ; $42BE: $FA $CC $D1
     cp   $04                                      ; $42C1: $FE $04
     jr   c, .else_42C9_28                         ; $42C3: $38 $04
 
@@ -459,7 +458,7 @@ func_028_427D::
     bit  3, a                                     ; $42CD: $CB $5F
     jr   z, .else_42FB_28                         ; $42CF: $28 $2A
 
-    ld   a, [$D1CC]                               ; $42D1: $FA $CC $D1
+    ld   a, [wD1CC]                               ; $42D1: $FA $CC $D1
     cp   $08                                      ; $42D4: $FE $08
     jr   nc, .else_42DC_28                        ; $42D6: $30 $04
 
@@ -471,17 +470,17 @@ func_028_427D::
     jr   .func_028_42E0                           ; $42DE: $18 $00
 
 .func_028_42E0::
-    ld   [$D1CC], a                               ; $42E0: $EA $CC $D1
+    ld   [wD1CC], a                               ; $42E0: $EA $CC $D1
     ld   d, $00                                   ; $42E3: $16 $00
     ld   e, a                                     ; $42E5: $5F
     ld   hl, Data_028_4241                        ; $42E6: $21 $41 $42
     add  hl, de                                   ; $42E9: $19
     ld   a, [hl]                                  ; $42EA: $7E
-    ld   [$D1CD], a                               ; $42EB: $EA $CD $D1
+    ld   [wD1CD], a                               ; $42EB: $EA $CD $D1
     ld   hl, Data_028_424D                        ; $42EE: $21 $4D $42
     add  hl, de                                   ; $42F1: $19
     ld   a, [hl]                                  ; $42F2: $7E
-    ld   [$D1CE], a                               ; $42F3: $EA $CE $D1
+    ld   [wD1CE], a                               ; $42F3: $EA $CE $D1
     ld   a, JINGLE_MOVE_SELECTION                 ; $42F6: $3E $0A
     ldh  [hJingle], a                             ; $42F8: $E0 $F2
     ret                                           ; $42FA: $C9
@@ -493,7 +492,7 @@ func_028_427D::
     ret  z                                        ; $42FF: $C8
 
     ld   b, $00                                   ; $4300: $06 $00
-    ld   a, [$D1CC]                               ; $4302: $FA $CC $D1
+    ld   a, [wD1CC]                               ; $4302: $FA $CC $D1
     ld   c, a                                     ; $4305: $4F
     ld   d, a                                     ; $4306: $57
     ld   hl, Data_028_4265                        ; $4307: $21 $65 $42
@@ -521,18 +520,18 @@ func_028_427D::
     add  hl, bc                                   ; $4329: $09
     ld   a, [hl]                                  ; $432A: $7E
 .func_028_432B::
-    ld   [$D1CB], a                               ; $432B: $EA $CB $D1
-    ld   hl, $D1CF                                ; $432E: $21 $CF $D1
+    ld   [wD1CB], a                               ; $432B: $EA $CB $D1
+    ld   hl, wD1CF                                ; $432E: $21 $CF $D1
     inc  [hl]                                     ; $4331: $34
     xor  a                                        ; $4332: $AF
-    ld   [$D1D0], a                               ; $4333: $EA $D0 $D1
+    ld   [wD1D0], a                               ; $4333: $EA $D0 $D1
     ret                                           ; $4336: $C9
 
 Data_028_4337::
     db   $0A, $08, $08                          ; $4337 |...|
 
 func_028_433A::
-    ld   a, [$D1CF]                               ; $433A: $FA $CF $D1
+    ld   a, [wD1CF]                               ; $433A: $FA $CF $D1
     and  a                                        ; $433D: $A7
     ret  z                                        ; $433E: $C8
 
@@ -540,32 +539,32 @@ func_028_433A::
     ld   e, a                                     ; $4341: $5F
     ld   hl, Data_028_4337                        ; $4342: $21 $37 $43
     add  hl, de                                   ; $4345: $19
-    ld   a, [$D1D0]                               ; $4346: $FA $D0 $D1
+    ld   a, [wD1D0]                               ; $4346: $FA $D0 $D1
     cp   [hl]                                     ; $4349: $BE
     jr   z, .else_4351_28                         ; $434A: $28 $05
 
     inc  a                                        ; $434C: $3C
-    ld   [$D1D0], a                               ; $434D: $EA $D0 $D1
+    ld   [wD1D0], a                               ; $434D: $EA $D0 $D1
     ret                                           ; $4350: $C9
 
 
 .else_4351_28:
     xor  a                                        ; $4351: $AF
-    ld   [$D1D0], a                               ; $4352: $EA $D0 $D1
-    ld   hl, $D1CF                                ; $4355: $21 $CF $D1
+    ld   [wD1D0], a                               ; $4352: $EA $D0 $D1
+    ld   hl, wD1CF                                ; $4355: $21 $CF $D1
     inc  [hl]                                     ; $4358: $34
     ld   a, [hl]                                  ; $4359: $7E
     cp   $03                                      ; $435A: $FE $03
     ret  nz                                       ; $435C: $C0
 
     xor  a                                        ; $435D: $AF
-    ld   [$D1CF], a                               ; $435E: $EA $CF $D1
+    ld   [wD1CF], a                               ; $435E: $EA $CF $D1
     ld   [wTransitionSequenceCounter], a          ; $4361: $EA $6B $C1
-    ld   a, [$D1CB]                               ; $4364: $FA $CB $D1
+    ld   a, [wD1CB]                               ; $4364: $FA $CB $D1
     cp   $FF                                      ; $4367: $FE $FF
     ret  z                                        ; $4369: $C8
 
-    jp   func_028_44DB                            ; $436A: $C3 $DB $44
+    jp   PhotoAlbumIncrementState                 ; $436A: $C3 $DB $44
 
 Data_028_436D::
     db   $00, $00, $40, $04, $00, $08, $42, $04 ; $436D |..@...B.|
@@ -573,7 +572,7 @@ Data_028_436D::
     db   $03, $02, $40, $04, $03, $0A, $42, $04 ; $437D |..@...B.|
 
 func_028_4385::
-    ld   a, [$D1CF]                               ; $4385: $FA $CF $D1
+    ld   a, [wD1CF]                               ; $4385: $FA $CF $D1
     sla  a                                        ; $4388: $CB $27
     sla  a                                        ; $438A: $CB $27
     sla  a                                        ; $438C: $CB $27
@@ -584,12 +583,12 @@ func_028_4385::
     ld   de, wOAMBuffer                           ; $4395: $11 $00 $C0
     ld   c, $02                                   ; $4398: $0E $02
 .loop_439A_28:
-    ld   a, [$D1CE]                               ; $439A: $FA $CE $D1
+    ld   a, [wD1CE]                               ; $439A: $FA $CE $D1
     add  [hl]                                     ; $439D: $86
     ld   [de], a                                  ; $439E: $12
     inc  de                                       ; $439F: $13
     inc  hl                                       ; $43A0: $23
-    ld   a, [$D1CD]                               ; $43A1: $FA $CD $D1
+    ld   a, [wD1CD]                               ; $43A1: $FA $CD $D1
     add  [hl]                                     ; $43A4: $86
     ld   [de], a                                  ; $43A5: $12
     inc  de                                       ; $43A6: $13
@@ -605,22 +604,22 @@ func_028_4385::
 
     ret                                           ; $43B1: $C9
 
-
-JumpTable_028_43B2:
-    call LCDOff                                   ; $43B2: JumpTable_028_43B2 $CD $CF $28
-    call func_028_43CC                            ; $43B5: JumpTable_028_43B2 $CD $CC $43
-    call func_028_4411                            ; $43B8: JumpTable_028_43B2 $CD $11 $44
-    call func_028_442C                            ; $43BB: JumpTable_028_43B2 $CD $2C $44
-                                                  ; $43BE: JumpTable_028_43B2 $3E $C7
+; Prepare a concrete photo to be displayed
+PhotoAlbumPreparePictureHandler:
+    call LCDOff                                   ; $43B2: PhotoAlbumPreparePictureHandler $CD $CF $28
+    call func_028_43CC                            ; $43B5: PhotoAlbumPreparePictureHandler $CD $CC $43
+    call func_028_4411                            ; $43B8: PhotoAlbumPreparePictureHandler $CD $11 $44
+    call func_028_442C                            ; $43BB: PhotoAlbumPreparePictureHandler $CD $2C $44
+                                                  ; $43BE: PhotoAlbumPreparePictureHandler $3E $C7
     ld   a, $C7
-    ld   [wLCDControl], a                         ; $43C0: JumpTable_028_43B2 $EA $FD $D6
-    ld   [rLCDC], a                               ; $43C3: JumpTable_028_43B2 $E0 $40
-    xor  a                                        ; $43C5: JumpTable_028_43B2 $AF
-    ld   [wTransitionSequenceCounter], a          ; $43C6: JumpTable_028_43B2 $EA $6B $C1
-    jp   func_028_44DB                            ; $43C9: JumpTable_028_43B2 $C3 $DB $44
+    ld   [wLCDControl], a                         ; $43C0: PhotoAlbumPreparePictureHandler $EA $FD $D6
+    ld   [rLCDC], a                               ; $43C3: PhotoAlbumPreparePictureHandler $E0 $40
+    xor  a                                        ; $43C5: PhotoAlbumPreparePictureHandler $AF
+    ld   [wTransitionSequenceCounter], a          ; $43C6: PhotoAlbumPreparePictureHandler $EA $6B $C1
+    jp   PhotoAlbumIncrementState                 ; $43C9: PhotoAlbumPreparePictureHandler $C3 $DB $44
 
 func_028_43CC::
-    ld   a, [$D1CB]                               ; $43CC: $FA $CB $D1
+    ld   a, [wD1CB]                               ; $43CC: $FA $CB $D1
     and  a                                        ; $43CF: $A7
     jr   nz, .else_43DB_28                        ; $43D0: $20 $09
 
@@ -640,10 +639,10 @@ func_028_43CC::
     push de                                       ; $43E6: $D5
     ldi  a, [hl]                                  ; $43E7: $2A
     ld   c, a                                     ; $43E8: $4F
-    ld   [$D168], a                               ; $43E9: $EA $68 $D1
+    ld   [wD168], a                               ; $43E9: $EA $68 $D1
     ldi  a, [hl]                                  ; $43EC: $2A
     ld   b, a                                     ; $43ED: $47
-    ld   [$D169], a                               ; $43EE: $EA $69 $D1
+    ld   [wD169], a                               ; $43EE: $EA $69 $D1
     ld   a, [hl]                                  ; $43F1: $7E
     ld   [w2_D16A], a                             ; $43F2: $EA $6A $D1
     ld   h, b                                     ; $43F5: $60
@@ -720,53 +719,54 @@ ELSE
 ENDC
 .end
 
-JumpTable_028_4469:
-    ldh  a, [hJoypadState]                        ; $4469: JumpTable_028_4469 $F0 $CC
-    bit  J_BIT_B, a                               ; $446B: JumpTable_028_4469 $CB $6F
-    jr   z, .else_447D_28                         ; $446D: JumpTable_028_4469 $28 $0E
+; When a picture is displayed, display the "A Print / B Cancel" buttons
+PhotoAlbumPictureInteractiveHandler:
+    ldh  a, [hJoypadState]                        ; $4469: PhotoAlbumPictureInteractiveHandler $F0 $CC
+    bit  J_BIT_B, a                               ; $446B: PhotoAlbumPictureInteractiveHandler $CB $6F
+    jr   z, .else_447D_28                         ; $446D: PhotoAlbumPictureInteractiveHandler $28 $0E
 
-    ld   a, JINGLE_VALIDATE                       ; $446F: JumpTable_028_4469 $3E $13
-    ldh  [hJingle], a                             ; $4471: JumpTable_028_4469 $E0 $F2
-    ld   a, $01                                   ; $4473: JumpTable_028_4469 $3E $01
-    ld   [wGameplaySubtype], a                    ; $4475: JumpTable_028_4469 $EA $96 $DB
-    xor  a                                        ; $4478: JumpTable_028_4469 $AF
-    ld   [wTransitionSequenceCounter], a          ; $4479: JumpTable_028_4469 $EA $6B $C1
-    ret                                           ; $447C: JumpTable_028_4469 $C9
+    ld   a, JINGLE_VALIDATE                       ; $446F: PhotoAlbumPictureInteractiveHandler $3E $13
+    ldh  [hJingle], a                             ; $4471: PhotoAlbumPictureInteractiveHandler $E0 $F2
+    ld   a, $01                                   ; $4473: PhotoAlbumPictureInteractiveHandler $3E $01
+    ld   [wGameplaySubtype], a                    ; $4475: PhotoAlbumPictureInteractiveHandler $EA $96 $DB
+    xor  a                                        ; $4478: PhotoAlbumPictureInteractiveHandler $AF
+    ld   [wTransitionSequenceCounter], a          ; $4479: PhotoAlbumPictureInteractiveHandler $EA $6B $C1
+    ret                                           ; $447C: PhotoAlbumPictureInteractiveHandler $C9
 
 
 .else_447D_28:
-    ldh  a, [hJoypadState]                        ; $447D: JumpTable_028_4469 $F0 $CC
-    bit  J_BIT_A, a                               ; $447F: JumpTable_028_4469 $CB $67
-    jr   z, .else_4492_28                         ; $4481: JumpTable_028_4469 $28 $0F
+    ldh  a, [hJoypadState]                        ; $447D: PhotoAlbumPictureInteractiveHandler $F0 $CC
+    bit  J_BIT_A, a                               ; $447F: PhotoAlbumPictureInteractiveHandler $CB $67
+    jr   z, .else_4492_28                         ; $4481: PhotoAlbumPictureInteractiveHandler $28 $0F
 
-    ld   a, JINGLE_VALIDATE                       ; $4483: JumpTable_028_4469 $3E $13
-    ldh  [hJingle], a                             ; $4485: JumpTable_028_4469 $E0 $F2
-    xor  a                                        ; $4487: JumpTable_028_4469 $AF
-    ld   [$D181], a                               ; $4488: JumpTable_028_4469 $EA $81 $D1
-    ld   a, $10                                   ; $448B: JumpTable_028_4469 $3E $10
-    ldh  [hFrameCounter], a                       ; $448D: JumpTable_028_4469 $E0 $E7
-    call func_028_44DB                            ; $448F: JumpTable_028_4469 $CD $DB $44
+    ld   a, JINGLE_VALIDATE                       ; $4483: PhotoAlbumPictureInteractiveHandler $3E $13
+    ldh  [hJingle], a                             ; $4485: PhotoAlbumPictureInteractiveHandler $E0 $F2
+    xor  a                                        ; $4487: PhotoAlbumPictureInteractiveHandler $AF
+    ld   [wD181], a                               ; $4488: PhotoAlbumPictureInteractiveHandler $EA $81 $D1
+    ld   a, $10                                   ; $448B: PhotoAlbumPictureInteractiveHandler $3E $10
+    ldh  [hFrameCounter], a                       ; $448D: PhotoAlbumPictureInteractiveHandler $E0 $E7
+    call PhotoAlbumIncrementState                 ; $448F: PhotoAlbumPictureInteractiveHandler $CD $DB $44
 .else_4492_28:
-    ld   hl, Data_028_4439                        ; $4492: JumpTable_028_4469 $21 $39 $44
-    ld   de, wOAMBuffer                           ; $4495: JumpTable_028_4469 $11 $00 $C0
-    ld   c, (Data_028_4439.end - Data_028_4439) / 4; $4498: JumpTable_028_4469 $0E $0C
+    ld   hl, Data_028_4439                        ; $4492: PhotoAlbumPictureInteractiveHandler $21 $39 $44
+    ld   de, wOAMBuffer                           ; $4495: PhotoAlbumPictureInteractiveHandler $11 $00 $C0
+    ld   c, (Data_028_4439.end - Data_028_4439) / 4; $4498: PhotoAlbumPictureInteractiveHandler $0E $0C
 .loop_449A_28:
-    ldi  a, [hl]                                  ; $449A: JumpTable_028_4469 $2A
-    ld   [de], a                                  ; $449B: JumpTable_028_4469 $12
-    inc  de                                       ; $449C: JumpTable_028_4469 $13
-    ldi  a, [hl]                                  ; $449D: JumpTable_028_4469 $2A
-    ld   [de], a                                  ; $449E: JumpTable_028_4469 $12
-    inc  de                                       ; $449F: JumpTable_028_4469 $13
-    ldi  a, [hl]                                  ; $44A0: JumpTable_028_4469 $2A
-    ld   [de], a                                  ; $44A1: JumpTable_028_4469 $12
-    inc  de                                       ; $44A2: JumpTable_028_4469 $13
-    ldi  a, [hl]                                  ; $44A3: JumpTable_028_4469 $2A
-    ld   [de], a                                  ; $44A4: JumpTable_028_4469 $12
-    inc  de                                       ; $44A5: JumpTable_028_4469 $13
-    dec  c                                        ; $44A6: JumpTable_028_4469 $0D
-    jr   nz, .loop_449A_28                        ; $44A7: JumpTable_028_4469 $20 $F1
+    ldi  a, [hl]                                  ; $449A: PhotoAlbumPictureInteractiveHandler $2A
+    ld   [de], a                                  ; $449B: PhotoAlbumPictureInteractiveHandler $12
+    inc  de                                       ; $449C: PhotoAlbumPictureInteractiveHandler $13
+    ldi  a, [hl]                                  ; $449D: PhotoAlbumPictureInteractiveHandler $2A
+    ld   [de], a                                  ; $449E: PhotoAlbumPictureInteractiveHandler $12
+    inc  de                                       ; $449F: PhotoAlbumPictureInteractiveHandler $13
+    ldi  a, [hl]                                  ; $44A0: PhotoAlbumPictureInteractiveHandler $2A
+    ld   [de], a                                  ; $44A1: PhotoAlbumPictureInteractiveHandler $12
+    inc  de                                       ; $44A2: PhotoAlbumPictureInteractiveHandler $13
+    ldi  a, [hl]                                  ; $44A3: PhotoAlbumPictureInteractiveHandler $2A
+    ld   [de], a                                  ; $44A4: PhotoAlbumPictureInteractiveHandler $12
+    inc  de                                       ; $44A5: PhotoAlbumPictureInteractiveHandler $13
+    dec  c                                        ; $44A6: PhotoAlbumPictureInteractiveHandler $0D
+    jr   nz, .loop_449A_28                        ; $44A7: PhotoAlbumPictureInteractiveHandler $20 $F1
 
-    ret                                           ; $44A9: JumpTable_028_4469 $C9
+    ret                                           ; $44A9: PhotoAlbumPictureInteractiveHandler $C9
 
 
 JumpTable_028_44AA:
@@ -792,7 +792,7 @@ JumpTable_028_44AA:
     ld   [rLCDC], a                               ; $44D8: JumpTable_028_44AA $E0 $40
     ret                                           ; $44DA: JumpTable_028_44AA $C9
 
-func_028_44DB::
+PhotoAlbumIncrementState::
     ld   hl, wGameplaySubtype                     ; $44DB: $21 $96 $DB
     inc  [hl]                                     ; $44DE: $34
     ret                                           ; $44DF: $C9
@@ -879,87 +879,88 @@ ELSE
 ENDC
 .end
 
-JumpTable_028_457E:
-    ldh  a, [hJoypadState]                        ; $457E: JumpTable_028_457E $F0 $CC
-    bit  J_BIT_A, a                               ; $4580: JumpTable_028_457E $CB $67
-    jr   z, .else_459A_28                         ; $4582: JumpTable_028_457E $28 $16
+; Display the "Print OK?" dialog
+PhotoAlbumConfirmPrintingHandler:
+    ldh  a, [hJoypadState]                        ; $457E: PhotoAlbumConfirmPrintingHandler $F0 $CC
+    bit  J_BIT_A, a                               ; $4580: PhotoAlbumConfirmPrintingHandler $CB $67
+    jr   z, .else_459A_28                         ; $4582: PhotoAlbumConfirmPrintingHandler $28 $16
 
-    xor  a                                        ; $4584: JumpTable_028_457E $AF
-    ld   [$D1C8], a                               ; $4585: JumpTable_028_457E $EA $C8 $D1
-    ld   [$D1CA], a                               ; $4588: JumpTable_028_457E $EA $CA $D1
-    ld   a, $20                                   ; $458B: JumpTable_028_457E $3E $20
-    ld   [$D1C9], a                               ; $458D: JumpTable_028_457E $EA $C9 $D1
+    xor  a                                        ; $4584: PhotoAlbumConfirmPrintingHandler $AF
+    ld   [wD1C8], a                               ; $4585: PhotoAlbumConfirmPrintingHandler $EA $C8 $D1
+    ld   [wD1CA], a                               ; $4588: PhotoAlbumConfirmPrintingHandler $EA $CA $D1
+    ld   a, $20                                   ; $458B: PhotoAlbumConfirmPrintingHandler $3E $20
+    ld   [wD1C9], a                               ; $458D: PhotoAlbumConfirmPrintingHandler $EA $C9 $D1
     ; Why is the owl's music played in the photo album code?
-    ld   a, MUSIC_OWL                             ; $4590: JumpTable_028_457E $3E $22
-    ld   [wMusicTrackToPlay], a                   ; $4592: JumpTable_028_457E $EA $68 $D3
-    call func_028_44DB                            ; $4595: JumpTable_028_457E $CD $DB $44
-    jr   .func_028_45A3                           ; $4598: JumpTable_028_457E $18 $09
+    ld   a, MUSIC_OWL                             ; $4590: PhotoAlbumConfirmPrintingHandler $3E $22
+    ld   [wMusicTrackToPlay], a                   ; $4592: PhotoAlbumConfirmPrintingHandler $EA $68 $D3
+    call PhotoAlbumIncrementState                 ; $4595: PhotoAlbumConfirmPrintingHandler $CD $DB $44
+    jr   .func_028_45A3                           ; $4598: PhotoAlbumConfirmPrintingHandler $18 $09
 
 .else_459A_28:
-    bit  J_BIT_B, a                               ; $459A: JumpTable_028_457E $CB $6F
-    jr   z, .else_45A7_28                         ; $459C: JumpTable_028_457E $28 $09
+    bit  J_BIT_B, a                               ; $459A: PhotoAlbumConfirmPrintingHandler $CB $6F
+    jr   z, .else_45A7_28                         ; $459C: PhotoAlbumConfirmPrintingHandler $28 $09
 
-    ld   a, $0A                                   ; $459E: JumpTable_028_457E $3E $0A
-    ld   [wGameplaySubtype], a                    ; $45A0: JumpTable_028_457E $EA $96 $DB
+    ld   a, $0A                                   ; $459E: PhotoAlbumConfirmPrintingHandler $3E $0A
+    ld   [wGameplaySubtype], a                    ; $45A0: PhotoAlbumConfirmPrintingHandler $EA $96 $DB
 .func_028_45A3::
-    ld   a, JINGLE_VALIDATE                       ; $45A3: JumpTable_028_457E $3E $13
-    ldh  [hJingle], a                             ; $45A5: JumpTable_028_457E $E0 $F2
+    ld   a, JINGLE_VALIDATE                       ; $45A3: PhotoAlbumConfirmPrintingHandler $3E $13
+    ldh  [hJingle], a                             ; $45A5: PhotoAlbumConfirmPrintingHandler $E0 $F2
 .else_45A7_28:
-    ld   de, wOAMBuffer                           ; $45A7: JumpTable_028_457E $11 $00 $C0
-    ld   hl, Data_028_452E                        ; $45AA: JumpTable_028_457E $21 $2E $45
+    ld   de, wOAMBuffer                           ; $45A7: PhotoAlbumConfirmPrintingHandler $11 $00 $C0
+    ld   hl, Data_028_452E                        ; $45AA: PhotoAlbumConfirmPrintingHandler $21 $2E $45
     ; Render both Data_028_454E and Data_028_452E
     ld   c, (Data_028_454E.end - Data_028_452E) / 4
-    ldh  a, [hFrameCounter]                       ; $45AF: JumpTable_028_457E $F0 $E7
-    inc  a                                        ; $45B1: JumpTable_028_457E $3C
-    ldh  [hFrameCounter], a                       ; $45B2: JumpTable_028_457E $E0 $E7
-    and  %00110000                                ; $45B4: JumpTable_028_457E $E6 $30
-    jr   nz, .else_45BD_28                        ; $45B6: JumpTable_028_457E $20 $05
+    ldh  a, [hFrameCounter]                       ; $45AF: PhotoAlbumConfirmPrintingHandler $F0 $E7
+    inc  a                                        ; $45B1: PhotoAlbumConfirmPrintingHandler $3C
+    ldh  [hFrameCounter], a                       ; $45B2: PhotoAlbumConfirmPrintingHandler $E0 $E7
+    and  %00110000                                ; $45B4: PhotoAlbumConfirmPrintingHandler $E6 $30
+    jr   nz, .else_45BD_28                        ; $45B6: PhotoAlbumConfirmPrintingHandler $20 $05
 
-    ld   hl, Data_028_454E                        ; $45B8: JumpTable_028_457E $21 $4E $45
-    ld   c, (Data_028_454E.end - Data_028_454E) / 4; $45BB: JumpTable_028_457E $0E $0C
+    ld   hl, Data_028_454E                        ; $45B8: PhotoAlbumConfirmPrintingHandler $21 $4E $45
+    ld   c, (Data_028_454E.end - Data_028_454E) / 4; $45BB: PhotoAlbumConfirmPrintingHandler $0E $0C
 .else_45BD_28:
-    ldi  a, [hl]                                  ; $45BD: JumpTable_028_457E $2A
-    ld   [de], a                                  ; $45BE: JumpTable_028_457E $12
-    inc  de                                       ; $45BF: JumpTable_028_457E $13
-    ldi  a, [hl]                                  ; $45C0: JumpTable_028_457E $2A
-    ld   [de], a                                  ; $45C1: JumpTable_028_457E $12
-    inc  de                                       ; $45C2: JumpTable_028_457E $13
-    ldi  a, [hl]                                  ; $45C3: JumpTable_028_457E $2A
-    ld   [de], a                                  ; $45C4: JumpTable_028_457E $12
-    inc  de                                       ; $45C5: JumpTable_028_457E $13
-    ldi  a, [hl]                                  ; $45C6: JumpTable_028_457E $2A
-    ld   [de], a                                  ; $45C7: JumpTable_028_457E $12
-    inc  de                                       ; $45C8: JumpTable_028_457E $13
-    dec  c                                        ; $45C9: JumpTable_028_457E $0D
-    jr   nz, .else_45BD_28                        ; $45CA: JumpTable_028_457E $20 $F1
+    ldi  a, [hl]                                  ; $45BD: PhotoAlbumConfirmPrintingHandler $2A
+    ld   [de], a                                  ; $45BE: PhotoAlbumConfirmPrintingHandler $12
+    inc  de                                       ; $45BF: PhotoAlbumConfirmPrintingHandler $13
+    ldi  a, [hl]                                  ; $45C0: PhotoAlbumConfirmPrintingHandler $2A
+    ld   [de], a                                  ; $45C1: PhotoAlbumConfirmPrintingHandler $12
+    inc  de                                       ; $45C2: PhotoAlbumConfirmPrintingHandler $13
+    ldi  a, [hl]                                  ; $45C3: PhotoAlbumConfirmPrintingHandler $2A
+    ld   [de], a                                  ; $45C4: PhotoAlbumConfirmPrintingHandler $12
+    inc  de                                       ; $45C5: PhotoAlbumConfirmPrintingHandler $13
+    ldi  a, [hl]                                  ; $45C6: PhotoAlbumConfirmPrintingHandler $2A
+    ld   [de], a                                  ; $45C7: PhotoAlbumConfirmPrintingHandler $12
+    inc  de                                       ; $45C8: PhotoAlbumConfirmPrintingHandler $13
+    dec  c                                        ; $45C9: PhotoAlbumConfirmPrintingHandler $0D
+    jr   nz, .else_45BD_28                        ; $45CA: PhotoAlbumConfirmPrintingHandler $20 $F1
 
-    ret                                           ; $45CC: JumpTable_028_457E $C9
+    ret                                           ; $45CC: PhotoAlbumConfirmPrintingHandler $C9
 
 
 func_028_45CD::
     xor  a                                        ; $45CD: $AF
-    ld   [$D16D], a                               ; $45CE: $EA $6D $D1
-    ld   [$D16E], a                               ; $45D1: $EA $6E $D1
+    ld   [wD16D], a                               ; $45CE: $EA $6D $D1
+    ld   [wD16E], a                               ; $45D1: $EA $6E $D1
     ld   a, $13                                   ; $45D4: $3E $13
-    ld   [$D17E], a                               ; $45D6: $EA $7E $D1
+    ld   [wD17E], a                               ; $45D6: $EA $7E $D1
     ld   a, $01                                   ; $45D9: $3E $01
-    ld   [$D17F], a                               ; $45DB: $EA $7F $D1
+    ld   [wD17F], a                               ; $45DB: $EA $7F $D1
     ld   a, $E4                                   ; $45DE: $3E $E4
-    ld   [$D180], a                               ; $45E0: $EA $80 $D1
+    ld   [wD180], a                               ; $45E0: $EA $80 $D1
     ld   a, $80                                   ; $45E3: $3E $80
-    ld   [$D16F], a                               ; $45E5: $EA $6F $D1
+    ld   [wD16F], a                               ; $45E5: $EA $6F $D1
     ret                                           ; $45E8: $C9
 
 
 func_028_45E9::
     ld   a, $00                                   ; $45E9: $3E $00
-    ld   [$D16B], a                               ; $45EB: $EA $6B $D1
+    ld   [wD16B], a                               ; $45EB: $EA $6B $D1
     ld   a, JINGLE_WRONG_ANSWER                   ; $45EE: $3E $1D
     ldh  [hJingle], a                             ; $45F0: $E0 $F2
     ld   a, $10                                   ; $45F2: $3E $10
     ldh  [hFrameCounter], a                       ; $45F4: $E0 $E7
     ld   a, $11                                   ; $45F6: $3E $11
-    ld   [$D1C6], a                               ; $45F8: $EA $C6 $D1
+    ld   [wD1C6], a                               ; $45F8: $EA $C6 $D1
     ld   a, $10                                   ; $45FB: $3E $10
     ld   [wGameplaySubtype], a                    ; $45FD: $EA $96 $DB
     ret                                           ; $4600: $C9
@@ -980,7 +981,7 @@ PrinterInterruptSerial::
     push de                                       ; $4608: $D5
     push hl                                       ; $4609: $E5
     ld   a, $01                                   ; $460A: $3E $01
-    ld   [$D171], a                               ; $460C: $EA $71 $D1
+    ld   [wD171], a                               ; $460C: $EA $71 $D1
     call func_028_4638                            ; $460F: $CD $38 $46
     pop  hl                                       ; $4612: $E1
     pop  de                                       ; $4613: $D1
@@ -990,19 +991,19 @@ PrinterInterruptSerial::
 
 
 PrinterInterruptVBlank::
-    ld   a, [$D16B]                               ; $4616: $FA $6B $D1
+    ld   a, [wD16B]                               ; $4616: $FA $6B $D1
     cp   $01                                      ; $4619: $FE $01
     ret  nz                                       ; $461B: $C0
 
-    ld   a, [$D16D]                               ; $461C: $FA $6D $D1
+    ld   a, [wD16D]                               ; $461C: $FA $6D $D1
     cp   $FF                                      ; $461F: $FE $FF
     ret  z                                        ; $4621: $C8
 
-    ld   a, [$D172]                               ; $4622: $FA $72 $D1
+    ld   a, [wD172]                               ; $4622: $FA $72 $D1
     and  a                                        ; $4625: $A7
     ret  nz                                       ; $4626: $C0
 
-    ld   hl, $D182                                ; $4627: $21 $82 $D1
+    ld   hl, wD182                                ; $4627: $21 $82 $D1
     inc  [hl]                                     ; $462A: $34
     ld   a, [hl]                                  ; $462B: $7E
     cp   $06                                      ; $462C: $FE $06
@@ -1010,21 +1011,21 @@ PrinterInterruptVBlank::
 
     xor  a                                        ; $462F: $AF
     ld   [hl], a                                  ; $4630: $77
-    ld   [$D17D], a                               ; $4631: $EA $7D $D1
+    ld   [wD17D], a                               ; $4631: $EA $7D $D1
     call func_028_4A27                            ; $4634: $CD $27 $4A
     ret                                           ; $4637: $C9
 
 
 func_028_4638::
-    ld   a, [$D17C]                               ; $4638: $FA $7C $D1
+    ld   a, [wD17C]                               ; $4638: $FA $7C $D1
     and  a                                        ; $463B: $A7
     jp   nz, func_028_47C5                        ; $463C: $C2 $C5 $47
 
-    ld   a, [$D16B]                               ; $463F: $FA $6B $D1
+    ld   a, [wD16B]                               ; $463F: $FA $6B $D1
     cp   $07                                      ; $4642: $FE $07
     jp   z, func_028_477F                         ; $4644: $CA $7F $47
 
-    ld   a, [$D173]                               ; $4647: $FA $73 $D1
+    ld   a, [wD173]                               ; $4647: $FA $73 $D1
     and  a                                        ; $464A: $A7
     jr   nz, .else_4651_28                        ; $464B: $20 $04
 
@@ -1033,15 +1034,15 @@ func_028_4638::
 
 
 .else_4651_28:
-    ld   a, [$D174]                               ; $4651: $FA $74 $D1
+    ld   a, [wD174]                               ; $4651: $FA $74 $D1
     and  a                                        ; $4654: $A7
     jr   z, .else_466C_28                         ; $4655: $28 $15
 
-    ld   a, [$D175]                               ; $4657: $FA $75 $D1
+    ld   a, [wD175]                               ; $4657: $FA $75 $D1
     and  a                                        ; $465A: $A7
     jr   z, .else_466C_28                         ; $465B: $28 $0F
 
-    ld   a, [$D176]                               ; $465D: $FA $76 $D1
+    ld   a, [wD176]                               ; $465D: $FA $76 $D1
     cp   $02                                      ; $4660: $FE $02
     jr   z, .else_4668_28                         ; $4662: $28 $04
 
@@ -1060,7 +1061,7 @@ func_028_4638::
 
 
 func_028_4670::
-    ld   hl, $D17A                                ; $4670: $21 $7A $D1
+    ld   hl, wD17A                                ; $4670: $21 $7A $D1
     ld   c, [hl]                                  ; $4673: $4E
     inc  [hl]                                     ; $4674: $34
     ld   b, $00                                   ; $4675: $06 $00
@@ -1072,56 +1073,56 @@ func_028_4670::
     ld   [rSC], a                                 ; $4680: $E0 $02
     ld   a, $81                                   ; $4682: $3E $81
     ld   [rSC], a                                 ; $4684: $E0 $02
-    ld   a, [$D17A]                               ; $4686: $FA $7A $D1
+    ld   a, [wD17A]                               ; $4686: $FA $7A $D1
     cp   $02                                      ; $4689: $FE $02
     ret  nz                                       ; $468B: $C0
 
     xor  a                                        ; $468C: $AF
-    ld   [$D17A], a                               ; $468D: $EA $7A $D1
+    ld   [wD17A], a                               ; $468D: $EA $7A $D1
     inc  a                                        ; $4690: $3C
-    ld   [$D173], a                               ; $4691: $EA $73 $D1
+    ld   [wD173], a                               ; $4691: $EA $73 $D1
     ret                                           ; $4694: $C9
 
 
 func_028_4695::
-    ld   a, [$D17A]                               ; $4695: $FA $7A $D1
+    ld   a, [wD17A]                               ; $4695: $FA $7A $D1
     ld   c, a                                     ; $4698: $4F
-    ld   a, [$D17B]                               ; $4699: $FA $7B $D1
+    ld   a, [wD17B]                               ; $4699: $FA $7B $D1
     ld   b, a                                     ; $469C: $47
-    ld   a, [$D183]                               ; $469D: $FA $83 $D1
+    ld   a, [wD183]                               ; $469D: $FA $83 $D1
     ld   l, a                                     ; $46A0: $6F
-    ld   a, [$D184]                               ; $46A1: $FA $84 $D1
+    ld   a, [wD184]                               ; $46A1: $FA $84 $D1
     ld   h, a                                     ; $46A4: $67
     add  hl, bc                                   ; $46A5: $09
     ld   a, [rSB]                                 ; $46A6: $F0 $01
-    ld   [$D18F], a                               ; $46A8: $EA $8F $D1
+    ld   [wD18F], a                               ; $46A8: $EA $8F $D1
     ld   a, [hl]                                  ; $46AB: $7E
     ld   [rSB], a                                 ; $46AC: $E0 $01
     ld   l, a                                     ; $46AE: $6F
-    ld   a, [$D178]                               ; $46AF: $FA $78 $D1
+    ld   a, [wD178]                               ; $46AF: $FA $78 $D1
     add  l                                        ; $46B2: $85
-    ld   [$D178], a                               ; $46B3: $EA $78 $D1
-    ld   a, [$D179]                               ; $46B6: $FA $79 $D1
+    ld   [wD178], a                               ; $46B3: $EA $78 $D1
+    ld   a, [wD179]                               ; $46B6: $FA $79 $D1
     adc  $00                                      ; $46B9: $CE $00
-    ld   [$D179], a                               ; $46BB: $EA $79 $D1
+    ld   [wD179], a                               ; $46BB: $EA $79 $D1
     ld   a, $01                                   ; $46BE: $3E $01
     ld   [rSC], a                                 ; $46C0: $E0 $02
     ld   a, $81                                   ; $46C2: $3E $81
     ld   [rSC], a                                 ; $46C4: $E0 $02
-    ld   hl, $D17A                                ; $46C6: $21 $7A $D1
+    ld   hl, wD17A                                ; $46C6: $21 $7A $D1
     inc  [hl]                                     ; $46C9: $34
     jr   nz, .else_46CE_28                        ; $46CA: $20 $02
 
     inc  hl                                       ; $46CC: $23
     inc  [hl]                                     ; $46CD: $34
 .else_46CE_28:
-    ld   hl, $D17A                                ; $46CE: $21 $7A $D1
-    ld   a, [$D189]                               ; $46D1: $FA $89 $D1
+    ld   hl, wD17A                                ; $46CE: $21 $7A $D1
+    ld   a, [wD189]                               ; $46D1: $FA $89 $D1
     cp   [hl]                                     ; $46D4: $BE
     jr   nz, .return_46DE_28                      ; $46D5: $20 $07
 
     inc  hl                                       ; $46D7: $23
-    ld   a, [$D18A]                               ; $46D8: $FA $8A $D1
+    ld   a, [wD18A]                               ; $46D8: $FA $8A $D1
     cp   [hl]                                     ; $46DB: $BE
     jr   z, .else_46DF_28                         ; $46DC: $28 $01
 
@@ -1130,38 +1131,38 @@ func_028_4695::
 
 
 .else_46DF_28:
-    ld   hl, $D174                                ; $46DF: $21 $74 $D1
+    ld   hl, wD174                                ; $46DF: $21 $74 $D1
     ld   a, [hl]                                  ; $46E2: $7E
     and  a                                        ; $46E3: $A7
     jr   z, .else_46E9_28                         ; $46E4: $28 $03
 
-    ld   hl, $D175                                ; $46E6: $21 $75 $D1
+    ld   hl, wD175                                ; $46E6: $21 $75 $D1
 .else_46E9_28:
     inc  [hl]                                     ; $46E9: $34
-    ld   a, [$D190]                               ; $46EA: $FA $90 $D1
+    ld   a, [wD190]                               ; $46EA: $FA $90 $D1
     and  a                                        ; $46ED: $A7
     jr   z, .else_4722_28                         ; $46EE: $28 $32
 
-    ld   a, [$D16B]                               ; $46F0: $FA $6B $D1
+    ld   a, [wD16B]                               ; $46F0: $FA $6B $D1
     cp   $06                                      ; $46F3: $FE $06
     jr   z, .else_4722_28                         ; $46F5: $28 $2B
 
-    ld   hl, $D175                                ; $46F7: $21 $75 $D1
+    ld   hl, wD175                                ; $46F7: $21 $75 $D1
     ld   a, [hl]                                  ; $46FA: $7E
     and  a                                        ; $46FB: $A7
     jr   nz, .else_471E_28                        ; $46FC: $20 $20
 
     xor  a                                        ; $46FE: $AF
-    ld   [$D17A], a                               ; $46FF: $EA $7A $D1
-    ld   [$D17B], a                               ; $4702: $EA $7B $D1
-    ld   a, [$D187]                               ; $4705: $FA $87 $D1
-    ld   [$D183], a                               ; $4708: $EA $83 $D1
-    ld   a, [$D188]                               ; $470B: $FA $88 $D1
-    ld   [$D184], a                               ; $470E: $EA $84 $D1
-    ld   a, [$D18D]                               ; $4711: $FA $8D $D1
-    ld   [$D189], a                               ; $4714: $EA $89 $D1
-    ld   a, [$D18E]                               ; $4717: $FA $8E $D1
-    ld   [$D18A], a                               ; $471A: $EA $8A $D1
+    ld   [wD17A], a                               ; $46FF: $EA $7A $D1
+    ld   [wD17B], a                               ; $4702: $EA $7B $D1
+    ld   a, [wD187]                               ; $4705: $FA $87 $D1
+    ld   [wD183], a                               ; $4708: $EA $83 $D1
+    ld   a, [wD188]                               ; $470B: $FA $88 $D1
+    ld   [wD184], a                               ; $470E: $EA $84 $D1
+    ld   a, [wD18D]                               ; $4711: $FA $8D $D1
+    ld   [wD189], a                               ; $4714: $EA $89 $D1
+    ld   a, [wD18E]                               ; $4717: $FA $8E $D1
+    ld   [wD18A], a                               ; $471A: $EA $8A $D1
     ret                                           ; $471D: $C9
 
 
@@ -1171,30 +1172,30 @@ func_028_4695::
 
 
 .else_4722_28:
-    ld   a, [$D18F]                               ; $4722: $FA $8F $D1
-    ld   [$D16E], a                               ; $4725: $EA $6E $D1
+    ld   a, [wD18F]                               ; $4722: $FA $8F $D1
+    ld   [wD16E], a                               ; $4725: $EA $6E $D1
 .func_028_4728::
     ld   a, $07                                   ; $4728: $3E $07
-    ld   [$D16B], a                               ; $472A: $EA $6B $D1
+    ld   [wD16B], a                               ; $472A: $EA $6B $D1
     ld   a, $01                                   ; $472D: $3E $01
-    ld   [$D170], a                               ; $472F: $EA $70 $D1
+    ld   [wD170], a                               ; $472F: $EA $70 $D1
     call func_028_47E6.func_028_47F0              ; $4732: $CD $F0 $47
 .func_028_4735::
-    ld   a, [$D18B]                               ; $4735: $FA $8B $D1
-    ld   [$D189], a                               ; $4738: $EA $89 $D1
-    ld   a, [$D18C]                               ; $473B: $FA $8C $D1
-    ld   [$D18A], a                               ; $473E: $EA $8A $D1
-    ld   a, [$D185]                               ; $4741: $FA $85 $D1
-    ld   [$D183], a                               ; $4744: $EA $83 $D1
-    ld   a, [$D186]                               ; $4747: $FA $86 $D1
-    ld   [$D184], a                               ; $474A: $EA $84 $D1
+    ld   a, [wD18B]                               ; $4735: $FA $8B $D1
+    ld   [wD189], a                               ; $4738: $EA $89 $D1
+    ld   a, [wD18C]                               ; $473B: $FA $8C $D1
+    ld   [wD18A], a                               ; $473E: $EA $8A $D1
+    ld   a, [wD185]                               ; $4741: $FA $85 $D1
+    ld   [wD183], a                               ; $4744: $EA $83 $D1
+    ld   a, [wD186]                               ; $4747: $FA $86 $D1
+    ld   [wD184], a                               ; $474A: $EA $84 $D1
     ret                                           ; $474D: $C9
 
 
 func_028_474E::
     ld   c, a                                     ; $474E: $4F
     ld   b, $00                                   ; $474F: $06 $00
-    ld   hl, $D178                                ; $4751: $21 $78 $D1
+    ld   hl, wD178                                ; $4751: $21 $78 $D1
     add  hl, bc                                   ; $4754: $09
     ld   a, [hl]                                  ; $4755: $7E
     ld   [rSB], a                                 ; $4756: $E0 $01
@@ -1202,21 +1203,21 @@ func_028_474E::
     ld   [rSC], a                                 ; $475A: $E0 $02
     ld   a, $81                                   ; $475C: $3E $81
     ld   [rSC], a                                 ; $475E: $E0 $02
-    ld   hl, $D176                                ; $4760: $21 $76 $D1
+    ld   hl, wD176                                ; $4760: $21 $76 $D1
     inc  [hl]                                     ; $4763: $34
     ret                                           ; $4764: $C9
 
 
 func_028_4765::
     ld   a, [rSB]                                 ; $4765: $F0 $01
-    ld   [$D16E], a                               ; $4767: $EA $6E $D1
+    ld   [wD16E], a                               ; $4767: $EA $6E $D1
     xor  a                                        ; $476A: $AF
     ld   [rSB], a                                 ; $476B: $E0 $01
     ld   a, $01                                   ; $476D: $3E $01
     ld   [rSC], a                                 ; $476F: $E0 $02
     ld   a, $81                                   ; $4771: $3E $81
     ld   [rSC], a                                 ; $4773: $E0 $02
-    ld   hl, $D177                                ; $4775: $21 $77 $D1
+    ld   hl, wD177                                ; $4775: $21 $77 $D1
     inc  [hl]                                     ; $4778: $34
     ld   a, [hl]                                  ; $4779: $7E
     cp   $02                                      ; $477A: $FE $02
@@ -1226,18 +1227,18 @@ func_028_4765::
 
 
 func_028_477F::
-    ld   a, [$D191]                               ; $477F: $FA $91 $D1
-    ld   [$D192], a                               ; $4782: $EA $92 $D1
-    ld   a, [$D16D]                               ; $4785: $FA $6D $D1
-    ld   [$D193], a                               ; $4788: $EA $93 $D1
+    ld   a, [wD191]                               ; $477F: $FA $91 $D1
+    ld   [wD192], a                               ; $4782: $EA $92 $D1
+    ld   a, [wD16D]                               ; $4785: $FA $6D $D1
+    ld   [wD193], a                               ; $4788: $EA $93 $D1
     ld   a, [rSB]                                 ; $478B: $F0 $01
-    ld   [$D16D], a                               ; $478D: $EA $6D $D1
+    ld   [wD16D], a                               ; $478D: $EA $6D $D1
     cp   $FF                                      ; $4790: $FE $FF
     jr   nz, func_028_47A0                        ; $4792: $20 $0C
 
     ld   a, $00                                   ; $4794: $3E $00
-    ld   [$D172], a                               ; $4796: $EA $72 $D1
-    ld   [$D16B], a                               ; $4799: $EA $6B $D1
+    ld   [wD172], a                               ; $4796: $EA $72 $D1
+    ld   [wD16B], a                               ; $4799: $EA $6B $D1
     ld   a, $02                                   ; $479C: $3E $02
     jr   func_028_47B8                            ; $479E: $18 $18
 
@@ -1246,25 +1247,25 @@ func_028_47A0::
     jr   z, func_028_47A9                         ; $47A2: $28 $05
 
     ld   a, $01                                   ; $47A4: $3E $01
-    ld   [$D17D], a                               ; $47A6: $EA $7D $D1
+    ld   [wD17D], a                               ; $47A6: $EA $7D $D1
 func_028_47A9::
     bit  4, a                                     ; $47A9: $CB $67
     ld   a, $00                                   ; $47AB: $3E $00
-    ld   [$D16B], a                               ; $47AD: $EA $6B $D1
+    ld   [wD16B], a                               ; $47AD: $EA $6B $D1
     ld   a, $01                                   ; $47B0: $3E $01
     jr   nz, func_028_47B7                        ; $47B2: $20 $03
 
-    ld   [$D16B], a                               ; $47B4: $EA $6B $D1
+    ld   [wD16B], a                               ; $47B4: $EA $6B $D1
 func_028_47B7::
     inc  a                                        ; $47B7: $3C
 func_028_47B8::
-    ld   [$D170], a                               ; $47B8: $EA $70 $D1
-    ld   a, [$D190]                               ; $47BB: $FA $90 $D1
+    ld   [wD170], a                               ; $47B8: $EA $70 $D1
+    ld   a, [wD190]                               ; $47BB: $FA $90 $D1
     and  a                                        ; $47BE: $A7
     jr   nz, func_028_47C5                        ; $47BF: $20 $04
 
     xor  a                                        ; $47C1: $AF
-    ld   [$D172], a                               ; $47C2: $EA $72 $D1
+    ld   [wD172], a                               ; $47C2: $EA $72 $D1
 func_028_47C5::
     ret                                           ; $47C5: $C9
 
@@ -1275,13 +1276,13 @@ func_028_47CB::
     xor  a                                        ; $47CB: $AF
     ld   [rSB], a                                 ; $47CC: $E0 $01
     ld   [rSC], a                                 ; $47CE: $E0 $02
-    ld   [$D16B], a                               ; $47D0: $EA $6B $D1
-    ld   [$D16C], a                               ; $47D3: $EA $6C $D1
+    ld   [wD16B], a                               ; $47D0: $EA $6B $D1
+    ld   [wD16C], a                               ; $47D3: $EA $6C $D1
     dec  a                                        ; $47D6: $3D
-    ld   [$D16D], a                               ; $47D7: $EA $6D $D1
-    ld   [$D16E], a                               ; $47DA: $EA $6E $D1
+    ld   [wD16D], a                               ; $47D7: $EA $6D $D1
+    ld   [wD16E], a                               ; $47DA: $EA $6E $D1
     ld   a, $80                                   ; $47DD: $3E $80
-    ld   [$D16F], a                               ; $47DF: $EA $6F $D1
+    ld   [wD16F], a                               ; $47DF: $EA $6F $D1
     call func_028_47E6                            ; $47E2: $CD $E6 $47
     ret                                           ; $47E5: $C9
 
@@ -1289,27 +1290,27 @@ func_028_47CB::
 ; What are these values? That's a lot of addresses being set to $00...
 func_028_47E6::
     xor  a                                        ; $47E6: $AF
-    ld   [$D170], a                               ; $47E7: $EA $70 $D1
-    ld   [$D171], a                               ; $47EA: $EA $71 $D1
-    ld   [$D172], a                               ; $47ED: $EA $72 $D1
+    ld   [wD170], a                               ; $47E7: $EA $70 $D1
+    ld   [wD171], a                               ; $47EA: $EA $71 $D1
+    ld   [wD172], a                               ; $47ED: $EA $72 $D1
 .func_028_47F0::
     xor  a                                      ; $47F0:, func_028_47E6.func_028_47F0 $AF
-    ld   [$D173], a                             ; $47F1:, func_028_47E6.func_028_47F0 $EA $73 $D1
-    ld   [$D174], a                             ; $47F4:, func_028_47E6.func_028_47F0 $EA $74 $D1
-    ld   [$D175], a                             ; $47F7:, func_028_47E6.func_028_47F0 $EA $75 $D1
-    ld   [$D176], a                             ; $47FA:, func_028_47E6.func_028_47F0 $EA $76 $D1
-    ld   [$D177], a                             ; $47FD:, func_028_47E6.func_028_47F0 $EA $77 $D1
-    ld   [$D178], a                             ; $4800:, func_028_47E6.func_028_47F0 $EA $78 $D1
-    ld   [$D179], a                             ; $4803:, func_028_47E6.func_028_47F0 $EA $79 $D1
-    ld   [$D17A], a                             ; $4806:, func_028_47E6.func_028_47F0 $EA $7A $D1
-    ld   [$D17B], a                             ; $4809:, func_028_47E6.func_028_47F0 $EA $7B $D1
-    ld   [$D17C], a                             ; $480C:, func_028_47E6.func_028_47F0 $EA $7C $D1
-    ld   [$D17D], a                             ; $480F:, func_028_47E6.func_028_47F0 $EA $7D $D1
+    ld   [wD173], a                             ; $47F1:, func_028_47E6.func_028_47F0 $EA $73 $D1
+    ld   [wD174], a                             ; $47F4:, func_028_47E6.func_028_47F0 $EA $74 $D1
+    ld   [wD175], a                             ; $47F7:, func_028_47E6.func_028_47F0 $EA $75 $D1
+    ld   [wD176], a                             ; $47FA:, func_028_47E6.func_028_47F0 $EA $76 $D1
+    ld   [wD177], a                             ; $47FD:, func_028_47E6.func_028_47F0 $EA $77 $D1
+    ld   [wD178], a                             ; $4800:, func_028_47E6.func_028_47F0 $EA $78 $D1
+    ld   [wD179], a                             ; $4803:, func_028_47E6.func_028_47F0 $EA $79 $D1
+    ld   [wD17A], a                             ; $4806:, func_028_47E6.func_028_47F0 $EA $7A $D1
+    ld   [wD17B], a                             ; $4809:, func_028_47E6.func_028_47F0 $EA $7B $D1
+    ld   [wD17C], a                             ; $480C:, func_028_47E6.func_028_47F0 $EA $7C $D1
+    ld   [wD17D], a                             ; $480F:, func_028_47E6.func_028_47F0 $EA $7D $D1
     ret                                         ; $4812:, func_028_47E6.func_028_47F0 $C9
 
 
 func_028_4813::
-    ld   a, [$D172]                               ; $4813: $FA $72 $D1
+    ld   a, [wD172]                               ; $4813: $FA $72 $D1
     and  a                                        ; $4816: $A7
     jr   z, .else_481D_28                         ; $4817: $28 $04
 
@@ -1317,7 +1318,7 @@ func_028_4813::
     ret  nc                                       ; $481C: $D0
 
 .else_481D_28:
-    ld   a, [$D192]                               ; $481D: $FA $92 $D1
+    ld   a, [wD192]                               ; $481D: $FA $92 $D1
     cp   $01                                      ; $4820: $FE $01
     jr   nz, .else_4828_28                        ; $4822: $20 $04
 
@@ -1329,7 +1330,7 @@ func_028_4813::
     jp   func_028_4B6B                            ; $482B: $C3 $6B $4B
 
 func_028_482E::
-    ld   a, [$D170]                               ; $482E: $FA $70 $D1
+    ld   a, [wD170]                               ; $482E: $FA $70 $D1
     cp   $02                                      ; $4831: $FE $02
     jr   c, func_028_4878                         ; $4833: $38 $43
 
@@ -1337,11 +1338,11 @@ func_028_482E::
     jr   nz, func_028_4878                        ; $4838: $20 $3E
 
     xor  a                                        ; $483A: $AF
-    ld   [$D182], a                               ; $483B: $EA $82 $D1
-    ld   [$D192], a                               ; $483E: $EA $92 $D1
+    ld   [wD182], a                               ; $483B: $EA $82 $D1
+    ld   [wD192], a                               ; $483E: $EA $92 $D1
     inc  a                                        ; $4841: $3C
-    ld   [$D16B], a                               ; $4842: $EA $6B $D1
-    ld   a, [$D16D]                               ; $4845: $FA $6D $D1
+    ld   [wD16B], a                               ; $4842: $EA $6B $D1
+    ld   a, [wD16D]                               ; $4845: $FA $6D $D1
     cp   $FF                                      ; $4848: $FE $FF
     jr   z, func_028_486E                         ; $484A: $28 $22
 
@@ -1355,9 +1356,9 @@ func_028_482E::
     jr   z, func_028_4876                         ; $4856: $28 $1E
 
     xor  a                                        ; $4858: $AF
-    ld   [$D16B], a                               ; $4859: $EA $6B $D1
-    ld   [$D192], a                               ; $485C: $EA $92 $D1
-    ld   a, [$D16D]                               ; $485F: $FA $6D $D1
+    ld   [wD16B], a                               ; $4859: $EA $6B $D1
+    ld   [wD192], a                               ; $485C: $EA $92 $D1
+    ld   a, [wD16D]                               ; $485F: $FA $6D $D1
     call func_028_4BA7                            ; $4862: $CD $A7 $4B
     jr   func_028_4876                            ; $4865: $18 $0F
 
@@ -1370,7 +1371,7 @@ func_028_482E::
 
 func_028_486E::
     inc  a                                        ; $486E: $3C
-    ld   [$D16B], a                               ; $486F: $EA $6B $D1
+    ld   [wD16B], a                               ; $486F: $EA $6B $D1
     dec  a                                        ; $4872: $3D
     call func_028_4BA7                            ; $4873: $CD $A7 $4B
 func_028_4876::
@@ -1385,7 +1386,7 @@ func_028_4878::
 
 
 func_028_487C::
-    ld   hl, $D170                                ; $487C: $21 $70 $D1
+    ld   hl, wD170                                ; $487C: $21 $70 $D1
     ld   a, [hl]                                  ; $487F: $7E
     cp   $03                                      ; $4880: $FE $03
     ret  z                                        ; $4882: $C8
@@ -1396,7 +1397,7 @@ func_028_487C::
 
 
 func_028_4886::
-    ld   a, [$D16B]                               ; $4886: $FA $6B $D1
+    ld   a, [wD16B]                               ; $4886: $FA $6B $D1
     cp   $01                                      ; $4889: $FE $01
     jr   z, .else_4898_28                         ; $488B: $28 $0B
 
@@ -1413,11 +1414,11 @@ func_028_4886::
 
 
 .else_4898_28:
-    ld   a, [$D17D]                               ; $4898: $FA $7D $D1
+    ld   a, [wD17D]                               ; $4898: $FA $7D $D1
     and  a                                        ; $489B: $A7
     jr   nz, .loop_4895_28                        ; $489C: $20 $F7
 
-    ld   a, [$D172]                               ; $489E: $FA $72 $D1
+    ld   a, [wD172]                               ; $489E: $FA $72 $D1
     and  a                                        ; $48A1: $A7
     jr   z, .else_48A8_28                         ; $48A2: $28 $04
 
@@ -1425,7 +1426,7 @@ func_028_4886::
     ret  nc                                       ; $48A7: $D0
 
 .else_48A8_28:
-    ld   a, [$D192]                               ; $48A8: $FA $92 $D1
+    ld   a, [wD192]                               ; $48A8: $FA $92 $D1
     cp   $02                                      ; $48AB: $FE $02
     jr   nz, .else_48B3_28                        ; $48AD: $20 $04
 
@@ -1433,7 +1434,7 @@ func_028_4886::
     ret  nc                                       ; $48B2: $D0
 
 .else_48B3_28:
-    ld   a, [$D16D]                               ; $48B3: $FA $6D $D1
+    ld   a, [wD16D]                               ; $48B3: $FA $6D $D1
     cp   $FF                                      ; $48B6: $FE $FF
     jp   z, func_028_4BA7                         ; $48B8: $CA $A7 $4B
 
@@ -1442,12 +1443,12 @@ func_028_4886::
 
 func_028_48C1::
     ld   c, a                                     ; $48C1: $4F
-    ld   a, [$D16B]                               ; $48C2: $FA $6B $D1
+    ld   a, [wD16B]                               ; $48C2: $FA $6B $D1
     and  a                                        ; $48C5: $A7
-    ld   a, [$D16D]                               ; $48C6: $FA $6D $D1
+    ld   a, [wD16D]                               ; $48C6: $FA $6D $D1
     jp   z, func_028_4BA7                         ; $48C9: $CA $A7 $4B
 
-    ld   a, [$D16B]                               ; $48CC: $FA $6B $D1
+    ld   a, [wD16B]                               ; $48CC: $FA $6B $D1
     cp   $01                                      ; $48CF: $FE $01
     jr   z, .else_48DA_28                         ; $48D1: $28 $07
 
@@ -1459,43 +1460,43 @@ func_028_48C1::
 
 
 .else_48DA_28:
-    ld   a, [$D172]                               ; $48DA: $FA $72 $D1
+    ld   a, [wD172]                               ; $48DA: $FA $72 $D1
     and  a                                        ; $48DD: $A7
     jr   nz, .else_4934_28                        ; $48DE: $20 $54
 
     ld   a, c                                     ; $48E0: $79
     inc  a                                        ; $48E1: $3C
-    ld   [$D194], a                               ; $48E2: $EA $94 $D1
+    ld   [wD194], a                               ; $48E2: $EA $94 $D1
     ld   a, l                                     ; $48E5: $7D
-    ld   [$D195], a                               ; $48E6: $EA $95 $D1
+    ld   [wD195], a                               ; $48E6: $EA $95 $D1
     ld   a, h                                     ; $48E9: $7C
-    ld   [$D196], a                               ; $48EA: $EA $96 $D1
+    ld   [wD196], a                               ; $48EA: $EA $96 $D1
     ld   a, $00                                   ; $48ED: $3E $00
-    ld   [$D197], a                               ; $48EF: $EA $97 $D1
+    ld   [wD197], a                               ; $48EF: $EA $97 $D1
     ld   a, $D0                                   ; $48F2: $3E $D0
-    ld   [$D198], a                               ; $48F4: $EA $98 $D1
-    ld   a, [$D16D]                               ; $48F7: $FA $6D $D1
+    ld   [wD198], a                               ; $48F4: $EA $98 $D1
+    ld   a, [wD16D]                               ; $48F7: $FA $6D $D1
     cp   $FF                                      ; $48FA: $FE $FF
     jp   z, func_028_4BA7                         ; $48FC: $CA $A7 $4B
 
-    ld   a, [$D199]                               ; $48FF: $FA $99 $D1
+    ld   a, [wD199]                               ; $48FF: $FA $99 $D1
     ld   [wD1B5], a                               ; $4902: $EA $B5 $D1
     and  a                                        ; $4905: $A7
     jr   z, .else_4928_28                         ; $4906: $28 $20
 
-    ld   a, [$D194]                               ; $4908: $FA $94 $D1
+    ld   a, [wD194]                               ; $4908: $FA $94 $D1
     dec  a                                        ; $490B: $3D
     dec  a                                        ; $490C: $3D
     ld   c, a                                     ; $490D: $4F
     ld   b, $00                                   ; $490E: $06 $00
     push hl                                       ; $4910: $E5
-    ld   hl, $D1AC                                ; $4911: $21 $AC $D1
+    ld   hl, wD1AC                                ; $4911: $21 $AC $D1
     add  hl, bc                                   ; $4914: $09
     ld   a, [hl]                                  ; $4915: $7E
     ld   [wD1B5], a                               ; $4916: $EA $B5 $D1
     sla  c                                        ; $4919: $CB $21
     ld   b, $00                                   ; $491B: $06 $00
-    ld   hl, $D19A                                ; $491D: $21 $9A $D1
+    ld   hl, wD19A                                ; $491D: $21 $9A $D1
     add  hl, bc                                   ; $4920: $09
     ldi  a, [hl]                                  ; $4921: $2A
     ld   b, [hl]                                  ; $4922: $46
@@ -1511,7 +1512,7 @@ func_028_48C1::
     jp   func_028_4B6B                            ; $4931: $C3 $6B $4B
 
 .else_4934_28:
-    ld   a, [$D170]                               ; $4934: $FA $70 $D1
+    ld   a, [wD170]                               ; $4934: $FA $70 $D1
     cp   $02                                      ; $4937: $FE $02
     ld   a, $F0                                   ; $4939: $3E $F0
     jp   c, .return_49E1_28                       ; $493B: $DA $E1 $49
@@ -1520,8 +1521,8 @@ func_028_48C1::
     ld   a, $F0                                   ; $4941: $3E $F0
     jp   nz, .return_49E1_28                      ; $4943: $C2 $E1 $49
 
-    ld   hl, $D194                                ; $4946: $21 $94 $D1
-    ld   a, [$D16D]                               ; $4949: $FA $6D $D1
+    ld   hl, wD194                                ; $4946: $21 $94 $D1
+    ld   a, [wD16D]                               ; $4949: $FA $6D $D1
     ld   c, a                                     ; $494C: $4F
     and  %11110000                                ; $494D: $E6 $F0
     ld   a, c                                     ; $494F: $79
@@ -1535,7 +1536,7 @@ func_028_48C1::
 
     ld   a, [hl]                                  ; $495D: $7E
     and  a                                        ; $495E: $A7
-    ld   a, [$D16D]                               ; $495F: $FA $6D $D1
+    ld   a, [wD16D]                               ; $495F: $FA $6D $D1
     jr   z, .else_49D8_28                         ; $4962: $28 $74
 
     ld   a, [hl]                                  ; $4964: $7E
@@ -1543,7 +1544,7 @@ func_028_48C1::
     jp   z, .func_028_49E2                        ; $4967: $CA $E2 $49
 
     dec  [hl]                                     ; $496A: $35
-    ld   a, [$D16D]                               ; $496B: $FA $6D $D1
+    ld   a, [wD16D]                               ; $496B: $FA $6D $D1
     jr   z, .else_49D8_28                         ; $496E: $28 $68
 
 .func_028_4970::
@@ -1553,71 +1554,71 @@ func_028_48C1::
     jp   z, .return_49E1_28                       ; $4975: $CA $E1 $49
 
     ld   bc, $280                                 ; $4978: $01 $80 $02
-    ld   a, [$D199]                               ; $497B: $FA $99 $D1
+    ld   a, [wD199]                               ; $497B: $FA $99 $D1
     ld   [wD1B5], a                               ; $497E: $EA $B5 $D1
     and  a                                        ; $4981: $A7
     jr   z, .else_49A1_28                         ; $4982: $28 $1D
 
-    ld   a, [$D194]                               ; $4984: $FA $94 $D1
+    ld   a, [wD194]                               ; $4984: $FA $94 $D1
     dec  a                                        ; $4987: $3D
     dec  a                                        ; $4988: $3D
     ld   c, a                                     ; $4989: $4F
     ld   b, $00                                   ; $498A: $06 $00
     push hl                                       ; $498C: $E5
-    ld   hl, $D1AC                                ; $498D: $21 $AC $D1
+    ld   hl, wD1AC                                ; $498D: $21 $AC $D1
     add  hl, bc                                   ; $4990: $09
     ld   a, [hl]                                  ; $4991: $7E
     ld   [wD1B5], a                               ; $4992: $EA $B5 $D1
     sla  c                                        ; $4995: $CB $21
     ld   b, $00                                   ; $4997: $06 $00
-    ld   hl, $D19A                                ; $4999: $21 $9A $D1
+    ld   hl, wD19A                                ; $4999: $21 $9A $D1
     add  hl, bc                                   ; $499C: $09
     ldi  a, [hl]                                  ; $499D: $2A
     ld   b, [hl]                                  ; $499E: $46
     pop  hl                                       ; $499F: $E1
     ld   c, a                                     ; $49A0: $4F
 .else_49A1_28:
-    ld   a, [$D16D]                               ; $49A1: $FA $6D $D1
+    ld   a, [wD16D]                               ; $49A1: $FA $6D $D1
     bit  1, a                                     ; $49A4: $CB $4F
     jp   nz, .func_028_49C3                       ; $49A6: $C2 $C3 $49
 
-    ld   a, [$D197]                               ; $49A9: $FA $97 $D1
+    ld   a, [wD197]                               ; $49A9: $FA $97 $D1
     add  $28                                      ; $49AC: $C6 $28
-    ld   [$D197], a                               ; $49AE: $EA $97 $D1
-    ld   a, [$D198]                               ; $49B1: $FA $98 $D1
+    ld   [wD197], a                               ; $49AE: $EA $97 $D1
+    ld   a, [wD198]                               ; $49B1: $FA $98 $D1
     adc  $00                                      ; $49B4: $CE $00
-    ld   [$D198], a                               ; $49B6: $EA $98 $D1
+    ld   [wD198], a                               ; $49B6: $EA $98 $D1
     ld   a, $00                                   ; $49B9: $3E $00
-    ld   [$D187], a                               ; $49BB: $EA $87 $D1
+    ld   [wD187], a                               ; $49BB: $EA $87 $D1
     ld   a, $C2                                   ; $49BE: $3E $C2
-    ld   [$D188], a                               ; $49C0: $EA $88 $D1
+    ld   [wD188], a                               ; $49C0: $EA $88 $D1
 .func_028_49C3::
-    ld   a, [$D187]                               ; $49C3: $FA $87 $D1
+    ld   a, [wD187]                               ; $49C3: $FA $87 $D1
     ld   l, a                                     ; $49C6: $6F
-    ld   a, [$D188]                               ; $49C7: $FA $88 $D1
+    ld   a, [wD188]                               ; $49C7: $FA $88 $D1
     ld   h, a                                     ; $49CA: $67
     jp   .func_028_492B                           ; $49CB: $C3 $2B $49
 
 .func_028_49CE::
     push af                                       ; $49CE: $F5
     ld   a, $01                                   ; $49CF: $3E $01
-    ld   [$D17C], a                               ; $49D1: $EA $7C $D1
+    ld   [wD17C], a                               ; $49D1: $EA $7C $D1
     pop  af                                       ; $49D4: $F1
     call func_028_4BA7                            ; $49D5: $CD $A7 $4B
 .else_49D8_28:
     push af                                       ; $49D8: $F5
     xor  a                                        ; $49D9: $AF
-    ld   [$D190], a                               ; $49DA: $EA $90 $D1
-    ld   [$D172], a                               ; $49DD: $EA $72 $D1
+    ld   [wD190], a                               ; $49DA: $EA $90 $D1
+    ld   [wD172], a                               ; $49DD: $EA $72 $D1
     pop  af                                       ; $49E0: $F1
 .return_49E1_28:
     ret                                           ; $49E1: $C9
 
 
 .func_028_49E2::
-    ld   a, [$D1B6]                               ; $49E2: $FA $B6 $D1
+    ld   a, [wD1B6]                               ; $49E2: $FA $B6 $D1
     and  a                                        ; $49E5: $A7
-    ld   a, [$D16D]                               ; $49E6: $FA $6D $D1
+    ld   a, [wD16D]                               ; $49E6: $FA $6D $D1
     jr   z, .else_49D8_28                         ; $49E9: $28 $ED
 
     dec  [hl]                                     ; $49EB: $35
@@ -1625,7 +1626,7 @@ func_028_48C1::
     jp   func_028_4B6B                            ; $49EF: $C3 $6B $4B
 
 func_028_49F2::
-    ld   a, [$d16b]                             ; $49f2: $fa $6b $d1
+    ld   a, [wLinkPositionXHistory + 22]        ; $49f2: $fa $6b $d1
     cp   $01                                    ; $49f5: $fe $01
     jr   z, jr_028_4a04                         ; $49f7: $28 $0b
 
@@ -1641,7 +1642,7 @@ func_028_49F2::
 
 
 jr_028_4a04::
-    ld   a, [$d172]                             ; $4a04: $fa $72 $d1
+    ld   a, [wD172]                             ; $4a04: $fa $72 $d1
     and  a                                      ; $4a07: $a7
     jr   z, jr_028_4a0e                         ; $4a08: $28 $04
 
@@ -1649,7 +1650,7 @@ jr_028_4a04::
     ret  nc                                     ; $4a0d: $d0
 
 jr_028_4a0e::
-    ld   a, [$d192]                             ; $4a0e: $fa $92 $d1
+    ld   a, [wD192]                             ; $4a0e: $fa $92 $d1
     cp   $04                                    ; $4a11: $fe $04
     jr   nz, jr_028_4a19                        ; $4a13: $20 $04
 
@@ -1657,7 +1658,7 @@ jr_028_4a0e::
     ret  nc                                     ; $4a18: $d0
 
 jr_028_4a19::
-    ld   a, [$d16d]                             ; $4a19: $fa $6d $d1
+    ld   a, [wD16D]                             ; $4a19: $fa $6d $d1
     cp   $ff                                    ; $4a1c: $fe $ff
     jp   z, func_028_4BA7                       ; $4a1e: $ca $a7 $4b
 
@@ -1666,7 +1667,7 @@ jr_028_4a19::
 
 
 func_028_4A27::
-    ld   a, [$D16B]                               ; $4A27: $FA $6B $D1
+    ld   a, [wD16B]                               ; $4A27: $FA $6B $D1
     cp   $01                                      ; $4A2A: $FE $01
     jr   z, .else_4A39_28                         ; $4A2C: $28 $0B
 
@@ -1682,7 +1683,7 @@ func_028_4A27::
 
 
 .else_4A39_28:
-    ld   a, [$D172]                               ; $4A39: $FA $72 $D1
+    ld   a, [wD172]                               ; $4A39: $FA $72 $D1
     and  a                                        ; $4A3C: $A7
     jr   z, .else_4A43_28                         ; $4A3D: $28 $04
 
@@ -1690,7 +1691,7 @@ func_028_4A27::
     ret  nc                                       ; $4A42: $D0
 
 .else_4A43_28:
-    ld   a, [$D16D]                               ; $4A43: $FA $6D $D1
+    ld   a, [wD16D]                               ; $4A43: $FA $6D $D1
     cp   $FF                                      ; $4A46: $FE $FF
     jp   z, func_028_4BA7                         ; $4A48: $CA $A7 $4B
 
@@ -1698,23 +1699,23 @@ func_028_4A27::
     jp   func_028_4B6B                            ; $4A4E: $C3 $6B $4B
 
 func_028_4A51::
-    ld   [$D191], a                               ; $4A51: $EA $91 $D1
+    ld   [wD191], a                               ; $4A51: $EA $91 $D1
     ld   a, d                                     ; $4A54: $7A
-    ld   [$D190], a                               ; $4A55: $EA $90 $D1
+    ld   [wD190], a                               ; $4A55: $EA $90 $D1
     ld   a, l                                     ; $4A58: $7D
-    ld   [$D183], a                               ; $4A59: $EA $83 $D1
-    ld   [$D185], a                               ; $4A5C: $EA $85 $D1
+    ld   [wD183], a                               ; $4A59: $EA $83 $D1
+    ld   [wD185], a                               ; $4A5C: $EA $85 $D1
     ld   a, h                                     ; $4A5F: $7C
-    ld   [$D184], a                               ; $4A60: $EA $84 $D1
-    ld   [$D186], a                               ; $4A63: $EA $86 $D1
+    ld   [wD184], a                               ; $4A60: $EA $84 $D1
+    ld   [wD186], a                               ; $4A63: $EA $86 $D1
     ld   a, c                                     ; $4A66: $79
-    ld   [$D189], a                               ; $4A67: $EA $89 $D1
-    ld   [$D18B], a                               ; $4A6A: $EA $8B $D1
+    ld   [wD189], a                               ; $4A67: $EA $89 $D1
+    ld   [wD18B], a                               ; $4A6A: $EA $8B $D1
     ld   a, b                                     ; $4A6D: $78
-    ld   [$D18A], a                               ; $4A6E: $EA $8A $D1
-    ld   [$D18C], a                               ; $4A71: $EA $8C $D1
+    ld   [wD18A], a                               ; $4A6E: $EA $8A $D1
+    ld   [wD18C], a                               ; $4A71: $EA $8C $D1
     xor  a                                        ; $4A74: $AF
-    ld   [$D170], a                               ; $4A75: $EA $70 $D1
+    ld   [wD170], a                               ; $4A75: $EA $70 $D1
     call func_028_47E6.func_028_47F0              ; $4A78: $CD $F0 $47
     ret                                           ; $4A7B: $C9
 
@@ -1746,33 +1747,33 @@ func_028_4AA2::
 func_028_4AAF::
     ld   a, $02                                   ; $4AAF: $3E $02
     ld   d, $00                                   ; $4AB1: $16 $00
-    ld   hl, $D1B7                                ; $4AB3: $21 $B7 $D1
+    ld   hl, wD1B7                                ; $4AB3: $21 $B7 $D1
     ld   bc, $0C                                  ; $4AB6: $01 $0C $00
     call func_028_4A51                            ; $4AB9: $CD $51 $4A
     ld   hl, Data_028_4A86                        ; $4ABC: $21 $86 $4A
-    ld   de, $D1B7                                ; $4ABF: $11 $B7 $D1
+    ld   de, wD1B7                                ; $4ABF: $11 $B7 $D1
     ld   bc, $04                                  ; $4AC2: $01 $04 $00
     call func_028_4B06                            ; $4AC5: $CD $06 $4B
     ld   de, $06                                  ; $4AC8: $11 $06 $00
-    ld   a, [$D17F]                               ; $4ACB: $FA $7F $D1
-    ld   [$D1BB], a                               ; $4ACE: $EA $BB $D1
+    ld   a, [wD17F]                               ; $4ACB: $FA $7F $D1
+    ld   [wD1BB], a                               ; $4ACE: $EA $BB $D1
     call func_028_4AFF                            ; $4AD1: $CD $FF $4A
-    ld   a, [$D17E]                               ; $4AD4: $FA $7E $D1
-    ld   [$D1BC], a                               ; $4AD7: $EA $BC $D1
+    ld   a, [wD17E]                               ; $4AD4: $FA $7E $D1
+    ld   [wD1BC], a                               ; $4AD7: $EA $BC $D1
     call func_028_4AFF                            ; $4ADA: $CD $FF $4A
-    ld   a, [$D180]                               ; $4ADD: $FA $80 $D1
-    ld   [$D1BD], a                               ; $4AE0: $EA $BD $D1
+    ld   a, [wD180]                               ; $4ADD: $FA $80 $D1
+    ld   [wD1BD], a                               ; $4AE0: $EA $BD $D1
     call func_028_4AFF                            ; $4AE3: $CD $FF $4A
-    ld   a, [$D16F]                               ; $4AE6: $FA $6F $D1
-    ld   [$D1BE], a                               ; $4AE9: $EA $BE $D1
+    ld   a, [wD16F]                               ; $4AE6: $FA $6F $D1
+    ld   [wD1BE], a                               ; $4AE9: $EA $BE $D1
     call func_028_4AFF                            ; $4AEC: $CD $FF $4A
     ld   a, e                                     ; $4AEF: $7B
-    ld   [$D1BF], a                               ; $4AF0: $EA $BF $D1
+    ld   [wD1BF], a                               ; $4AF0: $EA $BF $D1
     ld   a, d                                     ; $4AF3: $7A
-    ld   [$D1C0], a                               ; $4AF4: $EA $C0 $D1
+    ld   [wD1C0], a                               ; $4AF4: $EA $C0 $D1
     xor  a                                        ; $4AF7: $AF
-    ld   [$D1C1], a                               ; $4AF8: $EA $C1 $D1
-    ld   [$D1C2], a                               ; $4AFB: $EA $C2 $D1
+    ld   [wD1C1], a                               ; $4AF8: $EA $C1 $D1
+    ld   [wD1C2], a                               ; $4AFB: $EA $C2 $D1
     ret                                           ; $4AFE: $C9
 
 
@@ -1799,28 +1800,28 @@ func_028_4B06::
 
 func_028_4B0F::
     ld   a, l                                     ; $4B0F: $7D
-    ld   [$D187], a                               ; $4B10: $EA $87 $D1
+    ld   [wD187], a                               ; $4B10: $EA $87 $D1
     ld   a, h                                     ; $4B13: $7C
-    ld   [$D188], a                               ; $4B14: $EA $88 $D1
+    ld   [wD188], a                               ; $4B14: $EA $88 $D1
     ld   a, c                                     ; $4B17: $79
-    ld   [$D18D], a                               ; $4B18: $EA $8D $D1
+    ld   [wD18D], a                               ; $4B18: $EA $8D $D1
     ld   a, b                                     ; $4B1B: $78
-    ld   [$D18E], a                               ; $4B1C: $EA $8E $D1
+    ld   [wD18E], a                               ; $4B1C: $EA $8E $D1
     push bc                                       ; $4B1F: $C5
     ld   a, $03                                   ; $4B20: $3E $03
     ld   d, $01                                   ; $4B22: $16 $01
-    ld   hl, $D1B7                                ; $4B24: $21 $B7 $D1
+    ld   hl, wD1B7                                ; $4B24: $21 $B7 $D1
     ld   bc, $04                                  ; $4B27: $01 $04 $00
     call func_028_4A51                            ; $4B2A: $CD $51 $4A
     ld   a, [Data_028_4A8A]                       ; $4B2D: $FA $8A $4A
-    ld   [$D1B7], a                               ; $4B30: $EA $B7 $D1
+    ld   [wD1B7], a                               ; $4B30: $EA $B7 $D1
     ld   a, [wD1B5]                               ; $4B33: $FA $B5 $D1
-    ld   [$D1B8], a                               ; $4B36: $EA $B8 $D1
+    ld   [wD1B8], a                               ; $4B36: $EA $B8 $D1
     pop  bc                                       ; $4B39: $C1
     ld   a, c                                     ; $4B3A: $79
-    ld   [$D1B9], a                               ; $4B3B: $EA $B9 $D1
+    ld   [wD1B9], a                               ; $4B3B: $EA $B9 $D1
     ld   a, b                                     ; $4B3E: $78
-    ld   [$D1BA], a                               ; $4B3F: $EA $BA $D1
+    ld   [wD1BA], a                               ; $4B3F: $EA $BA $D1
     ret                                           ; $4B42: $C9
 
 Call_028_4b43::
@@ -1847,14 +1848,14 @@ func_028_4B5D::
     ret                                         ; $4B6A |.|
 
 func_028_4B6B::
-    ld   a, [$D16B]                               ; $4B6B: $FA $6B $D1
+    ld   a, [wD16B]                               ; $4B6B: $FA $6B $D1
     cp   $01                                      ; $4B6E: $FE $01
     jr   z, func_028_4B7E                         ; $4B70: $28 $0C
 
     and  a                                        ; $4B72: $A7
     jr   nz, func_028_4B7C                        ; $4B73: $20 $07
 
-    ld   a, [$D191]                               ; $4B75: $FA $91 $D1
+    ld   a, [wD191]                               ; $4B75: $FA $91 $D1
     cp   $01                                      ; $4B78: $FE $01
     jr   z, func_028_4B88                         ; $4B7A: $28 $0C
 
@@ -1864,18 +1865,18 @@ func_028_4B7C::
 
 
 func_028_4B7E::
-    ld   a, [$D191]                               ; $4B7E: $FA $91 $D1
+    ld   a, [wD191]                               ; $4B7E: $FA $91 $D1
     cp   $01                                      ; $4B81: $FE $01
     jr   z, func_028_4B7C                         ; $4B83: $28 $F7
 
-    ld   [$D16B], a                               ; $4B85: $EA $6B $D1
+    ld   [wD16B], a                               ; $4B85: $EA $6B $D1
 func_028_4B88::
     xor  a                                        ; $4B88: $AF
-    ld   [$D170], a                               ; $4B89: $EA $70 $D1
-    ld   [$D192], a                               ; $4B8C: $EA $92 $D1
+    ld   [wD170], a                               ; $4B89: $EA $70 $D1
+    ld   [wD192], a                               ; $4B8C: $EA $92 $D1
     ld   a, $01                                   ; $4B8F: $3E $01
-    ld   [$D17A], a                               ; $4B91: $EA $7A $D1
-    ld   [$D172], a                               ; $4B94: $EA $72 $D1
+    ld   [wD17A], a                               ; $4B91: $EA $7A $D1
+    ld   [wD172], a                               ; $4B94: $EA $72 $D1
     ld   a, [Data_028_4A7C]                       ; $4B97: $FA $7C $4A
     ld   [rSB], a                                 ; $4B9A: $E0 $01
     ld   a, $01                                   ; $4B9C: $3E $01
@@ -1888,7 +1889,7 @@ func_028_4B88::
 
 func_028_4BA7::
     push af                                       ; $4BA7: $F5
-    ld   a, [$D16D]                               ; $4BA8: $FA $6D $D1
+    ld   a, [wD16D]                               ; $4BA8: $FA $6D $D1
     cp   $FF                                      ; $4BAB: $FE $FF
     jr   z, .else_4BC7_28                         ; $4BAD: $28 $18
 
@@ -1913,7 +1914,7 @@ func_028_4BA7::
     jr   .func_028_4BD4                           ; $4BC5: $18 $0D
 
 .else_4BC7_28:
-    ld   a, [$D16E]                               ; $4BC7: $FA $6E $D1
+    ld   a, [wD16E]                               ; $4BC7: $FA $6E $D1
     cp   $81                                      ; $4BCA: $FE $81
     jr   z, .else_4BD2_28                         ; $4BCC: $28 $04
 
@@ -1923,7 +1924,7 @@ func_028_4BA7::
 .else_4BD2_28:
     ld   a, $01                                   ; $4BD2: $3E $01
 .func_028_4BD4::
-    ld   [$D1C5], a                               ; $4BD4: $EA $C5 $D1
+    ld   [wD1C5], a                               ; $4BD4: $EA $C5 $D1
     pop  af                                       ; $4BD7: $F1
     ret                                           ; $4BD8: $C9
 
@@ -1931,9 +1932,9 @@ func_028_4BA7::
 func_028_4BD9::
     push hl                                       ; $4BD9: $E5
     push bc                                       ; $4BDA: $C5
-    ld   a, [$D197]                               ; $4BDB: $FA $97 $D1
+    ld   a, [wD197]                               ; $4BDB: $FA $97 $D1
     ld   l, a                                     ; $4BDE: $6F
-    ld   a, [$D198]                               ; $4BDF: $FA $98 $D1
+    ld   a, [wD198]                               ; $4BDF: $FA $98 $D1
     ld   h, a                                     ; $4BE2: $67
     ld   de, wEntitiesPosXTable                   ; $4BE3: $11 $00 $C2
     ld   c, $28                                   ; $4BE6: $0E $28
@@ -1950,7 +1951,7 @@ func_028_4BD9::
     sla  a                                        ; $4BF8: $CB $27
     rl   h                                        ; $4BFA: $CB $14
     ld   l, a                                     ; $4BFC: $6F
-    ld   a, [$D169]                               ; $4BFD: $FA $69 $D1
+    ld   a, [wD169]                               ; $4BFD: $FA $69 $D1
     adc  h                                        ; $4C00: $8C
     ld   h, a                                     ; $4C01: $67
     ld   b, $10                                   ; $4C02: $06 $10
@@ -1964,143 +1965,143 @@ func_028_4BD9::
     ret                                           ; $4C0D: $C9
 
 
-JumpTable_028_4C0E:
-    call func_028_4813                            ; $4C0E: JumpTable_028_4C0E $CD $13 $48
-    cp   $F0                                      ; $4C11: JumpTable_028_4C0E $FE $F0
-    jr   z, .return_4C29_28                       ; $4C13: JumpTable_028_4C0E $28 $14
+PhotoAlbumStartPrint1Handler:
+    call func_028_4813                            ; $4C0E: PhotoAlbumStartPrint1Handler $CD $13 $48
+    cp   $F0                                      ; $4C11: PhotoAlbumStartPrint1Handler $FE $F0
+    jr   z, .return_4C29_28                       ; $4C13: PhotoAlbumStartPrint1Handler $28 $14
 
-    cp   $FF                                      ; $4C15: JumpTable_028_4C0E $FE $FF
-    jr   z, .else_4C2A_28                         ; $4C17: JumpTable_028_4C0E $28 $11
+    cp   $FF                                      ; $4C15: PhotoAlbumStartPrint1Handler $FE $FF
+    jr   z, .else_4C2A_28                         ; $4C17: PhotoAlbumStartPrint1Handler $28 $11
 
-    ld   a, [wGameplaySubtype]                    ; $4C19: JumpTable_028_4C0E $FA $96 $DB
-    inc  a                                        ; $4C1C: JumpTable_028_4C0E $3C
-    ld   [$D1C6], a                               ; $4C1D: JumpTable_028_4C0E $EA $C6 $D1
-    xor  a                                        ; $4C20: JumpTable_028_4C0E $AF
-    ld   [$D1C7], a                               ; $4C21: JumpTable_028_4C0E $EA $C7 $D1
-    ld   a, $10                                   ; $4C24: JumpTable_028_4C0E $3E $10
-    ld   [wGameplaySubtype], a                    ; $4C26: JumpTable_028_4C0E $EA $96 $DB
+    ld   a, [wGameplaySubtype]                    ; $4C19: PhotoAlbumStartPrint1Handler $FA $96 $DB
+    inc  a                                        ; $4C1C: PhotoAlbumStartPrint1Handler $3C
+    ld   [wD1C6], a                               ; $4C1D: PhotoAlbumStartPrint1Handler $EA $C6 $D1
+    xor  a                                        ; $4C20: PhotoAlbumStartPrint1Handler $AF
+    ld   [wD1C7], a                               ; $4C21: PhotoAlbumStartPrint1Handler $EA $C7 $D1
+    ld   a, $10                                   ; $4C24: PhotoAlbumStartPrint1Handler $3E $10
+    ld   [wGameplaySubtype], a                    ; $4C26: PhotoAlbumStartPrint1Handler $EA $96 $DB
 .return_4C29_28:
-    ret                                           ; $4C29: JumpTable_028_4C0E $C9
+    ret                                           ; $4C29: PhotoAlbumStartPrint1Handler $C9
 
 
 .else_4C2A_28:
-    ld   a, JINGLE_WRONG_ANSWER                   ; $4C2A: JumpTable_028_4C0E $3E $1D
-    ldh  [hJingle], a                             ; $4C2C: JumpTable_028_4C0E $E0 $F2
-    ld   a, $10                                   ; $4C2E: JumpTable_028_4C0E $3E $10
-    ldh  [hFrameCounter], a                       ; $4C30: JumpTable_028_4C0E $E0 $E7
-    ld   a, $11                                   ; $4C32: JumpTable_028_4C0E $3E $11
-    ld   [wGameplaySubtype], a                    ; $4C34: JumpTable_028_4C0E $EA $96 $DB
-    ret                                           ; $4C37: JumpTable_028_4C0E $C9
+    ld   a, JINGLE_WRONG_ANSWER                   ; $4C2A: PhotoAlbumStartPrint1Handler $3E $1D
+    ldh  [hJingle], a                             ; $4C2C: PhotoAlbumStartPrint1Handler $E0 $F2
+    ld   a, $10                                   ; $4C2E: PhotoAlbumStartPrint1Handler $3E $10
+    ldh  [hFrameCounter], a                       ; $4C30: PhotoAlbumStartPrint1Handler $E0 $E7
+    ld   a, $11                                   ; $4C32: PhotoAlbumStartPrint1Handler $3E $11
+    ld   [wGameplaySubtype], a                    ; $4C34: PhotoAlbumStartPrint1Handler $EA $96 $DB
+    ret                                           ; $4C37: PhotoAlbumStartPrint1Handler $C9
 
 
-JumpTable_028_4C38:
-    ld   a, [$D16D]                               ; $4C38: JumpTable_028_4C38 $FA $6D $D1
-    cp   $FF                                      ; $4C3B: JumpTable_028_4C38 $FE $FF
-    jp   z, func_028_45E9                         ; $4C3D: JumpTable_028_4C38 $CA $E9 $45
+PhotoAlbumStartPrint2Handler:
+    ld   a, [wD16D]                               ; $4C38: PhotoAlbumStartPrint2Handler $FA $6D $D1
+    cp   $FF                                      ; $4C3B: PhotoAlbumStartPrint2Handler $FE $FF
+    jp   z, func_028_45E9                         ; $4C3D: PhotoAlbumStartPrint2Handler $CA $E9 $45
 
-    ld   a, [$D172]                               ; $4C40: JumpTable_028_4C38 $FA $72 $D1
-    and  a                                        ; $4C43: JumpTable_028_4C38 $A7
-    jr   z, .else_4C54_28                         ; $4C44: JumpTable_028_4C38 $28 $0E
+    ld   a, [wD172]                               ; $4C40: PhotoAlbumStartPrint2Handler $FA $72 $D1
+    and  a                                        ; $4C43: PhotoAlbumStartPrint2Handler $A7
+    jr   z, .else_4C54_28                         ; $4C44: PhotoAlbumStartPrint2Handler $28 $0E
 
-    ld   a, [$D16B]                               ; $4C46: JumpTable_028_4C38 $FA $6B $D1
-    cp   $03                                      ; $4C49: JumpTable_028_4C38 $FE $03
-    jr   z, .else_4C54_28                         ; $4C4B: JumpTable_028_4C38 $28 $07
+    ld   a, [wD16B]                               ; $4C46: PhotoAlbumStartPrint2Handler $FA $6B $D1
+    cp   $03                                      ; $4C49: PhotoAlbumStartPrint2Handler $FE $03
+    jr   z, .else_4C54_28                         ; $4C4B: PhotoAlbumStartPrint2Handler $28 $07
 
-    cp   $01                                      ; $4C4D: JumpTable_028_4C38 $FE $01
-    jr   z, .else_4C54_28                         ; $4C4F: JumpTable_028_4C38 $28 $03
+    cp   $01                                      ; $4C4D: PhotoAlbumStartPrint2Handler $FE $01
+    jr   z, .else_4C54_28                         ; $4C4F: PhotoAlbumStartPrint2Handler $28 $03
 
-    jp   func_028_45E9                            ; $4C51: JumpTable_028_4C38 $C3 $E9 $45
+    jp   func_028_45E9                            ; $4C51: PhotoAlbumStartPrint2Handler $C3 $E9 $45
 
 .else_4C54_28:
-    ld   a, $01                                   ; $4C54: JumpTable_028_4C38 $3E $01
-    ld   [$D1B6], a                               ; $4C56: JumpTable_028_4C38 $EA $B6 $D1
-    ld   hl, wEntitiesPosXTable                   ; $4C59: JumpTable_028_4C38 $21 $00 $C2
-    ld   a, $09                                   ; $4C5C: JumpTable_028_4C38 $3E $09
-    call func_028_48C1                            ; $4C5E: JumpTable_028_4C38 $CD $C1 $48
-    cp   $FF                                      ; $4C61: JumpTable_028_4C38 $FE $FF
-    jp   z, func_028_45E9                         ; $4C63: JumpTable_028_4C38 $CA $E9 $45
+    ld   a, $01                                   ; $4C54: PhotoAlbumStartPrint2Handler $3E $01
+    ld   [wD1B6], a                               ; $4C56: PhotoAlbumStartPrint2Handler $EA $B6 $D1
+    ld   hl, wEntitiesPosXTable                   ; $4C59: PhotoAlbumStartPrint2Handler $21 $00 $C2
+    ld   a, $09                                   ; $4C5C: PhotoAlbumStartPrint2Handler $3E $09
+    call func_028_48C1                            ; $4C5E: PhotoAlbumStartPrint2Handler $CD $C1 $48
+    cp   $FF                                      ; $4C61: PhotoAlbumStartPrint2Handler $FE $FF
+    jp   z, func_028_45E9                         ; $4C63: PhotoAlbumStartPrint2Handler $CA $E9 $45
 
-    cp   $F0                                      ; $4C66: JumpTable_028_4C38 $FE $F0
-    ret  z                                        ; $4C68: JumpTable_028_4C38 $C8
+    cp   $F0                                      ; $4C66: PhotoAlbumStartPrint2Handler $FE $F0
+    ret  z                                        ; $4C68: PhotoAlbumStartPrint2Handler $C8
 
-    jp   func_028_44DB                            ; $4C69: JumpTable_028_4C38 $C3 $DB $44
+    jp   PhotoAlbumIncrementState                 ; $4C69: PhotoAlbumStartPrint2Handler $C3 $DB $44
 
-JumpTable_028_4C6C:
-    ld   a, [$D16D]                               ; $4C6C: JumpTable_028_4C6C $FA $6D $D1
-    cp   $FF                                      ; $4C6F: JumpTable_028_4C6C $FE $FF
-    jp   z, func_028_45E9                         ; $4C71: JumpTable_028_4C6C $CA $E9 $45
+PhotoAlbumStartPrint3Handler:
+    ld   a, [wD16D]                               ; $4C6C: PhotoAlbumStartPrint3Handler $FA $6D $D1
+    cp   $FF                                      ; $4C6F: PhotoAlbumStartPrint3Handler $FE $FF
+    jp   z, func_028_45E9                         ; $4C71: PhotoAlbumStartPrint3Handler $CA $E9 $45
 
-    ld   a, [$D172]                               ; $4C74: JumpTable_028_4C6C $FA $72 $D1
-    and  a                                        ; $4C77: JumpTable_028_4C6C $A7
-    jr   z, .else_4C87_28                         ; $4C78: JumpTable_028_4C6C $28 $0D
+    ld   a, [wD172]                               ; $4C74: PhotoAlbumStartPrint3Handler $FA $72 $D1
+    and  a                                        ; $4C77: PhotoAlbumStartPrint3Handler $A7
+    jr   z, .else_4C87_28                         ; $4C78: PhotoAlbumStartPrint3Handler $28 $0D
 
-    ld   a, [$D16B]                               ; $4C7A: JumpTable_028_4C6C $FA $6B $D1
-    cp   $02                                      ; $4C7D: JumpTable_028_4C6C $FE $02
-    jr   z, .else_4C87_28                         ; $4C7F: JumpTable_028_4C6C $28 $06
+    ld   a, [wD16B]                               ; $4C7A: PhotoAlbumStartPrint3Handler $FA $6B $D1
+    cp   $02                                      ; $4C7D: PhotoAlbumStartPrint3Handler $FE $02
+    jr   z, .else_4C87_28                         ; $4C7F: PhotoAlbumStartPrint3Handler $28 $06
 
-    cp   $01                                      ; $4C81: JumpTable_028_4C6C $FE $01
-    jr   z, .else_4C87_28                         ; $4C83: JumpTable_028_4C6C $28 $02
+    cp   $01                                      ; $4C81: PhotoAlbumStartPrint3Handler $FE $01
+    jr   z, .else_4C87_28                         ; $4C83: PhotoAlbumStartPrint3Handler $28 $02
 
-    jr   .return_4CAC_28                          ; $4C85: JumpTable_028_4C6C $18 $25
+    jr   .return_4CAC_28                          ; $4C85: PhotoAlbumStartPrint3Handler $18 $25
 
 .else_4C87_28:
-    ld   a, [$D16D]                               ; $4C87: JumpTable_028_4C6C $FA $6D $D1
-    bit  1, a                                     ; $4C8A: JumpTable_028_4C6C $CB $4F
-    jr   nz, .return_4CAC_28                      ; $4C8C: JumpTable_028_4C6C $20 $1E
+    ld   a, [wD16D]                               ; $4C87: PhotoAlbumStartPrint3Handler $FA $6D $D1
+    bit  1, a                                     ; $4C8A: PhotoAlbumStartPrint3Handler $CB $4F
+    jr   nz, .return_4CAC_28                      ; $4C8C: PhotoAlbumStartPrint3Handler $20 $1E
 
-    call func_028_4886                            ; $4C8E: JumpTable_028_4C6C $CD $86 $48
-    cp   $FF                                      ; $4C91: JumpTable_028_4C6C $FE $FF
-    jp   z, func_028_45E9                         ; $4C93: JumpTable_028_4C6C $CA $E9 $45
+    call func_028_4886                            ; $4C8E: PhotoAlbumStartPrint3Handler $CD $86 $48
+    cp   $FF                                      ; $4C91: PhotoAlbumStartPrint3Handler $FE $FF
+    jp   z, func_028_45E9                         ; $4C93: PhotoAlbumStartPrint3Handler $CA $E9 $45
 
-    cp   $F0                                      ; $4C96: JumpTable_028_4C6C $FE $F0
-    ret  z                                        ; $4C98: JumpTable_028_4C6C $C8
+    cp   $F0                                      ; $4C96: PhotoAlbumStartPrint3Handler $FE $F0
+    ret  z                                        ; $4C98: PhotoAlbumStartPrint3Handler $C8
 
-    ld   a, $03                                   ; $4C99: JumpTable_028_4C6C $3E $03
-    ld   [$D182], a                               ; $4C9B: JumpTable_028_4C6C $EA $82 $D1
-    xor  a                                        ; $4C9E: JumpTable_028_4C6C $AF
-    ld   [$D1C7], a                               ; $4C9F: JumpTable_028_4C6C $EA $C7 $D1
-    ld   a, $10                                   ; $4CA2: JumpTable_028_4C6C $3E $10
-    ld   [wGameplaySubtype], a                    ; $4CA4: JumpTable_028_4C6C $EA $96 $DB
-    ld   a, $0F                                   ; $4CA7: JumpTable_028_4C6C $3E $0F
-    ld   [$D1C6], a                               ; $4CA9: JumpTable_028_4C6C $EA $C6 $D1
+    ld   a, $03                                   ; $4C99: PhotoAlbumStartPrint3Handler $3E $03
+    ld   [wD182], a                               ; $4C9B: PhotoAlbumStartPrint3Handler $EA $82 $D1
+    xor  a                                        ; $4C9E: PhotoAlbumStartPrint3Handler $AF
+    ld   [wD1C7], a                               ; $4C9F: PhotoAlbumStartPrint3Handler $EA $C7 $D1
+    ld   a, $10                                   ; $4CA2: PhotoAlbumStartPrint3Handler $3E $10
+    ld   [wGameplaySubtype], a                    ; $4CA4: PhotoAlbumStartPrint3Handler $EA $96 $DB
+    ld   a, $0F                                   ; $4CA7: PhotoAlbumStartPrint3Handler $3E $0F
+    ld   [wD1C6], a                               ; $4CA9: PhotoAlbumStartPrint3Handler $EA $C6 $D1
 .return_4CAC_28:
-    ret                                           ; $4CAC: JumpTable_028_4C6C $C9
+    ret                                           ; $4CAC: PhotoAlbumStartPrint3Handler $C9
 
 
-JumpTable_028_4CAD:
-    ld   a, [$D16D]                               ; $4CAD: JumpTable_028_4CAD $FA $6D $D1
-    cp   $FF                                      ; $4CB0: JumpTable_028_4CAD $FE $FF
-    jp   z, func_028_45E9                         ; $4CB2: JumpTable_028_4CAD $CA $E9 $45
+PhotoAlbumStartPrint4Handler:
+    ld   a, [wD16D]                               ; $4CAD: PhotoAlbumStartPrint4Handler $FA $6D $D1
+    cp   $FF                                      ; $4CB0: PhotoAlbumStartPrint4Handler $FE $FF
+    jp   z, func_028_45E9                         ; $4CB2: PhotoAlbumStartPrint4Handler $CA $E9 $45
 
-    bit  3, a                                     ; $4CB5: JumpTable_028_4CAD $CB $5F
-    jp   nz, .return_4CCD_28                      ; $4CB7: JumpTable_028_4CAD $C2 $CD $4C
+    bit  3, a                                     ; $4CB5: PhotoAlbumStartPrint4Handler $CB $5F
+    jp   nz, .return_4CCD_28                      ; $4CB7: PhotoAlbumStartPrint4Handler $C2 $CD $4C
 
-    bit  1, a                                     ; $4CBA: JumpTable_028_4CAD $CB $4F
-    jp   nz, .return_4CCD_28                      ; $4CBC: JumpTable_028_4CAD $C2 $CD $4C
+    bit  1, a                                     ; $4CBA: PhotoAlbumStartPrint4Handler $CB $4F
+    jp   nz, .return_4CCD_28                      ; $4CBC: PhotoAlbumStartPrint4Handler $C2 $CD $4C
 
-    ld   a, $01                                   ; $4CBF: JumpTable_028_4CAD $3E $01
-    ld   [wGameplaySubtype], a                    ; $4CC1: JumpTable_028_4CAD $EA $96 $DB
-    ld   a, MUSIC_MINIGAME                        ; $4CC4: JumpTable_028_4CAD $3E $02
-    ld   [wMusicTrackToPlay], a                   ; $4CC6: JumpTable_028_4CAD $EA $68 $D3
-    xor  a                                        ; $4CC9: JumpTable_028_4CAD $AF
-    ld   [$D16B], a                               ; $4CCA: JumpTable_028_4CAD $EA $6B $D1
+    ld   a, $01                                   ; $4CBF: PhotoAlbumStartPrint4Handler $3E $01
+    ld   [wGameplaySubtype], a                    ; $4CC1: PhotoAlbumStartPrint4Handler $EA $96 $DB
+    ld   a, MUSIC_MINIGAME                        ; $4CC4: PhotoAlbumStartPrint4Handler $3E $02
+    ld   [wMusicTrackToPlay], a                   ; $4CC6: PhotoAlbumStartPrint4Handler $EA $68 $D3
+    xor  a                                        ; $4CC9: PhotoAlbumStartPrint4Handler $AF
+    ld   [wD16B], a                               ; $4CCA: PhotoAlbumStartPrint4Handler $EA $6B $D1
 .return_4CCD_28:
-    ret                                           ; $4CCD: JumpTable_028_4CAD $C9
+    ret                                           ; $4CCD: PhotoAlbumStartPrint4Handler $C9
 
 
-JumpTable_028_4CCE:
-    ld   hl, $D1C7                                ; $4CCE: JumpTable_028_4CCE $21 $C7 $D1
-    inc  [hl]                                     ; $4CD1: JumpTable_028_4CCE $34
-    ld   a, [hl]                                  ; $4CD2: JumpTable_028_4CCE $7E
-    cp   $06                                      ; $4CD3: JumpTable_028_4CCE $FE $06
-    jr   c, .return_4CDF_28                       ; $4CD5: JumpTable_028_4CCE $38 $08
+PhotoAlbumStartPrint5Handler:
+    ld   hl, wD1C7                                ; $4CCE: PhotoAlbumStartPrint5Handler $21 $C7 $D1
+    inc  [hl]                                     ; $4CD1: PhotoAlbumStartPrint5Handler $34
+    ld   a, [hl]                                  ; $4CD2: PhotoAlbumStartPrint5Handler $7E
+    cp   $06                                      ; $4CD3: PhotoAlbumStartPrint5Handler $FE $06
+    jr   c, .return_4CDF_28                       ; $4CD5: PhotoAlbumStartPrint5Handler $38 $08
 
-    xor  a                                        ; $4CD7: JumpTable_028_4CCE $AF
-    ld   [hl], a                                  ; $4CD8: JumpTable_028_4CCE $77
-    ld   a, [$D1C6]                               ; $4CD9: JumpTable_028_4CCE $FA $C6 $D1
-    ld   [wGameplaySubtype], a                    ; $4CDC: JumpTable_028_4CCE $EA $96 $DB
+    xor  a                                        ; $4CD7: PhotoAlbumStartPrint5Handler $AF
+    ld   [hl], a                                  ; $4CD8: PhotoAlbumStartPrint5Handler $77
+    ld   a, [wD1C6]                               ; $4CD9: PhotoAlbumStartPrint5Handler $FA $C6 $D1
+    ld   [wGameplaySubtype], a                    ; $4CDC: PhotoAlbumStartPrint5Handler $EA $96 $DB
 .return_4CDF_28:
-    ret                                           ; $4CDF: JumpTable_028_4CCE $C9
+    ret                                           ; $4CDF: PhotoAlbumStartPrint5Handler $C9
 
 MAKE_PRINT_ERROR: macro
 ; oam data, terminated with $FF
@@ -2146,58 +2147,59 @@ Data_028_4D84:
     dw Data_028_4D32
     dw Data_028_4D5B
 
-JumpTable_028_4D8C:
-    ldh  a, [hJoypadState]                        ; $4D8C: JumpTable_028_4D8C $F0 $CC
-    and  a                                        ; $4D8E: JumpTable_028_4D8C $A7
-    jr   z, .else_4D9F_28                         ; $4D8F: JumpTable_028_4D8C $28 $0E
+; Display a flashing error message with the printer error (like "Print Error 02")
+PhotoAlbumPrintErrorHandler:
+    ldh  a, [hJoypadState]                        ; $4D8C: PhotoAlbumPrintErrorHandler $F0 $CC
+    and  a                                        ; $4D8E: PhotoAlbumPrintErrorHandler $A7
+    jr   z, .else_4D9F_28                         ; $4D8F: PhotoAlbumPrintErrorHandler $28 $0E
 
-    ld   a, $01                                   ; $4D91: JumpTable_028_4D8C $3E $01
-    ld   [wGameplaySubtype], a                    ; $4D93: JumpTable_028_4D8C $EA $96 $DB
-    ld   a, MUSIC_MINIGAME                        ; $4D96: JumpTable_028_4D8C $3E $02
-    ld   [wMusicTrackToPlay], a                   ; $4D98: JumpTable_028_4D8C $EA $68 $D3
-    xor  a                                        ; $4D9B: JumpTable_028_4D8C $AF
-    ld   [wTransitionSequenceCounter], a          ; $4D9C: JumpTable_028_4D8C $EA $6B $C1
+    ld   a, $01                                   ; $4D91: PhotoAlbumPrintErrorHandler $3E $01
+    ld   [wGameplaySubtype], a                    ; $4D93: PhotoAlbumPrintErrorHandler $EA $96 $DB
+    ld   a, MUSIC_MINIGAME                        ; $4D96: PhotoAlbumPrintErrorHandler $3E $02
+    ld   [wMusicTrackToPlay], a                   ; $4D98: PhotoAlbumPrintErrorHandler $EA $68 $D3
+    xor  a                                        ; $4D9B: PhotoAlbumPrintErrorHandler $AF
+    ld   [wTransitionSequenceCounter], a          ; $4D9C: PhotoAlbumPrintErrorHandler $EA $6B $C1
 .else_4D9F_28:
-    ldh  a, [hFrameCounter]                       ; $4D9F: JumpTable_028_4D8C $F0 $E7
-    inc  a                                        ; $4DA1: JumpTable_028_4D8C $3C
-    ldh  [hFrameCounter], a                       ; $4DA2: JumpTable_028_4D8C $E0 $E7
-    and  %00110000                                ; $4DA4: JumpTable_028_4D8C $E6 $30
-    jr   nz, .else_4DAD_28                        ; $4DA6: JumpTable_028_4D8C $20 $05
+    ldh  a, [hFrameCounter]                       ; $4D9F: PhotoAlbumPrintErrorHandler $F0 $E7
+    inc  a                                        ; $4DA1: PhotoAlbumPrintErrorHandler $3C
+    ldh  [hFrameCounter], a                       ; $4DA2: PhotoAlbumPrintErrorHandler $E0 $E7
+    and  %00110000                                ; $4DA4: PhotoAlbumPrintErrorHandler $E6 $30
+    jr   nz, .else_4DAD_28                        ; $4DA6: PhotoAlbumPrintErrorHandler $20 $05
 
-    ld   a, JINGLE_WRONG_ANSWER                   ; $4DA8: JumpTable_028_4D8C $3E $1D
-    ldh  [hJingle], a                             ; $4DAA: JumpTable_028_4D8C $E0 $F2
-    ret                                           ; $4DAC: JumpTable_028_4D8C $C9
+    ld   a, JINGLE_WRONG_ANSWER                   ; $4DA8: PhotoAlbumPrintErrorHandler $3E $1D
+    ldh  [hJingle], a                             ; $4DAA: PhotoAlbumPrintErrorHandler $E0 $F2
+    ret                                           ; $4DAC: PhotoAlbumPrintErrorHandler $C9
 
 
 .else_4DAD_28:
-    ld   a, [$D1C5]                               ; $4DAD: JumpTable_028_4D8C $FA $C5 $D1
-    sla  a                                        ; $4DB0: JumpTable_028_4D8C $CB $27
-    add  LOW(Data_028_4D84)                       ; $4DB2: JumpTable_028_4D8C $C6 $84
-    ld   l, a                                     ; $4DB4: JumpTable_028_4D8C $6F
-    ld   a, HIGH(Data_028_4D84)                   ; $4DB5: JumpTable_028_4D8C $3E $4D
-    adc  $00                                      ; $4DB7: JumpTable_028_4D8C $CE $00
-    ld   h, a                                     ; $4DB9: JumpTable_028_4D8C $67
-    ld   e, [hl]                                  ; $4DBA: JumpTable_028_4D8C $5E
-    inc  hl                                       ; $4DBB: JumpTable_028_4D8C $23
-    ld   d, [hl]                                  ; $4DBC: JumpTable_028_4D8C $56
-    ld   hl, wram0Section                         ; $4DBD: JumpTable_028_4D8C $21 $00 $C0
+    ld   a, [wD1C5]                               ; $4DAD: PhotoAlbumPrintErrorHandler $FA $C5 $D1
+    sla  a                                        ; $4DB0: PhotoAlbumPrintErrorHandler $CB $27
+    add  LOW(Data_028_4D84)                       ; $4DB2: PhotoAlbumPrintErrorHandler $C6 $84
+    ld   l, a                                     ; $4DB4: PhotoAlbumPrintErrorHandler $6F
+    ld   a, HIGH(Data_028_4D84)                   ; $4DB5: PhotoAlbumPrintErrorHandler $3E $4D
+    adc  $00                                      ; $4DB7: PhotoAlbumPrintErrorHandler $CE $00
+    ld   h, a                                     ; $4DB9: PhotoAlbumPrintErrorHandler $67
+    ld   e, [hl]                                  ; $4DBA: PhotoAlbumPrintErrorHandler $5E
+    inc  hl                                       ; $4DBB: PhotoAlbumPrintErrorHandler $23
+    ld   d, [hl]                                  ; $4DBC: PhotoAlbumPrintErrorHandler $56
+    ld   hl, wram0Section                         ; $4DBD: PhotoAlbumPrintErrorHandler $21 $00 $C0
 .func_028_4DC0::
-    ld   a, [de]                                  ; $4DC0: JumpTable_028_4D8C $1A
-    cp   $FF                                      ; $4DC1: JumpTable_028_4D8C $FE $FF
-    ret  z                                        ; $4DC3: JumpTable_028_4D8C $C8
+    ld   a, [de]                                  ; $4DC0: PhotoAlbumPrintErrorHandler $1A
+    cp   $FF                                      ; $4DC1: PhotoAlbumPrintErrorHandler $FE $FF
+    ret  z                                        ; $4DC3: PhotoAlbumPrintErrorHandler $C8
 
-    ldi  [hl], a                                  ; $4DC4: JumpTable_028_4D8C $22
-    inc  de                                       ; $4DC5: JumpTable_028_4D8C $13
-    ld   a, [de]                                  ; $4DC6: JumpTable_028_4D8C $1A
-    ldi  [hl], a                                  ; $4DC7: JumpTable_028_4D8C $22
-    inc  de                                       ; $4DC8: JumpTable_028_4D8C $13
-    ld   a, [de]                                  ; $4DC9: JumpTable_028_4D8C $1A
-    ldi  [hl], a                                  ; $4DCA: JumpTable_028_4D8C $22
-    inc  de                                       ; $4DCB: JumpTable_028_4D8C $13
-    ld   a, [de]                                  ; $4DCC: JumpTable_028_4D8C $1A
-    ldi  [hl], a                                  ; $4DCD: JumpTable_028_4D8C $22
-    inc  de                                       ; $4DCE: JumpTable_028_4D8C $13
-    jr   .func_028_4DC0                           ; $4DCF: JumpTable_028_4D8C $18 $EF
+    ldi  [hl], a                                  ; $4DC4: PhotoAlbumPrintErrorHandler $22
+    inc  de                                       ; $4DC5: PhotoAlbumPrintErrorHandler $13
+    ld   a, [de]                                  ; $4DC6: PhotoAlbumPrintErrorHandler $1A
+    ldi  [hl], a                                  ; $4DC7: PhotoAlbumPrintErrorHandler $22
+    inc  de                                       ; $4DC8: PhotoAlbumPrintErrorHandler $13
+    ld   a, [de]                                  ; $4DC9: PhotoAlbumPrintErrorHandler $1A
+    ldi  [hl], a                                  ; $4DCA: PhotoAlbumPrintErrorHandler $22
+    inc  de                                       ; $4DCB: PhotoAlbumPrintErrorHandler $13
+    ld   a, [de]                                  ; $4DCC: PhotoAlbumPrintErrorHandler $1A
+    ldi  [hl], a                                  ; $4DCD: PhotoAlbumPrintErrorHandler $22
+    inc  de                                       ; $4DCE: PhotoAlbumPrintErrorHandler $13
+    jr   .func_028_4DC0                           ; $4DCF: PhotoAlbumPrintErrorHandler $18 $EF
 
 ; TODO: understand the purpose of these data blocks,
 ;       and move them to the relevant data/* directory.

@@ -1,20 +1,20 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MadBomberSpriteVariants::
 .variant0
-    db $FF, $00
-    db $FF, $20
+    db $FF, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $FF, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $70, $02
-    db $70, $22
+    db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $72, $02
-    db $72, $22
+    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3
-    db $74, $02
-    db $76, $02
+    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant4
-    db $76, $22
-    db $74, $22
+    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 Data_006_413A::
     db   $28, $38, $58, $58, $78, $88, $28, $88

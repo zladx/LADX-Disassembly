@@ -397,11 +397,11 @@ jr_006_6A36:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 OwlEventSpriteVariants::
 .variant0
-    db $78, $01
-    db $78, $21
+    db $78, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $7A, $01
-    db $7A, $21
+    db $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 Data_006_6A3F::
     db   $00, $F8, $7C, $01, $00, $00, $7E, $01

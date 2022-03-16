@@ -12,14 +12,14 @@ Data_007_4BAB::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Bear1SpriteVariants::
 .variant0
-    db $7A, $01
-    db $7C, $01
+    db $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Bear2SpriteVariants::
 .variant0
-    db $7C, $21
-    db $7A, $21
+    db $7C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 BearEntityHandler::
     xor  a                                        ; $4BB5: $AF

@@ -241,11 +241,11 @@ ENDC
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 EvilEagle1SpriteVariants::
 .variant0
-    db $7E, $02
-    db $7E, $22
+    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $7E, $42
-    db $7E, $62
+    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 
 func_005_5B5A::
     ld   de, EvilEagle1SpriteVariants             ; $5B5A: $11 $52 $5B
@@ -1298,11 +1298,11 @@ jr_005_6246:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 EvilEagle2SpriteVariants::
 .variant0
-    db $7C, $00
-    db $7C, $20
+    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $7C, $40
-    db $7C, $60
+    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 
 func_005_6256::
     ld   a, $02                                   ; $6256: $3E $02
@@ -1384,17 +1384,17 @@ jr_005_62B0:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 EvilEagle3SpriteVariants::
 .variant0
-    db $7A, $22
-    db $78, $22
+    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $78, $02
-    db $7A, $02
+    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant2
-    db $7A, $62
-    db $78, $62
+    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 .variant3
-    db $78, $42
-    db $7A, $42
+    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
 
 func_005_62C8::
     ld   de, EvilEagle3SpriteVariants             ; $62C8: $11 $B8 $62

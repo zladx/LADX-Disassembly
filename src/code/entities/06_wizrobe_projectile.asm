@@ -1,17 +1,17 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 WizrobeProjectileSpriteVariants::
 .variant0
-    db $6A, $23
-    db $68, $23
+    db $6A, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $68, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $68, $03
-    db $6A, $03
+    db $68, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $6A, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
 .variant2
-    db $6C, $43
-    db $6C, $63
+    db $6C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $6C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 .variant3
-    db $6C, $03
-    db $6C, $23
+    db $6C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $6C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 WizrobeProjectileEntityHandler::
     ; Flip palette every 8 frame

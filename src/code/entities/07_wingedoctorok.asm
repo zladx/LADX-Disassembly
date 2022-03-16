@@ -7,29 +7,29 @@ Data_007_5629::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 WingedOctorokSpriteVariants::
 .variant0
-    db $50, $02
-    db $50, $22
+    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $52, $02
-    db $52, $22
+    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $50, $42
-    db $50, $62
+    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 .variant3
-    db $52, $42
-    db $52, $62
+    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 .variant4
-    db $54, $02
-    db $56, $02
+    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $56, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant5
-    db $58, $02
-    db $5A, $02
+    db $58, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $5A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant6
-    db $56, $22
-    db $54, $22
+    db $56, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant7
-    db $5A, $22
-    db $58, $22
+    db $5A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $58, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 WingedOctorokEntityHandler::
     ld   de, WingedOctorokSpriteVariants          ; $564D: $11 $2D $56

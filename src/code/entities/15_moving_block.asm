@@ -1,8 +1,8 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MovingBlockSpriteVariants:: ; $40FC
 .variant0
-    db $F8, $17
-    db $FA, $17
+    db $F8, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
+    db $FA, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
 
 MovingBlockLeftTopEntityHandler::
     ld   de, MovingBlockSpriteVariants            ; $4100 $11 $FC $40

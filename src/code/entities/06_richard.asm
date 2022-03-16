@@ -1,29 +1,29 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 RichardSpriteVariants::
 .variant0
-    db $50, $03
-    db $52, $03
+    db $50, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $52, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
 .variant1
-    db $54, $03
-    db $56, $03
+    db $54, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $56, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
 .variant2
-    db $50, $03
-    db $52, $03
+    db $50, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $52, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
 .variant3
-    db $54, $03
-    db $56, $03
+    db $54, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $56, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
 .variant4
-    db $58, $03
-    db $5A, $03
+    db $58, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $5A, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
 .variant5
-    db $5C, $03
-    db $5E, $03
+    db $5C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $5E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
 .variant6
-    db $5A, $23
-    db $58, $23
+    db $5A, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $58, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant7
-    db $5E, $23
-    db $5C, $23
+    db $5E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 RichardEntityHandler::
     ld   a, $21                                   ; $4020: $3E $21

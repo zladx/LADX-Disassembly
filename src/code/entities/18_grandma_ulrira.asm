@@ -1,32 +1,32 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 GrandmaUlrira1SpriteVariants::
 .variant0
-    db $62, $21
-    db $60, $21
+    db $62, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $60, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $66, $21
-    db $64, $21
+    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $64, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $6C, $01
-    db $6E, $01
+    db $6C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $6E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 GrandmaUlrira2SpriteVariants::
 .variant0
-    db $68, $01
-    db $6A, $01
+    db $68, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $6A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant1
-    db $6A, $21
-    db $68, $21
+    db $6A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $68, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $6C, $01
-    db $6E, $01
+    db $6C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $6E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 GrandmaUlrira3SpriteVariants::
 .variant0
-    db $9A, $14
-    db $9C, $14
+    db $9A, OAM_GBC_PAL_4 | OAM_DMG_PAL_1
+    db $9C, OAM_GBC_PAL_4 | OAM_DMG_PAL_1
 
 GrandmaUlriraEntityHandler::
     ld   hl, wEntitiesPrivateState4Table          ; $4D17: $21 $40 $C4

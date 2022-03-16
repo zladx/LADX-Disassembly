@@ -1,17 +1,17 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 BoomerangSpriteVariants:: ; $4451
 .variant0
-    db $38, $14
-    db $38, $34
+    db $38, OAM_GBC_PAL_4 | OAM_DMG_PAL_1
+    db $38, OAM_GBC_PAL_4 | OAM_DMG_PAL_1 | OAM_X_FLIP
 .variant1
-    db $A4, $14
-    db $FF, $FF  
+    db $A4, OAM_GBC_PAL_4 | OAM_DMG_PAL_1
+    db $FF, OAM_GBC_PAL_7 | OAM_DMG_PAL_1 | OAM_BANK_1 | OAM_Y_FLIP | OAM_X_FLIP | OAM_PRIORITY
 .variant2
-    db $38, $54
-    db $38, $74
+    db $38, OAM_GBC_PAL_4 | OAM_DMG_PAL_1 | OAM_Y_FLIP
+    db $38, OAM_GBC_PAL_4 | OAM_DMG_PAL_1 | OAM_Y_FLIP | OAM_X_FLIP
 .variant3
-    db $FF, $FF
-    db $A4, $34
+    db $FF, OAM_GBC_PAL_7 | OAM_DMG_PAL_1 | OAM_BANK_1 | OAM_Y_FLIP | OAM_X_FLIP | OAM_PRIORITY
+    db $A4, OAM_GBC_PAL_4 | OAM_DMG_PAL_1 | OAM_X_FLIP
 
 BoomerangEntityHandler::
     ; wActiveProjectileCount = 1

@@ -1,11 +1,11 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 HoleFillerSpriteVariants::
 .variant0
-    db $40, $02
-    db $40, $22
+    db $40, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $40, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $42, $02
-    db $42, $22
+    db $42, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $42, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 HoleFillerEntityHandler::
     ld   de, HoleFillerSpriteVariants             ; $510C: $11 $04 $51

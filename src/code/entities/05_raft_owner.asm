@@ -1,29 +1,29 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 RaftOwnerIndoorSpriteVariants::
 .variant0
-    db $60, $00
-    db $62, $00
+    db $60, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $62, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant1
-    db $62, $20
-    db $60, $20
+    db $62, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $60, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $64, $00
-    db $66, $00
+    db $64, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $66, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant3
-    db $66, $20
-    db $64, $20
+    db $66, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $64, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant4
-    db $68, $00
-    db $6A, $00
+    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant5
-    db $6C, $00
-    db $6E, $00
+    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant6
-    db $6A, $20
-    db $68, $20
+    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant7
-    db $6E, $20
-    db $6C, $20
+    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 ; Handler for Raft Owner (and also the raft itself?)
 EntityRaftOwnerHandler::
@@ -108,11 +108,11 @@ func_005_53CB::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 RaftOwnerOnOverworldSpriteVariants:: ; $53D4
 .variant0
-    db $5C, $01
-    db $5C, $21
+    db $5C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $5C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $5E, $01
-    db $5E, $21   
+    db $5E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $5E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 raftOnOverworld:
     ld   hl, wEntitiesPrivateState4Table          ; $53DC: $21 $40 $C4

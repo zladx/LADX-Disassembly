@@ -79,20 +79,20 @@ jr_018_63F7:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 ZombieSpriteVariants::
 .variant0
-    db $FF, $FF
-    db $FF, $FF
+    db $FF, OAM_GBC_PAL_7 | OAM_DMG_PAL_1 | OAM_BANK_1 | OAM_Y_FLIP | OAM_X_FLIP | OAM_PRIORITY
+    db $FF, OAM_GBC_PAL_7 | OAM_DMG_PAL_1 | OAM_BANK_1 | OAM_Y_FLIP | OAM_X_FLIP | OAM_PRIORITY
 .variant1
-    db $6C, $02
-    db $6C, $22
+    db $6C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $6C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $68, $02
-    db $6A, $02
+    db $68, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $6A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant3
-    db $60, $02
-    db $62, $02
+    db $60, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $62, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant4
-    db $64, $02
-    db $66, $02
+    db $64, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $66, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 
 label_018_640C:
     ld   de, ZombieSpriteVariants                 ; $640C: $11 $F8 $63

@@ -10,20 +10,20 @@ MiniGelEntityHandler::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 GelLowHealthSpriteVariants::
 .variant0
-    db $52, $02
-    db $52, $22
+    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $54, $02
-    db $54, $22
+    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 GelSpriteVariants::
 .variant0
-    db $52, $00
-    db $52, $20
+    db $52, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $52, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $54, $00
-    db $54, $20
+    db $54, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $54, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 GelEntityHandler::
     call func_006_7BE2                            ; $7C19: $CD $E2 $7B

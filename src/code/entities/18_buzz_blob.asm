@@ -8,32 +8,32 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 BuzzBlobSpriteVariants::
 .variant0
-    db $62, $00
-    db $64, $00
+    db $62, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $64, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant1
-    db $60, $00
-    db $60, $20
+    db $60, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $60, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $64, $20
-    db $62, $20
+    db $64, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $62, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3
-    db $66, $00
-    db $68, $00
+    db $66, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant4
-    db $60, $00
-    db $60, $20
+    db $60, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $60, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant5
-    db $68, $20
-    db $66, $20
+    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $66, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant6
-    db $6C, $00
-    db $6E, $00
+    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant7
-    db $6A, $00
-    db $6A, $20
+    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant8
-    db $6E, $20
-    db $6C, $20
+    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 Data_018_774D::
     db   $00, $01, $02, $01

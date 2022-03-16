@@ -1,20 +1,20 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 GibdoSpriteVariants::
 .variant0
-    db $74, $02
-    db $76, $02
+    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant1
-    db $76, $22
-    db $74, $22
+    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 GibdoTurtleRockSpriteVariants::
 .variant0
-    db $44, $02
-    db $46, $02
+    db $44, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $46, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant1
-    db $46, $22
-    db $44, $22
+    db $46, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $44, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 Data_006_7E7F::
     db   $00, $08, $F8, $00, $F8, $08

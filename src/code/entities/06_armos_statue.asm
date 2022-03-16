@@ -1,11 +1,11 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 ArmosStatueSpriteVariants::
 .variant0
-    db $60, $07
-    db $62, $07
+    db $60, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
+    db $62, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
 .variant1
-    db $64, $07
-    db $66, $07
+    db $64, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
+    db $66, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
 
 ArmosStatueEntityHandler::
     ld   de, ArmosStatueSpriteVariants            ; $744E: $11 $46 $74

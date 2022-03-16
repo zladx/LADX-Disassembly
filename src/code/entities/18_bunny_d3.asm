@@ -1,29 +1,29 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 BunnyD3SpriteVariants::
 .variant0
-    db $50, $01
-    db $52, $01
+    db $50, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $52, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant1
-    db $52, $21
-    db $50, $21
+    db $52, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $50, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $54, $01
-    db $56, $01
+    db $54, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $56, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant3
-    db $56, $21
-    db $54, $21
+    db $56, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $54, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant4
-    db $58, $01
-    db $5A, $01
+    db $58, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $5A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant5
-    db $58, $01
-    db $5A, $01
+    db $58, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $5A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant6
-    db $5A, $21
-    db $58, $21
+    db $5A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $58, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant7
-    db $5A, $21
-    db $58, $21
+    db $5A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $58, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 BunnyD3EntityHandler::
     ld   a, [wDB74]                               ; $51D8: $FA $74 $DB

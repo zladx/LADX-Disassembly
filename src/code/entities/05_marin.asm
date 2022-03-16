@@ -1,65 +1,65 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MarinIndoor2SpriteVariants::
 .variant0
-    db $60, $01
-    db $62, $01
+    db $60, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $62, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant1
-    db $62, $21
-    db $60, $21
+    db $62, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $60, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $64, $01
-    db $66, $01
+    db $64, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant3
-    db $66, $21
-    db $64, $21
+    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $64, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant4
-    db $68, $01
-    db $6A, $01
+    db $68, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $6A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant5
-    db $6C, $01
-    db $6E, $01
+    db $6C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $6E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant6
-    db $6A, $21
-    db $68, $21
+    db $6A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $68, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant7
-    db $6E, $21
-    db $6C, $21
+    db $6E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MarinCreditsSpriteVariants::
 .variant0
-    db $68, $01
-    db $6A, $01
+    db $68, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $6A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant1
-    db $6A, $21
-    db $68, $21
+    db $6A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $68, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $66, $01
-    db $66, $21
+    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3
-    db $66, $01
-    db $66, $21
+    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant4
-    db $6C, $01
-    db $6E, $01
+    db $6C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $6E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant5
-    db $6C, $01
-    db $6E, $01
+    db $6C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $6E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant6
-    db $6E, $21
-    db $6C, $21
+    db $6E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant7
-    db $6E, $21
-    db $6C, $21
+    db $6E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant8
-    db $60, $01
-    db $62, $01
+    db $60, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $62, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant9
-    db $64, $01
-    db $64, $21
+    db $64, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $64, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant10
-    db $62, $21
-    db $60, $21
+    db $62, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $60, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 Data_005_4E56::
     db   $08, $08, $08, $09, $0A, $0A, $0A, $09
@@ -647,11 +647,11 @@ func_005_51BC::
 
     jp_open_dialog $197
 
-
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MarinIndoor1SpriteVariants::
 .variant0
-    db $5C, $00
-    db $5C, $20
+    db $5C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $5C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 MarinEntityHandler_Indoor::
     ld   a, [wTradeSequenceItem]                  ; $51CE: $FA $0E $DB
@@ -735,28 +735,29 @@ jr_005_5245:
 ._01 dw func_005_52DB                             ; $5254
 ._02 dw func_005_5312                             ; $5256
 
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MarinDropSpriteVariants::
 .variant0
-    db $40, $07
-    db $42, $07
+    db $40, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
+    db $42, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
 .variant1
-    db $42, $27
-    db $40, $27
+    db $42, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $40, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $44, $00
-    db $46, $00
+    db $44, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $46, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant3
-    db $48, $00
-    db $4A, $00
+    db $48, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $4A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant4
-    db $48, $00
-    db $4C, $00
+    db $48, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $4C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 
 ; define sprites and there OAM Attributes in a list
 MarinDropGBCSpriteList::
     ;  x    y    n°   OAM
-    db $00, $00, $4E, $06
-    db $00, $08, $4E, $26
+    db $00, $00, $4E, OAM_GBC_PAL_6 | OAM_DMG_PAL_0
+    db $00, $08, $4E, OAM_GBC_PAL_6 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 Data_005_5274::
     db   $03, $03, $03, $03, $03, $04, $03, $04, $03, $03, $03, $02, $02, $02, $02, $02

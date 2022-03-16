@@ -1,11 +1,11 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 PolsVoiceSpriteVariants::
 .variant0
-    db $70, $01
-    db $70, $21
+    db $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $72, $01
-    db $72, $21
+    db $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 PolsVoiceEntityHandler::
     ld   a, [wLinkPlayingOcarinaCountdown]        ; $737B: $FA $66 $C1

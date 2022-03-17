@@ -1,29 +1,29 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 PairoddSpriteVariants::
 .variant0
-    db $70, $01
-    db $72, $01
+    db $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant1
-    db $72, $21
-    db $70, $21
+    db $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $74, $01
-    db $74, $21
+    db $74, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3
-    db $00, $00
-    db $00, $00
+    db $00, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $00, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant4
-    db $7A, $01
-    db $7A, $21
+    db $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant5
-    db $FF, $00
-    db $FF, $00
+    db $FF, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $FF, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant6
-    db $76, $01
-    db $78, $01
+    db $76, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant7
-    db $78, $21
-    db $76, $21
+    db $78, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $76, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 PairoddEntityHandler::
     ldh  a, [hActiveEntitySpriteVariant]          ; $5DF1: $F0 $F1

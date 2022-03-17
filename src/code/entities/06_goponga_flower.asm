@@ -1,11 +1,11 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 GopongaFlowerSpriteVariants::
 .variant0
-    db $50, $02
-    db $50, $22
+    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $52, $02
-    db $52, $22
+    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 GopongaFlowerEntityHandler::
     ld   de, GopongaFlowerSpriteVariants          ; $63FC: $11 $F4 $63

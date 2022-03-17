@@ -180,29 +180,29 @@ func_003_58FC::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown009SpriteVariants::
 .variant0
-    db $60, $03
-    db $62, $03
+    db $60, OAM_GBC_PAL_3
+    db $62, OAM_GBC_PAL_3
 .variant1
-    db $62, $23
-    db $60, $23
+    db $62, OAM_GBC_PAL_3 | OAM_X_FLIP
+    db $60, OAM_GBC_PAL_3 | OAM_X_FLIP
 .variant2
-    db $64, $03
-    db $66, $03
+    db $64, OAM_GBC_PAL_3
+    db $66, OAM_GBC_PAL_3
 .variant3
-    db $66, $23
-    db $64, $23
+    db $66, OAM_GBC_PAL_3 | OAM_X_FLIP
+    db $64, OAM_GBC_PAL_3 | OAM_X_FLIP
 .variant4
-    db $68, $03
-    db $6A, $03
+    db $68, OAM_GBC_PAL_3
+    db $6A, OAM_GBC_PAL_3
 .variant5
-    db $6C, $03
-    db $6E, $03
+    db $6C, OAM_GBC_PAL_3
+    db $6E, OAM_GBC_PAL_3
 .variant6
-    db $6A, $23
-    db $68, $23
+    db $6A, OAM_GBC_PAL_3 | OAM_X_FLIP
+    db $68, OAM_GBC_PAL_3 | OAM_X_FLIP
 .variant7
-    db $6E, $23
-    db $6C, $23
+    db $6E, OAM_GBC_PAL_3 | OAM_X_FLIP
+    db $6C, OAM_GBC_PAL_3 | OAM_X_FLIP
 
 Data_003_5937::
     db   $08, $F8, $04, $FC

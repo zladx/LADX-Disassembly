@@ -522,17 +522,17 @@ func_004_542F::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Facade1SpriteVariants::
 .variant0
-    db $68, $06
-    db $68, $26
+    db $68, OAM_GBC_PAL_6 | OAM_DMG_PAL_0
+    db $68, OAM_GBC_PAL_6 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $6A, $06
-    db $6A, $26
+    db $6A, OAM_GBC_PAL_6 | OAM_DMG_PAL_0
+    db $6A, OAM_GBC_PAL_6 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $6C, $06
-    db $6C, $26
+    db $6C, OAM_GBC_PAL_6 | OAM_DMG_PAL_0
+    db $6C, OAM_GBC_PAL_6 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3
-    db $6E, $06
-    db $6E, $26
+    db $6E, OAM_GBC_PAL_6 | OAM_DMG_PAL_0
+    db $6E, OAM_GBC_PAL_6 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 Data_004_5456::
     db   $00, $01, $02, $03, $03, $03, $03, $03, $03, $02, $01, $00, $00, $00, $00, $00
@@ -622,20 +622,20 @@ jr_004_54F0:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Facade2SpriteVariants::
 .variant0
-    db $40, $06
-    db $40, $26
+    db $40, OAM_GBC_PAL_6 | OAM_DMG_PAL_0
+    db $40, OAM_GBC_PAL_6 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $42, $06
-    db $42, $26
+    db $42, OAM_GBC_PAL_6 | OAM_DMG_PAL_0
+    db $42, OAM_GBC_PAL_6 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Facade3SpriteVariants::
 .variant0
-    db $70, $06
-    db $70, $26
+    db $70, OAM_GBC_PAL_6 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_6 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $72, $06
-    db $72, $26
+    db $72, OAM_GBC_PAL_6 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_6 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 Data_004_5501::
     db   $40, $07, $40, $27, $42, $07, $42, $27
@@ -739,8 +739,8 @@ label_004_5596:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Facade4SpriteVariants::
 .variant0
-    db $F0, $16
-    db $F0, $36
+    db $F0, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
+    db $F0, OAM_GBC_PAL_6 | OAM_DMG_PAL_1 | OAM_X_FLIP
 
 FacadeState3Handler::
     ld   de, Facade4SpriteVariants                ; $559D: $11 $99 $55

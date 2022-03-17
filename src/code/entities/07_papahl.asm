@@ -1,46 +1,46 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Papahl1SpriteVariants::
 .variant0
-    db $6E, $20
-    db $6C, $20
+    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $6C, $00
-    db $6E, $00
+    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 PapahlDirectionSpriteVariants::
 .right
-    db $70, $00
-    db $72, $01
+    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .up
-    db $74, $00
-    db $76, $01
+    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $76, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .left
-    db $78, $00
-    db $7A, $01
+    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .down
-    db $7C, $00
-    db $76, $01
+    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $76, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 
 Papahl2SpriteVariants::
 .variant0
-    db $72, $20
-    db $70, $21
+    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $76, $20
-    db $74, $21
+    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $74, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $7A, $20
-    db $78, $21
+    db $7A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $78, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3
-    db $76, $20
-    db $7C, $21
+    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Papahl4SpriteVariants::
 .variant0
-    db $7E, $01
-    db $7E, $21
+    db $7E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $7E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 PapahlEntityHandler::
     ld   a, [wIsIndoor]                           ; $4A1B: $FA $A5 $DB

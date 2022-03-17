@@ -1192,19 +1192,19 @@ func_001_762B::
     ret                                           ; $764E: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-IntroMarinSpriteVariants::
+IntroMarinSpriteVariants:: ; $764F
 .variant0
-    db $00, $03                                   ; $764F
-    db $02, $03                                   ; $7651
+    db $00, OAM_GBC_PAL_3
+    db $02, OAM_GBC_PAL_3
 .variant1
-    db $04, $03                                   ; $7653
-    db $06, $03                                   ; $7655
+    db $04, OAM_GBC_PAL_3
+    db $06, OAM_GBC_PAL_3
 .variant2
-    db $08, $03                                   ; $7657
-    db $0A, $03                                   ; $7659
+    db $08, OAM_GBC_PAL_3
+    db $0A, OAM_GBC_PAL_3
 .variant3
-    db $0C, $03                                   ; $765B
-    db $0E, $03                                   ; $765D
+    db $0C, OAM_GBC_PAL_3
+    db $0E, OAM_GBC_PAL_3
 
 RenderIntroMarin::
     call func_001_71C7                            ; $765F: $CD $C7 $71
@@ -1422,29 +1422,29 @@ IntroMarinState4::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown003SpriteVariants::
 .variant0 ; $77BD
-    db $38, $00
-    db $38, $20
+    db $38, OAM_DMG_PAL_0
+    db $38, OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1 ; $77C1
-    db $3A, $00
-    db $3A, $20
+    db $3A, OAM_DMG_PAL_0
+    db $3A, OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2 ; $77C5
-    db $3A, $00
-    db $3A, $20
+    db $3A, OAM_DMG_PAL_0
+    db $3A, OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3 ; $77C9
-    db $3C, $00
-    db $3E, $00
+    db $3C, OAM_DMG_PAL_0
+    db $3E, OAM_DMG_PAL_0
 .variant4 ; $77CD
-    db $3C, $00
-    db $3E, $00
+    db $3C, OAM_DMG_PAL_0
+    db $3E, OAM_DMG_PAL_0
 .variant5 ; $77D1
-    db $3A, $00
-    db $3A, $20
+    db $3A, OAM_DMG_PAL_0
+    db $3A, OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant6 ; $77D5
-    db $3A, $00
-    db $3A, $20
+    db $3A, OAM_DMG_PAL_0
+    db $3A, OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant7 ; $77D9
-    db $38, $00
-    db $38, $20
+    db $38, OAM_DMG_PAL_0
+    db $38, OAM_DMG_PAL_0 | OAM_X_FLIP
 
 RenderIntroSparkle::
     xor  a                                        ; $77DD: $AF
@@ -1918,11 +1918,11 @@ jr_001_7A1F::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown004SpriteVariants::
 .variant0 ; $7A27
-    db $10, $00
-    db $12, $00
+    db $10, OAM_DMG_PAL_0
+    db $12, OAM_DMG_PAL_0
 .variant1 ; $7A2B
-    db $14, $00
-    db $16, $00
+    db $14, OAM_DMG_PAL_0
+    db $16, OAM_DMG_PAL_0
 
 RenderIntroInertLink::
     ldh  a, [hActiveEntityPosX]                   ; $7A2F: $F0 $EE

@@ -1,17 +1,17 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 CuccoSpriteVariants::
 .variant0
-    db $50, $01
-    db $52, $01
+    db $50, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $52, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant1
-    db $54, $01
-    db $56, $01
+    db $54, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $56, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant2
-    db $52, $21
-    db $50, $21
+    db $52, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $50, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3
-    db $56, $21
-    db $54, $21
+    db $56, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $54, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 CuccoEntityHandler::
     ld   hl, wEntitiesHealthTable                 ; $4524: $21 $60 $C3

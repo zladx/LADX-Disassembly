@@ -1,17 +1,17 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 BunnyCallingMarinSpriteVariants::
 .variant0
-    db $5A, $21
-    db $58, $21
+    db $5A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $58, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $5E, $21
-    db $5C, $21
+    db $5E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $58, $01
-    db $5A, $01
+    db $58, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $5A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant3
-    db $5C, $01
-    db $5E, $01
+    db $5C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $5E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 
 BunnyCallingMarinEntityHandler::
     ld   de, BunnyCallingMarinSpriteVariants      ; $52A6: $11 $96 $52

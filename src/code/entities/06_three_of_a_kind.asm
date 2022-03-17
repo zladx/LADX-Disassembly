@@ -1,29 +1,29 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 ThreeOfAKindSpriteVariants::
 .variant0
-    db $74, $02
-    db $76, $02
+    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant1
-    db $76, $22
-    db $74, $22
+    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $70, $01
-    db $72, $01
+    db $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 .variant3
-    db $72, $21
-    db $70, $21
+    db $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant4
-    db $78, $00
-    db $7A, $00
+    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $7A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 .variant5
-    db $7A, $20
-    db $78, $20
+    db $7A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant6
-    db $7C, $03
-    db $7E, $03
+    db $7C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $7E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
 .variant7
-    db $7E, $23
-    db $7C, $23
+    db $7E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 ThreeOfAKindEntityHandler::
     ld   hl, wEntitiesHealthTable                 ; $4931: $21 $60 $C3

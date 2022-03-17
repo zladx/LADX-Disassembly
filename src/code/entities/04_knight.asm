@@ -167,14 +167,14 @@ jr_004_6AA6:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 KnightSpriteVariants::
 .variant0
-    db $70, $02
-    db $72, $02
+    db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant1
-    db $74, $02
-    db $76, $02
+    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant2
-    db $78, $02
-    db $78, $22
+    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 Data_004_6AB3::
     db   $0A, $06, $03, $01

@@ -1,5 +1,5 @@
 MusicalNoteSpriteVariants::
-    db   $0E, $03
+    db   $0E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
 
 MusicalNoteEntityHandler::
     ld   de, MusicalNoteSpriteVariants            ; $7EF8: $11 $F6 $7E

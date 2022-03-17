@@ -271,17 +271,17 @@ Data_004_57F2::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MoldormSpriteVariants:: ; $58F2
 .variant0
-    db $70, $00
-    db $70, $20
+    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $72, $00
-    db $72, $20
+    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $74, $00
-    db $74, $20
+    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3
-    db $76, $00
-    db $76, $20
+    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 func_004_5902::
     ld   hl, wEntitiesPrivateState3Table          ; $5902: $21 $D0 $C2

@@ -804,20 +804,20 @@ label_005_72CA:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 SlimeEelSpriteVariants::
 .variant0
-    db $70, $07
-    db $70, $27
+    db $70, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $72, $07
-    db $72, $27
+    db $72, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $74, $07
-    db $74, $27
+    db $74, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3
-    db $7C, $06
-    db $7C, $26
+    db $7C, OAM_GBC_PAL_6 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_6 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant4
-    db $7E, $06
-    db $7E, $26
+    db $7E, OAM_GBC_PAL_6 | OAM_DMG_PAL_0
+    db $7E, OAM_GBC_PAL_6 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 RenderSlimeEel::
     ld   de, SlimeEelSpriteVariants               ; $72E0: $11 $CC $72

@@ -303,11 +303,11 @@ jr_018_50B4:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MadBatterSpriteVariants::
 .variant0
-    db $7E, $03
-    db $7E, $23
+    db $7E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $7E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $7E, $43
-    db $7E, $63
+    db $7E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $7E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 
 MadBatterRenderSmallSprite::
     ldh  a, [hFrameCounter]                       ; $50C3: $F0 $E7

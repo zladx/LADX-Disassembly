@@ -2,21 +2,21 @@
 ; one reversed and one normal ???
 TractorDevice1SpriteVariants::
 .variant0
-    db $4C, $07
-    db $4C, $27
+    db $4C, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
+    db $4C, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $4E, $04
-    db $4E, $24
+    db $4E, OAM_GBC_PAL_4 | OAM_DMG_PAL_0
+    db $4E, OAM_GBC_PAL_4 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 ; one reversed and one normal ???
 TractorDevice2SpriteVariants::
 .variant0
-    db $7C, $07
-    db $7C, $27
+    db $7C, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $7E, $04
-    db $7E, $24
+    db $7E, OAM_GBC_PAL_4 | OAM_DMG_PAL_0
+    db $7E, OAM_GBC_PAL_4 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 TractorDeviceEntityHandler::
 ReversedTractorDeviceEntityHandler::

@@ -126,20 +126,20 @@ ENDC
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MovingBlockMover1SpriteVariants::
 .variant0
-    db $44, $01
-    db $44, $21
+    db $44, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $44, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $74, $01
-    db $74, $21
+    db $74, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MovingBlockMover2SpriteVariants::
 .variant0
-    db $46, $01
-    db $46, $21
+    db $46, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $46, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $76, $01
-    db $76, $21
+    db $76, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $76, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 func_018_548A::
     ldh  a, [hMapId]                              ; $548A: $F0 $F7

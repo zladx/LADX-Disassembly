@@ -852,11 +852,11 @@ func_018_6EFB::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Vire1SpriteVariants::
 .variant0
-    db $1E, $03
-    db $1E, $63
+    db $1E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $1E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 .variant1
-    db $1E, $43
-    db $1E, $23
+    db $1E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $1E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 label_018_6F1F:
     ld   de, Vire1SpriteVariants                  ; $6F1F: $11 $17 $6F
@@ -904,11 +904,11 @@ jr_018_6F54:
 
 Vire2SpriteVariants::
 .variant0
-    db $6C, $00
-    db $6C, $20
+    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $6E, $00
-    db $6E, $20
+    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 label_018_6F70:
     ld   de, Vire2SpriteVariants

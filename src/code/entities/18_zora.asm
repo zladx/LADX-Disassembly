@@ -1,20 +1,20 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 ZoraSpriteVariants::
 .variant0
-    db $FF, $FF
-    db $FF, $FF
+    db $FF, OAM_GBC_PAL_7 | OAM_DMG_PAL_1 | OAM_BANK_1 | OAM_Y_FLIP | OAM_X_FLIP | OAM_PRIORITY
+    db $FF, OAM_GBC_PAL_7 | OAM_DMG_PAL_1 | OAM_BANK_1 | OAM_Y_FLIP | OAM_X_FLIP | OAM_PRIORITY
 .variant1
-    db $54, $02
-    db $54, $62
+    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 .variant2
-    db $54, $42
-    db $54, $22
+    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3
-    db $56, $02
-    db $56, $22
+    db $56, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $56, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant4
-    db $52, $02
-    db $52, $22
+    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 ZoraEntityHandler::
     ld   de, ZoraSpriteVariants                   ; $49D4: $11 $C0 $49

@@ -1,38 +1,38 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 KikiTheMonkey2SpriteVariants::
 .variant0
-    db $78, $02
-    db $72, $02
+    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant1
-    db $7A, $02
-    db $72, $02
+    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant2
-    db $70, $02
-    db $72, $02
+    db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant3
-    db $7C, $02
-    db $7E, $02
+    db $7C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant4
-    db $74, $02
-    db $76, $02
+    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 KikiTheMonkey1SpriteVariants::
 .variant0
-    db $72, $22
-    db $78, $22
+    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $72, $22
-    db $7A, $22
+    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $72, $22
-    db $70, $22
+    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3
-    db $7E, $22
-    db $7C, $22
+    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant4
-    db $76, $22
-    db $74, $22
+    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 KikiTheMonkeyEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5842: $F0 $F8

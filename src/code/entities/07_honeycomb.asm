@@ -1,7 +1,7 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 HoneycombSpriteVariants::
-    db $70, $01
-    db $70, $21
+    db $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 HoneycombEntityHandler::
     ldh  a, [hRoomStatus]                         ; $4C97: $F0 $F8

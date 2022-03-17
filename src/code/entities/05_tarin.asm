@@ -1,72 +1,72 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Tarin1SpriteVariants::
 .variant0
-    db $78, $02
-    db $7A, $02
+    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant1
-    db $7A, $22
-    db $78, $22
+    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $7C, $02
-    db $7E, $02
+    db $7C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant3
-    db $78, $02
-    db $7A, $02
+    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant4
-    db $70, $02
-    db $72, $02
+    db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant5
-    db $74, $02
-    db $76, $02
+    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant6
-    db $76, $22
-    db $74, $22
+    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant7
-    db $72, $22
-    db $70, $22
+    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Tarin3SpriteVariants::
 .variant0
-    db $5A, $22
-    db $58, $22
+    db $5A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $58, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1
-    db $58, $02
-    db $5A, $02
+    db $58, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $5A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant2
-    db $50, $02
-    db $52, $02
+    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 .variant3
-    db $50, $02
-    db $52, $02
+    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Tarin4SpriteVariants::
 .variant0
-    db $54, $02
-    db $56, $02
+    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $56, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Tarin2SpriteVariants::
 .variant0
-    db $7A, $07
-    db $7C, $07
+    db $7A, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
 
 ; define sprites and there OAM Attributes in a list
 Tarin1SpriteList::
     ;  x    y    n°   OAM
-    db $00, $00, $20, $02
-    db $00, $08, $22, $02
-    db $00, $00, $20, $02
-    db $00, $08, $22, $02
+    db $00, $00, $20, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $00, $08, $22, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $00, $00, $20, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $00, $08, $22, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 
 ; define sprites and there OAM Attributes in a list
 Tarin2SpriteList::
     ;  x    y    n°   OAM
-    db $F1, $FA, $2A, $02
-    db $F1, $02, $2A, $22
-    db $00, $00, $24, $02
-    db $00, $08, $28, $02
+    db $F1, $FA, $2A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $F1, $02, $2A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $00, $00, $24, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $00, $08, $28, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 
 ; Entity handler for:
 ;  - All appearances of Tarin (except when with the bees)
@@ -838,11 +838,17 @@ jr_005_4DC2:
 jr_005_4DC6:
     ret                                           ; $4DC6: $C9
 
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Tarin6SpriteVariants::
-    db   $74, $07, $76, $07
+.variant0
+    db $74, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
+    db $76, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
 
+; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Tarin5SpriteVariants::
-    db   $70, $00, $72, $00
+.variant0
+    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
 
 func_005_4DCF::
     ld   a, [wDB48]                               ; $4DCF: $FA $48 $DB

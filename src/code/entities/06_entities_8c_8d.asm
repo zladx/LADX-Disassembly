@@ -1,7 +1,7 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown017SpriteVariants::
-    db $F8, $10
-    db $FA, $10
+    db $F8, OAM_GBC_PAL_0 | OAM_DMG_PAL_1
+    db $FA, OAM_GBC_PAL_0 | OAM_DMG_PAL_1
 
 Entity8CHandler::
     ldh  a, [hActiveEntityState]                  ; $4EA1: $F0 $F0

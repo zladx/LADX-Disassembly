@@ -468,32 +468,32 @@ jr_006_589A:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 DesertLanmolaSpriteVariants::
 .variant0
-    db $72, $03
-    db $74, $03
+    db $72, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
 .variant1
-    db $74, $23
-    db $72, $23
+    db $74, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $72, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant2
-    db $70, $03
-    db $70, $23
+    db $70, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant3
-    db $70, $43
-    db $70, $63
+    db $70, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $70, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 .variant4
-    db $76, $03
-    db $76, $23
+    db $76, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $76, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant5
-    db $7A, $01
-    db $7A, $61
+    db $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 .variant6
-    db $7A, $41
-    db $7A, $21
+    db $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant7
-    db $78, $03
-    db $78, $63
+    db $78, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 .variant8
-    db $78, $43
-    db $78, $23
+    db $78, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $78, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 Data_006_58C3::
     db   $0C, $18, $24, $30, $3C, $48

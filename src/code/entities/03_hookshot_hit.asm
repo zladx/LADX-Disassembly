@@ -1,11 +1,11 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown005SpriteVariants::
 .variant0 ; $69AA
-    db $36, $02
-    db $36, $22
+    db $36, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $36, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 .variant1 ; $69AE
-    db $36, $12
-    db $36, $32
+    db $36, OAM_GBC_PAL_2 | OAM_DMG_PAL_1
+    db $36, OAM_GBC_PAL_2 | OAM_DMG_PAL_1 | OAM_X_FLIP
 
 MagicRodFireballEntityHandler::
     ld   hl, wActiveProjectileCount               ; $69B2: $21 $4D $C1

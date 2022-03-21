@@ -319,7 +319,7 @@ DialogClosingBeginHandler::
     jpsb AnimateDialogClosing                     ; $24AF: $3E $1C $EA $00 $21 $C3 $A8 $4A
 
 DialogLetterAnimationStartHandler::
-    ld   a, BANK(func_01C_49F1)                   ; $24B7: $3E $1C
+    ld   a, BANK(ClearLetterPixels)               ; $24B7: $3E $1C
     ld   [MBC3SelectBank], a                      ; $24B9: $EA $00 $21
     ld   a, [wDialogScrollDelay]                  ; $24BC: $FA $72 $C1
     and  a                                        ; $24BF: $A7
@@ -329,7 +329,7 @@ DialogLetterAnimationStartHandler::
     ret                                           ; $24C6: $C9
 
 .delayOver
-    call func_01C_49F1                            ; $24C7: $CD $F1 $49
+    call ClearLetterPixels                        ; $24C7: $CD $F1 $49
     jp   IncrementDialogStateAndReturn            ; $24CA: $C3 $85 $24
 
 DialogLetterAnimationEndHandler::

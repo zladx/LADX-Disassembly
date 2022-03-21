@@ -3028,7 +3028,7 @@ func_020_5C9C::
     call func_020_5BB9                            ; $5CB2: $CD $B9 $5B
 
 jr_020_5CB5:
-    ; de = [wRequestsSize]
+    ; de = start of the next wRequest
     ld   a, [wRequestsSize]                       ; $5CB5: $FA $00 $D6
     ld   e, a                                     ; $5CB8: $5F
     ld   d, $00                                   ; $5CB9: $16 $00
@@ -3037,7 +3037,7 @@ jr_020_5CB5:
     ld   hl, wRequest                             ; $5CBB: $21 $01 $D6
     add  hl, de                                   ; $5CBE: $19
 
-    ; Increment the request start by 0C
+    ; Increment the requests size by 0C
     add  $0C                                      ; $5CBF: $C6 $0C
     ld   [wRequestsSize], a                       ; $5CC1: $EA $00 $D6
     push hl                                       ; $5CC4: $E5
@@ -3058,7 +3058,7 @@ jr_020_5CB5:
     inc  de                                       ; $5CD2: $13
     ld   [hl+], a                                 ; $5CD3: $22
 
-    ; Copy request length
+    ; Copy request length (2 tiles)
     ld   a, $02                                   ; $5CD4: $3E $02
     ld   [hl+], a                                 ; $5CD6: $22
 

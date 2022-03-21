@@ -1,4 +1,5 @@
-func_01C_49F1::
+; Configure a wRequest to write pixels for a black tile to the VRAM of the next letter.
+ClearLetterPixels::
     ld   a, [wDialogCharacterIndex]               ; $49F1: $FA $70 $C1
     and  %00011111                                ; $49F4: $E6 $1F
     ld   e, a                                     ; $49F6: $5F
@@ -8,20 +9,28 @@ func_01C_49F1::
     ld   hl, DialogCharacterYTable                ; $49FD: $21 $81 $45
     add  hl, de                                   ; $4A00: $19
     ld   a, [hl]                                  ; $4A01: $7E
+
     ld   hl, wRequestsSize                        ; $4A02: $21 $00 $D6
     add  hl, bc                                   ; $4A05: $09
-    ldi  [hl], a                                  ; $4A06: $22
+    ldi  [hl], a ; wRequest.destinationHigh       ; $4A06: $22
+
     push hl                                       ; $4A07: $E5
     ld   hl, DialogCharacterXTable                ; $4A08: $21 $61 $45
     add  hl, de                                   ; $4A0B: $19
     ld   a, [hl]                                  ; $4A0C: $7E
     pop  hl                                       ; $4A0D: $E1
-    ldi  [hl], a                                  ; $4A0E: $22
-    ld   a, $4F                                   ; $4A0F: $3E $4F
-    ldi  [hl], a                                  ; $4A11: $22
+    ldi  [hl], a ; wRequest.destinationLow        ; $4A0E: $22
+
+    ; Repeat the same byte over the whole tile
+    ld   a, BG_COPY_MODE_ROW_SINGLE_VALUE | TILE_SIZE - 1 ; $4A0F: $3E $4F
+    ldi  [hl], a ; wRequest.length                ; $4A11: $22
+
+    ; Set the tile pixels (all black)
     ld   a, $FF                                   ; $4A12: $3E $FF
-    ldi  [hl], a                                  ; $4A14: $22
-    ld   [hl], $00                                ; $4A15: $36 $00
+    ldi  [hl], a   ; wRequest.data + 0            ; $4A14: $22
+
+    ; End of wRequest
+    ld   [hl], $00 ; wRequest.data + 1            ; $4A15: $36 $00
     ret                                           ; $4A17: $C9
 
 Data_01C_4A18::

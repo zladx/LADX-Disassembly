@@ -4013,36 +4013,36 @@ jr_036_5870:
     call label_3CD9                               ; $5872: $CD $D9 $3C
     pop  hl                                       ; $5875: $E1
     pop  af                                       ; $5876: $F1
+    ld   [hl], a                                  ; $5877: $77
+    ret                                           ; $5878: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 ; list overlapps with next list
+;
+; For this list:
+; - Variant 0 is a single sprite, rendered by RenderActiveEntitySprite
+; - Variant 1 is a double sprite, rendered by RenderActiveEntitySpritesPair
 DungeonBookSpriteVariants::
 .variant0
-    db $77, $C9
-;   db $58, $02 ; from next list
+    db   $58, OAM_GBC_PAL_2 | OAM_DMG_PAL_0       ; $5879: $58 $02
 .variant1
-;   db $5A, $00 ; from next list
-;   db $5A, $20 ; from next list
-
-Data_036_5879::
-    db   $58, $02, $5A, $00, $5A, $20
+    db   $5A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0       ; $587B: $5A $00
+    db   $5A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP ; $587D: $5A $20
 
 ColorDungeonBookEntityHandler::
     ldh  a, [hActiveEntitySpriteVariant]          ; $587F: $F0 $F1
     and  a                                        ; $5881: $A7
-    jr   z, jr_036_588C                           ; $5882: $28 $08
-
-    ld   de, DungeonBookSpriteVariants            ; $5884: $11 $77 $58
+    jr   z, .renderVariant0                       ; $5882: $28 $08
+    ; Variant 1: render a sprite pair
+    ld   de, DungeonBookSpriteVariants - 2        ; $5884: $11 $77 $58
     call RenderActiveEntitySpritesPair            ; $5887: $CD $C0 $3B
-    jr   jr_036_5892                              ; $588A: $18 $06
-
-jr_036_588C:
-    ld   de, Data_036_5879                        ; $588C: $11 $79 $58
-
-jr_036_588F:
+    jr   .renderEnd                               ; $588A: $18 $06
+.renderVariant0
+    ; Variant 0: render a single sprite
+    ld   de, DungeonBookSpriteVariants            ; $588C: $11 $79 $58
     call RenderActiveEntitySprite                 ; $588F: $CD $77 $3C
+.renderEnd
 
-jr_036_5892:
     ldh  a, [hActiveEntityState]                  ; $5892: $F0 $F0
     JP_TABLE                                      ; $5894
 ._00 dw func_036_58A1                             ; $5895

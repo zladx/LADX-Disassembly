@@ -100,16 +100,16 @@ CopyDataToBGMap::
     and  $03                                      ; $2949: $E6 $03
 
     ; Dispatch according to the copy mode
-    ; BG_COPY_MODE_ROW
+    ; DC_COPY_ROW
     jr   z, .copyRow                              ; $294B: $28 $08
     dec  a                                        ; $294D: $3D
-    ; BG_COPY_MODE_ROW_SINGLE_VALUE
-    jr   z, .copyRowSingleValue                   ; $294E: $28 $16
+    ; DC_FILL_ROW
+    jr   z, .fillRow                              ; $294E: $28 $16
     dec  a                                        ; $2950: $3D
-    ; BG_COPY_MODE_COLUMN
+    ; DC_COPY_COLUMN
     jr   z, .copyColumn                           ; $2951: $28 $24
-    ; BG_COPY_MODE_COLUMN_SINGLE_VALUE
-    jr   .copyColumnSingleValue                   ; $2953: $18 $2F
+    ; DC_FILL_COLUMN
+    jr   .fillColumn                              ; $2953: $18 $2F
 
 .copyRow
     ; Copy one byte from [de] to [hl]
@@ -134,7 +134,7 @@ CopyDataToBGMap::
     ret                                           ; $2965: $C9
 
 ; Copy a single value in [de] from [hl] to [hl + a]
-.copyRowSingleValue
+.fillRow
     ; Copy one byte from [de] to [hl]
     ld   a, [de]                                  ; $2966: $1A
     ldi  [hl], a                                  ; $2967: $22
@@ -151,7 +151,7 @@ CopyDataToBGMap::
     ; Decrement the length to be copied
     dec  b                                        ; $2972: $05
     ; Loop (without incrementing the source address)
-    jr   nz, .copyRowSingleValue                  ; $2973: $20 $F1
+    jr   nz, .fillRow                             ; $2973: $20 $F1
     inc  de                                       ; $2975: $13
     ret                                           ; $2976: $C9
 
@@ -172,7 +172,7 @@ CopyDataToBGMap::
     jr   nz, .copyColumn                          ; $2981: $20 $F4
     ret                                           ; $2983: $C9
 
-.copyColumnSingleValue
+.fillColumn
     ; Copy one byte from [de] to [hl]
     ld   a, [de]                                  ; $2984: $1A
     ld   [hl], a                                  ; $2985: $77
@@ -184,7 +184,7 @@ CopyDataToBGMap::
     ld   b, a                                     ; $298B: $47
     dec  b                                        ; $298C: $05
     ; Loop (without incrementing the source address)
-    jr   nz, .copyColumnSingleValue               ; $298D: $20 $F5
+    jr   nz, .fillColumn                          ; $298D: $20 $F5
     inc  de                                       ; $298F: $13
     ret                                           ; $2990: $C9
 

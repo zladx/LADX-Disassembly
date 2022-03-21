@@ -21,8 +21,8 @@ ld   hl, wDrawCommandsSize                        ; $4A02: $21 $00 $D6
     pop  hl                                       ; $4A0D: $E1
     ldi  [hl], a ; wDrawCommand.destinationLow    ; $4A0E: $22
 
-    ; Repeat the same byte over the whole tile
-    ld   a, BG_COPY_MODE_ROW_SINGLE_VALUE | TILE_SIZE - 1 ; $4A0F: $3E $4F
+    ; Fill all the tile data with the same byte repeated
+    ld   a, (TILE_SIZE - 1) | DC_FILL_ROW         ; $4A0F: $3E $4F
     ldi  [hl], a ; wDrawCommand.length            ; $4A11: $22
 
     ; Set the tile pixels (all black)

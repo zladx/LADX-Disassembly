@@ -702,7 +702,7 @@ ENDC
     jp   z, label_278B                            ; $26DE: $CA $8B $27
 
 .jp_26E1
-    ; Build a BG Data transfer request for the dialog background
+    ; Build a draw command for the dialog background
 
     ; e = (wDialogState == DIALOG_CLOSED ? 0 : 1)
     ld   e, $00                                   ; $26E1: $1E $00
@@ -723,7 +723,7 @@ ENDC
     ld   a, [wBGOriginLow]                        ; $26FC: $FA $2F $C1
     add  a, [hl]                                  ; $26FF: $86
     ld   [wDrawCommand.destinationLow], a         ; $2700: $EA $02 $D6
-    ld   a, BG_COPY_MODE_ROW_SINGLE_VALUE | $0F   ; $2703: $3E $4F
+    ld   a, DC_FILL_ROW | $0F                     ; $2703: $3E $4F
     ld   [wDrawCommand.length], a                 ; $2705: $EA $03 $D6
     ldh  a, [hDialogBackgroundTile]               ; $2708: $F0 $E8
     ld   [wDrawCommand.length+ 1], a              ; $270A: $EA $04 $D6

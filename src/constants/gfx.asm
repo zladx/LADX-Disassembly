@@ -7,6 +7,18 @@ OBJECTS_PER_COLUMN equ DISPLAY_HEIGHT/(TILE_HEIGHT*2) - 1
 ; Number of game objects in a whole room BG map
 OBJECTS_PER_ROOM   equ OBJECTS_PER_ROW * OBJECTS_PER_COLUMN
 
+; Drawing modes for draw commands.
+; See wDrawCommands
+;
+; Copy <length> bytes of data from source to dest, progressing horizontally
+DC_COPY_ROW                equ $00
+; Copy a single byte of data to <length> bytes of dest, progressing horizontally
+DC_FILL_ROW                equ $40
+; Copy <length> bytes of data from source to dest, progressing vertically
+DC_COPY_COLUMN             equ $80
+; Copy a single byte of data to <length> bytes of dest, progressing vertically
+DC_FILL_COLUMN             equ $C0
+
 ; Values for wTilesetToLoad
 TILESET_ROOM_TILEMAP                  equ $01
 TILESET_CLEAR_TILEMAP                 equ $02

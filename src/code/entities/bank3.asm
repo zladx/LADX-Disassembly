@@ -220,16 +220,16 @@ ENDC
     cp   ROOM_INDOOR_A_MASTER_STALFOS_3           ; $48D7: $FE $84
     jr   z, .jr_003_48E2                          ; $48D9: $28 $07
 
-    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_3]; $48DB: $FA $84 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_3] ; $48DB: $FA $84 $D9
     and  $30                                      ; $48DE: $E6 $30
     jr   z, MasterStalfosDefeated                 ; $48E0: $28 $CB
 
 .jr_003_48E2
-    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_2]; $48E2: $FA $92 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_2] ; $48E2: $FA $92 $D9
     and  $30                                      ; $48E5: $E6 $30
     jr   z, MasterStalfosDefeated                 ; $48E7: $28 $C4
 
-    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_1]; $48E9: $FA $95 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_INDOOR_A_MASTER_STALFOS_1] ; $48E9: $FA $95 $D9
     and  $30                                      ; $48EC: $E6 $30
     jr   z, MasterStalfosDefeated                 ; $48EE: $28 $BD
 .masterStalfosEnd
@@ -913,7 +913,7 @@ EntityDestructionHandler::
     ld   a, [hl]                                  ; $4C64: $7E
     ldh  [hActiveEntitySpriteVariant], a          ; $4C65: $E0 $F1
     call ExecuteActiveEntityHandler_trampoline    ; $4C67: $CD $81 $3A
-    call ReturnIfNonInteractive_03.allowInactiveEntity; $4C6A: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity ; $4C6A: $CD $7E $7F
     call ApplyRecoilIfNeeded_03                   ; $4C6D: $CD $A9 $7F
     call func_003_60B3                            ; $4C70: $CD $B3 $60
 IF __PATCH_0__
@@ -1043,7 +1043,7 @@ jr_003_4D19:
 
 jr_003_4D22:
     call ExecuteActiveEntityHandler_trampoline    ; $4D22: $CD $81 $3A
-    call ReturnIfNonInteractive_03.allowInactiveEntity; $4D25: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity ; $4D25: $CD $7E $7F
     ret                                           ; $4D28: $C9
 
 jr_003_4D29:
@@ -1078,7 +1078,7 @@ jr_003_4D51:
     call RenderActiveEntitySprite                 ; $4D54: $CD $77 $3C
 
 jr_003_4D57:
-    call ReturnIfNonInteractive_03.allowInactiveEntity; $4D57: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity ; $4D57: $CD $7E $7F
     call GetEntityTransitionCountdown             ; $4D5A: $CD $05 $0C
     cp   $3F                                      ; $4D5D: $FE $3F
     jr   nz, jr_003_4D66                          ; $4D5F: $20 $05
@@ -1119,7 +1119,7 @@ jr_003_4D66:
 
 EntityThrownHandler::
     call ExecuteActiveEntityHandler_trampoline    ; $4D94: $CD $81 $3A
-    call ReturnIfNonInteractive_03.allowInactiveEntity; $4D97: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity ; $4D97: $CD $7E $7F
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $4D9A: $21 $10 $C4
     add  hl, bc                                   ; $4D9D: $09
     ld   [hl], $02                                ; $4D9E: $36 $02
@@ -1196,7 +1196,7 @@ Data_003_4E05::
 
 EntityStunnedHandler::
     call ExecuteActiveEntityHandler_trampoline    ; $4E07: $CD $81 $3A
-    call ReturnIfNonInteractive_03.allowInactiveEntity; $4E0A: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity ; $4E0A: $CD $7E $7F
     call ApplyRecoilIfNeeded_03                   ; $4E0D: $CD $A9 $7F
     call func_003_60B3                            ; $4E10: $CD $B3 $60
     call ClearEntitySpeed                         ; $4E13: $CD $7F $3D
@@ -1440,7 +1440,7 @@ jr_003_4F54:
     cp   MOUNTAIN_CAVE_ROOM_3                     ; $4F54: $FE $7C
     jr   nz, jr_003_4F67                          ; $4F56: $20 $0F
 
-    ld   a, [wIndoorARoomStatus + ROOM_OW_ANGLERS_TUNNEL]; $4F58: $FA $69 $D9
+    ld   a, [wIndoorARoomStatus + ROOM_OW_ANGLERS_TUNNEL] ; $4F58: $FA $69 $D9
     and  $10                                      ; $4F5B: $E6 $10
     jp   z, UnloadEntityAndReturn                 ; $4F5D: $CA $8D $3F
 
@@ -1688,11 +1688,11 @@ jr_003_50B9:
     cp   $20                                      ; $50BD: $FE $20
     jr   nc, jr_003_50D8                          ; $50BF: $30 $17
 
-    ld   hl, (ChestRupeeCountLow - CHEST_RUPEES_50); $50C1: $21 $4D $50
+    ld   hl, (ChestRupeeCountLow - CHEST_RUPEES_50) ; $50C1: $21 $4D $50
     add  hl, de                                   ; $50C4: $19
     ld   a, [hl]                                  ; $50C5: $7E
     ld   [wAddRupeeBufferLow], a                  ; $50C6: $EA $90 $DB
-    ld   hl, (ChestRupeeCountHigh - CHEST_RUPEES_50); $50C9: $21 $48 $50
+    ld   hl, (ChestRupeeCountHigh - CHEST_RUPEES_50) ; $50C9: $21 $48 $50
     add  hl, de                                   ; $50CC: $19
     ld   a, [hl]                                  ; $50CD: $7E
     ld   [wAddRupeeBufferHigh], a                 ; $50CE: $EA $8F $DB
@@ -2229,7 +2229,7 @@ ENDC
 
 jr_003_556F:
     call ExecuteActiveEntityHandler_trampoline    ; $556F: $CD $81 $3A
-    call ReturnIfNonInteractive_03.allowInactiveEntity; $5572: $CD $7E $7F
+    call ReturnIfNonInteractive_03.allowInactiveEntity ; $5572: $CD $7E $7F
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5575: $21 $10 $C4
     add  hl, bc                                   ; $5578: $09
     ld   a, [hl]                                  ; $5579: $7E
@@ -2392,7 +2392,7 @@ SpawnEnemyDrop::
     add  hl, bc                                   ; $5612: $09
     ld   d, b                                     ; $5613: $50
     ld   e, [hl]                                  ; $5614: $5E
-    ld   hl, DestroyedEntityHealthGroupOffsetTable; $5615: $21 $26 $48
+    ld   hl, DestroyedEntityHealthGroupOffsetTable ; $5615: $21 $26 $48
     add  hl, de                                   ; $5618: $19
     ld   a, [hl]                                  ; $5619: $7E
     and  a                                        ; $561A: $A7
@@ -3151,7 +3151,7 @@ SwordShieldPickableState3Handler::
     ; …activate the sword poke VFX and SFX
     ldh  a, [hActiveEntityPosY]                   ; $5C3B: $F0 $EF
     sub  $0C                                      ; $5C3D: $D6 $0C
-    call CheckLinkCollisionWithProjectile.showSwordPokeVfx; $5C3F: $CD $36 $6C
+    call CheckLinkCollisionWithProjectile.showSwordPokeVfx ; $5C3F: $CD $36 $6C
     ld   a, JINGLE_SWORD_POKING                   ; $5C42: $3E $07
     ldh  [hJingle], a                             ; $5C44: $E0 $F2
 
@@ -3213,9 +3213,9 @@ KeyDropPointEntityHandler::
 
     ; If dropped in the quicksand mark the angler key
     ; as available in the quicksand cave by setting the room flags.
-    ld   hl, wOverworldRoomStatus + ROOM_OW_YARNA_LANMOLA; $5C8E: $21 $CE $D8
+    ld   hl, wOverworldRoomStatus + ROOM_OW_YARNA_LANMOLA ; $5C8E: $21 $CE $D8
     set  4, [hl]                                  ; $5C91: $CB $E6
-    ld   hl, wIndoorARoomStatus + ROOM_INDOOR_A_QUICKSAND_CAVE; $5C93: $21 $F8 $D9
+    ld   hl, wIndoorARoomStatus + ROOM_INDOOR_A_QUICKSAND_CAVE ; $5C93: $21 $F8 $D9
     set  5, [hl]                                  ; $5C96: $CB $EE
     ret                                           ; $5C98: $C9
 
@@ -4181,7 +4181,7 @@ jr_003_6235:
 jr_003_623B:
     ld   hl, wEntitiesOptions1Table               ; $623B: $21 $30 $C4
     add  hl, bc                                   ; $623E: $09
-    ld   [hl], ENTITY_OPT1_SPLASH_IN_WATER|ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL; $623F: $36 $0A
+    ld   [hl], ENTITY_OPT1_SPLASH_IN_WATER|ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL ; $623F: $36 $0A
     jr   jr_003_626B                              ; $6241: $18 $28
 
 jr_003_6243:
@@ -5818,13 +5818,13 @@ CheckLinkCollisionWithEnemy::
     ; If Link is in the air, skip the collision check
     ldh  a, [hLinkPositionZ]                      ; $6C72: $F0 $A2
     and  a                                        ; $6C74: $A7
-    jr   nz, CheckLinkCollisionWithProjectile.return; $6C75: $20 $E3
+    jr   nz, CheckLinkCollisionWithProjectile.return ; $6C75: $20 $E3
 
 .collisionEvenInTheAir
     ; If Link is not interactive, return.
     ld   a, [wLinkMotionState]                    ; $6C77: $FA $1C $C1
     cp   LINK_MOTION_TYPE_NON_INTERACTIVE         ; $6C7A: $FE $02
-    jr   nc, CheckLinkCollisionWithProjectile.return; $6C7C: $30 $DC
+    jr   nc, CheckLinkCollisionWithProjectile.return ; $6C7C: $30 $DC
 
     push bc                                       ; $6C7E: $C5
     ; c = (entity index * 4)
@@ -6331,7 +6331,7 @@ jr_003_6F20:
 
 label_003_6F24:
     call func_003_6F93                            ; $6F24: $CD $93 $6F
-    jp   CheckLinkCollisionWithProjectile.jr_003_6C54; $6F27: $C3 $54 $6C
+    jp   CheckLinkCollisionWithProjectile.jr_003_6C54 ; $6F27: $C3 $54 $6C
 
 jr_003_6F2A:
     cp   ENTITY_SPIKED_BEETLE                     ; $6F2A: $FE $2C

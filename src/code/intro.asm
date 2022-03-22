@@ -1791,12 +1791,12 @@ ENDC
     jr   z, .jr_001_7990                          ; $7987: $28 $07
     ; Renders both Data_001_7850 and Data_001_7870
     ld   hl, Data_001_7850                        ; $7989: $21 $50 $78
-    ld   c, (Data_001_7870.end - Data_001_7850) / 4; $798C: $0E $12
+    ld   c, (Data_001_7870.end - Data_001_7850) / 4 ; $798C: $0E $12
     jr   .render                                  ; $798E: $18 $1A
 
 .jr_001_7990
     ld   hl, Data_001_7870                        ; $7990: $21 $70 $78
-    ld   c, (Data_001_7870.end - Data_001_7870) / 4; $7993: $0E $0A
+    ld   c, (Data_001_7870.end - Data_001_7870) / 4 ; $7993: $0E $0A
     jr   .render                                  ; $7995: $18 $13
 
 .jr_001_7997
@@ -1810,12 +1810,12 @@ ELSE
 ENDC
     ld   hl, Data_001_7808                        ; $799E: $21 $08 $78
     ; renders both Data_001_7808 and Data_001_7828
-    ld   c, (Data_001_7828.end - Data_001_7808) / 4; $79A1: $0E $12
+    ld   c, (Data_001_7828.end - Data_001_7808) / 4 ; $79A1: $0E $12
     jr   .render                                  ; $79A3: $18 $05
 
 .jr_001_79A5
     ld   hl, Data_001_7828                        ; $79A5: $21 $28 $78
-    ld   c, (Data_001_7828.end - Data_001_7828) / 4; $79A8: $0E $0A
+    ld   c, (Data_001_7828.end - Data_001_7828) / 4 ; $79A8: $0E $0A
 
 .render
     call RenderActiveEntitySpritesRect            ; $79AA: $CD $E6 $3C

@@ -69,7 +69,7 @@ jr_006_725A:
     cp   ROOM_INDOOR_B_CHRISTINE_HOUSE            ; $725F: $FE $D9
     jr   nz, jr_006_7266                          ; $7261: $20 $03
 
-    ld   de, MrWriteBirdChristineHouseSpriteVariants; $7263: $11 $24 $72
+    ld   de, MrWriteBirdChristineHouseSpriteVariants ; $7263: $11 $24 $72
 
 jr_006_7266:
     call RenderActiveEntitySpritesPair            ; $7266: $CD $C0 $3B

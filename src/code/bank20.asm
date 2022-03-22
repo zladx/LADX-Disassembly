@@ -385,7 +385,7 @@ ColorDungeonEntitySpritesheetsTable_Slot4::
     db   HIGH($0000), $00
 
 LoadColorDungeonTiles::
-    ld   hl, ColorDungeonEntitySpritesheetsTable_Slot1; $475A: $21 $AA $46
+    ld   hl, ColorDungeonEntitySpritesheetsTable_Slot1 ; $475A: $21 $AA $46
     ldh  a, [hMapRoom]                            ; $475D: $F0 $F6
     rla                                           ; $475F: $17
     ld   e, a                                     ; $4760: $5F
@@ -409,7 +409,7 @@ LoadColorDungeonTiles::
 jr_020_4776:
     pop  de                                       ; $4776: $D1
     push de                                       ; $4777: $D5
-    ld   hl, ColorDungeonEntitySpritesheetsTable_Slot2; $4778: $21 $D6 $46
+    ld   hl, ColorDungeonEntitySpritesheetsTable_Slot2 ; $4778: $21 $D6 $46
     add  hl, de                                   ; $477B: $19
     ld   a, [hl]                                  ; $477C: $7E
     and  a                                        ; $477D: $A7
@@ -427,7 +427,7 @@ jr_020_4776:
 jr_020_478C:
     pop  de                                       ; $478C: $D1
     push de                                       ; $478D: $D5
-    ld   hl, ColorDungeonEntitySpritesheetsTable_Slot3; $478E: $21 $02 $47
+    ld   hl, ColorDungeonEntitySpritesheetsTable_Slot3 ; $478E: $21 $02 $47
     add  hl, de                                   ; $4791: $19
     ld   a, [hl]                                  ; $4792: $7E
     and  a                                        ; $4793: $A7
@@ -444,7 +444,7 @@ jr_020_478C:
 
 jr_020_47A2:
     pop  de                                       ; $47A2: $D1
-    ld   hl, ColorDungeonEntitySpritesheetsTable_Slot4; $47A3: $21 $2E $47
+    ld   hl, ColorDungeonEntitySpritesheetsTable_Slot4 ; $47A3: $21 $2E $47
     add  hl, de                                   ; $47A6: $19
     ld   a, [hl]                                  ; $47A7: $7E
     and  a                                        ; $47A8: $A7
@@ -2015,7 +2015,7 @@ UpdateBGRegionOrigin::
     add  hl, bc                                   ; $5581: $09
     ld   a, [hl]                                  ; $5582: $7E
     ld   [wBGUpdateRegionTilesCount], a           ; $5583: $EA $28 $C1
-    ld   a, [wRoomTransitionFramesBeforeMidScreen]; $5586: $FA $29 $C1
+    ld   a, [wRoomTransitionFramesBeforeMidScreen] ; $5586: $FA $29 $C1
     ; if uneven frame skip transition offset addition
     and  $01                                      ; $5589: $E6 $01
     jr   z, .skipOffsetAddition                   ; $558B: $28 $0B
@@ -2044,9 +2044,9 @@ UpdateBGRegionOrigin::
     and  $03                                      ; $55B0: $E6 $03
     ld   [wBGUpdateRegionOriginHigh], a           ; $55B2: $EA $26 $C1
     ; decrement wRoomTransitionFramesBeforeMidScreen
-    ld   a, [wRoomTransitionFramesBeforeMidScreen]; $55B5: $FA $29 $C1
+    ld   a, [wRoomTransitionFramesBeforeMidScreen] ; $55B5: $FA $29 $C1
     dec  a                                        ; $55B8: $3D
-    ld   [wRoomTransitionFramesBeforeMidScreen], a; $55B9: $EA $29 $C1
+    ld   [wRoomTransitionFramesBeforeMidScreen], a ; $55B9: $EA $29 $C1
     ; could be improved with:
     ;   jr z, .incrementRoomTransitionState
     ;   ret
@@ -3456,7 +3456,7 @@ jr_020_5F69:
     jr   z, jr_020_5F85                           ; $5F7C: $28 $07
 
     ld   a, $01                                   ; $5F7E: $3E $01
-    ld   [wCloseInventoryAfterOcarinaMenuClosed], a; $5F80: $EA $BA $C1
+    ld   [wCloseInventoryAfterOcarinaMenuClosed], a ; $5F80: $EA $BA $C1
     jr   jr_020_5FB2                              ; $5F83: $18 $2D
 
 jr_020_5F85:
@@ -3622,7 +3622,7 @@ func_020_6111::
 
     ld   hl, hNeedsUpdatingBGTiles                ; $611D: $21 $90 $FF
     ld   [hl], $0B                                ; $6120: $36 $0B
-    ld   a, [wCloseInventoryAfterOcarinaMenuClosed]; $6122: $FA $BA $C1
+    ld   a, [wCloseInventoryAfterOcarinaMenuClosed] ; $6122: $FA $BA $C1
     and  a                                        ; $6125: $A7
     jr   z, jr_020_612D                           ; $6126: $28 $05
 
@@ -4112,7 +4112,7 @@ InventoryVisibleHandler::
     call func_020_62A2                            ; $63D0: $CD $A2 $62
     call func_020_635C                            ; $63D3: $CD $5C $63
     call func_020_62DE                            ; $63D6: $CD $DE $62
-    ld   a, [wCloseInventoryAfterOcarinaMenuClosed]; $63D9: $FA $BA $C1
+    ld   a, [wCloseInventoryAfterOcarinaMenuClosed] ; $63D9: $FA $BA $C1
     and  a                                        ; $63DC: $A7
     jr   z, jr_020_63F5                           ; $63DD: $28 $16
 
@@ -4121,7 +4121,7 @@ InventoryVisibleHandler::
     jr   nz, jr_020_6445                          ; $63E4: $20 $5F
 
     xor  a                                        ; $63E6: $AF
-    ld   [wCloseInventoryAfterOcarinaMenuClosed], a; $63E7: $EA $BA $C1
+    ld   [wCloseInventoryAfterOcarinaMenuClosed], a ; $63E7: $EA $BA $C1
     ld   [wOcarinaMenuOpen], a                    ; $63EA: $EA $B5 $C1
     ld   [wOcarinaMenuOpening], a                 ; $63ED: $EA $B8 $C1
     ld   [wOcarinaMenuClosing], a                 ; $63F0: $EA $B9 $C1
@@ -5374,7 +5374,7 @@ LoadRoomObjectsAttributes::
     cp   ROOM_OW_EAGLE_TOWER                      ; $6DB6: $FE $0E
     jr   nz, .jr_020_6DC6                         ; $6DB8: $20 $0C
 
-    ld   a, [wOverworldRoomStatus + ROOM_OW_EAGLE_TOWER           ]; $6DBA: $FA $0E $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_EAGLE_TOWER] ; $6DBA: $FA $0E $D8
     and  OW_ROOM_STATUS_CHANGED                   ; $6DBD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DBF: $28 $59
     ld   hl, RoomGBCOverlay0EAlt                  ; $6DC1: $21 $90 $50
@@ -5384,7 +5384,7 @@ LoadRoomObjectsAttributes::
     cp   ROOM_OW_FACE_SHRINE_ENTRANCE             ; $6DC6: $FE $8C
     jr   nz, .jr_020_6DD6                         ; $6DC8: $20 $0C
 
-    ld   a, [wOverworldRoomStatus + ROOM_OW_FACE_SHRINE_ENTRANCE ]; $6DCA: $FA $8C $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_FACE_SHRINE_ENTRANCE] ; $6DCA: $FA $8C $D8
     and  OW_ROOM_STATUS_CHANGED                   ; $6DCD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DCF: $28 $49
     ld   hl, RoomGBCOverlay8CAlt                  ; $6DD1: $21 $D0 $51
@@ -5394,7 +5394,7 @@ LoadRoomObjectsAttributes::
     cp   UNKNOWN_ROOM_79                          ; $6DD6: $FE $79
     jr   nz, .jr_020_6DE6                         ; $6DD8: $20 $0C
 
-    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_79]; $6DDA: $FA $79 $D8
+    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_79] ; $6DDA: $FA $79 $D8
     and  OW_ROOM_STATUS_CHANGED                   ; $6DDD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DDF: $28 $39
     ld   hl, RoomGBCOverlay79Alt                  ; $6DE1: $21 $80 $51
@@ -5404,7 +5404,7 @@ LoadRoomObjectsAttributes::
     cp   UNKNOWN_ROOM_06                          ; $6DE6: $FE $06
     jr   nz, .jr_020_6DF6                         ; $6DE8: $20 $0C
 
-    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_06]; $6DEA: $FA $06 $D8
+    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_06] ; $6DEA: $FA $06 $D8
     and  OW_ROOM_STATUS_CHANGED                   ; $6DED: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DEF: $28 $29
     ld   hl, RoomGBCOverlay06Alt                  ; $6DF1: $21 $40 $50
@@ -5413,7 +5413,7 @@ LoadRoomObjectsAttributes::
 .jr_020_6DF6
     cp   UNKNOWN_ROOM_1B                          ; $6DF6: $FE $1B
     jr   nz, .jr_020_6E06                         ; $6DF8: $20 $0C
-    ld   a, [wOverworldRoomStatus + ROOM_OW_ANGLERS_TUNNEL_ENTRANCE]; $6DFA: $FA $2B $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_ANGLERS_TUNNEL_ENTRANCE] ; $6DFA: $FA $2B $D8
     and  OW_ROOM_STATUS_CHANGED                   ; $6DFD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DFF: $28 $19
     ld   hl, RoomGBCOverlay1BAlt                  ; $6E01: $21 $E0 $50
@@ -5423,7 +5423,7 @@ LoadRoomObjectsAttributes::
     cp   ROOM_OW_ANGLERS_TUNNEL_ENTRANCE          ; $6E06: $FE $2B
     jr   nz, .jr_020_6E1A                         ; $6E08: $20 $10
 
-    ld   a, [wOverworldRoomStatus + ROOM_OW_ANGLERS_TUNNEL_ENTRANCE]; $6E0A: $FA $2B $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_ANGLERS_TUNNEL_ENTRANCE] ; $6E0A: $FA $2B $D8
     and  OW_ROOM_STATUS_CHANGED                   ; $6E0D: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6E0F: $28 $09
     ld   hl, RoomGBCOverlay2BAlt                  ; $6E11: $21 $30 $51
@@ -5477,7 +5477,7 @@ ASSERT LOW(wRoomObjectsArea) & $0F == 0, "wRoomObjectsArea must be aligned on $1
     ld   a, e                                     ; $6E47: $7B
     add  $10                                      ; $6E48: $C6 $10
     ld   e, a                                     ; $6E4A: $5F
-    cp   LOW(wRoomObjects) + OBJECTS_PER_COLUMN * $10; $6E4B: $FE $91
+    cp   LOW(wRoomObjects) + OBJECTS_PER_COLUMN * $10 ; $6E4B: $FE $91
     jr   nz, .loop                                ; $6E4D: $20 $F0
 
     ret                                           ; $6E4F: $C9

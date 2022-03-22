@@ -697,7 +697,7 @@ jr_015_475C:
     ld   [hl], $30                                ; $4764: $36 $30
     ld   hl, wEntitiesOptions1Table               ; $4766: $21 $30 $C4
     add  hl, bc                                   ; $4769: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IS_MINI_BOSS; $476A: $36 $84
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IS_MINI_BOSS ; $476A: $36 $84
     ld   a, $01                                   ; $476C: $3E $01
     ld   [wD228], a                               ; $476E: $EA $28 $D2
     ld   a, $01                                   ; $4771: $3E $01
@@ -1770,7 +1770,7 @@ jr_015_4F02:
     set  4, [hl]                                  ; $4F23: $CB $E6
     ld   hl, wEntitiesOptions1Table               ; $4F25: $21 $30 $C4
     add  hl, de                                   ; $4F28: $19
-    set  ENTITY_OPT1_B_EXCLUDED_FROM_KILL_ALL, [hl]; $4F29: $CB $CE
+    set  ENTITY_OPT1_B_EXCLUDED_FROM_KILL_ALL, [hl] ; $4F29: $CB $CE
     set  4, [hl]                                  ; $4F2B: $CB $E6
     ldh  a, [hMultiPurpose0]                      ; $4F2D: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $4F2F: $21 $00 $C2
@@ -4041,7 +4041,7 @@ func_015_608C::
     ld   [hl], $0A                                ; $60AA: $36 $0A
     ld   hl, wEntitiesOptions1Table               ; $60AC: $21 $30 $C4
     add  hl, bc                                   ; $60AF: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT; $60B0: $36 $90
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT ; $60B0: $36 $90
     jp   ConfigureEntityHitbox                    ; $60B2: $C3 $EA $3A
 
 jr_015_60B5:
@@ -4283,11 +4283,11 @@ ENDC
 
     ld   hl, wEntitiesOptions1Table               ; $630F: $21 $30 $C4
     add  hl, bc                                   ; $6312: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT; $6313: $36 $90
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IMMUNE_WATER_PIT ; $6313: $36 $90
     call label_3B70                               ; $6315: $CD $70 $3B
     ld   hl, wEntitiesOptions1Table               ; $6318: $21 $30 $C4
     add  hl, bc                                   ; $631B: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT; $631C: $36 $D0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT ; $631C: $36 $D0
 
 jr_015_6324:
     ld   hl, wEntitiesHealthTable                 ; $631E: $21 $60 $C3
@@ -5145,7 +5145,7 @@ func_015_68E7::
     ld   [hl], $00                                ; $68FC: $36 $00
     ld   hl, wEntitiesOptions1Table               ; $68FE: $21 $30 $C4
     add  hl, bc                                   ; $6901: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF; $6902: $36 $C0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF ; $6902: $36 $C0
     call GetEntityDropTimer                       ; $6904: $CD $FB $0B
     ld   [hl], $90                                ; $6907: $36 $90
     xor  a                                        ; $6909: $AF
@@ -6768,7 +6768,7 @@ LaserBeamEntityHandler::
     and  a                                        ; $75DB: $A7
     jr   nz, jr_015_75E1                          ; $75DC: $20 $03
 
-    call CheckLinkCollisionWithProjectile_trampoline; $75DE: $CD $4F $3B
+    call CheckLinkCollisionWithProjectile_trampoline ; $75DE: $CD $4F $3B
 
 jr_015_75E1:
     call UpdateEntityPosWithSpeed_15              ; $75E1: $CD $88 $7B
@@ -7997,7 +7997,7 @@ label_015_7C71:
     jp   label_015_7C91                           ; $7C8E: $C3 $91 $7C
 
 label_015_7C91:
-    call ReturnIfNonInteractive_15.allowInactiveEntity; $7C91: $CD $13 $7B
+    call ReturnIfNonInteractive_15.allowInactiveEntity ; $7C91: $CD $13 $7B
     ldh  a, [hActiveEntityPosX]                   ; $7C94: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $7C96: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $7C98: $F0 $EC

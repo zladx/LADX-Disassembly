@@ -683,7 +683,7 @@ TarinShield2Handler::
 
     ld   a, $01                                   ; $4CD5: $3E $01
     ld   [wShieldLevel], a                        ; $4CD7: $EA $44 $DB
-    ld   a, LINK_ANIMATION_STATE_STANDING_SHIELD_DOWN; $4CDA: $3E $22
+    ld   a, LINK_ANIMATION_STATE_STANDING_SHIELD_DOWN ; $4CDA: $3E $22
     ldh  [hLinkAnimationState], a                 ; $4CDC: $E0 $9D
     call_open_dialog $091                         ; $4CDE
     jp   IncrementEntityState                     ; $4CE3: $C3 $12 $3B

@@ -749,7 +749,7 @@ PhotoAlbumPictureInteractiveHandler:
 .else_4492_28:
     ld   hl, Data_028_4439                        ; $4492: PhotoAlbumPictureInteractiveHandler $21 $39 $44
     ld   de, wOAMBuffer                           ; $4495: PhotoAlbumPictureInteractiveHandler $11 $00 $C0
-    ld   c, (Data_028_4439.end - Data_028_4439) / 4; $4498: PhotoAlbumPictureInteractiveHandler $0E $0C
+    ld   c, (Data_028_4439.end - Data_028_4439) / 4 ; $4498: PhotoAlbumPictureInteractiveHandler $0E $0C
 .loop_449A_28:
     ldi  a, [hl]                                  ; $449A: PhotoAlbumPictureInteractiveHandler $2A
     ld   [de], a                                  ; $449B: PhotoAlbumPictureInteractiveHandler $12
@@ -917,7 +917,7 @@ PhotoAlbumConfirmPrintingHandler:
     jr   nz, .else_45BD_28                        ; $45B6: PhotoAlbumConfirmPrintingHandler $20 $05
 
     ld   hl, Data_028_454E                        ; $45B8: PhotoAlbumConfirmPrintingHandler $21 $4E $45
-    ld   c, (Data_028_454E.end - Data_028_454E) / 4; $45BB: PhotoAlbumConfirmPrintingHandler $0E $0C
+    ld   c, (Data_028_454E.end - Data_028_454E) / 4 ; $45BB: PhotoAlbumConfirmPrintingHandler $0E $0C
 .else_45BD_28:
     ldi  a, [hl]                                  ; $45BD: PhotoAlbumConfirmPrintingHandler $2A
     ld   [de], a                                  ; $45BE: PhotoAlbumConfirmPrintingHandler $12

@@ -2637,7 +2637,7 @@ jr_007_786E:
     ld   [hl], $80                                ; $7872: $36 $80
     ld   hl, wEntitiesOptions1Table               ; $7874: $21 $30 $C4
     add  hl, bc                                   ; $7877: $09
-    ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_SPLASH_IN_WATER; $7878: $36 $48
+    ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_SPLASH_IN_WATER ; $7878: $36 $48
     call func_007_7E5D                            ; $787A: $CD $5D $7E
     add  $06                                      ; $787D: $C6 $06
     cp   $0A                                      ; $787F: $FE $0A
@@ -3596,7 +3596,7 @@ label_007_7F16:
     jp   label_007_7F36                           ; $7F33: $C3 $36 $7F
 
 label_007_7F36:
-    call ReturnIfNonInteractive_07.allowInactiveEntity; $7F36: $CD $9C $7D
+    call ReturnIfNonInteractive_07.allowInactiveEntity ; $7F36: $CD $9C $7D
     ldh  a, [hActiveEntityPosX]                   ; $7F39: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $7F3B: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $7F3D: $F0 $EC

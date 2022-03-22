@@ -96,7 +96,7 @@ MarinEntityHandler::
     jr   c, .notInAnyVillage                      ; $4E83: $38 $02
     jr   .continue                                ; $4E85: $18 $0F
 .notInAnyVillage
-    ld   a, [wOverworldRoomStatus + ROOM_OW_MARIN_BRIDGE]; $4E87: $FA $08 $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_MARIN_BRIDGE] ; $4E87: $FA $08 $D8
     and  $10                                      ; $4E8A: $E6 $10
     jr   nz, .continue                            ; $4E8C: $20 $08
     ld   a, [wTradeSequenceItem]                  ; $4E8E: $FA $0E $DB

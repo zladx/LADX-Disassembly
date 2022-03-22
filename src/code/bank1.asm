@@ -66,7 +66,7 @@ InitSaveFiles::
 
     ld   e, $00                                   ; $46C3: $1E $00
     ld   d, $00                                   ; $46C5: $16 $00
-    ld   bc, SaveGame1.main + wBButtonSlot - wOverworldRoomStatus; $46C7: $01 $05 $A4
+    ld   bc, SaveGame1.main + wBButtonSlot - wOverworldRoomStatus ; $46C7: $01 $05 $A4
 .loop
     ld   hl, DebugSaveFileData                    ; $46CA: $21 $67 $46
     add  hl, de                                   ; $46CD: $19

@@ -74,7 +74,7 @@ TradingItemEntityHandler::
     jr   nz, .jr_007_552E                         ; $5526: $20 $06
 
 .jr_007_5528
-    ld   a, [wOverworldRoomStatus + MOUNTAIN_CAVE_ROOM_2]; $5528: $FA $7B $D8
+    ld   a, [wOverworldRoomStatus + MOUNTAIN_CAVE_ROOM_2] ; $5528: $FA $7B $D8
     and  $10                                      ; $552B: $E6 $10
     ret  z                                        ; $552D: $C8
 

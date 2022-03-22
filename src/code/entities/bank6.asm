@@ -455,7 +455,7 @@ func_006_700A::
     jp   label_006_702A                           ; $7027: $C3 $2A $70
 
 label_006_702A:
-    call ReturnIfNonInteractive_06.allowInactiveEntity; $702A: $CD $CC $64
+    call ReturnIfNonInteractive_06.allowInactiveEntity ; $702A: $CD $CC $64
     ldh  a, [hActiveEntityPosX]                   ; $702D: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $702F: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $7031: $F0 $EC

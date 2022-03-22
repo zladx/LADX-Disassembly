@@ -20,8 +20,8 @@ def main():
                         code = line[:m.span()[0]].rstrip()
                         if not ';' in code:
                             comment = line[m.span()[0]:]
-                            code = code + " " * (50 - len(code))
-                            line = code + comment
+                            code = code + " " * (49 - len(code))
+                            line = code + " " + comment
                     new_content.append(line)
                 open(os.path.join(path, file), "wt").write("\n".join(new_content))
 

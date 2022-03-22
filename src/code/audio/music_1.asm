@@ -866,7 +866,7 @@ UpdateMusicChannel_1B::
     inc  l                                        ; $4525: $2C
     ld   a, [hl+] ; Dx11                          ; $4526: $2A
     and  a                                        ; $4527: $A7
-    jp   z, UpdateNextMusicChannelAfterHlDecrement; $4528: $CA $5B $44
+    jp   z, UpdateNextMusicChannelAfterHlDecrement ; $4528: $CA $5B $44
 
     dec  [hl] ; Dx12                              ; $452B: $35
     jp   nz, label_01B_442A                       ; $452C: $C2 $2A $44

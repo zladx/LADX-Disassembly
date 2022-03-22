@@ -1214,7 +1214,7 @@ label_005_7550:
     jp   label_005_7570                           ; $756D: $C3 $70 $75
 
 label_005_7570:
-    call ReturnIfNonInteractive_05.allowInactiveEntity; $7570: $CD $40 $7A
+    call ReturnIfNonInteractive_05.allowInactiveEntity ; $7570: $CD $40 $7A
     ldh  a, [hActiveEntityPosX]                   ; $7573: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $7575: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $7577: $F0 $EC
@@ -1692,7 +1692,7 @@ jr_005_7A1F:
 
     ld   hl, wEntitiesOptions1Table               ; $7A2A: $21 $30 $C4
     add  hl, bc                                   ; $7A2D: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF; $7A2E: $36 $C0
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF ; $7A2E: $36 $C0
     call label_3B70                               ; $7A30: $CD $70 $3B
     ld   hl, wEntitiesOptions1Table               ; $7A33: $21 $30 $C4
     add  hl, bc                                   ; $7A36: $09

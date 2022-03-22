@@ -1161,7 +1161,7 @@ SelectRoomTilesets::
     ld   a, e                                     ; $0DC1: $7B
     cp   $23                                      ; $0DC2: $FE $23
     jr   nz, .sirenRoomEnd                        ; $0DC4: $20 $08
-    ld   a, [wOverworldRoomStatus + ROOM_OW_SIREN]; $0DC6: $FA $C9 $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_SIREN] ; $0DC6: $FA $C9 $D8
     and  OW_ROOM_STATUS_OWL_TALKED                ; $0DC9: $E6 $20
     jr   z, .sirenRoomEnd                         ; $0DCB: $28 $01
     inc  e                                        ; $0DCD: $1C
@@ -1170,7 +1170,7 @@ SelectRoomTilesets::
     ld   a, e                                     ; $0DCE: $7B
     cp   $21                                      ; $0DCF: $FE $21
     jr   nz, .spritesheetGroupDone                ; $0DD1: $20 $08
-    ld   a, [wOverworldRoomStatus + ROOM_OW_WALRUS]; $0DD3: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_WALRUS] ; $0DD3: $FA $FD $D8
     and  $20                                      ; $0DD6: $E6 $20
     jr   z, .spritesheetGroupDone                 ; $0DD8: $28 $01
     inc  e                                        ; $0DDA: $1C
@@ -1416,7 +1416,7 @@ FileCopyHandler::
     jp   FileCopyEntryPoint                       ; $0F17: $C3 $8C $4F
 
 WorldHandler::
-    callsb UpdatePaletteEffectForInteractiveObjects; $0F1A: $3E $14 $EA $00 $21 $CD $4B $4C
+    callsb UpdatePaletteEffectForInteractiveObjects ; $0F1A: $3E $14 $EA $00 $21 $CD $4B $4C
     call PerformOverworldAudioTasks               ; $0F22: $CD $BC $4A
     jpsw WorldHandlerEntryPoint                   ; $0F25: $3E $01 $CD $0C $08 $C3 $71 $43
 
@@ -3301,10 +3301,10 @@ UpdateLinkWalkingAnimation::
     ld   hl, LinkAnimationsList_WalkingNoShield   ; $1AA0: $21 $10 $49
     jr   .done                                    ; $1AA3: $18 $22
 .hasShield
-    ld   hl, LinkAnimationsList_WalkCarryingDefaultShield; $1AA5: $21 $18 $49
+    ld   hl, LinkAnimationsList_WalkCarryingDefaultShield ; $1AA5: $21 $18 $49
     cp   $02                                      ; $1AA8: $FE $02
     jr   nz, .shieldDone                          ; $1AAA: $20 $03
-    ld   hl, LinkAnimationsList_WalkCarryingMirrorShield; $1AAC: $21 $28 $49
+    ld   hl, LinkAnimationsList_WalkCarryingMirrorShield ; $1AAC: $21 $28 $49
 .shieldDone
 
     ; If the carried shield is actually being used, add 8 to the animation list address
@@ -6075,7 +6075,7 @@ LoadRoom::
     ldh  a, [hMapRoom]                            ; $31BF: $F0 $F6
     cp   ROOM_OW_EAGLE_TOWER                      ; $31C1: $FE $0E
     jr   nz, .endEaglesTowerAlt                   ; $31C3: $20 $0C
-    ld   a, [wOverworldRoomStatus + ROOM_OW_EAGLE_TOWER           ]; $31C5: $FA $0E $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_EAGLE_TOWER] ; $31C5: $FA $0E $D8
     and  OW_ROOM_STATUS_CHANGED                   ; $31C8: $E6 $10
     jr   z, .altRoomsEnd                          ; $31CA: $28 $55
     ld   bc, Overworld0EAlt ; Eagle's Tower open  ; $31CC: $01 $EC $47
@@ -6591,12 +6591,12 @@ LoadRoomObject::
 
 .configureMovableBlock
     ld   hl, wRoomSwitchableObject                ; $3417: $21 $FA $D6
-    ld   [hl], ROOM_SWITCHABLE_OBJECT_MOBILE_BLOCK; $341A: $36 $02
+    ld   [hl], ROOM_SWITCHABLE_OBJECT_MOBILE_BLOCK ; $341A: $36 $02
     jr   .switchableObjectsEnd                    ; $341C: $18 $05
 
 .configureSwitchButton
     ld   hl, wRoomSwitchableObject                ; $341E: $21 $FA $D6
-    ld   [hl], ROOM_SWITCHABLE_OBJECT_SWITCH_BUTTON; $3421: $36 $01
+    ld   [hl], ROOM_SWITCHABLE_OBJECT_SWITCH_BUTTON ; $3421: $36 $01
 .switchableObjectsEnd
 
     ;
@@ -7669,8 +7669,8 @@ ReplaceEvilEagleRiderVisibleTiles::
     ld   de, vTiles0 + $460                       ; $3F9B: $11 $60 $84
     ld   bc, TILE_SIZE * 1                        ; $3F9E: $01 $10 $00
     call CopyData                                 ; $3FA1: $CD $14 $29
-    ld   hl, EvilEagleRiderVisibleTiles + TILE_SIZE; $3FA4: $21 $EE $59
-    jr   ReplaceEvilEagleRiderHiddenTiles.copyData; $3FA7: $18 $14
+    ld   hl, EvilEagleRiderVisibleTiles + TILE_SIZE ; $3FA4: $21 $EE $59
+    jr   ReplaceEvilEagleRiderHiddenTiles.copyData ; $3FA7: $18 $14
 
 ReplaceEvilEagleRiderHiddenTiles::
     ld   a, BANK(EvilEagleRiderHiddenTiles)       ; $3FA9: $3E $05
@@ -7679,7 +7679,7 @@ ReplaceEvilEagleRiderHiddenTiles::
     ld   de, vTiles0 + $460                       ; $3FB1: $11 $60 $84
     ld   bc, TILE_SIZE * 1                        ; $3FB4: $01 $10 $00
     call CopyData                                 ; $3FB7: $CD $14 $29
-    ld   hl, EvilEagleRiderHiddenTiles + TILE_SIZE; $3FBA: $21 $0E $5A
+    ld   hl, EvilEagleRiderHiddenTiles + TILE_SIZE ; $3FBA: $21 $0E $5A
 
 .copyData
     ld   de, vTiles0 + $480                       ; $3FBD: $11 $80 $84

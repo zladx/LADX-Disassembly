@@ -15,7 +15,7 @@ MarinAtTheShoreEntityHandler::
     cp   TRADING_ITEM_PINEAPPLE                   ; $61A1: $FE $07
     jp   c, ClearEntityStatusBank18               ; $61A3: $DA $08 $7F
 
-    ld   de, MarinAtTalTalAndInStoreSpriteVariants; $61A6: $11 $B7 $5E
+    ld   de, MarinAtTalTalAndInStoreSpriteVariants ; $61A6: $11 $B7 $5E
     call RenderActiveEntitySpritesPair            ; $61A9: $CD $C0 $3B
     ld   a, [wRoomTransitionState]                ; $61AC: $FA $24 $C1
     and  a                                        ; $61AF: $A7

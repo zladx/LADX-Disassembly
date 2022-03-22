@@ -662,7 +662,7 @@ DialogBreakHandler::
     jr   nz, .jp_26E1                             ; $269A: $20 $45
     ld   a, [wC3C3]                               ; $269C: $FA $C3 $C3
     cp   $FF                                      ; $269F: $FE $FF
-    jp   z, DialogDrawNextCharacterHandler.label_25AD; $26A1: $CA $AD $25
+    jp   z, DialogDrawNextCharacterHandler.label_25AD ; $26A1: $CA $AD $25
     cp   $FE                                      ; $26A4: $FE $FE
     jp   z, DialogDrawNextCharacterHandler.choice ; $26A6: $CA $95 $25
     ; wC1CC = 01 when an unfinished textbox is waiting for a button press to continue.

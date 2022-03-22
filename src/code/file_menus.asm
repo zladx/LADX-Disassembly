@@ -1206,7 +1206,7 @@ CopyQuitOkTilemap::
     ld   hl, wRequest                             ; $4E55: $21 $01 $D6
     ld   de, FileMenuQuitOkTilemap                ; $4E58: $11 $43 $4E
 IF LANG_EN
-    ld   c, FileMenuQuitOkTilemap.end - FileMenuQuitOkTilemap - 1; $4E5B: $0E $11
+    ld   c, FileMenuQuitOkTilemap.end - FileMenuQuitOkTilemap - 1 ; $4E5B: $0E $11
 ELSE
     ld   c, FileMenuQuitOkTilemap.end - FileMenuQuitOkTilemap
 ENDC
@@ -1310,7 +1310,7 @@ ENDC
 CopyReturnToMenuTilemap::
     ld   a, [wRequestsSize]                       ; $4EBB: $FA $00 $D6
     ld   e, a                                     ; $4EBE: $5F
-    add  FileReturnToMenuTilemap.end - FileReturnToMenuTilemap - 1; $4EBF: $C6 $11
+    add  FileReturnToMenuTilemap.end - FileReturnToMenuTilemap - 1 ; $4EBF: $C6 $11
     ld   [wRequestsSize], a                       ; $4EC1: $EA $00 $D6
     ld   d, $00                                   ; $4EC4: $16 $00
     ld   hl, wRequest                             ; $4EC6: $21 $01 $D6
@@ -1327,7 +1327,7 @@ IF LANG_DE
 ENDC
 
 IF LANG_EN
-    ld   c, FileReturnToMenuTilemap.end - FileReturnToMenuTilemap - 1; $4ECD: $0E $11
+    ld   c, FileReturnToMenuTilemap.end - FileReturnToMenuTilemap - 1 ; $4ECD: $0E $11
 ELSE
     ld   c, FileReturnToMenuTilemap.end - FileReturnToMenuTilemap
 ENDC

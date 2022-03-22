@@ -1307,7 +1307,7 @@ func_007_703A::
     ld   [wD5C0+1], a                             ; $705C: $EA $C1 $D5
     ld   a, $06                                   ; $705F: $3E $06
     ld   [wD5C2+1], a                             ; $7061: $EA $C3 $D5
-    ld   de, Unknown041SpriteVariants            ; $7064: $11 $15 $6F
+    ld   de, Unknown041SpriteVariants             ; $7064: $11 $15 $6F
     call RenderActiveEntitySpritesPair            ; $7067: $CD $C0 $3B
     ld   a, $02                                   ; $706A: $3E $02
     jp   label_007_7034                           ; $706C: $C3 $34 $70

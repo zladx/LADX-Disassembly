@@ -82,11 +82,11 @@ TarinEntityHandler::
     ld   hl, wEntitiesInertiaTable                ; $4977: $21 $D0 $C3
     add  hl, bc                                   ; $497A: $09
     ld   a, [hl]                                  ; $497B: $7E
-    ld   hl, Tarin1SpriteList                        ; $497C: $21 $4A $49
+    ld   hl, Tarin1SpriteList                     ; $497C: $21 $4A $49
     cp   $70                                      ; $497F: $FE $70
     jr   nz, jr_005_4986                          ; $4981: $20 $03
 
-    ld   hl, Tarin2SpriteList                        ; $4983: $21 $5A $49
+    ld   hl, Tarin2SpriteList                     ; $4983: $21 $5A $49
 
 jr_005_4986:
     ld   c, $04                                   ; $4986: $0E $04

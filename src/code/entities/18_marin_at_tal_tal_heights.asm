@@ -46,7 +46,7 @@ MarinAtTalTalHeightsEntityHandler::
 
     ld   a, c                                     ; $5EF6: $79
     ld   [wMarinEntityIndex], a                   ; $5EF7: $EA $0F $C5
-    ld   de, MarinAtTalTalAndInStoreSpriteVariants ; $5EFA: $11 $B7 $5E
+    ld   de, MarinAtTalTalAndInStoreSpriteVariants; $5EFA: $11 $B7 $5E
     call RenderActiveEntitySpritesPair            ; $5EFD: $CD $C0 $3B
     call func_018_7D60                            ; $5F00: $CD $60 $7D
     call AddEntityZSpeedToPos_18                  ; $5F03: $CD $98 $7E

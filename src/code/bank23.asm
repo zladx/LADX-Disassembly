@@ -298,7 +298,7 @@ func_023_7E95::
     ld   hl, Data_023_7610                        ; $7EB4: $21 $10 $76
     add  hl, de                                   ; $7EB7: $19
     push hl                                       ; $7EB8: $E5
-    ld   de, wRequest                             ; $7EB9: $11 $01 $D6
+    ld   de, wDrawCommand                         ; $7EB9: $11 $01 $D6
     ld   c, $18                                   ; $7EBC: $0E $18
 
 jr_023_7EBE:
@@ -313,7 +313,7 @@ jr_023_7EBE:
     and  a                                        ; $7EC7: $A7
     ret  z                                        ; $7EC8: $C8
 
-    ld   de, wRequestAlt                          ; $7EC9: $11 $91 $DC
+    ld   de, wDrawCommandAlt                      ; $7EC9: $11 $91 $DC
     ld   a, [wD00D]                               ; $7ECC: $FA $0D $D0
     cp   $50                                      ; $7ECF: $FE $50
     jr   z, jr_023_7EEE                           ; $7ED1: $28 $1B

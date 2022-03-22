@@ -3227,12 +3227,12 @@ jr_036_53D2:
     add  hl, bc                                   ; $53D2: $09
     ld   c, l                                     ; $53D3: $4D
     ld   b, h                                     ; $53D4: $44
-    ld   a, [wRequestsSize]                       ; $53D5: $FA $00 $D6
+    ld   a, [wDrawCommandsSize]                   ; $53D5: $FA $00 $D6
     ld   e, a                                     ; $53D8: $5F
     add  $08                                      ; $53D9: $C6 $08
-    ld   [wRequestsSize], a                       ; $53DB: $EA $00 $D6
+    ld   [wDrawCommandsSize], a                   ; $53DB: $EA $00 $D6
     ld   d, $00                                   ; $53DE: $16 $00
-    ld   hl, wRequest                             ; $53E0: $21 $01 $D6
+    ld   hl, wDrawCommand                         ; $53E0: $21 $01 $D6
     add  hl, de                                   ; $53E3: $19
     ld   e, $08                                   ; $53E4: $1E $08
 
@@ -3256,12 +3256,12 @@ jr_036_53E6:
     add  hl, bc                                   ; $53FE: $09
     ld   c, l                                     ; $53FF: $4D
     ld   b, h                                     ; $5400: $44
-    ld   a, [wRequestsAltSize]                    ; $5401: $FA $90 $DC
+    ld   a, [wDrawCommandsAltSize]                ; $5401: $FA $90 $DC
     ld   e, a                                     ; $5404: $5F
     add  $08                                      ; $5405: $C6 $08
-    ld   [wRequestsAltSize], a                    ; $5407: $EA $90 $DC
+    ld   [wDrawCommandsAltSize], a                ; $5407: $EA $90 $DC
     ld   d, $00                                   ; $540A: $16 $00
-    ld   hl, wRequestAlt                          ; $540C: $21 $91 $DC
+    ld   hl, wDrawCommandAlt                      ; $540C: $21 $91 $DC
     add  hl, de                                   ; $540F: $19
     ld   e, $08                                   ; $5410: $1E $08
 

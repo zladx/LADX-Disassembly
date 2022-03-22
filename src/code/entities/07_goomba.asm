@@ -68,10 +68,10 @@ ELSE
     jr   z, jr_007_659D                           ; $653A: $28 $61
 ENDC
 
-    ld   a, [wRequestsSize]                       ; $653C: $FA $00 $D6
+    ld   a, [wDrawCommandsSize]                   ; $653C: $FA $00 $D6
     ld   e, a                                     ; $653F: $5F
     add  $08                                      ; $6540: $C6 $08
-    ld   [wRequestsSize], a                       ; $6542: $EA $00 $D6
+    ld   [wDrawCommandsSize], a                   ; $6542: $EA $00 $D6
     ld   d, b                                     ; $6545: $50
     push bc                                       ; $6546: $C5
     ld   hl, wEntitiesInertiaTable                ; $6547: $21 $D0 $C3
@@ -84,7 +84,7 @@ ENDC
     add  hl, bc                                   ; $6555: $09
     ld   c, l                                     ; $6556: $4D
     ld   b, h                                     ; $6557: $44
-    ld   hl, wRequest                             ; $6558: $21 $01 $D6
+    ld   hl, wDrawCommand                         ; $6558: $21 $01 $D6
     add  hl, de                                   ; $655B: $19
     ld   e, $08                                   ; $655C: $1E $08
 
@@ -101,10 +101,10 @@ jr_007_655E:
     jr   z, jr_007_6596                           ; $6569: $28 $2B
 
     pop  bc                                       ; $656B: $C1
-    ld   a, [wRequestsAltSize]                    ; $656C: $FA $90 $DC
+    ld   a, [wDrawCommandsAltSize]                ; $656C: $FA $90 $DC
     ld   e, a                                     ; $656F: $5F
     add  $08                                      ; $6570: $C6 $08
-    ld   [wRequestsAltSize], a                    ; $6572: $EA $90 $DC
+    ld   [wDrawCommandsAltSize], a                ; $6572: $EA $90 $DC
     ld   d, b                                     ; $6575: $50
     push bc                                       ; $6576: $C5
     ld   hl, wEntitiesInertiaTable                ; $6577: $21 $D0 $C3
@@ -121,7 +121,7 @@ ENDC
     add  hl, bc                                   ; $6585: $09
     ld   c, l                                     ; $6586: $4D
     ld   b, h                                     ; $6587: $44
-    ld   hl, wRequestAlt                          ; $6588: $21 $91 $DC
+    ld   hl, wDrawCommandAlt                      ; $6588: $21 $91 $DC
     add  hl, de                                   ; $658B: $19
     ld   e, $08                                   ; $658C: $1E $08
 

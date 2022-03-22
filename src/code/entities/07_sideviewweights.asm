@@ -151,11 +151,11 @@ jr_007_625F:
     pop  bc                                       ; $62A1: $C1
 
 jr_007_62A2:
-    ld   hl, wRequest                             ; $62A2: $21 $01 $D6
-    ld   a, [wRequestsSize]                       ; $62A5: $FA $00 $D6
+    ld   hl, wDrawCommand                         ; $62A2: $21 $01 $D6
+    ld   a, [wDrawCommandsSize]                   ; $62A5: $FA $00 $D6
     ld   e, a                                     ; $62A8: $5F
     add  $0A                                      ; $62A9: $C6 $0A
-    ld   [wRequestsSize], a                       ; $62AB: $EA $00 $D6
+    ld   [wDrawCommandsSize], a                   ; $62AB: $EA $00 $D6
     ld   d, $00                                   ; $62AE: $16 $00
     add  hl, de                                   ; $62B0: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $62B1: $F0 $CF
@@ -201,11 +201,11 @@ jr_007_62D2:
     pop  bc                                       ; $62EB: $C1
 
 jr_007_62EC:
-    ld   hl, wRequest                             ; $62EC: $21 $01 $D6
-    ld   a, [wRequestsSize]                       ; $62EF: $FA $00 $D6
+    ld   hl, wDrawCommand                         ; $62EC: $21 $01 $D6
+    ld   a, [wDrawCommandsSize]                   ; $62EF: $FA $00 $D6
     ld   e, a                                     ; $62F2: $5F
     add  $0A                                      ; $62F3: $C6 $0A
-    ld   [wRequestsSize], a                       ; $62F5: $EA $00 $D6
+    ld   [wDrawCommandsSize], a                   ; $62F5: $EA $00 $D6
     ld   d, $00                                   ; $62F8: $16 $00
     add  hl, de                                   ; $62FA: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $62FB: $F0 $CF

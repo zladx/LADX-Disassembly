@@ -168,11 +168,11 @@ jr_007_51AA:
     pop  bc                                       ; $51F1: $C1
 
 jr_007_51F2:
-    ld   hl, wRequest                             ; $51F2: $21 $01 $D6
-    ld   a, [wRequestsSize]                       ; $51F5: $FA $00 $D6
+    ld   hl, wDrawCommand                         ; $51F2: $21 $01 $D6
+    ld   a, [wDrawCommandsSize]                   ; $51F5: $FA $00 $D6
     ld   e, a                                     ; $51F8: $5F
     add  $0A                                      ; $51F9: $C6 $0A
-    ld   [wRequestsSize], a                       ; $51FB: $EA $00 $D6
+    ld   [wDrawCommandsSize], a                   ; $51FB: $EA $00 $D6
     ld   d, $00                                   ; $51FE: $16 $00
     add  hl, de                                   ; $5200: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5201: $F0 $CF

@@ -2,9 +2,9 @@
 ; Memory-clearing functions
 ;
 
-; Clear $1600 bytes of WRAM (from $C000 to wRequestsSection)
+; Clear $1600 bytes of WRAM (from $C000 to wDrawCommandsSection)
 ClearLowerAndMiddleWRAM::
-    ld   bc, wRequestsSection - wram0Section      ; $29C1: $01 $00 $16
+    ld   bc, wDrawCommandsSection - wram0Section  ; $29C1: $01 $00 $16
     jr   ClearWRAMBytes                           ; $29C4: $18 $16
 
 ; Clear $1300 bytes of WRAM (from $C000 to wAudioSection)

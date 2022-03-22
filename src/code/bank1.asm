@@ -543,7 +543,7 @@ Data_001_54E8::
 ; See data/backgrounds/tilemap_pointers.asm
 CreateMinimapTilemap::
     ; Copy $29 bytes from Data_001_54E8 to wMinimapTilemap
-    ; (wMinimapTilemap is normally in the middle of wRequest.data - but is here used as some temporary free memory
+    ; (wMinimapTilemap is normally in the middle of wDrawCommand.data - but is here used as some temporary free memory
     ; to store the tilemap)
     ;
     ; This will later be used by the BGMapToLoad 7 (see tilemaps_pointers.asm)
@@ -1273,12 +1273,12 @@ Data_001_5D3E::
     db  $00                                       ; $5D52
 
 label_001_5D53::
-    ld   a, [wRequestsSize]                       ; $5D53: $FA $00 $D6
+    ld   a, [wDrawCommandsSize]                   ; $5D53: $FA $00 $D6
     ld   e, a                                     ; $5D56: $5F
     ld   d, $00                                   ; $5D57: $16 $00
     add  a, $14                                   ; $5D59: $C6 $14
-    ld   [wRequestsSize], a                       ; $5D5B: $EA $00 $D6
-    ld   hl, wRequest                             ; $5D5E: $21 $01 $D6
+    ld   [wDrawCommandsSize], a                   ; $5D5B: $EA $00 $D6
+    ld   hl, wDrawCommand                         ; $5D5E: $21 $01 $D6
     add  hl, de                                   ; $5D61: $19
     push de                                       ; $5D62: $D5
     ld   bc, Data_001_5D14                        ; $5D63: $01 $14 $5D
@@ -1300,7 +1300,7 @@ jr_001_5D77::
     dec  e                                        ; $5D7A: $1D
     jr   nz, jr_001_5D77                          ; $5D7B: $20 $FA
     pop  de                                       ; $5D7D: $D1
-    ld   hl, wRequest.data                        ; $5D7E: $21 $04 $D6
+    ld   hl, wDrawCommand.data                    ; $5D7E: $21 $04 $D6
     add  hl, de                                   ; $5D81: $19
     ld   c, $00                                   ; $5D82: $0E $00
     ldh  a, [hMultiPurpose2]                      ; $5D84: $F0 $D9

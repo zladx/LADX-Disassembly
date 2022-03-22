@@ -184,7 +184,7 @@ LoadRequestedGfx::
     call LCDOff                                   ; $043A: $CD $CF $28
     callsb LoadBGMapAttributes                    ; $043D: $3E $24 $EA $00 $21 $CD $2C $5C
 
-    ; Read and execute a wRequest for loading wBGMapToLoad.
+    ; Read and execute a wDrawCommand for loading wBGMapToLoad.
     callsb GetBGCopyRequest                       ; $0445: $3E $20 $EA $00 $21 $CD $77 $45
     ld   a, BANK(BGTilemaps)                      ; $044D: $3E $08
     ld   [MBC3SelectBank], a                      ; $044F: $EA $00 $21
@@ -396,13 +396,13 @@ InterruptVBlank::
     callsb func_024_5C1A                          ; $0530: $3E $24 $EA $00 $21 $CD $1A $5C
 .gbcEnd
 
-    ld   de, wRequest                             ; $0538: $11 $01 $D6
+    ld   de, wDrawCommand                         ; $0538: $11 $01 $D6
     call ExecuteBGCopyRequest ; Load BG column tiles ; $053B: $CD $27 $29
     xor  a                                        ; $053E: $AF
-    ld   [wRequestsSize], a                       ; $053F: $EA $00 $D6
-    ld   [wRequest], a                            ; $0542: $EA $01 $D6
-    ld   [wRequestsAltSize], a                    ; $0545: $EA $90 $DC
-    ld   [wRequestAlt], a                         ; $0548: $EA $91 $DC
+    ld   [wDrawCommandsSize], a                   ; $053F: $EA $00 $D6
+    ld   [wDrawCommand], a                        ; $0542: $EA $01 $D6
+    ld   [wDrawCommandsAltSize], a                ; $0545: $EA $90 $DC
+    ld   [wDrawCommandAlt], a                     ; $0548: $EA $91 $DC
 
     ; On Overworld, copy some palette data to OAM buffer
     callsb func_036_72BA                          ; $054B: $3E $36 $EA $00 $21 $CD $BA $72
@@ -453,13 +453,13 @@ PhotoAlbumVBlankHandler::
     callsw func_024_5C1A                          ; $0590: $3E $24 $CD $0C $08 $CD $1A $5C
 .gbcEnd
 
-    ld   de, wRequest                             ; $0598: $11 $01 $D6
+    ld   de, wDrawCommand                         ; $0598: $11 $01 $D6
     call ExecuteBGCopyRequest                     ; $059B: $CD $27 $29
     xor  a                                        ; $059E: $AF
-    ld   [wRequestsSize], a                       ; $059F: $EA $00 $D6
-    ld   [wRequest], a                            ; $05A2: $EA $01 $D6
-    ld   [wRequestsAltSize], a                    ; $05A5: $EA $90 $DC
-    ld   [wRequestAlt], a                         ; $05A8: $EA $91 $DC
+    ld   [wDrawCommandsSize], a                   ; $059F: $EA $00 $D6
+    ld   [wDrawCommand], a                        ; $05A2: $EA $01 $D6
+    ld   [wDrawCommandsAltSize], a                ; $05A5: $EA $90 $DC
+    ld   [wDrawCommandAlt], a                     ; $05A8: $EA $91 $DC
 
 .clearBGTilesFlag
     callsw PrinterInterruptVBlank                 ; $05AB: $3E $28 $CD $0C $08 $CD $16 $46

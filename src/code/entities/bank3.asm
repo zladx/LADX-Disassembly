@@ -1909,13 +1909,13 @@ func_003_51C9::
 
 label_003_51F5:
     call label_2887                               ; $51F5: $CD $87 $28
-    ld   a, [wRequestsSize]                       ; $51F8: $FA $00 $D6
+    ld   a, [wDrawCommandsSize]                   ; $51F8: $FA $00 $D6
     ld   e, a                                     ; $51FB: $5F
     ld   d, $00                                   ; $51FC: $16 $00
-    ld   hl, wRequest                             ; $51FE: $21 $01 $D6
+    ld   hl, wDrawCommand                         ; $51FE: $21 $01 $D6
     add  hl, de                                   ; $5201: $19
     add  $0A                                      ; $5202: $C6 $0A
-    ld   [wRequestsSize], a                       ; $5204: $EA $00 $D6
+    ld   [wDrawCommandsSize], a                   ; $5204: $EA $00 $D6
     pop  de                                       ; $5207: $D1
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5208: $F0 $CF
     ld   [hl+], a                                 ; $520A: $22

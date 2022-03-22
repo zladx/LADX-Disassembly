@@ -26,10 +26,10 @@ CopyData::
     jr   nz, CopyData                             ; $291A: $20 $F8
     ret                                           ; $291C: $C9
 
-; Execute a data copy from a wRequest structure,
+; Execute a data copy from a wDrawCommand structure,
 ; with optional handling during map transitions.
 ; Inputs:
-;   de: data copy request struct (see wRequest)
+;   de: data copy request struct (see wDrawCommand)
 ;   a:  destination address high byte
 ExpandCopyRequestArgs::
     ; Copy destination address to hl
@@ -45,10 +45,10 @@ ExpandCopyRequestArgs::
     call CopyDataToBGMap                          ; $2924: $CD $41 $29
     ; fallthrough
 
-; Copy data from a wRequest structure to the BG map,
+; Copy data from a wDrawCommand structure to the BG map,
 ; with optional handling during map transitions.
 ; Inputs:
-;   de: address of the data copy request struct (see wRequest)
+;   de: address of the data copy request struct (see wDrawCommand)
 ExecuteBGCopyRequest::
     ld   a, [wRoomTransitionState]                ; $2927: $FA $24 $C1
     and  a                                        ; $292A: $A7

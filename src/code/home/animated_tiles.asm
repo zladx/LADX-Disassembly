@@ -4,7 +4,7 @@
 
 ; Special case for the sequence with Marin and Link chatting on the beach
 AnimateMarinBeachTiles::
-    ld   a, [wRequest]                            ; $1ACC: $FA $01 $D6
+    ld   a, [wDrawCommand]                        ; $1ACC: $FA $01 $D6
     and  a                                        ; $1ACF: $A7
     ret  nz                                       ; $1AD0: $C0
     ld   a, BANK(MarinBeachWavesTiles)            ; $1AD1: $3E $10
@@ -72,7 +72,7 @@ AnimateTiles::
     cp   GAMEPLAY_INTRO                           ; $1B14: $FE $00
     jr   nz, .introEnd                            ; $1B16: $20 $2E
     ; If there is no transfer request pending…
-    ld   a, [wRequest]                            ; $1B18: $FA $01 $D6
+    ld   a, [wDrawCommand]                        ; $1B18: $FA $01 $D6
     and  a                                        ; $1B1B: $A7
     jp   nz, .return                              ; $1B1C: $C2 $45 $1B
     ; … and the frame count is >= 4
@@ -135,7 +135,7 @@ AnimateTiles::
     ; If there is a pending request or a map transition,
     ; only animate Link's sprite.
     ld   hl, wRoomTransitionState                 ; $1B67: $21 $24 $C1
-    ld   a, [wRequest]                            ; $1B6A: $FA $01 $D6
+    ld   a, [wDrawCommand]                        ; $1B6A: $FA $01 $D6
     or   [hl]                                     ; $1B6D: $B6
     jp   nz, DrawLinkSpriteAndReturn              ; $1B6E: $C2 $2E $1D
 

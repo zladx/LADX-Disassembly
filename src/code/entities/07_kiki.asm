@@ -386,11 +386,11 @@ jr_007_5A2A:
     pop  bc                                       ; $5A5E: $C1
 
 jr_007_5A5F:
-    ld   hl, wRequest                             ; $5A5F: $21 $01 $D6
-    ld   a, [wRequestsSize]                       ; $5A62: $FA $00 $D6
+    ld   hl, wDrawCommand                         ; $5A5F: $21 $01 $D6
+    ld   a, [wDrawCommandsSize]                   ; $5A62: $FA $00 $D6
     ld   e, a                                     ; $5A65: $5F
     add  $0A                                      ; $5A66: $C6 $0A
-    ld   [wRequestsSize], a                       ; $5A68: $EA $00 $D6
+    ld   [wDrawCommandsSize], a                   ; $5A68: $EA $00 $D6
     ld   d, $00                                   ; $5A6B: $16 $00
     add  hl, de                                   ; $5A6D: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5A6E: $F0 $CF

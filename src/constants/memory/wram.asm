@@ -2847,21 +2847,28 @@ wD5C4::
   ds 60 ; D5C4 - D600
 
 ;
-; Data structures for copying data to vram during blanking times.
+; Data structures for copying data to VRAM (tilemaps or tile data) during blanking times.
 ;
-; There can be several wRequests stacked together in this area.
+; The game mostly uses these commands to copy tilemaps; hence the modes to copy either rows or
+; columns of data. However it is also occasionally used to copy tile data (the actual pixels),
+; the most common example being the dialog letters.
+;
+; Draw commands are either decoded from static data (like the rooms objects), or built
+; dynamically at runtime (like the inventory).
+;
+; There can be several wDrawCommands stacked together in this area.
 ;
 
-wRequestsSection::
+wDrawCommandsSection::
 
-; Size of all cumulated wRequestsSize
-; When 0, no wRequest is executed on vblank
-wRequestsSize::
+; Size of all cumulated wDrawCommandsSize
+; When 0, no wDrawCommand is executed on vblank.
+wDrawCommandsSize::
   ds 1 ; D600
 
-; Format of a wRequest data structure
+; Format of a wDrawCommand data structure
 ; (This is the address of first one in memory; but several of them can be stacked.)
-wRequest::
+wDrawCommand::
 ; Request destination address high byte
 .destinationHigh
   ds 1 ; D601
@@ -3614,28 +3621,28 @@ wObjPal7::
 wObjPal8::
   ds 8 ; DC88 - DC8F
 
-; This seems to be some secondary wRequests buffer used during map scrolling.
+; This seems to be some secondary wDrawCommands buffer used during map scrolling.
 ;
 ; TODO: find a better name
 
-; Size of all cumulated wRequestsSize
-; When 0, no wRequest is executed on vblanks
-wRequestsAltSize::
+; Size of all cumulated wDrawCommandsSize
+; When 0, no wDrawCommand is executed on vblanks
+wDrawCommandsAltSize::
   ds 1 ; DC90
 
-; Secondary wRequest destination (higher byte)
-wRequestAlt::
+; Secondary wDrawCommand destination (higher byte)
+wDrawCommandAlt::
 .destinationHigh
   ds 1 ; DC91
-; Secondary wRequest destination (lower byte)
+; Secondary wDrawCommand destination (lower byte)
 .destinationLow
   ds 1 ; DC92
-; Secondary wRequest data length and options
+; Secondary wDrawCommand data length and options
 ; bits 0-6: data length,
 ; bits 7-8: copy mode (see BG_COPY_MODE_* constants)
 .length
   ds 1 ; DC93
-; Secondary wRequest data
+; Secondary wDrawCommand data
 .data
   ds $2C ; DC93 - DCBF
 

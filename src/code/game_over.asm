@@ -157,7 +157,7 @@ GameOverInteractiveHandler::
     call func_001_4339                            ; $42D9: $CD $39 $43 ; $42D9: $CD $39 $43
     ldh  a, [hJoypadState]                        ; $42DC: $F0 $CC ; $42DC: $F0 $CC
     and  J_A | J_B | J_START                      ; $42DE: $E6 $B0 ; $42DE: $E6 $B0
-    jr   z, jr_001_4335                           ; $42E0: $28 $53 ; $42E0: $28 $53
+    jr   z, ret_001_4335                          ; $42E0: $28 $53 ; $42E0: $28 $53
 
     ld   a, [wC13F]                               ; $42E2: $FA $3F $C1 ; $42E2: $FA $3F $C1
     cp   $01                                      ; $42E5: $FE $01 ; $42E5: $FE $01
@@ -207,7 +207,7 @@ jr_001_432C::
     ldh  [hActiveEntityTilesOffset], a            ; $4330: $E0 $F5 ; $4330: $E0 $F5
     call func_001_6162                            ; $4332: $CD $62 $61 ; $4332: $CD $62 $61
 
-jr_001_4335::
+ret_001_4335::
     ret                                           ; $4335: $C9 ; $4335: $C9
 
 Data_001_4336::

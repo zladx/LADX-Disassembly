@@ -105,7 +105,7 @@ MamuAndFrogsState1Handler::
     call func_018_407C                            ; $4097: $CD $7C $40
     ld   a, [wDialogState]                        ; $409A: $FA $9F $C1
     and  a                                        ; $409D: $A7
-    jr   nz, jr_018_40D6                          ; $409E: $20 $36
+    jr   nz, ret_018_40D6                         ; $409E: $20 $36
 
     call IncrementEntityState                     ; $40A0: $CD $12 $3B
     ld   a, [wDialogAskSelectionIndex]            ; $40A3: $FA $77 $C1
@@ -135,7 +135,7 @@ jr_018_40AF:
     ld   a, $01                                   ; $40D1: $3E $01
     ld   [wAlternateBackgroundEnabled], a         ; $40D3: $EA $00 $C5
 
-jr_018_40D6:
+ret_018_40D6:
     ret                                           ; $40D6: $C9
 
 ; Frogs start singing
@@ -144,7 +144,7 @@ MamuAndFrogsSingingHandler::
     ldh  [hLinkInteractiveMotionBlocked], a       ; $40D9: $E0 $A1
     ld   [wC167], a                               ; $40DB: $EA $67 $C1
     call GetEntityTransitionCountdown             ; $40DE: $CD $05 $0C
-    jr   nz, jr_018_40F0                          ; $40E1: $20 $0D
+    jr   nz, ret_018_40F0                         ; $40E1: $20 $0D
 
     ld   a, MUSIC_MAMU_SONG                       ; $40E3: $3E $35
     ld   [wMusicTrackToPlay], a                   ; $40E5: $EA $68 $D3
@@ -152,7 +152,7 @@ MamuAndFrogsSingingHandler::
     ld   [wD215], a                               ; $40EA: $EA $15 $D2
     jp   IncrementEntityState                     ; $40ED: $C3 $12 $3B
 
-jr_018_40F0:
+ret_018_40F0:
     ret                                           ; $40F0: $C9
 
 func_018_40F1::

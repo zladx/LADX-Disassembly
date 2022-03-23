@@ -1043,7 +1043,7 @@ IF __PATCH_4__
     ld   de, wDC09
     ; fallthrough
 ELSE
-    jr   z, jr_001_4DBD                           ; $4DAB: $28 $10 ; $4DAB: $28 $10
+    jr   z, ret_001_4DBD                          ; $4DAB: $28 $10 ; $4DAB: $28 $10
 
     xor  a                                        ; $4DAD: $AF ; $4DAD: $AF
     ldh  [hMultiPurpose4], a                      ; $4DAE: $E0 $DB ; $4DAE: $E0 $DB
@@ -1083,7 +1083,7 @@ jr_001_4dc8:
     jp label_001_5D53
 
 ELSE
-jr_001_4DBD::
+ret_001_4DBD::
     ret                                           ; $4DBD: $C9 ; $4DBD: $C9
 ENDC
 
@@ -1097,7 +1097,7 @@ IF __PATCH_4__
     ld   de, wDC0A
     jr   jr_001_4db6
 ELSE
-    jr   z, jr_001_4DBD                           ; $4DC3: $28 $F8 ; $4DC3: $28 $F8
+    jr   z, ret_001_4DBD                          ; $4DC3: $28 $F8 ; $4DC3: $28 $F8
 
     ld   a, $01                                   ; $4DC5: $3E $01 ; $4DC5: $3E $01
     ldh  [hMultiPurpose4], a                      ; $4DC7: $E0 $DB ; $4DC7: $E0 $DB
@@ -1118,7 +1118,7 @@ IF __PATCH_4__
     ld   de, wDC0B
     jr   jr_001_4db6
 ELSE
-    jr   z, jr_001_4DBD                           ; $4DDB: $28 $E0 ; $4DDB: $28 $E0
+    jr   z, ret_001_4DBD                          ; $4DDB: $28 $E0 ; $4DDB: $28 $E0
 
     ld   a, $02                                   ; $4DDD: $3E $02 ; $4DDD: $3E $02
     ldh  [hMultiPurpose4], a                      ; $4DDF: $E0 $DB ; $4DDF: $E0 $DB
@@ -1396,7 +1396,7 @@ func_001_4F0C::
 jr_001_4F1D::
     ldh  a, [hFrameCounter]                       ; $4F1D: $F0 $E7 ; $4F1D: $F0 $E7
     and  $10                                      ; $4F1F: $E6 $10 ; $4F1F: $E6 $10
-    jr   nz, jr_001_4F3A                          ; $4F21: $20 $17 ; $4F21: $20 $17
+    jr   nz, ret_001_4F3A                         ; $4F21: $20 $17 ; $4F21: $20 $17
 
     ld   a, [wCreditsScratch0]                    ; $4F23: $FA $00 $D0 ; $4F23: $FA $00 $D0
     ld   e, a                                     ; $4F26: $5F ; $4F26: $5F
@@ -1424,7 +1424,7 @@ jr_001_4F2E::
     xor  a                                        ; $4F38: $AF ; $4F38: $AF
     ld   [hl], a                                  ; $4F39: $77 ; $4F39: $77
 
-jr_001_4F3A::
+ret_001_4F3A::
     ret                                           ; $4F3A: $C9 ; $4F3A: $C9
 
 Data_001_4F3B::

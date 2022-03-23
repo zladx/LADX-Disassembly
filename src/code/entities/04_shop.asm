@@ -147,13 +147,13 @@ jr_004_77FC:
     ld   [wC167], a                               ; $7814: $EA $67 $C1
     ld   a, [wTransitionSequenceCounter]          ; $7817: $FA $6B $C1
     cp   $04                                      ; $781A: $FE $04
-    jr   nz, jr_004_7838                          ; $781C: $20 $1A
+    jr   nz, ret_004_7838                         ; $781C: $20 $1A
 
     ldh  a, [hLinkPositionY]                      ; $781E: $F0 $99
     sub  $01                                      ; $7820: $D6 $01
     ldh  [hLinkPositionY], a                      ; $7822: $E0 $99
     cp   $74                                      ; $7824: $FE $74
-    jr   nz, jr_004_7838                          ; $7826: $20 $10
+    jr   nz, ret_004_7838                         ; $7826: $20 $10
 
     call_open_dialog $038                         ; $7828
     ld   hl, wEntitiesStateTable                  ; $782D: $21 $90 $C2
@@ -162,7 +162,7 @@ jr_004_77FC:
     ld   a, MUSIC_BOSS_BATTLE                     ; $7833: $3E $19
     ld   [wMusicTrackToPlay], a                   ; $7835: $EA $68 $D3
 
-jr_004_7838:
+ret_004_7838:
     ret                                           ; $7838: $C9
 
 jr_004_7839:
@@ -691,7 +691,7 @@ Data_004_7AE5:: ; @TODO Palette data
 func_004_7AED::
     ld   a, [wDialogState]                        ; $7AED: $FA $9F $C1
     and  a                                        ; $7AF0: $A7
-    jr   nz, jr_004_7B3F                          ; $7AF1: $20 $4C
+    jr   nz, ret_004_7B3F                         ; $7AF1: $20 $4C
 
     ld   a, ENTITY_MAD_BATTER                     ; $7AF3: $3E $CA
     call SpawnNewEntity_trampoline                ; $7AF5: $CD $86 $3B
@@ -720,7 +720,7 @@ func_004_7AED::
     ld   [wSubtractHealthBuffer], a               ; $7B24: $EA $94 $DB
     ldh  a, [hIsGBC]                              ; $7B27: $F0 $FE
     and  a                                        ; $7B29: $A7
-    jr   z, jr_004_7B3F                           ; $7B2A: $28 $13
+    jr   z, ret_004_7B3F                          ; $7B2A: $28 $13
 
     ld   hl, wObjPal8                             ; $7B2C: $21 $88 $DC
     ld   de, Data_004_7AE5                        ; $7B2F: $11 $E5 $7A
@@ -736,7 +736,7 @@ func_004_7AED::
     ld   a, $02                                   ; $7B3A: $3E $02
     ld   [wPaletteDataFlags], a                   ; $7B3C: $EA $D1 $DD
 
-jr_004_7B3F:
+ret_004_7B3F:
     ret                                           ; $7B3F: $C9
 
 func_004_7B40::
@@ -853,13 +853,13 @@ jr_004_7BDD:
 
 func_004_7BE3::
     call CheckLinkCollisionWithEnemy_trampoline   ; $7BE3: $CD $5A $3B
-    jr   nc, jr_004_7C05                          ; $7BE6: $30 $1D
+    jr   nc, ret_004_7C05                         ; $7BE6: $30 $1D
 
     call CopyLinkFinalPositionToPosition          ; $7BE8: $CD $BE $0C
     call ResetPegasusBoots                        ; $7BEB: $CD $B6 $0C
     ld   a, [wC1A6]                               ; $7BEE: $FA $A6 $C1
     and  a                                        ; $7BF1: $A7
-    jr   z, jr_004_7C05                           ; $7BF2: $28 $11
+    jr   z, ret_004_7C05                          ; $7BF2: $28 $11
 
     ld   e, a                                     ; $7BF4: $5F
     ld   d, b                                     ; $7BF5: $50
@@ -867,13 +867,13 @@ func_004_7BE3::
     add  hl, de                                   ; $7BF9: $19
     ld   a, [hl]                                  ; $7BFA: $7E
     cp   $03                                      ; $7BFB: $FE $03
-    jr   nz, jr_004_7C05                          ; $7BFD: $20 $06
+    jr   nz, ret_004_7C05                         ; $7BFD: $20 $06
 
     ld   hl, wEntitiesStatusTable+15              ; $7BFF: $21 $8F $C2
     add  hl, de                                   ; $7C02: $19
     ld   [hl], $00                                ; $7C03: $36 $00
 
-jr_004_7C05:
+ret_004_7C05:
     ret                                           ; $7C05: $C9
 
 func_004_7C06::

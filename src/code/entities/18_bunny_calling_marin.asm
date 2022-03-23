@@ -91,21 +91,21 @@ BunnyCallingMarinState1Handler::
 func_018_5321::
     ldh  a, [hMultiPurposeG]                      ; $5321: $F0 $E8
     and  a                                        ; $5323: $A7
-    jr   z, jr_018_5337                           ; $5324: $28 $11
+    jr   z, ret_018_5337                          ; $5324: $28 $11
 
     ld   hl, wEntitiesPrivateState4Table          ; $5326: $21 $40 $C4
     add  hl, bc                                   ; $5329: $09
     ld   a, [hl]                                  ; $532A: $7E
     dec  [hl]                                     ; $532B: $35
     and  a                                        ; $532C: $A7
-    jr   nz, jr_018_5337                          ; $532D: $20 $08
+    jr   nz, ret_018_5337                         ; $532D: $20 $08
 
     ld   [hl], $08                                ; $532F: $36 $08
     ld   hl, wEntitiesSpeedZTable                 ; $5331: $21 $20 $C3
     add  hl, bc                                   ; $5334: $09
     ld   [hl], $12                                ; $5335: $36 $12
 
-jr_018_5337:
+ret_018_5337:
     ret                                           ; $5337: $C9
 
 BunnyCallingMarinState2Handler::
@@ -136,7 +136,7 @@ BunnyCallingMarinState3Handler::
     call func_018_5321                            ; $535B: $CD $21 $53
     ld   a, [wDialogState]                        ; $535E: $FA $9F $C1
     and  a                                        ; $5361: $A7
-    jr   nz, jr_018_53CD                          ; $5362: $20 $69
+    jr   nz, ret_018_53CD                         ; $5362: $20 $69
 
     call GetEntityTransitionCountdown             ; $5364: $CD $05 $0C
     jr   z, jr_018_5375                           ; $5367: $28 $0C
@@ -198,7 +198,7 @@ jr_018_5397:
     add  hl, de                                   ; $53BC: $19
     ld   a, [hl]                                  ; $53BD: $7E
     cp   $F0                                      ; $53BE: $FE $F0
-    jr   nz, jr_018_53CD                          ; $53C0: $20 $0B
+    jr   nz, ret_018_53CD                         ; $53C0: $20 $0B
 
     call ClearEntityStatusBank18                  ; $53C2: $CD $08 $7F
     xor  a                                        ; $53C5: $AF
@@ -206,5 +206,5 @@ jr_018_5397:
     xor  a                                        ; $53C9: $AF
     ld   [wC167], a                               ; $53CA: $EA $67 $C1
 
-jr_018_53CD:
+ret_018_53CD:
     ret                                           ; $53CD: $C9

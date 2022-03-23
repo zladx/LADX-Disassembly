@@ -31,12 +31,12 @@ CrystalSwitchEntityHandler::
     add  hl, bc                                   ; $434A: $09
     ld   a, [hl]                                  ; $434B: $7E
     and  a                                        ; $434C: $A7
-    jr   z, jr_015_4364                           ; $434D: $28 $15
+    jr   z, ret_015_4364                          ; $434D: $28 $15
 
     ld   [hl], b                                  ; $434F: $70
     ld   a, [wSwitchableObjectAnimationStage]     ; $4350: $FA $F8 $D6
     and  a                                        ; $4353: $A7
-    jr   nz, jr_015_4364                          ; $4354: $20 $0E
+    jr   nz, ret_015_4364                         ; $4354: $20 $0E
 
     ld   a, $01                                   ; $4356: $3E $01
     ld   [wSwitchableObjectAnimationStage], a     ; $4358: $EA $F8 $D6
@@ -45,7 +45,7 @@ CrystalSwitchEntityHandler::
     ld   a, $0E                                   ; $4360: $3E $0E
     ldh  [hWaveSfx], a                            ; $4362: $E0 $F3
 
-jr_015_4364:
+ret_015_4364:
     ret                                           ; $4364: $C9
 
 BouldersEntityHandler::
@@ -55,7 +55,7 @@ BouldersEntityHandler::
 
     call ReturnIfNonInteractive_15                ; $436B: $CD $0D $7B
     call GetEntityTransitionCountdown             ; $436E: $CD $05 $0C
-    jr   nz, jr_015_43AD                          ; $4371: $20 $3A
+    jr   nz, ret_015_43AD                         ; $4371: $20 $3A
 
     call GetRandomByte                            ; $4373: $CD $0D $28
     and  $3F                                      ; $4376: $E6 $3F
@@ -92,7 +92,7 @@ BouldersEntityHandler::
     add  hl, de                                   ; $43AB: $19
     inc  [hl]                                     ; $43AC: $34
 
-jr_015_43AD:
+ret_015_43AD:
     ret                                           ; $43AD: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
@@ -513,13 +513,13 @@ func_015_463D::
     sub  $50                                      ; $463F: $D6 $50
     add  $08                                      ; $4641: $C6 $08
     cp   $10                                      ; $4643: $FE $10
-    jr   nc, jr_015_465F                          ; $4645: $30 $18
+    jr   nc, ret_015_465F                         ; $4645: $30 $18
 
     ldh  a, [hLinkPositionY]                      ; $4647: $F0 $99
     sub  $30                                      ; $4649: $D6 $30
     add  $08                                      ; $464B: $C6 $08
     cp   $10                                      ; $464D: $FE $10
-    jr   nc, jr_015_465F                          ; $464F: $30 $0E
+    jr   nc, ret_015_465F                         ; $464F: $30 $0E
 
     ld   a, [wIsLinkInTheAir]                     ; $4651: $FA $46 $C1
     and  a                                        ; $4654: $A7
@@ -530,7 +530,7 @@ func_015_463D::
     add  hl, bc                                   ; $465C: $09
     ld   [hl], $30                                ; $465D: $36 $30
 
-jr_015_465F:
+ret_015_465F:
     ret                                           ; $465F: $C9
 
 func_015_4660::
@@ -827,7 +827,7 @@ jr_015_4816:
     add  hl, bc                                   ; $482A: $09
     ld   a, [hl]                                  ; $482B: $7E
     and  a                                        ; $482C: $A7
-    jr   nz, jr_015_483C                          ; $482D: $20 $0D
+    jr   nz, ret_015_483C                         ; $482D: $20 $0D
 
     call GetRandomByte                            ; $482F: $CD $0D $28
     and  $3F                                      ; $4832: $E6 $3F
@@ -836,7 +836,7 @@ jr_015_4816:
     call GetEntityPrivateCountdown1               ; $4837: $CD $00 $0C
     ld   [hl], $18                                ; $483A: $36 $18
 
-jr_015_483C:
+ret_015_483C:
     ret                                           ; $483C: $C9
 
 Data_015_483D::
@@ -1473,7 +1473,7 @@ jr_015_4D5B:
     inc  [hl]                                     ; $4D66: $34
     ld   a, [hl]                                  ; $4D67: $7E
     and  $0F                                      ; $4D68: $E6 $0F
-    jr   nz, jr_015_4D9C                          ; $4D6A: $20 $30
+    jr   nz, ret_015_4D9C                         ; $4D6A: $20 $30
 
     call GetEntityPrivateCountdown1               ; $4D6C: $CD $00 $0C
     ld   [hl], $08                                ; $4D6F: $36 $08
@@ -1503,7 +1503,7 @@ jr_015_4D5B:
     add  hl, de                                   ; $4D99: $19
     ld   [hl], $30                                ; $4D9A: $36 $30
 
-jr_015_4D9C:
+ret_015_4D9C:
     ret                                           ; $4D9C: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
@@ -1632,16 +1632,16 @@ jr_015_4E49:
     jr   z, jr_015_4E5B                           ; $4E55: $28 $04
 
     cp   $20                                      ; $4E57: $FE $20
-    jr   nz, jr_015_4E61                          ; $4E59: $20 $06
+    jr   nz, ret_015_4E61                         ; $4E59: $20 $06
 
 jr_015_4E5B:
     ld   a, [hl]                                  ; $4E5B: $7E
     cp   $02                                      ; $4E5C: $FE $02
-    jr   z, jr_015_4E61                           ; $4E5E: $28 $01
+    jr   z, ret_015_4E61                          ; $4E5E: $28 $01
 
     inc  [hl]                                     ; $4E60: $34
 
-jr_015_4E61:
+ret_015_4E61:
     ret                                           ; $4E61: $C9
 
 label_015_4E62:
@@ -1946,7 +1946,7 @@ func_015_501A::
     add  hl, bc                                   ; $5035: $09
     ld   a, [hl]                                  ; $5036: $7E
     and  $80                                      ; $5037: $E6 $80
-    jr   z, jr_015_5057                           ; $5039: $28 $1C
+    jr   z, ret_015_5057                          ; $5039: $28 $1C
 
     ld   [hl], b                                  ; $503B: $70
     ld   hl, wEntitiesSpeedZTable                 ; $503C: $21 $20 $C3
@@ -1964,7 +1964,7 @@ func_015_501A::
     call GetEntityPrivateCountdown1               ; $5052: $CD $00 $0C
     ld   [hl], $10                                ; $5055: $36 $10
 
-jr_015_5057:
+ret_015_5057:
     ret                                           ; $5057: $C9
 
 Data_015_5058::
@@ -2109,13 +2109,13 @@ func_015_5128::
 ; Final boss music initalization???
 jr_015_512D:
     cp   $30                                      ; $512D: $FE $30
-    jr   nz, jr_015_5137                          ; $512F: $20 $06
+    jr   nz, ret_015_5137                         ; $512F: $20 $06
 
     dec  [hl]                                     ; $5131: $35
     ld   a, MUSIC_FINAL_BOSS                      ; $5132: $3E $23
     ld   [wMusicTrackToPlay], a                   ; $5134: $EA $68 $D3
 
-jr_015_5137:
+ret_015_5137:
     ret                                           ; $5137: $C9
 
 func_015_5138::
@@ -2154,10 +2154,10 @@ func_015_5153::
 func_015_516E::
     call func_015_5631                            ; $516E: $CD $31 $56
     call GetEntityTransitionCountdown             ; $5171: $CD $05 $0C
-    jr   z, jr_015_5184                           ; $5174: $28 $0E
+    jr   z, ret_015_5184                          ; $5174: $28 $0E
 
     and  $07                                      ; $5176: $E6 $07
-    jr   nz, jr_015_5184                          ; $5178: $20 $0A
+    jr   nz, ret_015_5184                         ; $5178: $20 $0A
 
     ld   hl, wEntitiesSpriteVariantTable          ; $517A: $21 $B0 $C3
     add  hl, bc                                   ; $517D: $09
@@ -2167,7 +2167,7 @@ func_015_516E::
 
     inc  [hl]                                     ; $5183: $34
 
-jr_015_5184:
+ret_015_5184:
     ret                                           ; $5184: $C9
 
 jr_015_5185:
@@ -2443,7 +2443,7 @@ jr_015_5321:
 
 func_015_5330::
     call GetEntityTransitionCountdown             ; $5330: $CD $05 $0C
-    jr   nz, jr_015_5355                          ; $5333: $20 $20
+    jr   nz, ret_015_5355                         ; $5333: $20 $20
 
 label_015_5335:
     call GetRandomByte                            ; $5335: $CD $0D $28
@@ -2465,7 +2465,7 @@ label_015_5335:
     call IncrementEntityState                     ; $5350: $CD $12 $3B
     ld   [hl], $01                                ; $5353: $36 $01
 
-jr_015_5355:
+ret_015_5355:
     ret                                           ; $5355: $C9
 
 Data_015_5356::
@@ -3739,11 +3739,11 @@ jr_015_5E79:
     add  hl, bc                                   ; $5E7C: $09
     ld   a, [hl]                                  ; $5E7D: $7E
     and  a                                        ; $5E7E: $A7
-    jr   z, jr_015_5E84                           ; $5E7F: $28 $03
+    jr   z, ret_015_5E84                          ; $5E7F: $28 $03
 
     jp   ClearEntityStatus_15                     ; $5E81: $C3 $31 $7C
 
-jr_015_5E84:
+ret_015_5E84:
     ret                                           ; $5E84: $C9
 
 func_015_5E85::
@@ -3784,7 +3784,7 @@ func_015_5EAC::
     sub  [hl]                                     ; $5EBF: $96
     add  $10                                      ; $5EC0: $C6 $10
     cp   $20                                      ; $5EC2: $FE $20
-    jr   nc, jr_015_5F19                          ; $5EC4: $30 $53
+    jr   nc, ret_015_5F19                         ; $5EC4: $30 $53
 
     ld   hl, wEntitiesPosYTable                   ; $5EC6: $21 $10 $C2
     add  hl, de                                   ; $5EC9: $19
@@ -3792,7 +3792,7 @@ func_015_5EAC::
     sub  [hl]                                     ; $5ECC: $96
     add  $0C                                      ; $5ECD: $C6 $0C
     cp   $18                                      ; $5ECF: $FE $18
-    jr   nc, jr_015_5F19                          ; $5ED1: $30 $46
+    jr   nc, ret_015_5F19                         ; $5ED1: $30 $46
 
     ld   hl, wEntitiesSpeedXTable                 ; $5ED3: $21 $40 $C2
     add  hl, bc                                   ; $5ED6: $09
@@ -3836,7 +3836,7 @@ jr_015_5F0F:
     ld   a, $07                                   ; $5F15: $3E $07
     ldh  [hWaveSfx], a                            ; $5F17: $E0 $F3
 
-jr_015_5F19:
+ret_015_5F19:
     ret                                           ; $5F19: $C9
 
 Data_015_5F1A::
@@ -3870,7 +3870,7 @@ jr_015_5F3F:
     add  hl, bc                                   ; $5F42: $09
     ld   a, [hl]                                  ; $5F43: $7E
     and  a                                        ; $5F44: $A7
-    jr   z, jr_015_5F99                           ; $5F45: $28 $52
+    jr   z, ret_015_5F99                          ; $5F45: $28 $52
 
     ld   a, $36                                   ; $5F47: $3E $36
     ldh  [hNoiseSfx], a                           ; $5F49: $E0 $F4
@@ -3925,7 +3925,7 @@ jr_015_5F3F:
 jr_015_5F96:
     jp   ClearEntityStatus_15                     ; $5F96: $C3 $31 $7C
 
-jr_015_5F99:
+ret_015_5F99:
     ret                                           ; $5F99: $C9
 
 func_015_5F9A::
@@ -4269,7 +4269,7 @@ jr_015_62AC:
     call RenderActiveEntitySpritesPair            ; $62FE: $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ; $6301: $F0 $F0
     cp   $02                                      ; $6303: $FE $02
-    jr   nc, jr_015_6330                          ; $6305: $30 $29
+    jr   nc, ret_015_6330                         ; $6305: $30 $29
 
     ld   hl, wEntitiesFlashCountdownTable         ; $6307: $21 $20 $C4
     add  hl, bc                                   ; $630A: $09
@@ -4278,7 +4278,7 @@ jr_015_62AC:
 IF __PATCH_0__
     jr   nz, jr_015_6324
 ELSE
-    jr   nz, jr_015_6330                          ; $630D: $20 $21
+    jr   nz, ret_015_6330                         ; $630D: $20 $21
 ENDC
 
     ld   hl, wEntitiesOptions1Table               ; $630F: $21 $30 $C4
@@ -4294,14 +4294,14 @@ jr_015_6324:
     add  hl, bc                                   ; $6321: $09
     ld   a, [hl]                                  ; $6322: $7E
     cp   $F0                                      ; $6323: $FE $F0
-    jr   nc, jr_015_6330                          ; $6325: $30 $09
+    jr   nc, ret_015_6330                         ; $6325: $30 $09
 
     call IncrementEntityState                     ; $6327: $CD $12 $3B
     ld   hl, wEntitiesPrivateCountdown3Table      ; $632A: $21 $80 $C4
     add  hl, bc                                   ; $632D: $09
     ld   [hl], $50                                ; $632E: $36 $50
 
-jr_015_6330:
+ret_015_6330:
     ret                                           ; $6330: $C9
 
 func_015_6331::
@@ -4394,7 +4394,7 @@ jr_015_6379:
 
 jr_015_63AF:
     call GetEntityTransitionCountdown             ; $63AF: $CD $05 $0C
-    jr   nz, jr_015_63C7                          ; $63B2: $20 $13
+    jr   nz, ret_015_63C7                         ; $63B2: $20 $13
 
     call GetRandomByte                            ; $63B4: $CD $0D $28
     and  $1F                                      ; $63B7: $E6 $1F
@@ -4407,7 +4407,7 @@ jr_015_63AF:
     add  hl, bc                                   ; $63C5: $09
     ld   [hl], a                                  ; $63C6: $77
 
-jr_015_63C7:
+ret_015_63C7:
     ret                                           ; $63C7: $C9
 
 FinalNightmareForm5Handler::
@@ -4584,7 +4584,7 @@ jr_015_652E:
 
 func_015_6553::
     call GetEntityTransitionCountdown             ; $6553: $CD $05 $0C
-    jr   nz, jr_015_6565                          ; $6556: $20 $0D
+    jr   nz, ret_015_6565                         ; $6556: $20 $0D
 
     ld   [hl], $7F                                ; $6558: $36 $7F
     jp   IncrementEntityState                     ; $655A: $C3 $12 $3B
@@ -4595,7 +4595,7 @@ func_015_655D::
     ld   [wD21E], a                               ; $6561: $EA $1E $D2
     ret                                           ; $6564: $C9
 
-jr_015_6565:
+ret_015_6565:
     ret                                           ; $6565: $C9
 
 Data_015_6566::
@@ -4729,11 +4729,11 @@ jr_015_6651:
     ld   [wD224], a                               ; $665F: $EA $24 $D2
     ldh  a, [hFrameCounter]                       ; $6662: $F0 $E7
     and  $1F                                      ; $6664: $E6 $1F
-    jr   nz, jr_015_66C7                          ; $6666: $20 $5F
+    jr   nz, ret_015_66C7                         ; $6666: $20 $5F
 
     ld   a, [wD221]                               ; $6668: $FA $21 $D2
     cp   $06                                      ; $666B: $FE $06
-    jr   nc, jr_015_66C7                          ; $666D: $30 $58
+    jr   nc, ret_015_66C7                         ; $666D: $30 $58
 
     ld   a, ENTITY_FINAL_NIGHTMARE                ; $666F: $3E $E6
     call SpawnNewEntity_trampoline                ; $6671: $CD $86 $3B
@@ -4788,7 +4788,7 @@ jr_015_66A0:
     inc  [hl]                                     ; $66C5: $34
     pop  bc                                       ; $66C6: $C1
 
-jr_015_66C7:
+ret_015_66C7:
     ret                                           ; $66C7: $C9
 
 Data_015_66C8::
@@ -4969,7 +4969,7 @@ func_015_67E2::
 
 func_015_67E3::
     call GetEntityTransitionCountdown             ; $67E3: $CD $05 $0C
-    jr   nz, jr_015_67F9                          ; $67E6: $20 $11
+    jr   nz, ret_015_67F9                         ; $67E6: $20 $11
 
     ld   [hl], $40                                ; $67E8: $36 $40
     call func_015_542E                            ; $67EA: $CD $2E $54
@@ -4979,7 +4979,7 @@ func_015_67E3::
     xor  a                                        ; $67F5: $AF
     ld   [wD224], a                               ; $67F6: $EA $24 $D2
 
-jr_015_67F9:
+ret_015_67F9:
     ret                                           ; $67F9: $C9
 
 func_015_67FA::
@@ -5864,13 +5864,13 @@ jr_015_6F8B:
     ld   a, [hl]                                  ; $6F94: $7E
     add  e                                        ; $6F95: $83
     ld   [hl], a                                  ; $6F96: $77
-    jr   nc, jr_015_6FA0                          ; $6F97: $30 $07
+    jr   nc, ret_015_6FA0                         ; $6F97: $30 $07
 
     ld   a, [wD222]                               ; $6F99: $FA $22 $D2
     dec  a                                        ; $6F9C: $3D
     ld   [wD222], a                               ; $6F9D: $EA $22 $D2
 
-jr_015_6FA0:
+ret_015_6FA0:
     ret                                           ; $6FA0: $C9
 
 func_015_6FA1::
@@ -5895,7 +5895,7 @@ jr_015_6FAD:
 func_015_6FBC::
     call GetEntityTransitionCountdown             ; $6FBC: $CD $05 $0C
     and  $0F                                      ; $6FBF: $E6 $0F
-    jr   nz, jr_015_6FF5                          ; $6FC1: $20 $32
+    jr   nz, ret_015_6FF5                         ; $6FC1: $20 $32
 
     ld   a, [wD223]                               ; $6FC3: $FA $23 $D2
     cp   $00                                      ; $6FC6: $FE $00
@@ -5924,7 +5924,7 @@ jr_015_6FF1:
     dec  a                                        ; $6FF1: $3D
     ld   [wD223], a                               ; $6FF2: $EA $23 $D2
 
-jr_015_6FF5:
+ret_015_6FF5:
     ret                                           ; $6FF5: $C9
 
 Data_015_6FF6::
@@ -6329,7 +6329,7 @@ SandCrabEntityHandler::
     jr   nz, jr_015_735C                          ; $7355: $20 $05
 
     call GetEntityTransitionCountdown             ; $7357: $CD $05 $0C
-    jr   nz, jr_015_7382                          ; $735A: $20 $26
+    jr   nz, ret_015_7382                         ; $735A: $20 $26
 
 jr_015_735C:
     call GetEntityTransitionCountdown             ; $735C: $CD $05 $0C
@@ -6354,7 +6354,7 @@ jr_015_735C:
     add  hl, bc                                   ; $7380: $09
     ld   [hl], a                                  ; $7381: $77
 
-jr_015_7382:
+ret_015_7382:
     ret                                           ; $7382: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
@@ -6643,12 +6643,12 @@ BeetleSpawnerEntityHandler::
     call func_015_7BDB                            ; $7519: $CD $DB $7B
     add  $20                                      ; $751C: $C6 $20
     cp   $40                                      ; $751E: $FE $40
-    jr   nc, jr_015_756E                          ; $7520: $30 $4C
+    jr   nc, ret_015_756E                         ; $7520: $30 $4C
 
     call func_015_7BEB                            ; $7522: $CD $EB $7B
     add  $20                                      ; $7525: $C6 $20
     cp   $40                                      ; $7527: $FE $40
-    jr   nc, jr_015_756E                          ; $7529: $30 $43
+    jr   nc, ret_015_756E                         ; $7529: $30 $43
 
     ld   hl, wEntitiesInertiaTable                ; $752B: $21 $D0 $C3
     add  hl, bc                                   ; $752E: $09
@@ -6656,12 +6656,12 @@ BeetleSpawnerEntityHandler::
     inc  a                                        ; $7530: $3C
     ld   [hl], a                                  ; $7531: $77
     and  $3F                                      ; $7532: $E6 $3F
-    jr   nz, jr_015_756E                          ; $7534: $20 $38
+    jr   nz, ret_015_756E                         ; $7534: $20 $38
 
     ld   a, $B2                                   ; $7536: $3E $B2
     ld   e, $04                                   ; $7538: $1E $04
     call SpawnNewEntityInRange_trampoline         ; $753A: $CD $98 $3B
-    jr   c, jr_015_756E                           ; $753D: $38 $2F
+    jr   c, ret_015_756E                          ; $753D: $38 $2F
 
     ldh  a, [hMultiPurpose0]                      ; $753F: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $7541: $21 $00 $C2
@@ -6690,7 +6690,7 @@ BeetleSpawnerEntityHandler::
     call ApplyVectorTowardsLink_trampoline        ; $756A: $CD $AA $3B
     pop  bc                                       ; $756D: $C1
 
-jr_015_756E:
+ret_015_756E:
     ret                                           ; $756E: $C9
 
 Data_015_756F::
@@ -6950,7 +6950,7 @@ jr_015_771E:
     ld   [hl], a                                  ; $771E: $77
     ldh  [hActiveEntitySpriteVariant], a          ; $771F: $E0 $F1
     cp   $00                                      ; $7721: $FE $00
-    jr   z, jr_015_7792                           ; $7723: $28 $6D
+    jr   z, ret_015_7792                          ; $7723: $28 $6D
 
     call GetEntityTransitionCountdown             ; $7725: $CD $05 $0C
     ld   [hl], $28                                ; $7728: $36 $28
@@ -7019,7 +7019,7 @@ jr_015_776B:
     add  hl, de                                   ; $778F: $19
     ld   [hl], $01                                ; $7790: $36 $01
 
-jr_015_7792:
+ret_015_7792:
     ret                                           ; $7792: $C9
 
 func_015_7793::
@@ -7035,7 +7035,7 @@ func_015_7793::
     add  hl, bc                                   ; $77A7: $09
     ld   a, [hl]                                  ; $77A8: $7E
     and  $80                                      ; $77A9: $E6 $80
-    jr   z, jr_015_77BE                           ; $77AB: $28 $11
+    jr   z, ret_015_77BE                          ; $77AB: $28 $11
 
     ld   [hl], b                                  ; $77AD: $70
     ld   hl, wEntitiesSpeedZTable                 ; $77AE: $21 $20 $C3
@@ -7048,7 +7048,7 @@ jr_015_77BA:
     ld   a, $14                                   ; $77BA: $3E $14
     ldh  [hWaveSfx], a                            ; $77BC: $E0 $F3
 
-jr_015_77BE:
+ret_015_77BE:
     ret                                           ; $77BE: $C9
 
 func_015_77BF::
@@ -7141,7 +7141,7 @@ label_015_7825:
     add  hl, bc                                   ; $784E: $09
     ld   a, [hl]                                  ; $784F: $7E
     and  $80                                      ; $7850: $E6 $80
-    jr   z, jr_015_788C                           ; $7852: $28 $38
+    jr   z, ret_015_788C                          ; $7852: $28 $38
 
     ld   [hl], b                                  ; $7854: $70
     call GetRandomByte                            ; $7855: $CD $0D $28
@@ -7177,7 +7177,7 @@ label_015_7825:
     ld   a, JINGLE_BUMP                           ; $7888: $3E $09
     ldh  [hJingle], a                             ; $788A: $E0 $F2
 
-jr_015_788C:
+ret_015_788C:
     ret                                           ; $788C: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
@@ -7277,7 +7277,7 @@ jr_015_791A:
     call SetEntitySpriteVariant                   ; $791C: $CD $0C $3B
     ldh  a, [hFrameCounter]                       ; $791F: $F0 $E7
     and  $1F                                      ; $7921: $E6 $1F
-    jr   nz, jr_015_792D                          ; $7923: $20 $08
+    jr   nz, ret_015_792D                         ; $7923: $20 $08
 
     ld   hl, wEntitiesDirectionTable              ; $7925: $21 $80 $C3
     add  hl, bc                                   ; $7928: $09
@@ -7285,7 +7285,7 @@ jr_015_791A:
     xor  $04                                      ; $792A: $EE $04
     ld   [hl], a                                  ; $792C: $77
 
-jr_015_792D:
+ret_015_792D:
     ret                                           ; $792D: $C9
 
 func_015_792E::
@@ -8077,20 +8077,20 @@ func_015_7D01::
     call func_015_7BDB                            ; $7D02: $DB
     add  $0E                                      ; $7D04: $C6 $0E
     cp   $1C                                      ; $7D06: $FE $1C
-    jr   nc, jr_015_7D4F                          ; $7D08: $30 $45
+    jr   nc, ret_015_7D4F                         ; $7D08: $30 $45
 
     call func_015_7BEB                            ; $7D0A: $CD $EB $7B
     add  $0C                                      ; $7D0D: $C6 $0C
     cp   $18                                      ; $7D0F: $FE $18
-    jr   nc, jr_015_7D4F                          ; $7D11: $30 $3C
+    jr   nc, ret_015_7D4F                         ; $7D11: $30 $3C
 
     ldh  a, [hLinkDirection]                      ; $7D13: $F0 $9E
     and  a                                        ; $7D15: $A7
-    jr   nz, jr_015_7D4F                          ; $7D16: $20 $37
+    jr   nz, ret_015_7D4F                         ; $7D16: $20 $37
 
     ld   a, [wCollisionType]                      ; $7D18: $FA $33 $C1
     and  a                                        ; $7D1B: $A7
-    jr   z, jr_015_7D4F                           ; $7D1C: $28 $31
+    jr   z, ret_015_7D4F                          ; $7D1C: $28 $31
 
     call IncrementEntityState                     ; $7D1E: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $7D21: $CD $05 $0C
@@ -8115,7 +8115,7 @@ func_015_7D01::
     ld   [wTransitionSequenceCounter], a          ; $7D49: $EA $6B $C1
     ld   [wC16C], a                               ; $7D4C: $EA $6C $C1
 
-jr_015_7D4F:
+ret_015_7D4F:
     ret                                           ; $7D4F: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list

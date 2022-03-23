@@ -45,7 +45,7 @@ SpikeTrapState0Handler::
 
 SpikeTrapState1Handler::
     call GetEntityTransitionCountdown             ; $753F: $CD $05 $0C
-    jr   nz, jr_006_7599                          ; $7542: $20 $55
+    jr   nz, ret_006_7599                         ; $7542: $20 $55
 
     call ClearEntitySpeed                         ; $7544: $CD $7F $3D
     call func_006_65A4                            ; $7547: $CD $A4 $65
@@ -71,7 +71,7 @@ jr_006_7567:
     call func_006_6594                            ; $7567: $CD $94 $65
     add  $12                                      ; $756A: $C6 $12
     cp   $24                                      ; $756C: $FE $24
-    jr   nc, jr_006_7599                          ; $756E: $30 $29
+    jr   nc, ret_006_7599                         ; $756E: $30 $29
 
     call func_006_65A4                            ; $7570: $CD $A4 $65
     ld   d, b                                     ; $7573: $50
@@ -99,7 +99,7 @@ jr_006_7585:
     call GetEntityTransitionCountdown             ; $7595: $CD $05 $0C
     ld   [hl], b                                  ; $7598: $70
 
-jr_006_7599:
+ret_006_7599:
     ret                                           ; $7599: $C9
 
 jr_006_759A:

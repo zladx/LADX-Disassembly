@@ -377,14 +377,14 @@ label_002_5F27:
     ld   [hl], a                                  ; $5F46: $77
     ldh  a, [hIsGBC]                              ; $5F47: $F0 $FE
     and  a                                        ; $5F49: $A7
-    jr   z, jr_002_5F53                           ; $5F4A: $28 $07
+    jr   z, ret_002_5F53                          ; $5F4A: $28 $07
 
     push bc                                       ; $5F4C: $C5
     ld   a, $02                                   ; $5F4D: $3E $02
     call func_91D                                 ; $5F4F: $CD $1D $09
     pop  bc                                       ; $5F52: $C1
 
-jr_002_5F53:
+ret_002_5F53:
     ret                                           ; $5F53: $C9
 
 Data_002_5F54::
@@ -519,7 +519,7 @@ jr_002_6000:
     add  hl, bc                                   ; $600B: $09
     ld   a, [hl]                                  ; $600C: $7E
     and  ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL       ; $600D: $E6 $02
-    jr   z, jr_002_602C                           ; $600F: $28 $1B
+    jr   z, ret_002_602C                          ; $600F: $28 $1B
 
 jr_002_6011:
     dec  c                                        ; $6011: $0D
@@ -533,16 +533,16 @@ jr_002_6011:
 
     ld   a, [wD460]                               ; $601D: $FA $60 $D4
     and  a                                        ; $6020: $A7
-    jr   z, jr_002_602C                           ; $6021: $28 $09
+    jr   z, ret_002_602C                          ; $6021: $28 $09
 
     ld   a, [wEnemyWasKilled]                     ; $6023: $FA $13 $C1
     and  a                                        ; $6026: $A7
-    jr   nz, jr_002_602C                          ; $6027: $20 $03
+    jr   nz, ret_002_602C                         ; $6027: $20 $03
 
 jr_002_6029:
     jp   MarkTriggerAsResolved                    ; $6029: $C3 $60 $0C
 
-jr_002_602C:
+ret_002_602C:
     ret                                           ; $602C: $C9
 
 CheckAnswerTunicsTrigger::

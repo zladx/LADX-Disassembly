@@ -163,7 +163,7 @@ label_018_7A4B:
 
 label_018_7A5D:
     call GetEntityDropTimer                       ; $7A5D: $CD $FB $0B
-    jr   nz, jr_018_7AB9                          ; $7A60: $20 $57
+    jr   nz, ret_018_7AB9                         ; $7A60: $20 $57
 
     ld   hl, wEntitiesPosXTable                   ; $7A62: $21 $00 $C2
     add  hl, bc                                   ; $7A65: $09
@@ -217,7 +217,7 @@ jr_018_7AB2:
     push de                                       ; $7AB5: $D5
     jp   label_018_7B1D                           ; $7AB6: $C3 $1D $7B
 
-jr_018_7AB9:
+ret_018_7AB9:
     ret                                           ; $7AB9: $C9
 
 Data_018_7ABA::

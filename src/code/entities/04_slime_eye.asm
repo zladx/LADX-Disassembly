@@ -98,12 +98,12 @@ SlimeEyeState0Handler::
 
 jr_004_49FB:
     call GetEntityTransitionCountdown             ; $49FB: $CD $05 $0C
-    jr   nz, jr_004_4A2C                          ; $49FE: $20 $2C
+    jr   nz, ret_004_4A2C                         ; $49FE: $20 $2C
 
     ld   [hl], $50                                ; $4A00: $36 $50
     ld   a, [wC1AE]                               ; $4A02: $FA $AE $C1
     cp   $02                                      ; $4A05: $FE $02
-    jr   nc, jr_004_4A2C                          ; $4A07: $30 $23
+    jr   nc, ret_004_4A2C                         ; $4A07: $30 $23
 
     ld   a, ENTITY_GEL                            ; $4A09: $3E $1B
     call SpawnNewEntity_trampoline                ; $4A0B: $CD $86 $3B
@@ -123,7 +123,7 @@ jr_004_49FB:
     add  hl, de                                   ; $4A29: $19
     ld   [hl], $70                                ; $4A2A: $36 $70
 
-jr_004_4A2C:
+ret_004_4A2C:
     ret                                           ; $4A2C: $C9
 
 SlimeEyeState1Handler::
@@ -253,11 +253,11 @@ jr_004_4AEF:
     add  hl, bc                                   ; $4AF7: $09
     ld   a, [hl]                                  ; $4AF8: $7E
     and  a                                        ; $4AF9: $A7
-    jr   z, jr_004_4B11                           ; $4AFA: $28 $15
+    jr   z, ret_004_4B11                          ; $4AFA: $28 $15
 
     ldh  a, [hFrameCounter]                       ; $4AFC: $F0 $E7
     and  $1F                                      ; $4AFE: $E6 $1F
-    jr   nz, jr_004_4B11                          ; $4B00: $20 $0F
+    jr   nz, ret_004_4B11                         ; $4B00: $20 $0F
 
     call GetEntityPrivateCountdown1               ; $4B02: $CD $00 $0C
     ld   [hl], $50                                ; $4B05: $36 $50
@@ -265,11 +265,11 @@ jr_004_4AEF:
     add  hl, bc                                   ; $4B0A: $09
     ld   a, [hl]                                  ; $4B0B: $7E
     cp   $04                                      ; $4B0C: $FE $04
-    jr   z, jr_004_4B11                           ; $4B0E: $28 $01
+    jr   z, ret_004_4B11                          ; $4B0E: $28 $01
 
     inc  [hl]                                     ; $4B10: $34
 
-jr_004_4B11:
+ret_004_4B11:
     ret                                           ; $4B11: $C9
 
 Data_004_4B12::
@@ -340,7 +340,7 @@ Data_004_4B6C::
 func_004_4B7C::
     call GetEntityTransitionCountdown             ; $4B7C: $CD $05 $0C
     and  a                                        ; $4B7F: $A7
-    jr   nz, jr_004_4BC6                          ; $4B80: $20 $44
+    jr   nz, ret_004_4BC6                         ; $4B80: $20 $44
 
     call GetRandomByte                            ; $4B82: $CD $0D $28
     and  $1F                                      ; $4B85: $E6 $1F
@@ -390,7 +390,7 @@ jr_004_4BA2:
     add  hl, bc                                   ; $4BC4: $09
     ld   [hl], a                                  ; $4BC5: $77
 
-jr_004_4BC6:
+ret_004_4BC6:
     ret                                           ; $4BC6: $C9
 
 func_004_4BC7::
@@ -555,14 +555,14 @@ jr_004_4E4F:
 
 func_004_4E52::
     call GetEntityDropTimer                       ; $4E52: $CD $FB $0B
-    jr   z, jr_004_4E5F                           ; $4E55: $28 $08
+    jr   z, ret_004_4E5F                          ; $4E55: $28 $08
 
     ld   a, $02                                   ; $4E57: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4E59: $E0 $A1
     ld   a, LINK_ANIMATION_STATE_UNKNOWN_6A       ; $4E5B: $3E $6A
     ldh  [hLinkAnimationState], a                 ; $4E5D: $E0 $9D
 
-jr_004_4E5F:
+ret_004_4E5F:
     ret                                           ; $4E5F: $C9
 
 label_004_4E60:
@@ -746,7 +746,7 @@ func_004_4F7E::
     ld   a, $FF                                   ; $4F7E: $3E $FF
     call SetEntitySpriteVariant                   ; $4F80: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $4F83: $CD $05 $0C
-    jr   nz, jr_004_4FAD                          ; $4F86: $20 $25
+    jr   nz, ret_004_4FAD                         ; $4F86: $20 $25
 
     ld   [hl], $18                                ; $4F88: $36 $18
     ld   hl, wEntitiesPrivateState4Table          ; $4F8A: $21 $40 $C4
@@ -768,7 +768,7 @@ func_004_4F7E::
     ld   a, JINGLE_JUMP_DOWN                      ; $4FA9: $3E $08
     ldh  [hJingle], a                             ; $4FAB: $E0 $F2
 
-jr_004_4FAD:
+ret_004_4FAD:
     ret                                           ; $4FAD: $C9
 
 Data_004_4FAE::

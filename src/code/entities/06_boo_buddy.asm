@@ -159,7 +159,7 @@ jr_006_7A74:
 func_006_7A79::
     add  hl, bc                                   ; $7A79: $09
     sub  [hl]                                     ; $7A7A: $96
-    jr   z, jr_006_7A8B                           ; $7A7B: $28 $0E
+    jr   z, ret_006_7A8B                          ; $7A7B: $28 $0E
 
     bit  7, a                                     ; $7A7D: $CB $7F
     jr   z, jr_006_7A87                           ; $7A7F: $28 $06
@@ -168,7 +168,7 @@ func_006_7A79::
     dec  [hl]                                     ; $7A82: $35
     dec  [hl]                                     ; $7A83: $35
     dec  [hl]                                     ; $7A84: $35
-    jr   jr_006_7A8B                              ; $7A85: $18 $04
+    jr   ret_006_7A8B                             ; $7A85: $18 $04
 
 jr_006_7A87:
     inc  [hl]                                     ; $7A87: $34
@@ -176,7 +176,7 @@ jr_006_7A87:
     inc  [hl]                                     ; $7A89: $34
     inc  [hl]                                     ; $7A8A: $34
 
-jr_006_7A8B:
+ret_006_7A8B:
     ret                                           ; $7A8B: $C9
 
 func_006_7A8C::

@@ -106,7 +106,7 @@ jr_018_5A3F:
 
     ld   a, [wTransitionSequenceCounter]          ; $5A47: $FA $6B $C1
     cp   $04                                      ; $5A4A: $FE $04
-    jr   nz, jr_018_5A7F                          ; $5A4C: $20 $31
+    jr   nz, ret_018_5A7F                         ; $5A4C: $20 $31
 
     inc  [hl]                                     ; $5A4E: $34
     call GetEntityTransitionCountdown             ; $5A4F: $CD $05 $0C
@@ -137,7 +137,7 @@ func_018_5A79::
     dec  e                                        ; $5A7C: $1D
     jr   nz, .loop                                ; $5A7D: $20 $FC
 
-jr_018_5A7F:
+ret_018_5A7F:
     ret                                           ; $5A7F: $C9
 
 Data_018_5A80::

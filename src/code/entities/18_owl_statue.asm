@@ -56,7 +56,7 @@ func_018_5E5D::
     call ReturnIfNonInteractive_18                ; $5E5D: $CD $E8 $7D
     ld   a, [wDialogState]                        ; $5E60: $FA $9F $C1
     and  a                                        ; $5E63: $A7
-    jr   nz, jr_018_5E79                          ; $5E64: $20 $13
+    jr   nz, ret_018_5E79                         ; $5E64: $20 $13
 
     ld   a, GAMEPLAY_WF_MURAL                     ; $5E66: $3E $0A
     call func_018_4CB0                            ; $5E68: $CD $B0 $4C
@@ -67,7 +67,7 @@ func_018_5E5D::
     ld   hl, wOverworldRoomStatus + $AC           ; $5E74: $21 $AC $D8
     set  4, [hl]                                  ; $5E77: $CB $E6
 
-jr_018_5E79:
+ret_018_5E79:
     ret                                           ; $5E79: $C9
 
 OwlStatueEntityHandler::

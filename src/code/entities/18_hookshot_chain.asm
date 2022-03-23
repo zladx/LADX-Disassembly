@@ -80,12 +80,12 @@ jr_018_7C39:
 
 jr_018_7C46:
     call CheckLinkCollisionWithEnemy_trampoline   ; $7C46: $CD $5A $3B
-    jr   nc, jr_018_7CAE                          ; $7C49: $30 $63
+    jr   nc, ret_018_7CAE                         ; $7C49: $30 $63
 
     xor  a                                        ; $7C4B: $AF
     ld   [wC1C6], a                               ; $7C4C: $EA $C6 $C1
     call ClearEntityStatusBank18                  ; $7C4F: $CD $08 $7F
-    jr   jr_018_7CAE                              ; $7C52: $18 $5A
+    jr   ret_018_7CAE                             ; $7C52: $18 $5A
 
 jr_018_7C54:
     ld   a, $06                                   ; $7C54: $3E $06
@@ -100,14 +100,14 @@ jr_018_7C54:
     call label_3B23                               ; $7C64: $CD $23 $3B
     ld   a, [wIsIndoor]                           ; $7C67: $FA $A5 $DB
     and  a                                        ; $7C6A: $A7
-    jr   z, jr_018_7CAE                           ; $7C6B: $28 $41
+    jr   z, ret_018_7CAE                          ; $7C6B: $28 $41
 
     call func_018_6493                            ; $7C6D: $CD $93 $64
     ld   hl, wEntitiesSpeedYTable                 ; $7C70: $21 $50 $C2
     add  hl, bc                                   ; $7C73: $09
     ld   a, [hl]                                  ; $7C74: $7E
     and  a                                        ; $7C75: $A7
-    jr   z, jr_018_7CAE                           ; $7C76: $28 $36
+    jr   z, ret_018_7CAE                          ; $7C76: $28 $36
 
     ld   e, $9E                                   ; $7C78: $1E $9E
     bit  7, a                                     ; $7C7A: $CB $7F
@@ -118,7 +118,7 @@ jr_018_7C54:
 jr_018_7C80:
     ldh  a, [hObjectUnderEntity]                  ; $7C80: $F0 $AF
     cp   e                                        ; $7C82: $BB
-    jr   nz, jr_018_7CAE                          ; $7C83: $20 $29
+    jr   nz, ret_018_7CAE                         ; $7C83: $20 $29
 
     ld   a, ENTITY_68                             ; $7C85: $3E $68
     call SpawnNewEntity_trampoline                ; $7C87: $CD $86 $3B
@@ -146,7 +146,7 @@ jr_018_7CA5:
     call GetEntityTransitionCountdown             ; $7CAA: $CD $05 $0C
     ld   [hl], b                                  ; $7CAD: $70
 
-jr_018_7CAE:
+ret_018_7CAE:
     ret                                           ; $7CAE: $C9
 
 jr_018_7CAF:

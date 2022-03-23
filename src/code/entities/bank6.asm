@@ -35,14 +35,14 @@ include "code/entities/06_goponga_flower.asm"
 
 func_006_641A::
     call CheckLinkCollisionWithEnemy_trampoline   ; $641A: $CD $5A $3B
-    jr   nc, jr_006_643C                          ; $641D: $30 $1D
+    jr   nc, ret_006_643C                         ; $641D: $30 $1D
 
 label_006_641F:
     call CopyLinkFinalPositionToPosition          ; $641F: $CD $BE $0C
     call ResetPegasusBoots                        ; $6422: $CD $B6 $0C
     ld   a, [wC1A6]                               ; $6425: $FA $A6 $C1
     and  a                                        ; $6428: $A7
-    jr   z, jr_006_643C                           ; $6429: $28 $11
+    jr   z, ret_006_643C                          ; $6429: $28 $11
 
     ld   e, a                                     ; $642B: $5F
     ld   d, b                                     ; $642C: $50
@@ -50,13 +50,13 @@ label_006_641F:
     add  hl, de                                   ; $6430: $19
     ld   a, [hl]                                  ; $6431: $7E
     cp   $03                                      ; $6432: $FE $03
-    jr   nz, jr_006_643C                          ; $6434: $20 $06
+    jr   nz, ret_006_643C                         ; $6434: $20 $06
 
     ld   hl, wEntitiesStatusTable + $0F           ; $6436: $21 $8F $C2
     add  hl, de                                   ; $6439: $19
     ld   [hl], $00                                ; $643A: $36 $00
 
-jr_006_643C:
+ret_006_643C:
     ret                                           ; $643C: $C9
 
 ; Array indexed by direction

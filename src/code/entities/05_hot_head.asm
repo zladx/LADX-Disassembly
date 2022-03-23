@@ -165,7 +165,7 @@ func_005_63EB::
     add  hl, bc                                   ; $63FF: $09
     ld   a, [hl]                                  ; $6400: $7E
     cp   $05                                      ; $6401: $FE $05
-    jr   nc, jr_005_6443                          ; $6403: $30 $3E
+    jr   nc, ret_005_6443                         ; $6403: $30 $3E
 
     call IncrementEntityState                     ; $6405: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $6408: $CD $05 $0C
@@ -199,7 +199,7 @@ func_005_6432::
     add  hl, de                                   ; $6440: $19
     ld   [hl], $0F                                ; $6441: $36 $0F
 
-jr_005_6443:
+ret_005_6443:
     ret                                           ; $6443: $C9
 
 jr_005_6444:
@@ -237,7 +237,7 @@ jr_005_6471:
     add  hl, bc                                   ; $647E: $09
     ld   a, [hl]                                  ; $647F: $7E
     and  a                                        ; $6480: $A7
-    jr   z, jr_005_648D                           ; $6481: $28 $0A
+    jr   z, ret_005_648D                          ; $6481: $28 $0A
 
     ldh  a, [hFrameCounter]                       ; $6483: $F0 $E7
     rra                                           ; $6485: $1F
@@ -246,7 +246,7 @@ jr_005_6471:
     and  $01                                      ; $6488: $E6 $01
     jp   SetEntitySpriteVariant                   ; $648A: $C3 $0C $3B
 
-jr_005_648D:
+ret_005_648D:
     ret                                           ; $648D: $C9
 
 func_005_648E::

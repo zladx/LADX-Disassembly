@@ -68,13 +68,13 @@ jr_004_6A04:
     ld   [hl], $28                                ; $6A1F: $36 $28
     jp   IncrementEntityState                     ; $6A21: $C3 $12 $3B
 
-jr_004_6A24:
+ret_004_6A24:
     ret                                           ; $6A24: $C9
 
 jr_004_6A25:
     ldh  a, [hFrameCounter]                       ; $6A25: $F0 $E7
     and  $01                                      ; $6A27: $E6 $01
-    jr   nz, jr_004_6A24                          ; $6A29: $20 $F9
+    jr   nz, ret_004_6A24                         ; $6A29: $20 $F9
 
 label_004_6A2B:
     ld   hl, wEntitiesInertiaTable                ; $6A2B: $21 $D0 $C3
@@ -141,7 +141,7 @@ jr_004_6A7E:
     jr   z, jr_004_6A8A                           ; $6A84: $28 $04
 
     and  $80                                      ; $6A86: $E6 $80
-    jr   z, jr_004_6AA6                           ; $6A88: $28 $1C
+    jr   z, ret_004_6AA6                          ; $6A88: $28 $1C
 
 jr_004_6A8A:
     ld   [hl], b                                  ; $6A8A: $70
@@ -161,7 +161,7 @@ jr_004_6A8A:
     add  hl, bc                                   ; $6AA4: $09
     ld   [hl], a                                  ; $6AA5: $77
 
-jr_004_6AA6:
+ret_004_6AA6:
     ret                                           ; $6AA6: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list

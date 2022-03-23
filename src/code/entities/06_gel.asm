@@ -246,12 +246,12 @@ GelState3Handler::
     call func_006_7D0F                            ; $7D63: $CD $0F $7D
     ldh  a, [hMultiPurposeG]                      ; $7D66: $F0 $E8
     and  a                                        ; $7D68: $A7
-    jr   z, jr_006_7D6F                           ; $7D69: $28 $04
+    jr   z, ret_006_7D6F                          ; $7D69: $28 $04
 
     call IncrementEntityState                     ; $7D6B: $CD $12 $3B
     ld   [hl], b                                  ; $7D6E: $70
 
-jr_006_7D6F:
+ret_006_7D6F:
     ret                                           ; $7D6F: $C9
 
 GelState4Handler::
@@ -304,7 +304,7 @@ jr_006_7D91:
     call label_3B23                               ; $7DBC: $CD $23 $3B
     ldh  a, [hJoypadState]                        ; $7DBF: $F0 $CC
     and  a                                        ; $7DC1: $A7
-    jr   z, jr_006_7DD3                           ; $7DC2: $28 $0F
+    jr   z, ret_006_7DD3                          ; $7DC2: $28 $0F
 
     call func_006_7DCD                            ; $7DC4: $CD $CD $7D
     call func_006_7DCD                            ; $7DC7: $CD $CD $7D
@@ -312,9 +312,9 @@ jr_006_7D91:
 
 func_006_7DCD::
     call GetEntityTransitionCountdown             ; $7DCD: $CD $05 $0C
-    jr   z, jr_006_7DD3                           ; $7DD0: $28 $01
+    jr   z, ret_006_7DD3                          ; $7DD0: $28 $01
 
     dec  [hl]                                     ; $7DD2: $35
 
-jr_006_7DD3:
+ret_006_7DD3:
     ret                                           ; $7DD3: $C9

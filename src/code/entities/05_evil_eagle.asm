@@ -97,14 +97,14 @@ func_005_5A8E::
 ._03 dw func_005_5B3B                             ; $5A97
 ._04 dw func_005_5B4B                             ; $5A99
 
-jr_005_5A9B:
+ret_005_5A9B:
     ret                                           ; $5A9B: $C9
 
 func_005_5A9C::
     call func_005_5B5A                            ; $5A9C: $CD $5A $5B
     ldh  a, [hActiveEntityStatus]                 ; $5A9F: $F0 $EA
     cp   $05                                      ; $5AA1: $FE $05
-    jr   nz, jr_005_5A9B                          ; $5AA3: $20 $F6
+    jr   nz, ret_005_5A9B                         ; $5AA3: $20 $F6
 
     ld   a, $02                                   ; $5AA5: $3E $02
 
@@ -333,7 +333,7 @@ func_005_5BD8::
 
 func_005_5BEC::
     call GetEntityTransitionCountdown             ; $5BEC: $CD $05 $0C
-    jr   nz, jr_005_5C24                          ; $5BEF: $20 $33
+    jr   nz, ret_005_5C24                         ; $5BEF: $20 $33
 
     xor  a                                        ; $5BF1: $AF
     call SetEntitySpriteVariant                   ; $5BF2: $CD $0C $3B
@@ -369,7 +369,7 @@ func_005_5C20::
     ld   a, $22                                   ; $5C20: $3E $22
     ldh  [hNoiseSfx], a                           ; $5C22: $E0 $F4
 
-jr_005_5C24:
+ret_005_5C24:
     ret                                           ; $5C24: $C9
 
 jr_005_5C25:
@@ -550,7 +550,7 @@ Data_005_5D12::
 
 func_005_5D14::
     call GetEntityTransitionCountdown             ; $5D14: $CD $05 $0C
-    jr   nz, jr_005_5D68                          ; $5D17: $20 $4F
+    jr   nz, ret_005_5D68                         ; $5D17: $20 $4F
 
     ld   a, [wD205]                               ; $5D19: $FA $05 $D2
     JP_TABLE                                      ; $5D1C
@@ -600,7 +600,7 @@ jr_005_5D38:
     call IncrementEntityState                     ; $5D63: $CD $12 $3B
     ld   [hl], $08                                ; $5D66: $36 $08
 
-jr_005_5D68:
+ret_005_5D68:
     ret                                           ; $5D68: $C9
 
 func_005_5D69::
@@ -704,7 +704,7 @@ func_005_5E01::
     add  hl, bc                                   ; $5E01: $09
     ld   a, [hl]                                  ; $5E02: $7E
     and  a                                        ; $5E03: $A7
-    jr   z, jr_005_5E0D                           ; $5E04: $28 $07
+    jr   z, ret_005_5E0D                          ; $5E04: $28 $07
 
     and  $80                                      ; $5E06: $E6 $80
     jr   nz, jr_005_5E0C                          ; $5E08: $20 $02
@@ -715,7 +715,7 @@ func_005_5E01::
 jr_005_5E0C:
     inc  [hl]                                     ; $5E0C: $34
 
-jr_005_5E0D:
+ret_005_5E0D:
     ret                                           ; $5E0D: $C9
 
 jr_005_5E0E:
@@ -836,16 +836,16 @@ jr_005_5EB0:
     ld   [wD210], a                               ; $5EB0: $EA $10 $D2
     call GetEntityTransitionCountdown             ; $5EB3: $CD $05 $0C
     cp   $C0                                      ; $5EB6: $FE $C0
-    jr   nc, jr_005_5F2F                          ; $5EB8: $30 $75
+    jr   nc, ret_005_5F2F                         ; $5EB8: $30 $75
 
     ldh  a, [hFrameCounter]                       ; $5EBA: $F0 $E7
     and  $0F                                      ; $5EBC: $E6 $0F
-    jr   nz, jr_005_5F2F                          ; $5EBE: $20 $6F
+    jr   nz, ret_005_5F2F                         ; $5EBE: $20 $6F
 
     ld   a, ENTITY_EVIL_EAGLE                     ; $5EC0: $3E $63
     ld   e, $03                                   ; $5EC2: $1E $03
     call SpawnNewEntityInRange_trampoline         ; $5EC4: $CD $98 $3B
-    jr   c, jr_005_5F2F                           ; $5EC7: $38 $66
+    jr   c, ret_005_5F2F                          ; $5EC7: $38 $66
 
     ld   hl, wEntitiesPrivateState1Table          ; $5EC9: $21 $B0 $C2
     add  hl, de                                   ; $5ECC: $19
@@ -906,7 +906,7 @@ jr_005_5EB0:
     add  hl, de                                   ; $5F2C: $19
     ld   [hl], $02                                ; $5F2D: $36 $02
 
-jr_005_5F2F:
+ret_005_5F2F:
     ret                                           ; $5F2F: $C9
 
 label_005_5F30:
@@ -956,13 +956,13 @@ jr_005_5F68:
     call SetEntitySpriteVariant                   ; $5F69: $CD $0C $3B
     ldh  a, [hFrameCounter]                       ; $5F6C: $F0 $E7
     and  $01                                      ; $5F6E: $E6 $01
-    jr   nz, jr_005_5F77                          ; $5F70: $20 $05
+    jr   nz, ret_005_5F77                         ; $5F70: $20 $05
 
     ld   hl, wEntitiesSpeedYTable                 ; $5F72: $21 $50 $C2
     add  hl, bc                                   ; $5F75: $09
     dec  [hl]                                     ; $5F76: $35
 
-jr_005_5F77:
+ret_005_5F77:
     ret                                           ; $5F77: $C9
 
 label_005_5F78:
@@ -1011,12 +1011,12 @@ func_005_5FA8::
     call SetEntitySpriteVariant                   ; $5FB9: $CD $0C $3B
     ld   a, [wIgnoreLinkCollisionsCountdown]      ; $5FBC: $FA $3E $C1
     and  a                                        ; $5FBF: $A7
-    jr   nz, jr_005_5FE9                          ; $5FC0: $20 $27
+    jr   nz, ret_005_5FE9                         ; $5FC0: $20 $27
 
     call label_3B39                               ; $5FC2: $CD $39 $3B
     ld   a, [wIgnoreLinkCollisionsCountdown]      ; $5FC5: $FA $3E $C1
     and  a                                        ; $5FC8: $A7
-    jr   z, jr_005_5FE9                           ; $5FC9: $28 $1E
+    jr   z, ret_005_5FE9                          ; $5FC9: $28 $1E
 
     ld   a, $10                                   ; $5FCB: $3E $10
     ld   [wIgnoreLinkCollisionsCountdown], a      ; $5FCD: $EA $3E $C1
@@ -1035,7 +1035,7 @@ func_005_5FA8::
     ld   hl, hLinkPositionY                       ; $5FE5: $21 $99 $FF
     dec  [hl]                                     ; $5FE8: $35
 
-jr_005_5FE9:
+ret_005_5FE9:
     ret                                           ; $5FE9: $C9
 
 jr_005_5FEA:
@@ -1114,11 +1114,11 @@ jr_005_6053:
     ldh  a, [hActiveEntityVisualPosY]             ; $6056: $F0 $EC
     and  $F0                                      ; $6058: $E6 $F0
     cp   $C0                                      ; $605A: $FE $C0
-    jr   nz, jr_005_6061                          ; $605C: $20 $03
+    jr   nz, ret_005_6061                         ; $605C: $20 $03
 
     jp   label_005_5F78                           ; $605E: $C3 $78 $5F
 
-jr_005_6061:
+ret_005_6061:
     ret                                           ; $6061: $C9
 
 ; Evil Eagle display list
@@ -1335,7 +1335,7 @@ func_005_6283::
     add  e                                        ; $6285: $83
     ld   d, a                                     ; $6286: $57
     and  $03                                      ; $6287: $E6 $03
-    jr   nz, jr_005_6298                          ; $6289: $20 $0D
+    jr   nz, ret_005_6298                         ; $6289: $20 $0D
 
     ld   a, d                                     ; $628B: $7A
     rra                                           ; $628C: $1F
@@ -1352,7 +1352,7 @@ func_005_6283::
 jr_005_6297:
     dec  [hl]                                     ; $6297: $35
 
-jr_005_6298:
+ret_005_6298:
     ret                                           ; $6298: $C9
 
 func_005_6299::

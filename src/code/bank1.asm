@@ -193,7 +193,7 @@ func_001_4794::
     inc  c                                        ; $47A4: $0C
     dec  b                                        ; $47A5: $05
     jr   nz, .loop_479C                           ; $47A6: $20 $F4
-    jr   jr_001_47CD                              ; $47A8: $18 $23
+    jr   ret_001_47CD                             ; $47A8: $18 $23
 
 jr_001_47AA::
     push de                                       ; $47AA: $D5
@@ -226,7 +226,7 @@ jr_001_47AA::
     cp   SAVE_PREFIX_SIZE * 2 + 1                 ; $47C9: $FE $0B
     jr   c, .loop_47C3                            ; $47CB: $38 $F6
 
-jr_001_47CD::
+ret_001_47CD::
     ret                                           ; $47CD: $C9
 
 include "code/file_menus.asm"
@@ -758,7 +758,7 @@ FileSaveFadeOut::
     call func_1A22                                ; $5825: $CD $22 $1A
     ld   a, [wTransitionSequenceCounter]          ; $5828: $FA $6B $C1
     cp   $04                                      ; $582B: $FE $04
-    jr   nz, jr_001_58A7                          ; $582D: $20 $78
+    jr   nz, ret_001_58A7                         ; $582D: $20 $78
     ldh  a, [hIsGBC]                              ; $582F: $F0 $FE
     and  a                                        ; $5831: $A7
     jr   z, jr_001_5854                           ; $5832: $28 $20
@@ -834,7 +834,7 @@ func_001_5895::
     xor  a                                        ; $58A3: $AF
     ld   [wInventoryAppearing], a                 ; $58A4: $EA $4F $C1
 
-jr_001_58A7::
+ret_001_58A7::
     ret                                           ; $58A7: $C9
 
 func_001_58A8::
@@ -1051,7 +1051,7 @@ label_001_5B3F::
     ld   [hl], $20                                ; $5B69: $36 $20
     ldh  a, [hFrameCounter]                       ; $5B6B: $F0 $E7
     and  $10                                      ; $5B6D: $E6 $10
-    jr   nz, jr_001_5BAC                          ; $5B6F: $20 $3B
+    jr   nz, ret_001_5BAC                         ; $5B6F: $20 $3B
     ld   hl, wDynamicOAMBuffer+$58                ; $5B71: $21 $88 $C0
     ld   a, e                                     ; $5B74: $7B
     add  a, $04                                   ; $5B75: $C6 $04
@@ -1094,7 +1094,7 @@ label_001_5B3F::
     ld   a, $40                                   ; $5BA9: $3E $40
     ldi  [hl], a                                  ; $5BAB: $22
 
-jr_001_5BAC::
+ret_001_5BAC::
     ret                                           ; $5BAC: $C9
 
 Data_001_5BAD::
@@ -1336,7 +1336,7 @@ jr_001_5DA2::
 jr_001_5DAB::
     ldh  a, [hMultiPurpose3]                      ; $5DAB: $F0 $DA
     cp   c                                        ; $5DAD: $B9
-    jr   z, jr_001_5DBF                           ; $5DAE: $28 $0F
+    jr   z, ret_001_5DBF                          ; $5DAE: $28 $0F
     ld   a, $AE                                   ; $5DB0: $3E $AE
     ldi  [hl], a                                  ; $5DB2: $22
 
@@ -1352,7 +1352,7 @@ jr_001_5DB3::
 jr_001_5DBD::
     jr   jr_001_5DAB                              ; $5DBD: $18 $EC
 
-jr_001_5DBF::
+ret_001_5DBF::
     ret                                           ; $5DBF: $C9
 
 func_5DC0::
@@ -2378,7 +2378,7 @@ PeachPictureState1Handler::
     call func_1A22                                ; $682E: $CD $22 $1A
     ld   a, [wTransitionSequenceCounter]          ; $6831: $FA $6B $C1
     cp   $04                                      ; $6834: $FE $04
-    jr   nz, jr_001_6855                          ; $6836: $20 $1D
+    jr   nz, ret_001_6855                         ; $6836: $20 $1D
     call func_001_5888                            ; $6838: $CD $88 $58
     ldh  a, [hMapId]                              ; $683B: $F0 $F7
     cp   MAP_EAGLES_TOWER                         ; $683D: $FE $06
@@ -2395,7 +2395,7 @@ jr_001_6849::
     ld   a, TILESET_0F                            ; $6850: $3E $0F
     ld   [wTilesetToLoad], a                      ; $6852: $EA $FE $D6
 
-jr_001_6855::
+ret_001_6855::
     ret                                           ; $6855: $C9
 PeachPictureState2Handler::     ; This is for full-screen images ...
     ld   e, TILESET_EAGLES_TOWER_TOP ; First, check if it's Eagle's Tower ; $6856: $1E $21
@@ -2452,12 +2452,12 @@ PeachPictureState4Handler::
     call func_1A39                                ; $68AD: $CD $39 $1A
     ld   a, [wTransitionSequenceCounter]          ; $68B0: $FA $6B $C1
     cp   $04                                      ; $68B3: $FE $04
-    jr   nz, jr_001_68BF                          ; $68B5: $20 $08
+    jr   nz, ret_001_68BF                         ; $68B5: $20 $08
     call IncrementGameplaySubtype                 ; $68B7: $CD $D6 $44
     ld   a, $80                                   ; $68BA: $3E $80
     ld   [wD210], a                               ; $68BC: $EA $10 $D2
 
-jr_001_68BF::
+ret_001_68BF::
     ret                                           ; $68BF: $C9
 
 PeachPictureState5Handler::
@@ -2473,7 +2473,7 @@ PeachPictureState5Handler::
 jr_001_68CF::
     ldh  a, [hJoypadState]                        ; $68CF: $F0 $CC
     and  J_A | J_B | J_START                      ; $68D1: $E6 $B0
-    jr   z, jr_001_68E3                           ; $68D3: $28 $0E
+    jr   z, ret_001_68E3                          ; $68D3: $28 $0E
     ld   a, JINGLE_VALIDATE                       ; $68D5: $3E $13
     ldh  [hJingle], a                             ; $68D7: $E0 $F2
 
@@ -2483,7 +2483,7 @@ func_001_68D9::
     ld   [wTransitionSequenceCounter], a          ; $68DD: $EA $6B $C1
     ld   [wC16C], a                               ; $68E0: $EA $6C $C1
 
-jr_001_68E3::
+ret_001_68E3::
     ret                                           ; $68E3: $C9
 PeachPictureState7Handler::
     call func_6A7C                                ; $68E4: $CD $7C $6A
@@ -2512,7 +2512,7 @@ PeachPictureState8Handler::
     ld   a, [wD210]                               ; $690E: $FA $10 $D2
     dec  a                                        ; $6911: $3D
     ld   [wD210], a                               ; $6912: $EA $10 $D2
-    jr   nz, jr_001_6944                          ; $6915: $20 $2D
+    jr   nz, ret_001_6944                         ; $6915: $20 $2D
     call PlayBombExplosionSfx                     ; $6917: $CD $4B $0C
     ld   a, $30                                   ; $691A: $3E $30
     ld   [wD210], a                               ; $691C: $EA $10 $D2
@@ -2527,12 +2527,12 @@ PeachPictureState8Handler::
     inc  a                                        ; $6934: $3C
     ld   [wD213], a                               ; $6935: $EA $13 $D2
     cp   $04                                      ; $6938: $FE $04
-    jr   nz, jr_001_6944                          ; $693A: $20 $08
+    jr   nz, ret_001_6944                         ; $693A: $20 $08
     ld   a, $80                                   ; $693C: $3E $80
     ld   [wD210], a                               ; $693E: $EA $10 $D2
     call IncrementGameplaySubtype                 ; $6941: $CD $D6 $44
 
-jr_001_6944::
+ret_001_6944::
     ret                                           ; $6944: $C9
 PeachPictureState9Handler::
     call func_6A7C                                ; $6945: $CD $7C $6A
@@ -2551,7 +2551,7 @@ func_001_695B::
     ld   [wScreenShakeVertical], a                ; $695C: $EA $56 $C1
     ld   a, [wD215]                               ; $695F: $FA $15 $D2
     and  a                                        ; $6962: $A7
-    jr   z, jr_001_6975                           ; $6963: $28 $10
+    jr   z, ret_001_6975                          ; $6963: $28 $10
     dec  a                                        ; $6965: $3D
     ld   [wD215], a                               ; $6966: $EA $15 $D2
     ld   e, $FE                                   ; $6969: $1E $FE
@@ -2563,7 +2563,7 @@ jr_001_6971::
     ld   a, e                                     ; $6971: $7B
     ld   [wScreenShakeVertical], a                ; $6972: $EA $56 $C1
 
-jr_001_6975::
+ret_001_6975::
     ret                                           ; $6975: $C9
 
 Data_001_6976::
@@ -2732,7 +2732,7 @@ include "code/face_shrine_mural.asm"
 func_001_6BA8::
     ldh  a, [hJoypadState]                        ; $6BA8: $F0 $CC
     and  J_UP | J_DOWN                            ; $6BAA: $E6 $0C
-    jr   z, jr_001_6BB4                           ; $6BAC: $28 $06
+    jr   z, ret_001_6BB4                          ; $6BAC: $28 $06
 
 func_001_6BAE::
     push af                                       ; $6BAE: $F5
@@ -2740,7 +2740,7 @@ func_001_6BAE::
     ldh  [hJingle], a                             ; $6BB1: $E0 $F2
     pop  af                                       ; $6BB3: $F1
 
-jr_001_6BB4::
+ret_001_6BB4::
     ret                                           ; $6BB4: $C9
 
 ; Copy the tiles and BG map for the inventory Siren Instruments to VRAM.

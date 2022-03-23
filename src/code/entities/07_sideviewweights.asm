@@ -112,7 +112,7 @@ jr_007_625F:
     ldh  a, [hActiveEntityPosY]                   ; $625F: $F0 $EF
     and  $0F                                      ; $6261: $E6 $0F
     cp   $00                                      ; $6263: $FE $00
-    jr   nz, jr_007_62D1                          ; $6265: $20 $6A
+    jr   nz, ret_007_62D1                         ; $6265: $20 $6A
 
     ldh  a, [hActiveEntityPosY]                   ; $6267: $F0 $EF
     sub  $10                                      ; $6269: $D6 $10
@@ -130,7 +130,7 @@ jr_007_625F:
     call GetEntitySpeedYAddress                   ; $627D: $CD $05 $40
     ld   a, [hl]                                  ; $6280: $7E
     and  a                                        ; $6281: $A7
-    jr   z, jr_007_62D1                           ; $6282: $28 $4D
+    jr   z, ret_007_62D1                          ; $6282: $28 $4D
 
     and  $80                                      ; $6284: $E6 $80
     jr   nz, jr_007_62D2                          ; $6286: $20 $4A
@@ -181,7 +181,7 @@ jr_007_62A2:
     ld   [hl+], a                                 ; $62CF: $22
     ld   [hl], b                                  ; $62D0: $70
 
-jr_007_62D1:
+ret_007_62D1:
     ret                                           ; $62D1: $C9
 
 jr_007_62D2:
@@ -258,7 +258,7 @@ jr_007_6327:
     add  hl, de                                   ; $633B: $19
     ldh  a, [hMultiPurpose0]                      ; $633C: $F0 $D7
     cp   [hl]                                     ; $633E: $BE
-    jr   z, jr_007_6347                           ; $633F: $28 $06
+    jr   z, ret_007_6347                          ; $633F: $28 $06
 
 jr_007_6341:
     inc  e                                        ; $6341: $1C
@@ -266,5 +266,5 @@ jr_007_6341:
     cp   $10                                      ; $6343: $FE $10
     jr   nz, jr_007_6327                          ; $6345: $20 $E0
 
-jr_007_6347:
+ret_007_6347:
     ret                                           ; $6347: $C9

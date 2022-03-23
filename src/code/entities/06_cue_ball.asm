@@ -215,7 +215,7 @@ func_006_4C91::
     call SetEntitySpriteVariant                   ; $4CBF: $CD $0C $3B
     ldh  a, [hFrameCounter]                       ; $4CC2: $F0 $E7
     and  $0F                                      ; $4CC4: $E6 $0F
-    jr   nz, jr_006_4D3A                          ; $4CC6: $20 $72
+    jr   nz, ret_006_4D3A                         ; $4CC6: $20 $72
 
     ld   a, $2F                                   ; $4CC8: $3E $2F
     ldh  [hNoiseSfx], a                           ; $4CCA: $E0 $F4
@@ -225,7 +225,7 @@ func_006_4C91::
     ldh  [hMultiPurposeG], a                      ; $4CCE: $E0 $E8
     ld   a, ENTITY_CUE_BALL                       ; $4CD0: $3E $8E
     call SpawnNewEntity_trampoline                ; $4CD2: $CD $86 $3B
-    jr   c, jr_006_4D3A                           ; $4CD5: $38 $63
+    jr   c, ret_006_4D3A                          ; $4CD5: $38 $63
 
     push bc                                       ; $4CD7: $C5
     ld   hl, wEntitiesDirectionTable              ; $4CD8: $21 $80 $C3
@@ -285,7 +285,7 @@ func_006_4C91::
     cp   $FF                                      ; $4D36: $FE $FF
     jr   nz, .loop_4CCE                           ; $4D38: $20 $94
 
-jr_006_4D3A:
+ret_006_4D3A:
     ret                                           ; $4D3A: $C9
 
 CueBallState1Handler::

@@ -875,7 +875,7 @@ jr_021_5190:
     ld   [wPaletteToLoadForTileMap], a            ; $51A7: $EA $D2 $DD
     ld   a, e                                     ; $51AA: $7B
     cp   $04                                      ; $51AB: $FE $04
-    jr   nz, jr_021_51D5                          ; $51AD: $20 $26
+    jr   nz, ret_021_51D5                         ; $51AD: $20 $26
 
     ld   a, $01                                   ; $51AF: $3E $01
     ld   [wPaletteUnknownE], a                    ; $51B1: $EA $D5 $DD
@@ -893,7 +893,7 @@ jr_021_5190:
     call func_021_41B4                            ; $51C6: $CD $B4 $41
     xor  a                                        ; $51C9: $AF
     ld   [wPaletteUnknownE], a                    ; $51CA: $EA $D5 $DD
-    jr   jr_021_51D5                              ; $51CD: $18 $06
+    jr   ret_021_51D5                             ; $51CD: $18 $06
 
 jr_021_51CF:
     inc  hl                                       ; $51CF: $23
@@ -906,7 +906,7 @@ jr_021_51D1:
     dec  b                                        ; $51D2: $05
     jr   nz, jr_021_5190                          ; $51D3: $20 $BB
 
-jr_021_51D5:
+ret_021_51D5:
     ret                                           ; $51D5: $C9
 
 jr_021_51D6:
@@ -928,7 +928,7 @@ jr_021_51DB:
 
     ld   a, [hl+]                                 ; $51EA: $2A
     ld   [wPaletteToLoadForTileMap], a            ; $51EB: $EA $D2 $DD
-    jr   jr_021_51F5                              ; $51EE: $18 $05
+    jr   ret_021_51F5                             ; $51EE: $18 $05
 
 jr_021_51F0:
     inc  hl                                       ; $51F0: $23
@@ -938,7 +938,7 @@ jr_021_51F1:
     dec  b                                        ; $51F2: $05
     jr   nz, jr_021_51DB                          ; $51F3: $20 $E6
 
-jr_021_51F5:
+ret_021_51F5:
     ret                                           ; $51F5: $C9
 
 ; Array indexed by wPaletteToLoadForTileMap
@@ -993,7 +993,7 @@ OverworldSpritePaletteIndexData::
 func_021_5318::
     ld   a, [wIsIndoor]                           ; $5318: $FA $A5 $DB
     and  a                                        ; $531B: $A7
-    jr   nz, jr_021_5342                          ; $531C: $20 $24
+    jr   nz, ret_021_5342                         ; $531C: $20 $24
 
     ld   b, $06                                   ; $531E: $06 $06
     ld   hl, Data_021_5343                        ; $5320: $21 $43 $53
@@ -1015,7 +1015,7 @@ jr_021_5323:
     ld   [wDDD6], a                               ; $5333: $EA $D6 $DD
     ld   a, $0B                                   ; $5336: $3E $0B
     ld   [wDDD7], a                               ; $5338: $EA $D7 $DD
-    jr   jr_021_5342                              ; $533B: $18 $05
+    jr   ret_021_5342                             ; $533B: $18 $05
 
 jr_021_533D:
     inc  hl                                       ; $533D: $23
@@ -1025,7 +1025,7 @@ jr_021_533E:
     dec  b                                        ; $533F: $05
     jr   nz, jr_021_5323                          ; $5340: $20 $E1
 
-jr_021_5342:
+ret_021_5342:
     ret                                           ; $5342: $C9
 
 ; Array indexed by wRoomTransitionDirection
@@ -1222,13 +1222,13 @@ jr_021_5448:
 
     ld   a, [wRoomTransitionState]                ; $545A: $FA $24 $C1
     and  a                                        ; $545D: $A7
-    jr   z, jr_021_5465                           ; $545E: $28 $05
+    jr   z, ret_021_5465                          ; $545E: $28 $05
 
 jr_021_5460:
     ld   a, $01                                   ; $5460: $3E $01
     ld   [wPaletteDataFlags], a                   ; $5462: $EA $D1 $DD
 
-jr_021_5465:
+ret_021_5465:
     ret                                           ; $5465: $C9
 
 func_021_5466::

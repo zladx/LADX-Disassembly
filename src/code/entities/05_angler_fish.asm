@@ -323,7 +323,7 @@ func_005_576E::
     inc  [hl]                                     ; $5773: $34
     ld   a, [wC157]                               ; $5774: $FA $57 $C1
     and  a                                        ; $5777: $A7
-    jr   nz, jr_005_579B                          ; $5778: $20 $21
+    jr   nz, ret_005_579B                         ; $5778: $20 $21
 
     ld   hl, wEntitiesSpeedXTable                 ; $577A: $21 $40 $C2
     add  hl, bc                                   ; $577D: $09
@@ -333,7 +333,7 @@ func_005_576E::
     add  hl, bc                                   ; $5786: $09
     ldh  a, [hActiveEntityPosX]                   ; $5787: $F0 $EE
     cp   [hl]                                     ; $5789: $BE
-    jr   c, jr_005_579B                           ; $578A: $38 $0F
+    jr   c, ret_005_579B                          ; $578A: $38 $0F
 
     call GetEntityDropTimer                       ; $578C: $CD $FB $0B
     call GetRandomByte                            ; $578F: $CD $0D $28
@@ -343,7 +343,7 @@ func_005_576E::
     call IncrementEntityState                     ; $5797: $CD $12 $3B
     ld   [hl], b                                  ; $579A: $70
 
-jr_005_579B:
+ret_005_579B:
     ret                                           ; $579B: $C9
 
 Data_005_579C::
@@ -554,11 +554,11 @@ func_005_5984::
 jr_005_59CE:
     call UpdateEntityPosWithSpeed_05              ; $59CE: $CD $B1 $7A
     call GetEntityTransitionCountdown             ; $59D1: $CD $05 $0C
-    jr   nz, jr_005_59DD                          ; $59D4: $20 $07
+    jr   nz, ret_005_59DD                         ; $59D4: $20 $07
 
     ldh  a, [hActiveEntityPosX]                   ; $59D6: $F0 $EE
     cp   $A8                                      ; $59D8: $FE $A8
     jp   nc, ClearEntityStatus_05                 ; $59DA: $D2 $4B $7B
 
-jr_005_59DD:
+ret_005_59DD:
     ret                                           ; $59DD: $C9

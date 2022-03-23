@@ -105,7 +105,7 @@ jr_018_458A:
 ManboAndFishesSingHandler::
     ld   a, [wDialogState]                        ; $4592: $FA $9F $C1
     and  a                                        ; $4595: $A7
-    jr   nz, jr_018_45B6                          ; $4596: $20 $1E
+    jr   nz, ret_018_45B6                         ; $4596: $20 $1E
 
     ld   a, MUSIC_MANBO_MAMBO                     ; $4598: $3E $30
     ld   [wMusicTrackToPlay], a                   ; $459A: $EA $68 $D3
@@ -121,7 +121,7 @@ func_018_45A0::
     ld   [wD214], a                               ; $45B0: $EA $14 $D2
     ld   [wD218], a                               ; $45B3: $EA $18 $D2
 
-jr_018_45B6:
+ret_018_45B6:
     ret                                           ; $45B6: $C9
 
 Data_018_45B7::
@@ -212,13 +212,13 @@ jr_018_46DF:
 jr_018_4712:
     ld   a, e                                     ; $4712: $7B
     cp   $BE                                      ; $4713: $FE $BE
-    jr   nz, jr_018_471C                          ; $4715: $20 $05
+    jr   nz, ret_018_471C                         ; $4715: $20 $05
 
     ld   a, d                                     ; $4717: $7A
     cp   $05                                      ; $4718: $FE $05
     jr   z, jr_018_471D                           ; $471A: $28 $01
 
-jr_018_471C:
+ret_018_471C:
     ret                                           ; $471C: $C9
 
 jr_018_471D:

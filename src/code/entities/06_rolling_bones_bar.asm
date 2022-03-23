@@ -42,7 +42,7 @@ jr_006_6F03:
     jr   nz, jr_006_6F48                          ; $6F0C: $20 $3A
 
     call GetEntityTransitionCountdown             ; $6F0E: $CD $05 $0C
-    jr   nz, jr_006_6F47                          ; $6F11: $20 $34
+    jr   nz, ret_006_6F47                         ; $6F11: $20 $34
 
     ld   [hl], $03                                ; $6F13: $36 $03
     ld   hl, wEntitiesPrivateState1Table          ; $6F15: $21 $B0 $C2
@@ -79,7 +79,7 @@ jr_006_6F3C:
     ldh  [hMultiPurpose1], a                      ; $6F42: $E0 $D8
     jp   label_006_7035                           ; $6F44: $C3 $35 $70
 
-jr_006_6F47:
+ret_006_6F47:
     ret                                           ; $6F47: $C9
 
 jr_006_6F48:
@@ -185,7 +185,7 @@ jr_006_6FC0:
 RollingBonesBarDeceleratingHandler::
     ldh  a, [hFrameCounter]                       ; $6FC4: $F0 $E7
     and  $07                                      ; $6FC6: $E6 $07
-    jr   nz, jr_006_6FD9                          ; $6FC8: $20 $0F
+    jr   nz, ret_006_6FD9                         ; $6FC8: $20 $0F
 
     ld   hl, wEntitiesSpeedXTable                 ; $6FCA: $21 $40 $C2
 
@@ -204,7 +204,7 @@ jr_006_6FCD:
 jr_006_6FD8:
     dec  [hl]                                     ; $6FD8: $35
 
-jr_006_6FD9:
+ret_006_6FD9:
     ret                                           ; $6FD9: $C9
 
 jr_006_6FDA:

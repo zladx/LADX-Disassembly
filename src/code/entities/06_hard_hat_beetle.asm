@@ -40,7 +40,7 @@ HardHatBeetleEntityHandler::
     ldh  a, [hFrameCounter]                       ; $4F64: $F0 $E7
     xor  c                                        ; $4F66: $A9
     and  $03                                      ; $4F67: $E6 $03
-    jr   nz, jr_006_4FAF                          ; $4F69: $20 $44
+    jr   nz, ret_006_4FAF                         ; $4F69: $20 $44
 
     call GetRandomByte                            ; $4F6B: $CD $0D $28
     xor  c                                        ; $4F6E: $A9
@@ -68,28 +68,28 @@ jr_006_4F8C:
     add  hl, bc                                   ; $4F97: $09
     ld   a, [hl]                                  ; $4F98: $7E
     and  $03                                      ; $4F99: $E6 $03
-    jr   z, jr_006_4FA2                           ; $4F9B: $28 $05
+    jr   z, ret_006_4FA2                          ; $4F9B: $28 $05
 
     ld   hl, wEntitiesSpeedXTable                 ; $4F9D: $21 $40 $C2
     add  hl, bc                                   ; $4FA0: $09
     ld   [hl], b                                  ; $4FA1: $70
 
-jr_006_4FA2:
+ret_006_4FA2:
     ret                                           ; $4FA2: $C9
 
 func_006_4FA3::
     add  hl, bc                                   ; $4FA3: $09
     sub  [hl]                                     ; $4FA4: $96
-    jr   z, jr_006_4FAF                           ; $4FA5: $28 $08
+    jr   z, ret_006_4FAF                          ; $4FA5: $28 $08
 
     bit  7, a                                     ; $4FA7: $CB $7F
     jr   z, jr_006_4FAE                           ; $4FA9: $28 $03
 
     dec  [hl]                                     ; $4FAB: $35
-    jr   jr_006_4FAF                              ; $4FAC: $18 $01
+    jr   ret_006_4FAF                             ; $4FAC: $18 $01
 
 jr_006_4FAE:
     inc  [hl]                                     ; $4FAE: $34
 
-jr_006_4FAF:
+ret_006_4FAF:
     ret                                           ; $4FAF: $C9

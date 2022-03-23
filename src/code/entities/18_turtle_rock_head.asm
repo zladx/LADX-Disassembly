@@ -73,14 +73,14 @@ jr_018_7363:
     add  hl, bc                                   ; $736F: $09
     ld   a, [hl]                                  ; $7370: $7E
     and  a                                        ; $7371: $A7
-    jr   nz, jr_018_737D                          ; $7372: $20 $09
+    jr   nz, ret_018_737D                         ; $7372: $20 $09
 
     ld   hl, wOverworldRoomStatus + $10           ; $7374: $21 $10 $D8
     set  5, [hl]                                  ; $7377: $CB $EE
     ld   a, JINGLE_PUZZLE_SOLVED                  ; $7379: $3E $02
     ldh  [hJingle], a                             ; $737B: $E0 $F2
 
-jr_018_737D:
+ret_018_737D:
     ret                                           ; $737D: $C9
 
 jr_018_737E:
@@ -179,7 +179,7 @@ TurtleRockHeadState3Handler::
 
 jr_018_7416:
     and  $1F                                      ; $7416: $E6 $1F
-    jr   nz, jr_018_7479                          ; $7418: $20 $5F
+    jr   nz, ret_018_7479                         ; $7418: $20 $5F
 
     ldh  a, [hActiveEntitySpriteVariant]          ; $741A: $F0 $F1
     cp   $06                                      ; $741C: $FE $06
@@ -237,12 +237,12 @@ jr_018_746E:
     add  hl, bc                                   ; $7471: $09
     ld   a, [hl]                                  ; $7472: $7E
     cp   $07                                      ; $7473: $FE $07
-    jr   z, jr_018_7479                           ; $7475: $28 $02
+    jr   z, ret_018_7479                          ; $7475: $28 $02
 
     inc  a                                        ; $7477: $3C
     ld   [hl], a                                  ; $7478: $77
 
-jr_018_7479:
+ret_018_7479:
     ret                                           ; $7479: $C9
 
 TurtleRockHeadState4Handler::
@@ -323,7 +323,7 @@ jr_018_74E7:
 
 TurtleRockHeadState8Handler::
     call GetEntityTransitionCountdown             ; $74EA: $CD $05 $0C
-    jr   nz, jr_018_751E                          ; $74ED: $20 $2F
+    jr   nz, ret_018_751E                         ; $74ED: $20 $2F
 
     ld   hl, wEntitiesPrivateState5Table          ; $74EF: $21 $90 $C3
     add  hl, bc                                   ; $74F2: $09
@@ -356,7 +356,7 @@ jr_018_750C:
     inc  a                                        ; $751C: $3C
     ld   [hl], a                                  ; $751D: $77
 
-jr_018_751E:
+ret_018_751E:
     ret                                           ; $751E: $C9
 
 TurtleRockHeadState9Handler::

@@ -71,7 +71,7 @@ jr_018_4EA4:
 PapahlsWifeState1Handler::
     ld   a, [wDialogState]                        ; $4EA8: $FA $9F $C1
     and  a                                        ; $4EAB: $A7
-    jr   nz, jr_018_4ECE                          ; $4EAC: $20 $20
+    jr   nz, ret_018_4ECE                         ; $4EAC: $20 $20
 
     ld   a, [wDialogAskSelectionIndex]            ; $4EAE: $FA $77 $C1
     and  a                                        ; $4EB1: $A7
@@ -89,17 +89,17 @@ jr_018_4EC5:
     call IncrementEntityState                     ; $4ECA: $CD $12 $3B
     ld   [hl], b                                  ; $4ECD: $70
 
-jr_018_4ECE:
+ret_018_4ECE:
     ret                                           ; $4ECE: $C9
 
 PapahlsWifeState2Handler::
     ld   a, [wDialogState]                        ; $4ECF: $FA $9F $C1
     and  a                                        ; $4ED2: $A7
-    jr   nz, jr_018_4EDC                          ; $4ED3: $20 $07
+    jr   nz, ret_018_4EDC                         ; $4ED3: $20 $07
 
     call CreateTradingItemEntity                  ; $4ED5: $CD $0C $0C
     call IncrementEntityState                     ; $4ED8: $CD $12 $3B
     ld   [hl], b                                  ; $4EDB: $70
 
-jr_018_4EDC:
+ret_018_4EDC:
     ret                                           ; $4EDC: $C9

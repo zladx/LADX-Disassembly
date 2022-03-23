@@ -42,14 +42,14 @@ jr_003_69D9:
     cp   $8A                                      ; $69EA: $FE $8A
     jr   z, jr_003_69F8                           ; $69EC: $28 $0A
 
-    jr   jr_003_6A1D                              ; $69EE: $18 $2D
+    jr   ret_003_6A1D                             ; $69EE: $18 $2D
 
 jr_003_69F0:
     cp   $D3                                      ; $69F0: $FE $D3
     jr   z, jr_003_69F8                           ; $69F2: $28 $04
 
     cp   $5C                                      ; $69F4: $FE $5C
-    jr   nz, jr_003_6A1D                          ; $69F6: $20 $25
+    jr   nz, ret_003_6A1D                         ; $69F6: $20 $25
 
 jr_003_69F8:
     ld   hl, wEntitiesCollisionsTable             ; $69F8: $21 $A0 $C2
@@ -72,5 +72,5 @@ jr_003_69F8:
     ld   a, $13                                   ; $6A19: $3E $13
     ldh  [hNoiseSfx], a                           ; $6A1B: $E0 $F4
 
-jr_003_6A1D:
+ret_003_6A1D:
     ret                                           ; $6A1D: $C9

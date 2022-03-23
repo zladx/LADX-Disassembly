@@ -773,18 +773,18 @@ func_005_7283::
     sub  [hl]                                     ; $72A0: $96
     add  $08                                      ; $72A1: $C6 $08
     cp   $10                                      ; $72A3: $FE $10
-    jr   nc, jr_005_72C9                          ; $72A5: $30 $22
+    jr   nc, ret_005_72C9                         ; $72A5: $30 $22
 
     ldh  a, [hLinkPositionY]                      ; $72A7: $F0 $99
     ld   hl, hActiveEntityVisualPosY              ; $72A9: $21 $EC $FF
     sub  [hl]                                     ; $72AC: $96
     add  $08                                      ; $72AD: $C6 $08
     cp   $10                                      ; $72AF: $FE $10
-    jr   nc, jr_005_72C9                          ; $72B1: $30 $16
+    jr   nc, ret_005_72C9                         ; $72B1: $30 $16
 
     ld   a, [wLinkMotionState]                    ; $72B3: $FA $1C $C1
     and  a                                        ; $72B6: $A7
-    jr   nz, jr_005_72C9                          ; $72B7: $20 $10
+    jr   nz, ret_005_72C9                         ; $72B7: $20 $10
 
     call HurtBySpikes_trampoline                  ; $72B9: $CD $18 $3B
     ld   a, $18                                   ; $72BC: $3E $18
@@ -794,7 +794,7 @@ func_005_7283::
     ldh  a, [hMultiPurpose1]                      ; $72C5: $F0 $D8
     ldh  [hLinkSpeedX], a                         ; $72C7: $E0 $9A
 
-jr_005_72C9:
+ret_005_72C9:
     ret                                           ; $72C9: $C9
 
 label_005_72CA:
@@ -922,16 +922,16 @@ jr_005_7387:
     jr   z, jr_005_7395                           ; $738E: $28 $05
 
     cp   $0E                                      ; $7390: $FE $0E
-    jp   nz, jr_005_7424                          ; $7392: $C2 $24 $74
+    jp   nz, ret_005_7424                         ; $7392: $C2 $24 $74
 
 jr_005_7395:
     ldh  a, [hLinkDirection]                      ; $7395: $F0 $9E
     and  $02                                      ; $7397: $E6 $02
-    jp   z, jr_005_7424                           ; $7399: $CA $24 $74
+    jp   z, ret_005_7424                          ; $7399: $CA $24 $74
 
     ld   a, [wC1A6]                               ; $739C: $FA $A6 $C1
     and  a                                        ; $739F: $A7
-    jp   z, jr_005_7424                           ; $73A0: $CA $24 $74
+    jp   z, ret_005_7424                          ; $73A0: $CA $24 $74
 
     dec  a                                        ; $73A3: $3D
     ld   [wD202], a                               ; $73A4: $EA $02 $D2
@@ -941,13 +941,13 @@ jr_005_7395:
     add  hl, de                                   ; $73AC: $19
     ld   a, [hl]                                  ; $73AD: $7E
     and  a                                        ; $73AE: $A7
-    jr   z, jr_005_7424                           ; $73AF: $28 $73
+    jr   z, ret_005_7424                          ; $73AF: $28 $73
 
     ld   hl, wEntitiesTypeTable                   ; $73B1: $21 $A0 $C3
     add  hl, de                                   ; $73B4: $19
     ld   a, [hl]                                  ; $73B5: $7E
     cp   $03                                      ; $73B6: $FE $03
-    jr   nz, jr_005_7424                          ; $73B8: $20 $6A
+    jr   nz, ret_005_7424                         ; $73B8: $20 $6A
 
     ld   hl, wEntitiesPosXTable                   ; $73BA: $21 $00 $C2
     add  hl, de                                   ; $73BD: $19
@@ -955,7 +955,7 @@ jr_005_7395:
     sub  [hl]                                     ; $73C0: $96
     add  $08                                      ; $73C1: $C6 $08
     cp   $10                                      ; $73C3: $FE $10
-    jr   nc, jr_005_7424                          ; $73C5: $30 $5D
+    jr   nc, ret_005_7424                         ; $73C5: $30 $5D
 
     ld   hl, wEntitiesPosYTable                   ; $73C7: $21 $10 $C2
     add  hl, de                                   ; $73CA: $19
@@ -963,7 +963,7 @@ jr_005_7395:
     sub  [hl]                                     ; $73CD: $96
     add  $0C                                      ; $73CE: $C6 $0C
     cp   $18                                      ; $73D0: $FE $18
-    jr   nc, jr_005_7424                          ; $73D2: $30 $50
+    jr   nc, ret_005_7424                         ; $73D2: $30 $50
 
     ld   a, [wD203]                               ; $73D4: $FA $03 $D2
     inc  a                                        ; $73D7: $3C
@@ -1013,7 +1013,7 @@ jr_005_7414:
     inc  a                                        ; $7422: $3C
     ld   [hl], a                                  ; $7423: $77
 
-jr_005_7424:
+ret_005_7424:
     ret                                           ; $7424: $C9
 
 func_005_7425::
@@ -1159,7 +1159,7 @@ jr_005_750D:
     add  hl, de                                   ; $751F: $19
     ldh  a, [hFrameCounter]                       ; $7520: $F0 $E7
     and  [hl]                                     ; $7522: $A6
-    jr   nz, jr_005_7534                          ; $7523: $20 $0F
+    jr   nz, ret_005_7534                         ; $7523: $20 $0F
 
     ld   a, [wD201]                               ; $7525: $FA $01 $D2
     ld   e, a                                     ; $7528: $5F
@@ -1168,11 +1168,11 @@ jr_005_750D:
     add  hl, de                                   ; $752D: $19
     ld   a, [hl]                                  ; $752E: $7E
     cp   $04                                      ; $752F: $FE $04
-    jr   z, jr_005_7534                           ; $7531: $28 $01
+    jr   z, ret_005_7534                          ; $7531: $28 $01
 
     inc  [hl]                                     ; $7533: $34
 
-jr_005_7534:
+ret_005_7534:
     ret                                           ; $7534: $C9
 
 func_005_7535::
@@ -1517,7 +1517,7 @@ jr_005_7730:
 
 jr_005_775E:
     call GetEntityTransitionCountdown             ; $775E: $CD $05 $0C
-    jr   nz, jr_005_7776                          ; $7761: $20 $13
+    jr   nz, ret_005_7776                         ; $7761: $20 $13
 
     call GetRandomByte                            ; $7763: $CD $0D $28
     and  $1F                                      ; $7766: $E6 $1F
@@ -1530,7 +1530,7 @@ jr_005_775E:
     add  hl, bc                                   ; $7774: $09
     ld   [hl], a                                  ; $7775: $77
 
-jr_005_7776:
+ret_005_7776:
     ret                                           ; $7776: $C9
 
 label_005_7777:
@@ -1688,7 +1688,7 @@ jr_005_7A1F:
     add  hl, bc                                   ; $7A25: $09
     ld   a, [hl]                                  ; $7A26: $7E
     and  a                                        ; $7A27: $A7
-    jr   nz, jr_005_7A39                          ; $7A28: $20 $0F
+    jr   nz, ret_005_7A39                         ; $7A28: $20 $0F
 
     ld   hl, wEntitiesOptions1Table               ; $7A2A: $21 $30 $C4
     add  hl, bc                                   ; $7A2D: $09
@@ -1698,6 +1698,6 @@ jr_005_7A1F:
     add  hl, bc                                   ; $7A36: $09
     ld   [hl], ENTITY_OPT1_IS_BOSS                ; $7A37: $36 $80
 
-jr_005_7A39:
+ret_005_7A39:
     ret                                           ; $7A39: $C9
 

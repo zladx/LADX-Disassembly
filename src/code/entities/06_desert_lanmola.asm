@@ -61,7 +61,7 @@ IncrementEntityPrivateState2::
 
 func_006_563A::
     call GetEntityTransitionCountdown             ; $563A: $CD $05 $0C
-    jr   nz, jr_006_564A                          ; $563D: $20 $0B
+    jr   nz, ret_006_564A                         ; $563D: $20 $0B
 
     ld   [hl], $CF                                ; $563F: $36 $CF
     call IncrementEntityPrivateState2             ; $5641: $CD $34 $56
@@ -69,7 +69,7 @@ func_006_563A::
     add  hl, bc                                   ; $5647: $09
     ld   [hl], $05                                ; $5648: $36 $05
 
-jr_006_564A:
+ret_006_564A:
     ret                                           ; $564A: $C9
 
 func_006_564B::
@@ -108,7 +108,7 @@ func_006_564B::
 
 jr_006_568A:
     and  $1F                                      ; $568A: $E6 $1F
-    jr   nz, jr_006_56C6                          ; $568C: $20 $38
+    jr   nz, ret_006_56C6                         ; $568C: $20 $38
 
     ld   hl, wEntitiesInertiaTable                ; $568E: $21 $D0 $C3
     add  hl, bc                                   ; $5691: $09
@@ -131,7 +131,7 @@ jr_006_568A:
     add  hl, de                                   ; $56AB: $19
     ld   a, [hl]                                  ; $56AC: $7E
     and  $80                                      ; $56AD: $E6 $80
-    jr   nz, jr_006_56C6                          ; $56AF: $20 $15
+    jr   nz, ret_006_56C6                         ; $56AF: $20 $15
 
     push hl                                       ; $56B1: $E5
     ld   hl, wD100                                ; $56B2: $21 $00 $D1
@@ -148,7 +148,7 @@ jr_006_56BB:
     ld   a, $13                                   ; $56C2: $3E $13
     ldh  [hNoiseSfx], a                           ; $56C4: $E0 $F4
 
-jr_006_56C6:
+ret_006_56C6:
     ret                                           ; $56C6: $C9
 
 func_006_56C7::

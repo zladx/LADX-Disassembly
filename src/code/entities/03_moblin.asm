@@ -219,7 +219,7 @@ Data_003_5943::
 SpawnMoblinArrow::
     ld   a, ENTITY_MOBLIN_ARROW                   ; $5947: $3E $0C
     call SpawnNewEntity                           ; $5949: $CD $CA $64
-    jr   c, jr_003_598B                           ; $594C: $38 $3D
+    jr   c, ret_003_598B                          ; $594C: $38 $3D
 
     push bc                                       ; $594E: $C5
     ldh  a, [hMultiPurpose2]                      ; $594F: $F0 $D9
@@ -261,7 +261,7 @@ jr_003_5974:
     ld   [hl], a                                  ; $5989: $77
     pop  bc                                       ; $598A: $C1
 
-jr_003_598B:
+ret_003_598B:
     ret                                           ; $598B: $C9
 
 Data_003_598C::

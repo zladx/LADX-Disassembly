@@ -266,7 +266,7 @@ func_005_4180::
     jr   z, jr_005_41B1                           ; $4183: $28 $2C
 
     call GetEntityPrivateCountdown1               ; $4185: $CD $00 $0C
-    jr   nz, jr_005_41B0                          ; $4188: $20 $26
+    jr   nz, ret_005_41B0                         ; $4188: $20 $26
 
     call GetRandomByte                            ; $418A: $CD $0D $28
     and  $3F                                      ; $418D: $E6 $3F
@@ -290,7 +290,7 @@ func_005_4180::
     add  hl, bc                                   ; $41AE: $09
     ld   [hl], a                                  ; $41AF: $77
 
-jr_005_41B0:
+ret_005_41B0:
     ret                                           ; $41B0: $C9
 
 jr_005_41B1:
@@ -357,7 +357,7 @@ jr_005_4206:
 
 func_005_420E::
     call GetEntityTransitionCountdown             ; $420E: $CD $05 $0C
-    jr   nz, jr_005_4227                          ; $4211: $20 $14
+    jr   nz, ret_005_4227                         ; $4211: $20 $14
 
     call GetRandomByte                            ; $4213: $CD $0D $28
     and  $3F                                      ; $4216: $E6 $3F
@@ -373,7 +373,7 @@ jr_005_4223:
     call IncrementEntityState                     ; $4223: $CD $12 $3B
     ld   [hl], b                                  ; $4226: $70
 
-jr_005_4227:
+ret_005_4227:
     ret                                           ; $4227: $C9
 
 func_005_4228::
@@ -401,13 +401,13 @@ jr_005_423E:
     sub  [hl]                                     ; $4247: $96
     add  $20                                      ; $4248: $C6 $20
     cp   $40                                      ; $424A: $FE $40
-    jr   c, jr_005_4252                           ; $424C: $38 $04
+    jr   c, ret_005_4252                          ; $424C: $38 $04
 
     ldh  a, [hActiveEntityPosY]                   ; $424E: $F0 $EF
     ld   [hl], a                                  ; $4250: $77
     inc  e                                        ; $4251: $1C
 
-jr_005_4252:
+ret_005_4252:
     ret                                           ; $4252: $C9
 
 label_005_4253:
@@ -741,7 +741,7 @@ func_005_43FE::
     or   [hl]                                     ; $440B: $B6
     ld   hl, hLinkVelocityZ                       ; $440C: $21 $A3 $FF
     or   [hl]                                     ; $440F: $B6
-    jp   z, jr_005_44CA                           ; $4410: $CA $CA $44
+    jp   z, ret_005_44CA                          ; $4410: $CA $CA $44
 
     ld   hl, wEntitiesPrivateState1Table          ; $4413: $21 $B0 $C2
     add  hl, bc                                   ; $4416: $09
@@ -861,7 +861,7 @@ jr_005_4492:
 jr_005_4499:
     ldh  a, [hMultiPurpose0]                      ; $4499: $F0 $D7
     and  $02                                      ; $449B: $E6 $02
-    jr   z, jr_005_44CA                           ; $449D: $28 $2B
+    jr   z, ret_005_44CA                          ; $449D: $28 $2B
 
     ld   hl, wD100                                ; $449F: $21 $00 $D1
     ld   e, $06                                   ; $44A2: $1E $06
@@ -898,7 +898,7 @@ func_005_44B5::
     add  hl, bc                                   ; $44C8: $09
     ld   [hl], a                                  ; $44C9: $77
 
-jr_005_44CA:
+ret_005_44CA:
     ret                                           ; $44CA: $C9
 
 func_005_44CB::

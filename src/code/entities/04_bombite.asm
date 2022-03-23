@@ -336,7 +336,7 @@ jr_004_7EBA:
 func_004_7EC0::
     ld   a, ENTITY_BOMB                           ; $7EC0: $3E $02
     call SpawnNewEntity_trampoline                ; $7EC2: $CD $86 $3B
-    jr   c, jr_004_7EE4                           ; $7EC5: $38 $1D
+    jr   c, ret_004_7EE4                          ; $7EC5: $38 $1D
 
     call PlayBombExplosionSfx                     ; $7EC7: $CD $4B $0C
     ldh  a, [hMultiPurpose0]                      ; $7ECA: $F0 $D7
@@ -354,5 +354,5 @@ func_004_7EC0::
     add  hl, de                                   ; $7EE1: $19
     ld   [hl], $01                                ; $7EE2: $36 $01
 
-jr_004_7EE4:
+ret_004_7EE4:
     ret                                           ; $7EE4: $C9

@@ -603,7 +603,7 @@ jr_004_62E7:
     add  hl, bc                                   ; $62EA: $09
     ld   a, [hl]                                  ; $62EB: $7E
     cp   $2A                                      ; $62EC: $FE $2A
-    jr   c, jr_004_6307                           ; $62EE: $38 $17
+    jr   c, ret_004_6307                          ; $62EE: $38 $17
 
     call ClearEntitySpeed                         ; $62F0: $CD $7F $3D
     call IncrementEntityState                     ; $62F3: $CD $12 $3B
@@ -618,7 +618,7 @@ label_004_62F6:
     ld   a, JINGLE_WATER_DIVE                     ; $6303: $3E $0E
     ldh  [hJingle], a                             ; $6305: $E0 $F2
 
-jr_004_6307:
+ret_004_6307:
     ret                                           ; $6307: $C9
 
 func_004_6308::
@@ -976,14 +976,14 @@ jr_004_64E0:
     add  hl, bc                                   ; $64E3: $09
     ld   a, [hl]                                  ; $64E4: $7E
     cp   $34                                      ; $64E5: $FE $34
-    jr   nc, jr_004_64EF                          ; $64E7: $30 $06
+    jr   nc, ret_004_64EF                         ; $64E7: $30 $06
 
     inc  [hl]                                     ; $64E9: $34
     ld   hl, wEntitiesSpeedYTable                 ; $64EA: $21 $50 $C2
     add  hl, bc                                   ; $64ED: $09
     ld   [hl], b                                  ; $64EE: $70
 
-jr_004_64EF:
+ret_004_64EF:
     ret                                           ; $64EF: $C9
 
 Data_004_64F0::
@@ -1053,7 +1053,7 @@ func_004_652D::
     sub  [hl]                                     ; $655E: $96
     add  $08                                      ; $655F: $C6 $08
     cp   $10                                      ; $6561: $FE $10
-    jr   nc, jr_004_6575                          ; $6563: $30 $10
+    jr   nc, ret_004_6575                         ; $6563: $30 $10
 
     call ClearEntitySpeed                         ; $6565: $CD $7F $3D
     call IncrementEntityState                     ; $6568: $CD $12 $3B
@@ -1064,7 +1064,7 @@ func_004_652D::
     add  hl, de                                   ; $6573: $19
     ld   [hl], b                                  ; $6574: $70
 
-jr_004_6575:
+ret_004_6575:
     ret                                           ; $6575: $C9
 
 Data_004_6576::
@@ -1399,13 +1399,13 @@ label_004_6738:
 jr_004_674A:
     ldh  a, [hFrameCounter]                       ; $674A: $F0 $E7
     and  $03                                      ; $674C: $E6 $03
-    jr   nz, jr_004_675F                          ; $674E: $20 $0F
+    jr   nz, ret_004_675F                         ; $674E: $20 $0F
 
     ld   hl, wEntitiesSpeedXTable                 ; $6750: $21 $40 $C2
     add  hl, bc                                   ; $6753: $09
     ld   a, [hl]                                  ; $6754: $7E
     and  a                                        ; $6755: $A7
-    jr   z, jr_004_675F                           ; $6756: $28 $07
+    jr   z, ret_004_675F                          ; $6756: $28 $07
 
     and  $80                                      ; $6758: $E6 $80
     jr   z, jr_004_675E                           ; $675A: $28 $02
@@ -1416,7 +1416,7 @@ jr_004_674A:
 jr_004_675E:
     dec  [hl]                                     ; $675E: $35
 
-jr_004_675F:
+ret_004_675F:
     ret                                           ; $675F: $C9
 
 Data_004_6760::
@@ -1439,7 +1439,7 @@ jr_004_676D:
     call SetEntitySpriteVariant                   ; $6774: $CD $0C $3B
     ldh  a, [hFrameCounter]                       ; $6777: $F0 $E7
     and  $03                                      ; $6779: $E6 $03
-    jr   nz, jr_004_679A                          ; $677B: $20 $1D
+    jr   nz, ret_004_679A                         ; $677B: $20 $1D
 
     ld   hl, wEntitiesSpeedXTable                 ; $677D: $21 $40 $C2
     add  hl, bc                                   ; $6780: $09
@@ -1454,7 +1454,7 @@ jr_004_676D:
     sub  [hl]                                     ; $678E: $96
     pop  hl                                       ; $678F: $E1
     and  a                                        ; $6790: $A7
-    jr   z, jr_004_679A                           ; $6791: $28 $07
+    jr   z, ret_004_679A                          ; $6791: $28 $07
 
     and  $80                                      ; $6793: $E6 $80
     jr   z, jr_004_6799                           ; $6795: $28 $02
@@ -1465,13 +1465,13 @@ jr_004_676D:
 jr_004_6799:
     dec  [hl]                                     ; $6799: $35
 
-jr_004_679A:
+ret_004_679A:
     ret                                           ; $679A: $C9
 
 func_004_679B::
     ld   a, [wIntroSubTimer]                      ; $679B: $FA $02 $D0
     and  a                                        ; $679E: $A7
-    jr   nz, jr_004_67FA                          ; $679F: $20 $59
+    jr   nz, ret_004_67FA                         ; $679F: $20 $59
 
     ld   a, [wD003]                               ; $67A1: $FA $03 $D0
     ld   e, a                                     ; $67A4: $5F
@@ -1480,13 +1480,13 @@ func_004_679B::
     add  hl, de                                   ; $67A9: $19
     ld   a, [hl]                                  ; $67AA: $7E
     and  a                                        ; $67AB: $A7
-    jr   z, jr_004_67FA                           ; $67AC: $28 $4C
+    jr   z, ret_004_67FA                          ; $67AC: $28 $4C
 
     ld   hl, wEntitiesStateTable                  ; $67AE: $21 $90 $C2
     add  hl, de                                   ; $67B1: $19
     ld   a, [hl]                                  ; $67B2: $7E
     and  a                                        ; $67B3: $A7
-    jr   z, jr_004_67FA                           ; $67B4: $28 $44
+    jr   z, ret_004_67FA                          ; $67B4: $28 $44
 
     ld   a, [wIsFileSelectionArrowShifted]        ; $67B6: $FA $00 $D0
     ld   hl, hActiveEntityPosX                    ; $67B9: $21 $EE $FF
@@ -1497,21 +1497,21 @@ func_004_679B::
     ld   hl, wEntitiesDirectionTable              ; $67C1: $21 $80 $C3
     add  hl, bc                                   ; $67C4: $09
     cp   [hl]                                     ; $67C5: $BE
-    jr   nz, jr_004_67FA                          ; $67C6: $20 $32
+    jr   nz, ret_004_67FA                         ; $67C6: $20 $32
 
     ld   a, [wIsFileSelectionArrowShifted]        ; $67C8: $FA $00 $D0
     ld   hl, hActiveEntityPosX                    ; $67CB: $21 $EE $FF
     sub  [hl]                                     ; $67CE: $96
     add  $18                                      ; $67CF: $C6 $18
     cp   $30                                      ; $67D1: $FE $30
-    jr   nc, jr_004_67FA                          ; $67D3: $30 $25
+    jr   nc, ret_004_67FA                         ; $67D3: $30 $25
 
     ld   a, [wIntroTimer]                         ; $67D5: $FA $01 $D0
     ld   hl, hActiveEntityPosY                    ; $67D8: $21 $EF $FF
     sub  [hl]                                     ; $67DB: $96
     add  $10                                      ; $67DC: $C6 $10
     cp   $20                                      ; $67DE: $FE $20
-    jr   nc, jr_004_67FA                          ; $67E0: $30 $18
+    jr   nc, ret_004_67FA                         ; $67E0: $30 $18
 
     call IncrementEntityState                     ; $67E2: $CD $12 $3B
     ld   [hl], $02                                ; $67E5: $36 $02
@@ -1525,7 +1525,7 @@ func_004_679B::
     add  $30                                      ; $67F7: $C6 $30
     ld   [hl], a                                  ; $67F9: $77
 
-jr_004_67FA:
+ret_004_67FA:
     ret                                           ; $67FA: $C9
 
 label_004_67FB:

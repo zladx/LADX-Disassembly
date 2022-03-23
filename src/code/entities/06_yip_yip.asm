@@ -181,7 +181,7 @@ jr_006_5A98:
 YipYipState2Handler::
     ld   a, [wDialogState]                        ; $5AA3: $FA $9F $C1
     and  a                                        ; $5AA6: $A7
-    jr   nz, jr_006_5AD0                          ; $5AA7: $20 $27
+    jr   nz, ret_006_5AD0                         ; $5AA7: $20 $27
 
     ld   a, [wDialogAskSelectionIndex]            ; $5AA9: $FA $77 $C1
     and  a                                        ; $5AAC: $A7
@@ -204,19 +204,19 @@ func_006_5ACC::
     ld   a, $18                                   ; $5ACC: $3E $18
     ldh  [hWaveSfx], a                            ; $5ACE: $E0 $F3
 
-jr_006_5AD0:
+ret_006_5AD0:
     ret                                           ; $5AD0: $C9
 
 YipYipState3Handler::
     ld   a, [wDialogState]                        ; $5AD1: $FA $9F $C1
     and  a                                        ; $5AD4: $A7
-    jr   nz, jr_006_5ADE                          ; $5AD5: $20 $07
+    jr   nz, ret_006_5ADE                         ; $5AD5: $20 $07
 
     call CreateTradingItemEntity                  ; $5AD7: $CD $0C $0C
     call IncrementEntityState                     ; $5ADA: $CD $12 $3B
     ld   [hl], b                                  ; $5ADD: $70
 
-jr_006_5ADE:
+ret_006_5ADE:
     ret                                           ; $5ADE: $C9
 
 Data_006_5ADF::

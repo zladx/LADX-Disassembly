@@ -76,7 +76,7 @@ func_005_539C::
 
     ld   [hl], b                                  ; $53AA: $70
 
-jr_005_53AB:
+ret_005_53AB:
     ret                                           ; $53AB: $C9
 
 jr_005_53AC:
@@ -271,13 +271,13 @@ jr_005_54C1:
 
 func_005_54C3::
     call CheckLinkCollisionWithEnemy_trampoline   ; $54C3: $CD $5A $3B
-    jr   nc, jr_005_54E5                          ; $54C6: $30 $1D
+    jr   nc, ret_005_54E5                         ; $54C6: $30 $1D
 
     call CopyLinkFinalPositionToPosition          ; $54C8: $CD $BE $0C
     call ResetPegasusBoots                        ; $54CB: $CD $B6 $0C
     ld   a, [wC1A6]                               ; $54CE: $FA $A6 $C1
     and  a                                        ; $54D1: $A7
-    jr   z, jr_005_54E5                           ; $54D2: $28 $11
+    jr   z, ret_005_54E5                          ; $54D2: $28 $11
 
     ld   e, a                                     ; $54D4: $5F
     ld   d, b                                     ; $54D5: $50
@@ -285,13 +285,13 @@ func_005_54C3::
     add  hl, de                                   ; $54D9: $19
     ld   a, [hl]                                  ; $54DA: $7E
     cp   $03                                      ; $54DB: $FE $03
-    jr   nz, jr_005_54E5                          ; $54DD: $20 $06
+    jr   nz, ret_005_54E5                         ; $54DD: $20 $06
 
     ld   hl, wEntitiesStatusTable+15              ; $54DF: $21 $8F $C2
     add  hl, de                                   ; $54E2: $19
     ld   [hl], $00                                ; $54E3: $36 $00
 
-jr_005_54E5:
+ret_005_54E5:
     ret                                           ; $54E5: $C9
 
 Data_005_54E6::

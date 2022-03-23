@@ -235,7 +235,7 @@ jr_004_7881:
     jp   func_004_788E                            ; $788B: $C3 $8E $78
 
 func_004_788E::
-    ld   de, wRequest                             ; $788E: $11 $01 $D6
+    ld   de, wDrawCommand                         ; $788E: $11 $01 $D6
     push bc                                       ; $7891: $C5
     ld   hl, wC505                                ; $7892: $21 $05 $C5
     ld   c, $04                                   ; $7895: $0E $04
@@ -358,7 +358,7 @@ jr_004_792B:
     ld   e, a                                     ; $792F: $5F
     ld   hl, Data_004_7775                        ; $7930: $21 $75 $77
     add  hl, de                                   ; $7933: $19
-    ld   de, wRequest                             ; $7934: $11 $01 $D6
+    ld   de, wDrawCommand                         ; $7934: $11 $01 $D6
     ld   c, $0D                                   ; $7937: $0E $0D
 
 jr_004_7939:
@@ -410,7 +410,7 @@ label_004_796D:
     add  hl, de                                   ; $7975: $19
     ld   a, [wItemPickedUpInShop]                 ; $7976: $FA $09 $C5
     ld   [hl], a                                  ; $7979: $77
-    ld   de, wRequest                             ; $797A: $11 $01 $D6
+    ld   de, wDrawCommand                         ; $797A: $11 $01 $D6
     call func_004_798B                            ; $797D: $CD $8B $79
     xor  a                                        ; $7980: $AF
     ld   [wItemPickedUpInShop], a                 ; $7981: $EA $09 $C5

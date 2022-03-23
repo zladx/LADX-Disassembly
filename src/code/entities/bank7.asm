@@ -1589,13 +1589,13 @@ jr_007_71B4:
     pop  bc                                       ; $721C: $C1
 
 jr_007_721D:
-    ld   a, [wRequestsSize]                       ; $721D: $FA $00 $D6
+    ld   a, [wDrawCommandsSize]                   ; $721D: $FA $00 $D6
     ld   e, a                                     ; $7220: $5F
     ld   d, $00                                   ; $7221: $16 $00
-    ld   hl, wRequest                             ; $7223: $21 $01 $D6
+    ld   hl, wDrawCommand                         ; $7223: $21 $01 $D6
     add  hl, de                                   ; $7226: $19
     add  $0A                                      ; $7227: $C6 $0A
-    ld   [wRequestsSize], a                       ; $7229: $EA $00 $D6
+    ld   [wDrawCommandsSize], a                   ; $7229: $EA $00 $D6
     ld   e, $08                                   ; $722C: $1E $08
     call func_007_7233                            ; $722E: $CD $33 $72
     ld   e, $09                                   ; $7231: $1E $09

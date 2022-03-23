@@ -129,9 +129,9 @@ jr_001_43DC::
     jr   nz, jr_001_4425                          ; $4409: $20 $1A
 
 jr_001_440B::
-    ; Create a wRequest containing the minimap tilemap
+    ; Create a wDrawCommand containing the minimap tilemap
     call CreateMinimapTilemap                     ; $440B: $CD $11 $55
-    ; Request this wRequest to be loaded on next vblank
+    ; Request this wDrawCommand to be loaded on next vblank
     ld   a, $07                                   ; $440E: $3E $07
     ld   [wBGMapToLoad], a                        ; $4410: $EA $FF $D6
     ret                                           ; $4413: $C9

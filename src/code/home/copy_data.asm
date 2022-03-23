@@ -26,12 +26,11 @@ CopyData::
     jr   nz, CopyData                             ; $291A: $20 $F8
     ret                                           ; $291C: $C9
 
-; Execute a data copy from a wRequest structure,
-; with optional handling during map transitions.
+; Copy data from a series of draw command structures to VRAM.
+;
 ; Inputs:
-;   de: data copy request struct (see wRequest)
-;   a:  destination address high byte
-ExpandCopyRequestArgs::
+;   de: address of the next draw command struct (see wDrawCommand)
+NoRoomTransitionDrawLoop::
     ; Copy destination address to hl
     inc  de                                       ; $291D: $13
     ld   h, a                                     ; $291E: $67
@@ -42,28 +41,28 @@ ExpandCopyRequestArgs::
     ld   a, [de]                                  ; $2922: $1A
     ; Move de to the data start
     inc  de                                       ; $2923: $13
-    call CopyDataToBGMap                          ; $2924: $CD $41 $29
-    ; fallthrough
+    call DrawCommandToVRAM                        ; $2924: $CD $41 $29
+    ; fallthrough to the next wDrawCommand
 
-; Copy data from a wRequest structure to the BG map,
-; with optional handling during map transitions.
+; Copy data from a series of draw command structures to VRAM,
+; with optional handling during room transitions.
+;
 ; Inputs:
-;   de: address of the data copy request struct (see wRequest)
-ExecuteBGCopyRequest::
+;   de: address of the first draw command struct (see wDrawCommand)
+ExecuteDrawCommands::
     ld   a, [wRoomTransitionState]                ; $2927: $FA $24 $C1
     and  a                                        ; $292A: $A7
     jr   nz, .duringMapTransition                 ; $292B: $20 $0F
 
-.noMapTransition
-    ; If the request is present, copy the data.
+.noRoomTransition
+    ; If a draw command is present, copy the data.
     ld   a, [de]                                  ; $292D: $1A
     and  a                                        ; $292E: $A7
-    jr   nz, ExpandCopyRequestArgs                ; $292F: $20 $EC
-    ; but if the request is blank or has just been executed successfully,
-    ; return.
+    jr   nz, NoRoomTransitionDrawLoop             ; $292F: $20 $EC
+    ; No more draw commands: return.
     ret                                           ; $2931: $C9
 
-.mapTransitionCopyLoop
+.roomTransitionDrawLoop
     inc  de                                       ; $2932: $13
     ld   h, a                                     ; $2933: $67
     ld   a, [de]                                  ; $2934: $1A
@@ -71,22 +70,22 @@ ExecuteBGCopyRequest::
     inc  de                                       ; $2936: $13
     ld   a, [de]                                  ; $2937: $1A
     inc  de                                       ; $2938: $13
-    call label_2991                               ; $2939: $CD $91 $29
+    call DrawCommandToVRAMDuringRoomTransition    ; $2939: $CD $91 $29
 
 .duringMapTransition
     ld   a, [de]                                  ; $293C: $1A
     and  a                                        ; $293D: $A7
-    jr   nz, .mapTransitionCopyLoop               ; $293E: $20 $F2
+    jr   nz, .roomTransitionDrawLoop              ; $293E: $20 $F2
     ret                                           ; $2940: $C9
 
-; Copy data to the BG map, with support for copying a full row or column.
-; See BG_COPY_MODE_* for possible options.
+; Copy data to VRAM map, with support for copying a full row or column.
+; See DC_* constants for possible options.
 ;
 ; Inputs:
 ;   de: data copy source address
 ;   hl: data copy destination address
 ;   a:  data length (bits 0-6) and copy mode (bits 7-8)
-CopyDataToBGMap::
+DrawCommandToVRAM::
     ; Save the six lowest bits (actual data length) of the data length to b
     push af                                       ; $2941: $F5
     and  $3F                                      ; $2942: $E6 $3F
@@ -100,16 +99,16 @@ CopyDataToBGMap::
     and  $03                                      ; $2949: $E6 $03
 
     ; Dispatch according to the copy mode
-    ; BG_COPY_MODE_ROW
+    ; DC_COPY_ROW
     jr   z, .copyRow                              ; $294B: $28 $08
     dec  a                                        ; $294D: $3D
-    ; BG_COPY_MODE_ROW_SINGLE_VALUE
-    jr   z, .copyRowSingleValue                   ; $294E: $28 $16
+    ; DC_FILL_ROW
+    jr   z, .fillRow                              ; $294E: $28 $16
     dec  a                                        ; $2950: $3D
-    ; BG_COPY_MODE_COLUMN
+    ; DC_COPY_COLUMN
     jr   z, .copyColumn                           ; $2951: $28 $24
-    ; BG_COPY_MODE_COLUMN_SINGLE_VALUE
-    jr   .copyColumnSingleValue                   ; $2953: $18 $2F
+    ; DC_FILL_COLUMN
+    jr   .fillColumn                              ; $2953: $18 $2F
 
 .copyRow
     ; Copy one byte from [de] to [hl]
@@ -134,7 +133,7 @@ CopyDataToBGMap::
     ret                                           ; $2965: $C9
 
 ; Copy a single value in [de] from [hl] to [hl + a]
-.copyRowSingleValue
+.fillRow
     ; Copy one byte from [de] to [hl]
     ld   a, [de]                                  ; $2966: $1A
     ldi  [hl], a                                  ; $2967: $22
@@ -151,7 +150,7 @@ CopyDataToBGMap::
     ; Decrement the length to be copied
     dec  b                                        ; $2972: $05
     ; Loop (without incrementing the source address)
-    jr   nz, .copyRowSingleValue                  ; $2973: $20 $F1
+    jr   nz, .fillRow                             ; $2973: $20 $F1
     inc  de                                       ; $2975: $13
     ret                                           ; $2976: $C9
 
@@ -172,7 +171,7 @@ CopyDataToBGMap::
     jr   nz, .copyColumn                          ; $2981: $20 $F4
     ret                                           ; $2983: $C9
 
-.copyColumnSingleValue
+.fillColumn
     ; Copy one byte from [de] to [hl]
     ld   a, [de]                                  ; $2984: $1A
     ld   [hl], a                                  ; $2985: $77
@@ -184,39 +183,48 @@ CopyDataToBGMap::
     ld   b, a                                     ; $298B: $47
     dec  b                                        ; $298C: $05
     ; Loop (without incrementing the source address)
-    jr   nz, .copyColumnSingleValue               ; $298D: $20 $F5
+    jr   nz, .fillColumn                          ; $298D: $20 $F5
     inc  de                                       ; $298F: $13
     ret                                           ; $2990: $C9
 
-label_2991::
+; Copy data to VRAM map, with support for copying a full row or column,
+; special-cased for code executed during a room transition.
+;
+; See DC_* constants for possible options.
+;
+; Inputs:
+;   de: data copy source address
+;   hl: data copy destination address
+;   a:  data length (bits 0-6) and copy mode (bits 7-8)
+DrawCommandToVRAMDuringRoomTransition::
     push af                                       ; $2991: $F5
     and  $3F                                      ; $2992: $E6 $3F
     ld   b, a                                     ; $2994: $47
     inc  b                                        ; $2995: $04
     pop  af                                       ; $2996: $F1
     and  $80                                      ; $2997: $E6 $80
-    jr   nz, UpdateNextBGColumnWithTiles          ; $2999: $20 $15
+    jr   nz, .updateNextBGColumnWithTiles         ; $2999: $20 $15
 
-label_299B::
+.jr_299B
     ld   a, [de]                                  ; $299B: $1A
     cp   $EE                                      ; $299C: $FE $EE
-    jr   z, label_29AB                            ; $299E: $28 $0B
+    jr   z, .jr_29AB                              ; $299E: $28 $0B
     ldi  [hl], a                                  ; $29A0: $22
     ld   a, l                                     ; $29A1: $7D
     and  $1F                                      ; $29A2: $E6 $1F
-    jr   nz, label_29AB                           ; $29A4: $20 $05
+    jr   nz, .jr_29AB                             ; $29A4: $20 $05
     dec  hl                                       ; $29A6: $2B
     ld   a, l                                     ; $29A7: $7D
     and  $E0                                      ; $29A8: $E6 $E0
     ld   l, a                                     ; $29AA: $6F
 
-label_29AB::
+.jr_29AB
     inc  de                                       ; $29AB: $13
     dec  b                                        ; $29AC: $05
-    jr   nz, label_299B                           ; $29AD: $20 $EC
+    jr   nz, .jr_299B                             ; $29AD: $20 $EC
     ret                                           ; $29AF: $C9
 
-UpdateNextBGColumnWithTiles::
+.updateNextBGColumnWithTiles
     ld   a, [de]                                  ; $29B0: $1A
     cp   $EE                                      ; $29B1: $FE $EE
     jr   z, .continue                             ; $29B3: $28 $01
@@ -228,5 +236,5 @@ UpdateNextBGColumnWithTiles::
     add  hl, bc                                   ; $29BB: $09
     ld   b, a                                     ; $29BC: $47
     dec  b                                        ; $29BD: $05
-    jr   nz, UpdateNextBGColumnWithTiles          ; $29BE: $20 $F0
+    jr   nz, .updateNextBGColumnWithTiles         ; $29BE: $20 $F0
     ret                                           ; $29C0: $C9

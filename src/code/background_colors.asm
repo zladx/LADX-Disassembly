@@ -32,8 +32,8 @@ func_024_5C1A::
 
     ld   a, $01                                   ; $5C1E: $3E $01
     ldh  [rVBK], a                                ; $5C20: $E0 $4F
-    ld   de, wRequestAlt                          ; $5C22: $11 $91 $DC
-    call ExecuteBGCopyRequest                     ; $5C25: $CD $27 $29
+    ld   de, wDrawCommandAlt                      ; $5C22: $11 $91 $DC
+    call ExecuteDrawCommands                      ; $5C25: $CD $27 $29
     xor  a                                        ; $5C28: $AF
     ldh  [rVBK], a                                ; $5C29: $E0 $4F
     ret                                           ; $5C2B: $C9
@@ -56,7 +56,7 @@ LoadBGMapAttributes::
     ld   e, a                                     ; $5C41: $5F
     ld   a, [hl]                                  ; $5C42: $7E
     ld   d, a                                     ; $5C43: $57
-    call ExecuteBGCopyRequest.noMapTransition     ; $5C44: $CD $2D $29
+    call ExecuteDrawCommands.noRoomTransition     ; $5C44: $CD $2D $29
     xor  a                                        ; $5C47: $AF
     ldh  [rVBK], a                                ; $5C48: $E0 $4F
     ret                                           ; $5C4A: $C9

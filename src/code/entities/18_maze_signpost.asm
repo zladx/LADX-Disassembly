@@ -108,11 +108,11 @@ RevealMamuCave::
     pop  bc                                       ; $632C: $C1
 
 jr_018_632D:
-    ld   hl, wRequest                             ; $632D: $21 $01 $D6
-    ld   a, [wRequestsSize]                       ; $6330: $FA $00 $D6
+    ld   hl, wDrawCommand                         ; $632D: $21 $01 $D6
+    ld   a, [wDrawCommandsSize]                   ; $6330: $FA $00 $D6
     ld   e, a                                     ; $6333: $5F
     add  $0A                                      ; $6334: $C6 $0A
-    ld   [wRequestsSize], a                       ; $6336: $EA $00 $D6
+    ld   [wDrawCommandsSize], a                   ; $6336: $EA $00 $D6
     ld   d, $00                                   ; $6339: $16 $00
     add  hl, de                                   ; $633B: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $633C: $F0 $CF

@@ -1861,11 +1861,11 @@ jr_019_4C21:
     pop  bc                                       ; $4C87: $C1
 
 jr_019_4C88:
-    ld   hl, wRequest                             ; $4C88: $21 $01 $D6
-    ld   a, [wRequestsSize]                       ; $4C8B: $FA $00 $D6
+    ld   hl, wDrawCommand                         ; $4C88: $21 $01 $D6
+    ld   a, [wDrawCommandsSize]                   ; $4C8B: $FA $00 $D6
     ld   e, a                                     ; $4C8E: $5F
     add  $07                                      ; $4C8F: $C6 $07
-    ld   [wRequestsSize], a                       ; $4C91: $EA $00 $D6
+    ld   [wDrawCommandsSize], a                   ; $4C91: $EA $00 $D6
     ld   d, $00                                   ; $4C94: $16 $00
     add  hl, de                                   ; $4C96: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $4C97: $F0 $CF
@@ -2736,11 +2736,11 @@ FlyingRoosterState0Handler::
     pop  bc                                       ; $5266: $C1
 
 jr_019_5267:
-    ld   hl, wRequest                             ; $5267: $21 $01 $D6
-    ld   a, [wRequestsSize]                       ; $526A: $FA $00 $D6
+    ld   hl, wDrawCommand                         ; $5267: $21 $01 $D6
+    ld   a, [wDrawCommandsSize]                   ; $526A: $FA $00 $D6
     ld   e, a                                     ; $526D: $5F
     add  $0E                                      ; $526E: $C6 $0E
-    ld   [wRequestsSize], a                       ; $5270: $EA $00 $D6
+    ld   [wDrawCommandsSize], a                   ; $5270: $EA $00 $D6
     ld   d, $00                                   ; $5273: $16 $00
     add  hl, de                                   ; $5275: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $5276: $F0 $CF
@@ -2841,11 +2841,11 @@ FlyingRoosterState1Handler::
     pop  bc                                       ; $531D: $C1
 
 jr_019_531E:
-    ld   hl, wRequest                             ; $531E: $21 $01 $D6
-    ld   a, [wRequestsSize]                       ; $5321: $FA $00 $D6
+    ld   hl, wDrawCommand                         ; $531E: $21 $01 $D6
+    ld   a, [wDrawCommandsSize]                   ; $5321: $FA $00 $D6
     ld   e, a                                     ; $5324: $5F
     add  $0E                                      ; $5325: $C6 $0E
-    ld   [wRequestsSize], a                       ; $5327: $EA $00 $D6
+    ld   [wDrawCommandsSize], a                   ; $5327: $EA $00 $D6
     ld   d, $00                                   ; $532A: $16 $00
     add  hl, de                                   ; $532C: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $532D: $F0 $CF
@@ -5096,7 +5096,7 @@ func_019_6262::
     ld   d, [hl]                                  ; $6271: $56
     ld   e, a                                     ; $6272: $5F
     ld   c, $34                                   ; $6273: $0E $34
-    ld   hl, wRequest                             ; $6275: $21 $01 $D6
+    ld   hl, wDrawCommand                         ; $6275: $21 $01 $D6
 
 jr_019_6278:
     dec  de                                       ; $6278: $1B
@@ -5193,8 +5193,8 @@ Data_019_6354::
 
 func_019_6374::
     ld   a, $20                                   ; $6374: $3E $20
-    ld   [wRequestsSize], a                       ; $6376: $EA $00 $D6
-    ld   hl, wRequest                             ; $6379: $21 $01 $D6
+    ld   [wDrawCommandsSize], a                   ; $6376: $EA $00 $D6
+    ld   hl, wDrawCommand                         ; $6379: $21 $01 $D6
     ld   de, Data_019_62F4                        ; $637C: $11 $F4 $62
     ldh  a, [hIsGBC]                              ; $637F: $F0 $FE
     and  a                                        ; $6381: $A7
@@ -5241,8 +5241,8 @@ func_019_63B5::
     jr   z, jr_019_63D8                           ; $63B8: $28 $1E
 
     ld   a, $05                                   ; $63BA: $3E $05
-    ld   [wRequestsAltSize], a                    ; $63BC: $EA $90 $DC
-    ld   hl, wRequestAlt                          ; $63BF: $21 $91 $DC
+    ld   [wDrawCommandsAltSize], a                ; $63BC: $EA $90 $DC
+    ld   hl, wDrawCommandAlt                      ; $63BF: $21 $91 $DC
     ld   de, Data_019_63A3                        ; $63C2: $11 $A3 $63
     ldh  a, [hBaseScrollX]                        ; $63C5: $F0 $96
     and  a                                        ; $63C7: $A7
@@ -5586,7 +5586,7 @@ func_019_6894::
     ld   e, a                                     ; $68A5: $5F
     push bc                                       ; $68A6: $C5
     ld   c, $34                                   ; $68A7: $0E $34
-    ld   hl, wRequest                             ; $68A9: $21 $01 $D6
+    ld   hl, wDrawCommand                         ; $68A9: $21 $01 $D6
 
 jr_019_68AC:
     ld   a, [de]                                  ; $68AC: $1A
@@ -5621,7 +5621,7 @@ jr_019_68BA:
     ld   e, a                                     ; $68CF: $5F
     push bc                                       ; $68D0: $C5
     ld   c, $10                                   ; $68D1: $0E $10
-    ld   hl, wRequestAlt                          ; $68D3: $21 $91 $DC
+    ld   hl, wDrawCommandAlt                      ; $68D3: $21 $91 $DC
 
 jr_019_68D6:
     ld   a, [de]                                  ; $68D6: $1A
@@ -5668,7 +5668,7 @@ func_019_68F9::
     ld   d, [hl]                                  ; $6909: $56
     ld   e, a                                     ; $690A: $5F
     ld   c, $34                                   ; $690B: $0E $34
-    ld   hl, wRequest                             ; $690D: $21 $01 $D6
+    ld   hl, wDrawCommand                         ; $690D: $21 $01 $D6
 
 jr_019_6910:
     ld   a, [de]                                  ; $6910: $1A
@@ -5704,7 +5704,7 @@ jr_019_691E:
     ld   d, [hl]                                  ; $6936: $56
     ld   e, a                                     ; $6937: $5F
     ld   c, $34                                   ; $6938: $0E $34
-    ld   hl, wRequestAlt                          ; $693A: $21 $91 $DC
+    ld   hl, wDrawCommandAlt                      ; $693A: $21 $91 $DC
 
 jr_019_693D:
     ld   a, [de]                                  ; $693D: $1A
@@ -7800,8 +7800,8 @@ func_019_7921::
     push bc                                       ; $7921: $C5
     ld   c, $23                                   ; $7922: $0E $23
     ld   a, $22                                   ; $7924: $3E $22
-    ld   [wRequestsSize], a                       ; $7926: $EA $00 $D6
-    ld   hl, wRequest                             ; $7929: $21 $01 $D6
+    ld   [wDrawCommandsSize], a                   ; $7926: $EA $00 $D6
+    ld   hl, wDrawCommand                         ; $7929: $21 $01 $D6
     ld   de, Data_019_78FE                        ; $792C: $11 $FE $78
 
 jr_019_792F:
@@ -7814,8 +7814,8 @@ jr_019_792F:
 IF __PATCH_0__
     ld   c, Data_019_78FE_B.end - Data_019_78FE_B
     ld   a, $08
-    ld   [wRequestsAltSize], a
-    ld   hl, wRequestAlt
+    ld   [wDrawCommandsAltSize], a
+    ld   hl, wDrawCommandAlt
     ld   de, Data_019_78FE_B
 
 jr_019_7951:

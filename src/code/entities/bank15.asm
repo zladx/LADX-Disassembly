@@ -6546,11 +6546,11 @@ jr_015_746A:
     pop  bc                                       ; $749C: $C1
 
 jr_015_749D:
-    ld   hl, wRequest                             ; $749D: $21 $01 $D6
-    ld   a, [wRequestsSize]                       ; $74A0: $FA $00 $D6
+    ld   hl, wDrawCommand                         ; $749D: $21 $01 $D6
+    ld   a, [wDrawCommandsSize]                   ; $74A0: $FA $00 $D6
     ld   e, a                                     ; $74A3: $5F
     add  $0A                                      ; $74A4: $C6 $0A
-    ld   [wRequestsSize], a                       ; $74A6: $EA $00 $D6
+    ld   [wDrawCommandsSize], a                   ; $74A6: $EA $00 $D6
     ld   d, $00                                   ; $74A9: $16 $00
     add  hl, de                                   ; $74AB: $19
     ldh  a, [hIntersectedObjectBGAddressHigh]     ; $74AC: $F0 $CF
@@ -8198,12 +8198,12 @@ jr_015_7DAF:
     cp   $04                                      ; $7DB9: $FE $04
     jr   z, jr_015_7DEC                           ; $7DBB: $28 $2F
 
-    ld   a, [wRequestsSize]                       ; $7DBD: $FA $00 $D6
+    ld   a, [wDrawCommandsSize]                   ; $7DBD: $FA $00 $D6
     ld   e, a                                     ; $7DC0: $5F
     ld   d, b                                     ; $7DC1: $50
     add  $05                                      ; $7DC2: $C6 $05
-    ld   [wRequestsSize], a                       ; $7DC4: $EA $00 $D6
-    ld   hl, wRequest                             ; $7DC7: $21 $01 $D6
+    ld   [wDrawCommandsSize], a                   ; $7DC4: $EA $00 $D6
+    ld   hl, wDrawCommand                         ; $7DC7: $21 $01 $D6
     add  hl, de                                   ; $7DCA: $19
     push hl                                       ; $7DCB: $E5
     ld   hl, wEntitiesPrivateState2Table          ; $7DCC: $21 $C0 $C2

@@ -1,4 +1,5 @@
-func_01C_49F1::
+; Configure a wDrawCommand to write pixels for a black tile to the VRAM of the next letter.
+ClearLetterPixels::
     ld   a, [wDialogCharacterIndex]               ; $49F1: $FA $70 $C1
     and  %00011111                                ; $49F4: $E6 $1F
     ld   e, a                                     ; $49F6: $5F
@@ -8,20 +9,28 @@ func_01C_49F1::
     ld   hl, DialogCharacterYTable                ; $49FD: $21 $81 $45
     add  hl, de                                   ; $4A00: $19
     ld   a, [hl]                                  ; $4A01: $7E
-    ld   hl, wRequestsSize                        ; $4A02: $21 $00 $D6
+
+ld   hl, wDrawCommandsSize                        ; $4A02: $21 $00 $D6
     add  hl, bc                                   ; $4A05: $09
-    ldi  [hl], a                                  ; $4A06: $22
+    ldi  [hl], a ; wDrawCommand.destinationHigh   ; $4A06: $22
+
     push hl                                       ; $4A07: $E5
     ld   hl, DialogCharacterXTable                ; $4A08: $21 $61 $45
     add  hl, de                                   ; $4A0B: $19
     ld   a, [hl]                                  ; $4A0C: $7E
     pop  hl                                       ; $4A0D: $E1
-    ldi  [hl], a                                  ; $4A0E: $22
-    ld   a, $4F                                   ; $4A0F: $3E $4F
-    ldi  [hl], a                                  ; $4A11: $22
+    ldi  [hl], a ; wDrawCommand.destinationLow    ; $4A0E: $22
+
+    ; Fill all the tile data with the same byte repeated
+    ld   a, (TILE_SIZE - 1) | DC_FILL_ROW         ; $4A0F: $3E $4F
+    ldi  [hl], a ; wDrawCommand.length            ; $4A11: $22
+
+    ; Set the tile pixels (all black)
     ld   a, $FF                                   ; $4A12: $3E $FF
-    ldi  [hl], a                                  ; $4A14: $22
-    ld   [hl], $00                                ; $4A15: $36 $00
+    ldi  [hl], a   ; wDrawCommand.data + 0        ; $4A14: $22
+
+    ; End of wDrawCommand
+    ld   [hl], $00 ; wDrawCommand.data + 1        ; $4A15: $36 $00
     ret                                           ; $4A17: $C9
 
 Data_01C_4A18::
@@ -51,7 +60,7 @@ func_01C_4A3D::
     ld   hl, Data_01C_4A22                        ; $4A47: $21 $22 $4A
     add  hl, bc                                   ; $4A4A: $09
     add  [hl]                                     ; $4A4B: $86
-    ld   hl, wRequestsSize                        ; $4A4C: $21 $00 $D6
+    ld   hl, wDrawCommandsSize                    ; $4A4C: $21 $00 $D6
     add  hl, de                                   ; $4A4F: $19
     ldi  [hl], a                                  ; $4A50: $22
     push hl                                       ; $4A51: $E5
@@ -83,8 +92,8 @@ func_01C_4A71::
     ret                                           ; $4A75: $C9
 
 func_01C_4A76::
-    ld   hl, wRequestsAltSize                     ; $4A76: $21 $90 $DC
-    ld   de, wRequestsSize                        ; $4A79: $11 $00 $D6
+    ld   hl, wDrawCommandsAltSize                 ; $4A76: $21 $90 $DC
+    ld   de, wDrawCommandsSize                    ; $4A79: $11 $00 $D6
     ld   b, $04                                   ; $4A7C: $06 $04
 .loop_4A7E_1C:
     ld   a, [de]                                  ; $4A7E: $1A
@@ -162,28 +171,28 @@ AnimateDialogClosing::
     ld   e, $01                                   ; $4ABC: $1E $01
     ld   d, $00                                   ; $4ABE: $16 $00
 
-    ; Set wRequest.destinationHigh
+    ; Set wDrawCommand.destinationHigh
     ; a = [wBGOriginHigh] + DialogRestoreBGMapHighTable[frame index]
     ld   a, [wBGOriginHigh]                       ; $4AC0: $FA $2E $C1
     ld   hl, DialogRestoreBGMapLocationTable.high ; $4AC3: $21 $94 $4A
     add  hl, bc                                   ; $4AC6: $09
     add  [hl]                                     ; $4AC7: $86
-    ld   hl, wRequestsSize                        ; $4AC8: $21 $00 $D6
+    ld   hl, wDrawCommandsSize                    ; $4AC8: $21 $00 $D6
     add  hl, de                                   ; $4ACB: $19
-    ldi  [hl], a ; wRequest.destinationHigh     ; $4ACC: $22
+    ldi  [hl], a ; wDrawCommand.destinationHigh     ; $4ACC: $22
     push hl                                       ; $4ACD: $E5
 
-    ; Set wRequest.destinationLow
+    ; Set wDrawCommand.destinationLow
     ld   a, [wBGOriginLow]                        ; $4ACE: $FA $2F $C1
     ld   hl, DialogRestoreBGMapLocationTable.low  ; $4AD1: $21 $8A $4A
     add  hl, bc                                   ; $4AD4: $09
     add  [hl]                                     ; $4AD5: $86
     pop  hl                                       ; $4AD6: $E1
-    ldi  [hl], a ; ; wRequest.destinationLow   ; $4AD7: $22
+    ldi  [hl], a ; ; wDrawCommand.destinationLow   ; $4AD7: $22
 
-    ; Set wRequest.length
+    ; Set wDrawCommand.length
     ld   a, $11                                   ; $4AD8: $3E $11
-    ldi  [hl], a ; wRequest.length              ; $4ADA: $22
+    ldi  [hl], a ; wDrawCommand.length              ; $4ADA: $22
     push hl                                       ; $4ADB: $E5
 
     ; Configure where to read the saved BG map from
@@ -206,14 +215,14 @@ ENDC
     ; Loop from 12 to 1…
     ld   e, $12                                   ; $4AEB: $1E $12
 .loop
-    ; Copy a byte from BG map to restore to wRequest.data
+    ; Copy a byte from BG map to restore to wDrawCommand.data
     ld   a, [bc]                                  ; $4AED: $0A
     inc  bc                                       ; $4AEE: $03
     ldi  [hl], a                                  ; $4AEF: $22
     dec  e                                        ; $4AF0: $1D
     jr   nz, .loop                                ; $4AF1: $20 $FA
 
-    ; Write the END byte of wRequest.data
+    ; Write the END byte of wDrawCommand.data
     ld   [hl], $00                                ; $4AF3: $36 $00
 
     ldh  a, [hIsGBC]                              ; $4AF5: $F0 $FE
@@ -230,8 +239,8 @@ ENDC
 ; (CGB only)
 AnimateDialogClosingAttrs::
     push bc                                       ; $4B02: $C5
-    ld   hl, wRequestsAltSize                     ; $4B03: $21 $90 $DC
-    ld   de, wRequestsSize                        ; $4B06: $11 $00 $D6
+    ld   hl, wDrawCommandsAltSize                 ; $4B03: $21 $90 $DC
+    ld   de, wDrawCommandsSize                    ; $4B06: $11 $00 $D6
     ld   b, $04                                   ; $4B09: $06 $04
 .loop_4B0B_1C:
     ld   a, [de]                                  ; $4B0B: $1A

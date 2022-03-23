@@ -257,7 +257,7 @@ jr_007_51F2:
     ld   c, b                                     ; $5283: $48
     ld   hl, wRoomObjectsArea                     ; $5284: $21 $00 $D7
 
-jr_007_5287:
+.loop_5287:
     ld   a, [hl+]                                 ; $5287: $2A
     push hl                                       ; $5288: $E5
     ld   e, a                                     ; $5289: $5F
@@ -271,7 +271,7 @@ jr_007_5287:
     jr   z, jr_007_529E                           ; $5296: $28 $06
 
     dec  c                                        ; $5298: $0D
-    jr   nz, jr_007_5287                          ; $5299: $20 $EC
+    jr   nz, .loop_5287                           ; $5299: $20 $EC
 
     call MarkTriggerAsResolved                    ; $529B: $CD $60 $0C
 

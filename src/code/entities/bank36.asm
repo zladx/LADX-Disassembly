@@ -121,13 +121,13 @@ func_036_409C::
     ld   de, Data_036_4094                        ; $40AA: $11 $94 $40
     ld   hl, wObjPal7                             ; $40AD: $21 $80 $DC
 
-jr_036_40B0:
+.loop_40B0:
     ld   a, [de]                                  ; $40B0: $1A
     ld   [hl+], a                                 ; $40B1: $22
     inc  de                                       ; $40B2: $13
     ld   a, l                                     ; $40B3: $7D
     and  $07                                      ; $40B4: $E6 $07
-    jr   nz, jr_036_40B0                          ; $40B6: $20 $F8
+    jr   nz, .loop_40B0                           ; $40B6: $20 $F8
 
     ei                                            ; $40B8: $FB
     ld   a, $02                                   ; $40B9: $3E $02
@@ -312,13 +312,13 @@ func_036_41B2::
     ld   a, $02                                   ; $41CE: $3E $02
     ldh  [rSVBK], a                               ; $41D0: $E0 $70
 
-jr_036_41D2:
+.loop_41D2:
     ld   a, [de]                                  ; $41D2: $1A
     ld   [hl+], a                                 ; $41D3: $22
     inc  de                                       ; $41D4: $13
     ld   a, l                                     ; $41D5: $7D
     and  $07                                      ; $41D6: $E6 $07
-    jr   nz, jr_036_41D2                          ; $41D8: $20 $F8
+    jr   nz, .loop_41D2                           ; $41D8: $20 $F8
 
     xor  a                                        ; $41DA: $AF
     ldh  [rSVBK], a                               ; $41DB: $E0 $70
@@ -343,10 +343,10 @@ func_036_41DF::
     ld   hl, wLinkPositionZHistory                ; $41FC: $21 $95 $D1
     ld   e, $10                                   ; $41FF: $1E $10
 
-jr_036_4201:
+.loop_4201:
     ld   [hl+], a                                 ; $4201: $22
     dec  e                                        ; $4202: $1D
-    jr   nz, jr_036_4201                          ; $4203: $20 $FC
+    jr   nz, .loop_4201                           ; $4203: $20 $FC
 
     ld   [wEntitiesPosZTable+15], a               ; $4205: $EA $1F $C3
     ld   a, [wPhotos1]                            ; $4208: $FA $0C $DC
@@ -504,14 +504,14 @@ jr_036_42D4:
 
     ld   hl, wEntitiesTypeTable                   ; $4319: $21 $A0 $C3
 
-jr_036_431C:
+.loop_431C:
     ld   a, [hl+]                                 ; $431C: $2A
     cp   $DD                                      ; $431D: $FE $DD
     jr   z, jr_036_4329                           ; $431F: $28 $08
 
     ld   a, l                                     ; $4321: $7D
     and  $0F                                      ; $4322: $E6 $0F
-    jr   nz, jr_036_431C                          ; $4324: $20 $F6
+    jr   nz, .loop_431C                           ; $4324: $20 $F6
 
     call func_036_471E                            ; $4326: $CD $1E $47
 
@@ -1045,7 +1045,7 @@ func_036_4649::
     ld   hl, $FF70                                ; $464A: $21 $70 $FF
     ld   de, wBGPal1                              ; $464D: $11 $10 $DC
 
-jr_036_4650:
+.loop_4650:
     ld   a, [de]                                  ; $4650: $1A
     ld   [hl], $03                                ; $4651: $36 $03
     ld   [de], a                                  ; $4653: $12
@@ -1056,7 +1056,7 @@ jr_036_4650:
     inc  de                                       ; $4658: $13
     ld   a, e                                     ; $4659: $7B
     cp   $90                                      ; $465A: $FE $90
-    jr   nz, jr_036_4650                          ; $465C: $20 $F2
+    jr   nz, .loop_4650                           ; $465C: $20 $F2
 
     ld   a, $01                                   ; $465E: $3E $01
     ld   [wPaletteDataFlags], a                   ; $4660: $EA $D1 $DD
@@ -1068,7 +1068,7 @@ func_036_4665::
     ld   hl, $FF70                                ; $4666: $21 $70 $FF
     ld   de, wBGPal1                              ; $4669: $11 $10 $DC
 
-jr_036_466C:
+.loop_466C:
     ld   [hl], $03                                ; $466C: $36 $03
     ld   a, [de]                                  ; $466E: $1A
     ld   [hl], $00                                ; $466F: $36 $00
@@ -1076,7 +1076,7 @@ jr_036_466C:
     inc  de                                       ; $4672: $13
     ld   a, e                                     ; $4673: $7B
     cp   $90                                      ; $4674: $FE $90
-    jr   nz, jr_036_466C                          ; $4676: $20 $F4
+    jr   nz, .loop_466C                           ; $4676: $20 $F4
 
     ld   a, $01                                   ; $4678: $3E $01
     ld   [wPaletteDataFlags], a                   ; $467A: $EA $D1 $DD
@@ -1783,7 +1783,7 @@ func_036_4A4C::
     ld   l, a                                     ; $4A5C: $6F
     dec  hl                                       ; $4A5D: $2B
 
-jr_036_4A5E:
+.loop_4A5E:
     inc  hl                                       ; $4A5E: $23
     ldh  a, [hMapRoom]                            ; $4A5F: $F0 $F6
     cp   [hl]                                     ; $4A61: $BE
@@ -1792,7 +1792,7 @@ jr_036_4A5E:
     inc  c                                        ; $4A64: $0C
     ld   a, c                                     ; $4A65: $79
     cp   $03                                      ; $4A66: $FE $03
-    jr   nz, jr_036_4A5E                          ; $4A68: $20 $F4
+    jr   nz, .loop_4A5E                           ; $4A68: $20 $F4
 
 jr_036_4A6A:
     ld   hl, Data_036_4A14                        ; $4A6A: $21 $14 $4A
@@ -1848,13 +1848,13 @@ func_036_4A9F::
     ld   de, Data_036_4A97                        ; $4AC3: $11 $97 $4A
     ld   hl, wObjPal7                             ; $4AC6: $21 $80 $DC
 
-jr_036_4AC9:
+.loop_4AC9:
     ld   a, [de]                                  ; $4AC9: $1A
     ld   [hl+], a                                 ; $4ACA: $22
     inc  de                                       ; $4ACB: $13
     ld   a, l                                     ; $4ACC: $7D
     and  $07                                      ; $4ACD: $E6 $07
-    jr   nz, jr_036_4AC9                          ; $4ACF: $20 $F8
+    jr   nz, .loop_4AC9                           ; $4ACF: $20 $F8
 
     xor  a                                        ; $4AD1: $AF
     ldh  [rSVBK], a                               ; $4AD2: $E0 $70
@@ -3236,12 +3236,12 @@ jr_036_53D2:
     add  hl, de                                   ; $53E3: $19
     ld   e, $08                                   ; $53E4: $1E $08
 
-jr_036_53E6:
+.loop_53E6:
     ld   a, [bc]                                  ; $53E6: $0A
     inc  bc                                       ; $53E7: $03
     ld   [hl+], a                                 ; $53E8: $22
     dec  e                                        ; $53E9: $1D
-    jr   nz, jr_036_53E6                          ; $53EA: $20 $FA
+    jr   nz, .loop_53E6                           ; $53EA: $20 $FA
 
     ld   [hl], $00                                ; $53EC: $36 $00
     pop  bc                                       ; $53EE: $C1
@@ -3265,12 +3265,12 @@ jr_036_53E6:
     add  hl, de                                   ; $540F: $19
     ld   e, $08                                   ; $5410: $1E $08
 
-jr_036_5412:
+.loop_5412:
     ld   a, [bc]                                  ; $5412: $0A
     inc  bc                                       ; $5413: $03
     ld   [hl+], a                                 ; $5414: $22
     dec  e                                        ; $5415: $1D
-    jr   nz, jr_036_5412                          ; $5416: $20 $FA
+    jr   nz, .loop_5412                           ; $5416: $20 $FA
 
     ld   [hl], $00                                ; $5418: $36 $00
     pop  bc                                       ; $541A: $C1
@@ -3290,7 +3290,7 @@ func_036_5428::
     ld   hl, $FF70                                ; $542B: $21 $70 $FF
     di                                            ; $542E: $F3
 
-jr_036_542F:
+.loop_542F:
     ld   [hl], $02                                ; $542F: $36 $02
     ld   a, [de]                                  ; $5431: $1A
     ld   [hl], $00                                ; $5432: $36 $00
@@ -3298,7 +3298,7 @@ jr_036_542F:
     inc  de                                       ; $5435: $13
     ld   a, e                                     ; $5436: $7B
     and  $07                                      ; $5437: $E6 $07
-    jr   nz, jr_036_542F                          ; $5439: $20 $F4
+    jr   nz, .loop_542F                           ; $5439: $20 $F4
 
     ld   a, $01                                   ; $543B: $3E $01
     ld   [wPaletteDataFlags], a                   ; $543D: $EA $D1 $DD
@@ -4220,12 +4220,12 @@ func_036_5989::
     xor  $01                                      ; $598E: $EE $01
     ld   de, $FFFF                                ; $5990: $11 $FF $FF
 
-jr_036_5993:
+.loop_5993:
     inc  de                                       ; $5993: $13
     ld   hl, wEntitiesTypeTable                   ; $5994: $21 $A0 $C3
     add  hl, de                                   ; $5997: $19
     cp   [hl]                                     ; $5998: $BE
-    jr   nz, jr_036_5993                          ; $5999: $20 $F8
+    jr   nz, .loop_5993                           ; $5999: $20 $F8
 
     ld   hl, wEntitiesStateTable                  ; $599B: $21 $90 $C2
     add  hl, de                                   ; $599E: $19
@@ -8110,13 +8110,13 @@ func_036_703E::
     ld   hl, wObjPal8                             ; $703E: $21 $88 $DC
     ld   de, Data_036_7036                        ; $7041: $11 $36 $70
 
-jr_036_7044:
+.loop_7044:
     ld   a, [de]                                  ; $7044: $1A
     ld   [hl+], a                                 ; $7045: $22
     inc  de                                       ; $7046: $13
     ld   a, l                                     ; $7047: $7D
     and  $07                                      ; $7048: $E6 $07
-    jr   nz, jr_036_7044                          ; $704A: $20 $F8
+    jr   nz, .loop_7044                           ; $704A: $20 $F8
 
     ld   a, $02                                   ; $704C: $3E $02
     ld   [wPaletteDataFlags], a                   ; $704E: $EA $D1 $DD
@@ -8204,13 +8204,13 @@ ENDC
     add  hl, de                                   ; $70EF: $19
     ld   de, wObjPal2 + 2*2                       ; $70F0: $11 $5C $DC
 
-jr_036_70F3:
+.loop_70F3:
     ld   a, [hl+]                                 ; $70F3: $2A
     ld   [de], a                                  ; $70F4: $12
     inc  de                                       ; $70F5: $13
     ld   a, e                                     ; $70F6: $7B
     and  $03                                      ; $70F7: $E6 $03
-    jr   nz, jr_036_70F3                          ; $70F9: $20 $F8
+    jr   nz, .loop_70F3                           ; $70F9: $20 $F8
 
     ld   a, $02                                   ; $70FB: $3E $02
     ld   [wPaletteDataFlags], a                   ; $70FD: $EA $D1 $DD
@@ -8329,7 +8329,7 @@ label_036_71AD:
     ld   hl, wBButtonSlot                         ; $71B5: $21 $00 $DB
     ld   e, INVENTORY_SLOT_COUNT                  ; $71B8: $1E $0C
 
-jr_036_71BA:
+.loop_71BA:
     ld   a, [hl+]                                 ; $71BA: $2A
     cp   INVENTORY_SWORD                          ; $71BB: $FE $01
     jr   z, jr_036_71C7                           ; $71BD: $28 $08
@@ -8337,7 +8337,7 @@ jr_036_71BA:
     dec  e                                        ; $71BF: $1D
     ld   a, e                                     ; $71C0: $7B
     and  a                                        ; $71C1: $A7
-    jr   nz, jr_036_71BA                          ; $71C2: $20 $F6
+    jr   nz, .loop_71BA                           ; $71C2: $20 $F6
 
     jp   IsInteractiveMotionAllowed.allow         ; $71C4: $C3 $88 $72
 

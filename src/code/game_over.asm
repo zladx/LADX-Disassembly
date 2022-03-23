@@ -177,10 +177,10 @@ jr_001_42F5::
     ld   hl, wEntitiesStatusTable                 ; $42F6: $21 $80 $C2 ; $42F6: $21 $80 $C2
     ld   e, $10                                   ; $42F9: $1E $10 ; $42F9: $1E $10
 
-jr_001_42FB::
+.loop_42FB::
     ld   [hl+], a                                 ; $42FB: $22 ; $42FB: $22
     dec  e                                        ; $42FC: $1D ; $42FC: $1D
-    jr   nz, jr_001_42FB                          ; $42FD: $20 $FC ; $42FD: $20 $FC
+    jr   nz, .loop_42FB                           ; $42FD: $20 $FC ; $42FD: $20 $FC
 
     ld   [wOBJ0Palette], a                        ; $42FF: $EA $98 $DB ; $42FF: $EA $98 $DB
     ld   [wOBJ1Palette], a                        ; $4302: $EA $99 $DB ; $4302: $EA $99 $DB

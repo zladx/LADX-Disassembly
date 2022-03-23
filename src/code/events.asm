@@ -491,7 +491,7 @@ CheckKillInOrderTrigger::
     ld   c, $00                                   ; $5FEB: $0E $00
     ld   hl, wDBB6                                ; $5FED: $21 $B6 $DB
 
-jr_002_5FF0:
+.loop_5FF0:
     ld   a, [hl+]                                 ; $5FF0: $2A
     cp   c                                        ; $5FF1: $B9
     ret  nz                                       ; $5FF2: $C0
@@ -499,7 +499,7 @@ jr_002_5FF0:
     inc  c                                        ; $5FF3: $0C
     ld   a, c                                     ; $5FF4: $79
     cp   $03                                      ; $5FF5: $FE $03
-    jr   nz, jr_002_5FF0                          ; $5FF7: $20 $F7
+    jr   nz, .loop_5FF0                           ; $5FF7: $20 $F7
 
     jp   MarkTriggerAsResolved                    ; $5FF9: $C3 $60 $0C
 

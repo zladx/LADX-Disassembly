@@ -599,9 +599,9 @@ func_018_59AE::
     ld   e, $10                                   ; $59AE: $1E $10
     ld   hl, wLinkDirectionHistory                ; $59B0: $21 $B5 $D1
 
-jr_018_59B3:
+.loop_59B3:
     ld   [hl+], a                                 ; $59B3: $22
     dec  e                                        ; $59B4: $1D
-    jr   nz, jr_018_59B3                          ; $59B5: $20 $FC
+    jr   nz, .loop_59B3                           ; $59B5: $20 $FC
 
     ret                                           ; $59B7: $C9

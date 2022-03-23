@@ -1537,11 +1537,11 @@ label_005_7777:
     ld   e, $80                                   ; $7777: $1E $80
     ld   hl, wD100                                ; $7779: $21 $00 $D1
 
-jr_005_777C:
+.loop_777C:
     xor  a                                        ; $777C: $AF
     ld   [hl+], a                                 ; $777D: $22
     dec  e                                        ; $777E: $1D
-    jr   nz, jr_005_777C                          ; $777F: $20 $FB
+    jr   nz, .loop_777C                           ; $777F: $20 $FB
 
     ret                                           ; $7781: $C9
 

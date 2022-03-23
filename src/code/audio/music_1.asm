@@ -14,10 +14,10 @@ PlayMusicTrack_1B::
 label_01B_4009:
     ld   hl, wMusicTranspose                      ; $4009: $21 $00 $D3
 
-jr_01B_400C:
+.loop_400C:
     ld   [hl], $00                                ; $400C: $36 $00
     inc  l                                        ; $400E: $2C
-    jr   nz, jr_01B_400C                          ; $400F: $20 $FB
+    jr   nz, .loop_400C                           ; $400F: $20 $FB
 
     ld   a, $80                                   ; $4011: $3E $80
     ldh  [rNR52], a                               ; $4013: $E0 $26
@@ -93,12 +93,12 @@ jr_01B_406A:
     ld   b, $04                                   ; $406A: $06 $04
     ld   c, $20                                   ; $406C: $0E $20
 
-jr_01B_406E:
+.loop_406E:
     ld   a, [hl+]                                 ; $406E: $2A
     ld   [c], a                                   ; $406F: $E2
     inc  c                                        ; $4070: $0C
     dec  b                                        ; $4071: $05
-    jr   nz, jr_01B_406E                          ; $4072: $20 $FA
+    jr   nz, .loop_406E                           ; $4072: $20 $FA
 
     ld   a, [hl]                                  ; $4074: $7E
     ld   [de], a                                  ; $4075: $12
@@ -368,13 +368,13 @@ label_01B_42AB:
     push bc                                       ; $42C1: $C5
     ld   c, $30                                   ; $42C2: $0E $30
 
-jr_01B_42C4:
+.loop_42C4:
     ld   a, [hl+]                                 ; $42C4: $2A
     ld   [c], a                                   ; $42C5: $E2
     inc  c                                        ; $42C6: $0C
     ld   a, c                                     ; $42C7: $79
     cp   $40                                      ; $42C8: $FE $40
-    jr   nz, jr_01B_42C4                          ; $42CA: $20 $F8
+    jr   nz, .loop_42C4                           ; $42CA: $20 $F8
 
     ld   a, $80                                   ; $42CC: $3E $80
     ldh  [rNR30], a                               ; $42CE: $E0 $1A
@@ -386,7 +386,7 @@ label_01B_42D5:
     ld   a, [wActiveMusicIndex]                   ; $42D5: $FA $69 $D3
     ld   hl, Data_1B_418B                         ; $42D8: $21 $8B $41
 
-jr_01B_42DB:
+.loop_42DB:
     dec  a                                        ; $42DB: $3D
     jr   z, jr_01B_42E6                           ; $42DC: $28 $08
 
@@ -396,7 +396,7 @@ jr_01B_42DB:
     inc  hl                                       ; $42E1: $23
     inc  hl                                       ; $42E2: $23
     inc  hl                                       ; $42E3: $23
-    jr   jr_01B_42DB                              ; $42E4: $18 $F5
+    jr   .loop_42DB                               ; $42E4: $18 $F5
 
 jr_01B_42E6:
     ld   bc, wD355                                ; $42E6: $01 $55 $D3

@@ -276,7 +276,7 @@ jr_002_6848:
     ld   c, $00                                   ; $6858: $0E $00
     ld   d, c                                     ; $685A: $51
 
-jr_002_685B:
+.loop_685B:
     push hl                                       ; $685B: $E5
     ld   hl, wDungeonMinimap                      ; $685C: $21 $80 $D4
     add  hl, de                                   ; $685F: $19
@@ -291,7 +291,7 @@ jr_002_685B:
 
     inc  hl                                       ; $686A: $23
     and  $03                                      ; $686B: $E6 $03
-    jr   nz, jr_002_685B                          ; $686D: $20 $EC
+    jr   nz, .loop_685B                           ; $686D: $20 $EC
 
     ld   a, e                                     ; $686F: $7B
     add  $04                                      ; $6870: $C6 $04
@@ -302,7 +302,7 @@ jr_002_685B:
     ld   a, $00                                   ; $6877: $3E $00
     adc  h                                        ; $6879: $8C
     ld   h, a                                     ; $687A: $67
-    jr   jr_002_685B                              ; $687B: $18 $DE
+    jr   .loop_685B                               ; $687B: $18 $DE
 
 jr_002_687D:
     xor  a                                        ; $687D: $AF
@@ -318,7 +318,7 @@ jr_002_6885:
     ld   c, $00                                   ; $6885: $0E $00
     ld   d, c                                     ; $6887: $51
 
-jr_002_6888:
+.loop_6888:
     push hl                                       ; $6888: $E5
     ld   hl, wDungeonMinimap                      ; $6889: $21 $80 $D4
     add  hl, de                                   ; $688C: $19
@@ -333,7 +333,7 @@ jr_002_6888:
 
     inc  hl                                       ; $6897: $23
     and  $03                                      ; $6898: $E6 $03
-    jr   nz, jr_002_6888                          ; $689A: $20 $EC
+    jr   nz, .loop_6888                           ; $689A: $20 $EC
 
     ld   a, e                                     ; $689C: $7B
     add  $04                                      ; $689D: $C6 $04
@@ -344,7 +344,7 @@ jr_002_6888:
     ld   a, $00                                   ; $68A4: $3E $00
     adc  h                                        ; $68A6: $8C
     ld   h, a                                     ; $68A7: $67
-    jr   jr_002_6888                              ; $68A8: $18 $DE
+    jr   .loop_6888                               ; $68A8: $18 $DE
 
 jr_002_68AA:
     ret                                           ; $68AA: $C9

@@ -299,12 +299,12 @@ func_004_4B37::
     add  hl, bc                                   ; $4B47: $09
     ld   c, $04                                   ; $4B48: $0E $04
 
-jr_004_4B4A:
+.loop_4B4A:
     ld   a, [de]                                  ; $4B4A: $1A
     inc  de                                       ; $4B4B: $13
     ld   [hl+], a                                 ; $4B4C: $22
     dec  c                                        ; $4B4D: $0D
-    jr   nz, jr_004_4B4A                          ; $4B4E: $20 $FA
+    jr   nz, .loop_4B4A                           ; $4B4E: $20 $FA
 
     pop  bc                                       ; $4B50: $C1
     ret                                           ; $4B51: $C9

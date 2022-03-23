@@ -59,7 +59,7 @@ jr_018_404A:
     ld   e, INVENTORY_SLOT_COUNT -1               ; $405A: $1E $0B
     ld   hl, wBButtonSlot                         ; $405C: $21 $00 $DB
 
-jr_018_405F:
+.loop_405F:
     ld   a, [hl+]                                 ; $405F: $2A
     cp   INVENTORY_OCARINA                        ; $4060: $FE $09
     jr   z, jr_018_4074                           ; $4062: $28 $10
@@ -67,7 +67,7 @@ jr_018_405F:
     dec  e                                        ; $4064: $1D
     ld   a, e                                     ; $4065: $7B
     cp   $FF                                      ; $4066: $FE $FF
-    jr   nz, jr_018_405F                          ; $4068: $20 $F5
+    jr   nz, .loop_405F                           ; $4068: $20 $F5
 
     ld   a, $DB                                   ; $406A: $3E $DB
     call func_018_4087                            ; $406C: $CD $87 $40

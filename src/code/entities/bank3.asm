@@ -633,13 +633,13 @@ EntityInitTarin::
     ld   hl, wObjPal8                             ; $4AFB: $21 $88 $DC
     ld   de, Data_003_4AC6                        ; $4AFE: $11 $C6 $4A
 
-jr_003_4B01:
+.loop_4B01:
     ld   a, [de]                                  ; $4B01: $1A
     ld   [hl+], a                                 ; $4B02: $22
     inc  de                                       ; $4B03: $13
     ld   a, l                                     ; $4B04: $7D
     and  $07                                      ; $4B05: $E6 $07
-    jr   nz, jr_003_4B01                          ; $4B07: $20 $F8
+    jr   nz, .loop_4B01                           ; $4B07: $20 $F8
 
     xor  a                                        ; $4B09: $AF
     ldh  [rSVBK], a                               ; $4B0A: $E0 $70
@@ -5082,7 +5082,7 @@ func_003_6771::
     ld   c, $03                                   ; $67FE: $0E $03
     ld   b, $00                                   ; $6800: $06 $00
 
-jr_003_6802:
+.loop_6802:
     call func_003_6822                            ; $6802: $CD $22 $68
     ld   hl, Data_003_6769                        ; $6805: $21 $69 $67
     add  hl, bc                                   ; $6808: $09
@@ -5099,7 +5099,7 @@ jr_003_6802:
     dec  c                                        ; $6819: $0D
     ld   a, c                                     ; $681A: $79
     cp   $FF                                      ; $681B: $FE $FF
-    jr   nz, jr_003_6802                          ; $681D: $20 $E3
+    jr   nz, .loop_6802                           ; $681D: $20 $E3
 
     jp   label_003_68E4                           ; $681F: $C3 $E4 $68
 

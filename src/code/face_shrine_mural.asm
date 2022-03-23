@@ -22,7 +22,7 @@ FaceShrineMuralStage0Handler::
     ld   c, $80                                   ; $6B15: $0E $80
     di                                            ; $6B17: $F3
 
-jr_001_6B18::
+.loop_6B18::
     xor  a                                        ; $6B18: $AF
     ld   [rSVBK], a                               ; $6B19: $E0 $70
     ld   b, [hl]                                  ; $6B1B: $46
@@ -33,7 +33,7 @@ jr_001_6B18::
     dec  c                                        ; $6B22: $0D
     ld   a, c                                     ; $6B23: $79
     and  a                                        ; $6B24: $A7
-    jr   nz, jr_001_6B18                          ; $6B25: $20 $F1
+    jr   nz, .loop_6B18                           ; $6B25: $20 $F1
     xor  a                                        ; $6B27: $AF
     ld   [rSVBK], a                               ; $6B28: $E0 $70
     ei                                            ; $6B2A: $FB

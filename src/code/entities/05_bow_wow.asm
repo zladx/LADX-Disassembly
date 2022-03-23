@@ -136,10 +136,10 @@ func_005_40AF::
     ld   e, $10                                   ; $40BC: $1E $10
     ld   hl, wD100                                ; $40BE: $21 $00 $D1
 
-jr_005_40C1:
+.loop_40C1:
     ld   [hl+], a                                 ; $40C1: $22
     dec  e                                        ; $40C2: $1D
-    jr   nz, jr_005_40C1                          ; $40C3: $20 $FC
+    jr   nz, .loop_40C1                           ; $40C3: $20 $FC
 
     ld   hl, wEntitiesPosYTable                   ; $40C5: $21 $10 $C2
     add  hl, bc                                   ; $40C8: $09
@@ -155,10 +155,10 @@ jr_005_40C1:
     ld   e, $10                                   ; $40D7: $1E $10
     ld   hl, wD110                                ; $40D9: $21 $10 $D1
 
-jr_005_40DC:
+.loop_40DC:
     ld   [hl+], a                                 ; $40DC: $22
     dec  e                                        ; $40DD: $1D
-    jr   nz, jr_005_40DC                          ; $40DE: $20 $FC
+    jr   nz, .loop_40DC                           ; $40DE: $20 $FC
 
     ld   hl, wEntitiesPrivateState4Table          ; $40E0: $21 $40 $C4
     add  hl, bc                                   ; $40E3: $09

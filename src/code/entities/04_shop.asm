@@ -223,12 +223,12 @@ jr_004_7872:
     ld   de, wC505                                ; $787C: $11 $05 $C5
     ld   c, $04                                   ; $787F: $0E $04
 
-jr_004_7881:
+.loop_7881:
     ld   a, [hl+]                                 ; $7881: $2A
     ld   [de], a                                  ; $7882: $12
     inc  de                                       ; $7883: $13
     dec  c                                        ; $7884: $0D
-    jr   nz, jr_004_7881                          ; $7885: $20 $FA
+    jr   nz, .loop_7881                           ; $7885: $20 $FA
 
     pop  bc                                       ; $7887: $C1
     call IncrementEntityState                     ; $7888: $CD $12 $3B
@@ -361,12 +361,12 @@ jr_004_792B:
     ld   de, wDrawCommand                         ; $7934: $11 $01 $D6
     ld   c, $0D                                   ; $7937: $0E $0D
 
-jr_004_7939:
+.loop_7939:
     ld   a, [hl+]                                 ; $7939: $2A
     ld   [de], a                                  ; $793A: $12
     inc  de                                       ; $793B: $13
     dec  c                                        ; $793C: $0D
-    jr   nz, jr_004_7939                          ; $793D: $20 $FA
+    jr   nz, .loop_7939                           ; $793D: $20 $FA
 
     pop  bc                                       ; $793F: $C1
 
@@ -439,12 +439,12 @@ func_004_798B::
     push bc                                       ; $799E: $C5
     ld   c, $0B                                   ; $799F: $0E $0B
 
-jr_004_79A1:
+.loop_79A1:
     ld   a, [hl+]                                 ; $79A1: $2A
     ld   [de], a                                  ; $79A2: $12
     inc  de                                       ; $79A3: $13
     dec  c                                        ; $79A4: $0D
-    jr   nz, jr_004_79A1                          ; $79A5: $20 $FA
+    jr   nz, .loop_79A1                           ; $79A5: $20 $FA
 
     xor  a                                        ; $79A7: $AF
     ld   [de], a                                  ; $79A8: $12
@@ -470,13 +470,13 @@ jr_004_79BB:
     ld   hl, wBButtonSlot                         ; $79BF: $21 $00 $DB
     ld   d, INVENTORY_SLOT_COUNT                  ; $79C2: $16 $0C
 
-jr_004_79C4:
+.loop_79C4:
     ld   a, [hl+]                                 ; $79C4: $2A
     cp   INVENTORY_BOMBS                          ; $79C5: $FE $02
     jr   z, jr_004_79CE                           ; $79C7: $28 $05
 
     dec  d                                        ; $79C9: $15
-    jr   nz, jr_004_79C4                          ; $79CA: $20 $F8
+    jr   nz, .loop_79C4                           ; $79CA: $20 $F8
 
     jr   jr_004_7A0C                              ; $79CC: $18 $3E
 
@@ -495,13 +495,13 @@ jr_004_79D9:
     ld   hl, wBButtonSlot                         ; $79DD: $21 $00 $DB
     ld   d, INVENTORY_SLOT_COUNT                  ; $79E0: $16 $0C
 
-jr_004_79E2:
+.loop_79E2:
     ld   a, [hl+]                                 ; $79E2: $2A
     cp   INVENTORY_BOW                            ; $79E3: $FE $05
     jr   z, jr_004_79EC                           ; $79E5: $28 $05
 
     dec  d                                        ; $79E7: $15
-    jr   nz, jr_004_79E2                          ; $79E8: $20 $F8
+    jr   nz, .loop_79E2                           ; $79E8: $20 $F8
 
     jr   jr_004_7A0C                              ; $79EA: $18 $20
 
@@ -725,13 +725,13 @@ func_004_7AED::
     ld   hl, wObjPal8                             ; $7B2C: $21 $88 $DC
     ld   de, Data_004_7AE5                        ; $7B2F: $11 $E5 $7A
 
-jr_004_7B32:
+.loop_7B32:
     ld   a, [de]                                  ; $7B32: $1A
     ld   [hl+], a                                 ; $7B33: $22
     inc  de                                       ; $7B34: $13
     ld   a, l                                     ; $7B35: $7D
     and  $07                                      ; $7B36: $E6 $07
-    jr   nz, jr_004_7B32                          ; $7B38: $20 $F8
+    jr   nz, .loop_7B32                           ; $7B38: $20 $F8
 
     ld   a, $02                                   ; $7B3A: $3E $02
     ld   [wPaletteDataFlags], a                   ; $7B3C: $EA $D1 $DD

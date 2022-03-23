@@ -121,14 +121,14 @@ label_007_4328:
 func_007_4335::
     ld   hl, wEntitiesTypeTable                   ; $4335: $21 $A0 $C3
 
-jr_007_4338:
+.loop_4338:
     ld   a, [hl+]                                 ; $4338: $2A
     cp   $FA                                      ; $4339: $FE $FA
     jr   z, jr_007_4342                           ; $433B: $28 $05
 
     ld   a, l                                     ; $433D: $7D
     and  $0F                                      ; $433E: $E6 $0F
-    jr   nz, jr_007_4338                          ; $4340: $20 $F6
+    jr   nz, .loop_4338                           ; $4340: $20 $F6
 
 jr_007_4342:
     ld   a, l                                     ; $4342: $7D

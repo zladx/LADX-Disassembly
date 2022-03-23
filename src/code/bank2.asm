@@ -1290,7 +1290,7 @@ LinkMotionUnstuckingHandler::
     add  $10                                      ; $4974: $C6 $10
     ldh  [hLinkPositionZ], a                      ; $4976: $E0 $A2
 
-jr_002_4978:
+.loop_4978:
     ld   a, $FF                                   ; $4978: $3E $FF
     ldh  [hLinkSpeedY], a                         ; $497A: $E0 $9B
     xor  a                                        ; $497C: $AF
@@ -1305,14 +1305,14 @@ jr_002_4978:
     call CheckForLedgeJump                        ; $498D: $CD $45 $6E
     ldh  a, [hObjectUnderEntity]                  ; $4990: $F0 $AF
     cp   $E1                                      ; $4992: $FE $E1
-    jr   z, jr_002_4978                           ; $4994: $28 $E2
+    jr   z, .loop_4978                            ; $4994: $28 $E2
 
     cp   $61                                      ; $4996: $FE $61
     jr   z, jr_002_49A0                           ; $4998: $28 $06
 
     ld   a, [wCollisionType]                      ; $499A: $FA $33 $C1
     and  a                                        ; $499D: $A7
-    jr   nz, jr_002_4978                          ; $499E: $20 $D8
+    jr   nz, .loop_4978                           ; $499E: $20 $D8
 
 jr_002_49A0:
     ld   a, $01                                   ; $49A0: $3E $01
@@ -2085,14 +2085,14 @@ func_002_4E2C::
     ld   de, wObjPal8                             ; $4E32: $11 $88 $DC
     ld   c, $00                                   ; $4E35: $0E $00
 
-jr_002_4E37:
+.loop_4E37:
     ld   a, [hl+]                                 ; $4E37: $2A
     ld   [de], a                                  ; $4E38: $12
     inc  de                                       ; $4E39: $13
     inc  c                                        ; $4E3A: $0C
     ld   a, c                                     ; $4E3B: $79
     cp   $08                                      ; $4E3C: $FE $08
-    jr   c, jr_002_4E37                           ; $4E3E: $38 $F7
+    jr   c, .loop_4E37                            ; $4E3E: $38 $F7
 
     ei                                            ; $4E40: $FB
     ld   a, $02                                   ; $4E41: $3E $02
@@ -3493,7 +3493,7 @@ RenderTranscientLavaSplash::
     push bc                                       ; $561B: $C5
     ld   c, $04                                   ; $561C: $0E $04
 
-jr_002_561E:
+.loop_561E:
     ldh  a, [hMultiPurpose1]                      ; $561E: $F0 $D8
     ld   [de], a                                  ; $5620: $12
     inc  de                                       ; $5621: $13
@@ -3514,7 +3514,7 @@ jr_002_561E:
     ld   [de], a                                  ; $5637: $12
     inc  de                                       ; $5638: $13
     dec  c                                        ; $5639: $0D
-    jr   nz, jr_002_561E                          ; $563A: $20 $E2
+    jr   nz, .loop_561E                           ; $563A: $20 $E2
 
     pop  bc                                       ; $563C: $C1
     ld   a, $04                                   ; $563D: $3E $04
@@ -4136,12 +4136,12 @@ func_002_5A7B::
 
     xor  a                                        ; $5A8C: $AF
 
-jr_002_5A8D:
+.loop_5A8D:
     add  $04                                      ; $5A8D: $C6 $04
     ld   e, a                                     ; $5A8F: $5F
     ld   d, $00                                   ; $5A90: $16 $00
     dec  c                                        ; $5A92: $0D
-    jr   nz, jr_002_5A8D                          ; $5A93: $20 $F8
+    jr   nz, .loop_5A8D                           ; $5A93: $20 $F8
 
 jr_002_5A95:
     ld   hl, Data_002_5A1C                        ; $5A95: $21 $1C $5A
@@ -4269,7 +4269,7 @@ jr_002_5B31:
     and  $07                                      ; $5B49: $E6 $07
     ld   c, a                                     ; $5B4B: $4F
 
-jr_002_5B4C:
+.loop_5B4C:
     ld   hl, Data_002_5A40                        ; $5B4C: $21 $40 $5A
     add  hl, bc                                   ; $5B4F: $09
     ld   a, [hl]                                  ; $5B50: $7E
@@ -4291,7 +4291,7 @@ jr_002_5B4C:
     add  $08                                      ; $5B68: $C6 $08
     ldh  [hMultiPurposeE], a                      ; $5B6A: $E0 $E5
     ld   c, a                                     ; $5B6C: $4F
-    jr   jr_002_5B4C                              ; $5B6D: $18 $DD
+    jr   .loop_5B4C                               ; $5B6D: $18 $DD
 
 jr_002_5B6F:
     call GetRoomStatusAddress                     ; $5B6F: $CD $9F $5B
@@ -4394,12 +4394,12 @@ func_002_5C04::
     ld   c, a                                     ; $5C17: $4F
     xor  a                                        ; $5C18: $AF
 
-jr_002_5C19:
+.loop_5C19:
     add  $04                                      ; $5C19: $C6 $04
     ld   e, a                                     ; $5C1B: $5F
     ld   d, $00                                   ; $5C1C: $16 $00
     dec  c                                        ; $5C1E: $0D
-    jr   nz, jr_002_5C19                          ; $5C1F: $20 $F8
+    jr   nz, .loop_5C19                           ; $5C1F: $20 $F8
 
 jr_002_5C21:
     ld   hl, Data_002_5BE0                        ; $5C21: $21 $E0 $5B
@@ -4547,7 +4547,7 @@ jr_002_5CE5:
     ld   a, [hl]                                  ; $5CFB: $7E
     ldh  [hMultiPurpose0], a                      ; $5CFC: $E0 $D7
 
-jr_002_5CFE:
+.loop_5CFE:
     ld   hl, Data_002_5BF4                        ; $5CFE: $21 $F4 $5B
     add  hl, bc                                   ; $5D01: $09
     ld   a, [hl]                                  ; $5D02: $7E
@@ -4569,7 +4569,7 @@ jr_002_5CFE:
     add  $04                                      ; $5D1A: $C6 $04
     ldh  [hMultiPurposeE], a                      ; $5D1C: $E0 $E5
     ld   c, a                                     ; $5D1E: $4F
-    jr   jr_002_5CFE                              ; $5D1F: $18 $DD
+    jr   .loop_5CFE                               ; $5D1F: $18 $DD
 
 jr_002_5D21:
     ld   hl, wOverworldRoomStatus                 ; $5D21: $21 $00 $D8
@@ -6336,7 +6336,7 @@ jr_002_6E69:
     ld   c, a                                     ; $6E6F: $4F
     ld   b, $00                                   ; $6E70: $06 $00
 
-jr_002_6E72:
+.loop_6E72:
     push de                                       ; $6E72: $D5
     push bc                                       ; $6E73: $C5
     call func_002_6F2C                            ; $6E74: $CD $2C $6F
@@ -6344,7 +6344,7 @@ jr_002_6E72:
     pop  de                                       ; $6E78: $D1
     inc  bc                                       ; $6E79: $03
     dec  e                                        ; $6E7A: $1D
-    jr   nz, jr_002_6E72                          ; $6E7B: $20 $F5
+    jr   nz, .loop_6E72                           ; $6E7B: $20 $F5
 
     ldh  a, [hLinkSpeedY]                         ; $6E7D: $F0 $9B
     and  $80                                      ; $6E7F: $E6 $80
@@ -6432,7 +6432,7 @@ jr_002_6EED:
     ld   c, a                                     ; $6EF3: $4F
     ld   b, $00                                   ; $6EF4: $06 $00
 
-jr_002_6EF6:
+.loop_6EF6:
     push de                                       ; $6EF6: $D5
     push bc                                       ; $6EF7: $C5
     call func_002_6F2C                            ; $6EF8: $CD $2C $6F
@@ -6440,7 +6440,7 @@ jr_002_6EF6:
     pop  de                                       ; $6EFC: $D1
     inc  bc                                       ; $6EFD: $03
     dec  e                                        ; $6EFE: $1D
-    jr   nz, jr_002_6EF6                          ; $6EFF: $20 $F5
+    jr   nz, .loop_6EF6                           ; $6EFF: $20 $F5
 
     ld   a, [wCollisionType]                      ; $6F01: $FA $33 $C1
     and  COLLISION_TYPE_HORIZONTAL                ; $6F04: $E6 $0C
@@ -7304,14 +7304,14 @@ ENDC
 
     ld   hl, wBButtonSlot                         ; $73F3: $21 $00 $DB
 
-jr_002_73F6:
+.loop_73F6:
     ld   a, [hl+]                                 ; $73F6: $2A
     cp   INVENTORY_POWER_BRACELET                 ; $73F7: $FE $03
     jr   z, jr_002_7402                           ; $73F9: $28 $07
 
     ld   a, l                                     ; $73FB: $7D
     cp   $0C                                      ; $73FC: $FE $0C
-    jr   nz, jr_002_73F6                          ; $73FE: $20 $F6
+    jr   nz, .loop_73F6                           ; $73FE: $20 $F6
 
     jr   jr_002_7415                              ; $7400: $18 $13
 

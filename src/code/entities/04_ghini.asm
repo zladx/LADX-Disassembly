@@ -33,16 +33,16 @@ jr_004_5C16:
     call func_004_6E35                            ; $5C20: $CD $35 $6E
     add  $10                                      ; $5C23: $C6 $10
     cp   $20                                      ; $5C25: $FE $20
-    jr   nc, jr_004_5C42                          ; $5C27: $30 $19
+    jr   nc, ret_004_5C42                         ; $5C27: $30 $19
 
     call func_004_6E45                            ; $5C29: $CD $45 $6E
     add  $10                                      ; $5C2C: $C6 $10
     cp   $20                                      ; $5C2E: $FE $20
-    jr   nc, jr_004_5C42                          ; $5C30: $30 $10
+    jr   nc, ret_004_5C42                         ; $5C30: $30 $10
 
     ld   a, [wCollisionType]                      ; $5C32: $FA $33 $C1
     and  a                                        ; $5C35: $A7
-    jr   z, jr_004_5C42                           ; $5C36: $28 $0A
+    jr   z, ret_004_5C42                          ; $5C36: $28 $0A
 
     call IncrementEntityState                     ; $5C38: $CD $12 $3B
     ld   [hl], b                                  ; $5C3B: $70
@@ -50,7 +50,7 @@ jr_004_5C16:
     add  hl, bc                                   ; $5C3F: $09
     ld   [hl], $30                                ; $5C40: $36 $30
 
-jr_004_5C42:
+ret_004_5C42:
     ret                                           ; $5C42: $C9
 
 jr_004_5C43:
@@ -82,7 +82,7 @@ func_004_5C63::
     add  hl, bc                                   ; $5C6F: $09
     ld   a, [hl]                                  ; $5C70: $7E
     and  a                                        ; $5C71: $A7
-    jp   nz, jr_004_5D07                          ; $5C72: $C2 $07 $5D
+    jp   nz, ret_004_5D07                         ; $5C72: $C2 $07 $5D
 
     call label_3B44                               ; $5C75: $CD $44 $3B
     call GetEntityTransitionCountdown             ; $5C78: $CD $05 $0C
@@ -114,7 +114,7 @@ jr_004_5CA0:
     ldh  a, [hFrameCounter]                       ; $5CA0: $F0 $E7
     xor  c                                        ; $5CA2: $A9
     and  $03                                      ; $5CA3: $E6 $03
-    jr   nz, jr_004_5D07                          ; $5CA5: $20 $60
+    jr   nz, ret_004_5D07                         ; $5CA5: $20 $60
 
     ld   hl, wEntitiesPrivateState1Table          ; $5CA7: $21 $B0 $C2
     add  hl, bc                                   ; $5CAA: $09
@@ -193,25 +193,25 @@ jr_004_5CEF:
 jr_004_5D06:
     dec  [hl]                                     ; $5D06: $35
 
-jr_004_5D07:
+ret_004_5D07:
     ret                                           ; $5D07: $C9
 
 func_004_5D08::
     ldh  a, [hFrameCounter]                       ; $5D08: $F0 $E7
     and  $03                                      ; $5D0A: $E6 $03
-    jr   nz, jr_004_5D25                          ; $5D0C: $20 $17
+    jr   nz, ret_004_5D25                         ; $5D0C: $20 $17
 
     ld   hl, wEntitiesPosZTable                   ; $5D0E: $21 $10 $C3
     add  hl, bc                                   ; $5D11: $09
     ld   a, [hl]                                  ; $5D12: $7E
     cp   $10                                      ; $5D13: $FE $10
-    jr   z, jr_004_5D25                           ; $5D15: $28 $0E
+    jr   z, ret_004_5D25                          ; $5D15: $28 $0E
 
     bit  7, a                                     ; $5D17: $CB $7F
     jr   z, jr_004_5D1E                           ; $5D19: $28 $03
 
     inc  [hl]                                     ; $5D1B: $34
-    jr   jr_004_5D25                              ; $5D1C: $18 $07
+    jr   ret_004_5D25                             ; $5D1C: $18 $07
 
 jr_004_5D1E:
     cp   $10                                      ; $5D1E: $FE $10
@@ -223,7 +223,7 @@ jr_004_5D1E:
 jr_004_5D24:
     dec  [hl]                                     ; $5D24: $35
 
-jr_004_5D25:
+ret_004_5D25:
     ret                                           ; $5D25: $C9
 
 Data_004_5D26::

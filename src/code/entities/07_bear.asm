@@ -112,7 +112,7 @@ jr_007_4C45:
 func_007_4C49::
     ld   a, [wDialogState]                        ; $4C49: $FA $9F $C1
     and  a                                        ; $4C4C: $A7
-    jr   nz, jr_007_4C6F                          ; $4C4D: $20 $20
+    jr   nz, ret_007_4C6F                         ; $4C4D: $20 $20
 
     call IncrementEntityState                     ; $4C4F: $CD $12 $3B
     ld   a, [wDialogAskSelectionIndex]            ; $4C52: $FA $77 $C1
@@ -132,22 +132,22 @@ jr_007_4C5E:
     call GetEntityTransitionCountdown             ; $4C6A: $CD $05 $0C
     ld   [hl], $70                                ; $4C6D: $36 $70
 
-jr_007_4C6F:
+ret_007_4C6F:
     ret                                           ; $4C6F: $C9
 
 func_007_4C70::
     call GetEntityTransitionCountdown             ; $4C70: $CD $05 $0C
-    jr   nz, jr_007_4C82                          ; $4C73: $20 $0D
+    jr   nz, ret_007_4C82                         ; $4C73: $20 $0D
 
     ld   a, [wDialogState]                        ; $4C75: $FA $9F $C1
     and  a                                        ; $4C78: $A7
-    jr   nz, jr_007_4C82                          ; $4C79: $20 $07
+    jr   nz, ret_007_4C82                         ; $4C79: $20 $07
 
     call func_007_4C43                            ; $4C7B: $CD $43 $4C
     call IncrementEntityState                     ; $4C7E: $CD $12 $3B
     ld   [hl], b                                  ; $4C81: $70
 
-jr_007_4C82:
+ret_007_4C82:
     ret                                           ; $4C82: $C9
 
 func_007_4C83::

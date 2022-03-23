@@ -80,7 +80,7 @@ GrimCreeperState1Handler::
 
 GrimCreeperState2Handler::
     call GetEntityTransitionCountdown             ; $7059: $CD $05 $0C
-    jr   nz, jr_018_7088                          ; $705C: $20 $2A
+    jr   nz, ret_018_7088                         ; $705C: $20 $2A
 
     ld   [hl], $FF                                ; $705E: $36 $FF
     ld   hl, wEntitiesOptions1Table               ; $7060: $21 $30 $C4
@@ -114,7 +114,7 @@ jr_018_707F:
 
     jp   IncrementEntityState                     ; $7085: $C3 $12 $3B
 
-jr_018_7088:
+ret_018_7088:
     ret                                           ; $7088: $C9
 
 Data_018_7089::

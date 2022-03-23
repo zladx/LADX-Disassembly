@@ -277,7 +277,7 @@ func_004_7020::
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7022: $E0 $A1
     ld   a, [wDialogState]                        ; $7024: $FA $9F $C1
     and  a                                        ; $7027: $A7
-    jr   nz, jr_004_705C                          ; $7028: $20 $32
+    jr   nz, ret_004_705C                         ; $7028: $20 $32
 
     ld   a, [wDialogIndex]                        ; $702A: $FA $73 $C1
     cp   $F8                                      ; $702D: $FE $F8
@@ -311,7 +311,7 @@ label_004_7056:
     add  hl, bc                                   ; $7059: $09
     ld   [hl], $01                                ; $705A: $36 $01
 
-jr_004_705C:
+ret_004_705C:
     ret                                           ; $705C: $C9
 
 jr_004_705D:
@@ -417,14 +417,14 @@ jr_004_70CA:
 jr_004_70F4:
     ldh  a, [hPressedButtonsMask]                 ; $70F4: $F0 $CB
     and  $20                                      ; $70F6: $E6 $20
-    jr   z, jr_004_710B                           ; $70F8: $28 $11
+    jr   z, ret_004_710B                          ; $70F8: $28 $11
 
     ldh  a, [hLinkPositionX]                      ; $70FA: $F0 $98
     cp   $20                                      ; $70FC: $FE $20
-    jr   c, jr_004_710B                           ; $70FE: $38 $0B
+    jr   c, ret_004_710B                          ; $70FE: $38 $0B
 
     cp   $30                                      ; $7100: $FE $30
-    jr   nc, jr_004_710B                          ; $7102: $30 $07
+    jr   nc, ret_004_710B                         ; $7102: $30 $07
 
 label_004_7104:
     call IncrementEntityState                     ; $7104: $CD $12 $3B
@@ -433,7 +433,7 @@ func_004_7107::
     ld   a, $20                                   ; $7107: $3E $20
     ldh  [hNoiseSfx], a                           ; $7109: $E0 $F4
 
-jr_004_710B:
+ret_004_710B:
     ret                                           ; $710B: $C9
 
 func_004_710C::
@@ -474,13 +474,13 @@ jr_004_713B:
 jr_004_7141:
     ldh  a, [hFrameCounter]                       ; $7141: $F0 $E7
     and  $03                                      ; $7143: $E6 $03
-    jr   nz, jr_004_7164                          ; $7145: $20 $1D
+    jr   nz, ret_004_7164                         ; $7145: $20 $1D
 
     ld   a, [wD204]                               ; $7147: $FA $04 $D2
     inc  a                                        ; $714A: $3C
     ld   [wD204], a                               ; $714B: $EA $04 $D2
     cp   $88                                      ; $714E: $FE $88
-    jr   c, jr_004_7164                           ; $7150: $38 $12
+    jr   c, ret_004_7164                          ; $7150: $38 $12
 
 jr_004_7152:
     call IncrementEntityState                     ; $7152: $CD $12 $3B
@@ -495,7 +495,7 @@ func_004_7160::
     ld   a, $21                                   ; $7160: $3E $21
     ldh  [hNoiseSfx], a                           ; $7162: $E0 $F4
 
-jr_004_7164:
+ret_004_7164:
     ret                                           ; $7164: $C9
 
 func_004_7165::
@@ -620,17 +620,17 @@ func_004_71FF::
 
 jr_004_721D:
     and  a                                        ; $721D: $A7
-    jr   nz, jr_004_7248                          ; $721E: $20 $28
+    jr   nz, ret_004_7248                         ; $721E: $20 $28
 
     ldh  a, [hFrameCounter]                       ; $7220: $F0 $E7
     and  $03                                      ; $7222: $E6 $03
-    jr   nz, jr_004_7248                          ; $7224: $20 $22
+    jr   nz, ret_004_7248                         ; $7224: $20 $22
 
     ld   a, [wD206]                               ; $7226: $FA $06 $D2
     inc  a                                        ; $7229: $3C
     ld   [wD206], a                               ; $722A: $EA $06 $D2
     cp   $0F                                      ; $722D: $FE $0F
-    jr   nz, jr_004_7248                          ; $722F: $20 $17
+    jr   nz, ret_004_7248                         ; $722F: $20 $17
 
     call GetEntityTransitionCountdown             ; $7231: $CD $05 $0C
     ld   [hl], $FF                                ; $7234: $36 $FF
@@ -648,7 +648,7 @@ func_004_723B::
     call UpdateLinkWalkingAnimation_trampoline    ; $7244: $CD $F0 $0B
     pop  bc                                       ; $7247: $C1
 
-jr_004_7248:
+ret_004_7248:
     ret                                           ; $7248: $C9
 
 func_004_7249::
@@ -768,7 +768,7 @@ func_004_72EF::
     add  hl, bc                                   ; $7308: $09
     ld   a, [hl]                                  ; $7309: $7E
     and  a                                        ; $730A: $A7
-    jr   z, jr_004_7324                           ; $730B: $28 $17
+    jr   z, ret_004_7324                          ; $730B: $28 $17
 
     ld   [hl], $00                                ; $730D: $36 $00
     dec  a                                        ; $730F: $3D
@@ -779,13 +779,13 @@ func_004_72EF::
     ld   [hl], $02                                ; $7316: $36 $02
     ld   a, [wIsMarinFollowingLink]               ; $7318: $FA $73 $DB
     and  a                                        ; $731B: $A7
-    jr   z, jr_004_7324                           ; $731C: $28 $06
+    jr   z, ret_004_7324                          ; $731C: $28 $06
 
     ld   hl, wEntitiesSpriteVariantTable          ; $731E: $21 $B0 $C3
     add  hl, de                                   ; $7321: $19
     ld   [hl], $07                                ; $7322: $36 $07
 
-jr_004_7324:
+ret_004_7324:
     ret                                           ; $7324: $C9
 
 jr_004_7325:
@@ -891,7 +891,7 @@ func_004_73B7::
     add  hl, bc                                   ; $73BA: $09
     ld   a, [hl]                                  ; $73BB: $7E
     and  a                                        ; $73BC: $A7
-    jr   z, jr_004_73E1                           ; $73BD: $28 $22
+    jr   z, ret_004_73E1                          ; $73BD: $28 $22
 
     dec  a                                        ; $73BF: $3D
     ld   e, a                                     ; $73C0: $5F
@@ -913,7 +913,7 @@ func_004_73B7::
     add  hl, de                                   ; $73DF: $19
     ld   [hl], a                                  ; $73E0: $77
 
-jr_004_73E1:
+ret_004_73E1:
     ret                                           ; $73E1: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
@@ -1228,7 +1228,7 @@ jr_004_7594:
 jr_004_7598:
     ldh  a, [hFrameCounter]                       ; $7598: $F0 $E7
     and  $03                                      ; $759A: $E6 $03
-    jr   nz, jr_004_75A9                          ; $759C: $20 $0B
+    jr   nz, ret_004_75A9                         ; $759C: $20 $0B
 
     ld   hl, wEntitiesPosYTable                   ; $759E: $21 $10 $C2
     add  hl, bc                                   ; $75A1: $09
@@ -1239,7 +1239,7 @@ jr_004_7598:
     inc  a                                        ; $75A7: $3C
     ld   [hl], a                                  ; $75A8: $77
 
-jr_004_75A9:
+ret_004_75A9:
     ret                                           ; $75A9: $C9
 
 jr_004_75AA:

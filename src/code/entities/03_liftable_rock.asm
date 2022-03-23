@@ -130,7 +130,7 @@ ENDC
     add  hl, bc                                   ; $53CA: $09
     ld   a, [hl]                                  ; $53CB: $7E
     cp   $02                                      ; $53CC: $FE $02
-    jp   z, jr_003_5406                           ; $53CE: $CA $06 $54
+    jp   z, ret_003_5406                          ; $53CE: $CA $06 $54
 
     ld   hl, wEntitiesPosZTable                   ; $53D1: $21 $10 $C3
     add  hl, bc                                   ; $53D4: $09
@@ -142,6 +142,6 @@ ENDC
     add  hl, bc                                   ; $53DC: $09
     ld   a, [hl]                                  ; $53DD: $7E
     and  a                                        ; $53DE: $A7
-    jr   z, jr_003_5406                           ; $53DF: $28 $25
+    jr   z, ret_003_5406                          ; $53DF: $28 $25
 
     call func_003_5438                            ; $53E1: $CD $38 $54

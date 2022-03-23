@@ -45,7 +45,7 @@ func_007_512F::
     inc  a                                        ; $5144: $3C
     ld   [hl], a                                  ; $5145: $77
     cp   $10                                      ; $5146: $FE $10
-    jr   nz, jr_007_5173                          ; $5148: $20 $29
+    jr   nz, ret_007_5173                         ; $5148: $20 $29
 
     call IncrementEntityState                     ; $514A: $CD $12 $3B
     call func_007_7E7D                            ; $514D: $CD $7D $7E
@@ -76,7 +76,7 @@ jr_007_516E:
     add  hl, bc                                   ; $5171: $09
     ld   [hl], b                                  ; $5172: $70
 
-jr_007_5173:
+ret_007_5173:
     ret                                           ; $5173: $C9
 
 Data_007_5174::
@@ -134,7 +134,7 @@ jr_007_51AA:
     add  hl, bc                                   ; $51B7: $09
     or   [hl]                                     ; $51B8: $B6
     and  $0F                                      ; $51B9: $E6 $0F
-    jp   nz, jr_007_529F                          ; $51BB: $C2 $9F $52
+    jp   nz, ret_007_529F                         ; $51BB: $C2 $9F $52
 
     ld   a, [hl]                                  ; $51BE: $7E
     sub  $10                                      ; $51BF: $D6 $10
@@ -228,13 +228,13 @@ jr_007_51F2:
     ld   d, $01                                   ; $524E: $16 $01
     call GetObjectPhysicsFlags_trampoline         ; $5250: $CD $26 $2A
     cp   $0B                                      ; $5253: $FE $0B
-    jr   z, jr_007_529F                           ; $5255: $28 $48
+    jr   z, ret_007_529F                          ; $5255: $28 $48
 
     cp   $50                                      ; $5257: $FE $50
-    jr   z, jr_007_529F                           ; $5259: $28 $44
+    jr   z, ret_007_529F                          ; $5259: $28 $44
 
     cp   $51                                      ; $525B: $FE $51
-    jr   z, jr_007_529F                           ; $525D: $28 $40
+    jr   z, ret_007_529F                          ; $525D: $28 $40
 
     ldh  a, [hActiveEntityPosX]                   ; $525F: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $5261: $E0 $D7
@@ -251,7 +251,7 @@ jr_007_51F2:
     ld   a, [wRoomEvent]                          ; $5279: $FA $8E $C1
     and  $0F                                      ; $527C: $E6 $0F
     cp   TRIGGER_FILL_LAVA_GAPS                   ; $527E: $FE $0E
-    jr   nz, jr_007_529F                          ; $5280: $20 $1D
+    jr   nz, ret_007_529F                         ; $5280: $20 $1D
 
     push bc                                       ; $5282: $C5
     ld   c, b                                     ; $5283: $48
@@ -278,5 +278,5 @@ jr_007_51F2:
 jr_007_529E:
     pop  bc                                       ; $529E: $C1
 
-jr_007_529F:
+ret_007_529F:
     ret                                           ; $529F: $C9

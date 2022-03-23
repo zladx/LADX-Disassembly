@@ -175,12 +175,12 @@ jr_006_50BA:
     call func_006_5099                            ; $50BD: $CD $99 $50
     ldh  a, [hFrameCounter]                       ; $50C0: $F0 $E7
     and  $0F                                      ; $50C2: $E6 $0F
-    jr   nz, jr_006_50CA                          ; $50C4: $20 $04
+    jr   nz, ret_006_50CA                         ; $50C4: $20 $04
 
     ld   a, JINGLE_BIG_BUMP                       ; $50C6: $3E $20
     ldh  [hJingle], a                             ; $50C8: $E0 $F2
 
-jr_006_50CA:
+ret_006_50CA:
     ret                                           ; $50CA: $C9
 
 HinoxState3Handler::
@@ -291,7 +291,7 @@ jr_006_5179:
     call SetEntitySpriteVariant                   ; $5185: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $5188: $CD $05 $0C
     cp   $20                                      ; $518B: $FE $20
-    jr   c, jr_006_51BB                           ; $518D: $38 $2C
+    jr   c, ret_006_51BB                          ; $518D: $38 $2C
 
     sub  $20                                      ; $518F: $D6 $20
     rra                                           ; $5191: $1F
@@ -320,7 +320,7 @@ func_006_51B0::
     ldh  [hLinkAnimationState], a                 ; $51B6: $E0 $9D
     ld   [wC167], a                               ; $51B8: $EA $67 $C1
 
-jr_006_51BB:
+ret_006_51BB:
     ret                                           ; $51BB: $C9
 
 HinoxState5Handler::

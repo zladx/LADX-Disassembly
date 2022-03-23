@@ -147,7 +147,7 @@ jr_018_4C58:
 MrWriteState2Handler::
     ld   a, [wDialogState]                        ; $4C5E: $FA $9F $C1
     and  a                                        ; $4C61: $A7
-    jr   nz, jr_018_4C74                          ; $4C62: $20 $10
+    jr   nz, ret_018_4C74                         ; $4C62: $20 $10
 
     call IncrementEntityState                     ; $4C64: $CD $12 $3B
     ld   [hl], b                                  ; $4C67: $70
@@ -157,7 +157,7 @@ MrWriteState2Handler::
     ld   a, REPLACE_TILES_TRADING_ITEM            ; $4C70: $3E $0D
     ldh  [hReplaceTiles], a                       ; $4C72: $E0 $A5
 
-jr_018_4C74:
+ret_018_4C74:
     ret                                           ; $4C74: $C9
 
 label_018_4C75:

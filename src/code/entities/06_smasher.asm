@@ -199,12 +199,12 @@ jr_006_463E:
     call func_006_45E5                            ; $4644: $CD $E5 $45
     ldh  a, [hFrameCounter]                       ; $4647: $F0 $E7
     and  $08                                      ; $4649: $E6 $08
-    jr   z, jr_006_464F                           ; $464B: $28 $02
+    jr   z, ret_006_464F                          ; $464B: $28 $02
 
     inc  [hl]                                     ; $464D: $34
     inc  [hl]                                     ; $464E: $34
 
-jr_006_464F:
+ret_006_464F:
     ret                                           ; $464F: $C9
 
 Data_006_4650::
@@ -450,11 +450,11 @@ jr_006_4805:
 
 jr_006_4806:
     call CheckLinkCollisionWithEnemy_trampoline   ; $4806: $CD $5A $3B
-    jr   nc, jr_006_4852                          ; $4809: $30 $47
+    jr   nc, ret_006_4852                         ; $4809: $30 $47
 
     ld   a, [wLinkAttackStepAnimationCountdown]   ; $480B: $FA $9B $C1
     and  a                                        ; $480E: $A7
-    jr   nz, jr_006_4852                          ; $480F: $20 $41
+    jr   nz, ret_006_4852                         ; $480F: $20 $41
 
     ld   a, [wBButtonSlot]                        ; $4811: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4814: $FE $03
@@ -464,21 +464,21 @@ jr_006_4806:
     and  J_B                                      ; $481A: $E6 $20
     jr   nz, jr_006_482D                          ; $481C: $20 $0F
 
-    jr   jr_006_4852                              ; $481E: $18 $32
+    jr   ret_006_4852                             ; $481E: $18 $32
 
 jr_006_4820:
     ld   a, [wAButtonSlot]                        ; $4820: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4823: $FE $03
-    jr   nz, jr_006_4852                          ; $4825: $20 $2B
+    jr   nz, ret_006_4852                         ; $4825: $20 $2B
 
     ldh  a, [hJoypadState]                        ; $4827: $F0 $CC
     and  J_A                                      ; $4829: $E6 $10
-    jr   z, jr_006_4852                           ; $482B: $28 $25
+    jr   z, ret_006_4852                          ; $482B: $28 $25
 
 jr_006_482D:
     ld   a, [wC3CF]                               ; $482D: $FA $CF $C3
     and  a                                        ; $4830: $A7
-    jr   nz, jr_006_4852                          ; $4831: $20 $1F
+    jr   nz, ret_006_4852                         ; $4831: $20 $1F
 
     call IncrementEntityState                     ; $4833: $CD $12 $3B
     ld   [hl], $02                                ; $4836: $36 $02
@@ -495,7 +495,7 @@ jr_006_482D:
     ld   hl, hWaveSfx                             ; $484D: $21 $F3 $FF
     ld   [hl], $02                                ; $4850: $36 $02
 
-jr_006_4852:
+ret_006_4852:
     ret                                           ; $4852: $C9
 
 func_006_4853::
@@ -609,7 +609,7 @@ jr_006_48EC:
     add  hl, bc                                   ; $48F4: $09
     ld   a, [hl]                                  ; $48F5: $7E
     and  a                                        ; $48F6: $A7
-    jr   z, jr_006_4910                           ; $48F7: $28 $17
+    jr   z, ret_006_4910                          ; $48F7: $28 $17
 
     and  $03                                      ; $48F9: $E6 $03
     jr   z, jr_006_4902                           ; $48FB: $28 $05
@@ -632,5 +632,5 @@ jr_006_490C:
     call IncrementEntityState                     ; $490C: $CD $12 $3B
     ld   [hl], b                                  ; $490F: $70
 
-jr_006_4910:
+ret_006_4910:
     ret                                           ; $4910: $C9

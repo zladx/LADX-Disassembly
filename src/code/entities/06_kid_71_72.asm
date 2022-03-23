@@ -192,7 +192,7 @@ jr_006_614C:
     jr   z, jr_006_6161                           ; $615B: $28 $04
 
     and  $80                                      ; $615D: $E6 $80
-    jr   z, jr_006_616F                           ; $615F: $28 $0E
+    jr   z, ret_006_616F                          ; $615F: $28 $0E
 
 jr_006_6161:
     ld   [hl], b                                  ; $6161: $70
@@ -201,11 +201,11 @@ jr_006_6161:
     ld   [hl], b                                  ; $6166: $70
     ldh  a, [hFrameCounter]                       ; $6167: $F0 $E7
     and  $1F                                      ; $6169: $E6 $1F
-    jr   nz, jr_006_616F                          ; $616B: $20 $02
+    jr   nz, ret_006_616F                         ; $616B: $20 $02
 
     ld   [hl], $10                                ; $616D: $36 $10
 
-jr_006_616F:
+ret_006_616F:
     ret                                           ; $616F: $C9
 
 label_006_6170:
@@ -243,7 +243,7 @@ jr_006_619F:
 
 func_006_61A6::
     call GetEntityTransitionCountdown             ; $61A6: $CD $05 $0C
-    jr   nz, jr_006_61EB                          ; $61A9: $20 $40
+    jr   nz, ret_006_61EB                         ; $61A9: $20 $40
 
     ld   [hl], $80                                ; $61AB: $36 $80
     call IncrementEntityState                     ; $61AD: $CD $12 $3B
@@ -251,7 +251,7 @@ func_006_61A6::
     call SetEntitySpriteVariant                   ; $61B2: $CD $0C $3B
     ld   a, ENTITY_KID_71                         ; $61B5: $3E $71
     call SpawnNewEntity_trampoline                ; $61B7: $CD $86 $3B
-    jr   c, jr_006_61EB                           ; $61BA: $38 $2F
+    jr   c, ret_006_61EB                          ; $61BA: $38 $2F
 
     ldh  a, [hMultiPurpose0]                      ; $61BC: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $61BE: $21 $00 $C2
@@ -282,7 +282,7 @@ jr_006_61E0:
     add  hl, de                                   ; $61E8: $19
     ld   [hl], $24                                ; $61E9: $36 $24
 
-jr_006_61EB:
+ret_006_61EB:
     ret                                           ; $61EB: $C9
 
 func_006_61EC::

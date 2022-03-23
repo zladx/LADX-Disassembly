@@ -284,13 +284,13 @@ LinkMotionDefault::
 func_002_4338::
     ld   a, [wIsCarryingLiftedObject]             ; $4338: $FA $5C $C1
     cp   $02                                      ; $433B: $FE $02
-    jr   c, jr_002_4345                           ; $433D: $38 $06
+    jr   c, ret_002_4345                          ; $433D: $38 $06
 
     ldh  [hLinkAnimationState], a                 ; $433F: $E0 $9D
     ld   a, $01                                   ; $4341: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4343: $E0 $A1
 
-jr_002_4345:
+ret_002_4345:
     ret                                           ; $4345: $C9
 
 ; conversion table from view direction to animation state
@@ -383,16 +383,16 @@ jr_002_43A7:
     ld   a, [hl]                                  ; $43AB: $7E
     ld   hl, hLinkSpeedY                          ; $43AC: $21 $9B $FF
     sub  [hl]                                     ; $43AF: $96
-    jr   z, jr_002_43B9                           ; $43B0: $28 $07
+    jr   z, ret_002_43B9                          ; $43B0: $28 $07
 
     inc  [hl]                                     ; $43B2: $34
     bit  7, a                                     ; $43B3: $CB $7F
-    jr   z, jr_002_43B9                           ; $43B5: $28 $02
+    jr   z, ret_002_43B9                          ; $43B5: $28 $02
 
     dec  [hl]                                     ; $43B7: $35
     dec  [hl]                                     ; $43B8: $35
 
-jr_002_43B9:
+ret_002_43B9:
     ret                                           ; $43B9: $C9
 
 jr_002_43BA:
@@ -1464,7 +1464,7 @@ jr_002_4AB2:
     ld   [wC167], a                               ; $4AB3: $EA $67 $C1
     ld   a, [wSelectedSongIndex]                  ; $4AB6: $FA $4A $DB
     cp   $01                                      ; $4AB9: $FE $01
-    jr   nz, jr_002_4AD0                          ; $4ABB: $20 $13
+    jr   nz, ret_002_4AD0                         ; $4ABB: $20 $13
 
     ld   a, TRANSITION_GFX_MANBO_IN               ; $4ABD: $3E $02
     ld   [wTransitionGfx], a                      ; $4ABF: $EA $7F $C1
@@ -1475,7 +1475,7 @@ jr_002_4AB2:
     ld   a, JINGLE_MANBO_WARP                     ; $4ACC: $3E $2C
     ldh  [hJingle], a                             ; $4ACE: $E0 $F2
 
-jr_002_4AD0:
+ret_002_4AD0:
     ret                                           ; $4AD0: $C9
 
 jr_002_4AD1:
@@ -1510,11 +1510,11 @@ jr_002_4AF1:
 
     ld   a, [wC5A4]                               ; $4B02: $FA $A4 $C5
     cp   $14                                      ; $4B05: $FE $14
-    jr   nz, jr_002_4B40                          ; $4B07: $20 $37
+    jr   nz, ret_002_4B40                         ; $4B07: $20 $37
 
     ld   a, ENTITY_MUSICAL_NOTE                   ; $4B09: $3E $C9
     call SpawnNewEntity_trampoline                ; $4B0B: $CD $86 $3B
-    jr   c, jr_002_4B40                           ; $4B0E: $38 $30
+    jr   c, ret_002_4B40                          ; $4B0E: $38 $30
 
     ldh  a, [hLinkPositionY]                      ; $4B10: $F0 $99
     ld   hl, wEntitiesPosYTable                   ; $4B12: $21 $10 $C2
@@ -1544,7 +1544,7 @@ jr_002_4AF1:
     add  hl, de                                   ; $4B3D: $19
     ld   [hl], $40                                ; $4B3E: $36 $40
 
-jr_002_4B40:
+ret_002_4B40:
     ret                                           ; $4B40: $C9
 
 LinkDirectionToLinkAnimationState2::
@@ -1834,7 +1834,7 @@ jr_002_4CBE:
 jr_002_4CC1:
     call GetRandomByte                            ; $4CC1: $CD $0D $28
     and  $07                                      ; $4CC4: $E6 $07
-    jr   nz, jr_002_4D1F                          ; $4CC6: $20 $57
+    jr   nz, ret_002_4D1F                         ; $4CC6: $20 $57
 
     ld   a, [wIsIndoor]                           ; $4CC8: $FA $A5 $DB
     and  a                                        ; $4CCB: $A7
@@ -1853,7 +1853,7 @@ jr_002_4CD3:
 .randomDropEnd
 
     call SpawnNewEntity_trampoline                ; $4CDD: $CD $86 $3B
-    jr   c, jr_002_4D1F                           ; $4CE0: $38 $3D
+    jr   c, ret_002_4D1F                          ; $4CE0: $38 $3D
 
     ld   hl, wEntitiesPosXTable                   ; $4CE2: $21 $00 $C2
     add  hl, de                                   ; $4CE5: $19
@@ -1891,7 +1891,7 @@ jr_002_4CD3:
     add  hl, bc                                   ; $4D1D: $09
     ld   [hl], a                                  ; $4D1E: $77
 
-jr_002_4D1F:
+ret_002_4D1F:
     ret                                           ; $4D1F: $C9
 
 func_002_4D20::
@@ -2197,7 +2197,7 @@ jr_002_4EA1:
 jr_002_4EC4:
     ld   a, [wC198]                               ; $4EC4: $FA $98 $C1
     cp   $48                                      ; $4EC7: $FE $48
-    jr   nz, jr_002_4EEF                          ; $4EC9: $20 $24
+    jr   nz, ret_002_4EEF                         ; $4EC9: $20 $24
 
     ldh  a, [hIsGBC]                              ; $4ECB: $F0 $FE
     and  a                                        ; $4ECD: $A7
@@ -2224,7 +2224,7 @@ ENDC
     ld   a, LINK_MOTION_DEFAULT                   ; $4EEA: $3E $00
     ld   [wLinkMotionState], a                    ; $4EEC: $EA $1C $C1
 
-jr_002_4EEF:
+ret_002_4EEF:
     ret                                           ; $4EEF: $C9
 
 Data_002_4EF0::
@@ -3912,7 +3912,7 @@ func_002_58D0::
     ld   a, [hl]                                  ; $58DF: $7E
     ldh  [hMultiPurpose2], a                      ; $58E0: $E0 $D9
     cp   $A8                                      ; $58E2: $FE $A8
-    jr   c, jr_002_58EC                           ; $58E4: $38 $06
+    jr   c, ret_002_58EC                          ; $58E4: $38 $06
 
 ; Remove a transcient vfx from the effects table.
 ClearTranscientVfx::
@@ -3921,7 +3921,7 @@ ClearTranscientVfx::
     xor  a                                        ; $58EA: $AF
     ld   [hl], a                                  ; $58EB: $77
 
-jr_002_58EC:
+ret_002_58EC:
     ret                                           ; $58EC: $C9
 
 Data_002_58ED::
@@ -3944,7 +3944,7 @@ jr_002_5904:
     add  e                                        ; $590A: $83
     ld   [wC3C1], a                               ; $590B: $EA $C1 $C3
     cp   $60                                      ; $590E: $FE $60
-    jr   c, jr_002_5925                           ; $5910: $38 $13
+    jr   c, ret_002_5925                          ; $5910: $38 $13
 
     ldh  a, [hFrameCounter]                       ; $5912: $F0 $E7
     ld   hl, wActiveEntityIndex                   ; $5914: $21 $23 $C1
@@ -3959,7 +3959,7 @@ jr_002_591B:
     ld   a, [hl]                                  ; $5921: $7E
     ld   [wOAMNextAvailableSlot], a               ; $5922: $EA $C0 $C3
 
-jr_002_5925:
+ret_002_5925:
     ret                                           ; $5925: $C9
 
 func_002_5926::
@@ -5488,12 +5488,12 @@ jr_002_69F3:
     call func_002_6B56                            ; $69F3: $CD $56 $6B
     ld   a, [wCollisionType]                      ; $69F6: $FA $33 $C1
     and  COLLISION_TYPE_RIGHT                     ; $69F9: $E6 $08
-    jr   z, jr_002_6A00                           ; $69FB: $28 $03
+    jr   z, ret_002_6A00                          ; $69FB: $28 $03
 
     xor  a                                        ; $69FD: $AF
     ldh  [hLinkPhysicsModifier], a                ; $69FE: $E0 $9C
 
-jr_002_6A00:
+ret_002_6A00:
     ret                                           ; $6A00: $C9
 
 LinkSideScrollingPhysicsHandler::
@@ -5920,7 +5920,7 @@ func_002_6C2F::
     jr   z, func_002_6C69                         ; $6C63: $28 $04
 
     cp   $01                                      ; $6C65: $FE $01
-    jr   nz, jr_002_6C74                          ; $6C67: $20 $0B
+    jr   nz, ret_002_6C74                         ; $6C67: $20 $0B
 
 func_002_6C69::
     ld   hl, AddedCollisionType                   ; $6C69: $21 $57 $6B
@@ -5929,7 +5929,7 @@ func_002_6C69::
     or   [hl]                                     ; $6C70: $B6
     ld   [wCollisionType], a                      ; $6C71: $EA $33 $C1
 
-jr_002_6C74:
+ret_002_6C74:
     ret                                           ; $6C74: $C9
 
 ; Check Link's position, and initiate a map or room transition if needed
@@ -7413,7 +7413,7 @@ jr_002_7472:
     ldh  a, [hMultiPurpose5]                      ; $7472: $F0 $DC
     and  $0F                                      ; $7474: $E6 $0F
     cp   $06                                      ; $7476: $FE $06
-    jr   nc, jr_002_74AC                          ; $7478: $30 $32
+    jr   nc, ret_002_74AC                         ; $7478: $30 $32
 
     ld   a, JINGLE_REVOLVING_DOOR                 ; $747A: $3E $0C
     ldh  [hJingle], a                             ; $747C: $E0 $F2
@@ -7439,7 +7439,7 @@ jr_002_7493:
     jr   z, jr_002_74A3                           ; $749D: $28 $04
 
     cp   $BC                                      ; $749F: $FE $BC
-    jr   nz, jr_002_74AC                          ; $74A1: $20 $09
+    jr   nz, ret_002_74AC                         ; $74A1: $20 $09
 
 jr_002_74A3:
     ldh  a, [hMultiPurpose5]                      ; $74A3: $F0 $DC
@@ -7447,7 +7447,7 @@ jr_002_74A3:
     cp   $0C                                      ; $74A7: $FE $0C
     jp   nc, ApplyMapFadeOutTransitionWithNoise   ; $74A9: $D2 $7D $0C
 
-jr_002_74AC:
+ret_002_74AC:
     ret                                           ; $74AC: $C9
 
 label_002_74AD:
@@ -7588,7 +7588,7 @@ func_002_755B::
     jr   z, jr_002_7582                           ; $757A: $28 $06
 
     cp   $08                                      ; $757C: $FE $08
-    jr   nz, jr_002_7586                          ; $757E: $20 $06
+    jr   nz, ret_002_7586                         ; $757E: $20 $06
 
     ld   c, $FD                                   ; $7580: $0E $FD
 
@@ -7596,7 +7596,7 @@ jr_002_7582:
     ld   a, c                                     ; $7582: $79
     ld   [wC13B], a                               ; $7583: $EA $3B $C1
 
-jr_002_7586:
+ret_002_7586:
     ret                                           ; $7586: $C9
 
 jr_002_7587:
@@ -7612,13 +7612,13 @@ jr_002_7587:
 
     ldh  a, [hFrameCounter]                       ; $7595: $F0 $E7
     and  $01                                      ; $7597: $E6 $01
-    jr   nz, jr_002_75B1                          ; $7599: $20 $16
+    jr   nz, ret_002_75B1                         ; $7599: $20 $16
 
     ld   hl, wLinkOAMBuffer                       ; $759B: $21 $00 $C0
     ldh  a, [hLinkPositionY]                      ; $759E: $F0 $99
     add  $0B                                      ; $75A0: $C6 $0B
     cp   $88                                      ; $75A2: $FE $88
-    jr   nc, jr_002_75B1                          ; $75A4: $30 $0B
+    jr   nc, ret_002_75B1                         ; $75A4: $30 $0B
 
     ld   [hl+], a                                 ; $75A6: $22
 
@@ -7630,7 +7630,7 @@ jr_002_7587:
     ld   [hl+], a                                 ; $75AE: $22
     ld   [hl], $00                                ; $75AF: $36 $00
 
-jr_002_75B1:
+ret_002_75B1:
     ret                                           ; $75B1: $C9
 
 jr_002_75B2:
@@ -7638,7 +7638,7 @@ jr_002_75B2:
     ld   [wD475], a                               ; $75B3: $EA $75 $D4
     ld   a, [wLinkMotionState]                    ; $75B6: $FA $1C $C1
     cp   LINK_MOTION_UNSTUCKING                   ; $75B9: $FE $02
-    jr   z, jr_002_75B1                           ; $75BB: $28 $F4
+    jr   z, ret_002_75B1                          ; $75BB: $28 $F4
 
 ; Handle physics between Link and the ground.
 ;
@@ -7886,10 +7886,10 @@ jr_002_76F4:
 
     ld   a, [wLinkMotionState]                    ; $76FB: $FA $1C $C1
     cp   LINK_MOTION_RECOVER                      ; $76FE: $FE $08
-    jr   z, jr_002_774F                           ; $7700: $28 $4D
+    jr   z, ret_002_774F                          ; $7700: $28 $4D
 
     cp   LINK_MOTION_SWIMMING                     ; $7702: $FE $01
-    jr   z, jr_002_774F                           ; $7704: $28 $49
+    jr   z, ret_002_774F                          ; $7704: $28 $49
 
     ldh  a, [hLinkPositionY]                      ; $7706: $F0 $99
     add  $FE                                      ; $7708: $C6 $FE
@@ -7940,7 +7940,7 @@ ENDC
     ld   a, [hl]                                  ; $774C: $7E
     ldh  [hLinkSpeedY], a                         ; $774D: $E0 $9B
 
-jr_002_774F:
+ret_002_774F:
     ret                                           ; $774F: $C9
 
 jr_002_7750:

@@ -2882,7 +2882,7 @@ JumpTable_037_5257::
     dec  [hl]                                     ; $526A: $35
     call func_037_49CE                            ; $526B: $CD $CE $49
 
-jr_037_526E:
+ret_037_526E:
     ret                                           ; $526E: $C9
 
 JumpTable_037_526F::

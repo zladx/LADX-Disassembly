@@ -98,7 +98,7 @@ func_007_4F1F::
     call func_007_7CF0                            ; $4F1F: $CD $F0 $7C
     ld   a, [wDialogState]                        ; $4F22: $FA $9F $C1
     and  a                                        ; $4F25: $A7
-    jr   nz, jr_007_4F4D                          ; $4F26: $20 $25
+    jr   nz, ret_007_4F4D                         ; $4F26: $20 $25
 
     ld   a, [wDialogAskSelectionIndex]            ; $4F28: $FA $77 $C1
     and  a                                        ; $4F2B: $A7
@@ -119,7 +119,7 @@ jr_007_4F44:
     call IncrementEntityState                     ; $4F49: $CD $12 $3B
     ld   [hl], b                                  ; $4F4C: $70
 
-jr_007_4F4D:
+ret_007_4F4D:
     ret                                           ; $4F4D: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list

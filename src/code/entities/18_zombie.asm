@@ -14,7 +14,7 @@ ZombieEntityHandler::
 
     call ReturnIfNonInteractive_18                ; $6396: $CD $E8 $7D
     call GetEntityTransitionCountdown             ; $6399: $CD $05 $0C
-    jr   nz, jr_018_63F7                          ; $639C: $20 $59
+    jr   nz, ret_018_63F7                         ; $639C: $20 $59
 
     call GetRandomByte                            ; $639E: $CD $0D $28
     and  $07                                      ; $63A1: $E6 $07
@@ -56,7 +56,7 @@ jr_018_63D1:
     ld   a, $BF                                   ; $63D4: $3E $BF
     ld   e, $05                                   ; $63D6: $1E $05
     call SpawnNewEntityInRange_trampoline         ; $63D8: $CD $98 $3B
-    jr   c, jr_018_63F7                           ; $63DB: $38 $1A
+    jr   c, ret_018_63F7                          ; $63DB: $38 $1A
 
     ldh  a, [hMultiPurpose0]                      ; $63DD: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $63DF: $21 $00 $C2
@@ -73,7 +73,7 @@ jr_018_63D1:
     add  hl, de                                   ; $63F4: $19
     res  6, [hl]                                  ; $63F5: $CB $B6
 
-jr_018_63F7:
+ret_018_63F7:
     ret                                           ; $63F7: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list

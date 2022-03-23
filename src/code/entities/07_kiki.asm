@@ -112,12 +112,12 @@ func_007_58A8::
     call func_007_7E5D                            ; $58B7: $CD $5D $7E
     add  $18                                      ; $58BA: $C6 $18
     cp   $30                                      ; $58BC: $FE $30
-    jr   nc, jr_007_58DD                          ; $58BE: $30 $1D
+    jr   nc, ret_007_58DD                         ; $58BE: $30 $1D
 
     call func_007_7E6D                            ; $58C0: $CD $6D $7E
     add  $18                                      ; $58C3: $C6 $18
     cp   $30                                      ; $58C5: $FE $30
-    jr   nc, jr_007_58DD                          ; $58C7: $30 $14
+    jr   nc, ret_007_58DD                         ; $58C7: $30 $14
 
 jr_007_58C9:
     call GetEntityTransitionCountdown             ; $58C9: $CD $05 $0C
@@ -131,7 +131,7 @@ func_007_58D5::
     ld   a, $14                                   ; $58D8: $3E $14
     ld   [wDialogSFX], a                          ; $58DA: $EA $AB $C5
 
-jr_007_58DD:
+ret_007_58DD:
     ret                                           ; $58DD: $C9
 
 jr_007_58DE:
@@ -160,11 +160,11 @@ func_007_58FA::
     call SetEntitySpriteVariant                   ; $5901: $CD $0C $3B
     ldh  a, [hFrameCounter]                       ; $5904: $F0 $E7
     and  $1F                                      ; $5906: $E6 $1F
-    jr   nz, jr_007_5919                          ; $5908: $20 $0F
+    jr   nz, ret_007_5919                         ; $5908: $20 $0F
 
     call GetRandomByte                            ; $590A: $CD $0D $28
     and  $01                                      ; $590D: $E6 $01
-    jr   nz, jr_007_5919                          ; $590F: $20 $08
+    jr   nz, ret_007_5919                         ; $590F: $20 $08
 
     ld   hl, wEntitiesDirectionTable              ; $5911: $21 $80 $C3
     add  hl, bc                                   ; $5914: $09
@@ -172,7 +172,7 @@ func_007_58FA::
     xor  $01                                      ; $5916: $EE $01
     ld   [hl], a                                  ; $5918: $77
 
-jr_007_5919:
+ret_007_5919:
     ret                                           ; $5919: $C9
 
 func_007_591A::

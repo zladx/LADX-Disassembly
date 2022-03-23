@@ -105,10 +105,10 @@ func_007_4D27::
 
     ldh  a, [hFrameCounter]                       ; $4D31: $F0 $E7
     and  $07                                      ; $4D33: $E6 $07
-    jr   nz, jr_007_4D4C                          ; $4D35: $20 $15
+    jr   nz, ret_007_4D4C                         ; $4D35: $20 $15
 
     call func_007_4CEE                            ; $4D37: $CD $EE $4C
-    jr   c, jr_007_4D4C                           ; $4D3A: $38 $10
+    jr   c, ret_007_4D4C                          ; $4D3A: $38 $10
 
     ld   hl, wEntitiesInertiaTable                ; $4D3C: $21 $D0 $C3
     add  hl, bc                                   ; $4D3F: $09
@@ -121,7 +121,7 @@ func_007_4D27::
     add  hl, de                                   ; $4D4A: $19
     ld   [hl], b                                  ; $4D4B: $70
 
-jr_007_4D4C:
+ret_007_4D4C:
     ret                                           ; $4D4C: $C9
 
 func_007_4D4D::

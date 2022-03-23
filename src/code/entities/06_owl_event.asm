@@ -337,19 +337,19 @@ OwlState4Handler::
     ldh  [hDefaultMusicTrack], a                  ; $69EF: $E0 $B0
     ld   a, [wActivePowerUp]                      ; $69F1: $FA $7C $D4
     and  a                                        ; $69F4: $A7
-    jr   z, jr_006_6A04                           ; $69F5: $28 $0D
+    jr   z, ret_006_6A04                          ; $69F5: $28 $0D
 
 IF !__PATCH_0__
     ld   a, [wTunicType]                          ; $69F7: $FA $0F $DC
     and  a                                        ; $69FA: $A7
-    jr   nz, jr_006_6A04                          ; $69FB: $20 $07
+    jr   nz, ret_006_6A04                         ; $69FB: $20 $07
 ENDC
 
     ld   a, MUSIC_ACTIVE_POWER_UP
     ld   [wMusicTrackToPlay], a                   ; $69FF: $EA $68 $D3
     ldh  [hDefaultMusicTrackAlt], a               ; $6A02: $E0 $BD
 
-jr_006_6A04:
+ret_006_6A04:
     ret                                           ; $6A04: $C9
 
 jr_006_6A05:
@@ -363,7 +363,7 @@ jr_006_6A05:
 jr_006_6A0F:
     ldh  a, [hFrameCounter]                       ; $6A0F: $F0 $E7
     and  $01                                      ; $6A11: $E6 $01
-    jr   nz, jr_006_6A36                          ; $6A13: $20 $21
+    jr   nz, ret_006_6A36                         ; $6A13: $20 $21
 
     ld   a, $20                                   ; $6A15: $3E $20
     call GetVectorTowardsLink_trampoline          ; $6A17: $CD $B5 $3B
@@ -380,7 +380,7 @@ jr_006_6A0F:
 func_006_6A2B::
     add  hl, bc                                   ; $6A2B: $09
     sub  [hl]                                     ; $6A2C: $96
-    jr   z, jr_006_6A36                           ; $6A2D: $28 $07
+    jr   z, ret_006_6A36                          ; $6A2D: $28 $07
 
     bit  7, a                                     ; $6A2F: $CB $7F
     jr   z, jr_006_6A35                           ; $6A31: $28 $02
@@ -391,7 +391,7 @@ func_006_6A2B::
 jr_006_6A35:
     inc  [hl]                                     ; $6A35: $34
 
-jr_006_6A36:
+ret_006_6A36:
     ret                                           ; $6A36: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list

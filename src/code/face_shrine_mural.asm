@@ -44,7 +44,7 @@ FaceShrineMuralStage1Handler::
     call func_1A22                                ; $6B30: $CD $22 $1A
     ld   a, [wTransitionSequenceCounter]          ; $6B33: $FA $6B $C1
     cp   $04                                      ; $6B36: $FE $04
-    jr   nz, jr_001_6B51                          ; $6B38: $20 $17
+    jr   nz, ret_001_6B51                         ; $6B38: $20 $17
     call func_001_5888                            ; $6B3A: $CD $88 $58
     ld   a, $03                                   ; $6B3D: $3E $03
     ldh  [hVolumeRight], a                        ; $6B3F: $E0 $A9
@@ -56,7 +56,7 @@ FaceShrineMuralStage1Handler::
     ld   a, TILESET_FACE_SHRINE_MURAL             ; $6B4C: $3E $14
     ld   [wTilesetToLoad], a                      ; $6B4E: $EA $FE $D6
 
-jr_001_6B51::
+ret_001_6B51::
     ret                                           ; $6B51: $C9
 
 FaceShrineMuralStage2Handler::
@@ -77,12 +77,12 @@ FaceShrineMuralStage3Handler::
     call func_1A39                                ; $6B6F: $CD $39 $1A
     ld   a, [wTransitionSequenceCounter]          ; $6B72: $FA $6B $C1
     cp   $04                                      ; $6B75: $FE $04
-    jr   nz, jr_001_6B80                          ; $6B77: $20 $07
+    jr   nz, ret_001_6B80                         ; $6B77: $20 $07
     call IncrementGameplaySubtype                 ; $6B79: $CD $D6 $44
     xor  a                                        ; $6B7C: $AF
     ld   [wC3C4], a                               ; $6B7D: $EA $C4 $C3
 
-jr_001_6B80::
+ret_001_6B80::
     ret                                           ; $6B80: $C9
 
 FaceShrineMuralStage4Handler::
@@ -94,11 +94,11 @@ FaceShrineMuralStage4Handler::
     ld   [wC3C4], a                               ; $6B8A: $EA $C4 $C3
     jp   z, IncrementGameplaySubtype              ; $6B8D: $CA $D6 $44
     cp   $80                                      ; $6B90: $FE $80
-    jr   nz, jr_001_6B99                          ; $6B92: $20 $05
+    jr   nz, ret_001_6B99                         ; $6B92: $20 $05
     ld   a, $E7                                   ; $6B94: $3E $E7
     call OpenDialog                               ; $6B96: $CD $85 $23
 
-jr_001_6B99::
+ret_001_6B99::
     ret                                           ; $6B99: $C9
 
 FaceShrineMuralStage5Handler::

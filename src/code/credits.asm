@@ -328,7 +328,7 @@ jr_017_4612:
     ld   d, $00                                   ; $461C: $16 $00
     ldh  a, [hMultiPurposeD]                      ; $461E: $F0 $E4
     cp   $26                                      ; $4620: $FE $26
-    jr   c, jr_017_462F                           ; $4622: $38 $0B
+    jr   c, ret_017_462F                          ; $4622: $38 $0B
 
     ld   hl, Data_017_456D                        ; $4624: $21 $6D $45
     add  hl, de                                   ; $4627: $19
@@ -336,7 +336,7 @@ jr_017_4612:
     ld   [wBGPalette], a                          ; $4629: $EA $97 $DB
     ld   [wOBJ1Palette], a                        ; $462C: $EA $99 $DB
 
-jr_017_462F:
+ret_017_462F:
     ret                                           ; $462F: $C9
 
 func_017_4630::
@@ -796,7 +796,7 @@ func_017_488C::
     ldh  a, [hFrameCounter]                       ; $488C: $F0 $E7
     and  $0F                                      ; $488E: $E6 $0F
     cp   $02                                      ; $4890: $FE $02
-    jr   nz, jr_017_48CC                          ; $4892: $20 $38
+    jr   nz, ret_017_48CC                         ; $4892: $20 $38
 
     push de                                       ; $4894: $D5
     ld   hl, wDrawCommand                         ; $4895: $21 $01 $D6
@@ -848,7 +848,7 @@ jr_017_48C4:
 
     ld   [hl], c                                  ; $48CB: $71
 
-jr_017_48CC:
+ret_017_48CC:
     ret                                           ; $48CC: $C9
 
 Data_017_48CD::
@@ -1398,13 +1398,13 @@ jr_017_4D8F:
     ld   a, [wIntroSubTimer]                      ; $4D8F: $FA $02 $D0
     add  $40                                      ; $4D92: $C6 $40
     ld   [wIntroSubTimer], a                      ; $4D94: $EA $02 $D0
-    jr   nc, jr_017_4DD0                          ; $4D97: $30 $37
+    jr   nc, ret_017_4DD0                         ; $4D97: $30 $37
 
     ldh  a, [hBaseScrollY]                        ; $4D99: $F0 $97
     dec  a                                        ; $4D9B: $3D
     ldh  [hBaseScrollY], a                        ; $4D9C: $E0 $97
     cp   $90                                      ; $4D9E: $FE $90
-    jr   nz, jr_017_4DD0                          ; $4DA0: $20 $2E
+    jr   nz, ret_017_4DD0                         ; $4DA0: $20 $2E
 
     call IncrementCreditsSubscene                 ; $4DA2: $CD $D9 $4C
 
@@ -1425,7 +1425,7 @@ ResetCreditsSceneVariables::
     ld   [wD008], a                               ; $4DCA: $EA $08 $D0
     ld   [wD009], a                               ; $4DCD: $EA $09 $D0
 
-jr_017_4DD0:
+ret_017_4DD0:
     ret                                           ; $4DD0: $C9
 
 Data_017_4DD1::
@@ -1568,7 +1568,7 @@ CreditsWindFishPrepare2Handler::
     ld   [wBGPalette], a                          ; $4ECF: $EA $97 $DB
     ld   a, [wD006]                               ; $4ED2: $FA $06 $D0
     and  a                                        ; $4ED5: $A7
-    jr   nz, jr_017_4EEE                          ; $4ED6: $20 $16
+    jr   nz, ret_017_4EEE                         ; $4ED6: $20 $16
 
     ld   a, $08                                   ; $4ED8: $3E $08
     ld   [wD006], a                               ; $4EDA: $EA $06 $D0
@@ -1576,12 +1576,12 @@ CreditsWindFishPrepare2Handler::
     inc  a                                        ; $4EE0: $3C
     ld   [wD00A], a                               ; $4EE1: $EA $0A $D0
     cp   $05                                      ; $4EE4: $FE $05
-    jr   nz, jr_017_4EEE                          ; $4EE6: $20 $06
+    jr   nz, ret_017_4EEE                         ; $4EE6: $20 $06
 
     call ResetCreditsSceneVariables               ; $4EE8: $CD $A5 $4D
     jp   IncrementCreditsSubscene                 ; $4EEB: $C3 $D9 $4C
 
-jr_017_4EEE:
+ret_017_4EEE:
     ret                                           ; $4EEE: $C9
 
 Data_017_4EEF::
@@ -1729,18 +1729,18 @@ jr_017_5160:
 jr_017_5176:
     ld   a, [wD00A]                               ; $5176: $FA $0A $D0
     cp   $07                                      ; $5179: $FE $07
-    jr   c, jr_017_51A6                           ; $517B: $38 $29
+    jr   c, ret_017_51A6                          ; $517B: $38 $29
 
     ld   a, [wD00B]                               ; $517D: $FA $0B $D0
     inc  a                                        ; $5180: $3C
     ld   [wD00B], a                               ; $5181: $EA $0B $D0
     and  $0F                                      ; $5184: $E6 $0F
-    jr   nz, jr_017_51A6                          ; $5186: $20 $1E
+    jr   nz, ret_017_51A6                         ; $5186: $20 $1E
 
     ld   a, [wD005]                               ; $5188: $FA $05 $D0
     add  $20                                      ; $518B: $C6 $20
     ld   [wD005], a                               ; $518D: $EA $05 $D0
-    jr   nz, jr_017_51A6                          ; $5190: $20 $14
+    jr   nz, ret_017_51A6                         ; $5190: $20 $14
 
     ld   a, $FE                                   ; $5192: $3E $FE
     ld   [wTransitionGfx], a                      ; $5194: $EA $7F $C1
@@ -1751,7 +1751,7 @@ jr_017_5176:
     ldh  [rIE], a                                 ; $51A1: $E0 $FF
     jp   IncrementCreditsSubscene                 ; $51A3: $C3 $D9 $4C
 
-jr_017_51A6:
+ret_017_51A6:
     ret                                           ; $51A6: $C9
 
 ; Windfish palette data.
@@ -1847,7 +1847,7 @@ jr_017_53B8:
 CreditsWindFishFloatingHandler::
     ld   a, [wD006]                               ; $53E0: $FA $06 $D0
     and  a                                        ; $53E3: $A7
-    jr   nz, jr_017_53F2                          ; $53E4: $20 $0C
+    jr   nz, ret_017_53F2                         ; $53E4: $20 $0C
 
     call IncrementCreditsSubscene                 ; $53E6: $CD $D9 $4C
 
@@ -1859,23 +1859,23 @@ CreditsOpenWindFishDialog::
     ld   a, $17                                   ; $53EE: $3E $17
     ldh  [hWaveSfx], a                            ; $53F0: $E0 $F3
 
-jr_017_53F2:
+ret_017_53F2:
     ret                                           ; $53F2: $C9
 
 CreditsWindFishSpeechHandler::
     ld   a, [wDialogState]                        ; $53F3: $FA $9F $C1
     and  a                                        ; $53F6: $A7
-    jr   nz, jr_017_53FC                          ; $53F7: $20 $03
+    jr   nz, ret_017_53FC                         ; $53F7: $20 $03
 
     call IncrementCreditsSubscene                 ; $53F9: $CD $D9 $4C
 
-jr_017_53FC:
+ret_017_53FC:
     ret                                           ; $53FC: $C9
 
 CreditsWindFishPrepareDisapparitionHandler::
     ld   a, [wDialogState]                        ; $53FD: $FA $9F $C1
     and  a                                        ; $5400: $A7
-    jr   nz, jr_017_541D                          ; $5401: $20 $1A
+    jr   nz, ret_017_541D                         ; $5401: $20 $1A
 
     ld   a, $01                                   ; $5403: $3E $01
     ldh  [rIE], a                                 ; $5405: $E0 $FF
@@ -1889,7 +1889,7 @@ CreditsWindFishPrepareDisapparitionHandler::
     ldh  [hWaveSfx], a                            ; $5418: $E0 $F3
     call IncrementCreditsSubscene                 ; $541A: $CD $D9 $4C
 
-jr_017_541D:
+ret_017_541D:
     ret                                           ; $541D: $C9
 
 Data_017_541E::
@@ -1946,16 +1946,16 @@ jr_017_547D:
     inc  a                                        ; $5480: $3C
     ld   [wD00B], a                               ; $5481: $EA $0B $D0
     and  $0F                                      ; $5484: $E6 $0F
-    jr   nz, jr_017_5493                          ; $5486: $20 $0B
+    jr   nz, ret_017_5493                         ; $5486: $20 $0B
 
     ld   a, [wD005]                               ; $5488: $FA $05 $D0
     and  a                                        ; $548B: $A7
-    jr   z, jr_017_5493                           ; $548C: $28 $05
+    jr   z, ret_017_5493                          ; $548C: $28 $05
 
     sub  $20                                      ; $548E: $D6 $20
     ld   [wD005], a                               ; $5490: $EA $05 $D0
 
-jr_017_5493:
+ret_017_5493:
     ret                                           ; $5493: $C9
 
 Data_017_5494::
@@ -2031,7 +2031,7 @@ jr_017_54F6:
 CreditsPlayInstrumentsDialogHandler::
     ld   a, [wDialogState]                        ; $550B: $FA $9F $C1
     and  a                                        ; $550E: $A7
-    jr   nz, jr_017_551F                          ; $550F: $20 $0E
+    jr   nz, ret_017_551F                         ; $550F: $20 $0E
 
     call ResetCreditsSceneVariables               ; $5511: $CD $A5 $4D
     ld   a, LINK_ANIMATION_STATE_UNKNOWN_03       ; $5514: $3E $03
@@ -2040,7 +2040,7 @@ CreditsPlayInstrumentsDialogHandler::
     ldh  [hReplaceTiles], a                       ; $551A: $E0 $A5
     call IncrementCreditsSubscene                 ; $551C: $CD $D9 $4C
 
-jr_017_551F:
+ret_017_551F:
     ret                                           ; $551F: $C9
 
 CreditsLinkTurnsToPlayHandler::
@@ -2081,7 +2081,7 @@ Data_017_5563::
 CreditsLinkPreparesToPlayHandler::
     ld   a, [wD006]                               ; $556B: $FA $06 $D0
     and  a                                        ; $556E: $A7
-    jr   nz, jr_017_55E9                          ; $556F: $20 $78
+    jr   nz, ret_017_55E9                         ; $556F: $20 $78
 
     ld   a, LINK_ANIMATION_STATE_STANDING_UP      ; $5571: $3E $04
     ldh  [hLinkAnimationState], a                 ; $5573: $E0 $9D
@@ -2153,7 +2153,7 @@ jr_017_55A3:
     ld   [wD006], a                               ; $55E3: $EA $06 $D0
     call IncrementCreditsSubscene                 ; $55E6: $CD $D9 $4C
 
-jr_017_55E9:
+ret_017_55E9:
     ret                                           ; $55E9: $C9
 
 CreditsLinkShowsInstrumentsHandler::
@@ -2166,11 +2166,11 @@ CreditsLinkShowsInstrumentsHandler::
 
 jr_017_55F6:
     and  a                                        ; $55F6: $A7
-    jr   nz, jr_017_55FC                          ; $55F7: $20 $03
+    jr   nz, ret_017_55FC                         ; $55F7: $20 $03
 
     call IncrementCreditsSubscene                 ; $55F9: $CD $D9 $4C
 
-jr_017_55FC:
+ret_017_55FC:
     ret                                           ; $55FC: $C9
 
 ; Handles:
@@ -2347,13 +2347,13 @@ jr_017_56DC:
 
 func_017_5728::
     call func_017_5970                            ; $5728: $CD $70 $59
-    jr   nz, jr_017_5735                          ; $572B: $20 $08
+    jr   nz, ret_017_5735                         ; $572B: $20 $08
 
     ld   a, $50                                   ; $572D: $3E $50
     ld   [wD006], a                               ; $572F: $EA $06 $D0
     jp   IncrementD000AndReturn                   ; $5732: $C3 $25 $56
 
-jr_017_5735:
+ret_017_5735:
     ret                                           ; $5735: $C9
 
 func_017_5736::
@@ -2367,11 +2367,11 @@ func_017_5736::
 KidsSceneHandler::
     ld   a, [wD006]                               ; $573D: $FA $06 $D0
     and  a                                        ; $5740: $A7
-    jr   nz, jr_017_5793                          ; $5741: $20 $50
+    jr   nz, ret_017_5793                         ; $5741: $20 $50
 
     call func_017_5736                            ; $5743: $CD $36 $57
     call func_017_59FD                            ; $5746: $CD $FD $59
-    jr   nz, jr_017_5793                          ; $5749: $20 $48
+    jr   nz, ret_017_5793                         ; $5749: $20 $48
 
     ldh  a, [hIsGBC]                              ; $574B: $F0 $FE
     and  a                                        ; $574D: $A7
@@ -2415,28 +2415,28 @@ jr_017_575A:
     ld   [hl], $50                                ; $578E: $36 $50
     jp   IncrementD000AndReturn                   ; $5790: $C3 $25 $56
 
-jr_017_5793:
+ret_017_5793:
     ret                                           ; $5793: $C9
 
 func_017_5794::
     call func_017_5970                            ; $5794: $CD $70 $59
-    jr   nz, jr_017_57A1                          ; $5797: $20 $08
+    jr   nz, ret_017_57A1                         ; $5797: $20 $08
 
     ld   a, $50                                   ; $5799: $3E $50
     ld   [wD006], a                               ; $579B: $EA $06 $D0
     jp   IncrementD000AndReturn                   ; $579E: $C3 $25 $56
 
-jr_017_57A1:
+ret_017_57A1:
     ret                                           ; $57A1: $C9
 
 BeachSceneHandler::
     ld   a, [wD006]                               ; $57A2: $FA $06 $D0
     and  a                                        ; $57A5: $A7
-    jr   nz, jr_017_57F8                          ; $57A6: $20 $50
+    jr   nz, ret_017_57F8                         ; $57A6: $20 $50
 
     call func_017_5736                            ; $57A8: $CD $36 $57
     call func_017_59FD                            ; $57AB: $CD $FD $59
-    jr   nz, jr_017_57F8                          ; $57AE: $20 $48
+    jr   nz, ret_017_57F8                         ; $57AE: $20 $48
 
     ldh  a, [hIsGBC]                              ; $57B0: $F0 $FE
     and  a                                        ; $57B2: $A7
@@ -2480,28 +2480,28 @@ jr_017_57BF:
     ld   [hl], $60                                ; $57F3: $36 $60
     jp   IncrementD000AndReturn                   ; $57F5: $C3 $25 $56
 
-jr_017_57F8:
+ret_017_57F8:
     ret                                           ; $57F8: $C9
 
 func_017_57F9::
     call func_017_5970                            ; $57F9: $CD $70 $59
-    jr   nz, jr_017_5806                          ; $57FC: $20 $08
+    jr   nz, ret_017_5806                         ; $57FC: $20 $08
 
     ld   a, $50                                   ; $57FE: $3E $50
     ld   [wD006], a                               ; $5800: $EA $06 $D0
     jp   IncrementD000AndReturn                   ; $5803: $C3 $25 $56
 
-jr_017_5806:
+ret_017_5806:
     ret                                           ; $5806: $C9
 
 TarinSceneHandler::
     ld   a, [wD006]                               ; $5807: $FA $06 $D0
     and  a                                        ; $580A: $A7
-    jr   nz, jr_017_583B                          ; $580B: $20 $2E
+    jr   nz, ret_017_583B                         ; $580B: $20 $2E
 
     call func_017_5736                            ; $580D: $CD $36 $57
     call func_017_59FD                            ; $5810: $CD $FD $59
-    jr   nz, jr_017_583B                          ; $5813: $20 $26
+    jr   nz, ret_017_583B                         ; $5813: $20 $26
 
     ldh  a, [hIsGBC]                              ; $5815: $F0 $FE
     and  a                                        ; $5817: $A7
@@ -2527,28 +2527,28 @@ jr_017_5824:
     ld   [hl], $50                                ; $5836: $36 $50
     jp   IncrementD000AndReturn                   ; $5838: $C3 $25 $56
 
-jr_017_583B:
+ret_017_583B:
     ret                                           ; $583B: $C9
 
 func_017_583C::
     call func_017_5970                            ; $583C: $CD $70 $59
-    jr   nz, jr_017_5849                          ; $583F: $20 $08
+    jr   nz, ret_017_5849                         ; $583F: $20 $08
 
     ld   a, $50                                   ; $5841: $3E $50
     ld   [wD006], a                               ; $5843: $EA $06 $D0
     jp   IncrementD000AndReturn                   ; $5846: $C3 $25 $56
 
-jr_017_5849:
+ret_017_5849:
     ret                                           ; $5849: $C9
 
 MarinSingingSceneHandler:
     ld   a, [wD006]                               ; $584A: $FA $06 $D0
     and  a                                        ; $584D: $A7
-    jr   nz, jr_017_58C2                          ; $584E: $20 $72
+    jr   nz, ret_017_58C2                         ; $584E: $20 $72
 
     call func_017_5736                            ; $5850: $CD $36 $57
     call func_017_59FD                            ; $5853: $CD $FD $59
-    jr   nz, jr_017_58C2                          ; $5856: $20 $6A
+    jr   nz, ret_017_58C2                         ; $5856: $20 $6A
 
     ldh  a, [hIsGBC]                              ; $5858: $F0 $FE
     and  a                                        ; $585A: $A7
@@ -2610,29 +2610,29 @@ jr_017_5867:
     ld   [hl], $60                                ; $58BD: $36 $60
     jp   IncrementD000AndReturn                   ; $58BF: $C3 $25 $56
 
-jr_017_58C2:
+ret_017_58C2:
     ret                                           ; $58C2: $C9
 
 func_017_58C3::
     call func_017_5970                            ; $58C3: $CD $70 $59
-    jr   nz, jr_017_58D0                          ; $58C6: $20 $08
+    jr   nz, ret_017_58D0                         ; $58C6: $20 $08
 
     ld   a, $C0                                   ; $58C8: $3E $C0
     ld   [wD006], a                               ; $58CA: $EA $06 $D0
     jp   IncrementD000AndReturn                   ; $58CD: $C3 $25 $56
 
-jr_017_58D0:
+ret_017_58D0:
     ret                                           ; $58D0: $C9
 
 ; Load koholint island disapearing GFX
 func_017_58D1::
     ld   a, [wD006]                               ; $58D1: $FA $06 $D0
     and  a                                        ; $58D4: $A7
-    jr   nz, jr_017_58EF                          ; $58D5: $20 $18
+    jr   nz, ret_017_58EF                         ; $58D5: $20 $18
 
     call func_017_5736                            ; $58D7: $CD $36 $57
     call func_017_59FD                            ; $58DA: $CD $FD $59
-    jr   nz, jr_017_58EF                          ; $58DD: $20 $10
+    jr   nz, ret_017_58EF                         ; $58DD: $20 $10
 
     ld   a, TILESET_CREDITS_KOHOLINT_DISAPPEARING ; $58DF: $3E $1E
     ld   [wTilesetToLoad], a                      ; $58E1: $EA $FE $D6
@@ -2643,7 +2643,7 @@ func_017_58D1::
     call DisableAllEntities                       ; $58E9: $CD $2A $56
     jp   IncrementD000AndReturn                   ; $58EC: $C3 $25 $56
 
-jr_017_58EF:
+ret_017_58EF:
     ret                                           ; $58EF: $C9
 
 func_017_58F0::
@@ -2653,7 +2653,7 @@ func_017_58F0::
 
 func_017_58F8::
     call func_017_59A9                            ; $58F8: $CD $A9 $59
-    jr   nz, jr_017_590A                          ; $58FB: $20 $0D
+    jr   nz, ret_017_590A                         ; $58FB: $20 $0D
 
     ld   a, $A0                                   ; $58FD: $3E $A0
     ld   [wD006], a                               ; $58FF: $EA $06 $D0
@@ -2661,7 +2661,7 @@ func_017_58F8::
     ld   [wD00B], a                               ; $5904: $EA $0B $D0
     jp   IncrementD000AndReturn                   ; $5907: $C3 $25 $56
 
-jr_017_590A:
+ret_017_590A:
     ret                                           ; $590A: $C9
 
 func_017_590B::
@@ -2674,11 +2674,11 @@ func_017_590B::
 
 jr_017_5917:
     and  a                                        ; $5917: $A7
-    jr   nz, jr_017_594F                          ; $5918: $20 $35
+    jr   nz, ret_017_594F                         ; $5918: $20 $35
 
     ldh  a, [hFrameCounter]                       ; $591A: $F0 $E7
     and  $03                                      ; $591C: $E6 $03
-    jr   nz, jr_017_594F                          ; $591E: $20 $2F
+    jr   nz, ret_017_594F                         ; $591E: $20 $2F
 
     ld   a, [wD00B]                               ; $5920: $FA $0B $D0
     cp   $3F                                      ; $5923: $FE $3F
@@ -2708,7 +2708,7 @@ func_017_5938::
     call ClearFileMenuBG_trampoline               ; $5949: $CD $FA $08
     jp   IncrementD000AndReturn                   ; $594C: $C3 $25 $56
 
-jr_017_594F:
+ret_017_594F:
     ret                                           ; $594F: $C9
 
 Data_017_5950::
@@ -3321,7 +3321,7 @@ jr_017_5FFF:
 CreditsWaterNoiseFadingOutHandler::
     ld   a, [wD006]                               ; $6024: $FA $06 $D0
     and  a                                        ; $6027: $A7
-    jr   nz, jr_017_6045                          ; $6028: $20 $1B
+    jr   nz, ret_017_6045                         ; $6028: $20 $1B
 
     xor  a                                        ; $602A: $AF
     ld   [wCreditsSubscene], a                    ; $602B: $EA $0E $D0
@@ -3335,7 +3335,7 @@ CreditsWaterNoiseFadingOutHandler::
     ld   hl, wGameplaySubtype                     ; $6041: $21 $96 $DB
     inc  [hl]                                     ; $6044: $34
 
-jr_017_6045:
+ret_017_6045:
     ret                                           ; $6045: $C9
 
 CreditsLinkOnSeaLargeHandler::
@@ -3432,7 +3432,7 @@ LinkOnSeaLarge2Handler::
 LinkOnSeaLarge3Handler::
     ld   a, [wD009]                               ; $60F5: $FA $09 $D0
     and  a                                        ; $60F8: $A7
-    jr   nz, jr_017_6114                          ; $60F9: $20 $19
+    jr   nz, ret_017_6114                         ; $60F9: $20 $19
 
     xor  a                                        ; $60FB: $AF
     ld   [wCreditsSubscene], a                    ; $60FC: $EA $0E $D0
@@ -3447,7 +3447,7 @@ LinkOnSeaLarge3Handler::
     ld   hl, wGameplaySubtype                     ; $6110: $21 $96 $DB
     inc  [hl]                                     ; $6113: $34
 
-jr_017_6114:
+ret_017_6114:
     ret                                           ; $6114: $C9
 
 CreditsSunAboveHandler::
@@ -3598,12 +3598,12 @@ jr_017_61FE:
 CreditsSunAbove3Handler::
     ld   a, [wD009]                               ; $6223: $FA $09 $D0
     and  a                                        ; $6226: $A7
-    jr   nz, jr_017_622F                          ; $6227: $20 $06
+    jr   nz, ret_017_622F                         ; $6227: $20 $06
 
     call ResetCreditsSceneVariables               ; $6229: $CD $A5 $4D
     jp   IncrementCreditsSubscene                 ; $622C: $C3 $D9 $4C
 
-jr_017_622F:
+ret_017_622F:
     ret                                           ; $622F: $C9
 
 CreditsSunAbove4Handler::
@@ -3815,13 +3815,13 @@ jr_017_63F1:
 func_017_63FB::
     ld   a, [wD009]                               ; $63FB: $FA $09 $D0
     and  a                                        ; $63FE: $A7
-    jr   nz, jr_017_6405                          ; $63FF: $20 $04
+    jr   nz, ret_017_6405                         ; $63FF: $20 $04
 
 label_017_6401:
     ld   hl, wIntroTimer                          ; $6401: $21 $01 $D0
     inc  [hl]                                     ; $6404: $34
 
-jr_017_6405:
+ret_017_6405:
     ret                                           ; $6405: $C9
 
 Data_017_6406::
@@ -3833,7 +3833,7 @@ Data_017_6412::
 func_017_641E::
     ld   a, [wD006]                               ; $641E: $FA $06 $D0
     and  a                                        ; $6421: $A7
-    jr   nz, jr_017_6446                          ; $6422: $20 $22
+    jr   nz, ret_017_6446                         ; $6422: $20 $22
 
     ld   a, [wD00D]                               ; $6424: $FA $0D $D0
     ld   e, a                                     ; $6427: $5F
@@ -3852,24 +3852,24 @@ jr_017_642E:
     inc  a                                        ; $643B: $3C
     ld   [wD00D], a                               ; $643C: $EA $0D $D0
     cp   $0C                                      ; $643F: $FE $0C
-    jr   nz, jr_017_6446                          ; $6441: $20 $03
+    jr   nz, ret_017_6446                         ; $6441: $20 $03
 
     jp   label_017_6401                           ; $6443: $C3 $01 $64
 
-jr_017_6446:
+ret_017_6446:
     ret                                           ; $6446: $C9
 
 func_017_6447::
     ld   a, [wD006]                               ; $6447: $FA $06 $D0
     and  a                                        ; $644A: $A7
-    jr   nz, jr_017_6455                          ; $644B: $20 $08
+    jr   nz, ret_017_6455                         ; $644B: $20 $08
 
     xor  a                                        ; $644D: $AF
     ld   [wD005], a                               ; $644E: $EA $05 $D0
     call IncrementCreditsSubscene                 ; $6451: $CD $D9 $4C
     ret                                           ; $6454: $C9
 
-jr_017_6455:
+ret_017_6455:
     ret                                           ; $6455: $C9
 
 ; Palettes indices
@@ -3948,7 +3948,7 @@ jr_017_64B3:
 func_017_64D8::
     ld   a, [wD006]                               ; $64D8: $FA $06 $D0
     and  a                                        ; $64DB: $A7
-    jr   nz, jr_017_651D                          ; $64DC: $20 $3F
+    jr   nz, ret_017_651D                         ; $64DC: $20 $3F
 
 func_017_64DE::
     xor  a                                        ; $64DE: $AF
@@ -3974,11 +3974,11 @@ func_017_64DE::
     inc  [hl]                                     ; $6515: $34
     ld   a, [hl]                                  ; $6516: $7E
     cp   $0A                                      ; $6517: $FE $0A
-    jr   nz, jr_017_651D                          ; $6519: $20 $02
+    jr   nz, ret_017_651D                         ; $6519: $20 $02
 
     ld   [hl], $00                                ; $651B: $36 $00
 
-jr_017_651D:
+ret_017_651D:
     ret                                           ; $651D: $C9
 
 Data_017_651E::
@@ -4119,7 +4119,7 @@ func_017_67CA::
     ldh  a, [hFrameCounter]                       ; $67CA: $F0 $E7
     and  $01                                      ; $67CC: $E6 $01
     cp   $01                                      ; $67CE: $FE $01
-    jr   nz, jr_017_6808                          ; $67D0: $20 $36
+    jr   nz, ret_017_6808                         ; $67D0: $20 $36
 
     ld   a, [wIntroSubTimer]                      ; $67D2: $FA $02 $D0
     sla  a                                        ; $67D5: $CB $27
@@ -4166,7 +4166,7 @@ func_017_67CA::
     xor  a                                        ; $6806: $AF
     ld   [de], a                                  ; $6807: $12
 
-jr_017_6808:
+ret_017_6808:
     ret                                           ; $6808: $C9
 
 CreditsLinkSeatedOnLogHandler::
@@ -4260,12 +4260,12 @@ LinkSeatedOnLog3Handler::
     call func_017_488C                            ; $68A7: $CD $8C $48
     ld   a, [wD009]                               ; $68AA: $FA $09 $D0
     and  a                                        ; $68AD: $A7
-    jr   nz, jr_017_68B6                          ; $68AE: $20 $06
+    jr   nz, ret_017_68B6                         ; $68AE: $20 $06
 
     call ResetCreditsSceneVariables               ; $68B0: $CD $A5 $4D
     jp   IncrementCreditsSubscene                 ; $68B3: $C3 $D9 $4C
 
-jr_017_68B6:
+ret_017_68B6:
     ret                                           ; $68B6: $C9
 
 ; Palettes indices
@@ -4367,7 +4367,7 @@ LinkSeatedOnLog5Handler::
     call func_017_488C                            ; $6AAF: $CD $8C $48
     ld   a, [wD006]                               ; $6AB2: $FA $06 $D0
     and  a                                        ; $6AB5: $A7
-    jr   nz, jr_017_6AD0                          ; $6AB6: $20 $18
+    jr   nz, ret_017_6AD0                         ; $6AB6: $20 $18
 
     ld   a, $0A                                   ; $6AB8: $3E $0A
     ld   [wD006], a                               ; $6ABA: $EA $06 $D0
@@ -4375,13 +4375,13 @@ LinkSeatedOnLog5Handler::
     inc  a                                        ; $6AC0: $3C
     ld   [wCreditsScratch0], a                    ; $6AC1: $EA $00 $D0
     cp   $02                                      ; $6AC4: $FE $02
-    jr   nz, jr_017_6AD0                          ; $6AC6: $20 $08
+    jr   nz, ret_017_6AD0                         ; $6AC6: $20 $08
 
     ld   a, $20                                   ; $6AC8: $3E $20
     ld   [wD006], a                               ; $6ACA: $EA $06 $D0
     jp   IncrementCreditsSubscene                 ; $6ACD: $C3 $D9 $4C
 
-jr_017_6AD0:
+ret_017_6AD0:
     ret                                           ; $6AD0: $C9
 
 LinkSeatedOnLog6Handler::
@@ -4389,11 +4389,11 @@ LinkSeatedOnLog6Handler::
     call func_017_488C                            ; $6AD4: $CD $8C $48
     ld   a, [wD006]                               ; $6AD7: $FA $06 $D0
     and  a                                        ; $6ADA: $A7
-    jr   nz, jr_017_6AE0                          ; $6ADB: $20 $03
+    jr   nz, ret_017_6AE0                         ; $6ADB: $20 $03
 
     jp   IncrementCreditsSubscene                 ; $6ADD: $C3 $D9 $4C
 
-jr_017_6AE0:
+ret_017_6AE0:
     ret                                           ; $6AE0: $C9
 
 Data_017_6AE1::
@@ -4560,17 +4560,17 @@ jr_017_6CA9:
     ld   [wBGPalette], a                          ; $6CBA: $EA $97 $DB
     ld   a, [wD008]                               ; $6CBD: $FA $08 $D0
     and  a                                        ; $6CC0: $A7
-    jr   nz, jr_017_6D0A                          ; $6CC1: $20 $47
+    jr   nz, ret_017_6D0A                         ; $6CC1: $20 $47
 
     ld   a, [wD00B]                               ; $6CC3: $FA $0B $D0
     inc  a                                        ; $6CC6: $3C
     ld   [wD00B], a                               ; $6CC7: $EA $0B $D0
     and  $07                                      ; $6CCA: $E6 $07
-    jr   nz, jr_017_6D0A                          ; $6CCC: $20 $3C
+    jr   nz, ret_017_6D0A                         ; $6CCC: $20 $3C
 
     ld   a, [wD00C]                               ; $6CCE: $FA $0C $D0
     cp   $24                                      ; $6CD1: $FE $24
-    jr   z, jr_017_6D0A                           ; $6CD3: $28 $35
+    jr   z, ret_017_6D0A                          ; $6CD3: $28 $35
 
     ldh  a, [hIsGBC]                              ; $6CD5: $F0 $FE
     and  a                                        ; $6CD7: $A7
@@ -4583,7 +4583,7 @@ jr_017_6CDD:
     inc  a                                        ; $6CE0: $3C
     ld   [wD00C], a                               ; $6CE1: $EA $0C $D0
     cp   $05                                      ; $6CE4: $FE $05
-    jr   nz, jr_017_6D0A                          ; $6CE6: $20 $22
+    jr   nz, ret_017_6D0A                         ; $6CE6: $20 $22
 
     ld   a, $1E                                   ; $6CE8: $3E $1E
     ld   [wOBJ0Palette], a                        ; $6CEA: $EA $98 $DB
@@ -4602,7 +4602,7 @@ jr_017_6CDD:
     add  hl, de                                   ; $6D07: $19
     ld   [hl], $60                                ; $6D08: $36 $60
 
-jr_017_6D0A:
+ret_017_6D0A:
     ret                                           ; $6D0A: $C9
 
 func_017_6D0B::
@@ -4767,13 +4767,13 @@ jr_017_6E07:
     jr   z, jr_017_6E0F                           ; $6E09: $28 $04
 
     cp   $50                                      ; $6E0B: $FE $50
-    jr   nz, jr_017_6E13                          ; $6E0D: $20 $04
+    jr   nz, ret_017_6E13                         ; $6E0D: $20 $04
 
 jr_017_6E0F:
     ld   hl, wD003                                ; $6E0F: $21 $03 $D0
     inc  [hl]                                     ; $6E12: $34
 
-jr_017_6E13:
+ret_017_6E13:
     ret                                           ; $6E13: $C9
 
 CreditsLinkFaceCloseUp5Handler::
@@ -4826,11 +4826,11 @@ jr_017_6E40:
 CreditsLinkFaceCloseUp6Handler::
     ld   a, [wD006]                               ; $6E65: $FA $06 $D0
     and  a                                        ; $6E68: $A7
-    jr   nz, jr_017_6E6E                          ; $6E69: $20 $03
+    jr   nz, ret_017_6E6E                         ; $6E69: $20 $03
 
     jp   func_017_64DE                            ; $6E6B: $C3 $DE $64
 
-jr_017_6E6E:
+ret_017_6E6E:
     ret                                           ; $6E6E: $C9
 
 CreditsRollHandler::
@@ -4931,11 +4931,11 @@ jr_017_6F10:
 CreditsRoll3Handler::
     ld   a, [wD013]                               ; $6F28: $FA $13 $D0
     and  a                                        ; $6F2B: $A7
-    jr   nz, jr_017_6F67                          ; $6F2C: $20 $39
+    jr   nz, ret_017_6F67                         ; $6F2C: $20 $39
 
     ldh  a, [hFrameCounter]                       ; $6F2E: $F0 $E7
     and  $07                                      ; $6F30: $E6 $07
-    jr   nz, jr_017_6F67                          ; $6F32: $20 $33
+    jr   nz, ret_017_6F67                         ; $6F32: $20 $33
 
     ld   hl, hBaseScrollY                         ; $6F34: $21 $97 $FF
     dec  [hl]                                     ; $6F37: $35
@@ -4955,7 +4955,7 @@ jr_017_6F40:
 
 jr_017_6F4C:
     cp   $C0                                      ; $6F4C: $FE $C0
-    jr   nz, jr_017_6F67                          ; $6F4E: $20 $17
+    jr   nz, ret_017_6F67                         ; $6F4E: $20 $17
 
     ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $6F50: $3E $E8
     call SpawnNewEntity_trampoline                ; $6F52: $CD $86 $3B
@@ -4969,7 +4969,7 @@ jr_017_6F4C:
     add  hl, de                                   ; $6F64: $19
     ld   [hl], $0F                                ; $6F65: $36 $0F
 
-jr_017_6F67:
+ret_017_6F67:
     ret                                           ; $6F67: $C9
 
 CreditsRoll4Handler::
@@ -5212,7 +5212,7 @@ jr_017_7188:
 jr_017_71AC:
     ldh  a, [hFrameCounter]                       ; $71AC: $F0 $E7
     and  $01                                      ; $71AE: $E6 $01
-    jr   nz, jr_017_71CC                          ; $71B0: $20 $1A
+    jr   nz, ret_017_71CC                         ; $71B0: $20 $1A
 
     ld   hl, wEntitiesSpeedXTable                 ; $71B2: $21 $40 $C2
     add  hl, bc                                   ; $71B5: $09
@@ -5228,7 +5228,7 @@ jr_017_71AC:
     call IncrementCreditsSubscene                 ; $71C6: $CD $D9 $4C
     jp   label_017_7CC2                           ; $71C9: $C3 $C2 $7C
 
-jr_017_71CC:
+ret_017_71CC:
     ret                                           ; $71CC: $C9
 
 func_017_71CD::
@@ -5323,12 +5323,12 @@ jr_017_72A6:
     inc  a                                        ; $72B2: $3C
     ld   [hl], a                                  ; $72B3: $77
     and  $7F                                      ; $72B4: $E6 $7F
-    jr   nz, jr_017_72BC                          ; $72B6: $20 $04
+    jr   nz, ret_017_72BC                         ; $72B6: $20 $04
 
     ld   a, JINGLE_SEAGULL                        ; $72B8: $3E $21
     ldh  [hJingle], a                             ; $72BA: $E0 $F2
 
-jr_017_72BC:
+ret_017_72BC:
     ret                                           ; $72BC: $C9
 
 jr_017_72BD:
@@ -5536,14 +5536,14 @@ func_017_7545::
     jr   z, jr_017_756C                           ; $7566: $28 $04
 
     cp   $30                                      ; $7568: $FE $30
-    jr   nz, jr_017_7571                          ; $756A: $20 $05
+    jr   nz, ret_017_7571                         ; $756A: $20 $05
 
 jr_017_756C:
     ld   hl, wEntitiesSpriteVariantTable          ; $756C: $21 $B0 $C3
     add  hl, bc                                   ; $756F: $09
     inc  [hl]                                     ; $7570: $34
 
-jr_017_7571:
+ret_017_7571:
     ret                                           ; $7571: $C9
 
 Data_017_7572::
@@ -5575,10 +5575,10 @@ func_017_75AA::
     call UpdateEntityYPosWithSpeed_17             ; $75C9: $CD $30 $7E
     ldh  a, [hActiveEntityState]                  ; $75CC: $F0 $F0
     cp   $02                                      ; $75CE: $FE $02
-    jr   nc, jr_017_75E0                          ; $75D0: $30 $0E
+    jr   nc, ret_017_75E0                         ; $75D0: $30 $0E
 
     call GetEntityTransitionCountdown             ; $75D2: $CD $05 $0C
-    jr   nz, jr_017_75E0                          ; $75D5: $20 $09
+    jr   nz, ret_017_75E0                         ; $75D5: $20 $09
 
 jr_017_75D7:
     ld   [hl], $C0                                ; $75D7: $36 $C0
@@ -5586,7 +5586,7 @@ jr_017_75D7:
     ld   a, $17                                   ; $75DC: $3E $17
     ldh  [hWaveSfx], a                            ; $75DE: $E0 $F3
 
-jr_017_75E0:
+ret_017_75E0:
     ret                                           ; $75E0: $C9
 
 Data_017_75E1::
@@ -6296,7 +6296,7 @@ func_017_7B06::
     call func_017_7AEF                            ; $7B0A: $CD $EF $7A
     ldh  a, [hLinkPositionY]                      ; $7B0D: $F0 $99
     cp   $5C                                      ; $7B0F: $FE $5C
-    jr   nz, jr_017_7B40                          ; $7B11: $20 $2D
+    jr   nz, ret_017_7B40                         ; $7B11: $20 $2D
 
     xor  a                                        ; $7B13: $AF
     ldh  [hLinkSpeedY], a                         ; $7B14: $E0 $9B
@@ -6321,7 +6321,7 @@ func_017_7B06::
     ld   [hl], $30                                ; $7B3B: $36 $30
     call IncrementEntityState                     ; $7B3D: $CD $12 $3B
 
-jr_017_7B40:
+ret_017_7B40:
     ret                                           ; $7B40: $C9
 
 func_017_7B41::
@@ -6470,23 +6470,23 @@ func_017_7C1B::
 
 func_017_7C4D::
     call GetEntityTransitionCountdown             ; $7C4D: $CD $05 $0C
-    jr   nz, jr_017_7C6A                          ; $7C50: $20 $18
+    jr   nz, ret_017_7C6A                         ; $7C50: $20 $18
 
     call UpdateEntityYPosWithSpeed_17             ; $7C52: $CD $30 $7E
     ldh  a, [hFrameCounter]                       ; $7C55: $F0 $E7
     and  $03                                      ; $7C57: $E6 $03
-    jr   nz, jr_017_7C6A                          ; $7C59: $20 $0F
+    jr   nz, ret_017_7C6A                         ; $7C59: $20 $0F
 
     ld   hl, wEntitiesSpeedYTable                 ; $7C5B: $21 $50 $C2
     add  hl, bc                                   ; $7C5E: $09
     dec  [hl]                                     ; $7C5F: $35
-    jr   nz, jr_017_7C6A                          ; $7C60: $20 $08
+    jr   nz, ret_017_7C6A                         ; $7C60: $20 $08
 
     call GetEntityTransitionCountdown             ; $7C62: $CD $05 $0C
     ld   [hl], $80                                ; $7C65: $36 $80
     call IncrementEntityState                     ; $7C67: $CD $12 $3B
 
-jr_017_7C6A:
+ret_017_7C6A:
     ret                                           ; $7C6A: $C9
 
 Data_017_7C6B::
@@ -6526,13 +6526,13 @@ func_017_7CA5::
     call func_017_7C8D                            ; $7CA5: $CD $8D $7C
     ld   a, [wDialogState]                        ; $7CA8: $FA $9F $C1
     and  a                                        ; $7CAB: $A7
-    jr   nz, jr_017_7CB6                          ; $7CAC: $20 $08
+    jr   nz, ret_017_7CB6                         ; $7CAC: $20 $08
 
     call GetEntityTransitionCountdown             ; $7CAE: $CD $05 $0C
     ld   [hl], $FF                                ; $7CB1: $36 $FF
     call IncrementEntityState                     ; $7CB3: $CD $12 $3B
 
-jr_017_7CB6:
+ret_017_7CB6:
     ret                                           ; $7CB6: $C9
 
 func_017_7CB7::
@@ -6551,7 +6551,7 @@ label_017_7CC2:
 
 jr_017_7CC8:
     cp   $E0                                      ; $7CC8: $FE $E0
-    jr   nc, jr_017_7CEF                          ; $7CCA: $30 $23
+    jr   nc, ret_017_7CEF                         ; $7CCA: $30 $23
 
     cp   $DF                                      ; $7CCC: $FE $DF
     jr   nz, jr_017_7CD4                          ; $7CCE: $20 $04
@@ -6574,12 +6574,12 @@ jr_017_7CD4:
     ld   a, [hl]                                  ; $7CE5: $7E
     add  e                                        ; $7CE6: $83
     ld   [hl], a                                  ; $7CE7: $77
-    jr   nc, jr_017_7CEF                          ; $7CE8: $30 $05
+    jr   nc, ret_017_7CEF                         ; $7CE8: $30 $05
 
     ld   a, $FF                                   ; $7CEA: $3E $FF
     call SetEntitySpriteVariant                   ; $7CEC: $CD $0C $3B
 
-jr_017_7CEF:
+ret_017_7CEF:
     ret                                           ; $7CEF: $C9
 
 CreditsOpenDialog::

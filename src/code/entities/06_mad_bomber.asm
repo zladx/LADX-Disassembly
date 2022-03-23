@@ -117,7 +117,7 @@ MadBomberState3Handler::
     add  hl, bc                                   ; $41DA: $09
     ld   a, [hl]                                  ; $41DB: $7E
     and  a                                        ; $41DC: $A7
-    jr   nz, jr_006_4217                          ; $41DD: $20 $38
+    jr   nz, ret_006_4217                         ; $41DD: $20 $38
 
     ld   a, ENTITY_BOMB                           ; $41DF: $3E $02
     call SpawnNewEntity_trampoline                ; $41E1: $CD $86 $3B
@@ -152,7 +152,7 @@ label_006_41F8:
     ld   a, JINGLE_JUMP_DOWN                      ; $4213: $3E $08
     ldh  [hJingle], a                             ; $4215: $E0 $F2
 
-jr_006_4217:
+ret_006_4217:
     ret                                           ; $4217: $C9
 
 jr_006_4218:

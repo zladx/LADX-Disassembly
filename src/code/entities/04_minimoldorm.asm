@@ -185,7 +185,7 @@ jr_004_5B37:
 
 jr_004_5B66:
     call GetEntityTransitionCountdown             ; $5B66: $CD $05 $0C
-    jr   nz, jr_004_5B7E                          ; $5B69: $20 $13
+    jr   nz, ret_004_5B7E                         ; $5B69: $20 $13
 
     call GetRandomByte                            ; $5B6B: $CD $0D $28
     and  $1F                                      ; $5B6E: $E6 $1F
@@ -198,7 +198,7 @@ jr_004_5B66:
     add  hl, bc                                   ; $5B7C: $09
     ld   [hl], a                                  ; $5B7D: $77
 
-jr_004_5B7E:
+ret_004_5B7E:
     ret                                           ; $5B7E: $C9
 
 func_004_5B7F::

@@ -2242,7 +2242,7 @@ func_001_7D46::
     ldh  a, [hFrameCounter]                       ; $7D46: $F0 $E7
     and  $0F                                      ; $7D48: $E6 $0F
     cp   $04                                      ; $7D4A: $FE $04
-    jr   c, jr_001_7D9B                           ; $7D4C: $38 $4D
+    jr   c, ret_001_7D9B                          ; $7D4C: $38 $4D
 
 func_001_7D4E::
     ldh  a, [hFrameCounter]                       ; $7D4E: $F0 $E7
@@ -2293,7 +2293,7 @@ func_001_7D4E::
     ld   a, d                                     ; $7D97: $7A
     ld   [wD009], a                               ; $7D98: $EA $09 $D0
 
-jr_001_7D9B::
+ret_001_7D9B::
     ret                                           ; $7D9B: $C9
 
 func_001_7D9C::

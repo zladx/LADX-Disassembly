@@ -77,11 +77,11 @@ jr_01F_7FD7:
 jr_01F_7FE2:
     ldh  a, [hNoiseSfx]                           ; $7FE2: $F0 $F4
     and  a                                        ; $7FE4: $A7
-    jr   z, jr_01F_7FED                           ; $7FE5: $28 $06
+    jr   z, ret_01F_7FED                          ; $7FE5: $28 $06
 
     ld   [wActiveNoiseSfx], a                     ; $7FE7: $EA $78 $D3
     xor  a                                        ; $7FEA: $AF
     ldh  [hNoiseSfx], a                           ; $7FEB: $E0 $F4
 
-jr_01F_7FED:
+ret_01F_7FED:
     ret                                           ; $7FED: $C9

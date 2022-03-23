@@ -45,11 +45,11 @@ func_006_6CAB::
     add  hl, bc                                   ; $6CB4: $09
     ld   [hl], a                                  ; $6CB5: $77
     cp   $80                                      ; $6CB6: $FE $80
-    jr   nc, jr_006_6CBD                          ; $6CB8: $30 $03
+    jr   nc, ret_006_6CBD                         ; $6CB8: $30 $03
 
     call func_006_700A                            ; $6CBA: $CD $0A $70
 
-jr_006_6CBD:
+ret_006_6CBD:
     ret                                           ; $6CBD: $C9
 
 label_006_6CBE:

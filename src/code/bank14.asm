@@ -308,7 +308,7 @@ jr_014_4B5A:
     ld   hl, wScreenShakeHorizontal               ; $4B60: $21 $55 $C1
     ld   [hl], b                                  ; $4B63: $70
     cp   $20                                      ; $4B64: $FE $20
-    jr   c, jr_014_4B8E                           ; $4B66: $38 $26
+    jr   c, ret_014_4B8E                          ; $4B66: $38 $26
 
     rla                                           ; $4B68: $17
     nop                                           ; $4B69: $00
@@ -335,7 +335,7 @@ jr_014_4B8A:
     ld   a, $02                                   ; $4B8A: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4B8C: $E0 $A1
 
-jr_014_4B8E:
+ret_014_4B8E:
     ret                                           ; $4B8E: $C9
 
 Data_014_4B8F::
@@ -1399,7 +1399,7 @@ func_014_54AC::
     ld   hl, wFreeMovementMode                    ; $54AC: $21 $7B $C1
     ld   a, [wRoomTransitionState]                ; $54AF: $FA $24 $C1
     or   [hl]                                     ; $54B2: $B6
-    jr   nz, jr_014_54E7                          ; $54B3: $20 $32
+    jr   nz, ret_014_54E7                         ; $54B3: $20 $32
 
     ldh  a, [hLinkPositionX]                      ; $54B5: $F0 $98
     sub  $11                                      ; $54B7: $D6 $11
@@ -1425,7 +1425,7 @@ jr_014_54D1:
     ldh  a, [hLinkPositionY]                      ; $54D1: $F0 $99
     sub  $16                                      ; $54D3: $D6 $16
     cp   $5E                                      ; $54D5: $FE $5E
-    jr   c, jr_014_54E7                           ; $54D7: $38 $0E
+    jr   c, ret_014_54E7                          ; $54D7: $38 $0E
 
     ldh  a, [hLinkPositionY]                      ; $54D9: $F0 $99
     dec  a                                        ; $54DB: $3D
@@ -1437,7 +1437,7 @@ jr_014_54DE:
     ld   a, $02                                   ; $54E2: $3E $02
     ld   [wC111], a                               ; $54E4: $EA $11 $C1
 
-jr_014_54E7:
+ret_014_54E7:
     ret                                           ; $54E7: $C9
 
 Data_014_54E8::
@@ -1457,7 +1457,7 @@ func_014_54F8::
 jr_014_5502:
     ld   a, [wC157]                               ; $5502: $FA $57 $C1
     and  a                                        ; $5505: $A7
-    jr   z, jr_014_5525                           ; $5506: $28 $1D
+    jr   z, ret_014_5525                          ; $5506: $28 $1D
 
     dec  a                                        ; $5508: $3D
     ld   [wC157], a                               ; $5509: $EA $57 $C1
@@ -1475,7 +1475,7 @@ jr_014_5502:
     ld   a, [hl]                                  ; $5521: $7E
     ld   [wScreenShakeVertical], a                ; $5522: $EA $56 $C1
 
-jr_014_5525:
+ret_014_5525:
     ret                                           ; $5525: $C9
 
 func_014_5526::
@@ -1999,7 +1999,7 @@ func_014_5838::
     jr   z, jr_014_5866                           ; $583F: $28 $25
 
     cp   $0B                                      ; $5841: $FE $0B
-    jr   nc, jr_014_5883                          ; $5843: $30 $3E
+    jr   nc, ret_014_5883                         ; $5843: $30 $3E
 
     ld   hl, MapLayout0                           ; $5845: $21 $20 $42
     swap a                                        ; $5848: $CB $37
@@ -2045,7 +2045,7 @@ jr_014_5879:
 jr_014_5882:
     add  hl, de                                   ; $5882: $19
 
-jr_014_5883:
+ret_014_5883:
     ret                                           ; $5883: $C9
 
 ; Retrieve the status of chests in the given room

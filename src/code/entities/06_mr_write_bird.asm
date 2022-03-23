@@ -208,17 +208,17 @@ jr_006_732C:
 func_006_7335::
     ld   a, [wSwordAnimationState]                ; $7335: $FA $37 $C1
     cp   SWORD_ANIMATION_STATE_SWING_START        ; $7338: $FE $02
-    jr   nz, jr_006_7371                          ; $733A: $20 $35
+    jr   nz, ret_006_7371                         ; $733A: $20 $35
 
     call func_006_6594                            ; $733C: $CD $94 $65
     add  $18                                      ; $733F: $C6 $18
     cp   $30                                      ; $7341: $FE $30
-    jr   nc, jr_006_7371                          ; $7343: $30 $2C
+    jr   nc, ret_006_7371                         ; $7343: $30 $2C
 
     call func_006_65A4                            ; $7345: $CD $A4 $65
     add  $18                                      ; $7348: $C6 $18
     cp   $30                                      ; $734A: $FE $30
-    jr   nc, jr_006_7371                          ; $734C: $30 $23
+    jr   nc, ret_006_7371                         ; $734C: $30 $23
 
     call IncrementEntityState                     ; $734E: $CD $12 $3B
     ld   [hl], $02                                ; $7351: $36 $02
@@ -241,7 +241,7 @@ func_006_7335::
     ld   [hl], $0C                                ; $736E: $36 $0C
     pop  af                                       ; $7370: $F1
 
-jr_006_7371:
+ret_006_7371:
     ret                                           ; $7371: $C9
 
 label_006_7372:

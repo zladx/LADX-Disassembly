@@ -288,7 +288,7 @@ func_004_5902::
     add  hl, bc                                   ; $5905: $09
     ld   a, [hl]                                  ; $5906: $7E
     cp   $05                                      ; $5907: $FE $05
-    jp   nc, jr_004_5A04                          ; $5909: $D2 $04 $5A
+    jp   nc, ret_004_5A04                         ; $5909: $D2 $04 $5A
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $590C: $21 $40 $C3
     add  hl, bc                                   ; $590F: $09
@@ -321,7 +321,7 @@ jr_004_5924:
     add  hl, bc                                   ; $5939: $09
     ld   a, [hl]                                  ; $593A: $7E
     cp   $04                                      ; $593B: $FE $04
-    jp   nc, jr_004_5A04                          ; $593D: $D2 $04 $5A
+    jp   nc, ret_004_5A04                         ; $593D: $D2 $04 $5A
 
     ldh  a, [hMultiPurpose0]                      ; $5940: $F0 $D7
     sub  $0C                                      ; $5942: $D6 $0C
@@ -346,7 +346,7 @@ jr_004_5963:
     add  hl, bc                                   ; $5963: $09
     ld   a, [hl]                                  ; $5964: $7E
     cp   $03                                      ; $5965: $FE $03
-    jp   nc, jr_004_5A04                          ; $5967: $D2 $04 $5A
+    jp   nc, ret_004_5A04                         ; $5967: $D2 $04 $5A
 
     ldh  a, [hMultiPurpose0]                      ; $596A: $F0 $D7
     sub  $18                                      ; $596C: $D6 $18
@@ -369,7 +369,7 @@ jr_004_5963:
     add  hl, bc                                   ; $598D: $09
     ld   a, [hl]                                  ; $598E: $7E
     cp   $02                                      ; $598F: $FE $02
-    jr   nc, jr_004_5A04                          ; $5991: $30 $71
+    jr   nc, ret_004_5A04                         ; $5991: $30 $71
 
     ldh  a, [hMultiPurpose0]                      ; $5993: $F0 $D7
     sub  $24                                      ; $5995: $D6 $24
@@ -392,7 +392,7 @@ jr_004_5963:
     add  hl, bc                                   ; $59B6: $09
     ld   a, [hl]                                  ; $59B7: $7E
     and  a                                        ; $59B8: $A7
-    jr   nz, jr_004_5A04                          ; $59B9: $20 $49
+    jr   nz, ret_004_5A04                         ; $59B9: $20 $49
 
     ldh  a, [hMultiPurpose0]                      ; $59BB: $F0 $D7
     sub  $2E                                      ; $59BD: $D6 $2E
@@ -427,7 +427,7 @@ jr_004_5963:
     add  hl, bc                                   ; $59F0: $09
     ld   a, [hl]                                  ; $59F1: $7E
     and  a                                        ; $59F2: $A7
-    jr   nz, jr_004_5A04                          ; $59F3: $20 $0F
+    jr   nz, ret_004_5A04                         ; $59F3: $20 $0F
 
     ld   hl, wEntitiesOptions1Table               ; $59F5: $21 $30 $C4
     add  hl, bc                                   ; $59F8: $09
@@ -437,7 +437,7 @@ jr_004_5963:
     add  hl, bc                                   ; $5A01: $09
     ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IMMUNE_WATER_PIT ; $5A02: $36 $D0
 
-jr_004_5A04:
+ret_004_5A04:
     ret                                           ; $5A04: $C9
 
 func_004_5A05::

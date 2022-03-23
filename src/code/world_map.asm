@@ -65,7 +65,7 @@ WorldMapState1Handler::
     call func_1A22                                ; $567E: $CD $22 $1A
     ld   a, [wTransitionSequenceCounter]          ; $5681: $FA $6B $C1
     cp   $04                                      ; $5684: $FE $04
-    jr   nz, jr_001_56F3                          ; $5686: $20 $6B
+    jr   nz, ret_001_56F3                         ; $5686: $20 $6B
     ld   a, $03                                   ; $5688: $3E $03
     ldh  [hVolumeRight], a                        ; $568A: $E0 $A9
     ld   a, $30                                   ; $568C: $3E $30
@@ -118,7 +118,7 @@ jr_001_56D9::
     ld   a, $08                                   ; $56EE: $3E $08
     ld   [wBGMapToLoad], a                        ; $56F0: $EA $FF $D6
 
-jr_001_56F3::
+ret_001_56F3::
     ret                                           ; $56F3: $C9
 
 WorldMapState2Handler::

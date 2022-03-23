@@ -188,7 +188,7 @@ LoadRequestedGfx::
     callsb GetBGCopyRequest                       ; $0445: $3E $20 $EA $00 $21 $CD $77 $45
     ld   a, BANK(BGTilemaps)                      ; $044D: $3E $08
     ld   [MBC3SelectBank], a                      ; $044F: $EA $00 $21
-    call ExecuteBGCopyRequest.noMapTransition     ; $0452: $CD $2D $29
+    call ExecuteDrawCommands.noRoomTransition     ; $0452: $CD $2D $29
 
     ; Restore tilesets bank
     ld   a, $0C                                   ; $0455: $3E $0C
@@ -397,7 +397,7 @@ InterruptVBlank::
 .gbcEnd
 
     ld   de, wDrawCommand                         ; $0538: $11 $01 $D6
-    call ExecuteBGCopyRequest ; Load BG column tiles ; $053B: $CD $27 $29
+    call ExecuteDrawCommands; Load BG column tiles ; $053B: $CD $27 $29
     xor  a                                        ; $053E: $AF
     ld   [wDrawCommandsSize], a                   ; $053F: $EA $00 $D6
     ld   [wDrawCommand], a                        ; $0542: $EA $01 $D6
@@ -454,7 +454,7 @@ PhotoAlbumVBlankHandler::
 .gbcEnd
 
     ld   de, wDrawCommand                         ; $0598: $11 $01 $D6
-    call ExecuteBGCopyRequest                     ; $059B: $CD $27 $29
+    call ExecuteDrawCommands                      ; $059B: $CD $27 $29
     xor  a                                        ; $059E: $AF
     ld   [wDrawCommandsSize], a                   ; $059F: $EA $00 $D6
     ld   [wDrawCommand], a                        ; $05A2: $EA $01 $D6

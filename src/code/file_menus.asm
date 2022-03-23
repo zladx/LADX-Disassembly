@@ -1285,7 +1285,7 @@ CopyReturnToMenuTilemap::
     add  hl, de                                     ; $4f0d: $19
     ld   a, HIGH(vBGMap0 + $1EE)                    ; $4f0e: $3e $99
     ld   [hl+], a                                   ; $4f10: $22
-    ld   a, LOW(vBGMap0 + $1EE)                        ; $4f11: $3e $ee
+    ld   a, LOW(vBGMap0 + $1EE)                     ; $4f11: $3e $ee
     ld   [hl+], a                                   ; $4f13: $22
     ld   a, $42                                     ; $4f14: $3e $42
     ld   [hl+], a                                   ; $4f16: $22

@@ -473,7 +473,7 @@ func_AB5::
     push af                                       ; $0AB5: $F5
     callsb func_024_5C1A                          ; $0AB6: $3E $24 $EA $00 $21 $CD $1A $5C
     ld   de, wDrawCommand                         ; $0ABE: $11 $01 $D6
-    call ExecuteBGCopyRequest                     ; $0AC1: $CD $27 $29
+    call ExecuteDrawCommands                      ; $0AC1: $CD $27 $29
     jr   RestoreStackedBank                       ; $0AC4: $18 $EA
 
 func_036_703E_trampoline::

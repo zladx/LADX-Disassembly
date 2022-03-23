@@ -466,7 +466,7 @@ PhotoAlbumVBlankHandler::
     pop  af                                       ; $05B3: $F1
     ld   [wCurrentBank], a                        ; $05B4: $EA $AF $DB
     ld   [MBC3SelectBank], a                      ; $05B7: $EA $00 $21
-    jr   InterruptVBlank.vblankDoneInterruptsEnabled; $05BA: $18 $AE
+    jr   InterruptVBlank.vblankDoneInterruptsEnabled ; $05BA: $18 $AE
 
 ; Copy requested BG tiles or entity tiles to VRAM during V-Blank.
 ;
@@ -810,7 +810,7 @@ UpdateEntityTilesB::
 
 LoadInventorySirenInstruments::
     callsb LoadSirenInstruments                   ; $07B0: $3E $01 $EA $00 $21 $CD $B5 $6B
-    jp   CopyTilesToPieceOfHeartMeter.restoreBank0C; $07B8: $C3 $8B $00
+    jp   CopyTilesToPieceOfHeartMeter.restoreBank0C ; $07B8: $C3 $8B $00
 
 ; Data origin table (in bank $0C)
 TilesGfxSource::

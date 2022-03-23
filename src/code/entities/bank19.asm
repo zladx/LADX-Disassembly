@@ -1107,7 +1107,7 @@ MaskedMimicGoriyaEntityHandler::
     call ApplyRecoilIfNeeded_19                   ; $47CC: $CD $6E $7D
     ld   hl, wEntitiesOptions1Table               ; $47CF: $21 $30 $C4
     add  hl, bc                                   ; $47D2: $09
-    ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_SPLASH_IN_WATER; $47D3: $36 $48
+    ld   [hl], ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_SPLASH_IN_WATER ; $47D3: $36 $48
     call func_019_7E3A                            ; $47D5: $CD $3A $7E
     ld   hl, wEntitiesDirectionTable              ; $47D8: $21 $80 $C3
     add  hl, bc                                   ; $47DB: $09
@@ -8734,7 +8734,7 @@ label_019_7EA4:
     jp   label_019_7EC4                           ; $7EC1: $C3 $C4 $7E
 
 label_019_7EC4:
-    call ReturnIfNonInteractive_19.allowInactiveEntity; $7EC4: $CD $43 $7D
+    call ReturnIfNonInteractive_19.allowInactiveEntity ; $7EC4: $CD $43 $7D
     ldh  a, [hActiveEntityPosX]                   ; $7EC7: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $7EC9: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $7ECB: $F0 $EC

@@ -40,7 +40,7 @@ jr_006_4B98:
 
     ld   hl, wEntitiesOptions1Table               ; $4BBA: $21 $30 $C4
     add  hl, bc                                   ; $4BBD: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IS_MINI_BOSS; $4BBE: $36 $C4
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IS_MINI_BOSS ; $4BBE: $36 $C4
     ldh  a, [hActiveEntityState]                  ; $4BC0: $F0 $F0
     and  a                                        ; $4BC2: $A7
     jr   nz, jr_006_4BDE                          ; $4BC3: $20 $19
@@ -60,7 +60,7 @@ jr_006_4B98:
 
     ld   hl, wEntitiesOptions1Table               ; $4BD8: $21 $30 $C4
     add  hl, bc                                   ; $4BDB: $09
-    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IS_MINI_BOSS; $4BDC: $36 $84
+    ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IS_MINI_BOSS ; $4BDC: $36 $84
 
 jr_006_4BDE:
     call label_3B70                               ; $4BDE: $CD $70 $3B

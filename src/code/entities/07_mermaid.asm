@@ -302,7 +302,7 @@ jr_007_4846:
     ret                                           ; $4853: $C9
 
 jr_007_4854:
-    ld   a, TRADING_ITEM_SCALE & REPLACE_TILES_TRADING_ITEM; $4854: $3E $0D
+    ld   a, TRADING_ITEM_SCALE & REPLACE_TILES_TRADING_ITEM ; $4854: $3E $0D
     ld   [wTradeSequenceItem], a                  ; $4856: $EA $0E $DB
     ldh  [hReplaceTiles], a                       ; $4859: $E0 $A5
     call CreateTradingItemEntity                  ; $485B: $CD $0C $0C

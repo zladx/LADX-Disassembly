@@ -224,7 +224,7 @@ PairoddProjectileEntityHandler::
     call SetEntitySpriteVariant                   ; $5F0C: $CD $0C $3B
     call UpdateEntityPosWithSpeed_04              ; $5F0F: $CD $CA $6D
     call label_3B2E                               ; $5F12: $CD $2E $3B
-    call CheckLinkCollisionWithProjectile_trampoline; $5F15: $CD $4F $3B
+    call CheckLinkCollisionWithProjectile_trampoline ; $5F15: $CD $4F $3B
     call label_3B70                               ; $5F18: $CD $70 $3B
     ld   hl, wEntitiesCollisionsTable             ; $5F1B: $21 $A0 $C2
     add  hl, bc                                   ; $5F1E: $09

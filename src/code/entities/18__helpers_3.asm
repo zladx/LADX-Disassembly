@@ -469,7 +469,7 @@ label_018_7F4F:
     jp   label_018_7F6F                           ; $7F6C: $C3 $6F $7F
 
 label_018_7F6F:
-    call ReturnIfNonInteractive_18.allowInactiveEntity; $7F6F: $CD $EE $7D
+    call ReturnIfNonInteractive_18.allowInactiveEntity ; $7F6F: $CD $EE $7D
     ldh  a, [hActiveEntityPosX]                   ; $7F72: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $7F74: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $7F76: $F0 $EC

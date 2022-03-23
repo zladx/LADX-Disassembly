@@ -263,7 +263,7 @@ label_036_4178:
     ld   de, Unknown074SpriteVariants             ; $4178: $11 $F2 $48
     call RenderActiveEntitySpritesPair            ; $417B: $CD $C0 $3B
     call func_036_6B5C                            ; $417E: $CD $5C $6B
-    call ReturnIfNonInteractive_36.allowInactiveEntity; $4181: $CD $46 $6A
+    call ReturnIfNonInteractive_36.allowInactiveEntity ; $4181: $CD $46 $6A
     ldh  a, [hActiveEntityState]                  ; $4184: $F0 $F0
     and  a                                        ; $4186: $A7
     jr   z, jr_036_41A0                           ; $4187: $28 $17
@@ -480,7 +480,7 @@ jr_036_42D4:
     call func_015_7964_trampoline                 ; $42EA: $CD $A0 $3D
     call func_036_6B5C                            ; $42ED: $CD $5C $6B
     call CheckLinkCollisionWithEnemy_trampoline   ; $42F0: $CD $5A $3B
-    call ReturnIfNonInteractive_36.allowInactiveEntity; $42F3: $CD $46 $6A
+    call ReturnIfNonInteractive_36.allowInactiveEntity ; $42F3: $CD $46 $6A
     ldh  a, [hActiveEntityState]                  ; $42F6: $F0 $F0
     and  a                                        ; $42F8: $A7
     jr   z, jr_036_4329                           ; $42F9: $28 $2E
@@ -4738,7 +4738,7 @@ func_036_5C8B::
     ld   hl, hActiveEntityVisualPosY              ; $5CA3: $21 $EC $FF
     add  [hl]                                     ; $5CA6: $86
     ld   [hl], a                                  ; $5CA7: $77
-    call ReturnIfNonInteractive_36.allowInactiveEntity; $5CA8: $CD $46 $6A
+    call ReturnIfNonInteractive_36.allowInactiveEntity ; $5CA8: $CD $46 $6A
 
 func_036_5CAB::
     ldh  a, [hActiveEntityPosX]                   ; $5CAB: $F0 $EE

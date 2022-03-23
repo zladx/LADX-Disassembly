@@ -396,10 +396,10 @@ jr_007_66EE:
 func_007_66F2::
     ldh  a, [hLinkPositionZ]                      ; $66F2: $F0 $A2
     and  a                                        ; $66F4: $A7
-    jp   z, CheckLinkCollisionWithEnemy_trampoline; $66F5: $CA $5A $3B
+    jp   z, CheckLinkCollisionWithEnemy_trampoline ; $66F5: $CA $5A $3B
 
     cp   $08                                      ; $66F8: $FE $08
-    jp   c, CheckLinkCollisionWithEnemy_trampoline; $66FA: $DA $5A $3B
+    jp   c, CheckLinkCollisionWithEnemy_trampoline ; $66FA: $DA $5A $3B
 
     ret                                           ; $66FD: $C9
 

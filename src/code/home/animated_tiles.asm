@@ -625,7 +625,7 @@ ReplaceTradingItemTiles::
     ; and just draw Link's prite.
     ld   a, [wTradeSequenceItem]                  ; $1E01: $FA $0E $DB
     cp   TRADING_ITEM_RIBBON                      ; $1E04: $FE $02
-    jp  c, CopyDataAndDrawLinkSprite.drawLinkSprite; $1E06: $DA $3E $1F
+    jp  c, CopyDataAndDrawLinkSprite.drawLinkSprite ; $1E06: $DA $3E $1F
 
     ; de = wTradeSequenceItem * 4
     sub  a, TRADING_ITEM_RIBBON                   ; $1E09: $D6 $02

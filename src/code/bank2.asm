@@ -1107,7 +1107,7 @@ label_002_4827:
     add  hl, bc                                   ; $4865: $09
     ld   a, [hl]                                  ; $4866: $7E
     ld   [wC13B], a                               ; $4867: $EA $3B $C1
-    ld   hl, LinkDirectionToStaticSwordCollitionCheckNeeded; $486A: $21 $BE $45
+    ld   hl, LinkDirectionToStaticSwordCollitionCheckNeeded ; $486A: $21 $BE $45
     add  hl, bc                                   ; $486D: $09
     ld   a, [hl]                                  ; $486E: $7E
     and  a                                        ; $486F: $A7
@@ -2864,7 +2864,7 @@ jr_002_529F:
     ldh  [hWaveSfx], a                            ; $52B1: $E0 $F3
 
 .jr_002_52B3:
-    ld   e, LINK_ANIMATION_STATE_HOLD_SWIMMING_1_DOWN; $52B3: $1E $4C
+    ld   e, LINK_ANIMATION_STATE_HOLD_SWIMMING_1_DOWN ; $52B3: $1E $4C
 
 .jr_002_52B5:
     ld   a, e                                     ; $52B5: $7B
@@ -7660,7 +7660,7 @@ ApplyLinkGroundPhysics::
 
     ld   a, c                                     ; $75D1: $79
     cp   OBJECT_WELL                              ; $75D2: $FE $61
-    jp   z, ApplyLinkGroundPhysics_part2.makeLinkFallInPit; $75D4: $CA $AA $76
+    jp   z, ApplyLinkGroundPhysics_part2.makeLinkFallInPit ; $75D4: $CA $AA $76
 
     jr   .specialCasesEnd                         ; $75D7: $18 $0E
 
@@ -8116,7 +8116,7 @@ ApplyLinkGroundPhysics_Default::
     ldh  a, [hMapRoom]                            ; $7828: $F0 $F6
     cp   ROOM_INDOOR_B_KANALET_GATE_SWITCH        ; $782A: $FE $C3
     jr   nz, .kanaletGateEnd                      ; $782C: $20 $05
-    ld   hl, wOverworldRoomStatus + ROOM_OW_KANALET_GATE; $782E: $21 $79 $D8
+    ld   hl, wOverworldRoomStatus + ROOM_OW_KANALET_GATE ; $782E: $21 $79 $D8
     set  4, [hl]                                  ; $7831: $CB $E6
 .kanaletGateEnd
 

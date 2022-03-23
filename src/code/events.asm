@@ -190,7 +190,7 @@ jr_002_5E2E:
     ret  z                                        ; $5E32: $C8
 
     ld   a, [wRoomEvent]                          ; $5E33: $FA $8E $C1
-    cp   TRIGGER_KILL_ALL_ENEMIES | EFFECT_CLEAR_MIDBOSS; $5E36: $FE $C1
+    cp   TRIGGER_KILL_ALL_ENEMIES | EFFECT_CLEAR_MIDBOSS ; $5E36: $FE $C1
     jr   nz, jr_002_5E6A                          ; $5E38: $20 $30
 
     ldh  a, [hMapId]                         ; @TODO This sets the miniboss killed flag.

@@ -71,7 +71,7 @@ jr_006_6853:
     and  $02                                      ; $685C: $E6 $02
     jp   nz, ClearEntityStatus_06                 ; $685E: $C2 $DB $65
 
-    ld   a, [wOverworldRoomStatus + ROOM_OW_MARIN_BRIDGE]; $6861: $FA $08 $D8
+    ld   a, [wOverworldRoomStatus + ROOM_OW_MARIN_BRIDGE] ; $6861: $FA $08 $D8
     and  $10                                      ; $6864: $E6 $10
     ret  z                                        ; $6866: $C8
 
@@ -88,7 +88,7 @@ jr_006_6872:
     cp   UNKNOWN_ROOM_06                          ; Wind Fish's Egg
     jr   nz, jr_006_687E                          ; $6874: $20 $08
 
-    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_06]; $6876: $FA $06 $D8
+    ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_06] ; $6876: $FA $06 $D8
     and  $10                                      ; $6879: $E6 $10
     ret  z                                        ; $687B: $C8
 

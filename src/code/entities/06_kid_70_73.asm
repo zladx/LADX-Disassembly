@@ -67,7 +67,7 @@ jr_006_6277:
     and  $02                                      ; $627A: $E6 $02
     jr   z, jr_006_6290                           ; $627C: $28 $12
 
-    ld   a, [wIndoorBRoomStatus + UNKNOWN_ROOM_BE]; $627E: $FA $BE $DA
+    ld   a, [wIndoorBRoomStatus + UNKNOWN_ROOM_BE] ; $627E: $FA $BE $DA
     and  $10                                      ; $6281: $E6 $10
     jr   nz, jr_006_6290                          ; $6283: $20 $0B
 

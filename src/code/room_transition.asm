@@ -437,7 +437,7 @@ RoomTransitionPrepareHandler::
     jr   nz, .forestRoomEnd                       ; $7A95: $20 $0E
 
     ; … and this room has not been visited yet…
-    ld   hl, wOverworldRoomStatus + UNKNOWN_ROOM_41; $7A97: $21 $41 $D8
+    ld   hl, wOverworldRoomStatus + UNKNOWN_ROOM_41 ; $7A97: $21 $41 $D8
     bit  6, [hl]                                  ; $7A9A: $CB $76
     jr   nz, .forestRoomEnd                       ; $7A9C: $20 $07
 
@@ -508,7 +508,7 @@ ENDC
     ; track will be handled directly by the audio code ; return.
     ld   a, [wIsIndoor]                           ; $7AE9: $FA $A5 $DB
     and  a                                        ; $7AEC: $A7
-    jr   nz, IncrementRoomTransitionStateAndReturn; $7AED: $20 $47
+    jr   nz, IncrementRoomTransitionStateAndReturn ; $7AED: $20 $47
 
     ld   a, [wSwordLevel]                         ; $7AEF: $FA $4E $DB
     and  a                                        ; $7AF2: $A7
@@ -693,7 +693,7 @@ RoomTransitionConfigureScrollTargets::
     ld   [wRoomTransitionTargetScrollY], a        ; $7BA4: $EA $2D $C1
 
     ; Configure the initial position of the Background region to be updated
-    ld   hl, RoomTransitionBGInitialUpdateRegionLow; $7BA7: $21 $5B $7B
+    ld   hl, RoomTransitionBGInitialUpdateRegionLow ; $7BA7: $21 $5B $7B
     add  hl, bc                                   ; $7BAA: $09
     ld   a, [wBGOriginLow]                        ; $7BAB: $FA $2F $C1
     add  [hl]                                     ; $7BAE: $86
@@ -701,7 +701,7 @@ RoomTransitionConfigureScrollTargets::
     and  e                                        ; $7BB1: $A3
     ld   [wBGUpdateRegionOriginLow], a            ; $7BB2: $EA $27 $C1
 
-    ld   hl, RoomTransitionBGInitialUpdateRegionHigh; $7BB5: $21 $57 $7B
+    ld   hl, RoomTransitionBGInitialUpdateRegionHigh ; $7BB5: $21 $57 $7B
     add  hl, bc                                   ; $7BB8: $09
     ld   a, [wBGOriginHigh]                       ; $7BB9: $FA $2E $C1
     rr   d                                        ; $7BBC: $CB $1A
@@ -737,7 +737,7 @@ RoomTransitionConfigureScrollTargets::
     ld   hl, RoomTransitionFramesToMidScreen      ; $7BE9: $21 $63 $7B
     add  hl, bc                                   ; $7BEC: $09
     ld   a, [hl]                                  ; $7BED: $7E
-    ld   [wRoomTransitionFramesBeforeMidScreen], a; $7BEE: $EA $29 $C1
+    ld   [wRoomTransitionFramesBeforeMidScreen], a ; $7BEE: $EA $29 $C1
 
     ld   hl, RoomTransitionOffset                 ; $7BF1: $21 $67 $7B
     add  hl, bc                                   ; $7BF4: $09

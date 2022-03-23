@@ -747,12 +747,12 @@ func_001_7338::
     ld   hl, wDrawCommandAlt                      ; $7347: $21 $91 $DC
     ld   c, $13                                   ; $734A: $0E $13
 
-jr_001_734C::
+.loop_734C::
     ld   a, [de]                                  ; $734C: $1A
     inc  de                                       ; $734D: $13
     ldi  [hl], a                                  ; $734E: $22
     dec  c                                        ; $734F: $0D
-    jr   nz, jr_001_734C                          ; $7350: $20 $FA
+    jr   nz, .loop_734C                           ; $7350: $20 $FA
     ld   [hl], $00                                ; $7352: $36 $00
     ret                                           ; $7354: $C9
 
@@ -1906,12 +1906,12 @@ jr_001_7A19::
     push bc                                       ; $7A1C: $C5
     ld   c, $18                                   ; $7A1D: $0E $18
 
-jr_001_7A1F::
+.loop_7A1F::
     ld   a, [hli]                                 ; $7A1F: $2A
     ld   [de], a                                  ; $7A20: $12
     inc  de                                       ; $7A21: $13
     dec  c                                        ; $7A22: $0D
-    jr   nz, jr_001_7A1F                          ; $7A23: $20 $FA
+    jr   nz, .loop_7A1F                           ; $7A23: $20 $FA
     pop  bc                                       ; $7A25: $C1
     ret                                           ; $7A26: $C9
 

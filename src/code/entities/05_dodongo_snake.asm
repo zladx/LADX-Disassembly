@@ -14,26 +14,26 @@ EntityInitDodongoSnake::
     push de                                       ; $682E: $D5
     ld   e, $20                                   ; $682F: $1E $20
 
-jr_005_6831:
+.loop_6831:
     xor  a                                        ; $6831: $AF
     ld   [hl+], a                                 ; $6832: $22
     dec  e                                        ; $6833: $1D
     ld   a, e                                     ; $6834: $7B
     cp   $00                                      ; $6835: $FE $00
-    jr   nz, jr_005_6831                          ; $6837: $20 $F8
+    jr   nz, .loop_6831                           ; $6837: $20 $F8
 
     pop  de                                       ; $6839: $D1
     ld   hl, wD100                                ; $683A: $21 $00 $D1
     add  hl, de                                   ; $683D: $19
     ld   e, $20                                   ; $683E: $1E $20
 
-jr_005_6840:
+.loop_6840:
     xor  a                                        ; $6840: $AF
     ld   [hl+], a                                 ; $6841: $22
     dec  e                                        ; $6842: $1D
     ld   a, e                                     ; $6843: $7B
     cp   $00                                      ; $6844: $FE $00
-    jr   nz, jr_005_6840                          ; $6846: $20 $F8
+    jr   nz, .loop_6840                           ; $6846: $20 $F8
 
     ld   hl, wEntitiesSpeedYTable                 ; $6848: $21 $50 $C2
     add  hl, bc                                   ; $684B: $09

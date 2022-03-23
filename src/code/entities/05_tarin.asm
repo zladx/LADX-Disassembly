@@ -651,13 +651,13 @@ TarinShield1Handler::
     ld   hl, wObjPal8                             ; $4CB0: $21 $88 $DC
     ld   de, data_005_4C94                        ; $4CB3: $11 $94 $4C
 
-jr_005_4CB6:
+.loop_4CB6:
     ld   a, [de]                                  ; $4CB6: $1A
     ld   [hl+], a                                 ; $4CB7: $22
     inc  de                                       ; $4CB8: $13
     ld   a, l                                     ; $4CB9: $7D
     and  $07                                      ; $4CBA: $E6 $07
-    jr   nz, jr_005_4CB6                          ; $4CBC: $20 $F8
+    jr   nz, .loop_4CB6                           ; $4CBC: $20 $F8
 
     ld   a, $02                                   ; $4CBE: $3E $02
     ld   [wPaletteDataFlags], a                   ; $4CC0: $EA $D1 $DD

@@ -560,7 +560,7 @@ label_4A47::
     ld   e, DEBUG_SAVE_FILE_SIZE                  ; $4A4A: $1E $43
     push hl                                       ; $4A4C: $E5
 
-jr_001_4A4D::
+.loop_4A4D::
     call EnableExternalRAMWriting                 ; $4A4D: $CD $D0 $27
     ld   a, [bc]                                  ; $4A50: $0A
     ldi  [hl], a                                  ; $4A51: $22
@@ -568,7 +568,7 @@ jr_001_4A4D::
     dec  e                                        ; $4A53: $1D
     ld   a, e                                     ; $4A54: $7B
     and  a                                        ; $4A55: $A7
-    jr   nz, jr_001_4A4D                          ; $4A56: $20 $F5
+    jr   nz, .loop_4A4D                           ; $4A56: $20 $F5
     pop  hl                                       ; $4A58: $E1
     ld   bc, $4E                                  ; $4A59: $01 $4E $00
     ld   a, $01                                   ; $4A5C: $3E $01
@@ -1256,14 +1256,14 @@ ENDC
     ld   l, a                                     ; $4E8D: $6F ; $4E8D: $6F
     ld   de, SaveGame1.end - SaveGame1.main       ; $4E8E: $11 $A8 $03 ; $4E8E: $11 $A8 $03
 
-jr_001_4E91:: ; Clear the save
+.loop_4E91:: ; Clear the save
     call EnableExternalRAMWriting                 ; $4E91: $CD $D0 $27 ; $4E91: $CD $D0 $27
     xor  a                                        ; $4E94: $AF ; $4E94: $AF
     ld   [hl+], a                                 ; $4E95: $22 ; $4E95: $22
     dec  de                                       ; $4E96: $1B ; $4E96: $1B
     ld   a, e                                     ; $4E97: $7B ; $4E97: $7B
     or   d                                        ; $4E98: $B2 ; $4E98: $B2
-    jr   nz, jr_001_4E91                          ; $4E99: $20 $F6 ; $4E99: $20 $F6
+    jr   nz, .loop_4E91                           ; $4E99: $20 $F6 ; $4E99: $20 $F6
 
     jp   label_001_4555                           ; $4E9B: $C3 $55 $45 ; $4E9B: $C3 $55 $45
 
@@ -1372,12 +1372,12 @@ jr_001_4EEF::
     ld   de, wDrawCommand                         ; $4EFE: $11 $01 $D6 ; $4EFE: $11 $01 $D6
     ld   c, $08                                   ; $4F01: $0E $08 ; $4F01: $0E $08
 
-jr_001_4F03::
+.loop_4F03::
     ld   a, [hl+]                                 ; $4F03: $2A ; $4F03: $2A
     ld   [de], a                                  ; $4F04: $12 ; $4F04: $12
     inc  de                                       ; $4F05: $13 ; $4F05: $13
     dec  c                                        ; $4F06: $0D ; $4F06: $0D
-    jr   nz, jr_001_4F03                          ; $4F07: $20 $FA ; $4F07: $20 $FA
+    jr   nz, .loop_4F03                           ; $4F07: $20 $FA ; $4F07: $20 $FA
 
     xor  a                                        ; $4F09: $AF ; $4F09: $AF
     ld   [de], a                                  ; $4F0A: $12 ; $4F0A: $12
@@ -1766,12 +1766,12 @@ func_001_512C::
     ld   de, wDrawCommand                         ; $5141: $11 $01 $D6 ; $5141: $11 $01 $D6
     ld   c, $08                                   ; $5144: $0E $08 ; $5144: $0E $08
 
-jr_001_5146::
+.loop_5146::
     ld   a, [hl+]                                 ; $5146: $2A ; $5146: $2A
     ld   [de], a                                  ; $5147: $12 ; $5147: $12
     inc  de                                       ; $5148: $13 ; $5148: $13
     dec  c                                        ; $5149: $0D ; $5149: $0D
-    jr   nz, jr_001_5146                          ; $514A: $20 $FA ; $514A: $20 $FA
+    jr   nz, .loop_5146                           ; $514A: $20 $FA ; $514A: $20 $FA
 
     xor  a                                        ; $514C: $AF ; $514C: $AF
     ld   [de], a                                  ; $514D: $12 ; $514D: $12
@@ -1915,7 +1915,7 @@ FileCopyStateAHandler::
     ; sizeof save data
     ld   de, (SaveGame2 - SaveGame1)              ; $5221: $11 $AD $03 ; $5221: $11 $AD $03
 
-jr_001_5224::
+.loop_5224::
     call EnableExternalRAMWriting                 ; $5224: $CD $D0 $27 ; $5224: $CD $D0 $27
     ld   a, [bc]                                  ; $5227: $0A ; $5227: $0A
     inc  bc                                       ; $5228: $03 ; $5228: $03
@@ -1924,7 +1924,7 @@ jr_001_5224::
     dec  de                                       ; $522D: $1B ; $522D: $1B
     ld   a, e                                     ; $522E: $7B ; $522E: $7B
     or   d                                        ; $522F: $B2 ; $522F: $B2
-    jr   nz, jr_001_5224                          ; $5230: $20 $F2 ; $5230: $20 $F2
+    jr   nz, .loop_5224                           ; $5230: $20 $F2 ; $5230: $20 $F2
 
     jp   label_001_4555                           ; $5232: $C3 $55 $45 ; $5232: $C3 $55 $45
 
@@ -1958,12 +1958,12 @@ jr_001_5249::
     ld   de, wDrawCommand.data + 5                ; $5261: $11 $09 $D6 ; $5261: $11 $09 $D6
     ld   c, $08                                   ; $5264: $0E $08 ; $5264: $0E $08
 
-jr_001_5266::
+.loop_5266::
     ld   a, [hl+]                                 ; $5266: $2A ; $5266: $2A
     ld   [de], a                                  ; $5267: $12 ; $5267: $12
     inc  de                                       ; $5268: $13 ; $5268: $13
     dec  c                                        ; $5269: $0D ; $5269: $0D
-    jr   nz, jr_001_5266                          ; $526A: $20 $FA ; $526A: $20 $FA
+    jr   nz, .loop_5266                           ; $526A: $20 $FA ; $526A: $20 $FA
 
     xor  a                                        ; $526C: $AF ; $526C: $AF
     ld   [de], a                                  ; $526D: $12 ; $526D: $12

@@ -271,7 +271,7 @@ jr_005_4F95:
     ld   e, INVENTORY_SLOT_COUNT -1               ; $4F95: $1E $0B
     ld   hl, wBButtonSlot                         ; $4F97: $21 $00 $DB
 
-jr_005_4F9A:
+.loop_4F9A:
     ld   a, [hl+]                                 ; $4F9A: $2A
     cp   INVENTORY_OCARINA                        ; $4F9B: $FE $09
     jr   z, jr_005_4FA7                           ; $4F9D: $28 $08
@@ -279,7 +279,7 @@ jr_005_4F9A:
     dec  e                                        ; $4F9F: $1D
     ld   a, e                                     ; $4FA0: $7B
     cp   $FF                                      ; $4FA1: $FE $FF
-    jr   nz, jr_005_4F9A                          ; $4FA3: $20 $F5
+    jr   nz, .loop_4F9A                           ; $4FA3: $20 $F5
 
     jr   jr_005_4F90                              ; $4FA5: $18 $E9
 

@@ -88,12 +88,12 @@ ENDC
     add  hl, de                                   ; $655B: $19
     ld   e, $08                                   ; $655C: $1E $08
 
-jr_007_655E:
+.loop_655E:
     ld   a, [bc]                                  ; $655E: $0A
     inc  bc                                       ; $655F: $03
     ld   [hl+], a                                 ; $6560: $22
     dec  e                                        ; $6561: $1D
-    jr   nz, jr_007_655E                          ; $6562: $20 $FA
+    jr   nz, .loop_655E                           ; $6562: $20 $FA
 
     ld   [hl], $00                                ; $6564: $36 $00
     ldh  a, [hIsGBC]                              ; $6566: $F0 $FE
@@ -125,12 +125,12 @@ ENDC
     add  hl, de                                   ; $658B: $19
     ld   e, $08                                   ; $658C: $1E $08
 
-jr_007_658E:
+.loop_658E:
     ld   a, [bc]                                  ; $658E: $0A
     inc  bc                                       ; $658F: $03
     ld   [hl+], a                                 ; $6590: $22
     dec  e                                        ; $6591: $1D
-    jr   nz, jr_007_658E                          ; $6592: $20 $FA
+    jr   nz, .loop_658E                           ; $6592: $20 $FA
 
     ld   [hl], $00                                ; $6594: $36 $00
 
@@ -179,7 +179,7 @@ jr_007_659D:
     ld   hl, $FF70                                ; $65B5: $21 $70 $FF
     di                                            ; $65B8: $F3
 
-jr_007_65B9:
+.loop_65B9:
     ld   [hl], $02                                ; $65B9: $36 $02
     ld   a, [de]                                  ; $65BB: $1A
     ld   [hl], $00                                ; $65BC: $36 $00
@@ -187,7 +187,7 @@ jr_007_65B9:
     inc  de                                       ; $65BF: $13
     ld   a, e                                     ; $65C0: $7B
     and  $07                                      ; $65C1: $E6 $07
-    jr   nz, jr_007_65B9                          ; $65C3: $20 $F4
+    jr   nz, .loop_65B9                           ; $65C3: $20 $F4
 
     ld   a, $01                                   ; $65C5: $3E $01
     ld   [wPaletteDataFlags], a                   ; $65C7: $EA $D1 $DD

@@ -80,7 +80,7 @@ ENDC
     xor  a                                        ; $407B: $AF
     ld   d, a                                     ; $407C: $57
 
-jr_017_407D:
+.loop_407D:
     ldh  [hMultiPurpose2], a                      ; $407D: $E0 $D9
     sla  a                                        ; $407F: $CB $27
     ld   e, a                                     ; $4081: $5F
@@ -99,7 +99,7 @@ jr_017_407D:
     ldh  a, [hMultiPurpose2]                      ; $4090: $F0 $D9
     inc  a                                        ; $4092: $3C
     cp   $0D                                      ; $4093: $FE $0D
-    jr   nz, jr_017_407D                          ; $4095: $20 $E6
+    jr   nz, .loop_407D                           ; $4095: $20 $E6
 
     xor  a                                        ; $4097: $AF
     ldh  [hReplaceTiles], a                       ; $4098: $E0 $A5
@@ -816,11 +816,11 @@ func_017_488C::
 jr_017_48A9:
     ld   c, $14                                   ; $48A9: $0E $14
 
-jr_017_48AB:
+.loop_48AB:
     ld   a, [de]                                  ; $48AB: $1A
     ld   [hl+], a                                 ; $48AC: $22
     dec  c                                        ; $48AD: $0D
-    jr   nz, jr_017_48AB                          ; $48AE: $20 $FB
+    jr   nz, .loop_48AB                           ; $48AE: $20 $FB
 
     pop  de                                       ; $48B0: $D1
     ld   a, d                                     ; $48B1: $7A
@@ -840,11 +840,11 @@ jr_017_48AB:
 jr_017_48C4:
     ld   c, $14                                   ; $48C4: $0E $14
 
-jr_017_48C6:
+.loop_48C6:
     ld   a, [de]                                  ; $48C6: $1A
     ld   [hl+], a                                 ; $48C7: $22
     dec  c                                        ; $48C8: $0D
-    jr   nz, jr_017_48C6                          ; $48C9: $20 $FB
+    jr   nz, .loop_48C6                           ; $48C9: $20 $FB
 
     ld   [hl], c                                  ; $48CB: $71
 
@@ -896,12 +896,12 @@ jr_017_4911:
 
     ld   d, $00                                   ; $4917: $16 $00
 
-jr_017_4919:
+.loop_4919:
     ld   a, [wC17E]                               ; $4919: $FA $7E $C1
     inc  a                                        ; $491C: $3C
     ld   [wC17E], a                               ; $491D: $EA $7E $C1
     and  $01                                      ; $4920: $E6 $01
-    jr   nz, jr_017_4919                          ; $4922: $20 $F5
+    jr   nz, .loop_4919                           ; $4922: $20 $F5
 
     ld   a, [wC17C]                               ; $4924: $FA $7C $C1
     add  $01                                      ; $4927: $C6 $01
@@ -946,12 +946,12 @@ jr_017_4964:
 
     ld   d, $00                                   ; $496A: $16 $00
 
-jr_017_496C:
+.loop_496C:
     ld   a, [wC17E]                               ; $496C: $FA $7E $C1
     inc  a                                        ; $496F: $3C
     ld   [wC17E], a                               ; $4970: $EA $7E $C1
     and  $01                                      ; $4973: $E6 $01
-    jr   nz, jr_017_496C                          ; $4975: $20 $F5
+    jr   nz, .loop_496C                           ; $4975: $20 $F5
 
     ld   a, [wC17C]                               ; $4977: $FA $7C $C1
     add  $01                                      ; $497A: $C6 $01
@@ -1188,12 +1188,12 @@ label_017_4C22:
     ld   c, $80                                   ; $4C2B: $0E $80
     ld   a, $01                                   ; $4C2D: $3E $01
 
-jr_017_4C2F:
+.loop_4C2F:
     ld   a, [de]                                  ; $4C2F: $1A
     inc  de                                       ; $4C30: $13
     ld   [hl+], a                                 ; $4C31: $22
     dec  c                                        ; $4C32: $0D
-    jr   nz, jr_017_4C2F                          ; $4C33: $20 $FA
+    jr   nz, .loop_4C2F                           ; $4C33: $20 $FA
 
     call label_27F2                               ; $4C35: $CD $F2 $27
     ld   a, $01                                   ; $4C38: $3E $01
@@ -1457,12 +1457,12 @@ jr_017_4E27:
     ld   de, wDrawCommand                         ; $4E38: $11 $01 $D6
     ld   c, $08                                   ; $4E3B: $0E $08
 
-jr_017_4E3D:
+.loop_4E3D:
     ld   a, [hl+]                                 ; $4E3D: $2A
     ld   [de], a                                  ; $4E3E: $12
     inc  de                                       ; $4E3F: $13
     dec  c                                        ; $4E40: $0D
-    jr   nz, jr_017_4E3D                          ; $4E41: $20 $FA
+    jr   nz, .loop_4E3D                           ; $4E41: $20 $FA
 
     xor  a                                        ; $4E43: $AF
     ld   [de], a                                  ; $4E44: $12
@@ -1659,12 +1659,12 @@ jr_017_50F9:
     ld   de, wDrawCommand                         ; $5110: $11 $01 $D6
     ld   c, $18                                   ; $5113: $0E $18
 
-jr_017_5115:
+.loop_5115:
     ld   a, [hl+]                                 ; $5115: $2A
     ld   [de], a                                  ; $5116: $12
     inc  de                                       ; $5117: $13
     dec  c                                        ; $5118: $0D
-    jr   nz, jr_017_5115                          ; $5119: $20 $FA
+    jr   nz, .loop_5115                           ; $5119: $20 $FA
 
     pop  de                                       ; $511B: $D1
     ldh  a, [hIsGBC]                              ; $511C: $F0 $FE
@@ -1676,12 +1676,12 @@ jr_017_5115:
     ld   de, wDrawCommandAlt                      ; $5124: $11 $91 $DC
     ld   c, $18                                   ; $5127: $0E $18
 
-jr_017_5129:
+.loop_5129:
     ld   a, [hl+]                                 ; $5129: $2A
     ld   [de], a                                  ; $512A: $12
     inc  de                                       ; $512B: $13
     dec  c                                        ; $512C: $0D
-    jr   nz, jr_017_5129                          ; $512D: $20 $FA
+    jr   nz, .loop_5129                           ; $512D: $20 $FA
 
     ret                                           ; $512F: $C9
 
@@ -1994,12 +1994,12 @@ ENDC
     ld   de, wDrawCommand                         ; $54E5: $11 $01 $D6
     ld   c, $04                                   ; $54E8: $0E $04
 
-jr_017_54EA:
+.loop_54EA:
     ld   a, [hl+]                                 ; $54EA: $2A
     ld   [de], a                                  ; $54EB: $12
     inc  de                                       ; $54EC: $13
     dec  c                                        ; $54ED: $0D
-    jr   nz, jr_017_54EA                          ; $54EE: $20 $FA
+    jr   nz, .loop_54EA                           ; $54EE: $20 $FA
 
     xor  a                                        ; $54F0: $AF
     ld   [de], a                                  ; $54F1: $12
@@ -2015,12 +2015,12 @@ jr_017_54F6:
     ld   de, wDrawCommandAlt                      ; $54FB: $11 $91 $DC
     ld   c, $03                                   ; $54FE: $0E $03
 
-jr_017_5500:
+.loop_5500:
     ld   a, [hl+]                                 ; $5500: $2A
     ld   [de], a                                  ; $5501: $12
     inc  de                                       ; $5502: $13
     dec  c                                        ; $5503: $0D
-    jr   nz, jr_017_5500                          ; $5504: $20 $FA
+    jr   nz, .loop_5500                           ; $5504: $20 $FA
 
     xor  a                                        ; $5506: $AF
     ld   [de], a                                  ; $5507: $12
@@ -3220,12 +3220,12 @@ jr_017_5F4D:
     ld   de, wDrawCommand                         ; $5F70: $11 $01 $D6
     ld   c, $18                                   ; $5F73: $0E $18
 
-jr_017_5F75:
+.loop_5F75:
     ld   a, [hl+]                                 ; $5F75: $2A
     ld   [de], a                                  ; $5F76: $12
     inc  de                                       ; $5F77: $13
     dec  c                                        ; $5F78: $0D
-    jr   nz, jr_017_5F75                          ; $5F79: $20 $FA
+    jr   nz, .loop_5F75                           ; $5F79: $20 $FA
 
     pop  hl                                       ; $5F7B: $E1
     ldh  a, [hIsGBC]                              ; $5F7C: $F0 $FE
@@ -3245,12 +3245,12 @@ jr_017_5F75:
     ld   hl, Data_017_5EED                        ; $5F8D: $21 $ED $5E
     ld   c, $15                                   ; $5F90: $0E $15
 
-jr_017_5F92:
+.loop_5F92:
     ld   a, [hl+]                                 ; $5F92: $2A
     ld   [de], a                                  ; $5F93: $12
     inc  de                                       ; $5F94: $13
     dec  c                                        ; $5F95: $0D
-    jr   nz, jr_017_5F92                          ; $5F96: $20 $FA
+    jr   nz, .loop_5F92                           ; $5F96: $20 $FA
 
     ret                                           ; $5F98: $C9
 
@@ -3793,12 +3793,12 @@ func_017_63BC::
     ld   de, wDrawCommand.length                  ; $63E1: $11 $03 $D6
     ld   c, $10                                   ; $63E4: $0E $10
 
-jr_017_63E6:
+.loop_63E6:
     ld   a, [hl+]                                 ; $63E6: $2A
     ld   [de], a                                  ; $63E7: $12
     inc  de                                       ; $63E8: $13
     dec  c                                        ; $63E9: $0D
-    jr   nz, jr_017_63E6                          ; $63EA: $20 $FA
+    jr   nz, .loop_63E6                           ; $63EA: $20 $FA
 
     jr   jr_017_63F1                              ; $63EC: $18 $03
 
@@ -4134,12 +4134,12 @@ func_017_67CA::
     ld   de, wDrawCommand                         ; $67E2: $11 $01 $D6
     ld   c, $36                                   ; $67E5: $0E $36
 
-jr_017_67E7:
+.loop_67E7:
     ld   a, [hl+]                                 ; $67E7: $2A
     ld   [de], a                                  ; $67E8: $12
     inc  de                                       ; $67E9: $13
     dec  c                                        ; $67EA: $0D
-    jr   nz, jr_017_67E7                          ; $67EB: $20 $FA
+    jr   nz, .loop_67E7                           ; $67EB: $20 $FA
 
     xor  a                                        ; $67ED: $AF
     ld   [de], a                                  ; $67EE: $12
@@ -4156,12 +4156,12 @@ jr_017_67E7:
     ld   de, wDrawCommandAlt                      ; $67FB: $11 $91 $DC
     ld   c, $36                                   ; $67FE: $0E $36
 
-jr_017_6800:
+.loop_6800:
     ld   a, [hl+]                                 ; $6800: $2A
     ld   [de], a                                  ; $6801: $12
     inc  de                                       ; $6802: $13
     dec  c                                        ; $6803: $0D
-    jr   nz, jr_017_6800                          ; $6804: $20 $FA
+    jr   nz, .loop_6800                           ; $6804: $20 $FA
 
     xor  a                                        ; $6806: $AF
     ld   [de], a                                  ; $6807: $12
@@ -4992,12 +4992,12 @@ label_017_6F9F:
     ld   de, wDrawCommand                         ; $6FA2: $11 $01 $D6
     ld   c, $24                                   ; $6FA5: $0E $24
 
-jr_017_6FA7:
+.loop_6FA7:
     ld   a, [hl+]                                 ; $6FA7: $2A
     ld   [de], a                                  ; $6FA8: $12
     inc  de                                       ; $6FA9: $13
     dec  c                                        ; $6FAA: $0D
-    jr   nz, jr_017_6FA7                          ; $6FAB: $20 $FA
+    jr   nz, .loop_6FA7                           ; $6FAB: $20 $FA
 
     ldh  a, [hIsGBC]                              ; $6FAD: $F0 $FE
     and  a                                        ; $6FAF: $A7
@@ -5007,12 +5007,12 @@ jr_017_6FA7:
     ld   de, wDrawCommandAlt                      ; $6FB4: $11 $91 $DC
     ld   c, $11                                   ; $6FB7: $0E $11
 
-jr_017_6FB9:
+.loop_6FB9:
     ld   a, [hl+]                                 ; $6FB9: $2A
     ld   [de], a                                  ; $6FBA: $12
     inc  de                                       ; $6FBB: $13
     dec  c                                        ; $6FBC: $0D
-    jr   nz, jr_017_6FB9                          ; $6FBD: $20 $FA
+    jr   nz, .loop_6FB9                           ; $6FBD: $20 $FA
 
     ret                                           ; $6FBF: $C9
 
@@ -6127,13 +6127,13 @@ func_017_7A01::
     add  hl, de                                   ; $7A17: $19
     ld   de, wObjPal2 + 2*2                       ; $7A18: $11 $5C $DC
 
-jr_017_7A1B:
+.loop_7A1B:
     ld   a, [hl+]                                 ; $7A1B: $2A
     ld   [de], a                                  ; $7A1C: $12
     inc  de                                       ; $7A1D: $13
     ld   a, e                                     ; $7A1E: $7B
     and  $03                                      ; $7A1F: $E6 $03
-    jr   nz, jr_017_7A1B                          ; $7A21: $20 $F8
+    jr   nz, .loop_7A1B                           ; $7A21: $20 $F8
 
     ld   a, $02                                   ; $7A23: $3E $02
     ld   [wPaletteDataFlags], a                   ; $7A25: $EA $D1 $DD

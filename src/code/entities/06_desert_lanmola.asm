@@ -26,10 +26,10 @@ DesertLanmolaEntityHandler::
     ld   a, $FF                                   ; $5608: $3E $FF
     ld   hl, wD200                                ; $560A: $21 $00 $D2
 
-jr_006_560D:
+.loop_560D:
     ld   [hl+], a                                 ; $560D: $22
     dec  e                                        ; $560E: $1D
-    jr   nz, jr_006_560D                          ; $560F: $20 $FC
+    jr   nz, .loop_560D                           ; $560F: $20 $FC
 
 jr_006_5611:
     call func_006_58C9                            ; $5611: $CD $C9 $58
@@ -165,7 +165,7 @@ label_006_56C8:
 
     ld   a, $02                                   ; $56D7: $3E $02
 
-jr_006_56D9:
+.loop_56D9:
     ldh  [hMultiPurposeG], a                      ; $56D9: $E0 $E8
     ld   a, ENTITY_DESERT_LANMOLA                 ; $56DB: $3E $87
     call SpawnNewEntity_trampoline                ; $56DD: $CD $86 $3B
@@ -208,7 +208,7 @@ jr_006_56D9:
     pop  bc                                       ; $5720: $C1
     ldh  a, [hMultiPurposeG]                      ; $5721: $F0 $E8
     dec  a                                        ; $5723: $3D
-    jr   nz, jr_006_56D9                          ; $5724: $20 $B3
+    jr   nz, .loop_56D9                           ; $5724: $20 $B3
 
 jr_006_5726:
     call func_006_594C                            ; $5726: $CD $4C $59

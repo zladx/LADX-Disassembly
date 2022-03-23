@@ -342,7 +342,7 @@ label_007_69D0:
     add  hl, de                                   ; $6A20: $19
     ld   e, $05                                   ; $6A21: $1E $05
 
-jr_007_6A23:
+.loop_6A23:
     ld   a, [hl+]                                 ; $6A23: $2A
     ld   [bc], a                                  ; $6A24: $02
     push hl                                       ; $6A25: $E5
@@ -353,7 +353,7 @@ jr_007_6A23:
     pop  hl                                       ; $6A2D: $E1
     inc  bc                                       ; $6A2E: $03
     dec  e                                        ; $6A2F: $1D
-    jr   nz, jr_007_6A23                          ; $6A30: $20 $F1
+    jr   nz, .loop_6A23                           ; $6A30: $20 $F1
 
     pop  bc                                       ; $6A32: $C1
     ret                                           ; $6A33: $C9

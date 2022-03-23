@@ -301,12 +301,12 @@ func_023_7E95::
     ld   de, wDrawCommand                         ; $7EB9: $11 $01 $D6
     ld   c, $18                                   ; $7EBC: $0E $18
 
-jr_023_7EBE:
+.loop_7EBE:
     ld   a, [hl+]                                 ; $7EBE: $2A
     ld   [de], a                                  ; $7EBF: $12
     inc  de                                       ; $7EC0: $13
     dec  c                                        ; $7EC1: $0D
-    jr   nz, jr_023_7EBE                          ; $7EC2: $20 $FA
+    jr   nz, .loop_7EBE                           ; $7EC2: $20 $FA
 
     pop  hl                                       ; $7EC4: $E1
     ldh  a, [hIsGBC]                              ; $7EC5: $F0 $FE
@@ -355,11 +355,11 @@ jr_023_7EEE:
     ld   hl, Data_023_7E80                        ; $7EF8: $21 $80 $7E
     ld   c, $15                                   ; $7EFB: $0E $15
 
-jr_023_7EFD:
+.loop_7EFD:
     ld   a, [hl+]                                 ; $7EFD: $2A
     ld   [de], a                                  ; $7EFE: $12
     inc  de                                       ; $7EFF: $13
     dec  c                                        ; $7F00: $0D
-    jr   nz, jr_023_7EFD                          ; $7F01: $20 $FA
+    jr   nz, .loop_7EFD                           ; $7F01: $20 $FA
 
     ret                                           ; $7F03: $C9

@@ -184,7 +184,7 @@ func_001_4794::
     ld   hl, SaveGame1                            ; $4798: $21 $00 $A1
     add  hl, de                                   ; $479B: $19
 
-jr_001_479C::
+.loop_479C::
     call EnableExternalRAMWriting                 ; $479C: $CD $D0 $27
     ld   a, [hli]                                 ; $479F: $2A
     cp   c                                        ; $47A0: $B9
@@ -192,7 +192,7 @@ jr_001_479C::
     inc  c                                        ; $47A3: $0C
     inc  c                                        ; $47A4: $0C
     dec  b                                        ; $47A5: $05
-    jr   nz, jr_001_479C                          ; $47A6: $20 $F4
+    jr   nz, .loop_479C                           ; $47A6: $20 $F4
     jr   jr_001_47CD                              ; $47A8: $18 $23
 
 jr_001_47AA::
@@ -204,27 +204,27 @@ jr_001_47AA::
     ; de = sizeof(save)
     ld   de, SaveGame2 - SaveGame1.main           ; $47AF: $11 $A8 $03
 
-jr_001_47B2::
+.loop_47B2::
     call EnableExternalRAMWriting                 ; $47B2: $CD $D0 $27
     xor  a                                        ; $47B5: $AF
     ldi  [hl], a                                  ; $47B6: $22
     dec  de                                       ; $47B7: $1B
     ld   a, e                                     ; $47B8: $7B
     or   d                                        ; $47B9: $B2
-    jr   nz, jr_001_47B2                          ; $47BA: $20 $F6
+    jr   nz, .loop_47B2                           ; $47BA: $20 $F6
     pop  de                                       ; $47BC: $D1
     ld   hl, SaveGame1                            ; $47BD: $21 $00 $A1
     add  hl, de                                   ; $47C0: $19
     ld   a, $01                                   ; $47C1: $3E $01
 
     ; Store the sequence 1,3,5,7,9 into the prefix.
-jr_001_47C3::
+.loop_47C3::
     call EnableExternalRAMWriting                 ; $47C3: $CD $D0 $27
     ldi  [hl], a                                  ; $47C6: $22
     inc  a                                        ; $47C7: $3C
     inc  a                                        ; $47C8: $3C
     cp   SAVE_PREFIX_SIZE * 2 + 1                 ; $47C9: $FE $0B
-    jr   c, jr_001_47C3                           ; $47CB: $38 $F6
+    jr   c, .loop_47C3                            ; $47CB: $38 $F6
 
 jr_001_47CD::
     ret                                           ; $47CD: $C9
@@ -289,7 +289,7 @@ jr_001_52C7::
     ld   hl, wOverworldRoomStatus                 ; $52D3: $21 $00 $D8
     ld   de, SAVE_MAIN_SIZE                       ; $52D6: $11 $80 $03
 
-jr_001_52D9::
+.loop_52D9::
     call EnableExternalRAMWriting                 ; $52D9: $CD $D0 $27
     ld   a, [bc]                                  ; $52DC: $0A
     inc  bc                                       ; $52DD: $03
@@ -297,7 +297,7 @@ jr_001_52D9::
     dec  de                                       ; $52DF: $1B
     ld   a, e                                     ; $52E0: $7B
     or   d                                        ; $52E1: $B2
-    jr   nz, jr_001_52D9                          ; $52E2: $20 $F5
+    jr   nz, .loop_52D9                           ; $52E2: $20 $F5
 
 IF __PATCH_4__
     ld de, wMaxHealth
@@ -329,7 +329,7 @@ ENDC
     ld   hl, wColorDungeonItemFlags               ; $52E4: $21 $DA $DD
     ld   de, $05                                  ; $52E7: $11 $05 $00
 
-jr_001_52EA::
+.loop_52EA::
     call EnableExternalRAMWriting                 ; $52EA: $CD $D0 $27
     ld   a, [bc]                                  ; $52ED: $0A
     inc  bc                                       ; $52EE: $03
@@ -337,11 +337,11 @@ jr_001_52EA::
     dec  de                                       ; $52F0: $1B
     ld   a, e                                     ; $52F1: $7B
     or   d                                        ; $52F2: $B2
-    jr   nz, jr_001_52EA                          ; $52F3: $20 $F5
+    jr   nz, .loop_52EA                           ; $52F3: $20 $F5
     ld   hl, wColorDungeonRoomStatus              ; $52F5: $21 $E0 $DD
     ld   de, $20                                  ; $52F8: $11 $20 $00
 
-jr_001_52FB::
+.loop_52FB::
     call EnableExternalRAMWriting                 ; $52FB: $CD $D0 $27
     ld   a, [bc]                                  ; $52FE: $0A
     inc  bc                                       ; $52FF: $03
@@ -349,7 +349,7 @@ jr_001_52FB::
     dec  de                                       ; $5301: $1B
     ld   a, e                                     ; $5302: $7B
     or   d                                        ; $5303: $B2
-    jr   nz, jr_001_52FB                          ; $5304: $20 $F5
+    jr   nz, .loop_52FB                           ; $5304: $20 $F5
     call EnableExternalRAMWriting                 ; $5306: $CD $D0 $27
     ld   a, [bc]                                  ; $5309: $0A
     ld   [wTunicType], a                          ; $530A: $EA $0F $DC
@@ -766,7 +766,7 @@ FileSaveFadeOut::
     ld   c, $80                                   ; $5837: $0E $80
     di                                            ; $5839: $F3
 
-jr_001_583A::
+.loop_583A::
     ld   a, $03                                   ; $583A: $3E $03
     ld   [rSVBK], a                               ; $583C: $E0 $70
     ld   b, [hl]                                  ; $583E: $46
@@ -777,7 +777,7 @@ jr_001_583A::
     dec  c                                        ; $5844: $0D
     ld   a, c                                     ; $5845: $79
     and  a                                        ; $5846: $A7
-    jr   nz, jr_001_583A                          ; $5847: $20 $F1
+    jr   nz, .loop_583A                           ; $5847: $20 $F1
     ld   a, $03                                   ; $5849: $3E $03
     ld   [rSVBK], a                               ; $584B: $E0 $70
     xor  a                                        ; $584D: $AF
@@ -816,13 +816,13 @@ func_001_5888::
     ld   hl, wRoomTransitionState                 ; $5888: $21 $24 $C1
     ld   e, $00                                   ; $588B: $1E $00
 
-jr_001_588D::
+.loop_588D::
     xor  a                                        ; $588D: $AF
     ldi  [hl], a                                  ; $588E: $22
     inc  e                                        ; $588F: $1C
     ld   a, e                                     ; $5890: $7B
     cp   $0C                                      ; $5891: $FE $0C
-    jr   nz, jr_001_588D                          ; $5893: $20 $F8
+    jr   nz, .loop_588D                           ; $5893: $20 $F8
 
 func_001_5895::
     ld   a, $80                                   ; $5895: $3E $80
@@ -1293,12 +1293,12 @@ label_001_5D53::
 jr_001_5D75::
     ld   e, $15                                   ; $5D75: $1E $15
 
-jr_001_5D77::
+.loop_5D77::
     ld   a, [bc]                                  ; $5D77: $0A
     inc  bc                                       ; $5D78: $03
     ldi  [hl], a                                  ; $5D79: $22
     dec  e                                        ; $5D7A: $1D
-    jr   nz, jr_001_5D77                          ; $5D7B: $20 $FA
+    jr   nz, .loop_5D77                           ; $5D7B: $20 $FA
     pop  de                                       ; $5D7D: $D1
     ld   hl, wDrawCommand.data                    ; $5D7E: $21 $04 $D6
     add  hl, de                                   ; $5D81: $19
@@ -1417,7 +1417,7 @@ ENDC
     ld   bc, wOverworldRoomStatus                 ; $5E0C: $01 $00 $D8
     ld   de, SAVE_MAIN_SIZE                       ; $5E0F: $11 $80 $03
 
-jr_001_5E12::
+.loop_5E12::
     call EnableExternalRAMWriting                 ; $5E12: $CD $D0 $27
     ld   a, [bc]                                  ; $5E15: $0A
     inc  bc                                       ; $5E16: $03
@@ -1426,11 +1426,11 @@ jr_001_5E12::
     dec  de                                       ; $5E1B: $1B
     ld   a, e                                     ; $5E1C: $7B
     or   d                                        ; $5E1D: $B2
-    jr   nz, jr_001_5E12                          ; $5E1E: $20 $F2
+    jr   nz, .loop_5E12                           ; $5E1E: $20 $F2
     ld   bc, wColorDungeonItemFlags               ; $5E20: $01 $DA $DD
     ld   de, $05                                  ; $5E23: $11 $05 $00
 
-jr_001_5E26::
+.loop_5E26::
     call EnableExternalRAMWriting                 ; $5E26: $CD $D0 $27
     ld   a, [bc]                                  ; $5E29: $0A
     inc  bc                                       ; $5E2A: $03
@@ -1439,11 +1439,11 @@ jr_001_5E26::
     dec  de                                       ; $5E2F: $1B
     ld   a, e                                     ; $5E30: $7B
     or   d                                        ; $5E31: $B2
-    jr   nz, jr_001_5E26                          ; $5E32: $20 $F2
+    jr   nz, .loop_5E26                           ; $5E32: $20 $F2
     ld   bc, wColorDungeonRoomStatus              ; $5E34: $01 $E0 $DD
     ld   de, $20                                  ; $5E37: $11 $20 $00
 
-jr_001_5E3A::
+.loop_5E3A::
     call EnableExternalRAMWriting                 ; $5E3A: $CD $D0 $27
     ld   a, [bc]                                  ; $5E3D: $0A
     inc  bc                                       ; $5E3E: $03
@@ -1452,7 +1452,7 @@ jr_001_5E3A::
     dec  de                                       ; $5E43: $1B
     ld   a, e                                     ; $5E44: $7B
     or   d                                        ; $5E45: $B2
-    jr   nz, jr_001_5E3A                          ; $5E46: $20 $F2
+    jr   nz, .loop_5E3A                           ; $5E46: $20 $F2
     call EnableExternalRAMWriting                 ; $5E48: $CD $D0 $27
     ld   a, [wTunicType]                          ; $5E4B: $FA $0F $DC
     call EnableExternalRAMWriting                 ; $5E4E: $CD $D0 $27
@@ -2356,7 +2356,7 @@ PeachPictureState0Handler::
     ld   c, $80                                   ; $6813: $0E $80
     di                                            ; $6815: $F3
 
-jr_001_6816::
+.loop_6816::
     xor  a                                        ; $6816: $AF
     ld   [rSVBK], a                               ; $6817: $E0 $70
     ld   b, [hl]                                  ; $6819: $46
@@ -2367,7 +2367,7 @@ jr_001_6816::
     dec  c                                        ; $6820: $0D
     ld   a, c                                     ; $6821: $79
     and  a                                        ; $6822: $A7
-    jr   nz, jr_001_6816                          ; $6823: $20 $F1
+    jr   nz, .loop_6816                           ; $6823: $20 $F1
     xor  a                                        ; $6825: $AF
     ld   [rSVBK], a                               ; $6826: $E0 $70
     ei                                            ; $6828: $FB
@@ -2439,10 +2439,10 @@ jr_001_6885::
     ld   e, $08                                   ; $6899: $1E $08
     ld   hl, wD210                                ; $689B: $21 $10 $D2
 
-jr_001_689E::
+.loop_689E::
     ldi  [hl], a                                  ; $689E: $22
     dec  e                                        ; $689F: $1D
-    jr   nz, jr_001_689E                          ; $68A0: $20 $FC
+    jr   nz, .loop_689E                           ; $68A0: $20 $FC
     ld   a, $01                                   ; $68A2: $3E $01
     ld   [wPaletteUnknownE], a                    ; $68A4: $EA $D5 $DD
     jp   IncrementGameplaySubtypeAndReturn        ; $68A7: $C3 $D6 $44
@@ -3025,13 +3025,13 @@ jr_001_6D1C::
     ld   hl, vBGMap0                              ; $6D20: $21 $00 $98
     ld   bc, $400                                 ; $6D23: $01 $00 $04
 
-jr_001_6D26::
+.loop_6D26::
     ld   a, d                                     ; $6D26: $7A
     ldi  [hl], a                                  ; $6D27: $22
     dec  bc                                       ; $6D28: $0B
     ld   a, b                                     ; $6D29: $78
     or   c                                        ; $6D2A: $B1
-    jr   nz, jr_001_6D26                          ; $6D2B: $20 $F9
+    jr   nz, .loop_6D26                           ; $6D2B: $20 $F9
     ld   a, $00                                   ; $6D2D: $3E $00
     ld   [rVBK], a                                ; $6D2F: $E0 $4F
     ret                                           ; $6D31: $C9

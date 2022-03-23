@@ -126,7 +126,7 @@ jr_004_6007:
     ld   a, [wRupeeCountHigh]                     ; $6015: $FA $5D $DB
     ld   h, a                                     ; $6018: $67
 
-jr_004_6019:
+.loop_6019:
     ld   a, e                                     ; $6019: $7B
     or   d                                        ; $601A: $B2
     jr   z, jr_004_6023                           ; $601B: $28 $06
@@ -135,7 +135,7 @@ jr_004_6019:
     inc  hl                                       ; $601E: $23
     daa                                           ; $601F: $27
     dec  de                                       ; $6020: $1B
-    jr   jr_004_6019                              ; $6021: $18 $F6
+    jr   .loop_6019                               ; $6021: $18 $F6
 
     ; Play the fishing game: remove the price from the player's rupees
 jr_004_6023:
@@ -255,7 +255,7 @@ func_004_60D0::
     push bc                                       ; $60DD: $C5
     ld   c, $05                                   ; $60DE: $0E $05
 
-jr_004_60E0:
+.loop_60E0:
     ld   a, ENTITY_FISHERMAN_FISHING_GAME         ; $60E0: $3E $54
     call SpawnNewEntity_trampoline                ; $60E2: $CD $86 $3B
 
@@ -293,7 +293,7 @@ jr_004_60E0:
     add  hl, de                                   ; $6115: $19
     ld   [hl], a                                  ; $6116: $77
     dec  c                                        ; $6117: $0D
-    jr   nz, jr_004_60E0                          ; $6118: $20 $C6
+    jr   nz, .loop_60E0                           ; $6118: $20 $C6
 
     xor  a                                        ; $611A: $AF
     ld   [wD004], a                               ; $611B: $EA $04 $D0
@@ -446,7 +446,7 @@ jr_004_6202:
     ld   a, [wRupeeCountHigh]                     ; $6210: $FA $5D $DB
     ld   h, a                                     ; $6213: $67
 
-jr_004_6214:
+.loop_6214:
     ld   a, e                                     ; $6214: $7B
     or   d                                        ; $6215: $B2
     jr   z, jr_004_621E                           ; $6216: $28 $06
@@ -455,7 +455,7 @@ jr_004_6214:
     inc  hl                                       ; $6219: $23
     daa                                           ; $621A: $27
     dec  de                                       ; $621B: $1B
-    jr   jr_004_6214                              ; $621C: $18 $F6
+    jr   .loop_6214                               ; $621C: $18 $F6
 
     ; Play again: remove the price from the player's rupees
 jr_004_621E:

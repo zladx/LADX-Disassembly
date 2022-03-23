@@ -1574,7 +1574,7 @@ jr_015_4DF2:
 
     xor  a                                        ; $4DFA: $AF
 
-jr_015_4DFB:
+.loop_4DFB:
     ldh  [hMultiPurposeG], a                      ; $4DFB: $E0 $E8
     ld   a, ENTITY_FLAME_SHOOTER                  ; $4DFD: $3E $E2
     call SpawnNewEntity_trampoline                ; $4DFF: $CD $86 $3B
@@ -1617,7 +1617,7 @@ jr_015_4DFB:
     ldh  a, [hMultiPurposeG]                      ; $4E3F: $F0 $E8
     inc  a                                        ; $4E41: $3C
     cp   $02                                      ; $4E42: $FE $02
-    jr   c, jr_015_4DFB                           ; $4E44: $38 $B5
+    jr   c, .loop_4DFB                            ; $4E44: $38 $B5
 
 jr_015_4E46:
     jp   ClearEntityStatus_15                     ; $4E46: $C3 $31 $7C
@@ -2062,10 +2062,10 @@ ENDC
     ld   e, $80                                   ; $50E2: $1E $80
     ld   hl, wIsFileSelectionArrowShifted         ; $50E4: $21 $00 $D0
 
-jr_015_50E7:
+.loop_50E7:
     ld   [hl+], a                                 ; $50E7: $22
     dec  e                                        ; $50E8: $1D
-    jr   nz, jr_015_50E7                          ; $50E9: $20 $FC
+    jr   nz, .loop_50E7                           ; $50E9: $20 $FC
 
     ldh  a, [hLinkPositionY]                      ; $50EB: $F0 $99
     ld   hl, wEntitiesPosYTable                   ; $50ED: $21 $10 $C2
@@ -2074,10 +2074,10 @@ jr_015_50E7:
     ld   e, $80                                   ; $50F2: $1E $80
     ld   hl, wD100                                ; $50F4: $21 $00 $D1
 
-jr_015_50F7:
+.loop_50F7:
     ld   [hl+], a                                 ; $50F7: $22
     dec  e                                        ; $50F8: $1D
-    jr   nz, jr_015_50F7                          ; $50F9: $20 $FC
+    jr   nz, .loop_50F7                           ; $50F9: $20 $FC
 
     xor  a                                        ; $50FB: $AF
     ld   [wD21A], a                               ; $50FC: $EA $1A $D2
@@ -3876,7 +3876,7 @@ jr_015_5F3F:
     ldh  [hNoiseSfx], a                           ; $5F49: $E0 $F4
     xor  a                                        ; $5F4B: $AF
 
-jr_015_5F4C:
+.loop_5F4C:
     ldh  [hMultiPurposeG], a                      ; $5F4C: $E0 $E8
     ld   a, ENTITY_GOPONGA_FLOWER_PROJECTILE      ; $5F4E: $3E $7D
     call SpawnNewEntity_trampoline                ; $5F50: $CD $86 $3B
@@ -3920,7 +3920,7 @@ jr_015_5F4C:
     ldh  a, [hMultiPurposeG]                      ; $5F8F: $F0 $E8
     inc  a                                        ; $5F91: $3C
     cp   $04                                      ; $5F92: $FE $04
-    jr   nz, jr_015_5F4C                          ; $5F94: $20 $B6
+    jr   nz, .loop_5F4C                           ; $5F94: $20 $B6
 
 jr_015_5F96:
     jp   ClearEntityStatus_15                     ; $5F96: $C3 $31 $7C
@@ -3932,11 +3932,11 @@ func_015_5F9A::
     ld   e, $80                                   ; $5F9A: $1E $80
     ld   hl, wD100                                ; $5F9C: $21 $00 $D1
 
-jr_015_5F9F:
+.loop_5F9F:
     xor  a                                        ; $5F9F: $AF
     ld   [hl+], a                                 ; $5FA0: $22
     dec  e                                        ; $5FA1: $1D
-    jr   nz, jr_015_5F9F                          ; $5FA2: $20 $FB
+    jr   nz, .loop_5F9F                           ; $5FA2: $20 $FB
 
     ret                                           ; $5FA4: $C9
 

@@ -48,7 +48,7 @@ MarineBeachPrepare0::
     ld   c, $80                                   ; $624A: $0E $80
     di                                            ; $624C: $F3
 
-jr_001_624D::
+.loop_624D::
     xor  a                                        ; $624D: $AF
     ld   [rSVBK], a                               ; $624E: $E0 $70
     ld   b, [hl]                                  ; $6250: $46
@@ -59,7 +59,7 @@ jr_001_624D::
     dec  c                                        ; $6257: $0D
     ld   a, c                                     ; $6258: $79
     and  a                                        ; $6259: $A7
-    jr   nz, jr_001_624D                          ; $625A: $20 $F1
+    jr   nz, .loop_624D                           ; $625A: $20 $F1
     xor  a                                        ; $625C: $AF
     ld   [rSVBK], a                               ; $625D: $E0 $70
     ei                                            ; $625F: $FB
@@ -400,10 +400,10 @@ func_001_64FF::
     ld   hl, wTranscientVfxTypeTable              ; $6501: $21 $10 $C5
     xor  a                                        ; $6504: $AF
 
-jr_001_6505::
+.loop_6505::
     ldi  [hl], a                                  ; $6505: $22
     dec  e                                        ; $6506: $1D
-    jr   nz, jr_001_6505                          ; $6507: $20 $FC
+    jr   nz, .loop_6505                           ; $6507: $20 $FC
     ret                                           ; $6509: $C9
 
 ;

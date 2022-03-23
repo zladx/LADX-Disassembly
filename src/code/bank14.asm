@@ -421,7 +421,7 @@ jr_014_4C04:
 func_014_4C10::
     ld   b, $40                                   ; $4C10: $06 $40
 
-jr_014_4C12:
+.loop_4C12:
     ld   a, $02                                   ; $4C12: $3E $02
     ldh  [rSVBK], a                               ; $4C14: $E0 $70
     ld   c, [hl]                                  ; $4C16: $4E
@@ -430,7 +430,7 @@ jr_014_4C12:
     ld   [hl], c                                  ; $4C1A: $71
     inc  hl                                       ; $4C1B: $23
     dec  b                                        ; $4C1C: $05
-    jr   nz, jr_014_4C12                          ; $4C1D: $20 $F3
+    jr   nz, .loop_4C12                           ; $4C1D: $20 $F3
 
     ret                                           ; $4C1F: $C9
 
@@ -985,12 +985,12 @@ label_014_5067:
 
     ld   d, $00                                   ; $506D: $16 $00
 
-jr_014_506F:
+.loop_506F:
     ld   a, [wC17E]                               ; $506F: $FA $7E $C1
     inc  a                                        ; $5072: $3C
     ld   [wC17E], a                               ; $5073: $EA $7E $C1
     and  $01                                      ; $5076: $E6 $01
-    jr   nz, jr_014_506F                          ; $5078: $20 $F5
+    jr   nz, .loop_506F                           ; $5078: $20 $F5
 
     ld   a, [wC17C]                               ; $507A: $FA $7C $C1
     add  $01                                      ; $507D: $C6 $01

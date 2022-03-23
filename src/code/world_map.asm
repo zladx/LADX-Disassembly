@@ -39,7 +39,7 @@ WorldMapState0Handler::
     and  a                                        ; $565D: $A7
     jr   nz, jr_001_5674                          ; $565E: $20 $14
 
-jr_001_5660::
+.loop_5660::
     xor  a                                        ; $5660: $AF
     ld   [rSVBK], a                               ; $5661: $E0 $70
     ld   b, [hl]                                  ; $5663: $46
@@ -50,7 +50,7 @@ jr_001_5660::
     dec  c                                        ; $566A: $0D
     ld   a, c                                     ; $566B: $79
     and  a                                        ; $566C: $A7
-    jr   nz, jr_001_5660                          ; $566D: $20 $F1
+    jr   nz, .loop_5660                           ; $566D: $20 $F1
     ld   a, $01                                   ; $566F: $3E $01
     ld   [wIsFileSelectionArrowShifted], a        ; $5671: $EA $00 $D0
 

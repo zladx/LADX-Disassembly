@@ -336,7 +336,7 @@ jr_004_6B7C:
     call CopyEntityPositionToActivePosition       ; $6BA8: $CD $8A $3D
     ld   a, $03                                   ; $6BAB: $3E $03
 
-jr_004_6BAD:
+.loop_6BAD:
     ldh  [hMultiPurpose4], a                      ; $6BAD: $E0 $DB
     ldh  a, [hActiveEntityVisualPosY]             ; $6BAF: $F0 $EC
     ld   hl, hMultiPurpose1                       ; $6BB1: $21 $D8 $FF
@@ -364,7 +364,7 @@ jr_004_6BAD:
     ldh  [hMultiPurpose1], a                      ; $6BD5: $E0 $D8
     ldh  a, [hMultiPurpose4]                      ; $6BD7: $F0 $DB
     dec  a                                        ; $6BD9: $3D
-    jr   nz, jr_004_6BAD                          ; $6BDA: $20 $D1
+    jr   nz, .loop_6BAD                           ; $6BDA: $20 $D1
 
     ld   a, $03                                   ; $6BDC: $3E $03
     jp   func_015_7964_trampoline                 ; $6BDE: $C3 $A0 $3D

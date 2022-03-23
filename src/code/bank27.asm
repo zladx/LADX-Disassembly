@@ -14,7 +14,7 @@ func_027_7240::
     srl  a                                        ; $7252: $CB $3F
     ld   c, a                                     ; $7254: $4F
 
-jr_027_7255:
+.loop_7255:
     ldh  a, [hActiveEntityVisualPosY]             ; $7255: $F0 $EC
     add  [hl]                                     ; $7257: $86
     ld   [de], a                                  ; $7258: $12
@@ -32,7 +32,7 @@ jr_027_7255:
     ld   [de], a                                  ; $7265: $12
     inc  de                                       ; $7266: $13
     dec  c                                        ; $7267: $0D
-    jr   nz, jr_027_7255                          ; $7268: $20 $EB
+    jr   nz, .loop_7255                           ; $7268: $20 $EB
 
     pop  bc                                       ; $726A: $C1
     ld   a, [wOAMNextAvailableSlot]               ; $726B: $FA $C0 $C3

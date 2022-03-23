@@ -82,7 +82,7 @@ ManboAndFishesState1Handler::
     ld   e, INVENTORY_SLOT_COUNT -1               ; $4571: $1E $0B
     ld   hl, wBButtonSlot                         ; $4573: $21 $00 $DB
 
-jr_018_4576:
+.loop_4576:
     ld   a, [hl+]                                 ; $4576: $2A
     cp   INVENTORY_OCARINA                        ; $4577: $FE $09
     jr   z, jr_018_458A                           ; $4579: $28 $0F
@@ -90,7 +90,7 @@ jr_018_4576:
     dec  e                                        ; $457B: $1D
     ld   a, e                                     ; $457C: $7B
     cp   $FF                                      ; $457D: $FE $FF
-    jr   nz, jr_018_4576                          ; $457F: $20 $F5
+    jr   nz, .loop_4576                           ; $457F: $20 $F5
 
 jr_018_4581:
     call IncrementEntityState                     ; $4581: $CD $12 $3B

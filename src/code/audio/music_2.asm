@@ -12,10 +12,10 @@ PlayMusicTrack_1E::
 label_01E_4009:
     ld   hl, wMusicTranspose                      ; $4009: $21 $00 $D3
 
-jr_01E_400C:
+.loop_400C:
     ld   [hl], $00                                ; $400C: $36 $00
     inc  l                                        ; $400E: $2C
-    jr   nz, jr_01E_400C                          ; $400F: $20 $FB
+    jr   nz, .loop_400C                           ; $400F: $20 $FB
 
     ld   a, $80                                   ; $4011: $3E $80
     ldh  [rNR52], a                               ; $4013: $E0 $26
@@ -99,12 +99,12 @@ jr_01E_4072:
     ld   b, $04                                   ; $4072: $06 $04
     ld   c, $20                                   ; $4074: $0E $20
 
-jr_01E_4076:
+.loop_4076:
     ld   a, [hl+]                                 ; $4076: $2A
     ld   [c], a                                   ; $4077: $E2
     inc  c                                        ; $4078: $0C
     dec  b                                        ; $4079: $05
-    jr   nz, jr_01E_4076                          ; $407A: $20 $FA
+    jr   nz, .loop_4076                           ; $407A: $20 $FA
 
     ld   a, [hl]                                  ; $407C: $7E
     ld   [de], a                                  ; $407D: $12
@@ -202,13 +202,13 @@ func_01E_410E::
     push bc                                       ; $410E: $C5
     ld   c, $30                                   ; $410F: $0E $30
 
-jr_01E_4111:
+.loop_4111:
     ld   a, [hl+]                                 ; $4111: $2A
     ld   [c], a                                   ; $4112: $E2
     inc  c                                        ; $4113: $0C
     ld   a, c                                     ; $4114: $79
     cp   $40                                      ; $4115: $FE $40
-    jr   nz, jr_01E_4111                          ; $4117: $20 $F8
+    jr   nz, .loop_4111                           ; $4117: $20 $F8
 
     pop  bc                                       ; $4119: $C1
     ret                                           ; $411A: $C9
@@ -391,13 +391,13 @@ label_01E_432F:
     push bc                                       ; $4345: $C5
     ld   c, $30                                   ; $4346: $0E $30
 
-jr_01E_4348:
+.loop_4348:
     ld   a, [hl+]                                 ; $4348: $2A
     ld   [c], a                                   ; $4349: $E2
     inc  c                                        ; $434A: $0C
     ld   a, c                                     ; $434B: $79
     cp   $40                                      ; $434C: $FE $40
-    jr   nz, jr_01E_4348                          ; $434E: $20 $F8
+    jr   nz, .loop_4348                           ; $434E: $20 $F8
 
     ld   a, $80                                   ; $4350: $3E $80
     ldh  [rNR30], a                               ; $4352: $E0 $1A
@@ -409,7 +409,7 @@ label_01E_4359:
     ld   a, [wActiveMusicIndex]                   ; $4359: $FA $69 $D3
     ld   hl, Data_01E_41AF                        ; $435C: $21 $AF $41
 
-jr_01E_435F:
+.loop_435F:
     dec  a                                        ; $435F: $3D
     jr   z, jr_01E_436A                           ; $4360: $28 $08
 
@@ -419,7 +419,7 @@ jr_01E_435F:
     inc  hl                                       ; $4365: $23
     inc  hl                                       ; $4366: $23
     inc  hl                                       ; $4367: $23
-    jr   jr_01E_435F                              ; $4368: $18 $F5
+    jr   .loop_435F                               ; $4368: $18 $F5
 
 jr_01E_436A:
     ld   bc, wD355                                ; $436A: $01 $55 $D3
@@ -564,13 +564,13 @@ jr_01E_43E2:
     ld   bc, $410                                 ; $442C: $01 $10 $04
     ld   hl, wD312                                ; $442F: $21 $12 $D3
 
-jr_01E_4432:
+.loop_4432:
     ld   [hl], $01                                ; $4432: $36 $01
     ld   a, c                                     ; $4434: $79
     add  l                                        ; $4435: $85
     ld   l, a                                     ; $4436: $6F
     dec  b                                        ; $4437: $05
-    jr   nz, jr_01E_4432                          ; $4438: $20 $F8
+    jr   nz, .loop_4432                           ; $4438: $20 $F8
 
     xor  a                                        ; $443A: $AF
     ld   [wD31E], a                               ; $443B: $EA $1E $D3

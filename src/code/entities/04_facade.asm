@@ -275,13 +275,13 @@ jr_004_5202:
     add  hl, de                                   ; $5234: $19
     ld   [hl], $01                                ; $5235: $36 $01
 
-jr_004_5237:
+.loop_5237:
     call GetRandomByte                            ; $5237: $CD $0D $28
     and  $0F                                      ; $523A: $E6 $0F
     ld   hl, wEntitiesPrivateState2Table          ; $523C: $21 $C0 $C2
     add  hl, bc                                   ; $523F: $09
     cp   [hl]                                     ; $5240: $BE
-    jr   z, jr_004_5237                           ; $5241: $28 $F4
+    jr   z, .loop_5237                            ; $5241: $28 $F4
 
     ld   [hl], a                                  ; $5243: $77
     push bc                                       ; $5244: $C5

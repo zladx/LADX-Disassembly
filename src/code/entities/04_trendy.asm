@@ -193,13 +193,13 @@ jr_004_6F6C:
     ld   hl, wObjPal6                             ; $6FB2: $21 $78 $DC
     ld   de, Data_004_6F30                        ; $6FB5: $11 $30 $6F
 
-jr_004_6FB8:
+.loop_6FB8:
     ld   a, [de]                                  ; $6FB8: $1A
     ld   [hl+], a                                 ; $6FB9: $22
     inc  de                                       ; $6FBA: $13
     ld   a, l                                     ; $6FBB: $7D
     and  $07                                      ; $6FBC: $E6 $07
-    jr   nz, jr_004_6FB8                          ; $6FBE: $20 $F8
+    jr   nz, .loop_6FB8                           ; $6FBE: $20 $F8
 
     ld   a, $02                                   ; $6FC0: $3E $02
     ld   [wPaletteDataFlags], a                   ; $6FC2: $EA $D1 $DD

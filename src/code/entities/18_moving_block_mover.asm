@@ -160,7 +160,7 @@ jr_018_5492:
 
     ldh  [hActiveEntityVisualPosY], a             ; $54A2: $E0 $EC
 
-jr_018_54A4:
+.loop_54A4:
     ld   de, MovingBlockMover2SpriteVariants      ; $54A4: $11 $82 $54
     call RenderActiveEntitySpritesPair            ; $54A7: $CD $C0 $3B
     ldh  a, [hActiveEntityVisualPosY]             ; $54AA: $F0 $EC
@@ -168,7 +168,7 @@ jr_018_54A4:
     ldh  [hActiveEntityVisualPosY], a             ; $54AE: $E0 $EC
     ld   hl, hActiveEntityPosY                    ; $54B0: $21 $EF $FF
     cp   [hl]                                     ; $54B3: $BE
-    jr   c, jr_018_54A4                           ; $54B4: $38 $EE
+    jr   c, .loop_54A4                            ; $54B4: $38 $EE
 
     jp   CopyEntityPositionToActivePosition       ; $54B6: $C3 $8A $3D
 

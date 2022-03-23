@@ -4,11 +4,11 @@ EntityInitMoldorm::
     ld   e, $80                                   ; $5694: $1E $80
     ld   hl, wD100                                ; $5696: $21 $00 $D1
 
-jr_004_5699:
+.loop_5699:
     xor  a                                        ; $5699: $AF
     ld   [hl+], a                                 ; $569A: $22
     dec  e                                        ; $569B: $1D
-    jr   nz, jr_004_5699                          ; $569C: $20 $FB
+    jr   nz, .loop_5699                           ; $569C: $20 $FB
 
     ret                                           ; $569E: $C9
 
@@ -468,25 +468,25 @@ func_004_5A1A::
     push de                                       ; $5A2E: $D5
     ld   e, $20                                   ; $5A2F: $1E $20
 
-jr_004_5A31:
+.loop_5A31:
     xor  a                                        ; $5A31: $AF
     ld   [hl+], a                                 ; $5A32: $22
     dec  e                                        ; $5A33: $1D
     ld   a, e                                     ; $5A34: $7B
     cp   $00                                      ; $5A35: $FE $00
-    jr   nz, jr_004_5A31                          ; $5A37: $20 $F8
+    jr   nz, .loop_5A31                           ; $5A37: $20 $F8
 
     pop  de                                       ; $5A39: $D1
     ld   hl, wD100                                ; $5A3A: $21 $00 $D1
     add  hl, de                                   ; $5A3D: $19
     ld   e, $20                                   ; $5A3E: $1E $20
 
-jr_004_5A40:
+.loop_5A40:
     xor  a                                        ; $5A40: $AF
     ld   [hl+], a                                 ; $5A41: $22
     dec  e                                        ; $5A42: $1D
     ld   a, e                                     ; $5A43: $7B
     cp   $00                                      ; $5A44: $FE $00
-    jr   nz, jr_004_5A40                          ; $5A46: $20 $F8
+    jr   nz, .loop_5A40                           ; $5A46: $20 $F8
 
     ret                                           ; $5A48: $C9

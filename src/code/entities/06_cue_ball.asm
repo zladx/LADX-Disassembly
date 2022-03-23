@@ -221,7 +221,7 @@ func_006_4C91::
     ldh  [hNoiseSfx], a                           ; $4CCA: $E0 $F4
     ld   a, $01                                   ; $4CCC: $3E $01
 
-jr_006_4CCE:
+.loop_4CCE:
     ldh  [hMultiPurposeG], a                      ; $4CCE: $E0 $E8
     ld   a, ENTITY_CUE_BALL                       ; $4CD0: $3E $8E
     call SpawnNewEntity_trampoline                ; $4CD2: $CD $86 $3B
@@ -283,7 +283,7 @@ jr_006_4CCE:
     ldh  a, [hMultiPurposeG]                      ; $4D33: $F0 $E8
     dec  a                                        ; $4D35: $3D
     cp   $FF                                      ; $4D36: $FE $FF
-    jr   nz, jr_006_4CCE                          ; $4D38: $20 $94
+    jr   nz, .loop_4CCE                           ; $4D38: $20 $94
 
 jr_006_4D3A:
     ret                                           ; $4D3A: $C9

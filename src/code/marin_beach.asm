@@ -5,21 +5,21 @@
 MarineBeachEntryPoint::
     ld   a, [wDialogState]                        ; $6203: $FA $9F $C1
     and  a                                        ; $6206: $A7
-    jr   nz, jr_001_6213                          ; $6207: $20 $0A
+    jr   nz, .jr_6213                             ; $6207: $20 $0A
     ld   a, [wC3C7]                               ; $6209: $FA $C7 $C3
     and  a                                        ; $620C: $A7
-    jr   z, jr_001_6213                           ; $620D: $28 $04
+    jr   z, .jr_6213                              ; $620D: $28 $04
     dec  a                                        ; $620F: $3D
     ld   [wC3C7], a                               ; $6210: $EA $C7 $C3
 
-jr_001_6213::
+.jr_6213::
     ld   a, [wC3C4]                               ; $6213: $FA $C4 $C3
     and  a                                        ; $6216: $A7
-    jr   z, jr_001_621D                           ; $6217: $28 $04
+    jr   z, .jr_621D                              ; $6217: $28 $04
     dec  a                                        ; $6219: $3D
     ld   [wC3C4], a                               ; $621A: $EA $C4 $C3
 
-jr_001_621D::
+.jr_621D::
     ld   a, [wGameplaySubtype]                    ; $621D: $FA $96 $DB
     JP_TABLE                                      ; $6220: $C7
 ._00 dw MarineBeachPrepare0                       ; $6221
@@ -213,7 +213,7 @@ Data_001_63BA::
 MarineBeachScroll1::
     ldh  a, [hIsGBC]                              ; $63CA: $F0 $FE
     and  a                                        ; $63CC: $A7
-    jr   z, jr_001_63E4                           ; $63CD: $28 $15
+    jr   z, .jr_63E4                              ; $63CD: $28 $15
     ldh  a, [hFrameCounter]                       ; $63CF: $F0 $E7
     and  $07                                      ; $63D1: $E6 $07
     jr   nz, MarineBeachScroll2                   ; $63D3: $20 $42
@@ -224,18 +224,18 @@ MarineBeachScroll1::
     call IncrementGameplaySubtype                 ; $63DF: $CD $D6 $44
     jr   MarineBeachScroll2                       ; $63E2: $18 $33
 
-jr_001_63E4::
+.jr_63E4::
     ldh  a, [hFrameCounter]                       ; $63E4: $F0 $E7
     and  $07                                      ; $63E6: $E6 $07
-    jr   nz, jr_001_63F8                          ; $63E8: $20 $0E
+    jr   nz, .jr_63F8                             ; $63E8: $20 $0E
     ld   a, [wC3C5]                               ; $63EA: $FA $C5 $C3
     inc  a                                        ; $63ED: $3C
     ld   [wC3C5], a                               ; $63EE: $EA $C5 $C3
     cp   $0C                                      ; $63F1: $FE $0C
-    jr   nz, jr_001_63F8                          ; $63F3: $20 $03
+    jr   nz, .jr_63F8                             ; $63F3: $20 $03
     call IncrementGameplaySubtype                 ; $63F5: $CD $D6 $44
 
-jr_001_63F8::
+.jr_63F8::
     ldh  a, [hFrameCounter]                       ; $63F8: $F0 $E7
     and  $03                                      ; $63FA: $E6 $03
     ld   e, a                                     ; $63FC: $5F
@@ -256,17 +256,17 @@ jr_001_63F8::
 MarineBeachScroll2::
     ldh  a, [hFrameCounter]                       ; $6417: $F0 $E7
     and  $03                                      ; $6419: $E6 $03
-    jr   nz, jr_001_642E                          ; $641B: $20 $11
+    jr   nz, .jr_642E                             ; $641B: $20 $11
     ldh  a, [hBaseScrollY]                        ; $641D: $F0 $97
     inc  a                                        ; $641F: $3C
     ldh  [hBaseScrollY], a                        ; $6420: $E0 $97
     cp   $00                                      ; $6422: $FE $00
-    jr   nz, jr_001_642E                          ; $6424: $20 $08
+    jr   nz, .jr_642E                             ; $6424: $20 $08
     ld   a, $80                                   ; $6426: $3E $80
     ld   [wC3C7], a                               ; $6428: $EA $C7 $C3
     call IncrementGameplaySubtype                 ; $642B: $CD $D6 $44
 
-jr_001_642E::
+.jr_642E::
     call func_001_651E                            ; $642E: $CD $1E $65
     ret                                           ; $6431: $C9
 
@@ -349,13 +349,13 @@ MarineBeachAreYouListening::
     jr   nz, jr_001_64CA                          ; $64A9: $20 $1F
     ld   a, [wDialogAskSelectionIndex]            ; $64AB: $FA $77 $C1
     and  a                                        ; $64AE: $A7
-    jr   nz, jr_001_64BA                          ; $64AF: $20 $09
+    jr   nz, .jr_64BA                             ; $64AF: $20 $09
     ld   a, $DB                                   ; $64B1: $3E $DB
     call OpenMarinBeachDialog                     ; $64B3: $CD $DE $67
     call IncrementGameplaySubtype                 ; $64B6: $CD $D6 $44
     ret                                           ; $64B9: $C9
 
-jr_001_64BA::
+.jr_64BA::
     ld   a, $DE                                   ; $64BA: $3E $DE
     call OpenMarinBeachDialog                     ; $64BC: $CD $DE $67
     ld   a, $06                                   ; $64BF: $3E $06
@@ -430,16 +430,16 @@ func_001_651E::
     ld   a, [wNoiseSfxSeaWavesCounter]            ; $6521: $FA $14 $C1
     inc  a                                        ; $6524: $3C
     cp   $A0                                      ; $6525: $FE $A0
-    jr   nz, jr_001_652E                          ; $6527: $20 $05
+    jr   nz, .jr_652E                             ; $6527: $20 $05
     ld   a, NOISE_SFX_SEA_WAVES                   ; $6529: $3E $0F
     ldh  [hNoiseSfx], a                           ; $652B: $E0 $F4
     xor  a                                        ; $652D: $AF
 
-jr_001_652E::
+.jr_652E::
     ld   [wNoiseSfxSeaWavesCounter], a            ; $652E: $EA $14 $C1
     ld   a, [wD466]                               ; $6531: $FA $66 $D4
     and  a                                        ; $6534: $A7
-    jr   nz, jr_001_6545                          ; $6535: $20 $0E
+    jr   nz, .jr_6545                             ; $6535: $20 $0E
     ld   a, JINGLE_SEAGULL                        ; $6537: $3E $21
     ldh  [hJingle], a                             ; $6539: $E0 $F2
     call GetRandomByte                            ; $653B: $CD $0D $28
@@ -447,7 +447,7 @@ jr_001_652E::
     add  a, $60                                   ; $6540: $C6 $60
     ld   [wD466], a                               ; $6542: $EA $66 $D4
 
-jr_001_6545::
+.jr_6545::
     dec  a                                        ; $6545: $3D
     ld   [wD466], a                               ; $6546: $EA $66 $D4
     ldh  a, [hBaseScrollY]                        ; $6549: $F0 $97
@@ -457,12 +457,12 @@ jr_001_6545::
     ld   de, Data_001_650A                        ; $654F: $11 $0A $65
     ld   a, [wC3C4]                               ; $6552: $FA $C4 $C3
     and  a                                        ; $6555: $A7
-    jr   z, jr_001_655F                           ; $6556: $28 $07
+    jr   z, .jr_655F                              ; $6556: $28 $07
     cp   $60                                      ; $6558: $FE $60
-    jr   nc, jr_001_655F                          ; $655A: $30 $03
+    jr   nc, .jr_655F                             ; $655A: $30 $03
     ld   de, Data_001_650E                        ; $655C: $11 $0E $65
 
-jr_001_655F::
+.jr_655F::
     ld   a, $7C                                   ; $655F: $3E $7C
     ldh  [hActiveEntityVisualPosY], a             ; $6561: $E0 $EC
     ld   a, $58                                   ; $6563: $3E $58
@@ -474,13 +474,13 @@ jr_001_655F::
     ld   de, Data_001_6512                        ; $6571: $11 $12 $65
     ld   a, [wTunicType]                          ; $6574: $FA $0F $DC
     and  a                                        ; $6577: $A7
-    jr   z, jr_001_6584                           ; $6578: $28 $0A
+    jr   z, .jr_6584                              ; $6578: $28 $0A
     ld   de, Data_001_6516                        ; $657A: $11 $16 $65
     cp   $01                                      ; $657D: $FE $01
-    jr   z, jr_001_6584                           ; $657F: $28 $03
+    jr   z, .jr_6584                              ; $657F: $28 $03
     ld   de, Data_001_651A                        ; $6581: $11 $1A $65
 
-jr_001_6584::
+.jr_6584::
     ld   hl, wDynamicOAMBuffer+8                  ; $6584: $21 $38 $C0
     call func_001_658B                            ; $6587: $CD $8B $65
     ret                                           ; $658A: $C9
@@ -538,10 +538,10 @@ jr_001_65B2::
     add  hl, bc                                   ; $65CC: $09
     ld   a, [hl]                                  ; $65CD: $7E
     and  a                                        ; $65CE: $A7
-    jr   z, jr_001_65D2                           ; $65CF: $28 $01
+    jr   z, .jr_65D2                              ; $65CF: $28 $01
     dec  [hl]                                     ; $65D1: $35
 
-jr_001_65D2::
+.jr_65D2::
     pop  af                                       ; $65D2: $F1
     call func_001_65DD                            ; $65D3: $CD $DD $65
 
@@ -610,13 +610,13 @@ func_001_6673::
     inc  a                                        ; $667F: $3C
     ld   [hl], a                                  ; $6680: $77
     cp   $06                                      ; $6681: $FE $06
-    jr   c, jr_001_668B                           ; $6683: $38 $06
+    jr   c, .jr_668B                              ; $6683: $38 $06
     ld   [hl], b                                  ; $6685: $70
     ld   hl, wD200                                ; $6686: $21 $00 $D2
     add  hl, bc                                   ; $6689: $09
     inc  [hl]                                     ; $668A: $34
 
-jr_001_668B::
+.jr_668B::
     ld   hl, wD200                                ; $668B: $21 $00 $D2
     add  hl, bc                                   ; $668E: $09
     ld   e, [hl]                                  ; $668F: $5E
@@ -646,15 +646,15 @@ jr_001_668B::
     call func_001_67A8                            ; $66B1: $CD $A8 $67
     ldh  a, [hFrameCounter]                       ; $66B4: $F0 $E7
     and  $07                                      ; $66B6: $E6 $07
-    jr   nz, jr_001_66C4                          ; $66B8: $20 $0A
+    jr   nz, .jr_66C4                             ; $66B8: $20 $0A
     ld   hl, wC560                                ; $66BA: $21 $60 $C5
     add  hl, bc                                   ; $66BD: $09
     ld   a, [hl]                                  ; $66BE: $7E
     cp   $FB                                      ; $66BF: $FE $FB
-    jr   z, jr_001_66C4                           ; $66C1: $28 $01
+    jr   z, .jr_66C4                              ; $66C1: $28 $01
     dec  [hl]                                     ; $66C3: $35
 
-jr_001_66C4::
+.jr_66C4::
     ldh  a, [hMultiPurposeG]                      ; $66C4: $F0 $E8
     cp   $F0                                      ; $66C6: $FE $F0
     jr   c, ret_001_66D7                          ; $66C8: $38 $0D
@@ -708,13 +708,13 @@ func_001_66FD::
     add  hl, bc                                   ; $670B: $09
     ldh  a, [hFrameCounter]                       ; $670C: $F0 $E7
     and  $07                                      ; $670E: $E6 $07
-    jr   nz, jr_001_6717                          ; $6710: $20 $05
+    jr   nz, .jr_6717                             ; $6710: $20 $05
     ld   a, [hl]                                  ; $6712: $7E
     inc  a                                        ; $6713: $3C
     and  $03                                      ; $6714: $E6 $03
     ld   [hl], a                                  ; $6716: $77
 
-jr_001_6717::
+.jr_6717::
     ld   e, [hl]                                  ; $6717: $5E
 
 jr_001_6718::
@@ -738,7 +738,7 @@ jr_001_6718::
     pop  de                                       ; $672F: $D1
     call func_001_658B                            ; $6730: $CD $8B $65
 
-jr_001_6733::
+.jr_6733::
     call func_001_67A8                            ; $6733: $CD $A8 $67
     ld   a, c                                     ; $6736: $79
     sla  a                                        ; $6737: $CB $27
@@ -750,9 +750,9 @@ jr_001_6733::
     add  a, e                                     ; $6742: $83
     ldh  [hMultiPurposeH], a                      ; $6743: $E0 $E9
 
-jr_001_6745::
+.jr_6745::
     and  $3F                                      ; $6745: $E6 $3F
-    jr   nz, jr_001_675A                          ; $6747: $20 $11
+    jr   nz, .jr_675A                             ; $6747: $20 $11
     call GetRandomByte                            ; $6749: $CD $0D $28
     and  $07                                      ; $674C: $E6 $07
     ld   e, a                                     ; $674E: $5F
@@ -764,11 +764,11 @@ jr_001_6745::
     add  hl, bc                                   ; $6758: $09
     ld   [hl], a                                  ; $6759: $77
 
-jr_001_675A::
+.jr_675A::
     ldh  a, [hMultiPurposeH]                      ; $675A: $F0 $E9
     add  a, $40                                   ; $675C: $C6 $40
     and  $3F                                      ; $675E: $E6 $3F
-    jr   nz, jr_001_6773                          ; $6760: $20 $11
+    jr   nz, .jr_6773                             ; $6760: $20 $11
     call GetRandomByte                            ; $6762: $CD $0D $28
     and  $07                                      ; $6765: $E6 $07
     ld   e, a                                     ; $6767: $5F
@@ -780,7 +780,7 @@ jr_001_675A::
     add  hl, bc                                   ; $6771: $09
     ld   [hl], a                                  ; $6772: $77
 
-jr_001_6773::
+.jr_6773::
     ld   hl, wC590                                ; $6773: $21 $90 $C5
     add  hl, bc                                   ; $6776: $09
     ld   a, [hl]                                  ; $6777: $7E
@@ -798,10 +798,10 @@ jr_001_6773::
     sub  a, d                                     ; $6789: $92
     ld   e, $01                                   ; $678A: $1E $01
     and  $80                                      ; $678C: $E6 $80
-    jr   nz, jr_001_6792                          ; $678E: $20 $02
+    jr   nz, .jr_6792                             ; $678E: $20 $02
     ld   e, $FF                                   ; $6790: $1E $FF
 
-jr_001_6792::
+.jr_6792::
     ld   a, [hl]                                  ; $6792: $7E
     add  a, e                                     ; $6793: $83
     ld   [hl], a                                  ; $6794: $77
@@ -811,10 +811,10 @@ jr_001_6792::
     sub  a, $48                                   ; $679A: $D6 $48
     ld   e, $01                                   ; $679C: $1E $01
     and  $80                                      ; $679E: $E6 $80
-    jr   nz, jr_001_67A4                          ; $67A0: $20 $02
+    jr   nz, .jr_67A4                             ; $67A0: $20 $02
     ld   e, $FF                                   ; $67A2: $1E $FF
 
-jr_001_67A4::
+.jr_67A4::
     ld   a, [hl]                                  ; $67A4: $7E
     add  a, e                                     ; $67A5: $83
     ld   [hl], a                                  ; $67A6: $77
@@ -849,10 +849,10 @@ func_001_67B5::
     pop  af                                       ; $67CB: $F1
     ld   e, $00                                   ; $67CC: $1E $00
     bit  7, a                                     ; $67CE: $CB $7F
-    jr   z, jr_001_67D4                           ; $67D0: $28 $02
+    jr   z, .jr_67D4                              ; $67D0: $28 $02
     ld   e, $F0                                   ; $67D2: $1E $F0
 
-jr_001_67D4::
+.jr_67D4::
     swap a                                        ; $67D4: $CB $37
     and  $0F                                      ; $67D6: $E6 $0F
     or   e                                        ; $67D8: $B3

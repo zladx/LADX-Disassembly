@@ -33,12 +33,12 @@ MrWriteEntityHandler::
     ld   d, b                                     ; $4BA6: $50
     ldh  a, [hMapRoom]                            ; $4BA7: $F0 $F6
     cp   UNKNOWN_ROOM_A8                          ; $4BA9: $FE $A8
-    jr   nz, jr_018_4BB2                          ; $4BAB: $20 $05
+    jr   nz, .jr_4BB2                             ; $4BAB: $20 $05
 
     ld   hl, Data_018_4B55                        ; $4BAD: $21 $55 $4B
     jr   jr_018_4BB5                              ; $4BB0: $18 $03
 
-jr_018_4BB2:
+.jr_4BB2:
     ld   hl, Data_018_4B15                        ; $4BB2: $21 $15 $4B
 
 jr_018_4BB5:
@@ -58,18 +58,18 @@ jr_018_4BB5:
     call func_018_7EC2                            ; $4BCC: $CD $C2 $7E
     add  $0C                                      ; $4BCF: $C6 $0C
     cp   $18                                      ; $4BD1: $FE $18
-    jr   nc, jr_018_4BE4                          ; $4BD3: $30 $0F
+    jr   nc, .jr_4BE4                             ; $4BD3: $30 $0F
 
     call func_018_7EB2                            ; $4BD5: $CD $B2 $7E
     add  $10                                      ; $4BD8: $C6 $10
     cp   $20                                      ; $4BDA: $FE $20
-    jr   nc, jr_018_4BE4                          ; $4BDC: $30 $06
+    jr   nc, .jr_4BE4                             ; $4BDC: $30 $06
 
     ld   a, e                                     ; $4BDE: $7B
     add  $02                                      ; $4BDF: $C6 $02
     call SetEntitySpriteVariant                   ; $4BE1: $CD $0C $3B
 
-jr_018_4BE4:
+.jr_4BE4:
     call func_018_7D36                            ; $4BE4: $CD $36 $7D
     ldh  a, [hMapRoom]                            ; $4BE7: $F0 $F6
     cp   UNKNOWN_ROOM_A8                          ; $A8 = Mr. Write's house
@@ -78,11 +78,11 @@ jr_018_4BE4:
     ld   de, MrWrite2SpriteVariants               ; $4BEE: $11 $95 $4B
     ld   a, [wTradeSequenceItem]                  ; $4BF1: $FA $0E $DB
     cp   TRADING_ITEM_LETTER                      ; $4BF4: $FE $09
-    jr   nc, jr_018_4BFB                          ; $4BF6: $30 $03
+    jr   nc, .jr_4BFB                             ; $4BF6: $30 $03
 
     ld   de, MrWrite1SpriteVariants               ; $4BF8: $11 $99 $4B
 
-jr_018_4BFB:
+.jr_4BFB:
     xor  a                                        ; $4BFB: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4BFC: $E0 $F1
     ldh  a, [hActiveEntityPosX]                   ; $4BFE: $F0 $EE
@@ -114,33 +114,33 @@ MrWriteState0Handler::
 
     ld   a, [wTradeSequenceItem]                  ; $4C2C: $FA $0E $DB
     cp   TRADING_ITEM_HIBISCUS                    ; $4C2F: $FE $08
-    jr   nz, jr_018_4C3B                          ; $4C31: $20 $08
+    jr   nz, .jr_4C3B                             ; $4C31: $20 $08
 
     call_open_dialog $167                         ; $4C33
     jp   IncrementEntityState                     ; $4C38: $C3 $12 $3B
 
-jr_018_4C3B:
+.jr_4C3B:
     ld   a, $66                                   ; $4C3B: $3E $66
-    jr   c, jr_018_4C41                           ; $4C3D: $38 $02
+    jr   c, .jr_4C41                              ; $4C3D: $38 $02
 
     ld   a, $6B                                   ; $4C3F: $3E $6B
 
-jr_018_4C41:
+.jr_4C41:
     jp   OpenDialogInTable1                       ; $4C41: $C3 $73 $23
 
 MrWriteState1Handler::
     ld   a, [wDialogState]                        ; $4C44: $FA $9F $C1
     and  a                                        ; $4C47: $A7
-    jr   nz, jr_018_4C58                          ; $4C48: $20 $0E
+    jr   nz, .jr_4C58                             ; $4C48: $20 $0E
 
     call IncrementEntityState                     ; $4C4A: $CD $12 $3B
     ld   a, [wDialogAskSelectionIndex]            ; $4C4D: $FA $77 $C1
     and  a                                        ; $4C50: $A7
-    jr   nz, jr_018_4C58                          ; $4C51: $20 $05
+    jr   nz, .jr_4C58                             ; $4C51: $20 $05
 
     jp_open_dialog $168                           ; $4C53
 
-jr_018_4C58:
+.jr_4C58:
     ld   [hl], b                                  ; $4C58: $70
     jp_open_dialog $169                           ; $4C59
 
@@ -177,18 +177,18 @@ func_018_4C87::
 
     ld   a, [wTradeSequenceItem]                  ; $4C8B: $FA $0E $DB
     cp   TRADING_ITEM_LETTER                      ; $4C8E: $FE $09
-    jr   nz, jr_018_4C9A                          ; $4C90: $20 $08
+    jr   nz, .jr_4C9A                             ; $4C90: $20 $08
 
     call_open_dialog $134                         ; $4C92
     jp   IncrementEntityState                     ; $4C97: $C3 $12 $3B
 
-jr_018_4C9A:
+.jr_4C9A:
     ld   a, $33                                   ; $4C9A: $3E $33
-    jr   c, jr_018_4CA0                           ; $4C9C: $38 $02
+    jr   c, .jr_4CA0                              ; $4C9C: $38 $02
 
     ld   a, $39                                   ; $4C9E: $3E $39
 
-jr_018_4CA0:
+.jr_4CA0:
     jp   OpenDialogInTable1                       ; $4CA0: $C3 $73 $23
 
 func_018_4CA3::
@@ -230,7 +230,7 @@ func_018_4CD1::
     call IncrementEntityState                     ; $4CD6: $CD $12 $3B
     ld   a, [wDialogAskSelectionIndex]            ; $4CD9: $FA $77 $C1
     and  a                                        ; $4CDC: $A7
-    jr   nz, jr_018_4CEC                          ; $4CDD: $20 $0D
+    jr   nz, .jr_4CEC                             ; $4CDD: $20 $0D
 
     call CreateTradingItemEntity                  ; $4CDF: $CD $0C $0C
     ld   a, TRADING_ITEM_BROOM                    ; $4CE2: $3E $0A
@@ -239,7 +239,7 @@ func_018_4CD1::
     ldh  [hReplaceTiles], a                       ; $4CE9: $E0 $A5
     ret                                           ; $4CEB: $C9
 
-jr_018_4CEC:
+.jr_4CEC:
     dec  [hl]                                     ; $4CEC: $35
     jp_open_dialog $137                           ; $4CED
 

@@ -86,12 +86,12 @@ BomberState0Handler::
     inc  [hl]                                     ; $7898: $34
     ld   a, [hl]                                  ; $7899: $7E
     and  $07                                      ; $789A: $E6 $07
-    jr   nz, jr_018_78A3                          ; $789C: $20 $05
+    jr   nz, .jr_78A3                             ; $789C: $20 $05
 
     ld   a, $0A                                   ; $789E: $3E $0A
     call ApplyVectorTowardsLink_trampoline        ; $78A0: $CD $AA $3B
 
-jr_018_78A3:
+.jr_78A3:
     call IncrementEntityState                     ; $78A3: $CD $12 $3B
 
 label_018_78A6:
@@ -100,11 +100,11 @@ label_018_78A6:
     ld   a, [hl]                                  ; $78AA: $7E
     inc  [hl]                                     ; $78AB: $34
     and  $7F                                      ; $78AC: $E6 $7F
-    jr   nz, jr_018_78F1                          ; $78AE: $20 $41
+    jr   nz, .jr_78F1                             ; $78AE: $20 $41
 
     ld   a, ENTITY_BOMB                           ; $78B0: $3E $02
     call SpawnNewEntity_trampoline                ; $78B2: $CD $86 $3B
-    jr   c, jr_018_78F1                           ; $78B5: $38 $3A
+    jr   c, .jr_78F1                              ; $78B5: $38 $3A
 
     ld   hl, wEntitiesOptions1Table               ; $78B7: $21 $30 $C4
     add  hl, de                                   ; $78BA: $19
@@ -139,26 +139,26 @@ label_018_78A6:
     ld   a, JINGLE_JUMP_DOWN                      ; $78ED: $3E $08
     ldh  [hJingle], a                             ; $78EF: $E0 $F2
 
-jr_018_78F1:
+.jr_78F1:
     call func_018_7EE1                            ; $78F1: $CD $E1 $7E
     ldh  a, [hLinkDirection]                      ; $78F4: $F0 $9E
     xor  $01                                      ; $78F6: $EE $01
     cp   e                                        ; $78F8: $BB
-    jr   nz, jr_018_7935                          ; $78F9: $20 $3A
+    jr   nz, .jr_7935                             ; $78F9: $20 $3A
 
     call func_018_7EB2                            ; $78FB: $CD $B2 $7E
     add  $20                                      ; $78FE: $C6 $20
     cp   $40                                      ; $7900: $FE $40
-    jr   nc, jr_018_7935                          ; $7902: $30 $31
+    jr   nc, .jr_7935                             ; $7902: $30 $31
 
     call func_018_7ED2                            ; $7904: $CD $D2 $7E
     add  $20                                      ; $7907: $C6 $20
     cp   $40                                      ; $7909: $FE $40
-    jr   nc, jr_018_7935                          ; $790B: $30 $28
-    ; if wSwordAnimationState == SWORD_ANIMATION_STATE_NONE jump to jr_018_7935
+    jr   nc, .jr_7935                             ; $790B: $30 $28
+    ; if wSwordAnimationState == SWORD_ANIMATION_STATE_NONE jump to .jr_7935
     ld   a, [wSwordAnimationState]                ; $790D: $FA $37 $C1
     and  a                                        ; $7910: $A7
-    jr   z, jr_018_7935                           ; $7911: $28 $22
+    jr   z, .jr_7935                              ; $7911: $28 $22
 
     call IncrementEntityState                     ; $7913: $CD $12 $3B
     ld   [hl], $02                                ; $7916: $36 $02
@@ -180,7 +180,7 @@ jr_018_78F1:
     ld   [hl], a                                  ; $7933: $77
     ret                                           ; $7934: $C9
 
-jr_018_7935:
+.jr_7935:
     call label_3B39                               ; $7935: $CD $39 $3B
 
 label_018_7938:
@@ -192,22 +192,22 @@ label_018_7938:
 
 BomberState1Handler::
     call GetEntityTransitionCountdown             ; $7941: $CD $05 $0C
-    jr   nz, jr_018_794F                          ; $7944: $20 $09
+    jr   nz, .jr_794F                             ; $7944: $20 $09
 
     ld   [hl], $20                                ; $7946: $36 $20
     call IncrementEntityState                     ; $7948: $CD $12 $3B
     ld   [hl], b                                  ; $794B: $70
     call ClearEntitySpeed                         ; $794C: $CD $7F $3D
 
-jr_018_794F:
+.jr_794F:
     jp   label_018_78A6                           ; $794F: $C3 $A6 $78
 
 BomberState2Handler::
     call GetEntityTransitionCountdown             ; $7952: $CD $05 $0C
-    jr   nz, jr_018_795B                          ; $7955: $20 $04
+    jr   nz, .jr_795B                             ; $7955: $20 $04
 
     call IncrementEntityState                     ; $7957: $CD $12 $3B
     ld   [hl], b                                  ; $795A: $70
 
-jr_018_795B:
+.jr_795B:
     jp   label_018_7938                           ; $795B: $C3 $38 $79

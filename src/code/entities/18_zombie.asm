@@ -27,7 +27,7 @@ ZombieEntityHandler::
     add  hl, bc                                   ; $63AD: $09
     ld   [hl], a                                  ; $63AE: $77
 
-jr_018_63AF:
+.jr_63AF:
     ld   hl, Data_018_637D                        ; $63AF: $21 $7D $63
     add  hl, de                                   ; $63B2: $19
     ld   a, [hl]                                  ; $63B3: $7E
@@ -37,20 +37,20 @@ jr_018_63AF:
     call func_018_6493                            ; $63B9: $CD $93 $64
     ldh  a, [hMultiPurpose3]                      ; $63BC: $F0 $DA
     cp   $00                                      ; $63BE: $FE $00
-    jr   z, jr_018_63C9                           ; $63C0: $28 $07
+    jr   z, .jr_63C9                              ; $63C0: $28 $07
 
     cp   $06                                      ; $63C2: $FE $06
-    jr   z, jr_018_63C9                           ; $63C4: $28 $03
+    jr   z, .jr_63C9                              ; $63C4: $28 $03
 
     cp   $09                                      ; $63C6: $FE $09
     ret  nz                                       ; $63C8: $C0
 
-jr_018_63C9:
+.jr_63C9:
     call GetEntityTransitionCountdown             ; $63C9: $CD $05 $0C
     call GetRandomByte                            ; $63CC: $CD $0D $28
     and  $3F                                      ; $63CF: $E6 $3F
 
-jr_018_63D1:
+.jr_63D1:
     add  $40                                      ; $63D1: $C6 $40
     ld   [hl], a                                  ; $63D3: $77
     ld   a, $BF                                   ; $63D4: $3E $BF
@@ -113,7 +113,7 @@ ZombieState0Handler::
 
 ZombieState1Handler::
     call GetEntityTransitionCountdown             ; $642B: $CD $05 $0C
-    jr   nz, jr_018_6445                          ; $642E: $20 $15
+    jr   nz, .jr_6445                             ; $642E: $20 $15
 
     call GetRandomByte                            ; $6430: $CD $0D $28
     and  $3F                                      ; $6433: $E6 $3F
@@ -125,14 +125,14 @@ ZombieState1Handler::
     call ApplyVectorTowardsLink_trampoline        ; $643F: $CD $AA $3B
     call IncrementEntityState                     ; $6442: $CD $12 $3B
 
-jr_018_6445:
+.jr_6445:
     ld   e, $01                                   ; $6445: $1E $01
     cp   $18                                      ; $6447: $FE $18
-    jr   nc, jr_018_644C                          ; $6449: $30 $01
+    jr   nc, .jr_644C                             ; $6449: $30 $01
 
     inc  e                                        ; $644B: $1C
 
-jr_018_644C:
+.jr_644C:
     ld   a, e                                     ; $644C: $7B
     jp   SetEntitySpriteVariant                   ; $644D: $C3 $0C $3B
 
@@ -144,12 +144,12 @@ ZombieState2Handler::
     add  hl, bc                                   ; $645C: $09
     ld   a, [hl]                                  ; $645D: $7E
     and  $0F                                      ; $645E: $E6 $0F
-    jr   nz, jr_018_6467                          ; $6460: $20 $05
+    jr   nz, .jr_6467                             ; $6460: $20 $05
 
     call GetEntityTransitionCountdown             ; $6462: $CD $05 $0C
     jr   nz, jr_018_6475                          ; $6465: $20 $0E
 
-jr_018_6467:
+.jr_6467:
     call GetEntityTransitionCountdown             ; $6467: $CD $05 $0C
     ld   [hl], $30                                ; $646A: $36 $30
     call IncrementEntityState                     ; $646C: $CD $12 $3B
@@ -173,11 +173,11 @@ ZombieState3Handler::
 
     ld   e, $01                                   ; $6488: $1E $01
     cp   $18                                      ; $648A: $FE $18
-    jr   c, jr_018_648F                           ; $648C: $38 $01
+    jr   c, .jr_648F                              ; $648C: $38 $01
 
     inc  e                                        ; $648E: $1C
 
-jr_018_648F:
+.jr_648F:
     ld   a, e                                     ; $648F: $7B
     jp   SetEntitySpriteVariant                   ; $6490: $C3 $0C $3B
 

@@ -162,12 +162,12 @@ jr_007_559A:
     add  hl, de                                   ; $55A7: $19
     ld   a, [hl]                                  ; $55A8: $7E
     cp   $9D                                      ; $55A9: $FE $9D
-    jr   z, jr_007_55B1                           ; $55AB: $28 $04
+    jr   z, .jr_55B1                              ; $55AB: $28 $04
 
     cp   $44                                      ; $55AD: $FE $44
     jr   nz, jr_007_55B6                          ; $55AF: $20 $05
 
-jr_007_55B1:
+.jr_55B1:
     call OpenDialog                               ; $55B1: $CD $85 $23
     jr   jr_007_55B9                              ; $55B4: $18 $03
 
@@ -179,7 +179,7 @@ jr_007_55B9:
 
 jr_007_55BA:
     dec  a                                        ; $55BA: $3D
-    jr   nz, jr_007_55CD                          ; $55BB: $20 $10
+    jr   nz, .jr_55CD                             ; $55BB: $20 $10
 
     xor  a                                        ; $55BD: $AF
     ld   [wDB7F], a                               ; $55BE: $EA $7F $DB
@@ -189,19 +189,19 @@ jr_007_55BA:
     ld   [hl], a                                  ; $55C9: $77
     jp   func_007_7EA4                            ; $55CA: $C3 $A4 $7E
 
-jr_007_55CD:
+.jr_55CD:
     ldh  a, [hLinkPositionX]                      ; $55CD: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $55CF: $21 $00 $C2
     add  hl, bc                                   ; $55D2: $09
     ld   [hl], a                                  ; $55D3: $77
     ldh  a, [hMapRoom]                            ; $55D4: $F0 $F6
     cp   ROOM_OW_SIREN                            ; $55D6: $FE $C9
-    jr   nz, jr_007_55DF                          ; $55D8: $20 $05
+    jr   nz, .jr_55DF                             ; $55D8: $20 $05
 
     ld   a, $04                                   ; $55DA: $3E $04
     ld   [wC13B], a                               ; $55DC: $EA $3B $C1
 
-jr_007_55DF:
+.jr_55DF:
     ld   hl, wC13B                                ; $55DF: $21 $3B $C1
     ldh  a, [hLinkPositionY]                      ; $55E2: $F0 $99
     add  [hl]                                     ; $55E4: $86

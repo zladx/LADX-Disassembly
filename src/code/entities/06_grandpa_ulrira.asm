@@ -32,12 +32,12 @@ GrandpaUlriraEntityHandler::
 
     ld   a, [wRichardSpokenFlag]                  ; $5C41: $FA $55 $DB
     and  a                                        ; $5C44: $A7
-    jr   nz, jr_006_5C4C                          ; $5C45: $20 $05
+    jr   nz, .jr_5C4C                             ; $5C45: $20 $05
 
     ld   a, $01                                   ; $5C47: $3E $01
     ld   [wRichardSpokenFlag], a                  ; $5C49: $EA $55 $DB
 
-jr_006_5C4C:
+.jr_5C4C:
     jp_open_dialog $140                           ; $5C4C
 
 Data_006_5C51::

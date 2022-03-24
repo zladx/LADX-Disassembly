@@ -17,15 +17,15 @@ LiftableRockEntityHandler::
     add  hl, bc                                   ; $533B: $09
     ld   a, [hl]                                  ; $533C: $7E
     and  a                                        ; $533D: $A7
-    jr   z, jr_003_5369                           ; $533E: $28 $29
+    jr   z, .jr_5369                              ; $533E: $28 $29
 
     call GetRandomByte                            ; $5340: $CD $0D $28
     and  $03                                      ; $5343: $E6 $03
-    jr   nz, jr_003_5369                          ; $5345: $20 $22
+    jr   nz, .jr_5369                             ; $5345: $20 $22
 
     ld   a, ENTITY_DROPPABLE_FAIRY                ; $5347: $3E $2F
     call SpawnNewEntity                           ; $5349: $CD $CA $64
-    jr   c, jr_003_5369                           ; $534C: $38 $1B
+    jr   c, .jr_5369                              ; $534C: $38 $1B
 
     ldh  a, [hMultiPurpose0]                      ; $534E: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $5350: $21 $00 $C2
@@ -43,7 +43,7 @@ LiftableRockEntityHandler::
     add  hl, de                                   ; $5366: $19
     ld   [hl], $80                                ; $5367: $36 $80
 
-jr_003_5369:
+.jr_5369:
     ldh  a, [hActiveEntitySpriteVariant]          ; $5369: $F0 $F1
     and  a                                        ; $536B: $A7
     jr   nz, .marinReactionEnd                    ; $536C: $20 $24

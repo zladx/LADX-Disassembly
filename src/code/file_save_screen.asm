@@ -222,13 +222,13 @@ func_001_412A::
     call func_001_6BA8                            ; $412D: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $4130: $F0 $CC
     and  J_UP | J_DOWN                            ; $4132: $E6 $0C
-    jr   z, jr_001_413B                           ; $4134: $28 $05
+    jr   z, .jr_413B                              ; $4134: $28 $05
     ld   a, [hl]                                  ; $4136: $7E
     inc  a                                        ; $4137: $3C
     and  $01                                      ; $4138: $E6 $01
     ld   [hl], a                                  ; $413A: $77
 
-jr_001_413B::
+.jr_413B::
     ld   e, [hl]                                  ; $413B: $5E
     ld   d, $00                                   ; $413C: $16 $00
     ld   hl, Data_001_4128                        ; $413E: $21 $28 $41

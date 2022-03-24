@@ -119,7 +119,7 @@ MarinEntityHandler::
     pop  bc                                       ; $4EAA: $C1
     ldh  a, [hFrameCounter]                       ; $4EAB: $F0 $E7
     and  $1F                                      ; $4EAD: $E6 $1F
-    jr   nz, jr_005_4ED1                          ; $4EAF: $20 $20
+    jr   nz, .jr_4ED1                             ; $4EAF: $20 $20
 
     ld   hl, wEntitiesDirectionTable              ; $4EB1: $21 $80 $C3
     add  hl, bc                                   ; $4EB4: $09
@@ -127,19 +127,19 @@ MarinEntityHandler::
     call func_005_7B04                            ; $4EB7: $CD $04 $7B
     add  $14                                      ; $4EBA: $C6 $14
     cp   $28                                      ; $4EBC: $FE $28
-    jr   nc, jr_005_4ED1                          ; $4EBE: $30 $11
+    jr   nc, .jr_4ED1                             ; $4EBE: $30 $11
 
     call func_005_7B14                            ; $4EC0: $CD $14 $7B
     add  $14                                      ; $4EC3: $C6 $14
     cp   $28                                      ; $4EC5: $FE $28
-    jr   nc, jr_005_4ED1                          ; $4EC7: $30 $08
+    jr   nc, .jr_4ED1                             ; $4EC7: $30 $08
 
     call func_005_7B24                            ; $4EC9: $CD $24 $7B
     ld   hl, wEntitiesDirectionTable              ; $4ECC: $21 $80 $C3
     add  hl, bc                                   ; $4ECF: $09
     ld   [hl], e                                  ; $4ED0: $73
 
-jr_005_4ED1:
+.jr_4ED1:
     call func_005_54EA                            ; $4ED1: $CD $EA $54
     ld   a, [wC3C8]                               ; $4ED4: $FA $C8 $C3
     cp   $01                                      ; $4ED7: $FE $01
@@ -237,13 +237,13 @@ jr_005_4F39:
 func_005_4F64::
     ldh  a, [hMapRoom]                            ; $4F64: $F0 $F6
     cp   ROOM_SECTION_OW_VILLAGES                 ; $4F66: $FE $C0
-    jr   nc, jr_005_4F6F                          ; $4F68: $30 $05
+    jr   nc, .jr_4F6F                             ; $4F68: $30 $05
 
     ld   a, [wC3C8]                               ; $4F6A: $FA $C8 $C3
     and  a                                        ; $4F6D: $A7
     ret  nz                                       ; $4F6E: $C0
 
-jr_005_4F6F:
+.jr_4F6F:
     call ShouldLinkTalkToEntity_05                ; $4F6F: $CD $06 $55
     ret  nc                                       ; $4F72: $D0
 
@@ -254,12 +254,12 @@ jr_005_4F6F:
     ld   hl, wOverworldRoomStatus + $92           ; $4F7A: $21 $92 $D8
     ld   a, [hl]                                  ; $4F7D: $7E
     and  $40                                      ; $4F7E: $E6 $40
-    jr   nz, jr_005_4F89                          ; $4F80: $20 $07
+    jr   nz, .jr_4F89                             ; $4F80: $20 $07
 
     set  6, [hl]                                  ; $4F82: $CB $F6
     jp_open_dialog $194                           ; $4F84
 
-jr_005_4F89:
+.jr_4F89:
     ld   a, [wOcarinaSongFlags]                   ; $4F89: $FA $49 $DB
     and  BALLAD_OF_THE_WIND_FISH_FLAG             ; $4F8C: $E6 $04
     jr   z, jr_005_4F95                           ; $4F8E: $28 $05
@@ -287,7 +287,7 @@ jr_005_4FA7:
     call GetEntityPrivateCountdown1               ; $4FA7: $CD $00 $0C
     ld   [hl], $10                                ; $4FAA: $36 $10
 
-jr_005_4FAC:
+.jr_4FAC:
     ld   d, $2F                                   ; $4FAC: $16 $2F
     ld   e, $03                                   ; $4FAE: $1E $03
     ld   a, [wDB48]                               ; $4FB0: $FA $48 $DB
@@ -296,12 +296,12 @@ jr_005_4FAC:
 
     ld   e, $06                                   ; $4FB6: $1E $06
     cp   $02                                      ; $4FB8: $FE $02
-    jr   nz, jr_005_4FD0                          ; $4FBA: $20 $14
+    jr   nz, .jr_4FD0                             ; $4FBA: $20 $14
 
     ld   e, $05                                   ; $4FBC: $1E $05
     ldh  a, [hMapRoom]                            ; $4FBE: $F0 $F6
     cp   ROOM_SECTION_OW_VILLAGES                 ; $4FC0: $FE $C0
-    jr   c, jr_005_4FD0                           ; $4FC2: $38 $0C
+    jr   c, .jr_4FD0                              ; $4FC2: $38 $0C
 
     push de                                       ; $4FC4: $D5
     call label_27DD                               ; $4FC5: $CD $DD $27
@@ -311,7 +311,7 @@ jr_005_4FAC:
     ld   [hl], b                                  ; $4FCD: $70
     ld   e, $92                                   ; $4FCE: $1E $92
 
-jr_005_4FD0:
+.jr_4FD0:
     push bc                                       ; $4FD0: $C5
     ld   c, INVENTORY_SLOT_COUNT -1               ; $4FD1: $0E $0B
     ld   hl, wBButtonSlot                         ; $4FD3: $21 $00 $DB
@@ -319,7 +319,7 @@ jr_005_4FD0:
 jr_005_4FD6:
     ld   a, [hl+]                                 ; $4FD6: $2A
     cp   INVENTORY_OCARINA                        ; $4FD7: $FE $09
-    jr   nz, jr_005_4FF4                          ; $4FD9: $20 $19
+    jr   nz, .jr_4FF4                             ; $4FD9: $20 $19
 
     ld   e, $04                                   ; $4FDB: $1E $04
     ld   d, $4A                                   ; $4FDD: $16 $4A
@@ -336,7 +336,7 @@ jr_005_4FD6:
     ld   e, $92                                   ; $4FF0: $1E $92
     jr   jr_005_4FFA                              ; $4FF2: $18 $06
 
-jr_005_4FF4:
+.jr_4FF4:
     dec  c                                        ; $4FF4: $0D
     ld   a, c                                     ; $4FF5: $79
     cp   $FF                                      ; $4FF6: $FE $FF
@@ -348,18 +348,18 @@ jr_005_4FFA:
 jr_005_4FFB:
     ld   a, e                                     ; $4FFB: $7B
     cp   $80                                      ; $4FFC: $FE $80
-    jr   c, jr_005_5005                           ; $4FFE: $38 $05
+    jr   c, .jr_5005                              ; $4FFE: $38 $05
 
     call OpenDialogInTable1                       ; $5000: $CD $73 $23
     jr   jr_005_5008                              ; $5003: $18 $03
 
-jr_005_5005:
+.jr_5005:
     call OpenDialog                               ; $5005: $CD $85 $23
 
 jr_005_5008:
     ldh  a, [hMapRoom]                            ; $5008: $F0 $F6
     cp   ROOM_SECTION_OW_VILLAGES                 ; $500A: $FE $C0
-    jr   c, jr_005_5018                           ; $500C: $38 $0A
+    jr   c, .jr_5018                              ; $500C: $38 $0A
 
     ld   hl, wEntitiesPrivateState3Table          ; $500E: $21 $D0 $C2
     add  hl, bc                                   ; $5011: $09
@@ -368,7 +368,7 @@ jr_005_5008:
     call label_27DD                               ; $5014: $CD $DD $27
     pop  de                                       ; $5017: $D1
 
-jr_005_5018:
+.jr_5018:
     ld   hl, wEntitiesPrivateState4Table          ; $5018: $21 $40 $C4
     add  hl, bc                                   ; $501B: $09
     ld   [hl], d                                  ; $501C: $72
@@ -384,7 +384,7 @@ func_005_5020::
     ld   a, [hl]                                  ; $502C: $7E
     and  a                                        ; $502D: $A7
     ld   a, d                                     ; $502E: $7A
-    jr   nz, jr_005_503E                          ; $502F: $20 $0D
+    jr   nz, .jr_503E                             ; $502F: $20 $0D
 
     inc  [hl]                                     ; $5031: $34
     ld   [wMusicTrackToPlay], a                   ; $5032: $EA $68 $D3
@@ -393,13 +393,13 @@ func_005_5020::
     ld   hl, wC3C8                                ; $5039: $21 $C8 $C3
     ld   [hl], $01                                ; $503C: $36 $01
 
-jr_005_503E:
+.jr_503E:
     cp   $4A                                      ; $503E: $FE $4A
-    jr   nz, jr_005_5054                          ; $5040: $20 $12
+    jr   nz, .jr_5054                             ; $5040: $20 $12
 
     ld   a, [wOcarinaSongFlags]                   ; $5042: $FA $49 $DB
     and  BALLAD_OF_THE_WIND_FISH_FLAG             ; $5045: $E6 $04
-    jr   nz, jr_005_5054                          ; $5047: $20 $0B
+    jr   nz, .jr_5054                             ; $5047: $20 $0B
 
     call IncrementEntityState                     ; $5049: $CD $12 $3B
     xor  a                                        ; $504C: $AF
@@ -407,7 +407,7 @@ jr_005_503E:
     ld   [wD211], a                               ; $5050: $EA $11 $D2
     ret                                           ; $5053: $C9
 
-jr_005_5054:
+.jr_5054:
     call IncrementEntityState                     ; $5054: $CD $12 $3B
     ld   [hl], b                                  ; $5057: $70
 
@@ -423,11 +423,11 @@ func_005_5059::
     pop  bc                                       ; $5064: $C1
     ld   a, [wD211]                               ; $5065: $FA $11 $D2
     cp   $07                                      ; $5068: $FE $07
-    jr   nz, jr_005_508A                          ; $506A: $20 $1E
+    jr   nz, .jr_508A                             ; $506A: $20 $1E
 
     ld   a, [wD210]                               ; $506C: $FA $10 $D2
     cp   $E8                                      ; $506F: $FE $E8
-    jr   nz, jr_005_508A                          ; $5071: $20 $17
+    jr   nz, .jr_508A                             ; $5071: $20 $17
 
     ld   a, $16                                   ; $5073: $3E $16
     call OpenDialog                               ; $5075: $CD $85 $23
@@ -440,7 +440,7 @@ func_005_5059::
     call label_27F2                               ; $5084: $CD $F2 $27
     jp   IncrementEntityState                     ; $5087: $C3 $12 $3B
 
-jr_005_508A:
+.jr_508A:
     call func_005_7B24                            ; $508A: $CD $24 $7B
     ld   a, e                                     ; $508D: $7B
     xor  $01                                      ; $508E: $EE $01
@@ -455,17 +455,17 @@ jr_005_508A:
     ld   d, a                                     ; $50A3: $57
     ld   a, [wD211]                               ; $50A4: $FA $11 $D2
     cp   $07                                      ; $50A7: $FE $07
-    jr   nz, jr_005_50B7                          ; $50A9: $20 $0C
+    jr   nz, .jr_50B7                             ; $50A9: $20 $0C
 
     ld   a, [wD210]                               ; $50AB: $FA $10 $D2
     cp   $E0                                      ; $50AE: $FE $E0
-    jr   c, jr_005_50B7                           ; $50B0: $38 $05
+    jr   c, .jr_50B7                              ; $50B0: $38 $05
 
     xor  a                                        ; $50B2: $AF
     ld   [wC3C8], a                               ; $50B3: $EA $C8 $C3
     ret                                           ; $50B6: $C9
 
-jr_005_50B7:
+.jr_50B7:
     ld   hl, wC3C8                                ; $50B7: $21 $C8 $C3
     ld   [hl], $01                                ; $50BA: $36 $01
     ld   a, e                                     ; $50BC: $7B
@@ -478,14 +478,14 @@ jr_005_50B7:
     srl  d                                        ; $50C6: $CB $3A
     rra                                           ; $50C8: $1F
     cp   $1D                                      ; $50C9: $FE $1D
-    jr   c, jr_005_50D2                           ; $50CB: $38 $05
+    jr   c, .jr_50D2                              ; $50CB: $38 $05
 
     cp   $3B                                      ; $50CD: $FE $3B
-    jr   nc, jr_005_50D2                          ; $50CF: $30 $01
+    jr   nc, .jr_50D2                             ; $50CF: $30 $01
 
     inc  [hl]                                     ; $50D1: $34
 
-jr_005_50D2:
+.jr_50D2:
     cp   $1D                                      ; $50D2: $FE $1D
     ret  c                                        ; $50D4: $D8
 
@@ -494,10 +494,10 @@ jr_005_50D2:
     ldh  a, [hFrameCounter]                       ; $50D9: $F0 $E7
     ld   e, LINK_ANIMATION_STATE_UNKNOWN_75       ; $50DB: $1E $75
     and  $40                                      ; $50DD: $E6 $40
-    jr   z, jr_005_50E2                           ; $50DF: $28 $01
+    jr   z, .jr_50E2                              ; $50DF: $28 $01
     inc  e                                        ; $50E1: $1C
 
-jr_005_50E2:
+.jr_50E2:
     ld   a, e                                     ; $50E2: $7B
     ldh  [hLinkAnimationState], a                 ; $50E3: $E0 $9D
     ldh  a, [hFrameCounter]                       ; $50E5: $F0 $E7
@@ -555,7 +555,7 @@ func_005_512B::
     call IncrementEntityState                     ; $5131: $CD $12 $3B
     ld   a, [wDialogAskSelectionIndex]            ; $5134: $FA $77 $C1
     and  a                                        ; $5137: $A7
-    jr   nz, jr_005_514F                          ; $5138: $20 $15
+    jr   nz, .jr_514F                             ; $5138: $20 $15
 
     ld   a, $01                                   ; $513A: $3E $01
     ld   [wDE00], a                               ; $513C: $EA $00 $DE
@@ -567,7 +567,7 @@ func_005_512B::
     ld   [hl], $80                                ; $514C: $36 $80
     ret                                           ; $514E: $C9
 
-jr_005_514F:
+.jr_514F:
     ld   a, $15                                   ; $514F: $3E $15
     call OpenDialog                               ; $5151: $CD $85 $23
     call IncrementEntityState                     ; $5154: $CD $12 $3B
@@ -599,30 +599,30 @@ func_005_5161::
     call IncrementEntityState                     ; $5179: $CD $12 $3B
     ldh  a, [hMapRoom]                            ; $517C: $F0 $F6
     cp   ROOM_SECTION_OW_VILLAGES                 ; $517E: $FE $C0
-    jr   c, jr_005_5183                           ; $5180: $38 $01
+    jr   c, .jr_5183                              ; $5180: $38 $01
 
     ld   [hl], b                                  ; $5182: $70
 
-jr_005_5183:
+.jr_5183:
     xor  a                                        ; $5183: $AF
     ld   [wC167], a                               ; $5184: $EA $67 $C1
     ldh  a, [hMapRoom]                            ; $5187: $F0 $F6
     cp   ROOM_SECTION_OW_VILLAGES                 ; $5189: $FE $C0
-    jr   nc, jr_005_5192                          ; $518B: $30 $05
+    jr   nc, .jr_5192                             ; $518B: $30 $05
 
     jp_open_dialog $014
 
-jr_005_5192:
+.jr_5192:
     jp_open_dialog $193
 
 jr_005_5197:
     cp   $08                                      ; $5197: $FE $08
-    jr   nz, jr_005_51A1                          ; $5199: $20 $06
+    jr   nz, .jr_51A1                             ; $5199: $20 $06
 
     dec  [hl]                                     ; $519B: $35
     call_open_dialog $013
 
-jr_005_51A1:
+.jr_51A1:
     ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $51A1: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $51A3: $E0 $9D
     ld   a, $02                                   ; $51A5: $3E $02
@@ -656,7 +656,7 @@ MarinIndoor1SpriteVariants::
 MarinEntityHandler_Indoor::
     ld   a, [wTradeSequenceItem]                  ; $51CE: $FA $0E $DB
     cp   TRADING_ITEM_PINEAPPLE                   ; $51D1: $FE $07
-    jr   c, jr_005_51FB                           ; $51D3: $38 $26
+    jr   c, .jr_51FB                              ; $51D3: $38 $26
 
     ld   a, [wOverworldRoomStatus + $FD]          ; $51D5: $FA $FD $D8
     and  $30                                      ; $51D8: $E6 $30
@@ -676,14 +676,14 @@ MarinEntityHandler_Indoor::
 
     jp_open_dialog $1D7                           ; $51F6: $3E $D7
 
-jr_005_51FB:
+.jr_51FB:
     ld   a, [wSwordLevel]                         ; $51FB: $FA $4E $DB
     and  a                                        ; $51FE: $A7
     jp   nz, ClearEntityStatus_05                 ; $51FF: $C2 $4B $7B
 
     ld   a, [wShieldLevel]                        ; $5202: $FA $44 $DB
     and  a                                        ; $5205: $A7
-    jr   z, jr_005_5211                           ; $5206: $28 $09
+    jr   z, .jr_5211                              ; $5206: $28 $09
 
     ld   hl, wEntitiesStateTable                  ; $5208: $21 $90 $C2
     add  hl, bc                                   ; $520B: $09
@@ -691,10 +691,10 @@ jr_005_51FB:
     ld   [hl], a                                  ; $520E: $77
     ldh  [hActiveEntityState], a                  ; $520F: $E0 $F0
 
-jr_005_5211:
+.jr_5211:
     ldh  a, [hActiveEntityState]                  ; $5211: $F0 $F0
     and  a                                        ; $5213: $A7
-    jr   nz, jr_005_5237                          ; $5214: $20 $21
+    jr   nz, .jr_5237                             ; $5214: $20 $21
 
     call GetEntityDropTimer                       ; $5216: $CD $FB $0B
     ld   [hl], $7F                                ; $5219: $36 $7F
@@ -714,17 +714,17 @@ jr_005_5211:
     ld   [wC167], a                               ; $5231: $EA $67 $C1
     jp   IncrementEntityState                     ; $5234: $C3 $12 $3B
 
-jr_005_5237:
+.jr_5237:
     ldh  a, [hFrameCounter]                       ; $5237: $F0 $E7
     and  $1F                                      ; $5239: $E6 $1F
-    jr   nz, jr_005_5245                          ; $523B: $20 $08
+    jr   nz, .jr_5245                             ; $523B: $20 $08
 
     call func_005_7B24                            ; $523D: $CD $24 $7B
     ld   hl, wEntitiesDirectionTable              ; $5240: $21 $80 $C3
     add  hl, bc                                   ; $5243: $09
     ld   [hl], e                                  ; $5244: $73
 
-jr_005_5245:
+.jr_5245:
     call func_005_54EA                            ; $5245: $CD $EA $54
     ld   de, MarinIndoor2SpriteVariants           ; $5248: $11 $0A $4E
     call RenderActiveEntitySpritesPair            ; $524B: $CD $C0 $3B
@@ -765,14 +765,14 @@ Data_005_5274::
 
 func_005_5294::
     call GetEntityDropTimer                       ; $5294: $CD $FB $0B
-    jr   nz, jr_005_52A4                          ; $5297: $20 $0B
+    jr   nz, .jr_52A4                             ; $5297: $20 $0B
 
     call_open_dialog $001                         ; $5299: $3E $01
     ld   [hl], $40                                ; $529E: $36 $40
     call IncrementEntityState                     ; $52A0: $CD $12 $3B
     xor  a                                        ; $52A3: $AF
 
-jr_005_52A4:
+.jr_52A4:
     rra                                           ; $52A4: $1F
     rra                                           ; $52A5: $1F
     and  $1F                                      ; $52A6: $E6 $1F
@@ -798,13 +798,13 @@ func_005_52AF::
     call RenderActiveEntitySpritesPair            ; $52C8: $CD $C0 $3B
     ldh  a, [hIsGBC]                              ; $52CB: $F0 $FE
     and  a                                        ; $52CD: $A7
-    jr   z, jr_005_52D8                           ; $52CE: $28 $08
+    jr   z, .jr_52D8                              ; $52CE: $28 $08
 
     ld   hl, MarinDropGBCSpriteList               ; $52D0: $21 $6C $52
     ld   c, $02                                   ; $52D3: $0E $02
     call RenderActiveEntitySpritesRect            ; $52D5: $CD $E6 $3C
 
-jr_005_52D8:
+.jr_52D8:
     jp   CopyEntityPositionToActivePosition       ; $52D8: $C3 $8A $3D
 
 func_005_52DB::

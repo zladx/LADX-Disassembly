@@ -59,11 +59,11 @@ ENDC
     jr   z, jr_001_4414                           ; $43AB: $28 $67
     ldh  a, [hMapId]                              ; $43AD: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $43AF: $FE $FF
-    jr   nz, jr_001_43B8                          ; $43B1: $20 $05
+    jr   nz, .jr_43B8                             ; $43B1: $20 $05
     ld   hl, wColorDungeonItemFlags               ; $43B3: $21 $DA $DD
     jr   jr_001_43C5                              ; $43B6: $18 $0D
 
-jr_001_43B8::
+.jr_43B8::
     ld   e, a                                     ; $43B8: $5F
     sla  a                                        ; $43B9: $CB $27
     sla  a                                        ; $43BB: $CB $27
@@ -82,11 +82,11 @@ jr_001_43CA::
     cp   MAP_COLOR_DUNGEON                        ; $43CC: $FE $FF
     jr   z, jr_001_43DB                           ; $43CE: $28 $0B
     cp   MAP_WINDFISHS_EGG                        ; $43D0: $FE $08
-    jr   z, jr_001_43D8                           ; $43D2: $28 $04
+    jr   z, .jr_43D8                              ; $43D2: $28 $04
     cp   MAP_CAVE_B                               ; $43D4: $FE $0A
     jr   c, jr_001_43DB                           ; $43D6: $38 $03
 
-jr_001_43D8::
+.jr_43D8::
     xor  a                                        ; $43D8: $AF
     jr   z, jr_001_43DC                           ; $43D9: $28 $01
 
@@ -117,18 +117,18 @@ jr_001_43DC::
 
     ldh  a, [hMapId]                              ; $43F4: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $43F6: $FE $FF
-    jr   z, jr_001_440B                           ; $43F8: $28 $11
+    jr   z, .jr_440B                              ; $43F8: $28 $11
     cp   MAP_WINDFISHS_EGG                        ; $43FA: $FE $08
     jr   z, jr_001_4425                           ; $43FC: $28 $27
     cp   MAP_CAVE_B                               ; $43FE: $FE $0A
     jr   nc, jr_001_4425                          ; $4400: $30 $23
     cp   MAP_EAGLES_TOWER                         ; $4402: $FE $06
-    jr   nz, jr_001_440B                          ; $4404: $20 $05
+    jr   nz, .jr_440B                             ; $4404: $20 $05
     ldh  a, [hIsSideScrolling]                    ; $4406: $F0 $F9
     and  a                                        ; $4408: $A7
     jr   nz, jr_001_4425                          ; $4409: $20 $1A
 
-jr_001_440B::
+.jr_440B::
     ; Create a wDrawCommand containing the minimap tilemap
     call CreateMinimapTilemap                     ; $440B: $CD $11 $55
     ; Request this wDrawCommand to be loaded on next vblank
@@ -167,11 +167,11 @@ GameplayWorldLoadRoomHandler::
     ld   a, [wDBC8]                               ; $4445: $FA $C8 $DB
     ldh  [hLinkPositionZ], a                      ; $4448: $E0 $A2
     and  a                                        ; $444A: $A7
-    jr   z, jr_001_4452                           ; $444B: $28 $05
+    jr   z, .jr_4452                              ; $444B: $28 $05
     ld   a, $02                                   ; $444D: $3E $02
     ld   [wIsLinkInTheAir], a                     ; $444F: $EA $46 $C1
 
-jr_001_4452::
+.jr_4452::
     ld   a, $04                                   ; $4452: $3E $04
     ld   [wRoomTransitionDirection], a            ; $4454: $EA $25 $C1
     call LoadRoom                                 ; $4457: $CD $F4 $30
@@ -185,11 +185,11 @@ jr_001_4452::
     ld   d, a                                     ; $446A: $57
     ldh  a, [hMapId]                              ; $446B: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $446D: $FE $FF
-    jr   nz, jr_001_4475                          ; $446F: $20 $04
+    jr   nz, .jr_4475                             ; $446F: $20 $04
     ld   d, $00                                   ; $4471: $16 $00
     jr   jr_001_447E                              ; $4473: $18 $09
 
-jr_001_4475::
+.jr_4475::
     cp   $1A                                      ; $4475: $FE $1A
     jr   nc, jr_001_447E                          ; $4477: $30 $05
     cp   $06                                      ; $4479: $FE $06
@@ -201,15 +201,15 @@ jr_001_447E::
     ld   e, a                                     ; $4480: $5F
     call GetChestsStatusForRoom_trampoline        ; $4481: $CD $ED $29
     cp   $1A                                      ; $4484: $FE $1A
-    jr   z, jr_001_4495                           ; $4486: $28 $0D
+    jr   z, .jr_4495                              ; $4486: $28 $0D
     cp   $19                                      ; $4488: $FE $19
-    jr   z, jr_001_4495                           ; $448A: $28 $09
+    jr   z, .jr_4495                              ; $448A: $28 $09
     ld   a, [wRoomEvent]                          ; $448C: $FA $8E $C1
     and  EVENT_EFFECT_MASK                        ; $448F: $E6 $E0
     cp   EFFECT_DROP_KEY                          ; $4491: $FE $80
     jr   nz, jr_001_44A6                          ; $4493: $20 $11
 
-jr_001_4495::
+.jr_4495::
     ld   a, [wHasDungeonCompass]                  ; $4495: $FA $CD $DB
     and  a                                        ; $4498: $A7
     jr   z, jr_001_44A6                           ; $4499: $28 $0B
@@ -223,10 +223,10 @@ jr_001_44A6::
     ld   a, [wIsIndoor]                           ; $44A6: $FA $A5 $DB
     and  a                                        ; $44A9: $A7
     ld   a, $06                                   ; $44AA: $3E $06
-    jr   nz, jr_001_44B0                          ; $44AC: $20 $02
+    jr   nz, .jr_44B0                             ; $44AC: $20 $02
     ld   a, $07                                   ; $44AE: $3E $07
 
-jr_001_44B0::
+.jr_44B0::
     ld   [wTilesetToLoad], a                      ; $44B0: $EA $FE $D6
     ret                                           ; $44B3: $C9
 
@@ -235,7 +235,7 @@ GameplayWorldSelectTilesetHandler::
     ldh  [hWorldTileset], a                       ; $44B6: $E0 $94
     ldh  a, [hIsGBC]                              ; $44B8: $F0 $FE
     and  a                                        ; $44BA: $A7
-    jr   z, jr_001_44C9                           ; $44BB: $28 $0C
+    jr   z, .jr_44C9                              ; $44BB: $28 $0C
     di                                            ; $44BD: $F3
     ld   a, $03                                   ; $44BE: $3E $03
     ld   [rSVBK], a                               ; $44C0: $E0 $70
@@ -244,7 +244,7 @@ GameplayWorldSelectTilesetHandler::
     ld   [rSVBK], a                               ; $44C6: $E0 $70
     ei                                            ; $44C8: $FB
 
-jr_001_44C9::
+.jr_44C9::
     call SelectRoomTilesets                       ; $44C9: $CD $1E $0D
 
     xor  a                                        ; $44CC: $AF
@@ -341,7 +341,7 @@ GameplayWorldLoad6Handler::
 
     ld   a, [wObjectAffectingBGPalette]           ; $4528: $FA $CB $C3
     and  a                                        ; $452B: $A7
-    jr   z, jr_001_4548                           ; $452C: $28 $1A
+    jr   z, .jr_4548                              ; $452C: $28 $1A
     ld   a, [wC5AD]                               ; $452E: $FA $AD $C5
     ld   [wBGPalette], a                          ; $4531: $EA $97 $DB
     ld   a, $1C                                   ; $4534: $3E $1C
@@ -350,11 +350,11 @@ GameplayWorldLoad6Handler::
     ld   [wOBJ1Palette], a                        ; $453B: $EA $99 $DB
     ldh  a, [hIsGBC]                              ; $453E: $F0 $FE
     and  a                                        ; $4540: $A7
-    jr   nz, jr_001_4548                          ; $4541: $20 $05
+    jr   nz, .jr_4548                             ; $4541: $20 $05
     ld   a, $04                                   ; $4543: $3E $04
     ld   [wTransitionSequenceCounter], a          ; $4545: $EA $6B $C1
 
-jr_001_4548::
+.jr_4548::
     jp   label_27DD                               ; $4548: $C3 $DD $27
     ldh  a, [hJoypadState]                        ; $454B: $F0 $CC
     and  J_A | J_START                            ; $454D: $E6 $90

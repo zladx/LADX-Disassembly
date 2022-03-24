@@ -63,19 +63,19 @@ func_004_50A5::
 jr_004_50AD:
     ld   a, c                                     ; $50AD: $79
     cp   e                                        ; $50AE: $BB
-    jr   z, jr_004_50D5                           ; $50AF: $28 $24
+    jr   z, .jr_50D5                              ; $50AF: $28 $24
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $50B1: $21 $40 $C3
     add  hl, de                                   ; $50B4: $19
     ld   a, [hl]                                  ; $50B5: $7E
     and  $80                                      ; $50B6: $E6 $80
-    jr   nz, jr_004_50D5                          ; $50B8: $20 $1B
+    jr   nz, .jr_50D5                             ; $50B8: $20 $1B
 
     ld   hl, wEntitiesStatusTable                 ; $50BA: $21 $80 $C2
     add  hl, de                                   ; $50BD: $19
     ld   a, [hl]                                  ; $50BE: $7E
     cp   $05                                      ; $50BF: $FE $05
-    jr   c, jr_004_50D5                           ; $50C1: $38 $12
+    jr   c, .jr_50D5                              ; $50C1: $38 $12
 
     ld   [hl], $01                                ; $50C3: $36 $01
     ld   hl, wEntitiesPrivateCountdown3Table      ; $50C5: $21 $80 $C4
@@ -88,7 +88,7 @@ jr_004_50AD:
     or   $02                                      ; $50D2: $F6 $02
     ld   [hl], a                                  ; $50D4: $77
 
-jr_004_50D5:
+.jr_50D5:
     dec  e                                        ; $50D5: $1D
     ld   a, e                                     ; $50D6: $7B
     cp   $FF                                      ; $50D7: $FE $FF
@@ -137,13 +137,13 @@ label_004_510F:
     add  hl, bc                                   ; $5115: $09
     ld   a, [hl]                                  ; $5116: $7E
     and  a                                        ; $5117: $A7
-    jr   z, jr_004_5120                           ; $5118: $28 $06
+    jr   z, .jr_5120                              ; $5118: $28 $06
 
     ld   hl, wEntitiesPrivateState5Table          ; $511A: $21 $90 $C3
     add  hl, bc                                   ; $511D: $09
     ld   [hl], $FF                                ; $511E: $36 $FF
 
-jr_004_5120:
+.jr_5120:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5120: $21 $40 $C3
     add  hl, bc                                   ; $5123: $09
     ld   [hl], $08                                ; $5124: $36 $08
@@ -222,11 +222,11 @@ Data_004_51E6::
 func_004_51E8::
     ldh  a, [hFrameCounter]                       ; $51E8: $F0 $E7
 
-jr_004_51EA:
+.jr_51EA:
     and  $3F                                      ; $51EA: $E6 $3F
     jr   nz, jr_004_51FA                          ; $51EC: $20 $0C
 
-jr_004_51EE:
+.jr_51EE:
     call GetRandomByte                            ; $51EE: $CD $0D $28
     and  $01                                      ; $51F1: $E6 $01
     jr   nz, jr_004_51FA                          ; $51F3: $20 $05
@@ -242,7 +242,7 @@ jr_004_51FA:
     and  $01                                      ; $51FF: $E6 $01
     ld   e, a                                     ; $5201: $5F
 
-jr_004_5202:
+.jr_5202:
     ld   d, b                                     ; $5202: $50
     ld   hl, Data_004_51E6                        ; $5203: $21 $E6 $51
     add  hl, de                                   ; $5206: $19
@@ -315,18 +315,18 @@ jr_004_5202:
 
 jr_004_5273:
     call GetEntityPrivateCountdown1               ; $5273: $CD $00 $0C
-    jr   nz, jr_004_52C9                          ; $5276: $20 $51
+    jr   nz, .jr_52C9                             ; $5276: $20 $51
 
     ld   [hl], $40                                ; $5278: $36 $40
     ld   hl, wEntitiesInertiaTable                ; $527A: $21 $D0 $C3
     add  hl, bc                                   ; $527D: $09
     ld   a, [hl]                                  ; $527E: $7E
     cp   $14                                      ; $527F: $FE $14
-    jr   nc, jr_004_52C9                          ; $5281: $30 $46
+    jr   nc, .jr_52C9                             ; $5281: $30 $46
 
     ld   a, ENTITY_FACADE                         ; $5283: $3E $5A
     call SpawnNewEntity_trampoline                ; $5285: $CD $86 $3B
-    jr   c, jr_004_52C9                           ; $5288: $38 $3F
+    jr   c, .jr_52C9                              ; $5288: $38 $3F
 
     ld   hl, wEntitiesPrivateState1Table          ; $528A: $21 $B0 $C2
     add  hl, de                                   ; $528D: $19
@@ -365,7 +365,7 @@ jr_004_5273:
     ld   [hl], $02                                ; $52C6: $36 $02
     pop  bc                                       ; $52C8: $C1
 
-jr_004_52C9:
+.jr_52C9:
     ld   hl, wEntitiesPrivateCountdown2Table      ; $52C9: $21 $00 $C3
     add  hl, bc                                   ; $52CC: $09
     ld   a, [hl]                                  ; $52CD: $7E
@@ -433,11 +433,11 @@ jr_004_52C9:
     add  hl, bc                                   ; $5337: $09
     ld   a, [hl]                                  ; $5338: $7E
     and  a                                        ; $5339: $A7
-    jr   nz, jr_004_533F                          ; $533A: $20 $03
+    jr   nz, .jr_533F                             ; $533A: $20 $03
 
     call ClearEntityStatusBank04                  ; $533C: $CD $7A $6D
 
-jr_004_533F:
+.jr_533F:
     pop  bc                                       ; $533F: $C1
 
 jr_004_5340:
@@ -456,12 +456,12 @@ jr_004_5340:
     add  hl, bc                                   ; $5355: $09
     ld   a, [hl]                                  ; $5356: $7E
     and  a                                        ; $5357: $A7
-    jr   z, jr_004_535F                           ; $5358: $28 $05
+    jr   z, .jr_535F                              ; $5358: $28 $05
 
     ld   a, $02                                   ; $535A: $3E $02
     call SetEntitySpriteVariant                   ; $535C: $CD $0C $3B
 
-jr_004_535F:
+.jr_535F:
     ld   hl, wEntitiesPrivateState5Table          ; $535F: $21 $90 $C3
     add  hl, bc                                   ; $5362: $09
     ld   a, [hl]                                  ; $5363: $7E
@@ -545,12 +545,12 @@ FacadeState1Handler:
     jp   z, ClearEntityStatusBank04               ; $5472: $CA $7A $6D
 
     cp   $50                                      ; $5475: $FE $50
-    jr   nz, jr_004_547E                          ; $5477: $20 $05
+    jr   nz, .jr_547E                             ; $5477: $20 $05
 
     ld   hl, hJingle                              ; $5479: $21 $F2 $FF
     ld   [hl], JINGLE_FACADE_HOLE                 ; $547C: $36 $40
 
-jr_004_547E:
+.jr_547E:
     rra                                           ; $547E: $1F
     rra                                           ; $547F: $1F
     rra                                           ; $5480: $1F
@@ -644,15 +644,15 @@ FacadeState2Handler:
     ld   de, Data_004_5501                        ; $5509: $11 $01 $55
     ldh  a, [hMapId]                              ; $550C: $F0 $F7
     cp   MAP_EAGLES_TOWER                         ; @TODO ??? Is this right?
-    jr   z, jr_004_551C                           ; $5510: $28 $0A
+    jr   z, .jr_551C                              ; $5510: $28 $0A
 
     ld   de, Facade2SpriteVariants                ; $5512: $11 $F1 $54
     cp   $01                                      ; $5515: $FE $01
-    jr   nz, jr_004_551C                          ; $5517: $20 $03
+    jr   nz, .jr_551C                             ; $5517: $20 $03
 
     ld   de, Facade3SpriteVariants                ; $5519: $11 $F9 $54
 
-jr_004_551C:
+.jr_551C:
     call RenderActiveEntitySpritesPair            ; $551C: $CD $C0 $3B
     call DecrementEntityIgnoreHitsCountdown       ; $551F: $CD $56 $0C
     ld   hl, wEntitiesFlashCountdownTable         ; $5522: $21 $20 $C4
@@ -670,12 +670,12 @@ jr_004_551C:
     call SetEntitySpriteVariant                   ; $5534: $CD $0C $3B
     ldh  a, [hFrameCounter]                       ; $5537: $F0 $E7
     and  $07                                      ; $5539: $E6 $07
-    jr   nz, jr_004_5541                          ; $553B: $20 $04
+    jr   nz, .jr_5541                             ; $553B: $20 $04
 
     ld   a, JINGLE_FLYING_TILE                    ; $553D: $3E $3F
     ldh  [hJingle], a                             ; $553F: $E0 $F2
 
-jr_004_5541:
+.jr_5541:
     ldh  a, [hActiveEntityState]                  ; $5541: $F0 $F0
     JP_TABLE                                      ; $5543
 ._00 dw func_004_554A                             ; $5544
@@ -863,7 +863,7 @@ jr_004_5628:
     call label_2887                               ; $564B: $CD $87 $28
     ldh  a, [hIsGBC]                              ; $564E: $F0 $FE
     and  a                                        ; $5650: $A7
-    jr   z, jr_004_565F                           ; $5651: $28 $0C
+    jr   z, .jr_565F                              ; $5651: $28 $0C
 
     push bc                                       ; $5653: $C5
     ldh  a, [hMultiPurpose0]                      ; $5654: $F0 $D7
@@ -872,7 +872,7 @@ jr_004_5628:
     call func_91D                                 ; $565B: $CD $1D $09
     pop  bc                                       ; $565E: $C1
 
-jr_004_565F:
+.jr_565F:
     ld   a, [wDrawCommandsSize]                   ; $565F: $FA $00 $D6
     ld   e, a                                     ; $5662: $5F
     ld   d, $00                                   ; $5663: $16 $00

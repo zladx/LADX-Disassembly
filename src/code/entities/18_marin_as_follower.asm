@@ -49,7 +49,7 @@ MarinAsFollowerHandler::
     jr   z, jr_018_5A3F                           ; $59EF: $28 $4E
 
     cp   $10                                      ; $59F1: $FE $10
-    jr   nz, jr_018_5A07                          ; $59F3: $20 $12
+    jr   nz, .jr_5A07                             ; $59F3: $20 $12
 
     dec  [hl]                                     ; $59F5: $35
     ldh  a, [hLinkPositionY]                      ; $59F6: $F0 $99
@@ -62,9 +62,9 @@ MarinAsFollowerHandler::
     ld   a, $0F                                   ; $5A05: $3E $0F
 
 ; Sword on beach music handling script
-jr_018_5A07:
+.jr_5A07:
     cp   $01                                      ; $5A07: $FE $01
-    jr   nz, jr_018_5A18                          ; $5A09: $20 $0D
+    jr   nz, .jr_5A18                             ; $5A09: $20 $0D
 
     xor  a                                        ; $5A0B: $AF
     ld   [wC167], a                               ; $5A0C: $EA $67 $C1
@@ -74,7 +74,7 @@ jr_018_5A07:
     ld   a, MUSIC_OVERWORLD                       ; $5A14: $3E $05
     ldh  [hDefaultMusicTrack], a                  ; $5A16: $E0 $B0
 
-jr_018_5A18:
+.jr_5A18:
     xor  a                                        ; $5A18: $AF
     ld   [wEntitiesSpriteVariantTable], a         ; $5A19: $EA $B0 $C3
     ld   de, MarinAsFollowerSpriteVariants        ; $5A1C: $11 $B8 $59
@@ -152,7 +152,7 @@ Data_018_5A8A::
 jr_018_5A8C::
     ld   a, [wC3C8]
     and  a
-    jr   z, jr_018_5AE7
+    jr   z, .jr_5AE7
 
     ldh  a, [hFrameCounter]                       ; $5A92: $F0 $E7
     rra                                           ; $5A94: $1F
@@ -168,11 +168,11 @@ jr_018_5A8C::
     ldh  [hActiveEntitySpriteVariant], a          ; $5AA1: $E0 $F1
     ldh  a, [hFrameCounter]                       ; $5AA3: $F0 $E7
     and  $1F                                      ; $5AA5: $E6 $1F
-    jr   nz, jr_018_5AE7                          ; $5AA7: $20 $3E
+    jr   nz, .jr_5AE7                             ; $5AA7: $20 $3E
 
     ld   a, ENTITY_MUSICAL_NOTE                   ; $5AA9: $3E $C9
     call SpawnNewEntity_trampoline                ; $5AAB: $CD $86 $3B
-    jr   c, jr_018_5AE7                           ; $5AAE: $38 $37
+    jr   c, .jr_5AE7                              ; $5AAE: $38 $37
 
     ldh  a, [hMultiPurpose1]                      ; $5AB0: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $5AB2: $21 $10 $C2
@@ -209,7 +209,7 @@ jr_018_5A8C::
     ld   [hl], $40                                ; $5AE4: $36 $40
     pop  bc                                       ; $5AE6: $C1
 
-jr_018_5AE7:
+.jr_5AE7:
     ld   de, MarinAsFollowerSpriteVariants        ; $5AE7: $11 $B8 $59
     call RenderActiveEntitySpritesPair            ; $5AEA: $CD $C0 $3B
     ld   a, [wInventoryAppearing]                 ; $5AED: $FA $4F $C1
@@ -220,28 +220,28 @@ jr_018_5AE7:
     add  hl, bc                                   ; $5AF5: $09
     ld   a, [hl]                                  ; $5AF6: $7E
     and  a                                        ; $5AF7: $A7
-    jr   z, jr_018_5B03                           ; $5AF8: $28 $09
+    jr   z, .jr_5B03                              ; $5AF8: $28 $09
 
     dec  a                                        ; $5AFA: $3D
-    jr   nz, jr_018_5B03                          ; $5AFB: $20 $06
+    jr   nz, .jr_5B03                             ; $5AFB: $20 $06
 
     dec  [hl]                                     ; $5AFD: $35
     call_open_dialog $27A ; "What a surprise!"    ; $5AFE
 
-jr_018_5B03:
+.jr_5B03:
     ld   hl, wEntitiesPrivateCountdown2Table      ; $5B03: $21 $00 $C3
     add  hl, bc                                   ; $5B06: $09
     ld   a, [wTransitionSequenceCounter]          ; $5B07: $FA $6B $C1
     cp   $04                                      ; $5B0A: $FE $04
-    jr   z, jr_018_5B13                           ; $5B0C: $28 $05
+    jr   z, .jr_5B13                              ; $5B0C: $28 $05
 
     ld   a, [hl]                                  ; $5B0E: $7E
     and  a                                        ; $5B0F: $A7
-    jr   z, jr_018_5B13                           ; $5B10: $28 $01
+    jr   z, .jr_5B13                              ; $5B10: $28 $01
 
     dec  [hl]                                     ; $5B12: $35
 
-jr_018_5B13:
+.jr_5B13:
     ld   a, [hl]                                  ; $5B13: $7E
     and  a                                        ; $5B14: $A7
     jr   z, jr_018_5B6A                           ; $5B15: $28 $53
@@ -255,7 +255,7 @@ jr_018_5B13:
     sub  $58                                      ; $5B21: $D6 $58
     add  $03                                      ; $5B23: $C6 $03
     cp   $06                                      ; $5B25: $FE $06
-    jr   nc, jr_018_5B33                          ; $5B27: $30 $0A
+    jr   nc, .jr_5B33                             ; $5B27: $30 $0A
 
     ldh  a, [hLinkPositionY]                      ; $5B29: $F0 $99
     sub  $50                                      ; $5B2B: $D6 $50
@@ -263,7 +263,7 @@ jr_018_5B13:
     cp   $06                                      ; $5B2F: $FE $06
     jr   c, jr_018_5B3B                           ; $5B31: $38 $08
 
-jr_018_5B33:
+.jr_5B33:
     ld   [hl], b                                  ; $5B33: $70
     ld   hl, wEntitiesPrivateCountdown3Table      ; $5B34: $21 $80 $C4
     add  hl, bc                                   ; $5B37: $09
@@ -316,12 +316,12 @@ jr_018_5B6A:
     call ReturnIfNonInteractive_18                ; $5B83: $CD $E8 $7D
     ld   a, [wD468]                               ; $5B86: $FA $68 $D4
     and  a                                        ; $5B89: $A7
-    jr   z, jr_018_5B90                           ; $5B8A: $28 $04
+    jr   z, .jr_5B90                              ; $5B8A: $28 $04
 
     dec  a                                        ; $5B8C: $3D
     ld   [wD468], a                               ; $5B8D: $EA $68 $D4
 
-jr_018_5B90:
+.jr_5B90:
     ldh  a, [hActiveEntityState]                  ; $5B90: $F0 $F0
     JP_TABLE                                      ; $5B92
 ._00 dw func_018_5B9D                             ; $5B93
@@ -371,11 +371,11 @@ func_018_5BD0::
     ldh  a, [hFrameCounter]                       ; $5BDE: $F0 $E7
     and  $08                                      ; $5BE0: $E6 $08
     ld   e, $04                                   ; $5BE2: $1E $04
-    jr   z, jr_018_5BE7                           ; $5BE4: $28 $01
+    jr   z, .jr_5BE7                              ; $5BE4: $28 $01
 
     inc  e                                        ; $5BE6: $1C
 
-jr_018_5BE7:
+.jr_5BE7:
     ld   a, e                                     ; $5BE7: $7B
     call SetEntitySpriteVariant                   ; $5BE8: $CD $0C $3B
     call func_018_7EB2                            ; $5BEB: $CD $B2 $7E
@@ -403,10 +403,10 @@ func_018_5C07::
     ld   e, a                                     ; $5C10: $5F
     ld   a, [wIsOnLowHeath]                       ; $5C11: $FA $63 $C1
     cp   e                                        ; $5C14: $BB
-    jr   z, jr_018_5C27                           ; $5C15: $28 $10
+    jr   z, .jr_5C27                              ; $5C15: $28 $10
 
     and  a                                        ; $5C17: $A7
-    jr   z, jr_018_5C27                           ; $5C18: $28 $0D
+    jr   z, .jr_5C27                              ; $5C18: $28 $0D
 
     ld   e, $1C                                   ; $5C1A: $1E $1C
     call GetRandomByte                            ; $5C1C: $CD $0D $28
@@ -416,7 +416,7 @@ func_018_5C07::
     ld   e, LOW($21E) ; "Idiot, I told you this!" ; $5C23: $1E $1E
     jr   jr_018_5C32                              ; $5C25: $18 $0B
 
-jr_018_5C27:
+.jr_5C27:
     ld   e, LOW($21B) ; "I thought you'd never come back!" ; $5C27: $1E $1B
     ld   a, [wDB47]                               ; $5C29: $FA $47 $DB
     cp   $80                                      ; $5C2C: $FE $80
@@ -528,11 +528,11 @@ label_018_5C6A:
     ld   [hl], a                                  ; $5CCE: $77
     ld   a, [wLinkMotionState]                    ; $5CCF: $FA $1C $C1
     cp   LINK_MOTION_UNSTUCKING                   ; $5CD2: $FE $02
-    jr   z, jr_018_5CEA                           ; $5CD4: $28 $14
+    jr   z, .jr_5CEA                              ; $5CD4: $28 $14
 
     ld   a, [wRoomTransitionState]                ; $5CD6: $FA $24 $C1
     and  a                                        ; $5CD9: $A7
-    jr   nz, jr_018_5CEA                          ; $5CDA: $20 $0E
+    jr   nz, .jr_5CEA                             ; $5CDA: $20 $0E
 
     ld   a, [wDialogState]                        ; $5CDC: $FA $9F $C1
     and  a                                        ; $5CDF: $A7
@@ -543,7 +543,7 @@ label_018_5C6A:
     or   [hl]                                     ; $5CE7: $B6
     jr   z, jr_018_5CEF                           ; $5CE8: $28 $05
 
-jr_018_5CEA:
+.jr_5CEA:
     ld   hl, wEntitiesInertiaTable                ; $5CEA: $21 $D0 $C3
     add  hl, bc                                   ; $5CED: $09
     inc  [hl]                                     ; $5CEE: $34
@@ -618,13 +618,13 @@ jr_018_5CEF:
     ld   a, [hl]                                  ; $5D53: $7E
     dec  a                                        ; $5D54: $3D
     cp   $02                                      ; $5D55: $FE $02
-    jr   c, jr_018_5D5E                           ; $5D57: $38 $05
+    jr   c, .jr_5D5E                              ; $5D57: $38 $05
 
     ld   a, $07                                   ; $5D59: $3E $07
     ldh  [hNoiseSfx], a                           ; $5D5B: $E0 $F4
     ret                                           ; $5D5D: $C9
 
-jr_018_5D5E:
+.jr_5D5E:
     ldh  a, [hActiveEntityVisualPosY]             ; $5D5E: $F0 $EC
     ldh  [hMultiPurpose1], a                      ; $5D60: $E0 $D8
     ldh  a, [hActiveEntityPosX]                   ; $5D62: $F0 $EE
@@ -638,11 +638,11 @@ jr_018_5D6F:
     ld   a, e                                     ; $5D6F: $7B
     cp   $08                                      ; $5D70: $FE $08
     ld   a, JINGLE_JUMP_DOWN                      ; $5D72: $3E $08
-    jr   nc, jr_018_5D78                          ; $5D74: $30 $02
+    jr   nc, .jr_5D78                             ; $5D74: $30 $02
 
     ld   a, JINGLE_JUMP                           ; $5D76: $3E $24
 
-jr_018_5D78:
+.jr_5D78:
     ldh  [hJingle], a                             ; $5D78: $E0 $F2
 
 jr_018_5D7A:

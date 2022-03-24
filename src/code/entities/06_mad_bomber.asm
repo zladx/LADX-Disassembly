@@ -66,44 +66,44 @@ MadBomberState1Handler::
     ld   [hl], a                                  ; $4192: $77
     ld   hl, Data_006_4142                        ; $4193: $21 $42 $41
 
-jr_006_4196:
+.jr_4196:
     add  hl, de                                   ; $4196: $19
     ld   a, [hl]                                  ; $4197: $7E
     ld   hl, wEntitiesPosYTable                   ; $4198: $21 $10 $C2
 
-jr_006_419B:
+.jr_419B:
     add  hl, bc                                   ; $419B: $09
     ld   [hl], a                                  ; $419C: $77
     call func_006_6594                            ; $419D: $CD $94 $65
     add  $20                                      ; $41A0: $C6 $20
     cp   $40                                      ; $41A2: $FE $40
-    jr   nc, jr_006_41AE                          ; $41A4: $30 $08
+    jr   nc, .jr_41AE                             ; $41A4: $30 $08
 
     call func_006_65A4                            ; $41A6: $CD $A4 $65
     add  $20                                      ; $41A9: $C6 $20
     cp   $40                                      ; $41AB: $FE $40
     ret  c                                        ; $41AD: $D8
 
-jr_006_41AE:
+.jr_41AE:
     call GetEntityTransitionCountdown             ; $41AE: $CD $05 $0C
     ld   [hl], $18                                ; $41B1: $36 $18
     jp   IncrementEntityState                     ; $41B3: $C3 $12 $3B
 
 MadBomberState2Handler::
     call GetEntityTransitionCountdown             ; $41B6: $CD $05 $0C
-    jr   nz, jr_006_41C0                          ; $41B9: $20 $05
+    jr   nz, .jr_41C0                             ; $41B9: $20 $05
 
     ld   [hl], $30                                ; $41BB: $36 $30
     jp   IncrementEntityState                     ; $41BD: $C3 $12 $3B
 
-jr_006_41C0:
+.jr_41C0:
     cp   $0C                                      ; $41C0: $FE $0C
     ld   a, $01                                   ; $41C2: $3E $01
-    jr   nc, jr_006_41C7                          ; $41C4: $30 $01
+    jr   nc, .jr_41C7                             ; $41C4: $30 $01
 
     inc  a                                        ; $41C6: $3C
 
-jr_006_41C7:
+.jr_41C7:
     jp   SetEntitySpriteVariant                   ; $41C7: $C3 $0C $3B
 
 MadBomberState3Handler::
@@ -158,28 +158,28 @@ ret_006_4217:
 jr_006_4218:
     and  $20                                      ; $4218: $E6 $20
     ld   a, $03                                   ; $421A: $3E $03
-    jr   nz, jr_006_421F                          ; $421C: $20 $01
+    jr   nz, .jr_421F                             ; $421C: $20 $01
 
     inc  a                                        ; $421E: $3C
 
-jr_006_421F:
+.jr_421F:
     jp   SetEntitySpriteVariant                   ; $421F: $C3 $0C $3B
 
 MadBomberState4Handler::
     call GetEntityTransitionCountdown             ; $4222: $CD $05 $0C
-    jr   nz, jr_006_4230                          ; $4225: $20 $09
+    jr   nz, .jr_4230                             ; $4225: $20 $09
 
     call IncrementEntityState                     ; $4227: $CD $12 $3B
     ld   [hl], b                                  ; $422A: $70
     ld   a, $FF                                   ; $422B: $3E $FF
     jp   SetEntitySpriteVariant                   ; $422D: $C3 $0C $3B
 
-jr_006_4230:
+.jr_4230:
     cp   $08                                      ; $4230: $FE $08
     ld   a, $01                                   ; $4232: $3E $01
-    jr   c, jr_006_4237                           ; $4234: $38 $01
+    jr   c, .jr_4237                              ; $4234: $38 $01
 
     inc  a                                        ; $4236: $3C
 
-jr_006_4237:
+.jr_4237:
     jp   SetEntitySpriteVariant                   ; $4237: $C3 $0C $3B

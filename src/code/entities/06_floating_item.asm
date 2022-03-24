@@ -38,28 +38,28 @@ FloatingItemEntityHandler::
 FloatingItem2EntityHandler::
     ld   a, [wIsIndoor]                           ; $7B1C: $FA $A5 $DB
     and  a                                        ; $7B1F: $A7
-    jr   z, jr_006_7B32                           ; $7B20: $28 $10
+    jr   z, .jr_7B32                              ; $7B20: $28 $10
 
     ldh  a, [hMapId]                              ; $7B22: $F0 $F7
     and  a                                        ; $7B24: $A7
-    jr   nz, jr_006_7B32                          ; $7B25: $20 $0B
+    jr   nz, .jr_7B32                             ; $7B25: $20 $0B
 
     ldh  a, [hMapRoom]                            ; $7B27: $F0 $F6
     cp   UNKNOWN_ROOM_1C                          ; $7B29: $FE $1C
-    jr   nz, jr_006_7B32                          ; $7B2B: $20 $05
+    jr   nz, .jr_7B32                             ; $7B2B: $20 $05
 
     ld   a, $01                                   ; $7B2D: $3E $01
     ld   [wDE00], a                               ; $7B2F: $EA $00 $DE
 
-jr_006_7B32:
+.jr_7B32:
     ld   hl, Data_006_7AFB                        ; $7B32: $21 $FB $7A
     ldh  a, [hIsSideScrolling]                    ; $7B35: $F0 $F9
     and  a                                        ; $7B37: $A7
-    jr   z, jr_006_7B3D                           ; $7B38: $28 $03
+    jr   z, .jr_7B3D                              ; $7B38: $28 $03
 
     ld   hl, Data_006_7B03                        ; $7B3A: $21 $03 $7B
 
-jr_006_7B3D:
+.jr_7B3D:
     ldh  a, [hFrameCounter]                       ; $7B3D: $F0 $E7
     rra                                           ; $7B3F: $1F
     rra                                           ; $7B40: $1F
@@ -74,13 +74,13 @@ jr_006_7B3D:
     ld   [hl], a                                  ; $7B4C: $77
     ldh  a, [hActiveEntitySpriteVariant]          ; $7B4D: $F0 $F1
     cp   $05                                      ; $7B4F: $FE $05
-    jr   nz, jr_006_7B5B                          ; $7B51: $20 $08
+    jr   nz, .jr_7B5B                             ; $7B51: $20 $08
 
     ld   de, Data_006_7AD1 + 2                    ; $7B53: $11 $D3 $7A
     call RenderActiveEntitySpritesPair            ; $7B56: $CD $C0 $3B
     jr   jr_006_7B61                              ; $7B59: $18 $06
 
-jr_006_7B5B:
+.jr_7B5B:
     ld   de, Data_006_7ADD                        ; $7B5B: $11 $DD $7A
     call RenderActiveEntitySprite                 ; $7B5E: $CD $77 $3C
 
@@ -99,13 +99,13 @@ jr_006_7B61:
     call ReturnIfNonInteractive_06                ; $7B78: $CD $C6 $64
     ldh  a, [hIsSideScrolling]                    ; $7B7B: $F0 $F9
     and  a                                        ; $7B7D: $A7
-    jr   nz, jr_006_7B85                          ; $7B7E: $20 $05
+    jr   nz, .jr_7B85                             ; $7B7E: $20 $05
 
     ldh  a, [hLinkPositionZ]                      ; $7B80: $F0 $A2
     cp   $0C                                      ; $7B82: $FE $0C
     ret  c                                        ; $7B84: $D8
 
-jr_006_7B85:
+.jr_7B85:
     call CheckLinkCollisionWithEnemy_trampoline   ; $7B85: $CD $5A $3B
     ret  nc                                       ; $7B88: $D0
 
@@ -125,11 +125,11 @@ jr_006_7B85:
 func_006_7BA2::
     ld   a, [wAddHealthBuffer]                    ; $7BA2: $FA $93 $DB
     add  $18                                      ; $7BA5: $C6 $18
-    jr   nc, jr_006_7BAB                          ; $7BA7: $30 $02
+    jr   nc, .jr_7BAB                             ; $7BA7: $30 $02
 
     ld   a, $FF                                   ; $7BA9: $3E $FF
 
-jr_006_7BAB:
+.jr_7BAB:
     ld   [wAddHealthBuffer], a                    ; $7BAB: $EA $93 $DB
     ret                                           ; $7BAE: $C9
 
@@ -166,11 +166,11 @@ jr_006_7BD6:
     add  $10                                      ; $7BD9: $C6 $10
     daa                                           ; $7BDB: $27
     cp   [hl]                                     ; $7BDC: $BE
-    jr   c, jr_006_7BE0                           ; $7BDD: $38 $01
+    jr   c, .jr_7BE0                              ; $7BDD: $38 $01
 
     ld   a, [hl]                                  ; $7BDF: $7E
 
-jr_006_7BE0:
+.jr_7BE0:
     ld   [de], a                                  ; $7BE0: $12
     ret                                           ; $7BE1: $C9
 
@@ -179,14 +179,14 @@ func_006_7BE2::
     cp   MAP_CAVE_B                               ; $7BE4: $FE $0A
     ret  nz                                       ; $7BE6: $C0
 
-jr_006_7BE7:
+.jr_7BE7:
     ldh  a, [hMapRoom]                            ; $7BE7: $F0 $F6
     cp   ROOM_INDOOR_B_97                         ; $7BE9: $FE $97
-    jr   z, jr_006_7BF0                           ; $7BEB: $28 $03
+    jr   z, .jr_7BF0                              ; $7BEB: $28 $03
     cp   ROOM_INDOOR_B_98                         ; $7BED: $FE $98
     ret  nz                                       ; $7BEF: $C0
 
-jr_006_7BF0:
+.jr_7BF0:
     ld   a, [wDB7F]                               ; $7BF0: $FA $7F $DB
     and  a                                        ; $7BF3: $A7
     ret  z                                        ; $7BF4: $C8

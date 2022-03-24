@@ -49,13 +49,13 @@ PapahlEntityHandler::
 
     ld   a, [wTradeSequenceItem]                  ; $4A21: $FA $0E $DB
     cp   $08                                      ; $4A24: $FE $08
-    jr   nc, jr_007_4A30                          ; $4A26: $30 $08
+    jr   nc, .jr_4A30                             ; $4A26: $30 $08
 
     ld   a, [wHasInstrument3]                     ; $4A28: $FA $67 $DB
     and  $02                                      ; $4A2B: $E6 $02
     jp   nz, func_007_7EA4                        ; $4A2D: $C2 $A4 $7E
 
-jr_007_4A30:
+.jr_4A30:
     ld   de, Papahl2SpriteVariants                ; $4A30: $11 $07 $4A
     ld   a, [wTradeSequenceItem]                  ; $4A33: $FA $0E $DB
     cp   $08                                      ; $4A36: $FE $08
@@ -81,11 +81,11 @@ jr_007_4A30:
 
     ld   a, [wTradeSequenceItem]                  ; $4A58: $FA $0E $DB
     cp   $08                                      ; $4A5B: $FE $08
-    jr   nc, jr_007_4A64                          ; $4A5D: $30 $05
+    jr   nc, .jr_4A64                             ; $4A5D: $30 $05
 
     jp_open_dialog $027                           ; $4A5F
 
-jr_007_4A64:
+.jr_4A64:
     jp_open_dialog $176                           ; $4A64
 
 jr_007_4A69:
@@ -106,7 +106,7 @@ jr_007_4A69:
     call RenderActiveEntitySpritesPair            ; $4A7E: $CD $C0 $3B
     ld   a, [wTradeSequenceItem]                  ; $4A81: $FA $0E $DB
     cp   $08                                      ; $4A84: $FE $08
-    jr   nc, jr_007_4AA0                          ; $4A86: $30 $18
+    jr   nc, .jr_4AA0                             ; $4A86: $30 $18
 
     ldh  a, [hActiveEntityPosX]                   ; $4A88: $F0 $EE
     add  $10                                      ; $4A8A: $C6 $10
@@ -120,7 +120,7 @@ jr_007_4A69:
     call RenderActiveEntitySpritesPair            ; $4A9A: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4A9D: $CD $8A $3D
 
-jr_007_4AA0:
+.jr_4AA0:
     call ReturnIfNonInteractive_07                ; $4AA0: $CD $96 $7D
     call func_007_7CF0                            ; $4AA3: $CD $F0 $7C
     ldh  a, [hActiveEntityState]                  ; $4AA6: $F0 $F0
@@ -151,11 +151,11 @@ func_007_4AB3::
     ld   a, [wTradeSequenceItem]                  ; $4ACF: $FA $0E $DB
     cp   $07                                      ; $4AD2: $FE $07
     ld   a, $70                                   ; $4AD4: $3E $70
-    jr   z, jr_007_4ADA                           ; $4AD6: $28 $02
+    jr   z, .jr_4ADA                              ; $4AD6: $28 $02
 
     ld   a, $77                                   ; $4AD8: $3E $77
 
-jr_007_4ADA:
+.jr_4ADA:
     call OpenDialogInTable1                       ; $4ADA: $CD $73 $23
     call IncrementEntityState                     ; $4ADD: $CD $12 $3B
     ld   a, $01                                   ; $4AE0: $3E $01
@@ -176,11 +176,11 @@ jr_007_4AE9:
 func_007_4AF3::
     ld   a, [wDialogAskSelectionIndex]            ; $4AF3: $FA $77 $C1
     and  a                                        ; $4AF6: $A7
-    jr   nz, jr_007_4B0E                          ; $4AF7: $20 $15
+    jr   nz, .jr_4B0E                             ; $4AF7: $20 $15
 
     ld   a, [wTradeSequenceItem]                  ; $4AF9: $FA $0E $DB
     cp   $07                                      ; $4AFC: $FE $07
-    jr   nz, jr_007_4B0E                          ; $4AFE: $20 $0E
+    jr   nz, .jr_4B0E                             ; $4AFE: $20 $0E
 
     call_open_dialog $172                         ; $4B00
     call IncrementEntityState                     ; $4B05: $CD $12 $3B
@@ -188,7 +188,7 @@ func_007_4AF3::
     ld   [hl], $C0                                ; $4B0B: $36 $C0
     ret                                           ; $4B0D: $C9
 
-jr_007_4B0E:
+.jr_4B0E:
     call_open_dialog $171                         ; $4B0E
     xor  a                                        ; $4B13: $AF
     ld   [wC167], a                               ; $4B14: $EA $67 $C1
@@ -202,7 +202,7 @@ func_007_4B1C::
     jr   nz, func_007_4B44                        ; $4B20: $20 $22
 
     call GetEntityTransitionCountdown             ; $4B22: $CD $05 $0C
-    jr   nz, jr_007_4B3B                          ; $4B25: $20 $14
+    jr   nz, .jr_4B3B                             ; $4B25: $20 $14
 
     ld   [wMusicTrackTiming], a                   ; $4B27: $EA $0B $C1
     call_open_dialog $173                         ; $4B2A
@@ -212,7 +212,7 @@ func_007_4B1C::
     ldh  [hReplaceTiles], a                       ; $4B36: $E0 $A5
     jp   IncrementEntityState                     ; $4B38: $C3 $12 $3B
 
-jr_007_4B3B:
+.jr_4B3B:
     ld   a, $02                                   ; $4B3B: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4B3D: $E0 $A1
     ld   a, $01                                   ; $4B3F: $3E $01

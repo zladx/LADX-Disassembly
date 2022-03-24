@@ -3,7 +3,7 @@ OwlEventEntityHandler::
     ld   [wC501], a                               ; $67F6: $EA $01 $C5
     ldh  a, [hMapRoom]                            ; $67F9: $F0 $F6
     cp   $64                        ; Ghost's gravestone
-    jr   nz, jr_006_680D                          ; $67FD: $20 $0E
+    jr   nz, .jr_680D                             ; $67FD: $20 $0E
 
     ld   a, [wIndoorARoomStatus + $E3]            ; $67FF: $FA $E3 $D9
     and  $40                                      ; $6802: $E6 $40
@@ -13,19 +13,19 @@ OwlEventEntityHandler::
     and  $02                                      ; $6808: $E6 $02
     jp   nz, ClearEntityStatus_06                 ; $680A: $C2 $DB $65
 
-jr_006_680D:
+.jr_680D:
     ldh  a, [hMapRoom]                            ; $680D: $F0 $F6
     cp   ROOM_OW_SOUTHERN_FACE_SHRINE_ENTRANCE    ; $680F: $FE $AC
-    jr   nz, jr_006_681A                          ; $6811: $20 $07
+    jr   nz, .jr_681A                             ; $6811: $20 $07
 
     ldh  a, [hRoomStatus]                         ; $6813: $F0 $F8
     and  ROOM_STATUS_EVENT_1                      ; $6815: $E6 $10
     jp   z, ClearEntityStatus_06                  ; $6817: $CA $DB $65
 
-jr_006_681A:
+.jr_681A:
     ldh  a, [hMapRoom]                            ; $681A: $F0 $F6
     cp   UNKNOWN_ROOM_41                          ; Tail Cave key chest
-    jr   nz, jr_006_6829                          ; $681E: $20 $09
+    jr   nz, .jr_6829                             ; $681E: $20 $09
 
     ld   a, [wHasTailKey]                         ; $6820: $FA $11 $DB
     and  a                                        ; $6823: $A7
@@ -34,19 +34,19 @@ jr_006_681A:
     call GetEntityPrivateCountdown1               ; $6825: $CD $00 $0C
     ret  nz                                       ; $6828: $C0
 
-jr_006_6829:
+.jr_6829:
     ldh  a, [hMapRoom]                            ; $6829: $F0 $F6
     cp   UNKNOWN_ROOM_EE                          ; Yarna Desert
-    jr   nz, jr_006_6835                          ; $682D: $20 $06
+    jr   nz, .jr_6835                             ; $682D: $20 $06
 
     ld   a, [wHasAnglerKey]                       ; $682F: $FA $12 $DB
     and  a                                        ; $6832: $A7
     jr   jr_006_689D                              ; $6833: $18 $68
 
-jr_006_6835:
+.jr_6835:
     ldh  a, [hMapRoom]                            ; $6835: $F0 $F6
     cp   UNKNOWN_ROOM_D2                          ; 1 room west of Tail Cave
-    jr   z, jr_006_684E                           ; $6839: $28 $13
+    jr   z, .jr_684E                              ; $6839: $28 $13
     cp   UNKNOWN_ROOM_36                          ; 1 room east of Moblin Hideout
     jr   nz, jr_006_6853                          ; $683D: $20 $14
 
@@ -58,14 +58,14 @@ jr_006_6835:
     cp   $01                                      ; $6849: $FE $01
     jp   nz, ClearEntityStatus_06                 ; $684B: $C2 $DB $65
 
-jr_006_684E:
+.jr_684E:
     ld   a, [wHasInstrument1]                     ; $684E: $FA $65 $DB
     jr   jr_006_689B                              ; $6851: $18 $48
 
 jr_006_6853:
     ldh  a, [hMapRoom]                            ; $6853: $F0 $F6
     cp   ROOM_OW_MARIN_BRIDGE                     ; Bridge where Marin gets trapped
-    jr   nz, jr_006_6869                          ; $6857: $20 $10
+    jr   nz, .jr_6869                             ; $6857: $20 $10
 
     ld   a, [wHasInstrument8]                     ; $6859: $FA $6C $DB
     and  $02                                      ; $685C: $E6 $02
@@ -77,16 +77,16 @@ jr_006_6853:
 
     jr   jr_006_68A0                              ; $6867: $18 $37
 
-jr_006_6869:
+.jr_6869:
     cp   UNKNOWN_ROOM_9D                          ; Room with staircase leading to Face Shrine dungeon passage
-    jr   nz, jr_006_6872                          ; $686B: $20 $05
+    jr   nz, .jr_6872                             ; $686B: $20 $05
 
     ld   a, [wHasInstrument5]                     ; $686D: $FA $69 $DB
     jr   jr_006_689B                              ; $6870: $18 $29
 
-jr_006_6872:
+.jr_6872:
     cp   UNKNOWN_ROOM_06                          ; Wind Fish's Egg
-    jr   nz, jr_006_687E                          ; $6874: $20 $08
+    jr   nz, .jr_687E                             ; $6874: $20 $08
 
     ld   a, [wOverworldRoomStatus + UNKNOWN_ROOM_06] ; $6876: $FA $06 $D8
     and  $10                                      ; $6879: $E6 $10
@@ -94,21 +94,21 @@ jr_006_6872:
 
     jr   jr_006_68A0                              ; $687C: $18 $22
 
-jr_006_687E:
+.jr_687E:
     cp   UNKNOWN_ROOM_B6                          ; One east of Key Cavern
-    jr   nz, jr_006_6887                          ; $6880: $20 $05
+    jr   nz, .jr_6887                             ; $6880: $20 $05
 
     ld   a, [wHasInstrument3]                     ; $6882: $FA $67 $DB
     jr   jr_006_689B                              ; $6885: $18 $14
 
-jr_006_6887:
+.jr_6887:
     cp   UNKNOWN_ROOM_17                          ; One south-east of Wind Fish's Egg
-    jr   z, jr_006_688F                           ; $6889: $28 $04
+    jr   z, .jr_688F                              ; $6889: $28 $04
 
     cp   UNKNOWN_ROOM_9C                          ; One south of Face Shrine dungeon
     jr   nz, jr_006_6894                          ; $688D: $20 $05
 
-jr_006_688F:
+.jr_688F:
     ld   a, [wHasInstrument6]                     ; $688F: $FA $6A $DB
     jr   jr_006_689B                              ; $6892: $18 $07
 
@@ -127,28 +127,28 @@ jr_006_689D:
 jr_006_68A0:
     ldh  a, [hMapRoom]                            ; $68A0: $F0 $F6
     cp   UNKNOWN_ROOM_D2                          ; 1 room west of Tail Cave
-    jr   z, jr_006_68B4                           ; $68A4: $28 $0E
+    jr   z, .jr_68B4                              ; $68A4: $28 $0E
     cp   UNKNOWN_ROOM_16                          ; One south of Wind Fish's Egg
-    jr   z, jr_006_68B4                           ; $68A8: $28 $0A
+    jr   z, .jr_68B4                              ; $68A8: $28 $0A
     cp   UNKNOWN_ROOM_36                          ; 1 room east of Moblin Hideout
-    jr   z, jr_006_68B4                           ; $68AC: $28 $06
+    jr   z, .jr_68B4                              ; $68AC: $28 $06
 
     ldh  a, [hActiveEntityState]                  ; $68AE: $F0 $F0
     cp   $00                                      ; $68B0: $FE $00
     jr   z, jr_006_68B7                           ; $68B2: $28 $03
 
-jr_006_68B4:
+.jr_68B4:
     call func_006_6A4F                            ; $68B4: $CD $4F $6A
 
 jr_006_68B7:
     ldh  a, [hFrameCounter]                       ; $68B7: $F0 $E7
     and  $B0                                      ; $68B9: $E6 $B0
     ld   a, $00                                   ; $68BB: $3E $00
-    jr   nz, jr_006_68C0                          ; $68BD: $20 $01
+    jr   nz, .jr_68C0                             ; $68BD: $20 $01
 
     inc  a                                        ; $68BF: $3C
 
-jr_006_68C0:
+.jr_68C0:
     call SetEntitySpriteVariant                   ; $68C0: $CD $0C $3B
     ld   a, [wRoomTransitionState]                ; $68C3: $FA $24 $C1
     and  a                                        ; $68C6: $A7
@@ -165,7 +165,7 @@ jr_006_68C0:
 OwlState0Handler::
     ldh  a, [hMapRoom]
     cp   ROOM_OW_BEACH_WITH_SWORD
-    jr   nz, jr_006_68EF                          ; $68D9: $20 $14
+    jr   nz, .jr_68EF                             ; $68D9: $20 $14
 
     ld   a, MUSIC_SWORD_SEARCH                    ; $68DB: $3E $1D
     ldh  [hDefaultMusicTrack], a                  ; $68DD: $E0 $B0
@@ -181,7 +181,7 @@ OwlState0Handler::
 
     jr   jr_006_68F6                              ; $68ED: $18 $07
 
-jr_006_68EF:
+.jr_68EF:
     ld   a, [wSwordLevel]                         ; $68EF: $FA $4E $DB
     and  a                                        ; $68F2: $A7
     jp   z, ClearEntityStatus_06                  ; $68F3: $CA $DB $65
@@ -198,13 +198,13 @@ jr_006_68F6:
 
     ldh  a, [hMapRoom]                            ; $6906: $F0 $F6
     cp   UNKNOWN_ROOM_16                          ; $6908: $FE $16
-    jr   z, jr_006_6914                           ; $690A: $28 $08
+    jr   z, .jr_6914                              ; $690A: $28 $08
     cp   UNKNOWN_ROOM_36                          ; $690C: $FE $36
-    jr   z, jr_006_6914                           ; $690E: $28 $04
+    jr   z, .jr_6914                              ; $690E: $28 $04
     cp   UNKNOWN_ROOM_D2                          ; $6910: $FE $D2
     jr   nz, jr_006_691A                          ; $6912: $20 $06
 
-jr_006_6914:
+.jr_6914:
     call IncrementEntityState                     ; $6914: $CD $12 $3B
     ld   [hl], $02                                ; $6917: $36 $02
     ret                                           ; $6919: $C9
@@ -236,11 +236,11 @@ OwlState1Handler::
     add  hl, bc                                   ; $6949: $09
     ld   a, [hl]                                  ; $694A: $7E
     and  a                                        ; $694B: $A7
-    jr   nz, jr_006_6951                          ; $694C: $20 $03
+    jr   nz, .jr_6951                             ; $694C: $20 $03
 
     jp   IncrementEntityState                     ; $694E: $C3 $12 $3B
 
-jr_006_6951:
+.jr_6951:
     ld   hl, wEntitiesSpeedZTable                 ; $6951: $21 $20 $C3
     add  hl, bc                                   ; $6954: $09
     ld   [hl], $FC                                ; $6955: $36 $FC
@@ -270,12 +270,12 @@ OwlState2Handler::
 
     ldh  a, [hMapRoom]                            ; $6983: $F0 $F6
     cp   UNKNOWN_ROOM_06                          ; $6985: $FE $06
-    jr   nz, jr_006_6990                          ; $6987: $20 $07
+    jr   nz, .jr_6990                             ; $6987: $20 $07
 
     call_open_dialog $0CD                         ; $6989
     jr   jr_006_6993                              ; $698E: $18 $03
 
-jr_006_6990:
+.jr_6990:
     call label_2A07                               ; $6990: $CD $07 $2A
 
 jr_006_6993:
@@ -290,14 +290,14 @@ OwlState3Handler::
     call ReturnIfNonInteractive_06                ; $69A1: $CD $C6 $64
     ldh  a, [hMapRoom]                            ; $69A4: $F0 $F6
     cp   UNKNOWN_ROOM_06                          ; $69A6: $FE $06
-    jr   z, jr_006_69B2                           ; $69A8: $28 $08
+    jr   z, .jr_69B2                              ; $69A8: $28 $08
 
     call GetEntityTransitionCountdown             ; $69AA: $CD $05 $0C
     jr   nz, func_006_69BD                        ; $69AD: $20 $0E
 
     call IncrementEntityState                     ; $69AF: $CD $12 $3B
 
-jr_006_69B2:
+.jr_69B2:
     ldh  a, [hMapRoom]                            ; $69B2: $F0 $F6
     ld   e, a                                     ; $69B4: $5F
     ld   d, b                                     ; $69B5: $50
@@ -355,12 +355,12 @@ ret_006_6A04:
 jr_006_6A05:
     ldh  a, [hFrameCounter]                       ; $6A05: $F0 $E7
     and  $07                                      ; $6A07: $E6 $07
-    jr   nz, jr_006_6A0F                          ; $6A09: $20 $04
+    jr   nz, .jr_6A0F                             ; $6A09: $20 $04
 
     ld   a, $05                                   ; $6A0B: $3E $05
     ldh  [hNoiseSfx], a                           ; $6A0D: $E0 $F4
 
-jr_006_6A0F:
+.jr_6A0F:
     ldh  a, [hFrameCounter]                       ; $6A0F: $F0 $E7
     and  $01                                      ; $6A11: $E6 $01
     jr   nz, ret_006_6A36                         ; $6A13: $20 $21
@@ -383,12 +383,12 @@ func_006_6A2B::
     jr   z, ret_006_6A36                          ; $6A2D: $28 $07
 
     bit  7, a                                     ; $6A2F: $CB $7F
-    jr   z, jr_006_6A35                           ; $6A31: $28 $02
+    jr   z, .jr_6A35                              ; $6A31: $28 $02
 
     dec  [hl]                                     ; $6A33: $35
     dec  [hl]                                     ; $6A34: $35
 
-jr_006_6A35:
+.jr_6A35:
     inc  [hl]                                     ; $6A35: $34
 
 ret_006_6A36:
@@ -424,10 +424,10 @@ jr_006_6A5B:
     call func_015_7964_trampoline                 ; $6A65: $CD $A0 $3D
     ldh  a, [hMapRoom]                            ; $6A68: $F0 $F6
     cp   ROOM_OW_MARIN_BRIDGE                     ; $6A6A: $FE $08
-    jr   z, jr_006_6A71                           ; $6A6C: $28 $03
+    jr   z, .jr_6A71                              ; $6A6C: $28 $03
     jp   label_3CD9                               ; $6A6E: $C3 $D9 $3C
 
-jr_006_6A71:
+.jr_6A71:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6A71: $21 $40 $C3
     add  hl, bc                                   ; $6A74: $09
     res  4, [hl]                                  ; $6A75: $CB $A6

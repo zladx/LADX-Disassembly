@@ -100,11 +100,11 @@ func_007_517C::
 
     ld   e, $00                                   ; $518F: $1E $00
     and  $01                                      ; $5191: $E6 $01
-    jr   nz, jr_007_5196                          ; $5193: $20 $01
+    jr   nz, .jr_5196                             ; $5193: $20 $01
 
     inc  e                                        ; $5195: $1C
 
-jr_007_5196:
+.jr_5196:
     jr   jr_007_519F                              ; $5196: $18 $07
 
 jr_007_5198:
@@ -158,7 +158,7 @@ jr_007_51AA:
     call label_2887                               ; $51DE: $CD $87 $28
     ldh  a, [hIsGBC]                              ; $51E1: $F0 $FE
     and  a                                        ; $51E3: $A7
-    jr   z, jr_007_51F2                           ; $51E4: $28 $0C
+    jr   z, .jr_51F2                              ; $51E4: $28 $0C
 
     push bc                                       ; $51E6: $C5
     ld   a, $0D                                   ; $51E7: $3E $0D
@@ -167,7 +167,7 @@ jr_007_51AA:
     call func_91D                                 ; $51EE: $CD $1D $09
     pop  bc                                       ; $51F1: $C1
 
-jr_007_51F2:
+.jr_51F2:
     ld   hl, wDrawCommand                         ; $51F2: $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ; $51F5: $FA $00 $D6
     ld   e, a                                     ; $51F8: $5F
@@ -265,17 +265,17 @@ jr_007_51F2:
     call GetObjectPhysicsFlags_trampoline         ; $528C: $CD $26 $2A
     pop  hl                                       ; $528F: $E1
     cp   $50                                      ; $5290: $FE $50
-    jr   z, jr_007_529E                           ; $5292: $28 $0A
+    jr   z, .jr_529E                              ; $5292: $28 $0A
 
     cp   $51                                      ; $5294: $FE $51
-    jr   z, jr_007_529E                           ; $5296: $28 $06
+    jr   z, .jr_529E                              ; $5296: $28 $06
 
     dec  c                                        ; $5298: $0D
     jr   nz, .loop_5287                           ; $5299: $20 $EC
 
     call MarkTriggerAsResolved                    ; $529B: $CD $60 $0C
 
-jr_007_529E:
+.jr_529E:
     pop  bc                                       ; $529E: $C1
 
 ret_007_529F:

@@ -14,7 +14,7 @@ SideViewWeightsEntityHandler::
     ld   a, [hl]                                  ; $61E2: $7E
     ld   e, a                                     ; $61E3: $5F
     and  a                                        ; $61E4: $A7
-    jr   nz, jr_007_61FA                          ; $61E5: $20 $13
+    jr   nz, .jr_61FA                             ; $61E5: $20 $13
 
     ld   hl, wEntitiesPrivateState2Table          ; $61E7: $21 $C0 $C2
     add  hl, bc                                   ; $61EA: $09
@@ -28,7 +28,7 @@ SideViewWeightsEntityHandler::
     ld   [hl], $F0                                ; $61F6: $36 $F0
     ld   e, $10                                   ; $61F8: $1E $10
 
-jr_007_61FA:
+.jr_61FA:
     ldh  a, [hFrameCounter]                       ; $61FA: $F0 $E7
     and  $01                                      ; $61FC: $E6 $01
     jr   nz, jr_007_620E                          ; $61FE: $20 $0E
@@ -39,12 +39,12 @@ jr_007_61FA:
     jr   z, jr_007_620E                           ; $6205: $28 $07
 
     and  $80                                      ; $6207: $E6 $80
-    jr   z, jr_007_620D                           ; $6209: $28 $02
+    jr   z, .jr_620D                              ; $6209: $28 $02
 
     inc  [hl]                                     ; $620B: $34
     inc  [hl]                                     ; $620C: $34
 
-jr_007_620D:
+.jr_620D:
     dec  [hl]                                     ; $620D: $35
 
 jr_007_620E:
@@ -75,7 +75,7 @@ jr_007_620E:
     add  hl, bc                                   ; $6234: $09
     ld   a, [hl]                                  ; $6235: $7E
     and  a                                        ; $6236: $A7
-    jr   z, jr_007_6246                           ; $6237: $28 $0D
+    jr   z, .jr_6246                              ; $6237: $28 $0D
 
     call GetEntitySpeedYAddress                   ; $6239: $CD $05 $40
     ld   [hl], b                                  ; $623C: $70
@@ -84,7 +84,7 @@ jr_007_620E:
     add  hl, de                                   ; $6243: $19
     ld   [hl], $00                                ; $6244: $36 $00
 
-jr_007_6246:
+.jr_6246:
     jr   jr_007_625F                              ; $6246: $18 $17
 
 jr_007_6248:
@@ -94,12 +94,12 @@ jr_007_6248:
     jr   z, jr_007_6256                           ; $624D: $28 $07
 
     and  $80                                      ; $624F: $E6 $80
-    jr   z, jr_007_6255                           ; $6251: $28 $02
+    jr   z, .jr_6255                              ; $6251: $28 $02
 
     inc  [hl]                                     ; $6253: $34
     inc  [hl]                                     ; $6254: $34
 
-jr_007_6255:
+.jr_6255:
     dec  [hl]                                     ; $6255: $35
 
 jr_007_6256:
@@ -141,7 +141,7 @@ jr_007_625F:
     call label_2887                               ; $628E: $CD $87 $28
     ldh  a, [hIsGBC]                              ; $6291: $F0 $FE
     and  a                                        ; $6293: $A7
-    jr   z, jr_007_62A2                           ; $6294: $28 $0C
+    jr   z, .jr_62A2                              ; $6294: $28 $0C
 
     push bc                                       ; $6296: $C5
     ld   a, $4D                                   ; $6297: $3E $4D
@@ -150,7 +150,7 @@ jr_007_625F:
     call func_91D                                 ; $629E: $CD $1D $09
     pop  bc                                       ; $62A1: $C1
 
-jr_007_62A2:
+.jr_62A2:
     ld   hl, wDrawCommand                         ; $62A2: $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ; $62A5: $FA $00 $D6
     ld   e, a                                     ; $62A8: $5F
@@ -191,7 +191,7 @@ jr_007_62D2:
     call label_2887                               ; $62D8: $CD $87 $28
     ldh  a, [hIsGBC]                              ; $62DB: $F0 $FE
     and  a                                        ; $62DD: $A7
-    jr   z, jr_007_62EC                           ; $62DE: $28 $0C
+    jr   z, .jr_62EC                              ; $62DE: $28 $0C
 
     push bc                                       ; $62E0: $C5
     ld   a, $04                                   ; $62E1: $3E $04
@@ -200,7 +200,7 @@ jr_007_62D2:
     call func_91D                                 ; $62E8: $CD $1D $09
     pop  bc                                       ; $62EB: $C1
 
-jr_007_62EC:
+.jr_62EC:
     ld   hl, wDrawCommand                         ; $62EC: $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ; $62EF: $FA $00 $D6
     ld   e, a                                     ; $62F2: $5F
@@ -246,13 +246,13 @@ jr_007_6327:
     add  hl, de                                   ; $632A: $19
     ld   a, [hl]                                  ; $632B: $7E
     and  a                                        ; $632C: $A7
-    jr   z, jr_007_6341                           ; $632D: $28 $12
+    jr   z, .jr_6341                              ; $632D: $28 $12
 
     ld   hl, wEntitiesTypeTable                   ; $632F: $21 $A0 $C3
     add  hl, de                                   ; $6332: $19
     ld   a, [hl]                                  ; $6333: $7E
     cp   $A6                                      ; $6334: $FE $A6
-    jr   nz, jr_007_6341                          ; $6336: $20 $09
+    jr   nz, .jr_6341                             ; $6336: $20 $09
 
     ld   hl, wEntitiesLoadOrderTable              ; $6338: $21 $60 $C4
     add  hl, de                                   ; $633B: $19
@@ -260,7 +260,7 @@ jr_007_6327:
     cp   [hl]                                     ; $633E: $BE
     jr   z, ret_007_6347                          ; $633F: $28 $06
 
-jr_007_6341:
+.jr_6341:
     inc  e                                        ; $6341: $1C
     ld   a, e                                     ; $6342: $7B
     cp   $10                                      ; $6343: $FE $10

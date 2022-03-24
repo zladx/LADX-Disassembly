@@ -43,7 +43,7 @@ Data_004_7F25::
 
 func_004_7F27::
     call GetEntityTransitionCountdown             ; $7F27: $CD $05 $0C
-    jr   nz, jr_004_7F37                          ; $7F2A: $20 $0B
+    jr   nz, .jr_7F37                             ; $7F2A: $20 $0B
 
     call GetRandomByte                            ; $7F2C: $CD $0D $28
     and  $3F                                      ; $7F2F: $E6 $3F
@@ -51,7 +51,7 @@ func_004_7F27::
     ld   [hl], a                                  ; $7F33: $77
     jp   IncrementEntityState                     ; $7F34: $C3 $12 $3B
 
-jr_004_7F37:
+.jr_7F37:
     ld   hl, Data_004_7F25                        ; $7F37: $21 $25 $7F
 
 label_004_7F3A:
@@ -68,23 +68,23 @@ label_004_7F3A:
 func_004_7F49::
     call label_3B39                               ; $7F49: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $7F4C: $CD $05 $0C
-    jr   nz, jr_004_7F59                          ; $7F4F: $20 $08
+    jr   nz, .jr_7F59                             ; $7F4F: $20 $08
 
     ld   [hl], $1F                                ; $7F51: $36 $1F
     call IncrementEntityState                     ; $7F53: $CD $12 $3B
     jp   ClearEntitySpeed                         ; $7F56: $C3 $7F $3D
 
-jr_004_7F59:
+.jr_7F59:
     ldh  a, [hFrameCounter]                       ; $7F59: $F0 $E7
     xor  c                                        ; $7F5B: $A9
     push af                                       ; $7F5C: $F5
     and  $0F                                      ; $7F5D: $E6 $0F
-    jr   nz, jr_004_7F66                          ; $7F5F: $20 $05
+    jr   nz, .jr_7F66                             ; $7F5F: $20 $05
 
     ld   a, $08                                   ; $7F61: $3E $08
     call ApplyVectorTowardsLink_trampoline        ; $7F63: $CD $AA $3B
 
-jr_004_7F66:
+.jr_7F66:
     pop  af                                       ; $7F66: $F1
     srl  a                                        ; $7F67: $CB $3F
     srl  a                                        ; $7F69: $CB $3F
@@ -99,7 +99,7 @@ Data_004_7F73::
 
 func_004_7F75::
     call GetEntityTransitionCountdown             ; $7F75: $CD $05 $0C
-    jr   nz, jr_004_7F8A                          ; $7F78: $20 $10
+    jr   nz, .jr_7F8A                             ; $7F78: $20 $10
 
     call GetRandomByte                            ; $7F7A: $CD $0D $28
     and  $1F                                      ; $7F7D: $E6 $1F
@@ -109,7 +109,7 @@ func_004_7F75::
     ld   a, $08                                   ; $7F85: $3E $08
     jp   ApplyVectorTowardsLink_trampoline        ; $7F87: $C3 $AA $3B
 
-jr_004_7F8A:
+.jr_7F8A:
     ld   hl, Data_004_7F73                        ; $7F8A: $21 $73 $7F
     jp   label_004_7F3A                           ; $7F8D: $C3 $3A $7F
 
@@ -119,11 +119,11 @@ func_004_7F90:: ; also called from ghini code
     ld   a, [hl]                                  ; $7F94: $7E
     rl   a                                        ; $7F95: $CB $17
     ld   a, OAM_NO_FLIP                           ; $7F97: $3E $00
-    jr   c, jr_004_7F9D                           ; $7F99: $38 $02
+    jr   c, .jr_7F9D                              ; $7F99: $38 $02
 
     ld   a, OAM_X_FLIP                            ; $7F9B: $3E $20
 
-jr_004_7F9D:
+.jr_7F9D:
     ld   hl, hActiveEntityFlipAttribute           ; $7F9D: $21 $ED $FF
     xor  [hl]                                     ; $7FA0: $AE
     ld   [hl], a                                  ; $7FA1: $77

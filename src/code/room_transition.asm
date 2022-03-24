@@ -814,7 +814,7 @@ label_002_7C50:
     ld   e, $01                                   ; $7C69: $1E $01
     ldh  a, [hObjectUnderEntity]                  ; $7C6B: $F0 $AF
     cp   $0E                                      ; $7C6D: $FE $0E
-    jr   nz, jr_002_7C88                          ; $7C6F: $20 $17
+    jr   nz, .jr_7C88                             ; $7C6F: $20 $17
 
     ldh  a, [hMapRoom]                            ; @TODO Likely involves the river rapids area
     cp   UNKNOWN_ROOM_3E                          ; possibly for determining the leftward push
@@ -831,7 +831,7 @@ label_002_7C50:
     ld   e, $00                                   ; $7C84: $1E $00
     jr   jr_002_7C8B                              ; $7C86: $18 $03
 
-jr_002_7C88:
+.jr_7C88:
     sub  $E7                                      ; $7C88: $D6 $E7
     ld   e, a                                     ; $7C8A: $5F
 

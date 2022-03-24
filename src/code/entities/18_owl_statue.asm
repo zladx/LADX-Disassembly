@@ -14,11 +14,11 @@ OwlStatueSouthFaceShrine:
     ld   hl, Data_018_5DFB                        ; $5E1B: $21 $FB $5D
     ld   a, [wBGPaletteEffectAddress]             ; $5E1E: $FA $CC $C3
     and  a                                        ; $5E21: $A7
-    jr   nz, jr_018_5E27                          ; $5E22: $20 $03
+    jr   nz, .jr_5E27                             ; $5E22: $20 $03
 
     ld   hl, Data_018_5E0B                        ; $5E24: $21 $0B $5E
 
-jr_018_5E27:
+.jr_5E27:
     ld   c, $04                                   ; $5E27: $0E $04
     call RenderActiveEntitySpritesRect            ; $5E29: $CD $E6 $3C
     ld   a, $02                                   ; $5E2C: $3E $02
@@ -45,11 +45,11 @@ func_018_5E43::
 
     ld   a, [wBGPalette]                          ; $5E4E: $FA $97 $DB
     cp   $E4                                      ; $5E51: $FE $E4
-    jr   nz, jr_018_5E58                          ; $5E53: $20 $03
+    jr   nz, .jr_5E58                             ; $5E53: $20 $03
 
     jp   IncrementEntityState                     ; $5E55: $C3 $12 $3B
 
-jr_018_5E58:
+.jr_5E58:
     jp_open_dialog $0E6                           ; $5E58
 
 func_018_5E5D::
@@ -100,18 +100,18 @@ ENDC
     ld   a, [wHasDungeonStoneSlab]                ; $5E97: $FA $CE $DB
     and  a                                        ; $5E9A: $A7
     ld   a, $10                                   ; $5E9B: $3E $10
-    jr   nz, jr_018_5EA2                          ; $5E9D: $20 $03
+    jr   nz, .jr_5EA2                             ; $5E9D: $20 $03
 
     jp   OpenDialogInTable1                       ; $5E9F: $C3 $73 $23
 
-jr_018_5EA2:
+.jr_5EA2:
     ldh  a, [hMapId]                              ; $5EA2: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $5EA4: $FE $FF
-    jr   nz, jr_018_5EAD                          ; $5EA6: $20 $05
+    jr   nz, .jr_5EAD                             ; $5EA6: $20 $05
 
     jp_open_dialog $263                           ; $5EA8
 
-jr_018_5EAD:
+.jr_5EAD:
     ld   a, $18                                   ; $5EAD: $3E $18
     call func_036_4A4C_trampoline                 ; $5EAF: $CD $EA $0A
     ldh  a, [hMultiPurpose0]                      ; $5EB2: $F0 $D7

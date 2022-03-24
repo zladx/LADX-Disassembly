@@ -251,13 +251,13 @@ func_007_6606::
     inc  a                                        ; $661E: $3C
     ld   [hl], a                                  ; $661F: $77
     cp   $04                                      ; $6620: $FE $04
-    jr   nz, jr_007_662A                          ; $6622: $20 $06
+    jr   nz, .jr_662A                             ; $6622: $20 $06
 
     ld   [hl], b                                  ; $6624: $70
     call func_007_7E7D                            ; $6625: $CD $7D $7E
     jr   jr_007_6630                              ; $6628: $18 $06
 
-jr_007_662A:
+.jr_662A:
     call GetRandomByte                            ; $662A: $CD $0D $28
     and  $03                                      ; $662D: $E6 $03
     ld   e, a                                     ; $662F: $5F
@@ -284,13 +284,13 @@ func_007_6649::
     call label_3B70                               ; $6649: $CD $70 $3B
     call func_007_66F2                            ; $664C: $CD $F2 $66
     call GetEntityTransitionCountdown             ; $664F: $CD $05 $0C
-    jr   nz, jr_007_665A                          ; $6652: $20 $06
+    jr   nz, .jr_665A                             ; $6652: $20 $06
 
     ld   [hl], $20                                ; $6654: $36 $20
     call IncrementEntityState                     ; $6656: $CD $12 $3B
     ld   [hl], b                                  ; $6659: $70
 
-jr_007_665A:
+.jr_665A:
     call UpdateEntityPosWithSpeed_07              ; $665A: $CD $0A $7E
     call label_3B23                               ; $665D: $CD $23 $3B
 
@@ -308,7 +308,7 @@ func_007_666B::
     add  hl, bc                                   ; $666E: $09
     ld   [hl], $C2                                ; $666F: $36 $C2
     call GetEntityTransitionCountdown             ; $6671: $CD $05 $0C
-    jr   nz, jr_007_668E                          ; $6674: $20 $18
+    jr   nz, .jr_668E                             ; $6674: $20 $18
 
     ld   hl, wEntitiesDroppedItemTable            ; $6676: $21 $E0 $C4
     add  hl, bc                                   ; $6679: $09
@@ -323,7 +323,7 @@ func_007_666B::
     add  hl, bc                                   ; $668B: $09
     ld   [hl], $04                                ; $668C: $36 $04
 
-jr_007_668E:
+.jr_668E:
     ld   a, $02                                   ; $668E: $3E $02
     jp   SetEntitySpriteVariant                   ; $6690: $C3 $0C $3B
 
@@ -343,11 +343,11 @@ func_007_66A6::
     call func_007_7E5D                            ; $66A6: $CD $5D $7E
     ld   a, $08                                   ; $66A9: $3E $08
     dec  e                                        ; $66AB: $1D
-    jr   nz, jr_007_66B0                          ; $66AC: $20 $02
+    jr   nz, .jr_66B0                             ; $66AC: $20 $02
 
     ld   a, $F8                                   ; $66AE: $3E $F8
 
-jr_007_66B0:
+.jr_66B0:
     ld   hl, wEntitiesSpeedXTable                 ; $66B0: $21 $40 $C2
     add  hl, bc                                   ; $66B3: $09
     ld   [hl], a                                  ; $66B4: $77
@@ -363,7 +363,7 @@ func_007_66B8::
     add  hl, bc                                   ; $66C6: $09
     ld   a, [hl]                                  ; $66C7: $7E
     and  $03                                      ; $66C8: $E6 $03
-    jr   z, jr_007_66D4                           ; $66CA: $28 $08
+    jr   z, .jr_66D4                              ; $66CA: $28 $08
 
     ld   hl, wEntitiesSpeedXTable                 ; $66CC: $21 $40 $C2
     add  hl, bc                                   ; $66CF: $09
@@ -372,12 +372,12 @@ func_007_66B8::
     inc  a                                        ; $66D2: $3C
     ld   [hl], a                                  ; $66D3: $77
 
-jr_007_66D4:
+.jr_66D4:
     ld   hl, wEntitiesCollisionsTable             ; $66D4: $21 $A0 $C2
     add  hl, bc                                   ; $66D7: $09
     ld   a, [hl]                                  ; $66D8: $7E
     and  $08                                      ; $66D9: $E6 $08
-    jr   z, jr_007_66EE                           ; $66DB: $28 $11
+    jr   z, .jr_66EE                              ; $66DB: $28 $11
 
     ld   hl, wEntitiesPosYTable                   ; $66DD: $21 $10 $C2
     add  hl, bc                                   ; $66E0: $09
@@ -389,7 +389,7 @@ jr_007_66D4:
     ld   [hl], b                                  ; $66EA: $70
     jp   label_007_6660                           ; $66EB: $C3 $60 $66
 
-jr_007_66EE:
+.jr_66EE:
     xor  a                                        ; $66EE: $AF
     jp   SetEntitySpriteVariant                   ; $66EF: $C3 $0C $3B
 

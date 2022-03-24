@@ -6,17 +6,17 @@ MovingBlockMoverEntityHandler::
     sub  [hl]                                     ; $53D9: $96
     add  $04                                      ; $53DA: $C6 $04
     cp   $08                                      ; $53DC: $FE $08
-    jr   nc, jr_018_53ED                          ; $53DE: $30 $0D
+    jr   nc, .jr_53ED                             ; $53DE: $30 $0D
 
     ld   hl, hLinkPositionY                       ; $53E0: $21 $99 $FF
     ldh  a, [hActiveEntityVisualPosY]             ; $53E3: $F0 $EC
     add  $04                                      ; $53E5: $C6 $04
     sub  [hl]                                     ; $53E7: $96
-    jr   c, jr_018_53ED                           ; $53E8: $38 $03
+    jr   c, .jr_53ED                              ; $53E8: $38 $03
 
     call func_018_7D3B                            ; $53EA: $CD $3B $7D
 
-jr_018_53ED:
+.jr_53ED:
     ld   hl, hLinkPositionX                       ; $53ED: $21 $98 $FF
     ldh  a, [hActiveEntityPosX]                   ; $53F0: $F0 $EE
     sub  [hl]                                     ; $53F2: $96
@@ -34,14 +34,14 @@ jr_018_53ED:
     ld   e, $20                                   ; $5405: $1E $20
     ld   a, [wBButtonSlot]                        ; $5407: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $540A: $FE $03
-    jr   z, jr_018_5417                           ; $540C: $28 $09
+    jr   z, .jr_5417                              ; $540C: $28 $09
 
     ld   e, $10                                   ; $540E: $1E $10
     ld   a, [wAButtonSlot]                        ; $5410: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $5413: $FE $03
     jr   nz, jr_018_5466                          ; $5415: $20 $4F
 
-jr_018_5417:
+.jr_5417:
 IF __PATCH_0__
     ld   a, [wC3CF]
     and  a
@@ -101,7 +101,7 @@ jr_018_545F:
 jr_018_5466:
     ldh  a, [hActiveEntityVisualPosY]             ; $5466: $F0 $EC
     cp   $1B                                      ; $5468: $FE $1B
-    jr   c, jr_018_5479                           ; $546A: $38 $0D
+    jr   c, .jr_5479                              ; $546A: $38 $0D
 
     ld   hl, wEntitiesSpeedYTable                 ; $546C: $21 $50 $C2
     add  hl, bc                                   ; $546F: $09
@@ -113,7 +113,7 @@ IF !__PATCH_0__
     ldh  [hMovingBlockMoverState], a              ; $5477: $E0 $BA
 ENDC
 
-jr_018_5479:
+.jr_5479:
 IF __PATCH_0__
     ldh  a, [hActiveEntityVisualPosY]
     cp   $1a
@@ -144,11 +144,11 @@ MovingBlockMover2SpriteVariants::
 func_018_548A::
     ldh  a, [hMapId]                              ; $548A: $F0 $F7
     cp   MAP_BOTTLE_GROTTO                        ; $548C: $FE $01
-    jr   nz, jr_018_5492                          ; $548E: $20 $02
+    jr   nz, .jr_5492                             ; $548E: $20 $02
 
     ldh  [hActiveEntitySpriteVariant], a          ; $5490: $E0 $F1
 
-jr_018_5492:
+.jr_5492:
     ld   de, MovingBlockMover1SpriteVariants      ; $5492: $11 $7A $54
     call RenderActiveEntitySpritesPair            ; $5495: $CD $C0 $3B
     ld   hl, wEntitiesPrivateState2Table          ; $5498: $21 $C0 $C2
@@ -186,7 +186,7 @@ label_018_54BD:
     cp   $40                                      ; $54CE: $FE $40
     jr   c, jr_018_54DF                           ; $54D0: $38 $0D
 
-    jr   nz, jr_018_54DE                          ; $54D2: $20 $0A
+    jr   nz, .jr_54DE                             ; $54D2: $20 $0A
 
     ld   hl, wEntitiesPosYTable                   ; $54D4: $21 $10 $C2
     add  hl, bc                                   ; $54D7: $09
@@ -195,7 +195,7 @@ label_018_54BD:
     ld   [hl], a                                  ; $54DB: $77
     jr   jr_018_54DF                              ; $54DC: $18 $01
 
-jr_018_54DE:
+.jr_54DE:
     dec  e                                        ; $54DE: $1D
 
 jr_018_54DF:
@@ -204,11 +204,11 @@ jr_018_54DF:
     call GetEntityTransitionCountdown             ; $54E3: $CD $05 $0C
     ld   e, $FE                                   ; $54E6: $1E $FE
     and  $20                                      ; $54E8: $E6 $20
-    jr   z, jr_018_54EE                           ; $54EA: $28 $02
+    jr   z, .jr_54EE                              ; $54EA: $28 $02
 
     ld   e, $FC                                   ; $54EC: $1E $FC
 
-jr_018_54EE:
+.jr_54EE:
     ld   hl, wEntitiesSpeedYTable                 ; $54EE: $21 $50 $C2
     add  hl, bc                                   ; $54F1: $09
     ld   [hl], e                                  ; $54F2: $73

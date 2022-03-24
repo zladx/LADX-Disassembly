@@ -2911,12 +2911,12 @@ func_01F_5585::
 
     call IncrementValueAtBC                       ; $5589: $CD $75 $7A
     cp   $02                                      ; $558C: $FE $02
-    jr   z, jr_01F_5596                           ; $558E: $28 $06
+    jr   z, .jr_5596                              ; $558E: $28 $06
 
     ld   hl, Data_01F_55AA                        ; $5590: $21 $AA $55
     jp   WriteChannel3FrequencyAndDE              ; $5593: $C3 $7E $63
 
-jr_01F_5596:
+.jr_5596:
     call func_01F_7AA6                            ; $5596: $CD $A6 $7A
     jp   z, label_01F_632D                        ; $5599: $CA $2D $63
 
@@ -3139,7 +3139,7 @@ func_01F_5732::
 func_01F_5740::
     call DecrementValueAtDE                       ; $5740: $CD $71 $7A
 
-jr_01F_5743:
+.jr_5743:
     ret  nz                                       ; $5743: $C0
 
     call IncrementValueAtBC                       ; $5744: $CD $75 $7A
@@ -3351,7 +3351,7 @@ func_01F_58AF::
     ld   hl, Data_01F_58C4                        ; $58BB: $21 $C4 $58
     call GetHandlerAddressInTable                 ; $58BE: $CD $64 $7A
 
-jr_01F_58C1:
+.jr_58C1:
     jp   label_01F_5751                           ; $58C1: $C3 $51 $57
 
 Data_01F_58C4::
@@ -3450,13 +3450,13 @@ jr_01F_5967:
     jp   z, label_01F_6327                        ; $596A: $CA $27 $63
 
     cp   $02                                      ; $596D: $FE $02
-    jr   z, jr_01F_5976                           ; $596F: $28 $05
+    jr   z, .jr_5976                              ; $596F: $28 $05
 
     ld   a, $01                                   ; $5971: $3E $01
     ld   [bc], a                                  ; $5973: $02
     jr   jr_01F_5961                              ; $5974: $18 $EB
 
-jr_01F_5976:
+.jr_5976:
     xor  a                                        ; $5976: $AF
     ld   [bc], a                                  ; $5977: $02
     ld   a, $60                                   ; $5978: $3E $60
@@ -3491,13 +3491,13 @@ jr_01F_59B7:
     jp   z, label_01F_6327                        ; $59BA: $CA $27 $63
 
     cp   $08                                      ; $59BD: $FE $08
-    jr   z, jr_01F_59C6                           ; $59BF: $28 $05
+    jr   z, .jr_59C6                              ; $59BF: $28 $05
 
     ld   a, $01                                   ; $59C1: $3E $01
     ld   [bc], a                                  ; $59C3: $02
     jr   jr_01F_59B1                              ; $59C4: $18 $EB
 
-jr_01F_59C6:
+.jr_59C6:
     xor  a                                        ; $59C6: $AF
     ld   [bc], a                                  ; $59C7: $02
     ld   hl, Data_01F_59DB                        ; $59C8: $21 $DB $59
@@ -3572,7 +3572,7 @@ func_01F_5A44::
     ld   a, $02                                   ; $5A44: $3E $02
     ld   [wD3BE], a                               ; $5A46: $EA $BE $D3
 
-jr_01F_5A49:
+.jr_5A49:
     call func_01F_6365                            ; $5A49: $CD $65 $63
     ld   hl, Data_01F_5B5B                        ; $5A4C: $21 $5B $5B
     call func_01F_7ABD                            ; $5A4F: $CD $BD $7A
@@ -3586,12 +3586,12 @@ func_01F_5A55::
     ld   [de], a                                  ; $5A5B: $12
     call IncrementValueAtBC                       ; $5A5C: $CD $75 $7A
     cp   $71                                      ; $5A5F: $FE $71
-    jr   z, jr_01F_5A69                           ; $5A61: $28 $06
+    jr   z, .jr_5A69                              ; $5A61: $28 $06
 
     ld   hl, Data_01F_5A7B                        ; $5A63: $21 $7B $5A
     jp   label_01F_7AEB                           ; $5A66: $C3 $EB $7A
 
-jr_01F_5A69:
+.jr_5A69:
     call func_01F_7AA6                            ; $5A69: $CD $A6 $7A
     jp   z, label_01F_6327                        ; $5A6C: $CA $27 $63
 
@@ -3634,12 +3634,12 @@ func_01F_5B67::
 func_01F_5B78::
     call IncrementValueAtBC                       ; $5B78: $CD $75 $7A
     cp   $03                                      ; $5B7B: $FE $03
-    jr   z, jr_01F_5B85                           ; $5B7D: $28 $06
+    jr   z, .jr_5B85                              ; $5B7D: $28 $06
 
     ld   hl, Data_01F_5BAE                        ; $5B7F: $21 $AE $5B
     jp   label_01F_7AEB                           ; $5B82: $C3 $EB $7A
 
-jr_01F_5B85:
+.jr_5B85:
     call func_01F_7AA6                            ; $5B85: $CD $A6 $7A
     jp   z, label_01F_6327                        ; $5B88: $CA $27 $63
 
@@ -3701,13 +3701,13 @@ jr_01F_5BE2:
     jp   z, label_01F_6327                        ; $5BE5: $CA $27 $63
 
     cp   $06                                      ; $5BE8: $FE $06
-    jr   z, jr_01F_5BF1                           ; $5BEA: $28 $05
+    jr   z, .jr_5BF1                              ; $5BEA: $28 $05
 
     ld   a, $01                                   ; $5BEC: $3E $01
     ld   [bc], a                                  ; $5BEE: $02
     jr   jr_01F_5BDC                              ; $5BEF: $18 $EB
 
-jr_01F_5BF1:
+.jr_5BF1:
     xor  a                                        ; $5BF1: $AF
     ld   [bc], a                                  ; $5BF2: $02
     ld   hl, Data_01F_5C06                        ; $5BF3: $21 $06 $5C
@@ -3800,7 +3800,7 @@ func_01F_5C80::
     cp   $14                                      ; $5C83: $FE $14
     jp   z, label_01F_6385                        ; $5C85: $CA $85 $63
 
-jr_01F_5C88:
+.jr_5C88:
     ld   a, $04                                   ; $5C88: $3E $04
     ld   [wD3BE], a                               ; $5C8A: $EA $BE $D3
     call func_01F_636A                            ; $5C8D: $CD $6A $63
@@ -3968,7 +3968,7 @@ jr_01F_5DC4:
     call WriteChannel4AndDE                       ; $5DC7: $CD $8B $7A
     ld   a, $20                                   ; $5DCA: $3E $20
 
-jr_01F_5DCC:
+.jr_5DCC:
     jr   jr_01F_5DBD                              ; $5DCC: $18 $EF
 
 jr_01F_5DCE:
@@ -3976,7 +3976,7 @@ jr_01F_5DCE:
     jr   z, jr_01F_5DFB                           ; $5DD1: $28 $28
 
     cp   $01                                      ; $5DD3: $FE $01
-    jr   z, jr_01F_5DE9                           ; $5DD5: $28 $12
+    jr   z, .jr_5DE9                              ; $5DD5: $28 $12
 
     ld   a, $40                                   ; $5DD7: $3E $40
     ld   [bc], a                                  ; $5DD9: $02
@@ -3986,7 +3986,7 @@ jr_01F_5DCE:
     call func_01F_7ABD                            ; $5DE3: $CD $BD $7A
     jp   WriteChannel3AndDE                       ; $5DE6: $C3 $85 $7A
 
-jr_01F_5DE9:
+.jr_5DE9:
     ld   a, $40                                   ; $5DE9: $3E $40
     ld   [bc], a                                  ; $5DEB: $02
     ld   hl, Data_01F_5EC0                        ; $5DEC: $21 $C0 $5E
@@ -4058,13 +4058,13 @@ jr_01F_5EF5:
     jp   z, label_01F_6327                        ; $5EF8: $CA $27 $63
 
     cp   $07                                      ; $5EFB: $FE $07
-    jr   z, jr_01F_5F04                           ; $5EFD: $28 $05
+    jr   z, .jr_5F04                              ; $5EFD: $28 $05
 
     ld   a, $01                                   ; $5EFF: $3E $01
     ld   [bc], a                                  ; $5F01: $02
     jr   jr_01F_5EEF                              ; $5F02: $18 $EB
 
-jr_01F_5F04:
+.jr_5F04:
     xor  a                                        ; $5F04: $AF
     ld   [bc], a                                  ; $5F05: $02
     ld   hl, Data_01F_5F13                        ; $5F06: $21 $13 $5F
@@ -4227,12 +4227,12 @@ func_01F_601C::
 func_01F_602D::
     call IncrementValueAtBC                       ; $602D: $CD $75 $7A
     cp   $07                                      ; $6030: $FE $07
-    jr   z, jr_01F_603A                           ; $6032: $28 $06
+    jr   z, .jr_603A                              ; $6032: $28 $06
 
     ld   hl, Data_01F_6054                        ; $6034: $21 $54 $60
     jp   label_01F_7AEB                           ; $6037: $C3 $EB $7A
 
-jr_01F_603A:
+.jr_603A:
     call func_01F_7AA6                            ; $603A: $CD $A6 $7A
     jp   z, label_01F_6327                        ; $603D: $CA $27 $63
 
@@ -4376,12 +4376,12 @@ jr_01F_6115:
     ld   [wD3BE], a                               ; $6123: $EA $BE $D3
     ld   a, [wD3DD]                               ; $6126: $FA $DD $D3
     cp   $0B                                      ; $6129: $FE $0B
-    jr   nc, jr_01F_6131                          ; $612B: $30 $04
+    jr   nc, .jr_6131                             ; $612B: $30 $04
 
     ld   a, $02                                   ; $612D: $3E $02
     jr   jr_01F_6103                              ; $612F: $18 $D2
 
-jr_01F_6131:
+.jr_6131:
     ld   a, $04                                   ; $6131: $3E $04
     jr   jr_01F_6103                              ; $6133: $18 $CE
 
@@ -4895,7 +4895,7 @@ PlayActiveNoiseSfx::
     ld   hl, wActiveNoiseSfx                      ; $64EC: $21 $78 $D3
     ld   a, [hl]                                  ; $64EF: $7E
     and  a                                        ; $64F0: $A7
-    jr   z, jr_01F_6500                           ; $64F1: $28 $0D
+    jr   z, .jr_6500                              ; $64F1: $28 $0D
 
     ld   a, [wD3C9]                               ; $64F3: $FA $C9 $D3
     and  a                                        ; $64F6: $A7
@@ -4905,7 +4905,7 @@ PlayActiveNoiseSfx::
     ld   hl, NoiseSfxHandlersTable1               ; $64FB: $21 $EC $63
     jr   jr_01F_6508                              ; $64FE: $18 $08
 
-jr_01F_6500:
+.jr_6500:
     inc  hl                                       ; $6500: $23
     ld   a, [hl]                                  ; $6501: $7E
     and  a                                        ; $6502: $A7
@@ -4916,7 +4916,7 @@ jr_01F_6500:
 jr_01F_6508:
     call GetHandlerAddressInTable                 ; $6508: $CD $64 $7A
 
-jr_01F_650B:
+.jr_650B:
     ld   de, wD393                                ; $650B: $11 $93 $D3
     ld   bc, wD398                                ; $650E: $01 $98 $D3
     jp   hl                                       ; $6511: $E9
@@ -5089,7 +5089,7 @@ func_01F_661F::
     cp   $02                                      ; $6622: $FE $02
     jp   z, label_01F_7A2C                        ; $6624: $CA $2C $7A
 
-jr_01F_6627:
+.jr_6627:
     cp   $03                                      ; $6627: $FE $03
     jp   z, label_01F_7A2C                        ; $6629: $CA $2C $7A
 
@@ -5500,13 +5500,13 @@ func_01F_689C::
 
     call IncrementValueAtBC                       ; $68A0: $CD $75 $7A
     cp   $06                                      ; $68A3: $FE $06
-    jr   z, jr_01F_68B0                           ; $68A5: $28 $09
+    jr   z, .jr_68B0                              ; $68A5: $28 $09
 
     ld   hl, Data_01F_68C8                        ; $68A7: $21 $C8 $68
     call GetHandlerAddressInTable                 ; $68AA: $CD $64 $7A
     jp   func_01F_7A25                            ; $68AD: $C3 $25 $7A
 
-jr_01F_68B0:
+.jr_68B0:
     call func_01F_7AAC                            ; $68B0: $CD $AC $7A
     jp   z, func_01F_7A01                         ; $68B3: $CA $01 $7A
 
@@ -5627,11 +5627,11 @@ func_01F_6945::
     call GetHandlerAddressInTable                 ; $6954: $CD $64 $7A
     ld   a, [wD398]                               ; $6957: $FA $98 $D3
     cp   $11                                      ; $695A: $FE $11
-    jr   nc, jr_01F_6961                          ; $695C: $30 $03
+    jr   nc, .jr_6961                             ; $695C: $30 $03
 
     jp   WriteChannel4AndDE                       ; $695E: $C3 $8B $7A
 
-jr_01F_6961:
+.jr_6961:
     inc  hl                                       ; $6961: $23
     inc  hl                                       ; $6962: $23
     ld   a, $20                                   ; $6963: $3E $20
@@ -6076,7 +6076,7 @@ func_01F_6C13::
     ld   [wD3BF], a                               ; $6C15: $EA $BF $D3
     ld   hl, Data_01F_6C41                        ; $6C18: $21 $41 $6C
 
-jr_01F_6C1B:
+.jr_6C1B:
     jp   label_01F_79E9                           ; $6C1B: $C3 $E9 $79
 
 func_01F_6C1E::
@@ -6137,13 +6137,13 @@ jr_01F_6C6B:
     jp   z, func_01F_7A01                         ; $6C6E: $CA $01 $7A
 
     cp   $18                                      ; $6C71: $FE $18
-    jr   z, jr_01F_6C7A                           ; $6C73: $28 $05
+    jr   z, .jr_6C7A                              ; $6C73: $28 $05
 
     ld   a, $01                                   ; $6C75: $3E $01
     ld   [bc], a                                  ; $6C77: $02
     jr   jr_01F_6C62                              ; $6C78: $18 $E8
 
-jr_01F_6C7A:
+.jr_6C7A:
     ld   a, $01                                   ; $6C7A: $3E $01
     ld   [bc], a                                  ; $6C7C: $02
     ld   hl, Data_01F_6C8C                        ; $6C7D: $21 $8C $6C
@@ -6176,14 +6176,14 @@ func_01F_6C97::
 func_01F_6CA4::
     ld   a, [wC50E]                               ; $6CA4: $FA $0E $C5
     and  a                                        ; $6CA7: $A7
-    jr   z, jr_01F_6CB1                           ; $6CA8: $28 $07
+    jr   z, .jr_6CB1                              ; $6CA8: $28 $07
 
     call DecrementValueAtDE                       ; $6CAA: $CD $71 $7A
     ret  nz                                       ; $6CAD: $C0
 
     jp   func_01F_7A07                            ; $6CAE: $C3 $07 $7A
 
-jr_01F_6CB1:
+.jr_6CB1:
     ld   hl, Data_01F_6CBF                        ; $6CB1: $21 $BF $6C
     call WriteChannel4AndDE                       ; $6CB4: $CD $8B $7A
     jp   func_01F_7A07                            ; $6CB7: $C3 $07 $7A
@@ -6215,13 +6215,13 @@ jr_01F_6CDF:
     jp   z, func_01F_7A07                         ; $6CE2: $CA $07 $7A
 
     cp   $0E                                      ; $6CE5: $FE $0E
-    jr   z, jr_01F_6CEE                           ; $6CE7: $28 $05
+    jr   z, .jr_6CEE                              ; $6CE7: $28 $05
 
     ld   a, $01                                   ; $6CE9: $3E $01
     ld   [bc], a                                  ; $6CEB: $02
     jr   jr_01F_6CD6                              ; $6CEC: $18 $E8
 
-jr_01F_6CEE:
+.jr_6CEE:
     ld   a, $01                                   ; $6CEE: $3E $01
     ld   [bc], a                                  ; $6CF0: $02
     ld   hl, Data_01F_6D00                        ; $6CF1: $21 $00 $6D
@@ -6469,7 +6469,7 @@ func_01F_6E59::
 
     call IncrementValueAtBC                       ; $6E5D: $CD $75 $7A
 
-jr_01F_6E60:
+.jr_6E60:
     cp   $03                                      ; $6E60: $FE $03
     jr   z, jr_01F_6E6D                           ; $6E62: $28 $09
 
@@ -6673,7 +6673,7 @@ Data_01F_6F75::
 func_01F_6F78::
     ld   a, $08                                   ; $6F78: $3E $08
 
-jr_01F_6F7A:
+.jr_6F7A:
     ld   [wD3BF], a                               ; $6F7A: $EA $BF $D3
     ld   hl, Data_01F_6FBE                        ; $6F7D: $21 $BE $6F
     jp   func_01F_79E4                            ; $6F80: $C3 $E4 $79
@@ -6684,7 +6684,7 @@ func_01F_6F83::
 
     call IncrementValueAtBC                       ; $6F87: $CD $75 $7A
 
-jr_01F_6F8A:
+.jr_6F8A:
     cp   $0A                                      ; $6F8A: $FE $0A
     jr   z, jr_01F_6F9F                           ; $6F8C: $28 $11
 
@@ -7514,7 +7514,7 @@ func_01F_748B::
 func_01F_7496::
     call DecrementValueAtDE                       ; $7496: $CD $71 $7A
 
-jr_01F_7499:
+.jr_7499:
     ret  nz                                       ; $7499: $C0
 
     call IncrementValueAtBC                       ; $749A: $CD $75 $7A
@@ -7920,7 +7920,7 @@ func_01F_7730::
 
     call IncrementValueAtBC                       ; $7734: $CD $75 $7A
     cp   $03                                      ; $7737: $FE $03
-    jr   z, jr_01F_774C                           ; $7739: $28 $11
+    jr   z, .jr_774C                              ; $7739: $28 $11
 
     ld   hl, Data_01F_775A                        ; $773B: $21 $5A $77
     call GetHandlerAddressInTable                 ; $773E: $CD $64 $7A
@@ -7930,14 +7930,14 @@ func_01F_7730::
 
     jp   WriteChannel4AndDE                       ; $7749: $C3 $8B $7A
 
-jr_01F_774C:
+.jr_774C:
     xor  a                                        ; $774C: $AF
     ldh  [rNR10], a                               ; $774D: $E0 $10
 
-jr_01F_774F:
+.jr_774F:
     ld   [wD3C6], a                               ; $774F: $EA $C6 $D3
 
-jr_01F_7752:
+.jr_7752:
     ld   hl, wD31F                                ; $7752: $21 $1F $D3
     res  7, [hl]                                  ; $7755: $CB $BE
     jp   func_01F_7A07                            ; $7757: $C3 $07 $7A

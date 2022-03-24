@@ -116,7 +116,7 @@ PairoddState1Handler::
     jp   nc, label_3B39                           ; $5E7B: $D2 $39 $3B
 
     and  a                                        ; $5E7E: $A7
-    jr   nz, jr_004_5EA4                          ; $5E7F: $20 $23
+    jr   nz, .jr_5EA4                             ; $5E7F: $20 $23
 
     ld   [hl], $40                                ; $5E81: $36 $40
     call IncrementEntityState                     ; $5E83: $CD $12 $3B
@@ -140,7 +140,7 @@ PairoddState1Handler::
     ld   [hl], a                                  ; $5EA2: $77
     ret                                           ; $5EA3: $C9
 
-jr_004_5EA4:
+.jr_5EA4:
     rra                                           ; $5EA4: $1F
     rra                                           ; $5EA5: $1F
     rra                                           ; $5EA6: $1F

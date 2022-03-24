@@ -57,7 +57,7 @@ func_01B_4037::
     ld   hl, wActiveNoiseSfx                      ; $403A: $21 $78 $D3
     ld   a, [hl+]                                 ; $403D: $2A
     cp   $01                                      ; $403E: $FE $01
-    jr   z, jr_01B_4048                           ; $4040: $28 $06
+    jr   z, .jr_4048                              ; $4040: $28 $06
 
     ld   a, [hl]                                  ; $4042: $7E
     cp   $01                                      ; $4043: $FE $01
@@ -65,7 +65,7 @@ func_01B_4037::
 
     ret                                           ; $4047: $C9
 
-jr_01B_4048:
+.jr_4048:
     ld   a, $01                                   ; $4048: $3E $01
     ld   [wD379], a                               ; $404A: $EA $79 $D3
     ld   hl, Data_01B_4060                        ; $404D: $21 $60 $40
@@ -388,7 +388,7 @@ label_01B_42D5:
 
 .loop_42DB:
     dec  a                                        ; $42DB: $3D
-    jr   z, jr_01B_42E6                           ; $42DC: $28 $08
+    jr   z, .jr_42E6                              ; $42DC: $28 $08
 
     inc  hl                                       ; $42DE: $23
     inc  hl                                       ; $42DF: $23
@@ -398,7 +398,7 @@ label_01B_42D5:
     inc  hl                                       ; $42E3: $23
     jr   .loop_42DB                               ; $42E4: $18 $F5
 
-jr_01B_42E6:
+.jr_42E6:
     ld   bc, wD355                                ; $42E6: $01 $55 $D3
     ld   a, [hl+]                                 ; $42E9: $2A
     ld   [bc], a                                  ; $42EA: $02
@@ -447,19 +447,19 @@ func_01B_4303::
     ld   c, l                                     ; $4317: $4D
     ld   b, h                                     ; $4318: $44
     and  a                                        ; $4319: $A7
-    jr   z, jr_01B_4327                           ; $431A: $28 $0B
+    jr   z, .jr_4327                              ; $431A: $28 $0B
 
     inc  c                                        ; $431C: $0C
     cp   $01                                      ; $431D: $FE $01
-    jr   z, jr_01B_4327                           ; $431F: $28 $06
+    jr   z, .jr_4327                              ; $431F: $28 $06
 
     inc  c                                        ; $4321: $0C
     cp   $02                                      ; $4322: $FE $02
-    jr   z, jr_01B_4327                           ; $4324: $28 $01
+    jr   z, .jr_4327                              ; $4324: $28 $01
 
     inc  c                                        ; $4326: $0C
 
-jr_01B_4327:
+.jr_4327:
     ld   a, [bc]                                  ; $4327: $0A
     ldh  [rNR51], a                               ; $4328: $E0 $25
     ret                                           ; $432A: $C9
@@ -498,29 +498,29 @@ Copy2Bytes_1B::
 LoadMusicData_1B::
     ld   a, [wD379]                               ; $433C: $FA $79 $D3
     cp   $05                                      ; $433F: $FE $05
-    jr   z, jr_01B_435E                           ; $4341: $28 $1B
+    jr   z, .jr_435E                              ; $4341: $28 $1B
 
     cp   $0C                                      ; $4343: $FE $0C
-    jr   z, jr_01B_435E                           ; $4345: $28 $17
+    jr   z, .jr_435E                              ; $4345: $28 $17
 
     cp   $1A                                      ; $4347: $FE $1A
-    jr   z, jr_01B_435E                           ; $4349: $28 $13
+    jr   z, .jr_435E                              ; $4349: $28 $13
 
     cp   $24                                      ; $434B: $FE $24
-    jr   z, jr_01B_435E                           ; $434D: $28 $0F
+    jr   z, .jr_435E                              ; $434D: $28 $0F
 
     cp   $2A                                      ; $434F: $FE $2A
-    jr   z, jr_01B_435E                           ; $4351: $28 $0B
+    jr   z, .jr_435E                              ; $4351: $28 $0B
 
     cp   $2E                                      ; $4353: $FE $2E
-    jr   z, jr_01B_435E                           ; $4355: $28 $07
+    jr   z, .jr_435E                              ; $4355: $28 $07
 
     cp   $3F                                      ; $4357: $FE $3F
-    jr   z, jr_01B_435E                           ; $4359: $28 $03
+    jr   z, .jr_435E                              ; $4359: $28 $03
 
     call StopNoiseChannel_1B                      ; $435B: $CD $F3 $40
 
-jr_01B_435E:
+.jr_435E:
     call StopSquareAndWaveChannels_1B             ; $435E: $CD $57 $4E
     ld   de, wMusicTranspose                      ; $4361: $11 $00 $D3
     ld   b, $00                                   ; $4364: $06 $00
@@ -1350,28 +1350,28 @@ jr_01B_4762:
 func_01B_4787::
     ld   a, [wD31B]                               ; $4787: $FA $1B $D3
     and  a                                        ; $478A: $A7
-    jr   nz, jr_01B_47AE                          ; $478B: $20 $21
+    jr   nz, .jr_47AE                             ; $478B: $20 $21
 
     ld   a, [wD317]                               ; $478D: $FA $17 $D3
     and  a                                        ; $4790: $A7
-    jr   z, jr_01B_47AE                           ; $4791: $28 $1B
+    jr   z, .jr_47AE                              ; $4791: $28 $1B
 
     and  $0F                                      ; $4793: $E6 $0F
     ld   b, a                                     ; $4795: $47
     ld   hl, wD307                                ; $4796: $21 $07 $D3
     ld   a, [wD31E]                               ; $4799: $FA $1E $D3
     cp   [hl]                                     ; $479C: $BE
-    jr   nz, jr_01B_47AE                          ; $479D: $20 $0F
+    jr   nz, .jr_47AE                             ; $479D: $20 $0F
 
     ld   c, $12                                   ; $479F: $0E $12
     ld   de, wD31A                                ; $47A1: $11 $1A $D3
     ld   a, [wD31F]                               ; $47A4: $FA $1F $D3
     bit  7, a                                     ; $47A7: $CB $7F
-    jr   nz, jr_01B_47AE                          ; $47A9: $20 $03
+    jr   nz, .jr_47AE                             ; $47A9: $20 $03
 
     call func_01B_47D2                            ; $47AB: $CD $D2 $47
 
-jr_01B_47AE:
+.jr_47AE:
     ld   a, [wD320 + $0B]                         ; $47AE: $FA $2B $D3
     and  a                                        ; $47B1: $A7
     ret  nz                                       ; $47B2: $C0

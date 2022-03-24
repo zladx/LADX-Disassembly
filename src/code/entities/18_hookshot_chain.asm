@@ -30,12 +30,12 @@ HookshotChainEntityHandler::
     call ReturnIfNonInteractive_18                ; $7C0F: $CD $E8 $7D
     ldh  a, [hFrameCounter]                       ; $7C12: $F0 $E7
     and  $03                                      ; $7C14: $E6 $03
-    jr   nz, jr_018_7C1C                          ; $7C16: $20 $04
+    jr   nz, .jr_7C1C                             ; $7C16: $20 $04
 
     ld   a, $0B                                   ; $7C18: $3E $0B
     ldh  [hNoiseSfx], a                           ; $7C1A: $E0 $F4
 
-jr_018_7C1C:
+.jr_7C1C:
     ldh  a, [hActiveEntityState]                  ; $7C1C: $F0 $F0
     and  a                                        ; $7C1E: $A7
     jr   z, jr_018_7C39                           ; $7C1F: $28 $18
@@ -45,7 +45,7 @@ IF __PATCH_0__
     add  hl, bc
     ldh  a, [hLinkPositionX]
     cp   [hl]
-    jr   nz, jr_018_7C21
+    jr   nz, .jr_7C21
 
     ld   hl, wEntitiesPosYTable
     add  hl, bc
@@ -54,7 +54,7 @@ IF __PATCH_0__
     jr   z, jr_018_7C39
 ENDC
 
-jr_018_7C21:
+.jr_7C21:
     ld   a, $30                                   ; $7C21: $3E $30
     call GetVectorTowardsLink_trampoline          ; $7C23: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $7C26: $F0 $D7
@@ -111,11 +111,11 @@ jr_018_7C54:
 
     ld   e, $9E                                   ; $7C78: $1E $9E
     bit  7, a                                     ; $7C7A: $CB $7F
-    jr   nz, jr_018_7C80                          ; $7C7C: $20 $02
+    jr   nz, .jr_7C80                             ; $7C7C: $20 $02
 
     ld   e, $9F                                   ; $7C7E: $1E $9F
 
-jr_018_7C80:
+.jr_7C80:
     ldh  a, [hObjectUnderEntity]                  ; $7C80: $F0 $AF
     cp   e                                        ; $7C82: $BB
     jr   nz, ret_018_7CAE                         ; $7C83: $20 $29
@@ -135,11 +135,11 @@ jr_018_7C80:
     ldh  a, [hObjectUnderEntity]                  ; $7C9C: $F0 $AF
     cp   $9E                                      ; $7C9E: $FE $9E
     ld   a, $00                                   ; $7CA0: $3E $00
-    jr   z, jr_018_7CA5                           ; $7CA2: $28 $01
+    jr   z, .jr_7CA5                              ; $7CA2: $28 $01
 
     inc  a                                        ; $7CA4: $3C
 
-jr_018_7CA5:
+.jr_7CA5:
     ld   hl, wEntitiesDirectionTable              ; $7CA5: $21 $80 $C3
     add  hl, de                                   ; $7CA8: $19
     ld   [hl], a                                  ; $7CA9: $77
@@ -198,14 +198,14 @@ jr_018_7CF8:
     ld   hl, hFrameCounter                        ; $7CFA: $21 $E7 $FF
     xor  [hl]                                     ; $7CFD: $AE
     and  $01                                      ; $7CFE: $E6 $01
-    jr   nz, jr_018_7D09                          ; $7D00: $20 $07
+    jr   nz, .jr_7D09                             ; $7D00: $20 $07
 
     ldh  a, [hLinkPositionY]                      ; $7D02: $F0 $99
     ld   hl, hMultiPurpose1                       ; $7D04: $21 $D8 $FF
     add  [hl]                                     ; $7D07: $86
     ld   [de], a                                  ; $7D08: $12
 
-jr_018_7D09:
+.jr_7D09:
     inc  de                                       ; $7D09: $13
     ldh  a, [hLinkPositionX]                      ; $7D0A: $F0 $98
     ld   hl, hMultiPurpose0                       ; $7D0C: $21 $D7 $FF

@@ -13,11 +13,11 @@ ArmosKnightEntityHandler::
 
     ld   e, $02                                   ; $52F3: $1E $02
     cp   $04                                      ; $52F5: $FE $04
-    jr   nc, jr_006_52FB                          ; $52F7: $30 $02
+    jr   nc, .jr_52FB                             ; $52F7: $30 $02
 
     ld   e, $03                                   ; $52F9: $1E $03
 
-jr_006_52FB:
+.jr_52FB:
     ld   a, e                                     ; $52FB: $7B
     call SetEntitySpriteVariant                   ; $52FC: $CD $0C $3B
 
@@ -69,15 +69,15 @@ ArmosKnightPrivateState2Handler::
 
     ldh  a, [hActiveEntityType]                   ; $5347: $F0 $EB
     cp   ENTITY_HINOX                             ; $5349: $FE $89
-    jr   z, jr_006_5355                           ; $534B: $28 $08
+    jr   z, .jr_5355                              ; $534B: $28 $08
 
     cp   ENTITY_CUE_BALL                          ; $534D: $FE $8E
-    jr   z, jr_006_5355                           ; $534F: $28 $04
+    jr   z, .jr_5355                              ; $534F: $28 $04
 
     cp   ENTITY_SMASHER                           ; $5351: $FE $92
     jr   nz, jr_006_535A                          ; $5353: $20 $05
 
-jr_006_5355:
+.jr_5355:
     ldh  a, [hMapId]                              ; $5355: $F0 $F7
     cp   MAP_EAGLES_TOWER                         ; $5357: $FE $06
     ret  nc                                       ; $5359: $D0
@@ -106,23 +106,23 @@ jr_006_5361:
     ld   a, [hl]                                  ; $537A: $7E
     and  $80                                      ; $537B: $E6 $80
     ldh  [hMultiPurposeG], a                      ; $537D: $E0 $E8
-    jr   z, jr_006_5387                           ; $537F: $28 $06
+    jr   z, .jr_5387                              ; $537F: $28 $06
 
     ld   [hl], b                                  ; $5381: $70
     ld   hl, wEntitiesSpeedZTable                 ; $5382: $21 $20 $C3
     add  hl, bc                                   ; $5385: $09
     ld   [hl], b                                  ; $5386: $70
 
-jr_006_5387:
+.jr_5387:
     call GetEntityPrivateCountdown1               ; $5387: $CD $00 $0C
-    jr   z, jr_006_5394                           ; $538A: $28 $08
+    jr   z, .jr_5394                              ; $538A: $28 $08
 
     ld   a, $02                                   ; $538C: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $538E: $E0 $A1
     ld   a, LINK_ANIMATION_STATE_UNKNOWN_6A       ; $5390: $3E $6A
     ldh  [hLinkAnimationState], a                 ; $5392: $E0 $9D
 
-jr_006_5394:
+.jr_5394:
     ld   hl, wEntitiesHealthTable                 ; $5394: $21 $60 $C3
     add  hl, bc                                   ; $5397: $09
     ld   a, [hl]                                  ; $5398: $7E
@@ -136,7 +136,7 @@ jr_006_5394:
     jr   nc, label_006_5411                       ; $53A4: $30 $6B
 
     cp   $04                                      ; $53A6: $FE $04
-    jr   nc, jr_006_53D3                          ; $53A8: $30 $29
+    jr   nc, .jr_53D3                             ; $53A8: $30 $29
 
     ld   hl, wEntitiesInertiaTable                ; $53AA: $21 $D0 $C3
     add  hl, bc                                   ; $53AD: $09
@@ -163,7 +163,7 @@ jr_006_5394:
     sub  $10                                      ; $53CF: $D6 $10
     jr   jr_006_53F9                              ; $53D1: $18 $26
 
-jr_006_53D3:
+.jr_53D3:
     ld   hl, wEntitiesInertiaTable                ; $53D3: $21 $D0 $C3
     add  hl, bc                                   ; $53D6: $09
     ld   a, [hl]                                  ; $53D7: $7E
@@ -235,12 +235,12 @@ ret_006_5441:
 ArmosKnightState1Handler::
     call DecrementEntityIgnoreHitsCountdown       ; $5442: $CD $56 $0C
     call GetEntityTransitionCountdown             ; $5445: $CD $05 $0C
-    jr   nz, jr_006_544F                          ; $5448: $20 $05
+    jr   nz, .jr_544F                             ; $5448: $20 $05
 
     ld   [hl], $80                                ; $544A: $36 $80
     call IncrementEntityState                     ; $544C: $CD $12 $3B
 
-jr_006_544F:
+.jr_544F:
     rra                                           ; $544F: $1F
     rra                                           ; $5450: $1F
     and  $01                                      ; $5451: $E6 $01
@@ -249,7 +249,7 @@ jr_006_544F:
 ArmosKnightState2Handler::
     call DecrementEntityIgnoreHitsCountdown       ; $5456: $CD $56 $0C
     call GetEntityTransitionCountdown             ; $5459: $CD $05 $0C
-    jr   nz, jr_006_5476                          ; $545C: $20 $18
+    jr   nz, .jr_5476                             ; $545C: $20 $18
 
     ld   [hl], $50                                ; $545E: $36 $50
     call IncrementEntityState                     ; $5460: $CD $12 $3B
@@ -264,14 +264,14 @@ ArmosKnightState2Handler::
     res  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $5473: $CB $B6
     ret                                           ; $5475: $C9
 
-jr_006_5476:
+.jr_5476:
     ld   e, $08                                   ; $5476: $1E $08
     and  $04                                      ; $5478: $E6 $04
-    jr   z, jr_006_547E                           ; $547A: $28 $02
+    jr   z, .jr_547E                              ; $547A: $28 $02
 
     ld   e, $F8                                   ; $547C: $1E $F8
 
-jr_006_547E:
+.jr_547E:
     ld   hl, wEntitiesSpeedXTable                 ; $547E: $21 $40 $C2
     add  hl, bc                                   ; $5481: $09
     ld   [hl], e                                  ; $5482: $73
@@ -280,7 +280,7 @@ jr_006_547E:
 ArmosKnightState3Handler::
     call ApplyRecoilIfNeeded_06                   ; $5486: $CD $F7 $64
     call GetEntityTransitionCountdown             ; $5489: $CD $05 $0C
-    jr   nz, jr_006_549C                          ; $548C: $20 $0E
+    jr   nz, .jr_549C                             ; $548C: $20 $0E
 
     ld   hl, wEntitiesSpeedZTable                 ; $548E: $21 $20 $C3
     add  hl, bc                                   ; $5491: $09
@@ -290,7 +290,7 @@ ArmosKnightState3Handler::
     ldh  [hJingle], a                             ; $5499: $E0 $F2
     ret                                           ; $549B: $C9
 
-jr_006_549C:
+.jr_549C:
     ldh  a, [hMultiPurposeG]                      ; $549C: $F0 $E8
     and  a                                        ; $549E: $A7
     jr   z, jr_006_54BB                           ; $549F: $28 $1A
@@ -303,11 +303,11 @@ jr_006_549C:
     ld   a, [hl]                                  ; $54AB: $7E
     cp   $05                                      ; $54AC: $FE $05
     ld   a, $08                                   ; $54AE: $3E $08
-    jr   nc, jr_006_54B4                          ; $54B0: $30 $02
+    jr   nc, .jr_54B4                             ; $54B0: $30 $02
 
     ld   a, $0C                                   ; $54B2: $3E $0C
 
-jr_006_54B4:
+.jr_54B4:
     call ApplyVectorTowardsLink_trampoline        ; $54B4: $CD $AA $3B
     ld   a, JINGLE_BIG_BUMP                       ; $54B7: $3E $20
     ldh  [hJingle], a                             ; $54B9: $E0 $F2
@@ -321,26 +321,26 @@ ArmosKnightState4Handler::
     add  hl, bc                                   ; $54C4: $09
     ld   a, [hl]                                  ; $54C5: $7E
     and  $FE                                      ; $54C6: $E6 $FE
-    jr   nz, jr_006_54D5                          ; $54C8: $20 $0B
+    jr   nz, .jr_54D5                             ; $54C8: $20 $0B
 
     call GetEntityTransitionCountdown             ; $54CA: $CD $05 $0C
     ld   [hl], $10                                ; $54CD: $36 $10
     call ClearEntitySpeed                         ; $54CF: $CD $7F $3D
     call IncrementEntityState                     ; $54D2: $CD $12 $3B
 
-jr_006_54D5:
+.jr_54D5:
     jp   UpdateEntityPosWithSpeed_06              ; $54D5: $C3 $41 $65
 
 ArmosKnightState5Handler::
     call ApplyRecoilIfNeeded_06                   ; $54D8: $CD $F7 $64
     call GetEntityTransitionCountdown             ; $54DB: $CD $05 $0C
     ld   a, $00                                   ; $54DE: $3E $00
-    jr   nz, jr_006_54E7                          ; $54E0: $20 $05
+    jr   nz, .jr_54E7                             ; $54E0: $20 $05
 
     call IncrementEntityState                     ; $54E2: $CD $12 $3B
     ld   a, $B0                                   ; $54E5: $3E $B0
 
-jr_006_54E7:
+.jr_54E7:
     ld   hl, wEntitiesSpeedZTable                 ; $54E7: $21 $20 $C3
     add  hl, bc                                   ; $54EA: $09
     ld   [hl], a                                  ; $54EB: $77
@@ -362,12 +362,12 @@ ArmosKnightState6Handler::
     ld   [hl], $30                                ; $5505: $36 $30
     ld   a, [wIsLinkInTheAir]                     ; $5507: $FA $46 $C1
     and  a                                        ; $550A: $A7
-    jr   nz, jr_006_5512                          ; $550B: $20 $05
+    jr   nz, .jr_5512                             ; $550B: $20 $05
 
     call GetEntityPrivateCountdown1               ; $550D: $CD $00 $0C
     ld   [hl], $40                                ; $5510: $36 $40
 
-jr_006_5512:
+.jr_5512:
     jp   IncrementEntityState                     ; $5512: $C3 $12 $3B
 
 ArmosKnightState7Handler::
@@ -414,7 +414,7 @@ func_006_55B3::
     add  hl, bc                                   ; $55CF: $09
     ld   a, [hl]                                  ; $55D0: $7E
     and  a                                        ; $55D1: $A7
-    jr   z, jr_006_55E0                           ; $55D2: $28 $0C
+    jr   z, .jr_55E0                              ; $55D2: $28 $0C
 
     ldh  a, [hActiveEntityPosY]                   ; $55D4: $F0 $EF
     ldh  [hActiveEntityVisualPosY], a             ; $55D6: $E0 $EC
@@ -422,5 +422,5 @@ func_006_55B3::
     ld   c, $04                                   ; $55DB: $0E $04
     call RenderActiveEntitySpritesRect            ; $55DD: $CD $E6 $3C
 
-jr_006_55E0:
+.jr_55E0:
     jp   CopyEntityPositionToActivePosition       ; $55E0: $C3 $8A $3D

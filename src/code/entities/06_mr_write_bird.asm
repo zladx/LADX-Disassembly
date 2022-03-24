@@ -54,11 +54,11 @@ MrWriteBirdEntityHandler::
 
     and  $80                                      ; $724D: $E6 $80
     ld   a, $00                                   ; $724F: $3E $00
-    jr   nz, jr_006_7255                          ; $7251: $20 $02
+    jr   nz, .jr_7255                             ; $7251: $20 $02
 
     ld   a, $03                                   ; $7253: $3E $03
 
-jr_006_7255:
+.jr_7255:
     ld   hl, wEntitiesDirectionTable              ; $7255: $21 $80 $C3
     add  hl, bc                                   ; $7258: $09
     ld   [hl], a                                  ; $7259: $77
@@ -67,11 +67,11 @@ jr_006_725A:
     ld   de, MrWriteSpriteVariants                ; $725A: $11 $0C $72
     ldh  a, [hMapRoom]                            ; $725D: $F0 $F6
     cp   ROOM_INDOOR_B_CHRISTINE_HOUSE            ; $725F: $FE $D9
-    jr   nz, jr_006_7266                          ; $7261: $20 $03
+    jr   nz, .jr_7266                             ; $7261: $20 $03
 
     ld   de, MrWriteBirdChristineHouseSpriteVariants ; $7263: $11 $24 $72
 
-jr_006_7266:
+.jr_7266:
     call RenderActiveEntitySpritesPair            ; $7266: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $7269: $CD $C6 $64
     ld   a, [wIsIndoor]                           ; $726C: $FA $A5 $DB
@@ -87,14 +87,14 @@ jr_006_7266:
     ld   a, [hl]                                  ; $727F: $7E
     and  $80                                      ; $7280: $E6 $80
     ldh  [hMultiPurposeG], a                      ; $7282: $E0 $E8
-    jr   z, jr_006_728C                           ; $7284: $28 $06
+    jr   z, .jr_728C                              ; $7284: $28 $06
 
     ld   [hl], b                                  ; $7286: $70
     ld   hl, wEntitiesPosZTable                   ; $7287: $21 $10 $C3
     add  hl, bc                                   ; $728A: $09
     ld   [hl], b                                  ; $728B: $70
 
-jr_006_728C:
+.jr_728C:
     ldh  a, [hActiveEntityState]                  ; $728C: $F0 $F0
     JP_TABLE                                      ; $728E
 ._00 dw MrWriteBirdState0Handler
@@ -110,8 +110,8 @@ MrWriteBirdState0Handler::
     call SetEntitySpriteVariant                   ; $72A1: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $72A4: $CD $05 $0C
 
-jr_006_72A7:
-    jr   nz, jr_006_72E0                          ; $72A7: $20 $37
+.jr_72A7:
+    jr   nz, .jr_72E0                             ; $72A7: $20 $37
 
     call GetRandomByte                            ; $72A9: $CD $0D $28
     and  $07                                      ; $72AC: $E6 $07
@@ -144,7 +144,7 @@ jr_006_72A7:
     ld   [hl], a                                  ; $72DC: $77
     call IncrementEntityState                     ; $72DD: $CD $12 $3B
 
-jr_006_72E0:
+.jr_72E0:
     jp   label_006_7308                           ; $72E0: $C3 $08 $73
 
 MrWriteBirdState1Handler::
@@ -156,14 +156,14 @@ MrWriteBirdState1Handler::
     jr   z, label_006_7308                        ; $72EF: $28 $17
 
     call GetEntityTransitionCountdown             ; $72F1: $CD $05 $0C
-    jr   nz, jr_006_72FD                          ; $72F4: $20 $07
+    jr   nz, .jr_72FD                             ; $72F4: $20 $07
 
     ld   [hl], $30                                ; $72F6: $36 $30
     call IncrementEntityState                     ; $72F8: $CD $12 $3B
     ld   [hl], b                                  ; $72FB: $70
     ret                                           ; $72FC: $C9
 
-jr_006_72FD:
+.jr_72FD:
     ld   hl, wEntitiesSpeedZTable                 ; $72FD: $21 $20 $C3
     add  hl, bc                                   ; $7300: $09
     ld   [hl], $08                                ; $7301: $36 $08
@@ -184,21 +184,21 @@ MrWriteBirdState2Handler::
     call label_3B23                               ; $7315: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $7318: $F0 $E7
     and  $01                                      ; $731A: $E6 $01
-    jr   nz, jr_006_7323                          ; $731C: $20 $05
+    jr   nz, .jr_7323                             ; $731C: $20 $05
 
     ld   hl, wEntitiesSpeedZTable                 ; $731E: $21 $20 $C3
     add  hl, bc                                   ; $7321: $09
     inc  [hl]                                     ; $7322: $34
 
-jr_006_7323:
+.jr_7323:
     ldh  a, [hMultiPurposeG]                      ; $7323: $F0 $E8
     and  a                                        ; $7325: $A7
-    jr   z, jr_006_732C                           ; $7326: $28 $04
+    jr   z, .jr_732C                              ; $7326: $28 $04
 
     call IncrementEntityState                     ; $7328: $CD $12 $3B
     ld   [hl], b                                  ; $732B: $70
 
-jr_006_732C:
+.jr_732C:
     ldh  a, [hFrameCounter]                       ; $732C: $F0 $E7
     rra                                           ; $732E: $1F
     and  $02                                      ; $732F: $E6 $02

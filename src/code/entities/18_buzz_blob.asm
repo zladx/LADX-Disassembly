@@ -47,12 +47,12 @@ Data_018_7755::
 BuzzBlobEntityHandler::
     ldh  a, [hMapId]                              ; $7759: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $775B: $FE $FF
-    jr   nz, jr_018_7764                          ; $775D: $20 $05
+    jr   nz, .jr_7764                             ; $775D: $20 $05
 
     ld   a, $18                                   ; $775F: $3E $18
     jp   func_036_4F68_trampoline                 ; $7761: $C3 $77 $0A
 
-jr_018_7764:
+.jr_7764:
     ld   de, BuzzBlobSpriteVariants               ; $7764: $11 $29 $77
     call RenderActiveEntitySpritesPair            ; $7767: $CD $C0 $3B
     call ReturnIfNonInteractive_18                ; $776A: $CD $E8 $7D
@@ -71,7 +71,7 @@ Data_018_777C::
 
 BuzzBlobState0Handler::
     call GetEntityTransitionCountdown             ; $7784: $CD $05 $0C
-    jr   nz, jr_018_77A9                          ; $7787: $20 $20
+    jr   nz, .jr_77A9                             ; $7787: $20 $20
 
     call GetRandomByte                            ; $7789: $CD $0D $28
     and  $3F                                      ; $778C: $E6 $3F
@@ -93,7 +93,7 @@ BuzzBlobState0Handler::
     add  hl, bc                                   ; $77A7: $09
     ld   [hl], a                                  ; $77A8: $77
 
-jr_018_77A9:
+.jr_77A9:
     call UpdateEntityPosWithSpeed_18              ; $77A9: $CD $5F $7E
     call label_3B23                               ; $77AC: $CD $23 $3B
     ld   hl, wEntitiesPrivateState1Table          ; $77AF: $21 $B0 $C2
@@ -102,11 +102,11 @@ jr_018_77A9:
     ld   hl, Data_018_774D                        ; $77B4: $21 $4D $77
     and  a                                        ; $77B7: $A7
 
-jr_018_77B8:
+.jr_77B8:
     jr   z, label_018_77CF                        ; $77B8: $28 $15
 
     call func_018_7D95                            ; $77BA: $CD $95 $7D
-    jr   nc, jr_018_77CC                          ; $77BD: $30 $0D
+    jr   nc, .jr_77CC                             ; $77BD: $30 $0D
 
     ld   hl, wEntitiesPrivateState2Table          ; $77BF: $21 $C0 $C2
     add  hl, bc                                   ; $77C2: $09
@@ -116,7 +116,7 @@ jr_018_77B8:
     inc  [hl]                                     ; $77C8: $34
     call OpenDialogInTable2                       ; $77C9: $CD $7C $23
 
-jr_018_77CC:
+.jr_77CC:
     ld   hl, Data_018_7755                        ; $77CC: $21 $55 $77
 
 label_018_77CF:
@@ -133,12 +133,12 @@ label_018_77CF:
 
 BuzzBlobState1Handler::
     call GetEntityTransitionCountdown             ; $77DD: $CD $05 $0C
-    jr   nz, jr_018_77E7                          ; $77E0: $20 $05
+    jr   nz, .jr_77E7                             ; $77E0: $20 $05
 
     call IncrementEntityState                     ; $77E2: $CD $12 $3B
     ld   [hl], b                                  ; $77E5: $70
     ret                                           ; $77E6: $C9
 
-jr_018_77E7:
+.jr_77E7:
     ld   hl, Data_018_7751                        ; $77E7: $21 $51 $77
     jp   label_018_77CF                           ; $77EA: $C3 $CF $77

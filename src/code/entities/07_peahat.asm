@@ -33,7 +33,7 @@ func_007_6736::
     add  hl, bc                                   ; $6739: $09
     ld   a, [hl]                                  ; $673A: $7E
     and  a                                        ; $673B: $A7
-    jr   z, jr_007_6747                           ; $673C: $28 $09
+    jr   z, .jr_6747                              ; $673C: $28 $09
 
     ldh  a, [hFrameCounter]                       ; $673E: $F0 $E7
     and  $07                                      ; $6740: $E6 $07
@@ -42,7 +42,7 @@ func_007_6736::
     dec  [hl]                                     ; $6744: $35
     jr   jr_007_6753                              ; $6745: $18 $0C
 
-jr_007_6747:
+.jr_6747:
     ld   hl, wEntitiesHitboxFlagsTable            ; $6747: $21 $50 $C3
     add  hl, bc                                   ; $674A: $09
     res  7, [hl]                                  ; $674B: $CB $BE
@@ -62,12 +62,12 @@ jr_007_6753:
     jr   z, jr_007_6768                           ; $675F: $28 $07
 
     and  $80                                      ; $6761: $E6 $80
-    jr   z, jr_007_6767                           ; $6763: $28 $02
+    jr   z, .jr_6767                              ; $6763: $28 $02
 
     inc  [hl]                                     ; $6765: $34
     inc  [hl]                                     ; $6766: $34
 
-jr_007_6767:
+.jr_6767:
     dec  [hl]                                     ; $6767: $35
 
 jr_007_6768:
@@ -77,34 +77,34 @@ jr_007_6768:
     jr   z, jr_007_6776                           ; $676D: $28 $07
 
     and  $80                                      ; $676F: $E6 $80
-    jr   z, jr_007_6775                           ; $6771: $28 $02
+    jr   z, .jr_6775                              ; $6771: $28 $02
 
     inc  [hl]                                     ; $6773: $34
     inc  [hl]                                     ; $6774: $34
 
-jr_007_6775:
+.jr_6775:
     dec  [hl]                                     ; $6775: $35
 
 jr_007_6776:
     call GetEntityDropTimer                       ; $6776: $CD $FB $0B
-    jr   nz, jr_007_677E                          ; $6779: $20 $03
+    jr   nz, .jr_677E                             ; $6779: $20 $03
 
     call IncrementEntityState                     ; $677B: $CD $12 $3B
 
-jr_007_677E:
+.jr_677E:
     ld   hl, wEntitiesPrivateState1Table          ; $677E: $21 $B0 $C2
     add  hl, bc                                   ; $6781: $09
     ld   a, [hl]                                  ; $6782: $7E
     and  a                                        ; $6783: $A7
-    jr   z, jr_007_678D                           ; $6784: $28 $07
+    jr   z, .jr_678D                              ; $6784: $28 $07
 
     ldh  a, [hFrameCounter]                       ; $6786: $F0 $E7
     and  $1F                                      ; $6788: $E6 $1F
-    jr   nz, jr_007_678D                          ; $678A: $20 $01
+    jr   nz, .jr_678D                             ; $678A: $20 $01
 
     dec  [hl]                                     ; $678C: $35
 
-jr_007_678D:
+.jr_678D:
     jp   func_007_67AE                            ; $678D: $C3 $AE $67
 
 func_007_6790::
@@ -112,7 +112,7 @@ func_007_6790::
     add  hl, bc                                   ; $6793: $09
     ld   a, [hl]                                  ; $6794: $7E
     cp   $08                                      ; $6795: $FE $08
-    jr   c, jr_007_67A7                           ; $6797: $38 $0E
+    jr   c, .jr_67A7                              ; $6797: $38 $0E
 
     call GetEntityDropTimer                       ; $6799: $CD $FB $0B
     call GetRandomByte                            ; $679C: $CD $0D $28
@@ -121,7 +121,7 @@ func_007_6790::
     ld   [hl], a                                  ; $67A3: $77
     jp   IncrementEntityState                     ; $67A4: $C3 $12 $3B
 
-jr_007_67A7:
+.jr_67A7:
     ldh  a, [hFrameCounter]                       ; $67A7: $F0 $E7
     and  $0F                                      ; $67A9: $E6 $0F
     jr   nz, func_007_67AE                        ; $67AB: $20 $01
@@ -169,13 +169,13 @@ ret_007_67EA:
 
 jr_007_67EB:
     call GetEntityDropTimer                       ; $67EB: $CD $FB $0B
-    jr   nz, jr_007_67F6                          ; $67EE: $20 $06
+    jr   nz, .jr_67F6                             ; $67EE: $20 $06
 
     ld   [hl], $60                                ; $67F0: $36 $60
     call IncrementEntityState                     ; $67F2: $CD $12 $3B
     ld   [hl], b                                  ; $67F5: $70
 
-jr_007_67F6:
+.jr_67F6:
     ld   hl, wEntitiesPrivateState3Table          ; $67F6: $21 $D0 $C2
     add  hl, bc                                   ; $67F9: $09
     inc  [hl]                                     ; $67FA: $34

@@ -22,7 +22,7 @@ MagicRodFireballEntityHandler::
     add  hl, bc                                   ; $69C8: $09
     ld   [hl], a                                  ; $69C9: $77
     call GetEntityPrivateCountdown1               ; $69CA: $CD $00 $0C
-    jr   z, jr_003_69D9                           ; $69CD: $28 $0A
+    jr   z, .jr_69D9                              ; $69CD: $28 $0A
 
     dec  a                                        ; $69CF: $3D
     jp   z, UnloadEntity                          ; $69D0: $CA $8D $3F
@@ -30,21 +30,21 @@ MagicRodFireballEntityHandler::
     ld   de, EntityExplosionSpriteVariants        ; $69D3: $11 $44 $4C
     jp   RenderActiveEntitySpritesPair            ; $69D6: $C3 $C0 $3B
 
-jr_003_69D9:
+.jr_69D9:
     ld   de, Unknown005SpriteVariants             ; $69D9: $11 $AA $69
     call RenderActiveEntitySpritesPairSubcall     ; $69DC: $CD $D7 $6A
     call ReturnIfNonInteractive_03                ; $69DF: $CD $78 $7F
     ld   a, [wIsIndoor]                           ; $69E2: $FA $A5 $DB
     and  a                                        ; $69E5: $A7
     ldh  a, [hObjectUnderEntity]                  ; $69E6: $F0 $AF
-    jr   z, jr_003_69F0                           ; $69E8: $28 $06
+    jr   z, .jr_69F0                              ; $69E8: $28 $06
 
     cp   $8A                                      ; $69EA: $FE $8A
     jr   z, jr_003_69F8                           ; $69EC: $28 $0A
 
     jr   ret_003_6A1D                             ; $69EE: $18 $2D
 
-jr_003_69F0:
+.jr_69F0:
     cp   $D3                                      ; $69F0: $FE $D3
     jr   z, jr_003_69F8                           ; $69F2: $28 $04
 

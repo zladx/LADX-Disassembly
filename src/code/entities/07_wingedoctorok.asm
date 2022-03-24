@@ -40,7 +40,7 @@ WingedOctorokEntityHandler::
     add  hl, bc                                   ; $565C: $09
     ld   a, [hl]                                  ; $565D: $7E
     and  a                                        ; $565E: $A7
-    jr   z, jr_007_566F                           ; $565F: $28 $0E
+    jr   z, .jr_566F                              ; $565F: $28 $0E
 
     ld   hl, wEntitiesStateTable                  ; $5661: $21 $90 $C2
     add  hl, bc                                   ; $5664: $09
@@ -50,7 +50,7 @@ WingedOctorokEntityHandler::
     call GetEntityTransitionCountdown             ; $566A: $CD $05 $0C
     ld   [hl], $40                                ; $566D: $36 $40
 
-jr_007_566F:
+.jr_566F:
     call ApplyRecoilIfNeeded_07                   ; $566F: $CD $C3 $7D
     call UpdateEntityPosWithSpeed_07              ; $5672: $CD $0A $7E
     call AddEntityZSpeedToPos_07                  ; $5675: $CD $43 $7E
@@ -62,7 +62,7 @@ jr_007_566F:
     ld   a, [hl]                                  ; $5681: $7E
     and  $80                                      ; $5682: $E6 $80
     ldh  [hMultiPurposeG], a                      ; $5684: $E0 $E8
-    jr   z, jr_007_5693                           ; $5686: $28 $0B
+    jr   z, .jr_5693                              ; $5686: $28 $0B
 
     ld   [hl], b                                  ; $5688: $70
     ld   hl, wEntitiesSpeedZTable                 ; $5689: $21 $20 $C3
@@ -72,7 +72,7 @@ jr_007_566F:
     add  hl, bc                                   ; $5691: $09
     ld   [hl], b                                  ; $5692: $70
 
-jr_007_5693:
+.jr_5693:
     call label_3B23                               ; $5693: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $5696: $F0 $F0
     cp   $02                                      ; $5698: $FE $02
@@ -85,18 +85,18 @@ jr_007_5693:
     jr   z, jr_007_56BD                           ; $56A3: $28 $18
 
     cp   $0A                                      ; $56A5: $FE $0A
-    jr   nz, jr_007_56B7                          ; $56A7: $20 $0E
+    jr   nz, .jr_56B7                             ; $56A7: $20 $0E
 
     call func_007_7E7D                            ; $56A9: $CD $7D $7E
     ld   hl, wEntitiesDirectionTable              ; $56AC: $21 $80 $C3
     add  hl, bc                                   ; $56AF: $09
     ld   a, e                                     ; $56B0: $7B
     cp   [hl]                                     ; $56B1: $BE
-    jr   nz, jr_007_56B7                          ; $56B2: $20 $03
+    jr   nz, .jr_56B7                             ; $56B2: $20 $03
 
     call func_007_57B0                            ; $56B4: $CD $B0 $57
 
-jr_007_56B7:
+.jr_56B7:
     call ClearEntitySpeed                         ; $56B7: $CD $7F $3D
     jp   label_007_5721                           ; $56BA: $C3 $21 $57
 
@@ -115,12 +115,12 @@ jr_007_56BD:
     and  $03                                      ; $56D1: $E6 $03
     ld   [hl], a                                  ; $56D3: $77
     cp   $00                                      ; $56D4: $FE $00
-    jr   nz, jr_007_56DD                          ; $56D6: $20 $05
+    jr   nz, .jr_56DD                             ; $56D6: $20 $05
 
     call func_007_7E7D                            ; $56D8: $CD $7D $7E
     jr   jr_007_56E0                              ; $56DB: $18 $03
 
-jr_007_56DD:
+.jr_56DD:
     call GetRandomByte                            ; $56DD: $CD $0D $28
 
 jr_007_56E0:
@@ -148,12 +148,12 @@ jr_007_56FF:
     add  hl, bc                                   ; $5702: $09
     ld   a, [hl]                                  ; $5703: $7E
     and  $0F                                      ; $5704: $E6 $0F
-    jr   nz, jr_007_570D                          ; $5706: $20 $05
+    jr   nz, .jr_570D                             ; $5706: $20 $05
 
     call GetEntityTransitionCountdown             ; $5708: $CD $05 $0C
     jr   nz, jr_007_571E                          ; $570B: $20 $11
 
-jr_007_570D:
+.jr_570D:
     call GetRandomByte                            ; $570D: $CD $0D $28
     and  $0F                                      ; $5710: $E6 $0F
     or   $10                                      ; $5712: $F6 $10
@@ -185,7 +185,7 @@ label_007_5721:
 
     ld   a, [wBButtonSlot]                        ; $573B: $FA $00 $DB
     cp   INVENTORY_SWORD                          ; $573E: $FE $01
-    jr   nz, jr_007_574A                          ; $5740: $20 $08
+    jr   nz, .jr_574A                             ; $5740: $20 $08
 
     ldh  a, [hJoypadState]                        ; $5742: $F0 $CC
     and  J_B                                      ; $5744: $E6 $20
@@ -193,7 +193,7 @@ label_007_5721:
 
     jr   jr_007_5777                              ; $5748: $18 $2D
 
-jr_007_574A:
+.jr_574A:
     ld   a, [wAButtonSlot]                        ; $574A: $FA $01 $DB
     cp   INVENTORY_SWORD                          ; $574D: $FE $01
     jr   nz, jr_007_5777                          ; $574F: $20 $26

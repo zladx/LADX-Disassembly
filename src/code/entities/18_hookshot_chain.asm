@@ -35,7 +35,7 @@ HookshotChainEntityHandler::
     ld   a, $0B                                   ; $7C18: $3E $0B
     ldh  [hNoiseSfx], a                           ; $7C1A: $E0 $F4
 
-.jr_7C1C:
+.jr_7C1C
     ldh  a, [hActiveEntityState]                  ; $7C1C: $F0 $F0
     and  a                                        ; $7C1E: $A7
     jr   z, jr_018_7C39                           ; $7C1F: $28 $18
@@ -54,7 +54,7 @@ IF __PATCH_0__
     jr   z, jr_018_7C39
 ENDC
 
-.jr_7C21:
+.jr_7C21
     ld   a, $30                                   ; $7C21: $3E $30
     call GetVectorTowardsLink_trampoline          ; $7C23: $CD $B5 $3B
     ldh  a, [hMultiPurpose0]                      ; $7C26: $F0 $D7
@@ -115,7 +115,7 @@ jr_018_7C54:
 
     ld   e, $9F                                   ; $7C7E: $1E $9F
 
-.jr_7C80:
+.jr_7C80
     ldh  a, [hObjectUnderEntity]                  ; $7C80: $F0 $AF
     cp   e                                        ; $7C82: $BB
     jr   nz, ret_018_7CAE                         ; $7C83: $20 $29
@@ -139,7 +139,7 @@ jr_018_7C54:
 
     inc  a                                        ; $7CA4: $3C
 
-.jr_7CA5:
+.jr_7CA5
     ld   hl, wEntitiesDirectionTable              ; $7CA5: $21 $80 $C3
     add  hl, de                                   ; $7CA8: $19
     ld   [hl], a                                  ; $7CA9: $77
@@ -205,7 +205,7 @@ jr_018_7CF8:
     add  [hl]                                     ; $7D07: $86
     ld   [de], a                                  ; $7D08: $12
 
-.jr_7D09:
+.jr_7D09
     inc  de                                       ; $7D09: $13
     ldh  a, [hLinkPositionX]                      ; $7D0A: $F0 $98
     ld   hl, hMultiPurpose0                       ; $7D0C: $21 $D7 $FF

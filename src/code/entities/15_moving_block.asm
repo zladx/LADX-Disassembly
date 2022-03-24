@@ -82,7 +82,7 @@ jr_015_414D:
     inc  [hl]                                     ; $4168: $34
     jr   jr_015_416F                              ; $4169: $18 $04
 
-.jr_416B:
+.jr_416B
     ld   hl, hMultiPurposeG                       ; $416B: $21 $E8 $FF
     inc  [hl]                                     ; $416E: $34
 
@@ -111,7 +111,7 @@ jr_015_416F:
     ldh  [hLinkPositionX], a                      ; $4196: $E0 $98
     ret                                           ; $4198: $C9
 
-.jr_4199:
+.jr_4199
     cp   $01                                      ; $4199: $FE $01
     jr   nz, .jr_41A4                             ; $419B: $20 $07
 
@@ -120,7 +120,7 @@ jr_015_416F:
     ldh  [hLinkPositionX], a                      ; $41A1: $E0 $98
     ret                                           ; $41A3: $C9
 
-.jr_41A4:
+.jr_41A4
     cp   $02                                      ; $41A4: $FE $02
     jr   nz, jr_015_41B9                          ; $41A6: $20 $11
 
@@ -132,7 +132,7 @@ jr_015_416F:
     and  a                                        ; $41B0: $A7
     ret  nz                                       ; $41B1: $C0
 
-.jr_41B2:
+.jr_41B2
     ldh  a, [hActiveEntityVisualPosY]             ; $41B2: $F0 $EC
     add  $F0                                      ; $41B4: $C6 $F0
     ldh  [hLinkPositionY], a                      ; $41B6: $E0 $99
@@ -147,7 +147,7 @@ jr_015_41B9:
     and  a                                        ; $41C1: $A7
     ret  nz                                       ; $41C2: $C0
 
-.jr_41C3:
+.jr_41C3
     ldh  a, [hActiveEntityVisualPosY]             ; $41C3: $F0 $EC
     add  $0C                                      ; $41C5: $C6 $0C
     ldh  [hLinkPositionY], a                      ; $41C7: $E0 $99
@@ -233,7 +233,7 @@ jr_015_4217:
     dec  [hl]                                     ; $4232: $35
     jr   jr_015_4239                              ; $4233: $18 $04
 
-.jr_4235:
+.jr_4235
     ld   hl, hMultiPurposeG                       ; $4235: $21 $E8 $FF
     inc  [hl]                                     ; $4238: $34
 
@@ -318,7 +318,7 @@ jr_015_4289:
     inc  [hl]                                     ; $42A4: $34
     jr   jr_015_42AB                              ; $42A5: $18 $04
 
-.jr_42A7:
+.jr_42A7
     ld   hl, hMultiPurposeG                       ; $42A7: $21 $E8 $FF
     inc  [hl]                                     ; $42AA: $34
 
@@ -403,7 +403,7 @@ jr_015_42FB:
     dec  [hl]                                     ; $4316: $35
     jr   jr_015_431D                              ; $4317: $18 $04
 
-.jr_4319:
+.jr_4319
     ld   hl, hMultiPurposeG                       ; $4319: $21 $E8 $FF
     inc  [hl]                                     ; $431C: $34
 

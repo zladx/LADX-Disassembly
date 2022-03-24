@@ -32,7 +32,7 @@ func_018_7B9D::
     cpl                                           ; $7BB6: $2F
     inc  a                                        ; $7BB7: $3C
 
-.jr_7BB8:
+.jr_7BB8
     ld   d, a                                     ; $7BB8: $57
     ldh  a, [hMultiPurpose0]                      ; $7BB9: $F0 $D7
     bit  7, a                                     ; $7BBB: $CB $7F
@@ -41,7 +41,7 @@ func_018_7B9D::
     cpl                                           ; $7BBF: $2F
     inc  a                                        ; $7BC0: $3C
 
-.jr_7BC1:
+.jr_7BC1
     cp   d                                        ; $7BC1: $BA
     jr   nc, .jr_7BD1                             ; $7BC2: $30 $0D
 
@@ -55,7 +55,7 @@ func_018_7B9D::
     ld   a, [hl]                                  ; $7BCF: $7E
     ret                                           ; $7BD0: $C9
 
-.jr_7BD1:
+.jr_7BD1
     ld   a, d                                     ; $7BD1: $7A
     sra  a                                        ; $7BD2: $CB $2F
     sra  a                                        ; $7BD4: $CB $2F

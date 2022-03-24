@@ -19,7 +19,7 @@ BlainoEntityHandler::
     call GetEntityDropTimer                       ; $64E5: $CD $FB $0B
     ld   [hl], $20                                ; $64E8: $36 $20
 
-.jr_64EA:
+.jr_64EA
     call GetEntityPrivateCountdown1               ; $64EA: $CD $00 $0C
     jr   z, jr_018_650A                           ; $64ED: $28 $1B
 
@@ -31,7 +31,7 @@ BlainoEntityHandler::
     ld   hl, hJingle                              ; $64F7: $21 $F2 $FF
     ld   [hl], JINGLE_BLAINO_PUNCH                ; $64FA: $36 $33
 
-.jr_64FC:
+.jr_64FC
     and  a                                        ; $64FC: $A7
     jr   nz, jr_018_650A                          ; $64FD: $20 $0B
 
@@ -50,7 +50,7 @@ jr_018_650A:
 
     call label_3B39                               ; $6516: $CD $39 $3B
 
-.jr_6519:
+.jr_6519
     call UpdateEntityPosWithSpeed_18              ; $6519: $CD $5F $7E
     call label_3B23                               ; $651C: $CD $23 $3B
     call AddEntityZSpeedToPos_18                  ; $651F: $CD $98 $7E
@@ -73,7 +73,7 @@ jr_018_650A:
     ld   [hl], b                                  ; $653A: $70
     call ClearEntitySpeed                         ; $653B: $CD $7F $3D
 
-.jr_653E:
+.jr_653E
     call func_018_65CF                            ; $653E: $CD $CF $65
     call func_018_7EB2                            ; $6541: $CD $B2 $7E
     ld   hl, wEntitiesDirectionTable              ; $6544: $21 $80 $C3
@@ -91,7 +91,7 @@ jr_018_650A:
     add  hl, bc                                   ; $6559: $09
     ld   [hl], a                                  ; $655A: $77
 
-.jr_655B:
+.jr_655B
     ldh  a, [hMultiPurposeG]                      ; $655B: $F0 $E8
     and  a                                        ; $655D: $A7
     jr   z, .jr_6588                              ; $655E: $28 $28
@@ -118,7 +118,7 @@ jr_018_650A:
     add  [hl]                                     ; $6586: $86
     ld   [hl], a                                  ; $6587: $77
 
-.jr_6588:
+.jr_6588
     call func_018_6596                            ; $6588: $CD $96 $65
     ldh  a, [hFrameCounter]                       ; $658B: $F0 $E7
     rra                                           ; $658D: $1F
@@ -135,7 +135,7 @@ func_018_6596::
     ld   a, $03                                   ; $659B: $3E $03
     jr   label_018_65B8                           ; $659D: $18 $19
 
-.jr_659F:
+.jr_659F
     call GetEntityDropTimer                       ; $659F: $CD $FB $0B
     jr   nz, ret_018_65CE                         ; $65A2: $20 $2A
 
@@ -149,7 +149,7 @@ func_018_6596::
     ld   a, $01                                   ; $65AE: $3E $01
     jr   label_018_65B8                           ; $65B0: $18 $06
 
-.jr_65B2:
+.jr_65B2
     call GetRandomByte                            ; $65B2: $CD $0D $28
     and  $03                                      ; $65B5: $E6 $03
     inc  a                                        ; $65B7: $3C
@@ -162,7 +162,7 @@ label_018_65B8:
     ld   a, $0A                                   ; $65BF: $3E $0A
     ldh  [hNoiseSfx], a                           ; $65C1: $E0 $F4
 
-.jr_65C3:
+.jr_65C3
     call GetEntityTransitionCountdown             ; $65C3: $CD $05 $0C
     ld   [hl], $00                                ; $65C6: $36 $00
     ld   hl, wEntitiesInertiaTable                ; $65C8: $21 $D0 $C3
@@ -258,7 +258,7 @@ func_018_6643::
     inc  a                                        ; $666C: $3C
     ld   e, a                                     ; $666D: $5F
 
-.jr_666E:
+.jr_666E
     ld   hl, wEntitiesSpeedXTable                 ; $666E: $21 $40 $C2
     add  hl, bc                                   ; $6671: $09
     ld   [hl], e                                  ; $6672: $73
@@ -296,7 +296,7 @@ func_018_66CD::
     cp   LINK_MOTION_UNKNOWN_0A                   ; $66E4: $FE $0A
     jr   z, jr_018_66E9                           ; $66E6: $28 $01
 
-.jr_66E8:
+.jr_66E8
     inc  [hl]                                     ; $66E8: $34
 
 jr_018_66E9:
@@ -319,7 +319,7 @@ jr_018_66E9:
     inc  a                                        ; $6701: $3C
     ld   e, a                                     ; $6702: $5F
 
-.jr_6703:
+.jr_6703
     ld   hl, wEntitiesSpeedXTable                 ; $6703: $21 $40 $C2
     add  hl, bc                                   ; $6706: $09
     ld   [hl], e                                  ; $6707: $73
@@ -340,7 +340,7 @@ jr_018_66E9:
     ld   a, $10                                   ; $671F: $3E $10
     call ApplyVectorTowardsLink_trampoline        ; $6721: $CD $AA $3B
 
-.jr_6724:
+.jr_6724
     call GetEntityTransitionCountdown             ; $6724: $CD $05 $0C
     ld   [hl], $03                                ; $6727: $36 $03
 
@@ -444,7 +444,7 @@ func_018_68EA::
     ld   hl, hActiveEntityFlipAttribute           ; $6916: $21 $ED $FF
     set  OAM_BIT_X_FLIP, [hl]                     ; $6919: $CB $EE
 
-.jr_691B:
+.jr_691B
     ld   hl, Data_018_673A                        ; $691B: $21 $3A $67
     add  hl, de                                   ; $691E: $19
     ld   c, $06                                   ; $691F: $0E $06
@@ -474,7 +474,7 @@ jr_018_693C:
     add  $08                                      ; $6944: $C6 $08
     ld   [wD5C2], a                               ; $6946: $EA $C2 $D5
 
-.jr_6949:
+.jr_6949
     ldh  a, [hActiveEntityVisualPosY]             ; $6949: $F0 $EC
     add  [hl]                                     ; $694B: $86
     ld   [de], a                                  ; $694C: $12
@@ -494,7 +494,7 @@ jr_018_693C:
     add  $08                                      ; $695D: $C6 $08
     ld   b, a                                     ; $695F: $47
 
-.jr_6960:
+.jr_6960
     ld   a, [wD5C0]                               ; $6960: $FA $C0 $D5
     cp   $80                                      ; $6963: $FE $80
     jr   nz, jr_018_6972                          ; $6965: $20 $0B
@@ -506,7 +506,7 @@ jr_018_693C:
 
     add  $08                                      ; $696D: $C6 $08
 
-.jr_696F:
+.jr_696F
     ld   [wD5C0], a                               ; $696F: $EA $C0 $D5
 
 jr_018_6972:
@@ -527,7 +527,7 @@ jr_018_6972:
     ld   [de], a                                  ; $6982: $12
     inc  de                                       ; $6983: $13
 
-.jr_6984:
+.jr_6984
     inc  de                                       ; $6984: $13
     ldh  a, [hActiveEntityFlipAttribute]          ; $6985: $F0 $ED
     xor  [hl]                                     ; $6987: $AE
@@ -545,7 +545,7 @@ jr_018_6972:
     or   $04                                      ; $6997: $F6 $04
     ld   [de], a                                  ; $6999: $12
 
-.jr_699A:
+.jr_699A
     inc  hl                                       ; $699A: $23
     inc  de                                       ; $699B: $13
     dec  c                                        ; $699C: $0D

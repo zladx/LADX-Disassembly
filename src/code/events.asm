@@ -160,7 +160,7 @@ DropKeyEffectHandler::
     ld   [hl], a                                  ; Since that room handles the key now,
     ldh  [hRoomStatus], a                         ; mark this one.
 
-.jr_5E15:
+.jr_5E15
     jp   label_002_5425                           ; $5E15: $C3 $25 $54
 
 ; Open locked doors, and make the teleport point appear.
@@ -184,7 +184,7 @@ OpenLockedDoorsEffectHandler::
 
     call func_002_5E7B                            ; $5E2B: $CD $7B $5E
 
-.jr_5E2E:
+.jr_5E2E
     ld   a, [wRoomEventEffectExecuted]            ; $5E2E: $FA $8F $C1
     and  a                                        ; $5E31: $A7
     ret  z                                        ; $5E32: $C8
@@ -212,7 +212,7 @@ OpenLockedDoorsEffectHandler::
     ld   hl, wColorDungeonRoomStatus              ; $5E55: $21 $E0 $DD
     jr   jr_002_5E63                              ; $5E58: $18 $09
 
-.jr_5E5A:
+.jr_5E5A
     cp   $1A                                      ; $5E5A: $FE $1A
     jr   nc, jr_002_5E63                          ; $5E5C: $30 $05
 
@@ -289,7 +289,7 @@ RevealChestEffectHandler::
     ld   a, $40                                   ; $5EC6: $3E $40
     jr   jr_002_5ECC                              ; $5EC8: $18 $02
 
-.jr_5ECA:
+.jr_5ECA
     ld   a, $30                                   ; $5ECA: $3E $30
 
 jr_002_5ECC:
@@ -313,7 +313,7 @@ func_002_5ED3::
     ld   a, $30                                   ; $5EE7: $3E $30
     jr   jr_002_5EED                              ; $5EE9: $18 $02
 
-.jr_5EEB:
+.jr_5EEB
     ld   a, $20                                   ; $5EEB: $3E $20
 
 jr_002_5EED:
@@ -464,7 +464,7 @@ CheckKillSidescrollBossTrigger::
     ld   a, [wIndoorBRoomStatus + $E8]            ; $5FCC: $FA $E8 $DA
     jr   jr_002_5FD4                              ; $5FCF: $18 $03
 
-.jr_5FD1:
+.jr_5FD1
     ld   a, [wIndoorARoomStatus + $FF]            ; $5FD1: $FA $FF $D9
 
 jr_002_5FD4:
@@ -521,7 +521,7 @@ jr_002_6000:
     and  ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL       ; $600D: $E6 $02
     jr   z, ret_002_602C                          ; $600F: $28 $1B
 
-.jr_6011:
+.jr_6011
     dec  c                                        ; $6011: $0D
     ld   a, c                                     ; $6012: $79
     cp   $FF                                      ; $6013: $FE $FF
@@ -539,7 +539,7 @@ jr_002_6000:
     and  a                                        ; $6026: $A7
     jr   nz, ret_002_602C                         ; $6027: $20 $03
 
-.jr_6029:
+.jr_6029
     jp   MarkTriggerAsResolved                    ; $6029: $C3 $60 $0C
 
 ret_002_602C:
@@ -571,7 +571,7 @@ jr_002_603E:
     cp   $F1                                      ; $604B: $FE $F1
     jr   nz, jr_002_6064                          ; $604D: $20 $15
 
-.jr_604F:
+.jr_604F
     ld   hl, wEntitiesStatusTable                 ; $604F: $21 $80 $C2
     add  hl, de                                   ; $6052: $19
     ld   a, [hl]                                  ; $6053: $7E
@@ -600,7 +600,7 @@ jr_002_6064:
 
     ld   e, $04                                   ; $6072: $1E $04
 
-.jr_6074:
+.jr_6074
     ldh  a, [hMultiPurpose0]                      ; $6074: $F0 $D7
     cp   e                                        ; $6076: $BB
     ret  nz                                       ; $6077: $C0
@@ -624,7 +624,7 @@ jr_002_6064:
     ld   [hl], a                                  ; $6096: $77
     ret                                           ; $6097: $C9
 
-.jr_6098:
+.jr_6098
     jp   RevealChestEffectHandler                 ; $6098: $C3 $AB $5E
 
 jr_002_609B:
@@ -637,7 +637,7 @@ jr_002_609B:
     cp   $F7                                      ; $60A4: $FE $F7
     jr   nz, jr_002_60BD                          ; $60A6: $20 $15
 
-.jr_60A8:
+.jr_60A8
     ld   hl, wEntitiesStatusTable                 ; $60A8: $21 $80 $C2
     add  hl, de                                   ; $60AB: $19
     ld   a, [hl]                                  ; $60AC: $7E

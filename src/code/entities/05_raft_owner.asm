@@ -40,7 +40,7 @@ EntityRaftOwnerHandler::
     add  hl, bc                                   ; $5370: $09
     ld   [hl], e                                  ; $5371: $73
 
-.jr_5372:
+.jr_5372
     call func_005_54EA                            ; $5372: $CD $EA $54
     ld   de, RaftOwnerIndoorSpriteVariants        ; $5375: $11 $3E $53
     call RenderActiveEntitySpritesPair            ; $5378: $CD $C0 $3B
@@ -83,7 +83,7 @@ jr_005_53AC:
     ld   a, [wRupeeCountLow]                      ; $53AC: $FA $5E $DB
     sub  $00                                      ; $53AF: $D6 $00
 
-.jr_53B1:
+.jr_53B1
     ld   a, [wRupeeCountHigh]                     ; $53B1: $FA $5D $DB
     sbc  $01                                      ; $53B4: $DE $01
     jr   c, .jr_53C5                              ; $53B6: $38 $0D
@@ -94,7 +94,7 @@ jr_005_53AC:
     ld   [wD477], a                               ; $53BF: $EA $77 $D4
     jp   OpenDialog                               ; $53C2: $C3 $85 $23
 
-.jr_53C5:
+.jr_53C5
     ld   [hl], b                                  ; $53C5: $70
     ld   a, $4E                                   ; $53C6: $3E $4E
     jp   OpenDialog                               ; $53C8: $C3 $85 $23
@@ -141,7 +141,7 @@ jr_005_53E9:
     cp   $6A                                      ; $53FA: $FE $6A
     jp   z, ClearEntityStatus_05                  ; $53FC: $CA $4B $7B
 
-.jr_53FF:
+.jr_53FF
     dec  e                                        ; $53FF: $1D
     ld   a, e                                     ; $5400: $7B
     cp   $FF                                      ; $5401: $FE $FF
@@ -181,7 +181,7 @@ jr_005_5411:
     add  hl, bc                                   ; $543E: $09
     ld   [hl], a                                  ; $543F: $77
 
-.jr_5440:
+.jr_5440
     ld   a, [wLinkGroundStatus]                   ; $5440: $FA $1F $C1
     and  a                                        ; $5443: $A7
     jr   z, .jr_544C                              ; $5444: $28 $06
@@ -190,7 +190,7 @@ jr_005_5411:
     ld   [hl], b                                  ; $5449: $70
     jr   jr_005_5487                              ; $544A: $18 $3B
 
-.jr_544C:
+.jr_544C
     ldh  a, [hActiveEntityState]                  ; $544C: $F0 $F0
     JP_TABLE                                      ; $544E
 ._00 dw func_005_5455                             ; $544F
@@ -210,7 +210,7 @@ func_005_5455::
 
     call IncrementEntityState                     ; $5467: $CD $12 $3B
 
-.jr_546A:
+.jr_546A
     jr   jr_005_5487                              ; $546A: $18 $1B
 
 func_005_546C::
@@ -266,7 +266,7 @@ func_005_5490::
     ldh  a, [hLinkPositionZ]                      ; $54BE: $F0 $A2
     ld   [hl], a                                  ; $54C0: $77
 
-.jr_54C1:
+.jr_54C1
     jr   jr_005_5483                              ; $54C1: $18 $C0
 
 func_005_54C3::

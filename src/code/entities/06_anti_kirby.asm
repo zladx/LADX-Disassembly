@@ -20,7 +20,7 @@ AntiKirbyEntityHandler::
     add  hl, bc                                   ; $425C: $09
     ld   [hl], b                                  ; $425D: $70
 
-.jr_425E:
+.jr_425E
     ldh  a, [hActiveEntityState]                  ; $425E: $F0 $F0
     JP_TABLE                                      ; $4260
 ._00 dw AntiKirbyState0Handler
@@ -53,7 +53,7 @@ AntiKirbyState0Handler::
     ldh  [hNoiseSfx], a                           ; $4291: $E0 $F4
     ret                                           ; $4293: $C9
 
-.jr_4294:
+.jr_4294
     call GetEntityTransitionCountdown             ; $4294: $CD $05 $0C
     call GetRandomByte                            ; $4297: $CD $0D $28
     and  $1F                                      ; $429A: $E6 $1F
@@ -70,7 +70,7 @@ label_006_42A2:
     add  hl, bc                                   ; $42AA: $09
     ld   [hl], $10                                ; $42AB: $36 $10
 
-.jr_42AD:
+.jr_42AD
     call UpdateEntityPosWithSpeed_06              ; $42AD: $CD $41 $65
     call label_3B23                               ; $42B0: $CD $23 $3B
     ld   hl, wEntitiesDirectionTable              ; $42B3: $21 $80 $C3
@@ -104,7 +104,7 @@ AntiKirbyState1Handler::
     and  $03                                      ; $42E1: $E6 $03
     jr   jr_006_42F5                              ; $42E3: $18 $10
 
-.jr_42E5:
+.jr_42E5
     call func_006_6594                            ; $42E5: $CD $94 $65
     push de                                       ; $42E8: $D5
     call func_006_65A4                            ; $42E9: $CD $A4 $65
@@ -175,7 +175,7 @@ jr_006_432B:
     inc  [hl]                                     ; $4348: $34
     inc  [hl]                                     ; $4349: $34
 
-.jr_434A:
+.jr_434A
     dec  [hl]                                     ; $434A: $35
 
 jr_006_434B:
@@ -275,7 +275,7 @@ AntiKirbyState3Handler::
     ld   a, JINGLE_BUMP                           ; $43DE: $3E $09
     ldh  [hJingle], a                             ; $43E0: $E0 $F2
 
-.jr_43E2:
+.jr_43E2
     ld   hl, wEntitiesDirectionTable              ; $43E2: $21 $80 $C3
     add  hl, bc                                   ; $43E5: $09
     ld   a, [hl]                                  ; $43E6: $7E
@@ -303,7 +303,7 @@ jr_006_43F5:
 
     ld   a, $E8                                   ; $440A: $3E $E8
 
-.jr_440C:
+.jr_440C
     ldh  [hLinkSpeedX], a                         ; $440C: $E0 $9A
     ld   a, $10                                   ; $440E: $3E $10
     ldh  [hLinkVelocityZ], a                      ; $4410: $E0 $A3
@@ -402,7 +402,7 @@ func_006_44B6::
     ld   a, $03                                   ; $44EC: $3E $03
     jp   func_015_7964_trampoline                 ; $44EE: $C3 $A0 $3D
 
-.jr_44F1:
+.jr_44F1
     sub  $08                                      ; $44F1: $D6 $08
     rla                                           ; $44F3: $17
     rla                                           ; $44F4: $17

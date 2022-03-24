@@ -34,7 +34,7 @@ MadamMeowMeowEntityHandler::
     ld   a, $FF                                   ; $5B7E: $3E $FF
     ld   [wAddHealthBuffer], a                    ; $5B80: $EA $93 $DB
 
-.jr_5B83:
+.jr_5B83
     ldh  a, [hFrameCounter]                       ; $5B83: $F0 $E7
     and  $1F                                      ; $5B85: $E6 $1F
     jr   nz, .jr_5B91                             ; $5B87: $20 $08
@@ -44,7 +44,7 @@ MadamMeowMeowEntityHandler::
     add  hl, bc                                   ; $5B8F: $09
     ld   [hl], e                                  ; $5B90: $73
 
-.jr_5B91:
+.jr_5B91
     call SetEntitySpriteVariantForDirection       ; $5B91: $CD $41 $64
     ld   de, MadamMeowMeowSpriteVariants          ; $5B94: $11 $56 $5B
     call RenderActiveEntitySpritesPair            ; $5B97: $CD $C0 $3B
@@ -66,7 +66,7 @@ MadamMeowMeowEntityHandler::
     and  $80                                      ; $5BB2: $E6 $80
     jr   z, jr_006_5BC4                           ; $5BB4: $28 $0E
 
-.jr_5BB6:
+.jr_5BB6
     ld   [hl], b                                  ; $5BB6: $70
     ld   hl, wEntitiesSpeedZTable                 ; $5BB7: $21 $20 $C3
     add  hl, bc                                   ; $5BBA: $09
@@ -102,7 +102,7 @@ jr_006_5BC4:
     ld   e, $2F                                   ; $5BEE: $1E $2F
     jr   jr_006_5C00                              ; $5BF0: $18 $0E
 
-.jr_5BF2:
+.jr_5BF2
     ld   a, [wIsBowWowFollowingLink]              ; $5BF2: $FA $56 $DB
     and  a                                        ; $5BF5: $A7
     jr   z, jr_006_5C00                           ; $5BF6: $28 $08

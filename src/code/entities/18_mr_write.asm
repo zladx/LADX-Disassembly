@@ -38,7 +38,7 @@ MrWriteEntityHandler::
     ld   hl, Data_018_4B55                        ; $4BAD: $21 $55 $4B
     jr   jr_018_4BB5                              ; $4BB0: $18 $03
 
-.jr_4BB2:
+.jr_4BB2
     ld   hl, Data_018_4B15                        ; $4BB2: $21 $15 $4B
 
 jr_018_4BB5:
@@ -69,7 +69,7 @@ jr_018_4BB5:
     add  $02                                      ; $4BDF: $C6 $02
     call SetEntitySpriteVariant                   ; $4BE1: $CD $0C $3B
 
-.jr_4BE4:
+.jr_4BE4
     call func_018_7D36                            ; $4BE4: $CD $36 $7D
     ldh  a, [hMapRoom]                            ; $4BE7: $F0 $F6
     cp   UNKNOWN_ROOM_A8                          ; $A8 = Mr. Write's house
@@ -82,7 +82,7 @@ jr_018_4BB5:
 
     ld   de, MrWrite1SpriteVariants               ; $4BF8: $11 $99 $4B
 
-.jr_4BFB:
+.jr_4BFB
     xor  a                                        ; $4BFB: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4BFC: $E0 $F1
     ldh  a, [hActiveEntityPosX]                   ; $4BFE: $F0 $EE
@@ -119,13 +119,13 @@ MrWriteState0Handler::
     call_open_dialog $167                         ; $4C33
     jp   IncrementEntityState                     ; $4C38: $C3 $12 $3B
 
-.jr_4C3B:
+.jr_4C3B
     ld   a, $66                                   ; $4C3B: $3E $66
     jr   c, .jr_4C41                              ; $4C3D: $38 $02
 
     ld   a, $6B                                   ; $4C3F: $3E $6B
 
-.jr_4C41:
+.jr_4C41
     jp   OpenDialogInTable1                       ; $4C41: $C3 $73 $23
 
 MrWriteState1Handler::
@@ -140,7 +140,7 @@ MrWriteState1Handler::
 
     jp_open_dialog $168                           ; $4C53
 
-.jr_4C58:
+.jr_4C58
     ld   [hl], b                                  ; $4C58: $70
     jp_open_dialog $169                           ; $4C59
 
@@ -182,13 +182,13 @@ func_018_4C87::
     call_open_dialog $134                         ; $4C92
     jp   IncrementEntityState                     ; $4C97: $C3 $12 $3B
 
-.jr_4C9A:
+.jr_4C9A
     ld   a, $33                                   ; $4C9A: $3E $33
     jr   c, .jr_4CA0                              ; $4C9C: $38 $02
 
     ld   a, $39                                   ; $4C9E: $3E $39
 
-.jr_4CA0:
+.jr_4CA0
     jp   OpenDialogInTable1                       ; $4CA0: $C3 $73 $23
 
 func_018_4CA3::
@@ -239,7 +239,7 @@ func_018_4CD1::
     ldh  [hReplaceTiles], a                       ; $4CE9: $E0 $A5
     ret                                           ; $4CEB: $C9
 
-.jr_4CEC:
+.jr_4CEC
     dec  [hl]                                     ; $4CEC: $35
     jp_open_dialog $137                           ; $4CED
 

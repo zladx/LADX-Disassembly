@@ -23,7 +23,7 @@ DroppableFairyEntityHandler::
     bit  7, a                                     ; $6188: $CB $7F
     jr   z, .jr_618C                              ; $618A: $28 $00
 
-.jr_618C:
+.jr_618C
     cp   $20                                      ; $618C: $FE $20
     jr   c, jr_003_619C                           ; $618E: $38 $0C
 
@@ -32,7 +32,7 @@ DroppableFairyEntityHandler::
     bit  7, a                                     ; $6194: $CB $7F
     jr   z, .jr_6198                              ; $6196: $28 $00
 
-.jr_6198:
+.jr_6198
     cp   $20                                      ; $6198: $FE $20
     jr   nc, jr_003_61BB                          ; $619A: $30 $1F
 

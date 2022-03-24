@@ -18,7 +18,7 @@ CopyPalettesToVRAM::
     ld   de, $FF68                                ; $4010: $11 $68 $FF
     call func_021_4062                            ; $4013: $CD $62 $40
 
-.jr_4016:
+.jr_4016
     ld   a, [wPaletteDataFlags]                   ; $4016: $FA $D1 $DD
     and  $02                                      ; $4019: $E6 $02
     jr   z, .jr_4026                              ; $401B: $28 $09
@@ -27,7 +27,7 @@ CopyPalettesToVRAM::
     ld   de, $FF6A                                ; $4020: $11 $6A $FF
     call func_021_4062                            ; $4023: $CD $62 $40
 
-.jr_4026:
+.jr_4026
     xor  a                                        ; $4026: $AF
     ld   [wPaletteDataFlags], a                   ; $4027: $EA $D1 $DD
     ret                                           ; $402A: $C9
@@ -49,7 +49,7 @@ jr_021_402B:
     ld   hl, wBGPal1                              ; $4042: $21 $10 $DC
     jr   jr_021_404F                              ; $4045: $18 $08
 
-.jr_4047:
+.jr_4047
     ldh  [rOCPS], a                               ; $4047: $E0 $6A
     ld   bc, rOBPD                                ; $4049: $01 $6B $FF
     ld   hl, wObjPal1                             ; $404C: $21 $50 $DC
@@ -118,7 +118,7 @@ LoadPaletteForTilemap::
     pop  de                                       ; $409D: $D1
     pop  bc                                       ; $409E: $C1
 
-.jr_409F:
+.jr_409F
     ld   a, $02                                   ; $409F: $3E $02
     ldh  [rSVBK], a                               ; $40A1: $E0 $70
     call CopyData                                 ; $40A3: $CD $14 $29
@@ -152,7 +152,7 @@ LoadRoomPalettes::
     ld   a, $01                                   ; $40CE: $3E $01
     ld   [wPaletteUnknownE], a                    ; $40D0: $EA $D5 $DD
 
-.jr_40D3:
+.jr_40D3
     call func_021_40DB                            ; $40D3: $CD $DB $40
     xor  a                                        ; $40D6: $AF
     ld   [wPaletteUnknownE], a                    ; $40D7: $EA $D5 $DD
@@ -197,7 +197,7 @@ func_021_40DB::
     ld   [hl], a                                  ; $4118: $77
     ret                                           ; $4119: $C9
 
-.jr_411A:
+.jr_411A
     ld   a, [wRoomTransitionDirection]            ; $411A: $FA $25 $C1
     cp   $04                                      ; $411D: $FE $04
     ret  nz                                       ; $411F: $C0
@@ -209,7 +209,7 @@ func_021_40DB::
     ld   hl, Data_021_67D0                        ; $4126: $21 $D0 $67
     jp   label_021_41B4                           ; $4129: $C3 $B4 $41
 
-.jr_412C:
+.jr_412C
     cp   $0A                                      ; $412C: $FE $0A
     jr   nc, jr_021_416C                          ; $412E: $30 $3C
 
@@ -239,7 +239,7 @@ func_021_40DB::
     cp   UNKNOWN_ROOM_6B                          ; $4159: $FE $6B
     jr   nz, jr_021_4162                          ; $415B: $20 $05
 
-.jr_415D:
+.jr_415D
     ld   hl, Data_021_6750                        ; $415D: $21 $50 $67
     jr   jr_021_416A                              ; $4160: $18 $08
 
@@ -278,7 +278,7 @@ jr_021_416C:
     ld   hl, Data_021_73B0                        ; $4187: $21 $B0 $73
     jr   jr_021_41B4                              ; $418A: $18 $28
 
-.jr_418C:
+.jr_418C
     ld   hl, Data_021_74A0                        ; $418C: $21 $A0 $74
     jr   jr_021_41B4                              ; $418F: $18 $23
 
@@ -328,7 +328,7 @@ jr_021_41B4:
     call CopyData                                 ; $41D2: $CD $14 $29
     pop  hl                                       ; $41D5: $E1
 
-.jr_41D6:
+.jr_41D6
     ld   bc, $40                                  ; $41D6: $01 $40 $00
     ld   de, wBGPal1                              ; $41D9: $11 $10 $DC
     ld   a, $02                                   ; $41DC: $3E $02
@@ -363,7 +363,7 @@ jr_021_420B:
     ld   a, [hl]                                  ; $4211: $7E
     ld   [de], a                                  ; $4212: $12
 
-.jr_4213:
+.jr_4213
     ld   a, $02                                   ; $4213: $3E $02
     ldh  [rSVBK], a                               ; $4215: $E0 $70
     ld   a, [hl+]                                 ; $4217: $2A
@@ -391,7 +391,7 @@ jr_021_4222:
 
     ld   hl, Data_021_5534                        ; $4235: $21 $34 $55
 
-.jr_4238:
+.jr_4238
     ld   c, $02                                   ; $4238: $0E $02
     ld   de, wObjPal8 + 2*2                       ; $423A: $11 $8C $DC
 
@@ -403,7 +403,7 @@ jr_021_423D:
     ld   a, [hl]                                  ; $4243: $7E
     ld   [wObjPal8 + 2*2], a                      ; $4244: $EA $8C $DC
 
-.jr_4247:
+.jr_4247
     ld   a, $02                                   ; $4247: $3E $02
     ldh  [rSVBK], a                               ; $4249: $E0 $70
     ld   a, [hl+]                                 ; $424B: $2A
@@ -451,7 +451,7 @@ label_021_425E:
     ld   a, $02                                   ; $4290: $3E $02
     ld   [wPaletteDataFlags], a                   ; $4292: $EA $D1 $DD
 
-.jr_4295:
+.jr_4295
     call CopyData                                 ; $4295: $CD $14 $29
     xor  a                                        ; $4298: $AF
     ld   [wPaletteToLoadForTileMap], a            ; $4299: $EA $D2 $DD
@@ -895,7 +895,7 @@ jr_021_5190:
     ld   [wPaletteUnknownE], a                    ; $51CA: $EA $D5 $DD
     jr   ret_021_51D5                             ; $51CD: $18 $06
 
-.jr_51CF:
+.jr_51CF
     inc  hl                                       ; $51CF: $23
 
 jr_021_51D0:
@@ -930,7 +930,7 @@ jr_021_51DB:
     ld   [wPaletteToLoadForTileMap], a            ; $51EB: $EA $D2 $DD
     jr   ret_021_51F5                             ; $51EE: $18 $05
 
-.jr_51F0:
+.jr_51F0
     inc  hl                                       ; $51F0: $23
 
 jr_021_51F1:
@@ -1017,7 +1017,7 @@ jr_021_5323:
     ld   [wDDD7], a                               ; $5338: $EA $D7 $DD
     jr   ret_021_5342                             ; $533B: $18 $05
 
-.jr_533D:
+.jr_533D
     inc  hl                                       ; $533D: $23
 
 jr_021_533E:
@@ -1063,7 +1063,7 @@ func_021_5366::
     ld   l, a                                     ; $5378: $6F
     jr   jr_021_539C                              ; $5379: $18 $21
 
-.jr_537B:
+.jr_537B
     sub  $0A                                      ; $537B: $D6 $0A
     sla  a                                        ; $537D: $CB $27
     ld   e, a                                     ; $537F: $5F
@@ -1167,7 +1167,7 @@ func_021_53F3::
     ld   a, $40                                   ; $5419: $3E $40
     jr   jr_021_541F                              ; $541B: $18 $02
 
-.jr_541D:
+.jr_541D
     ld   a, $80                                   ; $541D: $3E $80
 
 jr_021_541F:
@@ -1179,7 +1179,7 @@ jr_021_541F:
     ld   a, $17                                   ; $5428: $3E $17
     jr   jr_021_542E                              ; $542A: $18 $02
 
-.jr_542C:
+.jr_542C
     ld   a, $0B                                   ; $542C: $3E $0B
 
 jr_021_542E:
@@ -1224,7 +1224,7 @@ jr_021_5448:
     and  a                                        ; $545D: $A7
     jr   z, ret_021_5465                          ; $545E: $28 $05
 
-.jr_5460:
+.jr_5460
     ld   a, $01                                   ; $5460: $3E $01
     ld   [wPaletteDataFlags], a                   ; $5462: $EA $D1 $DD
 
@@ -1262,7 +1262,7 @@ jr_021_5476:
     ldh  [rSVBK], a                               ; $548A: $E0 $70
     jr   jr_021_5491                              ; $548C: $18 $03
 
-.jr_548E:
+.jr_548E
     ld   a, [hl+]                                 ; $548E: $2A
     ld   e, a                                     ; $548F: $5F
     ld   d, [hl]                                  ; $5490: $56
@@ -1325,7 +1325,7 @@ jr_021_5491:
     ldh  [rSVBK], a                               ; $54E9: $E0 $70
     jr   jr_021_54F1                              ; $54EB: $18 $04
 
-.jr_54ED:
+.jr_54ED
     ld   a, e                                     ; $54ED: $7B
     ld   [hl+], a                                 ; $54EE: $22
     ld   a, d                                     ; $54EF: $7A

@@ -33,12 +33,12 @@ BoomerangEntityHandler::
     and  $03                                      ; $447E: $E6 $03
     ld   [hl], a                                  ; $4480: $77
 
-.jr_4481:
+.jr_4481
     ld   a, $08                                   ; $4481: $3E $08
     ld   [wC19E], a                               ; $4483: $EA $9E $C1
     call label_3B7B                               ; $4486: $CD $7B $3B
 
-.jr_4489:
+.jr_4489
     call UpdateEntityPosWithSpeed_19              ; $4489: $CD $B8 $7D
     call label_3B2E                               ; $448C: $CD $2E $3B
     call func_019_44CC                            ; $448F: $CD $CC $44
@@ -55,7 +55,7 @@ func_019_4499::
     call ApplyVectorTowardsLink_trampoline        ; $44A0: $CD $AA $3B
     jp   IncrementEntityState                     ; $44A3: $C3 $12 $3B
 
-.jr_44A6:
+.jr_44A6
     ld   hl, wEntitiesCollisionsTable             ; $44A6: $21 $A0 $C2
     add  hl, bc                                   ; $44A9: $09
     ld   a, [hl]                                  ; $44AA: $7E
@@ -79,7 +79,7 @@ func_019_44BA::
     ld   a, $20                                   ; $44C0: $3E $20
     call ApplyVectorTowardsLink_trampoline        ; $44C2: $CD $AA $3B
 
-.jr_44C5:
+.jr_44C5
     call label_3B44                               ; $44C5: $CD $44 $3B
     ret  nc                                       ; $44C8: $D0
 
@@ -90,7 +90,7 @@ func_019_44CC::
     and  a                                        ; $44CF: $A7
     ret  nz                                       ; $44D0: $C0
 
-.jr_44D1:
+.jr_44D1
     ldh  a, [hObjectUnderEntity]                  ; $44D1: $F0 $AF
     cp   $D3                                      ; $44D3: $FE $D3
     jr   z, .jr_44DA                              ; $44D5: $28 $03
@@ -98,7 +98,7 @@ func_019_44CC::
     cp   $5C                                      ; $44D7: $FE $5C
     ret  nz                                       ; $44D9: $C0
 
-.jr_44DA:
+.jr_44DA
     ld   hl, wEntitiesCollisionsTable             ; $44DA: $21 $A0 $C2
     add  hl, bc                                   ; $44DD: $09
     ld   [hl], b                                  ; $44DE: $70

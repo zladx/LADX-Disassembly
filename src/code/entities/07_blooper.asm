@@ -15,7 +15,7 @@ BlooperEntityHandler::
     call label_3B39                               ; $5C05: $CD $39 $3B
     call UpdateEntityPosWithSpeed_07              ; $5C08: $CD $0A $7E
 
-.jr_5C0B:
+.jr_5C0B
     call label_3B23                               ; $5C0B: $CD $23 $3B
     ld   hl, wEntitiesGroundStatusTable           ; $5C0E: $21 $70 $C4
     add  hl, bc                                   ; $5C11: $09
@@ -35,7 +35,7 @@ BlooperEntityHandler::
     add  hl, bc                                   ; $5C28: $09
     ld   [hl], a                                  ; $5C29: $77
 
-.jr_5C2A:
+.jr_5C2A
     xor  a                                        ; $5C2A: $AF
     call SetEntitySpriteVariant                   ; $5C2B: $CD $0C $3B
     ldh  a, [hActiveEntityState]                  ; $5C2E: $F0 $F0
@@ -63,12 +63,12 @@ func_007_5C35::
     ld   [hl], $01                                ; $5C55: $36 $01
     ret                                           ; $5C57: $C9
 
-.jr_5C58:
+.jr_5C58
     call GetEntitySpeedYAddress                   ; $5C58: $CD $05 $40
     ld   a, [hl]                                  ; $5C5B: $7E
     sub  $04                                      ; $5C5C: $D6 $04
 
-.jr_5C5E:
+.jr_5C5E
     jr   z, jr_007_5C67                           ; $5C5E: $28 $07
 
     and  $80                                      ; $5C60: $E6 $80
@@ -77,7 +77,7 @@ func_007_5C35::
     inc  [hl]                                     ; $5C64: $34
     inc  [hl]                                     ; $5C65: $34
 
-.jr_5C66:
+.jr_5C66
     dec  [hl]                                     ; $5C66: $35
 
 jr_007_5C67:
@@ -93,7 +93,7 @@ jr_007_5C67:
     inc  [hl]                                     ; $5C73: $34
     inc  [hl]                                     ; $5C74: $34
 
-.jr_5C75:
+.jr_5C75
     dec  [hl]                                     ; $5C75: $35
 
 ret_007_5C76:
@@ -111,7 +111,7 @@ func_007_5C79::
     ld   [hl], b                                  ; $5C83: $70
     ret                                           ; $5C84: $C9
 
-.jr_5C85:
+.jr_5C85
     ldh  a, [hFrameCounter]                       ; $5C85: $F0 $E7
     and  $01                                      ; $5C87: $E6 $01
     jr   nz, .jr_5CA0                             ; $5C89: $20 $15
@@ -130,7 +130,7 @@ func_007_5C79::
     add  [hl]                                     ; $5C9E: $86
     ld   [hl], a                                  ; $5C9F: $77
 
-.jr_5CA0:
+.jr_5CA0
     ld   a, $01                                   ; $5CA0: $3E $01
     jp   SetEntitySpriteVariant                   ; $5CA2: $C3 $0C $3B
 
@@ -157,7 +157,7 @@ jr_007_5CB8:
 
     xor  a                                        ; $5CBF: $AF
 
-.jr_5CC0:
+.jr_5CC0
     ld   [de], a                                  ; $5CC0: $12
     inc  hl                                       ; $5CC1: $23
     inc  de                                       ; $5CC2: $13
@@ -185,7 +185,7 @@ jr_007_5CB8:
     ld   [de], a                                  ; $5CDD: $12
     inc  de                                       ; $5CDE: $13
 
-.jr_5CDF:
+.jr_5CDF
     pop  bc                                       ; $5CDF: $C1
     inc  de                                       ; $5CE0: $13
     ldh  a, [hActiveEntityFlipAttribute]          ; $5CE1: $F0 $ED

@@ -1408,7 +1408,7 @@ IF LANG_JP
 ENDC
     ld   a, FILE_28                               ; $4F27: $3E $28 ; $4F27: $3E $28
 
-.jr_4f76:
+.jr_4f76
     dec  e                                        ; $4F29: $1D ; $4F29: $1D
     jr   nz, .jr_4F2E                             ; $4F2A: $20 $02 ; $4F2A: $20 $02
 

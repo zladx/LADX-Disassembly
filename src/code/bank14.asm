@@ -206,7 +206,7 @@ PerformOverworldAudioTasks::
 
     ldh  a, [hNextDefaultMusicTrack]              ; $4AE2: $F0 $BF
 
-.jr_4AE4:
+.jr_4AE4
     ld   [wMusicTrackToPlay], a                   ; $4AE4: $EA $68 $D3
 
 jr_014_4AE7:
@@ -258,7 +258,7 @@ jr_014_4AE7:
 
     inc  a                                        ; $4B1D: $3C
 
-.jr_4B1E:
+.jr_4B1E
     ld   [wC5A9], a                               ; $4B1E: $EA $A9 $C5
     ld   a, [wC5AC]                               ; $4B21: $FA $AC $C5
     inc  a                                        ; $4B24: $3C
@@ -267,7 +267,7 @@ jr_014_4AE7:
 
     xor  a                                        ; $4B29: $AF
 
-.jr_4B2A:
+.jr_4B2A
     ld   [wC5AC], a                               ; $4B2A: $EA $AC $C5
     ldh  a, [hFrameCounter]                       ; $4B2D: $F0 $E7
     and  $3F                                      ; $4B2F: $E6 $3F
@@ -280,7 +280,7 @@ jr_014_4AE7:
     inc  a                                        ; $4B3A: $3C
     ld   [wDB47], a                               ; $4B3B: $EA $47 $DB
 
-.jr_4B3E:
+.jr_4B3E
     ld   a, [wD464]                               ; $4B3E: $FA $64 $D4
     and  a                                        ; $4B41: $A7
     ret  z                                        ; $4B42: $C8
@@ -292,7 +292,7 @@ jr_014_4AE7:
     call func_014_4BEF                            ; $4B48: $CD $EF $4B
     jr   jr_014_4B5A                              ; $4B4B: $18 $0D
 
-.jr_4B4D:
+.jr_4B4D
     ld   a, $E4                                   ; $4B4D: $3E $E4
     ld   [wBGPalette], a                          ; $4B4F: $EA $97 $DB
     ld   [wOBJ1Palette], a                        ; $4B52: $EA $99 $DB
@@ -324,7 +324,7 @@ jr_014_4B5A:
     call func_014_4BA7                            ; $4B78: $CD $A7 $4B
     jr   jr_014_4B8A                              ; $4B7B: $18 $0D
 
-.jr_4B7D:
+.jr_4B7D
     ld   a, $CC                                   ; $4B7D: $3E $CC
     ld   [wBGPalette], a                          ; $4B7F: $EA $97 $DB
     ld   [wOBJ1Palette], a                        ; $4B82: $EA $99 $DB
@@ -361,7 +361,7 @@ func_014_4BA7::
     ld   a, $01                                   ; $4BBA: $3E $01
     jr   jr_014_4BD6                              ; $4BBC: $18 $18
 
-.jr_4BBE:
+.jr_4BBE
     ld   de, Data_014_4B97                        ; $4BBE: $11 $97 $4B
     ld   hl, wObjPal1                             ; $4BC1: $21 $50 $DC
     ld   b, $20                                   ; $4BC4: $06 $20
@@ -411,7 +411,7 @@ func_014_4BEF::
     ld   a, $01                                   ; $4C00: $3E $01
     jr   jr_014_4BD6                              ; $4C02: $18 $D2
 
-.jr_4C04:
+.jr_4C04
     ld   hl, wObjPal1                             ; $4C04: $21 $50 $DC
     call func_014_4C10                            ; $4C07: $CD $10 $4C
     ld   a, $02                                   ; $4C0A: $3E $02
@@ -549,7 +549,7 @@ jr_014_4CB2:
     and  a                                        ; $4CC5: $A7
     ret  z                                        ; $4CC6: $C8
 
-.jr_4CC7:
+.jr_4CC7
     ld   a, [wLinkMotionState]                    ; $4CC7: $FA $1C $C1
     cp   LINK_MOTION_DEFAULT                      ; $4CCA: $FE $00
     ret  nz                                       ; $4CCC: $C0
@@ -564,7 +564,7 @@ jr_014_4CB2:
     ld   [wRoomTransitionDirection], a            ; $4CDB: $EA $25 $C1
     ret                                           ; $4CDE: $C9
 
-.jr_4CDF:
+.jr_4CDF
     ld   a, [wDDD7]                               ; $4CDF: $FA $D7 $DD
     dec  a                                        ; $4CE2: $3D
     ld   [wDDD7], a                               ; $4CE3: $EA $D7 $DD
@@ -573,7 +573,7 @@ jr_014_4CB2:
     cp   $01                                      ; $4CE8: $FE $01
     ret  nz                                       ; $4CEA: $C0
 
-.jr_4CEB:
+.jr_4CEB
     ld   a, [wDDD6]                               ; $4CEB: $FA $D6 $DD
     and  $80                                      ; $4CEE: $E6 $80
     jr   nz, jr_014_4D0B                          ; $4CF0: $20 $19
@@ -590,7 +590,7 @@ jr_014_4CB2:
     dec  [hl]                                     ; $4CFE: $35
     jr   jr_014_4D22                              ; $4CFF: $18 $21
 
-.jr_4D01:
+.jr_4D01
     ld   a, [wBGPaletteEffectAddress]             ; $4D01: $FA $CC $C3
     sub  $04                                      ; $4D04: $D6 $04
     ld   [wBGPaletteEffectAddress], a             ; $4D06: $EA $CC $C3
@@ -609,7 +609,7 @@ jr_014_4D0B:
     inc  [hl]                                     ; $4D17: $34
     jr   jr_014_4D22                              ; $4D18: $18 $08
 
-.jr_4D1A:
+.jr_4D1A
     ld   a, [wBGPaletteEffectAddress]             ; $4D1A: $FA $CC $C3
     add  $04                                      ; $4D1D: $C6 $04
     ld   [wBGPaletteEffectAddress], a             ; $4D1F: $EA $CC $C3
@@ -626,7 +626,7 @@ jr_014_4D22:
     xor  a                                        ; $4D2E: $AF
     ld   [wDDD6], a                               ; $4D2F: $EA $D6 $DD
 
-.jr_4D32:
+.jr_4D32
     ld   a, [wDDD7]                               ; $4D32: $FA $D7 $DD
     and  a                                        ; $4D35: $A7
     jr   z, .jr_4D4A                              ; $4D36: $28 $12
@@ -642,7 +642,7 @@ jr_014_4D22:
     ld   [hl], a                                  ; $4D46: $77
     call Farcall                                  ; $4D47: $CD $D7 $0B
 
-.jr_4D4A:
+.jr_4D4A
     ld   a, [wDDD7]                               ; $4D4A: $FA $D7 $DD
     xor  $01                                      ; $4D4D: $EE $01
     swap a                                        ; $4D4F: $CB $37
@@ -662,7 +662,7 @@ jr_014_4D22:
     ld   a, $0A                                   ; $4D69: $3E $0A
     jr   jr_014_4D6F                              ; $4D6B: $18 $02
 
-.jr_4D6D:
+.jr_4D6D
     ld   a, $0B                                   ; $4D6D: $3E $0B
 
 jr_014_4D6F:
@@ -815,7 +815,7 @@ TeleportToManboPond::
     and  $0F                                      ; $4E67: $E6 $0F
     jr   jr_014_4E6F                              ; $4E69: $18 $04
 
-.jr_4E6B:
+.jr_4E6B
     cp   $0A                                      ; $4E6B: $FE $0A
     jr   nc, jr_014_4E88                          ; $4E6D: $30 $19
 
@@ -907,7 +907,7 @@ ApplyFadeToWhite_DMG::
     inc  a                                        ; $4FF7: $3C
     ld   [wC3CA], a                               ; $4FF8: $EA $CA $C3
 
-.jr_4FFB:
+.jr_4FFB
     ld   a, [wC3CA]                               ; $4FFB: $FA $CA $C3
     ld   e, a                                     ; $4FFE: $5F
     ldh  a, [hFrameCounter]                       ; $4FFF: $F0 $E7
@@ -930,7 +930,7 @@ ApplyFadeToWhite_DMG::
     ld   [wOBJ0Palette], a                        ; $501E: $EA $98 $DB
     jr   jr_014_5036                              ; $5021: $18 $13
 
-.jr_5023:
+.jr_5023
     ld   hl, Data_014_4EC8                        ; $5023: $21 $C8 $4E
     add  hl, de                                   ; $5026: $19
     ld   a, [hl]                                  ; $5027: $7E
@@ -961,7 +961,7 @@ RenderTransitionEffect::
     xor  $E0                                      ; $504D: $EE $E0
     ld   e, a                                     ; $504F: $5F
 
-.jr_5050:
+.jr_5050
     ld   a, e                                     ; $5050: $7B
     ldh  [hMultiPurpose1], a                      ; $5051: $E0 $D8
     ld   hl, wC17C                                ; $5053: $21 $7C $C1
@@ -1010,7 +1010,7 @@ label_014_5067:
 
     inc  c                                        ; $509A: $0C
 
-.jr_509B:
+.jr_509B
     ldh  a, [hMultiPurpose0]                      ; $509B: $F0 $D7
     add  [hl]                                     ; $509D: $86
     and  $1F                                      ; $509E: $E6 $1F
@@ -1027,7 +1027,7 @@ label_014_5067:
     cpl                                           ; $50B0: $2F
     inc  a                                        ; $50B1: $3C
 
-.jr_50B2:
+.jr_50B2
     push af                                       ; $50B2: $F5
     ld   hl, hBaseScrollX                         ; $50B3: $21 $96 $FF
     add  [hl]                                     ; $50B6: $86
@@ -1152,7 +1152,7 @@ func_014_5347::
     cp   LINK_MOTION_FALLING_DOWN                 ; $5350: $FE $06
     jr   nz, jr_014_5360                          ; $5352: $20 $0C
 
-.jr_5354:
+.jr_5354
     ldh  a, [hActiveEntityType]                   ; $5354: $F0 $EB
     cp   ENTITY_WRECKING_BALL                     ; $5356: $FE $A8
     jr   z, jr_014_5360                           ; $5358: $28 $06
@@ -1169,7 +1169,7 @@ jr_014_5360:
     ld   [wC5AE], a                               ; $5367: $EA $AE $C5
     ret                                           ; $536A: $C9
 
-.jr_536B:
+.jr_536B
     ld   a, [wIsCarryingLiftedObject]             ; $536B: $FA $5C $C1
     cp   TRUE                                     ; $536E: $FE $01
     jp   nz, label_014_5443                       ; $5370: $C2 $43 $54
@@ -1181,7 +1181,7 @@ jr_014_5360:
 
     ld   d, INVENTORY_BOMBS                       ; $537B: $16 $02
 
-.jr_537D:
+.jr_537D
     ld   e, $10                                   ; $537D: $1E $10
     ld   a, [wBButtonSlot]                        ; $537F: $FA $00 $DB
     cp   d                                        ; $5382: $BA
@@ -1190,7 +1190,7 @@ jr_014_5360:
     sla  e                                        ; $5385: $CB $23
     jr   jr_014_5391                              ; $5387: $18 $08
 
-.jr_5389:
+.jr_5389
     ld   a, [wAButtonSlot]                        ; $5389: $FA $01 $DB
     cp   d                                        ; $538C: $BA
     jr   z, jr_014_5391                           ; $538D: $28 $02
@@ -1221,7 +1221,7 @@ func_014_53A3::
     ld   [hl], $A0                                ; $53B2: $36 $A0
     jr   jr_014_5409                              ; $53B4: $18 $53
 
-.jr_53B6:
+.jr_53B6
     ld   hl, wEntitiesStatusTable                 ; $53B6: $21 $80 $C2
     add  hl, bc                                   ; $53B9: $09
     cp   $D6                                      ; $53BA: $FE $D6
@@ -1259,7 +1259,7 @@ func_014_53A3::
     ld   [hl], a                                  ; $53EB: $77
     pop  hl                                       ; $53EC: $E1
 
-.jr_53ED:
+.jr_53ED
     ld   [hl], $05                                ; $53ED: $36 $05
     call IncrementEntityState                     ; $53EF: $CD $12 $3B
     ld   [hl], $02                                ; $53F2: $36 $02
@@ -1274,7 +1274,7 @@ jr_014_53F6:
     ld   [hl], $03                                ; $53FF: $36 $03
     jr   jr_014_5409                              ; $5401: $18 $06
 
-.jr_5403:
+.jr_5403
     cp   $05                                      ; $5403: $FE $05
     jr   z, jr_014_5409                           ; $5405: $28 $02
 
@@ -1288,7 +1288,7 @@ jr_014_5409:
 
     ld   e, $08                                   ; $540F: $1E $08
 
-.jr_5411:
+.jr_5411
     ldh  a, [hActiveEntityType]                   ; $5411: $F0 $EB
     cp   ENTITY_BOMB                              ; $5413: $FE $02
     jr   nz, .jr_541B                             ; $5415: $20 $04
@@ -1297,7 +1297,7 @@ jr_014_5409:
     add  $04                                      ; $5418: $C6 $04
     ld   e, a                                     ; $541A: $5F
 
-.jr_541B:
+.jr_541B
     ldh  a, [hLinkDirection]                      ; $541B: $F0 $9E
     add  e                                        ; $541D: $83
     ld   e, a                                     ; $541E: $5F
@@ -1344,7 +1344,7 @@ DialogOpenAnimationStart::
     cp   LINK_MOTION_MAP_FADE_IN                  ; $5456: $FE $04
     jr   z, jr_014_5444                           ; $5458: $28 $EA
 
-.jr_545A:
+.jr_545A
     ld   a, [wGameplayType]                       ; $545A: $FA $95 $DB
     cp   GAMEPLAY_CREDITS                         ; $545D: $FE $01
     jr   z, .jr_547F                              ; $545F: $28 $1E
@@ -1365,7 +1365,7 @@ DialogOpenAnimationStart::
     ld   a, $1C                                   ; $547A: $3E $1C
     ld   [wOBJ0Palette], a                        ; $547C: $EA $98 $DB
 
-.jr_547F:
+.jr_547F
     ld   a, [wDrawCommand]                        ; $547F: $FA $01 $D6
     and  a                                        ; $5482: $A7
     ret  nz                                       ; $5483: $C0
@@ -1415,7 +1415,7 @@ func_014_54AC::
     ldh  [hLinkPositionX], a                      ; $54C6: $E0 $98
     jr   jr_014_54DE                              ; $54C8: $18 $14
 
-.jr_54CA:
+.jr_54CA
     ldh  a, [hLinkPositionX]                      ; $54CA: $F0 $98
     dec  a                                        ; $54CC: $3D
     ldh  [hLinkPositionX], a                      ; $54CD: $E0 $98
@@ -1454,7 +1454,7 @@ func_014_54F8::
     dec  a                                        ; $54FE: $3D
     ld   [wC178], a                               ; $54FF: $EA $78 $C1
 
-.jr_5502:
+.jr_5502
     ld   a, [wC157]                               ; $5502: $FA $57 $C1
     and  a                                        ; $5505: $A7
     jr   z, ret_014_5525                          ; $5506: $28 $1D
@@ -1502,7 +1502,7 @@ func_014_5526::
     call func_91D.jp_92E                          ; $5549: $CD $2E $09
     pop  bc                                       ; $554C: $C1
 
-.jr_554D:
+.jr_554D
     ld   hl, wDrawCommand                         ; $554D: $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ; $5550: $FA $00 $D6
     ld   e, a                                     ; $5553: $5F
@@ -1538,7 +1538,7 @@ jr_014_557D:
 
     jp   label_014_5743                           ; $5581: $C3 $43 $57
 
-.jr_5584:
+.jr_5584
     ld   a, [wIsIndoor]                           ; $5584: $FA $A5 $DB
     and  a                                        ; $5587: $A7
     jp   z, label_014_5630                        ; $5588: $CA $30 $56
@@ -1568,7 +1568,7 @@ jr_014_557D:
     call func_91D.jp_92E                          ; $55AF: $CD $2E $09
     pop  bc                                       ; $55B2: $C1
 
-.jr_55B3:
+.jr_55B3
     ld   hl, wDrawCommand                         ; $55B3: $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ; $55B6: $FA $00 $D6
     ld   e, a                                     ; $55B9: $5F
@@ -1616,7 +1616,7 @@ jr_014_55E3:
     call func_91D.jp_92E                          ; $55FC: $CD $2E $09
     pop  bc                                       ; $55FF: $C1
 
-.jr_5600:
+.jr_5600
     ld   hl, wDrawCommand                         ; $5600: $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ; $5603: $FA $00 $D6
     ld   e, a                                     ; $5606: $5F
@@ -1657,7 +1657,7 @@ label_014_5630:
     cp   UNKNOWN_ROOM_04                          ; $563C: $FE $04
     jr   nz, jr_014_5643                          ; $563E: $20 $03
 
-.jr_5640:
+.jr_5640
     jp   label_014_5767                           ; $5640: $C3 $67 $57
 
 jr_014_5643:
@@ -1731,7 +1731,7 @@ jr_014_5679:
 
     jr   jr_014_56B7                              ; $56A7: $18 $0E
 
-.jr_56A9:
+.jr_56A9
     cp   $75                                      ; $56A9: $FE $75
     jr   nz, jr_014_56B7                          ; $56AB: $20 $0A
 
@@ -1795,7 +1795,7 @@ jr_014_56C9:
 
     jr   jr_014_5712                              ; $5706: $18 $0A
 
-.jr_5708:
+.jr_5708
     cp   $75                                      ; $5708: $FE $75
     jr   nz, jr_014_5712                          ; $570A: $20 $06
 
@@ -1853,7 +1853,7 @@ label_014_5743:
     cp   UNKNOWN_ROOM_4A                          ; $5751: $FE $4A
     jp   nz, label_014_57E1                       ; $5753: $C2 $E1 $57
 
-.jr_5756:
+.jr_5756
     ld   hl, wRoomObjects                         ; $5756: $21 $11 $D7
     add  hl, de                                   ; $5759: $19
     push hl                                       ; $575A: $E5
@@ -1885,7 +1885,7 @@ label_014_5767:
     call func_91D.jp_92E                          ; $5785: $CD $2E $09
     pop  bc                                       ; $5788: $C1
 
-.jr_5789:
+.jr_5789
     ; Make staircase appear
     ld   hl, wDrawCommand                         ; $5789: $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ; $578C: $FA $00 $D6
@@ -1960,7 +1960,7 @@ label_014_57E1:
     call func_91D.jp_92E                          ; $5803: $CD $2E $09
     pop  bc                                       ; $5806: $C1
 
-.jr_5807:
+.jr_5807
     ld   hl, wDrawCommand                         ; $5807: $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ; $580A: $FA $00 $D6
     ld   e, a                                     ; $580D: $5F
@@ -2020,7 +2020,7 @@ func_014_5838::
 
     ld   hl, MapLayout12                          ; $5863: $21 $20 $45
 
-.jr_5866:
+.jr_5866
     add  hl, de                                   ; $5866: $19
     ld   a, [hl]                                  ; $5867: $7E
     ld   e, a                                     ; $5868: $5F
@@ -2033,7 +2033,7 @@ func_014_5838::
     ld   hl, wColorDungeonRoomStatus              ; $5874: $21 $E0 $DD
     jr   jr_014_5882                              ; $5877: $18 $09
 
-.jr_5879:
+.jr_5879
     cp   $1A                                      ; $5879: $FE $1A
     jr   nc, jr_014_5882                          ; $587B: $30 $05
 
@@ -2063,7 +2063,7 @@ GetChestsStatusForRoom::
     ld   hl, ColorDungeonRoomChestsTable          ; $588C: $21 $60 $48
     jr   jr_014_5894                              ; $588F: $18 $03
 
-.jr_5891:
+.jr_5891
     ld   hl, RoomChestsTable                      ; $5891: $21 $60 $45
 
 jr_014_5894:
@@ -2079,7 +2079,7 @@ func_014_5897::
     ld   hl, MapLayout11                          ; $589D: $21 $E0 $44
     jr   jr_014_58C7                              ; $58A0: $18 $25
 
-.jr_58A2:
+.jr_58A2
     cp   $0B                                      ; $58A2: $FE $0B
     jr   nc, jr_014_58D1                          ; $58A4: $30 $2B
 
@@ -2121,7 +2121,7 @@ jr_014_58D1:
     ld   hl, ColorDungeonEventsTable              ; $58DC: $21 $00 $42
     jr   jr_014_58ED                              ; $58DF: $18 $0C
 
-.jr_58E1:
+.jr_58E1
     cp   $1A                                      ; $58E1: $FE $1A
     jr   nc, .jr_58EA                             ; $58E3: $30 $05
 
@@ -2130,7 +2130,7 @@ jr_014_58D1:
 
     inc  b                                        ; $58E9: $04
 
-.jr_58EA:
+.jr_58EA
     ld   hl, DungeonEventsTable                   ; $58EA: $21 $00 $40
 
 jr_014_58ED:
@@ -2157,7 +2157,7 @@ func_014_5900::
     ld   hl, ColorDungeonRoomChestsTable          ; $590F: $21 $60 $48
     jr   jr_014_5920                              ; $5912: $18 $0C
 
-.jr_5914:
+.jr_5914
     cp   $1A                                      ; $5914: $FE $1A
     jr   nc, .jr_591D                             ; $5916: $30 $05
 
@@ -2166,7 +2166,7 @@ func_014_5900::
 
     inc  d                                        ; $591C: $14
 
-.jr_591D:
+.jr_591D
     ld   hl, RoomChestsTable                      ; $591D: $21 $60 $45
 
 jr_014_5920:
@@ -2182,6 +2182,6 @@ jr_014_5920:
 
     ld   a, $1C                                   ; $592F: $3E $1C
 
-.jr_5931:
+.jr_5931
     ldh  [hMultiPurpose8], a                      ; $5931: $E0 $DF
     ret                                           ; $5933: $C9

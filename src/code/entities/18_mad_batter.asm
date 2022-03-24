@@ -62,7 +62,7 @@ MadBatterState2Handler::
     ld   [hl], $60                                ; $4F3F: $36 $60
     jp   IncrementEntityState                     ; $4F41: $C3 $12 $3B
 
-.jr_018_4F44:
+.jr_018_4F44
     ld   e, $FC                                   ; $4F44: $1E $FC
     sub  $08                                      ; $4F46: $D6 $08
     and  $10                                      ; $4F48: $E6 $10
@@ -70,7 +70,7 @@ MadBatterState2Handler::
 
     ld   e, $04                                   ; $4F4C: $1E $04
 
-.jr_018_4F4E:
+.jr_018_4F4E
     ld   hl, wEntitiesSpeedXTable                 ; $4F4E: $21 $40 $C2
     add  hl, bc                                   ; $4F51: $09
     ld   [hl], e                                  ; $4F52: $73
@@ -134,7 +134,7 @@ jr_018_4F9E:
 
     xor  a                                        ; $4FAE: $AF
 
-.jr_4FAF:
+.jr_4FAF
     ld   [hl], a                                  ; $4FAF: $77
     ld   hl, MadBatterUpgradedMaximumTable        ; $4FB0: $21 $90 $4F
     add  hl, de                                   ; $4FB3: $19
@@ -183,7 +183,7 @@ MadBatterState6Handler::
     ld   [hl], $C0                                ; $4FFE: $36 $C0
     ret                                           ; $5000: $C9
 
-.jr_5001:
+.jr_5001
     dec  [hl]                                     ; $5001: $35
     dec  [hl]                                     ; $5002: $35
     ret                                           ; $5003: $C9
@@ -224,7 +224,7 @@ MadBatterState7Handler::
     ldh  [hReplaceTiles], a                       ; $5041: $E0 $A5
     ret                                           ; $5043: $C9
 
-.jr_5044:
+.jr_5044
     cp   $01                                      ; $5044: $FE $01
     jr   nz, .jr_504D                             ; $5046: $20 $05
 
@@ -232,7 +232,7 @@ MadBatterState7Handler::
     ld   [hl], d                                  ; $504B: $72
     ret                                           ; $504C: $C9
 
-.jr_504D:
+.jr_504D
     ld   hl, wArrowCount                          ; $504D: $21 $45 $DB
     ld   [hl], d                                  ; $5050: $72
     ret                                           ; $5051: $C9
@@ -253,7 +253,7 @@ MadBatterState8Handler::
     ld   a, JINGLE_SWORD_BEAM                     ; $5063: $3E $3B
     ldh  [hJingle], a                             ; $5065: $E0 $F2
 
-.jr_5067:
+.jr_5067
     call UpdateEntityYPosWithSpeed_18             ; $5067: $CD $62 $7E
     ld   hl, wEntitiesSpeedYTable                 ; $506A: $21 $50 $C2
     add  hl, bc                                   ; $506D: $09
@@ -295,7 +295,7 @@ RenderMadBatterSprite::
 
     ld   hl, Data_018_509C                        ; $50B1: $21 $9C $50
 
-.jr_50B4:
+.jr_50B4
     ld   c, $03                                   ; $50B4: $0E $03
     call RenderActiveEntitySpritesRect            ; $50B6: $CD $E6 $3C
     jr   func_018_50D2                            ; $50B9: $18 $17
@@ -348,7 +348,7 @@ label_018_50E2:
 
     ld   a, $44                                   ; $50F8: $3E $44
 
-.jr_50FA:
+.jr_50FA
     ld   [wBGPalette], a                          ; $50FA: $EA $97 $DB
     ret                                           ; $50FD: $C9
 
@@ -396,7 +396,7 @@ func_018_5174::
     add  hl, de                                   ; $518E: $19
     ld   c, [hl]                                  ; $518F: $4E
 
-.jr_5190:
+.jr_5190
     ld   hl, Data_018_5110                        ; $5190: $21 $10 $51
     ldh  a, [hFrameCounter]                       ; $5193: $F0 $E7
     and  $04                                      ; $5195: $E6 $04
@@ -404,7 +404,7 @@ func_018_5174::
 
     ld   hl, Data_018_5140                        ; $5199: $21 $40 $51
 
-.jr_519C:
+.jr_519C
     call RenderActiveEntitySpritesRect            ; $519C: $CD $E6 $3C
     ld   a, $04                                   ; $519F: $3E $04
     jp   func_015_7964_trampoline                 ; $51A1: $C3 $A0 $3D

@@ -63,7 +63,7 @@ BooBuddyState0Handler::
     ldh  a, [hMultiPurpose1]                      ; $79ED: $F0 $D8
     ld   hl, wEntitiesSpeedXTable                 ; $79EF: $21 $40 $C2
 
-.jr_79F2:
+.jr_79F2
     call func_006_7A79                            ; $79F2: $CD $79 $7A
     call label_3B44                               ; $79F5: $CD $44 $3B
     jr   jr_006_7A27                              ; $79F8: $18 $2D
@@ -77,7 +77,7 @@ jr_006_79FA:
     call func_006_65A4                            ; $7A03: $CD $A4 $65
     add  $24                                      ; $7A06: $C6 $24
 
-.jr_7A08:
+.jr_7A08
     cp   $48                                      ; $7A08: $FE $48
     jr   nc, jr_006_7A27                          ; $7A0A: $30 $1B
 
@@ -151,7 +151,7 @@ BooBuddyState1Handler::
     ld   [hl], a                                  ; $7A72: $77
     ret                                           ; $7A73: $C9
 
-.jr_7A74:
+.jr_7A74
     call IncrementEntityState                     ; $7A74: $CD $12 $3B
     ld   [hl], b                                  ; $7A77: $70
     ret                                           ; $7A78: $C9
@@ -170,7 +170,7 @@ func_006_7A79::
     dec  [hl]                                     ; $7A84: $35
     jr   ret_006_7A8B                             ; $7A85: $18 $04
 
-.jr_7A87:
+.jr_7A87
     inc  [hl]                                     ; $7A87: $34
     inc  [hl]                                     ; $7A88: $34
     inc  [hl]                                     ; $7A89: $34
@@ -217,7 +217,7 @@ func_006_7AB0::
     ld   a, $06                                   ; $7ABF: $3E $06
     jr   jr_006_7AC9                              ; $7AC1: $18 $06
 
-.jr_7AC3:
+.jr_7AC3
     ld   a, $07                                   ; $7AC3: $3E $07
     jr   jr_006_7AC9                              ; $7AC5: $18 $02
 

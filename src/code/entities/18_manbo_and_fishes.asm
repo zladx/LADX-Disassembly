@@ -17,7 +17,7 @@ ManboAndFishesEntityHandler::
     dec  a                                        ; $4513: $3D
     ld   [wD214], a                               ; $4514: $EA $14 $D2
 
-.jr_4517:
+.jr_4517
     ld   a, [wD218]                               ; $4517: $FA $18 $D2
     and  a                                        ; $451A: $A7
     jr   z, .jr_4521                              ; $451B: $28 $04
@@ -25,7 +25,7 @@ ManboAndFishesEntityHandler::
     dec  a                                        ; $451D: $3D
     ld   [wD218], a                               ; $451E: $EA $18 $D2
 
-.jr_4521:
+.jr_4521
     call func_018_4833                            ; $4521: $CD $33 $48
     call func_018_7D36                            ; $4524: $CD $36 $7D
     ldh  a, [hActiveEntityState]                  ; $4527: $F0 $F0
@@ -47,7 +47,7 @@ ManboAndFishesState0Handler::
 
     jp_open_dialog $189                           ; $4542
 
-.jr_4547:
+.jr_4547
 IF __PATCH_0__
     ld   a, $02
     ld   [wC167], a
@@ -168,7 +168,7 @@ ManboAndFishesState3Handler::
     ld   [hl], $20                                ; $46CC: $36 $20
     ret                                           ; $46CE: $C9
 
-.jr_46CF:
+.jr_46CF
     ld   a, [wD212]                               ; $46CF: $FA $12 $D2
     inc  a                                        ; $46D2: $3C
     cp   $14                                      ; $46D3: $FE $14
@@ -179,7 +179,7 @@ ManboAndFishesState3Handler::
     ld   [wD213], a                               ; $46DB: $EA $13 $D2
     xor  a                                        ; $46DE: $AF
 
-.jr_46DF:
+.jr_46DF
     ld   [wD212], a                               ; $46DF: $EA $12 $D2
     ld   a, [wD213]                               ; $46E2: $FA $13 $D2
     ld   e, a                                     ; $46E5: $5F
@@ -209,7 +209,7 @@ ManboAndFishesState3Handler::
     cp   $00                                      ; $470E: $FE $00
     jr   z, jr_018_4722                           ; $4710: $28 $10
 
-.jr_4712:
+.jr_4712
     ld   a, e                                     ; $4712: $7B
     cp   $BE                                      ; $4713: $FE $BE
     jr   nz, ret_018_471C                         ; $4715: $20 $05
@@ -243,7 +243,7 @@ ManboAndFishesGrantSongHandler::
     ld   [wC167], a                               ; $4740: $EA $67 $C1
     call IncrementEntityState                     ; $4743: $CD $12 $3B
 
-.jr_4746:
+.jr_4746
     ld   a, $02                                   ; $4746: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4748: $E0 $A1
     jp   func_018_455C                            ; $474A: $C3 $5C $45
@@ -266,14 +266,14 @@ ManboAndFishesState5Handler::
     ld   [hl], b                                  ; $4768: $70
     ret                                           ; $4769: $C9
 
-.jr_476A:
+.jr_476A
     cp   $08                                      ; $476A: $FE $08
     jr   nz, .jr_4774                             ; $476C: $20 $06
 
     dec  [hl]                                     ; $476E: $35
     call_open_dialog $188                         ; $476F
 
-.jr_4774:
+.jr_4774
     ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $4774: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $4776: $E0 $9D
     ld   a, $02                                   ; $4778: $3E $02
@@ -335,7 +335,7 @@ func_018_4833::
 
     ld   a, $03                                   ; $4853: $3E $03
 
-.jr_4855:
+.jr_4855
     jr   jr_018_485C                              ; $4855: $18 $05
 
 jr_018_4857:
@@ -447,7 +447,7 @@ func_018_48DE::
     ld   a, $07                                   ; $4900: $3E $07
     ldh  [hActiveEntitySpriteVariant], a          ; $4902: $E0 $F1
 
-.jr_4904:
+.jr_4904
     ldh  a, [hActiveEntitySpriteVariant]          ; $4904: $F0 $F1
     cp   $02                                      ; $4906: $FE $02
     jr   nc, jr_018_491D                          ; $4908: $30 $13
@@ -458,7 +458,7 @@ func_018_48DE::
 
     ld   hl, Data_018_48A0                        ; $4910: $21 $A0 $48
 
-.jr_4913:
+.jr_4913
     ld   c, $03                                   ; $4913: $0E $03
     call RenderActiveEntitySpritesRect            ; $4915: $CD $E6 $3C
     ld   a, $03                                   ; $4918: $3E $03
@@ -468,6 +468,6 @@ jr_018_491D:
     ld   de, ManboAndFishes2SpriteVariants        ; $491D: $11 $A4 $48
     call RenderActiveEntitySpritesPair            ; $4920: $CD $C0 $3B
 
-.jr_4923:
+.jr_4923
     ld   a, $02                                   ; $4923: $3E $02
     jp   func_015_7964_trampoline                 ; $4925: $C3 $A0 $3D

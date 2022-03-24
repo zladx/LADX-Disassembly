@@ -27,7 +27,7 @@ BigFairyEntityHandler::
     ld   a, $06                                   ; $70B3: $3E $06
     jp   func_036_505F_trampoline                 ; $70B5: $C3 $47 $0A
 
-.jr_70B8:
+.jr_70B8
     ld   hl, wEntitiesPrivateState3Table          ; $70B8: $21 $D0 $C2
     add  hl, bc                                   ; $70BB: $09
     ld   a, [hl]                                  ; $70BC: $7E
@@ -73,7 +73,7 @@ BigFairyEntityHandler::
     xor  $01                                      ; $70FD: $EE $01
     ld   [hl], a                                  ; $70FF: $77
 
-.jr_7100:
+.jr_7100
     ld   hl, wEntitiesPrivateState2Table          ; $7100: $21 $C0 $C2
     add  hl, bc                                   ; $7103: $09
     ld   e, [hl]                                  ; $7104: $5E
@@ -107,7 +107,7 @@ label_006_7123:
 
     ld   hl, Data_006_7089                        ; $712C: $21 $89 $70
 
-.jr_712F:
+.jr_712F
     ld   c, $06                                   ; $712F: $0E $06
     call RenderActiveEntitySpritesRect            ; $7131: $CD $E6 $3C
     ld   a, $06                                   ; $7134: $3E $06
@@ -123,7 +123,7 @@ label_006_7123:
 
     ld   e, $02                                   ; $7148: $1E $02
 
-.jr_714A:
+.jr_714A
     ld   hl, wEntitiesSpeedZTable                 ; $714A: $21 $20 $C3
     add  hl, bc                                   ; $714D: $09
     ld   [hl], e                                  ; $714E: $73
@@ -168,7 +168,7 @@ BigFairyHealingHandler::
     ldh  [hJingle], a                             ; $7194: $E0 $F2
     ret                                           ; $7196: $C9
 
-.jr_7197:
+.jr_7197
     ld   a, $02                                   ; $7197: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7199: $E0 $A1
     ld   a, JINGLE_FAIRY_HEALING                  ; $719B: $3E $1A
@@ -190,7 +190,7 @@ BigFairyHealingHandler::
     ld   a, $04                                   ; $71B5: $3E $04
     ld   [wAddHealthBuffer], a                    ; $71B7: $EA $93 $DB
 
-.jr_71BA:
+.jr_71BA
     call GetEntityPrivateCountdown1               ; $71BA: $CD $00 $0C
     jr   nz, ret_006_71F0                         ; $71BD: $20 $31
 
@@ -237,7 +237,7 @@ BigFairyDisappearingHandler::
 
     ld   a, $FF                                   ; $71FF: $3E $FF
 
-.jr_7201:
+.jr_7201
     ld   [wD202], a                               ; $7201: $EA $02 $D2
     call SetEntitySpriteVariant                   ; $7204: $CD $0C $3B
     ld   a, $02                                   ; $7207: $3E $02

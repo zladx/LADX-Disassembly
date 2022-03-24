@@ -42,7 +42,7 @@ func_007_6736::
     dec  [hl]                                     ; $6744: $35
     jr   jr_007_6753                              ; $6745: $18 $0C
 
-.jr_6747:
+.jr_6747
     ld   hl, wEntitiesHitboxFlagsTable            ; $6747: $21 $50 $C3
     add  hl, bc                                   ; $674A: $09
     res  7, [hl]                                  ; $674B: $CB $BE
@@ -67,7 +67,7 @@ jr_007_6753:
     inc  [hl]                                     ; $6765: $34
     inc  [hl]                                     ; $6766: $34
 
-.jr_6767:
+.jr_6767
     dec  [hl]                                     ; $6767: $35
 
 jr_007_6768:
@@ -82,7 +82,7 @@ jr_007_6768:
     inc  [hl]                                     ; $6773: $34
     inc  [hl]                                     ; $6774: $34
 
-.jr_6775:
+.jr_6775
     dec  [hl]                                     ; $6775: $35
 
 jr_007_6776:
@@ -91,7 +91,7 @@ jr_007_6776:
 
     call IncrementEntityState                     ; $677B: $CD $12 $3B
 
-.jr_677E:
+.jr_677E
     ld   hl, wEntitiesPrivateState1Table          ; $677E: $21 $B0 $C2
     add  hl, bc                                   ; $6781: $09
     ld   a, [hl]                                  ; $6782: $7E
@@ -104,7 +104,7 @@ jr_007_6776:
 
     dec  [hl]                                     ; $678C: $35
 
-.jr_678D:
+.jr_678D
     jp   func_007_67AE                            ; $678D: $C3 $AE $67
 
 func_007_6790::
@@ -121,7 +121,7 @@ func_007_6790::
     ld   [hl], a                                  ; $67A3: $77
     jp   IncrementEntityState                     ; $67A4: $C3 $12 $3B
 
-.jr_67A7:
+.jr_67A7
     ldh  a, [hFrameCounter]                       ; $67A7: $F0 $E7
     and  $0F                                      ; $67A9: $E6 $0F
     jr   nz, func_007_67AE                        ; $67AB: $20 $01
@@ -175,7 +175,7 @@ jr_007_67EB:
     call IncrementEntityState                     ; $67F2: $CD $12 $3B
     ld   [hl], b                                  ; $67F5: $70
 
-.jr_67F6:
+.jr_67F6
     ld   hl, wEntitiesPrivateState3Table          ; $67F6: $21 $D0 $C2
     add  hl, bc                                   ; $67F9: $09
     inc  [hl]                                     ; $67FA: $34

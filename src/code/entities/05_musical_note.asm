@@ -17,7 +17,7 @@ MusicalNoteEntityHandler::
 
     ld   e, $FF                                   ; $7F0E: $1E $FF
 
-.jr_7F10:
+.jr_7F10
     bit  0, a                                     ; $7F10: $CB $47
     jr   nz, .jr_7F1B                             ; $7F12: $20 $07
 
@@ -27,5 +27,5 @@ MusicalNoteEntityHandler::
     add  e                                        ; $7F19: $83
     ld   [hl], a                                  ; $7F1A: $77
 
-.jr_7F1B:
+.jr_7F1B
     jp   UpdateEntityPosWithSpeed_05              ; $7F1B: $C3 $B1 $7A

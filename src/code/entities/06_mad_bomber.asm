@@ -66,12 +66,12 @@ MadBomberState1Handler::
     ld   [hl], a                                  ; $4192: $77
     ld   hl, Data_006_4142                        ; $4193: $21 $42 $41
 
-.jr_4196:
+.jr_4196
     add  hl, de                                   ; $4196: $19
     ld   a, [hl]                                  ; $4197: $7E
     ld   hl, wEntitiesPosYTable                   ; $4198: $21 $10 $C2
 
-.jr_419B:
+.jr_419B
     add  hl, bc                                   ; $419B: $09
     ld   [hl], a                                  ; $419C: $77
     call func_006_6594                            ; $419D: $CD $94 $65
@@ -84,7 +84,7 @@ MadBomberState1Handler::
     cp   $40                                      ; $41AB: $FE $40
     ret  c                                        ; $41AD: $D8
 
-.jr_41AE:
+.jr_41AE
     call GetEntityTransitionCountdown             ; $41AE: $CD $05 $0C
     ld   [hl], $18                                ; $41B1: $36 $18
     jp   IncrementEntityState                     ; $41B3: $C3 $12 $3B
@@ -96,14 +96,14 @@ MadBomberState2Handler::
     ld   [hl], $30                                ; $41BB: $36 $30
     jp   IncrementEntityState                     ; $41BD: $C3 $12 $3B
 
-.jr_41C0:
+.jr_41C0
     cp   $0C                                      ; $41C0: $FE $0C
     ld   a, $01                                   ; $41C2: $3E $01
     jr   nc, .jr_41C7                             ; $41C4: $30 $01
 
     inc  a                                        ; $41C6: $3C
 
-.jr_41C7:
+.jr_41C7
     jp   SetEntitySpriteVariant                   ; $41C7: $C3 $0C $3B
 
 MadBomberState3Handler::
@@ -162,7 +162,7 @@ jr_006_4218:
 
     inc  a                                        ; $421E: $3C
 
-.jr_421F:
+.jr_421F
     jp   SetEntitySpriteVariant                   ; $421F: $C3 $0C $3B
 
 MadBomberState4Handler::
@@ -174,12 +174,12 @@ MadBomberState4Handler::
     ld   a, $FF                                   ; $422B: $3E $FF
     jp   SetEntitySpriteVariant                   ; $422D: $C3 $0C $3B
 
-.jr_4230:
+.jr_4230
     cp   $08                                      ; $4230: $FE $08
     ld   a, $01                                   ; $4232: $3E $01
     jr   c, .jr_4237                              ; $4234: $38 $01
 
     inc  a                                        ; $4236: $3C
 
-.jr_4237:
+.jr_4237
     jp   SetEntitySpriteVariant                   ; $4237: $C3 $0C $3B

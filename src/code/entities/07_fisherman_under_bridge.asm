@@ -45,7 +45,7 @@ FishermanUnderBridgeEntityHandler::
     call ConfigureEntityHitbox                    ; $42C0: $CD $EA $3A
     pop  bc                                       ; $42C3: $C1
 
-.jr_42C4:
+.jr_42C4
     ldh  a, [hActiveEntityState]                  ; $42C4: $F0 $F0
     cp   $06                                      ; $42C6: $FE $06
     jr   nc, jr_007_42DC                          ; $42C8: $30 $12
@@ -61,7 +61,7 @@ FishermanUnderBridgeEntityHandler::
 
     ld   a, $04                                   ; $42D8: $3E $04
 
-.jr_42DA:
+.jr_42DA
     ldh  [hActiveEntitySpriteVariant], a          ; $42DA: $E0 $F1
 
 jr_007_42DC:
@@ -72,7 +72,7 @@ jr_007_42DC:
 
     call func_007_43FD                            ; $42E5: $CD $FD $43
 
-.jr_42E8:
+.jr_42E8
     call ReturnIfNonInteractive_07                ; $42E8: $CD $96 $7D
     ld   a, [wPhotos1]                            ; $42EB: $FA $0C $DC
     bit  0, a                                     ; $42EE: $CB $47
@@ -91,7 +91,7 @@ jr_007_42DC:
 
     call func_007_434E                            ; $4306: $CD $4E $43
 
-.jr_4309:
+.jr_4309
     ldh  a, [hActiveEntityState]                  ; $4309: $F0 $F0
     JP_TABLE                                      ; $430B
 ._00 dw func_007_4335                             ; $430C
@@ -130,7 +130,7 @@ func_007_4335::
     and  $0F                                      ; $433E: $E6 $0F
     jr   nz, .loop_4338                           ; $4340: $20 $F6
 
-.jr_4342:
+.jr_4342
     ld   a, l                                     ; $4342: $7D
     dec  a                                        ; $4343: $3D
     and  $0F                                      ; $4344: $E6 $0F
@@ -230,7 +230,7 @@ func_007_43C5::
     add  hl, de                                   ; $43D5: $19
     inc  [hl]                                     ; $43D6: $34
 
-.jr_43D7:
+.jr_43D7
     ldh  a, [hFrameCounter]                       ; $43D7: $F0 $E7
     and  $01                                      ; $43D9: $E6 $01
     ret  nz                                       ; $43DB: $C0
@@ -289,7 +289,7 @@ func_007_4429::
     bit  7, a                                     ; $4433: $CB $7F
     ret  z                                        ; $4435: $C8
 
-.jr_4436:
+.jr_4436
     ld   hl, wEntitiesPrivateState5Table          ; $4436: $21 $90 $C3
     add  hl, bc                                   ; $4439: $09
     ld   e, [hl]                                  ; $443A: $5E
@@ -343,7 +343,7 @@ func_007_4475::
     call SetEntitySpriteVariant                   ; $448B: $CD $0C $3B
     jp   IncrementEntityState                     ; $448E: $C3 $12 $3B
 
-.jr_4491:
+.jr_4491
     call UpdateEntityPosWithSpeed_07              ; $4491: $CD $0A $7E
     call GetEntitySpeedYAddress                   ; $4494: $CD $05 $40
     inc  [hl]                                     ; $4497: $34
@@ -372,7 +372,7 @@ func_007_44B0::
     cp   $5E                                      ; $44BB: $FE $5E
     jr   c, func_007_44DC                         ; $44BD: $38 $1D
 
-.jr_44BF:
+.jr_44BF
     ld   a, [wTradeSequenceItem]                  ; $44BF: $FA $0E $DB
     cp   $0B                                      ; $44C2: $FE $0B
     jr   nz, .jr_44CE                             ; $44C4: $20 $08
@@ -380,13 +380,13 @@ func_007_44B0::
     call_open_dialog $1E8                         ; $44C6
     jp   IncrementEntityState                     ; $44CB: $C3 $12 $3B
 
-.jr_44CE:
+.jr_44CE
     cp   $0C                                      ; $44CE: $FE $0C
     jr   nc, .jr_44D7                             ; $44D0: $30 $05
 
     jp_open_dialog $1E7                           ; $44D2
 
-.jr_44D7:
+.jr_44D7
     jp_open_dialog $1ED                           ; $44D7
 
 func_007_44DC::
@@ -397,7 +397,7 @@ func_007_44DC::
 
     inc  e                                        ; $44E3: $1C
 
-.jr_44E4:
+.jr_44E4
     ld   a, e                                     ; $44E4: $7B
     jp   SetEntitySpriteVariant                   ; $44E5: $C3 $0C $3B
 
@@ -414,7 +414,7 @@ func_007_44E8::
     ld   [hl], $D0                                ; $44FC: $36 $D0
     jp_open_dialog $1E9                           ; $44FE
 
-.jr_4503:
+.jr_4503
     ld   [hl], b                                  ; $4503: $70
     jp_open_dialog $1EA                           ; $4504
 
@@ -430,7 +430,7 @@ func_007_4509::
     call_open_dialog $1EB                         ; $4519
     call IncrementEntityState                     ; $451E: $CD $12 $3B
 
-.jr_4521:
+.jr_4521
     ld   e, $03                                   ; $4521: $1E $03
     cp   $30                                      ; $4523: $FE $30
     jr   c, .jr_4533                              ; $4525: $38 $0C
@@ -445,7 +445,7 @@ func_007_4509::
 
     inc  e                                        ; $4532: $1C
 
-.jr_4533:
+.jr_4533
     ld   a, e                                     ; $4533: $7B
     jp   SetEntitySpriteVariant                   ; $4534: $C3 $0C $3B
 
@@ -491,7 +491,7 @@ func_007_4537::
     ld   a, REPLACE_TILES_TRADING_ITEM            ; $4582: $3E $0D
     ldh  [hReplaceTiles], a                       ; $4584: $E0 $A5
 
-.jr_4586:
+.jr_4586
     ld   a, $03                                   ; $4586: $3E $03
     jp   SetEntitySpriteVariant                   ; $4588: $C3 $0C $3B
 
@@ -555,7 +555,7 @@ label_007_45F7:
     sub  $10                                      ; $4615: $D6 $10
     ld   [wEntitiesPosYTable], a                  ; $4617: $EA $10 $C2
 
-.jr_461A:
+.jr_461A
     call func_007_467B                            ; $461A: $CD $7B $46
     call CheckLinkCollisionWithEnemy_trampoline   ; $461D: $CD $5A $3B
     jr   nc, .jr_4640                             ; $4620: $30 $1E
@@ -577,7 +577,7 @@ label_007_45F7:
     ld   a, $01                                   ; $463B: $3E $01
     ld   [wC147], a                               ; $463D: $EA $47 $C1
 
-.jr_4640:
+.jr_4640
     call ReturnIfNonInteractive_07                ; $4640: $CD $96 $7D
     ld   hl, wEntitiesInertiaTable                ; $4643: $21 $D0 $C3
     add  hl, bc                                   ; $4646: $09
@@ -593,7 +593,7 @@ label_007_45F7:
 
     ld   e, $4B                                   ; $4655: $1E $4B
 
-.jr_4657:
+.jr_4657
     ld   hl, wEntitiesPosYTable                   ; $4657: $21 $10 $C2
     add  hl, bc                                   ; $465A: $09
     ld   a, [hl]                                  ; $465B: $7E
@@ -606,7 +606,7 @@ label_007_45F7:
     inc  [hl]                                     ; $4663: $34
     inc  [hl]                                     ; $4664: $34
 
-.jr_4665:
+.jr_4665
     dec  [hl]                                     ; $4665: $35
 
 ret_007_4666:

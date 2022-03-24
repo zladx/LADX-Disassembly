@@ -34,7 +34,7 @@ ShopOwnerEntityHandler::
     ld   [wBlockItemUsage], a                     ; $76F3: $EA $0A $C5
     call func_004_788E                            ; $76F6: $CD $8E $78
 
-.jr_76F9:
+.jr_76F9
     ld   a, [wSwordLevel]                         ; $76F9: $FA $4E $DB
     and  a                                        ; $76FC: $A7
     jr   z, .jr_7705                              ; $76FD: $28 $06
@@ -43,7 +43,7 @@ ShopOwnerEntityHandler::
     and  $5F                                      ; $7701: $E6 $5F
     jr   nz, jr_004_770E                          ; $7703: $20 $09
 
-.jr_7705:
+.jr_7705
     call func_004_6E55                            ; $7705: $CD $55 $6E
     ld   a, e                                     ; $7708: $7B
     ld   hl, wEntitiesDirectionTable              ; $7709: $21 $80 $C3
@@ -61,7 +61,7 @@ jr_004_770E:
 
     call func_004_7BE3                            ; $7720: $CD $E3 $7B
 
-.jr_7723:
+.jr_7723
     ldh  a, [hActiveEntityState]                  ; $7723: $F0 $F0
     JP_TABLE                                      ; $7725
 ._00 dw func_004_77F8                             ; $7726
@@ -130,7 +130,7 @@ func_004_77F8::
     ld   a, [wHasStolenFromShop]                  ; $77F8: $FA $46 $DB
     and  a                                        ; $77FB: $A7
 
-.jr_77FC:
+.jr_77FC
     jr   z, jr_004_7839                           ; $77FC: $28 $3B
 
     ld   hl, wEntitiesPosYTable                   ; $77FE: $21 $10 $C2
@@ -174,7 +174,7 @@ jr_004_7839:
 
     ld   e, $04                                   ; $7843: $1E $04
 
-.jr_7845:
+.jr_7845
     push bc                                       ; $7845: $C5
     ld   hl, wBButtonSlot                         ; $7846: $21 $00 $DB
     ld   c, INVENTORY_SLOT_COUNT -1               ; $7849: $0E $0B
@@ -188,7 +188,7 @@ jr_004_784B:
     cp   INVENTORY_SHOVEL                         ; $7853: $FE $0B
     jr   nz, jr_004_7859                          ; $7855: $20 $02
 
-.jr_7857:
+.jr_7857
     ld   e, $08                                   ; $7857: $1E $08
 
 jr_004_7859:
@@ -209,7 +209,7 @@ jr_004_7864:
     cp   INVENTORY_BOW                            ; $786C: $FE $05
     jr   nz, jr_004_7872                          ; $786E: $20 $02
 
-.jr_7870:
+.jr_7870
     ld   e, $0C                                   ; $7870: $1E $0C
 
 jr_004_7872:
@@ -249,7 +249,7 @@ jr_004_7897:
     call func_004_798B                            ; $789C: $CD $8B $79
     pop  hl                                       ; $789F: $E1
 
-.jr_78A0:
+.jr_78A0
     dec  c                                        ; $78A0: $0D
     jr   nz, jr_004_7897                          ; $78A1: $20 $F4
 
@@ -282,7 +282,7 @@ func_004_78AF::
     ldh  [hLinkPositionY], a                      ; $78CD: $E0 $99
     jp_open_dialog $02F                           ; @TODO Text used when you're trying to steal stuff
 
-.jr_78D4:
+.jr_78D4
     ldh  a, [hLinkPositionY]                      ; $78D4: $F0 $99
     cp   $48                                      ; $78D6: $FE $48
     jr   nc, jr_004_7940                          ; $78D8: $30 $66
@@ -315,7 +315,7 @@ func_004_78AF::
     ldh  [hJingle], a                             ; $7902: $E0 $F2
     jp   label_004_796D                           ; $7904: $C3 $6D $79
 
-.jr_7907:
+.jr_7907
 IF __PATCH_0__
     ld   a, [wC3CF]
     and  a
@@ -351,7 +351,7 @@ ENDC
     ld   a, JINGLE_VALIDATE                       ; $7927: $3E $13
     ldh  [hJingle], a                             ; $7929: $E0 $F2
 
-.jr_792B:
+.jr_792B
     push bc                                       ; $792B: $C5
     ld   a, e                                     ; $792C: $7B
     swap a                                        ; $792D: $CB $37
@@ -387,7 +387,7 @@ jr_004_7940:
     call OpenDialog                               ; $7952: $CD $85 $23
     jp   IncrementEntityState                     ; $7955: $C3 $12 $3B
 
-.jr_7958:
+.jr_7958
     jp_open_dialog $02E                           ; $7958
 
 func_004_795D::
@@ -463,7 +463,7 @@ jr_004_79AB:
 
     jr   jr_004_7A0C                              ; $79B9: $18 $51
 
-.jr_79BB:
+.jr_79BB
     cp   $04                                      ; $79BB: $FE $04
     jr   nz, jr_004_79D9                          ; $79BD: $20 $1A
 
@@ -480,7 +480,7 @@ jr_004_79AB:
 
     jr   jr_004_7A0C                              ; $79CC: $18 $3E
 
-.jr_79CE:
+.jr_79CE
     ld   a, [wBombCount]                          ; $79CE: $FA $4D $DB
     ld   hl, wMaxBombs                            ; $79D1: $21 $77 $DB
     cp   [hl]                                     ; $79D4: $BE
@@ -505,7 +505,7 @@ jr_004_79D9:
 
     jr   jr_004_7A0C                              ; $79EA: $18 $20
 
-.jr_79EC:
+.jr_79EC
     ld   a, [wArrowCount]                         ; $79EC: $FA $45 $DB
     ld   hl, wMaxArrows                           ; $79EF: $21 $78 $DB
     cp   [hl]                                     ; $79F2: $BE
@@ -612,7 +612,7 @@ bought10Arrows:
 
     ld   a, $99                                   ; POI: ?? Checks for going over 99 (normal max 60)?
 
-.jr_7A88:
+.jr_7A88
     ld   [wArrowCount], a                         ; $7A88: $EA $45 $DB
     ret                                           ; $7A8B: $C9
 
@@ -628,7 +628,7 @@ boughtShop08:                           ; POI: Appears as a guardian acorn, but.
 
     ld   a, $99                         ; ????????
 
-.jr_7A9B:
+.jr_7A9B
     ld   [wDB47], a                               ; $7A9B: $EA $47 $DB
     ret                                           ; $7A9E: $C9
 
@@ -651,7 +651,7 @@ bought10Bombs:
 
     ld   a, $99                                   ; $7AB6: $3E $99
 
-.jr_7AB8:
+.jr_7AB8
     ld   [wBombCount], a                          ; $7AB8: $EA $4D $DB
     ld   d, INVENTORY_BOMBS                       ; $7ABB: $16 $02
     jp   GiveInventoryItem_trampoline             ; $7ABD: $C3 $6B $3E
@@ -664,7 +664,7 @@ bought10Bombs:
 
     ld   a, $99                                   ; $7AC8: $3E $99
 
-.jr_7ACA:
+.jr_7ACA
     ld   [wArrowCount], a                         ; $7ACA: $EA $45 $DB
     ld   d, INVENTORY_MAGIC_POWDER                ; $7ACD: $16 $0C
     jp   GiveInventoryItem_trampoline             ; $7ACF: $C3 $6B $3E
@@ -805,7 +805,7 @@ jr_004_7B72:
     ld   hl, hActiveEntityVisualPosY              ; $7B95: $21 $EC $FF
     ld   [hl], $2F                                ; $7B98: $36 $2F
 
-.jr_7B9A:
+.jr_7B9A
     cp   $05                                      ; $7B9A: $FE $05
     jr   nz, .jr_7BA6                             ; $7B9C: $20 $08
 
@@ -813,7 +813,7 @@ jr_004_7B72:
     call RenderActiveEntitySpritesPair            ; $7BA1: $CD $C0 $3B
     jr   jr_004_7BAC                              ; $7BA4: $18 $06
 
-.jr_7BA6:
+.jr_7BA6
     ld   de, Data_004_7B5A                        ; $7BA6: $11 $5A $7B
     call RenderActiveEntitySprite                 ; $7BA9: $CD $77 $3C
 
@@ -847,7 +847,7 @@ func_004_7BB7::
     ld   de, Unknown091SpriteVariants             ; $7BD7: $11 $58 $7B
     jp   RenderActiveEntitySpritesPair            ; $7BDA: $C3 $C0 $3B
 
-.jr_7BDD:
+.jr_7BDD
     ld   de, Data_004_7B5A                        ; $7BDD: $11 $5A $7B
     jp   RenderActiveEntitySprite                 ; $7BE0: $C3 $77 $3C
 
@@ -917,6 +917,6 @@ func_004_7C06::
     scf                                           ; $7C47: $37
     ret                                           ; $7C48: $C9
 
-.jr_7C49:
+.jr_7C49
     and  a                                        ; $7C49: $A7
     ret                                           ; $7C4A: $C9

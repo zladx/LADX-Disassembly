@@ -67,7 +67,7 @@ SpikeTrapState1Handler::
     ld   e, $18                                   ; $7563: $1E $18
     jr   jr_006_7585                              ; $7565: $18 $1E
 
-.jr_7567:
+.jr_7567
     call func_006_6594                            ; $7567: $CD $94 $65
     add  $12                                      ; $756A: $C6 $12
     cp   $24                                      ; $756C: $FE $24

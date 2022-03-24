@@ -22,7 +22,7 @@ CueBallEntityHandler::
     add  hl, bc                                   ; $4B95: $09
     ld   [hl], $01                                ; $4B96: $36 $01
 
-.jr_4B98:
+.jr_4B98
     call label_394D                               ; $4B98: $CD $4D $39
     call func_006_4E64                            ; $4B9B: $CD $64 $4E
     ldh  a, [hActiveEntityStatus]                 ; $4B9E: $F0 $EA
@@ -62,7 +62,7 @@ CueBallEntityHandler::
     add  hl, bc                                   ; $4BDB: $09
     ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IS_MINI_BOSS ; $4BDC: $36 $84
 
-.jr_4BDE:
+.jr_4BDE
     call label_3B70                               ; $4BDE: $CD $70 $3B
 
 jr_006_4BE1:
@@ -107,7 +107,7 @@ CueBallState0Handler::
     ld   hl, wEntitiesDirectionTable              ; $4C2E: $21 $80 $C3
     add  hl, bc                                   ; $4C31: $09
 
-.jr_4C32:
+.jr_4C32
     ld   a, [hl]                                  ; $4C32: $7E
     ld   hl, wEntitiesPrivateState5Table          ; $4C33: $21 $90 $C3
     add  hl, bc                                   ; $4C36: $09
@@ -125,7 +125,7 @@ CueBallState0Handler::
     inc  a                                        ; $4C4A: $3C
     ld   [hl], a                                  ; $4C4B: $77
 
-.jr_4C4C:
+.jr_4C4C
     jp   ClearEntitySpeed                         ; $4C4C: $C3 $7F $3D
 
 jr_006_4C4F:
@@ -156,7 +156,7 @@ func_006_4C59::
     cp   $68                                      ; $4C6F: $FE $68
     jr   c, func_006_4C91                         ; $4C71: $38 $1E
 
-.jr_4C73:
+.jr_4C73
     ldh  a, [hActiveEntityPosY]                   ; $4C73: $F0 $EF
     ld   [hl], a                                  ; $4C75: $77
     jr   jr_006_4C7B                              ; $4C76: $18 $03
@@ -303,7 +303,7 @@ CueBallState1Handler::
     ld   [hl], b                                  ; $4D4F: $70
     ret                                           ; $4D50: $C9
 
-.jr_4D51:
+.jr_4D51
     and  $03                                      ; $4D51: $E6 $03
     jr   nz, .jr_4D5E                             ; $4D53: $20 $09
 
@@ -314,7 +314,7 @@ CueBallState1Handler::
     and  $03                                      ; $4D5B: $E6 $03
     ld   [hl], a                                  ; $4D5D: $77
 
-.jr_4D5E:
+.jr_4D5E
     call func_006_4C91                            ; $4D5E: $CD $91 $4C
     jp   ClearEntitySpeed                         ; $4D61: $C3 $7F $3D
 

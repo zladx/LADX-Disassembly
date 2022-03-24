@@ -69,7 +69,7 @@ jr_004_5C43:
     ld   a, $FF                                   ; $5C55: $3E $FF
     call SetEntitySpriteVariant                   ; $5C57: $CD $0C $3B
 
-.jr_5C5A:
+.jr_5C5A
     call ReturnIfNonInteractive_04                ; $5C5A: $CD $A3 $7F
     call ApplyRecoilIfNeeded_04                   ; $5C5D: $CD $80 $6D
     call label_3B70                               ; $5C60: $CD $70 $3B
@@ -97,7 +97,7 @@ func_004_5C63::
     add  hl, bc                                   ; $5C8A: $09
     ld   [hl], a                                  ; $5C8B: $77
 
-.jr_5C8C:
+.jr_5C8C
     call GetEntityPrivateCountdown1               ; $5C8C: $CD $00 $0C
     jr   nz, .jr_5CA0                             ; $5C8F: $20 $0F
 
@@ -110,7 +110,7 @@ func_004_5C63::
     add  hl, bc                                   ; $5C9E: $09
     ld   [hl], a                                  ; $5C9F: $77
 
-.jr_5CA0:
+.jr_5CA0
     ldh  a, [hFrameCounter]                       ; $5CA0: $F0 $E7
     xor  c                                        ; $5CA2: $A9
     and  $03                                      ; $5CA3: $E6 $03
@@ -125,7 +125,7 @@ func_004_5C63::
     ld   [hl], $00                                ; $5CB1: $36 $00
     jr   jr_004_5CBB                              ; $5CB3: $18 $06
 
-.jr_5CB5:
+.jr_5CB5
     cp   $78                                      ; $5CB5: $FE $78
     jr   c, jr_004_5CC0                           ; $5CB7: $38 $07
 
@@ -145,7 +145,7 @@ jr_004_5CC0:
     ld   [hl], $00                                ; $5CCA: $36 $00
     jr   jr_004_5CD4                              ; $5CCC: $18 $06
 
-.jr_5CCE:
+.jr_5CCE
     cp   $60                                      ; $5CCE: $FE $60
     jr   c, jr_004_5CD9                           ; $5CD0: $38 $07
 
@@ -172,7 +172,7 @@ jr_004_5CD9:
     inc  [hl]                                     ; $5CED: $34
     inc  [hl]                                     ; $5CEE: $34
 
-.jr_5CEF:
+.jr_5CEF
     dec  [hl]                                     ; $5CEF: $35
     ld   hl, wEntitiesPrivateState2Table          ; $5CF0: $21 $C0 $C2
     add  hl, bc                                   ; $5CF3: $09
@@ -190,7 +190,7 @@ jr_004_5CD9:
     inc  [hl]                                     ; $5D04: $34
     inc  [hl]                                     ; $5D05: $34
 
-.jr_5D06:
+.jr_5D06
     dec  [hl]                                     ; $5D06: $35
 
 ret_004_5D07:
@@ -213,14 +213,14 @@ func_004_5D08::
     inc  [hl]                                     ; $5D1B: $34
     jr   ret_004_5D25                             ; $5D1C: $18 $07
 
-.jr_5D1E:
+.jr_5D1E
     cp   $10                                      ; $5D1E: $FE $10
     jr   nc, .jr_5D24                             ; $5D20: $30 $02
 
     inc  [hl]                                     ; $5D22: $34
     ret                                           ; $5D23: $C9
 
-.jr_5D24:
+.jr_5D24
     dec  [hl]                                     ; $5D24: $35
 
 ret_004_5D25:

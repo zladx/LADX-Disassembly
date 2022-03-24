@@ -48,7 +48,7 @@ TimerBombiteEntityHandler::
 
     ld   de, Bombite2SpriteVariants               ; $7D28: $11 $07 $7D
 
-.jr_7D2B:
+.jr_7D2B
     call GetEntityPrivateCountdown1               ; $7D2B: $CD $00 $0C
     rla                                           ; $7D2E: $17
     rla                                           ; $7D2F: $17
@@ -71,7 +71,7 @@ TimerBombiteEntityHandler::
     call GetEntityDropTimer                       ; $7D4C: $CD $FB $0B
     ld   [hl], $6F                                ; $7D4F: $36 $6F
 
-.jr_7D51:
+.jr_7D51
     call ApplyRecoilIfNeeded_04                   ; $7D51: $CD $80 $6D
     call UpdateEntityPosWithSpeed_04              ; $7D54: $CD $CA $6D
     call label_3B23                               ; $7D57: $CD $23 $3B
@@ -111,7 +111,7 @@ func_004_7D69::
     add  hl, bc                                   ; $7D8F: $09
     ld   [hl], a                                  ; $7D90: $77
 
-.jr_7D91:
+.jr_7D91
     ldh  a, [hFrameCounter]                       ; $7D91: $F0 $E7
     rra                                           ; $7D93: $1F
     rra                                           ; $7D94: $1F
@@ -132,7 +132,7 @@ func_004_7DA3::
     ld   [hl], b                                  ; $7DAC: $70
     ret                                           ; $7DAD: $C9
 
-.jr_7DAE:
+.jr_7DAE
     call label_3B70                               ; $7DAE: $CD $70 $3B
     call func_004_6E35                            ; $7DB1: $CD $35 $6E
     add  $12                                      ; $7DB4: $C6 $12
@@ -144,7 +144,7 @@ func_004_7DA3::
     cp   $24                                      ; $7DBF: $FE $24
     jr   c, jr_004_7DD1                           ; $7DC1: $38 $0E
 
-.jr_7DC3:
+.jr_7DC3
     ldh  a, [hFrameCounter]                       ; $7DC3: $F0 $E7
     xor  c                                        ; $7DC5: $A9
     and  $03                                      ; $7DC6: $E6 $03
@@ -153,7 +153,7 @@ func_004_7DA3::
     ld   a, $0E                                   ; $7DCA: $3E $0E
     call ApplyVectorTowardsLink_trampoline        ; $7DCC: $CD $AA $3B
 
-.jr_7DCF:
+.jr_7DCF
     jr   jr_004_7DD4                              ; $7DCF: $18 $03
 
 jr_004_7DD1:
@@ -170,7 +170,7 @@ jr_004_7DD4:
     call GetEntityPrivateCountdown1               ; $7DE0: $CD $00 $0C
     ld   [hl], $30                                ; $7DE3: $36 $30
 
-.jr_7DE5:
+.jr_7DE5
     rra                                           ; $7DE5: $1F
     rra                                           ; $7DE6: $1F
     rra                                           ; $7DE7: $1F
@@ -215,7 +215,7 @@ BouncingBombiteEntityHandler::
 
     ld   de, BouncingBombite2SpriteVariants       ; $7E16: $11 $FD $7D
 
-.jr_7E19:
+.jr_7E19
     call RenderActiveEntitySpritesPair            ; $7E19: $CD $C0 $3B
     call ReturnIfNonInteractive_04                ; $7E1C: $CD $A3 $7F
     call ApplyRecoilIfNeeded_04                   ; $7E1F: $CD $80 $6D
@@ -224,7 +224,7 @@ BouncingBombiteEntityHandler::
 
     call label_3B39                               ; $7E27: $CD $39 $3B
 
-.jr_7E2A:
+.jr_7E2A
     call UpdateEntityPosWithSpeed_04              ; $7E2A: $CD $CA $6D
     call label_3B23                               ; $7E2D: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $7E30: $F0 $F0
@@ -239,7 +239,7 @@ func_004_7E39::
 
     call IncrementEntityState                     ; $7E3E: $CD $12 $3B
 
-.jr_7E41:
+.jr_7E41
     ldh  a, [hFrameCounter]                       ; $7E41: $F0 $E7
     rra                                           ; $7E43: $1F
     rra                                           ; $7E44: $1F
@@ -257,7 +257,7 @@ func_004_7E4C::
     and  $03                                      ; $7E56: $E6 $03
     jr   jr_004_7E5D                              ; $7E58: $18 $03
 
-.jr_7E5A:
+.jr_7E5A
     call func_004_6E55                            ; $7E5A: $CD $55 $6E
 
 jr_004_7E5D:
@@ -301,7 +301,7 @@ func_004_7E83::
 
     jr   jr_004_7EB1                              ; $7E99: $18 $16
 
-.jr_7E9B:
+.jr_7E9B
     ld   hl, wEntitiesSpeedXTable                 ; $7E9B: $21 $40 $C2
     add  hl, bc                                   ; $7E9E: $09
     ld   a, [hl]                                  ; $7E9F: $7E

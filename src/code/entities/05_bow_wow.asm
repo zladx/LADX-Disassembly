@@ -64,7 +64,7 @@ BowWowEntityHandler::
     add  hl, bc                                   ; $4052: $09
     ld   [hl], b                                  ; $4053: $70
 
-.jr_4054:
+.jr_4054
     ld   de, BowWowFollowingSpriteVariants        ; $4054: $11 $1C $40
     ld   a, [wIsBowWowFollowingLink]              ; $4057: $FA $56 $DB
     and  a                                        ; $405A: $A7
@@ -90,7 +90,7 @@ BowWowEntityHandler::
 
     jp   label_005_40A2                           ; $4079: $C3 $A2 $40
 
-.jr_407C:
+.jr_407C
     ld   a, [wC1A8]                               ; $407C: $FA $A8 $C1
     ld   hl, wDialogState                         ; $407F: $21 $9F $C1
     or   [hl]                                     ; $4082: $B6
@@ -110,7 +110,7 @@ BowWowEntityHandler::
 
     call label_3B70                               ; $409C: $CD $70 $3B
 
-.jr_409F:
+.jr_409F
     call func_005_40A5                            ; $409F: $CD $A5 $40
 
 label_005_40A2:
@@ -179,7 +179,7 @@ func_005_40E6::
     ldh  [hMultiPurpose1], a                      ; $40F6: $E0 $D8
     jr   jr_005_4129                              ; $40F8: $18 $2F
 
-.jr_40FA:
+.jr_40FA
     ldh  a, [hLinkPositionY]                      ; $40FA: $F0 $99
     sub  $40                                      ; $40FC: $D6 $40
     add  $10                                      ; $40FE: $C6 $10
@@ -205,7 +205,7 @@ func_005_40E6::
     ld   a, $01                                   ; $4122: $3E $01
     ld   [wIsBowWowFollowingLink], a              ; $4124: $EA $56 $DB
 
-.jr_4127:
+.jr_4127
     jr   jr_005_4137                              ; $4127: $18 $0E
 
 jr_005_4129:
@@ -245,7 +245,7 @@ jr_005_4137:
     ld   [hl], a                                  ; $415E: $77
     ld   [de], a                                  ; $415F: $12
 
-.jr_4160:
+.jr_4160
     call label_3B23                               ; $4160: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $4163: $F0 $F0
     JP_TABLE                                      ; $4165
@@ -302,7 +302,7 @@ jr_005_41B1:
 
     jp   label_005_4297                           ; $41BC: $C3 $97 $42
 
-.jr_41BF:
+.jr_41BF
     ld   hl, wEntitiesSpeedZTable                 ; $41BF: $21 $20 $C3
     add  hl, bc                                   ; $41C2: $09
     ld   [hl], $20                                ; $41C3: $36 $20
@@ -319,7 +319,7 @@ func_005_41CF::
     call IncrementEntityState                     ; $41D6: $CD $12 $3B
     ld   [hl], b                                  ; $41D9: $70
 
-.jr_41DA:
+.jr_41DA
     ldh  a, [hMultiPurposeG]                      ; $41DA: $F0 $E8
     and  a                                        ; $41DC: $A7
     jr   z, .jr_41E5                              ; $41DD: $28 $06
@@ -328,7 +328,7 @@ func_005_41CF::
     add  hl, bc                                   ; $41E2: $09
     ld   [hl], $10                                ; $41E3: $36 $10
 
-.jr_41E5:
+.jr_41E5
     call UpdateEntityPosWithSpeed_05              ; $41E5: $CD $B1 $7A
     jp   func_005_4228                            ; $41E8: $C3 $28 $42
 
@@ -341,7 +341,7 @@ func_005_41EB::
     dec  e                                        ; $41F6: $1D
     jr   z, jr_005_4206                           ; $41F7: $28 $0D
 
-.jr_41F9:
+.jr_41F9
     call ClearEntitySpeed                         ; $41F9: $CD $7F $3D
     call IncrementEntityState                     ; $41FC: $CD $12 $3B
     ld   [hl], $03                                ; $41FF: $36 $03
@@ -369,7 +369,7 @@ func_005_420E::
 
     ld   [hl], $10                                ; $4221: $36 $10
 
-.jr_4223:
+.jr_4223
     call IncrementEntityState                     ; $4223: $CD $12 $3B
     ld   [hl], b                                  ; $4226: $70
 
@@ -392,7 +392,7 @@ func_005_4228::
     ld   [hl], a                                  ; $423C: $77
     inc  e                                        ; $423D: $1C
 
-.jr_423E:
+.jr_423E
     ld   hl, wEntitiesPrivateState2Table          ; $423E: $21 $C0 $C2
     add  hl, bc                                   ; $4241: $09
     ld   a, [hl]                                  ; $4242: $7E
@@ -447,7 +447,7 @@ jr_005_4268:
 
     ld   a, $7E                                   ; $4286: $3E $7E
 
-.jr_4288:
+.jr_4288
     ld   [de], a                                  ; $4288: $12
     inc  de                                       ; $4289: $13
     ld   a, $00                                   ; $428A: $3E $00
@@ -477,7 +477,7 @@ label_005_4297:
     ldh  [hMultiPurpose0], a                      ; $42AB: $E0 $D7
     jr   jr_005_42B7                              ; $42AD: $18 $08
 
-.jr_42AF:
+.jr_42AF
     ld   e, $00                                   ; $42AF: $1E $00
     ld   a, $01                                   ; $42B1: $3E $01
     ldh  [hMultiPurpose0], a                      ; $42B3: $E0 $D7
@@ -556,7 +556,7 @@ jr_005_42B9:
     ld   [hl], $04                                ; $4320: $36 $04
     ret                                           ; $4322: $C9
 
-.jr_4323:
+.jr_4323
     ld   hl, hMultiPurpose0                       ; $4323: $21 $D7 $FF
     ld   a, e                                     ; $4326: $7B
     add  [hl]                                     ; $4327: $86
@@ -623,7 +623,7 @@ label_005_4335:
     ld   [hl], $80                                ; $4379: $36 $80
     jp_open_dialog $115                           ; $437B
 
-.jr_4380:
+.jr_4380
     ld   hl, wEntitiesFlashCountdownTable         ; $4380: $21 $20 $C4
     add  hl, de                                   ; $4383: $19
     ld   a, [hl]                                  ; $4384: $7E
@@ -646,7 +646,7 @@ label_005_4335:
     inc  [hl]                                     ; $439E: $34
     ret                                           ; $439F: $C9
 
-.jr_43A0:
+.jr_43A0
     push bc                                       ; $43A0: $C5
     ld   c, e                                     ; $43A1: $4B
     ld   b, d                                     ; $43A2: $42
@@ -686,7 +686,7 @@ jr_005_43C6:
     inc  [hl]                                     ; $43D4: $34
     inc  [hl]                                     ; $43D5: $34
 
-.jr_43D6:
+.jr_43D6
     dec  [hl]                                     ; $43D6: $35
     dec  [hl]                                     ; $43D7: $35
 
@@ -715,7 +715,7 @@ jr_005_43E5:
     inc  [hl]                                     ; $43F3: $34
     inc  [hl]                                     ; $43F4: $34
 
-.jr_43F5:
+.jr_43F5
     dec  [hl]                                     ; $43F5: $35
     dec  [hl]                                     ; $43F6: $35
 
@@ -773,7 +773,7 @@ jr_005_442D:
     inc  [hl]                                     ; $443D: $34
     inc  [hl]                                     ; $443E: $34
 
-.jr_443F:
+.jr_443F
     dec  [hl]                                     ; $443F: $35
     dec  [hl]                                     ; $4440: $35
     dec  [hl]                                     ; $4441: $35
@@ -810,7 +810,7 @@ jr_005_4455:
     inc  [hl]                                     ; $4465: $34
     inc  [hl]                                     ; $4466: $34
 
-.jr_4467:
+.jr_4467
     dec  [hl]                                     ; $4467: $35
     dec  [hl]                                     ; $4468: $35
     dec  [hl]                                     ; $4469: $35
@@ -848,7 +848,7 @@ jr_005_4485:
     inc  [hl]                                     ; $448F: $34
     inc  [hl]                                     ; $4490: $34
 
-.jr_4491:
+.jr_4491
     dec  [hl]                                     ; $4491: $35
 
 jr_005_4492:
@@ -877,7 +877,7 @@ jr_005_44A4:
     inc  [hl]                                     ; $44AE: $34
     inc  [hl]                                     ; $44AF: $34
 
-.jr_44B0:
+.jr_44B0
     dec  [hl]                                     ; $44B0: $35
 
 jr_005_44B1:
@@ -920,7 +920,7 @@ func_005_44CB::
     cpl                                           ; $44E0: $2F
     inc  a                                        ; $44E1: $3C
 
-.jr_44E2:
+.jr_44E2
     ld   e, a                                     ; $44E2: $5F
     ld   hl, wEntitiesSpeedYTable                 ; $44E3: $21 $50 $C2
     add  hl, bc                                   ; $44E6: $09
@@ -931,7 +931,7 @@ func_005_44CB::
     cpl                                           ; $44EC: $2F
     inc  a                                        ; $44ED: $3C
 
-.jr_44EE:
+.jr_44EE
     cp   e                                        ; $44EE: $BB
     jr   nc, jr_005_44FE                          ; $44EF: $30 $0D
 
@@ -941,7 +941,7 @@ func_005_44CB::
     ld   e, $04                                   ; $44F5: $1E $04
     jr   label_005_4509                           ; $44F7: $18 $10
 
-.jr_44F9:
+.jr_44F9
     ld   e, $02                                   ; $44F9: $1E $02
     jp   label_005_4509                           ; $44FB: $C3 $09 $45
 
@@ -952,7 +952,7 @@ jr_005_44FE:
     ld   a, $06                                   ; $4502: $3E $06
     jp   SetEntitySpriteVariant                   ; $4504: $C3 $0C $3B
 
-.jr_4507:
+.jr_4507
     ld   e, $00                                   ; $4507: $1E $00
 
 label_005_4509:

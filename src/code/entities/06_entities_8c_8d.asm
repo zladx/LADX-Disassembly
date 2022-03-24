@@ -57,10 +57,10 @@ jr_006_4EE3:
     and  a                                        ; $4EE8: $A7
     jr   z, jr_006_4F0E                           ; $4EE9: $28 $23
 
-.jr_4EEB:
+.jr_4EEB
     ldh  a, [hFrameCounter]                       ; $4EEB: $F0 $E7
 
-.jr_4EED:
+.jr_4EED
     and  $0F                                      ; $4EED: $E6 $0F
     jr   nz, jr_006_4EF2                          ; $4EEF: $20 $01
 

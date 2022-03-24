@@ -257,7 +257,7 @@ func_007_6606::
     call func_007_7E7D                            ; $6625: $CD $7D $7E
     jr   jr_007_6630                              ; $6628: $18 $06
 
-.jr_662A:
+.jr_662A
     call GetRandomByte                            ; $662A: $CD $0D $28
     and  $03                                      ; $662D: $E6 $03
     ld   e, a                                     ; $662F: $5F
@@ -290,7 +290,7 @@ func_007_6649::
     call IncrementEntityState                     ; $6656: $CD $12 $3B
     ld   [hl], b                                  ; $6659: $70
 
-.jr_665A:
+.jr_665A
     call UpdateEntityPosWithSpeed_07              ; $665A: $CD $0A $7E
     call label_3B23                               ; $665D: $CD $23 $3B
 
@@ -323,7 +323,7 @@ func_007_666B::
     add  hl, bc                                   ; $668B: $09
     ld   [hl], $04                                ; $668C: $36 $04
 
-.jr_668E:
+.jr_668E
     ld   a, $02                                   ; $668E: $3E $02
     jp   SetEntitySpriteVariant                   ; $6690: $C3 $0C $3B
 
@@ -347,7 +347,7 @@ func_007_66A6::
 
     ld   a, $F8                                   ; $66AE: $3E $F8
 
-.jr_66B0:
+.jr_66B0
     ld   hl, wEntitiesSpeedXTable                 ; $66B0: $21 $40 $C2
     add  hl, bc                                   ; $66B3: $09
     ld   [hl], a                                  ; $66B4: $77
@@ -372,7 +372,7 @@ func_007_66B8::
     inc  a                                        ; $66D2: $3C
     ld   [hl], a                                  ; $66D3: $77
 
-.jr_66D4:
+.jr_66D4
     ld   hl, wEntitiesCollisionsTable             ; $66D4: $21 $A0 $C2
     add  hl, bc                                   ; $66D7: $09
     ld   a, [hl]                                  ; $66D8: $7E
@@ -389,7 +389,7 @@ func_007_66B8::
     ld   [hl], b                                  ; $66EA: $70
     jp   label_007_6660                           ; $66EB: $C3 $60 $66
 
-.jr_66EE:
+.jr_66EE
     xor  a                                        ; $66EE: $AF
     jp   SetEntitySpriteVariant                   ; $66EF: $C3 $0C $3B
 

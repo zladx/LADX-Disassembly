@@ -107,7 +107,7 @@ RevealMamuCave::
     call func_91D                                 ; $6329: $CD $1D $09
     pop  bc                                       ; $632C: $C1
 
-.jr_632D:
+.jr_632D
     ld   hl, wDrawCommand                         ; $632D: $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ; $6330: $FA $00 $D6
     ld   e, a                                     ; $6333: $5F

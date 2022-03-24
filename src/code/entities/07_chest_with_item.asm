@@ -109,7 +109,7 @@ notGelChest:
     ld   a, $01                                   ; $7C31: $3E $01
     ld   [wHasMedicine], a                        ; $7C33: $EA $0D $DB
 
-.jr_7C36:
+.jr_7C36
     ldh  a, [hIsGBC]                              ; $7C36: $F0 $FE
     and  a                                        ; $7C38: $A7
     jr   z, jr_007_7C58                           ; $7C39: $28 $1D
@@ -123,7 +123,7 @@ notGelChest:
     jr   nz, jr_007_7C58                          ; maybe related to incrementing an item level
     jr   jr_007_7C53                              ; $7C47: $18 $0A
 
-.jr_7C49:
+.jr_7C49
     cp   MAP_EAGLES_TOWER
     jr   nz, jr_007_7C58                          ; $7C4B: $20 $0B
 
@@ -158,7 +158,7 @@ jr_007_7C5E:
     call GetEntitySpeedYAddress                   ; $7C71: $CD $05 $40
     ld   [hl], $00                                ; $7C74: $36 $00
 
-.jr_7C76:
+.jr_7C76
     cp   $08                                      ; $7C76: $FE $08
     jr   nz, jr_007_7C93                          ; $7C78: $20 $19
 
@@ -178,7 +178,7 @@ jr_007_7C5E:
     ldh  [hJingle], a                             ; $7C8C: $E0 $F2
     jr   jr_007_7C93                              ; $7C8E: $18 $03
 
-.jr_7C90:
+.jr_7C90
     ld   [wMusicTrackToPlay], a                   ; $7C90: $EA $68 $D3
 
 jr_007_7C93:
@@ -201,7 +201,7 @@ jr_007_7C93:
     call_open_dialog $111                         ; $7CAA
     jr   jr_007_7CE9                              ; $7CAF: $18 $38
 
-.jr_7CB1:
+.jr_7CB1
     ld   a, e                                     ; $7CB1: $7B
     cp   CHEST_SHIELD                             ; $7CB2: $FE $01
     jr   nz, .jr_7CC1                             ; $7CB4: $20 $0B
@@ -213,7 +213,7 @@ jr_007_7C93:
     ld   a, $ED                                   ; $7CBD: $3E $ED
     jr   jr_007_7CE6                              ; $7CBF: $18 $25
 
-.jr_7CC1:
+.jr_7CC1
     ld   a, e                                     ; $7CC1: $7B
     cp   CHEST_SWORD                              ; $7CC2: $FE $0B
     jr   nz, .jr_7CD1                             ; $7CC4: $20 $0B
@@ -225,7 +225,7 @@ jr_007_7C93:
     ld   a, $9F                                   ; $7CCD: $3E $9F
     jr   jr_007_7CE6                              ; $7CCF: $18 $15
 
-.jr_7CD1:
+.jr_7CD1
     ld   a, e                                     ; $7CD1: $7B
     cp   CHEST_POWER_BRACELET                     ; $7CD2: $FE $00
     jr   nz, .jr_7CE1                             ; $7CD4: $20 $0B
@@ -237,7 +237,7 @@ jr_007_7C93:
     ld   a, $EE                                   ; $7CDD: $3E $EE
     jr   jr_007_7CE6                              ; $7CDF: $18 $05
 
-.jr_7CE1:
+.jr_7CE1
     ld   hl, SpitObjectDialog                     ; $7CE1: $21 $99 $7B
     add  hl, de                                   ; $7CE4: $19
     ld   a, [hl]                                  ; $7CE5: $7E

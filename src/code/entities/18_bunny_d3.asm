@@ -41,7 +41,7 @@ BunnyD3EntityHandler::
     add  hl, bc                                   ; $51F1: $09
     ld   [hl], e                                  ; $51F2: $73
 
-.jr_51F3:
+.jr_51F3
     call func_018_7D60                            ; $51F3: $CD $60 $7D
     call ReturnIfNonInteractive_18                ; $51F6: $CD $E8 $7D
     call AddEntityZSpeedToPos_18                  ; $51F9: $CD $98 $7E
@@ -58,7 +58,7 @@ BunnyD3EntityHandler::
     and  $80                                      ; $520A: $E6 $80
     jr   z, jr_018_521C                           ; $520C: $28 $0E
 
-.jr_520E:
+.jr_520E
     ld   [hl], b                                  ; $520E: $70
     ld   hl, wEntitiesSpeedZTable                 ; $520F: $21 $20 $C3
     add  hl, bc                                   ; $5212: $09
@@ -91,7 +91,7 @@ jr_018_521C:
     jr   z, .jr_523F                              ; $523C: $28 $01
     inc  e                                        ; $523E: $1C
 
-.jr_523F:
+.jr_523F
     ld   a, [wHasInstrument6]                     ; $523F: $FA $6A $DB
     and  $02                                      ; $5242: $E6 $02
     jr   z, .jr_524A                              ; $5244: $28 $04
@@ -100,14 +100,14 @@ jr_018_521C:
     add  $04                                      ; $5247: $C6 $04
     ld   e, a                                     ; $5249: $5F
 
-.jr_524A:
+.jr_524A
     ld   a, [wIsMarinFollowingLink]               ; $524A: $FA $73 $DB
     and  a                                        ; $524D: $A7
     jr   z, .jr_5255                              ; $524E: $28 $05
 
     jp_open_dialog $252                           ; $5250
 
-.jr_5255:
+.jr_5255
     ld   a, e                                     ; $5255: $7B
     add  $4A                                      ; $5256: $C6 $4A
     jp   OpenDialogInTable2                       ; $5258: $C3 $7C $23

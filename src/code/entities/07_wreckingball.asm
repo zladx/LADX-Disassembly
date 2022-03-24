@@ -32,7 +32,7 @@ ENDC
     ld   a, $10                                   ; $6014: $3E $10
     ld   [wC5AE], a                               ; $6016: $EA $AE $C5
 
-.jr_6019:
+.jr_6019
     ldh  a, [hMapRoom]                            ; $6019: $F0 $F6
     ld   hl, wEntitiesRoomTable                   ; $601B: $21 $E0 $C3
     add  hl, bc                                   ; $601E: $09
@@ -96,7 +96,7 @@ jr_007_602A:
     pop  af                                       ; $607F: $F1
     jr   jr_007_6083                              ; $6080: $18 $01
 
-.jr_6082:
+.jr_6082
     xor  a                                        ; $6082: $AF
 
 jr_007_6083:
@@ -161,7 +161,7 @@ func_007_60D1::
     inc  [hl]                                     ; $60DA: $34
     inc  [hl]                                     ; $60DB: $34
 
-.jr_60DC:
+.jr_60DC
     dec  [hl]                                     ; $60DC: $35
 
 jr_007_60DD:
@@ -182,7 +182,7 @@ jr_007_60DD:
 
     jr   ret_007_6133                             ; $60F5: $18 $3C
 
-.jr_60F7:
+.jr_60F7
     ld   a, [wAButtonSlot]                        ; $60F7: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $60FA: $FE $03
     jr   nz, ret_007_6133                         ; $60FC: $20 $35
@@ -290,7 +290,7 @@ jr_007_6172:
     call func_007_618F                            ; $6184: $CD $8F $61
     pop  de                                       ; $6187: $D1
 
-.jr_6188:
+.jr_6188
     dec  e                                        ; $6188: $1D
     ld   a, e                                     ; $6189: $7B
     cp   $FF                                      ; $618A: $FE $FF

@@ -74,14 +74,14 @@ MarinAtTheShoreState2Handler::
     call_open_dialog $1D5 ; "Want to talk a while?" ; $6201
     call IncrementEntityState                     ; $6206: $CD $12 $3B
 
-.jr_6209:
+.jr_6209
     ld   e, $02                                   ; $6209: $1E $02
     cp   $0C                                      ; $620B: $FE $0C
     jr   c, .jr_6211                              ; $620D: $38 $02
 
     ld   e, $04                                   ; $620F: $1E $04
 
-.jr_6211:
+.jr_6211
     ld   a, e                                     ; $6211: $7B
     jp   SetEntitySpriteVariant                   ; $6212: $C3 $0C $3B
 
@@ -129,14 +129,14 @@ MarinAtTheShoreState5Handler::
 
     call IncrementEntityState                     ; $6258: $CD $12 $3B
 
-.jr_625B:
+.jr_625B
     ld   e, $00                                   ; $625B: $1E $00
     cp   $54                                      ; $625D: $FE $54
     jr   c, .jr_6263                              ; $625F: $38 $02
 
     ld   e, $04                                   ; $6261: $1E $04
 
-.jr_6263:
+.jr_6263
     ld   a, e                                     ; $6263: $7B
     jp   SetEntitySpriteVariant                   ; $6264: $C3 $0C $3B
 

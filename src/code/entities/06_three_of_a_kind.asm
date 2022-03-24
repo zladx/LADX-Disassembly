@@ -50,7 +50,7 @@ ThreeOfAKindState0Handler::
     call ClearEntitySpeed                         ; $495C: $CD $7F $3D
     call IncrementEntityState                     ; $495F: $CD $12 $3B
 
-.jr_4962:
+.jr_4962
     ld   hl, wEntitiesInertiaTable                ; $4962: $21 $D0 $C3
     add  hl, bc                                   ; $4965: $09
     inc  [hl]                                     ; $4966: $34
@@ -67,7 +67,7 @@ jr_006_4967:
     and  $03                                      ; $4973: $E6 $03
     ld   [hl], a                                  ; $4975: $77
 
-.jr_4976:
+.jr_4976
     ld   e, [hl]                                  ; $4976: $5E
     sla  e                                        ; $4977: $CB $23
     ld   hl, wEntitiesInertiaTable                ; $4979: $21 $D0 $C3
@@ -100,7 +100,7 @@ Data_006_499F::
 ThreeOfAKindState1Handler::
     call label_3B39                               ; $49A3: $CD $39 $3B
 
-.jr_49A6:
+.jr_49A6
     call GetEntityTransitionCountdown             ; $49A6: $CD $05 $0C
     jr   nz, .jr_49D2                             ; $49A9: $20 $27
 
@@ -127,7 +127,7 @@ ThreeOfAKindState1Handler::
     add  hl, bc                                   ; $49D0: $09
     ld   [hl], a                                  ; $49D1: $77
 
-.jr_49D2:
+.jr_49D2
     jr   jr_006_4967                              ; $49D2: $18 $93
 
 ThreeOfAKindState2Handler::
@@ -170,7 +170,7 @@ jr_006_49E2:
     inc  a                                        ; $4A06: $3C
     ldh  [hMultiPurpose0], a                      ; $4A07: $E0 $D7
 
-.jr_4A09:
+.jr_4A09
     dec  e                                        ; $4A09: $1D
     ld   a, e                                     ; $4A0A: $7B
     cp   $FF                                      ; $4A0B: $FE $FF
@@ -206,7 +206,7 @@ jr_006_4A1B:
     ld   [hl], a                                  ; $4A35: $77
     inc  bc                                       ; $4A36: $03
 
-.jr_4A37:
+.jr_4A37
     dec  e                                        ; $4A37: $1D
     ld   a, e                                     ; $4A38: $7B
     cp   $FF                                      ; $4A39: $FE $FF
@@ -244,7 +244,7 @@ ENDC
 
     ld   e, $2E                                   ; $4A60: $1E $2E
 
-.jr_4A62:
+.jr_4A62
     ld   a, e                                     ; $4A62: $7B
     ldh  [hMultiPurposeG], a                      ; $4A63: $E0 $E8
     ld   e, $0F                                   ; $4A65: $1E $0F
@@ -272,7 +272,7 @@ jr_006_4A68:
     ld   [hl], d                                  ; $4A82: $72
     jr   jr_006_4AA1                              ; $4A83: $18 $1C
 
-.jr_4A85:
+.jr_4A85
     ld   hl, wEntitiesDroppedItemTable            ; $4A85: $21 $E0 $C4
     add  hl, de                                   ; $4A88: $19
     ld   [hl], a                                  ; $4A89: $77

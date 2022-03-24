@@ -16,7 +16,7 @@ MovingBlockMoverEntityHandler::
 
     call func_018_7D3B                            ; $53EA: $CD $3B $7D
 
-.jr_53ED:
+.jr_53ED
     ld   hl, hLinkPositionX                       ; $53ED: $21 $98 $FF
     ldh  a, [hActiveEntityPosX]                   ; $53F0: $F0 $EE
     sub  [hl]                                     ; $53F2: $96
@@ -41,7 +41,7 @@ MovingBlockMoverEntityHandler::
     cp   INVENTORY_POWER_BRACELET                 ; $5413: $FE $03
     jr   nz, jr_018_5466                          ; $5415: $20 $4F
 
-.jr_5417:
+.jr_5417
 IF __PATCH_0__
     ld   a, [wC3CF]
     and  a
@@ -113,7 +113,7 @@ IF !__PATCH_0__
     ldh  [hMovingBlockMoverState], a              ; $5477: $E0 $BA
 ENDC
 
-.jr_5479:
+.jr_5479
 IF __PATCH_0__
     ldh  a, [hActiveEntityVisualPosY]
     cp   $1a
@@ -148,7 +148,7 @@ func_018_548A::
 
     ldh  [hActiveEntitySpriteVariant], a          ; $5490: $E0 $F1
 
-.jr_5492:
+.jr_5492
     ld   de, MovingBlockMover1SpriteVariants      ; $5492: $11 $7A $54
     call RenderActiveEntitySpritesPair            ; $5495: $CD $C0 $3B
     ld   hl, wEntitiesPrivateState2Table          ; $5498: $21 $C0 $C2
@@ -195,7 +195,7 @@ label_018_54BD:
     ld   [hl], a                                  ; $54DB: $77
     jr   jr_018_54DF                              ; $54DC: $18 $01
 
-.jr_54DE:
+.jr_54DE
     dec  e                                        ; $54DE: $1D
 
 jr_018_54DF:
@@ -208,7 +208,7 @@ jr_018_54DF:
 
     ld   e, $FC                                   ; $54EC: $1E $FC
 
-.jr_54EE:
+.jr_54EE
     ld   hl, wEntitiesSpeedYTable                 ; $54EE: $21 $50 $C2
     add  hl, bc                                   ; $54F1: $09
     ld   [hl], e                                  ; $54F2: $73

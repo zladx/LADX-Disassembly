@@ -32,7 +32,7 @@ AnimalD0EntityHandler::
 
     ld   e, $02                                   ; $7F4B: $1E $02
 
-.jr_7F4D:
+.jr_7F4D
     ldh  a, [hFrameCounter]                       ; $7F4D: $F0 $E7
     rra                                           ; $7F4F: $1F
     rra                                           ; $7F50: $1F

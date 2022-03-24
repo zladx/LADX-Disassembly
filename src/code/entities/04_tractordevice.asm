@@ -29,7 +29,7 @@ ReversedTractorDeviceEntityHandler::
 
     ld   de, TractorDevice2SpriteVariants         ; $6831: $11 $1C $68
 
-.jr_6834:
+.jr_6834
     call RenderActiveEntitySpritesPair            ; $6834: $CD $C0 $3B
     call ReturnIfNonInteractive_04                ; $6837: $CD $A3 $7F
     call label_3B70                               ; $683A: $CD $70 $3B
@@ -48,7 +48,7 @@ func_004_6848::
     ld   [hl], $10                                ; $684D: $36 $10
     jp   IncrementEntityState                     ; $684F: $C3 $12 $3B
 
-.jr_6852:
+.jr_6852
     ld   a, [wLinkMotionState]                    ; $6852: $FA $1C $C1
     cp   LINK_MOTION_DEFAULT                      ; $6855: $FE $00
     jp   nz, label_004_68E4                       ; $6857: $C2 $E4 $68
@@ -66,7 +66,7 @@ func_004_6848::
     inc  e                                        ; $686A: $1C
     ld   a, $08                                   ; $686B: $3E $08
 
-.jr_686D:
+.jr_686D
     push de                                       ; $686D: $D5
     call GetVectorTowardsLink_trampoline          ; $686E: $CD $B5 $3B
     pop  de                                       ; $6871: $D1
@@ -77,7 +77,7 @@ func_004_6848::
     cpl                                           ; $6878: $2F
     inc  a                                        ; $6879: $3C
 
-.jr_687A:
+.jr_687A
     ldh  [hLinkSpeedY], a                         ; $687A: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $687C: $F0 $D8
     bit  0, e                                     ; $687E: $CB $43
@@ -86,7 +86,7 @@ func_004_6848::
     cpl                                           ; $6882: $2F
     inc  a                                        ; $6883: $3C
 
-.jr_6884:
+.jr_6884
     ldh  [hLinkSpeedX], a                         ; $6884: $E0 $9A
     push bc                                       ; $6886: $C5
     call UpdateFinalLinkPosition                  ; $6887: $CD $A8 $21
@@ -130,7 +130,7 @@ func_004_6848::
     ldh  [hWaveSfx], a                            ; $68D1: $E0 $F3
     ret                                           ; $68D3: $C9
 
-.jr_68D4:
+.jr_68D4
     ldh  a, [hFrameCounter]                       ; $68D4: $F0 $E7
     rra                                           ; $68D6: $1F
     rra                                           ; $68D7: $1F
@@ -170,7 +170,7 @@ func_004_68FD::
     call IncrementEntityState                     ; $6904: $CD $12 $3B
     ld   [hl], b                                  ; $6907: $70
 
-.jr_6908:
+.jr_6908
     ld   a, $00                                   ; $6908: $3E $00
     jp   SetEntitySpriteVariant                   ; $690A: $C3 $0C $3B
 
@@ -224,7 +224,7 @@ label_004_6910:
 
     inc  e                                        ; $6953: $1C
 
-.jr_6954:
+.jr_6954
     ldh  a, [hMultiPurpose0]                      ; $6954: $F0 $D7
     bit  0, e                                     ; $6956: $CB $43
     jr   nz, .jr_695C                             ; $6958: $20 $02
@@ -232,7 +232,7 @@ label_004_6910:
     cpl                                           ; $695A: $2F
     inc  a                                        ; $695B: $3C
 
-.jr_695C:
+.jr_695C
     ld   hl, wEntitiesSpeedYTable                 ; $695C: $21 $50 $C2
     add  hl, bc                                   ; $695F: $09
     ld   [hl], a                                  ; $6960: $77
@@ -243,7 +243,7 @@ label_004_6910:
     cpl                                           ; $6967: $2F
     inc  a                                        ; $6968: $3C
 
-.jr_6969:
+.jr_6969
     ld   hl, wEntitiesSpeedXTable                 ; $6969: $21 $40 $C2
     add  hl, bc                                   ; $696C: $09
     ld   [hl], a                                  ; $696D: $77
@@ -266,7 +266,7 @@ label_004_6910:
 
     call ClearEntityStatusBank04                  ; $698F: $CD $7A $6D
 
-.jr_6992:
+.jr_6992
     pop  af                                       ; $6992: $F1
     ld   hl, wEntitiesSpeedYTable                 ; $6993: $21 $50 $C2
     add  hl, bc                                   ; $6996: $09

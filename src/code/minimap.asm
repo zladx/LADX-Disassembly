@@ -304,13 +304,13 @@ jr_002_6848:
     ld   h, a                                     ; $687A: $67
     jr   .loop_685B                               ; $687B: $18 $DE
 
-.jr_687D:
+.jr_687D
     xor  a                                        ; $687D: $AF
     ld   [rSVBK], a                               ; $687E: $E0 $70
     ld   [rVBK], a                                ; $6880: $E0 $4F
     ei                                            ; $6882: $FB
 
-.jr_6883:
+.jr_6883
     pop  hl                                       ; $6883: $E1
     pop  de                                       ; $6884: $D1
 

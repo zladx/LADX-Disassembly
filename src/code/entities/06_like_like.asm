@@ -33,7 +33,7 @@ LikeLikeState0Handler::
     add  hl, bc                                   ; $7E04: $09
     ld   [hl], b                                  ; $7E05: $70
 
-.jr_7E06:
+.jr_7E06
     call label_3B70                               ; $7E06: $CD $70 $3B
 
 label_006_7E09:
@@ -58,7 +58,7 @@ LikeLikeState1Handler::
     ld   [hl], b                                  ; $7E25: $70
     ret                                           ; $7E26: $C9
 
-.jr_7E27:
+.jr_7E27
     ld   a, LINK_ANIMATION_STATE_NO_UPDATE        ; $7E27: $3E $FF
     ldh  [hLinkAnimationState], a                 ; $7E29: $E0 $9D
     ld   hl, wEntitiesPrivateState1Table          ; $7E2B: $21 $B0 $C2
@@ -86,7 +86,7 @@ jr_006_7E37:
     ld   [hl], a                                  ; $7E4B: $77
     jr   jr_006_7E55                              ; $7E4C: $18 $07
 
-.jr_7E4E:
+.jr_7E4E
     inc  hl                                       ; $7E4E: $23
     inc  e                                        ; $7E4F: $1C
     ld   a, e                                     ; $7E50: $7B

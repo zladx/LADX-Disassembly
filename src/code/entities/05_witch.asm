@@ -180,7 +180,7 @@ func_005_4896::
     ld   [wMusicTrackTiming], a                   ; $48A8: $EA $0B $C1
     ld   [wC167], a                               ; $48AB: $EA $67 $C1
 
-.jr_48AE:
+.jr_48AE
     ldh  [hLinkInteractiveMotionBlocked], a       ; $48AE: $E0 $A1
     ld   hl, wEntitiesInertiaTable                ; $48B0: $21 $D0 $C3
     add  hl, bc                                   ; $48B3: $09

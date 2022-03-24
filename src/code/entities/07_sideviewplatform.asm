@@ -130,7 +130,7 @@ label_007_63FB:
     call GetEntityTransitionCountdown             ; $641A: $CD $05 $0C
     ld   [hl], $6A                                ; $641D: $36 $6A
 
-.jr_641F:
+.jr_641F
     jp   func_007_639E                            ; $641F: $C3 $9E $63
 
 Data_007_6422::
@@ -143,7 +143,7 @@ SideViewPlatformEntityHandler::
     ld   a, $04                                   ; $6437: $3E $04
     ldh  [hActiveEntityTilesOffset], a            ; $6439: $E0 $F5
 
-.jr_643B:
+.jr_643B
     ld   hl, Data_007_6422                        ; $643B: $21 $22 $64
     ld   c, $04                                   ; $643E: $0E $04
     call RenderActiveEntitySpritesRect            ; $6440: $CD $E6 $3C
@@ -168,7 +168,7 @@ SideViewPlatformEntityHandler::
 
     ld   e, $04                                   ; $6464: $1E $04
 
-.jr_6466:
+.jr_6466
     ld   hl, wEntitiesPrivateState4Table          ; $6466: $21 $40 $C4
     add  hl, bc                                   ; $6469: $09
     ld   a, [hl]                                  ; $646A: $7E
@@ -182,14 +182,14 @@ SideViewPlatformEntityHandler::
     ld   a, $11                                   ; $6474: $3E $11
     ldh  [hNoiseSfx], a                           ; $6476: $E0 $F4
 
-.jr_6478:
+.jr_6478
     ldh  a, [hFrameCounter]                       ; $6478: $F0 $E7
     and  $03                                      ; $647A: $E6 $03
     jr   nz, ret_007_6488                         ; $647C: $20 $0A
 
     call GetEntitySpeedYAddress                   ; $647E: $CD $05 $40
 
-.jr_6481:
+.jr_6481
     ld   a, [hl]                                  ; $6481: $7E
     sub  e                                        ; $6482: $93
     and  $80                                      ; $6483: $E6 $80

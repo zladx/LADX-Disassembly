@@ -43,7 +43,7 @@ TarinBeekeeperEntityHandler::
     and  ROOM_STATUS_EVENT_3                      ; $4EC0: $E6 $40
     jp   nz, func_007_7EA4                        ; $4EC2: $C2 $A4 $7E
 
-.jr_4EC5:
+.jr_4EC5
     ld   a, [wHasInstrument3]                     ; $4EC5: $FA $67 $DB
     and  $02                                      ; $4EC8: $E6 $02
     jp   z, func_007_7EA4                         ; $4ECA: $CA $A4 $7E
@@ -67,7 +67,7 @@ TarinBeekeeperEntityHandler::
     add  hl, bc                                   ; $4EEC: $09
     ld   [hl], b                                  ; $4EED: $70
 
-.jr_4EEE:
+.jr_4EEE
     ldh  a, [hActiveEntityState]                  ; $4EEE: $F0 $F0
     JP_TABLE                                      ; $4EF0
 ._00 dw func_007_4EFF                             ; $4EF1
@@ -114,7 +114,7 @@ func_007_4F1F::
     ldh  [hJingle], a                             ; $4F3F: $E0 $F2
     jp   IncrementEntityState                     ; $4F41: $C3 $12 $3B
 
-.jr_4F44:
+.jr_4F44
     call_open_dialog $1C2                         ; $4F44
     call IncrementEntityState                     ; $4F49: $CD $12 $3B
     ld   [hl], b                                  ; $4F4C: $70
@@ -151,7 +151,7 @@ func_007_4F56::
     jp   SetEntitySpriteVariant                   ; $4F78: $C3 $0C $3B
 
 ; Tarin beehive cutscene related
-.jr_4F7B:
+.jr_4F7B
     cp   $18                                      ; $4F7B: $FE $18
     jr   nc, .jr_4FA5                             ; $4F7D: $30 $26
 
@@ -173,7 +173,7 @@ func_007_4F56::
     ld   [hl], $C0                                ; $4FA0: $36 $C0
     jp   IncrementEntityState                     ; $4FA2: $C3 $12 $3B
 
-.jr_4FA5:
+.jr_4FA5
     ld   a, $01                                   ; $4FA5: $3E $01
     ldh  [hActiveEntitySpriteVariant], a          ; $4FA7: $E0 $F1
     ldh  a, [hActiveEntityPosX]                   ; $4FA9: $F0 $EE
@@ -200,7 +200,7 @@ func_007_4FC6::
     ld   [hl], $0C                                ; $4FCF: $36 $0C
     call IncrementEntityState                     ; $4FD1: $CD $12 $3B
 
-.jr_4FD4:
+.jr_4FD4
     call GetEntityTransitionCountdown             ; $4FD4: $CD $05 $0C
     cp   $20                                      ; $4FD7: $FE $20
     jr   nz, .jr_4FE5                             ; $4FD9: $20 $0A
@@ -211,14 +211,14 @@ func_007_4FC6::
     call func_007_733F                            ; $4FE1: $CD $3F $73
     xor  a                                        ; $4FE4: $AF
 
-.jr_4FE5:
+.jr_4FE5
     cp   $60                                      ; $4FE5: $FE $60
     jr   nz, .jr_4FED                             ; $4FE7: $20 $04
 
     ld   hl, wD202                                ; $4FE9: $21 $02 $D2
     inc  [hl]                                     ; $4FEC: $34
 
-.jr_4FED:
+.jr_4FED
     cp   $A0                                      ; $4FED: $FE $A0
     jr   nz, .jr_4FFC                             ; $4FEF: $20 $0B
 
@@ -229,7 +229,7 @@ func_007_4FC6::
     add  hl, de                                   ; $4FF9: $19
     ld   [hl], $A0                                ; $4FFA: $36 $A0
 
-.jr_4FFC:
+.jr_4FFC
     and  $20                                      ; $4FFC: $E6 $20
     jr   z, .jr_5012                              ; $4FFE: $28 $12
 
@@ -243,7 +243,7 @@ func_007_4FC6::
     ldh  [hActiveEntityVisualPosY], a             ; $500E: $E0 $EC
     jr   jr_007_501B                              ; $5010: $18 $09
 
-.jr_5012:
+.jr_5012
     xor  a                                        ; $5012: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $5013: $E0 $F1
     ldh  a, [hActiveEntityVisualPosY]             ; $5015: $F0 $EC
@@ -261,7 +261,7 @@ jr_007_501B:
 
     inc  e                                        ; $502D: $1C
 
-.jr_502E:
+.jr_502E
     ld   a, e                                     ; $502E: $7B
     jp   SetEntitySpriteVariant                   ; $502F: $C3 $0C $3B
 
@@ -299,17 +299,17 @@ func_007_504E::
     ld   hl, Data_007_503D                        ; $5065: $21 $3D $50
     add  hl, de                                   ; $5068: $19
 
-.jr_5069:
+.jr_5069
     ld   e, [hl]                                  ; $5069: $5E
     call GetEntityTransitionCountdown             ; $506A: $CD $05 $0C
 
-.jr_506D:
+.jr_506D
     ld   [hl], e                                  ; $506D: $73
 
 jr_007_506E:
     ld   hl, wEntitiesInertiaTable                ; $506E: $21 $D0 $C3
 
-.jr_5071:
+.jr_5071
     add  hl, bc                                   ; $5071: $09
     ld   a, [hl]                                  ; $5072: $7E
     and  $03                                      ; $5073: $E6 $03

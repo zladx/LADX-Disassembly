@@ -13,7 +13,7 @@ OwlEventEntityHandler::
     and  $02                                      ; $6808: $E6 $02
     jp   nz, ClearEntityStatus_06                 ; $680A: $C2 $DB $65
 
-.jr_680D:
+.jr_680D
     ldh  a, [hMapRoom]                            ; $680D: $F0 $F6
     cp   ROOM_OW_SOUTHERN_FACE_SHRINE_ENTRANCE    ; $680F: $FE $AC
     jr   nz, .jr_681A                             ; $6811: $20 $07
@@ -22,7 +22,7 @@ OwlEventEntityHandler::
     and  ROOM_STATUS_EVENT_1                      ; $6815: $E6 $10
     jp   z, ClearEntityStatus_06                  ; $6817: $CA $DB $65
 
-.jr_681A:
+.jr_681A
     ldh  a, [hMapRoom]                            ; $681A: $F0 $F6
     cp   UNKNOWN_ROOM_41                          ; Tail Cave key chest
     jr   nz, .jr_6829                             ; $681E: $20 $09
@@ -34,7 +34,7 @@ OwlEventEntityHandler::
     call GetEntityPrivateCountdown1               ; $6825: $CD $00 $0C
     ret  nz                                       ; $6828: $C0
 
-.jr_6829:
+.jr_6829
     ldh  a, [hMapRoom]                            ; $6829: $F0 $F6
     cp   UNKNOWN_ROOM_EE                          ; Yarna Desert
     jr   nz, .jr_6835                             ; $682D: $20 $06
@@ -43,7 +43,7 @@ OwlEventEntityHandler::
     and  a                                        ; $6832: $A7
     jr   jr_006_689D                              ; $6833: $18 $68
 
-.jr_6835:
+.jr_6835
     ldh  a, [hMapRoom]                            ; $6835: $F0 $F6
     cp   UNKNOWN_ROOM_D2                          ; 1 room west of Tail Cave
     jr   z, .jr_684E                              ; $6839: $28 $13
@@ -58,7 +58,7 @@ OwlEventEntityHandler::
     cp   $01                                      ; $6849: $FE $01
     jp   nz, ClearEntityStatus_06                 ; $684B: $C2 $DB $65
 
-.jr_684E:
+.jr_684E
     ld   a, [wHasInstrument1]                     ; $684E: $FA $65 $DB
     jr   jr_006_689B                              ; $6851: $18 $48
 
@@ -77,14 +77,14 @@ jr_006_6853:
 
     jr   jr_006_68A0                              ; $6867: $18 $37
 
-.jr_6869:
+.jr_6869
     cp   UNKNOWN_ROOM_9D                          ; Room with staircase leading to Face Shrine dungeon passage
     jr   nz, .jr_6872                             ; $686B: $20 $05
 
     ld   a, [wHasInstrument5]                     ; $686D: $FA $69 $DB
     jr   jr_006_689B                              ; $6870: $18 $29
 
-.jr_6872:
+.jr_6872
     cp   UNKNOWN_ROOM_06                          ; Wind Fish's Egg
     jr   nz, .jr_687E                             ; $6874: $20 $08
 
@@ -94,21 +94,21 @@ jr_006_6853:
 
     jr   jr_006_68A0                              ; $687C: $18 $22
 
-.jr_687E:
+.jr_687E
     cp   UNKNOWN_ROOM_B6                          ; One east of Key Cavern
     jr   nz, .jr_6887                             ; $6880: $20 $05
 
     ld   a, [wHasInstrument3]                     ; $6882: $FA $67 $DB
     jr   jr_006_689B                              ; $6885: $18 $14
 
-.jr_6887:
+.jr_6887
     cp   UNKNOWN_ROOM_17                          ; One south-east of Wind Fish's Egg
     jr   z, .jr_688F                              ; $6889: $28 $04
 
     cp   UNKNOWN_ROOM_9C                          ; One south of Face Shrine dungeon
     jr   nz, jr_006_6894                          ; $688D: $20 $05
 
-.jr_688F:
+.jr_688F
     ld   a, [wHasInstrument6]                     ; $688F: $FA $6A $DB
     jr   jr_006_689B                              ; $6892: $18 $07
 
@@ -137,7 +137,7 @@ jr_006_68A0:
     cp   $00                                      ; $68B0: $FE $00
     jr   z, jr_006_68B7                           ; $68B2: $28 $03
 
-.jr_68B4:
+.jr_68B4
     call func_006_6A4F                            ; $68B4: $CD $4F $6A
 
 jr_006_68B7:
@@ -148,7 +148,7 @@ jr_006_68B7:
 
     inc  a                                        ; $68BF: $3C
 
-.jr_68C0:
+.jr_68C0
     call SetEntitySpriteVariant                   ; $68C0: $CD $0C $3B
     ld   a, [wRoomTransitionState]                ; $68C3: $FA $24 $C1
     and  a                                        ; $68C6: $A7
@@ -181,7 +181,7 @@ OwlState0Handler::
 
     jr   jr_006_68F6                              ; $68ED: $18 $07
 
-.jr_68EF:
+.jr_68EF
     ld   a, [wSwordLevel]                         ; $68EF: $FA $4E $DB
     and  a                                        ; $68F2: $A7
     jp   z, ClearEntityStatus_06                  ; $68F3: $CA $DB $65
@@ -204,7 +204,7 @@ jr_006_68F6:
     cp   UNKNOWN_ROOM_D2                          ; $6910: $FE $D2
     jr   nz, jr_006_691A                          ; $6912: $20 $06
 
-.jr_6914:
+.jr_6914
     call IncrementEntityState                     ; $6914: $CD $12 $3B
     ld   [hl], $02                                ; $6917: $36 $02
     ret                                           ; $6919: $C9
@@ -240,7 +240,7 @@ OwlState1Handler::
 
     jp   IncrementEntityState                     ; $694E: $C3 $12 $3B
 
-.jr_6951:
+.jr_6951
     ld   hl, wEntitiesSpeedZTable                 ; $6951: $21 $20 $C3
     add  hl, bc                                   ; $6954: $09
     ld   [hl], $FC                                ; $6955: $36 $FC
@@ -275,7 +275,7 @@ OwlState2Handler::
     call_open_dialog $0CD                         ; $6989
     jr   jr_006_6993                              ; $698E: $18 $03
 
-.jr_6990:
+.jr_6990
     call label_2A07                               ; $6990: $CD $07 $2A
 
 jr_006_6993:
@@ -297,7 +297,7 @@ OwlState3Handler::
 
     call IncrementEntityState                     ; $69AF: $CD $12 $3B
 
-.jr_69B2:
+.jr_69B2
     ldh  a, [hMapRoom]                            ; $69B2: $F0 $F6
     ld   e, a                                     ; $69B4: $5F
     ld   d, b                                     ; $69B5: $50
@@ -360,7 +360,7 @@ jr_006_6A05:
     ld   a, $05                                   ; $6A0B: $3E $05
     ldh  [hNoiseSfx], a                           ; $6A0D: $E0 $F4
 
-.jr_6A0F:
+.jr_6A0F
     ldh  a, [hFrameCounter]                       ; $6A0F: $F0 $E7
     and  $01                                      ; $6A11: $E6 $01
     jr   nz, ret_006_6A36                         ; $6A13: $20 $21
@@ -388,7 +388,7 @@ func_006_6A2B::
     dec  [hl]                                     ; $6A33: $35
     dec  [hl]                                     ; $6A34: $35
 
-.jr_6A35:
+.jr_6A35
     inc  [hl]                                     ; $6A35: $34
 
 ret_006_6A36:
@@ -427,7 +427,7 @@ jr_006_6A5B:
     jr   z, .jr_6A71                              ; $6A6C: $28 $03
     jp   label_3CD9                               ; $6A6E: $C3 $D9 $3C
 
-.jr_6A71:
+.jr_6A71
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6A71: $21 $40 $C3
     add  hl, bc                                   ; $6A74: $09
     res  4, [hl]                                  ; $6A75: $CB $A6

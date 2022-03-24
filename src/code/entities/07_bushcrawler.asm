@@ -61,7 +61,7 @@ BushCrawlerEntityHandler::
     add  hl, bc                                   ; $4051: $09
     ld   [hl], a                                  ; $4052: $77
 
-.jr_4053:
+.jr_4053
     ld   hl, wEntitiesPrivateState2Table          ; $4053: $21 $C0 $C2
     add  hl, bc                                   ; $4056: $09
     ldh  a, [hActiveEntityVisualPosY]             ; $4057: $F0 $EC
@@ -94,7 +94,7 @@ BushCrawlerEntityHandler::
     ld   de, Bushcrawler2SpriteVariants           ; $4084: $11 $0A $40
     call RenderActiveEntitySpritesPair            ; $4087: $CD $C0 $3B
 
-.jr_408A:
+.jr_408A
     call ReturnIfNonInteractive_07                ; $408A: $CD $96 $7D
     ld   hl, wEntitiesHealthTable                 ; $408D: $21 $60 $C3
     add  hl, bc                                   ; $4090: $09
@@ -125,7 +125,7 @@ BushCrawlerEntityHandler::
     ld   [hl], a                                  ; $40BD: $77
     jp   label_007_4198                           ; $40BE: $C3 $98 $41
 
-.jr_40C1:
+.jr_40C1
     call DecrementEntityIgnoreHitsCountdown       ; $40C1: $CD $56 $0C
     call label_3B39                               ; $40C4: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $40C7: $F0 $F0
@@ -162,7 +162,7 @@ BushCrawlerState0Handler::
     cp   $02                                      ; $40F5: $FE $02
     jr   z, jr_007_4128                           ; $40F7: $28 $2F
 
-.jr_40F9:
+.jr_40F9
     call IncrementEntityState                     ; $40F9: $CD $12 $3B
     call func_007_7E7D                            ; $40FC: $CD $7D $7E
     ld   d, b                                     ; $40FF: $50
@@ -213,7 +213,7 @@ jr_007_4128:
 
     ret                                           ; $414D: $C9
 
-.jr_414E:
+.jr_414E
     ld   a, [wAButtonSlot]                        ; $414E: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4151: $FE $03
     ret  nz                                       ; $4153: $C0

@@ -74,14 +74,14 @@ MermaidStatueOpeningHandler::
     ld   [wC167], a                               ; $49A9: $EA $67 $C1
     ret                                           ; $49AC: $C9
 
-.jr_49AD:
+.jr_49AD
     cp   $40                                      ; $49AD: $FE $40
     jr   nz, .jr_49B6                             ; $49AF: $20 $05
 
     ld   hl, hNoiseSfx                            ; $49B1: $21 $F4 $FF
     ld   [hl], $11                                ; $49B4: $36 $11
 
-.jr_49B6:
+.jr_49B6
     ret  nc                                       ; $49B6: $D0
 
     ld   hl, wEntitiesSpeedXTable                 ; $49B7: $21 $40 $C2

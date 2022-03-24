@@ -58,7 +58,7 @@ MrWriteBirdEntityHandler::
 
     ld   a, $03                                   ; $7253: $3E $03
 
-.jr_7255:
+.jr_7255
     ld   hl, wEntitiesDirectionTable              ; $7255: $21 $80 $C3
     add  hl, bc                                   ; $7258: $09
     ld   [hl], a                                  ; $7259: $77
@@ -71,7 +71,7 @@ jr_006_725A:
 
     ld   de, MrWriteBirdChristineHouseSpriteVariants ; $7263: $11 $24 $72
 
-.jr_7266:
+.jr_7266
     call RenderActiveEntitySpritesPair            ; $7266: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $7269: $CD $C6 $64
     ld   a, [wIsIndoor]                           ; $726C: $FA $A5 $DB
@@ -94,7 +94,7 @@ jr_006_725A:
     add  hl, bc                                   ; $728A: $09
     ld   [hl], b                                  ; $728B: $70
 
-.jr_728C:
+.jr_728C
     ldh  a, [hActiveEntityState]                  ; $728C: $F0 $F0
     JP_TABLE                                      ; $728E
 ._00 dw MrWriteBirdState0Handler
@@ -110,7 +110,7 @@ MrWriteBirdState0Handler::
     call SetEntitySpriteVariant                   ; $72A1: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $72A4: $CD $05 $0C
 
-.jr_72A7:
+.jr_72A7
     jr   nz, .jr_72E0                             ; $72A7: $20 $37
 
     call GetRandomByte                            ; $72A9: $CD $0D $28
@@ -144,7 +144,7 @@ MrWriteBirdState0Handler::
     ld   [hl], a                                  ; $72DC: $77
     call IncrementEntityState                     ; $72DD: $CD $12 $3B
 
-.jr_72E0:
+.jr_72E0
     jp   label_006_7308                           ; $72E0: $C3 $08 $73
 
 MrWriteBirdState1Handler::
@@ -163,7 +163,7 @@ MrWriteBirdState1Handler::
     ld   [hl], b                                  ; $72FB: $70
     ret                                           ; $72FC: $C9
 
-.jr_72FD:
+.jr_72FD
     ld   hl, wEntitiesSpeedZTable                 ; $72FD: $21 $20 $C3
     add  hl, bc                                   ; $7300: $09
     ld   [hl], $08                                ; $7301: $36 $08
@@ -190,7 +190,7 @@ MrWriteBirdState2Handler::
     add  hl, bc                                   ; $7321: $09
     inc  [hl]                                     ; $7322: $34
 
-.jr_7323:
+.jr_7323
     ldh  a, [hMultiPurposeG]                      ; $7323: $F0 $E8
     and  a                                        ; $7325: $A7
     jr   z, .jr_732C                              ; $7326: $28 $04
@@ -198,7 +198,7 @@ MrWriteBirdState2Handler::
     call IncrementEntityState                     ; $7328: $CD $12 $3B
     ld   [hl], b                                  ; $732B: $70
 
-.jr_732C:
+.jr_732C
     ldh  a, [hFrameCounter]                       ; $732C: $F0 $E7
     rra                                           ; $732E: $1F
     and  $02                                      ; $732F: $E6 $02

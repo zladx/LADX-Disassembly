@@ -104,7 +104,7 @@ func_007_517C::
 
     inc  e                                        ; $5195: $1C
 
-.jr_5196:
+.jr_5196
     jr   jr_007_519F                              ; $5196: $18 $07
 
 jr_007_5198:
@@ -167,7 +167,7 @@ jr_007_51AA:
     call func_91D                                 ; $51EE: $CD $1D $09
     pop  bc                                       ; $51F1: $C1
 
-.jr_51F2:
+.jr_51F2
     ld   hl, wDrawCommand                         ; $51F2: $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ; $51F5: $FA $00 $D6
     ld   e, a                                     ; $51F8: $5F
@@ -275,7 +275,7 @@ jr_007_51AA:
 
     call MarkTriggerAsResolved                    ; $529B: $CD $60 $0C
 
-.jr_529E:
+.jr_529E
     pop  bc                                       ; $529E: $C1
 
 ret_007_529F:

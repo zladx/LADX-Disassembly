@@ -55,7 +55,7 @@ PapahlEntityHandler::
     and  $02                                      ; $4A2B: $E6 $02
     jp   nz, func_007_7EA4                        ; $4A2D: $C2 $A4 $7E
 
-.jr_4A30:
+.jr_4A30
     ld   de, Papahl2SpriteVariants                ; $4A30: $11 $07 $4A
     ld   a, [wTradeSequenceItem]                  ; $4A33: $FA $0E $DB
     cp   $08                                      ; $4A36: $FE $08
@@ -85,7 +85,7 @@ PapahlEntityHandler::
 
     jp_open_dialog $027                           ; $4A5F
 
-.jr_4A64:
+.jr_4A64
     jp_open_dialog $176                           ; $4A64
 
 jr_007_4A69:
@@ -120,7 +120,7 @@ jr_007_4A69:
     call RenderActiveEntitySpritesPair            ; $4A9A: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4A9D: $CD $8A $3D
 
-.jr_4AA0:
+.jr_4AA0
     call ReturnIfNonInteractive_07                ; $4AA0: $CD $96 $7D
     call func_007_7CF0                            ; $4AA3: $CD $F0 $7C
     ldh  a, [hActiveEntityState]                  ; $4AA6: $F0 $F0
@@ -155,7 +155,7 @@ func_007_4AB3::
 
     ld   a, $77                                   ; $4AD8: $3E $77
 
-.jr_4ADA:
+.jr_4ADA
     call OpenDialogInTable1                       ; $4ADA: $CD $73 $23
     call IncrementEntityState                     ; $4ADD: $CD $12 $3B
     ld   a, $01                                   ; $4AE0: $3E $01
@@ -188,7 +188,7 @@ func_007_4AF3::
     ld   [hl], $C0                                ; $4B0B: $36 $C0
     ret                                           ; $4B0D: $C9
 
-.jr_4B0E:
+.jr_4B0E
     call_open_dialog $171                         ; $4B0E
     xor  a                                        ; $4B13: $AF
     ld   [wC167], a                               ; $4B14: $EA $67 $C1
@@ -212,7 +212,7 @@ func_007_4B1C::
     ldh  [hReplaceTiles], a                       ; $4B36: $E0 $A5
     jp   IncrementEntityState                     ; $4B38: $C3 $12 $3B
 
-.jr_4B3B:
+.jr_4B3B
     ld   a, $02                                   ; $4B3B: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4B3D: $E0 $A1
     ld   a, $01                                   ; $4B3F: $3E $01

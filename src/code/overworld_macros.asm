@@ -36,7 +36,7 @@ TreeMacroHandler::
     sub  $10                                      ; $75A6: $D6 $10
     ld   e, a                                     ; $75A8: $5F
 
-.jr_75A9:
+.jr_75A9
     ld   d, $00                                   ; $75A9: $16 $00
     ld   hl, wRoomObjectsArea                     ; $75AB: $21 $00 $D7
     add  hl, de                                   ; $75AE: $19
@@ -57,7 +57,7 @@ jr_024_75B7:
 
     ld   d, $0F                                   ; $75C3: $16 $0F
 
-.jr_75C5:
+.jr_75C5
     ld   a, l                                     ; $75C5: $7D
     add  d                                        ; $75C6: $82
     ld   l, a                                     ; $75C7: $6F
@@ -76,7 +76,7 @@ jr_024_75CD:
 
     add  $04                                      ; $75D4: $C6 $04
 
-.jr_75D6:
+.jr_75D6
     ld   [hl+], a                                 ; $75D6: $22
     ld   a, [hl]                                  ; $75D7: $7E
     cp   $10                                      ; $75D8: $FE $10
@@ -85,7 +85,7 @@ jr_024_75CD:
 
     add  $04                                      ; $75DE: $C6 $04
 
-.jr_75E0:
+.jr_75E0
     ld   [hl-], a                                 ; $75E0: $32
     ld   a, l                                     ; $75E1: $7D
     add  $10                                      ; $75E2: $C6 $10
@@ -101,7 +101,7 @@ jr_024_75CD:
     ld   a, $2A                                   ; $75F0: $3E $2A
     jr   jr_024_75F6                              ; $75F2: $18 $02
 
-.jr_75F4:
+.jr_75F4
     ld   a, $82                                   ; $75F4: $3E $82
 
 jr_024_75F6:
@@ -117,13 +117,13 @@ jr_024_75F6:
     ld   a, $29                                   ; $7602: $3E $29
     jr   jr_024_7608                              ; $7604: $18 $02
 
-.jr_7606:
+.jr_7606
     ld   a, $83                                   ; $7606: $3E $83
 
 jr_024_7608:
     ld   [hl], a                                  ; $7608: $77
 
-.jr_7609:
+.jr_7609
     inc  bc                                       ; $7609: $03
     ret                                           ; $760A
 
@@ -209,7 +209,7 @@ StonePigHeadMacroHandler::
 
     ld   de, Data_024_769D                        ; $76B1: $11 $9D $76
 
-.jr_76B4:
+.jr_76B4
     jp   Func_358B                                ; $76B4: $C3 $8B $35
 
 Data_024_76B7::

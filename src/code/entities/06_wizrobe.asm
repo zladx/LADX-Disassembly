@@ -58,7 +58,7 @@ WizrobeState0Handler::
     call GetEntityPrivateCountdown1               ; $7659: $CD $00 $0C
     ld   [hl], $20                                ; $765C: $36 $20
 
-.jr_765E:
+.jr_765E
     jr   jr_006_767E                              ; $765E: $18 $1E
 
 WizrobeState1Handler::
@@ -72,7 +72,7 @@ WizrobeState1Handler::
     add  hl, bc                                   ; $766D: $09
     add  [hl]                                     ; $766E: $86
 
-.jr_766F:
+.jr_766F
     ld   [hl], a                                  ; $766F: $77
     ld   hl, wEntitiesTransitionCountdownTable    ; $7670: $21 $E0 $C2
     add  hl, bc                                   ; $7673: $09
@@ -108,7 +108,7 @@ WizrobeState2Handler::
     ld   [hl], $18                                ; $769D: $36 $18
     jp   label_006_7735                           ; $769F: $C3 $35 $77
 
-.jr_76A2:
+.jr_76A2
     ld   hl, wEntitiesPrivateState1Table          ; $76A2: $21 $B0 $C2
     add  hl, bc                                   ; $76A5: $09
     ld   a, [hl]                                  ; $76A6: $7E
@@ -149,7 +149,7 @@ WizrobeState3Handler::
     ld   [hl], a                                  ; $76DB: $77
     ret                                           ; $76DC: $C9
 
-.jr_76DD:
+.jr_76DD
     ld   hl, wEntitiesPrivateState1Table          ; $76DD: $21 $B0 $C2
     add  hl, bc                                   ; $76E0: $09
     ld   [hl], $FF                                ; $76E1: $36 $FF
@@ -198,7 +198,7 @@ label_006_7709:
     add  hl, de                                   ; $7723: $19
     ld   [hl], a                                  ; $7724: $77
 
-.jr_7725:
+.jr_7725
     pop  bc                                       ; $7725: $C1
     ldh  a, [hMultiPurpose2]                      ; $7726: $F0 $D9
     ld   hl, wEntitiesSpriteVariantTable          ; $7728: $21 $B0 $C3

@@ -167,7 +167,7 @@ jr_007_559A:
     cp   $44                                      ; $55AD: $FE $44
     jr   nz, jr_007_55B6                          ; $55AF: $20 $05
 
-.jr_55B1:
+.jr_55B1
     call OpenDialog                               ; $55B1: $CD $85 $23
     jr   jr_007_55B9                              ; $55B4: $18 $03
 
@@ -189,7 +189,7 @@ jr_007_55BA:
     ld   [hl], a                                  ; $55C9: $77
     jp   func_007_7EA4                            ; $55CA: $C3 $A4 $7E
 
-.jr_55CD:
+.jr_55CD
     ldh  a, [hLinkPositionX]                      ; $55CD: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $55CF: $21 $00 $C2
     add  hl, bc                                   ; $55D2: $09
@@ -201,7 +201,7 @@ jr_007_55BA:
     ld   a, $04                                   ; $55DA: $3E $04
     ld   [wC13B], a                               ; $55DC: $EA $3B $C1
 
-.jr_55DF:
+.jr_55DF
     ld   hl, wC13B                                ; $55DF: $21 $3B $C1
     ldh  a, [hLinkPositionY]                      ; $55E2: $F0 $99
     add  [hl]                                     ; $55E4: $86

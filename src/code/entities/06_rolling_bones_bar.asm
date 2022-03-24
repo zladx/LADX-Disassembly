@@ -18,7 +18,7 @@ RollingBonesBarEntityHandler::
     ld   a, $10                                   ; $6EE9: $3E $10
     ldh  [hActiveEntityTilesOffset], a            ; $6EEB: $E0 $F5
 
-.jr_6EED:
+.jr_6EED
     ldh  a, [hRoomStatus]                         ; $6EED: $F0 $F8
     and  ROOM_STATUS_EVENT_2                      ; $6EEF: $E6 $20
     jp   nz, ClearEntityStatus_06                 ; $6EF1: $C2 $DB $65
@@ -31,7 +31,7 @@ RollingBonesBarEntityHandler::
     ld   e, a                                     ; $6F01: $5F
     ld   d, b                                     ; $6F02: $50
 
-.jr_6F03:
+.jr_6F03
     ld   hl, wEntitiesStatusTable                 ; $6F03: $21 $80 $C2
     add  hl, de                                   ; $6F06: $19
     ld   a, [hl]                                  ; $6F07: $7E
@@ -71,7 +71,7 @@ RollingBonesBarEntityHandler::
     or   [hl]                                     ; $6F3A: $B6
     ld   [hl], a                                  ; $6F3B: $77
 
-.jr_6F3C:
+.jr_6F3C
     ld   d, b                                     ; $6F3C: $50
     ld   hl, Data_006_6EDD                        ; $6F3D: $21 $DD $6E
     add  hl, de                                   ; $6F40: $19
@@ -90,7 +90,7 @@ jr_006_6F48:
 
     call label_3B39                               ; $6F50: $CD $39 $3B
 
-.jr_6F53:
+.jr_6F53
     call AddEntitySpeedToPos_06                   ; $6F53: $CD $4E $65
     call label_3B23                               ; $6F56: $CD $23 $3B
     ld   hl, wEntitiesSpeedXTable                 ; $6F59: $21 $40 $C2
@@ -105,26 +105,26 @@ jr_006_6F48:
     cpl                                           ; $6F65: $2F
     inc  a                                        ; $6F66: $3C
 
-.jr_6F67:
+.jr_6F67
     ld   e, $04                                   ; $6F67: $1E $04
     cp   $08                                      ; $6F69: $FE $08
     jr   nc, .jr_6F6F                             ; $6F6B: $30 $02
 
     ld   e, $08                                   ; $6F6D: $1E $08
 
-.jr_6F6F:
+.jr_6F6F
     cp   $04                                      ; $6F6F: $FE $04
     jr   nc, .jr_6F75                             ; $6F71: $30 $02
 
     ld   e, $10                                   ; $6F73: $1E $10
 
-.jr_6F75:
+.jr_6F75
     cp   $02                                      ; $6F75: $FE $02
     jr   nc, .jr_6F7B                             ; $6F77: $30 $02
 
     ld   e, $20                                   ; $6F79: $1E $20
 
-.jr_6F7B:
+.jr_6F7B
     ld   d, b                                     ; $6F7B: $50
     ldh  a, [hFrameCounter]                       ; $6F7C: $F0 $E7
     and  e                                        ; $6F7E: $A3
@@ -132,7 +132,7 @@ jr_006_6F48:
 
     inc  d                                        ; $6F81: $14
 
-.jr_6F82:
+.jr_6F82
     ld   a, d                                     ; $6F82: $7A
     call SetEntitySpriteVariant                   ; $6F83: $CD $0C $3B
 
@@ -168,7 +168,7 @@ RollingBonesBarRollingHandler::
     ldh  [hJingle], a                             ; $6FAE: $E0 $F2
     call IncrementEntityState                     ; $6FB0: $CD $12 $3B
 
-.jr_6FB3:
+.jr_6FB3
     ld   a, [wD210]                               ; $6FB3: $FA $10 $D2
     inc  a                                        ; $6FB6: $3C
     cp   $09                                      ; $6FB7: $FE $09
@@ -178,7 +178,7 @@ RollingBonesBarRollingHandler::
     ldh  [hWaveSfx], a                            ; $6FBD: $E0 $F3
     xor  a                                        ; $6FBF: $AF
 
-.jr_6FC0:
+.jr_6FC0
     ld   [wD210], a                               ; $6FC0: $EA $10 $D2
     ret                                           ; $6FC3: $C9
 
@@ -189,7 +189,7 @@ RollingBonesBarDeceleratingHandler::
 
     ld   hl, wEntitiesSpeedXTable                 ; $6FCA: $21 $40 $C2
 
-.jr_6FCD:
+.jr_6FCD
     add  hl, bc                                   ; $6FCD: $09
     ld   a, [hl]                                  ; $6FCE: $7E
     and  a                                        ; $6FCF: $A7
@@ -201,7 +201,7 @@ RollingBonesBarDeceleratingHandler::
     inc  [hl]                                     ; $6FD6: $34
     inc  [hl]                                     ; $6FD7: $34
 
-.jr_6FD8:
+.jr_6FD8
     dec  [hl]                                     ; $6FD8: $35
 
 ret_006_6FD9:

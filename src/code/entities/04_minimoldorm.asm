@@ -52,7 +52,7 @@ MiniMoldromEntityHandler::
     and  a                                        ; $5AA3: $A7
     jr   z, jr_004_5AA9                           ; $5AA4: $28 $03
 
-.jr_5AA6:
+.jr_5AA6
     call func_004_5A1A                            ; $5AA6: $CD $1A $5A
 
 jr_004_5AA9:
@@ -101,7 +101,7 @@ func_004_5AE6::
 
     call UpdateEntityPosWithSpeed_04              ; $5AEE: $CD $CA $6D
 
-.jr_5AF1:
+.jr_5AF1
     call label_3B23                               ; $5AF1: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $5AF4: $21 $A0 $C2
     add  hl, bc                                   ; $5AF7: $09
@@ -123,7 +123,7 @@ func_004_5AE6::
 
     ld   e, $0C                                   ; $5B0E: $1E $0C
 
-.jr_5B10:
+.jr_5B10
     ld   hl, wEntitiesPrivateState1Table          ; $5B10: $21 $B0 $C2
     add  hl, bc                                   ; $5B13: $09
     ld   [hl], e                                  ; $5B14: $73
@@ -138,7 +138,7 @@ func_004_5AE6::
     inc  a                                        ; $5B21: $3C
     ld   [hl], a                                  ; $5B22: $77
 
-.jr_5B23:
+.jr_5B23
     call GetEntityTransitionCountdown             ; $5B23: $CD $05 $0C
     ld   [hl], $10                                ; $5B26: $36 $10
 
@@ -153,7 +153,7 @@ jr_004_5B28:
 
     ld   [hl], $06                                ; $5B35: $36 $06
 
-.jr_5B37:
+.jr_5B37
     ld   hl, wEntitiesPrivateState2Table          ; $5B37: $21 $C0 $C2
     add  hl, bc                                   ; $5B3A: $09
     ld   a, [hl]                                  ; $5B3B: $7E

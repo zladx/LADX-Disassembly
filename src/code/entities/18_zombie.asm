@@ -27,7 +27,7 @@ ZombieEntityHandler::
     add  hl, bc                                   ; $63AD: $09
     ld   [hl], a                                  ; $63AE: $77
 
-.jr_63AF:
+.jr_63AF
     ld   hl, Data_018_637D                        ; $63AF: $21 $7D $63
     add  hl, de                                   ; $63B2: $19
     ld   a, [hl]                                  ; $63B3: $7E
@@ -45,12 +45,12 @@ ZombieEntityHandler::
     cp   $09                                      ; $63C6: $FE $09
     ret  nz                                       ; $63C8: $C0
 
-.jr_63C9:
+.jr_63C9
     call GetEntityTransitionCountdown             ; $63C9: $CD $05 $0C
     call GetRandomByte                            ; $63CC: $CD $0D $28
     and  $3F                                      ; $63CF: $E6 $3F
 
-.jr_63D1:
+.jr_63D1
     add  $40                                      ; $63D1: $C6 $40
     ld   [hl], a                                  ; $63D3: $77
     ld   a, $BF                                   ; $63D4: $3E $BF
@@ -125,14 +125,14 @@ ZombieState1Handler::
     call ApplyVectorTowardsLink_trampoline        ; $643F: $CD $AA $3B
     call IncrementEntityState                     ; $6442: $CD $12 $3B
 
-.jr_6445:
+.jr_6445
     ld   e, $01                                   ; $6445: $1E $01
     cp   $18                                      ; $6447: $FE $18
     jr   nc, .jr_644C                             ; $6449: $30 $01
 
     inc  e                                        ; $644B: $1C
 
-.jr_644C:
+.jr_644C
     ld   a, e                                     ; $644C: $7B
     jp   SetEntitySpriteVariant                   ; $644D: $C3 $0C $3B
 
@@ -149,7 +149,7 @@ ZombieState2Handler::
     call GetEntityTransitionCountdown             ; $6462: $CD $05 $0C
     jr   nz, jr_018_6475                          ; $6465: $20 $0E
 
-.jr_6467:
+.jr_6467
     call GetEntityTransitionCountdown             ; $6467: $CD $05 $0C
     ld   [hl], $30                                ; $646A: $36 $30
     call IncrementEntityState                     ; $646C: $CD $12 $3B
@@ -177,7 +177,7 @@ ZombieState3Handler::
 
     inc  e                                        ; $648E: $1C
 
-.jr_648F:
+.jr_648F
     ld   a, e                                     ; $648F: $7B
     jp   SetEntitySpriteVariant                   ; $6490: $C3 $0C $3B
 

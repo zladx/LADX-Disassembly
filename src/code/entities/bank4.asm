@@ -199,7 +199,7 @@ func_004_6E35::
 
     inc  e                                        ; $6E42: $1C
 
-.jr_6E43:
+.jr_6E43
     ld   d, a                                     ; $6E43: $57
     ret                                           ; $6E44: $C9
 
@@ -214,7 +214,7 @@ func_004_6E45::
 
     inc  e                                        ; $6E52: $1C
 
-.jr_6E53:
+.jr_6E53
     ld   d, a                                     ; $6E53: $57
     ret                                           ; $6E54: $C9
 
@@ -229,7 +229,7 @@ func_004_6E55::
     cpl                                           ; $6E60: $2F
     inc  a                                        ; $6E61: $3C
 
-.jr_6E62:
+.jr_6E62
     push af                                       ; $6E62: $F5
     call func_004_6E45                            ; $6E63: $CD $45 $6E
     ld   a, e                                     ; $6E66: $7B
@@ -241,7 +241,7 @@ func_004_6E55::
     cpl                                           ; $6E6E: $2F
     inc  a                                        ; $6E6F: $3C
 
-.jr_6E70:
+.jr_6E70
     pop  de                                       ; $6E70: $D1
     cp   d                                        ; $6E71: $BA
     jr   nc, .jr_6E78                             ; $6E72: $30 $04
@@ -249,7 +249,7 @@ func_004_6E55::
     ldh  a, [hMultiPurpose0]                      ; $6E74: $F0 $D7
     jr   jr_004_6E7A                              ; $6E76: $18 $02
 
-.jr_6E78:
+.jr_6E78
     ldh  a, [hMultiPurpose1]                      ; $6E78: $F0 $D8
 
 jr_004_6E7A:
@@ -306,7 +306,7 @@ func_004_7C4B:: ; called only from fishing minigame
     scf                                           ; $7C90: $37
     ret                                           ; $7C91: $C9
 
-.jr_7C92:
+.jr_7C92
     and  a                                        ; $7C92: $A7
     ret                                           ; $7C93: $C9
 

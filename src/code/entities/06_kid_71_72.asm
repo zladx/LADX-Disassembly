@@ -67,7 +67,7 @@ Kid72EntityHandler::
 
     ret                                           ; $60A1: $C9
 
-.jr_60A2:
+.jr_60A2
     ld   a, [wIsBowWowFollowingLink]              ; $60A2: $FA $56 $DB
     cp   $80                                      ; $60A5: $FE $80
     jp   nz, label_006_6170                       ; $60A7: $C2 $70 $61
@@ -88,7 +88,7 @@ Kid72EntityHandler::
 .render:
     call RenderActiveEntitySpritesPair            ; $60C1: $CD $C0 $3B
 
-.jr_60C4:
+.jr_60C4
     call func_006_65A4                            ; $60C4: $CD $A4 $65
     ld   a, e                                     ; $60C7: $7B
     dec  a                                        ; $60C8: $3D
@@ -96,10 +96,10 @@ Kid72EntityHandler::
     xor  $02                                      ; $60CB: $EE $02
     ld   e, a                                     ; $60CD: $5F
 
-.jr_60CE:
+.jr_60CE
     ldh  a, [hFrameCounter]                       ; $60CE: $F0 $E7
 
-.jr_60D0:
+.jr_60D0
     rra                                           ; $60D0: $1F
     rra                                           ; $60D1: $1F
     rra                                           ; $60D2: $1F
@@ -121,7 +121,7 @@ func_006_60E5::
     ld   [hl], $30                                ; $60EC: $36 $30
     ld   a, MUSIC_BOWWOW_KIDNAPPED                ; $60EE: $3E $0E
 
-.jr_60F0:
+.jr_60F0
     ld   [wMusicTrackToPlay], a                   ; $60F0: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $60F3: $E0 $B0
     ldh  [hDefaultMusicTrackAlt], a               ; $60F5: $E0 $BD
@@ -144,7 +144,7 @@ func_006_60FD::
     dec  [hl]                                     ; $610D: $35
     jr   nz, jr_006_6124                          ; $610E: $20 $14
 
-.jr_6110:
+.jr_6110
     ld   a, [wTransitionSequenceCounter]          ; $6110: $FA $6B $C1
     cp   $04                                      ; $6113: $FE $04
     ret  nz                                       ; $6115: $C0
@@ -179,7 +179,7 @@ func_006_6134::
 
     call_open_dialog $220                         ; $6147
 
-.jr_614C:
+.jr_614C
     call AddEntityZSpeedToPos_06                  ; $614C: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $614F: $21 $20 $C3
     add  hl, bc                                   ; $6152: $09
@@ -194,7 +194,7 @@ func_006_6134::
     and  $80                                      ; $615D: $E6 $80
     jr   z, ret_006_616F                          ; $615F: $28 $0E
 
-.jr_6161:
+.jr_6161
     ld   [hl], b                                  ; $6161: $70
     ld   hl, wEntitiesSpeedZTable                 ; $6162: $21 $20 $C3
     add  hl, bc                                   ; $6165: $09
@@ -235,7 +235,7 @@ label_006_6170:
     add  hl, bc                                   ; $619D: $09
     ld   [hl], a                                  ; $619E: $77
 
-.jr_619F:
+.jr_619F
     ldh  a, [hActiveEntityState]                  ; $619F: $F0 $F0
     JP_TABLE                                      ; $61A1
 ._00 dw func_006_61A6                             ; $61A2
@@ -274,7 +274,7 @@ func_006_61A6::
 
     ld   a, $EC                                   ; $61DE: $3E $EC
 
-.jr_61E0:
+.jr_61E0
     ld   hl, wEntitiesSpeedXTable                 ; $61E0: $21 $40 $C2
     add  hl, de                                   ; $61E3: $19
     ld   [hl], a                                  ; $61E4: $77
@@ -294,7 +294,7 @@ func_006_61EC::
     ld   [hl], b                                  ; $61F6: $70
     ret                                           ; $61F7: $C9
 
-.jr_61F8:
+.jr_61F8
     cp   $60                                      ; $61F8: $FE $60
     ret  nc                                       ; $61FA: $D0
 
@@ -309,6 +309,6 @@ func_006_61EC::
     add  hl, bc                                   ; $6207: $09
     ld   [hl], $08                                ; $6208: $36 $08
 
-.jr_620A:
+.jr_620A
     xor  a                                        ; $620A: $AF
     jp   SetEntitySpriteVariant                   ; $620B: $C3 $0C $3B

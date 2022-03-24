@@ -15,7 +15,7 @@ KnightEntityHandler::
     ld   [hl], ENTITY_HIDING_SLIME_KEY            ; $69C5: $36 $3C
     jr   jr_004_69D5                              ; $69C7: $18 $0C
 
-.jr_69C9:
+.jr_69C9
     ld   e, a                                     ; $69C9: $5F
     ld   d, b                                     ; $69CA: $50
     ld   hl, wHasInstrument1                      ; $69CB: $21 $65 $DB
@@ -51,7 +51,7 @@ func_004_69F3::
     ld   a, $04                                   ; $69FF: $3E $04
     call ApplyVectorTowardsLink_trampoline        ; $6A01: $CD $AA $3B
 
-.jr_6A04:
+.jr_6A04
     call UpdateEntityPosWithSpeed_04              ; $6A04: $CD $CA $6D
     call label_3B23                               ; $6A07: $CD $23 $3B
     call func_004_6E35                            ; $6A0A: $CD $35 $6E
@@ -116,7 +116,7 @@ func_004_6A3D::
     ld   [hl], b                                  ; $6A63: $70
     call IncrementEntityState                     ; $6A64: $CD $12 $3B
 
-.jr_6A67:
+.jr_6A67
     jp   label_004_6A2B                           ; $6A67: $C3 $2B $6A
 
 func_004_6A6A::
@@ -133,7 +133,7 @@ func_004_6A6A::
     add  hl, bc                                   ; $6A7C: $09
     inc  [hl]                                     ; $6A7D: $34
 
-.jr_6A7E:
+.jr_6A7E
     ld   hl, wEntitiesPrivateState3Table          ; $6A7E: $21 $D0 $C2
     add  hl, bc                                   ; $6A81: $09
     ld   a, [hl]                                  ; $6A82: $7E
@@ -143,7 +143,7 @@ func_004_6A6A::
     and  $80                                      ; $6A86: $E6 $80
     jr   z, ret_004_6AA6                          ; $6A88: $28 $1C
 
-.jr_6A8A:
+.jr_6A8A
     ld   [hl], b                                  ; $6A8A: $70
     call IncrementEntityState                     ; $6A8B: $CD $12 $3B
     ld   [hl], b                                  ; $6A8E: $70
@@ -210,7 +210,7 @@ func_004_6AC7::
     cpl                                           ; $6AEE: $2F
     inc  a                                        ; $6AEF: $3C
 
-.jr_6AF0:
+.jr_6AF0
     ld   hl, hActiveEntityPosX                    ; $6AF0: $21 $EE $FF
     add  [hl]                                     ; $6AF3: $86
     ld   [hl], a                                  ; $6AF4: $77
@@ -224,7 +224,7 @@ func_004_6AC7::
     cpl                                           ; $6AFF: $2F
     and  $0F                                      ; $6B00: $E6 $0F
 
-.jr_6B02:
+.jr_6B02
     ld   hl, hActiveEntityVisualPosY              ; $6B02: $21 $EC $FF
     add  [hl]                                     ; $6B05: $86
     add  $F3                                      ; $6B06: $C6 $F3
@@ -241,7 +241,7 @@ jr_004_6B0B:
     cpl                                           ; $6B14: $2F
     inc  a                                        ; $6B15: $3C
 
-.jr_6B16:
+.jr_6B16
     ld   hl, hActiveEntityVisualPosY              ; $6B16: $21 $EC $FF
     add  [hl]                                     ; $6B19: $86
     ld   [hl], a                                  ; $6B1A: $77
@@ -255,7 +255,7 @@ jr_004_6B0B:
     cpl                                           ; $6B25: $2F
     and  $0F                                      ; $6B26: $E6 $0F
 
-.jr_6B28:
+.jr_6B28
     ld   hl, hActiveEntityPosX                    ; $6B28: $21 $EE $FF
     add  [hl]                                     ; $6B2B: $86
     add  $F8                                      ; $6B2C: $C6 $F8
@@ -308,7 +308,7 @@ jr_004_6B51:
     call label_3B39                               ; $6B76: $CD $39 $3B
     call func_004_6BE1                            ; $6B79: $CD $E1 $6B
 
-.jr_6B7C:
+.jr_6B7C
     ldh  a, [hActiveEntityPosX]                   ; $6B7C: $F0 $EE
     add  $04                                      ; $6B7E: $C6 $04
     ld   hl, wEntitiesPosXTable                   ; $6B80: $21 $00 $C2

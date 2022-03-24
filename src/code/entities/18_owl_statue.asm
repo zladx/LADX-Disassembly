@@ -18,7 +18,7 @@ OwlStatueSouthFaceShrine:
 
     ld   hl, Data_018_5E0B                        ; $5E24: $21 $0B $5E
 
-.jr_5E27:
+.jr_5E27
     ld   c, $04                                   ; $5E27: $0E $04
     call RenderActiveEntitySpritesRect            ; $5E29: $CD $E6 $3C
     ld   a, $02                                   ; $5E2C: $3E $02
@@ -49,7 +49,7 @@ func_018_5E43::
 
     jp   IncrementEntityState                     ; $5E55: $C3 $12 $3B
 
-.jr_5E58:
+.jr_5E58
     jp_open_dialog $0E6                           ; $5E58
 
 func_018_5E5D::
@@ -104,14 +104,14 @@ ENDC
 
     jp   OpenDialogInTable1                       ; $5E9F: $C3 $73 $23
 
-.jr_5EA2:
+.jr_5EA2
     ldh  a, [hMapId]                              ; $5EA2: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $5EA4: $FE $FF
     jr   nz, .jr_5EAD                             ; $5EA6: $20 $05
 
     jp_open_dialog $263                           ; $5EA8
 
-.jr_5EAD:
+.jr_5EAD
     ld   a, $18                                   ; $5EAD: $3E $18
     call func_036_4A4C_trampoline                 ; $5EAF: $CD $EA $0A
     ldh  a, [hMultiPurpose0]                      ; $5EB2: $F0 $D7

@@ -200,7 +200,7 @@ func_005_7B04::
 
     inc  e                                        ; $7B11: $1C
 
-.jr_7B12:
+.jr_7B12
     ld   d, a                                     ; $7B12: $57
     ret                                           ; $7B13: $C9
 
@@ -215,7 +215,7 @@ func_005_7B14::
 
     inc  e                                        ; $7B21: $1C
 
-.jr_7B22:
+.jr_7B22
     ld   d, a                                     ; $7B22: $57
     ret                                           ; $7B23: $C9
 
@@ -230,7 +230,7 @@ func_005_7B24::
     cpl                                           ; $7B2F: $2F
     inc  a                                        ; $7B30: $3C
 
-.jr_7B31:
+.jr_7B31
     push af                                       ; $7B31: $F5
     call func_005_7B14                            ; $7B32: $CD $14 $7B
     ld   a, e                                     ; $7B35: $7B
@@ -242,7 +242,7 @@ func_005_7B24::
     cpl                                           ; $7B3D: $2F
     inc  a                                        ; $7B3E: $3C
 
-.jr_7B3F:
+.jr_7B3F
     pop  de                                       ; $7B3F: $D1
     cp   d                                        ; $7B40: $BA
     jr   nc, .jr_7B47                             ; $7B41: $30 $04
@@ -250,7 +250,7 @@ func_005_7B24::
     ldh  a, [hMultiPurpose0]                      ; $7B43: $F0 $D7
     jr   jr_005_7B49                              ; $7B45: $18 $02
 
-.jr_7B47:
+.jr_7B47
     ldh  a, [hMultiPurpose1]                      ; $7B47: $F0 $D8
 
 jr_005_7B49:

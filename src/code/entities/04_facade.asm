@@ -88,7 +88,7 @@ jr_004_50AD:
     or   $02                                      ; $50D2: $F6 $02
     ld   [hl], a                                  ; $50D4: $77
 
-.jr_50D5:
+.jr_50D5
     dec  e                                        ; $50D5: $1D
     ld   a, e                                     ; $50D6: $7B
     cp   $FF                                      ; $50D7: $FE $FF
@@ -143,7 +143,7 @@ label_004_510F:
     add  hl, bc                                   ; $511D: $09
     ld   [hl], $FF                                ; $511E: $36 $FF
 
-.jr_5120:
+.jr_5120
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5120: $21 $40 $C3
     add  hl, bc                                   ; $5123: $09
     ld   [hl], $08                                ; $5124: $36 $08
@@ -222,11 +222,11 @@ Data_004_51E6::
 func_004_51E8::
     ldh  a, [hFrameCounter]                       ; $51E8: $F0 $E7
 
-.jr_51EA:
+.jr_51EA
     and  $3F                                      ; $51EA: $E6 $3F
     jr   nz, jr_004_51FA                          ; $51EC: $20 $0C
 
-.jr_51EE:
+.jr_51EE
     call GetRandomByte                            ; $51EE: $CD $0D $28
     and  $01                                      ; $51F1: $E6 $01
     jr   nz, jr_004_51FA                          ; $51F3: $20 $05
@@ -242,7 +242,7 @@ jr_004_51FA:
     and  $01                                      ; $51FF: $E6 $01
     ld   e, a                                     ; $5201: $5F
 
-.jr_5202:
+.jr_5202
     ld   d, b                                     ; $5202: $50
     ld   hl, Data_004_51E6                        ; $5203: $21 $E6 $51
     add  hl, de                                   ; $5206: $19
@@ -365,7 +365,7 @@ jr_004_5273:
     ld   [hl], $02                                ; $52C6: $36 $02
     pop  bc                                       ; $52C8: $C1
 
-.jr_52C9:
+.jr_52C9
     ld   hl, wEntitiesPrivateCountdown2Table      ; $52C9: $21 $00 $C3
     add  hl, bc                                   ; $52CC: $09
     ld   a, [hl]                                  ; $52CD: $7E
@@ -437,7 +437,7 @@ jr_004_5273:
 
     call ClearEntityStatusBank04                  ; $533C: $CD $7A $6D
 
-.jr_533F:
+.jr_533F
     pop  bc                                       ; $533F: $C1
 
 jr_004_5340:
@@ -461,7 +461,7 @@ jr_004_5340:
     ld   a, $02                                   ; $535A: $3E $02
     call SetEntitySpriteVariant                   ; $535C: $CD $0C $3B
 
-.jr_535F:
+.jr_535F
     ld   hl, wEntitiesPrivateState5Table          ; $535F: $21 $90 $C3
     add  hl, bc                                   ; $5362: $09
     ld   a, [hl]                                  ; $5363: $7E
@@ -550,7 +550,7 @@ FacadeState1Handler:
     ld   hl, hJingle                              ; $5479: $21 $F2 $FF
     ld   [hl], JINGLE_FACADE_HOLE                 ; $547C: $36 $40
 
-.jr_547E:
+.jr_547E
     rra                                           ; $547E: $1F
     rra                                           ; $547F: $1F
     rra                                           ; $5480: $1F
@@ -652,7 +652,7 @@ FacadeState2Handler:
 
     ld   de, Facade3SpriteVariants                ; $5519: $11 $F9 $54
 
-.jr_551C:
+.jr_551C
     call RenderActiveEntitySpritesPair            ; $551C: $CD $C0 $3B
     call DecrementEntityIgnoreHitsCountdown       ; $551F: $CD $56 $0C
     ld   hl, wEntitiesFlashCountdownTable         ; $5522: $21 $20 $C4
@@ -675,7 +675,7 @@ FacadeState2Handler:
     ld   a, JINGLE_FLYING_TILE                    ; $553D: $3E $3F
     ldh  [hJingle], a                             ; $553F: $E0 $F2
 
-.jr_5541:
+.jr_5541
     ldh  a, [hActiveEntityState]                  ; $5541: $F0 $F0
     JP_TABLE                                      ; $5543
 ._00 dw func_004_554A                             ; $5544
@@ -872,7 +872,7 @@ jr_004_5628:
     call func_91D                                 ; $565B: $CD $1D $09
     pop  bc                                       ; $565E: $C1
 
-.jr_565F:
+.jr_565F
     ld   a, [wDrawCommandsSize]                   ; $565F: $FA $00 $D6
     ld   e, a                                     ; $5662: $5F
     ld   d, $00                                   ; $5663: $16 $00

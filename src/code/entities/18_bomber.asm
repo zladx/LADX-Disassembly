@@ -91,7 +91,7 @@ BomberState0Handler::
     ld   a, $0A                                   ; $789E: $3E $0A
     call ApplyVectorTowardsLink_trampoline        ; $78A0: $CD $AA $3B
 
-.jr_78A3:
+.jr_78A3
     call IncrementEntityState                     ; $78A3: $CD $12 $3B
 
 label_018_78A6:
@@ -139,7 +139,7 @@ label_018_78A6:
     ld   a, JINGLE_JUMP_DOWN                      ; $78ED: $3E $08
     ldh  [hJingle], a                             ; $78EF: $E0 $F2
 
-.jr_78F1:
+.jr_78F1
     call func_018_7EE1                            ; $78F1: $CD $E1 $7E
     ldh  a, [hLinkDirection]                      ; $78F4: $F0 $9E
     xor  $01                                      ; $78F6: $EE $01
@@ -180,7 +180,7 @@ label_018_78A6:
     ld   [hl], a                                  ; $7933: $77
     ret                                           ; $7934: $C9
 
-.jr_7935:
+.jr_7935
     call label_3B39                               ; $7935: $CD $39 $3B
 
 label_018_7938:
@@ -199,7 +199,7 @@ BomberState1Handler::
     ld   [hl], b                                  ; $794B: $70
     call ClearEntitySpeed                         ; $794C: $CD $7F $3D
 
-.jr_794F:
+.jr_794F
     jp   label_018_78A6                           ; $794F: $C3 $A6 $78
 
 BomberState2Handler::
@@ -209,5 +209,5 @@ BomberState2Handler::
     call IncrementEntityState                     ; $7957: $CD $12 $3B
     ld   [hl], b                                  ; $795A: $70
 
-.jr_795B:
+.jr_795B
     jp   label_018_7938                           ; $795B: $C3 $38 $79

@@ -65,7 +65,7 @@ func_01B_4037::
 
     ret                                           ; $4047: $C9
 
-.jr_4048:
+.jr_4048
     ld   a, $01                                   ; $4048: $3E $01
     ld   [wD379], a                               ; $404A: $EA $79 $D3
     ld   hl, Data_01B_4060                        ; $404D: $21 $60 $40
@@ -398,7 +398,7 @@ label_01B_42D5:
     inc  hl                                       ; $42E3: $23
     jr   .loop_42DB                               ; $42E4: $18 $F5
 
-.jr_42E6:
+.jr_42E6
     ld   bc, wD355                                ; $42E6: $01 $55 $D3
     ld   a, [hl+]                                 ; $42E9: $2A
     ld   [bc], a                                  ; $42EA: $02
@@ -459,7 +459,7 @@ func_01B_4303::
 
     inc  c                                        ; $4326: $0C
 
-.jr_4327:
+.jr_4327
     ld   a, [bc]                                  ; $4327: $0A
     ldh  [rNR51], a                               ; $4328: $E0 $25
     ret                                           ; $432A: $C9
@@ -520,7 +520,7 @@ LoadMusicData_1B::
 
     call StopNoiseChannel_1B                      ; $435B: $CD $F3 $40
 
-.jr_435E:
+.jr_435E
     call StopSquareAndWaveChannels_1B             ; $435E: $CD $57 $4E
     ld   de, wMusicTranspose                      ; $4361: $11 $00 $D3
     ld   b, $00                                   ; $4364: $06 $00
@@ -950,7 +950,7 @@ ParseSoundOpcode:
     ld   a, d                                     ; $4597: $7A
     jr   .jr_01B_45BF                             ; $4598: $18 $25
 
-.jr_01B_459A:
+.jr_01B_459A
     ld   e, a                                     ; $459A: $5F
     ld   a, d                                     ; $459B: $7A
     push af                                       ; $459C: $F5
@@ -965,14 +965,14 @@ ParseSoundOpcode:
 
     add  d                                        ; $45AA: $82
 
-.jr_01B_45AB:
+.jr_01B_45AB
     ld   c, a                                     ; $45AB: $4F
     and  a                                        ; $45AC: $A7
     jr   nz, .jr_01B_45B1                         ; $45AD: $20 $02
 
     ld   c, $02                                   ; $45AF: $0E $02
 
-.jr_01B_45B1:
+.jr_01B_45B1
     ld   de, wActiveChannelIndex                  ; $45B1: $11 $50 $D3
     ld   a, [de]                                  ; $45B4: $1A
     dec  a                                        ; $45B5: $3D
@@ -983,7 +983,7 @@ ParseSoundOpcode:
     ld   [hl], c                                  ; $45BD: $71
     pop  af                                       ; $45BE: $F1
 
-.jr_01B_45BF:
+.jr_01B_45BF
     pop  hl                                       ; $45BF: $E1
     dec  l                                        ; $45C0: $2D
     ld   [hl+], a ; [D3x3]                        ; $45C1: $22
@@ -1026,7 +1026,7 @@ HandleNote::
     xor  a                                        ; $45F4: $AF
     ld   [wD39F], a                               ; $45F5: $EA $9F $D3
 
-.jr_01B_45F8:
+.jr_01B_45F8
     ld   de, wActiveMusicTableIndex               ; $45F8: $11 $D9 $D3
     ld   a, [de]                                  ; $45FB: $1A
     and  a                                        ; $45FC: $A7
@@ -1152,7 +1152,7 @@ HandleNote::
     ld   a, $80                                   ; $4693: $3E $80
     ld   [c], a                                   ; $4695: $E2
 
-.jr_01B_4696:
+.jr_01B_4696
     inc  c                                        ; $4696: $0C
     inc  l                                        ; $4697: $2C
     inc  l                                        ; $4698: $2C
@@ -1171,7 +1171,7 @@ HandleNote::
     ld   c, rNR10 & $ff                           ; $46A5: $0E $10
     inc  c ; rNR11                                ; $46A7: $0C
 
-.jr_01B_46A8:
+.jr_01B_46A8
     inc  l                                        ; $46A8: $2C
     inc  l                                        ; $46A9: $2C
     ld   a, [hl+] ; D3x6                          ; $46AA: $2A
@@ -1180,7 +1180,7 @@ HandleNote::
     ld   a, [hl+] ; D3x8                          ; $46AD: $2A
     ld   d, a                                     ; $46AE: $57
 
-.jr_01B_46AF:
+.jr_01B_46AF
     push hl                                       ; $46AF: $E5
     inc  l                                        ; $46B0: $2C
     inc  l                                        ; $46B1: $2C
@@ -1190,7 +1190,7 @@ HandleNote::
 
     ld   e, $08                                   ; $46B6: $1E $08
 
-.jr_01B_46B8:
+.jr_01B_46B8
     inc  l                                        ; $46B8: $2C
     inc  l                                        ; $46B9: $2C
     ld   [hl], $00 ; D3xE                         ; $46BA: $36 $00
@@ -1371,7 +1371,7 @@ func_01B_4787::
 
     call func_01B_47D2                            ; $47AB: $CD $D2 $47
 
-.jr_47AE:
+.jr_47AE
     ld   a, [wD320 + $0B]                         ; $47AE: $FA $2B $D3
     and  a                                        ; $47B1: $A7
     ret  nz                                       ; $47B2: $C0

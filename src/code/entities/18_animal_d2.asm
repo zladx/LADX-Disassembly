@@ -29,7 +29,7 @@ AnimalD2EntityHandler::
 
     ld   e, $02                                   ; $5284: $1E $02
 
-.jr_5286:
+.jr_5286
     ldh  a, [hFrameCounter]                       ; $5286: $F0 $E7
     rra                                           ; $5288: $1F
     rra                                           ; $5289: $1F

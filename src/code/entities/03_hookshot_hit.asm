@@ -30,7 +30,7 @@ MagicRodFireballEntityHandler::
     ld   de, EntityExplosionSpriteVariants        ; $69D3: $11 $44 $4C
     jp   RenderActiveEntitySpritesPair            ; $69D6: $C3 $C0 $3B
 
-.jr_69D9:
+.jr_69D9
     ld   de, Unknown005SpriteVariants             ; $69D9: $11 $AA $69
     call RenderActiveEntitySpritesPairSubcall     ; $69DC: $CD $D7 $6A
     call ReturnIfNonInteractive_03                ; $69DF: $CD $78 $7F
@@ -44,7 +44,7 @@ MagicRodFireballEntityHandler::
 
     jr   ret_003_6A1D                             ; $69EE: $18 $2D
 
-.jr_69F0:
+.jr_69F0
     cp   $D3                                      ; $69F0: $FE $D3
     jr   z, jr_003_69F8                           ; $69F2: $28 $04
 

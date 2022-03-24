@@ -40,7 +40,7 @@ RichardEntityHandler::
     add  hl, bc                                   ; $4039: $09
     ld   [hl], e                                  ; $403A: $73
 
-.jr_403B:
+.jr_403B
     call SetEntitySpriteVariantForDirection       ; $403B: $CD $41 $64
     ld   hl, wEntitiesPrivateState1Table          ; $403E: $21 $B0 $C2
     add  hl, bc                                   ; $4041: $09
@@ -50,7 +50,7 @@ RichardEntityHandler::
 
     call func_006_641A                            ; $4046: $CD $1A $64
 
-.jr_4049:
+.jr_4049
     ldh  a, [hActiveEntityState]                  ; $4049: $F0 $F0
     JP_TABLE                                      ; $404B
 ._00 dw RichardState0Handler
@@ -82,7 +82,7 @@ RichardState1Handler::
     ld   e, $2D                                   ; $4072: $1E $2D
     jp   label_006_40C1                           ; $4074: $C3 $C1 $40
 
-.jr_4077:
+.jr_4077
     ldh  a, [hRoomStatus]                         ; $4077: $F0 $F8
     and  ROOM_STATUS_EVENT_1                      ; $4079: $E6 $10
     jr   z, .jr_4083                              ; $407B: $28 $06
@@ -91,7 +91,7 @@ RichardState1Handler::
     and  a                                        ; $4080: $A7
     jr   nz, jr_006_40A0                          ; $4081: $20 $1D
 
-.jr_4083:
+.jr_4083
     ldh  a, [hRoomStatus]                         ; $4083: $F0 $F8
     or   $10                                      ; $4085: $F6 $10
     ldh  [hRoomStatus], a                         ; $4087: $E0 $F8
@@ -104,7 +104,7 @@ RichardState1Handler::
     ld   a, $02                                   ; $4098: $3E $02
     ld   [wRichardSpokenFlag], a                  ; $409A: $EA $55 $DB
 
-.jr_409D:
+.jr_409D
     jp   IncrementEntityState                     ; $409D: $C3 $12 $3B
 
 jr_006_40A0:
@@ -138,7 +138,7 @@ RichardState2Handler::
 
     ld   a, $3C                                   ; $40CD: $3E $3C
 
-.jr_40CF:
+.jr_40CF
     call OpenDialogInTable1                       ; $40CF: $CD $73 $23
     call IncrementEntityState                     ; $40D2: $CD $12 $3B
     ld   [hl], $01                                ; $40D5: $36 $01
@@ -150,7 +150,7 @@ RichardState3Handler::
 
     call IncrementEntityState                     ; $40DD: $CD $12 $3B
 
-.jr_40E0:
+.jr_40E0
     ld   hl, wEntitiesSpeedXTable                 ; $40E0: $21 $40 $C2
     add  hl, bc                                   ; $40E3: $09
     ld   [hl], $F8                                ; $40E4: $36 $F8
@@ -167,7 +167,7 @@ RichardState4Handler::
 
     ld   a, $3D                                   ; $40F7: $3E $3D
 
-.jr_40F9:
+.jr_40F9
     call OpenDialogInTable1                       ; $40F9: $CD $73 $23
 
 jr_006_40FC:

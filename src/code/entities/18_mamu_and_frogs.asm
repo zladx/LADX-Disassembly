@@ -13,7 +13,7 @@ MamuAndFrogsEntityHandler::
     ld   a, $14                                   ; $400A: $3E $14
     ld   [wBGMapToLoad], a                        ; $400C: $EA $FF $D6
 
-.jr_400F:
+.jr_400F
     ldh  a, [hActiveEntityPosX]                   ; $400F: $F0 $EE
     cp   $48                                      ; $4011: $FE $48
     jp   nz, label_018_4373                       ; $4013: $C2 $73 $43
@@ -47,7 +47,7 @@ MamuAndFrogsState0Handler::
 
     jp   label_018_42B2                           ; $4047: $C3 $B2 $42
 
-.jr_404A:
+.jr_404A
     ldh  a, [hLinkPositionY]                      ; $404A: $F0 $99
     cp   $4C                                      ; $404C: $FE $4C
     jr   nc, func_018_407C                        ; $404E: $30 $2C
@@ -75,7 +75,7 @@ MamuAndFrogsState0Handler::
     ld   [hl], b                                  ; $4072: $70
     ret                                           ; $4073: $C9
 
-.jr_4074:
+.jr_4074
     ld   a, $DC                                   ; $4074: $3E $DC
     call func_018_4087                            ; $4076: $CD $87 $40
     call IncrementEntityState                     ; $4079: $CD $12 $3B
@@ -224,7 +224,7 @@ MamuAndFrogsState3Handler::
     cp   $70                                      ; $41F4: $FE $70
     call z, func_018_40FC                         ; $41F6: $CC $FC $40
 
-.jr_41F9:
+.jr_41F9
     ld   a, [wD210]                               ; $41F9: $FA $10 $D2
     add  $01                                      ; $41FC: $C6 $01
     ld   [wD210], a                               ; $41FE: $EA $10 $D2
@@ -246,7 +246,7 @@ MamuAndFrogsState3Handler::
     ld   [wAlternateBackgroundEnabled], a         ; $421A: $EA $00 $C5
     jp   IncrementEntityState                     ; $421D: $C3 $12 $3B
 
-.jr_4220:
+.jr_4220
     ld   a, [wD212]                               ; $4220: $FA $12 $D2
     inc  a                                        ; $4223: $3C
     cp   $1C                                      ; $4224: $FE $1C
@@ -257,7 +257,7 @@ MamuAndFrogsState3Handler::
     ld   [wD213], a                               ; $422C: $EA $13 $D2
     xor  a                                        ; $422F: $AF
 
-.jr_4230:
+.jr_4230
     ld   [wD212], a                               ; $4230: $EA $12 $D2
     ld   a, [wD213]                               ; $4233: $FA $13 $D2
     ld   e, a                                     ; $4236: $5F
@@ -293,7 +293,7 @@ MamuAndFrogsGrantSongHandler::
     ld   [wMusicTrackToPlay], a                   ; $4262: $EA $68 $D3
     call IncrementEntityState                     ; $4265: $CD $12 $3B
 
-.jr_4268:
+.jr_4268
     jp   func_018_407C                            ; $4268: $C3 $7C $40
 
 MamuAndFrogsState5Handler::
@@ -306,7 +306,7 @@ MamuAndFrogsState5Handler::
     set  FROGS_SONG_OF_THE_SOUL_FLAG_BIT, [hl]    ; $4278: $CB $C6
     jp   IncrementEntityState                     ; $427A: $C3 $12 $3B
 
-.jr_427D:
+.jr_427D
     cp   $08                                      ; $427D: $FE $08
     jr   nz, .jr_4287                             ; $427F: $20 $06
 
@@ -314,7 +314,7 @@ MamuAndFrogsState5Handler::
     ld   a, $DF                                   ; $4282: $3E $DF
     call func_018_4087                            ; $4284: $CD $87 $40
 
-.jr_4287:
+.jr_4287
     ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $4287: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $4289: $E0 $9D
     ld   a, $02                                   ; $428B: $3E $02
@@ -364,7 +364,7 @@ func_018_435A::
     rla                                           ; $435D: $17
     rla                                           ; $435E: $17
 
-.jr_435F:
+.jr_435F
     rla                                           ; $435F: $17
     rla                                           ; $4360: $17
     and  $E0                                      ; $4361: $E6 $E0
@@ -404,7 +404,7 @@ func_018_439A::
     and  a                                        ; $439D: $A7
     jp   nz, label_018_43B2                       ; $439E: $C2 $B2 $43
 
-.jr_43A1:
+.jr_43A1
     ld   hl, wEntitiesInertiaTable                ; $43A1: $21 $D0 $C3
     add  hl, bc                                   ; $43A4: $09
     inc  [hl]                                     ; $43A5: $34
@@ -415,7 +415,7 @@ func_018_439A::
 
     inc  e                                        ; $43AD: $1C
 
-.jr_43AE:
+.jr_43AE
     ld   a, e                                     ; $43AE: $7B
     jp   SetEntitySpriteVariant                   ; $43AF: $C3 $0C $3B
 
@@ -456,7 +456,7 @@ func_018_43E3::
     ld   de, MamuAndFrogsSpriteVariants           ; $43E9: $11 $B3 $43
     jp   RenderActiveEntitySpritesPair            ; $43EC: $C3 $C0 $3B
 
-.jr_43EF:
+.jr_43EF
     sub  $04                                      ; $43EF: $D6 $04
     rla                                           ; $43F1: $17
     rla                                           ; $43F2: $17
@@ -479,20 +479,20 @@ label_018_4402:
     add  $02                                      ; $440F: $C6 $02
     ld   e, a                                     ; $4411: $5F
 
-.jr_4412:
+.jr_4412
     ld   [hl+], a                                 ; $4412: $22
     ldh  a, [hIntersectedObjectBGAddressLow]      ; $4413: $F0 $D0
     ld   [hl+], a                                 ; $4415: $22
     ld   a, $85                                   ; $4416: $3E $85
 
-.jr_4418:
+.jr_4418
     ld   [hl+], a                                 ; $4418: $22
     xor  a                                        ; $4419: $AF
     ld   [hl+], a                                 ; $441A: $22
     ld   a, $04                                   ; $441B: $3E $04
     ld   [hl+], a                                 ; $441D: $22
 
-.jr_441E:
+.jr_441E
     ld   a, $7F                                   ; $441E: $3E $7F
     ld   [hl+], a                                 ; $4420: $22
     ld   [hl+], a                                 ; $4421: $22

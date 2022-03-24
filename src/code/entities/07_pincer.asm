@@ -28,7 +28,7 @@ func_007_52E0::
     cpl                                           ; $52F9: $2F
     inc  a                                        ; $52FA: $3C
 
-.jr_52FB:
+.jr_52FB
     ld   d, a                                     ; $52FB: $57
     ldh  a, [hMultiPurpose0]                      ; $52FC: $F0 $D7
     bit  7, a                                     ; $52FE: $CB $7F
@@ -37,7 +37,7 @@ func_007_52E0::
     cpl                                           ; $5302: $2F
     inc  a                                        ; $5303: $3C
 
-.jr_5304:
+.jr_5304
     cp   d                                        ; $5304: $BA
     jr   nc, .jr_5314                             ; $5305: $30 $0D
 
@@ -51,7 +51,7 @@ func_007_52E0::
     ld   a, [hl]                                  ; $5312: $7E
     ret                                           ; $5313: $C9
 
-.jr_5314:
+.jr_5314
     ld   a, d                                     ; $5314: $7A
     sra  a                                        ; $5315: $CB $2F
     sra  a                                        ; $5317: $CB $2F
@@ -117,7 +117,7 @@ func_007_535A::
     ld   [hl], $30                                ; $537A: $36 $30
     call IncrementEntityState                     ; $537C: $CD $12 $3B
 
-.jr_537F:
+.jr_537F
     xor  a                                        ; $537F: $AF
     jp   SetEntitySpriteVariant                   ; $5380: $C3 $0C $3B
 
@@ -136,7 +136,7 @@ func_007_5383::
     res  6, [hl]                                  ; $5399: $CB $B6
     jp   IncrementEntityState                     ; $539B: $C3 $12 $3B
 
-.jr_539E:
+.jr_539E
     cp   $10                                      ; $539E: $FE $10
     jr   nz, .jr_53B8                             ; $53A0: $20 $16
 
@@ -151,7 +151,7 @@ func_007_5383::
     ld   a, $18                                   ; $53B3: $3E $18
     call ApplyVectorTowardsLink_trampoline        ; $53B5: $CD $AA $3B
 
-.jr_53B8:
+.jr_53B8
     ld   a, $01                                   ; $53B8: $3E $01
     jp   SetEntitySpriteVariant                   ; $53BA: $C3 $0C $3B
 
@@ -163,7 +163,7 @@ func_007_53BD::
     ld   [hl], $20                                ; $53C5: $36 $20
     call IncrementEntityState                     ; $53C7: $CD $12 $3B
 
-.jr_53CA:
+.jr_53CA
     jp   label_3B39                               ; $53CA: $C3 $39 $3B
 
 func_007_53CD::
@@ -172,7 +172,7 @@ func_007_53CD::
 
     call IncrementEntityState                     ; $53D2: $CD $12 $3B
 
-.jr_53D5:
+.jr_53D5
     jp   label_3B39                               ; $53D5: $C3 $39 $3B
 
 func_007_53D8::
@@ -215,7 +215,7 @@ func_007_53D8::
     call GetEntityTransitionCountdown             ; $541A: $CD $05 $0C
     ld   [hl], $20                                ; $541D: $36 $20
 
-.jr_541F:
+.jr_541F
     pop  af                                       ; $541F: $F1
     ldh  [hLinkPositionY], a                      ; $5420: $E0 $99
     pop  af                                       ; $5422: $F1
@@ -301,7 +301,7 @@ jr_007_548A:
     ldh  a, [hMultiPurpose0]                      ; $5499: $F0 $D7
     add  [hl]                                     ; $549B: $86
 
-.jr_549C:
+.jr_549C
     add  $04                                      ; $549C: $C6 $04
     ld   [de], a                                  ; $549E: $12
     inc  de                                       ; $549F: $13

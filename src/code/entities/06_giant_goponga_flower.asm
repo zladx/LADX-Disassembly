@@ -22,7 +22,7 @@ GiantGopongaState1Handler::
     ld   [hl], $50                                ; $62D8: $36 $50
     call IncrementEntityState                     ; $62DA: $CD $12 $3B
 
-.jr_62DD:
+.jr_62DD
     rra                                           ; $62DD: $1F
     rra                                           ; $62DE: $1F
     rra                                           ; $62DF: $1F
@@ -37,7 +37,7 @@ GiantGopongaState2Handler::
     call IncrementEntityState                     ; $62EB: $CD $12 $3B
     ld   [hl], b                                  ; $62EE: $70
 
-.jr_62EF:
+.jr_62EF
     cp   $4A                                      ; $62EF: $FE $4A
     jr   nz, .jr_6311                             ; $62F1: $20 $1E
 
@@ -60,7 +60,7 @@ GiantGopongaState2Handler::
     call ApplyVectorTowardsLink_trampoline        ; $630D: $CD $AA $3B
     pop  bc                                       ; $6310: $C1
 
-.jr_6311:
+.jr_6311
     ld   a, $02                                   ; $6311: $3E $02
     jp   SetEntitySpriteVariant                   ; $6313: $C3 $0C $3B
 

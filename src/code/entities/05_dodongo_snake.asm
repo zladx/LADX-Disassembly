@@ -69,7 +69,7 @@ DodongoSnakeEntityHandler::
     ld   a, $10                                   ; $6875: $3E $10
     ldh  [hActiveEntityTilesOffset], a            ; $6877: $E0 $F5
 
-.jr_6879:
+.jr_6879
     call func_005_6A38                            ; $6879: $CD $38 $6A
     call ReturnIfNonInteractive_05                ; $687C: $CD $3A $7A
     call BossIntro                                ; $687F: $CD $E8 $3E
@@ -88,7 +88,7 @@ func_005_6891::
     ld   [hl], $00                                ; $6896: $36 $00
     call IncrementEntityState                     ; $6898: $CD $12 $3B
 
-.jr_689B:
+.jr_689B
     ld   hl, wEntitiesInertiaTable                ; $689B: $21 $D0 $C3
     add  hl, bc                                   ; $689E: $09
     ld   a, [hl]                                  ; $689F: $7E
@@ -204,7 +204,7 @@ jr_005_68F6:
     ldh  [hJingle], a                             ; $6950: $E0 $F2
     ret                                           ; $6952: $C9
 
-.jr_6953:
+.jr_6953
     dec  e                                        ; $6953: $1D
     jr   nz, jr_005_68F6                          ; $6954: $20 $A0
 
@@ -287,13 +287,13 @@ func_005_69B1::
     ld   [hl], $01                                ; $69C1: $36 $01
     ret                                           ; $69C3: $C9
 
-.jr_69C4:
+.jr_69C4
     cp   $24                                      ; $69C4: $FE $24
     jr   nz, .jr_69CB                             ; $69C6: $20 $03
 
     call PlayBombExplosionSfx                     ; $69C8: $CD $4B $0C
 
-.jr_69CB:
+.jr_69CB
     cp   $04                                      ; $69CB: $FE $04
     jr   nz, .jr_69EB                             ; $69CD: $20 $1C
 
@@ -314,7 +314,7 @@ func_005_69B1::
     call AddTranscientVfx                         ; $69E7: $CD $C7 $0C
     xor  a                                        ; $69EA: $AF
 
-.jr_69EB:
+.jr_69EB
     cp   $20                                      ; $69EB: $FE $20
     ret  nz                                       ; $69ED: $C0
 
@@ -387,7 +387,7 @@ func_005_6A38::
     call func_005_6A5F                            ; $6A50: $CD $5F $6A
     jp   CopyEntityPositionToActivePosition       ; $6A53: $C3 $8A $3D
 
-.jr_6A56:
+.jr_6A56
     call func_005_6A5F                            ; $6A56: $CD $5F $6A
     call func_005_6AA5                            ; $6A59: $CD $A5 $6A
     jp   CopyEntityPositionToActivePosition       ; $6A5C: $C3 $8A $3D
@@ -570,7 +570,7 @@ label_005_6C77:
 
     ld   hl, Data_005_6B37                        ; $6C8F: $21 $37 $6B
 
-.jr_6C92:
+.jr_6C92
     ldh  a, [hActiveEntitySpriteVariant]          ; $6C92: $F0 $F1
     ld   e, a                                     ; $6C94: $5F
     ld   d, b                                     ; $6C95: $50

@@ -20,7 +20,7 @@ HinoxEntityHandler::
 
     call func_006_51B0                            ; $4FD4: $CD $B0 $51
 
-.jr_4FD7:
+.jr_4FD7
     ldh  a, [hActiveEntityState]                  ; $4FD7: $F0 $F0
     cp   $04                                      ; $4FD9: $FE $04
     jr   nc, .jr_4FF1                             ; $4FDB: $30 $14
@@ -37,7 +37,7 @@ HinoxEntityHandler::
     ld   [hl], $20                                ; $4FEE: $36 $20
     ret                                           ; $4FF0: $C9
 
-.jr_4FF1:
+.jr_4FF1
     ldh  a, [hActiveEntityState]                  ; $4FF1: $F0 $F0
     JP_TABLE                                      ; $4FF3
 ._00 dw HinoxState0Handler                             ; $4FF4
@@ -62,7 +62,7 @@ HinoxState1Handler::
     cp   [hl]                                     ; $5014: $BE
     jr   nz, .jr_5017                             ; $5015: $20 $00
 
-.jr_5017:
+.jr_5017
     jp   label_3B23                               ; $5017: $C3 $23 $3B
 
 jr_006_501A:
@@ -84,7 +84,7 @@ jr_006_501A:
     ld   [hl], $30                                ; $5034: $36 $30
     ret                                           ; $5036: $C9
 
-.jr_5037:
+.jr_5037
     call GetEntityTransitionCountdown             ; $5037: $CD $05 $0C
     call GetRandomByte                            ; $503A: $CD $0D $28
     and  $1F                                      ; $503D: $E6 $1F
@@ -104,7 +104,7 @@ jr_006_501A:
     call func_006_65B4                            ; $5053: $CD $B4 $65
     jr   jr_006_505B                              ; $5056: $18 $03
 
-.jr_5058:
+.jr_5058
     call GetRandomByte                            ; $5058: $CD $0D $28
 
 jr_006_505B:
@@ -136,7 +136,7 @@ HinoxState0Handler::
     call GetEntityTransitionCountdown             ; $5080: $CD $05 $0C
     jr   nz, jr_006_5093                          ; $5083: $20 $0E
 
-.jr_5085:
+.jr_5085
     call GetRandomByte                            ; $5085: $CD $0D $28
     and  $0F                                      ; $5088: $E6 $0F
     or   $10                                      ; $508A: $F6 $10
@@ -191,7 +191,7 @@ HinoxState3Handler::
     call IncrementEntityState                     ; $50D3: $CD $12 $3B
     ld   [hl], b                                  ; $50D6: $70
 
-.jr_50D7:
+.jr_50D7
     call UpdateEntityPosWithSpeed_06              ; $50D7: $CD $41 $65
     call label_3B23                               ; $50DA: $CD $23 $3B
     call func_006_6594                            ; $50DD: $CD $94 $65
@@ -214,7 +214,7 @@ HinoxState3Handler::
     ld   a, $16                                   ; $50FE: $3E $16
     ldh  [hWaveSfx], a                            ; $5100: $E0 $F3
 
-.jr_5102:
+.jr_5102
     ldh  a, [hFrameCounter]                       ; $5102: $F0 $E7
     and  $07                                      ; $5104: $E6 $07
     jr   nz, .jr_5117                             ; $5106: $20 $0F
@@ -227,7 +227,7 @@ HinoxState3Handler::
     ld   a, TRANSCIENT_VFX_PEGASUS_DUST           ; $5112: $3E $0B
     call AddTranscientVfx                         ; $5114: $CD $C7 $0C
 
-.jr_5117:
+.jr_5117
     jr   jr_006_50BA                              ; $5117: $18 $A1
 
 Data_006_5119::
@@ -247,7 +247,7 @@ HinoxState4Handler::
     ld   [hl], b                                  ; $5143: $70
     ret                                           ; $5144: $C9
 
-.jr_5145:
+.jr_5145
     cp   $20                                      ; $5145: $FE $20
     jr   nz, jr_006_5179                          ; $5147: $20 $30
 
@@ -260,7 +260,7 @@ HinoxState4Handler::
 
     ld   a, $20                                   ; $5155: $3E $20
 
-.jr_5157:
+.jr_5157
     ldh  [hLinkSpeedX], a                         ; $5157: $E0 $9A
     ld   a, $10                                   ; $5159: $3E $10
     ldh  [hLinkVelocityZ], a                      ; $515B: $E0 $A3
@@ -332,14 +332,14 @@ HinoxState5Handler::
     ld   [hl], b                                  ; $51C7: $70
     ret                                           ; $51C8: $C9
 
-.jr_51C9:
+.jr_51C9
     ld   e, $00                                   ; $51C9: $1E $00
     cp   $10                                      ; $51CB: $FE $10
     jr   c, .jr_51D0                              ; $51CD: $38 $01
 
     inc  e                                        ; $51CF: $1C
 
-.jr_51D0:
+.jr_51D0
     cp   $10                                      ; $51D0: $FE $10
     jr   nz, .jr_51F6                             ; $51D2: $20 $22
 
@@ -362,7 +362,7 @@ HinoxState5Handler::
     ld   [hl], $10                                ; $51F1: $36 $10
     jp   label_006_41F8                           ; $51F3: $C3 $F8 $41
 
-.jr_51F6:
+.jr_51F6
     ld   a, e                                     ; $51F6: $7B
     jp   SetEntitySpriteVariant                   ; $51F7: $C3 $0C $3B
 
@@ -405,7 +405,7 @@ func_006_52BA::
 
     ld   hl, Data_006_51FA                        ; $52D5: $21 $FA $51
 
-.jr_52D8:
+.jr_52D8
     add  hl, de                                   ; $52D8: $19
     ld   c, $08                                   ; $52D9: $0E $08
     jp   RenderActiveEntitySpritesRect            ; $52DB: $C3 $E6 $3C

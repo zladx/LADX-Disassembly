@@ -84,7 +84,7 @@ PapahlsWifeState1Handler::
     call_open_dialog $128                         ; $4EBD
     jp   IncrementEntityState                     ; $4EC2: $C3 $12 $3B
 
-.jr_4EC5:
+.jr_4EC5
     call_open_dialog $127                         ; $4EC5
     call IncrementEntityState                     ; $4ECA: $CD $12 $3B
     ld   [hl], b                                  ; $4ECD: $70

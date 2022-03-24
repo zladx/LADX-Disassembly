@@ -65,7 +65,7 @@ KikiTheMonkeyEntityHandler::
     call RenderActiveEntitySpritesPair            ; $586E: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $5871: $CD $8A $3D
 
-.jr_5874:
+.jr_5874
     call ReturnIfNonInteractive_07                ; $5874: $CD $96 $7D
     call AddEntityZSpeedToPos_07                  ; $5877: $CD $43 $7E
     ld   hl, wEntitiesSpeedZTable                 ; $587A: $21 $20 $C3
@@ -84,7 +84,7 @@ KikiTheMonkeyEntityHandler::
     add  hl, bc                                   ; $588F: $09
     ld   [hl], b                                  ; $5890: $70
 
-.jr_5891:
+.jr_5891
     ldh  a, [hActiveEntityState]                  ; $5891: $F0 $F0
     JP_TABLE                                      ; $5893
 ._00 dw func_007_58A8                             ; $5894
@@ -119,7 +119,7 @@ func_007_58A8::
     cp   $30                                      ; $58C5: $FE $30
     jr   nc, ret_007_58DD                         ; $58C7: $30 $14
 
-.jr_58C9:
+.jr_58C9
     call GetEntityTransitionCountdown             ; $58C9: $CD $05 $0C
     ld   [hl], $10                                ; $58CC: $36 $10
     call IncrementEntityState                     ; $58CE: $CD $12 $3B
@@ -147,7 +147,7 @@ jr_007_58DE:
     call func_007_58D5                            ; $58EF: $CD $D5 $58
     jp   IncrementEntityState                     ; $58F2: $C3 $12 $3B
 
-.jr_58F5:
+.jr_58F5
     ld   a, $61                                   ; $58F5: $3E $61
     call func_007_58D5                            ; $58F7: $CD $D5 $58
 
@@ -189,7 +189,7 @@ func_007_591A::
     ld   [hl], $10                                ; $592B: $36 $10
     ret                                           ; $592D: $C9
 
-.jr_592E:
+.jr_592E
     ld   [hl], b                                  ; $592E: $70
     ld   a, $61                                   ; $592F: $3E $61
     jp   func_007_58D5                            ; $5931: $C3 $D5 $58
@@ -206,7 +206,7 @@ func_007_5934::
     ldh  [hJingle], a                             ; $5943: $E0 $F2
     call IncrementEntityState                     ; $5945: $CD $12 $3B
 
-.jr_5948:
+.jr_5948
     ld   a, $02                                   ; $5948: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $594A: $E0 $A1
     ret                                           ; $594C: $C9
@@ -230,14 +230,14 @@ func_007_5951::
     ld   [hl], $80                                ; $5965: $36 $80
     jp   IncrementEntityState                     ; $5967: $C3 $12 $3B
 
-.jr_596A:
+.jr_596A
     cp   $10                                      ; $596A: $FE $10
     jr   nz, .jr_5973                             ; $596C: $20 $05
 
     ld   a, $62                                   ; $596E: $3E $62
     call func_007_58D5                            ; $5970: $CD $D5 $58
 
-.jr_5973:
+.jr_5973
     ld   a, $02                                   ; $5973: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5975: $E0 $A1
     ret                                           ; $5977: $C9
@@ -263,7 +263,7 @@ func_007_5997::
     call func_007_58FA                            ; $599B: $CD $FA $58
     call GetEntityDropTimer                       ; $599E: $CD $FB $0B
 
-.jr_59A1:
+.jr_59A1
     jr   nz, jr_007_59C8                          ; $59A1: $20 $25
 
     ld   a, JINGLE_PUZZLE_SOLVED                  ; $59A3: $3E $02
@@ -281,7 +281,7 @@ func_007_5997::
     ld   hl, wEntitiesInertiaTable                ; $59C1: $21 $D0 $C3
     add  hl, bc                                   ; $59C4: $09
 
-.jr_59C5:
+.jr_59C5
     ld   [hl], $06                                ; $59C5: $36 $06
     ret                                           ; $59C7: $C9
 
@@ -294,7 +294,7 @@ jr_007_59C8:
     ld   a, REPLACE_TILES_TRADING_ITEM            ; $59D1: $3E $0D
     ldh  [hReplaceTiles], a                       ; $59D3: $E0 $A5
 
-.jr_59D5:
+.jr_59D5
     ldh  a, [hFrameCounter]                       ; $59D5: $F0 $E7
     and  $1F                                      ; $59D7: $E6 $1F
     jr   nz, jr_007_5A2A                          ; $59D9: $20 $4F
@@ -304,7 +304,7 @@ jr_007_59C8:
     ld   a, [hl]                                  ; $59DF: $7E
     cp   $07                                      ; $59E0: $FE $07
 
-.jr_59E2:
+.jr_59E2
     jr   z, jr_007_5A2A                           ; $59E2: $28 $46
 
     ld   a, ENTITY_KIKI_THE_MONKEY                ; $59E4: $3E $AD
@@ -385,7 +385,7 @@ jr_007_5A2A:
     call func_91D                                 ; $5A5B: $CD $1D $09
     pop  bc                                       ; $5A5E: $C1
 
-.jr_5A5F:
+.jr_5A5F
     ld   hl, wDrawCommand                         ; $5A5F: $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ; $5A62: $FA $00 $D6
     ld   e, a                                     ; $5A65: $5F
@@ -451,7 +451,7 @@ func_007_5AAC::
 
     ld   e, $F0                                   ; $5ACF: $1E $F0
 
-.jr_5AD1:
+.jr_5AD1
     ld   hl, wEntitiesSpeedXTable                 ; $5AD1: $21 $40 $C2
     add  hl, bc                                   ; $5AD4: $09
     ld   [hl], e                                  ; $5AD5: $73
@@ -495,7 +495,7 @@ func_007_5B08::
 
     inc  e                                        ; $5B13: $1C
 
-.jr_5B14:
+.jr_5B14
     ld   hl, wEntitiesDirectionTable              ; $5B14: $21 $80 $C3
     add  hl, bc                                   ; $5B17: $09
     ld   [hl], e                                  ; $5B18: $73
@@ -522,7 +522,7 @@ func_007_5B25::
 
     call label_3B23                               ; $5B38: $CD $23 $3B
 
-.jr_5B3B:
+.jr_5B3B
     ldh  a, [hMultiPurposeG]                      ; $5B3B: $F0 $E8
     and  a                                        ; $5B3D: $A7
     jr   z, jr_007_5B64                           ; $5B3E: $28 $24
@@ -541,7 +541,7 @@ func_007_5B25::
     ld   [hl], $10                                ; $5B56: $36 $10
     ret                                           ; $5B58: $C9
 
-.jr_5B59:
+.jr_5B59
     call GetEntityTransitionCountdown             ; $5B59: $CD $05 $0C
     call GetRandomByte                            ; $5B5C: $CD $0D $28
     and  $3F                                      ; $5B5F: $E6 $3F
@@ -579,7 +579,7 @@ func_007_5B69::
     ld   a, $08                                   ; $5B90: $3E $08
     ld   e, $08                                   ; $5B92: $1E $08
 
-.jr_5B94:
+.jr_5B94
     push de                                       ; $5B94: $D5
     call ApplyVectorTowardsLink_trampoline        ; $5B95: $CD $AA $3B
     pop  de                                       ; $5B98: $D1
@@ -607,7 +607,7 @@ func_007_5B69::
 
     call func_007_7EA4                            ; $5BBB: $CD $A4 $7E
 
-.jr_5BBE:
+.jr_5BBE
     pop  af                                       ; $5BBE: $F1
     ldh  [hLinkPositionY], a                      ; $5BBF: $E0 $99
     pop  af                                       ; $5BC1: $F1
@@ -624,7 +624,7 @@ jr_007_5BCA:
 
     ld   a, $04                                   ; $5BD4: $3E $04
 
-.jr_5BD6:
+.jr_5BD6
     jp   SetEntitySpriteVariant                   ; $5BD6: $C3 $0C $3B
 
 func_007_5BD9::
@@ -638,7 +638,7 @@ func_007_5BD9::
     dec  [hl]                                     ; $5BE6: $35
     dec  [hl]                                     ; $5BE7: $35
 
-.jr_5BE8:
+.jr_5BE8
     ld   a, $03                                   ; $5BE8: $3E $03
     call SetEntitySpriteVariant                   ; $5BEA: $CD $0C $3B
     jp   UpdateEntityPosWithSpeed_07              ; $5BED: $C3 $0A $7E

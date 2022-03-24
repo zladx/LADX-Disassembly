@@ -43,7 +43,7 @@ LiftableRockEntityHandler::
     add  hl, de                                   ; $5366: $19
     ld   [hl], $80                                ; $5367: $36 $80
 
-.jr_5369:
+.jr_5369
     ldh  a, [hActiveEntitySpriteVariant]          ; $5369: $F0 $F1
     and  a                                        ; $536B: $A7
     jr   nz, .marinReactionEnd                    ; $536C: $20 $24

@@ -15,7 +15,7 @@ func_01F_7F80::
     dec  a                                        ; $7F92: $3D
     ldh  [hVolumeRight], a                        ; $7F93: $E0 $A9
 
-.jr_7F95:
+.jr_7F95
     ldh  a, [hVolumeLeft]                         ; $7F95: $F0 $AA
     and  a                                        ; $7F97: $A7
     jr   z, jr_01F_7F9E                           ; $7F98: $28 $04
@@ -40,7 +40,7 @@ jr_01F_7F9E:
     inc  a                                        ; $7FB1: $3C
     ldh  [hVolumeRight], a                        ; $7FB2: $E0 $A9
 
-.jr_7FB4:
+.jr_7FB4
     ldh  a, [hVolumeLeft]                         ; $7FB4: $F0 $AA
     cp   $70                                      ; $7FB6: $FE $70
     jr   nc, jr_01F_7FBE                          ; $7FB8: $30 $04
@@ -65,7 +65,7 @@ jr_01F_7FBE:
     xor  a                                        ; $7FD4: $AF
     ldh  [hJingle], a                             ; $7FD5: $E0 $F2
 
-.jr_7FD7:
+.jr_7FD7
     ldh  a, [hWaveSfx]                            ; $7FD7: $F0 $F3
     and  a                                        ; $7FD9: $A7
     jr   z, .jr_7FE2                              ; $7FDA: $28 $06
@@ -74,7 +74,7 @@ jr_01F_7FBE:
     xor  a                                        ; $7FDF: $AF
     ldh  [hWaveSfx], a                            ; $7FE0: $E0 $F3
 
-.jr_7FE2:
+.jr_7FE2
     ldh  a, [hNoiseSfx]                           ; $7FE2: $F0 $F4
     and  a                                        ; $7FE4: $A7
     jr   z, ret_01F_7FED                          ; $7FE5: $28 $06

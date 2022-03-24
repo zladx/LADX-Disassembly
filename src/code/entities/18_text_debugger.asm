@@ -69,7 +69,7 @@ TextDebuggerEntityHandler::                       ; POI: Text debugging tool
     ld   a, [wTextDebuggerDialogId]               ; $5DCA: $FA $09 $C1
     jp   OpenDialog                               ; $5DCD: $C3 $85 $23
 
-.jr_5DD0:
+.jr_5DD0
     ldh  a, [hJoypadState]                        ; $5DD0: $F0 $CC
     and  J_B                                      ; $5DD2: $E6 $20
     jr   z, jr_018_5DDC                           ; $5DD4: $28 $06

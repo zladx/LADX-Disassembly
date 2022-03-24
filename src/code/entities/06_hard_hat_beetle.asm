@@ -60,7 +60,7 @@ HardHatBeetleEntityHandler::
     add  hl, bc                                   ; $4F8A: $09
     ld   [hl], b                                  ; $4F8B: $70
 
-.jr_4F8C:
+.jr_4F8C
     ldh  a, [hMultiPurpose1]                      ; $4F8C: $F0 $D8
     ld   hl, wEntitiesSpeedXTable                 ; $4F8E: $21 $40 $C2
     call func_006_4FA3                            ; $4F91: $CD $A3 $4F
@@ -88,7 +88,7 @@ func_006_4FA3::
     dec  [hl]                                     ; $4FAB: $35
     jr   ret_006_4FAF                             ; $4FAC: $18 $01
 
-.jr_4FAE:
+.jr_4FAE
     inc  [hl]                                     ; $4FAE: $34
 
 ret_006_4FAF:

@@ -14,7 +14,7 @@ BombEntityHandler::
     dec  [hl]                                     ; $66A9: $35
     call PlayBombExplosionSfx                     ; $66AA: $CD $4B $0C
 
-.jr_66AD:
+.jr_66AD
     ld   hl, wHasPlacedBomb                       ; $66AD: $21 $4E $C1
     inc  [hl]                                     ; $66B0: $34
     cp   $22                                      ; $66B1: $FE $22
@@ -27,7 +27,7 @@ BombEntityHandler::
     add  hl, bc                                   ; $66BC: $09
     ld   [hl], $30                                ; $66BD: $36 $30
 
-.jr_66BF:
+.jr_66BF
     call func_003_6711                            ; $66BF: $CD $11 $67
     call CheckForEntityFallingDownQuicksandHole   ; $66C2: $CD $EA $5C
     call ReturnIfNonInteractive_03                ; $66C5: $CD $78 $7F
@@ -51,7 +51,7 @@ BombEntityHandler::
 
     jr   jr_003_66FA                              ; $66E8: $18 $10
 
-.jr_66EA:
+.jr_66EA
     ld   a, [wAButtonSlot]                        ; $66EA: $FA $01 $DB
     cp   INVENTORY_BOMBS                          ; $66ED: $FE $02
     jr   nz, jr_003_66FA                          ; $66EF: $20 $09
@@ -73,7 +73,7 @@ jr_003_66FA:
 
     call func_003_6B34                            ; $6703: $CD $34 $6B
 
-.jr_6706:
+.jr_6706
     ldh  a, [hIsSideScrolling]                    ; $6706: $F0 $F9
     and  a                                        ; $6708: $A7
     ret  nz                                       ; $6709: $C0

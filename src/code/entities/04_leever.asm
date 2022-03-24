@@ -51,7 +51,7 @@ func_004_7F27::
     ld   [hl], a                                  ; $7F33: $77
     jp   IncrementEntityState                     ; $7F34: $C3 $12 $3B
 
-.jr_7F37:
+.jr_7F37
     ld   hl, Data_004_7F25                        ; $7F37: $21 $25 $7F
 
 label_004_7F3A:
@@ -74,7 +74,7 @@ func_004_7F49::
     call IncrementEntityState                     ; $7F53: $CD $12 $3B
     jp   ClearEntitySpeed                         ; $7F56: $C3 $7F $3D
 
-.jr_7F59:
+.jr_7F59
     ldh  a, [hFrameCounter]                       ; $7F59: $F0 $E7
     xor  c                                        ; $7F5B: $A9
     push af                                       ; $7F5C: $F5
@@ -84,7 +84,7 @@ func_004_7F49::
     ld   a, $08                                   ; $7F61: $3E $08
     call ApplyVectorTowardsLink_trampoline        ; $7F63: $CD $AA $3B
 
-.jr_7F66:
+.jr_7F66
     pop  af                                       ; $7F66: $F1
     srl  a                                        ; $7F67: $CB $3F
     srl  a                                        ; $7F69: $CB $3F
@@ -109,7 +109,7 @@ func_004_7F75::
     ld   a, $08                                   ; $7F85: $3E $08
     jp   ApplyVectorTowardsLink_trampoline        ; $7F87: $C3 $AA $3B
 
-.jr_7F8A:
+.jr_7F8A
     ld   hl, Data_004_7F73                        ; $7F8A: $21 $73 $7F
     jp   label_004_7F3A                           ; $7F8D: $C3 $3A $7F
 
@@ -123,7 +123,7 @@ func_004_7F90:: ; also called from ghini code
 
     ld   a, OAM_X_FLIP                            ; $7F9B: $3E $20
 
-.jr_7F9D:
+.jr_7F9D
     ld   hl, hActiveEntityFlipAttribute           ; $7F9D: $21 $ED $FF
     xor  [hl]                                     ; $7FA0: $AE
     ld   [hl], a                                  ; $7FA1: $77

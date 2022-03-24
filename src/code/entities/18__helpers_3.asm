@@ -26,7 +26,7 @@ func_018_7D3B::
     add  hl, de                                   ; $7D55: $19
     ld   [hl], $00                                ; $7D56: $36 $00
 
-.jr_7D58:
+.jr_7D58
     scf                                           ; $7D58: $37
     ret                                           ; $7D59: $C9
 
@@ -106,7 +106,7 @@ func_018_7DA0::
     pop  de                                       ; $7DBE: $D1
     jr   nz, jr_018_7DE6                          ; $7DBF: $20 $25
 
-.jr_7DC1:
+.jr_7DC1
     ld   hl, wC1AD                                ; $7DC1: $21 $AD $C1
     ld   [hl], $01                                ; $7DC4: $36 $01
     ld   a, [wDialogState]                        ; $7DC6: $FA $9F $C1
@@ -327,7 +327,7 @@ func_018_7EB2::
 
     inc  e                                        ; $7EBF: $1C
 
-.jr_7EC0:
+.jr_7EC0
     ld   d, a                                     ; $7EC0: $57
     ret                                           ; $7EC1: $C9
 
@@ -342,7 +342,7 @@ func_018_7EC2::
 
     inc  e                                        ; $7ECF: $1C
 
-.jr_7ED0:
+.jr_7ED0
     ld   d, a                                     ; $7ED0: $57
     ret                                           ; $7ED1: $C9
 
@@ -356,7 +356,7 @@ func_018_7ED2::
 
     inc  e                                        ; $7EDE: $1C
 
-.jr_7EDF:
+.jr_7EDF
     ld   d, a                                     ; $7EDF: $57
     ret                                           ; $7EE0: $C9
 
@@ -371,7 +371,7 @@ func_018_7EE1::
     cpl                                           ; $7EEC: $2F
     inc  a                                        ; $7EED: $3C
 
-.jr_7EEE:
+.jr_7EEE
     push af                                       ; $7EEE: $F5
     call func_018_7EC2                            ; $7EEF: $CD $C2 $7E
     ld   a, e                                     ; $7EF2: $7B
@@ -383,7 +383,7 @@ func_018_7EE1::
     cpl                                           ; $7EFA: $2F
     inc  a                                        ; $7EFB: $3C
 
-.jr_7EFC:
+.jr_7EFC
     pop  de                                       ; $7EFC: $D1
     cp   d                                        ; $7EFD: $BA
     jr   nc, .jr_7F04                             ; $7EFE: $30 $04
@@ -391,7 +391,7 @@ func_018_7EE1::
     ldh  a, [hMultiPurpose0]                      ; $7F00: $F0 $D7
     jr   jr_018_7F06                              ; $7F02: $18 $02
 
-.jr_7F04:
+.jr_7F04
     ldh  a, [hMultiPurpose1]                      ; $7F04: $F0 $D8
 
 jr_018_7F06:
@@ -445,7 +445,7 @@ func_018_7F3B::
     call SetRoomStatus20                          ; $7F46: $CD $B9 $7F
     jp   DidKillEnemy                             ; $7F49: $C3 $50 $3F
 
-.jr_7F4C:
+.jr_7F4C
     jp   label_018_7F4F                           ; $7F4C: $C3 $4F $7F
 
 label_018_7F4F:
@@ -499,7 +499,7 @@ label_018_7F6F:
     ld   [hl], $F0                                ; $7FA0: $36 $F0
     jr   jr_018_7FB0                              ; $7FA2: $18 $0C
 
-.jr_7FA4:
+.jr_7FA4
     ld   hl, wEntitiesSpeedZTable                 ; $7FA4: $21 $20 $C3
     add  hl, de                                   ; $7FA7: $19
     ld   [hl], $10                                ; $7FA8: $36 $10

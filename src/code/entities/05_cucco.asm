@@ -27,7 +27,7 @@ CuccoEntityHandler::
     add  $02                                      ; $4534: $C6 $02
     ldh  [hActiveEntitySpriteVariant], a          ; $4536: $E0 $F1
 
-.jr_4538:
+.jr_4538
     ld   de, CuccoSpriteVariants                  ; $4538: $11 $14 $45
     call RenderActiveEntitySpritesPair            ; $453B: $CD $C0 $3B
     ldh  a, [hActiveEntityStatus]                 ; $453E: $F0 $EA
@@ -41,7 +41,7 @@ CuccoEntityHandler::
     ld   a, WAVE_SFX_CUCCO_HURT                   ; $454A: $3E $13
     ldh  [hWaveSfx], a                            ; $454C: $E0 $F3
 
-.jr_454E:
+.jr_454E
     ldh  a, [hFrameCounter]                       ; $454E: $F0 $E7
     rra                                           ; $4550: $1F
     rra                                           ; $4551: $1F
@@ -73,7 +73,7 @@ jr_005_4557:
     add  hl, bc                                   ; $457E: $09
     ld   [hl], a                                  ; $457F: $77
 
-.jr_4580:
+.jr_4580
     ld   hl, wEntitiesFlashCountdownTable         ; $4580: $21 $20 $C4
     add  hl, bc                                   ; $4583: $09
     ld   a, [hl]                                  ; $4584: $7E
@@ -99,7 +99,7 @@ jr_005_4557:
     call_open_dialog $276                         ; $45A1
     jr   jr_005_45AD                              ; $45A6: $18 $05
 
-.jr_45A8:
+.jr_45A8
     call_open_dialog $08F                         ; $45A8
 
 jr_005_45AD:
@@ -139,7 +139,7 @@ jr_005_45BF:
 
     jr   jr_005_4611                              ; $45DD: $18 $32
 
-.jr_45DF:
+.jr_45DF
     ld   a, [wAButtonSlot]                        ; $45DF: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $45E2: $FE $03
     jr   nz, jr_005_4611                          ; $45E4: $20 $2B
@@ -232,7 +232,7 @@ func_005_4663::
     ld   [hl], b                                  ; $4678: $70
     ret                                           ; $4679: $C9
 
-.jr_467A:
+.jr_467A
     ld   hl, wEntitiesSpeedZTable                 ; $467A: $21 $20 $C3
     add  hl, bc                                   ; $467D: $09
     ld   [hl], $05                                ; $467E: $36 $05
@@ -275,7 +275,7 @@ func_005_46AF::
     cpl                                           ; $46CB: $2F
     inc  a                                        ; $46CC: $3C
 
-.jr_46CD:
+.jr_46CD
     ld   hl, wEntitiesSpeedXTable                 ; $46CD: $21 $40 $C2
     add  hl, bc                                   ; $46D0: $09
     ld   [hl], a                                  ; $46D1: $77
@@ -293,7 +293,7 @@ jr_005_46D2:
     add  hl, bc                                   ; $46E7: $09
     ld   a, e                                     ; $46E8: $7B
 
-.jr_46E9:
+.jr_46E9
     xor  $01                                      ; $46E9: $EE $01
     ld   [hl], a                                  ; $46EB: $77
     ld   hl, wEntitiesPrivateState1Table          ; $46EC: $21 $B0 $C2
@@ -380,7 +380,7 @@ func_005_474E::
 
     inc  e                                        ; $4776: $1C
 
-.jr_4777:
+.jr_4777
     ld   hl, wEntitiesDirectionTable              ; $4777: $21 $80 $C3
     add  hl, bc                                   ; $477A: $09
     ld   [hl], e                                  ; $477B: $73

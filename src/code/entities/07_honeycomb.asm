@@ -23,7 +23,7 @@ HoneycombEntityHandler::
     ld   hl, hActiveEntityPosX                    ; $4CB2: $21 $EE $FF
     dec  [hl]                                     ; $4CB5: $35
 
-.jr_4CB6:
+.jr_4CB6
     ld   de, HoneycombSpriteVariants              ; $4CB6: $11 $93 $4C
     call RenderActiveEntitySpritesPair            ; $4CB9: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $4CBC: $CD $96 $7D
@@ -52,7 +52,7 @@ func_007_4CCC::
     ld   [hl], $04                                ; $4CE4: $36 $04
     ret                                           ; $4CE6: $C9
 
-.jr_4CE7:
+.jr_4CE7
     xor  a                                        ; $4CE7: $AF
     ld   [wD202], a                               ; $4CE8: $EA $02 $D2
     call IncrementEntityState                     ; $4CEB: $CD $12 $3B
@@ -85,7 +85,7 @@ func_007_4CEE::
     and  a                                        ; $4D1B: $A7
     ret                                           ; $4D1C: $C9
 
-.jr_4D1D:
+.jr_4D1D
     scf                                           ; $4D1D: $37
     ret                                           ; $4D1E: $C9
 
@@ -212,7 +212,7 @@ func_007_4DA5::
     xor  $01                                      ; $4DC8: $EE $01
     ld   [hl], a                                  ; $4DCA: $77
 
-.jr_4DCB:
+.jr_4DCB
     ld   hl, wEntitiesPrivateState2Table          ; $4DCB: $21 $C0 $C2
     add  hl, bc                                   ; $4DCE: $09
     ld   e, [hl]                                  ; $4DCF: $5E
@@ -261,14 +261,14 @@ func_007_4E25::
     ld   a, [hl]                                  ; $4E32: $7E
     and  a                                        ; $4E33: $A7
 
-.jr_4E34:
+.jr_4E34
     jp   z, func_007_7EA4                         ; $4E34: $CA $A4 $7E
 
     ldh  a, [hFrameCounter]                       ; $4E37: $F0 $E7
     and  $07                                      ; $4E39: $E6 $07
     ld   hl, wEntitiesInertiaTable                ; $4E3B: $21 $D0 $C3
 
-.jr_4E3E:
+.jr_4E3E
     add  hl, bc                                   ; $4E3E: $09
     cp   [hl]                                     ; $4E3F: $BE
     jr   nz, .jr_4E89                             ; $4E40: $20 $47
@@ -319,7 +319,7 @@ func_007_4E25::
     pop  af                                       ; $4E86: $F1
     ldh  [hLinkPositionX], a                      ; $4E87: $E0 $98
 
-.jr_4E89:
+.jr_4E89
     jp   UpdateEntityPosWithSpeed_07              ; $4E89: $C3 $0A $7E
 
 func_007_4E8C::

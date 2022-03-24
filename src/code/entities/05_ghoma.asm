@@ -26,7 +26,7 @@ GhomaEntityHandler::
     ld   a, [hl]                                  ; $7BF3: $7E
     ldh  [hActiveEntityState], a                  ; $7BF4: $E0 $F0
 
-.jr_7BF6:
+.jr_7BF6
     ldh  a, [hActiveEntitySpriteVariant]          ; $7BF6: $F0 $F1
     rla                                           ; $7BF8: $17
     rla                                           ; $7BF9: $17
@@ -50,7 +50,7 @@ GhomaEntityHandler::
 
     call ReturnIfNonInteractive_05                ; $7C19: $CD $3A $7A
 
-.jr_7C1C:
+.jr_7C1C
     call BossIntro                                ; $7C1C: $CD $E8 $3E
     call label_3B39                               ; $7C1F: $CD $39 $3B
     call UpdateEntityPosWithSpeed_05              ; $7C22: $CD $B1 $7A
@@ -115,7 +115,7 @@ func_005_7C52::
     ld   [hl], a                                  ; $7C85: $77
     jp   label_005_7CE8                           ; $7C86: $C3 $E8 $7C
 
-.jr_7C89:
+.jr_7C89
     ld   hl, wEntitiesPosYTable                   ; $7C89: $21 $10 $C2
     add  hl, bc                                   ; $7C8C: $09
     ld   a, [hl]                                  ; $7C8D: $7E
@@ -139,7 +139,7 @@ jr_005_7C9C:
     ld   [hl], $08                                ; $7CA9: $36 $08
     jp   label_005_7D40                           ; $7CAB: $C3 $40 $7D
 
-.jr_7CAE:
+.jr_7CAE
     ld   [hl], $F8                                ; $7CAE: $36 $F8
     jp   label_005_7D40                           ; $7CB0: $C3 $40 $7D
 
@@ -201,7 +201,7 @@ label_005_7CE8:
     ld   [hl], a                                  ; $7CFD: $77
     jp   label_005_7D40                           ; $7CFE: $C3 $40 $7D
 
-.jr_7D01:
+.jr_7D01
     ld   hl, wEntitiesPrivateState1Table          ; $7D01: $21 $B0 $C2
     add  hl, bc                                   ; $7D04: $09
     ld   a, [hl]                                  ; $7D05: $7E
@@ -302,7 +302,7 @@ func_005_7D62::
     ld   [hl], $10                                ; $7D8D: $36 $10
     jp   label_005_7D97                           ; $7D8F: $C3 $97 $7D
 
-.jr_7D92:
+.jr_7D92
     ld   a, $10                                   ; $7D92: $3E $10
     call ApplyVectorTowardsLink_trampoline        ; $7D94: $CD $AA $3B
 
@@ -347,7 +347,7 @@ jr_005_7DCC:
     ld   [hl], $08                                ; $7DD4: $36 $08
     jr   label_005_7DF0                           ; $7DD6: $18 $18
 
-.jr_7DD8:
+.jr_7DD8
     ld   [hl], $F8                                ; $7DD8: $36 $F8
     jr   label_005_7DF0                           ; $7DDA: $18 $14
 
@@ -379,7 +379,7 @@ label_005_7DF0:
 
     ld   [hl], $00                                ; $7E00: $36 $00
 
-.jr_7E02:
+.jr_7E02
     ld   hl, wEntitiesInertiaTable                ; $7E02: $21 $D0 $C3
     add  hl, bc                                   ; $7E05: $09
     ld   a, [hl]                                  ; $7E06: $7E
@@ -394,7 +394,7 @@ func_005_7E0A::
 
     ret                                           ; $7E12: $C9
 
-.jr_7E13:
+.jr_7E13
     call GetEntityPrivateCountdown1               ; $7E13: $CD $00 $0C
     cp   $02                                      ; $7E16: $FE $02
     jr   nc, jr_005_7E3A                          ; $7E18: $30 $20
@@ -414,7 +414,7 @@ func_005_7E0A::
     ld   [hl], $40                                ; $7E32: $36 $40
     ret                                           ; $7E34: $C9
 
-.jr_7E35:
+.jr_7E35
     call GetEntityPrivateCountdown1               ; $7E35: $CD $00 $0C
     ld   [hl], $30                                ; $7E38: $36 $30
 
@@ -444,7 +444,7 @@ jr_005_7E3A:
     call ApplyVectorTowardsLink_trampoline        ; $7E5D: $CD $AA $3B
     pop  bc                                       ; $7E60: $C1
 
-.jr_7E61:
+.jr_7E61
     ld   hl, wEntitiesHitboxFlagsTable            ; $7E61: $21 $50 $C3
     add  hl, bc                                   ; $7E64: $09
     ld   [hl], $00                                ; $7E65: $36 $00
@@ -511,7 +511,7 @@ jr_005_7EAE:
     and  $80                                      ; $7EBB: $E6 $80
     jr   nz, jr_005_7ECC                          ; $7EBD: $20 $0D
 
-.jr_7EBF:
+.jr_7EBF
     dec  e                                        ; $7EBF: $1D
     ld   a, e                                     ; $7EC0: $7B
     cp   $FF                                      ; $7EC1: $FE $FF
@@ -543,7 +543,7 @@ label_005_7ED7:
     ld   hl, wColorDungeonRoomStatus              ; $7EE4: $21 $E0 $DD
     jr   jr_005_7EF2                              ; $7EE7: $18 $09
 
-.jr_7EE9:
+.jr_7EE9
     cp   $1A                                      ; $7EE9: $FE $1A
     jr   nc, jr_005_7EF2                          ; $7EEB: $30 $05
 

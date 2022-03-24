@@ -342,7 +342,7 @@ func_023_7E95::
     ld   [de], a                                  ; $7EEC: $12
     ret                                           ; $7EED: $C9
 
-.jr_7EEE:
+.jr_7EEE
     ld   a, [hl+]                                 ; $7EEE: $2A
     ld   [de], a                                  ; $7EEF: $12
     inc  de                                       ; $7EF0: $13

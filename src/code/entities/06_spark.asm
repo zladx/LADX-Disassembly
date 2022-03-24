@@ -63,7 +63,7 @@ SparkCounterClockwiseEntityHandler::
     ld   [hl], $09                                ; $6681: $36 $09
     jr   jr_006_669D                              ; $6683: $18 $18
 
-.jr_6685:
+.jr_6685
     ld   hl, wEntitiesPrivateState1Table          ; $6685: $21 $B0 $C2
     add  hl, bc                                   ; $6688: $09
     inc  [hl]                                     ; $6689: $34

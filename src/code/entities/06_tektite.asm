@@ -17,7 +17,7 @@ TektiteEntityHandler::
     ld   de, TektiteSpriteVariants                ; $78C7: $11 $B7 $78
     call RenderActiveEntitySpritesPair            ; $78CA: $CD $C0 $3B
 
-.jr_78CD:
+.jr_78CD
     call ReturnIfNonInteractive_06                ; $78CD: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $78D0: $CD $F7 $64
     call label_3B39                               ; $78D3: $CD $39 $3B
@@ -31,14 +31,14 @@ TektiteEntityHandler::
 
     call func_006_7979                            ; $78E5: $CD $79 $79
 
-.jr_78E8:
+.jr_78E8
     ld   a, [hl]                                  ; $78E8: $7E
     and  $0C                                      ; $78E9: $E6 $0C
     jr   z, .jr_78F0                              ; $78EB: $28 $03
 
     call func_006_797E                            ; $78ED: $CD $7E $79
 
-.jr_78F0:
+.jr_78F0
     ldh  a, [hActiveEntityState]                  ; $78F0: $F0 $F0
     and  a                                        ; $78F2: $A7
     jr   nz, jr_006_7921                          ; $78F3: $20 $2C
@@ -63,7 +63,7 @@ TektiteEntityHandler::
     ld   a, $01                                   ; $7913: $3E $01
     jp   SetEntitySpriteVariant                   ; $7915: $C3 $0C $3B
 
-.jr_7918:
+.jr_7918
     call AddEntityZSpeedToPos_06                  ; $7918: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $791B: $21 $20 $C3
     add  hl, bc                                   ; $791E: $09
@@ -117,7 +117,7 @@ jr_006_7921:
     ld   a, $14                                   ; $796B: $3E $14
     call ApplyVectorTowardsLink_trampoline        ; $796D: $CD $AA $3B
 
-.jr_7970:
+.jr_7970
     ld   hl, wEntitiesStateTable                  ; $7970: $21 $90 $C2
     add  hl, bc                                   ; $7973: $09
     xor  a                                        ; $7974: $AF

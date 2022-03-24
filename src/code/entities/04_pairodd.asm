@@ -140,7 +140,7 @@ PairoddState1Handler::
     ld   [hl], a                                  ; $5EA2: $77
     ret                                           ; $5EA3: $C9
 
-.jr_5EA4:
+.jr_5EA4
     rra                                           ; $5EA4: $1F
     rra                                           ; $5EA5: $1F
     rra                                           ; $5EA6: $1F

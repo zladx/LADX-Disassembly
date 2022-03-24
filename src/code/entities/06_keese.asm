@@ -63,7 +63,7 @@ KeeseRestingHandler::
     add  hl, de                                   ; $6771: $19
     ld   a, [hl]                                  ; $6772: $7E
 
-.jr_6773:
+.jr_6773
     ld   hl, wEntitiesPrivateState1Table          ; $6773: $21 $B0 $C2
     add  hl, bc                                   ; $6776: $09
     ld   [hl], a                                  ; $6777: $77
@@ -89,7 +89,7 @@ KeeseFlyingHandler::
     ld   [hl], b                                  ; $679F: $70
     jr   label_006_67E6                           ; $67A0: $18 $44
 
-.jr_67A2:
+.jr_67A2
     ld   hl, wEntitiesPrivateState3Table          ; $67A2: $21 $D0 $C2
     add  hl, bc                                   ; $67A5: $09
     inc  [hl]                                     ; $67A6: $34
@@ -144,5 +144,5 @@ label_006_67E6:
     rra                                           ; $67EF: $1F
     and  $01                                      ; $67F0: $E6 $01
 
-.jr_67F2:
+.jr_67F2
     jp   SetEntitySpriteVariant                   ; $67F2: $C3 $0C $3B

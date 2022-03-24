@@ -53,7 +53,7 @@ label_006_7E9D:
     ld   [hl], a                                  ; $7EB8: $77
     jr   jr_006_7EC3                              ; $7EB9: $18 $08
 
-.jr_7EBB:
+.jr_7EBB
     ld   hl, wEntitiesSpeedXTable                 ; $7EBB: $21 $40 $C2
     add  hl, bc                                   ; $7EBE: $09
     ld   a, [hl]                                  ; $7EBF: $7E
@@ -71,7 +71,7 @@ jr_006_7EC3:
     and  $3F                                      ; $7ECE: $E6 $3F
     jr   nz, jr_006_7EFF                          ; $7ED0: $20 $2D
 
-.jr_7ED2:
+.jr_7ED2
     xor  a                                        ; $7ED2: $AF
     ld   hl, wEntitiesSpeedYTable                 ; $7ED3: $21 $50 $C2
     add  hl, bc                                   ; $7ED6: $09

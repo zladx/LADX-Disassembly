@@ -23,7 +23,7 @@ StalfosAggressiveEntityHandler::
     ld   a, $06                                   ; $4AC9: $3E $06
     jp   func_036_4BE8_trampoline                 ; $4ACB: $C3 $8F $0A
 
-.jr_4ACE:
+.jr_4ACE
     ldh  a, [hActiveEntityState]                  ; $4ACE: $F0 $F0
     JP_TABLE                                      ; $4AD0
 ._00 dw StalfosAggressiveState0Handler
@@ -46,7 +46,7 @@ StalfosAggressiveState1Handler::
     ld   a, $08                                   ; $4AE7: $3E $08
     call ApplyVectorTowardsLink_trampoline        ; $4AE9: $CD $AA $3B
 
-.jr_4AEC:
+.jr_4AEC
     call func_006_6594                            ; $4AEC: $CD $94 $65
     add  $1C                                      ; $4AEF: $C6 $1C
     cp   $38                                      ; $4AF1: $FE $38
@@ -64,7 +64,7 @@ StalfosAggressiveState1Handler::
     call ApplyVectorTowardsLink_trampoline        ; $4B06: $CD $AA $3B
     call IncrementEntityState                     ; $4B09: $CD $12 $3B
 
-.jr_4B0C:
+.jr_4B0C
     call UpdateEntityPosWithSpeed_06              ; $4B0C: $CD $41 $65
     call label_3B23                               ; $4B0F: $CD $23 $3B
     ldh  a, [hFrameCounter]                       ; $4B12: $F0 $E7
@@ -91,7 +91,7 @@ StalfosAggressiveState2Handler::
     call ClearEntitySpeed                         ; $4B36: $CD $7F $3D
     call IncrementEntityState                     ; $4B39: $CD $12 $3B
 
-.jr_4B3C:
+.jr_4B3C
     ld   a, $02                                   ; $4B3C: $3E $02
     jp   SetEntitySpriteVariant                   ; $4B3E: $C3 $0C $3B
 
@@ -109,7 +109,7 @@ StalfosAggressiveState3Handler::
     and  $80                                      ; $4B50: $E6 $80
     ret  z                                        ; $4B52: $C8
 
-.jr_4B53:
+.jr_4B53
     ld   [hl], b                                  ; $4B53: $70
     call GetEntityTransitionCountdown             ; $4B54: $CD $05 $0C
     ld   [hl], $20                                ; $4B57: $36 $20

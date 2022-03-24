@@ -73,7 +73,7 @@ YipYipEntityHandler::
 
     inc  e                                        ; $5A09: $1C
 
-.jr_5A0A:
+.jr_5A0A
     ld   a, e                                     ; $5A0A: $7B
     ldh  [hActiveEntitySpriteVariant], a          ; $5A0B: $E0 $F1
 
@@ -88,7 +88,7 @@ jr_006_5A0D:
     add  $02                                      ; $5A17: $C6 $02
     ldh  [hActiveEntitySpriteVariant], a          ; $5A19: $E0 $F1
 
-.jr_5A1B:
+.jr_5A1B
     ld   de, YipYip1SpriteVariants                ; $5A1B: $11 $A8 $59
     ld   hl, wEntitiesPrivateState1Table          ; $5A1E: $21 $B0 $C2
     add  hl, bc                                   ; $5A21: $09
@@ -104,7 +104,7 @@ jr_006_5A0D:
     cp   TRADING_ITEM_DOG_FOOD                    ; $5A2F: $FE $03
     jr   c, jr_006_5A36                           ; $5A31: $38 $03
 
-.jr_5A33:
+.jr_5A33
     ld   de, YipYip2SpriteVariants                ; $5A33: $11 $C8 $59
 
 jr_006_5A36:
@@ -116,7 +116,7 @@ jr_006_5A36:
     add  $04                                      ; $5A3F: $C6 $04
     ldh  [hActiveEntitySpriteVariant], a          ; $5A41: $E0 $F1
 
-.jr_5A43:
+.jr_5A43
     call RenderActiveEntitySpritesPair            ; $5A43: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $5A46: $CD $C6 $64
     call DecrementEntityIgnoreHitsCountdown       ; $5A49: $CD $56 $0C
@@ -138,7 +138,7 @@ jr_006_5A36:
     add  hl, bc                                   ; $5A65: $09
     ld   [hl], a                                  ; $5A66: $77
 
-.jr_5A67:
+.jr_5A67
     ldh  a, [hActiveEntityState]                  ; $5A67: $F0 $F0
     cp   $02                                      ; $5A69: $FE $02
     jr   nc, jr_006_5A98                          ; $5A6B: $30 $2B
@@ -160,7 +160,7 @@ jr_006_5A36:
     ld   [hl], $02                                ; $5A86: $36 $02
     ld   e, $81                                   ; $5A88: $1E $81
 
-.jr_5A8A:
+.jr_5A8A
     ld   a, e                                     ; $5A8A: $7B
     call OpenDialogInTable1                       ; $5A8B: $CD $73 $23
     jp   func_006_5ACC                            ; $5A8E: $C3 $CC $5A
@@ -195,7 +195,7 @@ YipYipState2Handler::
     call func_006_5ACC                            ; $5ABD: $CD $CC $5A
     jp   IncrementEntityState                     ; $5AC0: $C3 $12 $3B
 
-.jr_5AC3:
+.jr_5AC3
     call IncrementEntityState                     ; $5AC3: $CD $12 $3B
     ld   [hl], b                                  ; $5AC6: $70
     call_open_dialog $184                         ; $5AC7
@@ -259,7 +259,7 @@ YipYipState0Handler::
     ld   [hl], a                                  ; $5B23: $77
     call IncrementEntityState                     ; $5B24: $CD $12 $3B
 
-.jr_5B27:
+.jr_5B27
     jp   label_006_5B4C                           ; $5B27: $C3 $4C $5B
 
 YipYipState1Handler::
@@ -277,7 +277,7 @@ YipYipState1Handler::
     ld   [hl], b                                  ; $5B3F: $70
     ret                                           ; $5B40: $C9
 
-.jr_5B41:
+.jr_5B41
     ld   hl, wEntitiesSpeedZTable                 ; $5B41: $21 $20 $C3
     add  hl, bc                                   ; $5B44: $09
     ld   [hl], $08                                ; $5B45: $36 $08

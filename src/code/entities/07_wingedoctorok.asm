@@ -50,7 +50,7 @@ WingedOctorokEntityHandler::
     call GetEntityTransitionCountdown             ; $566A: $CD $05 $0C
     ld   [hl], $40                                ; $566D: $36 $40
 
-.jr_566F:
+.jr_566F
     call ApplyRecoilIfNeeded_07                   ; $566F: $CD $C3 $7D
     call UpdateEntityPosWithSpeed_07              ; $5672: $CD $0A $7E
     call AddEntityZSpeedToPos_07                  ; $5675: $CD $43 $7E
@@ -72,7 +72,7 @@ WingedOctorokEntityHandler::
     add  hl, bc                                   ; $5691: $09
     ld   [hl], b                                  ; $5692: $70
 
-.jr_5693:
+.jr_5693
     call label_3B23                               ; $5693: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $5696: $F0 $F0
     cp   $02                                      ; $5698: $FE $02
@@ -96,7 +96,7 @@ WingedOctorokEntityHandler::
 
     call func_007_57B0                            ; $56B4: $CD $B0 $57
 
-.jr_56B7:
+.jr_56B7
     call ClearEntitySpeed                         ; $56B7: $CD $7F $3D
     jp   label_007_5721                           ; $56BA: $C3 $21 $57
 
@@ -120,7 +120,7 @@ jr_007_56BD:
     call func_007_7E7D                            ; $56D8: $CD $7D $7E
     jr   jr_007_56E0                              ; $56DB: $18 $03
 
-.jr_56DD:
+.jr_56DD
     call GetRandomByte                            ; $56DD: $CD $0D $28
 
 jr_007_56E0:
@@ -153,7 +153,7 @@ jr_007_56FF:
     call GetEntityTransitionCountdown             ; $5708: $CD $05 $0C
     jr   nz, jr_007_571E                          ; $570B: $20 $11
 
-.jr_570D:
+.jr_570D
     call GetRandomByte                            ; $570D: $CD $0D $28
     and  $0F                                      ; $5710: $E6 $0F
     or   $10                                      ; $5712: $F6 $10
@@ -193,7 +193,7 @@ label_007_5721:
 
     jr   jr_007_5777                              ; $5748: $18 $2D
 
-.jr_574A:
+.jr_574A
     ld   a, [wAButtonSlot]                        ; $574A: $FA $01 $DB
     cp   INVENTORY_SWORD                          ; $574D: $FE $01
     jr   nz, jr_007_5777                          ; $574F: $20 $26

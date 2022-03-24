@@ -26,7 +26,7 @@ ArmosStatueEntityHandler::
 
     call CopyLinkFinalPositionToPosition          ; $746F: $CD $BE $0C
 
-.jr_7472:
+.jr_7472
     call UpdateEntityPosWithSpeed_06              ; $7472: $CD $41 $65
     call label_3B23                               ; $7475: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $7478: $F0 $F0
@@ -66,14 +66,14 @@ ArmosStatueState1Handler::
     res  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $74AD: $CB $B6
     jp   ClearEntitySpeed                         ; $74AF: $C3 $7F $3D
 
-.jr_74B2:
+.jr_74B2
     ld   e, $08                                   ; $74B2: $1E $08
     and  $04                                      ; $74B4: $E6 $04
     jr   z, .jr_74BA                              ; $74B6: $28 $02
 
     ld   e, $F8                                   ; $74B8: $1E $F8
 
-.jr_74BA:
+.jr_74BA
     ld   hl, wEntitiesSpeedXTable                 ; $74BA: $21 $40 $C2
     add  hl, bc                                   ; $74BD: $09
     ld   [hl], e                                  ; $74BE: $73
@@ -100,7 +100,7 @@ ArmosStatueState2Handler::
     add  hl, de                                   ; $74DE: $19
     ld   a, [hl]                                  ; $74DF: $7E
 
-.jr_74E0:
+.jr_74E0
     ld   hl, wEntitiesSpeedXTable                 ; $74E0: $21 $40 $C2
     add  hl, bc                                   ; $74E3: $09
     ld   [hl], a                                  ; $74E4: $77

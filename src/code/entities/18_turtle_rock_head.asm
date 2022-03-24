@@ -29,7 +29,7 @@ TurtleRockHeadEntityHandler::
 
     ret                                           ; $732F: $C9
 
-.jr_7330:
+.jr_7330
     ld   hl, wEntitiesFlashCountdownTable         ; $7330: $21 $20 $C4
     add  hl, bc                                   ; $7333: $09
     ld   a, [hl]                                  ; $7334: $7E
@@ -39,7 +39,7 @@ TurtleRockHeadEntityHandler::
     ld   a, $07                                   ; $7338: $3E $07
     ldh  [hActiveEntitySpriteVariant], a          ; $733A: $E0 $F1
 
-.jr_733C:
+.jr_733C
     call func_018_766A                            ; $733C: $CD $6A $76
     ldh  a, [hActiveEntityState]                  ; $733F: $F0 $F0
     and  a                                        ; $7341: $A7
@@ -63,7 +63,7 @@ TurtleRockHeadEntityHandler::
     ld   [hl], $10                                ; $7360: $36 $10
     ret                                           ; $7362: $C9
 
-.jr_7363:
+.jr_7363
     ldh  a, [hActiveEntityStatus]                 ; $7363: $F0 $EA
     cp   $05                                      ; $7365: $FE $05
     jr   z, jr_018_737E                           ; $7367: $28 $15
@@ -94,7 +94,7 @@ jr_018_737E:
     call func_018_7D36                            ; $738D: $CD $36 $7D
     jr   jr_018_7395                              ; $7390: $18 $03
 
-.jr_7392:
+.jr_7392
     call label_3B44                               ; $7392: $CD $44 $3B
 
 jr_018_7395:
@@ -142,14 +142,14 @@ TurtleRockHeadState2Handler::
     ld   [hl], $FF                                ; $73D9: $36 $FF
     jp   IncrementEntityState                     ; $73DB: $C3 $12 $3B
 
-.jr_73DE:
+.jr_73DE
     ld   e, $08                                   ; $73DE: $1E $08
     and  $04                                      ; $73E0: $E6 $04
     jr   z, .jr_73E6                              ; $73E2: $28 $02
 
     ld   e, $F8                                   ; $73E4: $1E $F8
 
-.jr_73E6:
+.jr_73E6
     ld   hl, wEntitiesSpeedXTable                 ; $73E6: $21 $40 $C2
     add  hl, bc                                   ; $73E9: $09
     ld   [hl], e                                  ; $73EA: $73
@@ -177,7 +177,7 @@ TurtleRockHeadState3Handler::
     ld   [hl], $80                                ; $7411: $36 $80
     jp   IncrementEntityState                     ; $7413: $C3 $12 $3B
 
-.jr_7416:
+.jr_7416
     and  $1F                                      ; $7416: $E6 $1F
     jr   nz, ret_018_7479                         ; $7418: $20 $5F
 
@@ -232,7 +232,7 @@ TurtleRockHeadState3Handler::
     ld   [hl], a                                  ; $746C: $77
     pop  bc                                       ; $746D: $C1
 
-.jr_746E:
+.jr_746E
     ld   hl, wEntitiesSpriteVariantTable          ; $746E: $21 $B0 $C3
     add  hl, bc                                   ; $7471: $09
     ld   a, [hl]                                  ; $7472: $7E
@@ -252,7 +252,7 @@ TurtleRockHeadState4Handler::
     ld   [hl], $80                                ; $747F: $36 $80
     jp   IncrementEntityState                     ; $7481: $C3 $12 $3B
 
-.jr_7484:
+.jr_7484
     ld   e, $07                                   ; $7484: $1E $07
     cp   $60                                      ; $7486: $FE $60
     jr   nc, .jr_7496                             ; $7488: $30 $0C
@@ -266,7 +266,7 @@ TurtleRockHeadState4Handler::
     cp   $20                                      ; $7492: $FE $20
     jr   c, jr_018_7497                           ; $7494: $38 $01
 
-.jr_7496:
+.jr_7496
     inc  e                                        ; $7496: $1C
 
 jr_018_7497:
@@ -291,7 +291,7 @@ TurtleRockHeadState5Handler::
     ld   [wD202], a                               ; $74B8: $EA $02 $D2
     ret                                           ; $74BB: $C9
 
-.jr_74BC:
+.jr_74BC
     ld   hl, wEntitiesSpeedYTable                 ; $74BC: $21 $50 $C2
     add  hl, bc                                   ; $74BF: $09
     ld   [hl], $04                                ; $74C0: $36 $04
@@ -318,7 +318,7 @@ TurtleRockHeadState7Handler::
     ld   [hl], a                                  ; $74E3: $77
     call IncrementEntityState                     ; $74E4: $CD $12 $3B
 
-.jr_74E7:
+.jr_74E7
     jp   AddEntitySpeedToPos_18                   ; $74E7: $C3 $6C $7E
 
 TurtleRockHeadState8Handler::
@@ -343,7 +343,7 @@ TurtleRockHeadState8Handler::
     ld   [hl], $20                                ; $7509: $36 $20
     ret                                           ; $750B: $C9
 
-.jr_750C:
+.jr_750C
     call GetEntityTransitionCountdown             ; $750C: $CD $05 $0C
     ld   [hl], $40                                ; $750F: $36 $40
     call IncrementEntityState                     ; $7511: $CD $12 $3B
@@ -376,7 +376,7 @@ TurtleRockHeadState9Handler::
     inc  a                                        ; $7534: $3C
     ld   [hl], a                                  ; $7535: $77
 
-.jr_7536:
+.jr_7536
     jp   IncrementEntityState                     ; $7536: $C3 $12 $3B
 
 TurtleRockHeadStateAHandler::
@@ -389,7 +389,7 @@ TurtleRockHeadStateAHandler::
     call GetEntityTransitionCountdown             ; $7541: $CD $05 $0C
     jr   nz, jr_018_7549                          ; $7544: $20 $03
 
-.jr_7546:
+.jr_7546
     call IncrementEntityState                     ; $7546: $CD $12 $3B
 
 jr_018_7549:
@@ -425,7 +425,7 @@ TurtleRockHeadStateBHandler::
     call GetEntityTransitionCountdown             ; $7580: $CD $05 $0C
     ld   [hl], $20                                ; $7583: $36 $20
 
-.jr_7585:
+.jr_7585
     pop  af                                       ; $7585: $F1
     ldh  [hLinkPositionY], a                      ; $7586: $E0 $99
     pop  af                                       ; $7588: $F1
@@ -479,7 +479,7 @@ func_018_766A::
     cp   $05                                      ; $768C: $FE $05
     jp   c, label_018_7726                        ; $768E: $DA $26 $77
 
-.jr_7691:
+.jr_7691
     ld   hl, wEntitiesPrivateState4Table          ; $7691: $21 $40 $C4
     add  hl, bc                                   ; $7694: $09
     ld   a, [hl]                                  ; $7695: $7E
@@ -546,7 +546,7 @@ jr_018_76C9:
 
     ld   e, $E0                                   ; $76FC: $1E $E0
 
-.jr_76FE:
+.jr_76FE
     ld   a, e                                     ; $76FE: $7B
     ldh  [hLinkSpeedX], a                         ; $76FF: $E0 $9A
     xor  a                                        ; $7701: $AF

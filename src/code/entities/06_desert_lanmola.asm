@@ -106,7 +106,7 @@ func_006_564B::
     ldh  a, [hActiveEntityVisualPosY]             ; $5686: $F0 $EC
     jr   jr_006_56BB                              ; $5688: $18 $31
 
-.jr_568A:
+.jr_568A
     and  $1F                                      ; $568A: $E6 $1F
     jr   nz, ret_006_56C6                         ; $568C: $20 $38
 
@@ -239,7 +239,7 @@ jr_006_5726:
     add  hl, de                                   ; $5752: $19
     ld   [hl], a                                  ; $5753: $77
 
-.jr_5754:
+.jr_5754
     ldh  a, [hActiveEntityState]                  ; $5754: $F0 $F0
     JP_TABLE                                      ; $5756
 ._00 dw func_006_5773                             ; $5757
@@ -280,10 +280,10 @@ func_006_5773::
     ld   hl, wEntitiesPosYTable                   ; $5798: $21 $10 $C2
     add  hl, bc                                   ; $579B: $09
 
-.jr_579C:
+.jr_579C
     ld   [hl], a                                  ; $579C: $77
 
-.jr_579D:
+.jr_579D
     ld   hl, wEntitiesPosZTable                   ; $579D: $21 $10 $C3
     add  hl, bc                                   ; $57A0: $09
     ld   [hl], b                                  ; $57A1: $70
@@ -298,7 +298,7 @@ func_006_57A8::
     ldh  a, [hLinkPositionX]                      ; $57AF: $F0 $98
     push af                                       ; $57B1: $F5
 
-.jr_57B2:
+.jr_57B2
     ldh  a, [hLinkPositionY]                      ; $57B2: $F0 $99
     push af                                       ; $57B4: $F5
     ld   a, $58                                   ; $57B5: $3E $58
@@ -345,7 +345,7 @@ func_006_57ED::
     ld   [hl], $20                                ; $57FE: $36 $20
     call IncrementEntityState                     ; $5800: $CD $12 $3B
 
-.jr_5803:
+.jr_5803
     call UpdateEntityPosWithSpeed_06              ; $5803: $CD $41 $65
     call AddEntityZSpeedToPos_06                  ; $5806: $CD $7A $65
     jp   label_3B39                               ; $5809: $C3 $39 $3B
@@ -357,7 +357,7 @@ func_006_580C::
     ld   [hl], $80                                ; $5811: $36 $80
     call IncrementEntityState                     ; $5813: $CD $12 $3B
 
-.jr_5816:
+.jr_5816
     ld   hl, wEntitiesPrivateState1Table          ; $5816: $21 $B0 $C2
     add  hl, bc                                   ; $5819: $09
     ld   a, [hl]                                  ; $581A: $7E
@@ -374,7 +374,7 @@ func_006_580C::
     inc  [hl]                                     ; $5829: $34
     inc  [hl]                                     ; $582A: $34
 
-.jr_582B:
+.jr_582B
     dec  [hl]                                     ; $582B: $35
 
 jr_006_582C:
@@ -391,7 +391,7 @@ func_006_5835::
     ld   [hl], b                                  ; $583F: $70
     ret                                           ; $5840: $C9
 
-.jr_5841:
+.jr_5841
     cp   $78                                      ; $5841: $FE $78
     jr   nz, .jr_5858                             ; $5843: $20 $13
 
@@ -404,7 +404,7 @@ func_006_5835::
     ld   a, $23                                   ; $5854: $3E $23
     ldh  [hNoiseSfx], a                           ; $5856: $E0 $F4
 
-.jr_5858:
+.jr_5858
     ld   hl, wEntitiesSpeedZTable                 ; $5858: $21 $20 $C3
     add  hl, bc                                   ; $585B: $09
     ld   a, [hl]                                  ; $585C: $7E
@@ -414,7 +414,7 @@ func_006_5835::
 
     dec  [hl]                                     ; $5863: $35
 
-.jr_5864:
+.jr_5864
     ldh  a, [hFrameCounter]                       ; $5864: $F0 $E7
     and  $07                                      ; $5866: $E6 $07
     jr   nz, jr_006_5888                          ; $5868: $20 $1E
@@ -431,7 +431,7 @@ func_006_5835::
     inc  [hl]                                     ; $5876: $34
     inc  [hl]                                     ; $5877: $34
 
-.jr_5878:
+.jr_5878
     dec  [hl]                                     ; $5878: $35
 
 jr_006_5879:
@@ -447,7 +447,7 @@ jr_006_5879:
     inc  [hl]                                     ; $5885: $34
     inc  [hl]                                     ; $5886: $34
 
-.jr_5887:
+.jr_5887
     dec  [hl]                                     ; $5887: $35
 
 jr_006_5888:
@@ -461,7 +461,7 @@ jr_006_5888:
 
     call label_3B39                               ; $5897: $CD $39 $3B
 
-.jr_589A:
+.jr_589A
     ld   a, $02                                   ; $589A: $3E $02
     jp   SetEntitySpriteVariant                   ; $589C: $C3 $0C $3B
 
@@ -508,7 +508,7 @@ func_006_58C9::
     ld   de, DesertLanmolaSpriteVariants          ; $58D2: $11 $9F $58
     call RenderActiveEntitySpritesPair            ; $58D5: $CD $C0 $3B
 
-.jr_58D8:
+.jr_58D8
     ld   hl, wEntitiesInertiaTable                ; $58D8: $21 $D0 $C3
     add  hl, bc                                   ; $58DB: $09
     ld   a, [hl]                                  ; $58DC: $7E
@@ -522,7 +522,7 @@ func_006_58C9::
     ld   a, $00                                   ; $58E9: $3E $00
     jr   jr_006_58F3                              ; $58EB: $18 $06
 
-.jr_58ED:
+.jr_58ED
     ld   a, $FF                                   ; $58ED: $3E $FF
     ldh  [hIndexOfObjectBelowLink], a             ; $58EF: $E0 $E9
     ld   a, $05                                   ; $58F1: $3E $05
@@ -566,7 +566,7 @@ jr_006_58F3:
     and  $01                                      ; $592A: $E6 $01
     add  $07                                      ; $592C: $C6 $07
 
-.jr_592E:
+.jr_592E
     ldh  [hActiveEntitySpriteVariant], a          ; $592E: $E0 $F1
     ld   de, DesertLanmolaSpriteVariants          ; $5930: $11 $9F $58
     call RenderActiveEntitySpritesPair            ; $5933: $CD $C0 $3B
@@ -579,7 +579,7 @@ jr_006_5936:
 
     ld   e, $01                                   ; $593E: $1E $01
 
-.jr_5940:
+.jr_5940
     ld   hl, hIndexOfObjectBelowLink              ; $5940: $21 $E9 $FF
     ldh  a, [hMultiPurposeG]                      ; $5943: $F0 $E8
     add  e                                        ; $5945: $83
@@ -599,7 +599,7 @@ func_006_594C::
     cpl                                           ; $5956: $2F
     inc  a                                        ; $5957: $3C
 
-.jr_5958:
+.jr_5958
     ld   e, a                                     ; $5958: $5F
     ld   hl, wEntitiesSpeedYTable                 ; $5959: $21 $50 $C2
     add  hl, bc                                   ; $595C: $09
@@ -610,7 +610,7 @@ func_006_594C::
     cpl                                           ; $5962: $2F
     inc  a                                        ; $5963: $3C
 
-.jr_5964:
+.jr_5964
     cp   e                                        ; $5964: $BB
     jr   nc, jr_006_5973                          ; $5965: $30 $0C
 
@@ -620,7 +620,7 @@ func_006_594C::
     ld   a, $01                                   ; $596B: $3E $01
     jr   jr_006_597D                              ; $596D: $18 $0E
 
-.jr_596F:
+.jr_596F
     ld   a, $00                                   ; $596F: $3E $00
     jr   jr_006_597D                              ; $5971: $18 $0A
 
@@ -631,7 +631,7 @@ jr_006_5973:
     ld   a, $02                                   ; $5977: $3E $02
     jr   jr_006_597D                              ; $5979: $18 $02
 
-.jr_597B:
+.jr_597B
     ld   a, $03                                   ; $597B: $3E $03
 
 jr_006_597D:
@@ -656,7 +656,7 @@ label_006_5988:
     add  hl, bc                                   ; $59A0: $09
     inc  [hl]                                     ; $59A1: $34
 
-.jr_59A2:
+.jr_59A2
     cp   $10                                      ; $59A2: $FE $10
     ret  nz                                       ; $59A4: $C0
 

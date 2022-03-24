@@ -28,7 +28,7 @@ TelephoneEntityHandler::
     and  $02                                      ; $6AA4: $E6 $02
     jp   nz, label_006_6BAD                       ; $6AA6: $C2 $AD $6B
 
-.jr_6AA9:
+.jr_6AA9
     ld   e, $41                                   ; $6AA9: $1E $41
     ld   a, [wIndoorBRoomStatus + $A9]            ; $6AAB: $FA $A9 $DA
     and  $20                                      ; $6AAE: $E6 $20
@@ -78,7 +78,7 @@ TelephoneEntityHandler::
     xor  a                                        ; $6B00: $AF
     ld   [hl], a                                  ; $6B01: $77
 
-.jr_6B02:
+.jr_6B02
     ld   e, $28                                   ; $6B02: $1E $28
     add  e                                        ; $6B04: $83
     ld   e, a                                     ; $6B05: $5F
@@ -115,7 +115,7 @@ jr_006_6B09:
     and  $40                                      ; $6B3B: $E6 $40
     jr   z, label_006_6BAD                        ; $6B3D: $28 $6E
 
-.jr_6B3F:
+.jr_6B3F
     ld   e, $4C                                   ; $6B3F: $1E $4C
     ld   a, [wHasInstrument5]                     ; $6B41: $FA $69 $DB
     and  $02                                      ; $6B44: $E6 $02
@@ -143,7 +143,7 @@ jr_006_6B09:
 
     ld   e, $41                                   ; $6B6C: $1E $41
 
-.jr_6B6E:
+.jr_6B6E
     ld   a, [wHasInstrument7]                     ; $6B6E: $FA $6B $DB
     and  $02                                      ; $6B71: $E6 $02
     jr   nz, .jr_6B7C                             ; $6B73: $20 $07
@@ -154,7 +154,7 @@ jr_006_6B09:
 
     jr   label_006_6BB3                           ; $6B7A: $18 $37
 
-.jr_6B7C:
+.jr_6B7C
     ld   e, $4F                                   ; $6B7C: $1E $4F
     ld   a, [wOverworldRoomStatus + $10]          ; $6B7E: $FA $10 $D8
     and  $30                                      ; $6B81: $E6 $30

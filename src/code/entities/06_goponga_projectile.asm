@@ -51,7 +51,7 @@ GopongaProjectileEntityHandler::
     add  $02                                      ; $63C9: $C6 $02
     jp   SetEntitySpriteVariant                   ; $63CB: $C3 $0C $3B
 
-.jr_63CE:
+.jr_63CE
 
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $63CE: $21 $10 $C4
     add  hl, bc                                   ; $63D1: $09
@@ -63,7 +63,7 @@ GopongaProjectileEntityHandler::
     ld   [hl], $10                                ; $63DA: $36 $10
     ret                                           ; $63DC: $C9
 
-.jr_63DD:
+.jr_63DD
     ld   [hl], b                                  ; $63DD: $70
     call ReturnIfNonInteractive_06                ; $63DE: $CD $C6 $64
     ldh  a, [hFrameCounter]                       ; $63E1: $F0 $E7

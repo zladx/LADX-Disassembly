@@ -37,7 +37,7 @@ PolsVoiceEntityHandler::
     ld   [hl], $13                                ; $73AA: $36 $13
     ret                                           ; $73AC: $C9
 
-.jr_73AD:
+.jr_73AD
     ld   de, PolsVoiceSpriteVariants              ; $73AD: $11 $73 $73
     call RenderActiveEntitySpritesPair            ; $73B0: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $73B3: $CD $C6 $64
@@ -86,7 +86,7 @@ func_006_73E0::
     call ApplyVectorTowardsLink_trampoline        ; $7404: $CD $AA $3B
     jr   jr_006_741F                              ; $7407: $18 $16
 
-.jr_7409:
+.jr_7409
     ld   e, a                                     ; $7409: $5F
     ld   d, b                                     ; $740A: $50
     ld   hl, Data_006_73D4                        ; $740B: $21 $D4 $73

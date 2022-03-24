@@ -42,7 +42,7 @@ BunnyCallingMarinEntityHandler::
     add  hl, bc                                   ; $52D5: $09
     ld   [hl], b                                  ; $52D6: $70
 
-.jr_52D7:
+.jr_52D7
     ldh  a, [hActiveEntityState]                  ; $52D7: $F0 $F0
     JP_TABLE                                      ; $52D9
 ._00 dw BunnyCallingMarinState0Handler
@@ -71,7 +71,7 @@ BunnyCallingMarinState0Handler::
     pop  bc                                       ; $5302: $C1
     ret                                           ; $5303: $C9
 
-.jr_5304:
+.jr_5304
     cp   $48                                      ; $5304: $FE $48
     ret  nz                                       ; $5306: $C0
 
@@ -121,14 +121,14 @@ BunnyCallingMarinState2Handler::
     call_open_dialog $1E5                         ; $5347
     jp   IncrementEntityState                     ; $534C: $C3 $12 $3B
 
-.jr_534F:
+.jr_534F
     ld   e, $02                                   ; $534F: $1E $02
     cp   $08                                      ; $5351: $FE $08
     jr   nc, .jr_5357                             ; $5353: $30 $02
 
     ld   e, $00                                   ; $5355: $1E $00
 
-.jr_5357:
+.jr_5357
     ld   a, e                                     ; $5357: $7B
     jp   func_018_59AE                            ; $5358: $C3 $AE $59
 
@@ -147,7 +147,7 @@ BunnyCallingMarinState3Handler::
 
     ld   e, $02                                   ; $536F: $1E $02
 
-.jr_5371:
+.jr_5371
     ld   a, e                                     ; $5371: $7B
     jp   func_018_59AE                            ; $5372: $C3 $AE $59
 
@@ -171,7 +171,7 @@ jr_018_5375:
     ld   [hl], $EC                                ; $5392: $36 $EC
     call AddEntitySpeedToPos_18                   ; $5394: $CD $6C $7E
 
-.jr_5397:
+.jr_5397
     ld   a, [wMarinEntityIndex]                   ; $5397: $FA $0F $C5
     ld   e, a                                     ; $539A: $5F
     ld   d, b                                     ; $539B: $50

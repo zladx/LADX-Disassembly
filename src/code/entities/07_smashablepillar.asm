@@ -25,7 +25,7 @@ SmashablePillarEntityHandler::
     ld   a, $01                                   ; $5DCB: $3E $01
     ld   [wDE00], a                               ; $5DCD: $EA $00 $DE
 
-.jr_5DD0:
+.jr_5DD0
     ld   hl, wEntitiesPrivateState1Table          ; $5DD0: $21 $B0 $C2
     add  hl, bc                                   ; $5DD3: $09
     ld   a, [hl]                                  ; $5DD4: $7E
@@ -49,7 +49,7 @@ SmashablePillarEntityHandler::
     cp   [hl]                                     ; $5DF1: $BE
     jp   nz, func_007_7EA4                        ; $5DF2: $C2 $A4 $7E
 
-.jr_5DF5:
+.jr_5DF5
     ldh  a, [hActiveEntitySpriteVariant]          ; $5DF5: $F0 $F1
     cp   $05                                      ; $5DF7: $FE $05
     jr   nc, jr_007_5E12                          ; $5DF9: $30 $17
@@ -101,7 +101,7 @@ func_007_5E36::
 
     ld   e, $02                                   ; $5E3C: $1E $02
 
-.jr_5E3E:
+.jr_5E3E
     ld   a, e                                     ; $5E3E: $7B
     ld   [wScreenShakeHorizontal], a              ; $5E3F: $EA $55 $C1
     ret                                           ; $5E42: $C9
@@ -128,7 +128,7 @@ func_007_5E43::
 
     call func_007_5F61                            ; $5E64: $CD $61 $5F
 
-.jr_5E67:
+.jr_5E67
     ldh  a, [hFrameCounter]                       ; $5E67: $F0 $E7
     and  $03                                      ; $5E69: $E6 $03
     jr   nz, ret_007_5EA6                         ; $5E6B: $20 $39
@@ -179,7 +179,7 @@ label_007_5EA7:
     ld   [hl], $20                                ; $5EBA: $36 $20
     jp   IncrementEntityState                     ; $5EBC: $C3 $12 $3B
 
-.jr_5EBF:
+.jr_5EBF
     call func_007_6E7F                            ; $5EBF: $CD $7F $6E
     jp   func_007_7EA4                            ; $5EC2: $C3 $A4 $7E
 
@@ -196,14 +196,14 @@ func_007_5EC5::
     ld   [wGameplaySubtype], a                    ; $5ED8: $EA $96 $DB
     jp   IncrementEntityState                     ; $5EDB: $C3 $12 $3B
 
-.jr_5EDE:
+.jr_5EDE
     ld   e, $00                                   ; $5EDE: $1E $00
     and  $04                                      ; $5EE0: $E6 $04
     jr   z, .jr_5EE6                              ; $5EE2: $28 $02
 
     ld   e, $02                                   ; $5EE4: $1E $02
 
-.jr_5EE6:
+.jr_5EE6
     ld   a, e                                     ; $5EE6: $7B
     ld   [wScreenShakeHorizontal], a              ; $5EE7: $EA $55 $C1
 
@@ -224,7 +224,7 @@ func_007_5EF2::
     set  2, [hl]                                  ; $5F01: $CB $D6
     jp   func_007_7EA4                            ; $5F03: $C3 $A4 $7E
 
-.jr_5F06:
+.jr_5F06
     jp   func_007_5EEA                            ; $5F06: $C3 $EA $5E
 
 Data_007_5F09::
@@ -238,7 +238,7 @@ func_007_5F11::
 
     jp   func_007_7EA4                            ; $5F1A: $C3 $A4 $7E
 
-.jr_5F1D:
+.jr_5F1D
     push af                                       ; $5F1D: $F5
     and  $07                                      ; $5F1E: $E6 $07
     ld   e, a                                     ; $5F20: $5F
@@ -257,7 +257,7 @@ func_007_5F11::
     call func_007_5F61                            ; $5F33: $CD $61 $5F
     xor  a                                        ; $5F36: $AF
 
-.jr_5F37:
+.jr_5F37
     cp   $40                                      ; $5F37: $FE $40
     jr   c, ret_007_5F44                          ; $5F39: $38 $09
 
@@ -342,7 +342,7 @@ label_007_5FAB:
     add  $08                                      ; $5FAD: $C6 $08
     ldh  [hActiveEntityVisualPosY], a             ; $5FAF: $E0 $EC
 
-.jr_5FB1:
+.jr_5FB1
     ld   de, Data_007_5F9B                        ; $5FB1: $11 $9B $5F
     call RenderActiveEntitySprite                 ; $5FB4: $CD $77 $3C
     call UpdateEntityPosWithSpeed_07              ; $5FB7: $CD $0A $7E
@@ -386,7 +386,7 @@ label_007_5FAB:
     ld   hl, Data_007_5FA7                        ; $5FF4: $21 $A7 $5F
     add  hl, de                                   ; $5FF7: $19
 
-.jr_5FF8:
+.jr_5FF8
     ld   a, [hl]                                  ; $5FF8: $7E
     call GetEntitySpeedYAddress                   ; $5FF9: $CD $05 $40
     ld   [hl], a                                  ; $5FFC: $77

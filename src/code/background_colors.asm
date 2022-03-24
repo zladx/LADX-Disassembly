@@ -94,14 +94,14 @@ LoadBGPalettes::
 
     cp   $01                                      ; $7418: $FE $01
     ret  nz                                       ; $741A: $C0
-.jr_741B:
+.jr_741B
 
     ld   a, [wDDD6]                               ; $741B: $FA $D6 $DD
     bit  7, a                                     ; $741E: $CB $7F
     jr   nz, .jr_7427                             ; $7420: $20 $05
     ld   hl, BGPalettePointersTableA              ; $7422: $21 $E1 $73
     jr   jr_024_742A                              ; $7425: $18 $03
-.jr_7427:
+.jr_7427
     ld   hl, BGPalettePointersTableB              ; $7427: $21 $ED $73
 jr_024_742A:
 
@@ -112,7 +112,7 @@ jr_024_742A:
     ld   a, $0B                                   ; $7431: $3E $0B
     ld   [wDDD7], a                               ; $7433: $EA $D7 $DD
 
-.jr_7436:
+.jr_7436
     push hl                                       ; $7436: $E5
     ld   a, [wDDD6]                               ; $7437: $FA $D6 $DD
     and  $3F                                      ; $743A: $E6 $3F

@@ -190,7 +190,7 @@ label_004_6D0F:
     pop  bc                                       ; $6D5A: $C1
     ret                                           ; $6D5B: $C9
 
-.jr_6D5C:
+.jr_6D5C
     ld   hl, wEntitiesSpeedXTable                 ; $6D5C: $21 $40 $C2
     add  hl, bc                                   ; $6D5F: $09
     ld   a, [hl]                                  ; $6D60: $7E

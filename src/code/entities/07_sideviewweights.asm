@@ -28,7 +28,7 @@ SideViewWeightsEntityHandler::
     ld   [hl], $F0                                ; $61F6: $36 $F0
     ld   e, $10                                   ; $61F8: $1E $10
 
-.jr_61FA:
+.jr_61FA
     ldh  a, [hFrameCounter]                       ; $61FA: $F0 $E7
     and  $01                                      ; $61FC: $E6 $01
     jr   nz, jr_007_620E                          ; $61FE: $20 $0E
@@ -44,7 +44,7 @@ SideViewWeightsEntityHandler::
     inc  [hl]                                     ; $620B: $34
     inc  [hl]                                     ; $620C: $34
 
-.jr_620D:
+.jr_620D
     dec  [hl]                                     ; $620D: $35
 
 jr_007_620E:
@@ -84,7 +84,7 @@ jr_007_620E:
     add  hl, de                                   ; $6243: $19
     ld   [hl], $00                                ; $6244: $36 $00
 
-.jr_6246:
+.jr_6246
     jr   jr_007_625F                              ; $6246: $18 $17
 
 jr_007_6248:
@@ -99,7 +99,7 @@ jr_007_6248:
     inc  [hl]                                     ; $6253: $34
     inc  [hl]                                     ; $6254: $34
 
-.jr_6255:
+.jr_6255
     dec  [hl]                                     ; $6255: $35
 
 jr_007_6256:
@@ -150,7 +150,7 @@ jr_007_625F:
     call func_91D                                 ; $629E: $CD $1D $09
     pop  bc                                       ; $62A1: $C1
 
-.jr_62A2:
+.jr_62A2
     ld   hl, wDrawCommand                         ; $62A2: $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ; $62A5: $FA $00 $D6
     ld   e, a                                     ; $62A8: $5F
@@ -200,7 +200,7 @@ jr_007_62D2:
     call func_91D                                 ; $62E8: $CD $1D $09
     pop  bc                                       ; $62EB: $C1
 
-.jr_62EC:
+.jr_62EC
     ld   hl, wDrawCommand                         ; $62EC: $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ; $62EF: $FA $00 $D6
     ld   e, a                                     ; $62F2: $5F
@@ -260,7 +260,7 @@ jr_007_6327:
     cp   [hl]                                     ; $633E: $BE
     jr   z, ret_007_6347                          ; $633F: $28 $06
 
-.jr_6341:
+.jr_6341
     inc  e                                        ; $6341: $1C
     ld   a, e                                     ; $6342: $7B
     cp   $10                                      ; $6343: $FE $10

@@ -64,7 +64,7 @@ MarinAtTalTalHeightsEntityHandler::
     and  $80                                      ; $5F16: $E6 $80
     jr   z, jr_018_5F20                           ; $5F18: $28 $06
 
-.jr_5F1A:
+.jr_5F1A
     ld   [hl], b                                  ; $5F1A: $70
     ld   hl, wEntitiesSpeedZTable                 ; $5F1B: $21 $20 $C3
     add  hl, bc                                   ; $5F1E: $09
@@ -115,7 +115,7 @@ func_018_5F5E::
     and  $80                                      ; $5F63: $E6 $80
     ret  z                                        ; $5F65: $C8
 
-.jr_5F66:
+.jr_5F66
     ldh  a, [hFrameCounter]                       ; $5F66: $F0 $E7
     and  $3F                                      ; $5F68: $E6 $3F
     jr   nz, ret_018_5F72                         ; $5F6A: $20 $06
@@ -170,7 +170,7 @@ MarinAtTalTalHeightsState3Handler::
     ld   [hl], a                                  ; $5FBD: $77
     ret                                           ; $5FBE: $C9
 
-.jr_5FBF:
+.jr_5FBF
     xor  a                                        ; $5FBF: $AF
     ld   [wLinkAttackStepAnimationCountdown], a   ; $5FC0: $EA $9B $C1
 
@@ -261,7 +261,7 @@ MarinAtTalTalHeightsStateAHandler::
 
     jp   IncrementEntityState                     ; $6061: $C3 $12 $3B
 
-.jr_6064:
+.jr_6064
     ld   hl, wEntitiesSpeedYTable                 ; $6064: $21 $50 $C2
     add  hl, bc                                   ; $6067: $09
     ld   [hl], $06                                ; $6068: $36 $06
@@ -299,7 +299,7 @@ MarinAtTalTalHeightsStateCHandler::
     ld   [hl], $02                                ; $60A0: $36 $02
     ret                                           ; $60A2: $C9
 
-.jr_60A3:
+.jr_60A3
     ld   hl, wEntitiesSpeedXTable                 ; $60A3: $21 $40 $C2
     add  hl, bc                                   ; $60A6: $09
     ld   [hl], $F4                                ; $60A7: $36 $F4
@@ -322,7 +322,7 @@ ENDC
     ldh  [hRoomStatus], a                         ; $60C2: $E0 $F8
     jp   ClearEntityStatusBank18                  ; $60C4: $C3 $08 $7F
 
-.jr_60C7:
+.jr_60C7
     call func_018_7EB2                            ; $60C7: $CD $B2 $7E
     ld   a, e                                     ; $60CA: $7B
     xor  $01                                      ; $60CB: $EE $01
@@ -420,7 +420,7 @@ TarinAtTalTalHeightsState2Handler::
 
     ld   [hl], $01                                ; $6161: $36 $01
 
-.jr_6163:
+.jr_6163
     call ReturnIfNonInteractive_18                ; $6163: $CD $E8 $7D
     ld   a, [wMarinEntityIndex]                   ; $6166: $FA $0F $C5
     ld   e, a                                     ; $6169: $5F

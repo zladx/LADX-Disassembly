@@ -20,7 +20,7 @@ MoblinEntityHandler::
     cp   $80                                      ; $5830: $FE $80
     jp   nz, UnloadEntityAndReturn                ; $5832: $C2 $8D $3F
 
-.jr_5835:
+.jr_5835
     ld   a, c                                     ; $5835: $79
     ld   [wD153], a                               ; $5836: $EA $53 $D1
     ld   de, Unknown009SpriteVariants             ; $5839: $11 $17 $59
@@ -34,7 +34,7 @@ AnimateRoamingEnemy::
     add  hl, bc                                   ; $5845: $09
     ld   a, [hl]                                  ; $5846: $7E
 
-.jr_5847:
+.jr_5847
     and  a                                        ; $5847: $A7
     jr   z, .jr_5858                              ; $5848: $28 $0E
 
@@ -46,7 +46,7 @@ AnimateRoamingEnemy::
     call GetEntityTransitionCountdown             ; $5853: $CD $05 $0C
     ld   [hl], $40                                ; $5856: $36 $40
 
-.jr_5858:
+.jr_5858
     call ApplyRecoilIfNeeded_03                   ; $5858: $CD $A9 $7F
     call func_003_6E28                            ; $585B: $CD $28 $6E
     ldh  a, [hActiveEntityState]                  ; $585E: $F0 $F0
@@ -78,7 +78,7 @@ AnimateRoamingEnemy::
 
     call SpawnMoblinArrow                         ; $5886: $CD $47 $59
 
-.jr_5889:
+.jr_5889
     call func_003_7893                            ; $5889: $CD $93 $78
     ret                                           ; $588C: $C9
 
@@ -109,7 +109,7 @@ jr_003_5896:
     call func_003_7EFE                            ; $58B1: $CD $FE $7E
     jr   jr_003_58B9                              ; $58B4: $18 $03
 
-.jr_58B6:
+.jr_58B6
     call GetRandomByte                            ; $58B6: $CD $0D $28
 
 jr_003_58B9:
@@ -143,7 +143,7 @@ jr_003_58D7:
     call GetEntityTransitionCountdown             ; $58E0: $CD $05 $0C
     jr   nz, jr_003_58F6                          ; $58E3: $20 $11
 
-.jr_58E5:
+.jr_58E5
     call GetRandomByte                            ; $58E5: $CD $0D $28
     and  $0F                                      ; $58E8: $E6 $0F
     or   $10                                      ; $58EA: $F6 $10
@@ -245,7 +245,7 @@ SpawnMoblinArrow::
     add  hl, de                                   ; $5972: $19
     ld   [hl], a                                  ; $5973: $77
 
-.jr_5974:
+.jr_5974
     ld   hl, Data_003_5943                        ; $5974: $21 $43 $59
     add  hl, bc                                   ; $5977: $09
     ld   a, [hl]                                  ; $5978: $7E
@@ -316,7 +316,7 @@ SpawnOctorokRock::
     pop  bc                                       ; $59D4: $C1
     and  a                                        ; $59D5: $A7
 
-.jr_59D6:
+.jr_59D6
 IF !__PATCH_0__
     ret                                           ; $59D6: $C9
 ENDC

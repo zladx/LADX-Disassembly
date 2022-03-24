@@ -32,7 +32,7 @@ WalrusEntityHandler::
     add  hl, bc                                   ; $552D: $09
     ld   [hl], b                                  ; $552E: $70
 
-.jr_552F:
+.jr_552F
     call func_018_7D36                            ; $552F: $CD $36 $7D
     ldh  a, [hActiveEntityState]                  ; $5532: $F0 $F0
     JP_TABLE                                      ; $5534
@@ -78,7 +78,7 @@ WalrusState0Handler::
     add  hl, de                                   ; $5579: $19
     inc  [hl]                                     ; $557A: $34
 
-.jr_557B:
+.jr_557B
     ld   a, [wIsMarinFollowingLink]               ; $557B: $FA $73 $DB
     and  a                                        ; $557E: $A7
     jr   nz, .jr_558A                             ; $557F: $20 $09
@@ -88,7 +88,7 @@ WalrusState0Handler::
 
     jp_open_dialog $1E0                           ; $5585
 
-.jr_558A:
+.jr_558A
     call func_018_7EB2                            ; $558A: $CD $B2 $7E
     add  $13                                      ; $558D: $C6 $13
     cp   $26                                      ; $558F: $FE $26
@@ -135,7 +135,7 @@ WalrusWakingUpHandler::
     ld   [hl], $50                                ; $55D5: $36 $50
     ret                                           ; $55D7: $C9
 
-.jr_55D8:
+.jr_55D8
     ld   [hl], $08                                ; $55D8: $36 $08
     jp_open_dialog $1E4                           ; $55DA
 
@@ -150,7 +150,7 @@ WalrusState2Handler::
     ld   [hl], $C0                                ; $55ED: $36 $C0
     jp   IncrementEntityState                     ; $55EF: $C3 $12 $3B
 
-.jr_55F2:
+.jr_55F2
     ld   e, $00                                   ; $55F2: $1E $00
     cp   $40                                      ; $55F4: $FE $40
     jr   nc, jr_018_5612                          ; $55F6: $30 $1A
@@ -172,7 +172,7 @@ WalrusState2Handler::
     cp   $22                                      ; $560C: $FE $22
     jr   z, jr_018_5612                           ; $560E: $28 $02
 
-.jr_5610:
+.jr_5610
     ld   e, $01                                   ; $5610: $1E $01
 
 jr_018_5612:
@@ -204,7 +204,7 @@ WalrusState3Handler::
     call SetEntitySpriteVariant                   ; $5692: $CD $0C $3B
     jp   IncrementEntityState                     ; $5695: $C3 $12 $3B
 
-.jr_5698:
+.jr_5698
     ld   hl, wEntitiesPrivateState3Table          ; $5698: $21 $D0 $C2
     add  hl, bc                                   ; $569B: $09
     ld   e, [hl]                                  ; $569C: $5E
@@ -227,7 +227,7 @@ WalrusState3Handler::
     ld   a, JINGLE_JUMP                           ; $56B4: $3E $24
     ldh  [hJingle], a                             ; $56B6: $E0 $F2
 
-.jr_56B8:
+.jr_56B8
     ld   hl, Data_018_5616                        ; $56B8: $21 $16 $56
     add  hl, de                                   ; $56BB: $19
     ld   a, [hl]                                  ; $56BC: $7E
@@ -241,7 +241,7 @@ WalrusState3Handler::
     ld   hl, hJingle                              ; $56C7: $21 $F2 $FF
     ld   [hl], JINGLE_WALRUS                      ; $56CA: $36 $27
 
-.jr_56CC:
+.jr_56CC
     ld   a, $02                                   ; $56CC: $3E $02
 
 jr_018_56CE:
@@ -262,7 +262,7 @@ jr_018_56CE:
 
     inc  e                                        ; $56E5: $1C
 
-.jr_56E6:
+.jr_56E6
     ld   a, e                                     ; $56E6: $7B
     jp   SetEntitySpriteVariant                   ; $56E7: $C3 $0C $3B
 
@@ -352,7 +352,7 @@ WalrusDisappearHandler::
     pop  bc                                       ; $5776: $C1
     ret                                           ; $5777: $C9
 
-.jr_5778:
+.jr_5778
     ld   a, $05                                   ; $5778: $3E $05
     jp   SetEntitySpriteVariant                   ; $577A: $C3 $0C $3B
 
@@ -437,7 +437,7 @@ label_018_589A:
     call func_018_596B                            ; $589A: $CD $6B $59
     ld   a, [wRoomTransitionState]                ; $589D: $FA $24 $C1
 
-.jr_58A0:
+.jr_58A0
     and  a                                        ; $58A0: $A7
     ret  nz                                       ; $58A1: $C0
 
@@ -484,14 +484,14 @@ func_018_58DD::
     ld   [hl], $C8                                ; $58E2: $36 $C8
     jp   IncrementEntityState                     ; $58E4: $C3 $12 $3B
 
-.jr_58E7:
+.jr_58E7
     cp   $10                                      ; $58E7: $FE $10
     ld   a, $01                                   ; $58E9: $3E $01
     jr   c, .jr_58EE                              ; $58EB: $38 $01
 
     inc  a                                        ; $58ED: $3C
 
-.jr_58EE:
+.jr_58EE
     jp   SetEntitySpriteVariant                   ; $58EE: $C3 $0C $3B
 
 func_018_58F1::
@@ -501,11 +501,11 @@ func_018_58F1::
     call func_018_572E                            ; $58F6: $CD $2E $57
     jp   ClearEntityStatusBank18                  ; $58F9: $C3 $08 $7F
 
-.jr_58FC:
+.jr_58FC
     cp   $B0                                      ; $58FC: $FE $B0
     jr   nz, .jr_5900                             ; $58FE: $20 $00
 
-.jr_5900:
+.jr_5900
     call GetEntityTransitionCountdown             ; $5900: $CD $05 $0C
     cp   $80                                      ; $5903: $FE $80
     jr   nz, .jr_590D                             ; $5905: $20 $06
@@ -513,7 +513,7 @@ func_018_58F1::
     dec  [hl]                                     ; $5907: $35
     call_open_dialog $1E6                         ; $5908
 
-.jr_590D:
+.jr_590D
     call GetEntityTransitionCountdown             ; $590D: $CD $05 $0C
     ld   d, $00                                   ; $5910: $16 $00
     cp   $10                                      ; $5912: $FE $10
@@ -526,7 +526,7 @@ func_018_58F1::
 
     inc  d                                        ; $591D: $14
 
-.jr_591E:
+.jr_591E
     ld   hl, wEntitiesPrivateState5Table          ; $591E: $21 $90 $C3
     add  hl, bc                                   ; $5921: $09
     ld   [hl], d                                  ; $5922: $72
@@ -575,7 +575,7 @@ func_018_596B::
     inc  a                                        ; $5992: $3C
     ldh  [hActiveEntitySpriteVariant], a          ; $5993: $E0 $F1
 
-.jr_5995:
+.jr_5995
     ldh  a, [hActiveEntitySpriteVariant]          ; $5995: $F0 $F1
     rla                                           ; $5997: $17
     rla                                           ; $5998: $17

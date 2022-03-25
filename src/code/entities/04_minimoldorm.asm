@@ -44,7 +44,7 @@ MiniMoldromEntityHandler::
     call func_004_5B7F                            ; $5A95: $CD $7F $5B
     ld   a, [wRoomTransitionState]                ; $5A98: $FA $24 $C1
     and  a                                        ; $5A9B: $A7
-    jr   nz, jr_004_5AA6                          ; $5A9C: $20 $08
+    jr   nz, .jr_5AA6                             ; $5A9C: $20 $08
 
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5A9E: $21 $10 $C4
     add  hl, bc                                   ; $5AA1: $09
@@ -52,7 +52,7 @@ MiniMoldromEntityHandler::
     and  a                                        ; $5AA3: $A7
     jr   z, jr_004_5AA9                           ; $5AA4: $28 $03
 
-jr_004_5AA6:
+.jr_5AA6
     call func_004_5A1A                            ; $5AA6: $CD $1A $5A
 
 jr_004_5AA9:
@@ -97,11 +97,11 @@ func_004_5AE6::
     add  hl, bc                                   ; $5AE9: $09
     ld   a, [hl]                                  ; $5AEA: $7E
     and  a                                        ; $5AEB: $A7
-    jr   nz, jr_004_5AF1                          ; $5AEC: $20 $03
+    jr   nz, .jr_5AF1                             ; $5AEC: $20 $03
 
     call UpdateEntityPosWithSpeed_04              ; $5AEE: $CD $CA $6D
 
-jr_004_5AF1:
+.jr_5AF1
     call label_3B23                               ; $5AF1: $CD $23 $3B
     ld   hl, wEntitiesCollisionsTable             ; $5AF4: $21 $A0 $C2
     add  hl, bc                                   ; $5AF7: $09
@@ -111,25 +111,25 @@ jr_004_5AF1:
 
     ld   e, $08                                   ; $5AFC: $1E $08
     bit  0, a                                     ; $5AFE: $CB $47
-    jr   nz, jr_004_5B10                          ; $5B00: $20 $0E
+    jr   nz, .jr_5B10                             ; $5B00: $20 $0E
 
     ld   e, $00                                   ; $5B02: $1E $00
     bit  1, a                                     ; $5B04: $CB $4F
-    jr   nz, jr_004_5B10                          ; $5B06: $20 $08
+    jr   nz, .jr_5B10                             ; $5B06: $20 $08
 
     ld   e, $04                                   ; $5B08: $1E $04
     bit  2, a                                     ; $5B0A: $CB $57
-    jr   nz, jr_004_5B10                          ; $5B0C: $20 $02
+    jr   nz, .jr_5B10                             ; $5B0C: $20 $02
 
     ld   e, $0C                                   ; $5B0E: $1E $0C
 
-jr_004_5B10:
+.jr_5B10
     ld   hl, wEntitiesPrivateState1Table          ; $5B10: $21 $B0 $C2
     add  hl, bc                                   ; $5B13: $09
     ld   [hl], e                                  ; $5B14: $73
     call GetRandomByte                            ; $5B15: $CD $0D $28
     rra                                           ; $5B18: $1F
-    jr   c, jr_004_5B23                           ; $5B19: $38 $08
+    jr   c, .jr_5B23                              ; $5B19: $38 $08
 
     ld   hl, wEntitiesPrivateState2Table          ; $5B1B: $21 $C0 $C2
     add  hl, bc                                   ; $5B1E: $09
@@ -138,7 +138,7 @@ jr_004_5B10:
     inc  a                                        ; $5B21: $3C
     ld   [hl], a                                  ; $5B22: $77
 
-jr_004_5B23:
+.jr_5B23
     call GetEntityTransitionCountdown             ; $5B23: $CD $05 $0C
     ld   [hl], $10                                ; $5B26: $36 $10
 
@@ -149,11 +149,11 @@ jr_004_5B28:
     ld   [hl], $04                                ; $5B2D: $36 $04
     ldh  a, [hActiveEntityType]                   ; $5B2F: $F0 $EB
     cp   ENTITY_MOLDORM                           ; $5B31: $FE $59
-    jr   nz, jr_004_5B37                          ; $5B33: $20 $02
+    jr   nz, .jr_5B37                             ; $5B33: $20 $02
 
     ld   [hl], $06                                ; $5B35: $36 $06
 
-jr_004_5B37:
+.jr_5B37
     ld   hl, wEntitiesPrivateState2Table          ; $5B37: $21 $C0 $C2
     add  hl, bc                                   ; $5B3A: $09
     ld   a, [hl]                                  ; $5B3B: $7E

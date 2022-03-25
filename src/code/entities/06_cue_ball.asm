@@ -12,7 +12,7 @@ CueBallEntityHandler::
     add  hl, bc                                   ; $4B86: $09
     ld   a, [hl]                                  ; $4B87: $7E
     and  a                                        ; $4B88: $A7
-    jr   nz, jr_006_4B98                          ; $4B89: $20 $0D
+    jr   nz, .jr_4B98                             ; $4B89: $20 $0D
 
     inc  [hl]                                     ; $4B8B: $34
     ld   hl, wEntitiesHealthTable                 ; $4B8C: $21 $60 $C3
@@ -22,7 +22,7 @@ CueBallEntityHandler::
     add  hl, bc                                   ; $4B95: $09
     ld   [hl], $01                                ; $4B96: $36 $01
 
-jr_006_4B98:
+.jr_4B98
     call label_394D                               ; $4B98: $CD $4D $39
     call func_006_4E64                            ; $4B9B: $CD $64 $4E
     ldh  a, [hActiveEntityStatus]                 ; $4B9E: $F0 $EA
@@ -43,7 +43,7 @@ jr_006_4B98:
     ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_SWORD_CLINK_OFF|ENTITY_OPT1_IS_MINI_BOSS ; $4BBE: $36 $C4
     ldh  a, [hActiveEntityState]                  ; $4BC0: $F0 $F0
     and  a                                        ; $4BC2: $A7
-    jr   nz, jr_006_4BDE                          ; $4BC3: $20 $19
+    jr   nz, .jr_4BDE                             ; $4BC3: $20 $19
 
     ld   hl, wEntitiesDirectionTable              ; $4BC5: $21 $80 $C3
     add  hl, bc                                   ; $4BC8: $09
@@ -56,13 +56,13 @@ jr_006_4B98:
     call func_006_65B4                            ; $4BD1: $CD $B4 $65
     pop  af                                       ; $4BD4: $F1
     cp   e                                        ; $4BD5: $BB
-    jr   z, jr_006_4BDE                           ; $4BD6: $28 $06
+    jr   z, .jr_4BDE                              ; $4BD6: $28 $06
 
     ld   hl, wEntitiesOptions1Table               ; $4BD8: $21 $30 $C4
     add  hl, bc                                   ; $4BDB: $09
     ld   [hl], ENTITY_OPT1_IS_BOSS|ENTITY_OPT1_IS_MINI_BOSS ; $4BDC: $36 $84
 
-jr_006_4BDE:
+.jr_4BDE
     call label_3B70                               ; $4BDE: $CD $70 $3B
 
 jr_006_4BE1:
@@ -107,7 +107,7 @@ CueBallState0Handler::
     ld   hl, wEntitiesDirectionTable              ; $4C2E: $21 $80 $C3
     add  hl, bc                                   ; $4C31: $09
 
-jr_006_4C32:
+.jr_4C32
     ld   a, [hl]                                  ; $4C32: $7E
     ld   hl, wEntitiesPrivateState5Table          ; $4C33: $21 $90 $C3
     add  hl, bc                                   ; $4C36: $09
@@ -116,7 +116,7 @@ jr_006_4C32:
     ld   [hl], $58                                ; $4C3B: $36 $58
     call GetRandomByte                            ; $4C3D: $CD $0D $28
     and  $01                                      ; $4C40: $E6 $01
-    jr   nz, jr_006_4C4C                          ; $4C42: $20 $08
+    jr   nz, .jr_4C4C                             ; $4C42: $20 $08
 
     ld   hl, wEntitiesPrivateState4Table          ; $4C44: $21 $40 $C4
     add  hl, bc                                   ; $4C47: $09
@@ -125,7 +125,7 @@ jr_006_4C32:
     inc  a                                        ; $4C4A: $3C
     ld   [hl], a                                  ; $4C4B: $77
 
-jr_006_4C4C:
+.jr_4C4C
     jp   ClearEntitySpeed                         ; $4C4C: $C3 $7F $3D
 
 jr_006_4C4F:
@@ -151,12 +151,12 @@ func_006_4C59::
     add  hl, bc                                   ; $4C69: $09
     ld   a, [hl]                                  ; $4C6A: $7E
     cp   $28                                      ; $4C6B: $FE $28
-    jr   c, jr_006_4C73                           ; $4C6D: $38 $04
+    jr   c, .jr_4C73                              ; $4C6D: $38 $04
 
     cp   $68                                      ; $4C6F: $FE $68
     jr   c, func_006_4C91                         ; $4C71: $38 $1E
 
-jr_006_4C73:
+.jr_4C73
     ldh  a, [hActiveEntityPosY]                   ; $4C73: $F0 $EF
     ld   [hl], a                                  ; $4C75: $77
     jr   jr_006_4C7B                              ; $4C76: $18 $03
@@ -290,7 +290,7 @@ ret_006_4D3A:
 
 CueBallState1Handler::
     call GetEntityTransitionCountdown             ; $4D3B: $CD $05 $0C
-    jr   nz, jr_006_4D51                          ; $4D3E: $20 $11
+    jr   nz, .jr_4D51                             ; $4D3E: $20 $11
 
     ld   hl, wEntitiesPrivateState5Table          ; $4D40: $21 $90 $C3
     add  hl, bc                                   ; $4D43: $09
@@ -303,9 +303,9 @@ CueBallState1Handler::
     ld   [hl], b                                  ; $4D4F: $70
     ret                                           ; $4D50: $C9
 
-jr_006_4D51:
+.jr_4D51
     and  $03                                      ; $4D51: $E6 $03
-    jr   nz, jr_006_4D5E                          ; $4D53: $20 $09
+    jr   nz, .jr_4D5E                             ; $4D53: $20 $09
 
     ld   hl, wEntitiesDirectionTable              ; $4D55: $21 $80 $C3
     add  hl, bc                                   ; $4D58: $09
@@ -314,7 +314,7 @@ jr_006_4D51:
     and  $03                                      ; $4D5B: $E6 $03
     ld   [hl], a                                  ; $4D5D: $77
 
-jr_006_4D5E:
+.jr_4D5E
     call func_006_4C91                            ; $4D5E: $CD $91 $4C
     jp   ClearEntitySpeed                         ; $4D61: $C3 $7F $3D
 

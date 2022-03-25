@@ -88,25 +88,25 @@ WorldMapState1Handler::
     add  hl, de                                   ; $56B6: $19
     ld   a, [hl]                                  ; $56B7: $7E
     and  a                                        ; $56B8: $A7
-    jr   z, jr_001_56D9                           ; $56B9: $28 $1E
+    jr   z, .jr_56D9                              ; $56B9: $28 $1E
     swap a                                        ; $56BB: $CB $37
     and  $07                                      ; $56BD: $E6 $07
     inc  a                                        ; $56BF: $3C
     cp   $01                                      ; $56C0: $FE $01
-    jr   nz, jr_001_56D9                          ; $56C2: $20 $15
+    jr   nz, .jr_56D9                             ; $56C2: $20 $15
     ld   a, [wC5A2]                               ; $56C4: $FA $A2 $C5
     and  a                                        ; $56C7: $A7
     ld   a, $00                                   ; $56C8: $3E $00
-    jr   nz, jr_001_56D9                          ; $56CA: $20 $0D
+    jr   nz, .jr_56D9                             ; $56CA: $20 $0D
     ld   hl, wOverworldRoomStatus                 ; $56CC: $21 $00 $D8
     add  hl, de                                   ; $56CF: $19
     ld   a, [hl]                                  ; $56D0: $7E
     and  $20                                      ; $56D1: $E6 $20
     ld   a, $00                                   ; $56D3: $3E $00
-    jr   z, jr_001_56D9                           ; $56D5: $28 $02
+    jr   z, .jr_56D9                              ; $56D5: $28 $02
     ld   a, $01                                   ; $56D7: $3E $01
 
-jr_001_56D9::
+.jr_56D9::
     ld   [wC1B1], a                               ; $56D9: $EA $B1 $C1
     ld   a, [wDBB4]                               ; $56DC: $FA $B4 $DB
     ld   [wC1B4], a                               ; $56DF: $EA $B4 $C1
@@ -181,7 +181,7 @@ ENDC
     jr   z, jr_001_576F                           ; $574A: $28 $23
     ld   e, a                                     ; $574C: $5F
     and  $F0                                      ; $574D: $E6 $F0
-    jr   nz, jr_001_5766                          ; $574F: $20 $15
+    jr   nz, .jr_5766                             ; $574F: $20 $15
     ld   a, [wC5A2]                               ; $5751: $FA $A2 $C5
     and  a                                        ; $5754: $A7
     jr   nz, jr_001_576F                          ; $5755: $20 $18
@@ -195,7 +195,7 @@ ENDC
     and  $20                                      ; $5762: $E6 $20
     jr   z, jr_001_576F                           ; $5764: $28 $09
 
-jr_001_5766::
+.jr_5766::
     ld   d, $00                                   ; $5766: $16 $00
     ld   hl, MapSpecialLocationNamesLookupTable   ; $5768: $21 $09 $59
     add  hl, de                                   ; $576B: $19
@@ -205,11 +205,11 @@ jr_001_5766::
 jr_001_576F::
     ld   a, [wDBB4]                               ; $576F: $FA $B4 $DB
     cp   $24                                      ; $5772: $FE $24
-    jr   z, jr_001_577A                           ; $5774: $28 $04
+    jr   z, .jr_577A                              ; $5774: $28 $04
     cp   $34                                      ; $5776: $FE $34
     jr   nz, jr_001_577E                          ; $5778: $20 $04
 
-jr_001_577A::
+.jr_577A::
     ld   a, $76                                   ; $577A: $3E $76
     jr   jr_001_5792                              ; $577C: $18 $14
 
@@ -232,12 +232,12 @@ jr_001_5792::
     call OpenDialog                               ; $5792: $CD $85 $23
     ld   a, [wDialogIndex]                        ; $5795: $FA $73 $C1
     cp   $A7                                      ; $5798: $FE $A7
-    jr   z, jr_001_57A3                           ; $579A: $28 $07
+    jr   z, .jr_57A3                              ; $579A: $28 $07
     ld   a, [wDBB4]                               ; $579C: $FA $B4 $DB
     cp   $37                                      ; $579F: $FE $37
     jr   nz, jr_001_57A8                          ; $57A1: $20 $05
 
-jr_001_57A3::
+.jr_57A3::
     ld   a, $01                                   ; $57A3: $3E $01
     ld   [wDialogIndexHi], a                      ; $57A5: $EA $12 $C1
 
@@ -245,10 +245,10 @@ jr_001_57A8::
     ld   a, [wDBB4]                               ; $57A8: $FA $B4 $DB
     cp   $70                                      ; $57AB: $FE $70
     ld   a, $01                                   ; $57AD: $3E $01
-    jr   nc, jr_001_57B3                          ; $57AF: $30 $02
+    jr   nc, .jr_57B3                             ; $57AF: $30 $02
     ld   a, $81                                   ; $57B1: $3E $81
 
-jr_001_57B3::
+.jr_57B3::
     ld   [wDialogState], a                        ; $57B3: $EA $9F $C1
     ret                                           ; $57B6: $C9
 
@@ -256,10 +256,10 @@ jr_001_57B3::
 jr_001_57B7::
     ld   a, [ROM_DebugTool1]                    ; If we weren't pushing A above, then ; $57B7: $FA $03 $00
     and  a                                      ; Check the first debug flag ; $57BA: $A7
-    jr   z, jr_001_57FA                         ; If the debug flag is off, skip this ; $57BB: $28 $3D
+    jr   z, .jr_57FA                         ; If the debug flag is off, skip this ; $57BB: $28 $3D
     ldh  a, [hPressedButtonsMask]               ; Otherwise, are we holding SELECT / B? ; $57BD: $F0 $CB
     cp   J_SELECT | J_B                           ; $57BF: $FE $60
-    jr   nz, jr_001_57FA                        ; If yes, skip this too ; $57C1: $20 $37
+    jr   nz, .jr_57FA                        ; If yes, skip this too ; $57C1: $20 $37
     ld   a, GAMEPLAY_WORLD                      ; Otherwise, warp somewhere ; $57C3: $3E $0B
     ld   [wGameplayType], a                       ; $57C5: $EA $95 $DB
     call ApplyMapFadeOutTransitionWithNoise       ; $57C8: $CD $7D $0C
@@ -285,14 +285,14 @@ jr_001_57B7::
     ld   [wGameplaySubtype], a                    ; $57F6: $EA $96 $DB
     ret                                           ; $57F9: $C9
 
-jr_001_57FA::
+.jr_57FA::
     ld   e, J_SELECT                              ; $57FA: $1E $40
     ld   a, [ROM_DebugTool1]                      ; $57FC: $FA $03 $00
     and  a                                        ; $57FF: $A7
-    jr   nz, jr_001_5804                          ; $5800: $20 $02
+    jr   nz, .jr_5804                             ; $5800: $20 $02
     ld   e, J_SELECT | J_B                        ; $5802: $1E $60
 
-jr_001_5804::
+.jr_5804::
     ldh  a, [hJoypadState]                        ; $5804: $F0 $CC
     and  e                                        ; $5806: $A3
     jr   z, label_001_5818                        ; $5807: $28 $0F

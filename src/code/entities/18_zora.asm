@@ -45,18 +45,18 @@ ZoraEntityHandler::
 
     ld   a, [wPhotos2]                            ; $4A02: $FA $0D $DC
     and  $01                                      ; $4A05: $E6 $01
-    jr   nz, jr_018_4A0E                          ; $4A07: $20 $05
+    jr   nz, .jr_4A0E                             ; $4A07: $20 $05
 
     ld   a, $18                                   ; $4A09: $3E $18
     jp   func_036_4A77_trampoline                 ; $4A0B: $C3 $DE $0A
 
-jr_018_4A0E:
+.jr_4A0E
     call func_018_7D95                            ; $4A0E: $CD $95 $7D
-    jr   nc, jr_018_4A18                          ; $4A11: $30 $05
+    jr   nc, .jr_4A18                             ; $4A11: $30 $05
 
     call_open_dialog $126                         ; $4A13
 
-jr_018_4A18:
+.jr_4A18
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4A18: $21 $40 $C3
     add  hl, bc                                   ; $4A1B: $09
     ld   a, [hl]                                  ; $4A1C: $7E
@@ -119,7 +119,7 @@ ZoraState1Handler::
 
 ZoraState2Handler::
     call GetEntityTransitionCountdown             ; $4A7B: $CD $05 $0C
-    jr   nz, jr_018_4A90                          ; $4A7E: $20 $10
+    jr   nz, .jr_4A90                             ; $4A7E: $20 $10
 
     ld   [hl], $60                                ; $4A80: $36 $60
     ld   hl, wEntitiesInertiaTable                ; $4A82: $21 $D0 $C3
@@ -130,14 +130,14 @@ ZoraState2Handler::
     res  6, [hl]                                  ; $4A8B: $CB $B6
     jp   IncrementEntityState                     ; $4A8D: $C3 $12 $3B
 
-jr_018_4A90:
+.jr_4A90
     and  $04                                      ; $4A90: $E6 $04
     ld   a, $01                                   ; $4A92: $3E $01
-    jr   z, jr_018_4A97                           ; $4A94: $28 $01
+    jr   z, .jr_4A97                              ; $4A94: $28 $01
 
     inc  a                                        ; $4A96: $3C
 
-jr_018_4A97:
+.jr_4A97
     jp   SetEntitySpriteVariant                   ; $4A97: $C3 $0C $3B
 
 Data_018_4A9A::
@@ -162,7 +162,7 @@ ZoraState3Handler::
     ld   [hl], a                                  ; $4AB8: $77
     call label_3B39                               ; $4AB9: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $4ABC: $CD $05 $0C
-    jr   nz, jr_018_4ADC                          ; $4ABF: $20 $1B
+    jr   nz, .jr_4ADC                             ; $4ABF: $20 $1B
 
     call IncrementEntityState                     ; $4AC1: $CD $12 $3B
     ld   [hl], b                                  ; $4AC4: $70
@@ -178,13 +178,13 @@ ZoraState3Handler::
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $4AD7: $3E $01
     jp   AddTranscientVfx                         ; $4AD9: $C3 $C7 $0C
 
-jr_018_4ADC:
+.jr_4ADC
     cp   $30                                      ; $4ADC: $FE $30
-    jr   nz, jr_018_4B03                          ; $4ADE: $20 $23
+    jr   nz, .jr_4B03                             ; $4ADE: $20 $23
 
     ld   a, ENTITY_GOPONGA_FLOWER_PROJECTILE      ; $4AE0: $3E $7D
     call SpawnNewEntity_trampoline                ; $4AE2: $CD $86 $3B
-    jr   c, jr_018_4B03                           ; $4AE5: $38 $1C
+    jr   c, .jr_4B03                              ; $4AE5: $38 $1C
 
     ldh  a, [hMultiPurpose0]                      ; $4AE7: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $4AE9: $21 $00 $C2
@@ -204,17 +204,17 @@ jr_018_4ADC:
     call ApplyVectorTowardsLink_trampoline        ; $4AFF: $CD $AA $3B
     pop  bc                                       ; $4B02: $C1
 
-jr_018_4B03:
+.jr_4B03
     call GetEntityTransitionCountdown             ; $4B03: $CD $05 $0C
     ld   e, $03                                   ; $4B06: $1E $03
     cp   $50                                      ; $4B08: $FE $50
-    jr   nc, jr_018_4B11                          ; $4B0A: $30 $05
+    jr   nc, .jr_4B11                             ; $4B0A: $30 $05
 
     cp   $20                                      ; $4B0C: $FE $20
-    jr   c, jr_018_4B11                           ; $4B0E: $38 $01
+    jr   c, .jr_4B11                              ; $4B0E: $38 $01
 
     inc  e                                        ; $4B10: $1C
 
-jr_018_4B11:
+.jr_4B11
     ld   a, e                                     ; $4B11: $7B
     jp   SetEntitySpriteVariant                   ; $4B12: $C3 $0C $3B

@@ -55,7 +55,7 @@ func_01E_403F::
     ld   hl, wActiveNoiseSfx                      ; $4042: $21 $78 $D3
     ld   a, [hl+]                                 ; $4045: $2A
     cp   $01                                      ; $4046: $FE $01
-    jr   z, jr_01E_4050                           ; $4048: $28 $06
+    jr   z, .jr_4050                              ; $4048: $28 $06
 
     ld   a, [hl]                                  ; $404A: $7E
     cp   $01                                      ; $404B: $FE $01
@@ -63,7 +63,7 @@ func_01E_403F::
 
     ret                                           ; $404F: $C9
 
-jr_01E_4050:
+.jr_4050
     ld   a, $01                                   ; $4050: $3E $01
     ld   [wD379], a                               ; $4052: $EA $79 $D3
     ld   hl, Data_0E1_4068                        ; $4055: $21 $68 $40
@@ -411,7 +411,7 @@ label_01E_4359:
 
 .loop_435F:
     dec  a                                        ; $435F: $3D
-    jr   z, jr_01E_436A                           ; $4360: $28 $08
+    jr   z, .jr_436A                              ; $4360: $28 $08
 
     inc  hl                                       ; $4362: $23
     inc  hl                                       ; $4363: $23
@@ -421,7 +421,7 @@ label_01E_4359:
     inc  hl                                       ; $4367: $23
     jr   .loop_435F                               ; $4368: $18 $F5
 
-jr_01E_436A:
+.jr_436A
     ld   bc, wD355                                ; $436A: $01 $55 $D3
     ld   a, [hl+]                                 ; $436D: $2A
     ld   [bc], a                                  ; $436E: $02
@@ -470,19 +470,19 @@ func_01E_4387::
     ld   c, l                                     ; $439B: $4D
     ld   b, h                                     ; $439C: $44
     and  a                                        ; $439D: $A7
-    jr   z, jr_01E_43AB                           ; $439E: $28 $0B
+    jr   z, .jr_43AB                              ; $439E: $28 $0B
 
     inc  c                                        ; $43A0: $0C
     cp   $01                                      ; $43A1: $FE $01
-    jr   z, jr_01E_43AB                           ; $43A3: $28 $06
+    jr   z, .jr_43AB                              ; $43A3: $28 $06
 
     inc  c                                        ; $43A5: $0C
     cp   $02                                      ; $43A6: $FE $02
-    jr   z, jr_01E_43AB                           ; $43A8: $28 $01
+    jr   z, .jr_43AB                              ; $43A8: $28 $01
 
     inc  c                                        ; $43AA: $0C
 
-jr_01E_43AB:
+.jr_43AB
     ld   a, [bc]                                  ; $43AB: $0A
     ldh  [rNR51], a                               ; $43AC: $E0 $25
     ret                                           ; $43AE: $C9
@@ -511,29 +511,29 @@ func_01E_43BA::
 func_01E_43C0::
     ld   a, [wD379]                               ; $43C0: $FA $79 $D3
     cp   $05                                      ; $43C3: $FE $05
-    jr   z, jr_01E_43E2                           ; $43C5: $28 $1B
+    jr   z, .jr_43E2                              ; $43C5: $28 $1B
 
     cp   $0C                                      ; $43C7: $FE $0C
-    jr   z, jr_01E_43E2                           ; $43C9: $28 $17
+    jr   z, .jr_43E2                              ; $43C9: $28 $17
 
     cp   $1A                                      ; $43CB: $FE $1A
-    jr   z, jr_01E_43E2                           ; $43CD: $28 $13
+    jr   z, .jr_43E2                              ; $43CD: $28 $13
 
     cp   $24                                      ; $43CF: $FE $24
-    jr   z, jr_01E_43E2                           ; $43D1: $28 $0F
+    jr   z, .jr_43E2                              ; $43D1: $28 $0F
 
     cp   $2A                                      ; $43D3: $FE $2A
-    jr   z, jr_01E_43E2                           ; $43D5: $28 $0B
+    jr   z, .jr_43E2                              ; $43D5: $28 $0B
 
     cp   $2E                                      ; $43D7: $FE $2E
-    jr   z, jr_01E_43E2                           ; $43D9: $28 $07
+    jr   z, .jr_43E2                              ; $43D9: $28 $07
 
     cp   $3F                                      ; $43DB: $FE $3F
-    jr   z, jr_01E_43E2                           ; $43DD: $28 $03
+    jr   z, .jr_43E2                              ; $43DD: $28 $03
 
     call func_01E_411B                            ; $43DF: $CD $1B $41
 
-jr_01E_43E2:
+.jr_43E2
     call func_01E_4D2A                            ; $43E2: $CD $2A $4D
     ld   de, wMusicTranspose                      ; $43E5: $11 $00 $D3
     ld   b, $00                                   ; $43E8: $06 $00
@@ -582,7 +582,7 @@ jr_01E_4445:
     push hl                                       ; $4445: $E5
     ld   a, [wD371]                               ; $4446: $FA $71 $D3
     and  a                                        ; $4449: $A7
-    jr   nz, jr_01E_4454                          ; $444A: $20 $08
+    jr   nz, .jr_4454                             ; $444A: $20 $08
 
     xor  a                                        ; $444C: $AF
     ldh  [rNR30], a                               ; $444D: $E0 $1A
@@ -590,7 +590,7 @@ jr_01E_4445:
     ld   h, d                                     ; $4450: $62
     call func_01E_410E                            ; $4451: $CD $0E $41
 
-jr_01E_4454:
+.jr_4454
     pop  hl                                       ; $4454: $E1
     jr   jr_01E_4481                              ; $4455: $18 $2A
 
@@ -668,20 +668,20 @@ jr_01E_44A3:
 label_01E_44A6:
     ld   a, [wActiveChannelIndex]                 ; $44A6: $FA $50 $D3
     cp   $03                                      ; $44A9: $FE $03
-    jr   nz, jr_01E_44BD                          ; $44AB: $20 $10
+    jr   nz, .jr_44BD                             ; $44AB: $20 $10
 
     ld   a, [wD330 + $08]                         ; $44AD: $FA $38 $D3
     bit  7, a                                     ; $44B0: $CB $7F
-    jr   z, jr_01E_44BD                           ; $44B2: $28 $09
+    jr   z, .jr_44BD                              ; $44B2: $28 $09
 
     ld   a, [hl]                                  ; $44B4: $7E
     cp   $06                                      ; $44B5: $FE $06
-    jr   nz, jr_01E_44BD                          ; $44B7: $20 $04
+    jr   nz, .jr_44BD                             ; $44B7: $20 $04
 
     ld   a, $40                                   ; $44B9: $3E $40
     ldh  [rNR32], a                               ; $44BB: $E0 $1C
 
-jr_01E_44BD:
+.jr_44BD
     push hl                                       ; $44BD: $E5
     ld   a, l                                     ; $44BE: $7D
     add  $09                                      ; $44BF: $C6 $09
@@ -725,12 +725,12 @@ jr_01E_44E3:
     jr   z, jr_01E_450E                           ; $44ED: $28 $1F
 
     cp   $FF                                      ; $44EF: $FE $FF
-    jr   z, jr_01E_44F7                           ; $44F1: $28 $04
+    jr   z, .jr_44F7                              ; $44F1: $28 $04
 
     inc  l                                        ; $44F3: $2C
     jp   label_01E_45A3                           ; $44F4: $C3 $A3 $45
 
-jr_01E_44F7:
+.jr_44F7
     dec  l                                        ; $44F7: $2D
     push hl                                       ; $44F8: $E5
     call func_01E_4493                            ; $44F9: $CD $93 $44
@@ -815,7 +815,7 @@ label_01E_4565:
     dec  [hl]                                     ; $456B: $35
     ld   a, [hl]                                  ; $456C: $7E
     and  $7F                                      ; $456D: $E6 $7F
-    jr   z, jr_01E_457E                           ; $456F: $28 $0D
+    jr   z, .jr_457E                              ; $456F: $28 $0D
 
     ld   b, h                                     ; $4571: $44
     ld   c, l                                     ; $4572: $4D
@@ -830,7 +830,7 @@ label_01E_4565:
     ld   [hl-], a                                 ; $457B: $32
     jr   jr_01E_45A5                              ; $457C: $18 $27
 
-jr_01E_457E:
+.jr_457E
     pop  hl                                       ; $457E: $E1
     jr   jr_01E_453C                              ; $457F: $18 $BB
 
@@ -930,34 +930,34 @@ jr_01E_45A5:
     inc  l                                        ; $4605: $2C
     ld   a, [hl]                                  ; $4606: $7E
     and  $F0                                      ; $4607: $E6 $F0
-    jr   nz, jr_01E_460E                          ; $4609: $20 $03
+    jr   nz, .jr_460E                             ; $4609: $20 $03
 
     ld   a, d                                     ; $460B: $7A
     jr   jr_01E_4633                              ; $460C: $18 $25
 
-jr_01E_460E:
+.jr_460E
     ld   e, a                                     ; $460E: $5F
     ld   a, d                                     ; $460F: $7A
     push af                                       ; $4610: $F5
     srl  a                                        ; $4611: $CB $3F
     sla  e                                        ; $4613: $CB $23
-    jr   c, jr_01E_461F                           ; $4615: $38 $08
+    jr   c, .jr_461F                              ; $4615: $38 $08
 
     ld   d, a                                     ; $4617: $57
     srl  a                                        ; $4618: $CB $3F
     sla  e                                        ; $461A: $CB $23
-    jr   c, jr_01E_461F                           ; $461C: $38 $01
+    jr   c, .jr_461F                              ; $461C: $38 $01
 
     add  d                                        ; $461E: $82
 
-jr_01E_461F:
+.jr_461F
     ld   c, a                                     ; $461F: $4F
     and  a                                        ; $4620: $A7
-    jr   nz, jr_01E_4625                          ; $4621: $20 $02
+    jr   nz, .jr_4625                             ; $4621: $20 $02
 
     ld   c, $02                                   ; $4623: $0E $02
 
-jr_01E_4625:
+.jr_4625
     ld   de, wActiveChannelIndex                  ; $4625: $11 $50 $D3
     ld   a, [de]                                  ; $4628: $1A
     dec  a                                        ; $4629: $3D
@@ -999,14 +999,14 @@ jr_01E_463C:
     ld   de, wD39E                                ; $465E: $11 $9E $D3
     ld   a, [de]                                  ; $4661: $1A
     and  a                                        ; $4662: $A7
-    jr   z, jr_01E_466C                           ; $4663: $28 $07
+    jr   z, .jr_466C                              ; $4663: $28 $07
 
     ld   a, $01                                   ; $4665: $3E $01
     ld   [de], a                                  ; $4667: $12
     xor  a                                        ; $4668: $AF
     ld   [wD39F], a                               ; $4669: $EA $9F $D3
 
-jr_01E_466C:
+.jr_466C
     ld   de, wActiveMusicTableIndex               ; $466C: $11 $D9 $D3
     ld   a, [de]                                  ; $466F: $1A
     and  a                                        ; $4670: $A7
@@ -1048,11 +1048,11 @@ jr_01E_467B:
     ld   l, a                                     ; $469F: $6F
     ld   h, $00                                   ; $46A0: $26 $00
     bit  7, l                                     ; $46A2: $CB $7D
-    jr   z, jr_01E_46A8                           ; $46A4: $28 $02
+    jr   z, .jr_46A8                              ; $46A4: $28 $02
 
     ld   h, $FF                                   ; $46A6: $26 $FF
 
-jr_01E_46A8:
+.jr_46A8
     add  hl, bc                                   ; $46A8: $09
     ld   b, h                                     ; $46A9: $44
     ld   c, l                                     ; $46AA: $4D
@@ -1120,14 +1120,14 @@ jr_01E_46EE:
     ld   c, $1A                                   ; $46FC: $0E $1A
     ld   a, [wD330 + $0F]                         ; $46FE: $FA $3F $D3
     bit  7, a                                     ; $4701: $CB $7F
-    jr   nz, jr_01E_470A                          ; $4703: $20 $05
+    jr   nz, .jr_470A                             ; $4703: $20 $05
 
     xor  a                                        ; $4705: $AF
     ld   [c], a                                   ; $4706: $E2
     ld   a, $80                                   ; $4707: $3E $80
     ld   [c], a                                   ; $4709: $E2
 
-jr_01E_470A:
+.jr_470A
     inc  c                                        ; $470A: $0C
     inc  l                                        ; $470B: $2C
     inc  l                                        ; $470C: $2C
@@ -1161,11 +1161,11 @@ jr_01E_4723:
     inc  l                                        ; $4725: $2C
     ld   a, [hl+]                                 ; $4726: $2A
     and  a                                        ; $4727: $A7
-    jr   z, jr_01E_472C                           ; $4728: $28 $02
+    jr   z, .jr_472C                              ; $4728: $28 $02
 
     ld   e, $08                                   ; $472A: $1E $08
 
-jr_01E_472C:
+.jr_472C
     inc  l                                        ; $472C: $2C
     inc  l                                        ; $472D: $2C
     ld   [hl], $00                                ; $472E: $36 $00
@@ -1206,7 +1206,7 @@ label_01E_4752:
     ld   de, wActiveChannelIndex                  ; $4752: $11 $50 $D3
     ld   a, [de]                                  ; $4755: $1A
     cp   $04                                      ; $4756: $FE $04
-    jr   z, jr_01E_4763                           ; $4758: $28 $09
+    jr   z, .jr_4763                              ; $4758: $28 $09
 
     inc  a                                        ; $475A: $3C
     ld   [de], a                                  ; $475B: $12
@@ -1215,7 +1215,7 @@ label_01E_4752:
     ld   l, a                                     ; $475F: $6F
     jp   label_01E_4599                           ; $4760: $C3 $99 $45
 
-jr_01E_4763:
+.jr_4763
     ld   hl, wD31E                                ; $4763: $21 $1E $D3
     inc  [hl]                                     ; $4766: $34
     ld   hl, wD320 + $0E                          ; $4767: $21 $2E $D3
@@ -1315,28 +1315,28 @@ jr_01E_47D6:
 func_01E_47F6::
     ld   a, [wD31B]                               ; $47F6: $FA $1B $D3
     and  a                                        ; $47F9: $A7
-    jr   nz, jr_01E_481D                          ; $47FA: $20 $21
+    jr   nz, .jr_481D                             ; $47FA: $20 $21
 
     ld   a, [wD317]                               ; $47FC: $FA $17 $D3
     and  a                                        ; $47FF: $A7
-    jr   z, jr_01E_481D                           ; $4800: $28 $1B
+    jr   z, .jr_481D                              ; $4800: $28 $1B
 
     and  $0F                                      ; $4802: $E6 $0F
     ld   b, a                                     ; $4804: $47
     ld   hl, wD307                                ; $4805: $21 $07 $D3
     ld   a, [wD31E]                               ; $4808: $FA $1E $D3
     cp   [hl]                                     ; $480B: $BE
-    jr   nz, jr_01E_481D                          ; $480C: $20 $0F
+    jr   nz, .jr_481D                             ; $480C: $20 $0F
 
     ld   c, $12                                   ; $480E: $0E $12
     ld   de, wD31A                                ; $4810: $11 $1A $D3
     ld   a, [wD31F]                               ; $4813: $FA $1F $D3
     bit  7, a                                     ; $4816: $CB $7F
-    jr   nz, jr_01E_481D                          ; $4818: $20 $03
+    jr   nz, .jr_481D                             ; $4818: $20 $03
 
     call func_01E_4841                            ; $481A: $CD $41 $48
 
-jr_01E_481D:
+.jr_481D
     ld   a, [wD320 + $0B]                         ; $481D: $FA $2B $D3
     and  a                                        ; $4820: $A7
     ret  nz                                       ; $4821: $C0
@@ -1664,7 +1664,7 @@ label_01E_4CFF:
     xor  a                                        ; $4CFF: $AF
     ld   [wD379], a                               ; $4D00: $EA $79 $D3
 
-jr_01E_4D03:
+.jr_4D03
     ld   [wD34F], a                               ; $4D03: $EA $4F $D3
     ld   [wD398], a                               ; $4D06: $EA $98 $D3
     ld   [wD393], a                               ; $4D09: $EA $93 $D3
@@ -1673,7 +1673,7 @@ jr_01E_4D03:
     ld   [wD3E2+3], a                             ; $4D12: $EA $E5 $D3
     ld   a, $08                                   ; $4D15: $3E $08
 
-jr_01E_4D17:
+.jr_4D17
     ldh  [rNR42], a                               ; $4D17: $E0 $21
     ld   a, $80                                   ; $4D19: $3E $80
     ldh  [rNR44], a                               ; $4D1B: $E0 $23

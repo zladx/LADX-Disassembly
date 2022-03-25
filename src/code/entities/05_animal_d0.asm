@@ -28,11 +28,11 @@ AnimalD0EntityHandler::
     ldh  a, [hActiveEntityPosY]                   ; $7F44: $F0 $EF
     ld   e, $00                                   ; $7F46: $1E $00
     cp   [hl]                                     ; $7F48: $BE
-    jr   c, jr_005_7F4D                           ; $7F49: $38 $02
+    jr   c, .jr_7F4D                              ; $7F49: $38 $02
 
     ld   e, $02                                   ; $7F4B: $1E $02
 
-jr_005_7F4D:
+.jr_7F4D
     ldh  a, [hFrameCounter]                       ; $7F4D: $F0 $E7
     rra                                           ; $7F4F: $1F
     rra                                           ; $7F50: $1F

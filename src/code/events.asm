@@ -151,7 +151,7 @@ DropKeyEffectHandler::
     call EventEffectGuard                         ; $5E03: $CD $AF $5D
     ldh  a, [hMapRoom]                            ; $5E06: $F0 $F6
     cp   ROOM_OW_ANGLERS_TUNNEL                      ; Is this room 69? (Angler's Tunnel)
-    jr   nz, jr_002_5E15                          ; If not, skip ahead...
+    jr   nz, .jr_5E15                          ; If not, skip ahead...
 
     ; Mark the room as cleared
     call GetRoomStatusAddress                     ; This is the room where the key falls into
@@ -160,7 +160,7 @@ DropKeyEffectHandler::
     ld   [hl], a                                  ; Since that room handles the key now,
     ldh  [hRoomStatus], a                         ; mark this one.
 
-jr_002_5E15:
+.jr_5E15
     jp   label_002_5425                           ; $5E15: $C3 $25 $54
 
 ; Open locked doors, and make the teleport point appear.
@@ -180,11 +180,11 @@ ClearMidbossEffectHandler::
 OpenLockedDoorsEffectHandler::
     ld   a, [wC190]                               ; $5E25: $FA $90 $C1
     and  a                                        ; $5E28: $A7
-    jr   nz, jr_002_5E2E                          ; $5E29: $20 $03
+    jr   nz, .jr_5E2E                             ; $5E29: $20 $03
 
     call func_002_5E7B                            ; $5E2B: $CD $7B $5E
 
-jr_002_5E2E:
+.jr_5E2E
     ld   a, [wRoomEventEffectExecuted]            ; $5E2E: $FA $8F $C1
     and  a                                        ; $5E31: $A7
     ret  z                                        ; $5E32: $C8
@@ -207,12 +207,12 @@ jr_002_5E2E:
     ld   hl, wIndoorARoomStatus                   ; $5E4C: $21 $00 $D9
     ldh  a, [hMapId]                              ; $5E4F: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $5E51: $FE $FF
-    jr   nz, jr_002_5E5A                          ; $5E53: $20 $05
+    jr   nz, .jr_5E5A                             ; $5E53: $20 $05
 
     ld   hl, wColorDungeonRoomStatus              ; $5E55: $21 $E0 $DD
     jr   jr_002_5E63                              ; $5E58: $18 $09
 
-jr_002_5E5A:
+.jr_5E5A
     cp   $1A                                      ; $5E5A: $FE $1A
     jr   nc, jr_002_5E63                          ; $5E5C: $30 $05
 
@@ -278,18 +278,18 @@ RevealChestEffectHandler::
     sub  $30                                      ; $5EB4: $D6 $30
     add  $08                                      ; $5EB6: $C6 $08
     cp   $10                                      ; $5EB8: $FE $10
-    jr   nc, jr_002_5ECA                          ; $5EBA: $30 $0E
+    jr   nc, .jr_5ECA                             ; $5EBA: $30 $0E
 
     ldh  a, [hLinkPositionX]                      ; $5EBC: $F0 $98
     sub  $88                                      ; $5EBE: $D6 $88
     add  $10                                      ; $5EC0: $C6 $10
     cp   $20                                      ; $5EC2: $FE $20
-    jr   nc, jr_002_5ECA                          ; $5EC4: $30 $04
+    jr   nc, .jr_5ECA                             ; $5EC4: $30 $04
 
     ld   a, $40                                   ; $5EC6: $3E $40
     jr   jr_002_5ECC                              ; $5EC8: $18 $02
 
-jr_002_5ECA:
+.jr_5ECA
     ld   a, $30                                   ; $5ECA: $3E $30
 
 jr_002_5ECC:
@@ -302,18 +302,18 @@ func_002_5ED3::
     sub  $30                                      ; $5ED5: $D6 $30
     add  $08                                      ; $5ED7: $C6 $08
     cp   $10                                      ; $5ED9: $FE $10
-    jr   nc, jr_002_5EEB                          ; $5EDB: $30 $0E
+    jr   nc, .jr_5EEB                             ; $5EDB: $30 $0E
 
     ldh  a, [hLinkPositionX]                      ; $5EDD: $F0 $98
     sub  $88                                      ; $5EDF: $D6 $88
     add  $10                                      ; $5EE1: $C6 $10
     cp   $20                                      ; $5EE3: $FE $20
-    jr   nc, jr_002_5EEB                          ; $5EE5: $30 $04
+    jr   nc, .jr_5EEB                             ; $5EE5: $30 $04
 
     ld   a, $30                                   ; $5EE7: $3E $30
     jr   jr_002_5EED                              ; $5EE9: $18 $02
 
-jr_002_5EEB:
+.jr_5EEB
     ld   a, $20                                   ; $5EEB: $3E $20
 
 jr_002_5EED:
@@ -459,12 +459,12 @@ Events::
 CheckKillSidescrollBossTrigger::
     ldh  a, [hMapId]                              ; $5FC6: $F0 $F7
     cp   MAP_EAGLES_TOWER                         ; $5FC8: $FE $06
-    jr   nz, jr_002_5FD1                          ; $5FCA: $20 $05
+    jr   nz, .jr_5FD1                             ; $5FCA: $20 $05
 
     ld   a, [wIndoorBRoomStatus + $E8]            ; $5FCC: $FA $E8 $DA
     jr   jr_002_5FD4                              ; $5FCF: $18 $03
 
-jr_002_5FD1:
+.jr_5FD1
     ld   a, [wIndoorARoomStatus + $FF]            ; $5FD1: $FA $FF $D9
 
 jr_002_5FD4:
@@ -513,7 +513,7 @@ jr_002_6000:
     add  hl, bc                                   ; $6003: $09
     ld   a, [hl]                                  ; $6004: $7E
     and  a                                        ; $6005: $A7
-    jr   z, jr_002_6011                           ; $6006: $28 $09
+    jr   z, .jr_6011                              ; $6006: $28 $09
 
     ld   hl, wEntitiesOptions1Table               ; $6008: $21 $30 $C4
     add  hl, bc                                   ; $600B: $09
@@ -521,7 +521,7 @@ jr_002_6000:
     and  ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL       ; $600D: $E6 $02
     jr   z, ret_002_602C                          ; $600F: $28 $1B
 
-jr_002_6011:
+.jr_6011
     dec  c                                        ; $6011: $0D
     ld   a, c                                     ; $6012: $79
     cp   $FF                                      ; $6013: $FE $FF
@@ -529,7 +529,7 @@ jr_002_6011:
 
     ldh  a, [hMultiPurpose0]                      ; $6017: $F0 $D7
     cp   $08                                      ; $6019: $FE $08
-    jr   nz, jr_002_6029                          ; $601B: $20 $0C
+    jr   nz, .jr_6029                             ; $601B: $20 $0C
 
     ld   a, [wD460]                               ; $601D: $FA $60 $D4
     and  a                                        ; $6020: $A7
@@ -539,7 +539,7 @@ jr_002_6011:
     and  a                                        ; $6026: $A7
     jr   nz, ret_002_602C                         ; $6027: $20 $03
 
-jr_002_6029:
+.jr_6029
     jp   MarkTriggerAsResolved                    ; $6029: $C3 $60 $0C
 
 ret_002_602C:
@@ -563,15 +563,15 @@ jr_002_603E:
     add  hl, de                                   ; $6041: $19
     ld   a, [hl]                                  ; $6042: $7E
     cp   $EF                                      ; $6043: $FE $EF
-    jr   z, jr_002_604F                           ; $6045: $28 $08
+    jr   z, .jr_604F                              ; $6045: $28 $08
 
     cp   $F0                                      ; $6047: $FE $F0
-    jr   z, jr_002_604F                           ; $6049: $28 $04
+    jr   z, .jr_604F                              ; $6049: $28 $04
 
     cp   $F1                                      ; $604B: $FE $F1
     jr   nz, jr_002_6064                          ; $604D: $20 $15
 
-jr_002_604F:
+.jr_604F
     ld   hl, wEntitiesStatusTable                 ; $604F: $21 $80 $C2
     add  hl, de                                   ; $6052: $19
     ld   a, [hl]                                  ; $6053: $7E
@@ -596,11 +596,11 @@ jr_002_6064:
     ld   e, $09                                   ; $606A: $1E $09
     ldh  a, [hMapRoom]                            ; $606C: $F0 $F6
     cp   UNKNOWN_ROOM_0A                          ; $606E: $FE $0A
-    jr   z, jr_002_6074                           ; $6070: $28 $02
+    jr   z, .jr_6074                              ; $6070: $28 $02
 
     ld   e, $04                                   ; $6072: $1E $04
 
-jr_002_6074:
+.jr_6074
     ldh  a, [hMultiPurpose0]                      ; $6074: $F0 $D7
     cp   e                                        ; $6076: $BB
     ret  nz                                       ; $6077: $C0
@@ -610,7 +610,7 @@ jr_002_6074:
     cp   ROOM_OW_MARIN_BRIDGE                     ; $607D: $FE $08
     ret  z                                        ; $607F: $C8
     cp   UNKNOWN_ROOM_0A                          ; $6080: $FE $0A
-    jr   nz, jr_002_6098                          ; $6082: $20 $14
+    jr   nz, .jr_6098                             ; $6082: $20 $14
 
     call EventEffectGuard                         ; $6084: $CD $AF $5D
     call OpenLockedDoorsEffectHandler             ; $6087: $CD $25 $5E
@@ -624,7 +624,7 @@ jr_002_6074:
     ld   [hl], a                                  ; $6096: $77
     ret                                           ; $6097: $C9
 
-jr_002_6098:
+.jr_6098
     jp   RevealChestEffectHandler                 ; $6098: $C3 $AB $5E
 
 jr_002_609B:
@@ -632,12 +632,12 @@ jr_002_609B:
     add  hl, de                                   ; $609E: $19
     ld   a, [hl]                                  ; $609F: $7E
     cp   $F6                                      ; $60A0: $FE $F6
-    jr   z, jr_002_60A8                           ; $60A2: $28 $04
+    jr   z, .jr_60A8                              ; $60A2: $28 $04
 
     cp   $F7                                      ; $60A4: $FE $F7
     jr   nz, jr_002_60BD                          ; $60A6: $20 $15
 
-jr_002_60A8:
+.jr_60A8
     ld   hl, wEntitiesStatusTable                 ; $60A8: $21 $80 $C2
     add  hl, de                                   ; $60AB: $19
     ld   a, [hl]                                  ; $60AC: $7E

@@ -168,23 +168,23 @@ GetColorDungeonTilesAddress::
 
     ldh  a, [hMapRoom]                            ; $4617: $F0 $F6
     and  a                                        ; $4619: $A7
-    jr   z, jr_020_4620                           ; $461A: $28 $04
+    jr   z, .jr_4620                              ; $461A: $28 $04
     cp   ROOM_CD_05                               ; $461C: $FE $05
     jr   nz, jr_020_4640                          ; $461E: $20 $20
 
-jr_020_4620:
+.jr_4620
     ld   a, [hSwitchBlocksState]                  ; $4620: $FA $FB $D6
     and  a                                        ; $4623: $A7
     jr   z, jr_020_4640                           ; $4624: $28 $1A
 
     ld   a, c                                     ; $4626: $79
     cp   $40                                      ; $4627: $FE $40
-    jr   z, jr_020_462F                           ; $4629: $28 $04
+    jr   z, .jr_462F                              ; $4629: $28 $04
 
     cp   $80                                      ; $462B: $FE $80
     jr   nz, jr_020_4640                          ; $462D: $20 $11
 
-jr_020_462F:
+.jr_462F
     xor  $C0                                      ; $462F: $EE $C0
     ld   l, a                                     ; $4631: $6F
     ld   h, $5E                                   ; $4632: $26 $5E
@@ -395,7 +395,7 @@ LoadColorDungeonTiles::
     add  hl, de                                   ; $4765: $19
     ld   a, [hl]                                  ; $4766: $7E
     and  a                                        ; $4767: $A7
-    jr   z, jr_020_4776                           ; $4768: $28 $0C
+    jr   z, .jr_4776                              ; $4768: $28 $0C
 
     ld   d, a                                     ; $476A: $57
     dec  hl                                       ; $476B: $2B
@@ -406,14 +406,14 @@ LoadColorDungeonTiles::
     ld   h, $20                                   ; $4771: $26 $20
     call CopyDataToVRAM                           ; $4773: $CD $13 $0A
 
-jr_020_4776:
+.jr_4776
     pop  de                                       ; $4776: $D1
     push de                                       ; $4777: $D5
     ld   hl, ColorDungeonEntitySpritesheetsTable_Slot2 ; $4778: $21 $D6 $46
     add  hl, de                                   ; $477B: $19
     ld   a, [hl]                                  ; $477C: $7E
     and  a                                        ; $477D: $A7
-    jr   z, jr_020_478C                           ; $477E: $28 $0C
+    jr   z, .jr_478C                              ; $477E: $28 $0C
 
     ld   d, a                                     ; $4780: $57
     dec  hl                                       ; $4781: $2B
@@ -424,14 +424,14 @@ jr_020_4776:
     ld   h, $20                                   ; $4787: $26 $20
     call CopyDataToVRAM                           ; $4789: $CD $13 $0A
 
-jr_020_478C:
+.jr_478C
     pop  de                                       ; $478C: $D1
     push de                                       ; $478D: $D5
     ld   hl, ColorDungeonEntitySpritesheetsTable_Slot3 ; $478E: $21 $02 $47
     add  hl, de                                   ; $4791: $19
     ld   a, [hl]                                  ; $4792: $7E
     and  a                                        ; $4793: $A7
-    jr   z, jr_020_47A2                           ; $4794: $28 $0C
+    jr   z, .jr_47A2                              ; $4794: $28 $0C
 
     ld   d, a                                     ; $4796: $57
     dec  hl                                       ; $4797: $2B
@@ -442,13 +442,13 @@ jr_020_478C:
     ld   h, $20                                   ; $479D: $26 $20
     call CopyDataToVRAM                           ; $479F: $CD $13 $0A
 
-jr_020_47A2:
+.jr_47A2
     pop  de                                       ; $47A2: $D1
     ld   hl, ColorDungeonEntitySpritesheetsTable_Slot4 ; $47A3: $21 $2E $47
     add  hl, de                                   ; $47A6: $19
     ld   a, [hl]                                  ; $47A7: $7E
     and  a                                        ; $47A8: $A7
-    jr   z, jr_020_47B7                           ; $47A9: $28 $0C
+    jr   z, .jr_47B7                              ; $47A9: $28 $0C
 
     ld   d, a                                     ; $47AB: $57
     dec  hl                                       ; $47AC: $2B
@@ -459,7 +459,7 @@ jr_020_47A2:
     ld   h, $20                                   ; $47B2: $26 $20
     call CopyDataToVRAM                           ; $47B4: $CD $13 $0A
 
-jr_020_47B7:
+.jr_47B7
     ldh  a, [hMapRoom]                            ; $47B7: $F0 $F6
     cp   UNKNOWN_ROOM_01                          ; $47B9: $FE $01
     jr   nz, ret_020_47C2                         ; $47BB: $20 $05
@@ -688,15 +688,15 @@ func_020_48CA::
     add  hl, de                                   ; $48EE: $19
     ld   a, [hl]                                  ; $48EF: $7E
     cp   $53                                      ; $48F0: $FE $53
-    jr   z, jr_020_48FC                           ; $48F2: $28 $08
+    jr   z, .jr_48FC                              ; $48F2: $28 $08
 
     cp   $55                                      ; $48F4: $FE $55
-    jr   z, jr_020_48FC                           ; $48F6: $28 $04
+    jr   z, .jr_48FC                              ; $48F6: $28 $04
 
     cp   $54                                      ; $48F8: $FE $54
     jr   nz, jr_020_490A                          ; $48FA: $20 $0E
 
-jr_020_48FC:
+.jr_48FC
     ld   a, [wIsLinkInTheAir]                     ; $48FC: $FA $46 $C1
     and  a                                        ; $48FF: $A7
     jr   nz, jr_020_4917                          ; $4900: $20 $15
@@ -707,12 +707,12 @@ jr_020_48FC:
 
 jr_020_490A:
     cp   $56                                      ; $490A: $FE $56
-    jr   z, jr_020_4912                           ; $490C: $28 $04
+    jr   z, .jr_4912                              ; $490C: $28 $04
 
     cp   $57                                      ; $490E: $FE $57
     jr   nz, jr_020_4917                          ; $4910: $20 $05
 
-jr_020_4912:
+.jr_4912
     call func_020_4923                            ; $4912: $CD $23 $49
     jr   jr_020_4917                              ; $4915: $18 $00
 
@@ -761,12 +761,12 @@ func_020_4954::
     ldh  [hMultiPurpose0], a                      ; $4956: $E0 $D7
     dec  a                                        ; $4958: $3D
     cp   $55                                      ; $4959: $FE $55
-    jr   nz, jr_020_4961                          ; $495B: $20 $04
+    jr   nz, .jr_4961                             ; $495B: $20 $04
 
     ld   a, $AE                                   ; $495D: $3E $AE
     ldh  [hMultiPurpose0], a                      ; $495F: $E0 $D7
 
-jr_020_4961:
+.jr_4961
     ldh  a, [hMultiPurpose0]                      ; $4961: $F0 $D7
     ld   [hl], a                                  ; $4963: $77
     call label_2887                               ; $4964: $CD $87 $28
@@ -1005,14 +1005,14 @@ func_020_4AB3::
     ld   a, [hl]                                  ; $4AC9: $7E
     ld   [bc], a                                  ; $4ACA: $02
     cp   $FF                                      ; $4ACB: $FE $FF
-    jr   nz, jr_020_4AD4                          ; $4ACD: $20 $05
+    jr   nz, .jr_4AD4                             ; $4ACD: $20 $05
 
     dec  bc                                       ; $4ACF: $0B
     ld   a, $F0                                   ; $4AD0: $3E $F0
     ld   [bc], a                                  ; $4AD2: $02
     inc  bc                                       ; $4AD3: $03
 
-jr_020_4AD4:
+.jr_4AD4
     inc  bc                                       ; $4AD4: $03
     ld   hl, Data_020_4AA3                        ; $4AD5: $21 $A3 $4A
     add  hl, de                                   ; $4AD8: $19
@@ -1022,18 +1022,18 @@ jr_020_4AD4:
     ld   [bc], a                                  ; $4ADE: $02
     ldh  a, [hIsGBC]                              ; $4ADF: $F0 $FE
     and  a                                        ; $4AE1: $A7
-    jr   z, jr_020_4AEF                           ; $4AE2: $28 $0B
+    jr   z, .jr_4AEF                              ; $4AE2: $28 $0B
 
     ldh  a, [hMultiPurpose3]                      ; $4AE4: $F0 $DA
     and  a                                        ; $4AE6: $A7
-    jr   z, jr_020_4AEF                           ; $4AE7: $28 $06
+    jr   z, .jr_4AEF                              ; $4AE7: $28 $06
 
     ld   a, [bc]                                  ; $4AE9: $0A
     and  $F8                                      ; $4AEA: $E6 $F8
     or   $04                                      ; $4AEC: $F6 $04
     ld   [bc], a                                  ; $4AEE: $02
 
-jr_020_4AEF:
+.jr_4AEF
     inc  bc                                       ; $4AEF: $03
     pop  hl                                       ; $4AF0: $E1
     ldh  a, [hMultiPurpose0]                      ; $4AF1: $F0 $D7
@@ -1211,13 +1211,13 @@ ENDC
     ld   [hl], $03                                ; $4BBB: $36 $03
     ldh  a, [hIsSideScrolling]                    ; $4BBD: $F0 $F9
     and  a                                        ; $4BBF: $A7
-    jr   nz, jr_020_4BC8                          ; $4BC0: $20 $06
+    jr   nz, .jr_4BC8                             ; $4BC0: $20 $06
 
     ld   a, JINGLE_BUMP                           ; $4BC2: $3E $09
     ldh  [hJingle], a                             ; $4BC4: $E0 $F2
     jr   jr_020_4BCD                              ; $4BC6: $18 $05
 
-jr_020_4BC8:
+.jr_4BC8
     ld   hl, wEntitiesPosZTable                   ; $4BC8: $21 $10 $C3
     add  hl, de                                   ; $4BCB: $19
     ld   [hl], d                                  ; $4BCC: $72
@@ -1267,11 +1267,11 @@ func_020_4BFF::
 
 jr_020_4C0B:
     srl  a                                        ; $4C0B: $CB $3F
-    jr   nc, jr_020_4C10                          ; $4C0D: $30 $01
+    jr   nc, .jr_4C10                             ; $4C0D: $30 $01
 
     inc  b                                        ; $4C0F: $04
 
-jr_020_4C10:
+.jr_4C10
     dec  c                                        ; $4C10: $0D
     jr   nz, jr_020_4C0B                          ; $4C11: $20 $F8
 
@@ -1646,13 +1646,13 @@ PositionTitleScreenSprites::
     ld   a, [wC17E]                               ; $526B: $FA $7E $C1
     inc  a                                        ; $526E: $3C
     cp   $10                                      ; $526F: $FE $10
-    jr   c, jr_020_5279                           ; $5271: $38 $06
+    jr   c, .jr_5279                              ; $5271: $38 $06
 
     ld   a, $10                                   ; $5273: $3E $10
     ld   [wC17E], a                               ; $5275: $EA $7E $C1
     ret                                           ; $5278: $C9
 
-jr_020_5279:
+.jr_5279
     ld   [wC17E], a                               ; $5279: $EA $7E $C1
 
 jr_020_527C:
@@ -1704,7 +1704,7 @@ jr_020_5296:
     jr   z, jr_020_52DC                           ; $52BF: $28 $1B
 
     cp   l                                        ; $52C1: $BD
-    jr   c, jr_020_52CE                           ; $52C2: $38 $0A
+    jr   c, .jr_52CE                              ; $52C2: $38 $0A
 
     ldh  a, [hIsGBC]                              ; $52C4: $F0 $FE
     and  a                                        ; $52C6: $A7
@@ -1714,7 +1714,7 @@ jr_020_5296:
     ldh  [rBGP], a                                ; $52CA: $E0 $47
     jr   jr_020_5296                              ; $52CC: $18 $C8
 
-jr_020_52CE:
+.jr_52CE
     ld   hl, $0000                                ; $52CE: $21 $00 $00
     add  hl, de                                   ; $52D1: $19
     add  hl, bc                                   ; $52D2: $09
@@ -2066,22 +2066,22 @@ UpdateBGRegionOrigin::
 func_020_55CA::
     ldh  a, [hMusicFadeOutTimer]                  ; $55CA: $F0 $A8
     and  a                                        ; $55CC: $A7
-    jr   z, jr_020_55F0                           ; $55CD: $28 $21
+    jr   z, .jr_55F0                              ; $55CD: $28 $21
 
     ld   a, [wTransitionSequenceCounter]          ; $55CF: $FA $6B $C1
     cp   $03                                      ; $55D2: $FE $03
-    jr   nz, jr_020_55F0                          ; $55D4: $20 $1A
+    jr   nz, .jr_55F0                             ; $55D4: $20 $1A
 
     ld   a, [wC16C]                               ; $55D6: $FA $6C $C1
     and  $03                                      ; $55D9: $E6 $03
     cp   $03                                      ; $55DB: $FE $03
-    jr   nz, jr_020_55F0                          ; $55DD: $20 $11
+    jr   nz, .jr_55F0                             ; $55DD: $20 $11
 
     ld   hl, hVolumeRight                         ; $55DF: $21 $A9 $FF
     ld   a, [hl]                                  ; $55E2: $7E
     inc  hl                                       ; $55E3: $23
     or   [hl]                                     ; $55E4: $B6
-    jr   z, jr_020_55F0                           ; $55E5: $28 $09
+    jr   z, .jr_55F0                              ; $55E5: $28 $09
 
     ldh  a, [hMusicFadeOutTimer]                  ; $55E7: $F0 $A8
     and  $FC                                      ; $55E9: $E6 $FC
@@ -2089,7 +2089,7 @@ func_020_55CA::
     ldh  [hMusicFadeOutTimer], a                  ; $55ED: $E0 $A8
     ret                                           ; $55EF: $C9
 
-jr_020_55F0:
+.jr_55F0
     ld   hl, wC16C                                ; $55F0: $21 $6C $C1
     inc  [hl]                                     ; $55F3: $34
     ld   a, [hl]                                  ; $55F4: $7E
@@ -2121,11 +2121,11 @@ jr_020_5605:
 jr_020_5616:
     ld   a, c                                     ; $5616: $79
     and  $03                                      ; $5617: $E6 $03
-    jr   z, jr_020_561C                           ; $5619: $28 $01
+    jr   z, .jr_561C                              ; $5619: $28 $01
 
     dec  c                                        ; $561B: $0D
 
-jr_020_561C:
+.jr_561C
     rrc  c                                        ; $561C: $CB $09
     rrc  c                                        ; $561E: $CB $09
     inc  b                                        ; $5620: $04
@@ -2190,11 +2190,11 @@ jr_020_5664:
     ld   a, c                                     ; $5670: $79
     and  $03                                      ; $5671: $E6 $03
     cp   [hl]                                     ; $5673: $BE
-    jr   z, jr_020_5677                           ; $5674: $28 $01
+    jr   z, .jr_5677                              ; $5674: $28 $01
 
     inc  c                                        ; $5676: $0C
 
-jr_020_5677:
+.jr_5677
     rrc  c                                        ; $5677: $CB $09
     rrc  c                                        ; $5679: $CB $09
     inc  b                                        ; $567B: $04
@@ -2310,11 +2310,11 @@ func_020_58AD::
 jr_020_58B3:
     ld   a, [wC5A2]                               ; $58B3: $FA $A2 $C5
     and  a                                        ; $58B6: $A7
-    jr   nz, jr_020_58CB                          ; $58B7: $20 $12
+    jr   nz, .jr_58CB                             ; $58B7: $20 $12
 
     ld   a, [wGameplayType]                       ; $58B9: $FA $95 $DB
     cp   $01                                      ; $58BC: $FE $01
-    jr   z, jr_020_58CB                           ; $58BE: $28 $0B
+    jr   z, .jr_58CB                              ; $58BE: $28 $0B
 
     ld   hl, wOverworldRoomStatus                 ; $58C0: $21 $00 $D8
     add  hl, bc                                   ; $58C3: $09
@@ -2323,7 +2323,7 @@ jr_020_58B3:
     ld   a, $2C                                   ; $58C7: $3E $2C
     jr   z, jr_020_58D3                           ; $58C9: $28 $08
 
-jr_020_58CB:
+.jr_58CB
     ldh  a, [hBGMapOffsetLow]                     ; $58CB: $F0 $E1
     ld   l, a                                     ; $58CD: $6F
     ldh  a, [hMultiPurposeB]                      ; $58CE: $F0 $E2
@@ -2341,11 +2341,11 @@ jr_020_58D3:
     ldh  [rVBK], a                                ; $58DB: $E0 $4F
     ld   a, h                                     ; $58DD: $7C
     cp   $2C                                      ; $58DE: $FE $2C
-    jr   nz, jr_020_58E4                          ; $58E0: $20 $02
+    jr   nz, .jr_58E4                             ; $58E0: $20 $02
 
     ld   a, $01                                   ; $58E2: $3E $01
 
-jr_020_58E4:
+.jr_58E4
     ld   [de], a                                  ; $58E4: $12
     xor  a                                        ; $58E5: $AF
     ldh  [rVBK], a                                ; $58E6: $E0 $4F
@@ -2363,7 +2363,7 @@ jr_020_58EC:
     ld   a, e                                     ; $58F0: $7B
     and  $1F                                      ; $58F1: $E6 $1F
     cp   $12                                      ; $58F3: $FE $12
-    jr   nz, jr_020_5901                          ; $58F5: $20 $0A
+    jr   nz, .jr_5901                             ; $58F5: $20 $0A
 
     ld   a, e                                     ; $58F7: $7B
     and  $E0                                      ; $58F8: $E6 $E0
@@ -2373,7 +2373,7 @@ jr_020_58EC:
     adc  $00                                      ; $58FE: $CE $00
     ld   d, a                                     ; $5900: $57
 
-jr_020_5901:
+.jr_5901
     jr   jr_020_58B3                              ; $5901: $18 $B0
 
 ret_020_5903:
@@ -2582,12 +2582,12 @@ inventoryDisplayLoop:
 
     ldh  a, [hMapId]                              ; $5A42: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $5A44: $FE $FF
-    jr   z, jr_020_5A4C                           ; $5A46: $28 $04
+    jr   z, .jr_5A4C                              ; $5A46: $28 $04
 
     cp   $0A                                      ; $5A48: $FE $0A
     jr   nc, jr_020_5A4F                          ; $5A4A: $30 $03
 
-jr_020_5A4C:
+.jr_5A4C
     ld   de, wCurrentDungeonItemFlags             ; $5A4C: $11 $CC $DB
 
 jr_020_5A4F:
@@ -2646,7 +2646,7 @@ incrementInventoryDisplay:
     add  hl, de                                   ; $5A82: $19
     ld   a, [wSeashellsCount]                     ; $5A83: $FA $0F $DB
     and  a                                        ; $5A86: $A7
-    jr   z, jr_020_5A97                           ; $5A87: $28 $0E
+    jr   z, .jr_5A97                              ; $5A87: $28 $0E
 
     ; Offset seashell count sprites to reflect seashell count in inventory
     ld   e, a                                     ; $5A89: $5F
@@ -2659,7 +2659,7 @@ incrementInventoryDisplay:
     add  $B0                                      ; $5A94: $C6 $B0
     ld   [hl+], a                                 ; $5A96: $22
 
-jr_020_5A97:
+.jr_5A97
     ld   hl, wDrawCommand                         ; $5A97: $21 $01 $D6
     ld   de, $31                                  ; $5A9A: $11 $31 $00
     add  hl, de                                   ; $5A9D: $19
@@ -2669,12 +2669,12 @@ jr_020_5A97:
 
     ldh  a, [hMapId]                              ; $5AA4: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $5AA6: $FE $FF
-    jr   z, jr_020_5AAE                           ; $5AA8: $28 $04
+    jr   z, .jr_5AAE                              ; $5AA8: $28 $04
 
     cp   $0A                                      ; $5AAA: $FE $0A
     jr   nc, jr_020_5AD1                          ; $5AAC: $30 $23
 
-jr_020_5AAE:
+.jr_5AAE
     ld   a, [wSmallKeysCount]                     ; $5AAE: $FA $D0 $DB
     and  a                                        ; $5AB1: $A7
     jr   z, jr_020_5ADE                           ; $5AB2: $28 $2A
@@ -2741,7 +2741,7 @@ tradingItemPaletteIndexes:
 InventoryLoad2Handler::
     ldh  a, [hIsGBC]                              ; $5AFD: $F0 $FE
     and  a                                        ; $5AFF: $A7
-    jr   z, jr_020_5B3D                           ; $5B00: $28 $3B
+    jr   z, .jr_5B3D                              ; $5B00: $28 $3B
 
     ld   b, $00                                   ; $5B02: $06 $00
     ld   a, [wTradeSequenceItem]                  ; $5B04: $FA $0E $DB
@@ -2770,7 +2770,7 @@ InventoryLoad2Handler::
     add  $08                                      ; $5B38: $C6 $08
     ld   [wDrawCommandsAltSize], a                ; $5B3A: $EA $90 $DC
 
-jr_020_5B3D:
+.jr_5B3D
     ld   a, $03                                   ; $5B3D: $3E $03
     ldh  [hVolumeRight], a                        ; $5B3F: $E0 $A9
     ld   a, $30                                   ; $5B41: $3E $30
@@ -2909,24 +2909,24 @@ func_020_5BB9::
     pop  de                                       ; $5BE6: $D1
     pop  hl                                       ; $5BE7: $E1
     cp   $06                                      ; $5BE8: $FE $06
-    jr   nz, jr_020_5BF9                          ; $5BEA: $20 $0D
+    jr   nz, .jr_5BF9                             ; $5BEA: $20 $0D
 
     ld   a, [wPowerBraceletLevel]                 ; $5BEC: $FA $43 $DB
     cp   $02                                      ; $5BEF: $FE $02
-    jr   nz, jr_020_5BF9                          ; $5BF1: $20 $06
+    jr   nz, .jr_5BF9                             ; $5BF1: $20 $06
 
     ld   a, $02                                   ; $5BF3: $3E $02
     ld   [hl+], a                                 ; $5BF5: $22
     ld   [hl+], a                                 ; $5BF6: $22
     jr   jr_020_5C10                              ; $5BF7: $18 $17
 
-jr_020_5BF9:
+.jr_5BF9
     cp   $18                                      ; $5BF9: $FE $18
-    jr   nz, jr_020_5C0B                          ; $5BFB: $20 $0E
+    jr   nz, .jr_5C0B                             ; $5BFB: $20 $0E
 
     ld   a, [wHasToadstool]                       ; $5BFD: $FA $4B $DB
     and  a                                        ; $5C00: $A7
-    jr   z, jr_020_5C0B                           ; $5C01: $28 $08
+    jr   z, .jr_5C0B                              ; $5C01: $28 $08
 
     ld   a, $02                                   ; $5C03: $3E $02
     ld   [hl+], a                                 ; $5C05: $22
@@ -2934,7 +2934,7 @@ jr_020_5BF9:
     ld   [hl+], a                                 ; $5C08: $22
     jr   jr_020_5C10                              ; $5C09: $18 $05
 
-jr_020_5C0B:
+.jr_5C0B
     ld   a, [de]                                  ; $5C0B: $1A
     inc  de                                       ; $5C0C: $13
     ld   [hl+], a                                 ; $5C0D: $22
@@ -3023,11 +3023,11 @@ func_020_5C9C::
     ldh  [hMultiPurpose0], a                      ; $5CAB: $E0 $D7
     ldh  a, [hIsGBC]                              ; $5CAD: $F0 $FE
     and  a                                        ; $5CAF: $A7
-    jr   z, jr_020_5CB5                           ; $5CB0: $28 $03
+    jr   z, .jr_5CB5                              ; $5CB0: $28 $03
 
     call func_020_5BB9                            ; $5CB2: $CD $B9 $5B
 
-jr_020_5CB5:
+.jr_5CB5
     ; de = start of the next draw command
     ld   a, [wDrawCommandsSize]                   ; $5CB5: $FA $00 $D6
     ld   e, a                                     ; $5CB8: $5F
@@ -3324,7 +3324,7 @@ func_020_5EB5::
     inc  a                                        ; $5EC1: $3C
     ld   [wDE06], a                               ; $5EC2: $EA $06 $DE
     cp   $08                                      ; $5EC5: $FE $08
-    jr   c, jr_020_5ED6                           ; $5EC7: $38 $0D
+    jr   c, .jr_5ED6                              ; $5EC7: $38 $0D
 
     xor  a                                        ; $5EC9: $AF
     ld   [wDE06], a                               ; $5ECA: $EA $06 $DE
@@ -3334,7 +3334,7 @@ func_020_5EB5::
     ld   [wDE07], a                               ; $5ED2: $EA $07 $DE
     ld   c, a                                     ; $5ED5: $4F
 
-jr_020_5ED6:
+.jr_5ED6
     ld   b, $00                                   ; $5ED6: $06 $00
     ld   hl, InventoryInstrumentCyclingColors     ; $5ED8: $21 $75 $5E
     add  hl, bc                                   ; $5EDB: $09
@@ -3395,15 +3395,15 @@ moveInventoryCursor::
     ld   a, [wInventorySelection]                 ; $5F26: $FA $A3 $DB
     add  [hl]                                     ; $5F29: $86
     cp   INVENTORY_SLOT_COUNT - 2                 ; $5F2A: $FE $0A
-    jr   c, jr_020_5F35                           ; $5F2C: $38 $07
+    jr   c, .jr_5F35                              ; $5F2C: $38 $07
 
     rla                                           ; $5F2E: $17
     ld   a, $00                                   ; $5F2F: $3E $00
-    jr   nc, jr_020_5F35                          ; $5F31: $30 $02
+    jr   nc, .jr_5F35                             ; $5F31: $30 $02
 
     ld   a, INVENTORY_SLOT_COUNT - 3              ; $5F33: $3E $09
 
-jr_020_5F35:
+.jr_5F35
     ld   [wInventorySelection], a                 ; $5F35: $EA $A3 $DB
 
 jr_020_5F38:
@@ -3418,48 +3418,48 @@ jr_020_5F38:
     ld   a, [wInventorySelection]                 ; $5F47: $FA $A3 $DB
     add  [hl]                                     ; $5F4A: $86
     cp   INVENTORY_SLOT_COUNT - 2                 ; $5F4B: $FE $0A
-    jr   c, jr_020_5F56                           ; $5F4D: $38 $07
+    jr   c, .jr_5F56                              ; $5F4D: $38 $07
 
     rla                                           ; $5F4F: $17
     ld   a, $00                                   ; $5F50: $3E $00
-    jr   nc, jr_020_5F56                          ; $5F52: $30 $02
+    jr   nc, .jr_5F56                             ; $5F52: $30 $02
 
     ld   a, INVENTORY_SLOT_COUNT - 3              ; $5F54: $3E $09
 
-jr_020_5F56:
+.jr_5F56
     ld   [wInventorySelection], a                 ; $5F56: $EA $A3 $DB
 
 jr_020_5F59:
     ldh  a, [hPressedButtonsMask]                 ; $5F59: $F0 $CB
     and  J_UP | J_DOWN | J_LEFT | J_RIGHT         ; $5F5B: $E6 $0F
-    jr   z, jr_020_5F69                           ; $5F5D: $28 $0A
+    jr   z, .jr_5F69                              ; $5F5D: $28 $0A
 
     ld   a, [wOcarinaMenuOpen]                    ; $5F5F: $FA $B5 $C1
     and  a                                        ; $5F62: $A7
-    jr   nz, jr_020_5F69                          ; $5F63: $20 $04
+    jr   nz, .jr_5F69                             ; $5F63: $20 $04
 
     xor  a                                        ; $5F65: $AF
     ld   [wInventoryCursorFrameCounter], a        ; $5F66: $EA $59 $C1
 
-jr_020_5F69:
+.jr_5F69
     ld   a, [wOcarinaMenuOpen]                    ; $5F69: $FA $B5 $C1
     and  a                                        ; $5F6C: $A7
-    jr   z, jr_020_5F85                           ; $5F6D: $28 $16
+    jr   z, .jr_5F85                              ; $5F6D: $28 $16
 
     ld   a, [wOcarinaMenuOpening]                 ; $5F6F: $FA $B8 $C1
     ld   hl, wOcarinaMenuClosing                  ; $5F72: $21 $B9 $C1
     or   [hl]                                     ; $5F75: $B6
-    jr   nz, jr_020_5F85                          ; $5F76: $20 $0D
+    jr   nz, .jr_5F85                             ; $5F76: $20 $0D
 
     ldh  a, [hJoypadState]                        ; $5F78: $F0 $CC
     and  J_START                                  ; $5F7A: $E6 $80
-    jr   z, jr_020_5F85                           ; $5F7C: $28 $07
+    jr   z, .jr_5F85                              ; $5F7C: $28 $07
 
     ld   a, $01                                   ; $5F7E: $3E $01
     ld   [wCloseInventoryAfterOcarinaMenuClosed], a ; $5F80: $EA $BA $C1
     jr   jr_020_5FB2                              ; $5F83: $18 $2D
 
-jr_020_5F85:
+.jr_5F85
     ld   a, [wInventorySelection]                 ; $5F85: $FA $A3 $DB
     ld   hl, wC1B6                                ; $5F88: $21 $B6 $C1
     cp   [hl]                                     ; $5F8B: $BE
@@ -3548,11 +3548,11 @@ jr_020_5FED:
 
 jr_020_600D:
     cp   INVENTORY_OCARINA                        ; $600D: $FE $09
-    jr   nz, jr_020_6027                          ; $600F: $20 $16
+    jr   nz, .jr_6027                             ; $600F: $20 $16
 
     ld   a, [wOcarinaSongFlags]                   ; $6011: $FA $49 $DB
     and  a                                        ; $6014: $A7
-    jr   z, jr_020_6027                           ; $6015: $28 $10
+    jr   z, .jr_6027                              ; $6015: $28 $10
 
     ld   a, $08                                   ; $6017: $3E $08
     ldh  [hNeedsUpdatingBGTiles], a               ; $6019: $E0 $90
@@ -3562,7 +3562,7 @@ jr_020_600D:
     ld   [wOcarinaMenuOpen], a                    ; $6022: $EA $B5 $C1
     jr   jr_020_6036                              ; $6025: $18 $0F
 
-jr_020_6027:
+.jr_6027
     ld   a, [wOcarinaMenuOpen]                    ; $6027: $FA $B5 $C1
     and  a                                        ; $602A: $A7
     jr   z, jr_020_6036                           ; $602B: $28 $09
@@ -3688,7 +3688,7 @@ jr_020_616A:
     ld   [de], a                                  ; $6175: $12
     inc  de                                       ; $6176: $13
     cp   $22                                      ; $6177: $FE $22
-    jr   z, jr_020_6185                           ; $6179: $28 $0A
+    jr   z, .jr_6185                              ; $6179: $28 $0A
 
     cp   $24                                      ; $617B: $FE $24
     jr   z, jr_020_6189                           ; $617D: $28 $0A
@@ -3698,7 +3698,7 @@ jr_020_616A:
 
     jr   jr_020_619A                              ; $6183: $18 $15
 
-jr_020_6185:
+.jr_6185
     ld   b, $04                                   ; $6185: $06 $04
     jr   jr_020_618F                              ; $6187: $18 $06
 
@@ -3739,11 +3739,11 @@ jr_020_61AD:
     ld   a, [hl]                                  ; $61B0: $7E
     inc  a                                        ; $61B1: $3C
     cp   $03                                      ; $61B2: $FE $03
-    jr   nz, jr_020_61B7                          ; $61B4: $20 $01
+    jr   nz, .jr_61B7                             ; $61B4: $20 $01
 
     xor  a                                        ; $61B6: $AF
 
-jr_020_61B7:
+.jr_61B7
     ld   [hl], a                                  ; $61B7: $77
     ld   e, a                                     ; $61B8: $5F
     ld   d, $00                                   ; $61B9: $16 $00
@@ -3763,11 +3763,11 @@ jr_020_61CB:
     ld   a, [hl]                                  ; $61CE: $7E
     dec  a                                        ; $61CF: $3D
     cp   $80                                      ; $61D0: $FE $80
-    jr   c, jr_020_61D6                           ; $61D2: $38 $02
+    jr   c, .jr_61D6                              ; $61D2: $38 $02
 
     ld   a, $02                                   ; $61D4: $3E $02
 
-jr_020_61D6:
+.jr_61D6
     ld   [hl], a                                  ; $61D6: $77
     ld   e, a                                     ; $61D7: $5F
     ld   d, $00                                   ; $61D8: $16 $00
@@ -3780,11 +3780,11 @@ jr_020_61D6:
 jr_020_61E4:
     ldh  a, [hJoypadState]                        ; $61E4: $F0 $CC
     and  J_RIGHT | J_LEFT                         ; $61E6: $E6 $03
-    jr   z, jr_020_61ED                           ; $61E8: $28 $03
+    jr   z, .jr_61ED                              ; $61E8: $28 $03
 
     call func_020_6039                            ; $61EA: $CD $39 $60
 
-jr_020_61ED:
+.jr_61ED
     ld   hl, wOAMBuffer+$10                       ; $61ED: $21 $10 $C0
     ld   a, $38                                   ; $61F0: $3E $38
     ld   [hl+], a                                 ; $61F2: $22
@@ -3821,12 +3821,12 @@ func_020_6215::
 
     ldh  a, [hMapId]                              ; $621B: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $621D: $FE $FF
-    jr   z, jr_020_6226                           ; $621F: $28 $05
+    jr   z, .jr_6226                              ; $621F: $28 $05
 
     cp   $08                                      ; $6221: $FE $08
     jp   nc, label_020_628D                       ; $6223: $D2 $8D $62
 
-jr_020_6226:
+.jr_6226
     ld   a, [wD46B]                               ; $6226: $FA $6B $D4
     and  $F8                                      ; $6229: $E6 $F8
     add  $50                                      ; $622B: $C6 $50
@@ -3840,32 +3840,32 @@ jr_020_6226:
     ld   l, a                                     ; $6238: $6F
     ld   a, [wMinimapLayout]                      ; $6239: $FA $B0 $DB
     and  $20                                      ; $623C: $E6 $20
-    jr   z, jr_020_624D                           ; $623E: $28 $0D
+    jr   z, .jr_624D                              ; $623E: $28 $0D
 
     ld   a, [wD46B]                               ; $6240: $FA $6B $D4
     and  $38                                      ; $6243: $E6 $38
     cp   $20                                      ; $6245: $FE $20
-    jr   nc, jr_020_624D                          ; $6247: $30 $04
+    jr   nc, .jr_624D                             ; $6247: $30 $04
 
     ld   a, h                                     ; $6249: $7C
     sub  $08                                      ; $624A: $D6 $08
     ld   h, a                                     ; $624C: $67
 
-jr_020_624D:
+.jr_624D
     ld   a, [wMinimapLayout]                      ; $624D: $FA $B0 $DB
     and  $10                                      ; $6250: $E6 $10
-    jr   z, jr_020_6261                           ; $6252: $28 $0D
+    jr   z, .jr_6261                              ; $6252: $28 $0D
 
     ld   a, [wD46B]                               ; $6254: $FA $6B $D4
     and  $07                                      ; $6257: $E6 $07
     cp   $04                                      ; $6259: $FE $04
-    jr   c, jr_020_6261                           ; $625B: $38 $04
+    jr   c, .jr_6261                              ; $625B: $38 $04
 
     ld   a, l                                     ; $625D: $7D
     add  $08                                      ; $625E: $C6 $08
     ld   l, a                                     ; $6260: $6F
 
-jr_020_6261:
+.jr_6261
     ld   a, h                                     ; $6261: $7C
     ld   [wOAMBuffer], a                          ; $6262: $EA $00 $C0
     ld   a, l                                     ; $6265: $7D
@@ -3874,7 +3874,7 @@ jr_020_6261:
     ld   [wOAMBuffer+2], a                        ; $626B: $EA $02 $C0
     ldh  a, [hIsGBC]                              ; $626E: $F0 $FE
     and  a                                        ; $6270: $A7
-    jr   z, jr_020_6285                           ; $6271: $28 $12
+    jr   z, .jr_6285                              ; $6271: $28 $12
 
     ld   a, $01                                   ; $6273: $3E $01
     ld   [wOAMBuffer+3], a                        ; $6275: $EA $03 $C0
@@ -3886,7 +3886,7 @@ jr_020_6261:
     ld   [wOAMBuffer+3], a                        ; $6280: $EA $03 $C0
     jr   label_020_628D                           ; $6283: $18 $08
 
-jr_020_6285:
+.jr_6285
     ldh  a, [hFrameCounter]                       ; $6285: $F0 $E7
     rla                                           ; $6287: $17
     and  $10                                      ; $6288: $E6 $10
@@ -3918,7 +3918,7 @@ func_020_62A2::
     ld   [wOAMBuffer+8], a                        ; $62BB: $EA $08 $C0
     ld   hl, Data_020_628E                        ; $62BE: $21 $8E $62
 
-jr_020_62C1:
+.jr_62C1
     add  hl, de                                   ; $62C1: $19
     ld   a, [hl]                                  ; $62C2: $7E
     ld   [wOAMBuffer+5], a                        ; $62C3: $EA $05 $C0
@@ -3942,13 +3942,13 @@ func_020_62DE::
     inc  a                                        ; $62E5: $3C
     ld   [wDE08], a                               ; $62E6: $EA $08 $DE
     cp   $10                                      ; $62E9: $FE $10
-    jr   c, jr_020_62F2                           ; $62EB: $38 $05
+    jr   c, .jr_62F2                              ; $62EB: $38 $05
 
     xor  a                                        ; $62ED: $AF
     ld   [wDE08], a                               ; $62EE: $EA $08 $DE
     inc  b                                        ; $62F1: $04
 
-jr_020_62F2:
+.jr_62F2
     ld   a, b                                     ; $62F2: $78
     ld   [wDE09], a                               ; $62F3: $EA $09 $DE
     ldh  [hFreeWarpDataAddress], a                ; $62F6: $E0 $E6
@@ -4018,7 +4018,7 @@ IF __PATCH_0__
 ENDC
     ld   a, [wBGPalette]                          ; $6352: $FA $97 $DB
 
-jr_020_6355:
+.jr_6355
     cp   $E4                                      ; $6355: $FE $E4
     ret  c                                        ; $6357: $D8
 
@@ -4036,7 +4036,7 @@ jr_020_635E:
 .loop_6363:
     ld   a, [hl+]                                 ; $6363: $2A
     cp   INVENTORY_SWORD                          ; $6364: $FE $01
-    jr   z, jr_020_636E                           ; $6366: $28 $06
+    jr   z, .jr_636E                              ; $6366: $28 $06
 
     inc  e                                        ; $6368: $1C
     ld   a, e                                     ; $6369: $7B
@@ -4045,7 +4045,7 @@ jr_020_635E:
 
     ret                                           ; $636D: $C9
 
-jr_020_636E:
+.jr_636E
     ld   d, $00                                   ; $636E: $16 $00
     ld   hl, Data_020_633A                        ; $6370: $21 $3A $63
     add  hl, de                                   ; $6373: $19
@@ -4069,23 +4069,23 @@ jr_020_636E:
     ld   hl, wDynamicOAMBuffer                    ; $6390: $21 $30 $C0
     ld   a, [wGameplayType]                       ; $6393: $FA $95 $DB
     cp   $0C                                      ; $6396: $FE $0C
-    jr   nz, jr_020_63A1                          ; $6398: $20 $07
+    jr   nz, .jr_63A1                             ; $6398: $20 $07
 
     ld   a, [wGameplaySubtype]                    ; $639A: $FA $96 $DB
     cp   $02                                      ; $639D: $FE $02
     jr   nc, jr_020_63A2                          ; $639F: $30 $01
 
-jr_020_63A1:
+.jr_63A1
     add  hl, de                                   ; $63A1: $19
 
 jr_020_63A2:
     ld   a, [wOcarinaMenuOpen]                    ; $63A2: $FA $B5 $C1
     and  a                                        ; $63A5: $A7
-    jr   z, jr_020_63AB                           ; $63A6: $28 $03
+    jr   z, .jr_63AB                              ; $63A6: $28 $03
 
     ld   hl, wDynamicOAMBuffer+$6C                ; $63A8: $21 $9C $C0
 
-jr_020_63AB:
+.jr_63AB
     ld   a, [wWindowY]                            ; $63AB: $FA $9A $DB
     push hl                                       ; $63AE: $E5
     ld   hl, hMultiPurpose1                       ; $63AF: $21 $D8 $FF
@@ -4114,7 +4114,7 @@ InventoryVisibleHandler::
     call func_020_62DE                            ; $63D6: $CD $DE $62
     ld   a, [wCloseInventoryAfterOcarinaMenuClosed] ; $63D9: $FA $BA $C1
     and  a                                        ; $63DC: $A7
-    jr   z, jr_020_63F5                           ; $63DD: $28 $16
+    jr   z, .jr_63F5                              ; $63DD: $28 $16
 
     ld   a, [wGameplaySubtype]                    ; $63DF: $FA $96 $DB
     cp   $0C                                      ; $63E2: $FE $0C
@@ -4127,7 +4127,7 @@ InventoryVisibleHandler::
     ld   [wOcarinaMenuClosing], a                 ; $63F0: $EA $B9 $C1
     jr   jr_020_6436                              ; $63F3: $18 $41
 
-jr_020_63F5:
+.jr_63F5
     ; POI: Debug tool 3 check to enable free movement mode on the subscreen
     ; and resetting the photo album on pushing Select
     ldh  a, [hJoypadState]                        ; $63F5: $F0 $CC
@@ -4140,7 +4140,7 @@ jr_020_63F5:
     ld   [wDE0A], a                               ; $6402: $EA $0A $DE
     ld   a, [ROM_DebugTool3]                      ; $6405: $FA $05 $00
     and  a                                        ; $6408: $A7
-    jr   z, jr_020_641C                           ; $6409: $28 $11
+    jr   z, .jr_641C                              ; $6409: $28 $11
 
     ld   a, [wFreeMovementMode]                   ; $640B: $FA $7B $C1
     xor  $01                                      ; $640E: $EE $01
@@ -4153,7 +4153,7 @@ IF !__PATCH_3__
     ld   [wPhotos2], a                            ; $6419: $EA $0D $DC
 ENDC
 
-jr_020_641C:
+.jr_641C
     jr   ret_020_6445                             ; $641C: $18 $27
 
 jr_020_641E:
@@ -4307,11 +4307,11 @@ func_020_64EE::
 
 jr_020_654E:
     bit  0, a                                     ; $654E: $CB $47
-    jr   z, jr_020_6553                           ; $6550: $28 $01
+    jr   z, .jr_6553                              ; $6550: $28 $01
 
     inc  e                                        ; $6552: $1C
 
-jr_020_6553:
+.jr_6553
     srl  a                                        ; $6553: $CB $3F
     and  a                                        ; $6555: $A7
     jr   nz, jr_020_654E                          ; $6556: $20 $F6
@@ -4325,7 +4325,7 @@ jr_020_6553:
 
     inc  e                                        ; $6561: $1C
 
-.jr_020_6562:
+.jr_020_6562
     srl  a                                        ; $6562: $CB $3F
     and  a                                        ; $6564: $A7
 
@@ -4352,22 +4352,22 @@ InventoryInteractiveHandler::
     call func_020_64EE                            ; $6586: $CD $EE $64
     ldh  a, [hPressedButtonsMask]                 ; $6589: $F0 $CB
     and  $40                                      ; $658B: $E6 $40
-    jr   nz, jr_020_6596                          ; $658D: $20 $07
+    jr   nz, .jr_6596                             ; $658D: $20 $07
 
     ld   a, $0B                                   ; $658F: $3E $0B
     ld   [wGameplaySubtype], a                    ; $6591: $EA $96 $DB
     jr   ret_020_65A7                             ; $6594: $18 $11
 
-jr_020_6596:
+.jr_6596
     ld   a, [wDE0A]                               ; $6596: $FA $0A $DE
     sub  $04                                      ; $6599: $D6 $04
     cp   $78                                      ; $659B: $FE $78
-    jr   nc, jr_020_65A4                          ; $659D: $30 $05
+    jr   nc, .jr_65A4                             ; $659D: $30 $05
 
     call IncrementGameplaySubtype_20              ; $659F: $CD $83 $66
     ld   a, $78                                   ; $65A2: $3E $78
 
-jr_020_65A4:
+.jr_65A4
     ld   [wDE0A], a                               ; $65A4: $EA $0A $DE
 
 ret_020_65A7:
@@ -4391,13 +4391,13 @@ InventoryStatusOutHandler::
     ld   a, [wDE0A]                               ; $65BE: $FA $0A $DE
     add  $04                                      ; $65C1: $C6 $04
     cp   $90                                      ; $65C3: $FE $90
-    jr   c, jr_020_65CE                           ; $65C5: $38 $07
+    jr   c, .jr_65CE                              ; $65C5: $38 $07
 
     ld   a, $08                                   ; $65C7: $3E $08
     ld   [wGameplaySubtype], a                    ; $65C9: $EA $96 $DB
     ld   a, $90                                   ; $65CC: $3E $90
 
-jr_020_65CE:
+.jr_65CE
     ld   [wDE0A], a                               ; $65CE: $EA $0A $DE
     ret                                           ; $65D1: $C9
 
@@ -4498,12 +4498,12 @@ jr_020_6628:
     ld   [rLCDC], a                               ; $6670: $E0 $40
     ldh  a, [hMapId]                              ; $6672: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $6674: $FE $FF
-    jr   nz, jr_020_667C                          ; $6676: $20 $04
+    jr   nz, .jr_667C                             ; $6676: $20 $04
 
     ld   a, TRUE                                  ; $6678: $3E $01
     ldh  [hNeedsUpdatingEntityTilesA], a          ; $667A: $E0 $91
 
-jr_020_667C:
+.jr_667C
     ld   a, [wLCDControl]                         ; $667C: $FA $FD $D6
     ld   [rLCDC], a                               ; $667F: $E0 $40
     ei                                            ; $6681: $FB
@@ -4685,11 +4685,11 @@ func_020_6A30::
     ld   d, $40                                   ; $6A49: $16 $40
     ld   a, e                                     ; $6A4B: $7B
     cp   $06                                      ; $6A4C: $FE $06
-    jr   nc, jr_020_6A52                          ; $6A4E: $30 $02
+    jr   nc, .jr_6A52                             ; $6A4E: $30 $02
 
     ld   d, $28                                   ; $6A50: $16 $28
 
-jr_020_6A52:
+.jr_6A52
     and  $10                                      ; $6A52: $E6 $10
     jr   z, func_020_6A68                         ; $6A54: $28 $12
 
@@ -4711,11 +4711,11 @@ func_020_6A68::
     and  $1F                                      ; $6A6D: $E6 $1F
     add  c                                        ; $6A6F: $81
     cp   $20                                      ; $6A70: $FE $20
-    jr   c, jr_020_6A76                           ; $6A72: $38 $02
+    jr   c, .jr_6A76                              ; $6A72: $38 $02
 
     ld   a, $1F                                   ; $6A74: $3E $1F
 
-jr_020_6A76:
+.jr_6A76
     ldh  [hMultiPurpose0], a                      ; $6A76: $E0 $D7
     ldh  a, [hMultiPurposeE]                      ; $6A78: $F0 $E5
     ld   c, a                                     ; $6A7A: $4F
@@ -4730,11 +4730,11 @@ jr_020_6A76:
     and  $3E                                      ; $6A87: $E6 $3E
     add  c                                        ; $6A89: $81
     cp   $40                                      ; $6A8A: $FE $40
-    jr   c, jr_020_6A90                           ; $6A8C: $38 $02
+    jr   c, .jr_6A90                              ; $6A8C: $38 $02
 
     ld   a, $3E                                   ; $6A8E: $3E $3E
 
-jr_020_6A90:
+.jr_6A90
     ldh  [hMultiPurpose1], a                      ; $6A90: $E0 $D8
     ldh  a, [hFreeWarpDataAddress]                ; $6A92: $F0 $E6
     ld   c, a                                     ; $6A94: $4F
@@ -4742,11 +4742,11 @@ jr_020_6A90:
     and  $7C                                      ; $6A96: $E6 $7C
     add  c                                        ; $6A98: $81
     cp   $80                                      ; $6A99: $FE $80
-    jr   c, jr_020_6A9F                           ; $6A9B: $38 $02
+    jr   c, .jr_6A9F                              ; $6A9B: $38 $02
 
     ld   a, $7C                                   ; $6A9D: $3E $7C
 
-jr_020_6A9F:
+.jr_6A9F
     ldh  [hMultiPurpose2], a                      ; $6A9F: $E0 $D9
     pop  hl                                       ; $6AA1: $E1
     ldh  a, [hMultiPurpose0]                      ; $6AA2: $F0 $D7
@@ -4823,17 +4823,17 @@ func_020_6AF5::
     ld   a, [hl]                                  ; $6B09: $7E
     and  $1F                                      ; $6B0A: $E6 $1F
     cp   b                                        ; $6B0C: $B8
-    jr   c, jr_020_6B17                           ; $6B0D: $38 $08
+    jr   c, .jr_6B17                              ; $6B0D: $38 $08
 
-    jr   z, jr_020_6B17                           ; $6B0F: $28 $06
+    jr   z, .jr_6B17                              ; $6B0F: $28 $06
 
     sub  c                                        ; $6B11: $91
-    jr   c, jr_020_6B17                           ; $6B12: $38 $03
+    jr   c, .jr_6B17                              ; $6B12: $38 $03
 
     cp   b                                        ; $6B14: $B8
     jr   nc, jr_020_6B18                          ; $6B15: $30 $01
 
-jr_020_6B17:
+.jr_6B17
     ld   a, b                                     ; $6B17: $78
 
 jr_020_6B18:
@@ -4860,17 +4860,17 @@ jr_020_6B18:
     ld   c, a                                     ; $6B36: $4F
     pop  af                                       ; $6B37: $F1
     cp   b                                        ; $6B38: $B8
-    jr   c, jr_020_6B43                           ; $6B39: $38 $08
+    jr   c, .jr_6B43                              ; $6B39: $38 $08
 
-    jr   z, jr_020_6B43                           ; $6B3B: $28 $06
+    jr   z, .jr_6B43                              ; $6B3B: $28 $06
 
     sub  c                                        ; $6B3D: $91
-    jr   c, jr_020_6B43                           ; $6B3E: $38 $03
+    jr   c, .jr_6B43                              ; $6B3E: $38 $03
 
     cp   b                                        ; $6B40: $B8
     jr   nc, jr_020_6B44                          ; $6B41: $30 $01
 
-jr_020_6B43:
+.jr_6B43
     ld   a, b                                     ; $6B43: $78
 
 jr_020_6B44:
@@ -4883,17 +4883,17 @@ jr_020_6B44:
     ld   a, [hl]                                  ; $6B4D: $7E
     and  $7C                                      ; $6B4E: $E6 $7C
     cp   b                                        ; $6B50: $B8
-    jr   c, jr_020_6B5B                           ; $6B51: $38 $08
+    jr   c, .jr_6B5B                              ; $6B51: $38 $08
 
-    jr   z, jr_020_6B5B                           ; $6B53: $28 $06
+    jr   z, .jr_6B5B                              ; $6B53: $28 $06
 
     sub  c                                        ; $6B55: $91
-    jr   c, jr_020_6B5B                           ; $6B56: $38 $03
+    jr   c, .jr_6B5B                              ; $6B56: $38 $03
 
     cp   b                                        ; $6B58: $B8
     jr   nc, jr_020_6B5C                          ; $6B59: $30 $01
 
-jr_020_6B5B:
+.jr_6B5B
     ld   a, b                                     ; $6B5B: $78
 
 jr_020_6B5C:
@@ -5131,12 +5131,12 @@ func_020_6C4F::
 
     ld   a, [wC16C]                               ; $6C55: $FA $6C $C1
     and  $01                                      ; $6C58: $E6 $01
-    jr   z, jr_020_6C60                           ; $6C5A: $28 $04
+    jr   z, .jr_6C60                              ; $6C5A: $28 $04
 
     ld   a, $02                                   ; $6C5C: $3E $02
     jr   jr_020_6C76                              ; $6C5E: $18 $16
 
-jr_020_6C60:
+.jr_6C60
     ld   a, $04                                   ; $6C60: $3E $04
     ldh  [hMultiPurposeD], a                      ; $6C62: $E0 $E4
     ld   a, $08                                   ; $6C64: $3E $08
@@ -5159,12 +5159,12 @@ func_020_6C7A::
 
     ld   a, [wC16C]                               ; $6C80: $FA $6C $C1
     and  $01                                      ; $6C83: $E6 $01
-    jr   z, jr_020_6C8B                           ; $6C85: $28 $04
+    jr   z, .jr_6C8B                              ; $6C85: $28 $04
 
     ld   a, $02                                   ; $6C87: $3E $02
     jr   jr_020_6CA3                              ; $6C89: $18 $18
 
-jr_020_6C8B:
+.jr_6C8B
     ld   a, $04                                   ; $6C8B: $3E $04
     ldh  [hMultiPurposeD], a                      ; $6C8D: $E0 $E4
     ld   a, $08                                   ; $6C8F: $3E $08
@@ -5188,11 +5188,11 @@ ApplyFadeToWhite_GBC::
 
     push af                                       ; $6CAE: $F5
     and  $02                                      ; $6CAF: $E6 $02
-    jr   nz, jr_020_6CB5                          ; $6CB1: $20 $02
+    jr   nz, .jr_6CB5                             ; $6CB1: $20 $02
 
     ld   a, $01                                   ; $6CB3: $3E $01
 
-jr_020_6CB5:
+.jr_6CB5
     or   $80                                      ; $6CB5: $F6 $80
     ld   [wPaletteDataFlags], a                   ; $6CB7: $EA $D1 $DD
     ld   a, [wC3CA]                               ; $6CBA: $FA $CA $C3
@@ -5215,7 +5215,7 @@ jr_020_6CB5:
     ldh  [hMultiPurpose3], a                      ; $6CDF: $E0 $DA
     ld   a, [wTransitionGfx]                      ; $6CE1: $FA $7F $C1
     cp   $03                                      ; $6CE4: $FE $03
-    jr   z, jr_020_6CFA                           ; $6CE6: $28 $12
+    jr   z, .jr_6CFA                              ; $6CE6: $28 $12
 
     ld   a, [wPaletteDataFlags]                   ; $6CE8: $FA $D1 $DD
     push af                                       ; $6CEB: $F5
@@ -5226,7 +5226,7 @@ jr_020_6CB5:
     ld   [wPaletteUnknownE], a                    ; $6CF5: $EA $D5 $DD
     jr   ret_020_6D0D                             ; $6CF8: $18 $13
 
-jr_020_6CFA:
+.jr_6CFA
     ld   a, [wC3CA]                               ; $6CFA: $FA $CA $C3
     dec  a                                        ; $6CFD: $3D
     and  $03                                      ; $6CFE: $E6 $03
@@ -5249,16 +5249,16 @@ func_020_6D0E::
 
     ldh  a, [hFrameCounter]                       ; $6D14: $F0 $E7
     and  $01                                      ; $6D16: $E6 $01
-    jr   z, jr_020_6D1E                           ; $6D18: $28 $04
+    jr   z, .jr_6D1E                              ; $6D18: $28 $04
 
     ld   a, $02                                   ; $6D1A: $3E $02
     jr   jr_020_6D4E                              ; $6D1C: $18 $30
 
-jr_020_6D1E:
+.jr_6D1E
     ld   a, [hl]                                  ; $6D1E: $7E
     dec  a                                        ; $6D1F: $3D
     cp   $0E                                      ; $6D20: $FE $0E
-    jr   c, jr_020_6D38                           ; $6D22: $38 $14
+    jr   c, .jr_6D38                              ; $6D22: $38 $14
 
     ld   a, $01                                   ; $6D24: $3E $01
     ldh  [hMultiPurposeD], a                      ; $6D26: $E0 $E4
@@ -5274,7 +5274,7 @@ ENDC
     ld   d, $20                                   ; $6D33: $16 $20
     call func_020_6A68                            ; $6D35: $CD $68 $6A
 
-jr_020_6D38:
+.jr_6D38
     ld   a, $01                                   ; $6D38: $3E $01
     ldh  [hMultiPurposeD], a                      ; $6D3A: $E0 $E4
     ld   a, $02                                   ; $6D3C: $3E $02
@@ -5296,13 +5296,13 @@ func_020_6D52::
     ld   e, $20                                   ; $6D52: $1E $20
     ld   a, [hl]                                  ; $6D54: $7E
     cp   $30                                      ; $6D55: $FE $30
-    jr   c, jr_020_6D60                           ; $6D57: $38 $07
+    jr   c, .jr_6D60                              ; $6D57: $38 $07
 
     ld   hl, wObjPal1                             ; $6D59: $21 $50 $DC
     ld   a, $02                                   ; $6D5C: $3E $02
     jr   jr_020_6D65                              ; $6D5E: $18 $05
 
-jr_020_6D60:
+.jr_6D60
     ld   hl, wBGPal1                              ; $6D60: $21 $10 $DC
     ld   a, $01                                   ; $6D63: $3E $01
 
@@ -5314,11 +5314,11 @@ jr_020_6D68:
     ld   a, [hl]                                  ; $6D69: $7E
     inc  a                                        ; $6D6A: $3C
     and  $1F                                      ; $6D6B: $E6 $1F
-    jr   nz, jr_020_6D71                          ; $6D6D: $20 $02
+    jr   nz, .jr_6D71                             ; $6D6D: $20 $02
 
     ld   a, $1F                                   ; $6D6F: $3E $1F
 
-jr_020_6D71:
+.jr_6D71
     ldh  [hMultiPurpose0], a                      ; $6D71: $E0 $D7
     ld   a, [hl+]                                 ; $6D73: $2A
     and  $E0                                      ; $6D74: $E6 $E0
@@ -5330,20 +5330,20 @@ jr_020_6D71:
     or   d                                        ; $6D7E: $B2
     add  $02                                      ; $6D7F: $C6 $02
     and  $3E                                      ; $6D81: $E6 $3E
-    jr   nz, jr_020_6D87                          ; $6D83: $20 $02
+    jr   nz, .jr_6D87                             ; $6D83: $20 $02
 
     ld   a, $3E                                   ; $6D85: $3E $3E
 
-jr_020_6D87:
+.jr_6D87
     ldh  [hMultiPurpose1], a                      ; $6D87: $E0 $D8
     ld   a, [hl]                                  ; $6D89: $7E
     add  $04                                      ; $6D8A: $C6 $04
     and  $7C                                      ; $6D8C: $E6 $7C
-    jr   nz, jr_020_6D92                          ; $6D8E: $20 $02
+    jr   nz, .jr_6D92                             ; $6D8E: $20 $02
 
     ld   a, $7C                                   ; $6D90: $3E $7C
 
-jr_020_6D92:
+.jr_6D92
     ldh  [hMultiPurpose2], a                      ; $6D92: $E0 $D9
     pop  hl                                       ; $6D94: $E1
     ldh  a, [hMultiPurpose0]                      ; $6D95: $F0 $D7
@@ -6114,7 +6114,7 @@ func_020_7BA5::
 
     ld   hl, Data_020_7995                        ; $7BBF: $21 $95 $79
 
-jr_020_7BC2:
+.jr_7BC2
     dec  a                                        ; $7BC2: $3D
     jr   z, jr_020_7BD4                           ; $7BC3: $28 $0F
 
@@ -6124,7 +6124,7 @@ jr_020_7BC2:
 
     ld   hl, Data_020_7A95                        ; $7BCB: $21 $95 $7A
 
-jr_020_7BCE:
+.jr_7BCE
     dec  a                                        ; $7BCE: $3D
     jr   z, jr_020_7BD4                           ; $7BCF: $28 $03
 
@@ -6204,12 +6204,12 @@ func_020_7C26::
     pop  bc                                       ; $7C46: $C1
     ld   a, c                                     ; $7C47: $79
     cp   $20                                      ; $7C48: $FE $20
-    jr   z, jr_020_7C50                           ; $7C4A: $28 $04
+    jr   z, .jr_7C50                              ; $7C4A: $28 $04
 
     ld   a, $04                                   ; $7C4C: $3E $04
     jr   jr_020_7C5B                              ; $7C4E: $18 $0B
 
-jr_020_7C50:
+.jr_7C50
     ld   hl, wBGPal8                              ; $7C50: $21 $48 $DC
     ld   a, $A4                                   ; $7C53: $3E $A4
     ld   [hl+], a                                 ; $7C55: $22
@@ -6327,11 +6327,11 @@ func_020_7D40::
     ld   a, [wOAMNextAvailableSlot]               ; $7D6B: $FA $C0 $C3
     add  c                                        ; $7D6E: $81
     cp   $A0                                      ; $7D6F: $FE $A0
-    jr   c, jr_020_7D74                           ; $7D71: $38 $01
+    jr   c, .jr_7D74                              ; $7D71: $38 $01
 
     xor  a                                        ; $7D73: $AF
 
-jr_020_7D74:
+.jr_7D74
     ld   [wOAMNextAvailableSlot], a               ; $7D74: $EA $C0 $C3
     ld   a, [wActiveEntityIndex]                  ; $7D77: $FA $23 $C1
     ld   c, a                                     ; $7D7A: $4F
@@ -6358,14 +6358,14 @@ jr_020_7D97:
     ld   c, a                                     ; $7D9A: $4F
     ld   a, [hl]                                  ; $7D9B: $7E
     and  $1F                                      ; $7D9C: $E6 $1F
-    jr   z, jr_020_7DA4                           ; $7D9E: $28 $04
+    jr   z, .jr_7DA4                              ; $7D9E: $28 $04
 
     sub  c                                        ; $7DA0: $91
-    jr   nc, jr_020_7DA4                          ; $7DA1: $30 $01
+    jr   nc, .jr_7DA4                             ; $7DA1: $30 $01
 
     xor  a                                        ; $7DA3: $AF
 
-jr_020_7DA4:
+.jr_7DA4
     ldh  [hMultiPurpose0], a                      ; $7DA4: $E0 $D7
     ldh  a, [hMultiPurposeE]                      ; $7DA6: $F0 $E5
     ld   c, a                                     ; $7DA8: $4F
@@ -6378,27 +6378,27 @@ jr_020_7DA4:
     swap a                                        ; $7DB2: $CB $37
     or   b                                        ; $7DB4: $B0
     and  $3E                                      ; $7DB5: $E6 $3E
-    jr   z, jr_020_7DBD                           ; $7DB7: $28 $04
+    jr   z, .jr_7DBD                              ; $7DB7: $28 $04
 
     sub  c                                        ; $7DB9: $91
-    jr   nc, jr_020_7DBD                          ; $7DBA: $30 $01
+    jr   nc, .jr_7DBD                             ; $7DBA: $30 $01
 
     xor  a                                        ; $7DBC: $AF
 
-jr_020_7DBD:
+.jr_7DBD
     ldh  [hMultiPurpose1], a                      ; $7DBD: $E0 $D8
     ldh  a, [hFreeWarpDataAddress]                ; $7DBF: $F0 $E6
     ld   c, a                                     ; $7DC1: $4F
     ld   a, [hl]                                  ; $7DC2: $7E
     and  $7C                                      ; $7DC3: $E6 $7C
-    jr   z, jr_020_7DCB                           ; $7DC5: $28 $04
+    jr   z, .jr_7DCB                              ; $7DC5: $28 $04
 
     sub  c                                        ; $7DC7: $91
-    jr   nc, jr_020_7DCB                          ; $7DC8: $30 $01
+    jr   nc, .jr_7DCB                             ; $7DC8: $30 $01
 
     xor  a                                        ; $7DCA: $AF
 
-jr_020_7DCB:
+.jr_7DCB
     ldh  [hMultiPurpose2], a                      ; $7DCB: $E0 $D9
     pop  hl                                       ; $7DCD: $E1
     ldh  a, [hMultiPurpose0]                      ; $7DCE: $F0 $D7
@@ -6478,17 +6478,17 @@ Jump_020_7e25:
     ld a, [hl]                                    ; $7e39: $7e
     and $1f                                       ; $7e3a: $e6 $1f
     cp b                                          ; $7e3c: $b8
-    jr c, jr_020_7e47                             ; $7e3d: $38 $08
+    jr c, .jr_7e47                             ; $7e3d: $38 $08
 
-    jr z, jr_020_7e47                             ; $7e3f: $28 $06
+    jr z, .jr_7e47                             ; $7e3f: $28 $06
 
     sub c                                         ; $7e41: $91
-    jr c, jr_020_7e47                             ; $7e42: $38 $03
+    jr c, .jr_7e47                             ; $7e42: $38 $03
 
     cp b                                          ; $7e44: $b8
     jr nc, jr_020_7e48                            ; $7e45: $30 $01
 
-jr_020_7e47:
+.jr_7e47
     ld a, b                                       ; $7e47: $78
 
 jr_020_7e48:
@@ -6515,17 +6515,17 @@ jr_020_7e48:
     ld c, a                                       ; $7e66: $4f
     pop af                                        ; $7e67: $f1
     cp b                                          ; $7e68: $b8
-    jr c, jr_020_7e73                             ; $7e69: $38 $08
+    jr c, .jr_7e73                             ; $7e69: $38 $08
 
-    jr z, jr_020_7e73                             ; $7e6b: $28 $06
+    jr z, .jr_7e73                             ; $7e6b: $28 $06
 
     sub c                                         ; $7e6d: $91
-    jr c, jr_020_7e73                             ; $7e6e: $38 $03
+    jr c, .jr_7e73                             ; $7e6e: $38 $03
 
     cp b                                          ; $7e70: $b8
     jr nc, jr_020_7e74                            ; $7e71: $30 $01
 
-jr_020_7e73:
+.jr_7e73
     ld a, b                                       ; $7e73: $78
 
 jr_020_7e74:
@@ -6538,17 +6538,17 @@ jr_020_7e74:
     ld a, [hl]                                    ; $7e7d: $7e
     and $7c                                       ; $7e7e: $e6 $7c
     cp b                                          ; $7e80: $b8
-    jr c, jr_020_7e8b                             ; $7e81: $38 $08
+    jr c, .jr_7e8b                             ; $7e81: $38 $08
 
-    jr z, jr_020_7e8b                             ; $7e83: $28 $06
+    jr z, .jr_7e8b                             ; $7e83: $28 $06
 
     sub c                                         ; $7e85: $91
-    jr c, jr_020_7e8b                             ; $7e86: $38 $03
+    jr c, .jr_7e8b                             ; $7e86: $38 $03
 
     cp b                                          ; $7e88: $b8
     jr nc, jr_020_7e8c                            ; $7e89: $30 $01
 
-jr_020_7e8b:
+.jr_7e8b
     ld a, b                                       ; $7e8b: $78
 
 jr_020_7e8c:
@@ -6601,11 +6601,11 @@ jr_020_7ec8:
     and $1f                                       ; $7ecd: $e6 $1f
     add c                                         ; $7ecf: $81
     cp $20                                        ; $7ed0: $fe $20
-    jr c, jr_020_7ed6                             ; $7ed2: $38 $02
+    jr c, .jr_7ed6                             ; $7ed2: $38 $02
 
     ld a, $1f                                     ; $7ed4: $3e $1f
 
-jr_020_7ed6:
+.jr_7ed6
     ldh [hMultiPurpose0], a                            ; $7ed6: $e0 $d7
     ldh a, [hMultiPurposeE]                            ; $7ed8: $f0 $e5
     ld c, a                                       ; $7eda: $4f
@@ -6620,11 +6620,11 @@ jr_020_7ed6:
     and $3e                                       ; $7ee7: $e6 $3e
     add c                                         ; $7ee9: $81
     cp $40                                        ; $7eea: $fe $40
-    jr c, jr_020_7ef0                             ; $7eec: $38 $02
+    jr c, .jr_7ef0                             ; $7eec: $38 $02
 
     ld a, $3e                                     ; $7eee: $3e $3e
 
-jr_020_7ef0:
+.jr_7ef0
     ldh [hMultiPurpose1], a                            ; $7ef0: $e0 $d8
     ldh a, [hMultiPurposeF]                            ; $7ef2: $f0 $e6
     ld c, a                                       ; $7ef4: $4f
@@ -6632,11 +6632,11 @@ jr_020_7ef0:
     and $7c                                       ; $7ef6: $e6 $7c
     add c                                         ; $7ef8: $81
     cp $80                                        ; $7ef9: $fe $80
-    jr c, jr_020_7eff                             ; $7efb: $38 $02
+    jr c, .jr_7eff                             ; $7efb: $38 $02
 
     ld a, $7c                                     ; $7efd: $3e $7c
 
-jr_020_7eff:
+.jr_7eff
     ldh [hMultiPurpose2], a                            ; $7eff: $e0 $d9
     pop hl                                        ; $7f01: $e1
     ldh a, [hMultiPurpose0]                            ; $7f02: $f0 $d7

@@ -34,7 +34,7 @@ BearEntityHandler::
     call RenderActiveEntitySpritesPair            ; $4BC9: $CD $C0 $3B
     ld   a, [wTradeSequenceItem]                  ; $4BCC: $FA $0E $DB
     cp   $06                                      ; $4BCF: $FE $06
-    jr   nz, jr_007_4BE1                          ; $4BD1: $20 $0E
+    jr   nz, .jr_4BE1                             ; $4BD1: $20 $0E
 
     ld   a, $74                                   ; $4BD3: $3E $74
     ldh  [hActiveEntityPosX], a                   ; $4BD5: $E0 $EE
@@ -43,18 +43,18 @@ BearEntityHandler::
     ld   de, Data_007_4BAB                        ; $4BDB: $11 $AB $4B
     call RenderActiveEntitySprite                 ; $4BDE: $CD $77 $3C
 
-jr_007_4BE1:
+.jr_4BE1
     call CopyEntityPositionToActivePosition       ; $4BE1: $CD $8A $3D
     ld   hl, wEntitiesSpriteVariantTable          ; $4BE4: $21 $B0 $C3
     add  hl, bc                                   ; $4BE7: $09
     ld   a, [hl]                                  ; $4BE8: $7E
     ld   hl, Data_007_4B6B                        ; $4BE9: $21 $6B $4B
     and  a                                        ; $4BEC: $A7
-    jr   z, jr_007_4BF2                           ; $4BED: $28 $03
+    jr   z, .jr_4BF2                              ; $4BED: $28 $03
 
     ld   hl, Data_007_4B8B                        ; $4BEF: $21 $8B $4B
 
-jr_007_4BF2:
+.jr_4BF2
     ld   c, $08                                   ; $4BF2: $0E $08
     call RenderActiveEntitySpritesRect            ; $4BF4: $CD $E6 $3C
     ld   a, $06                                   ; $4BF7: $3E $06
@@ -62,7 +62,7 @@ jr_007_4BF2:
     xor  a                                        ; $4BFC: $AF
     call SetEntitySpriteVariant                   ; $4BFD: $CD $0C $3B
 
-jr_007_4C00:
+.jr_4C00
     call ReturnIfNonInteractive_07                ; $4C00: $CD $96 $7D
     ldh  a, [hFrameCounter]                       ; $4C03: $F0 $E7
     and  $20                                      ; $4C05: $E6 $20
@@ -85,13 +85,13 @@ func_007_4C16::
 
     ld   a, [wTradeSequenceItem]                  ; $4C23: $FA $0E $DB
     cp   $06                                      ; $4C26: $FE $06
-    jr   nz, jr_007_4C32                          ; $4C28: $20 $08
+    jr   nz, .jr_4C32                             ; $4C28: $20 $08
 
     ld   a, $CF                                   ; $4C2A: $3E $CF
     call func_007_4C83                            ; $4C2C: $CD $83 $4C
     jp   IncrementEntityState                     ; $4C2F: $C3 $12 $3B
 
-jr_007_4C32:
+.jr_4C32
     ld   e, $D4                                   ; $4C32: $1E $D4
     ld   a, [wIsMarinFollowingLink]               ; $4C34: $FA $73 $DB
     and  a                                        ; $4C37: $A7
@@ -117,13 +117,13 @@ func_007_4C49::
     call IncrementEntityState                     ; $4C4F: $CD $12 $3B
     ld   a, [wDialogAskSelectionIndex]            ; $4C52: $FA $77 $C1
     and  a                                        ; $4C55: $A7
-    jr   z, jr_007_4C5E                           ; $4C56: $28 $06
+    jr   z, .jr_4C5E                              ; $4C56: $28 $06
 
     ld   [hl], b                                  ; $4C58: $70
     ld   a, $D1                                   ; $4C59: $3E $D1
     jp   func_007_4C83                            ; $4C5B: $C3 $83 $4C
 
-jr_007_4C5E:
+.jr_4C5E
     ld   a, TRADING_ITEM_PINEAPPLE                ; $4C5E: $3E $07
     ld   [wTradeSequenceItem], a                  ; $4C60: $EA $0E $DB
     ld   a, REPLACE_TILES_TRADING_ITEM            ; $4C63: $3E $0D

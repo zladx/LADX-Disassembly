@@ -1628,10 +1628,10 @@ func_028_48C1::
 func_028_49F2::
     ld   a, [wLinkPositionXHistory + 22]        ; $49f2: $fa $6b $d1
     cp   $01                                    ; $49f5: $fe $01
-    jr   z, jr_028_4a04                         ; $49f7: $28 $0b
+    jr   z, .jr_4a04                         ; $49f7: $28 $0b
 
     cp   $03                                    ; $49f9: $fe $03
-    jr   z, jr_028_4a04                         ; $49fb: $28 $07
+    jr   z, .jr_4a04                         ; $49fb: $28 $07
 
     and  a                                      ; $49fd: $a7
     ld   a, $ff                                 ; $49fe: $3e $ff
@@ -1641,23 +1641,23 @@ func_028_49F2::
     ret                                         ; $4a03: $c9
 
 
-jr_028_4a04::
+.jr_4a04::
     ld   a, [wD172]                             ; $4a04: $fa $72 $d1
     and  a                                      ; $4a07: $a7
-    jr   z, jr_028_4a0e                         ; $4a08: $28 $04
+    jr   z, .jr_4a0e                         ; $4a08: $28 $04
 
     call func_028_482E                          ; $4a0a: $cd $2e $48
     ret  nc                                     ; $4a0d: $d0
 
-jr_028_4a0e::
+.jr_4a0e::
     ld   a, [wD192]                             ; $4a0e: $fa $92 $d1
     cp   $04                                    ; $4a11: $fe $04
-    jr   nz, jr_028_4a19                        ; $4a13: $20 $04
+    jr   nz, .jr_4a19                        ; $4a13: $20 $04
 
     call func_028_482E                          ; $4a15: $cd $2e $48
     ret  nc                                     ; $4a18: $d0
 
-jr_028_4a19::
+.jr_4a19::
     ld   a, [wD16D]                             ; $4a19: $fa $6d $d1
     cp   $ff                                    ; $4a1c: $fe $ff
     jp   z, func_028_4BA7                       ; $4a1e: $ca $a7 $4b

@@ -120,7 +120,7 @@ label_007_63FB:
     ld   hl, Data_007_63F9                        ; $640B: $21 $F9 $63
     add  hl, de                                   ; $640E: $19
     cp   [hl]                                     ; $640F: $BE
-    jr   nz, jr_007_641F                          ; $6410: $20 $0D
+    jr   nz, .jr_641F                             ; $6410: $20 $0D
 
     ld   hl, wEntitiesPrivateState1Table          ; $6412: $21 $B0 $C2
     add  hl, bc                                   ; $6415: $09
@@ -130,7 +130,7 @@ label_007_63FB:
     call GetEntityTransitionCountdown             ; $641A: $CD $05 $0C
     ld   [hl], $6A                                ; $641D: $36 $6A
 
-jr_007_641F:
+.jr_641F
     jp   func_007_639E                            ; $641F: $C3 $9E $63
 
 Data_007_6422::
@@ -138,12 +138,12 @@ Data_007_6422::
 
 SideViewPlatformEntityHandler::
     call GetEntityPrivateCountdown1               ; $6432: $CD $00 $0C
-    jr   z, jr_007_643B                           ; $6435: $28 $04
+    jr   z, .jr_643B                              ; $6435: $28 $04
 
     ld   a, $04                                   ; $6437: $3E $04
     ldh  [hActiveEntityTilesOffset], a            ; $6439: $E0 $F5
 
-jr_007_643B:
+.jr_643B
     ld   hl, Data_007_6422                        ; $643B: $21 $22 $64
     ld   c, $04                                   ; $643E: $0E $04
     call RenderActiveEntitySpritesRect            ; $6440: $CD $E6 $3C
@@ -158,7 +158,7 @@ jr_007_643B:
     ld   e, $04                                   ; $6451: $1E $04
     ldh  a, [hMapRoom]                            ; $6453: $F0 $F6
     cp   UNKNOWN_ROOM_3B                          ; $6455: $FE $3B
-    jr   z, jr_007_6466                           ; $6457: $28 $0D
+    jr   z, .jr_6466                              ; $6457: $28 $0D
 
     call GetEntityPrivateCountdown1               ; $6459: $CD $00 $0C
     ld   [hl], $08                                ; $645C: $36 $08
@@ -168,28 +168,28 @@ jr_007_643B:
 
     ld   e, $04                                   ; $6464: $1E $04
 
-jr_007_6466:
+.jr_6466
     ld   hl, wEntitiesPrivateState4Table          ; $6466: $21 $40 $C4
     add  hl, bc                                   ; $6469: $09
     ld   a, [hl]                                  ; $646A: $7E
     cp   $04                                      ; $646B: $FE $04
-    jr   z, jr_007_6478                           ; $646D: $28 $09
+    jr   z, .jr_6478                              ; $646D: $28 $09
 
     inc  [hl]                                     ; $646F: $34
     cp   $03                                      ; $6470: $FE $03
-    jr   nz, jr_007_6478                          ; $6472: $20 $04
+    jr   nz, .jr_6478                             ; $6472: $20 $04
 
     ld   a, $11                                   ; $6474: $3E $11
     ldh  [hNoiseSfx], a                           ; $6476: $E0 $F4
 
-jr_007_6478:
+.jr_6478
     ldh  a, [hFrameCounter]                       ; $6478: $F0 $E7
     and  $03                                      ; $647A: $E6 $03
     jr   nz, ret_007_6488                         ; $647C: $20 $0A
 
     call GetEntitySpeedYAddress                   ; $647E: $CD $05 $40
 
-jr_007_6481:
+.jr_6481
     ld   a, [hl]                                  ; $6481: $7E
     sub  e                                        ; $6482: $93
     and  $80                                      ; $6483: $E6 $80

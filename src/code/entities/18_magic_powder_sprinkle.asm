@@ -47,12 +47,12 @@ MagicPowderSprinkleEntityHandler::
     ld   a, [hl]                                  ; $79A8: $7E
     ldh  [hObjectUnderEntity], a                  ; $79A9: $E0 $AF
     cp   $D3                                      ; $79AB: $FE $D3
-    jr   z, jr_018_79B3                           ; $79AD: $28 $04
+    jr   z, .jr_79B3                              ; $79AD: $28 $04
 
     cp   $5C                                      ; $79AF: $FE $5C
     jr   nz, jr_018_79CF                          ; $79B1: $20 $1C
 
-jr_018_79B3:
+.jr_79B3
     ld   a, [wIsIndoor]                           ; $79B3: $FA $A5 $DB
     and  a                                        ; $79B6: $A7
     jr   nz, jr_018_79CF                          ; $79B7: $20 $16
@@ -79,7 +79,7 @@ jr_018_79CF:
 
     ldh  a, [hIsGBC]                              ; $79DB: $F0 $FE
     and  a                                        ; $79DD: $A7
-    jr   z, jr_018_79F0                           ; $79DE: $28 $10
+    jr   z, .jr_79F0                              ; $79DE: $28 $10
 
     ld   a, [wLinkMotionState]                    ; $79E0: $FA $1C $C1
     cp   LINK_MOTION_REVOLVING_DOOR               ; $79E3: $FE $05
@@ -93,7 +93,7 @@ jr_018_79CF:
     and  a                                        ; $79EE: $A7
     ret  nz                                       ; $79EF: $C0
 
-jr_018_79F0:
+.jr_79F0
     ld   a, $AC                                   ; $79F0: $3E $AC
     ld   [hl], a                                  ; $79F2: $77
     ld   [wDDD8], a                               ; $79F3: $EA $D8 $DD
@@ -122,20 +122,20 @@ jr_018_79F0:
     inc  [hl]                                     ; $7A1E: $34
     ld   a, [wC3CD]                               ; $7A1F: $FA $CD $C3
     and  a                                        ; $7A22: $A7
-    jr   z, jr_018_7A39                           ; $7A23: $28 $14
+    jr   z, .jr_7A39                              ; $7A23: $28 $14
 
     sub  $04                                      ; $7A25: $D6 $04
     ld   [wC3CD], a                               ; $7A27: $EA $CD $C3
     ldh  a, [hIsGBC]                              ; $7A2A: $F0 $FE
     and  a                                        ; $7A2C: $A7
-    jr   z, jr_018_7A39                           ; $7A2D: $28 $0A
+    jr   z, .jr_7A39                              ; $7A2D: $28 $0A
 
     ld   a, $40                                   ; $7A2F: $3E $40
     ld   [wDDD6], a                               ; $7A31: $EA $D6 $DD
     ld   a, $0B                                   ; $7A34: $3E $0B
     ld   [wDDD7], a                               ; $7A36: $EA $D7 $DD
 
-jr_018_7A39:
+.jr_7A39
     call GetEntityTransitionCountdown             ; $7A39: $CD $05 $0C
     ld   [hl], b                                  ; $7A3C: $70
     ld   a, $12                                   ; $7A3D: $3E $12
@@ -191,13 +191,13 @@ label_018_7A5D:
     dec  [hl]                                     ; $7A8B: $35
     ld   a, [wC3CD]                               ; $7A8C: $FA $CD $C3
     cp   $0C                                      ; $7A8F: $FE $0C
-    jr   nc, jr_018_7AB2                          ; $7A91: $30 $1F
+    jr   nc, .jr_7AB2                             ; $7A91: $30 $1F
 
     add  $04                                      ; $7A93: $C6 $04
     ld   [wC3CD], a                               ; $7A95: $EA $CD $C3
     ldh  a, [hIsGBC]                              ; $7A98: $F0 $FE
     and  a                                        ; $7A9A: $A7
-    jr   z, jr_018_7AB2                           ; $7A9B: $28 $15
+    jr   z, .jr_7AB2                              ; $7A9B: $28 $15
 
     ld   a, [wLinkMotionState]                    ; $7A9D: $FA $1C $C1
     cp   $05                                      ; $7AA0: $FE $05
@@ -212,7 +212,7 @@ label_018_7A5D:
     ld   a, $0B                                   ; $7AAD: $3E $0B
     ld   [wDDD7], a                               ; $7AAF: $EA $D7 $DD
 
-jr_018_7AB2:
+.jr_7AB2
     ld   de, Data_018_7962                        ; $7AB2: $11 $62 $79
     push de                                       ; $7AB5: $D5
     jp   label_018_7B1D                           ; $7AB6: $C3 $1D $7B
@@ -250,14 +250,14 @@ label_018_7B1D:
     call label_2887                               ; $7B1D: $CD $87 $28
     ldh  a, [hIsGBC]                              ; $7B20: $F0 $FE
     and  a                                        ; $7B22: $A7
-    jr   z, jr_018_7B2C                           ; $7B23: $28 $07
+    jr   z, .jr_7B2C                              ; $7B23: $28 $07
 
     push bc                                       ; $7B25: $C5
     ld   a, $18                                   ; $7B26: $3E $18
     call func_91D                                 ; $7B28: $CD $1D $09
     pop  bc                                       ; $7B2B: $C1
 
-jr_018_7B2C:
+.jr_7B2C
     ld   a, [wDrawCommandsSize]                   ; $7B2C: $FA $00 $D6
     ld   e, a                                     ; $7B2F: $5F
     ld   d, $00                                   ; $7B30: $16 $00

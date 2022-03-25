@@ -25,11 +25,11 @@ ReversedTractorDeviceEntityHandler::
     ld   de, TractorDevice1SpriteVariants         ; $6828: $11 $14 $68
     ldh  a, [hMapId]                              ; $682B: $F0 $F7
     cp   MAP_BOTTLE_GROTTO                        ; $682D: $FE $01
-    jr   nz, jr_004_6834                          ; $682F: $20 $03
+    jr   nz, .jr_6834                             ; $682F: $20 $03
 
     ld   de, TractorDevice2SpriteVariants         ; $6831: $11 $1C $68
 
-jr_004_6834:
+.jr_6834
     call RenderActiveEntitySpritesPair            ; $6834: $CD $C0 $3B
     call ReturnIfNonInteractive_04                ; $6837: $CD $A3 $7F
     call label_3B70                               ; $683A: $CD $70 $3B
@@ -43,12 +43,12 @@ Data_004_6844::
 
 func_004_6848::
     call GetEntityDropTimer                       ; $6848: $CD $FB $0B
-    jr   nz, jr_004_6852                          ; $684B: $20 $05
+    jr   nz, .jr_6852                             ; $684B: $20 $05
 
     ld   [hl], $10                                ; $684D: $36 $10
     jp   IncrementEntityState                     ; $684F: $C3 $12 $3B
 
-jr_004_6852:
+.jr_6852
     ld   a, [wLinkMotionState]                    ; $6852: $FA $1C $C1
     cp   LINK_MOTION_DEFAULT                      ; $6855: $FE $00
     jp   nz, label_004_68E4                       ; $6857: $C2 $E4 $68
@@ -61,32 +61,32 @@ jr_004_6852:
     ldh  a, [hActiveEntityType]                   ; $6862: $F0 $EB
     cp   ENTITY_TRACTOR_DEVICE                    ; $6864: $FE $52
     ld   a, $14                                   ; $6866: $3E $14
-    jr   nz, jr_004_686D                          ; $6868: $20 $03
+    jr   nz, .jr_686D                             ; $6868: $20 $03
 
     inc  e                                        ; $686A: $1C
     ld   a, $08                                   ; $686B: $3E $08
 
-jr_004_686D:
+.jr_686D
     push de                                       ; $686D: $D5
     call GetVectorTowardsLink_trampoline          ; $686E: $CD $B5 $3B
     pop  de                                       ; $6871: $D1
     ldh  a, [hMultiPurpose0]                      ; $6872: $F0 $D7
     bit  0, e                                     ; $6874: $CB $43
-    jr   z, jr_004_687A                           ; $6876: $28 $02
+    jr   z, .jr_687A                              ; $6876: $28 $02
 
     cpl                                           ; $6878: $2F
     inc  a                                        ; $6879: $3C
 
-jr_004_687A:
+.jr_687A
     ldh  [hLinkSpeedY], a                         ; $687A: $E0 $9B
     ldh  a, [hMultiPurpose1]                      ; $687C: $F0 $D8
     bit  0, e                                     ; $687E: $CB $43
-    jr   z, jr_004_6884                           ; $6880: $28 $02
+    jr   z, .jr_6884                              ; $6880: $28 $02
 
     cpl                                           ; $6882: $2F
     inc  a                                        ; $6883: $3C
 
-jr_004_6884:
+.jr_6884
     ldh  [hLinkSpeedX], a                         ; $6884: $E0 $9A
     push bc                                       ; $6886: $C5
     call UpdateFinalLinkPosition                  ; $6887: $CD $A8 $21
@@ -104,17 +104,17 @@ jr_004_6884:
 
     ld   a, [wIsLinkInTheAir]                     ; $689F: $FA $46 $C1
     and  a                                        ; $68A2: $A7
-    jr   nz, jr_004_68D4                          ; $68A3: $20 $2F
+    jr   nz, .jr_68D4                             ; $68A3: $20 $2F
 
     call func_004_6E35                            ; $68A5: $CD $35 $6E
     add  $04                                      ; $68A8: $C6 $04
     cp   $08                                      ; $68AA: $FE $08
-    jr   nc, jr_004_68D4                          ; $68AC: $30 $26
+    jr   nc, .jr_68D4                             ; $68AC: $30 $26
 
     call func_004_6E45                            ; $68AE: $CD $45 $6E
     add  $04                                      ; $68B1: $C6 $04
     cp   $08                                      ; $68B3: $FE $08
-    jr   nc, jr_004_68D4                          ; $68B5: $30 $1D
+    jr   nc, .jr_68D4                             ; $68B5: $30 $1D
 
     ldh  a, [hActiveEntityPosX]                   ; $68B7: $F0 $EE
     ldh  [hLinkPositionX], a                      ; $68B9: $E0 $98
@@ -130,7 +130,7 @@ jr_004_6884:
     ldh  [hWaveSfx], a                            ; $68D1: $E0 $F3
     ret                                           ; $68D3: $C9
 
-jr_004_68D4:
+.jr_68D4
     ldh  a, [hFrameCounter]                       ; $68D4: $F0 $E7
     rra                                           ; $68D6: $1F
     rra                                           ; $68D7: $1F
@@ -164,13 +164,13 @@ ret_004_68FC:
 
 func_004_68FD::
     call GetEntityDropTimer                       ; $68FD: $CD $FB $0B
-    jr   nz, jr_004_6908                          ; $6900: $20 $06
+    jr   nz, .jr_6908                             ; $6900: $20 $06
 
     ld   [hl], $40                                ; $6902: $36 $40
     call IncrementEntityState                     ; $6904: $CD $12 $3B
     ld   [hl], b                                  ; $6907: $70
 
-jr_004_6908:
+.jr_6908
     ld   a, $00                                   ; $6908: $3E $00
     jp   SetEntitySpriteVariant                   ; $690A: $C3 $0C $3B
 
@@ -220,30 +220,30 @@ label_004_6910:
     ld   e, $00                                   ; $694B: $1E $00
     ldh  a, [hActiveEntityType]                   ; $694D: $F0 $EB
     cp   ENTITY_TRACTOR_DEVICE                    ; $694F: $FE $52
-    jr   nz, jr_004_6954                          ; $6951: $20 $01
+    jr   nz, .jr_6954                             ; $6951: $20 $01
 
     inc  e                                        ; $6953: $1C
 
-jr_004_6954:
+.jr_6954
     ldh  a, [hMultiPurpose0]                      ; $6954: $F0 $D7
     bit  0, e                                     ; $6956: $CB $43
-    jr   nz, jr_004_695C                          ; $6958: $20 $02
+    jr   nz, .jr_695C                             ; $6958: $20 $02
 
     cpl                                           ; $695A: $2F
     inc  a                                        ; $695B: $3C
 
-jr_004_695C:
+.jr_695C
     ld   hl, wEntitiesSpeedYTable                 ; $695C: $21 $50 $C2
     add  hl, bc                                   ; $695F: $09
     ld   [hl], a                                  ; $6960: $77
     ldh  a, [hMultiPurpose1]                      ; $6961: $F0 $D8
     bit  0, e                                     ; $6963: $CB $43
-    jr   nz, jr_004_6969                          ; $6965: $20 $02
+    jr   nz, .jr_6969                             ; $6965: $20 $02
 
     cpl                                           ; $6967: $2F
     inc  a                                        ; $6968: $3C
 
-jr_004_6969:
+.jr_6969
     ld   hl, wEntitiesSpeedXTable                 ; $6969: $21 $40 $C2
     add  hl, bc                                   ; $696C: $09
     ld   [hl], a                                  ; $696D: $77
@@ -255,18 +255,18 @@ jr_004_6969:
     sub  [hl]                                     ; $697C: $96
     add  $02                                      ; $697D: $C6 $02
     cp   $04                                      ; $697F: $FE $04
-    jr   nc, jr_004_6992                          ; $6981: $30 $0F
+    jr   nc, .jr_6992                             ; $6981: $30 $0F
 
     ldh  a, [hActiveEntityVisualPosY]             ; $6983: $F0 $EC
     ld   hl, hLinkPositionY                       ; $6985: $21 $99 $FF
     sub  [hl]                                     ; $6988: $96
     add  $02                                      ; $6989: $C6 $02
     cp   $04                                      ; $698B: $FE $04
-    jr   nc, jr_004_6992                          ; $698D: $30 $03
+    jr   nc, .jr_6992                             ; $698D: $30 $03
 
     call ClearEntityStatusBank04                  ; $698F: $CD $7A $6D
 
-jr_004_6992:
+.jr_6992
     pop  af                                       ; $6992: $F1
     ld   hl, wEntitiesSpeedYTable                 ; $6993: $21 $50 $C2
     add  hl, bc                                   ; $6996: $09

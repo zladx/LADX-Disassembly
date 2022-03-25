@@ -195,11 +195,11 @@ func_004_6E35::
     add  hl, bc                                   ; $6E3C: $09
     sub  [hl]                                     ; $6E3D: $96
     bit  7, a                                     ; $6E3E: $CB $7F
-    jr   z, jr_004_6E43                           ; $6E40: $28 $01
+    jr   z, .jr_6E43                              ; $6E40: $28 $01
 
     inc  e                                        ; $6E42: $1C
 
-jr_004_6E43:
+.jr_6E43
     ld   d, a                                     ; $6E43: $57
     ret                                           ; $6E44: $C9
 
@@ -210,11 +210,11 @@ func_004_6E45::
     add  hl, bc                                   ; $6E4C: $09
     sub  [hl]                                     ; $6E4D: $96
     bit  7, a                                     ; $6E4E: $CB $7F
-    jr   nz, jr_004_6E53                          ; $6E50: $20 $01
+    jr   nz, .jr_6E53                             ; $6E50: $20 $01
 
     inc  e                                        ; $6E52: $1C
 
-jr_004_6E53:
+.jr_6E53
     ld   d, a                                     ; $6E53: $57
     ret                                           ; $6E54: $C9
 
@@ -224,32 +224,32 @@ func_004_6E55::
     ldh  [hMultiPurpose0], a                      ; $6E59: $E0 $D7
     ld   a, d                                     ; $6E5B: $7A
     bit  7, a                                     ; $6E5C: $CB $7F
-    jr   z, jr_004_6E62                           ; $6E5E: $28 $02
+    jr   z, .jr_6E62                              ; $6E5E: $28 $02
 
     cpl                                           ; $6E60: $2F
     inc  a                                        ; $6E61: $3C
 
-jr_004_6E62:
+.jr_6E62
     push af                                       ; $6E62: $F5
     call func_004_6E45                            ; $6E63: $CD $45 $6E
     ld   a, e                                     ; $6E66: $7B
     ldh  [hMultiPurpose1], a                      ; $6E67: $E0 $D8
     ld   a, d                                     ; $6E69: $7A
     bit  7, a                                     ; $6E6A: $CB $7F
-    jr   z, jr_004_6E70                           ; $6E6C: $28 $02
+    jr   z, .jr_6E70                              ; $6E6C: $28 $02
 
     cpl                                           ; $6E6E: $2F
     inc  a                                        ; $6E6F: $3C
 
-jr_004_6E70:
+.jr_6E70
     pop  de                                       ; $6E70: $D1
     cp   d                                        ; $6E71: $BA
-    jr   nc, jr_004_6E78                          ; $6E72: $30 $04
+    jr   nc, .jr_6E78                             ; $6E72: $30 $04
 
     ldh  a, [hMultiPurpose0]                      ; $6E74: $F0 $D7
     jr   jr_004_6E7A                              ; $6E76: $18 $02
 
-jr_004_6E78:
+.jr_6E78
     ldh  a, [hMultiPurpose1]                      ; $6E78: $F0 $D8
 
 jr_004_6E7A:
@@ -271,42 +271,42 @@ func_004_7C4B:: ; called only from fishing minigame
     or   [hl]                                     ; $7C55: $B6
     ld   hl, wC134                                ; $7C56: $21 $34 $C1
     or   [hl]                                     ; $7C59: $B6
-    jr   nz, jr_004_7C92                          ; $7C5A: $20 $36
+    jr   nz, .jr_7C92                             ; $7C5A: $20 $36
 
     ld   a, [wWindowY]                            ; $7C5C: $FA $9A $DB
     cp   $80                                      ; $7C5F: $FE $80
-    jr   nz, jr_004_7C92                          ; $7C61: $20 $2F
+    jr   nz, .jr_7C92                             ; $7C61: $20 $2F
 
     ldh  a, [hLinkPositionX]                      ; $7C63: $F0 $98
     ld   hl, hActiveEntityPosX                    ; $7C65: $21 $EE $FF
     sub  [hl]                                     ; $7C68: $96
     add  $10                                      ; $7C69: $C6 $10
     cp   $20                                      ; $7C6B: $FE $20
-    jr   nc, jr_004_7C92                          ; $7C6D: $30 $23
+    jr   nc, .jr_7C92                             ; $7C6D: $30 $23
 
     ldh  a, [hLinkPositionY]                      ; $7C6F: $F0 $99
     ld   hl, hActiveEntityPosY                    ; $7C71: $21 $EF $FF
     sub  [hl]                                     ; $7C74: $96
     add  $14                                      ; $7C75: $C6 $14
     cp   $28                                      ; $7C77: $FE $28
-    jr   nc, jr_004_7C92                          ; $7C79: $30 $17
+    jr   nc, .jr_7C92                             ; $7C79: $30 $17
 
     call func_004_6E55                            ; $7C7B: $CD $55 $6E
     ldh  a, [hLinkDirection]                      ; $7C7E: $F0 $9E
     xor  $01                                      ; $7C80: $EE $01
     cp   e                                        ; $7C82: $BB
-    jr   nz, jr_004_7C92                          ; $7C83: $20 $0D
+    jr   nz, .jr_7C92                             ; $7C83: $20 $0D
 
     ld   hl, wC1AD                                ; $7C85: $21 $AD $C1
     ld   [hl], $01                                ; $7C88: $36 $01
     ldh  a, [hJoypadState]                        ; $7C8A: $F0 $CC
     and  J_A                                      ; $7C8C: $E6 $10
-    jr   z, jr_004_7C92                           ; $7C8E: $28 $02
+    jr   z, .jr_7C92                              ; $7C8E: $28 $02
 
     scf                                           ; $7C90: $37
     ret                                           ; $7C91: $C9
 
-jr_004_7C92:
+.jr_7C92
     and  a                                        ; $7C92: $A7
     ret                                           ; $7C93: $C9
 

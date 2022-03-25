@@ -481,11 +481,11 @@ EntityInitMrWrite::
     ldh  a, [hMapRoom]                            ; $4A28: $F0 $F6
     cp   ROOM_INDOOR_B_CHRISTINE_HOUSE            ; $4A2A: $FE $D9
     ld   a, $32                                   ; $4A2C: $3E $32
-    jr   nz, jr_003_4A32                          ; $4A2E: $20 $02
+    jr   nz, .jr_4A32                             ; $4A2E: $20 $02
 
     ld   a, $37                                   ; $4A30: $3E $37
 
-jr_003_4A32:
+.jr_4A32
     jr   jr_003_4A4F                              ; $4A32: $18 $1B
 
 EntityInitBigFairy::
@@ -518,7 +518,7 @@ jr_003_4A4F:
 EntityInitBowWow::
     ldh  a, [hMapRoom]                            ; $4A5B: $F0 $F6
     cp   UNKNOWN_ROOM_E2                          ; $4A5D: $FE $E2
-    jr   nz, jr_003_4A6B                          ; $4A5F: $20 $0A
+    jr   nz, .jr_4A6B                             ; $4A5F: $20 $0A
 
     ld   a, [wIsBowWowFollowingLink]              ; $4A61: $FA $56 $DB
     cp   $80                                      ; $4A64: $FE $80
@@ -526,7 +526,7 @@ EntityInitBowWow::
 
     jp   UnloadEntityAndReturn                    ; $4A68: $C3 $8D $3F
 
-jr_003_4A6B:
+.jr_4A6B
     ld   a, [wIsBowWowFollowingLink]              ; $4A6B: $FA $56 $DB
     and  a                                        ; $4A6E: $A7
     jp   nz, UnloadEntityAndReturn                ; $4A6F: $C2 $8D $3F
@@ -1002,15 +1002,15 @@ EntityFallHandler::
     add  hl, bc                                   ; $4CE4: $09
     ld   a, [hl]                                  ; $4CE5: $7E
     and  $02                                      ; $4CE6: $E6 $02
-    jr   nz, jr_003_4CEF                          ; $4CE8: $20 $05
+    jr   nz, .jr_4CEF                             ; $4CE8: $20 $05
 
     ld   hl, wD460                                ; $4CEA: $21 $60 $D4
     ld   [hl], $01                                ; $4CED: $36 $01
 
-jr_003_4CEF:
+.jr_4CEF
     ldh  a, [hActiveEntityType]                   ; $4CEF: $F0 $EB
     cp   ENTITY_WRECKING_BALL                     ; $4CF1: $FE $A8
-    jr   nz, jr_003_4D04                          ; $4CF3: $20 $0F
+    jr   nz, .jr_4D04                             ; $4CF3: $20 $0F
 
     ld   a, $16                                   ; $4CF5: $3E $16
     ld   [wWreckingBallRoom], a                   ; $4CF7: $EA $6F $DB
@@ -1019,7 +1019,7 @@ jr_003_4CEF:
     ld   a, $27                                   ; $4CFF: $3E $27
     ld   [wWreckingBallPosY], a                   ; $4D01: $EA $71 $DB
 
-jr_003_4D04:
+.jr_4D04
     jp   UnloadEntityAndReturn                    ; $4D04: $C3 $8D $3F
 
 jr_003_4D07:
@@ -1028,15 +1028,15 @@ jr_003_4D07:
 
     ldh  a, [hActiveEntityType]                   ; $4D0B: $F0 $EB
     cp   ENTITY_OCTOROK                           ; $4D0D: $FE $09
-    jr   z, jr_003_4D19                           ; $4D0F: $28 $08
+    jr   z, .jr_4D19                              ; $4D0F: $28 $08
 
     cp   ENTITY_MOBLIN                            ; $4D11: $FE $0B
-    jr   z, jr_003_4D19                           ; $4D13: $28 $04
+    jr   z, .jr_4D19                              ; $4D13: $28 $04
 
     cp   ENTITY_MOBLIN_SWORD                      ; $4D15: $FE $14
     jr   nz, jr_003_4D22                          ; $4D17: $20 $09
 
-jr_003_4D19:
+.jr_4D19
     call func_003_58FC                            ; $4D19: $CD $FC $58
     call func_003_58FC                            ; $4D1C: $CD $FC $58
     call func_003_58FC                            ; $4D1F: $CD $FC $58
@@ -1065,7 +1065,7 @@ jr_003_4D29:
     ldh  [hActiveEntityVisualPosY], a             ; $4D3F: $E0 $EC
     ld   a, e                                     ; $4D41: $7B
     cp   $03                                      ; $4D42: $FE $03
-    jr   nz, jr_003_4D51                          ; $4D44: $20 $0B
+    jr   nz, .jr_4D51                             ; $4D44: $20 $0B
 
     xor  a                                        ; $4D46: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4D47: $E0 $F1
@@ -1073,7 +1073,7 @@ jr_003_4D29:
     call RenderActiveEntitySpritesPair            ; $4D4C: $CD $C0 $3B
     jr   jr_003_4D57                              ; $4D4F: $18 $06
 
-jr_003_4D51:
+.jr_4D51
     ld   de, Data_003_4CAC                        ; $4D51: $11 $AC $4C
     call RenderActiveEntitySprite                 ; $4D54: $CD $77 $3C
 
@@ -1081,12 +1081,12 @@ jr_003_4D57:
     call ReturnIfNonInteractive_03.allowInactiveEntity ; $4D57: $CD $7E $7F
     call GetEntityTransitionCountdown             ; $4D5A: $CD $05 $0C
     cp   $3F                                      ; $4D5D: $FE $3F
-    jr   nz, jr_003_4D66                          ; $4D5F: $20 $05
+    jr   nz, .jr_4D66                             ; $4D5F: $20 $05
 
     ld   hl, hJingle                              ; $4D61: $21 $F2 $FF
     ld   [hl], JINGLE_ITEM_FALLING                ; $4D64: $36 $18
 
-jr_003_4D66:
+.jr_4D66
     rra                                           ; $4D66: $1F
     rra                                           ; $4D67: $1F
     rra                                           ; $4D68: $1F
@@ -1203,7 +1203,7 @@ EntityStunnedHandler::
     call func_003_6E2B                            ; $4E16: $CD $2B $6E
     ld   a, [wBButtonSlot]                        ; $4E19: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4E1C: $FE $03
-    jr   nz, jr_003_4E28                          ; $4E1E: $20 $08
+    jr   nz, .jr_4E28                             ; $4E1E: $20 $08
 
     ldh  a, [hJoypadState]                        ; $4E20: $F0 $CC
     and  J_B                                      ; $4E22: $E6 $20
@@ -1211,7 +1211,7 @@ EntityStunnedHandler::
 
     jr   jr_003_4E72                              ; $4E26: $18 $4A
 
-jr_003_4E28:
+.jr_4E28
     ld   a, [wAButtonSlot]                        ; $4E28: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4E2B: $FE $03
     jr   nz, jr_003_4E72                          ; $4E2D: $20 $43
@@ -1264,7 +1264,7 @@ jr_003_4E72:
     add  hl, bc                                   ; $4E75: $09
     ld   a, [hl]                                  ; $4E76: $7E
     and  a                                        ; $4E77: $A7
-    jr   nz, jr_003_4E85                          ; $4E78: $20 $0B
+    jr   nz, .jr_4E85                             ; $4E78: $20 $0B
 
     ld   hl, wEntitiesStatusTable                 ; $4E7A: $21 $80 $C2
     add  hl, bc                                   ; $4E7D: $09
@@ -1273,7 +1273,7 @@ jr_003_4E72:
     add  hl, bc                                   ; $4E83: $09
     ld   [hl], b                                  ; $4E84: $70
 
-jr_003_4E85:
+.jr_4E85
     cp   $38                                      ; $4E85: $FE $38
     ret  nc                                       ; $4E87: $D0
 
@@ -1345,11 +1345,11 @@ EntityInitMoblinSword::
     ldh  a, [hActiveEntityPosX]                   ; $4EE2: $F0 $EE
     and  $10                                      ; $4EE4: $E6 $10
     ld   a, $00                                   ; $4EE6: $3E $00
-    jr   nz, jr_003_4EEC                          ; $4EE8: $20 $02
+    jr   nz, .jr_4EEC                             ; $4EE8: $20 $02
 
     ld   a, $03                                   ; $4EEA: $3E $03
 
-jr_003_4EEC:
+.jr_4EEC
     ld   hl, wEntitiesDirectionTable              ; $4EEC: $21 $80 $C3
     add  hl, bc                                   ; $4EEF: $09
     ld   [hl], a                                  ; $4EF0: $77
@@ -1367,12 +1367,12 @@ EntityInitSecretSeashell::
     ld   [hl], $02                                ; $4EFF: $36 $02
     ldh  a, [hMapRoom]                            ; $4F01: $F0 $F6
     cp   UNKNOWN_ROOM_A4                          ; Overworld room A4 (1 east of Mabe's big bush field)
-    jr   z, jr_003_4F0B                           ; $4F05: $28 $04
+    jr   z, .jr_4F0B                              ; $4F05: $28 $04
 
     cp   UNKNOWN_ROOM_D2                          ; overworld room D2 (1 west of Tail Cave)
     jr   nz, jr_003_4F0F                          ; $4F09: $20 $04
 
-jr_003_4F0B:
+.jr_4F0B
     dec  [hl]                                     ; $4F0B: $35
     call EntityInitWithShiftedPosition            ; $4F0C: $CD $83 $4F
 
@@ -1403,7 +1403,7 @@ jr_003_4F24:
 EntityInitKeyDropPoint::
     ldh  a, [hMapRoom]                            ; $4F2D: $F0 $F6
     cp   UNKNOWN_ROOM_F8                          ; In the Yarna Desert quicksand pit
-    jr   nz, jr_003_4F44                          ; $4F31: $20 $11
+    jr   nz, .jr_4F44                             ; $4F31: $20 $11
 
     ; check if the angler key has dropped, and not dropped down the hole yet
     ldh  a, [hRoomStatus]                         ; $4F33: $F0 $F8
@@ -1416,10 +1416,10 @@ EntityInitKeyDropPoint::
     ld   a, $02                                   ; $4F3F: $3E $02
     jp   SetEntitySpriteVariant                   ; $4F41: $C3 $0C $3B
 
-jr_003_4F44:
+.jr_4F44
     ; Handle the sprite change for the bird key
     cp   MOUNTAIN_CAVE_ROOM_1                     ; $4F44: $FE $7A
-    jr   nz, jr_003_4F54                          ; $4F46: $20 $0C
+    jr   nz, .jr_4F54                             ; $4F46: $20 $0C
 
 IF __PATCH_0__
     ld   a, [wHasBirdKey]
@@ -1434,7 +1434,7 @@ ENDC
     ld   a, $04                                   ; $4F4F: $3E $04
     jp   SetEntitySpriteVariant                   ; $4F51: $C3 $0C $3B
 
-jr_003_4F54:
+.jr_4F54
     ; handle the key in the sidescroll room in dungeon 4 where
     ; the key drops in the hole down into the sidescrolling room with water
     cp   MOUNTAIN_CAVE_ROOM_3                     ; $4F54: $FE $7C
@@ -1635,11 +1635,11 @@ EntityInitChestWithItem::
     ld   de, OpenChestTilesGBC                    ; $5076: $11 $4F $50
     ldh  a, [hIsGBC]                              ; $5079: $F0 $FE
     and  a                                        ; $507B: $A7
-    jr   z, jr_003_5081                           ; $507C: $28 $03
+    jr   z, .jr_5081                              ; $507C: $28 $03
 
     ld   de, OpenChestTiles                       ; $507E: $11 $53 $50
 
-jr_003_5081:
+.jr_5081
     ld   b, $A1                                   ; $5081: $06 $A1
     call func_003_51C9                            ; $5083: $CD $C9 $51
     ld   hl, wEntitiesPosYTable                   ; $5086: $21 $10 $C2
@@ -1656,7 +1656,7 @@ jr_003_5081:
     ldh  [hMultiPurposeG], a                      ; $5099: $E0 $E8
     ld   d, b                                     ; $509B: $50
     cp   CHEST_TAIL_KEY                           ; $509C: $FE $11
-    jr   nz, jr_003_50AC                          ; $509E: $20 $0C
+    jr   nz, .jr_50AC                             ; $509E: $20 $0C
 
     ; Next part seems to be related to the owl flying in when you get the tail key
     push af                                       ; $50A0: $F5
@@ -1667,7 +1667,7 @@ jr_003_5081:
     ld   [hl], $38                                ; $50A9: $36 $38
     pop  af                                       ; $50AB: $F1
 
-jr_003_50AC:
+.jr_50AC
     ld   e, a                                     ; $50AC: $5F
     cp   CHEST_MESSAGE                            ; $50AD: $FE $21
     jp   nc, MarkRoomCompleted                    ; $50AF: $D2 $2A $51
@@ -1676,17 +1676,17 @@ jr_003_50AC:
 IF __PATCH_3__
     jp   z, label_003_636D                        ; $50B4: $20 $03
 ELSE
-    jr   nz, jr_003_50B9                          ; $50B4: $20 $03
+    jr   nz, .jr_50B9                             ; $50B4: $20 $03
 
     jp   label_003_636D                           ; $50B6: $C3 $6D $63
 ENDC
 
-jr_003_50B9:
+.jr_50B9
     cp   CHEST_RUPEES_50                          ; $50B9: $FE $1B
-    jr   c, jr_003_50D8                           ; $50BB: $38 $1B
+    jr   c, .jr_50D8                              ; $50BB: $38 $1B
 
     cp   $20                                      ; $50BD: $FE $20
-    jr   nc, jr_003_50D8                          ; $50BF: $30 $17
+    jr   nc, .jr_50D8                             ; $50BF: $30 $17
 
     ld   hl, (ChestRupeeCountLow - CHEST_RUPEES_50) ; $50C1: $21 $4D $50
     add  hl, de                                   ; $50C4: $19
@@ -1700,12 +1700,12 @@ jr_003_50B9:
     ld   [wC3CE], a                               ; $50D3: $EA $CE $C3
     jr   MarkRoomCompleted                        ; $50D6: $18 $52
 
-jr_003_50D8:
+.jr_50D8
     cp   CHEST_MAP                                ; $50D8: $FE $16
-    jr   c, jr_003_50EF                           ; $50DA: $38 $13
+    jr   c, .jr_50EF                              ; $50DA: $38 $13
 
     cp   CHEST_RUPEES_50                          ; $50DC: $FE $1B
-    jr   nc, jr_003_50EF                          ; $50DE: $30 $0F
+    jr   nc, .jr_50EF                             ; $50DE: $30 $0F
 
     sub  CHEST_MAP                                ; $50E0: $D6 $16
     ld   e, a                                     ; $50E2: $5F
@@ -1716,7 +1716,7 @@ jr_003_50D8:
     call SynchronizeDungeonsItemFlags_trampoline  ; $50EA: $CD $02 $28
     jr   MarkRoomCompleted                        ; $50ED: $18 $3B
 
-jr_003_50EF:
+.jr_50EF
     cp   CHEST_FLIPPERS                           ; $50EF: $FE $0C
     jr   nc, ChestGiveNoneInventoryItem           ; $50F1: $30 $32
 
@@ -1845,28 +1845,28 @@ EntityInitPushedBlock::
 IF __PATCH_0__
     jp   nz, UnloadEntityAndReturn
 ELSE
-    jr   z, jr_003_5198                           ; $5193: $28 $03
+    jr   z, .jr_5198                              ; $5193: $28 $03
     jp   UnloadEntityAndReturn                    ; $5195: $C3 $8D $3F
 ENDC
 
-jr_003_5198:
+.jr_5198
     ld   a, NOISE_SFX_BLOCK_RUMBLE                ; $5198: $3E $11
     ldh  [hNoiseSfx], a                           ; $519A: $E0 $F4
     ld   de, Data_003_5166                        ; $519C: $11 $66 $51
     ld   b, $C6                                   ; $519F: $06 $C6
     ldh  a, [hMapRoom]                            ; $51A1: $F0 $F6
     cp   ROOM_OW_COLOR_DUNGEON_ENTRANCE           ; $51A3: $FE $77
-    jr   nz, jr_003_51B3                          ; $51A5: $20 $0C
+    jr   nz, .jr_51B3                             ; $51A5: $20 $0C
 
     ; If the color dungeon is open…
     ld   a, [wColorDungonCorrectTombStones]       ; $51A7: $FA $D9 $DD
     cp   $80                                      ; $51AA: $FE $80
-    jr   z, jr_003_51B3                           ; $51AC: $28 $05
+    jr   z, .jr_51B3                              ; $51AC: $28 $05
 
     ld   de, Data_003_516A                        ; $51AE: $11 $6A $51
     ld   b, $03                                   ; $51B1: $06 $03
 
-jr_003_51B3:
+.jr_51B3
     ld   a, [wIsIndoor]                           ; $51B3: $FA $A5 $DB
     and  a                                        ; $51B6: $A7
     jr   z, func_003_51C9                         ; $51B7: $28 $10
@@ -1966,13 +1966,13 @@ label_003_52D7:
     add  hl, de                                   ; $52DA: $19
     ld   a, [hl]                                  ; $52DB: $7E
     cp   $05                                      ; $52DC: $FE $05
-    jr   c, jr_003_531E                           ; $52DE: $38 $3E
+    jr   c, .jr_531E                              ; $52DE: $38 $3E
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $52E0: $21 $40 $C3
     add  hl, de                                   ; $52E3: $19
     ld   a, [hl]                                  ; $52E4: $7E
     and  $40                                      ; $52E5: $E6 $40
-    jr   nz, jr_003_531E                          ; $52E7: $20 $35
+    jr   nz, .jr_531E                             ; $52E7: $20 $35
 
     ld   hl, wEntitiesPosXTable                   ; $52E9: $21 $00 $C2
     add  hl, de                                   ; $52EC: $19
@@ -1980,7 +1980,7 @@ label_003_52D7:
     sub  [hl]                                     ; $52EF: $96
     add  $0C                                      ; $52F0: $C6 $0C
     cp   $18                                      ; $52F2: $FE $18
-    jr   nc, jr_003_531E                          ; $52F4: $30 $28
+    jr   nc, .jr_531E                             ; $52F4: $30 $28
 
     ld   hl, wEntitiesPosYTable                   ; $52F6: $21 $10 $C2
     add  hl, de                                   ; $52F9: $19
@@ -1992,13 +1992,13 @@ label_003_52D7:
     sub  [hl]                                     ; $5303: $96
     add  $0C                                      ; $5304: $C6 $0C
     cp   $18                                      ; $5306: $FE $18
-    jr   nc, jr_003_531E                          ; $5308: $30 $14
+    jr   nc, .jr_531E                             ; $5308: $30 $14
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $530A: $21 $40 $C3
     add  hl, de                                   ; $530D: $19
     ld   a, [hl]                                  ; $530E: $7E
     and  $20                                      ; $530F: $E6 $20
-    jr   nz, jr_003_531E                          ; $5311: $20 $0B
+    jr   nz, .jr_531E                             ; $5311: $20 $0B
 
     push bc                                       ; $5313: $C5
     ld   c, e                                     ; $5314: $4B
@@ -2009,7 +2009,7 @@ label_003_52D7:
     pop  de                                       ; $531C: $D1
     pop  bc                                       ; $531D: $C1
 
-jr_003_531E:
+.jr_531E
     dec  e                                        ; $531E: $1D
     ld   a, e                                     ; $531F: $7B
     cp   $FF                                      ; $5320: $FE $FF
@@ -2025,15 +2025,15 @@ func_003_53E4::; likely cutting grass
     ld   e, $1F                                   ; $53E9: $1E $1F
     ldh  a, [hActiveEntitySpriteVariant]          ; $53EB: $F0 $F1
     cp   $FF                                      ; $53ED: $FE $FF
-    jr   z, jr_003_53F9                           ; $53EF: $28 $08
+    jr   z, .jr_53F9                              ; $53EF: $28 $08
 
     cp   $01                                      ; $53F1: $FE $01
-    jr   z, jr_003_53F9                           ; $53F3: $28 $04
+    jr   z, .jr_53F9                              ; $53F3: $28 $04
 
     ld   [hl], $09                                ; $53F5: $36 $09
     ld   e, $0F                                   ; $53F7: $1E $0F
 
-jr_003_53F9:
+.jr_53F9
     ld   hl, wEntitiesPrivateCountdown1Table      ; $53F9: $21 $F0 $C2
     add  hl, bc                                   ; $53FC: $09
     ld   [hl], e                                  ; $53FD: $73
@@ -2097,13 +2097,13 @@ func_003_5438::
 
     ld   a, [wC503]                               ; $5448: $FA $03 $C5
     cp   $A0                                      ; $544B: $FE $A0
-    jr   z, jr_003_5455                           ; $544D: $28 $06
+    jr   z, .jr_5455                              ; $544D: $28 $06
 
     ld   a, [wC50D]                               ; $544F: $FA $0D $C5
     cp   $A0                                      ; $5452: $FE $A0
     ret  nz                                       ; $5454: $C0
 
-jr_003_5455:
+.jr_5455
     ld   a, $30                                   ; $5455: $3E $30
     ldh  [hIntersectedObjectLeft], a              ; $5457: $E0 $CE
     ld   a, $20                                   ; $5459: $3E $20
@@ -2122,7 +2122,7 @@ jr_003_5467:
     ret  c                                        ; $546F: $D8
 
     cp   $3D                                      ; $5470: $FE $3D
-    jr   c, jr_003_547D                           ; $5472: $38 $09
+    jr   c, .jr_547D                              ; $5472: $38 $09
 
     ld   a, [wC503]                               ; $5474: $FA $03 $C5
     cp   $35                                      ; $5477: $FE $35
@@ -2131,7 +2131,7 @@ jr_003_5467:
     cp   $3D                                      ; $547A: $FE $3D
     ret  nc                                       ; $547C: $D0
 
-jr_003_547D:
+.jr_547D
     jp   MarkTriggerAsResolved                    ; $547D: $C3 $60 $0C
 
 ; Alternate explosion GFX display list (unused?)
@@ -2241,16 +2241,16 @@ jr_003_556F:
     ld   [hl], $1F                                ; $5581: $36 $1F
     ld   a, [wTunicType]                          ; $5583: $FA $0F $DC
     and  a                                        ; $5586: $A7
-    jr   nz, jr_003_5594                          ; $5587: $20 $0B
+    jr   nz, .jr_5594                             ; $5587: $20 $0B
 
     ld   a, [wActivePowerUp]                      ; $5589: $FA $7C $D4
     cp   ACTIVE_POWER_UP_PIECE_OF_POWER           ; $558C: $FE $01
-    jr   nz, jr_003_5594                          ; $558E: $20 $04
+    jr   nz, .jr_5594                             ; $558E: $20 $04
 
     ld   a, $12                                   ; $5590: $3E $12
     ldh  [hWaveSfx], a                            ; $5592: $E0 $F3
 
-jr_003_5594:
+.jr_5594
     ld   hl, hNoiseSfx                            ; $5594: $21 $F4 $FF
     ld   [hl], $13                                ; $5597: $36 $13
 
@@ -2594,7 +2594,7 @@ EntityLiftedHandler::
     ldh  a, [hActiveEntityType]                   ; $5732: $F0 $EB
     ld   [wLiftedEntityType], a                   ; $5734: $EA $A8 $C5
     cp   ENTITY_BOMB                              ; $5737: $FE $02
-    jr   nz, jr_003_5745                          ; $5739: $20 $0A
+    jr   nz, .jr_5745                             ; $5739: $20 $0A
 
     ld   hl, wEntitiesFlashCountdownTable         ; $573B: $21 $20 $C4
     add  hl, bc                                   ; $573E: $09
@@ -2602,7 +2602,7 @@ EntityLiftedHandler::
     call func_003_6711                            ; $5740: $CD $11 $67
     jr   jr_003_5748                              ; $5743: $18 $03
 
-jr_003_5745:
+.jr_5745
     call ExecuteActiveEntityHandler_trampoline    ; $5745: $CD $81 $3A
 
 jr_003_5748:
@@ -2627,21 +2627,21 @@ jr_003_5748:
 
     ldh  a, [hActiveEntityType]                   ; $5764: $F0 $EB
     cp   ENTITY_BOMB                              ; $5766: $FE $02
-    jr   z, jr_003_577F                           ; $5768: $28 $15
+    jr   z, .jr_577F                              ; $5768: $28 $15
 
     ld   a, [wPowerBraceletLevel]                 ; $576A: $FA $43 $DB
     cp   $02                                      ; $576D: $FE $02
-    jr   nc, jr_003_577F                          ; $576F: $30 $0E
+    jr   nc, .jr_577F                             ; $576F: $30 $0E
 
     ld   a, [wTunicType]                          ; $5771: $FA $0F $DC
     and  $01                                      ; $5774: $E6 $01
-    jr   nz, jr_003_577F                          ; $5776: $20 $07
+    jr   nz, .jr_577F                             ; $5776: $20 $07
 
     ld   a, [wActivePowerUp]                      ; $5778: $FA $7C $D4
     cp   ACTIVE_POWER_UP_PIECE_OF_POWER           ; $577B: $FE $01
     jr   nz, jr_003_5782                          ; $577D: $20 $03
 
-jr_003_577F:
+.jr_577F
     ld   hl, Data_003_56EE                        ; $577F: $21 $EE $56
 
 jr_003_5782:
@@ -2654,11 +2654,11 @@ jr_003_5782:
 jr_003_5789:
     ld   a, e                                     ; $5789: $7B
     cp   $00                                      ; $578A: $FE $00
-    jr   nz, jr_003_578F                          ; $578C: $20 $01
+    jr   nz, .jr_578F                             ; $578C: $20 $01
 
     inc  e                                        ; $578E: $1C
 
-jr_003_578F:
+.jr_578F
     call func_003_5795                            ; $578F: $CD $95 $57
     jp   label_003_57E6                           ; $5792: $C3 $E6 $57
 
@@ -2694,7 +2694,7 @@ func_003_5795::
     ld   [hl], a                                  ; $57C6: $77
     ldh  a, [hIsSideScrolling]                    ; $57C7: $F0 $F9
     and  a                                        ; $57C9: $A7
-    jr   z, jr_003_57D7                           ; $57CA: $28 $0B
+    jr   z, .jr_57D7                              ; $57CA: $28 $0B
 
     push hl                                       ; $57CC: $E5
     ld   hl, Data_003_5721                        ; $57CD: $21 $21 $57
@@ -2706,7 +2706,7 @@ func_003_5795::
     ld   [hl], a                                  ; $57D5: $77
     ret                                           ; $57D6: $C9
 
-jr_003_57D7:
+.jr_57D7
     ld   hl, Data_003_5721                        ; $57D7: $21 $21 $57
     add  hl, de                                   ; $57DA: $19
     ld   a, [hl]                                  ; $57DB: $7E
@@ -2903,7 +2903,7 @@ HeartPieceState6Handler::
     ; If found 4 heart pieces…
     ld   a, [wHeartPiecesCount]                   ; $5AD0: $FA $5C $DB
     cp   $04                                      ; $5AD3: $FE $04
-    jr   nz, jr_003_5AED                          ; $5AD5: $20 $16
+    jr   nz, .jr_5AED                             ; $5AD5: $20 $16
     ; Play a success jingle
     ld   a, JINGLE_NEW_HEART                      ; $5AD7: $3E $19
     ldh  [hJingle], a                             ; $5AD9: $E0 $F2
@@ -2919,7 +2919,7 @@ HeartPieceState6Handler::
     ; Open the "4 pieces of heart collected" dialog
     call_open_dialog $050                         ; $5AE8
 
-jr_003_5AED:
+.jr_5AED
     jp   IncrementEntityState                     ; $5AED: $C3 $12 $3B
 
 HeartPieceState7Handler::
@@ -2974,11 +2974,11 @@ func_003_5B2B::
     ld   a, [wDialogState]                        ; $5B36: $FA $9F $C1
     and  $80                                      ; $5B39: $E6 $80
     ld   a, $23                                   ; $5B3B: $3E $23
-    jr   z, jr_003_5B41                           ; $5B3D: $28 $02
+    jr   z, .jr_5B41                              ; $5B3D: $28 $02
 
     ld   a, $6B                                   ; $5B3F: $3E $6B
 
-jr_003_5B41:
+.jr_5B41
     ldh  [hActiveEntityVisualPosY], a             ; $5B41: $E0 $EC
     ld   a, [wHeartPiecesCount]                   ; $5B43: $FA $5C $DB
     ldh  [hActiveEntitySpriteVariant], a          ; $5B46: $E0 $F1
@@ -3049,7 +3049,7 @@ SwordShieldPickableEntityHandler::
     ld   de, Data_003_5B95                        ; $5B99: $11 $95 $5B
     ld   a, [wSwordLevel]                         ; $5B9C: $FA $4E $DB
     and  a                                        ; $5B9F: $A7
-    jr   nz, jr_003_5BAC                          ; $5BA0: $20 $0A
+    jr   nz, .jr_5BAC                             ; $5BA0: $20 $0A
 
     ldh  a, [hRoomStatus]                         ; $5BA2: $F0 $F8
     and  ROOM_STATUS_EVENT_1                      ; $5BA4: $E6 $10
@@ -3057,7 +3057,7 @@ SwordShieldPickableEntityHandler::
 
     ld   de, Data_003_5B97                        ; $5BA9: $11 $97 $5B
 
-jr_003_5BAC:
+.jr_5BAC
     call RenderActiveEntitySprite                 ; $5BAC: $CD $77 $3C
     ldh  a, [hActiveEntityState]                  ; $5BAF: $F0 $F0
     JP_TABLE                                      ; $5BB1
@@ -3172,18 +3172,18 @@ label_003_5C49:
     jp   z, label_003_60AA                        ; $5C59: $CA $AA $60
 
     cp   $10                                      ; $5C5C: $FE $10
-    jr   nz, jr_003_5C67                          ; $5C5E: $20 $07
+    jr   nz, .jr_5C67                             ; $5C5E: $20 $07
 
     dec  [hl]                                     ; $5C60: $35
     call_open_dialog $093                         ; $5C61
     xor  a                                        ; $5C66: $AF
 
-jr_003_5C67:
+.jr_5C67
     dec  a                                        ; $5C67: $3D
 IF __PATCH_3__
     jp   nz, HoldEntityAboveLink
 ELSE
-    jr   nz, jr_003_5C75                          ; $5C68: $20 $0B
+    jr   nz, .jr_5C75                             ; $5C68: $20 $0B
 ENDC
 
     ld   d, INVENTORY_HOOKSHOT                    ; $5C6A: $16 $06
@@ -3192,7 +3192,7 @@ ENDC
     jp   UnloadEntityAndReturn                    ; $5C72: $C3 $8D $3F
 
 IF !__PATCH_3__
-jr_003_5C75:
+.jr_5C75
     jp   HoldEntityAboveLink                      ; $5C75: $C3 $17 $5A
 ENDC
 
@@ -3209,7 +3209,7 @@ KeyCollectDialogTable::
 
 KeyDropPointEntityHandler::
     call CheckForEntityFallingDownQuicksandHole   ; $5C89: $CD $EA $5C
-    jr   nc, jr_003_5C99                          ; $5C8C: $30 $0B
+    jr   nc, .jr_5C99                             ; $5C8C: $30 $0B
 
     ; If dropped in the quicksand mark the angler key
     ; as available in the quicksand cave by setting the room flags.
@@ -3219,7 +3219,7 @@ KeyDropPointEntityHandler::
     set  5, [hl]                                  ; $5C96: $CB $EE
     ret                                           ; $5C98: $C9
 
-jr_003_5C99:
+.jr_5C99
     ldh  a, [hMapRoom]                            ; $5C99: $F0 $F6
     cp   ROOM_INDOOR_A_MASTER_STALFOS_FINAL       ; $5C9B: $FE $80
     jp   z, label_003_5C49                        ; $5C9D: $CA $49 $5C
@@ -3230,7 +3230,7 @@ jr_003_5C99:
     jp   z, label_003_5CD6                        ; $5CA9: $CA $D6 $5C
 
     cp   $10                                      ; $5CAC: $FE $10
-    jr   nz, jr_003_5CCD                          ; $5CAE: $20 $1D
+    jr   nz, .jr_5CCD                             ; $5CAE: $20 $1D
 
     dec  [hl]                                     ; $5CB0: $35
     ldh  a, [hActiveEntitySpriteVariant]          ; $5CB1: $F0 $F1
@@ -3251,17 +3251,17 @@ jr_003_5C99:
     call MarkRoomCompleted                        ; $5CC9: $CD $2A $51
     xor  a                                        ; $5CCC: $AF
 
-jr_003_5CCD:
+.jr_5CCD
     dec  a                                        ; $5CCD: $3D
 IF __PATCH_3__
     jp   nz, HoldEntityAboveLink
     jp   UnloadEntityAndReturn
 ELSE
-    jr   nz, jr_003_5CD3                          ; $5CCE: $20 $03
+    jr   nz, .jr_5CD3                             ; $5CCE: $20 $03
 
     jp   UnloadEntityAndReturn                    ; $5CD0: $C3 $8D $3F
 
-jr_003_5CD3:
+.jr_5CD3
     jp   HoldEntityAboveLink                      ; $5CD3: $C3 $17 $5A
 ENDC
 
@@ -3272,11 +3272,11 @@ label_003_5CD6:
     add  hl, bc                                   ; $5CDF: $09
     ld   a, [hl]                                  ; $5CE0: $7E
     and  a                                        ; $5CE1: $A7
-    jr   nz, jr_003_5CE7                          ; $5CE2: $20 $03
+    jr   nz, .jr_5CE7                             ; $5CE2: $20 $03
 
     call func_003_62EB                            ; $5CE4: $CD $EB $62
 
-jr_003_5CE7:
+.jr_5CE7
     jp   func_003_60B3                            ; $5CE7: $C3 $B3 $60
 
 CheckForEntityFallingDownQuicksandHole::
@@ -3284,35 +3284,35 @@ CheckForEntityFallingDownQuicksandHole::
     ; Checks if the entity is at the center of the quicksand room and makes it drop.
     ld   a, [wIsIndoor]                           ; $5CEA: $FA $A5 $DB
     and  a                                        ; $5CED: $A7
-    jr   nz, jr_003_5D34                          ; $5CEE: $20 $44
+    jr   nz, .jr_5D34                             ; $5CEE: $20 $44
 
     ldh  a, [hMapRoom]                            ; $5CF0: $F0 $F6
     cp   ROOM_OW_YARNA_LANMOLA                    ; $5CF2: $FE $CE
-    jr   nz, jr_003_5D34                          ; $5CF4: $20 $3E
+    jr   nz, .jr_5D34                             ; $5CF4: $20 $3E
 
     ldh  a, [hActiveEntityPosY]                   ; $5CF6: $F0 $EF
     sub  $48                                      ; $5CF8: $D6 $48
     add  $03                                      ; $5CFA: $C6 $03
     cp   $06                                      ; $5CFC: $FE $06
-    jr   nc, jr_003_5D34                          ; $5CFE: $30 $34
+    jr   nc, .jr_5D34                             ; $5CFE: $30 $34
 
     ldh  a, [hActiveEntityPosX]                   ; $5D00: $F0 $EE
     sub  $50                                      ; $5D02: $D6 $50
     add  $03                                      ; $5D04: $C6 $03
     cp   $06                                      ; $5D06: $FE $06
-    jr   nc, jr_003_5D34                          ; $5D08: $30 $2A
+    jr   nc, .jr_5D34                             ; $5D08: $30 $2A
 
     ld   hl, wEntitiesPosZTable                   ; $5D0A: $21 $10 $C3
     add  hl, bc                                   ; $5D0D: $09
     ld   a, [hl]                                  ; $5D0E: $7E
     and  a                                        ; $5D0F: $A7
-    jr   nz, jr_003_5D34                          ; $5D10: $20 $22
+    jr   nz, .jr_5D34                             ; $5D10: $20 $22
 
     ld   hl, wEntitiesStatusTable                 ; $5D12: $21 $80 $C2
     add  hl, bc                                   ; $5D15: $09
     ld   a, [hl]                                  ; $5D16: $7E
     cp   $05                                      ; $5D17: $FE $05
-    jr   nz, jr_003_5D34                          ; $5D19: $20 $19
+    jr   nz, .jr_5D34                             ; $5D19: $20 $19
 
     ld   [hl], $02                                ; $5D1B: $36 $02
     ld   hl, wC4B0                                ; $5D1D: $21 $B0 $C4
@@ -3328,7 +3328,7 @@ CheckForEntityFallingDownQuicksandHole::
     scf                                           ; $5D32: $37
     ret                                           ; $5D33: $C9
 
-jr_003_5D34:
+.jr_5D34
     and  a                                        ; $5D34: $A7
     ret                                           ; $5D35: $C9
 
@@ -3360,18 +3360,18 @@ SleepyToadstoolEntityHandler::
     jp   z, label_003_60AA                        ; $5D5E: $CA $AA $60
 
     cp   $10                                      ; $5D61: $FE $10
-    jr   nz, jr_003_5D6C                          ; $5D63: $20 $07
+    jr   nz, .jr_5D6C                             ; $5D63: $20 $07
 
     dec  [hl]                                     ; $5D65: $35
     call_open_dialog $00F                         ; $5D66
     xor  a                                        ; $5D6B: $AF
 
-jr_003_5D6C:
+.jr_5D6C
     dec  a                                        ; $5D6C: $3D
 IF __PATCH_3__
     jp   nz, HoldEntityAboveLink
 ELSE
-    jr   nz, jr_003_5D80                          ; $5D6D: $20 $11
+    jr   nz, .jr_5D80                             ; $5D6D: $20 $11
 ENDC
 
     ld   a, REPLACE_TILES_TOADSTOOL               ; $5D6F: $3E $0A
@@ -3383,7 +3383,7 @@ ENDC
     jp   UnloadEntityAndReturn                    ; $5D7D: $C3 $8D $3F
 
 IF !__PATCH_3__
-jr_003_5D80:
+.jr_5D80
     jp   HoldEntityAboveLink                      ; $5D80: $C3 $17 $5A
 ENDC
 
@@ -3500,13 +3500,13 @@ animateSirensInstrumentPickup:
 
     ld   a, [hl]                                  ; $5E3C: $7E
     and  a                                        ; $5E3D: $A7
-    jr   nz, jr_003_5E45                          ; $5E3E: $20 $05
+    jr   nz, .jr_5E45                             ; $5E3E: $20 $05
 
     ld   a, $2C                                   ; $5E40: $3E $2C
     ldh  [hNoiseSfx], a                           ; $5E42: $E0 $F4
     xor  a                                        ; $5E44: $AF
 
-jr_003_5E45:
+.jr_5E45
     inc  [hl]                                     ; $5E45: $34
     cp   $18                                      ; $5E46: $FE $18
     jr   nz, jr_003_5E5B                          ; $5E48: $20 $11
@@ -3530,7 +3530,7 @@ jr_003_5E5B:
     ld   d, b                                     ; $5E65: $50
     ldh  a, [hIsGBC]                              ; $5E66: $F0 $FE
     and  a                                        ; $5E68: $A7
-    jr   z, jr_003_5E76                           ; $5E69: $28 $0B
+    jr   z, .jr_5E76                              ; $5E69: $28 $0B
 
     push bc                                       ; $5E6B: $C5
     push de                                       ; $5E6C: $D5
@@ -3540,7 +3540,7 @@ jr_003_5E5B:
     pop  bc                                       ; $5E73: $C1
     jr   ret_003_5E8A                             ; $5E74: $18 $14
 
-jr_003_5E76:
+.jr_5E76
     ld   hl, Data_003_5D9F                        ; $5E76: $21 $9F $5D
     add  hl, de                                   ; $5E79: $19
     ld   a, [hl]                                  ; $5E7A: $7E
@@ -3576,12 +3576,12 @@ SirensInstrumentState1Handler::
 SirensInstrumentState0Handler::
     ldh  a, [hActiveEntityState]                  ; $5EA3: $F0 $F0
     cp   $03                                      ; $5EA5: $FE $03
-    jr   nc, jr_003_5EAE                          ; $5EA7: $30 $05
+    jr   nc, .jr_5EAE                             ; $5EA7: $30 $05
 
     ld   a, $03                                   ; $5EA9: $3E $03
     call cycleInstrumentItemColor_trampoline      ; $5EAB: $CD $D2 $0A
 
-jr_003_5EAE:
+.jr_5EAE
     ld   a, c                                     ; $5EAE: $79
     ld   [wD201], a                               ; $5EAF: $EA $01 $D2
     ldh  a, [hRoomStatus]                         ; $5EB2: $F0 $F8
@@ -3611,7 +3611,7 @@ func_003_5ED5::
     jp   z, label_003_60AA                        ; $5ED8: $CA $AA $60
 
     cp   $10                                      ; $5EDB: $FE $10
-    jr   nz, jr_003_5EFE                          ; $5EDD: $20 $1F
+    jr   nz, .jr_5EFE                             ; $5EDD: $20 $1F
 
     dec  [hl]                                     ; $5EDF: $35
     call IncrementEntityState                     ; $5EE0: $CD $12 $3B
@@ -3638,7 +3638,7 @@ ENDC
     ld   [hl], a                                  ; $5EFC: $77
     xor  a                                        ; $5EFD: $AF
 
-jr_003_5EFE:
+.jr_5EFE
     dec  a                                        ; $5EFE: $3D
 IF __PATCH_0__
     jp   HoldEntityAboveLink
@@ -3662,11 +3662,11 @@ InstrumentMusicTable::
 func_003_5F0C::
     ld   a, [wActiveMusicIndex]                   ; $5F0C: $FA $69 $D3
     and  a                                        ; $5F0F: $A7
-    jr   nz, jr_003_5F2C                          ; $5F10: $20 $1A
+    jr   nz, .jr_5F2C                             ; $5F10: $20 $1A
 
     ld   a, [wDialogState]                        ; $5F12: $FA $9F $C1
     and  a                                        ; $5F15: $A7
-    jr   nz, jr_003_5F2C                          ; $5F16: $20 $14
+    jr   nz, .jr_5F2C                             ; $5F16: $20 $14
 
     ldh  a, [hMapId]                              ; $5F18: $F0 $F7
     ld   e, a                                     ; $5F1A: $5F
@@ -3679,7 +3679,7 @@ func_003_5F0C::
     call GetEntityTransitionCountdown             ; $5F27: $CD $05 $0C
     ld   [hl], $FF                                ; $5F2A: $36 $FF
 
-jr_003_5F2C:
+.jr_5F2C
     jp   HoldEntityAboveLink                      ; $5F2C: $C3 $17 $5A
 
 Data_003_5F2F::
@@ -3690,7 +3690,7 @@ Data_003_5F31::
 
 func_003_5F33::
     call GetEntityTransitionCountdown             ; $5F33: $CD $05 $0C
-    jr   nz, jr_003_5F5F                          ; $5F36: $20 $27
+    jr   nz, .jr_5F5F                             ; $5F36: $20 $27
 
     ld   a, JINGLE_INSTRUMENT_WARP                ; $5F38: $3E $2B
     ldh  [hJingle], a                             ; $5F3A: $E0 $F2
@@ -3714,13 +3714,13 @@ func_003_5F33::
     ld   [hl], $80                                ; $5F5A: $36 $80
     jp   IncrementEntityState                     ; $5F5C: $C3 $12 $3B
 
-jr_003_5F5F:
+.jr_5F5F
     ld   hl, wEntitiesPrivateState3Table          ; $5F5F: $21 $D0 $C2
     add  hl, bc                                   ; $5F62: $09
     dec  [hl]                                     ; $5F63: $35
     ld   a, [hl]                                  ; $5F64: $7E
     cp   $FF                                      ; $5F65: $FE $FF
-    jr   nz, jr_003_5FB9                          ; $5F67: $20 $50
+    jr   nz, .jr_5FB9                             ; $5F67: $20 $50
 
     ld   [hl], $17                                ; $5F69: $36 $17
     ld   hl, wEntitiesPrivateState4Table          ; $5F6B: $21 $40 $C4
@@ -3768,7 +3768,7 @@ jr_003_5F5F:
     ld   [hl], a                                  ; $5FB7: $77
     pop  bc                                       ; $5FB8: $C1
 
-jr_003_5FB9:
+.jr_5FB9
 IF !__PATCH_0__
     jp   HoldEntityAboveLink                      ; $5FB9: $C3 $17 $5A
 ENDC
@@ -3814,13 +3814,13 @@ DroppableSeashellEntityHandler::
 
     ldh  a, [hMapRoom]                            ; $5FE2: $F0 $F6
     cp   UNKNOWN_ROOM_E3                          ; House by the Bay
-    jr   nz, jr_003_5FEF                          ; $5FE6: $20 $07
+    jr   nz, .jr_5FEF                             ; $5FE6: $20 $07
 
     ldh  a, [hRoomStatus]                         ; $5FE8: $F0 $F8
     and  ROOM_STATUS_EVENT_3                      ; $5FEA: $E6 $40
     jp   z, UnloadEntityAndReturn                 ; $5FEC: $CA $8D $3F
 
-jr_003_5FEF:
+.jr_5FEF
     call func_003_61DE                            ; $5FEF: $CD $DE $61
     ld   de, data_003_5FD1                        ; $5FF2: $11 $D1 $5F
     call RenderActiveEntitySprite                 ; $5FF5: $CD $77 $3C
@@ -3846,16 +3846,16 @@ HidingSlimeKeyEntityHandler::
     dec  [hl]                                     ; $6017: $35
     ld   a, [wIsIndoor]                           ; $6018: $FA $A5 $DB
     and  a                                        ; $601B: $A7
-    jr   nz, jr_003_6029                          ; $601C: $20 $0B
+    jr   nz, .jr_6029                             ; $601C: $20 $0B
 
     ldh  a, [hMapRoom]                            ; $601E: $F0 $F6
     cp   ROOM_OW_POTHOLE_FIELD_SLIME_KEY          ; Overworld Pothole Field - Slime Key
-    jr   nz, jr_003_6029                          ; $6022: $20 $05
+    jr   nz, .jr_6029                             ; $6022: $20 $05
 
     ld   a, GOLDEN_LEAVES_5                       ; $6024: $3E $05
     ld   [wGoldenLeavesCount], a                  ; $6026: $EA $15 $DB
 
-jr_003_6029:
+.jr_6029
     ld   hl, wGoldenLeavesCount                   ; $6029: $21 $15 $DB
     call IncreaseValueAtHLClampAt99               ; $602C: $CD $73 $63
     call MarkRoomCompleted                        ; $602F: $CD $2A $51
@@ -3864,15 +3864,15 @@ jr_003_6029:
     ld   e, $A2                                   ; $6037: $1E $A2
     ld   a, [wGoldenLeavesCount]                  ; $6039: $FA $15 $DB
     cp   SLIME_KEY                                ; $603C: $FE $06
-    jr   z, jr_003_6047                           ; $603E: $28 $07
+    jr   z, .jr_6047                              ; $603E: $28 $07
 
     ld   e, $E8                                   ; $6040: $1E $E8
     cp   GOLDEN_LEAVES_5                          ; $6042: $FE $05
-    jr   nz, jr_003_6047                          ; $6044: $20 $01
+    jr   nz, .jr_6047                             ; $6044: $20 $01
 
     inc  e                                        ; $6046: $1C
 
-jr_003_6047:
+.jr_6047
     ld   a, e                                     ; $6047: $7B
     call OpenDialog                               ; $6048: $CD $85 $23
     xor  a                                        ; $604B: $AF
@@ -3883,11 +3883,11 @@ IF __PATCH_3__
     jp   nz, HoldEntityAboveLink
     jp   UnloadEntityAndReturn
 ELSE
-    jr   nz, jr_003_6052                          ; $604D: $20 $03
+    jr   nz, .jr_6052                             ; $604D: $20 $03
 
     jp   UnloadEntityAndReturn                    ; $604F: $C3 $8D $3F
 
-jr_003_6052:
+.jr_6052
     jp   HoldEntityAboveLink                      ; $6052: $C3 $17 $5A
 ENDC
 
@@ -3897,13 +3897,13 @@ Data_003_6055::
 DroppableMagicPowderEntityHandler::
     ld   a, [wIsIndoor]                           ; $6057: $FA $A5 $DB
     and  a                                        ; $605A: $A7
-    jr   z, jr_003_6063                           ; $605B: $28 $06
+    jr   z, .jr_6063                              ; $605B: $28 $06
 
     ldh  a, [hMapId]                              ; $605D: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $605F: $FE $FF
     jr   z, jr_003_606A                           ; $6061: $28 $07
 
-jr_003_6063:
+.jr_6063
     ld   a, [wHasToadstool]                       ; $6063: $FA $4B $DB
     and  a                                        ; $6066: $A7
     jp   nz, UnloadEntityAndReturn                ; $6067: $C2 $8D $3F
@@ -3960,7 +3960,7 @@ func_003_60B3::
     call func_003_7893                            ; $60B9: $CD $93 $78
     ldh  a, [hIsSideScrolling]                    ; $60BC: $F0 $F9
     and  a                                        ; $60BE: $A7
-    jr   z, jr_003_60E3                           ; $60BF: $28 $22
+    jr   z, .jr_60E3                              ; $60BF: $28 $22
 
     ld   hl, wEntitiesCollisionsTable             ; $60C1: $21 $A0 $C2
     add  hl, bc                                   ; $60C4: $09
@@ -3984,7 +3984,7 @@ func_003_60B3::
 
     jr   jr_003_6103                              ; $60E1: $18 $20
 
-jr_003_60E3:
+.jr_60E3
     ld   hl, wEntitiesPosZTable                   ; $60E3: $21 $10 $C3
     add  hl, bc                                   ; $60E6: $09
     ld   a, [hl]                                  ; $60E7: $7E
@@ -4058,11 +4058,11 @@ jr_003_6136:
     ld   a, [hl]                                  ; $613B: $7E
     sra  a                                        ; $613C: $CB $2F
     cp   $FF                                      ; $613E: $FE $FF
-    jr   nz, jr_003_6143                          ; $6140: $20 $01
+    jr   nz, .jr_6143                             ; $6140: $20 $01
 
     xor  a                                        ; $6142: $AF
 
-jr_003_6143:
+.jr_6143
     ld   [hl], a                                  ; $6143: $77
     ldh  a, [hIsSideScrolling]                    ; $6144: $F0 $F9
     and  a                                        ; $6146: $A7
@@ -4073,11 +4073,11 @@ jr_003_6143:
     ld   a, [hl]                                  ; $614D: $7E
     sra  a                                        ; $614E: $CB $2F
     cp   $FF                                      ; $6150: $FE $FF
-    jr   nz, jr_003_6155                          ; $6152: $20 $01
+    jr   nz, .jr_6155                             ; $6152: $20 $01
 
     xor  a                                        ; $6154: $AF
 
-jr_003_6155:
+.jr_6155
     ld   [hl], a                                  ; $6155: $77
 
 ret_003_6156:
@@ -4097,19 +4097,19 @@ func_003_61C0::
     jr   z, ret_003_61DD                          ; $61CD: $28 $0E
 
     bit  7, a                                     ; $61CF: $CB $7F
-    jr   z, jr_003_61D6                           ; $61D1: $28 $03
+    jr   z, .jr_61D6                              ; $61D1: $28 $03
 
     inc  [hl]                                     ; $61D3: $34
     jr   ret_003_61DD                             ; $61D4: $18 $07
 
-jr_003_61D6:
+.jr_61D6
     cp   $10                                      ; $61D6: $FE $10
-    jr   nc, jr_003_61DC                          ; $61D8: $30 $02
+    jr   nc, .jr_61DC                             ; $61D8: $30 $02
 
     inc  [hl]                                     ; $61DA: $34
     ret                                           ; $61DB: $C9
 
-jr_003_61DC:
+.jr_61DC
     dec  [hl]                                     ; $61DC: $35
 
 ret_003_61DD:
@@ -4132,17 +4132,17 @@ func_003_61DE::
 
     ldh  a, [hActiveEntityType]                   ; $61F3: $F0 $EB
     cp   ENTITY_DROPPABLE_SECRET_SEASHELL         ; $61F5: $FE $3D
-    jr   z, jr_003_6200                           ; $61F7: $28 $07 (???: If a seashell, jump?)
+    jr   z, .jr_6200                              ; $61F7: $28 $07 (???: If a seashell, jump?)
 
     ld   a, [wIsIndoor]                           ; $61F9: $FA $A5 $DB
     and  a                                        ; $61FC: $A7
     jp   nz, jr_003_629C                          ; $61FD: $C2 $9C $62
 
-jr_003_6200:
+.jr_6200
     call func_003_7E0E                            ; $6200: $CD $0E $7E
     ldh  a, [hActiveEntityType]                   ; $6203: $F0 $EB
     cp   ENTITY_DROPPABLE_HEART                   ; $6205: $FE $2D
-    jr   z, jr_003_6227                           ; $6207: $28 $1E
+    jr   z, .jr_6227                              ; $6207: $28 $1E
 
     cp   ENTITY_DROPPABLE_SECRET_SEASHELL         ; $6209: $FE $3D
     jr   nz, jr_003_622F                          ; $620B: $20 $22
@@ -4161,7 +4161,7 @@ jr_003_6200:
     cp   UNKNOWN_ROOM_B2                          ; Overworld room - Mabe village telephone booth (...no seashell???)
     jr   z, jr_003_622F                           ; $6225: $28 $08
 
-jr_003_6227:
+.jr_6227
     ldh  a, [hObjectUnderEntity]                  ; $6227: $F0 $AF
     cp   $04                                      ; $6229: $FE $04
     jr   z, jr_003_623B                           ; $622B: $28 $0E
@@ -4285,12 +4285,12 @@ func_003_62AF::
     add  hl, de                                   ; $62C6: $19
     ld   a, [hl]                                  ; $62C7: $7E
     cp   $01                                      ; $62C8: $FE $01
-    jr   z, jr_003_62D0                           ; $62CA: $28 $04
+    jr   z, .jr_62D0                              ; $62CA: $28 $04
 
     cp   $03                                      ; $62CC: $FE $03
     jr   nz, collectPickableItem                  ; $62CE: $20 $41
 
-jr_003_62D0:
+.jr_62D0
     ld   hl, wEntitiesPosXTable                   ; $62D0: $21 $00 $C2
     add  hl, de                                   ; $62D3: $19
     ld   a, [hl]                                  ; $62D4: $7E
@@ -4323,7 +4323,7 @@ func_003_62EB::
     add  hl, de                                   ; $62F9: $19
     ld   a, [hl]                                  ; $62FA: $7E
     and  a                                        ; $62FB: $A7
-    jr   z, jr_003_630C                           ; $62FC: $28 $0E
+    jr   z, .jr_630C                              ; $62FC: $28 $0E
 
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $62FE: $21 $10 $C4
     add  hl, bc                                   ; $6301: $09
@@ -4336,7 +4336,7 @@ func_003_62EB::
     pop  af                                       ; $630A: $F1
     ld   [hl], a                                  ; $630B: $77
 
-jr_003_630C:
+.jr_630C
     call func_003_6C6B                            ; $630C: $CD $6B $6C
     jr   nc, ret_003_62EA                         ; $630F: $30 $D9
 
@@ -4566,7 +4566,7 @@ MovePickupInTheAir::
 PickSword::
     ld   a, [wSwordLevel]                         ; $644D: $FA $4E $DB
     and  a                                        ; $6450: $A7
-    jr   nz, jr_003_6468                          ; $6451: $20 $15
+    jr   nz, .jr_6468                             ; $6451: $20 $15
 
     ld   a, MUSIC_SWORD_ACQUIRED                  ; $6453: $3E $0F
     ld   [wMusicTrackToPlay], a                   ; $6455: $EA $68 $D3
@@ -4578,7 +4578,7 @@ PickSword::
     ldh  [hNextDefaultMusicTrack], a              ; $6465: $E0 $BF
     ret                                           ; $6467: $C9
 
-jr_003_6468:
+.jr_6468
     ; POI: If sword level > 0, it's a shield instead. Used for Like-Likes?
     ld   hl, wEntitiesPrivateState1Table          ; $6468: $21 $B0 $C2
     add  hl, bc                                   ; $646B: $09
@@ -4625,12 +4625,12 @@ PickDroppableKey::
 
     ldh  a, [hMapRoom]                            ; $6495: $F0 $F6
     cp   MOUNTAIN_CAVE_ROOM_3                     ; L4 Side-view room where the key drops
-    jr   nz, jr_003_64A0                          ; $6499: $20 $05
+    jr   nz, .jr_64A0                             ; $6499: $20 $05
 
     ld   hl, wIndoorARoomStatus + $69             ; $649B: $21 $69 $D9
     set  4, [hl]                                  ; $649E: $CB $E6
 
-jr_003_64A0:
+.jr_64A0
     ldh  a, [hActiveEntitySpriteVariant]          ; $64A0: $F0 $F1
     and  a                                        ; $64A2: $A7
     jr   z, jr_003_64AD                           ; $64A3: $28 $08
@@ -4804,14 +4804,14 @@ func_003_65B0::
     sla  a                                        ; $65B5: $CB $27
     sla  a                                        ; $65B7: $CB $27
 
-jr_003_65B9:
+.jr_65B9
     sla  a                                        ; $65B9: $CB $27
     sla  a                                        ; $65BB: $CB $27
     sla  a                                        ; $65BD: $CB $27
     ld   e, a                                     ; $65BF: $5F
     ld   d, b                                     ; $65C0: $50
 
-jr_003_65C1:
+.jr_65C1
     ld   hl, Data_003_6530                        ; $65C1: $21 $30 $65
     add  hl, de                                   ; $65C4: $19
     ld   c, $08                                   ; $65C5: $0E $08
@@ -4844,10 +4844,10 @@ label_003_65F2:
     jp   z, ret_003_664F                          ; $65FB: $CA $4F $66
 
     cp   $0E                                      ; $65FE: $FE $0E
-    jr   c, jr_003_6614                           ; $6600: $38 $12
+    jr   c, .jr_6614                              ; $6600: $38 $12
 
     cp   $17                                      ; $6602: $FE $17
-    jr   nc, jr_003_6614                          ; $6604: $30 $0E
+    jr   nc, .jr_6614                             ; $6604: $30 $0E
 
     push af                                       ; $6606: $F5
     sub  $0E                                      ; $6607: $D6 $0E
@@ -4859,7 +4859,7 @@ label_003_65F2:
     call func_003_6771                            ; $6610: $CD $71 $67
     pop  af                                       ; $6613: $F1
 
-jr_003_6614:
+.jr_6614
     cp   $12                                      ; $6614: $FE $12
     jr   nz, ret_003_664F                         ; $6616: $20 $37
 
@@ -4867,12 +4867,12 @@ jr_003_6614:
     add  hl, bc                                   ; $661B: $09
     ld   a, [hl]                                  ; $661C: $7E
     and  a                                        ; $661D: $A7
-    jr   nz, jr_003_6625                          ; $661E: $20 $05
+    jr   nz, .jr_6625                             ; $661E: $20 $05
 
     call func_003_77D9                            ; $6620: $CD $D9 $77
     jr   jr_003_664A                              ; $6623: $18 $25
 
-jr_003_6625:
+.jr_6625
     ldh  a, [hActiveEntityPosX]                   ; $6625: $F0 $EE
     ld   hl, hLinkPositionX                       ; $6627: $21 $98 $FF
     sub  [hl]                                     ; $662A: $96
@@ -4926,15 +4926,15 @@ func_003_6650::
     ld   e, $E4                                   ; $6676: $1E $E4
     ld   a, [wRoomTransitionState]                ; $6678: $FA $24 $C1
     and  a                                        ; $667B: $A7
-    jr   nz, jr_003_6687                          ; $667C: $20 $09
+    jr   nz, .jr_6687                             ; $667C: $20 $09
 
     call GetEntityTransitionCountdown             ; $667E: $CD $05 $0C
     and  $04                                      ; $6681: $E6 $04
-    jr   z, jr_003_6687                           ; $6683: $28 $02
+    jr   z, .jr_6687                              ; $6683: $28 $02
 
     ld   e, $84                                   ; $6685: $1E $84
 
-jr_003_6687:
+.jr_6687
     ld   hl, wBGPalette                           ; $6687: $21 $97 $DB
     ld   [hl], e                                  ; $668A: $73
 
@@ -5172,12 +5172,12 @@ jr_003_6878:
     ld   d, $00                                   ; $687E: $16 $00
     ldh  a, [hMapId]                              ; $6880: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $6882: $FE $FF
-    jr   nz, jr_003_688B                          ; $6884: $20 $05
+    jr   nz, .jr_688B                             ; $6884: $20 $05
 
     ld   hl, wColorDungeonRoomStatus              ; $6886: $21 $E0 $DD
     jr   jr_003_6894                              ; $6889: $18 $09
 
-jr_003_688B:
+.jr_688B
     cp   $1A                                      ; $688B: $FE $1A
     jr   nc, jr_003_6894                          ; $688D: $30 $05
 
@@ -5215,7 +5215,7 @@ jr_003_6894:
     and  $0F                                      ; $68BB: $E6 $0F
     ld   e, a                                     ; $68BD: $5F
 
-jr_003_68BE:
+.jr_68BE
     ldh  a, [hIntersectedObjectTop]               ; $68BE: $F0 $CD
     and  $F0                                      ; $68C0: $E6 $F0
     or   e                                        ; $68C2: $B3
@@ -5390,11 +5390,11 @@ OctorokRockSpriteVariants::
 
 OctorokRockEntityHandler::
     call GetEntityTransitionCountdown             ; $6A26: $CD $05 $0C
-    jr   nz, jr_003_6A2E                          ; $6A29: $20 $03
+    jr   nz, .jr_6A2E                             ; $6A29: $20 $03
 
     call CheckLinkCollisionWithProjectile         ; $6A2B: $CD $DE $6B
 
-jr_003_6A2E:
+.jr_6A2E
     ld   de, OctorokRockSpriteVariants            ; $6A2E: $11 $1E $6A
     jp   RenderActiveEntitySpritesPairSubcall     ; $6A31: $C3 $D7 $6A
 
@@ -5415,7 +5415,7 @@ func_003_6A70::
 
     ld   a, ENTITY_BOMB                           ; $6A75: $3E $02
     call SpawnNewEntity                           ; $6A77: $CD $CA $64
-    jr   c, jr_003_6A93                           ; $6A7A: $38 $17
+    jr   c, .jr_6A93                              ; $6A7A: $38 $17
 
     ldh  a, [hMultiPurpose0]                      ; $6A7C: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $6A7E: $21 $00 $C2
@@ -5430,7 +5430,7 @@ func_003_6A70::
     ld   [hl], $17                                ; $6A8E: $36 $17
     call PlayBombExplosionSfx                     ; $6A90: $CD $4B $0C
 
-jr_003_6A93:
+.jr_6A93
     jp   UnloadEntityAndReturn                    ; $6A93: $C3 $8D $3F
 
 jr_003_6A96:
@@ -5506,12 +5506,12 @@ jr_003_6ADA:
     add  hl, bc                                   ; $6B0A: $09
     ld   a, [hl]                                  ; $6B0B: $7E
     inc  a                                        ; $6B0C: $3C
-    jr   z, jr_003_6B13                           ; $6B0D: $28 $04
+    jr   z, .jr_6B13                              ; $6B0D: $28 $04
 
     ld   a, JINGLE_SWORD_POKING                   ; $6B0F: $3E $07
     ldh  [hJingle], a                             ; $6B11: $E0 $F2
 
-jr_003_6B13:
+.jr_6B13
     call func_C50                                 ; $6B13: $CD $50 $0C
 
     ldh  a, [hActiveEntityType]                   ; $6B16: $F0 $EB
@@ -5566,11 +5566,11 @@ func_003_6B48:
 IF __PATCH_3__
     jp   z, UnloadEntityAndReturn
 ELSE
-    jr   nz, jr_003_6B53                          ; $6B4E: $20 $03
+    jr   nz, .jr_6B53                             ; $6B4E: $20 $03
     jp   UnloadEntityAndReturn                    ; $6B50: $C3 $8D $3F
 ENDC
 
-jr_003_6B53:
+.jr_6B53
     ldh  a, [hActiveEntityType]                   ; $6B53: $F0 $EB
     cp   ENTITY_OCTOROK_ROCK                      ; $6B55: $FE $0A
     jr   z, .octorokRockEnd                       ; $6B57: $28 $15
@@ -5600,7 +5600,7 @@ Data_003_6B77::
 func_003_6B7B::
     ldh  a, [hIsSideScrolling]                    ; $6B7B: $F0 $F9
     and  a                                        ; $6B7D: $A7
-    jr   nz, jr_003_6B8C                          ; $6B7E: $20 $0C
+    jr   nz, .jr_6B8C                             ; $6B7E: $20 $0C
 
     call AddEntityZSpeedToPos_03                  ; $6B80: $CD $5E $7F
     ld   hl, wEntitiesSpeedZTable                 ; $6B83: $21 $20 $C3
@@ -5610,7 +5610,7 @@ func_003_6B7B::
     ld   [hl], a                                  ; $6B8A: $77
     ret                                           ; $6B8B: $C9
 
-jr_003_6B8C:
+.jr_6B8C
     ld   hl, wEntitiesGroundStatusTable           ; $6B8C: $21 $70 $C4
     add  hl, bc                                   ; $6B8F: $09
     ld   a, [hl]                                  ; $6B90: $7E
@@ -5630,12 +5630,12 @@ jr_003_6B8C:
     jr   z, jr_003_6BAB                           ; $6BA2: $28 $07
 
     and  $80                                      ; $6BA4: $E6 $80
-    jr   z, jr_003_6BAA                           ; $6BA6: $28 $02
+    jr   z, .jr_6BAA                              ; $6BA6: $28 $02
 
     inc  [hl]                                     ; $6BA8: $34
     inc  [hl]                                     ; $6BA9: $34
 
-jr_003_6BAA:
+.jr_6BAA
     dec  [hl]                                     ; $6BAA: $35
 
 jr_003_6BAB:
@@ -5841,12 +5841,12 @@ CheckLinkCollisionWithEnemy::
     sub  [hl]                                     ; $6C8F: $96
     sub  $08                                      ; $6C90: $D6 $08
     cp   $80                                      ; $6C92: $FE $80
-    jr   c, jr_003_6C98                           ; $6C94: $38 $02
+    jr   c, .jr_6C98                              ; $6C94: $38 $02
 
     cpl                                           ; $6C96: $2F
     inc  a                                        ; $6C97: $3C
 
-jr_003_6C98:
+.jr_6C98
     pop  hl                                       ; $6C98: $E1
     push af                                       ; $6C99: $F5
     inc  hl                                       ; $6C9A: $23
@@ -5865,12 +5865,12 @@ jr_003_6C98:
     sub  [hl]                                     ; $6CAC: $96
     sub  $08                                      ; $6CAD: $D6 $08
     cp   $80                                      ; $6CAF: $FE $80
-    jr   c, jr_003_6CB5                           ; $6CB1: $38 $02
+    jr   c, .jr_6CB5                              ; $6CB1: $38 $02
 
     cpl                                           ; $6CB3: $2F
     inc  a                                        ; $6CB4: $3C
 
-jr_003_6CB5:
+.jr_6CB5
     pop  hl                                       ; $6CB5: $E1
     push af                                       ; $6CB6: $F5
     inc  hl                                       ; $6CB7: $23
@@ -6000,23 +6000,23 @@ ApplyLinkCollisionWithEnemy::
 .miniGelEnd
 
     cp   ENTITY_CUE_BALL                          ; $6D4E: $FE $8E
-    jr   z, jr_003_6D5D                           ; $6D50: $28 $0B
+    jr   z, .jr_6D5D                              ; $6D50: $28 $0B
 
     cp   ENTITY_ROLLING_BONES_BAR                 ; $6D52: $FE $82
-    jr   z, jr_003_6D5D                           ; $6D54: $28 $07
+    jr   z, .jr_6D5D                              ; $6D54: $28 $07
 
     ld   a, [wIgnoreLinkCollisionsCountdown]      ; $6D56: $FA $3E $C1
     and  a                                        ; $6D59: $A7
     jp   nz, setCarryAndReturn                    ; $6D5A: $C2 $0A $6E
 
-jr_003_6D5D:
+.jr_6D5D
     ldh  a, [hActiveEntityType]                   ; $6D5D: $F0 $EB
     cp   ENTITY_MOBLIN_KING                       ; $6D5F: $FE $E4
-    jr   nz, jr_003_6D73                          ; $6D61: $20 $10
+    jr   nz, .jr_6D73                             ; $6D61: $20 $10
 
     ldh  a, [hActiveEntityState]                  ; $6D63: $F0 $F0
     cp   $04                                      ; $6D65: $FE $04
-    jr   nz, jr_003_6D73                          ; $6D67: $20 $0A
+    jr   nz, .jr_6D73                             ; $6D67: $20 $0A
 
     call IncrementEntityState                     ; $6D69: $CD $12 $3B
     ld   [hl], $08                                ; $6D6C: $36 $08
@@ -6024,7 +6024,7 @@ jr_003_6D5D:
     ldh  [hWaveSfx], a                            ; $6D70: $E0 $F3
     ret                                           ; $6D72: $C9
 
-jr_003_6D73:
+.jr_6D73
     ld   a, [wInvincibilityCounter]               ; $6D73: $FA $C7 $DB
     ld   hl, wC1C6                                ; $6D76: $21 $C6 $C1
     or   [hl]                                     ; $6D79: $B6
@@ -6094,11 +6094,11 @@ jr_003_6D73:
 
     ldh  a, [hDefaultMusicTrack]                  ; $6DD4: $F0 $B0
     cp   MUSIC_OWL                                ; $6DD6: $FE $22
-    jr   z, jr_003_6DDD                           ; $6DD8: $28 $03
+    jr   z, .jr_6DDD                              ; $6DD8: $28 $03
 
     ld   [wMusicTrackToPlay], a                   ; $6DDA: $EA $68 $D3
 
-jr_003_6DDD:
+.jr_6DDD
     ldh  [hNextDefaultMusicTrack], a              ; $6DDD: $E0 $BF
 
 func_003_6DDF::
@@ -6165,21 +6165,21 @@ func_003_6E2B::
     add  hl, bc                                   ; $6E36: $09
     ld   a, [hl]                                  ; $6E37: $7E
     and  a                                        ; $6E38: $A7
-    jr   z, jr_003_6E40                           ; $6E39: $28 $05
+    jr   z, .jr_6E40                              ; $6E39: $28 $05
 
     cp   $18                                      ; $6E3B: $FE $18
     jp   c, label_003_73E6                        ; $6E3D: $DA $E6 $73
 
-jr_003_6E40:
+.jr_6E40
     ld   a, [wC1AC]                               ; $6E40: $FA $AC $C1
     and  a                                        ; $6E43: $A7
-    jr   z, jr_003_6E4B                           ; $6E44: $28 $05
+    jr   z, .jr_6E4B                              ; $6E44: $28 $05
 
     dec  a                                        ; $6E46: $3D
     cp   c                                        ; $6E47: $B9
     jp   z, label_003_73E6                        ; $6E48: $CA $E6 $73
 
-jr_003_6E4B:
+.jr_6E4B
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $6E4B: $21 $10 $C4
     add  hl, bc                                   ; $6E4E: $09
     ld   a, [hl]                                  ; $6E4F: $7E
@@ -6199,12 +6199,12 @@ jr_003_6E4B:
     ld   hl, wC140                                ; $6E64: $21 $40 $C1
     sub  [hl]                                     ; $6E67: $96
     cp   $80                                      ; $6E68: $FE $80
-    jr   c, jr_003_6E6E                           ; $6E6A: $38 $02
+    jr   c, .jr_6E6E                              ; $6E6A: $38 $02
 
     cpl                                           ; $6E6C: $2F
     inc  a                                        ; $6E6D: $3C
 
-jr_003_6E6E:
+.jr_6E6E
     pop  hl                                       ; $6E6E: $E1
     push af                                       ; $6E6F: $F5
     inc  hl                                       ; $6E70: $23
@@ -6225,12 +6225,12 @@ jr_003_6E6E:
     ld   hl, wC142                                ; $6E84: $21 $42 $C1
     sub  [hl]                                     ; $6E87: $96
     cp   $80                                      ; $6E88: $FE $80
-    jr   c, jr_003_6E8E                           ; $6E8A: $38 $02
+    jr   c, .jr_6E8E                              ; $6E8A: $38 $02
 
     cpl                                           ; $6E8C: $2F
     inc  a                                        ; $6E8D: $3C
 
-jr_003_6E8E:
+.jr_6E8E
     pop  hl                                       ; $6E8E: $E1
     push af                                       ; $6E8F: $F5
     inc  hl                                       ; $6E90: $23
@@ -6437,12 +6437,12 @@ label_003_6FA7:
     and  a                                        ; $6FAC: $A7
     pop  de                                       ; $6FAD: $D1
     ld   a, e                                     ; $6FAE: $7B
-    jr   z, jr_003_6FB3                           ; $6FAF: $28 $02
+    jr   z, .jr_6FB3                              ; $6FAF: $28 $02
 
     cpl                                           ; $6FB1: $2F
     inc  a                                        ; $6FB2: $3C
 
-jr_003_6FB3:
+.jr_6FB3
     ldh  [hLinkSpeedX], a                         ; $6FB3: $E0 $9A
     xor  a                                        ; $6FB5: $AF
     ldh  [hLinkSpeedY], a                         ; $6FB6: $E0 $9B
@@ -6901,50 +6901,50 @@ label_003_71C0:
     push af                                       ; $71F4: $F5
     ldh  a, [hActiveEntityType]                   ; $71F5: $F0 $EB
     cp   ENTITY_FINAL_NIGHTMARE                   ; $71F7: $FE $E6
-    jr   nz, jr_003_7215                          ; $71F9: $20 $1A
+    jr   nz, .jr_7215                             ; $71F9: $20 $1A
 
     ld   a, [wFinalNightmareForm]                 ; $71FB: $FA $19 $D2
     cp   $04                                      ; $71FE: $FE $04
-    jr   nz, jr_003_7215                          ; $7200: $20 $13
+    jr   nz, .jr_7215                             ; $7200: $20 $13
 
     ld   a, [wIsRunningWithPegasusBoots]          ; $7202: $FA $4A $C1
     push af                                       ; $7205: $F5
     call func_003_6DDF                            ; $7206: $CD $DF $6D
     pop  af                                       ; $7209: $F1
     and  a                                        ; $720A: $A7
-    jr   nz, jr_003_7215                          ; $720B: $20 $08
+    jr   nz, .jr_7215                             ; $720B: $20 $08
 
     ld   a, [wIsUsingSpinAttack]                  ; $720D: $FA $21 $C1
     and  a                                        ; $7210: $A7
-    jr   nz, jr_003_7215                          ; $7211: $20 $02
+    jr   nz, .jr_7215                             ; $7211: $20 $02
 
     pop  af                                       ; $7213: $F1
     ret                                           ; $7214: $C9
 
-jr_003_7215:
+.jr_7215
     ld   hl, wEntitiesOptions1Table               ; $7215: $21 $30 $C4
     add  hl, bc                                   ; $7218: $09
     ld   a, [hl]                                  ; $7219: $7E
     ld   hl, hJingle                              ; $721A: $21 $F2 $FF
     ld   [hl], JINGLE_BOW_WOW_CHOMP               ; $721D: $36 $03
     and  $80                                      ; $721F: $E6 $80
-    jr   z, jr_003_7228                           ; $7221: $28 $05
+    jr   z, .jr_7228                              ; $7221: $28 $05
 
     ld   hl, hWaveSfx                             ; $7223: $21 $F3 $FF
     ld   [hl], WAVE_SFX_BOSS_GRAWL                ; $7226: $36 $07
 
 ; Hurt cucco.
-jr_003_7228:
+.jr_7228
     ld   hl, wEntitiesTypeTable                   ; $7228: $21 $A0 $C3
     add  hl, bc                                   ; $722B: $09
     ld   a, [hl]                                  ; $722C: $7E
     cp   ENTITY_CUCCO                             ; $722D: $FE $6C
-    jr   nz, jr_003_7235                          ; $722F: $20 $04
+    jr   nz, .jr_7235                             ; $722F: $20 $04
 
     ld   a, WAVE_SFX_CUCCO_HURT                   ; $7231: $3E $13
     ldh  [hWaveSfx], a                            ; $7233: $E0 $F3
 
-jr_003_7235:
+.jr_7235
     ; pop damages type and amount
     pop  af                                       ; $7235: $F1
 
@@ -6952,7 +6952,7 @@ jr_003_7235:
     jr   c, jr_003_72B5                           ; $7238: $38 $7B
 
     cp   $FE ; damage-type: burn                               ; $723A: $FE $FE
-    jr   nz, jr_003_7260                          ; $723C: $20 $22
+    jr   nz, .jr_7260                             ; $723C: $20 $22
 
     ld   hl, hNoiseSfx                            ; $723E: $21 $F4 $FF
     ld   [hl], NOISE_SFX_BURSTING_FLAME           ; $7241: $36 $12
@@ -6973,7 +6973,7 @@ jr_003_7235:
     ld   [hl], a                                  ; $725E: $77
     ret                                           ; $725F: $C9
 
-jr_003_7260:
+.jr_7260
     cp   $FF                                      ; $7260: $FE $FF
     jr   nz, jr_003_7279                          ; $7262: $20 $15
 
@@ -6999,12 +6999,12 @@ jr_003_7279:
     add  hl, bc                                   ; $727F: $09
     ld   a, [hl]                                  ; $7280: $7E
     cp   ENTITY_GIANT_BUZZ_BLOB                   ; $7281: $FE $F8
-    jr   z, jr_003_7289                           ; $7283: $28 $04
+    jr   z, .jr_7289                              ; $7283: $28 $04
 
     cp   ENTITY_BUZZ_BLOB                         ; $7285: $FE $B9
     jr   nz, jr_003_7293                          ; $7287: $20 $0A
 
-jr_003_7289:
+.jr_7289
     ld   hl, wEntitiesPrivateState1Table          ; $7289: $21 $B0 $C2
     add  hl, bc                                   ; $728C: $09
     ld   a, [hl]                                  ; $728D: $7E
@@ -7042,11 +7042,11 @@ jr_003_72B5:
     ld   a, [hl]                                  ; $72BA: $7E
     sub  e                                        ; $72BB: $93
     ld   [hl], a                                  ; $72BC: $77
-    jr   c, jr_003_72C2                           ; $72BD: $38 $03
+    jr   c, .jr_72C2                              ; $72BD: $38 $03
 
     jp   nz, jr_003_73B6                          ; $72BF: $C2 $B6 $73
 
-jr_003_72C2:
+.jr_72C2
     ld   hl, wEntitiesStatusTable                 ; $72C2: $21 $80 $C2
     add  hl, bc                                   ; $72C5: $09
     ld   [hl], $01                                ; $72C6: $36 $01
@@ -7065,13 +7065,13 @@ jr_003_72C2:
 jr_003_72D8:
     ld   a, e                                     ; $72D8: $7B
     cp   c                                        ; $72D9: $B9
-    jr   z, jr_003_72EE                           ; $72DA: $28 $12
+    jr   z, .jr_72EE                              ; $72DA: $28 $12
 
     ld   hl, wEntitiesStatusTable                 ; $72DC: $21 $80 $C2
     add  hl, de                                   ; $72DF: $19
     ld   a, [hl]                                  ; $72E0: $7E
     cp   $05                                      ; $72E1: $FE $05
-    jr   nz, jr_003_72EE                          ; $72E3: $20 $09
+    jr   nz, .jr_72EE                             ; $72E3: $20 $09
 
     ld   hl, wEntitiesOptions1Table               ; $72E5: $21 $30 $C4
     add  hl, de                                   ; $72E8: $19
@@ -7079,7 +7079,7 @@ jr_003_72D8:
     and  $80                                      ; $72EA: $E6 $80
     jr   nz, jr_003_7304                          ; $72EC: $20 $16
 
-jr_003_72EE:
+.jr_72EE
     dec  e                                        ; $72EE: $1D
     ld   a, e                                     ; $72EF: $7B
     cp   $FF                                      ; $72F0: $FE $FF
@@ -7104,7 +7104,7 @@ jr_003_7304:
     ld   a, [hl]                                  ; $7312: $7E
     ld   e, $B7                                   ; $7313: $1E $B7
     cp   $5A                                      ; $7315: $FE $5A
-    jr   z, jr_003_7325                           ; $7317: $28 $0C
+    jr   z, .jr_7325                              ; $7317: $28 $0C
 
     ld   e, $B9                                   ; $7319: $1E $B9
     cp   $63                                      ; $731B: $FE $63
@@ -7115,7 +7115,7 @@ jr_003_7304:
     jr   nz, jr_003_733E                          ; $7323: $20 $19
 
 ; Boss dialog after defeating them
-jr_003_7325:
+.jr_7325
     ld   a, e                                     ; $7325: $7B
     call OpenDialog                               ; $7326: $CD $85 $23
     ld   a, MUSIC_BOSS_WARNING                    ; $7329: $3E $5E
@@ -7150,7 +7150,7 @@ jr_003_733E:
     add  hl, bc                                   ; $7351: $09
     ld   a, [hl]                                  ; $7352: $7E
     and  $80                                      ; $7353: $E6 $80
-    jr   nz, jr_003_7361                          ; $7355: $20 $0A
+    jr   nz, .jr_7361                             ; $7355: $20 $0A
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $7357: $21 $40 $C3
     add  hl, bc                                   ; $735A: $09
@@ -7159,7 +7159,7 @@ jr_003_733E:
     or   $04                                      ; $735E: $F6 $04
     ld   [hl], a                                  ; $7360: $77
 
-jr_003_7361:
+.jr_7361
     ld   hl, wEntitiesTypeTable                   ; $7361: $21 $A0 $C3
     add  hl, bc                                   ; $7364: $09
     ld   a, [hl]                                  ; $7365: $7E
@@ -7178,12 +7178,12 @@ jr_003_736D:
     add  hl, de                                   ; $7374: $19
     ld   a, [hl]                                  ; $7375: $7E
     cp   $10                                      ; $7376: $FE $10
-    jr   z, jr_003_737E                           ; $7378: $28 $04
+    jr   z, .jr_737E                              ; $7378: $28 $04
 
     cp   $11                                      ; $737A: $FE $11
     jr   nz, jr_003_73AA                          ; $737C: $20 $2C
 
-jr_003_737E:
+.jr_737E
     ld   hl, wEntitiesStateTable                  ; $737E: $21 $90 $C2
     add  hl, de                                   ; $7381: $19
     ld   a, [hl]                                  ; $7382: $7E
@@ -7230,7 +7230,7 @@ jr_003_73B6:
     ld   hl, wEntitiesFlashCountdownTable         ; $73BB: $21 $20 $C4
     add  hl, bc                                   ; $73BE: $09
     cp   $E6                                      ; $73BF: $FE $E6
-    jr   nz, jr_003_73CC                          ; $73C1: $20 $09
+    jr   nz, .jr_73CC                             ; $73C1: $20 $09
 
     ld   a, [wFinalNightmareForm]                 ; $73C3: $FA $19 $D2
     cp   $03                                      ; $73C6: $FE $03
@@ -7238,7 +7238,7 @@ jr_003_73B6:
 
     jr   jr_003_73D9                              ; $73CA: $18 $0D
 
-jr_003_73CC:
+.jr_73CC
     cp   $59                                      ; $73CC: $FE $59
     jr   nz, jr_003_73D9                          ; $73CE: $20 $09
 
@@ -7294,12 +7294,12 @@ func_003_73EB::
     ld   hl, wC140                                ; $7418: $21 $40 $C1
     sub  [hl]                                     ; $741B: $96
     cp   $80                                      ; $741C: $FE $80
-    jr   c, jr_003_7422                           ; $741E: $38 $02
+    jr   c, .jr_7422                              ; $741E: $38 $02
 
     cpl                                           ; $7420: $2F
     inc  a                                        ; $7421: $3C
 
-jr_003_7422:
+.jr_7422
     pop  hl                                       ; $7422: $E1
     push af                                       ; $7423: $F5
     inc  hl                                       ; $7424: $23
@@ -7318,12 +7318,12 @@ jr_003_7422:
     ld   hl, wC142                                ; $7436: $21 $42 $C1
     sub  [hl]                                     ; $7439: $96
     cp   $80                                      ; $743A: $FE $80
-    jr   c, jr_003_7440                           ; $743C: $38 $02
+    jr   c, .jr_7440                              ; $743C: $38 $02
 
     cpl                                           ; $743E: $2F
     inc  a                                        ; $743F: $3C
 
-jr_003_7440:
+.jr_7440
     pop  hl                                       ; $7440: $E1
     push af                                       ; $7441: $F5
     inc  hl                                       ; $7442: $23
@@ -7362,12 +7362,12 @@ jr_003_7440:
     ld   hl, wIsUsingSpinAttack                   ; $747D: $21 $21 $C1
     ld   a, [wC16A]                               ; $7480: $FA $6A $C1
     or   [hl]                                     ; $7483: $B6
-    jr   z, jr_003_748B                           ; $7484: $28 $05
+    jr   z, .jr_748B                              ; $7484: $28 $05
 
     ld   a, $0C                                   ; $7486: $3E $0C
     ld   [wC16D], a                               ; $7488: $EA $6D $C1
 
-jr_003_748B:
+.jr_748B
     ldh  a, [hActiveEntityType]                   ; $748B: $F0 $EB
     cp   ENTITY_BLAINO                            ; $748D: $FE $BE
     jr   nz, jr_003_74C1                          ; $748F: $20 $30
@@ -7379,10 +7379,10 @@ jr_003_748B:
     jr   z, jr_003_74BF                           ; $749A: $28 $23
 
     cp   $01                                      ; $749C: $FE $01
-    jr   z, jr_003_74B5                           ; $749E: $28 $15
+    jr   z, .jr_74B5                              ; $749E: $28 $15
 
     cp   $04                                      ; $74A0: $FE $04
-    jr   z, jr_003_74B5                           ; $74A2: $28 $11
+    jr   z, .jr_74B5                              ; $74A2: $28 $11
 
     cp   $03                                      ; $74A4: $FE $03
     jp   z, jr_003_7571                           ; $74A6: $CA $71 $75
@@ -7395,7 +7395,7 @@ ENDC
     call func_003_7565                            ; $74B0: $CD $65 $75
     jr   jr_003_74DC                              ; $74B3: $18 $27
 
-jr_003_74B5:
+.jr_74B5
     ld   a, $10                                   ; $74B5: $3E $10
     ld   [wIgnoreLinkCollisionsCountdown], a      ; $74B7: $EA $3E $C1
     ld   a, $20                                   ; $74BA: $3E $20
@@ -7460,12 +7460,12 @@ label_003_74EC:
     ld   hl, hMultiPurpose0                       ; $7507: $21 $D7 $FF
     sub  [hl]                                     ; $750A: $96
     cp   $80                                      ; $750B: $FE $80
-    jr   c, jr_003_7511                           ; $750D: $38 $02
+    jr   c, .jr_7511                              ; $750D: $38 $02
 
     cpl                                           ; $750F: $2F
     inc  a                                        ; $7510: $3C
 
-jr_003_7511:
+.jr_7511
     pop  hl                                       ; $7511: $E1
     push af                                       ; $7512: $F5
     inc  hl                                       ; $7513: $23
@@ -7484,12 +7484,12 @@ jr_003_7511:
     ld   hl, hMultiPurpose2                       ; $7523: $21 $D9 $FF
     sub  [hl]                                     ; $7526: $96
     cp   $80                                      ; $7527: $FE $80
-    jr   c, jr_003_752D                           ; $7529: $38 $02
+    jr   c, .jr_752D                              ; $7529: $38 $02
 
     cpl                                           ; $752B: $2F
     inc  a                                        ; $752C: $3C
 
-jr_003_752D:
+.jr_752D
     pop  hl                                       ; $752D: $E1
     push af                                       ; $752E: $F5
     inc  hl                                       ; $752F: $23
@@ -7553,11 +7553,11 @@ jr_003_7571:
     ld   a, [hl]                                  ; $7583: $7E
     and  a                                        ; $7584: $A7
     ld   a, $30                                   ; $7585: $3E $30
-    jr   z, jr_003_758B                           ; $7587: $28 $02
+    jr   z, .jr_758B                              ; $7587: $28 $02
 
     ld   a, $D0                                   ; $7589: $3E $D0
 
-jr_003_758B:
+.jr_758B
     ldh  [hLinkSpeedX], a                         ; $758B: $E0 $9A
     xor  a                                        ; $758D: $AF
     ldh  [hLinkSpeedY], a                         ; $758E: $E0 $9B
@@ -7725,7 +7725,7 @@ forceCollisionEnd:
     add  hl, de                                   ; $7671: $19
     ld   a, [hl]                                  ; $7672: $7E
     cp   $CA                                      ; $7673: $FE $CA
-    jr   nz, jr_003_7680                          ; $7675: $20 $09
+    jr   nz, .jr_7680                             ; $7675: $20 $09
 
     ld   hl, wEntitiesStateTable                  ; $7677: $21 $90 $C2
     add  hl, de                                   ; $767A: $19
@@ -7735,7 +7735,7 @@ forceCollisionEnd:
 
     inc  [hl]                                     ; $767F: $34
 
-jr_003_7680:
+.jr_7680
     cp   $3F                                      ; $7680: $FE $3F
     jr   nz, jr_003_76AC                          ; $7682: $20 $28
 
@@ -7805,7 +7805,7 @@ jr_003_76AC:
 
     ld   a, ENTITY_IRON_MASKS_MASK                ; $76E8: $3E $32
     call SpawnNewEntity                           ; $76EA: $CD $CA $64
-    jr   c, jr_003_770D                           ; $76ED: $38 $1E
+    jr   c, .jr_770D                              ; $76ED: $38 $1E
 
     ldh  a, [hMultiPurpose0]                      ; $76EF: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $76F1: $21 $00 $C2
@@ -7826,7 +7826,7 @@ jr_003_76AC:
     add  hl, de                                   ; $770B: $19
     ld   [hl], a                                  ; $770C: $77
 
-jr_003_770D:
+.jr_770D
     pop  de                                       ; $770D: $D1
     jr   jr_003_7737                              ; $770E: $18 $27
 
@@ -7837,12 +7837,12 @@ jr_003_7710:
 label_003_7715:
     ldh  a, [hActiveEntityType]                   ; $7715: $F0 $EB
     cp   ENTITY_BOOMERANG                         ; $7717: $FE $01
-    jr   z, jr_003_771F                           ; $7719: $28 $04
+    jr   z, .jr_771F                              ; $7719: $28 $04
 
     cp   ENTITY_HOOKSHOT_CHAIN                    ; $771B: $FE $03
     jr   nz, jr_003_7734                          ; $771D: $20 $15
 
-jr_003_771F:
+.jr_771F
     call GetEntityTransitionCountdown             ; $771F: $CD $05 $0C
     xor  a                                        ; $7722: $AF
     ld   [hl], a                                  ; $7723: $77
@@ -7873,14 +7873,14 @@ jr_003_7737:
     jr   z, jr_003_779A                           ; $7743: $28 $55
 
     cp   ENTITY_ENTITY_LIFTABLE_ROCK              ; $7745: $FE $05
-    jr   nz, jr_003_7751                          ; $7747: $20 $08
+    jr   nz, .jr_7751                             ; $7747: $20 $08
 
     push de                                       ; $7749: $D5
     call func_003_53E4                            ; $774A: $CD $E4 $53
     pop  de                                       ; $774D: $D1
     jp   checkNextEntity                          ; $774E: $C3 $9F $77
 
-jr_003_7751:
+.jr_7751
     ld   hl, wEntitiesStatusTable                 ; $7751: $21 $80 $C2
     add  hl, bc                                   ; $7754: $09
     ld   a, [hl]                                  ; $7755: $7E
@@ -7923,13 +7923,13 @@ jr_003_7782:
 
     ldh  a, [hActiveEntityType]                   ; $778A: $F0 $EB
     cp   ENTITY_ARROW                             ; $778C: $FE $00
-    jr   nz, jr_003_7795                          ; $778E: $20 $05
+    jr   nz, .jr_7795                             ; $778E: $20 $05
 
     ldh  a, [hActiveEntityState]                  ; $7790: $F0 $F0
     and  a                                        ; $7792: $A7
     jr   nz, jr_003_7798                          ; $7793: $20 $03
 
-jr_003_7795:
+.jr_7795
     call UnloadEntity                             ; $7795: $CD $8D $3F
 
 jr_003_7798:
@@ -7951,17 +7951,17 @@ checkNextEntity:
 func_003_77A7::
     ldh  a, [hActiveEntityType]                   ; $77A7: $F0 $EB
     cp   ENTITY_ARROW                             ; $77A9: $FE $00
-    jr   nz, jr_003_77B8                          ; $77AB: $20 $0B
+    jr   nz, .jr_77B8                             ; $77AB: $20 $0B
 
     ldh  a, [hActiveEntityState]                  ; $77AD: $F0 $F0
     and  a                                        ; $77AF: $A7
-    jr   z, jr_003_77B8                           ; $77B0: $28 $06
+    jr   z, .jr_77B8                              ; $77B0: $28 $06
 
     call GetEntityTransitionCountdown             ; $77B2: $CD $05 $0C
     ld   [hl], $03                                ; $77B5: $36 $03
     ret                                           ; $77B7: $C9
 
-jr_003_77B8:
+.jr_77B8
     ld   hl, wEntitiesSpeedXTable                 ; $77B8: $21 $40 $C2
     add  hl, bc                                   ; $77BB: $09
     ld   a, [hl]                                  ; $77BC: $7E
@@ -7995,19 +7995,19 @@ jr_003_77DD:
     add  hl, de                                   ; $77E0: $19
     ld   a, [hl]                                  ; $77E1: $7E
     cp   $05                                      ; $77E2: $FE $05
-    jr   c, jr_003_7834                           ; $77E4: $38 $4E
+    jr   c, .jr_7834                              ; $77E4: $38 $4E
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $77E6: $21 $40 $C3
     add  hl, de                                   ; $77E9: $19
     ld   a, [hl]                                  ; $77EA: $7E
     and  $60                                      ; $77EB: $E6 $60
-    jr   nz, jr_003_7834                          ; $77ED: $20 $45
+    jr   nz, .jr_7834                             ; $77ED: $20 $45
 
     ld   hl, wEntitiesHitboxFlagsTable            ; $77EF: $21 $50 $C3
     add  hl, de                                   ; $77F2: $19
     ld   a, [hl]                                  ; $77F3: $7E
     and  $80                                      ; $77F4: $E6 $80
-    jr   nz, jr_003_7834                          ; $77F6: $20 $3C
+    jr   nz, .jr_7834                             ; $77F6: $20 $3C
 
     ld   hl, wEntitiesPosXTable                   ; $77F8: $21 $00 $C2
     add  hl, de                                   ; $77FB: $19
@@ -8015,7 +8015,7 @@ jr_003_77DD:
     sub  [hl]                                     ; $77FE: $96
     add  $18                                      ; $77FF: $C6 $18
     cp   $30                                      ; $7801: $FE $30
-    jr   nc, jr_003_7834                          ; $7803: $30 $2F
+    jr   nc, .jr_7834                             ; $7803: $30 $2F
 
     ld   hl, wEntitiesPosYTable                   ; $7805: $21 $10 $C2
     add  hl, de                                   ; $7808: $19
@@ -8027,7 +8027,7 @@ jr_003_77DD:
     sub  [hl]                                     ; $7812: $96
     add  $18                                      ; $7813: $C6 $18
     cp   $30                                      ; $7815: $FE $30
-    jr   nc, jr_003_7834                          ; $7817: $30 $1B
+    jr   nc, .jr_7834                             ; $7817: $30 $1B
 
     ld   a, $07                                   ; $7819: $3E $07
     ld   [wC19E], a                               ; $781B: $EA $9E $C1
@@ -8043,7 +8043,7 @@ jr_003_77DD:
     ldh  a, [hMultiPurpose1]                      ; $7831: $F0 $D8
     ld   [hl], a                                  ; $7833: $77
 
-jr_003_7834:
+.jr_7834
     dec  e                                        ; $7834: $1D
     ld   a, e                                     ; $7835: $7B
     cp   $FF                                      ; $7836: $FE $FF
@@ -8109,12 +8109,12 @@ func_003_7893::
     add  hl, bc                                   ; $78A7: $09
     ld   a, [hl]                                  ; $78A8: $7E
     bit  7, a                                     ; $78A9: $CB $7F
-    jr   nz, jr_003_78B1                          ; $78AB: $20 $04
+    jr   nz, .jr_78B1                             ; $78AB: $20 $04
     ; … but entity Z != 0…
     and  a                                        ; $78AD: $A7
     jp   nz, jr_003_7A18                          ; $78AE: $C2 $18 $7A
 
-jr_003_78B1:
+.jr_78B1
     ld   hl, wEntitiesUnknowTableJ                ; $78B1: $21 $F0 $C4
     add  hl, bc                                   ; $78B4: $09
     ld   [hl], b                                  ; $78B5: $70
@@ -8204,7 +8204,7 @@ jr_003_790C:
 
     ldh  a, [hIsSideScrolling]                    ; $7929: $F0 $F9
     and  a                                        ; $792B: $A7
-    jr   nz, jr_003_793D                          ; $792C: $20 $0F
+    jr   nz, .jr_793D                             ; $792C: $20 $0F
 
     ld   hl, wEntitiesSpeedZTable                 ; $792E: $21 $20 $C3
     add  hl, bc                                   ; $7931: $09
@@ -8217,7 +8217,7 @@ jr_003_790C:
 
     jr   jr_003_7954                              ; $793B: $18 $17
 
-jr_003_793D:
+.jr_793D
     ldh  a, [hActiveEntityType]                   ; $793D: $F0 $EB
     cp   ENTITY_CHEEP_CHEEP_JUMPING               ; $793F: $FE $AC
     jr   z, jr_003_7954                           ; $7941: $28 $11
@@ -8265,7 +8265,7 @@ jr_003_7973:
     ld   d, b                                     ; $797D: $50
     ldh  a, [hFrameCounter]                       ; $797E: $F0 $E7
     and  $03                                      ; $7980: $E6 $03
-    jr   nz, jr_003_799A                          ; $7982: $20 $16
+    jr   nz, .jr_799A                             ; $7982: $20 $16
 
     ld   hl, Data_003_7883                        ; $7984: $21 $83 $78
     add  hl, de                                   ; $7987: $19
@@ -8282,22 +8282,22 @@ jr_003_7973:
     add  [hl]                                     ; $7998: $86
     ld   [hl], a                                  ; $7999: $77
 
-jr_003_799A:
+.jr_799A
     jr   jr_003_7A18                              ; $799A: $18 $7C
 
 jr_003_799C:
     ldh  a, [hObjectUnderEntity]                  ; $799C: $F0 $AF
     cp   $61                                      ; $799E: $FE $61
-    jr   z, jr_003_79AC                           ; $79A0: $28 $0A
+    jr   z, .jr_79AC                              ; $79A0: $28 $0A
 
     ldh  a, [hMultiPurpose3]                      ; $79A2: $F0 $DA
     cp   $50                                      ; $79A4: $FE $50
-    jr   z, jr_003_79AC                           ; $79A6: $28 $04
+    jr   z, .jr_79AC                              ; $79A6: $28 $04
 
     cp   $51                                      ; $79A8: $FE $51
     jr   nz, jr_003_7A18                          ; $79AA: $20 $6C
 
-jr_003_79AC:
+.jr_79AC
     ldh  a, [hActiveEntityType]                   ; $79AC: $F0 $EB
     cp   ENTITY_BOW_WOW                           ; $79AE: $FE $6D
     jr   z, jr_003_7A18                           ; $79B0: $28 $66
@@ -8309,7 +8309,7 @@ jr_003_79AC:
     jr   z, jr_003_7A18                           ; $79B8: $28 $5E
 
     cp   ENTITY_MARIN_AT_THE_SHORE                ; $79BA: $FE $C1
-    jr   nz, jr_003_79CB                          ; $79BC: $20 $0D
+    jr   nz, .jr_79CB                             ; $79BC: $20 $0D
 
     ld   a, [wLinkMotionState]                    ; $79BE: $FA $1C $C1
     cp   LINK_MOTION_FALLING_DOWN                 ; $79C1: $FE $06
@@ -8319,7 +8319,7 @@ jr_003_79AC:
     cp   $61                                      ; $79C7: $FE $61
     jr   nz, jr_003_7A18                          ; $79C9: $20 $4D
 
-jr_003_79CB:
+.jr_79CB
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $79CB: $21 $10 $C4
     add  hl, bc                                   ; $79CE: $09
     ld   a, [hl]                                  ; $79CF: $7E
@@ -8394,11 +8394,11 @@ jr_003_7A18:
 
     ld   de, $00                                  ; $7A3F: $11 $00 $00
     and  $80                                      ; $7A42: $E6 $80
-    jr   z, jr_003_7A47                           ; $7A44: $28 $01
+    jr   z, .jr_7A47                              ; $7A44: $28 $01
 
     inc  e                                        ; $7A46: $1C
 
-jr_003_7A47:
+.jr_7A47
     call ApplyEntityPhysics                       ; $7A47: $CD $CD $7A
     jr   c, jr_003_7A5D                           ; $7A4A: $38 $11
 
@@ -8423,11 +8423,11 @@ jr_003_7A5D:
 
     ld   de, $02                                  ; $7A66: $11 $02 $00
     and  $80                                      ; $7A69: $E6 $80
-    jr   nz, jr_003_7A6E                          ; $7A6B: $20 $01
+    jr   nz, .jr_7A6E                             ; $7A6B: $20 $01
 
     inc  e                                        ; $7A6D: $1C
 
-jr_003_7A6E:
+.jr_7A6E
     call ApplyEntityPhysics                       ; $7A6E: $CD $CD $7A
     jr   c, ret_003_7A84                          ; $7A71: $38 $11
 
@@ -8494,12 +8494,12 @@ ApplyEntityPhysics::
 
     ldh  a, [hActiveEntityType]                   ; $7AEF: $F0 $EB
     cp   ENTITY_WRECKING_BALL                     ; $7AF1: $FE $A8
-    jr   z, jr_003_7AF9                           ; $7AF3: $28 $04
+    jr   z, .jr_7AF9                              ; $7AF3: $28 $04
 
     cp   ENTITY_ENTITY_LIFTABLE_ROCK              ; $7AF5: $FE $05
     jr   nz, jr_003_7B0E                          ; $7AF7: $20 $15
 
-jr_003_7AF9:
+.jr_7AF9
     ld   hl, wEntitiesPosYTable                   ; $7AF9: $21 $10 $C2
     add  hl, bc                                   ; $7AFC: $09
     ld   a, [hl]                                  ; $7AFD: $7E
@@ -8507,11 +8507,11 @@ jr_003_7AF9:
     add  hl, bc                                   ; $7B01: $09
     ld   c, [hl]                                  ; $7B02: $4E
     bit  7, c                                     ; $7B03: $CB $79
-    jr   z, jr_003_7B09                           ; $7B05: $28 $02
+    jr   z, .jr_7B09                              ; $7B05: $28 $02
 
     ld   c, $00                                   ; $7B07: $0E $00
 
-jr_003_7B09:
+.jr_7B09
     srl  c                                        ; $7B09: $CB $39
     sub  c                                        ; $7B0B: $91
     jr   jr_003_7B13                              ; $7B0C: $18 $05
@@ -8564,12 +8564,12 @@ jr_003_7B13:
 
     ldh  a, [hActiveEntityType]                   ; $7B44: $F0 $EB
     cp   ENTITY_FISH                              ; $7B46: $FE $CC
-    jr   z, jr_003_7B4E                           ; $7B48: $28 $04
+    jr   z, .jr_7B4E                              ; $7B48: $28 $04
 
     cp   ENTITY_WATER_TEKTITE                     ; $7B4A: $FE $99
     jr   nz, jr_003_7B5D                          ; $7B4C: $20 $0F
 
-jr_003_7B4E:
+.jr_7B4E
     ldh  a, [hMultiPurpose3]                      ; $7B4E: $F0 $DA
     cp   $05                                      ; $7B50: $FE $05
     jp   z, setCarryFlagAndReturn                 ; $7B52: $CA $A7 $7C
@@ -8585,15 +8585,15 @@ jr_003_7B5D:
     jp   z, setCarryFlagAndReturn                 ; $7B60: $CA $A7 $7C
 
     cp   $0B                                      ; $7B63: $FE $0B
-    jr   z, jr_003_7B6F                           ; $7B65: $28 $08
+    jr   z, .jr_7B6F                              ; $7B65: $28 $08
 
     cp   $50                                      ; $7B67: $FE $50
-    jr   z, jr_003_7B6F                           ; $7B69: $28 $04
+    jr   z, .jr_7B6F                              ; $7B69: $28 $04
 
     cp   $51                                      ; $7B6B: $FE $51
     jr   nz, jr_003_7B8B                          ; $7B6D: $20 $1C
 
-jr_003_7B6F:
+.jr_7B6F
     ld   hl, wEntitiesPosZTable                   ; $7B6F: $21 $10 $C3
     add  hl, bc                                   ; $7B72: $09
     ld   a, [hl]                                  ; $7B73: $7E
@@ -8621,7 +8621,7 @@ jr_003_7B8B:
 
     cp   $80                                      ; $7B95: $FE $80
     ldh  a, [hActiveEntityType]                   ; $7B97: $F0 $EB
-    jr   c, jr_003_7BA7                           ; $7B99: $38 $0C
+    jr   c, .jr_7BA7                              ; $7B99: $38 $0C
 
     cp   ENTITY_WRECKING_BALL                     ; $7B9B: $FE $A8
     jp   z, setCarryFlagAndReturn                 ; $7B9D: $CA $A7 $7C
@@ -8631,7 +8631,7 @@ jr_003_7B8B:
 
     jr   jr_003_7BBB                              ; $7BA5: $18 $14
 
-jr_003_7BA7:
+.jr_7BA7
     cp   ENTITY_SPARK_COUNTER_CLOCKWISE           ; $7BA7: $FE $16
     jp   z, jr_003_7C9A                           ; $7BA9: $CA $9A $7C
 
@@ -8703,13 +8703,13 @@ label_003_7BE4:
 
     ld   a, [wIsIndoor]                           ; $7C0B: $FA $A5 $DB
     and  a                                        ; $7C0E: $A7
-    jr   nz, jr_003_7C17                          ; $7C0F: $20 $06
+    jr   nz, .jr_7C17                             ; $7C0F: $20 $06
 
     ldh  a, [hFrameCounter]                       ; $7C11: $F0 $E7
     and  $01                                      ; $7C13: $E6 $01
     jr   z, jr_003_7C28                           ; $7C15: $28 $11
 
-jr_003_7C17:
+.jr_7C17
     dec  [hl]                                     ; $7C17: $35
     jr   jr_003_7C28                              ; $7C18: $18 $0E
 
@@ -8754,13 +8754,13 @@ jr_003_7C2B:
     jp   z, setCarryFlagAndReturn                 ; $7C4C: $CA $A7 $7C
 
     cp   ENTITY_HOOKSHOT_CHAIN                    ; $7C4F: $FE $03
-    jr   nz, jr_003_7C5A                          ; $7C51: $20 $07
+    jr   nz, .jr_7C5A                             ; $7C51: $20 $07
 
     ld   a, [wD6F9]                               ; $7C53: $FA $F9 $D6
     and  a                                        ; $7C56: $A7
     jp   nz, setCarryFlagAndReturn                ; $7C57: $C2 $A7 $7C
 
-jr_003_7C5A:
+.jr_7C5A
     ldh  a, [hObjectUnderEntity]                  ; $7C5A: $F0 $AF
     cp   $DB                                      ; $7C5C: $FE $DB
     jr   c, jr_003_7C9A                           ; $7C5E: $38 $3A
@@ -8869,7 +8869,7 @@ ApplySwordIntersectionWithObjects::
 
     ldh  a, [hIsGBC]                              ; $7CE4: $F0 $FE
     and  a                                        ; $7CE6: $A7
-    jr   z, jr_003_7CFD                           ; $7CE7: $28 $14
+    jr   z, .jr_7CFD                              ; $7CE7: $28 $14
 
     ld   a, [wLinkMotionState]                    ; $7CE9: $FA $1C $C1
     cp   LINK_MOTION_REVOLVING_DOOR               ; $7CEC: $FE $05
@@ -8883,7 +8883,7 @@ ApplySwordIntersectionWithObjects::
     and  a                                        ; $7CF9: $A7
     jp   nz, jr_003_7E03                          ; $7CFA: $C2 $03 $7E
 
-jr_003_7CFD:
+.jr_7CFD
     ldh  a, [hActiveEntityType]                   ; $7CFD: $F0 $EB
     cp   ENTITY_MAGIC_ROD_FIREBALL                ; $7CFF: $FE $04
     jr   nz, jr_003_7D6B                          ; $7D01: $20 $68
@@ -8933,20 +8933,20 @@ jr_003_7CFD:
     inc  [hl]                                     ; $7D48: $34
     ld   a, [wC3CD]                               ; $7D49: $FA $CD $C3
     and  a                                        ; $7D4C: $A7
-    jr   z, jr_003_7D63                           ; $7D4D: $28 $14
+    jr   z, .jr_7D63                              ; $7D4D: $28 $14
 
     sub  $04                                      ; $7D4F: $D6 $04
     ld   [wC3CD], a                               ; $7D51: $EA $CD $C3
     ldh  a, [hIsGBC]                              ; $7D54: $F0 $FE
     and  a                                        ; $7D56: $A7
-    jr   z, jr_003_7D63                           ; $7D57: $28 $0A
+    jr   z, .jr_7D63                              ; $7D57: $28 $0A
 
     ld   a, $40                                   ; $7D59: $3E $40
     ld   [wDDD6], a                               ; $7D5B: $EA $D6 $DD
     ld   a, $0B                                   ; $7D5E: $3E $0B
     ld   [wDDD7], a                               ; $7D60: $EA $D7 $DD
 
-jr_003_7D63:
+.jr_7D63
     ld   de, Data_003_69A2                        ; $7D63: $11 $A2 $69
     push de                                       ; $7D66: $D5
     jp   label_003_51F5                           ; $7D67: $C3 $F5 $51
@@ -8992,13 +8992,13 @@ jr_003_7D6B:
 
     ld   a, [wIsIndoor]                           ; $7DA0: $FA $A5 $DB
     and  a                                        ; $7DA3: $A7
-    jr   nz, jr_003_7DAC                          ; $7DA4: $20 $06
+    jr   nz, .jr_7DAC                             ; $7DA4: $20 $06
 
     ldh  a, [hFrameCounter]                       ; $7DA6: $F0 $E7
     and  $01                                      ; $7DA8: $E6 $01
     jr   z, jr_003_7E03                           ; $7DAA: $28 $57
 
-jr_003_7DAC:
+.jr_7DAC
     dec  [hl]                                     ; $7DAC: $35
     jp   jr_003_7E03                              ; $7DAD: $C3 $03 $7E
 
@@ -9050,12 +9050,12 @@ jr_003_7DE3:
     ld   [hl], $01                                ; $7DE7: $36 $01
     ldh  a, [hActiveEntityType]                   ; $7DE9: $F0 $EB
     cp   ENTITY_BOOMERANG                         ; $7DEB: $FE $01
-    jr   nz, jr_003_7DF3                          ; $7DED: $20 $04
+    jr   nz, .jr_7DF3                             ; $7DED: $20 $04
 
     call GetEntityTransitionCountdown             ; $7DEF: $CD $05 $0C
     ret  z                                        ; $7DF2: $C8
 
-jr_003_7DF3:
+.jr_7DF3
     ld   hl, wEntitiesPosXTable                   ; $7DF3: $21 $00 $C2
     add  hl, bc                                   ; $7DF6: $09
     ldh  a, [hActiveEntityPosX]                   ; $7DF7: $F0 $EE
@@ -9306,32 +9306,32 @@ func_003_7EFE::
     ldh  [hMultiPurpose0], a                      ; $7F02: $E0 $D7
     ld   a, d                                     ; $7F04: $7A
     bit  7, a                                     ; $7F05: $CB $7F
-    jr   z, jr_003_7F0B                           ; $7F07: $28 $02
+    jr   z, .jr_7F0B                              ; $7F07: $28 $02
 
     cpl                                           ; $7F09: $2F
     inc  a                                        ; $7F0A: $3C
 
-jr_003_7F0B:
+.jr_7F0B
     push af                                       ; $7F0B: $F5
     call GetEntityYDistanceAwayFromLink           ; $7F0C: $CD $E9 $7E
     ld   a, e                                     ; $7F0F: $7B
     ldh  [hMultiPurpose1], a                      ; $7F10: $E0 $D8
     ld   a, d                                     ; $7F12: $7A
     bit  7, a                                     ; $7F13: $CB $7F
-    jr   z, jr_003_7F19                           ; $7F15: $28 $02
+    jr   z, .jr_7F19                              ; $7F15: $28 $02
 
     cpl                                           ; $7F17: $2F
     inc  a                                        ; $7F18: $3C
 
-jr_003_7F19:
+.jr_7F19
     pop  de                                       ; $7F19: $D1
     cp   d                                        ; $7F1A: $BA
-    jr   nc, jr_003_7F21                          ; $7F1B: $30 $04
+    jr   nc, .jr_7F21                             ; $7F1B: $30 $04
 
     ldh  a, [hMultiPurpose0]                      ; $7F1D: $F0 $D7
     jr   jr_003_7F23                              ; $7F1F: $18 $02
 
-jr_003_7F21:
+.jr_7F21
     ldh  a, [hMultiPurpose1]                      ; $7F21: $F0 $D8
 
 jr_003_7F23:

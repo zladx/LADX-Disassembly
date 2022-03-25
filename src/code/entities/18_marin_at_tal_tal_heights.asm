@@ -59,12 +59,12 @@ MarinAtTalTalHeightsEntityHandler::
     ld   a, [hl]                                  ; $5F10: $7E
     and  a                                        ; $5F11: $A7
     ldh  [hMultiPurposeG], a                      ; $5F12: $E0 $E8
-    jr   z, jr_018_5F1A                           ; $5F14: $28 $04
+    jr   z, .jr_5F1A                              ; $5F14: $28 $04
 
     and  $80                                      ; $5F16: $E6 $80
     jr   z, jr_018_5F20                           ; $5F18: $28 $06
 
-jr_018_5F1A:
+.jr_5F1A
     ld   [hl], b                                  ; $5F1A: $70
     ld   hl, wEntitiesSpeedZTable                 ; $5F1B: $21 $20 $C3
     add  hl, bc                                   ; $5F1E: $09
@@ -110,12 +110,12 @@ MarinAtTalTalHeightsState0Handler::
 func_018_5F5E::
     ldh  a, [hMultiPurposeG]                      ; $5F5E: $F0 $E8
     and  a                                        ; $5F60: $A7
-    jr   z, jr_018_5F66                           ; $5F61: $28 $03
+    jr   z, .jr_5F66                              ; $5F61: $28 $03
 
     and  $80                                      ; $5F63: $E6 $80
     ret  z                                        ; $5F65: $C8
 
-jr_018_5F66:
+.jr_5F66
     ldh  a, [hFrameCounter]                       ; $5F66: $F0 $E7
     and  $3F                                      ; $5F68: $E6 $3F
     jr   nz, ret_018_5F72                         ; $5F6A: $20 $06
@@ -157,7 +157,7 @@ MarinAtTalTalHeightsState3Handler::
     ld   [hl], e                                  ; $5FA7: $73
     ld   a, [wC1A4]                               ; $5FA8: $FA $A4 $C1
     and  a                                        ; $5FAB: $A7
-    jr   z, jr_018_5FBF                           ; $5FAC: $28 $11
+    jr   z, .jr_5FBF                              ; $5FAC: $28 $11
 
     ldh  a, [hLinkPositionX]                      ; $5FAE: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $5FB0: $21 $00 $C2
@@ -170,7 +170,7 @@ MarinAtTalTalHeightsState3Handler::
     ld   [hl], a                                  ; $5FBD: $77
     ret                                           ; $5FBE: $C9
 
-jr_018_5FBF:
+.jr_5FBF
     xor  a                                        ; $5FBF: $AF
     ld   [wLinkAttackStepAnimationCountdown], a   ; $5FC0: $EA $9B $C1
 
@@ -257,11 +257,11 @@ MarinAtTalTalHeightsStateAHandler::
     ldh  [hLinkInteractiveMotionBlocked], a       ; $6059: $E0 $A1
     ldh  a, [hActiveEntityVisualPosY]             ; $605B: $F0 $EC
     cp   $3E                                      ; $605D: $FE $3E
-    jr   c, jr_018_6064                           ; $605F: $38 $03
+    jr   c, .jr_6064                              ; $605F: $38 $03
 
     jp   IncrementEntityState                     ; $6061: $C3 $12 $3B
 
-jr_018_6064:
+.jr_6064
     ld   hl, wEntitiesSpeedYTable                 ; $6064: $21 $50 $C2
     add  hl, bc                                   ; $6067: $09
     ld   [hl], $06                                ; $6068: $36 $06
@@ -292,14 +292,14 @@ MarinAtTalTalHeightsStateCHandler::
     ld   a, $02                                   ; $6093: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $6095: $E0 $A1
     call GetEntityTransitionCountdown             ; $6097: $CD $05 $0C
-    jr   z, jr_018_60A3                           ; $609A: $28 $07
+    jr   z, .jr_60A3                              ; $609A: $28 $07
 
     ld   hl, wEntitiesDirectionTable              ; $609C: $21 $80 $C3
     add  hl, bc                                   ; $609F: $09
     ld   [hl], $02                                ; $60A0: $36 $02
     ret                                           ; $60A2: $C9
 
-jr_018_60A3:
+.jr_60A3
     ld   hl, wEntitiesSpeedXTable                 ; $60A3: $21 $40 $C2
     add  hl, bc                                   ; $60A6: $09
     ld   [hl], $F4                                ; $60A7: $36 $F4
@@ -309,7 +309,7 @@ jr_018_60A3:
     call AddEntitySpeedToPos_18                   ; $60AF: $CD $6C $7E
     ldh  a, [hActiveEntityPosX]                   ; $60B2: $F0 $EE
     cp   $F0                                      ; $60B4: $FE $F0
-    jr   nz, jr_018_60C7                          ; $60B6: $20 $0F
+    jr   nz, .jr_60C7                             ; $60B6: $20 $0F
 
     xor  a                                        ; $60B8: $AF
     ld   [wC167], a                               ; $60B9: $EA $67 $C1
@@ -322,7 +322,7 @@ ENDC
     ldh  [hRoomStatus], a                         ; $60C2: $E0 $F8
     jp   ClearEntityStatusBank18                  ; $60C4: $C3 $08 $7F
 
-jr_018_60C7:
+.jr_60C7
     call func_018_7EB2                            ; $60C7: $CD $B2 $7E
     ld   a, e                                     ; $60CA: $7B
     xor  $01                                      ; $60CB: $EE $01
@@ -416,11 +416,11 @@ TarinAtTalTalHeightsState2Handler::
     ld   [hl], $03                                ; $6158: $36 $03
     ld   a, [wDialogCharacterIndex]               ; $615A: $FA $70 $C1
     cp   $22                                      ; $615D: $FE $22
-    jr   c, jr_018_6163                           ; $615F: $38 $02
+    jr   c, .jr_6163                              ; $615F: $38 $02
 
     ld   [hl], $01                                ; $6161: $36 $01
 
-jr_018_6163:
+.jr_6163
     call ReturnIfNonInteractive_18                ; $6163: $CD $E8 $7D
     ld   a, [wMarinEntityIndex]                   ; $6166: $FA $0F $C5
     ld   e, a                                     ; $6169: $5F

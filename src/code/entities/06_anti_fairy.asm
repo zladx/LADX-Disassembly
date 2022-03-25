@@ -12,7 +12,7 @@ AntiFairyEntityHandler::
     call RenderActiveEntitySpritesPair            ; $7879: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $787C: $CD $C6 $64
 
-jr_006_787F:
+.jr_787F
     call ApplyRecoilIfNeeded_06                   ; $787F: $CD $F7 $64
     call label_3B39                               ; $7882: $CD $39 $3B
     call UpdateEntityPosWithSpeed_06              ; $7885: $CD $41 $65
@@ -21,7 +21,7 @@ jr_006_787F:
     add  hl, bc                                   ; $788E: $09
     ld   a, [hl]                                  ; $788F: $7E
     and  $03                                      ; $7890: $E6 $03
-    jr   nz, jr_006_789B                          ; $7892: $20 $07
+    jr   nz, .jr_789B                             ; $7892: $20 $07
 
     ld   a, [hl]                                  ; $7894: $7E
     and  $0C                                      ; $7895: $E6 $0C
@@ -29,7 +29,7 @@ jr_006_787F:
 
     jr   jr_006_78AD                              ; $7899: $18 $12
 
-jr_006_789B:
+.jr_789B
     ld   hl, wEntitiesSpeedXTable                 ; $789B: $21 $40 $C2
     add  hl, bc                                   ; $789E: $09
     ld   a, [hl]                                  ; $789F: $7E

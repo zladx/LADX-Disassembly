@@ -27,12 +27,12 @@ ENDC
 
     ld   a, [wLinkMotionState]                    ; $600D: $FA $1C $C1
     cp   LINK_MOTION_REVOLVING_DOOR               ; $6010: $FE $05
-    jr   nz, jr_007_6019                          ; $6012: $20 $05
+    jr   nz, .jr_6019                             ; $6012: $20 $05
 
     ld   a, $10                                   ; $6014: $3E $10
     ld   [wC5AE], a                               ; $6016: $EA $AE $C5
 
-jr_007_6019:
+.jr_6019
     ldh  a, [hMapRoom]                            ; $6019: $F0 $F6
     ld   hl, wEntitiesRoomTable                   ; $601B: $21 $E0 $C3
     add  hl, bc                                   ; $601E: $09
@@ -88,7 +88,7 @@ jr_007_602A:
     sra  a                                        ; $6073: $CB $2F
     cpl                                           ; $6075: $2F
     cp   $07                                      ; $6076: $FE $07
-    jr   c, jr_007_6082                           ; $6078: $38 $08
+    jr   c, .jr_6082                              ; $6078: $38 $08
 
     push af                                       ; $607A: $F5
     ld   a, $17                                   ; $607B: $3E $17
@@ -96,7 +96,7 @@ jr_007_602A:
     pop  af                                       ; $607F: $F1
     jr   jr_007_6083                              ; $6080: $18 $01
 
-jr_007_6082:
+.jr_6082
     xor  a                                        ; $6082: $AF
 
 jr_007_6083:
@@ -156,12 +156,12 @@ func_007_60D1::
     jr   z, jr_007_60DD                           ; $60D4: $28 $07
 
     and  $80                                      ; $60D6: $E6 $80
-    jr   z, jr_007_60DC                           ; $60D8: $28 $02
+    jr   z, .jr_60DC                              ; $60D8: $28 $02
 
     inc  [hl]                                     ; $60DA: $34
     inc  [hl]                                     ; $60DB: $34
 
-jr_007_60DC:
+.jr_60DC
     dec  [hl]                                     ; $60DC: $35
 
 jr_007_60DD:
@@ -174,7 +174,7 @@ jr_007_60DD:
 
     ld   a, [wBButtonSlot]                        ; $60E8: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $60EB: $FE $03
-    jr   nz, jr_007_60F7                          ; $60ED: $20 $08
+    jr   nz, .jr_60F7                             ; $60ED: $20 $08
 
     ldh  a, [hJoypadState]                        ; $60EF: $F0 $CC
     and  J_B                                      ; $60F1: $E6 $20
@@ -182,7 +182,7 @@ jr_007_60DD:
 
     jr   ret_007_6133                             ; $60F5: $18 $3C
 
-jr_007_60F7:
+.jr_60F7
     ld   a, [wAButtonSlot]                        ; $60F7: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $60FA: $FE $03
     jr   nz, ret_007_6133                         ; $60FC: $20 $35
@@ -278,19 +278,19 @@ jr_007_6172:
     add  hl, de                                   ; $6175: $19
     ld   a, [hl]                                  ; $6176: $7E
     and  a                                        ; $6177: $A7
-    jr   z, jr_007_6188                           ; $6178: $28 $0E
+    jr   z, .jr_6188                              ; $6178: $28 $0E
 
     ld   hl, wEntitiesTypeTable                   ; $617A: $21 $A0 $C3
     add  hl, de                                   ; $617D: $19
     ld   a, [hl]                                  ; $617E: $7E
     cp   $A7                                      ; $617F: $FE $A7
-    jr   nz, jr_007_6188                          ; $6181: $20 $05
+    jr   nz, .jr_6188                             ; $6181: $20 $05
 
     push de                                       ; $6183: $D5
     call func_007_618F                            ; $6184: $CD $8F $61
     pop  de                                       ; $6187: $D1
 
-jr_007_6188:
+.jr_6188
     dec  e                                        ; $6188: $1D
     ld   a, e                                     ; $6189: $7B
     cp   $FF                                      ; $618A: $FE $FF

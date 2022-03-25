@@ -34,14 +34,14 @@ BunnyD3EntityHandler::
     call RenderActiveEntitySpritesPair            ; $51E2: $CD $C0 $3B
     ldh  a, [hFrameCounter]                       ; $51E5: $F0 $E7
     and  $3F                                      ; $51E7: $E6 $3F
-    jr   nz, jr_018_51F3                          ; $51E9: $20 $08
+    jr   nz, .jr_51F3                             ; $51E9: $20 $08
 
     call func_018_7EE1                            ; $51EB: $CD $E1 $7E
     ld   hl, wEntitiesDirectionTable              ; $51EE: $21 $80 $C3
     add  hl, bc                                   ; $51F1: $09
     ld   [hl], e                                  ; $51F2: $73
 
-jr_018_51F3:
+.jr_51F3
     call func_018_7D60                            ; $51F3: $CD $60 $7D
     call ReturnIfNonInteractive_18                ; $51F6: $CD $E8 $7D
     call AddEntityZSpeedToPos_18                  ; $51F9: $CD $98 $7E
@@ -53,12 +53,12 @@ jr_018_51F3:
     add  hl, bc                                   ; $5205: $09
     ld   a, [hl]                                  ; $5206: $7E
     and  a                                        ; $5207: $A7
-    jr   z, jr_018_520E                           ; $5208: $28 $04
+    jr   z, .jr_520E                              ; $5208: $28 $04
 
     and  $80                                      ; $520A: $E6 $80
     jr   z, jr_018_521C                           ; $520C: $28 $0E
 
-jr_018_520E:
+.jr_520E
     ld   [hl], b                                  ; $520E: $70
     ld   hl, wEntitiesSpeedZTable                 ; $520F: $21 $20 $C3
     add  hl, bc                                   ; $5212: $09
@@ -80,34 +80,34 @@ jr_018_521C:
     ld   e, $00                                   ; $522A: $1E $00
     ld   a, [wIsIndoor]                           ; $522C: $FA $A5 $DB
     and  a                                        ; $522F: $A7
-    jr   nz, jr_018_523F                          ; $5230: $20 $0D
+    jr   nz, .jr_523F                             ; $5230: $20 $0D
 
     inc  e                                        ; $5232: $1C
     ldh  a, [hMapRoom]                            ; $5233: $F0 $F6
     cp   UNKNOWN_ROOM_CC                          ; $5235: $FE $CC
-    jr   z, jr_018_523F                           ; $5237: $28 $06
+    jr   z, .jr_523F                              ; $5237: $28 $06
     inc  e                                        ; $5239: $1C
     cp   UNKNOWN_ROOM_CD                          ; $523A: $FE $CD
-    jr   z, jr_018_523F                           ; $523C: $28 $01
+    jr   z, .jr_523F                              ; $523C: $28 $01
     inc  e                                        ; $523E: $1C
 
-jr_018_523F:
+.jr_523F
     ld   a, [wHasInstrument6]                     ; $523F: $FA $6A $DB
     and  $02                                      ; $5242: $E6 $02
-    jr   z, jr_018_524A                           ; $5244: $28 $04
+    jr   z, .jr_524A                              ; $5244: $28 $04
 
     ld   a, e                                     ; $5246: $7B
     add  $04                                      ; $5247: $C6 $04
     ld   e, a                                     ; $5249: $5F
 
-jr_018_524A:
+.jr_524A
     ld   a, [wIsMarinFollowingLink]               ; $524A: $FA $73 $DB
     and  a                                        ; $524D: $A7
-    jr   z, jr_018_5255                           ; $524E: $28 $05
+    jr   z, .jr_5255                              ; $524E: $28 $05
 
     jp_open_dialog $252                           ; $5250
 
-jr_018_5255:
+.jr_5255
     ld   a, e                                     ; $5255: $7B
     add  $4A                                      ; $5256: $C6 $4A
     jp   OpenDialogInTable2                       ; $5258: $C3 $7C $23

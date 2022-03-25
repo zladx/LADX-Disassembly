@@ -51,7 +51,7 @@ SpikeTrapState1Handler::
     call func_006_65A4                            ; $7547: $CD $A4 $65
     add  $12                                      ; $754A: $C6 $12
     cp   $24                                      ; $754C: $FE $24
-    jr   nc, jr_006_7567                          ; $754E: $30 $17
+    jr   nc, .jr_7567                             ; $754E: $30 $17
 
     call func_006_6594                            ; $7550: $CD $94 $65
     ld   d, b                                     ; $7553: $50
@@ -67,7 +67,7 @@ SpikeTrapState1Handler::
     ld   e, $18                                   ; $7563: $1E $18
     jr   jr_006_7585                              ; $7565: $18 $1E
 
-jr_006_7567:
+.jr_7567
     call func_006_6594                            ; $7567: $CD $94 $65
     add  $12                                      ; $756A: $C6 $12
     cp   $24                                      ; $756C: $FE $24

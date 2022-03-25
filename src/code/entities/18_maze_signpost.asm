@@ -98,7 +98,7 @@ RevealMamuCave::
     call label_2887                               ; $6319: $CD $87 $28
     ldh  a, [hIsGBC]                              ; $631C: $F0 $FE
     and  a                                        ; $631E: $A7
-    jr   z, jr_018_632D                           ; $631F: $28 $0C
+    jr   z, .jr_632D                              ; $631F: $28 $0C
 
     push bc                                       ; $6321: $C5
     ld   a, $C6                                   ; $6322: $3E $C6
@@ -107,7 +107,7 @@ RevealMamuCave::
     call func_91D                                 ; $6329: $CD $1D $09
     pop  bc                                       ; $632C: $C1
 
-jr_018_632D:
+.jr_632D
     ld   hl, wDrawCommand                         ; $632D: $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ; $6330: $FA $00 $D6
     ld   e, a                                     ; $6333: $5F

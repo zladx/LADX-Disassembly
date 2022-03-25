@@ -54,13 +54,13 @@ HardHatBeetleEntityHandler::
     add  hl, bc                                   ; $4F81: $09
     ld   a, [hl]                                  ; $4F82: $7E
     and  $0C                                      ; $4F83: $E6 $0C
-    jr   z, jr_006_4F8C                           ; $4F85: $28 $05
+    jr   z, .jr_4F8C                              ; $4F85: $28 $05
 
     ld   hl, wEntitiesSpeedYTable                 ; $4F87: $21 $50 $C2
     add  hl, bc                                   ; $4F8A: $09
     ld   [hl], b                                  ; $4F8B: $70
 
-jr_006_4F8C:
+.jr_4F8C
     ldh  a, [hMultiPurpose1]                      ; $4F8C: $F0 $D8
     ld   hl, wEntitiesSpeedXTable                 ; $4F8E: $21 $40 $C2
     call func_006_4FA3                            ; $4F91: $CD $A3 $4F
@@ -83,12 +83,12 @@ func_006_4FA3::
     jr   z, ret_006_4FAF                          ; $4FA5: $28 $08
 
     bit  7, a                                     ; $4FA7: $CB $7F
-    jr   z, jr_006_4FAE                           ; $4FA9: $28 $03
+    jr   z, .jr_4FAE                              ; $4FA9: $28 $03
 
     dec  [hl]                                     ; $4FAB: $35
     jr   ret_006_4FAF                             ; $4FAC: $18 $01
 
-jr_006_4FAE:
+.jr_4FAE
     inc  [hl]                                     ; $4FAE: $34
 
 ret_006_4FAF:

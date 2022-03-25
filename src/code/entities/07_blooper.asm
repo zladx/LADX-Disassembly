@@ -15,13 +15,13 @@ BlooperEntityHandler::
     call label_3B39                               ; $5C05: $CD $39 $3B
     call UpdateEntityPosWithSpeed_07              ; $5C08: $CD $0A $7E
 
-jr_007_5C0B:
+.jr_5C0B
     call label_3B23                               ; $5C0B: $CD $23 $3B
     ld   hl, wEntitiesGroundStatusTable           ; $5C0E: $21 $70 $C4
     add  hl, bc                                   ; $5C11: $09
     ld   a, [hl]                                  ; $5C12: $7E
     and  a                                        ; $5C13: $A7
-    jr   nz, jr_007_5C2A                          ; $5C14: $20 $14
+    jr   nz, .jr_5C2A                             ; $5C14: $20 $14
 
     ld   hl, wEntitiesPrivateCountdown3Table      ; $5C16: $21 $80 $C4
     add  hl, bc                                   ; $5C19: $09
@@ -35,7 +35,7 @@ jr_007_5C0B:
     add  hl, bc                                   ; $5C28: $09
     ld   [hl], a                                  ; $5C29: $77
 
-jr_007_5C2A:
+.jr_5C2A
     xor  a                                        ; $5C2A: $AF
     call SetEntitySpriteVariant                   ; $5C2B: $CD $0C $3B
     ldh  a, [hActiveEntityState]                  ; $5C2E: $F0 $F0
@@ -45,12 +45,12 @@ jr_007_5C2A:
 
 func_007_5C35::
     call GetEntityTransitionCountdown             ; $5C35: $CD $05 $0C
-    jr   nz, jr_007_5C58                          ; $5C38: $20 $1E
+    jr   nz, .jr_5C58                             ; $5C38: $20 $1E
 
     call func_007_7E6D                            ; $5C3A: $CD $6D $7E
     ld   a, e                                     ; $5C3D: $7B
     cp   $03                                      ; $5C3E: $FE $03
-    jr   z, jr_007_5C58                           ; $5C40: $28 $16
+    jr   z, .jr_5C58                              ; $5C40: $28 $16
 
     call ClearEntitySpeed                         ; $5C42: $CD $7F $3D
     call GetEntityTransitionCountdown             ; $5C45: $CD $05 $0C
@@ -63,21 +63,21 @@ func_007_5C35::
     ld   [hl], $01                                ; $5C55: $36 $01
     ret                                           ; $5C57: $C9
 
-jr_007_5C58:
+.jr_5C58
     call GetEntitySpeedYAddress                   ; $5C58: $CD $05 $40
     ld   a, [hl]                                  ; $5C5B: $7E
     sub  $04                                      ; $5C5C: $D6 $04
 
-jr_007_5C5E:
+.jr_5C5E
     jr   z, jr_007_5C67                           ; $5C5E: $28 $07
 
     and  $80                                      ; $5C60: $E6 $80
-    jr   z, jr_007_5C66                           ; $5C62: $28 $02
+    jr   z, .jr_5C66                              ; $5C62: $28 $02
 
     inc  [hl]                                     ; $5C64: $34
     inc  [hl]                                     ; $5C65: $34
 
-jr_007_5C66:
+.jr_5C66
     dec  [hl]                                     ; $5C66: $35
 
 jr_007_5C67:
@@ -88,12 +88,12 @@ jr_007_5C67:
     jr   z, ret_007_5C76                          ; $5C6D: $28 $07
 
     and  $80                                      ; $5C6F: $E6 $80
-    jr   z, jr_007_5C75                           ; $5C71: $28 $02
+    jr   z, .jr_5C75                              ; $5C71: $28 $02
 
     inc  [hl]                                     ; $5C73: $34
     inc  [hl]                                     ; $5C74: $34
 
-jr_007_5C75:
+.jr_5C75
     dec  [hl]                                     ; $5C75: $35
 
 ret_007_5C76:
@@ -104,17 +104,17 @@ Data_007_5C77::
 
 func_007_5C79::
     call GetEntityTransitionCountdown             ; $5C79: $CD $05 $0C
-    jr   nz, jr_007_5C85                          ; $5C7C: $20 $07
+    jr   nz, .jr_5C85                             ; $5C7C: $20 $07
 
     ld   [hl], $40                                ; $5C7E: $36 $40
     call IncrementEntityState                     ; $5C80: $CD $12 $3B
     ld   [hl], b                                  ; $5C83: $70
     ret                                           ; $5C84: $C9
 
-jr_007_5C85:
+.jr_5C85
     ldh  a, [hFrameCounter]                       ; $5C85: $F0 $E7
     and  $01                                      ; $5C87: $E6 $01
-    jr   nz, jr_007_5CA0                          ; $5C89: $20 $15
+    jr   nz, .jr_5CA0                             ; $5C89: $20 $15
 
     call GetEntitySpeedYAddress                   ; $5C8B: $CD $05 $40
     dec  [hl]                                     ; $5C8E: $35
@@ -130,7 +130,7 @@ jr_007_5C85:
     add  [hl]                                     ; $5C9E: $86
     ld   [hl], a                                  ; $5C9F: $77
 
-jr_007_5CA0:
+.jr_5CA0
     ld   a, $01                                   ; $5CA0: $3E $01
     jp   SetEntitySpriteVariant                   ; $5CA2: $C3 $0C $3B
 
@@ -153,11 +153,11 @@ jr_007_5CB8:
     ldh  a, [hActiveEntityVisualPosY]             ; $5CB8: $F0 $EC
     add  [hl]                                     ; $5CBA: $86
     cp   $7E                                      ; $5CBB: $FE $7E
-    jr   c, jr_007_5CC0                           ; $5CBD: $38 $01
+    jr   c, .jr_5CC0                              ; $5CBD: $38 $01
 
     xor  a                                        ; $5CBF: $AF
 
-jr_007_5CC0:
+.jr_5CC0
     ld   [de], a                                  ; $5CC0: $12
     inc  hl                                       ; $5CC1: $23
     inc  de                                       ; $5CC2: $13
@@ -178,14 +178,14 @@ jr_007_5CC0:
     ld   [de], a                                  ; $5CD5: $12
     pop  af                                       ; $5CD6: $F1
     cp   $FF                                      ; $5CD7: $FE $FF
-    jr   nz, jr_007_5CDF                          ; $5CD9: $20 $04
+    jr   nz, .jr_5CDF                             ; $5CD9: $20 $04
 
     dec  de                                       ; $5CDB: $1B
     xor  a                                        ; $5CDC: $AF
     ld   [de], a                                  ; $5CDD: $12
     inc  de                                       ; $5CDE: $13
 
-jr_007_5CDF:
+.jr_5CDF
     pop  bc                                       ; $5CDF: $C1
     inc  de                                       ; $5CE0: $13
     ldh  a, [hActiveEntityFlipAttribute]          ; $5CE1: $F0 $ED

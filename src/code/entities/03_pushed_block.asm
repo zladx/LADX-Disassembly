@@ -38,22 +38,22 @@ PushedBlockEntityHandler::
     call UpdateEntityPosWithSpeed_03              ; $5263: $CD $25 $7F
     call func_003_52D4                            ; $5266: $CD $D4 $52
     call CheckLinkCollisionWithEnemy.collisionEvenInTheAir ; $5269: $CD $77 $6C
-    jr   nc, jr_003_5276                          ; $526C: $30 $08
+    jr   nc, .jr_5276                             ; $526C: $30 $08
 
     call CopyLinkFinalPositionToPosition          ; $526E: $CD $BE $0C
     ld   a, $03                                   ; $5271: $3E $03
     ld   [wIsLinkPushing], a                      ; $5273: $EA $44 $C1
 
-jr_003_5276:
+.jr_5276
     ldh  a, [hMapRoom]                            ; $5276: $F0 $F6
     cp   UNKNOWN_ROOM_C7                          ; $5278: $FE $C7
-    jr   z, jr_003_5282                           ; $527A: $28 $06
+    jr   z, .jr_5282                              ; $527A: $28 $06
 
     ld   a, [wIsIndoor]                           ; $527C: $FA $A5 $DB
     and  a                                        ; $527F: $A7
     jr   nz, jr_003_5286                          ; $5280: $20 $04
 
-jr_003_5282:
+.jr_5282
     ld   a, $02                                   ; $5282: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5284: $E0 $A1
 
@@ -84,17 +84,17 @@ jr_003_5286:
     ld   b, $C4                                   ; $52A8: $06 $C4
     ld   a, [wIsIndoor]                           ; $52AA: $FA $A5 $DB
     and  a                                        ; $52AD: $A7
-    jr   z, jr_003_52B5                           ; $52AE: $28 $05
+    jr   z, .jr_52B5                              ; $52AE: $28 $05
 
     ld   de, Data_003_515E                        ; $52B0: $11 $5E $51
     ld   b, $A6                                   ; $52B3: $06 $A6
 
-jr_003_52B5:
+.jr_52B5
     call func_003_51C9                            ; $52B5: $CD $C9 $51
     ld   a, [wRoomEvent]                          ; $52B8: $FA $8E $C1
     and  EVENT_TRIGGER_MASK                       ; $52BB: $E6 $1F
     cp   TRIGGER_PUSH_SINGLE_BLOCK                ; $52BD: $FE $02
-    jr   z, jr_003_52D1                           ; $52BF: $28 $10
+    jr   z, .jr_52D1                              ; $52BF: $28 $10
 
     cp   TRIGGER_PUSH_BLOCKS                      ; $52C1: $FE $07
     ret  nz                                       ; $52C3: $C0
@@ -102,10 +102,10 @@ jr_003_52B5:
     call func_003_7893                            ; $52C4: $CD $93 $78
     ld   a, [wC503]                               ; $52C7: $FA $03 $C5
     cp   $A7                                      ; $52CA: $FE $A7
-    jr   z, jr_003_52D1                           ; $52CC: $28 $03
+    jr   z, .jr_52D1                              ; $52CC: $28 $03
 
     cp   $A6                                      ; $52CE: $FE $A6
     ret  nz                                       ; $52D0: $C0
 
-jr_003_52D1:
+.jr_52D1
     jp   MarkTriggerAsResolved                    ; $52D1: $C3 $60 $0C

@@ -28,22 +28,22 @@ ShopOwnerSpriteVariants::
 ShopOwnerEntityHandler::
     ld   a, [wBlockItemUsage]                     ; $76EB: $FA $0A $C5
     and  a                                        ; $76EE: $A7
-    jr   nz, jr_004_76F9                          ; $76EF: $20 $08
+    jr   nz, .jr_76F9                             ; $76EF: $20 $08
 
     ld   a, $01                                   ; $76F1: $3E $01
     ld   [wBlockItemUsage], a                     ; $76F3: $EA $0A $C5
     call func_004_788E                            ; $76F6: $CD $8E $78
 
-jr_004_76F9:
+.jr_76F9
     ld   a, [wSwordLevel]                         ; $76F9: $FA $4E $DB
     and  a                                        ; $76FC: $A7
-    jr   z, jr_004_7705                           ; $76FD: $28 $06
+    jr   z, .jr_7705                              ; $76FD: $28 $06
 
     ldh  a, [hFrameCounter]                       ; $76FF: $F0 $E7
     and  $5F                                      ; $7701: $E6 $5F
     jr   nz, jr_004_770E                          ; $7703: $20 $09
 
-jr_004_7705:
+.jr_7705
     call func_004_6E55                            ; $7705: $CD $55 $6E
     ld   a, e                                     ; $7708: $7B
     ld   hl, wEntitiesDirectionTable              ; $7709: $21 $80 $C3
@@ -57,11 +57,11 @@ jr_004_770E:
     call func_004_7B70                            ; $7717: $CD $70 $7B
     ldh  a, [hActiveEntityState]                  ; $771A: $F0 $F0
     cp   $04                                      ; $771C: $FE $04
-    jr   nc, jr_004_7723                          ; $771E: $30 $03
+    jr   nc, .jr_7723                             ; $771E: $30 $03
 
     call func_004_7BE3                            ; $7720: $CD $E3 $7B
 
-jr_004_7723:
+.jr_7723
     ldh  a, [hActiveEntityState]                  ; $7723: $F0 $F0
     JP_TABLE                                      ; $7725
 ._00 dw func_004_77F8                             ; $7726
@@ -130,7 +130,7 @@ func_004_77F8::
     ld   a, [wHasStolenFromShop]                  ; $77F8: $FA $46 $DB
     and  a                                        ; $77FB: $A7
 
-jr_004_77FC:
+.jr_77FC
     jr   z, jr_004_7839                           ; $77FC: $28 $3B
 
     ld   hl, wEntitiesPosYTable                   ; $77FE: $21 $10 $C2
@@ -170,11 +170,11 @@ jr_004_7839:
     ld   d, b                                     ; $783B: $50
     ld   a, [wHasInstrument2]                     ; $783C: $FA $66 $DB
     and  $02                                      ; $783F: $E6 $02
-    jr   z, jr_004_7845                           ; $7841: $28 $02
+    jr   z, .jr_7845                              ; $7841: $28 $02
 
     ld   e, $04                                   ; $7843: $1E $04
 
-jr_004_7845:
+.jr_7845
     push bc                                       ; $7845: $C5
     ld   hl, wBButtonSlot                         ; $7846: $21 $00 $DB
     ld   c, INVENTORY_SLOT_COUNT -1               ; $7849: $0E $0B
@@ -182,13 +182,13 @@ jr_004_7845:
 jr_004_784B:
     ld   a, [wBoomerangTradedItem]                ; $784B: $FA $7D $DB
     cp   INVENTORY_SHOVEL                         ; $784E: $FE $0B
-    jr   z, jr_004_7857                           ; $7850: $28 $05
+    jr   z, .jr_7857                              ; $7850: $28 $05
 
     ld   a, [hl+]                                 ; $7852: $2A
     cp   INVENTORY_SHOVEL                         ; $7853: $FE $0B
     jr   nz, jr_004_7859                          ; $7855: $20 $02
 
-jr_004_7857:
+.jr_7857
     ld   e, $08                                   ; $7857: $1E $08
 
 jr_004_7859:
@@ -203,13 +203,13 @@ jr_004_7859:
 jr_004_7864:
     ld   a, [wBoomerangTradedItem]                ; $7864: $FA $7D $DB
     cp   INVENTORY_BOW                            ; $7867: $FE $05
-    jr   z, jr_004_7870                           ; $7869: $28 $05
+    jr   z, .jr_7870                              ; $7869: $28 $05
 
     ld   a, [hl+]                                 ; $786B: $2A
     cp   INVENTORY_BOW                            ; $786C: $FE $05
     jr   nz, jr_004_7872                          ; $786E: $20 $02
 
-jr_004_7870:
+.jr_7870
     ld   e, $0C                                   ; $7870: $1E $0C
 
 jr_004_7872:
@@ -243,13 +243,13 @@ func_004_788E::
 jr_004_7897:
     ld   a, [hl+]                                 ; $7897: $2A
     and  a                                        ; $7898: $A7
-    jr   z, jr_004_78A0                           ; $7899: $28 $05
+    jr   z, .jr_78A0                              ; $7899: $28 $05
 
     push hl                                       ; $789B: $E5
     call func_004_798B                            ; $789C: $CD $8B $79
     pop  hl                                       ; $789F: $E1
 
-jr_004_78A0:
+.jr_78A0
     dec  c                                        ; $78A0: $0D
     jr   nz, jr_004_7897                          ; $78A1: $20 $F4
 
@@ -262,27 +262,27 @@ Data_004_78A5::
 func_004_78AF::
     ld   a, [wItemPickedUpInShop]                 ; $78AF: $FA $09 $C5
     and  a                                        ; $78B2: $A7
-    jr   z, jr_004_78D4                           ; $78B3: $28 $1F
+    jr   z, .jr_78D4                              ; $78B3: $28 $1F
 
     ld   hl, wEntitiesDirectionTable              ; $78B5: $21 $80 $C3
     add  hl, bc                                   ; $78B8: $09
     ld   a, [hl]                                  ; $78B9: $7E
     and  $01                                      ; $78BA: $E6 $01
-    jr   z, jr_004_78D4                           ; $78BC: $28 $16
+    jr   z, .jr_78D4                              ; $78BC: $28 $16
 
     ld   a, [wLinkMotionState]                    ; $78BE: $FA $1C $C1
     cp   LINK_MOTION_DEFAULT                      ; $78C1: $FE $00
-    jr   nz, jr_004_78D4                          ; $78C3: $20 $0F
+    jr   nz, .jr_78D4                             ; $78C3: $20 $0F
 
     ldh  a, [hLinkPositionY]                      ; $78C5: $F0 $99
     cp   $7B                                      ; $78C7: $FE $7B
-    jr   c, jr_004_78D4                           ; $78C9: $38 $09
+    jr   c, .jr_78D4                              ; $78C9: $38 $09
 
     sub  $02                                      ; $78CB: $D6 $02
     ldh  [hLinkPositionY], a                      ; $78CD: $E0 $99
     jp_open_dialog $02F                           ; @TODO Text used when you're trying to steal stuff
 
-jr_004_78D4:
+.jr_78D4
     ldh  a, [hLinkPositionY]                      ; $78D4: $F0 $99
     cp   $48                                      ; $78D6: $FE $48
     jr   nc, jr_004_7940                          ; $78D8: $30 $66
@@ -297,7 +297,7 @@ jr_004_78D4:
 
     ld   a, [wItemPickedUpInShop]                 ; $78E6: $FA $09 $C5
     and  a                                        ; $78E9: $A7
-    jr   z, jr_004_7907                           ; $78EA: $28 $1B
+    jr   z, .jr_7907                              ; $78EA: $28 $1B
 
     ldh  a, [hLinkPositionX]                      ; $78EC: $F0 $98
     add  $00                                      ; $78EE: $C6 $00
@@ -315,7 +315,7 @@ jr_004_78D4:
     ldh  [hJingle], a                             ; $7902: $E0 $F2
     jp   label_004_796D                           ; $7904: $C3 $6D $79
 
-jr_004_7907:
+.jr_7907
 IF __PATCH_0__
     ld   a, [wC3CF]
     and  a
@@ -346,12 +346,12 @@ ENDC
     ld   [wItemPickedUpInShop], a                 ; $7920: $EA $09 $C5
     ld   [hl], b                                  ; $7923: $70
     and  a                                        ; $7924: $A7
-    jr   z, jr_004_792B                           ; $7925: $28 $04
+    jr   z, .jr_792B                              ; $7925: $28 $04
 
     ld   a, JINGLE_VALIDATE                       ; $7927: $3E $13
     ldh  [hJingle], a                             ; $7929: $E0 $F2
 
-jr_004_792B:
+.jr_792B
     push bc                                       ; $792B: $C5
     ld   a, e                                     ; $792C: $7B
     swap a                                        ; $792D: $CB $37
@@ -376,7 +376,7 @@ jr_004_7940:
 
     ld   a, [wItemPickedUpInShop]                 ; $7944: $FA $09 $C5
     and  a                                        ; $7947: $A7
-    jr   z, jr_004_7958                           ; $7948: $28 $0E
+    jr   z, .jr_7958                              ; $7948: $28 $0E
 
     dec  a                                        ; $794A: $3D
     ld   e, a                                     ; $794B: $5F
@@ -387,7 +387,7 @@ jr_004_7940:
     call OpenDialog                               ; $7952: $CD $85 $23
     jp   IncrementEntityState                     ; $7955: $C3 $12 $3B
 
-jr_004_7958:
+.jr_7958
     jp_open_dialog $02E                           ; $7958
 
 func_004_795D::
@@ -455,7 +455,7 @@ jr_004_79AB:
     ld   a, [wItemPickedUpInShop]                 ; $79AB: $FA $09 $C5
     ld   e, a                                     ; $79AE: $5F
     cp   $02                                      ; $79AF: $FE $02
-    jr   nz, jr_004_79BB                          ; $79B1: $20 $08
+    jr   nz, .jr_79BB                             ; $79B1: $20 $08
 
     ld   a, [wC5A9]                               ; $79B3: $FA $A9 $C5
     and  a                                        ; $79B6: $A7
@@ -463,7 +463,7 @@ jr_004_79AB:
 
     jr   jr_004_7A0C                              ; $79B9: $18 $51
 
-jr_004_79BB:
+.jr_79BB
     cp   $04                                      ; $79BB: $FE $04
     jr   nz, jr_004_79D9                          ; $79BD: $20 $1A
 
@@ -473,14 +473,14 @@ jr_004_79BB:
 .loop_79C4:
     ld   a, [hl+]                                 ; $79C4: $2A
     cp   INVENTORY_BOMBS                          ; $79C5: $FE $02
-    jr   z, jr_004_79CE                           ; $79C7: $28 $05
+    jr   z, .jr_79CE                              ; $79C7: $28 $05
 
     dec  d                                        ; $79C9: $15
     jr   nz, .loop_79C4                           ; $79CA: $20 $F8
 
     jr   jr_004_7A0C                              ; $79CC: $18 $3E
 
-jr_004_79CE:
+.jr_79CE
     ld   a, [wBombCount]                          ; $79CE: $FA $4D $DB
     ld   hl, wMaxBombs                            ; $79D1: $21 $77 $DB
     cp   [hl]                                     ; $79D4: $BE
@@ -498,14 +498,14 @@ jr_004_79D9:
 .loop_79E2:
     ld   a, [hl+]                                 ; $79E2: $2A
     cp   INVENTORY_BOW                            ; $79E3: $FE $05
-    jr   z, jr_004_79EC                           ; $79E5: $28 $05
+    jr   z, .jr_79EC                              ; $79E5: $28 $05
 
     dec  d                                        ; $79E7: $15
     jr   nz, .loop_79E2                           ; $79E8: $20 $F8
 
     jr   jr_004_7A0C                              ; $79EA: $18 $20
 
-jr_004_79EC:
+.jr_79EC
     ld   a, [wArrowCount]                         ; $79EC: $FA $45 $DB
     ld   hl, wMaxArrows                           ; $79EF: $21 $78 $DB
     cp   [hl]                                     ; $79F2: $BE
@@ -608,11 +608,11 @@ bought10Arrows:
     ld   a, [wArrowCount]                         ; $7A7E: $FA $45 $DB
     add  $0A                                      ; $7A81: $C6 $0A
     daa                                           ; $7A83: $27
-    jr   nc, jr_004_7A88                          ; $7A84: $30 $02
+    jr   nc, .jr_7A88                             ; $7A84: $30 $02
 
     ld   a, $99                                   ; POI: ?? Checks for going over 99 (normal max 60)?
 
-jr_004_7A88:
+.jr_7A88
     ld   [wArrowCount], a                         ; $7A88: $EA $45 $DB
     ret                                           ; $7A8B: $C9
 
@@ -624,11 +624,11 @@ boughtShop08:                           ; POI: Appears as a guardian acorn, but.
     ld   a, [wDB47]                     ; Add 10 to DB47 (?)
     add  $0A                            ; This code is similar to that for adding bought arrows
     daa                                 ; But DB47 isn't one of those (?)
-    jr   nc, jr_004_7A9B                ; Still attempts to cap to 99
+    jr   nc, .jr_7A9B                ; Still attempts to cap to 99
 
     ld   a, $99                         ; ????????
 
-jr_004_7A9B:
+.jr_7A9B
     ld   [wDB47], a                               ; $7A9B: $EA $47 $DB
     ret                                           ; $7A9E: $C9
 
@@ -647,11 +647,11 @@ bought10Bombs:
     ld   a, [wBombCount]                          ; $7AAE: $FA $4D $DB
     add  $0A                                      ; $7AB1: $C6 $0A
     daa                                           ; $7AB3: $27
-    jr   nc, jr_004_7AB8                          ; $7AB4: $30 $02
+    jr   nc, .jr_7AB8                             ; $7AB4: $30 $02
 
     ld   a, $99                                   ; $7AB6: $3E $99
 
-jr_004_7AB8:
+.jr_7AB8
     ld   [wBombCount], a                          ; $7AB8: $EA $4D $DB
     ld   d, INVENTORY_BOMBS                       ; $7ABB: $16 $02
     jp   GiveInventoryItem_trampoline             ; $7ABD: $C3 $6B $3E
@@ -660,11 +660,11 @@ jr_004_7AB8:
     ld   a, [wArrowCount]                         ; ???????????????????
     add  $0A                                      ; $7AC3: $C6 $0A
     daa                                           ; $7AC5: $27
-    jr   nc, jr_004_7ACA                          ; $7AC6: $30 $02
+    jr   nc, .jr_7ACA                             ; $7AC6: $30 $02
 
     ld   a, $99                                   ; $7AC8: $3E $99
 
-jr_004_7ACA:
+.jr_7ACA
     ld   [wArrowCount], a                         ; $7ACA: $EA $45 $DB
     ld   d, INVENTORY_MAGIC_POWDER                ; $7ACD: $16 $0C
     jp   GiveInventoryItem_trampoline             ; $7ACF: $C3 $6B $3E
@@ -800,20 +800,20 @@ jr_004_7B72:
     ldh  [hActiveEntityVisualPosY], a             ; $7B8D: $E0 $EC
     ldh  a, [hActiveEntitySpriteVariant]          ; $7B8F: $F0 $F1
     cp   $01                                      ; $7B91: $FE $01
-    jr   nz, jr_004_7B9A                          ; $7B93: $20 $05
+    jr   nz, .jr_7B9A                             ; $7B93: $20 $05
 
     ld   hl, hActiveEntityVisualPosY              ; $7B95: $21 $EC $FF
     ld   [hl], $2F                                ; $7B98: $36 $2F
 
-jr_004_7B9A:
+.jr_7B9A
     cp   $05                                      ; $7B9A: $FE $05
-    jr   nz, jr_004_7BA6                          ; $7B9C: $20 $08
+    jr   nz, .jr_7BA6                             ; $7B9C: $20 $08
 
     ld   de, Unknown091SpriteVariants             ; $7B9E: $11 $58 $7B
     call RenderActiveEntitySpritesPair            ; $7BA1: $CD $C0 $3B
     jr   jr_004_7BAC                              ; $7BA4: $18 $06
 
-jr_004_7BA6:
+.jr_7BA6
     ld   de, Data_004_7B5A                        ; $7BA6: $11 $5A $7B
     call RenderActiveEntitySprite                 ; $7BA9: $CD $77 $3C
 
@@ -842,12 +842,12 @@ func_004_7BB7::
     ldh  [hActiveEntityVisualPosY], a             ; $7BCF: $E0 $EC
     ldh  a, [hActiveEntitySpriteVariant]          ; $7BD1: $F0 $F1
     cp   $05                                      ; $7BD3: $FE $05
-    jr   nz, jr_004_7BDD                          ; $7BD5: $20 $06
+    jr   nz, .jr_7BDD                             ; $7BD5: $20 $06
 
     ld   de, Unknown091SpriteVariants             ; $7BD7: $11 $58 $7B
     jp   RenderActiveEntitySpritesPair            ; $7BDA: $C3 $C0 $3B
 
-jr_004_7BDD:
+.jr_7BDD
     ld   de, Data_004_7B5A                        ; $7BDD: $11 $5A $7B
     jp   RenderActiveEntitySprite                 ; $7BE0: $C3 $77 $3C
 
@@ -882,20 +882,20 @@ func_004_7C06::
     sub  [hl]                                     ; $7C0B: $96
     add  $20                                      ; $7C0C: $C6 $20
     cp   $30                                      ; $7C0E: $FE $30
-    jr   nc, jr_004_7C49                          ; $7C10: $30 $37
+    jr   nc, .jr_7C49                             ; $7C10: $30 $37
 
     ldh  a, [hLinkPositionY]                      ; $7C12: $F0 $99
     ld   hl, hActiveEntityPosY                    ; $7C14: $21 $EF $FF
     sub  [hl]                                     ; $7C17: $96
     add  $10                                      ; $7C18: $C6 $10
     cp   $20                                      ; $7C1A: $FE $20
-    jr   nc, jr_004_7C49                          ; $7C1C: $30 $2B
+    jr   nc, .jr_7C49                             ; $7C1C: $30 $2B
 
     call func_004_6E55                            ; $7C1E: $CD $55 $6E
     ldh  a, [hLinkDirection]                      ; $7C21: $F0 $9E
     xor  $01                                      ; $7C23: $EE $01
     cp   e                                        ; $7C25: $BB
-    jr   nz, jr_004_7C49                          ; $7C26: $20 $21
+    jr   nz, .jr_7C49                             ; $7C26: $20 $21
 
     ld   hl, wC1AD                                ; $7C28: $21 $AD $C1
     ld   [hl], $01                                ; $7C2B: $36 $01
@@ -904,19 +904,19 @@ func_004_7C06::
     or   [hl]                                     ; $7C33: $B6
     ld   hl, wC134                                ; $7C34: $21 $34 $C1
     or   [hl]                                     ; $7C37: $B6
-    jr   nz, jr_004_7C49                          ; $7C38: $20 $0F
+    jr   nz, .jr_7C49                             ; $7C38: $20 $0F
 
     ld   a, [wWindowY]                            ; $7C3A: $FA $9A $DB
     cp   $80                                      ; $7C3D: $FE $80
-    jr   nz, jr_004_7C49                          ; $7C3F: $20 $08
+    jr   nz, .jr_7C49                             ; $7C3F: $20 $08
 
     ldh  a, [hJoypadState]                        ; $7C41: $F0 $CC
     and  J_A                                      ; $7C43: $E6 $10
-    jr   z, jr_004_7C49                           ; $7C45: $28 $02
+    jr   z, .jr_7C49                              ; $7C45: $28 $02
 
     scf                                           ; $7C47: $37
     ret                                           ; $7C48: $C9
 
-jr_004_7C49:
+.jr_7C49
     and  a                                        ; $7C49: $A7
     ret                                           ; $7C4A: $C9

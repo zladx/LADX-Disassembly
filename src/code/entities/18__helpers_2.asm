@@ -27,23 +27,23 @@ func_018_7B9D::
     ld   h, a                                     ; $7BAF: $67
     ldh  a, [hMultiPurpose1]                      ; $7BB0: $F0 $D8
     bit  7, a                                     ; $7BB2: $CB $7F
-    jr   z, jr_018_7BB8                           ; $7BB4: $28 $02
+    jr   z, .jr_7BB8                              ; $7BB4: $28 $02
 
     cpl                                           ; $7BB6: $2F
     inc  a                                        ; $7BB7: $3C
 
-jr_018_7BB8:
+.jr_7BB8
     ld   d, a                                     ; $7BB8: $57
     ldh  a, [hMultiPurpose0]                      ; $7BB9: $F0 $D7
     bit  7, a                                     ; $7BBB: $CB $7F
-    jr   z, jr_018_7BC1                           ; $7BBD: $28 $02
+    jr   z, .jr_7BC1                              ; $7BBD: $28 $02
 
     cpl                                           ; $7BBF: $2F
     inc  a                                        ; $7BC0: $3C
 
-jr_018_7BC1:
+.jr_7BC1
     cp   d                                        ; $7BC1: $BA
-    jr   nc, jr_018_7BD1                          ; $7BC2: $30 $0D
+    jr   nc, .jr_7BD1                             ; $7BC2: $30 $0D
 
     sra  a                                        ; $7BC4: $CB $2F
     sra  a                                        ; $7BC6: $CB $2F
@@ -55,7 +55,7 @@ jr_018_7BC1:
     ld   a, [hl]                                  ; $7BCF: $7E
     ret                                           ; $7BD0: $C9
 
-jr_018_7BD1:
+.jr_7BD1
     ld   a, d                                     ; $7BD1: $7A
     sra  a                                        ; $7BD2: $CB $2F
     sra  a                                        ; $7BD4: $CB $2F

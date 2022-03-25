@@ -531,7 +531,7 @@ JumpTable_037_4371::
     ld   [wEntitiesPosXTable+8], a                ; $437F: $EA $08 $C2
     ld   a, $40                                   ; $4382: $3E $40
 
-jr_037_4384:
+.jr_4384
     ld   [wEntitiesPosXTable+9], a                ; $4384: $EA $09 $C2
     ld   hl, wEntitiesPosXSignTable+13            ; $4387: $21 $2D $C2
     ld   [hl], $10                                ; $438A: $36 $10

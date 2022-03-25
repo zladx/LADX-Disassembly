@@ -1450,16 +1450,16 @@ RenderIntroSparkle::
     xor  a                                        ; $77DD: $AF
     ld   [wC3C1], a                               ; $77DE: $EA $C1 $C3
 
-jr_001_77E1::
+.jr_77E1::
     call GetEntityTransitionCountdown             ; $77E1: $CD $05 $0C
     dec  [hl]                                     ; $77E4: $35
-    jr   nz, jr_001_77ED                          ; $77E5: $20 $06
+    jr   nz, .jr_77ED                             ; $77E5: $20 $06
     ld   hl, wEntitiesStatusTable                 ; $77E7: $21 $80 $C2
     add  hl, bc                                   ; $77EA: $09
     ld   [hl], b                                  ; $77EB: $70
     ret                                           ; $77EC: $C9
 
-jr_001_77ED::
+.jr_77ED::
     ld   a, [hl]                                  ; $77ED: $7E
     rra                                           ; $77EE: $1F
     rra                                           ; $77EF: $1F

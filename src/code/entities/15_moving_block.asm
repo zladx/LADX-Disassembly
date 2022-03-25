@@ -67,7 +67,7 @@ jr_015_414D:
     ld   hl, wEntitiesPosYTable                   ; $4152: $21 $10 $C2
     add  hl, bc                                   ; $4155: $09
     cp   [hl]                                     ; $4156: $BE
-    jr   z, jr_015_416B                           ; $4157: $28 $12
+    jr   z, .jr_416B                              ; $4157: $28 $12
 
     ld   hl, wEntitiesInertiaTable                ; $4159: $21 $D0 $C3
     add  hl, bc                                   ; $415C: $09
@@ -82,7 +82,7 @@ jr_015_414D:
     inc  [hl]                                     ; $4168: $34
     jr   jr_015_416F                              ; $4169: $18 $04
 
-jr_015_416B:
+.jr_416B
     ld   hl, hMultiPurposeG                       ; $416B: $21 $E8 $FF
     inc  [hl]                                     ; $416E: $34
 
@@ -104,35 +104,35 @@ jr_015_416F:
     call func_015_7C0A                            ; $418A: $CD $0A $7C
     ld   a, e                                     ; $418D: $7B
     cp   $00                                      ; $418E: $FE $00
-    jr   nz, jr_015_4199                          ; $4190: $20 $07
+    jr   nz, .jr_4199                             ; $4190: $20 $07
 
     ldh  a, [hActiveEntityPosX]                   ; $4192: $F0 $EE
     add  $0C                                      ; $4194: $C6 $0C
     ldh  [hLinkPositionX], a                      ; $4196: $E0 $98
     ret                                           ; $4198: $C9
 
-jr_015_4199:
+.jr_4199
     cp   $01                                      ; $4199: $FE $01
-    jr   nz, jr_015_41A4                          ; $419B: $20 $07
+    jr   nz, .jr_41A4                             ; $419B: $20 $07
 
     ldh  a, [hActiveEntityPosX]                   ; $419D: $F0 $EE
     add  $F4                                      ; $419F: $C6 $F4
     ldh  [hLinkPositionX], a                      ; $41A1: $E0 $98
     ret                                           ; $41A3: $C9
 
-jr_015_41A4:
+.jr_41A4
     cp   $02                                      ; $41A4: $FE $02
     jr   nz, jr_015_41B9                          ; $41A6: $20 $11
 
     ldh  a, [hActiveEntityType]                   ; $41A8: $F0 $EB
     cp   ENTITY_MOVING_BLOCK_LEFT_BOTTOM          ; $41AA: $FE $47
-    jr   nz, jr_015_41B2                          ; $41AC: $20 $04
+    jr   nz, .jr_41B2                             ; $41AC: $20 $04
 
     ldh  a, [hMultiPurposeG]                      ; $41AE: $F0 $E8
     and  a                                        ; $41B0: $A7
     ret  nz                                       ; $41B1: $C0
 
-jr_015_41B2:
+.jr_41B2
     ldh  a, [hActiveEntityVisualPosY]             ; $41B2: $F0 $EC
     add  $F0                                      ; $41B4: $C6 $F0
     ldh  [hLinkPositionY], a                      ; $41B6: $E0 $99
@@ -141,13 +141,13 @@ jr_015_41B2:
 jr_015_41B9:
     ldh  a, [hActiveEntityType]                   ; $41B9: $F0 $EB
     cp   ENTITY_MOVING_BLOCK_LEFT_TOP             ; $41BB: $FE $46
-    jr   nz, jr_015_41C3                          ; $41BD: $20 $04
+    jr   nz, .jr_41C3                             ; $41BD: $20 $04
 
     ldh  a, [hMultiPurposeG]                      ; $41BF: $F0 $E8
     and  a                                        ; $41C1: $A7
     ret  nz                                       ; $41C2: $C0
 
-jr_015_41C3:
+.jr_41C3
     ldh  a, [hActiveEntityVisualPosY]             ; $41C3: $F0 $EC
     add  $0C                                      ; $41C5: $C6 $0C
     ldh  [hLinkPositionY], a                      ; $41C7: $E0 $99
@@ -218,7 +218,7 @@ jr_015_4217:
     ld   hl, wEntitiesPosYTable                   ; $421C: $21 $10 $C2
     add  hl, bc                                   ; $421F: $09
     cp   [hl]                                     ; $4220: $BE
-    jr   z, jr_015_4235                           ; $4221: $28 $12
+    jr   z, .jr_4235                              ; $4221: $28 $12
 
     ld   hl, wEntitiesInertiaTable                ; $4223: $21 $D0 $C3
     add  hl, bc                                   ; $4226: $09
@@ -233,7 +233,7 @@ jr_015_4217:
     dec  [hl]                                     ; $4232: $35
     jr   jr_015_4239                              ; $4233: $18 $04
 
-jr_015_4235:
+.jr_4235
     ld   hl, hMultiPurposeG                       ; $4235: $21 $E8 $FF
     inc  [hl]                                     ; $4238: $34
 
@@ -303,7 +303,7 @@ jr_015_4289:
     ld   hl, wEntitiesPosXTable                   ; $428E: $21 $00 $C2
     add  hl, bc                                   ; $4291: $09
     cp   [hl]                                     ; $4292: $BE
-    jr   z, jr_015_42A7                           ; $4293: $28 $12
+    jr   z, .jr_42A7                              ; $4293: $28 $12
 
     ld   hl, wEntitiesInertiaTable                ; $4295: $21 $D0 $C3
     add  hl, bc                                   ; $4298: $09
@@ -318,7 +318,7 @@ jr_015_4289:
     inc  [hl]                                     ; $42A4: $34
     jr   jr_015_42AB                              ; $42A5: $18 $04
 
-jr_015_42A7:
+.jr_42A7
     ld   hl, hMultiPurposeG                       ; $42A7: $21 $E8 $FF
     inc  [hl]                                     ; $42AA: $34
 
@@ -388,7 +388,7 @@ jr_015_42FB:
     ld   hl, wEntitiesPosXTable                   ; $4300: $21 $00 $C2
     add  hl, bc                                   ; $4303: $09
     cp   [hl]                                     ; $4304: $BE
-    jr   z, jr_015_4319                           ; $4305: $28 $12
+    jr   z, .jr_4319                              ; $4305: $28 $12
 
     ld   hl, wEntitiesInertiaTable                ; $4307: $21 $D0 $C3
     add  hl, bc                                   ; $430A: $09
@@ -403,7 +403,7 @@ jr_015_42FB:
     dec  [hl]                                     ; $4316: $35
     jr   jr_015_431D                              ; $4317: $18 $04
 
-jr_015_4319:
+.jr_4319
     ld   hl, hMultiPurposeG                       ; $4319: $21 $E8 $FF
     inc  [hl]                                     ; $431C: $34
 

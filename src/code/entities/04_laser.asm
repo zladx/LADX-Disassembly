@@ -154,19 +154,19 @@ label_004_6D0F:
     sub  [hl]                                     ; $6D20: $96
     add  $10                                      ; $6D21: $C6 $10
     cp   $20                                      ; $6D23: $FE $20
-    jr   nc, jr_004_6D5C                          ; $6D25: $30 $35
+    jr   nc, .jr_6D5C                             ; $6D25: $30 $35
 
     ldh  a, [hActiveEntityPosY]                   ; $6D27: $F0 $EF
     ld   hl, hLinkPositionY                       ; $6D29: $21 $99 $FF
     sub  [hl]                                     ; $6D2C: $96
     add  $10                                      ; $6D2D: $C6 $10
     cp   $20                                      ; $6D2F: $FE $20
-    jr   nc, jr_004_6D5C                          ; $6D31: $30 $29
+    jr   nc, .jr_6D5C                             ; $6D31: $30 $29
 
     call ClearEntityStatusBank04                  ; $6D33: $CD $7A $6D
     ld   a, [wInvincibilityCounter]               ; $6D36: $FA $C7 $DB
     and  a                                        ; $6D39: $A7
-    jr   nz, jr_004_6D5C                          ; $6D3A: $20 $20
+    jr   nz, .jr_6D5C                             ; $6D3A: $20 $20
 
     ld   hl, wEntitiesPrivateState1Table          ; $6D3C: $21 $B0 $C2
     add  hl, bc                                   ; $6D3F: $09
@@ -176,7 +176,7 @@ label_004_6D0F:
     add  hl, de                                   ; $6D45: $19
     ld   a, [hl]                                  ; $6D46: $7E
     and  a                                        ; $6D47: $A7
-    jr   nz, jr_004_6D5C                          ; $6D48: $20 $12
+    jr   nz, .jr_6D5C                             ; $6D48: $20 $12
 
     ld   [hl], $20                                ; $6D4A: $36 $20
     ld   hl, wEntitiesFlashCountdownTable         ; $6D4C: $21 $20 $C4
@@ -190,7 +190,7 @@ label_004_6D0F:
     pop  bc                                       ; $6D5A: $C1
     ret                                           ; $6D5B: $C9
 
-jr_004_6D5C:
+.jr_6D5C
     ld   hl, wEntitiesSpeedXTable                 ; $6D5C: $21 $40 $C2
     add  hl, bc                                   ; $6D5F: $09
     ld   a, [hl]                                  ; $6D60: $7E

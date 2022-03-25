@@ -17,12 +17,12 @@ GiantGopongaState0Handler::
 
 GiantGopongaState1Handler::
     call GetEntityTransitionCountdown             ; $62D3: $CD $05 $0C
-    jr   nz, jr_006_62DD                          ; $62D6: $20 $05
+    jr   nz, .jr_62DD                             ; $62D6: $20 $05
 
     ld   [hl], $50                                ; $62D8: $36 $50
     call IncrementEntityState                     ; $62DA: $CD $12 $3B
 
-jr_006_62DD:
+.jr_62DD
     rra                                           ; $62DD: $1F
     rra                                           ; $62DE: $1F
     rra                                           ; $62DF: $1F
@@ -32,18 +32,18 @@ jr_006_62DD:
 
 GiantGopongaState2Handler::
     call GetEntityTransitionCountdown             ; $62E6: $CD $05 $0C
-    jr   nz, jr_006_62EF                          ; $62E9: $20 $04
+    jr   nz, .jr_62EF                             ; $62E9: $20 $04
 
     call IncrementEntityState                     ; $62EB: $CD $12 $3B
     ld   [hl], b                                  ; $62EE: $70
 
-jr_006_62EF:
+.jr_62EF
     cp   $4A                                      ; $62EF: $FE $4A
-    jr   nz, jr_006_6311                          ; $62F1: $20 $1E
+    jr   nz, .jr_6311                             ; $62F1: $20 $1E
 
     ld   a, ENTITY_GOPONGA_FLOWER_PROJECTILE      ; $62F3: $3E $7D
     call SpawnNewEntity_trampoline                ; $62F5: $CD $86 $3B
-    jr   c, jr_006_6311                           ; $62F8: $38 $17
+    jr   c, .jr_6311                              ; $62F8: $38 $17
 
     ldh  a, [hMultiPurpose0]                      ; $62FA: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $62FC: $21 $00 $C2
@@ -60,7 +60,7 @@ jr_006_62EF:
     call ApplyVectorTowardsLink_trampoline        ; $630D: $CD $AA $3B
     pop  bc                                       ; $6310: $C1
 
-jr_006_6311:
+.jr_6311
     ld   a, $02                                   ; $6311: $3E $02
     jp   SetEntitySpriteVariant                   ; $6313: $C3 $0C $3B
 

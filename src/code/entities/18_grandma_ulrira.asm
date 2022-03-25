@@ -41,11 +41,11 @@ GrandmaUlriraEntityHandler::
     ld   a, [wHasInstrument5]                     ; $4D25: $FA $69 $DB
     ld   d, $B1                                   ; $4D28: $16 $B1
     and  $02                                      ; $4D2A: $E6 $02
-    jr   z, jr_018_4D30                           ; $4D2C: $28 $02
+    jr   z, .jr_4D30                              ; $4D2C: $28 $02
 
     ld   d, $CD                                   ; $4D2E: $16 $CD
 
-jr_018_4D30:
+.jr_4D30
     ldh  a, [hMapRoom]                            ; $4D30: $F0 $F6
     cp   d                                        ; $4D32: $BA
     jp   nz, ClearEntityStatusBank18              ; $4D33: $C2 $08 $7F
@@ -60,13 +60,13 @@ jr_018_4D36:
 
     ld   a, [wHasInstrument5]                     ; $4D43: $FA $69 $DB
     and  $02                                      ; $4D46: $E6 $02
-    jr   nz, jr_018_4D51                          ; $4D48: $20 $07
+    jr   nz, .jr_4D51                             ; $4D48: $20 $07
 
     ld   a, [wTradeSequenceItem]                  ; $4D4A: $FA $0E $DB
     cp   TRADING_ITEM_BROOM                       ; $4D4D: $FE $0A
     jr   c, jr_018_4D58                           ; $4D4F: $38 $07
 
-jr_018_4D51:
+.jr_4D51
     ld   a, $01                                   ; $4D51: $3E $01
     ldh  [hMultiPurposeG], a                      ; $4D53: $E0 $E8
     ld   de, GrandmaUlrira2SpriteVariants         ; $4D55: $11 $07 $4D
@@ -104,7 +104,7 @@ GrandmaUlriraState0Handler::
     ld   a, [wIsBowWowFollowingLink]              ; $4D87: $FA $56 $DB
     cp   $80                                      ; $4D8A: $FE $80
     ld   a, $78                                   ; $4D8C: $3E $78
-    jr   z, jr_018_4DA0                           ; $4D8E: $28 $10
+    jr   z, .jr_4DA0                              ; $4D8E: $28 $10
 
     ldh  a, [hMultiPurposeG]                      ; $4D90: $F0 $E8
     and  a                                        ; $4D92: $A7
@@ -113,29 +113,29 @@ GrandmaUlriraState0Handler::
     ld   a, [wTradeSequenceItem]                  ; $4D95: $FA $0E $DB
     cp   TRADING_ITEM_FISHING_HOOK                ; $4D98: $FE $0B
     ld   a, $5A                                   ; $4D9A: $3E $5A
-    jr   c, jr_018_4DA0                           ; $4D9C: $38 $02
+    jr   c, .jr_4DA0                              ; $4D9C: $38 $02
 
     ld   a, $5F                                   ; $4D9E: $3E $5F
 
-jr_018_4DA0:
+.jr_4DA0
     jp   OpenDialogInTable1                       ; $4DA0: $C3 $73 $23
 
 jr_018_4DA3:
     ld   a, [wTradeSequenceItem]                  ; $4DA3: $FA $0E $DB
     cp   TRADING_ITEM_BROOM                       ; $4DA6: $FE $0A
-    jr   nz, jr_018_4DB5                          ; $4DA8: $20 $0B
+    jr   nz, .jr_4DB5                             ; $4DA8: $20 $0B
 
     ld   [wC167], a                               ; $4DAA: $EA $67 $C1
     call_open_dialog $15C                         ; $4DAD
     jp   IncrementEntityState                     ; $4DB2: $C3 $12 $3B
 
-jr_018_4DB5:
+.jr_4DB5
     jp_open_dialog $15B                           ; $4DB5
 
 GrandmaUlriraState1Handler::
     ld   a, [wDialogAskSelectionIndex]            ; $4DBA: $FA $77 $C1
     and  a                                        ; $4DBD: $A7
-    jr   nz, jr_018_4DCF                          ; $4DBE: $20 $0F
+    jr   nz, .jr_4DCF                             ; $4DBE: $20 $0F
 
     ld   a, JINGLE_TREASURE_FOUND                 ; $4DC0: $3E $01
     ldh  [hJingle], a                             ; $4DC2: $E0 $F2
@@ -144,7 +144,7 @@ GrandmaUlriraState1Handler::
     ld   [hl], $80                                ; $4DCA: $36 $80
     jp   IncrementEntityState                     ; $4DCC: $C3 $12 $3B
 
-jr_018_4DCF:
+.jr_4DCF
     xor  a                                        ; $4DCF: $AF
     ld   [wC167], a                               ; $4DD0: $EA $67 $C1
     call_open_dialog $159                         ; $4DD3
@@ -154,7 +154,7 @@ jr_018_4DCF:
 
 GrandmaUlriraState2Handler::
     call GetEntityTransitionCountdown             ; $4DDD: $CD $05 $0C
-    jr   nz, jr_018_4DF3                          ; $4DE0: $20 $11
+    jr   nz, .jr_4DF3                             ; $4DE0: $20 $11
 
     ld   a, TRADING_ITEM_FISHING_HOOK             ; $4DE2: $3E $0B
     ld   [wTradeSequenceItem], a                  ; $4DE4: $EA $0E $DB
@@ -163,7 +163,7 @@ GrandmaUlriraState2Handler::
     call_open_dialog $15D                         ; $4DEB
     jp   IncrementEntityState                     ; $4DF0: $C3 $12 $3B
 
-jr_018_4DF3:
+.jr_4DF3
     ld   a, $02                                   ; $4DF3: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4DF5: $E0 $A1
     ld   [wC167], a                               ; $4DF7: $EA $67 $C1

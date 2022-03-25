@@ -64,12 +64,12 @@ jr_004_5C43:
     call SetEntitySpriteVariant                   ; $5C4C: $CD $0C $3B
     ldh  a, [hFrameCounter]                       ; $5C4F: $F0 $E7
     and  $00                                      ; $5C51: $E6 $00
-    jr   z, jr_004_5C5A                           ; $5C53: $28 $05
+    jr   z, .jr_5C5A                              ; $5C53: $28 $05
 
     ld   a, $FF                                   ; $5C55: $3E $FF
     call SetEntitySpriteVariant                   ; $5C57: $CD $0C $3B
 
-jr_004_5C5A:
+.jr_5C5A
     call ReturnIfNonInteractive_04                ; $5C5A: $CD $A3 $7F
     call ApplyRecoilIfNeeded_04                   ; $5C5D: $CD $80 $6D
     call label_3B70                               ; $5C60: $CD $70 $3B
@@ -86,7 +86,7 @@ func_004_5C63::
 
     call label_3B44                               ; $5C75: $CD $44 $3B
     call GetEntityTransitionCountdown             ; $5C78: $CD $05 $0C
-    jr   nz, jr_004_5C8C                          ; $5C7B: $20 $0F
+    jr   nz, .jr_5C8C                             ; $5C7B: $20 $0F
 
     call GetRandomByte                            ; $5C7D: $CD $0D $28
     and  $1F                                      ; $5C80: $E6 $1F
@@ -97,9 +97,9 @@ func_004_5C63::
     add  hl, bc                                   ; $5C8A: $09
     ld   [hl], a                                  ; $5C8B: $77
 
-jr_004_5C8C:
+.jr_5C8C
     call GetEntityPrivateCountdown1               ; $5C8C: $CD $00 $0C
-    jr   nz, jr_004_5CA0                          ; $5C8F: $20 $0F
+    jr   nz, .jr_5CA0                             ; $5C8F: $20 $0F
 
     call GetRandomByte                            ; $5C91: $CD $0D $28
     and  $0F                                      ; $5C94: $E6 $0F
@@ -110,7 +110,7 @@ jr_004_5C8C:
     add  hl, bc                                   ; $5C9E: $09
     ld   [hl], a                                  ; $5C9F: $77
 
-jr_004_5CA0:
+.jr_5CA0
     ldh  a, [hFrameCounter]                       ; $5CA0: $F0 $E7
     xor  c                                        ; $5CA2: $A9
     and  $03                                      ; $5CA3: $E6 $03
@@ -120,12 +120,12 @@ jr_004_5CA0:
     add  hl, bc                                   ; $5CAA: $09
     ldh  a, [hActiveEntityPosX]                   ; $5CAB: $F0 $EE
     cp   $28                                      ; $5CAD: $FE $28
-    jr   nc, jr_004_5CB5                          ; $5CAF: $30 $04
+    jr   nc, .jr_5CB5                             ; $5CAF: $30 $04
 
     ld   [hl], $00                                ; $5CB1: $36 $00
     jr   jr_004_5CBB                              ; $5CB3: $18 $06
 
-jr_004_5CB5:
+.jr_5CB5
     cp   $78                                      ; $5CB5: $FE $78
     jr   c, jr_004_5CC0                           ; $5CB7: $38 $07
 
@@ -140,12 +140,12 @@ jr_004_5CC0:
     add  hl, bc                                   ; $5CC3: $09
     ldh  a, [hActiveEntityVisualPosY]             ; $5CC4: $F0 $EC
     cp   $28                                      ; $5CC6: $FE $28
-    jr   nc, jr_004_5CCE                          ; $5CC8: $30 $04
+    jr   nc, .jr_5CCE                             ; $5CC8: $30 $04
 
     ld   [hl], $00                                ; $5CCA: $36 $00
     jr   jr_004_5CD4                              ; $5CCC: $18 $06
 
-jr_004_5CCE:
+.jr_5CCE
     cp   $60                                      ; $5CCE: $FE $60
     jr   c, jr_004_5CD9                           ; $5CD0: $38 $07
 
@@ -167,12 +167,12 @@ jr_004_5CD9:
     add  hl, bc                                   ; $5CE7: $09
     sub  [hl]                                     ; $5CE8: $96
     and  $80                                      ; $5CE9: $E6 $80
-    jr   nz, jr_004_5CEF                          ; $5CEB: $20 $02
+    jr   nz, .jr_5CEF                             ; $5CEB: $20 $02
 
     inc  [hl]                                     ; $5CED: $34
     inc  [hl]                                     ; $5CEE: $34
 
-jr_004_5CEF:
+.jr_5CEF
     dec  [hl]                                     ; $5CEF: $35
     ld   hl, wEntitiesPrivateState2Table          ; $5CF0: $21 $C0 $C2
     add  hl, bc                                   ; $5CF3: $09
@@ -185,12 +185,12 @@ jr_004_5CEF:
     add  hl, bc                                   ; $5CFE: $09
     sub  [hl]                                     ; $5CFF: $96
     and  $80                                      ; $5D00: $E6 $80
-    jr   nz, jr_004_5D06                          ; $5D02: $20 $02
+    jr   nz, .jr_5D06                             ; $5D02: $20 $02
 
     inc  [hl]                                     ; $5D04: $34
     inc  [hl]                                     ; $5D05: $34
 
-jr_004_5D06:
+.jr_5D06
     dec  [hl]                                     ; $5D06: $35
 
 ret_004_5D07:
@@ -208,19 +208,19 @@ func_004_5D08::
     jr   z, ret_004_5D25                          ; $5D15: $28 $0E
 
     bit  7, a                                     ; $5D17: $CB $7F
-    jr   z, jr_004_5D1E                           ; $5D19: $28 $03
+    jr   z, .jr_5D1E                              ; $5D19: $28 $03
 
     inc  [hl]                                     ; $5D1B: $34
     jr   ret_004_5D25                             ; $5D1C: $18 $07
 
-jr_004_5D1E:
+.jr_5D1E
     cp   $10                                      ; $5D1E: $FE $10
-    jr   nc, jr_004_5D24                          ; $5D20: $30 $02
+    jr   nc, .jr_5D24                             ; $5D20: $30 $02
 
     inc  [hl]                                     ; $5D22: $34
     ret                                           ; $5D23: $C9
 
-jr_004_5D24:
+.jr_5D24
     dec  [hl]                                     ; $5D24: $35
 
 ret_004_5D25:

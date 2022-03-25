@@ -25,11 +25,11 @@ AnimalD2EntityHandler::
     ldh  a, [hActiveEntityPosX]                   ; $527D: $F0 $EE
     ld   e, $00                                   ; $527F: $1E $00
     cp   [hl]                                     ; $5281: $BE
-    jr   nc, jr_018_5286                          ; $5282: $30 $02
+    jr   nc, .jr_5286                             ; $5282: $30 $02
 
     ld   e, $02                                   ; $5284: $1E $02
 
-jr_018_5286:
+.jr_5286
     ldh  a, [hFrameCounter]                       ; $5286: $F0 $E7
     rra                                           ; $5288: $1F
     rra                                           ; $5289: $1F

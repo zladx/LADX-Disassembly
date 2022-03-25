@@ -12,7 +12,7 @@ func_018_7D3B::
     call ResetPegasusBoots                        ; $7D3E: $CD $B6 $0C
     ld   a, [wC1A6]                               ; $7D41: $FA $A6 $C1
     and  a                                        ; $7D44: $A7
-    jr   z, jr_018_7D58                           ; $7D45: $28 $11
+    jr   z, .jr_7D58                              ; $7D45: $28 $11
 
     ld   e, a                                     ; $7D47: $5F
     ld   d, b                                     ; $7D48: $50
@@ -20,13 +20,13 @@ func_018_7D3B::
     add  hl, de                                   ; $7D4C: $19
     ld   a, [hl]                                  ; $7D4D: $7E
     cp   $03                                      ; $7D4E: $FE $03
-    jr   nz, jr_018_7D58                          ; $7D50: $20 $06
+    jr   nz, .jr_7D58                             ; $7D50: $20 $06
 
     ld   hl, wEntitiesStatusTable + $0F           ; $7D52: $21 $8F $C2
     add  hl, de                                   ; $7D55: $19
     ld   [hl], $00                                ; $7D56: $36 $00
 
-jr_018_7D58:
+.jr_7D58
     scf                                           ; $7D58: $37
     ret                                           ; $7D59: $C9
 
@@ -96,7 +96,7 @@ func_018_7DA0::
     inc  e                                        ; $7DAE: $1C
     ldh  a, [hActiveEntityType]                   ; $7DAF: $F0 $EB
     cp   ENTITY_WALRUS                            ; $7DB1: $FE $C4
-    jr   z, jr_018_7DC1                           ; $7DB3: $28 $0C
+    jr   z, .jr_7DC1                              ; $7DB3: $28 $0C
 
     push de                                       ; $7DB5: $D5
     call func_018_7EE1                            ; $7DB6: $CD $E1 $7E
@@ -106,7 +106,7 @@ func_018_7DA0::
     pop  de                                       ; $7DBE: $D1
     jr   nz, jr_018_7DE6                          ; $7DBF: $20 $25
 
-jr_018_7DC1:
+.jr_7DC1
     ld   hl, wC1AD                                ; $7DC1: $21 $AD $C1
     ld   [hl], $01                                ; $7DC4: $36 $01
     ld   a, [wDialogState]                        ; $7DC6: $FA $9F $C1
@@ -323,11 +323,11 @@ func_018_7EB2::
     add  hl, bc                                   ; $7EB9: $09
     sub  [hl]                                     ; $7EBA: $96
     bit  7, a                                     ; $7EBB: $CB $7F
-    jr   z, jr_018_7EC0                           ; $7EBD: $28 $01
+    jr   z, .jr_7EC0                              ; $7EBD: $28 $01
 
     inc  e                                        ; $7EBF: $1C
 
-jr_018_7EC0:
+.jr_7EC0
     ld   d, a                                     ; $7EC0: $57
     ret                                           ; $7EC1: $C9
 
@@ -338,11 +338,11 @@ func_018_7EC2::
     add  hl, bc                                   ; $7EC9: $09
     sub  [hl]                                     ; $7ECA: $96
     bit  7, a                                     ; $7ECB: $CB $7F
-    jr   nz, jr_018_7ED0                          ; $7ECD: $20 $01
+    jr   nz, .jr_7ED0                             ; $7ECD: $20 $01
 
     inc  e                                        ; $7ECF: $1C
 
-jr_018_7ED0:
+.jr_7ED0
     ld   d, a                                     ; $7ED0: $57
     ret                                           ; $7ED1: $C9
 
@@ -352,11 +352,11 @@ func_018_7ED2::
     ld   hl, hActiveEntityVisualPosY              ; $7ED6: $21 $EC $FF
     sub  [hl]                                     ; $7ED9: $96
     bit  7, a                                     ; $7EDA: $CB $7F
-    jr   nz, jr_018_7EDF                          ; $7EDC: $20 $01
+    jr   nz, .jr_7EDF                             ; $7EDC: $20 $01
 
     inc  e                                        ; $7EDE: $1C
 
-jr_018_7EDF:
+.jr_7EDF
     ld   d, a                                     ; $7EDF: $57
     ret                                           ; $7EE0: $C9
 
@@ -366,32 +366,32 @@ func_018_7EE1::
     ldh  [hMultiPurpose0], a                      ; $7EE5: $E0 $D7
     ld   a, d                                     ; $7EE7: $7A
     bit  7, a                                     ; $7EE8: $CB $7F
-    jr   z, jr_018_7EEE                           ; $7EEA: $28 $02
+    jr   z, .jr_7EEE                              ; $7EEA: $28 $02
 
     cpl                                           ; $7EEC: $2F
     inc  a                                        ; $7EED: $3C
 
-jr_018_7EEE:
+.jr_7EEE
     push af                                       ; $7EEE: $F5
     call func_018_7EC2                            ; $7EEF: $CD $C2 $7E
     ld   a, e                                     ; $7EF2: $7B
     ldh  [hMultiPurpose1], a                      ; $7EF3: $E0 $D8
     ld   a, d                                     ; $7EF5: $7A
     bit  7, a                                     ; $7EF6: $CB $7F
-    jr   z, jr_018_7EFC                           ; $7EF8: $28 $02
+    jr   z, .jr_7EFC                              ; $7EF8: $28 $02
 
     cpl                                           ; $7EFA: $2F
     inc  a                                        ; $7EFB: $3C
 
-jr_018_7EFC:
+.jr_7EFC
     pop  de                                       ; $7EFC: $D1
     cp   d                                        ; $7EFD: $BA
-    jr   nc, jr_018_7F04                          ; $7EFE: $30 $04
+    jr   nc, .jr_7F04                             ; $7EFE: $30 $04
 
     ldh  a, [hMultiPurpose0]                      ; $7F00: $F0 $D7
     jr   jr_018_7F06                              ; $7F02: $18 $02
 
-jr_018_7F04:
+.jr_7F04
     ldh  a, [hMultiPurpose1]                      ; $7F04: $F0 $D8
 
 jr_018_7F06:
@@ -438,14 +438,14 @@ func_018_7F2C::
 
 func_018_7F3B::
     call GetEntityTransitionCountdown             ; $7F3B: $CD $05 $0C
-    jr   nz, jr_018_7F4C                          ; $7F3E: $20 $0C
+    jr   nz, .jr_7F4C                             ; $7F3E: $20 $0C
 
     call PlayBombExplosionSfx                     ; $7F40: $CD $4B $0C
     call label_27DD                               ; $7F43: $CD $DD $27
     call SetRoomStatus20                          ; $7F46: $CD $B9 $7F
     jp   DidKillEnemy                             ; $7F49: $C3 $50 $3F
 
-jr_018_7F4C:
+.jr_7F4C
     jp   label_018_7F4F                           ; $7F4C: $C3 $4F $7F
 
 label_018_7F4F:
@@ -492,14 +492,14 @@ label_018_7F6F:
     ld   [hl], a                                  ; $7F96: $77
     ldh  a, [hIsSideScrolling]                    ; $7F97: $F0 $F9
     and  a                                        ; $7F99: $A7
-    jr   z, jr_018_7FA4                           ; $7F9A: $28 $08
+    jr   z, .jr_7FA4                              ; $7F9A: $28 $08
 
     ld   hl, wEntitiesSpeedYTable                 ; $7F9C: $21 $50 $C2
     add  hl, bc                                   ; $7F9F: $09
     ld   [hl], $F0                                ; $7FA0: $36 $F0
     jr   jr_018_7FB0                              ; $7FA2: $18 $0C
 
-jr_018_7FA4:
+.jr_7FA4
     ld   hl, wEntitiesSpeedZTable                 ; $7FA4: $21 $20 $C3
     add  hl, de                                   ; $7FA7: $19
     ld   [hl], $10                                ; $7FA8: $36 $10

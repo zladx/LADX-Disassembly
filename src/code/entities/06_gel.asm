@@ -55,14 +55,14 @@ jr_006_7C2E:
     ld   a, [hl]                                  ; $7C43: $7E
     and  $80                                      ; $7C44: $E6 $80
     ldh  [hMultiPurposeG], a                      ; $7C46: $E0 $E8
-    jr   z, jr_006_7C50                           ; $7C48: $28 $06
+    jr   z, .jr_7C50                              ; $7C48: $28 $06
 
     ld   [hl], b                                  ; $7C4A: $70
     ld   hl, wEntitiesSpeedZTable                 ; $7C4B: $21 $20 $C3
     add  hl, bc                                   ; $7C4E: $09
     ld   [hl], b                                  ; $7C4F: $70
 
-jr_006_7C50:
+.jr_7C50
     ldh  a, [hActiveEntityType]                   ; $7C50: $F0 $EB
     cp   ENTITY_GEL                               ; $7C52: $FE $1B
     jr   nz, jr_006_7CB7                          ; $7C54: $20 $61
@@ -81,7 +81,7 @@ jr_006_7C50:
     push af                                       ; $7C66: $F5
     ld   hl, wEntitiesTypeTable                   ; $7C67: $21 $A0 $C3
 
-jr_006_7C6A:
+.jr_7C6A
     add  hl, bc                                   ; $7C6A: $09
     ld   [hl], $1C                                ; $7C6B: $36 $1C
     call label_3965                               ; $7C6D: $CD $65 $39
@@ -133,7 +133,7 @@ jr_006_7CB7:
     add  hl, bc                                   ; $7CBD: $09
     ld   a, [hl]                                  ; $7CBE: $7E
     and  a                                        ; $7CBF: $A7
-    jr   nz, jr_006_7CD4                          ; $7CC0: $20 $12
+    jr   nz, .jr_7CD4                             ; $7CC0: $20 $12
 
     ldh  a, [hActiveEntityState]                  ; $7CC2: $F0 $F0
     and  $01                                      ; $7CC4: $E6 $01
@@ -141,26 +141,26 @@ jr_006_7CB7:
     add  hl, bc                                   ; $7CC9: $09
     ld   [hl], a                                  ; $7CCA: $77
     dec  a                                        ; $7CCB: $3D
-    jr   nz, jr_006_7CD4                          ; $7CCC: $20 $06
+    jr   nz, .jr_7CD4                             ; $7CCC: $20 $06
 
     ld   hl, wEntitiesPrivateCountdown2Table      ; $7CCE: $21 $00 $C3
     add  hl, bc                                   ; $7CD1: $09
     ld   [hl], $08                                ; $7CD2: $36 $08
 
-jr_006_7CD4:
+.jr_7CD4
     ldh  a, [hActiveEntityState]                  ; $7CD4: $F0 $F0
     cp   $04                                      ; $7CD6: $FE $04
-    jr   z, jr_006_7CE5                           ; $7CD8: $28 $0B
+    jr   z, .jr_7CE5                              ; $7CD8: $28 $0B
 
     ld   hl, wEntitiesPrivateCountdown3Table      ; $7CDA: $21 $80 $C4
     add  hl, bc                                   ; $7CDD: $09
     ld   a, [hl]                                  ; $7CDE: $7E
     and  a                                        ; $7CDF: $A7
-    jr   nz, jr_006_7CE5                          ; $7CE0: $20 $03
+    jr   nz, .jr_7CE5                             ; $7CE0: $20 $03
 
     call label_3B39                               ; $7CE2: $CD $39 $3B
 
-jr_006_7CE5:
+.jr_7CE5
     ldh  a, [hActiveEntityState]                  ; $7CE5: $F0 $F0
     JP_TABLE                                      ; $7CE7
 ._00 dw GelState0Handler
@@ -177,13 +177,13 @@ GelState1Handler::
     call ClearEntitySpeed                         ; $7CF9: $CD $7F $3D
     call GetRandomByte                            ; $7CFC: $CD $0D $28
     and  $0F                                      ; $7CFF: $E6 $0F
-    jr   nz, jr_006_7D0B                          ; $7D01: $20 $08
+    jr   nz, .jr_7D0B                             ; $7D01: $20 $08
 
     call GetEntityTransitionCountdown             ; $7D03: $CD $05 $0C
     ld   [hl], $50                                ; $7D06: $36 $50
     jp   IncrementEntityState                     ; $7D08: $C3 $12 $3B
 
-jr_006_7D0B:
+.jr_7D0B
     call IncrementEntityState                     ; $7D0B: $CD $12 $3B
     ld   [hl], b                                  ; $7D0E: $70
 
@@ -213,7 +213,7 @@ GelState0Handler::
 
 GelState2Handler::
     call GetEntityTransitionCountdown             ; $7D36: $CD $05 $0C
-    jr   nz, jr_006_7D4A                          ; $7D39: $20 $0F
+    jr   nz, .jr_7D4A                             ; $7D39: $20 $0F
 
     call IncrementEntityState                     ; $7D3B: $CD $12 $3B
     ld   a, $10                                   ; $7D3E: $3E $10
@@ -223,17 +223,17 @@ GelState2Handler::
     ld   [hl], $20                                ; $7D47: $36 $20
     ret                                           ; $7D49: $C9
 
-jr_006_7D4A:
+.jr_7D4A
     call GetEntityTransitionCountdown             ; $7D4A: $CD $05 $0C
     ld   hl, wEntitiesSpeedXTable                 ; $7D4D: $21 $40 $C2
     add  hl, bc                                   ; $7D50: $09
     and  $04                                      ; $7D51: $E6 $04
-    jr   nz, jr_006_7D59                          ; $7D53: $20 $04
+    jr   nz, .jr_7D59                             ; $7D53: $20 $04
 
     ld   [hl], $08                                ; $7D55: $36 $08
     jr   jr_006_7D5B                              ; $7D57: $18 $02
 
-jr_006_7D59:
+.jr_7D59
     ld   [hl], $F8                                ; $7D59: $36 $F8
 
 jr_006_7D5B:
@@ -256,7 +256,7 @@ ret_006_7D6F:
 
 GelState4Handler::
     call GetEntityTransitionCountdown             ; $7D70: $CD $05 $0C
-    jr   nz, jr_006_7D91                          ; $7D73: $20 $1C
+    jr   nz, .jr_7D91                             ; $7D73: $20 $1C
 
     ld   hl, wEntitiesPrivateCountdown3Table      ; $7D75: $21 $80 $C4
     add  hl, bc                                   ; $7D78: $09
@@ -273,7 +273,7 @@ GelState4Handler::
     ld   [hl], $03                                ; $7D8E: $36 $03
     ret                                           ; $7D90: $C9
 
-jr_006_7D91:
+.jr_7D91
     push af                                       ; $7D91: $F5
     rra                                           ; $7D92: $1F
     and  $07                                      ; $7D93: $E6 $07

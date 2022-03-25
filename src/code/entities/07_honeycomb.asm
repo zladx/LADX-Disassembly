@@ -18,12 +18,12 @@ HoneycombEntityHandler::
     ld   [wD201], a                               ; $4CA8: $EA $01 $D2
     call GetEntityTransitionCountdown             ; $4CAB: $CD $05 $0C
     and  $20                                      ; $4CAE: $E6 $20
-    jr   z, jr_007_4CB6                           ; $4CB0: $28 $04
+    jr   z, .jr_4CB6                              ; $4CB0: $28 $04
 
     ld   hl, hActiveEntityPosX                    ; $4CB2: $21 $EE $FF
     dec  [hl]                                     ; $4CB5: $35
 
-jr_007_4CB6:
+.jr_4CB6
     ld   de, HoneycombSpriteVariants              ; $4CB6: $11 $93 $4C
     call RenderActiveEntitySpritesPair            ; $4CB9: $CD $C0 $3B
     call ReturnIfNonInteractive_07                ; $4CBC: $CD $96 $7D
@@ -38,7 +38,7 @@ jr_007_4CB6:
 func_007_4CCC::
     ld   a, [wDB7F]                               ; $4CCC: $FA $7F $DB
     cp   $02                                      ; $4CCF: $FE $02
-    jr   nz, jr_007_4CE7                          ; $4CD1: $20 $14
+    jr   nz, .jr_4CE7                             ; $4CD1: $20 $14
 
     ld   hl, wEntitiesPosYTable                   ; $4CD3: $21 $10 $C2
     add  hl, bc                                   ; $4CD6: $09
@@ -52,7 +52,7 @@ func_007_4CCC::
     ld   [hl], $04                                ; $4CE4: $36 $04
     ret                                           ; $4CE6: $C9
 
-jr_007_4CE7:
+.jr_4CE7
     xor  a                                        ; $4CE7: $AF
     ld   [wD202], a                               ; $4CE8: $EA $02 $D2
     call IncrementEntityState                     ; $4CEB: $CD $12 $3B
@@ -60,7 +60,7 @@ jr_007_4CE7:
 func_007_4CEE::
     ld   a, ENTITY_HONEYCOMB                      ; $4CEE: $3E $B3
     call SpawnNewEntity_trampoline                ; $4CF0: $CD $86 $3B
-    jr   c, jr_007_4D1D                           ; $4CF3: $38 $28
+    jr   c, .jr_4D1D                              ; $4CF3: $38 $28
 
     ldh  a, [hMultiPurpose0]                      ; $4CF5: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $4CF7: $21 $00 $C2
@@ -85,7 +85,7 @@ func_007_4CEE::
     and  a                                        ; $4D1B: $A7
     ret                                           ; $4D1C: $C9
 
-jr_007_4D1D:
+.jr_4D1D
     scf                                           ; $4D1D: $37
     ret                                           ; $4D1E: $C9
 
@@ -204,7 +204,7 @@ func_007_4DA5::
     ld   hl, Data_007_4DA1                        ; $4DBC: $21 $A1 $4D
     add  hl, de                                   ; $4DBF: $19
     cp   [hl]                                     ; $4DC0: $BE
-    jr   nz, jr_007_4DCB                          ; $4DC1: $20 $08
+    jr   nz, .jr_4DCB                             ; $4DC1: $20 $08
 
     ld   hl, wEntitiesPrivateState1Table          ; $4DC3: $21 $B0 $C2
     add  hl, bc                                   ; $4DC6: $09
@@ -212,7 +212,7 @@ func_007_4DA5::
     xor  $01                                      ; $4DC8: $EE $01
     ld   [hl], a                                  ; $4DCA: $77
 
-jr_007_4DCB:
+.jr_4DCB
     ld   hl, wEntitiesPrivateState2Table          ; $4DCB: $21 $C0 $C2
     add  hl, bc                                   ; $4DCE: $09
     ld   e, [hl]                                  ; $4DCF: $5E
@@ -261,17 +261,17 @@ func_007_4E25::
     ld   a, [hl]                                  ; $4E32: $7E
     and  a                                        ; $4E33: $A7
 
-jr_007_4E34:
+.jr_4E34
     jp   z, func_007_7EA4                         ; $4E34: $CA $A4 $7E
 
     ldh  a, [hFrameCounter]                       ; $4E37: $F0 $E7
     and  $07                                      ; $4E39: $E6 $07
     ld   hl, wEntitiesInertiaTable                ; $4E3B: $21 $D0 $C3
 
-jr_007_4E3E:
+.jr_4E3E
     add  hl, bc                                   ; $4E3E: $09
     cp   [hl]                                     ; $4E3F: $BE
-    jr   nz, jr_007_4E89                          ; $4E40: $20 $47
+    jr   nz, .jr_4E89                             ; $4E40: $20 $47
 
     ld   a, [wD204]                               ; $4E42: $FA $04 $D2
     ld   e, a                                     ; $4E45: $5F
@@ -319,7 +319,7 @@ jr_007_4E3E:
     pop  af                                       ; $4E86: $F1
     ldh  [hLinkPositionX], a                      ; $4E87: $E0 $98
 
-jr_007_4E89:
+.jr_4E89
     jp   UpdateEntityPosWithSpeed_07              ; $4E89: $C3 $0A $7E
 
 func_007_4E8C::

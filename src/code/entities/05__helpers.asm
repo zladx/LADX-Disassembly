@@ -196,11 +196,11 @@ func_005_7B04::
     add  hl, bc                                   ; $7B0B: $09
     sub  [hl]                                     ; $7B0C: $96
     bit  7, a                                     ; $7B0D: $CB $7F
-    jr   z, jr_005_7B12                           ; $7B0F: $28 $01
+    jr   z, .jr_7B12                              ; $7B0F: $28 $01
 
     inc  e                                        ; $7B11: $1C
 
-jr_005_7B12:
+.jr_7B12
     ld   d, a                                     ; $7B12: $57
     ret                                           ; $7B13: $C9
 
@@ -211,11 +211,11 @@ func_005_7B14::
     add  hl, bc                                   ; $7B1B: $09
     sub  [hl]                                     ; $7B1C: $96
     bit  7, a                                     ; $7B1D: $CB $7F
-    jr   nz, jr_005_7B22                          ; $7B1F: $20 $01
+    jr   nz, .jr_7B22                             ; $7B1F: $20 $01
 
     inc  e                                        ; $7B21: $1C
 
-jr_005_7B22:
+.jr_7B22
     ld   d, a                                     ; $7B22: $57
     ret                                           ; $7B23: $C9
 
@@ -225,32 +225,32 @@ func_005_7B24::
     ldh  [hMultiPurpose0], a                      ; $7B28: $E0 $D7
     ld   a, d                                     ; $7B2A: $7A
     bit  7, a                                     ; $7B2B: $CB $7F
-    jr   z, jr_005_7B31                           ; $7B2D: $28 $02
+    jr   z, .jr_7B31                              ; $7B2D: $28 $02
 
     cpl                                           ; $7B2F: $2F
     inc  a                                        ; $7B30: $3C
 
-jr_005_7B31:
+.jr_7B31
     push af                                       ; $7B31: $F5
     call func_005_7B14                            ; $7B32: $CD $14 $7B
     ld   a, e                                     ; $7B35: $7B
     ldh  [hMultiPurpose1], a                      ; $7B36: $E0 $D8
     ld   a, d                                     ; $7B38: $7A
     bit  7, a                                     ; $7B39: $CB $7F
-    jr   z, jr_005_7B3F                           ; $7B3B: $28 $02
+    jr   z, .jr_7B3F                              ; $7B3B: $28 $02
 
     cpl                                           ; $7B3D: $2F
     inc  a                                        ; $7B3E: $3C
 
-jr_005_7B3F:
+.jr_7B3F
     pop  de                                       ; $7B3F: $D1
     cp   d                                        ; $7B40: $BA
-    jr   nc, jr_005_7B47                          ; $7B41: $30 $04
+    jr   nc, .jr_7B47                             ; $7B41: $30 $04
 
     ldh  a, [hMultiPurpose0]                      ; $7B43: $F0 $D7
     jr   jr_005_7B49                              ; $7B45: $18 $02
 
-jr_005_7B47:
+.jr_7B47
     ldh  a, [hMultiPurpose1]                      ; $7B47: $F0 $D8
 
 jr_005_7B49:

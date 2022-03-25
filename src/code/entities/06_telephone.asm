@@ -22,13 +22,13 @@ TelephoneEntityHandler::
     ld   e, $6E                                   ; $6A98: $1E $6E
     ld   a, [wTradeSequenceItem]                  ; $6A9A: $FA $0E $DB
     cp   TRADING_ITEM_BROOM
-    jr   nz, jr_006_6AA9                          ; $6A9F: $20 $08
+    jr   nz, .jr_6AA9                             ; $6A9F: $20 $08
 
     ld   a, [wHasInstrument5]                     ; $6AA1: $FA $69 $DB
     and  $02                                      ; $6AA4: $E6 $02
     jp   nz, label_006_6BAD                       ; $6AA6: $C2 $AD $6B
 
-jr_006_6AA9:
+.jr_6AA9
     ld   e, $41                                   ; $6AA9: $1E $41
     ld   a, [wIndoorBRoomStatus + $A9]            ; $6AAB: $FA $A9 $DA
     and  $20                                      ; $6AAE: $E6 $20
@@ -73,12 +73,12 @@ jr_006_6AA9:
     inc  [hl]                                     ; $6AFA: $34
     ld   a, [hl]                                  ; $6AFB: $7E
     cp   $03                                      ; $6AFC: $FE $03
-    jr   nz, jr_006_6B02                          ; $6AFE: $20 $02
+    jr   nz, .jr_6B02                             ; $6AFE: $20 $02
 
     xor  a                                        ; $6B00: $AF
     ld   [hl], a                                  ; $6B01: $77
 
-jr_006_6B02:
+.jr_6B02
     ld   e, $28                                   ; $6B02: $1E $28
     add  e                                        ; $6B04: $83
     ld   e, a                                     ; $6B05: $5F
@@ -108,14 +108,14 @@ jr_006_6B09:
 
     ld   a, [wIsGhostFollowingLink]               ; $6B30: $FA $79 $DB
     and  a                                        ; $6B33: $A7
-    jr   z, jr_006_6B3F                           ; $6B34: $28 $09
+    jr   z, .jr_6B3F                              ; $6B34: $28 $09
 
     ld   e, $4B                                   ; $6B36: $1E $4B
     ld   a, [wIndoorARoomStatus + $E3]            ; $6B38: $FA $E3 $D9
     and  $40                                      ; $6B3B: $E6 $40
     jr   z, label_006_6BAD                        ; $6B3D: $28 $6E
 
-jr_006_6B3F:
+.jr_6B3F
     ld   e, $4C                                   ; $6B3F: $1E $4C
     ld   a, [wHasInstrument5]                     ; $6B41: $FA $69 $DB
     and  $02                                      ; $6B44: $E6 $02
@@ -134,7 +134,7 @@ jr_006_6B3F:
     ld   e, $4E                                   ; $6B5B: $1E $4E
     ld   a, [wIsRoosterFollowingLink]             ; $6B5D: $FA $7B $DB
     and  a                                        ; $6B60: $A7
-    jr   z, jr_006_6B6E                           ; $6B61: $28 $0B
+    jr   z, .jr_6B6E                              ; $6B61: $28 $0B
 
     ld   e, $46                                   ; $6B63: $1E $46
     ld   a, [wHasBirdKey]                         ; $6B65: $FA $14 $DB
@@ -143,10 +143,10 @@ jr_006_6B3F:
 
     ld   e, $41                                   ; $6B6C: $1E $41
 
-jr_006_6B6E:
+.jr_6B6E
     ld   a, [wHasInstrument7]                     ; $6B6E: $FA $6B $DB
     and  $02                                      ; $6B71: $E6 $02
-    jr   nz, jr_006_6B7C                          ; $6B73: $20 $07
+    jr   nz, .jr_6B7C                             ; $6B73: $20 $07
 
     ld   a, e                                     ; $6B75: $7B
     cp   $4E                                      ; $6B76: $FE $4E
@@ -154,7 +154,7 @@ jr_006_6B6E:
 
     jr   label_006_6BB3                           ; $6B7A: $18 $37
 
-jr_006_6B7C:
+.jr_6B7C
     ld   e, $4F                                   ; $6B7C: $1E $4F
     ld   a, [wOverworldRoomStatus + $10]          ; $6B7E: $FA $10 $D8
     and  $30                                      ; $6B81: $E6 $30

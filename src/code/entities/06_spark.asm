@@ -48,7 +48,7 @@ SparkCounterClockwiseEntityHandler::
     ld   a, [hl]                                  ; $666B: $7E
     pop  hl                                       ; $666C: $E1
     and  [hl]                                     ; $666D: $A6
-    jr   nz, jr_006_6685                          ; $666E: $20 $15
+    jr   nz, .jr_6685                             ; $666E: $20 $15
 
     call GetEntityTransitionCountdown             ; $6670: $CD $05 $0C
     jr   nz, jr_006_6690                          ; $6673: $20 $1B
@@ -63,7 +63,7 @@ SparkCounterClockwiseEntityHandler::
     ld   [hl], $09                                ; $6681: $36 $09
     jr   jr_006_669D                              ; $6683: $18 $18
 
-jr_006_6685:
+.jr_6685
     ld   hl, wEntitiesPrivateState1Table          ; $6685: $21 $B0 $C2
     add  hl, bc                                   ; $6688: $09
     inc  [hl]                                     ; $6689: $34

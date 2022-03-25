@@ -316,16 +316,16 @@ func_023_7E95::
     ld   de, wDrawCommandAlt                      ; $7EC9: $11 $91 $DC
     ld   a, [wD00D]                               ; $7ECC: $FA $0D $D0
     cp   $50                                      ; $7ECF: $FE $50
-    jr   z, jr_023_7EEE                           ; $7ED1: $28 $1B
+    jr   z, .jr_7EEE                              ; $7ED1: $28 $1B
 
     cp   $51                                      ; $7ED3: $FE $51
-    jr   z, jr_023_7EEE                           ; $7ED5: $28 $17
+    jr   z, .jr_7EEE                              ; $7ED5: $28 $17
 
     cp   $52                                      ; $7ED7: $FE $52
-    jr   z, jr_023_7EEE                           ; $7ED9: $28 $13
+    jr   z, .jr_7EEE                              ; $7ED9: $28 $13
 
     cp   $53                                      ; $7EDB: $FE $53
-    jr   z, jr_023_7EEE                           ; $7EDD: $28 $0F
+    jr   z, .jr_7EEE                              ; $7EDD: $28 $0F
 
     ld   a, [hl+]                                 ; $7EDF: $2A
     ld   [de], a                                  ; $7EE0: $12
@@ -342,7 +342,7 @@ func_023_7E95::
     ld   [de], a                                  ; $7EEC: $12
     ret                                           ; $7EED: $C9
 
-jr_023_7EEE:
+.jr_7EEE
     ld   a, [hl+]                                 ; $7EEE: $2A
     ld   [de], a                                  ; $7EEF: $12
     inc  de                                       ; $7EF0: $13

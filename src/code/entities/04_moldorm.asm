@@ -70,12 +70,12 @@ MoldormDestructionFlash2Handler::
     add  hl, bc                                   ; $56FB: $09
     ld   a, [hl]                                  ; $56FC: $7E
     cp   $04                                      ; $56FD: $FE $04
-    jr   z, jr_004_5705                           ; $56FF: $28 $04
+    jr   z, .jr_5705                              ; $56FF: $28 $04
 
     inc  [hl]                                     ; $5701: $34
     jp   func_004_5A05                            ; $5702: $C3 $05 $5A
 
-jr_004_5705:
+.jr_5705
     call GetEntityTransitionCountdown             ; $5705: $CD $05 $0C
     ld   [hl], $30                                ; $5708: $36 $30
     jp   IncrementEntityState                     ; $570A: $C3 $12 $3B
@@ -129,33 +129,33 @@ DropHeartContainer::
     call SpawnNewEntity_trampoline                ; $5753: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $5756: $F0 $D7
     cp   $88                                      ; $5758: $FE $88
-    jr   c, jr_004_575E                           ; $575A: $38 $02
+    jr   c, .jr_575E                              ; $575A: $38 $02
 
     ld   a, $88                                   ; $575C: $3E $88
 
-jr_004_575E:
+.jr_575E
     cp   $18                                      ; $575E: $FE $18
-    jr   nc, jr_004_5764                          ; $5760: $30 $02
+    jr   nc, .jr_5764                             ; $5760: $30 $02
 
     ld   a, $18                                   ; $5762: $3E $18
 
-jr_004_5764:
+.jr_5764
     ld   hl, wEntitiesPosXTable                   ; $5764: $21 $00 $C2
     add  hl, de                                   ; $5767: $19
     ld   [hl], a                                  ; $5768: $77
     ldh  a, [hMultiPurpose1]                      ; $5769: $F0 $D8
     cp   $70                                      ; $576B: $FE $70
-    jr   c, jr_004_5771                           ; $576D: $38 $02
+    jr   c, .jr_5771                              ; $576D: $38 $02
 
     ld   a, $70                                   ; $576F: $3E $70
 
-jr_004_5771:
+.jr_5771
     cp   $20                                      ; $5771: $FE $20
-    jr   nc, jr_004_5777                          ; $5773: $30 $02
+    jr   nc, .jr_5777                             ; $5773: $30 $02
 
     ld   a, $20                                   ; $5775: $3E $20
 
-jr_004_5777:
+.jr_5777
     ld   hl, wEntitiesPosYTable                   ; $5777: $21 $10 $C2
     add  hl, de                                   ; $577A: $19
     ld   [hl], a                                  ; $577B: $77
@@ -180,7 +180,7 @@ MoldormEntityActiveHandler::
     add  hl, bc                                   ; $57A0: $09
     ld   a, [hl]                                  ; $57A1: $7E
     cp   $02                                      ; $57A2: $FE $02
-    jr   c, jr_004_57AE                           ; $57A4: $38 $08
+    jr   c, .jr_57AE                              ; $57A4: $38 $08
 
     ld   hl, wEntitiesPrivateCountdown2Table      ; $57A6: $21 $00 $C3
     add  hl, bc                                   ; $57A9: $09
@@ -188,7 +188,7 @@ MoldormEntityActiveHandler::
     and  a                                        ; $57AB: $A7
     jr   z, jr_004_57B8                           ; $57AC: $28 $0A
 
-jr_004_57AE:
+.jr_57AE
     call jr_004_57C6                              ; $57AE: $CD $C6 $57
     ld   a, $01                                   ; $57B1: $3E $01
     ld   [wD3D6], a                               ; $57B3: $EA $D6 $D3
@@ -307,7 +307,7 @@ func_004_5902::
     ld   hl, Data_004_57F2                        ; $5920: $21 $F2 $57
     add  hl, de                                   ; $5923: $19
 
-jr_004_5924:
+.jr_5924
     ld   c, $08                                   ; $5924: $0E $08
     call RenderActiveEntitySpritesRect            ; $5926: $CD $E6 $3C
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5929: $21 $40 $C3
@@ -342,7 +342,7 @@ jr_004_5924:
     call RenderActiveEntitySpritesPair            ; $595D: $CD $C0 $3B
     ld   hl, wEntitiesPrivateState3Table          ; $5960: $21 $D0 $C2
 
-jr_004_5963:
+.jr_5963
     add  hl, bc                                   ; $5963: $09
     ld   a, [hl]                                  ; $5964: $7E
     cp   $03                                      ; $5965: $FE $03

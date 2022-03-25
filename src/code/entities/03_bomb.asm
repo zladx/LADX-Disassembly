@@ -9,25 +9,25 @@ BombEntityHandler::
     cp   $18                                      ; $66A2: $FE $18
     jp   c, label_003_65E2                        ; $66A4: $DA $E2 $65
 
-    jr   nz, jr_003_66AD                          ; $66A7: $20 $04
+    jr   nz, .jr_66AD                             ; $66A7: $20 $04
 
     dec  [hl]                                     ; $66A9: $35
     call PlayBombExplosionSfx                     ; $66AA: $CD $4B $0C
 
-jr_003_66AD:
+.jr_66AD
     ld   hl, wHasPlacedBomb                       ; $66AD: $21 $4E $C1
     inc  [hl]                                     ; $66B0: $34
     cp   $22                                      ; $66B1: $FE $22
     jr   c, jr_003_668C                           ; $66B3: $38 $D7
 
     cp   $48                                      ; $66B5: $FE $48
-    jr   nz, jr_003_66BF                          ; $66B7: $20 $06
+    jr   nz, .jr_66BF                             ; $66B7: $20 $06
 
     ld   hl, wEntitiesFlashCountdownTable         ; $66B9: $21 $20 $C4
     add  hl, bc                                   ; $66BC: $09
     ld   [hl], $30                                ; $66BD: $36 $30
 
-jr_003_66BF:
+.jr_66BF
     call func_003_6711                            ; $66BF: $CD $11 $67
     call CheckForEntityFallingDownQuicksandHole   ; $66C2: $CD $EA $5C
     call ReturnIfNonInteractive_03                ; $66C5: $CD $78 $7F
@@ -43,7 +43,7 @@ jr_003_66BF:
 
     ld   a, [wBButtonSlot]                        ; $66DB: $FA $00 $DB
     cp   INVENTORY_BOMBS                          ; $66DE: $FE $02
-    jr   nz, jr_003_66EA                          ; $66E0: $20 $08
+    jr   nz, .jr_66EA                             ; $66E0: $20 $08
 
     ldh  a, [hJoypadState]                        ; $66E2: $F0 $CC
     and  J_B                                      ; $66E4: $E6 $20
@@ -51,7 +51,7 @@ jr_003_66BF:
 
     jr   jr_003_66FA                              ; $66E8: $18 $10
 
-jr_003_66EA:
+.jr_66EA
     ld   a, [wAButtonSlot]                        ; $66EA: $FA $01 $DB
     cp   INVENTORY_BOMBS                          ; $66ED: $FE $02
     jr   nz, jr_003_66FA                          ; $66EF: $20 $09
@@ -69,11 +69,11 @@ jr_003_66FA:
     add  hl, bc                                   ; $66FD: $09
     ld   a, [hl]                                  ; $66FE: $7E
     and  $03                                      ; $66FF: $E6 $03
-    jr   z, jr_003_6706                           ; $6701: $28 $03
+    jr   z, .jr_6706                              ; $6701: $28 $03
 
     call func_003_6B34                            ; $6703: $CD $34 $6B
 
-jr_003_6706:
+.jr_6706
     ldh  a, [hIsSideScrolling]                    ; $6706: $F0 $F9
     and  a                                        ; $6708: $A7
     ret  nz                                       ; $6709: $C0

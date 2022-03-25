@@ -35,14 +35,14 @@ BunnyCallingMarinEntityHandler::
     ld   a, [hl]                                  ; $52CA: $7E
     and  $80                                      ; $52CB: $E6 $80
     ldh  [hMultiPurposeG], a                      ; $52CD: $E0 $E8
-    jr   z, jr_018_52D7                           ; $52CF: $28 $06
+    jr   z, .jr_52D7                              ; $52CF: $28 $06
 
     ld   [hl], b                                  ; $52D1: $70
     ld   hl, wEntitiesSpeedZTable                 ; $52D2: $21 $20 $C3
     add  hl, bc                                   ; $52D5: $09
     ld   [hl], b                                  ; $52D6: $70
 
-jr_018_52D7:
+.jr_52D7
     ldh  a, [hActiveEntityState]                  ; $52D7: $F0 $F0
     JP_TABLE                                      ; $52D9
 ._00 dw BunnyCallingMarinState0Handler
@@ -60,7 +60,7 @@ BunnyCallingMarinState0Handler::
     call AddEntitySpeedToPos_18                   ; $52EC: $CD $6C $7E
     ldh  a, [hActiveEntityPosX]                   ; $52EF: $F0 $EE
     cp   $20                                      ; $52F1: $FE $20
-    jr   nz, jr_018_5304                          ; $52F3: $20 $0F
+    jr   nz, .jr_5304                             ; $52F3: $20 $0F
 
     ld   a, $01                                   ; $52F5: $3E $01
     call func_018_59AE                            ; $52F7: $CD $AE $59
@@ -71,7 +71,7 @@ BunnyCallingMarinState0Handler::
     pop  bc                                       ; $5302: $C1
     ret                                           ; $5303: $C9
 
-jr_018_5304:
+.jr_5304
     cp   $48                                      ; $5304: $FE $48
     ret  nz                                       ; $5306: $C0
 
@@ -115,20 +115,20 @@ BunnyCallingMarinState2Handler::
     ret  nz                                       ; $533F: $C0
 
     call GetEntityTransitionCountdown             ; $5340: $CD $05 $0C
-    jr   nz, jr_018_534F                          ; $5343: $20 $0A
+    jr   nz, .jr_534F                             ; $5343: $20 $0A
 
     ld   [hl], $10                                ; $5345: $36 $10
     call_open_dialog $1E5                         ; $5347
     jp   IncrementEntityState                     ; $534C: $C3 $12 $3B
 
-jr_018_534F:
+.jr_534F
     ld   e, $02                                   ; $534F: $1E $02
     cp   $08                                      ; $5351: $FE $08
-    jr   nc, jr_018_5357                          ; $5353: $30 $02
+    jr   nc, .jr_5357                             ; $5353: $30 $02
 
     ld   e, $00                                   ; $5355: $1E $00
 
-jr_018_5357:
+.jr_5357
     ld   a, e                                     ; $5357: $7B
     jp   func_018_59AE                            ; $5358: $C3 $AE $59
 
@@ -143,11 +143,11 @@ BunnyCallingMarinState3Handler::
 
     ld   e, $01                                   ; $5369: $1E $01
     cp   $08                                      ; $536B: $FE $08
-    jr   c, jr_018_5371                           ; $536D: $38 $02
+    jr   c, .jr_5371                              ; $536D: $38 $02
 
     ld   e, $02                                   ; $536F: $1E $02
 
-jr_018_5371:
+.jr_5371
     ld   a, e                                     ; $5371: $7B
     jp   func_018_59AE                            ; $5372: $C3 $AE $59
 
@@ -164,14 +164,14 @@ jr_018_5375:
     ldh  a, [hActiveEntityPosX]                   ; $5386: $F0 $EE
     and  $FC                                      ; $5388: $E6 $FC
     cp   $E0                                      ; $538A: $FE $E0
-    jr   z, jr_018_5397                           ; $538C: $28 $09
+    jr   z, .jr_5397                              ; $538C: $28 $09
 
     ld   hl, wEntitiesSpeedXTable                 ; $538E: $21 $40 $C2
     add  hl, bc                                   ; $5391: $09
     ld   [hl], $EC                                ; $5392: $36 $EC
     call AddEntitySpeedToPos_18                   ; $5394: $CD $6C $7E
 
-jr_018_5397:
+.jr_5397
     ld   a, [wMarinEntityIndex]                   ; $5397: $FA $0F $C5
     ld   e, a                                     ; $539A: $5F
     ld   d, b                                     ; $539B: $50

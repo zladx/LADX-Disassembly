@@ -22,7 +22,7 @@ CrowEntityHandler::
     add  hl, bc                                   ; $5CA2: $09
     ld   a, [hl]                                  ; $5CA3: $7E
     cp   $10                                      ; $5CA4: $FE $10
-    jr   c, jr_006_5CAB                           ; $5CA6: $38 $03
+    jr   c, .jr_5CAB                              ; $5CA6: $38 $03
 
     srl  a                                        ; $5CA8: $CB $3F
 IF __PATCH_0__
@@ -31,7 +31,7 @@ ENDC
 
     ld   [hl], a                                  ; $5CAA: $77
 
-jr_006_5CAB:
+.jr_5CAB
     ldh  a, [hRoomStatus]                         ; $5CAB: $F0 $F8
     and  ROOM_STATUS_EVENT_1                      ; $5CAD: $E6 $10
     jp   nz, ClearEntityStatus_06                 ; $5CAF: $C2 $DB $65
@@ -48,18 +48,18 @@ jr_006_5CBE:
     add  hl, bc                                   ; $5CC1: $09
     ld   a, [hl]                                  ; $5CC2: $7E
     and  a                                        ; $5CC3: $A7
-    jr   nz, jr_006_5CCC                          ; $5CC4: $20 $06
+    jr   nz, .jr_5CCC                             ; $5CC4: $20 $06
 
     ldh  a, [hActiveEntitySpriteVariant]          ; $5CC6: $F0 $F1
     add  $02                                      ; $5CC8: $C6 $02
     ldh  [hActiveEntitySpriteVariant], a          ; $5CCA: $E0 $F1
 
-jr_006_5CCC:
+.jr_5CCC
     ld   de, CrowSpriteVariants                   ; $5CCC: $11 $89 $5C
     call RenderActiveEntitySpritesPair            ; $5CCF: $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ; $5CD2: $F0 $F0
     and  a                                        ; $5CD4: $A7
-    jr   nz, jr_006_5CE5                          ; $5CD5: $20 $0E
+    jr   nz, .jr_5CE5                             ; $5CD5: $20 $0E
 
     ld   hl, wEntitiesPosYTable                   ; $5CD7: $21 $10 $C2
     add  hl, bc                                   ; $5CDA: $09
@@ -70,7 +70,7 @@ jr_006_5CCC:
     ld   a, [hl]                                  ; $5CE2: $7E
     ldh  [hActiveEntityState], a                  ; $5CE3: $E0 $F0
 
-jr_006_5CE5:
+.jr_5CE5
     call ReturnIfNonInteractive_06                ; $5CE5: $CD $C6 $64
     call ApplyRecoilIfNeeded_06                   ; $5CE8: $CD $F7 $64
     ldh  a, [hActiveEntityState]                  ; $5CEB: $F0 $F0
@@ -121,12 +121,12 @@ jr_006_5D0F:
     ldh  a, [hMultiPurpose0]                      ; $5D2E: $F0 $D7
     sub  l                                        ; $5D30: $95
     bit  7, a                                     ; $5D31: $CB $7F
-    jr   z, jr_006_5D37                           ; $5D33: $28 $02
+    jr   z, .jr_5D37                              ; $5D33: $28 $02
 
     cpl                                           ; $5D35: $2F
     inc  a                                        ; $5D36: $3C
 
-jr_006_5D37:
+.jr_5D37
     cp   $20                                      ; $5D37: $FE $20
     jr   nc, jr_006_5D4F                          ; $5D39: $30 $14
 
@@ -136,12 +136,12 @@ jr_006_5D37:
     ldh  a, [hMultiPurpose1]                      ; $5D40: $F0 $D8
     sub  l                                        ; $5D42: $95
     bit  7, a                                     ; $5D43: $CB $7F
-    jr   z, jr_006_5D49                           ; $5D45: $28 $02
+    jr   z, .jr_5D49                              ; $5D45: $28 $02
 
     cpl                                           ; $5D47: $2F
     inc  a                                        ; $5D48: $3C
 
-jr_006_5D49:
+.jr_5D49
     cp   $20                                      ; $5D49: $FE $20
     jr   nc, jr_006_5D4F                          ; $5D4B: $30 $02
 
@@ -217,12 +217,12 @@ jr_006_5D9F:
 CrowState1Handler::
     call label_3B39                               ; $5DAD: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $5DB0: $CD $05 $0C
-    jr   nz, jr_006_5DBA                          ; $5DB3: $20 $05
+    jr   nz, .jr_5DBA                             ; $5DB3: $20 $05
 
     ld   [hl], $30                                ; $5DB5: $36 $30
     jp   IncrementEntityState                     ; $5DB7: $C3 $12 $3B
 
-jr_006_5DBA:
+.jr_5DBA
     call ClearEntitySpeed                         ; $5DBA: $CD $7F $3D
     ld   hl, wEntitiesSpeedZTable                 ; $5DBD: $21 $20 $C3
     add  hl, bc                                   ; $5DC0: $09
@@ -245,24 +245,24 @@ CrowState2Handler::
     add  hl, bc                                   ; $5DDF: $09
     sub  [hl]                                     ; $5DE0: $96
     and  $80                                      ; $5DE1: $E6 $80
-    jr   nz, jr_006_5DE7                          ; $5DE3: $20 $02
+    jr   nz, .jr_5DE7                             ; $5DE3: $20 $02
 
     inc  [hl]                                     ; $5DE5: $34
     inc  [hl]                                     ; $5DE6: $34
 
-jr_006_5DE7:
+.jr_5DE7
     dec  [hl]                                     ; $5DE7: $35
     ldh  a, [hMultiPurpose1]                      ; $5DE8: $F0 $D8
     ld   hl, wEntitiesSpeedXTable                 ; $5DEA: $21 $40 $C2
     add  hl, bc                                   ; $5DED: $09
     sub  [hl]                                     ; $5DEE: $96
     and  $80                                      ; $5DEF: $E6 $80
-    jr   nz, jr_006_5DF5                          ; $5DF1: $20 $02
+    jr   nz, .jr_5DF5                             ; $5DF1: $20 $02
 
     inc  [hl]                                     ; $5DF3: $34
     inc  [hl]                                     ; $5DF4: $34
 
-jr_006_5DF5:
+.jr_5DF5
     dec  [hl]                                     ; $5DF5: $35
     ld   hl, wEntitiesSpeedXTable                 ; $5DF6: $21 $40 $C2
     add  hl, bc                                   ; $5DF9: $09
@@ -303,12 +303,12 @@ CrowState3Handler::
     add  hl, bc                                   ; $5E2C: $09
     sub  [hl]                                     ; $5E2D: $96
     and  $80                                      ; $5E2E: $E6 $80
-    jr   nz, jr_006_5E34                          ; $5E30: $20 $02
+    jr   nz, .jr_5E34                             ; $5E30: $20 $02
 
     inc  [hl]                                     ; $5E32: $34
     inc  [hl]                                     ; $5E33: $34
 
-jr_006_5E34:
+.jr_5E34
     dec  [hl]                                     ; $5E34: $35
     ldh  a, [hMultiPurpose1]                      ; $5E35: $F0 $D8
     cpl                                           ; $5E37: $2F
@@ -317,12 +317,12 @@ jr_006_5E34:
     add  hl, bc                                   ; $5E3C: $09
     sub  [hl]                                     ; $5E3D: $96
     and  $80                                      ; $5E3E: $E6 $80
-    jr   nz, jr_006_5E44                          ; $5E40: $20 $02
+    jr   nz, .jr_5E44                             ; $5E40: $20 $02
 
     inc  [hl]                                     ; $5E42: $34
     inc  [hl]                                     ; $5E43: $34
 
-jr_006_5E44:
+.jr_5E44
     dec  [hl]                                     ; $5E44: $35
     ld   hl, wEntitiesSpeedXTable                 ; $5E45: $21 $40 $C2
     add  hl, bc                                   ; $5E48: $09

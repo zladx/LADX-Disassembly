@@ -276,7 +276,7 @@ jr_002_6848:
     ld   c, $00                                   ; $6858: $0E $00
     ld   d, c                                     ; $685A: $51
 
-.loop_685B:
+.loop_685B
     push hl                                       ; $685B: $E5
     ld   hl, wDungeonMinimap                      ; $685C: $21 $80 $D4
     add  hl, de                                   ; $685F: $19
@@ -318,7 +318,7 @@ jr_002_6885:
     ld   c, $00                                   ; $6885: $0E $00
     ld   d, c                                     ; $6887: $51
 
-.loop_6888:
+.loop_6888
     push hl                                       ; $6888: $E5
     ld   hl, wDungeonMinimap                      ; $6889: $21 $80 $D4
     add  hl, de                                   ; $688C: $19
@@ -329,7 +329,7 @@ jr_002_6885:
     inc  c                                        ; $6891: $0C
     ld   a, c                                     ; $6892: $79
     cp   $10                                      ; $6893: $FE $10
-    jr   z, ret_002_68AA                          ; $6895: $28 $13
+    jr   z, .ret_68AA                             ; $6895: $28 $13
 
     inc  hl                                       ; $6897: $23
     and  $03                                      ; $6898: $E6 $03
@@ -346,5 +346,5 @@ jr_002_6885:
     ld   h, a                                     ; $68A7: $67
     jr   .loop_6888                               ; $68A8: $18 $DE
 
-ret_002_68AA:
+.ret_68AA
     ret                                           ; $68AA: $C9

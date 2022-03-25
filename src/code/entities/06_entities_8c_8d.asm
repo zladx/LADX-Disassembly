@@ -34,7 +34,7 @@ label_006_4EB7:
     inc  [hl]                                     ; $4ECD: $34
     ld   a, [hl]                                  ; $4ECE: $7E
     cp   $0A                                      ; $4ECF: $FE $0A
-    jr   nz, ret_006_4EE2                         ; $4ED1: $20 $0F
+    jr   nz, .ret_4EE2                            ; $4ED1: $20 $0F
 
     ld   [hl], b                                  ; $4ED3: $70
     ld   a, $11                                   ; $4ED4: $3E $11
@@ -43,11 +43,11 @@ label_006_4EB7:
     add  hl, bc                                   ; $4EDB: $09
     ld   a, [hl]                                  ; $4EDC: $7E
     cp   $20                                      ; $4EDD: $FE $20
-    jr   nc, ret_006_4EE2                         ; $4EDF: $30 $01
+    jr   nc, .ret_4EE2                            ; $4EDF: $30 $01
 
     inc  [hl]                                     ; $4EE1: $34
 
-ret_006_4EE2:
+.ret_4EE2
     ret                                           ; $4EE2: $C9
 
 jr_006_4EE3:
@@ -69,7 +69,7 @@ jr_006_4EE3:
 jr_006_4EF2:
     ld   a, [hl]                                  ; $4EF2: $7E
     cp   $04                                      ; $4EF3: $FE $04
-    jr   nc, ret_006_4F0D                         ; $4EF5: $30 $16
+    jr   nc, .ret_4F0D                            ; $4EF5: $30 $16
 
     call CheckLinkCollisionWithEnemy_trampoline   ; $4EF7: $CD $5A $3B
     ret  nc                                       ; $4EFA: $D0
@@ -83,7 +83,7 @@ jr_006_4EF2:
     ldh  a, [hMultiPurpose1]                      ; $4F09: $F0 $D8
     ldh  [hLinkSpeedX], a                         ; $4F0B: $E0 $9A
 
-ret_006_4F0D:
+.ret_4F0D
     ret                                           ; $4F0D: $C9
 
 jr_006_4F0E:

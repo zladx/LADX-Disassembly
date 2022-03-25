@@ -88,7 +88,7 @@ ENDC
     add  hl, de                                   ; $655B: $19
     ld   e, $08                                   ; $655C: $1E $08
 
-.loop_655E:
+.loop_655E
     ld   a, [bc]                                  ; $655E: $0A
     inc  bc                                       ; $655F: $03
     ld   [hl+], a                                 ; $6560: $22
@@ -125,7 +125,7 @@ ENDC
     add  hl, de                                   ; $658B: $19
     ld   e, $08                                   ; $658C: $1E $08
 
-.loop_658E:
+.loop_658E
     ld   a, [bc]                                  ; $658E: $0A
     inc  bc                                       ; $658F: $03
     ld   [hl+], a                                 ; $6590: $22
@@ -179,7 +179,7 @@ jr_007_659D:
     ld   hl, $FF70                                ; $65B5: $21 $70 $FF
     di                                            ; $65B8: $F3
 
-.loop_65B9:
+.loop_65B9
     ld   [hl], $02                                ; $65B9: $36 $02
     ld   a, [de]                                  ; $65BB: $1A
     ld   [hl], $00                                ; $65BC: $36 $00

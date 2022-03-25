@@ -329,7 +329,7 @@ label_007_41F0:
     call label_3B23                               ; $4209: $CD $23 $3B
     call label_3B39                               ; $420C: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $420F: $CD $05 $0C
-    jr   nz, ret_007_4233                         ; $4212: $20 $1F
+    jr   nz, .ret_4233                            ; $4212: $20 $1F
 
     call GetRandomByte                            ; $4214: $CD $0D $28
     and  $1F                                      ; $4217: $E6 $1F
@@ -350,5 +350,5 @@ label_007_41F0:
     call GetEntitySpeedYAddress                   ; $422F: $CD $05 $40
     ld   [hl], a                                  ; $4232: $77
 
-ret_007_4233:
+.ret_4233
     ret                                           ; $4233: $C9

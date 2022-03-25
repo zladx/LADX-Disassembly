@@ -184,7 +184,7 @@ GrandmaUlriraState2Handler::
 GrandmaUlriraState3Handler::
     ld   a, [wDialogState]                        ; $4E17: $FA $9F $C1
     and  a                                        ; $4E1A: $A7
-    jr   nz, ret_018_4E2A                         ; $4E1B: $20 $0D
+    jr   nz, .ret_4E2A                            ; $4E1B: $20 $0D
 
     ld   [wDB7F], a                               ; $4E1D: $EA $7F $DB
     ld   [wC167], a                               ; $4E20: $EA $67 $C1
@@ -192,5 +192,5 @@ GrandmaUlriraState3Handler::
     call IncrementEntityState                     ; $4E26: $CD $12 $3B
     ld   [hl], b                                  ; $4E29: $70
 
-ret_018_4E2A:
+.ret_4E2A
     ret                                           ; $4E2A: $C9

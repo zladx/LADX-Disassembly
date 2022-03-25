@@ -33,16 +33,16 @@ jr_004_5C16:
     call func_004_6E35                            ; $5C20: $CD $35 $6E
     add  $10                                      ; $5C23: $C6 $10
     cp   $20                                      ; $5C25: $FE $20
-    jr   nc, ret_004_5C42                         ; $5C27: $30 $19
+    jr   nc, .ret_5C42                            ; $5C27: $30 $19
 
     call func_004_6E45                            ; $5C29: $CD $45 $6E
     add  $10                                      ; $5C2C: $C6 $10
     cp   $20                                      ; $5C2E: $FE $20
-    jr   nc, ret_004_5C42                         ; $5C30: $30 $10
+    jr   nc, .ret_5C42                            ; $5C30: $30 $10
 
     ld   a, [wCollisionType]                      ; $5C32: $FA $33 $C1
     and  a                                        ; $5C35: $A7
-    jr   z, ret_004_5C42                          ; $5C36: $28 $0A
+    jr   z, .ret_5C42                             ; $5C36: $28 $0A
 
     call IncrementEntityState                     ; $5C38: $CD $12 $3B
     ld   [hl], b                                  ; $5C3B: $70
@@ -50,7 +50,7 @@ jr_004_5C16:
     add  hl, bc                                   ; $5C3F: $09
     ld   [hl], $30                                ; $5C40: $36 $30
 
-ret_004_5C42:
+.ret_5C42
     ret                                           ; $5C42: $C9
 
 jr_004_5C43:

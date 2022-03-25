@@ -61,16 +61,16 @@ func_007_639E::
     ldh  [hMultiPurposeG], a                      ; $63B1: $E0 $E8
     call label_3B23                               ; $63B3: $CD $23 $3B
     call CheckLinkCollisionWithEnemy_trampoline   ; $63B6: $CD $5A $3B
-    jr   nc, ret_007_63F6                         ; $63B9: $30 $3B
+    jr   nc, .ret_63F6                            ; $63B9: $30 $3B
 
     ldh  a, [hLinkSpeedY]                         ; $63BB: $F0 $9B
     and  $80                                      ; $63BD: $E6 $80
-    jr   nz, ret_007_63F6                         ; $63BF: $20 $35
+    jr   nz, .ret_63F6                            ; $63BF: $20 $35
 
     call func_007_7E6D                            ; $63C1: $CD $6D $7E
     add  $08                                      ; $63C4: $C6 $08
     bit  7, a                                     ; $63C6: $CB $7F
-    jr   z, ret_007_63F6                          ; $63C8: $28 $2C
+    jr   z, .ret_63F6                             ; $63C8: $28 $2C
 
     ld   hl, wEntitiesPosYTable                   ; $63CA: $21 $10 $C2
     add  hl, bc                                   ; $63CD: $09
@@ -97,7 +97,7 @@ func_007_639E::
     add  hl, bc                                   ; $63F3: $09
     ld   [hl], $10                                ; $63F4: $36 $10
 
-ret_007_63F6:
+.ret_63F6
     ret                                           ; $63F6: $C9
 
 Data_007_63F7::

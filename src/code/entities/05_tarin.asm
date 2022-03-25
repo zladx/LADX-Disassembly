@@ -510,7 +510,7 @@ label_005_4BC1:
 .jr_4BE3
     ldh  a, [hFrameCounter]                       ; $4BE3: $F0 $E7
     and  $01                                      ; $4BE5: $E6 $01
-    jr   nz, ret_005_4BF0                         ; $4BE7: $20 $07
+    jr   nz, .ret_4BF0                            ; $4BE7: $20 $07
 
     ld   hl, wEntitiesSpeedXTable                 ; $4BE9: $21 $40 $C2
     add  hl, bc                                   ; $4BEC: $09
@@ -518,7 +518,7 @@ label_005_4BC1:
     add  e                                        ; $4BEE: $83
     ld   [hl], a                                  ; $4BEF: $77
 
-ret_005_4BF0:
+.ret_4BF0
     ret                                           ; $4BF0: $C9
 
 jr_005_4BF1:
@@ -651,7 +651,7 @@ TarinShield1Handler::
     ld   hl, wObjPal8                             ; $4CB0: $21 $88 $DC
     ld   de, data_005_4C94                        ; $4CB3: $11 $94 $4C
 
-.loop_4CB6:
+.loop_4CB6
     ld   a, [de]                                  ; $4CB6: $1A
     ld   [hl+], a                                 ; $4CB7: $22
     inc  de                                       ; $4CB8: $13

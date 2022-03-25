@@ -14,7 +14,7 @@ func_027_7240::
     srl  a                                        ; $7252: $CB $3F
     ld   c, a                                     ; $7254: $4F
 
-.loop_7255:
+.loop_7255
     ldh  a, [hActiveEntityVisualPosY]             ; $7255: $F0 $EC
     add  [hl]                                     ; $7257: $86
     ld   [de], a                                  ; $7258: $12

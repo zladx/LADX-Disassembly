@@ -14,7 +14,7 @@ PlayMusicTrack_1B::
 label_01B_4009:
     ld   hl, wMusicTranspose                      ; $4009: $21 $00 $D3
 
-.loop_400C:
+.loop_400C
     ld   [hl], $00                                ; $400C: $36 $00
     inc  l                                        ; $400E: $2C
     jr   nz, .loop_400C                           ; $400F: $20 $FB
@@ -93,7 +93,7 @@ jr_01B_406A:
     ld   b, $04                                   ; $406A: $06 $04
     ld   c, $20                                   ; $406C: $0E $20
 
-.loop_406E:
+.loop_406E
     ld   a, [hl+]                                 ; $406E: $2A
     ld   [c], a                                   ; $406F: $E2
     inc  c                                        ; $4070: $0C
@@ -368,7 +368,7 @@ label_01B_42AB:
     push bc                                       ; $42C1: $C5
     ld   c, $30                                   ; $42C2: $0E $30
 
-.loop_42C4:
+.loop_42C4
     ld   a, [hl+]                                 ; $42C4: $2A
     ld   [c], a                                   ; $42C5: $E2
     inc  c                                        ; $42C6: $0C
@@ -386,7 +386,7 @@ label_01B_42D5:
     ld   a, [wActiveMusicIndex]                   ; $42D5: $FA $69 $D3
     ld   hl, Data_1B_418B                         ; $42D8: $21 $8B $41
 
-.loop_42DB:
+.loop_42DB
     dec  a                                        ; $42DB: $3D
     jr   z, .jr_42E6                              ; $42DC: $28 $08
 

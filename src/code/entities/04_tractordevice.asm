@@ -154,12 +154,12 @@ label_004_68E4:
     call SetEntitySpriteVariant                   ; $68EF: $CD $0C $3B
     ldh  a, [hFrameCounter]                       ; $68F2: $F0 $E7
     and  $1F                                      ; $68F4: $E6 $1F
-    jr   nz, ret_004_68FC                         ; $68F6: $20 $04
+    jr   nz, .ret_68FC                            ; $68F6: $20 $04
 
     ld   a, $1F                                   ; $68F8: $3E $1F
     ldh  [hNoiseSfx], a                           ; $68FA: $E0 $F4
 
-ret_004_68FC:
+.ret_68FC
     ret                                           ; $68FC: $C9
 
 func_004_68FD::

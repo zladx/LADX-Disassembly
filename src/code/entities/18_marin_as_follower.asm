@@ -445,7 +445,7 @@ func_018_5C39::
     ldh  a, [hActiveEntityVisualPosY]             ; $5C55: $F0 $EC
     ld   e, $10                                   ; $5C57: $1E $10
 
-.loop_5C59:
+.loop_5C59
     ld   [hl+], a                                 ; $5C59: $22
     dec  a                                        ; $5C5A: $3D
     dec  e                                        ; $5C5B: $1D
@@ -457,7 +457,7 @@ func_018_5C39::
 func_018_5C63::
     ld   e, $10                                   ; $5C63: $1E $10
 
-.loop_5C65:
+.loop_5C65
     ld   [hl+], a                                 ; $5C65: $22
     dec  e                                        ; $5C66: $1D
     jr   nz, .loop_5C65                           ; $5C67: $20 $FC

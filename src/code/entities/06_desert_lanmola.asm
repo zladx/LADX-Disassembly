@@ -26,7 +26,7 @@ DesertLanmolaEntityHandler::
     ld   a, $FF                                   ; $5608: $3E $FF
     ld   hl, wD200                                ; $560A: $21 $00 $D2
 
-.loop_560D:
+.loop_560D
     ld   [hl+], a                                 ; $560D: $22
     dec  e                                        ; $560E: $1D
     jr   nz, .loop_560D                           ; $560F: $20 $FC
@@ -61,7 +61,7 @@ IncrementEntityPrivateState2::
 
 func_006_563A::
     call GetEntityTransitionCountdown             ; $563A: $CD $05 $0C
-    jr   nz, ret_006_564A                         ; $563D: $20 $0B
+    jr   nz, .ret_564A                            ; $563D: $20 $0B
 
     ld   [hl], $CF                                ; $563F: $36 $CF
     call IncrementEntityPrivateState2             ; $5641: $CD $34 $56
@@ -69,7 +69,7 @@ func_006_563A::
     add  hl, bc                                   ; $5647: $09
     ld   [hl], $05                                ; $5648: $36 $05
 
-ret_006_564A:
+.ret_564A
     ret                                           ; $564A: $C9
 
 func_006_564B::
@@ -165,7 +165,7 @@ label_006_56C8:
 
     ld   a, $02                                   ; $56D7: $3E $02
 
-.loop_56D9:
+.loop_56D9
     ldh  [hMultiPurposeG], a                      ; $56D9: $E0 $E8
     ld   a, ENTITY_DESERT_LANMOLA                 ; $56DB: $3E $87
     call SpawnNewEntity_trampoline                ; $56DD: $CD $86 $3B

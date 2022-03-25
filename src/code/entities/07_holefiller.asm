@@ -257,7 +257,7 @@ jr_007_51AA:
     ld   c, b                                     ; $5283: $48
     ld   hl, wRoomObjectsArea                     ; $5284: $21 $00 $D7
 
-.loop_5287:
+.loop_5287
     ld   a, [hl+]                                 ; $5287: $2A
     push hl                                       ; $5288: $E5
     ld   e, a                                     ; $5289: $5F

@@ -26,19 +26,19 @@ MadBatterState0Handler::
     ld   a, [wMaxMagicPowder]                     ; $4F05: $FA $76 $DB
     ld   hl, MadBatterUpgradedMaximumTable        ; $4F08: $21 $90 $4F
     cp   [hl]                                     ; $4F0B: $BE
-    jr   nz, ret_018_4F1D                         ; $4F0C: $20 $0F
+    jr   nz, .ret_4F1D                            ; $4F0C: $20 $0F
 
     inc  hl                                       ; $4F0E: $23
     ld   a, [wMaxBombs]                           ; $4F0F: $FA $77 $DB
     cp   [hl]                                     ; $4F12: $BE
-    jr   nz, ret_018_4F1D                         ; $4F13: $20 $08
+    jr   nz, .ret_4F1D                            ; $4F13: $20 $08
 
     inc  hl                                       ; $4F15: $23
     ld   a, [wMaxArrows]                          ; $4F16: $FA $78 $DB
     cp   [hl]                                     ; $4F19: $BE
     jp   z, ClearEntityStatusBank18               ; $4F1A: $CA $08 $7F
 
-ret_018_4F1D:
+.ret_4F1D
     ret                                           ; $4F1D: $C9
 
 MadBatterState1Handler::

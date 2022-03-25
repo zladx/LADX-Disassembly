@@ -284,13 +284,13 @@ LinkMotionDefault::
 func_002_4338::
     ld   a, [wIsCarryingLiftedObject]             ; $4338: $FA $5C $C1
     cp   $02                                      ; $433B: $FE $02
-    jr   c, ret_002_4345                          ; $433D: $38 $06
+    jr   c, .ret_4345                             ; $433D: $38 $06
 
     ldh  [hLinkAnimationState], a                 ; $433F: $E0 $9D
     ld   a, $01                                   ; $4341: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4343: $E0 $A1
 
-ret_002_4345:
+.ret_4345
     ret                                           ; $4345: $C9
 
 ; conversion table from view direction to animation state
@@ -383,16 +383,16 @@ func_002_438F::
     ld   a, [hl]                                  ; $43AB: $7E
     ld   hl, hLinkSpeedY                          ; $43AC: $21 $9B $FF
     sub  [hl]                                     ; $43AF: $96
-    jr   z, ret_002_43B9                          ; $43B0: $28 $07
+    jr   z, .ret_43B9                             ; $43B0: $28 $07
 
     inc  [hl]                                     ; $43B2: $34
     bit  7, a                                     ; $43B3: $CB $7F
-    jr   z, ret_002_43B9                          ; $43B5: $28 $02
+    jr   z, .ret_43B9                             ; $43B5: $28 $02
 
     dec  [hl]                                     ; $43B7: $35
     dec  [hl]                                     ; $43B8: $35
 
-ret_002_43B9:
+.ret_43B9
     ret                                           ; $43B9: $C9
 
 jr_002_43BA:
@@ -1290,7 +1290,7 @@ LinkMotionUnstuckingHandler::
     add  $10                                      ; $4974: $C6 $10
     ldh  [hLinkPositionZ], a                      ; $4976: $E0 $A2
 
-.loop_4978:
+.loop_4978
     ld   a, $FF                                   ; $4978: $3E $FF
     ldh  [hLinkSpeedY], a                         ; $497A: $E0 $9B
     xor  a                                        ; $497C: $AF
@@ -1464,7 +1464,7 @@ jr_002_4AB2:
     ld   [wC167], a                               ; $4AB3: $EA $67 $C1
     ld   a, [wSelectedSongIndex]                  ; $4AB6: $FA $4A $DB
     cp   $01                                      ; $4AB9: $FE $01
-    jr   nz, ret_002_4AD0                         ; $4ABB: $20 $13
+    jr   nz, .ret_4AD0                            ; $4ABB: $20 $13
 
     ld   a, TRANSITION_GFX_MANBO_IN               ; $4ABD: $3E $02
     ld   [wTransitionGfx], a                      ; $4ABF: $EA $7F $C1
@@ -1475,7 +1475,7 @@ jr_002_4AB2:
     ld   a, JINGLE_MANBO_WARP                     ; $4ACC: $3E $2C
     ldh  [hJingle], a                             ; $4ACE: $E0 $F2
 
-ret_002_4AD0:
+.ret_4AD0
     ret                                           ; $4AD0: $C9
 
 jr_002_4AD1:
@@ -1510,11 +1510,11 @@ jr_002_4AD1:
 
     ld   a, [wC5A4]                               ; $4B02: $FA $A4 $C5
     cp   $14                                      ; $4B05: $FE $14
-    jr   nz, ret_002_4B40                         ; $4B07: $20 $37
+    jr   nz, .ret_4B40                            ; $4B07: $20 $37
 
     ld   a, ENTITY_MUSICAL_NOTE                   ; $4B09: $3E $C9
     call SpawnNewEntity_trampoline                ; $4B0B: $CD $86 $3B
-    jr   c, ret_002_4B40                          ; $4B0E: $38 $30
+    jr   c, .ret_4B40                             ; $4B0E: $38 $30
 
     ldh  a, [hLinkPositionY]                      ; $4B10: $F0 $99
     ld   hl, wEntitiesPosYTable                   ; $4B12: $21 $10 $C2
@@ -1544,7 +1544,7 @@ jr_002_4AD1:
     add  hl, de                                   ; $4B3D: $19
     ld   [hl], $40                                ; $4B3E: $36 $40
 
-ret_002_4B40:
+.ret_4B40
     ret                                           ; $4B40: $C9
 
 LinkDirectionToLinkAnimationState2::
@@ -2085,7 +2085,7 @@ func_002_4E2C::
     ld   de, wObjPal8                             ; $4E32: $11 $88 $DC
     ld   c, $00                                   ; $4E35: $0E $00
 
-.loop_4E37:
+.loop_4E37
     ld   a, [hl+]                                 ; $4E37: $2A
     ld   [de], a                                  ; $4E38: $12
     inc  de                                       ; $4E39: $13
@@ -3493,7 +3493,7 @@ RenderTranscientLavaSplash::
     push bc                                       ; $561B: $C5
     ld   c, $04                                   ; $561C: $0E $04
 
-.loop_561E:
+.loop_561E
     ldh  a, [hMultiPurpose1]                      ; $561E: $F0 $D8
     ld   [de], a                                  ; $5620: $12
     inc  de                                       ; $5621: $13
@@ -4136,7 +4136,7 @@ func_002_5A7B::
 
     xor  a                                        ; $5A8C: $AF
 
-.loop_5A8D:
+.loop_5A8D
     add  $04                                      ; $5A8D: $C6 $04
     ld   e, a                                     ; $5A8F: $5F
     ld   d, $00                                   ; $5A90: $16 $00
@@ -4269,7 +4269,7 @@ label_002_5AA7:
     and  $07                                      ; $5B49: $E6 $07
     ld   c, a                                     ; $5B4B: $4F
 
-.loop_5B4C:
+.loop_5B4C
     ld   hl, Data_002_5A40                        ; $5B4C: $21 $40 $5A
     add  hl, bc                                   ; $5B4F: $09
     ld   a, [hl]                                  ; $5B50: $7E
@@ -4394,7 +4394,7 @@ func_002_5C04::
     ld   c, a                                     ; $5C17: $4F
     xor  a                                        ; $5C18: $AF
 
-.loop_5C19:
+.loop_5C19
     add  $04                                      ; $5C19: $C6 $04
     ld   e, a                                     ; $5C1B: $5F
     ld   d, $00                                   ; $5C1C: $16 $00
@@ -4547,7 +4547,7 @@ label_002_5C33:
     ld   a, [hl]                                  ; $5CFB: $7E
     ldh  [hMultiPurpose0], a                      ; $5CFC: $E0 $D7
 
-.loop_5CFE:
+.loop_5CFE
     ld   hl, Data_002_5BF4                        ; $5CFE: $21 $F4 $5B
     add  hl, bc                                   ; $5D01: $09
     ld   a, [hl]                                  ; $5D02: $7E
@@ -5488,12 +5488,12 @@ jr_002_69F3:
     call func_002_6B56                            ; $69F3: $CD $56 $6B
     ld   a, [wCollisionType]                      ; $69F6: $FA $33 $C1
     and  COLLISION_TYPE_RIGHT                     ; $69F9: $E6 $08
-    jr   z, ret_002_6A00                          ; $69FB: $28 $03
+    jr   z, .ret_6A00                             ; $69FB: $28 $03
 
     xor  a                                        ; $69FD: $AF
     ldh  [hLinkPhysicsModifier], a                ; $69FE: $E0 $9C
 
-ret_002_6A00:
+.ret_6A00
     ret                                           ; $6A00: $C9
 
 LinkSideScrollingPhysicsHandler::
@@ -6336,7 +6336,7 @@ CheckForLedgeJumpAndReturn::
     ld   c, a                                     ; $6E6F: $4F
     ld   b, $00                                   ; $6E70: $06 $00
 
-.loop_6E72:
+.loop_6E72
     push de                                       ; $6E72: $D5
     push bc                                       ; $6E73: $C5
     call func_002_6F2C                            ; $6E74: $CD $2C $6F
@@ -6432,7 +6432,7 @@ jr_002_6EDD:
     ld   c, a                                     ; $6EF3: $4F
     ld   b, $00                                   ; $6EF4: $06 $00
 
-.loop_6EF6:
+.loop_6EF6
     push de                                       ; $6EF6: $D5
     push bc                                       ; $6EF7: $C5
     call func_002_6F2C                            ; $6EF8: $CD $2C $6F
@@ -7304,7 +7304,7 @@ ENDC
 
     ld   hl, wBButtonSlot                         ; $73F3: $21 $00 $DB
 
-.loop_73F6:
+.loop_73F6
     ld   a, [hl+]                                 ; $73F6: $2A
     cp   INVENTORY_POWER_BRACELET                 ; $73F7: $FE $03
     jr   z, .jr_7402                              ; $73F9: $28 $07

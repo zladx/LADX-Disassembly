@@ -4,7 +4,7 @@ EntityInitMoldorm::
     ld   e, $80                                   ; $5694: $1E $80
     ld   hl, wD100                                ; $5696: $21 $00 $D1
 
-.loop_5699:
+.loop_5699
     xor  a                                        ; $5699: $AF
     ld   [hl+], a                                 ; $569A: $22
     dec  e                                        ; $569B: $1D
@@ -468,7 +468,7 @@ func_004_5A1A::
     push de                                       ; $5A2E: $D5
     ld   e, $20                                   ; $5A2F: $1E $20
 
-.loop_5A31:
+.loop_5A31
     xor  a                                        ; $5A31: $AF
     ld   [hl+], a                                 ; $5A32: $22
     dec  e                                        ; $5A33: $1D
@@ -481,7 +481,7 @@ func_004_5A1A::
     add  hl, de                                   ; $5A3D: $19
     ld   e, $20                                   ; $5A3E: $1E $20
 
-.loop_5A40:
+.loop_5A40
     xor  a                                        ; $5A40: $AF
     ld   [hl+], a                                 ; $5A41: $22
     dec  e                                        ; $5A42: $1D

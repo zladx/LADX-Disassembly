@@ -137,17 +137,17 @@ ret_007_4C6F:
 
 func_007_4C70::
     call GetEntityTransitionCountdown             ; $4C70: $CD $05 $0C
-    jr   nz, ret_007_4C82                         ; $4C73: $20 $0D
+    jr   nz, .ret_4C82                            ; $4C73: $20 $0D
 
     ld   a, [wDialogState]                        ; $4C75: $FA $9F $C1
     and  a                                        ; $4C78: $A7
-    jr   nz, ret_007_4C82                         ; $4C79: $20 $07
+    jr   nz, .ret_4C82                            ; $4C79: $20 $07
 
     call func_007_4C43                            ; $4C7B: $CD $43 $4C
     call IncrementEntityState                     ; $4C7E: $CD $12 $3B
     ld   [hl], b                                  ; $4C81: $70
 
-ret_007_4C82:
+.ret_4C82
     ret                                           ; $4C82: $C9
 
 func_007_4C83::

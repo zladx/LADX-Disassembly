@@ -95,11 +95,11 @@ ret_018_4ECE:
 PapahlsWifeState2Handler::
     ld   a, [wDialogState]                        ; $4ECF: $FA $9F $C1
     and  a                                        ; $4ED2: $A7
-    jr   nz, ret_018_4EDC                         ; $4ED3: $20 $07
+    jr   nz, .ret_4EDC                            ; $4ED3: $20 $07
 
     call CreateTradingItemEntity                  ; $4ED5: $CD $0C $0C
     call IncrementEntityState                     ; $4ED8: $CD $12 $3B
     ld   [hl], b                                  ; $4EDB: $70
 
-ret_018_4EDC:
+.ret_4EDC
     ret                                           ; $4EDC: $C9

@@ -95,7 +95,7 @@ func_01C_4A76::
     ld   hl, wDrawCommandsAltSize                 ; $4A76: $21 $90 $DC
     ld   de, wDrawCommandsSize                    ; $4A79: $11 $00 $D6
     ld   b, $04                                   ; $4A7C: $06 $04
-.loop_4A7E_1C:
+.loop_4A7E_1C
     ld   a, [de]                                  ; $4A7E: $1A
     ldi  [hl], a                                  ; $4A7F: $22
     inc  de                                       ; $4A80: $13
@@ -242,7 +242,7 @@ AnimateDialogClosingAttrs::
     ld   hl, wDrawCommandsAltSize                 ; $4B03: $21 $90 $DC
     ld   de, wDrawCommandsSize                    ; $4B06: $11 $00 $D6
     ld   b, $04                                   ; $4B09: $06 $04
-.loop_4B0B_1C:
+.loop_4B0B_1C
     ld   a, [de]                                  ; $4B0B: $1A
     ldi  [hl], a                                  ; $4B0C: $22
     inc  de                                       ; $4B0D: $13
@@ -254,7 +254,7 @@ AnimateDialogClosingAttrs::
     sub  $12                                      ; $4B13: $D6 $12
     ld   c, a                                     ; $4B15: $4F
     ld   e, $12                                   ; $4B16: $1E $12
-.loop_4B18_1C:
+.loop_4B18_1C
     ld   a, $02                                   ; $4B18: $3E $02
     ld   [rSVBK], a                               ; $4B1A: $E0 $70
     ld   a, [bc]                                  ; $4B1C: $0A

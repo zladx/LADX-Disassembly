@@ -80,10 +80,10 @@ TextDebuggerEntityHandler::                       ; POI: Text debugging tool
 jr_018_5DDC:
     ldh  a, [hJoypadState]                        ; $5DDC: $F0 $CC
     and  J_SELECT                                 ; $5DDE: $E6 $40
-    jr   z, ret_018_5DE8                          ; $5DE0: $28 $06
+    jr   z, .ret_5DE8                             ; $5DE0: $28 $06
 
     ld   a, [wTextDebuggerDialogId]               ; $5DE2: $FA $09 $C1
     jp   OpenDialogInTable2                       ; $5DE5: $C3 $7C $23
 
-ret_018_5DE8:
+.ret_5DE8
     ret                                           ; $5DE8: $C9

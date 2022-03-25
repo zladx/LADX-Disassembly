@@ -82,7 +82,7 @@ ManboAndFishesState1Handler::
     ld   e, INVENTORY_SLOT_COUNT -1               ; $4571: $1E $0B
     ld   hl, wBButtonSlot                         ; $4573: $21 $00 $DB
 
-.loop_4576:
+.loop_4576
     ld   a, [hl+]                                 ; $4576: $2A
     cp   INVENTORY_OCARINA                        ; $4577: $FE $09
     jr   z, jr_018_458A                           ; $4579: $28 $0F
@@ -212,13 +212,13 @@ ManboAndFishesState3Handler::
 .jr_4712
     ld   a, e                                     ; $4712: $7B
     cp   $BE                                      ; $4713: $FE $BE
-    jr   nz, ret_018_471C                         ; $4715: $20 $05
+    jr   nz, .ret_471C                            ; $4715: $20 $05
 
     ld   a, d                                     ; $4717: $7A
     cp   $05                                      ; $4718: $FE $05
     jr   z, jr_018_471D                           ; $471A: $28 $01
 
-ret_018_471C:
+.ret_471C
     ret                                           ; $471C: $C9
 
 jr_018_471D:

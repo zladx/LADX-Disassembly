@@ -12,7 +12,7 @@ PlayMusicTrack_1E::
 label_01E_4009:
     ld   hl, wMusicTranspose                      ; $4009: $21 $00 $D3
 
-.loop_400C:
+.loop_400C
     ld   [hl], $00                                ; $400C: $36 $00
     inc  l                                        ; $400E: $2C
     jr   nz, .loop_400C                           ; $400F: $20 $FB
@@ -99,7 +99,7 @@ jr_01E_4072:
     ld   b, $04                                   ; $4072: $06 $04
     ld   c, $20                                   ; $4074: $0E $20
 
-.loop_4076:
+.loop_4076
     ld   a, [hl+]                                 ; $4076: $2A
     ld   [c], a                                   ; $4077: $E2
     inc  c                                        ; $4078: $0C
@@ -202,7 +202,7 @@ func_01E_410E::
     push bc                                       ; $410E: $C5
     ld   c, $30                                   ; $410F: $0E $30
 
-.loop_4111:
+.loop_4111
     ld   a, [hl+]                                 ; $4111: $2A
     ld   [c], a                                   ; $4112: $E2
     inc  c                                        ; $4113: $0C
@@ -391,7 +391,7 @@ label_01E_432F:
     push bc                                       ; $4345: $C5
     ld   c, $30                                   ; $4346: $0E $30
 
-.loop_4348:
+.loop_4348
     ld   a, [hl+]                                 ; $4348: $2A
     ld   [c], a                                   ; $4349: $E2
     inc  c                                        ; $434A: $0C
@@ -409,7 +409,7 @@ label_01E_4359:
     ld   a, [wActiveMusicIndex]                   ; $4359: $FA $69 $D3
     ld   hl, Data_01E_41AF                        ; $435C: $21 $AF $41
 
-.loop_435F:
+.loop_435F
     dec  a                                        ; $435F: $3D
     jr   z, .jr_436A                              ; $4360: $28 $08
 
@@ -564,7 +564,7 @@ func_01E_43C0::
     ld   bc, $410                                 ; $442C: $01 $10 $04
     ld   hl, wD312                                ; $442F: $21 $12 $D3
 
-.loop_4432:
+.loop_4432
     ld   [hl], $01                                ; $4432: $36 $01
     ld   a, c                                     ; $4434: $79
     add  l                                        ; $4435: $85

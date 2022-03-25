@@ -346,7 +346,7 @@ func_007_488E::
     add  hl, bc                                   ; $489D: $09
     ld   a, [hl]                                  ; $489E: $7E
     and  $80                                      ; $489F: $E6 $80
-    jr   z, ret_007_48AF                          ; $48A1: $28 $0C
+    jr   z, .ret_48AF                             ; $48A1: $28 $0C
 
     ld   [hl], b                                  ; $48A3: $70
     call IncrementEntityState                     ; $48A4: $CD $12 $3B
@@ -354,7 +354,7 @@ func_007_488E::
     call GetEntityTransitionCountdown             ; $48AA: $CD $05 $0C
     ld   [hl], $10                                ; $48AD: $36 $10
 
-ret_007_48AF:
+.ret_48AF
     ret                                           ; $48AF: $C9
 
 func_007_48B0::

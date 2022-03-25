@@ -177,7 +177,7 @@ jr_001_42F5::
     ld   hl, wEntitiesStatusTable                 ; $42F6: $21 $80 $C2 ; $42F6: $21 $80 $C2
     ld   e, $10                                   ; $42F9: $1E $10 ; $42F9: $1E $10
 
-.loop_42FB::
+.loop_42FB
     ld   [hl+], a                                 ; $42FB: $22 ; $42FB: $22
     dec  e                                        ; $42FC: $1D ; $42FC: $1D
     jr   nz, .loop_42FB                           ; $42FD: $20 $FC ; $42FD: $20 $FC

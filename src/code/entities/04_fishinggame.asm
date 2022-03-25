@@ -126,7 +126,7 @@ func_004_5FEF::
     ld   a, [wRupeeCountHigh]                     ; $6015: $FA $5D $DB
     ld   h, a                                     ; $6018: $67
 
-.loop_6019:
+.loop_6019
     ld   a, e                                     ; $6019: $7B
     or   d                                        ; $601A: $B2
     jr   z, .jr_6023                              ; $601B: $28 $06
@@ -255,7 +255,7 @@ func_004_60D0::
     push bc                                       ; $60DD: $C5
     ld   c, $05                                   ; $60DE: $0E $05
 
-.loop_60E0:
+.loop_60E0
     ld   a, ENTITY_FISHERMAN_FISHING_GAME         ; $60E0: $3E $54
     call SpawnNewEntity_trampoline                ; $60E2: $CD $86 $3B
 
@@ -446,7 +446,7 @@ func_004_61E5::
     ld   a, [wRupeeCountHigh]                     ; $6210: $FA $5D $DB
     ld   h, a                                     ; $6213: $67
 
-.loop_6214:
+.loop_6214
     ld   a, e                                     ; $6214: $7B
     or   d                                        ; $6215: $B2
     jr   z, .jr_621E                              ; $6216: $28 $06
@@ -976,14 +976,14 @@ jr_004_64E0:
     add  hl, bc                                   ; $64E3: $09
     ld   a, [hl]                                  ; $64E4: $7E
     cp   $34                                      ; $64E5: $FE $34
-    jr   nc, ret_004_64EF                         ; $64E7: $30 $06
+    jr   nc, .ret_64EF                            ; $64E7: $30 $06
 
     inc  [hl]                                     ; $64E9: $34
     ld   hl, wEntitiesSpeedYTable                 ; $64EA: $21 $50 $C2
     add  hl, bc                                   ; $64ED: $09
     ld   [hl], b                                  ; $64EE: $70
 
-ret_004_64EF:
+.ret_64EF
     ret                                           ; $64EF: $C9
 
 Data_004_64F0::
@@ -1053,7 +1053,7 @@ func_004_652D::
     sub  [hl]                                     ; $655E: $96
     add  $08                                      ; $655F: $C6 $08
     cp   $10                                      ; $6561: $FE $10
-    jr   nc, ret_004_6575                         ; $6563: $30 $10
+    jr   nc, .ret_6575                            ; $6563: $30 $10
 
     call ClearEntitySpeed                         ; $6565: $CD $7F $3D
     call IncrementEntityState                     ; $6568: $CD $12 $3B
@@ -1064,7 +1064,7 @@ func_004_652D::
     add  hl, de                                   ; $6573: $19
     ld   [hl], b                                  ; $6574: $70
 
-ret_004_6575:
+.ret_6575
     ret                                           ; $6575: $C9
 
 Data_004_6576::
@@ -1471,7 +1471,7 @@ ret_004_679A:
 func_004_679B::
     ld   a, [wIntroSubTimer]                      ; $679B: $FA $02 $D0
     and  a                                        ; $679E: $A7
-    jr   nz, ret_004_67FA                         ; $679F: $20 $59
+    jr   nz, .ret_67FA                            ; $679F: $20 $59
 
     ld   a, [wD003]                               ; $67A1: $FA $03 $D0
     ld   e, a                                     ; $67A4: $5F
@@ -1480,13 +1480,13 @@ func_004_679B::
     add  hl, de                                   ; $67A9: $19
     ld   a, [hl]                                  ; $67AA: $7E
     and  a                                        ; $67AB: $A7
-    jr   z, ret_004_67FA                          ; $67AC: $28 $4C
+    jr   z, .ret_67FA                             ; $67AC: $28 $4C
 
     ld   hl, wEntitiesStateTable                  ; $67AE: $21 $90 $C2
     add  hl, de                                   ; $67B1: $19
     ld   a, [hl]                                  ; $67B2: $7E
     and  a                                        ; $67B3: $A7
-    jr   z, ret_004_67FA                          ; $67B4: $28 $44
+    jr   z, .ret_67FA                             ; $67B4: $28 $44
 
     ld   a, [wIsFileSelectionArrowShifted]        ; $67B6: $FA $00 $D0
     ld   hl, hActiveEntityPosX                    ; $67B9: $21 $EE $FF
@@ -1497,21 +1497,21 @@ func_004_679B::
     ld   hl, wEntitiesDirectionTable              ; $67C1: $21 $80 $C3
     add  hl, bc                                   ; $67C4: $09
     cp   [hl]                                     ; $67C5: $BE
-    jr   nz, ret_004_67FA                         ; $67C6: $20 $32
+    jr   nz, .ret_67FA                            ; $67C6: $20 $32
 
     ld   a, [wIsFileSelectionArrowShifted]        ; $67C8: $FA $00 $D0
     ld   hl, hActiveEntityPosX                    ; $67CB: $21 $EE $FF
     sub  [hl]                                     ; $67CE: $96
     add  $18                                      ; $67CF: $C6 $18
     cp   $30                                      ; $67D1: $FE $30
-    jr   nc, ret_004_67FA                         ; $67D3: $30 $25
+    jr   nc, .ret_67FA                            ; $67D3: $30 $25
 
     ld   a, [wIntroTimer]                         ; $67D5: $FA $01 $D0
     ld   hl, hActiveEntityPosY                    ; $67D8: $21 $EF $FF
     sub  [hl]                                     ; $67DB: $96
     add  $10                                      ; $67DC: $C6 $10
     cp   $20                                      ; $67DE: $FE $20
-    jr   nc, ret_004_67FA                         ; $67E0: $30 $18
+    jr   nc, .ret_67FA                            ; $67E0: $30 $18
 
     call IncrementEntityState                     ; $67E2: $CD $12 $3B
     ld   [hl], $02                                ; $67E5: $36 $02
@@ -1525,7 +1525,7 @@ func_004_679B::
     add  $30                                      ; $67F7: $C6 $30
     ld   [hl], a                                  ; $67F9: $77
 
-ret_004_67FA:
+.ret_67FA
     ret                                           ; $67FA: $C9
 
 label_004_67FB:

@@ -42,7 +42,7 @@ MovingBlockLeftTopState1Handler::
     inc  [hl]                                     ; $4134: $34
     ld   a, [hl]                                  ; $4135: $7E
     cp   $0A                                      ; $4136: $FE $0A
-    jr   c, ret_015_414C                          ; $4138: $38 $12
+    jr   c, .ret_414C                             ; $4138: $38 $12
 
     ld   [hl], b                                  ; $413A: $70
     ld   a, $11                                   ; $413B: $3E $11
@@ -53,11 +53,11 @@ MovingBlockLeftTopState1Handler::
     ld   hl, wEntitiesPosYTable                   ; $4144: $21 $10 $C2
     add  hl, bc                                   ; $4147: $09
     cp   [hl]                                     ; $4148: $BE
-    jr   z, ret_015_414C                          ; $4149: $28 $01
+    jr   z, .ret_414C                             ; $4149: $28 $01
 
     dec  [hl]                                     ; $414B: $35
 
-ret_015_414C:
+.ret_414C
     ret                                           ; $414C: $C9
 
 jr_015_414D:
@@ -193,7 +193,7 @@ MovingBlockLeftBottomState1Handler::
     inc  [hl]                                     ; $41FE: $34
     ld   a, [hl]                                  ; $41FF: $7E
     cp   $0A                                      ; $4200: $FE $0A
-    jr   c, ret_015_4216                          ; $4202: $38 $12
+    jr   c, .ret_4216                             ; $4202: $38 $12
 
     ld   [hl], b                                  ; $4204: $70
     ld   a, $11                                   ; $4205: $3E $11
@@ -204,11 +204,11 @@ MovingBlockLeftBottomState1Handler::
     ld   hl, wEntitiesPosYTable                   ; $420E: $21 $10 $C2
     add  hl, bc                                   ; $4211: $09
     cp   [hl]                                     ; $4212: $BE
-    jr   z, ret_015_4216                          ; $4213: $28 $01
+    jr   z, .ret_4216                             ; $4213: $28 $01
 
     inc  [hl]                                     ; $4215: $34
 
-ret_015_4216:
+.ret_4216
     ret                                           ; $4216: $C9
 
 jr_015_4217:
@@ -278,7 +278,7 @@ MovingBlockBottomLeftState1Handler::
     inc  [hl]                                     ; $4270: $34
     ld   a, [hl]                                  ; $4271: $7E
     cp   $0A                                      ; $4272: $FE $0A
-    jr   c, ret_015_4288                          ; $4274: $38 $12
+    jr   c, .ret_4288                             ; $4274: $38 $12
 
     ld   [hl], b                                  ; $4276: $70
     ld   a, $11                                   ; $4277: $3E $11
@@ -289,11 +289,11 @@ MovingBlockBottomLeftState1Handler::
     ld   hl, wEntitiesPosXTable                   ; $4280: $21 $00 $C2
     add  hl, bc                                   ; $4283: $09
     cp   [hl]                                     ; $4284: $BE
-    jr   z, ret_015_4288                          ; $4285: $28 $01
+    jr   z, .ret_4288                             ; $4285: $28 $01
 
     dec  [hl]                                     ; $4287: $35
 
-ret_015_4288:
+.ret_4288
     ret                                           ; $4288: $C9
 
 jr_015_4289:
@@ -363,7 +363,7 @@ MovingBlockBottomRightState1Handler::
     inc  [hl]                                     ; $42E2: $34
     ld   a, [hl]                                  ; $42E3: $7E
     cp   $0A                                      ; $42E4: $FE $0A
-    jr   c, ret_015_42FA                          ; $42E6: $38 $12
+    jr   c, .ret_42FA                             ; $42E6: $38 $12
 
     ld   [hl], b                                  ; $42E8: $70
     ld   a, $11                                   ; $42E9: $3E $11
@@ -374,11 +374,11 @@ MovingBlockBottomRightState1Handler::
     ld   hl, wEntitiesPosXTable                   ; $42F2: $21 $00 $C2
     add  hl, bc                                   ; $42F5: $09
     cp   [hl]                                     ; $42F6: $BE
-    jr   z, ret_015_42FA                          ; $42F7: $28 $01
+    jr   z, .ret_42FA                             ; $42F7: $28 $01
 
     inc  [hl]                                     ; $42F9: $34
 
-ret_015_42FA:
+.ret_42FA
     ret                                           ; $42FA: $C9
 
 jr_015_42FB:

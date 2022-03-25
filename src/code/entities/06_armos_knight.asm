@@ -218,18 +218,18 @@ ArmosKnightState0Handler::
     call func_006_6594                            ; $5427: $CD $94 $65
     add  $20                                      ; $542A: $C6 $20
     cp   $40                                      ; $542C: $FE $40
-    jr   nc, ret_006_5441                         ; $542E: $30 $11
+    jr   nc, .ret_5441                            ; $542E: $30 $11
 
     call func_006_65A4                            ; $5430: $CD $A4 $65
     add  $20                                      ; $5433: $C6 $20
     cp   $40                                      ; $5435: $FE $40
-    jr   nc, ret_006_5441                         ; $5437: $30 $08
+    jr   nc, .ret_5441                            ; $5437: $30 $08
 
     call IncrementEntityState                     ; $5439: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $543C: $CD $05 $0C
     ld   [hl], $30                                ; $543F: $36 $30
 
-ret_006_5441:
+.ret_5441
     ret                                           ; $5441: $C9
 
 ArmosKnightState1Handler::
@@ -373,12 +373,12 @@ ArmosKnightState6Handler::
 ArmosKnightState7Handler::
     call ApplyRecoilIfNeeded_06                   ; $5515: $CD $F7 $64
     call GetEntityTransitionCountdown             ; $5518: $CD $05 $0C
-    jr   nz, ret_006_5522                         ; $551B: $20 $05
+    jr   nz, .ret_5522                            ; $551B: $20 $05
 
     call IncrementEntityState                     ; $551D: $CD $12 $3B
     ld   [hl], $02                                ; $5520: $36 $02
 
-ret_006_5522:
+.ret_5522
     ret                                           ; $5522: $C9
 
 Data_006_5523::

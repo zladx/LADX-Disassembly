@@ -98,12 +98,12 @@ SlimeEyeState0Handler::
 
 .jr_49FB
     call GetEntityTransitionCountdown             ; $49FB: $CD $05 $0C
-    jr   nz, ret_004_4A2C                         ; $49FE: $20 $2C
+    jr   nz, .ret_4A2C                            ; $49FE: $20 $2C
 
     ld   [hl], $50                                ; $4A00: $36 $50
     ld   a, [wC1AE]                               ; $4A02: $FA $AE $C1
     cp   $02                                      ; $4A05: $FE $02
-    jr   nc, ret_004_4A2C                         ; $4A07: $30 $23
+    jr   nc, .ret_4A2C                            ; $4A07: $30 $23
 
     ld   a, ENTITY_GEL                            ; $4A09: $3E $1B
     call SpawnNewEntity_trampoline                ; $4A0B: $CD $86 $3B
@@ -123,7 +123,7 @@ SlimeEyeState0Handler::
     add  hl, de                                   ; $4A29: $19
     ld   [hl], $70                                ; $4A2A: $36 $70
 
-ret_004_4A2C:
+.ret_4A2C
     ret                                           ; $4A2C: $C9
 
 SlimeEyeState1Handler::
@@ -253,11 +253,11 @@ jr_004_4AA5:
     add  hl, bc                                   ; $4AF7: $09
     ld   a, [hl]                                  ; $4AF8: $7E
     and  a                                        ; $4AF9: $A7
-    jr   z, ret_004_4B11                          ; $4AFA: $28 $15
+    jr   z, .ret_4B11                             ; $4AFA: $28 $15
 
     ldh  a, [hFrameCounter]                       ; $4AFC: $F0 $E7
     and  $1F                                      ; $4AFE: $E6 $1F
-    jr   nz, ret_004_4B11                         ; $4B00: $20 $0F
+    jr   nz, .ret_4B11                            ; $4B00: $20 $0F
 
     call GetEntityPrivateCountdown1               ; $4B02: $CD $00 $0C
     ld   [hl], $50                                ; $4B05: $36 $50
@@ -265,11 +265,11 @@ jr_004_4AA5:
     add  hl, bc                                   ; $4B0A: $09
     ld   a, [hl]                                  ; $4B0B: $7E
     cp   $04                                      ; $4B0C: $FE $04
-    jr   z, ret_004_4B11                          ; $4B0E: $28 $01
+    jr   z, .ret_4B11                             ; $4B0E: $28 $01
 
     inc  [hl]                                     ; $4B10: $34
 
-ret_004_4B11:
+.ret_4B11
     ret                                           ; $4B11: $C9
 
 Data_004_4B12::
@@ -299,7 +299,7 @@ func_004_4B37::
     add  hl, bc                                   ; $4B47: $09
     ld   c, $04                                   ; $4B48: $0E $04
 
-.loop_4B4A:
+.loop_4B4A
     ld   a, [de]                                  ; $4B4A: $1A
     inc  de                                       ; $4B4B: $13
     ld   [hl+], a                                 ; $4B4C: $22
@@ -555,14 +555,14 @@ jr_004_4E4F:
 
 func_004_4E52::
     call GetEntityDropTimer                       ; $4E52: $CD $FB $0B
-    jr   z, ret_004_4E5F                          ; $4E55: $28 $08
+    jr   z, .ret_4E5F                             ; $4E55: $28 $08
 
     ld   a, $02                                   ; $4E57: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4E59: $E0 $A1
     ld   a, LINK_ANIMATION_STATE_UNKNOWN_6A       ; $4E5B: $3E $6A
     ldh  [hLinkAnimationState], a                 ; $4E5D: $E0 $9D
 
-ret_004_4E5F:
+.ret_4E5F
     ret                                           ; $4E5F: $C9
 
 label_004_4E60:
@@ -746,7 +746,7 @@ func_004_4F7E::
     ld   a, $FF                                   ; $4F7E: $3E $FF
     call SetEntitySpriteVariant                   ; $4F80: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $4F83: $CD $05 $0C
-    jr   nz, ret_004_4FAD                         ; $4F86: $20 $25
+    jr   nz, .ret_4FAD                            ; $4F86: $20 $25
 
     ld   [hl], $18                                ; $4F88: $36 $18
     ld   hl, wEntitiesPrivateState4Table          ; $4F8A: $21 $40 $C4
@@ -768,7 +768,7 @@ func_004_4F7E::
     ld   a, JINGLE_JUMP_DOWN                      ; $4FA9: $3E $08
     ldh  [hJingle], a                             ; $4FAB: $E0 $F2
 
-ret_004_4FAD:
+.ret_4FAD
     ret                                           ; $4FAD: $C9
 
 Data_004_4FAE::

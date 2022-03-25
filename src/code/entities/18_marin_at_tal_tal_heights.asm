@@ -118,13 +118,13 @@ func_018_5F5E::
 .jr_5F66
     ldh  a, [hFrameCounter]                       ; $5F66: $F0 $E7
     and  $3F                                      ; $5F68: $E6 $3F
-    jr   nz, ret_018_5F72                         ; $5F6A: $20 $06
+    jr   nz, .ret_5F72                            ; $5F6A: $20 $06
 
     ld   hl, wEntitiesSpeedZTable                 ; $5F6C: $21 $20 $C3
     add  hl, bc                                   ; $5F6F: $09
     ld   [hl], $10                                ; $5F70: $36 $10
 
-ret_018_5F72:
+.ret_5F72
     ret                                           ; $5F72: $C9
 
 MarinAtTalTalHeightsState1Handler::

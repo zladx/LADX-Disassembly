@@ -78,7 +78,7 @@ ENDC
     ld   a, [hl]                                  ; $5447: $7E
     inc  [hl]                                     ; $5448: $34
     and  $18                                      ; $5449: $E6 $18
-    jr   z, ret_018_545E                          ; $544B: $28 $11
+    jr   z, .ret_545E                             ; $544B: $28 $11
 
     ld   hl, hLinkAnimationState                  ; $544D: $21 $9D $FF
     inc  [hl]                                     ; $5450: $34
@@ -89,7 +89,7 @@ ENDC
     ld   a, $01                                   ; $545A: $3E $01
     ldh  [hMovingBlockMoverState], a              ; $545C: $E0 $BA
 
-ret_018_545E:
+.ret_545E
     ret                                           ; $545E: $C9
 
 jr_018_545F:
@@ -160,7 +160,7 @@ func_018_548A::
 
     ldh  [hActiveEntityVisualPosY], a             ; $54A2: $E0 $EC
 
-.loop_54A4:
+.loop_54A4
     ld   de, MovingBlockMover2SpriteVariants      ; $54A4: $11 $82 $54
     call RenderActiveEntitySpritesPair            ; $54A7: $CD $C0 $3B
     ldh  a, [hActiveEntityVisualPosY]             ; $54AA: $F0 $EC

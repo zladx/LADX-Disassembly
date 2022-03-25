@@ -71,7 +71,7 @@ func_038_785A::
     ret  nz                                       ; $7863: $C0
 
     ld   bc, $00                                  ; $7864: $01 $00 $00
-.loop_7867_38:
+.loop_7867_38
     push bc                                       ; $7867: $C5
     ld   hl, wEntitiesSpeedXTable+2               ; $7868: $21 $42 $C2
     add  hl, bc                                   ; $786B: $09

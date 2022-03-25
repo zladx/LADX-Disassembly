@@ -14,7 +14,7 @@ EntityInitDodongoSnake::
     push de                                       ; $682E: $D5
     ld   e, $20                                   ; $682F: $1E $20
 
-.loop_6831:
+.loop_6831
     xor  a                                        ; $6831: $AF
     ld   [hl+], a                                 ; $6832: $22
     dec  e                                        ; $6833: $1D
@@ -27,7 +27,7 @@ EntityInitDodongoSnake::
     add  hl, de                                   ; $683D: $19
     ld   e, $20                                   ; $683E: $1E $20
 
-.loop_6840:
+.loop_6840
     xor  a                                        ; $6840: $AF
     ld   [hl+], a                                 ; $6841: $22
     dec  e                                        ; $6842: $1D

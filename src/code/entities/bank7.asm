@@ -119,13 +119,13 @@ func_007_68AD::
     add  hl, de                                   ; $68C4: $19
     ld   a, [hl]                                  ; $68C5: $7E
     cp   $FF                                      ; $68C6: $FE $FF
-    jr   z, ret_007_68CF                          ; $68C8: $28 $05
+    jr   z, .ret_68CF                             ; $68C8: $28 $05
 
     ld   hl, wEntitiesDirectionTable              ; $68CA: $21 $80 $C3
     add  hl, bc                                   ; $68CD: $09
     ld   [hl], a                                  ; $68CE: $77
 
-ret_007_68CF:
+.ret_68CF
     ret                                           ; $68CF: $C9
 
 jr_007_68D0:
@@ -182,12 +182,12 @@ jr_007_691A:
     call func_007_7E6D                            ; $691A: $CD $6D $7E
     add  $08                                      ; $691D: $C6 $08
     cp   $10                                      ; $691F: $FE $10
-    jr   nc, ret_007_6928                         ; $6921: $30 $05
+    jr   nc, .ret_6928                            ; $6921: $30 $05
 
     call func_007_7E5D                            ; $6923: $CD $5D $7E
     jr   jr_007_6901                              ; $6926: $18 $D9
 
-ret_007_6928:
+.ret_6928
     ret                                           ; $6928: $C9
 
 func_007_6929::
@@ -342,7 +342,7 @@ label_007_69D0:
     add  hl, de                                   ; $6A20: $19
     ld   e, $05                                   ; $6A21: $1E $05
 
-.loop_6A23:
+.loop_6A23
     ld   a, [hl+]                                 ; $6A23: $2A
     ld   [bc], a                                  ; $6A24: $02
     push hl                                       ; $6A25: $E5
@@ -473,7 +473,7 @@ func_007_6ADF::
     add  hl, bc                                   ; $6AE2: $09
     ld   [hl], b                                  ; $6AE3: $70
     call GetEntityTransitionCountdown             ; $6AE4: $CD $05 $0C
-    jr   nz, ret_007_6AF4                         ; $6AE7: $20 $0B
+    jr   nz, .ret_6AF4                            ; $6AE7: $20 $0B
 
     ld   [hl], $30                                ; $6AE9: $36 $30
     call IncrementEntityState                     ; $6AEB: $CD $12 $3B
@@ -481,7 +481,7 @@ func_007_6ADF::
     add  hl, bc                                   ; $6AF1: $09
     ld   [hl], $6F                                ; $6AF2: $36 $6F
 
-ret_007_6AF4:
+.ret_6AF4
     ret                                           ; $6AF4: $C9
 
 func_007_6AF5::
@@ -555,7 +555,7 @@ jr_007_6B45:
     ld   hl, wD20D                                ; $6B4F: $21 $0D $D2
     ld   [hl], $F0                                ; $6B52: $36 $F0
     cp   $20                                      ; $6B54: $FE $20
-    jr   c, ret_007_6B67                          ; $6B56: $38 $0F
+    jr   c, .ret_6B67                             ; $6B56: $38 $0F
 
     ld   hl, wD20E                                ; $6B58: $21 $0E $D2
     ld   [hl], $F2                                ; $6B5B: $36 $F2
@@ -564,7 +564,7 @@ jr_007_6B45:
     ld   hl, wD20D                                ; $6B62: $21 $0D $D2
     ld   [hl], $F2                                ; $6B65: $36 $F2
 
-ret_007_6B67:
+.ret_6B67
     ret                                           ; $6B67: $C9
 
 func_007_6B68::
@@ -939,16 +939,16 @@ jr_007_6DB8:
 jr_007_6DC7:
     call GetEntityTransitionCountdown             ; $6DC7: $CD $05 $0C
     cp   $14                                      ; $6DCA: $FE $14
-    jr   nc, ret_007_6DD8                         ; $6DCC: $30 $0A
+    jr   nc, .ret_6DD8                            ; $6DCC: $30 $0A
 
     ld   a, [wD20E]                               ; $6DCE: $FA $0E $D2
     and  a                                        ; $6DD1: $A7
-    jr   z, ret_007_6DD8                          ; $6DD2: $28 $04
+    jr   z, .ret_6DD8                             ; $6DD2: $28 $04
 
     inc  a                                        ; $6DD4: $3C
     ld   [wD20E], a                               ; $6DD5: $EA $0E $D2
 
-ret_007_6DD8:
+.ret_6DD8
     ret                                           ; $6DD8: $C9
 
 func_007_6DD9::
@@ -960,10 +960,10 @@ func_007_6DD9::
 
 .jr_6DE3
     cp   $30                                      ; $6DE3: $FE $30
-    jr   nc, ret_007_6DF5                         ; $6DE5: $30 $0E
+    jr   nc, .ret_6DF5                            ; $6DE5: $30 $0E
 
     and  $03                                      ; $6DE7: $E6 $03
-    jr   nz, ret_007_6DF5                         ; $6DE9: $20 $0A
+    jr   nz, .ret_6DF5                            ; $6DE9: $20 $0A
 
     ld   a, [wD20E]                               ; $6DEB: $FA $0E $D2
     add  $02                                      ; $6DEE: $C6 $02
@@ -971,7 +971,7 @@ func_007_6DD9::
     inc  a                                        ; $6DF1: $3C
     ld   [wD20E], a                               ; $6DF2: $EA $0E $D2
 
-ret_007_6DF5:
+.ret_6DF5
     ret                                           ; $6DF5: $C9
 
 func_007_6DF6::
@@ -2091,7 +2091,7 @@ WaterTektiteEntityHandler::
 
 func_007_7576::
     call GetEntityTransitionCountdown             ; $7576: $CD $05 $0C
-    jr   nz, ret_007_7596                         ; $7579: $20 $1B
+    jr   nz, .ret_7596                            ; $7579: $20 $1B
 
     ld   [hl], $20                                ; $757B: $36 $20
     call IncrementEntityState                     ; $757D: $CD $12 $3B
@@ -2108,7 +2108,7 @@ func_007_7576::
     add  hl, bc                                   ; $7594: $09
     ld   [hl], a                                  ; $7595: $77
 
-ret_007_7596:
+.ret_7596
     ret                                           ; $7596: $C9
 
 func_007_7597::

@@ -336,7 +336,7 @@ jr_004_6B51:
     call CopyEntityPositionToActivePosition       ; $6BA8: $CD $8A $3D
     ld   a, $03                                   ; $6BAB: $3E $03
 
-.loop_6BAD:
+.loop_6BAD
     ldh  [hMultiPurpose4], a                      ; $6BAD: $E0 $DB
     ldh  a, [hActiveEntityVisualPosY]             ; $6BAF: $F0 $EC
     ld   hl, hMultiPurpose1                       ; $6BB1: $21 $D8 $FF

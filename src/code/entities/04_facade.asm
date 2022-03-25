@@ -275,7 +275,7 @@ jr_004_51FA:
     add  hl, de                                   ; $5234: $19
     ld   [hl], $01                                ; $5235: $36 $01
 
-.loop_5237:
+.loop_5237
     call GetRandomByte                            ; $5237: $CD $0D $28
     and  $0F                                      ; $523A: $E6 $0F
     ld   hl, wEntitiesPrivateState2Table          ; $523C: $21 $C0 $C2
@@ -466,7 +466,7 @@ jr_004_5340:
     add  hl, bc                                   ; $5362: $09
     ld   a, [hl]                                  ; $5363: $7E
     and  a                                        ; $5364: $A7
-    jr   z, ret_004_537E                          ; $5365: $28 $17
+    jr   z, .ret_537E                             ; $5365: $28 $17
 
     dec  [hl]                                     ; $5367: $35
     rra                                           ; $5368: $1F
@@ -484,7 +484,7 @@ jr_004_5340:
     add  hl, bc                                   ; $537B: $09
     ld   [hl], $48                                ; $537C: $36 $48
 
-ret_004_537E:
+.ret_537E
     ret                                           ; $537E: $C9
 
 Data_004_537F::
@@ -562,25 +562,25 @@ FacadeState1Handler:
     ld   a, [hl]                                  ; $5489: $7E
     call SetEntitySpriteVariant                   ; $548A: $CD $0C $3B
     cp   $03                                      ; $548D: $FE $03
-    jr   nz, ret_004_54F0                         ; $548F: $20 $5F
+    jr   nz, .ret_54F0                            ; $548F: $20 $5F
 
     ld   a, [wLinkMotionState]                    ; $5491: $FA $1C $C1
     cp   LINK_MOTION_FALLING_DOWN                 ; $5494: $FE $06
-    jr   z, ret_004_54F0                          ; $5496: $28 $58
+    jr   z, .ret_54F0                             ; $5496: $28 $58
 
     ldh  a, [hLinkPositionZ]                      ; $5498: $F0 $A2
     and  a                                        ; $549A: $A7
-    jr   nz, ret_004_54F0                         ; $549B: $20 $53
+    jr   nz, .ret_54F0                            ; $549B: $20 $53
 
     call func_004_6E35                            ; $549D: $CD $35 $6E
     add  $08                                      ; $54A0: $C6 $08
     cp   $10                                      ; $54A2: $FE $10
-    jr   nc, ret_004_54F0                         ; $54A4: $30 $4A
+    jr   nc, .ret_54F0                            ; $54A4: $30 $4A
 
     call func_004_6E45                            ; $54A6: $CD $45 $6E
     add  $08                                      ; $54A9: $C6 $08
     cp   $10                                      ; $54AB: $FE $10
-    jr   nc, ret_004_54F0                         ; $54AD: $30 $41
+    jr   nc, .ret_54F0                            ; $54AD: $30 $41
 
     ld   a, $0C                                   ; $54AF: $3E $0C
     call GetVectorTowardsLink_trampoline          ; $54B1: $CD $B5 $3B
@@ -598,12 +598,12 @@ FacadeState1Handler:
     call func_004_6E35                            ; $54C5: $CD $35 $6E
     add  $03                                      ; $54C8: $C6 $03
     cp   $06                                      ; $54CA: $FE $06
-    jr   nc, ret_004_54F0                         ; $54CC: $30 $22
+    jr   nc, .ret_54F0                            ; $54CC: $30 $22
 
     call func_004_6E45                            ; $54CE: $CD $45 $6E
     add  $03                                      ; $54D1: $C6 $03
     cp   $06                                      ; $54D3: $FE $06
-    jr   nc, ret_004_54F0                         ; $54D5: $30 $19
+    jr   nc, .ret_54F0                            ; $54D5: $30 $19
 
     ldh  a, [hActiveEntityPosX]                   ; $54D7: $F0 $EE
     ldh  [hLinkPositionX], a                      ; $54D9: $E0 $98
@@ -616,7 +616,7 @@ FacadeState1Handler:
     ld   a, $50                                   ; $54EB: $3E $50
     ld   [wDBCB], a                               ; $54ED: $EA $CB $DB
 
-ret_004_54F0:
+.ret_54F0
     ret                                           ; $54F0: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
@@ -709,13 +709,13 @@ func_004_5569::
     ret  c                                        ; $5573: $D8
 
     and  $03                                      ; $5574: $E6 $03
-    jr   nz, ret_004_557D                         ; $5576: $20 $05
+    jr   nz, .ret_557D                            ; $5576: $20 $05
 
     ld   hl, wEntitiesPosZTable                   ; $5578: $21 $10 $C3
     add  hl, bc                                   ; $557B: $09
     inc  [hl]                                     ; $557C: $34
 
-ret_004_557D:
+.ret_557D
     ret                                           ; $557D: $C9
 
 jr_004_557E:
@@ -774,13 +774,13 @@ func_004_55C3::
     ret  c                                        ; $55CD: $D8
 
     and  $03                                      ; $55CE: $E6 $03
-    jr   nz, ret_004_55D7                         ; $55D0: $20 $05
+    jr   nz, .ret_55D7                            ; $55D0: $20 $05
 
     ld   hl, wEntitiesPosZTable                   ; $55D2: $21 $10 $C3
     add  hl, bc                                   ; $55D5: $09
     inc  [hl]                                     ; $55D6: $34
 
-ret_004_55D7:
+.ret_55D7
     ret                                           ; $55D7: $C9
 
 jr_004_55D8:

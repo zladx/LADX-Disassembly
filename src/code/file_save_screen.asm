@@ -75,7 +75,7 @@ FileSaveMapFadeOut::
     call func_1A22                                ; $4048: $CD $22 $1A
     ld   a, [wTransitionSequenceCounter]          ; $404B: $FA $6B $C1
     cp   $04                                      ; $404E: $FE $04
-    jr   nz, ret_001_4072                         ; $4050: $20 $20
+    jr   nz, .ret_4072                            ; $4050: $20 $20
     ld   a, $03                                   ; $4052: $3E $03
     ldh  [hVolumeRight], a                        ; $4054: $E0 $A9
     ld   a, $30                                   ; $4056: $3E $30
@@ -91,7 +91,7 @@ FileSaveMapFadeOut::
     ld   a, TILESET_0F                            ; $406D: $3E $0F
     ld   [wTilesetToLoad], a                      ; $406F: $EA $FE $D6
 
-ret_001_4072::
+.ret_4072
     ret                                           ; $4072: $C9
 
 FileSaveDelay1::

@@ -300,18 +300,18 @@ jr_005_46D2:
     add  hl, bc                                   ; $46EF: $09
     ld   a, [hl]                                  ; $46F0: $7E
     cp   $23                                      ; $46F1: $FE $23
-    jr   nz, ret_005_474D                         ; $46F3: $20 $58
+    jr   nz, .ret_474D                            ; $46F3: $20 $58
 
     ld   hl, wIsIndoor                            ; $46F5: $21 $A5 $DB
     ldh  a, [hFrameCounter]                       ; $46F8: $F0 $E7
     and  $0F                                      ; $46FA: $E6 $0F
     or   [hl]                                     ; $46FC: $B6
-    jr   nz, ret_005_474D                         ; $46FD: $20 $4E
+    jr   nz, .ret_474D                            ; $46FD: $20 $4E
 
     ld   a, $6C                                   ; $46FF: $3E $6C
     ld   e, $07                                   ; $4701: $1E $07
     call SpawnNewEntityInRange_trampoline         ; $4703: $CD $98 $3B
-    jr   c, ret_005_474D                          ; $4706: $38 $45
+    jr   c, .ret_474D                             ; $4706: $38 $45
 
     ld   a, WAVE_SFX_CUCCO_HURT                   ; $4708: $3E $13
     ldh  [hWaveSfx], a                            ; $470A: $E0 $F3
@@ -352,7 +352,7 @@ jr_005_46D2:
     call ApplyVectorTowardsLink_trampoline        ; $4749: $CD $AA $3B
     pop  bc                                       ; $474C: $C1
 
-ret_005_474D:
+.ret_474D
     ret                                           ; $474D: $C9
 
 func_005_474E::

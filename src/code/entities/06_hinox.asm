@@ -175,12 +175,12 @@ jr_006_50BA:
     call func_006_5099                            ; $50BD: $CD $99 $50
     ldh  a, [hFrameCounter]                       ; $50C0: $F0 $E7
     and  $0F                                      ; $50C2: $E6 $0F
-    jr   nz, ret_006_50CA                         ; $50C4: $20 $04
+    jr   nz, .ret_50CA                            ; $50C4: $20 $04
 
     ld   a, JINGLE_BIG_BUMP                       ; $50C6: $3E $20
     ldh  [hJingle], a                             ; $50C8: $E0 $F2
 
-ret_006_50CA:
+.ret_50CA
     ret                                           ; $50CA: $C9
 
 HinoxState3Handler::

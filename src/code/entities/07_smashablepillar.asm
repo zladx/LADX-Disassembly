@@ -131,11 +131,11 @@ func_007_5E43::
 .jr_5E67
     ldh  a, [hFrameCounter]                       ; $5E67: $F0 $E7
     and  $03                                      ; $5E69: $E6 $03
-    jr   nz, ret_007_5EA6                         ; $5E6B: $20 $39
+    jr   nz, .ret_5EA6                            ; $5E6B: $20 $39
 
     ld   a, ENTITY_SMASHABLE_PILLAR               ; $5E6D: $3E $A7
     call SpawnNewEntity_trampoline                ; $5E6F: $CD $86 $3B
-    jr   c, ret_007_5EA6                          ; $5E72: $38 $32
+    jr   c, .ret_5EA6                             ; $5E72: $38 $32
 
     call GetRandomByte                            ; $5E74: $CD $0D $28
     and  $07                                      ; $5E77: $E6 $07
@@ -163,7 +163,7 @@ func_007_5E43::
     add  hl, de                                   ; $5EA3: $19
     ld   [hl], $01                                ; $5EA4: $36 $01
 
-ret_007_5EA6:
+.ret_5EA6
     ret                                           ; $5EA6: $C9
 
 label_007_5EA7:
@@ -259,15 +259,15 @@ func_007_5F11::
 
 .jr_5F37
     cp   $40                                      ; $5F37: $FE $40
-    jr   c, ret_007_5F44                          ; $5F39: $38 $09
+    jr   c, .ret_5F44                             ; $5F39: $38 $09
 
     and  $07                                      ; $5F3B: $E6 $07
-    jr   nz, ret_007_5F44                         ; $5F3D: $20 $05
+    jr   nz, .ret_5F44                            ; $5F3D: $20 $05
 
     ld   hl, hNoiseSfx                            ; $5F3F: $21 $F4 $FF
     ld   [hl], $0C                                ; $5F42: $36 $0C
 
-ret_007_5F44:
+.ret_5F44
     ret                                           ; $5F44: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
@@ -294,7 +294,7 @@ label_007_5F4D:
 func_007_5F61::
     ld   a, ENTITY_SMASHABLE_PILLAR               ; $5F61: $3E $A7
     call SpawnNewEntity_trampoline                ; $5F63: $CD $86 $3B
-    jr   c, ret_007_5F9A                          ; $5F66: $38 $32
+    jr   c, .ret_5F9A                             ; $5F66: $38 $32
 
     ld   hl, wEntitiesPrivateState1Table          ; $5F68: $21 $B0 $C2
     add  hl, de                                   ; $5F6B: $19
@@ -322,7 +322,7 @@ func_007_5F61::
     add  hl, de                                   ; $5F98: $19
     ld   [hl], a                                  ; $5F99: $77
 
-ret_007_5F9A:
+.ret_5F9A
     ret                                           ; $5F9A: $C9
 
 Data_007_5F9B::

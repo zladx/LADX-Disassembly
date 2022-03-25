@@ -39,7 +39,7 @@ WorldMapState0Handler::
     and  a                                        ; $565D: $A7
     jr   nz, jr_001_5674                          ; $565E: $20 $14
 
-.loop_5660::
+.loop_5660
     xor  a                                        ; $5660: $AF
     ld   [rSVBK], a                               ; $5661: $E0 $70
     ld   b, [hl]                                  ; $5663: $46

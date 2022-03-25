@@ -160,11 +160,11 @@ func_007_58FA::
     call SetEntitySpriteVariant                   ; $5901: $CD $0C $3B
     ldh  a, [hFrameCounter]                       ; $5904: $F0 $E7
     and  $1F                                      ; $5906: $E6 $1F
-    jr   nz, ret_007_5919                         ; $5908: $20 $0F
+    jr   nz, .ret_5919                            ; $5908: $20 $0F
 
     call GetRandomByte                            ; $590A: $CD $0D $28
     and  $01                                      ; $590D: $E6 $01
-    jr   nz, ret_007_5919                         ; $590F: $20 $08
+    jr   nz, .ret_5919                            ; $590F: $20 $08
 
     ld   hl, wEntitiesDirectionTable              ; $5911: $21 $80 $C3
     add  hl, bc                                   ; $5914: $09
@@ -172,7 +172,7 @@ func_007_58FA::
     xor  $01                                      ; $5916: $EE $01
     ld   [hl], a                                  ; $5918: $77
 
-ret_007_5919:
+.ret_5919
     ret                                           ; $5919: $C9
 
 func_007_591A::

@@ -199,12 +199,12 @@ SmasherState1Handler::
     call func_006_45E5                            ; $4644: $CD $E5 $45
     ldh  a, [hFrameCounter]                       ; $4647: $F0 $E7
     and  $08                                      ; $4649: $E6 $08
-    jr   z, ret_006_464F                          ; $464B: $28 $02
+    jr   z, .ret_464F                             ; $464B: $28 $02
 
     inc  [hl]                                     ; $464D: $34
     inc  [hl]                                     ; $464E: $34
 
-ret_006_464F:
+.ret_464F
     ret                                           ; $464F: $C9
 
 Data_006_4650::

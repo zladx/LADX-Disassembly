@@ -48,7 +48,7 @@ MarineBeachPrepare0::
     ld   c, $80                                   ; $624A: $0E $80
     di                                            ; $624C: $F3
 
-.loop_624D::
+.loop_624D
     xor  a                                        ; $624D: $AF
     ld   [rSVBK], a                               ; $624E: $E0 $70
     ld   b, [hl]                                  ; $6250: $46
@@ -277,12 +277,12 @@ MarineBeachScrollStop::
     jr   nz, jr_001_644A                          ; $6439: $20 $0F
     ld   a, [wC3C7]                               ; $643B: $FA $C7 $C3
     and  a                                        ; $643E: $A7
-    jr   nz, ret_001_6449                         ; $643F: $20 $08
+    jr   nz, .ret_6449                            ; $643F: $20 $08
     ld   a, $D8                                   ; $6441: $3E $D8
     call OpenMarinBeachDialog                     ; $6443: $CD $DE $67
     call IncrementGameplaySubtype                 ; $6446: $CD $D6 $44
 
-ret_001_6449::
+.ret_6449
     ret                                           ; $6449: $C9
 
 jr_001_644A::
@@ -294,52 +294,52 @@ MarineBeachDialog1::
     call func_001_651E                            ; $6450: $CD $1E $65
     ld   a, [wDialogState]                        ; $6453: $FA $9F $C1
     and  a                                        ; $6456: $A7
-    jr   nz, ret_001_6466                         ; $6457: $20 $0D
+    jr   nz, .ret_6466                            ; $6457: $20 $0D
     ld   a, $80                                   ; $6459: $3E $80
     ld   [wC3C4], a                               ; $645B: $EA $C4 $C3
     ld   a, $C0                                   ; $645E: $3E $C0
     ld   [wC3C7], a                               ; $6460: $EA $C7 $C3
     call IncrementGameplaySubtype                 ; $6463: $CD $D6 $44
 
-ret_001_6466::
+.ret_6466
     ret                                           ; $6466: $C9
 
 MarineBeachPause1::
     call func_001_651E                            ; $6467: $CD $1E $65
     ld   a, [wC3C7]                               ; $646A: $FA $C7 $C3
     and  a                                        ; $646D: $A7
-    jr   nz, ret_001_6478                         ; $646E: $20 $08
+    jr   nz, .ret_6478                            ; $646E: $20 $08
     ld   a, $D9                                   ; $6470: $3E $D9
     call OpenMarinBeachDialog                     ; $6472: $CD $DE $67
     jp   IncrementGameplaySubtypeAndReturn        ; $6475: $C3 $D6 $44
 
-ret_001_6478::
+.ret_6478
     ret                                           ; $6478: $C9
 
 MarineBeachDialog2::
     call func_001_651E                            ; $6479: $CD $1E $65
     ld   a, [wDialogState]                        ; $647C: $FA $9F $C1
     and  a                                        ; $647F: $A7
-    jr   nz, ret_001_648F                         ; $6480: $20 $0D
+    jr   nz, .ret_648F                            ; $6480: $20 $0D
     ld   a, $80                                   ; $6482: $3E $80
     ld   [wC3C4], a                               ; $6484: $EA $C4 $C3
     ld   a, $C0                                   ; $6487: $3E $C0
     ld   [wC3C7], a                               ; $6489: $EA $C7 $C3
     call IncrementGameplaySubtype                 ; $648C: $CD $D6 $44
 
-ret_001_648F::
+.ret_648F
     ret                                           ; $648F: $C9
 
 MarineBeachPause2::
     call func_001_651E                            ; $6490: $CD $1E $65
     ld   a, [wC3C7]                               ; $6493: $FA $C7 $C3
     and  a                                        ; $6496: $A7
-    jr   nz, ret_001_64A1                         ; $6497: $20 $08
+    jr   nz, .ret_64A1                            ; $6497: $20 $08
     ld   a, $DA                                   ; $6499: $3E $DA
     call OpenMarinBeachDialog                     ; $649B: $CD $DE $67
     jp   IncrementGameplaySubtypeAndReturn        ; $649E: $C3 $D6 $44
 
-ret_001_64A1::
+.ret_64A1
     ret                                           ; $64A1: $C9
 
 MarineBeachAreYouListening::
@@ -373,14 +373,14 @@ MarineBeachDialog3::
     call func_001_651E                            ; $64D0: $CD $1E $65
     ld   a, [wDialogState]                        ; $64D3: $FA $9F $C1
     and  a                                        ; $64D6: $A7
-    jr   nz, ret_001_64E6                         ; $64D7: $20 $0D
+    jr   nz, .ret_64E6                            ; $64D7: $20 $0D
     ld   a, $DC                                   ; $64D9: $3E $DC
     call OpenMarinBeachDialog                     ; $64DB: $CD $DE $67
     ld   a, $30                                   ; $64DE: $3E $30
     ld   [wC3C7], a                               ; $64E0: $EA $C7 $C3
     call IncrementGameplaySubtype                 ; $64E3: $CD $D6 $44
 
-ret_001_64E6::
+.ret_64E6
     ret                                           ; $64E6: $C9
 
 MarineBeachDialog4::
@@ -400,7 +400,7 @@ func_001_64FF::
     ld   hl, wTranscientVfxTypeTable              ; $6501: $21 $10 $C5
     xor  a                                        ; $6504: $AF
 
-.loop_6505::
+.loop_6505
     ldi  [hl], a                                  ; $6505: $22
     dec  e                                        ; $6506: $1D
     jr   nz, .loop_6505                           ; $6507: $20 $FC
@@ -657,7 +657,7 @@ func_001_6673::
 .jr_66C4::
     ldh  a, [hMultiPurposeG]                      ; $66C4: $F0 $E8
     cp   $F0                                      ; $66C6: $FE $F0
-    jr   c, ret_001_66D7                          ; $66C8: $38 $0D
+    jr   c, .ret_66D7                             ; $66C8: $38 $0D
     ld   hl, wC560                                ; $66CA: $21 $60 $C5
     add  hl, bc                                   ; $66CD: $09
     ld   a, [hl]                                  ; $66CE: $7E
@@ -667,7 +667,7 @@ func_001_6673::
     add  hl, bc                                   ; $66D5: $09
     ld   [hl], b                                  ; $66D6: $70
 
-ret_001_66D7::
+.ret_66D7
     ret                                           ; $66D7: $C9
 
 Data_001_66D8::

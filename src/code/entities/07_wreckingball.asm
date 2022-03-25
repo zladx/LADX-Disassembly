@@ -300,7 +300,7 @@ jr_007_6172:
 
 func_007_618F::
     call GetEntityTransitionCountdown             ; $618F: $CD $05 $0C
-    jr   nz, ret_007_61CD                         ; $6192: $20 $39
+    jr   nz, .ret_61CD                            ; $6192: $20 $39
 
     ld   hl, wEntitiesPosXTable                   ; $6194: $21 $00 $C2
     add  hl, de                                   ; $6197: $19
@@ -308,7 +308,7 @@ func_007_618F::
     sub  [hl]                                     ; $619A: $96
     add  $10                                      ; $619B: $C6 $10
     cp   $20                                      ; $619D: $FE $20
-    jr   nc, ret_007_61CD                         ; $619F: $30 $2C
+    jr   nc, .ret_61CD                            ; $619F: $30 $2C
 
     ld   hl, wEntitiesPosYTable                   ; $61A1: $21 $10 $C2
     add  hl, de                                   ; $61A4: $19
@@ -316,7 +316,7 @@ func_007_618F::
     sub  [hl]                                     ; $61A7: $96
     add  $18                                      ; $61A8: $C6 $18
     cp   $28                                      ; $61AA: $FE $28
-    jr   nc, ret_007_61CD                         ; $61AC: $30 $1F
+    jr   nc, .ret_61CD                            ; $61AC: $30 $1F
 
     call func_007_6142                            ; $61AE: $CD $42 $61
     ld   a, $25                                   ; $61B1: $3E $25
@@ -329,12 +329,12 @@ func_007_618F::
     add  hl, de                                   ; $61C1: $19
     ld   a, [hl]                                  ; $61C2: $7E
     and  a                                        ; $61C3: $A7
-    jr   nz, ret_007_61CD                         ; $61C4: $20 $07
+    jr   nz, .ret_61CD                            ; $61C4: $20 $07
 
     inc  [hl]                                     ; $61C6: $34
     ld   hl, wEntitiesTransitionCountdownTable    ; $61C7: $21 $E0 $C2
     add  hl, de                                   ; $61CA: $19
     ld   [hl], $50                                ; $61CB: $36 $50
 
-ret_007_61CD:
+.ret_61CD
     ret                                           ; $61CD: $C9

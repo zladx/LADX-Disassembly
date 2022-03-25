@@ -160,11 +160,11 @@ func_007_67D7::
 
     ldh  a, [hFrameCounter]                       ; $67E3: $F0 $E7
     and  $07                                      ; $67E5: $E6 $07
-    jr   nz, ret_007_67EA                         ; $67E7: $20 $01
+    jr   nz, .ret_67EA                            ; $67E7: $20 $01
 
     inc  [hl]                                     ; $67E9: $34
 
-ret_007_67EA:
+.ret_67EA
     ret                                           ; $67EA: $C9
 
 jr_007_67EB:
@@ -181,7 +181,7 @@ jr_007_67EB:
     inc  [hl]                                     ; $67FA: $34
     ld   a, [hl]                                  ; $67FB: $7E
     cp   $18                                      ; $67FC: $FE $18
-    jr   c, ret_007_683D                          ; $67FE: $38 $3D
+    jr   c, .ret_683D                             ; $67FE: $38 $3D
 
     ld   [hl], b                                  ; $6800: $70
     ld   hl, wEntitiesPrivateState2Table          ; $6801: $21 $C0 $C2
@@ -211,7 +211,7 @@ jr_007_67EB:
     ld   [hl], a                                  ; $682A: $77
     call GetRandomByte                            ; $682B: $CD $0D $28
     and  $07                                      ; $682E: $E6 $07
-    jr   nz, ret_007_683D                         ; $6830: $20 $0B
+    jr   nz, .ret_683D                            ; $6830: $20 $0B
 
     call GetRandomByte                            ; $6832: $CD $0D $28
     and  $02                                      ; $6835: $E6 $02
@@ -220,5 +220,5 @@ jr_007_67EB:
     add  hl, bc                                   ; $683B: $09
     ld   [hl], a                                  ; $683C: $77
 
-ret_007_683D:
+.ret_683D
     ret                                           ; $683D: $C9

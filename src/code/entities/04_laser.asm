@@ -45,11 +45,11 @@ LaserEntityHandler::
     jr   z, jr_004_6CB4                           ; $6C79: $28 $39
 
     cp   $10                                      ; $6C7B: $FE $10
-    jr   nz, ret_004_6CB3                         ; $6C7D: $20 $34
+    jr   nz, .ret_6CB3                            ; $6C7D: $20 $34
 
     ld   a, ENTITY_LASER_BEAM                     ; $6C7F: $3E $2B
     call SpawnNewEntity_trampoline                ; $6C81: $CD $86 $3B
-    jr   c, ret_004_6CB3                          ; $6C84: $38 $2D
+    jr   c, .ret_6CB3                             ; $6C84: $38 $2D
 
     ld   a, $08                                   ; $6C86: $3E $08
     ldh  [hNoiseSfx], a                           ; $6C88: $E0 $F4
@@ -78,7 +78,7 @@ LaserEntityHandler::
     add  hl, de                                   ; $6CB1: $19
     ld   [hl], a                                  ; $6CB2: $77
 
-ret_004_6CB3:
+.ret_6CB3
     ret                                           ; $6CB3: $C9
 
 jr_004_6CB4:
@@ -88,7 +88,7 @@ jr_004_6CB4:
     inc  a                                        ; $6CB9: $3C
     ld   [hl], a                                  ; $6CBA: $77
     and  $07                                      ; $6CBB: $E6 $07
-    jr   nz, ret_004_6D0E                         ; $6CBD: $20 $4F
+    jr   nz, .ret_6D0E                            ; $6CBD: $20 $4F
 
     ld   hl, wEntitiesDirectionTable              ; $6CBF: $21 $80 $C3
     add  hl, bc                                   ; $6CC2: $09
@@ -102,7 +102,7 @@ jr_004_6CB4:
     ld   [hl], a                                  ; $6CCE: $77
     ld   a, ENTITY_LASER                          ; $6CCF: $3E $2A
     call SpawnNewEntity_trampoline                ; $6CD1: $CD $86 $3B
-    jr   c, ret_004_6D0E                          ; $6CD4: $38 $38
+    jr   c, .ret_6D0E                             ; $6CD4: $38 $38
 
     ldh  a, [hMultiPurpose0]                      ; $6CD6: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $6CD8: $21 $00 $C2
@@ -138,7 +138,7 @@ jr_004_6CB4:
     ld   [hl], a                                  ; $6D0C: $77
     pop  bc                                       ; $6D0D: $C1
 
-ret_004_6D0E:
+.ret_6D0E
     ret                                           ; $6D0E: $C9
 
 label_004_6D0F:

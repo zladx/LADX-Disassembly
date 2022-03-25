@@ -91,21 +91,21 @@ BunnyCallingMarinState1Handler::
 func_018_5321::
     ldh  a, [hMultiPurposeG]                      ; $5321: $F0 $E8
     and  a                                        ; $5323: $A7
-    jr   z, ret_018_5337                          ; $5324: $28 $11
+    jr   z, .ret_5337                             ; $5324: $28 $11
 
     ld   hl, wEntitiesPrivateState4Table          ; $5326: $21 $40 $C4
     add  hl, bc                                   ; $5329: $09
     ld   a, [hl]                                  ; $532A: $7E
     dec  [hl]                                     ; $532B: $35
     and  a                                        ; $532C: $A7
-    jr   nz, ret_018_5337                         ; $532D: $20 $08
+    jr   nz, .ret_5337                            ; $532D: $20 $08
 
     ld   [hl], $08                                ; $532F: $36 $08
     ld   hl, wEntitiesSpeedZTable                 ; $5331: $21 $20 $C3
     add  hl, bc                                   ; $5334: $09
     ld   [hl], $12                                ; $5335: $36 $12
 
-ret_018_5337:
+.ret_5337
     ret                                           ; $5337: $C9
 
 BunnyCallingMarinState2Handler::

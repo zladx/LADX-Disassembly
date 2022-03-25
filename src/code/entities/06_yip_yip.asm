@@ -210,13 +210,13 @@ ret_006_5AD0:
 YipYipState3Handler::
     ld   a, [wDialogState]                        ; $5AD1: $FA $9F $C1
     and  a                                        ; $5AD4: $A7
-    jr   nz, ret_006_5ADE                         ; $5AD5: $20 $07
+    jr   nz, .ret_5ADE                            ; $5AD5: $20 $07
 
     call CreateTradingItemEntity                  ; $5AD7: $CD $0C $0C
     call IncrementEntityState                     ; $5ADA: $CD $12 $3B
     ld   [hl], b                                  ; $5ADD: $70
 
-ret_006_5ADE:
+.ret_5ADE
     ret                                           ; $5ADE: $C9
 
 Data_006_5ADF::

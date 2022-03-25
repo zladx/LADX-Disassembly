@@ -31,7 +31,7 @@ VireEntityHandler::
 func_018_6A31::
     ld   a, ENTITY_VIRE                           ; $6A31: $3E $BD
     call SpawnNewEntity_trampoline                ; $6A33: $CD $86 $3B
-    jr   c, ret_018_6A70                          ; $6A36: $38 $38
+    jr   c, .ret_6A70                             ; $6A36: $38 $38
 
     ld   hl, wEntitiesLoadOrderTable              ; $6A38: $21 $60 $C4
     add  hl, bc                                   ; $6A3B: $09
@@ -65,7 +65,7 @@ func_018_6A31::
     add  hl, de                                   ; $6A6D: $19
     ld   [hl], $01                                ; $6A6E: $36 $01
 
-ret_018_6A70:
+.ret_6A70
     ret                                           ; $6A70: $C9
 
 jr_018_6A71:
@@ -292,12 +292,12 @@ VireState2Handler::
     add  hl, bc                                   ; $6BC9: $09
     ld   [hl], a                                  ; $6BCA: $77
     and  a                                        ; $6BCB: $A7
-    jr   nz, ret_018_6BD3                         ; $6BCC: $20 $05
+    jr   nz, .ret_6BD3                            ; $6BCC: $20 $05
 
     call GetEntityTransitionCountdown             ; $6BCE: $CD $05 $0C
     ld   [hl], $10                                ; $6BD1: $36 $10
 
-ret_018_6BD3:
+.ret_6BD3
     ret                                           ; $6BD3: $C9
 
 jr_018_6BD4:
@@ -496,7 +496,7 @@ Data_018_6CE4::
 
 VireState4Handler::
     call GetEntityTransitionCountdown             ; $6CEC: $CD $05 $0C
-    jr   nz, ret_018_6D17                         ; $6CEF: $20 $26
+    jr   nz, .ret_6D17                            ; $6CEF: $20 $26
 
     ld   hl, wEntitiesPosZTable                   ; $6CF1: $21 $10 $C3
     add  hl, bc                                   ; $6CF4: $09
@@ -520,7 +520,7 @@ VireState4Handler::
     add  hl, bc                                   ; $6D15: $09
     ld   [hl], a                                  ; $6D16: $77
 
-ret_018_6D17:
+.ret_6D17
     ret                                           ; $6D17: $C9
 
 VireState5Handler::
@@ -661,11 +661,11 @@ jr_018_6DC3:
     ld   a, b                                     ; $6DE4: $78
     ld   b, $00                                   ; $6DE5: $06 $00
     cp   $03                                      ; $6DE7: $FE $03
-    jr   nc, ret_018_6E35                         ; $6DE9: $30 $4A
+    jr   nc, .ret_6E35                            ; $6DE9: $30 $4A
 
     ld   a, ENTITY_VIRE                           ; $6DEB: $3E $BD
     call SpawnNewEntity_trampoline                ; $6DED: $CD $86 $3B
-    jr   c, ret_018_6E35                          ; $6DF0: $38 $43
+    jr   c, .ret_6E35                             ; $6DF0: $38 $43
 
     ldh  a, [hMultiPurpose0]                      ; $6DF2: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $6DF4: $21 $00 $C2
@@ -706,7 +706,7 @@ jr_018_6DC3:
     ld   [hl], $20                                ; $6E32: $36 $20
     pop  bc                                       ; $6E34: $C1
 
-ret_018_6E35:
+.ret_6E35
     ret                                           ; $6E35: $C9
 
 label_018_6E36:

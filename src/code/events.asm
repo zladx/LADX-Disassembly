@@ -377,14 +377,14 @@ label_002_5F27:
     ld   [hl], a                                  ; $5F46: $77
     ldh  a, [hIsGBC]                              ; $5F47: $F0 $FE
     and  a                                        ; $5F49: $A7
-    jr   z, ret_002_5F53                          ; $5F4A: $28 $07
+    jr   z, .ret_5F53                             ; $5F4A: $28 $07
 
     push bc                                       ; $5F4C: $C5
     ld   a, $02                                   ; $5F4D: $3E $02
     call func_91D                                 ; $5F4F: $CD $1D $09
     pop  bc                                       ; $5F52: $C1
 
-ret_002_5F53:
+.ret_5F53
     ret                                           ; $5F53: $C9
 
 Data_002_5F54::
@@ -491,7 +491,7 @@ CheckKillInOrderTrigger::
     ld   c, $00                                   ; $5FEB: $0E $00
     ld   hl, wDBB6                                ; $5FED: $21 $B6 $DB
 
-.loop_5FF0:
+.loop_5FF0
     ld   a, [hl+]                                 ; $5FF0: $2A
     cp   c                                        ; $5FF1: $B9
     ret  nz                                       ; $5FF2: $C0

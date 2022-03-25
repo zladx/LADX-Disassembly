@@ -184,7 +184,7 @@ func_001_4794::
     ld   hl, SaveGame1                            ; $4798: $21 $00 $A1
     add  hl, de                                   ; $479B: $19
 
-.loop_479C::
+.loop_479C
     call EnableExternalRAMWriting                 ; $479C: $CD $D0 $27
     ld   a, [hli]                                 ; $479F: $2A
     cp   c                                        ; $47A0: $B9
@@ -204,7 +204,7 @@ func_001_4794::
     ; de = sizeof(save)
     ld   de, SaveGame2 - SaveGame1.main           ; $47AF: $11 $A8 $03
 
-.loop_47B2::
+.loop_47B2
     call EnableExternalRAMWriting                 ; $47B2: $CD $D0 $27
     xor  a                                        ; $47B5: $AF
     ldi  [hl], a                                  ; $47B6: $22
@@ -218,7 +218,7 @@ func_001_4794::
     ld   a, $01                                   ; $47C1: $3E $01
 
     ; Store the sequence 1,3,5,7,9 into the prefix.
-.loop_47C3::
+.loop_47C3
     call EnableExternalRAMWriting                 ; $47C3: $CD $D0 $27
     ldi  [hl], a                                  ; $47C6: $22
     inc  a                                        ; $47C7: $3C
@@ -289,7 +289,7 @@ LoadSavedFile::
     ld   hl, wOverworldRoomStatus                 ; $52D3: $21 $00 $D8
     ld   de, SAVE_MAIN_SIZE                       ; $52D6: $11 $80 $03
 
-.loop_52D9::
+.loop_52D9
     call EnableExternalRAMWriting                 ; $52D9: $CD $D0 $27
     ld   a, [bc]                                  ; $52DC: $0A
     inc  bc                                       ; $52DD: $03
@@ -329,7 +329,7 @@ ENDC
     ld   hl, wColorDungeonItemFlags               ; $52E4: $21 $DA $DD
     ld   de, $05                                  ; $52E7: $11 $05 $00
 
-.loop_52EA::
+.loop_52EA
     call EnableExternalRAMWriting                 ; $52EA: $CD $D0 $27
     ld   a, [bc]                                  ; $52ED: $0A
     inc  bc                                       ; $52EE: $03
@@ -341,7 +341,7 @@ ENDC
     ld   hl, wColorDungeonRoomStatus              ; $52F5: $21 $E0 $DD
     ld   de, $20                                  ; $52F8: $11 $20 $00
 
-.loop_52FB::
+.loop_52FB
     call EnableExternalRAMWriting                 ; $52FB: $CD $D0 $27
     ld   a, [bc]                                  ; $52FE: $0A
     inc  bc                                       ; $52FF: $03
@@ -766,7 +766,7 @@ FileSaveFadeOut::
     ld   c, $80                                   ; $5837: $0E $80
     di                                            ; $5839: $F3
 
-.loop_583A::
+.loop_583A
     ld   a, $03                                   ; $583A: $3E $03
     ld   [rSVBK], a                               ; $583C: $E0 $70
     ld   b, [hl]                                  ; $583E: $46
@@ -816,7 +816,7 @@ func_001_5888::
     ld   hl, wRoomTransitionState                 ; $5888: $21 $24 $C1
     ld   e, $00                                   ; $588B: $1E $00
 
-.loop_588D::
+.loop_588D
     xor  a                                        ; $588D: $AF
     ldi  [hl], a                                  ; $588E: $22
     inc  e                                        ; $588F: $1C
@@ -1051,7 +1051,7 @@ label_001_5B3F::
     ld   [hl], $20                                ; $5B69: $36 $20
     ldh  a, [hFrameCounter]                       ; $5B6B: $F0 $E7
     and  $10                                      ; $5B6D: $E6 $10
-    jr   nz, ret_001_5BAC                         ; $5B6F: $20 $3B
+    jr   nz, .ret_5BAC                            ; $5B6F: $20 $3B
     ld   hl, wDynamicOAMBuffer+$58                ; $5B71: $21 $88 $C0
     ld   a, e                                     ; $5B74: $7B
     add  a, $04                                   ; $5B75: $C6 $04
@@ -1094,7 +1094,7 @@ label_001_5B3F::
     ld   a, $40                                   ; $5BA9: $3E $40
     ldi  [hl], a                                  ; $5BAB: $22
 
-ret_001_5BAC::
+.ret_5BAC
     ret                                           ; $5BAC: $C9
 
 Data_001_5BAD::
@@ -1293,7 +1293,7 @@ label_001_5D53::
 .jr_5D75::
     ld   e, $15                                   ; $5D75: $1E $15
 
-.loop_5D77::
+.loop_5D77
     ld   a, [bc]                                  ; $5D77: $0A
     inc  bc                                       ; $5D78: $03
     ldi  [hl], a                                  ; $5D79: $22
@@ -1417,7 +1417,7 @@ ENDC
     ld   bc, wOverworldRoomStatus                 ; $5E0C: $01 $00 $D8
     ld   de, SAVE_MAIN_SIZE                       ; $5E0F: $11 $80 $03
 
-.loop_5E12::
+.loop_5E12
     call EnableExternalRAMWriting                 ; $5E12: $CD $D0 $27
     ld   a, [bc]                                  ; $5E15: $0A
     inc  bc                                       ; $5E16: $03
@@ -1430,7 +1430,7 @@ ENDC
     ld   bc, wColorDungeonItemFlags               ; $5E20: $01 $DA $DD
     ld   de, $05                                  ; $5E23: $11 $05 $00
 
-.loop_5E26::
+.loop_5E26
     call EnableExternalRAMWriting                 ; $5E26: $CD $D0 $27
     ld   a, [bc]                                  ; $5E29: $0A
     inc  bc                                       ; $5E2A: $03
@@ -1443,7 +1443,7 @@ ENDC
     ld   bc, wColorDungeonRoomStatus              ; $5E34: $01 $E0 $DD
     ld   de, $20                                  ; $5E37: $11 $20 $00
 
-.loop_5E3A::
+.loop_5E3A
     call EnableExternalRAMWriting                 ; $5E3A: $CD $D0 $27
     ld   a, [bc]                                  ; $5E3D: $0A
     inc  bc                                       ; $5E3E: $03
@@ -2356,7 +2356,7 @@ PeachPictureState0Handler::
     ld   c, $80                                   ; $6813: $0E $80
     di                                            ; $6815: $F3
 
-.loop_6816::
+.loop_6816
     xor  a                                        ; $6816: $AF
     ld   [rSVBK], a                               ; $6817: $E0 $70
     ld   b, [hl]                                  ; $6819: $46
@@ -2439,7 +2439,7 @@ PeachPictureState3Handler::     ; Determines the tilemap to load (?)
     ld   e, $08                                   ; $6899: $1E $08
     ld   hl, wD210                                ; $689B: $21 $10 $D2
 
-.loop_689E::
+.loop_689E
     ldi  [hl], a                                  ; $689E: $22
     dec  e                                        ; $689F: $1D
     jr   nz, .loop_689E                           ; $68A0: $20 $FC
@@ -2452,12 +2452,12 @@ PeachPictureState4Handler::
     call func_1A39                                ; $68AD: $CD $39 $1A
     ld   a, [wTransitionSequenceCounter]          ; $68B0: $FA $6B $C1
     cp   $04                                      ; $68B3: $FE $04
-    jr   nz, ret_001_68BF                         ; $68B5: $20 $08
+    jr   nz, .ret_68BF                            ; $68B5: $20 $08
     call IncrementGameplaySubtype                 ; $68B7: $CD $D6 $44
     ld   a, $80                                   ; $68BA: $3E $80
     ld   [wD210], a                               ; $68BC: $EA $10 $D2
 
-ret_001_68BF::
+.ret_68BF
     ret                                           ; $68BF: $C9
 
 PeachPictureState5Handler::
@@ -2512,7 +2512,7 @@ PeachPictureState8Handler::
     ld   a, [wD210]                               ; $690E: $FA $10 $D2
     dec  a                                        ; $6911: $3D
     ld   [wD210], a                               ; $6912: $EA $10 $D2
-    jr   nz, ret_001_6944                         ; $6915: $20 $2D
+    jr   nz, .ret_6944                            ; $6915: $20 $2D
     call PlayBombExplosionSfx                     ; $6917: $CD $4B $0C
     ld   a, $30                                   ; $691A: $3E $30
     ld   [wD210], a                               ; $691C: $EA $10 $D2
@@ -2527,12 +2527,12 @@ PeachPictureState8Handler::
     inc  a                                        ; $6934: $3C
     ld   [wD213], a                               ; $6935: $EA $13 $D2
     cp   $04                                      ; $6938: $FE $04
-    jr   nz, ret_001_6944                         ; $693A: $20 $08
+    jr   nz, .ret_6944                            ; $693A: $20 $08
     ld   a, $80                                   ; $693C: $3E $80
     ld   [wD210], a                               ; $693E: $EA $10 $D2
     call IncrementGameplaySubtype                 ; $6941: $CD $D6 $44
 
-ret_001_6944::
+.ret_6944
     ret                                           ; $6944: $C9
 PeachPictureState9Handler::
     call func_6A7C                                ; $6945: $CD $7C $6A
@@ -3025,7 +3025,7 @@ func_001_6D11::
     ld   hl, vBGMap0                              ; $6D20: $21 $00 $98
     ld   bc, $400                                 ; $6D23: $01 $00 $04
 
-.loop_6D26::
+.loop_6D26
     ld   a, d                                     ; $6D26: $7A
     ldi  [hl], a                                  ; $6D27: $22
     dec  bc                                       ; $6D28: $0B

@@ -193,7 +193,7 @@ jr_004_6F3C:
     ld   hl, wObjPal6                             ; $6FB2: $21 $78 $DC
     ld   de, Data_004_6F30                        ; $6FB5: $11 $30 $6F
 
-.loop_6FB8:
+.loop_6FB8
     ld   a, [de]                                  ; $6FB8: $1A
     ld   [hl+], a                                 ; $6FB9: $22
     inc  de                                       ; $6FBA: $13
@@ -768,7 +768,7 @@ func_004_72EF::
     add  hl, bc                                   ; $7308: $09
     ld   a, [hl]                                  ; $7309: $7E
     and  a                                        ; $730A: $A7
-    jr   z, ret_004_7324                          ; $730B: $28 $17
+    jr   z, .ret_7324                             ; $730B: $28 $17
 
     ld   [hl], $00                                ; $730D: $36 $00
     dec  a                                        ; $730F: $3D
@@ -779,13 +779,13 @@ func_004_72EF::
     ld   [hl], $02                                ; $7316: $36 $02
     ld   a, [wIsMarinFollowingLink]               ; $7318: $FA $73 $DB
     and  a                                        ; $731B: $A7
-    jr   z, ret_004_7324                          ; $731C: $28 $06
+    jr   z, .ret_7324                             ; $731C: $28 $06
 
     ld   hl, wEntitiesSpriteVariantTable          ; $731E: $21 $B0 $C3
     add  hl, de                                   ; $7321: $19
     ld   [hl], $07                                ; $7322: $36 $07
 
-ret_004_7324:
+.ret_7324
     ret                                           ; $7324: $C9
 
 jr_004_7325:
@@ -891,7 +891,7 @@ func_004_73B7::
     add  hl, bc                                   ; $73BA: $09
     ld   a, [hl]                                  ; $73BB: $7E
     and  a                                        ; $73BC: $A7
-    jr   z, ret_004_73E1                          ; $73BD: $28 $22
+    jr   z, .ret_73E1                             ; $73BD: $28 $22
 
     dec  a                                        ; $73BF: $3D
     ld   e, a                                     ; $73C0: $5F
@@ -913,7 +913,7 @@ func_004_73B7::
     add  hl, de                                   ; $73DF: $19
     ld   [hl], a                                  ; $73E0: $77
 
-ret_004_73E1:
+.ret_73E1
     ret                                           ; $73E1: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
@@ -1228,7 +1228,7 @@ func_004_7566::
 jr_004_7598:
     ldh  a, [hFrameCounter]                       ; $7598: $F0 $E7
     and  $03                                      ; $759A: $E6 $03
-    jr   nz, ret_004_75A9                         ; $759C: $20 $0B
+    jr   nz, .ret_75A9                            ; $759C: $20 $0B
 
     ld   hl, wEntitiesPosYTable                   ; $759E: $21 $10 $C2
     add  hl, bc                                   ; $75A1: $09
@@ -1239,7 +1239,7 @@ jr_004_7598:
     inc  a                                        ; $75A7: $3C
     ld   [hl], a                                  ; $75A8: $77
 
-ret_004_75A9:
+.ret_75A9
     ret                                           ; $75A9: $C9
 
 jr_004_75AA:

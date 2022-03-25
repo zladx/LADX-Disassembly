@@ -190,7 +190,7 @@ Data_018_65DF::
 
 func_018_65EC::
     call GetEntityTransitionCountdown             ; $65EC: $CD $05 $0C
-    jr   nz, ret_018_660B                         ; $65EF: $20 $1A
+    jr   nz, .ret_660B                            ; $65EF: $20 $1A
 
     ld   hl, wEntitiesInertiaTable                ; $65F1: $21 $D0 $C3
     add  hl, bc                                   ; $65F4: $09
@@ -208,7 +208,7 @@ func_018_65EC::
     call GetEntityTransitionCountdown             ; $6606: $CD $05 $0C
     ld   [hl], $01                                ; $6609: $36 $01
 
-ret_018_660B:
+.ret_660B
     ret                                           ; $660B: $C9
 
 label_018_660C:

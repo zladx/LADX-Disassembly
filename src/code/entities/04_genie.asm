@@ -95,13 +95,13 @@ GenieState0Handler::
 func_004_4090::
     ldh  a, [hLinkPositionY]                      ; $4090: $F0 $99
     cp   $70                                      ; $4092: $FE $70
-    jr   nc, ret_004_409E                         ; $4094: $30 $08
+    jr   nc, .ret_409E                            ; $4094: $30 $08
 
     call IncrementEntityState                     ; $4096: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $4099: $CD $05 $0C
     ld   [hl], $FF                                ; $409C: $36 $FF
 
-ret_004_409E:
+.ret_409E
     ret                                           ; $409E: $C9
 
 Data_004_409F::
@@ -801,7 +801,7 @@ func_004_44E9::
     jp   z, ClearEntityStatusBank04               ; $44EC: $CA $7A $6D
 
     cp   $04                                      ; $44EF: $FE $04
-    jr   nz, ret_004_4516                         ; $44F1: $20 $23
+    jr   nz, .ret_4516                            ; $44F1: $20 $23
 
     ld   a, ENTITY_GENIE                          ; $44F3: $3E $5C
     call SpawnNewEntity_trampoline                ; $44F5: $CD $86 $3B
@@ -822,7 +822,7 @@ func_004_44E9::
     ld   a, JINGLE_ENEMY_MORPH_OUT                ; $4512: $3E $1F
     ldh  [hJingle], a                             ; $4514: $E0 $F2
 
-ret_004_4516:
+.ret_4516
     ret                                           ; $4516: $C9
 
 func_004_4517::
@@ -926,7 +926,7 @@ func_004_4575::
     ld   [hl], b                                  ; $45AD: $70
     ld   a, ENTITY_GENIE                          ; $45AE: $3E $5C
     call SpawnNewEntity_trampoline                ; $45B0: $CD $86 $3B
-    jr   c, ret_004_45F0                          ; $45B3: $38 $3B
+    jr   c, .ret_45F0                             ; $45B3: $38 $3B
 
     push bc                                       ; $45B5: $C5
     ld   hl, wEntitiesInertiaTable                ; $45B6: $21 $D0 $C3
@@ -963,7 +963,7 @@ func_004_4575::
     ld   a, $28                                   ; $45EC: $3E $28
     ldh  [hNoiseSfx], a                           ; $45EE: $E0 $F4
 
-ret_004_45F0:
+.ret_45F0
     ret                                           ; $45F0: $C9
 
 jr_004_45F1:
@@ -1292,7 +1292,7 @@ GenieState3Handler::
     add  hl, bc                                   ; $4922: $09
     ld   a, [hl]                                  ; $4923: $7E
     and  $80                                      ; $4924: $E6 $80
-    jr   z, ret_004_4937                          ; $4926: $28 $0F
+    jr   z, .ret_4937                             ; $4926: $28 $0F
 
     ld   [hl], b                                  ; $4928: $70
     call IncrementEntityState                     ; $4929: $CD $12 $3B
@@ -1302,7 +1302,7 @@ GenieState3Handler::
     add  hl, bc                                   ; $4934: $09
     ld   [hl], $E0                                ; $4935: $36 $E0
 
-ret_004_4937:
+.ret_4937
     ret                                           ; $4937: $C9
 
 jr_004_4938:

@@ -136,7 +136,7 @@ func_005_40AF::
     ld   e, $10                                   ; $40BC: $1E $10
     ld   hl, wD100                                ; $40BE: $21 $00 $D1
 
-.loop_40C1:
+.loop_40C1
     ld   [hl+], a                                 ; $40C1: $22
     dec  e                                        ; $40C2: $1D
     jr   nz, .loop_40C1                           ; $40C3: $20 $FC
@@ -155,7 +155,7 @@ func_005_40AF::
     ld   e, $10                                   ; $40D7: $1E $10
     ld   hl, wD110                                ; $40D9: $21 $10 $D1
 
-.loop_40DC:
+.loop_40DC
     ld   [hl+], a                                 ; $40DC: $22
     dec  e                                        ; $40DD: $1D
     jr   nz, .loop_40DC                           ; $40DE: $20 $FC
@@ -266,7 +266,7 @@ func_005_4180::
     jr   z, jr_005_41B1                           ; $4183: $28 $2C
 
     call GetEntityPrivateCountdown1               ; $4185: $CD $00 $0C
-    jr   nz, ret_005_41B0                         ; $4188: $20 $26
+    jr   nz, .ret_41B0                            ; $4188: $20 $26
 
     call GetRandomByte                            ; $418A: $CD $0D $28
     and  $3F                                      ; $418D: $E6 $3F
@@ -290,7 +290,7 @@ func_005_4180::
     add  hl, bc                                   ; $41AE: $09
     ld   [hl], a                                  ; $41AF: $77
 
-ret_005_41B0:
+.ret_41B0
     ret                                           ; $41B0: $C9
 
 jr_005_41B1:
@@ -401,13 +401,13 @@ func_005_4228::
     sub  [hl]                                     ; $4247: $96
     add  $20                                      ; $4248: $C6 $20
     cp   $40                                      ; $424A: $FE $40
-    jr   c, ret_005_4252                          ; $424C: $38 $04
+    jr   c, .ret_4252                             ; $424C: $38 $04
 
     ldh  a, [hActiveEntityPosY]                   ; $424E: $F0 $EF
     ld   [hl], a                                  ; $4250: $77
     inc  e                                        ; $4251: $1C
 
-ret_005_4252:
+.ret_4252
     ret                                           ; $4252: $C9
 
 label_005_4253:

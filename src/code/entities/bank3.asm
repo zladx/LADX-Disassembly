@@ -633,7 +633,7 @@ EntityInitTarin::
     ld   hl, wObjPal8                             ; $4AFB: $21 $88 $DC
     ld   de, Data_003_4AC6                        ; $4AFE: $11 $C6 $4A
 
-.loop_4B01:
+.loop_4B01
     ld   a, [de]                                  ; $4B01: $1A
     ld   [hl+], a                                 ; $4B02: $22
     inc  de                                       ; $4B03: $13
@@ -648,12 +648,12 @@ EntityInitTarin::
 EntityInitMadamMeowMeow::
     ld   a, [wIsBowWowFollowingLink]              ; $4B0E: $FA $56 $DB
     cp   $80                                      ; $4B11: $FE $80
-    jr   nz, ret_003_4B1A                         ; $4B13: $20 $05
+    jr   nz, .ret_4B1A                            ; $4B13: $20 $05
 
     ld   a, MUSIC_BOWWOW_KIDNAPPED                ; $4B15: $3E $0E
     ld   [wMusicTrackToPlay], a                   ; $4B17: $EA $68 $D3
 
-ret_003_4B1A:
+.ret_4B1A
     ret                                           ; $4B1A: $C9
 
 EntityInitRaftRaftOwner::
@@ -1438,7 +1438,7 @@ ENDC
     ; handle the key in the sidescroll room in dungeon 4 where
     ; the key drops in the hole down into the sidescrolling room with water
     cp   MOUNTAIN_CAVE_ROOM_3                     ; $4F54: $FE $7C
-    jr   nz, ret_003_4F67                         ; $4F56: $20 $0F
+    jr   nz, .ret_4F67                            ; $4F56: $20 $0F
 
     ld   a, [wIndoorARoomStatus + ROOM_OW_ANGLERS_TUNNEL] ; $4F58: $FA $69 $D9
     and  $10                                      ; $4F5B: $E6 $10
@@ -1448,7 +1448,7 @@ ENDC
     and  ROOM_STATUS_EVENT_1                      ; $4F62: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $4F64: $C2 $8D $3F
 
-ret_003_4F67:
+.ret_4F67
     ret                                           ; $4F67: $C9
 
 EntityInitTradingItem::
@@ -1945,14 +1945,14 @@ label_003_51F5:
     ld   [hl], a                                  ; $5227: $77
     ldh  a, [hIsGBC]                              ; $5228: $F0 $FE
     and  a                                        ; $522A: $A7
-    jr   z, ret_003_5234                          ; $522B: $28 $07
+    jr   z, .ret_5234                             ; $522B: $28 $07
 
     push bc                                       ; $522D: $C5
     ld   a, $03                                   ; $522E: $3E $03
     call func_91D                                 ; $5230: $CD $1D $09
     pop  bc                                       ; $5233: $C1
 
-ret_003_5234:
+.ret_5234
     ret                                           ; $5234: $C9
 
 include "code/entities/03_pushed_block.asm"
@@ -2880,13 +2880,13 @@ HeartPieceState5Handler::
     jp   z, IncrementEntityState                  ; $5AAC: $CA $12 $3B
 
     cp   $38                                      ; $5AAF: $FE $38
-    jr   nz, ret_003_5ABA                         ; $5AB1: $20 $07
+    jr   nz, .ret_5ABA                            ; $5AB1: $20 $07
 
     ld   a, [wHeartPiecesCount]                   ; $5AB3: $FA $5C $DB
     inc  a                                        ; $5AB6: $3C
     ld   [wHeartPiecesCount], a                   ; $5AB7: $EA $5C $DB
 
-ret_003_5ABA:
+.ret_5ABA
     ret                                           ; $5ABA: $C9
 
 HeartPieceState6Handler::
@@ -4414,13 +4414,13 @@ IncreaseValueAtHLClampAt99::
     ; But you can never get anywhere near that! Golden Leaves even stop at 6 (slime key)!
     ld   a, [hl]                                  ; $6373: $7E
     cp   $99                                      ; $6374: $FE $99
-    jr   z, ret_003_637C                          ; $6376: $28 $04
+    jr   z, .ret_637C                             ; $6376: $28 $04
 
     add  $01                                      ; $6378: $C6 $01
     daa                                           ; $637A: $27
     ld   [hl], a                                  ; $637B: $77
 
-ret_003_637C:
+.ret_637C
     ret                                           ; $637C: $C9
 
 PickDroppableArrows::
@@ -5082,7 +5082,7 @@ func_003_6771::
     ld   c, $03                                   ; $67FE: $0E $03
     ld   b, $00                                   ; $6800: $06 $00
 
-.loop_6802:
+.loop_6802
     call func_003_6822                            ; $6802: $CD $22 $68
     ld   hl, Data_003_6769                        ; $6805: $21 $69 $67
     add  hl, bc                                   ; $6808: $09
@@ -5650,14 +5650,14 @@ jr_003_6BAB:
     add  hl, de                                   ; $6BB9: $19
     sub  [hl]                                     ; $6BBA: $96
     and  $80                                      ; $6BBB: $E6 $80
-    jr   nz, ret_003_6BC5                         ; $6BBD: $20 $06
+    jr   nz, .ret_6BC5                            ; $6BBD: $20 $06
 
     ld   a, [hl]                                  ; $6BBF: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $6BC0: $21 $50 $C2
     add  hl, bc                                   ; $6BC3: $09
     ld   [hl], a                                  ; $6BC4: $77
 
-ret_003_6BC5:
+.ret_6BC5
     ret                                           ; $6BC5: $C9
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list

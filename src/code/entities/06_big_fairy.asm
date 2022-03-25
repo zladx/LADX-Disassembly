@@ -192,19 +192,19 @@ BigFairyHealingHandler::
 
 .jr_71BA
     call GetEntityPrivateCountdown1               ; $71BA: $CD $00 $0C
-    jr   nz, ret_006_71F0                         ; $71BD: $20 $31
+    jr   nz, .ret_71F0                            ; $71BD: $20 $31
 
     ld   [hl], $13                                ; $71BF: $36 $13
     ld   hl, wEntitiesPrivateState1Table          ; $71C1: $21 $B0 $C2
     add  hl, bc                                   ; $71C4: $09
     ld   a, [hl]                                  ; $71C5: $7E
     cp   $0A                                      ; $71C6: $FE $0A
-    jr   z, ret_006_71F0                          ; $71C8: $28 $26
+    jr   z, .ret_71F0                             ; $71C8: $28 $26
 
     inc  [hl]                                     ; $71CA: $34
     ld   a, ENTITY_BIG_FAIRY                      ; $71CB: $3E $84
     call SpawnNewEntity_trampoline                ; $71CD: $CD $86 $3B
-    jr   c, ret_006_71F0                          ; $71D0: $38 $1E
+    jr   c, .ret_71F0                             ; $71D0: $38 $1E
 
     ld   hl, wEntitiesPrivateState3Table          ; $71D2: $21 $D0 $C2
     add  hl, de                                   ; $71D5: $19
@@ -223,7 +223,7 @@ BigFairyHealingHandler::
     add  hl, de                                   ; $71ED: $19
     ld   [hl], $E8                                ; $71EE: $36 $E8
 
-ret_006_71F0:
+.ret_71F0
     ret                                           ; $71F0: $C9
 
 BigFairyDisappearingHandler::

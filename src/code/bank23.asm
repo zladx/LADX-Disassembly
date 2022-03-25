@@ -301,7 +301,7 @@ func_023_7E95::
     ld   de, wDrawCommand                         ; $7EB9: $11 $01 $D6
     ld   c, $18                                   ; $7EBC: $0E $18
 
-.loop_7EBE:
+.loop_7EBE
     ld   a, [hl+]                                 ; $7EBE: $2A
     ld   [de], a                                  ; $7EBF: $12
     inc  de                                       ; $7EC0: $13
@@ -355,7 +355,7 @@ func_023_7E95::
     ld   hl, Data_023_7E80                        ; $7EF8: $21 $80 $7E
     ld   c, $15                                   ; $7EFB: $0E $15
 
-.loop_7EFD:
+.loop_7EFD
     ld   a, [hl+]                                 ; $7EFD: $2A
     ld   [de], a                                  ; $7EFE: $12
     inc  de                                       ; $7EFF: $13

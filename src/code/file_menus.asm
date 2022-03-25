@@ -560,7 +560,7 @@ label_4A47::
     ld   e, DEBUG_SAVE_FILE_SIZE                  ; $4A4A: $1E $43
     push hl                                       ; $4A4C: $E5
 
-.loop_4A4D::
+.loop_4A4D
     call EnableExternalRAMWriting                 ; $4A4D: $CD $D0 $27
     ld   a, [bc]                                  ; $4A50: $0A
     ldi  [hl], a                                  ; $4A51: $22
@@ -1372,7 +1372,7 @@ jr_001_4EEF::
     ld   de, wDrawCommand                         ; $4EFE: $11 $01 $D6 ; $4EFE: $11 $01 $D6
     ld   c, $08                                   ; $4F01: $0E $08 ; $4F01: $0E $08
 
-.loop_4F03::
+.loop_4F03
     ld   a, [hl+]                                 ; $4F03: $2A ; $4F03: $2A
     ld   [de], a                                  ; $4F04: $12 ; $4F04: $12
     inc  de                                       ; $4F05: $13 ; $4F05: $13
@@ -1766,7 +1766,7 @@ func_001_512C::
     ld   de, wDrawCommand                         ; $5141: $11 $01 $D6 ; $5141: $11 $01 $D6
     ld   c, $08                                   ; $5144: $0E $08 ; $5144: $0E $08
 
-.loop_5146::
+.loop_5146
     ld   a, [hl+]                                 ; $5146: $2A ; $5146: $2A
     ld   [de], a                                  ; $5147: $12 ; $5147: $12
     inc  de                                       ; $5148: $13 ; $5148: $13
@@ -1915,7 +1915,7 @@ FileCopyStateAHandler::
     ; sizeof save data
     ld   de, (SaveGame2 - SaveGame1)              ; $5221: $11 $AD $03 ; $5221: $11 $AD $03
 
-.loop_5224::
+.loop_5224
     call EnableExternalRAMWriting                 ; $5224: $CD $D0 $27 ; $5224: $CD $D0 $27
     ld   a, [bc]                                  ; $5227: $0A ; $5227: $0A
     inc  bc                                       ; $5228: $03 ; $5228: $03
@@ -1958,7 +1958,7 @@ jr_001_5235::
     ld   de, wDrawCommand.data + 5                ; $5261: $11 $09 $D6 ; $5261: $11 $09 $D6
     ld   c, $08                                   ; $5264: $0E $08 ; $5264: $0E $08
 
-.loop_5266::
+.loop_5266
     ld   a, [hl+]                                 ; $5266: $2A ; $5266: $2A
     ld   [de], a                                  ; $5267: $12 ; $5267: $12
     inc  de                                       ; $5268: $13 ; $5268: $13

@@ -73,14 +73,14 @@ TurtleRockHeadEntityHandler::
     add  hl, bc                                   ; $736F: $09
     ld   a, [hl]                                  ; $7370: $7E
     and  a                                        ; $7371: $A7
-    jr   nz, ret_018_737D                         ; $7372: $20 $09
+    jr   nz, .ret_737D                            ; $7372: $20 $09
 
     ld   hl, wOverworldRoomStatus + $10           ; $7374: $21 $10 $D8
     set  5, [hl]                                  ; $7377: $CB $EE
     ld   a, JINGLE_PUZZLE_SOLVED                  ; $7379: $3E $02
     ldh  [hJingle], a                             ; $737B: $E0 $F2
 
-ret_018_737D:
+.ret_737D
     ret                                           ; $737D: $C9
 
 jr_018_737E:

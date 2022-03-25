@@ -271,7 +271,7 @@ jr_005_4F95:
     ld   e, INVENTORY_SLOT_COUNT -1               ; $4F95: $1E $0B
     ld   hl, wBButtonSlot                         ; $4F97: $21 $00 $DB
 
-.loop_4F9A:
+.loop_4F9A
     ld   a, [hl+]                                 ; $4F9A: $2A
     cp   INVENTORY_OCARINA                        ; $4F9B: $FE $09
     jr   z, jr_005_4FA7                           ; $4F9D: $28 $08
@@ -502,11 +502,11 @@ func_005_5059::
     ldh  [hLinkAnimationState], a                 ; $50E3: $E0 $9D
     ldh  a, [hFrameCounter]                       ; $50E5: $F0 $E7
     and  $1F                                      ; $50E7: $E6 $1F
-    jr   nz, ret_005_512A                         ; $50E9: $20 $3F
+    jr   nz, .ret_512A                            ; $50E9: $20 $3F
 
     ld   a, ENTITY_MUSICAL_NOTE                   ; $50EB: $3E $C9
     call SpawnNewEntity_trampoline                ; $50ED: $CD $86 $3B
-    jr   c, ret_005_512A                          ; $50F0: $38 $38
+    jr   c, .ret_512A                             ; $50F0: $38 $38
 
     ldh  a, [hLinkPositionY]                      ; $50F2: $F0 $99
     ld   hl, wEntitiesPosYTable                   ; $50F4: $21 $10 $C2
@@ -544,7 +544,7 @@ func_005_5059::
     add  hl, de                                   ; $5127: $19
     ld   [hl], $40                                ; $5128: $36 $40
 
-ret_005_512A:
+.ret_512A
     ret                                           ; $512A: $C9
 
 func_005_512B::
@@ -813,11 +813,11 @@ func_005_52DB::
     call GetEntityTransitionCountdown             ; $52E0: $CD $05 $0C
     ld   hl, wDialogState                         ; $52E3: $21 $9F $C1
     or   [hl]                                     ; $52E6: $B6
-    jr   nz, ret_005_5311                         ; $52E7: $20 $28
+    jr   nz, .ret_5311                            ; $52E7: $20 $28
 
     ldh  a, [hPressedButtonsMask]                 ; $52E9: $F0 $CB
     and  $0F                                      ; $52EB: $E6 $0F
-    jr   z, ret_005_5311                          ; $52ED: $28 $22
+    jr   z, .ret_5311                             ; $52ED: $28 $22
 
     call IncrementEntityState                     ; $52EF: $CD $12 $3B
     ld   a, $01                                   ; $52F2: $3E $01
@@ -836,7 +836,7 @@ func_005_52DB::
     ld   a, $01                                   ; $530C: $3E $01
     ld   [wC10A], a                               ; $530E: $EA $0A $C1
 
-ret_005_5311:
+.ret_5311
     ret                                           ; $5311: $C9
 
 func_005_5312::

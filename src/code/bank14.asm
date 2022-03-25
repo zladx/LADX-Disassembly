@@ -421,7 +421,7 @@ func_014_4BEF::
 func_014_4C10::
     ld   b, $40                                   ; $4C10: $06 $40
 
-.loop_4C12:
+.loop_4C12
     ld   a, $02                                   ; $4C12: $3E $02
     ldh  [rSVBK], a                               ; $4C14: $E0 $70
     ld   c, [hl]                                  ; $4C16: $4E
@@ -985,7 +985,7 @@ label_014_5067:
 
     ld   d, $00                                   ; $506D: $16 $00
 
-.loop_506F:
+.loop_506F
     ld   a, [wC17E]                               ; $506F: $FA $7E $C1
     inc  a                                        ; $5072: $3C
     ld   [wC17E], a                               ; $5073: $EA $7E $C1
@@ -1457,7 +1457,7 @@ func_014_54F8::
 .jr_5502
     ld   a, [wC157]                               ; $5502: $FA $57 $C1
     and  a                                        ; $5505: $A7
-    jr   z, ret_014_5525                          ; $5506: $28 $1D
+    jr   z, .ret_5525                             ; $5506: $28 $1D
 
     dec  a                                        ; $5508: $3D
     ld   [wC157], a                               ; $5509: $EA $57 $C1
@@ -1475,7 +1475,7 @@ func_014_54F8::
     ld   a, [hl]                                  ; $5521: $7E
     ld   [wScreenShakeVertical], a                ; $5522: $EA $56 $C1
 
-ret_014_5525:
+.ret_5525
     ret                                           ; $5525: $C9
 
 func_014_5526::

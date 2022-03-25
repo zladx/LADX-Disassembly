@@ -221,7 +221,7 @@ func_006_4C91::
     ldh  [hNoiseSfx], a                           ; $4CCA: $E0 $F4
     ld   a, $01                                   ; $4CCC: $3E $01
 
-.loop_4CCE:
+.loop_4CCE
     ldh  [hMultiPurposeG], a                      ; $4CCE: $E0 $E8
     ld   a, ENTITY_CUE_BALL                       ; $4CD0: $3E $8E
     call SpawnNewEntity_trampoline                ; $4CD2: $CD $86 $3B

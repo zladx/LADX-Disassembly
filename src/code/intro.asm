@@ -747,7 +747,7 @@ func_001_7338::
     ld   hl, wDrawCommandAlt                      ; $7347: $21 $91 $DC
     ld   c, $13                                   ; $734A: $0E $13
 
-.loop_734C::
+.loop_734C
     ld   a, [de]                                  ; $734C: $1A
     inc  de                                       ; $734D: $13
     ldi  [hl], a                                  ; $734E: $22
@@ -1906,7 +1906,7 @@ jr_001_7A19::
     push bc                                       ; $7A1C: $C5
     ld   c, $18                                   ; $7A1D: $0E $18
 
-.loop_7A1F::
+.loop_7A1F
     ld   a, [hli]                                 ; $7A1F: $2A
     ld   [de], a                                  ; $7A20: $12
     inc  de                                       ; $7A21: $13

@@ -78,7 +78,7 @@ func_028_4033::
     add  hl, bc                                   ; $4075: $09
     ld   de, wOAMBuffer                           ; $4076: $11 $00 $C0
     ld   c, $0A                                   ; $4079: $0E $0A
-.loop_407B_28:
+.loop_407B_28
     ldi  a, [hl]                                  ; $407B: $2A
     ld   [de], a                                  ; $407C: $12
     inc  de                                       ; $407D: $13
@@ -119,7 +119,7 @@ PhotoAlbumFadeInHandler:
 PhotoAlbumInit1Handler:
     ld   bc, $6B                                  ; $40A7: PhotoAlbumInit1Handler $01 $6B $00
     ld   hl, wD168                                ; $40AA: PhotoAlbumInit1Handler $21 $68 $D1
-.loop_40AD_28:
+.loop_40AD_28
     xor  a                                        ; $40AD: PhotoAlbumInit1Handler $AF
     ldi  [hl], a                                  ; $40AE: PhotoAlbumInit1Handler $22
     dec  bc                                       ; $40AF: PhotoAlbumInit1Handler $0B
@@ -243,7 +243,7 @@ func_028_4185::
     ld   [wPhotos2], a                            ; $4192: $EA $0D $DC
 .else_4195_28:
     ld   bc, $01                                  ; $4195: $01 $01 $00
-.loop_4198_28:
+.loop_4198_28
     ld   hl, Data_028_4265                        ; $4198: $21 $65 $42
     add  hl, bc                                   ; $419B: $09
     ld   a, [hl]                                  ; $419C: $7E
@@ -326,7 +326,7 @@ func_028_41FC::
 
     ld   hl, vBGMap0 + $22                        ; $4201: $21 $22 $98
     ld   d, $7E                                   ; $4204: $16 $7E
-.loop_4206_28:
+.loop_4206_28
     ld   a, d                                     ; $4206: $7A
     ldi  [hl], a                                  ; $4207: $22
     ld   a, l                                     ; $4208: $7D
@@ -582,7 +582,7 @@ func_028_4385::
     add  hl, de                                   ; $4394: $19
     ld   de, wOAMBuffer                           ; $4395: $11 $00 $C0
     ld   c, $02                                   ; $4398: $0E $02
-.loop_439A_28:
+.loop_439A_28
     ld   a, [wD1CE]                               ; $439A: $FA $CE $D1
     add  [hl]                                     ; $439D: $86
     ld   [de], a                                  ; $439E: $12
@@ -750,7 +750,7 @@ PhotoAlbumPictureInteractiveHandler:
     ld   hl, Data_028_4439                        ; $4492: PhotoAlbumPictureInteractiveHandler $21 $39 $44
     ld   de, wOAMBuffer                           ; $4495: PhotoAlbumPictureInteractiveHandler $11 $00 $C0
     ld   c, (Data_028_4439.end - Data_028_4439) / 4 ; $4498: PhotoAlbumPictureInteractiveHandler $0E $0C
-.loop_449A_28:
+.loop_449A_28
     ldi  a, [hl]                                  ; $449A: PhotoAlbumPictureInteractiveHandler $2A
     ld   [de], a                                  ; $449B: PhotoAlbumPictureInteractiveHandler $12
     inc  de                                       ; $449C: PhotoAlbumPictureInteractiveHandler $13
@@ -1408,7 +1408,7 @@ func_028_4886::
     ld   a, $FF                                   ; $4892: $3E $FF
     ret  z                                        ; $4894: $C8
 
-.loop_4895_28:
+.loop_4895_28
     ld   a, $F0                                   ; $4895: $3E $F0
     ret                                           ; $4897: $C9
 
@@ -1938,7 +1938,7 @@ func_028_4BD9::
     ld   h, a                                     ; $4BE2: $67
     ld   de, wEntitiesPosXTable                   ; $4BE3: $11 $00 $C2
     ld   c, $28                                   ; $4BE6: $0E $28
-.loop_4BE8_28:
+.loop_4BE8_28
     ldi  a, [hl]                                  ; $4BE8: $2A
     push hl                                       ; $4BE9: $E5
     ld   h, $00                                   ; $4BEA: $26 $00

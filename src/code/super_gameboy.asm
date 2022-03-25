@@ -153,7 +153,7 @@ SuperGameBoyInit::
 
     ld   hl, vTiles0                              ; $6B2A: $21 $00 $80
     ld   bc, $2000                                ; $6B2D: $01 $00 $20
-.loop_6B30_3C:
+.loop_6B30_3C
     xor  a                                        ; $6B30: $AF
     ldi  [hl], a                                  ; $6B31: $22
     dec  bc                                       ; $6B32: $0B
@@ -190,11 +190,11 @@ SendUploadCommand::
     ld   a, $30                                   ; $6B5B: $3E $30
     ld   [$ff00+c], a                             ; $6B5D: $E2
     ld   b, $10                                   ; $6B5E: $06 $10
-.loop_6B60_3C:
+.loop_6B60_3C
     ld   e, $08                                   ; $6B60: $1E $08
     ldi  a, [hl]                                  ; $6B62: $2A
     ld   d, a                                     ; $6B63: $57
-.loop_6B64_3C:
+.loop_6B64_3C
     bit  0, d                                     ; $6B64: $CB $42
     ld   a, $10                                   ; $6B66: $3E $10
     jr   nz, .else_6B6C_3C                        ; $6B68: $20 $02
@@ -220,7 +220,7 @@ SendUploadCommand::
 
 WaitFor3Frames::
     ld   de, $1B58                                ; $6B86: $11 $58 $1B
-.loop_6B89_3C:
+.loop_6B89_3C
     nop                                           ; $6B89: $00
     nop                                           ; $6B8A: $00
     nop                                           ; $6B8B: $00
@@ -277,9 +277,9 @@ SendVRAMCommand::
     ld   de, $0C                                  ; $6BB4: $11 $0C $00
     ld   a, $80                                   ; $6BB7: $3E $80
     ld   c, $0D                                   ; $6BB9: $0E $0D
-.loop_6BBB_3C:
+.loop_6BBB_3C
     ld   b, $14                                   ; $6BBB: $06 $14
-.loop_6BBD_3C:
+.loop_6BBD_3C
     ldi  [hl], a                                  ; $6BBD: $22
     inc  a                                        ; $6BBE: $3C
     dec  b                                        ; $6BBF: $05

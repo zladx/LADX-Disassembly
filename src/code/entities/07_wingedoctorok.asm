@@ -238,14 +238,14 @@ label_007_577A:
     call func_007_7D1A                            ; $578D: $CD $1A $7D
     ldh  a, [hMultiPurposeG]                      ; $5790: $F0 $E8
     and  a                                        ; $5792: $A7
-    jr   z, ret_007_579F                          ; $5793: $28 $0A
+    jr   z, .ret_579F                             ; $5793: $28 $0A
 
     call IncrementEntityState                     ; $5795: $CD $12 $3B
     ld   [hl], $01                                ; $5798: $36 $01
     call GetEntityTransitionCountdown             ; $579A: $CD $05 $0C
     ld   [hl], $20                                ; $579D: $36 $20
 
-ret_007_579F:
+.ret_579F
     ret                                           ; $579F: $C9
 
 Data_007_57A0::
@@ -263,7 +263,7 @@ Data_007_57AC::
 func_007_57B0::
     ld   a, ENTITY_OCTOROK_ROCK                   ; $57B0: $3E $0A
     call SpawnNewEntity_trampoline                ; $57B2: $CD $86 $3B
-    jr   c, ret_007_57F4                          ; $57B5: $38 $3D
+    jr   c, .ret_57F4                             ; $57B5: $38 $3D
 
     push bc                                       ; $57B7: $C5
     ld   hl, wEntitiesSpriteVariantTable          ; $57B8: $21 $B0 $C3
@@ -303,7 +303,7 @@ func_007_57B0::
     pop  bc                                       ; $57F2: $C1
     and  a                                        ; $57F3: $A7
 
-ret_007_57F4:
+.ret_57F4
     ret                                           ; $57F4: $C9
 
 Data_007_57F5::

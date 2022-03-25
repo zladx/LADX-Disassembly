@@ -237,7 +237,7 @@ jr_005_6444:
     add  hl, bc                                   ; $647E: $09
     ld   a, [hl]                                  ; $647F: $7E
     and  a                                        ; $6480: $A7
-    jr   z, ret_005_648D                          ; $6481: $28 $0A
+    jr   z, .ret_648D                             ; $6481: $28 $0A
 
     ldh  a, [hFrameCounter]                       ; $6483: $F0 $E7
     rra                                           ; $6485: $1F
@@ -246,7 +246,7 @@ jr_005_6444:
     and  $01                                      ; $6488: $E6 $01
     jp   SetEntitySpriteVariant                   ; $648A: $C3 $0C $3B
 
-ret_005_648D:
+.ret_648D
     ret                                           ; $648D: $C9
 
 func_005_648E::

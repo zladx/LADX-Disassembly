@@ -7,7 +7,7 @@ KanaletBombableWallEntityHandler::
 
     ldh  a, [hRoomStatus]                         ; $71A1: $F0 $F8
     and  ROOM_STATUS_EVENT_1                      ; $71A3: $E6 $10
-    jp   nz, func_007_7EA4                        ; $71A5: $C2 $A4 $7E
+    jp   nz, ClearEntityStatus_07                 ; $71A5: $C2 $A4 $7E
 
     ld   hl, wEntitiesLoadOrderTable              ; $71A8: $21 $60 $C4
     add  hl, bc                                   ; $71AB: $09

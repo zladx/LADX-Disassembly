@@ -81,7 +81,7 @@ TradingItemEntityHandler::
 .jr_007_552E
     ldh  a, [hRoomStatus]                         ; $552E: $F0 $F8
     and  ROOM_STATUS_EVENT_2                      ; $5530: $E6 $20
-    jp   nz, func_007_7EA4                        ; $5532: $C2 $A4 $7E
+    jp   nz, ClearEntityStatus_07                 ; $5532: $C2 $A4 $7E
 
     ldh  a, [hIsGBC]                              ; $5535: $F0 $FE
     and  a                                        ; $5537: $A7
@@ -187,7 +187,7 @@ jr_007_55BA:
     call func_007_560D                            ; $55C4: $CD $0D $56
     or   $20                                      ; $55C7: $F6 $20
     ld   [hl], a                                  ; $55C9: $77
-    jp   func_007_7EA4                            ; $55CA: $C3 $A4 $7E
+    jp   ClearEntityStatus_07                     ; $55CA: $C3 $A4 $7E
 
 .jr_55CD
     ldh  a, [hLinkPositionX]                      ; $55CD: $F0 $98

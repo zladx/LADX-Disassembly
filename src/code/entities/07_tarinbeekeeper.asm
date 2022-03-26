@@ -41,12 +41,12 @@ TarinBeekeeperEntityHandler::
     inc  [hl]                                     ; $4EBD: $34
     ldh  a, [hRoomStatus]                         ; $4EBE: $F0 $F8
     and  ROOM_STATUS_EVENT_3                      ; $4EC0: $E6 $40
-    jp   nz, func_007_7EA4                        ; $4EC2: $C2 $A4 $7E
+    jp   nz, ClearEntityStatus_07                 ; $4EC2: $C2 $A4 $7E
 
 .jr_4EC5
     ld   a, [wHasInstrument3]                     ; $4EC5: $FA $67 $DB
     and  $02                                      ; $4EC8: $E6 $02
-    jp   z, func_007_7EA4                         ; $4ECA: $CA $A4 $7E
+    jp   z, ClearEntityStatus_07                  ; $4ECA: $CA $A4 $7E
 
     ld   de, TarinBeekeeperSpriteVariants         ; $4ECD: $11 $8D $4E
     call RenderActiveEntitySpritesPair            ; $4ED0: $CD $C0 $3B
@@ -399,4 +399,4 @@ func_007_50E3::
     ld   hl, wEntitiesPosZTable                   ; $50FB: $21 $10 $C3
     add  hl, de                                   ; $50FE: $19
     ld   [hl], $10                                ; $50FF: $36 $10
-    jp   func_007_7EA4                            ; $5101: $C3 $A4 $7E
+    jp   ClearEntityStatus_07                     ; $5101: $C3 $A4 $7E

@@ -247,7 +247,7 @@ jr_007_51AA:
     ld   hl, wTranscientVfxCountdownTable         ; $5270: $21 $20 $C5
     add  hl, de                                   ; $5273: $19
     ld   [hl], $0F                                ; $5274: $36 $0F
-    call func_007_7EA4                            ; $5276: $CD $A4 $7E
+    call ClearEntityStatus_07                     ; $5276: $CD $A4 $7E
     ld   a, [wRoomEvent]                          ; $5279: $FA $8E $C1
     and  $0F                                      ; $527C: $E6 $0F
     cp   TRIGGER_FILL_LAVA_GAPS                   ; $527E: $FE $0E

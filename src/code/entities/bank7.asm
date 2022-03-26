@@ -410,7 +410,7 @@ jr_007_7EA2:
     ld   e, a                                     ; $7EA2: $5F
     ret                                           ; $7EA3: $C9
 
-func_007_7EA4::
+ClearEntityStatus_07::
     ld   hl, wEntitiesStatusTable                 ; $7EA4: $21 $80 $C2
     add  hl, bc                                   ; $7EA7: $09
     ld   [hl], b                                  ; $7EA8: $70
@@ -546,7 +546,7 @@ label_007_7F36:
     ld   [hl], $08                                ; $7F74: $36 $08
 
 jr_007_7F76:
-    call func_007_7EA4                            ; $7F76: $CD $A4 $7E
+    call ClearEntityStatus_07                     ; $7F76: $CD $A4 $7E
     ld   hl, hNoiseSfx                            ; $7F79: $21 $F4 $FF
     ld   [hl], $1A                                ; $7F7C: $36 $1A
     ret                                           ; $7F7E: $C9

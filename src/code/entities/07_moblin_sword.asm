@@ -8,7 +8,7 @@ MoblinSwordEntityHandler::
 
     ld   a, [wIsBowWowFollowingLink]              ; $7947: $FA $56 $DB
     cp   $80                                      ; $794A: $FE $80
-    jp   nz, func_007_7EA4                        ; $794C: $C2 $A4 $7E
+    jp   nz, ClearEntityStatus_07                 ; $794C: $C2 $A4 $7E
 
 .jr_794F
     call func_007_7AB5                            ; $794F: $CD $B5 $7A

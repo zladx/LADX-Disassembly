@@ -37,7 +37,7 @@ KikiTheMonkey1SpriteVariants::
 KikiTheMonkeyEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5842: $F0 $F8
     and  ROOM_STATUS_EVENT_1                      ; $5844: $E6 $10
-    jp   nz, func_007_7EA4                        ; $5846: $C2 $A4 $7E
+    jp   nz, ClearEntityStatus_07                 ; $5846: $C2 $A4 $7E
 
     ld   de, KikiTheMonkey2SpriteVariants         ; $5849: $11 $1A $58
     ld   hl, wEntitiesDirectionTable              ; $584C: $21 $80 $C3
@@ -512,7 +512,7 @@ func_007_5B25::
     call UpdateEntityPosWithSpeed_07              ; $5B25: $CD $0A $7E
     ldh  a, [hActiveEntityPosY]                   ; $5B28: $F0 $EF
     cp   $08                                      ; $5B2A: $FE $08
-    jp   c, func_007_7EA4                         ; $5B2C: $DA $A4 $7E
+    jp   c, ClearEntityStatus_07                  ; $5B2C: $DA $A4 $7E
 
     ld   hl, wEntitiesInertiaTable                ; $5B2F: $21 $D0 $C3
     add  hl, bc                                   ; $5B32: $09
@@ -605,7 +605,7 @@ func_007_5B69::
     cp   $90                                      ; $5BB7: $FE $90
     jr   c, .jr_5BBE                              ; $5BB9: $38 $03
 
-    call func_007_7EA4                            ; $5BBB: $CD $A4 $7E
+    call ClearEntityStatus_07                     ; $5BBB: $CD $A4 $7E
 
 .jr_5BBE
     pop  af                                       ; $5BBE: $F1

@@ -194,7 +194,7 @@ jr_007_659D:
     ei                                            ; $65CA: $FB
 
 jr_007_65CB:
-    jp   func_007_7EA4                            ; $65CB: $C3 $A4 $7E
+    jp   ClearEntityStatus_07                     ; $65CB: $C3 $A4 $7E
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 GoombaSpriteVariants::

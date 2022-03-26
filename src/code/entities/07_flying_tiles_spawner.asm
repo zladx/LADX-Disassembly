@@ -32,7 +32,7 @@ func_007_74A8::
     add  hl, bc                                   ; $74AB: $09
     ld   a, [hl]                                  ; $74AC: $7E
     cp   $10                                      ; $74AD: $FE $10
-    jp   z, func_007_7EA4                         ; $74AF: $CA $A4 $7E
+    jp   z, ClearEntityStatus_07                  ; $74AF: $CA $A4 $7E
 
     call GetEntityTransitionCountdown             ; $74B2: $CD $05 $0C
     jr   nz, ret_007_752C                         ; $74B5: $20 $75

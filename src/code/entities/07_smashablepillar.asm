@@ -37,7 +37,7 @@ SmashablePillarEntityHandler::
 
     ldh  a, [hRoomStatus]                         ; $5DDE: $F0 $F8
     and  ROOM_STATUS_EVENT_2                      ; $5DE0: $E6 $20
-    jp   nz, func_007_7EA4                        ; $5DE2: $C2 $A4 $7E
+    jp   nz, ClearEntityStatus_07                 ; $5DE2: $C2 $A4 $7E
 
     ld   a, [wRoomTransitionState]                ; $5DE5: $FA $24 $C1
     and  a                                        ; $5DE8: $A7
@@ -47,7 +47,7 @@ SmashablePillarEntityHandler::
     add  hl, bc                                   ; $5DEE: $09
     ldh  a, [hMapRoom]                            ; $5DEF: $F0 $F6
     cp   [hl]                                     ; $5DF1: $BE
-    jp   nz, func_007_7EA4                        ; $5DF2: $C2 $A4 $7E
+    jp   nz, ClearEntityStatus_07                 ; $5DF2: $C2 $A4 $7E
 
 .jr_5DF5
     ldh  a, [hActiveEntitySpriteVariant]          ; $5DF5: $F0 $F1
@@ -181,7 +181,7 @@ label_007_5EA7:
 
 .jr_5EBF
     call func_007_6E7F                            ; $5EBF: $CD $7F $6E
-    jp   func_007_7EA4                            ; $5EC2: $C3 $A4 $7E
+    jp   ClearEntityStatus_07                     ; $5EC2: $C3 $A4 $7E
 
 func_007_5EC5::
     call GetEntityTransitionCountdown             ; $5EC5: $CD $05 $0C
@@ -222,7 +222,7 @@ func_007_5EF2::
     call func_007_6E7F                            ; $5EFB: $CD $7F $6E
     ld   hl, wHasInstrument7                      ; $5EFE: $21 $6B $DB
     set  2, [hl]                                  ; $5F01: $CB $D6
-    jp   func_007_7EA4                            ; $5F03: $C3 $A4 $7E
+    jp   ClearEntityStatus_07                     ; $5F03: $C3 $A4 $7E
 
 .jr_5F06
     jp   func_007_5EEA                            ; $5F06: $C3 $EA $5E
@@ -236,7 +236,7 @@ func_007_5F11::
     call GetEntityTransitionCountdown             ; $5F15: $CD $05 $0C
     jr   nz, .jr_5F1D                             ; $5F18: $20 $03
 
-    jp   func_007_7EA4                            ; $5F1A: $C3 $A4 $7E
+    jp   ClearEntityStatus_07                     ; $5F1A: $C3 $A4 $7E
 
 .jr_5F1D
     push af                                       ; $5F1D: $F5
@@ -283,7 +283,7 @@ label_007_5F4D:
     ld   de, Unknown101SpriteVariants             ; $5F4D: $11 $45 $5F
     call RenderActiveEntitySpritesPair            ; $5F50: $CD $C0 $3B
     call GetEntityTransitionCountdown             ; $5F53: $CD $05 $0C
-    jp   z, func_007_7EA4                         ; $5F56: $CA $A4 $7E
+    jp   z, ClearEntityStatus_07                  ; $5F56: $CA $A4 $7E
 
     cp   $04                                      ; $5F59: $FE $04
     ret  nz                                       ; $5F5B: $C0
@@ -363,7 +363,7 @@ label_007_5FAB:
     ld   a, [hl]                                  ; $5FD0: $7E
     inc  [hl]                                     ; $5FD1: $34
     cp   $04                                      ; $5FD2: $FE $04
-    jp   z, func_007_7EA4                         ; $5FD4: $CA $A4 $7E
+    jp   z, ClearEntityStatus_07                  ; $5FD4: $CA $A4 $7E
 
     ld   e, a                                     ; $5FD7: $5F
     ld   d, b                                     ; $5FD8: $50

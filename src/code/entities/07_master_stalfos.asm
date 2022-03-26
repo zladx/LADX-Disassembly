@@ -154,7 +154,7 @@ label_007_6A34:
     ld   [wScreenShakeHorizontal], a              ; $6A35: $EA $55 $C1
     ld   [wC167], a                               ; $6A38: $EA $67 $C1
     call label_27DD                               ; $6A3B: $CD $DD $27
-    jp   func_007_7EA4                            ; $6A3E: $C3 $A4 $7E
+    jp   ClearEntityStatus_07                     ; $6A3E: $C3 $A4 $7E
 
 ; Entity handler for:
 ;  - Master Stalfos
@@ -866,7 +866,7 @@ jr_007_6E6A:
     jr   c, ret_007_6EA1                          ; $6E77: $38 $28
 
     call label_27DD                               ; $6E79: $CD $DD $27
-    call func_007_7EA4                            ; $6E7C: $CD $A4 $7E
+    call ClearEntityStatus_07                     ; $6E7C: $CD $A4 $7E
 
 ; Also used by smashable pillar to set ROOM_STATUS_EVENT_2 on the current room.
 func_007_6E7F::

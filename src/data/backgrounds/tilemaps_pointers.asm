@@ -2,7 +2,7 @@ TilemapsPointersTable::
 ._00 dw $0000
 ._01 dw CreditsIslandTilemap             ; $56CC
 ._02 dw InventoryTilemap                 ; $6748
-._03 dw MenuFileSelection                ; $6336
+._03 dw MenuFileSelectionTilemap         ; $6336
 ._04 dw MenuFileSelectionCommandsTilemap ; $6328
 ._05 dw MenuFileCreationTilemap          ; $644D
 ._06 dw MenuFileEraseTilemap             ; $6589

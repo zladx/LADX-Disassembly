@@ -40,7 +40,7 @@ WorldMapTilemap::
 incbin "data/backgrounds/world_map.tilemap.encoded"
 MenuFileSelectionCommandsTilemap::
 incbin "data/backgrounds/menu_file_selection_commands.tilemap.encoded"
-MenuFileSelection::
+MenuFileSelectionTilemap::
 incbin "data/backgrounds/menu_file_selection.tilemap.encoded"
 MenuFileCreationTilemap::
 incbin "data/backgrounds/menu_file_creation.tilemap.encoded"

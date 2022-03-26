@@ -1,5 +1,5 @@
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 PodobooSpriteVariants::
 .variant0
     db $7A, $42
@@ -174,7 +174,7 @@ PodobooState2Handler::
     ld   [hl], a                                  ; $54DB: $77
     ret                                           ; $54DC: $C9
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown067SpriteVariants::
 .variant0
     db $7C, $42
@@ -195,7 +195,7 @@ Unknown067SpriteVariants::
     db $7C, $14
     db $7C, $34
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown068SpriteVariants::
 .variant0
     db $7E, $02

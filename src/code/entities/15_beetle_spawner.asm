@@ -65,7 +65,7 @@ Data_015_756F::
 Data_015_7573::
     db   $00, $00, $F8, $08
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown058SpriteVariants::
 .variant0
     db $70, $00

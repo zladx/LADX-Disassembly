@@ -45,7 +45,7 @@ BouldersEntityHandler::
 .ret_43AD
     ret                                           ; $43AD: $C9
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown043SpriteVariants:: ; $43AE
 .variant0
     db $5C, $00

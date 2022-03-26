@@ -247,7 +247,7 @@ jr_019_4355:
     ld   [wBGPalette], a                          ; $438F: $EA $97 $DB
     ret                                           ; $4392: $C9
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown062SpriteVariants::
 .variant0
     db $1E, $02

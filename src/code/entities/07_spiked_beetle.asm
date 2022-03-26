@@ -1,4 +1,4 @@
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 SpikedBeetle1SpriteVariants:: ; $7784
 .variant0
     db $70, $00
@@ -13,7 +13,7 @@ SpikedBeetle1SpriteVariants:: ; $7784
     db $76, $00
     db $76, $20
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 SpikedBeetle2SpriteVariants::
 .variant0
     db $60, $00

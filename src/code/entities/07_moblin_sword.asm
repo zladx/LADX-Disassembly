@@ -219,7 +219,7 @@ Data_007_7A85::
 Data_007_7A8D::
     db   $14, $14, $FC, $FC, $0C, $0C, $0C, $0C
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown042SpriteVariants::
 .variant0
     db $60, $03

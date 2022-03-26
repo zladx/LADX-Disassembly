@@ -263,7 +263,7 @@ func_015_77BF::
 
     ret                                           ; $7812: $C9
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown057SpriteVariants::
 .variant0
     db $7C, $01

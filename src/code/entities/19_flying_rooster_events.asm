@@ -17,7 +17,7 @@ label_019_4D9B:
 ._03 dw func_019_4E43                             ; $4DB4
 ._04 dw func_019_4E74                             ; $4DB6
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown064SpriteVariants::
 .variant0
     db $60, $07
@@ -285,7 +285,7 @@ label_019_4F30:
 .ret_4FDA
     ret                                           ; $4FDA: $C9
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown065SpriteVariants::
 .variant0
     db $60, $00
@@ -312,7 +312,7 @@ Unknown065SpriteVariants::
     db $6E, $20
     db $6C, $20
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown066SpriteVariants::
 .variant0
     db $70, $03

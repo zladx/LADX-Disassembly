@@ -1,5 +1,5 @@
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 HidingGel2SpriteVariants::
 .variant0
     db $FF, $FF
@@ -14,7 +14,7 @@ HidingGel2SpriteVariants::
     db $52, $00
     db $52, $20
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 HidingGel1SpriteVariants::
 .variant0
     db $56, $00

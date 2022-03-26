@@ -736,7 +736,7 @@ jr_015_54B7:
 
     ret                                           ; $54BD: $C9
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown047SpriteVariants::
 .variant0
     db $4E, $00
@@ -801,13 +801,13 @@ Data_015_5501::
     db   $00, $00, $4A, $00, $00, $08, $4A, $20, $00, $08, $FF, $20, $00, $10, $FF, $20
     db   $00, $F8, $FF, $40, $00, $00, $FF, $40, $00, $08, $FF, $60, $00, $10, $FF, $60
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown048SpriteVariants::
 .variant0
     db $4C, $00
     db $4C, $20
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown052SpriteVariants::
 .variant0
     db $48, $00
@@ -1421,7 +1421,7 @@ func_015_5A67::
     call func_015_5B0B                            ; $5A6D: $CD $0B $5B
     jp   label_015_5D48                           ; $5A70: $C3 $48 $5D
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown049SpriteVariants::
 .variant0
     db $6A, $00
@@ -1594,7 +1594,7 @@ label_015_5D48:
     ld   a, $08                                   ; $5D74: $3E $08
     jp   func_015_7964_trampoline                 ; $5D76: $C3 $A0 $3D
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown050SpriteVariants::
 .variant0
     db $1E, $00
@@ -1661,7 +1661,7 @@ label_015_5DD5:
     ld   de, Data_015_5DCD                        ; $5DD5: $11 $CD $5D
     ret                                           ; $5DD8: $C9
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown051SpriteVariants::
 .variant0
     db $7E, $00
@@ -2176,7 +2176,7 @@ Data_015_6135::
     db   $F8, $F8, $60, $00, $F8, $00, $62, $00, $F8, $08, $62, $20, $F8, $10, $60, $20
     db   $08, $F8, $60, $40, $08, $00, $62, $40, $08, $08, $6E, $20, $08, $10, $6C, $20
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown053SpriteVariants::
 .variant0
     db $70, $00
@@ -3504,7 +3504,7 @@ label_015_6C61:
     ldh  [hLinkPositionX], a                      ; $6D2D: $E0 $98
     ret                                           ; $6D2F: $C9
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown054SpriteVariants:: ; $6D30
 .variant0
     db $4A, $00
@@ -3537,7 +3537,7 @@ label_015_6D40:
     ld   a, [hl]                                  ; $6D5A: $7E
     jp   SetEntitySpriteVariant                   ; $6D5B: $C3 $0C $3B
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown055SpriteVariants::
 .variant0
     db $1E, $00
@@ -4051,7 +4051,7 @@ Data_015_7127::
     db   $08, $07, $06, $05, $05, $04, $03, $01, $00, $FF, $FD, $FC, $FB, $FB, $FA, $F9
     db   $F8, $F9, $FA, $FB, $FB, $FC, $FD, $FF
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown056SpriteVariants::
 .variant0
     db $4E, $00

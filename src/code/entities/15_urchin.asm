@@ -1,4 +1,4 @@
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Urchin2SpriteVariants::
 .variant0
     db $5C, $03
@@ -13,7 +13,7 @@ Urchin2SpriteVariants::
     db $5C, $43
     db $5E, $43
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Urchin1SpriteVariants::
 .variant0
     db $2C, $03

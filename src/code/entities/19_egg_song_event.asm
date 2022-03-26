@@ -195,7 +195,7 @@ func_019_4B6E::
 .ret_4BAB
     ret                                           ; $4BAB: $C9
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown063SpriteVariants:: ; $4BAC
 .variant0
     db $50, $06

@@ -882,7 +882,7 @@ func_007_6E7F::
     ld   e, a                                     ; $6E8D: $5F
     ld   d, b                                     ; $6E8E: $50
 
-    ; If the map uses rooms in the indoors_b rooms group…
+    ; If the map uses rooms in the indoors_b rooms groupâ€¦
     ldh  a, [hMapId]                              ; $6E8F: $F0 $F7
     cp   MAP_INDOORS_B_END                        ; $6E91: $FE $1A
     jr   nc, jr_007_6E9A                          ; $6E93: $30 $05
@@ -966,7 +966,7 @@ func_007_6EF0::
     ld   [wD20D], a                               ; $6F11: $EA $0D $D2
     ret                                           ; $6F14: $C9
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown041SpriteVariants::
 .variant0
     db $70, $01

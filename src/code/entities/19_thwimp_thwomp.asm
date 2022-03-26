@@ -189,7 +189,7 @@ func_019_567B::
     ld   a, [hl]                                  ; $56BB: $7E
     ret                                           ; $56BC: $C9
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 ThwimpSpriteVariants::
 .variant0
     db $5A, $03
@@ -306,7 +306,7 @@ Data_019_5768::
     db   $00, $00, $70, $07, $00, $08, $72, $07, $00, $10, $72, $27, $00, $18, $70, $27
     db   $10, $00, $74, $07, $10, $08, $76, $07, $10, $10, $76, $27, $10, $18, $74, $27
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 ThwompSpriteVariants::
 .variant0
     db $FF, $07

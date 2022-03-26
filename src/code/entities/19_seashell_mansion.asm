@@ -329,13 +329,13 @@ SeashellMansionState9Handler::
     ld   [hl], $07                                ; $73A6: $36 $07
     ret                                           ; $73A8: $C9
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown070SpriteVariants::
 .variant0
     db $50, $00
     db $50, $20
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown071SpriteVariants::
 .variant0
     db $3C, $00
@@ -520,7 +520,7 @@ func_019_7526::
     ld   a, $0A                                   ; $7566: $3E $0A
     jp   func_015_7964_trampoline                 ; $7568: $C3 $A0 $3D
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown072SpriteVariants::
 .variant0
     db $7A, $00
@@ -808,7 +808,7 @@ func_019_784F::
     ld   a, $10                                   ; $7874: $3E $10
     jp   func_015_7964_trampoline                 ; $7876: $C3 $A0 $3D
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown073SpriteVariants::
 .variant0
     db $7E, $00

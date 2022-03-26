@@ -1,4 +1,4 @@
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 StalfosEvasive2SpriteVariants::
 .variant0
     db $4A, $01
@@ -13,7 +13,7 @@ StalfosEvasive2SpriteVariants::
 Data_015_4E89::
     db   $00, $06, $FA, $FA, $06
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 StalfosEvasive1SpriteVariants::
 .variant0
     db $48, $01

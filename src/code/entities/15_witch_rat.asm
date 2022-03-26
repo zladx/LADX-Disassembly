@@ -1,4 +1,4 @@
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 WitchRatSpriteVariants::
 .variant0
     db $50, $03

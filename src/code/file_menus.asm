@@ -223,11 +223,11 @@ IF LANG_DE
     ldh [hLinkInteractiveMotionBlocked], a
 ENDC
     and  a                                        ; $48C5: $A7
-    ; … use background map 3,
-    ld   a, $03                                   ; $48C6: $3E $03
+    ; … draw the file selection without the copy/erase commands,
+    ld   a, TILEMAP_MENU_FILE_SELECTION           ; $48C6: $3E $03
     jr   z, .BGMapEnd                             ; $48C8: $28 $02
-    ; else use background map 4.
-    ld   a, $04                                   ; $48CA: $3E $04
+    ; … else draw the file selection with the commands.
+    ld   a, TILEMAP_MENU_FILE_SELECTION_COMMANDS  ; $48CA: $3E $04
 .BGMapEnd
 
     ; Load background and palette
@@ -518,7 +518,7 @@ FileCreationInit1Handler::
     ret                                           ; $4A23: $C9
 
 FileCreationInit2Handler::
-    ld   a, $05                                   ; $4A24: $3E $05
+    ld   a, TILEMAP_MENU_FILE_CREATION            ; $4A24: $3E $05
     ld   [wBGMapToLoad], a                        ; $4A26: $EA $FF $D6
 
     ;
@@ -996,7 +996,7 @@ FileDeletionState2Handler::
     jp   IncrementGameplaySubtypeAndReturn        ; $4D62: $C3 $D6 $44 ; $4D62: $C3 $D6 $44
 
 FileDeletionState3Handler::
-    ld   a, $06                                   ; $4D65: $3E $06 ; $4D65: $3E $06
+    ld   a, TILEMAP_MENU_FILE_ERASE               ; $4D65: $3E $06 ; $4D65: $3E $06
     ld   [wBGMapToLoad], a                        ; $4D67: $EA $FF $D6 ; $4D67: $EA $FF $D6
     jp   IncrementGameplaySubtypeAndReturn        ; $4D6A: $C3 $D6 $44 ; $4D6A: $C3 $D6 $44
 
@@ -1517,7 +1517,7 @@ FileCopyState2Handler::
     jp   IncrementGameplaySubtypeAndReturn        ; $4FB8: $C3 $D6 $44 ; $4FB8: $C3 $D6 $44
 
 FileCopyState3Handler::
-    ld   a, $0C                                   ; $4FBB: $3E $0C ; $4FBB: $3E $0C
+    ld   a, TILEMAP_MENU_FILE_COPY                ; $4FBB: $3E $0C ; $4FBB: $3E $0C
     ld   [wBGMapToLoad], a                        ; $4FBD: $EA $FF $D6 ; $4FBD: $EA $FF $D6
     jp   IncrementGameplaySubtypeAndReturn        ; $4FC0: $C3 $D6 $44 ; $4FC0: $C3 $D6 $44
 

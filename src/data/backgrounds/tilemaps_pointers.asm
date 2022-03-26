@@ -1,3 +1,4 @@
+; Table indexed by wBGMapToLoad
 TilemapsPointersTable::
 ._00 dw $0000
 ._01 dw CreditsIslandTilemap             ; $56CC

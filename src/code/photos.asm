@@ -3126,7 +3126,7 @@ JumpTable_037_5393.func_037_53C0::
     ld   [wGameplayType], a                       ; $53F1: $EA $95 $DB
     xor  a                                        ; $53F4: $AF
     ld   [wGameplaySubtype], a                    ; $53F5: $EA $96 $DB
-    ld   a, $02                                   ; $53F8: $3E $02
+    ld   a, TILEMAP_INVENTORY                     ; $53F8: $3E $02
     ld   [wBGMapToLoad], a                        ; $53FA: $EA $FF $D6
     ret                                           ; $53FD: $C9
 

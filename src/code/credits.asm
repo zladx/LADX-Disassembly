@@ -1297,7 +1297,7 @@ IncrementCreditsSubsceneAndReturn::
 
 CreditsStairsPrepare2Handler::
     ; Prepare loading of background map
-    ld   a, $16                                   ; $4CDE: $3E $16
+    ld   a, TILEMAP_CREDITS_STAIRS                ; $4CDE: $3E $16
     ld   [wBGMapToLoad], a                        ; $4CE0: $EA $FF $D6
 
     ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $4CE3: $3E $E8
@@ -2301,7 +2301,7 @@ MrsMeowMeowsHouseSceneHandler::
     jr   jr_017_56DC                              ; $56D5: $18 $05
 
 .jr_56D7
-    ld   a, $20                                   ; $56D7: $3E $20
+    ld   a, TILEMAP_CREDITS_MRS_MEOW_MEOWS_HOUSE  ; $56D7: $3E $20
     ld   [wBGMapToLoad], a                        ; $56D9: $EA $FF $D6
 
 jr_017_56DC:
@@ -2381,7 +2381,7 @@ KidsSceneHandler::
     jr   jr_017_575A                              ; $5753: $18 $05
 
 .jr_5755
-    ld   a, $1E                                   ; $5755: $3E $1E
+    ld   a, TILEMAP_CREDITS_KIDS                  ; $5755: $3E $1E
     ld   [wBGMapToLoad], a                        ; $5757: $EA $FF $D6
 
 jr_017_575A:
@@ -2446,7 +2446,7 @@ BeachSceneHandler::
     jr   jr_017_57BF                              ; $57B8: $18 $05
 
 .jr_57BA
-    ld   a, $22                                   ; $57BA: $3E $22
+    ld   a, TILEMAP_CREDITS_BEACH                 ; $57BA: $3E $22
     ld   [wBGMapToLoad], a                        ; $57BC: $EA $FF $D6
 
 jr_017_57BF:
@@ -2511,7 +2511,7 @@ TarinSceneHandler::
     jr   jr_017_5824                              ; $581D: $18 $05
 
 .jr_581F
-    ld   a, $21                                   ; $581F: $3E $21
+    ld   a, TILEMAP_CREDITS_TARIN                 ; $581F: $3E $21
     ld   [wBGMapToLoad], a                        ; $5821: $EA $FF $D6
 
 jr_017_5824:
@@ -2558,7 +2558,7 @@ MarinSingingSceneHandler:
     jr   jr_017_5867                              ; $5860: $18 $05
 
 .jr_5862
-    ld   a, $1F                                   ; $5862: $3E $1F
+    ld   a, TILEMAP_CREDITS_MARIN_SINGING         ; $5862: $3E $1F
     ld   [wBGMapToLoad], a                        ; $5864: $EA $FF $D6
 
 jr_017_5867:
@@ -2647,7 +2647,7 @@ func_017_58D1::
     ret                                           ; $58EF: $C9
 
 func_017_58F0::
-    ld   a, $01                                   ; $58F0: $3E $01
+    ld   a, TILEMAP_CREDITS_ISLAND                ; $58F0: $3E $01
     ld   [wBGMapToLoad], a                        ; $58F2: $EA $FF $D6
     jp   IncrementD000AndReturn                   ; $58F5: $C3 $25 $56
 
@@ -3365,8 +3365,9 @@ LinkOnSeaLarge0Handler::
     jp   IncrementCreditsSubscene                 ; $6075: $C3 $D9 $4C
 
 LinkOnSeaLarge1Handler::
-    ld   a, $17                                   ; $6078: $3E $17
+    ld   a, TILEMAP_CREDITS_LINK_ON_SEA_LARGE     ; $6078: $3E $17
     ld   [wBGMapToLoad], a                        ; $607A: $EA $FF $D6
+
     ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $607D: $3E $E8
     call SpawnNewEntity_trampoline                ; $607F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $6082: $21 $00 $C2
@@ -3405,6 +3406,7 @@ LinkOnSeaLarge1Handler::
     ld   hl, wEntitiesSpriteVariantTable          ; $60C2: $21 $B0 $C3
     add  hl, de                                   ; $60C5: $19
     inc  [hl]                                     ; $60C6: $34
+
     jp   IncrementCreditsSubscene                 ; $60C7: $C3 $D9 $4C
 
 ; Palettes indices
@@ -3478,7 +3480,7 @@ CreditsSunAbove0Handler::
     jp   IncrementCreditsSubscene                 ; $6146: $C3 $D9 $4C
 
 CreditsSunAbove1Handler::
-    ld   a, $18                                   ; $6149: $3E $18
+    ld   a, TILEMAP_CREDITS_SUN_ABOVE             ; $6149: $3E $18
     ld   [wBGMapToLoad], a                        ; $614B: $EA $FF $D6
 
     ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $614E: $3E $E8
@@ -3668,7 +3670,7 @@ func_017_6292::
     jp   IncrementCreditsSubscene                 ; $629B: $C3 $D9 $4C
 
 func_017_629E::
-    ld   a, $19                                   ; $629E: $3E $19
+    ld   a, TILEMAP_CREDITS_LINK_ON_SEA_CLOSE     ; $629E: $3E $19
     ld   [wBGMapToLoad], a                        ; $62A0: $EA $FF $D6
     ld   hl, $FFFF                                ; $62A3: $21 $FF $FF
     set  1, [hl]                                  ; $62A6: $CB $CE
@@ -4191,7 +4193,7 @@ LinkSeatedOnLog0Handler::
     jp   IncrementCreditsSubscene                 ; $682C: $C3 $D9 $4C
 
 LinkSeatedOnLog1Handler::
-    ld   a, $1A                                   ; $682F: $3E $1A
+    ld   a, TILEMAP_CREDITS_LINK_SEATED_ON_LOG    ; $682F: $3E $1A
     ld   [wBGMapToLoad], a                        ; $6831: $EA $FF $D6
 
     ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $6834: $3E $E8
@@ -4639,8 +4641,9 @@ CreditsLinkFaceCloseUp0Handler::
     jp   IncrementCreditsSubscene                 ; $6D3F: $C3 $D9 $4C
 
 CreditsLinkFaceCloseUp1Handler::
-    ld   a, $1B                                   ; $6D42: $3E $1B
+    ld   a, TILEMAP_CREDITS_LINK_FACE_CLOSE_UP    ; $6D42: $3E $1B
     ld   [wBGMapToLoad], a                        ; $6D44: $EA $FF $D6
+
     call ResetCreditsSceneVariables               ; $6D47: $CD $A5 $4D
     ld   a, $1E                                   ; $6D4A: $3E $1E
     ld   [wBGPalette], a                          ; $6D4C: $EA $97 $DB
@@ -4861,8 +4864,9 @@ CreditsRollLoadHandler::
     jp   IncrementCreditsSubscene                 ; $6EA0: $C3 $D9 $4C
 
 CreditsRoll1Handler::
-    ld   a, $1C                                   ; $6EA3: $3E $1C
+    ld   a, TILEMAP_CREDITS_ROLL_1                ; $6EA3: $3E $1C
     ld   [wBGMapToLoad], a                        ; $6EA5: $EA $FF $D6
+
     call ResetCreditsSceneVariables               ; $6EA8: $CD $A5 $4D
     ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $6EAB: $3E $E8
     call SpawnNewEntity_trampoline                ; $6EAD: $CD $86 $3B

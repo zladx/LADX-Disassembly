@@ -69,7 +69,7 @@ ENDC
     and  a                                        ; $0209: $A7
     jr   nz, .loadRequestedGfx                    ; $020A: $20 $07
     ld   a, [wBGMapToLoad]                        ; $020C: $FA $FF $D6
-    cp   $00                                      ; $020F: $FE $00
+    cp   TILEMAP_NONE                             ; $020F: $FE $00
     jr   z, .noGfxToLoad                          ; $0211: $28 $2A
 
 .loadRequestedGfx

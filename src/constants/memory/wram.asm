@@ -2935,7 +2935,7 @@ wTilesetToLoad::
   ds 1 ; D6FE
 
 ; Index of a tilemap that will be copied to VRAM on next vblank.
-; See possible values at TilemapsPointersTable
+; See TILEMAP_* constants for possible values.
 wBGMapToLoad::
   ds 1 ; D6FF
 

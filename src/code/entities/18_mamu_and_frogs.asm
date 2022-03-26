@@ -10,7 +10,7 @@ MamuAndFrogsEntityHandler::
 
     inc  a                                        ; $4006: $3C
     ld   [wC116], a                               ; $4007: $EA $16 $C1
-    ld   a, $14                                   ; $400A: $3E $14
+    ld   a, TILEMAP_MAMU                          ; $400A: $3E $14
     ld   [wBGMapToLoad], a                        ; $400C: $EA $FF $D6
 
 .jr_400F

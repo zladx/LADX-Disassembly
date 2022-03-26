@@ -34,7 +34,7 @@ IntroHandlerEntryPoint::
     ; else transition to Title screen
     ld   a, 40  ; Ignore joypad for the next 40 frames ; $6E39: $3E $28
     ldh  [hButtonsInactiveDelay], a               ; $6E3B: $E0 $B5
-    ld   a, $11                                   ; $6E3D: $3E $11
+    ld   a, TILEMAP_TITLE                         ; $6E3D: $3E $11
     ld   [wBGMapToLoad], a                        ; $6E3F: $EA $FF $D6
     ldh  a, [hIsGBC]                              ; $6E42: $F0 $FE
     and  a                                        ; $6E44: $A7
@@ -188,13 +188,13 @@ IntroSceneStage2Handler::
     ldh  a, [hIsGBC]                              ; $6F39: $F0 $FE
     and  a                                        ; $6F3B: $A7
     jr   z, .notGBC                               ; $6F3C: $28 $04
-    ld   a, $25                                   ; $6F3E: $3E $25
+    ld   a, TILEMAP_INTRO_SEA_CGB                 ; $6F3E: $3E $25
     jr   .bgMapEnd                                ; $6F40: $18 $02
 .notGBC
-    ld   a, $0E                                   ; $6F42: $3E $0E
+    ld   a, TILEMAP_INTRO_SEA_DMG                 ; $6F42: $3E $0E
 .bgMapEnd
-
     ld   [wBGMapToLoad], a                        ; $6F44: $EA $FF $D6
+
     ld   a, $1C                                   ; $6F47: $3E $1C
     ld   [wOBJ0Palette], a                        ; $6F49: $EA $98 $DB
     ld   a, $E0                                   ; $6F4C: $3E $E0
@@ -310,7 +310,7 @@ IntroShipOnSeaHandler::
     ld   [rBGP], a                                ; $701D: $E0 $47
     ld   a, GAMEPLAY_INTRO_LINK_FACE              ; $701F: $3E $04
     ld   [wGameplaySubtype], a                    ; $7021: $EA $96 $DB
-    ld   a, $0F                                   ; $7024: $3E $0F
+    ld   a, TILEMAP_INTRO_LINK_FACE               ; $7024: $3E $0F
     ld   [wBGMapToLoad], a                        ; $7026: $EA $FF $D6
     ld   a, $01                                   ; $7029: $3E $01
     ld   [rIE], a                                 ; $702B: $E0 $FF
@@ -438,17 +438,17 @@ IntroLinkFaceHandler::
     ; Move back to sea sequence
     ld   a, GAMEPLAY_INTRO_SEA                    ; $70D0: $3E $03
     ld   [wGameplaySubtype], a                    ; $70D2: $EA $96 $DB
+
     ldh  a, [hIsGBC]                              ; $70D5: $F0 $FE
     and  a                                        ; $70D7: $A7
     jr   z, .notGBC                               ; $70D8: $28 $04
-    ld   a, $25                                   ; $70DA: $3E $25
+    ld   a, TILEMAP_INTRO_SEA_CGB                 ; $70DA: $3E $25
     jr   .continue3                               ; $70DC: $18 $02
-
 .notGBC
-    ld   a, $0E                                   ; $70DE: $3E $0E
-
+    ld   a, TILEMAP_INTRO_SEA_DMG                 ; $70DE: $3E $0E
 .continue3
     ld   [wBGMapToLoad], a                        ; $70E0: $EA $FF $D6
+
     call LoadTileMapZero_trampoline               ; $70E3: $CD $08 $71
     ld   a, $03                                   ; $70E6: $3E $03
     ld   [rIE], a ; Enable interrupts on VBlank and LCDStat ; $70E8: $E0 $FF
@@ -485,10 +485,12 @@ LoadTileMapZero_trampoline::
     jp   Farcall                                  ; $7117: $C3 $D7 $0B
 
 IntroStage5Handler::
-    ld   a, $10                                   ; $711A: $3E $10
+    ld   a, TILEMAP_INTRO_BEACH                   ; $711A: $3E $10
     ld   [wBGMapToLoad], a                        ; $711C: $EA $FF $D6
+
     ld   a, $01                                   ; $711F: $3E $01
     ld   [wPaletteUnknownE], a                    ; $7121: $EA $D5 $DD
+
     call IncrementGameplaySubtype                 ; $7124: $CD $D6 $44
     ret                                           ; $7127: $C9
 

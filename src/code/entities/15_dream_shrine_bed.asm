@@ -51,7 +51,7 @@ func_015_7D01::
 .ret_7D4F
     ret                                           ; $7D4F: $C9
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown061SpriteVariants::
 .variant0
     db $50, $07
@@ -60,7 +60,7 @@ Unknown061SpriteVariants::
     db $54, $00
     db $56, $00
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown059SpriteVariants::
 .variant0
     db $50, $07
@@ -69,7 +69,7 @@ Unknown059SpriteVariants::
     db $54, $02
     db $56, $02
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown060SpriteVariants::
 .variant0
     db $50, $07

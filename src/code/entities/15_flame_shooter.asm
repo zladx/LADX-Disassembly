@@ -1,4 +1,4 @@
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 FlameShooterSpriteVariants::
 .variant0
     db $70, $02
@@ -65,7 +65,7 @@ FlameShooterEntityHandler::
 .ret_4D9C
     ret                                           ; $4D9C: $C9
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown045SpriteVariants::
 .variant0
     db $78, $02
@@ -77,7 +77,7 @@ Unknown045SpriteVariants::
     db $74, $02
     db $74, $22
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown046SpriteVariants::
 .variant0
     db $7A, $02

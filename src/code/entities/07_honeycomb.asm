@@ -6,7 +6,7 @@ HoneycombSpriteVariants::
 HoneycombEntityHandler::
     ldh  a, [hRoomStatus]                         ; $4C97: $F0 $F8
     and  ROOM_STATUS_EVENT_2                      ; $4C99: $E6 $20
-    jp   nz, func_007_7EA4                        ; $4C9B: $C2 $A4 $7E
+    jp   nz, ClearEntityStatus_07                 ; $4C9B: $C2 $A4 $7E
 
     ld   hl, wEntitiesPrivateState4Table          ; $4C9E: $21 $40 $C4
     add  hl, bc                                   ; $4CA1: $09
@@ -156,7 +156,7 @@ func_007_4D4E::
     ld   a, REPLACE_TILES_TRADING_ITEM            ; $4D76: $3E $0D
     ldh  [hReplaceTiles], a                       ; $4D78: $E0 $A5
     call CreateTradingItemEntity                  ; $4D7A: $CD $0C $0C
-    jp   func_007_7EA4                            ; $4D7D: $C3 $A4 $7E
+    jp   ClearEntityStatus_07                     ; $4D7D: $C3 $A4 $7E
 
 Data_007_4D80::
     db   $72, $00, $72, $40
@@ -262,7 +262,7 @@ func_007_4E25::
     and  a                                        ; $4E33: $A7
 
 .jr_4E34
-    jp   z, func_007_7EA4                         ; $4E34: $CA $A4 $7E
+    jp   z, ClearEntityStatus_07                  ; $4E34: $CA $A4 $7E
 
     ldh  a, [hFrameCounter]                       ; $4E37: $F0 $E7
     and  $07                                      ; $4E39: $E6 $07

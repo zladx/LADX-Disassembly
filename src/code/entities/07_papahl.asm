@@ -53,7 +53,7 @@ PapahlEntityHandler::
 
     ld   a, [wHasInstrument3]                     ; $4A28: $FA $67 $DB
     and  $02                                      ; $4A2B: $E6 $02
-    jp   nz, func_007_7EA4                        ; $4A2D: $C2 $A4 $7E
+    jp   nz, ClearEntityStatus_07                 ; $4A2D: $C2 $A4 $7E
 
 .jr_4A30
     ld   de, Papahl2SpriteVariants                ; $4A30: $11 $07 $4A
@@ -91,7 +91,7 @@ PapahlEntityHandler::
 jr_007_4A69:
     ldh  a, [hRoomStatus]                         ; $4A69: $F0 $F8
     and  ROOM_STATUS_EVENT_2                      ; $4A6B: $E6 $20
-    jp   nz, func_007_7EA4                        ; $4A6D: $C2 $A4 $7E
+    jp   nz, ClearEntityStatus_07                 ; $4A6D: $C2 $A4 $7E
 
     ld   de, PapahlDirectionSpriteVariants        ; $4A70: $11 $F7 $49
     ld   hl, wEntitiesDirectionTable              ; $4A73: $21 $80 $C3

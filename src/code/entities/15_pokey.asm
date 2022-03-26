@@ -180,7 +180,7 @@ func_015_4C85::
     ld   c, $02                                   ; $4CD0: $0E $02
     jp   RenderActiveEntitySpritesRect            ; $4CD2: $C3 $E6 $3C
 
-; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
+; define sprite variants by selecting tile nÂ° and setting OAM attributes (palette + flags) in a list
 Unknown044SpriteVariants::
 .variant0
     db $76, $00

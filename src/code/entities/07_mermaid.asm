@@ -390,7 +390,7 @@ func_007_48CA::
     xor  a                                        ; $48D7: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $48D8: $E0 $A1
     ld   [wC167], a                               ; $48DA: $EA $67 $C1
-    jp   func_007_7EA4                            ; $48DD: $C3 $A4 $7E
+    jp   ClearEntityStatus_07                     ; $48DD: $C3 $A4 $7E
 
 .jr_48E0
     inc  [hl]                                     ; $48E0: $34

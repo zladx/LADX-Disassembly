@@ -408,7 +408,7 @@ func_007_44E8::
     jr   nz, .jr_4503                             ; $44EF: $20 $12
 
     ld   a, $01                                   ; $44F1: $3E $01
-    ld   [wDoesNotHaveTradeSequenceItem], a       ; $44F3: $EA $7F $DB
+    ld   [wExchangingTradeSequenceItem], a        ; $44F3: $EA $7F $DB
     ld   [wC167], a                               ; $44F6: $EA $67 $C1
     call GetEntityTransitionCountdown             ; $44F9: $CD $05 $0C
     ld   [hl], $D0                                ; $44FC: $36 $D0

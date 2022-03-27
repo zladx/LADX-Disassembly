@@ -35,7 +35,7 @@ GoriyaEntityHandler::
     cp   $0E                                      ; $45EF: $FE $0E
     jp   nz, ClearEntityStatus_19                 ; $45F1: $C2 $61 $7E
 
-    ld   a, [wDoesNotHaveTradeSequenceItem]       ; $45F4: $FA $7F $DB
+    ld   a, [wExchangingTradeSequenceItem]        ; $45F4: $FA $7F $DB
     and  a                                        ; $45F7: $A7
     jp   nz, ClearEntityStatus_19                 ; $45F8: $C2 $61 $7E
 

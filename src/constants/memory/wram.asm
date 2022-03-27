@@ -3304,8 +3304,8 @@ wKidSaveHintIndex::
   ds 1 ; DB7E
 
 ; Set to $01 or $02 if you handed over your trade sequence item to someone and have not gotten the next one yet.
-; wTradeSequenceItem will still indicate where you are in the sequence, and wDoesNotHaveTradeSequenceItem will hide the item from your inventory menu.
-wDoesNotHaveTradeSequenceItem::
+; wTradeSequenceItem will still indicate where you are in the sequence, and wExchangingTradeSequenceItem will hide the item from your inventory menu.
+wExchangingTradeSequenceItem::
   ds 1 ; DB7F
 
 ; Names of the saved files.

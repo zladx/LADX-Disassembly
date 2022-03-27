@@ -220,7 +220,7 @@ jr_004_7872:
 
     ld   hl, Data_004_77B5                        ; $7878: $21 $B5 $77
     add  hl, de                                   ; $787B: $19
-    ld   de, wShopItemList                                ; $787C: $11 $05 $C5
+    ld   de, wShopItemList                        ; $787C: $11 $05 $C5
     ld   c, $04                                   ; $787F: $0E $04
 
 .loop_7881

@@ -182,7 +182,7 @@ jr_007_55BA:
     jr   nz, .jr_55CD                             ; $55BB: $20 $10
 
     xor  a                                        ; $55BD: $AF
-    ld   [wDoesNotHaveTradeSequenceItem], a       ; $55BE: $EA $7F $DB
+    ld   [wExchangingTradeSequenceItem], a        ; $55BE: $EA $7F $DB
     ld   [wC167], a                               ; $55C1: $EA $67 $C1
     call func_007_560D                            ; $55C4: $CD $0D $56
     or   $20                                      ; $55C7: $F6 $20

@@ -187,7 +187,7 @@ func_006_7BE2::
     ret  nz                                       ; $7BEF: $C0
 
 .jr_7BF0
-    ld   a, [wDoesNotHaveTradeSequenceItem]       ; $7BF0: $FA $7F $DB
+    ld   a, [wExchangingTradeSequenceItem]        ; $7BF0: $FA $7F $DB
     and  a                                        ; $7BF3: $A7
     ret  z                                        ; $7BF4: $C8
 

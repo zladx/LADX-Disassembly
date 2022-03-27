@@ -139,7 +139,7 @@ GrandmaUlriraState1Handler::
 
     ld   a, JINGLE_TREASURE_FOUND                 ; $4DC0: $3E $01
     ldh  [hJingle], a                             ; $4DC2: $E0 $F2
-    ld   [wDoesNotHaveTradeSequenceItem], a       ; $4DC4: $EA $7F $DB
+    ld   [wExchangingTradeSequenceItem], a        ; $4DC4: $EA $7F $DB
     call GetEntityTransitionCountdown             ; $4DC7: $CD $05 $0C
     ld   [hl], $80                                ; $4DCA: $36 $80
     jp   IncrementEntityState                     ; $4DCC: $C3 $12 $3B
@@ -186,7 +186,7 @@ GrandmaUlriraState3Handler::
     and  a                                        ; $4E1A: $A7
     jr   nz, .ret_4E2A                            ; $4E1B: $20 $0D
 
-    ld   [wDoesNotHaveTradeSequenceItem], a       ; $4E1D: $EA $7F $DB
+    ld   [wExchangingTradeSequenceItem], a        ; $4E1D: $EA $7F $DB
     ld   [wC167], a                               ; $4E20: $EA $67 $C1
     call CreateTradingItemEntity                  ; $4E23: $CD $0C $0C
     call IncrementEntityState                     ; $4E26: $CD $12 $3B

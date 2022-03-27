@@ -54,16 +54,18 @@ IF !LANG_DE
     ret                                           ; $43A6: $C9
 .debugToolDisabled
 ENDC
+
     ld   a, [wIsIndoor]                           ; $43A7: $FA $A5 $DB
     and  a                                        ; $43AA: $A7
-    jr   z, jr_001_4414                           ; $43AB: $28 $67
+    jr   z, .loadOverworldInventory               ; $43AB: $28 $67
+
     ldh  a, [hMapId]                              ; $43AD: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $43AF: $FE $FF
     jr   nz, .jr_43B8                             ; $43B1: $20 $05
     ld   hl, wColorDungeonItemFlags               ; $43B3: $21 $DA $DD
-    jr   jr_001_43C5                              ; $43B6: $18 $0D
+    jr   .jr_001_43C5                             ; $43B6: $18 $0D
 
-.jr_43B8::
+.jr_43B8
     ld   e, a                                     ; $43B8: $5F
     sla  a                                        ; $43B9: $CB $27
     sla  a                                        ; $43BB: $CB $27
@@ -73,31 +75,31 @@ ENDC
     ld   hl, wDungeonItemFlags                    ; $43C1: $21 $16 $DB
     add  hl, de                                   ; $43C4: $19
 
-jr_001_43C5::
+.jr_001_43C5
     ld   de, wHasDungeonMap                       ; $43C5: $11 $CC $DB
     ld   c, $05                                   ; $43C8: $0E $05
 
-jr_001_43CA::
+.jr_001_43CA
     ldh  a, [hMapId]                              ; $43CA: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $43CC: $FE $FF
-    jr   z, jr_001_43DB                           ; $43CE: $28 $0B
+    jr   z, .jr_001_43DB                          ; $43CE: $28 $0B
     cp   MAP_WINDFISHS_EGG                        ; $43D0: $FE $08
     jr   z, .jr_43D8                              ; $43D2: $28 $04
     cp   MAP_CAVE_B                               ; $43D4: $FE $0A
-    jr   c, jr_001_43DB                           ; $43D6: $38 $03
+    jr   c, .jr_001_43DB                          ; $43D6: $38 $03
 
-.jr_43D8::
+.jr_43D8
     xor  a                                        ; $43D8: $AF
-    jr   z, jr_001_43DC                           ; $43D9: $28 $01
+    jr   z, .jr_001_43DC                          ; $43D9: $28 $01
 
-jr_001_43DB::
+.jr_001_43DB
     ld   a, [hli]                                 ; $43DB: $2A
 
-jr_001_43DC::
+.jr_001_43DC
     ld   [de], a                                  ; $43DC: $12
     inc  de                                       ; $43DD: $13
     dec  c                                        ; $43DE: $0D
-    jr   nz, jr_001_43CA                          ; $43DF: $20 $E9
+    jr   nz, .jr_001_43CA                         ; $43DF: $20 $E9
 
     ; If inside the color dungeon ($FF),
     ; lookup for dungeon $0F in the table instead.
@@ -107,7 +109,7 @@ jr_001_43DC::
     ld   a, $0F                                   ; $43E7: $3E $0F
 .colorDungeonIndexEnd
 
-    ; Lookup the minimap layout for the dungeon in a
+    ; Lookup the minimap layout for the dungeon
     ld   e, a                                     ; $43E9: $5F
     ld   d, $00                                   ; $43EA: $16 $00
     ld   hl, MinimapLayoutTable                   ; $43EC: $21 $85 $43
@@ -117,18 +119,23 @@ jr_001_43DC::
 
     ldh  a, [hMapId]                              ; $43F4: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $43F6: $FE $FF
-    jr   z, .jr_440B                              ; $43F8: $28 $11
+    jr   z, .loadMinimap                          ; $43F8: $28 $11
+
+    ; If on the Windfish Egg,
+    ; or in a non-dungeon indoor (hMapId >= MAP_CAVE_B),
+    ; or in the side-scrolling section of Eagle's Tower (boss fight),
+    ; load the Eagle's Tower unused clouds instead of the minimap.
     cp   MAP_WINDFISHS_EGG                        ; $43FA: $FE $08
-    jr   z, jr_001_4425                           ; $43FC: $28 $27
+    jr   z, .loadEaglesTowerClouds                ; $43FC: $28 $27
     cp   MAP_CAVE_B                               ; $43FE: $FE $0A
-    jr   nc, jr_001_4425                          ; $4400: $30 $23
+    jr   nc, .loadEaglesTowerClouds               ; $4400: $30 $23
     cp   MAP_EAGLES_TOWER                         ; $4402: $FE $06
-    jr   nz, .jr_440B                             ; $4404: $20 $05
+    jr   nz, .loadMinimap                         ; $4404: $20 $05
     ldh  a, [hIsSideScrolling]                    ; $4406: $F0 $F9
     and  a                                        ; $4408: $A7
-    jr   nz, jr_001_4425                          ; $4409: $20 $1A
+    jr   nz, .loadEaglesTowerClouds               ; $4409: $20 $1A
 
-.jr_440B::
+.loadMinimap
     ; Create a wDrawCommand containing the minimap tilemap
     call CreateMinimapTilemap                     ; $440B: $CD $11 $55
     ; Request this wDrawCommand to be loaded on next vblank
@@ -136,7 +143,8 @@ jr_001_43DC::
     ld   [wBGMapToLoad], a                        ; $4410: $EA $FF $D6
     ret                                           ; $4413: $C9
 
-jr_001_4414::
+.loadOverworldInventory
+    ; Loading the overworld inventory is much simpler.
     ld   a, TILEMAP_INVENTORY                     ; $4414: $3E $02
     ld   [wBGMapToLoad], a                        ; $4416: $EA $FF $D6
 
@@ -148,8 +156,17 @@ jr_001_4414::
 
     ret                                           ; $4424: $C9
 
-jr_001_4425::
-    ld   a, TILEMAP_09                            ; $4425: $3E $09
+.loadEaglesTowerClouds
+    ; Eagle's Tower boss fight was supposed to have animated clouds,
+    ; loaded as an extra tilemap outside of the visible viewport before
+    ; the actual room tilemap is loaded.
+    ;
+    ; However this effect is not used in the final game.
+    ;
+    ; Moreover, this extra tilemap is loaded for maaaany other rooms than Eagle's Tower
+    ; boss fight – basically every non-dungeon indoor room, plus the Windfish Egg.
+    ; We can only speculate why (programming error?)
+    ld   a, TILEMAP_EAGLES_TOWER_CLOUDS           ; $4425: $3E $09
     ld   [wBGMapToLoad], a                        ; $4427: $EA $FF $D6
     ret                                           ; $442A: $C9
 

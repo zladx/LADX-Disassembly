@@ -66,7 +66,7 @@ TILEMAP_MENU_FILE_CREATION           equ $05
 TILEMAP_MENU_FILE_ERASE              equ $06
 TILEMAP_MINIMAP                      equ $07
 TILEMAP_WORLD_MAP                    equ $08
-TILEMAP_09                           equ $09
+TILEMAP_EAGLES_TOWER_CLOUDS          equ $09
 TILEMAP_GAME_OVER                    equ $0A
 TILEMAP_INVENTORY_DEBUG              equ $0B
 TILEMAP_MENU_FILE_COPY               equ $0C

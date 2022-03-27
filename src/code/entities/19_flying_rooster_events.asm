@@ -666,9 +666,9 @@ FlyingRoosterState0Handler::
 
     call GetEntityTransitionCountdown             ; $5215: $CD $05 $0C
     ld   [hl], $40                                ; $5218: $36 $40
-    ld   hl, $D746                                ; $521A: $21 $46 $D7
+    ld   hl, wRoomObjects + $35                   ; $521A: $21 $46 $D7
     ld   [hl], $0C                                ; $521D: $36 $0C
-    ld   hl, $D756                                ; $521F: $21 $56 $D7
+    ld   hl, wRoomObjects + $45                   ; $521F: $21 $56 $D7
     ld   [hl], $C6                                ; $5222: $36 $C6
     ld   a, $99                                   ; $5224: $3E $99
     call func_2BF                                 ; $5226: $CD $2F $0B
@@ -769,11 +769,11 @@ FlyingRoosterState1Handler::
     jp   nz, label_019_5363                       ; $52C6: $C2 $63 $53
 
     ld   [wC167], a                               ; $52C9: $EA $67 $C1
-    ld   hl, $D736                                ; $52CC: $21 $36 $D7
+    ld   hl, wRoomObjects + $25                   ; $52CC: $21 $36 $D7
     ld   [hl], $91                                ; $52CF: $36 $91
     ld   a, $99                                   ; $52D1: $3E $99
     call func_2BF                                 ; $52D3: $CD $2F $0B
-    ld   hl, $D746                                ; $52D6: $21 $46 $D7
+    ld   hl, wRoomObjects + $35                   ; $52D6: $21 $46 $D7
     ld   [hl], $5E                                ; $52D9: $36 $5E
     ld   a, $99                                   ; $52DB: $3E $99
     call func_2BF                                 ; $52DD: $CD $2F $0B

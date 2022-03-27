@@ -51,12 +51,7 @@ Data_018_7865::
     db   $F8, $FA
 
 Data_018_7867::
-    db   $00
-
-func_018_7868::
-    ld   b, $08                                   ; $7868: $06 $08
-    ld   b, $00                                   ; $786A: $06 $00
-    ld   a, [$FAF8]                               ; $786C: $FA $F8 $FA
+    db   $00, $06, $08, $06, $00, $FA, $F8, $FA
 
 BomberState0Handler::
     call GetEntityTransitionCountdown             ; $786F: $CD $05 $0C

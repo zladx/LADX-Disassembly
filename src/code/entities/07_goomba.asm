@@ -176,7 +176,7 @@ jr_007_659D:
     jr   z, jr_007_65CB                           ; $65B0: $28 $19
 
     ld   de, wBGPal2                              ; $65B2: $11 $18 $DC
-    ld   hl, $FF70                                ; $65B5: $21 $70 $FF
+    ld   hl, rSVBK                                ; $65B5: $21 $70 $FF
     di                                            ; $65B8: $F3
 
 .loop_65B9

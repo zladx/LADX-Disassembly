@@ -217,17 +217,17 @@ EaglesTowerOpeningState6Handler::
     ld   [wC167], a                               ; $62C3: $EA $67 $C1
     ld   a, JINGLE_PUZZLE_SOLVED                  ; $62C6: $3E $02
     ldh  [hJingle], a                             ; $62C8: $E0 $F2
-    ld   hl, $D736                                ; $62CA: $21 $36 $D7
+    ld   hl, wRoomObjects + $25                   ; $62CA: $21 $36 $D7
     ld   a, $E1                                   ; $62CD: $3E $E1
     ld   [hl], a                                  ; $62CF: $77
     ld   a, $99                                   ; $62D0: $3E $99
     call func_2BF                                 ; $62D2: $CD $2F $0B
-    ld   hl, $D746                                ; $62D5: $21 $46 $D7
+    ld   hl, wRoomObjects + $35                   ; $62D5: $21 $46 $D7
     ld   a, $77                                   ; $62D8: $3E $77
     ld   [hl], a                                  ; $62DA: $77
     ld   a, $99                                   ; $62DB: $3E $99
     call func_2BF                                 ; $62DD: $CD $2F $0B
-    ld   hl, $D756                                ; $62E0: $21 $56 $D7
+    ld   hl, wRoomObjects + $45                   ; $62E0: $21 $56 $D7
     ld   a, $77                                   ; $62E3: $3E $77
     ld   [hl], a                                  ; $62E5: $77
     ld   a, $99                                   ; $62E6: $3E $99
@@ -798,7 +798,7 @@ jr_019_693D:
     jp   label_019_6A3C                           ; $695E: $C3 $3C $6A
 
 .jr_6961
-    ld   hl, $D712                                ; $6961: $21 $12 $D7
+    ld   hl, wRoomObjects + $01                   ; $6961: $21 $12 $D7
     ld   a, $B3                                   ; $6964: $3E $B3
     ld   [hl+], a                                 ; $6966: $22
     ld   a, $B3                                   ; $6967: $3E $B3
@@ -809,7 +809,7 @@ jr_019_693D:
     ld   [hl+], a                                 ; $696F: $22
     ld   a, $B3                                   ; $6970: $3E $B3
     ld   [hl+], a                                 ; $6972: $22
-    ld   hl, $D712                                ; $6973: $21 $12 $D7
+    ld   hl, wRoomObjects + $01                   ; $6973: $21 $12 $D7
     ld   a, $99                                   ; $6976: $3E $99
     call func_2BF                                 ; $6978: $CD $2F $0B
     inc  hl                                       ; $697B: $23
@@ -824,7 +824,7 @@ jr_019_693D:
     inc  hl                                       ; $698D: $23
     ld   a, $99                                   ; $698E: $3E $99
     call func_2BF                                 ; $6990: $CD $2F $0B
-    ld   hl, $D722                                ; $6993: $21 $22 $D7
+    ld   hl, wRoomObjects + $11                   ; $6993: $21 $22 $D7
     ld   a, $B3                                   ; $6996: $3E $B3
     ld   [hl+], a                                 ; $6998: $22
     ld   a, $B3                                   ; $6999: $3E $B3
@@ -835,7 +835,7 @@ jr_019_693D:
     ld   [hl+], a                                 ; $69A1: $22
     ld   a, $B3                                   ; $69A2: $3E $B3
     ld   [hl+], a                                 ; $69A4: $22
-    ld   hl, $D722                                ; $69A5: $21 $22 $D7
+    ld   hl, wRoomObjects + $11                   ; $69A5: $21 $22 $D7
     ld   a, $99                                   ; $69A8: $3E $99
     call func_2BF                                 ; $69AA: $CD $2F $0B
     inc  hl                                       ; $69AD: $23
@@ -850,7 +850,7 @@ jr_019_693D:
     inc  hl                                       ; $69BF: $23
     ld   a, $99                                   ; $69C0: $3E $99
     call func_2BF                                 ; $69C2: $CD $2F $0B
-    ld   hl, $D732                                ; $69C5: $21 $32 $D7
+    ld   hl, wRoomObjects + $21                   ; $69C5: $21 $32 $D7
     ld   a, $AD                                   ; $69C8: $3E $AD
     ld   [hl+], a                                 ; $69CA: $22
     ld   a, $B1                                   ; $69CB: $3E $B1
@@ -861,7 +861,7 @@ jr_019_693D:
     ld   [hl+], a                                 ; $69D3: $22
     ld   a, $B1                                   ; $69D4: $3E $B1
     ld   [hl+], a                                 ; $69D6: $22
-    ld   hl, $D732                                ; $69D7: $21 $32 $D7
+    ld   hl, wRoomObjects + $21                   ; $69D7: $21 $32 $D7
     ld   a, $99                                   ; $69DA: $3E $99
     call func_2BF                                 ; $69DC: $CD $2F $0B
     inc  hl                                       ; $69DF: $23
@@ -876,7 +876,7 @@ jr_019_693D:
     inc  hl                                       ; $69F1: $23
     ld   a, $99                                   ; $69F2: $3E $99
     call func_2BF                                 ; $69F4: $CD $2F $0B
-    ld   hl, $D742                                ; $69F7: $21 $42 $D7
+    ld   hl, wRoomObjects + $31                   ; $69F7: $21 $42 $D7
     ld   a, $AE                                   ; $69FA: $3E $AE
     ld   [hl+], a                                 ; $69FC: $22
     ld   a, $B2                                   ; $69FD: $3E $B2
@@ -887,7 +887,7 @@ jr_019_693D:
     ld   [hl+], a                                 ; $6A05: $22
     ld   a, $B2                                   ; $6A06: $3E $B2
     ld   [hl+], a                                 ; $6A08: $22
-    ld   hl, $D742                                ; $6A09: $21 $42 $D7
+    ld   hl, wRoomObjects + $31                   ; $6A09: $21 $42 $D7
     ld   a, $99                                   ; $6A0C: $3E $99
     call func_2BF                                 ; $6A0E: $CD $2F $0B
     inc  hl                                       ; $6A11: $23

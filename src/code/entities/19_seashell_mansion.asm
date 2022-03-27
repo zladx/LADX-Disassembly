@@ -932,11 +932,11 @@ ENDC
 
     pop  bc                                       ; $7935: $C1
     ld   a, $89                                   ; $7936: $3E $89
-    ld   [$D729], a                               ; $7938: $EA $29 $D7
-    ld   [$D739], a                               ; $793B: $EA $39 $D7
-    ld   [$D749], a                               ; $793E: $EA $49 $D7
-    ld   [$D759], a                               ; $7941: $EA $59 $D7
-    ld   [$D769], a                               ; $7944: $EA $69 $D7
-    ld   [$D779], a                               ; $7947: $EA $79 $D7
-    ld   [$D789], a                               ; $794A: $EA $89 $D7
+    ld   [wRoomObjects + $18], a                  ; $7938: $EA $29 $D7
+    ld   [wRoomObjects + $28], a                  ; $793B: $EA $39 $D7
+    ld   [wRoomObjects + $38], a                  ; $793E: $EA $49 $D7
+    ld   [wRoomObjects + $48], a                  ; $7941: $EA $59 $D7
+    ld   [wRoomObjects + $58], a                  ; $7944: $EA $69 $D7
+    ld   [wRoomObjects + $68], a                  ; $7947: $EA $79 $D7
+    ld   [wRoomObjects + $78], a                  ; $794A: $EA $89 $D7
     ret                                           ; $794D: $C9

@@ -3769,7 +3769,7 @@ func_015_6E66::
     ld   [hl], a                                  ; $6ED9: $77
     ld   hl, Data_015_6E0B                        ; $6EDA: $21 $0B $6E
     add  hl, de                                   ; $6EDD: $19
-    ld   a, [$D210]                               ; $6EDE: $FA $10 $D2
+    ld   a, [wD210]                               ; $6EDE: $FA $10 $D2
     inc  a                                        ; $6EE1: $3C
     cp   [hl]                                     ; $6EE2: $BE
     jr   c, .jr_6EEA                              ; $6EE3: $38 $05
@@ -3779,7 +3779,7 @@ func_015_6E66::
     xor  a                                        ; $6EE9: $AF
 
 .jr_6EEA
-    ld   [$D210], a                               ; $6EEA: $EA $10 $D2
+    ld   [wD210], a                               ; $6EEA: $EA $10 $D2
     ld   a, $00                                   ; $6EED: $3E $00
     call SetEntitySpriteVariant                   ; $6EEF: $CD $0C $3B
     call GetEntityDropTimer                       ; $6EF2: $CD $FB $0B

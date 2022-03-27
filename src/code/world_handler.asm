@@ -380,10 +380,10 @@ label_001_4555::
     ld   a, [SaveGame1.main + wName - wOverworldRoomStatus + 4] ; $457C: $FA $58 $A4
     ld   [wSaveSlot1Name+4], a                    ; $457F: $EA $84 $DB
     call EnableExternalRAMWriting                 ; $4582: $CD $D0 $27
-    ld   a, [$A45F]                               ; $4585: $FA $5F $A4
+    ld   a, [SaveGame1.main + wHealth - wOverworldRoomStatus] ; $4585: $FA $5F $A4
     ld   [wDC06], a                               ; $4588: $EA $06 $DC
     call EnableExternalRAMWriting                 ; $458B: $CD $D0 $27
-    ld   a, [$A460]                               ; $458E: $FA $60 $A4
+    ld   a, [SaveGame1.main + wMaxHealth - wOverworldRoomStatus] ; $458E: $FA $60 $A4
     ld   [wDC09], a                               ; $4591: $EA $09 $DC
     call EnableExternalRAMWriting                 ; $4594: $CD $D0 $27
     ld   a, [SaveGame1.main + wDeathCount - wOverworldRoomStatus] ; $4597: $FA $5C $A4
@@ -407,10 +407,10 @@ label_001_4555::
     ld   a, [SaveGame2.main + wName - wOverworldRoomStatus + 4] ; $45CD: $FA $05 $A8
     ld   [wSaveSlot2Name+4], a                    ; $45D0: $EA $89 $DB
     call EnableExternalRAMWriting                 ; $45D3: $CD $D0 $27
-    ld   a, [$A80C]                               ; $45D6: $FA $0C $A8
+    ld   a, [SaveGame2.main + wHealth - wOverworldRoomStatus] ; $45D6: $FA $0C $A8
     ld   [wDC07], a                               ; $45D9: $EA $07 $DC
     call EnableExternalRAMWriting                 ; $45DC: $CD $D0 $27
-    ld   a, [$A80D]                               ; $45DF: $FA $0D $A8
+    ld   a, [SaveGame2.main + wMaxHealth - wOverworldRoomStatus] ; $45DF: $FA $0D $A8
     ld   [wDC0A], a                               ; $45E2: $EA $0A $DC
     call EnableExternalRAMWriting                 ; $45E5: $CD $D0 $27
     ld   a, [SaveGame2.main + wDeathCount - wOverworldRoomStatus] ; $45E8: $FA $09 $A8
@@ -434,10 +434,10 @@ label_001_4555::
     ld   a, [SaveGame3.main + wName - wOverworldRoomStatus + 4] ; $461E: $FA $B2 $AB
     ld   [wSaveSlot3Name+4], a                    ; $4621: $EA $8E $DB
     call EnableExternalRAMWriting                 ; $4624: $CD $D0 $27
-    ld   a, [$ABB9]                               ; $4627: $FA $B9 $AB
+    ld   a, [SaveGame3.main + wHealth - wOverworldRoomStatus] ; $4627: $FA $B9 $AB
     ld   [wDC08], a                               ; $462A: $EA $08 $DC
     call EnableExternalRAMWriting                 ; $462D: $CD $D0 $27
-    ld   a, [$ABBA]                               ; $4630: $FA $BA $AB
+    ld   a, [SaveGame3.main + wMaxHealth - wOverworldRoomStatus] ; $4630: $FA $BA $AB
     ld   [wDC0B], a                               ; $4633: $EA $0B $DC
     call EnableExternalRAMWriting                 ; $4636: $CD $D0 $27
     ld   a, [SaveGame3.main + wDeathCount - wOverworldRoomStatus] ; $4639: $FA $B6 $AB

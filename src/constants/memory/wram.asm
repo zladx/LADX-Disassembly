@@ -1338,7 +1338,7 @@ wBlockItemUsage::
 wIndexPickedUpInShop::
   ds 1 ; C50B
 
-; Entity index of a picked up rocked (only used by the crow on the castle to trigger flying away)
+; Entity index of a picked up rock (only used by the crow on the castle to trigger flying away)
 wPickedUpRockIndex::
   ds 1 ; C50C
 

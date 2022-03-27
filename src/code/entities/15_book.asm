@@ -157,7 +157,7 @@ func_015_7F04::
     cp   $0E                                      ; $7F26: $FE $0E
     jr   nz, jr_015_7F4F                          ; $7F28: $20 $25
 
-    ld   a, [wDB7F]                               ; $7F2A: $FA $7F $DB
+    ld   a, [wDoesNotHaveTradeSequenceItem]       ; $7F2A: $FA $7F $DB
     and  a                                        ; $7F2D: $A7
     jr   nz, jr_015_7F4F                          ; $7F2E: $20 $1F
 

@@ -220,7 +220,7 @@ jr_004_7872:
 
     ld   hl, Data_004_77B5                        ; $7878: $21 $B5 $77
     add  hl, de                                   ; $787B: $19
-    ld   de, wC505                                ; $787C: $11 $05 $C5
+    ld   de, wShopItemList                                ; $787C: $11 $05 $C5
     ld   c, $04                                   ; $787F: $0E $04
 
 .loop_7881
@@ -237,7 +237,7 @@ jr_004_7872:
 func_004_788E::
     ld   de, wDrawCommand                         ; $788E: $11 $01 $D6
     push bc                                       ; $7891: $C5
-    ld   hl, wC505                                ; $7892: $21 $05 $C5
+    ld   hl, wShopItemList                        ; $7892: $21 $05 $C5
     ld   c, $04                                   ; $7895: $0E $04
 
 jr_004_7897:
@@ -307,7 +307,7 @@ func_004_78AF::
     ld   d, b                                     ; $78F5: $50
     ld   hl, Data_004_78A5                        ; $78F6: $21 $A5 $78
     add  hl, de                                   ; $78F9: $19
-    ld   a, [wC50B]                               ; $78FA: $FA $0B $C5
+    ld   a, [wIndexPickedUpInShop]                ; $78FA: $FA $0B $C5
     cp   [hl]                                     ; $78FD: $BE
     jr   nz, jr_004_7940                          ; $78FE: $20 $40
 
@@ -337,10 +337,10 @@ ENDC
     ld   hl, Data_004_78A5                        ; $7911: $21 $A5 $78
     add  hl, de                                   ; $7914: $19
     ld   a, [hl]                                  ; $7915: $7E
-    ld   [wC50B], a                               ; $7916: $EA $0B $C5
+    ld   [wIndexPickedUpInShop], a                ; $7916: $EA $0B $C5
     ld   e, a                                     ; $7919: $5F
     ld   d, b                                     ; $791A: $50
-    ld   hl, wC505                                ; $791B: $21 $05 $C5
+    ld   hl, wShopItemList                        ; $791B: $21 $05 $C5
     add  hl, de                                   ; $791E: $19
     ld   a, [hl]                                  ; $791F: $7E
     ld   [wItemPickedUpInShop], a                 ; $7920: $EA $09 $C5
@@ -403,10 +403,10 @@ func_004_795D::
     jr   z, jr_004_7984                           ; $796B: $28 $17
 
 label_004_796D:
-    ld   a, [wC50B]                               ; $796D: $FA $0B $C5
+    ld   a, [wIndexPickedUpInShop]                ; $796D: $FA $0B $C5
     ld   e, a                                     ; $7970: $5F
     ld   d, b                                     ; $7971: $50
-    ld   hl, wC505                                ; $7972: $21 $05 $C5
+    ld   hl, wShopItemList                        ; $7972: $21 $05 $C5
     add  hl, de                                   ; $7975: $19
     ld   a, [wItemPickedUpInShop]                 ; $7976: $FA $09 $C5
     ld   [hl], a                                  ; $7979: $77
@@ -782,7 +782,7 @@ jr_004_7B72:
     ldh  [hFreeWarpDataAddress], a                ; $7B72: $E0 $E6
     ld   e, a                                     ; $7B74: $5F
     ld   d, b                                     ; $7B75: $50
-    ld   hl, wC504                                ; $7B76: $21 $04 $C5
+    ld   hl, wShopItemList - 1                    ; $7B76: $21 $04 $C5
     add  hl, de                                   ; $7B79: $19
     ld   a, [hl]                                  ; $7B7A: $7E
     and  a                                        ; $7B7B: $A7

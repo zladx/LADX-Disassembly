@@ -2565,7 +2565,7 @@ inventoryDisplayLoop:
     jr   nz, .tradeSequenceItemEnd                ; $5A2C: $20 $06
 
     ; Only executed for Trade Sequence items
-    ld   a, [wDB7F]                               ; $5A2E: $FA $7F $DB
+    ld   a, [wDoesNotHaveTradeSequenceItem]       ; $5A2E: $FA $7F $DB
     and  a                                        ; $5A31: $A7
     jr   nz, overwriteInventoryDisplaySprite      ; $5A32: $20 $23
 .tradeSequenceItemEnd

@@ -105,7 +105,7 @@ func_007_4F1F::
     jr   nz, .jr_4F44                             ; $4F2C: $20 $16
 
     ld   a, $02                                   ; $4F2E: $3E $02
-    ld   [wDB7F], a                               ; $4F30: $EA $7F $DB
+    ld   [wDoesNotHaveTradeSequenceItem], a       ; $4F30: $EA $7F $DB
     ld   hl, wOverworldRoomStatus + $87           ; $4F33: $21 $87 $D8
     set  6, [hl]                                  ; $4F36: $CB $F6
     call GetEntityTransitionCountdown             ; $4F38: $CD $05 $0C

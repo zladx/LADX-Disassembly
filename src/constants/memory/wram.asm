@@ -1306,8 +1306,8 @@ wEntitiesUnknowTableJ::
 wAlternateBackgroundEnabled::
   ds 1 ; C500
 
-; Unlabeled
-wC501::
+; If an OwlEvent entity is active, the index of the entity is stored here (only used to trigger the owl on getting the tail key)
+wOwlEntityIndex::
   ds 1 ; C501
 
 ; Unlabeled
@@ -1318,15 +1318,15 @@ wC502::
 wC503::
   ds 1 ; C503
 
-; Unlabeled
+; Unused? (only written to zero, not read anywhere)
 wC504::
   ds 1 ; C504
 
-; Unlabeled
-wC505::
+; List of 4 items that are available in the shop, filled depending on your current state in the game and what you have bought already.
+wShopItemList::
   ds 4 ; C505 - C508
 
-; Index of the item we are grabbing in the shop
+; Type of the item we are grabbing in the shop (special shop type numbers, see shop code)
 wItemPickedUpInShop::
   ds 1 ; C509
 
@@ -1334,12 +1334,12 @@ wItemPickedUpInShop::
 wBlockItemUsage::
   ds 1 ; C50A
 
-; Unlabeled
-wC50B::
+; Position index of item picked up in shop, left most item is 0, right most 3
+wIndexPickedUpInShop::
   ds 1 ; C50B
 
-; Unlabeled
-wC50C::
+; Entity index of a picked up rocked (only used by the crow on the castle to trigger flying away)
+wPickedUpRockIndex::
   ds 1 ; C50C
 
 ; Unlabeled
@@ -3303,8 +3303,9 @@ wBoomerangTradedItem::
 wKidSaveHintIndex::
   ds 1 ; DB7E
 
-; Unlabeled
-wDB7F::
+; Set to $01 or $02 if you handed over your trade sequence item to someone and have not gotten the next one yet.
+; wTradeSequenceItem will still indicate where you are in the sequence, and wDoesNotHaveTradeSequenceItem will hide the item from your inventory menu.
+wDoesNotHaveTradeSequenceItem::
   ds 1 ; DB7F
 
 ; Names of the saved files.
@@ -3542,28 +3543,28 @@ wFile3DeathCountHigh::
 wFile3DeathCountLow::
   ds 1 ; DC05
 
-; Unlabeled
-wDC06::
+; Amount of health for file 1, needs to be wFile1MaxHealth * 8 or the game crashes while drawing the file selection menu
+wFile1Health::
   ds 1 ; DC06
 
-; Unlabeled
-wDC07::
+; Amount of health for file 2, needs to be wFile2MaxHealth * 8 or the game crashes while drawing the file selection menu
+wFile2Health::
   ds 1 ; DC07
 
-; Unlabeled
-wDC08::
+; Amount of health for file 3, needs to be wFile3MaxHealth * 8 or the game crashes while drawing the file selection menu
+wFile3Health::
   ds 1 ; DC08
 
-; Unlabeled
-wDC09::
+; Amount of maximum health for file 1, used to draw the hearts on the file selection menu
+wFile1MaxHealth::
   ds 1 ; DC09
 
-; Unlabeled
-wDC0A::
+; Amount of maximum health for file 2, used to draw the hearts on the file selection menu
+wFile2MaxHealth::
   ds 1 ; DC0A
 
-; Unlabeled
-wDC0B::
+; Amount of maximum health for file 3, used to draw the hearts on the file selection menu
+wFile3MaxHealth::
   ds 1 ; DC0B
 
 ; Photos 1-8 (bitfield)

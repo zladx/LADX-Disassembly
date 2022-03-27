@@ -1042,7 +1042,7 @@ func_036_462B::
 
 func_036_4649::
     di                                            ; $4649: $F3
-    ld   hl, $FF70                                ; $464A: $21 $70 $FF
+    ld   hl, rSVBK                                ; $464A: $21 $70 $FF
     ld   de, wBGPal1                              ; $464D: $11 $10 $DC
 
 .loop_4650
@@ -1065,7 +1065,7 @@ func_036_4649::
 
 func_036_4665::
     di                                            ; $4665: $F3
-    ld   hl, $FF70                                ; $4666: $21 $70 $FF
+    ld   hl, rSVBK                                ; $4666: $21 $70 $FF
     ld   de, wBGPal1                              ; $4669: $11 $10 $DC
 
 .loop_466C
@@ -2312,7 +2312,7 @@ jr_036_4D6E:
 .jr_4D89
     ld   e, l                                     ; $4D89: $5D
     ld   d, h                                     ; $4D8A: $54
-    ld   hl, $FF70                                ; $4D8B: $21 $70 $FF
+    ld   hl, rSVBK                                ; $4D8B: $21 $70 $FF
     ld   a, [de]                                  ; $4D8E: $1A
     ld   [wObjPal8 + 2*2], a                      ; $4D8F: $EA $8C $DC
     ld   [hl], $02                                ; $4D92: $36 $02
@@ -3287,7 +3287,7 @@ TunicFairyState9::
 TunicFairyStateA::
 func_036_5428::
     ld   de, wBGPal2                              ; $5428: $11 $18 $DC
-    ld   hl, $FF70                                ; $542B: $21 $70 $FF
+    ld   hl, rSVBK                                ; $542B: $21 $70 $FF
     di                                            ; $542E: $F3
 
 .loop_542F
@@ -7553,7 +7553,7 @@ func_036_6C37::
     ret                                           ; $6C45: $C9
 
 func_036_6C46::
-    ld   hl, $FF70                                ; $6C46: $21 $70 $FF
+    ld   hl, rSVBK                                ; $6C46: $21 $70 $FF
     ld   [hl], $02                                ; $6C49: $36 $02
     push hl                                       ; $6C4B: $E5
     call func_036_6C32                            ; $6C4C: $CD $32 $6C
@@ -7563,7 +7563,7 @@ func_036_6C46::
     ret                                           ; $6C53: $C9
 
 func_036_6C54::
-    ld   hl, $FF70                                ; $6C54: $21 $70 $FF
+    ld   hl, rSVBK                                ; $6C54: $21 $70 $FF
     ld   [hl], $02                                ; $6C57: $36 $02
     push hl                                       ; $6C59: $E5
     call func_036_6C37                            ; $6C5A: $CD $37 $6C
@@ -7573,7 +7573,7 @@ func_036_6C54::
     ret                                           ; $6C61: $C9
 
 func_036_6C62::
-    ld   hl, $FF70                                ; $6C62: $21 $70 $FF
+    ld   hl, rSVBK                                ; $6C62: $21 $70 $FF
     ld   [hl], $02                                ; $6C65: $36 $02
     push hl                                       ; $6C67: $E5
     call func_036_6C32                            ; $6C68: $CD $32 $6C
@@ -7583,7 +7583,7 @@ func_036_6C62::
     ret                                           ; $6C6F: $C9
 
 func_036_6C70::
-    ld   hl, $FF70                                ; $6C70: $21 $70 $FF
+    ld   hl, rSVBK                                ; $6C70: $21 $70 $FF
     ld   [hl], $02                                ; $6C73: $36 $02
     push hl                                       ; $6C75: $E5
     call func_036_6C37                            ; $6C76: $CD $37 $6C

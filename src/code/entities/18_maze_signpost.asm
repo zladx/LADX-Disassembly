@@ -79,7 +79,7 @@ MazeSignpostEntityHandler::
     ret
 
 RevealMamuCave::
-    ld   hl, $D739                                ; $62F5: $21 $39 $D7
+    ld   hl, wRoomObjects + $28                   ; $62F5: $21 $39 $D7
     ld   [hl], $C6                                ; $62F8: $36 $C6
     ld   a, $98                                   ; $62FA: $3E $98
     call func_2BF                                 ; $62FC: $CD $2F $0B

@@ -144,8 +144,8 @@ EggSongEventState3Handler::
     ld   a, $FF                                   ; $4B5E: $3E $FF
     ld   [wLinkPlayingOcarinaCountdown], a        ; $4B60: $EA $66 $C1
     xor  a                                        ; $4B63: $AF
-    ld   [$D210], a                               ; $4B64: $EA $10 $D2
-    ld   [$D211], a                               ; $4B67: $EA $11 $D2
+    ld   [wD210], a                               ; $4B64: $EA $10 $D2
+    ld   [wD211], a                               ; $4B67: $EA $11 $D2
     jp   IncrementEntityState                     ; $4B6A: $C3 $12 $3B
 
 EggSongEventState4Handler::
@@ -288,12 +288,12 @@ jr_019_4C21:
 
     ld   [wScreenShakeHorizontal], a              ; $4C2E: $EA $55 $C1
     ld   [wC5A3], a                               ; $4C31: $EA $A3 $C5
-    ld   hl, $D736                                ; $4C34: $21 $36 $D7
+    ld   hl, wRoomObjects + $25                   ; $4C34: $21 $36 $D7
     ld   a, $C1                                   ; $4C37: $3E $C1
     ld   [hl], a                                  ; $4C39: $77
     ld   a, $99                                   ; $4C3A: $3E $99
     call func_2BF                                 ; $4C3C: $CD $2F $0B
-    ld   hl, $D746                                ; $4C3F: $21 $46 $D7
+    ld   hl, wRoomObjects + $35                   ; $4C3F: $21 $46 $D7
     ld   a, $CB                                   ; $4C42: $3E $CB
     ld   [hl], a                                  ; $4C44: $77
     ld   a, $99                                   ; $4C45: $3E $99
@@ -378,7 +378,7 @@ jr_019_4C21:
     call func_019_4D45                            ; $4CCA: $CD $45 $4D
     call PlayBombExplosionSfx                     ; $4CCD: $CD $4B $0C
     ld   de, wObjPal2 + 2*2                       ; $4CD0: $11 $5C $DC
-    ld   hl, $FF70                                ; $4CD3: $21 $70 $FF
+    ld   hl, rSVBK                                ; $4CD3: $21 $70 $FF
 
 .loop_4CD6
     ld   [hl], $02                                ; $4CD6: $36 $02

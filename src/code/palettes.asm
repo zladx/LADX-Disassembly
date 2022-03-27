@@ -15,7 +15,7 @@ CopyPalettesToVRAM::
     jr   z, .jr_4016                              ; $400B: $28 $09
 
     ld   hl, wBGPal1                              ; $400D: $21 $10 $DC
-    ld   de, $FF68                                ; $4010: $11 $68 $FF
+    ld   de, rBCPS                                ; $4010: $11 $68 $FF
     call func_021_4062                            ; $4013: $CD $62 $40
 
 .jr_4016
@@ -24,7 +24,7 @@ CopyPalettesToVRAM::
     jr   z, .jr_4026                              ; $401B: $28 $09
 
     ld   hl, wObjPal1                             ; $401D: $21 $50 $DC
-    ld   de, $FF6A                                ; $4020: $11 $6A $FF
+    ld   de, rOCPS                                ; $4020: $11 $6A $FF
     call func_021_4062                            ; $4023: $CD $62 $40
 
 .jr_4026

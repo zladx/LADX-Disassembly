@@ -102,8 +102,9 @@ FileSaveDelay1::
     jp   IncrementGameplaySubtypeAndReturn        ; $407C: $C3 $D6 $44
 
 FileSaveDelay2::
-    ld   a, $0D                                   ; $407F: $3E $0D
+    ld   a, TILEMAP_MENU_FILE_SAVE                ; $407F: $3E $0D
     ld   [wBGMapToLoad], a                        ; $4081: $EA $FF $D6
+
     ld   a, $FF                                   ; $4084: $3E $FF
     ld   [wWindowY], a                            ; $4086: $EA $9A $DB
     xor  a                                        ; $4089: $AF

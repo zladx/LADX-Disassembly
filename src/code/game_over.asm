@@ -120,10 +120,13 @@ LoadGameOverStage1Handler::
 LoadGameOverStage2Handler::
     ld   a, $E4                                   ; $429B: $3E $E4 ; $429B: $3E $E4
     ld   [wBGPalette], a                          ; $429D: $EA $97 $DB ; $429D: $EA $97 $DB
-    ld   a, $0A                                   ; $42A0: $3E $0A ; $42A0: $3E $0A
+
+    ld   a, TILEMAP_GAME_OVER                     ; $42A0: $3E $0A ; $42A0: $3E $0A
     ld   [wBGMapToLoad], a                        ; $42A2: $EA $FF $D6 ; $42A2: $EA $FF $D6
+
     ld   a, $FF                                   ; $42A5: $3E $FF ; $42A5: $3E $FF
     ld   [wWindowY], a                            ; $42A7: $EA $9A $DB ; $42A7: $EA $9A $DB
+
     xor  a                                        ; $42AA: $AF ; $42AA: $AF
     ldh  [hBaseScrollX], a                        ; $42AB: $E0 $96 ; $42AB: $E0 $96
     ldh  [hBaseScrollY], a                        ; $42AD: $E0 $97 ; $42AD: $E0 $97

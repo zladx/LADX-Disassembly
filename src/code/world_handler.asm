@@ -49,7 +49,7 @@ IF !LANG_DE
     ld   a, [ROM_DebugTool2]                      ; $439B: $FA $04 $00
     and  a                                        ; $439E: $A7
     jr   z, .debugToolDisabled                    ; $439F: $28 $06
-    ld   a, $0B                                   ; $43A1: $3E $0B
+    ld   a, TILEMAP_INVENTORY_DEBUG               ; $43A1: $3E $0B
     ld   [wBGMapToLoad], a                        ; $43A3: $EA $FF $D6
     ret                                           ; $43A6: $C9
 .debugToolDisabled
@@ -132,12 +132,12 @@ jr_001_43DC::
     ; Create a wDrawCommand containing the minimap tilemap
     call CreateMinimapTilemap                     ; $440B: $CD $11 $55
     ; Request this wDrawCommand to be loaded on next vblank
-    ld   a, $07                                   ; $440E: $3E $07
+    ld   a, TILEMAP_MINIMAP                       ; $440E: $3E $07
     ld   [wBGMapToLoad], a                        ; $4410: $EA $FF $D6
     ret                                           ; $4413: $C9
 
 jr_001_4414::
-    ld   a, $02                                   ; $4414: $3E $02
+    ld   a, TILEMAP_INVENTORY                     ; $4414: $3E $02
     ld   [wBGMapToLoad], a                        ; $4416: $EA $FF $D6
 
     call GetRandomByte                            ; $4419: $CD $0D $28
@@ -149,7 +149,7 @@ jr_001_4414::
     ret                                           ; $4424: $C9
 
 jr_001_4425::
-    ld   a, $09                                   ; $4425: $3E $09
+    ld   a, TILEMAP_09                            ; $4425: $3E $09
     ld   [wBGMapToLoad], a                        ; $4427: $EA $FF $D6
     ret                                           ; $442A: $C9
 

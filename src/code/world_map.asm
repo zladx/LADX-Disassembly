@@ -115,7 +115,7 @@ WorldMapState1Handler::
     ld   [wLCDControl], a                         ; $56E6: $EA $FD $D6
     ld   [rLCDC], a                               ; $56E9: $E0 $40
     call func_001_5888                            ; $56EB: $CD $88 $58
-    ld   a, $08                                   ; $56EE: $3E $08
+    ld   a, TILEMAP_WORLD_MAP                     ; $56EE: $3E $08
     ld   [wBGMapToLoad], a                        ; $56F0: $EA $FF $D6
 
 ret_001_56F3::

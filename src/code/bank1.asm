@@ -424,7 +424,7 @@ jr_001_531D::
     ldh  [hLinkDirection], a                      ; $538C: $E0 $9E
 
 .finish
-    ld   a, $02                                   ; $538E: $3E $02
+    ld   a, TILEMAP_INVENTORY                     ; $538E: $3E $02
     ld   [wBGMapToLoad], a                        ; $5390: $EA $FF $D6
     ret                                           ; $5393: $C9
 
@@ -2416,15 +2416,15 @@ PeachPictureState2Handler::     ; This is for full-screen images ...
     jp   IncrementGameplaySubtypeAndReturn        ; $6870: $C3 $D6 $44
 
 PeachPictureState3Handler::     ; Determines the tilemap to load (?)
-    ld   e, $24                                   ; $6873: $1E $24
+    ld   e, TILEMAP_EAGLES_TOWER_COLLAPSE         ; $6873: $1E $24
     ldh  a, [hMapId]                              ; $6875: $F0 $F7
     cp   MAP_EAGLES_TOWER                         ; $6877: $FE $06
     jr   z, .jr_6885                              ; $6879: $28 $0A
     ldh  a, [hMapRoom]                            ; $687B: $F0 $F6
     cp   ROOM_INDOOR_B_SCHULE_HOUSE               ; $687D: $FE $DD
-    ld   e, $12                                   ; $687F: $1E $12
+    ld   e, TILEMAP_PEACH                         ; $687F: $1E $12
     jr   nz, .jr_6885                             ; $6881: $20 $02
-    ld   e, $23                                   ; $6883: $1E $23
+    ld   e, TILEMAP_SCHULE_PAINTING               ; $6883: $1E $23
 
 .jr_6885::
     ld   a, e                                     ; $6885: $7B

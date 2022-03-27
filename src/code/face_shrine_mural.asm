@@ -60,8 +60,9 @@ FaceShrineMuralStage1Handler::
     ret                                           ; $6B51: $C9
 
 FaceShrineMuralStage2Handler::
-    ld   a, $15                                   ; $6B52: $3E $15
+    ld   a, TILEMAP_FACE_SHRINE_MURAL             ; $6B52: $3E $15
     ld   [wBGMapToLoad], a                        ; $6B54: $EA $FF $D6
+
     ld   a, $FF                                   ; $6B57: $3E $FF
     ld   [wWindowY], a                            ; $6B59: $EA $9A $DB
     xor  a                                        ; $6B5C: $AF

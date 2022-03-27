@@ -56,6 +56,46 @@ TILESET_EAGLES_TOWER_TOP              equ $21
 TILESET_CREDITS_MARIN_PORTRAIT        equ $22
 TILESET_THANKS_FOR_PLAYING            equ $23
 
+; Values for wBGMapToLoad
+TILEMAP_NONE                         equ $00
+TILEMAP_CREDITS_ISLAND               equ $01
+TILEMAP_INVENTORY                    equ $02
+TILEMAP_MENU_FILE_SELECTION          equ $03
+TILEMAP_MENU_FILE_SELECTION_COMMANDS equ $04
+TILEMAP_MENU_FILE_CREATION           equ $05
+TILEMAP_MENU_FILE_ERASE              equ $06
+TILEMAP_MINIMAP                      equ $07
+TILEMAP_WORLD_MAP                    equ $08
+TILEMAP_09                           equ $09
+TILEMAP_GAME_OVER                    equ $0A
+TILEMAP_INVENTORY_DEBUG              equ $0B
+TILEMAP_MENU_FILE_COPY               equ $0C
+TILEMAP_MENU_FILE_SAVE               equ $0D
+TILEMAP_INTRO_SEA_DMG                equ $0E
+TILEMAP_INTRO_LINK_FACE              equ $0F
+TILEMAP_INTRO_BEACH                  equ $10
+TILEMAP_TITLE                        equ $11
+TILEMAP_PEACH                        equ $12
+TILEMAP_MARIN_BEACH                  equ $13
+TILEMAP_MAMU                         equ $14
+TILEMAP_FACE_SHRINE_MURAL            equ $15
+TILEMAP_CREDITS_STAIRS               equ $16
+TILEMAP_CREDITS_LINK_ON_SEA_LARGE    equ $17
+TILEMAP_CREDITS_SUN_ABOVE            equ $18
+TILEMAP_CREDITS_LINK_ON_SEA_CLOSE    equ $19
+TILEMAP_CREDITS_LINK_SEATED_ON_LOG   equ $1A
+TILEMAP_CREDITS_LINK_FACE_CLOSE_UP   equ $1B
+TILEMAP_CREDITS_ROLL_1               equ $1C
+TILEMAP_CREDITS_ROLL_2               equ $1D
+TILEMAP_CREDITS_KIDS                 equ $1E
+TILEMAP_CREDITS_MARIN_SINGING        equ $1F
+TILEMAP_CREDITS_MRS_MEOW_MEOWS_HOUSE equ $20
+TILEMAP_CREDITS_TARIN                equ $21
+TILEMAP_CREDITS_BEACH                equ $22
+TILEMAP_SCHULE_PAINTING              equ $23
+TILEMAP_EAGLES_TOWER_COLLAPSE        equ $24
+TILEMAP_INTRO_SEA_CGB                equ $25
+
 ; Value for overworld room objects
 OBJECT_SHORT_GRASS          equ $04
 OBJECT_ROCKY_GROUND         equ $09

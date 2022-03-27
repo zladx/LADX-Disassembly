@@ -89,10 +89,12 @@ MarineBeachPrepare2::
     jp   IncrementGameplaySubtypeAndReturn        ; $628B: $C3 $D6 $44
 
 MarineBeachPrepare3::
-    ld   a, $13                                   ; $628E: $3E $13
+    ld   a, TILEMAP_MARIN_BEACH                   ; $628E: $3E $13
     ld   [wBGMapToLoad], a                        ; $6290: $EA $FF $D6
+
     ld   a, $FF                                   ; $6293: $3E $FF
     ld   [wWindowY], a                            ; $6295: $EA $9A $DB
+
     xor  a                                        ; $6298: $AF
     ldh  [hBaseScrollX], a                        ; $6299: $E0 $96
     ld   [wTransitionSequenceCounter], a          ; $629B: $EA $6B $C1

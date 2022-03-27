@@ -1039,17 +1039,17 @@ func_001_4DA6::
 IF __PATCH_4__
     ret  z
     xor  a
-    ld   hl, wDC06
-    ld   de, wDC09
+    ld   hl, wFile1Health
+    ld   de, wFile1MaxHealth
     ; fallthrough
 ELSE
     jr   z, ret_001_4DBD                          ; $4DAB: $28 $10 ; $4DAB: $28 $10
 
     xor  a                                        ; $4DAD: $AF ; $4DAD: $AF
     ldh  [hMultiPurpose4], a                      ; $4DAE: $E0 $DB ; $4DAE: $E0 $DB
-    ld   a, [wDC06]                               ; $4DB0: $FA $06 $DC ; $4DB0: $FA $06 $DC
+    ld   a, [wFile1Health]                        ; $4DB0: $FA $06 $DC ; $4DB0: $FA $06 $DC
     ldh  [hMultiPurpose2], a                      ; $4DB3: $E0 $D9 ; $4DB3: $E0 $D9
-    ld   a, [wDC09]                               ; $4DB5: $FA $09 $DC ; $4DB5: $FA $09 $DC
+    ld   a, [wFile1MaxHealth]                     ; $4DB5: $FA $09 $DC ; $4DB5: $FA $09 $DC
     ldh  [hMultiPurpose3], a                      ; $4DB8: $E0 $DA ; $4DB8: $E0 $DA
     jp   label_001_5D53                           ; $4DBA: $C3 $53 $5D ; $4DBA: $C3 $53 $5D
 ENDC
@@ -1093,17 +1093,17 @@ func_001_4DBE::
 IF __PATCH_4__
     ret  z
     ld   a, $01
-    ld   hl, wDC07
-    ld   de, wDC0A
+    ld   hl, wFile2Health
+    ld   de, wFile2MaxHealth
     jr   jr_001_4db6
 ELSE
     jr   z, ret_001_4DBD                          ; $4DC3: $28 $F8 ; $4DC3: $28 $F8
 
     ld   a, $01                                   ; $4DC5: $3E $01 ; $4DC5: $3E $01
     ldh  [hMultiPurpose4], a                      ; $4DC7: $E0 $DB ; $4DC7: $E0 $DB
-    ld   a, [wDC07]                               ; $4DC9: $FA $07 $DC ; $4DC9: $FA $07 $DC
+    ld   a, [wFile2Health]                        ; $4DC9: $FA $07 $DC ; $4DC9: $FA $07 $DC
     ldh  [hMultiPurpose2], a                      ; $4DCC: $E0 $D9 ; $4DCC: $E0 $D9
-    ld   a, [wDC0A]                               ; $4DCE: $FA $0A $DC ; $4DCE: $FA $0A $DC
+    ld   a, [wFile2MaxHealth]                     ; $4DCE: $FA $0A $DC ; $4DCE: $FA $0A $DC
     ldh  [hMultiPurpose3], a                      ; $4DD1: $E0 $DA ; $4DD1: $E0 $DA
     jp   label_001_5D53                           ; $4DD3: $C3 $53 $5D ; $4DD3: $C3 $53 $5D
 ENDC
@@ -1114,17 +1114,17 @@ func_001_4DD6::
 IF __PATCH_4__
     ret  z
     ld   a, $02
-    ld   hl, wDC08
-    ld   de, wDC0B
+    ld   hl, wFile3Health
+    ld   de, wFile3MaxHealth
     jr   jr_001_4db6
 ELSE
     jr   z, ret_001_4DBD                          ; $4DDB: $28 $E0 ; $4DDB: $28 $E0
 
     ld   a, $02                                   ; $4DDD: $3E $02 ; $4DDD: $3E $02
     ldh  [hMultiPurpose4], a                      ; $4DDF: $E0 $DB ; $4DDF: $E0 $DB
-    ld   a, [wDC08]                               ; $4DE1: $FA $08 $DC ; $4DE1: $FA $08 $DC
+    ld   a, [wFile3Health]                        ; $4DE1: $FA $08 $DC ; $4DE1: $FA $08 $DC
     ldh  [hMultiPurpose2], a                      ; $4DE4: $E0 $D9 ; $4DE4: $E0 $D9
-    ld   a, [wDC0B]                               ; $4DE6: $FA $0B $DC ; $4DE6: $FA $0B $DC
+    ld   a, [wFile3MaxHealth]                     ; $4DE6: $FA $0B $DC ; $4DE6: $FA $0B $DC
     ldh  [hMultiPurpose3], a                      ; $4DE9: $E0 $DA ; $4DE9: $E0 $DA
     jp   label_001_5D53                           ; $4DEB: $C3 $53 $5D ; $4DEB: $C3 $53 $5D
 ENDC

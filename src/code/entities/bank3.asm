@@ -1660,7 +1660,7 @@ EntityInitChestWithItem::
 
     ; Next part seems to be related to the owl flying in when you get the tail key
     push af                                       ; $50A0: $F5
-    ld   a, [wC501]                               ; $50A1: $FA $01 $C5
+    ld   a, [wOwlEntityIndex]                     ; $50A1: $FA $01 $C5
     ld   e, a                                     ; $50A4: $5F
     ld   hl, wEntitiesPrivateCountdown1Table      ; $50A5: $21 $F0 $C2
     add  hl, de                                   ; $50A8: $19

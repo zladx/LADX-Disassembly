@@ -28,7 +28,7 @@ MermaidStatueInitHandler::
 
 MermaidStatueInteractiveHandler::
     call func_018_7D36                            ; $495A: $CD $36 $7D
-    ld   a, [wDB7F]                               ; $495D: $FA $7F $DB
+    ld   a, [wExchangingTradeSequenceItem]        ; $495D: $FA $7F $DB
     and  a                                        ; $4960: $A7
     ret  nz                                       ; $4961: $C0
 
@@ -46,7 +46,7 @@ MermaidStatueInteractiveHandler::
     ld   a, TRADING_ITEM_MAGNIFIYING_GLASS        ; $4970: $3E $0E
     ld   [wTradeSequenceItem], a                  ; $4972: $EA $0E $DB
     ld   a, $01                                   ; $4975: $3E $01
-    ld   [wDB7F], a                               ; $4977: $EA $7F $DB
+    ld   [wExchangingTradeSequenceItem], a        ; $4977: $EA $7F $DB
     ld   a, $04                                   ; $497A: $3E $04
     ldh  [hNoiseSfx], a                           ; $497C: $E0 $F4
     call GetEntityTransitionCountdown             ; $497E: $CD $05 $0C

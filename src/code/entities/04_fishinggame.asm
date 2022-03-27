@@ -38,7 +38,7 @@ FishermanFishingGameEntityHandler::
 
     call ClearEntityStatusBank04                  ; $5F84: $CD $7A $6D
     xor  a                                        ; $5F87: $AF
-    ld   [wDB7F], a                               ; $5F88: $EA $7F $DB
+    ld   [wExchangingTradeSequenceItem], a        ; $5F88: $EA $7F $DB
     ld   [wC167], a                               ; $5F8B: $EA $67 $C1
     jp   CreateTradingItemEntity                  ; $5F8E: $C3 $0C $0C
 

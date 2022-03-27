@@ -53,7 +53,7 @@ MimicEntityHandler::
     jr   nz, jr_019_6ACE                          ; $6AC6: $20 $06
 
 .jr_6AC8
-    ld   a, [wDB7F]                               ; $6AC8: $FA $7F $DB
+    ld   a, [wExchangingTradeSequenceItem]        ; $6AC8: $FA $7F $DB
     and  a                                        ; $6ACB: $A7
     jr   nz, jr_019_6AD4                          ; $6ACC: $20 $06
 

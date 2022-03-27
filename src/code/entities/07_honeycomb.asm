@@ -36,7 +36,7 @@ HoneycombEntityHandler::
 ._04 dw func_007_4D4E                             ; $4CCA
 
 func_007_4CCC::
-    ld   a, [wDB7F]                               ; $4CCC: $FA $7F $DB
+    ld   a, [wExchangingTradeSequenceItem]        ; $4CCC: $FA $7F $DB
     cp   $02                                      ; $4CCF: $FE $02
     jr   nz, .jr_4CE7                             ; $4CD1: $20 $14
 
@@ -150,7 +150,7 @@ func_007_4D4E::
     ret  nc                                       ; $4D6C: $D0
 
     xor  a                                        ; $4D6D: $AF
-    ld   [wDB7F], a                               ; $4D6E: $EA $7F $DB
+    ld   [wExchangingTradeSequenceItem], a        ; $4D6E: $EA $7F $DB
     ld   a, TRADING_ITEM_HONEYCOMB                ; $4D71: $3E $06
     ld   [wTradeSequenceItem], a                  ; $4D73: $EA $0E $DB
     ld   a, REPLACE_TILES_TRADING_ITEM            ; $4D76: $3E $0D

@@ -272,7 +272,7 @@ func_007_5997::
     or   $10                                      ; $59AA: $F6 $10
     ld   [wOverworldRoomStatus + $7B], a          ; $59AC: $EA $7B $D8
     ld   a, $01                                   ; $59AF: $3E $01
-    ld   [wDB7F], a                               ; $59B1: $EA $7F $DB
+    ld   [wExchangingTradeSequenceItem], a        ; $59B1: $EA $7F $DB
     ld   a, $63                                   ; $59B4: $3E $63
     ld   [wC168], a                               ; $59B6: $EA $68 $C1
     call func_007_58D5                            ; $59B9: $CD $D5 $58

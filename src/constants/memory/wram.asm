@@ -511,6 +511,7 @@ wLinkPlayingOcarinaCountdown:
 
 ; Unlabeled
 ; maybe it is wHasBoomerangUnlocked
+; Fishing-related
 wC167:
   ds 1 ; C167
 
@@ -1082,7 +1083,7 @@ wEntitiesSpeedZAccTable::
 ; bit 4: display shadow on posZ > 0 if set,
 ; bit 5: item is pickable,
 ; bit 6: doesn't react to projectiles if set (arrow, hookshot, etc.),
-; bit 7: doesn't hurt Link if set (Link's go through)
+; bit 7: doesn't hurt Link on collision if set
 wEntitiesPhysicsFlagsTable::
   ds $10 ; C340 - C34F
 

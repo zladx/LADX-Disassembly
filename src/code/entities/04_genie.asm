@@ -283,7 +283,7 @@ jr_004_41A9:
 jr_004_41AC:
     call DecrementEntityIgnoreHitsCountdown       ; $41AC: $CD $56 $0C
     call label_3B70                               ; $41AF: $CD $70 $3B
-    call func_004_7BE3                            ; $41B2: $CD $E3 $7B
+    call ApplySolidCollision_04                   ; $41B2: $CD $E3 $7B
     ldh  a, [hActiveEntityPosX]                   ; $41B5: $F0 $EE
     ld   hl, hLinkPositionX                       ; $41B7: $21 $98 $FF
     sub  [hl]                                     ; $41BA: $96

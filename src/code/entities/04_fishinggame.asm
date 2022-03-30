@@ -1,11 +1,32 @@
-Data_004_5F28::
-    db   $00, $F0, $78, $01, $00, $F8, $7A, $01, $00, $00, $70, $01, $00, $08, $72, $01
+FishermanRodLowSpriteRect::                 ; $5F28
+    db   $00, $F0
+    db   $78, $01
+    db   $00, $F8
+    db   $7A, $01
+    db   $00, $00
+    db   $70, $01
+    db   $00, $08
+    db   $72, $01
 
-Data_004_5F38::
-    db   $00, $F0, $7C, $01, $00, $F8, $7E, $01, $00, $00, $70, $01, $00, $08, $72, $01
+FishermanRowHighSpriteRect::                 ; $5F38
+    db   $00, $F0
+    db   $7C, $01
+    db   $00, $F8
+    db   $7E, $01
+    db   $00, $00
+    db   $70, $01
+    db   $00, $08
+    db   $72, $01
 
-Data_004_5F48::
-    db   $00, $F0, $78, $01, $00, $F8, $7A, $01, $00, $00, $74, $01, $00, $08, $76, $01
+FishermanTowardsLinkSpriteRect::             ; $5F48
+    db   $00, $F0
+    db   $78, $01
+    db   $00, $F8
+    db   $7A, $01
+    db   $00, $00
+    db   $74, $01
+    db   $00, $08
+    db   $76, $01
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 FishermanFishingGameSpriteVariants::
@@ -13,12 +34,20 @@ FishermanFishingGameSpriteVariants::
     db $9A, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
     db $9C, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
 
+; Entity responsible for:
+; - The fisherman near the pond
+; - The fishing game itself
+; - Each fish
 FishermanFishingGameEntityHandler::
+    ;
+    ; Special case when wEntitiesPrivateState4Table is non-zero
+    ;
+
     ld   hl, wEntitiesPrivateState4Table          ; $5F5C: $21 $40 $C4
     add  hl, bc                                   ; $5F5F: $09
     ld   a, [hl]                                  ; $5F60: $7E
     and  a                                        ; $5F61: $A7
-    jr   z, jr_004_5F96                           ; $5F62: $28 $32
+    jr   z, .privateState4End                     ; $5F62: $28 $32
 
     ldh  a, [hActiveEntityVisualPosY]             ; $5F64: $F0 $EC
     add  $04                                      ; $5F66: $C6 $04
@@ -30,65 +59,79 @@ FishermanFishingGameEntityHandler::
     ld   hl, wEntitiesSpeedZTable                 ; $5F76: $21 $20 $C3
     add  hl, bc                                   ; $5F79: $09
     dec  [hl]                                     ; $5F7A: $35
+
     ld   hl, wEntitiesPosZTable                   ; $5F7B: $21 $10 $C3
     add  hl, bc                                   ; $5F7E: $09
     ld   a, [hl]                                  ; $5F7F: $7E
     and  $80                                      ; $5F80: $E6 $80
     jr   z, .jr_5F91                              ; $5F82: $28 $0D
-
     call ClearEntityStatusBank04                  ; $5F84: $CD $7A $6D
     xor  a                                        ; $5F87: $AF
     ld   [wExchangingTradeSequenceItem], a        ; $5F88: $EA $7F $DB
     ld   [wC167], a                               ; $5F8B: $EA $67 $C1
     jp   CreateTradingItemEntity                  ; $5F8E: $C3 $0C $0C
-
 .jr_5F91
+
     ld   a, $02                                   ; $5F91: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5F93: $E0 $A1
     ret                                           ; $5F95: $C9
+.privateState4End
 
-jr_004_5F96:
     ldh  a, [hIsSideScrolling]                    ; $5F96: $F0 $F9
     and  a                                        ; $5F98: $A7
-    jp   nz, label_004_60A4                       ; $5F99: $C2 $A4 $60
+    jp   nz, FishingGameAndFishHandler            ; $5F99: $C2 $A4 $60
 
+    ;
+    ; Fisherman near the pond
+    ;
+
+    ; Allocate 4 sprites, and don't hurt Link on touch
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5F9C: $21 $40 $C3
     add  hl, bc                                   ; $5F9F: $09
-    ld   [hl], $84                                ; $5FA0: $36 $84
+    ld   [hl], $04 | $80                          ; $5FA0: $36 $84
+
     ld   hl, wEntitiesPrivateState5Table          ; $5FA2: $21 $90 $C3
     add  hl, bc                                   ; $5FA5: $09
     ld   a, [hl]                                  ; $5FA6: $7E
     ldh  [hMultiPurposeG], a                      ; $5FA7: $E0 $E8
+
+    ; Select the sprites rect to render:
+    ; - if a dialog is visible, FishermanTowardsLinkSpriteRect
+    ; - else if wEntitiesInertiaTable is $30, FishermanRowHighSpriteRect
+    ; - else FishermanRodLowSpriteRect
     ld   a, [wDialogState]                        ; $5FA9: $FA $9F $C1
     and  a                                        ; $5FAC: $A7
-    ld   hl, Data_004_5F48                        ; $5FAD: $21 $48 $5F
-    jr   nz, .jr_5FC2                             ; $5FB0: $20 $10
+    ld   hl, FishermanTowardsLinkSpriteRect       ; $5FAD: $21 $48 $5F
+    jr   nz, .renderSprites                       ; $5FB0: $20 $10
 
     ld   hl, wEntitiesInertiaTable                ; $5FB2: $21 $D0 $C3
     add  hl, bc                                   ; $5FB5: $09
     ld   a, [hl]                                  ; $5FB6: $7E
     inc  [hl]                                     ; $5FB7: $34
-    ld   hl, Data_004_5F28                        ; $5FB8: $21 $28 $5F
+    ld   hl, FishermanRodLowSpriteRect            ; $5FB8: $21 $28 $5F
     and  $30                                      ; $5FBB: $E6 $30
-    jr   z, .jr_5FC2                              ; $5FBD: $28 $03
+    jr   z, .renderSprites                        ; $5FBD: $28 $03
 
-    ld   hl, Data_004_5F38                        ; $5FBF: $21 $38 $5F
+    ld   hl, FishermanRowHighSpriteRect           ; $5FBF: $21 $38 $5F
 
-.jr_5FC2
+.renderSprites
+    ; Render a rect of 4 sprites (2 for the rod, 2 for the fisherman)
     ld   c, $04                                   ; $5FC2: $0E $04
     call RenderActiveEntitySpritesRect            ; $5FC4: $CD $E6 $3C
+
     ld   a, $04                                   ; $5FC7: $3E $04
     call func_015_7964_trampoline                 ; $5FC9: $CD $A0 $3D
-    call func_004_7BE3                            ; $5FCC: $CD $E3 $7B
+    call ApplySolidCollision_04                   ; $5FCC: $CD $E3 $7B
+
     ldh  a, [hActiveEntityState]                  ; $5FCF: $F0 $F0
     JP_TABLE                                      ; $5FD1
-._00 dw func_004_5FD8                             ; $5FD2
-._01 dw func_004_5FEF                             ; $5FD4
-._02 dw func_004_6041                             ; $5FD6
+._00 dw FishermanIdleHandler                      ; $5FD2
+._01 dw FishermanProposingHandler                 ; $5FD4
+._02 dw FishermanExplainingRulesHandler           ; $5FD6
 
-func_004_5FD8::
+FishermanIdleHandler::
     ld   a, [wGameplayType]                       ; $5FD8: $FA $95 $DB
-    cp   $0B                                      ; $5FDB: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $5FDB: $FE $0B
     ret  nz                                       ; $5FDD: $C0
 
     call func_004_7C4B                            ; $5FDE: $CD $4B $7C
@@ -96,10 +139,11 @@ func_004_5FD8::
 
     ld   a, $02                                   ; $5FE2: $3E $02
     ld   [wC167], a                               ; $5FE4: $EA $67 $C1
-    call_open_dialog $045                         ; $5FE7
+    call_open_dialog $045 ; "How about some fishing" ; $5FE7
     jp   IncrementEntityState                     ; $5FEC: $C3 $12 $3B
 
-func_004_5FEF::
+; Displaying the dialog that asks if Link's want to fish
+FishermanProposingHandler::
     ld   a, [wDialogState]                        ; $5FEF: $FA $9F $C1
     and  a                                        ; $5FF2: $A7
     ret  nz                                       ; $5FF3: $C0
@@ -107,14 +151,15 @@ func_004_5FEF::
     call IncrementEntityState                     ; $5FF4: $CD $12 $3B
     ld   a, [wDialogAskSelectionIndex]            ; $5FF7: $FA $77 $C1
     and  a                                        ; $5FFA: $A7
-    jr   z, .jr_6007                              ; $5FFB: $28 $0A
+    jr   z, .accepted                             ; $5FFB: $28 $0A
 
+    ; Declined
     ld   [hl], b                                  ; $5FFD: $70
     xor  a                                        ; $5FFE: $AF
     ld   [wC167], a                               ; $5FFF: $EA $67 $C1
-    jp_open_dialog $046                           ; $6002
+    jp_open_dialog $046 ; "Too bad"               ; $6002
 
-.jr_6007
+.accepted
     push hl                                       ; $6007: $E5
     push de                                       ; $6008: $D5
     ld   a, [wAddRupeeBufferLow]                  ; $6009: $FA $90 $DB
@@ -145,27 +190,26 @@ func_004_5FEF::
     sbc  $00                                      ; $6027: $DE $00
     pop  de                                       ; $6029: $D1
     pop  hl                                       ; $602A: $E1
-    jr   c, .jr_6037                              ; $602B: $38 $0A
+    jr   c, .notEnoughRupees                      ; $602B: $38 $0A
 
     ld   a, FISHING_GAME_PRICE
     ld   [wSubstractRupeeBufferLow], a            ; $602F: $EA $92 $DB
-    jp_open_dialog $047                           ; $6032
+    jp_open_dialog $047 ; "Here's how it works"   ; $6032
 
-.jr_6037
+.notEnoughRupees
     ld   [hl], b                                  ; $6037: $70
     xor  a                                        ; $6038: $AF
     ld   [wC167], a                               ; $6039: $EA $67 $C1
-    jp_open_dialog $04E                           ; $603C
+    jp_open_dialog $04E ; "Not enough rupees"     ; $603C
 
-func_004_6041::
+; Fishing accepted; explaining the rules
+FishermanExplainingRulesHandler::
     ld   a, [wDialogState]                        ; $6041: $FA $9F $C1
-
-.jr_6044
     and  a                                        ; $6044: $A7
     ret  nz                                       ; $6045: $C0
 
     call UnloadAllEntities                        ; $6046: $CD $83 $3E
-    jp   label_004_67FB                           ; $6049: $C3 $FB $67
+    jp   WarpToFishingGame                        ; $6049: $C3 $FB $67
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown080SpriteVariants::
@@ -215,7 +259,7 @@ Data_004_6092::
 Data_004_609B::
     db   $10, $E0, $F8, $10, $00, $00, $00, $00, $F0
 
-label_004_60A4:
+FishingGameAndFishHandler::
     ld   a, $01                                   ; $60A4
     ld   [wC167], a
     ld   hl, wEntitiesPrivateState1Table          ; $60A9: $21 $B0 $C2
@@ -488,7 +532,7 @@ func_004_6247::
     ret  nz                                       ; $624B: $C0
 
     call UnloadAllEntities                        ; $624C: $CD $83 $3E
-    jp   label_004_67FB                           ; $624F: $C3 $FB $67
+    jp   WarpToFishingGame                           ; $624F: $C3 $FB $67
 
 func_004_6252::
     ld   a, [wDialogState]                        ; $6252: $FA $9F $C1
@@ -1528,7 +1572,7 @@ func_004_679B::
 .ret_67FA
     ret                                           ; $67FA: $C9
 
-label_004_67FB:
+WarpToFishingGame:
     call ApplyMapFadeOutTransition                ; $67FB: $CD $83 $0C
     ldh  a, [hLinkPositionX]                      ; $67FE: $F0 $98
     swap a                                        ; $6800: $CB $37

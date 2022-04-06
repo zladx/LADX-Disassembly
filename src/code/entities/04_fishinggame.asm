@@ -266,10 +266,10 @@ FishingGameAndFishHandler::
     add  hl, bc                                   ; $60AC: $09
     ld   a, [hl]                                  ; $60AD: $7E
     JP_TABLE                                      ; $60AE: $C7
-._00 dw func_004_60D0                             ; $60AF
-._01 dw func_004_6281                             ; $60B1
-._02 dw func_004_643A                             ; $60B3
-._03 dw func_004_6721                             ; $60B5
+._00 dw FishingGameHandler                        ; $60AF
+._01 dw FishingLureHandler                        ; $60B1
+._02 dw SmallFishHandler                          ; $60B3
+._03 dw BigFishHandler                            ; $60B5
 
 FishStartX:
     db   $18, $58, $60, $18, $88
@@ -286,7 +286,7 @@ FishType:
 FishMoveDelay:
     db   $00, $3E, $1E, $10, $30
 
-func_004_60D0::
+FishingGameHandler::
     ld   a, $02                                   ; $60D0: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $60D2: $E0 $A1
     ld   hl, wEntitiesPrivateState2Table          ; $60D4: $21 $C0 $C2
@@ -532,7 +532,7 @@ func_004_6247::
     ret  nz                                       ; $624B: $C0
 
     call UnloadAllEntities                        ; $624C: $CD $83 $3E
-    jp   WarpToFishingGame                           ; $624F: $C3 $FB $67
+    jp   WarpToFishingGame                        ; $624F: $C3 $FB $67
 
 func_004_6252::
     ld   a, [wDialogState]                        ; $6252: $FA $9F $C1
@@ -571,7 +571,7 @@ Unknown081SpriteVariants::
     db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
     db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
 
-func_004_6281::
+FishingLureHandler::
     ld   a, c                                     ; $6281: $79
     ld   [wD003], a                               ; $6282: $EA $03 $D0
     ld   de, Unknown081SpriteVariants             ; $6285: $11 $6D $62
@@ -867,7 +867,7 @@ jr_004_6402:
     jp   SetEntitySpriteVariant                   ; $6417: $C3 $0C $3B
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-Unknown082SpriteVariants::
+SmallFishSpriteVariants::
 .variant0
     db $4C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
     db $4A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
@@ -893,7 +893,7 @@ Unknown082SpriteVariants::
     db $4E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
     db $48, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
-func_004_643A::
+SmallFishHandler::
     ld   hl, wEntitiesDirectionTable              ; $643A: $21 $80 $C3
     add  hl, bc                                   ; $643D: $09
     ld   a, [hl]                                  ; $643E: $7E
@@ -905,12 +905,17 @@ func_004_643A::
     ldh  [hActiveEntitySpriteVariant], a          ; $6446: $E0 $F1
 
 .jr_6448
-    ld   de, Unknown082SpriteVariants             ; $6448: $11 $1A $64
+    ld   de, SmallFishSpriteVariants              ; $6448: $11 $1A $64
     call RenderActiveEntitySpritesPair            ; $644B: $CD $C0 $3B
 
-label_004_644E:
+.sharedFishBehavior
+    ;
+    ; Behavior shared between small fish and big fish
+    ;
+
     call ReturnIfNonInteractive_04                ; $644E: $CD $A3 $7F
     call UpdateEntityPosWithSpeed_04              ; $6451: $CD $CA $6D
+
     ldh  a, [hActiveEntityState]                  ; $6454: $F0 $F0
     JP_TABLE                                      ; $6456
 ._00 dw func_004_6463                             ; $6457
@@ -1386,7 +1391,7 @@ jr_004_66FE:
     jp   ClearEntityStatusBank04                  ; $66FE: $C3 $7A $6D
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-Unknown083SpriteVariants::
+BigFishSpriteVariants::
 .variant0
     db $44, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
     db $42, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
@@ -1412,7 +1417,7 @@ Unknown083SpriteVariants::
     db $46, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
     db $40, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
-func_004_6721::
+BigFishHandler::
     ld   hl, wEntitiesDirectionTable              ; $6721: $21 $80 $C3
     add  hl, bc                                   ; $6724: $09
     ld   a, [hl]                                  ; $6725: $7E
@@ -1424,9 +1429,9 @@ func_004_6721::
     ldh  [hActiveEntitySpriteVariant], a          ; $672D: $E0 $F1
 
 .jr_672F
-    ld   de, Unknown083SpriteVariants             ; $672F: $11 $01 $67
+    ld   de, BigFishSpriteVariants                ; $672F: $11 $01 $67
     call RenderActiveEntitySpritesPair            ; $6732: $CD $C0 $3B
-    jp   label_004_644E                           ; $6735: $C3 $4E $64
+    jp  SmallFishHandler.sharedFishBehavior       ; $6735: $C3 $4E $64
 
 label_004_6738:
     call GetEntityTransitionCountdown             ; $6738: $CD $05 $0C

@@ -59,7 +59,7 @@ jr_004_770E:
     cp   $04                                      ; $771C: $FE $04
     jr   nc, .jr_7723                             ; $771E: $30 $03
 
-    call func_004_7BE3                            ; $7720: $CD $E3 $7B
+    call ApplySolidCollision_04                   ; $7720: $CD $E3 $7B
 
 .jr_7723
     ldh  a, [hActiveEntityState]                  ; $7723: $F0 $F0
@@ -851,7 +851,8 @@ func_004_7BB7::
     ld   de, Data_004_7B5A                        ; $7BDD: $11 $5A $7B
     jp   RenderActiveEntitySprite                 ; $7BE0: $C3 $77 $3C
 
-func_004_7BE3::
+; Disallow Link going through a solid object
+ApplySolidCollision_04::
     call CheckLinkCollisionWithEnemy_trampoline   ; $7BE3: $CD $5A $3B
     jr   nc, .ret_7C05                            ; $7BE6: $30 $1D
 

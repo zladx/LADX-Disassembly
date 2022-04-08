@@ -38,7 +38,7 @@ GrandpaUlriraEntityHandler::
     ld   [wRichardSpokenFlag], a                  ; $5C49: $EA $55 $DB
 
 .jr_5C4C
-    jp_open_dialog $140                           ; $5C4C
+    jp_open_dialog Dialog140                      ; $5C4C
 
 Data_006_5C51::
     db   $F7, $00, $70, $02, $F7, $08, $72, $02, $07, $00, $74, $02, $07, $08, $76, $02

@@ -122,7 +122,7 @@ func_007_79D7::
     jr   nz, jr_007_7A1E                          ; $79EF: $20 $2D
 
     inc  [hl]                                     ; $79F1: $34
-    call_open_dialog $190                         ; $79F2
+    call_open_dialog Dialog190                    ; $79F2
     jr   jr_007_7A1E                              ; $79F7: $18 $25
 
 .jr_79F9

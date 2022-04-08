@@ -61,7 +61,7 @@ func_005_538A::
     ret  nc                                       ; $5393: $D0
 
     ld   a, $F0                                   ; $5394: $3E $F0
-    call OpenDialog                               ; $5396: $CD $85 $23
+    call OpenDialogInTable0                       ; $5396: $CD $85 $23
     jp   IncrementEntityState                     ; $5399: $C3 $12 $3B
 
 func_005_539C::
@@ -92,18 +92,18 @@ jr_005_53AC:
     ld   [wSubstractRupeeBufferLow], a            ; $53BA: $EA $92 $DB
     ld   a, $F1                                   ; $53BD: $3E $F1
     ld   [wD477], a                               ; $53BF: $EA $77 $D4
-    jp   OpenDialog                               ; $53C2: $C3 $85 $23
+    jp   OpenDialogInTable0                       ; $53C2: $C3 $85 $23
 
 .jr_53C5
     ld   [hl], b                                  ; $53C5: $70
     ld   a, $4E                                   ; $53C6: $3E $4E
-    jp   OpenDialog                               ; $53C8: $C3 $85 $23
+    jp   OpenDialogInTable0                       ; $53C8: $C3 $85 $23
 
 func_005_53CB::
     call ShouldLinkTalkToEntity_05                ; $53CB: $CD $06 $55
     ret  nc                                       ; $53CE: $D0
 
-    jp_open_dialog $0F1                           ; $53CF
+    jp_open_dialog Dialog0F1                      ; $53CF
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 RaftOwnerOnOverworldSpriteVariants:: ; $53D4

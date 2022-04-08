@@ -198,7 +198,7 @@ jr_007_7C93:
     cp   UNKNOWN_ROOM_96                          ; @TODO Master Stalfos "screw you" letter chest?
     jr   nz, .jr_7CB1                             ; $7CA8: $20 $07
 
-    call_open_dialog $111                         ; $7CAA
+    call_open_dialog Dialog111                    ; $7CAA
     jr   jr_007_7CE9                              ; $7CAF: $18 $38
 
 .jr_7CB1
@@ -243,7 +243,7 @@ jr_007_7C93:
     ld   a, [hl]                                  ; $7CE5: $7E
 
 jr_007_7CE6:
-    call OpenDialog                               ; $7CE6: $CD $85 $23
+    call OpenDialogInTable0                       ; $7CE6: $CD $85 $23
 
 jr_007_7CE9:
     xor  a                                        ; $7CE9: $AF

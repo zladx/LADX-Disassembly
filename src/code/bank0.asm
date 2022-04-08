@@ -1602,7 +1602,7 @@ ApplyGotItem::
     ld   hl, DialogForItem - $01                  ; $1057: $21 $2D $10
     add  hl, de                                   ; $105A: $19
     ld   a, [hl]                                  ; $105B: $7E
-    call OpenDialog                               ; $105C: $CD $85 $23
+    call OpenDialogInTable0                       ; $105C: $CD $85 $23
     ld   a, $01                                   ; $105F: $3E $01
 
 .countdownNotFinished
@@ -3220,7 +3220,7 @@ ENDC
     xor  a                                        ; $1A18: $AF
     ld   [wDidStealItem], a                       ; $1A19: $EA $7E $D4
     ld   a, $36                                   ; $1A1C: $3E $36
-    jp   OpenDialog                               ; $1A1E: $C3 $85 $23
+    jp   OpenDialogInTable0                       ; $1A1E: $C3 $85 $23
 
 IF !__PATCH_0__
 .return
@@ -3752,7 +3752,7 @@ ENDC
     and  a                                        ; $2025: $A7
     jr   z, .jr_2030                              ; $2026: $28 $08
     ; Open Marin's "Do you look in people's drawers?" dialog
-    call_open_dialog $278                         ; $2028: $3E $78 $CD $7C $23
+    call_open_dialog Dialog278                    ; $2028: $3E $78 $CD $7C $23
     jp   .specialCasesEnd                         ; $202D: $C3 $CF $20
 
 .jr_2030
@@ -3821,7 +3821,7 @@ ENDC
     jp   .specialCasesEnd                         ; $208B: $C3 $CF $20
 
 .jr_208E
-    call OpenDialog                               ; $208E: $CD $85 $23
+    call OpenDialogInTable0                       ; $208E: $CD $85 $23
     jr   .specialCasesEnd                         ; $2091: $18 $3C
 
 .jr_2093

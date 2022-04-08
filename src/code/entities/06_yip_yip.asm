@@ -167,7 +167,7 @@ jr_006_5A36:
 
 jr_006_5A91:
     ld   a, e                                     ; $5A91: $7B
-    call OpenDialog                               ; $5A92: $CD $85 $23
+    call OpenDialogInTable0                       ; $5A92: $CD $85 $23
     call func_006_5ACC                            ; $5A95: $CD $CC $5A
 
 jr_006_5A98:
@@ -191,14 +191,14 @@ YipYipState2Handler::
     ld   [wTradeSequenceItem], a                  ; $5AB1: $EA $0E $DB
     ld   a, REPLACE_TILES_TRADING_ITEM            ; $5AB4: $3E $0D
     ldh  [hReplaceTiles], a                       ; $5AB6: $E0 $A5
-    call_open_dialog $183                         ; $5AB8
+    call_open_dialog Dialog183                    ; $5AB8
     call func_006_5ACC                            ; $5ABD: $CD $CC $5A
     jp   IncrementEntityState                     ; $5AC0: $C3 $12 $3B
 
 .jr_5AC3
     call IncrementEntityState                     ; $5AC3: $CD $12 $3B
     ld   [hl], b                                  ; $5AC6: $70
-    call_open_dialog $184                         ; $5AC7
+    call_open_dialog Dialog184                    ; $5AC7
 
 func_006_5ACC::
     ld   a, $18                                   ; $5ACC: $3E $18

@@ -1446,7 +1446,7 @@ jr_002_4A7C:
     and  a                                        ; $4A98: $A7
     jr   nz, jr_002_4AB2                          ; $4A99: $20 $17
 
-    call_open_dialog $277                         ; $4A9B
+    call_open_dialog Dialog277                    ; $4A9B
     jr   jr_002_4AB2                              ; $4AA0: $18 $10
 
 .jr_4AA2
@@ -1454,7 +1454,7 @@ jr_002_4A7C:
     and  a                                        ; $4AA5: $A7
     jr   nz, jr_002_4AB2                          ; $4AA6: $20 $0A
 
-    call_open_dialog $08E                         ; $4AA8
+    call_open_dialog Dialog08E                    ; $4AA8
     xor  a                                        ; $4AAD: $AF
     ld   [wC167], a                               ; $4AAE: $EA $67 $C1
     ret                                           ; $4AB1: $C9
@@ -1603,7 +1603,7 @@ func_002_4B49::
     and  a                                        ; $4B99: $A7
     jr   nz, .jr_002_4BA1                         ; $4B9A: $20 $05
 
-    call_open_dialog $279                         ; $4B9C
+    call_open_dialog Dialog279                    ; $4B9C
 
 .jr_002_4BA1
     xor  a                                        ; $4BA1: $AF
@@ -5786,7 +5786,7 @@ label_002_6B66:
 
     inc  a                                        ; $6B90: $3C
     ld   [wC5A6], a                               ; $6B91: $EA $A6 $C5
-    call_open_dialog $051                         ; $6B94
+    call_open_dialog Dialog051                    ; $6B94
 
 .jr_6B99
     ldh  a, [hObjectUnderEntity]                  ; $6B99: $F0 $AF
@@ -7327,7 +7327,7 @@ ENDC
     jr   z, jr_002_742D                           ; $7413: $28 $18
 
 jr_002_7415:
-    call_open_dialog $253                         ; $7415
+    call_open_dialog Dialog253                    ; $7415
     jp   collisionEnd                             ; $741A: $C3 $54 $74
 
 jr_002_741D:
@@ -7498,7 +7498,7 @@ label_002_74AD:
     jp   func_1828                                ; $74FB: $C3 $28 $18
 
 func_002_74FE::
-    call OpenDialog                               ; $74FE: $CD $85 $23
+    call OpenDialogInTable0                       ; $74FE: $CD $85 $23
     jp   ClearLinkPositionIncrement               ; $7501: $C3 $8E $17
 
 func_002_7504::

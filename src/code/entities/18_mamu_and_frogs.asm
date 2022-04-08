@@ -96,7 +96,7 @@ func_018_4087::
     ld   a, $10                                   ; $408B: $3E $10
     ldh  [hLinkPositionY], a                      ; $408D: $E0 $99
     ld   a, e                                     ; $408F: $7B
-    call OpenDialog                               ; $4090: $CD $85 $23
+    call OpenDialogInTable0                       ; $4090: $CD $85 $23
     pop  af                                       ; $4093: $F1
     ldh  [hLinkPositionY], a                      ; $4094: $E0 $99
     ret                                           ; $4096: $C9

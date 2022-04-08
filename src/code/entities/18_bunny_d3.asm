@@ -105,7 +105,7 @@ jr_018_521C:
     and  a                                        ; $524D: $A7
     jr   z, .jr_5255                              ; $524E: $28 $05
 
-    jp_open_dialog $252                           ; $5250
+    jp_open_dialog Dialog252                      ; $5250
 
 .jr_5255
     ld   a, e                                     ; $5255: $7B

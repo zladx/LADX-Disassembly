@@ -40,7 +40,7 @@ SeashellMansionEntityHandler::
     and  $02                                      ; $71EB: $E6 $02
     jr   nz, jr_019_71FD                          ; $71ED: $20 $0E
 
-    call_open_dialog $179                         ; $71EF
+    call_open_dialog Dialog179                    ; $71EF
     inc  [hl]                                     ; $71F4: $34
     ret                                           ; $71F5: $C9
 
@@ -245,7 +245,7 @@ SeashellMansionState4Handler::
     and  a                                        ; $731A: $A7
     jr   nz, .ret_7327                            ; $731B: $20 $0A
 
-    call_open_dialog $17B                         ; $731D
+    call_open_dialog Dialog17B                    ; $731D
     call IncrementEntityState                     ; $7322: $CD $12 $3B
     ld   [hl], $08                                ; $7325: $36 $08
 
@@ -256,7 +256,7 @@ SeashellMansionState5Handler::
     call GetEntityPrivateCountdown1               ; $7328: $CD $00 $0C
     ret  nz                                       ; $732B: $C0
 
-    call_open_dialog $17A                         ; $732C
+    call_open_dialog Dialog17A                    ; $732C
     call IncrementEntityState                     ; $7331: $CD $12 $3B
     ld   [hl], $07                                ; $7334: $36 $07
     ret                                           ; $7336: $C9
@@ -678,7 +678,7 @@ func_019_76CB::
     ld   [hl], $20                                ; $76DF: $36 $20
     ld   a, MUSIC_TOOL_ACQUIRED                   ; $76E1: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $76E3: $EA $68 $D3
-    call_open_dialog $09F                         ; $76E6
+    call_open_dialog Dialog09F                    ; $76E6
     ld   a, [wIndoorBRoomStatus + $E9]            ; $76EB: $FA $E9 $DA
     or   $10                                      ; $76EE: $F6 $10
     ld   [wIndoorBRoomStatus + $E9], a            ; $76F0: $EA $E9 $DA
@@ -863,7 +863,7 @@ jr_019_78C0:
     add  $01                                      ; $78C0: $C6 $01
     daa                                           ; $78C2: $27
     ld   [wSeashellsCount], a                     ; $78C3: $EA $0F $DB
-    call_open_dialog $0EF                         ; $78C6
+    call_open_dialog Dialog0EF                    ; $78C6
 
 ret_019_78CB:
     ret                                           ; $78CB: $C9

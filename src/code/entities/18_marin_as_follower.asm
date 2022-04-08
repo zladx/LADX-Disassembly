@@ -56,7 +56,7 @@ MarinAsFollowerHandler::
     push af                                       ; $59F8: $F5
     ld   a, $28                                   ; $59F9: $3E $28
     ldh  [hLinkPositionY], a                      ; $59FB: $E0 $99
-    call_open_dialog $01F ; "Marin is joining you!" ; $59FD
+    call_open_dialog Dialog01F ; "Marin is joining you!" ; $59FD
     pop  af                                       ; $5A02: $F1
     ldh  [hLinkPositionY], a                      ; $5A03: $E0 $99
     ld   a, $0F                                   ; $5A05: $3E $0F
@@ -226,7 +226,7 @@ jr_018_5A8C::
     jr   nz, .jr_5B03                             ; $5AFB: $20 $06
 
     dec  [hl]                                     ; $5AFD: $35
-    call_open_dialog $27A ; "What a surprise!"    ; $5AFE
+    call_open_dialog Dialog27A ; "What a surprise!" ; $5AFE
 
 .jr_5B03
     ld   hl, wEntitiesPrivateCountdown2Table      ; $5B03: $21 $00 $C3
@@ -290,7 +290,7 @@ jr_018_5B55:
     jr   nz, jr_018_5B61                          ; $5B59: $20 $06
 
     dec  [hl]                                     ; $5B5B: $35
-    call_open_dialog $27B ; "Sorry, are you ok?"  ; $5B5C
+    call_open_dialog Dialog27B ; "Sorry, are you ok?" ; $5B5C
 
 jr_018_5B61:
     ld   a, $02                                   ; $5B61: $3E $02

@@ -164,7 +164,7 @@ func_005_49E5::
     jr   nz, .jr_49FD                             ; $49F4: $20 $07
 
     ld   [hl], $01                                ; $49F6: $36 $01
-    jp_open_dialog $021                           ; $49F8
+    jp_open_dialog Dialog021                      ; $49F8
 
 .jr_49FD
     call ShouldLinkTalkToEntity_05                ; $49FD: $CD $06 $55
@@ -174,7 +174,7 @@ func_005_49E5::
     and  a                                        ; $4A05: $A7
     ret  nz                                       ; $4A06: $C0
 
-    jp_open_dialog $00D                           ; $4A07
+    jp_open_dialog Dialog00D                      ; $4A07
 
 .jr_4A0C
     ld   hl, wC1AD                                ; $4A0C: $21 $AD $C1
@@ -450,7 +450,7 @@ func_005_4B89::
     cp   $01                                      ; $4B8C: $FE $01
     jr   nz, .jr_4B95                             ; $4B8E: $20 $05
 
-    jp_open_dialog $00A                           ; $4B90
+    jp_open_dialog Dialog00A                      ; $4B90
 
 .jr_4B95
     and  a                                        ; $4B95: $A7
@@ -482,7 +482,7 @@ func_005_4B89::
     call ShouldLinkTalkToEntity_05                ; $4BB6: $CD $06 $55
     ret  nc                                       ; $4BB9: $D0
 
-    jp_open_dialog $00B                           ; $4BBA
+    jp_open_dialog Dialog00B                      ; $4BBA
 
 Data_005_4BBF::
     db   $78, $00
@@ -620,7 +620,7 @@ TarinShield0Handler::
     sub  $02                                      ; $4C7F: $D6 $02
     ldh  [hLinkPositionY], a                      ; $4C81: $E0 $99
     ; … and open the "Woah, wait" dialog.
-    jp_open_dialog $000                           ; $4C83
+    jp_open_dialog Dialog000                      ; $4C83
 .whoahWaitEnd
 
 
@@ -628,7 +628,7 @@ TarinShield0Handler::
     ret  nc                                       ; $4C8B: $D0
 
     ; Open the "There's your shield" dialog
-    call_open_dialog $054                         ; $4C8C
+    call_open_dialog Dialog054                    ; $4C8C
     jp   IncrementEntityState                     ; $4C91: $C3 $12 $3B
 
 ; This data is pushed into wObjPal8
@@ -685,7 +685,7 @@ TarinShield2Handler::
     ld   [wShieldLevel], a                        ; $4CD7: $EA $44 $DB
     ld   a, LINK_ANIMATION_STATE_STANDING_SHIELD_DOWN ; $4CDA: $3E $22
     ldh  [hLinkAnimationState], a                 ; $4CDC: $E0 $9D
-    call_open_dialog $091                         ; $4CDE
+    call_open_dialog Dialog091                    ; $4CDE
     jp   IncrementEntityState                     ; $4CE3: $C3 $12 $3B
 
 .jr_4CE6
@@ -727,7 +727,7 @@ TarinShield3Handler::
     cp   $03                                      ; $4D23: $FE $03
     jr   nz, jr_005_4D33                          ; $4D25: $20 $0C
 
-    call_open_dialog $1C5                         ; $4D27
+    call_open_dialog Dialog1C5                    ; $4D27
 
 .jr_4D2C
     ld   a, [wIsMarinFollowingLink]               ; $4D2C: $FA $73 $DB
@@ -754,7 +754,7 @@ jr_005_4D38:
     ld   a, $10                                   ; $4D46: $3E $10
 
 .jr_4D48
-    call OpenDialog                               ; $4D48: $CD $85 $23
+    call OpenDialogInTable0                       ; $4D48: $CD $85 $23
 
 jr_005_4D4B:
     jr   jr_005_4D56                              ; $4D4B: $18 $09
@@ -763,7 +763,7 @@ jr_005_4D4D:
     call ShouldLinkTalkToEntity_05                ; $4D4D: $CD $06 $55
     ret  nc                                       ; $4D50: $D0
 
-    jp_open_dialog $055                           ; $4D51
+    jp_open_dialog Dialog055                      ; $4D51
 
 jr_005_4D56:
     ld   a, [wDB48]                               ; $4D56: $FA $48 $DB
@@ -829,7 +829,7 @@ TarinShield4Handler::
     jr   jr_005_4DC2                              ; $4DBB: $18 $05
 
 .jr_4DBD
-    call_open_dialog $1C9                         ; $4DBD
+    call_open_dialog Dialog1C9                    ; $4DBD
 
 jr_005_4DC2:
     call IncrementEntityState                     ; $4DC2: $CD $12 $3B

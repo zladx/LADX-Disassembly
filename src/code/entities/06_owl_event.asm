@@ -272,7 +272,7 @@ OwlState2Handler::
     cp   UNKNOWN_ROOM_06                          ; $6985: $FE $06
     jr   nz, .jr_6990                             ; $6987: $20 $07
 
-    call_open_dialog $0CD                         ; $6989
+    call_open_dialog Dialog0CD                    ; $6989
     jr   jr_006_6993                              ; $698E: $18 $03
 
 .jr_6990

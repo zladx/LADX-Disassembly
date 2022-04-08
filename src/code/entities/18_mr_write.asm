@@ -116,7 +116,7 @@ MrWriteState0Handler::
     cp   TRADING_ITEM_HIBISCUS                    ; $4C2F: $FE $08
     jr   nz, .jr_4C3B                             ; $4C31: $20 $08
 
-    call_open_dialog $167                         ; $4C33
+    call_open_dialog Dialog167                    ; $4C33
     jp   IncrementEntityState                     ; $4C38: $C3 $12 $3B
 
 .jr_4C3B
@@ -138,11 +138,11 @@ MrWriteState1Handler::
     and  a                                        ; $4C50: $A7
     jr   nz, .jr_4C58                             ; $4C51: $20 $05
 
-    jp_open_dialog $168                           ; $4C53
+    jp_open_dialog Dialog168                      ; $4C53
 
 .jr_4C58
     ld   [hl], b                                  ; $4C58: $70
-    jp_open_dialog $169                           ; $4C59
+    jp_open_dialog Dialog169                      ; $4C59
 
 MrWriteState2Handler::
     ld   a, [wDialogState]                        ; $4C5E: $FA $9F $C1
@@ -179,7 +179,7 @@ func_018_4C87::
     cp   TRADING_ITEM_LETTER                      ; $4C8E: $FE $09
     jr   nz, .jr_4C9A                             ; $4C90: $20 $08
 
-    call_open_dialog $134                         ; $4C92
+    call_open_dialog Dialog134                    ; $4C92
     jp   IncrementEntityState                     ; $4C97: $C3 $12 $3B
 
 .jr_4C9A
@@ -220,7 +220,7 @@ func_018_4CBE::
     ret  nz                                       ; $4CC8: $C0
 
     call IncrementEntityState                     ; $4CC9: $CD $12 $3B
-    jp_open_dialog $135                           ; $4CCC
+    jp_open_dialog Dialog135                      ; $4CCC
 
 func_018_4CD1::
     ld   a, [wDialogState]                        ; $4CD1: $FA $9F $C1
@@ -241,10 +241,10 @@ func_018_4CD1::
 
 .jr_4CEC
     dec  [hl]                                     ; $4CEC: $35
-    jp_open_dialog $137                           ; $4CED
+    jp_open_dialog Dialog137                      ; $4CED
 
 func_018_4CF2::
     call ShouldLinkTalkToEntity_18                ; $4CF2: $CD $89 $7D
     ret  nc                                       ; $4CF5: $D0
 
-    jp_open_dialog $138                           ; $4CF6
+    jp_open_dialog Dialog138                      ; $4CF6

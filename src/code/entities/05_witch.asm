@@ -123,7 +123,7 @@ jr_005_484A:
     call ShouldLinkTalkToEntity_05                ; $484A: $CD $06 $55
     ret  nc                                       ; $484D: $D0
 
-    jp_open_dialog $00C                           ; $484E
+    jp_open_dialog Dialog00C                      ; $484E
 
 jr_005_4853:
     xor  a                                        ; $4853: $AF
@@ -160,7 +160,7 @@ func_005_487D::
     cp   $04                                      ; $4886: $FE $04
     ret  nz                                       ; $4888: $C0
 
-    call_open_dialog $009                         ; $4889
+    call_open_dialog Dialog009                    ; $4889
     call GetEntityTransitionCountdown             ; $488E: $CD $05 $0C
     ld   [hl], $C0                                ; $4891: $36 $C0
     jp   IncrementEntityState                     ; $4893: $C3 $12 $3B
@@ -195,7 +195,7 @@ func_005_4896::
     ld   [wC167], a                               ; $48BF: $EA $67 $C1
     ldh  a, [hDefaultMusicTrack]                  ; $48C2: $F0 $B0
     ld   [wMusicTrackToPlay], a                   ; $48C4: $EA $68 $D3
-    call_open_dialog $0FE                         ; $48C7
+    call_open_dialog Dialog0FE                    ; $48C7
     jp   IncrementEntityState                     ; $48CC: $C3 $12 $3B
 
 func_005_48CF::

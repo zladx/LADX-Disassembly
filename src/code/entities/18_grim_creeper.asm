@@ -25,7 +25,7 @@ GrimCreeperEntityHandler::
     jr   nz, .jr_7008                             ; $6FFD: $20 $09
 
     inc  [hl]                                     ; $6FFF: $34
-    call_open_dialog $025                         ; $7000
+    call_open_dialog Dialog025                    ; $7000
     jp   SetRoomStatus20                          ; $7005: $C3 $B9 $7F
 
 .jr_7008
@@ -244,7 +244,7 @@ GrimCreeperState6Handler::
     jr   nz, .jr_7152                             ; $714A: $20 $06
 
     inc  [hl]                                     ; $714C: $34
-    call_open_dialog $1DF                         ; $714D
+    call_open_dialog Dialog1DF                    ; $714D
 
 .jr_7152
     call IncrementEntityState                     ; $7152: $CD $12 $3B

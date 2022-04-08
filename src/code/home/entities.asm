@@ -1160,7 +1160,7 @@ BossIntro::
     add  hl, de                                   ; $3F43: $19
     ld   a, [hl]                                  ; $3F44: $7E
 .openDialog:
-    jp   OpenDialog                               ; $3F45: $C3 $85 $23
+    jp   OpenDialogInTable0                       ; $3F45: $C3 $85 $23
 
 data_3F48::
     db 1, 2, 4, 8, $10, $20, $40, $80             ; $3F48

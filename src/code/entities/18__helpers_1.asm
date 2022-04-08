@@ -7,7 +7,7 @@ label_018_51A4:
     call func_018_7D95                            ; $51A7: $CD $95 $7D
     ret  nc                                       ; $51AA: $D0
 
-    jp_open_dialog $196                           ; $51AB
+    jp_open_dialog Dialog196                      ; $51AB
 
 func_018_51B0::
     ld   a, [wDB74]                               ; $51B0: $FA $74 $DB

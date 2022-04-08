@@ -246,7 +246,7 @@ func_007_43C5::
     cp   e                                        ; $43E9: $BB
     ret  c                                        ; $43EA: $D8
 
-    call_open_dialog $124                         ; $43EB
+    call_open_dialog Dialog124                    ; $43EB
     ld   a, $04                                   ; $43F0: $3E $04
     call SetEntitySpriteVariant                   ; $43F2: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $43F5: $CD $05 $0C
@@ -338,7 +338,7 @@ func_007_4475::
     jr   c, .jr_4491                              ; $447F: $38 $10
 
     call func_007_48FD                            ; $4481: $CD $FD $48
-    call_open_dialog $117                         ; $4484
+    call_open_dialog Dialog117                    ; $4484
     ld   a, $04                                   ; $4489: $3E $04
     call SetEntitySpriteVariant                   ; $448B: $CD $0C $3B
     jp   IncrementEntityState                     ; $448E: $C3 $12 $3B
@@ -377,17 +377,17 @@ func_007_44B0::
     cp   $0B                                      ; $44C2: $FE $0B
     jr   nz, .jr_44CE                             ; $44C4: $20 $08
 
-    call_open_dialog $1E8                         ; $44C6
+    call_open_dialog Dialog1E8                    ; $44C6
     jp   IncrementEntityState                     ; $44CB: $C3 $12 $3B
 
 .jr_44CE
     cp   $0C                                      ; $44CE: $FE $0C
     jr   nc, .jr_44D7                             ; $44D0: $30 $05
 
-    jp_open_dialog $1E7                           ; $44D2
+    jp_open_dialog Dialog1E7                      ; $44D2
 
 .jr_44D7
-    jp_open_dialog $1ED                           ; $44D7
+    jp_open_dialog Dialog1ED                      ; $44D7
 
 func_007_44DC::
     ldh  a, [hFrameCounter]                       ; $44DC: $F0 $E7
@@ -412,11 +412,11 @@ func_007_44E8::
     ld   [wC167], a                               ; $44F6: $EA $67 $C1
     call GetEntityTransitionCountdown             ; $44F9: $CD $05 $0C
     ld   [hl], $D0                                ; $44FC: $36 $D0
-    jp_open_dialog $1E9                           ; $44FE
+    jp_open_dialog Dialog1E9                      ; $44FE
 
 .jr_4503
     ld   [hl], b                                  ; $4503: $70
-    jp_open_dialog $1EA                           ; $4504
+    jp_open_dialog Dialog1EA                      ; $4504
 
 func_007_4509::
     ld   a, $02                                   ; $4509: $3E $02
@@ -427,7 +427,7 @@ func_007_4509::
     jr   nz, .jr_4521                             ; $4515: $20 $0A
 
     ld   [hl], $20                                ; $4517: $36 $20
-    call_open_dialog $1EB                         ; $4519
+    call_open_dialog Dialog1EB                    ; $4519
     call IncrementEntityState                     ; $451E: $CD $12 $3B
 
 .jr_4521

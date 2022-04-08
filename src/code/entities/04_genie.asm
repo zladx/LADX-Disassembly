@@ -254,7 +254,7 @@ func_004_4155::
     jr   nz, .jr_418D                             ; $4185: $20 $06
 
     inc  [hl]                                     ; $4187: $34
-    call_open_dialog $17F                         ; $4188
+    call_open_dialog Dialog17F                    ; $4188
 
 .jr_418D
     call ClearEntitySpeed                         ; $418D: $CD $7F $3D
@@ -537,7 +537,7 @@ func_004_4345::
     ld   a, $53                                   ; $436B: $3E $53
 
 .jr_436D
-    jp   OpenDialog                               ; $436D: $C3 $85 $23
+    jp   OpenDialogInTable0                       ; $436D: $C3 $85 $23
 
 Data_004_4370::
     db   $10, $14, $18, $20, $28, $30, $38, $40

@@ -73,7 +73,7 @@ MazeSignpostEntityHandler::
     ld   [wMazeSignpostPos], a                    ; $62E8: $EA $73 $D4
     ld   a, JINGLE_WRONG_ANSWER                   ; $62EB: $3E $1D
     ldh  [hJingle], a                             ; $62ED: $E0 $F2
-    call_open_dialog $1AD                         ; "try again from the start"
+    call_open_dialog Dialog1AD                    ; "try again from the start"
 
 .skip:
     ret

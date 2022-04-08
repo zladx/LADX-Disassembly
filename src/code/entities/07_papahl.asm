@@ -83,10 +83,10 @@ PapahlEntityHandler::
     cp   $08                                      ; $4A5B: $FE $08
     jr   nc, .jr_4A64                             ; $4A5D: $30 $05
 
-    jp_open_dialog $027                           ; $4A5F
+    jp_open_dialog Dialog027                      ; $4A5F
 
 .jr_4A64
-    jp_open_dialog $176                           ; $4A64
+    jp_open_dialog Dialog176                      ; $4A64
 
 jr_007_4A69:
     ldh  a, [hRoomStatus]                         ; $4A69: $F0 $F8
@@ -182,14 +182,14 @@ func_007_4AF3::
     cp   $07                                      ; $4AFC: $FE $07
     jr   nz, .jr_4B0E                             ; $4AFE: $20 $0E
 
-    call_open_dialog $172                         ; $4B00
+    call_open_dialog Dialog172                    ; $4B00
     call IncrementEntityState                     ; $4B05: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $4B08: $CD $05 $0C
     ld   [hl], $C0                                ; $4B0B: $36 $C0
     ret                                           ; $4B0D: $C9
 
 .jr_4B0E
-    call_open_dialog $171                         ; $4B0E
+    call_open_dialog Dialog171                    ; $4B0E
     xor  a                                        ; $4B13: $AF
     ld   [wC167], a                               ; $4B14: $EA $67 $C1
     call IncrementEntityState                     ; $4B17: $CD $12 $3B
@@ -205,7 +205,7 @@ func_007_4B1C::
     jr   nz, .jr_4B3B                             ; $4B25: $20 $14
 
     ld   [wMusicTrackTiming], a                   ; $4B27: $EA $0B $C1
-    call_open_dialog $173                         ; $4B2A
+    call_open_dialog Dialog173                    ; $4B2A
     ld   a, TRADING_ITEM_HIBISCUS                 ; $4B2F: $3E $08
     ld   [wTradeSequenceItem], a                  ; $4B31: $EA $0E $DB
     ld   a, REPLACE_TILES_TRADING_ITEM            ; $4B34: $3E $0D
@@ -242,4 +242,4 @@ func_007_4B5B::
 
     xor  a                                        ; $4B62: $AF
     ld   [wC167], a                               ; $4B63: $EA $67 $C1
-    jp_open_dialog $175                           ; $4B66
+    jp_open_dialog Dialog175                      ; $4B66

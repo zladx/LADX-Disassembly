@@ -76,7 +76,7 @@ BananasSchuleState0Handler::
     cp   $03                                      ; $6D57: $FE $03
     jr   nz, .jr_6D63                             ; $6D59: $20 $08
 
-    call_open_dialog $1C7                         ; $6D5B
+    call_open_dialog Dialog1C7                    ; $6D5B
     jp   IncrementEntityState                     ; $6D60: $C3 $12 $3B
 
 .jr_6D63
@@ -103,10 +103,10 @@ BananasSchuleState1Handler::
     jr   z, .jr_6D86                              ; $6D7E: $28 $06
 
     ld   [hl], b                                  ; $6D80: $70
-    jp_open_dialog $1C9                           ; $6D81
+    jp_open_dialog Dialog1C9                      ; $6D81
 
 .jr_6D86
-    jp_open_dialog $1C8                           ; $6D86
+    jp_open_dialog Dialog1C8                      ; $6D86
 
 BananasSchuleState2Handler::
     ld   a, [wDialogState]                        ; $6D8B: $FA $9F $C1
@@ -189,7 +189,7 @@ BananasSchuleState3Handler::
     jr   nz, .jr_6E14                             ; $6E0C: $20 $06
 
     dec  [hl]                                     ; $6E0E: $35
-    call_open_dialog $1CA                         ; $6E0F
+    call_open_dialog Dialog1CA                    ; $6E0F
 
 .jr_6E14
     ldh  a, [hFrameCounter]                       ; $6E14: $F0 $E7
@@ -352,7 +352,7 @@ func_019_6F8C::
     cp   $0E                                      ; $6FA0: $FE $0E
     jr   nz, .jr_6FAB                             ; $6FA2: $20 $07
 
-    call_open_dialog $0D8                         ; $6FA4
+    call_open_dialog Dialog0D8                    ; $6FA4
     jr   jr_019_6FB0                              ; $6FA9: $18 $05
 
 .jr_6FAB
@@ -539,7 +539,7 @@ label_019_70A9:
 
 jr_019_7114:
     ld   a, e                                     ; $7114: $7B
-    jp   OpenDialog                               ; $7115: $C3 $85 $23
+    jp   OpenDialogInTable0                       ; $7115: $C3 $85 $23
 
 Data_019_7118::
     db   $F4, $00, $64, $03, $F4, $08, $66, $03, $04, $00, $68, $03, $04, $08, $6A, $03

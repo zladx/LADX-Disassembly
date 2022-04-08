@@ -71,7 +71,7 @@ MarinAtTheShoreState2Handler::
     call GetEntityTransitionCountdown             ; $61FC: $CD $05 $0C
     jr   nz, .jr_6209                             ; $61FF: $20 $08
 
-    call_open_dialog $1D5 ; "Want to talk a while?" ; $6201
+    call_open_dialog Dialog1D5 ; "Want to talk a while?" ; $6201
     call IncrementEntityState                     ; $6206: $CD $12 $3B
 
 .jr_6209
@@ -112,7 +112,7 @@ MarinAtTheShoreState3Handler::
 .playerDoesntWantToTalk
     xor  a                                        ; $623D: $AF
     ld   [wC167], a                               ; $623E: $EA $67 $C1
-    jp_open_dialog $1D6 ; "I'll just watch the waves" ; $6241
+    jp_open_dialog Dialog1D6 ; "I'll just watch the waves" ; $6241
 
 MarinAtTheShoreState4Handler::
     ld   a, [wDialogState]                        ; $6246: $FA $9F $C1

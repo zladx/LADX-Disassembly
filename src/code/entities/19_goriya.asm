@@ -83,7 +83,7 @@ Data_019_4634::
     jr   nz, jr_019_4663                          ; $4641: $20 $20
 
 .jr_4643
-    call_open_dialog $221                         ; $4643
+    call_open_dialog Dialog221                    ; $4643
     jp   IncrementEntityState                     ; $4648: $C3 $12 $3B
 
 ; Unused data
@@ -169,11 +169,11 @@ GoriyaState1Handler::
 
 jr_019_46DB:
     ld   [hl], b                                  ; $46DB: $70
-    jp_open_dialog $223                           ; $46DC
+    jp_open_dialog Dialog223                      ; $46DC
 
 jr_019_46E1:
     ld   [hl], b                                  ; $46E1: $70
-    jp_open_dialog $227                           ; $46E2
+    jp_open_dialog Dialog227                      ; $46E2
 
 GoriyaState3Handler::
     call ReturnIfNonInteractive_19                ; $46E7: $CD $3D $7D
@@ -215,7 +215,7 @@ GoriyaState3Handler::
 
 jr_019_4725:
     ld   [hl], b                                  ; $4725: $70
-    jp_open_dialog $223                           ; $4726
+    jp_open_dialog Dialog223                      ; $4726
 
 Data_019_472B::
     db   $00, $17, $84, $17, $80, $17, $82, $17, $86, $17, $88, $17, $8A, $14, $8C, $14

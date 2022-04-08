@@ -168,7 +168,7 @@ jr_007_559A:
     jr   nz, jr_007_55B6                          ; $55AF: $20 $05
 
 .jr_55B1
-    call OpenDialog                               ; $55B1: $CD $85 $23
+    call OpenDialogInTable0                       ; $55B1: $CD $85 $23
     jr   jr_007_55B9                              ; $55B4: $18 $03
 
 jr_007_55B6:

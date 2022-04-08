@@ -887,7 +887,7 @@ func_001_5A59::
     ld   hl, MapSpecialLocationNamesLookupTable   ; $5A63: $21 $09 $59
     add  hl, de                                   ; $5A66: $19
     ld   a, [hl]                                  ; $5A67: $7E
-    jp   OpenDialog                               ; $5A68: $C3 $85 $23
+    jp   OpenDialogInTable0                       ; $5A68: $C3 $85 $23
 
 Data_001_5A6B::
     db 0, 1, $FF                                  ; $5A6B
@@ -2325,7 +2325,7 @@ OpenDungeonNameDialog::
     ; Open Dialog n° (hMapId + $56)
     ldh  a, [hMapId]                              ; $61FB: $F0 $F7
     add  a, $56                                   ; $61FD: $C6 $56
-    call OpenDialog                               ; $61FF: $CD $85 $23
+    call OpenDialogInTable0                       ; $61FF: $CD $85 $23
 .return
     ret                                           ; $6202: $C9
 

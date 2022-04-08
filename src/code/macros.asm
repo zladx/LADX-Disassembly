@@ -70,31 +70,38 @@ entities_end: macro
     db   ENTITIES_END
 endm
 
+; Define a pointer to a dialog in a pointers table.
+;
+; This macro:
+; - emits a `dw DialogXXX` word with the pointer,
+; - defines a `DialogXXX_IndexOffset` label, to allow looking up the dialog by index.
+;
+; Usage:
+;   dialog_pointer Dialog123
+dialog_pointer: macro
+\1_IdxOffset:
+    dw \1
+endm
+
 ; Open a dialog in the correct dialogs table (using a `call` instruction)
 ; Usage:
-;   call_open_dialog $123 ; will open Dialog123
+;   call_open_dialog Dialog123 ; emits "ld a, $23 \n call OpenDialogInTable1"
 call_open_dialog: macro
-    ld   a, LOW(\1)
-    if HIGH(\1) == 1
-        call OpenDialogInTable1
-    elif HIGH(\1) == 2
-        call OpenDialogInTable2
-    else
-        call OpenDialog
-    endc
+    ld   a, LOW((\1_IdxOffset - DialogPointerTable) / 2)
+    ; Ihe code needs to call the correct function, but the exact dialog index isn't available at compile-time
+    ; (only at link-time), so we can't use IF().
+    ; Instead multiply the functions by a boolean, that resolves either to 0 or 1 at link-time.
+    call (OpenDialogInTable0 * (HIGH((\1_IdxOffset - DialogPointerTable) / 2) == 0)) \
+       | (OpenDialogInTable1 * (HIGH((\1_IdxOffset - DialogPointerTable) / 2) == 1)) \
+       | (OpenDialogInTable2 * (HIGH((\1_IdxOffset - DialogPointerTable) / 2) == 2))
 endm
 
 ; Open a dialog in the correct dialogs table (using a `jp` instruction)
 ; Usage:
-;   jp_open_dialog $123 ; will open Dialog123
+;   jp_open_dialog Dialog123 ; emits "ld a, $23 \n jp OpenDialogInTable1"
 jp_open_dialog: macro
-    ld   a, LOW(\1)
-    if HIGH(\1) == 1
-        jp   OpenDialogInTable1
-    elif HIGH(\1) == 2
-        jp   OpenDialogInTable2
-    else
-        jp   OpenDialog
-    endc
+    ld   a, LOW((\1_IdxOffset - DialogPointerTable) / 2)
+    jp  (OpenDialogInTable0 * (HIGH((\1_IdxOffset - DialogPointerTable) / 2) == 0)) \
+      | (OpenDialogInTable1 * (HIGH((\1_IdxOffset - DialogPointerTable) / 2) == 1)) \
+      | (OpenDialogInTable2 * (HIGH((\1_IdxOffset - DialogPointerTable) / 2) == 2))
 endm
-

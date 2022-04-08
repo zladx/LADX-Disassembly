@@ -96,7 +96,7 @@ RichardState1Handler::
     or   $10                                      ; $4085: $F6 $10
     ldh  [hRoomStatus], a                         ; $4087: $E0 $F8
     ld   [wIndoorBRoomStatus + $C7], a            ; $4089: $EA $C7 $DA
-    call_open_dialog $13A                         ; $408C
+    call_open_dialog Dialog13A                    ; $408C
     ld   a, [wRichardSpokenFlag]                  ; $4091: $FA $55 $DB
     cp   $02                                      ; $4094: $FE $02
     jr   nc, .jr_409D                             ; $4096: $30 $05

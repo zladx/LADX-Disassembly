@@ -96,11 +96,11 @@ jr_005_4557:
     and  $3F                                      ; $459D: $E6 $3F
     jr   nz, .jr_45A8                             ; $459F: $20 $07
 
-    call_open_dialog $276                         ; $45A1
+    call_open_dialog Dialog276                    ; $45A1
     jr   jr_005_45AD                              ; $45A6: $18 $05
 
 .jr_45A8
-    call_open_dialog $08F                         ; $45A8
+    call_open_dialog Dialog08F                    ; $45A8
 
 jr_005_45AD:
     ld   hl, wEntitiesPrivateState1Table          ; $45AD: $21 $B0 $C2

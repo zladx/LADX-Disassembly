@@ -104,7 +104,7 @@ MarinAtTalTalHeightsState0Handler::
     cp   $90                                      ; $5F53: $FE $90
     ret  nc                                       ; $5F55: $D0
 
-    call_open_dialog $235                         ; $5F56
+    call_open_dialog Dialog235                    ; $5F56
     jp   IncrementEntityState                     ; $5F5B: $C3 $12 $3B
 
 func_018_5F5E::
@@ -130,7 +130,7 @@ func_018_5F5E::
 MarinAtTalTalHeightsState1Handler::
     call func_018_5F5E                            ; $5F73: $CD $5E $5F
     call ReturnIfNonInteractive_18                ; $5F76: $CD $E8 $7D
-    call_open_dialog $236                         ; $5F79
+    call_open_dialog Dialog236                    ; $5F79
     jp   IncrementEntityState                     ; $5F7E: $C3 $12 $3B
 
 MarinAtTalTalHeightsState2Handler::
@@ -192,7 +192,7 @@ MarinAtTalTalHeightsState4Handler::
     call GetEntityTransitionCountdown             ; $5FE1: $CD $05 $0C
     ret  nz                                       ; $5FE4: $C0
 
-    call_open_dialog $237                         ; $5FE5
+    call_open_dialog Dialog237                    ; $5FE5
     jp   IncrementEntityState                     ; $5FEA: $C3 $12 $3B
 
 MarinAtTalTalHeightsState5Handler::
@@ -200,7 +200,7 @@ MarinAtTalTalHeightsState5Handler::
     call ReturnIfNonInteractive_18                ; $5FF0: $CD $E8 $7D
     ld   a, $02                                   ; $5FF3: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5FF5: $E0 $A1
-    call_open_dialog $238                         ; $5FF7
+    call_open_dialog Dialog238                    ; $5FF7
     jp   IncrementEntityState                     ; $5FFC: $C3 $12 $3B
 
 MarinAtTalTalHeightsState6Handler::
@@ -208,7 +208,7 @@ MarinAtTalTalHeightsState6Handler::
     ld   a, $02                                   ; $6002: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $6004: $E0 $A1
     call ReturnIfNonInteractive_18                ; $6006: $CD $E8 $7D
-    call_open_dialog $239                         ; $6009
+    call_open_dialog Dialog239                    ; $6009
     ld   hl, wEntitiesPrivateState1Table          ; $600E: $21 $B0 $C2
     add  hl, bc                                   ; $6011: $09
     ld   [hl], b                                  ; $6012: $70
@@ -382,7 +382,7 @@ TarinAtTalTalHeightsState0Handler::
     cp   $70                                      ; $611A: $FE $70
     ret  nc                                       ; $611C: $D0
 
-    call_open_dialog $23B                         ; $611D
+    call_open_dialog Dialog23B                    ; $611D
     ld   a, $03                                   ; $6122: $3E $03
     ldh  [hLinkDirection], a                      ; $6124: $E0 $9E
     ld   a, [wMarinEntityIndex]                   ; $6126: $FA $0F $C5
@@ -404,7 +404,7 @@ TarinAtTalTalHeightsState1Handler::
     add  hl, de                                   ; $6141: $19
     ld   [hl], $03                                ; $6142: $36 $03
     call ReturnIfNonInteractive_18                ; $6144: $CD $E8 $7D
-    call_open_dialog $23A                         ; $6147
+    call_open_dialog Dialog23A                    ; $6147
     jp   IncrementEntityState                     ; $614C: $C3 $12 $3B
 
 TarinAtTalTalHeightsState2Handler::

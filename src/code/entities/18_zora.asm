@@ -54,7 +54,7 @@ ZoraEntityHandler::
     call func_018_7D95                            ; $4A0E: $CD $95 $7D
     jr   nc, .jr_4A18                             ; $4A11: $30 $05
 
-    call_open_dialog $126                         ; $4A13
+    call_open_dialog Dialog126                    ; $4A13
 
 .jr_4A18
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4A18: $21 $40 $C3

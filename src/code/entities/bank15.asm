@@ -52,7 +52,7 @@ func_015_45FE::
     jr   nz, .jr_460B                             ; $4603: $20 $06
 
     dec  [hl]                                     ; $4605: $35
-    jp_open_dialog $0D7                           ; $4606
+    jp_open_dialog Dialog0D7                      ; $4606
 
 .jr_460B
     and  a                                        ; $460B: $A7

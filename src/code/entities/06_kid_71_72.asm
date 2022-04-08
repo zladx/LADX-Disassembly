@@ -153,7 +153,7 @@ func_006_60FD::
     cp   ENTITY_KID_71                            ; $6118: $FE $71
     jr   nz, .kid71End                            ; $611A: $20 $05
 
-    call_open_dialog $220                         ; $611C
+    call_open_dialog Dialog220                    ; $611C
 .kid71End
 
     jp   label_006_60F7                           ; $6121: $C3 $F7 $60
@@ -177,7 +177,7 @@ func_006_6134::
     call func_006_645D                            ; $6142: $CD $5D $64
     jr   nc, .jr_614C                             ; $6145: $30 $05
 
-    call_open_dialog $220                         ; $6147
+    call_open_dialog Dialog220                    ; $6147
 
 .jr_614C
     call AddEntityZSpeedToPos_06                  ; $614C: $CD $7A $65

@@ -130,7 +130,7 @@ FishermanIdleHandler::
 
     ld   a, $02                                   ; $5FE2: $3E $02
     ld   [wC167], a                               ; $5FE4: $EA $67 $C1
-    call_open_dialog $045 ; "How about some fishing" ; $5FE7
+    call_open_dialog Dialog045 ; "How about some fishing" ; $5FE7
     jp   IncrementEntityState                     ; $5FEC: $C3 $12 $3B
 
 ; Displaying the dialog that asks if Link's want to fish
@@ -148,7 +148,7 @@ FishermanProposingHandler::
     ld   [hl], b                                  ; $5FFD: $70
     xor  a                                        ; $5FFE: $AF
     ld   [wC167], a                               ; $5FFF: $EA $67 $C1
-    jp_open_dialog $046 ; "Too bad"               ; $6002
+    jp_open_dialog Dialog046 ; "Too bad"          ; $6002
 
 .accepted
     push hl                                       ; $6007: $E5
@@ -185,13 +185,13 @@ FishermanProposingHandler::
 
     ld   a, FISHING_GAME_PRICE
     ld   [wSubstractRupeeBufferLow], a            ; $602F: $EA $92 $DB
-    jp_open_dialog $047 ; "Here's how it works"   ; $6032
+    jp_open_dialog Dialog047 ; "Here's how it works" ; $6032
 
 .notEnoughRupees
     ld   [hl], b                                  ; $6037: $70
     xor  a                                        ; $6038: $AF
     ld   [wC167], a                               ; $6039: $EA $67 $C1
-    jp_open_dialog $04E ; "Not enough rupees"     ; $603C
+    jp_open_dialog Dialog04E ; "Not enough rupees" ; $603C
 
 ; Fishing accepted; explaining the rules
 FishermanExplainingRulesHandler::
@@ -464,7 +464,7 @@ func_004_61E5::
     cp   $05                                      ; $61F3: $FE $05
     jr   c, .jr_6202                              ; $61F5: $38 $0B
 
-    call_open_dialog $04B                         ; $61F7
+    call_open_dialog Dialog04B                    ; $61F7
     call IncrementEntityState                     ; $61FC: $CD $12 $3B
     ld   [hl], $05                                ; $61FF: $36 $05
     ret                                           ; $6201: $C9
@@ -504,17 +504,17 @@ func_004_61E5::
 
     ld   a, FISHING_GAME_PRICE                    ; $6228: $3E $0A
     ld   [wSubstractRupeeBufferLow], a            ; $622A: $EA $92 $DB
-    call_open_dialog $047                         ; $622D
+    call_open_dialog Dialog047                    ; $622D
     call IncrementEntityState                     ; $6232: $CD $12 $3B
     ld   [hl], b                                  ; $6235: $70
     ret                                           ; $6236: $C9
 
 jr_004_6237:
-    call_open_dialog $046                         ; $6237
+    call_open_dialog Dialog046                    ; $6237
     jp   IncrementEntityState                     ; $623C: $C3 $12 $3B
 
 jr_004_623F:
-    call_open_dialog $04E                         ; $623F
+    call_open_dialog Dialog04E                    ; $623F
     jp   IncrementEntityState                     ; $6244: $C3 $12 $3B
 
 func_004_6247::
@@ -536,10 +536,10 @@ func_004_6252::
     and  a                                        ; $625F: $A7
     jr   nz, .jr_6267                             ; $6260: $20 $05
 
-    jp_open_dialog $04C                           ; $6262
+    jp_open_dialog Dialog04C                      ; $6262
 
 .jr_6267
-    jp_open_dialog $046                           ; $6267
+    jp_open_dialog Dialog046                      ; $6267
 
 func_004_626C::
     ret                                           ; $626C: $C9
@@ -741,7 +741,7 @@ jr_004_6354:
 
     ld   hl, wEntitiesStateTable                  ; $637A: $21 $90 $C2
     ld   [hl], $03                                ; $637D: $36 $03
-    call_open_dialog $048                         ; $637F
+    call_open_dialog Dialog048                    ; $637F
     call ClearEntityStatusBank04                  ; $6384: $CD $7A $6D
     ld   e, $0F                                   ; $6387: $1E $0F
     ld   d, b                                     ; $6389: $50
@@ -1296,7 +1296,7 @@ jr_004_6631:
 
     ld   hl, wEntitiesStateTable                  ; $667C: $21 $90 $C2
     ld   [hl], $03                                ; $667F: $36 $03
-    call_open_dialog $049                         ; $6681
+    call_open_dialog Dialog049                    ; $6681
     jp   ClearEntityStatusBank04                  ; $6686: $C3 $7A $6D
 
 func_004_6689::
@@ -1376,7 +1376,7 @@ jr_004_66E6:
 
     ; Open the prize dialog
     ld   [hl], e                                  ; $66FA: $73
-    call OpenDialog                               ; $66FB: $CD $85 $23
+    call OpenDialogInTable0                       ; $66FB: $CD $85 $23
 
 jr_004_66FE:
     jp   ClearEntityStatusBank04                  ; $66FE: $C3 $7A $6D

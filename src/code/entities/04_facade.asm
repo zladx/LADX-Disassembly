@@ -186,7 +186,7 @@ func_004_5158::
     ld   [hl], $A0                                ; $5172: $36 $A0
     call GetEntityDropTimer                       ; $5174: $CD $FB $0B
     ld   [hl], $FF                                ; $5177: $36 $FF
-    jp_open_dialog $0B6                           ; $5179
+    jp_open_dialog Dialog0B6                      ; $5179
 
 Data_004_517E::
     db   $03, $02, $04, $02

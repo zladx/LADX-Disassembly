@@ -86,7 +86,7 @@ WalrusState0Handler::
     call func_018_7D7C                            ; $5581: $CD $7C $7D
     ret  nc                                       ; $5584: $D0
 
-    jp_open_dialog $1E0                           ; $5585
+    jp_open_dialog Dialog1E0                      ; $5585
 
 .jr_558A
     call func_018_7EB2                            ; $558A: $CD $B2 $7E
@@ -115,7 +115,7 @@ WalrusState0Handler::
     ret  nz                                       ; $55B0: $C0
 
     call IncrementEntityState                     ; $55B1: $CD $12 $3B
-    call_open_dialog $1E1                         ; $55B4
+    call_open_dialog Dialog1E1                    ; $55B4
     jp   label_018_59AC                           ; $55B9: $C3 $AC $59
 
 WalrusWakingUpHandler::
@@ -137,7 +137,7 @@ WalrusWakingUpHandler::
 
 .jr_55D8
     ld   [hl], $08                                ; $55D8: $36 $08
-    jp_open_dialog $1E4                           ; $55DA
+    jp_open_dialog Dialog1E4                      ; $55DA
 
 WalrusState2Handler::
     ld   a, $01                                   ; $55DF: $3E $01
@@ -342,7 +342,7 @@ WalrusDisappearHandler::
     ld   [wMusicTrackToPlay], a                   ; $575C: $EA $68 $D3
     ld   a, $FF                                   ; $575F: $3E $FF
     call SetEntitySpriteVariant                   ; $5761: $CD $0C $3B
-    call_open_dialog $1E2                         ; $5764
+    call_open_dialog Dialog1E2                    ; $5764
     ld   a, $03                                   ; $5769: $3E $03
     call func_018_59AE                            ; $576B: $CD $AE $59
     ld   a, DIRECTION_DOWN                        ; $576E: $3E $03
@@ -511,7 +511,7 @@ func_018_58F1::
     jr   nz, .jr_590D                             ; $5905: $20 $06
 
     dec  [hl]                                     ; $5907: $35
-    call_open_dialog $1E6                         ; $5908
+    call_open_dialog Dialog1E6                    ; $5908
 
 .jr_590D
     call GetEntityTransitionCountdown             ; $590D: $CD $05 $0C

@@ -155,7 +155,7 @@ BigFairyWaitingHandler::
     call IncrementEntityState                     ; $7178: $CD $12 $3B
     call GetEntityDropTimer                       ; $717B: $CD $FB $0B
     ld   [hl], $48                                ; $717E: $36 $48
-    jp_open_dialog $024                           ; $7180
+    jp_open_dialog Dialog024                      ; $7180
 
 BigFairyHealingHandler::
     call GetEntityDropTimer                       ; $7185: $CD $FB $0B

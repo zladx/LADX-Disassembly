@@ -46,4 +46,4 @@ AnimalD1EntityHandler::
 
     call ShouldLinkTalkToEntity_15                ; $7FC5: $CD $BC $7A
     ret  nc                                       ; $7FC8: $D0
-    jp_open_dialog $196                           ; $7FC9
+    jp_open_dialog Dialog196                      ; $7FC9

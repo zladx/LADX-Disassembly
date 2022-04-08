@@ -159,7 +159,7 @@ func_036_40C5::
 jr_036_40DF:
     ld   a, LINK_ANIMATION_STATE_STANDING_LEFT    ; $40DF: $3E $06
     ldh  [hLinkAnimationState], a                 ; $40E1: $E0 $9D
-    call_open_dialog $2A7                         ; $40E3
+    call_open_dialog Dialog2A7                    ; $40E3
     jp   IncrementEntityState                     ; $40E8: $C3 $12 $3B
 
 func_036_40EB::
@@ -389,7 +389,7 @@ func_036_4221::
     and  a                                        ; $4243: $A7
     ret  nz                                       ; $4244: $C0
 
-    call_open_dialog $2A6                         ; $4245
+    call_open_dialog Dialog2A6                    ; $4245
     jp   IncrementEntityState                     ; $424A: $C3 $12 $3B
 
 func_036_424D::
@@ -624,13 +624,13 @@ func_036_43BD::
     and  $7F                                      ; $43DC: $E6 $7F
     jr   z, .jr_43E6                              ; $43DE: $28 $06
 
-    call_open_dialog $2AD                         ; $43E0
+    call_open_dialog Dialog2AD                    ; $43E0
     ret                                           ; $43E5: $C9
 
 .jr_43E6
     ld   a, $02                                   ; $43E6: $3E $02
     ld   [wC167], a                               ; $43E8: $EA $67 $C1
-    call_open_dialog $10C                         ; $43EB
+    call_open_dialog Dialog10C                    ; $43EB
     jp   IncrementEntityState                     ; $43F0: $C3 $12 $3B
 
 func_036_43F3::
@@ -640,12 +640,12 @@ func_036_43F3::
 
     xor  a                                        ; $43F9: $AF
     ld   [wC167], a                               ; $43FA: $EA $67 $C1
-    call_open_dialog $10D                         ; $43FD
+    call_open_dialog Dialog10D                    ; $43FD
     jp   IncrementEntityState                     ; $4402: $C3 $12 $3B
 
 .jr_4405
     call func_036_4365                            ; $4405: $CD $65 $43
-    call_open_dialog $294                         ; $4408
+    call_open_dialog Dialog294                    ; $4408
     call PointHLToEntityPosX                      ; $440D: $CD $23 $6C
     ld   a, [hl]                                  ; $4410: $7E
     ld   hl, wEntitiesPrivateState2Table          ; $4411: $21 $C0 $C2
@@ -764,7 +764,7 @@ func_036_44A4::
     call GetEntityTransitionCountdown             ; $44A7: $CD $05 $0C
     ret  nz                                       ; $44AA: $C0
 
-    call_open_dialog $10F                         ; $44AB
+    call_open_dialog Dialog10F                    ; $44AB
     jp   IncrementEntityState                     ; $44B0: $C3 $12 $3B
 
 func_036_44B3::
@@ -785,7 +785,7 @@ func_036_44C2::
 
     xor  a                                        ; $44CB: $AF
     ld   [wC167], a                               ; $44CC: $EA $67 $C1
-    call_open_dialog $10D                         ; $44CF
+    call_open_dialog Dialog10D                    ; $44CF
     call IncrementEntityState                     ; $44D4: $CD $12 $3B
     ld   [hl], $03                                ; $44D7: $36 $03
     ret                                           ; $44D9: $C9
@@ -806,7 +806,7 @@ func_036_44C2::
     cp   $05                                      ; $44ED: $FE $05
     jr   nz, .jr_44F6                             ; $44EF: $20 $05
 
-    call_open_dialog $296                         ; $44F1
+    call_open_dialog Dialog296                    ; $44F1
 
 .jr_44F6
     call IncrementEntityState                     ; $44F6: $CD $12 $3B
@@ -868,7 +868,7 @@ jr_036_452D:
     cp   [hl]                                     ; $454A: $BE
     ret  nz                                       ; $454B: $C0
 
-    call_open_dialog $294                         ; $454C
+    call_open_dialog Dialog294                    ; $454C
     ld   a, $07                                   ; $4551: $3E $07
     call SetEntityState                           ; $4553: $CD $07 $6C
     ret                                           ; $4556: $C9
@@ -1037,7 +1037,7 @@ func_036_462B::
     ld   [wPhotos2], a                            ; $463C: $EA $0D $DC
     xor  a                                        ; $463F: $AF
     ld   [hl], a                                  ; $4640: $77
-    call_open_dialog $297                         ; $4641
+    call_open_dialog Dialog297                    ; $4641
     jp   IncrementEntityState                     ; $4646: $C3 $12 $3B
 
 func_036_4649::
@@ -1185,7 +1185,7 @@ func_036_46F9::
     cp   $2E                                      ; $470E: $FE $2E
     ret  nc                                       ; $4710: $D0
 
-    call_open_dialog $298                         ; $4711
+    call_open_dialog Dialog298                    ; $4711
     call PointHLToEntitySpriteVariant             ; $4716: $CD $02 $6C
     ld   [hl], $00                                ; $4719: $36 $00
     jp   IncrementEntityState                     ; $471B: $C3 $12 $3B
@@ -1219,7 +1219,7 @@ func_036_4742::
     xor  a                                        ; $4749: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $474A: $E0 $A1
     ld   [wC167], a                               ; $474C: $EA $67 $C1
-    call_open_dialog $299                         ; $474F
+    call_open_dialog Dialog299                    ; $474F
     ld   a, [wPhotos1]                            ; $4754: $FA $0C $DC
     or   $01                                      ; $4757: $F6 $01
     ld   [wPhotos1], a                            ; $4759: $EA $0C $DC
@@ -1375,7 +1375,7 @@ func_036_4820::
 
     ld   a, LINK_ANIMATION_STATE_STANDING_RIGHT   ; $4824: $3E $0A
     ldh  [hLinkAnimationState], a                 ; $4826: $E0 $9D
-    call_open_dialog $108                         ; $4828
+    call_open_dialog Dialog108                    ; $4828
     jp   IncrementEntityState                     ; $482D: $C3 $12 $3B
 
 func_036_4830::
@@ -1414,7 +1414,7 @@ func_036_4830::
 .jr_4859
     call PointHLToEntitySpriteVariant             ; $4859: $CD $02 $6C
     ld   [hl], $02                                ; $485C: $36 $02
-    call_open_dialog $109                         ; $485E
+    call_open_dialog Dialog109                    ; $485E
     jp   IncrementEntityState                     ; $4863: $C3 $12 $3B
 
 func_036_4866::
@@ -1933,7 +1933,7 @@ func_036_4B3B::
     jr   nz, .jr_4B4D                             ; $4B3E: $20 $0D
 
     call IncrementEntityState                     ; $4B40: $CD $12 $3B
-    call_open_dialog $1EF                         ; $4B43
+    call_open_dialog Dialog1EF                    ; $4B43
     ld   a, $03                                   ; $4B48: $3E $03
     jp   SetEntitySpriteVariant                   ; $4B4A: $C3 $0C $3B
 
@@ -2025,7 +2025,7 @@ func_036_4BC3::
     call GetEntityTransitionCountdown             ; $4BC3: $CD $05 $0C
     ret  nz                                       ; $4BC6: $C0
 
-    call_open_dialog $1F8                         ; $4BC7
+    call_open_dialog Dialog1F8                    ; $4BC7
     jp   IncrementEntityState                     ; $4BCC: $C3 $12 $3B
 
 func_036_4BCF::
@@ -2257,7 +2257,7 @@ func_036_4D03::
     cp   $10                                      ; $4D2E: $FE $10
     jr   nz, jr_036_4D6E                          ; $4D30: $20 $3C
 
-    call_open_dialog $26F                         ; $4D32
+    call_open_dialog Dialog26F                    ; $4D32
     jr   jr_036_4D6E                              ; $4D37: $18 $35
 
 Data_036_4D39::
@@ -2345,7 +2345,7 @@ func_036_4DB7::
     inc  hl                                       ; $4DC2: $23
     ld   [hl], $14                                ; $4DC3: $36 $14
     pop  bc                                       ; $4DC5: $C1
-    call_open_dialog $26D                         ; $4DC6
+    call_open_dialog Dialog26D                    ; $4DC6
     call IncrementEntityState                     ; $4DCB: $CD $12 $3B
     ret                                           ; $4DCE: $C9
 
@@ -2439,7 +2439,7 @@ func_036_4E27::
     jr   nz, jr_036_4E5C                          ; $4E48: $20 $12
 
     inc  [hl]                                     ; $4E4A: $34
-    call_open_dialog $26E                         ; $4E4B
+    call_open_dialog Dialog26E                    ; $4E4B
 
 jr_036_4E50:
     call PointHLToEntitySpeedX                    ; $4E50: $CD $EE $6B
@@ -2838,7 +2838,7 @@ TunicFairyState0::
     and  J_A                                      ; $50FC: $E6 $10
     ret  z                                        ; $50FE: $C8
 
-    call_open_dialog $268                         ; $50FF
+    call_open_dialog Dialog268                    ; $50FF
     xor  a                                        ; $5104: $AF
     ld   [wC16C], a                               ; $5105: $EA $6C $C1
     ld   [wTransitionSequenceCounter], a          ; $5108: $EA $6B $C1
@@ -2890,7 +2890,7 @@ TunicFairyState2::
     ret                                           ; $5147: $C9
 
 .jr_5148
-    call_open_dialog $25C                         ; $5148
+    call_open_dialog Dialog25C                    ; $5148
     ld   a, $01                                   ; $514D: $3E $01
     call SetEntityState                           ; $514F: $CD $07 $6C
     ret                                           ; $5152: $C9
@@ -2940,7 +2940,7 @@ TunicFairyState4::
     call GetEntityTransitionCountdown             ; $5199: $CD $05 $0C
     ret  nz                                       ; $519C: $C0
 
-    call_open_dialog $26B                         ; $519D
+    call_open_dialog Dialog26B                    ; $519D
     call IncrementEntityState                     ; $51A2: $CD $12 $3B
     ret                                           ; $51A5: $C9
 
@@ -3305,7 +3305,7 @@ func_036_5428::
     ei                                            ; $5440: $FB
     ld   a, $3A                                   ; $5441: $3E $3A
     ldh  [hLinkPositionY], a                      ; $5443: $E0 $99
-    call_open_dialog $26C                         ; $5445
+    call_open_dialog Dialog26C                    ; $5445
     call IncrementEntityState                     ; $544A: $CD $12 $3B
     ret                                           ; $544D: $C9
 
@@ -3508,7 +3508,7 @@ func_036_5561::
     call GetEntityTransitionCountdown             ; $5568: $CD $05 $0C
     ret  nz                                       ; $556B: $C0
 
-    call_open_dialog $261                         ; $556C
+    call_open_dialog Dialog261                    ; $556C
     call IncrementEntityState                     ; $5571: $CD $12 $3B
     ret                                           ; $5574: $C9
 
@@ -3661,7 +3661,7 @@ func_036_55B1::
     jr   nz, .jr_5661                             ; $5658: $20 $07
 
     ld   [hl], $01                                ; $565A: $36 $01
-    call_open_dialog $269                         ; $565C
+    call_open_dialog Dialog269                    ; $565C
 
 .jr_5661
     ld   a, $10                                   ; $5661: $3E $10
@@ -4125,7 +4125,7 @@ func_036_58E4::
     and  J_A                                      ; $5905: $E6 $10
     jr   z, ret_036_5911                          ; $5907: $28 $08
 
-    call_open_dialog $266                         ; $5909
+    call_open_dialog Dialog266                    ; $5909
     call IncrementEntityState                     ; $590E: $CD $12 $3B
 
 ret_036_5911:
@@ -4141,7 +4141,7 @@ func_036_5912::
     jr   nz, .jr_592A                             ; $591B: $20 $0D
 
     call func_036_6C0D                            ; $591D: $CD $0D $6C
-    call_open_dialog $267                         ; $5920
+    call_open_dialog Dialog267                    ; $5920
     call IncrementEntityState                     ; $5925: $CD $12 $3B
     jr   ret_036_592F                             ; $5928: $18 $05
 
@@ -4282,7 +4282,7 @@ func_036_59C3::
     and  a                                        ; $59EF: $A7
     jr   nz, .jr_59F9                             ; $59F0: $20 $07
 
-    call_open_dialog $262                         ; $59F2
+    call_open_dialog Dialog262                    ; $59F2
     jr   jr_036_5A00                              ; $59F7: $18 $07
 
 .jr_59F9
@@ -4308,7 +4308,7 @@ ENDC
     cp   e                                        ; $5A12: $BB
     jr   nz, .jr_5A1E                             ; $5A13: $20 $09
 
-    call_open_dialog $264                         ; $5A15
+    call_open_dialog Dialog264                    ; $5A15
     call IncrementEntityState                     ; $5A1A: $CD $12 $3B
     ret                                           ; $5A1D: $C9
 
@@ -4331,7 +4331,7 @@ ENDC
 .jr_5A2B
     ld   a, $02                                   ; $5A2B: $3E $02
     call SetEntitySpriteVariant                   ; $5A2D: $CD $0C $3B
-    call_open_dialog $265                         ; $5A30
+    call_open_dialog Dialog265                    ; $5A30
     ld   a, $03                                   ; $5A35: $3E $03
     call SetEntityState                           ; $5A37: $CD $07 $6C
     ret                                           ; $5A3A: $C9

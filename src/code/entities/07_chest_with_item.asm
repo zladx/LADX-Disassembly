@@ -198,7 +198,7 @@ jr_007_7C93:
     cp   UNKNOWN_ROOM_96                          ; @TODO Master Stalfos "screw you" letter chest?
     jr   nz, .jr_7CB1                             ; $7CA8: $20 $07
 
-    call_open_dialog $111                         ; $7CAA
+    call_open_dialog Dialog111                    ; $7CAA
     jr   jr_007_7CE9                              ; $7CAF: $18 $38
 
 .jr_7CB1

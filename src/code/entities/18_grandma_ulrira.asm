@@ -126,11 +126,11 @@ jr_018_4DA3:
     jr   nz, .jr_4DB5                             ; $4DA8: $20 $0B
 
     ld   [wC167], a                               ; $4DAA: $EA $67 $C1
-    call_open_dialog $15C                         ; $4DAD
+    call_open_dialog Dialog15C                    ; $4DAD
     jp   IncrementEntityState                     ; $4DB2: $C3 $12 $3B
 
 .jr_4DB5
-    jp_open_dialog $15B                           ; $4DB5
+    jp_open_dialog Dialog15B                      ; $4DB5
 
 GrandmaUlriraState1Handler::
     ld   a, [wDialogAskSelectionIndex]            ; $4DBA: $FA $77 $C1
@@ -147,7 +147,7 @@ GrandmaUlriraState1Handler::
 .jr_4DCF
     xor  a                                        ; $4DCF: $AF
     ld   [wC167], a                               ; $4DD0: $EA $67 $C1
-    call_open_dialog $159                         ; $4DD3
+    call_open_dialog Dialog159                    ; $4DD3
     call IncrementEntityState                     ; $4DD8: $CD $12 $3B
     ld   [hl], b                                  ; $4DDB: $70
     ret                                           ; $4DDC: $C9
@@ -160,7 +160,7 @@ GrandmaUlriraState2Handler::
     ld   [wTradeSequenceItem], a                  ; $4DE4: $EA $0E $DB
     ld   a, REPLACE_TILES_TRADING_ITEM            ; $4DE7: $3E $0D
     ldh  [hReplaceTiles], a                       ; $4DE9: $E0 $A5
-    call_open_dialog $15D                         ; $4DEB
+    call_open_dialog Dialog15D                    ; $4DEB
     jp   IncrementEntityState                     ; $4DF0: $C3 $12 $3B
 
 .jr_4DF3

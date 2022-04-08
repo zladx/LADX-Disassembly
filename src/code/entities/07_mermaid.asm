@@ -168,7 +168,7 @@ func_007_4759::
     call IncrementEntityState                     ; $4786: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $4789: $CD $05 $0C
     ld   [hl], $14                                ; $478C: $36 $14
-    jp_open_dialog $1F1                           ; $478E
+    jp_open_dialog Dialog1F1                      ; $478E
 
 .jr_4793
     call func_007_7D43                            ; $4793: $CD $43 $7D
@@ -178,13 +178,13 @@ func_007_4759::
     cp   $0C                                      ; $479A: $FE $0C
     jr   nz, .jr_47A9                             ; $479C: $20 $0B
 
-    call_open_dialog $1F2                         ; $479E
+    call_open_dialog Dialog1F2                    ; $479E
     call IncrementEntityState                     ; $47A3: $CD $12 $3B
     ld   [hl], $05                                ; $47A6: $36 $05
     ret                                           ; $47A8: $C9
 
 .jr_47A9
-    jp_open_dialog $1F0                           ; $47A9
+    jp_open_dialog Dialog1F0                      ; $47A9
 
 func_007_47AE::
     jp   IncrementEntityState                     ; $47AE: $C3 $12 $3B
@@ -249,7 +249,7 @@ func_007_47F5::
 
 .jr_4804
     ld   [hl], b                                  ; $4804: $70
-    jp_open_dialog $1F4                           ; $4805
+    jp_open_dialog Dialog1F4                      ; $4805
 
 func_007_480A::
     ld   a, [wDialogState]                        ; $480A: $FA $9F $C1
@@ -264,7 +264,7 @@ func_007_480A::
 
     dec  [hl]                                     ; $4818: $35
     push af                                       ; $4819: $F5
-    call_open_dialog $1F3                         ; $481A
+    call_open_dialog Dialog1F3                    ; $481A
     pop  af                                       ; $481F: $F1
 
 .jr_4820
@@ -506,7 +506,7 @@ func_007_4982::
     call func_007_7D43                            ; $4993: $CD $43 $7D
     ret  nc                                       ; $4996: $D0
 
-    jp_open_dialog $1F7                           ; $4997
+    jp_open_dialog Dialog1F7                      ; $4997
 
 Data_007_499C::
     db   $F0, $00, $70, $01, $F0, $08, $72, $01, $00, $00, $74, $01, $00, $08, $76, $01

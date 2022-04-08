@@ -91,7 +91,7 @@ func_007_4EFF::
     call func_007_7D43                            ; $4F13: $CD $43 $7D
     ret  nc                                       ; $4F16: $D0
 
-    call_open_dialog $1C0                         ; $4F17
+    call_open_dialog Dialog1C0                    ; $4F17
     jp   IncrementEntityState                     ; $4F1C: $C3 $12 $3B
 
 func_007_4F1F::
@@ -115,7 +115,7 @@ func_007_4F1F::
     jp   IncrementEntityState                     ; $4F41: $C3 $12 $3B
 
 .jr_4F44
-    call_open_dialog $1C2                         ; $4F44
+    call_open_dialog Dialog1C2                    ; $4F44
     call IncrementEntityState                     ; $4F49: $CD $12 $3B
     ld   [hl], b                                  ; $4F4C: $70
 

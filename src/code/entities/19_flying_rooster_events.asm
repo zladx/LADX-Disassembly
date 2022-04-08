@@ -123,7 +123,7 @@ label_019_4E62:
     push af                                       ; $4E64: $F5
     ld   a, $10                                   ; $4E65: $3E $10
     ldh  [hLinkPositionY], a                      ; $4E67: $E0 $99
-    call_open_dialog $16D                         ; $4E69
+    call_open_dialog Dialog16D                    ; $4E69
     pop  af                                       ; $4E6E: $F1
     ldh  [hLinkPositionY], a                      ; $4E6F: $E0 $99
     jp   IncrementEntityState                     ; $4E71: $C3 $12 $3B
@@ -603,7 +603,7 @@ label_019_50C4::
     ret  nz                                       ; $51A5: $C0
 
     ld   [hl], $80                                ; $51A6: $36 $80
-    jp_open_dialog $18D                           ; $51A8
+    jp_open_dialog Dialog18D                      ; $51A8
 
 Data_019_51AD::
     db   $F0, $00, $78, $07, $F0, $08, $7A, $07, $00, $00, $7C, $07, $00, $08, $7E, $07

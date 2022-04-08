@@ -84,7 +84,7 @@ ENDC
     ld   [wMusicTrackToPlay], a                   ; $50C9: $EA $68 $D3
     ld   hl, wIndoorBRoomStatus + $74             ; $50CC: $21 $74 $DA
     set  6, [hl]                                  ; $50CF: $CB $F6
-    call_open_dialog $0F5                         ; $50D1
+    call_open_dialog Dialog0F5                    ; $50D1
     call GetEntityTransitionCountdown             ; $50D6: $CD $05 $0C
     ld   [hl], $50                                ; $50D9: $36 $50
     ldh  a, [hLinkPositionX]                      ; $50DB: $F0 $98
@@ -3706,7 +3706,7 @@ func_015_6E66::
 
     ld   a, $03                                   ; $6E6F: $3E $03
     ld   [wBossAgonySFXCountdown], a              ; $6E71: $EA $A7 $C5
-    call_open_dialog $0F6                         ; $6E74
+    call_open_dialog Dialog0F6                    ; $6E74
     ld   a, MUSIC_BOSS_WARNING                    ; $6E79: $3E $5E
     ld   [wMusicTrackToPlay], a                   ; $6E7B: $EA $68 $D3
     call GetEntityTransitionCountdown             ; $6E7E: $CD $05 $0C

@@ -45,7 +45,7 @@ ManboAndFishesState0Handler::
     call func_018_7D7C                            ; $453D: $CD $7C $7D
     jr   nc, func_018_455C                        ; $4540: $30 $1A
 
-    jp_open_dialog $189                           ; $4542
+    jp_open_dialog Dialog189                      ; $4542
 
 .jr_4547
 IF __PATCH_0__
@@ -59,7 +59,7 @@ ENDC
     ld   a, $2F                                   ; $454D: $3E $2F
     ldh  [hLinkPositionX], a                      ; $454F: $E0 $98
     call ClearLinkPositionIncrement               ; $4551: $CD $8E $17
-    call_open_dialog $185                         ; $4554
+    call_open_dialog Dialog185                    ; $4554
     call IncrementEntityState                     ; $4559: $CD $12 $3B
 
 func_018_455C::
@@ -95,11 +95,11 @@ ManboAndFishesState1Handler::
 jr_018_4581:
     call IncrementEntityState                     ; $4581: $CD $12 $3B
     ld   [hl], b                                  ; $4584: $70
-    jp_open_dialog $18A                           ; $4585
+    jp_open_dialog Dialog18A                      ; $4585
 
 jr_018_458A:
     call IncrementEntityState                     ; $458A: $CD $12 $3B
-    jp_open_dialog $187                           ; $458D
+    jp_open_dialog Dialog187                      ; $458D
 
 ; Manbo singing his song
 ManboAndFishesSingHandler::
@@ -271,7 +271,7 @@ ManboAndFishesState5Handler::
     jr   nz, .jr_4774                             ; $476C: $20 $06
 
     dec  [hl]                                     ; $476E: $35
-    call_open_dialog $188                         ; $476F
+    call_open_dialog Dialog188                    ; $476F
 
 .jr_4774
     ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $4774: $3E $6C

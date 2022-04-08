@@ -158,7 +158,7 @@ ENDC
     push af                                       ; $5AF0: $F5
     ld   a, $10                                   ; $5AF1: $3E $10
     ldh  [hLinkPositionY], a                      ; $5AF3: $E0 $99
-    call_open_dialog $0BA                         ; $5AF5
+    call_open_dialog Dialog0BA                    ; $5AF5
     pop  af                                       ; $5AFA: $F1
     ldh  [hLinkPositionY], a                      ; $5AFB: $E0 $99
     ret                                           ; $5AFD: $C9

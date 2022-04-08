@@ -248,7 +248,7 @@ jr_004_6FE6:
     cp   e                                        ; $6FFC: $BB
     jr   c, .jr_7004                              ; $6FFD: $38 $05
 
-    jp_open_dialog $040                           ; $6FFF
+    jp_open_dialog Dialog040                      ; $6FFF
 
 .jr_7004
     ld   a, [wIsMarinFollowingLink]               ; $7004: $FA $73 $DB
@@ -296,7 +296,7 @@ func_004_7040::
     sbc  $00                                      ; $7040: $DE $00
     jr   nc, jr_004_705D                          ; $7042: $30 $19
 
-    call_open_dialog $034                         ; $7044
+    call_open_dialog Dialog034                    ; $7044
     jr   label_004_7056                           ; $7049: $18 $0B
 
 jr_004_704B:
@@ -304,7 +304,7 @@ jr_004_704B:
     and  a                                        ; $704E: $A7
     jr   z, label_004_7056                        ; $704F: $28 $05
 
-    jp_open_dialog $0F8                           ; $7051
+    jp_open_dialog Dialog0F8                      ; $7051
 
 label_004_7056:
     ld   hl, wEntitiesStateTable                  ; $7056: $21 $90 $C2
@@ -1292,7 +1292,7 @@ func_004_75BC::
     cp   $06                                      ; $75EC: $FE $06
     jr   c, .jr_75F8                              ; $75EE: $38 $08
 
-    call_open_dialog $0F9                         ; $75F0
+    call_open_dialog Dialog0F9                    ; $75F0
     jp   IncrementEntityState                     ; $75F5: $C3 $12 $3B
 
 .jr_75F8

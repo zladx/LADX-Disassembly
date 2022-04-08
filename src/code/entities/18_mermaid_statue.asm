@@ -52,12 +52,12 @@ MermaidStatueInteractiveHandler::
     call GetEntityTransitionCountdown             ; $497E: $CD $05 $0C
     ld   [hl], $60                                ; $4981: $36 $60
     call SetRoomStatus20                          ; $4983: $CD $B9 $7F
-    call_open_dialog $116                         ; $4986
+    call_open_dialog Dialog116                    ; $4986
 
     jp   IncrementEntityState                     ; $498B: $C3 $12 $3B
 
 .alreadyHasMagnifyingGlass
-    jp_open_dialog $19C                           ; $498E
+    jp_open_dialog Dialog19C                      ; $498E
 
 MermaidStatueOpeningHandler::
     ld   a, $02                                   ; $4993: $3E $02

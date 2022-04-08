@@ -257,7 +257,7 @@ func_005_4F64::
     jr   nz, .jr_4F89                             ; $4F80: $20 $07
 
     set  6, [hl]                                  ; $4F82: $CB $F6
-    jp_open_dialog $194                           ; $4F84
+    jp_open_dialog Dialog194                      ; $4F84
 
 .jr_4F89
     ld   a, [wOcarinaSongFlags]                   ; $4F89: $FA $49 $DB
@@ -265,7 +265,7 @@ func_005_4F64::
     jr   z, jr_005_4F95                           ; $4F8E: $28 $05
 
 jr_005_4F90:
-    jp_open_dialog $195                           ; $4F90
+    jp_open_dialog Dialog195                      ; $4F90
 
 jr_005_4F95:
     ld   e, INVENTORY_SLOT_COUNT -1               ; $4F95: $1E $0B
@@ -610,17 +610,17 @@ func_005_5161::
     cp   ROOM_SECTION_OW_VILLAGES                 ; $5189: $FE $C0
     jr   nc, .jr_5192                             ; $518B: $30 $05
 
-    jp_open_dialog $014
+    jp_open_dialog Dialog014
 
 .jr_5192
-    jp_open_dialog $193
+    jp_open_dialog Dialog193
 
 jr_005_5197:
     cp   $08                                      ; $5197: $FE $08
     jr   nz, .jr_51A1                             ; $5199: $20 $06
 
     dec  [hl]                                     ; $519B: $35
-    call_open_dialog $013
+    call_open_dialog Dialog013
 
 .jr_51A1
     ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $51A1: $3E $6C
@@ -645,7 +645,7 @@ func_005_51BC::
     call ShouldLinkTalkToEntity_05                ; $51C1: $CD $06 $55
     ret  nc                                       ; $51C4: $D0
 
-    jp_open_dialog $197
+    jp_open_dialog Dialog197
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MarinIndoor1SpriteVariants::
@@ -674,7 +674,7 @@ MarinEntityHandler_Indoor::
     call ShouldLinkTalkToEntity_05                ; $51F2: $CD $06 $55
     ret  nc                                       ; $51F5: $D0
 
-    jp_open_dialog $1D7                           ; $51F6: $3E $D7
+    jp_open_dialog Dialog1D7                      ; $51F6: $3E $D7
 
 .jr_51FB
     ld   a, [wSwordLevel]                         ; $51FB: $FA $4E $DB
@@ -767,7 +767,7 @@ func_005_5294::
     call GetEntityDropTimer                       ; $5294: $CD $FB $0B
     jr   nz, .jr_52A4                             ; $5297: $20 $0B
 
-    call_open_dialog $001                         ; $5299: $3E $01
+    call_open_dialog Dialog001                    ; $5299: $3E $01
     ld   [hl], $40                                ; $529E: $36 $40
     call IncrementEntityState                     ; $52A0: $CD $12 $3B
     xor  a                                        ; $52A3: $AF
@@ -845,7 +845,7 @@ func_005_5312::
     call ShouldLinkTalkToEntity_05                ; $5318: $CD $06 $55
     ret  nc                                       ; $531B: $D0
 
-    jp_open_dialog $002                           ; $531C
+    jp_open_dialog Dialog002                      ; $531C
 
 ; Add item to inventory slot (used for assigning the shield)
 AssignItemToSlot:

@@ -199,7 +199,7 @@ func_005_40E6::
     ; Bow-Wow retrieved from King Moblin
     ld   a, MUSIC_TOOL_ACQUIRED                   ; $4114: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $4116: $EA $68 $D3
-    call_open_dialog $16C                         ; $4119
+    call_open_dialog Dialog16C                    ; $4119
     ld   a, WAVE_SFX_CHAIN_CHOMP                  ; $411E: $3E $18
     ldh  [hWaveSfx], a                            ; $4120: $E0 $F3
     ld   a, $01                                   ; $4122: $3E $01
@@ -621,7 +621,7 @@ label_005_4335:
     ret  nz                                       ; $4378: $C0
 
     ld   [hl], $80                                ; $4379: $36 $80
-    jp_open_dialog $115                           ; $437B
+    jp_open_dialog Dialog115                      ; $437B
 
 .jr_4380
     ld   hl, wEntitiesFlashCountdownTable         ; $4380: $21 $20 $C4

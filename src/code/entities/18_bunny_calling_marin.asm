@@ -83,7 +83,7 @@ BunnyCallingMarinState1Handler::
     call GetEntityTransitionCountdown             ; $530F: $CD $05 $0C
     jr   nz, func_018_5321                        ; $5312: $20 $0D
 
-    call_open_dialog $1E3                         ; $5314
+    call_open_dialog Dialog1E3                    ; $5314
     call GetEntityTransitionCountdown             ; $5319: $CD $05 $0C
     ld   [hl], $10                                ; $531C: $36 $10
     call IncrementEntityState                     ; $531E: $CD $12 $3B
@@ -118,7 +118,7 @@ BunnyCallingMarinState2Handler::
     jr   nz, .jr_534F                             ; $5343: $20 $0A
 
     ld   [hl], $10                                ; $5345: $36 $10
-    call_open_dialog $1E5                         ; $5347
+    call_open_dialog Dialog1E5                    ; $5347
     jp   IncrementEntityState                     ; $534C: $C3 $12 $3B
 
 .jr_534F

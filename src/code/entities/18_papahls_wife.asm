@@ -81,11 +81,11 @@ PapahlsWifeState1Handler::
     ld   [wTradeSequenceItem], a                  ; $4EB6: $EA $0E $DB
     ld   a, REPLACE_TILES_TRADING_ITEM            ; $4EB9: $3E $0D
     ldh  [hReplaceTiles], a                       ; $4EBB: $E0 $A5
-    call_open_dialog $128                         ; $4EBD
+    call_open_dialog Dialog128                    ; $4EBD
     jp   IncrementEntityState                     ; $4EC2: $C3 $12 $3B
 
 .jr_4EC5
-    call_open_dialog $127                         ; $4EC5
+    call_open_dialog Dialog127                    ; $4EC5
     call IncrementEntityState                     ; $4ECA: $CD $12 $3B
     ld   [hl], b                                  ; $4ECD: $70
 

@@ -2861,7 +2861,7 @@ HeartPieceState3Handler::
     jp   IncrementEntityState                     ; $5A87: $C3 $12 $3B
 
 HeartPieceState4Handler::
-    call_open_dialog $04F                         ; $5A8A: $3E $4F
+    call_open_dialog Dialog04F                    ; $5A8A: $3E $4F
     call IncrementEntityState                     ; $5A8F: $CD $12 $3B
     ld   a, $01                                   ; $5A92: $3E $01
     ld   [wC1AB], a                               ; $5A94: $EA $AB $C1
@@ -2917,7 +2917,7 @@ HeartPieceState6Handler::
     ld   hl, wMaxHealth                           ; $5AE4: $21 $5B $DB
     inc  [hl]                                     ; $5AE7: $34
     ; Open the "4 pieces of heart collected" dialog
-    call_open_dialog $050                         ; $5AE8
+    call_open_dialog Dialog050                    ; $5AE8
 
 .jr_5AED
     jp   IncrementEntityState                     ; $5AED: $C3 $12 $3B
@@ -3077,7 +3077,7 @@ SwordShieldPickableState0Handler::
     dec  [hl]                                     ; $5BC4: $35
 
     ; "You found your Sword!"
-    call_open_dialog $09B                         ; $5BC5
+    call_open_dialog Dialog09B                    ; $5BC5
     xor  a                                        ; $5BCA: $AF
 
 .playSwordFanfare
@@ -3175,7 +3175,7 @@ label_003_5C49:
     jr   nz, .jr_5C67                             ; $5C5E: $20 $07
 
     dec  [hl]                                     ; $5C60: $35
-    call_open_dialog $093                         ; $5C61
+    call_open_dialog Dialog093                    ; $5C61
     xor  a                                        ; $5C66: $AF
 
 .jr_5C67
@@ -3363,7 +3363,7 @@ SleepyToadstoolEntityHandler::
     jr   nz, .jr_5D6C                             ; $5D63: $20 $07
 
     dec  [hl]                                     ; $5D65: $35
-    call_open_dialog $00F                         ; $5D66
+    call_open_dialog Dialog00F                    ; $5D66
     xor  a                                        ; $5D6B: $AF
 
 .jr_5D6C
@@ -4403,7 +4403,7 @@ jr_003_635F:
     ret                                           ; $6367: $C9
 
 PickSecretSeashell::
-    call_open_dialog $0EF                         ; $6368
+    call_open_dialog Dialog0EF                    ; $6368
 
 label_003_636D:
     call MarkRoomCompleted                        ; $636D: $CD $2A $51

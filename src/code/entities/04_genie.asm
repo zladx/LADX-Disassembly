@@ -254,7 +254,7 @@ func_004_4155::
     jr   nz, .jr_418D                             ; $4185: $20 $06
 
     inc  [hl]                                     ; $4187: $34
-    call_open_dialog $17F                         ; $4188
+    call_open_dialog Dialog17F                    ; $4188
 
 .jr_418D
     call ClearEntitySpeed                         ; $418D: $CD $7F $3D

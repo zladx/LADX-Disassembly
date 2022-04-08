@@ -126,7 +126,7 @@ CrazyTracyGreetingHandler::
     ret  nc                                       ; $5F33: $D0
 
     ; Open Tracy greeting dialog
-    call_open_dialog $017                         ; $5F34
+    call_open_dialog Dialog017                    ; $5F34
     ld   hl, wDialogState                         ; $5F39: $21 $9F $C1
     set  7, [hl]                                  ; $5F3C: $CB $FE
 
@@ -178,7 +178,7 @@ CrazyTracyProposingPriceHandler::
 
     ; Link already has a medecine in the inventory:
     ; open the "No medecine for you!" dialog.
-    call_open_dialog $01C                         ; $5F76
+    call_open_dialog Dialog01C                    ; $5F76
     ld   hl, wDialogState                         ; $5F7B: $21 $9F $C1
     set  7, [hl]                                  ; $5F7E: $CB $FE
     ret                                           ; $5F80: $C9
@@ -234,7 +234,7 @@ CrazyTracySellingHandler::
     ld   [wPurchasedMedecineCount], a             ; $5FC3: $EA $75 $DB
     jr   nz, .buy                                 ; $5FC6: $20 $0D
     ; Open "I'll give you a discount dialog"
-    call_open_dialog $01E                         ; $5FC8
+    call_open_dialog Dialog01E                    ; $5FC8
     ld   hl, wDialogState                         ; $5FCD: $21 $9F $C1
     set  7, [hl]                                  ; $5FD0: $CB $FE
     jp   IncrementEntityState                     ; $5FD2: $C3 $12 $3B
@@ -311,7 +311,7 @@ CrazyTracyBonusHandler::
     ; Also fill hearts
     ld   a, $FF                                   ; $6035: $3E $FF
     ld   [wAddHealthBuffer], a                    ; $6037: $EA $93 $DB
-    call_open_dialog $19A                         ; $603A
+    call_open_dialog Dialog19A                    ; $603A
     ld   hl, wDialogState                         ; $603F: $21 $9F $C1
     set  7, [hl]                                  ; $6042: $CB $FE
 .fillHeartsEnd

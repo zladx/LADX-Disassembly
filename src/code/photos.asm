@@ -1154,7 +1154,7 @@ JumpTable_037_473B::
 
     xor  a                                        ; $4748: $AF
     ld   [hl], a                                  ; $4749: $77
-    call_open_dialog $10B                         ; $474A
+    call_open_dialog Dialog10B                    ; $474A
     call func_037_4705                            ; $474F: $CD $05 $47
     ret                                           ; $4752: $C9
 
@@ -1336,7 +1336,7 @@ JumpTable_037_485E::
     ret                                           ; $4875: $C9
 
 .else_4876_37:
-    call_open_dialog $23E                           ; $4876
+    call_open_dialog Dialog23E                      ; $4876
     ld   a, $10                                   ; $487B: $3E $10
     ld   [wEntitiesPosYTable+3], a                ; $487D: $EA $13 $C2
     call func_037_47E4                            ; $4880: $CD $E4 $47
@@ -1375,7 +1375,7 @@ JumpTable_037_48A0::
 
     xor  a                                        ; $48AD: $AF
     ld   [hl], a                                  ; $48AE: $77
-    call_open_dialog $23F                           ; $48AF
+    call_open_dialog Dialog23F                      ; $48AF
     call func_037_47E4                            ; $48B4: $CD $E4 $47
     ret                                           ; $48B7: $C9
 
@@ -1922,7 +1922,7 @@ JumpTable_037_4C36::
     xor  a                                        ; $4C3E: $AF
     ld   [hl], a                                  ; $4C3F: $77
     ld   [wEntitiesPosXTable+4], a                ; $4C40: $EA $04 $C2
-    call_open_dialog $270                           ; $4C43
+    call_open_dialog Dialog270                      ; $4C43
 .func_037_4C48::
     ld   hl, wEntitiesPosXSignTable+4             ; $4C48: $21 $24 $C2
     inc  [hl]                                     ; $4C4B: $34
@@ -2020,7 +2020,7 @@ JumpTable_037_4CF9::
 
     xor  a                                        ; $4D11: $AF
     ld   [hl], a                                  ; $4D12: $77
-    call_open_dialog $271                           ; $4D13
+    call_open_dialog Dialog271                      ; $4D13
     jp   JumpTable_037_4C36.func_037_4C48         ; $4D18: $C3 $48 $4C
 
 .else_4D1B_37:
@@ -2045,7 +2045,7 @@ JumpTable_037_4D2E::
     xor  a                                        ; $4D36: $AF
     ld   [hl], a                                  ; $4D37: $77
     ld   [wEntitiesPosXTable+4], a                ; $4D38: $EA $04 $C2
-    call_open_dialog $272                           ; $4D3B
+    call_open_dialog Dialog272                      ; $4D3B
     jp   JumpTable_037_4C36.func_037_4C48         ; $4D40: $C3 $48 $4C
 
 JumpTable_037_4D43::
@@ -2065,7 +2065,7 @@ JumpTable_037_4D43::
     xor  a                                        ; $4D59: $AF
     ld   [hl], a                                  ; $4D5A: $77
     ld   [wEntitiesPosXTable+4], a                ; $4D5B: $EA $04 $C2
-    call_open_dialog $273                           ; $4D5E
+    call_open_dialog Dialog273                      ; $4D5E
     jp   JumpTable_037_4C36.func_037_4C48         ; $4D63: $C3 $48 $4C
 
 .else_4D66_37:
@@ -2099,7 +2099,7 @@ JumpTable_037_4D7B::
     ld   [wEntitiesSpeedYAccTable+5], a           ; $4D93: $EA $75 $C2
     xor  a                                        ; $4D96: $AF
     ld   [hl], a                                  ; $4D97: $77
-    call_open_dialog $275                           ; $4D98
+    call_open_dialog Dialog275                      ; $4D98
     jp   JumpTable_037_4C36.func_037_4C48         ; $4D9D: $C3 $48 $4C
 
 .else_4DA0_37:
@@ -2118,7 +2118,7 @@ JumpTable_037_4D7B::
 JumpTable_037_4DB5::
     ld   a, $02                                   ; $4DB5: $3E $02
     ld   [wEntitiesSpeedYAccTable+5], a           ; $4DB7: $EA $75 $C2
-    call_open_dialog $274                           ; $4DBA
+    call_open_dialog Dialog274                      ; $4DBA
     jp   JumpTable_037_4C36.func_037_4C48         ; $4DBF: $C3 $48 $4C
 
 JumpTable_037_4DC2::
@@ -2542,7 +2542,7 @@ func_037_5028::
     cp   $52                                      ; $5032: $FE $52
     ret  nz                                       ; $5034: $C0
 
-    call_open_dialog $22E                           ; $5035
+    call_open_dialog Dialog22E                      ; $5035
     call JumpTable_037_506F.func_037_507C         ; $503A: $CD $7C $50
     ld   [hl], $04                                ; $503D: $36 $04
     ret                                           ; $503F: $C9
@@ -2671,7 +2671,7 @@ JumpTable_037_50D5::
     ld   [wEntitiesPosYTable+7], a                ; $50FA: $EA $17 $C2
     xor  a                                        ; $50FD: $AF
     ld   [wEntitiesPosYTable+9], a                ; $50FE: $EA $19 $C2
-    call_open_dialog $23C                           ; $5101
+    call_open_dialog Dialog23C                      ; $5101
     call JumpTable_037_506F.func_037_507C         ; $5106: $CD $7C $50
     ret                                           ; $5109: $C9
 
@@ -2722,7 +2722,7 @@ JumpTable_037_510A::
     ld   [wEntitiesPosYTable+7], a                ; $5154: $EA $17 $C2
     ld   a, $04                                   ; $5157: $3E $04
     ld   [wEntitiesPosYTable+9], a                ; $5159: $EA $19 $C2
-    call_open_dialog $249                           ; $515C
+    call_open_dialog Dialog249                      ; $515C
     call JumpTable_037_506F.func_037_507C         ; $5161: $CD $7C $50
     ret                                           ; $5164: $C9
 
@@ -2769,7 +2769,7 @@ JumpTable_037_5192::
 
     xor  a                                        ; $519F: $AF
     ld   [wEntitiesPosYTable+9], a                ; $51A0: $EA $19 $C2
-    call_open_dialog $254                           ; $51A3
+    call_open_dialog Dialog254                      ; $51A3
     jp   JumpTable_037_506F.func_037_507C         ; $51A8: $C3 $7C $50
 
 JumpTable_037_51AB::
@@ -2866,7 +2866,7 @@ JumpTable_037_5228::
     xor  a                                        ; $524A: $AF
     ld   [wEntitiesSpeedXTable+14], a             ; $524B: $EA $4E $C2
     call func_037_49CE                            ; $524E: $CD $CE $49
-    call_open_dialog $2AF                           ; $5251
+    call_open_dialog Dialog2AF                      ; $5251
     ret                                           ; $5256: $C9
 
 JumpTable_037_5257::
@@ -2874,7 +2874,7 @@ JumpTable_037_5257::
     and  a                                        ; $525A: $A7
     ret  nz                                       ; $525B: $C0
 
-    call_open_dialog $12E                           ; $525C
+    call_open_dialog Dialog12E                      ; $525C
     ld   a, $01                                   ; $5261: $3E $01
     ld   [wEntitiesPosXTable+1], a                ; $5263: $EA $01 $C2
     ld   hl, wEntitiesPosXTable+2                 ; $5266: $21 $02 $C2
@@ -2924,7 +2924,7 @@ JumpTable_037_527D::
     ret  c                                        ; $52A6: $D8
 
     call func_037_49CE                            ; $52A7: $CD $CE $49
-    call_open_dialog $1F6                           ; $52AA
+    call_open_dialog Dialog1F6                      ; $52AA
     ret                                           ; $52AF: $C9
 
 func_037_52B0::

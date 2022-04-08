@@ -68,12 +68,12 @@ LiftableRockEntityHandler::
     and  $3F                                      ; $5381: $E6 $3F
     jr   nz, .marinReaction2                      ; $5383: $20 $08
     ; Open Marin reaction 1 (Dialog028)
-    call_open_dialog $028                         ; $5385
+    call_open_dialog Dialog028                    ; $5385
     jp   UnloadEntityAndReturn                    ; $538A: $C3 $8D $3F
 
 .marinReaction2
     ; Open Marin reaction 2
-    call_open_dialog $199                         ; $538D
+    call_open_dialog Dialog199                    ; $538D
 
 .marinReactionEnd
     jp   UnloadEntityAndReturn                    ; $5392: $C3 $8D $3F

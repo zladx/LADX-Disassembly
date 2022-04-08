@@ -3752,7 +3752,7 @@ ENDC
     and  a                                        ; $2025: $A7
     jr   z, .jr_2030                              ; $2026: $28 $08
     ; Open Marin's "Do you look in people's drawers?" dialog
-    call_open_dialog $278                         ; $2028: $3E $78 $CD $7C $23
+    call_open_dialog Dialog278                    ; $2028: $3E $78 $CD $7C $23
     jp   .specialCasesEnd                         ; $202D: $C3 $CF $20
 
 .jr_2030

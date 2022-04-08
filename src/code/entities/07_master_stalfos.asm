@@ -797,7 +797,7 @@ func_007_6DF6::
     add  hl, bc                                   ; $6E21: $09
     set  7, [hl]                                  ; $6E22: $CB $FE
     call IncrementEntityState                     ; $6E24: $CD $12 $3B
-    call_open_dialog $113                         ; $6E27
+    call_open_dialog Dialog113                    ; $6E27
     call GetEntityTransitionCountdown             ; $6E2C: $CD $05 $0C
     ld   [hl], $04                                ; $6E2F: $36 $04
     ret                                           ; $6E31: $C9

@@ -42,14 +42,14 @@ func_006_6230::
     and  a                                        ; $6252: $A7
     jr   z, .jr_625A                              ; $6253: $28 $05
 
-    jp_open_dialog $123                           ; $6255
+    jp_open_dialog Dialog123                      ; $6255
 
 .jr_625A
     ld   a, [wIsMarinFollowingLink]               ; $625A: $FA $73 $DB
     and  a                                        ; $625D: $A7
     jr   z, .jr_6265                              ; $625E: $28 $05
 
-    jp_open_dialog $121                           ; $6260
+    jp_open_dialog Dialog121                      ; $6260
 
 .jr_6265
     ldh  a, [hMapRoom]                            ; $6265: $F0 $F6
@@ -60,7 +60,7 @@ func_006_6230::
     and  $30                                      ; $626E: $E6 $30
     jr   nz, .jr_6277                             ; $6270: $20 $05
 
-    jp_open_dialog $120                           ; $6272
+    jp_open_dialog Dialog120                      ; $6272
 
 .jr_6277
     ld   a, [wHasInstrument2]                     ; $6277: $FA $66 $DB
@@ -75,7 +75,7 @@ func_006_6230::
     cp   UNKNOWN_ROOM_83                          ; $6287: $FE $83
     jr   nz, .jr_6290                             ; $6289: $20 $05
 
-    jp_open_dialog $122                           ; $628B
+    jp_open_dialog Dialog122                      ; $628B
 
 .jr_6290
     ld   hl, wKidSaveHintIndex                    ; $6290: $21 $7E $DB

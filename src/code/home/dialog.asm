@@ -83,6 +83,7 @@ OpenDialogInTable2::
 ; Input:
 ;   a: dialog index in table 0
 OpenDialog::
+OpenDialogInTable0::
     ; Clear wDialogAskSelectionIndex
     push af                                       ; $2385: $F5
     xor  a                                        ; $2386: $AF

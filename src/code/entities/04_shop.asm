@@ -155,7 +155,7 @@ func_004_77F8::
     cp   $74                                      ; $7824: $FE $74
     jr   nz, .ret_7838                            ; $7826: $20 $10
 
-    call_open_dialog $038                         ; $7828
+    call_open_dialog Dialog038                    ; $7828
     ld   hl, wEntitiesStateTable                  ; $782D: $21 $90 $C2
     add  hl, bc                                   ; $7830: $09
     ld   [hl], $04                                ; $7831: $36 $04
@@ -280,7 +280,7 @@ func_004_78AF::
 
     sub  $02                                      ; $78CB: $D6 $02
     ldh  [hLinkPositionY], a                      ; $78CD: $E0 $99
-    jp_open_dialog $02F                           ; @TODO Text used when you're trying to steal stuff
+    jp_open_dialog Dialog02F                      ; @TODO Text used when you're trying to steal stuff
 
 .jr_78D4
     ldh  a, [hLinkPositionY]                      ; $78D4: $F0 $99
@@ -388,7 +388,7 @@ jr_004_7940:
     jp   IncrementEntityState                     ; $7955: $C3 $12 $3B
 
 .jr_7958
-    jp_open_dialog $02E                           ; $7958
+    jp_open_dialog Dialog02E                      ; $7958
 
 func_004_795D::
     ld   a, [wDialogState]                        ; $795D: $FA $9F $C1
@@ -581,7 +581,7 @@ jr_004_7A2E:
     ld   [hl], $01                                ; $7A55: $36 $01
     pop  af                                       ; $7A57: $F1
     push af                                       ; $7A58: $F5
-    call_open_dialog $035                         ; $7A59
+    call_open_dialog Dialog035                    ; $7A59
     pop  af                                       ; $7A5E: $F1
 
 label_004_7A5F:                         ; @TODO What to do after buying a shopkeeper item

@@ -50,7 +50,7 @@ func_018_5E43::
     jp   IncrementEntityState                     ; $5E55: $C3 $12 $3B
 
 .jr_5E58
-    jp_open_dialog $0E6                           ; $5E58
+    jp_open_dialog Dialog0E6                      ; $5E58
 
 func_018_5E5D::
     call ReturnIfNonInteractive_18                ; $5E5D: $CD $E8 $7D
@@ -109,7 +109,7 @@ ENDC
     cp   MAP_COLOR_DUNGEON                        ; $5EA4: $FE $FF
     jr   nz, .jr_5EAD                             ; $5EA6: $20 $05
 
-    jp_open_dialog $263                           ; $5EA8
+    jp_open_dialog Dialog263                      ; $5EA8
 
 .jr_5EAD
     ld   a, $18                                   ; $5EAD: $3E $18

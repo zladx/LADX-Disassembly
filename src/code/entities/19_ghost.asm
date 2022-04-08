@@ -196,7 +196,7 @@ GhostState1Handler::
     ldh  [hLinkPositionX], a                      ; $5F19: $E0 $98
     pop  af                                       ; $5F1B: $F1
     ldh  [hLinkPositionY], a                      ; $5F1C: $E0 $99
-    call_open_dialog $216                         ; $5F1E
+    call_open_dialog Dialog216                    ; $5F1E
     ld   a, JINGLE_GHOST_PRESENCE                 ; $5F23: $3E $2D
     ldh  [hJingle], a                             ; $5F25: $E0 $F2
     call IncrementEntityState                     ; $5F27: $CD $12 $3B
@@ -256,7 +256,7 @@ label_019_5F5F:
     inc  [hl]                                     ; $5F7A: $34
     ld   a, JINGLE_GHOST_PRESENCE                 ; $5F7B: $3E $2D
     ldh  [hJingle], a                             ; $5F7D: $E0 $F2
-    jp_open_dialog $213                           ; $5F7F
+    jp_open_dialog Dialog213                      ; $5F7F
 
 label_019_5F84:
     call ReturnIfNonInteractive_19                ; $5F84: $CD $3D $7D
@@ -426,7 +426,7 @@ func_019_6064::
     push af                                       ; $606D: $F5
     ld   a, $10                                   ; $606E: $3E $10
     ldh  [hLinkPositionY], a                      ; $6070: $E0 $99
-    call_open_dialog $214                         ; $6072
+    call_open_dialog Dialog214                    ; $6072
     pop  af                                       ; $6077: $F1
     ldh  [hLinkPositionY], a                      ; $6078: $E0 $99
     call IncrementEntityState                     ; $607A: $CD $12 $3B
@@ -438,7 +438,7 @@ func_019_6080::
     call GetEntityTransitionCountdown             ; $6080: $CD $05 $0C
     jr   nz, .jr_608D                             ; $6083: $20 $08
 
-    call_open_dialog $215                         ; $6085
+    call_open_dialog Dialog215                    ; $6085
     call IncrementEntityState                     ; $608A: $CD $12 $3B
 
 .jr_608D

@@ -96,7 +96,7 @@ func_015_4750::
     call GetEntityTransitionCountdown             ; $4750: $CD $05 $0C
     ret  nz                                       ; $4753: $C0
 
-    call_open_dialog $191                         ; $4754
+    call_open_dialog Dialog191                    ; $4754
     ld   hl, wDialogState                         ; $4759: $21 $9F $C1
 
 .jr_475C

@@ -103,7 +103,7 @@ func_005_53CB::
     call ShouldLinkTalkToEntity_05                ; $53CB: $CD $06 $55
     ret  nc                                       ; $53CE: $D0
 
-    jp_open_dialog $0F1                           ; $53CF
+    jp_open_dialog Dialog0F1                      ; $53CF
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 RaftOwnerOnOverworldSpriteVariants:: ; $53D4

@@ -1,6 +1,6 @@
-Attrmap09::
+EaglesTowerCloudsAttrmap::
 InventoryDebugAttrmap::
-incbin "data/backgrounds/tilemap09.attrmap.encoded"
+incbin "data/backgrounds/eagles_tower_clouds.attrmap.encoded"
 IntroSeaCGBAttrmap::
 IntroSeaDMGAttrmap::
 incbin "data/backgrounds/intro_sea_dmg.attrmap.encoded"

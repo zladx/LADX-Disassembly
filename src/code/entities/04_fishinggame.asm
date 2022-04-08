@@ -1,32 +1,23 @@
-FishermanRodLowSpriteRect::                 ; $5F28
-    db   $00, $F0
-    db   $78, $01
-    db   $00, $F8
-    db   $7A, $01
-    db   $00, $00
-    db   $70, $01
-    db   $00, $08
-    db   $72, $01
+; defines a list of sprites with [x, y, tile n°, tile attrs]
+FishermanRodLowSpriteRect::                       ; $5F28
+    db   $00, $F0, $78, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db   $00, $F8, $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db   $00, $00, $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db   $00, $08, $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 
-FishermanRowHighSpriteRect::                 ; $5F38
-    db   $00, $F0
-    db   $7C, $01
-    db   $00, $F8
-    db   $7E, $01
-    db   $00, $00
-    db   $70, $01
-    db   $00, $08
-    db   $72, $01
+; defines a list of sprites with [x, y, tile n°, tile attrs]
+FishermanRowHighSpriteRect::                      ; $5F38
+    db   $00, $F0, $7C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db   $00, $F8, $7E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db   $00, $00, $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db   $00, $08, $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 
-FishermanTowardsLinkSpriteRect::             ; $5F48
-    db   $00, $F0
-    db   $78, $01
-    db   $00, $F8
-    db   $7A, $01
-    db   $00, $00
-    db   $74, $01
-    db   $00, $08
-    db   $76, $01
+; defines a list of sprites with [x, y, tile n°, tile attrs]
+FishermanTowardsLinkSpriteRect::                  ; $5F48
+    db   $00, $F0, $78, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db   $00, $F8, $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db   $00, $00, $74, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db   $00, $08, $76, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 FishermanFishingGameSpriteVariants::

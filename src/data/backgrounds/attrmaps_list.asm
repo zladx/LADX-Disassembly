@@ -24,8 +24,8 @@ MarinBeachAttrmap::
 incbin "data/backgrounds/marin_beach.attrmap.encoded"
 InventoryAttrmap::
 incbin "data/backgrounds/inventory.attrmap.encoded"
-Attrmap07::
-incbin "data/backgrounds/tilemap07.attrmap.encoded"
+MinimapAttrmap::
+incbin "data/backgrounds/minimap.attrmap.encoded"
 MamuAttrmap::
 incbin "data/backgrounds/mamu.attrmap.encoded"
 PeachAttrmap::

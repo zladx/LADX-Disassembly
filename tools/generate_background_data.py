@@ -57,7 +57,7 @@ background_names = [
   'MenuFileSelectionCommandsTilemap',#04
   'MenuFileCreationTilemap',         #05
   'MenuFileEraseTilemap',            #06
-  'Tilemap07',                       #07
+  'MinimapTilemap',                  #07
   'WorldMapTilemap',                 #08
   'EaglesTowerCloudsTilemap',        #09
   'GameOverTilemap',                 #0A

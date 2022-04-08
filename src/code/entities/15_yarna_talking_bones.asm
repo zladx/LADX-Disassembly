@@ -50,7 +50,7 @@ jr_015_4445:
     ld   a, $43                                   ; $4487: $3E $43
 
 .jr_4489
-    jp   OpenDialog                               ; $4489: $C3 $85 $23
+    jp   OpenDialogInTable0                       ; $4489: $C3 $85 $23
 
 jr_015_448C:
     dec  e                                        ; $448C: $1D

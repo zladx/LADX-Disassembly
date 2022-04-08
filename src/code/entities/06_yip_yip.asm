@@ -167,7 +167,7 @@ jr_006_5A36:
 
 jr_006_5A91:
     ld   a, e                                     ; $5A91: $7B
-    call OpenDialog                               ; $5A92: $CD $85 $23
+    call OpenDialogInTable0                       ; $5A92: $CD $85 $23
     call func_006_5ACC                            ; $5A95: $CD $CC $5A
 
 jr_006_5A98:

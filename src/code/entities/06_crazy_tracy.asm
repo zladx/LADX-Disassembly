@@ -170,7 +170,7 @@ CrazyTracyProposingPriceHandler::
     ld   a, $019                                  ; $5F69: $3E $19
 .priceEnd
 
-    call OpenDialog                               ; $5F6B: $CD $85 $23
+    call OpenDialogInTable0                       ; $5F6B: $CD $85 $23
     ld   hl, wDialogState                         ; $5F6E: $21 $9F $C1
     set  7, [hl]                                  ; $5F71: $CB $FE
     jp   IncrementEntityState                     ; $5F73: $C3 $12 $3B
@@ -280,7 +280,7 @@ CrazyTracySellingHandler::
     ld   a, $01D                                  ; $600D: $3E $1D
 
 .openFinalDialog
-    call OpenDialog                               ; $600F: $CD $85 $23
+    call OpenDialogInTable0                       ; $600F: $CD $85 $23
     ld   hl, wDialogState                         ; $6012: $21 $9F $C1
     set  7, [hl]                                  ; $6015: $CB $FE
     call IncrementEntityState                     ; $6017: $CD $12 $3B

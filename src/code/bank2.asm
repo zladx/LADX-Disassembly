@@ -7498,7 +7498,7 @@ label_002_74AD:
     jp   func_1828                                ; $74FB: $C3 $28 $18
 
 func_002_74FE::
-    call OpenDialog                               ; $74FE: $CD $85 $23
+    call OpenDialogInTable0                       ; $74FE: $CD $85 $23
     jp   ClearLinkPositionIncrement               ; $7501: $C3 $8E $17
 
 func_002_7504::

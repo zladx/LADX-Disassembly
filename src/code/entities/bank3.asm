@@ -3240,7 +3240,7 @@ KeyDropPointEntityHandler::
     ld   hl, KeyCollectDialogTable                ; $5CB6: $21 $84 $5C
     add  hl, de                                   ; $5CB9: $19
     ld   a, [hl]                                  ; $5CBA: $7E
-    call OpenDialog                               ; $5CBB: $CD $85 $23
+    call OpenDialogInTable0                       ; $5CBB: $CD $85 $23
     ldh  a, [hActiveEntitySpriteVariant]          ; $5CBE: $F0 $F1
     dec  a                                        ; $5CC0: $3D
     ld   e, a                                     ; $5CC1: $5F
@@ -3874,7 +3874,7 @@ HidingSlimeKeyEntityHandler::
 
 .jr_6047
     ld   a, e                                     ; $6047: $7B
-    call OpenDialog                               ; $6048: $CD $85 $23
+    call OpenDialogInTable0                       ; $6048: $CD $85 $23
     xor  a                                        ; $604B: $AF
 
 jr_003_604C:
@@ -7117,7 +7117,7 @@ jr_003_7304:
 ; Boss dialog after defeating them
 .jr_7325
     ld   a, e                                     ; $7325: $7B
-    call OpenDialog                               ; $7326: $CD $85 $23
+    call OpenDialogInTable0                       ; $7326: $CD $85 $23
     ld   a, MUSIC_BOSS_WARNING                    ; $7329: $3E $5E
     ld   [wMusicTrackToPlay], a                   ; $732B: $EA $68 $D3
     jr   jr_003_733E                              ; $732E: $18 $0E
@@ -7132,7 +7132,7 @@ ENDC
     ld   a, $10                                   ; $7333: $3E $10
     ldh  [hLinkPositionY], a                      ; $7335: $E0 $99
     ld   a, e                                     ; $7337: $7B
-    call OpenDialog                               ; $7338: $CD $85 $23
+    call OpenDialogInTable0                       ; $7338: $CD $85 $23
     pop  af                                       ; $733B: $F1
     ldh  [hLinkPositionY], a                      ; $733C: $E0 $99
 

@@ -269,7 +269,7 @@ jr_004_6FE6:
     ld   a, $3E                                   ; $7018: $3E $3E
 
 jr_004_701A:
-    call OpenDialog                               ; $701A: $CD $85 $23
+    call OpenDialogInTable0                       ; $701A: $CD $85 $23
     jp   IncrementEntityState                     ; $701D: $C3 $12 $3B
 
 func_004_7020::
@@ -333,7 +333,7 @@ jr_004_705D:
     ld   a, $3F                                   ; $7072: $3E $3F
 
 .jr_7074
-    call OpenDialog                               ; $7074: $CD $85 $23
+    call OpenDialogInTable0                       ; $7074: $CD $85 $23
     ld   a, $0A                                   ; $7077: $3E $0A
     ld   [wSubstractRupeeBufferLow], a            ; $7079: $EA $92 $DB
     jp   IncrementEntityState                     ; $707C: $C3 $12 $3B
@@ -1339,7 +1339,7 @@ func_004_75BC::
     ld   hl, Data_004_75B6                        ; $7639: $21 $B6 $75
     add  hl, de                                   ; $763C: $19
     ld   a, [hl]                                  ; $763D: $7E
-    call OpenDialog                               ; $763E: $CD $85 $23
+    call OpenDialogInTable0                       ; $763E: $CD $85 $23
     ldh  a, [hActiveEntitySpriteVariant]          ; $7641: $F0 $F1
     dec  a                                        ; $7643: $3D
     jr   nz, .jr_7647                             ; $7644: $20 $01

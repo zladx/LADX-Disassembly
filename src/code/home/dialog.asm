@@ -65,7 +65,8 @@ DialogOpenAnimationStartHandler::
 ; Input:
 ;   a: dialog index in table 1
 OpenDialogInTable1::
-    call OpenDialog                               ; $2373: $CD $85 $23
+    call OpenDialogInTable0                       ; $2373: $CD $85 $23
+    ; Overwrite the table number
     ld   a, $01                                   ; $2376: $3E $01
     ld   [wDialogIndexHi], a                      ; $2378: $EA $12 $C1
     ret                                           ; $237B: $C9
@@ -74,7 +75,8 @@ OpenDialogInTable1::
 ; Input:
 ;   a: dialog index in table 2
 OpenDialogInTable2::
-    call OpenDialog                               ; $237C: $CD $85 $23
+    call OpenDialogInTable0                       ; $237C: $CD $85 $23
+    ; Overwrite the table number
     ld   a, $02                                   ; $237F: $3E $02
     ld   [wDialogIndexHi], a                      ; $2381: $EA $12 $C1
     ret                                           ; $2384: $C9
@@ -82,7 +84,6 @@ OpenDialogInTable2::
 ; Open a dialog in the $00-$FF range
 ; Input:
 ;   a: dialog index in table 0
-OpenDialog::
 OpenDialogInTable0::
     ; Clear wDialogAskSelectionIndex
     push af                                       ; $2385: $F5
@@ -100,8 +101,10 @@ OpenDialogInTable0::
     ld   [wDialogCharacterIndexHi], a             ; $2395: $EA $64 $C1
     ld   [wNameIndex], a                          ; $2398: $EA $08 $C1
     ld   [wDialogIndexHi], a                      ; $239B: $EA $12 $C1
+
     ld   a, $0F                                   ; $239E: $3E $0F
     ld   [wDialogSFX], a                          ; $23A0: $EA $AB $C5
+
     ; Determine if the dialog is displayed on top or bottom
     ; wDialogState = hLinkPositionY < $48 ? $81 : $01
     ldh  a, [hLinkPositionY]                      ; $23A3: $F0 $99
@@ -110,6 +113,7 @@ OpenDialogInTable0::
     and  $80                                      ; $23A8: $E6 $80
     or   $01                                      ; $23AA: $F6 $01
     ld   [wDialogState], a                        ; $23AC: $EA $9F $C1
+
     ret                                           ; $23AF: $C9
 
 DialogOpenAnimationHandler::

@@ -243,7 +243,7 @@ jr_007_7C93:
     ld   a, [hl]                                  ; $7CE5: $7E
 
 jr_007_7CE6:
-    call OpenDialog                               ; $7CE6: $CD $85 $23
+    call OpenDialogInTable0                       ; $7CE6: $CD $85 $23
 
 jr_007_7CE9:
     xor  a                                        ; $7CE9: $AF

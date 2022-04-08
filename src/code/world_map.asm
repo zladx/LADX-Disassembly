@@ -229,7 +229,7 @@ jr_001_577E::
     ld   a, [hl]                                  ; $5791: $7E
 
 jr_001_5792::
-    call OpenDialog                               ; $5792: $CD $85 $23
+    call OpenDialogInTable0                       ; $5792: $CD $85 $23
     ld   a, [wDialogIndex]                        ; $5795: $FA $73 $C1
     cp   $A7                                      ; $5798: $FE $A7
     jr   z, .jr_57A3                              ; $579A: $28 $07

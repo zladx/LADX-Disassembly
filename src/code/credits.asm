@@ -1855,7 +1855,7 @@ CreditsWindFishFloatingHandler::
     ld   a, $D0                                   ; $53E9: $3E $D0
 
 CreditsOpenWindFishDialog::
-    call CreditsOpenDialog                        ; $53EB: $CD $F0 $7C
+    call CreditsOpenDialog                ; $53EB: $CD $F0 $7C
     ld   a, $17                                   ; $53EE: $3E $17
     ldh  [hWaveSfx], a                            ; $53F0: $E0 $F3
 
@@ -6502,7 +6502,7 @@ func_017_7C7B::
     jr   nz, func_017_7C8D                        ; $7C7E: $20 $0D
 
     ld   a, $CF                                   ; $7C80: $3E $CF
-    call CreditsOpenDialog                        ; $7C82: $CD $F0 $7C
+    call CreditsOpenDialog                ; $7C82: $CD $F0 $7C
     ld   a, $19                                   ; $7C85: $3E $19
     ld   [wDialogSFX], a                          ; $7C87: $EA $AB $C5
     call IncrementEntityState                     ; $7C8A: $CD $12 $3B
@@ -6593,7 +6593,7 @@ CreditsOpenDialog::
     ld   a, $10                                   ; $7CF4: $3E $10
     ldh  [hLinkPositionY], a                      ; $7CF6: $E0 $99
     ld   a, e                                     ; $7CF8: $7B
-    call OpenDialog                               ; $7CF9: $CD $85 $23
+    call OpenDialogInTable0                       ; $7CF9: $CD $85 $23
     pop  af                                       ; $7CFC: $F1
     ldh  [hLinkPositionY], a                      ; $7CFD: $E0 $99
     ret                                           ; $7CFF: $C9

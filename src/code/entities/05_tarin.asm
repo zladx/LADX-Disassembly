@@ -754,7 +754,7 @@ jr_005_4D38:
     ld   a, $10                                   ; $4D46: $3E $10
 
 .jr_4D48
-    call OpenDialog                               ; $4D48: $CD $85 $23
+    call OpenDialogInTable0                       ; $4D48: $CD $85 $23
 
 jr_005_4D4B:
     jr   jr_005_4D56                              ; $4D4B: $18 $09

@@ -122,7 +122,7 @@ jr_019_494A:
     jr   jr_019_4980                              ; $497B: $18 $03
 
 .jr_497D
-    call OpenDialog                               ; $497D: $CD $85 $23
+    call OpenDialogInTable0                       ; $497D: $CD $85 $23
 
 jr_019_4980:
     ld   a, [wC3C8]                               ; $4980: $FA $C8 $C3

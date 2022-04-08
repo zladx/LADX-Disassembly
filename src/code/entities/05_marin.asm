@@ -354,7 +354,7 @@ jr_005_4FFB:
     jr   jr_005_5008                              ; $5003: $18 $03
 
 .jr_5005
-    call OpenDialog                               ; $5005: $CD $85 $23
+    call OpenDialogInTable0                       ; $5005: $CD $85 $23
 
 jr_005_5008:
     ldh  a, [hMapRoom]                            ; $5008: $F0 $F6
@@ -430,7 +430,7 @@ func_005_5059::
     jr   nz, .jr_508A                             ; $5071: $20 $17
 
     ld   a, $16                                   ; $5073: $3E $16
-    call OpenDialog                               ; $5075: $CD $85 $23
+    call OpenDialogInTable0                       ; $5075: $CD $85 $23
     push bc                                       ; $5078: $C5
     call UpdateLinkWalkingAnimation_trampoline    ; $5079: $CD $F0 $0B
     pop  bc                                       ; $507C: $C1
@@ -569,7 +569,7 @@ func_005_512B::
 
 .jr_514F
     ld   a, $15                                   ; $514F: $3E $15
-    call OpenDialog                               ; $5151: $CD $85 $23
+    call OpenDialogInTable0                       ; $5151: $CD $85 $23
     call IncrementEntityState                     ; $5154: $CD $12 $3B
     ld   [hl], $01                                ; $5157: $36 $01
     ld   hl, wEntitiesPrivateState3Table          ; $5159: $21 $D0 $C2

@@ -276,7 +276,7 @@ OpenDialogAtBottom::
     ld   a, $20                                   ; $5084: $3E $20
     ldh  [hLinkPositionY], a                      ; $5086: $E0 $99
     ld   a, e                                     ; $5088: $7B
-    call OpenDialog                               ; $5089: $CD $85 $23
+    call OpenDialogInTable0                       ; $5089: $CD $85 $23
     pop  af                                       ; $508C: $F1
     ldh  [hLinkPositionY], a                      ; $508D: $E0 $99
     ret                                           ; $508F: $C9

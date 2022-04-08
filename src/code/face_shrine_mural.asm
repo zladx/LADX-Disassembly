@@ -97,7 +97,7 @@ FaceShrineMuralStage4Handler::
     cp   $80                                      ; $6B90: $FE $80
     jr   nz, .ret_6B99                            ; $6B92: $20 $05
     ld   a, $E7                                   ; $6B94: $3E $E7
-    call OpenDialog                               ; $6B96: $CD $85 $23
+    call OpenDialogInTable0                       ; $6B96: $CD $85 $23
 
 .ret_6B99
     ret                                           ; $6B99: $C9

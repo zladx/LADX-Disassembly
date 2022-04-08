@@ -1376,7 +1376,7 @@ jr_004_66E6:
 
     ; Open the prize dialog
     ld   [hl], e                                  ; $66FA: $73
-    call OpenDialog                               ; $66FB: $CD $85 $23
+    call OpenDialogInTable0                       ; $66FB: $CD $85 $23
 
 jr_004_66FE:
     jp   ClearEntityStatusBank04                  ; $66FE: $C3 $7A $6D

@@ -384,7 +384,7 @@ jr_004_7940:
     ld   hl, Data_004_77C9                        ; $794D: $21 $C9 $77
     add  hl, de                                   ; $7950: $19
     ld   a, [hl]                                  ; $7951: $7E
-    call OpenDialog                               ; $7952: $CD $85 $23
+    call OpenDialogInTable0                       ; $7952: $CD $85 $23
     jp   IncrementEntityState                     ; $7955: $C3 $12 $3B
 
 .jr_7958
@@ -551,7 +551,7 @@ jr_004_7A0C:
     ld   a, $34                                   ; $7A22: $3E $34
 
 jr_004_7A24:
-    call OpenDialog                               ; $7A24: $CD $85 $23
+    call OpenDialogInTable0                       ; $7A24: $CD $85 $23
     ld   hl, wEntitiesStateTable                  ; $7A27: $21 $90 $C2
     add  hl, bc                                   ; $7A2A: $09
     ld   [hl], $03                                ; $7A2B: $36 $03

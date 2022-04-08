@@ -3214,8 +3214,8 @@ wHasInstrument6::
 
 ; @TODO Dungeon 1-9 *flags*, not instrument checks
 ; bit 0: miniboss clear
-; bit 1: set if true
-; bit 2: (?)
+; bit 1: has instrument
+; bit 2: is eagle's tower collapsed
 ; 0 = false
 wHasInstrument7::
   ds 1 ; DB6B

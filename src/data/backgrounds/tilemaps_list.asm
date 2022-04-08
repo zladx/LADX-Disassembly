@@ -42,8 +42,8 @@ MenuFileCopyTilemap::
 incbin "data/backgrounds/menu_file_copy.tilemap.encoded"
 InventoryTilemap::
 incbin "data/backgrounds/inventory.tilemap.encoded"
-Tilemap09::
-incbin "data/backgrounds/tilemap09.tilemap.encoded"
+EaglesTowerCloudsTilemap::
+incbin "data/backgrounds/eagles_tower_clouds.tilemap.encoded"
 InventoryDebugTilemap::
 incbin "data/backgrounds/inventory_debug.tilemap.encoded"
 GameOverTilemap::

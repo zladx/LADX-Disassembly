@@ -1,6 +1,6 @@
-Attrmap09::
+EaglesTowerCloudsAttrmap::
 InventoryDebugAttrmap::
-incbin "data/backgrounds/tilemap09.attrmap.encoded"
+incbin "data/backgrounds/eagles_tower_clouds.attrmap.encoded"
 IntroSeaCGBAttrmap::
 IntroSeaDMGAttrmap::
 incbin "data/backgrounds/intro_sea_dmg.attrmap.encoded"
@@ -24,8 +24,8 @@ MarinBeachAttrmap::
 incbin "data/backgrounds/marin_beach.attrmap.encoded"
 InventoryAttrmap::
 incbin "data/backgrounds/inventory.attrmap.encoded"
-Attrmap07::
-incbin "data/backgrounds/tilemap07.attrmap.encoded"
+MinimapAttrmap::
+incbin "data/backgrounds/minimap.attrmap.encoded"
 MamuAttrmap::
 incbin "data/backgrounds/mamu.attrmap.encoded"
 PeachAttrmap::

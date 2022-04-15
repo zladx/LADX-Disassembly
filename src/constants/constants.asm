@@ -27,6 +27,11 @@ include "constants/maps.asm"
 include "constants/rooms.asm"
 
 ;
+; Entities
+;
+include "constants/entities/bow_wow.asm"
+
+;
 ; Character maps for strings
 ;
 include "constants/charmaps/main.asm"

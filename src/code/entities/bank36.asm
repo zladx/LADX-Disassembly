@@ -582,7 +582,7 @@ func_036_436D::
     or   [hl]                                     ; $439C: $B6
     ld   hl, wIsRoosterFollowingLink              ; $439D: $21 $7B $DB
     or   [hl]                                     ; $43A0: $B6
-    and  $7F                                      ; $43A1: $E6 $7F
+    and  $7E | BOW_WOW_IS_FOLLOWING_LINK          ; $43A1: $E6 $7F
     jr   nz, .jr_43B0                             ; $43A3: $20 $0B
 
     ld   a, $38                                   ; $43A5: $3E $38
@@ -621,7 +621,7 @@ func_036_43BD::
     or   [hl]                                     ; $43D7: $B6
     ld   hl, wIsRoosterFollowingLink              ; $43D8: $21 $7B $DB
     or   [hl]                                     ; $43DB: $B6
-    and  $7F                                      ; $43DC: $E6 $7F
+    and  $7E | BOW_WOW_IS_FOLLOWING_LINK          ; $43DC: $E6 $7F
     jr   z, .jr_43E6                              ; $43DE: $28 $06
 
     call_open_dialog Dialog2AD                    ; $43E0
@@ -8293,7 +8293,7 @@ SpawnPhotographer::
     or   [hl]                                     ; $717C: $B6
     ld   hl, wIsBowWowFollowingLink               ; $717D: $21 $56 $DB
     or   [hl]                                     ; $7180: $B6
-    and  $7F                                      ; $7181: $E6 $7F
+    and  $7E | BOW_WOW_IS_FOLLOWING_LINK          ; $7181: $E6 $7F
     ret  nz                                       ; $7183: $C0
 
     push bc                                       ; $7184: $C5

@@ -102,7 +102,7 @@ GrandmaUlriraState0Handler::
     ret  nc                                       ; $4D86: $D0
 
     ld   a, [wIsBowWowFollowingLink]              ; $4D87: $FA $56 $DB
-    cp   BOW_WOW_HAS_BEEN_KIDNAPPED               ; $4D8A: $FE $80
+    cp   BOW_WOW_KIDNAPPED                        ; $4D8A: $FE $80
     ld   a, $78                                   ; $4D8C: $3E $78
     jr   z, .jr_4DA0                              ; $4D8E: $28 $10
 

@@ -50,7 +50,7 @@ BowWowEntityHandler::
     ld   a, c                                     ; $4038: $79
     ld   [wD154], a                               ; $4039: $EA $54 $D1
     ld   a, [wIsBowWowFollowingLink]              ; $403C: $FA $56 $DB
-    cp   BOW_WOW_IS_FOLLOWING_LINK                ; $403F: $FE $01
+    cp   BOW_WOW_FOLLOWING                        ; $403F: $FE $01
     jr   nz, .selectSpriteVariant                 ; $4041: $20 $11
 
     ; calculate x- and y-Offset of bow_wow
@@ -80,7 +80,7 @@ BowWowEntityHandler::
     jr   z, .jr_407C                              ; $4067: $28 $13
 
     ld   a, [wIsBowWowFollowingLink]              ; $4069: $FA $56 $DB
-    cp   BOW_WOW_IS_FOLLOWING_LINK                ; $406C: $FE $01
+    cp   BOW_WOW_FOLLOWING                        ; $406C: $FE $01
     jp   z, label_005_40A2                        ; $406E: $CA $A2 $40
 
     ld   hl, wEntitiesRoomTable                   ; $4071: $21 $E0 $C3
@@ -172,7 +172,7 @@ func_005_40E6::
     and  a                                        ; $40E9: $A7
     jr   z, jr_005_4137                           ; $40EA: $28 $4B
 
-    cp   BOW_WOW_HAS_BEEN_KIDNAPPED               ; $40EC: $FE $80
+    cp   BOW_WOW_KIDNAPPED                        ; $40EC: $FE $80
     jr   z, .jr_40FA                              ; $40EE: $28 $0A
 
     ; bow_wow is following link
@@ -205,7 +205,7 @@ func_005_40E6::
     call_open_dialog Dialog16C                    ; $4119
     ld   a, WAVE_SFX_CHAIN_CHOMP                  ; $411E: $3E $18
     ldh  [hWaveSfx], a                            ; $4120: $E0 $F3
-    ld   a, BOW_WOW_IS_FOLLOWING_LINK             ; $4122: $3E $01
+    ld   a, BOW_WOW_FOLLOWING                     ; $4122: $3E $01
     ld   [wIsBowWowFollowingLink], a              ; $4124: $EA $56 $DB
 
 .jr_4127
@@ -467,7 +467,7 @@ jr_005_428E:
 
 label_005_4297:
     ld   a, [wIsBowWowFollowingLink]              ; $4297: $FA $56 $DB
-    cp   BOW_WOW_HAS_BEEN_KIDNAPPED               ; $429A: $FE $80
+    cp   BOW_WOW_KIDNAPPED                        ; $429A: $FE $80
     jp   z, label_005_432F                        ; $429C: $CA $2F $43
 
     call GetRandomByte                            ; $429F: $CD $0D $28
@@ -736,7 +736,7 @@ func_005_43FE::
     and  a                                        ; $4401: $A7
     ret  z                                        ; $4402: $C8
 
-    cp   BOW_WOW_HAS_BEEN_KIDNAPPED               ; $4403: $FE $80
+    cp   BOW_WOW_KIDNAPPED                        ; $4403: $FE $80
     ret  z                                        ; $4405: $C8
 
     ldh  a, [hLinkSpeedY]                         ; $4406: $F0 $9B

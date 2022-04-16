@@ -2206,7 +2206,7 @@ CreateFollowingNpcEntity::
 
     ; If Bow-Wow is following Link…
     ld   a, [wIsBowWowFollowingLink]              ; $6124: $FA $56 $DB
-    cp   BOW_WOW_IS_FOLLOWING_LINK                ; $6127: $FE $01
+    cp   BOW_WOW_FOLLOWING                        ; $6127: $FE $01
     jr   nz, .bowWowEnd                           ; $6129: $20 $36
 
     ; Search for an existing Bow-Wow entity

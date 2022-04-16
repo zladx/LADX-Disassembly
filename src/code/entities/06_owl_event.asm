@@ -55,7 +55,7 @@ OwlEventEntityHandler::
     jp   nz, ClearEntityStatus_06                 ; $6843: $C2 $DB $65
 
     ld   a, [wIsBowWowFollowingLink]              ; $6846: $FA $56 $DB
-    cp   BOW_WOW_IS_FOLLOWING_LINK                ; $6849: $FE $01
+    cp   BOW_WOW_FOLLOWING                        ; $6849: $FE $01
     jp   nz, ClearEntityStatus_06                 ; $684B: $C2 $DB $65
 
 .jr_684E

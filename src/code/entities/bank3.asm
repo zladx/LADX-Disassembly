@@ -521,7 +521,7 @@ EntityInitBowWow::
     jr   nz, .jr_4A6B                             ; $4A5F: $20 $0A
 
     ld   a, [wIsBowWowFollowingLink]              ; $4A61: $FA $56 $DB
-    cp   BOW_WOW_HAS_BEEN_KIDNAPPED               ; $4A64: $FE $80
+    cp   BOW_WOW_KIDNAPPED                        ; $4A64: $FE $80
     jr   z, .return                               ; $4A66: $28 $0A
 
     jp   UnloadEntityAndReturn                    ; $4A68: $C3 $8D $3F
@@ -647,7 +647,7 @@ EntityInitTarin::
 
 EntityInitMadamMeowMeow::
     ld   a, [wIsBowWowFollowingLink]              ; $4B0E: $FA $56 $DB
-    cp   BOW_WOW_HAS_BEEN_KIDNAPPED               ; $4B11: $FE $80
+    cp   BOW_WOW_KIDNAPPED                        ; $4B11: $FE $80
     jr   nz, .return                              ; $4B13: $20 $05
 
     ld   a, MUSIC_BOWWOW_KIDNAPPED                ; $4B15: $3E $0E
@@ -3451,7 +3451,7 @@ SirensInstrumentState2Handler::
 
 AfterSirensInstrumentD1::
     ; Mark Bow-Wow as kidnapped
-    ld   a, BOW_WOW_HAS_BEEN_KIDNAPPED            ; $5E0C: $3E $80
+    ld   a, BOW_WOW_KIDNAPPED                     ; $5E0C: $3E $80
     ld   [wIsBowWowFollowingLink], a              ; $5E0E: $EA $56 $DB
     ret                                           ; $5E11: $C9
 

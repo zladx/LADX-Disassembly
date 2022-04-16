@@ -7,7 +7,7 @@ MoblinSwordEntityHandler::
     jr   nz, .jr_794F                             ; $7945: $20 $08
 
     ld   a, [wIsBowWowFollowingLink]              ; $7947: $FA $56 $DB
-    cp   BOW_WOW_HAS_BEEN_KIDNAPPED               ; $794A: $FE $80
+    cp   BOW_WOW_KIDNAPPED                        ; $794A: $FE $80
     jp   nz, ClearEntityStatus_07                 ; $794C: $C2 $A4 $7E
 
 .jr_794F

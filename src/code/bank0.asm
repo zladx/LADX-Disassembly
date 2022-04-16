@@ -5415,7 +5415,7 @@ LoadRoomSpecificTiles::
 .indoorEnd
 
     ld   a, [wIsBowWowFollowingLink]              ; $2EB0: $FA $56 $DB
-    cp   $01                                      ; $2EB3: $FE $01
+    cp   BOW_WOW_FOLLOWING                        ; $2EB3: $FE $01
     ld   a, $A4                                   ; $2EB5: $3E $A4
     jr   z, .useOverridenSpritesheet              ; $2EB7: $28 $18
     ld   a, [wIsGhostFollowingLink]               ; $2EB9: $FA $79 $DB

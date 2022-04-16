@@ -1220,7 +1220,7 @@ IncrementCreditsGameplaySubtypeAndReturn::
 
 ; Owl speech, Wind Fish speech, song of awakening sequence
 CreditsWindFishHandler::
-    ld   a, $80                                   ; $4C60: $3E $80
+    ld   a, BOW_WOW_KIDNAPPED                     ; $4C60: $3E $80
     ld   [wIsBowWowFollowingLink], a              ; $4C62: $EA $56 $DB
     xor  a                                        ; $4C65: $AF
     ld   [wIsIndoor], a                           ; $4C66: $EA $A5 $DB

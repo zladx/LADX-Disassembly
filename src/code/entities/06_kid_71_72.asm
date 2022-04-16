@@ -69,11 +69,11 @@ Kid72EntityHandler::
 
 .jr_60A2
     ld   a, [wIsBowWowFollowingLink]              ; $60A2: $FA $56 $DB
-    cp   $80                                      ; $60A5: $FE $80
+    cp   BOW_WOW_KIDNAPPED                        ; $60A5: $FE $80
     jp   nz, label_006_6170                       ; $60A7: $C2 $70 $61
 
     ld   a, [wGameplayType]                       ; $60AA: $FA $95 $DB
-    cp   $01                                      ; $60AD: $FE $01
+    cp   BOW_WOW_FOLLOWING                        ; $60AD: $FE $01
     jp   z, label_006_6170                        ; $60AF: $CA $70 $61
 
     ld   de, Kid71SpriteVariants                  ; $60B2: $11 $4D $60

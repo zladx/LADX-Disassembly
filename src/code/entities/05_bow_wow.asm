@@ -50,9 +50,10 @@ BowWowEntityHandler::
     ld   a, c                                     ; $4038: $79
     ld   [wD154], a                               ; $4039: $EA $54 $D1
     ld   a, [wIsBowWowFollowingLink]              ; $403C: $FA $56 $DB
-    cp   $01                                      ; $403F: $FE $01
-    jr   nz, .jr_4054                             ; $4041: $20 $11
+    cp   BOW_WOW_FOLLOWING                        ; $403F: $FE $01
+    jr   nz, .selectSpriteVariant                 ; $4041: $20 $11
 
+    ; calculate x- and y-Offset of bow_wow
     ldh  a, [hMapRoom]                            ; $4043: $F0 $F6
     ld   hl, wEntitiesRoomTable                   ; $4045: $21 $E0 $C3
     add  hl, bc                                   ; $4048: $09
@@ -64,7 +65,7 @@ BowWowEntityHandler::
     add  hl, bc                                   ; $4052: $09
     ld   [hl], b                                  ; $4053: $70
 
-.jr_4054
+.selectSpriteVariant
     ld   de, BowWowFollowingSpriteVariants        ; $4054: $11 $1C $40
     ld   a, [wIsBowWowFollowingLink]              ; $4057: $FA $56 $DB
     and  a                                        ; $405A: $A7
@@ -79,7 +80,7 @@ BowWowEntityHandler::
     jr   z, .jr_407C                              ; $4067: $28 $13
 
     ld   a, [wIsBowWowFollowingLink]              ; $4069: $FA $56 $DB
-    cp   TRUE                                     ; $406C: $FE $01
+    cp   BOW_WOW_FOLLOWING                        ; $406C: $FE $01
     jp   z, label_005_40A2                        ; $406E: $CA $A2 $40
 
     ld   hl, wEntitiesRoomTable                   ; $4071: $21 $E0 $C3
@@ -166,13 +167,15 @@ func_005_40AF::
     ret                                           ; $40E5: $C9
 
 func_005_40E6::
+    ; if bow_wow is at home jump to jr_005_4137
     ld   a, [wIsBowWowFollowingLink]              ; $40E6: $FA $56 $DB
     and  a                                        ; $40E9: $A7
     jr   z, jr_005_4137                           ; $40EA: $28 $4B
 
-    cp   $80                                      ; $40EC: $FE $80
+    cp   BOW_WOW_KIDNAPPED                        ; $40EC: $FE $80
     jr   z, .jr_40FA                              ; $40EE: $28 $0A
 
+    ; bow_wow is following link
     ldh  a, [hLinkPositionX]                      ; $40F0: $F0 $98
     ldh  [hMultiPurpose0], a                      ; $40F2: $E0 $D7
     ldh  a, [hLinkPositionZModified]              ; $40F4: $F0 $B3
@@ -202,7 +205,7 @@ func_005_40E6::
     call_open_dialog Dialog16C                    ; $4119
     ld   a, WAVE_SFX_CHAIN_CHOMP                  ; $411E: $3E $18
     ldh  [hWaveSfx], a                            ; $4120: $E0 $F3
-    ld   a, $01                                   ; $4122: $3E $01
+    ld   a, BOW_WOW_FOLLOWING                     ; $4122: $3E $01
     ld   [wIsBowWowFollowingLink], a              ; $4124: $EA $56 $DB
 
 .jr_4127
@@ -298,11 +301,11 @@ jr_005_41B1:
     ld   [hl], $28                                ; $41B4: $36 $28
     ld   a, [wIsBowWowFollowingLink]              ; $41B6: $FA $56 $DB
     and  a                                        ; $41B9: $A7
-    jr   z, .jr_41BF                              ; $41BA: $28 $03
+    jr   z, .bow_wow_not_following                ; $41BA: $28 $03
 
     jp   label_005_4297                           ; $41BC: $C3 $97 $42
 
-.jr_41BF
+.bow_wow_not_following
     ld   hl, wEntitiesSpeedZTable                 ; $41BF: $21 $20 $C3
     add  hl, bc                                   ; $41C2: $09
     ld   [hl], $20                                ; $41C3: $36 $20
@@ -365,11 +368,11 @@ func_005_420E::
     ld   [hl], a                                  ; $421A: $77
     ld   a, [wIsBowWowFollowingLink]              ; $421B: $FA $56 $DB
     and  a                                        ; $421E: $A7
-    jr   z, .jr_4223                              ; $421F: $28 $02
+    jr   z, .bow_wow_not_following                ; $421F: $28 $02
 
     ld   [hl], $10                                ; $4221: $36 $10
 
-.jr_4223
+.bow_wow_not_following
     call IncrementEntityState                     ; $4223: $CD $12 $3B
     ld   [hl], b                                  ; $4226: $70
 
@@ -443,11 +446,11 @@ jr_005_4268:
     ld   a, [wIsBowWowFollowingLink]              ; $427E: $FA $56 $DB
     and  a                                        ; $4281: $A7
     ld   a, $4E                                   ; $4282: $3E $4E
-    jr   nz, .jr_4288                             ; $4284: $20 $02
+    jr   nz, .bow_wow_not_at_home                 ; $4284: $20 $02
 
     ld   a, $7E                                   ; $4286: $3E $7E
 
-.jr_4288
+.bow_wow_not_at_home
     ld   [de], a                                  ; $4288: $12
     inc  de                                       ; $4289: $13
     ld   a, $00                                   ; $428A: $3E $00
@@ -464,7 +467,7 @@ jr_005_428E:
 
 label_005_4297:
     ld   a, [wIsBowWowFollowingLink]              ; $4297: $FA $56 $DB
-    cp   $80                                      ; $429A: $FE $80
+    cp   BOW_WOW_KIDNAPPED                        ; $429A: $FE $80
     jp   z, label_005_432F                        ; $429C: $CA $2F $43
 
     call GetRandomByte                            ; $429F: $CD $0D $28
@@ -733,7 +736,7 @@ func_005_43FE::
     and  a                                        ; $4401: $A7
     ret  z                                        ; $4402: $C8
 
-    cp   $80                                      ; $4403: $FE $80
+    cp   BOW_WOW_KIDNAPPED                        ; $4403: $FE $80
     ret  z                                        ; $4405: $C8
 
     ldh  a, [hLinkSpeedY]                         ; $4406: $F0 $9B

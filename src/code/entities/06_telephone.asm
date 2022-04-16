@@ -41,7 +41,7 @@ TelephoneEntityHandler::
 
     ld   e, $42                                   ; $6ABD: $1E $42
     ld   a, [wIsBowWowFollowingLink]              ; $6ABF: $FA $56 $DB
-    cp   $80                                      ; $6AC2: $FE $80
+    cp   BOW_WOW_KIDNAPPED                        ; $6AC2: $FE $80
     jp   z, label_006_6BAD                        ; $6AC4: $CA $AD $6B
 
     ld   e, $43                                   ; $6AC7: $1E $43
@@ -51,7 +51,7 @@ TelephoneEntityHandler::
 
     ld   e, $44                                   ; $6AD1: $1E $44
     ld   a, [wIsBowWowFollowingLink]              ; $6AD3: $FA $56 $DB
-    cp   $01                                      ; $6AD6: $FE $01
+    cp   BOW_WOW_FOLLOWING                        ; $6AD6: $FE $01
     jp   z, label_006_6BB3                        ; $6AD8: $CA $B3 $6B
 
     ld   e, $44                                   ; $6ADB: $1E $44

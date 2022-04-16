@@ -1,6 +1,6 @@
 MoblinKingEntityHandler::
     ld   a, [wIsBowWowFollowingLink]              ; $46B6: $FA $56 $DB
-    cp   $80                                      ; $46B9: $FE $80
+    cp   BOW_WOW_KIDNAPPED                        ; $46B9: $FE $80
     jp   nz, ClearEntityStatus_15                 ; $46BB: $C2 $31 $7C
 
     ld   hl, wEntitiesDirectionTable              ; $46BE: $21 $80 $C3

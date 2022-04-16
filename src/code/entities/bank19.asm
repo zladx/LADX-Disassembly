@@ -314,7 +314,7 @@ UpdateEntityPositionForRoomTransition::
     jr   nz, label_019_7A74                       ; $7A3D: $20 $35
 
     ld   a, [wIsBowWowFollowingLink]              ; $7A3F: $FA $56 $DB
-    cp   $01                                      ; $7A42: $FE $01
+    cp   BOW_WOW_FOLLOWING                        ; $7A42: $FE $01
     jr   nz, .jr_019_7A4C                         ; $7A44: $20 $06
 
     ldh  a, [hFrameCounter]                       ; $7A46: $F0 $E7

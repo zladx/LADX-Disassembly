@@ -429,3 +429,8 @@ DROP_COUNTDOWN_TIME equ $18 ; frames dropped entity is blinking before despawn
 SWORD_RECOIL_GENIE_JAR_DEFAULT  equ $20
 SWORD_RECOIL_GENIE_JAR_STRONGER equ $30
 SWORD_RECOIL_DEFAULT            equ $30
+
+; constants for wIsBowWowFollowingLink
+BOW_WOW_AT_HOME   equ $00
+BOW_WOW_FOLLOWING equ $01
+BOW_WOW_KIDNAPPED equ $80

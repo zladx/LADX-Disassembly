@@ -100,7 +100,7 @@ KikiTheMonkeyEntityHandler::
 
 func_007_58A8::
     ld   a, [wIsBowWowFollowingLink]              ; $58A8: $FA $56 $DB
-    cp   $01                                      ; $58AB: $FE $01
+    cp   BOW_WOW_FOLLOWING                        ; $58AB: $FE $01
     jr   nz, jr_007_58DE                          ; $58AD: $20 $2F
 
     ld   hl, wEntitiesFlashCountdownTable         ; $58AF: $21 $20 $C4

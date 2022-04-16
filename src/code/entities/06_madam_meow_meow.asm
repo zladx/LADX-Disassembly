@@ -49,7 +49,7 @@ MadamMeowMeowEntityHandler::
     ld   de, MadamMeowMeowSpriteVariants          ; $5B94: $11 $56 $5B
     call RenderActiveEntitySpritesPair            ; $5B97: $CD $C0 $3B
     ld   a, [wIsBowWowFollowingLink]              ; $5B9A: $FA $56 $DB
-    cp   $80                                      ; $5B9D: $FE $80
+    cp   BOW_WOW_KIDNAPPED                        ; $5B9D: $FE $80
     jr   nz, jr_006_5BC4                          ; $5B9F: $20 $23
 
     call AddEntityZSpeedToPos_06                  ; $5BA1: $CD $7A $65
@@ -92,28 +92,32 @@ jr_006_5BC4:
     jr   z, .jr_5BF2                              ; $5BDC: $28 $14
 
     ld   a, [wIsBowWowFollowingLink]              ; $5BDE: $FA $56 $DB
-    cp   $01                                      ; $5BE1: $FE $01
+    cp   BOW_WOW_FOLLOWING                        ; $5BE1: $FE $01
     jr   nz, .jr_5BF2                             ; $5BE3: $20 $0D
 
+    ; set status to BOW_WOW_AT_HOME
     xor  a                                        ; $5BE5: $AF
     ld   [wIsBowWowFollowingLink], a              ; $5BE6: $EA $56 $DB
     call GetEntityTransitionCountdown             ; $5BE9: $CD $05 $0C
     ld   [hl], $10                                ; $5BEC: $36 $10
     ld   e, $2F                                   ; $5BEE: $1E $2F
-    jr   jr_006_5C00                              ; $5BF0: $18 $0E
+    jr   .loadDialogIndex                         ; $5BF0: $18 $0E
 
 .jr_5BF2
     ld   a, [wIsBowWowFollowingLink]              ; $5BF2: $FA $56 $DB
+    ; check for bow_wow is at home
     and  a                                        ; $5BF5: $A7
-    jr   z, jr_006_5C00                           ; $5BF6: $28 $08
+    jr   z, .loadDialogIndex                      ; $5BF6: $28 $08
 
+    ; bow_wow is following link
     ld   e, $31                                   ; $5BF8: $1E $31
-    cp   $01                                      ; $5BFA: $FE $01
-    jr   nz, jr_006_5C00                          ; $5BFC: $20 $02
+    cp   BOW_WOW_FOLLOWING                        ; $5BFA: $FE $01
+    jr   nz, .loadDialogIndex                     ; $5BFC: $20 $02
 
+    ; bow_wow has been kidnapped
     ld   e, $32                                   ; $5BFE: $1E $32
 
-jr_006_5C00:
+.loadDialogIndex
     ld   a, e                                     ; $5C00: $7B
     jp   label_006_5C04                           ; $5C01: $C3 $04 $5C
 

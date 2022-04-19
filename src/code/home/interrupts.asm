@@ -490,17 +490,17 @@ LoadTiles::
     and  a                                        ; $05BE: $A7
     jp   z, LoadEntityTiles                       ; $05BF: $CA $9E $06
 
-    cp   $07                                      ; $05C2: $FE $07
+    cp   TILESET_LOAD_INVENTORY                   ; $05C2: $FE $07
     jp   z, LoadInventorySirenInstruments         ; $05C4: $CA $B0 $07
-    cp   $03                                      ; $05C7: $FE $03
+    cp   TILESET_LOAD_PIECE_OF_HEART_1            ; $05C7: $FE $03
     jp   z, LoadPieceOfHeartMeterTiles1           ; $05C9: $CA $62 $00
-    cp   $04                                      ; $05CC: $FE $04
+    cp   TILESET_LOAD_PIECE_OF_HEART_2            ; $05CC: $FE $04
     jp   z, LoadPieceOfHeartMeterTiles2           ; $05CE: $CA $6A $00
-    cp   $05                                      ; $05D1: $FE $05
+    cp   TILESET_CLEAR_PIECE_OF_HEART_1           ; $05D1: $FE $05
     jp   z, ClearPieceOfHeartMeterTiles1          ; $05D3: $CA $72 $00
-    cp   $06                                      ; $05D6: $FE $06
+    cp   TILESET_CLEAR_PIECE_OF_HEART_2           ; $05D6: $FE $06
     jp   z, ClearPieceOfHeartMeterTiles2          ; $05D8: $CA $7A $00
-    cp   $08                                      ; $05DB: $FE $08
+    cp   TILESET_LOAD_INVENTORY_SONG_1            ; $05DB: $FE $08
     jp   nc, LoadBGTilesCommands8ToD              ; $05DD: $D2 $D3 $07
 
     ld   a, [wIsIndoor]                           ; $05E0: $FA $A5 $DB
@@ -511,7 +511,7 @@ ELSE
     jp   z, LoadOverworldBGTiles                  ; $05E4: $CA $56 $06
 ENDC
     ldh  a, [hNeedsUpdatingBGTiles]               ; $05E7: $F0 $90
-    cp   $02                                      ; $05E9: $FE $02
+    cp   TILESET_LOAD_DUNGEON_MINIMAP             ; $05E9: $FE $02
     jp   z, LoadDungeonMinimapTiles               ; $05EB: $CA $26 $08
 
     ld   a, BANK(Dungeons2Tiles)                  ; $05EE: $3E $0D
@@ -864,9 +864,9 @@ LoadBGTilesCommands8ToD::
     call CopyData                                 ; $07F5: $CD $14 $29
 
     ldh  a, [hNeedsUpdatingBGTiles]               ; $07F8: $F0 $90
-    cp   $0A                                      ; $07FA: $FE $0A
+    cp   TILESET_LOAD_INVENTORY_SONG_3            ; $07FA: $FE $0A
     jr   z, .clearBGTilesFlag                     ; $07FC: $28 $0A
-    cp   $0D                                      ; $07FE: $FE $0D
+    cp   TILESET_LOAD_SHARED_GFX_3                ; $07FE: $FE $0D
     jr   z, .clearBGTilesFlag                     ; $0800: $28 $06
 
     ; Increment BG Tiles flag

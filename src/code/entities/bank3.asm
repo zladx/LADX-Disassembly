@@ -2851,12 +2851,12 @@ HeartPieceState1Handler::
     jp   IncrementEntityState                     ; $5A79: $C3 $12 $3B
 
 HeartPieceState2Handler::
-    ld   a, $03                                   ; $5A7C: $3E $03
+    ld   a, TILESET_LOAD_PIECE_OF_HEART_1         ; $5A7C: $3E $03
     ldh  [hNeedsUpdatingBGTiles], a               ; $5A7E: $E0 $90
     jp   IncrementEntityState                     ; $5A80: $C3 $12 $3B
 
 HeartPieceState3Handler::
-    ld   a, $04                                   ; $5A83: $3E $04
+    ld   a, TILESET_LOAD_PIECE_OF_HEART_2         ; $5A83: $3E $04
     ldh  [hNeedsUpdatingBGTiles], a               ; $5A85: $E0 $90
     jp   IncrementEntityState                     ; $5A87: $C3 $12 $3B
 
@@ -2930,12 +2930,12 @@ HeartPieceState7Handler::
     and  a                                        ; $5AFC: $A7
     ret  nz                                       ; $5AFD: $C0
 
-    ld   a, $05                                   ; $5AFE: $3E $05
+    ld   a, TILESET_CLEAR_PIECE_OF_HEART_1        ; $5AFE: $3E $05
     ldh  [hNeedsUpdatingBGTiles], a               ; $5B00: $E0 $90
     jp   IncrementEntityState                     ; $5B02: $C3 $12 $3B
 
 HeartPieceState8Handler::
-    ld   a, $06                                   ; $5B05: $3E $06
+    ld   a, TILESET_CLEAR_PIECE_OF_HEART_2        ; $5B05: $3E $06
     ldh  [hNeedsUpdatingBGTiles], a               ; $5B07: $E0 $90
     call UnloadEntity                             ; $5B09: $CD $8D $3F
     ld   a, REPLACE_TILES_TRADING_ITEM            ; $5B0C: $3E $0D

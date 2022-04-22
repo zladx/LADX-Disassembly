@@ -1043,7 +1043,7 @@ SelectRoomTilesets::
     ; (except if the tileset is W_TILESET_NO_UPDATE)
     cp   W_TILESET_NO_UPDATE                      ; $0D4F: $FE $FF
     jr   z, .indoorTilesetEnd                     ; $0D51: $28 $04
-    ld   a, $01                                   ; $0D53: $3E $01
+    ld   a, TILESET_LOAD_WORLD                    ; $0D53: $3E $01
     ldh  [hNeedsUpdatingBGTiles], a               ; $0D55: $E0 $90
 
 .indoorTilesetEnd
@@ -1101,7 +1101,7 @@ SelectRoomTilesets::
 
     ldh  [hWorldTileset], a                       ; $0D8B: $E0 $94
     ; Schedule the tiles loading operation for the next vblank
-    ld   a, $01                                   ; $0D8D: $3E $01
+    ld   a, TILESET_LOAD_WORLD                    ; $0D8D: $3E $01
     ldh  [hNeedsUpdatingBGTiles], a               ; $0D8F: $E0 $90
 .tilesetEnd
 

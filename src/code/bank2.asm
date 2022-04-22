@@ -4716,7 +4716,7 @@ ENDC
     ld   [wC154], a                               ; $6180: $EA $54 $C1
     ld   a, [wIsIndoor]                           ; $6183: $FA $A5 $DB
     and  a                                        ; $6186: $A7
-    ld   a, $07                                   ; $6187: $3E $07
+    ld   a, TILESET_LOAD_INVENTORY                ; $6187: $3E $07
     jr   z, jr_002_619C                           ; Partially determines if subscreen dungeon map should be drawn
 
     ldh  a, [hMapId]                              ; $618B: $F0 $F7
@@ -4724,12 +4724,12 @@ ENDC
     jr   z, .jr_6197                              ; $618F: $28 $06
 
     cp   MAP_WINDFISHS_EGG                        ; $6191: $FE $08
-    ld   a, $07                                   ; $6193: $3E $07
+    ld   a, TILESET_LOAD_INVENTORY                ; $6193: $3E $07
     jr   nc, jr_002_619C                          ; $6195: $30 $05
 
 .jr_6197
     call LoadMinimap                              ; $6197: $CD $09 $67
-    ld   a, $02                                   ; $619A: $3E $02
+    ld   a, TILESET_LOAD_DUNGEON_MINIMAP          ; $619A: $3E $02
 
 jr_002_619C:
     ldh  [hNeedsUpdatingBGTiles], a               ; $619C: $E0 $90

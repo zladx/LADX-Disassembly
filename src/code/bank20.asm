@@ -3479,7 +3479,7 @@ jr_020_5F59:
     and  a                                        ; $5FA2: $A7
     jr   z, jr_020_5FB2                           ; $5FA3: $28 $0D
 
-    ld   a, $08                                   ; $5FA5: $3E $08
+    ld   a, TILESET_LOAD_INVENTORY_SONG_1         ; $5FA5: $3E $08
     ldh  [hNeedsUpdatingBGTiles], a               ; $5FA7: $E0 $90
     ld   a, $10                                   ; $5FA9: $3E $10
     ld   [wOcarinaMenuOpening], a                 ; $5FAB: $EA $B8 $C1
@@ -3554,7 +3554,7 @@ jr_020_600D:
     and  a                                        ; $6014: $A7
     jr   z, .jr_6027                              ; $6015: $28 $10
 
-    ld   a, $08                                   ; $6017: $3E $08
+    ld   a, TILESET_LOAD_INVENTORY_SONG_1         ; $6017: $3E $08
     ldh  [hNeedsUpdatingBGTiles], a               ; $6019: $E0 $90
     ld   a, $10                                   ; $601B: $3E $10
     ld   [wOcarinaMenuOpening], a                 ; $601D: $EA $B8 $C1
@@ -3621,7 +3621,7 @@ func_020_6111::
     jr   nz, jr_020_612E                          ; $611B: $20 $11
 
     ld   hl, hNeedsUpdatingBGTiles                ; $611D: $21 $90 $FF
-    ld   [hl], $0B                                ; $6120: $36 $0B
+    ld   [hl], TILESET_LOAD_SHARED_GFX_1          ; $6120: $36 $0B
     ld   a, [wCloseInventoryAfterOcarinaMenuClosed] ; $6122: $FA $BA $C1
     and  a                                        ; $6125: $A7
     jr   z, .ret_612D                             ; $6126: $28 $05

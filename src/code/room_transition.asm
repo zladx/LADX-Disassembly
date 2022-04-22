@@ -461,7 +461,7 @@ RoomTransitionPrepareHandler::
     jr   nz, .colorDungeonEnd                     ; $7AB2: $20 $09
 
     ; force update the background tiles
-    ld   a, $01                                   ; $7AB4: $3E $01
+    ld   a, TILESET_LOAD_WORLD                    ; $7AB4: $3E $01
     ldh  [hNeedsUpdatingBGTiles], a               ; $7AB6: $E0 $90
 
     ; Replace objects $56 and $57 by object $0D

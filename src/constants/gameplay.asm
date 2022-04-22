@@ -431,6 +431,10 @@ SWORD_RECOIL_GENIE_JAR_STRONGER equ $30
 SWORD_RECOIL_DEFAULT            equ $30
 
 ; constants for wIsBowWowFollowingLink
+;
+; There exist code, where multiple checks are done.
+; All values are combined with OR-operations and then masked once.
+; To avoid collisions, the highest bit is used here for KIDNAPPED.
 BOW_WOW_AT_HOME   equ $00
 BOW_WOW_FOLLOWING equ $01
 BOW_WOW_KIDNAPPED equ $80

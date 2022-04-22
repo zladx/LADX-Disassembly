@@ -7323,7 +7323,7 @@ ENDC
     or   [hl]                                     ; $740C: $B6
     ld   hl, wIsBowWowFollowingLink               ; $740D: $21 $56 $DB
     or   [hl]                                     ; $7410: $B6
-    and  $7E | BOW_WOW_FOLLOWING                  ; $7411: $E6 $7F
+    and  LOW(~BOW_WOW_KIDNAPPED)                  ; $7411: $E6 $7F
     jr   z, jr_002_742D                           ; $7413: $28 $18
 
 jr_002_7415:

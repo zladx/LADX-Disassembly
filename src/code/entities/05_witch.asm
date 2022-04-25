@@ -235,8 +235,7 @@ func_005_48F7::
     jp   IncrementEntityState                     ; $4906: $C3 $12 $3B
 
 func_005_4909::
-    ld   a, $7E                                   ; $4909: $3E $7E
-    call OpenDialogInTable1                       ; $490B: $CD $73 $23
+    call_open_dialog Dialog17E ; "Good job!"      ; $4909: $3E $7E $CD $73 $23
     jp   IncrementEntityState                     ; $490E: $C3 $12 $3B
 
 func_005_4911::

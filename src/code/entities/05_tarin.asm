@@ -720,7 +720,7 @@ TarinShield3Handler::
 
     ld   a, [wIsMarinFollowingLink]               ; $4D18: $FA $73 $DB
     and  a                                        ; $4D1B: $A7
-    ld   a, $DD                                   ; $4D1C: $3E $DD
+    ld_dialog_low a, Dialog1DD ; "I lost my taste for honey" ; $4D1C: $3E $DD
     jr   nz, jr_005_4D35                          ; $4D1E: $20 $15
 
     ld   a, [wTradeSequenceItem]                  ; $4D20: $FA $0E $DB
@@ -737,7 +737,7 @@ TarinShield3Handler::
     ret                                           ; $4D32: $C9
 
 jr_005_4D33:
-    ld   a, $C5                                   ; $4D33: $3E $C5
+    ld_dialog_low a, Dialog1C5 ; "Got bananas on the beach" ; $4D33: $3E $C5
 
 jr_005_4D35:
     jp   OpenDialogInTable1                       ; $4D35: $C3 $73 $23
@@ -748,10 +748,10 @@ jr_005_4D38:
 
     ld   a, [wHasInstrument1]                     ; $4D3D: $FA $65 $DB
     bit  1, a                                     ; $4D40: $CB $4F
-    ld   a, $11                                   ; $4D42: $3E $11
+    ld_dialog_low a, Dialog011 ; "I'm tired…"     ; $4D42: $3E $11
     jr   z, .jr_4D48                              ; $4D44: $28 $02
 
-    ld   a, $10                                   ; $4D46: $3E $10
+    ld_dialog_low a, Dialog010 ; "Snore…"         ; $4D46: $3E $10
 
 .jr_4D48
     call OpenDialogInTable0                       ; $4D48: $CD $85 $23

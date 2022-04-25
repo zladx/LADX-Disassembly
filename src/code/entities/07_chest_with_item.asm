@@ -38,15 +38,41 @@ ChestItemSpriteTable::
     db $A6, $15        ; CHEST_RUPEES_500
     db $9E, $14        ; CHEST_SEASHELL
 
-SpitObjectDialog::
-    db $90 ; Dialog144
-    db $91 ; Dialog145
-    db $92 ; Dialog146
-    db $93 ; Dialog147
-    db $94, $95, $96, $97, $98, $99
-    db $9A, $9B, $9C, $9D, $9E, $9F, $A0, $A1
-    db $A2, $A3, $A4, $A5, $A6, $A7, $A8, $A9
-    db $AA, $AC, $AB, $AD, $AE, $AE, $EF, $06
+GotItemDialog::
+._00 db_dialog_low Dialog090 ; Power Bracelet
+._01 db_dialog_low Dialog091 ; Shield back
+._02 db_dialog_low Dialog092 ; unused (points to another dialog)
+._03 db_dialog_low Dialog093 ; Hook Shot
+._04 db_dialog_low Dialog094 ; Magic Rod
+._05 db_dialog_low Dialog095 ; Pegasus Boots
+._06 db_dialog_low Dialog096 ; Ocarina
+._07 db_dialog_low Dialog097 ; Roc's Feather
+._08 db_dialog_low Dialog098 ; Showel
+._09 db_dialog_low Dialog099 ; Magic Powder
+._0A db_dialog_low Dialog09A ; Bomb
+._0B db_dialog_low Dialog09B ; Found your sword
+._0C db_dialog_low Dialog09C ; Flippers
+._0D db_dialog_low Dialog09D ; Magifying Lens
+._0E db_dialog_low Dialog09E ; New sword
+._0F db_dialog_low Dialog09F ; New sword
+._10 db_dialog_low Dialog0A0 ; Secret medicine
+._11 db_dialog_low Dialog0A1 ; Tail Key
+._12 db_dialog_low Dialog0A2 ; Slime Key
+._13 db_dialog_low Dialog0A3 ; Angler Key
+._14 db_dialog_low Dialog0A4 ; Face Key
+._15 db_dialog_low Dialog0A5 ; Bird Key
+._16 db_dialog_low Dialog0A6 ; Map
+._17 db_dialog_low Dialog0A7 ; Compass
+._18 db_dialog_low Dialog0A8 ; Stone beak
+._19 db_dialog_low Dialog0A9 ; Nightmare's Key
+._1A db_dialog_low Dialog0AA ; Small Key
+._1B db_dialog_low Dialog0AC ; 50 Rupees
+._1C db_dialog_low Dialog0AB ; 20 Rupees
+._1D db_dialog_low Dialog0AD ; 100 Rupees
+._1E db_dialog_low Dialog0AE ; 200 Rupees
+._1F db_dialog_low Dialog0AE ; 200 Rupees
+._20 db_dialog_low Dialog0EF ; Secret Seashell
+._21 db_dialog_low Dialog006 ; unused (Tarin's taking a nap at home)
 
 Data_007_7BBB::
     db $10, $10, $10, $10, $10, $10, $10, $10
@@ -210,7 +236,7 @@ jr_007_7C93:
     cp   $02                                      ; $7CB9: $FE $02
     jr   nz, .jr_7CC1                             ; $7CBB: $20 $04
 
-    ld   a, $ED                                   ; $7CBD: $3E $ED
+    ld_dialog_low a, Dialog0ED ; "Got the Mirror Shield!" ; $7CBD: $3E $ED
     jr   jr_007_7CE6                              ; $7CBF: $18 $25
 
 .jr_7CC1
@@ -222,7 +248,7 @@ jr_007_7C93:
     cp   $02                                      ; $7CC9: $FE $02
     jr   nz, .jr_7CD1                             ; $7CCB: $20 $04
 
-    ld   a, $9F                                   ; $7CCD: $3E $9F
+    ld_dialog_low a, Dialog09F ; "Got a new sword!" ; $7CCD: $3E $9F
     jr   jr_007_7CE6                              ; $7CCF: $18 $15
 
 .jr_7CD1
@@ -234,11 +260,11 @@ jr_007_7C93:
     cp   $02                                      ; $7CD9: $FE $02
     jr   nz, .jr_7CE1                             ; $7CDB: $20 $04
 
-    ld   a, $EE                                   ; $7CDD: $3E $EE
+    ld_dialog_low a, Dialog0EE ; "Got a more powerful Bracelet!" ; $7CDD: $3E $EE
     jr   jr_007_7CE6                              ; $7CDF: $18 $05
 
 .jr_7CE1
-    ld   hl, SpitObjectDialog                     ; $7CE1: $21 $99 $7B
+    ld   hl, GotItemDialog                        ; $7CE1: $21 $99 $7B
     add  hl, de                                   ; $7CE4: $19
     ld   a, [hl]                                  ; $7CE5: $7E
 

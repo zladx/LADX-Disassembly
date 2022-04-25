@@ -196,7 +196,7 @@ WAVE_SFX_CUCCO_HURT      equ $13
 ;WAVE_SFX_UNKNOWN        equ $14
 WAVE_SFX_OCARINA_NOSONG  equ $15    ; Off-key notes for when you have no songs available
 WAVE_SFX_BOSS_HIT        equ $16
-;WAVE_SFX_UNKNOWN        equ $17
+WAVE_SFX_WIND_FISH       equ $17
 WAVE_SFX_CHAIN_CHOMP     equ $18
 WAVE_SFX_HOOT            equ $19
 ;WAVE_SFX_UNKNOWN        equ $1A

@@ -47,22 +47,22 @@ PapahlsWifeState0Handler::
     and  $02                                      ; $4E88: $E6 $02
     jp   z, label_018_4E91                        ; $4E8A: $CA $91 $4E
 
-    ld   e, $EE                                   ; $4E8D: $1E $EE
+    ld_dialog_low e, Dialog1EE                    ; $4E8D: $1E $EE
     jr   jr_018_4EA4                              ; $4E8F: $18 $13
 
 label_018_4E91:
     ld   a, [wTradeSequenceItem]                  ; $4E91: $FA $0E $DB
     and  a                                        ; $4E94: $A7
-    ld   e, $2A                                   ; $4E95: $1E $2A
+    ld_dialog_low e, Dialog12A                    ; $4E95: $1E $2A
     jr   z, jr_018_4EA4                           ; $4E97: $28 $0B
 
-    ld   e, $2C                                   ; $4E99: $1E $2C
+    ld_dialog_low e, Dialog12C                    ; $4E99: $1E $2C
     cp   $01                                      ; $4E9B: $FE $01
     jr   nz, jr_018_4EA4                          ; $4E9D: $20 $05
 
 jr_018_4E9F:
     call IncrementEntityState                     ; $4E9F: $CD $12 $3B
-    ld   e, $2B                                   ; $4EA2: $1E $2B
+    ld_dialog_low e, Dialog12B                    ; $4EA2: $1E $2B
 
 jr_018_4EA4:
     ld   a, e                                     ; $4EA4: $7B

@@ -3204,8 +3204,12 @@ KeyDropSpriteTable:
     db   $C6, $14
     db   $CA, $17
 
-KeyCollectDialogTable::
-    db   $00, $A3, $A4, $A5, $00
+KeyCollectDialogs::
+._0 db_dialog_low Dialog000 ; unused
+._1 db_dialog_low Dialog0A3 ; Angler Key
+._2 db_dialog_low Dialog0A4 ; Face Key
+._3 db_dialog_low Dialog0A5 ; Bird Key
+._4 db_dialog_low Dialog000 ; unused
 
 KeyDropPointEntityHandler::
     call CheckForEntityFallingDownQuicksandHole   ; $5C89: $CD $EA $5C
@@ -3237,7 +3241,7 @@ KeyDropPointEntityHandler::
     dec  a                                        ; $5CB3: $3D
     ld   e, a                                     ; $5CB4: $5F
     ld   d, b                                     ; $5CB5: $50
-    ld   hl, KeyCollectDialogTable                ; $5CB6: $21 $84 $5C
+    ld   hl, KeyCollectDialogs                    ; $5CB6: $21 $84 $5C
     add  hl, de                                   ; $5CB9: $19
     ld   a, [hl]                                  ; $5CBA: $7E
     call OpenDialogInTable0                       ; $5CBB: $CD $85 $23
@@ -3621,9 +3625,22 @@ IF __PATCH_0__
     ld   [wActivePowerUp], a
 ENDC
 
+    ; Open "You got XXXX instrument" dialog.
+    ;
+    ; Dialog id is $100 + hMapId. That yields:
+    ;
+    ; Dialog100
+    ; Dialog101
+    ; Dialog102
+    ; Dialog103
+    ; Dialog104
+    ; Dialog105
+    ; Dialog106
+    ; Dialog107
     ldh  a, [hMapId]                              ; $5EE3: $F0 $F7
     add  $00                                      ; $5EE5: $C6 $00 (???)
     call OpenDialogInTable1                       ; $5EE7: $CD $73 $23
+
     ldh  a, [hMapId]                              ; $5EEA: $F0 $F7
     ld   e, a                                     ; $5EEC: $5F
     ld   d, b                                     ; $5EED: $50
@@ -3861,18 +3878,18 @@ HidingSlimeKeyEntityHandler::
     call MarkRoomCompleted                        ; $602F: $CD $2A $51
     ld   hl, hRoomStatus                          ; $6032: $21 $F8 $FF
     res  4, [hl]                                  ; $6035: $CB $A6
-    ld   e, $A2                                   ; $6037: $1E $A2
+    ld_dialog_low e, Dialog0A2 ; "Got the Slime Key" ; $6037: $1E $A2
     ld   a, [wGoldenLeavesCount]                  ; $6039: $FA $15 $DB
     cp   SLIME_KEY                                ; $603C: $FE $06
-    jr   z, .jr_6047                              ; $603E: $28 $07
+    jr   z, .openDialog                           ; $603E: $28 $07
 
-    ld   e, $E8                                   ; $6040: $1E $E8
+    ld_dialog_low e, Dialog0E8 ; "Found a Gold Leaf" ; $6040: $1E $E8
     cp   GOLDEN_LEAVES_5                          ; $6042: $FE $05
-    jr   nz, .jr_6047                             ; $6044: $20 $01
+    jr   nz, .openDialog                          ; $6044: $20 $01
 
-    inc  e                                        ; $6046: $1C
+    inc  e ; Dialog0E9 "Found the final Golden Leaf" ; $6046: $1C
 
-.jr_6047
+.openDialog
     ld   a, e                                     ; $6047: $7B
     call OpenDialogInTable0                       ; $6048: $CD $85 $23
     xor  a                                        ; $604B: $AF
@@ -7096,33 +7113,36 @@ jr_003_72D8:
 jr_003_7304:
     ld   a, $03                                   ; $7304: $3E $03
     ld   [wBossAgonySFXCountdown], a              ; $7306: $EA $A7 $C5
+
     ld   hl, wEntitiesPrivateState2Table          ; $7309: $21 $C0 $C2
     add  hl, bc                                   ; $730C: $09
     ld   [hl], b                                  ; $730D: $70
+
     ld   hl, wEntitiesTypeTable                   ; $730E: $21 $A0 $C3
     add  hl, bc                                   ; $7311: $09
     ld   a, [hl]                                  ; $7312: $7E
-    ld   e, $B7                                   ; $7313: $1E $B7
-    cp   $5A                                      ; $7315: $FE $5A
-    jr   z, .jr_7325                              ; $7317: $28 $0C
 
-    ld   e, $B9                                   ; $7319: $1E $B9
-    cp   $63                                      ; $731B: $FE $63
-    jr   z, jr_003_7330                           ; $731D: $28 $11
+    ld_dialog_low e, Dialog0B7                    ; $7313: $1E $B7
+    cp   ENTITY_FACADE                            ; $7315: $FE $5A
+    jr   z, .openBossDefeatedDialog               ; $7317: $28 $0C
 
-    ld   e, $BD                                   ; $731F: $1E $BD
-    cp   $62                                      ; $7321: $FE $62
+    ld_dialog_low e, Dialog0B9                    ; $7319: $1E $B9
+    cp   ENTITY_EVIL_EAGLE                        ; $731B: $FE $63
+    jr   z, .openDialogAtBottom                   ; $731D: $28 $11
+
+    ld_dialog_low e, Dialog0BD                    ; $731F: $1E $BD
+    cp   ENTITY_HOT_HEAD                          ; $7321: $FE $62
     jr   nz, jr_003_733E                          ; $7323: $20 $19
 
 ; Boss dialog after defeating them
-.jr_7325
+.openBossDefeatedDialog
     ld   a, e                                     ; $7325: $7B
     call OpenDialogInTable0                       ; $7326: $CD $85 $23
     ld   a, MUSIC_BOSS_WARNING                    ; $7329: $3E $5E
     ld   [wMusicTrackToPlay], a                   ; $732B: $EA $68 $D3
     jr   jr_003_733E                              ; $732E: $18 $0E
 
-jr_003_7330:
+.openDialogAtBottom
 IF __PATCH_0__
     ld   a, $01
     ld   [wDE0B], a

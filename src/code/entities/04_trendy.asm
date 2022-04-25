@@ -255,7 +255,7 @@ jr_004_6FE6:
     and  a                                        ; $7007: $A7
     jr   z, .jr_700E                              ; $7008: $28 $04
 
-    ld   a, $F7                                   ; $700A: $3E $F7
+    ld_dialog_low a, Dialog0F7                    ; $700A: $3E $F7
     jr   jr_004_701A                              ; $700C: $18 $0C
 
 .jr_700E
@@ -263,10 +263,10 @@ jr_004_6FE6:
     add  hl, bc                                   ; $7011: $09
     ld   a, [hl]                                  ; $7012: $7E
     and  a                                        ; $7013: $A7
-    ld   a, $3B                                   ; $7014: $3E $3B
+    ld_dialog_low a, Dialog03B                    ; $7014: $3E $3B
     jr   z, jr_004_701A                           ; $7016: $28 $02
 
-    ld   a, $3E                                   ; $7018: $3E $3E
+    ld_dialog_low a, Dialog03E                    ; $7018: $3E $3E
 
 jr_004_701A:
     call OpenDialogInTable0                       ; $701A: $CD $85 $23
@@ -327,10 +327,10 @@ jr_004_705D:
     ld   a, [hl]                                  ; $706A: $7E
     ld   [hl], $01                                ; $706B: $36 $01
     and  a                                        ; $706D: $A7
-    ld   a, $3C                                   ; $706E: $3E $3C
+    ld_dialog_low a, Dialog03C                    ; $706E: $3E $3C
     jr   z, .jr_7074                              ; $7070: $28 $02
 
-    ld   a, $3F                                   ; $7072: $3E $3F
+    ld_dialog_low a, Dialog03F                    ; $7072: $3E $3F
 
 .jr_7074
     call OpenDialogInTable0                       ; $7074: $CD $85 $23
@@ -1250,8 +1250,13 @@ jr_004_75AA:
     ld   [hl], $0A                                ; $75B1: $36 $0A
     jp   IncrementEntityState                     ; $75B3: $C3 $12 $3B
 
-Data_004_75B6::
-    db   $44, $43, $42, $41, $3D, $2A
+TrendyPrizeDialogs::
+._0 db_dialog_low Dialog044 ; Yoshi
+._1 db_dialog_low Dialog043 ; unused
+._2 db_dialog_low Dialog042 ; 30 Rupees
+._3 db_dialog_low Dialog041 ; Magic Powder
+._4 db_dialog_low Dialog03D ; Shield
+._5 db_dialog_low Dialog02A ; 1 Heart
 
 func_004_75BC::
     ld   a, [wIsMarinFollowingLink]               ; $75BC: $FA $73 $DB
@@ -1333,13 +1338,16 @@ func_004_75BC::
     call ClearEntityStatusBank04                  ; $762D: $CD $7A $6D
     ld   hl, hWaveSfx                             ; $7630: $21 $F3 $FF
     ld   [hl], WAVE_SFX_SEASHELL                  ; $7633: $36 $01
+
     ldh  a, [hActiveEntitySpriteVariant]          ; $7635: $F0 $F1
     ld   e, a                                     ; $7637: $5F
     ld   d, b                                     ; $7638: $50
-    ld   hl, Data_004_75B6                        ; $7639: $21 $B6 $75
+
+    ld   hl, TrendyPrizeDialogs                   ; $7639: $21 $B6 $75
     add  hl, de                                   ; $763C: $19
     ld   a, [hl]                                  ; $763D: $7E
     call OpenDialogInTable0                       ; $763E: $CD $85 $23
+
     ldh  a, [hActiveEntitySpriteVariant]          ; $7641: $F0 $F1
     dec  a                                        ; $7643: $3D
     jr   nz, .jr_7647                             ; $7644: $20 $01

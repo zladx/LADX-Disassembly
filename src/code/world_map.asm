@@ -210,7 +210,7 @@ jr_001_576F::
     jr   nz, jr_001_577E                          ; $5778: $20 $04
 
 .jr_577A::
-    ld   a, $76                                   ; $577A: $3E $76
+    ld_dialog_low a, Dialog076 ; "Goponga Swamp"  ; $577A: $3E $76
     jr   jr_001_5792                              ; $577C: $18 $14
 
 jr_001_577E::

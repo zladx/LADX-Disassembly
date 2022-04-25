@@ -109,5 +109,5 @@ jr_018_521C:
 
 .jr_5255
     ld   a, e                                     ; $5255: $7B
-    add  $4A                                      ; $5256: $C6 $4A
+    add  $4A ; open Dialog24A, Dialog24B, Dialog24C or Dialog24D ; $5256: $C6 $4A
     jp   OpenDialogInTable2                       ; $5258: $C3 $7C $23

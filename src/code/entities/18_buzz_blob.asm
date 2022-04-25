@@ -112,7 +112,7 @@ BuzzBlobState0Handler::
     add  hl, bc                                   ; $77C2: $09
     ld   a, [hl]                                  ; $77C3: $7E
     and  $03                                      ; $77C4: $E6 $03
-    add  $7C                                      ; $77C6: $C6 $7C
+    add  $7C ; open Dialog27C, Dialog27D, Dialog27E or Dialog27F ; $77C6: $C6 $7C
     inc  [hl]                                     ; $77C8: $34
     call OpenDialogInTable2                       ; $77C9: $CD $7C $23
 

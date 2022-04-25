@@ -2322,9 +2322,9 @@ OpenDungeonNameDialog::
     ld   a, [wFreeMovementMode]                   ; $61F5: $FA $7B $C1
     and  a                                        ; $61F8: $A7
     jr   nz, .return                              ; $61F9: $20 $07
-    ; Open Dialog n° (hMapId + $56)
+    ; Open Dialog n° (Dialog056 + hMapId)
     ldh  a, [hMapId]                              ; $61FB: $F0 $F7
-    add  a, $56                                   ; $61FD: $C6 $56
+    add  a, LOW($056)                             ; $61FD: $C6 $56
     call OpenDialogInTable0                       ; $61FF: $CD $85 $23
 .return
     ret                                           ; $6202: $C9

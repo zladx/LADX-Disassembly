@@ -280,7 +280,7 @@ MarineBeachScrollStop::
     ld   a, [wC3C7]                               ; $643B: $FA $C7 $C3
     and  a                                        ; $643E: $A7
     jr   nz, .ret_6449                            ; $643F: $20 $08
-    ld   a, $D8                                   ; $6441: $3E $D8
+    ld_dialog_low a, Dialog1D8                    ; $6441: $3E $D8
     call OpenMarinBeachDialog                     ; $6443: $CD $DE $67
     call IncrementGameplaySubtype                 ; $6446: $CD $D6 $44
 
@@ -311,7 +311,7 @@ MarineBeachPause1::
     ld   a, [wC3C7]                               ; $646A: $FA $C7 $C3
     and  a                                        ; $646D: $A7
     jr   nz, .ret_6478                            ; $646E: $20 $08
-    ld   a, $D9                                   ; $6470: $3E $D9
+    ld_dialog_low a, Dialog1D9                    ; $6470: $3E $D9
     call OpenMarinBeachDialog                     ; $6472: $CD $DE $67
     jp   IncrementGameplaySubtypeAndReturn        ; $6475: $C3 $D6 $44
 
@@ -337,7 +337,7 @@ MarineBeachPause2::
     ld   a, [wC3C7]                               ; $6493: $FA $C7 $C3
     and  a                                        ; $6496: $A7
     jr   nz, .ret_64A1                            ; $6497: $20 $08
-    ld   a, $DA                                   ; $6499: $3E $DA
+    ld_dialog_low a, Dialog1DA                    ; $6499: $3E $DA
     call OpenMarinBeachDialog                     ; $649B: $CD $DE $67
     jp   IncrementGameplaySubtypeAndReturn        ; $649E: $C3 $D6 $44
 
@@ -352,13 +352,13 @@ MarineBeachAreYouListening::
     ld   a, [wDialogAskSelectionIndex]            ; $64AB: $FA $77 $C1
     and  a                                        ; $64AE: $A7
     jr   nz, .jr_64BA                             ; $64AF: $20 $09
-    ld   a, $DB                                   ; $64B1: $3E $DB
+    ld_dialog_low a, Dialog1DB                    ; $64B1: $3E $DB
     call OpenMarinBeachDialog                     ; $64B3: $CD $DE $67
     call IncrementGameplaySubtype                 ; $64B6: $CD $D6 $44
     ret                                           ; $64B9: $C9
 
 .jr_64BA::
-    ld   a, $DE                                   ; $64BA: $3E $DE
+    ld_dialog_low a, Dialog1DE                    ; $64BA: $3E $DE
     call OpenMarinBeachDialog                     ; $64BC: $CD $DE $67
     ld   a, $06                                   ; $64BF: $3E $06
     ld   [wGameplaySubtype], a                    ; $64C1: $EA $96 $DB
@@ -376,7 +376,7 @@ MarineBeachDialog3::
     ld   a, [wDialogState]                        ; $64D3: $FA $9F $C1
     and  a                                        ; $64D6: $A7
     jr   nz, .ret_64E6                            ; $64D7: $20 $0D
-    ld   a, $DC                                   ; $64D9: $3E $DC
+    ld_dialog_low a, Dialog1DC                    ; $64D9: $3E $DC
     call OpenMarinBeachDialog                     ; $64DB: $CD $DE $67
     ld   a, $30                                   ; $64DE: $3E $30
     ld   [wC3C7], a                               ; $64E0: $EA $C7 $C3

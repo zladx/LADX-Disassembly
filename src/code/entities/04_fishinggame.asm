@@ -1344,11 +1344,11 @@ func_004_6689::
     ld   [hl], $40                                ; $66D0: $36 $40
     ld   hl, wMaxHealth                           ; $66D2: $21 $5B $DB
     inc  [hl]                                     ; $66D5: $34
-    ld   a, $FF                                   ; $66D6: $3E $FF
+    ld_dialog_low a, Dialog1FF ; "It has a piece of heart! New heart" ; $66D6: $3E $FF
     jr   jr_004_66DC                              ; $66D8: $18 $02
 
 .jr_66DA
-    ld   a, $FE                                   ; $66DA: $3E $FE
+    ld_dialog_low a, Dialog1FE ; "It has a piece of heart" ; $66DA: $3E $FE
 
 jr_004_66DC:
     call OpenDialogInTable1                       ; $66DC: $CD $73 $23

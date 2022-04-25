@@ -349,7 +349,7 @@ PhotoAlbumInit4Handler:
 
     xor  a                                        ; $421E: PhotoAlbumInit4Handler $AF
     ld   [wD1D1], a                               ; $421F: PhotoAlbumInit4Handler $EA $D1 $D1
-    ld   a, $2C                                   ; $4222: PhotoAlbumInit4Handler $3E $2C
+    ld_dialog_low a, Dialog22C                    ; $4222: PhotoAlbumInit4Handler $3E $2C
     ld   [wDialogIndex], a                        ; $4224: PhotoAlbumInit4Handler $EA $73 $C1
     call OpenDialogInTable2                       ; $4227: PhotoAlbumInit4Handler $CD $7C $23
     ld   a, $01                                   ; $422A: PhotoAlbumInit4Handler $3E $01

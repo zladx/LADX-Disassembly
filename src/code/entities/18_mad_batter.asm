@@ -105,15 +105,17 @@ MadBatterState4Handler::
     call GetEntityTransitionCountdown             ; $4F84: $CD $05 $0C
     ret  nz                                       ; $4F87: $C0
 
-    ld   a, $E1                                   ; $4F88: $3E $E1
+    ld_dialog_low a, Dialog0E1 ; "You woke me up" ; $4F88: $3E $E1
     call OpenDialogAtBottom                       ; $4F8A: $CD $80 $50
     jp   IncrementEntityState                     ; $4F8D: $C3 $12 $3B
 
 MadBatterUpgradedMaximumTable::
     db   $40, $60, $60
 
-Data_018_4F93::
-    db   $E2, $E3, $E4
+MadBatterUpgradeDialogs::
+._0 db_dialog_low Dialog0E2 ; "More Magic Powder"
+._1 db_dialog_low Dialog0E3 ; "More Bombs"
+._2 db_dialog_low Dialog0E4 ; "More arrows"
 
 MadBatterState5Handler::
     call RenderMadBatterSprite                    ; $4F96: $CD $A8 $50
@@ -144,7 +146,7 @@ jr_018_4F9E:
     cp   [hl]                                     ; $4FB9: $BE
     jr   z, jr_018_4F9E                           ; $4FBA: $28 $E2
 
-    ld   hl, Data_018_4F93                        ; $4FBC: $21 $93 $4F
+    ld   hl, MadBatterUpgradeDialogs              ; $4FBC: $21 $93 $4F
     add  hl, de                                   ; $4FBF: $19
     ld   a, [hl]                                  ; $4FC0: $7E
     call OpenDialogAtBottom                       ; $4FC1: $CD $80 $50
@@ -197,7 +199,7 @@ MadBatterState7Handler::
     ret  nz                                       ; $5012: $C0
 
     call ClearEntitySpeed                         ; $5013: $CD $7F $3D
-    ld   a, $E5                                   ; $5016: $3E $E5
+    ld_dialog_low a, Dialog0E5 ; "Take care!"     ; $5016: $3E $E5
     call OpenDialogAtBottom                       ; $5018: $CD $80 $50
     call IncrementEntityState                     ; $501B: $CD $12 $3B
     ld   a, [wD201]                               ; $501E: $FA $01 $D2

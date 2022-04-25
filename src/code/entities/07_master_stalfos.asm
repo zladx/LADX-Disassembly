@@ -308,7 +308,7 @@ func_007_6B16::
     cp   $01                                      ; $6B19: $FE $01
     jr   nz, jr_007_6B33                          ; $6B1B: $20 $16
 
-    ld   e, $12                                   ; $6B1D: $1E $12
+    ld_dialog_low e, Dialog112 ; "You found me!"  ; $6B1D: $1E $12
     ldh  a, [hMapRoom]                            ; $6B1F: $F0 $F6
     cp   ROOM_INDOOR_A_MASTER_STALFOS_2           ; $6B21: $FE $92
     jr   z, .jr_6B2F                              ; $6B23: $28 $0A
@@ -317,7 +317,7 @@ func_007_6B16::
     cp   ROOM_INDOOR_A_MASTER_STALFOS_FINAL       ; $6B29: $FE $80
     jr   nz, jr_007_6B33                          ; $6B2B: $20 $06
 
-    ld   e, $14                                   ; $6B2D: $1E $14
+    ld_dialog_low e, Dialog114 ; "I can't outlast you" ; $6B2D: $1E $14
 
 .jr_6B2F
     ld   a, e                                     ; $6B2F: $7B

@@ -432,10 +432,10 @@ jr_019_5093:
 
     ld   a, [wIsRoosterFollowingLink]             ; $5097: $FA $7B $DB
     and  a                                        ; $509A: $A7
-    ld   a, $8B                                   ; $509B: $3E $8B
+    ld_dialog_low a, Dialog18B                    ; $509B: $3E $8B
     jr   z, .jr_50A1                              ; $509D: $28 $02
 
-    ld   a, $8C                                   ; $509F: $3E $8C
+    ld_dialog_low a, Dialog18C                    ; $509F: $3E $8C
 
 .jr_50A1
     jp   OpenDialogInTable1                       ; $50A1: $C3 $73 $23

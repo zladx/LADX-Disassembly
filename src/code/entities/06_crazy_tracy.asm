@@ -165,9 +165,9 @@ CrazyTracyProposingPriceHandler::
     add  hl, bc                                   ; $5F61: $09
     ld   a, [hl]                                  ; $5F62: $7E
     and  $01                                      ; $5F63: $E6 $01
-    ld   a, $018                                  ; $5F65: $3E $18
+    ld_dialog_low a, Dialog018 ; "Will you give 28 Rupees?" ; $5F65: $3E $18
     jr   z, .priceEnd                             ; $5F67: $28 $02
-    ld   a, $019                                  ; $5F69: $3E $19
+    ld_dialog_low a, Dialog019 ; "How about 42 Rupees?" ; $5F69: $3E $19
 .priceEnd
 
     call OpenDialogInTable0                       ; $5F6B: $CD $85 $23

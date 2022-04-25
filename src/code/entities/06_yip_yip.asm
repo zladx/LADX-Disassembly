@@ -1,5 +1,5 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-YipYip1SpriteVariants::
+YipYipSpriteVariants::
 .variant0
     db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
     db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
@@ -26,7 +26,7 @@ YipYip1SpriteVariants::
     db $04, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-YipYip2SpriteVariants::
+YipYipWithRibbonSpriteVariants::
 .variant0
     db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
     db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
@@ -55,11 +55,11 @@ YipYip2SpriteVariants::
 YipYipEntityHandler::
     ld   a, [wDialogState]                        ; $59E8: $FA $9F $C1
     and  a                                        ; $59EB: $A7
-    jr   z, jr_006_5A0D                           ; $59EC: $28 $1F
+    jr   z, .jr_006_5A0D                          ; $59EC: $28 $1F
 
     ld   a, [wDialogIndex]                        ; $59EE: $FA $73 $C1
-    cp   $82                                      ; $59F1: $FE $82
-    jr   z, jr_006_5A0D                           ; $59F3: $28 $18
+    cp_dialog_low Dialog182                                ; $59F1: $FE $82
+    jr   z, .jr_006_5A0D                          ; $59F3: $28 $18
 
     call func_006_6594                            ; $59F5: $CD $94 $65
     ld   hl, wEntitiesDirectionTable              ; $59F8: $21 $80 $C3
@@ -77,7 +77,7 @@ YipYipEntityHandler::
     ld   a, e                                     ; $5A0A: $7B
     ldh  [hActiveEntitySpriteVariant], a          ; $5A0B: $E0 $F1
 
-jr_006_5A0D:
+.jr_006_5A0D
     ld   hl, wEntitiesDirectionTable              ; $5A0D: $21 $80 $C3
     add  hl, bc                                   ; $5A10: $09
     ld   a, [hl]                                  ; $5A11: $7E
@@ -89,25 +89,23 @@ jr_006_5A0D:
     ldh  [hActiveEntitySpriteVariant], a          ; $5A19: $E0 $F1
 
 .jr_5A1B
-    ld   de, YipYip1SpriteVariants                ; $5A1B: $11 $A8 $59
+    ld   de, YipYipSpriteVariants                 ; $5A1B: $11 $A8 $59
     ld   hl, wEntitiesPrivateState1Table          ; $5A1E: $21 $B0 $C2
     add  hl, bc                                   ; $5A21: $09
     ld   a, [hl]                                  ; $5A22: $7E
     and  a                                        ; $5A23: $A7
-    jr   nz, .jr_5A33                             ; $5A24: $20 $0D
+    jr   nz, .useRibbonVariant                    ; $5A24: $20 $0D
 
     ldh  a, [hMapRoom]                            ; $5A26: $F0 $F6
     cp   UNKNOWN_ROOM_B2                          ; Inside the dog house
-    jr   nz, jr_006_5A36                          ; $5A2A: $20 $0A
-
+    jr   nz, .ribbonEnd                           ; $5A2A: $20 $0A
     ld   a, [wTradeSequenceItem]                  ; $5A2C: $FA $0E $DB
     cp   TRADING_ITEM_DOG_FOOD                    ; $5A2F: $FE $03
-    jr   c, jr_006_5A36                           ; $5A31: $38 $03
+    jr   c, .ribbonEnd                            ; $5A31: $38 $03
+.useRibbonVariant
+    ld   de, YipYipWithRibbonSpriteVariants       ; $5A33: $11 $C8 $59
+.ribbonEnd
 
-.jr_5A33
-    ld   de, YipYip2SpriteVariants                ; $5A33: $11 $C8 $59
-
-jr_006_5A36:
     ld   a, [wGameplayType]                       ; $5A36: $FA $95 $DB
     cp   GAMEPLAY_CREDITS                         ; $5A39: $FE $01
     jr   nz, .jr_5A43                             ; $5A3B: $20 $06
@@ -146,26 +144,26 @@ jr_006_5A36:
     call func_006_645D                            ; $5A6D: $CD $5D $64
     jr   nc, jr_006_5A98                          ; $5A70: $30 $26
 
-    ld   e, $23                                   ; $5A72: $1E $23
+    ld_dialog_low e, Dialog023                    ; $5A72: $1E $23
     ldh  a, [hMapRoom]                            ; $5A74: $F0 $F6
     cp   UNKNOWN_ROOM_B2                          ; Inside the dog house
-    jr   nz, jr_006_5A91                          ; $5A78: $20 $17
+    jr   nz, .openDialogInTable0                  ; $5A78: $20 $17
 
-    ld   e, $80                                   ; $5A7A: $1E $80
+    ld_dialog_low e, Dialog180                    ; $5A7A: $1E $80
     ld   a, [wTradeSequenceItem]                  ; $5A7C: $FA $0E $DB
     cp   TRADING_ITEM_RIBBON                      ; $5A7F: $FE $02
-    jr   nz, .jr_5A8A                             ; $5A81: $20 $07
+    jr   nz, .openDialogInTable1                  ; $5A81: $20 $07
 
     call IncrementEntityState                     ; $5A83: $CD $12 $3B
     ld   [hl], $02                                ; $5A86: $36 $02
-    ld   e, $81                                   ; $5A88: $1E $81
+    ld_dialog_low e, Dialog181                    ; $5A88: $1E $81
 
-.jr_5A8A
+.openDialogInTable1
     ld   a, e                                     ; $5A8A: $7B
     call OpenDialogInTable1                       ; $5A8B: $CD $73 $23
     jp   func_006_5ACC                            ; $5A8E: $C3 $CC $5A
 
-jr_006_5A91:
+.openDialogInTable0
     ld   a, e                                     ; $5A91: $7B
     call OpenDialogInTable0                       ; $5A92: $CD $85 $23
     call func_006_5ACC                            ; $5A95: $CD $CC $5A

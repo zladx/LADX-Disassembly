@@ -40,14 +40,14 @@ jr_015_4445:
 
     ldh  a, [hMapRoom]                            ; $447A: $F0 $F6
     cp   UNKNOWN_ROOM_DF                          ; $447C: $FE $DF
-    ld   a, $92                                   ; $447E: $3E $92
+    ld_dialog_low a, Dialog092                    ; $447E: $3E $92
     jr   z, .jr_4489                              ; $4480: $28 $07
 
     ld   a, [wIsGhostFollowingLink]               ; $4482: $FA $79 $DB
     and  a                                        ; $4485: $A7
     ret  nz                                       ; $4486: $C0
 
-    ld   a, $43                                   ; $4487: $3E $43
+    ld_dialog_low a, Dialog043                    ; $4487: $3E $43
 
 .jr_4489
     jp   OpenDialogInTable0                       ; $4489: $C3 $85 $23

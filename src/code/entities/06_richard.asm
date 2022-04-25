@@ -79,7 +79,7 @@ RichardState1Handler::
     and  a                                        ; $406F: $A7
     jr   z, .jr_4077                              ; $4070: $28 $05
 
-    ld   e, $2D                                   ; $4072: $1E $2D
+    ld_dialog_low e, Dialog12D ; "Do not bring that beast here" ; $4072: $1E $2D
     jp   label_006_40C1                           ; $4074: $C3 $C1 $40
 
 .jr_4077
@@ -108,7 +108,7 @@ RichardState1Handler::
     jp   IncrementEntityState                     ; $409D: $C3 $12 $3B
 
 jr_006_40A0:
-    ld   e, $3F                                   ; $40A0: $1E $3F
+    ld_dialog_low e, Dialog13F ; "You must find all the leaves" ; $40A0: $1E $3F
     cp   $05                                      ; $40A2: $FE $05
     jr   c, label_006_40C1                        ; $40A4: $38 $1B
 
@@ -124,7 +124,7 @@ jr_006_40A0:
     ld   [wGoldenLeavesCount], a                  ; $40B8: $EA $15 $DB
     ld   a, REPLACE_TILES_GOLDEN_LEAF             ; $40BB: $3E $09
     ldh  [hReplaceTiles], a                       ; $40BD: $E0 $A5
-    ld   e, $3D                                   ; $40BF: $1E $3D
+    ld_dialog_low e, Dialog13D ; "You have recovered all of the leaves!" ; $40BF: $1E $3D
 
 label_006_40C1:
     ld   a, e                                     ; $40C1: $7B
@@ -133,10 +133,10 @@ label_006_40C1:
 RichardState2Handler::
     ld   a, [wDialogAskSelectionIndex]            ; $40C5: $FA $77 $C1
     and  a                                        ; $40C8: $A7
-    ld   a, $3B                                   ; $40C9: $3E $3B
+    ld_dialog_low a, Dialog13B ; "I am impressed" ; $40C9: $3E $3B
     jr   z, .jr_40CF                              ; $40CB: $28 $02
 
-    ld   a, $3C                                   ; $40CD: $3E $3C
+    ld_dialog_low a, Dialog13C ; "Just get out of there!" ; $40CD: $3E $3C
 
 .jr_40CF
     call OpenDialogInTable1                       ; $40CF: $CD $73 $23
@@ -162,10 +162,10 @@ RichardState4Handler::
 
     ld   a, [wGoldenLeavesCount]                  ; $40EE: $FA $15 $DB
     cp   SLIME_KEY                                ; $40F1: $FE $06
-    ld   a, $3E                                   ; $40F3: $3E $3E
+    ld_dialog_low a, Dialog13E ; "I am forever in your debt" ; $40F3: $3E $3E
     jr   z, .jr_40F9                              ; $40F5: $28 $02
 
-    ld   a, $3D                                   ; $40F7: $3E $3D
+    ld_dialog_low a, Dialog13D ; "You have recovered all of the leaves!" ; $40F7: $3E $3D
 
 .jr_40F9
     call OpenDialogInTable1                       ; $40F9: $CD $73 $23

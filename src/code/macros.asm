@@ -77,15 +77,45 @@ endm
 ; - defines a `DialogXXX_IndexOffset` label, to allow looking up the dialog by index.
 ;
 ; Usage:
-;   dialog_pointer Dialog123
+;   dialog_pointer Dialog123 ; Emits: "Dialog123_IdxOffset: dw Dialog123"
 dialog_pointer: macro
 \1_IdxOffset:
     dw \1
 endm
 
+; Load the low part of a dialog index into the given register.
+; Usage:
+;   ld_dialog_low a, Dialog123 ; Emits "ld a, $23"
+;
+; NB: if rgbasm ever supports user-defined functions, then we'll replace this by:
+;   ld a, DIALOG_ID_LOW(Dialog123)
+ld_dialog_low: macro
+  ld \1, LOW((\2_IdxOffset - DialogPointerTable) / 2)
+endm
+
+; Store the low part of a dialog index as a db instruction.
+; Usage:
+;   db_dialog_low Dialog123 ; Emits "db $23"
+;
+; NB: if rgbasm ever supports user-defined functions, then we'll replace this by:
+;   db DIALOG_ID_LOW(Dialog123)
+db_dialog_low: macro
+  db LOW((\1_IdxOffset - DialogPointerTable) / 2)
+endm
+
+; Compare the low part of a dialog index.
+; Usage:
+;   cp_dialog_low Dialog123 ; Emits "cp $23"
+;
+; NB: if rgbasm ever supports user-defined functions, then we'll replace this by:
+;   cp DIALOG_ID_LOW(Dialog123)
+cp_dialog_low: macro
+  cp LOW((\1_IdxOffset - DialogPointerTable) / 2)
+endm
+
 ; Open a dialog in the correct dialogs table (using a `call` instruction)
 ; Usage:
-;   call_open_dialog Dialog123 ; emits "ld a, $23 \n call OpenDialogInTable1"
+;   call_open_dialog Dialog123 ; Emits "ld a, $23 \n call OpenDialogInTable1"
 call_open_dialog: macro
     ld   a, LOW((\1_IdxOffset - DialogPointerTable) / 2)
     ; Ihe code needs to call the correct function, but the exact dialog index isn't available at compile-time

@@ -115,7 +115,7 @@ jr_019_494A:
 
     ld   a, [wC3C8]                               ; $496E: $FA $C8 $C3
     and  a                                        ; $4971: $A7
-    ld   a, $20                                   ; $4972: $3E $20
+    ld_dialog_low a, Dialog020 ; "GRRRR"          ; $4972: $3E $20
     jr   z, .jr_497D                              ; $4974: $28 $07
 
     call_open_dialog Dialog196                    ; $4976

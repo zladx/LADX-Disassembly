@@ -1093,7 +1093,7 @@ JumpTable_037_46F6::
     ld   [hl], a                                  ; $46FF: $77
     ld   a, $55                                   ; $4700: $3E $55
 
-func_037_4702::
+PhotosOpenDialogAndIncrementXPos::
     call OpenDialogInTable2                       ; $4702: $CD $7C $23
 
 func_037_4705::
@@ -1102,16 +1102,16 @@ func_037_4705::
     ret                                           ; $4709: $C9
 
 JumpTable_037_470A::
-    ld   a, $56                                   ; $470A: $3E $56
-    jr   func_037_4702                            ; $470C: $18 $F4
+    ld_dialog_low a, Dialog256                    ; $470A: $3E $56
+    jr   PhotosOpenDialogAndIncrementXPos         ; $470C: $18 $F4
 
 JumpTable_037_470E::
-    ld   a, $57                                   ; $470E: $3E $57
-    jr   func_037_4702                            ; $4710: $18 $F0
+    ld_dialog_low a, Dialog257                    ; $470E: $3E $57
+    jr   PhotosOpenDialogAndIncrementXPos         ; $4710: $18 $F0
 
 JumpTable_037_4712::
-    ld   a, $58                                   ; $4712: $3E $58
-    jr   func_037_4702                            ; $4714: $18 $EC
+    ld_dialog_low a, Dialog258                    ; $4712: $3E $58
+    jr   PhotosOpenDialogAndIncrementXPos         ; $4714: $18 $EC
 
 JumpTable_037_4716::
     ld   hl, wEntitiesPosYTable+3                 ; $4716: $21 $13 $C2
@@ -1122,8 +1122,8 @@ JumpTable_037_4716::
 
     xor  a                                        ; $471E: $AF
     ld   [hl], a                                  ; $471F: $77
-    ld   a, $59                                   ; $4720: $3E $59
-    jr   func_037_4702                            ; $4722: $18 $DE
+    ld_dialog_low a, Dialog259                    ; $4720: $3E $59
+    jr   PhotosOpenDialogAndIncrementXPos         ; $4722: $18 $DE
 
 JumpTable_037_4724::
     ld   hl, wEntitiesPosYTable+3                 ; $4724: $21 $13 $C2

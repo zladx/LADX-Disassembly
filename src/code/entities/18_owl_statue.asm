@@ -99,7 +99,7 @@ ENDC
 
     ld   a, [wHasDungeonStoneSlab]                ; $5E97: $FA $CE $DB
     and  a                                        ; $5E9A: $A7
-    ld   a, $10                                   ; $5E9B: $3E $10
+    ld_dialog_low a, Dialog110 ; "no beak"        ; $5E9B: $3E $10
     jr   nz, .jr_5EA2                             ; $5E9D: $20 $03
 
     jp   OpenDialogInTable1                       ; $5E9F: $C3 $73 $23
@@ -113,6 +113,6 @@ ENDC
 
 .jr_5EAD
     ld   a, $18                                   ; $5EAD: $3E $18
-    call func_036_4A4C_trampoline                 ; $5EAF: $CD $EA $0A
+    call GetOwlStatueDialogId_trampoline          ; $5EAF: $CD $EA $0A
     ldh  a, [hMultiPurpose0]                      ; $5EB2: $F0 $D7
     jp   OpenDialogInTable2                       ; $5EB4: $C3 $7C $23

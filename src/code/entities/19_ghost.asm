@@ -294,13 +294,15 @@ ENDC
     ld   hl, wEntitiesPrivateState3Table          ; $5FA9: $21 $D0 $C2
     add  hl, bc                                   ; $5FAC: $09
     inc  [hl]                                     ; $5FAD: $34
+
     ld   a, JINGLE_GHOST_PRESENCE                 ; $5FAE: $3E $2D
     ldh  [hJingle], a                             ; $5FB0: $E0 $F2
+
     ld   a, [wGhostSeeksGrave]                    ; $5FB2: $FA $7A $DB
     and  a                                        ; $5FB5: $A7
-    ld   a, $11                                   ; $5FB6: $3E $11
+    ld_dialog_low a, Dialog211 ; "the house…"     ; $5FB6: $3E $11
     jr   z, .endIf                                ; $5FB8: $28 $02
-    ld   a, $10                                   ; $5FBA: $3E $10
+    ld_dialog_low a, Dialog210 ; "my grave…"      ; $5FBA: $3E $10
 .endIf
     jp   OpenDialogInTable2                       ; $5FBC: $C3 $7C $23
 

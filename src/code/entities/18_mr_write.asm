@@ -22,6 +22,7 @@ MrWrite1SpriteVariants::
     db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
     db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
+; Entity handler for both Mr Write and the Goat
 MrWriteEntityHandler::
     ldh  a, [hActiveEntitySpriteVariant]          ; $4B9D: $F0 $F1
     rla                                           ; $4B9F: $17
@@ -120,10 +121,10 @@ MrWriteState0Handler::
     jp   IncrementEntityState                     ; $4C38: $C3 $12 $3B
 
 .jr_4C3B
-    ld   a, $66                                   ; $4C3B: $3E $66
+    ld_dialog_low a, Dialog166 ; "You don't know the etiquette" ; $4C3B: $3E $66
     jr   c, .jr_4C41                              ; $4C3D: $38 $02
 
-    ld   a, $6B                                   ; $4C3F: $3E $6B
+    ld_dialog_low a, Dialog16B ; "I can't help eating paper" ; $4C3F: $3E $6B
 
 .jr_4C41
     jp   OpenDialogInTable1                       ; $4C41: $C3 $73 $23
@@ -183,10 +184,10 @@ func_018_4C87::
     jp   IncrementEntityState                     ; $4C97: $C3 $12 $3B
 
 .jr_4C9A
-    ld   a, $33                                   ; $4C9A: $3E $33
+    ld_dialog_low a, Dialog133 ; "My name's Write!" ; $4C9A: $3E $33
     jr   c, .jr_4CA0                              ; $4C9C: $38 $02
 
-    ld   a, $39                                   ; $4C9E: $3E $39
+    ld_dialog_low a, Dialog139 ; "I'm writing back to Christine" ; $4C9E: $3E $39
 
 .jr_4CA0
     jp   OpenDialogInTable1                       ; $4CA0: $C3 $73 $23

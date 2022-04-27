@@ -112,26 +112,27 @@ func_007_58A8::
     call func_007_7E5D                            ; $58B7: $CD $5D $7E
     add  $18                                      ; $58BA: $C6 $18
     cp   $30                                      ; $58BC: $FE $30
-    jr   nc, ret_007_58DD                         ; $58BE: $30 $1D
+    jr   nc, KikiOpenDialog.return                ; $58BE: $30 $1D
 
     call func_007_7E6D                            ; $58C0: $CD $6D $7E
     add  $18                                      ; $58C3: $C6 $18
     cp   $30                                      ; $58C5: $FE $30
-    jr   nc, ret_007_58DD                         ; $58C7: $30 $14
+    jr   nc, KikiOpenDialog.return                ; $58C7: $30 $14
 
 .jr_58C9
     call GetEntityTransitionCountdown             ; $58C9: $CD $05 $0C
     ld   [hl], $10                                ; $58CC: $36 $10
     call IncrementEntityState                     ; $58CE: $CD $12 $3B
     ld   [hl], $05                                ; $58D1: $36 $05
-    ld   a, $60                                   ; $58D3: $3E $60
+    ld_dialog_low a, Dialog160 ; "Let's battle!"  ; $58D3: $3E $60
 
-func_007_58D5::
+KikiOpenDialog::
     call OpenDialogInTable1                       ; $58D5: $CD $73 $23
+
     ld   a, $14                                   ; $58D8: $3E $14
     ld   [wDialogSFX], a                          ; $58DA: $EA $AB $C5
 
-ret_007_58DD:
+.return
     ret                                           ; $58DD: $C9
 
 jr_007_58DE:
@@ -143,13 +144,13 @@ jr_007_58DE:
     cp   $04                                      ; $58E9: $FE $04
     jr   nz, .jr_58F5                             ; $58EB: $20 $08
 
-    ld   a, $65                                   ; $58ED: $3E $65
-    call func_007_58D5                            ; $58EF: $CD $D5 $58
+    ld_dialog_low a, Dialog165 ; "Give to Kiki?"  ; $58ED: $3E $65
+    call KikiOpenDialog                           ; $58EF: $CD $D5 $58
     jp   IncrementEntityState                     ; $58F2: $C3 $12 $3B
 
 .jr_58F5
-    ld   a, $61                                   ; $58F5: $3E $61
-    call func_007_58D5                            ; $58F7: $CD $D5 $58
+    ld_dialog_low a, Dialog161 ; "Hungry!"        ; $58F5: $3E $61
+    call KikiOpenDialog                           ; $58F7: $CD $D5 $58
 
 func_007_58FA::
     ldh  a, [hFrameCounter]                       ; $58FA: $F0 $E7
@@ -191,8 +192,8 @@ func_007_591A::
 
 .jr_592E
     ld   [hl], b                                  ; $592E: $70
-    ld   a, $61                                   ; $592F: $3E $61
-    jp   func_007_58D5                            ; $5931: $C3 $D5 $58
+    ld_dialog_low a, Dialog161 ; "Hungry!"        ; $592F: $3E $61
+    jp   KikiOpenDialog                           ; $5931: $C3 $D5 $58
 
 func_007_5934::
     call GetEntityTransitionCountdown             ; $5934: $CD $05 $0C
@@ -234,8 +235,8 @@ func_007_5951::
     cp   $10                                      ; $596A: $FE $10
     jr   nz, .jr_5973                             ; $596C: $20 $05
 
-    ld   a, $62                                   ; $596E: $3E $62
-    call func_007_58D5                            ; $5970: $CD $D5 $58
+    ld_dialog_low a, Dialog162 ; "Repay him!"     ; $596E: $3E $62
+    call KikiOpenDialog                           ; $5970: $CD $D5 $58
 
 .jr_5973
     ld   a, $02                                   ; $5973: $3E $02
@@ -273,10 +274,12 @@ func_007_5997::
     ld   [wOverworldRoomStatus + $7B], a          ; $59AC: $EA $7B $D8
     ld   a, $01                                   ; $59AF: $3E $01
     ld   [wExchangingTradeSequenceItem], a        ; $59B1: $EA $7F $DB
-    ld   a, $63                                   ; $59B4: $3E $63
+
+    ld_dialog_low a, Dialog163 ; "Done!"          ; $59B4: $3E $63
     ld   [wC168], a                               ; $59B6: $EA $68 $C1
-    call func_007_58D5                            ; $59B9: $CD $D5 $58
+    call KikiOpenDialog                           ; $59B9: $CD $D5 $58
     call IncrementEntityState                     ; $59BC: $CD $12 $3B
+
     ld   [hl], $05                                ; $59BF: $36 $05
     ld   hl, wEntitiesInertiaTable                ; $59C1: $21 $D0 $C3
     add  hl, bc                                   ; $59C4: $09

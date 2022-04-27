@@ -34,7 +34,7 @@ func_006_6230::
 
     ld   a, [wHasInstrument5]                     ; $6245: $FA $69 $DB
     and  $02                                      ; $6248: $E6 $02
-    ld   a, $6F                                   ; $624A: $3E $6F
+    ld_dialog_low a, Dialog16F ; "Grandma's not here" ; $624A: $3E $6F
     jp   nz, OpenDialogInTable1                   ; $624C: $C2 $73 $23
 
 .jr_624F
@@ -94,12 +94,12 @@ func_006_6230::
     jr   nz, .jr_62A9                             ; $62A1: $20 $06
 
     pop  af                                       ; $62A3: $F1
-    add  $18                                      ; $62A4: $C6 $18
+    add  $18 ; Dialog118 or Dialog119             ; $62A4: $C6 $18
     jp   OpenDialogInTable1                       ; $62A6: $C3 $73 $23
 
 .jr_62A9
     pop  af                                       ; $62A9: $F1
     ldh  a, [hActiveEntityType]                   ; $62AA: $F0 $EB
     sub  ENTITY_KID_70                            ; $62AC: $D6 $70
-    add  $1C                                      ; $62AE: $C6 $1C
+    add  $1C ; Dialog11C or Dialog11F             ; $62AE: $C6 $1C
     jp   OpenDialogInTable1                       ; $62B0: $C3 $73 $23

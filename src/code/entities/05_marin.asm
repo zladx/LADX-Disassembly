@@ -249,7 +249,7 @@ func_005_4F64::
 
     ld   a, [wOverworldRoomStatus + $08]          ; $4F73: $FA $08 $D8
     and  $10                                      ; $4F76: $E6 $10
-    jr   z, jr_005_4FA7                           ; $4F78: $28 $2D
+    jr   z, .jr_005_4FA7                          ; $4F78: $28 $2D
 
     ld   hl, wOverworldRoomStatus + $92           ; $4F7A: $21 $92 $D8
     ld   a, [hl]                                  ; $4F7D: $7E
@@ -262,37 +262,37 @@ func_005_4F64::
 .jr_4F89
     ld   a, [wOcarinaSongFlags]                   ; $4F89: $FA $49 $DB
     and  BALLAD_OF_THE_WIND_FISH_FLAG             ; $4F8C: $E6 $04
-    jr   z, jr_005_4F95                           ; $4F8E: $28 $05
+    jr   z, .jr_005_4F95                          ; $4F8E: $28 $05
 
-jr_005_4F90:
+.jr_005_4F90
     jp_open_dialog Dialog195                      ; $4F90
 
-jr_005_4F95:
+.jr_005_4F95
     ld   e, INVENTORY_SLOT_COUNT -1               ; $4F95: $1E $0B
     ld   hl, wBButtonSlot                         ; $4F97: $21 $00 $DB
 
 .loop_4F9A
     ld   a, [hl+]                                 ; $4F9A: $2A
     cp   INVENTORY_OCARINA                        ; $4F9B: $FE $09
-    jr   z, jr_005_4FA7                           ; $4F9D: $28 $08
+    jr   z, .jr_005_4FA7                          ; $4F9D: $28 $08
 
     dec  e                                        ; $4F9F: $1D
     ld   a, e                                     ; $4FA0: $7B
     cp   $FF                                      ; $4FA1: $FE $FF
     jr   nz, .loop_4F9A                           ; $4FA3: $20 $F5
 
-    jr   jr_005_4F90                              ; $4FA5: $18 $E9
+    jr   .jr_005_4F90                             ; $4FA5: $18 $E9
 
-jr_005_4FA7:
+.jr_005_4FA7
     call GetEntityPrivateCountdown1               ; $4FA7: $CD $00 $0C
     ld   [hl], $10                                ; $4FAA: $36 $10
 
 .jr_4FAC
     ld   d, $2F                                   ; $4FAC: $16 $2F
-    ld   e, $03                                   ; $4FAE: $1E $03
+    ld_dialog_low e, Dialog003                    ; $4FAE: $1E $03
     ld   a, [wDB48]                               ; $4FB0: $FA $48 $DB
     and  a                                        ; $4FB3: $A7
-    jr   z, jr_005_4FFB                           ; $4FB4: $28 $45
+    jr   z, .openDialog                           ; $4FB4: $28 $45
 
     ld   e, $06                                   ; $4FB6: $1E $06
     cp   $02                                      ; $4FB8: $FE $02
@@ -316,47 +316,45 @@ jr_005_4FA7:
     ld   c, INVENTORY_SLOT_COUNT -1               ; $4FD1: $0E $0B
     ld   hl, wBButtonSlot                         ; $4FD3: $21 $00 $DB
 
-jr_005_4FD6:
+.jr_005_4FD6
     ld   a, [hl+]                                 ; $4FD6: $2A
     cp   INVENTORY_OCARINA                        ; $4FD7: $FE $09
     jr   nz, .jr_4FF4                             ; $4FD9: $20 $19
 
-    ld   e, $04                                   ; $4FDB: $1E $04
+    ld_dialog_low e, Dialog004 ; "Nice ocarina!"  ; $4FDB: $1E $04
     ld   d, $4A                                   ; $4FDD: $16 $4A
     ld   a, [wOcarinaSongFlags]                   ; $4FDF: $FA $49 $DB
     and  BALLAD_OF_THE_WIND_FISH_FLAG             ; $4FE2: $E6 $04
-    jr   z, jr_005_4FFA                           ; $4FE4: $28 $14
+    jr   z, .jr_005_4FFA                          ; $4FE4: $28 $14
 
-    ld   e, $05                                   ; $4FE6: $1E $05
+    ld_dialog_low e, Dialog005 ; "I just love to sing!" ; $4FE6: $1E $05
     ld   d, $2F                                   ; $4FE8: $16 $2F
     ldh  a, [hMapRoom]                            ; $4FEA: $F0 $F6
     cp   ROOM_SECTION_OW_VILLAGES                 ; $4FEC: $FE $C0
-    jr   c, jr_005_4FFA                           ; $4FEE: $38 $0A
+    jr   c, .jr_005_4FFA                          ; $4FEE: $38 $0A
 
-    ld   e, $92                                   ; $4FF0: $1E $92
-    jr   jr_005_4FFA                              ; $4FF2: $18 $06
+    ld_dialog_low e, Dialog192 ; "I often come to this village" ; $4FF0: $1E $92
+    jr   .jr_005_4FFA                             ; $4FF2: $18 $06
 
 .jr_4FF4
     dec  c                                        ; $4FF4: $0D
     ld   a, c                                     ; $4FF5: $79
     cp   $FF                                      ; $4FF6: $FE $FF
-    jr   nz, jr_005_4FD6                          ; $4FF8: $20 $DC
+    jr   nz, .jr_005_4FD6                         ; $4FF8: $20 $DC
 
-jr_005_4FFA:
+.jr_005_4FFA
     pop  bc                                       ; $4FFA: $C1
 
-jr_005_4FFB:
+.openDialog
     ld   a, e                                     ; $4FFB: $7B
     cp   $80                                      ; $4FFC: $FE $80
-    jr   c, .jr_5005                              ; $4FFE: $38 $05
-
+    jr   c, .openDialogInTable0                       ; $4FFE: $38 $05
     call OpenDialogInTable1                       ; $5000: $CD $73 $23
-    jr   jr_005_5008                              ; $5003: $18 $03
-
-.jr_5005
+    jr   .openDialogEnd                           ; $5003: $18 $03
+.openDialogInTable0
     call OpenDialogInTable0                       ; $5005: $CD $85 $23
+.openDialogEnd
 
-jr_005_5008:
     ldh  a, [hMapRoom]                            ; $5008: $F0 $F6
     cp   ROOM_SECTION_OW_VILLAGES                 ; $500A: $FE $C0
     jr   c, .jr_5018                              ; $500C: $38 $0A
@@ -429,8 +427,7 @@ func_005_5059::
     cp   $E8                                      ; $506F: $FE $E8
     jr   nz, .jr_508A                             ; $5071: $20 $17
 
-    ld   a, $16                                   ; $5073: $3E $16
-    call OpenDialogInTable0                       ; $5075: $CD $85 $23
+    call_open_dialog Dialog016 ; "How do you like it?" ; $5073: $3E $16 $CD $85 $23
     push bc                                       ; $5078: $C5
     call UpdateLinkWalkingAnimation_trampoline    ; $5079: $CD $F0 $0B
     pop  bc                                       ; $507C: $C1
@@ -568,8 +565,7 @@ func_005_512B::
     ret                                           ; $514E: $C9
 
 .jr_514F
-    ld   a, $15                                   ; $514F: $3E $15
-    call OpenDialogInTable0                       ; $5151: $CD $85 $23
+    call_open_dialog Dialog015 ; "I want you to learn it" ; $514F: $3E $15 $CD $85 $23
     call IncrementEntityState                     ; $5154: $CD $12 $3B
     ld   [hl], $01                                ; $5157: $36 $01
     ld   hl, wEntitiesPrivateState3Table          ; $5159: $21 $D0 $C2

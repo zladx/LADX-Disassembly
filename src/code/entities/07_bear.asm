@@ -78,36 +78,36 @@ func_007_4C16::
     call func_007_7D36                            ; $4C16: $CD $36 $7D
     ret  nc                                       ; $4C19: $D0
 
-    ld   e, $D3                                   ; $4C1A: $1E $D3
+    ld_dialog_low e, Dialog1D3                    ; $4C1A: $1E $D3
     ld   a, [wOverworldRoomStatus + $FD]          ; $4C1C: $FA $FD $D8
     and  $30                                      ; $4C1F: $E6 $30
-    jr   nz, jr_007_4C45                          ; $4C21: $20 $22
+    jr   nz, func_007_4C43.openDialog             ; $4C21: $20 $22
 
     ld   a, [wTradeSequenceItem]                  ; $4C23: $FA $0E $DB
     cp   $06                                      ; $4C26: $FE $06
     jr   nz, .jr_4C32                             ; $4C28: $20 $08
 
-    ld   a, $CF                                   ; $4C2A: $3E $CF
-    call func_007_4C83                            ; $4C2C: $CD $83 $4C
+    ld_dialog_low a, Dialog1CF                    ; $4C2A: $3E $CF
+    call BearOpenDialog                           ; $4C2C: $CD $83 $4C
     jp   IncrementEntityState                     ; $4C2F: $C3 $12 $3B
 
 .jr_4C32
-    ld   e, $D4                                   ; $4C32: $1E $D4
+    ld_dialog_low e, Dialog1D4                    ; $4C32: $1E $D4
     ld   a, [wIsMarinFollowingLink]               ; $4C34: $FA $73 $DB
     and  a                                        ; $4C37: $A7
-    jr   nz, jr_007_4C45                          ; $4C38: $20 $0B
+    jr   nz, func_007_4C43.openDialog             ; $4C38: $20 $0B
 
-    ld   e, $CE                                   ; $4C3A: $1E $CE
+    ld_dialog_low e, Dialog1CE                    ; $4C3A: $1E $CE
     ld   a, [wTradeSequenceItem]                  ; $4C3C: $FA $0E $DB
     cp   TRADING_ITEM_PINEAPPLE                   ; $4C3F: $FE $07
-    jr   nz, jr_007_4C45                          ; $4C41: $20 $02
+    jr   nz, func_007_4C43.openDialog             ; $4C41: $20 $02
 
 func_007_4C43::
-    ld   e, $D2                                   ; $4C43: $1E $D2
+    ld_dialog_low e, Dialog1D2                    ; $4C43: $1E $D2
 
-jr_007_4C45:
+.openDialog
     ld   a, e                                     ; $4C45: $7B
-    jp   func_007_4C83                            ; $4C46: $C3 $83 $4C
+    jp   BearOpenDialog                           ; $4C46: $C3 $83 $4C
 
 func_007_4C49::
     ld   a, [wDialogState]                        ; $4C49: $FA $9F $C1
@@ -120,8 +120,8 @@ func_007_4C49::
     jr   z, .jr_4C5E                              ; $4C56: $28 $06
 
     ld   [hl], b                                  ; $4C58: $70
-    ld   a, $D1                                   ; $4C59: $3E $D1
-    jp   func_007_4C83                            ; $4C5B: $C3 $83 $4C
+    ld_dialog_low a, Dialog1D1                    ; $4C59: $3E $D1
+    jp   BearOpenDialog                           ; $4C5B: $C3 $83 $4C
 
 .jr_4C5E
     ld   a, TRADING_ITEM_PINEAPPLE                ; $4C5E: $3E $07
@@ -150,14 +150,25 @@ func_007_4C70::
 .ret_4C82
     ret                                           ; $4C82: $C9
 
-func_007_4C83::
+; Open a dialog for the bear
+; Inputs:
+;   a    index of the dialog to open
+BearOpenDialog::
     ld   e, a                                     ; $4C83: $5F
+
+    ; Move Link 16px to the bottom
+    ; (for the dialog box not to overlap the bear?)
     ldh  a, [hLinkPositionY]                      ; $4C84: $F0 $99
     push af                                       ; $4C86: $F5
     ld   a, $10                                   ; $4C87: $3E $10
     ldh  [hLinkPositionY], a                      ; $4C89: $E0 $99
     ld   a, e                                     ; $4C8B: $7B
+
+    ; Open the dialog
     call OpenDialogInTable1                       ; $4C8C: $CD $73 $23
+
+    ; Restore Link's position
     pop  af                                       ; $4C8F: $F1
     ldh  [hLinkPositionY], a                      ; $4C90: $E0 $99
+
     ret                                           ; $4C92: $C9

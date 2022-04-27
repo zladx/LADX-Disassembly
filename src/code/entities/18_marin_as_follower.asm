@@ -413,16 +413,16 @@ func_018_5C07::
     and  $3F                                      ; $5C1F: $E6 $3F
     jr   nz, jr_018_5C32                          ; $5C21: $20 $0F
 
-    ld   e, LOW($21E) ; "Idiot, I told you this!" ; $5C23: $1E $1E
+    ld_dialog_low e, Dialog21E ; "Idiot, I told you this!" ; $5C23: $1E $1E
     jr   jr_018_5C32                              ; $5C25: $18 $0B
 
 .jr_5C27
-    ld   e, LOW($21B) ; "I thought you'd never come back!" ; $5C27: $1E $1B
+    ld_dialog_low e, Dialog21B ; "I thought you'd never come back!" ; $5C27: $1E $1B
     ld   a, [wDB47]                               ; $5C29: $FA $47 $DB
     cp   $80                                      ; $5C2C: $FE $80
     jr   nc, jr_018_5C32                          ; $5C2E: $30 $02
 
-    ld   e, LOW($21D) ; "You're back! Are you hurt?" ; $5C30: $1E $1D
+    ld_dialog_low e, Dialog21D ; "You're back! Are you hurt?" ; $5C30: $1E $1D
 
 jr_018_5C32:
     ld   a, e                                     ; $5C32: $7B

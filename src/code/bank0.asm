@@ -491,9 +491,9 @@ func_036_4A77_trampoline::
     callsw func_036_4A77                          ; $0ADF: $3E $36 $CD $0C $08 $CD $77 $4A
     jp   RestoreStackedBankAndReturn              ; $0AE7: $C3 $73 $09
 
-func_036_4A4C_trampoline::
+GetOwlStatueDialogId_trampoline::
     push af                                       ; $0AEA: $F5
-    callsb func_036_4A4C                          ; $0AEB: $3E $36 $EA $00 $21 $CD $4C $4A
+    callsb GetOwlStatueDialogId                   ; $0AEB: $3E $36 $EA $00 $21 $CD $4C $4A
     jp   RestoreStackedBankAndReturn              ; $0AF3: $C3 $73 $09
 
 SpawnPhotographer_trampoline::
@@ -1570,11 +1570,11 @@ returnFromGameplayHandler::
 
 ; Dialog to open, indexed by wDialogGotItem value
 DialogForItem::
-.gotItem1 db $008 ; Piece of Power                ; $102E
-.gotItem2 db $00E ; Toadstool                     ; $102F
-.gotItem3 db $099 ; Magic powder                  ; $1030
-.gotItem4 db $028 ; Break pots (?)                ; $1031
-.gotItem5 db $0EC ; Guardian Acorn                ; $1032
+.gotItem1 db_dialog_low Dialog008 ; Piece of Power ; $102E
+.gotItem2 db_dialog_low Dialog00E ; Toadstool      ; $102F
+.gotItem3 db_dialog_low Dialog099 ; Magic powder   ; $1030
+.gotItem4 db_dialog_low Dialog028 ; Break pots (?) ; $1031
+.gotItem5 db_dialog_low Dialog0EC ; Guardian Acorn ; $1032
 
 ApplyGotItem::
     ldh  a, [hLinkPositionY]                      ; $1033: $F0 $99
@@ -3219,8 +3219,7 @@ ELSE
 ENDC
     xor  a                                        ; $1A18: $AF
     ld   [wDidStealItem], a                       ; $1A19: $EA $7E $D4
-    ld   a, $36                                   ; $1A1C: $3E $36
-    jp   OpenDialogInTable0                       ; $1A1E: $C3 $85 $23
+    jp_open_dialog Dialog036                      ; $1A1C: $3E $36 $C3 $85 $23
 
 IF !__PATCH_0__
 .return
@@ -3741,8 +3740,8 @@ ENDC
     jp   z, .specialCasesEnd                      ; $200F: $CA $CF $20
     ld   a, e                                     ; $2012: $7B
     cp   OBJECT_WEATHER_VANE_BASE                 ; $2013: $FE $5E
-    ld   a, $8E                     ; Dialog $18E "Here sleeps..." ; $2015: $3E $8E
-    jr   z, .jr_2088                              ; $2017: $28 $6F
+    ld_dialog_low a, Dialog18E ; "Here sleeps..." ; $2015: $3E $8E
+    jr   z, .openDialogInTable1                   ; $2017: $28 $6F
     ld   a, e                                     ; $2019: $7B
     cp   OBJECT_OWN_STATUE                        ; $201A: $FE $6F
     jr   z, .signpost                             ; $201C: $28 $2B
@@ -3761,23 +3760,28 @@ ENDC
     and  a                                        ; $2033: $A7
     ldh  a, [hMapRoom]                            ; $2034: $F0 $F6
     jr   nz, .noSwordEnd                          ; $2036: $20 $06
-    ld   e, $FF                                   ; $2038: $1E $FF
+    ld_dialog_low e, Dialog0FF                    ; $2038: $1E $FF
     cp   ROOM_INDOOR_B_MARIN_HOUSE                ; $203A: $FE $A3
     jr   z, .jr_2046                              ; $203C: $28 $08
 .noSwordEnd
 
-    ld   e, $FC                                   ; $203E: $1E $FC
+    ld_dialog_low e, Dialog0FC ; "This is not a chest"     ; $203E: $1E $FC
     cp   UNKNOWN_ROOM_FA                          ; $2040: $FE $FA
     jr   z, .jr_2046                              ; $2042: $28 $02
-    ld   e, $FD                                   ; $2044: $1E $FD
+    ld_dialog_low e, Dialog0FD ; "XXXXX checked the chest" ; $2044: $1E $FD
 
 .jr_2046
     ld   a, e                                     ; $2046: $7B
-    jr   .jr_208E                                 ; $2047: $18 $45
+    jr   .openDialogInTable0                      ; $2047: $18 $45
 
 .signpost
+    ;
     ; Activating an OBJECT_SIGNPOST
     ; de = [hMapRoom]
+    ;
+
+    ; a = SignpostDialogTable[hMapRoom]
+    ; e = wOcarinaSongFlags
     ldh  a, [hMapRoom]                            ; $2049: $F0 $F6
     ld   e, a                                     ; $204B: $5F
     ld   d, $00                                   ; $204C: $16 $00
@@ -3788,17 +3792,20 @@ ENDC
     ld   a, [wOcarinaSongFlags]                   ; $2057: $FA $49 $DB
     ld   e, a                                     ; $205A: $5F
     ld   a, [hl]                                  ; $205B: $7E
-    cp   $A9                                      ; $205C: $FE $A9
-    jr   nz, .jr_2066                             ; $205E: $20 $06
-    bit  0, e                                     ; $2060: $CB $43
-    jr   z, .jr_2066                              ; $2062: $28 $02
-    ld   a, $AF                                   ; $2064: $3E $AF
 
-.jr_2066
-    cp   $AF                                      ; $2066: $FE $AF
-    jr   nz, .jr_2080                             ; $2068: $20 $16
+    ; If the signpost dialog is "Down", and player has the Frog song…
+    cp_dialog_low Dialog1A9 ; Dialog1A9 ; "Down"           ; $205C: $FE $A9
+    jr   nz, .mamuGoneEnd                         ; $205E: $20 $06
+    bit  0, e                                     ; $2060: $CB $43
+    jr   z, .mamuGoneEnd                          ; $2062: $28 $02
+    ; … use the "Gone" dialog
+    ld_dialog_low a, Dialog1AF ; "Gone on tour, Mamu" ; $2064: $3E $AF
+.mamuGoneEnd
+
+    cp_dialog_low Dialog1AF                       ; $2066: $FE $AF
+    jr   nz, .selectSignpostDialogTable           ; $2068: $20 $16
     bit  0, e                                     ; $206A: $CB $43
-    jr   nz, .jr_2080                             ; $206C: $20 $12
+    jr   nz, .selectSignpostDialogTable           ; $206C: $20 $12
     ldh  a, [hIntersectedObjectLeft]              ; $206E: $F0 $CE
     swap a                                        ; $2070: $CB $37
     and  $0F                                      ; $2072: $E6 $0F
@@ -3809,22 +3816,22 @@ ENDC
     ld   [wMazeSignpostPos], a                    ; $207A: $EA $73 $D4
     jp   .specialCasesEnd                         ; $207D: $C3 $CF $20
 
-.jr_2080
-    ; Some other signpost (not part of the maze), or maze completed
-    cp   $83                                      ; $2080: $FE $83
-    jr   z, .jr_208E                              ; $2082: $28 $0A
-    cp   $2D                                      ; $2084: $FE $2D
-    jr   z, .jr_2093                              ; $2086: $28 $0B
+.selectSignpostDialogTable
+    cp_dialog_low Dialog083 ; use table 0 for Dialog083    ; $2080: $FE $83
+    jr   z, .openDialogInTable0                   ; $2082: $28 $0A
+    cp_dialog_low Dialog22D ; use table 2 for Dialog22D    ; $2084: $FE $2D
+    jr   z, .openDialogInTable2                   ; $2086: $28 $0B
+    ; otherwise use table 1
 
-.jr_2088
+.openDialogInTable1
     call OpenDialogInTable1                       ; $2088: $CD $73 $23
     jp   .specialCasesEnd                         ; $208B: $C3 $CF $20
 
-.jr_208E
+.openDialogInTable0
     call OpenDialogInTable0                       ; $208E: $CD $85 $23
     jr   .specialCasesEnd                         ; $2091: $18 $3C
 
-.jr_2093
+.openDialogInTable2
     call OpenDialogInTable2                       ; $2093: $CD $7C $23
     jr   .specialCasesEnd                         ; $2096: $18 $37
 

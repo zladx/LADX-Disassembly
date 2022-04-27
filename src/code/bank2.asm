@@ -6555,7 +6555,7 @@ func_002_6F2C::
     jr   nz, .jr_6FBD                             ; $6FB4: $20 $07
 
     ld   a, [wHasBirdKey]                         ; $6FB6: $FA $14 $DB
-    ld   e, $33                                   ; $6FB9: $1E $33
+    ld_dialog_low e, Dialog233 ; "Bird Keyhole"   ; $6FB9: $1E $33
     jr   jr_002_6FC6                              ; $6FBB: $18 $09
 
 .jr_6FBD
@@ -6563,7 +6563,7 @@ func_002_6F2C::
     jr   nz, jr_002_6FE3                          ; $6FBF: $20 $22
 
     ld   a, [wHasFaceKey]                         ; $6FC1: $FA $13 $DB
-    ld   e, $34                                   ; $6FC4: $1E $34
+    ld_dialog_low e, Dialog234 ; "Face Keyhole"   ; $6FC4: $1E $34
 
 jr_002_6FC6:
     and  a                                        ; $6FC6: $A7
@@ -6594,7 +6594,7 @@ jr_002_6FE3:
 
     ld   a, [wHasAnglerKey]                       ; $6FE7: $FA $12 $DB
     and  a                                        ; $6FEA: $A7
-    ld   e, $32                                   ; $6FEB: $1E $32
+    ld_dialog_low e, Dialog232 ; "Angler Keyhole" ; $6FEB: $1E $32
     jr   z, jr_002_703E                           ; $6FED: $28 $4F
 
     call label_27F2                               ; $6FEF: $CD $F2 $27
@@ -6613,7 +6613,7 @@ jr_002_6FE3:
 
     ld   a, [wGoldenLeavesCount]                  ; $7002: $FA $15 $DB
     cp   SLIME_KEY                                ; $7005: $FE $06
-    ld   e, $31                                   ; $7007: $1E $31
+    ld_dialog_low e, Dialog231 ; "Slime Keyhole"  ; $7007: $1E $31
     jr   nz, jr_002_703E                          ; $7009: $20 $33
 
     jr   jr_002_7015                              ; $700B: $18 $08
@@ -6621,7 +6621,7 @@ jr_002_6FE3:
 .jr_700D
     ld   a, [wHasTailKey]                         ; $700D: $FA $11 $DB
     and  a                                        ; $7010: $A7
-    ld   e, $30                                   ; $7011: $1E $30
+    ld_dialog_low e, Dialog230 ; "Tail Keyhole"   ; $7011: $1E $30
     jr   z, jr_002_703E                           ; $7013: $28 $29
 
 jr_002_7015:
@@ -6653,7 +6653,7 @@ label_002_703B:
 
 jr_002_703E:
     ld   a, e                                     ; $703E: $7B
-    call func_002_7504                            ; $703F: $CD $04 $75
+    call OpenDialogInTable2AndClearIncrement      ; $703F: $CD $04 $75
     jp   label_002_7277                           ; $7042: $C3 $77 $72
 
 label_002_7045:
@@ -6824,8 +6824,8 @@ jr_002_7112:
     and  a                                        ; $713C: $A7
     jr   nz, jr_002_7147                          ; $713D: $20 $08
 
-    ld   a, $07                                   ; $713F: $3E $07
-    call func_002_74FE                            ; $7141: $CD $FE $74
+    ld_dialog_low a, Dialog007 ; "Boss door locked" ; $713F: $3E $07
+    call OpenDialogInTable0AndClearIncrement      ; $7141: $CD $FE $74
     jp   label_002_7277                           ; $7144: $C3 $77 $72
 
 jr_002_7147:
@@ -6962,16 +6962,18 @@ label_002_71BB:
     cp   TRUE                                     ; $7207: $FE $01
     jr   nz, .jr_7213                             ; $7209: $20 $08
 
-    ld   a, $12                                   ; $720B: $3E $12
-    call func_002_7504                            ; $720D: $CD $04 $75
+    ld_dialog_low a, Dialog212 ; "N-not there!"   ; $720B: $3E $12
+    call OpenDialogInTable2AndClearIncrement      ; $720D: $CD $04 $75
     jp   collisionEnd                             ; $7210: $C3 $54 $74
 
 .jr_7213
     xor  a                                        ; $7213: $AF
     ld   [wDB47], a                               ; $7214: $EA $47 $DB
-    ld   a, $98                                   ; $7217: $3E $98
+
+    ld_dialog_low a, Dialog198 ; "You want me to go in there?" ; $7217: $3E $98
     ld   [wC3C9], a                               ; $7219: $EA $C9 $C3
     call OpenDialogInTable1                       ; $721C: $CD $73 $23
+
     ld   a, [wIsOnLowHeath]                       ; $721F: $FA $63 $C1
     inc  a                                        ; $7222: $3C
     ld   [wDB10], a                               ; $7223: $EA $10 $DB
@@ -7060,11 +7062,11 @@ jr_002_728E:
     ldh  a, [hObjectUnderEntity]                  ; $72A3: $F0 $AF
     jr   z, jr_002_72D1                           ; $72A5: $28 $2A
 
-    ld   e, $8A                                   ; $72A7: $1E $8A
+    ld_dialog_low e, Dialog08A ; "This rock has many cracks" ; $72A7: $1E $8A
     cp   $A9                                      ; $72A9: $FE $A9
     jr   z, jr_002_72EC                           ; $72AB: $28 $3F
 
-    ld   e, $8B                                   ; $72AD: $1E $8B
+    ld_dialog_low e, Dialog08B ; "What a weird object" ; $72AD: $1E $8B
     cp   $4F                                      ; $72AF: $FE $4F
     jr   z, .jr_72BB                              ; $72B1: $28 $08
 
@@ -7089,7 +7091,7 @@ jr_002_72C3:
     and  a                                        ; $72CA: $A7
     jr   nz, jr_002_72FA                          ; $72CB: $20 $2D
 
-    ld   e, $8C                                   ; $72CD: $1E $8C
+    ld_dialog_low e, Dialog08C ; "This rock has a key hole" ; $72CD: $1E $8C
     jr   jr_002_72EC                              ; $72CF: $18 $1B
 
 jr_002_72D1:
@@ -7108,7 +7110,7 @@ jr_002_72D1:
     and  $02                                      ; $72E6: $E6 $02
     jr   nz, jr_002_72FA                          ; $72E8: $20 $10
 
-    ld   e, $8D                                   ; $72EA: $1E $8D
+    ld_dialog_low e, Dialog08D ; "This looks pretty heavy" ; $72EA: $1E $8D
 
 jr_002_72EC:
     ld   a, [wC5A6]                               ; $72EC: $FA $A6 $C5
@@ -7117,8 +7119,9 @@ jr_002_72EC:
 
     inc  a                                        ; $72F2: $3C
     ld   [wC5A6], a                               ; $72F3: $EA $A6 $C5
+
     ld   a, e                                     ; $72F6: $7B
-    call func_002_74FE                            ; $72F7: $CD $FE $74
+    call OpenDialogInTable0AndClearIncrement      ; $72F7: $CD $FE $74
 
 jr_002_72FA:
     ld   a, [wIsRunningWithPegasusBoots]          ; $72FA: $FA $4A $C1
@@ -7497,11 +7500,11 @@ label_002_74AD:
     ldh  [hJingle], a                             ; $74F9: $E0 $F2
     jp   func_1828                                ; $74FB: $C3 $28 $18
 
-func_002_74FE::
+OpenDialogInTable0AndClearIncrement::
     call OpenDialogInTable0                       ; $74FE: $CD $85 $23
     jp   ClearLinkPositionIncrement               ; $7501: $C3 $8E $17
 
-func_002_7504::
+OpenDialogInTable2AndClearIncrement::
     call OpenDialogInTable2                       ; $7504: $CD $7C $23
     jp   ClearLinkPositionIncrement               ; $7507: $C3 $8E $17
 

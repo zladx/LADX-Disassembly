@@ -86,7 +86,7 @@ jr_006_5BC4:
     call func_006_645D                            ; $5BD1: $CD $5D $64
     ret  nc                                       ; $5BD4: $D0
 
-    ld   e, $30                                   ; $5BD5: $1E $30
+    ld_dialog_low e, Dialog130 ; "My BowWow is so proud" ; $5BD5: $1E $30
     ld   a, [wHasInstrument2]                     ; $5BD7: $FA $66 $DB
     and  $02                                      ; $5BDA: $E6 $02
     jr   z, .jr_5BF2                              ; $5BDC: $28 $14
@@ -100,7 +100,7 @@ jr_006_5BC4:
     ld   [wIsBowWowFollowingLink], a              ; $5BE6: $EA $56 $DB
     call GetEntityTransitionCountdown             ; $5BE9: $CD $05 $0C
     ld   [hl], $10                                ; $5BEC: $36 $10
-    ld   e, $2F                                   ; $5BEE: $1E $2F
+    ld_dialog_low e, Dialog12F ; "SMOOOOOOCH!"    ; $5BEE: $1E $2F
     jr   .loadDialogIndex                         ; $5BF0: $18 $0E
 
 .jr_5BF2
@@ -110,12 +110,12 @@ jr_006_5BC4:
     jr   z, .loadDialogIndex                      ; $5BF6: $28 $08
 
     ; bow_wow is following link
-    ld   e, $31                                   ; $5BF8: $1E $31
+    ld_dialog_low e, Dialog131 ; "My BowWow was kidnapped!" ; $5BF8: $1E $31
     cp   BOW_WOW_FOLLOWING                        ; $5BFA: $FE $01
     jr   nz, .loadDialogIndex                     ; $5BFC: $20 $02
 
     ; bow_wow has been kidnapped
-    ld   e, $32                                   ; $5BFE: $1E $32
+    ld_dialog_low e, Dialog132 ; "Oh thank you!"  ; $5BFE: $1E $32
 
 .loadDialogIndex
     ld   a, e                                     ; $5C00: $7B

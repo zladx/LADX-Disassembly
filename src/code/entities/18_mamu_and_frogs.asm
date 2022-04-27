@@ -69,15 +69,15 @@ MamuAndFrogsState0Handler::
     cp   $FF                                      ; $4066: $FE $FF
     jr   nz, .loop_405F                           ; $4068: $20 $F5
 
-    ld   a, $DB                                   ; $406A: $3E $DB
-    call func_018_4087                            ; $406C: $CD $87 $40
+    ld_dialog_low a, Dialog0DB                    ; $406A: $3E $DB
+    call MamuOpenDialogAtBottom                   ; $406C: $CD $87 $40
     call IncrementEntityState                     ; $406F: $CD $12 $3B
     ld   [hl], b                                  ; $4072: $70
     ret                                           ; $4073: $C9
 
 .jr_4074
-    ld   a, $DC                                   ; $4074: $3E $DC
-    call func_018_4087                            ; $4076: $CD $87 $40
+    ld_dialog_low a, Dialog0DC                    ; $4074: $3E $DC
+    call MamuOpenDialogAtBottom                   ; $4076: $CD $87 $40
     call IncrementEntityState                     ; $4079: $CD $12 $3B
 
 func_018_407C::
@@ -89,7 +89,7 @@ func_018_407C::
     and  $01                                      ; $4082: $E6 $01
     jp   SetEntitySpriteVariant                   ; $4084: $C3 $0C $3B
 
-func_018_4087::
+MamuOpenDialogAtBottom::
     ld   e, a                                     ; $4087: $5F
     ldh  a, [hLinkPositionY]                      ; $4088: $F0 $99
     push af                                       ; $408A: $F5
@@ -114,8 +114,8 @@ MamuAndFrogsState1Handler::
 
 jr_018_40A9:
     ld   [hl], b                                  ; $40A9: $70
-    ld   a, $DE                                   ; $40AA: $3E $DE
-    jp   func_018_4087                            ; $40AC: $C3 $87 $40
+    ld_dialog_low a, Dialog0DE                    ; $40AA: $3E $DE
+    jp   MamuOpenDialogAtBottom                   ; $40AC: $C3 $87 $40
 
 jr_018_40AF:
     ld   a, [wRupeeCountHigh]                     ; $40AF: $FA $5D $DB
@@ -240,8 +240,8 @@ MamuAndFrogsState3Handler::
     cp   $20                                      ; $4210: $FE $20
     jr   nz, .jr_4220                             ; $4212: $20 $0C
 
-    ld   a, $DD                                   ; $4214: $3E $DD
-    call func_018_4087                            ; $4216: $CD $87 $40
+    ld_dialog_low a, Dialog0DD                    ; $4214: $3E $DD
+    call MamuOpenDialogAtBottom                   ; $4216: $CD $87 $40
     xor  a                                        ; $4219: $AF
     ld   [wAlternateBackgroundEnabled], a         ; $421A: $EA $00 $C5
     jp   IncrementEntityState                     ; $421D: $C3 $12 $3B
@@ -311,8 +311,8 @@ MamuAndFrogsState5Handler::
     jr   nz, .jr_4287                             ; $427F: $20 $06
 
     dec  [hl]                                     ; $4281: $35
-    ld   a, $DF                                   ; $4282: $3E $DF
-    call func_018_4087                            ; $4284: $CD $87 $40
+    ld_dialog_low a, Dialog0DF                    ; $4282: $3E $DF
+    call MamuOpenDialogAtBottom                   ; $4284: $CD $87 $40
 
 .jr_4287
     ld   a, LINK_ANIMATION_STATE_GOT_ITEM         ; $4287: $3E $6C
@@ -340,8 +340,8 @@ MamuAndFrogsState6Handler::
     ld   [hl], b                                  ; $42B1: $70
 
 label_018_42B2:
-    ld   a, $E0                                   ; $42B2: $3E $E0
-    call func_018_4087                            ; $42B4: $CD $87 $40
+    ld_dialog_low a, Dialog0E0                    ; $42B2: $3E $E0
+    call MamuOpenDialogAtBottom                   ; $42B4: $CD $87 $40
 
 jr_018_42B7:
     jp   func_018_407C                            ; $42B7: $C3 $7C $40

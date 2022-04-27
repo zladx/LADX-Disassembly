@@ -10,8 +10,21 @@ MazeSignpostEntityRoom::
     db   UNKNOWN_ROOM_C4, UNKNOWN_ROOM_C5
     db   UNKNOWN_ROOM_D5, UNKNOWN_ROOM_D4
 
-MazeSignpostEntityDialog::
-    db   $AB, $A9, $AC, $AA, $AB, $A9, $AB, $AA, $AC, $A9, $AB, $A9, $AC, $AE
+MazeSignpostDialogs::
+._0 db_dialog_low Dialog1AB ; right
+._1 db_dialog_low Dialog1A9 ; down
+._2 db_dialog_low Dialog1AC ; left
+._3 db_dialog_low Dialog1AA ; up
+._4 db_dialog_low Dialog1AB ; right
+._5 db_dialog_low Dialog1A9 ; down
+._6 db_dialog_low Dialog1AB ; right
+._7 db_dialog_low Dialog1AA ; up
+._8 db_dialog_low Dialog1AC ; down
+._9 db_dialog_low Dialog1A9 ; down
+._A db_dialog_low Dialog1AB ; right
+._B db_dialog_low Dialog1A9 ; down
+._C db_dialog_low Dialog1AC ; down
+._D db_dialog_low Dialog1AE ; there!
 
 MazeSignpostEntityHandler::
     call ReturnIfNonInteractive_18
@@ -62,7 +75,7 @@ MazeSignpostEntityHandler::
     pop  de                                       ; $62DB: $D1
 
 .dialog:
-    ld   hl, MazeSignpostEntityDialog             ; $62DC: $21 $84 $62
+    ld   hl, MazeSignpostDialogs                  ; $62DC: $21 $84 $62
     add  hl, de                                   ; $62DF: $19
     ld   a, [hl]                                  ; $62E0: $7E
     jp   OpenDialogInTable1                       ; $62E1: $C3 $73 $23
@@ -73,7 +86,7 @@ MazeSignpostEntityHandler::
     ld   [wMazeSignpostPos], a                    ; $62E8: $EA $73 $D4
     ld   a, JINGLE_WRONG_ANSWER                   ; $62EB: $3E $1D
     ldh  [hJingle], a                             ; $62ED: $E0 $F2
-    call_open_dialog Dialog1AD                    ; "try again from the start"
+    call_open_dialog Dialog1AD ; "try again from the start" ; $62EF
 
 .skip:
     ret

@@ -156,14 +156,14 @@ func_007_4356::
     call func_007_434E                            ; $4363: $CD $4E $43
     ld   a, $02                                   ; $4366: $3E $02
     call SetEntitySpriteVariant                   ; $4368: $CD $0C $3B
-    ld   a, $25                                   ; $436B: $3E $25
+    ld_dialog_low a, Dialog125                    ; $436B: $3E $25
 
 jr_007_436D:
     call OpenDialogInTable1                       ; $436D: $CD $73 $23
     jp   IncrementEntityState                     ; $4370: $C3 $12 $3B
 
 func_007_4373::
-    ld   a, $E9                                   ; $4373: $3E $E9
+    ld_dialog_low a, Dialog1E9                    ; $4373: $3E $E9
     jr   jr_007_436D                              ; $4375: $18 $F6
 
 func_007_4377::

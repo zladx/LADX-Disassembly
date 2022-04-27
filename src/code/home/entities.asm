@@ -1134,13 +1134,13 @@ BossIntro::
     ldh  a, [hActiveEntityType]                   ; $3F1C: $F0 $EB
     cp   ENTITY_DESERT_LANMOLA                    ; $3F1E: $FE $87
     jr   nz, .endDesertLanmola                    ; $3F20: $20 $04
-    ld   a, $DA                                   ; $3F22: $3E $DA
+    ld_dialog_low a, Dialog0DA                    ; $3F22: $3E $DA
     jr   .openDialog                              ; $3F24: $18 $1F
 .endDesertLanmola:
 
     cp   ENTITY_GRIM_CREEPER                      ; $3F26: $FE $BC
     jr   nz, .endGrimCreeper                      ; $3F28: $20 $04
-    ld   a, $26                                   ; $3F2A: $3E $26
+    ld_dialog_low a, Dialog026                    ; $3F2A: $3E $26
     jr   .openDialog                              ; $3F2C: $18 $17
 .endGrimCreeper:
 

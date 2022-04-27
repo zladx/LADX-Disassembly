@@ -103,7 +103,7 @@ GrandmaUlriraState0Handler::
 
     ld   a, [wIsBowWowFollowingLink]              ; $4D87: $FA $56 $DB
     cp   BOW_WOW_KIDNAPPED                        ; $4D8A: $FE $80
-    ld   a, $78                                   ; $4D8C: $3E $78
+    ld_dialog_low a, Dialog178 ; "Awful tragedy"  ; $4D8C: $3E $78
     jr   z, .jr_4DA0                              ; $4D8E: $28 $10
 
     ldh  a, [hMultiPurposeG]                      ; $4D90: $F0 $E8
@@ -112,10 +112,10 @@ GrandmaUlriraState0Handler::
 
     ld   a, [wTradeSequenceItem]                  ; $4D95: $FA $0E $DB
     cp   TRADING_ITEM_FISHING_HOOK                ; $4D98: $FE $0B
-    ld   a, $5A                                   ; $4D9A: $3E $5A
+    ld_dialog_low a, Dialog15A ; "I'm fine, and you?" ; $4D9A: $3E $5A
     jr   c, .jr_4DA0                              ; $4D9C: $38 $02
 
-    ld   a, $5F                                   ; $4D9E: $3E $5F
+    ld_dialog_low a, Dialog15F ; "A new broom!"   ; $4D9E: $3E $5F
 
 .jr_4DA0
     jp   OpenDialogInTable1                       ; $4DA0: $C3 $73 $23

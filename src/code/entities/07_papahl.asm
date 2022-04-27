@@ -150,10 +150,10 @@ func_007_4AB3::
 
     ld   a, [wTradeSequenceItem]                  ; $4ACF: $FA $0E $DB
     cp   $07                                      ; $4AD2: $FE $07
-    ld   a, $70                                   ; $4AD4: $3E $70
+    ld_dialog_low a, Dialog170 ; "Papahl got lost! Yes/Nope" ; $4AD4: $3E $70
     jr   z, .jr_4ADA                              ; $4AD6: $28 $02
 
-    ld   a, $77                                   ; $4AD8: $3E $77
+    ld_dialog_low a, Dialog177 ; "Papahl got lost! No/Can't" ; $4AD8: $3E $77
 
 .jr_4ADA
     call OpenDialogInTable1                       ; $4ADA: $CD $73 $23

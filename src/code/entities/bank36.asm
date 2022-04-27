@@ -164,12 +164,13 @@ jr_036_40DF:
 
 func_036_40EB::
     call func_036_4365                            ; $40EB: $CD $65 $43
-    ld   a, $A8                                   ; $40EE: $3E $A8
+
+    ld_dialog_low a, Dialog2A8 ; "I'll call this one 'Close Call'" ; $40EE: $3E $A8
     jr   jr_036_40F7                              ; $40F0: $18 $05
 
 func_036_40F2::
     call func_036_4365                            ; $40F2: $CD $65 $43
-    ld   a, $A9                                   ; $40F5: $3E $A9
+    ld_dialog_low a, Dialog2A9 ; "I'm too close"  ; $40F5: $3E $A9
 
 jr_036_40F7:
     call OpenDialogInTable2                       ; $40F7: $CD $7C $23
@@ -661,7 +662,7 @@ func_036_441C::
     call func_036_6A98                            ; $4420: $CD $98 $6A
     jr   nc, .jr_4429                             ; $4423: $30 $04
 
-    ld   a, $0D                                   ; $4425: $3E $0D
+    ld_dialog_low a, Dialog10D ; "stand in front of the screen" ; $4425: $3E $0D
     jr   jr_036_4440                              ; $4427: $18 $17
 
 .jr_4429
@@ -677,7 +678,7 @@ func_036_441C::
     and  a                                        ; $443C: $A7
     ret  nz                                       ; $443D: $C0
 
-    ld   a, $0E                                   ; $443E: $3E $0E
+    ld_dialog_low a, Dialog10E ; "go back!"       ; $443E: $3E $0E
 
 jr_036_4440:
     call OpenDialogInTable1                       ; $4440: $CD $73 $23
@@ -1009,11 +1010,11 @@ jr_036_45E6:
     cp   $04                                      ; $4618: $FE $04
     jr   nz, .jr_4620                             ; $461A: $20 $04
 
-    ld   a, $95                                   ; $461C: $3E $95
+    ld_dialog_low a, Dialog295 ; "No picture?!"   ; $461C: $3E $95
     jr   jr_036_4622                              ; $461E: $18 $02
 
 .jr_4620
-    ld   a, $94                                   ; $4620: $3E $94
+    ld_dialog_low a, Dialog294 ; "Let's take a picture" ; $4620: $3E $94
 
 jr_036_4622:
     call OpenDialogInTable2                       ; $4622: $CD $7C $23
@@ -1266,7 +1267,7 @@ jr_036_477E:
 
 jr_036_478A:
     ld   a, e                                     ; $478A: $7B
-    add  $9A                                      ; $478B: $C6 $9A
+    add  LOW($29A) ; From Dialog29A, "[11-1] shots left!" ; $478B: $C6 $9A
     call OpenDialogInTable2                       ; $478D: $CD $7C $23
     ret                                           ; $4790: $C9
 
@@ -1700,39 +1701,56 @@ func_036_49F6::
     ld   [hl], $04                                ; $49F9: $36 $04
     ret                                           ; $49FB: $C9
 
-Data_036_49FC::
-    db   $80, $80, $88
+TailCaveHints::
+    db_dialog_low Dialog280
+    db_dialog_low Dialog280
+    db_dialog_low Dialog288
 
-Data_036_49FF::
-    db   $81, $8A, $89
+BottleGrottoHints::
+    db_dialog_low Dialog281
+    db_dialog_low Dialog28A
+    db_dialog_low Dialog289
 
-Data_036_4A02::
-    db   $82, $8B, $8C
+KeyCavernHints::
+    db_dialog_low Dialog282
+    db_dialog_low Dialog28B
+    db_dialog_low Dialog28C
 
-Data_036_4A05::
-    db   $83, $00, $00
+AnglersTunnelHints::
+    db_dialog_low Dialog283
+    db_dialog_low Dialog200
+    db_dialog_low Dialog200
 
-Data_036_4A08::
-    db   $84, $8D, $00
+CatfishsMawHints::
+    db_dialog_low Dialog284
+    db_dialog_low Dialog28D
+    db_dialog_low Dialog200
 
-Data_036_4A0B::
-    db   $85, $8E, $8F
+FaceShrineHints::
+    db_dialog_low Dialog285
+    db_dialog_low Dialog28E
+    db_dialog_low Dialog28F
 
-Data_036_4A0E::
-    db   $86, $90, $91
+EaglesTowerHints::
+    db_dialog_low Dialog286
+    db_dialog_low Dialog290
+    db_dialog_low Dialog291
 
-Data_036_4A11::
-    db   $87, $92, $93
+TurtleRockHints::
+    db_dialog_low Dialog287
+    db_dialog_low Dialog292
+    db_dialog_low Dialog293
 
+; Indexed by hMapId
 Data_036_4A14::
-    dw   Data_036_49FC
-    dw   Data_036_49FF
-    dw   Data_036_4A02
-    dw   Data_036_4A05
-    dw   Data_036_4A08
-    dw   Data_036_4A0B
-    dw   Data_036_4A0E
-    dw   Data_036_4A11
+._0 dw TailCaveHints
+._1 dw BottleGrottoHints
+._2 dw KeyCavernHints
+._3 dw AnglersTunnelHints
+._4 dw CatfishsMawHints
+._5 dw FaceShrineHints
+._6 dw EaglesTowerHints
+._7 dw TurtleRockHints
 
 Data_036_4A24::
     db   UNKNOWN_ROOM_03, UNKNOWN_ROOM_0A, UNKNOWN_ROOM_04
@@ -1768,7 +1786,12 @@ Data_036_4A3C::
     dw   Data_036_4A36
     dw   Data_036_4A39
 
-func_036_4A4C::
+; Returns a dialog id for an owl statue hint, depending on the
+; current map and room.
+;
+; Returns:
+;   hMultiPurpose0   the lower part of the dialog id
+GetOwlStatueDialogId::
     push bc                                       ; $4A4C: $C5
     ld   hl, Data_036_4A3C                        ; $4A4D: $21 $3C $4A
     ldh  a, [hMapId]                              ; $4A50: $F0 $F7
@@ -2862,11 +2885,11 @@ ENDC
     ld   hl, wEntitiesPrivateState2Table          ; $5120: $21 $C0 $C2
     add  hl, bc                                   ; $5123: $09
     ld   [hl], a                                  ; $5124: $77
-    ld   e, $5D                                   ; $5125: $1E $5D
+    ld_dialog_low e, Dialog25D ; "Are you sure?"  ; $5125: $1E $5D
     and  a                                        ; $5127: $A7
     jr   z, .jr_512C                              ; $5128: $28 $02
 
-    ld   e, $AE                                   ; $512A: $1E $AE
+    ld_dialog_low e, Dialog2AE ; "Are you sure?"  ; $512A: $1E $AE
 
 .jr_512C
     ld   a, e                                     ; $512C: $7B
@@ -3151,12 +3174,12 @@ TunicFairyState7::
 
     xor  a                                        ; $52E4: $AF
     ldh  [hAnimatedTilesGroup], a                 ; $52E5: $E0 $A4
-    ld   e, $5B                                   ; $52E7: $1E $5B
+    ld_dialog_low e, Dialog25B ; "got the Red Clothes" ; $52E7: $1E $5B
     ld   a, [wTunicType]                          ; $52E9: $FA $0F $DC
     cp   $01                                      ; $52EC: $FE $01
     jr   z, .jr_52F2                              ; $52EE: $28 $02
 
-    ld   e, $5A                                   ; $52F0: $1E $5A
+    ld_dialog_low e, Dialog25A ; "got the Blue Clothes" ; $52F0: $1E $5A
 
 .jr_52F2
     ld   a, e                                     ; $52F2: $7B
@@ -4277,12 +4300,12 @@ func_036_59C3::
     add  hl, bc                                   ; $59E7: $09
     ld   a, $01                                   ; $59E8: $3E $01
     ld   [hl], a                                  ; $59EA: $77
-    ld   e, $60                                   ; $59EB: $1E $60
+    ld_dialog_low e, Dialog260 ; "Our colors are never the same" ; $59EB: $1E $60
     ldh  a, [hIsGBC]                              ; $59ED: $F0 $FE
     and  a                                        ; $59EF: $A7
     jr   nz, .jr_59F9                             ; $59F0: $20 $07
 
-    call_open_dialog Dialog262                    ; $59F2
+    call_open_dialog Dialog262 ; "I am sorry, no color" ; $59F2
     jr   jr_036_5A00                              ; $59F7: $18 $07
 
 .jr_59F9
@@ -4346,12 +4369,12 @@ func_036_5A40::
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5A42: $E0 $A1
     ld   [wC167], a                               ; $5A44: $EA $67 $C1
     call PointHLToEntityPosX                      ; $5A47: $CD $23 $6C
-    ld   e, $5F                                   ; $5A4A: $1E $5F
+    ld_dialog_low e, Dialog25F ; "Do you have the powder?" ; $5A4A: $1E $5F
     ld   a, [hl]                                  ; $5A4C: $7E
     cp   $3C                                      ; $5A4D: $FE $3C
     jr   z, .jr_5A57                              ; $5A4F: $28 $06
 
-    ld   e, $5E                                   ; $5A51: $1E $5E
+    ld_dialog_low e, Dialog25E ; "The fairy queen is waiting" ; $5A51: $1E $5E
     cp   $63                                      ; $5A53: $FE $63
     jr   nz, jr_036_5A6A                          ; $5A55: $20 $13
 
@@ -4798,8 +4821,7 @@ AvalaunchState0Handler::
     ret                                           ; $5CF3: $C9
 
 AvalaunchState2Handler::
-    ld   a, $6A                                   ; $5CF4: $3E $6A
-    call OpenDialogInTable2                       ; $5CF6: $CD $7C $23
+    call_open_dialog Dialog26A                    ; $5CF4: $3E $6A $CD $7C $23
     call IncrementEntityState                     ; $5CF9: $CD $12 $3B
     ret                                           ; $5CFC: $C9
 

@@ -107,13 +107,22 @@ Data_004_77B5::             ; @TODO Shop item "for sale" table.
 ; 08  Guardian Acorn (in appearance only)
 ; 09  Medicine
 
-    ;         Shvl 3Hrt Shld 10bm Bow 10awo Ocar Acrn Medc
-    ;          1    2    3    4    5    6    7    8    9
-Data_004_77C9::     ; @TODO: Shop dialogue indexes (table 0) when about to buy
-    db        $30, $31, $32, $33, $2C, $2D, $39, $00, $00, $00
-    ; POI: Ocarina has a dialog index assigned (39), but
-    ; it's the message about the Kanalet castle gate opening.
-    ; (Comes right after the "I wasn't kidding when I said pay" message, though...)
+; @POI: Ocarina has a dialog index assigned (39), but
+; it's the message about the Kanalet castle gate opening.
+; (Comes right after the "I wasn't kidding when I said pay" message, though...)
+;
+; @TODO: Shop dialogue indexes (table 0) when about to buy
+ShopItemPresentationDialogs::
+._0 db_dialog_low Dialog030 ; Showel
+._1 db_dialog_low Dialog031 ; 3 hearts
+._2 db_dialog_low Dialog032 ; Shield
+._3 db_dialog_low Dialog033 ; 10 bombs
+._4 db_dialog_low Dialog02C ; Bow and Arrow
+._5 db_dialog_low Dialog02D ; 10 arrows
+._6 db_dialog_low Dialog039 ; unused (Ocarina, but has Kanalet castle message)
+._7 db_dialog_low Dialog000 ; unused
+._8 db_dialog_low Dialog000 ; unused
+._9 db_dialog_low Dialog000 ; unused
 
     ;    ---  Shvl 3Hrt Shld 10bm Bow 10awo Ocar Acrn Medc
     ;     0    1    2    3    4    5    6    7    8    9
@@ -381,7 +390,7 @@ jr_004_7940:
     dec  a                                        ; $794A: $3D
     ld   e, a                                     ; $794B: $5F
     ld   d, b                                     ; $794C: $50
-    ld   hl, Data_004_77C9                        ; $794D: $21 $C9 $77
+    ld   hl, ShopItemPresentationDialogs          ; $794D: $21 $C9 $77
     add  hl, de                                   ; $7950: $19
     ld   a, [hl]                                  ; $7951: $7E
     call OpenDialogInTable0                       ; $7952: $CD $85 $23
@@ -526,7 +535,7 @@ jr_004_7A00:
     jr   nz, jr_004_7A09                          ; $7A03: $20 $04
 
 jr_004_7A05:
-    ld   a, $29                                   ; $7A05: $3E $29
+    ld_dialog_low a, Dialog029 ; "Aye Caramba!"   ; $7A05: $3E $29
     jr   jr_004_7A24                              ; $7A07: $18 $1B
 
 jr_004_7A09:
@@ -548,7 +557,7 @@ jr_004_7A0C:
     sbc  d                                        ; $7A1F: $9A
     jr   nc, jr_004_7A2E                          ; $7A20: $30 $0C
 
-    ld   a, $34                                   ; $7A22: $3E $34
+    ld_dialog_low a, Dialog034 ; "You don't have the Rupees" ; $7A22: $3E $34
 
 jr_004_7A24:
     call OpenDialogInTable0                       ; $7A24: $CD $85 $23

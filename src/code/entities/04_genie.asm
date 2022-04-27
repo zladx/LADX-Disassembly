@@ -526,7 +526,7 @@ func_004_4345::
     add  hl, de                                   ; $4359: $19
     ld   a, [hl]                                  ; $435A: $7E
     and  a                                        ; $435B: $A7
-    ld   a, $52                                   ; $435C: $3E $52
+    ld_dialog_low a, Dialog052                    ; $435C: $3E $52
     jr   nz, .jr_436D                             ; $435E: $20 $0D
 
     call IncrementEntityState                     ; $4360: $CD $12 $3B
@@ -534,7 +534,7 @@ func_004_4345::
     ld   hl, wEntitiesHealthTable                 ; $4365: $21 $60 $C3
     add  hl, bc                                   ; $4368: $09
     ld   [hl], GENIE_VAR_B                        ; $4369: $36 $08
-    ld   a, $53                                   ; $436B: $3E $53
+    ld_dialog_low a, Dialog053                    ; $436B: $3E $53
 
 .jr_436D
     jp   OpenDialogInTable0                       ; $436D: $C3 $85 $23

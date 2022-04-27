@@ -61,17 +61,17 @@ BananasSchuleState0Handler::
     call func_019_7CF0                            ; $6D3C: $CD $F0 $7C
     jr   nc, jr_019_6D67                          ; $6D3F: $30 $26
 
-    ld   e, $CD                                   ; $6D41: $1E $CD
+    ld_dialog_low e, Dialog1CD                    ; $6D41: $1E $CD
     ldh  a, [hRoomStatus]                         ; $6D43: $F0 $F8
     and  ROOM_STATUS_EVENT_2                      ; $6D45: $E6 $20
     jr   nz, .jr_6D63                             ; $6D47: $20 $1A
 
-    ld   e, $CC                                   ; $6D49: $1E $CC
+    ld_dialog_low e, Dialog1CC                    ; $6D49: $1E $CC
     ld   a, [wIndoorBRoomStatus + $FE]            ; $6D4B: $FA $FE $DA
     and  $20                                      ; $6D4E: $E6 $20
     jr   nz, .jr_6D63                             ; $6D50: $20 $11
 
-    ld   e, $C6                                   ; $6D52: $1E $C6
+    ld_dialog_low e, Dialog1C6                    ; $6D52: $1E $C6
     ld   a, [wTradeSequenceItem]                  ; $6D54: $FA $0E $DB
     cp   $03                                      ; $6D57: $FE $03
     jr   nz, .jr_6D63                             ; $6D59: $20 $08
@@ -345,7 +345,7 @@ func_019_6F8C::
     cp   $0D                                      ; $6F98: $FE $0D
     jr   nz, .jr_6FA0                             ; $6F9A: $20 $04
 
-    ld   a, $8F                                   ; $6F9C: $3E $8F
+    ld_dialog_low a, Dialog18F                    ; $6F9C: $3E $8F
     jr   jr_019_6FAD                              ; $6F9E: $18 $0D
 
 .jr_6FA0
@@ -356,7 +356,7 @@ func_019_6F8C::
     jr   jr_019_6FB0                              ; $6FA9: $18 $05
 
 .jr_6FAB
-    ld   a, $9B                                   ; $6FAB: $3E $9B
+    ld_dialog_low a, Dialog19B                    ; $6FAB: $3E $9B
 
 jr_019_6FAD:
     call OpenDialogInTable1                       ; $6FAD: $CD $73 $23
@@ -524,18 +524,18 @@ label_019_70A9:
     and  $01                                      ; $70FC: $E6 $01
     jr   z, .jr_7112                              ; $70FE: $28 $12
 
-    ld   e, $AF                                   ; $7100: $1E $AF
+    ld_dialog_low e, Dialog0AF                    ; $7100: $1E $AF
     call GetRandomByte                            ; $7102: $CD $0D $28
     and  $3F                                      ; $7105: $E6 $3F
     jr   z, jr_019_7114                           ; $7107: $28 $0B
 
-    ld   e, $FB                                   ; $7109: $1E $FB
+    ld_dialog_low e, Dialog0FB                    ; $7109: $1E $FB
     call GetRandomByte                            ; $710B: $CD $0D $28
     and  $07                                      ; $710E: $E6 $07
     jr   z, jr_019_7114                           ; $7110: $28 $02
 
 .jr_7112
-    ld   e, $FA                                   ; $7112: $1E $FA
+    ld_dialog_low e, Dialog0FA                    ; $7112: $1E $FA
 
 jr_019_7114:
     ld   a, e                                     ; $7114: $7B

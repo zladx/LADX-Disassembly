@@ -166,9 +166,21 @@ jr_007_659D:
     call GetEntityTransitionCountdown             ; $659D: $CD $05 $0C
     ret  nz                                       ; $65A0: $C0
 
+    ; Open dialog with next hint
+    ;
+    ; Dialog id is (Dialog150 + mapId). This gives us:
+    ; Dialog150
+    ; Dialog151
+    ; Dialog152
+    ; Dialog153
+    ; Dialog154
+    ; Dialog155
+    ; Dialog156
+    ; Dialog157
     ldh  a, [hMapId]                              ; $65A1: $F0 $F7
-    add  $50                                      ; $65A3: $C6 $50
+    add  LOW($150)                                ; $65A3: $C6 $50
     call OpenDialogInTable1                       ; $65A5: $CD $73 $23
+
     ld   a, $E4                                   ; $65A8: $3E $E4
     ld   [wBGPalette], a                          ; $65AA: $EA $97 $DB
     ldh  a, [hIsGBC]                              ; $65AD: $F0 $FE

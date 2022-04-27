@@ -1,5 +1,19 @@
-Data_007_54C2::
-    db   $44, $29, $82, $CB, $64, $C1, $D0, $74, $6A, $36, $5E, $EC, $F5, $9D
+; Table of "You got item XXX!" dialogs, indexed by (wTradeSequenceItem - 1)
+TradingItemDialogs::
+._0 db_dialog_low Dialog044
+._1 db_dialog_low Dialog129
+._2 db_dialog_low Dialog182
+._3 db_dialog_low Dialog1CB
+._4 db_dialog_low Dialog164
+._5 db_dialog_low Dialog1C1
+._6 db_dialog_low Dialog1D0
+._7 db_dialog_low Dialog174
+._8 db_dialog_low Dialog16A
+._9 db_dialog_low Dialog136
+._A db_dialog_low Dialog15E
+._B db_dialog_low Dialog1EC
+._C db_dialog_low Dialog1F5
+._D db_dialog_low Dialog09D
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 TradingItem1SpriteVariants::
@@ -130,7 +144,7 @@ TradingItemEntityHandler::
 .render
     call RenderActiveEntitySpritesPair            ; $5572: $CD $C0 $3B
     call GetEntityTransitionCountdown             ; $5575: $CD $05 $0C
-    jr   nz, jr_007_559A                          ; $5578: $20 $20
+    jr   nz, .openDialog                          ; $5578: $20 $20
 
     call CheckLinkCollisionWithEnemy_trampoline   ; $557A: $CD $5A $3B
     jr   nc, .return                              ; $557D: $30 $1A
@@ -150,7 +164,7 @@ TradingItemEntityHandler::
 .return
     ret                                           ; $5599: $C9
 
-jr_007_559A:
+.openDialog
     cp   $10                                      ; $559A: $FE $10
     jr   nz, jr_007_55BA                          ; $559C: $20 $1C
 
@@ -158,23 +172,21 @@ jr_007_559A:
     ld   a, [wTradeSequenceItem]                  ; $559F: $FA $0E $DB
     ld   e, a                                     ; $55A2: $5F
     ld   d, b                                     ; $55A3: $50
-    ld   hl, Data_007_54C2 - 1                    ; $55A4: $21 $C1 $54
+    ld   hl, TradingItemDialogs - 1               ; $55A4: $21 $C1 $54
     add  hl, de                                   ; $55A7: $19
     ld   a, [hl]                                  ; $55A8: $7E
-    cp   $9D                                      ; $55A9: $FE $9D
-    jr   z, .jr_55B1                              ; $55AB: $28 $04
+    cp_dialog_low Dialog09D                                ; $55A9: $FE $9D
+    jr   z, .openDialogInTable0                   ; $55AB: $28 $04
 
-    cp   $44                                      ; $55AD: $FE $44
-    jr   nz, jr_007_55B6                          ; $55AF: $20 $05
-
-.jr_55B1
+    cp_dialog_low Dialog044                                ; $55AD: $FE $44
+    jr   nz, .openDialogInTable1                  ; $55AF: $20 $05
+.openDialogInTable0
     call OpenDialogInTable0                       ; $55B1: $CD $85 $23
-    jr   jr_007_55B9                              ; $55B4: $18 $03
-
-jr_007_55B6:
+    jr   .dialogEnd                               ; $55B4: $18 $03
+.openDialogInTable1
     call OpenDialogInTable1                       ; $55B6: $CD $73 $23
+.dialogEnd
 
-jr_007_55B9:
     xor  a                                        ; $55B9: $AF
 
 jr_007_55BA:

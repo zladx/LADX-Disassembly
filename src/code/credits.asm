@@ -1851,12 +1851,12 @@ CreditsWindFishFloatingHandler::
 
     call IncrementCreditsSubscene                 ; $53E6: $CD $D9 $4C
 
-    ; Open Wind Fish Speech
-    ld   a, $D0                                   ; $53E9: $3E $D0
+    ld_dialog_low  a, Dialog0D0 ; "I AM THE WIND FISH" ; $53E9: $3E $D0
+    ; fallthrough
 
 CreditsOpenWindFishDialog::
-    call CreditsOpenDialog                ; $53EB: $CD $F0 $7C
-    ld   a, $17                                   ; $53EE: $3E $17
+    call CreditsOpenDialog                        ; $53EB: $CD $F0 $7C
+    ld   a, WAVE_SFX_WIND_FISH                    ; $53EE: $3E $17
     ldh  [hWaveSfx], a                            ; $53F0: $E0 $F3
 
 ret_017_53F2:
@@ -1973,7 +1973,7 @@ CreditsWindFishDisappearedHandler::
     jr   nz, .jr_54D5                             ; $54C6: $20 $0D
 
     ; Open the "Play the intruments!" dialog
-    ld   a, $D2                                   ; $54C8: $3E $D2
+    ld_dialog_low a, Dialog0D2                    ; $54C8: $3E $D2
     call CreditsOpenWindFishDialog                ; $54CA: $CD $EB $53
     ld   a, $27                                   ; $54CD: $3E $27
     ld   [wBGPalette], a                          ; $54CF: $EA $97 $DB
@@ -6501,8 +6501,8 @@ func_017_7C7B::
     call GetEntityTransitionCountdown             ; $7C7B: $CD $05 $0C
     jr   nz, func_017_7C8D                        ; $7C7E: $20 $0D
 
-    ld   a, $CF                                   ; $7C80: $3E $CF
-    call CreditsOpenDialog                ; $7C82: $CD $F0 $7C
+    ld_dialog_low a, Dialog0CF ; "Hoot yound lad" ; $7C80: $3E $CF
+    call CreditsOpenDialog                        ; $7C82: $CD $F0 $7C
     ld   a, $19                                   ; $7C85: $3E $19
     ld   [wDialogSFX], a                          ; $7C87: $EA $AB $C5
     call IncrementEntityState                     ; $7C8A: $CD $12 $3B

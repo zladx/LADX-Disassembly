@@ -92,8 +92,7 @@ Data_019_454B::
     db   $D9, $11, $CE, $10, $F3, $51, $67, $28
 
 jr_019_4663:
-    ld   a, $25                                   ; $4663: $3E $25
-    call OpenDialogInTable2                       ; $4665: $CD $7C $23
+    call_open_dialog Dialog225                    ; $4663: $3E $25 $CD $7C $23
     ld   a, [wBoomerangTradedItem]                ; $4668: $FA $7D $DB
     sla  a                                        ; $466B: $CB $27
     sla  a                                        ; $466D: $CB $27
@@ -240,10 +239,10 @@ GoriyaState2Handler::
     add  hl, bc                                   ; $475D: $09
     ld   a, [hl]                                  ; $475E: $7E
     cp   $0D                                      ; $475F: $FE $0D
-    ld   a, $24                                   ; $4761: $3E $24
+    ld_dialog_low a, Dialog224 ; "Got the Boomerang" ; $4761: $3E $24
     jr   z, .jr_4767                              ; $4763: $28 $02
 
-    ld   a, $26                                   ; $4765: $3E $26
+    ld_dialog_low a, Dialog226 ; "The item came back to you" ; $4765: $3E $26
 
 .jr_4767
     call OpenDialogInTable2                       ; $4767: $CD $7C $23

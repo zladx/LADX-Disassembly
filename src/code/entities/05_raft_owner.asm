@@ -87,7 +87,7 @@ jr_005_53AC:
     sbc  $01                                      ; $53B4: $DE $01
     jr   c, .jr_53C5                              ; $53B6: $38 $0D
 
-    ld   a, $64                                   ; $53B8: $3E $64
+    ld   a, RAFT_GAME_PRICE                       ; $53B8: $3E $64
     ld   [wSubstractRupeeBufferLow], a            ; $53BA: $EA $92 $DB
     ld_dialog_low a, Dialog0F1 ; "Raft is ready"  ; $53BD: $3E $F1
     ld   [wD477], a                               ; $53BF: $EA $77 $D4

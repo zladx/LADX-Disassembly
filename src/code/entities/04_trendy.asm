@@ -334,7 +334,7 @@ jr_004_705D:
 
 .jr_7074
     call OpenDialogInTable0                       ; $7074: $CD $85 $23
-    ld   a, $0A                                   ; $7077: $3E $0A
+    ld   a, TRENDY_GAME_PRICE                     ; $7077: $3E $0A
     ld   [wSubstractRupeeBufferLow], a            ; $7079: $EA $92 $DB
     jp   IncrementEntityState                     ; $707C: $C3 $12 $3B
 

@@ -24,7 +24,7 @@ BeetleSpawnerEntityHandler::
     and  $3F                                      ; $7532: $E6 $3F
     jr   nz, .ret_756E                            ; $7534: $20 $38
 
-    ld   a, $B2                                   ; $7536: $3E $B2
+    ld   a, ENTITY_BEETLE_SPAWNER                 ; $7536: $3E $B2
     ld   e, $04                                   ; $7538: $1E $04
     call SpawnNewEntityInRange_trampoline         ; $753A: $CD $98 $3B
     jr   c, .ret_756E                             ; $753D: $38 $2F

@@ -53,7 +53,7 @@ ZombieEntityHandler::
 .jr_63D1
     add  $40                                      ; $63D1: $C6 $40
     ld   [hl], a                                  ; $63D3: $77
-    ld   a, $BF                                   ; $63D4: $3E $BF
+    ld   a, ENTITY_ZOMBIE                         ; $63D4: $3E $BF
     ld   e, $05                                   ; $63D6: $1E $05
     call SpawnNewEntityInRange_trampoline         ; $63D8: $CD $98 $3B
     jr   c, ret_018_63F7                          ; $63DB: $38 $1A

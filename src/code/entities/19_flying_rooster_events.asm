@@ -391,9 +391,7 @@ func_019_500D::
     cp   $0F                                      ; $5060: $FE $0F
     jr   nz, jr_019_5093                          ; $5062: $20 $2F
 
-    ld   a, $08                                   ; $5064: $3E $08
-
-.jr_5066
+    ld   a, ENTITY_MAGIC_POWDER_SPRINKLE          ; $5064: $3E $08
     call SpawnNewEntity_trampoline                ; $5066: $CD $86 $3B
     jr   c, ret_019_5092                          ; $5069: $38 $27
 

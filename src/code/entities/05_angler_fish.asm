@@ -71,7 +71,7 @@ func_005_55CA::
     and  $3F                                      ; $55D5: $E6 $3F
     jr   nz, jr_005_561E                          ; $55D7: $20 $45
 
-    ld   a, $65                                   ; $55D9: $3E $65
+    ld   a, ENTITY_ANGLER_FISH                    ; $55D9: $3E $65
     ld   e, $04                                   ; $55DB: $1E $04
     call SpawnNewEntityInRange_trampoline         ; $55DD: $CD $98 $3B
     jr   c, jr_005_5650                           ; $55E0: $38 $6E
@@ -116,7 +116,7 @@ jr_005_561E:
     and  $7F                                      ; $5625: $E6 $7F
     jr   nz, jr_005_5650                          ; $5627: $20 $27
 
-    ld   a, $65                                   ; $5629: $3E $65
+    ld   a, ENTITY_ANGLER_FISH                    ; $5629: $3E $65
     ld   e, $04                                   ; $562B: $1E $04
     call SpawnNewEntityInRange_trampoline         ; $562D: $CD $98 $3B
     jr   c, jr_005_5650                           ; $5630: $38 $1E
@@ -150,7 +150,7 @@ jr_005_5650:
     and  $FF                                      ; $565E: $E6 $FF
     jr   nz, .jr_56B1                             ; $5660: $20 $4F
 
-    ld   a, $65                                   ; $5662: $3E $65
+    ld   a, ENTITY_ANGLER_FISH                    ; $5662: $3E $65
     ld   e, $04                                   ; $5664: $1E $04
     call SpawnNewEntityInRange_trampoline         ; $5666: $CD $98 $3B
     jr   c, .jr_56B1                              ; $5669: $38 $46

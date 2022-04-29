@@ -121,11 +121,11 @@ func_015_770A::
     and  $0F                                      ; $7730: $E6 $0F
     jr   nz, .jr_7738                             ; $7732: $20 $04
 
-    ld   a, $02                                   ; $7734: $3E $02
+    ld   a, ENTITY_BOMB                           ; $7734: $3E $02
     jr   jr_015_773A                              ; $7736: $18 $02
 
 .jr_7738
-    ld   a, $E0                                   ; $7738: $3E $E0
+    ld   a, ENTITY_MONKEY                         ; $7738: $3E $E0
 
 jr_015_773A:
     call SpawnNewEntity_trampoline                ; $773A: $CD $86 $3B
@@ -278,6 +278,7 @@ Data_015_781B::
 Data_015_781D::
     db   $10, $0C, $00, $F4, $F0, $F4, $00, $0C
 
+; Monkey's coconut entity handler
 label_015_7825:
     ld   de, Unknown057SpriteVariants             ; $7825: $11 $13 $78
     call RenderActiveEntitySpritesPair            ; $7828: $CD $C0 $3B

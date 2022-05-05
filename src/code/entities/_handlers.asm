@@ -117,7 +117,7 @@ EntityHandlersTable::
 ._65 far_pointer AnglerFishEntityHandler
 ._66 far_pointer CrystalSwitchEntityHandler
 ._67 far_pointer Entity67Handler
-._68 far_pointer Entity68Handler ; $68
+._68 far_pointer HookshotBridgeHandler ; $68
 ._69 far_pointer MovingBlockMoverEntityHandler
 ._6A far_pointer EntityRaftOwnerHandler
 ._6B far_pointer TextDebuggerEntityHandler

@@ -180,7 +180,7 @@ include "code/entities/15_urchin.asm"
 Data_015_7436::
     db   $30, $D0
 
-Entity68Handler::
+HookshotBridgeHandler::
     call ReturnIfNonInteractive_15                ; $7438: $CD $0D $7B
     ld   hl, wEntitiesDirectionTable              ; $743B: $21 $80 $C3
     add  hl, bc                                   ; $743E: $09

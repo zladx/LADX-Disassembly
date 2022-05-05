@@ -120,7 +120,7 @@ jr_018_7C54:
     cp   e                                        ; $7C82: $BB
     jr   nz, ret_018_7CAE                         ; $7C83: $20 $29
 
-    ld   a, ENTITY_68                             ; $7C85: $3E $68
+    ld   a, ENTITY_HOOKSHOT_BRIDGE                ; $7C85: $3E $68
     call SpawnNewEntity_trampoline                ; $7C87: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                   ; $7C8A: $21 $00 $C2
     add  hl, de                                   ; $7C8D: $19

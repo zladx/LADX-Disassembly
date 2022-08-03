@@ -3748,24 +3748,36 @@ wFarcallAdressLow::
 wFarcallReturnBank::
   ds 1 ; DE04
 
+; Some sort of counter. 
+; start at 0x18 and counts down to 0
 wDE05:
   ds 1 ; DE05
 
+; Some sort of counter.
+; start at 0 and counts up to 0x08
 wDE06:
   ds 1 ; DE06
 
+; mirror of wDE06
 wDE07:
   ds 1 ; DE07
 
+; Some sort of counter.
+; start at 0 and counts up to 0x10
 wDE08:
   ds 1 ; DE08
 
+; mirror of wDE08
 wDE09:
   ds 1 ; DE09
 
+; BG offset for inventory ?
 wDE0A:
   ds 1 ; DE0A
 
+; introduced in __PATCH_0__
+; related to evil eagle boss fight
+; maybe flag to play diffenrent music in dialog before fight.
 wDE0B:
   ds 1 ; DE0B
 

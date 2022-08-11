@@ -191,10 +191,46 @@ TitleLogoTiles::
 incbin "gfx/intro/title.dmg.2bpp"
 FontTiles::
 incbin "gfx/fonts/font.2bpp"
+
 Overworld2Tiles::
-OverworldCameraShop::
+OverworldCameraShopTiles::
 incbin "gfx/world/ow_camera_shop.dmg.2bpp"
-incbin "gfx/world/overworld_2.dmg.2bpp"
+OverworldTurtleRockTiles::
+incbin "gfx/world/ow_turtle_rock.dmg.2bpp"
+OverworldSeashellMansionTiles::
+incbin "gfx/world/ow_seashell_mansion.dmg.2bpp"
+OverworldMysteriousWoodsTiles::
+incbin "gfx/world/ow_mysterious_woods.dmg.2bpp"
+OverworldBeachTiles::
+incbin "gfx/world/ow_beach.dmg.2bpp"
+OverworldPrarieStoneHeadTiles::
+incbin "gfx/world/ow_prarie_stone_head.dmg.2bpp"
+OverworldMabeVillageTiles::
+incbin "gfx/world/ow_mabe_village.dmg.2bpp"
+OverworldKanaletCastleTiles::
+incbin "gfx/world/ow_kanalet_castle.dmg.2bpp"
+OverworldFaceShrineTiles::
+incbin "gfx/world/ow_face_shrine.dmg.2bpp"
+OverworldYarnaDesertTiles::
+incbin "gfx/world/ow_yarna_desert.dmg.2bpp"
+OverworldPrarieSouthTiles::
+incbin "gfx/world/ow_prarie_south.dmg.2bpp"
+OverworldEaglesTowerTiles::
+incbin "gfx/world/ow_eagles_tower.dmg.2bpp"
+OverworldRaftingGameTiles::
+incbin "gfx/world/ow_rafting_game.dmg.2bpp"
+OverworldAnglersTunnelTiles::
+incbin "gfx/world/ow_anglers_tunnel.dmg.2bpp"
+OverworldGopongoSwampTiles::
+incbin "gfx/world/ow_gopongo_swamp.dmg.2bpp"
+OverworldGraveyardTiles::
+incbin "gfx/world/ow_graveyard.dmg.2bpp"
+OverworldMarthasBayTiles::
+incbin "gfx/world/ow_marthas_bay.dmg.2bpp"
+OverworldEggTiles::
+incbin "gfx/world/ow_egg.dmg.2bpp"
+OverworldTaramanchMiddleTiles::
+incbin "gfx/world/ow_taramanch_middle.dmg.2bpp"
 
 section "bank10",romx[$4000],bank[$10]
 IntroTiles::
@@ -461,10 +497,46 @@ incbin "gfx/menus/menu.cgb.2bpp"
 incbin "gfx/menus/save_menu.cgb.2bpp"
 incbin "gfx/intro/title.cgb.2bpp"
 incbin "gfx/fonts/font.2bpp" ; unused
+
 Overworld2TilesCGB::
-OverworldCameraShopCGB::
+OverworldCameraShopTilesCGB::
 incbin "gfx/world/ow_camera_shop.cgb.2bpp"
-incbin "gfx/world/overworld_2.cgb.2bpp"
+OverworldTurtleRockTilesCGB::
+incbin "gfx/world/ow_turtle_rock.cgb.2bpp"
+OverworldSeashellMansionTilesCGB::
+incbin "gfx/world/ow_seashell_mansion.cgb.2bpp"
+OverworldMysteriousWoodsTilesCGB::
+incbin "gfx/world/ow_mysterious_woods.cgb.2bpp"
+OverworldBeachTilesCGB::
+incbin "gfx/world/ow_beach.cgb.2bpp"
+OverworldPrarieStoneHeadTilesCGB::
+incbin "gfx/world/ow_prarie_stone_head.cgb.2bpp"
+OverworldMabeVillageTilesCGB::
+incbin "gfx/world/ow_mabe_village.cgb.2bpp"
+OverworldKanaletCastleTilesCGB::
+incbin "gfx/world/ow_kanalet_castle.cgb.2bpp"
+OverworldFaceShrineTilesCGB::
+incbin "gfx/world/ow_face_shrine.cgb.2bpp"
+OverworldYarnaDesertTilesCGB::
+incbin "gfx/world/ow_yarna_desert.cgb.2bpp"
+OverworldPrarieSouthTilesCGB::
+incbin "gfx/world/ow_prarie_south.cgb.2bpp"
+OverworldEaglesTowerTilesCGB::
+incbin "gfx/world/ow_eagles_tower.cgb.2bpp"
+OverworldRaftingGameTilesCGB::
+incbin "gfx/world/ow_rafting_game.cgb.2bpp"
+OverworldAnglersTunnelTilesCGB::
+incbin "gfx/world/ow_anglers_tunnel.cgb.2bpp"
+OverworldGopongoSwampTilesCGB::
+incbin "gfx/world/ow_gopongo_swamp.cgb.2bpp"
+OverworldGraveyardTilesCGB::
+incbin "gfx/world/ow_graveyard.cgb.2bpp"
+OverworldMarthasBayTilesCGB::
+incbin "gfx/world/ow_marthas_bay.cgb.2bpp"
+OverworldEggTilesCGB::
+incbin "gfx/world/ow_egg.cgb.2bpp"
+OverworldTaramanchMiddleTilesCGB::
+incbin "gfx/world/ow_taramanch_middle.cgb.2bpp"
 
 section "bank30",romx[$4000],bank[$30]
 incbin "gfx/intro/intro_1.cgb.2bpp"

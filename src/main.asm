@@ -192,6 +192,8 @@ incbin "gfx/intro/title.dmg.2bpp"
 FontTiles::
 incbin "gfx/fonts/font.2bpp"
 Overworld2Tiles::
+OverworldCameraShop::
+incbin "gfx/world/ow_camera_shop.dmg.2bpp"
 incbin "gfx/world/overworld_2.dmg.2bpp"
 
 section "bank10",romx[$4000],bank[$10]
@@ -459,6 +461,9 @@ incbin "gfx/menus/menu.cgb.2bpp"
 incbin "gfx/menus/save_menu.cgb.2bpp"
 incbin "gfx/intro/title.cgb.2bpp"
 incbin "gfx/fonts/font.2bpp" ; unused
+Overworld2TilesCGB::
+OverworldCameraShopCGB::
+incbin "gfx/world/ow_camera_shop.cgb.2bpp"
 incbin "gfx/world/overworld_2.cgb.2bpp"
 
 section "bank30",romx[$4000],bank[$30]

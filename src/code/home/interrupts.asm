@@ -577,7 +577,7 @@ ENDC
     ret                                           ; $0655: $C9
 
 LoadOverworldBGTiles::
-    ld   a, $0F                                   ; $0656: $3E $0F
+    ld   a, BANK(Overworld2Tiles)                 ; $0656: $3E $0F
     call AdjustBankNumberForGBC                   ; $0658: $CD $0B $0B
     ld   [rSelectROMBank], a                      ; $065B: $EA $00 $21
     ; de = vTiles2 + [hBGTilesLoadingStage] * 6

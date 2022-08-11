@@ -1098,7 +1098,7 @@ SelectRoomTilesets::
 
     ; If on prairie north, but not on the Camera Shoop room,
     ; treat the tileset as TILESET_KEEP: nothing to do.
-    cp   W_TILESET_CAMERA_SHOP                    ; $0D80: $FE $1A
+    cp   HIGH(OverworldCameraShop) - $40                    ; $0D80: $FE $1A
     jr   nz, .cameraShopEnd                       ; $0D82: $20 $07
     ldh  a, [hMapRoom]                            ; $0D84: $F0 $F6
     cp   ROOM_OW_CAMERA_SHOP                      ; $0D86: $FE $37

@@ -3,11 +3,9 @@
 ; $OF means "don't change"
 
 ; TODO: Replace these by references to the real tileset address, like:
-; W_TILESET_CAMERA_SHOP      equ HIGH(Overworld2Tiles - $4000 + $0000)
 ; W_TILESET_TURTLE_ROCK      equ HIGH(Overworld2Tiles - $4000 + $0200)
 
 W_TILESET_KEEP               equ $0F
-W_TILESET_CAMERA_SHOP        equ HIGH(OverworldCameraShop) - $40
 W_TILESET_TURTLE_ROCK        equ $1C
 W_TILESET_SEASHELL_MANSION   equ $1E
 W_TILESET_MYSTERIOUS_WOODS   equ $20

@@ -2,40 +2,40 @@
 ; GBC palette entry
 ; RGB r, g, b
 ; values: 0 ~ 31
-RGB: macro
+macro RGB
     db (\1) + (\2) << 5 + (\3) << 10
 endm
 
 ; Farcall using direct bank selection
-callsb: macro
+macro callsb
     ld   a, BANK(\1)
     ld   [MBC3SelectBank], a
     call \1
 endm
 
 ; Farcall using direct bank selection with hl
-callhl: macro
+macro callhl
     ld   hl, MBC3SelectBank
     ld   [hl], BANK(\1)
     call \1
 endm
 
 ; Farcall using SwitchBank
-callsw: macro
+macro callsw
     ld   a, BANK(\1)
     call SwitchBank
     call \1
 endm
 
 ; Jump using SwitchBank
-jpsb: macro
+macro jpsb
     ld   a, BANK(\1)
     ld   [MBC3SelectBank], a
     jp   \1
 endm
 
 ; Jump using SwitchBank
-jpsw: macro
+macro jpsw
     ld   a, BANK(\1)
     call SwitchBank
     jp   \1
@@ -45,28 +45,28 @@ endm
 ; which means reseting the PC to 0 activates the jump table.
 ;
 ; See the JumpTable function for details and usage.
-JP_TABLE: macro
+macro JP_TABLE
     rst 0
 endm
 
 ; Store an address and the associated bank.
 ; First 2 bytes: memory address; third byte: bank id
-far_pointer: macro
+macro far_pointer
     db LOW(\1), HIGH(\1), BANK(\1)
 endm
 
-far_pointer_null: macro
+macro far_pointer_null
     db $00, $00, $00
 endm
 
 ; Define an entity in an entities list
 ; Usage:
 ;   entity <vertical-position>, <horizontal-position>, <type>
-entity: macro
+macro entity
     db   \1 * $10 + \2, \3
 endm
 
-entities_end: macro
+macro entities_end
     db   ENTITIES_END
 endm
 
@@ -78,7 +78,7 @@ endm
 ;
 ; Usage:
 ;   dialog_pointer Dialog123 ; Emits: "Dialog123_IdxOffset: dw Dialog123"
-dialog_pointer: macro
+macro dialog_pointer
 \1_IdxOffset:
     dw \1
 endm
@@ -89,7 +89,7 @@ endm
 ;
 ; NB: if rgbasm ever supports user-defined functions, then we'll replace this by:
 ;   ld a, DIALOG_ID_LOW(Dialog123)
-ld_dialog_low: macro
+macro ld_dialog_low
   ld \1, LOW((\2_IdxOffset - DialogPointerTable) / 2)
 endm
 
@@ -99,7 +99,7 @@ endm
 ;
 ; NB: if rgbasm ever supports user-defined functions, then we'll replace this by:
 ;   db DIALOG_ID_LOW(Dialog123)
-db_dialog_low: macro
+macro db_dialog_low
   db LOW((\1_IdxOffset - DialogPointerTable) / 2)
 endm
 
@@ -109,14 +109,14 @@ endm
 ;
 ; NB: if rgbasm ever supports user-defined functions, then we'll replace this by:
 ;   cp DIALOG_ID_LOW(Dialog123)
-cp_dialog_low: macro
+macro cp_dialog_low
   cp LOW((\1_IdxOffset - DialogPointerTable) / 2)
 endm
 
 ; Open a dialog in the correct dialogs table (using a `call` instruction)
 ; Usage:
 ;   call_open_dialog Dialog123 ; Emits "ld a, $23 \n call OpenDialogInTable1"
-call_open_dialog: macro
+macro call_open_dialog
     ld   a, LOW((\1_IdxOffset - DialogPointerTable) / 2)
     ; Ihe code needs to call the correct function, but the exact dialog index isn't available at compile-time
     ; (only at link-time), so we can't use IF().
@@ -129,7 +129,7 @@ endm
 ; Open a dialog in the correct dialogs table (using a `jp` instruction)
 ; Usage:
 ;   jp_open_dialog Dialog123 ; emits "ld a, $23 \n jp OpenDialogInTable1"
-jp_open_dialog: macro
+macro jp_open_dialog
     ld   a, LOW((\1_IdxOffset - DialogPointerTable) / 2)
     jp  (OpenDialogInTable0 * (HIGH((\1_IdxOffset - DialogPointerTable) / 2) == 0)) \
       | (OpenDialogInTable1 * (HIGH((\1_IdxOffset - DialogPointerTable) / 2) == 1)) \

@@ -1,45 +1,45 @@
-end_def: macro
+macro end_def
     db $00
 endm
 
-rest: macro
+macro rest
     db $01
 endm
 
 ; Sets [wActiveMusicTableIndex] to 1.
-unknownop_94: macro
+macro unknownop_94
     db $94
 endm
 
 ; Sets [wD3CD] to 0.
-disable_unknown1: macro
+macro disable_unknown1
     db $95
 endm
 
 ; Sets [wD3CD] to 1.
-enable_unknown1: macro
+macro enable_unknown1
     db $96
 endm
 
 ; Sets [wD3B6 + channelIndex] to 1.
-enable_unknown2: macro
+macro enable_unknown2
     db $97
 endm
 
 ; Sets [wD3B6 + channelIndex] to 0.
-disable_unknown2: macro
+macro disable_unknown2
     db $98
 endm
 
 ; This seems to enable some kind of mode that controls the volume, similar to
 ; the hardware envelope? (This name is just a guess and may need to be changed.)
 ; Sets [wD39E] to 1.
-enable_software_envelope: macro
+macro enable_software_envelope
     db $99
 endm
 
 ; Ses [wD39E] to 0.
-disable_software_envelope: macro
+macro disable_software_envelope
     db $9a
 endm
 
@@ -48,17 +48,17 @@ endm
 ; Arg1: Number of times to loop. (NEXT_LOOP macro will jump back that many
 ; times.) If bit 7 is set, this causes some special-case code in the Noise
 ; channel when note NOISE_FF is played?
-begin_loop: macro
+macro begin_loop
     db $9b, \1
 endm
 
 ; Loops back to begin_loop, or continues on if it's looped enough times already.
-next_loop: macro
+macro next_loop
     db $9c
 endm
 
 ; Set waveform data for channel 3 ONLY.
-set_waveform: macro
+macro set_waveform
     db $9d
     dw \1
     db \2
@@ -74,31 +74,31 @@ endm
 ; Arg 4: Note length; bits 0-5 or NRx1
 ;
 ; The opcode's 3 bytes are written to D3x6, D3x7, D3x8 (x = channel number).
-set_envelope_duty: macro
+macro set_envelope_duty
     ASSERT \3 < 4, "set_envelope_duty: Invalid duty cycle value \3"
     ASSERT \4 < $40, "set_envelope_duty: Note length must be less than 0x40, got \4"
     db $9d, \1, \2, ((\3<<6) | \4)
 endm
 
 ; Takes a pointer to some data which determines the music speed.
-set_speed: macro
+macro set_speed
     db $9e
     dw \1
 endm
 
 ; Set the transpose value to transpose all subsequent notes.
-set_transpose: macro
+macro set_transpose
     db $9f, \1 * 2
 endm
 
 ; Sets the length of subsequent notes.
-notelen: macro
+macro notelen
     ASSERT \1 <= $f, "notelen: Length must be less than or equal to $f, got \1"
     db $a0 + \1
 endm
 
 ; Play a note. Can pass multiple notes to this.
-note: macro
+macro note
     REPT _NARG
         ASSERT (\1 >= $1 && \1 <= $90) || \1 == $ff, "note: Invalid note value \1"
         db \1

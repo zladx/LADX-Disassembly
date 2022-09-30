@@ -9,14 +9,14 @@
 ; Defines a Super Game Boy command.
 ; Usage:
 ;   sgb_cmd <command code>, <length>
-sgb_cmd: macro
+macro sgb_cmd
     db   (\1) << 3 + (\2)
 endm
 
 ; Defines a Super Game Boy 'Data Send' command.
 ; Usage:
 ;   sgb_data_snd <SNES destination address>, <SNES destination bank>, <data length>
-sgb_data_send_cmd: macro
+macro sgb_data_send_cmd
     sgb_cmd SGB_DATA_SND, 1
     dw  \1 ; SNES destination address
     db  \2 ; SNES destination bank

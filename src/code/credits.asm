@@ -2,12 +2,12 @@
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-CREDITS_MACRO: macro
+macro CREDITS_MACRO
     CREDITS_MACRO_LDH_AND_ADD
     CREDITS_MACRO_LD
 endm
 
-CREDITS_MACRO_LDH_AND_ADD: macro
+macro CREDITS_MACRO_LDH_AND_ADD
 IF !__PATCH_0__
     ldh  a, [hFrameCounter]
     and  $03
@@ -15,7 +15,7 @@ IF !__PATCH_0__
 ENDC
 endm
 
-CREDITS_MACRO_LDH_AND_LD: macro
+macro CREDITS_MACRO_LDH_AND_LD
 mask = $03
 IF _NARG == 1
 mask = \1
@@ -28,13 +28,13 @@ IF !__PATCH_0__
 ENDC
 endm
 
-CREDITS_MACRO_LD: macro
+macro CREDITS_MACRO_LD
 IF !__PATCH_0__
     ld   e, a
 ENDC
 endm
 
-CREDITS_MACRO_ADD: macro
+macro CREDITS_MACRO_ADD
 IF !__PATCH_0__
     add  e
 ENDC
@@ -1112,7 +1112,7 @@ Data_017_4B3A::
     db   $01, $01, $00, $01, $01, $01, $01, $01, $01, $00, $01, $00, $00, $00, $00, $00
     db   $01, $01, $00, $00, $00, $00, $00, $00, $00, $00, $01, $00, $00, $00, $00, $00
 
-CREDITS_FADE: macro
+macro CREDITS_FADE
 IF !__PATCH_0__
     db \1, \1, \1, \1
     db \2, \2, \2, \2

@@ -602,7 +602,7 @@ SaveSlotNameAddresses::
 ._02 db  wSaveSlot2Name - wSaveSlotNames
 ._03 db  wSaveSlot3Name - wSaveSlotNames                           ; $4A98
 
-CHECKNAME: macro
+macro CHECKNAME
     ld   hl, wSaveSlotNames
     add  hl, de
 I = 0

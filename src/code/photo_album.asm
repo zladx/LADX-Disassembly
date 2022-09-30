@@ -2103,7 +2103,7 @@ PhotoAlbumStartPrint5Handler:
 .return_4CDF_28:
     ret                                           ; $4CDF: PhotoAlbumStartPrint5Handler $C9
 
-MAKE_PRINT_ERROR: macro
+macro MAKE_PRINT_ERROR
 ; oam data, terminated with $FF
 IF __PATCH_1__
     db   $50, $38, $1E, $00

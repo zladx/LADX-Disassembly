@@ -56,4 +56,4 @@ NewStaffPeople::
     db "      NOE PT      "
     db " SHIGERU MIYAMOTO "
     db " HIROSHI YAMAUCHI "
-    db "  ", $5C, $5D, $5E, $5F, "            "
+    db "  \\]^", $5F, "            "

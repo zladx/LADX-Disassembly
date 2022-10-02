@@ -96,7 +96,7 @@ azlj-r2_FXFLAGS = --rom-version 2 --title "ZELDA" --game-id "AZLJ"
 
 azlg_asm = $(shell find revisions/G0 -type f -name '*.asm')
 azlg_gfx = $(shell find revisions/G0 -type f -name '*.png')
-azlg_bin = $(shell find revisions/J0 -type f -name '*.tilemap.encoded')
+azlg_bin = $(shell find revisions/G0 -type f -name '*.tilemap.encoded')
 
 games += azlg.gbc
 src/main.azlg.o: $(azlg_asm) $(azlg_gfx:.png=.2bpp) $(azlg_bin)

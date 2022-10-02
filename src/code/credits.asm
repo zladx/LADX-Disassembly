@@ -133,7 +133,7 @@ jr_017_40cb:
 ENDC
 
 PUSHC
-NEWCHARMAP default
+SETCHARMAP CreditsCharmap
 include "text/credits.asm"
 POPC
 

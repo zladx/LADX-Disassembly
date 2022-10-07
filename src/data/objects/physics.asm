@@ -1,3 +1,27 @@
+;$00 = Open
+;$01 = Solid
+;$02 = Stairs
+;$03 = Door
+;$04 = Ocean (blocks enemies but not projectiles?)
+;$05 = Marsh/swamp/shallow water
+;$06 = Cuttable gras
+;$07 = Water
+;$08 = "bridge" (offsets the sprite up a few pixels)
+;$0A = wide stairs (Before instrument)
+;$10 = Jumpable ledge
+;$30 = Removable obstacle (bush/rock/keyblock/cracked block/sword-crystals)
+;$50 = Pit
+;$51 = Pit with warp to other room (D1 boss, D7)
+;$60 = Hookshotable solid or dash-crystal
+;$7x = Open door/flip door
+;$8x = per 8x8 tile collision
+;$9x = Key doors, bombable walls
+;$C0 = Keyhole
+;$B0 = Sidescroll water
+;$B1 = Sidescroll ladder
+;$Dx = Dungeon ledge wall
+;$Fx = Conveyor (but not rapids)
+
 OverworldObjectPhysicFlags::
     db   $01, $00, $00, $00, $00, $01, $01, $01   ; $4AD4
     db   $00, $00, $06, $00, $00, $00, $07, $00   ; $4ADC

@@ -25,7 +25,7 @@ md5: 1043fd167d0ed9c4094e3c9d8e757f1e`
 - azlf-r1.gbc (French, v1.1) `
 md5: 68242187b65166b5f8225b20e2021659`
 
-Additionnaly, a wiki includes a [high-level overview of the game engine](https://github.com/zladx/LADX-Disassembly/wiki/Game-engine-documentation), and technical informations on the [data formats used](https://github.com/zladx/LADX-Disassembly/wiki/Maps-data-format) throughout the game.
+Additionally, a wiki includes a [high-level overview of the game engine](https://github.com/zladx/LADX-Disassembly/wiki/Game-engine-documentation), and technical informations on the [data formats used](https://github.com/zladx/LADX-Disassembly/wiki/Maps-data-format) throughout the game.
 
 ## Usage
 

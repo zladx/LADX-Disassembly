@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:bullseye
 
 # Install CircleCI dependencies
 RUN apt-get update
@@ -10,7 +10,7 @@ RUN apt-get install -y build-essential bison pkg-config libpng-dev
 # Retrieve rgbds
 RUN git clone https://github.com/rednex/rgbds.git && \
   cd rgbds && \
-  git fetch --tags && git checkout v0.5.2
+  git fetch --tags && git checkout v0.6.0
 
 # Build rgbds
 RUN cd rgbds && make install

@@ -7,14 +7,25 @@
 # Dev tools binaries and options
 #
 
-# Get rgbasm version
-ASMVER    := $(shell rgbasm --version | cut -f2 -dv)
-ASMVERMAJ := $(shell echo $(ASMVER) | cut -f1 -d.)
-ASMVERMIN := $(shell echo $(ASMVER) | cut -f2 -d.)
-
 2BPP    := rgbgfx
 
 ASM     := rgbasm
+
+# Get assembler version
+ASMVER    := $(shell $(ASM) --version | cut -f2 -dv)
+ASMVERMAJ := $(shell echo $(ASMVER) | cut -f1 -d.)
+ASMVERMIN := $(shell echo $(ASMVER) | cut -f2 -d.)
+
+# Abort if RGBDS version is too low and 'clean' is not the only target
+ifneq ($(MAKECMDGOALS), "clean")
+  ifeq ($(shell expr \
+    \( $(ASMVERMAJ) = 0 \) \&\
+    \( $(ASMVERMIN) \< 5 \)\
+  ), 1)
+    $(error Requires RGBDS version >= 0.5.0)
+  endif
+endif
+
 ASFLAGS := --export-all
 
 # If we're using RGBDS >= 0.6.0, add flags to force behavior that used to be default

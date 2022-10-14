@@ -35,9 +35,9 @@ For instance:
 
 ```
 # Decode a tilemap using an initial color
-tools/convert_background.py decode src/data/backgrounds/menu_file_creation.tilemap.encoded --filler 0x7E --outfile src/data/backgrounds/menu_file_creation.tilemap
+tools/convert_background.py decode src/data/backgrounds/menu_file_creation.tilemap.encoded --filler 0x7E --output src/data/backgrounds/menu_file_creation.tilemap
 # Edit using an external tool
 # …
 # Re-encode the tilemap without storing the initial color
-tools/convert_background.py encode src/data/backgrounds/menu_file_creation.tilemap --filler 0x7E --outfile src/data/backgrounds/menu_file_creation.tilemap.encoded
+tools/convert_background.py encode src/data/backgrounds/menu_file_creation.tilemap --filler 0x7E --output src/data/backgrounds/menu_file_creation.tilemap.encoded
 ```

@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
     encoding_parser = operations_subparser.add_parser('encode',  parents=[options_parser], help='convert a raw tilemap to the encoded ZLADX format')
     encoding_parser.add_argument('infile', type=str, help='raw tilemap file to encode')
-    encoding_parser.add_argument('--location', type=int, metavar="VRAM_address", default=0x9800, action='store', help='start address of the tilemap in VRAM')
+    encoding_parser.add_argument('--location', type=lambda x: int(x, 0), metavar="VRAM_address", default=0x9800, action='store', help='start address of the tilemap in VRAM')
 
     args = arg_parser.parse_args()
 

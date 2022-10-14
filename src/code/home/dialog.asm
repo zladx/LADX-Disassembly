@@ -597,13 +597,13 @@ ENDR
     ld   [hl], $00                                ; $2639: $36 $00
     push hl                                       ; $263B: $E5
 
-    ld   a, BANK(DakutenTable)                    ; $263C: $3E $1C
+    ld   a, BANK(DiacriticsTable)                 ; $263C: $3E $1C
     ld   [MBC3SelectBank], a ; current character  ; $263E: $EA $00 $21
     ldh  a, [hMultiPurpose1]                      ; $2641: $F0 $D8
     ld   e, a                                     ; $2643: $5F
     ld   d, $00                                   ; $2644: $16 $00
-IF __DO_CHECK_DAKUTEN__
-    ld   hl, DakutenTable
+IF __DO_CHECK_DIACRITICS__
+    ld   hl, DiacriticsTable
     add  hl, de
     ld   a, [hl]
 ELSE
@@ -611,7 +611,7 @@ ELSE
 ENDC
     pop  hl                                       ; $2647: $E1
     and  a                                        ; $2648: $A7
-    jr   z, .noDakuten                            ; $2649: $28 $18
+    jr   z, .noDiacritic                          ; $2649: $28 $18
     ld   e, a                                     ; $264B: $5F
     ld   a, [wC175]                               ; $264C: $FA $75 $C1
     ldi  [hl], a                                  ; $264F: $22
@@ -622,14 +622,14 @@ ENDC
     ldi  [hl], a                                  ; $2658: $22
     ld   a, $C9                                   ; $2659: $3E $C9
     rr   e                                        ; $265B: $CB $1B
-    jr   c, .handleDakutenTile                    ; $265D: $38 $01
-    dec  a  ; dakuten ($C8)                       ; $265F: $3D
+    jr   c, .handleDiacriticTile                  ; $265D: $38 $01
+    dec  a  ; diacritic ($C8)                     ; $265F: $3D
 
-.handleDakutenTile
+.handleDiacriticTile
     ldi  [hl], a                                  ; $2660: $22
     ld   [hl], $00                                ; $2661: $36 $00
 
-.noDakuten
+.noDiacritic
     ld   a, [wDialogCharacterIndex]               ; $2663: $FA $70 $C1
     add  a, $01                                   ; $2666: $C6 $01
     ld   [wDialogCharacterIndex], a               ; $2668: $EA $70 $C1

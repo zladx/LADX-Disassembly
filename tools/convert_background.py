@@ -32,6 +32,7 @@ if __name__ == "__main__":
     options_parser.add_argument('--output', '-o', type=str, metavar='outfile', action='store', help='file to write the output to')
     options_parser.add_argument('--width', type=int, metavar='tiles_count', default=20, action='store', help='number of tiles in the tilemap width')
     options_parser.add_argument('--filler', type=lambda x: int(x, 0), metavar='filler', default=None, action='store', help='filler byte used as the tilemap background')
+    options_parser.add_argument('--no-file-terminator', dest='has_file_terminator', default=True, action='store_false', help='operate on a partial tilemap without a file terminator (e.g. some menus)')
 
     operations_subparser = arg_parser.add_subparsers(title='commands', dest='command', required=True)
     decoding_parser = operations_subparser.add_parser('decode',  parents=[options_parser], help='convert a tilemap encoded with the ZLADX format to a raw tilemap')
@@ -51,11 +52,11 @@ if __name__ == "__main__":
     outfile = (args.output and open(args.output, 'wb')) or sys.stdout
 
     if args.command == 'decode':
-        result = BackgroundCoder.decode(data, args.width, args.filler or 0x00)
+        result = BackgroundCoder.decode(data, args.width, args.filler or 0x00, args.has_file_terminator)
         write_result(result, outfile, wrap_count=args.wrap)
 
     elif args.command == 'encode':
-        result = BackgroundCoder.encode(data, args.location, args.width, args.filler)
+        result = BackgroundCoder.encode(data, args.location, args.width, args.filler, args.has_file_terminator)
         write_result(result, outfile)
 
     outfile.close()

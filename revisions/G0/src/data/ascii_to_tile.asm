@@ -32,7 +32,7 @@ AsciiToTileMap::
 ;        UP  DOWN LEFT RIGHT                                            BLANK
     db  $34, $35, $36, $37, 0  , 0  , $51, 0  , 0  , 0  , 0  , 0  , $4F, $7e, 0  , 0
 
-DakutenTable::
+DiacriticsTable::
     db   0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0
     db   0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0
     db   0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0

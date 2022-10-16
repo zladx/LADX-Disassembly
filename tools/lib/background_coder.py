@@ -1,3 +1,4 @@
+import sys
 from itertools import groupby
 from functools import reduce
 
@@ -22,7 +23,7 @@ class BackgroundCoder:
     """
 
     @staticmethod
-    def decode(encoded_tilemap_bytes, tilemap_width=0x20, filler=0x00):
+    def decode(encoded_tilemap_bytes, tilemap_width=0x20, filler=0x00, has_file_terminator=True):
         """
         Decode a BG tilemap encoded using LADX commands format.
         Returns a dict of {address1: value1, address2: value2, …}
@@ -36,7 +37,7 @@ class BackgroundCoder:
         byte_at_address = {}
 
         idx = 0
-        while data[idx] != 0x00:
+        while idx < len(data) and data[idx] != 0x00:
             addr = data[idx] << 8 | data[idx + 1]
             amount = (data[idx + 2] & 0x3F) + 1
             repeat = (data[idx + 2] & 0x40) == 0x40
@@ -49,6 +50,9 @@ class BackgroundCoder:
                 addr += 0x20 if vertical else 0x01
             if repeat:
                 idx += 1
+
+        if has_file_terminator and idx >= len(data):
+            print("Warning: reached end of file without encountering a file terminator (0x00).\n  Use the `--no-file-terminator` option to properly decode and encode the file.", file=sys.stderr)
 
         # Place the bytes into the BG video memory
         addresses = list(sorted(byte_at_address))
@@ -73,7 +77,7 @@ class BackgroundCoder:
         return result
 
     @staticmethod
-    def encode(bytes, tilemap_location=0x9800, tilemap_width=20, filler=None):
+    def encode(bytes, tilemap_location=0x9800, tilemap_width=20, filler=None, has_file_terminator=True):
         """
         Encode a raw BG tilemap to the LADX commands format.
 
@@ -129,5 +133,7 @@ class BackgroundCoder:
 
                 address += len(group)
 
-        encoded_bytes.append(0x00)
+        if has_file_terminator:
+            encoded_bytes.append(0x00)
+
         return encoded_bytes

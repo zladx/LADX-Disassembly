@@ -22,7 +22,7 @@ To make change to a tilemap:
 
 ## Background color
 
-Some tilemaps take advantage of the backround being pre-filled with an initial color.
+Some tilemaps take advantage of the background being pre-filled with an initial color.
 For instance, the file menu tilemaps assume that the background has been filled with black tiles
 (7E) beforehand.
 
@@ -41,3 +41,21 @@ tools/convert_background.py decode src/data/backgrounds/menu_file_creation.tilem
 # Re-encode the tilemap without storing the initial color
 tools/convert_background.py encode src/data/backgrounds/menu_file_creation.tilemap --filler 0x7E --output src/data/backgrounds/menu_file_creation.tilemap.encoded
 ```
+
+## File terminator
+
+Although most tilemaps end with a file terminator (0x00), some of them are partial tilemaps, and omit
+this terminator. At runtime, after rendering the tilemap, the game continue rendering and fallback on
+the next tilemap stored in the ROM or RAM (usually a menu).
+
+In the original game, this concerns these files:
+- menu_file_selection_commands.tilemap.encoded
+- menu_file_selection_commands.attrmap.encoded
+
+To handle this case, both the decoder and encoder support a `--no-file-terminator` option.
+
+When **decoding**, `--no-file-terminator` tells the decoder that the file is expected to end abruptely.
+
+When **encoding**, `--no-file-terminator` tells the encoder not to append the NULL file terminator at the end of the file.
+
+This option should be used when decoding and encoding the relevant files.

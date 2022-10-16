@@ -69,11 +69,18 @@ BANK_1C_VAR = 1
 ;   1: Removes the debug feature that allows you to jump to the ending
 ;      by pushing START on the map screen if debug flag 3 is enabled
 ;
+; __PATCH_9__
+;   Small optimizations
+;
 ; __PATCH_A__
 ;   1: Skips updating the status bar's hearts, rupees,
 ;      and subscreen inventory if debug flag 2 is set.
 ;   2: Swaps the order of the subscreen and heart/rupee updates.
 ;      Purpose unknown.
+;
+; __DO_CHECK_DIACRITICS__
+;   Adds support for two diacritical marks on separate tiles above
+;   letters.
 
 __PATCH_0__ = FALSE ; Applies to JP1+, EN1+, DE, FR
 __PATCH_1__ = FALSE ; Applies to DE, FR
@@ -83,7 +90,6 @@ __PATCH_4__ = FALSE ; Applies to DE1+, JP2+, EN2+, FR1+
 __PATCH_8__ = FALSE ; Applies to JP1+
 __PATCH_9__ = FALSE ; Applies to DE, JP
 __PATCH_A__ = 0 ; 1 in JP, 2 in DE
-__PATCH_B__ = 0 ; 1 in JP/DE, 2 in FR
 __DO_CHECK_DIACRITICS__ = FALSE ; TRUE in JP, DE
 __USE_FIXED_DIALOG_BANKS__ = FALSE ; TRUE in JP
 
@@ -147,7 +153,6 @@ __USE_FIXED_DIALOG_BANKS__ = TRUE
 __DO_CHECK_DIACRITICS__ = TRUE
 __PATCH_9__ = TRUE
 __PATCH_A__ = 1
-__PATCH_B__ = 1
 IF (VERSION > 0)
 __PATCH_0__ = TRUE
 __PATCH_2__ = TRUE
@@ -197,7 +202,6 @@ GAMEOVER_OPTION_CONTINUE_Y equ 104
 __PATCH_0__ = TRUE
 __PATCH_1__ = TRUE
 __PATCH_2__ = TRUE
-__PATCH_B__ = 2
 IF (VERSION > 0)
 __PATCH_4__ = TRUE
 ENDC
@@ -227,7 +231,6 @@ __PATCH_1__ = TRUE
 __PATCH_2__ = TRUE
 __PATCH_9__ = TRUE
 __PATCH_A__ = 2
-__PATCH_B__ = 1
 IF (VERSION > 0)
 __PATCH_4__ = TRUE
 ENDC

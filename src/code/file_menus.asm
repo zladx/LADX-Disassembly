@@ -95,7 +95,7 @@ CopyDeathCountsToBG::
 FileSelectionPrepare5::
     jp   FileDeletionState4Handler                ; $484F: $C3 $6D $4D
 
-func_001_4852::
+DrawSaveSlotName::
     push de                                       ; $4852: $D5
     ld   a, [wDrawCommandsSize]                   ; $4853: $FA $00 $D6
     ld   e, a                                     ; $4856: $5F
@@ -114,12 +114,12 @@ func_001_4852::
     push de                                       ; $486A: $D5
     ld   a, $05                                   ; $486B: $3E $05
 
-.loop
+.drawCharacterRowLoop
     ldh  [hMultiPurpose0], a                      ; $486D: $E0 $D7
     ld   a, [de]                                  ; $486F: $1A
     and  a                                        ; $4870: $A7
-    ld   a, $7E                                   ; $4871: $3E $7E
-    jr   z, .skipDE                               ; $4873: $28 $0C
+    ld   a, $7E                ; Empty tile       ; $4871: $3E $7E
+    jr   z, .drawCharacterTile                    ; $4873: $28 $0C
     ld   a, [de]                                  ; $4875: $1A
     dec  a                                        ; $4876: $3D
     push bc                                       ; $4877: $C5
@@ -129,13 +129,13 @@ func_001_4852::
     call ReadTileValueFromAsciiTable              ; $487C: $CD $25 $0C
     pop  hl                                       ; $487F: $E1
     pop  bc                                       ; $4880: $C1
-.skipDE
 
+.drawCharacterTile
     ldi  [hl], a                                  ; $4881: $22
     inc  de                                       ; $4882: $13
     ldh  a, [hMultiPurpose0]                      ; $4883: $F0 $D7
     dec  a                                        ; $4885: $3D
-    jr   nz, .loop                                ; $4886: $20 $E5
+    jr   nz, .drawCharacterRowLoop                ; $4886: $20 $E5
     ld   a, b                                     ; $4888: $78
     ldi  [hl], a                                  ; $4889: $22
     ld   a, c                                     ; $488A: $79
@@ -146,60 +146,66 @@ func_001_4852::
     pop  de                                       ; $4891: $D1
     ld   a, $05                                   ; $4892: $3E $05
 
-jr_001_4894::
+.drawSpacingRowLoop
+    ; Draw the empty row above the save slot name;
+    ; might contain diacritics
     ldh  [hMultiPurpose0], a                      ; $4894: $E0 $D7
     ld   a, [de]                                  ; $4896: $1A
     and  a                                        ; $4897: $A7
 
 IF LANG_EN
-    jr   .jr_489D                                 ; $4898: $18 $03
+    jr   .selectSpacingTile                       ; $4898: $18 $03
+    ; Unreachable code:
     dec  a                                        ; $489A: $3D
     and  $C0                                      ; $489B: $E6 $C0
 ELSE
-    jr   z, .jr_489D
+    jr   z, .selectSpacingTile
     dec  a
     push hl
     push bc
     ld   c, a
     ld   b, $00
-    call ReadDialogBankFromTable
-IF __PATCH_9__
-    ldh  [hRoomBank], a
+    call ReadTileValueFromDiacriticsTable
+IF __DIACRITICS_SUPPORT__
+    ldh  [hDialogBackgroundTile], a
 ENDC
     pop  bc
     pop  hl
     cp   $00
 ENDC
 
-.jr_489D::
-IF __PATCH_B__ == 1
-    ld   a, $7E
-    jr   z, .jr_48A9
-    ldh  a, [hRoomBank]
-    cp   $02
-    ld   a, $C8
-    jr   z, .jr_48A9
-    inc  a
-ELIF __PATCH_B__ == 2
-    ld   a, $7E
-    jr   z, .jr_48A9
-    ld   a, $c9
+.selectSpacingTile::
+    ; Select what tile to draw above the current character
+IF __DIACRITICS_SUPPORT__
+    ld   a, $7E               ; Empty tile
+    jr   z, .drawSpacingTile  ; Jump if no diacritic
+    ldh  a, [hDialogBackgroundTile] ; Load value from DiacriticsTable
+    cp   2                    ; Check if DiacriticsTable had value 2
+    ld   a, $C8               ; First diacritic tile
+    jr   z, .drawSpacingTile  ; Jump if diacritic 2
+    inc  a                    ; Second diacritic tile
+ELIF LANG_FR
+    ld   a, $7E               ; Empty tile
+    jr   z, .drawSpacingTile  ; Jump if no diacritic
+    ld   a, $C9               ; Second diacritic tile
 ELSE
-    ld   a, $7E                                   ; $489D: $3E $7E
-    jr   .jr_48A9                                 ; $489F: $18 $08
+    ld   a, $7E               ; Empty tile        ; $489D: $3E $7E
+    jr   .drawSpacingTile                         ; $489F: $18 $08
+    ; Unreachable code, likely early diacritics
+    ; support that has been stubbed out:
     ld   a, [de]                                  ; $48A1: $1A
     and  $80                                      ; $48A2: $E6 $80
     ld   a, $C8                                   ; $48A4: $3E $C8
-    jr   z, .jr_48A9                              ; $48A6: $28 $01
+    jr   z, .drawSpacingTile                              ; $48A6: $28 $01
     inc  a                                        ; $48A8: $3C
 ENDC
 
-.jr_48A9::
+.drawSpacingTile::
     ldi  [hl], a                                  ; $48A9: $22
     inc  de                                       ; $48AA: $13
     ldh  a, [hMultiPurpose0]                      ; $48AB: $F0 $D7
     dec  a                                        ; $48AD: $3D
-    jr   nz, jr_001_4894                          ; $48AE: $20 $E4
+    jr   nz, .drawSpacingRowLoop                  ; $48AE: $20 $E4
     xor  a                                        ; $48B0: $AF
     ld   [hl], a                                  ; $48B1: $77
     ret                                           ; $48B2: $C9
@@ -632,12 +638,12 @@ FileCreationInteractiveHandler::
     ld   e, l                                     ; $4AAA: $5D
     ld   d, h                                     ; $4AAB: $54
     ld   bc, $984A                                ; $4AAC: $01 $4A $98
-    call func_001_4852                            ; $4AAF: $CD $52 $48
+    call DrawSaveSlotName                         ; $4AAF: $CD $52 $48
 
     ; If START is pressed, record the save file name
     ldh  a, [hJoypadState]                        ; $4AB2: $F0 $CC
     and  J_START                                  ; $4AB4: $E6 $80
-IF __PATCH_9__
+IF __DIACRITICS_SUPPORT__
     jp   z, .validationEnd
 ELSE
     jr   z, .validationEnd                        ; $4AB6: $28 $71
@@ -722,7 +728,7 @@ Data_001_4B30::
     db   $58, $58, $58, $58, $58, $58, $58, $58   ; $4B58 ; $4B58
     db   $68, $68, $68, $68, $68, $68, $68, $68   ; $4B60 ; $4B60
     db   $68, $68, $68, $68, $68, $68, $68, $68   ; $4B68 ; $4B68
-IF __PATCH_9__
+IF __DIACRITICS_SUPPORT__
     db   $78, $78, $78, $78, $78, $78, $78, $78
     db   $78, $78, $78, $78, $78, $78, $78, $78
 ENDC
@@ -736,7 +742,7 @@ Data_001_4B70::
     db   $54, $5C, $64, $6C, $74, $7C, $84, $8C   ; $4B98 ; $4B98
     db   $14, $1C, $24, $2C, $34, $3C, $44, $4C   ; $4BA0 ; $4BA0
     db   $54, $5C, $64, $6C, $74, $7C, $84, $8C   ; $4BA8 ; $4BA8
-IF __PATCH_9__
+IF __DIACRITICS_SUPPORT__
     db   $14, $1C, $24, $2C, $34, $3C, $44, $4C
     db   $54, $5C, $64, $6C, $74, $7C, $84, $8C
 ENDC
@@ -1021,17 +1027,17 @@ FileDeletionState7Handler::
 func_001_4D8B::
     ld   bc, $98C5                                ; $4D8B: $01 $C5 $98 ; $4D8B: $01 $C5 $98
     ld   de, wSaveSlot1Name                       ; $4D8E: $11 $80 $DB ; $4D8E: $11 $80 $DB
-    jp   func_001_4852                            ; $4D91: $C3 $52 $48 ; $4D91: $C3 $52 $48
+    jp   DrawSaveSlotName                         ; $4D91: $C3 $52 $48 ; $4D91: $C3 $52 $48
 
 func_001_4D94::
     ld   bc, $9925                                ; $4D94: $01 $25 $99 ; $4D94: $01 $25 $99
     ld   de, wSaveSlot2Name                       ; $4D97: $11 $85 $DB ; $4D97: $11 $85 $DB
-    jp   func_001_4852                            ; $4D9A: $C3 $52 $48 ; $4D9A: $C3 $52 $48
+    jp   DrawSaveSlotName                         ; $4D9A: $C3 $52 $48 ; $4D9A: $C3 $52 $48
 
 func_001_4D9D::
     ld   bc, $9985                                ; $4D9D: $01 $85 $99 ; $4D9D: $01 $85 $99
     ld   de, wSaveSlot3Name                       ; $4DA0: $11 $8A $DB ; $4DA0: $11 $8A $DB
-    jp   func_001_4852                            ; $4DA3: $C3 $52 $48 ; $4DA3: $C3 $52 $48
+    jp   DrawSaveSlotName                         ; $4DA3: $C3 $52 $48 ; $4DA3: $C3 $52 $48
 
 func_001_4DA6::
     ld   a, [wSaveFilesCount]                     ; $4DA6: $FA $A7 $DB ; $4DA6: $FA $A7 $DB
@@ -1524,25 +1530,25 @@ FileCopyState3Handler::
 FileCopyState4Handler::
     ld   bc, $98C4                                ; $4FC3: $01 $C4 $98 ; $4FC3: $01 $C4 $98
     ld   de, wSaveSlot1Name                       ; $4FC6: $11 $80 $DB ; $4FC6: $11 $80 $DB
-    call func_001_4852                            ; $4FC9: $CD $52 $48 ; $4FC9: $CD $52 $48
+    call DrawSaveSlotName                         ; $4FC9: $CD $52 $48 ; $4FC9: $CD $52 $48
     ld   bc, $9924                                ; $4FCC: $01 $24 $99 ; $4FCC: $01 $24 $99
     ld   de, wSaveSlot2Name                       ; $4FCF: $11 $85 $DB ; $4FCF: $11 $85 $DB
-    call func_001_4852                            ; $4FD2: $CD $52 $48 ; $4FD2: $CD $52 $48
+    call DrawSaveSlotName                         ; $4FD2: $CD $52 $48 ; $4FD2: $CD $52 $48
     ld   bc, $9984                                ; $4FD5: $01 $84 $99 ; $4FD5: $01 $84 $99
     ld   de, wSaveSlot3Name                       ; $4FD8: $11 $8A $DB ; $4FD8: $11 $8A $DB
-    call func_001_4852                            ; $4FDB: $CD $52 $48 ; $4FDB: $CD $52 $48
+    call DrawSaveSlotName                         ; $4FDB: $CD $52 $48 ; $4FDB: $CD $52 $48
     jp   IncrementGameplaySubtypeAndReturn        ; $4FDE: $C3 $D6 $44 ; $4FDE: $C3 $D6 $44
 
 FileCopyState5Handler::
     ld   bc, $98CD                                ; $4FE1: $01 $CD $98 ; $4FE1: $01 $CD $98
     ld   de, wSaveSlot1Name                       ; $4FE4: $11 $80 $DB ; $4FE4: $11 $80 $DB
-    call func_001_4852                            ; $4FE7: $CD $52 $48 ; $4FE7: $CD $52 $48
+    call DrawSaveSlotName                         ; $4FE7: $CD $52 $48 ; $4FE7: $CD $52 $48
     ld   bc, $992D                                ; $4FEA: $01 $2D $99 ; $4FEA: $01 $2D $99
     ld   de, wSaveSlot2Name                       ; $4FED: $11 $85 $DB ; $4FED: $11 $85 $DB
-    call func_001_4852                            ; $4FF0: $CD $52 $48 ; $4FF0: $CD $52 $48
+    call DrawSaveSlotName                         ; $4FF0: $CD $52 $48 ; $4FF0: $CD $52 $48
     ld   bc, $998D                                ; $4FF3: $01 $8D $99 ; $4FF3: $01 $8D $99
     ld   de, wSaveSlot3Name                       ; $4FF6: $11 $8A $DB ; $4FF6: $11 $8A $DB
-    call func_001_4852                            ; $4FF9: $CD $52 $48 ; $4FF9: $CD $52 $48
+    call DrawSaveSlotName                         ; $4FF9: $CD $52 $48 ; $4FF9: $CD $52 $48
     jp   IncrementGameplaySubtypeAndReturn        ; $4FFC: $C3 $D6 $44 ; $4FFC: $C3 $D6 $44
 
 FileCopyState8Handler::
@@ -1787,17 +1793,17 @@ label_001_514F::
 
     ld   bc, $98C4                                ; $515A: $01 $C4 $98 ; $515A: $01 $C4 $98
     ld   de, wSaveSlot1Name                       ; $515D: $11 $80 $DB ; $515D: $11 $80 $DB
-    jp   func_001_4852                            ; $5160: $C3 $52 $48 ; $5160: $C3 $52 $48
+    jp   DrawSaveSlotName                         ; $5160: $C3 $52 $48 ; $5160: $C3 $52 $48
 
 .jr_5163::
     ld   bc, $9924                                ; $5163: $01 $24 $99 ; $5163: $01 $24 $99
     ld   de, wSaveSlot2Name                       ; $5166: $11 $85 $DB ; $5166: $11 $85 $DB
-    jp   func_001_4852                            ; $5169: $C3 $52 $48 ; $5169: $C3 $52 $48
+    jp   DrawSaveSlotName                         ; $5169: $C3 $52 $48 ; $5169: $C3 $52 $48
 
 jr_001_516C::
     ld   bc, $9984                                ; $516C: $01 $84 $99 ; $516C: $01 $84 $99
     ld   de, wSaveSlot3Name                       ; $516F: $11 $8A $DB ; $516F: $11 $8A $DB
-    jp   func_001_4852                            ; $5172: $C3 $52 $48 ; $5172: $C3 $52 $48
+    jp   DrawSaveSlotName                         ; $5172: $C3 $52 $48 ; $5172: $C3 $52 $48
 
 func_001_5175::
     ld   a, [wIntroSubTimer]                      ; $5175: $FA $02 $D0 ; $5175: $FA $02 $D0
@@ -1979,14 +1985,14 @@ label_001_526F::
 
     ld   bc, $98CD                                ; $527A: $01 $CD $98 ; $527A: $01 $CD $98
     ld   de, wSaveSlot1Name                       ; $527D: $11 $80 $DB ; $527D: $11 $80 $DB
-    jp   func_001_4852                            ; $5280: $C3 $52 $48 ; $5280: $C3 $52 $48
+    jp   DrawSaveSlotName                         ; $5280: $C3 $52 $48 ; $5280: $C3 $52 $48
 
 .jr_5283::
     ld   bc, $992D                                ; $5283: $01 $2D $99 ; $5283: $01 $2D $99
     ld   de, wSaveSlot2Name                       ; $5286: $11 $85 $DB ; $5286: $11 $85 $DB
-    jp   func_001_4852                            ; $5289: $C3 $52 $48 ; $5289: $C3 $52 $48
+    jp   DrawSaveSlotName                         ; $5289: $C3 $52 $48 ; $5289: $C3 $52 $48
 
 jr_001_528C::
     ld   bc, $998D                                ; $528C: $01 $8D $99 ; $528C: $01 $8D $99
     ld   de, wSaveSlot3Name                       ; $528F: $11 $8A $DB ; $528F: $11 $8A $DB
-    jp   func_001_4852                            ; $5292: $C3 $52 $48 ; $5292: $C3 $52 $48
+    jp   DrawSaveSlotName                         ; $5292: $C3 $52 $48 ; $5292: $C3 $52 $48

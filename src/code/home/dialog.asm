@@ -602,7 +602,7 @@ ENDR
     ldh  a, [hMultiPurpose1]                      ; $2641: $F0 $D8
     ld   e, a                                     ; $2643: $5F
     ld   d, $00                                   ; $2644: $16 $00
-IF __DO_CHECK_DIACRITICS__
+IF __DIACRITICS_SUPPORT__
     ld   hl, DiacriticsTable
     add  hl, de
     ld   a, [hl]

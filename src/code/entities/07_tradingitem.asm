@@ -18,59 +18,59 @@ TradingItemDialogs::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 TradingItem1SpriteVariants::
 .variant0
-    db $9A, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_6 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_6 | OAMF_PAL1
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 TradingItem2SpriteVariants::
 .variant0
-    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $76, OAM_GBC_PAL_0 | OAMF_PAL0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 TradingItem3SpriteVariants::
 .variant0
-    db $9A, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_7 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_7 | OAMF_PAL1
 .variant1
-    db $9A, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_7 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_7 | OAMF_PAL1
 .variant2
-    db $9A, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_7 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_7 | OAMF_PAL1
 .variant3
-    db $9A, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_7 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_7 | OAMF_PAL1
 .variant4
-    db $9A, OAM_GBC_PAL_4 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_4 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_4 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_4 | OAMF_PAL1
 .variant5
-    db $9A, OAM_GBC_PAL_4 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_4 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_4 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_4 | OAMF_PAL1
 .variant6
-    db $9A, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_7 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_7 | OAMF_PAL1
 .variant7
-    db $9A, OAM_GBC_PAL_4 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_4 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_4 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_4 | OAMF_PAL1
 .variant8
-    db $9A, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_7 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_7 | OAMF_PAL1
 .variant9
-    db $9A, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_6 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_6 | OAMF_PAL1
 .variant10
-    db $9A, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_7 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_7 | OAMF_PAL1
 .variant11
-    db $9A, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_6 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_6 | OAMF_PAL1
 .variant12
-    db $9A, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_7 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_7 | OAMF_PAL1
 .variant13
-    db $9A, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_7 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_7 | OAMF_PAL1
 
 TradingItemEntityHandler::
     ld   a, [wIsIndoor]                           ; $5510: $FA $A5 $DB

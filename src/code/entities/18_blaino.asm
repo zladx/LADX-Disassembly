@@ -442,7 +442,7 @@ func_018_68EA::
     inc  a                                        ; $6913: $3C
     ldh  [hMultiPurposeG], a                      ; $6914: $E0 $E8
     ld   hl, hActiveEntityFlipAttribute           ; $6916: $21 $ED $FF
-    set  OAM_BIT_X_FLIP, [hl]                     ; $6919: $CB $EE
+    set  OAMB_XFLIP, [hl]                         ; $6919: $CB $EE
 
 .jr_691B
     ld   hl, Data_018_673A                        ; $691B: $21 $3A $67
@@ -537,7 +537,7 @@ jr_018_6972:
     jr   z, .jr_699A                              ; $698C: $28 $0C
 
     ldh  a, [hActiveEntityFlipAttribute]          ; $698E: $F0 $ED
-    bit  OAM_BIT_GB_PAL, a                        ; $6990: $CB $67
+    bit  OAMB_PAL1, a                             ; $6990: $CB $67
     jr   z, .jr_699A                              ; $6992: $28 $06
 
     ld   a, [de]                                  ; $6994: $1A

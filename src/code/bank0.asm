@@ -4398,7 +4398,7 @@ EnableExternalRAMWriting::
     ld   hl, MBC3SRamBank                         ; $27D1: $21 $00 $40
     ld   [hl], $00 ; Switch to RAM bank 0         ; $27D4: $36 $00
     ld   hl, MBC3SRamEnable                       ; $27D6: $21 $00 $00
-    ld   [hl], SRAM_ENABLE ; Enable external RAM writing ; $27D9: $36 $0A
+    ld   [hl], CART_SRAM_ENABLE ; Enable external RAM writing ; $27D9: $36 $0A
     pop  hl                                       ; $27DB: $E1
     ret                                           ; $27DC: $C9
 
@@ -4484,14 +4484,14 @@ ReadJoypadState::
     ret                                           ; $2851: $C9
 
 .readState
-    ld   a, $20                                   ; $2852: $3E $20
+    ld   a, J_BUTTONS                             ; $2852: $3E $20
     ld   [rP1], a                                 ; $2854: $E0 $00
     ld   a, [rP1]                                 ; $2856: $F0 $00
     ld   a, [rP1]                                 ; $2858: $F0 $00
     cpl                                           ; $285A: $2F
     and  $0F                                      ; $285B: $E6 $0F
     ld   b, a                                     ; $285D: $47
-    ld   a, $10                                   ; $285E: $3E $10
+    ld   a, J_DPAD                                ; $285E: $3E $10
     ld   [rP1], a                                 ; $2860: $E0 $00
     ld   a, [rP1]                                 ; $2862: $F0 $00
     ld   a, [rP1]                                 ; $2864: $F0 $00
@@ -4512,7 +4512,7 @@ ReadJoypadState::
     ldh  [hJoypadState], a                        ; $287D: $E0 $CC
     ld   a, c                                     ; $287F: $79
     ldh  [hPressedButtonsMask], a                 ; $2880: $E0 $CB
-    ld   a, $30                                   ; $2882: $3E $30
+    ld   a, J_BUTTONS | J_DPAD                    ; $2882: $3E $30
     ld   [rP1], a                                 ; $2884: $E0 $00
 
 .return
@@ -5904,7 +5904,7 @@ ASSERT LOW(wRoomObjectsArea) & $0F == 0, "wRoomObjectsArea must be aligned on $1
     ld   e, a                                     ; $30D8: $5F
     ; When the end of a tiles line is reached, move to the next one.
     and  $1F                                      ; $30D9: $E6 $1F
-    cp   (DISPLAY_WIDTH / TILE_WIDTH)             ; $30DB: $FE $14
+    cp   (SCRN_X / TILE_WIDTH)                    ; $30DB: $FE $14
     jr   nz, .eEnd                                ; $30DD: $20 $0A
     ld   a, e                                     ; $30DF: $7B
     and  $E0                                      ; $30E0: $E6 $E0

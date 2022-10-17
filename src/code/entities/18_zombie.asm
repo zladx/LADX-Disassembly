@@ -79,20 +79,20 @@ ret_018_63F7:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 ZombieSpriteVariants::
 .variant0
-    db $FF, OAM_GBC_PAL_7 | OAM_DMG_PAL_1 | OAM_BANK_1 | OAM_Y_FLIP | OAM_X_FLIP | OAM_PRIORITY
-    db $FF, OAM_GBC_PAL_7 | OAM_DMG_PAL_1 | OAM_BANK_1 | OAM_Y_FLIP | OAM_X_FLIP | OAM_PRIORITY
+    db $FF, OAM_GBC_PAL_7 | OAMF_PAL1 | OAMF_BANK1 | OAMF_YFLIP | OAMF_XFLIP | OAMF_PRI
+    db $FF, OAM_GBC_PAL_7 | OAMF_PAL1 | OAMF_BANK1 | OAMF_YFLIP | OAMF_XFLIP | OAMF_PRI
 .variant1
-    db $6C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $6C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6C, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $6C, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $68, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $6A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $68, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $6A, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant3
-    db $60, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $62, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $60, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $62, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant4
-    db $64, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $66, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $64, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $66, OAM_GBC_PAL_2 | OAMF_PAL0
 
 label_018_640C:
     ld   de, ZombieSpriteVariants                 ; $640C: $11 $F8 $63

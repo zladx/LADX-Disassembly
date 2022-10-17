@@ -183,14 +183,14 @@ Unknown009SpriteVariants::
     db $60, OAM_GBC_PAL_3
     db $62, OAM_GBC_PAL_3
 .variant1
-    db $62, OAM_GBC_PAL_3 | OAM_X_FLIP
-    db $60, OAM_GBC_PAL_3 | OAM_X_FLIP
+    db $62, OAM_GBC_PAL_3 | OAMF_XFLIP
+    db $60, OAM_GBC_PAL_3 | OAMF_XFLIP
 .variant2
     db $64, OAM_GBC_PAL_3
     db $66, OAM_GBC_PAL_3
 .variant3
-    db $66, OAM_GBC_PAL_3 | OAM_X_FLIP
-    db $64, OAM_GBC_PAL_3 | OAM_X_FLIP
+    db $66, OAM_GBC_PAL_3 | OAMF_XFLIP
+    db $64, OAM_GBC_PAL_3 | OAMF_XFLIP
 .variant4
     db $68, OAM_GBC_PAL_3
     db $6A, OAM_GBC_PAL_3
@@ -198,11 +198,11 @@ Unknown009SpriteVariants::
     db $6C, OAM_GBC_PAL_3
     db $6E, OAM_GBC_PAL_3
 .variant6
-    db $6A, OAM_GBC_PAL_3 | OAM_X_FLIP
-    db $68, OAM_GBC_PAL_3 | OAM_X_FLIP
+    db $6A, OAM_GBC_PAL_3 | OAMF_XFLIP
+    db $68, OAM_GBC_PAL_3 | OAMF_XFLIP
 .variant7
-    db $6E, OAM_GBC_PAL_3 | OAM_X_FLIP
-    db $6C, OAM_GBC_PAL_3 | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_3 | OAMF_XFLIP
+    db $6C, OAM_GBC_PAL_3 | OAMF_XFLIP
 
 Data_003_5937::
     db   $08, $F8, $04, $FC

@@ -1,11 +1,11 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown011SpriteVariants::
 .variant0
-    db $6E, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
-    db $6E, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_7 | OAMF_PAL0
+    db $6E, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $F8, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
-    db $FA, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
+    db $F8, OAM_GBC_PAL_7 | OAMF_PAL1
+    db $FA, OAM_GBC_PAL_7 | OAMF_PAL1
 
 Data_003_523D::
     db   $F8, $08, $00, $00
@@ -16,8 +16,8 @@ Data_003_5241::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown010SpriteVariants::
 .variant0
-    db $7E, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
-    db $7E, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7E, OAM_GBC_PAL_7 | OAMF_PAL0
+    db $7E, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
 
 PushedBlockEntityHandler::
     ld   a, [wIsIndoor]                           ; $5249: $FA $A5 $DB

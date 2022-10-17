@@ -1,0 +1,7 @@
+; MBC3
+MBC3SRamEnable EQU $0000
+MBC3RomBank    EQU $2000
+MBC3SelectBank EQU $2100
+MBC3SRamBank   EQU $4000
+MBC3LatchClock EQU $6000
+MBC3RTC        EQU $A000

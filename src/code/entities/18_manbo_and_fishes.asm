@@ -302,20 +302,20 @@ Data_018_478F::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 ManboAndFishes1SpriteVariants::
 .variant0
-    db $FF, OAM_GBC_PAL_7 | OAM_DMG_PAL_1 | OAM_BANK_1 | OAM_Y_FLIP | OAM_X_FLIP | OAM_PRIORITY
-    db $FF, OAM_GBC_PAL_7 | OAM_DMG_PAL_1 | OAM_BANK_1 | OAM_Y_FLIP | OAM_X_FLIP | OAM_PRIORITY
+    db $FF, OAM_GBC_PAL_7 | OAMF_PAL1 | OAMF_BANK1 | OAMF_YFLIP | OAMF_XFLIP | OAMF_PRI
+    db $FF, OAM_GBC_PAL_7 | OAMF_PAL1 | OAMF_BANK1 | OAMF_YFLIP | OAMF_XFLIP | OAMF_PRI
 .variant1
-    db $64, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $66, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $64, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $66, OAM_GBC_PAL_0 | OAMF_PAL0
 .varaiant2
-    db $64, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP
-    db $66, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $64, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_YFLIP
+    db $66, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_YFLIP
 .variant3
-    db $66, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
-    db $64, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $66, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
+    db $64, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
 .variant4
-    db $66, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $64, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $66, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $64, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 func_018_4833::
     ld   hl, wEntitiesPrivateState1Table          ; $4833: $21 $B0 $C2
@@ -385,32 +385,32 @@ Data_018_48A0::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 ManboAndFishes2SpriteVariants::
 .variant0
-    db $00, OAM_GBC_PAL_4 | OAM_DMG_PAL_0
-    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $00, OAM_GBC_PAL_4 | OAMF_PAL0
+    db $78, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant1
-    db $00, OAM_GBC_PAL_4 | OAM_DMG_PAL_0 | OAM_BANK_1
-    db $7E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $00, OAM_GBC_PAL_4 | OAMF_PAL0 | OAMF_BANK1
+    db $7E, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant2
-    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $68, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $6A, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant3
-    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $6C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant4
-    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $70, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $70, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant5
-    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6A, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $68, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant6
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $6C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .varaiant7
-    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $72, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $74, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant8
-    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $74, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $72, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 label_018_48C8::
     call func_018_48DE

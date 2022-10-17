@@ -1,29 +1,29 @@
 ; defines a list of sprites with [x, y, tile n°, tile attrs]
 FishermanRodLowSpriteRect::                       ; $5F28
-    db   $00, $F0, $78, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db   $00, $F8, $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db   $00, $00, $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db   $00, $08, $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db   $00, $F0, $78, OAM_GBC_PAL_1 | OAMF_PAL0
+    db   $00, $F8, $7A, OAM_GBC_PAL_1 | OAMF_PAL0
+    db   $00, $00, $70, OAM_GBC_PAL_1 | OAMF_PAL0
+    db   $00, $08, $72, OAM_GBC_PAL_1 | OAMF_PAL0
 
 ; defines a list of sprites with [x, y, tile n°, tile attrs]
 FishermanRowHighSpriteRect::                      ; $5F38
-    db   $00, $F0, $7C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db   $00, $F8, $7E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db   $00, $00, $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db   $00, $08, $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db   $00, $F0, $7C, OAM_GBC_PAL_1 | OAMF_PAL0
+    db   $00, $F8, $7E, OAM_GBC_PAL_1 | OAMF_PAL0
+    db   $00, $00, $70, OAM_GBC_PAL_1 | OAMF_PAL0
+    db   $00, $08, $72, OAM_GBC_PAL_1 | OAMF_PAL0
 
 ; defines a list of sprites with [x, y, tile n°, tile attrs]
 FishermanTowardsLinkSpriteRect::                  ; $5F48
-    db   $00, $F0, $78, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db   $00, $F8, $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db   $00, $00, $74, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db   $00, $08, $76, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db   $00, $F0, $78, OAM_GBC_PAL_1 | OAMF_PAL0
+    db   $00, $F8, $7A, OAM_GBC_PAL_1 | OAMF_PAL0
+    db   $00, $00, $74, OAM_GBC_PAL_1 | OAMF_PAL0
+    db   $00, $08, $76, OAM_GBC_PAL_1 | OAMF_PAL0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 FishermanFishingGameSpriteVariants::
 .variant0
-    db $9A, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
-    db $9C, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
+    db $9A, OAM_GBC_PAL_6 | OAMF_PAL1
+    db $9C, OAM_GBC_PAL_6 | OAMF_PAL1
 
 ; Entity responsible for:
 ; - The fisherman near the pond
@@ -205,35 +205,35 @@ FishermanExplainingRulesHandler::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown080SpriteVariants::
 .variant0
-    db $58, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $5A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $58, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $5A, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant1
-    db $56, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $FF, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $56, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $FF, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant2
-    db $5C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $5E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $5C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $5E, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant3
-    db $58, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $5A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $58, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $5A, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant4
-    db $58, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $5A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $58, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $5A, OAM_GBC_PAL_0 | OAMF_PAL0
 .variatn5
-    db $5C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $5E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $5C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $5E, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant6
-    db $5C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $5E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $5C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $5E, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant7
-    db $56, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $FF, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $56, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $FF, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant8
-    db $5E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $5C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $5C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant9
-    db $58, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $5A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $58, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $5A, OAM_GBC_PAL_0 | OAMF_PAL0
 
 Data_004_6074::
     db   $06, $16, $10, $10, $38, $38, $39, $39, $16, $38
@@ -547,20 +547,20 @@ func_004_626C::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown081SpriteVariants::
 .variant0
-    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $50, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $54, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant1
-    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $50, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $52, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant2
-    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
-    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $50, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP
+    db $54, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant3
-    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
-    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $54, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP
+    db $50, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP
 .variant4
-    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
-    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $54, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
+    db $50, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
 
 FishingLureHandler::
     ld   a, c                                     ; $6281: $79
@@ -860,29 +860,29 @@ jr_004_6402:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 SmallFishSpriteVariants::
 .variant0
-    db $4C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $4A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $4C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $4A, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant1
-    db $4C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $4E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $4C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $4E, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant2
-    db $48, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $4A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $48, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $4A, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant3
-    db $48, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $4E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $48, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $4E, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant4
-    db $4A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $4C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $4A, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $4C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant5
-    db $4E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $4C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $4E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $4C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant6
-    db $4A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $48, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $4A, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $48, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant7
-    db $4E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $48, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $4E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $48, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 SmallFishHandler::
     ld   hl, wEntitiesDirectionTable              ; $643A: $21 $80 $C3
@@ -1384,29 +1384,29 @@ jr_004_66FE:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 BigFishSpriteVariants::
 .variant0
-    db $44, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $42, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $44, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $42, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant1
-    db $44, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $46, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $44, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $46, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant2
-    db $40, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $42, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $40, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $42, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant3
-    db $40, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $46, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $40, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $46, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant4
-    db $42, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $44, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $42, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $44, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant5
-    db $46, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $44, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $46, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $44, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant6
-    db $42, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $40, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $42, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $40, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant7
-    db $46, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $40, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $46, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $40, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 BigFishHandler::
     ld   hl, wEntitiesDirectionTable              ; $6721: $21 $80 $C3

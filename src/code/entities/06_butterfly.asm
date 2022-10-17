@@ -4,7 +4,7 @@
 ButterflyOAMAttributes::
 ;       n°   OAM
 ._00 db $5E, OAM_GBC_PAL_1
-._01 db $5E, OAM_GBC_PAL_1 | OAM_Y_FLIP
+._01 db $5E, OAM_GBC_PAL_1 | OAMF_YFLIP
 
 ; Randomly-selected X or Y speed
 ButterflyPossibleSpeeds::

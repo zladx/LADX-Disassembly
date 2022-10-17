@@ -1,38 +1,38 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MarinAsFollowerSpriteVariants::
 .variant0
-    db $42, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $40, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $42, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $40, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $40, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $42, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $40, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $42, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant2
-    db $44, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $46, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $44, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $46, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant3
-    db $46, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $44, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $46, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $44, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $48, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $4A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $48, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $4A, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant5
-    db $4C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $4E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $4C, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $4E, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant6
-    db $4A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $48, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $4A, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $48, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant7
-    db $4E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $4C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $4E, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $4C, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant8
-    db $50, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $52, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $50, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $52, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant9
-    db $54, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $54, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $54, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $54, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant10
-    db $52, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $50, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $52, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $50, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 Data_018_59E4::
     db   $06, $04, $02, $00

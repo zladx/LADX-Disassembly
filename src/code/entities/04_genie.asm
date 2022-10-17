@@ -1238,11 +1238,11 @@ jr_004_48A6:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown012SpriteVariants:: ; $48D1
 .variant0
-    db $34, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $34, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $34, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $34, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $34, OAM_GBC_PAL_2 | OAM_DMG_PAL_1
-    db $34, OAM_GBC_PAL_2 | OAM_DMG_PAL_1 | OAM_X_FLIP
+    db $34, OAM_GBC_PAL_2 | OAMF_PAL1
+    db $34, OAM_GBC_PAL_2 | OAMF_PAL1 | OAMF_XFLIP
 
 GenieState3Handler::
     ld   de, Unknown012SpriteVariants             ; $48D9: $11 $D1 $48

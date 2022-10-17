@@ -281,11 +281,11 @@ func_018_7181::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 GrimCreeperSpriteVariants::
 .variant0
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_YFLIP
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
 
 label_018_71A3:
     ld   de, GrimCreeperSpriteVariants            ; $71A3: $11 $9B $71

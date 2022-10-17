@@ -85,21 +85,21 @@ jr_003_5395:
 ; maybe for rock or pot entity
 Unknown007SpriteVariants::
 .variant0
-    db $F0, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
-    db $F2, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
+    db $F0, OAM_GBC_PAL_7 | OAMF_PAL1
+    db $F2, OAM_GBC_PAL_7 | OAMF_PAL1
 .variant1
-    db $F4, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
-    db $F6, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
+    db $F4, OAM_GBC_PAL_6 | OAMF_PAL1
+    db $F6, OAM_GBC_PAL_6 | OAMF_PAL1
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 ; maybe for rock or pot entity
 Unknown008SpriteVariants::
 .variant0
-    db $F0, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
-    db $F2, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
+    db $F0, OAM_GBC_PAL_6 | OAMF_PAL1
+    db $F2, OAM_GBC_PAL_6 | OAMF_PAL1
 .variant1
-    db $F4, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
-    db $F6, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
+    db $F4, OAM_GBC_PAL_6 | OAMF_PAL1
+    db $F6, OAM_GBC_PAL_6 | OAMF_PAL1
 
 jp_003_53A8::
 IF __PATCH_3__

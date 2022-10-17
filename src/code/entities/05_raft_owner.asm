@@ -1,29 +1,29 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 RaftOwnerIndoorSpriteVariants::
 .variant0
-    db $60, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $62, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $60, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $62, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant1
-    db $62, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $60, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $62, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $60, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $64, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $66, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $64, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $66, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant3
-    db $66, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $64, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $66, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $64, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $68, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $6A, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant5
-    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $6C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant6
-    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6A, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $68, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant7
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $6C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 ; Handler for Raft Owner (and also the raft itself?)
 EntityRaftOwnerHandler::
@@ -106,11 +106,11 @@ func_005_53CB::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 RaftOwnerOnOverworldSpriteVariants:: ; $53D4
 .variant0
-    db $5C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $5C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5C, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $5C, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $5E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $5E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5E, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $5E, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 raftOnOverworld:
     ld   hl, wEntitiesPrivateState4Table          ; $53DC: $21 $40 $C4

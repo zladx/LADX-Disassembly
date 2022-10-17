@@ -1,11 +1,11 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 RollingBonesSpriteVariants::
 .variant0
-    db $6C, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
-    db $6C, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6C, OAM_GBC_PAL_7 | OAMF_PAL0
+    db $6C, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $6C, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_Y_FLIP
-    db $6C, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $6C, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_YFLIP
+    db $6C, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
 
 Data_006_6EDD::
     db   $70, $60, $50, $40, $30, $20

@@ -694,17 +694,17 @@ label_005_6776:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 HotHead1SpriteVariants::
 .variant0
-    db $1E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $1E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $1E, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $1E, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
 .variant1
-    db $1E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
-    db $1E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $1E, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP
+    db $1E, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
 label_005_6798:
     ld   de, HotHead1SpriteVariants               ; $6798: $11 $88 $67
@@ -756,11 +756,11 @@ func_005_67D2::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 HotHead2SpriteVariants::
 .variant0
-    db $6C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $6E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $6C, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $6E, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant1
-    db $6E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $6C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $6C, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
 label_005_67EA:
     ld   de, HotHead2SpriteVariants               ; $67EA: $11 $E2 $67

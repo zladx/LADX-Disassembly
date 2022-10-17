@@ -1,72 +1,72 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Tarin1SpriteVariants::
 .variant0
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant1
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $7C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $7E, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant3
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant4
-    db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $72, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant5
-    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $76, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant6
-    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $76, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $74, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant7
-    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $72, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $70, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Tarin3SpriteVariants::
 .variant0
-    db $5A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $58, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $58, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $58, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $5A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $58, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $5A, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant2
-    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $50, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $52, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant3
-    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $50, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $52, OAM_GBC_PAL_2 | OAMF_PAL0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Tarin4SpriteVariants::
 .variant0
-    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $56, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $54, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $56, OAM_GBC_PAL_2 | OAMF_PAL0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Tarin2SpriteVariants::
 .variant0
-    db $7A, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
-    db $7C, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
+    db $7A, OAM_GBC_PAL_7 | OAMF_PAL0
+    db $7C, OAM_GBC_PAL_7 | OAMF_PAL0
 
 ; define sprites and their OAM Attributes in a list
 Tarin1SpriteList::
     ;  x    y    n°   OAM
-    db $00, $00, $20, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $00, $08, $22, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $00, $00, $20, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $00, $08, $22, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $00, $00, $20, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $00, $08, $22, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $00, $00, $20, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $00, $08, $22, OAM_GBC_PAL_2 | OAMF_PAL0
 
 ; define sprites and their OAM Attributes in a list
 Tarin2SpriteList::
     ;  x    y    n°   OAM
-    db $F1, $FA, $2A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $F1, $02, $2A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $00, $00, $24, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $00, $08, $28, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $F1, $FA, $2A, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $F1, $02, $2A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $00, $00, $24, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $00, $08, $28, OAM_GBC_PAL_2 | OAMF_PAL0
 
 ; Entity handler for:
 ;  - All appearances of Tarin (except when with the bees)
@@ -843,14 +843,14 @@ ret_005_4DC6:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Tarin6SpriteVariants::
 .variant0
-    db $74, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
-    db $76, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_7 | OAMF_PAL0
+    db $76, OAM_GBC_PAL_7 | OAMF_PAL0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Tarin5SpriteVariants::
 .variant0
-    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $72, OAM_GBC_PAL_0 | OAMF_PAL0
 
 func_005_4DCF::
     ld   a, [wDB48]                               ; $4DCF: $FA $48 $DB

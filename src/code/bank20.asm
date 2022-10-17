@@ -4204,19 +4204,19 @@ func_020_6446::
 
 GreenTunicStatusOAMData::
     db   $40, OAM_GBC_PAL_5              ; left green tunic
-    db   $40, OAM_GBC_PAL_5 | OAM_X_FLIP ; right green tunic
+    db   $40, OAM_GBC_PAL_5 | OAMF_XFLIP ; right green tunic
     db   $5C, OAM_GBC_PAL_3              ; left "WEAR G"
     db   $5E, OAM_GBC_PAL_3              ; right "WEAR G"
 
 RedTunicStatusOAMData::
     db   $40, OAM_GBC_PAL_6              ; left red tunic
-    db   $40, OAM_GBC_PAL_6 | OAM_X_FLIP ; right red tunic
+    db   $40, OAM_GBC_PAL_6 | OAMF_XFLIP ; right red tunic
     db   $60, OAM_GBC_PAL_3              ; left "WEAR R"
     db   $62, OAM_GBC_PAL_3              ; right "WEAR R"
 
 BlueTunicStatusOAMData::
     db   $40, OAM_GBC_PAL_7              ; left blue tunic
-    db   $40, OAM_GBC_PAL_7 | OAM_X_FLIP ; right blue tunic
+    db   $40, OAM_GBC_PAL_7 | OAMF_XFLIP ; right blue tunic
     db   $64, OAM_GBC_PAL_3              ; left "WEAR B"
     db   $7E, OAM_GBC_PAL_3              ; right "WEAR B"
 

@@ -1,29 +1,29 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 ShopOwnerSpriteVariants::
 .variant0
-    db $60, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $62, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $60, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $62, OAM_GBC_PAL_3 | OAMF_PAL0
 .variant1
-    db $62, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 |OAM_X_FLIP
-    db $60, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 |OAM_X_FLIP
+    db $62, OAM_GBC_PAL_3 | OAMF_PAL0 |OAMF_XFLIP
+    db $60, OAM_GBC_PAL_3 | OAMF_PAL0 |OAMF_XFLIP
 .variant2
-    db $64, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $66, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $64, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $66, OAM_GBC_PAL_3 | OAMF_PAL0
 .variant3
-    db $66, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $64, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $66, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
+    db $64, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $68, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $6A, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $68, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $6A, OAM_GBC_PAL_3 | OAMF_PAL0
 .variant5
-    db $6C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $6E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $6C, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $6E, OAM_GBC_PAL_3 | OAMF_PAL0
 .variant6
-    db $6A, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $68, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6A, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
+    db $68, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 .variant7
-    db $6E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $6C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
+    db $6C, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 
 ShopOwnerEntityHandler::
     ld   a, [wBlockItemUsage]                     ; $76EB: $FA $0A $C5
@@ -769,20 +769,20 @@ Data_004_7B56::
 ; overlaps with the next list
 Unknown091SpriteVariants::
 .variant0
-    db $5D, OAM_GBC_PAL_5 | OAM_DMG_PAL_1 | OAM_BANK_1 | OAM_Y_FLIP | OAM_X_FLIP
+    db $5D, OAM_GBC_PAL_5 | OAMF_PAL1 | OAMF_BANK1 | OAMF_YFLIP | OAMF_XFLIP
 
 Data_004_7B5A::
-    db $96, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
-    db $A8, OAM_GBC_PAL_4 | OAM_DMG_PAL_1
-    db $86, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
-    db $80, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
-    db $88, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
-    db $FF, OAM_GBC_PAL_7 | OAM_DMG_PAL_1 | OAM_BANK_1 | OAM_Y_FLIP | OAM_X_FLIP | OAM_PRIORITY
-    db $90, OAM_GBC_PAL_0 | OAM_DMG_PAL_1
-    db $AE, OAM_GBC_PAL_0 | OAM_DMG_PAL_1
-    db $A0, OAM_GBC_PAL_0 | OAM_DMG_PAL_1
-    db $2A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_Y_FLIP
-    db $2A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $96, OAM_GBC_PAL_7 | OAMF_PAL1
+    db $A8, OAM_GBC_PAL_4 | OAMF_PAL1
+    db $86, OAM_GBC_PAL_7 | OAMF_PAL1
+    db $80, OAM_GBC_PAL_7 | OAMF_PAL1
+    db $88, OAM_GBC_PAL_6 | OAMF_PAL1
+    db $FF, OAM_GBC_PAL_7 | OAMF_PAL1 | OAMF_BANK1 | OAMF_YFLIP | OAMF_XFLIP | OAMF_PRI
+    db $90, OAM_GBC_PAL_0 | OAMF_PAL1
+    db $AE, OAM_GBC_PAL_0 | OAMF_PAL1
+    db $A0, OAM_GBC_PAL_0 | OAMF_PAL1
+    db $2A, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_YFLIP
+    db $2A, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
 
 func_004_7B70::
     ld   a, $04                                   ; $7B70: $3E $04

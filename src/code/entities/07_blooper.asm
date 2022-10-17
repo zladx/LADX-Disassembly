@@ -1,11 +1,11 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 BlooperSpriteVariants::
 .variant0
-    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6A, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $6A, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $68, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $68, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 BlooperEntityHandler::
     ld   de, BlooperSpriteVariants                ; $5BF9: $11 $F1 $5B

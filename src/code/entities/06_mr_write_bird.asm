@@ -1,44 +1,44 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MrWriteSpriteVariants::
 .variant0
-    db $68, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $6A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $68, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $6A, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant1
-    db $64, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $64, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $66, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant2
-    db $6C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $6E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $6C, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $6E, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant3
-    db $6A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $68, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6A, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $68, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $64, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $66, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $64, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant5
-    db $6E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $6C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $6C, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MrWriteBirdChristineHouseSpriteVariants::
 .variant0
-    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $68, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $6A, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant1
-    db $64, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $66, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $64, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $66, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant2
-    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $6C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant3
-    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6A, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $68, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $66, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $64, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $66, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $64, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant5
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $6C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 MrWriteBirdEntityHandler::
     ld   hl, wEntitiesDirectionTable              ; $723C: $21 $80 $C3

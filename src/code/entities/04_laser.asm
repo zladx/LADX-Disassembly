@@ -1,29 +1,29 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 LaserSpriteVariants::
 .variant0
-    db $70, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $70, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $70, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $70, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $78, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $7A, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $7A, OAM_GBC_PAL_3 | OAMF_PAL0
 .variant2
-    db $74, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $76, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $76, OAM_GBC_PAL_3 | OAMF_PAL0
 .variant3
-    db $7C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $7E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $7E, OAM_GBC_PAL_3 | OAMF_PAL0
 .variant4
-    db $72, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $72, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $72, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $72, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 .variant5
-    db $7E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $7C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7E, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
+    db $7C, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 .variant6
-    db $76, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $74, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $76, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
+    db $74, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 .variant7
-    db $7A, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $78, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7A, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
+    db $78, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 
 Data_004_6C4D::
     db   $10, $0E, $0C, $06

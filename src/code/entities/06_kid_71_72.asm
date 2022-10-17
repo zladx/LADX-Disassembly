@@ -1,47 +1,47 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Kid71SpriteVariants::
 .variant0
-    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $72, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant1
-    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $72, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $70, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $76, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant3
-    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $76, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $74, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Kid72SpriteVariants::
 .variant0
-    db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $72, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant1
-    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $72, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $70, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $76, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant3
-    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $76, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $74, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown019SpriteVariants::
 .variant0
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant1
-    db $7C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $7E, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant2
-    db $7A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7A, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $78, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $7E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $7C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 Data_006_607D::
     db   $3E, $00

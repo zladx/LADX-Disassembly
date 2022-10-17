@@ -425,28 +425,28 @@ label_018_43B2:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MamuAndFrogsSpriteVariants::
 .variant0
-    db $58, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $58, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $58, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $58, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $5A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $5A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5A, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $5A, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $5C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $5E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $5C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $5E, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant3
-    db $5E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $5C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $5C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 MamuAndFrogsSpriteList::
     ;  x    y    n°   OAM
-    db $F0, $00, $50, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $F0, $08, $52, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $00, $00, $54, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $00, $08, $56, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $F0, $00, $52, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $F0, $08, $50, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $00, $00, $56, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $00, $08, $54, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $F0, $00, $50, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $F0, $08, $52, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $00, $00, $54, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $00, $08, $56, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $F0, $00, $52, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $F0, $08, $50, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $00, $00, $56, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $00, $08, $54, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 func_018_43E3::
     ldh  a, [hActiveEntitySpriteVariant]          ; $43E3: $F0 $F1

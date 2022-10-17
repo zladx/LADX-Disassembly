@@ -1,8 +1,8 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 TelephoneSpriteVariants::
 .variant0
-    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $50, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $52, OAM_GBC_PAL_2 | OAMF_PAL0
 
 TelephoneEntityHandler::
     ldh  a, [hActiveEntityVisualPosY]             ; $6A7C: $F0 $EC

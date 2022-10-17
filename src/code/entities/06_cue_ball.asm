@@ -354,17 +354,17 @@ func_006_4E64::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 CueBallSpriteVariants::
 .variant0
-    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $6C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant1
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $6C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $6C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_YFLIP
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_YFLIP
 .variant3
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
-    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
+    db $6C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
 
 label_006_4E88:
     ld   de, CueBallSpriteVariants                ; $4E88: $11 $78 $4E

@@ -451,8 +451,8 @@ Data_018_758E::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 TurtleRockHeadSpriteVariants::
 .variant0
-    db $76, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
-    db $76, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $76, OAM_GBC_PAL_7 | OAMF_PAL0
+    db $76, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
 
 func_018_766A::
     ldh  a, [hActiveEntitySpriteVariant]          ; $766A: $F0 $F1

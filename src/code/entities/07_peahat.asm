@@ -1,11 +1,11 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 PeaHatSpriteVariants::
 .variant0
-    db $40, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $40, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $40, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $40, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $42, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $42, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $42, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $42, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
 PeaHatEntityHandler::
     ld   de, PeaHatSpriteVariants                 ; $6709: $11 $01 $67

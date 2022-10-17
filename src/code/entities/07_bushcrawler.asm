@@ -1,29 +1,29 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Bushcrawler2SpriteVariants::
 .variant0
-    db $7C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $7E, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant1
-    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $7C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7E, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $7C, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 BushcrawlerOutdoorSpriteVariants::
 .variant0
-    db $F4, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
-    db $F6, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
+    db $F4, OAM_GBC_PAL_6 | OAMF_PAL1
+    db $F6, OAM_GBC_PAL_6 | OAMF_PAL1
 .variant1
-    db $F0, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
-    db $F2, OAM_GBC_PAL_7 | OAM_DMG_PAL_1
+    db $F0, OAM_GBC_PAL_7 | OAMF_PAL1
+    db $F2, OAM_GBC_PAL_7 | OAMF_PAL1
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 BushcrawlerIndoorSpriteVariants::
 .variant0
-    db $F4, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
-    db $F6, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
+    db $F4, OAM_GBC_PAL_6 | OAMF_PAL1
+    db $F6, OAM_GBC_PAL_6 | OAMF_PAL1
 .variant1
-    db $F0, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
-    db $F2, OAM_GBC_PAL_6 | OAM_DMG_PAL_1
+    db $F0, OAM_GBC_PAL_6 | OAMF_PAL1
+    db $F2, OAM_GBC_PAL_6 | OAMF_PAL1
 
 BushCrawlerEntityHandler::
     ld   hl, wEntitiesPrivateState1Table          ; $4022: $21 $B0 $C2

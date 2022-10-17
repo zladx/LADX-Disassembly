@@ -164,8 +164,8 @@ jr_018_7CAF:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 HookshotChainSpriteVariants::
 .variant0
-    db $36, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $36, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $36, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $36, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 func_018_7CC8::
     ld   de, HookshotChainSpriteVariants          ; $7CC8: $11 $C4 $7C

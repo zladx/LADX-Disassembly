@@ -10,20 +10,20 @@ GelEntityHandler::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 ZolLowHealthSpriteVariants::
 .variant0
-    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $52, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $52, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $54, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $54, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 ZolSpriteVariants::
 .variant0
-    db $52, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $52, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $52, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $52, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $54, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $54, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $54, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $54, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 ZolEntityHandler::
     call func_006_7BE2                            ; $7C19: $CD $E2 $7B

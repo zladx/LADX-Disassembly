@@ -2,21 +2,21 @@
 ; one reversed and one normal ???
 TractorDevice1SpriteVariants::
 .variant0
-    db $4C, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
-    db $4C, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $4C, OAM_GBC_PAL_7 | OAMF_PAL0
+    db $4C, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $4E, OAM_GBC_PAL_4 | OAM_DMG_PAL_0
-    db $4E, OAM_GBC_PAL_4 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $4E, OAM_GBC_PAL_4 | OAMF_PAL0
+    db $4E, OAM_GBC_PAL_4 | OAMF_PAL0 | OAMF_XFLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 ; one reversed and one normal ???
 TractorDevice2SpriteVariants::
 .variant0
-    db $7C, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
-    db $7C, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7C, OAM_GBC_PAL_7 | OAMF_PAL0
+    db $7C, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $7E, OAM_GBC_PAL_4 | OAM_DMG_PAL_0
-    db $7E, OAM_GBC_PAL_4 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7E, OAM_GBC_PAL_4 | OAMF_PAL0
+    db $7E, OAM_GBC_PAL_4 | OAMF_PAL0 | OAMF_XFLIP
 
 TractorDeviceEntityHandler::
 ReversedTractorDeviceEntityHandler::

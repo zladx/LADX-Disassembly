@@ -1,38 +1,38 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 KikiTheMonkey2SpriteVariants::
 .variant0
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $72, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant1
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $72, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant2
-    db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $72, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant3
-    db $7C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $7E, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant4
-    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $76, OAM_GBC_PAL_2 | OAMF_PAL0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 KikiTheMonkey1SpriteVariants::
 .variant0
-    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $72, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $72, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $72, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $70, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $7C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7E, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $7C, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $76, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $74, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
 KikiTheMonkeyEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5842: $F0 $F8

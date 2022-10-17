@@ -1,8 +1,8 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 SideViewWeightsSpriteVariants::
 .variant0
-    db $50, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
-    db $50, OAM_GBC_PAL_7 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $50, OAM_GBC_PAL_7 | OAMF_PAL0
+    db $50, OAM_GBC_PAL_7 | OAMF_PAL0 | OAMF_XFLIP
 
 SideViewWeightsEntityHandler::
     ld   de, SideViewWeightsSpriteVariants        ; $61D2: $11 $CE $61

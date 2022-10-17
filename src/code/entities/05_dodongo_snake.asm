@@ -355,20 +355,20 @@ func_005_69B1::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 DodongoSnakeSpriteVariants::
 .variant0
-    db $66, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $64, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $66, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
+    db $64, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $64, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $66, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $64, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $66, OAM_GBC_PAL_3 | OAMF_PAL0
 .variant2
-    db $62, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $62, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $62, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $62, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $60, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $60, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $60, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $60, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $68, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $68, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $68, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $68, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 
 func_005_6A38::
     call GetEntityPrivateCountdown1               ; $6A38: $CD $00 $0C

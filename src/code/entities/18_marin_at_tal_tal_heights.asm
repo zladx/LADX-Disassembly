@@ -1,29 +1,29 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MarinAtTalTalAndInStoreSpriteVariants::
 .variant0
-    db $60, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $62, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $60, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $62, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant1
-    db $62, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $60, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $62, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $60, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $64, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $64, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $66, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant3
-    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $64, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $66, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $64, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $68, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $6A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $68, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $6A, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant5
-    db $6C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $6E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $6C, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $6E, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant6
-    db $6A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $68, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6A, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $68, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant7
-    db $6E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $6C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $6C, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 MarinAtTalTalHeightsEntityHandler::
     ld   a, [wHasInstrument7]                     ; $5ED7: $FA $6B $DB
@@ -335,29 +335,29 @@ ENDC
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MarinAtTalTal2SpriteVariants::
 .variant0
-    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $50, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $52, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant1
-    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $52, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $50, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $56, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $54, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $56, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant3
-    db $56, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $56, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $54, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $58, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $5A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $58, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $5A, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant5
-    db $5C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $5E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $5C, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $5E, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant6
-    db $5A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $58, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $58, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant7
-    db $5E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $5C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5E, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $5C, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
 TarinAtTalTalHeights:
     ld   de, MarinAtTalTal2SpriteVariants         ; $60F5: $11 $D5 $60

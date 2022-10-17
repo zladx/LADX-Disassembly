@@ -5749,7 +5749,7 @@ jr_017_7784:
 
     ; X-flip the entity
     ld   hl, hActiveEntityFlipAttribute           ; $7793: $21 $ED $FF
-    set  OAM_BIT_X_FLIP, [hl]                     ; $7796: $CB $EE
+    set  OAMB_XFLIP, [hl]                         ; $7796: $CB $EE
 
 .jr_7798
     ld   de, Data_017_7766                        ; $7798: $11 $66 $77
@@ -5879,8 +5879,8 @@ Unknow001SpriteVariants::
     db $54, OAM_GBC_PAL_4
     db $64, OAM_GBC_PAL_4
 .variant1 ; $787D
-    db $64, OAM_GBC_PAL_4 | OAM_X_FLIP
-    db $54, OAM_GBC_PAL_4 | OAM_X_FLIP
+    db $64, OAM_GBC_PAL_4 | OAMF_XFLIP
+    db $54, OAM_GBC_PAL_4 | OAMF_XFLIP
 .variant2 ; $7881
     db $4E, OAM_GBC_PAL_4
     db $7E, OAM_GBC_PAL_4
@@ -5966,23 +5966,23 @@ jr_017_78DD:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown002SpriteVariants::
 .variant0
-    db $72, OAM_DMG_PAL_0
-    db $72, OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $72, OAMF_PAL0
+    db $72, OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $74, OAM_DMG_PAL_0
-    db $74, OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $74, OAMF_PAL0
+    db $74, OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $76, OAM_DMG_PAL_0
-    db $76, OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $76, OAMF_PAL0
+    db $76, OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $78, OAM_DMG_PAL_0
-    db $78, OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $78, OAMF_PAL0
+    db $78, OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $7A, OAM_DMG_PAL_0
-    db $7A, OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7A, OAMF_PAL0
+    db $7A, OAMF_PAL0 | OAMF_XFLIP
 .variant5
-    db $7C, OAM_DMG_PAL_0
-    db $7C, OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7C, OAMF_PAL0
+    db $7C, OAMF_PAL0 | OAMF_XFLIP
 
 Data_017_7907::
     db   $08, $06, $06, $06, $06, $08
@@ -6159,7 +6159,7 @@ func_017_7A29::
     ld   a, [wScreenShakeHorizontal]              ; $7A39: $FA $55 $C1
     ld   c, a                                     ; $7A3C: $4F
     ldh  a, [hActiveEntityFlipAttribute]          ; $7A3D: $F0 $ED
-    and  OAM_X_FLIP                               ; $7A3F: $E6 $20
+    and  OAMF_XFLIP                               ; $7A3F: $E6 $20
     rra                                           ; $7A41: $1F
     rra                                           ; $7A42: $1F
     ld   hl, hActiveEntityPosX                    ; $7A43: $21 $EE $FF
@@ -6191,8 +6191,8 @@ func_017_7A29::
     ld   a, [wScreenShakeHorizontal]              ; $7A68: $FA $55 $C1
     ld   c, a                                     ; $7A6B: $4F
     ldh  a, [hActiveEntityFlipAttribute]          ; $7A6C: $F0 $ED
-    and  OAM_X_FLIP                               ; $7A6E: $E6 $20
-    xor  OAM_X_FLIP                               ; $7A70: $EE $20
+    and  OAMF_XFLIP                               ; $7A6E: $E6 $20
+    xor  OAMF_XFLIP                               ; $7A70: $EE $20
     rra                                           ; $7A72: $1F
     rra                                           ; $7A73: $1F
     ld   hl, hActiveEntityPosX                    ; $7A74: $21 $EE $FF

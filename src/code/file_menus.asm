@@ -167,7 +167,7 @@ ELSE
     ld   b, $00
     call ReadTileValueFromDiacriticsTable
 IF __DO_CHECK_DIACRITICS__
-    ldh  [hRoomBank], a
+    ldh  [hDialogBackgroundTile], a
 ENDC
     pop  bc
     pop  hl
@@ -179,7 +179,7 @@ ENDC
 IF __DO_CHECK_DIACRITICS__
     ld   a, $7E               ; Empty tile
     jr   z, .drawSpacingTile  ; Jump if no diacritic
-    ldh  a, [hRoomBank]       ; Load value from DiacriticsTable
+    ldh  a, [hDialogBackgroundTile] ; Load value from DiacriticsTable
     cp   2                    ; Check if DiacriticsTable had value 2
     ld   a, $C8               ; First diacritic tile
     jr   z, .drawSpacingTile  ; Jump if diacritic 2

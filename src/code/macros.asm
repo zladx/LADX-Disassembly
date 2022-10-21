@@ -3,7 +3,7 @@
 ; RGB r, g, b
 ; values: 0 ~ 31
 macro RGB
-    db (\1) + (\2) << 5 + (\3) << 10
+    dw (\1) + (\2) << 5 + (\3) << 10
 endm
 
 ; Farcall using direct bank selection

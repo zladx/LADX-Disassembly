@@ -136,7 +136,7 @@ ENDC
     ; (credited as "Programmer")
 INDEX = 0
 REPT 5
-    ld   a, STRSUB("{DEBUG_SAVE_FILE_NAME}", INDEX + 1, 1) + 1
+    ld   a, CHARSUB("{DEBUG_SAVE_FILE_NAME}", INDEX + 1) + 1
     ld   [SaveGame1.main + wName - wOverworldRoomStatus + INDEX], a
 INDEX = INDEX + 1
 ENDR

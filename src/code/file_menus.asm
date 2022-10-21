@@ -614,10 +614,10 @@ macro CHECKNAME
 I = 0
 REPT NAME_LENGTH
     ld   a, [hli]
-IF STRLEN(\1) < I + 1
+IF CHARLEN(\1) < I + 1
     cp   0
 ELSE
-    cp   STRSUB(\1, 1 + I, 1) + $01
+    cp   CHARSUB(\1, 1 + I) + $01
 ENDC
     jr   nz, \3
 I = I + 1

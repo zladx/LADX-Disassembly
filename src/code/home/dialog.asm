@@ -506,10 +506,10 @@ ENDC
 .ThiefString::
 INDEX = 0
 REPT 5
-IF STRLEN("{THIEF_NAME}") < INDEX + 1
+IF CHARLEN("{THIEF_NAME}") < INDEX + 1
     db 0
 ELSE
-    db  STRSUB("{THIEF_NAME}", INDEX + 1, 1) + 1  ; $25B8
+    db  CHARSUB("{THIEF_NAME}", INDEX + 1) + 1  ; $25B8
 ENDC
 INDEX = INDEX + 1
 ENDR

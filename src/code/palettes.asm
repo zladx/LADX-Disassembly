@@ -320,7 +320,7 @@ jr_021_41B4:
     ld   de, wBGPal1                              ; $41BE: $11 $10 $DC
     call CopyData                                 ; $41C1: $CD $14 $29
     push hl                                       ; $41C4: $E5
-    ld   hl, Data_021_5518                        ; $41C5: $21 $18 $55
+    ld   hl, Object_Palettes                      ; $41C5: $21 $18 $55
     ld   bc, $30                                  ; $41C8: $01 $30 $00
     call CopyData                                 ; $41CB: $CD $14 $29
     pop  hl                                       ; $41CE: $E1
@@ -335,7 +335,7 @@ jr_021_41B4:
     ldh  [rSVBK], a                               ; $41DE: $E0 $70
     call CopyData                                 ; $41E0: $CD $14 $29
     push hl                                       ; $41E3: $E5
-    ld   hl, Data_021_5518                        ; $41E4: $21 $18 $55
+    ld   hl, Object_Palettes                      ; $41E4: $21 $18 $55
     ld   bc, $30                                  ; $41E7: $01 $30 $00
     call CopyData                                 ; $41EA: $CD $14 $29
     pop  hl                                       ; $41ED: $E1
@@ -385,11 +385,11 @@ jr_021_4222:
     and  a                                        ; $422B: $A7
     jr   z, jr_021_4254                           ; $422C: $28 $26
 
-    ld   hl, Data_021_552A + 4                    ; $422E: $21 $2C $55
+    ld   hl, Red_Tunic_Palette + 4                ; $422E: $21 $2C $55
     cp   $01                                      ; $4231: $FE $01
     jr   z, .jr_4238                              ; $4233: $28 $03
 
-    ld   hl, Data_021_5532 + 4                    ; $4235: $21 $34 $55
+    ld   hl, Blue_Tunic_Palette + 4               ; $4235: $21 $34 $55
 
 .jr_4238
     ld   c, $02                                   ; $4238: $0E $02
@@ -1372,17 +1372,16 @@ func_021_54F9::
 
 
 ; These 6 object palettes are always in RAM while you're controlling Link
-
-Data_021_5518::
+Object_Palettes::
     rgb   #F8F888, #000000, #10A840, #F8B888      ; green objects: Link, leaf particles, etc.
 
 
     rgb   #F8F888, #000000, #F87808, #F8B888      ; orange objects: Marin, chickens, arrows, etc.
                                                   ; - particles when enemies get defeated
-Data_021_552A::
+Red_Tunic_Palette::
     rgb   #F8F8F8, #000000, #F80828, #F8B888      ; red objects: Tarin, octoroks, red tunic, etc.
 
-Data_021_5532::
+Blue_Tunic_Palette::
     rgb   #F8F8F8, #000000, #1880F8, #F8B888      ; blue objects: sword, Bow-Wow, blue tunic, etc.
     
 
@@ -2101,7 +2100,7 @@ Data_021_74F0::
     dw 0
     dw 0
     dw Data_021_7536
-    dw TitleBGPalettes
+    dw Title_BG_Palettes
     dw Data_021_7696
     dw Data_021_7636
     dw Data_021_76D6
@@ -2441,7 +2440,7 @@ Data_021_7D6E:
     rgb   #000000, #D8E030, #806088, #482860
 
 ; BG palettes data for the title screen.
-TitleBGPalettes::
+Title_BG_Palettes::
 IF LANG_JP
     rgb   #F8F8F8, #E83028, #B80028, #000000
     rgb   #F8F8F8, #F8C020, #F87020, #000000

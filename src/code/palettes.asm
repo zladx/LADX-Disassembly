@@ -389,7 +389,7 @@ jr_021_4222:
     cp   $01                                      ; $4231: $FE $01
     jr   z, .jr_4238                              ; $4233: $28 $03
 
-    ld   hl, Blue_Tunic_Palette + 4               ; $4235: $21 $34 $55
+    ld   hl, Blue_Tunic_Palette + 4
 
 .jr_4238
     ld   c, $02                                   ; $4238: $0E $02

@@ -31,5 +31,3 @@ AsciiToTileMap::
     db  $88, $90, $91, $92, $93, $94, $95, $89, $96, $97, $98, $99, $9a, $87, $86, 0
 ;        UP  DOWN LEFT RIGHT                                            BLANK
     db  $34, $35, $36, $37, 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , $7e, 0  , 0
-
-DiacriticsTable:

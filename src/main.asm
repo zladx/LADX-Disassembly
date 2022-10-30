@@ -339,6 +339,7 @@ db BANK_1C_VAR ; Extra byte present in the original ROM
 include "data/dialogs/dialog_pointers.asm"
 include "data/text_box_data.asm"
 include "data/ascii_to_tile.asm"
+include "data/ascii_to_diacritic.asm"
 include "data/dialogs/dialog_banks.asm"
 include "code/dialog_letters.asm"
 include "text/dialog_3.asm"

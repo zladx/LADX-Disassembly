@@ -778,7 +778,7 @@ ReadTileValueFromAsciiTable::
     jr   ReadValueInDialogsBank                   ; $0C28: $18 $03
 
 ReadTileValueFromDiacriticsTable::
-    ld   hl, DiacriticsTable                      ; $0C2A: $21 $41 $47
+    ld   hl, AsciiToDiacritic                     ; $0C2A: $21 $41 $47
 
 ReadValueInDialogsBank::
     ld   a, BANK(AsciiToTileMap) ; or BANK(DialogBankTable) ; $0C2D: $3E $1C

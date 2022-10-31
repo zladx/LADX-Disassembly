@@ -89,16 +89,7 @@ charmap "w", $77
 charmap "x", $78
 charmap "y", $79
 charmap "z", $7A
-
 charmap "+", $7F
-
-charmap "ü", $FC
-charmap "Ä", $C4
-charmap "Ö", $D6
-charmap "Ü", $DC
-charmap "ß", $DF
-charmap "ä", $E4
-charmap "ö", $F6
 
 charmap "<skull>", $ac
 charmap "<marin>", $ae
@@ -116,16 +107,24 @@ charmap "<fishhook>", $b9
 charmap "<bra>", $ba
 charmap "<scale>", $bb
 charmap "<letter>", $bd
+
+charmap "Ä", $c4
+
+charmap "Ö", $d6
+charmap "Ü", $dc
+charmap "ß", $df
+
+charmap "ä", $e4
 charmap "<brokenHeartL>", $e8
 charmap "<brokenHeartR>", $e9
-
 charmap "<dpad>", $ee
 
 charmap "<up>", $f0
 charmap "<down>", $f1
 charmap "<left>", $f2
 charmap "<right>", $f3
-
+charmap "ö", $f6
+charmap "ü", $fc
 charmap "<ask>", $fe
 charmap "@", $ff
 

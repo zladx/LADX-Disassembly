@@ -203,7 +203,11 @@ CheckItemsToUse::
 
 .jr_128D
     ; Special code for the Color Dungeon
+IF FREE_BANK0
+    call func_020_48CA_trampoline
+ELSE
     callsb func_020_48CA                          ; $128D: $3E $20 $EA $00 $21 $CD $CA $48
     ld   a, [wCurrentBank]                        ; $1295: $FA $AF $DB
-    ld   [rSelectROMBank], a                      ; $1298: $EA $00 $21
+    ld   [MBC3SelectBank], a                      ; $1298: $EA $00 $21
+ENDC
     ret                                           ; $129B: $C9

@@ -8248,3 +8248,8 @@ jr_002_78CF:
     ret                                           ; $78D7: $C9
 
 include "code/room_transition.asm"
+
+IF FREE_BANK0
+include "code/home/check_items_to_use.asm"
+ENDC
+

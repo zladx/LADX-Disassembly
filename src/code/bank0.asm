@@ -1761,7 +1761,15 @@ LinkMotionDefaultHandler::
 
     jpsw LinkMotionDefault                        ; $116F: $3E $02 $CD $0C $08 $C3 $87 $42
 
+IF FREE_BANK0
+func_020_48CA_trampoline::
+    callsb func_020_48CA
+    ld   a, [wCurrentBank]
+    ld   [rSelectROMBank], a
+    ret
+ELSE
 include "code/home/check_items_to_use.asm"
+ENDC
 
 ; Use an inventory item.
 ;
@@ -3037,7 +3045,6 @@ IF !__OPTIMIZATIONS_1__
 .return
     ret                                           ; $1A21: $C9
 ENDC
-
 
 func_1A22::
     callsb func_020_6C4F                          ; $1A22: $3E $20 $EA $00 $21 $CD $4F $6C

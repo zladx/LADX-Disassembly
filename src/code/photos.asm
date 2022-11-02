@@ -8,7 +8,7 @@ PhotosEntryPoint::
     JP_TABLE                                      ; $4005: $C7
 ._0E dw LinkPictureHandler
 ._0F dw LinkPictureHandler
-._10 dw MarineCliffPictureHandler
+._10 dw MarinCliffPictureHandler
 ._11 dw $0000 ; Marin Well picture handler (disabled)
 ._12 dw MabePictureHandler
 ._13 dw UlriraPictureHandler
@@ -33,7 +33,7 @@ LinkPictureHandler::
     dw JumpTable_037_462F
     dw JumpTable_037_5393
 
-MarineCliffPictureHandler::
+MarinCliffPictureHandler::
     ld   a, [wGameplaySubtype]                    ; $4032: $FA $96 $DB
     JP_TABLE                                      ; $4035: $C7
     dw JumpTable_037_40EC

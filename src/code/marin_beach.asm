@@ -1,8 +1,8 @@
 ;
-; Cinematic where Marin discuss with Link of the beach
+; Cinematic where Marin discusses with Link on the beach
 ;
 
-MarineBeachEntryPoint::
+MarinBeachEntryPoint::
     ld   a, [wDialogState]                        ; $6203: $FA $9F $C1
     and  a                                        ; $6206: $A7
     jr   nz, .jr_6213                             ; $6207: $20 $0A
@@ -22,27 +22,27 @@ MarineBeachEntryPoint::
 .jr_621D::
     ld   a, [wGameplaySubtype]                    ; $621D: $FA $96 $DB
     JP_TABLE                                      ; $6220: $C7
-._00 dw MarineBeachPrepare0                       ; $6221
-._01 dw MarineBeachPrepare1                       ; $6223
-._02 dw MarineBeachPrepare2                       ; $6225
-._03 dw MarineBeachPrepare3                       ; $6227
-._04 dw MarineBeachScroll1                        ; $6229
-._05 dw MarineBeachScroll2                        ; $622B
-._06 dw MarineBeachScrollStop                     ; $622D
-._07 dw MarineBeachDialog1                        ; $622F
-._08 dw MarineBeachPause1                         ; $6231
-._09 dw MarineBeachDialog2                        ; $6233
-._0A dw MarineBeachPause2                         ; $6235
-._0B dw MarineBeachAreYouListening                ; $6237
-._0C dw MarineBeachDialog3                        ; $6239
-._0D dw MarineBeachDialog4                        ; $623B
+._00 dw MarinBeachPrepare0                       ; $6221
+._01 dw MarinBeachPrepare1                       ; $6223
+._02 dw MarinBeachPrepare2                       ; $6225
+._03 dw MarinBeachPrepare3                       ; $6227
+._04 dw MarinBeachScroll1                        ; $6229
+._05 dw MarinBeachScroll2                        ; $622B
+._06 dw MarinBeachScrollStop                     ; $622D
+._07 dw MarinBeachDialog1                        ; $622F
+._08 dw MarinBeachPause1                         ; $6231
+._09 dw MarinBeachDialog2                        ; $6233
+._0A dw MarinBeachPause2                         ; $6235
+._0B dw MarinBeachAreYouListening                ; $6237
+._0C dw MarinBeachDialog3                        ; $6239
+._0D dw MarinBeachDialog4                        ; $623B
 ._0E dw FileSaveFadeOut                           ; $623D
 
-MarineBeachPrepare0::
+MarinBeachPrepare0::
     call IncrementGameplaySubtype                 ; $623F: $CD $D6 $44
     ldh  a, [hIsGBC]                              ; $6242: $F0 $FE
     and  a                                        ; $6244: $A7
-    jr   z, MarineBeachPrepare1                   ; $6245: $28 $19
+    jr   z, MarinBeachPrepare1                   ; $6245: $28 $19
 
     ld   hl, wBGPal1                              ; $6247: $21 $10 $DC
     ld   c, $80                                   ; $624A: $0E $80
@@ -64,7 +64,7 @@ MarineBeachPrepare0::
     ld   [rSVBK], a                               ; $625D: $E0 $70
     ei                                            ; $625F: $FB
 
-MarineBeachPrepare1::
+MarinBeachPrepare1::
     ld   a, $01                                   ; $6260: $3E $01
     ld   [wC167], a                               ; $6262: $EA $67 $C1
     call func_1A22                                ; $6265: $CD $22 $1A
@@ -81,14 +81,14 @@ MarineBeachPrepare1::
 .return
     ret                                           ; $6281: $C9
 
-MarineBeachPrepare2::
+MarinBeachPrepare2::
     ld   a, TILESET_MARIN_BEACH                   ; $6282: $3E $13
     ld   [wTilesetToLoad], a                      ; $6284: $EA $FE $D6
     xor  a                                        ; $6287: $AF
     ld   [wC13F], a                               ; $6288: $EA $3F $C1
     jp   IncrementGameplaySubtypeAndReturn        ; $628B: $C3 $D6 $44
 
-MarineBeachPrepare3::
+MarinBeachPrepare3::
     ld   a, TILEMAP_MARIN_BEACH                   ; $628E: $3E $13
     ld   [wBGMapToLoad], a                        ; $6290: $EA $FF $D6
 
@@ -212,19 +212,19 @@ Data_001_63AA::
 Data_001_63BA::
     db 0, 0, 0, 0, 4, 4, 4, 4, $18, $18, $18, $18, $1C, $1C, $1C, $1C ; $63BA
 
-MarineBeachScroll1::
+MarinBeachScroll1::
     ldh  a, [hIsGBC]                              ; $63CA: $F0 $FE
     and  a                                        ; $63CC: $A7
     jr   z, .jr_63E4                              ; $63CD: $28 $15
     ldh  a, [hFrameCounter]                       ; $63CF: $F0 $E7
     and  $07                                      ; $63D1: $E6 $07
-    jr   nz, MarineBeachScroll2                   ; $63D3: $20 $42
+    jr   nz, MarinBeachScroll2                   ; $63D3: $20 $42
     call func_1A39                                ; $63D5: $CD $39 $1A
     ld   a, [wTransitionSequenceCounter]          ; $63D8: $FA $6B $C1
     cp   $04                                      ; $63DB: $FE $04
-    jr   nz, MarineBeachScroll2                   ; $63DD: $20 $38
+    jr   nz, MarinBeachScroll2                   ; $63DD: $20 $38
     call IncrementGameplaySubtype                 ; $63DF: $CD $D6 $44
-    jr   MarineBeachScroll2                       ; $63E2: $18 $33
+    jr   MarinBeachScroll2                       ; $63E2: $18 $33
 
 .jr_63E4::
     ldh  a, [hFrameCounter]                       ; $63E4: $F0 $E7
@@ -255,7 +255,7 @@ MarineBeachScroll1::
     ld   a, [hl]                                  ; $6413: $7E
     ld   [wOBJ0Palette], a                        ; $6414: $EA $98 $DB
 
-MarineBeachScroll2::
+MarinBeachScroll2::
     ldh  a, [hFrameCounter]                       ; $6417: $F0 $E7
     and  $03                                      ; $6419: $E6 $03
     jr   nz, .jr_642E                             ; $641B: $20 $11
@@ -272,7 +272,7 @@ MarineBeachScroll2::
     call func_001_651E                            ; $642E: $CD $1E $65
     ret                                           ; $6431: $C9
 
-MarineBeachScrollStop::
+MarinBeachScrollStop::
     call func_001_651E                            ; $6432: $CD $1E $65
     ld   a, [wDialogState]                        ; $6435: $FA $9F $C1
     and  a                                        ; $6438: $A7
@@ -292,7 +292,7 @@ jr_001_644A::
     ld   [wC3C4], a                               ; $644C: $EA $C4 $C3
     ret                                           ; $644F: $C9
 
-MarineBeachDialog1::
+MarinBeachDialog1::
     call func_001_651E                            ; $6450: $CD $1E $65
     ld   a, [wDialogState]                        ; $6453: $FA $9F $C1
     and  a                                        ; $6456: $A7
@@ -306,7 +306,7 @@ MarineBeachDialog1::
 .ret_6466
     ret                                           ; $6466: $C9
 
-MarineBeachPause1::
+MarinBeachPause1::
     call func_001_651E                            ; $6467: $CD $1E $65
     ld   a, [wC3C7]                               ; $646A: $FA $C7 $C3
     and  a                                        ; $646D: $A7
@@ -318,7 +318,7 @@ MarineBeachPause1::
 .ret_6478
     ret                                           ; $6478: $C9
 
-MarineBeachDialog2::
+MarinBeachDialog2::
     call func_001_651E                            ; $6479: $CD $1E $65
     ld   a, [wDialogState]                        ; $647C: $FA $9F $C1
     and  a                                        ; $647F: $A7
@@ -332,7 +332,7 @@ MarineBeachDialog2::
 .ret_648F
     ret                                           ; $648F: $C9
 
-MarineBeachPause2::
+MarinBeachPause2::
     call func_001_651E                            ; $6490: $CD $1E $65
     ld   a, [wC3C7]                               ; $6493: $FA $C7 $C3
     and  a                                        ; $6496: $A7
@@ -344,7 +344,7 @@ MarineBeachPause2::
 .ret_64A1
     ret                                           ; $64A1: $C9
 
-MarineBeachAreYouListening::
+MarinBeachAreYouListening::
     call func_001_651E                            ; $64A2: $CD $1E $65
     ld   a, [wDialogState]                        ; $64A5: $FA $9F $C1
     and  a                                        ; $64A8: $A7
@@ -371,7 +371,7 @@ jr_001_64CA::
     ld   [wC3C4], a                               ; $64CC: $EA $C4 $C3
     ret                                           ; $64CF: $C9
 
-MarineBeachDialog3::
+MarinBeachDialog3::
     call func_001_651E                            ; $64D0: $CD $1E $65
     ld   a, [wDialogState]                        ; $64D3: $FA $9F $C1
     and  a                                        ; $64D6: $A7
@@ -385,7 +385,7 @@ MarineBeachDialog3::
 .ret_64E6
     ret                                           ; $64E6: $C9
 
-MarineBeachDialog4::
+MarinBeachDialog4::
     call func_001_651E                            ; $64E7: $CD $1E $65
     ld   a, $02                                   ; $64EA: $3E $02
     ld   [wC3C4], a                               ; $64EC: $EA $C4 $C3

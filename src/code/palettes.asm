@@ -1022,70 +1022,70 @@ TilemapPaletteTable::
 
 IndoorSpritePaletteIndexData::
     ; This is a table with 4 byte records:
-    ; MapId, RoomId, Transition Direction, wPaletteToLoadForTileMap
-    db   $00, $17, $04, $81
-    db   $00, $13, $01, $80
-    db   $00, $13, $00, $80  ; $523E |........|
-    db   $00, $13, $03, $81
-    db   $00, $10, $00, $CA  ; $5246 |........|
-    db   $00, $1C, $02, $C2
-    db   $01, $2D, $02, $D0  ; $524E |.....-..|
-    db   $02, $52, $04, $83
-    db   $02, $51, $02, $82  ; $5256 |.R...Q..|
-    db   $02, $51, $03, $83
-    db   $03, $78, $01, $8B  ; $525E |.Q...x..|
-    db   $03, $78, $00, $8B
-    db   $03, $78, $03, $8C  ; $5266 |.x...x..|
-    db   $03, $EF, $03, $CD
-    db   $04, $A1, $04, $85  ; $526E |........|
-    db   $04, $9F, $02, $86
-    db   $04, $9F, $00, $85  ; $5276 |........|
-    db   $04, $9C, $02, $84
-    db   $04, $9C, $01, $84  ; $527E |........|
-    db   $04, $9C, $00, $86
-    db   $04, $95, $00, $84  ; $5286 |........|
-    db   $04, $95, $03, $86
-    db   $04, $81, $04, $86  ; $528E |........|
-    db   $04, $8B, $02, $CE
-    db   $04, $85, $03, $C4  ; $5296 |........|
-    db   $05, $D2, $02, $D2
-    db   $05, $CE, $02, $D1  ; $529E |........|
-    db   $06, $2E, $04, $89
-    db   $06, $F8, $04, $88  ; $52A6 |........|
-    db   $06, $0E, $04, $87
-    db   $06, $0D, $02, $89  ; $52AE |........|
-    db   $06, $0D, $00, $87
-    db   $06, $0F, $02, $89  ; $52B6 |........|
-    db   $06, $0F, $00, $89
-    db   $06, $0F, $01, $87  ; $52BE |........|
-    db   $06, $17, $02, $D3
-    db   $06, $14, $01, $D3  ; $52C6 |........|
-    db   $06, $13, $00, $C7
-    db   $07, $55, $01, $CA  ; $52CE |.....U..|
-    db   $07, $54, $00, $CF
-    db   $07, $54, $03, $CF  ; $52D6 |.T...T..|
-    db   $07, $54, $02, $CF
-    db   $16, $6F, $02, $DC  ; $52DE |.T...o..|
-    db   $16, $7F, $02, $DD
-    db   $16, $8F, $03, $DE  ; $52E6 |........|
+    ; hMapId, RoomId, Transition Direction, wPaletteToLoadForTileMap
+    db   MAP_TAIL_CAVE,      $17, DIRECTION_ENTER, $81 ; dungeon entrance
+    db   MAP_TAIL_CAVE,      $13, DIRECTION_LEFT,  $80
+    db   MAP_TAIL_CAVE,      $13, DIRECTION_RIGHT, $80 
+    db   MAP_TAIL_CAVE,      $13, DIRECTION_DOWN,  $81
+    db   MAP_TAIL_CAVE,      $10, DIRECTION_RIGHT, $CA 
+    db   MAP_TAIL_CAVE,      $1C, DIRECTION_UP,    $C2
+    db   MAP_BOTTLE_GROTTO,  $2D, DIRECTION_UP,    $D0 
+    db   MAP_KEY_CAVERN,     $52, DIRECTION_ENTER, $83 ; dungeon entrance
+    db   MAP_KEY_CAVERN,     $51, DIRECTION_UP,    $82
+    db   MAP_KEY_CAVERN,     $51, DIRECTION_DOWN,  $83
+    db   MAP_ANGLERS_TUNNEL, $78, DIRECTION_LEFT,  $8B
+    db   MAP_ANGLERS_TUNNEL, $78, DIRECTION_RIGHT, $8B
+    db   MAP_ANGLERS_TUNNEL, $78, DIRECTION_DOWN,  $8C
+    db   MAP_ANGLERS_TUNNEL, $EF, DIRECTION_DOWN,  $CD
+    db   MAP_CATFISHS_MAW,   $A1, DIRECTION_ENTER, $85 ; dungeon entrance
+    db   MAP_CATFISHS_MAW,   $9F, DIRECTION_UP,    $86
+    db   MAP_CATFISHS_MAW,   $9F, DIRECTION_RIGHT, $85
+    db   MAP_CATFISHS_MAW,   $9C, DIRECTION_UP,    $84
+    db   MAP_CATFISHS_MAW,   $9C, DIRECTION_LEFT,  $84
+    db   MAP_CATFISHS_MAW,   $9C, DIRECTION_RIGHT, $86
+    db   MAP_CATFISHS_MAW,   $95, DIRECTION_RIGHT, $84
+    db   MAP_CATFISHS_MAW,   $95, DIRECTION_DOWN,  $86
+    db   MAP_CATFISHS_MAW,   $81, DIRECTION_ENTER, $86 ; stairs entrance
+    db   MAP_CATFISHS_MAW,   $8B, DIRECTION_UP,    $CE
+    db   MAP_CATFISHS_MAW,   $85, DIRECTION_DOWN,  $C4
+    db   MAP_FACE_SHRINE,    $D2, DIRECTION_UP,    $D2
+    db   MAP_FACE_SHRINE,    $CE, DIRECTION_UP,    $D1
+    db   MAP_EAGLES_TOWER,   $2E, DIRECTION_ENTER, $89 ; stairs entrance
+    db   MAP_EAGLES_TOWER,   $F8, DIRECTION_ENTER, $88 ; sidescrolling tower entrance
+    db   MAP_EAGLES_TOWER,   $0E, DIRECTION_ENTER, $87 ; dungeon entrance
+    db   MAP_EAGLES_TOWER,   $0D, DIRECTION_UP,    $89
+    db   MAP_EAGLES_TOWER,   $0D, DIRECTION_RIGHT, $87
+    db   MAP_EAGLES_TOWER,   $0F, DIRECTION_UP,    $89
+    db   MAP_EAGLES_TOWER,   $0F, DIRECTION_RIGHT, $89
+    db   MAP_EAGLES_TOWER,   $0F, DIRECTION_LEFT,  $87
+    db   MAP_EAGLES_TOWER,   $17, DIRECTION_UP,    $D3
+    db   MAP_EAGLES_TOWER,   $14, DIRECTION_LEFT,  $D3
+    db   MAP_EAGLES_TOWER,   $13, DIRECTION_RIGHT, $C7
+    db   MAP_TURTLE_ROCK,    $55, DIRECTION_LEFT,  $CA
+    db   MAP_TURTLE_ROCK,    $54, DIRECTION_RIGHT, $CF
+    db   MAP_TURTLE_ROCK,    $54, DIRECTION_DOWN,  $CF
+    db   MAP_TURTLE_ROCK,    $54, DIRECTION_UP,    $CF
+    db   MAP_S_FACE_SHRINE,  $6F, DIRECTION_UP,    $DC
+    db   MAP_S_FACE_SHRINE,  $7F, DIRECTION_UP,    $DD
+    db   MAP_S_FACE_SHRINE,  $8F, DIRECTION_DOWN,  $DE
 
 OverworldSpritePaletteIndexData::
     ; This is table with 3 byte records:
     ; RoomId, Transition Direction, wPaletteToLoadForTileMap
-    db   $44, $03, $94
-    db   $36, $00, $94
-    db   $16, $02, $95
-    db   $26, $03, $95
-    db   $17, $02, $95
-    db   $27, $03, $95
-    db   $08, $02, $9B
-    db   $17, $01, $9B
-    db   $9C, $00, $96
-    db   $9F, $02, $D7
-    db   $9E, $00, $DA
-    db   $2C, $00, $98
-    db   $12, $00, $99
-    db   $65, $02, $98
+    db   $44, DIRECTION_DOWN,  $94
+    db   $36, DIRECTION_RIGHT, $94
+    db   $16, DIRECTION_UP,    $95
+    db   $26, DIRECTION_DOWN,  $95
+    db   $17, DIRECTION_UP,    $95
+    db   $27, DIRECTION_DOWN,  $95
+    db   $08, DIRECTION_UP,    $9B
+    db   $17, DIRECTION_LEFT,  $9B
+    db   $9C, DIRECTION_RIGHT, $96
+    db   $9F, DIRECTION_UP,    $D7
+    db   $9E, DIRECTION_RIGHT, $DA
+    db   $2C, DIRECTION_RIGHT, $98
+    db   $12, DIRECTION_RIGHT, $99
+    db   $65, DIRECTION_UP,    $98
 
 func_021_5318::
     ld   a, [wIsIndoor]                           ; $5318: $FA $A5 $DB
@@ -1127,8 +1127,10 @@ ret_021_5342:
 
 ; Array indexed by wRoomTransitionDirection
 Data_021_5343::
-    db   $40, $03, $40, $30, $02, $80, $44, $00  ; $5343 |@.@0..D.|
-    db   $80, $43, $01, $40, $90, $03, $80, $80  ; $534B |.C.@....|
+    db   $40, $03, $40, $30
+    db   $02, $80, $44, $00  ; $5343 |@.@0..D.|
+    db   $80, $43, $01, $40
+    db   $90, $03, $80, $80  ; $534B |.C.@....|
 
     ld   [bc], a                                  ; $5353: $02
     ld   b, b                                     ; $5354: $40
@@ -2318,18 +2320,6 @@ InteriorPalette00::
     rgb   #F0F8C0, #D0A858, #805028, #100810
     rgb   #F8D8D8, #909038, #283818, #000000
 
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-
 InteriorPalette1C:: ; Fisherman under the bridge
     rgb   #F0F8C0, #7898F8, #2040F8, #100810
     rgb   #F8F888, #9878A0, #381850, #000000
@@ -2381,18 +2371,6 @@ InteriorPalette01::
     
     rgb   #C88818, #20B048, #084828, #000000
     rgb   #C88818, #9878A0, #381850, #000000
-
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
-    ;rgb   #FFFFFF, #FFFFFF, #FFFFFF, #000000
 
 InteriorPalette02:: ; cave in Mysterious Woods, cave at indoor_b $B6 $B7, something at $C5, something at $B3 B4
     rgb   #C88818, #9878A0, #381850, #000000

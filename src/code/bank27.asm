@@ -875,90 +875,92 @@ Data_027_7BC5::
     db   $01, $01, $01, $01, $01, $01, $01, $01   ; $7C75
     db   $00, $00, $00, $00, $00, $00, $00, $00   ; $7C7D
 
-Data_027_7C85::
-    db   $FF, $7F, $26, $7D, $26, $7D, $26, $7D   ; $7C85
-    db   $FF, $7F, $26, $7D, $26, $7D, $26, $7D   ; $7C8D
-    db   $FF, $7F, $26, $7D, $26, $7D, $26, $7D   ; $7C95
-    db   $FF, $7F, $26, $7D, $26, $7D, $26, $7D   ; $7C9D
-    db   $FF, $7F, $26, $7D, $26, $7D, $26, $7D   ; $7CA5
-    db   $FF, $7F, $26, $7D, $26, $7D, $26, $7D   ; $7CAD
-    db   $FF, $7F, $26, $7D, $26, $7D, $26, $7D   ; $7CB5
+; Marin fading in and out
 
-Data_027_7CBD:
-    db   $FF, $7F, $E5, $68, $4A, $6D, $09, $6D   ; $7CBD
-    db   $FF, $7F, $E5, $68, $07, $69, $8A, $75   ; $7CC5
-    db   $FF, $7F, $09, $6D, $4A, $6D, $8A, $75   ; $7CCD
-    db   $FF, $7F, $E5, $68, $47, $7D, $68, $7D   ; $7CD5
-    db   $FF, $7F, $E5, $68, $EA, $70, $8A, $75   ; $7CDD
-    db   $FF, $7F, $E5, $68, $4A, $6D, $EA, $70   ; $7CE5
-    db   $FF, $7F, $E8, $68, $EA, $70, $8A, $75   ; $7CED
+MarinFadePalette0::
+    rgb   #F8F8F8, #3048F8, #3048F8, #3048F8   ; $7C85
+    rgb   #F8F8F8, #3048F8, #3048F8, #3048F8   ; $7C8D
+    rgb   #F8F8F8, #3048F8, #3048F8, #3048F8   ; $7C95
+    rgb   #F8F8F8, #3048F8, #3048F8, #3048F8   ; $7C9D
+    rgb   #F8F8F8, #3048F8, #3048F8, #3048F8   ; $7CA5
+    rgb   #F8F8F8, #3048F8, #3048F8, #3048F8   ; $7CAD
+    rgb   #F8F8F8, #3048F8, #3048F8, #3048F8   ; $7CB5
 
-Data_027_7CF5:
-    db   $FF, $7F, $C4, $58, $6E, $61, $0B, $5D   ; $7CF5
-    db   $FF, $7F, $C4, $58, $E8, $58, $CE, $6D   ; $7CFD
-    db   $FF, $7F, $0B, $5D, $6E, $61, $CE, $6D   ; $7D05
-    db   $FF, $7F, $C4, $58, $47, $7D, $AA, $7D   ; $7D0D
-    db   $FF, $7F, $C4, $58, $CE, $68, $CE, $6D   ; $7D15
-    db   $FF, $7F, $C4, $58, $6E, $61, $CE, $68   ; $7D1D
-    db   $FF, $7F, $CA, $58, $CE, $68, $CE, $6D   ; $7D25
+MarinFadePalette1:
+    rgb   #F8F8F8, #2838D0, #5050D8, #4840D8   ; $7CBD
+    rgb   #F8F8F8, #2838D0, #3840D0, #5060E8   ; $7CC5
+    rgb   #F8F8F8, #4840D8, #5050D8, #5060E8   ; $7CCD
+    rgb   #F8F8F8, #2838D0, #3850F8, #4058F8   ; $7CD5
+    rgb   #F8F8F8, #2838D0, #5038E0, #5060E8   ; $7CDD
+    rgb   #F8F8F8, #2838D0, #5050D8, #5038E0   ; $7CE5
+    rgb   #F8F8F8, #4038D0, #5038E0, #5060E8   ; $7CED
 
-Data_027_7D2D:
-    db   $FF, $7F, $A3, $44, $71, $55, $0D, $51   ; $7D2D
-    db   $FF, $7F, $A3, $44, $C9, $48, $11, $66   ; $7D35
-    db   $FF, $7F, $0D, $51, $71, $55, $11, $66   ; $7D3D
-    db   $FF, $7F, $A3, $44, $47, $7D, $EC, $7D   ; $7D45
-    db   $FF, $7F, $A3, $44, $B1, $60, $11, $66   ; $7D4D
-    db   $FF, $7F, $A3, $44, $71, $55, $B1, $60   ; $7D55
-    db   $FF, $7F, $AB, $44, $B1, $60, $11, $66   ; $7D5D
+MarinFadePalette2:
+    rgb   #F8F8F8, #2030B0, #7058C0, #5840B8   ; $7CF5
+    rgb   #F8F8F8, #2030B0, #4038B0, #7070D8   ; $7CFD
+    rgb   #F8F8F8, #5840B8, #7058C0, #7070D8   ; $7D05
+    rgb   #F8F8F8, #2030B0, #3850F8, #5068F8   ; $7D0D
+    rgb   #F8F8F8, #2030B0, #7030D0, #7070D8   ; $7D15
+    rgb   #F8F8F8, #2030B0, #7058C0, #7030D0   ; $7D1D
+    rgb   #F8F8F8, #5030B0, #7030D0, #7070D8   ; $7D25
 
-Data_027_7D65:
-    db   $FF, $7F, $62, $34, $95, $45, $0F, $41   ; $7D65
-    db   $FF, $7F, $62, $34, $A9, $34, $55, $5E   ; $7D6D
-    db   $FF, $7F, $0F, $41, $95, $45, $55, $5E   ; $7D75
-    db   $FF, $7F, $62, $34, $47, $7D, $0E, $7E   ; $7D7D
-    db   $FF, $7F, $62, $34, $75, $58, $55, $5E   ; $7D85
-    db   $FF, $7F, $62, $34, $95, $45, $75, $58   ; $7D8D
-    db   $FF, $7F, $6D, $34, $75, $58, $55, $5E   ; $7D95
+MarinFadePalette3:
+    rgb   #F8F8F8, #182888, #8858A8, #6840A0   ; $7D2D
+    rgb   #F8F8F8, #182888, #483090, #8880C8   ; $7D35
+    rgb   #F8F8F8, #6840A0, #8858A8, #8880C8   ; $7D3D
+    rgb   #F8F8F8, #182888, #3850F8, #6078F8   ; $7D45
+    rgb   #F8F8F8, #182888, #8828C0, #8880C8   ; $7D4D
+    rgb   #F8F8F8, #182888, #8858A8, #8828C0   ; $7D55
+    rgb   #F8F8F8, #582888, #8828C0, #8880C8   ; $7D5D
 
-Data_027_7D9D:
-    db   $FF, $7F, $41, $20, $98, $39, $11, $35   ; $7D9D
-    db   $FF, $7F, $41, $20, $8A, $24, $98, $56   ; $7DA5
-    db   $FF, $7F, $11, $35, $98, $39, $98, $56   ; $7DAD
-    db   $FF, $7F, $41, $20, $47, $7D, $50, $7E   ; $7DB5
-    db   $FF, $7F, $41, $20, $58, $50, $98, $56   ; $7DBD
-    db   $FF, $7F, $41, $20, $98, $39, $58, $50   ; $7DC5
-    db   $FF, $7F, $4E, $20, $58, $50, $98, $56   ; $7DCD
+MarinFadePalette4:
+    rgb   #F8F8F8, #101868, #A86088, #784080   ; $7D65
+    rgb   #F8F8F8, #101868, #482868, #A890B8   ; $7D6D
+    rgb   #F8F8F8, #784080, #A86088, #A890B8   ; $7D75
+    rgb   #F8F8F8, #101868, #3850F8, #7080F8   ; $7D7D
+    rgb   #F8F8F8, #101868, #A818B0, #A890B8   ; $7D85
+    rgb   #F8F8F8, #101868, #A86088, #A818B0   ; $7D8D
+    rgb   #F8F8F8, #681868, #A818B0, #A890B8   ; $7D95
 
-Data_027_7DD5:
-    db   $FF, $7F, $20, $10, $BC, $2D, $13, $25   ; $7DD5
-    db   $FF, $7F, $20, $10, $6B, $14, $DC, $4E   ; $7DDD
-    db   $FF, $7F, $13, $25, $BC, $2D, $DC, $4E   ; $7DE5
-    db   $FF, $7F, $20, $10, $47, $7D, $92, $7E   ; $7DED
-    db   $FF, $7F, $20, $10, $3C, $48, $DC, $4E   ; $7DF5
-    db   $FF, $7F, $20, $10, $BC, $2D, $3C, $48   ; $7DFD
-    db   $FF, $7F, $30, $10, $3C, $48, $DC, $4E   ; $7E05
+MarinFadePalette5:
+    rgb   #F8F8F8, #081040, #C06070, #884068   ; $7D9D
+    rgb   #F8F8F8, #081040, #502048, #C0A0A8   ; $7DA5
+    rgb   #F8F8F8, #884068, #C06070, #C0A0A8   ; $7DAD
+    rgb   #F8F8F8, #081040, #3850F8, #8090F8   ; $7DB5
+    rgb   #F8F8F8, #081040, #C010A0, #C0A0A8   ; $7DBD
+    rgb   #F8F8F8, #081040, #C06070, #C010A0   ; $7DC5
+    rgb   #F8F8F8, #701040, #C010A0, #C0A0A8   ; $7DCD
 
-Data_027_7E0D:
-    db   $26, $7D, $00, $00, $BF, $21, $15, $19   ; $7E0D
-    db   $FF, $7F, $00, $00, $6B, $04, $1F, $4B   ; $7E15
-    db   $FF, $7F, $15, $19, $BF, $21, $1F, $4B   ; $7E1D
-    db   $FF, $7F, $00, $00, $68, $7D, $B3, $7E   ; $7E25
-    db   $FF, $7F, $00, $00, $1F, $40, $1F, $4B   ; $7E2D
-    db   $FF, $7F, $00, $00, $BF, $21, $1F, $40   ; $7E35
-    db   $FF, $7F, $11, $00, $1F, $40, $1F, $4B   ; $7E3D
+MarinFadePalette6:
+    rgb   #F8F8F8, #000820, #E06858, #984048   ; $7DD5
+    rgb   #F8F8F8, #000820, #581828, #E0B098   ; $7DDD
+    rgb   #F8F8F8, #984048, #E06858, #E0B098   ; $7DE5
+    rgb   #F8F8F8, #000820, #3850F8, #90A0F8   ; $7DED
+    rgb   #F8F8F8, #000820, #E00890, #E0B098   ; $7DF5
+    rgb   #F8F8F8, #000820, #E06858, #E00890   ; $7DFD
+    rgb   #F8F8F8, #800820, #E00890, #E0B098   ; $7E05
 
-Data_027_7E45::
-    dw   Data_027_7C85
-    dw   Data_027_7CBD
-    dw   Data_027_7CF5
-    dw   Data_027_7D2D
-    dw   Data_027_7D65
-    dw   Data_027_7D9D
-    dw   Data_027_7DD5
-    dw   Data_027_7E0D
+MarinFadePalette7:
+    rgb   #3048F8, #000000, #F86840, #A84030   ; $7E0D
+    rgb   #F8F8F8, #000000, #581808, #F8C090   ; $7E15
+    rgb   #F8F8F8, #A84030, #F86840, #F8C090   ; $7E1D
+    rgb   #F8F8F8, #000000, #4058F8, #98A8F8   ; $7E25
+    rgb   #F8F8F8, #000000, #F80080, #F8C090   ; $7E2D
+    rgb   #F8F8F8, #000000, #F86840, #F80080   ; $7E35
+    rgb   #F8F8F8, #880000, #F80080, #F8C090   ; $7E3D
+
+MarinFadePalettes::
+    dw   MarinFadePalette0
+    dw   MarinFadePalette1
+    dw   MarinFadePalette2
+    dw   MarinFadePalette3
+    dw   MarinFadePalette4
+    dw   MarinFadePalette5
+    dw   MarinFadePalette6
+    dw   MarinFadePalette7
 
 func_027_7E55::
-    ld   hl, Data_027_7C85                        ; $7E55: $21 $85 $7C
+    ld   hl, MarinFadePalette0                    ; $7E55: $21 $85 $7C
     jr   jr_027_7E7D                              ; $7E58: $18 $23
 
 func_027_7E5A::
@@ -979,7 +981,7 @@ func_027_7E5A::
     sla  a                                        ; $7E70: $CB $27
     ld   e, a                                     ; $7E72: $5F
     ld   d, $00                                   ; $7E73: $16 $00
-    ld   hl, Data_027_7E45                        ; $7E75: $21 $45 $7E
+    ld   hl, MarinFadePalettes                    ; $7E75: $21 $45 $7E
     add  hl, de                                   ; $7E78: $19
     ld   a, [hl+]                                 ; $7E79: $2A
     ld   d, a                                     ; $7E7A: $57
@@ -1018,18 +1020,18 @@ Data_027_7E87::
     db   $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF   ; $7F37
     db   $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF   ; $7F3F
 
-Data_027_7F47::
-    db   $FF, $7F, $26, $7D, $26, $7D, $26, $7D   ; $7F47
-    db   $FF, $7F, $E5, $68, $0E, $7E, $0E, $7E   ; $7F4F
-    db   $FF, $7F, $C4, $58, $F6, $7E, $F6, $7E   ; $7F57
-    db   $FF, $7F, $A3, $44, $FF, $7F, $FF, $7F   ; $7F5F
-    db   $FF, $7F, $62, $34, $59, $7F, $FF, $7F   ; $7F67
-    db   $FF, $7F, $41, $20, $B3, $7E, $FF, $7F   ; $7F6F
-    db   $FF, $7F, $20, $10, $0D, $7E, $FF, $7F   ; $7F77
-    db   $FF, $7F, $00, $00, $68, $7D, $FF, $7F   ; $7F7F
+SeagullFadePalettes::
+    rgb   #F8F8F8, #3048F8, #3048F8, #3048F8   ; $7F47
+    rgb   #F8F8F8, #2838D0, #7080F8, #7080F8   ; $7F4F
+    rgb   #F8F8F8, #2030B0, #B0B8F8, #B0B8F8   ; $7F57
+    rgb   #F8F8F8, #182888, #F8F8F8, #F8F8F8   ; $7F5F
+    rgb   #F8F8F8, #101868, #C8D0F8, #F8F8F8   ; $7F67
+    rgb   #F8F8F8, #081040, #98A8F8, #F8F8F8   ; $7F6F
+    rgb   #F8F8F8, #000820, #6880F8, #F8F8F8   ; $7F77
+    rgb   #F8F8F8, #000000, #4058F8, #F8F8F8   ; $7F7F
 
 func_027_7F87::
-    ld   hl, Data_027_7F47                        ; $7F87: $21 $47 $7F
+    ld   hl, SeagullFadePalettes                  ; $7F87: $21 $47 $7F
     jr   jr_027_7FAF                              ; $7F8A: $18 $23
 
 func_027_7F8C::
@@ -1052,7 +1054,7 @@ func_027_7F8C::
     sla  a                                        ; $7FA6: $CB $27
     ld   e, a                                     ; $7FA8: $5F
     ld   d, $00                                   ; $7FA9: $16 $00
-    ld   hl, Data_027_7F47                        ; $7FAB: $21 $47 $7F
+    ld   hl, SeagullFadePalettes                  ; $7FAB: $21 $47 $7F
     add  hl, de                                   ; $7FAE: $19
 
 jr_027_7FAF:

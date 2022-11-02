@@ -1150,7 +1150,6 @@ wC3C5::
 wC3C7::
   ds 1 ; C3C7
 
-; Unlabeled
 wIsMarinSinging::
   ds 1 ; C3C8
 

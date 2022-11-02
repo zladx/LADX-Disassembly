@@ -159,7 +159,7 @@ jr_018_5375:
     and  $01                                      ; $537A: $E6 $01
     add  $02                                      ; $537C: $C6 $02
     call SetEntitySpriteVariant                   ; $537E: $CD $0C $3B
-    ld   hl, wDB74                                ; $5381: $21 $74 $DB
+    ld   hl, wIsMarinInAnimalVillage              ; $5381: $21 $74 $DB
     ld   [hl], $01                                ; $5384: $36 $01
     ldh  a, [hActiveEntityPosX]                   ; $5386: $F0 $EE
     and  $FC                                      ; $5388: $E6 $FC

@@ -150,7 +150,7 @@ Data_018_5A8A::
     db   $06, $01
 
 jr_018_5A8C::
-    ld   a, [wC3C8]
+    ld   a, [wIsMarinSinging]
     and  a
     jr   z, .jr_5AE7
 
@@ -300,7 +300,7 @@ jr_018_5B61:
     ret                                           ; $5B69: $C9
 
 jr_018_5B6A:
-    ld   a, [wDB74]                               ; $5B6A: $FA $74 $DB
+    ld   a, [wIsMarinInAnimalVillage]             ; $5B6A: $FA $74 $DB
     ld   hl, wLoadPreviousMapCountdown            ; $5B6D: $21 $BC $C1
     or   [hl]                                     ; $5B70: $B6
     ret  nz                                       ; $5B71: $C0

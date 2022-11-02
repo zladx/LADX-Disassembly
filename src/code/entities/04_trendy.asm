@@ -319,7 +319,7 @@ jr_004_705D:
     and  a                                        ; $7060: $A7
     jr   z, .jr_7066                              ; $7061: $28 $03
 
-    ld   [wDB74], a                               ; $7063: $EA $74 $DB
+    ld   [wIsMarinInAnimalVillage], a             ; $7063: $EA $74 $DB
 
 .jr_7066
     ld   hl, wEntitiesPrivateState3Table          ; $7066: $21 $D0 $C2
@@ -1409,7 +1409,7 @@ func_004_7681::
     and  a                                        ; $768B: $A7
     ret  nz                                       ; $768C: $C0
 
-    ld   [wDB74], a                               ; $768D: $EA $74 $DB
+    ld   [wIsMarinInAnimalVillage], a             ; $768D: $EA $74 $DB
     ld   a, $18                                   ; $7690: $3E $18
     ld   [wLoadPreviousMapCountdown], a           ; $7692: $EA $BC $C1
     jp   IncrementEntityState                     ; $7695: $C3 $12 $3B

@@ -141,7 +141,7 @@ MarinEntityHandler::
 
 .jr_4ED1
     call func_005_54EA                            ; $4ED1: $CD $EA $54
-    ld   a, [wC3C8]                               ; $4ED4: $FA $C8 $C3
+    ld   a, [wIsMarinSinging]                     ; $4ED4: $FA $C8 $C3
     cp   $01                                      ; $4ED7: $FE $01
     jr   nz, jr_005_4F39                          ; $4ED9: $20 $5E
 
@@ -239,7 +239,7 @@ func_005_4F64::
     cp   ROOM_SECTION_OW_VILLAGES                 ; $4F66: $FE $C0
     jr   nc, .jr_4F6F                             ; $4F68: $30 $05
 
-    ld   a, [wC3C8]                               ; $4F6A: $FA $C8 $C3
+    ld   a, [wIsMarinSinging]                     ; $4F6A: $FA $C8 $C3
     and  a                                        ; $4F6D: $A7
     ret  nz                                       ; $4F6E: $C0
 
@@ -388,7 +388,7 @@ func_005_5020::
     ld   [wMusicTrackToPlay], a                   ; $5032: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $5035: $E0 $B0
     ldh  [hDefaultMusicTrackAlt], a               ; $5037: $E0 $BD
-    ld   hl, wC3C8                                ; $5039: $21 $C8 $C3
+    ld   hl, wIsMarinSinging                      ; $5039: $21 $C8 $C3
     ld   [hl], $01                                ; $503C: $36 $01
 
 .jr_503E
@@ -459,11 +459,11 @@ func_005_5059::
     jr   c, .jr_50B7                              ; $50B0: $38 $05
 
     xor  a                                        ; $50B2: $AF
-    ld   [wC3C8], a                               ; $50B3: $EA $C8 $C3
+    ld   [wIsMarinSinging], a                     ; $50B3: $EA $C8 $C3
     ret                                           ; $50B6: $C9
 
 .jr_50B7
-    ld   hl, wC3C8                                ; $50B7: $21 $C8 $C3
+    ld   hl, wIsMarinSinging                      ; $50B7: $21 $C8 $C3
     ld   [hl], $01                                ; $50BA: $36 $01
     ld   a, e                                     ; $50BC: $7B
     srl  d                                        ; $50BD: $CB $3A

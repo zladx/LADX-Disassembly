@@ -14,7 +14,7 @@ AnimalD0SpriteVariants::
     db $54, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 AnimalD0EntityHandler::
-    ld   a, [wDB74]                               ; $7F2E: $FA $74 $DB
+    ld   a, [wIsMarinInAnimalVillage]             ; $7F2E: $FA $74 $DB
     and  a                                        ; $7F31: $A7
     jp   z, ClearEntityStatus_05                  ; $7F32: $CA $4B $7B
 

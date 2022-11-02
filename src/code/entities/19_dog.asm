@@ -50,7 +50,7 @@ DogEntityHandler::
     ld   [hl], b                                  ; $4913: $70
 
 .jr_4914
-    ld   a, [wC3C8]                               ; $4914: $FA $C8 $C3
+    ld   a, [wIsMarinSinging]                     ; $4914: $FA $C8 $C3
     and  a                                        ; $4917: $A7
     jr   z, jr_019_4947                           ; $4918: $28 $2D
 
@@ -113,7 +113,7 @@ jr_019_494A:
     call func_019_7CF0                            ; $4969: $CD $F0 $7C
     jr   nc, jr_019_4980                          ; $496C: $30 $12
 
-    ld   a, [wC3C8]                               ; $496E: $FA $C8 $C3
+    ld   a, [wIsMarinSinging]                     ; $496E: $FA $C8 $C3
     and  a                                        ; $4971: $A7
     ld_dialog_low a, Dialog020 ; "GRRRR"          ; $4972: $3E $20
     jr   z, .jr_497D                              ; $4974: $28 $07
@@ -125,7 +125,7 @@ jr_019_494A:
     call OpenDialogInTable0                       ; $497D: $CD $85 $23
 
 jr_019_4980:
-    ld   a, [wC3C8]                               ; $4980: $FA $C8 $C3
+    ld   a, [wIsMarinSinging]                     ; $4980: $FA $C8 $C3
     and  a                                        ; $4983: $A7
     ret  nz                                       ; $4984: $C0
 

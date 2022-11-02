@@ -320,7 +320,7 @@ EntityInitGel::
     ret                                           ; $4959: $C9
 
 EntityInitMarinAtTheShore::
-    ld   hl, wDB74                                ; $495A: $21 $74 $DB
+    ld   hl, wIsMarinInAnimalVillage              ; $495A: $21 $74 $DB
     ld   a, [wIsMarinFollowingLink]               ; $495D: $FA $73 $DB
     or   [hl]                                     ; $4960: $B6
     jp   nz, UnloadEntityAndReturn                ; $4961: $C2 $8D $3F
@@ -552,42 +552,56 @@ UnloadEntityIfRoomStatusSet::
     ret                                           ; $4A7F: $C9
 
 EntityInitMarin::
+    ; Check if the current room is > $C0, ie.
+    ; below Mabe Village, which in practice means
+    ; we're in Animal Village (Marin at the shore
+    ; is a separate entity)
     ldh  a, [hMapRoom]                            ; $4A80: $F0 $F6
     cp   UNKNOWN_ROOM_C0                          ; $4A82: $FE $C0
-    jr   c, .mabeWeatherVaneEnd                   ; $4A84: $38 $1D
+    jr   c, .checkMarinDebug                      ; $4A84: $38 $1D
 
-    ld   a, [wDB74]                               ; $4A86: $FA $74 $DB
+    ; Check if Marin should be here
+    ld   a, [wIsMarinInAnimalVillage]             ; $4A86: $FA $74 $DB
     and  a                                        ; $4A89: $A7
     jp   z, UnloadEntityAndReturn                 ; $4A8A: $CA $8D $3F
 
+    ; Check if Marin is currently following Link
     ld   a, [wIsMarinFollowingLink]               ; $4A8D: $FA $73 $DB
     and  a                                        ; $4A90: $A7
     jp   nz, UnloadEntityAndReturn                ; $4A91: $C2 $8D $3F
 
+    ; Marin is here and not following Link, so
+    ; she should sing Ballad of the Wind Fish
     inc  a                                        ; $4A94: $3C
-    ld   [wC3C8], a                               ; $4A95: $EA $C8 $C3
+    ld   [wIsMarinSinging], a                     ; $4A95: $EA $C8 $C3
     ld   a, MUSIC_MARIN_SINGING                   ; $4A98: $3E $2F
     ldh  [hNextMusicTrackToFadeInto], a           ; $4A9A: $E0 $B1
     ldh  [hDefaultMusicTrack], a                  ; $4A9C: $E0 $B0
     ldh  [hDefaultMusicTrackAlt], a               ; $4A9E: $E0 $BD
     call ResetMusicFadeTimer                      ; $4AA0: $CD $EA $27
 
-.mabeWeatherVaneEnd
-
+.checkMarinDebug
+    ; Check if Marin should trigger debugging
+    ; tools
     ld   a, [ROM_DebugTool1]                      ; $4AA3: $FA $03 $00
     and  a                                        ; $4AA6: $A7
     jp   z, EntityInitNpcFacingDown               ; $4AA7: $CA $2F $4B
 
+    ; Check if player's name begins with 0
     ld   a, [wName]                               ; $4AAA: $FA $4F $DB
     and  a                                        ; $4AAD: $A7
     jr   nz, EntityInitNpcFacingDown              ; $4AAE: $20 $7F
 
     ld   a, [wName + 1]                           ; $4AB0: $FA $50 $DB
     and  a                                        ; $4AB3: $A7
+    ; If player's name begins with single 0,
+    ; activate the text debugger
     jr   nz, .enableTextDebugger                  ; $4AB4: $20 $09
 
+    ; If player's name begins with 00,
+    ; jump to credits
     ld   [wGameplaySubtype], a                    ; $4AB6: $EA $96 $DB
-    ld   a, $01                                   ; $4AB9: $3E $01
+    ld   a, GAMEPLAY_CREDITS                      ; $4AB9: $3E $01
     ld   [wGameplayType], a                       ; $4ABB: $EA $95 $DB
     ret                                           ; $4ABE: $C9
 
@@ -3478,8 +3492,9 @@ AfterSirensInstrumentNone::
     ret                                           ; $5E1E: $C9
 
 AfterSirensInstrumentD6::
+    ; Mark Marin as disappeared
     xor  a                                        ; $5E1F: $AF
-    ld   [wDB74], a                               ; $5E20: $EA $74 $DB
+    ld   [wIsMarinInAnimalVillage], a             ; $5E20: $EA $74 $DB
     ret                                           ; $5E23: $C9
 
 AfterSirensInstrumentD7::

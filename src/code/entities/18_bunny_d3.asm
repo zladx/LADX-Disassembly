@@ -26,7 +26,7 @@ BunnyD3SpriteVariants::
     db $58, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 BunnyD3EntityHandler::
-    ld   a, [wDB74]                               ; $51D8: $FA $74 $DB
+    ld   a, [wIsMarinInAnimalVillage]             ; $51D8: $FA $74 $DB
     and  a                                        ; $51DB: $A7
     jp   nz, ClearEntityStatusBank18              ; $51DC: $C2 $08 $7F
 

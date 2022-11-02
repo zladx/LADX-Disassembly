@@ -38,7 +38,7 @@ func_006_6230::
     jp   nz, OpenDialogInTable1                   ; $624C: $C2 $73 $23
 
 .jr_624F
-    ld   a, [wDB74]                               ; $624F: $FA $74 $DB
+    ld   a, [wIsMarinInAnimalVillage]             ; $624F: $FA $74 $DB
     and  a                                        ; $6252: $A7
     jr   z, .jr_625A                              ; $6253: $28 $05
 

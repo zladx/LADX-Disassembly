@@ -1362,7 +1362,7 @@ PeachPictureHandler::
     jp   returnFromGameplayHandler                ; $0EC8: $C3 $1A $10
 
 MarinBeachHandler::
-    call MarineBeachEntryPoint                    ; $0ECB: $CD $03 $62
+    call MarinBeachEntryPoint                    ; $0ECB: $CD $03 $62
     jp   returnFromGameplayHandler                ; $0ECE: $C3 $1A $10
 
 WorldMapHandler::

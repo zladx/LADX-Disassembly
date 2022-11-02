@@ -784,7 +784,7 @@ wC1AB::
 wC1AC::
   ds 1 ; C1AC
 
-; Unlabeled
+; Whether the A button should do something other than using an item?
 wC1AD::
   ds 1 ; C1AD
 
@@ -1150,8 +1150,7 @@ wC3C5::
 wC3C7::
   ds 1 ; C3C7
 
-; Unlabeled
-wC3C8::
+wIsMarinSinging::
   ds 1 ; C3C8
 
 ; Unlabeled
@@ -3257,8 +3256,8 @@ wNumberOfDungeon7PillarsDestroyed:
 wIsMarinFollowingLink::
   ds 1 ; DB73
 
-; Unlabeled, Marin-related
-wDB74::
+; Whether Marin is in Animal Village
+wIsMarinInAnimalVillage::
   ds 1
 
 ; Total number of medecine ever purchased from Crazy Tracy

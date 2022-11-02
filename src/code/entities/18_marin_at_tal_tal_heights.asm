@@ -314,7 +314,7 @@ MarinAtTalTalHeightsStateCHandler::
     xor  a                                        ; $60B8: $AF
     ld   [wC167], a                               ; $60B9: $EA $67 $C1
 IF __PATCH_0__
-    ld   [wDB74], a
+    ld   [wIsMarinInAnimalVillage], a
 ENDC
     ld   hl, wOverworldRoomStatus + $08           ; $60BC: $21 $08 $D8
     set  4, [hl]                                  ; $60BF: $CB $E6

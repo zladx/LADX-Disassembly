@@ -1408,7 +1408,7 @@ ResetRoomVariables::
     ld   [wD460], a                               ; $4CC3: $EA $60 $D4
     ld   [wInBossBattle], a                       ; $4CC6: $EA $BE $C1
     ld   [wC50E], a                               ; $4CC9: $EA $0E $C5
-    ld   [wC3C8], a                               ; $4CCC: $EA $C8 $C3
+    ld   [wIsMarinSinging], a                     ; $4CCC: $EA $C8 $C3
     ld   [wC5A6], a                               ; $4CCF: $EA $A6 $C5
     ld   [wCompassSfxCountdown], a                ; $4CD2: $EA $62 $D4
     ld   [wC3CD], a                               ; $4CD5: $EA $CD $C3

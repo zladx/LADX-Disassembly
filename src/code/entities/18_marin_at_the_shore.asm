@@ -3,7 +3,7 @@ MarinAtTheShoreEntityHandler::
     and  a                                        ; $618D: $A7
     jp   nz, MarinAsFollowerHandler               ; $618E: $C2 $E8 $59
 
-    ld   a, [wDB74]                               ; $6191: $FA $74 $DB
+    ld   a, [wIsMarinInAnimalVillage]             ; $6191: $FA $74 $DB
     and  a                                        ; $6194: $A7
     ret  nz                                       ; $6195: $C0
 

@@ -10,7 +10,7 @@ label_018_51A4:
     jp_open_dialog Dialog196                      ; $51AB
 
 func_018_51B0::
-    ld   a, [wDB74]                               ; $51B0: $FA $74 $DB
+    ld   a, [wIsMarinInAnimalVillage]             ; $51B0: $FA $74 $DB
     and  a                                        ; $51B3: $A7
     jp   z, ClearEntityStatusBank18               ; $51B4: $CA $08 $7F
 

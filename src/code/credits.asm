@@ -1226,7 +1226,7 @@ CreditsWindFishHandler::
     ld   [wIsIndoor], a                           ; $4C66: $EA $A5 $DB
     ldh  [hRoomStatus], a                         ; $4C69: $E0 $F8
     ld   a, $01                                   ; $4C6B: $3E $01
-    ld   [wC3C8], a                               ; $4C6D: $EA $C8 $C3
+    ld   [wIsMarinSinging], a                     ; $4C6D: $EA $C8 $C3
     ld   a, UNKNOWN_ROOM_92                       ; $4C70: $3E $92
     ldh  [hMapRoom], a                            ; $4C72: $E0 $F6
     ld   a, $FF                                   ; $4C74: $3E $FF

@@ -281,7 +281,7 @@ label_019_5F84:
 
     call GetRandomByte                            ; $5F9F: $CD $0D $28
     and  $03                                      ; $5FA2: $E6 $03
-    ld   hl, wC3C8                                ; $5FA4: $21 $C8 $C3
+    ld   hl, wIsMarinSinging                      ; $5FA4: $21 $C8 $C3
     or   [hl]                                     ; $5FA7: $B6
     ret  nz                                       ; $5FA8: $C0
 

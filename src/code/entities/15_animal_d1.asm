@@ -14,7 +14,7 @@ AnimalD1SpriteVariants::
     db $70, $23
 
 AnimalD1EntityHandler::
-    ld   a, [wDB74]                               ; $7F96: $FA $74 $DB
+    ld   a, [wIsMarinInAnimalVillage]             ; $7F96: $FA $74 $DB
     and  a                                        ; $7F99: $A7
     jp   z, ClearEntityStatus_15                  ; $7F9A: $CA $31 $7C
 

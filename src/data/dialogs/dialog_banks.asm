@@ -1,13 +1,19 @@
-; Some bank numbers have the high bit set for an unknown reason.
-; The routine DrawNextCharacter does `and $3f`, so the bit
-; is dropped. It is unknown if it's used anywhere else.
+; Some bank numbers have the high bit set. This is a flag that
+; marks the dialog as unskippable; otherwise, the dialog can
+; be skipped with the B button. This is only relevant if
+; __SKIP_DIALOG_SUPPORT__ is enabled; if not, all dialog is
+; unskippable (the routine DialogDrawNextCharacterHandler
+; does `and $1f`, so the bit is dropped).
+;
+; All textboxes with a prompt - e.g. 'yes/no', or a red
+; 'press a button to continue' arrow - are unskippable.
 
-; All textboxes with a prompt - e.g. 'yes/no', or a red 'press a button to continue' arrow - have '| $80'.
+DIALOG_UNSKIPPABLE equ $80
 
 DialogBankTable::
 ; dialog_1.asm starts here
     db BANK(Dialog000)
-    db BANK(Dialog001) | $80
+    db BANK(Dialog001) | DIALOG_UNSKIPPABLE
     db BANK(Dialog002)
     db BANK(Dialog003)
     db BANK(Dialog004)
@@ -21,14 +27,14 @@ DialogBankTable::
     db BANK(Dialog00C)
     db BANK(Dialog00D)
     db BANK(Dialog00E)
-    db BANK(Dialog00F) | $80
+    db BANK(Dialog00F) | DIALOG_UNSKIPPABLE
     db BANK(Dialog010)
     db BANK(Dialog011)
     db BANK(Dialog012)
-    db BANK(Dialog013) | $80
+    db BANK(Dialog013) | DIALOG_UNSKIPPABLE
     db BANK(Dialog014)
     db BANK(Dialog015)
-    db BANK(Dialog016) | $80
+    db BANK(Dialog016) | DIALOG_UNSKIPPABLE
     db BANK(Dialog017)
     db BANK(Dialog018)
     db BANK(Dialog019)
@@ -44,7 +50,7 @@ DialogBankTable::
     db BANK(Dialog023)
     db BANK(Dialog024)
     db BANK(Dialog025)
-    db BANK(Dialog026) | $80
+    db BANK(Dialog026) | DIALOG_UNSKIPPABLE
     db BANK(Dialog027)
     db BANK(Dialog028)
     db BANK(Dialog029)
@@ -60,9 +66,9 @@ DialogBankTable::
     db BANK(Dialog033)
     db BANK(Dialog034)
     db BANK(Dialog035)
-    db BANK(Dialog036) | $80
+    db BANK(Dialog036) | DIALOG_UNSKIPPABLE
     db BANK(Dialog037)
-    db BANK(Dialog038) | $80
+    db BANK(Dialog038) | DIALOG_UNSKIPPABLE
     db BANK(Dialog039)
     db BANK(Dialog03A)
     db BANK(Dialog03B)
@@ -75,22 +81,22 @@ DialogBankTable::
     db BANK(Dialog042)
     db BANK(Dialog043)
     db BANK(Dialog044)
-    db BANK(Dialog045) | $80
-    db BANK(Dialog046) | $80
-    db BANK(Dialog047) | $80
-    db BANK(Dialog048) | $80
-    db BANK(Dialog049) | $80
-    db BANK(Dialog04A) | $80
-    db BANK(Dialog04B) | $80
-    db BANK(Dialog04C) | $80
-    db BANK(Dialog04D) | $80
-    db BANK(Dialog04E) | $80
-    db BANK(Dialog04F) | $80
-    db BANK(Dialog050) | $80
-    db BANK(Dialog051) | $80
-    db BANK(Dialog052) | $80
-    db BANK(Dialog053) | $80
-    db BANK(Dialog054) | $80
+    db BANK(Dialog045) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog046) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog047) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog048) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog049) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog04A) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog04B) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog04C) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog04D) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog04E) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog04F) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog050) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog051) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog052) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog053) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog054) | DIALOG_UNSKIPPABLE
     db BANK(Dialog055)
     db BANK(Dialog056)
     db BANK(Dialog057)
@@ -150,98 +156,98 @@ DialogBankTable::
     db BANK(Dialog08D)
     db BANK(Dialog08E)
     db BANK(Dialog08F)
-    db BANK(Dialog090) | $80
-    db BANK(Dialog091) | $80
-    db BANK(Dialog092) | $80
-    db BANK(Dialog093) | $80
-    db BANK(Dialog094) | $80
-    db BANK(Dialog095) | $80
-    db BANK(Dialog096) | $80
-    db BANK(Dialog097) | $80
-    db BANK(Dialog098) | $80
-    db BANK(Dialog099) | $80
-    db BANK(Dialog09A) | $80
-    db BANK(Dialog09B) | $80
-    db BANK(Dialog09C) | $80
-    db BANK(Dialog09D) | $80
-    db BANK(Dialog09E) | $80
-    db BANK(Dialog09F) | $80
-    db BANK(Dialog0A0) | $80
-    db BANK(Dialog0A1) | $80
-    db BANK(Dialog0A2) | $80
-    db BANK(Dialog0A3) | $80
+    db BANK(Dialog090) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog091) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog092) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog093) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog094) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog095) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog096) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog097) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog098) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog099) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog09A) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog09B) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog09C) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog09D) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog09E) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog09F) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0A0) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0A1) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0A2) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0A3) | DIALOG_UNSKIPPABLE
 
 ; dialog_2.asm starts here
-    db BANK(Dialog0A4) | $80
-    db BANK(Dialog0A5) | $80
-    db BANK(Dialog0A6) | $80
-    db BANK(Dialog0A7) | $80
-    db BANK(Dialog0A8) | $80
-    db BANK(Dialog0A9) | $80
-    db BANK(Dialog0AA) | $80
-    db BANK(Dialog0AB) | $80
-    db BANK(Dialog0AC) | $80
-    db BANK(Dialog0AD) | $80
-    db BANK(Dialog0AE) | $80
-    db BANK(Dialog0AF) | $80
-    db BANK(Dialog0B0) | $80
-    db BANK(Dialog0B1) | $80
-    db BANK(Dialog0B2) | $80
-    db BANK(Dialog0B3) | $80
-    db BANK(Dialog0B4) | $80
-    db BANK(Dialog0B5) | $80
-    db BANK(Dialog0B6) | $80
-    db BANK(Dialog0B7) | $80
-    db BANK(Dialog0B8) | $80
-    db BANK(Dialog0B9) | $80
-    db BANK(Dialog0BA) | $80
-    db BANK(Dialog0BB) | $80
-    db BANK(Dialog0BC) | $80
-    db BANK(Dialog0BD) | $80
-    db BANK(Dialog0BE) | $80
-    db BANK(Dialog0BF) | $80
-    db BANK(Dialog0C0) | $80
-    db BANK(Dialog0C1) | $80
-    db BANK(Dialog0C2) | $80
-    db BANK(Dialog0C3) | $80
-    db BANK(Dialog0C4) | $80
-    db BANK(Dialog0C5) | $80
-    db BANK(Dialog0C6) | $80
-    db BANK(Dialog0C7) | $80
-    db BANK(Dialog0C8) | $80
-    db BANK(Dialog0C9) | $80
-    db BANK(Dialog0CA) | $80
-    db BANK(Dialog0CB) | $80
-    db BANK(Dialog0CC) | $80
-    db BANK(Dialog0CD) | $80
-    db BANK(Dialog0CE) | $80
-    db BANK(Dialog0CF) | $80
-    db BANK(Dialog0D0) | $80
-    db BANK(Dialog0D1) | $80
-    db BANK(Dialog0D2) | $80
-    db BANK(Dialog0D3) | $80
-    db BANK(Dialog0D4) | $80
-    db BANK(Dialog0D5) | $80
-    db BANK(Dialog0D6) | $80
-    db BANK(Dialog0D7) | $80
-    db BANK(Dialog0D8) | $80
-    db BANK(Dialog0D9) | $80
+    db BANK(Dialog0A4) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0A5) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0A6) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0A7) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0A8) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0A9) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0AA) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0AB) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0AC) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0AD) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0AE) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0AF) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0B0) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0B1) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0B2) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0B3) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0B4) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0B5) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0B6) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0B7) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0B8) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0B9) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0BA) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0BB) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0BC) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0BD) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0BE) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0BF) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0C0) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0C1) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0C2) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0C3) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0C4) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0C5) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0C6) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0C7) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0C8) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0C9) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0CA) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0CB) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0CC) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0CD) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0CE) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0CF) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0D0) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0D1) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0D2) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0D3) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0D4) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0D5) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0D6) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0D7) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0D8) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0D9) | DIALOG_UNSKIPPABLE
     db BANK(Dialog0DA)
     db BANK(Dialog0DB)
-    db BANK(Dialog0DC) | $80
+    db BANK(Dialog0DC) | DIALOG_UNSKIPPABLE
     db BANK(Dialog0DD)
     db BANK(Dialog0DE)
     db BANK(Dialog0DF)
     db BANK(Dialog0E0)
-    db BANK(Dialog0E1) | $80
-    db BANK(Dialog0E2) | $80
-    db BANK(Dialog0E3) | $80
-    db BANK(Dialog0E4) | $80
-    db BANK(Dialog0E5) | $80
+    db BANK(Dialog0E1) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0E2) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0E3) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0E4) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0E5) | DIALOG_UNSKIPPABLE
     db BANK(Dialog0E6)
     db BANK(Dialog0E7)
     db BANK(Dialog0E8)
-    db BANK(Dialog0E9) | $80
+    db BANK(Dialog0E9) | DIALOG_UNSKIPPABLE
     db BANK(Dialog0EA)
     db BANK(Dialog0EB)
     db BANK(Dialog0EC)
@@ -253,16 +259,16 @@ DialogBankTable::
     db BANK(Dialog0F2)
     db BANK(Dialog0F3)
     db BANK(Dialog0F4)
-    db BANK(Dialog0F5) | $80
-    db BANK(Dialog0F6) | $80
-    db BANK(Dialog0F7) | $80
+    db BANK(Dialog0F5) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0F6) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog0F7) | DIALOG_UNSKIPPABLE
     db BANK(Dialog0F8)
     db BANK(Dialog0F9)
     db BANK(Dialog0FA)
     db BANK(Dialog0FB)
     db BANK(Dialog0FC)
     db BANK(Dialog0FD)
-    db BANK(Dialog0FE) | $80
+    db BANK(Dialog0FE) | DIALOG_UNSKIPPABLE
     db BANK(Dialog0FF)
     db BANK(Dialog100)
     db BANK(Dialog101)
@@ -274,16 +280,16 @@ DialogBankTable::
     db BANK(Dialog107)
 
 ; dialog_3.asm starts here
-    db BANK(Dialog108) | $80
-    db BANK(Dialog109) | $80
-    db BANK(Dialog10A) | $80
-    db BANK(Dialog10B) | $80
-    db BANK(Dialog10C) | $80
-    db BANK(Dialog10D) | $80
-    db BANK(Dialog10E) | $80
-    db BANK(Dialog10F) | $80
-    db BANK(Dialog110) | $80
-    db BANK(Dialog111) | $80
+    db BANK(Dialog108) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog109) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog10A) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog10B) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog10C) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog10D) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog10E) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog10F) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog110) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog111) | DIALOG_UNSKIPPABLE
     db BANK(Dialog112)
     db BANK(Dialog113)
     db BANK(Dialog114)
@@ -369,7 +375,7 @@ DialogBankTable::
     db BANK(Dialog164)
     db BANK(Dialog165)
     db BANK(Dialog166)
-    db BANK(Dialog167) | $80
+    db BANK(Dialog167) | DIALOG_UNSKIPPABLE
     db BANK(Dialog168)
     db BANK(Dialog169)
     db BANK(Dialog16A)
@@ -413,10 +419,10 @@ DialogBankTable::
 
 ; dialog_4.asm starts here
     db BANK(Dialog190)
-    db BANK(Dialog191) | $80
+    db BANK(Dialog191) | DIALOG_UNSKIPPABLE
     db BANK(Dialog192)
     db BANK(Dialog193)
-    db BANK(Dialog194) | $80
+    db BANK(Dialog194) | DIALOG_UNSKIPPABLE
     db BANK(Dialog195)
     db BANK(Dialog196)
     db BANK(Dialog197)
@@ -461,7 +467,7 @@ DialogBankTable::
     db BANK(Dialog1BE)
     db BANK(Dialog1BF)
     db BANK(Dialog1C0)
-    db BANK(Dialog1C1) | $80
+    db BANK(Dialog1C1) | DIALOG_UNSKIPPABLE
     db BANK(Dialog1C2)
     db BANK(Dialog1C3)
     db BANK(Dialog1C4)
@@ -481,11 +487,11 @@ DialogBankTable::
     db BANK(Dialog1D2)
     db BANK(Dialog1D3)
     db BANK(Dialog1D4)
-    db BANK(Dialog1D5) | $80
+    db BANK(Dialog1D5) | DIALOG_UNSKIPPABLE
     db BANK(Dialog1D6)
     db BANK(Dialog1D7)
-    db BANK(Dialog1D8) | $80
-    db BANK(Dialog1D9) | $80
+    db BANK(Dialog1D8) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog1D9) | DIALOG_UNSKIPPABLE
     db BANK(Dialog1DA)
     db BANK(Dialog1DB)
     db BANK(Dialog1DC)
@@ -503,7 +509,7 @@ DialogBankTable::
     db BANK(Dialog1E8)
     db BANK(Dialog1E9)
     db BANK(Dialog1EA)
-    db BANK(Dialog1EB) | $80
+    db BANK(Dialog1EB) | DIALOG_UNSKIPPABLE
     db BANK(Dialog1EC)
     db BANK(Dialog1ED)
     db BANK(Dialog1EE)
@@ -513,7 +519,7 @@ DialogBankTable::
     db BANK(Dialog1F2)
     db BANK(Dialog1F3)
     db BANK(Dialog1F4)
-    db BANK(Dialog1F5) | $80
+    db BANK(Dialog1F5) | DIALOG_UNSKIPPABLE
     db BANK(Dialog1F6)
     db BANK(Dialog1F7)
     db BANK(Dialog1F8)
@@ -522,8 +528,8 @@ DialogBankTable::
     db BANK(Dialog1FB)
     db BANK(Dialog1FC)
     db BANK(Dialog1FD)
-    db BANK(Dialog1FE) | $80
-    db BANK(Dialog1FF) | $80
+    db BANK(Dialog1FE) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog1FF) | DIALOG_UNSKIPPABLE
     db BANK(Dialog200)
     db BANK(Dialog201)
     db BANK(Dialog202)
@@ -540,13 +546,13 @@ DialogBankTable::
     db BANK(Dialog20D)
     db BANK(Dialog20E)
     db BANK(Dialog20F)
-    db BANK(Dialog210) | $80
-    db BANK(Dialog211) | $80
+    db BANK(Dialog210) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog211) | DIALOG_UNSKIPPABLE
     db BANK(Dialog212)
-    db BANK(Dialog213) | $80
-    db BANK(Dialog214) | $80
-    db BANK(Dialog215) | $80
-    db BANK(Dialog216) | $80
+    db BANK(Dialog213) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog214) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog215) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog216) | DIALOG_UNSKIPPABLE
     db BANK(Dialog217)
     db BANK(Dialog218)
     db BANK(Dialog219)
@@ -577,13 +583,13 @@ DialogBankTable::
     db BANK(Dialog232)
     db BANK(Dialog233)
     db BANK(Dialog234)
-    db BANK(Dialog235) | $80
-    db BANK(Dialog236) | $80
-    db BANK(Dialog237) | $80
-    db BANK(Dialog238) | $80
-    db BANK(Dialog239) | $80
-    db BANK(Dialog23A) | $80
-    db BANK(Dialog23B) | $80
+    db BANK(Dialog235) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog236) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog237) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog238) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog239) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog23A) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog23B) | DIALOG_UNSKIPPABLE
     db BANK(Dialog23C)
     db BANK(Dialog23D)
     db BANK(Dialog23E)
@@ -616,10 +622,10 @@ DialogBankTable::
     db BANK(Dialog257)
     db BANK(Dialog258)
     db BANK(Dialog259)
-    db BANK(Dialog25A) | $80
-    db BANK(Dialog25B) | $80
-    db BANK(Dialog25C) | $80
-    db BANK(Dialog25D) | $80
+    db BANK(Dialog25A) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog25B) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog25C) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog25D) | DIALOG_UNSKIPPABLE
     db BANK(Dialog25E)
     db BANK(Dialog25F)
     db BANK(Dialog260)
@@ -630,11 +636,11 @@ DialogBankTable::
     db BANK(Dialog265)
     db BANK(Dialog266)
     db BANK(Dialog267)
-    db BANK(Dialog268) | $80
+    db BANK(Dialog268) | DIALOG_UNSKIPPABLE
     db BANK(Dialog269)
     db BANK(Dialog26A)
-    db BANK(Dialog26B) | $80
-    db BANK(Dialog26C) | $80
+    db BANK(Dialog26B) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog26C) | DIALOG_UNSKIPPABLE
     db BANK(Dialog26D)
     db BANK(Dialog26E)
     db BANK(Dialog26F)
@@ -654,44 +660,44 @@ DialogBankTable::
     db BANK(Dialog27D)
     db BANK(Dialog27E)
     db BANK(Dialog27F)
-    db BANK(Dialog280) | $80
-    db BANK(Dialog281) | $80
-    db BANK(Dialog282) | $80
-    db BANK(Dialog283) | $80
-    db BANK(Dialog284) | $80
-    db BANK(Dialog285) | $80
-    db BANK(Dialog286) | $80
-    db BANK(Dialog287) | $80
-    db BANK(Dialog288) | $80
-    db BANK(Dialog289) | $80
-    db BANK(Dialog28A) | $80
-    db BANK(Dialog28B) | $80
-    db BANK(Dialog28C) | $80
-    db BANK(Dialog28D) | $80
-    db BANK(Dialog28E) | $80
-    db BANK(Dialog28F) | $80
-    db BANK(Dialog290) | $80
-    db BANK(Dialog291) | $80
-    db BANK(Dialog292) | $80
-    db BANK(Dialog293) | $80
-    db BANK(Dialog294) | $80
-    db BANK(Dialog295) | $80
+    db BANK(Dialog280) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog281) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog282) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog283) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog284) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog285) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog286) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog287) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog288) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog289) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog28A) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog28B) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog28C) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog28D) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog28E) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog28F) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog290) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog291) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog292) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog293) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog294) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog295) | DIALOG_UNSKIPPABLE
     db BANK(Dialog296)
     db BANK(Dialog297)
-    db BANK(Dialog298) | $80
-    db BANK(Dialog299) | $80
-    db BANK(Dialog29A) | $80
-    db BANK(Dialog29B) | $80
-    db BANK(Dialog29C) | $80
-    db BANK(Dialog29D) | $80
-    db BANK(Dialog29E) | $80
-    db BANK(Dialog29F) | $80
-    db BANK(Dialog2A0) | $80
-    db BANK(Dialog2A1) | $80
-    db BANK(Dialog2A2) | $80
-    db BANK(Dialog2A3) | $80
-    db BANK(Dialog2A4) | $80
-    db BANK(Dialog2A5) | $80
+    db BANK(Dialog298) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog299) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog29A) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog29B) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog29C) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog29D) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog29E) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog29F) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog2A0) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog2A1) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog2A2) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog2A3) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog2A4) | DIALOG_UNSKIPPABLE
+    db BANK(Dialog2A5) | DIALOG_UNSKIPPABLE
     db BANK(Dialog2A6)
     db BANK(Dialog2A7)
     db BANK(Dialog2A8)
@@ -701,4 +707,4 @@ DialogBankTable::
     db BANK(Dialog2AC)
     db BANK(Dialog2AD)
     db BANK(Dialog2AE)
-    db BANK(Dialog2AF) | $80
+    db BANK(Dialog2AF) | DIALOG_UNSKIPPABLE

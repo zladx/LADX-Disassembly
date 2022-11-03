@@ -121,12 +121,17 @@ CheckItemsToUse::
     ldh  a, [hPressedButtonsMask]                 ; $1221: $F0 $CB
     and  J_A                                      ; $1223: $E6 $10
     jr   z, .shieldB                              ; $1225: $28 $0E
-    ; TODO: comment here
-    ld   a, [wC1AD]                               ; $1227: $FA $AD $C1
-    cp   $01                                      ; $122A: $FE $01
+    ; check if we're near an NPC, and if so,
+    ; pressing A should initiate dialog instead
+    ; of using the shield
+    ld   a, [wItemUsageContext]                   ; $1227: $FA $AD $C1
+    cp   ITEM_USAGE_NEAR_NPC                      ; $122A: $FE $01
     jr   z, .shieldB                              ; $122C: $28 $07
-    ; TODO: comment here
-    cp   $02                                      ; $122E: $FE $02
+    ; check if we're currently reading text from
+    ; a sign/owl statue/etc, and if so, pressing
+    ; A should only advance the text instead of
+    ; using the shield
+    cp   ITEM_USAGE_READING_TEXT                  ; $122E: $FE $02
     jr   z, .shieldB                              ; $1230: $28 $03
     ; use the shield
     call SetShieldVals                            ; $1232: $CD $40 $13
@@ -143,30 +148,38 @@ CheckItemsToUse::
     ldh  a, [hPressedButtonsMask]                 ; $1242: $F0 $CB
     and  J_B                                      ; $1244: $E6 $20
     jr   z, .nextItemB                            ; $1246: $28 $03
-    ; the two checks from A does not apear here == bug?
+
+    ; possibly a minor bug here: we're not
+    ; checking if we're near an NPC or currently
+    ; reading text from a sign, so if the shield
+    ; is equipped to B, we can press and hold B
+    ; at the final text line to close a text box
+    ; and immediately raise the shield. This is
+    ; not possible if the shield is equipped to A.
+
     ; use the shield
     call SetShieldVals                            ; $1248: $CD $40 $13
 
 .nextItemB
     ldh  a, [hJoypadState]                        ; $124B: $F0 $CC
     and  J_B                                      ; $124D: $E6 $20
-    jr   z, .jr_125E                              ; $124F: $28 $0D
-    ld   a, [wC1AD]                               ; $1251: $FA $AD $C1
-    cp   $02                                      ; $1254: $FE $02
-    jr   z, .jr_125E                              ; $1256: $28 $06
+    jr   z, .nextItemA                            ; $124F: $28 $0D
+    ld   a, [wItemUsageContext]                   ; $1251: $FA $AD $C1
+    cp   ITEM_USAGE_READING_TEXT                  ; $1254: $FE $02
+    jr   z, .nextItemA                            ; $1256: $28 $06
 
     ; Use item in B slot
     ld   a, [wBButtonSlot]                        ; $1258: $FA $00 $DB
     call UseItem                                  ; $125B: $CD $9C $12
 
-.jr_125E
+.nextItemA
     ldh  a, [hJoypadState]                        ; $125E: $F0 $CC
     and  J_A                                      ; $1260: $E6 $10
     jr   z, .swordB                               ; $1262: $28 $11
-    ld   a, [wC1AD]                               ; $1264: $FA $AD $C1
-    cp   $01                                      ; $1267: $FE $01
+    ld   a, [wItemUsageContext]                   ; $1264: $FA $AD $C1
+    cp   ITEM_USAGE_NEAR_NPC                      ; $1267: $FE $01
     jr   z, .swordB                               ; $1269: $28 $0A
-    cp   $02                                      ; $126B: $FE $02
+    cp   ITEM_USAGE_READING_TEXT                  ; $126B: $FE $02
     jr   z, .swordB                               ; $126D: $28 $06
 
     ; Use item in A slot
@@ -177,11 +190,11 @@ CheckItemsToUse::
     ; skip if button is not pressed
     ldh  a, [hPressedButtonsMask]                 ; $1275: $F0 $CB
     and  J_B                                      ; $1277: $E6 $20
-    jr   z, .jr_1281                              ; $1279: $28 $06
+    jr   z, .swordA                               ; $1279: $28 $06
     ld   a, [wBButtonSlot]                        ; $127B: $FA $00 $DB
     call label_1321                               ; $127E: $CD $21 $13
 
-.jr_1281
+.swordA
     ldh  a, [hPressedButtonsMask]                 ; $1281: $F0 $CB
     and  J_A                                      ; $1283: $E6 $10
     jr   z, .jr_128D                              ; $1285: $28 $06

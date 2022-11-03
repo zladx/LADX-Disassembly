@@ -786,8 +786,9 @@ wC1AB::
 wC1AC::
   ds 1 ; C1AC
 
-; Whether the A button should do something other than using an item?
-wC1AD::
+; Whether pressing the A or B button will do something other than using the current item
+; read a sign/interact with a drawer
+wItemUsageContext::
   ds 1 ; C1AD
 
 ; Unlabeled

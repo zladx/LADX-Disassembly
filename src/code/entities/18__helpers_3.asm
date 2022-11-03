@@ -107,8 +107,8 @@ func_018_7DA0::
     jr   nz, jr_018_7DE6                          ; $7DBF: $20 $25
 
 .jr_7DC1
-    ld   hl, wC1AD                                ; $7DC1: $21 $AD $C1
-    ld   [hl], $01                                ; $7DC4: $36 $01
+    ld   hl, wItemUsageContext                    ; $7DC1: $21 $AD $C1
+    ld   [hl], ITEM_USAGE_NEAR_NPC                ; $7DC4: $36 $01
     ld   a, [wDialogState]                        ; $7DC6: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $7DC9: $21 $4F $C1
     or   [hl]                                     ; $7DCC: $B6

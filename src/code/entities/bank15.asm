@@ -645,8 +645,8 @@ ShouldLinkTalkToEntity_15::
     pop  de                                       ; $7ADF: $D1
     jr   nz, .jr_7B0B                             ; $7AE0: $20 $29
 
-    ld   hl, wC1AD                                ; $7AE2: $21 $AD $C1
-    ld   [hl], $01                                ; $7AE5: $36 $01
+    ld   hl, wItemUsageContext                    ; $7AE2: $21 $AD $C1
+    ld   [hl], ITEM_USAGE_NEAR_NPC                ; $7AE5: $36 $01
     ld   a, [wDialogState]                        ; $7AE7: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $7AEA: $21 $4F $C1
     or   [hl]                                     ; $7AED: $B6

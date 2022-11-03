@@ -1854,8 +1854,8 @@ label_1321::
     ret  nz                                       ; $1323: $C0
     ; normal attack
     ld   hl, wSwordAnimationState                 ; $1324: $21 $37 $C1
-    ld   a, [wC1AD]                               ; $1327: $FA $AD $C1
-    and  $03                                      ; $132A: $E6 $03
+    ld   a, [wItemUsageContext]                   ; $1327: $FA $AD $C1
+    and  ITEM_USAGE_NEAR_NPC | ITEM_USAGE_READING_TEXT ; $132A: $E6 $03
     or   [hl]                                     ; $132C: $B6
     ret  nz                                       ; $132D: $C0
     ; sword held
@@ -3535,9 +3535,8 @@ ENDC
     ldh  a, [hLinkDirection]                      ; $1FFF: $F0 $9E
     cp   DIRECTION_UP                             ; $2001: $FE $02
     jp   nz, .specialCasesEnd                     ; $2003: $C2 $CF $20
-    ; Set [wC1AD] = 2
-    ld   a, $02                                   ; $2006: $3E $02
-    ld   [wC1AD], a                               ; $2008: $EA $AD $C1
+    ld   a, ITEM_USAGE_READING_TEXT               ; $2006: $3E $02
+    ld   [wItemUsageContext], a                   ; $2008: $EA $AD $C1
 
     ; If A or B is pressed…
     ldh  a, [hJoypadState]                        ; $200B: $F0 $CC
@@ -3652,7 +3651,7 @@ ENDC
     ldh  a, [hLinkDirection]                      ; $20A5: $F0 $9E
     cp   DIRECTION_UP                             ; $20A7: $FE $02
     jr   nz, .specialCasesEnd                     ; $20A9: $20 $24
-    ld   [wC1AD], a                               ; $20AB: $EA $AD $C1
+    ld   [wItemUsageContext], a                   ; $20AB: $EA $AD $C1
     ldh  a, [hJoypadState]                        ; $20AE: $F0 $CC
     and  J_A | J_B                                ; $20B0: $E6 $30
     jr   z, .specialCasesEnd                      ; $20B2: $28 $1B

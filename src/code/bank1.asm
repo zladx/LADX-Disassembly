@@ -1959,7 +1959,7 @@ HideSpritesUnderDialog::
     inc  hl                                       ; $5FAD: $23
     inc  hl                                       ; $5FAE: $23
     dec  e                                        ; $5FAF: $1D
-    jr   nz, .hideSpritesLoop              ; $5FB0: $20 $D2
+    jr   nz, .hideSpritesLoop                     ; $5FB0: $20 $D2
     ret                                           ; $5FB2: $C9
 
 ; Create the entity for the NPC currently following Link (if any).

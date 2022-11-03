@@ -907,8 +907,8 @@ func_004_7C06::
     cp   e                                        ; $7C25: $BB
     jr   nz, .jr_7C49                             ; $7C26: $20 $21
 
-    ld   hl, wC1AD                                ; $7C28: $21 $AD $C1
-    ld   [hl], $01                                ; $7C2B: $36 $01
+    ld   hl, wItemUsageContext                    ; $7C28: $21 $AD $C1
+    ld   [hl], ITEM_USAGE_NEAR_NPC                ; $7C2B: $36 $01
     ld   a, [wDialogState]                        ; $7C2D: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $7C30: $21 $4F $C1
     or   [hl]                                     ; $7C33: $B6

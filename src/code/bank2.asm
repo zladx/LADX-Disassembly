@@ -254,9 +254,9 @@ LinkMotionDefault::
     ret                                           ; $4315: $C9
 
 .lowerSword
-    ; Guess: inside dialog = wC1AD ?
-    ld   a, [wC1AD]                               ; $4316: $FA $AD $C1
-    cp   $01                                      ; $4319: $FE $01
+    ; If approaching an NPC, lower sword
+    ld   a, [wItemUsageContext]                   ; $4316: $FA $AD $C1
+    cp   ITEM_USAGE_NEAR_NPC                      ; $4319: $FE $01
     jr   z, .resetSwordCharge                     ; $431B: $28 $16
     ; if sword not fully charged reset it
     ld   a, [wSwordCharge]                        ; $431D: $FA $22 $C1
@@ -646,8 +646,8 @@ ApplyLinkGroundMotion::
     and  a                                        ; $4514: $A7
     jr   nz, .jr_002_451E                         ; $4515: $20 $07
 
-    ld   a, [wC1AD]                               ; $4517: $FA $AD $C1
-    cp   $80                                      ; $451A: $FE $80
+    ld   a, [wItemUsageContext]                   ; $4517: $FA $AD $C1
+    cp   ITEM_USAGE_ON_RAFT                       ; $451A: $FE $80
     jr   nz, .jr_002_4523                         ; $451C: $20 $05
 
 .jr_002_451E
@@ -7883,8 +7883,8 @@ label_002_76C0:
     jp   label_002_7C50                           ; $76F1: $C3 $50 $7C
 
 .jr_76F4
-    ld   a, [wC1AD]                               ; $76F4: $FA $AD $C1
-    cp   $80                                      ; $76F7: $FE $80
+    ld   a, [wItemUsageContext]                   ; $76F4: $FA $AD $C1
+    cp   ITEM_USAGE_ON_RAFT                       ; $76F7: $FE $80
     jr   z, jr_002_7750                           ; $76F9: $28 $55
 
     ld   a, [wLinkMotionState]                    ; $76FB: $FA $1C $C1

@@ -1405,7 +1405,7 @@ func_004_7681::
     ld   a, $02                                   ; $7681: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7683: $E0 $A1
     ld   [wC167], a                               ; $7685: $EA $67 $C1
-    ld   a, [wC1AD]                               ; $7688: $FA $AD $C1
+    ld   a, [wItemUsageContext]                   ; $7688: $FA $AD $C1
     and  a                                        ; $768B: $A7
     ret  nz                                       ; $768C: $C0
 

@@ -215,10 +215,10 @@ jr_005_4F39:
     call RenderActiveEntitySpritesPair            ; $4F40: $CD $C0 $3B
     call func_005_54C3                            ; $4F43: $CD $C3 $54
     ld   a, [wGameplayType]                       ; $4F46: $FA $95 $DB
-    cp   $07                                      ; $4F49: $FE $07
+    cp   GAMEPLAY_WORLD_MAP                       ; $4F49: $FE $07
     ret  z                                        ; $4F4B: $C8
 
-    cp   $0B                                      ; $4F4C: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $4F4C: $FE $0B
     ret  nz                                       ; $4F4E: $C0
 
     ld   a, [wTransitionSequenceCounter]          ; $4F4F: $FA $6B $C1

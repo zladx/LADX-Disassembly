@@ -37,7 +37,7 @@ Data_015_73A7::
 UrchinEntityHandler::
     ld   de, Urchin2SpriteVariants                ; $73AB: $11 $83 $73
     ld   a, [wGameplayType]                       ; $73AE: $FA $95 $DB
-    cp   $01                                      ; $73B1: $FE $01
+    cp   GAMEPLAY_CREDITS                         ; $73B1: $FE $01
     jr   nz, .render                              ; $73B3: $20 $03
 
     ld   de, Urchin1SpriteVariants                ; $73B5: $11 $93 $73

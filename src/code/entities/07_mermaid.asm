@@ -140,7 +140,7 @@ func_007_4750::
 
 func_007_4759::
     ld   a, [wGameplayType]                       ; $4759: $FA $95 $DB
-    cp   $0B                                      ; $475C: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $475C: $FE $0B
     ret  nz                                       ; $475E: $C0
 
     ld   a, [wTransitionSequenceCounter]          ; $475F: $FA $6B $C1

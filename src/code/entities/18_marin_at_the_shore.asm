@@ -23,7 +23,7 @@ MarinAtTheShoreEntityHandler::
 
     call func_018_7D36                            ; $61B1: $CD $36 $7D
     ld   a, [wGameplayType]                       ; $61B4: $FA $95 $DB
-    cp   $0B                                      ; $61B7: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $61B7: $FE $0B
     ret  nz                                       ; $61B9: $C0
 
     ld   a, [wTransitionSequenceCounter]          ; $61BA: $FA $6B $C1

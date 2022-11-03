@@ -2313,7 +2313,7 @@ jr_020_58B3:
     jr   nz, .jr_58CB                             ; $58B7: $20 $12
 
     ld   a, [wGameplayType]                       ; $58B9: $FA $95 $DB
-    cp   $01                                      ; $58BC: $FE $01
+    cp   GAMEPLAY_CREDITS                         ; $58BC: $FE $01
     jr   z, .jr_58CB                              ; $58BE: $28 $0B
 
     ld   hl, wOverworldRoomStatus                 ; $58C0: $21 $00 $D8
@@ -4068,7 +4068,7 @@ jr_020_635E:
     ld   d, $00                                   ; $638E: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $6390: $21 $30 $C0
     ld   a, [wGameplayType]                       ; $6393: $FA $95 $DB
-    cp   $0C                                      ; $6396: $FE $0C
+    cp   GAMEPLAY_INVENTORY                       ; $6396: $FE $0C
     jr   nz, .jr_63A1                             ; $6398: $20 $07
 
     ld   a, [wGameplaySubtype]                    ; $639A: $FA $96 $DB
@@ -4421,7 +4421,7 @@ InventoryFadeOutHandler::
     ldh  [hVolumeRight], a                        ; $65F8: $E0 $A9
     ld   a, $70                                   ; $65FA: $3E $70
     ldh  [hVolumeLeft], a                         ; $65FC: $E0 $AA
-    ld   a, $0B                                   ; $65FE: $3E $0B
+    ld   a, GAMEPLAY_WORLD                        ; $65FE: $3E $0B
     ld   [wGameplayType], a                       ; $6600: $EA $95 $DB
     ldh  [hContinueMusicAfterWarp], a             ; $6603: $E0 $BC
     ld   a, $02                                   ; $6605: $3E $02

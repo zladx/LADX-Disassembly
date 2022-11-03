@@ -382,10 +382,10 @@ ReturnIfNonInteractive_04::
 
 .allowInactiveEntity
     ld   a, [wGameplayType]                       ; $7FA9: $FA $95 $DB
-    cp   $07                                      ; $7FAC: $FE $07
+    cp   GAMEPLAY_WORLD_MAP                       ; $7FAC: $FE $07
     jr   z, .skip                                 ; $7FAE: $28 $1E
 
-    cp   $0B                                      ; $7FB0: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $7FB0: $FE $0B
     jr   nz, .skip                                ; $7FB2: $20 $1A
 
     ld   a, [wTransitionSequenceCounter]          ; $7FB4: $FA $6B $C1

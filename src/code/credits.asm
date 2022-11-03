@@ -6678,7 +6678,7 @@ func_017_7D7C::
 .jr_7D8B
     ld   d, $00                                   ; $7D8B: $16 $00
     ld   a, [wGameplayType]                       ; $7D8D: $FA $95 $DB
-    cp   $01                                      ; $7D90: $FE $01
+    cp   GAMEPLAY_CREDITS                         ; $7D90: $FE $01
     jr   z, .jr_7DAC                              ; $7D92: $28 $18
 
     ld   hl, Data_017_7D7A                        ; $7D94: $21 $7A $7D
@@ -6725,7 +6725,7 @@ func_017_7DCC::
 .jr_7DD6
     ld   d, $00                                   ; $7DD6: $16 $00
     ld   a, [wGameplayType]                       ; $7DD8: $FA $95 $DB
-    cp   $01                                      ; $7DDB: $FE $01
+    cp   GAMEPLAY_CREDITS                         ; $7DDB: $FE $01
     jr   z, jr_017_7E04                           ; $7DDD: $28 $25
 
     ld   hl, Data_017_7DC8                        ; $7DDF: $21 $C8 $7D

@@ -252,7 +252,7 @@ func_036_4161::
     call func_036_4365                            ; $4161: $CD $65 $43
     ld   a, $40                                   ; $4164: $3E $40
     ldh  [hNoiseSfx], a                           ; $4166: $E0 $F4
-    ld   a, $1A                                   ; $4168: $3E $1A
+    ld   a, GAMEPLAY_PHOTO_BRIDGE                 ; $4168: $3E $1A
     ld   [wGameplayType], a                       ; $416A: $EA $95 $DB
     xor  a                                        ; $416D: $AF
     ld   [wTransitionSequenceCounter], a          ; $416E: $EA $6B $C1
@@ -274,7 +274,7 @@ label_036_4178:
     jr   nz, .jr_41A0                             ; $418D: $20 $11
 
     ld   a, [wGameplayType]                       ; $418F: $FA $95 $DB
-    cp   $0B                                      ; $4192: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $4192: $FE $0B
     jr   nz, .jr_41A0                             ; $4194: $20 $0A
 
     ld   a, [wLinkMotionState]                    ; $4196: $FA $1C $C1
@@ -604,7 +604,7 @@ func_036_43B7::
 
 func_036_43BD::
     ld   a, [wGameplayType]                       ; $43BD: $FA $95 $DB
-    cp   $06                                      ; $43C0: $FE $06
+    cp   GAMEPLAY_FILE_SAVE                       ; $43C0: $FE $06
     ret  z                                        ; $43C2: $C8
 
     call func_036_6A98                            ; $43C3: $CD $98 $6A
@@ -1280,7 +1280,7 @@ label_036_4791:
     call RenderActiveEntitySpritesPair            ; $4799: $CD $C0 $3B
     call ReturnIfNonInteractive_36                ; $479C: $CD $40 $6A
     ld   a, [wGameplayType]                       ; $479F: $FA $95 $DB
-    cp   $0B                                      ; $47A2: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $47A2: $FE $0B
     ret  nz                                       ; $47A4: $C0
 
     ldh  a, [hActiveEntityState]                  ; $47A5: $F0 $F0
@@ -1421,7 +1421,7 @@ func_036_4830::
 func_036_4866::
     ld   a, $40                                   ; $4866: $3E $40
     ldh  [hNoiseSfx], a                           ; $4868: $E0 $F4
-    ld   a, $13                                   ; $486A: $3E $13
+    ld   a, GAMEPLAY_PHOTO_ULRIRA                 ; $486A: $3E $13
     ld   [wGameplayType], a                       ; $486C: $EA $95 $DB
     xor  a                                        ; $486F: $AF
     ld   [wTransitionSequenceCounter], a          ; $4870: $EA $6B $C1
@@ -2058,7 +2058,7 @@ func_036_4BCF::
 
     ld   a, $40                                   ; $4BD4: $3E $40
     ldh  [hNoiseSfx], a                           ; $4BD6: $E0 $F4
-    ld   a, $17                                   ; $4BD8: $3E $17
+    ld   a, GAMEPLAY_PHOTO_ZORA                   ; $4BD8: $3E $17
     ld   [wGameplayType], a                       ; $4BDA: $EA $95 $DB
     xor  a                                        ; $4BDD: $AF
     ld   [wGameplaySubtype], a                    ; $4BDE: $EA $96 $DB
@@ -4220,7 +4220,7 @@ ColorGuardianRedEntityHandler::
     add  hl, bc                                   ; $596D: $09
     ld   [hl], a                                  ; $596E: $77
     ld   a, [wGameplayType]                       ; $596F: $FA $95 $DB
-    cp   $0B                                      ; $5972: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $5972: $FE $0B
     ret  nz                                       ; $5974: $C0
 
     ld   a, [wDialogState]                        ; $5975: $FA $9F $C1
@@ -4380,7 +4380,7 @@ func_036_5A40::
 
 .jr_5A57
     ld   a, [wGameplayType]                       ; $5A57: $FA $95 $DB
-    cp   $0B                                      ; $5A5A: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $5A5A: $FE $0B
     jr   nz, jr_036_5A6A                          ; $5A5C: $20 $0C
 
     xor  a                                        ; $5A5E: $AF
@@ -7953,7 +7953,7 @@ PiranhaPlantEntityHandler::
     ld   [hl], b                                  ; $6EDE: $70
     call func_036_7022                            ; $6EDF: $CD $22 $70
     ld   a, [wGameplayType]                       ; $6EE2: $FA $95 $DB
-    cp   $0B                                      ; $6EE5: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $6EE5: $FE $0B
     ret  nz                                       ; $6EE7: $C0
 
     ld   a, [wTransitionSequenceCounter]          ; $6EE8: $FA $6B $C1

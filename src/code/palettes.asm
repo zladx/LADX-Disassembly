@@ -438,7 +438,7 @@ label_021_425E:
     ld   de, wBGPal1                              ; $4275: $11 $10 $DC
     ld   bc, $40                                  ; $4278: $01 $40 $00
     ld   a, [wGameplayType]                       ; $427B: $FA $95 $DB
-    cp   $01                                      ; $427E: $FE $01
+    cp   GAMEPLAY_CREDITS                         ; $427E: $FE $01
     jr   z, jr_021_429D                           ; $4280: $28 $1B
 
     ld   a, [wPaletteToLoadForTileMap]            ; $4282: $FA $D2 $DD

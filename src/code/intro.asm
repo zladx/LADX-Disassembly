@@ -55,6 +55,11 @@ IntroHandlerEntryPoint::
 .paletteEnd
 
     ld   [wD013], a                               ; $6E62: $EA $13 $D0
+    ; Set the wGameplaySubtype to $0D, which is
+    ; a value that's never checked by itself, but
+    ; perhaps dispatched to and/or used to count
+    ; down in a transition to $0B which is
+    ; GAMEPLAY_INTRO_TITLE ?
     ld   a, $0D                                   ; $6E65: $3E $0D
     ld   [wGameplaySubtype], a                    ; $6E67: $EA $96 $DB
     xor  a                                        ; $6E6A: $AF
@@ -275,7 +280,7 @@ IntroShipOnSeaHandler::
     ld   [wEntitiesStatusTable+1], a              ; $6FE0: $EA $81 $C2
     ld   [wEntitiesStatusTable+2], a              ; $6FE3: $EA $82 $C2
     ld   [wEntitiesStateTable], a                 ; $6FE6: $EA $90 $C2
-    ld   a, $05                                   ; $6FE9: $3E $05
+    ld   a, GAMEPLAY_INTRO_LIGHTNING              ; $6FE9: $3E $05
     ld   [wGameplaySubtype], a                    ; $6FEB: $EA $96 $DB
     ld   [wD00F], a                               ; $6FEE: $EA $0F $D0
     call func_001_7D4E                            ; $6FF1: $CD $4E $7D
@@ -521,7 +526,7 @@ IntroStage6Handler::
     dec  a                                        ; $7168: $3D
     ld   [wIntroTimer], a                         ; $7169: $EA $01 $D0
     jr   nz, .jr_001_7188                         ; $716C: $20 $1A
-    ld   a, $07                                   ; $716E: $3E $07
+    ld   a, GAMEPLAY_INTRO_BEACH                  ; $716E: $3E $07
     ld   [wGameplaySubtype], a                    ; $7170: $EA $96 $DB
     ld   a, $06                                   ; $7173: $3E $06
     ld   [wEntitiesStatusTable], a                ; $7175: $EA $80 $C2
@@ -912,7 +917,7 @@ IntroStageCHandler::
 IntroStageDHandler::
     ld   a, $11                                   ; $7448: $3E $11
     ld   [wTilesetToLoad], a                      ; $744A: $EA $FE $D6
-    ld   a, $0B                                   ; $744D: $3E $0B
+    ld   a, GAMEPLAY_INTRO_TITLE                  ; $744D: $3E $0B
     ld   [wGameplaySubtype], a                    ; $744F: $EA $96 $DB
     ld   a, $C9                                   ; $7452: $3E $C9
     ld   [wBGPalette], a                          ; $7454: $EA $97 $DB

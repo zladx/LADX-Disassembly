@@ -30,7 +30,7 @@ label_015_45CB:
     call func_015_7964_trampoline                 ; $45DD: $CD $A0 $3D
     call ReturnIfNonInteractive_15                ; $45E0: $CD $0D $7B
     ld   a, [wGameplayType]                       ; $45E3: $FA $95 $DB
-    cp   $01                                      ; $45E6: $FE $01
+    cp   GAMEPLAY_CREDITS                         ; $45E6: $FE $01
     ret  z                                        ; $45E8: $C8
 
     ldh  a, [hActiveEntityState]                  ; $45E9: $F0 $F0
@@ -148,7 +148,7 @@ func_015_4660::
 
     xor  a                                        ; $4692: $AF
     ld   [wGameplaySubtype], a                    ; $4693: $EA $96 $DB
-    ld   a, $01                                   ; $4696: $3E $01
+    ld   a, GAMEPLAY_CREDITS                      ; $4696: $3E $01
     ld   [wGameplayType], a                       ; $4698: $EA $95 $DB
     ret                                           ; $469B: $C9
 

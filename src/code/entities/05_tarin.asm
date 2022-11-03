@@ -76,6 +76,7 @@ TarinEntityHandler::
     cp   $01                                      ; $496D: $FE $01
     jr   nz, jr_005_4995                          ; $496F: $20 $24
 
+    ; Handle Tarin's appearance in the credits
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4971: $21 $40 $C3
     add  hl, bc                                   ; $4974: $09
     ld   [hl], $C4                                ; $4975: $36 $C4
@@ -103,8 +104,9 @@ TarinEntityHandler::
 jr_005_4995:
     ld   a, [wIsIndoor]                           ; $4995: $FA $A5 $DB
     and  a                                        ; $4998: $A7
-    jp   nz, label_005_4BC1                       ; $4999: $C2 $C1 $4B
+    jp   nz, TarinIndoorsHandler                  ; $4999: $C2 $C1 $4B
 
+    ; Handle Tarin's outdoor appearances
     ldh  a, [hRoomStatus]                         ; $499C: $F0 $F8
     and  ROOM_STATUS_EVENT_1                      ; $499E: $E6 $10
     jp   nz, ClearEntityStatus_05                 ; $49A0: $C2 $4B $7B
@@ -125,7 +127,7 @@ jr_005_4995:
     jr   nc, .jr_49CC                             ; $49B7: $30 $13
 
     ld   a, $01                                   ; $49B9: $3E $01
-    ld   [wC10C], a                               ; $49BB: $EA $0C $C1
+    ld   [wShouldGetLostInMysteriousWoods], a     ; $49BB: $EA $0C $C1
     ldh  a, [hFrameCounter]                       ; $49BE: $F0 $E7
     rra                                           ; $49C0: $1F
     rra                                           ; $49C1: $1F
@@ -487,7 +489,7 @@ func_005_4B89::
 Data_005_4BBF::
     db   $78, $00
 
-label_005_4BC1:
+TarinIndoorsHandler:
     ld   hl, wEntitiesPrivateState2Table          ; $4BC1: $21 $C0 $C2
     add  hl, bc                                   ; $4BC4: $09
     ld   a, [hl]                                  ; $4BC5: $7E

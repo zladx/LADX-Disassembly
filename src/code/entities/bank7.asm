@@ -146,7 +146,7 @@ jr_007_7D4E:
     or   [hl]                                     ; $7D7A: $B6
     ld   hl, wIsLinkInTheAir                      ; $7D7B: $21 $46 $C1
     or   [hl]                                     ; $7D7E: $B6
-    ld   hl, wC134                                ; $7D7F: $21 $34 $C1
+    ld   hl, wDialogCooldown                      ; $7D7F: $21 $34 $C1
     or   [hl]                                     ; $7D82: $B6
     jr   nz, jr_007_7D94                          ; $7D83: $20 $0F
 

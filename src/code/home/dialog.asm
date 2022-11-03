@@ -122,8 +122,8 @@ DialogOpenAnimationHandler::
 DialogClosingEndHandler::
     xor  a                                        ; $23B1: $AF
     ld   [wDialogState], a                        ; $23B2: $EA $9F $C1
-    ld   a, $18                                   ; $23B5: $3E $18
-    ld   [wC134], a                               ; $23B7: $EA $34 $C1
+    ld   a, DIALOG_COOLDOWN                       ; $23B5: $3E $18
+    ld   [wDialogCooldown], a                     ; $23B7: $EA $34 $C1
     ldh  a, [hIsGBC]                              ; $23BA: $F0 $FE
     and  a                                        ; $23BC: $A7
     ret  z                                        ; $23BD: $C8

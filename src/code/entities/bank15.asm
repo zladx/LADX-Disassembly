@@ -652,9 +652,9 @@ ShouldLinkTalkToEntity_15::
     or   [hl]                                     ; $7AED: $B6
     ld   hl, wIsLinkInTheAir                      ; $7AEE: $21 $46 $C1
     or   [hl]                                     ; $7AF1: $B6
-    ld   hl, wC134                                ; $7AF2: $21 $34 $C1
+    ld   hl, wDialogCooldown                      ; $7AF2: $21 $34 $C1
     or   [hl]                                     ; $7AF5: $B6
-    ld   hl, wDE05                                ; $7AF6: $21 $05 $DE
+    ld   hl, wPhotoAlbumCooldown                  ; $7AF6: $21 $05 $DE
     or   [hl]                                     ; $7AF9: $B6
     jr   nz, .jr_7B0B                             ; $7AFA: $20 $0F
 

@@ -269,7 +269,7 @@ func_004_7C4B:: ; called only from fishing minigame
     or   [hl]                                     ; $7C51: $B6
     ld   hl, wIsLinkInTheAir                      ; $7C52: $21 $46 $C1
     or   [hl]                                     ; $7C55: $B6
-    ld   hl, wC134                                ; $7C56: $21 $34 $C1
+    ld   hl, wDialogCooldown                      ; $7C56: $21 $34 $C1
     or   [hl]                                     ; $7C59: $B6
     jr   nz, .jr_7C92                             ; $7C5A: $20 $36
 

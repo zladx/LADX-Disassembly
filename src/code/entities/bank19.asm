@@ -684,7 +684,7 @@ func_019_7D16::
     or   [hl]                                     ; $7D21: $B6
     ld   hl, wIsLinkInTheAir                      ; $7D22: $21 $46 $C1
     or   [hl]                                     ; $7D25: $B6
-    ld   hl, wC134                                ; $7D26: $21 $34 $C1
+    ld   hl, wDialogCooldown                      ; $7D26: $21 $34 $C1
     or   [hl]                                     ; $7D29: $B6
     jr   nz, jr_019_7D3B                          ; $7D2A: $20 $0F
 

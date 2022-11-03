@@ -912,7 +912,7 @@ func_004_7C06::
     ld   a, [wDialogState]                        ; $7C2D: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $7C30: $21 $4F $C1
     or   [hl]                                     ; $7C33: $B6
-    ld   hl, wC134                                ; $7C34: $21 $34 $C1
+    ld   hl, wDialogCooldown                      ; $7C34: $21 $34 $C1
     or   [hl]                                     ; $7C37: $B6
     jr   nz, .jr_7C49                             ; $7C38: $20 $0F
 

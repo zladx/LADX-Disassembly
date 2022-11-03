@@ -144,7 +144,7 @@ func_006_645D::
     or   [hl]                                     ; $64AA: $B6
     ld   hl, wIsLinkInTheAir                      ; $64AB: $21 $46 $C1
     or   [hl]                                     ; $64AE: $B6
-    ld   hl, wC134                                ; $64AF: $21 $34 $C1
+    ld   hl, wDialogCooldown                      ; $64AF: $21 $34 $C1
     or   [hl]                                     ; $64B2: $B6
     jr   nz, .return                              ; $64B3: $20 $0F
 

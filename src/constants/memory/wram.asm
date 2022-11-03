@@ -283,8 +283,8 @@ wC130::
 wCollisionType::
   ds 1 ; C133
 
-; Unlabeled
-wC134:
+; When this counter is non-zero, NPCs won't talk to you
+wDialogCooldown:
   ds 1 ; C134
 
 ; Unlabeled
@@ -540,6 +540,7 @@ wC16D:
   ds 1 ; C16D
 
 ; Unlabeled
+; Is set to a non-zero value when the sword is swung or held out
 wC16E:
   ds 1 ; C16E
 
@@ -2791,7 +2792,7 @@ wD478::
 wDebugWarpIndex::
   ds 1 ; D479
 
-; Power-ups are disabled after 3 hits are taken from ennemies
+; Power-ups are disabled after 3 hits are taken from enemies
 wPowerUpHits::
   ds 1 ; D47A
 
@@ -2801,7 +2802,7 @@ wForceFileSelectionScreenMusic::
 
 ; 0 = No power-up
 ; 1 = Piece of Power
-; 2 = Guardian Accorn
+; 2 = Guardian Acorn
 wActivePowerUp::
   ds 1 ; D47C
 
@@ -3747,9 +3748,10 @@ wFarcallAdressLow::
 wFarcallReturnBank::
   ds 1 ; DE04
 
-; Some sort of counter. 
-; start at 0x18 and counts down to 0
-wDE05:
+; Counter that blocks opening the photo album again too quickly after
+; closing it.
+; Starts at PHOTO_ALBUM_COOLDOWN ($18 by default) and counts down to 0
+wPhotoAlbumCooldown:
   ds 1 ; DE05
 
 ; Some sort of counter.

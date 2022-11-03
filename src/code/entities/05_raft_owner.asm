@@ -376,7 +376,7 @@ ShouldLinkTalkToEntity_05::
     or   [hl]                                     ; $554F: $B6
     ld   hl, wIsLinkInTheAir                      ; $5550: $21 $46 $C1
     or   [hl]                                     ; $5553: $B6
-    ld   hl, wC134                                ; $5554: $21 $34 $C1
+    ld   hl, wDialogCooldown                      ; $5554: $21 $34 $C1
     or   [hl]                                     ; $5557: $B6
     jr   nz, .dontTalk                            ; $5558: $20 $0F
 

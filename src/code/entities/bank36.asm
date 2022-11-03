@@ -7263,7 +7263,7 @@ func_036_6A98::
     or   [hl]                                     ; $6AD0: $B6
     ld   hl, wIsLinkInTheAir                      ; $6AD1: $21 $46 $C1
     or   [hl]                                     ; $6AD4: $B6
-    ld   hl, wC134                                ; $6AD5: $21 $34 $C1
+    ld   hl, wDialogCooldown                      ; $6AD5: $21 $34 $C1
     or   [hl]                                     ; $6AD8: $B6
     jr   nz, jr_036_6AEA                          ; $6AD9: $20 $0F
 

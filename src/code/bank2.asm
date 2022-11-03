@@ -3227,20 +3227,20 @@ label_002_5487:
     xor  a                                        ; $5487: $AF
     ld   [wIndoorARoomStatus], a                  ; $5488: $EA $00 $D9
     ld   [wIndoorBRoomStatus], a                  ; $548B: $EA $00 $DA
-    ld   a, [wC134]                               ; $548E: $FA $34 $C1
+    ld   a, [wDialogCooldown]                     ; $548E: $FA $34 $C1
     and  a                                        ; $5491: $A7
-    jr   z, .jr_5498                              ; $5492: $28 $04
+    jr   z, .decrementPhotoAlbumCooldown          ; $5492: $28 $04
 
     dec  a                                        ; $5494: $3D
-    ld   [wC134], a                               ; $5495: $EA $34 $C1
+    ld   [wDialogCooldown], a                     ; $5495: $EA $34 $C1
 
-.jr_5498
-    ld   a, [wDE05]                               ; $5498: $FA $05 $DE
+.decrementPhotoAlbumCooldown
+    ld   a, [wPhotoAlbumCooldown]                 ; $5498: $FA $05 $DE
     and  a                                        ; $549B: $A7
     jr   z, .jr_54A2                              ; $549C: $28 $04
 
     dec  a                                        ; $549E: $3D
-    ld   [wDE05], a                               ; $549F: $EA $05 $DE
+    ld   [wPhotoAlbumCooldown], a                 ; $549F: $EA $05 $DE
 
 .jr_54A2
     ldh  a, [hPressedButtonsMask]                 ; $54A2: $F0 $CB

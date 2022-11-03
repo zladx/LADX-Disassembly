@@ -120,6 +120,12 @@ DIALOG_GOT_MAGIC_POWDER   equ $03
 DIALOG_GOT_ROD            equ $04
 DIALOG_GOT_GUARDIAN_ACORN equ $05
 
+; Cooldown time for dialog boxes
+DIALOG_COOLDOWN              equ $18
+
+; Cooldown time after closing photo album
+PHOTO_ALBUM_COOLDOWN         equ $18
+
 ; Values for wLinkMotionState
 ; Only the first two values are interactive
 LINK_MOTION_DEFAULT              equ $00 ; ground, flying with rooster, etc

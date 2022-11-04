@@ -82,8 +82,8 @@ wC10A:
 wMusicTrackTiming:
   ds 1 ; C10B
 
-; Unlabeled
-wC10C:
+; Checks whether Link should get lost in the Mysterious Forest/Woods
+wShouldGetLostInMysteriousWoods:
   ds 1 ; C10C
 
 ; Index of the higher sprite slot that needs changing during a room transition.

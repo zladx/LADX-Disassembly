@@ -391,8 +391,8 @@ RoomTransitionPrepareHandler::
     ; Overworld
     ;
 
-    ; If C10C != 0…
-    ld   a, [wC10C]                               ; $7A6D: $FA $0C $C1
+    ; If wShouldGetLostInMysteriousWoods != 0…
+    ld   a, [wShouldGetLostInMysteriousWoods]     ; $7A6D: $FA $0C $C1
     and  a                                        ; $7A70: $A7
     jr   z, .mysteriousWoodsEnd                   ; $7A71: $28 $11
 

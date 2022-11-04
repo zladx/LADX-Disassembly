@@ -492,7 +492,7 @@ label_005_7E9D:
     ldh  [hNoiseSfx], a                           ; $7E9F: $E0 $F4
     ldh  a, [hActiveEntityType]                   ; $7EA1: $F0 $EB
     cp   ENTITY_EVIL_EAGLE                        ; $7EA3: $FE $63
-    jp   z, label_005_758C                        ; $7EA5: $CA $8C $75
+    jp   z, DropHeartContainer_05.evilEagle       ; $7EA5: $CA $8C $75
 
     call DidKillEnemy                             ; $7EA8: $CD $50 $3F
     ld   e, $0F                                   ; $7EAB: $1E $0F

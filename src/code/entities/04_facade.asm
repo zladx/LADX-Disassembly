@@ -109,7 +109,7 @@ func_004_50E1::
 
 func_004_50E9::
     call GetEntityTransitionCountdown             ; $50E9: $CD $05 $0C
-    jp   z, DropHeartContainer                    ; $50EC: $CA $51 $57
+    jp   z, DropHeartContainer_04                 ; $50EC: $CA $51 $57
 
 label_004_50EF:
     and  $07                                      ; $50EF: $E6 $07

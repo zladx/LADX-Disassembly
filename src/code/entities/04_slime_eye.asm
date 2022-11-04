@@ -545,7 +545,7 @@ jr_004_4E2E:
     cp   $FF                                      ; $4E45: $FE $FF
     jr   nz, jr_004_4E2E                          ; $4E47: $20 $E5
 
-    jp   DropHeartContainer                       ; $4E49: $C3 $51 $57
+    jp   DropHeartContainer_04                    ; $4E49: $C3 $51 $57
 
 jr_004_4E4C:
     jp   ClearEntityStatusBank04                  ; $4E4C: $C3 $7A $6D

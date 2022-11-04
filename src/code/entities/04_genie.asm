@@ -482,7 +482,7 @@ GenieKilledHandler1::
 
 GenieKilledHandler2::
     call GetEntityTransitionCountdown             ; $4311: $CD $05 $0C
-    jp   z, DropHeartContainer                    ; $4314: $CA $51 $57
+    jp   z, DropHeartContainer_04                 ; $4314: $CA $51 $57
 
     jp   label_004_50EF                           ; $4317: $C3 $EF $50
 

@@ -62,7 +62,7 @@ func_005_634D::
     jp   label_005_7550                           ; $635B: $C3 $50 $75
 
 label_005_635E:
-    call func_005_7585                            ; $635E: $CD $85 $75
+    call DropHeartContainer_05                    ; $635E: $CD $85 $75
     ld   hl, wEntitiesPosXTable                   ; $6361: $21 $00 $C2
     add  hl, de                                   ; $6364: $19
     ldh  a, [hLinkPositionX]                      ; $6365: $F0 $98

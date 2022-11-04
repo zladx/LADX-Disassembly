@@ -48,7 +48,7 @@ func_005_55AB::
     jp   label_005_7550                           ; $55B9: $C3 $50 $75
 
 label_005_55BC:
-    call func_005_7585                            ; $55BC: $CD $85 $75
+    call DropHeartContainer_05                    ; $55BC: $CD $85 $75
     ld   hl, wEntitiesPrivateCountdown3Table      ; $55BF: $21 $80 $C4
     add  hl, de                                   ; $55C2: $19
     ld   [hl], $08                                ; $55C3: $36 $08

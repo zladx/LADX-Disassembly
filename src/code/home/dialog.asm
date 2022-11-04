@@ -338,7 +338,7 @@ DialogLetterAnimationStartHandler::
     jp   IncrementDialogStateAndReturn            ; $24CA: $C3 $85 $24
 
 DialogLetterAnimationEndHandler::
-    ld   a, $1C                                   ; $24CD: $3E $1C
+    ld   a, BANK(DialogPointerTable)              ; $24CD: $3E $1C
     ld   [MBC3SelectBank], a                      ; $24CF: $EA $00 $21
     ld   a, [wDialogState]                        ; $24D2: $FA $9F $C1
     ld   c, a                                     ; $24D5: $4F
@@ -639,8 +639,7 @@ ENDC
     adc  a, $00                                   ; $266E: $CE $00
     ld   [wDialogCharacterIndexHi], a             ; $2670: $EA $64 $C1
     xor  a                                        ; $2673: $AF
-    ; wC1CC = 01 when an unfinished textbox is waiting for a button press to continue.
-    ld   [wC1CC], a                               ; $2674: $EA $CC $C1
+    ld   [wDialogIsWaitingForButtonPress], a      ; $2674: $EA $CC $C1
     ld   a, [wDialogNextCharPosition]             ; $2677: $FA $71 $C1
     cp   $1F                                      ; $267A: $FE $1F
     jr   z, label_268E                            ; $267C: $28 $10
@@ -672,41 +671,42 @@ DialogBreakHandler::
     jp   z, DialogDrawNextCharacterHandler.label_25AD ; $26A1: $CA $AD $25
     cp   $FE                                      ; $26A4: $FE $FE
     jp   z, DialogDrawNextCharacterHandler.choice ; $26A6: $CA $95 $25
-    ; wC1CC = 01 when an unfinished textbox is waiting for a button press to continue.
-    ld   a, [wC1CC]                               ; $26A9: $FA $CC $C1
+    ld   a, [wDialogIsWaitingForButtonPress]      ; $26A9: $FA $CC $C1
     and  a                                        ; $26AC: $A7
-    jr   nz, .jp_26B6                             ; $26AD: $20 $07
+    jr   nz, .dialogButtonPressHandler            ; $26AD: $20 $07
     inc  a                                        ; $26AF: $3C
-    ; wC1CC = 01 when an unfinished textbox is waiting for a button press to continue.
-    ld   [wC1CC], a                               ; $26B0: $EA $CC $C1
+    ld   [wDialogIsWaitingForButtonPress], a      ; $26B0: $EA $CC $C1
     call DialogDrawNextCharacterHandler.endDialog ; $26B3: $CD $9F $25
 
-.jp_26B6
+.dialogButtonPressHandler
     call func_27BB                                ; $26B6: $CD $BB $27
-    ; If
     ldh  a, [hJoypadState]                        ; $26B9: $F0 $CC
     bit  J_BIT_A, a                               ; $26BB: $CB $67
     jr   nz, .jp_26E1                             ; $26BD: $20 $22
     bit  J_BIT_B, a                               ; $26BF: $CB $6F
     jr   z, DialogScrollingStartHandler           ; $26C1: $28 $51
+    ; The following code looks up whether the
+    ; current dialog can be skipped with the B
+    ; button, but this information is only used
+    ; if __SKIP_DIALOG_SUPPORT__ is set.
     ld   a, BANK(DialogBankTable)                 ; $26C3: $3E $1C
     ld   [MBC3SelectBank], a                      ; $26C5: $EA $00 $21
     ld   a, [wGameplayType]                       ; $26C8: $FA $95 $DB
     cp   GAMEPLAY_WORLD_MAP                       ; $26CB: $FE $07
-    jp   z, label_278B                            ; $26CD: $CA $8B $27
+    jp   z, SkipDialog                            ; $26CD: $CA $8B $27
     ld   a, [wDialogIndex]                        ; $26D0: $FA $73 $C1
     ld   e, a                                     ; $26D3: $5F
     ld   a, [wDialogIndexHi]                      ; $26D4: $FA $12 $C1
     ld   d, a                                     ; $26D7: $57
     ld   hl, DialogBankTable                      ; $26D8: $21 $41 $47
     add  hl, de                                   ; $26DB: $19
-IF __PATCH_1__
+IF __SKIP_DIALOG_SUPPORT__
     bit  7, [hl]
 ELSE
     ld   a, [hl]                                  ; $26DC: $7E
     and  a                                        ; $26DD: $A7
 ENDC
-    jp   z, label_278B                            ; $26DE: $CA $8B $27
+    jp   z, SkipDialog                            ; $26DE: $CA $8B $27
 
 .jp_26E1
     ; Build a draw command for the dialog background
@@ -840,7 +840,7 @@ label_2777::
     call label_2731                               ; $2785: $CD $31 $27
     jp   label_267E                               ; $2788: $C3 $7E $26
 
-label_278B::
+SkipDialog::
     ld   a, $02                                   ; $278B: $3E $02
     ld   [wDialogAskSelectionIndex], a            ; $278D: $EA $77 $C1
     jp   UpdateDialogState                        ; $2790: $C3 $96 $24

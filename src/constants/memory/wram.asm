@@ -578,6 +578,7 @@ wC176:
   ds 1 ; C176
 
 ; 0 or 1 depending on the first or second option is selected in a ask dialog
+; 2 if a (non-ask) dialog is skipped with the B button
 wDialogAskSelectionIndex:
   ds 1 ; C177
 
@@ -917,8 +918,8 @@ wC1CA::
 wSwitchButtonPressed::
   ds 1 ; C1CB
 
-; Unlabeled
-wC1CC::
+; Whether a dialog box is waiting for a button press to continue.
+wDialogIsWaitingForButtonPress::
   ds 1 ; C1CC
 
 ; Unlabeled

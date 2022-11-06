@@ -505,44 +505,57 @@ CheckKillInOrderTrigger::
 
 ; Check for both TRIGGER_KILL_ALL_ENEMIES and TRIGGER_KILL_SPECIALS
 CheckKillEnemiesTrigger::
-    ld   c, $0F                                   ; $5FFC: $0E $0F
+    ld   c, MAX_ENTITIES - 1                      ; $5FFC: $0E $0F
     ld   b, $00                                   ; $5FFE: $06 $00
 
-jr_002_6000:
+    ; Enumerate all entities, from $0F to 0
+.loopOverEntities
     ld   hl, wEntitiesStatusTable                 ; $6000: $21 $80 $C2
     add  hl, bc                                   ; $6003: $09
     ld   a, [hl]                                  ; $6004: $7E
-    and  a                                        ; $6005: $A7
-    jr   z, .jr_6011                              ; $6006: $28 $09
 
+    ; If the entity is none or disabled, continue with the next entity
+    and  a                                        ; $6005: $A7
+    jr   z, .continue                             ; $6006: $28 $09
+
+    ; If the entity is active, and not excluded from the "Kill all" trigger,
+    ; then the trigger is not resolved: return immediately.
     ld   hl, wEntitiesOptions1Table               ; $6008: $21 $30 $C4
     add  hl, bc                                   ; $600B: $09
     ld   a, [hl]                                  ; $600C: $7E
     and  ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL       ; $600D: $E6 $02
-    jr   z, ret_002_602C                          ; $600F: $28 $1B
+    jr   z, .return                               ; $600F: $28 $1B
 
-.jr_6011
+    ; Loop until all entities are enumerated
+.continue
     dec  c                                        ; $6011: $0D
     ld   a, c                                     ; $6012: $79
-    cp   $FF                                      ; $6013: $FE $FF
-    jr   nz, jr_002_6000                          ; $6015: $20 $E9
+    cp   -1                                       ; $6013: $FE $FF
+    jr   nz, .loopOverEntities                    ; $6015: $20 $E9
 
+    ; We enumerated all entities, and all of them are either disabled
+    ; or excluded from the "Kill all" trigger: the trigger might be
+    ; resolved.
+
+    ; If the trigger is not TRIGGER_KILL_SPECIALS, then the trigger is resolved.
     ldh  a, [hMultiPurpose0]                      ; $6017: $F0 $D7
-    cp   $08                                      ; $6019: $FE $08
-    jr   nz, .jr_6029                             ; $601B: $20 $0C
+    cp   TRIGGER_KILL_SPECIALS                    ; $6019: $FE $08
+    jr   nz, .triggerSatisfied                    ; $601B: $20 $0C
 
+    ; If wD460 == 0, don't mark the trigger as resolved.
     ld   a, [wD460]                               ; $601D: $FA $60 $D4
     and  a                                        ; $6020: $A7
-    jr   z, ret_002_602C                          ; $6021: $28 $09
+    jr   z, .return                               ; $6021: $28 $09
 
+    ; If the trigger was already resolved, don't mark it as resolved again.
     ld   a, [wEnemyWasKilled]                     ; $6023: $FA $13 $C1
     and  a                                        ; $6026: $A7
-    jr   nz, ret_002_602C                         ; $6027: $20 $03
+    jr   nz, .return                              ; $6027: $20 $03
 
-.jr_6029
+.triggerSatisfied
     jp   MarkTriggerAsResolved                    ; $6029: $C3 $60 $0C
 
-ret_002_602C:
+.return
     ret                                           ; $602C: $C9
 
 CheckAnswerTunicsTrigger::

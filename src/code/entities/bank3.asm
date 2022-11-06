@@ -1015,13 +1015,12 @@ EntityFallHandler::
     ld   hl, wEntitiesOptions1Table               ; $4CE1: $21 $30 $C4
     add  hl, bc                                   ; $4CE4: $09
     ld   a, [hl]                                  ; $4CE5: $7E
-    and  $02                                      ; $4CE6: $E6 $02
+    and  ENTITY_OPT1_EXCLUDED_FROM_KILL_ALL       ; $4CE6: $E6 $02
     jr   nz, .jr_4CEF                             ; $4CE8: $20 $05
-
     ld   hl, wD460                                ; $4CEA: $21 $60 $D4
     ld   [hl], $01                                ; $4CED: $36 $01
-
 .jr_4CEF
+
     ldh  a, [hActiveEntityType]                   ; $4CEF: $F0 $EB
     cp   ENTITY_WRECKING_BALL                     ; $4CF1: $FE $A8
     jr   nz, .jr_4D04                             ; $4CF3: $20 $0F

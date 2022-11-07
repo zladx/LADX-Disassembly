@@ -313,7 +313,7 @@ EntityInitSideViewPlatformVertical::
     inc  [hl]                                     ; $4951: $34
     ret                                           ; $4952: $C9
 
-EntityInitGel::
+EntityInitZol::
     ld   hl, wEntitiesHealthTable                 ; $4953: $21 $60 $C3
     add  hl, bc                                   ; $4956: $09
     ld   [hl], $02                                ; $4957: $36 $02
@@ -6017,18 +6017,18 @@ ApplyLinkCollisionWithEnemy::
 .goombaEnd
 
     ;
-    ; Special case when Link collisions with a Mini-Gel
+    ; Special case when Link collides with a Gel
 
     ldh  a, [hActiveEntityType]                   ; $6D3D: $F0 $EB
-    cp   ENTITY_MINI_GEL                          ; $6D3F: $FE $1C
-    jr   nz, .miniGelEnd                          ; $6D41: $20 $0B
+    cp   ENTITY_GEL                               ; $6D3F: $FE $1C
+    jr   nz, .gelEnd                              ; $6D41: $20 $0B
 
     call GetEntityTransitionCountdown             ; $6D43: $CD $05 $0C
     ld   [hl], $80                                ; $6D46: $36 $80
     call IncrementEntityState                     ; $6D48: $CD $12 $3B
     ld   [hl], $04                                ; $6D4B: $36 $04
     ret                                           ; $6D4D: $C9
-.miniGelEnd
+.gelEnd
 
     cp   ENTITY_CUE_BALL                          ; $6D4E: $FE $8E
     jr   z, .jr_6D5D                              ; $6D50: $28 $0B

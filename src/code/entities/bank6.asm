@@ -559,7 +559,7 @@ include "code/entities/06_anti_fairy.asm"
 include "code/entities/06_tektite.asm"
 include "code/entities/06_boo_buddy.asm"
 include "code/entities/06_floating_item.asm"
-include "code/entities/06_gel.asm"
+include "code/entities/06_zol.asm"
 include "code/entities/06_like_like.asm"
 include "code/entities/06_gibdo.asm"
 

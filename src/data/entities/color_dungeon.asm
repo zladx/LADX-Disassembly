@@ -20,21 +20,21 @@ ColorDungeon04Entities::
   entities_end
 
 ColorDungeon05Entities::
-  entity $2, $3, ENTITY_HIDING_GEL
-  entity $5, $3, ENTITY_HIDING_GEL
-  entity $2, $6, ENTITY_HIDING_GEL
-  entity $5, $6, ENTITY_HIDING_GEL
+  entity $2, $3, ENTITY_HIDING_ZOL
+  entity $5, $3, ENTITY_HIDING_ZOL
+  entity $2, $6, ENTITY_HIDING_ZOL
+  entity $5, $6, ENTITY_HIDING_ZOL
   entity $1, $8, ENTITY_DROPPABLE_FAIRY
   entity $6, $1, ENTITY_DROPPABLE_HEART
   entities_end
 
 ColorDungeon06Entities::
-  entity $4, $2, ENTITY_HIDING_GEL
-  entity $3, $3, ENTITY_HIDING_GEL
-  entity $3, $2, ENTITY_GEL
-  entity $1, $4, ENTITY_GEL
-  entity $3, $8, ENTITY_HIDING_GEL
-  entity $4, $7, ENTITY_HIDING_GEL
+  entity $4, $2, ENTITY_HIDING_ZOL
+  entity $3, $3, ENTITY_HIDING_ZOL
+  entity $3, $2, ENTITY_ZOL
+  entity $1, $4, ENTITY_ZOL
+  entity $3, $8, ENTITY_HIDING_ZOL
+  entity $4, $7, ENTITY_HIDING_ZOL
   entities_end
 
 ColorDungeon07Entities::

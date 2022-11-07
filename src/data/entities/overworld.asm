@@ -294,8 +294,8 @@ Overworld41Entities::
   entities_end
 
 Overworld42Entities::
-  entity $4, $5, ENTITY_GEL
-  entity $5, $4, ENTITY_GEL
+  entity $4, $5, ENTITY_ZOL
+  entity $5, $4, ENTITY_ZOL
   entity $4, $7, ENTITY_MOBLIN
   entities_end
 
@@ -510,21 +510,21 @@ Overworld70Entities::
   entities_end
 
 Overworld71Entities::
-  entity $4, $2, ENTITY_GEL
-  entity $6, $6, ENTITY_GEL
+  entity $4, $2, ENTITY_ZOL
+  entity $6, $6, ENTITY_ZOL
   entity $2, $2, ENTITY_MOBLIN
   entities_end
 
 Overworld72Entities::
   entity $4, $2, ENTITY_MOBLIN
   entity $4, $6, ENTITY_MOBLIN
-  entity $3, $2, ENTITY_GEL
+  entity $3, $2, ENTITY_ZOL
   entities_end
 
 Overworld73Entities::
   entity $2, $4, ENTITY_MOBLIN
   entity $3, $5, ENTITY_MOBLIN
-  entity $5, $7, ENTITY_GEL
+  entity $5, $7, ENTITY_ZOL
   entities_end
 
 Overworld74Entities::
@@ -827,10 +827,10 @@ OverworldACEntities::
 OverworldADEntities::
   entity $2, $3, ENTITY_ARMOS_STATUE
   entity $2, $7, ENTITY_ARMOS_STATUE
-  entity $2, $4, ENTITY_HIDING_GEL
-  entity $2, $6, ENTITY_HIDING_GEL
-  entity $4, $4, ENTITY_HIDING_GEL
-  entity $4, $6, ENTITY_HIDING_GEL
+  entity $2, $4, ENTITY_HIDING_ZOL
+  entity $2, $6, ENTITY_HIDING_ZOL
+  entity $4, $4, ENTITY_HIDING_ZOL
+  entity $4, $6, ENTITY_HIDING_ZOL
   entities_end
 
 OverworldAEEntities::
@@ -908,9 +908,9 @@ OverworldBBEntities::
 OverworldBCEntities::
   entity $1, $2, ENTITY_ARMOS_STATUE
   entity $6, $4, ENTITY_ARMOS_STATUE
-  entity $1, $3, ENTITY_HIDING_GEL
-  entity $4, $2, ENTITY_HIDING_GEL
-  entity $6, $6, ENTITY_HIDING_GEL
+  entity $1, $3, ENTITY_HIDING_ZOL
+  entity $4, $2, ENTITY_HIDING_ZOL
+  entity $6, $6, ENTITY_HIDING_ZOL
   entities_end
 
 OverworldBDEntities::
@@ -918,25 +918,25 @@ OverworldBDEntities::
   entity $2, $6, ENTITY_ARMOS_STATUE
   entity $4, $4, ENTITY_ARMOS_STATUE
   entity $5, $7, ENTITY_ARMOS_STATUE
-  entity $2, $5, ENTITY_HIDING_GEL
-  entity $3, $2, ENTITY_HIDING_GEL
+  entity $2, $5, ENTITY_HIDING_ZOL
+  entity $3, $2, ENTITY_HIDING_ZOL
   entities_end
 
 OverworldBEEntities::
   entity $1, $2, ENTITY_ARMOS_STATUE
   entity $1, $4, ENTITY_ARMOS_STATUE
   entity $4, $6, ENTITY_ARMOS_STATUE
-  entity $4, $1, ENTITY_HIDING_GEL
-  entity $5, $3, ENTITY_HIDING_GEL
-  entity $5, $6, ENTITY_HIDING_GEL
+  entity $4, $1, ENTITY_HIDING_ZOL
+  entity $5, $3, ENTITY_HIDING_ZOL
+  entity $5, $6, ENTITY_HIDING_ZOL
   entities_end
 
 OverworldBFEntities::
   entity $3, $1, ENTITY_ARMOS_STATUE
   entity $3, $5, ENTITY_ARMOS_STATUE
   entity $5, $3, ENTITY_ARMOS_STATUE
-  entity $2, $3, ENTITY_GEL
-  entity $2, $6, ENTITY_HIDING_GEL
+  entity $2, $3, ENTITY_ZOL
+  entity $2, $6, ENTITY_HIDING_ZOL
   entities_end
 
 OverworldC0Entities::
@@ -961,15 +961,15 @@ OverworldC3Entities::
 
 OverworldC4Entities::
   entity $0, $0, ENTITY_MAZE_SIGNPOST
-  entity $2, $3, ENTITY_HIDING_GEL
-  entity $4, $4, ENTITY_HIDING_GEL
-  entity $5, $6, ENTITY_GEL
+  entity $2, $3, ENTITY_HIDING_ZOL
+  entity $4, $4, ENTITY_HIDING_ZOL
+  entity $5, $6, ENTITY_ZOL
   entities_end
 
 OverworldC5Entities::
   entity $0, $0, ENTITY_MAZE_SIGNPOST
-  entity $4, $3, ENTITY_HIDING_GEL
-  entity $5, $8, ENTITY_HIDING_GEL
+  entity $4, $3, ENTITY_HIDING_ZOL
+  entity $5, $8, ENTITY_HIDING_ZOL
   entities_end
 
 OverworldC6Entities::
@@ -1043,15 +1043,15 @@ OverworldD3Entities::
 
 OverworldD4Entities::
   entity $0, $0, ENTITY_MAZE_SIGNPOST
-  entity $2, $2, ENTITY_HIDING_GEL
+  entity $2, $2, ENTITY_HIDING_ZOL
   entity $3, $6, ENTITY_BUSH_CRAWLER
   entities_end
 
 OverworldD5Entities::
   entity $0, $0, ENTITY_MAZE_SIGNPOST
-  entity $2, $4, ENTITY_HIDING_GEL
-  entity $3, $3, ENTITY_HIDING_GEL
-  entity $4, $7, ENTITY_HIDING_GEL
+  entity $2, $4, ENTITY_HIDING_ZOL
+  entity $3, $3, ENTITY_HIDING_ZOL
+  entity $4, $7, ENTITY_HIDING_ZOL
   entity $6, $4, ENTITY_BUSH_CRAWLER
   entities_end
 

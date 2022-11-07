@@ -832,7 +832,7 @@ func_005_72E6::
 ._01 dw func_005_7363                             ; $72F1
 ._02 dw func_005_7425                             ; $72F3
 ._03 dw func_005_74B1                             ; $72F5
-._04 dw func_005_753C                             ; $72F7
+._04 dw BossDestructionHandler_05                 ; $72F7
 
 Data_005_72F9::
     db   $09, $0A, $0B, $0B, $0B, $0B
@@ -1180,10 +1180,12 @@ func_005_7535::
     ld   [wD200], a                               ; $7536: $EA $00 $D2
     jp   ClearEntityStatus_05                     ; $7539: $C3 $4B $7B
 
-func_005_753C::
+; Loop until boss destruction animation is done, then call to load heart
+; Used from 4 different bosses: Slime Eel, Anglerfish, Evil Eagle, Hot Head
+BossDestructionHandler_05::
     call func_005_79A7                            ; $753C: $CD $A7 $79
     call GetEntityTransitionCountdown             ; $753F: $CD $05 $0C
-    jp   z, func_005_7585                         ; $7542: $CA $85 $75
+    jp   z, DropHeartContainer_05                 ; $7542: $CA $85 $75
 
     ld   hl, wEntitiesFlashCountdownTable         ; $7545: $21 $20 $C4
     add  hl, bc                                   ; $7548: $09
@@ -1225,12 +1227,14 @@ label_005_7570:
     ldh  [hNoiseSfx], a                           ; $7582: $E0 $F4
     ret                                           ; $7584: $C9
 
-func_005_7585::
+; Load heart container value to load when boss is killed
+; Used from 4 different bosses: Slime Eel, Anglerfish, Evil Eagle, Hot Head
+DropHeartContainer_05::
     ld   a, ENTITY_HEART_CONTAINER                ; $7585: $3E $36
     call SpawnNewEntity_trampoline                ; $7587: $CD $86 $3B
-    jr   jr_005_7599                              ; $758A: $18 $0D
+    jr   .notEvilEagle                            ; $758A: $18 $0D
 
-label_005_758C:
+.evilEagle:
     ld   a, ENTITY_HEART_CONTAINER                ; $758C: $3E $36
     call SpawnNewEntity_trampoline                ; $758E: $CD $86 $3B
     ld   a, $48                                   ; $7591: $3E $48
@@ -1238,7 +1242,7 @@ label_005_758C:
     ld   a, $10                                   ; $7595: $3E $10
     ldh  [hMultiPurpose1], a                      ; $7597: $E0 $D8
 
-jr_005_7599:
+.notEvilEagle:
     ldh  a, [hMultiPurpose1]                      ; $7599: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $759B: $21 $10 $C2
     add  hl, de                                   ; $759E: $19

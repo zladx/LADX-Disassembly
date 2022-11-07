@@ -482,7 +482,7 @@ GenieKilledHandler1::
 
 GenieKilledHandler2::
     call GetEntityTransitionCountdown             ; $4311: $CD $05 $0C
-    jp   z, DropHeartContainer                    ; $4314: $CA $51 $57
+    jp   z, DropHeartContainer_04                 ; $4314: $CA $51 $57
 
     jp   label_004_50EF                           ; $4317: $C3 $EF $50
 
@@ -553,12 +553,10 @@ Data_004_437E::
     db   8, -8
 
 func_004_4380::
-    db   $CD
-    db   $CA, $6D, $21                            ; $4381: $CA $6D $21
-
-    add  b                                        ; $4384: $80
-    jp   label_004_5E09                           ; $4385: $C3 $09 $5E
-
+    call UpdateEntityPosWithSpeed_04              ; $4380: $CD $CA $6D
+    ld   hl, wEntitiesDirectionTable              ; $4383: $21 $80 $C3
+    add  hl, bc                                   ; $4386: $09
+    ld   e, [hl]                                  ; $4387: $5E
     ld   d, b                                     ; $4388: $50
     ldh  a, [hFrameCounter]                       ; $4389: $F0 $E7
     and  $07                                      ; $438B: $E6 $07

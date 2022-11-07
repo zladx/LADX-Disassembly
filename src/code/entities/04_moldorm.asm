@@ -39,7 +39,7 @@ MoldormEntityHandler::
 ._00 dw MoldormDestructionFlashInitHandler
 ._01 dw MoldormDestructionFlash1Handler
 ._02 dw MoldormDestructionFlash2Handler
-._03 dw BossDestructionHandler
+._03 dw BossDestructionHandler_04
 
 MoldormDestructionFlashInitHandler::
     call GetEntityTransitionCountdown             ; $56D5: $CD $05 $0C
@@ -87,9 +87,10 @@ Data_004_5715::
     db   $F8, $FA, $00, $06, $08, $06, $00, $FA
 
 ; Loop until boss destruction animation is done, then call to load heart
-BossDestructionHandler::
+; Used from 4 different bosses: Moldorm, Genie, Slime Eye, Facade
+BossDestructionHandler_04::
     call GetEntityTransitionCountdown             ; $571D
-    jp   z, DropHeartContainer                    ; $5720: $CA $51 $57
+    jp   z, DropHeartContainer_04                 ; $5720: $CA $51 $57
 
     and  $03                                      ; $5723: $E6 $03
     jr   nz, .return                              ; $5725: $20 $29
@@ -123,8 +124,8 @@ BossDestructionHandler::
     ret                                           ; $5750: $C9
 
 ; Load heart container value to load when boss is killed
-; Used from 4 different bossses.
-DropHeartContainer::
+; Used from 4 different bosses: Moldorm, Genie, Slime Eye, Facade
+DropHeartContainer_04::
     ld   a, ENTITY_HEART_CONTAINER                ; $5751: $3E $36
     call SpawnNewEntity_trampoline                ; $5753: $CD $86 $3B
     ldh  a, [hMultiPurpose0]                      ; $5756: $F0 $D7

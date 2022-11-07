@@ -73,7 +73,7 @@ Tarin2SpriteList::
 ;  - Mysterious wood racoon
 TarinEntityHandler::
     ld   a, [wGameplayType]                       ; $496A: $FA $95 $DB
-    cp   $01                                      ; $496D: $FE $01
+    cp   GAMEPLAY_CREDITS                         ; $496D: $FE $01
     jr   nz, jr_005_4995                          ; $496F: $20 $24
 
     ; Handle Tarin's appearance in the credits

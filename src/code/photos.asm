@@ -179,7 +179,7 @@ JumpTable_037_40EC::
 
     ld   hl, Data_037_570D                        ; $411B: $21 $0D $57
     ld   a, [wGameplayType]                       ; $411E: $FA $95 $DB
-    sub  $0E                                      ; $4121: $D6 $0E
+    sub  GAMEPLAY_PHOTO_DIZZY_LINK                ; $4121: $D6 $0E
     sla  a                                        ; $4123: $CB $27
     ld   e, a                                     ; $4125: $5F
     ld   d, $00                                   ; $4126: $16 $00
@@ -300,7 +300,7 @@ JumpTable_037_4229::
     call LCDOff                                   ; $4229: $CD $CF $28
     ld   c, $00                                   ; $422C: $0E $00
     ld   a, [wGameplayType]                       ; $422E: $FA $95 $DB
-    sub  $0E                                      ; $4231: $D6 $0E
+    sub  GAMEPLAY_PHOTO_DIZZY_LINK                ; $4231: $D6 $0E
     sla  a                                        ; $4233: $CB $27
     ld   e, a                                     ; $4235: $5F
     ld   d, $00                                   ; $4236: $16 $00
@@ -365,7 +365,7 @@ JumpTable_037_4229::
     call func_037_4190                            ; $4285: $CD $90 $41
 .else_4288_37:
     ld   a, [wGameplayType]                       ; $4288: $FA $95 $DB
-    sub  $0E                                      ; $428B: $D6 $0E
+    sub  GAMEPLAY_PHOTO_DIZZY_LINK                ; $428B: $D6 $0E
     ld   e, a                                     ; $428D: $5F
     ld   d, $00                                   ; $428E: $16 $00
     ld   hl, Data_037_420F                        ; $4290: $21 $0F $42

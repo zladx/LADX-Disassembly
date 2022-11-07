@@ -188,7 +188,7 @@ func_007_5EC5::
     jr   nz, .jr_5EDE                             ; $5EC8: $20 $14
 
     ld   [hl], $20                                ; $5ECA: $36 $20
-    ld   a, $08                                   ; $5ECC: $3E $08
+    ld   a, GAMEPLAY_CUTSCENE                     ; $5ECC: $3E $08
     ld   [wGameplayType], a                       ; $5ECE: $EA $95 $DB
     xor  a                                        ; $5ED1: $AF
     ld   [wTransitionSequenceCounter], a          ; $5ED2: $EA $6B $C1

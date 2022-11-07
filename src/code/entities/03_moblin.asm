@@ -84,7 +84,7 @@ AnimateRoamingEnemy::
 
 jr_003_588D:
     ld   a, [wGameplayType]                       ; $588D: $FA $95 $DB
-    cp   $01                                      ; $5890: $FE $01
+    cp   GAMEPLAY_CREDITS                         ; $5890: $FE $01
     ret  z                                        ; $5892: $C8
 
     jp   SpawnOctorokRock                         ; $5893: $C3 $98 $59

@@ -43,7 +43,7 @@ label_019_6D00:
     call func_019_6EC5                            ; $6D1F: $CD $C5 $6E
     call func_019_7CA2                            ; $6D22: $CD $A2 $7C
     ld   a, [wGameplayType]                       ; $6D25: $FA $95 $DB
-    cp   $0B                                      ; $6D28: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $6D28: $FE $0B
     ret  nz                                       ; $6D2A: $C0
 
     ld   a, [wTransitionSequenceCounter]          ; $6D2B: $FA $6B $C1
@@ -454,7 +454,7 @@ func_019_7039::
     cp   $04                                      ; $708E: $FE $04
     jr   nz, .jr_70A6                             ; $7090: $20 $14
 
-    ld   a, $08                                   ; $7092: $3E $08
+    ld   a, GAMEPLAY_CUTSCENE                     ; $7092: $3E $08
     ld   [wGameplayType], a                       ; $7094: $EA $95 $DB
     xor  a                                        ; $7097: $AF
     ld   [wTransitionSequenceCounter], a          ; $7098: $EA $6B $C1

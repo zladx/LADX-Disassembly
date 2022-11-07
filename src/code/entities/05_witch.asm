@@ -134,7 +134,7 @@ jr_005_4853:
 
 func_005_485F::
     ld   a, [wGameplayType]                       ; $485F: $FA $95 $DB
-    cp   $0B                                      ; $4862: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $4862: $FE $0B
     ret  nz                                       ; $4864: $C0
 
     ld   a, [wTransitionSequenceCounter]          ; $4865: $FA $6B $C1
@@ -153,7 +153,7 @@ func_005_485F::
 
 func_005_487D::
     ld   a, [wGameplayType]                       ; $487D: $FA $95 $DB
-    cp   $0B                                      ; $4880: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $4880: $FE $0B
     ret  nz                                       ; $4882: $C0
 
     ld   a, [wTransitionSequenceCounter]          ; $4883: $FA $6B $C1

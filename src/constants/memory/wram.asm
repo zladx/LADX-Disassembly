@@ -3354,7 +3354,7 @@ wSubtractHealthBuffer::
 wGameplayType::
   ds 1 ; DB95
 
-; Value depens on GameplayType: this can be a sequence index, or a frame counter.
+; Value depends on GameplayType: this can be a sequence index, or a frame counter.
 wGameplaySubtype::
   ds 1 ; DB96
 

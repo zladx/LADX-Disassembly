@@ -91,7 +91,7 @@ jr_018_4D58:
 
 GrandmaUlriraState0Handler::
     ld   a, [wGameplayType]                       ; $4D77: $FA $95 $DB
-    cp   $0B                                      ; $4D7A: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $4D7A: $FE $0B
     ret  nz                                       ; $4D7C: $C0
 
     ld   a, [wTransitionSequenceCounter]          ; $4D7D: $FA $6B $C1

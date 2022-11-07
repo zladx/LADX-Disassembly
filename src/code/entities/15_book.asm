@@ -77,7 +77,7 @@ Data_015_7EB0::
 
 func_015_7EB9::
     ld   a, [wGameplayType]                       ; $7EB9: $FA $95 $DB
-    cp   $07                                      ; $7EBC: $FE $07
+    cp   GAMEPLAY_WORLD_MAP                       ; $7EBC: $FE $07
     jr   z, .jr_7EC4                              ; $7EBE: $28 $04
 
     xor  a                                        ; $7EC0: $AF
@@ -195,7 +195,7 @@ jr_015_7F4F:
     ld   [wTransitionSequenceCounter], a          ; $7F5B: $EA $6B $C1
     ld   [wC16C], a                               ; $7F5E: $EA $6C $C1
     ld   [wGameplaySubtype], a                    ; $7F61: $EA $96 $DB
-    ld   a, $07                                   ; $7F64: $3E $07
+    ld   a, GAMEPLAY_WORLD_MAP                    ; $7F64: $3E $07
     ld   [wGameplayType], a                       ; $7F66: $EA $95 $DB
     ld   a, $01                                   ; $7F69: $3E $01
     ld   [wC5A2], a                               ; $7F6B: $EA $A2 $C5
@@ -209,7 +209,7 @@ jr_015_7F72:
     ld   [wTransitionSequenceCounter], a          ; $7F73: $EA $6B $C1
     ld   [wC16C], a                               ; $7F76: $EA $6C $C1
     ld   [wGameplaySubtype], a                    ; $7F79: $EA $96 $DB
-    ld   a, $0D                                   ; $7F7C: $3E $0D
+    ld   a, GAMEPLAY_PHOTO_ALBUM                  ; $7F7C: $3E $0D
     ld   [wGameplayType], a                       ; $7F7E: $EA $95 $DB
     ret                                           ; $7F81: $C9
 

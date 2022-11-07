@@ -70,7 +70,7 @@ jr_004_6ECA:
 
 .jr_6EE9
     ld   a, [wGameplayType]                       ; $6EE9: $FA $95 $DB
-    cp   $0B                                      ; $6EEC: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $6EEC: $FE $0B
     ret  nz                                       ; $6EEE: $C0
 
     ld   a, [wTransitionSequenceCounter]          ; $6EEF: $FA $6B $C1

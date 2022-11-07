@@ -13,7 +13,7 @@ GAMEPLAY_FILE_DELETE       equ $04
 GAMEPLAY_FILE_COPY         equ $05
 GAMEPLAY_FILE_SAVE         equ $06
 GAMEPLAY_WORLD_MAP         equ $07
-GAMEPLAY_PEACH_PIC         equ $08 ; also used for the Eagle's Tower collapse cutscene
+GAMEPLAY_CUTSCENE          equ $08
 GAMEPLAY_MARIN_BEACH       equ $09
 GAMEPLAY_WF_MURAL          equ $0A
 GAMEPLAY_WORLD             equ $0B

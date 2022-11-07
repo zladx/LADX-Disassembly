@@ -103,7 +103,7 @@ jr_018_4BB5:
 
 MrWriteState0Handler::
     ld   a, [wGameplayType]                       ; $4C1C: $FA $95 $DB
-    cp   $0B                                      ; $4C1F: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $4C1F: $FE $0B
     ret  nz                                       ; $4C21: $C0
 
     ld   a, [wTransitionSequenceCounter]          ; $4C22: $FA $6B $C1
@@ -201,7 +201,7 @@ func_018_4CA3::
 
 func_018_4CAB::
     call IncrementEntityState                     ; $4CAB: $CD $12 $3B
-    ld   a, $08                                   ; $4CAE: $3E $08
+    ld   a, GAMEPLAY_CUTSCENE                     ; $4CAE: $3E $08
 
 func_018_4CB0::
     ld   [wGameplayType], a                       ; $4CB0: $EA $95 $DB

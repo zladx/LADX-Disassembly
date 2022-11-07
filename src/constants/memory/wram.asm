@@ -3260,7 +3260,7 @@ wIsMarinFollowingLink::
 
 ; Whether Marin is in Animal Village
 wIsMarinInAnimalVillage::
-  ds 1
+  ds 1 ; DB74
 
 ; Total number of medecine ever purchased from Crazy Tracy
 wPurchasedMedecineCount::

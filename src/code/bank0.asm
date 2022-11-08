@@ -1773,22 +1773,22 @@ CheckItemsToUse::
 
     ld   a, [wAButtonSlot]                        ; $1189: $FA $01 $DB
     cp   INVENTORY_SWORD                          ; $118C: $FE $01
-    jr   z, .swordEquiped                         ; $118E: $28 $1A
+    jr   z, .swordEquipped                        ; $118E: $28 $1A
     ld   a, [wBButtonSlot]                        ; $1190: $FA $00 $DB
     cp   INVENTORY_SWORD                          ; $1193: $FE $01
-    jr   z, .swordEquiped                         ; $1195: $28 $13
+    jr   z, .swordEquipped                        ; $1195: $28 $13
     ld   a, [wAButtonSlot]                        ; $1197: $FA $01 $DB
     cp   INVENTORY_SHIELD                         ; $119A: $FE $04
-    jr   z, .shieldEquiped                        ; $119C: $28 $07
+    jr   z, .shieldEquipped                       ; $119C: $28 $07
     ld   a, [wBButtonSlot]                        ; $119E: $FA $00 $DB
     cp   INVENTORY_SHIELD                         ; $11A1: $FE $04
     jr   nz, .shieldEnd                           ; $11A3: $20 $15
 
-.shieldEquiped
+.shieldEquipped
     call SetShieldVals                            ; $11A5: $CD $40 $13
     jr   .shieldEnd                               ; $11A8: $18 $10
 
-.swordEquiped
+.swordEquipped
     ld   a, [wSwordAnimationState]                ; $11AA: $FA $37 $C1
     dec  a                                        ; $11AD: $3D
     cp   SWORD_ANIMATION_STATE_SWING_END          ; $11AE: $FE $04
@@ -1830,7 +1830,7 @@ CheckItemsToUse::
     jp   nz, UseItem.return                       ; $11E5: $C2 $ED $12
 
 .pegasusBootsB
-    ; if Pegasus boots are not equiped in slot B check slot A
+    ; if Pegasus boots are not equipped in slot B check slot A
     ld   a, [wBButtonSlot]                        ; $11E8: $FA $00 $DB
     cp   INVENTORY_PEGASUS_BOOTS                  ; $11EB: $FE $08
     jr   nz, .pegasusBootsA                       ; $11ED: $20 $0F
@@ -1848,7 +1848,7 @@ CheckItemsToUse::
     ld   [wPegasusBootsChargeMeter], a            ; $11FB: $EA $4B $C1
 
 .pegasusBootsA
-    ; if Pegasus boots are not equiped in slot A check slot A for shield
+    ; if Pegasus boots are not equipped in slot A check slot A for shield
     ld   a, [wAButtonSlot]                        ; $11FE: $FA $01 $DB
     cp   INVENTORY_PEGASUS_BOOTS                  ; $1201: $FE $08
     jr   nz, .shieldA                             ; $1203: $20 $0F
@@ -1866,14 +1866,14 @@ CheckItemsToUse::
     ld   [wPegasusBootsChargeMeter], a            ; $1211: $EA $4B $C1
 
 .shieldA
-    ; if shield is not equiped in slot A
+    ; if shield is not equipped in slot A
     ld   a, [wAButtonSlot]                        ; $1214: $FA $01 $DB
     cp   INVENTORY_SHIELD                         ; $1217: $FE $04
     jr   nz, .shieldB                             ; $1219: $20 $1A
     ; update shield status
     ld   a, [wShieldLevel]                        ; $121B: $FA $44 $DB
     ld   [wHasMirrorShield], a                    ; $121E: $EA $5A $C1
-    ; reset shield if button not longer pressed down
+    ; reset shield if button no longer pressed down
     ldh  a, [hPressedButtonsMask]                 ; $1221: $F0 $CB
     and  J_A                                      ; $1223: $E6 $10
     jr   z, .shieldB                              ; $1225: $28 $0E
@@ -1888,7 +1888,7 @@ CheckItemsToUse::
     call SetShieldVals                            ; $1232: $CD $40 $13
 
 .shieldB
-    ; if shield is not equiped in slot B
+    ; if shield is not equipped in slot B
     ld   a, [wBButtonSlot]                        ; $1235: $FA $00 $DB
     cp   INVENTORY_SHIELD                         ; $1238: $FE $04
     jr   nz, .nextItemB                           ; $123A: $20 $0F
@@ -2053,7 +2053,7 @@ label_1321::
     and  $03                                      ; $132A: $E6 $03
     or   [hl]                                     ; $132C: $B6
     ret  nz                                       ; $132D: $C0
-    ; sword holded
+    ; sword held
     ld   a, [wC160]                               ; $132E: $FA $60 $C1
     and  a                                        ; $1331: $A7
     ret  nz                                       ; $1332: $C0
@@ -3743,7 +3743,7 @@ ENDC
     ld_dialog_low a, Dialog18E ; "Here sleeps..." ; $2015: $3E $8E
     jr   z, .openDialogInTable1                   ; $2017: $28 $6F
     ld   a, e                                     ; $2019: $7B
-    cp   OBJECT_OWN_STATUE                        ; $201A: $FE $6F
+    cp   OBJECT_OWL_STATUE                        ; $201A: $FE $6F
     jr   z, .signpost                             ; $201C: $28 $2B
     cp   OBJECT_SIGNPOST                          ; $201E: $FE $D4
     jr   z, .signpost                             ; $2020: $28 $27

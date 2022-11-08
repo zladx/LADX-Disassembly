@@ -128,7 +128,7 @@ hLinkFinalPositionX::
 hLinkFinalPositionY::
   ds 1 ; FFA0
 
-; Whether the interactive motion of Link (i.e. responding to directionnal pad presses)
+; Whether the interactive motion of Link (i.e. responding to directional pad presses)
 ; is temporary blocked.
 ; For instance when grabbing an object with the Power Bracelet, giving
 ; a sword slash, or talking to some NPCs.

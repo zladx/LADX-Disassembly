@@ -334,7 +334,7 @@ ShouldLinkTalkToEntity_05::
     cp   $2B                                      ; $5515: $FE $2B
     jr   .checkYPosEnd                            ; $5517: $18 $0A
 .witchYPosCheck
-    ; Allow Link to talk to the witch accross her cauldron
+    ; Allow Link to talk to the witch across her cauldron
     ldh  a, [hLinkPositionY]                      ; $5519: $F0 $99
     ld   hl, hActiveEntityPosY                    ; $551B: $21 $EF $FF
     sub  [hl]                                     ; $551E: $96

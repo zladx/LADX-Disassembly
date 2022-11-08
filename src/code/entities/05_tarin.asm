@@ -52,7 +52,7 @@ Tarin2SpriteVariants::
     db $7A, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
     db $7C, OAM_GBC_PAL_7 | OAM_DMG_PAL_0
 
-; define sprites and there OAM Attributes in a list
+; define sprites and their OAM Attributes in a list
 Tarin1SpriteList::
     ;  x    y    n°   OAM
     db $00, $00, $20, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
@@ -60,7 +60,7 @@ Tarin1SpriteList::
     db $00, $00, $20, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
     db $00, $08, $22, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
 
-; define sprites and there OAM Attributes in a list
+; define sprites and their OAM Attributes in a list
 Tarin2SpriteList::
     ;  x    y    n°   OAM
     db $F1, $FA, $2A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0

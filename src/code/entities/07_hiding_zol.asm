@@ -1,6 +1,6 @@
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-HidingGel2SpriteVariants::
+HidingZol2SpriteVariants::
 .variant0
     db $FF, $FF
     db $FF, $FF
@@ -15,22 +15,22 @@ HidingGel2SpriteVariants::
     db $52, $20
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-HidingGel1SpriteVariants::
+HidingZol1SpriteVariants::
 .variant0
     db $56, $00
     db $56, $00
 
-HidingGelEntityHandler::
+HidingZolEntityHandler::
     ldh  a, [hActiveEntitySpriteVariant]          ; $72AF: $F0 $F1
     cp   $01                                      ; $72B1: $FE $01
     jr   nz, .jr_72BD                             ; $72B3: $20 $08
 
-    ld   de, HidingGel1SpriteVariants             ; $72B5: $11 $AB $72
+    ld   de, HidingZol1SpriteVariants             ; $72B5: $11 $AB $72
     call RenderActiveEntitySprite                 ; $72B8: $CD $77 $3C
     jr   jr_007_72C3                              ; $72BB: $18 $06
 
 .jr_72BD
-    ld   de, HidingGel2SpriteVariants             ; $72BD: $11 $9B $72
+    ld   de, HidingZol2SpriteVariants             ; $72BD: $11 $9B $72
     call RenderActiveEntitySpritesPair            ; $72C0: $CD $C0 $3B
 
 jr_007_72C3:

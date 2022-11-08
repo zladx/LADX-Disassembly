@@ -91,10 +91,10 @@ ChestWithItemEntityHandler::
     ; wC16A = 0
     ld   [wC16A], a                               ; $7BE5: $EA $6A $C1
     ldh  a, [hActiveEntitySpriteVariant]          ; $7BE8: $F0 $F1
-    cp   CHEST_GEL                                ; $7BEA: $FE $22
-    jr   nz, notGelChest                          ; $7BEC: $20 $3B
+    cp   CHEST_ZOL                                ; $7BEA: $FE $22
+    jr   nz, notZolChest                          ; $7BEC: $20 $3B
 
-    ld   a, ENTITY_GEL                            ; $7BEE: $3E $1B
+    ld   a, ENTITY_ZOL                            ; $7BEE: $3E $1B
     call SpawnNewEntity_trampoline                ; $7BF0: $CD $86 $3B
     jp   c, ClearEntityStatus_07                  ; $7BF3: $DA $A4 $7E
 
@@ -125,7 +125,7 @@ ChestWithItemEntityHandler::
     ldh  [hJingle], a                             ; $7C24: $E0 $F2
     jp   ClearEntityStatus_07                     ; $7C26: $C3 $A4 $7E
 
-notGelChest:
+notZolChest:
     cp   CHEST_MESSAGE                            ; $7C29: $FE $21
     jr   z, jr_007_7C5E                           ; $7C2B: $28 $31
 

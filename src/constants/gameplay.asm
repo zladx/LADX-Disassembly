@@ -328,7 +328,7 @@ CHEST_RUPEES_500       equ $1F ; POI: Unused
 CHEST_SEASHELL         equ $20
 ; Miscellaneous
 CHEST_MESSAGE          equ $21 ; used in Catfish's Maw
-CHEST_GEL              equ $22 ; green slime enemy
+CHEST_ZOL              equ $22 ; green slime enemy
 
 ; Values for wTradeSequenceItem
 TRADING_ITEM_NONE              equ $00

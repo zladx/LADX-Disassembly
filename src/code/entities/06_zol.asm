@@ -1,14 +1,14 @@
 Data_006_7BFA::
     db   $56, $02, $56, $22
 
-MiniGelEntityHandler::
+GelEntityHandler::
     call func_006_7BE2                            ; $7BFE: $CD $E2 $7B
     ld   de, Data_006_7BFA                        ; $7C01: $11 $FA $7B
     call RenderActiveEntitySprite                 ; $7C04: $CD $77 $3C
     jr   jr_006_7C2E                              ; $7C07: $18 $25
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-GelLowHealthSpriteVariants::
+ZolLowHealthSpriteVariants::
 .variant0
     db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
     db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
@@ -17,7 +17,7 @@ GelLowHealthSpriteVariants::
     db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
-GelSpriteVariants::
+ZolSpriteVariants::
 .variant0
     db $52, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
     db $52, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
@@ -25,9 +25,9 @@ GelSpriteVariants::
     db $54, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
     db $54, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
 
-GelEntityHandler::
+ZolEntityHandler::
     call func_006_7BE2                            ; $7C19: $CD $E2 $7B
-    ld   de, GelLowHealthSpriteVariants           ; $7C1C: $11 $09 $7C
+    ld   de, ZolLowHealthSpriteVariants           ; $7C1C: $11 $09 $7C
     ld   hl, wEntitiesHealthTable                 ; $7C1F: $21 $60 $C3
     add  hl, bc                                   ; $7C22: $09
     ld   a, [hl]                                  ; $7C23: $7E
@@ -35,7 +35,7 @@ GelEntityHandler::
     jr   nz, .render                              ; $7C26: $20 $03
 
     ; load different sprite variants, when health bit 2 is set
-    ld   de, GelSpriteVariants                    ; $7C28: $11 $11 $7C
+    ld   de, ZolSpriteVariants                    ; $7C28: $11 $11 $7C
 
 .render:
     call RenderActiveEntitySpritesPair            ; $7C2B: $CD $C0 $3B
@@ -64,7 +64,7 @@ jr_006_7C2E:
 
 .jr_7C50
     ldh  a, [hActiveEntityType]                   ; $7C50: $F0 $EB
-    cp   ENTITY_GEL                               ; $7C52: $FE $1B
+    cp   ENTITY_ZOL                               ; $7C52: $FE $1B
     jr   nz, jr_006_7CB7                          ; $7C54: $20 $61
 
     ld   hl, wEntitiesFlashCountdownTable         ; $7C56: $21 $20 $C4
@@ -100,7 +100,7 @@ jr_006_7C2E:
     ld   hl, wEntitiesSpeedZTable                 ; $7C83: $21 $20 $C3
     add  hl, bc                                   ; $7C86: $09
     ld   [hl], $20                                ; $7C87: $36 $20
-    ld   a, ENTITY_MINI_GEL                       ; $7C89: $3E $1C
+    ld   a, ENTITY_GEL                       ; $7C89: $3E $1C
     call SpawnNewEntity_trampoline                ; $7C8B: $CD $86 $3B
     jr   c, jr_006_7CB7                           ; $7C8E: $38 $27
 
@@ -163,13 +163,13 @@ jr_006_7CB7:
 .jr_7CE5
     ldh  a, [hActiveEntityState]                  ; $7CE5: $F0 $F0
     JP_TABLE                                      ; $7CE7
-._00 dw GelState0Handler
-._01 dw GelState1Handler
-._02 dw GelState2Handler
-._03 dw GelState3Handler
-._04 dw GelState4Handler
+._00 dw ZolState0Handler
+._01 dw ZolState1Handler
+._02 dw ZolState2Handler
+._03 dw ZolState3Handler
+._04 dw ZolState4Handler
 
-GelState1Handler::
+ZolState1Handler::
     call GetEntityTransitionCountdown             ; $7CF2: $CD $05 $0C
     jr   nz, func_006_7D0F                        ; $7CF5: $20 $18
 
@@ -201,7 +201,7 @@ func_006_7D0F::
     ld   [hl], b                                  ; $7D23: $70
     ret                                           ; $7D24: $C9
 
-GelState0Handler::
+ZolState0Handler::
     call func_006_7D0F                            ; $7D25: $CD $0F $7D
     call GetEntityTransitionCountdown             ; $7D28: $CD $05 $0C
     ret  nz                                       ; $7D2B: $C0
@@ -211,7 +211,7 @@ GelState0Handler::
     ld   a, $04                                   ; $7D31: $3E $04
     jp   ApplyVectorTowardsLink_trampoline        ; $7D33: $C3 $AA $3B
 
-GelState2Handler::
+ZolState2Handler::
     call GetEntityTransitionCountdown             ; $7D36: $CD $05 $0C
     jr   nz, .jr_7D4A                             ; $7D39: $20 $0F
 
@@ -242,7 +242,7 @@ jr_006_7D5B:
     ld   [hl], b                                  ; $7D5F: $70
     jp   func_006_7D0F                            ; $7D60: $C3 $0F $7D
 
-GelState3Handler::
+ZolState3Handler::
     call func_006_7D0F                            ; $7D63: $CD $0F $7D
     ldh  a, [hMultiPurposeG]                      ; $7D66: $F0 $E8
     and  a                                        ; $7D68: $A7
@@ -254,7 +254,7 @@ GelState3Handler::
 .ret_7D6F
     ret                                           ; $7D6F: $C9
 
-GelState4Handler::
+ZolState4Handler::
     call GetEntityTransitionCountdown             ; $7D70: $CD $05 $0C
     jr   nz, .jr_7D91                             ; $7D73: $20 $1C
 

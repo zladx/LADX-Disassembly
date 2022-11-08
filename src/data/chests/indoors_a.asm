@@ -89,7 +89,7 @@
     db CHEST_STONE_BEAK
     db 0
     db CHEST_RUPEES_200
-    db CHEST_GEL
+    db CHEST_ZOL
     ; 50 --------------------
     db CHEST_MAP
     db CHEST_SMALL_KEY
@@ -121,7 +121,7 @@
     db CHEST_MAP
     db 0
     db 0
-    db CHEST_GEL
+    db CHEST_ZOL
     db CHEST_RUPEES_50
     db 0
     ; 70 --------------------

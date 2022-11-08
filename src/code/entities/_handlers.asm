@@ -40,8 +40,8 @@ EntityHandlersTable::
 ._18 far_pointer PolsVoiceEntityHandler ; $18
 ._19 far_pointer KeeseEntityHandler
 ._1A far_pointer StalfosAggressiveEntityHandler
-._1B far_pointer GelEntityHandler
-._1C far_pointer MiniGelEntityHandler ; $1C
+._1B far_pointer ZolEntityHandler
+._1C far_pointer GelEntityHandler ; $1C
 ._1D far_pointer_null
 ._1E far_pointer StalfosEvasiveEntityHandler
 ._1F far_pointer GibdoEntityHandler
@@ -168,7 +168,7 @@ EntityHandlersTable::
 ._98 far_pointer HorsePieceEntityHandler ; $98
 ._99 far_pointer WaterTektiteEntityHandler
 ._9A far_pointer FlyingTilesEntityHandler
-._9B far_pointer HidingGelEntityHandler
+._9B far_pointer HidingZolEntityHandler
 ._9C far_pointer StarEntityHandler ; $9C
 ._9D far_pointer LiftableStatueEntityHandler
 ._9E far_pointer FireballShooterEntityHandler
@@ -319,7 +319,7 @@ EntityInitHandlersTable::
 ._18 dw   EntityInitWithRandomDirection
 ._19 dw   EntityInitWithRandomDirection
 ._1A dw   EntityInitWithRandomDirection
-._1B dw   EntityInitGel
+._1B dw   EntityInitZol
 ._1C dw   EntityInitWithRandomDirection
 ._1D dw   EntityInitWizrobe
 ._1E dw   IncrementEntityState

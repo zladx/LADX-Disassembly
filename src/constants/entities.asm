@@ -64,8 +64,8 @@ ENTITY_SPARK_CLOCKWISE               equ $17
 ENTITY_POLS_VOICE                    equ $18
 ENTITY_KEESE                         equ $19
 ENTITY_STALFOS_AGGRESSIVE            equ $1A
-ENTITY_GEL                           equ $1B
-ENTITY_MINI_GEL                      equ $1C
+ENTITY_ZOL                           equ $1B
+ENTITY_GEL                           equ $1C
 ;ENTITY_DISABLED                     equ $1D
 ENTITY_STALFOS_EVASIVE               equ $1E
 ENTITY_GIBDO                         equ $1F
@@ -192,7 +192,7 @@ ENTITY_DIVABLE_WATER                 equ $97
 ENTITY_HORSE_PIECE                   equ $98
 ENTITY_WATER_TEKTITE                 equ $99
 ENTITY_FLYING_TILES                  equ $9A
-ENTITY_HIDING_GEL                    equ $9B
+ENTITY_HIDING_ZOL                    equ $9B
 ENTITY_STAR                          equ $9C
 ENTITY_LIFTABLE_STATUE               equ $9D
 ENTITY_FIREBALL_SHOOTER              equ $9E

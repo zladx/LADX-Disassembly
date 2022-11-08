@@ -214,7 +214,7 @@ hNextMusicTrackToFadeInto::
   ds 1 ; FFB1
 
 ; When 1, Link is moving much slower, like when being
-; incapacited by a mini-gel.
+; incapacited by a gel.
 hLinkSlowWalkingSpeed::
   ds 1 ; FFB2
 

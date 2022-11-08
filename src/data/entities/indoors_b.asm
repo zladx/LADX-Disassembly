@@ -107,10 +107,10 @@ IndoorsB14Entities::
   entities_end
 
 IndoorsB15Entities::
-  entity $2, $2, ENTITY_HIDING_GEL
+  entity $2, $2, ENTITY_HIDING_ZOL
   entity $3, $4, ENTITY_SMASHABLE_PILLAR
-  entity $4, $5, ENTITY_HIDING_GEL
-  entity $1, $7, ENTITY_GEL
+  entity $4, $5, ENTITY_HIDING_ZOL
+  entity $1, $7, ENTITY_ZOL
   entities_end
 
 IndoorsB16Entities::
@@ -123,19 +123,19 @@ IndoorsB16Entities::
 IndoorsB17Entities::
   entity $1, $2, ENTITY_SPARK_COUNTER_CLOCKWISE
   entity $2, $5, ENTITY_SPARK_CLOCKWISE
-  entity $3, $3, ENTITY_HIDING_GEL
-  entity $5, $7, ENTITY_HIDING_GEL
+  entity $3, $3, ENTITY_HIDING_ZOL
+  entity $5, $7, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB18Entities::
   entity $4, $5, ENTITY_SMASHABLE_PILLAR
-  entity $3, $7, ENTITY_HIDING_GEL
-  entity $5, $4, ENTITY_HIDING_GEL
+  entity $3, $7, ENTITY_HIDING_ZOL
+  entity $5, $4, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB19Entities::
   entity $4, $4, ENTITY_SMASHABLE_PILLAR
-  entity $5, $2, ENTITY_HIDING_GEL
+  entity $5, $2, ENTITY_HIDING_ZOL
   entity $5, $6, ENTITY_FLOATING_ITEM_2
   entities_end
 
@@ -158,8 +158,8 @@ IndoorsB1CEntities::
 
 IndoorsB1DEntities::
   entity $2, $4, ENTITY_CRYSTAL_SWITCH
-  entity $3, $7, ENTITY_HIDING_GEL
-  entity $6, $3, ENTITY_HIDING_GEL
+  entity $3, $7, ENTITY_HIDING_ZOL
+  entity $6, $3, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB1EEntities::
@@ -177,7 +177,7 @@ IndoorsB1FEntities::
 IndoorsB20Entities::
   entity $1, $5, ENTITY_HORSE_PIECE
   entity $2, $3, ENTITY_HORSE_PIECE
-  entity $4, $5, ENTITY_GEL
+  entity $4, $5, ENTITY_ZOL
   entity $5, $7, ENTITY_LASER
   entities_end
 
@@ -308,10 +308,10 @@ IndoorsB3BEntities::
   entities_end
 
 IndoorsB3CEntities::
-  entity $1, $1, ENTITY_HIDING_GEL
-  entity $2, $1, ENTITY_HIDING_GEL
-  entity $2, $3, ENTITY_HIDING_GEL
-  entity $3, $4, ENTITY_HIDING_GEL
+  entity $1, $1, ENTITY_HIDING_ZOL
+  entity $2, $1, ENTITY_HIDING_ZOL
+  entity $2, $3, ENTITY_HIDING_ZOL
+  entity $3, $4, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB3DEntities::
@@ -354,15 +354,15 @@ IndoorsB43Entities::
 IndoorsB44Entities::
   entity $1, $6, ENTITY_SPARK_COUNTER_CLOCKWISE
   entity $1, $7, ENTITY_SPARK_COUNTER_CLOCKWISE
-  entity $4, $2, ENTITY_HIDING_GEL
-  entity $5, $2, ENTITY_HIDING_GEL
+  entity $4, $2, ENTITY_HIDING_ZOL
+  entity $5, $2, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB45Entities::
-  entity $2, $3, ENTITY_HIDING_GEL
-  entity $2, $6, ENTITY_HIDING_GEL
-  entity $5, $3, ENTITY_HIDING_GEL
-  entity $5, $6, ENTITY_HIDING_GEL
+  entity $2, $3, ENTITY_HIDING_ZOL
+  entity $2, $6, ENTITY_HIDING_ZOL
+  entity $5, $3, ENTITY_HIDING_ZOL
+  entity $5, $6, ENTITY_HIDING_ZOL
   entity $3, $8, ENTITY_FLOATING_ITEM
   entity $0, $7, ENTITY_OWL_STATUE
   entities_end
@@ -414,8 +414,8 @@ IndoorsB4EEntities::
   entities_end
 
 IndoorsB4FEntities::
-  entity $2, $2, ENTITY_HIDING_GEL
-  entity $2, $4, ENTITY_HIDING_GEL
+  entity $2, $2, ENTITY_HIDING_ZOL
+  entity $2, $4, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB50Entities::
@@ -433,8 +433,8 @@ IndoorsB52Entities::
 IndoorsB53Entities::
   entity $5, $1, ENTITY_OWL_STATUE
   entity $1, $8, ENTITY_LASER
-  entity $3, $4, ENTITY_HIDING_GEL
-  entity $5, $5, ENTITY_HIDING_GEL
+  entity $3, $4, ENTITY_HIDING_ZOL
+  entity $5, $5, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB54Entities::
@@ -471,8 +471,8 @@ IndoorsB59Entities::
 
 IndoorsB5AEntities::
   entity $4, $7, ENTITY_HOLE_FILLER
-  entity $4, $2, ENTITY_HIDING_GEL
-  entity $5, $3, ENTITY_HIDING_GEL
+  entity $4, $2, ENTITY_HIDING_ZOL
+  entity $5, $3, ENTITY_HIDING_ZOL
   entity $3, $4, ENTITY_FLOATING_ITEM_2
   entities_end
 
@@ -481,9 +481,9 @@ IndoorsB5BEntities::
   entities_end
 
 IndoorsB5CEntities::
-  entity $3, $3, ENTITY_HIDING_GEL
-  entity $3, $5, ENTITY_HIDING_GEL
-  entity $4, $4, ENTITY_HIDING_GEL
+  entity $3, $3, ENTITY_HIDING_ZOL
+  entity $3, $5, ENTITY_HIDING_ZOL
+  entity $4, $4, ENTITY_HIDING_ZOL
   entity $6, $7, ENTITY_TRACTOR_DEVICE
   entities_end
 
@@ -639,9 +639,9 @@ IndoorsB80Entities::
   entities_end
 
 IndoorsB81Entities::
-  entity $1, $3, ENTITY_HIDING_GEL
-  entity $1, $4, ENTITY_HIDING_GEL
-  entity $1, $5, ENTITY_HIDING_GEL
+  entity $1, $3, ENTITY_HIDING_ZOL
+  entity $1, $4, ENTITY_HIDING_ZOL
+  entity $1, $5, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB82Entities::
@@ -658,31 +658,31 @@ IndoorsB84Entities::
   entities_end
 
 IndoorsB85Entities::
-  entity $4, $8, ENTITY_HIDING_GEL
+  entity $4, $8, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB86Entities::
   entity $3, $6, ENTITY_HARDHAT_BEETLE
-  entity $3, $4, ENTITY_HIDING_GEL
-  entity $4, $7, ENTITY_HIDING_GEL
+  entity $3, $4, ENTITY_HIDING_ZOL
+  entity $4, $7, ENTITY_HIDING_ZOL
   entity $4, $2, ENTITY_HARDHAT_BEETLE
   entities_end
 
 IndoorsB87Entities::
-  entity $4, $1, ENTITY_HIDING_GEL
-  entity $5, $1, ENTITY_HIDING_GEL
+  entity $4, $1, ENTITY_HIDING_ZOL
+  entity $5, $1, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB88Entities::
-  entity $2, $5, ENTITY_HIDING_GEL
-  entity $2, $7, ENTITY_HIDING_GEL
-  entity $4, $5, ENTITY_HIDING_GEL
-  entity $4, $7, ENTITY_HIDING_GEL
+  entity $2, $5, ENTITY_HIDING_ZOL
+  entity $2, $7, ENTITY_HIDING_ZOL
+  entity $4, $5, ENTITY_HIDING_ZOL
+  entity $4, $7, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB89Entities::
   entity $3, $3, ENTITY_KEESE
-  entity $3, $5, ENTITY_HIDING_GEL
+  entity $3, $5, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB8AEntities::
@@ -696,8 +696,8 @@ IndoorsB8BEntities::
   entities_end
 
 IndoorsB8CEntities::
-  entity $4, $4, ENTITY_HIDING_GEL
-  entity $4, $5, ENTITY_HIDING_GEL
+  entity $4, $4, ENTITY_HIDING_ZOL
+  entity $4, $5, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB8DEntities::
@@ -722,33 +722,33 @@ IndoorsB91Entities::
   entity $1, $6, ENTITY_KEESE
   entity $2, $5, ENTITY_BUSH_CRAWLER
   entity $5, $3, ENTITY_BUSH_CRAWLER
-  entity $6, $6, ENTITY_HIDING_GEL
+  entity $6, $6, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB92Entities::
-  entity $3, $2, ENTITY_HIDING_GEL
+  entity $3, $2, ENTITY_HIDING_ZOL
   entity $4, $5, ENTITY_BUSH_CRAWLER
   entities_end
 
 IndoorsB93Entities::
   entity $2, $1, ENTITY_BUSH_CRAWLER
-  entity $2, $4, ENTITY_HIDING_GEL
+  entity $2, $4, ENTITY_HIDING_ZOL
   entity $3, $7, ENTITY_BUSH_CRAWLER
-  entity $4, $3, ENTITY_HIDING_GEL
+  entity $4, $3, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB94Entities::
-  entity $2, $7, ENTITY_HIDING_GEL
+  entity $2, $7, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB95Entities::
-  entity $1, $5, ENTITY_HIDING_GEL
-  entity $4, $5, ENTITY_HIDING_GEL
-  entity $5, $2, ENTITY_HIDING_GEL
+  entity $1, $5, ENTITY_HIDING_ZOL
+  entity $4, $5, ENTITY_HIDING_ZOL
+  entity $5, $2, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB96Entities::
-  entity $5, $2, ENTITY_HIDING_GEL
+  entity $5, $2, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsB97Entities::
@@ -762,9 +762,9 @@ IndoorsB97Entities::
   entities_end
 
 IndoorsB98Entities::
-  entity $2, $2, ENTITY_GEL
-  entity $4, $8, ENTITY_GEL
-  entity $5, $3, ENTITY_GEL
+  entity $2, $2, ENTITY_ZOL
+  entity $4, $8, ENTITY_ZOL
+  entity $5, $3, ENTITY_ZOL
   entity $2, $5, ENTITY_MIMIC
   entity $4, $1, ENTITY_MIMIC
   entities_end
@@ -863,8 +863,8 @@ IndoorsBABEntities::
   entities_end
 
 IndoorsBACEntities::
-  entity $3, $3, ENTITY_HIDING_GEL
-  entity $4, $4, ENTITY_HIDING_GEL
+  entity $3, $3, ENTITY_HIDING_ZOL
+  entity $4, $4, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsBADEntities::
@@ -874,14 +874,14 @@ IndoorsBADEntities::
   entities_end
 
 IndoorsBAEEntities::
-  entity $3, $1, ENTITY_HIDING_GEL
-  entity $5, $3, ENTITY_HIDING_GEL
+  entity $3, $1, ENTITY_HIDING_ZOL
+  entity $5, $3, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsBAFEntities::
-  entity $5, $4, ENTITY_HIDING_GEL
-  entity $5, $5, ENTITY_HIDING_GEL
-  entity $5, $6, ENTITY_HIDING_GEL
+  entity $5, $4, ENTITY_HIDING_ZOL
+  entity $5, $5, ENTITY_HIDING_ZOL
+  entity $5, $6, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsBB0Entities::
@@ -917,21 +917,21 @@ IndoorsBB6Entities::
   entities_end
 
 IndoorsBB7Entities::
-  entity $1, $4, ENTITY_HIDING_GEL
+  entity $1, $4, ENTITY_HIDING_ZOL
   entity $2, $0, ENTITY_FIREBALL_SHOOTER
-  entity $5, $5, ENTITY_HIDING_GEL
+  entity $5, $5, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsBB8Entities::
   entity $2, $6, ENTITY_KEESE
   entity $2, $7, ENTITY_KEESE
-  entity $4, $6, ENTITY_HIDING_GEL
+  entity $4, $6, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsBB9Entities::
   entity $2, $2, ENTITY_KEESE
   entity $2, $4, ENTITY_KEESE
-  entity $3, $3, ENTITY_HIDING_GEL
+  entity $3, $3, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsBBAEntities::
@@ -939,14 +939,14 @@ IndoorsBBAEntities::
   entities_end
 
 IndoorsBBBEntities::
-  entity $3, $7, ENTITY_HIDING_GEL
-  entity $4, $2, ENTITY_HIDING_GEL
+  entity $3, $7, ENTITY_HIDING_ZOL
+  entity $4, $2, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsBBCEntities::
-  entity $3, $7, ENTITY_HIDING_GEL
-  entity $4, $5, ENTITY_HIDING_GEL
-  entity $6, $8, ENTITY_HIDING_GEL
+  entity $3, $7, ENTITY_HIDING_ZOL
+  entity $4, $5, ENTITY_HIDING_ZOL
+  entity $6, $8, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsBBDEntities::
@@ -1010,18 +1010,18 @@ IndoorsBC7Entities::
   entities_end
 
 IndoorsBC8Entities::
-  entity $3, $2, ENTITY_HIDING_GEL
-  entity $3, $7, ENTITY_HIDING_GEL
+  entity $3, $2, ENTITY_HIDING_ZOL
+  entity $3, $7, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsBC9Entities::
-  entity $3, $3, ENTITY_HIDING_GEL
+  entity $3, $3, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsBCAEntities::
   entity $4, $5, ENTITY_BUSH_CRAWLER
-  entity $6, $2, ENTITY_HIDING_GEL
-  entity $6, $4, ENTITY_HIDING_GEL
+  entity $6, $2, ENTITY_HIDING_ZOL
+  entity $6, $4, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsBCBEntities::
@@ -1033,10 +1033,10 @@ IndoorsBCCEntities::
   entities_end
 
 IndoorsBCDEntities::
-  entity $2, $1, ENTITY_HIDING_GEL
-  entity $2, $7, ENTITY_HIDING_GEL
-  entity $4, $3, ENTITY_HIDING_GEL
-  entity $4, $8, ENTITY_HIDING_GEL
+  entity $2, $1, ENTITY_HIDING_ZOL
+  entity $2, $7, ENTITY_HIDING_ZOL
+  entity $4, $3, ENTITY_HIDING_ZOL
+  entity $4, $8, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsBCEEntities::
@@ -1062,7 +1062,7 @@ IndoorsBD1Entities::
 IndoorsBD2Entities::
   entity $1, $3, ENTITY_MOBLIN
   entity $1, $6, ENTITY_MOBLIN
-  entity $3, $2, ENTITY_GEL
+  entity $3, $2, ENTITY_ZOL
   entity $3, $7, ENTITY_ANTI_FAIRY
   entities_end
 
@@ -1085,8 +1085,8 @@ IndoorsBD7Entities::
   entities_end
 
 IndoorsBD8Entities::
-  entity $1, $3, ENTITY_HIDING_GEL
-  entity $2, $6, ENTITY_HIDING_GEL
+  entity $1, $3, ENTITY_HIDING_ZOL
+  entity $2, $6, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsBD9Entities::
@@ -1149,9 +1149,9 @@ IndoorsBE5Entities::
 
 IndoorsBE6Entities::
   entity $1, $3, ENTITY_HEART_PIECE
-  entity $3, $4, ENTITY_HIDING_GEL
-  entity $3, $5, ENTITY_HIDING_GEL
-  entity $3, $6, ENTITY_HIDING_GEL
+  entity $3, $4, ENTITY_HIDING_ZOL
+  entity $3, $5, ENTITY_HIDING_ZOL
+  entity $3, $6, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsBE7Entities::
@@ -1190,9 +1190,9 @@ IndoorsBEEEntities::
 
 IndoorsBEFEntities::
   entity $3, $1, ENTITY_BUSH_CRAWLER
-  entity $3, $5, ENTITY_HIDING_GEL
+  entity $3, $5, ENTITY_HIDING_ZOL
   entity $5, $5, ENTITY_BUSH_CRAWLER
-  entity $5, $3, ENTITY_HIDING_GEL
+  entity $5, $3, ENTITY_HIDING_ZOL
   entities_end
 
 IndoorsBF0Entities::

@@ -100,7 +100,7 @@
     db 0
     db 0
     db 0
-    db CHEST_GEL
+    db CHEST_ZOL
     db 0
     db 0
     db CHEST_COMPASS
@@ -152,7 +152,7 @@
     db 0
     db 0
     db 0
-    db CHEST_GEL
+    db CHEST_ZOL
     db 0
     db 0
     db 0

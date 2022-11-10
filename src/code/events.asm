@@ -489,7 +489,7 @@ CheckStepOnButtonTrigger::
 
 CheckKillInOrderTrigger::
     ld   c, $00                                   ; $5FEB: $0E $00
-    ld   hl, wDBB6                                ; $5FED: $21 $B6 $DB
+    ld   hl, wKillOrder                           ; $5FED: $21 $B6 $DB
 
 .loop_5FF0
     ld   a, [hl+]                                 ; $5FF0: $2A

@@ -3465,12 +3465,19 @@ wDBB3::
 wDBB4::
   ds 1 ; DBB4
 
-; TODO comment
-wKillCount2::
+; The number of enemies killed, which is also used as an index into
+; the wKillOrder array.
+; Reset when loading a new indoor room, but not in the overworld,
+; which can cause an overflow, which can result in the so called
+; "Tunic Glitch" bug when 90 enemies are killed and wTunicType is
+; overwritten.
+wKillCount::
   ds 1 ; DBB5
 
-; Unlabeled
-wDBB6::
+; An array of enemy IDs in the order they were killed.
+; Used by CheckKillInOrderTrigger (the TRIGGER_KILL_IN_ORDER puzzle
+; in Bottle Grotto).
+wKillOrder::
   ds $11 ; DBB6 - DBC6
 
 ; TODO comment
@@ -3585,6 +3592,14 @@ wDC0E::
 ; 0 = green,
 ; 1 = red,
 ; 2 = blue
+; 
+; Other valid values (don't occur naturally, but can be set by the "Tunic Glitch" bug
+; when wKillOrder overflows into this memory location):
+; 3 = inverted red,
+; 4 = inverted blue,
+;
+; Other values are also possible, but their effects will depend on the currently active
+; palettes.
 wTunicType::
   ds 1 ; DC0F
 

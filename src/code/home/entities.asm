@@ -1178,14 +1178,19 @@ DidKillEnemy::
     ld   a, [hl]                                  ; $3F62: $7E
     cp   $FF                                      ; $3F63: $FE $FF
     jr   z, UnloadEntity                          ; $3F65: $28 $26
+    ; Increase wKillCount
     push af                                       ; $3F67: $F5
-    ld   a, [wKillCount2]                         ; $3F68: $FA $B5 $DB
+    ld   a, [wKillCount]                          ; $3F68: $FA $B5 $DB
     ld   e, a                                     ; $3F6B: $5F
     ld   d, b                                     ; $3F6C: $50
     inc  a                                        ; $3F6D: $3C
-    ld   [wKillCount2], a                         ; $3F6E: $EA $B5 $DB
+    ld   [wKillCount], a                          ; $3F6E: $EA $B5 $DB
+    ; Append entity ID to wKillOrder array
+    ; There's a bug here: The bounds of wKillOrder
+    ; isn't checked, and can overflow, which can
+    ; cause the so-called "Tunic Glitch" among others.
     ld   a, [hl]                                  ; $3F71: $7E
-    ld   hl, wDBB6                                ; $3F72: $21 $B6 $DB
+    ld   hl, wKillOrder                           ; $3F72: $21 $B6 $DB
     add  hl, de                                   ; $3F75: $19
     ld   [hl], a                                  ; $3F76: $77
     pop  af                                       ; $3F77: $F1

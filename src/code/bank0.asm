@@ -5958,8 +5958,9 @@ LoadRoom::
     ld   [MBC3SelectBank], a                      ; $3126: $EA $00 $21
     ldh  [hRoomBank], a                           ; $3129: $E0 $E8
     call func_014_5897                            ; $312B: $CD $97 $58
+    ; Reset wKillCount and wKillOrder array
     ld   e, a                                     ; $312E: $5F
-    ld   hl, wKillCount2                          ; $312F: $21 $B5 $DB
+    ld   hl, wKillCount                           ; $312F: $21 $B5 $DB
 .loop
     xor  a                                        ; $3132: $AF
     ldi  [hl], a                                  ; $3133: $22

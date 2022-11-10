@@ -5966,7 +5966,7 @@ LoadRoom::
     ldi  [hl], a                                  ; $3133: $22
     inc  e                                        ; $3134: $1C
     ld   a, e                                     ; $3135: $7B
-    cp   $11                                      ; $3136: $FE $11
+    cp   wKillOrder.end - wKillOrder              ; $3136: $FE $11
     jr   nz, .loop                                ; $3138: $20 $F8
 .indoorSpecialCodeEnd
 

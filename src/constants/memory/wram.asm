@@ -3479,6 +3479,7 @@ wKillCount::
 ; in Bottle Grotto).
 wKillOrder::
   ds $11 ; DBB6 - DBC6
+.end:
 
 ; TODO comment
 wInvincibilityCounter::

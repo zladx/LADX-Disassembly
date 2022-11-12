@@ -85,6 +85,11 @@ BANK_1C_VAR = 1
 ; __SKIP_DIALOG_SUPPORT__
 ;   Pressing the B button will skip the remaining dialog and close the
 ;   text box immediately (for most dialog; some is marked as unskippable).
+;
+; __WEAK_GENIE__
+;   The Genie (the boss in Level 2, Bottle Grotto) is weaker. The bottle
+;   only needs to be thrown into the wall two times instead of three, and
+;   the Genie himself has less HP.
 
 __PATCH_0__ = FALSE ; Applies to JP1+, EN1+, DE, FR
 __PATCH_1__ = FALSE ; Applies to DE, FR
@@ -96,6 +101,7 @@ __PATCH_9__ = FALSE ; Applies to DE, JP
 __PATCH_A__ = 0 ; 1 in JP, 2 in DE
 __SKIP_DIALOG_SUPPORT__ = FALSE ; TRUE in DE, FR
 __DIACRITICS_SUPPORT__ = FALSE ; TRUE in JP, DE
+__WEAK_GENIE__ = FALSE ; TRUE in FR, DE
 __USE_FIXED_DIALOG_BANKS__ = FALSE ; TRUE in JP
 
 ; If the Key Cavern map is split into 1F and B1F on the subscreen.
@@ -211,6 +217,7 @@ IF (VERSION > 0)
 __PATCH_4__ = TRUE
 ENDC
 __SKIP_DIALOG_SUPPORT__ = TRUE
+__WEAK_GENIE__ = TRUE
 
 ELIF ("{LANG}" == "DE")
 LANG_DE = TRUE
@@ -241,6 +248,7 @@ IF (VERSION > 0)
 __PATCH_4__ = TRUE
 ENDC
 __SKIP_DIALOG_SUPPORT__ = TRUE
+__WEAK_GENIE__ = TRUE
 ENDC
 
 IF !DEF(DEBUG_SAVE_BOMB_COUNT)

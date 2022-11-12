@@ -1,9 +1,9 @@
-IF __PATCH_1__
-GENIE_VAR_A = $02
-GENIE_VAR_B = $06
+IF __WEAK_GENIE__
+JAR_HEALTH = $02
+GENIE_HEALTH = $06
 ELSE
-GENIE_VAR_A = $03
-GENIE_VAR_B = $08
+JAR_HEALTH = $03
+GENIE_HEALTH = $08
 ENDC
 
 GenieEntityHandler::
@@ -23,7 +23,7 @@ GenieState0Handler::
     ld   hl, wEntitiesPrivateState4Table          ; $4016: $21 $40 $C4
     add  hl, bc                                   ; $4019: $09
     ld   a, [hl]                                  ; $401A: $7E
-    cp   GENIE_VAR_A                              ; $401B: $FE $03
+    cp   JAR_HEALTH                               ; $401B: $FE $03
     jr   c, .jr_404E                              ; $401D: $38 $2F
 
     ld   a, ENTITY_GENIE                          ; $401F: $3E $5C
@@ -533,7 +533,7 @@ func_004_4345::
     ld   [hl], $04                                ; $4363: $36 $04
     ld   hl, wEntitiesHealthTable                 ; $4365: $21 $60 $C3
     add  hl, bc                                   ; $4368: $09
-    ld   [hl], GENIE_VAR_B                        ; $4369: $36 $08
+    ld   [hl], GENIE_HEALTH                       ; $4369: $36 $08
     ld_dialog_low a, Dialog053                    ; $436B: $3E $53
 
 .jr_436D

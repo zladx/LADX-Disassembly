@@ -1280,7 +1280,7 @@ jr_020_4C0B:
     jr   c, .ret_4C3E                             ; $4C16: $38 $26
 
     ldh  a, [hPressedButtonsMask]                 ; $4C18: $F0 $CB
-    and  $03                                      ; $4C1A: $E6 $03
+    and  J_RIGHT | J_LEFT                         ; $4C1A: $E6 $03
     ld   c, a                                     ; $4C1C: $4F
     ld   b, $00                                   ; $4C1D: $06 $00
     ld   hl, Data_020_4BF9 - 1                    ; $4C1F: $21 $F8 $4B
@@ -3626,7 +3626,7 @@ func_020_6111::
     and  a                                        ; $6125: $A7
     jr   z, .ret_612D                             ; $6126: $28 $05
 
-    ld   a, $0C                                   ; $6128: $3E $0C
+    ld   a, GAMEPLAY_INVENTORY_FADE_OUT           ; $6128: $3E $0C
     ld   [wGameplaySubtype], a                    ; $612A: $EA $96 $DB
 
 .ret_612D
@@ -4072,7 +4072,7 @@ jr_020_635E:
     jr   nz, .jr_63A1                             ; $6398: $20 $07
 
     ld   a, [wGameplaySubtype]                    ; $639A: $FA $96 $DB
-    cp   $02                                      ; $639D: $FE $02
+    cp   GAMEPLAY_INVENTORY_DELAY1                ; $639D: $FE $02
     jr   nc, jr_020_63A2                          ; $639F: $30 $01
 
 .jr_63A1
@@ -4117,15 +4117,15 @@ InventoryVisibleHandler::
     jr   z, .jr_63F5                              ; $63DD: $28 $16
 
     ld   a, [wGameplaySubtype]                    ; $63DF: $FA $96 $DB
-    cp   $0C                                      ; $63E2: $FE $0C
-    jr   nz, ret_020_6445                         ; $63E4: $20 $5F
+    cp   GAMEPLAY_INVENTORY_FADE_OUT              ; $63E2: $FE $0C
+    jr   nz, CloseInventory.return                ; $63E4: $20 $5F
 
     xor  a                                        ; $63E6: $AF
     ld   [wCloseInventoryAfterOcarinaMenuClosed], a ; $63E7: $EA $BA $C1
     ld   [wOcarinaMenuOpen], a                    ; $63EA: $EA $B5 $C1
     ld   [wOcarinaMenuOpening], a                 ; $63ED: $EA $B8 $C1
     ld   [wOcarinaMenuClosing], a                 ; $63F0: $EA $B9 $C1
-    jr   jr_020_6436                              ; $63F3: $18 $41
+    jr   CloseInventory                           ; $63F3: $18 $41
 
 .jr_63F5
     ; POI: Debug tool 3 check to enable free movement mode on the subscreen
@@ -4134,7 +4134,7 @@ InventoryVisibleHandler::
     and  J_SELECT                                 ; $63F7: $E6 $40
     jr   z, jr_020_641E                           ; $63F9: $28 $23
 
-    ld   a, $09                                   ; $63FB: $3E $09
+    ld   a, GAMEPLAY_INVENTORY_STATUS_IN          ; $63FB: $3E $09
     ld   [wGameplaySubtype], a                    ; $63FD: $EA $96 $DB
     ld   a, $90                                   ; $6400: $3E $90
     ld   [wDE0A], a                               ; $6402: $EA $0A $DE
@@ -4154,7 +4154,7 @@ IF !__PATCH_3__
 ENDC
 
 .jr_641C
-    jr   ret_020_6445                             ; $641C: $18 $27
+    jr   CloseInventory.return                    ; $641C: $18 $27
 
 jr_020_641E:
     ld   a, [wOcarinaMenuOpen]                    ; $641E: $FA $B5 $C1
@@ -4162,16 +4162,16 @@ jr_020_641E:
     or   [hl]                                     ; $6424: $B6
     ld   hl, wOcarinaMenuClosing                  ; $6425: $21 $B9 $C1
     or   [hl]                                     ; $6428: $B6
-    jr   nz, ret_020_6445                         ; $6429: $20 $1A
+    jr   nz, CloseInventory.return                ; $6429: $20 $1A
 
     ldh  a, [hJoypadState]                        ; $642B: $F0 $CC
     and  J_START                                  ; $642D: $E6 $80
-    jr   z, ret_020_6445                          ; $642F: $28 $14
+    jr   z, CloseInventory.return                 ; $642F: $28 $14
 
-    ld   a, $0C                                   ; $6431: $3E $0C
+    ld   a, GAMEPLAY_INVENTORY_FADE_OUT           ; $6431: $3E $0C
     ld   [wGameplaySubtype], a                    ; $6433: $EA $96 $DB
 
-jr_020_6436:
+CloseInventory:
     xor  a                                        ; $6436: $AF
     ld   [wTransitionSequenceCounter], a          ; $6437: $EA $6B $C1
     ld   [wC16C], a                               ; $643A: $EA $6C $C1
@@ -4179,8 +4179,7 @@ jr_020_6436:
     ld   [wPaletteUnknownE], a                    ; $643E: $EA $D5 $DD
     ld   a, JINGLE_CLOSE_INVENTORY                ; $6441: $3E $12
     ldh  [hJingle], a                             ; $6443: $E0 $F2
-
-ret_020_6445:
+.return:
     ret                                           ; $6445: $C9
 
 func_020_6446::
@@ -4351,12 +4350,12 @@ InventoryInteractiveHandler::
     call func_020_5EB5                            ; $6583: $CD $B5 $5E
     call func_020_64EE                            ; $6586: $CD $EE $64
     ldh  a, [hPressedButtonsMask]                 ; $6589: $F0 $CB
-    and  $40                                      ; $658B: $E6 $40
+    and  J_SELECT                                 ; $658B: $E6 $40
     jr   nz, .jr_6596                             ; $658D: $20 $07
 
-    ld   a, $0B                                   ; $658F: $3E $0B
+    ld   a, GAMEPLAY_INVENTORY_STATUS_OUT         ; $658F: $3E $0B
     ld   [wGameplaySubtype], a                    ; $6591: $EA $96 $DB
-    jr   ret_020_65A7                             ; $6594: $18 $11
+    jr   .return                                  ; $6594: $18 $11
 
 .jr_6596
     ld   a, [wDE0A]                               ; $6596: $FA $0A $DE
@@ -4370,14 +4369,14 @@ InventoryInteractiveHandler::
 .jr_65A4
     ld   [wDE0A], a                               ; $65A4: $EA $0A $DE
 
-ret_020_65A7:
+.return:
     ret                                           ; $65A7: $C9
 
 InventoryStatusInHandler::
     call func_020_5EB5                            ; $65A8: $CD $B5 $5E
     call func_020_64EE                            ; $65AB: $CD $EE $64
     ldh  a, [hPressedButtonsMask]                 ; $65AE: $F0 $CB
-    and  $40                                      ; $65B0: $E6 $40
+    and  J_SELECT                                 ; $65B0: $E6 $40
     jr   nz, .ret_65B7                            ; $65B2: $20 $03
 
     call IncrementGameplaySubtype_20              ; $65B4: $CD $83 $66
@@ -4393,7 +4392,7 @@ InventoryStatusOutHandler::
     cp   $90                                      ; $65C3: $FE $90
     jr   c, .jr_65CE                              ; $65C5: $38 $07
 
-    ld   a, $08                                   ; $65C7: $3E $08
+    ld   a, GAMEPLAY_INVENTORY_INTERACTIVE        ; $65C7: $3E $08
     ld   [wGameplaySubtype], a                    ; $65C9: $EA $96 $DB
     ld   a, $90                                   ; $65CC: $3E $90
 
@@ -4424,7 +4423,7 @@ InventoryFadeOutHandler::
     ld   a, GAMEPLAY_WORLD                        ; $65FE: $3E $0B
     ld   [wGameplayType], a                       ; $6600: $EA $95 $DB
     ldh  [hContinueMusicAfterWarp], a             ; $6603: $E0 $BC
-    ld   a, $02                                   ; $6605: $3E $02
+    ld   a, GAMEPLAY_INVENTORY_DELAY1             ; $6605: $3E $02
     ld   [wGameplaySubtype], a                    ; $6607: $EA $96 $DB
     ld   a, [wIsIndoor]                           ; $660A: $FA $A5 $DB
     and  a                                        ; $660D: $A7

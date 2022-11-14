@@ -2390,9 +2390,9 @@ InventoryEntryPoint::
 ._05 dw InventoryLoad4Handler
 ._06 dw InventoryLoad5Handler
 ._07 dw InventoryFadeInHandler
-._08 dw InventoryVisibleHandler
-._09 dw InventoryInteractiveHandler
-._0A dw InventoryStatusInHandler
+._08 dw InventoryInteractiveHandler
+._09 dw InventoryStatusInHandler
+._0A dw InventoryStatusHandler
 ._0B dw InventoryStatusOutHandler
 ._0C dw InventoryFadeOutHandler
 
@@ -4104,7 +4104,7 @@ jr_020_63BE:
     call func_015_7964_trampoline                 ; $63C0: $CD $A0 $3D
     ret                                           ; $63C3: $C9
 
-InventoryVisibleHandler::
+InventoryInteractiveHandler::
     call func_020_5EB5                            ; $63C4: $CD $B5 $5E
     call func_020_6215                            ; $63C7: $CD $15 $62
     call moveInventoryCursor                      ; $63CA: $CD $06 $5F
@@ -4346,7 +4346,7 @@ jr_020_654E:
     call func_020_6446                            ; $657F: $CD $46 $64
     ret                                           ; $6582: $C9
 
-InventoryInteractiveHandler::
+InventoryStatusInHandler::
     call func_020_5EB5                            ; $6583: $CD $B5 $5E
     call func_020_64EE                            ; $6586: $CD $EE $64
     ldh  a, [hPressedButtonsMask]                 ; $6589: $F0 $CB
@@ -4372,7 +4372,7 @@ InventoryInteractiveHandler::
 .return:
     ret                                           ; $65A7: $C9
 
-InventoryStatusInHandler::
+InventoryStatusHandler::
     call func_020_5EB5                            ; $65A8: $CD $B5 $5E
     call func_020_64EE                            ; $65AB: $CD $EE $64
     ldh  a, [hPressedButtonsMask]                 ; $65AE: $F0 $CB

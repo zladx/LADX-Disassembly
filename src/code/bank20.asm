@@ -4202,19 +4202,28 @@ func_020_6446::
 
     ret                                           ; $645B: $C9
 
-Data_020_645C::
-    db   $40, $05, $40, $25, $5C, $03, $5E, $03   ; $645C
+GreenTunicStatusOAMData::
+    db   $40, OAM_GBC_PAL_5              ; left green tunic
+    db   $40, OAM_GBC_PAL_5 | OAM_X_FLIP ; right green tunic
+    db   $5C, OAM_GBC_PAL_3              ; left "WEAR G"
+    db   $5E, OAM_GBC_PAL_3              ; right "WEAR G"
 
-Data_020_6464::
-    db   $40, $06, $40, $26, $60, $03, $62, $03   ; $6464
+RedTunicStatusOAMData::
+    db   $40, OAM_GBC_PAL_6              ; left red tunic
+    db   $40, OAM_GBC_PAL_6 | OAM_X_FLIP ; right red tunic
+    db   $60, OAM_GBC_PAL_3              ; left "WEAR R"
+    db   $62, OAM_GBC_PAL_3              ; right "WEAR R"
 
-Data_020_646C::
-    db   $40, $07, $40, $27, $64, $03, $7E, $03   ; $646C
+BlueTunicStatusOAMData::
+    db   $40, OAM_GBC_PAL_7              ; left blue tunic
+    db   $40, OAM_GBC_PAL_7 | OAM_X_FLIP ; right blue tunic
+    db   $64, OAM_GBC_PAL_3              ; left "WEAR B"
+    db   $7E, OAM_GBC_PAL_3              ; right "WEAR B"
 
-Data_020_6474::
-    dw   Data_020_645C
-    dw   Data_020_6464
-    dw   Data_020_646C
+TunicStatusOAMTable::
+    dw   GreenTunicStatusOAMData
+    dw   RedTunicStatusOAMData
+    dw   BlueTunicStatusOAMData
 
 Data_020_647A::
     db   $42, $06, $42, $26, $66, $03, $7A, $03, $6E, $03
@@ -4251,7 +4260,8 @@ Data_020_64E4::
     db   $7A, $03, $68, $03, $6A, $03   ; $64E2
     db   $7C, $03, $7C, $03                       ; $64EA
 
-func_020_64EE::
+; Draw the inventory status window that appears when you hold SELECT
+RenderInventoryStatus::
     ld   hl, wOAMBuffer+$10                       ; $64EE: $21 $10 $C0
     ld   a, $53                                   ; $64F1: $3E $53
     ldh  [hBGMapOffsetLow], a                     ; $64F3: $E0 $E1
@@ -4259,7 +4269,7 @@ func_020_64EE::
     ldh  [hMultiPurposeB], a                      ; $64F8: $E0 $E2
     push hl                                       ; $64FA: $E5
     ld   c, $04                                   ; $64FB: $0E $04
-    ld   hl, Data_020_6474                        ; $64FD: $21 $74 $64
+    ld   hl, TunicStatusOAMTable                  ; $64FD: $21 $74 $64
     ld   a, [wTunicType]                          ; $6500: $FA $0F $DC
     sla  a                                        ; $6503: $CB $27
     ld   e, a                                     ; $6505: $5F
@@ -4348,7 +4358,7 @@ jr_020_654E:
 
 InventoryStatusInHandler::
     call func_020_5EB5                            ; $6583: $CD $B5 $5E
-    call func_020_64EE                            ; $6586: $CD $EE $64
+    call RenderInventoryStatus                    ; $6586: $CD $EE $64
     ldh  a, [hPressedButtonsMask]                 ; $6589: $F0 $CB
     and  J_SELECT                                 ; $658B: $E6 $40
     jr   nz, .jr_6596                             ; $658D: $20 $07
@@ -4374,7 +4384,7 @@ InventoryStatusInHandler::
 
 InventoryStatusHandler::
     call func_020_5EB5                            ; $65A8: $CD $B5 $5E
-    call func_020_64EE                            ; $65AB: $CD $EE $64
+    call RenderInventoryStatus                    ; $65AB: $CD $EE $64
     ldh  a, [hPressedButtonsMask]                 ; $65AE: $F0 $CB
     and  J_SELECT                                 ; $65B0: $E6 $40
     jr   nz, .ret_65B7                            ; $65B2: $20 $03
@@ -4386,7 +4396,7 @@ InventoryStatusHandler::
 
 InventoryStatusOutHandler::
     call func_020_5EB5                            ; $65B8: $CD $B5 $5E
-    call func_020_64EE                            ; $65BB: $CD $EE $64
+    call RenderInventoryStatus                    ; $65BB: $CD $EE $64
     ld   a, [wDE0A]                               ; $65BE: $FA $0A $DE
     add  $04                                      ; $65C1: $C6 $04
     cp   $90                                      ; $65C3: $FE $90

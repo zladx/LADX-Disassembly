@@ -2647,7 +2647,7 @@ jr_003_5748:
     jr   nc, .jr_577F                             ; $576F: $30 $0E
 
     ld   a, [wTunicType]                          ; $5771: $FA $0F $DC
-    and  $01                                      ; $5774: $E6 $01
+    and  TUNIC_RED                                ; $5774: $E6 $01
     jr   nz, .jr_577F                             ; $5776: $20 $07
 
     ld   a, [wActivePowerUp]                      ; $5778: $FA $7C $D4
@@ -6080,7 +6080,7 @@ ApplyLinkCollisionWithEnemy::
 
     ; If using the Blue Tunic, take half damages
     ld   a, [wTunicType]                          ; $6D94: $FA $0F $DC
-    cp   $02                                      ; $6D97: $FE $02
+    cp   TUNIC_BLUE                               ; $6D97: $FE $02
     jr   z, .takeHalfDamages                      ; $6D99: $28 $0E
 
     ; If having an active Guardian Acorn, take no damages
@@ -6708,7 +6708,7 @@ ENDC
 
     ; … make the Genie jar recoil less than usual enemies…
     ld   a, [wTunicType]                          ; $70CD: $FA $0F $DC
-    cp   $01                                      ; $70D0: $FE $01
+    cp   TUNIC_RED                                ; $70D0: $FE $01
     jr   z, .genieJarExtraRecoil                  ; $70D2: $28 $09
     ld   a, [wActivePowerUp]                      ; $70D4: $FA $7C $D4
     cp   ACTIVE_POWER_UP_PIECE_OF_POWER           ; $70D7: $FE $01
@@ -6823,7 +6823,7 @@ ENDC
 
     ; If wearing the attack tunic or having a Piece of power…
     ld   a, [wTunicType]                          ; $716C: $FA $0F $DC
-    cp   $01                                      ; $716F: $FE $01
+    cp   TUNIC_RED                                ; $716F: $FE $01
     jr   z, .powerRecoil                          ; $7171: $28 $07
 
     ld   a, [wActivePowerUp]                      ; $7173: $FA $7C $D4
@@ -6876,11 +6876,11 @@ ApplySwordDamagesToEnemy::
     ; - or is using a Spin attack…
     ; - or is running with the Pegasus boots…
     ld   a, [wTunicType]                          ; $71A2: $FA $0F $DC
-    and  $01                                      ; $71A5: $E6 $01
-    jr   nz, .wearingAttackTunic                  ; $71A7: $20 $05
+    and  TUNIC_RED                                ; $71A5: $E6 $01
+    jr   nz, .wearingRedTunic                     ; $71A7: $20 $05
     ld   a, [wActivePowerUp]                      ; $71A9: $FA $7C $D4
     and  ACTIVE_POWER_UP_PIECE_OF_POWER           ; $71AC: $E6 $01
-.wearingAttackTunic
+.wearingRedTunic
     ld   hl, wIsUsingSpinAttack                   ; $71AE: $21 $21 $C1
     or   [hl]                                     ; $71B1: $B6
     ld   hl, wIsRunningWithPegasusBoots           ; $71B2: $21 $4A $C1

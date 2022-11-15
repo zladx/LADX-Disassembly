@@ -386,7 +386,7 @@ jr_021_4222:
     jr   z, jr_021_4254                           ; $422C: $28 $26
 
     ld   hl, RedTunicPalette + 4                  ; $422E: $21 $2C $55
-    cp   $01                                      ; $4231: $FE $01
+    cp   TUNIC_RED                                      ; $4231: $FE $01
     jr   z, .jr_4238                              ; $4233: $28 $03
 
     ld   hl, BlueTunicPalette + 4                 ; $4235: $21 $34 $55

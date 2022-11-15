@@ -327,9 +327,9 @@ jr_001_5364:
 ENDC
 
     ld   hl, wColorDungeonItemFlags               ; $52E4: $21 $DA $DD
-    ld   de, $05                                  ; $52E7: $11 $05 $00
+    ld   de, SAVE_DX1_SIZE                        ; $52E7: $11 $05 $00
 
-.loop_52EA
+.loopLoadDX1
     call EnableExternalRAMWriting                 ; $52EA: $CD $D0 $27
     ld   a, [bc]                                  ; $52ED: $0A
     inc  bc                                       ; $52EE: $03
@@ -337,11 +337,11 @@ ENDC
     dec  de                                       ; $52F0: $1B
     ld   a, e                                     ; $52F1: $7B
     or   d                                        ; $52F2: $B2
-    jr   nz, .loop_52EA                           ; $52F3: $20 $F5
+    jr   nz, .loopLoadDX1                         ; $52F3: $20 $F5
     ld   hl, wColorDungeonRoomStatus              ; $52F5: $21 $E0 $DD
-    ld   de, $20                                  ; $52F8: $11 $20 $00
+    ld   de, SAVE_DX2_SIZE                        ; $52F8: $11 $20 $00
 
-.loop_52FB
+.loopLoadDX2
     call EnableExternalRAMWriting                 ; $52FB: $CD $D0 $27
     ld   a, [bc]                                  ; $52FE: $0A
     inc  bc                                       ; $52FF: $03
@@ -349,7 +349,7 @@ ENDC
     dec  de                                       ; $5301: $1B
     ld   a, e                                     ; $5302: $7B
     or   d                                        ; $5303: $B2
-    jr   nz, .loop_52FB                           ; $5304: $20 $F5
+    jr   nz, .loopLoadDX2                         ; $5304: $20 $F5
     call EnableExternalRAMWriting                 ; $5306: $CD $D0 $27
     ld   a, [bc]                                  ; $5309: $0A
     ld   [wTunicType], a                          ; $530A: $EA $0F $DC
@@ -1428,9 +1428,9 @@ ENDC
     or   d                                        ; $5E1D: $B2
     jr   nz, .loop_5E12                           ; $5E1E: $20 $F2
     ld   bc, wColorDungeonItemFlags               ; $5E20: $01 $DA $DD
-    ld   de, $05                                  ; $5E23: $11 $05 $00
+    ld   de, SAVE_DX1_SIZE                        ; $5E23: $11 $05 $00
 
-.loop_5E26
+.loopSaveDX1
     call EnableExternalRAMWriting                 ; $5E26: $CD $D0 $27
     ld   a, [bc]                                  ; $5E29: $0A
     inc  bc                                       ; $5E2A: $03
@@ -1439,11 +1439,11 @@ ENDC
     dec  de                                       ; $5E2F: $1B
     ld   a, e                                     ; $5E30: $7B
     or   d                                        ; $5E31: $B2
-    jr   nz, .loop_5E26                           ; $5E32: $20 $F2
+    jr   nz, .loopSaveDX1                         ; $5E32: $20 $F2
     ld   bc, wColorDungeonRoomStatus              ; $5E34: $01 $E0 $DD
-    ld   de, $20                                  ; $5E37: $11 $20 $00
+    ld   de, SAVE_DX2_SIZE                        ; $5E37: $11 $20 $00
 
-.loop_5E3A
+.loopSaveDX2
     call EnableExternalRAMWriting                 ; $5E3A: $CD $D0 $27
     ld   a, [bc]                                  ; $5E3D: $0A
     inc  bc                                       ; $5E3E: $03
@@ -1452,7 +1452,7 @@ ENDC
     dec  de                                       ; $5E43: $1B
     ld   a, e                                     ; $5E44: $7B
     or   d                                        ; $5E45: $B2
-    jr   nz, .loop_5E3A                           ; $5E46: $20 $F2
+    jr   nz, .loopSaveDX2                         ; $5E46: $20 $F2
     call EnableExternalRAMWriting                 ; $5E48: $CD $D0 $27
     ld   a, [wTunicType]                          ; $5E4B: $FA $0F $DC
     call EnableExternalRAMWriting                 ; $5E4E: $CD $D0 $27

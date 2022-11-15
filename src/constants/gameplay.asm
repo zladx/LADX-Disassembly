@@ -449,3 +449,8 @@ SWORD_RECOIL_DEFAULT            equ $30
 BOW_WOW_AT_HOME   equ $00
 BOW_WOW_FOLLOWING equ $01
 BOW_WOW_KIDNAPPED equ $80
+
+; values for wTunicType
+TUNIC_GREEN  equ $00
+TUNIC_RED    equ $01
+TUNIC_BLUE   equ $02

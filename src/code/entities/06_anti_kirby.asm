@@ -329,29 +329,29 @@ AntiKirbyState4Handler::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 AntiKirbySpriteVariants::
 .variant0
-    db $62, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $60, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $62, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $60, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $68, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $68, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $66, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $60, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $62, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $60, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $62, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant3
-    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $68, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $66, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $68, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant4
-    db $62, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $60, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $62, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $60, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant5
-    db $68, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $68, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $66, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant6
-    db $60, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $62, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $60, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $62, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant7
-    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $68, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $66, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $68, OAM_GBC_PAL_1 | OAMF_PAL0
 
 Data_006_4456::
     db   $00, $FC, $62, $21, $00, $04, $6A, $21, $00, $0C, $64, $21, $00, $FC, $64, $01

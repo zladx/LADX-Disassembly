@@ -1,14 +1,14 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 StalfosAggressiveSpriteVariants:: ; $4AA8
 .variant0
-    db $4A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $4C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $4A, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $4C, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant1
-    db $4C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $4A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $4C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $4A, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $4E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $4E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $4E, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $4E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 StalfosAggressiveEntityHandler::
     ld   de, StalfosAggressiveSpriteVariants

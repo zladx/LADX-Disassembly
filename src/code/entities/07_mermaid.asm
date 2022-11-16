@@ -1,26 +1,26 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Mermaid1SpriteVariants::
 .variant0
-    db $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $72, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $70, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $72, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant2
-    db $76, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $78, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $76, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $78, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant3
-    db $78, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $76, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $78, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $76, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Mermaid2SpriteVariants::
 .variant0
-    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $74, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $74, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_1
-    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_1 | OAM_X_FLIP
+    db $74, OAM_GBC_PAL_0 | OAMF_PAL1
+    db $74, OAM_GBC_PAL_0 | OAMF_PAL1 | OAMF_XFLIP
 
 Data_007_469B::
     db   $00, $FC, $7A, $01, $00, $04, $7C, $01, $00, $0C, $7E, $01, $00, $FC, $7E, $21

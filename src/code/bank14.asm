@@ -774,7 +774,7 @@ UpdateEntityTimers::
     ; When the flash countdown is active, invert the palette every 4 frames
     sla  a                                        ; $4DE4: $CB $27
     sla  a                                        ; $4DE6: $CB $27
-    and  OAM_DMG_PAL_1                            ; $4DE8: $E6 $10
+    and  OAMF_PAL1                                ; $4DE8: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4DEA: $E0 $ED
     ret                                           ; $4DEC: $C9
 

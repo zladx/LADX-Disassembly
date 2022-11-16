@@ -7,7 +7,7 @@
 ; (See header.asm)
 Start::
     ; Switch CPU to double-speed if needed
-    cp   GBC ; is running on Game Boy Color?      ; $0150: $FE $11
+    cp   BOOTUP_A_CGB ; running on Game Boy Color? ; $0150: $FE $11
     jr   nz, .notGBC                              ; $0152: $20 $1A
     ld   a, [rKEY1]                               ; $0154: $F0 $4D
     and  $80 ; do we need to switch the CPU speed? ; $0156: $E6 $80

@@ -1,11 +1,11 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 SparkSpriteVariants::
 .variant0
-    db $5C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $5C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $5C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $5C, OAM_GBC_PAL_4 | OAM_DMG_PAL_1
-    db $5C, OAM_GBC_PAL_4 | OAM_DMG_PAL_1 | OAM_X_FLIP
+    db $5C, OAM_GBC_PAL_4 | OAMF_PAL1
+    db $5C, OAM_GBC_PAL_4 | OAMF_PAL1 | OAMF_XFLIP
 
 Data_006_661D::
     db   $00, $10, $00, $F0, $00, $F0, $00, $10

@@ -1,17 +1,17 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 LeeverSpriteVariants::
 .variant0
-    db $56, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $56, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $56, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $56, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $54, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $54, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $52, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $52, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $50, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $50, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
 LeeverEntityHandler::
     ld   de, LeeverSpriteVariants                 ; $7EF5: $11 $E5 $7E
@@ -121,7 +121,7 @@ func_004_7F90:: ; also called from ghini code
     ld   a, OAM_NO_FLIP                           ; $7F97: $3E $00
     jr   c, .jr_7F9D                              ; $7F99: $38 $02
 
-    ld   a, OAM_X_FLIP                            ; $7F9B: $3E $20
+    ld   a, OAMF_XFLIP                            ; $7F9B: $3E $20
 
 .jr_7F9D
     ld   hl, hActiveEntityFlipAttribute           ; $7F9D: $21 $ED $FF

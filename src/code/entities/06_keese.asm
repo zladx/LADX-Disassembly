@@ -1,20 +1,20 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 KeeseSpriteVariants:: ; $6708
 .variant0
-    db $42, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $42, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $42, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $42, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $40, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $40, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $40, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $40, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 KeeseCaveBSpriteVariants::
 .variant0
-    db $62, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $62, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $62, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $62, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $60, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $60, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $60, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $60, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 Data_006_6718::
     db   $00, $05, $0A, $0D

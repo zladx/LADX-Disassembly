@@ -211,14 +211,14 @@ jr_007_65CB:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 GoombaSpriteVariants::
 .variant0
-    db $4A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $4C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $4A, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $4C, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant1
-    db $4C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $4A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $4C, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $4A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $4E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $4E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $4E, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $4E, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
 GoombaEntityHandler::
     ld   hl, wEntitiesPrivateState1Table          ; $65DA: $21 $B0 $C2

@@ -1,17 +1,17 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 CrowSpriteVariants::
 .variant0
-    db $50, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $52, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $50, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $52, OAM_GBC_PAL_3 | OAMF_PAL0
 .variant1
-    db $54, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $56, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $54, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $56, OAM_GBC_PAL_3 | OAMF_PAL0
 .variant2
-    db $52, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $50, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $52, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
+    db $50, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $56, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $54, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $56, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
+    db $54, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 
 CrowEntityHandler::
     ldh  a, [hMapRoom]                            ; $5C99: $F0 $F6

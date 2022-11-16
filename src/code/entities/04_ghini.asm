@@ -1,11 +1,11 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 GhiniSpriteVariants::
 .variant0
-    db $58, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $5A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $58, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $5A, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant1
-    db $5C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $5E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $5C, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $5E, OAM_GBC_PAL_2 | OAMF_PAL0
 
 Data_004_5C04::
     db   $0C, $F4
@@ -244,7 +244,7 @@ func_004_5DA6::
     and  $40                                      ; $5DAD: $E6 $40
     ldh  [hMultiPurpose0], a                      ; $5DAF: $E0 $D7
     pop  af                                       ; $5DB1: $F1
-    and  OAM_BANK_1 | OAM_GBC_PAL_MASK            ; $5DB2: $E6 $0F
+    and  OAMF_BANK1 | OAMF_PALMASK                ; $5DB2: $E6 $0F
     ldh  [hActiveEntityFlipAttribute], a          ; $5DB4: $E0 $ED
     ld   hl, wEntitiesSpriteVariantTable          ; $5DB6: $21 $B0 $C3
     add  hl, bc                                   ; $5DB9: $09

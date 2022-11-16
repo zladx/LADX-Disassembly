@@ -10,7 +10,7 @@ CrystalSwitchEntityHandler::
     ld   [hl], $FF                                ; $4328: $36 $FF
     call GetEntityTransitionCountdown             ; $432A: $CD $05 $0C
     rla                                           ; $432D: $17
-    and  OAM_DMG_PAL_1                            ; $432E: $E6 $10
+    and  OAMF_PAL1                                ; $432E: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4330: $E0 $ED
     ld   de, CrystealSwitchSpriteVariants         ; $4332: $11 $20 $43
     call RenderActiveEntitySpritesPair            ; $4335: $CD $C0 $3B

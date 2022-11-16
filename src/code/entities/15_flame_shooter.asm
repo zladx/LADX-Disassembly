@@ -99,7 +99,7 @@ label_015_4DB5:
     ldh  a, [hFrameCounter]                       ; $4DBA: $F0 $E7
     rla                                           ; $4DBC: $17
     rla                                           ; $4DBD: $17
-    and  OAM_DMG_PAL_1                            ; $4DBE: $E6 $10
+    and  OAMF_PAL1                                ; $4DBE: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4DC0: $E0 $ED
     ld   de, Unknown045SpriteVariants             ; $4DC2: $11 $9D $4D
     call RenderActiveEntitySpritesPair            ; $4DC5: $CD $C0 $3B
@@ -207,7 +207,7 @@ label_015_4E62:
     ldh  a, [hFrameCounter]                       ; $4E62: $F0 $E7
     rla                                           ; $4E64: $17
     rla                                           ; $4E65: $17
-    and  OAM_DMG_PAL_1                            ; $4E66: $E6 $10
+    and  OAMF_PAL1                                ; $4E66: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4E68: $E0 $ED
     ld   de, Unknown046SpriteVariants             ; $4E6A: $11 $A9 $4D
     call RenderActiveEntitySpritesPair            ; $4E6D: $CD $C0 $3B

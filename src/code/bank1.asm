@@ -1815,7 +1815,7 @@ HideAllSprites::
     jr   z, .enableExternalRAMWriting             ; $5F34: $28 $04
     ; disable external RAM writing
     ; (probably because an extra RAM bank available on CGB can be used)
-    ld   [hl], SRAM_DISABLE                       ; $5F36: $36 $00
+    ld   [hl], CART_SRAM_DISABLE                  ; $5F36: $36 $00
     jr   .endIf                                   ; $5F38: $18 $02
 
 .enableExternalRAMWriting

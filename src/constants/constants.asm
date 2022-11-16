@@ -1,7 +1,9 @@
 ;
 ; Useful definitions
 ;
-include "constants/gbhw.asm"
+include "constants/hardware.inc"
+include "constants/joypad.asm"
+include "constants/mbc3.asm"
 include "constants/defines.asm"
 
 ;

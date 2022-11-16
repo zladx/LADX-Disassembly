@@ -103,7 +103,7 @@ CheepCheepJumpingEntityHandler::
     jr   nz, .jr_6BD3                             ; $6BCB: $20 $06
 
     ldh  a, [hActiveEntityFlipAttribute]          ; $6BCD: $F0 $ED
-    or   OAM_Y_FLIP                               ; $6BCF: $F6 $40
+    or   OAMF_YFLIP                               ; $6BCF: $F6 $40
     ldh  [hActiveEntityFlipAttribute], a          ; $6BD1: $E0 $ED
 
 .jr_6BD3

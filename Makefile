@@ -64,9 +64,9 @@ default: build test
 #
 
 # Dependencies for the base version (English 1.0)
-asm_files = $(shell find src     -type f -name '*.asm')
-gfx_files = $(shell find src/gfx -type f -name '*.png')
-bin_files = $(shell find src     -type f -name '*.tilemap.encoded' -o -name '*.attrmap.encoded')
+asm_files =  $(shell find src     -type f -name '*.asm' -o -name '*.inc')
+gfx_files =  $(shell find src/gfx -type f -name '*.png')
+bin_files =  $(shell find src     -type f -name '*.tilemap.encoded' -o -name '*.attrmap.encoded')
 
 # Compile an PNG file for OAM memory to a 2BPP file
 # (inverting the palette and de-interleaving the tiles).

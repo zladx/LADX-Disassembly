@@ -1,44 +1,44 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Bombite1SpriteVariants::
 .variant0
-    db $7A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7A, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $78, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $7A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $7A, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant2
-    db $7E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $7E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7E, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $7E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $72, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant4
-    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $76, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant5
-    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $7C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Bombite2SpriteVariants::
 .variant0
-    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6A, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $68, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $68, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $6A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $68, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $6A, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant2
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $60, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $62, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $60, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $62, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant4
-    db $64, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $66, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $64, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $66, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant5
-    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $6C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 TimerBombiteEntityHandler::
     ld   de, Bombite1SpriteVariants               ; $7D1F: $11 $EF $7C
@@ -53,7 +53,7 @@ TimerBombiteEntityHandler::
     rla                                           ; $7D2E: $17
     rla                                           ; $7D2F: $17
     rla                                           ; $7D30: $17
-    and  OAM_DMG_PAL_1                            ; $7D31: $E6 $10
+    and  OAMF_PAL1                                ; $7D31: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $7D33: $E0 $ED
     call RenderActiveEntitySpritesPair            ; $7D35: $CD $C0 $3B
     call ReturnIfNonInteractive_04                ; $7D38: $CD $A3 $7F
@@ -186,20 +186,20 @@ jr_004_7DD4:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 BouncingBombite1SpriteVariants::
 .variant0
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 BouncingBombite2SpriteVariants::
 .variant0
-    db $6A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $68, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $68, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $68, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $6A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $68, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $6A, OAM_GBC_PAL_2 | OAMF_PAL0
 
 Data_004_7E05::
     db   $08, $F8, $00, $00

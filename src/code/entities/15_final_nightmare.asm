@@ -2293,7 +2293,7 @@ func_015_6245::
     ldh  a, [hFrameCounter]                       ; $62F0: $F0 $E7
     rla                                           ; $62F2: $17
     rla                                           ; $62F3: $17
-    and  OAM_DMG_PAL_1                            ; $62F4: $E6 $10
+    and  OAMF_PAL1                                ; $62F4: $E6 $10
     ld   hl, hActiveEntityFlipAttribute           ; $62F6: $21 $ED $FF
     xor  [hl]                                     ; $62F9: $AE
     ld   [hl], a                                  ; $62FA: $77
@@ -3556,7 +3556,7 @@ label_015_6D6E:
     ldh  a, [hFrameCounter]                       ; $6D6E: $F0 $E7
     rla                                           ; $6D70: $17
     rla                                           ; $6D71: $17
-    and  OAM_DMG_PAL_1                            ; $6D72: $E6 $10
+    and  OAMF_PAL1                                ; $6D72: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $6D74: $E0 $ED
     ld   de, Unknown055SpriteVariants             ; $6D76: $11 $5E $6D
     call RenderActiveEntitySpritesPair            ; $6D79: $CD $C0 $3B

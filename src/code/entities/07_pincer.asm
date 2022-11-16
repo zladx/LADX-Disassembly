@@ -226,35 +226,35 @@ func_007_53D8::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown100SpriteVariants::
 .variant0
-    db $FF, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $FF, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $FF, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $FF, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $6C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $6C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6C, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $6C, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $64, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $62, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $64, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $62, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $68, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $66, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $68, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $66, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $60, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $60, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $60, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $60, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant5
-    db $66, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $68, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $66, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $68, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant6
-    db $62, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $64, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $62, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $64, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant7
-    db $66, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
-    db $68, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $66, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP
+    db $68, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP
 .variant8
-    db $60, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
-    db $60, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $60, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP
+    db $60, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
 .variant9
-    db $68, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
-    db $66, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $68, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
+    db $66, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
 
 func_007_5453::
     ld   de, Unknown100SpriteVariants             ; $5453: $11 $2B $54

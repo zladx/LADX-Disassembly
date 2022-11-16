@@ -1,24 +1,24 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 WizrobeProjectileSpriteVariants::
 .variant0
-    db $6A, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $68, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6A, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
+    db $68, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $68, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $6A, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $68, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $6A, OAM_GBC_PAL_3 | OAMF_PAL0
 .variant2
-    db $6C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_Y_FLIP
-    db $6C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $6C, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_YFLIP
+    db $6C, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
 .variant3
-    db $6C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $6C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6C, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $6C, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 
 WizrobeProjectileEntityHandler::
     ; Flip palette every 8 frame
     ldh  a, [hFrameCounter]                       ; $65F1: $F0 $E7
     rla                                           ; $65F3: $17
     rla                                           ; $65F4: $17
-    and  OAM_DMG_PAL_1                            ; $65F5: $E6 $10
+    and  OAMF_PAL1                                ; $65F5: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $65F7: $E0 $ED
 
     ld   de, WizrobeProjectileSpriteVariants      ; $65F9: $11 $E1 $65

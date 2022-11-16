@@ -1,8 +1,8 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 OwlStatueSpriteVariants::
 .variant0
-    db $5E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $5E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5E, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $5E, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 Data_018_5DFB::
     db   $00, $F8, $50, $06, $00, $00, $52, $06, $00, $08, $54, $06, $00, $10, $56, $06

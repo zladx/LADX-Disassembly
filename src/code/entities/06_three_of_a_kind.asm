@@ -1,29 +1,29 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 ThreeOfAKindSpriteVariants::
 .variant0
-    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $76, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant1
-    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $76, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $74, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $72, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant3
-    db $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $72, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $70, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $7A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $7A, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant5
-    db $7A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7A, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $78, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant6
-    db $7C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
-    db $7E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_3 | OAMF_PAL0
+    db $7E, OAM_GBC_PAL_3 | OAMF_PAL0
 .variant7
-    db $7E, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $7C, OAM_GBC_PAL_3 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7E, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
+    db $7C, OAM_GBC_PAL_3 | OAMF_PAL0 | OAMF_XFLIP
 
 ThreeOfAKindEntityHandler::
     ld   hl, wEntitiesHealthTable                 ; $4931: $21 $60 $C3

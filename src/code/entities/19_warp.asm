@@ -333,7 +333,7 @@ label_019_4406:
     ldh  a, [hFrameCounter]                       ; $440C: $F0 $E7
     rla                                           ; $440E: $17
     rla                                           ; $440F: $17
-    and  OAM_DMG_PAL_1                            ; $4410: $E6 $10
+    and  OAMF_PAL1                                ; $4410: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4412: $E0 $ED
     ldh  a, [hActiveEntityPosX]                   ; $4414: $F0 $EE
     ldh  [hMultiPurposeE], a                      ; $4416: $E0 $E5

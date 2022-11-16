@@ -4047,10 +4047,10 @@ func_036_5844::
 ; - Variant 1 is a double sprite, rendered by RenderActiveEntitySpritesPair
 DungeonBookSpriteVariants::
 .variant0
-    db   $58, OAM_GBC_PAL_2 | OAM_DMG_PAL_0       ; $5879: $58 $02
+    db   $58, OAM_GBC_PAL_2 | OAMF_PAL0           ; $5879: $58 $02
 .variant1
-    db   $5A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0       ; $587B: $5A $00
-    db   $5A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP ; $587D: $5A $20
+    db   $5A, OAM_GBC_PAL_0 | OAMF_PAL0           ; $587B: $5A $00
+    db   $5A, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP ; $587D: $5A $20
 
 ColorDungeonBookEntityHandler::
     ldh  a, [hActiveEntitySpriteVariant]          ; $587F: $F0 $F1

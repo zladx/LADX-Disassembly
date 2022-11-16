@@ -181,7 +181,7 @@ label_019_4F30:
     ldh  a, [hFrameCounter]                       ; $4F30: $F0 $E7
     rla                                           ; $4F32: $17
     rla                                           ; $4F33: $17
-    and  OAM_DMG_PAL_1                            ; $4F34: $E6 $10
+    and  OAMF_PAL1                                ; $4F34: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $4F36: $E0 $ED
     ld   de, Data_019_4EAA                        ; $4F38: $11 $AA $4E
     call RenderActiveEntitySprite                 ; $4F3B: $CD $77 $3C

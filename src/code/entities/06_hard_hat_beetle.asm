@@ -1,20 +1,20 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 HardHatBeetleSpriteVariants::
 .variant0
-    db $44, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $44, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $44, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $44, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $46, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $46, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $46, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $46, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 HardHatBeetleCaveBSpriteVariants::
 .variant0
-    db $64, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $64, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $64, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $64, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $66, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $66, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $66, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 HardHatBeetleEntityHandler::
     ld   de, HardHatBeetleSpriteVariants          ; $4F3C: $11 $2C $4F

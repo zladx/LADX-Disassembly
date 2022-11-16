@@ -1,29 +1,29 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 BunnyD3SpriteVariants::
 .variant0
-    db $50, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $52, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $50, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $52, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant1
-    db $52, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $50, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $52, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $50, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $54, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $56, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $54, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $56, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant3
-    db $56, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $54, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $56, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $54, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $58, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $5A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $58, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $5A, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant5
-    db $58, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $5A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $58, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $5A, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant6
-    db $5A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $58, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5A, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $58, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant7
-    db $5A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $58, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5A, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $58, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 BunnyD3EntityHandler::
     ld   a, [wIsMarinInAnimalVillage]             ; $51D8: $FA $74 $DB

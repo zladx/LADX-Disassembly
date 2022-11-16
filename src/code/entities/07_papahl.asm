@@ -1,46 +1,46 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Papahl1SpriteVariants::
 .variant0
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $6C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $6C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $6E, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $6C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $6E, OAM_GBC_PAL_0 | OAMF_PAL0
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 PapahlDirectionSpriteVariants::
 .right
-    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $72, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $72, OAM_GBC_PAL_1 | OAMF_PAL0
 .up
-    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $76, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $76, OAM_GBC_PAL_1 | OAMF_PAL0
 .left
-    db $78, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $7A, OAM_GBC_PAL_1 | OAMF_PAL0
 .down
-    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $76, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $76, OAM_GBC_PAL_1 | OAMF_PAL0
 
 Papahl2SpriteVariants::
 .variant0
-    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $70, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $72, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $70, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $74, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $76, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $74, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $7A, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $78, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7A, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $78, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $7C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $76, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
+    db $7C, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Papahl4SpriteVariants::
 .variant0
-    db $7E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $7E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7E, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $7E, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 PapahlEntityHandler::
     ld   a, [wIsIndoor]                           ; $4A1B: $FA $A5 $DB

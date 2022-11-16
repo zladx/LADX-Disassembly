@@ -2,32 +2,32 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 TarinBeekeeperSpriteVariants::
 .variant0
-    db $5A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $58, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $58, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $5E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $5C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $5E, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $5C, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $58, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $5A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $58, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $5A, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant3
-    db $5C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $5E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $5C, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $5E, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant4
-    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $56, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $54, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $56, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant5
-    db $56, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $54, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $56, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $54, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant6
-    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $50, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $52, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant7
-    db $52, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $50, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $52, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $50, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant8
-    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $76, OAM_GBC_PAL_2 | OAMF_PAL0
 
 TarinBeekeeperEntityHandler::
     ld   a, c                                     ; $4EB1: $79
@@ -125,11 +125,11 @@ ret_007_4F4D:
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown102SpriteVariants::
 .variant0
-    db $78, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $FF, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $FF, OAM_GBC_PAL_0 | OAMF_PAL0
 .variant1
-    db $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $7C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $7A, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $7C, OAM_GBC_PAL_1 | OAMF_PAL0
 
 func_007_4F56::
     ld   a, $01                                   ; $4F56: $3E $01

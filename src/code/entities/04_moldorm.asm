@@ -272,17 +272,17 @@ Data_004_57F2::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 MoldormSpriteVariants:: ; $58F2
 .variant0
-    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $70, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $70, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $70, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $72, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $72, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $72, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant2
-    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $74, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $74, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $74, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $76, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $76, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $76, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
 func_004_5902::
     ld   hl, wEntitiesPrivateState3Table          ; $5902: $21 $D0 $C2
@@ -418,7 +418,7 @@ func_004_5902::
     ldh  a, [hFrameCounter]                       ; $59DC: $F0 $E7
     rla                                           ; $59DE: $17
     rla                                           ; $59DF: $17
-    and  OAM_DMG_PAL_1                            ; $59E0: $E6 $10
+    and  OAMF_PAL1                                ; $59E0: $E6 $10
     ld   hl, hActiveEntityFlipAttribute           ; $59E2: $21 $ED $FF
     xor  [hl]                                     ; $59E5: $AE
     ld   [hl], a                                  ; $59E6: $77

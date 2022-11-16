@@ -1,11 +1,11 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 LikeLikeSpriteVariants::
 .variant0
-    db $7C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $7C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7C, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $7C, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $7E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $7E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7E, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $7E, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 LikeLikeEntityHandler::
     ld   de, LikeLikeSpriteVariants               ; $7DDC: $11 $D4 $7D

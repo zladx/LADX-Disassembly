@@ -273,11 +273,11 @@ func_007_5F11::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 Unknown101SpriteVariants::
 .variant0
-    db $30, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $30, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $30, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $30, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $32, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $32, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $32, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $32, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 label_007_5F4D:
     ld   de, Unknown101SpriteVariants             ; $5F4D: $11 $45 $5F

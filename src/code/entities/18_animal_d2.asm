@@ -1,17 +1,17 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 AnimalD2SpriteVariants::
 .variant0
-    db $78, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $7A, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant1
-    db $7C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $7E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $7E, OAM_GBC_PAL_1 | OAMF_PAL0
 .variant2
-    db $7A, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $78, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7A, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $78, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $7E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $7C, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7E, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
+    db $7C, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 AnimalD2EntityHandler::
     call func_018_51B0                            ; $526B: $CD $B0 $51

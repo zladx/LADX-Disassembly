@@ -241,11 +241,11 @@ ENDC
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 EvilEagle1SpriteVariants::
 .variant0
-    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7E, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $7E, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
-    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $7E, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP
+    db $7E, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
 
 func_005_5B5A::
     ld   de, EvilEagle1SpriteVariants             ; $5B5A: $11 $52 $5B
@@ -1298,11 +1298,11 @@ func_005_61F2::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 EvilEagle2SpriteVariants::
 .variant0
-    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0
-    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7C, OAM_GBC_PAL_0 | OAMF_PAL0
+    db $7C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP
-    db $7C, OAM_GBC_PAL_0 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $7C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_YFLIP
+    db $7C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
 
 func_005_6256::
     ld   a, $02                                   ; $6256: $3E $02
@@ -1384,17 +1384,17 @@ func_005_6299::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 EvilEagle3SpriteVariants::
 .variant0
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant1
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant2
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP | OAM_X_FLIP
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP | OAMF_XFLIP
 .variant3
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_Y_FLIP
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_YFLIP
 
 func_005_62C8::
     ld   de, EvilEagle3SpriteVariants             ; $62C8: $11 $B8 $62

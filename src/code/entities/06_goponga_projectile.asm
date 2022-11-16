@@ -30,7 +30,7 @@ GopongaProjectileEntityHandler::
     ldh  a, [hFrameCounter]                       ; $63AD: $F0 $E7
     rla                                           ; $63AF: $17
     rla                                           ; $63B0: $17
-    and  OAM_DMG_PAL_1                            ; $63B1: $E6 $10
+    and  OAMF_PAL1                                ; $63B1: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $63B3: $E0 $ED
 .flashEnd
 

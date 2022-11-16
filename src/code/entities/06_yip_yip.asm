@@ -1,56 +1,56 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 YipYipSpriteVariants::
 .variant0
-    db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $70, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $72, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant1
-    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $74, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $76, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant2
-    db $72, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $70, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $72, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $70, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $76, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $74, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $76, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $74, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $00, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $02, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $00, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $02, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant5
-    db $04, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $06, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $04, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $06, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant6
-    db $02, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $00, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $02, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $00, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant7
-    db $06, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $04, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $06, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $04, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 YipYipWithRibbonSpriteVariants::
 .variant0
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant1
-    db $7C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $7C, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $7E, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant2
-    db $7A, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $78, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7A, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $78, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant3
-    db $7E, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $7C, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $7E, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $7C, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant4
-    db $10, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $12, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $10, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $12, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant5
-    db $14, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
-    db $16, OAM_GBC_PAL_2 | OAM_DMG_PAL_0
+    db $14, OAM_GBC_PAL_2 | OAMF_PAL0
+    db $16, OAM_GBC_PAL_2 | OAMF_PAL0
 .variant6
-    db $12, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $10, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $12, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $10, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 .variant7
-    db $16, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
-    db $14, OAM_GBC_PAL_2 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $16, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
+    db $14, OAM_GBC_PAL_2 | OAMF_PAL0 | OAMF_XFLIP
 
 YipYipEntityHandler::
     ld   a, [wDialogState]                        ; $59E8: $FA $9F $C1
@@ -58,7 +58,7 @@ YipYipEntityHandler::
     jr   z, .jr_006_5A0D                          ; $59EC: $28 $1F
 
     ld   a, [wDialogIndex]                        ; $59EE: $FA $73 $C1
-    cp_dialog_low Dialog182                                ; $59F1: $FE $82
+    cp_dialog_low Dialog182                       ; $59F1: $FE $82
     jr   z, .jr_006_5A0D                          ; $59F3: $28 $18
 
     call func_006_6594                            ; $59F5: $CD $94 $65

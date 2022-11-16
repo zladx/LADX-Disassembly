@@ -357,8 +357,8 @@ func_006_4771::
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 SmasherSpriteVariants::
 .variant0
-    db $6E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0
-    db $6E, OAM_GBC_PAL_1 | OAM_DMG_PAL_0 | OAM_X_FLIP
+    db $6E, OAM_GBC_PAL_1 | OAMF_PAL0
+    db $6E, OAM_GBC_PAL_1 | OAMF_PAL0 | OAMF_XFLIP
 
 label_006_4781:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4781: $21 $40 $C3

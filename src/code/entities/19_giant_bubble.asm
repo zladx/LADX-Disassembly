@@ -9,7 +9,7 @@ GiantBubbleEntityHandler::
     ldh  a, [hFrameCounter]                       ; $5390: $F0 $E7
     rla                                           ; $5392: $17
     rla                                           ; $5393: $17
-    and  OAM_DMG_PAL_1                            ; $5394: $E6 $10
+    and  OAMF_PAL1                                ; $5394: $E6 $10
     ldh  [hActiveEntityFlipAttribute], a          ; $5396: $E0 $ED
     ldh  a, [hFrameCounter]                       ; $5398: $F0 $E7
     rra                                           ; $539A: $1F

@@ -175,10 +175,10 @@ TradingItemEntityHandler::
     ld   hl, TradingItemDialogs - 1               ; $55A4: $21 $C1 $54
     add  hl, de                                   ; $55A7: $19
     ld   a, [hl]                                  ; $55A8: $7E
-    cp_dialog_low Dialog09D                                ; $55A9: $FE $9D
+    cp_dialog_low Dialog09D                       ; $55A9: $FE $9D
     jr   z, .openDialogInTable0                   ; $55AB: $28 $04
 
-    cp_dialog_low Dialog044                                ; $55AD: $FE $44
+    cp_dialog_low Dialog044                       ; $55AD: $FE $44
     jr   nz, .openDialogInTable1                  ; $55AF: $20 $05
 .openDialogInTable0
     call OpenDialogInTable0                       ; $55B1: $CD $85 $23

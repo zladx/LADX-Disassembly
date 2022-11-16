@@ -418,7 +418,7 @@ func_004_5902::
     ldh  a, [hFrameCounter]                       ; $59DC: $F0 $E7
     rla                                           ; $59DE: $17
     rla                                           ; $59DF: $17
-    and  OAMF_PAL1                            ; $59E0: $E6 $10
+    and  OAMF_PAL1                                ; $59E0: $E6 $10
     ld   hl, hActiveEntityFlipAttribute           ; $59E2: $21 $ED $FF
     xor  [hl]                                     ; $59E5: $AE
     ld   [hl], a                                  ; $59E6: $77

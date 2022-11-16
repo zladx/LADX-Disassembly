@@ -196,7 +196,7 @@ ELSE
     ld   a, [de]                                  ; $48A1: $1A
     and  $80                                      ; $48A2: $E6 $80
     ld   a, $C8                                   ; $48A4: $3E $C8
-    jr   z, .drawSpacingTile                              ; $48A6: $28 $01
+    jr   z, .drawSpacingTile                      ; $48A6: $28 $01
     inc  a                                        ; $48A8: $3C
 ENDC
 

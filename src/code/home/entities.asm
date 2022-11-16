@@ -513,11 +513,11 @@ RenderActiveEntitySpritesPair::
     and  a                                        ; $3C12: $A7
     jr   z, .paletteFlip0End                      ; $3C13: $28 $0C
     ldh  a, [hActiveEntityFlipAttribute]          ; $3C15: $F0 $ED
-    and  OAMF_PAL1                            ; $3C17: $E6 $10
+    and  OAMF_PAL1                                ; $3C17: $E6 $10
     jr   z, .paletteFlip0End                      ; $3C19: $28 $06
     ; …invert the color palette data and set 3th bit.
     ld   a, [de]                                  ; $3C1B: $1A
-    and  $FF ^ OAMF_PALMASK                   ; $3C1C: $E6 $F8
+    and  $FF ^ OAMF_PALMASK                       ; $3C1C: $E6 $F8
     or   OAM_GBC_PAL_4                            ; $3C1E: $F6 $04
     ld   [de], a                                  ; $3C20: $12
 .paletteFlip0End
@@ -572,11 +572,11 @@ RenderActiveEntitySpritesPair::
     and  a                                        ; $3C54: $A7
     jr   z, .paletteFlip1End                      ; $3C55: $28 $0C
     ldh  a, [hActiveEntityFlipAttribute]          ; $3C57: $F0 $ED
-    and  OAMF_PAL1                            ; $3C59: $E6 $10
+    and  OAMF_PAL1                                ; $3C59: $E6 $10
     jr   z, .paletteFlip1End                      ; $3C5B: $28 $06
     ; …invert the color palette data.
     ld   a, [de]                                  ; $3C5D: $1A
-    and  $FF ^ OAMF_PALMASK                   ; $3C5E: $E6 $F8
+    and  $FF ^ OAMF_PALMASK                       ; $3C5E: $E6 $F8
     or   $04                                      ; $3C60: $F6 $04
     ld   [de], a                                  ; $3C62: $12
 .paletteFlip1End
@@ -682,7 +682,7 @@ RenderActiveEntitySprite::
     jr   z, .paletteFlipEnd                       ; $3CC6: $28 $08
     ; …invert the color palette data and set the 3th bit.
     ld   a, [hl]                                  ; $3CC8: $7E
-    and  $FF ^ OAMF_PALMASK                   ; $3CC9: $E6 $F8
+    and  $FF ^ OAMF_PALMASK                       ; $3CC9: $E6 $F8
     or   OAM_GBC_PAL_4                            ; $3CCB: $F6 $04
     ld   [de], a                                  ; $3CCD: $12
     jr   .functionEnd                             ; $3CCE: $18 $06
@@ -814,7 +814,7 @@ RenderActiveEntitySpritesRect::
     jr   z, .paletteFlipEnd                       ; $3D37: $28 $06
     ; …invert the color palette data and set the 3th bit.
     ld   a, [de]                                  ; $3D39: $1A
-    and  $FF ^ OAMF_PALMASK                   ; $3D3A: $E6 $F8
+    and  $FF ^ OAMF_PALMASK                       ; $3D3A: $E6 $F8
     or   OAM_GBC_PAL_4                            ; $3D3C: $F6 $04
     ld   [de], a                                  ; $3D3E: $12
 .paletteFlipEnd

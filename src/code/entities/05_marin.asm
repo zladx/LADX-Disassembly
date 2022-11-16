@@ -348,7 +348,7 @@ func_005_4F64::
 .openDialog
     ld   a, e                                     ; $4FFB: $7B
     cp   $80                                      ; $4FFC: $FE $80
-    jr   c, .openDialogInTable0                       ; $4FFE: $38 $05
+    jr   c, .openDialogInTable0                   ; $4FFE: $38 $05
     call OpenDialogInTable1                       ; $5000: $CD $73 $23
     jr   .openDialogEnd                           ; $5003: $18 $03
 .openDialogInTable0

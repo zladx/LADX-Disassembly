@@ -58,7 +58,7 @@ YipYipEntityHandler::
     jr   z, .jr_006_5A0D                          ; $59EC: $28 $1F
 
     ld   a, [wDialogIndex]                        ; $59EE: $FA $73 $C1
-    cp_dialog_low Dialog182                                ; $59F1: $FE $82
+    cp_dialog_low Dialog182                       ; $59F1: $FE $82
     jr   z, .jr_006_5A0D                          ; $59F3: $28 $18
 
     call func_006_6594                            ; $59F5: $CD $94 $65

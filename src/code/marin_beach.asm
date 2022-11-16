@@ -42,7 +42,7 @@ MarinBeachPrepare0::
     call IncrementGameplaySubtype                 ; $623F: $CD $D6 $44
     ldh  a, [hIsGBC]                              ; $6242: $F0 $FE
     and  a                                        ; $6244: $A7
-    jr   z, MarinBeachPrepare1                   ; $6245: $28 $19
+    jr   z, MarinBeachPrepare1                    ; $6245: $28 $19
 
     ld   hl, wBGPal1                              ; $6247: $21 $10 $DC
     ld   c, $80                                   ; $624A: $0E $80
@@ -218,13 +218,13 @@ MarinBeachScroll1::
     jr   z, .jr_63E4                              ; $63CD: $28 $15
     ldh  a, [hFrameCounter]                       ; $63CF: $F0 $E7
     and  $07                                      ; $63D1: $E6 $07
-    jr   nz, MarinBeachScroll2                   ; $63D3: $20 $42
+    jr   nz, MarinBeachScroll2                    ; $63D3: $20 $42
     call func_1A39                                ; $63D5: $CD $39 $1A
     ld   a, [wTransitionSequenceCounter]          ; $63D8: $FA $6B $C1
     cp   $04                                      ; $63DB: $FE $04
-    jr   nz, MarinBeachScroll2                   ; $63DD: $20 $38
+    jr   nz, MarinBeachScroll2                    ; $63DD: $20 $38
     call IncrementGameplaySubtype                 ; $63DF: $CD $D6 $44
-    jr   MarinBeachScroll2                       ; $63E2: $18 $33
+    jr   MarinBeachScroll2                        ; $63E2: $18 $33
 
 .jr_63E4::
     ldh  a, [hFrameCounter]                       ; $63E4: $F0 $E7

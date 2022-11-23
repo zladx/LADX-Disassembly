@@ -103,7 +103,7 @@ Makefile: ;
 
 azlj_asm = $(shell find revisions/J0 -type f -name '*.asm')
 azlj_gfx = $(shell find revisions/J0 -type f -name '*.png')
-azlj_bin = $(shell find revisions/J0 -type f -name '*.tilemap.encoded')
+azlj_bin = $(shell find revisions/J0 -type f -name '*.tilemap.encoded' -o -name '*.attrmap.encoded')
 
 games += azlj.gbc
 src/main.azlj.o: $(azlj_asm) $(azlj_gfx:.png=.2bpp) $(azlj_bin)
@@ -126,7 +126,7 @@ azlj-r2_FXFLAGS = --rom-version 2 --title "ZELDA" --game-id "AZLJ"
 
 azlg_asm = $(shell find revisions/G0 -type f -name '*.asm')
 azlg_gfx = $(shell find revisions/G0 -type f -name '*.png')
-azlg_bin = $(shell find revisions/G0 -type f -name '*.tilemap.encoded')
+azlg_bin = $(shell find revisions/G0 -type f -name '*.tilemap.encoded' -o -name '*.attrmap.encoded')
 
 games += azlg.gbc
 src/main.azlg.o: $(azlg_asm) $(azlg_gfx:.png=.2bpp) $(azlg_bin)
@@ -145,7 +145,7 @@ azlg-r1_FXFLAGS = --rom-version 1 --non-japanese --title "ZELDA" --game-id "AZLD
 
 azlf_asm = $(shell find revisions/F0 -type f -name '*.asm')
 azlf_gfx = $(shell find revisions/F0 -type f -name '*.png')
-azlf_bin = $(shell find revisions/F0 -type f -name '*.tilemap.encoded')
+azlf_bin = $(shell find revisions/F0 -type f -name '*.tilemap.encoded' -o -name '*.attrmap.encoded')
 
 games += azlf.gbc
 src/main.azlf.o: $(azlf_asm) $(azlf_gfx:.png=.2bpp) $(azlf_bin)

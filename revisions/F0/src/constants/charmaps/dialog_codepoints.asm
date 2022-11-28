@@ -1,5 +1,7 @@
-; ASCII charmap (French flavored)
-
+;
+; Mapping from Unicode to the codepoints used by the ROM (French flavored)
+; Mostly matches ASCII
+;
 PUSHC
 NEWCHARMAP DialogCharmap
 

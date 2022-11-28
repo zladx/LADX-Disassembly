@@ -1,6 +1,7 @@
 ;
 ; Mapping from Unicode to the codepoints used by the ROM
-; Used for the player's name. ASCII, but off by 1.
+; Used for the player's name
+; ASCII, but off by 1
 ;
 PUSHC
 NEWCHARMAP NameEntryCharmap

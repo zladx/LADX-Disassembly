@@ -129,3 +129,5 @@ charmap "<ask>", $fe
 charmap "@", $ff
 
 POPC
+
+SETCHARMAP DialogCharmap

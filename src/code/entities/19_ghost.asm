@@ -19,7 +19,8 @@ GhostSpriteVariants::
     db $4C, $03
     db $4E, $03
 
-Data_019_5E10::
+; Z positions of the ghost, new index every 8 frames.
+GhostZPositionTable::
     db   $10, $11, $12, $13, $13, $12, $11, $10
 
 ; Friendly ghost following Link after Dungeon 4
@@ -41,12 +42,12 @@ GhostEntityHandler::
     ldh  a, [hFrameCounter]                       ; $5E31: $F0 $E7
     xor  c                                        ; $5E33: $A9
     and  $01                                      ; $5E34: $E6 $01
-    jr   nz, .jr_5E3E                             ; $5E36: $20 $06
+    jr   nz, .skipDraw                            ; $5E36: $20 $06
 
     ld   de, GhostSpriteVariants                  ; $5E38: $11 $F8 $5D
     call RenderActiveEntitySpritesPair            ; $5E3B: $CD $C0 $3B
 
-.jr_5E3E
+.skipDraw
     ld   hl, wEntitiesPrivateState2Table          ; $5E3E: $21 $C0 $C2
     add  hl, bc                                   ; $5E41: $09
     ld   a, [hl]                                  ; $5E42: $7E
@@ -60,7 +61,7 @@ GhostEntityHandler::
     and  $07                                      ; $5E4B: $E6 $07
     ld   e, a                                     ; $5E4D: $5F
     ld   d, b                                     ; $5E4E: $50
-    ld   hl, Data_019_5E10                        ; $5E4F: $21 $10 $5E
+    ld   hl, GhostZPositionTable                  ; $5E4F: $21 $10 $5E
     add  hl, de                                   ; $5E52: $19
     ld   a, [hl]                                  ; $5E53: $7E
     sub  $04                                      ; $5E54: $D6 $04
@@ -79,7 +80,7 @@ GhostEntityHandler::
     ld   e, $04                                   ; $5E66: $1E $04
     jr   z, .jr_5E6F                              ; $5E68: $28 $05
 
-    call func_019_7E0B                            ; $5E6A: $CD $0B $7E
+    call entityLinkPositionXDifference            ; $5E6A: $CD $0B $7E
     sla  e                                        ; $5E6D: $CB $23
 
 .jr_5E6F
@@ -91,7 +92,7 @@ GhostEntityHandler::
     and  $01                                      ; $5E75: $E6 $01
     add  e                                        ; $5E77: $83
     call SetEntitySpriteVariant                   ; $5E78: $CD $0C $3B
-    call func_019_7E0B                            ; $5E7B: $CD $0B $7E
+    call entityLinkPositionXDifference            ; $5E7B: $CD $0B $7E
     add  $18                                      ; $5E7E: $C6 $18
     cp   $30                                      ; $5E80: $FE $30
     jr   nc, .jr_5E99                             ; $5E82: $30 $15
@@ -100,7 +101,7 @@ GhostEntityHandler::
     push af                                       ; $5E86: $F5
     add  $0C                                      ; $5E87: $C6 $0C
     ldh  [hLinkPositionY], a                      ; $5E89: $E0 $99
-    call func_019_7E1B                            ; $5E8B: $CD $1B $7E
+    call entityLinkPositionYDifference            ; $5E8B: $CD $1B $7E
     ld   e, a                                     ; $5E8E: $5F
     pop  af                                       ; $5E8F: $F1
     ldh  [hLinkPositionY], a                      ; $5E90: $E0 $99
@@ -116,9 +117,9 @@ GhostEntityHandler::
 
     ld   a, [wIsRunningWithPegasusBoots]          ; $5E9F: $FA $4A $C1
     and  a                                        ; $5EA2: $A7
+    ; Set the speed at which the ghost follows you.
     ld   a, $08                                   ; $5EA3: $3E $08
     jr   z, .jr_5EA9                              ; $5EA5: $28 $02
-
     ld   a, $18                                   ; $5EA7: $3E $18
 
 .jr_5EA9
@@ -175,7 +176,7 @@ GhostState1Handler::
     ldh  [hLinkPositionX], a                      ; $5EF5: $E0 $98
     ld   a, $08                                   ; $5EF7: $3E $08
     call ApplyVectorTowardsLink_trampoline        ; $5EF9: $CD $AA $3B
-    call func_019_7E0B                            ; $5EFC: $CD $0B $7E
+    call entityLinkPositionXDifference            ; $5EFC: $CD $0B $7E
     push af                                       ; $5EFF: $F5
     ld   a, e                                     ; $5F00: $7B
     sla  a                                        ; $5F01: $CB $27
@@ -187,7 +188,7 @@ GhostState1Handler::
     cp   $06                                      ; $5F0B: $FE $06
     jr   nc, .jr_5F30                             ; $5F0D: $30 $21
 
-    call func_019_7E1B                            ; $5F0F: $CD $1B $7E
+    call entityLinkPositionYDifference            ; $5F0F: $CD $1B $7E
     add  $0C                                      ; $5F12: $C6 $0C
     cp   $18                                      ; $5F14: $FE $18
     jr   nc, .jr_5F30                             ; $5F16: $30 $18

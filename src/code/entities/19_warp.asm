@@ -100,12 +100,12 @@ WarpState0Handler::
     ret                                           ; $42A2: $C9
 
 WarpState1Handler::
-    call func_019_7E0B                            ; $42A3: $CD $0B $7E
+    call entityLinkPositionXDifference            ; $42A3: $CD $0B $7E
     add  $04                                      ; $42A6: $C6 $04
     cp   $08                                      ; $42A8: $FE $08
     jp   nc, IncrementEntityState                 ; $42AA: $D2 $12 $3B
 
-    call func_019_7E1B                            ; $42AD: $CD $1B $7E
+    call entityLinkPositionYDifference            ; $42AD: $CD $1B $7E
     add  $04                                      ; $42B0: $C6 $04
     cp   $08                                      ; $42B2: $FE $08
     ret  c                                        ; $42B4: $D8
@@ -117,12 +117,12 @@ WarpState2Handler::
     and  a                                        ; $42BA: $A7
     jr   nz, label_019_42E0                       ; $42BB: $20 $23
 
-    call func_019_7E0B                            ; $42BD: $CD $0B $7E
+    call entityLinkPositionXDifference            ; $42BD: $CD $0B $7E
     add  $03                                      ; $42C0: $C6 $03
     cp   $06                                      ; $42C2: $FE $06
     jr   nc, label_019_42E0                       ; $42C4: $30 $1A
 
-    call func_019_7E1B                            ; $42C6: $CD $1B $7E
+    call entityLinkPositionYDifference            ; $42C6: $CD $1B $7E
     add  $03                                      ; $42C9: $C6 $03
     cp   $06                                      ; $42CB: $FE $06
     jr   nc, label_019_42E0                       ; $42CD: $30 $11

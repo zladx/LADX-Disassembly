@@ -95,12 +95,12 @@ jr_019_5A35:
     and  $01                                      ; $5A47: $E6 $01
     add  e                                        ; $5A49: $83
     call SetEntitySpriteVariant                   ; $5A4A: $CD $0C $3B
-    call func_019_7E0B                            ; $5A4D: $CD $0B $7E
+    call entityLinkPositionXDifference            ; $5A4D: $CD $0B $7E
     add  $12                                      ; $5A50: $C6 $12
     cp   $24                                      ; $5A52: $FE $24
     jr   nc, .jr_5A5F                             ; $5A54: $30 $09
 
-    call func_019_7E1B                            ; $5A56: $CD $1B $7E
+    call entityLinkPositionYDifference            ; $5A56: $CD $1B $7E
     add  $12                                      ; $5A59: $C6 $12
     cp   $24                                      ; $5A5B: $FE $24
     jr   c, jr_019_5A9F                           ; $5A5D: $38 $40

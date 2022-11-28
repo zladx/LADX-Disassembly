@@ -224,7 +224,7 @@ ThwimpState1Handler::
     call GetEntityTransitionCountdown             ; $56ED: $CD $05 $0C
     ret  nz                                       ; $56F0: $C0
 
-    call func_019_7E0B                            ; $56F1: $CD $0B $7E
+    call entityLinkPositionXDifference            ; $56F1: $CD $0B $7E
     ld   e, a                                     ; $56F4: $5F
     add  $28                                      ; $56F5: $C6 $28
     cp   $50                                      ; $56F7: $FE $50
@@ -377,7 +377,7 @@ ThwompState1Handler::
     ret  nz                                       ; $57FA: $C0
 
 .jr_57FB
-    call func_019_7E0B                            ; $57FB: $CD $0B $7E
+    call entityLinkPositionXDifference            ; $57FB: $CD $0B $7E
     add  $F8                                      ; $57FE: $C6 $F8
     ld   e, a                                     ; $5800: $5F
     add  $28                                      ; $5801: $C6 $28
@@ -483,7 +483,7 @@ func_019_58A2::
     call CheckLinkCollisionWithEnemy_trampoline   ; $58A2: $CD $5A $3B
     ret  nc                                       ; $58A5: $D0
 
-    call func_019_7E1B                            ; $58A6: $CD $1B $7E
+    call entityLinkPositionYDifference            ; $58A6: $CD $1B $7E
     add  $08                                      ; $58A9: $C6 $08
     bit  7, a                                     ; $58AB: $CB $7F
     jr   nz, .jr_58C0                             ; $58AD: $20 $11

@@ -31,11 +31,9 @@ include "constants/rooms.asm"
 ;
 ; Character maps for strings
 ;
-include "constants/charmaps/ascii.asm"
-include "constants/charmaps/jp.asm"
-include "constants/charmaps/name_entry.asm"
-include "constants/charmaps/credits.asm"
-include "constants/charmaps/main.asm"
+include "constants/charmaps/dialog_codepoints.asm"
+include "constants/charmaps/name_codepoints.asm"
+include "constants/charmaps/credits_codepoints.asm"
 
 ;
 ; Memory layout

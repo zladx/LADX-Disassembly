@@ -1,3 +1,6 @@
+; mapping from `constants/charmaps/credits_codepoints.asm`
+;           to `gfx/ending/credits_roll.png`
+
 ; Tilemap
 CreditsStaffCharmap::
     db   $20, $30 ; A

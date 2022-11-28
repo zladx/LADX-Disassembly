@@ -774,14 +774,14 @@ PlayWrongAnswerJingle::
     ret                                           ; $0C24: $C9
 
 ReadTileValueFromAsciiTable::
-    ld   hl, AsciiToTileMap                       ; $0C25: $21 $41 $46
+    ld   hl, CodepointToTileMap                   ; $0C25: $21 $41 $46
     jr   ReadValueInDialogsBank                   ; $0C28: $18 $03
 
 ReadTileValueFromDiacriticsTable::
-    ld   hl, AsciiToDiacritic                     ; $0C2A: $21 $41 $47
+    ld   hl, CodepointToDiacritic                 ; $0C2A: $21 $41 $47
 
 ReadValueInDialogsBank::
-    ld   a, BANK(AsciiToTileMap) ; or BANK(DialogBankTable) ; $0C2D: $3E $1C
+    ld   a, BANK(CodepointToTileMap) ; or BANK(DialogBankTable) ; $0C2D: $3E $1C
     ld   [MBC3SelectBank], a                      ; $0C2F: $EA $00 $21
     add  hl, bc                                   ; $0C32: $09
     ld   a, [hl]                                  ; $0C33: $7E

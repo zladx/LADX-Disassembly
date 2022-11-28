@@ -1,7 +1,7 @@
-; ASCII charmap (English flavored)
+; ASCII charmap (German flavored)
 
 PUSHC
-NEWCHARMAP AsciiCharmap
+NEWCHARMAP DialogCharmap
 
 charmap " ", $20
 charmap "!", $21
@@ -12,6 +12,8 @@ charmap "&", $26
 
 charmap "(", $28
 charmap ")", $29
+
+charmap "*", $2A
 
 charmap ",", $2C
 charmap "-", $2D
@@ -59,7 +61,7 @@ charmap "X", $58
 charmap "Y", $59
 charmap "Z", $5A
 
-charmap "'", $5E
+charmap "^", $5E
 
 charmap "a", $61
 charmap "b", $62
@@ -87,75 +89,42 @@ charmap "w", $77
 charmap "x", $78
 charmap "y", $79
 charmap "z", $7A
-
 charmap "+", $7F
 
-; Special characters
-charmap "Á", $80
-charmap "É", $81
-charmap "Í", $82
-charmap "Ó", $83
-charmap "Ú", $84
-charmap "Ü", $85
-charmap "Ñ", $86
-charmap "Ç", $88
-charmap "á", $89
-charmap "é", $8A
-charmap "í", $8B
-charmap "ó", $8C
-charmap "ú", $8D
-charmap "ü", $8E
-charmap "ñ", $8F
+charmap "<skull>", $ac
+charmap "<marin>", $ae
+charmap "<heart>", $af
+charmap "<yoshi>", $b0
+charmap "<ribbon>", $b1
+charmap "<dogfood>", $b2
+charmap "<bananas>", $b3
+charmap "<stick>", $b4
+charmap "<honeycomb>", $b5
+charmap "<pineapple>", $b6
+charmap "<flower2>", $b7
+charmap "<broom>", $b8
+charmap "<fishhook>", $b9
+charmap "<bra>", $ba
+charmap "<scale>", $bb
+charmap "<letter>", $bd
 
-charmap "à", $90
-charmap "è", $91
-charmap "ì", $92
-charmap "ò", $93
-charmap "ù", $94
-charmap "ä", $95
-charmap "ë", $96
-charmap "ï", $97
-charmap "ö", $98
-charmap "¡", $9A
-charmap "¿", $9B
+charmap "Ä", $c4
 
-charmap "`", $9C
+charmap "Ö", $d6
+charmap "Ü", $dc
+charmap "ß", $df
 
-charmap "â", $B0
-charmap "ê", $B1
-charmap "î", $B2
-charmap "ô", $B3
-charmap "û", $B4
-
-charmap "<flower>", $d9
-charmap "<footprint>", $da
-charmap "<skull>", $dc
-charmap "<link>", $dd
-charmap "<marin>", $de
-charmap "<tarin>", $df
-charmap "<yoshi>", $e0
-charmap "<ribbon>", $e1
-charmap "<dogfood>", $e2
-charmap "<bananas>", $e3
-charmap "<stick>", $e4
-charmap "<honeycomb>", $e5
-charmap "<pineapple>", $e6
-charmap "<flower2>", $e7
-charmap "<broom>", $e8
-charmap "<fishhook>", $e9
-charmap "<bra>", $ea
-charmap "<scale>", $eb
-charmap "<glass>", $ec
-charmap "<letter>", $ed
-
+charmap "ä", $e4
+charmap "<brokenHeartL>", $e8
+charmap "<brokenHeartR>", $e9
 charmap "<dpad>", $ee
 
 charmap "<up>", $f0
 charmap "<down>", $f1
 charmap "<left>", $f2
 charmap "<right>", $f3
-
-charmap "/", $fd
+charmap "ö", $f6
+charmap "ü", $fc
 charmap "<ask>", $fe
 charmap "@", $ff
 

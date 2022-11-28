@@ -1,9 +1,9 @@
 PUSHC
 NEWCHARMAP CreditsCharmap
 
-SETCHARMAP AsciiCharmap
+SETCHARMAP DialogCharmap
 
-; Credits-specific charmap patches for French
+; Credits-specific charmap patches for German
 charmap "[", $5B
 charmap "\\", $5C
 charmap "]", $5D

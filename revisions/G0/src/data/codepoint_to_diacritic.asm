@@ -2,10 +2,13 @@
 ; - 1: ¨ (umlaut on lowercase letter, tile $C9)
 ; - 2: ¨ (umlaut on uppercase letter, tile $C8)
 ;
-; The two diacritic tiles are on the `gfx/items/inventory_overworld_items.dmg.png` tilesheet.
+; The two diacritic tiles are on these tilesheets:
+; - `gfx/items/inventory_overworld_items.dmg.png`
+; - `gfx/items/inventory_indoor_items.dmg.png`
+; - `gfx/ending/ending_1.dmg.png`
 ;
 ; See AsciiCharmap
-AsciiToDiacritic::
+CodepointToDiacritic::
 ;
     db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ;

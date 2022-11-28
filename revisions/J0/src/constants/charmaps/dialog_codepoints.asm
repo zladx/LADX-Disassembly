@@ -1,7 +1,7 @@
 ; Japanese charmap
 
 PUSHC
-NEWCHARMAP JpCharmap
+NEWCHARMAP DialogCharmap
 
 charmap "あ", $00
 charmap "い", $01

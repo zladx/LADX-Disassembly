@@ -1,4 +1,7 @@
-AsciiToTileMap::
+; Mapping from `constants/charmaps/dialog_codepoints.asm`
+;           to `gfx/fonts/font.png`
+
+CodepointToTileMap::
 ;
     db  0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0
 ;

@@ -1,3 +1,6 @@
+; mapping from `constants/charmaps/credits_codepoints.asm`
+;           to `gfx/ending/credits_roll.png`
+
 CreditsStaffCharmap::
     db   $20, $30 ; A
     db   $21, $31 ; B

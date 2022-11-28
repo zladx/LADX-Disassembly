@@ -1,7 +1,7 @@
 ; ASCII charmap to tiles (French flavored)
 ;
-; See AsciiCharmap, AsciiToDiacritic
-AsciiToTileMap::
+; See DialogCharmap, CodepointToDiacritic
+CodepointToTileMap::
 ;
     db  0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0
 ;

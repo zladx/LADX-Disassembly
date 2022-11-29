@@ -3,13 +3,13 @@
 ; Build options
 include "options.asm"
 
-; Definitions
+; Definitions and macros
 include "constants/constants.asm"
-
-; Utilities functions and ROM header
-include "code/header.asm"
 include "code/macros.asm"
 include "code/audio_macros.asm"
+
+; ROM header
+include "code/header.asm"
 
 ; Sources
 section "Main", rom0[$0150]

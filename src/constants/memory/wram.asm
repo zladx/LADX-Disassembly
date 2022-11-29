@@ -2056,7 +2056,8 @@ ENDU
 wD200::
   ds 1 ; D200
 
-; Unlabeled
+; Used by various NPC scripts. Including:
+;  Horse heads, to indicate the entity index of the 2nd head.
 wD201::
   ds 1 ; D201
 

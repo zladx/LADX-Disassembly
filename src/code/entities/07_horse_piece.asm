@@ -1,18 +1,18 @@
 ; define sprite variants by selecting tile n° and setting OAM attributes (palette + flags) in a list
 HorsePieceSpriteVariants::
-.variant0
+.variant0 ; Upright sprite
     db $60, $03
     db $62, $03
-.variant1
+.variant1 ; Laying on the floor
     db $64, $03
     db $66, $03
-.variant2
+.variant2 ; Upside down tumbling
     db $62, $63
     db $60, $63
-.variant3
+.variant3 ; Upside down, on floor sprite
     db $66, $63
     db $64, $63
-.variant4
+.variant4 ; Laying on the floor, flipped
     db $66, $23
     db $64, $23
 
@@ -21,29 +21,32 @@ HorsePieceEntityHandler::
     add  hl, bc                                   ; $75F5: $09
     ld   a, [hl]                                  ; $75F6: $7E
     and  a                                        ; $75F7: $A7
-    jr   z, .jr_75FE                              ; $75F8: $28 $04
-
+    jr   z, .firstHead                            ; $75F8: $28 $04
+    ; Store our entity index in D201 if we are the 2nd horse head
     ld   a, c                                     ; $75FA: $79
     ld   [wD201], a                               ; $75FB: $EA $01 $D2
-
-.jr_75FE
+.firstHead
     ld   de, HorsePieceSpriteVariants             ; $75FE: $11 $DE $75
     call RenderActiveEntitySpritesPair            ; $7601: $CD $C0 $3B
+    ; Note: ReturnIfNonInteractive_07 also exits this entity if we are being carried
     call ReturnIfNonInteractive_07                ; $7604: $CD $96 $7D
     call UpdateEntityPosWithSpeed_07              ; $7607: $CD $0A $7E
     call AddEntityZSpeedToPos_07                  ; $760A: $CD $43 $7E
+    ; Apply collision physics
     call label_3B23                               ; $760D: $CD $23 $3B
+    ; Add gravity.
     ld   hl, wEntitiesSpeedZTable                 ; $7610: $21 $20 $C3
     add  hl, bc                                   ; $7613: $09
     dec  [hl]                                     ; $7614: $35
     dec  [hl]                                     ; $7615: $35
+    ; Check if we are on the floor, and then bounce with half Z speed
     ld   hl, wEntitiesPosZTable                   ; $7616: $21 $10 $C3
     add  hl, bc                                   ; $7619: $09
     ld   a, [hl]                                  ; $761A: $7E
     ldh  [hMultiPurposeG], a                      ; $761B: $E0 $E8
     dec  a                                        ; $761D: $3D
     and  $80                                      ; $761E: $E6 $80
-    jr   z, jr_007_7633                           ; $7620: $28 $11
+    jr   z, .noBounce                             ; $7620: $28 $11
 
     ld   [hl], b                                  ; $7622: $70
     ld   hl, wEntitiesSpeedZTable                 ; $7623: $21 $20 $C3
@@ -52,36 +55,36 @@ HorsePieceEntityHandler::
     ldh  [hDungeonFloorTile], a                   ; $7628: $E0 $E9
     sra  a                                        ; $762A: $CB $2F
     cpl                                           ; $762C: $2F
+    ; If new bounce speed is less then 7, set the speed to zero
     cp   $07                                      ; $762D: $FE $07
-    jr   nc, .jr_7632                             ; $762F: $30 $01
-
+    jr   nc, .doBounce                            ; $762F: $30 $01
     xor  a                                        ; $7631: $AF
-
-.jr_7632
+.doBounce
     ld   [hl], a                                  ; $7632: $77
 
-jr_007_7633:
+.noBounce
     ldh  a, [hActiveEntityState]                  ; $7633: $F0 $F0
     JP_TABLE                                      ; $7635
-._00 dw func_007_7640                             ; $7636
-._01 dw func_007_7640                             ; $7638
-._02 dw func_007_7657                             ; $763A
-._03 dw func_007_76EE                             ; $763C
-._04 dw func_007_7724                             ; $763E
+._00 dw HorsePieceStateInit                       ; $7636
+._01 dw HorsePieceStateInit                       ; $7638
+._02 dw HorsePieceStateThrowing                   ; $763A
+._03 dw HorsePieceStateWaitingForOther            ; $763C
+._04 dw HorsePieceStateFinished                   ; $763E
 
-func_007_7640::
-    jp   label_007_7733                           ; $7640: $C3 $33 $77
+HorsePieceStateInit::
+    jp   HorsePieceCheckForPickup                  ; $7640: $C3 $33 $77
 
-Data_007_7643::
+HorsePieceRandomBounceX::
     db   $00, $0C, $10, $0C, $00, $F4, $F0, $F4
 
-Data_007_764B::
+HorsePieceRandomBounceY::
     db   $F0, $F4, $00, $0C, $10, $0C, $00, $F4
 
-Data_007_7653::
+; One of these sprite variants is picked when throwing the horse heads. On variant 0 the head is considered upright, else it is not.
+HorsePieceRandomVariant::
     db   $00, $01, $04, $00
 
-func_007_7657::
+HorsePieceStateThrowing:
     call GetEntityTransitionCountdown             ; $7657: $CD $05 $0C
     jr   nz, .jr_7671                             ; $765A: $20 $15
 
@@ -91,7 +94,7 @@ func_007_7657::
     and  $03                                      ; $7665: $E6 $03
     ld   e, a                                     ; $7667: $5F
     ld   d, b                                     ; $7668: $50
-    ld   hl, Data_007_7653                        ; $7669: $21 $53 $76
+    ld   hl, HorsePieceRandomVariant              ; $7669: $21 $53 $76
     add  hl, de                                   ; $766C: $19
     ld   a, [hl]                                  ; $766D: $7E
     jp   SetEntitySpriteVariant                   ; $766E: $C3 $0C $3B
@@ -140,13 +143,13 @@ func_007_7657::
     ld   [hl], a                                  ; $76A9: $77
     ld   e, a                                     ; $76AA: $5F
     ld   d, b                                     ; $76AB: $50
-    ld   hl, Data_007_7643                        ; $76AC: $21 $43 $76
+    ld   hl, HorsePieceRandomBounceX              ; $76AC: $21 $43 $76
     add  hl, de                                   ; $76AF: $19
     ld   a, [hl]                                  ; $76B0: $7E
     ld   hl, wEntitiesSpeedXTable                 ; $76B1: $21 $40 $C2
     add  hl, bc                                   ; $76B4: $09
     ld   [hl], a                                  ; $76B5: $77
-    ld   hl, Data_007_764B                        ; $76B6: $21 $4B $76
+    ld   hl, HorsePieceRandomBounceY              ; $76B6: $21 $4B $76
     add  hl, de                                   ; $76B9: $19
     ld   a, [hl]                                  ; $76BA: $7E
     call GetEntitySpeedYAddress                   ; $76BB: $CD $05 $40
@@ -168,10 +171,11 @@ jr_007_76C2:
     call GetEntityTransitionCountdown             ; $76D2: $CD $05 $0C
     srl  [hl]                                     ; $76D5: $CB $3E
     ld   hl, wEntitiesSpeedXTable                 ; $76D7: $21 $40 $C2
-    call func_007_76E0                            ; $76DA: $CD $E0 $76
+    call .bounceSpeedAdjust                       ; $76DA: $CD $E0 $76
     ld   hl, wEntitiesSpeedYTable                 ; $76DD: $21 $50 $C2
 
-func_007_76E0::
+    ; When bouncing, reduce the X/Y speed by half and flip them.
+.bounceSpeedAdjust
     add  hl, bc                                   ; $76E0: $09
     ld   a, [hl]                                  ; $76E1: $7E
     cpl                                           ; $76E2: $2F
@@ -187,13 +191,15 @@ func_007_76E7::
 ret_007_76ED:
     ret                                           ; $76ED: $C9
 
-func_007_76EE::
+HorsePieceStateWaitingForOther::
+    ; If we are the 2nd horse piece, do nothing.
     ld   hl, wEntitiesLoadOrderTable              ; $76EE: $21 $60 $C4
     add  hl, bc                                   ; $76F1: $09
     ld   a, [hl]                                  ; $76F2: $7E
     and  a                                        ; $76F3: $A7
     ret  nz                                       ; $76F4: $C0
 
+    ; Find the 2nd horse piece and check if it is also in "waiting for other" state.
     ld   a, [wD201]                               ; $76F5: $FA $01 $D2
     ld   e, a                                     ; $76F8: $5F
     ld   d, b                                     ; $76F9: $50
@@ -207,7 +213,7 @@ func_007_76EE::
     call IncrementEntityState                     ; $7703: $CD $12 $3B
     ldh  a, [hActiveEntitySpriteVariant]          ; $7706: $F0 $F1
     cp   $00                                      ; $7708: $FE $00
-    jr   nz, .jr_7716                             ; $770A: $20 $0A
+    jr   nz, .puzzleFailed                        ; $770A: $20 $0A
 
     ld   hl, wEntitiesSpriteVariantTable          ; $770C: $21 $B0 $C3
     add  hl, de                                   ; $770F: $19
@@ -215,7 +221,7 @@ func_007_76EE::
     cp   $00                                      ; $7711: $FE $00
     jp   z, MarkTriggerAsResolved                 ; $7713: $CA $60 $0C
 
-.jr_7716
+.puzzleFailed
     ld   hl, wEntitiesTransitionCountdownTable    ; $7716: $21 $E0 $C2
     add  hl, de                                   ; $7719: $19
     ld   [hl], $40                                ; $771A: $36 $40
@@ -223,24 +229,23 @@ func_007_76EE::
     ld   [hl], $40                                ; $771F: $36 $40
     jp   PlayWrongAnswerJingle                    ; $7721: $C3 $20 $0C
 
-func_007_7724::
+HorsePieceStateFinished::
     call GetEntityTransitionCountdown             ; $7724: $CD $05 $0C
     cp   $01                                      ; $7727: $FE $01
-    jr   nz, .jr_7730                             ; $7729: $20 $05
-
+    jr   nz, .notFallDown                         ; $7729: $20 $05
+    ; Reached finished without both upright, so fall down this one.
     ld   a, $01                                   ; $772B: $3E $01
     call SetEntitySpriteVariant                   ; $772D: $CD $0C $3B
+.notFallDown
+    jp   HorsePieceCheckForPickup                  ; $7730: $C3 $33 $77
 
-.jr_7730
-    jp   label_007_7733                           ; $7730: $C3 $33 $77
-
-label_007_7733:
+HorsePieceCheckForPickup:
     call CheckLinkCollisionWithEnemy_trampoline   ; $7733: $CD $5A $3B
-    jr   nc, ret_007_7783                         ; $7736: $30 $4B
+    jr   nc, .ret                                 ; $7736: $30 $4B
 
     ld   a, [wLinkAttackStepAnimationCountdown]   ; $7738: $FA $9B $C1
     and  a                                        ; $773B: $A7
-    jr   nz, ret_007_7783                         ; $773C: $20 $45
+    jr   nz, .ret                                 ; $773C: $20 $45
 
     ld   a, [wBButtonSlot]                        ; $773E: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $7741: $FE $03
@@ -248,23 +253,23 @@ label_007_7733:
 
     ldh  a, [hJoypadState]                        ; $7745: $F0 $CC
     and  J_B                                      ; $7747: $E6 $20
-    jr   nz, jr_007_775A                          ; $7749: $20 $0F
+    jr   nz, .jr_775A                             ; $7749: $20 $0F
 
-    jr   ret_007_7783                             ; $774B: $18 $36
+    jr   .ret                                     ; $774B: $18 $36
 
 .jr_774D
     ld   a, [wAButtonSlot]                        ; $774D: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $7750: $FE $03
-    jr   nz, ret_007_7783                         ; $7752: $20 $2F
+    jr   nz, .ret                                 ; $7752: $20 $2F
 
     ldh  a, [hJoypadState]                        ; $7754: $F0 $CC
     and  J_A                                      ; $7756: $E6 $10
-    jr   z, ret_007_7783                          ; $7758: $28 $29
+    jr   z, .ret                                  ; $7758: $28 $29
 
-jr_007_775A:
+.jr_775A
     ld   a, [wC3CF]                               ; $775A: $FA $CF $C3
     and  a                                        ; $775D: $A7
-    jr   nz, ret_007_7783                         ; $775E: $20 $23
+    jr   nz, .ret                                 ; $775E: $20 $23
 
     inc  a                                        ; $7760: $3C
     ld   [wC3CF], a                               ; $7761: $EA $CF $C3
@@ -272,7 +277,7 @@ jr_007_775A:
     ld   [hl], $02                                ; $7767: $36 $02
     ld   hl, wEntitiesStatusTable                 ; $7769: $21 $80 $C2
     add  hl, bc                                   ; $776C: $09
-    ld   [hl], $07                                ; $776D: $36 $07
+    ld   [hl], ENTITY_STATUS_LIFTED               ; $776D: $36 $07
     ld   hl, wEntitiesLiftedTable                 ; $776F: $21 $90 $C4
     add  hl, bc                                   ; $7772: $09
     ld   [hl], b                                  ; $7773: $70
@@ -281,7 +286,7 @@ jr_007_775A:
     call GetEntityTransitionCountdown             ; $7779: $CD $05 $0C
     ld   [hl], $02                                ; $777C: $36 $02
     ld   hl, hWaveSfx                             ; $777E: $21 $F3 $FF
-    ld   [hl], $02                                ; $7781: $36 $02
+    ld   [hl], WAVE_SFX_ZIP                       ; $7781: $36 $02
 
-ret_007_7783:
+.ret
     ret                                           ; $7783: $C9

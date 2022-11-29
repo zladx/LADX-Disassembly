@@ -7,7 +7,7 @@
 ; - `gfx/items/inventory_indoor_items.dmg.png`
 ; - `gfx/ending/ending_1.dmg.png`
 ;
-; See AsciiCharmap
+; See DialogCharmap
 CodepointToDiacritic::
 ;
     db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0

@@ -1,5 +1,10 @@
-; mapping from `constants/charmaps/credits_codepoints.asm`
+;
+; Mapping from `constants/charmaps/credits_codepoints.asm`
 ;           to `gfx/ending/credits_roll.png`
+;              `gfx/fonts/font_large.dmg.png`
+;
+; Large text only
+;
 
 CreditsStaffCharmap::
     db   $20, $30 ; A

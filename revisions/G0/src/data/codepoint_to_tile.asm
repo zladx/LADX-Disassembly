@@ -1,6 +1,6 @@
 ; ASCII charmap to tiles (German flavored)
 ;
-; See AsciiCharmap, AsciiToDiacritic
+; See DialogCharmap, CodepointToDiacritic
 CodepointToTileMap::
 ;
     db  0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0

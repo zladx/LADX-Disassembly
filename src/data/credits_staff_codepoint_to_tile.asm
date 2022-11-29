@@ -1,5 +1,10 @@
-; mapping from `constants/charmaps/credits_codepoints.asm`
+;
+; Mapping from `constants/charmaps/credits_codepoints.asm`
 ;           to `gfx/ending/credits_roll.png`
+;              `gfx/fonts/font_large.dmg.png`
+;
+; Large text only
+;
 
 ; Tilemap
 CreditsStaffCharmap::
@@ -29,7 +34,7 @@ CreditsStaffCharmap::
     db   $00, $00 ; (unused)
     db   $36, $25 ; Y
     db   $37, $37 ; Z
-    db   $14, $15 ;
+    db   $14, $15 ; & ("R&D2")
     db   $12, $13 ; 2
 
 ; Attrmap
@@ -60,5 +65,5 @@ CreditsStaffAttrmap::
     db   $10, $10 ; X
     db   $50, $10 ; Y
     db   $10, $70 ; Z
-    db   $10, $10
-    db   $10, $10
+    db   $10, $10 ; &
+    db   $10, $10 ; 2

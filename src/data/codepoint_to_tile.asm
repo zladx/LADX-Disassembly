@@ -1,8 +1,10 @@
 ;
-; Mapping from `constants/charmaps/dialog_codepoints.asm`
+; Map codepoints (bytes of text as stored in the ROM)
+;         from `constants/charmaps/dialog.asm`
 ;           to `gfx/fonts/font.png`
 ;
-
+; See: DialogCharmap, CodepointToDiacritic
+;
 CodepointToTileMap::
 ;
     db  0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0

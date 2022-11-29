@@ -1,6 +1,10 @@
-; ASCII charmap to tiles (French flavored)
 ;
-; See DialogCharmap, CodepointToDiacritic
+; Map codepoints (bytes of text as stored in the ROM)
+;         from `F0/src/constants/charmaps/dialog.asm`
+;           to `F0/src/gfx/fonts/font.png`
+;
+; See: DialogCharmap, CodepointToDiacritic
+;
 CodepointToTileMap::
 ;
     db  0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0

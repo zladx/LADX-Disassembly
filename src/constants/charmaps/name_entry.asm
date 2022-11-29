@@ -1,7 +1,7 @@
 ;
-; Mapping from Unicode to the codepoints used by the ROM
-; Used for the player's name
-; ASCII, but off by 1
+; Mapping from Unicode to the codepoints used by the ROM.
+; Used for the player's name.
+; Mostly ASCII, but off by 1.
 ;
 PUSHC
 NEWCHARMAP NameEntryCharmap
@@ -61,14 +61,5 @@ charmap "w", $77 + 1
 charmap "x", $78 + 1
 charmap "y", $79 + 1
 charmap "z", $7A + 1
-
-charmap "Ä", $c4 + 1
-charmap "Ö", $d6 + 1
-charmap "Ü", $dc + 1
-charmap "ß", $df + 1
-charmap "ä", $e4 + 1
-charmap "ö", $f6 + 1
-charmap "ü", $fc + 1
-
 
 POPC

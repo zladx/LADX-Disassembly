@@ -1,5 +1,5 @@
 ;
-; Mapping from Unicode to the codepoints used in the ROM
+; Mapping from Unicode to the codepoints used in the ROM.
 ;
 PUSHC
 NEWCHARMAP CreditsCharmap

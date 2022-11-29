@@ -1,5 +1,5 @@
 ;
-; Mapping from Unicode to the codepoints used by the ROM
+; Mapping from Unicode to the codepoints used by the ROM.
 ;
 PUSHC
 NEWCHARMAP DialogCharmap

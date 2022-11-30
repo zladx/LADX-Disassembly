@@ -1,64 +1,65 @@
 ;
-; Charmap used on the name entry table
-; Space is 0, other values seem to just map to A
-; (but 0 in a charmap makes rgbds truncate the rest of the string, doh)
-;
-; If you look at this and go "wow, it's ASCII but off by one!" ... yep.
+; Mapping from Unicode to the codepoints used by the ROM.
+; Used for the player's name.
+; Mostly ASCII, but off by 1.
 ;
 PUSHC
 NEWCHARMAP NameEntryCharmap
 
-CHARMAP "A", $42
-CHARMAP "B", $43
-CHARMAP "C", $44
-CHARMAP "D", $45
-CHARMAP "E", $46
-CHARMAP "F", $47
-CHARMAP "G", $48
-CHARMAP "H", $49
-CHARMAP "I", $4A
-CHARMAP "J", $4B
-CHARMAP "K", $4C
-CHARMAP "L", $4D
-CHARMAP "M", $4E
-CHARMAP "N", $4F
-CHARMAP "O", $50
-CHARMAP "P", $51
-CHARMAP "Q", $52
-CHARMAP "R", $53
-CHARMAP "S", $54
-CHARMAP "T", $55
-CHARMAP "U", $56
-CHARMAP "V", $57
-CHARMAP "W", $58
-CHARMAP "X", $59
-CHARMAP "Y", $5A
-CHARMAP "Z", $5B
-CHARMAP "a", $62
-CHARMAP "b", $63
-CHARMAP "c", $64
-CHARMAP "d", $65
-CHARMAP "e", $66
-CHARMAP "f", $67
-CHARMAP "g", $68
-CHARMAP "h", $69
-CHARMAP "i", $6A
-CHARMAP "j", $6B
-CHARMAP "k", $6C
-CHARMAP "l", $6D
-CHARMAP "m", $6E
-CHARMAP "n", $6F
-CHARMAP "o", $70
-CHARMAP "p", $71
-CHARMAP "q", $72
-CHARMAP "r", $73
-CHARMAP "s", $74
-CHARMAP "t", $75
-CHARMAP "u", $76
-CHARMAP "v", $77
-CHARMAP "w", $78
-CHARMAP "x", $79
-CHARMAP "y", $7A
-CHARMAP "z", $7B
+charmap " ", $00
+
+charmap "A", $41 + 1
+charmap "B", $42 + 1
+charmap "C", $43 + 1
+charmap "D", $44 + 1
+charmap "E", $45 + 1
+charmap "F", $46 + 1
+charmap "G", $47 + 1
+charmap "H", $48 + 1
+charmap "I", $49 + 1
+charmap "J", $4A + 1
+charmap "K", $4B + 1
+charmap "L", $4C + 1
+charmap "M", $4D + 1
+charmap "N", $4E + 1
+charmap "O", $4F + 1
+charmap "P", $50 + 1
+charmap "Q", $51 + 1
+charmap "R", $52 + 1
+charmap "S", $53 + 1
+charmap "T", $54 + 1
+charmap "U", $55 + 1
+charmap "V", $56 + 1
+charmap "W", $57 + 1
+charmap "X", $58 + 1
+charmap "Y", $59 + 1
+charmap "Z", $5A + 1
+
+charmap "a", $61 + 1
+charmap "b", $62 + 1
+charmap "c", $63 + 1
+charmap "d", $64 + 1
+charmap "e", $65 + 1
+charmap "f", $66 + 1
+charmap "g", $67 + 1
+charmap "h", $68 + 1
+charmap "i", $69 + 1
+charmap "j", $6A + 1
+charmap "k", $6B + 1
+charmap "l", $6C + 1
+charmap "m", $6D + 1
+charmap "n", $6E + 1
+charmap "o", $6F + 1
+charmap "p", $70 + 1
+charmap "q", $71 + 1
+charmap "r", $72 + 1
+charmap "s", $73 + 1
+charmap "t", $74 + 1
+charmap "u", $75 + 1
+charmap "v", $76 + 1
+charmap "w", $77 + 1
+charmap "x", $78 + 1
+charmap "y", $79 + 1
+charmap "z", $7A + 1
 
 POPC

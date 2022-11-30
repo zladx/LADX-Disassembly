@@ -595,7 +595,7 @@ ENDC
 
     ret                                           ; $4713: $C9
 
-include "data/credits_staff_charmap.asm"
+include "data/credits_staff_codepoint_to_tile.asm"
 
 LayoutStaffLetters::
     ld   a, [wD011]                               ; $4784: $FA $11 $D0

@@ -1,7 +1,11 @@
-; ASCII charmap to tiles (Japanese flavored)
 ;
-; See AsciiCharmap, AsciiToDiacritic
-AsciiToTileMap::
+; Map codepoints (bytes of text as stored in the ROM)
+;         from `J0/src/constants/charmaps/dialog.asm`
+;           to `J0/src/gfx/fonts/font.png`
+;
+; See: DialogCharmap, CodepointToDiacritic
+;
+CodepointToTileMap::
     db   $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $0A, $0B, $0C, $0D, $0E, $0F
     db   $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $1A, $1B, $1C, $1D, $1E, $1F
     db   $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $2A, $2B, $30, $2C, $05, $06

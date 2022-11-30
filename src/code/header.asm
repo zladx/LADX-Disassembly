@@ -1,3 +1,5 @@
+SETCHARMAP DialogCharmap
+
 ; Interrupts setup
 section "RST 0x0000", rom0[$0000]
     jp   TableJump

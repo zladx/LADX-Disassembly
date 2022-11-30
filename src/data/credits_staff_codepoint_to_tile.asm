@@ -1,3 +1,12 @@
+;
+; Mapping from `constants/charmaps/credits_codepoints.asm`
+;           to `gfx/ending/credits_roll.png`
+;              `gfx/fonts/font_large.dmg.png`
+;
+; Large text only
+;
+
+; Tilemap
 CreditsStaffCharmap::
     db   $20, $30 ; A
     db   $21, $31 ; B
@@ -10,7 +19,7 @@ CreditsStaffCharmap::
     db   $27, $27 ; I
     db   $28, $38 ; J
     db   $29, $39 ; K
-    db   $15, $16 ; L
+    db   $16, $17 ; L
     db   $2A, $3A ; M
     db   $2B, $3B ; N
     db   $20, $20 ; O
@@ -25,14 +34,10 @@ CreditsStaffCharmap::
     db   $00, $00 ; (unused)
     db   $36, $25 ; Y
     db   $37, $37 ; Z
-    db   $13, $14 ; .
-    db   $10, $11 ; E
-    db   $12, $1B ; n
-    db   $1C, $1D ; d
-    db   $1E, $1F ; e
-    db   $14, $15 ; i
-    db   $12, $13 ; ?
+    db   $14, $15 ; & ("R&D2")
+    db   $12, $13 ; 2
 
+; Attrmap
 CreditsStaffAttrmap::
     db   $10, $10 ; A
     db   $10, $10 ; B
@@ -50,20 +55,15 @@ CreditsStaffAttrmap::
     db   $10, $10 ; N
     db   $10, $50 ; O
     db   $10, $10 ; P
-    db   $10, $10 ; (unused)
+    db   $10, $10 ; Q
     db   $10, $10 ; R
     db   $10, $10 ; S
     db   $10, $10 ; T
     db   $50, $50 ; U
-    db   $10, $10 ; (unused)
+    db   $10, $10 ; V
     db   $10, $10 ; W
-    db   $10, $10 ; (unused)
+    db   $10, $10 ; X
     db   $50, $10 ; Y
     db   $10, $70 ; Z
-    db   $10, $10 ; .
-    db   $10, $10 ; E
-    db   $10, $10 ; n
-    db   $10, $10 ; d
-    db   $10, $10 ; e
-    db   $10, $10 ; i
-    db   $10, $10 ; ?
+    db   $10, $10 ; &
+    db   $10, $10 ; 2

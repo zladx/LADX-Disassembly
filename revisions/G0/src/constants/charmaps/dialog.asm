@@ -1,7 +1,9 @@
-; ASCII charmap (German flavored)
-
+;
+; Mapping from Unicode to the codepoints used by the ROM (German flavored)
+; Mostly matches ASCII
+;
 PUSHC
-NEWCHARMAP AsciiCharmap
+NEWCHARMAP DialogCharmap
 
 charmap " ", $20
 charmap "!", $21

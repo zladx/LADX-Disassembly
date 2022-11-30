@@ -566,9 +566,9 @@ ENDR
 .notName
     ldh  [hMultiPurpose1], a                      ; $2608: $E0 $D8
     ld   e, a                                     ; $260A: $5F
-    ld   a, BANK(AsciiToTileMap)                  ; $260B: $3E $1C
+    ld   a, BANK(CodepointToTileMap)              ; $260B: $3E $1C
     ld   [MBC3SelectBank], a                      ; $260D: $EA $00 $21
-    ld   hl, AsciiToTileMap                       ; $2610: $21 $41 $46
+    ld   hl, CodepointToTileMap                   ; $2610: $21 $41 $46
     add  hl, de                                   ; $2613: $19
     ld   e, [hl]                                  ; $2614: $5E
     ld   d, $00                                   ; $2615: $16 $00
@@ -599,13 +599,13 @@ ENDR
 
     ; Check if the current character has a diacritic tile above
     ; (if compiled with support for diacritics)
-    ld   a, BANK(AsciiToDiacritic)                ; $263C: $3E $1C
+    ld   a, BANK(CodepointToDiacritic)            ; $263C: $3E $1C
     ld   [MBC3SelectBank], a ; current character  ; $263E: $EA $00 $21
     ldh  a, [hMultiPurpose1]                      ; $2641: $F0 $D8
     ld   e, a                                     ; $2643: $5F
     ld   d, $00                                   ; $2644: $16 $00
 IF __DIACRITICS_SUPPORT__
-    ld   hl, AsciiToDiacritic
+    ld   hl, CodepointToDiacritic
     add  hl, de
     ld   a, [hl]
 ELSE

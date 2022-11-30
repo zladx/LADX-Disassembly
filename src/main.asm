@@ -3,13 +3,13 @@
 ; Build options
 include "options.asm"
 
-; Definitions
+; Definitions and macros
 include "constants/constants.asm"
-
-; Utilities functions and ROM header
-include "code/header.asm"
 include "code/macros.asm"
 include "code/audio_macros.asm"
+
+; ROM header
+include "code/header.asm"
 
 ; Sources
 section "Main", rom0[$0150]
@@ -338,8 +338,8 @@ section "bank1C",romx[$4000],bank[$1C]
 db BANK_1C_VAR ; Extra byte present in the original ROM
 include "data/dialogs/dialog_pointers.asm"
 include "data/text_box_data.asm"
-include "data/ascii_to_tile.asm"
-include "data/ascii_to_diacritic.asm"
+include "data/codepoint_to_tile.asm"
+include "data/codepoint_to_diacritic.asm"
 include "data/dialogs/dialog_banks.asm"
 include "code/dialog_letters.asm"
 include "text/dialog_3.asm"

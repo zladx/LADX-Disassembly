@@ -1,21 +1,33 @@
-; ASCII charmap (English flavored)
-
+;
+; Mapping from Unicode to the codepoints used by the ROM (French flavored).
+; Mostly matches ASCII.
+;
 PUSHC
-NEWCHARMAP AsciiCharmap
+NEWCHARMAP DialogCharmap
+
+charmap "<09>", $09
 
 charmap " ", $20
 charmap "!", $21
 charmap "\"", $22
 charmap "#", $23
 
+charmap "â", $24
+charmap "à", $25
+
 charmap "&", $26
 
 charmap "(", $28
 charmap ")", $29
 
+charmap "é", $2a
+charmap "è", $2b
+
 charmap ",", $2C
 charmap "-", $2D
 charmap ".", $2E
+
+charmap "î", $2F
 
 charmap "0", $30
 charmap "1", $31
@@ -28,9 +40,14 @@ charmap "7", $37
 charmap "8", $38
 charmap "9", $39
 charmap ":", $3A
-charmap ";", $3B
+
+charmap "<hash>", $3B
+charmap "ê", $3C
+charmap "ù", $3D
 
 charmap "?", $3F
+
+charmap "Ç", $40
 
 charmap "A", $41
 charmap "B", $42
@@ -59,7 +76,11 @@ charmap "X", $58
 charmap "Y", $59
 charmap "Z", $5A
 
+charmap "ï", $5B
+charmap "û", $5C
+charmap "ô", $5D
 charmap "'", $5E
+charmap "ç", $5F
 
 charmap "a", $61
 charmap "b", $62
@@ -88,51 +109,19 @@ charmap "x", $78
 charmap "y", $79
 charmap "z", $7A
 
+charmap "<star>", $7C
+charmap "Ó", $7D
+
 charmap "+", $7F
 
-; Special characters
-charmap "Á", $80
-charmap "É", $81
-charmap "Í", $82
-charmap "Ó", $83
-charmap "Ú", $84
-charmap "Ü", $85
-charmap "Ñ", $86
-charmap "Ç", $88
-charmap "á", $89
-charmap "é", $8A
-charmap "í", $8B
-charmap "ó", $8C
-charmap "ú", $8D
-charmap "ü", $8E
-charmap "ñ", $8F
-
-charmap "à", $90
-charmap "è", $91
-charmap "ì", $92
-charmap "ò", $93
-charmap "ù", $94
-charmap "ä", $95
-charmap "ë", $96
-charmap "ï", $97
-charmap "ö", $98
-charmap "¡", $9A
-charmap "¿", $9B
-
-charmap "`", $9C
-
-charmap "â", $B0
-charmap "ê", $B1
-charmap "î", $B2
-charmap "ô", $B3
-charmap "û", $B4
-
-charmap "<flower>", $d9
-charmap "<footprint>", $da
+charmap ";", $ad
+charmap "<tri1>", $ae
+charmap "<tri2>", $af
+charmap "É", $ce
+charmap "<heart>", $cf
 charmap "<skull>", $dc
 charmap "<link>", $dd
 charmap "<marin>", $de
-charmap "<tarin>", $df
 charmap "<yoshi>", $e0
 charmap "<ribbon>", $e1
 charmap "<dogfood>", $e2
@@ -140,22 +129,17 @@ charmap "<bananas>", $e3
 charmap "<stick>", $e4
 charmap "<honeycomb>", $e5
 charmap "<pineapple>", $e6
-charmap "<flower2>", $e7
+charmap "<flower>", $e7
 charmap "<broom>", $e8
 charmap "<fishhook>", $e9
 charmap "<bra>", $ea
-charmap "<scale>", $eb
-charmap "<glass>", $ec
 charmap "<letter>", $ed
-
 charmap "<dpad>", $ee
-
+charmap "/", $ef
 charmap "<up>", $f0
 charmap "<down>", $f1
 charmap "<left>", $f2
 charmap "<right>", $f3
-
-charmap "/", $fd
 charmap "<ask>", $fe
 charmap "@", $ff
 

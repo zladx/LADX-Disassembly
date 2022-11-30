@@ -1,7 +1,10 @@
+;
+; Mapping from Unicode to the codepoints used in the ROM.
+;
 PUSHC
 NEWCHARMAP CreditsCharmap
 
-SETCHARMAP AsciiCharmap
+SETCHARMAP DialogCharmap
 
 ; Credits-specific charmap patches for German
 charmap "[", $5B

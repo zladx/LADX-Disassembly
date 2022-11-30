@@ -1,7 +1,8 @@
-; Japanese charmap
-
+;
+; Mapping from Unicode to the codepoints used by the ROM.
+;
 PUSHC
-NEWCHARMAP JpCharmap
+NEWCHARMAP DialogCharmap
 
 charmap "あ", $00
 charmap "い", $01

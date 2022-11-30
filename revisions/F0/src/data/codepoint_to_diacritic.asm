@@ -1,8 +1,14 @@
+;
+; Map codepoints (bytes of text as stored in the ROM) to diacritic tiles.
+;
 ; The French text uses two diacritic tiles:
 ; - 1: ` (Grave accent on uppercase letter, tile $C9)
 ; - 2: ´ (Acute accent on uppercase letter, tile $C8)
 ;
-; The two diacritic tiles are on the `gfx/items/inventory_overworld_items.dmg.png` tilesheet.
+; The two diacritic tiles are on these tilesheets:
+; - `F0/src/gfx/items/inventory_overworld_items.dmg.png`
+; - `F0/src/gfx/items/inventory_indoor_items.dmg.png`
+; - `F0/src/gfx/ending/ending_1.dmg.png`
 ;
 ; However diacritics support for the French version is actually disabled:
 ; this table, as well as the associated diacritics, is unused.
@@ -13,8 +19,9 @@
 ; the tilemap only reserve space for two. In the retail version, all
 ; french capital letters are left unaccentuated.
 ;
-; See AsciiCharmap
-AsciiToDiacritic::
+; See: DialogCharmap, CodepointToTileMap
+;
+CodepointToDiacritic::
 ;
     db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ;

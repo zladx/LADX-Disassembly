@@ -52,7 +52,7 @@ HorsePieceEntityHandler::
     ld   hl, wEntitiesSpeedZTable                 ; $7623: $21 $20 $C3
     add  hl, bc                                   ; $7626: $09
     ld   a, [hl]                                  ; $7627: $7E
-    ldh  [hDungeonFloorTile], a                   ; $7628: $E0 $E9
+    ldh  [hMultiPurposeH], a                      ; $7628: $E0 $E9
     sra  a                                        ; $762A: $CB $2F
     cpl                                           ; $762C: $2F
     ; If new bounce speed is less then 7, set the speed to zero
@@ -119,7 +119,7 @@ HorsePieceStateThrowing:
     jr   z, .jr_76C2                              ; $7683: $28 $3D
 
     call .func_76E7                               ; $7685: $CD $E7 $76
-    ldh  a, [hDungeonFloorTile]                   ; $7688: $F0 $E9
+    ldh  a, [hMultiPurposeH]                      ; $7688: $F0 $E9
     sub  $FC                                      ; $768A: $D6 $FC
     and  $80                                      ; $768C: $E6 $80
     jr   nz, .jr_7696                             ; $768E: $20 $06

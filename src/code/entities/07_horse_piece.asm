@@ -52,7 +52,7 @@ HorsePieceEntityHandler::
     ld   hl, wEntitiesSpeedZTable                 ; $7623: $21 $20 $C3
     add  hl, bc                                   ; $7626: $09
     ld   a, [hl]                                  ; $7627: $7E
-    ldh  [hDungeonFloorTile], a                   ; $7628: $E0 $E9
+    ldh  [hMultiPurposeH], a                      ; $7628: $E0 $E9
     sra  a                                        ; $762A: $CB $2F
     cpl                                           ; $762C: $2F
     ; If new bounce speed is less then 7, set the speed to zero
@@ -86,8 +86,9 @@ HorsePieceRandomVariant::
 
 HorsePieceStateThrowing:
     call GetEntityTransitionCountdown             ; $7657: $CD $05 $0C
-    jr   nz, .jr_7671                             ; $765A: $20 $15
+    jr   nz, .stateNotEnded                       ; $765A: $20 $15
 
+    ; End the throwing state, pick a random variant to show. If this is variant $00, then we are upright.
     call ClearEntitySpeed                         ; $765C: $CD $7F $3D
     call IncrementEntityState                     ; $765F: $CD $12 $3B
     call GetRandomByte                            ; $7662: $CD $0D $28
@@ -99,10 +100,11 @@ HorsePieceStateThrowing:
     ld   a, [hl]                                  ; $766D: $7E
     jp   SetEntitySpriteVariant                   ; $766E: $C3 $0C $3B
 
-.jr_7671
+.stateNotEnded
     and  $07                                      ; $7671: $E6 $07
-    jr   nz, .jr_767E                             ; $7673: $20 $09
+    jr   nz, .noVariantChange                     ; $7673: $20 $09
 
+    ; Every 8 frames, change our variant for tumbling animation.
     ld   hl, wEntitiesSpriteVariantTable          ; $7675: $21 $B0 $C3
     add  hl, bc                                   ; $7678: $09
     ld   a, [hl]                                  ; $7679: $7E
@@ -110,21 +112,21 @@ HorsePieceStateThrowing:
     and  $03                                      ; $767B: $E6 $03
     ld   [hl], a                                  ; $767D: $77
 
-.jr_767E
+.noVariantChange
     ldh  a, [hMultiPurposeG]                      ; $767E: $F0 $E8
     dec  a                                        ; $7680: $3D
     and  $80                                      ; $7681: $E6 $80
-    jr   z, jr_007_76C2                           ; $7683: $28 $3D
+    jr   z, .jr_76C2                              ; $7683: $28 $3D
 
-    call func_007_76E7                            ; $7685: $CD $E7 $76
-    ldh  a, [hDungeonFloorTile]                   ; $7688: $F0 $E9
+    call .func_76E7                               ; $7685: $CD $E7 $76
+    ldh  a, [hMultiPurposeH]                      ; $7688: $F0 $E9
     sub  $FC                                      ; $768A: $D6 $FC
     and  $80                                      ; $768C: $E6 $80
     jr   nz, .jr_7696                             ; $768E: $20 $06
 
     ldh  a, [hFrameCounter]                       ; $7690: $F0 $E7
     and  $07                                      ; $7692: $E6 $07
-    jr   nz, jr_007_76C2                          ; $7694: $20 $2C
+    jr   nz, .jr_76C2                             ; $7694: $20 $2C
 
 .jr_7696
     call GetRandomByte                            ; $7696: $CD $0D $28
@@ -154,14 +156,14 @@ HorsePieceStateThrowing:
     ld   a, [hl]                                  ; $76BA: $7E
     call GetEntitySpeedYAddress                   ; $76BB: $CD $05 $40
     ld   [hl], a                                  ; $76BE: $77
-    call func_007_76E7                            ; $76BF: $CD $E7 $76
+    call .func_76E7                               ; $76BF: $CD $E7 $76
 
-jr_007_76C2:
+.jr_76C2:
     ld   hl, wEntitiesCollisionsTable             ; $76C2: $21 $A0 $C2
     add  hl, bc                                   ; $76C5: $09
     ld   a, [hl]                                  ; $76C6: $7E
     and  a                                        ; $76C7: $A7
-    jr   z, ret_007_76ED                          ; $76C8: $28 $23
+    jr   z, .ret                                  ; $76C8: $28 $23
 
     ld   hl, wEntitiesDirectionTable              ; $76CA: $21 $80 $C3
     add  hl, bc                                   ; $76CD: $09
@@ -183,12 +185,12 @@ jr_007_76C2:
     inc  a                                        ; $76E5: $3C
     ld   [hl], a                                  ; $76E6: $77
 
-func_007_76E7::
+.func_76E7
     ld   hl, wC5D0                                ; $76E7: $21 $D0 $C5
     add  hl, bc                                   ; $76EA: $09
     ld   [hl], $FF                                ; $76EB: $36 $FF
 
-ret_007_76ED:
+.ret
     ret                                           ; $76ED: $C9
 
 HorsePieceStateWaitingForOther::
@@ -249,15 +251,15 @@ HorsePieceCheckForPickup:
 
     ld   a, [wBButtonSlot]                        ; $773E: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $7741: $FE $03
-    jr   nz, .jr_774D                             ; $7743: $20 $08
+    jr   nz, .noBraceletB                         ; $7743: $20 $08
 
     ldh  a, [hJoypadState]                        ; $7745: $F0 $CC
     and  J_B                                      ; $7747: $E6 $20
-    jr   nz, .jr_775A                             ; $7749: $20 $0F
+    jr   nz, .useBracelet                         ; $7749: $20 $0F
 
     jr   .ret                                     ; $774B: $18 $36
 
-.jr_774D
+.noBraceletB
     ld   a, [wAButtonSlot]                        ; $774D: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $7750: $FE $03
     jr   nz, .ret                                 ; $7752: $20 $2F
@@ -266,7 +268,7 @@ HorsePieceCheckForPickup:
     and  J_A                                      ; $7756: $E6 $10
     jr   z, .ret                                  ; $7758: $28 $29
 
-.jr_775A
+.useBracelet
     ld   a, [wC3CF]                               ; $775A: $FA $CF $C3
     and  a                                        ; $775D: $A7
     jr   nz, .ret                                 ; $775E: $20 $23

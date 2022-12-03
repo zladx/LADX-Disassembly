@@ -340,7 +340,7 @@ GameplayWorldLoad6Handler::
     ;
 
     ld   a, [rLCDC]                               ; $450A: $F0 $40
-    or   $20                                      ; $450C: $F6 $20
+    or   LCDCF_WINON                              ; $450C: $F6 $20
     ld   [wLCDControl], a                         ; $450E: $EA $FD $D6
     ld   [rLCDC], a                               ; $4511: $E0 $40
 

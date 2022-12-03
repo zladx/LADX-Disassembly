@@ -439,7 +439,7 @@ JumpTable_037_4229::
     jr   .else_42F4_37                            ; $42F2: $18 $00
 
 .else_42F4_37:
-    ld   a, $C7                                   ; $42F4: $3E $C7
+    ld   a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON ; $42F4: $3E $C7
     ld   [wLCDControl], a                         ; $42F6: $EA $FD $D6
     ldh  [rLCDC], a                               ; $42F9: $E0 $40
     jp   func_037_53FE                            ; $42FB: $C3 $FE $53
@@ -925,7 +925,7 @@ func_037_4552::
     ld   b, a                                     ; $4603: $47
     ld   a, [hl]                                  ; $4604: $7E
     call func_037_418B                            ; $4605: $CD $8B $41
-    ld   a, $E5                                   ; $4608: $3E $E5
+    ld   a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_BGON ; $4608: $3E $E5
     ld   [wLCDControl], a                         ; $460A: $EA $FD $D6
     ldh  [rLCDC], a                               ; $460D: $E0 $40
     xor  a                                        ; $460F: $AF
@@ -3103,7 +3103,7 @@ JumpTable_037_5393.func_037_53C0::
     call CopyDataToVRAM                           ; $53C6: $CD $13 $0A
 
 .else_53C9_37:
-    ld   a, $C7                                   ; $53C9: $3E $C7
+    ld   a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON ; $53C9: $3E $C7
     ld   [wLCDControl], a                         ; $53CB: $EA $FD $D6
     ldh  [rLCDC], a                               ; $53CE: $E0 $40
     ld   hl, Data_037_5379                        ; $53D0: $21 $79 $53

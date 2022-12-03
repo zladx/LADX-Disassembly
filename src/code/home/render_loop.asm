@@ -111,10 +111,10 @@ ENDC
 
     ; Apply LCD status flags
     ld   a, [wLCDControl]                         ; $023D: $FA $FD $D6
-    and  $7F                                      ; $0240: $E6 $7F
+    and  ~LCDCF_ON                                ; $0240: $E6 $7F
     ld   e, a                                     ; $0242: $5F
     ld   a, [rLCDC]                               ; $0243: $F0 $40
-    and  $80                                      ; $0245: $E6 $80
+    and  LCDCF_ON                                 ; $0245: $E6 $80
     or   e                                        ; $0247: $B3
     ld   [rLCDC], a                               ; $0248: $E0 $40
 

@@ -4595,19 +4595,19 @@ LCDOff::
     ; Save interrupts configuration
     ld   a, [rIE]                                 ; $28CF: $F0 $FF
     ldh  [hInterrupts], a                         ; $28D1: $E0 $D2
-    ; Disable all interrupts
-    res  0, a                                     ; $28D3: $CB $87
+    ; Disable VBlank interrupt
+    res  IEB_VBLANK, a                            ; $28D3: $CB $87
     ld   [rIE], a                                 ; $28D5: $E0 $FF
 
     ; Wait for row 145
 .waitForEndOfLine
     ld   a, [rLY]                                 ; $28D7: $F0 $44
-    cp   145                                      ; $28D9: $FE $91
+    cp   SCRN_Y + 1                               ; $28D9: $FE $91
     jr   nz, .waitForEndOfLine                    ; $28DB: $20 $FA
 
     ; Switch off LCD screen
     ld   a, [rLCDC]                               ; $28DD: $F0 $40
-    and  $7F                                      ; $28DF: $E6 $7F
+    and  ~LCDCF_ON                                ; $28DF: $E6 $7F
     ld   [rLCDC], a                               ; $28E1: $E0 $40
 
     ; Restore interrupts configuration
@@ -5924,7 +5924,7 @@ ASSERT LOW(wRoomObjectsArea) & $0F == 0, "wRoomObjectsArea must be aligned on $1
 ; Load room objects
 LoadRoom::
     ; Disable all interrupts except VBlank
-    ld   a, $01                                   ; $30F4: $3E $01
+    ld   a, IEF_VBLANK                            ; $30F4: $3E $01
     ld   [rIE], a                                 ; $30F6: $E0 $FF
 
     ; Increment wD47F

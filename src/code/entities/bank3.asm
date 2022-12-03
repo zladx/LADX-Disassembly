@@ -729,7 +729,7 @@ NoopFunction::
     ret                                           ; $4B56: $C9
 
 EntityInitSouthFaceShrineDoor::
-    ld   a, $03                                   ; $4B57: $3E $03
+    ld   a, IEF_STAT | IEF_VBLANK                 ; $4B57: $3E $03
     ldh  [rIE], a                                 ; $4B59: $E0 $FF
     ret                                           ; $4B5B: $C9
 

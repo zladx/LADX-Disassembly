@@ -891,7 +891,7 @@ ApplyWindFishVfx::
 
 jr_017_4911:
     ldh  a, [rSTAT]                               ; $4911: $F0 $41
-    and  $03                                      ; $4913: $E6 $03
+    and  STATF_LCD                                ; $4913: $E6 $03
     jr   nz, jr_017_4911                          ; $4915: $20 $FA
 
     ld   d, $00                                   ; $4917: $16 $00
@@ -941,7 +941,7 @@ jr_017_4911:
 
 jr_017_4964:
     ldh  a, [rSTAT]                               ; $4964: $F0 $41
-    and  $03                                      ; $4966: $E6 $03
+    and  STATF_LCD                                ; $4966: $E6 $03
     jr   nz, jr_017_4964                          ; $4968: $20 $FA
 
     ld   d, $00                                   ; $496A: $16 $00
@@ -1196,12 +1196,12 @@ label_017_4C22:
     jr   nz, .loop_4C2F                           ; $4C33: $20 $FA
 
     call label_27F2                               ; $4C35: $CD $F2 $27
-    ld   a, $01                                   ; $4C38: $3E $01
+    ld   a, IEF_VBLANK                            ; $4C38: $3E $01
     ldh  [rIE], a                                 ; $4C3A: $E0 $FF
     ld   a, $00                                   ; $4C3C: $3E $00
     ldh  [rLYC], a                                ; $4C3E: $E0 $45
     ld   hl, wLCDControl                          ; $4C40: $21 $FD $D6
-    res  3, [hl]                                  ; $4C43: $CB $9E
+    res  LCDCB_BG9C00, [hl]                       ; $4C43: $CB $9E
     call ResetCreditsSceneVariables               ; $4C45: $CD $A5 $4D
     call IncrementCreditsGameplaySubtype          ; $4C48: $CD $5B $4C
     ld   a, MUSIC_MEETING_WINDFISH                ; $4C4B: $3E $59
@@ -1627,7 +1627,7 @@ CreditsWindFishPrepare3Handler::
     ld   a, $F0                                   ; $50D6: $3E $F0
     ldh  [hBaseScrollY], a                        ; $50D8: $E0 $97
     call ResetCreditsSceneVariables               ; $50DA: $CD $A5 $4D
-    ld   a, $01                                   ; $50DD: $3E $01
+    ld   a, IEF_VBLANK                            ; $50DD: $3E $01
     ldh  [rIE], a                                 ; $50DF: $E0 $FF
     ld   a, $56                                   ; $50E1: $3E $56
     ldh  [rLYC], a                                ; $50E3: $E0 $45
@@ -1747,7 +1747,7 @@ jr_017_5160:
     call ResetCreditsSceneVariables               ; $5197: $CD $A5 $4D
     ld   a, $40                                   ; $519A: $3E $40
     ld   [wD006], a                               ; $519C: $EA $06 $D0
-    ld   a, $03                                   ; $519F: $3E $03
+    ld   a, IEF_STAT | IEF_VBLANK                 ; $519F: $3E $03
     ldh  [rIE], a                                 ; $51A1: $E0 $FF
     jp   IncrementCreditsSubscene                 ; $51A3: $C3 $D9 $4C
 
@@ -1877,7 +1877,7 @@ CreditsWindFishPrepareDisapparitionHandler::
     and  a                                        ; $5400: $A7
     jr   nz, .ret_541D                            ; $5401: $20 $1A
 
-    ld   a, $01                                   ; $5403: $3E $01
+    ld   a, IEF_VBLANK                            ; $5403: $3E $01
     ldh  [rIE], a                                 ; $5405: $E0 $FF
     ld   a, $FF                                   ; $5407: $3E $FF
     ld   [wTransitionGfx], a                      ; $5409: $EA $7F $C1
@@ -1937,7 +1937,7 @@ jr_017_544D:
     call ResetCreditsSceneVariables               ; $546E: $CD $A5 $4D
     ld   a, $30                                   ; $5471: $3E $30
     ld   [wD006], a                               ; $5473: $EA $06 $D0
-    ld   a, $01                                   ; $5476: $3E $01
+    ld   a, IEF_VBLANK                            ; $5476: $3E $01
     ldh  [rIE], a                                 ; $5478: $E0 $FF
     jp   IncrementCreditsSubsceneAndReturn        ; $547A: $C3 $D9 $4C
 
@@ -3672,8 +3672,9 @@ func_017_6292::
 func_017_629E::
     ld   a, TILEMAP_CREDITS_LINK_ON_SEA_CLOSE     ; $629E: $3E $19
     ld   [wBGMapToLoad], a                        ; $62A0: $EA $FF $D6
-    ld   hl, $FFFF                                ; $62A3: $21 $FF $FF
-    set  1, [hl]                                  ; $62A6: $CB $CE
+    ; Enable LCD STAT interrupt
+    ld   hl, rIE                                  ; $62A3: $21 $FF $FF
+    set  IEB_STAT, [hl]                           ; $62A6: $CB $CE
     ld   a, $42                                   ; $62A8: $3E $42
     ldh  [rLYC], a                                ; $62AA: $E0 $45
 
@@ -3968,8 +3969,10 @@ func_017_64DE::
     ld   [wD00F], a                               ; $64FF: $EA $0F $D0
     ld   [wD00F], a                               ; $6502: $EA $0F $D0
     call ResetCreditsSceneVariables               ; $6505: $CD $A5 $4D
-    ld   hl, $FFFF                                ; $6508: $21 $FF $FF
-    res  1, [hl]                                  ; $650B: $CB $8E
+    ; Disable LCD STAT interrupt
+    ld   hl, rIE                                  ; $6508: $21 $FF $FF
+    res  IEB_STAT, [hl]                           ; $650B: $CB $8E
+    ; Set OAM size to 8x16
     ld   hl, wLCDControl                          ; $650D: $21 $FD $D6
     set  2, [hl]                                  ; $6510: $CB $D6
     ld   hl, wGameplaySubtype                     ; $6512: $21 $96 $DB

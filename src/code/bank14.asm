@@ -980,7 +980,7 @@ RenderTransitionEffect::
 
 label_014_5067:
     ldh  a, [rSTAT]                               ; $5067: $F0 $41
-    and  $03                                      ; $5069: $E6 $03
+    and  STATF_LCD                                ; $5069: $E6 $03
     jr   nz, label_014_5067                       ; $506B: $20 $FA
 
     ld   d, $00                                   ; $506D: $16 $00

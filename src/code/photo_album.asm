@@ -33,10 +33,10 @@ Data_028_4031::
 
 func_028_4033::
     ld   a, [wGameplaySubtype]                    ; $4033: $FA $96 $DB
-    cp   $0D                                      ; $4036: $FE $0D
+    cp   GAMEPLAY_PHOTO_ALBUM                     ; $4036: $FE $0D
     jr   c, .return_408E_28                       ; $4038: $38 $54
 
-    cp   $11                                      ; $403A: $FE $11
+    cp   GAMEPLAY_PHOTO_MARIN_WELL                ; $403A: $FE $11
     jr   nc, .return_408E_28                      ; $403C: $30 $50
 
     ld   b, $00                                   ; $403E: $06 $00
@@ -140,7 +140,7 @@ PhotoAlbumInit1Handler:
     ld   a, $30                                   ; $40CB: PhotoAlbumInit1Handler $3E $30
     ldh  [hVolumeLeft], a                         ; $40CD: PhotoAlbumInit1Handler $E0 $AA
     call func_028_47CB                            ; $40CF: PhotoAlbumInit1Handler $CD $CB $47
-    ld   a, $09                                   ; $40D2: PhotoAlbumInit1Handler $3E $09
+    ld   a, IEF_SERIAL | IEF_VBLANK               ; $40D2: PhotoAlbumInit1Handler $3E $09
     ld   [rIE], a                                 ; $40D4: PhotoAlbumInit1Handler $E0 $FF
     jp   PhotoAlbumIncrementState                 ; $40D6: PhotoAlbumInit1Handler $C3 $DB $44
 
@@ -211,8 +211,7 @@ ENDC
     ld   hl, PhotoAlbumPalettes                   ; $415F: PhotoAlbumInit3Handler $21 $B0 $7C
     ld   de, wBGPal1                              ; $4162: PhotoAlbumInit3Handler $11 $10 $DC
     call func_028_4176                            ; $4165: PhotoAlbumInit3Handler $CD $76 $41
-                                                  ; $4168: PhotoAlbumInit3Handler $3E $C7
-    ld   a, $C7
+    ld   a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON ; $4168: PhotoAlbumInit3Handler $3E $C7
     ld   [wLCDControl], a                         ; $416A: PhotoAlbumInit3Handler $EA $FD $D6
     ld   [rLCDC], a                               ; $416D: PhotoAlbumInit3Handler $E0 $40
     xor  a                                        ; $416F: PhotoAlbumInit3Handler $AF
@@ -610,8 +609,7 @@ PhotoAlbumPreparePictureHandler:
     call func_028_43CC                            ; $43B5: PhotoAlbumPreparePictureHandler $CD $CC $43
     call func_028_4411                            ; $43B8: PhotoAlbumPreparePictureHandler $CD $11 $44
     call func_028_442C                            ; $43BB: PhotoAlbumPreparePictureHandler $CD $2C $44
-                                                  ; $43BE: PhotoAlbumPreparePictureHandler $3E $C7
-    ld   a, $C7
+    ld   a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON ; $43BE: PhotoAlbumPreparePictureHandler $3E $C7
     ld   [wLCDControl], a                         ; $43C0: PhotoAlbumPreparePictureHandler $EA $FD $D6
     ld   [rLCDC], a                               ; $43C3: PhotoAlbumPreparePictureHandler $E0 $40
     xor  a                                        ; $43C5: PhotoAlbumPreparePictureHandler $AF

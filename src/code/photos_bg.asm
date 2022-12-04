@@ -37,8 +37,7 @@ Data_03D_401C::
 LoadPhotoBgMap::
     call LCDOff                                   ; $4029: $CD $CF $28
     ld   a, [wLCDControl]                         ; $402C: $FA $FD $D6
-                                                  ; $402F: $E6 $7F
-    and  $7F
+    and ~LCDCF_ON                                 ; $402F: $E6 $7F
     ld   [rLCDC], a                               ; $4031: $E0 $40
 
     ; Get the BG map pointer for the photo
@@ -95,8 +94,7 @@ LoadPhotoBgMap::
     xor  a                                        ; $407E: $AF
     ld   [rVBK], a                                ; $407F: $E0 $4F
 .else_4081_3D:
-                                                  ; $4081: $3E $C7
-    ld   a, $C7
+    ld   a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON ; $4081: $3E $C7
     ld   [wLCDControl], a                         ; $4083: $EA $FD $D6
     ld   [rLCDC], a                               ; $4086: $E0 $40
     ld   a, [wGameplayType]                       ; $4088: $FA $95 $DB

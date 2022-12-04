@@ -161,7 +161,7 @@ SuperGameBoyInit::
     or   b                                        ; $6B34: $B0
     jr   nz, .loop_6B30_3C                        ; $6B35: $20 $F9
 
-    ld   a, $81                                   ; $6B37: $3E $81
+    ld   a, LCDCF_ON | LCDCF_BGON                 ; $6B37: $3E $81
     ld   [rLCDC], a                               ; $6B39: $E0 $40
     ld   bc, $06                                  ; $6B3B: $01 $06 $00
     call WaitForBCFrames                          ; $6B3E: $CD $92 $6B
@@ -172,7 +172,7 @@ SuperGameBoyInit::
     ld   bc, $06                                  ; $6B47: $01 $06 $00
     call WaitForBCFrames                          ; $6B4A: $CD $92 $6B
 
-    ; Disable the LCDC interrupt
+    ; Disable all LCD Control flags
     xor  a                                        ; $6B4D: $AF
     ld   [rLCDC], a                               ; $6B4E: $E0 $40
     ret                                           ; $6B50: $C9
@@ -287,7 +287,7 @@ SendVRAMCommand::
     add  hl, de                                   ; $6BC2: $19
     dec  c                                        ; $6BC3: $0D
     jr   nz, .loop_6BBB_3C                        ; $6BC4: $20 $F5
-    ld   a, $81                                   ; $6BC6: $3E $81
+    ld   a, LCDCF_ON | LCDCF_BGON                 ; $6BC6: $3E $81
     ld   [rLCDC], a                               ; $6BC8: $E0 $40
     ld   bc, $05                                  ; $6BCA: $01 $05 $00
     call WaitForBCFrames                          ; $6BCD: $CD $92 $6B

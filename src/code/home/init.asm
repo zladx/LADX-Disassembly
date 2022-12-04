@@ -10,15 +10,15 @@ Start::
     cp   BOOTUP_A_CGB ; running on Game Boy Color? ; $0150: $FE $11
     jr   nz, .notGBC                              ; $0152: $20 $1A
     ld   a, [rKEY1]                               ; $0154: $F0 $4D
-    and  $80 ; do we need to switch the CPU speed? ; $0156: $E6 $80
-    jr   nz, .speedSwitchDone                     ; $0158: $20 $0D
-    ld   a, $30      ; \                          ; $015A: $3E $30
-    ld   [rP1], a  ; |                            ; $015C: $E0 $00
-    ld   a, $01      ; |                          ; $015E: $3E $01
-    ld   [rKEY1], a  ; | Switch the CPU speed     ; $0160: $E0 $4D
-    xor  a           ; |                          ; $0162: $AF
-    ld   [rIE], a    ; |                          ; $0163: $E0 $FF
-    stop             ; /                          ; $0165: $10 $00
+    and  KEY1F_DBLSPEED       ; do we need to     ; $0156: $E6 $80
+    jr   nz, .speedSwitchDone ; switch CPU speed? ; $0158: $20 $0D
+    ld   a, P1F_5 | P1F_4 ; \                     ; $015A: $3E $30
+    ld   [rP1], a         ; |                     ; $015C: $E0 $00
+    ld   a, KEY1F_PREPARE ; |                     ; $015E: $3E $01
+    ld   [rKEY1], a       ; | Prepare CPU speed   ; $0160: $E0 $4D
+    xor  a                ; |                     ; $0162: $AF
+    ld   [rIE], a         ; |                     ; $0163: $E0 $FF
+    stop                  ; / Switch CPU speed    ; $0165: $10 $00
 
 .speedSwitchDone
     xor  a                                        ; $0167: $AF
@@ -71,7 +71,7 @@ Init::
     ;   Bit 4: Mode 1 V-Blank interrupt disabled
     ;   Bit 3: Mode 0 H-Blank interrupt disabled
     ;   Bit 2-0: read-only
-    ld   a, %01000100                             ; $01AE: $3E $44
+    ld   a, STATF_LYC | STATF_LYCF                ; $01AE: $3E $44
     ld   [rSTAT], a                               ; $01B0: $E0 $41
 
     ; Initialize LY Compare register
@@ -89,7 +89,7 @@ Init::
     ;   Bit 2: Timer interrupt disabled
     ;   Bit 1: LCD STAT interrupt disabled
     ;   Bit 0: V-Blank interrupt enabled
-    ld   a, %00001                                ; $01BB: $3E $01
+    ld   a, IEF_VBLANK                            ; $01BB: $3E $01
     ld   [rIE], a                                 ; $01BD: $E0 $FF
 
     ; Initialize save files

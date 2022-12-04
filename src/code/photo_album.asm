@@ -351,7 +351,7 @@ PhotoAlbumInit4Handler:
     ld_dialog_low a, Dialog22C                    ; $4222: PhotoAlbumInit4Handler $3E $2C
     ld   [wDialogIndex], a                        ; $4224: PhotoAlbumInit4Handler $EA $73 $C1
     call OpenDialogInTable2                       ; $4227: PhotoAlbumInit4Handler $CD $7C $23
-    ld   a, $01                                   ; $422A: PhotoAlbumInit4Handler $3E $01
+    ld   a, DIALOG_OPENING_1                      ; $422A: PhotoAlbumInit4Handler $3E $01
     ld   [wDialogState], a                        ; $422C: PhotoAlbumInit4Handler $EA $9F $C1
 .else_422F_28:
     jp   PhotoAlbumIncrementState                 ; $422F: PhotoAlbumInit4Handler $C3 $DB $44

@@ -100,7 +100,7 @@ func_015_4750::
     ld   hl, wDialogState                         ; $4759: $21 $9F $C1
 
 .jr_475C
-    res  7, [hl]                                  ; $475C: $CB $BE
+    res  DIALOG_BOX_BOTTOM_BIT, [hl]              ; $475C: $CB $BE
     call IncrementEntityState                     ; $475E: $CD $12 $3B
     call GetEntityDropTimer                       ; $4761: $CD $FB $0B
     ld   [hl], $30                                ; $4764: $36 $30

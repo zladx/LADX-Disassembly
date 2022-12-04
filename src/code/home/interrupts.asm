@@ -260,7 +260,7 @@ InterruptVBlank::
     ; Dialog handling
     ;
     ld   a, [wDialogState]                        ; $0493: $FA $9F $C1
-    and  $7F  ; If dialog is closed               ; $0496: $E6 $7F
+    and  ~DIALOG_BOX_BOTTOM_FLAG ; If dialog is closed ; $0496: $E6 $7F
     jr   z, .dialogEnd                            ; $0498: $28 $32
     cp   DIALOG_OPENING_1                         ; $049A: $FE $01
     jr   z, .dialogEnd                            ; $049C: $28 $2E

@@ -108,9 +108,18 @@ DIALOG_CHOICE              equ $0D ; press A to choose
 DIALOG_CLOSING_1           equ $0E
 DIALOG_CLOSING_2           equ $0F
 
+DIALOG_BOX_BOTTOM_FLAG     equ $80 ; display dialog on the bottom
+DIALOG_BOX_BOTTOM_BIT      equ 7
+
 ; Tiles used as the dialog background color
 DIALOG_BG_TILE_DARK        equ $7E
 DIALOG_BG_TILE_LIGHT       equ $7F
+
+; Tiles used for diacritics above regular characters
+; Note that the order of the tiles in the tilemap are reversed from
+; the diacritic number, which is used in the CodepointToDiacritic table
+DIALOG_DIACRITIC_1         equ $C9
+DIALOG_DIACRITIC_2         equ $C8
 
 ; Values for wDialogGotItem
 DIALOG_GOT_PIECE_OF_POWER equ $01
@@ -121,6 +130,11 @@ DIALOG_GOT_GUARDIAN_ACORN equ $05
 
 ; Cooldown time for dialog boxes
 DIALOG_COOLDOWN              equ $18
+
+; Flag for denoting a dialog as unskippable,
+; set as the high bit of the dialog bank
+; (see dialog_banks.asm)
+DIALOG_UNSKIPPABLE equ $80
 
 ; Cooldown time after closing photo album
 PHOTO_ALBUM_COOLDOWN         equ $18

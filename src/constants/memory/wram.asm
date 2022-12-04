@@ -3263,8 +3263,8 @@ wIsMarinFollowingLink::
 wIsMarinInAnimalVillage::
   ds 1 ; DB74
 
-; Total number of medecine ever purchased from Crazy Tracy
-wPurchasedMedecineCount::
+; Total number of medicine ever purchased from Crazy Tracy
+wPurchasedMedicineCount::
   ds 1 ; DB75
 
 ; TODO comment

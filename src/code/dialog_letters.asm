@@ -46,7 +46,7 @@ DialogOpenAnimationEnd::
     cp   $05                                      ; $4A33: $FE $05
     jr   z, func_01C_4A71                         ; $4A35: $28 $3A
 
-    bit  7, c                                     ; $4A37: $CB $79
+    bit  DIALOG_BOX_BOTTOM_BIT, c                 ; $4A37: $CB $79
     jr   z, func_01C_4A3D                         ; $4A39: $28 $02
 
     add  $05                                      ; $4A3B: $C6 $05

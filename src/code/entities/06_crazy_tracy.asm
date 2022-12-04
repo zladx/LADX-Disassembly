@@ -3,7 +3,7 @@ CrazyTracySpriteAttributes::
 ._01 db   $00, $00, $60, $02, $00, $08, $62, $02, $10, $00, $68, $02, $10, $08, $6A, $02
 ._02 db   $00, $00, $66, $22, $00, $08, $64, $22, $10, $00, $6A, $22, $10, $08, $68, $22
 
-MedecineSpriteAttributes::
+MedicineSpriteAttributes::
     db   $A0, $14
 
 CrazyTracyEntityHandler::
@@ -32,14 +32,14 @@ CrazyTracyEntityHandler::
     ld   [hl], a                                  ; $5EAB: $77
 
     ;
-    ; When Link just got the Medecine, display the Medecine
+    ; When Link just got the Medicine, display the Medicine
     ; over its head.
     ;
 
     call GetEntityTransitionCountdown             ; $5EAC: $CD $05 $0C
-    jr   z, .gotMedecineEnd                       ; $5EAF: $28 $2D
+    jr   z, .gotMedicineEnd                       ; $5EAF: $28 $2D
 
-    ; Position the medecine sprite above Link
+    ; Position the medicine sprite above Link
     ldh  a, [hLinkPositionX]                      ; $5EB1: $F0 $98
     ldh  [hActiveEntityPosX], a                   ; $5EB3: $E0 $EE
     ld   a, [wC145]                               ; $5EB5: $FA $45 $C1
@@ -60,10 +60,10 @@ CrazyTracyEntityHandler::
     ld   [wSwordCharge], a                        ; $5ECF: $EA $22 $C1
     ld   [wIsUsingSpinAttack], a                  ; $5ED2: $EA $21 $C1
 
-    ld   de, MedecineSpriteAttributes             ; $5ED5: $11 $93 $5E
+    ld   de, MedicineSpriteAttributes             ; $5ED5: $11 $93 $5E
     call RenderActiveEntitySprite                 ; $5ED8: $CD $77 $3C
     call CopyEntityPositionToActivePosition       ; $5EDB: $CD $8A $3D
-.gotMedecineEnd
+.gotMedicineEnd
 
     ;
     ; Turn Tracy's head if Link is on the side
@@ -128,9 +128,9 @@ CrazyTracyGreetingHandler::
     ; Open Tracy greeting dialog
     call_open_dialog Dialog017                    ; $5F34
     ld   hl, wDialogState                         ; $5F39: $21 $9F $C1
-    set  7, [hl]                                  ; $5F3C: $CB $FE
+    set  DIALOG_BOX_BOTTOM_BIT, [hl]              ; $5F3C: $CB $FE
 
-    ; Gather the informations for the medecine price.
+    ; Gather the informations for the medicine price.
     ; wEntitiesPrivateState1Table is wether Tracy makes a discount:
     ;   Total number of killed enemies is even: 28 rupees
     ;   Total number of killed enemies is odd:  42 rupees
@@ -141,7 +141,7 @@ CrazyTracyGreetingHandler::
     add  hl, bc                                   ; $5F46: $09
     ld   [hl], a                                  ; $5F47: $77
 
-    ld   a, [wPurchasedMedecineCount]             ; $5F48: $FA $75 $DB
+    ld   a, [wPurchasedMedicineCount]             ; $5F48: $FA $75 $DB
     cp   $07                                      ; $5F4B: $FE $07
     jr   nz, .discountEnd                         ; $5F4D: $20 $02
     inc  [hl]                                     ; $5F4F: $34
@@ -155,11 +155,11 @@ CrazyTracyProposingPriceHandler::
     call ShouldLinkTalkToTracy                    ; $5F54: $CD $23 $5F
     ret  nc                                       ; $5F57: $D0
 
-    ; If Link doesn’t already have the medecine…
+    ; If Link doesn’t already have the medicine…
     ld   a, [wHasMedicine]                        ; $5F58: $FA $0D $DB
     and  a                                        ; $5F5B: $A7
-    jr   nz, .giveMedecinePriceEnd                ; $5F5C: $20 $18
-    ; Open the dialog proposing to sell the medecine.
+    jr   nz, .giveMedicinePriceEnd                ; $5F5C: $20 $18
+    ; Open the dialog proposing to sell the medicine.
     ; (See wEntitiesPrivateState1Table for the price)
     ld   hl, wEntitiesPrivateState1Table          ; $5F5E: $21 $B0 $C2
     add  hl, bc                                   ; $5F61: $09
@@ -172,24 +172,24 @@ CrazyTracyProposingPriceHandler::
 
     call OpenDialogInTable0                       ; $5F6B: $CD $85 $23
     ld   hl, wDialogState                         ; $5F6E: $21 $9F $C1
-    set  7, [hl]                                  ; $5F71: $CB $FE
+    set  DIALOG_BOX_BOTTOM_BIT, [hl]              ; $5F71: $CB $FE
     jp   IncrementEntityState                     ; $5F73: $C3 $12 $3B
-.giveMedecinePriceEnd
+.giveMedicinePriceEnd
 
-    ; Link already has a medecine in the inventory:
-    ; open the "No medecine for you!" dialog.
+    ; Link already has a medicine in the inventory:
+    ; open the "No medicine for you!" dialog.
     call_open_dialog Dialog01C                    ; $5F76
     ld   hl, wDialogState                         ; $5F7B: $21 $9F $C1
-    set  7, [hl]                                  ; $5F7E: $CB $FE
+    set  DIALOG_BOX_BOTTOM_BIT, [hl]              ; $5F7E: $CB $FE
     ret                                           ; $5F80: $C9
 
-MedecinePriceCharacters::
+MedicinePriceCharacters::
     db   $28, $42, $07, $07
 
 Data_006_5F85::
     db   $00, $00, $00, $00
 
-MedecinePriceDecimal::
+MedicinePriceDecimal::
     db   28, 42, 7, 7
 
 Data_006_5F8D::
@@ -202,7 +202,7 @@ CrazyTracySellingHandler::
 
     ld   a, [wDialogAskSelectionIndex]            ; $5F98: $FA $77 $C1
     and  a                                        ; $5F9B: $A7
-    jr   nz, .refusedMedecine
+    jr   nz, .refusedMedicine
 
     ; Open the "Too bad" dialog                   ; $5F9C: $20 $6F
     ld   hl, wEntitiesPrivateState1Table          ; $5F9E: $21 $B0 $C2
@@ -212,7 +212,7 @@ CrazyTracySellingHandler::
     ld   hl, Data_006_5F85                        ; $5FA4: $21 $85 $5F
     add  hl, de                                   ; $5FA7: $19
     ld   a, [hl]                                  ; $5FA8: $7E
-    ld   hl, MedecinePriceCharacters              ; $5FA9: $21 $81 $5F
+    ld   hl, MedicinePriceCharacters              ; $5FA9: $21 $81 $5F
     add  hl, de                                   ; $5FAC: $19
     ld   e, [hl]                                  ; $5FAD: $5E
     ld   d, a                                     ; $5FAE: $57
@@ -227,28 +227,28 @@ CrazyTracySellingHandler::
 
 .jr_006_5FBD
 
-    ; Every 8th purchased medecine, give a discount
-    ld   a, [wPurchasedMedecineCount]             ; $5FBD: $FA $75 $DB
+    ; Every 8th purchased medicine, give a discount
+    ld   a, [wPurchasedMedicineCount]             ; $5FBD: $FA $75 $DB
     inc  a                                        ; $5FC0: $3C
     and  $07                                      ; $5FC1: $E6 $07
-    ld   [wPurchasedMedecineCount], a             ; $5FC3: $EA $75 $DB
+    ld   [wPurchasedMedicineCount], a             ; $5FC3: $EA $75 $DB
     jr   nz, .buy                                 ; $5FC6: $20 $0D
     ; Open "I'll give you a discount dialog"
     call_open_dialog Dialog01E                    ; $5FC8
     ld   hl, wDialogState                         ; $5FCD: $21 $9F $C1
-    set  7, [hl]                                  ; $5FD0: $CB $FE
+    set  DIALOG_BOX_BOTTOM_BIT, [hl]              ; $5FD0: $CB $FE
     jp   IncrementEntityState                     ; $5FD2: $C3 $12 $3B
 
 .buy
     ;
-    ; Buy the medecine
+    ; Buy the medicine
     ;
 
     ld   hl, wEntitiesPrivateState1Table          ; $5FD5: $21 $B0 $C2
     add  hl, bc                                   ; $5FD8: $09
     ld   e, [hl]                                  ; $5FD9: $5E
     ld   d, b                                     ; $5FDA: $50
-    ld   hl, MedecinePriceDecimal                 ; $5FDB: $21 $89 $5F
+    ld   hl, MedicinePriceDecimal                 ; $5FDB: $21 $89 $5F
     add  hl, de                                   ; $5FDE: $19
     ld   a, [wSubstractRupeeBufferLow]            ; $5FDF: $FA $92 $DB
     add  [hl]                                     ; $5FE2: $86
@@ -275,14 +275,14 @@ CrazyTracySellingHandler::
     ldh  [hJingle], a                             ; $600A: $E0 $F2
     ret                                           ; $600C: $C9
 
-.refusedMedecine
+.refusedMedicine
     ; Open the "Too bad" dialog
     ld   a, $01D                                  ; $600D: $3E $1D
 
 .openFinalDialog
     call OpenDialogInTable0                       ; $600F: $CD $85 $23
     ld   hl, wDialogState                         ; $6012: $21 $9F $C1
-    set  7, [hl]                                  ; $6015: $CB $FE
+    set  DIALOG_BOX_BOTTOM_BIT, [hl]              ; $6015: $CB $FE
     call IncrementEntityState                     ; $6017: $CD $12 $3B
     ld   [hl], b                                  ; $601A: $70
 
@@ -313,7 +313,7 @@ CrazyTracyBonusHandler::
     ld   [wAddHealthBuffer], a                    ; $6037: $EA $93 $DB
     call_open_dialog Dialog19A                    ; $603A
     ld   hl, wDialogState                         ; $603F: $21 $9F $C1
-    set  7, [hl]                                  ; $6042: $CB $FE
+    set  DIALOG_BOX_BOTTOM_BIT, [hl]              ; $6042: $CB $FE
 .fillHeartsEnd
 
     ; Reset to state 0 (first stage dialog)

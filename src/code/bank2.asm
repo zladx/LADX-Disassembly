@@ -4802,16 +4802,16 @@ label_002_61E7:
 
 label_002_61F5:
     ld   a, [wDialogState]                        ; $61F5: $FA $9F $C1
-    and  $7F                                      ; $61F8: $E6 $7F
-    jr   z, .jr_002_6203                          ; $61FA: $28 $07
+    and  ~DIALOG_BOX_BOTTOM_FLAG                  ; $61F8: $E6 $7F
+    jr   z, .dialogClosed                         ; $61FA: $28 $07
 
-    cp   $0C                                      ; $61FC: $FE $0C
-    jr   z, .jr_002_6203                          ; $61FE: $28 $03
+    cp   DIALOG_END                               ; $61FC: $FE $0C
+    jr   z, .dialogClosed                         ; $61FE: $28 $03
 
-    cp   $0D                                      ; $6200: $FE $0D
+    cp   DIALOG_CHOICE                            ; $6200: $FE $0D
     ret  nz                                       ; $6202: $C0
 
-.jr_002_6203
+.dialogClosed
     call UpdateRupeesCount                        ; $6203: $CD $09 $62
     jp   UpdateHealth                             ; $6206: $C3 $17 $63
 

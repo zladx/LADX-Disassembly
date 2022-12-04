@@ -35,9 +35,9 @@ ExecuteDialog::
 .writePosition
     ld   [wDialogNextCharPosition], a             ; $2345: $EA $71 $C1
 
-    ; Discard wDialogState lower byte
+    ; Discard wDialogState upper bit (dialog displayed on bottom)
     ld   a, e                                     ; $2348: $7B
-    and  $7F                                      ; $2349: $E6 $7F
+    and  ~DIALOG_BOX_BOTTOM_FLAG                  ; $2349: $E6 $7F
 
     ; Dispatch according to the dialog state
     dec  a                                        ; $234B: $3D
@@ -110,8 +110,8 @@ OpenDialogInTable0::
     ldh  a, [hLinkPositionY]                      ; $23A3: $F0 $99
     cp   $48                                      ; $23A5: $FE $48
     rra                                           ; $23A7: $1F
-    and  $80                                      ; $23A8: $E6 $80
-    or   $01                                      ; $23AA: $F6 $01
+    and  DIALOG_BOX_BOTTOM_FLAG                   ; $23A8: $E6 $80
+    or   DIALOG_OPENING_1                         ; $23AA: $F6 $01
     ld   [wDialogState], a                        ; $23AC: $EA $9F $C1
 
     ret                                           ; $23AF: $C9
@@ -140,7 +140,7 @@ DialogClosingEndHandler::
 
 ; This array actually begins two bytes before,
 ; in the middle of the `jp` instruction,
-; and so has two extra bytes at the begining ($CF, $53).
+; and so has two extra bytes at the beginning ($CF, $53).
 data_23D2::
     db   $00, $24                                 ; $23D2
     db   $48, $00                                 ; $23D4
@@ -155,9 +155,9 @@ data_23DC::
 ; Saves tiles under the dialog box?
 func_23E4::
     ld   a, [wDialogState]                        ; $23E4: $FA $9F $C1
-    bit  7, a                                     ; $23E7: $CB $7F
+    bit  DIALOG_BOX_BOTTOM_BIT, a                 ; $23E7: $CB $7F
     jr   z, .jr_23EF                              ; $23E9: $28 $04
-    and  $7F                                      ; $23EB: $E6 $7F
+    and  ~DIALOG_BOX_BOTTOM_FLAG                  ; $23EB: $E6 $7F
     add  a, $03                                   ; $23ED: $C6 $03
 .jr_23EF
 
@@ -343,7 +343,7 @@ DialogLetterAnimationEndHandler::
     ld   a, [wDialogState]                        ; $24D2: $FA $9F $C1
     ld   c, a                                     ; $24D5: $4F
     ld   a, [wDialogNextCharPosition]             ; $24D6: $FA $71 $C1
-    bit  7, c                                     ; $24D9: $CB $79
+    bit  DIALOG_BOX_BOTTOM_BIT, c                 ; $24D9: $CB $79
     jr   z, .jp_24DF                              ; $24DB: $28 $02
     add  a, $20                                   ; $24DD: $C6 $20
 
@@ -456,7 +456,7 @@ ELSE
     ld   hl, DialogBankTable                      ; $256C: $21 $41 $47
     add  hl, de                                   ; $256F: $19
     ld   a, [hl] ; bank                           ; $2570: $7E
-    and  $3f                                      ; $2571: $E6 $3F
+    and  $3F                                      ; $2571: $E6 $3F
     ld   [MBC3SelectBank], a                      ; $2573: $EA $00 $21
     pop  hl                                       ; $2576: $E1
 ENDC
@@ -480,6 +480,7 @@ ENDC
 
 .choice
     ld   a, [wDialogState]                        ; $2595: $FA $9F $C1
+    ; Keep DIALOG_BOX_BOTTOM_FLAG
     and  $F0                                      ; $2598: $E6 $F0
     or   DIALOG_CHOICE                            ; $259A: $F6 $0D
     ld   [wDialogState], a                        ; $259C: $EA $9F $C1
@@ -498,8 +499,9 @@ ENDC
 
 .label_25AD::
     ld   a, [wDialogState]                        ; $25AD: $FA $9F $C1
+    ; Keep DIALOG_BOX_BOTTOM_FLAG
     and  $F0                                      ; $25B0: $E6 $F0
-    or   $0C                                      ; $25B2: $F6 $0C
+    or   DIALOG_END                               ; $25B2: $F6 $0C
     ld   [wDialogState], a                        ; $25B4: $EA $9F $C1
     ret                                           ; $25B7: $C9
 
@@ -622,10 +624,10 @@ ENDC
     ldi  [hl], a                                  ; $2655: $22
     ld   a, $00                                   ; $2656: $3E $00
     ldi  [hl], a                                  ; $2658: $22
-    ld   a, $C9                                   ; $2659: $3E $C9
+    ld   a, DIALOG_DIACRITIC_1                    ; $2659: $3E $C9
     rr   e                                        ; $265B: $CB $1B
     jr   c, .handleDiacriticTile                  ; $265D: $38 $01
-    dec  a  ; diacritic ($C8)                     ; $265F: $3D
+    dec  a  ; DIALOG_DIACRITIC_2                  ; $265F: $3D
 
 .handleDiacriticTile
     ldi  [hl], a                                  ; $2660: $22
@@ -714,7 +716,7 @@ ENDC
     ; e = (wDialogState == DIALOG_CLOSED ? 0 : 1)
     ld   e, $00                                   ; $26E1: $1E $00
     ld   a, [wDialogState]                        ; $26E3: $FA $9F $C1
-    and  $80                                      ; $26E6: $E6 $80
+    and  DIALOG_BOX_BOTTOM_FLAG                   ; $26E6: $E6 $80
     jr   z, .closed                               ; $26E8: $28 $01
     inc  e                                        ; $26EA: $1C
 .closed
@@ -825,7 +827,7 @@ data_276B::
 DialogFinishScrolling::
     ld   e, 0                                     ; $276D: $1E $00
     ld   a, [wDialogState]                        ; $276F: $FA $9F $C1
-    and  $80                                      ; $2772: $E6 $80
+    and  DIALOG_BOX_BOTTOM_FLAG                   ; $2772: $E6 $80
     jr   z, label_2777                            ; $2774: $28 $01
     inc  e                                        ; $2776: $1C
 

@@ -1875,7 +1875,7 @@ jr_001_5F6A::
     ret  z                                        ; $5F73: $C8
     ld   d, $3E                                   ; $5F74: $16 $3E
     ld   a, [wDialogState]                        ; $5F76: $FA $9F $C1
-    and  $80                                      ; $5F79: $E6 $80
+    and  DIALOG_BOX_BOTTOM_FLAG                   ; $5F79: $E6 $80
     jr   z, .jr_5F7F                              ; $5F7B: $28 $02
     ld   d, $58                                   ; $5F7D: $16 $58
 
@@ -1887,7 +1887,7 @@ jr_001_5F84::
     ld   a, [hl]                                  ; $5F84: $7E
     cp   d                                        ; $5F85: $BA
     ld   a, [wDialogState]                        ; $5F86: $FA $9F $C1
-    bit  7, a                                     ; $5F89: $CB $7F
+    bit  DIALOG_BOX_BOTTOM_BIT, a                 ; $5F89: $CB $7F
     jr   nz, .jr_5F8E                             ; $5F8B: $20 $01
     ccf                                           ; $5F8D: $3F
 
@@ -1901,7 +1901,7 @@ jr_001_5F84::
     jr   nz, .jr_5FA9                             ; $5F9B: $20 $0C
     inc  hl                                       ; $5F9D: $23
     inc  hl                                       ; $5F9E: $23
-    db   $3A ; ldd  a, [hl]                       ; $5F9F
+    ld   a, [hl-]                                 ; $5F9F
     dec  hl                                       ; $5FA0: $2B
     cp   $9A                                      ; $5FA1: $FE $9A
     jr   c, .jr_5FA9                              ; $5FA3: $38 $04

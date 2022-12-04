@@ -118,7 +118,7 @@ DrawSaveSlotName::
     ldh  [hMultiPurpose0], a                      ; $486D: $E0 $D7
     ld   a, [de]                                  ; $486F: $1A
     and  a                                        ; $4870: $A7
-    ld   a, $7E                ; Empty tile       ; $4871: $3E $7E
+    ld   a, DIALOG_BG_TILE_DARK                   ; $4871: $3E $7E
     jr   z, .drawCharacterTile                    ; $4873: $28 $0C
     ld   a, [de]                                  ; $4875: $1A
     dec  a                                        ; $4876: $3D
@@ -177,25 +177,25 @@ ENDC
 .selectSpacingTile::
     ; Select what tile to draw above the current character
 IF __DIACRITICS_SUPPORT__
-    ld   a, $7E               ; Empty tile
-    jr   z, .drawSpacingTile  ; Jump if no diacritic
-    ldh  a, [hDialogBackgroundTile] ; Load value from DiacriticsTable
-    cp   2                    ; Check if DiacriticsTable had value 2
-    ld   a, $C8               ; First diacritic tile
-    jr   z, .drawSpacingTile  ; Jump if diacritic 2
-    inc  a                    ; Second diacritic tile
+    ld   a, DIALOG_BG_TILE_DARK
+    jr   z, .drawSpacingTile   ; Jump if no diacritic
+    ldh  a, [hDialogBackgroundTile] ; Load value from CodepointToDiacritics table
+    cp   2                     ; Check if diacritic had value 2
+    ld   a, DIALOG_DIACRITIC_2 ; First diacritic tile
+    jr   z, .drawSpacingTile   ; Jump if diacritic 2
+    inc  a                     ; DIALOG_DIACRITIC_1
 ELIF LANG_FR
-    ld   a, $7E               ; Empty tile
-    jr   z, .drawSpacingTile  ; Jump if no diacritic
-    ld   a, $C9               ; Second diacritic tile
+    ld   a, DIALOG_BG_TILE_DARK
+    jr   z, .drawSpacingTile   ; Jump if no diacritic
+    ld   a, DIALOG_DIACRITIC_1 ; Second diacritic tile
 ELSE
-    ld   a, $7E               ; Empty tile        ; $489D: $3E $7E
+    ld   a, DIALOG_BG_TILE_DARK                   ; $489D: $3E $7E
     jr   .drawSpacingTile                         ; $489F: $18 $08
     ; Unreachable code, likely early diacritics
     ; support that has been stubbed out:
     ld   a, [de]                                  ; $48A1: $1A
     and  $80                                      ; $48A2: $E6 $80
-    ld   a, $C8                                   ; $48A4: $3E $C8
+    ld   a, DIALOG_DIACRITIC_2                    ; $48A4: $3E $C8
     jr   z, .drawSpacingTile                      ; $48A6: $28 $01
     inc  a                                        ; $48A8: $3C
 ENDC
@@ -1295,7 +1295,7 @@ CopyReturnToMenuTilemap::
     ld   [hl+], a                                   ; $4f13: $22
     ld   a, $42                                     ; $4f14: $3e $42
     ld   [hl+], a                                   ; $4f16: $22
-    ld   a, $7e                                     ; $4f17: $3e $7e
+    ld   a, $7E                                     ; $4f17: $3e $7e
     ld   [hl+], a                                   ; $4f19: $22
     xor  a                                          ; $4f1a: $af
     ld   [hl], a                                    ; $4f1b: $77

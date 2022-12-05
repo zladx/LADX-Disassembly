@@ -2985,7 +2985,7 @@ func_003_5B2B::
     ret  nc                                       ; $5B35: $D0
 
     ld   a, [wDialogState]                        ; $5B36: $FA $9F $C1
-    and  $80                                      ; $5B39: $E6 $80
+    and  DIALOG_BOX_BOTTOM_FLAG                   ; $5B39: $E6 $80
     ld   a, $23                                   ; $5B3B: $3E $23
     jr   z, .jr_5B41                              ; $5B3D: $28 $02
 

@@ -8,8 +8,6 @@
 ; All textboxes with a prompt - e.g. 'yes/no', or a red
 ; 'press a button to continue' arrow - are unskippable.
 
-DIALOG_UNSKIPPABLE equ $80
-
 DialogBankTable::
 ; dialog_1.asm starts here
     db BANK(Dialog000)

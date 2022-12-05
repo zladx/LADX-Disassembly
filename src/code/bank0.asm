@@ -4426,7 +4426,7 @@ LoadTileset0F_trampoline::
 
 ; Fill the Background Map with black tiles
 FillBGMapBlack::
-    ld   a, $7E    ; value                        ; $28F0: $3E $7E
+    ld   a, DIALOG_BG_TILE_DARK   ; value         ; $28F0: $3E $7E
     ld   bc, $400 ; count                         ; $28F2: $01 $00 $04
     jr   FillBGMap                                ; $28F5: $18 $05
 

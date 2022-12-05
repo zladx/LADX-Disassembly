@@ -125,5 +125,5 @@ label_006_5C04:
     ld   a, e                                     ; $5C04: $7B
     call OpenDialogInTable1                       ; $5C05: $CD $73 $23
     ld   hl, wDialogState                         ; $5C08: $21 $9F $C1
-    set  7, [hl]                                  ; $5C0B: $CB $FE
+    set  DIALOG_BOX_BOTTOM_BIT, [hl]              ; $5C0B: $CB $FE
     ret                                           ; $5C0D: $C9

@@ -6673,7 +6673,7 @@ func_017_7D7C::
 
     ld   e, $00                                   ; $7D81: $1E $00
     ld   a, [wDialogState]                        ; $7D83: $FA $9F $C1
-    and  $80                                      ; $7D86: $E6 $80
+    and  DIALOG_BOX_BOTTOM_FLAG                   ; $7D86: $E6 $80
     jr   z, .jr_7D8B                              ; $7D88: $28 $01
 
     inc  e                                        ; $7D8A: $1C
@@ -6720,7 +6720,7 @@ Data_017_7DCA::
 func_017_7DCC::
     ld   e, $00                                   ; $7DCC: $1E $00
     ld   a, [wDialogState]                        ; $7DCE: $FA $9F $C1
-    and  $80                                      ; $7DD1: $E6 $80
+    and  DIALOG_BOX_BOTTOM_FLAG                   ; $7DD1: $E6 $80
     jr   z, .jr_7DD6                              ; $7DD3: $28 $01
 
     inc  e                                        ; $7DD5: $1C

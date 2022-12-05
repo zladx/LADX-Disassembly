@@ -90,38 +90,6 @@ ROOM_TRANSITION_CONFIGURE_SCROLL equ $03
 ROOM_TRANSITION_FIRST_HALF       equ $04
 ROOM_TRANSITION_SECOND_HALF      equ $05
 
-; Values for wDialogState
-DIALOG_CLOSED              equ $00
-DIALOG_OPENING_1           equ $01
-DIALOG_OPENING_2           equ $02
-DIALOG_OPENING_3           equ $03
-DIALOG_OPENING_4           equ $04
-DIALOG_OPENING_5           equ $05
-DIALOG_LETTER_IN_1         equ $06
-DIALOG_LETTER_IN_2         equ $07
-DIALOG_LETTER_IN_3         equ $08
-DIALOG_BREAK               equ $09 ; press A to continue
-DIALOG_SCROLLING_1         equ $0A
-DIALOG_SCROLLING_2         equ $0B
-DIALOG_END                 equ $0C ; press A to close
-DIALOG_CHOICE              equ $0D ; press A to choose
-DIALOG_CLOSING_1           equ $0E
-DIALOG_CLOSING_2           equ $0F
-
-; Tiles used as the dialog background color
-DIALOG_BG_TILE_DARK        equ $7E
-DIALOG_BG_TILE_LIGHT       equ $7F
-
-; Values for wDialogGotItem
-DIALOG_GOT_PIECE_OF_POWER equ $01
-DIALOG_GOT_TOADSTOOL      equ $02
-DIALOG_GOT_MAGIC_POWDER   equ $03
-DIALOG_GOT_ROD            equ $04
-DIALOG_GOT_GUARDIAN_ACORN equ $05
-
-; Cooldown time for dialog boxes
-DIALOG_COOLDOWN              equ $18
-
 ; Cooldown time after closing photo album
 PHOTO_ALBUM_COOLDOWN         equ $18
 

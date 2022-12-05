@@ -363,7 +363,7 @@ jr_019_6FAD:
 
 jr_019_6FB0:
     ld   hl, wDialogState                         ; $6FB0: $21 $9F $C1
-    set  7, [hl]                                  ; $6FB3: $CB $FE
+    set  DIALOG_BOX_BOTTOM_BIT, [hl]              ; $6FB3: $CB $FE
     call IncrementEntityState                     ; $6FB5: $CD $12 $3B
 
 jr_019_6FB8:

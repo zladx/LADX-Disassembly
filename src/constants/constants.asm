@@ -11,7 +11,7 @@ include "constants/defines.asm"
 ;
 include "constants/animated_tiles.asm"
 include "constants/debug.asm"
-;include "constants/dialogs.asm"
+include "constants/dialog.asm"
 include "constants/directions.asm"
 include "constants/entities.asm"
 include "constants/events.asm"

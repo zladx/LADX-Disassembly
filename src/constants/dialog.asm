@@ -48,3 +48,8 @@ DIALOG_COOLDOWN              equ $18
 ; set as the high bit of the dialog bank
 ; (see dialog_banks.asm)
 DIALOG_UNSKIPPABLE equ $80
+
+; Dialog box position and size
+DIALOG_BOX_HEIGHT       equ $28
+DIALOG_BOX_TOP_Y        equ $08
+DIALOG_BOX_BOTTOM_Y     equ $60

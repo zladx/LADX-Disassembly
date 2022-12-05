@@ -1824,7 +1824,7 @@ HideAllSprites::
 .endIf
 
     ; loop counter
-    ld   b, $28                                   ; $5F3C: $06 $28
+    ld   b, OAM_COUNT                             ; $5F3C: $06 $28
     ; value to write
     ld   a, $F4                                   ; $5F3E: $3E $F4
     ; address
@@ -1841,83 +1841,125 @@ HideAllSprites::
     jr   nz, .loop                                ; $5F48: $20 $F9
     ret                                           ; $5F4A: $C9
 
-UpdateWindowPosition::
+; Hide sprites that should be obscured by the inventory window
+; or the dialog box.
+; 
+; Note that this code checks if wInventoryAppearing is true, and if
+; so, it hides sprites based on wWindowY, ie. the window's Y position.
+; This is likely a remnant from the DMG version of the game, where
+; the inventory screen scrolled in from the bottom, and wWindowY could
+; have many different values. In DX, wWindowY can only be 0 (ie. fully
+; open inventory) while wInventoryAppearing is true.
+HideSprites::
+    ; Is the inventory window currently opening?
     ld   a, [wInventoryAppearing]                 ; $5F4B: $FA $4F $C1
     and  a                                        ; $5F4E: $A7
-    jr   z, jr_001_5F6A                           ; $5F4F: $28 $19
+    jr   z, HideSpritesUnderDialog                ; $5F4F: $28 $19
+    ; If so, calculate what sprites should be hidden
     ld   hl, wOAMBuffer                           ; $5F51: $21 $00 $C0
+    ; Sprites are 16 pixels tall, and their Y position
+    ; is 16 less than actual screen position, so check if
+    ; at least half of the sprite overlaps the window
     ld   a, [wWindowY]                            ; $5F54: $FA $9A $DB
-    add  a, $08                                   ; $5F57: $C6 $08
+    add  a, OAM_Y_OFS / 2                         ; $5F57: $C6 $08
     ld   d, a                                     ; $5F59: $57
-    ld   e, $28                                   ; $5F5A: $1E $28
+    ; Loop counter
+    ld   e, OAM_COUNT                             ; $5F5A: $1E $28
 
-jr_001_5F5C::
+.hideSpritesLoop::
     ld   a, [hl]                                  ; $5F5C: $7E
     cp   d                                        ; $5F5D: $BA
-    jr   c, .jr_5F62                              ; $5F5E: $38 $02
+    jr   c, .nextSprite                           ; $5F5E: $38 $02
+    ; Set sprite's Y position to 0 (off-screen)
     ld   [hl], $00                                ; $5F60: $36 $00
 
-.jr_5F62::
+.nextSprite
     inc  hl                                       ; $5F62: $23
     inc  hl                                       ; $5F63: $23
     inc  hl                                       ; $5F64: $23
     inc  hl                                       ; $5F65: $23
     dec  e                                        ; $5F66: $1D
-    jr   nz, jr_001_5F5C                          ; $5F67: $20 $F3
+    jr   nz, .hideSpritesLoop                     ; $5F67: $20 $F3
     ret                                           ; $5F69: $C9
 
-jr_001_5F6A::
+; The window is not opening, so we potentially need to hide sprites
+; under a dialog box instead.
+HideSpritesUnderDialog::
+    ; If wWindowY == 0, the inventory window is fully open, so
+    ; there is no dialog box
     ld   a, [wWindowY]                            ; $5F6A: $FA $9A $DB
     and  a                                        ; $5F6D: $A7
     ret  z                                        ; $5F6E: $C8
+    ; If wDialogState == 0 (DIALOG_CLOSED),
+    ; there is no dialog box
     ld   a, [wDialogState]                        ; $5F6F: $FA $9F $C1
     and  a                                        ; $5F72: $A7
     ret  z                                        ; $5F73: $C8
-    ld   d, $3E                                   ; $5F74: $16 $3E
+    ; Compare sprites' Y positions with either the bottom of
+    ; the dialog box at the top of the screen (but allow two
+    ; pixels of the sprite to overlap)...
+    ld   d, DIALOG_BOX_TOP_Y + DIALOG_BOX_HEIGHT + OAM_Y_OFS - 2 ; $5F74: $16 $3E
     ld   a, [wDialogState]                        ; $5F76: $FA $9F $C1
+    ; ... or the top of the dialog box at the bottom of the screen
+    ; (allow up to half the sprite to overlap here)
     and  DIALOG_BOX_BOTTOM_FLAG                   ; $5F79: $E6 $80
-    jr   z, .jr_5F7F                              ; $5F7B: $28 $02
-    ld   d, $58                                   ; $5F7D: $16 $58
+    jr   z, .hideSpritesUnderDialog               ; $5F7B: $28 $02
+    ld   d, DIALOG_BOX_BOTTOM_Y - (OAM_Y_OFS / 2) ; $5F7D: $16 $58
 
-.jr_5F7F::
-    ld   e, $1F                                   ; $5F7F: $1E $1F
-    ld   hl, wOAMBuffer+$24                       ; $5F81: $21 $24 $C0
+.hideSpritesUnderDialog::
+    ; Skip the first 9 OAM entries, as those include parts of wLinkOAMBuffer
+    ; (Link will never be on top of the dialog box) which is also used for
+    ; sprites that should be on top of the dialog box (like the prompt arrow)
+    ld   e, OAM_COUNT - 9 ; loop counter          ; $5F7F: $1E $1F
+    ld   hl, wOAMBuffer + (sizeof_OAM_ATTRS * 9)  ; $5F81: $21 $24 $C0
 
-jr_001_5F84::
+.hideSpritesLoop::
+    ; Check if the sprite's Y position is sufficiently more
+    ; than the comparison value (below)...
     ld   a, [hl]                                  ; $5F84: $7E
     cp   d                                        ; $5F85: $BA
+    ; ...or, if the dialog box is on the bottom of the screen...
     ld   a, [wDialogState]                        ; $5F86: $FA $9F $C1
     bit  DIALOG_BOX_BOTTOM_BIT, a                 ; $5F89: $CB $7F
-    jr   nz, .jr_5F8E                             ; $5F8B: $20 $01
+    jr   nz, .checkPieceOfHeart                   ; $5F8B: $20 $01
+    ; ...if the sprite's Y position is sufficiently less (above)...
     ccf                                           ; $5F8D: $3F
 
-.jr_5F8E::
-    jr   c, jr_001_5FAB                           ; $5F8E: $38 $1B
+.checkPieceOfHeart::
+    ; ...then don't hide the sprite.
+    jr   c, .nextSprite                           ; $5F8E: $38 $1B
+    ; Check if the dialog being displayed is Dialog04F,
+    ; ie. the "You've got a Piece of Heart" text
     ld   a, [wDialogIndex]                        ; $5F90: $FA $73 $C1
-    cp   $4F                                      ; $5F93: $FE $4F
-    jr   nz, .jr_5FA9                             ; $5F95: $20 $12
+    cp_dialog_low Dialog04F                       ; $5F93: $FE $4F
+    jr   nz, .hideSprite                          ; $5F95: $20 $12
     ld   a, [wDialogIndexHi]                      ; $5F97: $FA $12 $C1
     and  a                                        ; $5F9A: $A7
-    jr   nz, .jr_5FA9                             ; $5F9B: $20 $0C
+    jr   nz, .hideSprite                          ; $5F9B: $20 $0C
+    ; Get the sprite's tile number
     inc  hl                                       ; $5F9D: $23
     inc  hl                                       ; $5F9E: $23
     ld   a, [hl-]                                 ; $5F9F
     dec  hl                                       ; $5FA0: $2B
+    ; If the sprite is the Piece of Heart graphic, ie. tile numbers
+    ; $9A to $9F, which is supposed to overlay the relevant dialog,
+    ; don't hide it
     cp   $9A                                      ; $5FA1: $FE $9A
-    jr   c, .jr_5FA9                              ; $5FA3: $38 $04
+    jr   c, .hideSprite                           ; $5FA3: $38 $04
     cp   $A0                                      ; $5FA5: $FE $A0
-    jr   c, jr_001_5FAB                           ; $5FA7: $38 $02
+    jr   c, .nextSprite                           ; $5FA7: $38 $02
 
-.jr_5FA9::
+.hideSprite::
+    ; Set sprite's Y position to 0 (off-screen)
     ld   [hl], $00                                ; $5FA9: $36 $00
 
-jr_001_5FAB::
+.nextSprite::
     inc  hl                                       ; $5FAB: $23
     inc  hl                                       ; $5FAC: $23
     inc  hl                                       ; $5FAD: $23
     inc  hl                                       ; $5FAE: $23
     dec  e                                        ; $5FAF: $1D
-    jr   nz, jr_001_5F84                          ; $5FB0: $20 $D2
+    jr   nz, .hideSpritesLoop              ; $5FB0: $20 $D2
     ret                                           ; $5FB2: $C9
 
 ; Create the entity for the NPC currently following Link (if any).

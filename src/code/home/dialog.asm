@@ -325,7 +325,7 @@ DialogClosingBeginHandler::
 
 DialogLetterAnimationStartHandler::
     ld   a, BANK(ClearLetterPixels)               ; $24B7: $3E $1C
-    ld   [MBC3SelectBank], a                      ; $24B9: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $24B9: $EA $00 $21
     ld   a, [wDialogScrollDelay]                  ; $24BC: $FA $72 $C1
     and  a                                        ; $24BF: $A7
     jr   z, .delayOver                            ; $24C0: $28 $05
@@ -339,7 +339,7 @@ DialogLetterAnimationStartHandler::
 
 DialogLetterAnimationEndHandler::
     ld   a, BANK(DialogPointerTable)              ; $24CD: $3E $1C
-    ld   [MBC3SelectBank], a                      ; $24CF: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $24CF: $EA $00 $21
     ld   a, [wDialogState]                        ; $24D2: $FA $9F $C1
     ld   c, a                                     ; $24D5: $4F
     ld   a, [wDialogNextCharPosition]             ; $24D6: $FA $71 $C1
@@ -399,7 +399,7 @@ DialogLetterAnimationEndHandler::
 
 DialogDrawNextCharacterHandler::
     ld   a, BANK(DialogPointerTable)              ; $2529: $3E $1C
-    ld   [MBC3SelectBank], a                      ; $252B: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $252B: $EA $00 $21
     ld   a, [wDialogCharacterIndex]               ; $252E: $FA $70 $C1
     and  $1F                                      ; $2531: $E6 $1F
     ld   c, a                                     ; $2533: $4F
@@ -446,7 +446,7 @@ IF __USE_FIXED_DIALOG_BANKS__
     ld   e,  BANK(Dialog200)
 .foundBank
     ld   a, e
-    ld   [MBC3SelectBank], a
+    ld   [rSelectROMBank], a
 ELSE
     push de                                       ; $2563: $D5
     ld   a, [wDialogIndex]                        ; $2564: $FA $73 $C1
@@ -457,7 +457,7 @@ ELSE
     add  hl, de                                   ; $256F: $19
     ld   a, [hl] ; bank                           ; $2570: $7E
     and  $3F                                      ; $2571: $E6 $3F
-    ld   [MBC3SelectBank], a                      ; $2573: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $2573: $EA $00 $21
     pop  hl                                       ; $2576: $E1
 ENDC
     ld   a, [wDialogCharacterIndex]               ; $2577: $FA $70 $C1
@@ -569,7 +569,7 @@ ENDR
     ldh  [hMultiPurpose1], a                      ; $2608: $E0 $D8
     ld   e, a                                     ; $260A: $5F
     ld   a, BANK(CodepointToTileMap)              ; $260B: $3E $1C
-    ld   [MBC3SelectBank], a                      ; $260D: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $260D: $EA $00 $21
     ld   hl, CodepointToTileMap                   ; $2610: $21 $41 $46
     add  hl, de                                   ; $2613: $19
     ld   e, [hl]                                  ; $2614: $5E
@@ -602,7 +602,7 @@ ENDR
     ; Check if the current character has a diacritic tile above
     ; (if compiled with support for diacritics)
     ld   a, BANK(CodepointToDiacritic)            ; $263C: $3E $1C
-    ld   [MBC3SelectBank], a ; current character  ; $263E: $EA $00 $21
+    ld   [rSelectROMBank], a ; current character  ; $263E: $EA $00 $21
     ldh  a, [hMultiPurpose1]                      ; $2641: $F0 $D8
     ld   e, a                                     ; $2643: $5F
     ld   d, $00                                   ; $2644: $16 $00
@@ -692,7 +692,7 @@ DialogBreakHandler::
     ; button, but this information is only used
     ; if __SKIP_DIALOG_SUPPORT__ is set.
     ld   a, BANK(DialogBankTable)                 ; $26C3: $3E $1C
-    ld   [MBC3SelectBank], a                      ; $26C5: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $26C5: $EA $00 $21
     ld   a, [wGameplayType]                       ; $26C8: $FA $95 $DB
     cp   GAMEPLAY_WORLD_MAP                       ; $26CB: $FE $07
     jp   z, SkipDialog                            ; $26CD: $CA $8B $27

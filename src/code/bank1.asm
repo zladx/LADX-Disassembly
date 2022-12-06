@@ -1807,7 +1807,7 @@ UpdateRecentRoomsList::
 
 HideAllSprites::
     ; $0000 controls whether to enable external RAM writing
-    ld   hl, MBC3SRamEnable                       ; $5F2E: $21 $00 $00
+    ld   hl, rRAMG                                ; $5F2E: $21 $00 $00
 
     ; If CGB…
     ldh  a, [hIsGBC]                              ; $5F31: $F0 $FE

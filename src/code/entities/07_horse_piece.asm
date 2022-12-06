@@ -72,7 +72,7 @@ HorsePieceEntityHandler::
 ._04 dw HorsePieceStateFinished                   ; $763E
 
 HorsePieceStateInit::
-    jp   HorsePieceCheckForPickup                  ; $7640: $C3 $33 $77
+    jp   HorsePieceCheckForPickup                 ; $7640: $C3 $33 $77
 
 HorsePieceRandomBounceX::
     db   $00, $0C, $10, $0C, $00, $F4, $F0, $F4
@@ -239,7 +239,7 @@ HorsePieceStateFinished::
     ld   a, $01                                   ; $772B: $3E $01
     call SetEntitySpriteVariant                   ; $772D: $CD $0C $3B
 .notFallDown
-    jp   HorsePieceCheckForPickup                  ; $7730: $C3 $33 $77
+    jp   HorsePieceCheckForPickup                 ; $7730: $C3 $33 $77
 
 HorsePieceCheckForPickup:
     call CheckLinkCollisionWithEnemy_trampoline   ; $7733: $CD $5A $3B

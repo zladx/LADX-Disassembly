@@ -79,7 +79,7 @@ CopyTilesToPieceOfHeartMeter::
     ldh  [hBGTilesLoadingStage], a
 .restoreBank0C
     ld   a, $0C
-    ld   [MBC3SelectBank], a
+    ld   [rSelectROMBank], a
     ret
 
 section "Entry", rom0[$100]

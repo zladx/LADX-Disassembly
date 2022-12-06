@@ -165,7 +165,7 @@ ENDC
     ; Else, render a non-interactive transition effect.
 
     ld   a, BANK(ApplyFadeToWhite_DMG)            ; $027C: $3E $14
-    ld   [MBC3SelectBank], a                      ; $027E: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $027E: $EA $00 $21
 
     ; Increment frame count for the transition effect
     ld   a, [wTransitionGfxFrameCount]            ; $0281: $FA $80 $C1
@@ -214,7 +214,7 @@ ENDC
 .transitionDone
     ; Render transition effect
     ld   a, BANK(RenderTransitionEffect)          ; $02B7: $3E $14
-    ld   [MBC3SelectBank], a                      ; $02B9: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $02B9: $EA $00 $21
     pop  af                                       ; $02BC: $F1
     call RenderTransitionEffect                   ; $02BD: $CD $38 $50
 

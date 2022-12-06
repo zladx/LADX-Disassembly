@@ -9,7 +9,7 @@ AnimateMarinBeachTiles::
     ret  nz                                       ; $1AD0: $C0
     ld   a, BANK(MarinBeachWavesTiles)            ; $1AD1: $3E $10
     call AdjustBankNumberForGBC                   ; $1AD3: $CD $0B $0B
-    ld   [MBC3SelectBank], a                      ; $1AD6: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $1AD6: $EA $00 $21
     ld   hl, MarinBeachWavesTiles                 ; $1AD9: $21 $00 $65
     ld   de, vTiles2 + $500                       ; $1ADC: $11 $00 $95
     ldh  a, [hFrameCounter]                       ; $1ADF: $F0 $E7
@@ -83,7 +83,7 @@ AnimateTiles::
     ; Switch to the bank with intro tiles
     ld   a, $10                                   ; $1B27: $3E $10
     call AdjustBankNumberForGBC                   ; $1B29: $CD $0B $0B
-    ld   [MBC3SelectBank], a                      ; $1B2C: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $1B2C: $EA $00 $21
     ; Copy 32 bytes of data from address stored at wD006 to address stored at wD008
     ld   a, [wD006]                               ; $1B2F: $FA $06 $D0
     ld   l, a                                     ; $1B32: $6F
@@ -229,7 +229,7 @@ AnimateCounterTilesGroup::
     callsb LoadCounterAnimatedTiles               ; $1C00: $3E $01 $EA $00 $21 $CD $AA $61
     ld   a, $0C                                   ; $1C08: $3E $0C
     call AdjustBankNumberForGBC                   ; $1C0A: $CD $0B $0B
-    ld   [MBC3SelectBank], a                      ; $1C0D: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $1C0D: $EA $00 $21
     jp   DrawLinkSpriteAndReturn                  ; $1C10: $C3 $2E $1D
 
 ; Load the given frame for the animated tiles group
@@ -300,19 +300,19 @@ LoadAnimatedTilesFrame::
     jr   nz, .endMapFF                            ; $1C5E: $20 $27
 
     ld   a, BANK(ConfigureAnimatedTilesCopy)      ; $1C60: $3E $20
-    ld   [MBC3SelectBank], a                      ; $1C62: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $1C62: $EA $00 $21
     ld   b, $01                                   ; $1C65: $06 $01
     call ConfigureAnimatedTilesCopy               ; $1C67: $CD $F7 $47
     jr   z, .next                                 ; $1C6A: $28 $06
-    ld   [MBC3SelectBank], a                      ; $1C6C: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $1C6C: $EA $00 $21
     call CopyData                                 ; $1C6F: $CD $14 $29
 .next
     ld   a, BANK(ConfigureAnimatedTilesCopy)      ; $1C72: $3E $20
-    ld   [MBC3SelectBank], a                      ; $1C74: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $1C74: $EA $00 $21
     ld   b, $00                                   ; $1C77: $06 $00
     call ConfigureAnimatedTilesCopy               ; $1C79: $CD $F7 $47
     jr   z, .endMapFF                             ; $1C7C: $28 $09
-    ld   [MBC3SelectBank], a                      ; $1C7E: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $1C7E: $EA $00 $21
     ld   de, $96C0                                ; $1C81: $11 $C0 $96
     call CopyData                                 ; $1C84: $CD $14 $29
 .endMapFF
@@ -360,7 +360,7 @@ AnimateWarpTilesGroup::
 IF __PATCH_3__
     ld   a, BANK(AnimatedTiles)
     call AdjustBankNumberForGBC
-    ld   [MBC3SelectBank], a
+    ld   [rSelectROMBank], a
 ENDC
     ld   h, HIGH(AnimatedTiles) + $6              ; $1CC6: $26 $70
 
@@ -422,7 +422,7 @@ AnimatePhotoTilesGroup::
 CopyLinkTilesPair::
     ld   a, BANK(LinkCharacterTiles)              ; $1D0A: $3E $0C
     call AdjustBankNumberForGBC                   ; $1D0C: $CD $0B $0B
-    ld   [MBC3SelectBank], a                      ; $1D0F: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $1D0F: $EA $00 $21
 
 .loop
     ld   a, [bc]                                  ; $1D12: $0A
@@ -432,14 +432,14 @@ CopyLinkTilesPair::
     jr   nz, .loop                                ; $1D16: $20 $FA
 
     ld   a, BANK(func_020_54F5)                   ; $1D18: $3E $20
-    ld   [MBC3SelectBank], a                      ; $1D1A: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $1D1A: $EA $00 $21
     ret                                           ; $1D1D: $C9
 
 SkipTilesGroupAnimation::
     callsb func_020_54F5                          ; $1D1E: $3E $20 $EA $00 $21 $CD $F5 $54
     ld   a, $0C                                   ; $1D26: $3E $0C
     call AdjustBankNumberForGBC                   ; $1D28: $CD $0B $0B
-    ld   [MBC3SelectBank], a                      ; $1D2B: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $1D2B: $EA $00 $21
 
 ; Called during V-Blank
 DrawLinkSprite::
@@ -613,7 +613,7 @@ ReplaceMarinTiles::
     ld   hl, Npc3Tiles + $2080                    ; $1DF2: $21 $80 $60
 
 .copyTiles
-    ld   [MBC3SelectBank], a                      ; $1DF5: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $1DF5: $EA $00 $21
     ld   de, vTiles0 + $400                       ; $1DF8: $11 $00 $84
     ld   bc, TILE_SIZE * 4                        ; $1DFB: $01 $40 $00
     jp   CopyDataAndDrawLinkSprite                ; $1DFE: $C3 $3B $1F
@@ -643,6 +643,6 @@ ReplaceTradingItemTiles::
     ld   bc, TILE_SIZE * 4                        ; $1E1D: $01 $40 $00
     ld   a, BANK(Items1Tiles)                     ; $1E20: $3E $0C
     call AdjustBankNumberForGBC                   ; $1E22: $CD $0B $0B
-    ld   [MBC3SelectBank], a                      ; $1E25: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $1E25: $EA $00 $21
 
     jp   CopyDataAndDrawLinkSprite                ; $1E28: $C3 $3B $1F

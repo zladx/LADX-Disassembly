@@ -9,7 +9,7 @@ WorldHandlerEntryPoint::
 ._1 dw GameplayWorldLoadRoomHandler               ; $4377
 ._2 dw GameplayWorldSelectTilesetHandler          ; $4379
 ._3 dw GameplayWorldLoadRoomTilemapHandler        ; $437B
-._4 dw GameplayWorldLoadHeartsAndRuppeesHandler   ; $437D
+._4 dw GameplayWorldLoadHeartsAndRupeesHandler    ; $437D
 ._5 dw GameplayWorldLoadABButtonsHandler          ; $437F
 ._6 dw GameplayWorldLoad6Handler                  ; $4381
 ._7 dw WorldInteractiveHandler                    ; $4383
@@ -296,18 +296,18 @@ GameplayWorldLoadRoomTilemapHandler::
     call IncrementGameplaySubtype                 ; $44F5: $CD $D6 $44
     ret                                           ; $44F8: $C9
 
-GameplayWorldLoadHeartsAndRuppeesHandler::
+GameplayWorldLoadHeartsAndRupeesHandler::
 IF __PATCH_A__ == 1
     call IncrementGameplaySubtype
     ld a, [ROM_DebugTool2]
     and a
     ret nz
-    call LoadHeartsAndRuppeesCount
+    call LoadHeartsAndRupeesCount
 ELIF __PATCH_A__ == 2
     call IncrementGameplaySubtype
-    call LoadHeartsAndRuppeesCount
+    call LoadHeartsAndRupeesCount
 ELSE
-    call LoadHeartsAndRuppeesCount                ; $44F9: $CD $3F $3E
+    call LoadHeartsAndRupeesCount                 ; $44F9: $CD $3F $3E
     call IncrementGameplaySubtype                 ; $44FC: $CD $D6 $44
 ENDC
     ret                                           ; $44FF: $C9

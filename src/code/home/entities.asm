@@ -411,15 +411,11 @@ SpawnNewEntityInRange_trampoline::
     ret                                           ; $3BA9: $C9
 
 ApplyVectorTowardsLink_trampoline::
-    ld   hl, rSelectROMBank                       ; $3BAA: $21 $00 $21
-    ld   [hl], BANK(ApplyVectorTowardsLink)       ; $3BAD: $36 $03
-    call ApplyVectorTowardsLink                   ; $3BAF: $CD $C7 $7E
+    callhl ApplyVectorTowardsLink                 ; $3BAA: $21 $00 $21 $36 $03 $CD $C7 $7E
     jp   ReloadSavedBank                          ; $3BB2: $C3 $1D $08
 
 GetVectorTowardsLink_trampoline::
-    ld   hl, rSelectROMBank                       ; $3BB5: $21 $00 $21
-    ld   [hl], BANK(GetVectorTowardsLink)         ; $3BB8: $36 $03
-    call GetVectorTowardsLink                     ; $3BBA: $CD $45 $7E
+    callhl GetVectorTowardsLink                   ; $3BB5: $21 $00 $21 $36 $03 $CD $45 $7E
     jp   ReloadSavedBank                          ; $3BBD: $C3 $1D $08
 
 ; Render a pair of sprites for the active entity to the OAM buffer.
@@ -969,10 +965,8 @@ label_3E34::
     callhl SmashRock                              ; $3E34: $21 $00 $21 $36 $03 $CD $07 $54
     jp   ReloadSavedBank                          ; $3E3C: $C3 $1D $08
 
-LoadHeartsAndRuppeesCount::
-    ld   hl, rSelectROMBank                       ; $3E3F: $21 $00 $21
-    ld   [hl], BANK(LoadRupeesDigits)             ; $3E42: $36 $02
-    call LoadRupeesDigits                         ; $3E44: $CD $CE $62
+LoadHeartsAndRupeesCount::
+    callhl LoadRupeesDigits                       ; $3E3F: $21 $00 $21 $36 $02 $CD $CE $62
     call LoadHeartsCount                          ; $3E47: $CD $14 $64
     jp   ReloadSavedBank                          ; $3E4A: $C3 $1D $08
 

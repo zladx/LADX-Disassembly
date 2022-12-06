@@ -788,6 +788,7 @@ wC1AC::
 
 ; Whether pressing the A or B button will do something other than using the current item
 ; read a sign/interact with a drawer
+; See ITEM_USAGE_* constants for possible values.
 wItemUsageContext::
   ds 1 ; C1AD
 

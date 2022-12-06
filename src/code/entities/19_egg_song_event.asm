@@ -223,9 +223,9 @@ Unknown063SpriteVariants:: ; $4BAC
     db $6E, $06
 
 label_019_4BCC::
-    ld   hl, wEntitiesPrivateState1Table          ; $4bcc: $21 $b0 $c2
+    ld   hl, wEntitiesPrivateState1Table          ; $4BCC: $21 $B0 $C2
     add  hl, bc
-    ld   a, [hl]                                  ; $4bd0: $7e
+    ld   a, [hl]                                  ; $4BD0: $7E
     cp   $02                                      ; $4BD1: $FE $02
     jp   z, label_019_4CFF                        ; $4BD3: $CA $FF $4C
 

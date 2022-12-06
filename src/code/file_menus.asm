@@ -1196,10 +1196,10 @@ CopyQuitOkTilemap::
     ld [hl+], a
     ld a, $3D
 
-    ld [hl+], a                                   ; $4eb9: $22
-    xor a                                         ; $4eba: $af
-    ld [hl], a                                    ; $4ebb: $77
-    ret                                           ; $4ebc: $c9
+    ld [hl+], a                                   ; $4EB9: $22
+    xor a                                         ; $4EBA: $AF
+    ld [hl], a                                    ; $4EBB: $77
+    ret                                           ; $4EBC: $C9
 ELSE
     jr   CopyQuitOkTilemap                        ; $4E41: $18 $12 ; $4E41: $18 $12
 
@@ -1282,24 +1282,24 @@ jr_001_4E9E::
 
 IF LANG_JP
 CopyReturnToMenuTilemap::
-    ld   a, [wDrawCommandsSize]                     ; $4eff: $fa $00 $d6
-    ld   e, a                                       ; $4f02: $5f
-    add  $04                                        ; $4f03: $c6 $04
-    ld   [wDrawCommandsSize], a                     ; $4f05: $ea $00 $d6
-    ld   d, $00                                     ; $4f08: $16 $00
-    ld   hl, wDrawCommand                           ; $4f0a: $21 $01 $d6
-    add  hl, de                                     ; $4f0d: $19
-    ld   a, HIGH(vBGMap0 + $1EE)                    ; $4f0e: $3e $99
-    ld   [hl+], a                                   ; $4f10: $22
-    ld   a, LOW(vBGMap0 + $1EE)                     ; $4f11: $3e $ee
-    ld   [hl+], a                                   ; $4f13: $22
-    ld   a, $42                                     ; $4f14: $3e $42
-    ld   [hl+], a                                   ; $4f16: $22
-    ld   a, $7E                                     ; $4f17: $3e $7e
-    ld   [hl+], a                                   ; $4f19: $22
-    xor  a                                          ; $4f1a: $af
-    ld   [hl], a                                    ; $4f1b: $77
-    ret                                             ; $4f1c: $c9
+    ld   a, [wDrawCommandsSize]                   ; $4EFF: $FA $00 $D6
+    ld   e, a                                     ; $4F02: $5F
+    add  $04                                      ; $4F03: $C6 $04
+    ld   [wDrawCommandsSize], a                   ; $4F05: $EA $00 $D6
+    ld   d, $00                                   ; $4F08: $16 $00
+    ld   hl, wDrawCommand                         ; $4F0A: $21 $01 $D6
+    add  hl, de                                   ; $4F0D: $19
+    ld   a, HIGH(vBGMap0 + $1EE)                  ; $4F0E: $3E $99
+    ld   [hl+], a                                 ; $4F10: $22
+    ld   a, LOW(vBGMap0 + $1EE)                   ; $4F11: $3E $EE
+    ld   [hl+], a                                 ; $4F13: $22
+    ld   a, $42                                   ; $4F14: $3E $42
+    ld   [hl+], a                                 ; $4F16: $22
+    ld   a, $7E                                   ; $4F17: $3E $7E
+    ld   [hl+], a                                 ; $4F19: $22
+    xor  a                                        ; $4F1A: $AF
+    ld   [hl], a                                  ; $4F1B: $77
+    ret                                           ; $4F1C: $C9
 ELSE
 
 ; Tilemap for the "RETURN TO MENU" text, formatted as wDrawCommand data

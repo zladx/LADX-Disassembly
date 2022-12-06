@@ -1500,92 +1500,92 @@ Data_001_5eb2:
 
 Call_001_5eca:
     ; full heart containers
-    ld a, $03                                     ; $5eca: $3e $03
-    ldh [hMultiPurpose0], a                            ; $5ecc: $e0 $d7
-    xor a                                         ; $5ece: $af
-    ldh [hMultiPurpose1], a                            ; $5ecf: $e0 $d8
-    ld c, $08                                     ; $5ed1: $0e $08
-    ld hl, Data_001_5ea2                                   ; $5ed3: $21 $a2 $5e
+    ld a, $03                                     ; $5ECA: $3E $03
+    ldh [hMultiPurpose0], a                       ; $5ECC: $E0 $D7
+    xor a                                         ; $5ECE: $AF
+    ldh [hMultiPurpose1], a                       ; $5ECF: $E0 $D8
+    ld c, $08                                     ; $5ED1: $0E $08
+    ld hl, Data_001_5ea2                          ; $5ED3: $21 $A2 $5E
 
 .bossLoop
-    ld a, [hl+]                                   ; $5ed6: $2a
-    ld e, a                                       ; $5ed7: $5f
-    ld a, [hl+]                                   ; $5ed8: $2a
-    ld d, a                                       ; $5ed9: $57
-    ld a, [de]                                    ; $5eda: $1a
+    ld a, [hl+]                                   ; $5ED6: $2A
+    ld e, a                                       ; $5ED7: $5F
+    ld a, [hl+]                                   ; $5ED8: $2A
+    ld d, a                                       ; $5ED9: $57
+    ld a, [de]                                    ; $5EDA: $1A
     and $20 ; ROOM_STATUS_BOSS_DEFEATED
-    jr z, .endIfBossDefeated                             ; $5edd: $28 $05
-    ldh a, [hMultiPurpose0]                            ; $5edf: $f0 $d7
-    inc a                                         ; $5ee1: $3c
-    ldh [hMultiPurpose0], a                            ; $5ee2: $e0 $d7
+    jr z, .endIfBossDefeated                      ; $5EDD: $28 $05
+    ldh a, [hMultiPurpose0]                       ; $5EDF: $F0 $D7
+    inc a                                         ; $5EE1: $3C
+    ldh [hMultiPurpose0], a                       ; $5EE2: $E0 $D7
 .endIfBossDefeated:
 
-    dec c                                         ; $5ee4: $0d
-    jr nz, .bossLoop                                   ; $5ee5: $20 $ef
+    dec c                                         ; $5EE4: $0D
+    jr nz, .bossLoop                              ; $5EE5: $20 $EF
 
-    ld c, $0c                                     ; $5ee7: $0e $0c
-    ld hl, Data_001_5eb2                                  ; $5ee9: $21 $b2 $5e
+    ld c, $0c                                     ; $5EE7: $0E $0C
+    ld hl, Data_001_5eb2                          ; $5EE9: $21 $B2 $5E
 
 .heartPieceLoop
-    ld a, [hl+]                                   ; $5eec: $2a
-    ld e, a                                       ; $5eed: $5f
-    ld a, [hl+]                                   ; $5eee: $2a
-    ld d, a                                       ; $5eef: $57
-    ld a, [de]                                    ; $5ef0: $1a
-    and OW_ROOM_STATUS_CHANGED                       ; $5ef1: $e6 $10
-    jr z, .endIfHeartPieceTaken                             ; $5ef3: $28 $0f
+    ld a, [hl+]                                   ; $5EEC: $2A
+    ld e, a                                       ; $5EED: $5F
+    ld a, [hl+]                                   ; $5EEE: $2A
+    ld d, a                                       ; $5EEF: $57
+    ld a, [de]                                    ; $5EF0: $1A
+    and OW_ROOM_STATUS_CHANGED                    ; $5EF1: $E6 $10
+    jr z, .endIfHeartPieceTaken                   ; $5EF3: $28 $0F
 
-    ldh a, [hMultiPurpose1]                            ; $5ef5: $f0 $d8
-    inc a                                         ; $5ef7: $3c
-    cp $04                                        ; $5ef8: $fe $04
-    jr nz, .endIf4heartPieces                            ; $5efa: $20 $06
+    ldh a, [hMultiPurpose1]                       ; $5EF5: $F0 $D8
+    inc a                                         ; $5EF7: $3C
+    cp $04                                        ; $5EF8: $FE $04
+    jr nz, .endIf4heartPieces                     ; $5EFA: $20 $06
 
-    ldh a, [hMultiPurpose0]                            ; $5efc: $f0 $d7
-    inc a                                         ; $5efe: $3c
-    ldh [hMultiPurpose0], a                            ; $5eff: $e0 $d7
-    xor a                                         ; $5f01: $af
+    ldh a, [hMultiPurpose0]                       ; $5EFC: $F0 $D7
+    inc a                                         ; $5EFE: $3C
+    ldh [hMultiPurpose0], a                       ; $5EFF: $E0 $D7
+    xor a                                         ; $5F01: $AF
 .endIf4heartPieces
 
-    ldh [hMultiPurpose1], a                            ; $5f02: $e0 $d8
+    ldh [hMultiPurpose1], a                       ; $5F02: $E0 $D8
 
 .endIfHeartPieceTaken
-    dec c                                         ; $5f04: $0d
-    jr nz, .heartPieceLoop                            ; $5f05: $20 $e5
+    dec c                                         ; $5F04: $0D
+    jr nz, .heartPieceLoop                        ; $5F05: $20 $E5
 
-    ldh a, [hMultiPurpose0]                            ; $5f07: $f0 $d7
-    call Call_001_5f1c                            ; $5f09: $cd $1c $5f
-    ld [wMaxHealth], a                            ; $5f0c: $ea $5b $db
-    cp $0e                                        ; $5f0f: $fe $0e
-    jr nz, jr_001_5f16                            ; $5f11: $20 $03
+    ldh a, [hMultiPurpose0]                       ; $5F07: $F0 $D7
+    call Call_001_5f1c                            ; $5F09: $CD $1C $5F
+    ld [wMaxHealth], a                            ; $5F0C: $EA $5B $DB
+    cp $0e                                        ; $5F0F: $FE $0E
+    jr nz, jr_001_5f16                            ; $5F11: $20 $03
 
-    xor a                                         ; $5f13: $af
-    jr jr_001_5f18                                ; $5f14: $18 $02
+    xor a                                         ; $5F13: $AF
+    jr jr_001_5f18                                ; $5F14: $18 $02
 
 jr_001_5f16:
-    ldh a, [hMultiPurpose1]                            ; $5f16: $f0 $d8
+    ldh a, [hMultiPurpose1]                       ; $5F16: $F0 $D8
 
 jr_001_5f18:
-    ld [wHeartPiecesCount], a                     ; $5f18: $ea $5c $db
-    ret                                           ; $5f1b: $c9
+    ld [wHeartPiecesCount], a                     ; $5F18: $EA $5C $DB
+    ret                                           ; $5F1B: $C9
 
 
 ; clamps max health between 3 and 14
 Call_001_5f1c:
-    cp $03                                        ; $5f1c: $fe $03
-    jr nc, jr_001_5f23                            ; $5f1e: $30 $03
+    cp $03                                        ; $5F1C: $FE $03
+    jr nc, jr_001_5f23                            ; $5F1E: $30 $03
 
-    ld a, $03                                     ; $5f20: $3e $03
-    ret                                           ; $5f22: $c9
+    ld a, $03                                     ; $5F20: $3E $03
+    ret                                           ; $5F22: $C9
 
 
 jr_001_5f23:
-    cp $0e                                        ; $5f23: $fe $0e
-    jr c, jr_001_5f29                             ; $5f25: $38 $02
+    cp $0e                                        ; $5F23: $FE $0E
+    jr c, jr_001_5f29                             ; $5F25: $38 $02
 
-    ld a, $0e                                     ; $5f27: $3e $0e
+    ld a, $0e                                     ; $5F27: $3E $0E
 
 jr_001_5f29:
-    ret                                           ; $5f29: $c9
+    ret                                           ; $5F29: $C9
 ENDC
 
 
@@ -1959,7 +1959,7 @@ HideSpritesUnderDialog::
     inc  hl                                       ; $5FAD: $23
     inc  hl                                       ; $5FAE: $23
     dec  e                                        ; $5FAF: $1D
-    jr   nz, .hideSpritesLoop              ; $5FB0: $20 $D2
+    jr   nz, .hideSpritesLoop                     ; $5FB0: $20 $D2
     ret                                           ; $5FB2: $C9
 
 ; Create the entity for the NPC currently following Link (if any).

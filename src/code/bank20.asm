@@ -6455,215 +6455,215 @@ ENDC
 
 IF __PATCH_1__
 func_020_7E0E:
-    ld a, $06                                     ; $7e0e: $3e $06
-    ldh [hMultiPurposeD], a                            ; $7e10: $e0 $e4
-    ld a, $0c                                     ; $7e12: $3e $0c
-    ldh [hMultiPurposeE], a                            ; $7e14: $e0 $e5
-    ld a, $18                                     ; $7e16: $3e $18
-    ldh [hMultiPurposeF], a                            ; $7e18: $e0 $e6
-    ld hl, wBGPal1                                ; $7e1a: $21 $10 $dc
-    ld a, $40                                     ; $7e1d: $3e $40
-    ldh [hMultiPurpose3], a                            ; $7e1f: $e0 $da
-    call Call_020_7e25                            ; $7e21: $cd $25 $7e
-    ret                                           ; $7e24: $c9
+    ld a, $06                                     ; $7E0E: $3E $06
+    ldh [hMultiPurposeD], a                       ; $7E10: $E0 $E4
+    ld a, $0c                                     ; $7E12: $3E $0C
+    ldh [hMultiPurposeE], a                       ; $7E14: $E0 $E5
+    ld a, $18                                     ; $7E16: $3E $18
+    ldh [hMultiPurposeF], a                       ; $7E18: $E0 $E6
+    ld hl, wBGPal1                                ; $7E1A: $21 $10 $DC
+    ld a, $40                                     ; $7E1D: $3E $40
+    ldh [hMultiPurpose3], a                       ; $7E1F: $E0 $DA
+    call Call_020_7e25                            ; $7E21: $CD $25 $7E
+    ret                                           ; $7E24: $C9
 
 Call_020_7e25:
 Jump_020_7e25:
-    push hl                                       ; $7e25: $e5
-    ld a, $02                                     ; $7e26: $3e $02
-    ldh [rSVBK], a                                ; $7e28: $e0 $70
-    ld a, [hl+]                                   ; $7e2a: $2a
-    ld e, a                                       ; $7e2b: $5f
-    ld a, [hl]                                    ; $7e2c: $7e
-    ld d, a                                       ; $7e2d: $57
-    dec hl                                        ; $7e2e: $2b
-    xor a                                         ; $7e2f: $af
-    ldh [rSVBK], a                                ; $7e30: $e0 $70
-    ldh a, [hMultiPurposeD]                            ; $7e32: $f0 $e4
-    ld c, a                                       ; $7e34: $4f
-    ld a, e                                       ; $7e35: $7b
-    and $1f                                       ; $7e36: $e6 $1f
-    ld b, a                                       ; $7e38: $47
-    ld a, [hl]                                    ; $7e39: $7e
-    and $1f                                       ; $7e3a: $e6 $1f
-    cp b                                          ; $7e3c: $b8
-    jr c, .jr_7e47                             ; $7e3d: $38 $08
+    push hl                                       ; $7E25: $E5
+    ld a, $02                                     ; $7E26: $3E $02
+    ldh [rSVBK], a                                ; $7E28: $E0 $70
+    ld a, [hl+]                                   ; $7E2A: $2A
+    ld e, a                                       ; $7E2B: $5F
+    ld a, [hl]                                    ; $7E2C: $7E
+    ld d, a                                       ; $7E2D: $57
+    dec hl                                        ; $7E2E: $2B
+    xor a                                         ; $7E2F: $AF
+    ldh [rSVBK], a                                ; $7E30: $E0 $70
+    ldh a, [hMultiPurposeD]                       ; $7E32: $F0 $E4
+    ld c, a                                       ; $7E34: $4F
+    ld a, e                                       ; $7E35: $7B
+    and $1f                                       ; $7E36: $E6 $1F
+    ld b, a                                       ; $7E38: $47
+    ld a, [hl]                                    ; $7E39: $7E
+    and $1f                                       ; $7E3A: $E6 $1F
+    cp b                                          ; $7E3C: $B8
+    jr c, .jr_7e47                                ; $7E3D: $38 $08
 
-    jr z, .jr_7e47                             ; $7e3f: $28 $06
+    jr z, .jr_7e47                                ; $7E3F: $28 $06
 
-    sub c                                         ; $7e41: $91
-    jr c, .jr_7e47                             ; $7e42: $38 $03
+    sub c                                         ; $7E41: $91
+    jr c, .jr_7e47                                ; $7E42: $38 $03
 
-    cp b                                          ; $7e44: $b8
-    jr nc, jr_020_7e48                            ; $7e45: $30 $01
+    cp b                                          ; $7E44: $B8
+    jr nc, jr_020_7e48                            ; $7E45: $30 $01
 
 .jr_7e47
-    ld a, b                                       ; $7e47: $78
+    ld a, b                                       ; $7E47: $78
 
 jr_020_7e48:
-    ldh [hMultiPurpose0], a                            ; $7e48: $e0 $d7
-    ld a, e                                       ; $7e4a: $7b
-    and $e0                                       ; $7e4b: $e6 $e0
-    swap a                                        ; $7e4d: $cb $37
-    ld b, a                                       ; $7e4f: $47
-    ld a, d                                       ; $7e50: $7a
-    and $03                                       ; $7e51: $e6 $03
-    swap a                                        ; $7e53: $cb $37
-    or b                                          ; $7e55: $b0
-    ld b, a                                       ; $7e56: $47
-    ld a, [hl+]                                   ; $7e57: $2a
-    and $e0                                       ; $7e58: $e6 $e0
-    swap a                                        ; $7e5a: $cb $37
-    ld c, a                                       ; $7e5c: $4f
-    ld a, [hl]                                    ; $7e5d: $7e
-    and $03                                       ; $7e5e: $e6 $03
-    swap a                                        ; $7e60: $cb $37
-    or c                                          ; $7e62: $b1
-    push af                                       ; $7e63: $f5
-    ldh a, [hMultiPurposeE]                            ; $7e64: $f0 $e5
-    ld c, a                                       ; $7e66: $4f
-    pop af                                        ; $7e67: $f1
-    cp b                                          ; $7e68: $b8
-    jr c, .jr_7e73                             ; $7e69: $38 $08
+    ldh [hMultiPurpose0], a                       ; $7E48: $E0 $D7
+    ld a, e                                       ; $7E4A: $7B
+    and $e0                                       ; $7E4B: $E6 $E0
+    swap a                                        ; $7E4D: $CB $37
+    ld b, a                                       ; $7E4F: $47
+    ld a, d                                       ; $7E50: $7A
+    and $03                                       ; $7E51: $E6 $03
+    swap a                                        ; $7E53: $CB $37
+    or b                                          ; $7E55: $B0
+    ld b, a                                       ; $7E56: $47
+    ld a, [hl+]                                   ; $7E57: $2A
+    and $e0                                       ; $7E58: $E6 $E0
+    swap a                                        ; $7E5A: $CB $37
+    ld c, a                                       ; $7E5C: $4F
+    ld a, [hl]                                    ; $7E5D: $7E
+    and $03                                       ; $7E5E: $E6 $03
+    swap a                                        ; $7E60: $CB $37
+    or c                                          ; $7E62: $B1
+    push af                                       ; $7E63: $F5
+    ldh a, [hMultiPurposeE]                       ; $7E64: $F0 $E5
+    ld c, a                                       ; $7E66: $4F
+    pop af                                        ; $7E67: $F1
+    cp b                                          ; $7E68: $B8
+    jr c, .jr_7e73                                ; $7E69: $38 $08
 
-    jr z, .jr_7e73                             ; $7e6b: $28 $06
+    jr z, .jr_7e73                                ; $7E6B: $28 $06
 
-    sub c                                         ; $7e6d: $91
-    jr c, .jr_7e73                             ; $7e6e: $38 $03
+    sub c                                         ; $7E6D: $91
+    jr c, .jr_7e73                                ; $7E6E: $38 $03
 
-    cp b                                          ; $7e70: $b8
-    jr nc, jr_020_7e74                            ; $7e71: $30 $01
+    cp b                                          ; $7E70: $B8
+    jr nc, jr_020_7e74                            ; $7E71: $30 $01
 
 .jr_7e73
-    ld a, b                                       ; $7e73: $78
+    ld a, b                                       ; $7E73: $78
 
 jr_020_7e74:
-    ldh [hMultiPurpose1], a                            ; $7e74: $e0 $d8
-    ldh a, [hMultiPurposeF]                            ; $7e76: $f0 $e6
-    ld c, a                                       ; $7e78: $4f
-    ld a, d                                       ; $7e79: $7a
-    and $7c                                       ; $7e7a: $e6 $7c
-    ld b, a                                       ; $7e7c: $47
-    ld a, [hl]                                    ; $7e7d: $7e
-    and $7c                                       ; $7e7e: $e6 $7c
-    cp b                                          ; $7e80: $b8
-    jr c, .jr_7e8b                             ; $7e81: $38 $08
+    ldh [hMultiPurpose1], a                       ; $7E74: $E0 $D8
+    ldh a, [hMultiPurposeF]                       ; $7E76: $F0 $E6
+    ld c, a                                       ; $7E78: $4F
+    ld a, d                                       ; $7E79: $7A
+    and $7c                                       ; $7E7A: $E6 $7C
+    ld b, a                                       ; $7E7C: $47
+    ld a, [hl]                                    ; $7E7D: $7E
+    and $7c                                       ; $7E7E: $E6 $7C
+    cp b                                          ; $7E80: $B8
+    jr c, .jr_7e8b                                ; $7E81: $38 $08
 
-    jr z, .jr_7e8b                             ; $7e83: $28 $06
+    jr z, .jr_7e8b                                ; $7E83: $28 $06
 
-    sub c                                         ; $7e85: $91
-    jr c, .jr_7e8b                             ; $7e86: $38 $03
+    sub c                                         ; $7E85: $91
+    jr c, .jr_7e8b                                ; $7E86: $38 $03
 
-    cp b                                          ; $7e88: $b8
-    jr nc, jr_020_7e8c                            ; $7e89: $30 $01
+    cp b                                          ; $7E88: $B8
+    jr nc, jr_020_7e8c                            ; $7E89: $30 $01
 
 .jr_7e8b
-    ld a, b                                       ; $7e8b: $78
+    ld a, b                                       ; $7E8B: $78
 
 jr_020_7e8c:
-    ldh [hMultiPurpose2], a                            ; $7e8c: $e0 $d9
-    pop hl                                        ; $7e8e: $e1
-    ldh a, [hMultiPurpose0]                            ; $7e8f: $f0 $d7
-    ld b, a                                       ; $7e91: $47
-    ldh a, [hMultiPurpose1]                            ; $7e92: $f0 $d8
-    swap a                                        ; $7e94: $cb $37
-    ld c, a                                       ; $7e96: $4f
-    and $e0                                       ; $7e97: $e6 $e0
-    or b                                          ; $7e99: $b0
-    ld [hl+], a                                   ; $7e9a: $22
-    ldh a, [hMultiPurpose2]                            ; $7e9b: $f0 $d9
-    ld b, a                                       ; $7e9d: $47
-    ld a, c                                       ; $7e9e: $79
-    and $03                                       ; $7e9f: $e6 $03
-    or b                                          ; $7ea1: $b0
-    ld [hl+], a                                   ; $7ea2: $22
-    ldh a, [hMultiPurpose3]                            ; $7ea3: $f0 $da
-    dec a                                         ; $7ea5: $3d
-    ldh [hMultiPurpose3], a                            ; $7ea6: $e0 $da
-    and a                                         ; $7ea8: $a7
-    jp nz, Jump_020_7e25                          ; $7ea9: $c2 $25 $7e
+    ldh [hMultiPurpose2], a                       ; $7E8C: $E0 $D9
+    pop hl                                        ; $7E8E: $E1
+    ldh a, [hMultiPurpose0]                       ; $7E8F: $F0 $D7
+    ld b, a                                       ; $7E91: $47
+    ldh a, [hMultiPurpose1]                       ; $7E92: $F0 $D8
+    swap a                                        ; $7E94: $CB $37
+    ld c, a                                       ; $7E96: $4F
+    and $e0                                       ; $7E97: $E6 $E0
+    or b                                          ; $7E99: $B0
+    ld [hl+], a                                   ; $7E9A: $22
+    ldh a, [hMultiPurpose2]                       ; $7E9B: $F0 $D9
+    ld b, a                                       ; $7E9D: $47
+    ld a, c                                       ; $7E9E: $79
+    and $03                                       ; $7E9F: $E6 $03
+    or b                                          ; $7EA1: $B0
+    ld [hl+], a                                   ; $7EA2: $22
+    ldh a, [hMultiPurpose3]                       ; $7EA3: $F0 $DA
+    dec a                                         ; $7EA5: $3D
+    ldh [hMultiPurpose3], a                       ; $7EA6: $E0 $DA
+    and a                                         ; $7EA8: $A7
+    jp nz, Jump_020_7e25                          ; $7EA9: $C2 $25 $7E
 
-    xor a                                         ; $7eac: $af
-    ld [wPaletteUnknownE], a                      ; $7ead: $ea $d5 $dd
-    ret                                           ; $7eb0: $c9
+    xor a                                         ; $7EAC: $AF
+    ld [wPaletteUnknownE], a                      ; $7EAD: $EA $D5 $DD
+    ret                                           ; $7EB0: $C9
 
 func_020_7EB1::
-    ld a, $06                                     ; $7eb1: $3e $06
-    ldh [hMultiPurposeD], a                            ; $7eb3: $e0 $e4
-    ld a, $0c                                     ; $7eb5: $3e $0c
-    ldh [hMultiPurposeE], a                            ; $7eb7: $e0 $e5
-    ld a, $18                                     ; $7eb9: $3e $18
-    ldh [hMultiPurposeF], a                            ; $7ebb: $e0 $e6
-    ld hl, wBGPal1                                ; $7ebd: $21 $10 $dc
-    ld d, $40                                     ; $7ec0: $16 $40
-    ldh [hMultiPurpose3], a                            ; $7ec2: $e0 $da
-    call Call_020_7ec8                            ; $7ec4: $cd $c8 $7e
-    ret                                           ; $7ec7: $c9
+    ld a, $06                                     ; $7EB1: $3E $06
+    ldh [hMultiPurposeD], a                       ; $7EB3: $E0 $E4
+    ld a, $0c                                     ; $7EB5: $3E $0C
+    ldh [hMultiPurposeE], a                       ; $7EB7: $E0 $E5
+    ld a, $18                                     ; $7EB9: $3E $18
+    ldh [hMultiPurposeF], a                       ; $7EBB: $E0 $E6
+    ld hl, wBGPal1                                ; $7EBD: $21 $10 $DC
+    ld d, $40                                     ; $7EC0: $16 $40
+    ldh [hMultiPurpose3], a                       ; $7EC2: $E0 $DA
+    call Call_020_7ec8                            ; $7EC4: $CD $C8 $7E
+    ret                                           ; $7EC7: $C9
 
 
 Call_020_7ec8:
 jr_020_7ec8:
-    push hl                                       ; $7ec8: $e5
-    ldh a, [hMultiPurposeD]                            ; $7ec9: $f0 $e4
-    ld c, a                                       ; $7ecb: $4f
-    ld a, [hl]                                    ; $7ecc: $7e
-    and $1f                                       ; $7ecd: $e6 $1f
-    add c                                         ; $7ecf: $81
-    cp $20                                        ; $7ed0: $fe $20
-    jr c, .jr_7ed6                             ; $7ed2: $38 $02
+    push hl                                       ; $7EC8: $E5
+    ldh a, [hMultiPurposeD]                       ; $7EC9: $F0 $E4
+    ld c, a                                       ; $7ECB: $4F
+    ld a, [hl]                                    ; $7ECC: $7E
+    and $1f                                       ; $7ECD: $E6 $1F
+    add c                                         ; $7ECF: $81
+    cp $20                                        ; $7ED0: $FE $20
+    jr c, .jr_7ed6                                ; $7ED2: $38 $02
 
-    ld a, $1f                                     ; $7ed4: $3e $1f
+    ld a, $1f                                     ; $7ED4: $3E $1F
 
 .jr_7ed6
-    ldh [hMultiPurpose0], a                            ; $7ed6: $e0 $d7
-    ldh a, [hMultiPurposeE]                            ; $7ed8: $f0 $e5
-    ld c, a                                       ; $7eda: $4f
-    ld a, [hl+]                                   ; $7edb: $2a
-    and $e0                                       ; $7edc: $e6 $e0
-    swap a                                        ; $7ede: $cb $37
-    ld b, a                                       ; $7ee0: $47
-    ld a, [hl]                                    ; $7ee1: $7e
-    and $03                                       ; $7ee2: $e6 $03
-    swap a                                        ; $7ee4: $cb $37
-    or b                                          ; $7ee6: $b0
-    and $3e                                       ; $7ee7: $e6 $3e
-    add c                                         ; $7ee9: $81
-    cp $40                                        ; $7eea: $fe $40
-    jr c, .jr_7ef0                             ; $7eec: $38 $02
+    ldh [hMultiPurpose0], a                       ; $7ED6: $E0 $D7
+    ldh a, [hMultiPurposeE]                       ; $7ED8: $F0 $E5
+    ld c, a                                       ; $7EDA: $4F
+    ld a, [hl+]                                   ; $7EDB: $2A
+    and $e0                                       ; $7EDC: $E6 $E0
+    swap a                                        ; $7EDE: $CB $37
+    ld b, a                                       ; $7EE0: $47
+    ld a, [hl]                                    ; $7EE1: $7E
+    and $03                                       ; $7EE2: $E6 $03
+    swap a                                        ; $7EE4: $CB $37
+    or b                                          ; $7EE6: $B0
+    and $3e                                       ; $7EE7: $E6 $3E
+    add c                                         ; $7EE9: $81
+    cp $40                                        ; $7EEA: $FE $40
+    jr c, .jr_7ef0                                ; $7EEC: $38 $02
 
-    ld a, $3e                                     ; $7eee: $3e $3e
+    ld a, $3e                                     ; $7EEE: $3E $3E
 
 .jr_7ef0
-    ldh [hMultiPurpose1], a                            ; $7ef0: $e0 $d8
-    ldh a, [hMultiPurposeF]                            ; $7ef2: $f0 $e6
-    ld c, a                                       ; $7ef4: $4f
-    ld a, [hl]                                    ; $7ef5: $7e
-    and $7c                                       ; $7ef6: $e6 $7c
-    add c                                         ; $7ef8: $81
-    cp $80                                        ; $7ef9: $fe $80
-    jr c, .jr_7eff                             ; $7efb: $38 $02
+    ldh [hMultiPurpose1], a                       ; $7EF0: $E0 $D8
+    ldh a, [hMultiPurposeF]                       ; $7EF2: $F0 $E6
+    ld c, a                                       ; $7EF4: $4F
+    ld a, [hl]                                    ; $7EF5: $7E
+    and $7c                                       ; $7EF6: $E6 $7C
+    add c                                         ; $7EF8: $81
+    cp $80                                        ; $7EF9: $FE $80
+    jr c, .jr_7eff                                ; $7EFB: $38 $02
 
-    ld a, $7c                                     ; $7efd: $3e $7c
+    ld a, $7c                                     ; $7EFD: $3E $7C
 
 .jr_7eff
-    ldh [hMultiPurpose2], a                            ; $7eff: $e0 $d9
-    pop hl                                        ; $7f01: $e1
-    ldh a, [hMultiPurpose0]                            ; $7f02: $f0 $d7
-    ld b, a                                       ; $7f04: $47
-    ldh a, [hMultiPurpose1]                            ; $7f05: $f0 $d8
-    swap a                                        ; $7f07: $cb $37
-    ld c, a                                       ; $7f09: $4f
-    and $e0                                       ; $7f0a: $e6 $e0
-    or b                                          ; $7f0c: $b0
-    ld [hl+], a                                   ; $7f0d: $22
-    ldh a, [hMultiPurpose2]                            ; $7f0e: $f0 $d9
-    ld b, a                                       ; $7f10: $47
-    ld a, c                                       ; $7f11: $79
-    and $03                                       ; $7f12: $e6 $03
-    or b                                          ; $7f14: $b0
-    ld [hl+], a                                   ; $7f15: $22
-    dec d                                         ; $7f16: $15
-    jr nz, jr_020_7ec8                            ; $7f17: $20 $af
+    ldh [hMultiPurpose2], a                       ; $7EFF: $E0 $D9
+    pop hl                                        ; $7F01: $E1
+    ldh a, [hMultiPurpose0]                       ; $7F02: $F0 $D7
+    ld b, a                                       ; $7F04: $47
+    ldh a, [hMultiPurpose1]                       ; $7F05: $F0 $D8
+    swap a                                        ; $7F07: $CB $37
+    ld c, a                                       ; $7F09: $4F
+    and $e0                                       ; $7F0A: $E6 $E0
+    or b                                          ; $7F0C: $B0
+    ld [hl+], a                                   ; $7F0D: $22
+    ldh a, [hMultiPurpose2]                       ; $7F0E: $F0 $D9
+    ld b, a                                       ; $7F10: $47
+    ld a, c                                       ; $7F11: $79
+    and $03                                       ; $7F12: $E6 $03
+    or b                                          ; $7F14: $B0
+    ld [hl+], a                                   ; $7F15: $22
+    dec d                                         ; $7F16: $15
+    jr nz, jr_020_7ec8                            ; $7F17: $20 $AF
 
-    ret                                           ; $7f19: $c9
+    ret                                           ; $7F19: $C9
 ENDC

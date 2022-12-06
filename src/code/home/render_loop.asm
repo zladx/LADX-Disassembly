@@ -343,14 +343,10 @@ ENDC
     xor  a                                        ; $0353: $AF
     ld   [wPaletteToLoadForTileMap], a            ; $0354: $EA $D2 $DD
 
-    ;
-    ; Render Window
-    ;
-    callsw UpdateWindowPosition                   ; $0357: $3E $01 $CD $0C $08 $CD $4B $5F
+    ; Hide any sprites that should be hidden
+    ; (behind the window or dialog box)
+    callsw HideSprites                            ; $0357: $3E $01 $CD $0C $08 $CD $4B $5F
 
-    ;
-    ;
-    ;
 .waitForNextFrame
     ; Animate inventory window
     callsw func_01F_7F80                          ; $035F: $3E $1F $CD $0C $08 $CD $80 $7F

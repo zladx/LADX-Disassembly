@@ -185,7 +185,7 @@ func_001_4794::
     add  hl, de                                   ; $479B: $19
 
 .loop_479C
-    call EnableExternalRAMWriting                 ; $479C: $CD $D0 $27
+    call EnableSRAM                               ; $479C: $CD $D0 $27
     ld   a, [hli]                                 ; $479F: $2A
     cp   c                                        ; $47A0: $B9
     jr   nz, .jr_47AA                             ; $47A1: $20 $07
@@ -205,7 +205,7 @@ func_001_4794::
     ld   de, SaveGame2 - SaveGame1.main           ; $47AF: $11 $A8 $03
 
 .loop_47B2
-    call EnableExternalRAMWriting                 ; $47B2: $CD $D0 $27
+    call EnableSRAM                               ; $47B2: $CD $D0 $27
     xor  a                                        ; $47B5: $AF
     ldi  [hl], a                                  ; $47B6: $22
     dec  de                                       ; $47B7: $1B
@@ -219,7 +219,7 @@ func_001_4794::
 
     ; Store the sequence 1,3,5,7,9 into the prefix.
 .loop_47C3
-    call EnableExternalRAMWriting                 ; $47C3: $CD $D0 $27
+    call EnableSRAM                               ; $47C3: $CD $D0 $27
     ldi  [hl], a                                  ; $47C6: $22
     inc  a                                        ; $47C7: $3C
     inc  a                                        ; $47C8: $3C
@@ -281,7 +281,7 @@ LoadSavedFile::
     sla  a                                        ; $52C7: $CB $27
     ld   e, a                                     ; $52C9: $5F
     ld   d, $00                                   ; $52CA: $16 $00
-    ld   hl, Data_001_49F8                        ; $52CC: $21 $F8 $49
+    ld   hl, SaveGameTable                        ; $52CC: $21 $F8 $49
     add  hl, de                                   ; $52CF: $19
     ld   c, [hl]                                  ; $52D0: $4E
     inc  hl                                       ; $52D1: $23
@@ -289,15 +289,15 @@ LoadSavedFile::
     ld   hl, wOverworldRoomStatus                 ; $52D3: $21 $00 $D8
     ld   de, SAVE_MAIN_SIZE                       ; $52D6: $11 $80 $03
 
-.loop_52D9
-    call EnableExternalRAMWriting                 ; $52D9: $CD $D0 $27
+.loopLoadMain
+    call EnableSRAM                               ; $52D9: $CD $D0 $27
     ld   a, [bc]                                  ; $52DC: $0A
     inc  bc                                       ; $52DD: $03
     ldi  [hl], a                                  ; $52DE: $22
     dec  de                                       ; $52DF: $1B
     ld   a, e                                     ; $52E0: $7B
     or   d                                        ; $52E1: $B2
-    jr   nz, .loop_52D9                           ; $52E2: $20 $F5
+    jr   nz, .loopLoadMain                        ; $52E2: $20 $F5
 
 IF __PATCH_4__
     ld de, wMaxHealth
@@ -330,7 +330,7 @@ ENDC
     ld   de, SAVE_DX1_SIZE                        ; $52E7: $11 $05 $00
 
 .loopLoadDX1
-    call EnableExternalRAMWriting                 ; $52EA: $CD $D0 $27
+    call EnableSRAM                               ; $52EA: $CD $D0 $27
     ld   a, [bc]                                  ; $52ED: $0A
     inc  bc                                       ; $52EE: $03
     ldi  [hl], a                                  ; $52EF: $22
@@ -342,7 +342,7 @@ ENDC
     ld   de, SAVE_DX2_SIZE                        ; $52F8: $11 $20 $00
 
 .loopLoadDX2
-    call EnableExternalRAMWriting                 ; $52FB: $CD $D0 $27
+    call EnableSRAM                               ; $52FB: $CD $D0 $27
     ld   a, [bc]                                  ; $52FE: $0A
     inc  bc                                       ; $52FF: $03
     ldi  [hl], a                                  ; $5300: $22
@@ -350,15 +350,15 @@ ENDC
     ld   a, e                                     ; $5302: $7B
     or   d                                        ; $5303: $B2
     jr   nz, .loopLoadDX2                         ; $5304: $20 $F5
-    call EnableExternalRAMWriting                 ; $5306: $CD $D0 $27
+    call EnableSRAM                               ; $5306: $CD $D0 $27
     ld   a, [bc]                                  ; $5309: $0A
     ld   [wTunicType], a                          ; $530A: $EA $0F $DC
     inc  bc                                       ; $530D: $03
-    call EnableExternalRAMWriting                 ; $530E: $CD $D0 $27
+    call EnableSRAM                               ; $530E: $CD $D0 $27
     ld   a, [bc]                                  ; $5311: $0A
     ld   [wPhotos1], a                            ; $5312: $EA $0C $DC
     inc  bc                                       ; $5315: $03
-    call EnableExternalRAMWriting                 ; $5316: $CD $D0 $27
+    call EnableSRAM                               ; $5316: $CD $D0 $27
     ld   a, [bc]                                  ; $5319: $0A
     ld   [wPhotos2], a                            ; $531A: $EA $0D $DC
 
@@ -1388,18 +1388,22 @@ jr_001_5DCC::
     jr   nz, jr_001_5DCC                          ; $5DE3: $20 $E7
     ret                                           ; $5DE5: $C9
 
-func_001_5DE6::
+SaveGameToFile::
 IF __PATCH_4__
-    call Call_001_5eca
+    call RecalculateMaxHealth
 ENDC
-    ld   a, [wHealth]                           ; Does the player have any health? ; $5DE6: $FA $5A $DB
-    and  a                                      ; If yes, skip this ; $5DE9: $A7
+    ; Does the player have any health?
+    ld   a, [wHealth]                             ; $5DE6: $FA $5A $DB
+    and  a                                        ; $5DE9: $A7
     jr   nz, .skipHealthReset                     ; $5DEA: $20 $0E
-    ld   a, [wMaxHealth]                        ; Otherwise, get their max health... ; $5DEC: $FA $5B $DB
+    ; If not, get the current max health
+    ld   a, [wMaxHealth]                          ; $5DEC: $FA $5B $DB
     ld   e, a                                     ; $5DEF: $5F
     ld   d, $00                                   ; $5DF0: $16 $00
-    ld   hl, MaxHealthToStartingHealthTable     ; and use it as an index into the table ; $5DF2: $21 $95 $52
-    add  hl, de                                 ; to provide the starting health value. ; $5DF5: $19
+    ; and use it as an index into the table
+    ld   hl, MaxHealthToStartingHealthTable       ; $5DF2: $21 $95 $52
+    add  hl, de                                   ; $5DF5: $19
+    ; to provide the starting health value.
     ld   a, [hl]                                  ; $5DF6: $7E
     ld   [wHealth], a                             ; $5DF7: $EA $5A $DB
 
@@ -1409,7 +1413,7 @@ ENDC
     sla  a                                        ; $5E00: $CB $27
     ld   e, a                                     ; $5E02: $5F
     ld   d, $00                                   ; $5E03: $16 $00
-    ld   hl, Data_001_49F8                        ; $5E05: $21 $F8 $49
+    ld   hl, SaveGameTable                        ; $5E05: $21 $F8 $49
     add  hl, de                                   ; $5E08: $19
     ld   a, [hli]                                 ; $5E09: $2A
     ld   h, [hl]                                  ; $5E0A: $66
@@ -1417,24 +1421,24 @@ ENDC
     ld   bc, wOverworldRoomStatus                 ; $5E0C: $01 $00 $D8
     ld   de, SAVE_MAIN_SIZE                       ; $5E0F: $11 $80 $03
 
-.loop_5E12
-    call EnableExternalRAMWriting                 ; $5E12: $CD $D0 $27
+.loopSaveMain
+    call EnableSRAM                               ; $5E12: $CD $D0 $27
     ld   a, [bc]                                  ; $5E15: $0A
     inc  bc                                       ; $5E16: $03
-    call EnableExternalRAMWriting                 ; $5E17: $CD $D0 $27
+    call EnableSRAM                               ; $5E17: $CD $D0 $27
     ldi  [hl], a                                  ; $5E1A: $22
     dec  de                                       ; $5E1B: $1B
     ld   a, e                                     ; $5E1C: $7B
     or   d                                        ; $5E1D: $B2
-    jr   nz, .loop_5E12                           ; $5E1E: $20 $F2
+    jr   nz, .loopSaveMain                        ; $5E1E: $20 $F2
     ld   bc, wColorDungeonItemFlags               ; $5E20: $01 $DA $DD
     ld   de, SAVE_DX1_SIZE                        ; $5E23: $11 $05 $00
 
 .loopSaveDX1
-    call EnableExternalRAMWriting                 ; $5E26: $CD $D0 $27
+    call EnableSRAM                               ; $5E26: $CD $D0 $27
     ld   a, [bc]                                  ; $5E29: $0A
     inc  bc                                       ; $5E2A: $03
-    call EnableExternalRAMWriting                 ; $5E2B: $CD $D0 $27
+    call EnableSRAM                               ; $5E2B: $CD $D0 $27
     ldi  [hl], a                                  ; $5E2E: $22
     dec  de                                       ; $5E2F: $1B
     ld   a, e                                     ; $5E30: $7B
@@ -1444,26 +1448,26 @@ ENDC
     ld   de, SAVE_DX2_SIZE                        ; $5E37: $11 $20 $00
 
 .loopSaveDX2
-    call EnableExternalRAMWriting                 ; $5E3A: $CD $D0 $27
+    call EnableSRAM                               ; $5E3A: $CD $D0 $27
     ld   a, [bc]                                  ; $5E3D: $0A
     inc  bc                                       ; $5E3E: $03
-    call EnableExternalRAMWriting                 ; $5E3F: $CD $D0 $27
+    call EnableSRAM                               ; $5E3F: $CD $D0 $27
     ldi  [hl], a                                  ; $5E42: $22
     dec  de                                       ; $5E43: $1B
     ld   a, e                                     ; $5E44: $7B
     or   d                                        ; $5E45: $B2
     jr   nz, .loopSaveDX2                         ; $5E46: $20 $F2
-    call EnableExternalRAMWriting                 ; $5E48: $CD $D0 $27
+    call EnableSRAM                               ; $5E48: $CD $D0 $27
     ld   a, [wTunicType]                          ; $5E4B: $FA $0F $DC
-    call EnableExternalRAMWriting                 ; $5E4E: $CD $D0 $27
+    call EnableSRAM                               ; $5E4E: $CD $D0 $27
     ldi  [hl], a                                  ; $5E51: $22
-    call EnableExternalRAMWriting                 ; $5E52: $CD $D0 $27
+    call EnableSRAM                               ; $5E52: $CD $D0 $27
     ld   a, [wPhotos1]                            ; $5E55: $FA $0C $DC
-    call EnableExternalRAMWriting                 ; $5E58: $CD $D0 $27
+    call EnableSRAM                               ; $5E58: $CD $D0 $27
     ldi  [hl], a                                  ; $5E5B: $22
-    call EnableExternalRAMWriting                 ; $5E5C: $CD $D0 $27
+    call EnableSRAM                               ; $5E5C: $CD $D0 $27
     ld   a, [wPhotos2]                            ; $5E5F: $FA $0D $DC
-    call EnableExternalRAMWriting                 ; $5E62: $CD $D0 $27
+    call EnableSRAM                               ; $5E62: $CD $D0 $27
     ldi  [hl], a                                  ; $5E65: $22
     ret                                           ; $5E66: $C9
 
@@ -1474,7 +1478,7 @@ IF __PATCH_4__
 ; if the boss has been defeated or the heart piece was collected,
 ; then resets max HP to 3 + (bosses) + (PoH / 4).
 ;
-Data_001_5ea2:
+BossRoomTable:
     dw wIndoorARoomStatus + $06 ; moldorm
     dw wIndoorARoomStatus + $2b ; genie
     dw wIndoorARoomStatus + $5a
@@ -1484,7 +1488,7 @@ Data_001_5ea2:
     dw wIndoorBRoomStatus + $e8
     dw wIndoorBRoomStatus + $34 ; hothead
 
-Data_001_5eb2:
+PieceOfHeartRoomTable:
     dw wIndoorBRoomStatus + $a4
     dw wIndoorBRoomStatus + $b1
     dw wOverworldRoomStatus + $44
@@ -1498,14 +1502,14 @@ Data_001_5eb2:
     dw wIndoorBRoomStatus + $ba
     dw wOverworldRoomStatus + $00
 
-Call_001_5eca:
+RecalculateMaxHealth:
     ; full heart containers
     ld a, $03                                     ; $5ECA: $3E $03
     ldh [hMultiPurpose0], a                       ; $5ECC: $E0 $D7
     xor a                                         ; $5ECE: $AF
     ldh [hMultiPurpose1], a                       ; $5ECF: $E0 $D8
     ld c, $08                                     ; $5ED1: $0E $08
-    ld hl, Data_001_5ea2                          ; $5ED3: $21 $A2 $5E
+    ld hl, BossRoomTable                          ; $5ED3: $21 $A2 $5E
 
 .bossLoop
     ld a, [hl+]                                   ; $5ED6: $2A
@@ -1513,7 +1517,7 @@ Call_001_5eca:
     ld a, [hl+]                                   ; $5ED8: $2A
     ld d, a                                       ; $5ED9: $57
     ld a, [de]                                    ; $5EDA: $1A
-    and $20 ; ROOM_STATUS_BOSS_DEFEATED
+    and ROOM_STATUS_EVENT_2 ; Boss defeated
     jr z, .endIfBossDefeated                      ; $5EDD: $28 $05
     ldh a, [hMultiPurpose0]                       ; $5EDF: $F0 $D7
     inc a                                         ; $5EE1: $3C
@@ -1524,7 +1528,7 @@ Call_001_5eca:
     jr nz, .bossLoop                              ; $5EE5: $20 $EF
 
     ld c, $0c                                     ; $5EE7: $0E $0C
-    ld hl, Data_001_5eb2                          ; $5EE9: $21 $B2 $5E
+    ld hl, PieceOfHeartRoomTable                  ; $5EE9: $21 $B2 $5E
 
 .heartPieceLoop
     ld a, [hl+]                                   ; $5EEC: $2A
@@ -1553,7 +1557,7 @@ Call_001_5eca:
     jr nz, .heartPieceLoop                        ; $5F05: $20 $E5
 
     ldh a, [hMultiPurpose0]                       ; $5F07: $F0 $D7
-    call Call_001_5f1c                            ; $5F09: $CD $1C $5F
+    call ClampMaxHealth                           ; $5F09: $CD $1C $5F
     ld [wMaxHealth], a                            ; $5F0C: $EA $5B $DB
     cp $0e                                        ; $5F0F: $FE $0E
     jr nz, jr_001_5f16                            ; $5F11: $20 $03
@@ -1570,21 +1574,19 @@ jr_001_5f18:
 
 
 ; clamps max health between 3 and 14
-Call_001_5f1c:
+ClampMaxHealth:
     cp $03                                        ; $5F1C: $FE $03
-    jr nc, jr_001_5f23                            ; $5F1E: $30 $03
+    jr nc, .upperBound                            ; $5F1E: $30 $03
 
     ld a, $03                                     ; $5F20: $3E $03
     ret                                           ; $5F22: $C9
 
-
-jr_001_5f23:
+.upperBound:
     cp $0e                                        ; $5F23: $FE $0E
-    jr c, jr_001_5f29                             ; $5F25: $38 $02
-
+    jr c, .return                                 ; $5F25: $38 $02
     ld a, $0e                                     ; $5F27: $3E $0E
 
-jr_001_5f29:
+.return:
     ret                                           ; $5F29: $C9
 ENDC
 
@@ -1806,20 +1808,25 @@ UpdateRecentRoomsList::
     ret                                           ; $5F2D: $C9
 
 HideAllSprites::
-    ; $0000 controls whether to enable external RAM writing
+    ; $0000 controls whether to enable external RAM
     ld   hl, rRAMG                                ; $5F2E: $21 $00 $00
 
     ; If CGB…
     ldh  a, [hIsGBC]                              ; $5F31: $F0 $FE
     and  a                                        ; $5F33: $A7
-    jr   z, .enableExternalRAMWriting             ; $5F34: $28 $04
-    ; disable external RAM writing
+    jr   z, .enableSRAM                           ; $5F34: $28 $04
+    ; disable external RAM
     ; (probably because an extra RAM bank available on CGB can be used)
     ld   [hl], CART_SRAM_DISABLE                  ; $5F36: $36 $00
     jr   .endIf                                   ; $5F38: $18 $02
 
-.enableExternalRAMWriting
-    ; else enable external RAM writing
+.enableSRAM
+    ; else write $FF to rRAMG, which also should disable
+    ; external RAM; only a value of $0A enables external
+    ; RAM (SRAM) on MBC5 according to Pandocs. SRAM is also
+    ; not used in this subroutine. What's actually going on
+    ; here? Stubbed out code that hasn't been removed even
+    ; though it's run every frame?
     ld   [hl], $FF                                ; $5F3A: $36 $FF
 .endIf
 

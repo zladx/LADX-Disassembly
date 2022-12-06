@@ -478,16 +478,16 @@ Data_001_49F2::
     dw   SaveGame2.main + wBButtonSlot - wOverworldRoomStatus
     dw   SaveGame3.main + wBButtonSlot - wOverworldRoomStatus
 
-Data_001_49F8::
+SaveGameTable::
     dw   SaveGame1.main
     dw   SaveGame2.main
     dw   SaveGame3.main
 
 ; Part of file copy
 Data_001_49FE::
-    dw SaveGame1                                  ; $49FE
-    dw SaveGame2                                  ; $4A00
-    dw SaveGame3                                  ; $4A02
+    dw   SaveGame1                                ; $49FE
+    dw   SaveGame2                                ; $4A00
+    dw   SaveGame3                                ; $4A02
 
 FileSelectionLoadSavedFile::
     jp   LoadSavedFile                            ; $4A04: $C3 $A4 $52
@@ -553,10 +553,10 @@ IF !LANG_DE
 ;   hl   address of the save file start
 ;   bc   offset
 ;   a    value to write
-WriteByteToExternalRAM::
+WriteByteToSRAM::
     push hl                                       ; $4A3F: $E5
     add  hl, bc                                   ; $4A40: $09
-    call EnableExternalRAMWriting                 ; $4A41: $CD $D0 $27
+    call EnableSRAM                               ; $4A41: $CD $D0 $27
     ld   [hl], a                                  ; $4A44: $77
     pop  hl                                       ; $4A45: $E1
     ret                                           ; $4A46: $C9
@@ -567,7 +567,7 @@ label_4A47::
     push hl                                       ; $4A4C: $E5
 
 .loop_4A4D
-    call EnableExternalRAMWriting                 ; $4A4D: $CD $D0 $27
+    call EnableSRAM                               ; $4A4D: $CD $D0 $27
     ld   a, [bc]                                  ; $4A50: $0A
     ldi  [hl], a                                  ; $4A51: $22
     inc  bc                                       ; $4A52: $03
@@ -578,26 +578,26 @@ label_4A47::
     pop  hl                                       ; $4A58: $E1
     ld   bc, $4E                                  ; $4A59: $01 $4E $00
     ld   a, $01                                   ; $4A5C: $3E $01
-    call WriteByteToExternalRAM                   ; $4A5E: $CD $3F $4A
+    call WriteByteToSRAM                          ; $4A5E: $CD $3F $4A
     ld   bc, $44                                  ; $4A61: $01 $44 $00
-    call WriteByteToExternalRAM                   ; $4A64: $CD $3F $4A
+    call WriteByteToSRAM                          ; $4A64: $CD $3F $4A
     ld   bc, $43                                  ; $4A67: $01 $43 $00
     ld   a, $02                                   ; $4A6A: $3E $02
-    call WriteByteToExternalRAM                   ; $4A6C: $CD $3F $4A
+    call WriteByteToSRAM                          ; $4A6C: $CD $3F $4A
     ld   bc, $4D                                  ; $4A6F: $01 $4D $00
     ld   a, $59                                   ; $4A72: $3E $59
-    call WriteByteToExternalRAM                   ; $4A74: $CD $3F $4A
+    call WriteByteToSRAM                          ; $4A74: $CD $3F $4A
     ld   bc, $77                                  ; $4A77: $01 $77 $00
-    call WriteByteToExternalRAM                   ; $4A7A: $CD $3F $4A
+    call WriteByteToSRAM                          ; $4A7A: $CD $3F $4A
     ld   bc, $78                                  ; $4A7D: $01 $78 $00
-    call WriteByteToExternalRAM                   ; $4A80: $CD $3F $4A
+    call WriteByteToSRAM                          ; $4A80: $CD $3F $4A
     ld   bc, $45                                  ; $4A83: $01 $45 $00
-    call WriteByteToExternalRAM                   ; $4A86: $CD $3F $4A
+    call WriteByteToSRAM                          ; $4A86: $CD $3F $4A
     ld   bc, $76                                  ; $4A89: $01 $76 $00
     ld   a, $39                                   ; $4A8C: $3E $39
-    call WriteByteToExternalRAM                   ; $4A8E: $CD $3F $4A
+    call WriteByteToSRAM                          ; $4A8E: $CD $3F $4A
     ld   bc, $4C                                  ; $4A91: $01 $4C $00
-    call WriteByteToExternalRAM                   ; $4A94: $CD $3F $4A
+    call WriteByteToSRAM                          ; $4A94: $CD $3F $4A
     ret                                           ; $4A97: $C9
 ENDC
 
@@ -689,7 +689,7 @@ ENDC
     pop  bc                                       ; $4B02: $C1
     ld   e, NAME_LENGTH                           ; $4B03: $1E $05
 .loop
-    call EnableExternalRAMWriting                 ; $4B05: $CD $D0 $27
+    call EnableSRAM                               ; $4B05: $CD $D0 $27
     ld   a, [hli]                                 ; $4B08: $2A
     ld   [bc], a                                  ; $4B09: $02
     inc  bc                                       ; $4B0A: $03
@@ -1255,7 +1255,7 @@ ENDC
     sla  a                                        ; $4E82: $CB $27 ; $4E82: $CB $27
     ld   e, a                                     ; $4E84: $5F ; $4E84: $5F
     ld   d, $00                                   ; $4E85: $16 $00 ; $4E85: $16 $00
-    ld   hl, Data_001_49F8                        ; $4E87: $21 $F8 $49 ; $4E87: $21 $F8 $49
+    ld   hl, SaveGameTable                        ; $4E87: $21 $F8 $49 ; $4E87: $21 $F8 $49
     add  hl, de                                   ; $4E8A: $19 ; $4E8A: $19
     ld   a, [hl+]                                 ; $4E8B: $2A ; $4E8B: $2A
     ld   h, [hl]                                  ; $4E8C: $66 ; $4E8C: $66
@@ -1263,7 +1263,7 @@ ENDC
     ld   de, SaveGame1.end - SaveGame1.main       ; $4E8E: $11 $A8 $03 ; $4E8E: $11 $A8 $03
 
 .loop_4E91:: ; Clear the save
-    call EnableExternalRAMWriting                 ; $4E91: $CD $D0 $27 ; $4E91: $CD $D0 $27
+    call EnableSRAM                               ; $4E91: $CD $D0 $27 ; $4E91: $CD $D0 $27
     xor  a                                        ; $4E94: $AF ; $4E94: $AF
     ld   [hl+], a                                 ; $4E95: $22 ; $4E95: $22
     dec  de                                       ; $4E96: $1B ; $4E96: $1B
@@ -1922,10 +1922,10 @@ FileCopyStateAHandler::
     ld   de, (SaveGame2 - SaveGame1)              ; $5221: $11 $AD $03 ; $5221: $11 $AD $03
 
 .loop_5224
-    call EnableExternalRAMWriting                 ; $5224: $CD $D0 $27 ; $5224: $CD $D0 $27
+    call EnableSRAM                               ; $5224: $CD $D0 $27 ; $5224: $CD $D0 $27
     ld   a, [bc]                                  ; $5227: $0A ; $5227: $0A
     inc  bc                                       ; $5228: $03 ; $5228: $03
-    call EnableExternalRAMWriting                 ; $5229: $CD $D0 $27 ; $5229: $CD $D0 $27
+    call EnableSRAM                               ; $5229: $CD $D0 $27 ; $5229: $CD $D0 $27
     ld   [hl+], a                                 ; $522C: $22 ; $522C: $22
     dec  de                                       ; $522D: $1B ; $522D: $1B
     ld   a, e                                     ; $522E: $7B ; $522E: $7B

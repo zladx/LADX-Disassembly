@@ -173,7 +173,7 @@ GameOverInteractiveHandler::
     jr   jr_001_42F5                              ; $42F0: $18 $03 ; $42F0: $18 $03
 
 .jr_42F2::
-    call func_001_5DE6                            ; $42F2: $CD $E6 $5D ; $42F2: $CD $E6 $5D
+    call SaveGameToFile                           ; $42F2: $CD $E6 $5D ; $42F2: $CD $E6 $5D
 
 jr_001_42F5::
     xor  a                                        ; $42F5: $AF ; $42F5: $AF
@@ -205,7 +205,7 @@ jr_001_42F5::
     ret                                           ; $432B: $C9 ; $432B: $C9
 
 jr_001_432C::
-    call func_001_5DE6                            ; $432C: $CD $E6 $5D ; $432C: $CD $E6 $5D
+    call SaveGameToFile                           ; $432C: $CD $E6 $5D ; $432C: $CD $E6 $5D
     xor  a                                        ; $432F: $AF ; $432F: $AF
     ldh  [hActiveEntityTilesOffset], a            ; $4330: $E0 $F5 ; $4330: $E0 $F5
     call func_001_6162                            ; $4332: $CD $62 $61 ; $4332: $CD $62 $61

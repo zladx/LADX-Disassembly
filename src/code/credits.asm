@@ -1059,7 +1059,7 @@ EndCreditsEntryPoint::
     ; Decrement wD008
     ld   a, [wD008]                               ; $4AEA: $FA $08 $D0
     and  a                                        ; $4AED: $A7
-    jr   z, .decrementwD008End                              ; $4AEE: $28 $04
+    jr   z, .decrementwD008End                    ; $4AEE: $28 $04
     dec  a                                        ; $4AF0: $3D
     ld   [wD008], a                               ; $4AF1: $EA $08 $D0
 .decrementwD008End

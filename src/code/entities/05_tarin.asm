@@ -179,7 +179,7 @@ func_005_49E5::
     jp_open_dialog Dialog00D                      ; $4A07
 
 .jr_4A0C
-    ld   hl, wC1AD                                ; $4A0C: $21 $AD $C1
+    ld   hl, wItemUsageContext                    ; $4A0C: $21 $AD $C1
     ld   [hl], b                                  ; $4A0F: $70
     ret                                           ; $4A10: $C9
 

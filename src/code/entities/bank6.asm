@@ -137,8 +137,8 @@ func_006_645D::
     jr   nz, .return                              ; $649D: $20 $25
 
 .jr_006_649F
-    ld   hl, wC1AD                                ; $649F: $21 $AD $C1
-    ld   [hl], $01                                ; $64A2: $36 $01
+    ld   hl, wItemUsageContext                    ; $649F: $21 $AD $C1
+    ld   [hl], ITEM_USAGE_NEAR_NPC                ; $64A2: $36 $01
     ld   a, [wDialogState]                        ; $64A4: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $64A7: $21 $4F $C1
     or   [hl]                                     ; $64AA: $B6

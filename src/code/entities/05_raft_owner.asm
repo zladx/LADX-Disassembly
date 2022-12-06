@@ -173,7 +173,7 @@ jr_005_5411:
     jr   nc, .jr_5440                             ; $5432: $30 $0C
 
     ld   a, $80                                   ; $5434: $3E $80
-    ld   [wC1AD], a                               ; $5436: $EA $AD $C1
+    ld   [wItemUsageContext], a                   ; $5436: $EA $AD $C1
     ldh  a, [hLinkPositionX]                      ; $5439: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $543B: $21 $00 $C2
     add  hl, bc                                   ; $543E: $09
@@ -369,8 +369,8 @@ ShouldLinkTalkToEntity_05::
     jr   nz, .dontTalk                            ; $5542: $20 $25
 .bowWowEnd
 
-    ld   hl, wC1AD                                ; $5544: $21 $AD $C1
-    ld   [hl], $01                                ; $5547: $36 $01
+    ld   hl, wItemUsageContext                    ; $5544: $21 $AD $C1
+    ld   [hl], ITEM_USAGE_NEAR_NPC                ; $5547: $36 $01
     ld   a, [wDialogState]                        ; $5549: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $554C: $21 $4F $C1
     or   [hl]                                     ; $554F: $B6

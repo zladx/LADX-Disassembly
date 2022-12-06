@@ -422,3 +422,8 @@ BOW_WOW_KIDNAPPED equ $80
 TUNIC_GREEN  equ $00
 TUNIC_RED    equ $01
 TUNIC_BLUE   equ $02
+
+; Values for wItemUsageContext
+ITEM_USAGE_NEAR_NPC     equ $01 ; set when near an NPC, to stop item usage
+ITEM_USAGE_READING_TEXT equ $02 ; set when reading non-dialog text, to stop item usage
+ITEM_USAGE_ON_RAFT      equ $80 ; set when on the raft, to freeze the raft when using an item

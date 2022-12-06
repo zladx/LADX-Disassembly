@@ -2855,8 +2855,8 @@ TunicFairyState0::
     cp   $02                                      ; $50F2: $FE $02
     ret  nz                                       ; $50F4: $C0
 
-    ld   hl, wC1AD                                ; $50F5: $21 $AD $C1
-    ld   [hl], $01                                ; $50F8: $36 $01
+    ld   hl, wItemUsageContext                    ; $50F5: $21 $AD $C1
+    ld   [hl], ITEM_USAGE_NEAR_NPC                ; $50F8: $36 $01
     ldh  a, [hJoypadState]                        ; $50FA: $F0 $CC
     and  J_A                                      ; $50FC: $E6 $10
     ret  z                                        ; $50FE: $C8
@@ -4142,8 +4142,8 @@ func_036_58E4::
     cp   $02                                      ; $58FA: $FE $02
     jr   nz, ret_036_5911                         ; $58FC: $20 $13
 
-    ld   hl, wC1AD                                ; $58FE: $21 $AD $C1
-    ld   [hl], $01                                ; $5901: $36 $01
+    ld   hl, wItemUsageContext                    ; $58FE: $21 $AD $C1
+    ld   [hl], ITEM_USAGE_NEAR_NPC                ; $5901: $36 $01
     ldh  a, [hJoypadState]                        ; $5903: $F0 $CC
     and  J_A                                      ; $5905: $E6 $10
     jr   z, ret_036_5911                          ; $5907: $28 $08
@@ -4290,8 +4290,8 @@ func_036_59C3::
     and  $04                                      ; $59D5: $E6 $04
     jr   z, jr_036_5A00                           ; $59D7: $28 $27
 
-    ld   hl, wC1AD                                ; $59D9: $21 $AD $C1
-    ld   [hl], $01                                ; $59DC: $36 $01
+    ld   hl, wItemUsageContext                    ; $59D9: $21 $AD $C1
+    ld   [hl], ITEM_USAGE_NEAR_NPC                ; $59DC: $36 $01
     ldh  a, [hJoypadState]                        ; $59DE: $F0 $CC
     and  J_A                                      ; $59E0: $E6 $10
     jr   z, jr_036_5A00                           ; $59E2: $28 $1C
@@ -7256,8 +7256,8 @@ func_036_6A98::
     jr   nz, jr_036_6AEA                          ; $6AC3: $20 $25
 
 .jr_6AC5
-    ld   hl, wC1AD                                ; $6AC5: $21 $AD $C1
-    ld   [hl], $01                                ; $6AC8: $36 $01
+    ld   hl, wItemUsageContext                    ; $6AC5: $21 $AD $C1
+    ld   [hl], ITEM_USAGE_NEAR_NPC                ; $6AC8: $36 $01
     ld   a, [wDialogState]                        ; $6ACA: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $6ACD: $21 $4F $C1
     or   [hl]                                     ; $6AD0: $B6

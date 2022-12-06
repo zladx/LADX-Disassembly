@@ -139,8 +139,8 @@ jr_007_7D4E:
     jr   nz, jr_007_7D94                          ; $7D6D: $20 $25
 
 .jr_7D6F
-    ld   hl, wC1AD                                ; $7D6F: $21 $AD $C1
-    ld   [hl], $01                                ; $7D72: $36 $01
+    ld   hl, wItemUsageContext                    ; $7D6F: $21 $AD $C1
+    ld   [hl], ITEM_USAGE_NEAR_NPC                ; $7D72: $36 $01
     ld   a, [wDialogState]                        ; $7D74: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $7D77: $21 $4F $C1
     or   [hl]                                     ; $7D7A: $B6

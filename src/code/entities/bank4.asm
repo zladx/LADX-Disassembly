@@ -297,8 +297,8 @@ func_004_7C4B:: ; called only from fishing minigame
     cp   e                                        ; $7C82: $BB
     jr   nz, .jr_7C92                             ; $7C83: $20 $0D
 
-    ld   hl, wC1AD                                ; $7C85: $21 $AD $C1
-    ld   [hl], $01                                ; $7C88: $36 $01
+    ld   hl, wItemUsageContext                    ; $7C85: $21 $AD $C1
+    ld   [hl], ITEM_USAGE_NEAR_NPC                ; $7C88: $36 $01
     ldh  a, [hJoypadState]                        ; $7C8A: $F0 $CC
     and  J_A                                      ; $7C8C: $E6 $10
     jr   z, .jr_7C92                              ; $7C8E: $28 $02

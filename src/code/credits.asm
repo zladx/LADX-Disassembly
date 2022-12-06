@@ -1008,77 +1008,84 @@ Data_017_49B7::
     db   $00, $00, $00, $00, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $00, $00, $00
 
 EndCreditsEntryPoint::
-    ldh  a, [hJoypadState]                        ; $4AB7: $F0 $CC
-    and  $0C                                      ; $4AB9: $E6 $0C
-    jr   z, .jr_4AC7                              ; $4ABB: $28 $0A
+    ;
+    ; End Credits Debug Tools
+    ;
 
+    ; If pressing UP or DOWN…
+    ldh  a, [hJoypadState]                        ; $4AB7: $F0 $CC
+    and  J_UP | J_DOWN                            ; $4AB9: $E6 $0C
+    jr   z, .debugResetEnd                        ; $4ABB: $28 $0A
+    ; … and ROM_DebugTool2 is enabled…
     ld   a, [ROM_DebugTool2]                      ; $4ABD: $FA $04 $00
     and  a                                        ; $4AC0: $A7
-    jr   z, .jr_4AC7                              ; $4AC1: $28 $04
-
+    jr   z, .debugResetEnd                        ; $4AC1: $28 $04
+    ; … reset the ending sequence to the start.
     xor  a                                        ; $4AC3: $AF
     ld   [wGameplaySubtype], a                    ; $4AC4: $EA $96 $DB
+.debugResetEnd
 
-.jr_4AC7
+    ; If pressing LEFT or RIGHT…
     ldh  a, [hJoypadState]                        ; $4AC7: $F0 $CC
     and  J_RIGHT | J_LEFT                         ; $4AC9: $E6 $03
-    jr   z, .jr_4AD6                              ; $4ACB: $28 $09
-
+    jr   z, .debugSkipEnd                         ; $4ACB: $28 $09
+    ; … and ROM_DebugTool2 is enabled…
     ld   a, [ROM_DebugTool2]                      ; $4ACD: $FA $04 $00
     and  a                                        ; $4AD0: $A7
-    jr   z, .jr_4AD6                              ; $4AD1: $28 $03
+    jr   z, .debugSkipEnd                         ; $4AD1: $28 $03
+    call TransitionToNextEndingScene              ; $4AD3: $CD $DE $64
+.debugSkipEnd
 
-    call func_017_64DE                            ; $4AD3: $CD $DE $64
+    ;
+    ; Update ending global timers
+    ;
 
-.jr_4AD6
+    ; Decrement wD006
     ld   a, [wD006]                               ; $4AD6: $FA $06 $D0
     and  a                                        ; $4AD9: $A7
-    jr   z, .jr_4AE0                              ; $4ADA: $28 $04
-
+    jr   z, .decrementwD006End                    ; $4ADA: $28 $04
     dec  a                                        ; $4ADC: $3D
     ld   [wD006], a                               ; $4ADD: $EA $06 $D0
+.decrementwD006End
 
-.jr_4AE0
+    ; Decrement wD007
     ld   a, [wD007]                               ; $4AE0: $FA $07 $D0
     and  a                                        ; $4AE3: $A7
-    jr   z, .jr_4AEA                              ; $4AE4: $28 $04
-
+    jr   z, .decrementwD007End                    ; $4AE4: $28 $04
     dec  a                                        ; $4AE6: $3D
     ld   [wD007], a                               ; $4AE7: $EA $07 $D0
+.decrementwD007End
 
-.jr_4AEA
+    ; Decrement wD008
     ld   a, [wD008]                               ; $4AEA: $FA $08 $D0
     and  a                                        ; $4AED: $A7
-    jr   z, .jr_4AF4                              ; $4AEE: $28 $04
-
+    jr   z, .decrementwD008End                              ; $4AEE: $28 $04
     dec  a                                        ; $4AF0: $3D
     ld   [wD008], a                               ; $4AF1: $EA $08 $D0
+.decrementwD008End
 
-.jr_4AF4
+    ; Decrement wD009 every 4 frames
     ldh  a, [hFrameCounter]                       ; $4AF4: $F0 $E7
     and  $03                                      ; $4AF6: $E6 $03
-    jr   nz, .jr_4B04                             ; $4AF8: $20 $0A
-
+    jr   nz, .decrementwD009End                   ; $4AF8: $20 $0A
     ld   a, [wD009]                               ; $4AFA: $FA $09 $D0
     and  a                                        ; $4AFD: $A7
-    jr   z, .jr_4B04                              ; $4AFE: $28 $04
-
+    jr   z, .decrementwD009End                    ; $4AFE: $28 $04
     dec  a                                        ; $4B00: $3D
     ld   [wD009], a                               ; $4B01: $EA $09 $D0
+.decrementwD009End
 
-.jr_4B04
+    ; Decrement wD013 every 16 frames
     ldh  a, [hFrameCounter]                       ; $4B04: $F0 $E7
     and  $0F                                      ; $4B06: $E6 $0F
-    jr   nz, .jr_4B14                             ; $4B08: $20 $0A
-
+    jr   nz, .decrementwD013End                   ; $4B08: $20 $0A
     ld   a, [wD013]                               ; $4B0A: $FA $13 $D0
     and  a                                        ; $4B0D: $A7
-    jr   z, .jr_4B14                              ; $4B0E: $28 $04
-
+    jr   z, .decrementwD013End                    ; $4B0E: $28 $04
     dec  a                                        ; $4B10: $3D
     ld   [wD013], a                               ; $4B11: $EA $13 $D0
+.decrementwD013End
 
-.jr_4B14
     ld   a, [wD01E]                               ; $4B14: $FA $1E $D0
     and  a                                        ; $4B17: $A7
     jr   z, .jr_4B22                              ; $4B18: $28 $08
@@ -1087,8 +1094,9 @@ EndCreditsEntryPoint::
     ld   [wD01E], a                               ; $4B1B: $EA $1E $D0
     ld   hl, wD008                                ; $4B1E: $21 $08 $D0
     inc  [hl]                                     ; $4B21: $34
-
 .jr_4B22
+
+    ; Main ending sequence jump table
     ld   a, [wGameplaySubtype]                    ; $4B22: $FA $96 $DB
     JP_TABLE                                      ; $4B25: $C7
 ._00 dw CreditsInitHandler
@@ -3951,9 +3959,10 @@ jr_017_64B3:
 func_017_64D8::
     ld   a, [wD006]                               ; $64D8: $FA $06 $D0
     and  a                                        ; $64DB: $A7
-    jr   nz, ret_017_651D                         ; $64DC: $20 $3F
+    jr   nz, TransitionToNextEndingScene.return   ; $64DC: $20 $3F
 
-func_017_64DE::
+; Cleanup state, and increment wGameplaySubtype to move to the next scene.
+TransitionToNextEndingScene::
     xor  a                                        ; $64DE: $AF
     ld   [wCreditsSubscene], a                    ; $64DF: $EA $0E $D0
     ld   [wEntitiesStatusTable+7], a              ; $64E2: $EA $87 $C2
@@ -3968,22 +3977,27 @@ func_017_64DE::
     ldh  [hBaseScrollY], a                        ; $64FD: $E0 $97
     ld   [wD00F], a                               ; $64FF: $EA $0F $D0
     ld   [wD00F], a                               ; $6502: $EA $0F $D0
+
     call ResetCreditsSceneVariables               ; $6505: $CD $A5 $4D
+
     ; Disable LCD STAT interrupt
     ld   hl, rIE                                  ; $6508: $21 $FF $FF
     res  IEB_STAT, [hl]                           ; $650B: $CB $8E
+
     ; Set OAM size to 8x16
     ld   hl, wLCDControl                          ; $650D: $21 $FD $D6
     set  2, [hl]                                  ; $6510: $CB $D6
+
     ld   hl, wGameplaySubtype                     ; $6512: $21 $96 $DB
     inc  [hl]                                     ; $6515: $34
+
+    ; When reaching the last scene, reset to the first one
     ld   a, [hl]                                  ; $6516: $7E
     cp   $0A                                      ; $6517: $FE $0A
-    jr   nz, ret_017_651D                         ; $6519: $20 $02
-
+    jr   nz, .return                              ; $6519: $20 $02
     ld   [hl], $00                                ; $651B: $36 $00
 
-ret_017_651D:
+.return
     ret                                           ; $651D: $C9
 
 Data_017_651E::
@@ -4551,7 +4565,7 @@ LinkSeatedOnLog8Handler::
     ld   [wBGPalette], a                          ; $6C9E: $EA $97 $DB
     ld   a, $17                                   ; $6CA1: $3E $17
     call ClearFileMenuBG_trampoline               ; $6CA3: $CD $FA $08
-    jp   func_017_64DE                            ; $6CA6: $C3 $DE $64
+    jp   TransitionToNextEndingScene              ; $6CA6: $C3 $DE $64
 
 .jr_6CA9
     CREDITS_MACRO_LDH_AND_LD
@@ -4834,7 +4848,7 @@ CreditsLinkFaceCloseUp6Handler::
     and  a                                        ; $6E68: $A7
     jr   nz, .ret_6E6E                            ; $6E69: $20 $03
 
-    jp   func_017_64DE                            ; $6E6B: $C3 $DE $64
+    jp   TransitionToNextEndingScene              ; $6E6B: $C3 $DE $64
 
 .ret_6E6E
     ret                                           ; $6E6E: $C9

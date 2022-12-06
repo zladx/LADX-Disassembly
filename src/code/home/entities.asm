@@ -9,11 +9,11 @@
 ;   a    value read from BowWowEatableEntitiesTable
 CanBowWowEatEntity::
     ld   a, $14                                   ; $3925: $3E $14
-    ld   [MBC3SelectBank], a                      ; $3927: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $3927: $EA $00 $21
     ld   hl, BowWowEatableEntitiesTable           ; $392A: $21 $18 $52
     add  hl, de                                   ; $392D: $19
     ld   a, [hl]                                  ; $392E: $7E
-    ld   hl, MBC3SelectBank                       ; $392F: $21 $00 $21
+    ld   hl, rSelectROMBank                       ; $392F: $21 $00 $21
     ld   [hl], $05                                ; $3932: $36 $05
     ret                                           ; $3934: $C9
 
@@ -46,7 +46,7 @@ label_3970::
 label_397B::
     callsb func_014_5347                          ; $397B: $3E $14 $EA $00 $21 $CD $47 $53
     ld   a, $03                                   ; $3983: $3E $03
-    ld   [MBC3SelectBank], a                      ; $3985: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $3985: $EA $00 $21
     ret                                           ; $3988: $C9
 
 data_3989::
@@ -102,7 +102,7 @@ AnimateEntities::
     ld   [wOAMNextAvailableSlot], a               ; $39CB: $EA $C0 $C3
     callsb func_020_4303                          ; $39CE: $3E $20 $EA $00 $21 $CD $03 $43
     xor  a                                        ; $39D6: $AF
-    ld   [MBC3SelectBank], a                      ; $39D7: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $39D7: $EA $00 $21
     ld   a, [wDialogState]                        ; $39DA: $FA $9F $C1
     and  a                                        ; $39DD: $A7
     jr   nz, .label_39E3                          ; $39DE: $20 $03
@@ -111,7 +111,7 @@ AnimateEntities::
 .label_39E3
     ld   a, BANK(func_020_6352)                   ; $39E3: $3E $20
     ld   [wCurrentBank], a                        ; $39E5: $EA $AF $DB
-    ld   [MBC3SelectBank], a                      ; $39E8: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $39E8: $EA $00 $21
     call func_020_6352                            ; $39EB: $CD $52 $63
 
     ; Initialize the entities counter
@@ -150,7 +150,7 @@ AnimateEntities::
 ResetEntity_trampoline::
     callsb ResetEntity                            ; $3A0A: $3E $15 $EA $00 $21 $CD $00 $40
     ld   a, $03                                   ; $3A12: $3E $03
-    ld   [MBC3SelectBank], a                      ; $3A14: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $3A14: $EA $00 $21
     ret                                           ; $3A17: $C9
 
 ; For a given entity slot, call the relevant entity handler
@@ -176,7 +176,7 @@ AnimateEntity::
 
     ld   a, BANK(UpdateEntityPositionForRoomTransition) ; $3A2D: $3E $19
     ld   [wCurrentBank], a                        ; $3A2F: $EA $AF $DB
-    ld   [MBC3SelectBank], a                      ; $3A32: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $3A32: $EA $00 $21
 
     ldh  a, [hActiveEntityType]                   ; $3A35: $F0 $EB
     cp   ENTITY_RAFT_RAFT_OWNER                   ; $3A37: $FE $6A
@@ -200,13 +200,13 @@ AnimateEntity::
 
     ld   a, BANK(UpdateEntityTimers)              ; $3A54: $3E $14
     ld   [wCurrentBank], a                        ; $3A56: $EA $AF $DB
-    ld   [MBC3SelectBank], a                      ; $3A59: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $3A59: $EA $00 $21
     call UpdateEntityTimers                       ; $3A5C: $CD $73 $4D
 
     ; Select bank 3
     ld   a, $03                                   ; $3A5F: $3E $03
     ld   [wCurrentBank], a                        ; $3A61: $EA $AF $DB
-    ld   [MBC3SelectBank], a                      ; $3A64: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $3A64: $EA $00 $21
 
     ldh  a, [hActiveEntityStatus]                 ; $3A67: $F0 $EA
     cp   ENTITY_STATUS_ACTIVE                     ; $3A69: $FE $05
@@ -227,14 +227,14 @@ ExecuteActiveEntityHandler_trampoline::
     call ExecuteActiveEntityHandler               ; $3A81: $CD $8D $3A
     ld   a, $03                                   ; $3A84: $3E $03
     ld   [wCurrentBank], a                        ; $3A86: $EA $AF $DB
-    ld   [MBC3SelectBank], a                      ; $3A89: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $3A89: $EA $00 $21
     ret                                           ; $3A8C: $C9
 
 ; Read the entity handler address in the handlers table,
 ; then jump to execution.
 ExecuteActiveEntityHandler::
     ld   a, BANK(EntityHandlersTable)             ; $3A8D: $3E $20
-    ld   [MBC3SelectBank], a                      ; $3A8F: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $3A8F: $EA $00 $21
 
     ; de = active entity id
     ldh  a, [hActiveEntityType]                   ; $3A92: $F0 $EB
@@ -261,7 +261,7 @@ ExecuteActiveEntityHandler::
     ld   l, e                                     ; $3AA1: $6B
     ld   h, d                                     ; $3AA2: $62
     ld   [wCurrentBank], a                        ; $3AA3: $EA $AF $DB
-    ld   [MBC3SelectBank], a                      ; $3AA6: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $3AA6: $EA $00 $21
 
     ; Jump to the entity handler
     jp   hl                                       ; $3AA9: $E9
@@ -391,7 +391,7 @@ label_3B7B::
 SpawnNewEntity_trampoline::
     push af                                       ; $3B86: $F5
     ld   a, BANK(SpawnNewEntity)                  ; $3B87: $3E $03
-    ld   [MBC3SelectBank], a                      ; $3B89: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $3B89: $EA $00 $21
     pop  af                                       ; $3B8C: $F1
     call SpawnNewEntity                           ; $3B8D: $CD $CA $64
     rr   l                                        ; $3B90: $CB $1D
@@ -402,7 +402,7 @@ SpawnNewEntity_trampoline::
 SpawnNewEntityInRange_trampoline::
     push af                                       ; $3B98: $F5
     ld   a, BANK(SpawnNewEntityInRange)           ; $3B99: $3E $03
-    ld   [MBC3SelectBank], a                      ; $3B9B: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $3B9B: $EA $00 $21
     pop  af                                       ; $3B9E: $F1
     call SpawnNewEntityInRange                    ; $3B9F: $CD $CC $64
     rr   l                                        ; $3BA2: $CB $1D
@@ -411,15 +411,11 @@ SpawnNewEntityInRange_trampoline::
     ret                                           ; $3BA9: $C9
 
 ApplyVectorTowardsLink_trampoline::
-    ld   hl, MBC3SelectBank                       ; $3BAA: $21 $00 $21
-    ld   [hl], BANK(ApplyVectorTowardsLink)       ; $3BAD: $36 $03
-    call ApplyVectorTowardsLink                   ; $3BAF: $CD $C7 $7E
+    callhl ApplyVectorTowardsLink                 ; $3BAA: $21 $00 $21 $36 $03 $CD $C7 $7E
     jp   ReloadSavedBank                          ; $3BB2: $C3 $1D $08
 
 GetVectorTowardsLink_trampoline::
-    ld   hl, MBC3SelectBank                       ; $3BB5: $21 $00 $21
-    ld   [hl], BANK(GetVectorTowardsLink)         ; $3BB8: $36 $03
-    call GetVectorTowardsLink                     ; $3BBA: $CD $45 $7E
+    callhl GetVectorTowardsLink                   ; $3BB5: $21 $00 $21 $36 $03 $CD $45 $7E
     jp   ReloadSavedBank                          ; $3BBD: $C3 $1D $08
 
 ; Render a pair of sprites for the active entity to the OAM buffer.
@@ -699,7 +695,7 @@ RenderActiveEntitySprite::
 
 label_3CD9::
     ld   a, $15                                   ; $3CD9: $3E $15
-    ld   [MBC3SelectBank], a                      ; $3CDB: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $3CDB: $EA $00 $21
     jr   label_3C71                               ; $3CDE: $18 $91
 
 ; Render a large rectangle of sprites using the entire OAM buffer.
@@ -969,10 +965,8 @@ label_3E34::
     callhl SmashRock                              ; $3E34: $21 $00 $21 $36 $03 $CD $07 $54
     jp   ReloadSavedBank                          ; $3E3C: $C3 $1D $08
 
-LoadHeartsAndRuppeesCount::
-    ld   hl, MBC3SelectBank                       ; $3E3F: $21 $00 $21
-    ld   [hl], BANK(LoadRupeesDigits)             ; $3E42: $36 $02
-    call LoadRupeesDigits                         ; $3E44: $CD $CE $62
+LoadHeartsAndRupeesCount::
+    callhl LoadRupeesDigits                       ; $3E3F: $21 $00 $21 $36 $02 $CD $CE $62
     call LoadHeartsCount                          ; $3E47: $CD $14 $64
     jp   ReloadSavedBank                          ; $3E4A: $C3 $1D $08
 
@@ -982,7 +976,7 @@ label_3E4D::
     jp   SwitchBank                               ; $3E57: $C3 $0C $08
 
 label_3E5A::
-    ld   hl, MBC3SelectBank                       ; $3E5A: $21 $00 $21
+    ld   hl, rSelectROMBank                       ; $3E5A: $21 $00 $21
     ld   [hl], BANK(func_020_5C9C)                ; $3E5D: $36 $20
     ld   c, $01                                   ; $3E5F: $0E $01
     ld   b, $00                                   ; $3E61: $06 $00
@@ -1168,7 +1162,7 @@ data_3F48::
 DidKillEnemy::
     ld   a, BANK(SpawnEnemyDrop)                  ; $3F50: $3E $03
     ld   [wEnemyWasKilled], a                     ; $3F52: $EA $13 $C1
-    ld   [MBC3SelectBank], a                      ; $3F55: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $3F55: $EA $00 $21
     call SpawnEnemyDrop                           ; $3F58: $CD $CF $55
     call ReloadSavedBank                          ; $3F5B: $CD $1D $08
 

@@ -19,13 +19,13 @@ endm
 ; Farcall using direct bank selection
 macro callsb
     ld   a, BANK(\1)
-    ld   [MBC3SelectBank], a
+    ld   [rSelectROMBank], a
     call \1
 endm
 
 ; Farcall using direct bank selection with hl
 macro callhl
-    ld   hl, MBC3SelectBank
+    ld   hl, rSelectROMBank
     ld   [hl], BANK(\1)
     call \1
 endm
@@ -40,7 +40,7 @@ endm
 ; Jump using SwitchBank
 macro jpsb
     ld   a, BANK(\1)
-    ld   [MBC3SelectBank], a
+    ld   [rSelectROMBank], a
     jp   \1
 endm
 

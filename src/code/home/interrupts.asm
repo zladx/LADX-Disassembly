@@ -129,7 +129,7 @@ InterruptSerial::
     push af                                       ; $0408: $F5
     callsb PrinterInterruptSerial                 ; $0409: $3E $28 $EA $00 $21 $CD $01 $46
     ld   a, [wCurrentBank]                        ; $0411: $FA $AF $DB
-    ld   [MBC3SelectBank], a                      ; $0414: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $0414: $EA $00 $21
     pop  af                                       ; $0417: $F1
     reti                                          ; $0418: $D9
 
@@ -187,13 +187,13 @@ LoadRequestedGfx::
     ; Read and execute a wDrawCommand for loading wBGMapToLoad.
     callsb GetBGCopyRequest                       ; $0445: $3E $20 $EA $00 $21 $CD $77 $45
     ld   a, BANK(BGTilemaps)                      ; $044D: $3E $08
-    ld   [MBC3SelectBank], a                      ; $044F: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $044F: $EA $00 $21
     call ExecuteDrawCommands.noRoomTransition     ; $0452: $CD $2D $29
 
     ; Restore tilesets bank
     ld   a, $0C                                   ; $0455: $3E $0C
     call AdjustBankNumberForGBC                   ; $0457: $CD $0B $0B
-    ld   [MBC3SelectBank], a                      ; $045A: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $045A: $EA $00 $21
 
 .clearFlagsAndReturn
     xor  a                                        ; $045D: $AF
@@ -416,7 +416,7 @@ InterruptVBlank::
     jr   z, .vblankDone                           ; $0559: $28 $0E
     callsb CopyPalettesToVRAM                     ; $055B: $3E $21 $EA $00 $21 $CD $00 $40
     ld   a, [wCurrentBank]                        ; $0563: $FA $AF $DB
-    ld   [MBC3SelectBank], a                      ; $0566: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $0566: $EA $00 $21
 
 .vblankDone
     ei                                            ; $0569: $FB
@@ -465,7 +465,7 @@ PhotoAlbumVBlankHandler::
     callsw PrinterInterruptVBlank                 ; $05AB: $3E $28 $CD $0C $08 $CD $16 $46
     pop  af                                       ; $05B3: $F1
     ld   [wCurrentBank], a                        ; $05B4: $EA $AF $DB
-    ld   [MBC3SelectBank], a                      ; $05B7: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $05B7: $EA $00 $21
     jr   InterruptVBlank.vblankDoneInterruptsEnabled ; $05BA: $18 $AE
 
 ; Copy requested BG tiles or entity tiles to VRAM during V-Blank.
@@ -516,7 +516,7 @@ ENDC
 
     ld   a, BANK(Dungeons2Tiles)                  ; $05EE: $3E $0D
     call AdjustBankNumberForGBC                   ; $05F0: $CD $0B $0B
-    ld   [MBC3SelectBank], a                      ; $05F3: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $05F3: $EA $00 $21
     ldh  a, [hBGTilesLoadingStage]                ; $05F6: $F0 $92
     ld   c, a                                     ; $05F8: $4F
     ld   b, $00                                   ; $05F9: $06 $00
@@ -542,7 +542,7 @@ ENDC
     cp   MAP_COLOR_DUNGEON                        ; $061E: $FE $FF
     jr   nz, .colorDungeonEnd                     ; $0620: $20 $0D
     callsb GetColorDungeonTilesAddress            ; $0622: $3E $20 $EA $00 $21 $CD $16 $46
-    ld   [MBC3SelectBank], a                      ; $062A: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $062A: $EA $00 $21
     jr   .copyData                                ; $062D: $18 $12
 .colorDungeonEnd
 
@@ -579,7 +579,7 @@ ENDC
 LoadOverworldBGTiles::
     ld   a, $0F                                   ; $0656: $3E $0F
     call AdjustBankNumberForGBC                   ; $0658: $CD $0B $0B
-    ld   [MBC3SelectBank], a                      ; $065B: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $065B: $EA $00 $21
     ; de = vTiles2 + [hBGTilesLoadingStage] * 6
     ldh  a, [hBGTilesLoadingStage]                ; $065E: $F0 $92
     ld   c, a                                     ; $0660: $4F
@@ -686,7 +686,7 @@ ENDC
     call AdjustBankNumberForGBC                   ; $06F4: $CD $0B $0B
 .adjustBankEnd
 
-    ld   [MBC3SelectBank], a                      ; $06F7: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $06F7: $EA $00 $21
     ldh  a, [hEntityTilesLoadingStageA]           ; $06FA: $F0 $93
     ld   c, a                                     ; $06FC: $4F
     ld   b, $00                                   ; $06FD: $06 $00
@@ -764,7 +764,7 @@ UpdateEntityTilesB::
     call AdjustBankNumberForGBC                   ; $0761: $CD $0B $0B
 .jp_0764
 
-    ld   [MBC3SelectBank], a                      ; $0764: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $0764: $EA $00 $21
     ld   a, [wEntityTilesLoadingStageB]           ; $0767: $FA $0F $C1
     ld   c, a                                     ; $076A: $4F
     ld   b, $00                                   ; $076B: $06 $00
@@ -858,7 +858,7 @@ LoadBGTilesCommands8ToD::
     ld   l, a                                     ; $07E9: $6F
     ld   a, $0C                                   ; $07EA: $3E $0C
     call AdjustBankNumberForGBC                   ; $07EC: $CD $0B $0B
-    ld   [MBC3SelectBank], a                      ; $07EF: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $07EF: $EA $00 $21
     ; Data length
     ld   bc, $40                                  ; $07F2: $01 $40 $00
     call CopyData                                 ; $07F5: $CD $14 $29

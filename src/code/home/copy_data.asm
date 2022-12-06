@@ -5,10 +5,10 @@
 ;   de : destination address
 ;   hl : source address
 CopyDataFromBank::
-    ld   [MBC3SelectBank], a                      ; $2908: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $2908: $EA $00 $21
     call CopyData                                 ; $290B: $CD $14 $29
     ld   a, $01                                   ; $290E: $3E $01
-    ld   [MBC3SelectBank], a                      ; $2910: $EA $00 $21
+    ld   [rSelectROMBank], a                      ; $2910: $EA $00 $21
     ret                                           ; $2913: $C9
 
 ; Copy data

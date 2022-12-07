@@ -1551,7 +1551,7 @@ LinkDirectionToLinkAnimationState2::
     db   $71, $72, $6F, $70, $73, $74, $6D, $6E
 
 func_002_4B49::
-    ld   a, [wC1C7]                               ; $4B49: $FA $C7 $C1
+    ld   a, [wLinkUsingShovel]                    ; $4B49: $FA $C7 $C1
     and  a                                        ; $4B4C: $A7
     jr   z, .return                               ; $4B4D: $28 $70
 
@@ -1577,9 +1577,9 @@ func_002_4B49::
     ld   [wSwordAnimationState], a                ; $4B6C: $EA $37 $C1
     ld   [wIsUsingSpinAttack], a                  ; $4B6F: $EA $21 $C1
     ld   [wSwordCharge], a                        ; $4B72: $EA $22 $C1
-    ld   a, [wC1C8]                               ; $4B75: $FA $C8 $C1
+    ld   a, [wLinkUsingShovelTimer]               ; $4B75: $FA $C8 $C1
     inc  a                                        ; $4B78: $3C
-    ld   [wC1C8], a                               ; $4B79: $EA $C8 $C1
+    ld   [wLinkUsingShovelTimer], a               ; $4B79: $EA $C8 $C1
     cp   $10                                      ; $4B7C: $FE $10
     jr   nz, .jr_002_4B85                         ; $4B7E: $20 $05
 
@@ -1591,7 +1591,7 @@ func_002_4B49::
     cp   $18                                      ; $4B85: $FE $18
     jr   nz, .jr_002_4BA9                         ; $4B87: $20 $20
 
-    ld   a, [wC1C7]                               ; $4B89: $FA $C7 $C1
+    ld   a, [wLinkUsingShovel]                    ; $4B89: $FA $C7 $C1
     cp   $02                                      ; $4B8C: $FE $02
     jr   nz, .jr_002_4BA1                         ; $4B8E: $20 $11
 
@@ -1607,7 +1607,7 @@ func_002_4B49::
 
 .jr_002_4BA1
     xor  a                                        ; $4BA1: $AF
-    ld   [wC1C7], a                               ; $4BA2: $EA $C7 $C1
+    ld   [wLinkUsingShovel], a                    ; $4BA2: $EA $C7 $C1
     ld   [wC1AC], a                               ; $4BA5: $EA $AC $C1
     ret                                           ; $4BA8: $C9
 
@@ -1652,7 +1652,7 @@ func_002_4BC8::
     ret  c                                        ; $4BCB: $D8
 
     ld   a, $02                                   ; $4BCC: $3E $02
-    ld   [wC1C7], a                               ; $4BCE: $EA $C7 $C1
+    ld   [wLinkUsingShovel], a                    ; $4BCE: $EA $C7 $C1
     jp   label_002_4C92                           ; $4BD1: $C3 $92 $4C
 
 func_002_4BD4::

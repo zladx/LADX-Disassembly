@@ -894,12 +894,12 @@ ds 1 ; C1C5
 wC1C6::
   ds 1 ; C1C6
 
-; Unlabeled
-wC1C7::
+; 00 per default, 01 when using the shovel.
+wLinkUsingShovel::
   ds 1 ; C1C7
 
-; Unlabeled
-wC1C8::
+; Counter from $00 to $18 when the shovel animation is playing.
+wLinkUsingShovelTimer::
   ds 1 ; C1C8
 
 ; Unlabeled

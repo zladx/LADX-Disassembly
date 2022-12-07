@@ -4197,12 +4197,12 @@ SetWorldMusicTrack::
     ldh  [hMusicFadeOutTimer], a                  ; $27CD: $E0 $A8
     ret                                           ; $27CF: $C9
 
-EnableExternalRAMWriting::
+EnableSRAM::
     push hl                                       ; $27D0: $E5
     ld   hl, rRAMB                                ; $27D1: $21 $00 $40
     ld   [hl], $00 ; Switch to RAM bank 0         ; $27D4: $36 $00
     ld   hl, rRAMG                                ; $27D6: $21 $00 $00
-    ld   [hl], CART_SRAM_ENABLE ; Enable external RAM writing ; $27D9: $36 $0A
+    ld   [hl], CART_SRAM_ENABLE ; Enable external RAM ; $27D9: $36 $0A
     pop  hl                                       ; $27DB: $E1
     ret                                           ; $27DC: $C9
 

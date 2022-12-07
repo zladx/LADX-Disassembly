@@ -168,7 +168,7 @@ label_40D6::
 
 jr_001_40F9::
     call label_27F2                               ; $40F9: $CD $F2 $27
-    call func_001_5DE6                            ; $40FC: $CD $E6 $5D
+    call SaveGameToFile                           ; $40FC: $CD $E6 $5D
     call ClearWRAMAndLowerHRAM                    ; $40FF: $CD $CB $29
     xor  a                                        ; $4102: $AF
     ldh  [hActiveEntityTilesOffset], a            ; $4103: $E0 $F5

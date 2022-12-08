@@ -34,7 +34,7 @@ BouldersEntityHandler::
     ld   [hl], $10                                ; $439A: $36 $10
     ld   hl, wEntitiesPhysicsFlagsTable           ; $439C: $21 $40 $C3
     add  hl, de                                   ; $439F: $19
-    ld   [hl], $12                                ; $43A0: $36 $12
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ; $43A0: $36 $12
     ld   hl, wEntitiesHitboxFlagsTable            ; $43A2: $21 $50 $C3
     add  hl, de                                   ; $43A5: $19
     set  7, [hl]                                  ; $43A6: $CB $FE

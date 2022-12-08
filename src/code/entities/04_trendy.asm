@@ -106,6 +106,7 @@ Data_004_6F15::
 Data_004_6F1B::
     db   $3E, $4E, $4E, $00, $00, $00
 
+; Values for wEntitiesPhysicsFlagsTable
 Data_004_6F21::
     db   $04, $01, $02, $05, $02, $02, $00, $03, $04, $81, $81, $81, $82, $81, $81
 
@@ -152,7 +153,6 @@ jr_004_6F3C:
     ld   hl, Data_004_6F21                        ; $6F68: $21 $21 $6F
     add  hl, de                                   ; $6F6B: $19
 
-.jr_6F6C
     ld   a, [hl]                                  ; $6F6C: $7E
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6F6D: $21 $40 $C3
     add  hl, de                                   ; $6F70: $19

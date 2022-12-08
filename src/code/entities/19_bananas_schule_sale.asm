@@ -132,7 +132,7 @@ BananasSchuleState2Handler::
     ld   [hl], $20                                ; $6DAF: $36 $20
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6DB1: $21 $40 $C3
     add  hl, de                                   ; $6DB4: $19
-    ld   [hl], $C2                                ; $6DB5: $36 $C2
+    ld   [hl], 2 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $6DB5: $36 $C2
     ld   a, JINGLE_JUMP                           ; $6DB7: $3E $24
     ldh  [hJingle], a                             ; $6DB9: $E0 $F2
     ldh  a, [hIsGBC]                              ; $6DBB: $F0 $FE
@@ -266,7 +266,7 @@ BananasSchuleSaleEntityHandler::
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6F17: $21 $40 $C3
     add  hl, bc                                   ; $6F1A: $09
-    ld   [hl], $C3                                ; $6F1B: $36 $C3
+    ld   [hl], 3 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $6F1B: $36 $C3
     ld   hl, Data_019_6F05                        ; $6F1D: $21 $05 $6F
     ld   c, $03                                   ; $6F20: $0E $03
     jp   RenderActiveEntitySpritesRect            ; $6F22: $C3 $E6 $3C

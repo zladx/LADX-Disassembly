@@ -280,7 +280,7 @@ TurtleRockHeadState5Handler::
     ld   [hl], $40                                ; $74A0: $36 $40
     ld   hl, wEntitiesPhysicsFlagsTable           ; $74A2: $21 $40 $C3
     add  hl, bc                                   ; $74A5: $09
-    res  7, [hl]                                  ; $74A6: $CB $BE
+    res  ENTITY_PHYSICS_B_HARMLESS, [hl]          ; $74A6: $CB $BE
     ld   hl, wEntitiesOptions1Table               ; $74A8: $21 $30 $C4
     add  hl, bc                                   ; $74AB: $09
     res  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $74AC: $CB $B6

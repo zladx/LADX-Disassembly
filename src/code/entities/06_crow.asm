@@ -209,7 +209,7 @@ label_006_5D8A:
 jr_006_5D9F:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5D9F: $21 $40 $C3
     add  hl, bc                                   ; $5DA2: $09
-    ld   [hl], $12                                ; $5DA3: $36 $12
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ; $5DA3: $36 $12
     call GetEntityTransitionCountdown             ; $5DA5: $CD $05 $0C
     ld   [hl], $22                                ; $5DA8: $36 $22
     jp   IncrementEntityState                     ; $5DAA: $C3 $12 $3B

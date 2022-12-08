@@ -195,7 +195,7 @@ jr_006_53F9:
     ld   [hl], $0F                                ; $5400: $36 $0F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5402: $21 $40 $C3
     add  hl, de                                   ; $5405: $19
-    ld   [hl], $C4                                ; $5406: $36 $C4
+    ld   [hl], 4 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $5406: $36 $C4
     ld   a, TRANSCIENT_VFX_POOF                   ; $5408: $3E $02
     call AddTranscientVfx                         ; $540A: $CD $C7 $0C
     ld   a, $29                                   ; $540D: $3E $29
@@ -255,7 +255,7 @@ ArmosKnightState2Handler::
     call IncrementEntityState                     ; $5460: $CD $12 $3B
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5463: $21 $40 $C3
     add  hl, bc                                   ; $5466: $09
-    res  7, [hl]                                  ; $5467: $CB $BE
+    res  ENTITY_PHYSICS_B_HARMLESS, [hl]          ; $5467: $CB $BE
     ld   hl, wEntitiesHitboxFlagsTable            ; $5469: $21 $50 $C3
     add  hl, bc                                   ; $546C: $09
     res  7, [hl]                                  ; $546D: $CB $BE

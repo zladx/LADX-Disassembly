@@ -208,12 +208,12 @@ label_006_7709:
 jr_006_772D:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $772D: $21 $40 $C3
     add  hl, bc                                   ; $7730: $09
-    ld   a, $02                                   ; $7731: $3E $02
+    ld   a, 2                                     ; $7731: $3E $02
     ld   [hl], a                                  ; $7733: $77
     ret                                           ; $7734: $C9
 
 label_006_7735:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $7735: $21 $40 $C3
     add  hl, bc                                   ; $7738: $09
-    ld   [hl], $42                                ; $7739: $36 $42
+    ld   [hl], 2 | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $7739: $36 $42
     ret                                           ; $773B: $C9

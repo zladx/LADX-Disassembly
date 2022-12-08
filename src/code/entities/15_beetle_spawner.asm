@@ -39,7 +39,7 @@ BeetleSpawnerEntityHandler::
     ld   [hl], a                                  ; $754C: $77
     ld   hl, wEntitiesPhysicsFlagsTable           ; $754D: $21 $40 $C3
     add  hl, de                                   ; $7550: $19
-    ld   [hl], $12                                ; $7551: $36 $12
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ; $7551: $36 $12
     ld   hl, wEntitiesPrivateState3Table          ; $7553: $21 $D0 $C2
     add  hl, de                                   ; $7556: $19
     ld   [hl], $01                                ; $7557: $36 $01

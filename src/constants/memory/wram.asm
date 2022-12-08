@@ -1091,12 +1091,13 @@ wEntitiesSpeedZTable::
 wEntitiesSpeedZAccTable::
   ds $10 ; C330 - C33F
 
-; Physics attribute flags:
-; bits 0-3: of number allocated sprites in OAM memory,
-; bit 4: display shadow on posZ > 0 if set,
-; bit 5: item is pickable,
-; bit 6: doesn't react to projectiles if set (arrow, hookshot, etc.),
-; bit 7: doesn't hurt Link on collision if set
+; Physics attribute flags. See ENTITY_PHYSICS_* for possible values.
+;
+; bits 0-3: number of allocated sprites in OAM memory,
+; bit 4: display shadow on posZ > 0 if set (ENTITY_PHYSICS_SHADOW),
+; bit 5: item can be picked up (ENTITY_PHYSICS_GRABBABLE),
+; bit 6: doesn't react to projectiles if set (arrow, hookshot, etc.) (ENTITY_PHYSICS_PROJECTILE_NOCLIP),
+; bit 7: doesn't hurt Link on collision if set (ENTITY_PHYSICS_HARMLESS)
 wEntitiesPhysicsFlagsTable::
   ds $10 ; C340 - C34F
 
@@ -1135,7 +1136,7 @@ wEntitiesTypeTable::
 
 ; Index of an entity sprite variant, depending for instance on the direction,
 ; the tail waving, etc.
-; A sprite variant may use entirerly different tiles, or change only some of them.
+; A sprite variant may use entirely different tiles, or change only some of them.
 wEntitiesSpriteVariantTable::
   ds $10 ; C3B0 - C3BF
 

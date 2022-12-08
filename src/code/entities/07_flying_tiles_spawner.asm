@@ -103,7 +103,7 @@ func_007_74A8::
     ld   [hl], a                                  ; $7512: $77
     ld   hl, wEntitiesPhysicsFlagsTable           ; $7513: $21 $40 $C3
     add  hl, de                                   ; $7516: $19
-    ld   [hl], $12                                ; $7517: $36 $12
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ; $7517: $36 $12
     ld   hl, wEntitiesHitboxFlagsTable            ; $7519: $21 $50 $C3
     add  hl, de                                   ; $751C: $19
     ld   [hl], $00                                ; $751D: $36 $00

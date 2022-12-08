@@ -79,7 +79,7 @@ TarinEntityHandler::
     ; Handle Tarin's appearance in the credits
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4971: $21 $40 $C3
     add  hl, bc                                   ; $4974: $09
-    ld   [hl], $C4                                ; $4975: $36 $C4
+    ld   [hl], 4 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $4975: $36 $C4
     ld   hl, wEntitiesInertiaTable                ; $4977: $21 $D0 $C3
     add  hl, bc                                   ; $497A: $09
     ld   a, [hl]                                  ; $497B: $7E
@@ -806,7 +806,7 @@ jr_005_4D5D:
     ld   [hl], $30                                ; $4D94: $36 $30
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4D96: $21 $40 $C3
     add  hl, de                                   ; $4D99: $19
-    ld   [hl], $C1                                ; $4D9A: $36 $C1
+    ld   [hl], 1 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $4D9A: $36 $C1
     ld   hl, wEntitiesHitboxFlagsTable            ; $4D9C: $21 $50 $C3
     add  hl, de                                   ; $4D9F: $19
     ld   [hl], $00                                ; $4DA0: $36 $00

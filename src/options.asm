@@ -102,6 +102,10 @@ BANK_1C_VAR = 1
 ; __OPTIMIZATIONS_2__
 ;   Small optimizations that were likely bundled in when adding diacritics support,
 ;   and so appear in the Japanese and German versions, but not any others
+;
+; __OPTIMIZATIONS_3__
+;   Small optimizations that were implemented in version 1.1 of the Japanese and English
+;   revisions, but not backported to other language releases
 
 __PATCH_0__ = FALSE ; Applies to JP1+, EN1+, DE, FR
 __PATCH_1__ = FALSE ; Applies to DE, FR
@@ -117,6 +121,7 @@ __USE_FIXED_DIALOG_BANKS__ = FALSE ; TRUE in JP
 __RECALCULATE_MAX_HEARTS__ = FALSE ; Applies to DE1+, JP2+, EN2+, FR1+
 __OPTIMIZATIONS_1__ = FALSE ; Applies to JP1+, EN1+, DE, FR
 __OPTIMIZATIONS_2__ = FALSE ; Applies to DE, JP
+__OPTIMIZATIONS_3__ = FALSE ; Applies to JP1+, EN1+
 
 ; If the Key Cavern map is split into 1F and B1F on the subscreen.
 ; See also: https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening/Version_Differences#Key_Cavern
@@ -184,6 +189,7 @@ __PATCH_2__ = TRUE
 __PATCH_3__ = TRUE
 __PATCH_8__ = TRUE
 __OPTIMIZATIONS_1__ = TRUE
+__OPTIMIZATIONS_3__ = TRUE
 ENDC
 IF (VERSION > 1)
 __PATCH_4__ = TRUE
@@ -204,6 +210,7 @@ IF (VERSION > 0)
 __PATCH_0__ = TRUE
 __PATCH_3__ = TRUE
 __OPTIMIZATIONS_1__ = TRUE
+__OPTIMIZATIONS_3__ = TRUE
 ENDC
 IF (VERSION > 1)
 __PATCH_2__ = TRUE

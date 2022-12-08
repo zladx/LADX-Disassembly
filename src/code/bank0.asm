@@ -507,6 +507,7 @@ LoadPhotoBgMap_trampoline::
     ret                                           ; $0B0A: $C9
 
 IF __PATCH_3__
+; Unused code?
 func_036_72D5_trampoline::
     push af
     callsb func_036_72D5

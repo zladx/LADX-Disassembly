@@ -363,13 +363,16 @@ LOW_MAX_HEALTH    equ $07
 MEDIUM_MAX_HEALTH equ $0B
 ;HIGH_MAX_HEALTH   equ
 
+MIN_HEARTS          equ $03
+MAX_HEARTS          equ $0E
+
 ; how much time has to pass until the player can receive damage again
 DAMAGE_COOLDOWN_TIME equ $A0
 
 ; power up values
 POWER_UP_NONE             equ 0
 POWER_UP_PIECE_OF_POWER   equ 1
-POWER_UP_GUARDIAN_ACCORN  equ 2
+POWER_UP_GUARDIAN_ACORN   equ 2
 
 ; arrow values
 ARROW_MAX_ACTIVE_COUNT    equ 2 ; maximun amount of arrows in the air
@@ -381,9 +384,9 @@ HOOKSHOT_CHAIN_SPEED      equ $30
 ; Values for wActivePowerUp
 ACTIVE_POWER_UP_NONE            equ 0
 ACTIVE_POWER_UP_PIECE_OF_POWER  equ 1
-ACTIVE_POWER_UP_GUARDIAN_ACCORN equ 2
+ACTIVE_POWER_UP_GUARDIAN_ACORN  equ 2
 
-GUARDIAN_ACCORN_COUNTER_MAX                  equ $0C ; defines after how many random drops a guardian accorn is dropped
+GUARDIAN_ACORN_COUNTER_MAX                   equ $0C ; defines after how many random drops a guardian acorn is dropped
 PIECE_OF_POWER_COUNTER_MAX_LOW_MAX_HEALTH    equ $1E ; defines after how many random drops a piece of power is dropped
 PIECE_OF_POWER_COUNTER_MAX_MEDIUM_MAX_HEALTH equ $23
 PIECE_OF_POWER_COUNTER_MAX_HIGH_MAX_HEALTH   equ $28

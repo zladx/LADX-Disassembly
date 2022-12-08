@@ -43,12 +43,12 @@ FileSelectionPrepare1::
     jp   IncrementGameplaySubtypeAndReturn        ; $47FA: $C3 $D6 $44
 
 FileSelectionPrepare2::
-    call func_001_4DA6                            ; $47FD: $CD $A6 $4D
-    call func_001_4DBE                            ; $4800: $CD $BE $4D
+    call DrawSaveSlot1MaxHearts                   ; $47FD: $CD $A6 $4D
+    call DrawSaveSlot2MaxHearts                   ; $4800: $CD $BE $4D
     jp   IncrementGameplaySubtypeAndReturn        ; $4803: $C3 $D6 $44
 
 FileSelectionPrepare3::
-    call func_001_4DD6                            ; $4806: $CD $D6 $4D
+    call DrawSaveSlot3MaxHearts                   ; $4806: $CD $D6 $4D
     jp   IncrementGameplaySubtypeAndReturn        ; $4809: $C3 $D6 $44
 
 CopyDeathCountsToBG::
@@ -285,7 +285,7 @@ IF LANG_DE
 ENDC
 
 .start
-    call func_001_6BA8                            ; $48E8: $CD $A8 $6B
+    call MoveSelect                               ; $48E8: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $48EB: $F0 $CC
     and  J_A | J_START                            ; $48ED: $E6 $90
     jr   z, .jr_48F4                              ; $48EF: $28 $03
@@ -329,7 +329,7 @@ jr_001_4920::
     ldh  a, [hJoypadState]                        ; $4927: $F0 $CC
     and  J_RIGHT | J_LEFT                         ; $4929: $E6 $03
     jr   z, .jr_4938                              ; $492B: $28 $0B
-    call func_001_6BAE                            ; $492D: $CD $AE $6B
+    call MoveSelect.playMoveSelectionJingle       ; $492D: $CD $AE $6B
     ld   a, [wIsFileSelectionArrowShifted]        ; $4930: $FA $00 $D0
     xor  $01                                      ; $4933: $EE $01
     ld   [wIsFileSelectionArrowShifted], a        ; $4935: $EA $00 $D0
@@ -345,12 +345,12 @@ jr_001_4920::
     ld   a, FILE_64                               ; $4946: $3E $64
 
 .jr_4948::
-    ld   hl, wOAMBuffer + $8                      ; $4948: $21 $08 $C0
+    ld   hl, wOAMBuffer + $8 ; Arrow sprite              ; $4948: $21 $08 $C0
     ld   [hl], $88 ; y                            ; $494B: $36 $88
     inc  hl                                       ; $494D: $23
     ldi  [hl], a ; x                              ; $494E: $22
     ld   a, $BE                                   ; $494F: $3E $BE
-    ldi  [hl], a ; chr                            ; $4951: $22
+    ldi  [hl], a ; Tile                           ; $4951: $22
     xor  a                                        ; $4952: $AF
     ld   [hl], a                                  ; $4953: $77
 
@@ -703,7 +703,7 @@ ENDC
     ld   [hl], $18  ; write new save current health ; $4B14: $36 $18
     pop  hl                                       ; $4B16: $E1
     push hl                                       ; $4B17: $E5
-    ld   de, wMaxHealth - wBButtonSlot            ; $4B18: $11 $5B $00
+    ld   de, wMaxHearts - wBButtonSlot            ; $4B18: $11 $5B $00
     add  hl, de                                   ; $4B1B: $19
     ld   [hl], $03  ; write new save max health   ; $4B1C: $36 $03
     pop  hl                                       ; $4B1E: $E1
@@ -787,7 +787,7 @@ jr_001_4C1F::
     jr   jr_001_4C63                              ; $4C1F: $18 $42
 
 jr_001_4C21::
-    call func_001_6BAE                            ; $4C21: $CD $AE $6B
+    call MoveSelect.playMoveSelectionJingle       ; $4C21: $CD $AE $6B
     bit  1, a                                     ; $4C24: $CB $4F
     jr   nz, .jr_4C34                             ; $4C26: $20 $0C
     ld   a, [wDBA9]                               ; $4C28: $FA $A9 $DB
@@ -806,7 +806,7 @@ jr_001_4C21::
     jr   jr_001_4C5E                              ; $4C3F: $18 $1D
 
 jr_001_4C41::
-    call func_001_6BAE                            ; $4C41: $CD $AE $6B
+    call MoveSelect.playMoveSelectionJingle       ; $4C41: $CD $AE $6B
     bit  2, a                                     ; $4C44: $CB $57
     jr   z, .jr_4C53                              ; $4C46: $28 $0B
     ld   a, [wDBA9]                               ; $4C48: $FA $A9 $DB
@@ -1007,132 +1007,136 @@ FileDeletionState3Handler::
     jp   IncrementGameplaySubtypeAndReturn        ; $4D6A: $C3 $D6 $44 ; $4D6A: $C3 $D6 $44
 
 FileDeletionState4Handler::
-    call func_001_4D8B                            ; $4D6D: $CD $8B $4D ; $4D6D: $CD $8B $4D
-    call func_001_4D94                            ; $4D70: $CD $94 $4D ; $4D70: $CD $94 $4D
-    call func_001_4D9D                            ; $4D73: $CD $9D $4D ; $4D73: $CD $9D $4D
+    call DrawSaveSlot1Name                        ; $4D6D: $CD $8B $4D ; $4D6D: $CD $8B $4D
+    call DrawSaveSlot2Name                        ; $4D70: $CD $94 $4D ; $4D70: $CD $94 $4D
+    call DrawSaveSlot3Name                        ; $4D73: $CD $9D $4D ; $4D73: $CD $9D $4D
     jp   IncrementGameplaySubtypeAndReturn        ; $4D76: $C3 $D6 $44 ; $4D76: $C3 $D6 $44
 
 FileDeletionState5Handler::
-    call func_001_4DA6                            ; $4D79: $CD $A6 $4D ; $4D79: $CD $A6 $4D
-    call func_001_4DBE                            ; $4D7C: $CD $BE $4D ; $4D7C: $CD $BE $4D
+    call DrawSaveSlot1MaxHearts                   ; $4D79: $CD $A6 $4D
+    call DrawSaveSlot2MaxHearts                   ; $4D7C: $CD $BE $4D ; $4D7C: $CD $BE $4D
     jp   IncrementGameplaySubtypeAndReturn        ; $4D7F: $C3 $D6 $44 ; $4D7F: $C3 $D6 $44
 
 FileDeletionState6Handler::
-    call func_001_4DD6                            ; $4D82: $CD $D6 $4D ; $4D82: $CD $D6 $4D
+    call DrawSaveSlot3MaxHearts                   ; $4D82: $CD $D6 $4D ; $4D82: $CD $D6 $4D
     jp   IncrementGameplaySubtypeAndReturn        ; $4D85: $C3 $D6 $44 ; $4D85: $C3 $D6 $44
 
 FileDeletionState7Handler::
     jp   CopyDeathCountsToBG                      ; $4D88: $C3 $0C $48 ; $4D88: $C3 $0C $48
 
-func_001_4D8B::
+DrawSaveSlot1Name::
     ld   bc, $98C5                                ; $4D8B: $01 $C5 $98 ; $4D8B: $01 $C5 $98
     ld   de, wSaveSlot1Name                       ; $4D8E: $11 $80 $DB ; $4D8E: $11 $80 $DB
     jp   DrawSaveSlotName                         ; $4D91: $C3 $52 $48 ; $4D91: $C3 $52 $48
 
-func_001_4D94::
+DrawSaveSlot2Name::
     ld   bc, $9925                                ; $4D94: $01 $25 $99 ; $4D94: $01 $25 $99
     ld   de, wSaveSlot2Name                       ; $4D97: $11 $85 $DB ; $4D97: $11 $85 $DB
     jp   DrawSaveSlotName                         ; $4D9A: $C3 $52 $48 ; $4D9A: $C3 $52 $48
 
-func_001_4D9D::
+DrawSaveSlot3Name::
     ld   bc, $9985                                ; $4D9D: $01 $85 $99 ; $4D9D: $01 $85 $99
     ld   de, wSaveSlot3Name                       ; $4DA0: $11 $8A $DB ; $4DA0: $11 $8A $DB
     jp   DrawSaveSlotName                         ; $4DA3: $C3 $52 $48 ; $4DA3: $C3 $52 $48
 
-func_001_4DA6::
+DrawSaveSlot1MaxHearts::
     ld   a, [wSaveFilesCount]                     ; $4DA6: $FA $A7 $DB ; $4DA6: $FA $A7 $DB
     and  $01                                      ; $4DA9: $E6 $01 ; $4DA9: $E6 $01
-IF __PATCH_4__
+
+; If the __RECALCULATE_MAX_HEARTS__ patch is enabled, also clamp
+; the maximum number of hearts before drawing:
+IF __RECALCULATE_MAX_HEARTS__
     ret  z
     xor  a
     ld   hl, wFile1Health
-    ld   de, wFile1MaxHealth
-    ; fallthrough
-ELSE
-    jr   z, ret_001_4DBD                          ; $4DAB: $28 $10 ; $4DAB: $28 $10
+    ld   de, wFile1MaxHearts
 
-    xor  a                                        ; $4DAD: $AF ; $4DAD: $AF
-    ldh  [hMultiPurpose4], a                      ; $4DAE: $E0 $DB ; $4DAE: $E0 $DB
-    ld   a, [wFile1Health]                        ; $4DB0: $FA $06 $DC ; $4DB0: $FA $06 $DC
-    ldh  [hMultiPurpose2], a                      ; $4DB3: $E0 $D9 ; $4DB3: $E0 $D9
-    ld   a, [wFile1MaxHealth]                     ; $4DB5: $FA $09 $DC ; $4DB5: $FA $09 $DC
-    ldh  [hMultiPurpose3], a                      ; $4DB8: $E0 $DA ; $4DB8: $E0 $DA
-    jp   label_001_5D53                           ; $4DBA: $C3 $53 $5D ; $4DBA: $C3 $53 $5D
-ENDC
-
-IF __PATCH_4__
-jr_001_4db6:
+.clamp:
     ldh [hMultiPurpose4], a
     ld a, [hl]
     ldh [hMultiPurpose2], a
     ld a, [de]
-    cp $03
-    jr nc, jr_001_4dc2
-    ld a, $03
+    cp MIN_HEARTS
+    jr nc, .max
+    ld a, MIN_HEARTS
+.max:
+    cp MAX_HEARTS
+    jr c, .prepareDrawCommand
 
-jr_001_4dc2:
-    cp $0e
-    jr c, jr_001_4dc8
+    ld a, MAX_HEARTS
 
-    ld a, $0e
-
-jr_001_4dc8:
+.prepareDrawCommand:
     ld [de], a
     ldh [hMultiPurpose3], a
     swap a
     srl a
     cp [hl]
-    jp nc, label_001_5D53
+    jp nc, BuildSaveSlotHeartsDrawCommand
 
     ld [hl], a
     ldh [hMultiPurpose2], a
-    jp label_001_5D53
-
+    jp BuildSaveSlotHeartsDrawCommand
 ELSE
-ret_001_4DBD::
+    jr   z, .return                               ; $4DAB: $28 $10
+
+    xor  a                                        ; $4DAD: $AF
+    ldh  [hMultiPurpose4], a                      ; $4DAE: $E0 $DB
+    ld   a, [wFile1Health]                        ; $4DB0: $FA $06 $DC
+    ldh  [hMultiPurpose2], a                      ; $4DB3: $E0 $D9
+    ld   a, [wFile1MaxHearts]                     ; $4DB5: $FA $09 $DC
+    ldh  [hMultiPurpose3], a                      ; $4DB8: $E0 $DA
+    jp   BuildSaveSlotHeartsDrawCommand           ; $4DBA: $C3 $53 $5D
+
+.return::
     ret                                           ; $4DBD: $C9 ; $4DBD: $C9
 ENDC
 
-func_001_4DBE::
+DrawSaveSlot2MaxHearts::
     ld   a, [wSaveFilesCount]                     ; $4DBE: $FA $A7 $DB ; $4DBE: $FA $A7 $DB
     and  $02                                      ; $4DC1: $E6 $02 ; $4DC1: $E6 $02
-IF __PATCH_4__
+; If the __RECALCULATE_MAX_HEARTS__ patch is enabled, also clamp
+; the maximum number of hearts before drawing (jumps into
+; DrawSaveSlot1MaxHearts to avoid code duplication):
+IF __RECALCULATE_MAX_HEARTS__
     ret  z
     ld   a, $01
     ld   hl, wFile2Health
-    ld   de, wFile2MaxHealth
-    jr   jr_001_4db6
+    ld   de, wFile2MaxHearts
+    jr   DrawSaveSlot1MaxHearts.clamp
 ELSE
-    jr   z, ret_001_4DBD                          ; $4DC3: $28 $F8 ; $4DC3: $28 $F8
+    jr   z, DrawSaveSlot1MaxHearts.return         ; $4DC3: $28 $F8
 
     ld   a, $01                                   ; $4DC5: $3E $01 ; $4DC5: $3E $01
     ldh  [hMultiPurpose4], a                      ; $4DC7: $E0 $DB ; $4DC7: $E0 $DB
     ld   a, [wFile2Health]                        ; $4DC9: $FA $07 $DC ; $4DC9: $FA $07 $DC
     ldh  [hMultiPurpose2], a                      ; $4DCC: $E0 $D9 ; $4DCC: $E0 $D9
-    ld   a, [wFile2MaxHealth]                     ; $4DCE: $FA $0A $DC ; $4DCE: $FA $0A $DC
+    ld   a, [wFile2MaxHearts]                     ; $4DCE: $FA $0A $DC ; $4DCE: $FA $0A $DC
     ldh  [hMultiPurpose3], a                      ; $4DD1: $E0 $DA ; $4DD1: $E0 $DA
-    jp   label_001_5D53                           ; $4DD3: $C3 $53 $5D ; $4DD3: $C3 $53 $5D
+    jp   BuildSaveSlotHeartsDrawCommand           ; $4DD3: $C3 $53 $5D ; $4DD3: $C3 $53 $5D
 ENDC
 
-func_001_4DD6::
+DrawSaveSlot3MaxHearts::
     ld   a, [wSaveFilesCount]                     ; $4DD6: $FA $A7 $DB ; $4DD6: $FA $A7 $DB
     and  $04                                      ; $4DD9: $E6 $04 ; $4DD9: $E6 $04
-IF __PATCH_4__
+; If the __RECALCULATE_MAX_HEARTS__ patch is enabled, also clamp
+; the maximum number of hearts before drawing (jumps into
+; DrawSaveSlot1MaxHearts to avoid code duplication):
+IF __RECALCULATE_MAX_HEARTS__
     ret  z
     ld   a, $02
     ld   hl, wFile3Health
-    ld   de, wFile3MaxHealth
-    jr   jr_001_4db6
+    ld   de, wFile3MaxHearts
+    jr   DrawSaveSlot1MaxHearts.clamp
 ELSE
-    jr   z, ret_001_4DBD                          ; $4DDB: $28 $E0 ; $4DDB: $28 $E0
+    jr   z, DrawSaveSlot1MaxHearts.return         ; $4DDB: $28 $E0
 
     ld   a, $02                                   ; $4DDD: $3E $02 ; $4DDD: $3E $02
     ldh  [hMultiPurpose4], a                      ; $4DDF: $E0 $DB ; $4DDF: $E0 $DB
     ld   a, [wFile3Health]                        ; $4DE1: $FA $08 $DC ; $4DE1: $FA $08 $DC
     ldh  [hMultiPurpose2], a                      ; $4DE4: $E0 $D9 ; $4DE4: $E0 $D9
-    ld   a, [wFile3MaxHealth]                     ; $4DE6: $FA $0B $DC ; $4DE6: $FA $0B $DC
+    ld   a, [wFile3MaxHearts]                     ; $4DE6: $FA $0B $DC ; $4DE6: $FA $0B $DC
     ldh  [hMultiPurpose3], a                      ; $4DE9: $E0 $DA ; $4DE9: $E0 $DA
-    jp   label_001_5D53                           ; $4DEB: $C3 $53 $5D ; $4DEB: $C3 $53 $5D
+    jp   BuildSaveSlotHeartsDrawCommand           ; $4DEB: $C3 $53 $5D ; $4DEB: $C3 $53 $5D
 ENDC
 
 Data_001_4DEE::
@@ -1141,7 +1145,7 @@ Data_001_4DEE::
     db   $99, $65, $44, $7E, $99, $85, $44, $7E   ; $4DFE ; $4DFE
 
 FileDeletionState10Handler::
-    call func_001_6BA8                            ; $4E06: $CD $A8 $6B ; $4E06: $CD $A8 $6B
+    call MoveSelect                               ; $4E06: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $4E09: $F0 $CC ; $4E09: $F0 $CC
     and  J_DOWN                                   ; $4E0B: $E6 $08 ; $4E0B: $E6 $08
     jr   z, .jr_4E18                              ; $4E0D: $28 $09 ; $4E0D: $28 $09
@@ -1361,9 +1365,9 @@ jr_001_4ED9::
 func_001_4EE5::
     ld   a, [wSaveSlot]                           ; $4EE5: $FA $A6 $DB ; $4EE5: $FA $A6 $DB
     JP_TABLE                                      ; $4EE8 ; $4EE8: $C7
-._00 dw func_001_4D8B                                ; $4EE9 ; $4EE9
-._01 dw func_001_4D94                                ; $4EEB ; $4EEB
-._02 dw func_001_4D9D                                ; $4EED ; $4EED
+._00 dw DrawSaveSlot1Name                                ; $4EE9 ; $4EE9
+._01 dw DrawSaveSlot2Name                                ; $4EEB ; $4EEB
+._02 dw DrawSaveSlot3Name                                ; $4EED ; $4EED
 
 jr_001_4EEF::
     ld   a, [wSaveSlot]                           ; $4EEF: $FA $A6 $DB ; $4EEF: $FA $A6 $DB
@@ -1394,7 +1398,7 @@ func_001_4F0C::
     and  J_RIGHT | J_LEFT                         ; $4F0E: $E6 $03 ; $4F0E: $E6 $03
     jr   z, .jr_4F1D                              ; $4F10: $28 $0B ; $4F10: $28 $0B
 
-    call func_001_6BAE                            ; $4F12: $CD $AE $6B ; $4F12: $CD $AE $6B
+    call MoveSelect.playMoveSelectionJingle       ; $4F12: $CD $AE $6B
     ld   a, [wCreditsScratch0]                    ; $4F15: $FA $00 $D0 ; $4F15: $FA $00 $D0
     xor  $01                                      ; $4F18: $EE $01 ; $4F18: $EE $01
     ld   [wCreditsScratch0], a                    ; $4F1A: $EA $00 $D0 ; $4F1A: $EA $00 $D0
@@ -1552,7 +1556,7 @@ FileCopyState5Handler::
     jp   IncrementGameplaySubtypeAndReturn        ; $4FFC: $C3 $D6 $44 ; $4FFC: $C3 $D6 $44
 
 FileCopyState8Handler::
-    call func_001_6BA8                            ; $4FFF: $CD $A8 $6B ; $4FFF: $CD $A8 $6B
+    call MoveSelect                               ; $4FFF: $CD $A8 $6B ; $4FFF: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $5002: $F0 $CC ; $5002: $F0 $CC
     and  J_DOWN                                   ; $5004: $E6 $08 ; $5004: $E6 $08
     jr   z, .jr_500E                              ; $5006: $28 $06 ; $5006: $28 $06
@@ -1600,6 +1604,10 @@ jr_001_501D::
 jr_001_5042::
     xor  a                                        ; $5042: $AF ; $5042: $AF
 IF __PATCH_4__
+    ; This patch changes ADD to OR, presumably just for clarity
+    ; (the two opcodes use the same number of cycles, and differ
+    ; only in that ADD sets the H and C flags, but those aren't
+    ; used after this point anyway)
     or   [hl]
     inc  hl
     or   [hl]
@@ -1705,7 +1713,7 @@ Data_001_50C7::
     db   $99, $6D, $44, $7E, $99, $8D, $44, $7E   ; $50D7 ; $50D7
 
 FileCopyState9Handler::
-    call func_001_6BA8                            ; $50DF: $CD $A8 $6B ; $50DF: $CD $A8 $6B
+    call MoveSelect                               ; $50DF: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $50E2: $F0 $CC ; $50E2: $F0 $CC
     and  J_DOWN                                   ; $50E4: $E6 $08 ; $50E4: $E6 $08
     jr   z, .jr_50F1                              ; $50E6: $28 $09 ; $50E6: $28 $09

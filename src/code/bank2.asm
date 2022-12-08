@@ -4999,8 +4999,8 @@ UpdateHealth:
     ; $wIsOnLowHeath = False
     xor  a                                        ; $6317: $AF
     ld   [wIsOnLowHeath], a                       ; $6318: $EA $63 $C1
-    ; de = 0x00 | $wMaxHealth
-    ld   a, [wMaxHealth]                          ; $631B: $FA $5B $DB
+    ; de = 0x00 | $wMaxHearts
+    ld   a, [wMaxHearts]                          ; $631B: $FA $5B $DB
     ld   e, a                                     ; $631E: $5F
     ld   d, $00                                   ; $631F: $16 $00
     ; if wHealth is above threshold skip low health section
@@ -5045,14 +5045,14 @@ UpdateHealth:
     ; decrease $wAddHealthBuffer
     dec  a                                        ; $6354: $3D
     ld   [wAddHealthBuffer], a                    ; $6355: $EA $93 $DB
-    ; cap $wMaxHealth at $0E
-    ld   a, [wMaxHealth]                          ; $6358: $FA $5B $DB
+    ; cap $wMaxHearts at $0E
+    ld   a, [wMaxHearts]                          ; $6358: $FA $5B $DB
     cp   $0F                                      ; $635B: $FE $0F
-    jr   c, .skipSetMaxHealthCap                  ; $635D: $38 $02
+    jr   c, .skipSetMaxHeartsCap                  ; $635D: $38 $02
     ld   a, $0E                                   ; $635F: $3E $0E
 
-.skipSetMaxHealthCap:
-    ; e = $wMaxHealth * 8
+.skipSetMaxHeartsCap:
+    ; e = $wMaxHearts * 8
     sla  a                                        ; $6361: $CB $27
     sla  a                                        ; $6363: $CB $27
     sla  a                                        ; $6365: $CB $27
@@ -5234,7 +5234,7 @@ jr_002_6459:
     jr   jr_002_646B                              ; $6460: $18 $09
 
 jr_002_6462:
-    ld   a, [wMaxHealth]                          ; $6462: $FA $5B $DB
+    ld   a, [wMaxHearts]                          ; $6462: $FA $5B $DB
     cp   c                                        ; $6465: $B9
     jr   z, jr_002_6477                           ; $6466: $28 $0F
 

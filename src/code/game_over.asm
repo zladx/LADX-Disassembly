@@ -220,7 +220,7 @@ Data_001_4336::
 
 func_001_4339::
     ld   hl, wC13F                                ; $4339: $21 $3F $C1 ; $4339: $21 $3F $C1
-    call func_001_6BA8                            ; $433C: $CD $A8 $6B ; $433C: $CD $A8 $6B
+    call MoveSelect                               ; $433C: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $433F: $F0 $CC ; $433F: $F0 $CC
     and  J_DOWN                                   ; $4341: $E6 $08 ; $4341: $E6 $08
     jr   z, jr_001_434D                           ; $4343: $28 $08 ; $4343: $28 $08

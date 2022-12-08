@@ -115,7 +115,7 @@ JINGLE_ENEMY_MORPH_IN   equ $06;mario mushroom
 JINGLE_SWORD_POKING     equ $07
 JINGLE_JUMP_DOWN        equ $08
 JINGLE_BUMP             equ $09
-JINGLE_MOVE_SELECTION   equ $0A
+JINGLE_MOVE_SELECTION   equ $0A;moving the cursor
 JINGLE_HUGE_BUMP        equ $0B;huge bump
 JINGLE_REVOLVING_DOOR   equ $0C
 JINGLE_FEATHER_JUMP     equ $0D

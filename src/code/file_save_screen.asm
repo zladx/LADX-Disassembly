@@ -220,7 +220,7 @@ Data_001_4128::
 ; Called by FileSaveInteractive
 func_001_412A::
     ld   hl, wC13F                                ; $412A: $21 $3F $C1
-    call func_001_6BA8                            ; $412D: $CD $A8 $6B
+    call MoveSelect                               ; $412D: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $4130: $F0 $CC
     and  J_UP | J_DOWN                            ; $4132: $E6 $0C
     jr   z, .jr_413B                              ; $4134: $28 $05

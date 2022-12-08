@@ -62,8 +62,8 @@ BANK_1C_VAR = 1
 ; @TODO Patch effects and changes:
 ;
 ; __PATCH_4__
-;   Recalculates player's max HP (on save/load?), based on
-;   map room flags for defeated bosses and collected heart containers.
+;   Changes ADD to OR one place, and removes the possibility to press
+;   START to skip some part of the fisherman photo
 ;
 ; __PATCH_8__
 ;   1: Removes the debug feature that allows you to jump to the ending
@@ -90,6 +90,13 @@ BANK_1C_VAR = 1
 ;   The Genie (the boss in Level 2, Bottle Grotto) is weaker. The bottle
 ;   only needs to be thrown into the wall two times instead of three, and
 ;   the Genie himself has less HP.
+;
+; __RECALCULATE_MAX_HEARTS__
+;   Makes sure the player's maximum health is legal by:
+;   - clamping the maximum health between 3 and 4 when displaying the file menu
+;   - clamping the maximum health between 3 and 14 before loading a saved file
+;   - recalculating the maximum health to the actual, legal amount before saving,
+;     based on map room flags for defeated bosses and collected heart containers
 
 __PATCH_0__ = FALSE ; Applies to JP1+, EN1+, DE, FR
 __PATCH_1__ = FALSE ; Applies to DE, FR
@@ -103,6 +110,7 @@ __SKIP_DIALOG_SUPPORT__ = FALSE ; TRUE in DE, FR
 __DIACRITICS_SUPPORT__ = FALSE ; TRUE in JP, DE
 __WEAK_GENIE__ = FALSE ; TRUE in FR, DE
 __USE_FIXED_DIALOG_BANKS__ = FALSE ; TRUE in JP
+__RECALCULATE_MAX_HEARTS__ = FALSE ; Applies to DE1+, JP2+, EN2+, FR1+
 
 ; If the Key Cavern map is split into 1F and B1F on the subscreen.
 ; See also: https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening/Version_Differences#Key_Cavern
@@ -172,6 +180,7 @@ __PATCH_8__ = TRUE
 ENDC
 IF (VERSION > 1)
 __PATCH_4__ = TRUE
+__RECALCULATE_MAX_HEARTS__ = TRUE
 ENDC
 
 ELIF ("{LANG}" == "EN")
@@ -191,6 +200,7 @@ ENDC
 IF (VERSION > 1)
 __PATCH_2__ = TRUE
 __PATCH_4__ = TRUE
+__RECALCULATE_MAX_HEARTS__ = TRUE
 ENDC
 
 ELIF ("{LANG}" == "FR")
@@ -215,6 +225,7 @@ __PATCH_1__ = TRUE
 __PATCH_2__ = TRUE
 IF (VERSION > 0)
 __PATCH_4__ = TRUE
+__RECALCULATE_MAX_HEARTS__ = TRUE
 ENDC
 __SKIP_DIALOG_SUPPORT__ = TRUE
 __WEAK_GENIE__ = TRUE
@@ -246,6 +257,7 @@ __PATCH_9__ = TRUE
 __PATCH_A__ = 2
 IF (VERSION > 0)
 __PATCH_4__ = TRUE
+__RECALCULATE_MAX_HEARTS__ = TRUE
 ENDC
 __SKIP_DIALOG_SUPPORT__ = TRUE
 __WEAK_GENIE__ = TRUE

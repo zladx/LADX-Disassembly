@@ -246,7 +246,7 @@ jr_014_4AE7:
     ld   [wNoiseSfxSeaWavesCounter], a            ; $4B09: $EA $14 $C1
 .wavesSfxEnd
 
-    ld   a, [wMaxHealth]                          ; $4B0C: $FA $5B $DB
+    ld   a, [wMaxHearts]                          ; $4B0C: $FA $5B $DB
     ld   e, a                                     ; $4B0F: $5F
     ld   d, b                                     ; $4B10: $50
     ld   hl, Data_014_4AAD                        ; $4B11: $21 $AD $4A

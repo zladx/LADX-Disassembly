@@ -2380,8 +2380,8 @@ SpawnEnemyDrop::
     ld   a, [wGuardianAcornCounter]               ; $55EE: $FA $71 $D4
     inc  a                                        ; $55F1: $3C
     ld   [wGuardianAcornCounter], a               ; $55F2: $EA $71 $D4
-    cp   GUARDIAN_ACCORN_COUNTER_MAX              ; $55F5: $FE $0C
-    jr   c, .noGuardianAccornDrop                 ; $55F7: $38 $16
+    cp   GUARDIAN_ACORN_COUNTER_MAX               ; $55F5: $FE $0C
+    jr   c, .noGuardianAcornDrop                  ; $55F7: $38 $16
     ; reset counter if max value reached, even if not droped
     xor  a                                        ; $55F9: $AF
     ld   [wGuardianAcornCounter], a               ; $55FA: $EA $71 $D4
@@ -2393,12 +2393,12 @@ SpawnEnemyDrop::
     ; do not drop during side scrolling
     ld   hl, hIsSideScrolling                     ; $5604: $21 $F9 $FF
     or   [hl]                                     ; $5607: $B6
-    jr   nz, .noGuardianAccornDrop                ; $5608: $20 $05
-    ; drop the guardian accorn
+    jr   nz, .noGuardianAcornDrop                 ; $5608: $20 $05
+    ; drop the guardian acorn
     ld   a, ENTITY_GUARDIAN_ACORN                 ; $560A: $3E $34
     jp   .dropEntity                              ; $560C: $C3 $70 $56
 
-.noGuardianAccornDrop:
+.noGuardianAcornDrop:
     ; get an offset from the DestroyedEntityHealthGroupOffsetTable
     ; the value is used in combination with the destroyed entity type in further code as as offset by add HL, DE
     ld   hl, wEntitiesHealthGroup                 ; $560F: $21 $D0 $C4
@@ -2416,7 +2416,7 @@ SpawnEnemyDrop::
     ld   e, a                                     ; How many enemies to kill before a Piece of Power drops?
     ; early game
     ld   d, PIECE_OF_POWER_COUNTER_MAX_LOW_MAX_HEALTH ; Max HP 0~6: 30
-    ld   a, [wMaxHealth]                          ;
+    ld   a, [wMaxHearts]                          ;
     cp   LOW_MAX_HEALTH                           ; If max HP <= 6, skip
     jr   c, .pieceOfPowerDrop                     ;
     ; mid game
@@ -2759,7 +2759,7 @@ HeartContainerEntityHandler::
     ld   a, MUSIC_BOSS_DEFEATED                   ; $59EB: $3E $18
     ld   [wMusicTrackToPlay], a                   ; $59ED: $EA $68 $D3
     ; Increase max health, and fully restore health
-    ld   hl, wMaxHealth                           ; $59F0: $21 $5B $DB
+    ld   hl, wMaxHearts                           ; $59F0: $21 $5B $DB
     inc  [hl]                                     ; $59F3: $34
     ld   hl, wAddHealthBuffer                     ; $59F4: $21 $93 $DB
     ld   [hl], $FF                                ; $59F7: $36 $FF
@@ -2927,7 +2927,7 @@ HeartPieceState6Handler::
     ld   hl, wAddHealthBuffer                     ; $5ADF: $21 $93 $DB
     ld   [hl], $40                                ; $5AE2: $36 $40
     ; Increase the maximum number of hearts
-    ld   hl, wMaxHealth                           ; $5AE4: $21 $5B $DB
+    ld   hl, wMaxHearts                           ; $5AE4: $21 $5B $DB
     inc  [hl]                                     ; $5AE7: $34
     ; Open the "4 pieces of heart collected" dialog
     call_open_dialog Dialog050                    ; $5AE8
@@ -4535,7 +4535,7 @@ Data_003_63F2::
     db   $D4,      $D4,       $04,       $04
 
 PickGuardianAcorn::
-    ld   a, ACTIVE_POWER_UP_GUARDIAN_ACCORN       ; $63F6: $3E $02
+    ld   a, ACTIVE_POWER_UP_GUARDIAN_ACORN        ; $63F6: $3E $02
     ld   e, DIALOG_GOT_GUARDIAN_ACORN             ; $63F8: $1E $05
     jr   ProcessPowerUp                           ; $63FA: $18 $04
 
@@ -6085,7 +6085,7 @@ ApplyLinkCollisionWithEnemy::
 
     ; If having an active Guardian Acorn, take no damages
     ld   a, [wActivePowerUp]                      ; $6D9B: $FA $7C $D4
-    cp   ACTIVE_POWER_UP_GUARDIAN_ACCORN          ; $6D9E: $FE $02
+    cp   ACTIVE_POWER_UP_GUARDIAN_ACORN           ; $6D9E: $FE $02
     jr   nz, .damageModifiersEnd                  ; $6DA0: $20 $09
 
     ld   a, e                                     ; $6DA2: $7B

@@ -90,10 +90,10 @@ InitSaveFiles::
     ld   hl, SaveGame1.main + wHasInstrument1 - wOverworldRoomStatus ; Dungeon boss flags = 00000010 ; $46E6: $21 $6A $A4
     ld   e, $09 ; POI: Sets 9 flags (but only 8 dungeons...?) ; $46E9: $1E $09
     ld   a, $02 ; Sets 46A~447                    ; $46EB: $3E $02
-.loop2
+.drawEmptyHeartsLoop
     ldi  [hl], a                                  ; $46ED: $22
     dec  e                                        ; $46EE: $1D
-    jr   nz, .loop2                               ; $46EF: $20 $FC
+    jr   nz, .drawEmptyHeartsLoop                 ; $46EF: $20 $FC
 
     ld   a, DEBUG_SAVE_BOMB_COUNT                 ; $46F1: $3E $60
     ld   [SaveGame1.main + wBombCount - wOverworldRoomStatus], a ; 60 bombs                    ; $46F3: $EA $52 $A4
@@ -125,7 +125,7 @@ ENDC
     ld   a, $50                                   ; $4724: $3E $50
     ld   [SaveGame1.main + wHealth - wOverworldRoomStatus], a ; 10 hearts of health         ; $4726: $EA $5F $A4
     ld   a, $0A                                   ; $4729: $3E $0A
-    ld   [SaveGame1.main + wMaxHealth - wOverworldRoomStatus], a ; 10 heart containers         ; $472B: $EA $60 $A4
+    ld   [SaveGame1.main + wMaxHearts - wOverworldRoomStatus], a ; 10 heart containers         ; $472B: $EA $60 $A4
 
     ld   a, [wGameplayType]                       ; $472E: $FA $95 $DB
     cp   GAMEPLAY_FILE_NEW                        ; $4731: $FE $03
@@ -232,9 +232,9 @@ ret_001_47CD::
 include "code/file_menus.asm"
 
 ; Table that determines how much health you have after a game over.
-; New files always start with 3 HP / 3 MAX HP, but after that
+; New files always start with 3 hearts / 3 max hearts, but after that
 ; the health you're provided on respawning depends on your max:
-MaxHealthToStartingHealthTable::
+MaxHeartsToStartingHealthTable::
     db  3 FULL_HEARTS  ;  0 heart containers      ; $5295
     db  3 FULL_HEARTS  ;  1 heart container       ; $5296
     db  3 FULL_HEARTS  ;  2 heart containers      ; $5297
@@ -261,10 +261,10 @@ LoadSavedFile::
     ld   a, [wHealth]                           ; Does the player have any health? ; $52A7: $FA $5A $DB
     and  a                                      ; If yes, skip this ; $52AA: $A7
     jr   nz, .skipHealthReset                     ; $52AB: $20 $0E
-    ld   a, [wMaxHealth]                        ; Otherwise, get their max health... ; $52AD: $FA $5B $DB
+    ld   a, [wMaxHearts]                        ; Otherwise, get their max health... ; $52AD: $FA $5B $DB
     ld   e, a                                     ; $52B0: $5F
     ld   d, $00                                   ; $52B1: $16 $00
-    ld   hl, MaxHealthToStartingHealthTable     ; and use it as an index into the table ; $52B3: $21 $95 $52
+    ld   hl, MaxHeartsToStartingHealthTable     ; and use it as an index into the table ; $52B3: $21 $95 $52
     add  hl, de                                 ; to provide the starting health value. ; $52B6: $19
     ld   a, [hl]                                  ; $52B7: $7E
     ld   [wHealth], a                             ; $52B8: $EA $5A $DB
@@ -299,33 +299,33 @@ LoadSavedFile::
     or   d                                        ; $52E1: $B2
     jr   nz, .loopLoadMain                        ; $52E2: $20 $F5
 
-IF __PATCH_4__
-    ld de, wMaxHealth
-    ld hl, wHealth
-    ld a, [de]
-    cp $03
-    jr nc, jr_001_5355
+IF __RECALCULATE_MAX_HEARTS__
+    ; Clamp max health before loading
+    ld   de, wMaxHearts
+    ld   hl, wHealth
+    ld   a, [de]
+    cp   MIN_HEARTS
+    jr   nc, .min
 
-    ld a, $03
+    ld   a, MIN_HEARTS
 
-jr_001_5355:
-    cp $0e
-    jr c, jr_001_535b
+.min:
+    cp   MAX_HEARTS
+    jr   c, .max
 
-    ld a, $0e
+    ld   a, MAX_HEARTS
 
-jr_001_535b:
-    ld [de], a
+.max:
+    ld   [de], a
     swap a
-    srl a
-    cp [hl]
-    jr nc, jr_001_5364
+    srl  a
+    cp   [hl]
+    jr   nc, .prepareLoadDX1
 
-    ld [hl], a
-
-jr_001_5364:
+    ld   [hl], a
 ENDC
 
+.prepareLoadDX1:
     ld   hl, wColorDungeonItemFlags               ; $52E4: $21 $DA $DD
     ld   de, SAVE_DX1_SIZE                        ; $52E7: $11 $05 $00
 
@@ -587,7 +587,7 @@ CreateMinimapTilemap::
 .jr_001_5543
     pop  hl                                       ; $5543: $E1
 
-.loop2
+.drawEmptyHeartsLoop
     push hl                                       ; $5544: $E5
     ld   hl, Data_001_53D8                        ; $5545: $21 $D8 $53
     add  hl, bc                                   ; $5548: $09
@@ -615,7 +615,7 @@ CreateMinimapTilemap::
     pop  hl                                       ; $556C: $E1
     inc  hl                                       ; $556D: $23
     cp   $FF                                      ; $556E: $FE $FF
-    jr   nz, .loop2                               ; $5570: $20 $D2
+    jr   nz, .drawEmptyHeartsLoop                 ; $5570: $20 $D2
 
     xor  a                                        ; $5572: $AF
     ld   [hl], a                                  ; $5573: $77
@@ -976,7 +976,7 @@ jr_001_5AA0::
     jr   label_001_5B3F                           ; $5AF3: $18 $4A
 
 .jr_5AF5::
-    call func_001_6BAE                            ; $5AF5: $CD $AE $6B
+    call MoveSelect.playMoveSelectionJingle       ; $5AF5: $CD $AE $6B
     ld   hl, MapSpecialLocationNamesTable         ; $5AF8: $21 $59 $59
     add  hl, de                                   ; $5AFB: $19
     ld   a, [hl]                                  ; $5AFC: $7E
@@ -1257,102 +1257,172 @@ jr_001_5C7B::
 label_001_5D13::
     ret                                           ; $5D13: $C9
 
-Data_001_5D14::
-    db  $98, $CB, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E ; $5D14
-    db  $98, $EB, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E ; $5D1E
-    db  $00                                       ; $5D28
+SaveSlot1HeartsDrawData::
+    ; First row:
+    db  $98 ; wDrawCommand.destinationHigh
+    db  $CB ; wDrawCommand.destinationLow
+    db  $06 ; wDrawCommand.length
+    db  $7E, $7E, $7E, $7E, $7E, $7E, $7E ; wDrawCommand.data, empty tiles
+    ; Second row:
+    db  $98 ; wDrawCommand.destinationHigh
+    db  $EB ; wDrawCommand.destinationLow
+    db  $06 ; wDrawCommand.length
+    db  $7E, $7E, $7E, $7E, $7E, $7E, $7E ; wDrawCommand.data, empty tiles
+.end
+    db  $00
 
-Data_001_5D29::
-    db  $99, $2B, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E ; $5D29
-    db  $99, $4B, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E ; $5D33
-    db  $00                                       ; $5D3D
+SaveSlot2HeartsDrawData::
+    ; First row:
+    db  $99 ; wDrawCommand.destinationHigh
+    db  $2B ; wDrawCommand.destinationLow
+    db  $06 ; wDrawCommand.length
+    db  $7E, $7E, $7E, $7E, $7E, $7E, $7E ; wDrawCommand.data, empty tiles
+    ; Second row:
+    db  $99 ; wDrawCommand.destinationHigh
+    db  $4B ; wDrawCommand.destinationLow
+    db  $06 ; wDrawCommand.length
+    db  $7E, $7E, $7E, $7E, $7E, $7E, $7E ; wDrawCommand.data, empty tiles
+.end
+    db  $00
 
-Data_001_5D3E::
-    db  $99, $8B, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E ; $5D3E
-    db  $99, $AB, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E ; $5D48
-    db  $00                                       ; $5D52
+SaveSlot3HeartsDrawData::
+    ; First row:
+    db  $99 ; wDrawCommand.destinationHigh
+    db  $8B ; wDrawCommand.destinationLow
+    db  $06 ; wDrawCommand.length
+    db  $7E, $7E, $7E, $7E, $7E, $7E, $7E ; wDrawCommand.data, empty tiles
+    ; Second row:
+    db  $99 ; wDrawCommand.destinationHigh
+    db  $AB ; wDrawCommand.destinationLow
+    db  $06 ; wDrawCommand.length
+    db  $7E, $7E, $7E, $7E, $7E, $7E, $7E ; wDrawCommand.data, empty tiles
+.end
+    db  $00
 
-label_001_5D53::
+; Builds a wDrawCommand to draw hearts next to the save files.
+;
+; Draws one full heart per full heart remaining in the actual health,
+; then one full heart if there's half a heart remaining of the actual health,
+; then one full heart per empty heart of the max health.
+;
+; This seems to have originally supported drawing the actual health of the
+; player at the time of saving, but the final code (in all revisions of both
+; the original game and DX) simply draws full hearts for all Heart Containers.
+;
+; Arguments:
+; - hMultiPurpose2 = Health
+; - hMultiPurpose3 = Max health
+; - hMultiPurpose4 = Save slot
+BuildSaveSlotHeartsDrawCommand::
+    ; Set up draw command
     ld   a, [wDrawCommandsSize]                   ; $5D53: $FA $00 $D6
     ld   e, a                                     ; $5D56: $5F
     ld   d, $00                                   ; $5D57: $16 $00
-    add  a, $14                                   ; $5D59: $C6 $14
+    add  a, SaveSlot1HeartsDrawData.end - SaveSlot1HeartsDrawData ; $5D59: $C6 $14
     ld   [wDrawCommandsSize], a                   ; $5D5B: $EA $00 $D6
     ld   hl, wDrawCommand                         ; $5D5E: $21 $01 $D6
     add  hl, de                                   ; $5D61: $19
     push de                                       ; $5D62: $D5
-    ld   bc, Data_001_5D14                        ; $5D63: $01 $14 $5D
+
+    ; Select correct save slot
+    ld   bc, SaveSlot1HeartsDrawData              ; $5D63: $01 $14 $5D
     ldh  a, [hMultiPurpose4]                      ; $5D66: $F0 $DB
     and  a                                        ; $5D68: $A7
-    jr   z, .jr_5D75                              ; $5D69: $28 $0A
-    ld   bc, Data_001_5D29                        ; $5D6B: $01 $29 $5D
+    jr   z, .initCopyDrawDataLoop                 ; $5D69: $28 $0A
+    ld   bc, SaveSlot2HeartsDrawData              ; $5D6B: $01 $29 $5D
     cp   $01                                      ; $5D6E: $FE $01
-    jr   z, .jr_5D75                              ; $5D70: $28 $03
-    ld   bc, Data_001_5D3E                        ; $5D72: $01 $3E $5D
+    jr   z, .initCopyDrawDataLoop                 ; $5D70: $28 $03
+    ld   bc, SaveSlot3HeartsDrawData              ; $5D72: $01 $3E $5D
 
-.jr_5D75::
-    ld   e, $15                                   ; $5D75: $1E $15
+.initCopyDrawDataLoop::
+    ld   e, $15 ; loop counter                    ; $5D75: $1E $15
 
-.loop_5D77
+.copyDrawDataLoop
+    ; Copy draw data to wDrawCommand
     ld   a, [bc]                                  ; $5D77: $0A
     inc  bc                                       ; $5D78: $03
     ldi  [hl], a                                  ; $5D79: $22
     dec  e                                        ; $5D7A: $1D
-    jr   nz, .loop_5D77                           ; $5D7B: $20 $FA
+    jr   nz, .copyDrawDataLoop                    ; $5D7B: $20 $FA
+
+    ; Prepare replacing empty tiles in draw command with hearts
     pop  de                                       ; $5D7D: $D1
     ld   hl, wDrawCommand.data                    ; $5D7E: $21 $04 $D6
     add  hl, de                                   ; $5D81: $19
-    ld   c, $00                                   ; $5D82: $0E $00
+    ld   c, 0 ; loop counter                      ; $5D82: $0E $00
     ldh  a, [hMultiPurpose2]                      ; $5D84: $F0 $D9
     and  a                                        ; $5D86: $A7
-    jr   z, jr_001_5DAB                           ; $5D87: $28 $22
+    jr   z, .drawEmptyHeartsLoop                  ; $5D87: $28 $22
     ldh  [hMultiPurpose0], a                      ; $5D89: $E0 $D7
 
-jr_001_5D8B::
+    ; Replace empty tiles in wDrawCommand with heart tiles
+    ; corresponding to the save file's max health
+.drawFullHeartsLoop::
+    ; Decrement health (one heart = 8 health)
+    ; to see if there's just half a heart left of it
     ldh  a, [hMultiPurpose0]                      ; $5D8B: $F0 $D7
-    sub  a, $08                                   ; $5D8D: $D6 $08
+    sub  a, ONE_HEART                             ; $5D8D: $D6 $08
     ldh  [hMultiPurpose0], a                      ; $5D8F: $E0 $D7
-    jr   c, jr_001_5DA2                           ; $5D91: $38 $0F
-    ld   a, $AE                                   ; $5D93: $3E $AE
+    jr   c, .drawHalfHeart                        ; $5D91: $38 $0F
+
+    ; Draw one full heart
+    ld   a, $AE ; Heart tile                      ; $5D93: $3E $AE
     ldi  [hl], a                                  ; $5D95: $22
+
+    ; Increment loop counter
     inc  c                                        ; $5D96: $0C
     ld   a, c                                     ; $5D97: $79
-    cp   $07                                      ; $5D98: $FE $07
-    jr   nz, .jr_5DA0                             ; $5D9A: $20 $04
+    cp   7                                        ; $5D98: $FE $07
+    jr   nz, .drawFullHeartsLoopContinue          ; $5D9A: $20 $04
+
+    ; End of first row (we've drawn 7 hearts),
+    ; go to next wDrawCommand.data by skipping the three
+    ; bytes of metadata
     ld   a, l                                     ; $5D9C: $7D
-    add  a, $03                                   ; $5D9D: $C6 $03
+    add  a, wDrawCommand.data - wDrawCommand      ; $5D9D: $C6 $03
     ld   l, a                                     ; $5D9F: $6F
 
-.jr_5DA0::
-    jr   jr_001_5D8B                              ; $5DA0: $18 $E9
+.drawFullHeartsLoopContinue::
+    jr   .drawFullHeartsLoop                      ; $5DA0: $18 $E9
 
-jr_001_5DA2::
-    add  a, $08                                   ; $5DA2: $C6 $08
-    jr   z, jr_001_5DAB                           ; $5DA4: $28 $05
-    ld   a, $AE                                   ; $5DA6: $3E $AE
+.drawHalfHeart::
+    add  a, ONE_HEART                             ; $5DA2: $C6 $08
+    jr   z, .drawEmptyHeartsLoop                  ; $5DA4: $28 $05
+
+    ; Draw full heart; this was presumably originally
+    ; the half heart tile $CE
+    ld   a, $AE ; Heart tile                      ; $5DA6: $3E $AE
     ldi  [hl], a                                  ; $5DA8: $22
-    jr   jr_001_5DB3                              ; $5DA9: $18 $08
+    jr   .nextEmptyHeart                          ; $5DA9: $18 $08
 
-jr_001_5DAB::
+.drawEmptyHeartsLoop::
     ldh  a, [hMultiPurpose3]                      ; $5DAB: $F0 $DA
     cp   c                                        ; $5DAD: $B9
-    jr   z, ret_001_5DBF                          ; $5DAE: $28 $0F
-    ld   a, $AE                                   ; $5DB0: $3E $AE
+    jr   z, .return                               ; $5DAE: $28 $0F
+
+    ; Draw full heart; this was presumably originally
+    ; the empty heart tile $CD
+    ld   a, $AE ; Heart tile                      ; $5DB0: $3E $AE
     ldi  [hl], a                                  ; $5DB2: $22
 
-jr_001_5DB3::
+.nextEmptyHeart::
+    ; Increment loop counter
     inc  c                                        ; $5DB3: $0C
     ld   a, c                                     ; $5DB4: $79
-    cp   $07                                      ; $5DB5: $FE $07
-    jr   nz, .jr_5DBD                             ; $5DB7: $20 $04
+    cp   7                                        ; $5DB5: $FE $07
+    jr   nz, .drawEmptyHeartsLoopContinue         ; $5DB7: $20 $04
+
+    ; End of first row (we've drawn 7 hearts),
+    ; go to next wDrawCommand.data by skipping the three
+    ; bytes of metadata
     ld   a, l                                     ; $5DB9: $7D
-    add  a, $03                                   ; $5DBA: $C6 $03
+    add  a, wDrawCommand.data - wDrawCommand      ; $5DBA: $C6 $03
     ld   l, a                                     ; $5DBC: $6F
 
-.jr_5DBD::
-    jr   jr_001_5DAB                              ; $5DBD: $18 $EC
+.drawEmptyHeartsLoopContinue::
+    jr   .drawEmptyHeartsLoop                     ; $5DBD: $18 $EC
 
-ret_001_5DBF::
+.return::
     ret                                           ; $5DBF: $C9
 
 func_5DC0::
@@ -1389,19 +1459,20 @@ jr_001_5DCC::
     ret                                           ; $5DE5: $C9
 
 SaveGameToFile::
-IF __PATCH_4__
-    call RecalculateMaxHealth
+IF __RECALCULATE_MAX_HEARTS__
+    ; Recalculate max health before saving
+    call RecalculateMaxHearts
 ENDC
     ; Does the player have any health?
     ld   a, [wHealth]                             ; $5DE6: $FA $5A $DB
     and  a                                        ; $5DE9: $A7
     jr   nz, .skipHealthReset                     ; $5DEA: $20 $0E
     ; If not, get the current max health
-    ld   a, [wMaxHealth]                          ; $5DEC: $FA $5B $DB
+    ld   a, [wMaxHearts]                          ; $5DEC: $FA $5B $DB
     ld   e, a                                     ; $5DEF: $5F
     ld   d, $00                                   ; $5DF0: $16 $00
     ; and use it as an index into the table
-    ld   hl, MaxHealthToStartingHealthTable       ; $5DF2: $21 $95 $52
+    ld   hl, MaxHeartsToStartingHealthTable       ; $5DF2: $21 $95 $52
     add  hl, de                                   ; $5DF5: $19
     ; to provide the starting health value.
     ld   a, [hl]                                  ; $5DF6: $7E
@@ -1471,7 +1542,7 @@ ENDC
     ldi  [hl], a                                  ; $5E65: $22
     ret                                           ; $5E66: $C9
 
-IF __PATCH_4__
+IF __RECALCULATE_MAX_HEARTS__
 ;
 ; Recalculates player's Max HP based on two tables; one for boss rooms,
 ; one for piece of heart rooms. Checks the save data's room flags to check
@@ -1502,7 +1573,7 @@ PieceOfHeartRoomTable:
     dw wIndoorBRoomStatus + $ba
     dw wOverworldRoomStatus + $00
 
-RecalculateMaxHealth:
+RecalculateMaxHearts:
     ; full heart containers
     ld a, $03                                     ; $5ECA: $3E $03
     ldh [hMultiPurpose0], a                       ; $5ECC: $E0 $D7
@@ -1557,8 +1628,8 @@ RecalculateMaxHealth:
     jr nz, .heartPieceLoop                        ; $5F05: $20 $E5
 
     ldh a, [hMultiPurpose0]                       ; $5F07: $F0 $D7
-    call ClampMaxHealth                           ; $5F09: $CD $1C $5F
-    ld [wMaxHealth], a                            ; $5F0C: $EA $5B $DB
+    call ClampMaxHearts                           ; $5F09: $CD $1C $5F
+    ld [wMaxHearts], a                            ; $5F0C: $EA $5B $DB
     cp $0e                                        ; $5F0F: $FE $0E
     jr nz, jr_001_5f16                            ; $5F11: $20 $03
 
@@ -1574,7 +1645,7 @@ jr_001_5f18:
 
 
 ; clamps max health between 3 and 14
-ClampMaxHealth:
+ClampMaxHearts:
     cp $03                                        ; $5F1C: $FE $03
     jr nc, .upperBound                            ; $5F1E: $30 $03
 
@@ -2778,18 +2849,20 @@ func_6A7C::
 
 include "code/face_shrine_mural.asm"
 
-func_001_6BA8::
+; Move selection marker and play the corresponding jingle
+; This only checks for movement up/down, but several places
+; in the code checks for left/right separately and then calls
+; into MoveSelect.playMoveSelectionJingle to just play the jingle
+MoveSelect::
     ldh  a, [hJoypadState]                        ; $6BA8: $F0 $CC
     and  J_UP | J_DOWN                            ; $6BAA: $E6 $0C
-    jr   z, ret_001_6BB4                          ; $6BAC: $28 $06
-
-func_001_6BAE::
+    jr   z, .return                               ; $6BAC: $28 $06
+.playMoveSelectionJingle::
     push af                                       ; $6BAE: $F5
     ld   a, JINGLE_MOVE_SELECTION                 ; $6BAF: $3E $0A
     ldh  [hJingle], a                             ; $6BB1: $E0 $F2
     pop  af                                       ; $6BB3: $F1
-
-ret_001_6BB4::
+.return::
     ret                                           ; $6BB4: $C9
 
 ; Copy the tiles and BG map for the inventory Siren Instruments to VRAM.

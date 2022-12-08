@@ -69,9 +69,6 @@ BANK_1C_VAR = 1
 ;   1: Removes the debug feature that allows you to jump to the ending
 ;      by pushing START on the map screen if debug flag 3 is enabled
 ;
-; __PATCH_9__
-;   Small optimizations
-;
 ; __PATCH_A__
 ;   1: Skips updating the status bar's hearts, rupees,
 ;      and subscreen inventory if debug flag 2 is set.
@@ -97,6 +94,14 @@ BANK_1C_VAR = 1
 ;   - clamping the maximum health between 3 and 14 before loading a saved file
 ;   - recalculating the maximum health to the actual, legal amount before saving,
 ;     based on map room flags for defeated bosses and collected heart containers
+;
+; __OPTIMIZATIONS_1__
+;   Optimizations that were implemented in version 1.1 of the Japanese and English
+;   revisions, and also in 1.0 of the French and German releases
+;
+; __OPTIMIZATIONS_2__
+;   Small optimizations that were likely bundled in when adding diacritics support,
+;   and so appear in the Japanese and German versions, but not any others
 
 __PATCH_0__ = FALSE ; Applies to JP1+, EN1+, DE, FR
 __PATCH_1__ = FALSE ; Applies to DE, FR
@@ -104,13 +109,14 @@ __PATCH_2__ = FALSE ; Applies to DE, JP1+, EN2+, FR
 __PATCH_3__ = FALSE ; Applies to JP1+, EN1+
 __PATCH_4__ = FALSE ; Applies to DE1+, JP2+, EN2+, FR1+
 __PATCH_8__ = FALSE ; Applies to JP1+
-__PATCH_9__ = FALSE ; Applies to DE, JP
 __PATCH_A__ = 0 ; 1 in JP, 2 in DE
 __SKIP_DIALOG_SUPPORT__ = FALSE ; TRUE in DE, FR
 __DIACRITICS_SUPPORT__ = FALSE ; TRUE in JP, DE
 __WEAK_GENIE__ = FALSE ; TRUE in FR, DE
 __USE_FIXED_DIALOG_BANKS__ = FALSE ; TRUE in JP
 __RECALCULATE_MAX_HEARTS__ = FALSE ; Applies to DE1+, JP2+, EN2+, FR1+
+__OPTIMIZATIONS_1__ = FALSE ; Applies to JP1+, EN1+, DE, FR
+__OPTIMIZATIONS_2__ = FALSE ; Applies to DE, JP
 
 ; If the Key Cavern map is split into 1F and B1F on the subscreen.
 ; See also: https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening/Version_Differences#Key_Cavern
@@ -170,13 +176,14 @@ GAMEOVER_OPTION_CONTINUE_Y equ 104
 SAVE_OPTION_X equ 36
 __USE_FIXED_DIALOG_BANKS__ = TRUE
 __DIACRITICS_SUPPORT__ = TRUE
-__PATCH_9__ = TRUE
+__OPTIMIZATIONS_2__ = TRUE
 __PATCH_A__ = 1
 IF (VERSION > 0)
 __PATCH_0__ = TRUE
 __PATCH_2__ = TRUE
 __PATCH_3__ = TRUE
 __PATCH_8__ = TRUE
+__OPTIMIZATIONS_1__ = TRUE
 ENDC
 IF (VERSION > 1)
 __PATCH_4__ = TRUE
@@ -196,6 +203,7 @@ __SPLIT_KEY_CAVERN_MAP__ = FALSE
 IF (VERSION > 0)
 __PATCH_0__ = TRUE
 __PATCH_3__ = TRUE
+__OPTIMIZATIONS_1__ = TRUE
 ENDC
 IF (VERSION > 1)
 __PATCH_2__ = TRUE
@@ -223,6 +231,7 @@ GAMEOVER_OPTION_CONTINUE_Y equ 104
 __PATCH_0__ = TRUE
 __PATCH_1__ = TRUE
 __PATCH_2__ = TRUE
+__OPTIMIZATIONS_1__ = TRUE
 IF (VERSION > 0)
 __PATCH_4__ = TRUE
 __RECALCULATE_MAX_HEARTS__ = TRUE
@@ -253,7 +262,8 @@ __DIACRITICS_SUPPORT__ = TRUE
 __PATCH_0__ = TRUE
 __PATCH_1__ = TRUE
 __PATCH_2__ = TRUE
-__PATCH_9__ = TRUE
+__OPTIMIZATIONS_1__ = TRUE
+__OPTIMIZATIONS_2__ = TRUE
 __PATCH_A__ = 2
 IF (VERSION > 0)
 __PATCH_4__ = TRUE

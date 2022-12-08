@@ -203,7 +203,7 @@ AnimateDialogClosing::
     ld   b, $00                                   ; $4AE2: $06 $00
     ld   hl, wD500                                ; $4AE4: $21 $00 $D5
     add  hl, bc                                   ; $4AE7: $09
-IF __PATCH_9__
+IF __OPTIMIZATIONS_2__
     ld   c, l
     ld   b, h
 ELSE

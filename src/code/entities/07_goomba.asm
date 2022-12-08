@@ -62,7 +62,7 @@ label_007_6523:
     add  hl, bc                                   ; $6536: $09
     ld   a, [hl]                                  ; $6537: $7E
     cp   $09                                      ; $6538: $FE $09
-if __PATCH_0__
+if __OPTIMIZATIONS_1__
     jp   z, jr_007_659D                           ; $653A: $28 $61
 ELSE
     jr   z, jr_007_659D                           ; $653A: $28 $61

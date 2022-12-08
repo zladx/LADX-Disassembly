@@ -75,7 +75,7 @@ OwlStatueEntityHandler::
     cp   MAP_S_FACE_SHRINE                        ; $5E7C: $FE $16
     jp   z, OwlStatueSouthFaceShrine              ; $5E7E: $CA $1B $5E
 
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     ld   hl, hActiveEntityVisualPosY
     inc  [hl]
 ELSE
@@ -86,7 +86,7 @@ ENDC
     ld   de, OwlStatueSpriteVariants              ; $5E87: $11 $F7 $5D
     call RenderActiveEntitySpritesPair            ; $5E8A: $CD $C0 $3B
 
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     call ReturnIfNonInteractive_18
     call func_018_7D36
 ELSE

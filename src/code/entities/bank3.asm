@@ -195,7 +195,7 @@ EntityInitHandler::
     jr   z, .callEntityInitHandler                ; $48BC: $28 $5
     ldh  a, [hRoomStatus]                         ; $48BE: $F0 $F8
     and  ROOM_STATUS_EVENT_2|ROOM_STATUS_EVENT_1  ; $48C0: $E6 $30
-IF __PATCH_0__
+IF __PATCH_0__ ; Could probably be moved into __OPTIMIZATIONS_1__
     jp   nz, UnloadEntityAndReturn
 ELSE
     jr   z, .roomStatusEnd                        ; $48C2: $28 $03
@@ -872,7 +872,7 @@ jr_003_4C15:
 EntityInitColorDungeonBook::
     ld   hl, wEntitiesPosYTable                   ; $4C1F: $21 $10 $C2
     add  hl, bc                                   ; $4C22: $09
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     inc  [hl]
     inc  [hl]
 ELSE
@@ -930,7 +930,7 @@ EntityDestructionHandler::
     call ReturnIfNonInteractive_03.allowInactiveEntity ; $4C6A: $CD $7E $7F
     call ApplyRecoilIfNeeded_03                   ; $4C6D: $CD $A9 $7F
     call func_003_60B3                            ; $4C70: $CD $B3 $60
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     jp   ClearEntitySpeed
 ELSE
     call ClearEntitySpeed                         ; $4C73: $CD $7F $3D
@@ -1160,7 +1160,7 @@ EntityThrownHandler::
     ld   [hl], WAVE_SFX_BOSS_GRAWL                ; $4DC5: $36 $07
     ld   hl, wEntitiesPrivateState4Table          ; $4DC7: $21 $40 $C4
     add  hl, bc                                   ; $4DCA: $09
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     inc  [hl]
     ld   a, [hl]
 ELSE
@@ -2052,7 +2052,7 @@ func_003_53E4::; likely cutting grass
     ld   [hl], e                                  ; $53FD: $73
     ld   hl, wEntitiesPhysicsFlagsTable           ; $53FE: $21 $40 $C3
     add  hl, bc                                   ; $5401: $09
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     inc  [hl]
     inc  [hl]
 ELSE
@@ -2176,7 +2176,7 @@ EntityDeathHandler::
     add  hl, bc                                   ; $551B: $09
     ld   a, [hl]                                  ; $551C: $7E
     and  $80                                      ; $551D: $E6 $80
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     jp   nz, ExecuteActiveEntityHandler
 ELSE
     jr   z, .dying                                ; $551F: $28 $03
@@ -3475,7 +3475,7 @@ AfterSirensInstrumentD1::
 AfterSirensInstrumentD2::
     ld   a, $02                                   ; $5E12: $3E $02
     ld   [wDB48], a                               ; $5E14: $EA $48 $DB
-IF !__PATCH_0__
+IF !__OPTIMIZATIONS_1__
     ret                                           ; $5E17: $C9
 ENDC
 
@@ -3671,7 +3671,7 @@ ENDC
 
 .jr_5EFE
     dec  a                                        ; $5EFE: $3D
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     jp   HoldEntityAboveLink
 ELSE
     jr   nz, jr_003_5F01                          ; $5EFF: $20 $00

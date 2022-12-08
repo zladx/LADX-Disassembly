@@ -52,7 +52,7 @@ GotItemDialog::
 ._0A db_dialog_low Dialog09A ; Bomb
 ._0B db_dialog_low Dialog09B ; Found your sword
 ._0C db_dialog_low Dialog09C ; Flippers
-._0D db_dialog_low Dialog09D ; Magifying Lens
+._0D db_dialog_low Dialog09D ; Magnifying Lens
 ._0E db_dialog_low Dialog09E ; New sword
 ._0F db_dialog_low Dialog09F ; New sword
 ._10 db_dialog_low Dialog0A0 ; Secret medicine

@@ -613,14 +613,14 @@ InteriorPalettes::
     dw   InteriorPalette1B ; Camera Shop
     dw   InteriorPalette1C ; Fisherman under the bridge
     dw   InteriorPalette1D ; Pegasus Boots cave at indoor_b $E4, $F4
-    dw   InteriorPalette1E ; magnifying glass cave
+    dw   InteriorPalette1E ; magnifying lens cave
     dw   InteriorPalette1F ; the guy who expands your bags
     dw   InteriorPalette20 ; Dream Shrine dreamworld
     dw   InteriorPalette21 ; Manbo
     dw   InteriorPalette22 ; Great Fairy $FB
 
 CaveBPaletteMap:: ;0A MAP_CAVE_B
-    ; magnifying glass cave, Manbo, cave in Mysterious Woods, 
+    ; magnifying lens cave, Manbo, cave in Mysterious Woods, 
     ; cave at indoor_b $B6 $B7, something at $C5, something at $B3 B4
      ;    0    1    2    3    4    5    6    7    8    9    a    b    c    d    e    f
     db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00; 0
@@ -2437,7 +2437,7 @@ InteriorPalette1D:: ; Pegasus Boots cave at indoor_b $E4, $F4
     rgb   #000000, #3800B8, #1880F8, #F8F8F8
     rgb   #000000, #000000, #1880F8, #F8F8F8
 
-InteriorPalette1E:: ; magnifying glass cave
+InteriorPalette1E:: ; magnifying lens cave
     rgb   #C88818, #9878A0, #381850, #000000
     rgb   #F8F888, #9878A0, #381850, #000000
     rgb   #F8F888, #B80028, #400020, #000000

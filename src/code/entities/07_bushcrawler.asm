@@ -121,7 +121,7 @@ BushCrawlerEntityHandler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $40B6: $21 $40 $C3
     add  hl, bc                                   ; $40B9: $09
     ld   a, [hl]                                  ; $40BA: $7E
-    add  $02                                      ; $40BB: $C6 $02
+    add  2                                        ; $40BB: $C6 $02
     ld   [hl], a                                  ; $40BD: $77
     jp   label_007_4198                           ; $40BE: $C3 $98 $41
 
@@ -179,7 +179,7 @@ BushCrawlerState0Handler::
     ld   [hl], a                                  ; $4112: $77
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4113: $21 $40 $C3
     add  hl, bc                                   ; $4116: $09
-    res  7, [hl]                                  ; $4117: $CB $BE
+    res  ENTITY_PHYSICS_B_HARMLESS, [hl]          ; $4117: $CB $BE
     ld   hl, wEntitiesHitboxFlagsTable            ; $4119: $21 $50 $C3
     add  hl, bc                                   ; $411C: $09
     res  2, [hl]                                  ; $411D: $CB $96
@@ -191,7 +191,7 @@ BushCrawlerState0Handler::
 jr_007_4128:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4128: $21 $40 $C3
     add  hl, bc                                   ; $412B: $09
-    set  7, [hl]                                  ; $412C: $CB $FE
+    set  ENTITY_PHYSICS_B_HARMLESS, [hl]          ; $412C: $CB $FE
     ld   hl, wEntitiesHitboxFlagsTable            ; $412E: $21 $50 $C3
     add  hl, bc                                   ; $4131: $09
     set  2, [hl]                                  ; $4132: $CB $D6

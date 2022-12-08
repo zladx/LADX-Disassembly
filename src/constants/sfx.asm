@@ -216,7 +216,7 @@ NOISE_SFX_SHOOT_ARROW             equ $0A;probs arrow
 ;NOISE_SFX_SHIELD_DEFLECT         equ $0B;shield sound but shorter
 NOISE_SFX_BOMB_EXPLOSION          equ $0C; Used for the lightning sounds in the title screen intro cutscene
 NOISE_SFX_MAGIC_ROD               equ $0D;electricity, but likely magic
-NOISE_SFX_SHOWEL_DIG              equ $0E;digging
+NOISE_SFX_SHOVEL_DIG              equ $0E;digging
 NOISE_SFX_SEA_WAVES               equ $0F;beach waves
 NOISE_SFX_DOOR_CLOSED             equ $10;closing of door likely
 NOISE_SFX_BLOCK_RUMBLE            equ $11;some rumble

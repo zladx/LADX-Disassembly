@@ -133,7 +133,7 @@ func_007_5383::
     ld   [hl], $18                                ; $5393: $36 $18
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5395: $21 $40 $C3
     add  hl, bc                                   ; $5398: $09
-    res  6, [hl]                                  ; $5399: $CB $B6
+    res  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $5399: $CB $B6
     jp   IncrementEntityState                     ; $539B: $C3 $12 $3B
 
 .jr_539E

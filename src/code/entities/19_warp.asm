@@ -268,7 +268,7 @@ Data_019_43A5::
 func_019_43A9::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $43A9: $21 $40 $C3
     add  hl, bc                                   ; $43AC: $09
-    ld   [hl], $C2                                ; $43AD: $36 $C2
+    ld   [hl], 2 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $43AD: $36 $C2
     ldh  a, [hFrameCounter]                       ; $43AF: $F0 $E7
     rra                                           ; $43B1: $1F
     rra                                           ; $43B2: $1F
@@ -279,7 +279,7 @@ func_019_43A9::
     call RenderActiveEntitySpritesPair            ; $43BB: $CD $C0 $3B
     ld   hl, wEntitiesPhysicsFlagsTable           ; $43BE: $21 $40 $C3
     add  hl, bc                                   ; $43C1: $09
-    ld   [hl], $C1                                ; $43C2: $36 $C1
+    ld   [hl], 1 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $43C2: $36 $C1
     xor  a                                        ; $43C4: $AF
 
 .loop_43C5
@@ -329,7 +329,7 @@ Data_019_4404::
 label_019_4406:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4406: $21 $40 $C3
     add  hl, bc                                   ; $4409: $09
-    ld   [hl], $C1                                ; $440A: $36 $C1
+    ld   [hl], 1 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $440A: $36 $C1
     ldh  a, [hFrameCounter]                       ; $440C: $F0 $E7
     rla                                           ; $440E: $17
     rla                                           ; $440F: $17

@@ -318,7 +318,7 @@ label_007_6660:
 func_007_666B::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $666B: $21 $40 $C3
     add  hl, bc                                   ; $666E: $09
-    ld   [hl], $C2                                ; $666F: $36 $C2
+    ld   [hl], 2 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $666F: $36 $C2
     call GetEntityTransitionCountdown             ; $6671: $CD $05 $0C
     jr   nz, .jr_668E                             ; $6674: $20 $18
 
@@ -333,7 +333,7 @@ func_007_666B::
     ld   [hl], $01                                ; $6686: $36 $01
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6688: $21 $40 $C3
     add  hl, bc                                   ; $668B: $09
-    ld   [hl], $04                                ; $668C: $36 $04
+    ld   [hl], 4                                  ; $668C: $36 $04
 
 .jr_668E
     ld   a, $02                                   ; $668E: $3E $02

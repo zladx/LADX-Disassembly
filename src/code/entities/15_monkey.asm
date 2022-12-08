@@ -166,7 +166,7 @@ jr_015_773A:
     ld   [hl], $0C                                ; $7774: $36 $0C
     ld   hl, wEntitiesPhysicsFlagsTable           ; $7776: $21 $40 $C3
     add  hl, de                                   ; $7779: $19
-    ld   [hl], $12                                ; $777A: $36 $12
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ; $777A: $36 $12
     ld   hl, wEntitiesOptions1Table               ; $777C: $21 $30 $C4
     add  hl, de                                   ; $777F: $19
     set  ENTITY_OPT1_B_MOVE_PIT_WATER, [hl]       ; $7780: $CB $C6

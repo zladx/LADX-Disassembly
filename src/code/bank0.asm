@@ -1827,7 +1827,7 @@ UseShovel::
     jr   .endIf                                   ; $1309: $18 $04
 
 .notPoking
-    ld   a, NOISE_SFX_SHOWEL_DIG                  ; $130B: $3E $0E
+    ld   a, NOISE_SFX_SHOVEL_DIG                  ; $130B: $3E $0E
     ldh  [hNoiseSfx], a                           ; $130D: $E0 $F4
 .endIf
 

@@ -78,7 +78,7 @@ func_007_4CEE::
     ld   [hl], $0E                                ; $4D0D: $36 $0E
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4D0F: $21 $40 $C3
     add  hl, de                                   ; $4D12: $19
-    ld   [hl], $C1                                ; $4D13: $36 $C1
+    ld   [hl], 1 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $4D13: $36 $C1
     ld   hl, wEntitiesHitboxFlagsTable            ; $4D15: $21 $50 $C3
     add  hl, de                                   ; $4D18: $19
     ld   [hl], $00                                ; $4D19: $36 $00

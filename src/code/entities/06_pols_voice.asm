@@ -32,7 +32,7 @@ PolsVoiceEntityHandler::
     ld   [hl], $01                                ; $739F: $36 $01
     ld   hl, wEntitiesPhysicsFlagsTable           ; $73A1: $21 $40 $C3
     add  hl, bc                                   ; $73A4: $09
-    ld   [hl], $04                                ; $73A5: $36 $04
+    ld   [hl], 4                                  ; $73A5: $36 $04
     ld   hl, hNoiseSfx                            ; $73A7: $21 $F4 $FF
     ld   [hl], $13                                ; $73AA: $36 $13
     ret                                           ; $73AC: $C9

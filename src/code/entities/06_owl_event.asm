@@ -430,5 +430,5 @@ jr_006_6A5B:
 .jr_6A71
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6A71: $21 $40 $C3
     add  hl, bc                                   ; $6A74: $09
-    res  4, [hl]                                  ; $6A75: $CB $A6
+    res  ENTITY_PHYSICS_B_SHADOW, [hl]            ; $6A75: $CB $A6
     ret                                           ; $6A77: $C9

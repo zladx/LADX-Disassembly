@@ -363,7 +363,7 @@ SmasherSpriteVariants::
 label_006_4781:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4781: $21 $40 $C3
     add  hl, bc                                   ; $4784: $09
-    ld   [hl], $92                                ; $4785: $36 $92
+    ld   [hl], 2 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_SHADOW ; $4785: $36 $92
     ld   hl, wC5D0                                ; $4787: $21 $D0 $C5
     add  hl, bc                                   ; $478A: $09
     ld   [hl], $FF                                ; $478B: $36 $FF
@@ -594,11 +594,11 @@ label_006_48DB:
 func_006_48DD::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $48DD: $21 $40 $C3
     add  hl, bc                                   ; $48E0: $09
-    ld   [hl], $12                                ; $48E1: $36 $12
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ; $48E1: $36 $12
     call label_3B44                               ; $48E3: $CD $44 $3B
     ld   hl, wEntitiesPhysicsFlagsTable           ; $48E6: $21 $40 $C3
     add  hl, bc                                   ; $48E9: $09
-    ld   [hl], $92                                ; $48EA: $36 $92
+    ld   [hl], 2 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_SHADOW ; $48EA: $36 $92
 
 jr_006_48EC:
     ldh  a, [hMultiPurposeG]                      ; $48EC: $F0 $E8

@@ -78,7 +78,7 @@ func_005_55CA::
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $55E2: $21 $40 $C3
     add  hl, de                                   ; $55E5: $19
-    ld   [hl], $02                                ; $55E6: $36 $02
+    ld   [hl], 2                                  ; $55E6: $36 $02
     ld   hl, wEntitiesHitboxFlagsTable            ; $55E8: $21 $50 $C3
     add  hl, de                                   ; $55EB: $19
     ld   [hl], $80                                ; $55EC: $36 $80
@@ -123,7 +123,7 @@ jr_005_561E:
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5632: $21 $40 $C3
     add  hl, de                                   ; $5635: $19
-    ld   [hl], $41                                ; $5636: $36 $41
+    ld   [hl], 1 | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $5636: $36 $41
     ld   hl, wEntitiesPrivateState3Table          ; $5638: $21 $D0 $C2
     add  hl, de                                   ; $563B: $19
     ld   [hl], $02                                ; $563C: $36 $02
@@ -160,7 +160,7 @@ jr_005_5650:
     ld   [hl], d                                  ; $566F: $72
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5670: $21 $40 $C3
     add  hl, de                                   ; $5673: $19
-    ld   [hl], $02                                ; $5674: $36 $02
+    ld   [hl], 2                                  ; $5674: $36 $02
     ld   hl, wEntitiesOptions1Table               ; $5676: $21 $30 $C4
     add  hl, de                                   ; $5679: $19
     ld   [hl], d                                  ; $567A: $72

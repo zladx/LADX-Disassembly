@@ -238,7 +238,7 @@ jr_019_4185:
 .jr_4193
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4193: $21 $40 $C3
     add  hl, de                                   ; $4196: $19
-    ld   [hl], $C1                                ; $4197: $36 $C1
+    ld   [hl], 1 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $4197: $36 $C1
     push bc                                       ; $4199: $C5
     ldh  a, [hMultiPurposeG]                      ; $419A: $F0 $E8
     ld   c, a                                     ; $419C: $4F

@@ -62,7 +62,7 @@ GenieState0Handler::
     call ReturnIfNonInteractive_04                ; $405B: $CD $A3 $7F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $405E: $21 $40 $C3
     add  hl, bc                                   ; $4061: $09
-    ld   [hl], $81                                ; $4062: $36 $81
+    ld   [hl], 1 | ENTITY_PHYSICS_HARMLESS        ; $4062: $36 $81
     ld   hl, wEntitiesHitboxFlagsTable            ; $4064: $21 $50 $C3
     add  hl, bc                                   ; $4067: $09
     ld   [hl], $80                                ; $4068: $36 $80
@@ -677,7 +677,7 @@ jr_004_43A6:
     ld   [hl], $0C                                ; $4430: $36 $0C
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4432: $21 $40 $C3
     add  hl, de                                   ; $4435: $19
-    ld   [hl], $42                                ; $4436: $36 $42
+    ld   [hl], 2 | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $4436: $36 $42
 
 jr_004_4438:
     call GetEntityPrivateCountdown1               ; $4438: $CD $00 $0C
@@ -715,7 +715,7 @@ jr_004_4438:
     ld   [hl], $04                                ; $446D: $36 $04
     ld   hl, wEntitiesPhysicsFlagsTable           ; $446F: $21 $40 $C3
     add  hl, de                                   ; $4472: $19
-    ld   [hl], $12                                ; $4473: $36 $12
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ; $4473: $36 $12
     ld   c, e                                     ; $4475: $4B
     ld   b, d                                     ; $4476: $42
     ld   a, $1F                                   ; $4477: $3E $1F
@@ -891,7 +891,7 @@ jr_004_4568:
 func_004_4575::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4575: $21 $40 $C3
     add  hl, bc                                   ; $4578: $09
-    ld   [hl], $41                                ; $4579: $36 $41
+    ld   [hl], 1 | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $4579: $36 $41
     call GetEntityTransitionCountdown             ; $457B: $CD $05 $0C
     jr   nz, jr_004_45F1                          ; $457E: $20 $71
 
@@ -899,7 +899,7 @@ func_004_4575::
     ld   [hl], $04                                ; $4583: $36 $04
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4585: $21 $40 $C3
     add  hl, bc                                   ; $4588: $09
-    ld   [hl], $01                                ; $4589: $36 $01
+    ld   [hl], 1                                  ; $4589: $36 $01
     call GetRandomByte                            ; $458B: $CD $0D $28
     and  $01                                      ; $458E: $E6 $01
     jr   nz, .jr_45A6                             ; $4590: $20 $14
@@ -952,7 +952,7 @@ func_004_4575::
     ld   [hl], $04                                ; $45DC: $36 $04
     ld   hl, wEntitiesPhysicsFlagsTable           ; $45DE: $21 $40 $C3
     add  hl, de                                   ; $45E1: $19
-    ld   [hl], $12                                ; $45E2: $36 $12
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ; $45E2: $36 $12
     ld   c, e                                     ; $45E4: $4B
     ld   b, d                                     ; $45E5: $42
     ld   a, $1F                                   ; $45E6: $3E $1F
@@ -1201,7 +1201,7 @@ jr_004_486D:
     ld   [hl], $40                                ; $4898: $36 $40
     ld   hl, wEntitiesPhysicsFlagsTable           ; $489A: $21 $40 $C3
     add  hl, de                                   ; $489D: $19
-    ld   [hl], $01                                ; $489E: $36 $01
+    ld   [hl], 1                                  ; $489E: $36 $01
     ld   hl, wEntitiesHitboxFlagsTable            ; $48A0: $21 $50 $C3
     add  hl, de                                   ; $48A3: $19
     ld   [hl], $8C                                ; $48A4: $36 $8C

@@ -56,7 +56,7 @@ func_019_4DBC::
     inc  [hl]                                     ; $4DF0: $34
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4DF1: $21 $40 $C3
     add  hl, de                                   ; $4DF4: $19
-    ld   [hl], $C1                                ; $4DF5: $36 $C1
+    ld   [hl], 1 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $4DF5: $36 $C1
     ld   a, MUSIC_ROOSTER_REVIVAL                 ; $4DF7: $3E $55
     ld   [wMusicTrackToPlay], a                   ; $4DF9: $EA $68 $D3
     jp   IncrementEntityState                     ; $4DFC: $C3 $12 $3B
@@ -333,7 +333,7 @@ Data_019_500B::
 func_019_500D::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $500D: $21 $40 $C3
     add  hl, bc                                   ; $5010: $09
-    ld   [hl], $D2                                ; $5011: $36 $D2
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $5011: $36 $D2
     ld   de, Unknown065SpriteVariants             ; $5013: $11 $DB $4F
     call RenderActiveEntitySpritesPair            ; $5016: $CD $C0 $3B
     ld   hl, wEntitiesPrivateState3Table          ; $5019: $21 $D0 $C2
@@ -513,7 +513,7 @@ label_019_50C4::
     ldh  [hActiveEntitySpriteVariant], a          ; $511C: $E0 $F1
     ld   hl, wEntitiesPhysicsFlagsTable           ; $511E: $21 $40 $C3
     add  hl, bc                                   ; $5121: $09
-    res  4, [hl]                                  ; $5122: $CB $A6
+    res  ENTITY_PHYSICS_B_SHADOW, [hl]            ; $5122: $CB $A6
     ld   de, Unknown066SpriteVariants             ; $5124: $11 $FB $4F
     call RenderActiveEntitySpritesPair            ; $5127: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $512A: $CD $8A $3D

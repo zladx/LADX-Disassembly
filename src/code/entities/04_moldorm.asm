@@ -293,7 +293,7 @@ func_004_5902::
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $590C: $21 $40 $C3
     add  hl, bc                                   ; $590F: $09
-    ld   [hl], $08                                ; $5910: $36 $08
+    ld   [hl], 8                                  ; $5910: $36 $08
     ld   hl, wEntitiesSpriteVariantTable          ; $5912: $21 $B0 $C3
     add  hl, bc                                   ; $5915: $09
     ld   a, [hl]                                  ; $5916: $7E
@@ -313,7 +313,7 @@ func_004_5902::
     call RenderActiveEntitySpritesRect            ; $5926: $CD $E6 $3C
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5929: $21 $40 $C3
     add  hl, bc                                   ; $592C: $09
-    ld   [hl], $02                                ; $592D: $36 $02
+    ld   [hl], 2                                  ; $592D: $36 $02
     ld   hl, wEntitiesInertiaTable                ; $592F: $21 $D0 $C3
     add  hl, bc                                   ; $5932: $09
     ld   a, [hl]                                  ; $5933: $7E

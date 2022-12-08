@@ -79,7 +79,7 @@ FishermanFishingGameEntityHandler::
     ; Allocate 4 sprites, and don't hurt Link on touch
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5F9C: $21 $40 $C3
     add  hl, bc                                   ; $5F9F: $09
-    ld   [hl], $04 | $80                          ; $5FA0: $36 $84
+    ld   [hl], 4 | ENTITY_PHYSICS_HARMLESS        ; $5FA0: $36 $84
 
     ld   hl, wEntitiesPrivateState5Table          ; $5FA2: $21 $90 $C3
     add  hl, bc                                   ; $5FA5: $09

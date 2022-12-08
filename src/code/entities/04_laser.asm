@@ -120,7 +120,7 @@ jr_004_6CB4:
     ld   [hl], c                                  ; $6CEE: $71
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6CEF: $21 $40 $C3
     add  hl, de                                   ; $6CF2: $19
-    ld   [hl], $C0                                ; $6CF3: $36 $C0
+    ld   [hl], ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $6CF3: $36 $C0
     push bc                                       ; $6CF5: $C5
     ldh  a, [hMultiPurpose2]                      ; $6CF6: $F0 $D9
     ld   c, a                                     ; $6CF8: $4F

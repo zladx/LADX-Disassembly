@@ -229,7 +229,7 @@ func_005_5B3B::
 func_005_5B4B::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5B4B: $21 $40 $C3
     add  hl, bc                                   ; $5B4E: $09
-    ld   [hl], $C2                                ; $5B4F: $36 $C2
+    ld   [hl], 2 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $5B4F: $36 $C2
 
 IF __PATCH_0__
     xor  a
@@ -282,7 +282,7 @@ func_005_5B6B::
     ldh  [hNoiseSfx], a                           ; $5B99: $E0 $F4
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5B9B: $21 $40 $C3
     add  hl, bc                                   ; $5B9E: $09
-    ld   [hl], $42                                ; $5B9F: $36 $42
+    ld   [hl], 2 | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $5B9F: $36 $42
     ld   hl, wEntitiesPrivateState3Table          ; $5BA1: $21 $D0 $C2
     add  hl, bc                                   ; $5BA4: $09
     inc  [hl]                                     ; $5BA5: $34
@@ -898,7 +898,7 @@ jr_005_5EA3:
     pop  bc                                       ; $5F1C: $C1
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5F1D: $21 $40 $C3
     add  hl, de                                   ; $5F20: $19
-    ld   [hl], $02                                ; $5F21: $36 $02
+    ld   [hl], 2                                  ; $5F21: $36 $02
     ld   hl, wEntitiesOptions1Table               ; $5F23: $21 $30 $C4
     add  hl, de                                   ; $5F26: $19
     ld   [hl], ENTITY_OPT1_NONE                   ; $5F27: $36 $00
@@ -968,7 +968,7 @@ jr_005_5F68:
 label_005_5F78:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5F78: $21 $40 $C3
     add  hl, bc                                   ; $5F7B: $09
-    ld   [hl], $02                                ; $5F7C: $36 $02
+    ld   [hl], 2                                  ; $5F7C: $36 $02
     call IncrementEntityState                     ; $5F7E: $CD $12 $3B
     ld   [hl], $07                                ; $5F81: $36 $07
     call GetEntityTransitionCountdown             ; $5F83: $CD $05 $0C

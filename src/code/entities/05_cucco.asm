@@ -323,7 +323,7 @@ jr_005_46D2:
     ld   [hl], $10                                ; $4716: $36 $10
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4718: $21 $40 $C3
     add  hl, de                                   ; $471B: $19
-    ld   [hl], $12                                ; $471C: $36 $12
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ; $471C: $36 $12
     ld   hl, wEntitiesHitboxFlagsTable            ; $471E: $21 $50 $C3
     add  hl, de                                   ; $4721: $19
     ld   [hl], $80                                ; $4722: $36 $80

@@ -246,7 +246,7 @@ func_015_51B5::
     ld   [hl], b                                  ; $51C8: $70
     ld   hl, wEntitiesPhysicsFlagsTable           ; $51C9: $21 $40 $C3
     add  hl, bc                                   ; $51CC: $09
-    res  7, [hl]                                  ; $51CD: $CB $BE
+    res  ENTITY_PHYSICS_B_HARMLESS, [hl]          ; $51CD: $CB $BE
     ret                                           ; $51CF: $C9
 
 .jr_51D0
@@ -416,7 +416,7 @@ func_015_52BB::
     ld   [hl], b                                  ; $52D6: $70
     ld   hl, wEntitiesPhysicsFlagsTable           ; $52D7: $21 $40 $C3
     add  hl, bc                                   ; $52DA: $09
-    ld   [hl], $C0                                ; $52DB: $36 $C0
+    ld   [hl], ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $52DB: $36 $C0
     ld   a, $02                                   ; $52DD: $3E $02
     ld   [wEntityTilesSpriteslotIndexA], a        ; $52DF: $EA $97 $C1
     inc  a                                        ; $52E2: $3C
@@ -571,7 +571,7 @@ jr_015_5384:
     ld   [hl], $2F                                ; $53C7: $36 $2F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $53C9: $21 $40 $C3
     add  hl, de                                   ; $53CC: $19
-    ld   [hl], $C2                                ; $53CD: $36 $C2
+    ld   [hl], 2 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $53CD: $36 $C2
     ld   hl, wEntitiesPrivateState5Table          ; $53CF: $21 $90 $C3
     add  hl, de                                   ; $53D2: $19
     inc  [hl]                                     ; $53D3: $34
@@ -1123,7 +1123,7 @@ func_015_5854::
     ld   [hl], a                                  ; $5884: $77
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5885: $21 $40 $C3
     add  hl, de                                   ; $5888: $19
-    ld   [hl], $42                                ; $5889: $36 $42
+    ld   [hl], 2 | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $5889: $36 $42
     ld   hl, wEntitiesHitboxFlagsTable            ; $588B: $21 $50 $C3
     add  hl, de                                   ; $588E: $19
     ld   [hl], d                                  ; $588F: $72
@@ -1741,7 +1741,7 @@ func_015_5E38::
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5E49: $21 $40 $C3
     add  hl, de                                   ; $5E4C: $19
-    ld   [hl], $C2                                ; $5E4D: $36 $C2
+    ld   [hl], 2 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $5E4D: $36 $C2
     ld   hl, wEntitiesHitboxFlagsTable            ; $5E4F: $21 $50 $C3
     add  hl, de                                   ; $5E52: $19
     ld   [hl], d                                  ; $5E53: $72
@@ -2067,7 +2067,7 @@ func_015_608C::
     ld   [hl], $FF                                ; $609E: $36 $FF
     ld   hl, wEntitiesPhysicsFlagsTable           ; $60A0: $21 $40 $C3
     add  hl, bc                                   ; $60A3: $09
-    ld   [hl], $40                                ; $60A4: $36 $40
+    ld   [hl], ENTITY_PHYSICS_PROJECTILE_NOCLIP   ; $60A4: $36 $40
     ld   hl, wEntitiesHitboxFlagsTable            ; $60A6: $21 $50 $C3
     add  hl, bc                                   ; $60A9: $09
     ld   [hl], $0A                                ; $60AA: $36 $0A
@@ -2194,7 +2194,7 @@ Unknown053SpriteVariants::
 func_015_6245::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6245: $21 $40 $C3
     add  hl, bc                                   ; $6248: $09
-    ld   [hl], $48                                ; $6249: $36 $48
+    ld   [hl], 8 | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $6249: $36 $48
     ld   hl, wEntitiesSpriteVariantTable          ; $624B: $21 $B0 $C3
     add  hl, bc                                   ; $624E: $09
     ld   a, [hl]                                  ; $624F: $7E
@@ -2780,7 +2780,7 @@ jr_015_6628:
     push bc                                       ; $6681: $C5
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6682: $21 $40 $C3
     add  hl, de                                   ; $6685: $19
-    ld   [hl], $42                                ; $6686: $36 $42
+    ld   [hl], 2 | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $6686: $36 $42
     ld   hl, wEntitiesHitboxFlagsTable            ; $6688: $21 $50 $C3
     add  hl, de                                   ; $668B: $19
     ld   [hl], $00                                ; $668C: $36 $00
@@ -2889,7 +2889,7 @@ func_015_66CC::
     ld   [hl], a                                  ; $672C: $77
     ld   hl, wEntitiesPhysicsFlagsTable           ; $672D: $21 $40 $C3
     add  hl, de                                   ; $6730: $19
-    ld   [hl], $40                                ; $6731: $36 $40
+    ld   [hl], ENTITY_PHYSICS_PROJECTILE_NOCLIP   ; $6731: $36 $40
     ld   hl, wEntitiesHitboxFlagsTable            ; $6733: $21 $50 $C3
     add  hl, de                                   ; $6736: $19
     ld   [hl], $08                                ; $6737: $36 $08
@@ -3023,7 +3023,7 @@ func_015_67FA::
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6805: $21 $40 $C3
     add  hl, bc                                   ; $6808: $09
-    res  6, [hl]                                  ; $6809: $CB $B6
+    res  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $6809: $CB $B6
     call IncrementEntityState                     ; $680B: $CD $12 $3B
     jp   ClearEntitySpeed                         ; $680E: $C3 $7F $3D
 
@@ -3069,7 +3069,7 @@ jr_015_683F:
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6847: $21 $40 $C3
     add  hl, bc                                   ; $684A: $09
-    set  6, [hl]                                  ; $684B: $CB $F6
+    set  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $684B: $CB $F6
     call GetEntityTransitionCountdown             ; $684D: $CD $05 $0C
     ld   [hl], $80                                ; $6850: $36 $80
     call label_27F2                               ; $6852: $CD $F2 $27
@@ -3107,7 +3107,7 @@ jr_015_683F:
     ld   [hl], $1F                                ; $6887: $36 $1F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6889: $21 $40 $C3
     add  hl, de                                   ; $688C: $19
-    ld   [hl], $C2                                ; $688D: $36 $C2
+    ld   [hl], 2 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $688D: $36 $C2
     ld   hl, wEntitiesSpriteVariantTable          ; $688F: $21 $B0 $C3
     add  hl, de                                   ; $6892: $19
     ld   [hl], $01                                ; $6893: $36 $01
@@ -3719,7 +3719,7 @@ func_015_6E66::
     res  7, [hl]                                  ; $6E8D: $CB $BE
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6E8F: $21 $40 $C3
     add  hl, bc                                   ; $6E92: $09
-    set  6, [hl]                                  ; $6E93: $CB $F6
+    set  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $6E93: $CB $F6
     call label_27F2                               ; $6E95: $CD $F2 $27
     jp   IncrementEntityState                     ; $6E98: $C3 $12 $3B
 

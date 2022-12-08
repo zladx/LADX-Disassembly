@@ -41,7 +41,7 @@ jr_007_713E:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $714F: $21 $40 $C3
     add  hl, de                                   ; $7152: $19
     ld   a, [hl]                                  ; $7153: $7E
-    and  $80                                      ; $7154: $E6 $80
+    and  ENTITY_PHYSICS_HARMLESS                  ; $7154: $E6 $80
     jr   nz, .jr_7161                             ; $7156: $20 $09
 
     ld   hl, wEntitiesStatusTable                 ; $7158: $21 $80 $C2

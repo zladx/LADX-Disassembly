@@ -1056,7 +1056,7 @@ func_014_50C3::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $50D0: $21 $40 $C3
     add  hl, de                                   ; $50D3: $19
     ld   a, [hl]                                  ; $50D4: $7E
-    and  %00100000                                ; $50D5: $E6 $20
+    and  ENTITY_PHYSICS_GRABBABLE                 ; $50D5: $E6 $20
     jr   z, .continue                             ; $50D7: $28 $38
 
     ; and the wEntitiesPrivateState3Table value != 2…

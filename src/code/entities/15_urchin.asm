@@ -59,7 +59,7 @@ UrchinEntityHandler::
     ld   [hl], e                                  ; $73D3: $73
     ld   hl, wEntitiesPhysicsFlagsTable           ; $73D4: $21 $40 $C3
     add  hl, bc                                   ; $73D7: $09
-    res  7, [hl]                                  ; $73D8: $CB $BE
+    res  ENTITY_PHYSICS_B_HARMLESS, [hl]          ; $73D8: $CB $BE
     ld   a, [wIsUsingShield]                      ; $73DA: $FA $5B $C1
     and  a                                        ; $73DD: $A7
     jr   z, .jr_73E9                              ; $73DE: $28 $09
@@ -79,7 +79,7 @@ UrchinEntityHandler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $73F1: $21 $40 $C3
     add  hl, bc                                   ; $73F4: $09
     ld   a, [hl]                                  ; $73F5: $7E
-    and  $80                                      ; $73F6: $E6 $80
+    and  ENTITY_PHYSICS_HARMLESS                  ; $73F6: $E6 $80
     ret  z                                        ; $73F8: $C8
 
     ld   hl, wEntitiesDirectionTable              ; $73F9: $21 $80 $C3

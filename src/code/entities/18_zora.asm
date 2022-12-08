@@ -36,7 +36,7 @@ ZoraEntityHandler::
     jp   z, ClearEntityStatusBank18               ; $49F0: $CA $08 $7F
 
     ld   a, [wTradeSequenceItem]                  ; $49F3: $FA $0E $DB
-    cp   TRADING_ITEM_MAGNIFYING_GLASS            ; $49F6: $FE $0E
+    cp   TRADING_ITEM_MAGNIFYING_LENS             ; $49F6: $FE $0E
     jp   nz, ClearEntityStatusBank18              ; $49F8: $C2 $08 $7F
 
     ld   a, [wExchangingTradeSequenceItem]        ; $49FB: $FA $7F $DB

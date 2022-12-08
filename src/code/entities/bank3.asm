@@ -747,7 +747,7 @@ EntityInitZora::
     jr   nz, EntityInitNoop                       ; $4B6B: $20 $E9
 
     ld   a, [wTradeSequenceItem]                  ; $4B6D: $FA $0E $DB
-    cp   TRADING_ITEM_MAGNIFYING_GLASS            ; $4B70: $FE $0E
+    cp   TRADING_ITEM_MAGNIFYING_LENS             ; $4B70: $FE $0E
     jp   nz, UnloadEntityAndReturn                ; $4B72: $C2 $8D $3F
 
     ld   a, [wPhotos2]                            ; $4B75: $FA $0D $DC
@@ -1466,7 +1466,7 @@ ENDC
 
 EntityInitTradingItem::
     ld   a, [wTradeSequenceItem]                  ; $4F68: $FA $0E $DB
-    cp   TRADING_ITEM_MAGNIFYING_GLASS            ; $4F6B: $FE $0E
+    cp   TRADING_ITEM_MAGNIFYING_LENS             ; $4F6B: $FE $0E
     jr   z, EntityInitWithShiftedPosition         ; $4F6D: $28 $14
 
     ret                                           ; $4F6F: $C9

@@ -400,8 +400,8 @@ label_001_4555::
     ld   a, [SaveGame1.main + wHealth - wOverworldRoomStatus] ; $4585: $FA $5F $A4
     ld   [wFile1Health], a                        ; $4588: $EA $06 $DC
     call EnableSRAM                               ; $458B: $CD $D0 $27
-    ld   a, [SaveGame1.main + wMaxHealth - wOverworldRoomStatus] ; $458E: $FA $60 $A4
-    ld   [wFile1MaxHealth], a                     ; $4591: $EA $09 $DC
+    ld   a, [SaveGame1.main + wMaxHearts - wOverworldRoomStatus] ; $458E: $FA $60 $A4
+    ld   [wFile1MaxHearts], a                     ; $4591: $EA $09 $DC
     call EnableSRAM                               ; $4594: $CD $D0 $27
     ld   a, [SaveGame1.main + wDeathCount - wOverworldRoomStatus] ; $4597: $FA $5C $A4
     ld   [wFile1DeathCountHigh], a                ; $459A: $EA $00 $DC
@@ -427,8 +427,8 @@ label_001_4555::
     ld   a, [SaveGame2.main + wHealth - wOverworldRoomStatus] ; $45D6: $FA $0C $A8
     ld   [wFile2Health], a                        ; $45D9: $EA $07 $DC
     call EnableSRAM                               ; $45DC: $CD $D0 $27
-    ld   a, [SaveGame2.main + wMaxHealth - wOverworldRoomStatus] ; $45DF: $FA $0D $A8
-    ld   [wFile2MaxHealth], a                     ; $45E2: $EA $0A $DC
+    ld   a, [SaveGame2.main + wMaxHearts - wOverworldRoomStatus] ; $45DF: $FA $0D $A8
+    ld   [wFile2MaxHearts], a                     ; $45E2: $EA $0A $DC
     call EnableSRAM                               ; $45E5: $CD $D0 $27
     ld   a, [SaveGame2.main + wDeathCount - wOverworldRoomStatus] ; $45E8: $FA $09 $A8
     ld   [wFile2DeathCountHigh], a                ; $45EB: $EA $02 $DC
@@ -454,8 +454,8 @@ label_001_4555::
     ld   a, [SaveGame3.main + wHealth - wOverworldRoomStatus] ; $4627: $FA $B9 $AB
     ld   [wFile3Health], a                        ; $462A: $EA $08 $DC
     call EnableSRAM                               ; $462D: $CD $D0 $27
-    ld   a, [SaveGame3.main + wMaxHealth - wOverworldRoomStatus] ; $4630: $FA $BA $AB
-    ld   [wFile3MaxHealth], a                     ; $4633: $EA $0B $DC
+    ld   a, [SaveGame3.main + wMaxHearts - wOverworldRoomStatus] ; $4630: $FA $BA $AB
+    ld   [wFile3MaxHearts], a                     ; $4633: $EA $0B $DC
     call EnableSRAM                               ; $4636: $CD $D0 $27
     ld   a, [SaveGame3.main + wDeathCount - wOverworldRoomStatus] ; $4639: $FA $B6 $AB
     ld   [wFile3DeathCountHigh], a                ; $463C: $EA $04 $DC

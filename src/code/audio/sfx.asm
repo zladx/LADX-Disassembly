@@ -8694,9 +8694,15 @@ func_01F_7B5C::
     ldh  [rNR24], a                               ; $7BF7: $E0 $19
     ldh  [rNR44], a                               ; $7BF9: $E0 $23
     xor  a                                        ; $7BFB: $AF
+    ; Disable sweep
     ldh  [rNR10], a                               ; $7BFC: $E0 $10
 IF __PATCH_2__
+    ; Turn off the sound
     ldh  [rNR30], a
 ELSE
+    ; Probably a bug:
+    ; Write zero to the joypad register
     ldh  [rP1], a                                 ; $7BFE: $E0 $00
 ENDC
+    ; Fall through NOPs $7C00-$7F7F and land
+    ; in src/audio/sfx_fade.asm ?

@@ -1342,7 +1342,7 @@ func_004_6689::
     ld   [wHeartPiecesCount], a                   ; $66CA: $EA $5C $DB
     ld   hl, wAddHealthBuffer                     ; $66CD: $21 $93 $DB
     ld   [hl], $40                                ; $66D0: $36 $40
-    ld   hl, wMaxHealth                           ; $66D2: $21 $5B $DB
+    ld   hl, wMaxHearts                           ; $66D2: $21 $5B $DB
     inc  [hl]                                     ; $66D5: $34
     ld_dialog_low a, Dialog1FF ; "It has a piece of heart! New heart" ; $66D6: $3E $FF
     jr   jr_004_66DC                              ; $66D8: $18 $02

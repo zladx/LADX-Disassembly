@@ -3122,12 +3122,12 @@ wIsBowWowFollowingLink::
 wDeathCount::
   ds 3 ; DB57 DB58 DB59
 
-; Number of hearts ($08 = 1 heart)
+; Amount of health ($08 = 1 heart)
 wHealth::
   ds 1 ; DB5A
 
 ; Maximum number of hearts
-wMaxHealth::
+wMaxHearts::
   ds 1 ; DB5B
 
 ; TODO comment
@@ -3413,11 +3413,22 @@ wDBA4::
 wIsIndoor::
   ds 1 ; DBA5
 
-; TODO comment
+; The currently selected save slot, or file menu item
+;
+; 0 = The first save file
+; 1 = The second save file
+; 2 = The third save file
+; 3 = The COPY/ERASE file menu item
+;     (see wIsFileSelectionArrowShifted)
 wSaveSlot::
   ds 1 ; DBA6
 
-; TODO comment
+; Bitfield that indicates which save files have been
+; initialized/created, ie. the following values OR-ed together:
+;
+; 1 = The first save file has been initialized
+; 2 = The second save file has been initialized
+; 4 = The third save file has been initialized
 wSaveFilesCount::
   ds 1 ; DBA7
 
@@ -3556,28 +3567,28 @@ wFile3DeathCountHigh::
 wFile3DeathCountLow::
   ds 1 ; DC05
 
-; Amount of health for file 1, needs to be wFile1MaxHealth * 8 or the game crashes while drawing the file selection menu
+; Amount of health for file 1, needs to be wFile1MaxHearts * 8 or the game crashes while drawing the file selection menu
 wFile1Health::
   ds 1 ; DC06
 
-; Amount of health for file 2, needs to be wFile2MaxHealth * 8 or the game crashes while drawing the file selection menu
+; Amount of health for file 2, needs to be wFile2MaxHearts * 8 or the game crashes while drawing the file selection menu
 wFile2Health::
   ds 1 ; DC07
 
-; Amount of health for file 3, needs to be wFile3MaxHealth * 8 or the game crashes while drawing the file selection menu
+; Amount of health for file 3, needs to be wFile3MaxHearts * 8 or the game crashes while drawing the file selection menu
 wFile3Health::
   ds 1 ; DC08
 
-; Amount of maximum health for file 1, used to draw the hearts on the file selection menu
-wFile1MaxHealth::
+; Amount of maximum hearts for file 1, used to draw the hearts on the file selection menu
+wFile1MaxHearts::
   ds 1 ; DC09
 
-; Amount of maximum health for file 2, used to draw the hearts on the file selection menu
-wFile2MaxHealth::
+; Amount of maximum hearts for file 2, used to draw the hearts on the file selection menu
+wFile2MaxHearts::
   ds 1 ; DC0A
 
-; Amount of maximum health for file 3, used to draw the hearts on the file selection menu
-wFile3MaxHealth::
+; Amount of maximum hearts for file 3, used to draw the hearts on the file selection menu
+wFile3MaxHearts::
   ds 1 ; DC0B
 
 ; Photos 1-8 (bitfield)

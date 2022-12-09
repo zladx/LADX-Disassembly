@@ -489,7 +489,7 @@ DrawLinkSpriteAndReturn::
     add  a, c                                     ; $1D62: $81
     ; wLinkOAMBuffer[8 + 1] = a
     ldi  [hl], a                                  ; $1D63: $22
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     xor  a
 ELSE
     ld   a, $00                                   ; $1D64: $3E $00

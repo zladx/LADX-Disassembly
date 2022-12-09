@@ -276,7 +276,7 @@ MamuAndFrogsState3Handler::
     ld   [wEntitiesSpriteVariantTable+2], a       ; $424D: $EA $B2 $C3
     ret                                           ; $4250: $C9
 
-IF !__PATCH_0__
+IF !__OPTIMIZATIONS_1__
     ret                                           ; $4251: $C9
 ENDC
 

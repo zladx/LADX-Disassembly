@@ -308,7 +308,7 @@ func_999::
     ldi  [hl], a                                  ; $09C5: $22
     jr   RestoreStackedBankAndReturn              ; $09C6: $18 $AB
 
-IF !__PATCH_0__
+IF !__OPTIMIZATIONS_1__
 CheckPushedTombStone_trampoline::
     push af                                       ; $09C8: $F5
     callsb CheckPushedTombStone                   ; $09C9: $3E $20 $EA $00 $21 $CD $85 $49
@@ -507,6 +507,7 @@ LoadPhotoBgMap_trampoline::
     ret                                           ; $0B0A: $C9
 
 IF __PATCH_3__
+; Unused code?
 func_036_72D5_trampoline::
     push af
     callsb func_036_72D5
@@ -2951,7 +2952,7 @@ LinkMotionMapFadeOutHandler::
 ; or starting after a game over.
 SetSpawnLocation::
     ; Initialize counter
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     xor  a
 ELSE
     ld   a, $00                                   ; $19C2: $3E $00
@@ -3001,7 +3002,7 @@ LinkMotionMapFadeInHandler::
     call func_1A39                                ; $19FC: $CD $39 $1A
     ld   a, [wTransitionSequenceCounter]          ; $19FF: $FA $6B $C1
     cp   $04                                      ; $1A02: $FE $04
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     ret  nz
 ELSE
     jr   nz, .return                              ; $1A04: $20 $1B
@@ -3017,7 +3018,7 @@ ENDC
     ld   [wLinkMotionState], a                    ; $1A0F: $EA $1C $C1
     ld   a, [wDidStealItem]                       ; $1A12: $FA $7E $D4
     and  a                                        ; $1A15: $A7
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     ret  z
 ELSE
     jr   z, .return                               ; $1A16: $28 $09
@@ -3026,7 +3027,7 @@ ENDC
     ld   [wDidStealItem], a                       ; $1A19: $EA $7E $D4
     jp_open_dialog Dialog036                      ; $1A1C: $3E $36 $C3 $85 $23
 
-IF !__PATCH_0__
+IF !__OPTIMIZATIONS_1__
 .return
     ret                                           ; $1A21: $C9
 ENDC
@@ -3432,7 +3433,7 @@ label_1F69::
     or   [hl]                                     ; $1F73: $B6
     ld   hl, wLinkMotionState                     ; $1F74: $21 $1C $C1
     or   [hl]                                     ; $1F77: $B6
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     ret  nz
 ELSE
     jp   nz, func_2165.return                     ; $1F78: $C2 $77 $21
@@ -3679,14 +3680,14 @@ ENDC
 .jr_20DD
     ld   a, [wAButtonSlot]                        ; $20DD: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $20E0: $FE $03
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     ret  nz
 ELSE
     jp   nz, func_2165.return                     ; $20E2: $C2 $77 $21
 ENDC
     ldh  a, [hPressedButtonsMask]                 ; $20E5: $F0 $CB
     and  J_A                                      ; $20E7: $E6 $10
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     ret  z
 ELSE
     jp   z, func_2165.return                      ; $20E9: $CA $77 $21
@@ -3730,7 +3731,7 @@ ENDC
     inc  [hl]                                     ; $212F: $34
     ld   a, [hl]                                  ; $2130: $7E
     cp   e                                        ; $2131: $BB
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     ret  c
 ELSE
     jr   c, .return                               ; $2132: $38 $19
@@ -3744,7 +3745,7 @@ ENDC
     jr   z, .jr_2153                              ; $213F: $28 $12
     ld   a, [wIsIndoor]                           ; $2141: $FA $A5 $DB
     and  a                                        ; $2144: $A7
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     ret  nz
 ELSE
     jr   nz, .return                              ; $2145: $20 $06
@@ -3780,7 +3781,7 @@ func_2165::
     ld   [wC15D], a                               ; $2171: $EA $5D $C1
     jp   label_2183                               ; $2174: $C3 $83 $21
 
-IF !__PATCH_0__
+IF !__OPTIMIZATIONS_1__
 .return
     ret                                           ; $2177: $C9
 ENDC
@@ -3793,10 +3794,10 @@ label_2183::
     ld   a, ENTITY_ENTITY_LIFTABLE_ROCK           ; $2183: $3E $05
     call SpawnPlayerProjectile                    ; $2185: $CD $2F $14
 
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     ret  c
 ELSE
-    jr   c, label_21A7                            ; $2188: $38 $1D
+    jr   c, .return                               ; $2188: $38 $1D
 ENDC
 
     ld   a, WAVE_SFX_ZIP                          ; $218A: $3E $02
@@ -3814,8 +3815,8 @@ ENDC
     ld   e, $01                                   ; $219D: $1E $01
     jpsw func_003_5795                            ; $219F: $3E $03 $CD $0C $08 $C3 $95 $57
 
-IF !__PATCH_0__
-label_21A7::
+IF !__OPTIMIZATIONS_1__
+.return
     ret                                           ; $21A7: $C9
 ENDC
 

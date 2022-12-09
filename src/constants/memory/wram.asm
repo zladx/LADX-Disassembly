@@ -3809,7 +3809,7 @@ wDE0A:
 
 ; introduced in __PATCH_0__
 ; related to evil eagle boss fight
-; maybe flag to play diffenrent music in dialog before fight.
+; maybe flag to play different music in dialog before fight.
 wDE0B:
   ds 1 ; DE0B
 

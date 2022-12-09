@@ -505,7 +505,7 @@ LoadTiles::
 
     ld   a, [wIsIndoor]                           ; $05E0: $FA $A5 $DB
     and  a                                        ; $05E3: $A7
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     jr   z, LoadOverworldBGTiles
 ELSE
     jp   z, LoadOverworldBGTiles                  ; $05E4: $CA $56 $06
@@ -655,7 +655,7 @@ LoadEntityTiles::
     ; use wNeedsUpdatingEntityTilesB.
     ldh  a, [hNeedsUpdatingEntityTilesA]          ; $06CB: $F0 $91
     and  a                                        ; $06CD: $A7
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     jr   z, UpdateEntityTilesB
 ELSE
     jp   z, UpdateEntityTilesB                    ; $06CE: $CA $3E $07

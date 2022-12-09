@@ -102,7 +102,7 @@ Unknown008SpriteVariants::
     db $F6, OAM_GBC_PAL_6 | OAMF_PAL1
 
 jp_003_53A8::
-IF __PATCH_3__
+IF __OPTIMIZATIONS_3__
     ld   de, Unknown007SpriteVariants
     ld   a, [wIsIndoor]
     and  a

@@ -107,7 +107,7 @@ ENDC
 
     ld   a, [wIsLinkInTheAir]                     ; $4254: $FA $46 $C1
     and  a                                        ; $4257: $A7
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     ret  nz
 ELSE
     jr   nz, .return                              ; $4258: $20 $2C
@@ -115,7 +115,7 @@ ENDC
 
     ld   a, ENTITY_HOOKSHOT_CHAIN                 ; $425A: $3E $03
     call SpawnPlayerProjectile                    ; $425C: $CD $2F $14
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     ret  c
 ELSE
     jr   c, .return                               ; $425F: $38 $25
@@ -441,7 +441,7 @@ jr_002_43F4:
 jr_002_4402:
     ld   a, [wIsLinkInTheAir]                     ; $4402: $FA $46 $C1
     and  a                                        ; $4405: $A7
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     jr   nz, label_002_4464
 ELSE
     jp   nz, label_002_4464                       ; $4406: $C2 $64 $44
@@ -7372,7 +7372,7 @@ interactiveBlock:
     cp   ROOM_OW_COLOR_DUNGEON_ENTRANCE           ; $744B: $FE $77
     jr   nz, collisionEnd                         ; $744D: $20 $05
 
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     ld   hl, wFarcallParams
     ld   a, BANK(CheckPushedTombStone)
     ld   [hl+], a

@@ -337,19 +337,19 @@ OwlState4Handler::
     ldh  [hDefaultMusicTrack], a                  ; $69EF: $E0 $B0
     ld   a, [wActivePowerUp]                      ; $69F1: $FA $7C $D4
     and  a                                        ; $69F4: $A7
-    jr   z, .ret_6A04                             ; $69F5: $28 $0D
+    jr   z, .return                               ; $69F5: $28 $0D
 
 IF !__PATCH_0__
     ld   a, [wTunicType]                          ; $69F7: $FA $0F $DC
     and  a                                        ; $69FA: $A7
-    jr   nz, .ret_6A04                            ; $69FB: $20 $07
+    jr   nz, .return                              ; $69FB: $20 $07
 ENDC
 
     ld   a, MUSIC_ACTIVE_POWER_UP
     ld   [wMusicTrackToPlay], a                   ; $69FF: $EA $68 $D3
     ldh  [hDefaultMusicTrackAlt], a               ; $6A02: $E0 $BD
 
-.ret_6A04
+.return
     ret                                           ; $6A04: $C9
 
 jr_006_6A05:

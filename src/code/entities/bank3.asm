@@ -195,7 +195,7 @@ EntityInitHandler::
     jr   z, .callEntityInitHandler                ; $48BC: $28 $5
     ldh  a, [hRoomStatus]                         ; $48BE: $F0 $F8
     and  ROOM_STATUS_EVENT_2|ROOM_STATUS_EVENT_1  ; $48C0: $E6 $30
-IF __PATCH_0__
+IF __PATCH_0__ ; Could probably be moved into __OPTIMIZATIONS_1__
     jp   nz, UnloadEntityAndReturn
 ELSE
     jr   z, .roomStatusEnd                        ; $48C2: $28 $03
@@ -872,7 +872,7 @@ jr_003_4C15:
 EntityInitColorDungeonBook::
     ld   hl, wEntitiesPosYTable                   ; $4C1F: $21 $10 $C2
     add  hl, bc                                   ; $4C22: $09
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     inc  [hl]
     inc  [hl]
 ELSE
@@ -930,7 +930,7 @@ EntityDestructionHandler::
     call ReturnIfNonInteractive_03.allowInactiveEntity ; $4C6A: $CD $7E $7F
     call ApplyRecoilIfNeeded_03                   ; $4C6D: $CD $A9 $7F
     call func_003_60B3                            ; $4C70: $CD $B3 $60
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     jp   ClearEntitySpeed
 ELSE
     call ClearEntitySpeed                         ; $4C73: $CD $7F $3D
@@ -1160,7 +1160,7 @@ EntityThrownHandler::
     ld   [hl], WAVE_SFX_BOSS_GRAWL                ; $4DC5: $36 $07
     ld   hl, wEntitiesPrivateState4Table          ; $4DC7: $21 $40 $C4
     add  hl, bc                                   ; $4DCA: $09
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     inc  [hl]
     ld   a, [hl]
 ELSE
@@ -1686,7 +1686,7 @@ EntityInitChestWithItem::
     jp   nc, MarkRoomCompleted                    ; $50AF: $D2 $2A $51
 
     cp   CHEST_SEASHELL                           ; $50B2: $FE $20
-IF __PATCH_3__
+IF __OPTIMIZATIONS_3__
     jp   z, label_003_636D                        ; $50B4: $20 $03
 ELSE
     jr   nz, .jr_50B9                             ; $50B4: $20 $03
@@ -2052,7 +2052,7 @@ func_003_53E4::; likely cutting grass
     ld   [hl], e                                  ; $53FD: $73
     ld   hl, wEntitiesPhysicsFlagsTable           ; $53FE: $21 $40 $C3
     add  hl, bc                                   ; $5401: $09
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     inc  [hl]
     inc  [hl]
 ELSE
@@ -2176,7 +2176,7 @@ EntityDeathHandler::
     add  hl, bc                                   ; $551B: $09
     ld   a, [hl]                                  ; $551C: $7E
     and  $80                                      ; $551D: $E6 $80
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     jp   nz, ExecuteActiveEntityHandler
 ELSE
     jr   z, .dying                                ; $551F: $28 $03
@@ -3193,7 +3193,7 @@ label_003_5C49:
 
 .jr_5C67
     dec  a                                        ; $5C67: $3D
-IF __PATCH_3__
+IF __OPTIMIZATIONS_3__
     jp   nz, HoldEntityAboveLink
 ELSE
     jr   nz, .jr_5C75                             ; $5C68: $20 $0B
@@ -3204,7 +3204,7 @@ ENDC
     call MarkRoomCompleted                        ; $5C6F: $CD $2A $51
     jp   UnloadEntityAndReturn                    ; $5C72: $C3 $8D $3F
 
-IF !__PATCH_3__
+IF !__OPTIMIZATIONS_3__
 .jr_5C75
     jp   HoldEntityAboveLink                      ; $5C75: $C3 $17 $5A
 ENDC
@@ -3270,7 +3270,7 @@ KeyDropPointEntityHandler::
 
 .jr_5CCD
     dec  a                                        ; $5CCD: $3D
-IF __PATCH_3__
+IF __OPTIMIZATIONS_3__
     jp   nz, HoldEntityAboveLink
     jp   UnloadEntityAndReturn
 ELSE
@@ -3385,7 +3385,7 @@ SleepyToadstoolEntityHandler::
 
 .jr_5D6C
     dec  a                                        ; $5D6C: $3D
-IF __PATCH_3__
+IF __OPTIMIZATIONS_3__
     jp   nz, HoldEntityAboveLink
 ELSE
     jr   nz, .jr_5D80                             ; $5D6D: $20 $11
@@ -3399,7 +3399,7 @@ ENDC
     ld   [wHasToadstool], a                       ; $5D7A: $EA $4B $DB
     jp   UnloadEntityAndReturn                    ; $5D7D: $C3 $8D $3F
 
-IF !__PATCH_3__
+IF !__OPTIMIZATIONS_3__
 .jr_5D80
     jp   HoldEntityAboveLink                      ; $5D80: $C3 $17 $5A
 ENDC
@@ -3475,7 +3475,7 @@ AfterSirensInstrumentD1::
 AfterSirensInstrumentD2::
     ld   a, $02                                   ; $5E12: $3E $02
     ld   [wDB48], a                               ; $5E14: $EA $48 $DB
-IF !__PATCH_0__
+IF !__OPTIMIZATIONS_1__
     ret                                           ; $5E17: $C9
 ENDC
 
@@ -3671,7 +3671,7 @@ ENDC
 
 .jr_5EFE
     dec  a                                        ; $5EFE: $3D
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     jp   HoldEntityAboveLink
 ELSE
     jr   nz, jr_003_5F01                          ; $5EFF: $20 $00
@@ -3910,12 +3910,11 @@ HidingSlimeKeyEntityHandler::
 
 jr_003_604C:
     dec  a                                        ; $604C: $3D
-IF __PATCH_3__
+IF __OPTIMIZATIONS_3__
     jp   nz, HoldEntityAboveLink
     jp   UnloadEntityAndReturn
 ELSE
     jr   nz, .jr_6052                             ; $604D: $20 $03
-
     jp   UnloadEntityAndReturn                    ; $604F: $C3 $8D $3F
 
 .jr_6052
@@ -5166,7 +5165,7 @@ jr_003_6828:
     ld   [wDDD8], a                               ; $6850: $EA $D8 $DD
     ld   a, $83                                   ; $6853: $3E $83
     call func_2BF                                 ; $6855: $CD $2F $0B
-IF __PATCH_3__
+IF __OPTIMIZATIONS_3__
     ld   de, Data_003_674D
     ldh  a, [hIsGBC]
     and  a
@@ -5594,7 +5593,7 @@ Data_003_6B48::
 
 func_003_6B48:
     cp   $01                                      ; $6B4C: $FE $01
-IF __PATCH_3__
+IF __OPTIMIZATIONS_3__
     jp   z, UnloadEntityAndReturn
 ELSE
     jr   nz, .jr_6B53                             ; $6B4E: $20 $03
@@ -6649,7 +6648,7 @@ EnemyCollidedWithSword::
 
     ldh  a, [hMultiPurposeG]                      ; $7081: $F0 $E8
     and  a                                        ; $7083: $A7
-IF __PATCH_3__
+IF __OPTIMIZATIONS_3__
     jp   nz, func_003_6DDF
 ELSE
     jr   nz, .jr_003_70A9                         ; $7084: $20 $23
@@ -6678,7 +6677,7 @@ ENDC
     call func_003_6DDF                            ; $70A3: $CD $DF $6D
     jp   .continueDefaultCollision                ; $70A6: $C3 $02 $71
 
-IF !__PATCH_3__
+IF !__OPTIMIZATIONS_3__
 .jr_003_70A9
     jp   func_003_6DDF                            ; $70A9: $C3 $DF $6D
 ENDC
@@ -9053,7 +9052,7 @@ jr_003_7DC0:
     jp   c, label_003_7DCD                        ; $7DC2: $DA $CD $7D
 
     cp   $90                                      ; $7DC5: $FE $90
-IF __PATCH_3__
+IF __OPTIMIZATIONS_3__
     jp   c, jr_003_7E03
 ELSE
     jp   nc, label_003_7DCD                       ; $7DC7: $D2 $CD $7D

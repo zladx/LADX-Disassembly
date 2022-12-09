@@ -279,7 +279,7 @@ Data_003_5994::
 SpawnOctorokRock::
     ld   a, ENTITY_OCTOROK_ROCK                   ; $5998: $3E $0A
     call SpawnNewEntity                           ; $599A: $CD $CA $64
-    jr   c, .jr_59D6                              ; $599D: $38 $37
+    jr   c, .return                               ; $599D: $38 $37
 
     push bc                                       ; $599F: $C5
     ldh  a, [hMultiPurpose2]                      ; $59A0: $F0 $D9
@@ -316,7 +316,10 @@ SpawnOctorokRock::
     pop  bc                                       ; $59D4: $C1
     and  a                                        ; $59D5: $A7
 
-.jr_59D6
-IF !__PATCH_0__
+.return
+IF !__OPTIMIZATIONS_1__
+    ; Small optimization: This RET isn't needed since we just
+    ; fall through to EntityInitBrokenHeartContainer, which only
+    ; contains RET.
     ret                                           ; $59D6: $C9
 ENDC

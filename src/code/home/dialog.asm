@@ -738,7 +738,7 @@ ENDC
     ld   [wDrawCommand.length+ 1], a              ; $270A: $EA $04 $D6
     xor  a                                        ; $270D: $AF
     ld   [wDrawCommand.data + 1], a               ; $270E: $EA $05 $D6
-IF __PATCH_9__
+IF __OPTIMIZATIONS_2__
     jp   IncrementDialogState
 ELSE
     call IncrementDialogState                     ; $2711: $CD $85 $24
@@ -869,7 +869,7 @@ DialogChoiceHandler::
     jpsb func_017_7DCC                            ; $27AF: $3E $17 $EA $00 $21 $C3 $CC $7D
 
 .jp_27B7
-IF __PATCH_9__
+IF __OPTIMIZATIONS_2__
     jp   UpdateDialogState
 ELSE
     call UpdateDialogState                        ; $27B7: $CD $96 $24

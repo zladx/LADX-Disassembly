@@ -2307,7 +2307,7 @@ func_015_6245::
     add  hl, bc                                   ; $630A: $09
     ld   a, [hl]                                  ; $630B: $7E
     and  a                                        ; $630C: $A7
-IF __PATCH_0__
+IF __OPTIMIZATIONS_1__
     jr   nz, .jr_6324
 ELSE
     jr   nz, ret_015_6330                         ; $630D: $20 $21

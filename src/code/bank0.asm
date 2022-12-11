@@ -1814,7 +1814,7 @@ UseShield::
     ret                                           ; $12F7: $C9
 
 UseShovel::
-    ld   a, [wC1C7]                               ; $12F8: $FA $C7 $C1
+    ld   a, [wLinkUsingShovel]                    ; $12F8: $FA $C7 $C1
     ld   hl, wIsLinkInTheAir                      ; $12FB: $21 $46 $C1
     or   [hl]                                     ; $12FE: $B6
     ret  nz                                       ; $12FF: $C0
@@ -1836,9 +1836,9 @@ IF __PATCH_0__
 ENDC
 
     ld   a, $01                                   ; $130F: $3E $01
-    ld   [wC1C7], a                               ; $1311: $EA $C7 $C1
+    ld   [wLinkUsingShovel], a                    ; $1311: $EA $C7 $C1
     xor  a                                        ; $1314: $AF
-    ld   [wC1C8], a                               ; $1315: $EA $C8 $C1
+    ld   [wLinkUsingShovelTimer], a               ; $1315: $EA $C8 $C1
     ret                                           ; $1318: $C9
 
 UseHookshot::

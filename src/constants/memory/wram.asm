@@ -894,7 +894,14 @@ ds 1 ; C1C5
 wC1C6::
   ds 1 ; C1C6
 
-; 00 per default, 01 when using the shovel.
+; Whether Link is shoveling.
+;
+; 0: not using the shovel
+; 1: digging
+; 2: hole opened in the ground
+;
+; If the ground under Link cannot be excavated (whether solid ground or
+; hole already dug), this variable goes from 0 to 1, but never through stage 2.
 wLinkUsingShovel::
   ds 1 ; C1C7
 

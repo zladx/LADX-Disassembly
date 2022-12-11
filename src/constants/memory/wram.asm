@@ -905,7 +905,9 @@ wC1C6::
 wLinkUsingShovel::
   ds 1 ; C1C7
 
-; Counter from $00 to $18 when the shovel animation is playing.
+; Counter when the shovel animation is playing.
+; $00 -> $10: digging
+; $11 -> $18: throwing dirt away
 wLinkUsingShovelTimer::
   ds 1 ; C1C8
 

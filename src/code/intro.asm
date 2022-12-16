@@ -1682,7 +1682,7 @@ func_001_7920::
     dec  [hl]                                     ; $7927: $35
     ret                                           ; $7928: $C9
 
-; Position of DX logo
+; Position of the DX logo
 
 IF LANG_JP
 X_POS = $79

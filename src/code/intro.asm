@@ -744,7 +744,7 @@ func_001_7338::
     sla  a                                        ; $733B: $CB $27
     ld   e, a                                     ; $733D: $5F
     ld   d, $00                                   ; $733E: $16 $00
-    ld   hl, Data_001_732A                        ; $7340: $21 $2A $73
+    ld   hl, TitleAttrMap                         ; $7340: $21 $2A $73
     add  hl, de                                   ; $7343: $19
     ld   a, [hli]                                 ; $7344: $2A
     ld   d, [hl]                                  ; $7345: $56
@@ -1681,6 +1681,8 @@ func_001_7920::
     jr   z, .jr_001_7929                          ; $7925: $28 $02
     dec  [hl]                                     ; $7927: $35
     ret                                           ; $7928: $C9
+
+; Position of DX logo
 
 IF LANG_JP
 X_POS = $79

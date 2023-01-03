@@ -308,7 +308,7 @@ jr_005_46D2:
     or   [hl]                                     ; $46FC: $B6
     jr   nz, .ret_474D                            ; $46FD: $20 $4E
 
-    ld   a, $6C                                   ; $46FF: $3E $6C
+    ld   a, ENTITY_CUCCO                          ; $46FF: $3E $6C
     ld   e, $07                                   ; $4701: $1E $07
     call SpawnNewEntityInRange_trampoline         ; $4703: $CD $98 $3B
     jr   c, .ret_474D                             ; $4706: $38 $45

@@ -141,7 +141,7 @@ ENTITY_SOUTH_FACE_SHRINE_DOOR        equ $64 ; unknown ; @TODO unused Eagle's To
 ENTITY_ANGLER_FISH                   equ $65
 ENTITY_CRYSTAL_SWITCH                equ $66
 ENTITY_67                            equ $67 ; unknown
-ENTITY_68                            equ $68 ; unknown
+ENTITY_HOOKSHOT_BRIDGE               equ $68
 ENTITY_MOVING_BLOCK_MOVER            equ $69
 ENTITY_RAFT_RAFT_OWNER               equ $6A
 ENTITY_TEXT_DEBUGGER                 equ $6B

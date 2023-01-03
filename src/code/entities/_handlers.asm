@@ -117,7 +117,7 @@ EntityHandlersTable::
 ._65 far_pointer AnglerFishEntityHandler
 ._66 far_pointer CrystalSwitchEntityHandler
 ._67 far_pointer Entity67Handler
-._68 far_pointer Entity68Handler ; $68
+._68 far_pointer HookshotBridgeHandler
 ._69 far_pointer MovingBlockMoverEntityHandler
 ._6A far_pointer EntityRaftOwnerHandler
 ._6B far_pointer TextDebuggerEntityHandler
@@ -153,8 +153,8 @@ EntityHandlersTable::
 ._89 far_pointer HinoxEntityHandler
 ._8A far_pointer TileGlintShownEntityHandler
 ._8B far_pointer TileGlintHiddenEntityHandler
-._8C far_pointer Entity8CHandler ; $8C
-._8D far_pointer Entity8DHandler
+._8C far_pointer Entity8CHandler ; unused moving block?
+._8D far_pointer Entity8DHandler ; unused moving block?
 ._8E far_pointer CueBallEntityHandler
 ._8F far_pointer MaskedMimicGoriyaEntityHandler
 ._90 far_pointer ThreeOfAKindEntityHandler ; $90

@@ -3760,7 +3760,7 @@ func_003_5F33::
     ld   a, [hl]                                  ; $5F70: $7E
     and  $01                                      ; $5F71: $E6 $01
     ldh  [hMultiPurposeG], a                      ; $5F73: $E0 $E8
-    ld   a, $39                                   ; $5F75: $3E $39
+    ld   a, ENTITY_INSTRUMENT_OF_THE_SIRENS       ; $5F75: $3E $39
     call SpawnNewEntity                           ; $5F77: $CD $CA $64
     push bc                                       ; $5F7A: $C5
     ld   hl, wEntitiesPrivateState1Table          ; $5F7B: $21 $B0 $C2

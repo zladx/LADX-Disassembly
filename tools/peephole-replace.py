@@ -247,7 +247,7 @@ rules = [
         0x65: "ENTITY_ANGLER_FISH",
         0x66: "ENTITY_CRYSTAL_SWITCH",
         0x67: "ENTITY_67",
-        0x68: "ENTITY_68",
+        0x68: "ENTITY_HOOKSHOT_BRIDGE",
         0x69: "ENTITY_MOVING_BLOCK_MOVER",
         0x6A: "ENTITY_RAFT_RAFT_OWNER",
         0x6B: "ENTITY_TEXT_DEBUGGER",

@@ -1,10 +1,10 @@
 ; Array indexed by entity type, see ENTITY_* constants
 ;
 ; bits 0-3: number of allocated sprites in OAM memory,
-; bit 4: display shadow on posZ > 0 if set,
-; bit 5: item is pickable,
-; bit 6: doesn't react to projectiles if set (arrow, hookshot, etc.),
-; bit 7: doesn't hurt Link on collision if set
+; bit 4: display shadow on posZ > 0 if set (ENTITY_PHYSICS_SHADOW),
+; bit 5: item can be picked up (ENTITY_PHYSICS_GRABBABLE),
+; bit 6: doesn't react to projectiles if set (arrow, hookshot, etc.) (ENTITY_PHYSICS_PROJECTILE_NOCLIP),
+; bit 7: doesn't hurt Link on collision if set (ENTITY_PHYSICS_HARMLESS)
 ;
 ; See wEntitiesPhysicsFlagsTable
 PhysicsFlagsForEntity::

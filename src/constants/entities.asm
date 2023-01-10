@@ -38,7 +38,7 @@ ENTITY_OPT1_B_MOVE_PIT_WATER         equ 0
 ; Values for wEntitiesPhysicsFlagsTable
 ENTITY_PHYSICS_HARMLESS             equ $80 ; The entity does not damage Link
 ENTITY_PHYSICS_PROJECTILE_NOCLIP    equ $40 ; Projectiles pass through the entity
-ENTITY_PHYSICS_GRABBABLE            equ $20 ; The entity can be grabbed with the Power Bracelet
+ENTITY_PHYSICS_GRABBABLE            equ $20 ; TODO: Implies that the entity can be grabbed with the Power Bracelet, or picked up/collected, depending on entity's private state?
 ENTITY_PHYSICS_SHADOW               equ $10 ; The entity casts a shadow
 ; Mask for all the physics flags
 ENTITY_PHYSICS_MASK                 equ $F0

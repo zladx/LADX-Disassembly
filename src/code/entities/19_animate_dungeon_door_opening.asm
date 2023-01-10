@@ -951,7 +951,7 @@ label_019_6A4F:
     pop  bc                                       ; $6A79: $C1
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6A7A: $21 $40 $C3
     add  hl, de                                   ; $6A7D: $19
-    ld   [hl], $C2                                ; $6A7E: $36 $C2
+    ld   [hl], 2 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $6A7E: $36 $C2
     ld   hl, wEntitiesTransitionCountdownTable    ; $6A80: $21 $E0 $C2
     add  hl, de                                   ; $6A83: $19
     ld   [hl], $10                                ; $6A84: $36 $10

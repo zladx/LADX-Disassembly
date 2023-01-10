@@ -2484,7 +2484,7 @@ jr_002_5015:
     ld   [hl], $03                                ; $5071: $36 $03
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5073: $21 $40 $C3
     add  hl, de                                   ; $5076: $19
-    res  4, [hl]                                  ; $5077: $CB $A6
+    res  ENTITY_PHYSICS_B_SHADOW, [hl]            ; $5077: $CB $A6
 
 .return
     ret                                           ; $5079: $C9
@@ -7220,7 +7220,7 @@ jr_002_72FA:
     ld   [hl], $0F                                ; $7398: $36 $0F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $739A: $21 $40 $C3
     add  hl, de                                   ; $739D: $19
-    ld   [hl], $C4                                ; $739E: $36 $C4
+    ld   [hl], 4 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $739E: $36 $C4
     jp   label_002_7461                           ; $73A0: $C3 $61 $74
 
 Data_002_73A3::

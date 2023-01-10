@@ -113,7 +113,7 @@ Data_004_77B5::             ; @TODO Shop item "for sale" table.
 ;
 ; @TODO: Shop dialogue indexes (table 0) when about to buy
 ShopItemPresentationDialogs::
-._0 db_dialog_low Dialog030 ; Showel
+._0 db_dialog_low Dialog030 ; Shovel
 ._1 db_dialog_low Dialog031 ; 3 hearts
 ._2 db_dialog_low Dialog032 ; Shield
 ._3 db_dialog_low Dialog033 ; 10 bombs

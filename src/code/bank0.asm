@@ -1827,7 +1827,7 @@ UseShovel::
     jr   .endIf                                   ; $1309: $18 $04
 
 .notPoking
-    ld   a, NOISE_SFX_SHOWEL_DIG                  ; $130B: $3E $0E
+    ld   a, NOISE_SFX_SHOVEL_DIG                  ; $130B: $3E $0E
     ldh  [hNoiseSfx], a                           ; $130D: $E0 $F4
 .endIf
 
@@ -5859,7 +5859,7 @@ LoadRoom::
     cp   ROOM_INDOOR_A_GORIYA                     ; $3195: $FE $F5
     jr   nz, .goriyaRoomEnd                       ; $3197: $20 $0D
     ld   a, [wTradeSequenceItem]                  ; $3199: $FA $0E $DB
-    cp   INVENTORY_MAGNIFYING_GLASS               ; $319C: $FE $0E
+    cp   INVENTORY_MAGNIFYING_LENS                ; $319C: $FE $0E
     jr   nz, .goriyaRoomEnd                       ; $319E: $20 $06
     ld   bc, IndoorsAF5Alt                        ; $31A0: $01 $55 $78
     jp   .parseRoomHeader                         ; $31A3: $C3 $3A $32

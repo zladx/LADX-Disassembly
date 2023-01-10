@@ -6721,7 +6721,7 @@ IndoorsAF5::
   db   $E0, $00, $F4, $18, $20 ; object
   db   ROOM_END
 
-IndoorsAF5Alt::   ; Goriya room with Magnifying Glass
+IndoorsAF5Alt::   ; Goriya room with Magnifying Lens
   db   ANIMATED_TILES_WATER_DUNGEON ; animation id
   db   ROOM_TEMPLATE_TOP_RIGHT_BOTTOM_LEFT | $0D ; room template | floor tile
   db   $00, $DF                ; object

@@ -36,7 +36,7 @@ ZoraEntityHandler::
     jp   z, ClearEntityStatusBank18               ; $49F0: $CA $08 $7F
 
     ld   a, [wTradeSequenceItem]                  ; $49F3: $FA $0E $DB
-    cp   TRADING_ITEM_MAGNIFIYING_GLASS           ; $49F6: $FE $0E
+    cp   TRADING_ITEM_MAGNIFYING_LENS             ; $49F6: $FE $0E
     jp   nz, ClearEntityStatusBank18              ; $49F8: $C2 $08 $7F
 
     ld   a, [wExchangingTradeSequenceItem]        ; $49FB: $FA $7F $DB
@@ -60,7 +60,7 @@ ZoraEntityHandler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4A18: $21 $40 $C3
     add  hl, bc                                   ; $4A1B: $09
     ld   a, [hl]                                  ; $4A1C: $7E
-    or   $80                                      ; $4A1D: $F6 $80
+    or   ENTITY_PHYSICS_HARMLESS                  ; $4A1D: $F6 $80
     ld   [hl], a                                  ; $4A1F: $77
     call CheckLinkCollisionWithEnemy_trampoline   ; $4A20: $CD $5A $3B
     ret  nc                                       ; $4A23: $D0
@@ -81,7 +81,7 @@ jr_018_4A2A:
 ZoraState0Handler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4A3B: $21 $40 $C3
     add  hl, bc                                   ; $4A3E: $09
-    set  6, [hl]                                  ; $4A3F: $CB $F6
+    set  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $4A3F: $CB $F6
     call GetRandomByte                            ; $4A41: $CD $0D $28
     and  $07                                      ; $4A44: $E6 $07
     ld   e, a                                     ; $4A46: $5F
@@ -127,7 +127,7 @@ ZoraState2Handler::
     ld   [hl], b                                  ; $4A86: $70
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4A87: $21 $40 $C3
     add  hl, bc                                   ; $4A8A: $09
-    res  6, [hl]                                  ; $4A8B: $CB $B6
+    res  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $4A8B: $CB $B6
     jp   IncrementEntityState                     ; $4A8D: $C3 $12 $3B
 
 .jr_4A90

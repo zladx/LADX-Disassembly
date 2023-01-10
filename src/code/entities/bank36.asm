@@ -2413,7 +2413,7 @@ func_036_4DD8::
     ld   [hl], a                                  ; $4E07: $77
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4E08: $21 $40 $C3
     add  hl, de                                   ; $4E0B: $19
-    ld   [hl], $12                                ; $4E0C: $36 $12
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ; $4E0C: $36 $12
     ld   hl, wEntitiesHitboxFlagsTable            ; $4E0E: $21 $50 $C3
     add  hl, de                                   ; $4E11: $19
     set  7, [hl]                                  ; $4E12: $CB $FE
@@ -3792,7 +3792,7 @@ func_036_56CD::
     ld   [hl], a                                  ; $5712: $77
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5713: $21 $40 $C3
     add  hl, de                                   ; $5716: $19
-    ld   [hl], $12                                ; $5717: $36 $12
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ; $5717: $36 $12
     ld   hl, wEntitiesHitboxFlagsTable            ; $5719: $21 $50 $C3
     add  hl, de                                   ; $571C: $19
     set  7, [hl]                                  ; $571D: $CB $FE
@@ -4009,8 +4009,6 @@ func_036_5844::
     call func_036_6C7E                            ; $584E: $CD $7E $6C
     push hl                                       ; $5851: $E5
     call PointHLToEntitySpriteVariant             ; $5852: $CD $02 $6C
-
-.jr_5855
     ld   e, [hl]                                  ; $5855: $5E
     sla  e                                        ; $5856: $CB $23
     pop  hl                                       ; $5858: $E1
@@ -4019,18 +4017,12 @@ func_036_5844::
     ld   a, $36                                   ; $585E: $3E $36
     call func_A5F                                 ; $5860: $CD $5F $0A
     ld   a, $06                                   ; $5863: $3E $06
-
-.jr_5865
     call func_015_7964_trampoline                 ; $5865: $CD $A0 $3D
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5868: $21 $40 $C3
     add  hl, bc                                   ; $586B: $09
     ld   a, [hl]                                  ; $586C: $7E
-
-.jr_586D
     push af                                       ; $586D: $F5
-    or   $10                                      ; $586E: $F6 $10
-
-.jr_5870
+    or   ENTITY_PHYSICS_SHADOW                    ; $586E: $F6 $10
     ld   [hl], a                                  ; $5870: $77
     push hl                                       ; $5871: $E5
     call label_3CD9                               ; $5872: $CD $D9 $3C
@@ -5168,7 +5160,7 @@ jr_036_5EC7:
     ld   [hl], $10                                ; $5F01: $36 $10
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5F03: $21 $40 $C3
     add  hl, de                                   ; $5F06: $19
-    ld   [hl], $12                                ; $5F07: $36 $12
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ; $5F07: $36 $12
     ld   hl, wEntitiesHitboxFlagsTable            ; $5F09: $21 $50 $C3
     add  hl, de                                   ; $5F0C: $19
     set  7, [hl]                                  ; $5F0D: $CB $FE
@@ -6187,7 +6179,7 @@ ColorGhoulState2Handler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $649A: $21 $40 $C3
     add  hl, bc                                   ; $649D: $09
     ld   a, [hl]                                  ; $649E: $7E
-    and  $0F                                      ; $649F: $E6 $0F
+    and  ~ENTITY_PHYSICS_MASK                     ; $649F: $E6 $0F
     ld   [hl], a                                  ; $64A1: $77
     jr   ret_036_64B9                             ; $64A2: $18 $15
 
@@ -6201,7 +6193,7 @@ ColorGhoulState2Handler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $64AC: $21 $40 $C3
     add  hl, bc                                   ; $64AF: $09
     ld   a, [hl]                                  ; $64B0: $7E
-    and  $DF                                      ; $64B1: $E6 $DF
+    and  ~ENTITY_PHYSICS_GRABBABLE                ; $64B1: $E6 $DF
     ld   [hl], a                                  ; $64B3: $77
     ld   a, $01                                   ; $64B4: $3E $01
     call SetEntityState                           ; $64B6: $CD $07 $6C
@@ -6283,7 +6275,7 @@ ColorGhoulStateBHandler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6520: $21 $40 $C3
     add  hl, bc                                   ; $6523: $09
     ld   a, [hl]                                  ; $6524: $7E
-    or   $D0                                      ; $6525: $F6 $D0
+    or   ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP | ENTITY_PHYSICS_SHADOW ; $6525: $F6 $D0
     ld   [hl], a                                  ; $6527: $77
 
 label_036_6528:
@@ -6715,7 +6707,7 @@ jr_036_67D1:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $67F9: $21 $40 $C3
     add  hl, bc                                   ; $67FC: $09
     ld   a, [hl]                                  ; $67FD: $7E
-    or   $80                                      ; $67FE: $F6 $80
+    or   ENTITY_PHYSICS_HARMLESS                  ; $67FE: $F6 $80
     ld   [hl], a                                  ; $6800: $77
     ld   a, $04                                   ; $6801: $3E $04
     call SetEntityState                           ; $6803: $CD $07 $6C
@@ -6763,7 +6755,7 @@ ColorShellState5Handler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6830: $21 $40 $C3
     add  hl, bc                                   ; $6833: $09
     ld   a, [hl]                                  ; $6834: $7E
-    or   $80                                      ; $6835: $F6 $80
+    or   ENTITY_PHYSICS_HARMLESS                  ; $6835: $F6 $80
     ld   [hl], a                                  ; $6837: $77
     ld   a, $04                                   ; $6838: $3E $04
     call SetEntityState                           ; $683A: $CD $07 $6C
@@ -6773,7 +6765,7 @@ ColorShellState5Handler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $683F: $21 $40 $C3
     add  hl, bc                                   ; $6842: $09
     ld   a, [hl]                                  ; $6843: $7E
-    or   $80                                      ; $6844: $F6 $80
+    or   ENTITY_PHYSICS_HARMLESS                  ; $6844: $F6 $80
     ld   [hl], a                                  ; $6846: $77
     ldh  a, [hActiveEntityStatus]                 ; $6847: $F0 $EA
     cp   $06                                      ; $6849: $FE $06
@@ -6855,7 +6847,7 @@ ColorShellState8Handler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $68AB: $21 $40 $C3
     add  hl, bc                                   ; $68AE: $09
     ld   a, [hl]                                  ; $68AF: $7E
-    or   $F0                                      ; $68B0: $F6 $F0
+    or   ENTITY_PHYSICS_MASK                      ; $68B0: $F6 $F0
     ld   [hl], a                                  ; $68B2: $77
     call func_036_6BCF                            ; $68B3: $CD $CF $6B
     ldh  a, [hActiveEntityType]                   ; $68B6: $F0 $EB
@@ -6961,7 +6953,7 @@ ColorShellStateBHandler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6953: $21 $40 $C3
     add  hl, bc                                   ; $6956: $09
     ld   a, [hl]                                  ; $6957: $7E
-    and  $7F                                      ; $6958: $E6 $7F
+    and  ~ENTITY_PHYSICS_HARMLESS                 ; $6958: $E6 $7F
     ld   [hl], a                                  ; $695A: $77
 
 .ret_695B
@@ -8185,7 +8177,7 @@ jr_036_705F:
     ld   [hl], a                                  ; $7087: $77
     ld   hl, wEntitiesPhysicsFlagsTable           ; $7088: $21 $40 $C3
     add  hl, de                                   ; $708B: $19
-    ld   [hl], $C4                                ; $708C: $36 $C4
+    ld   [hl], 4 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $708C: $36 $C4
 
 jr_036_708E:
     dec  c                                        ; $708E: $0D

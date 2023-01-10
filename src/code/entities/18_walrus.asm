@@ -73,7 +73,7 @@ WalrusState0Handler::
     ld   [hl], $60                                ; $556E: $36 $60
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5570: $21 $40 $C3
     add  hl, de                                   ; $5573: $19
-    ld   [hl], $C1                                ; $5574: $36 $C1
+    ld   [hl], 1 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $5574: $36 $C1
     ld   hl, wEntitiesPrivateState1Table          ; $5576: $21 $B0 $C2
     add  hl, de                                   ; $5579: $19
     inc  [hl]                                     ; $557A: $34

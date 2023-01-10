@@ -682,7 +682,7 @@ jr_018_6DC3:
     ld   [hl], $02                                ; $6E08: $36 $02
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6E0A: $21 $40 $C3
     add  hl, de                                   ; $6E0D: $19
-    ld   [hl], $02                                ; $6E0E: $36 $02
+    ld   [hl], 2                                  ; $6E0E: $36 $02
     ld   hl, wEntitiesHealthTable                 ; $6E10: $21 $60 $C3
     add  hl, de                                   ; $6E13: $19
     ld   [hl], $4C                                ; $6E14: $36 $4C

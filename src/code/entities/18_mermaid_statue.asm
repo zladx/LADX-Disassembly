@@ -36,14 +36,14 @@ MermaidStatueInteractiveHandler::
     ret  nc                                       ; $4965: $D0
 
     ld   a, [wTradeSequenceItem]                  ; $4966: $FA $0E $DB
-    cp   TRADING_ITEM_MAGNIFIYING_GLASS           ; $4969: $FE $0E
-    ret  z                                        ; If you have the magnifying glass, return
+    cp   TRADING_ITEM_MAGNIFYING_LENS             ; $4969: $FE $0E
+    ret  z                                        ; If you have the magnifying lens, return
 
     cp   TRADING_ITEM_SCALE                       ; $496C: $FE $0D
-    jr   nz, .alreadyHasMagnifyingGlass
+    jr   nz, .alreadyHasMagnifyingLens
 
     ; If the player has the Mermaid Scale, move the statue and open the passage
-    ld   a, TRADING_ITEM_MAGNIFIYING_GLASS        ; $4970: $3E $0E
+    ld   a, TRADING_ITEM_MAGNIFYING_LENS          ; $4970: $3E $0E
     ld   [wTradeSequenceItem], a                  ; $4972: $EA $0E $DB
     ld   a, $01                                   ; $4975: $3E $01
     ld   [wExchangingTradeSequenceItem], a        ; $4977: $EA $7F $DB
@@ -56,7 +56,7 @@ MermaidStatueInteractiveHandler::
 
     jp   IncrementEntityState                     ; $498B: $C3 $12 $3B
 
-.alreadyHasMagnifyingGlass
+.alreadyHasMagnifyingLens
     jp_open_dialog Dialog19C                      ; $498E
 
 MermaidStatueOpeningHandler::

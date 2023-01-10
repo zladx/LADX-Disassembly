@@ -312,7 +312,7 @@ TRADING_ITEM_BROOM             equ $0A
 TRADING_ITEM_FISHING_HOOK      equ $0B
 TRADING_ITEM_NECKLACE          equ $0C
 TRADING_ITEM_SCALE             equ $0D
-TRADING_ITEM_MAGNIFIYING_GLASS equ $0E
+TRADING_ITEM_MAGNIFYING_LENS   equ $0E
 
 ; Values for hRoomStatus and wOverworldRoomStatus
 ;

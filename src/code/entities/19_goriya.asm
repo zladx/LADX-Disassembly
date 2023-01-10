@@ -29,10 +29,10 @@ GoriyaSpriteVariants::
 GoriyaEntityHandler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $45E4: $21 $40 $C3
     add  hl, bc                                   ; $45E7: $09
-    set  6, [hl]                                  ; $45E8: $CB $F6
-    set  7, [hl]                                  ; $45EA: $CB $FE
+    set  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $45E8: $CB $F6
+    set  ENTITY_PHYSICS_B_HARMLESS, [hl]          ; $45EA: $CB $FE
     ld   a, [wTradeSequenceItem]                  ; $45EC: $FA $0E $DB
-    cp   $0E                                      ; $45EF: $FE $0E
+    cp   TRADING_ITEM_MAGNIFYING_LENS             ; $45EF: $FE $0E
     jp   nz, ClearEntityStatus_19                 ; $45F1: $C2 $61 $7E
 
     ld   a, [wExchangingTradeSequenceItem]        ; $45F4: $FA $7F $DB

@@ -284,7 +284,7 @@ jr_006_4A68:
     ld   [hl], $01                                ; $4A94: $36 $01
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4A96: $21 $40 $C3
     add  hl, de                                   ; $4A99: $19
-    ld   [hl], $04                                ; $4A9A: $36 $04
+    ld   [hl], 4                                  ; $4A9A: $36 $04
     ld   hl, hNoiseSfx                            ; $4A9C: $21 $F4 $FF
     ld   [hl], $13                                ; $4A9F: $36 $13
 

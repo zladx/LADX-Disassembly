@@ -339,7 +339,7 @@ func_015_795D::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $795D: $21 $40 $C3
     add  hl, bc                                   ; $7960: $09
     ld   a, [hl]                                  ; $7961: $7E
-    and  $0F                                      ; $7962: $E6 $0F
+    and  ~ENTITY_PHYSICS_MASK                     ; $7962: $E6 $0F
 
 ; Increment wOAMNextAvailableSlot by `a * 4` tiles
 ; (plus special conditions)
@@ -411,7 +411,7 @@ func_015_7995::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $79B4: $21 $40 $C3
     add  hl, bc                                   ; $79B7: $09
     ld   a, [hl]                                  ; $79B8: $7E
-    and  $10                                      ; $79B9: $E6 $10
+    and  ENTITY_PHYSICS_SHADOW                    ; $79B9: $E6 $10
     ret  z                                        ; $79BB: $C8
 
     ldh  a, [hFrameCounter]                       ; $79BC: $F0 $E7

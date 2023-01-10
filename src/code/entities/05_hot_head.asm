@@ -484,7 +484,7 @@ jr_005_6581:
     ld   [hl], $08                                ; $65CB: $36 $08
     ld   hl, wEntitiesPhysicsFlagsTable           ; $65CD: $21 $40 $C3
     add  hl, de                                   ; $65D0: $19
-    ld   [hl], $42                                ; $65D1: $36 $42
+    ld   [hl], 2 | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $65D1: $36 $42
 
 .jr_65D3
     ldh  a, [hMultiPurposeG]                      ; $65D3: $F0 $E8
@@ -514,7 +514,7 @@ func_005_65D9::
     ld   [hl], $14                                ; $65F8: $36 $14
     ld   hl, wEntitiesPhysicsFlagsTable           ; $65FA: $21 $40 $C3
     add  hl, de                                   ; $65FD: $19
-    ld   [hl], $C4                                ; $65FE: $36 $C4
+    ld   [hl], 4 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $65FE: $36 $C4
     ret                                           ; $6600: $C9
 
 Data_005_6601::
@@ -576,7 +576,7 @@ jr_005_6613:
     ld   [hl], $13                                ; $6657: $36 $13
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6659: $21 $40 $C3
     add  hl, de                                   ; $665C: $19
-    ld   [hl], $42                                ; $665D: $36 $42
+    ld   [hl], 2 | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $665D: $36 $42
 
 .jr_665F
     ldh  a, [hMultiPurposeG]                      ; $665F: $F0 $E8
@@ -609,8 +609,8 @@ func_005_6705::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $670B: $21 $40 $C3
     add  hl, bc                                   ; $670E: $09
     ld   a, [hl]                                  ; $670F: $7E
-    and  $F0                                      ; $6710: $E6 $F0
-    or   $08                                      ; $6712: $F6 $08
+    and  ENTITY_PHYSICS_MASK                      ; $6710: $E6 $F0
+    or   8                                        ; $6712: $F6 $08
     ld   [hl], a                                  ; $6714: $77
     ldh  a, [hActiveEntitySpriteVariant]          ; $6715: $F0 $F1
     rla                                           ; $6717: $17
@@ -642,8 +642,8 @@ label_005_672A:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6738: $21 $40 $C3
     add  hl, bc                                   ; $673B: $09
     ld   a, [hl]                                  ; $673C: $7E
-    and  $F0                                      ; $673D: $E6 $F0
-    or   $04                                      ; $673F: $F6 $04
+    and  ENTITY_PHYSICS_MASK                      ; $673D: $E6 $F0
+    or   4                                        ; $673F: $F6 $04
     ld   [hl], a                                  ; $6741: $77
     ldh  a, [hActiveEntityPosY]                   ; $6742: $F0 $EF
     ldh  [hActiveEntityVisualPosY], a             ; $6744: $E0 $EC
@@ -658,8 +658,8 @@ label_005_6754:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6754: $21 $40 $C3
     add  hl, bc                                   ; $6757: $09
     ld   a, [hl]                                  ; $6758: $7E
-    and  $F0                                      ; $6759: $E6 $F0
-    or   $04                                      ; $675B: $F6 $04
+    and  ENTITY_PHYSICS_MASK                      ; $6759: $E6 $F0
+    or   4                                        ; $675B: $F6 $04
     ld   [hl], a                                  ; $675D: $77
     ldh  a, [hActiveEntitySpriteVariant]          ; $675E: $F0 $F1
     dec  a                                        ; $6760: $3D

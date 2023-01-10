@@ -247,8 +247,8 @@ func_019_6C99::
 CheepCheepJumpingState5Handler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6CA9: $21 $40 $C3
     add  hl, bc                                   ; $6CAC: $09
-    set  7, [hl]                                  ; $6CAD: $CB $FE
-    set  6, [hl]                                  ; $6CAF: $CB $F6
+    set  ENTITY_PHYSICS_B_HARMLESS, [hl]          ; $6CAD: $CB $FE
+    set  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $6CAF: $CB $F6
     ld   hl, wEntitiesSpeedYTable                 ; $6CB1: $21 $50 $C2
     add  hl, bc                                   ; $6CB4: $09
     inc  [hl]                                     ; $6CB5: $34

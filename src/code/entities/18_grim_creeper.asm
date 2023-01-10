@@ -9,7 +9,7 @@ GrimCreeperEntityHandler::
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6FDF: $21 $40 $C3
     add  hl, bc                                   ; $6FE2: $09
-    set  6, [hl]                                  ; $6FE3: $CB $F6
+    set  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $6FE3: $CB $F6
     call func_018_7181                            ; $6FE5: $CD $81 $71
     call label_394D                               ; $6FE8: $CD $4D $39
     call BossIntro                                ; $6FEB: $CD $E8 $3E
@@ -185,7 +185,7 @@ GrimCreeperState3Handler::
     ld   [hl], $01                                ; $70F4: $36 $01
     ld   hl, wEntitiesPhysicsFlagsTable           ; $70F6: $21 $40 $C3
     add  hl, de                                   ; $70F9: $19
-    set  6, [hl]                                  ; $70FA: $CB $F6
+    set  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $70FA: $CB $F6
     pop  bc                                       ; $70FC: $C1
 
 label_018_70FD:
@@ -429,7 +429,7 @@ func_018_72A5::
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $72AD: $21 $40 $C3
     add  hl, bc                                   ; $72B0: $09
-    res  6, [hl]                                  ; $72B1: $CB $B6
+    res  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $72B1: $CB $B6
     ld   a, $20                                   ; $72B3: $3E $20
     call ApplyVectorTowardsLink_trampoline        ; $72B5: $CD $AA $3B
     ld   hl, wEntitiesSpeedZTable                 ; $72B8: $21 $20 $C3

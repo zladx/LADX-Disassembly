@@ -747,7 +747,7 @@ EntityInitZora::
     jr   nz, EntityInitNoop                       ; $4B6B: $20 $E9
 
     ld   a, [wTradeSequenceItem]                  ; $4B6D: $FA $0E $DB
-    cp   TRADING_ITEM_MAGNIFIYING_GLASS           ; $4B70: $FE $0E
+    cp   TRADING_ITEM_MAGNIFYING_LENS             ; $4B70: $FE $0E
     jp   nz, UnloadEntityAndReturn                ; $4B72: $C2 $8D $3F
 
     ld   a, [wPhotos2]                            ; $4B75: $FA $0D $DC
@@ -960,7 +960,7 @@ ENDC
     ld   [hl], ENTITY_STATUS_DYING                ; $4C96: $36 $01
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4C98: $21 $40 $C3
     add  hl, bc                                   ; $4C9B: $09
-    ld   [hl], $04                                ; $4C9C: $36 $04
+    ld   [hl], 4                                  ; $4C9C: $36 $04
     ld   hl, hNoiseSfx                            ; $4C9E: $21 $F4 $FF
     ld   [hl], NOISE_SFX_ENEMY_DESTROYED          ; $4CA1: $36 $13
     ret                                           ; $4CA3: $C9
@@ -1243,7 +1243,7 @@ func_003_4E35::
     ld   a, [hl]                                  ; $4E3F: $7E
     push hl                                       ; $4E40: $E5
     push af                                       ; $4E41: $F5
-    or   $80                                      ; $4E42: $F6 $80
+    or   ENTITY_PHYSICS_HARMLESS                  ; $4E42: $F6 $80
     ld   [hl], a                                  ; $4E44: $77
     call CheckLinkCollisionWithEnemy              ; $4E45: $CD $72 $6C
     rl   e                                        ; $4E48: $CB $13
@@ -1466,7 +1466,7 @@ ENDC
 
 EntityInitTradingItem::
     ld   a, [wTradeSequenceItem]                  ; $4F68: $FA $0E $DB
-    cp   TRADING_ITEM_MAGNIFIYING_GLASS           ; $4F6B: $FE $0E
+    cp   TRADING_ITEM_MAGNIFYING_LENS             ; $4F6B: $FE $0E
     jr   z, EntityInitWithShiftedPosition         ; $4F6D: $28 $14
 
     ret                                           ; $4F6F: $C9
@@ -1984,7 +1984,7 @@ label_003_52D7:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $52E0: $21 $40 $C3
     add  hl, de                                   ; $52E3: $19
     ld   a, [hl]                                  ; $52E4: $7E
-    and  $40                                      ; $52E5: $E6 $40
+    and  ENTITY_PHYSICS_PROJECTILE_NOCLIP         ; $52E5: $E6 $40
     jr   nz, .jr_531E                             ; $52E7: $20 $35
 
     ld   hl, wEntitiesPosXTable                   ; $52E9: $21 $00 $C2
@@ -2010,7 +2010,7 @@ label_003_52D7:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $530A: $21 $40 $C3
     add  hl, de                                   ; $530D: $19
     ld   a, [hl]                                  ; $530E: $7E
-    and  $20                                      ; $530F: $E6 $20
+    and  ENTITY_PHYSICS_GRABBABLE                 ; $530F: $E6 $20
     jr   nz, .jr_531E                             ; $5311: $20 $0B
 
     push bc                                       ; $5313: $C5
@@ -2091,7 +2091,7 @@ SmashRock::
     ld   [hl], $0F                                ; $5429: $36 $0F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $542B: $21 $40 $C3
     add  hl, de                                   ; $542E: $19
-    ld   [hl], $C4                                ; $542F: $36 $C4
+    ld   [hl], 4 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $542F: $36 $C4
     ld   a, NOISE_SFX_POT_SMASHED                 ; $5431: $3E $09
     ldh  [hNoiseSfx], a                           ; $5433: $E0 $F4
     jp   UnloadEntityAndReturn                    ; $5435: $C3 $8D $3F
@@ -7637,7 +7637,7 @@ entitiesLoop:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $75BD: $21 $40 $C3
     add  hl, de                                   ; $75C0: $19
     ld   a, [hl]                                  ; $75C1: $7E
-    and  $40                                      ; $75C2: $E6 $40
+    and  ENTITY_PHYSICS_PROJECTILE_NOCLIP         ; $75C2: $E6 $40
     jp   nz, checkNextEntity                      ; $75C4: $C2 $9F $77
 
     ; If the entities X are far appart, move to next
@@ -7713,7 +7713,7 @@ entitiesLoop:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $7630: $21 $40 $C3
     add  hl, de                                   ; $7633: $19
     ld   a, [hl]                                  ; $7634: $7E
-    and  $20                                      ; $7635: $E6 $20
+    and  ENTITY_PHYSICS_GRABBABLE                 ; $7635: $E6 $20
     jp   nz, label_003_7715                       ; $7637: $C2 $15 $77
 
     ldh  a, [hActiveEntityType]                   ; $763A: $F0 $EB
@@ -7882,7 +7882,7 @@ label_003_7715:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $7724: $21 $40 $C3
     add  hl, de                                   ; $7727: $19
     ld   a, [hl]                                  ; $7728: $7E
-    and  $20                                      ; $7729: $E6 $20
+    and  ENTITY_PHYSICS_GRABBABLE                 ; $7729: $E6 $20
     jr   z, jr_003_7737                           ; $772B: $28 $0A
 
     ld   a, c                                     ; $772D: $79
@@ -8033,7 +8033,7 @@ jr_003_77DD:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $77E6: $21 $40 $C3
     add  hl, de                                   ; $77E9: $19
     ld   a, [hl]                                  ; $77EA: $7E
-    and  $60                                      ; $77EB: $E6 $60
+    and  ENTITY_PHYSICS_PROJECTILE_NOCLIP | ENTITY_PHYSICS_GRABBABLE ; $77EB: $E6 $60
     jr   nz, .jr_7834                             ; $77ED: $20 $45
 
     ld   hl, wEntitiesHitboxFlagsTable            ; $77EF: $21 $50 $C3

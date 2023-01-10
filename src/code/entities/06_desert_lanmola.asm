@@ -204,7 +204,7 @@ label_006_56C8:
     ld   [hl], $02                                ; $5718: $36 $02
     ld   hl, wEntitiesPhysicsFlagsTable           ; $571A: $21 $40 $C3
     add  hl, de                                   ; $571D: $19
-    ld   [hl], $C1                                ; $571E: $36 $C1
+    ld   [hl], 1 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $571E: $36 $C1
     pop  bc                                       ; $5720: $C1
     ldh  a, [hMultiPurposeG]                      ; $5721: $F0 $E8
     dec  a                                        ; $5723: $3D

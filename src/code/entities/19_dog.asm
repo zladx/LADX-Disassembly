@@ -56,7 +56,7 @@ DogEntityHandler::
 
     ld   hl, wEntitiesPhysicsFlagsTable           ; $491A: $21 $40 $C3
     add  hl, bc                                   ; $491D: $09
-    set  6, [hl]                                  ; $491E: $CB $F6
+    set  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $491E: $CB $F6
     ld   a, [wMarinEntityIndex]                   ; $4920: $FA $0F $C5
     ld   e, a                                     ; $4923: $5F
     ld   d, b                                     ; $4924: $50
@@ -238,11 +238,11 @@ DogState3Handler::
     call label_3B23                               ; $4A2F: $CD $23 $3B
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4A32: $21 $40 $C3
     add  hl, bc                                   ; $4A35: $09
-    ld   [hl], $52                                ; $4A36: $36 $52
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $4A36: $36 $52
     call label_3B44                               ; $4A38: $CD $44 $3B
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4A3B: $21 $40 $C3
     add  hl, bc                                   ; $4A3E: $09
-    ld   [hl], $92                                ; $4A3F: $36 $92
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW | ENTITY_PHYSICS_HARMLESS ; $4A3F: $36 $92
     ldh  a, [hMultiPurposeG]                      ; $4A41: $F0 $E8
     and  a                                        ; $4A43: $A7
     jr   z, .ret_4A4F                             ; $4A44: $28 $09

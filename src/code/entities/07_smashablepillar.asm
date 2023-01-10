@@ -155,7 +155,7 @@ func_007_5E43::
     ld   [hl], a                                  ; $5E93: $77
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5E94: $21 $40 $C3
     add  hl, de                                   ; $5E97: $19
-    ld   [hl], $C2                                ; $5E98: $36 $C2
+    ld   [hl], 2 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $5E98: $36 $C2
     ld   hl, wEntitiesTransitionCountdownTable    ; $5E9A: $21 $E0 $C2
     add  hl, de                                   ; $5E9D: $19
     ld   [hl], $10                                ; $5E9E: $36 $10
@@ -301,7 +301,7 @@ func_007_5F61::
     ld   [hl], $02                                ; $5F6C: $36 $02
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5F6E: $21 $40 $C3
     add  hl, de                                   ; $5F71: $19
-    ld   [hl], $D1                                ; $5F72: $36 $D1
+    ld   [hl], 1 | ENTITY_PHYSICS_SHADOW | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $5F72: $36 $D1
     ld   hl, wEntitiesPosZTable                   ; $5F74: $21 $10 $C3
     add  hl, de                                   ; $5F77: $19
     ld   [hl], $70                                ; $5F78: $36 $70

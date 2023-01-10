@@ -2736,7 +2736,7 @@ tradingItemPaletteIndexes:
     db $01  ; TRADING_ITEM_FISHING_HOOK
     db $02  ; TRADING_ITEM_NECKLACE
     db $02  ; TRADING_ITEM_SCALE
-    db $05  ; TRADING_ITEM_MAGNIFIYING_GLASS
+    db $05  ; TRADING_ITEM_MAGNIFYING_LENS
 
 InventoryLoad2Handler::
     ldh  a, [hIsGBC]                              ; $5AFD: $F0 $FE
@@ -3225,7 +3225,7 @@ InventoryTradingItemPaletteIndex::
     db  $00  ; TRADING_ITEM_FISHING_HOOK
     db  $00  ; TRADING_ITEM_NECKLACE
     db  $00  ; TRADING_ITEM_SCALE
-    db  $06  ; TRADING_ITEM_MAGNIFIYING_GLASS
+    db  $06  ; TRADING_ITEM_MAGNIFYING_LENS
 
 InventoryLoad5Handler::
     xor  a                                        ; $5E1A: $AF

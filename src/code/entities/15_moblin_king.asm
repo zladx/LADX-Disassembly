@@ -36,7 +36,7 @@ MoblinKingEntityHandler::
     set  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $46F1: $CB $F6
     ld   hl, wEntitiesPhysicsFlagsTable           ; $46F3: $21 $40 $C3
     add  hl, bc                                   ; $46F6: $09
-    res  7, [hl]                                  ; $46F7: $CB $BE
+    res  ENTITY_PHYSICS_B_HARMLESS, [hl]          ; $46F7: $CB $BE
     call UpdateEntityPosWithSpeed_15              ; $46F9: $CD $88 $7B
     call label_3B23                               ; $46FC: $CD $23 $3B
     call AddEntityZSpeedToPos_15                  ; $46FF: $CD $C1 $7B
@@ -346,7 +346,7 @@ func_015_48CF::
     res  ENTITY_OPT1_B_SWORD_CLINK_OFF, [hl]      ; $48D3: $CB $B6
     ld   hl, wEntitiesPhysicsFlagsTable           ; $48D5: $21 $40 $C3
     add  hl, bc                                   ; $48D8: $09
-    set  7, [hl]                                  ; $48D9: $CB $FE
+    set  ENTITY_PHYSICS_B_HARMLESS, [hl]          ; $48D9: $CB $FE
     call GetEntityTransitionCountdown             ; $48DB: $CD $05 $0C
     jr   nz, .jr_48F0                             ; $48DE: $20 $10
 

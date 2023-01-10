@@ -71,7 +71,7 @@ ZombieEntityHandler::
     ld   [hl], $01                                ; $63EF: $36 $01
     ld   hl, wEntitiesPhysicsFlagsTable           ; $63F1: $21 $40 $C3
     add  hl, de                                   ; $63F4: $19
-    res  6, [hl]                                  ; $63F5: $CB $B6
+    res  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $63F5: $CB $B6
 
 ret_018_63F7:
     ret                                           ; $63F7: $C9
@@ -155,7 +155,7 @@ ZombieState2Handler::
     call IncrementEntityState                     ; $646C: $CD $12 $3B
     ld   hl, wEntitiesPhysicsFlagsTable           ; $646F: $21 $40 $C3
     add  hl, bc                                   ; $6472: $09
-    set  6, [hl]                                  ; $6473: $CB $F6
+    set  ENTITY_PHYSICS_B_PROJECTILE_NOCLIP, [hl] ; $6473: $CB $F6
 
 jr_018_6475:
     ldh  a, [hFrameCounter]                       ; $6475: $F0 $E7

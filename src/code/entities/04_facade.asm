@@ -84,8 +84,9 @@ jr_004_50AD:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $50CB: $21 $40 $C3
     add  hl, de                                   ; $50CE: $19
     ld   a, [hl]                                  ; $50CF: $7E
-    and  $F0                                      ; $50D0: $E6 $F0
-    or   $02                                      ; $50D2: $F6 $02
+    and  ENTITY_PHYSICS_MASK                      ; $50D0: $E6 $F0
+    ; Set the entity's sprite count to 2
+    or   2                                        ; $50D2: $F6 $02
     ld   [hl], a                                  ; $50D4: $77
 
 .jr_50D5
@@ -146,7 +147,7 @@ label_004_510F:
 .jr_5120
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5120: $21 $40 $C3
     add  hl, bc                                   ; $5123: $09
-    ld   [hl], $08                                ; $5124: $36 $08
+    ld   [hl], 8                                  ; $5124: $36 $08
 
     ldh  a, [hActiveEntityState]                  ; $5126: $F0 $F0
     JP_TABLE                                      ; $5128
@@ -304,7 +305,7 @@ jr_004_51FA:
     ld   [hl], $7F                                ; $525E: $36 $7F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5260: $21 $40 $C3
     add  hl, de                                   ; $5263: $19
-    ld   [hl], $C2                                ; $5264: $36 $C2
+    ld   [hl], 2 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $5264: $36 $C2
     ld   hl, wEntitiesHitboxFlagsTable            ; $5266: $21 $50 $C3
     add  hl, de                                   ; $5269: $19
     ld   [hl], $00                                ; $526A: $36 $00
@@ -353,7 +354,7 @@ jr_004_5273:
     ld   [hl], a                                  ; $52AF: $77
     ld   hl, wEntitiesPhysicsFlagsTable           ; $52B0: $21 $40 $C3
     add  hl, de                                   ; $52B3: $19
-    ld   [hl], $12                                ; $52B4: $36 $12
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ; $52B4: $36 $12
     ld   hl, wEntitiesHitboxFlagsTable            ; $52B6: $21 $50 $C3
     add  hl, de                                   ; $52B9: $19
     ld   [hl], $00                                ; $52BA: $36 $00
@@ -413,7 +414,7 @@ jr_004_5273:
     ldh  [hActiveEntityPosY], a                   ; $530F: $E0 $EF
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5311: $21 $40 $C3
     add  hl, de                                   ; $5314: $19
-    ld   [hl], $12                                ; $5315: $36 $12
+    ld   [hl], 2 | ENTITY_PHYSICS_SHADOW          ; $5315: $36 $12
     ld   hl, wEntitiesHitboxFlagsTable            ; $5317: $21 $50 $C3
     add  hl, de                                   ; $531A: $19
     ld   [hl], $00                                ; $531B: $36 $00
@@ -482,7 +483,7 @@ jr_004_5340:
     call SetEntitySpriteVariant                   ; $5375: $CD $0C $3B
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5378: $21 $40 $C3
     add  hl, bc                                   ; $537B: $09
-    ld   [hl], $48                                ; $537C: $36 $48
+    ld   [hl], 8 | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $537C: $36 $48
 
 .ret_537E
     ret                                           ; $537E: $C9

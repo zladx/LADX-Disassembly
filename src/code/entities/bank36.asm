@@ -104,8 +104,8 @@ func_036_4077::
     call func_036_4365                            ; $408E: $CD $65 $43
     jp   IncrementEntityState                     ; $4091: $C3 $12 $3B
 
-Data_036_4094::
-    db   $FF, $7F, $00, $00, $71, $44, $7F, $7D
+PhotographerPaletteA::
+    rgb  #F8F8F8, #000000, #881888, #F858F8
 
 func_036_409C::
     call func_036_4365                            ; $409C: $CD $65 $43
@@ -118,7 +118,7 @@ func_036_409C::
 
     ld   [hl], a                                  ; $40A8: $77
     di                                            ; $40A9: $F3
-    ld   de, Data_036_4094                        ; $40AA: $11 $94 $40
+    ld   de, PhotographerPaletteA                 ; $40AA: $11 $94 $40
     ld   hl, wObjPal7                             ; $40AD: $21 $80 $DC
 
 .loop_40B0
@@ -308,7 +308,7 @@ func_036_41B2::
     ldh  [rLCDC], a                               ; $41C4: $E0 $40
     pop  bc                                       ; $41C6: $C1
     di                                            ; $41C7: $F3
-    ld   de, Data_036_4094                        ; $41C8: $11 $94 $40
+    ld   de, PhotographerPaletteA                 ; $41C8: $11 $94 $40
     ld   hl, wObjPal7                             ; $41CB: $21 $80 $DC
     ld   a, $02                                   ; $41CE: $3E $02
     ldh  [rSVBK], a                               ; $41D0: $E0 $70
@@ -1847,8 +1847,8 @@ func_036_4A77::
 ._09 dw func_036_4BC3                             ; $4A93
 ._0A dw func_036_4BCF                             ; $4A95
 
-Data_036_4A97::
-    db   $FF, $7F, $00, $00, $71, $44, $7F, $7D
+PhotographerPaletteB::
+    rgb  #F8F8F8, #000000, #881888, #F858F8
 
 func_036_4A9F::
     push bc                                       ; $4A9F: $C5
@@ -1868,7 +1868,7 @@ func_036_4A9F::
     di                                            ; $4ABE: $F3
     ld   a, $02                                   ; $4ABF: $3E $02
     ldh  [rSVBK], a                               ; $4AC1: $E0 $70
-    ld   de, Data_036_4A97                        ; $4AC3: $11 $97 $4A
+    ld   de, PhotographerPaletteB                 ; $4AC3: $11 $97 $4A
     ld   hl, wObjPal7                             ; $4AC6: $21 $80 $DC
 
 .loop_4AC9
@@ -2283,9 +2283,8 @@ func_036_4D03::
     call_open_dialog Dialog26F                    ; $4D32
     jr   jr_036_4D6E                              ; $4D37: $18 $35
 
-Data_036_4D39::
-    db   $1F, $00, $1F, $00, $1F, $01, $1F, $02, $1F
-    db   $03, $31, $07, $44, $0B, $40, $3A, $A5, $7C
+ColorDungeonBossPalette::
+    rgb   #F80000, #F80000, #F84000, #F88000, #F8C000, #88C808, #20D010, #009070, #2828F8
 
 func_036_4D4B::
     call DecrementEntityIgnoreHitsCountdown       ; $4D4B: $CD $56 $0C
@@ -2319,7 +2318,7 @@ jr_036_4D6E:
     and  $FE                                      ; $4D73: $E6 $FE
     ld   e, a                                     ; $4D75: $5F
     ld   d, $00                                   ; $4D76: $16 $00
-    ld   hl, Data_036_4D39                        ; $4D78: $21 $39 $4D
+    ld   hl, ColorDungeonBossPalette              ; $4D78: $21 $39 $4D
     add  hl, de                                   ; $4D7B: $19
     ld   a, [wObjPal8 + 2*2]                      ; $4D7C: $FA $8C $DC
     cp   [hl]                                     ; $4D7F: $BE
@@ -7674,32 +7673,35 @@ jr_036_6CBF:
 ret_036_6CC0:
     ret                                           ; $6CC0: $C9
 
-Data_036_6CC1::
-    db   $FF, $47, $39, $0E, $C7, $00, $00, $00   ; $6CC1
+; Color Dungeon dynamic palettes
 
-Data_036_6CC9::
-    db   $8C, $31, $C4, $26, $24, $15, $00, $00   ; $6CC9
+ColorDungeonBGPalette1:: ; BG7
+    rgb   #F8F888, #C88818, #383000, #000000
 
-Data_036_6CD1::
-    db   $FF, $47, $87, $7D, $83, $3C, $00, $00   ; $6CD1
+ColorDungeonBGPalette2:: ; BG7, probably
+    rgb   #606060, #20B048, #204828, #000000
 
-Data_036_6CD9::
-    db   $0D, $76, $45, $7D, $A4, $3C, $00, $00   ; $6CD9
+ColorDungeonBGPalette3:: ; BG7
+    rgb   #F8F888, #3860F8, #182078, #000000
 
-Data_036_6CE1::
-    db   $F3, $51, $00, $00, $6D, $0D, $17, $17   ; $6CE1
+ColorDungeonBGPalette4:: ; BG7: fairy water
+    rgb   #6880E8, #2850F8, #202878, #000000
 
-Data_036_6CE9::
-    db   $F3, $51, $00, $00, $00, $7C, $AE, $7E   ; $6CE9
+ColorDungeonOBJPalette1:: ; OBJ7: rock guy miniboss
+    rgb   #9878A0, #000000, #685818, #B8C028
 
-Data_036_6CF1::
-    db   $FF, $47, $F3, $51, $67, $28, $00, $00   ; $6CF1
+ColorDungeonOBJPalette2:: ; OBJ7: buzzblob miniboss
+    rgb   #9878A0, #000000, #0000F8, #70A8F8
 
-Data_036_6CF9::
-    db   $FF, $47, $F3, $51, $67, $28, $00, $00   ; $6CF9
+ColorDungeonOBJPalette3:: ; OBJ7
+    rgb   #F8F888, #9878A0, #381850, #000000
 
-Data_036_6D01::
-    db   $F3, $51, $00, $00, $B4, $01, $FF, $7F, $F3, $51, $00, $00, $A5, $7C, $FF, $7F
+ColorDungeonOBJPalette4:: ; OBJ7
+    rgb   #F8F888, #9878A0, #381850, #000000
+
+ColorDungeonBossBasePalette:: ; OBJ6 and OBJ7: boss
+    rgb   #9878A0, #000000, #A06800, #F8F8F8
+    rgb   #9878A0, #000000, #2828F8, #F8F8F8
 
 Data_036_6D11:: ; indexed by hMapRoom
     db   $00, $04, $00, $00, $00, $00, $00, $03, $00, $03, $01, $01, $00, $01, $01, $00
@@ -7711,14 +7713,14 @@ Data_036_6D27::
 
 Data_036_6D3B::
     dw   $0000
-    dw   Data_036_6CC1
-    dw   Data_036_6CC9
-    dw   Data_036_6CD1
-    dw   Data_036_6CD9
-    dw   Data_036_6CE1
-    dw   Data_036_6CE9
-    dw   Data_036_6CF1
-    dw   Data_036_6CF9
+    dw   ColorDungeonBGPalette1
+    dw   ColorDungeonBGPalette2
+    dw   ColorDungeonBGPalette3
+    dw   ColorDungeonBGPalette4
+    dw   ColorDungeonOBJPalette1
+    dw   ColorDungeonOBJPalette2
+    dw   ColorDungeonOBJPalette3
+    dw   ColorDungeonOBJPalette4
 
 func_036_6D4D::
     ldh  a, [hMapId]                              ; $6D4D: $F0 $F7
@@ -7758,7 +7760,7 @@ func_036_6D4D::
     bit  7, a                                     ; $6D7F: $CB $7F
     jr   z, .jr_6D8E                              ; $6D81: $28 $0B
 
-    ld   hl, Data_036_6D01                        ; $6D83: $21 $01 $6D
+    ld   hl, ColorDungeonBossBasePalette          ; $6D83: $21 $01 $6D
     ld   de, wObjPal7                             ; $6D86: $11 $80 $DC
     ld   bc, $10                                  ; $6D89: $01 $10 $00
     jr   jr_036_6D9E                              ; $6D8C: $18 $10
@@ -8188,11 +8190,23 @@ jr_036_708E:
     pop  bc                                       ; $7094: $C1
     ret                                           ; $7095: $C9
 
-Data_036_7096::
-    db   $80, $26, $95, $63, $20, $3A, $75, $6B, $A0, $51, $35, $73, $08, $7D, $18, $7F
-    db   $AD, $78, $F9, $7E, $50, $5C, $DA, $76, $12, $40, $BB, $6A, $15, $30, $BC, $66
-    db   $17, $14, $BD, $5E, $D7, $04, $FD, $56, $37, $05, $1D, $57, $97, $09, $3D, $5B
-    db   $F5, $09, $5C, $5B, $10, $0A, $5A, $5B, $4B, $06, $79, $57, $A0, $02, $95, $57
+InstrumentPalette::
+    rgb  #00A048, #A8E0C0
+    rgb  #008870, #A8D8D0
+    rgb  #0068A0, #A8C8E0
+    rgb  #4040F8, #C0C0F8
+    rgb  #6828F0, #C8B8F8
+    rgb  #8010B8, #D0B0E8
+    rgb  #900080, #D8A8D0
+    rgb  #A80060, #E0A8C8
+    rgb  #B80028, #E8A8B8
+    rgb  #B83008, #E8B8A8
+    rgb  #B84808, #E8C0A8
+    rgb  #B86010, #E8C8B0
+    rgb  #A87810, #E0D0B0
+    rgb  #808010, #D0D0B0
+    rgb  #589008, #C8D8A8
+    rgb  #00A800, #A8E0A8
 
 cycleInstrumentItemColor::
     ld   a, [wPaletteUnknownE]                    ; $70D6: $FA $D5 $DD
@@ -8214,7 +8228,7 @@ ENDC
     and  $3C                                      ; $70E7: $E6 $3C
     ld   e, a                                     ; $70E9: $5F
     ld   d, $00                                   ; $70EA: $16 $00
-    ld   hl, Data_036_7096                        ; $70EC: $21 $96 $70
+    ld   hl, InstrumentPalette                    ; $70EC: $21 $96 $70
     add  hl, de                                   ; $70EF: $19
     ld   de, wObjPal2 + 2*2                       ; $70F0: $11 $5C $DC
 

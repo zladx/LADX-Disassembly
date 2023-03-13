@@ -65,18 +65,18 @@ Dialog111:: ; Master Stalfos (D5 Mini-Boss)
     db "get it, if you  "
     db "can!'  Master <skull>@"
 
-Dialog112:: ; idk
+Dialog112:: ; Master Stalfos (D5 Mini-Boss)
     db "Gulp!  You found"
     db "me!  You're a   "
     db "real pesky kid, "
     db "you know that?!@"
 
-Dialog113:: ; idk
+Dialog113:: ; Master Stalfos (D5 Mini-Boss)
     db "Arrgh!  I can't "
     db "beat you!  I'm  "
     db "outta here!@"
 
-Dialog114:: ; idk
+Dialog114:: ; Master Stalfos (D5 Mini-Boss)
     db "You again?!  You"
     db "keep going and  "
     db "going... I can't"
@@ -213,7 +213,7 @@ Dialog123:: ; Kid, probably
     db "What happened to"
     db "her?@"
 
-Dialog124:: ; Fisherman, probably
+Dialog124:: ; Fisherman
     db "WHOA! That's a  "
     db "big one! Hey,   "
     db "photo guy! Can  "
@@ -226,7 +226,7 @@ Dialog125:: ; Fisherman
     db "I'll catch a big"
     db "fish again.@"
 
-Dialog126:: ; Zora, probably
+Dialog126:: ; Zora
     db "If you keep me a"
     db "secret, I'll    "
     db "tell you some-  "
@@ -250,7 +250,7 @@ Dialog128:: ; Mamasha, probably
     db "you this in     "
     db "return!@"
 
-Dialog129:: ; Mamasha, probably
+Dialog129:: ; Narrator
     db "You traded your "
     db "<yoshi> for <ribbon>!  Maybe "
     db "you can trade   "
@@ -293,7 +293,7 @@ Dialog12D:: ; Richard
     db "we can talk!    "
     db "Good Bye!@"
 
-Dialog12E:: ; Photographer, probably
+Dialog12E:: ; Photographer
     db "You want to know"
     db "about that      "
     db "ghost? I'll bet "
@@ -954,7 +954,7 @@ Dialog179:: ; Spirit of the Mansion
     db "the ultimate    "
     db "sword!@"
 
-Dialog17A:: ; Spirit of the Mansion
+Dialog17A:: ; Narrator
     db "Hmmm. No        "
     db "response. You   "
     db "must not have   "
@@ -1078,7 +1078,7 @@ Dialog18A:: ; Manbo
     db "have an Ocarina,"
     db "so...Glub glub!@"
 
-Dialog18B:: ; idk
+Dialog18B:: ; Henhouse Keeper
     db "Chickens these  "
     db "days don't have "
     db "the fighting    "
@@ -1089,7 +1089,7 @@ Dialog18B:: ; idk
     db "But now, see?   "
     db "Cluck cluck!@"
 
-Dialog18C:: ; idk
+Dialog18C:: ; Henhouse Keeper
     db "Wow!  Amazing!  "
     db "That rooster is "
     db "actually flying!"
@@ -1100,7 +1100,7 @@ Dialog18C:: ; idk
     db "your head? Cluck"
     db "Cluck!@"
 
-Dialog18D:: ; idk
+Dialog18D:: ; Henhouse Keeper
     db "Wooo!  Finally! "
     db "This flying     "
     db "rooster is the  "

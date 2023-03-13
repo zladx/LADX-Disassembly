@@ -43,7 +43,7 @@ Dialog003:: ; Marin
     db "'Ballad of the  "
     db "Wind Fish.'@"
 
-Dialog004:: ; Marin, probably
+Dialog004:: ; Marin
     db "Hey!  That's a  "
     db "nice Ocarina you"
     db "have there! Will"
@@ -170,7 +170,7 @@ Dialog012:: ; Talking Tree
     db "the wall with a "
     db "Bomb!@"
 
-Dialog013:: ; Narrator, probably
+Dialog013:: ; Narrator
     db "You've learned  "
     db "the 'Ballad of  "
     db "the Wind Fish!' "
@@ -178,7 +178,7 @@ Dialog013:: ; Narrator, probably
     db "always remain in"
     db "your heart!@"
 
-Dialog014:: ; Marin, probably
+Dialog014:: ; Marin
     db "Please remember "
     db "this song!  You "
     db "should play it  "
@@ -187,13 +187,13 @@ Dialog014:: ; Marin, probably
     db "fresh in your   "
     db "mind!@"
 
-Dialog015:: ; Marin, probably
+Dialog015:: ; Marin
     db "Please!  I want "
     db "you to learn it!"
     db "This song is my "
     db "favorite!@"
 
-Dialog016:: ; Marin, probably
+Dialog016:: ; Marin
     db "So, how do you  "
     db "like it?  It's  "
     db "really touching,"
@@ -239,7 +239,7 @@ ENDC
     db "Drop by again,  "
     db "big guy!@"
 
-Dialog01B:: ; Crazy Tracy, probably
+Dialog01B:: ; Crazy Tracy
     db "Beat it, then!  "
     db "Come back when  "
     db "you have some   "
@@ -250,7 +250,7 @@ Dialog01C:: ; Crazy Tracy
     db "But I won't sell"
     db "it to you!@"
 
-Dialog01D:: ; Crazy Tracy, probably
+Dialog01D:: ; Crazy Tracy
     db "Well!  I'm only "
     db "offering you a  "
     db "secret that will"
@@ -269,7 +269,7 @@ Dialog01F:: ; Narrator
     db "Is this your big"
     db "chance?@"
 
-Dialog020:: ; Fox
+Dialog020:: ; Mutt
     db "GRRRR...@"
 
 Dialog021:: ; Tarin
@@ -320,7 +320,7 @@ Dialog027:: ; Papahl
     db "keep a look out "
     db "for me, hear?@"
 
-Dialog028:: ; Marin, probably
+Dialog028:: ; Marin
     db "Yes!!  Yes!!    "
     db "Break them!     "
     db "Break them all! "
@@ -779,7 +779,7 @@ Dialog083:: ; Signpost
 Dialog084:: ; Map
     db "Seashell Mansion@"
 
-Dialog085:: ; Map, probably
+Dialog085:: ; Map
     db "Richard's Villa @"
 
 Dialog086:: ; Map
@@ -822,13 +822,13 @@ Dialog08D:: ; Narrator
     db "with just your  "
     db "bare hands...@"
 
-Dialog08E:: ; Narrator, probably
+Dialog08E:: ; Narrator
     db "Well, it's an   "
     db "Ocarina, but you"
     db "don't know how  "
     db "to play it...@"
 
-Dialog08F:: ; Marin, probably
+Dialog08F:: ; Marin
     db "No!  No!  Poor  "
     db "hen!  Stop that!@"
 
@@ -846,7 +846,7 @@ Dialog091:: ; Narrator
     db "and repel       "
     db "enemies with it!@"
 
-Dialog092:: ; idk
+Dialog092:: ; Desert skull
     db "Ahhh... Yess... "
     db "That dust was so"
     db "refreshing...   "
@@ -907,7 +907,7 @@ Dialog099:: ; Narrator
     db "it on a variety "
     db "of things!@"
 
-Dialog09A:: ; Narrator, probably
+Dialog09A:: ; Narrator
     db "You've got a    "
     db "bomb! Way to    "
     db "go!@"

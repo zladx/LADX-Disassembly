@@ -28,12 +28,12 @@ Dialog192:: ; Marin
     db "what is your    "
     db "favorite song?@"
 
-Dialog193:: ; Marin, probably
+Dialog193:: ; Marin
     db "Please, don't   "
     db "ever forget this"
     db "song...or me...@"
 
-Dialog194:: ; Marin, probably
+Dialog194:: ; Marin
     db "Thank you for   "
     db "everything!     "
     db "#####, you are  "
@@ -57,13 +57,13 @@ Dialog195:: ; Marin
     db "never forgive   "
     db "you!@"
 
-Dialog196:: ; Fox
+Dialog196:: ; Mutt, narrator
     db "... ... ... ... "
     db "It seems to be  "
     db "totally absorbed"
     db "in Marin's song!@"
 
-Dialog197:: ; Marin, probably
+Dialog197:: ; Marin
     db "They say the    "
     db "'Ballad of the  "
     db "Wind Fish' is a "
@@ -74,7 +74,7 @@ Dialog197:: ; Marin, probably
     db "he make my wish "
     db "come true?@"
 
-Dialog198:: ; Marin, probably
+Dialog198:: ; Marin
     db "Eh?  You want me"
     db "to go in there? "
     db "No, I think I'll"
@@ -82,12 +82,12 @@ Dialog198:: ; Marin, probably
     db "Take care of    "
     db "yourself, #####!@"
 
-Dialog199:: ; Marin, probably
+Dialog199:: ; Marin
     db "Ahhh!  Ahhh, you"
     db "are a bad boy,  "
     db "#####!@"
 
-Dialog19A:: ; idk, maybe Crazy Tracy?
+Dialog19A:: ; Crazy Tracy
     db "Here's some     "
     db "bonus treatment!"
     db "Behold!  Your   "
@@ -293,8 +293,8 @@ Dialog1C3:: ; Signpost
     db "touch them with "
     db "your bare hands!@"
 
-Dialog1C4:: ; idk
-Dialog1C5:: ; idk
+Dialog1C4:: ; Tarin
+Dialog1C5:: ; Tarin
     db "I was hungry    "
     db "somethin' fierce"
     db "so I went and   "
@@ -435,7 +435,7 @@ Dialog1D4:: ; Chef Bear
     db "are here too... "
     db "Sorry...@"
 
-Dialog1D5:: ; Marin, probably
+Dialog1D5:: ; Marin
     db "Oh, #####, I'm  "
     db "glad you found  "
     db "this place.     "
@@ -444,7 +444,7 @@ Dialog1D5:: ; Marin, probably
     db "for a while?    "
     db "    Yes! No...<ask>"
 
-Dialog1D6:: ; Marin, probably
+Dialog1D6:: ; Marin
     db "Okay, I'll just "
     db "watch the waves "
     db "for a while...@"
@@ -501,7 +501,7 @@ Dialog1DB:: ; Marin
     db "you...Err...Uhh,"
     db "Ha ha ha ha!@"
 
-Dialog1DC:: ; Marin, probably
+Dialog1DC:: ; Marin
     db "Hunh? The walrus"
     db "wants me to go  "
     db "to him?  It     "
@@ -509,14 +509,14 @@ Dialog1DC:: ; Marin, probably
     db "I will go with  "
     db "you to him...@"
 
-Dialog1DD:: ; idk
+Dialog1DD:: ; Tarin
     db "Unnnngh! Owwwww!"
     db "... ... ... ... "
     db "I've sure lost  "
     db "my taste for    "
     db "honey!@"
 
-Dialog1DE:: ; Marin, probably
+Dialog1DE:: ; Marin
     db "Humph! Your head"
     db "is always in the"
     db "clouds! Will you"
@@ -529,11 +529,11 @@ Dialog1DF:: ; idk
     db "Get ready for   "
     db "THIS!@"
 
-Dialog1E0:: ; idk
+Dialog1E0:: ; Walrus
     db "ZZZ ZZZ ZZZ ZZZ "
     db " ... <marin> ... <marin> ...@"
 
-Dialog1E1:: ; Marin, probably, and Link
+Dialog1E1:: ; Marin, Link
     db "Yes, it's that  "
     db "lazy walrus!    "
     db "Shall we give   "
@@ -541,19 +541,19 @@ Dialog1E1:: ; Marin, probably, and Link
     db "surprise?       "
     db "    Yes  No...<ask>"
 
-Dialog1E2:: ; Marin, probably
+Dialog1E2:: ; Marin
     db "Aha ha ha!  Wow!"
     db "He certainly    "
     db "woke with a     "
     db "start!@"
 
-Dialog1E3:: ; idk
+Dialog1E3:: ; Marin
     db "Hunh?  Oh, he's "
     db "calling me...   "
     db "It's the same as"
     db "always... Ha ha!@"
 
-Dialog1E4:: ; idk
+Dialog1E4:: ; Marin
     db "You're right, it"
     db "would be mean to"
     db "wake him up now!"
@@ -596,18 +596,18 @@ Dialog1E8:: ; Fisherman
     db "me have it...   "
     db "    Okay No<ask>"
 
-Dialog1E9:: ; Fisherman, probably
+Dialog1E9:: ; Fisherman
     db "Keep your eyes  "
     db "open and watch  "
     db "a pro at work.@"
 
-Dialog1EA:: ; Fisherman, probably
+Dialog1EA:: ; Fisherman
     db "You should be   "
     db "more kind to me!"
     db "I thought we    "
     db "were buddies!@"
 
-Dialog1EB:: ; Fisherman, probably
+Dialog1EB:: ; Fisherman
     db "My, that's a    "
     db "BIIIIG one!@"
 
@@ -616,18 +616,18 @@ Dialog1EC:: ; Narrator
     db "necklace <bra>!     "
     db "L-l-lucky!@"
 
-Dialog1ED:: ; Fisherman, probably
+Dialog1ED:: ; Fisherman
     db "I can't wait to "
     db "see what I'll   "
     db "catch next!@"
 
-Dialog1EE:: ; Mamasha, probably
+Dialog1EE:: ; Mamasha
     db "My husband is   "
     db "lost in the     "
     db "woods! Please   "
     db "go find him!@"
 
-Dialog1EF:: ; Secret Zora or Secret Goriya, not sure
+Dialog1EF:: ; Secret Zora
     db "Hey, you can see"
     db "me?! You must   "
     db "have a magnify- "
@@ -667,7 +667,7 @@ Dialog1F3:: ; Mermaid
     db "Promise!  You'll"
     db "only take one!@"
 
-Dialog1F4:: ; Mermaid, probably
+Dialog1F4:: ; Mermaid
     db "You are heart-  "
     db "less and cruel!@"
 
@@ -994,23 +994,23 @@ Dialog21A:: ; Book, Narrator
     db "this book reeks "
     db "of secrets...@"
 
-Dialog21B:: ; Marin, probably
+Dialog21B:: ; Marin
     db "...You're late! "
     db "I thought you'd "
     db "never come back!@"
 
-Dialog21C:: ; Marin, probably
+Dialog21C:: ; Marin
     db "...EEEK!  You're"
     db "hurt!  Arrrgh!  "
     db "Don't be so     "
     db "reckless!@"
 
-Dialog21D:: ; Marin, probably
+Dialog21D:: ; Marin
     db "#####! You're   "
     db "back!  Are you  "
     db "hurt?@"
 
-Dialog21E:: ; Marin, probably
+Dialog21E:: ; Marin
     db "...You idiot!   "
     db "I told you this "
     db "would happen... "

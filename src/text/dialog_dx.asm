@@ -47,20 +47,20 @@ Dialog254:: ; idk
     db "I just decided  "
     db "to wait at home.@"
 
-Dialog255:: ; Marin, probably
+Dialog255:: ; Marin
     db "This is my first"
     db "walk with you,  "
     db "#####.@"
 
-Dialog256:: ; Marin, probably
+Dialog256:: ; Marin
     db ". . . . .@"
 
-Dialog257:: ; Marin, probably
+Dialog257:: ; Marin
     db "This cliff will "
     db "be our secret   "
     db "place. @"
 
-Dialog258:: ; Marin, probably
+Dialog258:: ; Marin
     db "Aren't you going"
     db "to say anything?@"
 
@@ -279,7 +279,7 @@ Dialog278:: ; Marin
     db "other people's  "
     db "drawers?@"
 
-Dialog279:: ; Marin, probably
+Dialog279:: ; Marin
     db "Great!  Dig it! "
     db "Dig it!  Dig to "
     db "the center of   "

@@ -103,7 +103,7 @@ Dialog0B4:: ; Genie (D2 Nightmare)
     db "this time!!     "
     db "HO HO HO!@"
 
-Dialog0B5:: ; idk
+Dialog0B5:: ; Slime Eel (D5 Nightmare)
     db "TSSSK, TSSSK!   "
     db "You don't ssseem"
     db "to know what    "
@@ -121,7 +121,7 @@ Dialog0B6:: ; Facade (D6 Nightmare)
     db "go, talking too "
     db "much again...@"
 
-Dialog0B7:: ; idk
+Dialog0B7:: ; Facade (D6 Nightmare)
     db "Okay, listen up!"
     db "If the Wind Fish"
     db "wakes up, every-"
@@ -482,8 +482,8 @@ Dialog0D0:: ; Wind Fish
     db "LET US AWAKEN..."
     db "   TOGETHER!!@"
 
-Dialog0D1:: ; Wind Fish, probably
-Dialog0D2:: ; Wind Fish, probably
+Dialog0D1:: ; Wind Fish
+Dialog0D2:: ; Wind Fish
     db " PLAY THE EIGHT "
     db "  INSTRUMENTS!  "
     db "PLAY THE SONG OF"
@@ -494,8 +494,8 @@ Dialog0D4:: ; Map, probably
 Dialog0D5:: ; Map, probably
     db "Mermaid Statue  @"
 
-Dialog0D6:: ; idk
-Dialog0D7:: ; idk
+Dialog0D6:: ; Owl
+Dialog0D7:: ; Owl
     db "...#####, you   "
     db "have beaten all "
     db "the Nightmares! "
@@ -533,7 +533,7 @@ Dialog0D9:: ; Owl
     db "wait for you    "
     db "there!  Hoot!@"
 
-Dialog0DA:: ; idk
+Dialog0DA:: ; Lanmola
     db "Annoyance!  You "
     db "are only getting"
     db "in the way!@"
@@ -566,12 +566,12 @@ Dialog0DC:: ; Mamu
     db "What do you do? "
     db "    Pay  Leave<ask>"
 
-Dialog0DD:: ; Mamu, probably
+Dialog0DD:: ; Mamu
     db "Thank you...    "
     db "Thank you very  "
     db "much... Croak!@"
 
-Dialog0DE:: ; Mamu, probably
+Dialog0DE:: ; Mamu
     db "Well, that's a  "
     db "shame, but we   "
     db "don't play for  "
@@ -586,7 +586,7 @@ Dialog0DF:: ; Narrator
     db "even liven up   "
     db "unliving things!@"
 
-Dialog0E0:: ; Mamu, probably
+Dialog0E0:: ; Mamu
     db "If you play this"
     db "song, you'll    "
     db "make everything "
@@ -633,7 +633,7 @@ Dialog0E5:: ; Li'l Devil
     db "Hah!  Take care!"
     db "See you again!@"
 
-Dialog0E6:: ; Narrator, probably
+Dialog0E6:: ; Narrator
     db "??  There is a  "
     db "picture carved  "
     db "on the wall, but"
@@ -641,7 +641,7 @@ Dialog0E6:: ; Narrator, probably
     db "because it's too"
     db "dark in here...@"
 
-Dialog0E7:: ; idk
+Dialog0E7:: ; Southern Face Shrine mural
     db "TO THE FINDER..."
     db "  THE ISLE OF   "
     db "KOHOLINT, IS BUT"
@@ -732,7 +732,7 @@ Dialog0F4:: ; Signpost, probably
     db "Entrance to the "
     db " Animal Village@"
 
-Dialog0F5:: ; idk
+Dialog0F5:: ; Nightmare (final boss)
     db "We were born of "
     db "nightmares... To"
     db "take over this  "
@@ -754,7 +754,7 @@ Dialog0F5:: ; idk
     db "defeat us!!!    "
     db "Let's rumble!@"
 
-Dialog0F6:: ; idk
+Dialog0F6:: ; Nightmare (final boss)
     db "This island is  "
     db "going to dis-   "
     db "appear...  Our  "
@@ -763,19 +763,19 @@ Dialog0F6:: ; idk
     db "Our world...    "
     db "Our... world... @"
 
-Dialog0F7:: ; Marin, probably
+Dialog0F7:: ; Marin
     db "Wow!  #####, can"
     db "I try this?!    "
     db "What do you say?"
     db "    Okay No Way<ask>"
 
-Dialog0F8:: ; Marin, probably
+Dialog0F8:: ; Marin
     db "C'mon!  I want  "
     db "to do it! Can I?"
     db "It looks so fun!"
     db "    Yes  Okay<ask>"
 
-Dialog0F9:: ; idk
+Dialog0F9:: ; Trendy Gamester
     db "You're good!    "
     db "You're a pro,   "
     db "aren't you?     "

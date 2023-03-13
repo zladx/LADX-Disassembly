@@ -3167,36 +3167,34 @@ InventoryLoad4Handler::
     ret                                           ; $5D60: $C9
 
 InventoryPalettes::
-    ; 8 + 8 palettes used for the inventory subscreen
-    ;       0      1      2      3
-    dw   $57FF, $26C4, $1521, $0000
-    dw   $57FF, $5231, $28C5, $0000
-    dw   $57FF, $2C7F, $140E, $0000
-    dw   $57FF, $11D9, $10CE, $0000
-    dw   $57FF, $7EAE, $7C00, $0000
-    dw   $57FF, $7FFF, $0642, $0000
-    dw   $57FF, $12BB, $0151, $0000
-    dw   $57FF, $2B02, $0A00, $0000
-    dw   $57FF, $0000, $22A2, $4EFF
-    dw   $7C00, $0000, $05FF, $4EFF
-    dw   $7C00, $0000, $7E03, $4EFF
-    dw   $7C00, $0000, $5231, $7FFF
-    dw   $7C00, $1ADF, $187D, $0000
-    dw   $7C00, $0000, $22A2, $7FFF
-    dw   $7C00, $0000, $001F, $7FFF
-    dw   $7C00, $0000, $7C00, $7FFF
+    rgb   #F8F8A8, #20B048, #084828, #000000
+    rgb   #F8F8A8, #8888A0, #283050, #000000
+    rgb   #F8F8A8, #F81858, #700028, #000000
+    rgb   #F8F8A8, #C87020, #703020, #000000
+    rgb   #F8F8A8, #70A8F8, #0000F8, #000000
+    rgb   #F8F8A8, #F8F8F8, #109008, #000000
+    rgb   #F8F8A8, #D8A820, #885000, #000000
+    rgb   #F8F8A8, #10C050, #008010, #000000
+
+    rgb   #F8F8A8, #000000, #10A840, #F8B898
+    rgb   #0000F8, #000000, #F87808, #F8B898
+    rgb   #0000F8, #000000, #1880F8, #F8B898
+    rgb   #0000F8, #000000, #8888A0, #F8F8F8
+    rgb   #0000F8, #F8B030, #E81830, #000000
+    rgb   #0000F8, #000000, #10A840, #F8F8F8
+    rgb   #0000F8, #000000, #F80000, #F8F8F8
+    rgb   #0000F8, #000000, #0000F8, #F8F8F8
 
 InventoryTradingItemPalettes::
     ; Replaces the second and third color in the fifth BG palette line
     ; Used for trading sequence items
-    ;       2      3
-    dw   $7FFF, $0642
-    dw   $0FBE, $0213
-    dw   $0F7F, $09E0
-    dw   $32DF, $187D
-    dw   $7FFF, $083D
-    dw   $7EAE, $7C00
-    dw   $7FFF, $5231
+    rgb            #F8F8F8, #109008          ; Yoshi doll
+    rgb            #F0E818, #988000          ; bananas
+    rgb            #F8D818, #007810          ; pineapple
+    rgb            #F8B060, #E81830          ; hibiscus
+    rgb            #F8F8F8, #E80810          ; letter
+    rgb            #70A8F8, #0000F8          ; magnifying lens
+    rgb            #F8F8F8, #8888A0          ; dog food
 
 InventoryTradingItemPaletteTable::
     ; Pointers to InventoryTradingItemPalettes
@@ -3296,22 +3294,23 @@ jr_020_5E6D:
 
 InventoryInstrumentCyclingColors::
     ; Palette colors for the color-cycling the instruments use on the subscreen.
-    dw  $2680, $1100
-    dw  $3A20, $18E0
-    dw  $51A0, $20C0
-    dw  $7D08, $3484
-    dw  $7CAD, $3046
-    dw  $5C50, $2827
-    dw  $4012, $1C08
-    dw  $3015, $1409
-    dw  $1417, $0009
-    dw  $04D7, $046A
-    dw  $0537, $048A
-    dw  $0997, $04AA
-    dw  $09F5, $04C9
-    dw  $0A10, $04E7
-    dw  $064B, $0505
-    dw  $02A0, $0120
+    ; Except the colors look wrong... maybe this is something else...?
+    rgb  #008048, #007820 ;     dw  $2680, $1100
+    rgb  #00B070, #202030 ;     dw  $3A20, $18E0
+    rgb  #3050A0, #380840 ;     dw  $51A0, $20C0
+    rgb  #4040F8, #480068 ;     dw  $7D08, $3484
+    rgb  #4800F8, #501860 ;     dw  $7CAD, $3046
+    rgb  #5020B8, #502850 ;     dw  $5C50, $2827
+    rgb  #483080, #383838 ;     dw  $4012, $1C08
+    rgb  #280060, #000828 ;     dw  $3015, $1409
+    rgb  #002028, #000800 ;     dw  $1417, $0009
+    rgb  #002808, #400008 ;     dw  $04D7, $046A
+    rgb  #686808, #801008 ;     dw  $0537, $048A
+    rgb  #904010, #A80008 ;     dw  $0997, $04AA
+    rgb  #B84010, #B83008 ;     dw  $09F5, $04C9
+    rgb  #B88810, #B82008 ;     dw  $0A10, $04E7
+    rgb  #A8B808, #804008 ;     dw  $064B, $0505
+    rgb  #589000, #006800 ;     dw  $02A0, $0120
 
 func_020_5EB5::
     ldh  a, [hIsGBC]                              ; $5EB5: $F0 $FE

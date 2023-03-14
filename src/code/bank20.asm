@@ -3294,23 +3294,22 @@ jr_020_5E6D:
 
 InventoryInstrumentCyclingColors::
     ; Palette colors for the color-cycling the instruments use on the subscreen.
-    ; Except the colors look wrong... maybe this is something else...?
-    rgb  #008048, #007820 ;     dw  $2680, $1100
-    rgb  #00B070, #202030 ;     dw  $3A20, $18E0
-    rgb  #3050A0, #380840 ;     dw  $51A0, $20C0
-    rgb  #4040F8, #480068 ;     dw  $7D08, $3484
-    rgb  #4800F8, #501860 ;     dw  $7CAD, $3046
-    rgb  #5020B8, #502850 ;     dw  $5C50, $2827
-    rgb  #483080, #383838 ;     dw  $4012, $1C08
-    rgb  #280060, #000828 ;     dw  $3015, $1409
-    rgb  #002028, #000800 ;     dw  $1417, $0009
-    rgb  #002808, #400008 ;     dw  $04D7, $046A
-    rgb  #686808, #801008 ;     dw  $0537, $048A
-    rgb  #904010, #A80008 ;     dw  $0997, $04AA
-    rgb  #B84010, #B83008 ;     dw  $09F5, $04C9
-    rgb  #B88810, #B82008 ;     dw  $0A10, $04E7
-    rgb  #A8B808, #804008 ;     dw  $064B, $0505
-    rgb  #589000, #006800 ;     dw  $02A0, $0120
+    rgb   #00A048, #004020
+    rgb   #008870, #003830
+    rgb   #0068A0, #003040
+    rgb   #4040F8, #202068
+    rgb   #6828F8, #301060
+    rgb   #8010B8, #380850
+    rgb   #900080, #400038
+    rgb   #A80060, #480028
+    rgb   #B80028, #480000
+    rgb   #B83008, #501808
+    rgb   #B84808, #502008
+    rgb   #B86010, #502808
+    rgb   #A87810, #483008
+    rgb   #808010, #383808
+    rgb   #589008, #284008
+    rgb   #00A800, #004800
 
 func_020_5EB5::
     ldh  a, [hIsGBC]                              ; $5EB5: $F0 $FE

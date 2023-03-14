@@ -1,4 +1,4 @@
-Dialog24E::
+Dialog24E:: ; idk
     db "Have you heard  "
     db "of the Flying   "
     db "Rooster?  They  "
@@ -8,32 +8,32 @@ Dialog24E::
     db "I wonder if it's"
     db "true...@"
 
-Dialog24F::
+Dialog24F:: ; idk
     db "Aaaah, Little   "
     db "Marin... I want "
     db "her to come back"
     db "again...Her song"
     db "is the best...@"
 
-Dialog250::
+Dialog250:: ; idk
     db "I dreamed that  "
     db "I turned into a "
     db "carrot last     "
     db "night...  What  "
     db "an odd dream...@"
 
-Dialog251::
+Dialog251:: ; Rabbit
     db "Eh?  How can an "
     db "animal talk?    "
     db "How?  Hey, I'm  "
     db "just a rabbit,  "
     db "so I don't know!@"
 
-Dialog252::
+Dialog252:: ; idk
     db "Ahhh!  It's her!"
     db "Little Marin!!@"
 
-Dialog253::
+Dialog253:: ; idk
     db "If you have no  "
     db "courage,then    "
     db "you have no     "
@@ -42,29 +42,29 @@ Dialog253::
     db "won't move for  "
     db "cowards.@"
 
-Dialog254::
+Dialog254:: ; idk
     db "I'm not afraid. "
     db "I just decided  "
     db "to wait at home.@"
 
-Dialog255::
+Dialog255:: ; Marin
     db "This is my first"
     db "walk with you,  "
     db "#####.@"
 
-Dialog256::
+Dialog256:: ; Marin
     db ". . . . .@"
 
-Dialog257::
+Dialog257:: ; Marin
     db "This cliff will "
     db "be our secret   "
     db "place. @"
 
-Dialog258::
+Dialog258:: ; Marin
     db "Aren't you going"
     db "to say anything?@"
 
-Dialog259::
+Dialog259:: ; Photographer, maybe
     db "Oh how I love   "
     db "pictures! Why   "
     db "don't you take  "
@@ -73,42 +73,42 @@ Dialog259::
     db "around? You can "
     db "call it . . .@"
 
-Dialog25A::
+Dialog25A:: ; Narrator
     db "You've got the  "
     db "Blue Clothes!   "
     db "Your damage will"
     db "be reduced by   "
     db "half!@"
 
-Dialog25B::
+Dialog25B:: ; Narrator
     db "You've got the  "
     db "Red Clothes!    "
     db "Your body is    "
     db "full of energy! @"
 
-Dialog25C::
+Dialog25C:: ; Fairy Queen (Color Dungeon)
     db "Red for offense,"
     db "blue for        "
     db "defense. Which  "
     db "do you choose?  "
     db "    RED  BLUE<ask>"
 
-Dialog25D::
+Dialog25D:: ; Fairy Queen (Color Dungeon), Link
     db "Are you sure?   "
     db "    YES  NO<ask>"
 
-Dialog25E::
+Dialog25E:: ; Dion (Color Dungeon)
     db "The fairy queen "
     db "is waiting for  "
     db "you.@"
 
-Dialog25F::
+Dialog25F:: ; Gar (Color Dungeon)
     db "Do you have the "
     db "powder? If not, "
     db "you must go     "
     db "back.@"
 
-Dialog260::
+Dialog260:: ; Color Guard (Color Dungeon)
     db "Our colors are  "
     db "never the same! "
     db "If I am red, he "
@@ -118,13 +118,13 @@ Dialog260::
     db "is my cloth?    "
     db "    Red  Blue<ask>"
 
-Dialog261::
+Dialog261:: ; idk
     db "BOO! I am no    "
     db "weakling! Your  "
     db "pitiful sword is"
     db "no match for me!@"
 
-Dialog262::
+Dialog262:: ; Color Guard (Color Dungeon)
     db "I am sorry, but "
     db "this is the     "
     db "Color Dungeon.  "
@@ -138,27 +138,27 @@ Dialog262::
     db "enter.          "
     db "Farewell.@"
 
-Dialog263::
+Dialog263:: ; idk (Color Dungeon)
     db "Here is your    "
     db "clue. Make      "
     db "all the red     "
     db "blue.@"
 
-Dialog264::
+Dialog264:: ; idk
     db "No,  no. Take a "
     db "closer look and "
     db "try again.@"
 
-Dialog265::
+Dialog265:: ; idk
     db "Don't tell      "
     db "anyone.@"
 
-Dialog266::
+Dialog266:: ; Narrator
     db "Do you want to  "
     db "read this book? "
     db "    YES  NO<ask>"
 
-Dialog267::
+Dialog267:: ; Book, Narrator
     db "New world of    "
     db "color under the "
     db "5 gravestones.  "
@@ -175,7 +175,7 @@ Dialog267::
     db "what the world  "
     db "of color is?@"
 
-Dialog268::
+Dialog268:: ; Fairy Queen (Color Dungeon)
     db "Welcome, #####. "
     db "I admire you for"
     db "coming this far."
@@ -190,13 +190,13 @@ Dialog268::
     db "you want?       "
     db "    RED  BLUE<ask>"
 
-Dialog269::
+Dialog269:: ; idk
     db "You fool! Your  "
     db "sword won't     "
     db "work! Try       "
     db "something else!@"
 
-Dialog26A::
+Dialog26A:: ; idk
     db "What a greedy   "
     db "fool! You want  "
     db "more power?! A  "
@@ -205,33 +205,33 @@ Dialog26A::
     db "give up and     "
     db "go home!@"
 
-Dialog26B::
+Dialog26B:: ; Great Fairy
     db "Relax and close "
     db "your eyes.@"
 
-Dialog26C::
+Dialog26C:: ; idk (Color Dungeon)
     db "I will now take "
     db "you out.@"
 
-Dialog26D::
+Dialog26D:: ; idk (Color Dungeon)
     db "Blue is safe.   "
     db "Yellow is       "
     db "caution. Red is "
     db "danger.@"
 
-Dialog26E::
+Dialog26E:: ; idk (Color Dungeon)
     db "Yellow is       "
     db "caution. Red is "
     db "danger,Take     "
     db "your time.@"
 
-Dialog26F::
+Dialog26F:: ; idk (Color Dungeon)
     db "Blue. Start     "
     db "over. Yellow is "
     db "caution. Red is "
     db "danger.@"
 
-Dialog270::
+Dialog270:: ; Photographer
     db "Hey, that looks "
     db "great! I'll call"
     db "it '##### Plays "
@@ -239,26 +239,26 @@ Dialog270::
     db "Now get closer  "
     db "to BowWow!@"
 
-Dialog271::
+Dialog271:: ; BowWow
     db "Grrrr!@"
 
-Dialog272::
+Dialog272:: ; Photographer
     db "#####, get      "
     db "closer!@"
 
-Dialog273::
+Dialog273:: ; BowWow
     db "Grrrr! Grrrr!!@"
 
-Dialog274::
+Dialog274:: ; Photographer
     db "Much closer! OK,"
     db "I'm ready.      "
     db "Smile!@"
 
-Dialog275::
+Dialog275:: ; BowWow
     db "Grrrr! Grrrr!!  "
     db "GRRRR!@"
 
-Dialog276::
+Dialog276:: ; Marin
     db "Ha ha ha! Do it!"
     db "Do it!  Do it   "
     db "moooore! ... ..."
@@ -266,114 +266,114 @@ Dialog276::
     db "nothing... I    "
     db "didn't mean it.@"
 
-Dialog277::
+Dialog277:: ; Marin
     db "Not very good..."
     db "Eh?  What?  Did "
     db "I say something?"
     db "No, you're hear-"
     db "ing things...@"
 
-Dialog278::
+Dialog278:: ; Marin
     db "#####, do you   "
     db "always look in  "
     db "other people's  "
     db "drawers?@"
 
-Dialog279::
+Dialog279:: ; Marin
     db "Great!  Dig it! "
     db "Dig it!  Dig to "
     db "the center of   "
     db "the earth!!@"
 
-Dialog27A::
+Dialog27A:: ; Marin, probably
     db "Whew!  What a   "
     db "surprise!@"
 
-Dialog27B::
+Dialog27B:: ; Marin, probably
     db "Ohh!  I'm sorry!"
     db "Are you okay?!  "
     db "#####?@"
 
-Dialog27C::
+Dialog27C:: ; Cukeman
     db "Hey Mon!@"
 
-Dialog27D::
+Dialog27D:: ; Cukeman
     db "You know me, I  "
     db "like short names"
     db "the best...@"
 
-Dialog27E::
+Dialog27E:: ; Cukeman
     db "It can display  "
     db "millions of     "
     db "polygons!@"
 
-Dialog27F::
+Dialog27F:: ; Cukeman
     db "I definitely    "
     db "need it, as soon"
     db "as possible!@"
 
-Dialog280::
+Dialog280:: ; Owl Statue
     db "Turn aside the  "
     db "spined ones with"
     db "a shield...@"
 
-Dialog281::
+Dialog281:: ; Owl Statue
     db "First, defeat   "
     db "the imprisoned  "
     db "Pols Voice,     "
     db "Last, Stalfos...@@"
 
-Dialog282::
+Dialog282:: ; Owl Statue
     db "Far away...     "
     db "Do not fear,    "
     db "dash and fly!@"
 
-Dialog283::
+Dialog283:: ; Owl Statue
     db "The glint of the"
     db "tile will be    "
     db "your guide...@"
 
-Dialog284::
+Dialog284:: ; Owl Statue
     db "Dive under where"
     db "torchlight beams"
     db "do cross...@"
 
-Dialog285::
+Dialog285:: ; Owl Statue
     db "Enter the space "
     db "where the eyes  "
     db "have walls...@"
 
-Dialog286::
+Dialog286:: ; Owl Statue
     db "The riddle is   "
     db "solved when the "
     db "pillars fall!@"
 
-Dialog287::
+Dialog287:: ; Owl Statue
     db "Fill all the    "
     db "holes with the  "
     db "rock that rolls,"
     db "this (<dpad>) is the "
     db "key!@"
 
-Dialog288::
+Dialog288:: ; Owl Statue
     db "If there is a   "
     db "door that you   "
     db "can't open, move"
     db "a stone block.@"
 
-Dialog289::
+Dialog289:: ; Owl Statue
     db "Make every block"
     db "design the same."
     db "A new path will "
     db "open.@"
 
-Dialog28A::
+Dialog28A:: ; Owl Statue
     db "Part of the     "
     db "floor is raised."
     db "Tap the blue    "
     db "crystal.@"
 
-Dialog28B::
+Dialog28B:: ; Owl Statue
     db "To defeat the   "
     db "black monster   "
     db "with the hard   "
@@ -381,7 +381,7 @@ Dialog28B::
     db "something ex-   "
     db "plosive.@"
 
-Dialog28C::
+Dialog28C:: ; Owl Statue
     db "Poke suspicious "
     db "parts of the    "
     db "wall with your  "
@@ -389,70 +389,70 @@ Dialog28C::
     db "to the sounds it"
     db "makes.@"
 
-Dialog28D::
+Dialog28D:: ; Owl Statue
     db "If you can't    "
     db "destroy a       "
     db "skeleton with   "
     db "your sword, try "
     db "using a bomb.@"
 
-Dialog28E::
+Dialog28E:: ; Owl Statue
     db "To open a       "
     db "treasure chest, "
     db "use the pots    "
     db "around it.@"
 
-Dialog28F::
+Dialog28F:: ; Owl Statue
     db "Hop on top of   "
     db "the crystals to "
     db "move forward.@"
 
-Dialog290::
+Dialog290:: ; Owl Statue
     db "If you can't go "
     db "over the poles, "
     db "try throwing    "
     db "things you have "
     db "in your hands.@"
 
-Dialog291::
+Dialog291:: ; Owl Statue
     db "Jump off the    "
     db "floor above to  "
     db "reach the chest "
     db "on the table.@"
 
-Dialog292::
+Dialog292:: ; Owl Statue
     db "To defeat the   "
     db "monsters who    "
     db "hold the key,   "
     db "attack them from"
     db "a higher place.@"
 
-Dialog293::
+Dialog293:: ; Owl Statue
     db "If the statue   "
     db "looks strange,  "
     db "shoot it with   "
     db "the bow.@"
 
-Dialog294::
+Dialog294:: ; Photographer, Link
     db "Let's take a    "
     db "picture!        "
     db "    YES  NO<ask>"
 
-Dialog295::
+Dialog295:: ; Photographer, Link
     db "No picture?! Are"
     db "you pullin' my  "
     db "leg?            "
     db "    Yes  No way<ask>"
 
-Dialog296::
+Dialog296:: ; Photographer
     db "What a bummer!@"
 
-Dialog297::
+Dialog297:: ; Photographer
     db "Beautiful! I'll "
     db "call this 'Game "
     db "Over.'@"
 
-Dialog298::
+Dialog298:: ; Photographer
     db "What's your     "
     db "name, young man?"
     db "#####? Well     "
@@ -462,85 +462,85 @@ Dialog298::
     db "before you      "
     db "leave!@"
 
-Dialog299::
+Dialog299:: ; Photographer
     db "Let's see if we "
     db "can fill that   "
     db "album!@"
 
-Dialog29A::
+Dialog29A:: ; Photographer
     db "11 shots left!  "
     db "What kind of    "
     db "picture should  "
     db "I take?@"
 
-Dialog29B::
+Dialog29B:: ; Photographer
     db "10 shots left!  "
     db "What kind of    "
     db "picture should  "
     db "I take?@"
 
-Dialog29C::
+Dialog29C:: ; Photographer
     db "9 shots left!   "
     db "What kind of    "
     db "picture should  "
     db "I take?@"
 
-Dialog29D::
+Dialog29D:: ; Photographer
     db "8 shots left!   "
     db "What kind of    "
     db "picture should  "
     db "I take?@"
 
-Dialog29E::
+Dialog29E:: ; Photographer
     db "7 shots left!   "
     db "What kind of    "
     db "picture should  "
     db "I take?@"
 
-Dialog29F::
+Dialog29F:: ; Photographer
     db "6 shots left!   "
     db "What kind of    "
     db "picture should  "
     db "I take?@"
 
-Dialog2A0::
+Dialog2A0:: ; Photographer
     db "5 shots left!   "
     db "What kind of    "
     db "picture should  "
     db "I take?@"
 
-Dialog2A1::
+Dialog2A1:: ; Photographer
     db "4 shots left!   "
     db "What kind of    "
     db "picture should  "
     db "I take?@"
 
-Dialog2A2::
+Dialog2A2:: ; Photographer
     db "3 shots left!   "
     db "What kind of    "
     db "picture should  "
     db "I take?@"
 
-Dialog2A3::
+Dialog2A3:: ; Photographer
     db "2 shots left!   "
     db "What kind of    "
     db "picture should  "
     db "I take?@"
 
-Dialog2A4::
+Dialog2A4:: ; Photographer
     db "1 shots left!   "
     db "What kind of    "
     db "picture should  "
     db "I take?@"
 
-Dialog2A5::
+Dialog2A5:: ; Photographer
     db "Oh no! You're   "
     db "out of film!    "
     db "Don't forget to "
     db "look at your    "
     db "album!@"
 
-Dialog2A6::
+Dialog2A6:: ; Photographer
     db "Hi! I'm the     "
     db "photographer!   "
     db "What a great    "
@@ -548,42 +548,42 @@ Dialog2A6::
     db "I'll call this  "
     db "'Heads Up!'@"
 
-Dialog2A7::
+Dialog2A7:: ; Photographer
     db "Hey, this       "
     db "represents your "
     db "adventures      "
     db "perfectly!@"
 
-Dialog2A8::
+Dialog2A8:: ; Photographer
     db "I'll call this  "
     db "one 'Close      "
     db "Call.' Hmm.@"
 
-Dialog2A9::
+Dialog2A9:: ; Photographer
     db "I'm too close.@"
 
-Dialog2AA::
+Dialog2AA:: ; Photographer
     db "I should back up"
     db ".@"
 
-Dialog2AB::
+Dialog2AB:: ; Photographer
     db "Aaaaaah!@"
 
-Dialog2AC::
+Dialog2AC:: ; Photographer, probably
     db "I'm going back  "
     db "to the store.   "
     db "Bye!@"
 
-Dialog2AD::
+Dialog2AD:: ; Photographer, probably
     db "See me later,   "
     db "when you're     "
     db "alone!@"
 
-Dialog2AE::
+Dialog2AE:: ; Photographer, probably
     db "Are you sure?   "
     db "    YES  NO<ask>"
 
-Dialog2AF::
+Dialog2AF:: ; Photographer, probably
     db "Ah how I love   "
     db "pictures. Hey,  "
     db "#####! What are "

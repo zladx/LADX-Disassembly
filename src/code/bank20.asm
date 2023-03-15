@@ -5490,6 +5490,8 @@ ASSERT LOW(wRoomObjectsArea) & $0F == 0, "wRoomObjectsArea must be aligned on $1
     ret                                           ; $6E4F: $C9
 
 ; Check if the object at HL is in the overworld object ignore list.
+;
+; See BackupObjectInRAM2
 CheckOverworldObjectIgnoreList::
     push hl                                       ; $6E50: $E5
     ld   c, [hl]                                  ; $6E51: $4E

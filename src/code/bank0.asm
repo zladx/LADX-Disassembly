@@ -553,7 +553,11 @@ CopyObjectsAttributesToWRAM2::
     ret                                           ; $0B2E: $C9
 
 ; On GBC, copy the overworld object at [hl] to ram bank 2.
-;   This is used when the inventory menu is exited to restore the background data
+;
+; This is used when the inventory menu is exited to restore the background objects
+; as they were modified (i.e. cut grass, holes dug with the shovel, etc.)
+;
+;
 ; Inputs:
 ;   a  bit7: If not set, check if the object at address hl is in a specific ignore list.
 ;      bit0-6: Bank number to return to after this function is finished.
@@ -4017,18 +4021,18 @@ DoUpdateBGRegion::
     ld   b, $00                                   ; $224C: $06 $00
     ld   c, [hl]                                  ; $224E: $4E
 
-    ; If running on GBC…
+    ; When on the GBC Overworld, read the object value from WRAM2 instead
+    ; (See BackupObjectInRAM2)
     ldh  a, [hIsGBC]                              ; $224F: $F0 $FE
     and  a                                        ; $2251: $A7
     jr   z, .ramSwitchEnd                         ; $2252: $28 $0E
-    ; … and is indoor…
     ld   a, [wIsIndoor]                           ; $2254: $FA $A5 $DB
     and  a                                        ; $2257: $A7
     jr   nz, .ramSwitchEnd                        ; $2258: $20 $08
-    ; … switch to RAM Bank 2,
+    ; Switch to RAM Bank 2,
     ld   a, $02                                   ; $225A: $3E $02
     ld   [rSVBK], a                               ; $225C: $E0 $70
-    ; read hl,
+    ; read the object value,
     ld   c, [hl]                                  ; $225E: $4E
     ; switch back to RAM Bank 0.
     xor  a                                        ; $225F: $AF

@@ -292,12 +292,12 @@ jr_019_4C21:
     ld   a, $C1                                   ; $4C37: $3E $C1
     ld   [hl], a                                  ; $4C39: $77
     ld   a, $99                                   ; $4C3A: $3E $99
-    call func_2BF                                 ; $4C3C: $CD $2F $0B
+    call BackupObjectInRAM2                       ; $4C3C: $CD $2F $0B
     ld   hl, wRoomObjects + $35                   ; $4C3F: $21 $46 $D7
     ld   a, $CB                                   ; $4C42: $3E $CB
     ld   [hl], a                                  ; $4C44: $77
     ld   a, $99                                   ; $4C45: $3E $99
-    call func_2BF                                 ; $4C47: $CD $2F $0B
+    call BackupObjectInRAM2                       ; $4C47: $CD $2F $0B
     ld   a, $50                                   ; $4C4A: $3E $50
     ldh  [hIntersectedObjectLeft], a              ; $4C4C: $E0 $CE
     ld   a, $20                                   ; $4C4E: $3E $20

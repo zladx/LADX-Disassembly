@@ -20,7 +20,7 @@ When you come across an edge case that isn't referenced in this guide, please ad
 
 ; Comments should go above the code they're describing, not below, and be aligned with the code.
 
-; Functions are commented with unindented comments
+; Routines are commented with unindented comments
 SomeFunction::
     ; Code is commented with an indentation
     ld  a, [hl]

@@ -5490,11 +5490,11 @@ ASSERT LOW(wRoomObjectsArea) & $0F == 0, "wRoomObjectsArea must be aligned on $1
     ret                                           ; $6E4F: $C9
 
 ; Check if the object at HL is in the overworld object ignore list.
-checkOverworldObjectIgnoreList::
+CheckOverworldObjectIgnoreList::
     push hl                                       ; $6E50: $E5
     ld   c, [hl]                                  ; $6E51: $4E
     ld   b, $0E                                   ; $6E52: $06 $0E
-    ld   hl, overworldObjectIgnoreList            ; $6E54: $21 $65 $6E
+    ld   hl, OverworldObjectIgnoreList            ; $6E54: $21 $65 $6E
 
 .loop
     ld   a, [hl+]                                 ; $6E57: $2A
@@ -5517,7 +5517,7 @@ checkOverworldObjectIgnoreList::
 
 ; List of overworld objects that should not be backed up in WRAM bank 2.
 ; This is used to prevent exiting the inventory menu from messing up the overlay grass tiles.
-overworldObjectIgnoreList::
+OverworldObjectIgnoreList::
     db   $03, $04, $09, $5E, $91, $A1, $AA, $C4, $C6, $CC, $DB, $E1, $E3, $E8
 
 TilesetTables::

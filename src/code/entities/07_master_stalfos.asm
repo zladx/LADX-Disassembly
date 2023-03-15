@@ -140,7 +140,7 @@ label_007_69D0:
     ld   h, b                                     ; $6A26: $60
     ld   l, c                                     ; $6A27: $69
     ld   a, $87                                   ; $6A28: $3E $87
-    call backupObjectInRAM2                       ; $6A2A: $CD $2F $0B
+    call BackupObjectInRAM2                       ; $6A2A: $CD $2F $0B
     pop  hl                                       ; $6A2D: $E1
     inc  bc                                       ; $6A2E: $03
     dec  e                                        ; $6A2F: $1D

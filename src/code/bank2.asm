@@ -1812,7 +1812,7 @@ label_002_4C92:
     add  hl, de                                   ; $4C9A: $19
     ld   [hl], $CC                                ; $4C9B: $36 $CC
     ld   a, $82                                   ; $4C9D: $3E $82
-    call func_2BF                                 ; $4C9F: $CD $2F $0B
+    call backupObjectInRAM2                       ; $4C9F: $CD $2F $0B
     call label_2887                               ; $4CA2: $CD $87 $28
     ld   hl, wDrawCommand                         ; $4CA5: $21 $01 $D6
     ld   a, [wDrawCommandsSize]                   ; $4CA8: $FA $00 $D6
@@ -3650,7 +3650,7 @@ jr_002_568C:
 .jr_56FC
     ld   [hl], $E3                                ; $56FC: $36 $E3
     ld   a, $82                                   ; $56FE: $3E $82
-    call func_2BF                                 ; $5700: $CD $2F $0B
+    call backupObjectInRAM2                       ; $5700: $CD $2F $0B
     ld   a, JINGLE_DUNGEON_OPENED                 ; $5703: $3E $23
     ldh  [hJingle], a                             ; $5705: $E0 $F2
 

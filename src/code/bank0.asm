@@ -552,11 +552,13 @@ CopyObjectsAttributesToWRAM2::
     ld   [rSelectROMBank], a                      ; $0B2B: $EA $00 $21
     ret                                           ; $0B2E: $C9
 
-; On GBC, copy some overworld objects to ram bank 2
+; On GBC, copy the overworld object at [hl] to ram bank 2.
+;   This is used when the inventory menu is exited to restore the background data
 ; Inputs:
-;   a  data bank?
-;   hl destination in RAM bank 2
-func_2BF::
+;   a  bit7: If not set, check if the object at address hl is in a specific ignore list.
+;      bit0-6: Bank number to return to after this function is finished.
+;   hl source in RAM bank 0 and destination in RAM bank 2
+backupObjectInRAM2::
     ldh  [hMultiPurpose2], a                      ; $0B2F: $E0 $D9
     ldh  a, [hIsGBC]                              ; $0B31: $F0 $FE
     and  a                                        ; $0B33: $A7
@@ -570,7 +572,7 @@ func_2BF::
     ldh  a, [hMultiPurpose2]                      ; $0B3B: $F0 $D9
     and  $80                                      ; $0B3D: $E6 $80
     jr   nz, .else                                ; $0B3F: $20 $0A
-    callsb func_020_6E50                          ; $0B41: $3E $20 $EA $00 $21 $CD $50 $6E
+    callsb checkOverworldObjectIgnoreList         ; $0B41: $3E $20 $EA $00 $21 $CD $50 $6E
     jr   c, .endIf                                ; $0B49: $38 $09
 .else
     ld   b, [hl]                                  ; $0B4B: $46
@@ -6701,7 +6703,7 @@ label_3527::
     ld   a, $1A                                   ; $3527: $3E $1A
 
 label_3529::
-    call func_2BF                                 ; $3529: $CD $2F $0B
+    call backupObjectInRAM2                       ; $3529: $CD $2F $0B
     ret                                           ; $352C: $C9
 
 ; Copy an object from the room data to the active room
@@ -6865,7 +6867,7 @@ label_35CB::
 
 label_35E8::
     ld   a, $24                                   ; $35E8: $3E $24
-    call func_2BF                                 ; $35EA: $CD $2F $0B
+    call backupObjectInRAM2                       ; $35EA: $CD $2F $0B
     ret                                           ; $35ED: $C9
 
 label_35EE::

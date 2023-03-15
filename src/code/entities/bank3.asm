@@ -1918,7 +1918,7 @@ func_003_51C9::
     ld   [hl], a                                  ; $51EC: $77
     ld   [wDDD8], a                               ; $51ED: $EA $D8 $DD
     ld   a, $03                                   ; $51F0: $3E $03
-    call func_2BF                                 ; $51F2: $CD $2F $0B
+    call backupObjectInRAM2                       ; $51F2: $CD $2F $0B
 
 label_003_51F5:
     call label_2887                               ; $51F5: $CD $87 $28
@@ -5091,10 +5091,10 @@ func_003_6771::
     ld   [hl+], a                                 ; $67D9: $22
     ld   [hl-], a                                 ; $67DA: $32
     ld   a, $83                                   ; $67DB: $3E $83
-    call func_2BF                                 ; $67DD: $CD $2F $0B
+    call backupObjectInRAM2                       ; $67DD: $CD $2F $0B
     inc  hl                                       ; $67E0: $23
     ld   a, $83                                   ; $67E1: $3E $83
-    call func_2BF                                 ; $67E3: $CD $2F $0B
+    call backupObjectInRAM2                       ; $67E3: $CD $2F $0B
     dec  hl                                       ; $67E6: $2B
     ld   a, l                                     ; $67E7: $7D
     add  $10                                      ; $67E8: $C6 $10
@@ -5104,10 +5104,10 @@ func_003_6771::
     ld   [hl], a                                  ; $67EE: $77
     ld   [wDDD8], a                               ; $67EF: $EA $D8 $DD
     ld   a, $83                                   ; $67F2: $3E $83
-    call func_2BF                                 ; $67F4: $CD $2F $0B
+    call backupObjectInRAM2                       ; $67F4: $CD $2F $0B
     dec  hl                                       ; $67F7: $2B
     ld   a, $83                                   ; $67F8: $3E $83
-    call func_2BF                                 ; $67FA: $CD $2F $0B
+    call backupObjectInRAM2                       ; $67FA: $CD $2F $0B
     inc  hl                                       ; $67FD: $23
     ld   c, $03                                   ; $67FE: $0E $03
     ld   b, $00                                   ; $6800: $06 $00
@@ -5164,7 +5164,7 @@ jr_003_6828:
     ld   [hl], a                                  ; $684F: $77
     ld   [wDDD8], a                               ; $6850: $EA $D8 $DD
     ld   a, $83                                   ; $6853: $3E $83
-    call func_2BF                                 ; $6855: $CD $2F $0B
+    call backupObjectInRAM2                       ; $6855: $CD $2F $0B
 IF __OPTIMIZATIONS_3__
     ld   de, Data_003_674D
     ldh  a, [hIsGBC]

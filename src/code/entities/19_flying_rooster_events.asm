@@ -669,7 +669,7 @@ FlyingRoosterState0Handler::
     ld   hl, wRoomObjects + $45                   ; $521F: $21 $56 $D7
     ld   [hl], $C6                                ; $5222: $36 $C6
     ld   a, $99                                   ; $5224: $3E $99
-    call func_2BF                                 ; $5226: $CD $2F $0B
+    call backupObjectInRAM2                       ; $5226: $CD $2F $0B
     ld   a, $50                                   ; $5229: $3E $50
     ldh  [hIntersectedObjectLeft], a              ; $522B: $E0 $CE
     ld   a, $30                                   ; $522D: $3E $30
@@ -770,11 +770,11 @@ FlyingRoosterState1Handler::
     ld   hl, wRoomObjects + $25                   ; $52CC: $21 $36 $D7
     ld   [hl], $91                                ; $52CF: $36 $91
     ld   a, $99                                   ; $52D1: $3E $99
-    call func_2BF                                 ; $52D3: $CD $2F $0B
+    call backupObjectInRAM2                       ; $52D3: $CD $2F $0B
     ld   hl, wRoomObjects + $35                   ; $52D6: $21 $46 $D7
     ld   [hl], $5E                                ; $52D9: $36 $5E
     ld   a, $99                                   ; $52DB: $3E $99
-    call func_2BF                                 ; $52DD: $CD $2F $0B
+    call backupObjectInRAM2                       ; $52DD: $CD $2F $0B
     ld   a, $50                                   ; $52E0: $3E $50
     ldh  [hIntersectedObjectLeft], a              ; $52E2: $E0 $CE
     ld   a, $20                                   ; $52E4: $3E $20

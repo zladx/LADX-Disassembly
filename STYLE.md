@@ -64,7 +64,7 @@ DEF BUT_ONLY_RELATED_CONSTANTS EQU 5
 ## Code
 
 ```asm
-SomeFunction::
+SomeRoutine::
     ; Instructions are indented with 4 spaces
     ldh  a, [hIsGBC]
     and  a

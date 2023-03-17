@@ -5915,7 +5915,7 @@ func_003_6CC0::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6CC0: $21 $40 $C3
     add  hl, bc                                   ; $6CC3: $09
     ld   a, [hl]                                  ; $6CC4: $7E
-    and  $80                                      ; $6CC5: $E6 $80
+    and  ENTITY_PHYSICS_HARMLESS                  ; $6CC5: $E6 $80
     jr   z, jr_003_6CCD                           ; $6CC7: $28 $04
 
 jr_003_6CC9:
@@ -6274,7 +6274,7 @@ func_003_6E2B::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6E9B: $21 $40 $C3
     add  hl, bc                                   ; $6E9E: $09
     ld   a, [hl]                                  ; $6E9F: $7E
-    and  %00100000                                ; $6EA0: $E6 $20
+    and  ENTITY_PHYSICS_GRABBABLE                 ; $6EA0: $E6 $20
     jp   nz, collectPickableItem                  ; $6EA2: $C2 $11 $63
     ; if sword collision is enabled jump to EnemyCollidedWithSword
     ld   a, [wSwordCollisionEnabled]              ; $6EA5: $FA $B0 $C5

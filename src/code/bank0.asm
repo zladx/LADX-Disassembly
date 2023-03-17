@@ -1633,7 +1633,7 @@ ApplyGotItem::
 
 InitGotItemSequence::
     ldh  a, [hPressedButtonsMask]                 ; $107F: $F0 $CB
-    and  J_START | J_SELECT                       ; $1081: $E6 $B0
+    and  J_A | J_B | J_START                      ; $1081: $E6 $B0
     jr   nz, .jp_10DB                             ; $1083: $20 $56
     ldh  a, [hPressedButtonsMask]                 ; $1085: $F0 $CB
     and  J_SELECT                                 ; $1087: $E6 $40

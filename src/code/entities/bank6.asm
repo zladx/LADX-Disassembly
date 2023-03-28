@@ -33,7 +33,7 @@ include "code/entities/06_goponga_flower.asm"
 ;
 ; ----------------------------------------------------------------------
 
-func_006_641A::
+PushLinkOutOfEntity_06::
     call CheckLinkCollisionWithEnemy_trampoline   ; $641A: $CD $5A $3B
     jr   nc, ret_006_643C                         ; $641D: $30 $1D
 
@@ -89,7 +89,7 @@ SetEntitySpriteVariantForDirection::
     jp   SetEntitySpriteVariant                   ; $645A: $C3 $0C $3B
 
 ; Should Link talk to Entity
-func_006_645D::
+CheckLinkInteractionWithEntity_06::
     ld   e, b                                     ; $645D: $58
     ldh  a, [hActiveEntityType]                   ; $645E: $F0 $EB
     cp   ENTITY_GRANDPA_ULRIRA                    ; $6460: $FE $77

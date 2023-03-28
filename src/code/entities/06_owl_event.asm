@@ -259,7 +259,7 @@ OwlState1Handler::
 
 OwlState2Handler::
     call ReturnIfNonInteractive_06                ; $6972: $CD $C6 $64
-    call func_006_641A                            ; $6975: $CD $1A $64
+    call PushLinkOutOfEntity_06                   ; $6975: $CD $1A $64
     ld   a, [wTransitionSequenceCounter]          ; $6978: $FA $6B $C1
     cp   $04                                      ; $697B: $FE $04
     ret  nz                                       ; $697D: $C0

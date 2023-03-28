@@ -102,7 +102,7 @@ CrazyTracyEntityHandler::
     call func_015_7964_trampoline                 ; $5F0A: $CD $A0 $3D
     call CopyEntityPositionToActivePosition       ; $5F0D: $CD $8A $3D
     call ReturnIfNonInteractive_06                ; $5F10: $CD $C6 $64
-    call func_006_641A                            ; $5F13: $CD $1A $64
+    call PushLinkOutOfEntity_06                   ; $5F13: $CD $1A $64
 
     ldh  a, [hActiveEntityState]                  ; $5F16: $F0 $F0
     JP_TABLE                                      ; $5F18
@@ -119,7 +119,7 @@ ShouldLinkTalkToTracy::
     sub  [hl]                                     ; $5F28: $96
     add  $28                                      ; $5F29: $C6 $28
     cp   $50                                      ; $5F2B: $FE $50
-    jp   func_006_645D.label_006_647E             ; $5F2D: $C3 $7E $64
+    jp   CheckLinkInteractionWithEntity_06.label_006_647E ; $5F2D: $C3 $7E $64
 
 CrazyTracyGreetingHandler::
     call ShouldLinkTalkToTracy                    ; $5F30: $CD $23 $5F

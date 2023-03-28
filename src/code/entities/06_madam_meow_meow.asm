@@ -81,9 +81,9 @@ jr_006_5BC4:
     call ReturnIfNonInteractive_06                ; $5BC4: $CD $C6 $64
     ldh  a, [hActiveEntityPosY]                   ; $5BC7: $F0 $EF
     ldh  [hActiveEntityVisualPosY], a             ; $5BC9: $E0 $EC
-    call func_006_641A                            ; $5BCB: $CD $1A $64
+    call PushLinkOutOfEntity_06                   ; $5BCB: $CD $1A $64
     call CopyEntityPositionToActivePosition       ; $5BCE: $CD $8A $3D
-    call func_006_645D                            ; $5BD1: $CD $5D $64
+    call CheckLinkInteractionWithEntity_06        ; $5BD1: $CD $5D $64
     ret  nc                                       ; $5BD4: $D0
 
     ld_dialog_low e, Dialog130 ; "My BowWow is so proud" ; $5BD5: $1E $30

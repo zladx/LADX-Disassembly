@@ -95,7 +95,7 @@ jr_006_5361:
     call ReturnIfNonInteractive_06                ; $5361: $CD $C6 $64
     call BossIntro                                ; $5364: $CD $E8 $3E
     call label_3B70                               ; $5367: $CD $70 $3B
-    call func_006_641A                            ; $536A: $CD $1A $64
+    call PushLinkOutOfEntity_06                   ; $536A: $CD $1A $64
     call AddEntityZSpeedToPos_06                  ; $536D: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $5370: $21 $20 $C3
     add  hl, bc                                   ; $5373: $09

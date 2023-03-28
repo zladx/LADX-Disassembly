@@ -141,7 +141,7 @@ YipYipEntityHandler::
     cp   $02                                      ; $5A69: $FE $02
     jr   nc, jr_006_5A98                          ; $5A6B: $30 $2B
 
-    call func_006_645D                            ; $5A6D: $CD $5D $64
+    call CheckLinkInteractionWithEntity_06        ; $5A6D: $CD $5D $64
     jr   nc, jr_006_5A98                          ; $5A70: $30 $26
 
     ld_dialog_low e, Dialog023                    ; $5A72: $1E $23

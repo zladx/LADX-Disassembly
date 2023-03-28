@@ -43,7 +43,7 @@ Unknown019SpriteVariants::
     db $7E, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
     db $7C, OAM_GBC_PAL_0 | OAMF_PAL0 | OAMF_XFLIP
 
-Data_006_607D::
+KidBallSprite::
     db   $3E, $00
 
 Kid71EntityHandler::
@@ -52,9 +52,9 @@ Kid72EntityHandler::
     add  hl, bc                                   ; $6082: $09
     ld   a, [hl]                                  ; $6083: $7E
     and  a                                        ; $6084: $A7
-    jr   z, .jr_60A2                              ; $6085: $28 $1B
+    jr   z, .notBall                              ; $6085: $28 $1B
 
-    ld   de, Data_006_607D                        ; $6087: $11 $7D $60
+    ld   de, KidBallSprite                        ; $6087: $11 $7D $60
     call RenderActiveEntitySprite                 ; $608A: $CD $77 $3C
     call ReturnIfNonInteractive_06                ; $608D: $CD $C6 $64
     call UpdateEntityPosWithSpeed_06              ; $6090: $CD $41 $65
@@ -67,39 +67,33 @@ Kid72EntityHandler::
 
     ret                                           ; $60A1: $C9
 
-.jr_60A2
+.notBall
     ld   a, [wIsBowWowFollowingLink]              ; $60A2: $FA $56 $DB
     cp   BOW_WOW_KIDNAPPED                        ; $60A5: $FE $80
-    jp   nz, label_006_6170                       ; $60A7: $C2 $70 $61
+    jp   nz, KidPlayingWithBall                   ; $60A7: $C2 $70 $61
 
     ld   a, [wGameplayType]                       ; $60AA: $FA $95 $DB
-    cp   BOW_WOW_FOLLOWING                        ; $60AD: $FE $01
-    jp   z, label_006_6170                        ; $60AF: $CA $70 $61
+    cp   GAMEPLAY_CREDITS                         ; $60AD: $FE $01
+    jp   z, KidPlayingWithBall                    ; $60AF: $CA $70 $61
 
+    ; Beyond this point is the BOW WOW kidnapped event.
     ld   de, Kid71SpriteVariants                  ; $60B2: $11 $4D $60
     ld   hl, wEntitiesTypeTable                   ; $60B5: $21 $A0 $C3
     add  hl, bc                                   ; $60B8: $09
     ld   a, [hl]                                  ; $60B9: $7E
     cp   ENTITY_KID_72                            ; $60BA: $FE $72
     jr   nz, .render                              ; $60BC: $20 $03
-
     ld   de, Kid72SpriteVariants                  ; $60BE: $11 $5D $60
-
 .render:
     call RenderActiveEntitySpritesPair            ; $60C1: $CD $C0 $3B
 
-.jr_60C4
     call func_006_65A4                            ; $60C4: $CD $A4 $65
     ld   a, e                                     ; $60C7: $7B
     dec  a                                        ; $60C8: $3D
     and  $02                                      ; $60C9: $E6 $02
     xor  $02                                      ; $60CB: $EE $02
     ld   e, a                                     ; $60CD: $5F
-
-.jr_60CE
     ldh  a, [hFrameCounter]                       ; $60CE: $F0 $E7
-
-.jr_60D0
     rra                                           ; $60D0: $1F
     rra                                           ; $60D1: $1F
     rra                                           ; $60D2: $1F
@@ -110,29 +104,26 @@ Kid72EntityHandler::
     add  hl, bc                                   ; $60DC: $09
     ld   a, [hl]                                  ; $60DD: $7E
     JP_TABLE                                      ; $60DE
-._00 dw func_006_60E5                             ; $60DF
-._01 dw func_006_60FD                             ; $60E1
-._02 dw func_006_6134                             ; $60E3
+._00 dw KidBowwowKidnapState0                     ; $60DF
+._01 dw KidBowwowKidnapState1                     ; $60E1
+._02 dw KidBowwowKidnapState2                     ; $60E3
 
-func_006_60E5::
+KidBowwowKidnapState0::
     call ReturnIfNonInteractive_06                ; $60E5: $CD $C6 $64
     ld   hl, wEntitiesPrivateState2Table          ; $60E8: $21 $C0 $C2
     add  hl, bc                                   ; $60EB: $09
     ld   [hl], $30                                ; $60EC: $36 $30
     ld   a, MUSIC_BOWWOW_KIDNAPPED                ; $60EE: $3E $0E
-
-.jr_60F0
     ld   [wMusicTrackToPlay], a                   ; $60F0: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $60F3: $E0 $B0
     ldh  [hDefaultMusicTrackAlt], a               ; $60F5: $E0 $BD
-
-label_006_60F7:
+IncreasePrivateState3:
     ld   hl, wEntitiesPrivateState3Table          ; $60F7: $21 $D0 $C2
     add  hl, bc                                   ; $60FA: $09
     inc  [hl]                                     ; $60FB: $34
     ret                                           ; $60FC: $C9
 
-func_006_60FD::
+KidBowwowKidnapState1::
     call ReturnIfNonInteractive_06                ; $60FD: $CD $C6 $64
     call func_006_65A4                            ; $6100: $CD $A4 $65
     add  $20                                      ; $6103: $C6 $20
@@ -142,7 +133,7 @@ func_006_60FD::
     ld   hl, wEntitiesPrivateState2Table          ; $6109: $21 $C0 $C2
     add  hl, bc                                   ; $610C: $09
     dec  [hl]                                     ; $610D: $35
-    jr   nz, jr_006_6124                          ; $610E: $20 $14
+    jr   nz, .moveTowardsLink                     ; $610E: $20 $14
 
 .jr_6110
     ld   a, [wTransitionSequenceCounter]          ; $6110: $FA $6B $C1
@@ -152,13 +143,12 @@ func_006_60FD::
     ldh  a, [hActiveEntityType]                   ; $6116: $F0 $EB
     cp   ENTITY_KID_71                            ; $6118: $FE $71
     jr   nz, .kid71End                            ; $611A: $20 $05
-
     call_open_dialog Dialog220                    ; $611C
 .kid71End
 
-    jp   label_006_60F7                           ; $6121: $C3 $F7 $60
+    jp   IncreasePrivateState3                    ; $6121: $C3 $F7 $60
 
-jr_006_6124:
+.moveTowardsLink:
     ld   a, $08                                   ; $6124: $3E $08
     call ApplyVectorTowardsLink_trampoline        ; $6126: $CD $AA $3B
     call UpdateEntityPosWithSpeed_06              ; $6129: $CD $41 $65
@@ -167,19 +157,17 @@ jr_006_6124:
     ld   [wC167], a                               ; $6130: $EA $67 $C1
     ret                                           ; $6133: $C9
 
-func_006_6134::
+KidBowwowKidnapState2::
     xor  a                                        ; $6134: $AF
     ld   [wC167], a                               ; $6135: $EA $67 $C1
     ldh  a, [hActiveEntityPosY]                   ; $6138: $F0 $EF
     ldh  [hActiveEntityVisualPosY], a             ; $613A: $E0 $EC
-    call func_006_641A                            ; $613C: $CD $1A $64
+    call PushLinkOutOfEntity_06                   ; $613C: $CD $1A $64
     call CopyEntityPositionToActivePosition       ; $613F: $CD $8A $3D
-    call func_006_645D                            ; $6142: $CD $5D $64
-    jr   nc, .jr_614C                             ; $6145: $30 $05
-
+    call CheckLinkInteractionWithEntity_06        ; $6142: $CD $5D $64
+    jr   nc, .noTalking                           ; $6145: $30 $05
     call_open_dialog Dialog220                    ; $6147
-
-.jr_614C
+.noTalking
     call AddEntityZSpeedToPos_06                  ; $614C: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $614F: $21 $20 $C3
     add  hl, bc                                   ; $6152: $09
@@ -192,7 +180,7 @@ func_006_6134::
     jr   z, .jr_6161                              ; $615B: $28 $04
 
     and  $80                                      ; $615D: $E6 $80
-    jr   z, ret_006_616F                          ; $615F: $28 $0E
+    jr   z, .ret                                  ; $615F: $28 $0E
 
 .jr_6161
     ld   [hl], b                                  ; $6161: $70
@@ -201,14 +189,13 @@ func_006_6134::
     ld   [hl], b                                  ; $6166: $70
     ldh  a, [hFrameCounter]                       ; $6167: $F0 $E7
     and  $1F                                      ; $6169: $E6 $1F
-    jr   nz, ret_006_616F                         ; $616B: $20 $02
-
+    jr   nz, .ret                                 ; $616B: $20 $02
+    ; Make the kid jump.
     ld   [hl], $10                                ; $616D: $36 $10
-
-ret_006_616F:
+.ret:
     ret                                           ; $616F: $C9
 
-label_006_6170:
+KidPlayingWithBall:
     ld   hl, wEntitiesDirectionTable              ; $6170: $21 $80 $C3
     add  hl, bc                                   ; $6173: $09
     ldh  a, [hActiveEntitySpriteVariant]          ; $6174: $F0 $F1
@@ -238,12 +225,12 @@ label_006_6170:
 .jr_619F
     ldh  a, [hActiveEntityState]                  ; $619F: $F0 $F0
     JP_TABLE                                      ; $61A1
-._00 dw func_006_61A6                             ; $61A2
-._01 dw func_006_61EC                             ; $61A4
+._00 dw KidWithBallState0                         ; $61A2
+._01 dw KidWithBallState1                         ; $61A4
 
-func_006_61A6::
+KidWithBallState0::
     call GetEntityTransitionCountdown             ; $61A6: $CD $05 $0C
-    jr   nz, ret_006_61EB                         ; $61A9: $20 $40
+    jr   nz, .ret                                 ; $61A9: $20 $40
 
     ld   [hl], $80                                ; $61AB: $36 $80
     call IncrementEntityState                     ; $61AD: $CD $12 $3B
@@ -251,8 +238,9 @@ func_006_61A6::
     call SetEntitySpriteVariant                   ; $61B2: $CD $0C $3B
     ld   a, ENTITY_KID_71                         ; $61B5: $3E $71
     call SpawnNewEntity_trampoline                ; $61B7: $CD $86 $3B
-    jr   c, ret_006_61EB                          ; $61BA: $38 $2F
-
+    jr   c, .ret                                  ; $61BA: $38 $2F
+    ; Created the ball entity, set the right properties
+    ; to make it take the throwing arc from one kid to the other.
     ldh  a, [hMultiPurpose0]                      ; $61BC: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $61BE: $21 $00 $C2
     add  hl, de                                   ; $61C1: $19
@@ -270,11 +258,9 @@ func_006_61A6::
     ldh  a, [hActiveEntityType]                   ; $61D6: $F0 $EB
     cp   ENTITY_KID_71                            ; $61D8: $FE $71
     ld   a, $14                                   ; $61DA: $3E $14
-    jr   z, .jr_61E0                              ; $61DC: $28 $02
-
-    ld   a, $EC                                   ; $61DE: $3E $EC
-
-.jr_61E0
+    jr   z, .throwRight                           ; $61DC: $28 $02
+    ld   a, -$14                                  ; $61DE: $3E $EC
+.throwRight
     ld   hl, wEntitiesSpeedXTable                 ; $61E0: $21 $40 $C2
     add  hl, de                                   ; $61E3: $19
     ld   [hl], a                                  ; $61E4: $77
@@ -282,10 +268,10 @@ func_006_61A6::
     add  hl, de                                   ; $61E8: $19
     ld   [hl], $24                                ; $61E9: $36 $24
 
-ret_006_61EB:
+.ret:
     ret                                           ; $61EB: $C9
 
-func_006_61EC::
+KidWithBallState1::
     call GetEntityTransitionCountdown             ; $61EC: $CD $05 $0C
     jr   nz, .jr_61F8                             ; $61EF: $20 $07
 
@@ -299,16 +285,16 @@ func_006_61EC::
     ret  nc                                       ; $61FA: $D0
 
     cp   $40                                      ; $61FB: $FE $40
-    jr   nc, .jr_620A                             ; $61FD: $30 $0B
+    jr   nc, .noJump                              ; $61FD: $30 $0B
 
     ldh  a, [hMultiPurposeG]                      ; $61FF: $F0 $E8
     and  a                                        ; $6201: $A7
-    jr   z, .jr_620A                              ; $6202: $28 $06
+    jr   z, .noJump                               ; $6202: $28 $06
 
     ld   hl, wEntitiesSpeedZTable                 ; $6204: $21 $20 $C3
     add  hl, bc                                   ; $6207: $09
     ld   [hl], $08                                ; $6208: $36 $08
 
-.jr_620A
+.noJump
     xor  a                                        ; $620A: $AF
     jp   SetEntitySpriteVariant                   ; $620B: $C3 $0C $3B

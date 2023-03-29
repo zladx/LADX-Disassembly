@@ -88,7 +88,7 @@ SetEntitySpriteVariantForDirection::
     or   [hl]                                     ; $6459: $B6
     jp   SetEntitySpriteVariant                   ; $645A: $C3 $0C $3B
 
-; Should Link talk to Entity
+; Should Link interact with Entity
 CheckLinkInteractionWithEntity_06::
     ld   e, b                                     ; $645D: $58
     ldh  a, [hActiveEntityType]                   ; $645E: $F0 $EB

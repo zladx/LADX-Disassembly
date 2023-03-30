@@ -87,7 +87,7 @@ func_007_4EFF::
     ld   hl, wEntitiesPosYTable                   ; $4F0A: $21 $10 $C2
     add  hl, bc                                   ; $4F0D: $09
     ld   [hl], $58                                ; $4F0E: $36 $58
-    call func_007_7CF0                            ; $4F10: $CD $F0 $7C
+    call PushLinkOutOfEntity_07                   ; $4F10: $CD $F0 $7C
     call func_007_7D43                            ; $4F13: $CD $43 $7D
     ret  nc                                       ; $4F16: $D0
 
@@ -95,7 +95,7 @@ func_007_4EFF::
     jp   IncrementEntityState                     ; $4F1C: $C3 $12 $3B
 
 func_007_4F1F::
-    call func_007_7CF0                            ; $4F1F: $CD $F0 $7C
+    call PushLinkOutOfEntity_07                   ; $4F1F: $CD $F0 $7C
     ld   a, [wDialogState]                        ; $4F22: $FA $9F $C1
     and  a                                        ; $4F25: $A7
     jr   nz, ret_007_4F4D                         ; $4F26: $20 $25

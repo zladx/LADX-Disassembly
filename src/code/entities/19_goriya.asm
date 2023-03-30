@@ -55,7 +55,7 @@ GoriyaEntityHandler::
     ld   [hl], e                                  ; $4617: $73
 
 .jr_4618
-    call func_019_7CA2                            ; $4618: $CD $A2 $7C
+    call PushLinkOutOfEntity_19                   ; $4618: $CD $A2 $7C
     ldh  a, [hActiveEntityState]                  ; $461B: $F0 $F0
     JP_TABLE                                      ; $461D
 ._00 dw GoriyaState0Handler

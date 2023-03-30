@@ -136,7 +136,7 @@ KikiOpenDialog::
     ret                                           ; $58DD: $C9
 
 jr_007_58DE:
-    call func_007_7CF0                            ; $58DE: $CD $F0 $7C
+    call PushLinkOutOfEntity_07                   ; $58DE: $CD $F0 $7C
     call func_007_7D43                            ; $58E1: $CD $43 $7D
     jr   nc, func_007_58FA                        ; $58E4: $30 $14
 

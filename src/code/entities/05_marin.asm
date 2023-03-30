@@ -213,7 +213,7 @@ jr_005_4F39:
 
     ld   de, MarinCreditsSpriteVariants           ; $4F3D: $11 $2A $4E
     call RenderActiveEntitySpritesPair            ; $4F40: $CD $C0 $3B
-    call func_005_54C3                            ; $4F43: $CD $C3 $54
+    call PushLinkOutOfEntity_05                   ; $4F43: $CD $C3 $54
     ld   a, [wGameplayType]                       ; $4F46: $FA $95 $DB
     cp   GAMEPLAY_WORLD_MAP                       ; $4F49: $FE $07
     ret  z                                        ; $4F4B: $C8
@@ -837,7 +837,7 @@ func_005_52DB::
 
 func_005_5312::
     call ReturnIfNonInteractive_05                ; $5312: $CD $3A $7A
-    call func_005_54C3                            ; $5315: $CD $C3 $54
+    call PushLinkOutOfEntity_05                   ; $5315: $CD $C3 $54
     call ShouldLinkTalkToEntity_05                ; $5318: $CD $06 $55
     ret  nc                                       ; $531B: $D0
 

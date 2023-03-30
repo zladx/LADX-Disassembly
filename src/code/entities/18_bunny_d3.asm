@@ -72,7 +72,7 @@ BunnyD3EntityHandler::
 jr_018_521C:
     ldh  a, [hActiveEntityPosY]                   ; $521C: $F0 $EF
     ldh  [hActiveEntityVisualPosY], a             ; $521E: $E0 $EC
-    call func_018_7D36                            ; $5220: $CD $36 $7D
+    call PushLinkOutOfEntity_18                   ; $5220: $CD $36 $7D
     call CopyEntityPositionToActivePosition       ; $5223: $CD $8A $3D
     call func_018_7D95                            ; $5226: $CD $95 $7D
     ret  nc                                       ; $5229: $D0

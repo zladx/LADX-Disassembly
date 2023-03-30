@@ -27,7 +27,7 @@ MermaidStatueInitHandler::
     jp   IncrementEntityState                     ; $4957: $C3 $12 $3B
 
 MermaidStatueInteractiveHandler::
-    call func_018_7D36                            ; $495A: $CD $36 $7D
+    call PushLinkOutOfEntity_18                   ; $495A: $CD $36 $7D
     ld   a, [wExchangingTradeSequenceItem]        ; $495D: $FA $7F $DB
     and  a                                        ; $4960: $A7
     ret  nz                                       ; $4961: $C0

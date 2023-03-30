@@ -33,7 +33,7 @@ WalrusEntityHandler::
     ld   [hl], b                                  ; $552E: $70
 
 .jr_552F
-    call func_018_7D36                            ; $552F: $CD $36 $7D
+    call PushLinkOutOfEntity_18                   ; $552F: $CD $36 $7D
     ldh  a, [hActiveEntityState]                  ; $5532: $F0 $F0
     JP_TABLE                                      ; $5534
 ._00 dw WalrusState0Handler                       ; $5535

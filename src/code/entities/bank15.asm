@@ -552,7 +552,7 @@ label_015_7A27:
 ;
 ; ----------------------------------------------------------------------
 
-func_015_7A6E::
+PushLinkOutOfEntity_15::
     call CheckLinkCollisionWithEnemy_trampoline   ; $7A6E: $CD $5A $3B
     jr   nc, jr_015_7A9A                          ; $7A71: $30 $27
 

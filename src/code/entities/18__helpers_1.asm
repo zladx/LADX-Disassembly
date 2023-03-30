@@ -3,7 +3,7 @@
 ;
 
 label_018_51A4:
-    call func_018_7D36                            ; $51A4: $CD $36 $7D
+    call PushLinkOutOfEntity_18                   ; $51A4: $CD $36 $7D
     call func_018_7D95                            ; $51A7: $CD $95 $7D
     ret  nc                                       ; $51AA: $D0
 

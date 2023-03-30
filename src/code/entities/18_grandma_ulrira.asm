@@ -81,7 +81,7 @@ jr_018_4D58:
     rra                                           ; $4D63: $1F
     and  $01                                      ; $4D64: $E6 $01
     call SetEntitySpriteVariant                   ; $4D66: $CD $0C $3B
-    call func_018_7D36                            ; $4D69: $CD $36 $7D
+    call PushLinkOutOfEntity_18                   ; $4D69: $CD $36 $7D
     ldh  a, [hActiveEntityState]                  ; $4D6C: $F0 $F0
     JP_TABLE                                      ; $4D6E
 ._00 dw GrandmaUlriraState0Handler

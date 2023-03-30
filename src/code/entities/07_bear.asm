@@ -67,7 +67,7 @@ BearEntityHandler::
     ldh  a, [hFrameCounter]                       ; $4C03: $F0 $E7
     and  $20                                      ; $4C05: $E6 $20
     call SetEntitySpriteVariant                   ; $4C07: $CD $0C $3B
-    call func_007_7CF0                            ; $4C0A: $CD $F0 $7C
+    call PushLinkOutOfEntity_07                   ; $4C0A: $CD $F0 $7C
     ldh  a, [hActiveEntityState]                  ; $4C0D: $F0 $F0
     JP_TABLE                                      ; $4C0F
 ._00 dw func_007_4C16                             ; $4C10

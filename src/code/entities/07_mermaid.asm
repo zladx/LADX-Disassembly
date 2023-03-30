@@ -150,7 +150,7 @@ func_007_4759::
     call func_007_7E5D                            ; $4765: $CD $5D $7E
     ld   a, e                                     ; $4768: $7B
     call SetEntitySpriteVariant                   ; $4769: $CD $0C $3B
-    call func_007_7CF0                            ; $476C: $CD $F0 $7C
+    call PushLinkOutOfEntity_07                   ; $476C: $CD $F0 $7C
     call func_007_7E5D                            ; $476F: $CD $5D $7E
     add  $12                                      ; $4772: $C6 $12
     cp   $24                                      ; $4774: $FE $24
@@ -496,7 +496,7 @@ func_007_4959::
     jp   SetEntitySpriteVariant                   ; $497F: $C3 $0C $3B
 
 func_007_4982::
-    call func_007_7CF0                            ; $4982: $CD $F0 $7C
+    call PushLinkOutOfEntity_07                   ; $4982: $CD $F0 $7C
     call func_007_7E5D                            ; $4985: $CD $5D $7E
     ld   a, e                                     ; $4988: $7B
     add  $02                                      ; $4989: $C6 $02

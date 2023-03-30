@@ -91,7 +91,7 @@ jr_018_737E:
     cp   $05                                      ; $7389: $FE $05
     jr   nc, .jr_7392                             ; $738B: $30 $05
 
-    call func_018_7D36                            ; $738D: $CD $36 $7D
+    call PushLinkOutOfEntity_18                   ; $738D: $CD $36 $7D
     jr   jr_018_7395                              ; $7390: $18 $03
 
 .jr_7392

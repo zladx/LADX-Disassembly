@@ -3,11 +3,11 @@
 ; These helpers are defined (with small variants) in most entity banks.
 ;
 
-func_018_7D36::
+PushLinkOutOfEntity_18::
     call CheckLinkCollisionWithEnemy_trampoline   ; $7D36: $CD $5A $3B
-    jr   nc, jr_018_7D5A                          ; $7D39: $30 $1F
+    jr   nc, .jr_018_7D5A                         ; $7D39: $30 $1F
 
-func_018_7D3B::
+.forcePush
     call CopyLinkFinalPositionToPosition          ; $7D3B: $CD $BE $0C
     call ResetPegasusBoots                        ; $7D3E: $CD $B6 $0C
     ld   a, [wC1A6]                               ; $7D41: $FA $A6 $C1
@@ -30,7 +30,7 @@ func_018_7D3B::
     scf                                           ; $7D58: $37
     ret                                           ; $7D59: $C9
 
-jr_018_7D5A:
+.jr_018_7D5A
     and  a                                        ; $7D5A: $A7
     ret                                           ; $7D5B: $C9
 

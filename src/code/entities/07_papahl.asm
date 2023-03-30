@@ -75,7 +75,7 @@ PapahlEntityHandler::
     rra                                           ; $4A4B: $1F
     and  $01                                      ; $4A4C: $E6 $01
     call SetEntitySpriteVariant                   ; $4A4E: $CD $0C $3B
-    call func_007_7CF0                            ; $4A51: $CD $F0 $7C
+    call PushLinkOutOfEntity_07                   ; $4A51: $CD $F0 $7C
     call func_007_7D43                            ; $4A54: $CD $43 $7D
     ret  nc                                       ; $4A57: $D0
 
@@ -122,7 +122,7 @@ jr_007_4A69:
 
 .jr_4AA0
     call ReturnIfNonInteractive_07                ; $4AA0: $CD $96 $7D
-    call func_007_7CF0                            ; $4AA3: $CD $F0 $7C
+    call PushLinkOutOfEntity_07                   ; $4AA3: $CD $F0 $7C
     ldh  a, [hActiveEntityState]                  ; $4AA6: $F0 $F0
     JP_TABLE                                      ; $4AA8
 ._00 dw func_007_4AB3                             ; $4AA9

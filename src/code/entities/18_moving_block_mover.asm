@@ -14,7 +14,7 @@ MovingBlockMoverEntityHandler::
     sub  [hl]                                     ; $53E7: $96
     jr   c, .jr_53ED                              ; $53E8: $38 $03
 
-    call func_018_7D3B                            ; $53EA: $CD $3B $7D
+    call PushLinkOutOfEntity_18.forcePush         ; $53EA: $CD $3B $7D
 
 .jr_53ED
     ld   hl, hLinkPositionX                       ; $53ED: $21 $98 $FF

@@ -591,7 +591,7 @@ jr_019_7C90:
 ;
 ; ----------------------------------------------------------------------
 
-func_019_7CA2::
+PushLinkOutOfEntity_19::
     call CheckLinkCollisionWithEnemy_trampoline   ; $7CA2: $CD $5A $3B
     jr   nc, jr_019_7CCE                          ; $7CA5: $30 $27
 

@@ -36,7 +36,7 @@ ThwompRammableEntityHandler::
 ._02 dw ThwompRammableState2Handler
 
 ThwompRammableState0Handler::
-    call func_019_7CA2                            ; $55B5: $CD $A2 $7C
+    call PushLinkOutOfEntity_19                   ; $55B5: $CD $A2 $7C
     ret  nc                                       ; $55B8: $D0
 
     and  a                                        ; $55B9: $A7
@@ -64,7 +64,7 @@ ThwompRammableState0Handler::
     jp   IncrementEntityState                     ; $55DA: $C3 $12 $3B
 
 ThwompRammableState1Handler::
-    call func_019_7CA2                            ; $55DD: $CD $A2 $7C
+    call PushLinkOutOfEntity_19                   ; $55DD: $CD $A2 $7C
     call GetEntityTransitionCountdown             ; $55E0: $CD $05 $0C
     cp   $01                                      ; $55E3: $FE $01
     jr   nz, .jr_55EC                             ; $55E5: $20 $05

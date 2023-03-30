@@ -404,7 +404,8 @@ ClearEntityStatusBank18::
     ld   [hl], $00                                ; $7F0C: $36 $00
     ret                                           ; $7F0E: $C9
 
-func_018_7F0F::
+; Kill boss or mini-boss enemy with explosions animation
+AnimateBossAgony_18::
     ld   hl, wEntitiesPrivateState2Table          ; $7F0F: $21 $C0 $C2
     add  hl, bc                                   ; $7F12: $09
     ld   a, [hl]                                  ; $7F13: $7E
@@ -510,7 +511,7 @@ label_018_7F6F:
 jr_018_7FB0:
     call ClearEntityStatusBank18                  ; $7FB0: $CD $08 $7F
     ld   hl, hNoiseSfx                            ; $7FB3: $21 $F4 $FF
-    ld   [hl], $1A                                ; $7FB6: $36 $1A
+    ld   [hl], NOISE_SFX_1A                       ; $7FB6: $36 $1A
     ret                                           ; $7FB8: $C9
 
 SetRoomStatus20::

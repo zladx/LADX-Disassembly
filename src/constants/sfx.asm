@@ -228,7 +228,7 @@ NOISE_SFX_DRAW_SHIELD             equ $16;
 ;NOISE_SFX_UNKNOWN                equ $17;LVL2 shield?
 NOISE_SFX_SWORD_D                 equ $18;
 NOISE_SFX_TITLE_APPEARS           equ $19;probably correct
-;NOISE_SFX_UNKNOWN                equ $1A
+NOISE_SFX_1A                      equ $1A
 ;NOISE_SFX_UNKNOWN                equ $1B
 ;NOISE_SFX_UNKNOWN                equ $1C
 ;NOISE_SFX_UNKNOWN                equ $1D

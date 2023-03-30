@@ -68,7 +68,7 @@ TurtleRockHeadEntityHandler::
     cp   $05                                      ; $7365: $FE $05
     jr   z, jr_018_737E                           ; $7367: $28 $15
 
-    call func_018_7F0F                            ; $7369: $CD $0F $7F
+    call AnimateBossAgony_18                      ; $7369: $CD $0F $7F
     ld   hl, wEntitiesStatusTable                 ; $736C: $21 $80 $C2
     add  hl, bc                                   ; $736F: $09
     ld   a, [hl]                                  ; $7370: $7E

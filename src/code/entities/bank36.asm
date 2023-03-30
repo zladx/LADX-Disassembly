@@ -2206,7 +2206,7 @@ HardhitBeetleEntityHandler::
     call func_036_4F4E                            ; $4CBD: $CD $4E $4F
     ldh  a, [hActiveEntityStatus]                 ; $4CC0: $F0 $EA
     cp   $05                                      ; $4CC2: $FE $05
-    jp   nz, label_036_5C3C                       ; $4CC4: $C2 $3C $5C
+    jp   nz, AnimateBossAgony_1836                ; $4CC4: $C2 $3C $5C
 
     ldh  a, [hFrameCounter]                       ; $4CC7: $F0 $E7
     and  $1F                                      ; $4CC9: $E6 $1F
@@ -3449,7 +3449,7 @@ GiantBuzzBlobEntityHandler::
     call func_036_5844                            ; $54E9: $CD $44 $58
     ldh  a, [hActiveEntityStatus]                 ; $54EC: $F0 $EA
     cp   $05                                      ; $54EE: $FE $05
-    jp   nz, label_036_5C3C                       ; $54F0: $C2 $3C $5C
+    jp   nz, AnimateBossAgony_1836                ; $54F0: $C2 $3C $5C
 
     ld   a, [wMagicPowderCount]                   ; $54F3: $FA $4C $DB
     and  a                                        ; $54F6: $A7
@@ -4645,7 +4645,7 @@ AvalaunchEntityHandler::
     call label_3CD9                               ; $5C01: $CD $D9 $3C
     ldh  a, [hActiveEntityStatus]                 ; $5C04: $F0 $EA
     cp   $05                                      ; $5C06: $FE $05
-    jr   nz, label_036_5C3C                       ; $5C08: $20 $32
+    jr   nz, AnimateBossAgony_1836                ; $5C08: $20 $32
 
     call BossIntro                                ; $5C0A: $CD $E8 $3E
     call ReturnIfNonInteractive_36                ; $5C0D: $CD $40 $6A
@@ -4679,7 +4679,8 @@ AvalaunchEntityHandler::
 ._09 dw AvalaunchState9Handler
 ._0A dw AvalaunchStateAHandler
 
-label_036_5C3C:
+; Kill boss or mini-boss enemy with explosions
+AnimateBossAgony_1836::
     ld   hl, wEntitiesPrivateState5Table          ; $5C3C: $21 $90 $C3
     add  hl, bc                                   ; $5C3F: $09
     ld   a, [hl]                                  ; $5C40: $7E

@@ -5,7 +5,7 @@ BlainoEntityHandler::
     call func_018_68EA                            ; $64CC: $CD $EA $68
     ldh  a, [hActiveEntityStatus]                 ; $64CF: $F0 $EA
     cp   $01                                      ; $64D1: $FE $01
-    jp   z, func_018_7F0F                         ; $64D3: $CA $0F $7F
+    jp   z, AnimateBossAgony_18                   ; $64D3: $CA $0F $7F
 
     call ReturnIfNonInteractive_18                ; $64D6: $CD $E8 $7D
     call BossIntro                                ; $64D9: $CD $E8 $3E

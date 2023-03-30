@@ -19,7 +19,7 @@ MamuAndFrogsEntityHandler::
     jp   nz, label_018_4373                       ; $4013: $C2 $73 $43
 
     call func_018_435A                            ; $4016: $CD $5A $43
-    call func_018_7D36                            ; $4019: $CD $36 $7D
+    call PushLinkOutOfEntity_18                   ; $4019: $CD $36 $7D
     ldh  a, [hActiveEntityState]                  ; $401C: $F0 $F0
     JP_TABLE                                      ; $401E
 ._00 dw MamuAndFrogsState0Handler
@@ -386,7 +386,7 @@ label_018_4373:
     ld   [hl], $98                                ; $437D: $36 $98
     call ConfigureEntityHitbox                    ; $437F: $CD $EA $3A
     call func_018_43E3                            ; $4382: $CD $E3 $43
-    call func_018_7D36                            ; $4385: $CD $36 $7D
+    call PushLinkOutOfEntity_18                   ; $4385: $CD $36 $7D
     ldh  a, [hActiveEntityState]                  ; $4388: $F0 $F0
     JP_TABLE                                      ; $438A
 ._00 dw func_018_438F                             ; $438B

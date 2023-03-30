@@ -27,7 +27,7 @@ ManboAndFishesEntityHandler::
 
 .jr_4521
     call func_018_4833                            ; $4521: $CD $33 $48
-    call func_018_7D36                            ; $4524: $CD $36 $7D
+    call PushLinkOutOfEntity_18                   ; $4524: $CD $36 $7D
     ldh  a, [hActiveEntityState]                  ; $4527: $F0 $F0
     JP_TABLE                                      ; $4529
 ._00 dw ManboAndFishesState0Handler

@@ -21,7 +21,7 @@ MarinAtTheShoreEntityHandler::
     and  a                                        ; $61AF: $A7
     ret  nz                                       ; $61B0: $C0
 
-    call func_018_7D36                            ; $61B1: $CD $36 $7D
+    call PushLinkOutOfEntity_18                   ; $61B1: $CD $36 $7D
     ld   a, [wGameplayType]                       ; $61B4: $FA $95 $DB
     cp   GAMEPLAY_WORLD                           ; $61B7: $FE $0B
     ret  nz                                       ; $61B9: $C0

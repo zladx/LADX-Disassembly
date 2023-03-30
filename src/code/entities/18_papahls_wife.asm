@@ -25,7 +25,7 @@ PapahlsWifeEntityHandler::
     call SetEntitySpriteVariant                   ; $4E64: $CD $0C $3B
 
     call ReturnIfNonInteractive_18                ; $4E67: $CD $E8 $7D
-    call func_018_7D36                            ; $4E6A: $CD $36 $7D
+    call PushLinkOutOfEntity_18                   ; $4E6A: $CD $36 $7D
     ldh  a, [hActiveEntityState]                  ; $4E6D: $F0 $F0
     JP_TABLE                                      ; $4E6F
 ._00 dw PapahlsWifeState0Handler

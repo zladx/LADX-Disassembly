@@ -154,7 +154,7 @@ jr_005_49D1:
 ._03 dw func_005_4B89                             ; $49E3
 
 func_005_49E5::
-    call func_005_54C3                            ; $49E5: $CD $C3 $54
+    call PushLinkOutOfEntity_05                   ; $49E5: $CD $C3 $54
     ldh  a, [hLinkPositionY]                      ; $49E8: $F0 $99
     cp   $20                                      ; $49EA: $FE $20
     jr   nc, .jr_49FD                             ; $49EC: $30 $0F
@@ -478,7 +478,7 @@ func_005_4B89::
     and  a                                        ; $4BB0: $A7
     jr   nz, .jr_4BB6                             ; $4BB1: $20 $03
 
-    call func_005_54C3                            ; $4BB3: $CD $C3 $54
+    call PushLinkOutOfEntity_05                   ; $4BB3: $CD $C3 $54
 
 .jr_4BB6
     call ShouldLinkTalkToEntity_05                ; $4BB6: $CD $06 $55
@@ -593,7 +593,7 @@ jr_005_4C43:
 jr_005_4C57:
     call RenderActiveEntitySpritesPair            ; $4C57: $CD $C0 $3B
     call ReturnIfNonInteractive_05                ; $4C5A: $CD $3A $7A
-    call func_005_54C3                            ; $4C5D: $CD $C3 $54
+    call PushLinkOutOfEntity_05                   ; $4C5D: $CD $C3 $54
 
     ; Jump table excuted when Tarin is giving the shield
     ldh  a, [hActiveEntityState]                  ; $4C60: $F0 $F0

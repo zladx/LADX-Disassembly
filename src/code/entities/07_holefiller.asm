@@ -30,7 +30,7 @@ Data_007_512B::
     db   $00, $00, $F8, $08
 
 func_007_512F::
-    call func_007_7CF0                            ; $512F: $CD $F0 $7C
+    call PushLinkOutOfEntity_07                   ; $512F: $CD $F0 $7C
     jr   nc, jr_007_516E                          ; $5132: $30 $3A
 
     ldh  a, [hPressedButtonsMask]                 ; $5134: $F0 $CB

@@ -74,7 +74,7 @@ label_007_5E09:
 jr_007_5E12:
     call DecrementEntityIgnoreHitsCountdown       ; $5E12: $CD $56 $0C
     call label_3B70                               ; $5E15: $CD $70 $3B
-    call func_007_7CF0                            ; $5E18: $CD $F0 $7C
+    call PushLinkOutOfEntity_07                   ; $5E18: $CD $F0 $7C
     ldh  a, [hActiveEntityState]                  ; $5E1B: $F0 $F0
     JP_TABLE                                      ; $5E1D
 ._00 dw func_007_5E2A                             ; $5E1E

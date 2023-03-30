@@ -42,7 +42,7 @@ AnimalD0EntityHandler::
     and  $01                                      ; $7F54: $E6 $01
     add  e                                        ; $7F56: $83
     call SetEntitySpriteVariant                   ; $7F57: $CD $0C $3B
-    call func_005_54C3                            ; $7F5A: $CD $C3 $54
+    call PushLinkOutOfEntity_05                   ; $7F5A: $CD $C3 $54
     call ShouldLinkTalkToEntity_05                ; $7F5D: $CD $06 $55
     ret  nc                                       ; $7F60: $D0
 

@@ -54,7 +54,7 @@ LiftableStatueEntityHandler::
 
 LiftableStatueState0Handler::
     call label_3B23                               ; $4070: $CD $23 $3B
-    call func_019_7CA2                            ; $4073: $CD $A2 $7C
+    call PushLinkOutOfEntity_19                   ; $4073: $CD $A2 $7C
     call entityLinkPositionXDifference            ; $4076: $CD $0B $7E
     add  $10                                      ; $4079: $C6 $10
     cp   $20                                      ; $407B: $FE $20

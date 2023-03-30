@@ -66,7 +66,7 @@ func_019_4DBC::
 func_019_4E00::
     ld   de, Unknown064SpriteVariants             ; $4E00: $11 $B8 $4D
     call RenderActiveEntitySpritesPair            ; $4E03: $CD $C0 $3B
-    jp   func_019_7CA2                            ; $4E06: $C3 $A2 $7C
+    jp   PushLinkOutOfEntity_19                   ; $4E06: $C3 $A2 $7C
 
 func_019_4E09::
     ld   a, $02                                   ; $4E09: $3E $02
@@ -357,7 +357,7 @@ func_019_500D::
 
 .jr_5034
     call ReturnIfNonInteractive_19                ; $5034: $CD $3D $7D
-    call func_019_7CA2                            ; $5037: $CD $A2 $7C
+    call PushLinkOutOfEntity_19                   ; $5037: $CD $A2 $7C
     ldh  a, [hFrameCounter]                       ; $503A: $F0 $E7
     and  $7F                                      ; $503C: $E6 $7F
     jr   nz, .jr_504A                             ; $503E: $20 $0A

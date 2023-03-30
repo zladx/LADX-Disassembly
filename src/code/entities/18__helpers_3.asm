@@ -3,11 +3,11 @@
 ; These helpers are defined (with small variants) in most entity banks.
 ;
 
-func_018_7D36::
+PushLinkOutOfEntity_18::
     call CheckLinkCollisionWithEnemy_trampoline   ; $7D36: $CD $5A $3B
-    jr   nc, jr_018_7D5A                          ; $7D39: $30 $1F
+    jr   nc, .jr_018_7D5A                         ; $7D39: $30 $1F
 
-func_018_7D3B::
+.forcePush
     call CopyLinkFinalPositionToPosition          ; $7D3B: $CD $BE $0C
     call ResetPegasusBoots                        ; $7D3E: $CD $B6 $0C
     ld   a, [wC1A6]                               ; $7D41: $FA $A6 $C1
@@ -30,7 +30,7 @@ func_018_7D3B::
     scf                                           ; $7D58: $37
     ret                                           ; $7D59: $C9
 
-jr_018_7D5A:
+.jr_018_7D5A
     and  a                                        ; $7D5A: $A7
     ret                                           ; $7D5B: $C9
 
@@ -404,7 +404,8 @@ ClearEntityStatusBank18::
     ld   [hl], $00                                ; $7F0C: $36 $00
     ret                                           ; $7F0E: $C9
 
-func_018_7F0F::
+; Kill boss or mini-boss enemy with explosions animation
+AnimateBossAgony_18::
     ld   hl, wEntitiesPrivateState2Table          ; $7F0F: $21 $C0 $C2
     add  hl, bc                                   ; $7F12: $09
     ld   a, [hl]                                  ; $7F13: $7E
@@ -510,7 +511,7 @@ label_018_7F6F:
 jr_018_7FB0:
     call ClearEntityStatusBank18                  ; $7FB0: $CD $08 $7F
     ld   hl, hNoiseSfx                            ; $7FB3: $21 $F4 $FF
-    ld   [hl], $1A                                ; $7FB6: $36 $1A
+    ld   [hl], NOISE_SFX_1A                       ; $7FB6: $36 $1A
     ret                                           ; $7FB8: $C9
 
 SetRoomStatus20::

@@ -263,7 +263,7 @@ func_036_4161::
 label_036_4178:
     ld   de, Unknown074SpriteVariants             ; $4178: $11 $F2 $48
     call RenderActiveEntitySpritesPair            ; $417B: $CD $C0 $3B
-    call func_036_6B5C                            ; $417E: $CD $5C $6B
+    call PushLinkOutOfEntity_36                   ; $417E: $CD $5C $6B
     call ReturnIfNonInteractive_36.allowInactiveEntity ; $4181: $CD $46 $6A
     ldh  a, [hActiveEntityState]                  ; $4184: $F0 $F0
     and  a                                        ; $4186: $A7
@@ -463,7 +463,7 @@ label_036_429A:
     call RenderActiveEntitySpritesRect            ; $42C5: $CD $E6 $3C
     ld   a, $06                                   ; $42C8: $3E $06
     call func_015_7964_trampoline                 ; $42CA: $CD $A0 $3D
-    call func_036_6B5C                            ; $42CD: $CD $5C $6B
+    call PushLinkOutOfEntity_36                   ; $42CD: $CD $5C $6B
     call CheckLinkCollisionWithEnemy_trampoline   ; $42D0: $CD $5A $3B
     ret                                           ; $42D3: $C9
 
@@ -479,7 +479,7 @@ label_036_429A:
     call RenderActiveEntitySpritesRect            ; $42E5: $CD $E6 $3C
     ld   a, $03                                   ; $42E8: $3E $03
     call func_015_7964_trampoline                 ; $42EA: $CD $A0 $3D
-    call func_036_6B5C                            ; $42ED: $CD $5C $6B
+    call PushLinkOutOfEntity_36                   ; $42ED: $CD $5C $6B
     call CheckLinkCollisionWithEnemy_trampoline   ; $42F0: $CD $5A $3B
     call ReturnIfNonInteractive_36.allowInactiveEntity ; $42F3: $CD $46 $6A
     ldh  a, [hActiveEntityState]                  ; $42F6: $F0 $F0
@@ -2206,7 +2206,7 @@ HardhitBeetleEntityHandler::
     call func_036_4F4E                            ; $4CBD: $CD $4E $4F
     ldh  a, [hActiveEntityStatus]                 ; $4CC0: $F0 $EA
     cp   $05                                      ; $4CC2: $FE $05
-    jp   nz, label_036_5C3C                       ; $4CC4: $C2 $3C $5C
+    jp   nz, AnimateBossAgony_1836                ; $4CC4: $C2 $3C $5C
 
     ldh  a, [hFrameCounter]                       ; $4CC7: $F0 $E7
     and  $1F                                      ; $4CC9: $E6 $1F
@@ -3449,7 +3449,7 @@ GiantBuzzBlobEntityHandler::
     call func_036_5844                            ; $54E9: $CD $44 $58
     ldh  a, [hActiveEntityStatus]                 ; $54EC: $F0 $EA
     cp   $05                                      ; $54EE: $FE $05
-    jp   nz, label_036_5C3C                       ; $54F0: $C2 $3C $5C
+    jp   nz, AnimateBossAgony_1836                ; $54F0: $C2 $3C $5C
 
     ld   a, [wMagicPowderCount]                   ; $54F3: $FA $4C $DB
     and  a                                        ; $54F6: $A7
@@ -4199,7 +4199,7 @@ ColorGuardianRedEntityHandler::
     and  a                                        ; $595B: $A7
     jr   nz, .jr_5964                             ; $595C: $20 $06
 
-    call func_036_6B5C                            ; $595E: $CD $5C $6B
+    call PushLinkOutOfEntity_36                   ; $595E: $CD $5C $6B
     call CheckLinkCollisionWithEnemy_trampoline   ; $5961: $CD $5A $3B
 
 .jr_5964
@@ -4645,7 +4645,7 @@ AvalaunchEntityHandler::
     call label_3CD9                               ; $5C01: $CD $D9 $3C
     ldh  a, [hActiveEntityStatus]                 ; $5C04: $F0 $EA
     cp   $05                                      ; $5C06: $FE $05
-    jr   nz, label_036_5C3C                       ; $5C08: $20 $32
+    jr   nz, AnimateBossAgony_1836                ; $5C08: $20 $32
 
     call BossIntro                                ; $5C0A: $CD $E8 $3E
     call ReturnIfNonInteractive_36                ; $5C0D: $CD $40 $6A
@@ -4679,7 +4679,8 @@ AvalaunchEntityHandler::
 ._09 dw AvalaunchState9Handler
 ._0A dw AvalaunchStateAHandler
 
-label_036_5C3C:
+; Kill boss or mini-boss enemy with explosions
+AnimateBossAgony_1836::
     ld   hl, wEntitiesPrivateState5Table          ; $5C3C: $21 $90 $C3
     add  hl, bc                                   ; $5C3F: $09
     ld   a, [hl]                                  ; $5C40: $7E
@@ -5737,7 +5738,7 @@ RotoswitchBlueEntityHandler::
     add  hl, bc                                   ; $6244: $09
     ld   [hl], $FF                                ; $6245: $36 $FF
     call func_036_63C2                            ; $6247: $CD $C2 $63
-    call func_036_6B5C                            ; $624A: $CD $5C $6B
+    call PushLinkOutOfEntity_36                   ; $624A: $CD $5C $6B
     ld   a, [wRoomEventEffectExecuted]            ; $624D: $FA $8F $C1
     and  a                                        ; $6250: $A7
     jr   z, .jr_625F                              ; $6251: $28 $0C
@@ -7365,7 +7366,7 @@ ApplyRecoilIfNeeded_36::
 .return
     ret                                           ; $6B5B: $C9
 
-func_036_6B5C::
+PushLinkOutOfEntity_36::
     call CheckLinkCollisionWithEnemy_trampoline   ; $6B5C: $CD $5A $3B
     jr   nc, jr_036_6B88                          ; $6B5F: $30 $27
 

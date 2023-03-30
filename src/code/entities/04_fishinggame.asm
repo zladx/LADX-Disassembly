@@ -112,7 +112,7 @@ FishermanFishingGameEntityHandler::
 
     ld   a, $04                                   ; $5FC7: $3E $04
     call func_015_7964_trampoline                 ; $5FC9: $CD $A0 $3D
-    call ApplySolidCollision_04                   ; $5FCC: $CD $E3 $7B
+    call PushLinkOutOfEntity_04                   ; $5FCC: $CD $E3 $7B
 
     ldh  a, [hActiveEntityState]                  ; $5FCF: $F0 $F0
     JP_TABLE                                      ; $5FD1

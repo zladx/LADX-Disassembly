@@ -41,7 +41,7 @@ label_019_6D00:
     jp   nz, label_019_6CE7                       ; $6D1C: $C2 $E7 $6C
 
     call func_019_6EC5                            ; $6D1F: $CD $C5 $6E
-    call func_019_7CA2                            ; $6D22: $CD $A2 $7C
+    call PushLinkOutOfEntity_19                   ; $6D22: $CD $A2 $7C
     ld   a, [wGameplayType]                       ; $6D25: $FA $95 $DB
     cp   GAMEPLAY_WORLD                           ; $6D28: $FE $0B
     ret  nz                                       ; $6D2A: $C0
@@ -324,7 +324,7 @@ BananasSchuleSaleEntityHandler::
     ld   [hl], a                                  ; $6F7A: $77
     pop  bc                                       ; $6F7B: $C1
     call func_019_7039                            ; $6F7C: $CD $39 $70
-    call func_019_7CA2                            ; $6F7F: $CD $A2 $7C
+    call PushLinkOutOfEntity_19                   ; $6F7F: $CD $A2 $7C
     ldh  a, [hActiveEntityState]                  ; $6F82: $F0 $F0
     JP_TABLE                                      ; $6F84
 ._00 dw func_019_6F8B                             ; $6F85
@@ -427,7 +427,7 @@ func_019_7039::
     ld   hl, Data_019_7029                        ; $705C: $21 $29 $70
     ld   c, $04                                   ; $705F: $0E $04
     call RenderActiveEntitySpritesRect            ; $7061: $CD $E6 $3C
-    call func_019_7CA2                            ; $7064: $CD $A2 $7C
+    call PushLinkOutOfEntity_19                   ; $7064: $CD $A2 $7C
     ldh  a, [hLinkPositionX]                      ; $7067: $F0 $98
     sub  $68                                      ; $7069: $D6 $68
     add  $04                                      ; $706B: $C6 $04
@@ -486,7 +486,7 @@ label_019_70A9:
 
 .jr_70C2
     call func_019_717C                            ; $70C2: $CD $7C $71
-    call func_019_7CA2                            ; $70C5: $CD $A2 $7C
+    call PushLinkOutOfEntity_19                   ; $70C5: $CD $A2 $7C
     ld   hl, wEntitiesDirectionTable              ; $70C8: $21 $80 $C3
     add  hl, bc                                   ; $70CB: $09
     ldh  a, [hFrameCounter]                       ; $70CC: $F0 $E7

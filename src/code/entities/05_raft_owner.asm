@@ -45,7 +45,7 @@ EntityRaftOwnerHandler::
     ld   de, RaftOwnerIndoorSpriteVariants        ; $5375: $11 $3E $53
     call RenderActiveEntitySpritesPair            ; $5378: $CD $C0 $3B
     call ReturnIfNonInteractive_05                ; $537B: $CD $3A $7A
-    call func_005_54C3                            ; $537E: $CD $C3 $54
+    call PushLinkOutOfEntity_05                   ; $537E: $CD $C3 $54
     ldh  a, [hActiveEntityState]                  ; $5381: $F0 $F0
     JP_TABLE                                      ; $5383
 ._00 dw func_005_538A                             ; $5384
@@ -148,7 +148,7 @@ jr_005_53E9:
     ld   de, RaftOwnerOnOverworldSpriteVariants   ; $5405: $11 $D4 $53
     call RenderActiveEntitySpritesPair            ; $5408: $CD $C0 $3B
     call ReturnIfNonInteractive_05                ; $540B: $CD $3A $7A
-    jp   func_005_54C3                            ; $540E: $C3 $C3 $54
+    jp   PushLinkOutOfEntity_05                   ; $540E: $C3 $C3 $54
 
 jr_005_5411:
     ldh  a, [hFrameCounter]                       ; $5411: $F0 $E7
@@ -267,7 +267,15 @@ func_005_5490::
 .jr_54C1
     jr   jr_005_5483                              ; $54C1: $18 $C0
 
-func_005_54C3::
+; ----------------------------------------------------------------------
+;
+; ENTITY COMMON HELPERS
+;
+; These helpers are defined (with small variants) in most entity banks.
+;
+; ----------------------------------------------------------------------
+
+PushLinkOutOfEntity_05::
     call CheckLinkCollisionWithEnemy_trampoline   ; $54C3: $CD $5A $3B
     jr   nc, .ret_54E5                            ; $54C6: $30 $1D
 

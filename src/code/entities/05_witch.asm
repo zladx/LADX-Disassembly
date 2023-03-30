@@ -63,7 +63,7 @@ WitchEntityHandler::
     rra                                           ; $47F9: $1F
     and  $03                                      ; $47FA: $E6 $03
     call SetEntitySpriteVariant                   ; $47FC: $CD $0C $3B
-    call func_005_54C3                            ; $47FF: $CD $C3 $54
+    call PushLinkOutOfEntity_05                   ; $47FF: $CD $C3 $54
     ldh  a, [hActiveEntityState]                  ; $4802: $F0 $F0
     JP_TABLE                                      ; $4804
 ._00 dw func_005_4815                             ; $4805

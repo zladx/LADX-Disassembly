@@ -88,9 +88,9 @@ ENDC
 
 IF __OPTIMIZATIONS_1__
     call ReturnIfNonInteractive_18
-    call func_018_7D36
+    call PushLinkOutOfEntity_18
 ELSE
-    call func_018_7D36                            ; $5E8D: $CD $36 $7D
+    call PushLinkOutOfEntity_18                   ; $5E8D: $CD $36 $7D
     call ReturnIfNonInteractive_18                ; $5E90: $CD $E8 $7D
 ENDC
 

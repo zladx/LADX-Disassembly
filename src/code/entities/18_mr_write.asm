@@ -71,7 +71,7 @@ jr_018_4BB5:
     call SetEntitySpriteVariant                   ; $4BE1: $CD $0C $3B
 
 .jr_4BE4
-    call func_018_7D36                            ; $4BE4: $CD $36 $7D
+    call PushLinkOutOfEntity_18                   ; $4BE4: $CD $36 $7D
     ldh  a, [hMapRoom]                            ; $4BE7: $F0 $F6
     cp   UNKNOWN_ROOM_A8                          ; $A8 = Mr. Write's house
     jp   z, label_018_4C75                        ; $4BEB: $CA $75 $4C

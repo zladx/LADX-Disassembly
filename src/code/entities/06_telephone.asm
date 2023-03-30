@@ -11,7 +11,7 @@ TelephoneEntityHandler::
     ld   de, TelephoneSpriteVariants              ; $6A82: $11 $78 $6A
     call RenderActiveEntitySpritesPair            ; $6A85: $CD $C0 $3B
     call ReturnIfNonInteractive_06                ; $6A88: $CD $C6 $64
-    call func_006_645D                            ; $6A8B: $CD $5D $64
+    call CheckLinkInteractionWithEntity_06        ; $6A8B: $CD $5D $64
     ret  nc                                       ; $6A8E: $D0
 
     ld_dialog_low e, Dialog1FD                    ; $6A8F: $1E $FD

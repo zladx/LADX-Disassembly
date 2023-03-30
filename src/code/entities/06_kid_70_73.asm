@@ -23,9 +23,9 @@ Kid73EntityHandler::
 func_006_6230::
     ldh  a, [hActiveEntityPosY]                   ; $6230: $F0 $EF
     ldh  [hActiveEntityVisualPosY], a             ; $6232: $E0 $EC
-    call func_006_641A                            ; $6234: $CD $1A $64
+    call PushLinkOutOfEntity_06                   ; $6234: $CD $1A $64
     call CopyEntityPositionToActivePosition       ; $6237: $CD $8A $3D
-    call func_006_645D                            ; $623A: $CD $5D $64
+    call CheckLinkInteractionWithEntity_06        ; $623A: $CD $5D $64
     ret  nc                                       ; $623D: $D0
 
     ld   a, [wTradeSequenceItem]                  ; $623E: $FA $0E $DB

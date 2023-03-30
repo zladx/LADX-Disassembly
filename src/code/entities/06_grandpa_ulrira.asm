@@ -26,8 +26,8 @@ GrandpaUlriraEntityHandler::
     rra                                           ; $5C34: $1F
     and  $01                                      ; $5C35: $E6 $01
     call SetEntitySpriteVariant                   ; $5C37: $CD $0C $3B
-    call func_006_641A                            ; $5C3A: $CD $1A $64
-    call func_006_645D                            ; $5C3D: $CD $5D $64
+    call PushLinkOutOfEntity_06                   ; $5C3A: $CD $1A $64
+    call CheckLinkInteractionWithEntity_06        ; $5C3D: $CD $5D $64
     ret  nc                                       ; $5C40: $D0
 
     ld   a, [wRichardSpokenFlag]                  ; $5C41: $FA $55 $DB

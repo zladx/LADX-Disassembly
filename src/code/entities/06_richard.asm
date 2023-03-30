@@ -48,7 +48,7 @@ RichardEntityHandler::
     and  a                                        ; $4043: $A7
     jr   nz, .jr_4049                             ; $4044: $20 $03
 
-    call func_006_641A                            ; $4046: $CD $1A $64
+    call PushLinkOutOfEntity_06                   ; $4046: $CD $1A $64
 
 .jr_4049
     ldh  a, [hActiveEntityState]                  ; $4049: $F0 $F0
@@ -72,7 +72,7 @@ RichardState0Handler::
     ret                                           ; $4067: $C9
 
 RichardState1Handler::
-    call func_006_645D                            ; $4068: $CD $5D $64
+    call CheckLinkInteractionWithEntity_06        ; $4068: $CD $5D $64
     ret  nc                                       ; $406B: $D0
 
     ld   a, [wIsBowWowFollowingLink]              ; $406C: $FA $56 $DB
@@ -157,7 +157,7 @@ RichardState3Handler::
     jp   AddEntitySpeedToPos_06                   ; $40E6: $C3 $4E $65
 
 RichardState4Handler::
-    call func_006_645D                            ; $40E9: $CD $5D $64
+    call CheckLinkInteractionWithEntity_06        ; $40E9: $CD $5D $64
     jr   nc, jr_006_40FC                          ; $40EC: $30 $0E
 
     ld   a, [wGoldenLeavesCount]                  ; $40EE: $FA $15 $DB

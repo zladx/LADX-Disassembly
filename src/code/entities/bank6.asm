@@ -464,7 +464,7 @@ label_006_702A:
 label_006_7035:
     ld   a, TRANSCIENT_VFX_POOF                   ; $7035: $3E $02
     call AddTranscientVfx                         ; $7037: $CD $C7 $0C
-    ld   a, $13                                   ; $703A: $3E $13
+    ld   a, NOISE_SFX_ENEMY_DESTROYED             ; $703A: $3E $13
     ldh  [hNoiseSfx], a                           ; $703C: $E0 $F4
     ret                                           ; $703E: $C9
 

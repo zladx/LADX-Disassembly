@@ -1386,7 +1386,7 @@ PlayBoomerangSfx::
     and  a                                        ; $4C9B: $A7
     jr   nz, PlayBoomerangSfx.return              ; $4C9C: $20 $04
 
-    ld   a, $2D                                   ; $4C9E: $3E $2D
+    ld   a, NOISE_SFX_BOOMERANG                   ; $4C9E: $3E $2D
     ldh  [hNoiseSfx], a                           ; $4CA0: $E0 $F4
 
 PlayBoomerangSfx.return::

@@ -185,7 +185,7 @@ TurtleRockHeadState3Handler::
     cp   $06                                      ; $741C: $FE $06
     jr   z, .jr_746E                              ; $741E: $28 $4E
 
-    ld   a, $13                                   ; $7420: $3E $13
+    ld   a, NOISE_SFX_ENEMY_DESTROYED             ; $7420: $3E $13
     ldh  [hNoiseSfx], a                           ; $7422: $E0 $F4
     ld   a, ENTITY_TURTLE_ROCK_HEAD               ; $7424: $3E $7F
     call SpawnNewEntity_trampoline                ; $7426: $CD $86 $3B
@@ -557,7 +557,7 @@ jr_018_76C9:
     ld   [wInvincibilityCounter], a               ; $770B: $EA $C7 $DB
     ld   a, $08                                   ; $770E: $3E $08
     ld   [wSubtractHealthBuffer], a               ; $7710: $EA $94 $DB
-    ld   a, $03                                   ; $7713: $3E $03
+    ld   a, WAVE_SFX_LINK_HURT                    ; $7713: $3E $03
     ldh  [hWaveSfx], a                            ; $7715: $E0 $F3
 
 jr_018_7717:

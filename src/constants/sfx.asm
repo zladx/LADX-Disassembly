@@ -186,21 +186,27 @@ WAVE_SFX_OCARINA_BALLAD  equ $09
 WAVE_SFX_OCARINA_FROG    equ $0A
 WAVE_SFX_OCARINA_MAMBO   equ $0B
 WAVE_SFX_LINK_FALLS      equ $0C
-;WAVE_SFX_UNKNOWN        equ $0D
+WAVE_SFX_UNKNOWN_0D      equ $0D
 WAVE_SFX_SWITCH_BUTTON   equ $0E
 WAVE_SFX_TYPEWRITER      equ $0F
 WAVE_SFX_BOSS_AGONY      equ $10
 WAFE_SFX_POWER_HIT       equ $11
-;WAVE_SFX_UNKNOWN        equ $12
+WAVE_SFX_UNKNOWN_12      equ $12
 WAVE_SFX_CUCCO_HURT      equ $13
-;WAVE_SFX_UNKNOWN        equ $14
+WAVE_SFX_UNKNOWN_14      equ $14
 WAVE_SFX_OCARINA_NOSONG  equ $15    ; Off-key notes for when you have no songs available
 WAVE_SFX_BOSS_HIT        equ $16
 WAVE_SFX_WIND_FISH       equ $17
 WAVE_SFX_CHAIN_CHOMP     equ $18
 WAVE_SFX_HOOT            equ $19
-;WAVE_SFX_UNKNOWN        equ $1A
+WAVE_SFX_UNKNOWN_1A      equ $1A
 WAVE_SFX_COMPASS         equ $1B
+WAVE_SFX_UNKNOWN_1C      equ $1C
+WAVE_SFX_UNKNOWN_1E      equ $1E
+WAVE_SFX_UNKNOWN_1F      equ $1F
+WAVE_SFX_UNKNOWN_21      equ $21
+WAVE_SFX_UNKNOWN_22      equ $22
+WAVE_SFX_UNKNOWN_23      equ $23
 
 ; Values for hNoiseSfx and wActiveNoiseSfx
 NOISE_SFX_NONE                    equ $00;
@@ -211,9 +217,10 @@ NOISE_SFX_DOOR_UNLOCKED           equ $04;opening of door likely
 NOISE_SFX_CUT_GRASS               equ $05;
 NOISE_SFX_STAIRS                  equ $06;  Also used for doorways.
 NOISE_SFX_FOOTSTEP                equ $07;  Landing after jump
+NOISE_SFX_UNKNOWN_08              equ $08
 NOISE_SFX_POT_SMASHED             equ $09;hit/stun, perhaps pot
 NOISE_SFX_SHOOT_ARROW             equ $0A;probs arrow
-;NOISE_SFX_SHIELD_DEFLECT         equ $0B;shield sound but shorter
+NOISE_SFX_SHIELD_DEFLECT          equ $0B;shield sound but shorter
 NOISE_SFX_BOMB_EXPLOSION          equ $0C; Used for the lightning sounds in the title screen intro cutscene
 NOISE_SFX_MAGIC_ROD               equ $0D;electricity, but likely magic
 NOISE_SFX_SHOVEL_DIG              equ $0E;digging
@@ -225,33 +232,47 @@ NOISE_SFX_ENEMY_DESTROYED         equ $13;
 NOISE_SFX_SWORD_B                 equ $14;
 NOISE_SFX_SWORD_C                 equ $15;
 NOISE_SFX_DRAW_SHIELD             equ $16;
-;NOISE_SFX_UNKNOWN                equ $17;LVL2 shield?
+NOISE_SFX_UNKNOWN_17              equ $17;LVL2 shield?
 NOISE_SFX_SWORD_D                 equ $18;
 NOISE_SFX_TITLE_APPEARS           equ $19;probably correct
 NOISE_SFX_1A                      equ $1A
-;NOISE_SFX_UNKNOWN                equ $1B
-;NOISE_SFX_UNKNOWN                equ $1C
-;NOISE_SFX_UNKNOWN                equ $1D
+NOISE_SFX_UNKNOWN_1B              equ $1B
+NOISE_SFX_UNKNOWN_1C              equ $1C
+NOISE_SFX_UNKNOWN_1D              equ $1D
 ;NOISE_SFX_UNKNOWN                equ $1E
-;NOISE_SFX_UNKNOWN                equ $1F
-;NOISE_SFX_ELECTRICITY            equ $20;Electricity/Shopkeeper's magic
-;NOISE_SFX_UNKNOWN                equ $21;silent?
-;NOISE_SFX_UNKNOWN                equ $22;beach/explosion with fade out
-;NOISE_SFX_UNKNOWN                equ $23;burning/explosion/rumbling
-;NOISE_SFX_UNKNOWN                equ $24;beach/fire doused
-;NOISE_SFX_UNKNOWN                equ $25;fire, definitely cutscene because timed hiccups
-;NOISE_SFX_UNKNOWN                equ $26;more electricity
-;NOISE_SFX_UNKNOWN                equ $27;breaking/fire/explosion
-;NOISE_SFX_UNKNOWN                equ $28;stunned enemy?
-;NOISE_SFX_UNKNOWN                equ $29;brick blocks break
+NOISE_SFX_UNKNOWN_1F              equ $1F
+NOISE_SFX_ELECTRICITY             equ $20;Electricity/Shopkeeper's magic
+NOISE_SFX_UNKNOWN_21              equ $21;silent?
+NOISE_SFX_UNKNOWN_22              equ $22;beach/explosion with fade out
+NOISE_SFX_UNKNOWN_23              equ $23;burning/explosion/rumbling
+NOISE_SFX_UNKNOWN_24              equ $24;beach/fire doused
+NOISE_SFX_UNKNOWN_25              equ $25;fire, definitely cutscene because timed hiccups
+NOISE_SFX_UNKNOWN_26              equ $26;more electricity
+NOISE_SFX_UNKNOWN_27              equ $27;breaking/fire/explosion
+NOISE_SFX_UNKNOWN_28              equ $28;stunned enemy?
+NOISE_SFX_UNKNOWN_29              equ $29;brick blocks break
 NOISE_SFX_DOOR_RUMBLE             equ $2A;probably entrance opening
 NOISE_SFX_ROCK_RUMBLE             equ $2B;ancient door sliding
-;NOISE_SFX_UNKNOWN                equ $2C;fade out, intro?
+NOISE_SFX_UNKNOWN_2C              equ $2C;fade out, intro?
 NOISE_SFX_BOOMERANG               equ $2D;probably boomerang
-;NOISE_SFX_UNKNOWN                equ $2E;burning... then small door opening
-;NOISE_SFX_UNKNOWN                equ $2F;page of a book
+NOISE_SFX_UNKNOWN_2E              equ $2E;burning... then small door opening
+NOISE_SFX_UNKNOWN_2F              equ $2F;page of a book
 NOISE_SFX_EAGLE_TOUCHDOWN         equ $30;probably eagle wings
 NOISE_SFX_EAGLE_LIFT_UP           equ $31;also eagle probably
+NOISE_SFX_UNKNOWN_32              equ $32
+NOISE_SFX_UNKNOWN_33              equ $33
+NOISE_SFX_UNKNOWN_34              equ $34
+NOISE_SFX_UNKNOWN_35              equ $35
+NOISE_SFX_UNKNOWN_36              equ $36
+NOISE_SFX_UNKNOWN_37              equ $37
+NOISE_SFX_UNKNOWN_38              equ $38
+NOISE_SFX_UNKNOWN_39              equ $39
+NOISE_SFX_UNKNOWN_3A              equ $3A
+NOISE_SFX_UNKNOWN_3B              equ $3B
+NOISE_SFX_UNKNOWN_3D              equ $3D
+NOISE_SFX_UNKNOWN_3E              equ $3E
+NOISE_SFX_UNKNOWN_3F              equ $3F
+NOISE_SFX_UNKNOWN_40              equ $40
 ; entries to be added to at least $AA
 
 ; values for wOcarinaSongFlags

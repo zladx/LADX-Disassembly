@@ -477,7 +477,7 @@ label_018_7F6F:
     ldh  [hMultiPurpose1], a                      ; $7F78: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $7F7A: $3E $02
     call AddTranscientVfx                         ; $7F7C: $CD $C7 $0C
-    ld   a, $13                                   ; $7F7F: $3E $13
+    ld   a, NOISE_SFX_ENEMY_DESTROYED             ; $7F7F: $3E $13
     ldh  [hNoiseSfx], a                           ; $7F81: $E0 $F4
     ret                                           ; $7F83: $C9
 

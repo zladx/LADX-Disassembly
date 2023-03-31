@@ -744,7 +744,7 @@ FlyingRoosterState0Handler::
     ld   a, $4B                                   ; $529E: $3E $4B
     ld   [hl+], a                                 ; $52A0: $22
     ld   [hl], b                                  ; $52A1: $70
-    ld   a, $11                                   ; $52A2: $3E $11
+    ld   a, NOISE_SFX_BLOCK_RUMBLE                ; $52A2: $3E $11
     ldh  [hNoiseSfx], a                           ; $52A4: $E0 $F4
     call IncrementEntityState                     ; $52A6: $CD $12 $3B
     jr   FlyingRoosterState1Handler               ; $52A9: $18 $06

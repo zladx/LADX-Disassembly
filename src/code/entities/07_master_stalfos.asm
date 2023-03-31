@@ -36,7 +36,7 @@ func_007_698A::
     jp   IncrementEntityState                     ; $6993: $C3 $12 $3B
 
 func_007_6996::
-    ld   a, $1D                                   ; $6996: $3E $1D
+    ld   a, NOISE_SFX_UNKNOWN_1D                  ; $6996: $3E $1D
     ldh  [hNoiseSfx], a                           ; $6998: $E0 $F4
     call GetEntityTransitionCountdown             ; $699A: $CD $05 $0C
     ld   [hl], $80                                ; $699D: $36 $80
@@ -525,7 +525,7 @@ jr_007_6C55:
     cp   $17                                      ; $6C7B: $FE $17
     jr   nz, .jr_6C89                             ; $6C7D: $20 $0A
 
-    ld   a, $27                                   ; $6C7F: $3E $27
+    ld   a, NOISE_SFX_UNKNOWN_27                  ; $6C7F: $3E $27
     ldh  [hNoiseSfx], a                           ; $6C81: $E0 $F4
     ld   hl, wEntitiesPrivateCountdown2Table      ; $6C83: $21 $00 $C3
     add  hl, bc                                   ; $6C86: $09
@@ -578,7 +578,7 @@ jr_007_6CB8:
     cp   $17                                      ; $6CDB: $FE $17
     jr   nz, .jr_6CE9                             ; $6CDD: $20 $0A
 
-    ld   a, $27                                   ; $6CDF: $3E $27
+    ld   a, NOISE_SFX_UNKNOWN_27                  ; $6CDF: $3E $27
     ldh  [hNoiseSfx], a                           ; $6CE1: $E0 $F4
     ld   hl, wEntitiesPrivateCountdown2Table      ; $6CE3: $21 $00 $C3
     add  hl, bc                                   ; $6CE6: $09
@@ -849,7 +849,7 @@ func_007_6E58::
     dec  a                                        ; $6E60: $3D
     jr   nz, .jr_6E67                             ; $6E61: $20 $04
 
-    ld   a, $3F                                   ; $6E63: $3E $3F
+    ld   a, NOISE_SFX_UNKNOWN_3F                  ; $6E63: $3E $3F
     ldh  [hNoiseSfx], a                           ; $6E65: $E0 $F4
 
 .jr_6E67
@@ -1198,7 +1198,7 @@ func_007_70B7::
     ld   [wSubtractHealthBuffer], a               ; $7105: $EA $94 $DB
     ld   a, $20                                   ; $7108: $3E $20
     ld   [wInvincibilityCounter], a               ; $710A: $EA $C7 $DB
-    ld   a, $03                                   ; $710D: $3E $03
+    ld   a, WAVE_SFX_LINK_HURT                    ; $710D: $3E $03
     ldh  [hWaveSfx], a                            ; $710F: $E0 $F3
 
 ret_007_7111:

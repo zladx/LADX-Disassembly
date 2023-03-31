@@ -1021,7 +1021,7 @@ label_015_7C91:
     ldh  [hMultiPurpose1], a                      ; $7C9A: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $7C9C: $3E $02
     call AddTranscientVfx                         ; $7C9E: $CD $C7 $0C
-    ld   a, $13                                   ; $7CA1: $3E $13
+    ld   a, NOISE_SFX_ENEMY_DESTROYED             ; $7CA1: $3E $13
     ldh  [hNoiseSfx], a                           ; $7CA3: $E0 $F4
     ret                                           ; $7CA5: $C9
 
@@ -1055,7 +1055,7 @@ label_015_7C91:
 jr_015_7CD2:
     call ClearEntityStatus_15                     ; $7CD2: $CD $31 $7C
     ld   hl, hNoiseSfx                            ; $7CD5: $21 $F4 $FF
-    ld   [hl], $1A                                ; $7CD8: $36 $1A
+    ld   [hl], NOISE_SFX_1A                       ; $7CD8: $36 $1A
     ret                                           ; $7CDA: $C9
 
 func_015_7CDB::

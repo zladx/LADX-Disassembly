@@ -59,7 +59,7 @@ ArmosKnightPrivateState2Handler::
     call GetEntityTransitionCountdown             ; $5333: $CD $05 $0C
     jr   nz, jr_006_535D                          ; $5336: $20 $25
 
-    ld   a, $1A                                   ; $5338: $3E $1A
+    ld   a, NOISE_SFX_1A                          ; $5338: $3E $1A
     ldh  [hNoiseSfx], a                           ; $533A: $E0 $F4
     call label_27DD                               ; $533C: $CD $DD $27
     call DidKillEnemy                             ; $533F: $CD $50 $3F
@@ -198,7 +198,7 @@ jr_006_53F9:
     ld   [hl], 4 | ENTITY_PHYSICS_HARMLESS | ENTITY_PHYSICS_PROJECTILE_NOCLIP ; $5406: $36 $C4
     ld   a, TRANSCIENT_VFX_POOF                   ; $5408: $3E $02
     call AddTranscientVfx                         ; $540A: $CD $C7 $0C
-    ld   a, $29                                   ; $540D: $3E $29
+    ld   a, NOISE_SFX_UNKNOWN_29                  ; $540D: $3E $29
     ldh  [hNoiseSfx], a                           ; $540F: $E0 $F4
 
 label_006_5411:

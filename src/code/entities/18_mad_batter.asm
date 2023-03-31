@@ -165,7 +165,7 @@ MadBatterState6Handler::
 
     ld   a, ENTITY_MAD_BATTER                     ; $4FD8: $3E $CA
     call SpawnNewEntity_trampoline                ; $4FDA: $CD $86 $3B
-    ld   a, $26                                   ; $4FDD: $3E $26
+    ld   a, NOISE_SFX_UNKNOWN_26                  ; $4FDD: $3E $26
     ldh  [hNoiseSfx], a                           ; $4FDF: $E0 $F4
     ldh  a, [hMultiPurpose0]                      ; $4FE1: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $4FE3: $21 $00 $C2

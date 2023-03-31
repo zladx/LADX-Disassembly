@@ -49,7 +49,7 @@ AntiKirbyState0Handler::
     ld   [hl], $02                                ; $4288: $36 $02
     call GetEntityTransitionCountdown             ; $428A: $CD $05 $0C
     ld   [hl], $FF                                ; $428D: $36 $FF
-    ld   a, $3B                                   ; $428F: $3E $3B
+    ld   a, NOISE_SFX_UNKNOWN_3B                  ; $428F: $3E $3B
     ldh  [hNoiseSfx], a                           ; $4291: $E0 $F4
     ret                                           ; $4293: $C9
 

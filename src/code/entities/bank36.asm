@@ -250,7 +250,7 @@ func_036_4153::
 
 func_036_4161::
     call func_036_4365                            ; $4161: $CD $65 $43
-    ld   a, $40                                   ; $4164: $3E $40
+    ld   a, NOISE_SFX_UNKNOWN_40                  ; $4164: $3E $40
     ldh  [hNoiseSfx], a                           ; $4166: $E0 $F4
     ld   a, GAMEPLAY_PHOTO_BRIDGE                 ; $4168: $3E $1A
     ld   [wGameplayType], a                       ; $416A: $EA $95 $DB
@@ -1093,7 +1093,7 @@ func_036_467F::
     and  a                                        ; $4688: $A7
     jr   nz, .jr_469A                             ; $4689: $20 $0F
 
-    ld   a, $40                                   ; $468B: $3E $40
+    ld   a, NOISE_SFX_UNKNOWN_40                  ; $468B: $3E $40
     ldh  [hNoiseSfx], a                           ; $468D: $E0 $F4
     ld   hl, wBGPalette                           ; $468F: $21 $97 $DB
     xor  a                                        ; $4692: $AF
@@ -1419,7 +1419,7 @@ func_036_4830::
     jp   IncrementEntityState                     ; $4863: $C3 $12 $3B
 
 func_036_4866::
-    ld   a, $40                                   ; $4866: $3E $40
+    ld   a, NOISE_SFX_UNKNOWN_40                  ; $4866: $3E $40
     ldh  [hNoiseSfx], a                           ; $4868: $E0 $F4
     ld   a, GAMEPLAY_PHOTO_ULRIRA                 ; $486A: $3E $13
     ld   [wGameplayType], a                       ; $486C: $EA $95 $DB
@@ -2056,7 +2056,7 @@ func_036_4BCF::
     and  a                                        ; $4BD2: $A7
     ret  nz                                       ; $4BD3: $C0
 
-    ld   a, $40                                   ; $4BD4: $3E $40
+    ld   a, NOISE_SFX_UNKNOWN_40                  ; $4BD4: $3E $40
     ldh  [hNoiseSfx], a                           ; $4BD6: $E0 $F4
     ld   a, GAMEPLAY_PHOTO_ZORA                   ; $4BD8: $3E $17
     ld   [wGameplayType], a                       ; $4BDA: $EA $95 $DB
@@ -2740,7 +2740,7 @@ func_036_501C::
 
 func_036_503C::
     call func_036_6C89                            ; $503C: $CD $89 $6C
-    ld   a, $01                                   ; $503F: $3E $01
+    ld   a, WAVE_SFX_SEASHELL                     ; $503F: $3E $01
     ldh  [hWaveSfx], a                            ; $5041: $E0 $F3
     ld   d, $0C                                   ; $5043: $16 $0C
     call GiveInventoryItem_trampoline             ; $5045: $CD $6B $3E
@@ -4721,7 +4721,7 @@ func_036_5C69::
     ret                                           ; $5C71: $C9
 
 .jr_5C72
-    ld   a, $1A                                   ; $5C72: $3E $1A
+    ld   a, NOISE_SFX_1A                          ; $5C72: $3E $1A
     ldh  [hNoiseSfx], a                           ; $5C74: $E0 $F4
     call label_27DD                               ; $5C76: $CD $DD $27
     call DidKillEnemy                             ; $5C79: $CD $50 $3F
@@ -4762,7 +4762,7 @@ func_036_5CAB::
     ldh  [hMultiPurpose1], a                      ; $5CB1: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $5CB3: $3E $02
     call AddTranscientVfx                         ; $5CB5: $CD $C7 $0C
-    ld   a, $13                                   ; $5CB8: $3E $13
+    ld   a, NOISE_SFX_ENEMY_DESTROYED             ; $5CB8: $3E $13
     ldh  [hNoiseSfx], a                           ; $5CBA: $E0 $F4
     ret                                           ; $5CBC: $C9
 
@@ -6854,7 +6854,7 @@ ColorShellState8Handler::
     sub  ENTITY_COLOR_SHELL_RED                   ; $68B8: $D6 $E9
     add  $67                                      ; $68BA: $C6 $67
     ld   [hl], a                                  ; $68BC: $77
-    ld   a, $04                                   ; $68BD: $3E $04
+    ld   a, NOISE_SFX_DOOR_UNLOCKED               ; $68BD: $3E $04
     ldh  [hNoiseSfx], a                           ; $68BF: $E0 $F4
     jr   ret_036_68EB                             ; $68C1: $18 $28
 

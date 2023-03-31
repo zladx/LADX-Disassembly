@@ -39,7 +39,7 @@ func_005_6D00::
     ld   [hl], $80                                ; $6D04: $36 $80
     ld   a, $FF                                   ; $6D06: $3E $FF
     ld   [wC157], a                               ; $6D08: $EA $57 $C1
-    ld   a, $3E                                   ; $6D0B: $3E $3E
+    ld   a, NOISE_SFX_UNKNOWN_3E                  ; $6D0B: $3E $3E
     ldh  [hNoiseSfx], a                           ; $6D0D: $E0 $F4
     ld   [wD3E8], a                               ; $6D0F: $EA $E8 $D3
     ld   a, $04                                   ; $6D12: $3E $04
@@ -1223,7 +1223,7 @@ label_005_7570:
     ldh  [hMultiPurpose1], a                      ; $7579: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $757B: $3E $02
     call AddTranscientVfx                         ; $757D: $CD $C7 $0C
-    ld   a, $13                                   ; $7580: $3E $13
+    ld   a, NOISE_SFX_ENEMY_DESTROYED             ; $7580: $3E $13
     ldh  [hNoiseSfx], a                           ; $7582: $E0 $F4
     ret                                           ; $7584: $C9
 
@@ -1271,7 +1271,7 @@ DropHeartContainer_05::
 jr_005_75C0:
     call ClearEntityStatus_05                     ; $75C0: $CD $4B $7B
     ld   hl, hNoiseSfx                            ; $75C3: $21 $F4 $FF
-    ld   [hl], $1A                                ; $75C6: $36 $1A
+    ld   [hl], NOISE_SFX_1A                       ; $75C6: $36 $1A
     ret                                           ; $75C8: $C9
 
 Data_005_75C9::

@@ -351,7 +351,7 @@ func_007_4475::
 
 func_007_4499::
     call func_007_4429                            ; $4499: $CD $29 $44
-    ld   a, $40                                   ; $449C: $3E $40
+    ld   a, NOISE_SFX_UNKNOWN_40                  ; $449C: $3E $40
     ldh  [hNoiseSfx], a                           ; $449E: $E0 $F4
     ld   a, GAMEPLAY_PHOTO_FISHERMAN              ; $44A0: $3E $16
     ld   [wGameplayType], a                       ; $44A2: $EA $95 $DB

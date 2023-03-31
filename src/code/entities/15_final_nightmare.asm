@@ -393,7 +393,7 @@ func_015_52AA::
     jp   label_015_5335                           ; $52AE: $C3 $35 $53
 
 func_015_52B1::
-    ld   a, $23                                   ; $52B1: $3E $23
+    ld   a, WAVE_SFX_UNKNOWN_23                   ; $52B1: $3E $23
     ldh  [hWaveSfx], a                            ; $52B3: $E0 $F3
     ret                                           ; $52B5: $C9
 
@@ -519,7 +519,7 @@ func_015_5370::
     ld   [hl], $80                                ; $5378: $36 $80
     call IncrementEntityState                     ; $537A: $CD $12 $3B
     ld   [hl], $04                                ; $537D: $36 $04
-    ld   a, $21                                   ; $537F: $3E $21
+    ld   a, WAVE_SFX_UNKNOWN_21                   ; $537F: $3E $21
     ldh  [hWaveSfx], a                            ; $5381: $E0 $F3
 
 func_015_5383::
@@ -639,7 +639,7 @@ func_015_53E1::
     ld   [hl], $05                                ; $542C: $36 $05
 
 func_015_542E::
-    ld   a, $37                                   ; $542E: $3E $37
+    ld   a, NOISE_SFX_UNKNOWN_37                  ; $542E: $3E $37
     ldh  [hNoiseSfx], a                           ; $5430: $E0 $F4
     jp   func_015_5383                            ; $5432: $C3 $83 $53
 
@@ -719,7 +719,7 @@ label_015_54A2:
     ld   hl, wEntitiesFlashCountdownTable         ; $54A2: $21 $20 $C4
     add  hl, bc                                   ; $54A5: $09
     ld   [hl], $14                                ; $54A6: $36 $14
-    ld   a, $07                                   ; $54A8: $3E $07
+    ld   a, WAVE_SFX_BOSS_GRAWL                   ; $54A8: $3E $07
     ldh  [hWaveSfx], a                            ; $54AA: $E0 $F3
     ld   a, JINGLE_SHADOW_1_HURT                  ; $54AC: $3E $37
     ldh  [hJingle], a                             ; $54AE: $E0 $F2
@@ -1055,7 +1055,7 @@ func_015_580B::
     call GetEntityTransitionCountdown             ; $580B: $CD $05 $0C
     jr   nz, func_015_5819                        ; $580E: $20 $09
 
-    ld   a, $22                                   ; $5810: $3E $22
+    ld   a, WAVE_SFX_UNKNOWN_22                   ; $5810: $3E $22
     ldh  [hWaveSfx], a                            ; $5812: $E0 $F3
     ld   [hl], $C0                                ; $5814: $36 $C0
     jp   IncrementEntityState                     ; $5816: $C3 $12 $3B
@@ -1127,7 +1127,7 @@ func_015_5854::
     ld   hl, wEntitiesHitboxFlagsTable            ; $588B: $21 $50 $C3
     add  hl, de                                   ; $588E: $19
     ld   [hl], d                                  ; $588F: $72
-    ld   a, $38                                   ; $5890: $3E $38
+    ld   a, NOISE_SFX_UNKNOWN_38                  ; $5890: $3E $38
     ldh  [hNoiseSfx], a                           ; $5892: $E0 $F4
     ld   a, [wD220]                               ; $5894: $FA $20 $D2
     cp   $02                                      ; $5897: $FE $02
@@ -1145,7 +1145,7 @@ func_015_5854::
     ld   hl, wEntitiesTransitionCountdownTable    ; $58AB: $21 $E0 $C2
     add  hl, de                                   ; $58AE: $19
     ld   [hl], $1C                                ; $58AF: $36 $1C
-    ld   a, $39                                   ; $58B1: $3E $39
+    ld   a, NOISE_SFX_UNKNOWN_39                  ; $58B1: $3E $39
     ldh  [hNoiseSfx], a                           ; $58B3: $E0 $F4
 
 .jr_58B5
@@ -1779,7 +1779,7 @@ func_015_5E38::
     ret                                           ; $5E84: $C9
 
 func_015_5E85::
-    ld   a, $08                                   ; $5E85: $3E $08
+    ld   a, NOISE_SFX_UNKNOWN_08                  ; $5E85: $3E $08
     ldh  [hNoiseSfx], a                           ; $5E87: $E0 $F4
     ld   a, $18                                   ; $5E89: $3E $18
     call GetVectorTowardsLink_trampoline          ; $5E8B: $CD $B5 $3B
@@ -1865,7 +1865,7 @@ jr_015_5F0F:
     ld   hl, wEntitiesFlashCountdownTable         ; $5F0F: $21 $20 $C4
     add  hl, de                                   ; $5F12: $19
     ld   [hl], $14                                ; $5F13: $36 $14
-    ld   a, $07                                   ; $5F15: $3E $07
+    ld   a, WAVE_SFX_BOSS_GRAWL                   ; $5F15: $3E $07
     ldh  [hWaveSfx], a                            ; $5F17: $E0 $F3
 
 ret_015_5F19:
@@ -1904,7 +1904,7 @@ jr_015_5F3F:
     and  a                                        ; $5F44: $A7
     jr   z, ret_015_5F99                          ; $5F45: $28 $52
 
-    ld   a, $36                                   ; $5F47: $3E $36
+    ld   a, NOISE_SFX_UNKNOWN_36                  ; $5F47: $3E $36
     ldh  [hNoiseSfx], a                           ; $5F49: $E0 $F4
     xor  a                                        ; $5F4B: $AF
 
@@ -2492,7 +2492,7 @@ jr_015_63F5:
     ld   [hl], $09                                ; $6410: $36 $09
     ld   a, $09                                   ; $6412: $3E $09
     ldh  [hActiveEntityState], a                  ; $6414: $E0 $F0
-    ld   a, $10                                   ; $6416: $3E $10
+    ld   a, WAVE_SFX_BOSS_AGONY                   ; $6416: $3E $10
     ldh  [hWaveSfx], a                            ; $6418: $E0 $F3
     call GetEntityTransitionCountdown             ; $641A: $CD $05 $0C
     ld   [hl], $80                                ; $641D: $36 $80
@@ -2654,7 +2654,7 @@ func_015_65A6::
     jr   nz, .jr_65C4                             ; $65BD: $20 $05
 
     ld   hl, hNoiseSfx                            ; $65BF: $21 $F4 $FF
-    ld   [hl], $19                                ; $65C2: $36 $19
+    ld   [hl], NOISE_SFX_TITLE_APPEARS            ; $65C2: $36 $19
 
 .jr_65C4
     cp   $58                                      ; $65C4: $FE $58
@@ -2901,7 +2901,7 @@ func_015_66CC::
     call ApplyVectorTowardsLink_trampoline        ; $6741: $CD $AA $3B
     call GetEntityTransitionCountdown             ; $6744: $CD $05 $0C
     ld   [hl], $30                                ; $6747: $36 $30
-    ld   a, $27                                   ; $6749: $3E $27
+    ld   a, NOISE_SFX_UNKNOWN_27                  ; $6749: $3E $27
     ldh  [hNoiseSfx], a                           ; $674B: $E0 $F4
     pop  bc                                       ; $674D: $C1
 
@@ -3073,7 +3073,7 @@ jr_015_683F:
     call GetEntityTransitionCountdown             ; $684D: $CD $05 $0C
     ld   [hl], $80                                ; $6850: $36 $80
     call label_27F2                               ; $6852: $CD $F2 $27
-    ld   a, $10                                   ; $6855: $3E $10
+    ld   a, WAVE_SFX_BOSS_AGONY                   ; $6855: $3E $10
     ldh  [hWaveSfx], a                            ; $6857: $E0 $F3
     call func_015_5383                            ; $6859: $CD $83 $53
     jp   IncrementEntityState                     ; $685C: $C3 $12 $3B
@@ -3411,7 +3411,7 @@ label_015_6C61:
     and  $0F                                      ; $6CA3: $E6 $0F
     jr   nz, .jr_6CAB                             ; $6CA5: $20 $04
 
-    ld   a, $3A                                   ; $6CA7: $3E $3A
+    ld   a, NOISE_SFX_UNKNOWN_3A                  ; $6CA7: $3E $3A
     ldh  [hNoiseSfx], a                           ; $6CA9: $E0 $F4
 
 .jr_6CAB
@@ -3598,7 +3598,7 @@ func_015_6D9C::
     cp   $01                                      ; $6DAB: $FE $01
     jr   nz, .jr_6DB8                             ; $6DAD: $20 $09
 
-    ld   a, $28                                   ; $6DAF: $3E $28
+    ld   a, NOISE_SFX_UNKNOWN_28                  ; $6DAF: $3E $28
     ldh  [hNoiseSfx], a                           ; $6DB1: $E0 $F4
     ld   a, $30                                   ; $6DB3: $3E $30
     call ApplyVectorTowardsLink_trampoline        ; $6DB5: $CD $AA $3B
@@ -3918,9 +3918,9 @@ func_015_6FA1::
     ret  nz                                       ; $6FAE: $C0
 
     ld   [hl], $80                                ; $6FAF: $36 $80
-    ld   a, $3D                                   ; $6FB1: $3E $3D
+    ld   a, NOISE_SFX_UNKNOWN_3D                  ; $6FB1: $3E $3D
     ldh  [hNoiseSfx], a                           ; $6FB3: $E0 $F4
-    ld   a, $10                                   ; $6FB5: $3E $10
+    ld   a, WAVE_SFX_BOSS_AGONY                   ; $6FB5: $3E $10
     ldh  [hWaveSfx], a                            ; $6FB7: $E0 $F3
     jp   IncrementEntityState                     ; $6FB9: $C3 $12 $3B
 
@@ -4321,7 +4321,7 @@ ENDC
     ld   [wIgnoreLinkCollisionsCountdown], a      ; $7311: $EA $3E $C1
     ld   a, $30                                   ; $7314: $3E $30
     ld   [wInvincibilityCounter], a               ; $7316: $EA $C7 $DB
-    ld   a, $03                                   ; $7319: $3E $03
+    ld   a, WAVE_SFX_LINK_HURT                    ; $7319: $3E $03
     ldh  [hWaveSfx], a                            ; $731B: $E0 $F3
 
 .jr_731D

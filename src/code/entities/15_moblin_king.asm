@@ -138,7 +138,7 @@ func_015_4780::
     call SpawnNewEntity_trampoline                ; $478B: $CD $86 $3B
     jr   c, .jr_47D1                              ; $478E: $38 $41
 
-    ld   a, $0A                                   ; $4790: $3E $0A
+    ld   a, NOISE_SFX_SHOOT_ARROW                 ; $4790: $3E $0A
     ldh  [hNoiseSfx], a                           ; $4792: $E0 $F4
     push bc                                       ; $4794: $C5
     ldh  a, [hMultiPurpose2]                      ; $4795: $F0 $D9

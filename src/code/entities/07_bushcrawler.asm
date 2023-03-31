@@ -115,7 +115,7 @@ BushCrawlerEntityHandler::
     add  hl, bc                                   ; $40A9: $09
     ld   [hl], $05                                ; $40AA: $36 $05
     ld   hl, hNoiseSfx                            ; $40AC: $21 $F4 $FF
-    ld   [hl], $05                                ; $40AF: $36 $05
+    ld   [hl], NOISE_SFX_CUT_GRASS                ; $40AF: $36 $05
     call GetEntityPrivateCountdown1               ; $40B1: $CD $00 $0C
     ld   [hl], $1F                                ; $40B4: $36 $1F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $40B6: $21 $40 $C3
@@ -245,7 +245,7 @@ jr_007_415A:
     call GetEntityTransitionCountdown             ; $417E: $CD $05 $0C
     ld   [hl], $02                                ; $4181: $36 $02
     ld   hl, hWaveSfx                             ; $4183: $21 $F3 $FF
-    ld   [hl], $02                                ; $4186: $36 $02
+    ld   [hl], WAVE_SFX_ZIP                       ; $4186: $36 $02
     ld   hl, wEntitiesTypeTable                   ; $4188: $21 $A0 $C3
     add  hl, bc                                   ; $418B: $09
     ld   [hl], $05                                ; $418C: $36 $05

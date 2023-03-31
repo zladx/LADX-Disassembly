@@ -211,7 +211,7 @@ HinoxState3Handler::
     call IncrementEntityState                     ; $50F6: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $50F9: $CD $05 $0C
     ld   [hl], $4F                                ; $50FC: $36 $4F
-    ld   a, $16                                   ; $50FE: $3E $16
+    ld   a, WAVE_SFX_BOSS_HIT                     ; $50FE: $3E $16
     ldh  [hWaveSfx], a                            ; $5100: $E0 $F3
 
 .jr_5102

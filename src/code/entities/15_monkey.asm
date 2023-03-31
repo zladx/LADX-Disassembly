@@ -205,7 +205,7 @@ func_015_7793::
     call IncrementEntityState                     ; $77B7: $CD $12 $3B
 
 jr_015_77BA:
-    ld   a, $14                                   ; $77BA: $3E $14
+    ld   a, WAVE_SFX_UNKNOWN_14                   ; $77BA: $3E $14
     ldh  [hWaveSfx], a                            ; $77BC: $E0 $F3
 
 ret_015_77BE:

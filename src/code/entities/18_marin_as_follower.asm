@@ -274,7 +274,7 @@ jr_018_5B3B:
     ld   hl, hJingle                              ; $5B3B: $21 $F2 $FF
     ld   [hl], JINGLE_HUGE_BUMP                   ; $5B3E: $36 $0B
     ld   hl, hWaveSfx                             ; $5B40: $21 $F3 $FF
-    ld   [hl], $03                                ; $5B43: $36 $03
+    ld   [hl], WAVE_SFX_LINK_HURT                 ; $5B43: $36 $03
     ld   hl, wC157                                ; $5B45: $21 $57 $C1
     ld   [hl], $18                                ; $5B48: $36 $18
     ld   hl, wC158                                ; $5B4A: $21 $58 $C1
@@ -620,7 +620,7 @@ jr_018_5CEF:
     cp   $02                                      ; $5D55: $FE $02
     jr   c, .jr_5D5E                              ; $5D57: $38 $05
 
-    ld   a, $07                                   ; $5D59: $3E $07
+    ld   a, NOISE_SFX_FOOTSTEP                    ; $5D59: $3E $07
     ldh  [hNoiseSfx], a                           ; $5D5B: $E0 $F4
     ret                                           ; $5D5D: $C9
 

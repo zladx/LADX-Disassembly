@@ -606,7 +606,7 @@ VireState7Handler::
     jp   nz, label_018_6E36                       ; $6D95: $C2 $36 $6E
 
 func_018_6D98::
-    ld   a, $0D                                   ; $6D98: $3E $0D
+    ld   a, NOISE_SFX_MAGIC_ROD                   ; $6D98: $3E $0D
     ldh  [hNoiseSfx], a                           ; $6D9A: $E0 $F4
     ldh  a, [hLinkPositionY]                      ; $6D9C: $F0 $99
     push af                                       ; $6D9E: $F5

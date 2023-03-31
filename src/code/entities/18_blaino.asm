@@ -159,7 +159,7 @@ label_018_65B8:
     cp   $01                                      ; $65BB: $FE $01
     jr   nz, .jr_65C3                             ; $65BD: $20 $04
 
-    ld   a, $0A                                   ; $65BF: $3E $0A
+    ld   a, NOISE_SFX_SHOOT_ARROW                 ; $65BF: $3E $0A
     ldh  [hNoiseSfx], a                           ; $65C1: $E0 $F4
 
 .jr_65C3

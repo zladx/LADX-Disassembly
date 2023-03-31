@@ -179,7 +179,7 @@ SideViewPlatformEntityHandler::
     cp   $03                                      ; $6470: $FE $03
     jr   nz, .jr_6478                             ; $6472: $20 $04
 
-    ld   a, $11                                   ; $6474: $3E $11
+    ld   a, NOISE_SFX_BLOCK_RUMBLE                ; $6474: $3E $11
     ldh  [hNoiseSfx], a                           ; $6476: $E0 $F4
 
 .jr_6478

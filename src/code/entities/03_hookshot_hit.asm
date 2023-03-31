@@ -69,7 +69,7 @@ jr_003_69F8:
     ldh  [hMultiPurpose1], a                      ; $6A12: $E0 $D8
     ld   a, $08                                   ; $6A14: $3E $08
     call AddTranscientVfx                         ; $6A16: $CD $C7 $0C
-    ld   a, $13                                   ; $6A19: $3E $13
+    ld   a, NOISE_SFX_ENEMY_DESTROYED             ; $6A19: $3E $13
     ldh  [hNoiseSfx], a                           ; $6A1B: $E0 $F4
 
 ret_003_6A1D:

@@ -100,7 +100,7 @@ EaglesTowerOpeningState1Handler::
     cp   $A0                                      ; $6230: $FE $A0
     jr   nz, .jr_6238                             ; $6232: $20 $04
 
-    ld   a, $1D                                   ; $6234: $3E $1D
+    ld   a, NOISE_SFX_UNKNOWN_1D                  ; $6234: $3E $1D
     ldh  [hNoiseSfx], a                           ; $6236: $E0 $F4
 
 .jr_6238
@@ -592,7 +592,7 @@ AnimateDungeonDoorOpening:
 ._03 dw func_019_68F9                             ; $6858
 
 func_019_685A::
-    ld   a, $04                                   ; $685A: $3E $04
+    ld   a, NOISE_SFX_DOOR_UNLOCKED               ; $685A: $3E $04
     ldh  [hNoiseSfx], a                           ; $685C: $E0 $F4
     call GetEntityTransitionCountdown             ; $685E: $CD $05 $0C
     ld   [hl], $AC                                ; $6861: $36 $AC
@@ -606,7 +606,7 @@ func_019_686B::
     jr   nz, .jr_6877                             ; $6870: $20 $05
 
     ld   hl, hNoiseSfx                            ; $6872: $21 $F4 $FF
-    ld   [hl], $2E                                ; $6875: $36 $2E
+    ld   [hl], NOISE_SFX_UNKNOWN_2E               ; $6875: $36 $2E
 
 .jr_6877
     and  a                                        ; $6877: $A7

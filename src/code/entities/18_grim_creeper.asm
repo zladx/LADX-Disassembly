@@ -32,7 +32,7 @@ GrimCreeperEntityHandler::
     cp   $01                                      ; $7008: $FE $01
     jr   nz, .jr_7011                             ; $700A: $20 $05
 
-    ld   a, $3F                                   ; $700C: $3E $3F
+    ld   a, NOISE_SFX_UNKNOWN_3F                  ; $700C: $3E $3F
     ldh  [hNoiseSfx], a                           ; $700E: $E0 $F4
     inc  [hl]                                     ; $7010: $34
 

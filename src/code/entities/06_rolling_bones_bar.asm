@@ -174,7 +174,7 @@ RollingBonesBarRollingHandler::
     cp   $09                                      ; $6FB7: $FE $09
     jr   c, .jr_6FC0                              ; $6FB9: $38 $05
 
-    ld   a, $1A                                   ; $6FBB: $3E $1A
+    ld   a, WAVE_SFX_UNKNOWN_1A                   ; $6FBB: $3E $1A
     ldh  [hWaveSfx], a                            ; $6FBD: $E0 $F3
     xor  a                                        ; $6FBF: $AF
 

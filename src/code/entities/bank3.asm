@@ -2260,12 +2260,12 @@ jr_003_556F:
     cp   ACTIVE_POWER_UP_PIECE_OF_POWER           ; $558C: $FE $01
     jr   nz, .jr_5594                             ; $558E: $20 $04
 
-    ld   a, $12                                   ; $5590: $3E $12
+    ld   a, WAVE_SFX_UNKNOWN_12                   ; $5590: $3E $12
     ldh  [hWaveSfx], a                            ; $5592: $E0 $F3
 
 .jr_5594
     ld   hl, hNoiseSfx                            ; $5594: $21 $F4 $FF
-    ld   [hl], $13                                ; $5597: $36 $13
+    ld   [hl], NOISE_SFX_ENEMY_DESTROYED          ; $5597: $36 $13
 
 jr_003_5599:
     call ApplyRecoilIfNeeded_03                   ; $5599: $CD $A9 $7F
@@ -3520,7 +3520,7 @@ animateSirensInstrumentPickup:
     and  a                                        ; $5E3D: $A7
     jr   nz, .jr_5E45                             ; $5E3E: $20 $05
 
-    ld   a, $2C                                   ; $5E40: $3E $2C
+    ld   a, NOISE_SFX_UNKNOWN_2C                  ; $5E40: $3E $2C
     ldh  [hNoiseSfx], a                           ; $5E42: $E0 $F4
     xor  a                                        ; $5E44: $AF
 
@@ -4057,7 +4057,7 @@ jr_003_6112:
     cp   ENTITY_KEY_DROP_POINT                    ; $6116: $FE $30
     jr   nz, .keyDropPointEnd                     ; $6118: $20 $06
 
-    ld   a, $17                                   ; $611A: $3E $17
+    ld   a, NOISE_SFX_UNKNOWN_17                  ; $611A: $3E $17
     ldh  [hNoiseSfx], a                           ; $611C: $E0 $F4
     jr   .bombEnd                                 ; $611E: $18 $14
 .keyDropPointEnd
@@ -5955,7 +5955,7 @@ ApplyLinkCollisionWithEnemy::
     ld   a, $F0                                   ; $6CED: $3E $F0
     ldh  [hLinkSpeedY], a                         ; $6CEF: $E0 $9B
     call ClearEntitySpeed                         ; $6CF1: $CD $7F $3D
-    ld   a, $0E                                   ; $6CF4: $3E $0E
+    ld   a, WAVE_SFX_SWITCH_BUTTON                ; $6CF4: $3E $0E
     ldh  [hWaveSfx], a                            ; $6CF6: $E0 $F3
     ret                                           ; $6CF8: $C9
 .cheepCheepEnd
@@ -5999,7 +5999,7 @@ ApplyLinkCollisionWithEnemy::
     ld   [hl], $02                                ; $6D23: $36 $02
     call GetEntityTransitionCountdown             ; $6D25: $CD $05 $0C
     ld   [hl], $30                                ; $6D28: $36 $30
-    ld   a, $0E                                   ; $6D2A: $3E $0E
+    ld   a, WAVE_SFX_SWITCH_BUTTON                ; $6D2A: $3E $0E
     ldh  [hWaveSfx], a                            ; $6D2C: $E0 $F3
     ldh  a, [hIsSideScrolling]                    ; $6D2E: $F0 $F9
     and  a                                        ; $6D30: $A7
@@ -6589,7 +6589,7 @@ EnemyCollidedWithSword::
     ld   [wSwordAnimationState], a                ; $7032: $EA $37 $C1
     ld   [wC16A], a                               ; $7035: $EA $6A $C1
     ld   [wIsUsingSpinAttack], a                  ; $7038: $EA $21 $C1
-    ld   a, $1C                                   ; $703B: $3E $1C
+    ld   a, NOISE_SFX_UNKNOWN_1C                  ; $703B: $3E $1C
     ldh  [hNoiseSfx], a                           ; $703D: $E0 $F4
     jp   ApplyLinkCollisionWithEnemy              ; $703F: $C3 $D5 $6C
 .buzzBlobEnd

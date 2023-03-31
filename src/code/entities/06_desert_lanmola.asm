@@ -145,7 +145,7 @@ jr_006_56BB:
     ldh  [hMultiPurpose1], a                      ; $56BB: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $56BD: $3E $02
     call AddTranscientVfx                         ; $56BF: $CD $C7 $0C
-    ld   a, $13                                   ; $56C2: $3E $13
+    ld   a, NOISE_SFX_ENEMY_DESTROYED             ; $56C2: $3E $13
     ldh  [hNoiseSfx], a                           ; $56C4: $E0 $F4
 
 ret_006_56C6:
@@ -401,7 +401,7 @@ func_006_5835::
     ld   [wC1CE], a                               ; $584C: $EA $CE $C1
     call GetEntityPrivateCountdown1               ; $584F: $CD $00 $0C
     ld   [hl], $60                                ; $5852: $36 $60
-    ld   a, $23                                   ; $5854: $3E $23
+    ld   a, NOISE_SFX_UNKNOWN_23                  ; $5854: $3E $23
     ldh  [hNoiseSfx], a                           ; $5856: $E0 $F4
 
 .jr_5858

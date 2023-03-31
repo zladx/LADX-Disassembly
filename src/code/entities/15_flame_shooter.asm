@@ -41,7 +41,7 @@ FlameShooterEntityHandler::
     call SpawnNewEntity_trampoline                ; $4D73: $CD $86 $3B
     ret  c                                        ; $4D76: $D8
 
-    ld   a, $12                                   ; $4D77: $3E $12
+    ld   a, NOISE_SFX_BURSTING_FLAME              ; $4D77: $3E $12
     ldh  [hNoiseSfx], a                           ; $4D79: $E0 $F4
     ldh  a, [hMultiPurpose0]                      ; $4D7B: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $4D7D: $21 $00 $C2

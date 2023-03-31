@@ -138,7 +138,7 @@ jr_018_79CF:
 .jr_7A39
     call GetEntityTransitionCountdown             ; $7A39: $CD $05 $0C
     ld   [hl], b                                  ; $7A3C: $70
-    ld   a, $12                                   ; $7A3D: $3E $12
+    ld   a, NOISE_SFX_BURSTING_FLAME              ; $7A3D: $3E $12
     ldh  [hNoiseSfx], a                           ; $7A3F: $E0 $F4
     ld   de, Data_018_795E                        ; $7A41: $11 $5E $79
     push de                                       ; $7A44: $D5

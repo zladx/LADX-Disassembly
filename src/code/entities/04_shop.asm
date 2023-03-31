@@ -704,7 +704,7 @@ func_004_7AED::
 
     ld   a, ENTITY_MAD_BATTER                     ; $7AF3: $3E $CA
     call SpawnNewEntity_trampoline                ; $7AF5: $CD $86 $3B
-    ld   a, $26                                   ; $7AF8: $3E $26
+    ld   a, NOISE_SFX_UNKNOWN_26                  ; $7AF8: $3E $26
     ldh  [hNoiseSfx], a                           ; $7AFA: $E0 $F4
     ldh  a, [hMultiPurpose0]                      ; $7AFC: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $7AFE: $21 $00 $C2

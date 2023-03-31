@@ -111,7 +111,7 @@ jr_006_7B61:
 
     call DidKillEnemy.label_3F5E                  ; $7B89: $CD $5E $3F
     call ClearEntityStatus_06                     ; $7B8C: $CD $DB $65
-    ld   a, $01                                   ; $7B8F: $3E $01
+    ld   a, WAVE_SFX_SEASHELL                     ; $7B8F: $3E $01
     ldh  [hWaveSfx], a                            ; $7B91: $E0 $F3
     ldh  a, [hActiveEntitySpriteVariant]          ; $7B93: $F0 $F1
     JP_TABLE                                      ; $7B95

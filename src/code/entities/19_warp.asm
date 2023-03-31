@@ -69,7 +69,7 @@ WarpEntityHandler::
     ld   [wC198], a                               ; $426A: $EA $98 $C1
     ld   a, $51                                   ; $426D: $3E $51
     ld   [wDBCB], a                               ; $426F: $EA $CB $DB
-    ld   a, $0C                                   ; $4272: $3E $0C
+    ld   a, WAVE_SFX_LINK_FALLS                   ; $4272: $3E $0C
     ldh  [hWaveSfx], a                            ; $4274: $E0 $F3
     jp   ClearEntityStatus_19                     ; $4276: $C3 $61 $7E
 

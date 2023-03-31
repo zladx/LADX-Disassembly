@@ -196,7 +196,7 @@ WalrusState3Handler::
     jr   nz, .jr_5698                             ; $5682: $20 $14
 
     ld   [wIsMarinSinging], a                     ; $5684: $EA $C8 $C3
-    ld   a, $11                                   ; $5687: $3E $11
+    ld   a, NOISE_SFX_BLOCK_RUMBLE                ; $5687: $3E $11
     ldh  [hNoiseSfx], a                           ; $5689: $E0 $F4
     call GetEntityTransitionCountdown             ; $568B: $CD $05 $0C
     ld   [hl], $08                                ; $568E: $36 $08
@@ -313,7 +313,7 @@ WalrusState5Handler::
 
 ; Walrus splash VFX
 func_018_572E::
-    ld   a, $24                                   ; $572E: $3E $24
+    ld   a, NOISE_SFX_UNKNOWN_24                  ; $572E: $3E $24
     ldh  [hNoiseSfx], a                           ; $5730: $E0 $F4
     ldh  a, [hActiveEntityPosX]                   ; $5732: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $5734: $E0 $D7

@@ -156,7 +156,7 @@ label_004_68E4:
     and  $1F                                      ; $68F4: $E6 $1F
     jr   nz, .ret_68FC                            ; $68F6: $20 $04
 
-    ld   a, $1F                                   ; $68F8: $3E $1F
+    ld   a, NOISE_SFX_UNKNOWN_1F                  ; $68F8: $3E $1F
     ldh  [hNoiseSfx], a                           ; $68FA: $E0 $F4
 
 .ret_68FC

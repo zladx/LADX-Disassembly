@@ -47,7 +47,7 @@ MermaidStatueInteractiveHandler::
     ld   [wTradeSequenceItem], a                  ; $4972: $EA $0E $DB
     ld   a, $01                                   ; $4975: $3E $01
     ld   [wExchangingTradeSequenceItem], a        ; $4977: $EA $7F $DB
-    ld   a, $04                                   ; $497A: $3E $04
+    ld   a, NOISE_SFX_DOOR_UNLOCKED               ; $497A: $3E $04
     ldh  [hNoiseSfx], a                           ; $497C: $E0 $F4
     call GetEntityTransitionCountdown             ; $497E: $CD $05 $0C
     ld   [hl], $60                                ; $4981: $36 $60
@@ -79,7 +79,7 @@ MermaidStatueOpeningHandler::
     jr   nz, .jr_49B6                             ; $49AF: $20 $05
 
     ld   hl, hNoiseSfx                            ; $49B1: $21 $F4 $FF
-    ld   [hl], $11                                ; $49B4: $36 $11
+    ld   [hl], NOISE_SFX_BLOCK_RUMBLE             ; $49B4: $36 $11
 
 .jr_49B6
     ret  nc                                       ; $49B6: $D0

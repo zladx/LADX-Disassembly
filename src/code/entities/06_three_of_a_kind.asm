@@ -286,7 +286,7 @@ jr_006_4A68:
     add  hl, de                                   ; $4A99: $19
     ld   [hl], 4                                  ; $4A9A: $36 $04
     ld   hl, hNoiseSfx                            ; $4A9C: $21 $F4 $FF
-    ld   [hl], $13                                ; $4A9F: $36 $13
+    ld   [hl], NOISE_SFX_ENEMY_DESTROYED          ; $4A9F: $36 $13
 
 jr_006_4AA1:
     dec  e                                        ; $4AA1: $1D

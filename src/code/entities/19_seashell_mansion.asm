@@ -158,7 +158,7 @@ SeashellMansionState2Handler::
 .jr_7294
     add  [hl]                                     ; $7294: $86
     ld   [hl], a                                  ; $7295: $77
-    ld   a, $06                                   ; $7296: $3E $06
+    ld   a, WAVE_SFX_HEART_PICKED_UP              ; $7296: $3E $06
     ldh  [hWaveSfx], a                            ; $7298: $E0 $F3
 
 ret_019_729A:
@@ -469,7 +469,7 @@ func_019_7511::
     jr   nz, func_019_7526                        ; $751B: $20 $09
 
     ld   [hl], $FF                                ; $751D: $36 $FF
-    ld   a, $1E                                   ; $751F: $3E $1E
+    ld   a, WAVE_SFX_UNKNOWN_1E                   ; $751F: $3E $1E
     ldh  [hWaveSfx], a                            ; $7521: $E0 $F3
     call IncrementEntityState                     ; $7523: $CD $12 $3B
 
@@ -490,7 +490,7 @@ func_019_7526::
     and  $07                                      ; $7537: $E6 $07
     jr   nz, .jr_7547                             ; $7539: $20 $0C
 
-    ld   a, $33                                   ; $753B: $3E $33
+    ld   a, NOISE_SFX_UNKNOWN_33                  ; $753B: $3E $33
     ldh  [hNoiseSfx], a                           ; $753D: $E0 $F4
     call GetRandomByte                            ; $753F: $CD $0D $28
     and  $03                                      ; $7542: $E6 $03
@@ -628,7 +628,7 @@ func_019_767B::
     jr   c, .ret_76B0                             ; $7699: $38 $15
 
     ld   [hl], $70                                ; $769B: $36 $70
-    ld   a, $17                                   ; $769D: $3E $17
+    ld   a, NOISE_SFX_UNKNOWN_17                  ; $769D: $3E $17
     ldh  [hNoiseSfx], a                           ; $769F: $E0 $F4
     ld   hl, wEntitiesSpeedYTable                 ; $76A1: $21 $50 $C2
     add  hl, bc                                   ; $76A4: $09
@@ -843,7 +843,7 @@ func_019_787D::
     call CheckLinkCollisionWithEnemy_trampoline   ; $78A4: $CD $5A $3B
     jr   nc, ret_019_78CB                         ; $78A7: $30 $22
 
-    ld   a, $01                                   ; $78A9: $3E $01
+    ld   a, WAVE_SFX_SEASHELL                     ; $78A9: $3E $01
     ldh  [hWaveSfx], a                            ; $78AB: $E0 $F3
     call ClearEntityStatus_19                     ; $78AD: $CD $61 $7E
     ld   hl, wIndoorBRoomStatus + $E9             ; $78B0: $21 $E9 $DA

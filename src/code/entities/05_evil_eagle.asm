@@ -278,7 +278,7 @@ func_005_5B6B::
     call ClearEntitySpeed                         ; $5B8F: $CD $7F $3D
     call IncrementEntityState                     ; $5B92: $CD $12 $3B
     ld   [hl], $0E                                ; $5B95: $36 $0E
-    ld   a, $31                                   ; $5B97: $3E $31
+    ld   a, NOISE_SFX_EAGLE_LIFT_UP               ; $5B97: $3E $31
     ldh  [hNoiseSfx], a                           ; $5B99: $E0 $F4
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5B9B: $21 $40 $C3
     add  hl, bc                                   ; $5B9E: $09
@@ -366,7 +366,7 @@ func_005_5BEC::
     ld   [hl], $80                                ; $5C1E: $36 $80
 
 func_005_5C20::
-    ld   a, $22                                   ; $5C20: $3E $22
+    ld   a, NOISE_SFX_UNKNOWN_22                  ; $5C20: $3E $22
     ldh  [hNoiseSfx], a                           ; $5C22: $E0 $F4
 
 ret_005_5C24:
@@ -376,7 +376,7 @@ jr_005_5C25:
     call IncrementEntityState                     ; $5C25: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $5C28: $CD $05 $0C
     ld   [hl], $30                                ; $5C2B: $36 $30
-    ld   a, $30                                   ; $5C2D: $3E $30
+    ld   a, NOISE_SFX_EAGLE_TOUCHDOWN             ; $5C2D: $3E $30
     ldh  [hNoiseSfx], a                           ; $5C2F: $E0 $F4
     ret                                           ; $5C31: $C9
 
@@ -828,7 +828,7 @@ jr_005_5EA3:
     cp   $22                                      ; $5EA7: $FE $22
     jr   c, .jr_5EB0                              ; $5EA9: $38 $05
 
-    ld   a, $32                                   ; $5EAB: $3E $32
+    ld   a, NOISE_SFX_UNKNOWN_32                  ; $5EAB: $3E $32
     ldh  [hNoiseSfx], a                           ; $5EAD: $E0 $F4
     xor  a                                        ; $5EAF: $AF
 
@@ -1090,7 +1090,7 @@ func_005_6028::
     dec  a                                        ; $6033: $3D
     jr   nz, .jr_603A                             ; $6034: $20 $04
 
-    ld   a, $31                                   ; $6036: $3E $31
+    ld   a, NOISE_SFX_EAGLE_LIFT_UP               ; $6036: $3E $31
     ldh  [hNoiseSfx], a                           ; $6038: $E0 $F4
 
 .jr_603A

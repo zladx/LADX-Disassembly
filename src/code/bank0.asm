@@ -2502,7 +2502,7 @@ CheckItemsSwordCollision::
     ret                                           ; $16F7: $C9
 
 .label_16F8
-    ld   a, $17                                   ; $16F8: $3E $17
+    ld   a, NOISE_SFX_UNKNOWN_17                  ; $16F8: $3E $17
     ldh  [hNoiseSfx], a                           ; $16FA: $E0 $F4
     ret                                           ; $16FC: $C9
 

@@ -57,7 +57,7 @@ label_007_6523:
     ld   [wBGOriginLow], a                        ; $6528: $EA $2F $C1
     ld   [wBGOriginHigh], a                       ; $652B: $EA $2E $C1
     ld   hl, wLCDControl                          ; $652E: $21 $FD $D6
-    res  5, [hl]                                  ; $6531: $CB $AE
+    res  LCDCB_WINON, [hl]                        ; $6531: $CB $AE
     ld   hl, wEntitiesInertiaTable                ; $6533: $21 $D0 $C3
     add  hl, bc                                   ; $6536: $09
     ld   a, [hl]                                  ; $6537: $7E

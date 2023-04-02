@@ -3216,7 +3216,7 @@ TunicFairyState8::
     ld   [wBGOriginLow], a                        ; $5321: $EA $2F $C1
     ld   [wBGOriginHigh], a                       ; $5324: $EA $2E $C1
     ld   hl, wLCDControl                          ; $5327: $21 $FD $D6
-    res  5, [hl]                                  ; $532A: $CB $AE
+    res  LCDCB_WINON, [hl]                        ; $532A: $CB $AE
     call IncrementEntityState                     ; $532C: $CD $12 $3B
     ret                                           ; $532F: $C9
 

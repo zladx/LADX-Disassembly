@@ -15,7 +15,7 @@ IntroBeachScreenSections::
 ;
 ; InterruptLCDStatus
 ;
-; Manipulate the Background's scrollX and scrollY value during HBlank,
+; Manipulate the Background's scrollX and scrollY value during mode 2,
 ; to create various effects like differential scrolling.
 ;
 

@@ -2,7 +2,7 @@
 
 ; Values for wMusicTrackToPlay
 
-MUSIC_NONE                              equ $00
+MUSIC_NONE                              equ $00 ; Unclear usage, needs looking into
 MUSIC_TITLE_SCREEN_INTRO                equ $01
 MUSIC_MINIGAME                          equ $02 ; Trendy Game, Fishing, Camera Shop
 MUSIC_GAME_OVER                         equ $03
@@ -30,11 +30,11 @@ MUSIC_AFTER_BOSS                        equ $18
 MUSIC_BOSS                              equ $19
 MUSIC_INTRO_CUTSCENE                    equ $1A
 MUSIC_OBTAIN_INSTRUMENT                 equ $1B
-MUSIC_INTRO_WAKE_UP                     equ $1C ; Marin & Tarin's House
+MUSIC_INTRO_WAKE_UP                     equ $1C ; Marin & Tarin's House when starting a new game
 MUSIC_OVERWORLD_SWORDLESS               equ $1D
 MUSIC_DREAM_SHRINE_SLEEP                equ $1E
 MUSIC_SOUTHERN_SHRINE                   equ $1F
-MUSIC_FULL_MOON_CELLO                   equ $20
+MUSIC_INSTRUMENT_FULL_MOON_CELLO        equ $20 ; After obtaining
 MUSIC_2D_UNDERGROUND                    equ $21
 MUSIC_OWL                               equ $22
 MUSIC_FINAL_BOSS                        equ $23
@@ -42,20 +42,20 @@ MUSIC_DREAM_SHRINE_BED                  equ $24
 MUSIC_HEART_CONTAINER                   equ $25
 MUSIC_CAVE                              equ $26
 MUSIC_OBTAIN_POWERUP                    equ $27
-MUSIC_CONCH_HORN                        equ $28
-MUSIC_SEA_LILYS_BELL                    equ $29
-MUSIC_SURF_HARP                         equ $2A
-MUSIC_WIND_MARIMBA                      equ $2B
-MUSIC_CORAL_TRIANGLE                    equ $2C
-MUSIC_ORGAN_OF_EVENING_CALM             equ $2D
-MUSIC_THUNDER_DRUM                      equ $2E
+MUSIC_INSTRUMENT_CONCH_HORN             equ $28 ;\ 
+MUSIC_INSTRUMENT_SEA_LILYS_BELL         equ $29 ; \ 
+MUSIC_INSTRUMENT_SURF_HARP              equ $2A ;  \ 
+MUSIC_INSTRUMENT_WIND_MARIMBA           equ $2B ;   After obtaining
+MUSIC_INSTRUMENT_CORAL_TRIANGLE         equ $2C ;  /
+MUSIC_INSTRUMENT_ORGAN_OF_EVENING_CALM  equ $2D ; /
+MUSIC_INSTRUMENT_THUNDER_DRUM           equ $2E ;/
 MUSIC_MARIN_SING                        equ $2F
 MUSIC_MANBOS_MAMBO                      equ $30
 MUSIC_OVERWORLD_INTRO                   equ $31 ; After obtaining sword
 MUSIC_MR_WRITE_HOUSE                    equ $32
-MUSIC_ULRIRA                            equ $33
+MUSIC_ULRIRA                            equ $33 ; Ulrira's House, Phone Booths
 MUSIC_TARIN_BEES                        equ $34
-MUSIC_FROG_SONG                         equ $35
+MUSIC_MAMU_FROG_SONG                    equ $35
 MUSIC_MONKEYS_BUILDING_BRIDGE           equ $36
 MUSIC_CHRISTINE_HOUSE                   equ $37
 MUSIC_TOTAKA_UNUSED                     equ $38
@@ -67,13 +67,13 @@ MUSIC_ENDING                            equ $3D
 MUSIC_MOBLIN_HIDEOUT                    equ $3E
 MUSIC_ISLAND_DISAPPEAR                  equ $3F
 MUSIC_RICHARD_HOUSE                     equ $40
-MUSIC_EGG_BALLAD_DEFAULT                equ $41 ; Play without instrument #3
-MUSIC_EGG_BALLAD_BELL                   equ $42 ; Play with instrument #3
-MUSIC_EGG_BALLAD_HARP                   equ $43 ; Play with instruments #3-4
-MUSIC_EGG_BALLAD_MARIMBA                equ $44 ; Play with instruments #3-5
-MUSIC_EGG_BALLAD_TRIANGLE               equ $45 ; Play with instruments #3-6
-MUSIC_EGG_BALLAD_ORGAN                  equ $46 ; Play with instruments #3-7
-MUSIC_EGG_BALLAD_ALL                    equ $47 ; Play with instruments #3-8
+MUSIC_EGG_BALLAD_DEFAULT                equ $41 ; Play at egg without instrument #3
+MUSIC_EGG_BALLAD_BELL                   equ $42 ; Play at egg with instrument #3
+MUSIC_EGG_BALLAD_HARP                   equ $43 ; Play at egg with instruments #3-4
+MUSIC_EGG_BALLAD_MARIMBA                equ $44 ; Play at egg with instruments #3-5
+MUSIC_EGG_BALLAD_TRIANGLE               equ $45 ; Play at egg with instruments #3-6
+MUSIC_EGG_BALLAD_ORGAN                  equ $46 ; Play at egg with instruments #3-7
+MUSIC_EGG_BALLAD_ALL                    equ $47 ; Play at egg with instruments #3-8
 MUSIC_GHOST_HOUSE                       equ $48
 MUSIC_ACTIVE_POWER_UP                   equ $49
 MUSIC_LEARN_BALLAD                      equ $4A
@@ -83,8 +83,8 @@ MUSIC_MARIN_ON_BEACH                    equ $4D
 MUSIC_MARIN_BEACH_TALK                  equ $4E
 MUSIC_MARIN_UNUSED                      equ $4F
 MUSIC_MINIBOSS                          equ $50
-MUSIC_KANALET_CASTLE_DUPE               equ $51
-MUSIC_TAIL_CAVE_DUPE                    equ $52
+MUSIC_KANALET_CASTLE_COPY               equ $51
+MUSIC_TAIL_CAVE_COPY                    equ $52
 MUSIC_DREAM_SHRINE_DREAM                equ $53
 MUSIC_EAGLE_BOSS_TRANSITION             equ $54
 MUSIC_ROOSTER_REVIVAL                   equ $55
@@ -100,7 +100,7 @@ MUSIC_BOSS_DEFEAT                       equ $5E
 MUSIC_FINAL_BOSS_DEFEAT                 equ $5F
 MUSIC_FILE_SELECT_ZELDA                 equ $60 ; Enter file name ZELDA
 MUSIC_COLOR_DUNGEON                     equ $61
-MUSIC_SILENCE                           equ $FF
+MUSIC_SILENCE                           equ $FF ; Silences the music. Seems to only work cleanly for certain tracks. Needs looking into
 
 ; Values for hJingle
 JINGLE_NONE                             equ $00
@@ -119,7 +119,7 @@ JINGLE_REVOLVING_DOOR                   equ $0C
 JINGLE_FEATHER_JUMP                     equ $0D
 JINGLE_WATER_SPLASH                     equ $0E
 JINGLE_SWIM                             equ $0F
-JINGLE_UNKNOWN_10                       equ $10 ; Produces no sound
+JINGLE_UNKNOWN_10                       equ $10 ; Produces no sound, unused?
 JINGLE_OPEN_INVENTORY                   equ $11
 JINGLE_CLOSE_INVENTORY                  equ $12
 JINGLE_VALIDATE                         equ $13 ; File Select, Map, Angler's Tunnel platforms
@@ -161,14 +161,14 @@ JINGLE_SHADOW_AGAHNIM_DEFEAT            equ $36
 JINGLE_SHADOW_ZOL_HURT                  equ $37
 JINGLE_SHADOW_MOLDORM_ROAM              equ $38
 JINGLE_GANON_TRIDENT_APPEAR             equ $39
-JINGLE_UNKNOWN_3A                       equ $3A
+JINGLE_UNKNOWN_3A                       equ $3A ; Unused?
 JINGLE_SWORD_BEAM                       equ $3B ; Mad Batter flying away
 JINGLE_PAIRODD_TELEPORT                 equ $3C ; Key Cavern enemy
 JINGLE_DETHI_HANDS                      equ $3D
 JINGLE_URCHIN_PUSH                      equ $3E ; D8 Hole Filler
 JINGLE_FLYING_TILE                      equ $3F
 JINGLE_FACADE_HOLE                      equ $40 ; Holes spawned by D6 boss
-JINGLE_UNKNOWN_41                       equ $41
+JINGLE_UNKNOWN_41                       equ $41 ; Unused?
 
 ; Values for hWaveSfx
 WAVE_SFX_NONE                           equ $00
@@ -200,13 +200,13 @@ WAVE_SFX_OWL_HOOT                       equ $19
 WAVE_SFX_ROLLING_SPIKE_BAR              equ $1A ; D1 Miniboss
 WAVE_SFX_COMPASS                        equ $1B
 WAVE_SFX_ROVER_CRY                      equ $1C ; D6 Miniboss
-WAVE_SFX_UNKNOWN_1D                     equ $1D
+WAVE_SFX_UNKNOWN_1D                     equ $1D ; Unused?
 WAVE_SFX_L2_SWORD_APPEAR                equ $1E
 WAVE_SFX_WIND_FISH_MORPH                equ $1F
 WAVE_SFX_FLYING_WITH_SPOUT              equ $20
 WAVE_SFX_SHADOW_DISPERSE                equ $21
 WAVE_SFX_AGAHNIM_CHARGE                 equ $22
-WAVE_SFX_FINAL_BOSS_CHANGE_FORM         equ $23
+WAVE_SFX_SHADOW_CHANGE_FORM             equ $23
 
 ; Values for hNoiseSfx
 NOISE_SFX_NONE                          equ $00
@@ -216,7 +216,7 @@ NOISE_SFX_SPIN_ATTACK                   equ $03
 NOISE_SFX_DOOR_UNLOCKED                 equ $04 ; Also chests
 NOISE_SFX_CUT_GRASS                     equ $05
 NOISE_SFX_STAIRS                        equ $06
-NOISE_SFX_FOOTSTEP                          equ $07 ; Land from air, run with boots
+NOISE_SFX_FOOTSTEP                      equ $07 ; Land from air, run with boots
 NOISE_SFX_BEAMOS_LASER                  equ $08 ; Deflecting Shadow Agahnim's ball
 NOISE_SFX_POT_SMASHED                   equ $09
 NOISE_SFX_WHOOSH                        equ $0A ; Blade Trap, Arrow shot, Blaino's jabs
@@ -239,7 +239,7 @@ NOISE_SFX_BOSS_EXPLOSION                equ $1A
 NOISE_SFX_MOLDORM_ROAM                  equ $1B ; D1 Boss
 NOISE_SFX_BUZZ_BLOB_ELECTROCUTE         equ $1C
 NOISE_SFX_OPEN_D4_D7                    equ $1D ; Angler's Tunnel, Eagle's Tower
-NOISE_SFX_UNKNOWN_1E                    equ $1E
+NOISE_SFX_UNKNOWN_1E                    equ $1E ; Unused?
 NOISE_SFX_BLACK_HOLE_ACTIVE             equ $1F
 NOISE_SFX_TRENDY_CRANE                  equ $20
 NOISE_SFX_SILENT                        equ $21 ; Trendy Crane
@@ -269,7 +269,7 @@ NOISE_SFX_AGAHNIM_BALL                  equ $38
 NOISE_SFX_AGAHNIM_FAKE_BALL             equ $39
 NOISE_SFX_GANON_FLYING_TRIDENT          equ $3A
 NOISE_SFX_KIRBY_INHALE                  equ $3B
-NOISE_SFX_UNKNOWN_3C                    equ $3C
+NOISE_SFX_UNKNOWN_3C                    equ $3C ; Unused?
 NOISE_SFX_FINAL_BOSS_EXPLOSION          equ $3D
 NOISE_SFX_SLIME_EEL_FLOOR_BREAK         equ $3E
 NOISE_SFX_MINIBOSS_FLEE                 equ $3F ; Master Stalfos, Grim Creeper

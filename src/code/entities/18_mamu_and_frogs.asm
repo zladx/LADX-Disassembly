@@ -146,7 +146,7 @@ MamuAndFrogsSingingHandler::
     call GetEntityTransitionCountdown             ; $40DE: $CD $05 $0C
     jr   nz, .ret_40F0                            ; $40E1: $20 $0D
 
-    ld   a, MUSIC_FROG_SONG                       ; $40E3: $3E $35
+    ld   a, MUSIC_MAMU_FROG_SONG                  ; $40E3: $3E $35
     ld   [wMusicTrackToPlay], a                   ; $40E5: $EA $68 $D3
     ld   a, $01                                   ; $40E8: $3E $01
     ld   [wD215], a                               ; $40EA: $EA $15 $D2

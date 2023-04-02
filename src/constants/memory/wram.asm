@@ -497,7 +497,8 @@ wC162:
 wIsOnLowHeath::
   ds 1 ; C163
 
-; TODO comment
+; High byte of index of character in a dialog text
+; (See also wDialogCharacterIndex)
 wDialogCharacterIndexHi:
   ds 1 ; C164
 
@@ -549,7 +550,8 @@ wC16E:
 wDialogOpenCloseAnimationFrame:
   ds 1 ; C16F
 
-; TODO comment
+; Low byte of index of character in a dialog text
+; (See also wDialogCharacterIndexHi)
 wDialogCharacterIndex:
   ds 1 ; C170
 
@@ -1149,7 +1151,7 @@ wC3C1::
   ds 2 ; C3C1 - C3C2
 
 ; Unlabeled
-wC3C3::
+wDialogNextChar::
   ds 1 ; C3C3
 
 ; Unlabeled

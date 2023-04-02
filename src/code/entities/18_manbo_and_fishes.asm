@@ -107,7 +107,7 @@ ManboAndFishesSingHandler::
     and  a                                        ; $4595: $A7
     jr   nz, ret_018_45B6                         ; $4596: $20 $1E
 
-    ld   a, MUSIC_MANBO_MAMBO                     ; $4598: $3E $30
+    ld   a, MUSIC_MANBOS_MAMBO                     ; $4598: $3E $30
     ld   [wMusicTrackToPlay], a                   ; $459A: $EA $68 $D3
     call IncrementEntityState                     ; $459D: $CD $12 $3B
 
@@ -238,7 +238,7 @@ ManboAndFishesGrantSongHandler::
     jr   nz, .jr_4746                             ; $4737: $20 $0D
 
     ld   [hl], $70                                ; $4739: $36 $70
-    ld   a, MUSIC_TOOL_ACQUIRED                   ; $473B: $3E $10
+    ld   a, MUSIC_OBTAIN_ITEM                     ; $473B: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $473D: $EA $68 $D3
     ld   [wC167], a                               ; $4740: $EA $67 $C1
     call IncrementEntityState                     ; $4743: $CD $12 $3B

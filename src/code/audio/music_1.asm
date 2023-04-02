@@ -750,13 +750,13 @@ soundOpcode00:
 ; Item acquired fanfare ends
 .val00
     ld   a, [wD3CA]                               ; $4492: $FA $CA $D3
-    cp   MUSIC_SWORD_ACQUIRED                     ; $4495: $FE $0F
+    cp   MUSIC_OBTAIN_SWORD                       ; $4495: $FE $0F
     jp   z, ContinueCurrentScreenMusic_1B         ; $4497: $CA $E5 $47
 
-    cp   MUSIC_TOOL_ACQUIRED                      ; $449A: $FE $10
+    cp   MUSIC_OBTAIN_ITEM                        ; $449A: $FE $10
     jp   z, ContinueCurrentScreenMusic_1B         ; $449C: $CA $E5 $47
 
-    cp   MUSIC_HEART_CONTAINER_ACQUIRED           ; $449F: $FE $25
+    cp   MUSIC_HEART_CONTAINER                    ; $449F: $FE $25
     jp   z, ContinueCurrentScreenMusic_1B         ; $44A1: $CA $E5 $47
 
     ld   hl, wActiveMusicIndex                    ; $44A4: $21 $69 $D3

@@ -401,7 +401,7 @@ func_006_5835::
     ld   [wC1CE], a                               ; $584C: $EA $CE $C1
     call GetEntityPrivateCountdown1               ; $584F: $CD $00 $0C
     ld   [hl], $60                                ; $5852: $36 $60
-    ld   a, NOISE_SFX_UNKNOWN_23                  ; $5854: $3E $23
+    ld   a, NOISE_SFX_LANMOLA_BURROW              ; $5854: $3E $23
     ldh  [hNoiseSfx], a                           ; $5856: $E0 $F4
 
 .jr_5858

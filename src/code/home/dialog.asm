@@ -523,10 +523,10 @@ ENDR
     ld   a, [wDialogSFX]                          ; $25C2: $FA $AB $C5
     ld   d, a                                     ; $25C5: $57
     ld   e, $01                                   ; $25C6: $1E $01
-    cp   WAVE_SFX_TYPEWRITER                      ; $25C8: $FE $0F
+    cp   WAVE_SFX_TEXT_PRINT                      ; $25C8: $FE $0F
     jr   z, .handleFrequency                      ; $25CA: $28 $08
     ld   e, $07                                   ; $25CC: $1E $07
-    cp   WAVE_SFX_HOOT                            ; $25CE: $FE $19
+    cp   WAVE_SFX_OWL_HOOT                        ; $25CE: $FE $19
     jr   z, .handleFrequency                      ; $25D0: $28 $02
     ld   e, $03                                   ; $25D2: $1E $03
 .handleFrequency

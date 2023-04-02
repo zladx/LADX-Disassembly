@@ -556,7 +556,7 @@ func_005_512B::
 
     ld   a, $01                                   ; $513A: $3E $01
     ld   [wDE00], a                               ; $513C: $EA $00 $DE
-    ld   a, MUSIC_TOOL_ACQUIRED                   ; $513F: $3E $10
+    ld   a, MUSIC_OBTAIN_ITEM                     ; $513F: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $5141: $EA $68 $D3
     ld   a, $05                                   ; $5144: $3E $05
     call func_036_703E_trampoline                 ; $5146: $CD $C6 $0A

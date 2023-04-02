@@ -1085,7 +1085,7 @@ label_019_7EC4:
 jr_019_7F05:
     call ClearEntityStatus_19                     ; $7F05: $CD $61 $7E
     ld   hl, hNoiseSfx                            ; $7F08: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_1A                       ; $7F0B: $36 $1A
+    ld   [hl], NOISE_SFX_BOSS_EXPLOSION           ; $7F0B: $36 $1A
     ret                                           ; $7F0D: $C9
 
 func_019_7F0E::

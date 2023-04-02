@@ -414,7 +414,7 @@ func_004_617B::
     ld   hl, wEntitiesTransitionCountdownTable    ; $61AB: $21 $E0 $C2
     add  hl, de                                   ; $61AE: $19
     ld   [hl], $14                                ; $61AF: $36 $14
-    ld   a, JINGLE_JUMP_DOWN                      ; $61B1: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $61B1: $3E $08
     ldh  [hJingle], a                             ; $61B3: $E0 $F2
     ret                                           ; $61B5: $C9
 
@@ -650,7 +650,7 @@ label_004_62F6:
     ldh  [hMultiPurpose0], a                      ; $62FC: $E0 $D7
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $62FE: $3E $01
     call AddTranscientVfx                         ; $6300: $CD $C7 $0C
-    ld   a, JINGLE_WATER_DIVE                     ; $6303: $3E $0E
+    ld   a, JINGLE_WATER_SPLASH                   ; $6303: $3E $0E
     ldh  [hJingle], a                             ; $6305: $E0 $F2
 
 ret_004_6307:

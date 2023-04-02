@@ -131,7 +131,7 @@ label_018_78A6:
     ld   a, $10                                   ; $78E7: $3E $10
     call ApplyVectorTowardsLink_trampoline        ; $78E9: $CD $AA $3B
     pop  bc                                       ; $78EC: $C1
-    ld   a, JINGLE_JUMP_DOWN                      ; $78ED: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $78ED: $3E $08
     ldh  [hJingle], a                             ; $78EF: $E0 $F2
 
 .jr_78F1

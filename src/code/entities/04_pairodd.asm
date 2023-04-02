@@ -101,7 +101,7 @@ PairoddState0Handler::
     call GetEntityTransitionCountdown             ; $5E66: $CD $05 $0C
     ld   [hl], $20                                ; $5E69: $36 $20
     call IncrementEntityState                     ; $5E6B: $CD $12 $3B
-    ld   a, JINGLE_ENEMY_SHRIEK                   ; $5E6E: $3E $3C
+    ld   a, JINGLE_PAIRODD_TELEPORT               ; $5E6E: $3E $3C
     ldh  [hJingle], a                             ; $5E70: $E0 $F2
 
 .return

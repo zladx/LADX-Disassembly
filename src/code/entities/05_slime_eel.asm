@@ -39,7 +39,7 @@ func_005_6D00::
     ld   [hl], $80                                ; $6D04: $36 $80
     ld   a, $FF                                   ; $6D06: $3E $FF
     ld   [wC157], a                               ; $6D08: $EA $57 $C1
-    ld   a, NOISE_SFX_UNKNOWN_3E                  ; $6D0B: $3E $3E
+    ld   a, NOISE_SFX_SLIME_EEL_FLOOR_BREAK       ; $6D0B: $3E $3E
     ldh  [hNoiseSfx], a                           ; $6D0D: $E0 $F4
     ld   [wD3E8], a                               ; $6D0F: $EA $E8 $D3
     ld   a, $04                                   ; $6D12: $3E $04
@@ -848,7 +848,7 @@ func_005_7305::
     cp   $18                                      ; $730C: $FE $18
     jr   nz, .jr_7314                             ; $730E: $20 $04
 
-    ld   a, WAVE_SFX_BOSS_HIT                     ; $7310: $3E $16
+    ld   a, WAVE_SFX_BOSS_GROWL                   ; $7310: $3E $16
     ldh  [hWaveSfx], a                            ; $7312: $E0 $F3
 
 .jr_7314
@@ -895,7 +895,7 @@ func_005_7363::
     cp   $20                                      ; $736A: $FE $20
     jr   nz, .jr_7372                             ; $736C: $20 $04
 
-    ld   a, WAVE_SFX_BOSS_HIT                     ; $736E: $3E $16
+    ld   a, WAVE_SFX_BOSS_GROWL                   ; $736E: $3E $16
     ldh  [hWaveSfx], a                            ; $7370: $E0 $F3
 
 .jr_7372
@@ -1271,7 +1271,7 @@ DropHeartContainer_05::
 jr_005_75C0:
     call ClearEntityStatus_05                     ; $75C0: $CD $4B $7B
     ld   hl, hNoiseSfx                            ; $75C3: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_1A                       ; $75C6: $36 $1A
+    ld   [hl], NOISE_SFX_BOSS_EXPLOSION           ; $75C6: $36 $1A
     ret                                           ; $75C8: $C9
 
 Data_005_75C9::
@@ -1675,7 +1675,7 @@ jr_005_79B3:
     call label_27F2                               ; $7A08: $CD $F2 $27
     ld   a, $03                                   ; $7A0B: $3E $03
     ld   [wBossAgonySFXCountdown], a              ; $7A0D: $EA $A7 $C5
-    ld   a, MUSIC_BOSS_WARNING                    ; $7A10: $3E $5E
+    ld   a, MUSIC_BOSS_DEFEAT                     ; $7A10: $3E $5E
     ld   [wMusicTrackToPlay], a                   ; $7A12: $EA $68 $D3
     call_open_dialog Dialog0B5                    ; $7A15: $3E $B5 $CD $85 $23
 

@@ -92,7 +92,7 @@ EaglesTowerOpeningState1Handler::
 
     ld   [wScreenShakeHorizontal], a              ; $6223: $EA $55 $C1
     call SetEntitySpriteVariant                   ; $6226: $CD $0C $3B
-    ld   a, JINGLE_EAGLE_TOWER_OPEN               ; $6229: $3E $2E
+    ld   a, JINGLE_EAGLES_TOWER_ROTATE            ; $6229: $3E $2E
     ldh  [hJingle], a                             ; $622B: $E0 $F2
     jp   IncrementEntityState                     ; $622D: $C3 $12 $3B
 
@@ -100,7 +100,7 @@ EaglesTowerOpeningState1Handler::
     cp   $A0                                      ; $6230: $FE $A0
     jr   nz, .jr_6238                             ; $6232: $20 $04
 
-    ld   a, NOISE_SFX_UNKNOWN_1D                  ; $6234: $3E $1D
+    ld   a, NOISE_SFX_OPEN_D4_D7                  ; $6234: $3E $1D
     ldh  [hNoiseSfx], a                           ; $6236: $E0 $F4
 
 .jr_6238
@@ -606,7 +606,7 @@ func_019_686B::
     jr   nz, .jr_6877                             ; $6870: $20 $05
 
     ld   hl, hNoiseSfx                            ; $6872: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_UNKNOWN_2E               ; $6875: $36 $2E
+    ld   [hl], NOISE_SFX_OPEN_FACE_SHRINE         ; $6875: $36 $2E
 
 .jr_6877
     and  a                                        ; $6877: $A7

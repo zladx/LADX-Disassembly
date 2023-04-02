@@ -810,7 +810,7 @@ CopySirenInstrumentTiles::
 
 PlayBombExplosionSfx::
     ld   hl, hNoiseSfx                            ; $0C4B: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_BOMB_EXPLOSION           ; $0C4E: $36 $0C
+    ld   [hl], NOISE_SFX_EXPLOSION                ; $0C4E: $36 $0C
 
 func_C50::
     ld   hl, wC502                                ; $0C50: $21 $02 $C5
@@ -1993,7 +1993,7 @@ ShootArrow::
     jr   .setBombArrowCooldown                    ; $13FF: $18 $06
 
 .initBombArrowCooldown
-    ld   a, NOISE_SFX_SHOOT_ARROW                 ; $1401: $3E $0A
+    ld   a, NOISE_SFX_WHOOSH                      ; $1401: $3E $0A
     ldh  [hNoiseSfx], a                           ; $1403: $E0 $F4
     ld   a, BOMB_ARROW_COOLDOWN                   ; $1405: $3E $06
 
@@ -2188,7 +2188,7 @@ UseRocsFeather::
     ret                                           ; $1523: $C9
 
 SwordRandomSfxTable::
-    db   NOISE_SFX_SWORD_A, NOISE_SFX_SWORD_B, NOISE_SFX_SWORD_C, NOISE_SFX_SWORD_D ; $1524
+    db   NOISE_SFX_SWORD_SWING_A, NOISE_SFX_SWORD_SWING_B, NOISE_SFX_SWORD_SWING_C, NOISE_SFX_SWORD_SWING_D ; $1524
 
 UseSword::
     ld   a, [wC16D]                               ; $1528: $FA $6D $C1
@@ -2502,7 +2502,7 @@ CheckItemsSwordCollision::
     ret                                           ; $16F7: $C9
 
 .label_16F8
-    ld   a, NOISE_SFX_UNKNOWN_17                  ; $16F8: $3E $17
+    ld   a, NOISE_SFX_CLINK                       ; $16F8: $3E $17
     ldh  [hNoiseSfx], a                           ; $16FA: $E0 $F4
     ret                                           ; $16FC: $C9
 
@@ -2600,7 +2600,7 @@ DisplayTransientVfxForLinkRunning::
     cp   GROUND_VFX_SHALLOW_WATER                 ; $176E: $FE $05
     jr   z, .shallowWater                         ; $1770: $28 $0F
 
-    ld   a, NOISE_SFX_FOOTSTEP                    ; $1772: $3E $07
+    ld   a, NOISE_SFX_FOOTSTEP                        ; $1772: $3E $07
     ldh  [hNoiseSfx], a                           ; $1774: $E0 $F4
     ldh  a, [hLinkPositionY]                      ; $1776: $F0 $99
     add  a, $06                                   ; $1778: $C6 $06
@@ -2611,7 +2611,7 @@ DisplayTransientVfxForLinkRunning::
 .shallowWater
     ldh  a, [hLinkPositionY]                      ; $1781: $F0 $99
     ldh  [hMultiPurpose1], a                      ; $1783: $E0 $D8
-    ld   a, JINGLE_WATER_DIVE                     ; $1785: $3E $0E
+    ld   a, JINGLE_WATER_SPLASH                   ; $1785: $3E $0E
     ldh  [hJingle], a                             ; $1787: $E0 $F2
     ld   a, TRANSCIENT_VFX_PEGASUS_SPLASH         ; $1789: $3E $0C
     jp   AddTranscientVfx                         ; $178B: $C3 $C7 $0C
@@ -3806,7 +3806,7 @@ ELSE
     jr   c, .return                               ; $2188: $38 $1D
 ENDC
 
-    ld   a, WAVE_SFX_ZIP                          ; $218A: $3E $02
+    ld   a, WAVE_SFX_LIFT_UP                      ; $218A: $3E $02
     ldh  [hWaveSfx], a                            ; $218C: $E0 $F3
 
     ld   hl, wEntitiesStatusTable                 ; $218E: $21 $80 $C2

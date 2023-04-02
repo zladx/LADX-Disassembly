@@ -143,7 +143,7 @@ func_005_63A8::
     ld   hl, wEntitiesSpeedZTable                 ; $63DB: $21 $20 $C3
     add  hl, bc                                   ; $63DE: $09
     ld   [hl], $18                                ; $63DF: $36 $18
-    ld   a, WAVE_SFX_BOSS_HIT                     ; $63E1: $3E $16
+    ld   a, WAVE_SFX_BOSS_GROWL                   ; $63E1: $3E $16
     ldh  [hWaveSfx], a                            ; $63E3: $E0 $F3
     call func_005_65D9                            ; $63E5: $CD $D9 $65
     jp   IncrementEntityState                     ; $63E8: $C3 $12 $3B

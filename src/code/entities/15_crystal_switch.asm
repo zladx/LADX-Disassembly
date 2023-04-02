@@ -34,7 +34,7 @@ CrystalSwitchEntityHandler::
     ld   [wSwitchableObjectAnimationStage], a     ; $4358: $EA $F8 $D6
     call GetEntityTransitionCountdown             ; $435B: $CD $05 $0C
     ld   [hl], $18                                ; $435E: $36 $18
-    ld   a, WAVE_SFX_SWITCH_BUTTON                ; $4360: $3E $0E
+    ld   a, WAVE_SFX_FLOOR_SWITCH                 ; $4360: $3E $0E
     ldh  [hWaveSfx], a                            ; $4362: $E0 $F3
 
 .ret_4364

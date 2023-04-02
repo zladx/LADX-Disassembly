@@ -149,7 +149,7 @@ TradingItemEntityHandler::
     call CheckLinkCollisionWithEnemy_trampoline   ; $557A: $CD $5A $3B
     jr   nc, .return                              ; $557D: $30 $1A
 
-    ld   a, MUSIC_TOOL_ACQUIRED                   ; $557F: $3E $10
+    ld   a, MUSIC_OBTAIN_ITEM                     ; $557F: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $5581: $EA $68 $D3
     ld   [wC167], a                               ; $5584: $EA $67 $C1
     ldh  a, [hNextDefaultMusicTrack]              ; $5587: $F0 $BF

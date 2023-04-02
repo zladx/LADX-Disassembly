@@ -511,7 +511,7 @@ label_018_7F6F:
 jr_018_7FB0:
     call ClearEntityStatusBank18                  ; $7FB0: $CD $08 $7F
     ld   hl, hNoiseSfx                            ; $7FB3: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_1A                       ; $7FB6: $36 $1A
+    ld   [hl], NOISE_SFX_BOSS_EXPLOSION           ; $7FB6: $36 $1A
     ret                                           ; $7FB8: $C9
 
 SetRoomStatus20::

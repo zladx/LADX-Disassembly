@@ -767,7 +767,7 @@ TitleScreenSfxHandler::
     cp   $10                                      ; $7358: $FE $10
     jr   c, .return                               ; $735A: $38 $07
 
-    ld   a, NOISE_SFX_TITLE_APPEARS               ; $735C: $3E $19
+    ld   a, NOISE_SFX_PING                        ; $735C: $3E $19
     ldh  [hNoiseSfx], a                           ; $735E: $E0 $F4
     call IncrementGameplaySubtype                 ; $7360: $CD $D6 $44
 .return

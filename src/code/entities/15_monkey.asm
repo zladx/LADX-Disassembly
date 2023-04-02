@@ -170,7 +170,7 @@ jr_015_773A:
     ld   hl, wEntitiesOptions1Table               ; $777C: $21 $30 $C4
     add  hl, de                                   ; $777F: $19
     set  ENTITY_OPT1_B_MOVE_PIT_WATER, [hl]       ; $7780: $CB $C6
-    ld   a, JINGLE_JUMP_DOWN                      ; $7782: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $7782: $3E $08
     ldh  [hJingle], a                             ; $7784: $E0 $F2
     ld   hl, wEntitiesTransitionCountdownTable    ; $7786: $21 $E0 $C2
     add  hl, de                                   ; $7789: $19
@@ -205,7 +205,7 @@ func_015_7793::
     call IncrementEntityState                     ; $77B7: $CD $12 $3B
 
 jr_015_77BA:
-    ld   a, WAVE_SFX_UNKNOWN_14                   ; $77BA: $3E $14
+    ld   a, WAVE_SFX_MONKEY                       ; $77BA: $3E $14
     ldh  [hWaveSfx], a                            ; $77BC: $E0 $F3
 
 ret_015_77BE:

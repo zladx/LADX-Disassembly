@@ -1055,7 +1055,7 @@ label_015_7C91:
 jr_015_7CD2:
     call ClearEntityStatus_15                     ; $7CD2: $CD $31 $7C
     ld   hl, hNoiseSfx                            ; $7CD5: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_1A                       ; $7CD8: $36 $1A
+    ld   [hl], NOISE_SFX_BOSS_EXPLOSION           ; $7CD8: $36 $1A
     ret                                           ; $7CDA: $C9
 
 func_015_7CDB::

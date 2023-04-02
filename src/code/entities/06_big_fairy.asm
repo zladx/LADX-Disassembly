@@ -171,7 +171,7 @@ BigFairyHealingHandler::
 .jr_7197
     ld   a, $02                                   ; $7197: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $7199: $E0 $A1
-    ld   a, JINGLE_FAIRY_HEALING                  ; $719B: $3E $1A
+    ld   a, JINGLE_FAIRY_HEAL                     ; $719B: $3E $1A
     ldh  [hJingle], a                             ; $719D: $E0 $F2
     call ReturnIfNonInteractive_06                ; $719F: $CD $C6 $64
     ld   hl, wEntitiesPrivateCountdown2Table      ; $71A2: $21 $00 $C3

@@ -162,7 +162,7 @@ GoriyaState1Handler::
     ld   [hl], $80                                ; $46CE: $36 $80
     ld   a, $01                                   ; $46D0: $3E $01
     ld   [wC167], a                               ; $46D2: $EA $67 $C1
-    ld   a, MUSIC_TOOL_ACQUIRED                   ; $46D5: $3E $10
+    ld   a, MUSIC_OBTAIN_ITEM                     ; $46D5: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $46D7: $EA $68 $D3
     ret                                           ; $46DA: $C9
 
@@ -208,7 +208,7 @@ GoriyaState3Handler::
     ld   [hl], $80                                ; $4718: $36 $80
     ld   a, $01                                   ; $471A: $3E $01
     ld   [wC167], a                               ; $471C: $EA $67 $C1
-    ld   a, MUSIC_TOOL_ACQUIRED                   ; $471F: $3E $10
+    ld   a, MUSIC_OBTAIN_ITEM                     ; $471F: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $4721: $EA $68 $D3
     ret                                           ; $4724: $C9
 

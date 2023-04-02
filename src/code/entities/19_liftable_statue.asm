@@ -151,7 +151,7 @@ jr_019_40AD:
     call GetEntityTransitionCountdown             ; $4112: $CD $05 $0C
     ld   [hl], $02                                ; $4115: $36 $02
     ld   hl, hWaveSfx                             ; $4117: $21 $F3 $FF
-    ld   [hl], WAVE_SFX_ZIP                       ; $411A: $36 $02
+    ld   [hl], WAVE_SFX_LIFT_UP                   ; $411A: $36 $02
 
 label_019_411C:
     ld   hl, wEntitiesInertiaTable                ; $411C: $21 $D0 $C3

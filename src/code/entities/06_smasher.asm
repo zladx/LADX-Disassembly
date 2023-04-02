@@ -118,7 +118,7 @@ SmasherState0Handler::
     ld   [hl], $01                                ; $45CF: $36 $01
     call GetEntityTransitionCountdown             ; $45D1: $CD $05 $0C
     ld   [hl], $1F                                ; $45D4: $36 $1F
-    ld   a, WAVE_SFX_UNKNOWN_1C                   ; $45D6: $3E $1C
+    ld   a, WAVE_SFX_ROVER_CRY                    ; $45D6: $3E $1C
     ldh  [hWaveSfx], a                            ; $45D8: $E0 $F3
 
 .jr_45DA
@@ -301,7 +301,7 @@ SmasherState3Handler::
     ld   hl, wEntitiesSpeedZTable                 ; $46EE: $21 $20 $C3
     add  hl, bc                                   ; $46F1: $09
     ld   [hl], $20                                ; $46F2: $36 $20
-    ld   a, JINGLE_JUMP_DOWN                      ; $46F4: $3E $08
+    ld   a, JINGLE_FALL_DOWN                      ; $46F4: $3E $08
     ldh  [hJingle], a                             ; $46F6: $E0 $F2
     jp   IncrementEntityState                     ; $46F8: $C3 $12 $3B
 
@@ -493,7 +493,7 @@ jr_006_482D:
     call GetEntityTransitionCountdown             ; $4848: $CD $05 $0C
     ld   [hl], $02                                ; $484B: $36 $02
     ld   hl, hWaveSfx                             ; $484D: $21 $F3 $FF
-    ld   [hl], WAVE_SFX_ZIP                       ; $4850: $36 $02
+    ld   [hl], WAVE_SFX_LIFT_UP                   ; $4850: $36 $02
 
 ret_006_4852:
     ret                                           ; $4852: $C9
@@ -554,7 +554,7 @@ func_006_4855::
     inc  a                                        ; $489F: $3C
     sra  a                                        ; $48A0: $CB $2F
     ld   [hl], a                                  ; $48A2: $77
-    ld   a, WAVE_SFX_BOSS_GRAWL                   ; $48A3: $3E $07
+    ld   a, WAVE_SFX_BOSS_HURT                    ; $48A3: $3E $07
     ldh  [hWaveSfx], a                            ; $48A5: $E0 $F3
     ld   hl, wEntitiesHealthTable                 ; $48A7: $21 $60 $C3
     add  hl, de                                   ; $48AA: $19
@@ -581,7 +581,7 @@ func_006_4855::
     ld   hl, wEntitiesOptions1Table               ; $48CD: $21 $30 $C4
     add  hl, bc                                   ; $48D0: $09
     res  ENTITY_OPT1_B_IS_BOSS, [hl]              ; $48D1: $CB $BE
-    ld   a, WAVE_SFX_BOSS_AGONY                   ; $48D3: $3E $10
+    ld   a, WAVE_SFX_BOSS_DEATH_CRY               ; $48D3: $3E $10
     ldh  [hWaveSfx], a                            ; $48D5: $E0 $F3
 
 .jr_48D7

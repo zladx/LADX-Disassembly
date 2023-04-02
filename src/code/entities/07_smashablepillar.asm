@@ -265,7 +265,7 @@ func_007_5F11::
     jr   nz, .ret_5F44                            ; $5F3D: $20 $05
 
     ld   hl, hNoiseSfx                            ; $5F3F: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_BOMB_EXPLOSION           ; $5F42: $36 $0C
+    ld   [hl], NOISE_SFX_EXPLOSION                ; $5F42: $36 $0C
 
 .ret_5F44
     ret                                           ; $5F44: $C9

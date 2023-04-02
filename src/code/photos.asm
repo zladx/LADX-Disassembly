@@ -800,7 +800,7 @@ func_037_4552::
 
     inc  a                                        ; $455B: $3C
     ld   [wEntitiesPosYTable+4], a                ; $455C: $EA $14 $C2
-    ld   a, NOISE_SFX_UNKNOWN_40                  ; $455F: $3E $40
+    ld   a, NOISE_SFX_PHOTO                       ; $455F: $3E $40
     ldh  [hNoiseSfx], a                           ; $4561: $E0 $F4
     ldh  a, [hIsGBC]                              ; $4563: $F0 $FE
     and  a                                        ; $4565: $A7

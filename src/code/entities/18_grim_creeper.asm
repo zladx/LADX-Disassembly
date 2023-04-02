@@ -32,7 +32,7 @@ GrimCreeperEntityHandler::
     cp   $01                                      ; $7008: $FE $01
     jr   nz, .jr_7011                             ; $700A: $20 $05
 
-    ld   a, NOISE_SFX_UNKNOWN_3F                  ; $700C: $3E $3F
+    ld   a, NOISE_SFX_MINIBOSS_FLEE               ; $700C: $3E $3F
     ldh  [hNoiseSfx], a                           ; $700E: $E0 $F4
     inc  [hl]                                     ; $7010: $34
 
@@ -147,7 +147,7 @@ GrimCreeperState3Handler::
     call SpawnNewEntity_trampoline                ; $70B3: $CD $86 $3B
     jr   c, label_018_70FD                        ; $70B6: $38 $45
 
-    ld   a, JINGLE_GRIM_CREEPER                   ; $70B8: $3E $31
+    ld   a, JINGLE_GRIM_CREEPER_BATS              ; $70B8: $3E $31
     ldh  [hJingle], a                             ; $70BA: $E0 $F2
     ld   hl, wEntitiesInertiaTable                ; $70BC: $21 $D0 $C3
     add  hl, bc                                   ; $70BF: $09
@@ -435,7 +435,7 @@ func_018_72A5::
     ld   hl, wEntitiesSpeedZTable                 ; $72B8: $21 $20 $C3
     add  hl, bc                                   ; $72BB: $09
     ld   [hl], $F4                                ; $72BC: $36 $F4
-    ld   a, JINGLE_GRIM_CREEPER                   ; $72BE: $3E $31
+    ld   a, JINGLE_GRIM_CREEPER_BATS              ; $72BE: $3E $31
     ldh  [hJingle], a                             ; $72C0: $E0 $F2
     call IncrementEntityState                     ; $72C2: $CD $12 $3B
 

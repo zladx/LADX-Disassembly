@@ -472,7 +472,7 @@ func_027_7884::
     cp   $06                                      ; $7888: $FE $06
     jp   nz, label_027_7895                       ; $788A: $C2 $95 $78
 
-    ld   a, MUSIC_MARIN_SINGING                   ; $788D: $3E $2F
+    ld   a, MUSIC_MARIN_SING                      ; $788D: $3E $2F
     ld   [wMusicTrackToPlay], a                   ; $788F: $EA $68 $D3
     jp   label_027_7BAB                           ; $7892: $C3 $AB $7B
 
@@ -508,7 +508,7 @@ func_027_789E::
     inc  [hl]                                     ; $78BE: $34
     ld   a, $01                                   ; $78BF: $3E $01
     ld   [wD017], a                               ; $78C1: $EA $17 $D0
-    ld   a, JINGLE_MIDBOSS_WARP                   ; $78C4: $3E $1C
+    ld   a, JINGLE_DUNGEON_WARP                   ; $78C4: $3E $1C
     ldh  [hJingle], a                             ; $78C6: $E0 $F2
     ld   a, $60                                   ; $78C8: $3E $60
     ld   [wD021], a                               ; $78CA: $EA $21 $D0

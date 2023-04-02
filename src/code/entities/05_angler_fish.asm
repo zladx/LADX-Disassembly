@@ -293,7 +293,7 @@ func_005_5737::
     jr   nz, .jr_574A                             ; $5743: $20 $05
 
     ld   hl, hWaveSfx                             ; $5745: $21 $F3 $FF
-    ld   [hl], WAVE_SFX_UNKNOWN_0D                ; $5748: $36 $0D
+    ld   [hl], WAVE_SFX_ANGLER_DASH               ; $5748: $36 $0D
 
 .jr_574A
     ret  nc                                       ; $574A: $D0

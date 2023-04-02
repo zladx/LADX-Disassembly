@@ -168,7 +168,7 @@ ZoraState3Handler::
     ld   [hl], b                                  ; $4AC4: $70
     xor  a                                        ; $4AC5: $AF
     call SetEntitySpriteVariant                   ; $4AC6: $CD $0C $3B
-    ld   a, JINGLE_WATER_DIVE                     ; $4AC9: $3E $0E
+    ld   a, JINGLE_WATER_SPLASH                   ; $4AC9: $3E $0E
     ldh  [hJingle], a                             ; $4ACB: $E0 $F2
     ldh  a, [hActiveEntityPosX]                   ; $4ACD: $F0 $EE
     ldh  [hMultiPurpose0], a                      ; $4ACF: $E0 $D7

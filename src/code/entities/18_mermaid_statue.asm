@@ -79,7 +79,7 @@ MermaidStatueOpeningHandler::
     jr   nz, .jr_49B6                             ; $49AF: $20 $05
 
     ld   hl, hNoiseSfx                            ; $49B1: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_BLOCK_RUMBLE             ; $49B4: $36 $11
+    ld   [hl], NOISE_SFX_RUMBLE                   ; $49B4: $36 $11
 
 .jr_49B6
     ret  nc                                       ; $49B6: $D0

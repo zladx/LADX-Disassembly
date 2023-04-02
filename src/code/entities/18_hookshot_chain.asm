@@ -32,7 +32,7 @@ HookshotChainEntityHandler::
     and  $03                                      ; $7C14: $E6 $03
     jr   nz, .jr_7C1C                             ; $7C16: $20 $04
 
-    ld   a, NOISE_SFX_SHIELD_DEFLECT              ; $7C18: $3E $0B
+    ld   a, NOISE_SFX_HOOKSHOT                    ; $7C18: $3E $0B
     ldh  [hNoiseSfx], a                           ; $7C1A: $E0 $F4
 
 .jr_7C1C

@@ -46,7 +46,7 @@ Entity8CHandler::
 
     ld   [hl], b                                  ; $4ED3: $70
 
-    ld   a, NOISE_SFX_BLOCK_RUMBLE                ; $4ED4: $3E $11
+    ld   a, NOISE_SFX_RUMBLE                      ; $4ED4: $3E $11
     ldh  [hNoiseSfx], a                           ; $4ED6: $E0 $F4
 
     ld   hl, wEntitiesPosZTable                   ; $4ED8: $21 $10 $C3

@@ -30,7 +30,7 @@ func_015_40C1::
     ret  nz                                       ; $40CB: $C0
 
     ld   [hl], $30                                ; $40CC: $36 $30
-    ld   a, NOISE_SFX_BLOCK_RUMBLE                ; $40CE: $3E $11
+    ld   a, NOISE_SFX_RUMBLE                      ; $40CE: $3E $11
     ldh  [hNoiseSfx], a                           ; $40D0: $E0 $F4
     jp   IncrementEntityState                     ; $40D2: $C3 $12 $3B
 

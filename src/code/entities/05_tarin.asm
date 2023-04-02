@@ -644,7 +644,7 @@ TarinShield1Handler::
 
     call GetEntityTransitionCountdown             ; $4CA1: $CD $05 $0C
     ld   [hl], $80                                ; $4CA4: $36 $80
-    ld   a, MUSIC_TOOL_ACQUIRED                   ; $4CA6: $3E $10
+    ld   a, MUSIC_OBTAIN_ITEM                     ; $4CA6: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $4CA8: $EA $68 $D3
     ldh  a, [hIsGBC]                              ; $4CAB: $F0 $FE
     and  a                                        ; $4CAD: $A7

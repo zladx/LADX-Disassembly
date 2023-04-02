@@ -281,6 +281,6 @@ func_019_6CD3::
     ldh  [hMultiPurpose0], a                      ; $6CD7: $E0 $D7
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $6CD9: $3E $01
     call AddTranscientVfx                         ; $6CDB: $CD $C7 $0C
-    ld   a, JINGLE_WATER_DIVE                     ; $6CDE: $3E $0E
+    ld   a, JINGLE_WATER_SPLASH                   ; $6CDE: $3E $0E
     ldh  [hJingle], a                             ; $6CE0: $E0 $F2
     ret                                           ; $6CE2: $C9

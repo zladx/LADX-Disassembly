@@ -168,7 +168,7 @@ func_004_77F8::
     ld   hl, wEntitiesStateTable                  ; $782D: $21 $90 $C2
     add  hl, bc                                   ; $7830: $09
     ld   [hl], $04                                ; $7831: $36 $04
-    ld   a, MUSIC_BOSS_BATTLE                     ; $7833: $3E $19
+    ld   a, MUSIC_BOSS                            ; $7833: $3E $19
     ld   [wMusicTrackToPlay], a                   ; $7835: $EA $68 $D3
 
 .ret_7838
@@ -704,7 +704,7 @@ func_004_7AED::
 
     ld   a, ENTITY_MAD_BATTER                     ; $7AF3: $3E $CA
     call SpawnNewEntity_trampoline                ; $7AF5: $CD $86 $3B
-    ld   a, NOISE_SFX_UNKNOWN_26                  ; $7AF8: $3E $26
+    ld   a, NOISE_SFX_ELECTRIC_BEAM               ; $7AF8: $3E $26
     ldh  [hNoiseSfx], a                           ; $7AFA: $E0 $F4
     ldh  a, [hMultiPurpose0]                      ; $7AFC: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $7AFE: $21 $00 $C2

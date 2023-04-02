@@ -217,7 +217,7 @@ func_006_4C91::
     and  $0F                                      ; $4CC4: $E6 $0F
     jr   nz, ret_006_4D3A                         ; $4CC6: $20 $72
 
-    ld   a, NOISE_SFX_UNKNOWN_2F                  ; $4CC8: $3E $2F
+    ld   a, NOISE_SFX_CUEBALL_SPLASH              ; $4CC8: $3E $2F
     ldh  [hNoiseSfx], a                           ; $4CCA: $E0 $F4
     ld   a, $01                                   ; $4CCC: $3E $01
 

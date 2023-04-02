@@ -167,7 +167,7 @@ OwlState0Handler::
     cp   ROOM_OW_BEACH_WITH_SWORD
     jr   nz, .jr_68EF                             ; $68D9: $20 $14
 
-    ld   a, MUSIC_SWORD_SEARCH                    ; $68DB: $3E $1D
+    ld   a, MUSIC_OVERWORLD_SWORDLESS             ; $68DB: $3E $1D
     ldh  [hDefaultMusicTrack], a                  ; $68DD: $E0 $B0
     ldh  a, [hLinkPositionY]                      ; $68DF: $F0 $99
     cp   $44                                      ; $68E1: $FE $44

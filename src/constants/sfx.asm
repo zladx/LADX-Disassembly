@@ -14,7 +14,7 @@ MUSIC_RAFT_RIDE_RAPIDS                  equ $08
 MUSIC_MYSTERIOUS_FOREST                 equ $09
 MUSIC_TOWN_HOUSE                        equ $0A
 MUSIC_ANIMAL_VILLAGE                    equ $0B
-MUSIC_FAIRY                             equ $0C
+MUSIC_FAIRY_FOUNTAIN                    equ $0C
 MUSIC_TITLE_SCREEN                      equ $0D ; If intro skipped with Start
 MUSIC_BOWWOW_KIDNAPPED                  equ $0E
 MUSIC_OBTAIN_SWORD                      equ $0F
@@ -28,9 +28,9 @@ MUSIC_KEY_CAVERN                        equ $16
 MUSIC_ANGLERS_TUNNEL                    equ $17
 MUSIC_AFTER_BOSS                        equ $18
 MUSIC_BOSS                              equ $19
-MUSIC_INTRO                             equ $1A
+MUSIC_INTRO_CUTSCENE                    equ $1A
 MUSIC_OBTAIN_INSTRUMENT                 equ $1B
-MUSIC_WAKE_UP                           equ $1C
+MUSIC_INTRO_WAKE_UP                     equ $1C ; Marin & Tarin's House
 MUSIC_OVERWORLD_SWORDLESS               equ $1D
 MUSIC_DREAM_SHRINE_SLEEP                equ $1E
 MUSIC_SOUTHERN_SHRINE                   equ $1F
@@ -38,7 +38,7 @@ MUSIC_FULL_MOON_CELLO                   equ $20
 MUSIC_2D_UNDERGROUND                    equ $21
 MUSIC_OWL                               equ $22
 MUSIC_FINAL_BOSS                        equ $23
-MUSIC_DREAM_SHRINE                      equ $24
+MUSIC_DREAM_SHRINE_BED                  equ $24
 MUSIC_HEART_CONTAINER                   equ $25
 MUSIC_CAVE                              equ $26
 MUSIC_OBTAIN_POWERUP                    equ $27
@@ -64,7 +64,7 @@ MUSIC_FISHERMAN_UNDER_BRIDGE            equ $3A
 MUSIC_OBTAIN_ITEM_UNUSED                equ $3B
 MUSIC_FILE_SELECT_TOTAKA                equ $3C ; Accessible only in German DX and Japanese versions. Enter file name MOYSE/とたけけ
 MUSIC_ENDING                            equ $3D
-MUSIC_MOBLIN_CAVE                       equ $3E
+MUSIC_MOBLIN_HIDEOUT                    equ $3E
 MUSIC_ISLAND_DISAPPEAR                  equ $3F
 MUSIC_RICHARD_HOUSE                     equ $40
 MUSIC_EGG_BALLAD_DEFAULT                equ $41 ; Play without instrument #3
@@ -85,21 +85,22 @@ MUSIC_MARIN_UNUSED                      equ $4F
 MUSIC_MINIBOSS                          equ $50
 MUSIC_KANALET_CASTLE_DUPE               equ $51
 MUSIC_TAIL_CAVE_DUPE                    equ $52
-MUSIC_DREAM_SHRINE                      equ $53
-MUSIC_BOSS_EAGLE                        equ $54
-MUSIC_ROOSTER_REVIVE                    equ $55
+MUSIC_DREAM_SHRINE_DREAM                equ $53
+MUSIC_EAGLE_BOSS_TRANSITION             equ $54
+MUSIC_ROOSTER_REVIVAL                   equ $55
 MUSIC_L2_SWORD                          equ $56
 MUSIC_HENHOUSE                          equ $57
 MUSIC_FACE_SHRINE                       equ $58
 MUSIC_WIND_FISH                         equ $59
 MUSIC_TURTLE_ROCK                       equ $5A
 MUSIC_EAGLES_TOWER                      equ $5B
-MUSIC_BOSS_EAGLE_INTRO                  equ $5C
+MUSIC_EAGLE_BOSS_LOOP                   equ $5C ; Changes to $54 after dialog
 MUSIC_FINAL_BOSS_INTRO                  equ $5D
 MUSIC_BOSS_DEFEAT                       equ $5E
 MUSIC_FINAL_BOSS_DEFEAT                 equ $5F
 MUSIC_FILE_SELECT_ZELDA                 equ $60 ; Enter file name ZELDA
 MUSIC_COLOR_DUNGEON                     equ $61
+MUSIC_SILENCE                           equ $FF
 
 ; Values for hJingle
 JINGLE_NONE                             equ $00
@@ -113,7 +114,7 @@ JINGLE_SWORD_POKING                     equ $07
 JINGLE_FALL_DOWN                        equ $08 ; Jumping from ledge, Slime Eye
 JINGLE_BUMP                             equ $09
 JINGLE_MOVE_SELECTION                   equ $0A ; File Select, Map Screen
-JINGLE_BUMP                             equ $0B ; Spiked log, Boots wall bonk, Slime Eye, Blaino
+JINGLE_BUMP                             equ $0B ; Spike bar, Boots wall bonk, Slime Eye, Blaino
 JINGLE_REVOLVING_DOOR                   equ $0C
 JINGLE_FEATHER_JUMP                     equ $0D
 JINGLE_WATER_SPLASH                     equ $0E
@@ -139,8 +140,8 @@ JINGLE_SEAGULL                          equ $21
 JINGLE_TARIN_BEE_BUZZ                   equ $22
 JINGLE_DUNGEON_OPENED                   equ $23
 JINGLE_JUMP                             equ $24
-JINGLE_WARP_HOLE                        equ $25
-JINGLE_FAIRY_DISAPPEAR                  equ $26
+JINGLE_OVERWORLD_WARP_HOLE              equ $25
+JINGLE_DISAPPEAR                        equ $26 ; Great Fairy, ending Owl
 JINGLE_WALRUS                           equ $27
 JINGLE_STALFOS_COLLAPSE                 equ $28
 JINGLE_SLIME_EEL_PULL                   equ $29
@@ -149,12 +150,12 @@ JINGLE_INSTRUMENT_WARP                  equ $2B
 JINGLE_MANBO_WARP                       equ $2C
 JINGLE_GHOST_PRESENCE                   equ $2D
 JINGLE_EAGLES_TOWER_ROTATE              equ $2E
-JINGLE_FACE_SHRINE_RISING               equ $2F
+JINGLE_POOF                             equ $2F ; Pokey, Face Shrine opening, D8 Hole Filler
 JINGLE_EAGLE_SKID                       equ $30
 JINGLE_GRIM_CREEPER_BATS                equ $31
 JINGLE_HOT_HEAD_SPLASH                  equ $32
 JINGLE_LINK_DAZED                       equ $33 ; Blaino's fast wind up punch
-JINGLE_INSTRUMENTS_APPEAR               equ $34
+JINGLE_INSTRUMENTS_APPEAR               equ $34 ; Wind Fish cutscene
 JINGLE_SHADOW_MOVE                      equ $35
 JINGLE_SHADOW_AGAHNIM_DEFEAT            equ $36
 JINGLE_SHADOW_ZOL_HURT                  equ $37
@@ -193,17 +194,17 @@ WAVE_SFX_CUCCO_HURT                     equ $13
 WAVE_SFX_MONKEY                         equ $14
 WAVE_SFX_OCARINA_NOSONG                 equ $15	; Off-key notes for when you have no songs available
 WAVE_SFX_BOSS_GROWL                     equ $16
-WAVE_SFX_WIND_FISH                      equ $17
+WAVE_SFX_WIND_FISH_CRY                  equ $17
 WAVE_SFX_CHAIN_CHOMP                    equ $18
 WAVE_SFX_OWL_HOOT                       equ $19
-WAVE_SFX_ROLLING_SPIKE_LOG              equ $1A ; D1 Miniboss
+WAVE_SFX_ROLLING_SPIKE_BAR              equ $1A ; D1 Miniboss
 WAVE_SFX_COMPASS                        equ $1B
-WAVE_SFX_ROVER                          equ $1C ; D6 Miniboss
+WAVE_SFX_ROVER_CRY                      equ $1C ; D6 Miniboss
 WAVE_SFX_UNKNOWN_1D                     equ $1D
 WAVE_SFX_L2_SWORD_APPEAR                equ $1E
-WAVE_SFX_WIND_FISH_APPEAR               equ $1F
+WAVE_SFX_WIND_FISH_MORPH                equ $1F
 WAVE_SFX_FLYING_WITH_SPOUT              equ $20
-WAVE_SFX_FINAL_BOSS_DISINTEGRATE        equ $21
+WAVE_SFX_SHADOW_DISPERSE                equ $21
 WAVE_SFX_AGAHNIM_CHARGE                 equ $22
 WAVE_SFX_FINAL_BOSS_CHANGE_FORM         equ $23
 
@@ -213,9 +214,9 @@ NOISE_SFX_UNKNOWN_1                     equ $01
 NOISE_SFX_SWORD_SWING_A                 equ $02
 NOISE_SFX_SPIN_ATTACK                   equ $03
 NOISE_SFX_DOOR_UNLOCKED                 equ $04 ; Also chests
-NOISE_SFX_BUSH                          equ $05
+NOISE_SFX_CUT_GRASS                     equ $05
 NOISE_SFX_STAIRS                        equ $06
-NOISE_SFX_STEP                          equ $07 ; Land from air, run with boots
+NOISE_SFX_FOOTSTEP                          equ $07 ; Land from air, run with boots
 NOISE_SFX_BEAMOS_LASER                  equ $08 ; Deflecting Shadow Agahnim's ball
 NOISE_SFX_POT_SMASHED                   equ $09
 NOISE_SFX_WHOOSH                        equ $0A ; Blade Trap, Arrow shot, Blaino's jabs
@@ -226,7 +227,7 @@ NOISE_SFX_SHOWEL_DIG                    equ $0E
 NOISE_SFX_SEA_WAVES                     equ $0F
 NOISE_SFX_DOOR_CLOSED                   equ $10
 NOISE_SFX_RUMBLE                        equ $11 ; Block push, Walrus falls
-NOISE_SFX_FLAMETHROWER                  equ $12 ; En route to D8
+NOISE_SFX_BURSTING_FLAME                equ $12 ; Flame shooter, burning enemy
 NOISE_SFX_ENEMY_DESTROYED               equ $13
 NOISE_SFX_SWORD_SWING_B                 equ $14
 NOISE_SFX_SWORD_SWING_C                 equ $15
@@ -247,12 +248,12 @@ NOISE_SFX_LANMOLA_BURROW                equ $23
 NOISE_SFX_WALRUS_SPLASH                 equ $24
 NOISE_SFX_D7_PILLAR_COLLAPSE            equ $25
 NOISE_SFX_ELECTRIC_BEAM                 equ $26 ; Shopkeeper, Mad Batter
-NOISE_SFX_GANON_TRIDENT_THROW           equ $27
+NOISE_SFX_WEAPON_SWING                  equ $27 ; Master Stalfos, Ganon's trident throw
 NOISE_SFX_GENIE_FIREBALL                equ $28 ; Also Ganon's bats
 NOISE_SFX_BREAK                         equ $29 ; Armos Knight, Elephant statues, Hot Head
 NOISE_SFX_OPEN_KEY_CAVERN               equ $2A
-NOISE_SFX_ROCK_RUMBLE                   equ $2B
-NOISE_SFX_INTRUMENT_WARP                equ $2C
+NOISE_SFX_RUMBLE2                       equ $2B ; Floor crumble, instrument appearing for egg ballad
+NOISE_SFX_INSTRUMENT_WARP               equ $2C
 NOISE_SFX_BOOMERANG                     equ $2D
 NOISE_SFX_OPEN_FACE_SHRINE              equ $2E
 NOISE_SFX_CUEBALL_SPLASH                equ $2F
@@ -263,7 +264,7 @@ NOISE_SFX_L2_SWORD_SPARKS               equ $33 ; During cutscene
 NOISE_SFX_WATERSPOUT                    equ $34 ; Wind Fish cutscene
 NOISE_SFX_ISLAND_DISAPPEAR              equ $35 ; Ending cutscene
 NOISE_SFX_AGAHNIM_FAKE_BALL_EXPLODE     equ $36
-NOISE_SFX_SHADOW_DISINTEGRATE           equ $37
+NOISE_SFX_SHADOW_DISPERSE               equ $37
 NOISE_SFX_AGAHNIM_BALL                  equ $38
 NOISE_SFX_AGAHNIM_FAKE_BALL             equ $39
 NOISE_SFX_GANON_FLYING_TRIDENT          equ $3A

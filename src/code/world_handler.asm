@@ -318,12 +318,12 @@ IF __PATCH_A__ == 1
     ld a, [ROM_DebugTool2]
     and a
     ret nz
-    call label_3E5A
+    call DrawABButtonSlots
 ELIF __PATCH_A__ == 2
     call IncrementGameplaySubtype
-    call label_3E5A
+    call DrawABButtonSlots
 ELSE
-    call label_3E5A                               ; $4500: $CD $5A $3E
+    call DrawABButtonSlots                        ; $4500: $CD $5A $3E
     call IncrementGameplaySubtype                 ; $4503: $CD $D6 $44
 ENDC
     ret                                           ; $4506: $C9

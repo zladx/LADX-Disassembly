@@ -80,7 +80,7 @@ ManboAndFishesState1Handler::
     jr   nz, jr_018_4581                          ; $456F: $20 $10
 
     ld   e, INVENTORY_SLOT_COUNT -1               ; $4571: $1E $0B
-    ld   hl, wBButtonSlot                         ; $4573: $21 $00 $DB
+    ld   hl, wInventoryItems.BButtonSlot          ; $4573: $21 $00 $DB
 
 .loop_4576
     ld   a, [hl+]                                 ; $4576: $2A

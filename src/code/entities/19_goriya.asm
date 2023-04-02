@@ -126,7 +126,7 @@ GoriyaState1Handler::
     and  a                                        ; $4699: $A7
     jr   nz, jr_019_46DB                          ; $469A: $20 $3F
 
-    ld   a, [wBButtonSlot]                        ; $469C: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $469C: $FA $00 $DB
     and  a                                        ; $469F: $A7
     jr   z, jr_019_46DB                           ; $46A0: $28 $39
 
@@ -154,7 +154,7 @@ GoriyaState1Handler::
 
     ld   [wBoomerangTradedItem], a                ; $46BE: $EA $7D $DB
     ld   a, INVENTORY_BOOMERANG                   ; $46C1: $3E $0D
-    ld   [wBButtonSlot], a                        ; $46C3: $EA $00 $DB
+    ld   [wInventoryItems.BButtonSlot], a         ; $46C3: $EA $00 $DB
     ld   hl, wEntitiesPrivateState1Table          ; $46C6: $21 $B0 $C2
     add  hl, bc                                   ; $46C9: $09
     ld   [hl], a                                  ; $46CA: $77
@@ -182,7 +182,7 @@ GoriyaState3Handler::
     and  a                                        ; $46F2: $A7
     jr   nz, jr_019_4725                          ; $46F3: $20 $30
 
-    ld   hl, wBButtonSlot                         ; $46F5: $21 $00 $DB
+    ld   hl, wInventoryItems.BButtonSlot          ; $46F5: $21 $00 $DB
     ld   de, $0000                                ; $46F8: $11 $00 $00
 
 .loop_46FB

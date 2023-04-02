@@ -5726,7 +5726,7 @@ jr_002_6B34:
     jr   z, jr_002_6B55                           ; $6B43: $28 $10
 
     ld   e, $20                                   ; $6B45: $1E $20
-    ld   a, [wBButtonSlot]                        ; $6B47: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $6B47: $FA $00 $DB
     cp   INVENTORY_ROCS_FEATHER                   ; $6B4A: $FE $0A
     jr   z, .jr_6B50                              ; $6B4C: $28 $02
 
@@ -7098,11 +7098,11 @@ jr_002_72D1:
     cp   $20                                      ; $72D1: $FE $20
     jr   nz, jr_002_72FA                          ; $72D3: $20 $25
 
-    ld   a, [wAButtonSlot]                        ; $72D5: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $72D5: $FA $01 $DB
     cp   $03                                      ; $72D8: $FE $03
     jr   z, jr_002_72FA                           ; $72DA: $28 $1E
 
-    ld   a, [wBButtonSlot]                        ; $72DC: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $72DC: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $72DF: $FE $03
     jr   z, jr_002_72FA                           ; $72E1: $28 $17
 
@@ -7305,7 +7305,7 @@ IF __PATCH_0__
     jr   nz, collisionEnd
 ENDC
 
-    ld   hl, wBButtonSlot                         ; $73F3: $21 $00 $DB
+    ld   hl, wInventoryItems.BButtonSlot          ; $73F3: $21 $00 $DB
 
 .loop_73F6
     ld   a, [hl+]                                 ; $73F6: $2A

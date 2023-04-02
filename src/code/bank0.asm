@@ -469,9 +469,9 @@ RestoreStackedBank::
     call SwitchBank                               ; $0AB1: $CD $0C $08
     ret                                           ; $0AB4: $C9
 
-func_AB5::
+ChangeBGColumnPaletteAndExecuteDrawCommands::
     push af                                       ; $0AB5: $F5
-    callsb func_024_5C1A                          ; $0AB6: $3E $24 $EA $00 $21 $CD $1A $5C
+    callsb ChangeBGColumnPalette                  ; $0AB6: $3E $24 $EA $00 $21 $CD $1A $5C
     ld   de, wDrawCommand                         ; $0ABE: $11 $01 $D6
     call ExecuteDrawCommands                      ; $0AC1: $CD $27 $29
     jr   RestoreStackedBank                       ; $0AC4: $18 $EA
@@ -1553,7 +1553,7 @@ WorldInteractiveHandler::
     dec  e                                        ; $1009: $1D
 
 .label_100A
-    callsb func_020_5C9C                          ; $100A: $3E $20 $EA $00 $21 $CD $9C $5C
+    callsb DrawInventorySlots                     ; $100A: $3E $20 $EA $00 $21 $CD $9C $5C
 
 label_1012::
     callsw func_014_54F8                          ; $1012: $3E $14 $CD $0C $08 $CD $F8 $54
@@ -3049,6 +3049,7 @@ func_1A22::
 func_1A39::
     callsb func_020_6C7A                          ; $1A39: $3E $20 $EA $00 $21 $CD $7A $6C
     callsb func_020_563B                          ; $1A41: $3E $20 $EA $00 $21 $CD $3B $56
+    ; Return to previous ROM bank callsite
     ld   a, [wCurrentBank]                        ; $1A49: $FA $AF $DB
     ld   [rSelectROMBank], a                      ; $1A4C: $EA $00 $21
     ret                                           ; $1A4F: $C9
@@ -3675,7 +3676,7 @@ ENDC
 
 .specialCasesEnd
 
-    ld   a, [wBButtonSlot]                        ; $20CF: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $20CF: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $20D2: $FE $03
     jr   nz, .jr_20DD                             ; $20D4: $20 $07
     ldh  a, [hPressedButtonsMask]                 ; $20D6: $F0 $CB
@@ -3684,7 +3685,7 @@ ENDC
     ret                                           ; $20DC: $C9
 
 .jr_20DD
-    ld   a, [wAButtonSlot]                        ; $20DD: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $20DD: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $20E0: $FE $03
 IF __OPTIMIZATIONS_1__
     ret  nz

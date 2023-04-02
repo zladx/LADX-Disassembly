@@ -299,7 +299,7 @@ jr_004_41AC:
     jr   nc, jr_004_4210                          ; $41CB: $30 $43
 
     call ResetPegasusBoots                        ; $41CD: $CD $B6 $0C
-    ld   a, [wBButtonSlot]                        ; $41D0: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $41D0: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $41D3: $FE $03
     jr   nz, .jr_41DF                             ; $41D5: $20 $08
 
@@ -310,7 +310,7 @@ jr_004_41AC:
     jr   jr_004_4210                              ; $41DD: $18 $31
 
 .jr_41DF
-    ld   a, [wAButtonSlot]                        ; $41DF: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $41DF: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $41E2: $FE $03
     jr   nz, jr_004_4210                          ; $41E4: $20 $2A
 

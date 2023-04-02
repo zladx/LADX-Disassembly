@@ -89,7 +89,7 @@ func_005_4815::
     and  a                                        ; $4824: $A7
     ret  z                                        ; $4825: $C8
 
-    ld   hl, wBButtonSlot                         ; $4826: $21 $00 $DB
+    ld   hl, wInventoryItems.BButtonSlot          ; $4826: $21 $00 $DB
     ld   a, [hl]                                  ; $4829: $7E
     cp   INVENTORY_MAGIC_POWDER                   ; $482A: $FE $0C
     jr   nz, .checkASlot                          ; $482C: $20 $0E

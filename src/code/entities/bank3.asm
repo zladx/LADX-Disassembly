@@ -1214,7 +1214,7 @@ EntityStunnedHandler::
     call func_003_60B3                            ; $4E10: $CD $B3 $60
     call ClearEntitySpeed                         ; $4E13: $CD $7F $3D
     call func_003_6E2B                            ; $4E16: $CD $2B $6E
-    ld   a, [wBButtonSlot]                        ; $4E19: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $4E19: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4E1C: $FE $03
     jr   nz, .jr_4E28                             ; $4E1E: $20 $08
 
@@ -1225,7 +1225,7 @@ EntityStunnedHandler::
     jr   jr_003_4E72                              ; $4E26: $18 $4A
 
 .jr_4E28
-    ld   a, [wAButtonSlot]                        ; $4E28: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $4E28: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4E2B: $FE $03
     jr   nz, jr_003_4E72                          ; $4E2D: $20 $43
 
@@ -1777,7 +1777,7 @@ ENDC
 ChestGiveNoneInventoryItem:
     ; This handles giving keys, golden leafs and flippers
     ; by increasing the proper memory location.
-    ld   hl, wBButtonSlot                         ; $5125: $21 $00 $DB
+    ld   hl, wInventoryItems.BButtonSlot          ; $5125: $21 $00 $DB
     add  hl, de                                   ; $5128: $19
     inc  [hl]                                     ; $5129: $34
 
@@ -4617,7 +4617,7 @@ PickSword::
     ld   d, INVENTORY_SHIELD                      ; $6470: $16 $04
 
 GiveInventoryItem::     ; @TODO GivePlayerItem or w/e - inserts item in [d] into first available slot
-    ld   hl, wBButtonSlot                         ; $6472: $21 $00 $DB
+    ld   hl, wInventoryItems.BButtonSlot          ; $6472: $21 $00 $DB
     ld   e, $0C                                   ; $6475: $1E $0C
 
 .checkInventorySlot:                              ; Check if we already have this item:
@@ -4628,7 +4628,7 @@ GiveInventoryItem::     ; @TODO GivePlayerItem or w/e - inserts item in [d] into
     dec  e                                        ; Otherwise, have we checked all slots?
     jr   nz, .checkInventorySlot                  ; If no, continue
 
-    ld   hl, wBButtonSlot                         ; Otherwise, load the inventory start again...
+    ld   hl, wInventoryItems.BButtonSlot                         ; Otherwise, load the inventory start again...
 
 .checkInventorySlotEmpty:
     ld   a, [hl]                                  ; Check if an item is equipped in this slot

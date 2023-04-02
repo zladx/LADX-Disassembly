@@ -474,9 +474,9 @@ HandleFileSelectionCommand::
 
 ; File creation data
 Data_001_49F2::
-    dw   SaveGame1.main + wBButtonSlot - wOverworldRoomStatus
-    dw   SaveGame2.main + wBButtonSlot - wOverworldRoomStatus
-    dw   SaveGame3.main + wBButtonSlot - wOverworldRoomStatus
+    dw   SaveGame1.main + wInventoryItems.BButtonSlot - wOverworldRoomStatus
+    dw   SaveGame2.main + wInventoryItems.BButtonSlot - wOverworldRoomStatus
+    dw   SaveGame3.main + wInventoryItems.BButtonSlot - wOverworldRoomStatus
 
 SaveGameTable::
     dw   SaveGame1.main
@@ -659,7 +659,7 @@ ENDC
     ld   h, [hl]                                  ; $4AC8: $66
     ld   l, a                                     ; $4AC9: $6F
     push hl                                       ; $4ACA: $E5
-    ld   de, wName - wBButtonSlot                 ; $4ACB: $11 $4F $00
+    ld   de, wName - wInventoryItems.BButtonSlot  ; $4ACB: $11 $4F $00
     add  hl, de                                   ; $4ACE: $19
     push hl                                       ; $4ACF: $E5
     ld   a, [wSaveSlot]                           ; $4AD0: $FA $A6 $DB
@@ -698,16 +698,16 @@ ENDC
 
     pop  hl                                       ; $4B0E: $E1
     push hl                                       ; $4B0F: $E5
-    ld   de, wHealth - wBButtonSlot               ; $4B10: $11 $5A $00
+    ld   de, wHealth - wInventoryItems.BButtonSlot ; $4B10: $11 $5A $00
     add  hl, de                                   ; $4B13: $19
     ld   [hl], $18  ; write new save current health ; $4B14: $36 $18
     pop  hl                                       ; $4B16: $E1
     push hl                                       ; $4B17: $E5
-    ld   de, wMaxHearts - wBButtonSlot            ; $4B18: $11 $5B $00
+    ld   de, wMaxHearts - wInventoryItems.BButtonSlot ; $4B18: $11 $5B $00
     add  hl, de                                   ; $4B1B: $19
     ld   [hl], $03  ; write new save max health   ; $4B1C: $36 $03
     pop  hl                                       ; $4B1E: $E1
-    ld   de, wDeathCount - wBButtonSlot           ; $4B1F: $11 $57 $00
+    ld   de, wDeathCount - wInventoryItems.BButtonSlot ; $4B1F: $11 $57 $00
     add  hl, de                                   ; $4B22: $19
     xor  a                                        ; $4B23: $AF
     ldi  [hl], a                                  ; $4B24: $22

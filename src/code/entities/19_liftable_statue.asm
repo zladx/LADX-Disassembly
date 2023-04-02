@@ -69,7 +69,7 @@ LiftableStatueState0Handler::
     and  a                                        ; $408D: $A7
     jp   nz, label_019_411C                       ; $408E: $C2 $1C $41
 
-    ld   a, [wBButtonSlot]                        ; $4091: $FA $00 $DB
+    ld   a, [wInventoryItems.BButtonSlot]         ; $4091: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4094: $FE $03
     jr   nz, .jr_40A0                             ; $4096: $20 $08
 
@@ -80,7 +80,7 @@ LiftableStatueState0Handler::
     jr   label_019_411C                           ; $409E: $18 $7C
 
 .jr_40A0
-    ld   a, [wAButtonSlot]                        ; $40A0: $FA $01 $DB
+    ld   a, [wInventoryItems.AButtonSlot]         ; $40A0: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $40A3: $FE $03
     jr   nz, label_019_411C                       ; $40A5: $20 $75
 

@@ -2986,15 +2986,16 @@ wIndoorBRoomStatus::
   ds $100 ; DA00
 
 ; TODO comment
-wBButtonSlot::
+wInventoryItems::
+.BButtonSlot::
   ds 1 ; DB00
 
 ; TODO comment
-wAButtonSlot::
+.AButtonSlot::
   ds 1 ; DB01
 
 ; TODO comment
-wInventoryItems::
+.subscreen
   ds INVENTORY_SLOT_COUNT - 2 ; DB02-DB0B
 
 ; TODO comment
